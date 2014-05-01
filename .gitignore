@@ -61,7 +61,8 @@ local.properties
 [Dd]ebug/
 [Rr]elease/
 x64/
-build/
+# wizardwhosaysni : removed build/ from default config file
+# build/ 
 [Bb]in/
 [Oo]bj/
 
