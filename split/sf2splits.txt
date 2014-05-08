@@ -11,6 +11,7 @@
 #dir	battles/animations/enemies/
 #dir	battles/animations/allies/
 #dir	battles/animations/invocations/
+#dir	battles/grounds/
 #dir	maps/
 #dir	maps/tilesets
 #dir	maps/palettes
@@ -20,7 +21,6 @@
 #dir	sprites/battlesprites
 #dir	sprites/battlesprites/enemies
 #dir	sprites/battlesprites/allies
-#dir	sprites/battlesprites/grounds/
 #dir	sprites/weapons
 #dir	spells/
 #dir	portraits/
@@ -2163,16 +2163,37 @@
 #split	0x1B6DDA,0x1B6DFA,misc/specialscreens/endingkisspalette.bin
 #split	0x1B6DFA,0x1B7C9A,misc/specialscreens/endingkisstiles.bin
 
-#split	0x1B8178,0x1B843E,sprites/battlesprites/grounds/groundtiles01.bin
-#split	0x1B843E,0x1B86D8,sprites/battlesprites/grounds/groundtiles02.bin
-#split	0x1B86D8,0x1B8944,sprites/battlesprites/grounds/groundtiles03.bin
-#split	0x1B8944,0x1B8B8C,sprites/battlesprites/grounds/groundtiles04.bin
-#split	0x1B8B8C,0x1B8DDC,sprites/battlesprites/grounds/groundtiles05.bin
-#split	0x1B8DDC,0x1B9072,sprites/battlesprites/grounds/groundtiles06.bin
-#split	0x1B9072,0x1B92E8,sprites/battlesprites/grounds/groundtiles07.bin
-#split	0x1B92E8,0x1B9550,sprites/battlesprites/grounds/groundtiles08.bin
-#split	0x1B9550,0x1B97BE,sprites/battlesprites/grounds/groundtiles09.bin
-#split	0x1B97BE,0x1B9A9A,sprites/battlesprites/grounds/groundtiles10.bin
+#split	0x1B8178,0x1B843E,battles/grounds/ground01.bin
+#split	0x1B843E,0x1B86D8,battles/grounds/ground02.bin
+#split	0x1B843E,0x1B86D8,battles/grounds/ground03.bin
+#split	0x1B8B8C,0x1B8DDC,battles/grounds/ground04.bin
+#split	0x1B8178,0x1B843E,battles/grounds/ground05.bin
+#split	0x1B86D8,0x1B8944,battles/grounds/ground06.bin
+#split	0x1B86D8,0x1B8944,battles/grounds/ground07.bin
+#split	0x1B8B8C,0x1B8DDC,battles/grounds/ground08.bin
+#split	0x1B8DDC,0x1B9072,battles/grounds/ground09.bin
+#split	0x1B9072,0x1B92E8,battles/grounds/ground10.bin
+#split	0x1B8B8C,0x1B8DDC,battles/grounds/ground11.bin
+#split	0x1B8B8C,0x1B8DDC,battles/grounds/ground12.bin
+#split	0x1B8B8C,0x1B8DDC,battles/grounds/ground13.bin
+#split	0x1B9072,0x1B92E8,battles/grounds/ground14.bin
+#split	0x1B8944,0x1B8B8C,battles/grounds/ground15.bin
+#split	0x1B9072,0x1B92E8,battles/grounds/ground16.bin
+#split	0x1B8178,0x1B843E,battles/grounds/ground17.bin
+#split	0x1B92E8,0x1B9550,battles/grounds/ground18.bin
+#split	0x1B8944,0x1B8B8C,battles/grounds/ground19.bin
+#split	0x1B8178,0x1B843E,battles/grounds/ground20.bin
+#split	0x1B92E8,0x1B9550,battles/grounds/ground21.bin
+#split	0x1B8B8C,0x1B8DDC,battles/grounds/ground22.bin
+#split	0x1B8B8C,0x1B8DDC,battles/grounds/ground23.bin
+#split	0x1B8B8C,0x1B8DDC,battles/grounds/ground24.bin
+#split	0x1B8178,0x1B843E,battles/grounds/ground25.bin
+#split	0x1B9550,0x1B97BE,battles/grounds/ground26.bin
+#split	0x1B97BE,0x1B9A9A,battles/grounds/ground27.bin
+#split	0x1B97BE,0x1B9A9A,battles/grounds/ground28.bin
+#split	0x1B8B8C,0x1B8DDC,battles/grounds/ground29.bin
+#split	0x1B9072,0x1B92E8,battles/grounds/ground30.bin
+
 
 #split	0x1B9AF6,0x1B9F1A,sprites/weapons/weaponsprite00.bin
 #split	0x1B9F1A,0x1BA3B2,sprites/weapons/weaponsprite01.bin
