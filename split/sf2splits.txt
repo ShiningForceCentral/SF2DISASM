@@ -1,8 +1,8 @@
 /***********************Directories***************************/
 #dir	sound/
-#dir	sound/driver/
-#dir	sound/pcm/
-#dir	sound/music/
+#dir	sound/driver
+#dir	sound/pcm
+#dir	sound/music
 #dir	scriptbanks/
 #dir	battles/
 #dir	battles/entitysetups/
@@ -1412,8 +1412,8 @@
 #split	0x176A6,0x1796E,spells/spelldefs.bin
 #split	0x1796E,0x17F3E,misc/itemnames.bin
 #split	0x17F3E,0x17FDA,chardata/classnames.bin
-#split	0x1F806,0x1F913,sprites/charbattlesprites.bin
-#split	0x1F913,0x1F9E2,sprites/enemybattlesprites.bin
+#split	0x1F806,0x1F914,sprites/charbattlesprites.bin
+#split	0x1F914,0x1F9E2,sprites/enemybattlesprites.bin
 #split	0x1F9E2,0x1FA8A,sprites/weaponsprites.bin
 #split	0x1FA8A,0x1FAB8,backgrounds/custombackgrounds.bin
 #split	0x1FAD6,0x1FADD,sprites/battlesprites/allyidlesprites.bin
