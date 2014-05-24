@@ -1459,7 +1459,7 @@
 #split	0x1AA31E,0x1AA5FA,misc/battlescenetransitiontilesa.bin
 #split	0x1AA5FA,0x1AA8CA,misc/battlescenetransitiontilesb.bin
 #split	0x1AA8CA,0x1AAA82,spells/boltanimdataa.bin
-#split	0x11AAA82,0x1AA8CA,spells/boltanimdatab.bin
+#split	0x1AAA82,0x1AAC3A,spells/boltanimdatab.bin
 #split	0x1B6DB0,0x1B6DBC,battles/specialbattles.bin
 #split	0x1B6DDA,0x1B6DFA,misc/specialscreens/endingkisspalette.bin
 #split	0x1B6DFA,0x1B7C9A,misc/specialscreens/endingkisstiles.bin
