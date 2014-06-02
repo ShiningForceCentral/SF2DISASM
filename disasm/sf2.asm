@@ -1,11 +1,7 @@
 
-
-align macro
-   cnop 0,\1
-   endm
+   include "sf2macros.asm"
    include "sf2enums.asm"
    include "sf2const.asm"
-
 
    include "sf2-01.asm"		; Technical Layer, Low Level Game Engine, Map/Exploration Engine, Entity Script Commands, Witch Functions
    include "sf2-02.asm"		; Character Stats Engine, Item Effects Engine

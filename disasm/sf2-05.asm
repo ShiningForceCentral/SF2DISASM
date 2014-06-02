@@ -9587,6 +9587,8 @@ loc_257D0:
 										movem.w d1-d3,-(sp)
 										clr.w   d1
 										move.b  ((RAM_CurrentMapIdx-$1000000)).w,d1
+loc_257FE:
+										
 										jsr     (LoadMapTilesets).w
 										movem.w (sp)+,d1-d3
 										bsr.w   WaitForFadeToFinish

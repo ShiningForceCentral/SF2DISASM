@@ -1443,6 +1443,8 @@
 #split	0x2E196,0x2EB34,scriptbanks/scriptbanktrees.bin
 #split	0x4201E,0x425E7,misc/gamestaff.bin
 #split	0x4428A,0x44298,maps/overworldmaps.bin
+#split	0x44338,0x4433C,misc/overworldfollowoers.bin
+#split	0x4433C,0x4438A,misc/followers.bin
 #split	0x44A5E,0x44A7C,chardata/allyspriteids.bin
 #split	0x44AA4,0x44B4A,chardata/enemyspriteids.bin
 #split	0x4567A,0x45858,chardata/spriteportraitsnblips.bin

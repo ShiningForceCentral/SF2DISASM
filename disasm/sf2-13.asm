@@ -274,6 +274,8 @@ loc_1AC09E:
 										dc.l sub_1AC1E4
 										moveq   #$78,d0 
 										jsr     (Sleep).w       
+loc_1AC0FE:
+										
 										jsr     j_UpdateForce
 										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
 										subq.w  #1,d7

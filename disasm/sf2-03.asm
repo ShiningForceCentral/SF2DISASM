@@ -1179,8 +1179,6 @@ loc_106FE:
 										
 										clr.w   d0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-loc_10704:
-										
 										move.w  d0,d1
 										add.w   d0,d0
 										lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
@@ -1863,6 +1861,8 @@ loc_10BFE:
 loc_10C02:
 										
 										move.w  #4,d2
+loc_10C06:
+										
 										jsr     (MoveWindowWithSFX).w
 										jsr     (waitForVint_andFFA900Clear).w
 										move.w  -$C(a6),d0
@@ -2010,14 +2010,14 @@ loc_10D3E:
 loc_10D48:
 										
 										trap    #0
-
-; END OF FUNCTION CHUNK FOR sub_10CC6
-
 										dc.w SFX_VALIDATION
 										lsl.w   #6,d5
 										or.w    d5,d0
 										jsr     (WaitForVInt).w 
 										rts
+
+; END OF FUNCTION CHUNK FOR sub_10CC6
+
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -8198,6 +8198,8 @@ sub_13F14:
 										moveq   #2,d1
 										jsr     j_GetItemAndNumberOfItems
 										move.w  d1,(a0)+
+loc_13F3E:
+										
 										moveq   #3,d1
 										jsr     j_GetItemAndNumberOfItems
 										move.w  d1,(a0)+
