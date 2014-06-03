@@ -1476,7 +1476,7 @@
 #split	0x1E0000,0x1E8000,sound/pcm/bank0.bin
 #split	0x1E8000,0x1EB000,sound/pcm/bank1.bin
 #split	0x1EB000,0x1EC000,sound/yminst.bin
-#split	0x1EC000,0x1EE000,sound/driver/cube.bin
+/*#split	0x1EC000,0x1EE000,sound/driver/cube.bin*/
 #split	0x1EE02C,0x1EE270,chardata/growthcurves.bin
 #split	0x1EE2F0,0x1EE31C,chardata/stats/bowie.bin
 #split	0x1EE31C,0x1EE36B,chardata/stats/sarah.bin
