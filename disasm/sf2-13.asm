@@ -274,8 +274,6 @@ loc_1AC09E:
 										dc.l sub_1AC1E4
 										moveq   #$78,d0 
 										jsr     (Sleep).w       
-loc_1AC0FE:
-										
 										jsr     j_UpdateForce
 										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
 										subq.w  #1,d7
@@ -299,11 +297,11 @@ loc_1AC10E:
 										jsr     (storeVdpCommandster).w
 										move.w  #$40,d6 
 										jsr     (UpdateRandomSeed).w
-										addi.w  #$80,d7 
+										add.w   #$80,d7 
 										move.w  d7,(FFD100_MaybeRelatedToHscroll+2).l
 										move.w  #$60,d6 
 										jsr     (UpdateRandomSeed).w
-										addi.w  #$20,d7 
+										add.w   #$20,d7 
 										neg.w   d7
 										move.w  d7,(FFD502_MaybeRelatedToOtherVScrollStuff).l
 										move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -325,7 +323,7 @@ loc_1AC10E:
 loc_1AC1A8:
 										
 										movea.l ((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w,a0
-										cmpi.b  #$FF,(a0)
+										cmp.b   #$FF,(a0)
 										bne.s   loc_1AC1A8
 										bsr.w   sub_1AC1CC
 										move.w  #$B4,d0 
@@ -367,13 +365,13 @@ sub_1AC1E4:
 loc_1AC1F6:
 										
 										movea.l ((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w,a0
-										cmpi.b  #$FF,(a0)
+										cmp.b   #$FF,(a0)
 										beq.s   loc_1AC220
 										move.b  ((byte_FFDEA0-$1000000)).w,d0
-										andi.b  #1,d0
+										and.b   #1,d0
 										bne.s   loc_1AC220
 										move.w  (FFD500_MaybeRelatedToVscroll).l,d0
-										andi.w  #$F,d0
+										and.w   #$F,d0
 										bne.s   loc_1AC21A
 										bsr.w   sub_1AC22E
 loc_1AC21A:
@@ -397,10 +395,10 @@ sub_1AC22E:
 										lea     (byte_FFC000).l,a1
 										move.w  (FFD500_MaybeRelatedToVscroll).l,d0
 										lsr.w   #3,d0
-										addi.w  #$1C,d0
-										andi.w  #$1F,d0
+										add.w   #$1C,d0
+										and.w   #$1F,d0
 										lsl.w   #6,d0
-										adda.w  d0,a1
+										add.w   d0,a1
 										movem.l d7/a1,-(sp)
 										moveq   #$1F,d7
 loc_1AC250:
@@ -411,15 +409,15 @@ loc_1AC250:
 										tst.b   d1
 										beq.s   loc_1AC280
 										lsl.w   #1,d1
-										adda.w  d1,a1
+										add.w   d1,a1
 loc_1AC262:
 										
 										clr.w   d1
 										move.b  (a0)+,d1
 										beq.w   loc_1AC280
-										subi.w  #$20,d1 
+										sub.w   #$20,d1 
 										lsl.w   #1,d1
-										ori.w   #$C100,d1
+										or.w    #$C100,d1
 										move.w  d1,(a1)
 										addq.w  #1,d1
 										move.w  d1,$40(a1)
@@ -454,8 +452,8 @@ loc_1AC2BA:
 loc_1AC2BC:
 										
 										move.l  (a0)+,d0
-										andi.l  #$22222222,d0
-										eori.l  #$22222222,d0
+										and.l   #$22222222,d0
+										eor.l   #$22222222,d0
 										lsr.l   #1,d0
 										move.l  d0,(a1)
 										addq.l  #8,a1
@@ -473,21 +471,21 @@ loc_1AC2E4:
 										
 										clr.b   d0
 										move.b  -4(a1),d1
-										andi.b  #$10,d1
+										and.b   #$10,d1
 										beq.w   loc_1AC302
 										move.b  4(a1),d1
-										andi.b  #$10,d1
+										and.b   #$10,d1
 										beq.w   loc_1AC302
-										ori.b   #$10,d0
+										or.b    #$10,d0
 loc_1AC302:
 										
 										move.b  -4(a1),d1
-										andi.b  #1,d1
+										and.b   #1,d1
 										beq.w   loc_1AC31E
 										move.b  4(a1),d1
-										andi.b  #1,d1
+										and.b   #1,d1
 										beq.w   loc_1AC31E
-										ori.b   #1,d0
+										or.b    #1,d0
 loc_1AC31E:
 										
 										move.b  d0,(a1)+
@@ -514,7 +512,7 @@ loc_1AC344:
 loc_1AC362:
 										
 										move.l  (a0),d0
-										andi.l  #$11111111,d0
+										and.l   #$11111111,d0
 										mulu.w  #$F,d0
 										not.l   d0
 										and.l   (a1)+,d0
@@ -540,9 +538,9 @@ sub_1AC38E:
 										jsr     j_GetYPos
 										move.w  d1,d4
 										jsr     j_GetEnemyAISetting3233
-										cmpi.b  #$FF,d1
+										cmp.b   #$FF,d1
 										bne.s   loc_1AC3C2
-										cmpi.b  #$FF,d2
+										cmp.b   #$FF,d2
 										bne.s   loc_1AC3BE
 										move.b  #$FF,d1
 										bra.w   loc_1AC434
@@ -581,7 +579,7 @@ loc_1AC3F4:
 										
 										btst    #0,d5
 										bne.s   loc_1AC406
-										subi.w  #4,d3
+										sub.w   #4,d3
 										tst.w   d3
 										bpl.s   loc_1AC404
 										clr.w   d3
@@ -590,15 +588,15 @@ loc_1AC404:
 										bra.s   loc_1AC414
 loc_1AC406:
 										
-										addi.w  #4,d3
-										cmpi.w  #$2F,d3 
+										add.w   #4,d3
+										cmp.w   #$2F,d3 
 										ble.s   loc_1AC414
 										move.w  #$2F,d3 
 loc_1AC414:
 										
 										btst    #1,d5
 										beq.s   loc_1AC426
-										subi.w  #4,d4
+										sub.w   #4,d4
 										tst.w   d4
 										bpl.s   loc_1AC424
 										clr.w   d4
@@ -607,8 +605,8 @@ loc_1AC424:
 										bra.s   loc_1AC434
 loc_1AC426:
 										
-										addi.w  #4,d4
-										cmpi.w  #$2F,d4 
+										add.w   #4,d4
+										cmp.w   #$2F,d4 
 										ble.s   loc_1AC434
 										move.w  #$2F,d4 
 loc_1AC434:
@@ -627,7 +625,7 @@ getEnemyAITargetMoveList:
 										movem.l d0-a6,-(sp)
 										move.b  d0,d7
 										jsr     j_GetEnemyAISetting3233
-										cmpi.b  #$FF,d1
+										cmp.b   #$FF,d1
 										bne.s   loc_1AC454
 										bra.w   loc_1AC4EA
 										bra.s   loc_1AC456
@@ -665,7 +663,7 @@ loc_1AC49E:
 loc_1AC4A6:
 										
 										move.b  (a0,d1.w),d0
-										cmpi.b  #$FF,d0
+										cmp.b   #$FF,d0
 										bne.s   loc_1AC4B4
 										bra.w   loc_1AC4D2
 loc_1AC4B4:
@@ -684,11 +682,11 @@ loc_1AC4D0:
 										move.l  (sp)+,d3
 loc_1AC4D2:
 										
-										addi.w  #1,d1
+										add.w   #1,d1
 										dbf     d3,loc_1AC4A6
-										adda.w  #$30,a0 
-										adda.w  #$30,a1 
-										addi.w  #1,d2
+										add.w   #$30,a0 
+										add.w   #$30,a1 
+										add.w   #1,d2
 										dbf     d4,loc_1AC49E
 loc_1AC4EA:
 										
@@ -709,9 +707,9 @@ sub_1AC4F0:
 										clr.w   d1
 										move.b  d0,d1
 										lea     (EnemyTargettingCommandList).l,a0
-										andi.b  #$7F,d1 
+										and.b   #$7F,d1 
 										move.b  (a0,d1.w),d1
-										cmpi.b  #$FF,d1
+										cmp.b   #$FF,d1
 										beq.s   loc_1AC516
 										bsr.w   sub_1AC5AA
 										bra.w   loc_1AC5A4
@@ -719,7 +717,7 @@ loc_1AC516:
 										
 										move.w  d7,d0
 										jsr     j_GetEnemyAISetting3233
-										cmpi.b  #$FF,d1
+										cmp.b   #$FF,d1
 										bne.s   loc_1AC52A
 										bra.w   loc_1AC5A4
 										bra.s   loc_1AC52C
@@ -748,7 +746,7 @@ loc_1AC554:
 loc_1AC55C:
 										
 										move.b  (a0,d1.w),d0
-										cmpi.b  #$FF,d0
+										cmp.b   #$FF,d0
 										bne.s   loc_1AC56A
 										bra.w   loc_1AC576
 loc_1AC56A:
@@ -758,9 +756,9 @@ loc_1AC56A:
 										move.b  d0,(a0,d1.w)
 loc_1AC576:
 										
-										addi.w  #1,d1
+										add.w   #1,d1
 										dbf     d3,loc_1AC55C
-										adda.w  #$30,a0 
+										add.w   #$30,a0 
 										dbf     d4,loc_1AC554
 										lea     unk_1AC848(pc), a0
 										nop
@@ -786,7 +784,7 @@ sub_1AC5AA:
 										movem.l d0-a6,-(sp)
 										move.b  d0,d7
 										jsr     j_GetEnemyAISetting3233
-										cmpi.b  #$FF,d1
+										cmp.b   #$FF,d1
 										bne.s   loc_1AC5C2
 										bra.w   loc_1AC64E
 										bra.s   loc_1AC5C4
@@ -815,7 +813,7 @@ loc_1AC5EA:
 loc_1AC5F2:
 										
 										move.b  (a0,d1.w),d0
-										cmpi.b  #$FF,d0
+										cmp.b   #$FF,d0
 										bne.s   loc_1AC600
 										bra.w   loc_1AC60C
 loc_1AC600:
@@ -825,9 +823,9 @@ loc_1AC600:
 										move.b  d0,(a0,d1.w)
 loc_1AC60C:
 										
-										addi.w  #1,d1
+										add.w   #1,d1
 										dbf     d3,loc_1AC5F2
-										adda.w  #$30,a0 
+										add.w   #$30,a0 
 										dbf     d4,loc_1AC5EA
 										lea     unk_1AC848(pc), a0
 										nop
@@ -868,7 +866,7 @@ loc_1AC662:
 loc_1AC66A:
 										
 										move.b  (a0,d1.w),d0
-										cmpi.b  #$FF,d0
+										cmp.b   #$FF,d0
 										bne.s   loc_1AC678
 										bra.w   loc_1AC684
 loc_1AC678:
@@ -878,9 +876,9 @@ loc_1AC678:
 										move.b  d0,(a0,d1.w)
 loc_1AC684:
 										
-										addi.w  #1,d1
+										add.w   #1,d1
 										dbf     d3,loc_1AC66A
-										adda.w  #$30,a0 
+										add.w   #$30,a0 
 										dbf     d4,loc_1AC662
 										movem.l (sp)+,d0-a6
 										rts
@@ -909,7 +907,7 @@ sub_1AC69A:
 										bsr.w   sub_1AC728
 loc_1AC6C8:
 										
-										cmpi.b  #1,d5
+										cmp.b   #1,d5
 										bne.s   loc_1AC6E6
 										move.b  #0,d1
 										bsr.w   sub_1AC728
@@ -919,7 +917,7 @@ loc_1AC6C8:
 										bsr.w   sub_1AC728
 loc_1AC6E6:
 										
-										cmpi.b  #3,d5
+										cmp.b   #3,d5
 										bne.s   loc_1AC704
 										move.b  #0,d1
 										bsr.w   sub_1AC728
@@ -929,7 +927,7 @@ loc_1AC6E6:
 										bsr.w   sub_1AC728
 loc_1AC704:
 										
-										cmpi.b  #2,d5
+										cmp.b   #2,d5
 										bne.s   loc_1AC722
 										move.b  #0,d1
 										bsr.w   sub_1AC728
@@ -953,7 +951,7 @@ sub_1AC728:
 										link    a6,#-4
 										move.w  d3,d6
 										move.w  d4,d7
-										cmpi.b  #0,d1
+										cmp.b   #0,d1
 										bne.s   loc_1AC74E
 										move.b  #0,-1(a6)
 										move.b  d7,-2(a6)
@@ -961,7 +959,7 @@ sub_1AC728:
 										move.b  #$2F,-4(a6) 
 loc_1AC74E:
 										
-										cmpi.b  #1,d1
+										cmp.b   #1,d1
 										bne.s   loc_1AC768
 										move.b  #0,-1(a6)
 										move.b  d7,-2(a6)
@@ -969,7 +967,7 @@ loc_1AC74E:
 										move.b  d6,-4(a6)
 loc_1AC768:
 										
-										cmpi.b  #2,d1
+										cmp.b   #2,d1
 										bne.s   loc_1AC782
 										move.b  d7,-1(a6)
 										move.b  #$2F,-2(a6) 
@@ -977,7 +975,7 @@ loc_1AC768:
 										move.b  d6,-4(a6)
 loc_1AC782:
 										
-										cmpi.b  #3,d1
+										cmp.b   #3,d1
 										bne.s   loc_1AC79C
 										move.b  d7,-1(a6)
 										move.b  #$2F,-2(a6) 
@@ -1004,19 +1002,19 @@ loc_1AC7C4:
 										movea.l a0,a1
 										move.l  d2,-(sp)
 										mulu.w  #$30,d2 
-										adda.w  d2,a1
+										add.w   d2,a1
 										move.l  (sp)+,d2
 										move.b  (a1,d1.w),d0
-										cmpi.b  #$FF,d0
+										cmp.b   #$FF,d0
 										beq.s   loc_1AC7E6
 										bset    #7,d0
 										bset    #6,d0
 										move.b  d0,(a1,d1.w)
 loc_1AC7E6:
 										
-										addi.w  #1,d1
+										add.w   #1,d1
 										dbf     d3,loc_1AC7C4
-										addi.w  #1,d2
+										add.w   #1,d2
 										dbf     d4,loc_1AC7B4
 										unlk    a6
 										movem.l (sp)+,d0-a6
@@ -1037,14 +1035,14 @@ loc_1AC808:
 										
 										move.w  d6,d2
 										add.b   1(a0),d2
-										cmpi.w  #$30,d2 
+										cmp.w   #$30,d2 
 										bcc.w   loc_1AC83C
 										move.w  d5,d1
 										add.b   (a0),d1
-										cmpi.w  #$30,d1 
+										cmp.w   #$30,d1 
 										bcc.w   loc_1AC83C
 										jsr     j_GetTerrainType
-										cmpi.b  #$FF,d0
+										cmp.b   #$FF,d0
 										beq.s   loc_1AC83C
 										bclr    #7,d0
 										bclr    #6,d0
@@ -1160,7 +1158,7 @@ sub_1AC8A0:
 										nop
 										clr.w   d1
 										move.b  (a0)+,d1
-										subi.w  #1,d1
+										sub.w   #1,d1
 										clr.w   d3
 loc_1AC8BE:
 										
@@ -1170,7 +1168,7 @@ loc_1AC8BE:
 										bra.w   loc_1AC8D8
 loc_1AC8CA:
 										
-										addi.w  #1,d3
+										add.w   #1,d3
 										dbf     d1,loc_1AC8BE
 										clr.w   d3
 										bra.w   loc_1AC9AC
@@ -1182,10 +1180,10 @@ loc_1AC8D8:
 										movea.l (a0,d3.w),a0
 										clr.w   d0
 										move.b  d7,d0
-										andi.w  #$7F,d0 
+										and.w   #$7F,d0 
 										clr.w   d6
 										move.b  (a0,d0.w),d6
-										cmpi.b  #$FF,d6
+										cmp.b   #$FF,d6
 										bne.s   loc_1AC8FE
 										moveq   #0,d3
 										bra.w   loc_1AC9AC
@@ -1199,22 +1197,22 @@ loc_1AC8FE:
 										jsr     j_clearMovableGrid
 										tst.w   d6
 										bne.s   loc_1AC91E
-										addi.w  #1,d1
+										add.w   #1,d1
 loc_1AC91E:
 										
-										cmpi.w  #1,d6
+										cmp.w   #1,d6
 										bne.s   loc_1AC928
-										subi.w  #1,d2
+										sub.w   #1,d2
 loc_1AC928:
 										
-										cmpi.w  #2,d6
+										cmp.w   #2,d6
 										bne.s   loc_1AC932
-										subi.w  #1,d1
+										sub.w   #1,d1
 loc_1AC932:
 										
-										cmpi.w  #3,d6
+										cmp.w   #3,d6
 										bne.s   loc_1AC93C
-										addi.w  #1,d2
+										add.w   #1,d2
 loc_1AC93C:
 										
 										lea     ((RAM_CharIdxList-$1000000)).w,a0
@@ -1223,43 +1221,43 @@ loc_1AC942:
 										
 										jsr     j_setMovableAtCoord
 										jsr     j_GetUnitID
-										cmpi.b  #$FF,d0
+										cmp.b   #$FF,d0
 										bne.s   loc_1AC958
 										bra.w   loc_1AC960
 loc_1AC958:
 										
 										move.b  d0,(a0,d3.w)
-										addi.w  #1,d3
+										add.w   #1,d3
 loc_1AC960:
 										
 										tst.w   d6
 										bne.s   loc_1AC972
-										addi.w  #1,d1
-										cmpi.w  #$2F,d1 
+										add.w   #1,d1
+										cmp.w   #$2F,d1 
 										ble.s   loc_1AC972
 										bra.w   loc_1AC9AC
 loc_1AC972:
 										
-										cmpi.w  #1,d6
+										cmp.w   #1,d6
 										bne.s   loc_1AC984
-										subi.w  #1,d2
+										sub.w   #1,d2
 										tst.w   d2
 										bpl.s   loc_1AC984
 										bra.w   loc_1AC9AC
 loc_1AC984:
 										
-										cmpi.w  #2,d6
+										cmp.w   #2,d6
 										bne.s   loc_1AC996
-										subi.w  #1,d1
+										sub.w   #1,d1
 										tst.w   d1
 										bpl.s   loc_1AC996
 										bra.w   loc_1AC9AC
 loc_1AC996:
 										
-										cmpi.w  #3,d6
+										cmp.w   #3,d6
 										bne.s   loc_1AC9AA
-										addi.w  #1,d2
-										cmpi.w  #$2F,d2 
+										add.w   #1,d2
+										cmp.w   #$2F,d2 
 										ble.s   loc_1AC9AA
 										bra.w   loc_1AC9AC
 loc_1AC9AA:
@@ -1339,7 +1337,7 @@ unk_1AC9F0:         dc.b $FF
 sub_1AC9FC:
 										
 										movem.l d0/d2-a6,-(sp)
-										cmpi.b  #$FF,d0
+										cmp.b   #$FF,d0
 										bne.s   loc_1ACA0C
 										clr.w   d6
 										bra.w   loc_1ACA6A
@@ -1355,9 +1353,9 @@ loc_1ACA1E:
 										
 										move.w  d7,d0
 										mulu.w  #$C,d0
-										adda.w  d0,a0
+										add.w   d0,a0
 										move.b  (a0),d0
-										cmpi.b  #3,d0
+										cmp.b   #3,d0
 										bne.s   loc_1ACA40
 										move.w  2(a0),d2
 										move.w  4(a0),d3
@@ -1370,7 +1368,7 @@ loc_1ACA40:
 										move.w  4(a0),d3
 										move.w  8(a0),d4
 										bsr.w   sub_1ACA72
-										cmpi.b  #0,d6
+										cmp.b   #0,d6
 										beq.s   loc_1ACA5A
 										bra.w   loc_1ACA6A
 loc_1ACA5A:
@@ -1428,7 +1426,7 @@ loc_1ACAAE:
 										bra.w   loc_1ACACC
 loc_1ACABC:
 										
-										addi.w  #1,d0
+										add.w   #1,d0
 										dbf     d7,loc_1ACA7C
 										move.w  #0,d6
 										bra.w   loc_1ACAD0
@@ -1450,25 +1448,25 @@ sub_1ACAD6:
 										movem.l d0-d5/d7-a6,-(sp)
 										link    a6,#-$A
 										move.w  d2,d0
-										andi.w  #$FF,d0
+										and.w   #$FF,d0
 										move.b  d0,-2(a6)
 										move.w  d2,d0
 										lsr.w   #8,d0
 										move.b  d0,-1(a6)
 										move.w  d3,d0
-										andi.w  #$FF,d0
+										and.w   #$FF,d0
 										move.b  d0,-4(a6)
 										move.w  d3,d0
 										lsr.w   #8,d0
 										move.b  d0,-3(a6)
 										move.w  d4,d0
-										andi.w  #$FF,d0
+										and.w   #$FF,d0
 										move.b  d0,-6(a6)
 										move.w  d4,d0
 										lsr.w   #8,d0
 										move.b  d0,-5(a6)
 										move.w  d5,d0
-										andi.w  #$FF,d0
+										and.w   #$FF,d0
 										move.b  d0,-8(a6)
 										move.w  d5,d0
 										lsr.w   #8,d0
@@ -1486,7 +1484,7 @@ sub_1ACAD6:
 										move.b  -7(a6),d5
 										move.b  -8(a6),d6
 										bsr.w   sub_1ACC26
-										cmpi.b  #1,d0
+										cmp.b   #1,d0
 										bne.s   loc_1ACB58
 										bra.w   loc_1ACC10
 loc_1ACB58:
@@ -1512,7 +1510,7 @@ loc_1ACB7C:
 										move.b  -7(a6),d5
 										move.b  -8(a6),d6
 										bsr.w   sub_1ACC26
-										cmpi.b  #1,d0
+										cmp.b   #1,d0
 										bne.s   loc_1ACBA2
 										bra.w   loc_1ACC10
 loc_1ACBA2:
@@ -1538,7 +1536,7 @@ loc_1ACBC6:
 										move.b  -7(a6),d5
 										move.b  -8(a6),d6
 										bsr.w   sub_1ACC26
-										cmpi.b  #1,d0
+										cmp.b   #1,d0
 										bne.s   loc_1ACBEC
 										bra.w   loc_1ACC10
 loc_1ACBEC:
@@ -1712,7 +1710,7 @@ loc_1ACD4A:
 										bclr    #1,d0
 loc_1ACD4E:
 										
-										andi.w  #3,d0
+										and.w   #3,d0
 										unlk    a6
 										movem.l (sp)+,d1-a6
 										rts
@@ -1817,7 +1815,7 @@ loc_1ACE22:
 										bra.w   loc_1ACD32
 loc_1ACE2A:
 										
-										ori     #1,ccr
+										or      #1,ccr
 										bra.w   loc_1ACD32
 
 	; End of function sub_1ACC26
@@ -1832,7 +1830,7 @@ CheckTriggerRegionFlag:
 										movem.l d0-a6,-(sp)
 										clr.w   d1
 										move.b  d0,d1
-										addi.w  #$5A,d1 
+										add.w   #$5A,d1 
 										jsr     j_CheckFlag
 										movem.l (sp)+,d0-a6
 										rts
@@ -1854,7 +1852,7 @@ UpdateTriggeredRegionsAndAI:
 loc_1ACE60:
 										
 										move.w  d1,d2
-										subi.w  #1,d2
+										sub.w   #1,d2
 										clr.w   d0
 loc_1ACE68:
 										
@@ -1867,20 +1865,20 @@ loc_1ACE68:
 										beq.s   loc_1ACE8A
 										clr.w   d1
 										move.b  d0,d1
-										addi.w  #$5A,d1 
+										add.w   #$5A,d1 
 										jsr     j_SetFlag
 loc_1ACE8A:
 										
 										move.w  (a0),d1
 										bset    d0,d1
 										move.w  d1,(a0)
-										addi.w  #1,d0
+										add.w   #1,d0
 										dbf     d2,loc_1ACE68
 										move.w  d7,d0
 										jsr     j_GetEnemyAISetting36
-										cmpi.w  #$F,d1
+										cmp.w   #$F,d1
 										bne.s   loc_1ACEB0
-										cmpi.w  #$F,d2
+										cmp.w   #$F,d2
 										bne.s   loc_1ACEB0
 										bra.w   loc_1ACF2A
 loc_1ACEB0:
@@ -1888,14 +1886,14 @@ loc_1ACEB0:
 										move.b  d0,d7
 										move.b  d2,d6
 										move.b  d1,d5
-										cmpi.b  #$F,d5
+										cmp.b   #$F,d5
 										bne.s   loc_1ACEC0
 										bra.w   loc_1ACEF0
 loc_1ACEC0:
 										
 										clr.w   d1
 										move.b  d5,d1
-										addi.w  #$5A,d1 
+										add.w   #$5A,d1 
 										jsr     j_CheckFlag
 										bne.s   loc_1ACED4
 										bra.w   loc_1ACEF0
@@ -1904,20 +1902,20 @@ loc_1ACED4:
 										clr.w   d0
 										move.w  d7,d0
 										jsr     j_GetCharacterWord34
-										andi.w  #$FFFE,d1
+										and.w   #$FFFE,d1
 										bset    #0,d1
 										jsr     j_SetCharacterWord34
 										bra.w   loc_1ACF2A
 loc_1ACEF0:
 										
-										cmpi.b  #$F,d6
+										cmp.b   #$F,d6
 										bne.s   loc_1ACEFA
 										bra.w   loc_1ACF2A
 loc_1ACEFA:
 										
 										clr.w   d1
 										move.b  d6,d1
-										addi.w  #$5A,d1 
+										add.w   #$5A,d1 
 										jsr     j_CheckFlag
 										bne.s   loc_1ACF0E
 										bra.w   loc_1ACF2A
@@ -1926,7 +1924,7 @@ loc_1ACF0E:
 										clr.w   d0
 										move.w  d7,d0
 										jsr     j_GetCharacterWord34
-										andi.w  #$FFFC,d1
+										and.w   #$FFFC,d1
 										bset    #0,d1
 										bset    #1,d1
 										jsr     j_SetCharacterWord34
@@ -1953,13 +1951,13 @@ GetListOfSpawningEnemies:
 loc_1ACF44:
 										
 										jsr     j_GetCharacterWord34
-										andi.w  #$F00,d1
+										and.w   #$F00,d1
 										tst.w   d1
 										bne.s   loc_1ACF56      
 										bra.w   loc_1ACFEA
 loc_1ACF56:
 										
-										cmpi.w  #$200,d1        ; 0x200 - region-triggered spawn - check if triggered and if not spawned yet
+										cmp.w   #$200,d1        ; 0x200 - region-triggered spawn - check if triggered and if not spawned yet
 										bne.w   loc_1ACF92      
 										bsr.w   UpdateEnemyActivationIfDead
 										tst.w   d0
@@ -1979,10 +1977,10 @@ loc_1ACF7A:
 										bsr.w   UpdateEnemyStatsForRespawn
 										bcs.w   loc_1ACFEA
 										move.b  d4,(a0,d5.w)
-										addi.w  #1,d5
+										add.w   #1,d5
 loc_1ACF92:
 										
-										cmpi.w  #$100,d1        ; 0x100 - respawn - check if dead
+										cmp.w   #$100,d1        ; 0x100 - respawn - check if dead
 										bne.w   loc_1ACFC0      
 										jsr     j_GetCurrentHP
 										tst.w   d1
@@ -1995,10 +1993,10 @@ loc_1ACFA8:
 										bsr.w   UpdateEnemyStatsForRespawn
 										bcs.w   loc_1ACFEA
 										move.b  d4,(a0,d5.w)
-										addi.w  #1,d5
+										add.w   #1,d5
 loc_1ACFC0:
 										
-										cmpi.w  #$300,d1        ; 0x300 - region-triggered respawn - check if dead and triggered
+										cmp.w   #$300,d1        ; 0x300 - region-triggered respawn - check if dead and triggered
 										bne.s   loc_1ACFEA
 										bsr.w   UpdateEnemyActivationIfDead
 										tst.w   d0
@@ -2011,10 +2009,10 @@ loc_1ACFD2:
 										bsr.w   UpdateEnemyStatsForRespawn
 										bcs.w   loc_1ACFEA
 										move.b  d4,(a0,d5.w)
-										addi.w  #1,d5
+										add.w   #1,d5
 loc_1ACFEA:
 										
-										addi.w  #1,d4
+										add.w   #1,d4
 										move.w  d4,d0
 										subq.w  #1,d7
 										bne.w   loc_1ACF44
@@ -2042,10 +2040,10 @@ UpdateEnemyActivationIfDead:
 loc_1AD014:
 										
 										jsr     j_GetEnemyAISetting36
-										cmpi.b  #$F,d1
+										cmp.b   #$F,d1
 										beq.s   loc_1AD044
 										move.w  d1,d6
-										addi.w  #$5A,d1 
+										add.w   #$5A,d1 
 										jsr     j_CheckFlag
 										beq.s   loc_1AD044
 										move.w  d4,d0
@@ -2057,11 +2055,11 @@ loc_1AD044:
 										
 										move.w  d4,d0
 										jsr     j_GetEnemyAISetting36
-										cmpi.b  #$F,d2
+										cmp.b   #$F,d2
 										beq.w   loc_1AD07E
 										move.w  d2,d6
 										move.w  d2,d1
-										addi.w  #$5A,d1 
+										add.w   #$5A,d1 
 										jsr     j_CheckFlag
 										beq.s   loc_1AD07E
 										move.w  d4,d0
@@ -2094,8 +2092,8 @@ GetRandomValueSigned:
 										move.b  (a0),d7
 										ext.w   d7
 										mulu.w  #$21D,d7
-										addi.w  #$3039,d7
-										andi.w  #$FF,d7
+										add.w   #$3039,d7
+										and.w   #$FF,d7
 										move.b  d7,(a0)
 										movem.l (sp)+,d0-d5/a0-a6
 										rts
@@ -2112,7 +2110,7 @@ randomLessThanD6:
 loc_1AD0BA:
 										
 										bsr.s   GetRandomValueSigned
-										cmpi.b  #1,d1
+										cmp.b   #1,d1
 										beq.s   loc_1AD0C4
 										bpl.s   loc_1AD0C8
 loc_1AD0C4:
@@ -2365,9 +2363,9 @@ InitEnemyBattlePosition:
 										movem.l d0-a6,-(sp)
 										lea     ((RAM_CurrentBattleIdx-$1000000)).w,a0
 										move.b  (a0),d1
-										cmpi.b  #$20,d1 
+										cmp.b   #$20,d1 
 										bne.s   loc_1B132E
-										cmpi.b  #$8F,d0
+										cmp.b   #$8F,d0
 										bne.s   loc_1B132E
 										bsr.w   sub_1B1A28
 										tst.w   d1
@@ -2383,12 +2381,12 @@ loc_1B132E:
 										cmp.b   d2,d0
 										bcc.w   loc_1B1368
 										move.b  d0,d1
-										andi.l  #$7F,d1 
+										and.l   #$7F,d1 
 										mulu.w  #$C,d1
-										adda.w  d1,a0
+										add.w   d1,a0
 										move.w  $A(a0),d1
-										andi.w  #$F,d1
-										cmpi.w  #2,d1
+										and.w   #$F,d1
+										cmp.w   #2,d1
 										bge.w   loc_1B1368
 										bsr.w   InitEnemyStats  
 										bra.w   loc_1B139A
@@ -2430,9 +2428,9 @@ UpdateEnemyStatsForRespawn:
 										cmp.b   d1,d0
 										bcc.w   loc_1B13E8
 										move.b  d0,d1
-										andi.l  #$7F,d1 
+										and.l   #$7F,d1 
 										mulu.w  #$C,d1
-										adda.w  d1,a0
+										add.w   d1,a0
 										clr.w   d3
 										clr.w   d4
 										move.b  1(a0),d3
@@ -2450,7 +2448,7 @@ loc_1B13E8:
 										jsr     j_SetCurrentHP
 										move.w  #$FFFF,d1
 										jsr     j_SetXPos
-										ori     #1,ccr
+										or      #1,ccr
 loc_1B1404:
 										
 										movem.l (sp)+,d0-a6
@@ -2472,7 +2470,7 @@ InitEnemyStats:
 										move.w  d1,d6
 										mulu.w  #$38,d1 
 										lea     unk_1B1A66(pc), a1
-										adda.w  d1,a1
+										add.w   d1,a1
 										move.l  a0,-(sp)
 										jsr     j_GetCharacterRAMAddress_0
 										moveq   #$D,d7
@@ -2492,9 +2490,9 @@ loc_1B142C:
 										jsr     j_SetYPos
 										jsr     j_GetUpperMoveType
 										lsl.w   #4,d1
-										andi.w  #$F0,d1 
+										and.w   #$F0,d1 
 										move.b  3(a0),d2
-										andi.w  #$F,d2
+										and.w   #$F,d2
 										or.w    d2,d1
 										jsr     j_SetMoveType
 										move.b  d6,d1
@@ -2509,10 +2507,10 @@ loc_1B142C:
 										bsr.w   sub_1B1504      
 										jsr     j_GetCharacterWord34
 										move.w  d1,d2
-										andi.w  #$F000,d2
+										and.w   #$F000,d2
 										move.w  $A(a0),d1
 										ror.w   #8,d1
-										andi.w  #$FFF,d1
+										and.w   #$FFF,d1
 										or.w    d2,d1
 										jsr     j_SetCharacterWord34
 										bsr.w   setEnemyBaseATK 
@@ -2541,7 +2539,7 @@ loc_1B14E2:
 loc_1B14F4:
 										
 										move.b  (a0),(a1)+
-										adda.w  #$C,a0
+										add.w   #$C,a0
 										dbf     d1,loc_1B14F4
 										movem.l (sp)+,d1/a0-a1
 										rts
@@ -2556,7 +2554,7 @@ loc_1B14F4:
 sub_1B1504:
 										
 										movem.l d0-a0,-(sp)
-										cmpi.w  #ITEMIDX_NOTHING,d1
+										cmp.w   #ITEMIDX_NOTHING,d1
 										beq.w   loc_1B154E
 										jsr     j_AddItem
 										btst    #7,d1
@@ -2564,7 +2562,7 @@ sub_1B1504:
 										move.w  d1,d3
 										clr.w   d1
 										jsr     j_GetItemAndNumberOfItems
-										subi.w  #1,d2
+										sub.w   #1,d2
 										move.w  d2,d4
 										clr.w   d5
 loc_1B152E:
@@ -2578,7 +2576,7 @@ loc_1B152E:
 										bra.w   loc_1B154E
 loc_1B1546:
 										
-										addi.w  #1,d5
+										add.w   #1,d5
 										dbf     d4,loc_1B152E
 loc_1B154E:
 										
@@ -2606,7 +2604,7 @@ loc_1B155C:
 										bne.s   loc_1B1576
 										jsr     j_GetYPos
 										cmp.w   d1,d4
-										ori     #1,ccr
+										or      #1,ccr
 										beq.w   loc_1B15A4
 loc_1B1576:
 										
@@ -2621,7 +2619,7 @@ loc_1B1582:
 										bne.s   loc_1B159C
 										jsr     j_GetYPos
 										cmp.w   d1,d4
-										ori     #1,ccr
+										or      #1,ccr
 										beq.w   loc_1B15A4
 loc_1B159C:
 										
@@ -2644,7 +2642,7 @@ setEnemyBaseATK:
 										
 										move.l  d1,-(sp)
 										jsr     j_GetDifficulty
-										cmpi.w  #2,d1
+										cmp.w   #2,d1
 										beq.s   loc_1B15BC
 										beq.w   loc_1B15F4
 loc_1B15BC:
@@ -2655,7 +2653,7 @@ loc_1B15BC:
 										lsr.l   #2,d1
 										jsr     j_SetBaseATK
 										jsr     j_GetDifficulty
-										cmpi.w  #2,d1
+										cmp.w   #2,d1
 										beq.s   loc_1B15E0
 										bra.w   loc_1B15F4
 loc_1B15E0:
@@ -2690,9 +2688,9 @@ loc_1B1612:
 										
 										moveq   #4,d1
 										bsr.w   getAddrOfBattleDataSection
-										andi.w  #$F,d0
+										and.w   #$F,d0
 										add.w   d0,d0
-										adda.w  d0,a0
+										add.w   d0,a0
 										clr.w   d1
 										clr.w   d2
 										move.b  (a0),d1
@@ -2733,21 +2731,21 @@ getAddrOfBattleDataSection:
 										move.b  1(a1),d1
 										move.b  (a1),d0
 										mulu.w  #$C,d0
-										adda.l  d0,a0
+										add.l   d0,a0
 										subq.b  #1,d2
 										beq.w   loc_1B1698
 										clr.l   d0
 										move.b  2(a1),d1
 										move.b  1(a1),d0
 										mulu.w  #$C,d0
-										adda.l  d0,a0
+										add.l   d0,a0
 										subq.b  #1,d2
 										beq.w   loc_1B1698
 										clr.l   d0
 										move.b  3(a1),d1
 										move.b  2(a1),d0
 										mulu.w  #$C,d0
-										adda.l  d0,a0
+										add.l   d0,a0
 loc_1B1698:
 										
 										movem.l (sp)+,d0/d2/a1
@@ -2774,9 +2772,9 @@ GetMonsterStartPos:
 										bra.w   loc_1B16F8
 loc_1B16BE:
 										
-										andi.w  #$FF,d0
+										and.w   #$FF,d0
 										mulu.w  #$C,d0
-										adda.w  d0,a0
+										add.w   d0,a0
 										bra.s   loc_1B16EC
 loc_1B16CA:
 										
@@ -2789,9 +2787,9 @@ loc_1B16CA:
 										bra.w   loc_1B16F8
 loc_1B16E2:
 										
-										andi.w  #$7F,d0 
+										and.w   #$7F,d0 
 										mulu.w  #$C,d0
-										adda.w  d0,a0
+										add.w   d0,a0
 loc_1B16EC:
 										
 										clr.w   d1
@@ -2816,7 +2814,7 @@ sub_1B16FE:
 										move.w  #2,d1
 										bsr.w   getAddrOfBattleDataSection
 										move.w  d1,d5
-										subi.w  #1,d5
+										sub.w   #1,d5
 										move.w  #$80,d0 
 										tst.w   d1
 										bne.s   loc_1B1724
@@ -2831,12 +2829,12 @@ loc_1B1724:
 										cmp.b   d2,d7
 										bne.s   loc_1B176A
 										jsr     j_GetCharacterWord34
-										cmpi.w  #$200,d1
+										cmp.w   #$200,d1
 										bne.s   loc_1B176A
 										jsr     j_GetEnemyAISetting36
-										cmpi.w  #$F,d1
+										cmp.w   #$F,d1
 										bne.s   loc_1B176A
-										cmpi.w  #$F,d2
+										cmp.w   #$F,d2
 										bne.s   loc_1B176A
 										jsr     j_GetMaxHP
 										tst.w   d1
@@ -2846,8 +2844,8 @@ loc_1B1724:
 										bra.w   loc_1B177A
 loc_1B176A:
 										
-										addi.w  #1,d0
-										adda.w  #$C,a0
+										add.w   #1,d0
+										add.w   #$C,a0
 										dbf     d5,loc_1B1724
 										move.w  #$FFFF,d0
 loc_1B177A:
@@ -2880,7 +2878,7 @@ DoesBattleUpgrade:
 										bra.w   loc_1B17B6      ; else
 loc_1B17A0:
 										
-										subi.w  #1,d6           ; d6--
+										sub.w   #1,d6           ; d6--
 loc_1B17A4:
 										
 										move.b  (a0)+,d0        ; put next byte in d0
@@ -2910,20 +2908,20 @@ sub_1B17BC:
 										nop
 										clr.w   d2
 										move.b  (a1),d2
-										subi.w  #1,d2
-										adda.w  #1,a1
+										sub.w   #1,d2
+										add.w   #1,a1
 										clr.w   d3
 loc_1B17DA:
 										
 										move.b  (a1,d3.w),d1
 										cmp.b   d1,d7
 										bne.s   loc_1B17F0
-										addi.w  #$1F4,d1
+										add.w   #$1F4,d1
 										jsr     j_SetFlag
 										bra.w   loc_1B17F8
 loc_1B17F0:
 										
-										addi.w  #1,d3
+										add.w   #1,d3
 										dbf     d2,loc_1B17DA
 loc_1B17F8:
 										
@@ -2946,8 +2944,8 @@ ShouldBattleUpgrade:
 										nop
 										clr.w   d2
 										move.b  (a1),d2
-										subi.w  #1,d2
-										adda.w  #1,a1
+										sub.w   #1,d2
+										add.w   #1,a1
 										clr.w   d3
 loc_1B181C:
 										
@@ -2955,7 +2953,7 @@ loc_1B181C:
 										move.b  (a1,d3.w),d1
 										cmp.b   d1,d7
 										bne.s   loc_1B183E
-										addi.w  #$1F4,d1
+										add.w   #$1F4,d1
 										jsr     j_CheckFlag
 										bne.s   loc_1B1836
 										clr.w   d1
@@ -2968,7 +2966,7 @@ loc_1B183A:
 										bra.w   loc_1B1846
 loc_1B183E:
 										
-										addi.w  #1,d3
+										add.w   #1,d3
 										dbf     d2,loc_1B181C
 loc_1B1846:
 										
@@ -3006,81 +3004,81 @@ loc_1B186C:
 										move.b  d5,d1
 										mulu.w  #$38,d1 
 										lea     unk_1B1A66(pc), a1
-										adda.w  d1,a1
+										add.w   d1,a1
 										move.b  $31(a1),d2
 										lsr.w   #4,d2
-										andi.b  #$F,d2
-										cmpi.b  #1,d2
+										and.b   #$F,d2
+										cmp.b   #1,d2
 										bne.s   loc_1B1896
 										lea     unk_1B6DBC(pc), a0
 										nop
 										bra.w   loc_1B193C
 loc_1B1896:
 										
-										cmpi.b  #2,d2
+										cmp.b   #2,d2
 										bne.s   loc_1B18A6
 										lea     unk_1B6DBC(pc), a0
 										nop
 										bra.w   loc_1B193C
 loc_1B18A6:
 										
-										cmpi.b  #3,d2
+										cmp.b   #3,d2
 										bne.s   loc_1B18B6
 										lea     unk_1B6DBC(pc), a0
 										nop
 										bra.w   loc_1B193C
 loc_1B18B6:
 										
-										cmpi.b  #4,d2
+										cmp.b   #4,d2
 										bne.s   loc_1B18C6
 										lea     unk_1B6DBC(pc), a0
 										nop
 										bra.w   loc_1B193C
 loc_1B18C6:
 										
-										cmpi.b  #5,d2
+										cmp.b   #5,d2
 										bne.s   loc_1B18D6
 										lea     unk_1B6DC6(pc), a0
 										nop
 										bra.w   loc_1B193C
 loc_1B18D6:
 										
-										cmpi.b  #6,d2
+										cmp.b   #6,d2
 										bne.s   loc_1B18E6
 										lea     unk_1B6DC6(pc), a0
 										nop
 										bra.w   loc_1B193C
 loc_1B18E6:
 										
-										cmpi.b  #8,d2
+										cmp.b   #8,d2
 										bne.s   loc_1B18F6
 										lea     unk_1B6DCA(pc), a0
 										nop
 										bra.w   loc_1B193C
 loc_1B18F6:
 										
-										cmpi.b  #9,d2
+										cmp.b   #9,d2
 										bne.s   loc_1B1906
 										lea     unk_1B6DCA(pc), a0
 										nop
 										bra.w   loc_1B193C
 loc_1B1906:
 										
-										cmpi.b  #$A,d2
+										cmp.b   #$A,d2
 										bne.s   loc_1B1916
 										lea     unk_1B6DCA(pc), a0
 										nop
 										bra.w   loc_1B193C
 loc_1B1916:
 										
-										cmpi.b  #$B,d2
+										cmp.b   #$B,d2
 										bne.s   loc_1B1926
 										lea     unk_1B6DD0(pc), a0
 										nop
 										bra.w   loc_1B193C
 loc_1B1926:
 										
-										cmpi.b  #$C,d2
+										cmp.b   #$C,d2
 										bne.s   loc_1B1936
 										lea     unk_1B6DD5(pc), a0
 										nop
@@ -3098,9 +3096,9 @@ loc_1B193C:
 										jsr     j_GetCurrentLevel
 										move.w  d1,d2
 										jsr     j_GetClass      
-										cmpi.b  #$B,d1
+										cmp.b   #$B,d1
 										ble.s   loc_1B195C
-										addi.w  #$14,d2
+										add.w   #$14,d2
 loc_1B195C:
 										
 										lea     ((RAM_CurrentBattleIdx-$1000000)).w,a1
@@ -3132,7 +3130,7 @@ loc_1B1988:
 loc_1B198E:
 										
 										divu.w  #$A,d2
-										andi.l  #$FF,d2
+										and.l   #$FF,d2
 										tst.w   d2
 										bne.s   loc_1B19A2
 										move.w  d5,d1
@@ -3141,7 +3139,7 @@ loc_1B19A2:
 										
 										clr.w   d6
 										move.b  (a0),d6
-										cmpi.b  #5,d6
+										cmp.b   #5,d6
 										bne.s   loc_1B19B0
 										mulu.w  d6,d2
 										subq.w  #5,d2
@@ -3149,7 +3147,7 @@ loc_1B19B0:
 										
 										add.w   d2,d3
 										move.w  d3,d2
-										addi.w  #1,d6
+										add.w   #1,d6
 loc_1B19B8:
 										
 										jsr     (UpdateRandomSeed).w
@@ -3183,10 +3181,10 @@ loc_1B19EC:
 loc_1B19F2:
 										
 										movea.l a0,a1
-										adda.w  #3,a1
+										add.w   #3,a1
 										clr.w   d1
 										move.b  (a1)+,d1
-										subi.w  #1,d1
+										sub.w   #1,d1
 loc_1B1A00:
 										
 										move.b  (a1)+,d0
@@ -3223,20 +3221,20 @@ sub_1B1A28:
 										jsr     j_UpdateForce
 										lea     ((RAM_CharIdxListSize-$1000000)).w,a0
 										move.w  (a0),d7
-										subi.w  #1,d7
+										sub.w   #1,d7
 										lea     ((RAM_CharIdxList-$1000000)).w,a0
 										clr.l   d6
 loc_1B1A42:
 										
 										clr.w   d0
 										move.b  (a0,d6.w),d0
-										cmpi.b  #$17,d0
+										cmp.b   #$17,d0
 										bne.s   loc_1B1A56
 										move.w  #1,d1
 										bra.w   loc_1B1A60
 loc_1B1A56:
 										
-										addi.w  #1,d6
+										add.w   #1,d6
 										dbf     d7,loc_1B1A42
 										clr.w   d1
 loc_1B1A60:

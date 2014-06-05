@@ -77,15 +77,15 @@ loc_1000DE:
 										move.w  #$E,d0
 										sub.w   d7,d0
 										lsl.w   #3,d0
-										addi.w  #$80,d0 
+										add.w   #$80,d0 
 										move.w  d0,(a1)+
 										addq.l  #2,a1
-										ori.w   #$2000,d1
+										or.w    #$2000,d1
 										move.w  d1,(a1)+
 										move.w  #$1F,d0
 										sub.w   d6,d0
 										lsl.w   #3,d0
-										addi.w  #$80,d0 
+										add.w   #$80,d0 
 										move.w  d0,(a1)+
 										moveq   #$FFFFFFFF,d2
 loc_100104:
@@ -202,7 +202,7 @@ titleScreenEnd:
 										divs.w  #$1E,d0
 										swap    d0
 										addq.w  #1,d0
-										cmpi.w  #$A,d0
+										cmp.w   #$A,d0
 										ble.s   loc_100260
 										lea     $480(a0),a0
 loc_100260:
