@@ -181,11 +181,11 @@ j_ExecuteBattleCutscene_Defeated:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4404C:
+j_ExecuteAfterBattleCutscene:
 										
-										jmp     sub_47CBC(pc)
+										jmp     ExecuteAfterBattleCutscene(pc)
 
-	; End of function sub_4404C
+	; End of function j_ExecuteAfterBattleCutscene
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4667,7 +4667,7 @@ loc_470DA:
 
 off_47102:          dc.l word_4931C         
 										dc.l bbcs_08            
-										dc.l word_4AA74         
+										dc.l abcs_battle08      
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6005,79 +6005,7 @@ unk_47A38:          dc.b $11
 										dc.b $14
 										dc.b  $D
 cs_Nothing:         dc.w $FFFF
-
-; =============== S U B R O U T I N E =======================================
-
-; cutscene before the battle begins
-
-j_ExecuteBattleCutscene_Intro_0:
-										
-										movem.l d1,-(sp)
-										clr.w   d1
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d1
-										add.w   #$1C2,d1
-										jsr     j_CheckFlag
-										bne.w   loc_47AE8
-										movem.l d0/a0,-(sp)
-										clr.w   d0
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
-										add.w   d0,d0
-										move.w  rpt_BattleBeginCutscenes(pc,d0.w),d0
-																						; rpt_BattleCutscenes
-										lea     rpt_BattleBeginCutscenes(pc,d0.w),a0
-										bsr.w   ExecuteMapScript
-										movem.l (sp)+,d0/a0
-										bra.w   loc_47AE8
-rpt_BattleBeginCutscenes:
-										
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w bbcs_01-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w bbcs_03-rpt_BattleBeginCutscenes
-										dc.w bbcs_04-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w bbcs_06-rpt_BattleBeginCutscenes
-										dc.w bbcs_07-rpt_BattleBeginCutscenes
-										dc.w bbcs_08-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w bbcs_11-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w bbcs_15-rpt_BattleBeginCutscenes
-										dc.w bbcs_16-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w bbcs_18-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w bbcs_21-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w bbcs_26-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w bbcs_28-rpt_BattleBeginCutscenes
-										dc.w bbcs_29-rpt_BattleBeginCutscenes
-										dc.w bbcs_30-rpt_BattleBeginCutscenes
-										dc.w bbcs_31-rpt_BattleBeginCutscenes
-										dc.w bbcs_32-rpt_BattleBeginCutscenes
-										dc.w bbcs_33-rpt_BattleBeginCutscenes
-										dc.w bbcs_34-rpt_BattleBeginCutscenes
-										dc.w bbcs_35-rpt_BattleBeginCutscenes
-										dc.w bbcs_36-rpt_BattleBeginCutscenes
-										dc.w bbcs_37-rpt_BattleBeginCutscenes
-										dc.w bbcs_38-rpt_BattleBeginCutscenes
-										dc.w bbcs_39-rpt_BattleBeginCutscenes
-										dc.w bbcs_40-rpt_BattleBeginCutscenes
-										dc.w bbcs_41-rpt_BattleBeginCutscenes
-										dc.w bbcs_42-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
-										dc.w cs_Nothing+$10000-rpt_BattleBeginCutscenes
+   include "asmscripts\battlecutscenes\cs_beforebattle.asm"		; Before battle cutscenes
 loc_47AE8:
 										
 										movem.l (sp)+,d1
@@ -6105,61 +6033,12 @@ ExecuteBattleCutscene_Start:
 										clr.w   d0
 										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
 										add.w   d0,d0
-										move.w  rpt_47B2C(pc,d0.w),d0
-										lea     rpt_47B2C(pc,d0.w),a0
+										move.w  rpt_BattleStartCutscenes(pc,d0.w),d0
+										lea     rpt_BattleStartCutscenes(pc,d0.w),a0
 										bsr.w   ExecuteMapScript
 										movem.l (sp)+,d0/a0
 										bra.w   loc_47B8C
-rpt_47B2C:
-										
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w word_4BE6A-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
-										dc.w cs_Nothing+$10000-rpt_47B2C
+   include "asmscripts\battlecutscenes\cs_battlestart.asm"		; Battle start cutscenes
 loc_47B8C:
 										
 										movem.l (sp)+,d1
@@ -6198,55 +6077,7 @@ ExecuteBattleCutscene_Defeated:
 
 	; End of function ExecuteBattleCutscene_Defeated
 
-rpt_EnemyDefeatedCutscenes:
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w word_49AB2-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w word_4ACC8-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w word_4F358-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
-										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+   include "asmscripts\battlecutscenes\cs_enemydefeated.asm"		; Enemy defeated cutscenes
 
 ; START OF FUNCTION CHUNK FOR ExecuteBattleCutscene_Defeated
 
@@ -6284,7 +6115,7 @@ EnemyLeaderPresence:incbin "battles/enemyleaderpresence.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47CBC:
+ExecuteAfterBattleCutscene:
 										
 										movem.l d0-d1,-(sp)
 										clr.w   d1
@@ -6296,64 +6127,17 @@ sub_47CBC:
 										clr.w   d0
 										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
 										add.w   d0,d0
-										move.w  off_47CF4(pc,d0.w),d0
-										lea     off_47CF4(pc,d0.w),a0
+										move.w  rpt_AfterBattleCutscenes(pc,d0.w),d0
+										lea     rpt_AfterBattleCutscenes(pc,d0.w),a0
 										bsr.w   ExecuteMapScript
 										movem.l (sp)+,d0/a0
 										bra.w   loc_47D54
 
-	; End of function sub_47CBC
+	; End of function ExecuteAfterBattleCutscene
 
-off_47CF4:          dc.w word_4F47A-off_47CF4
-										dc.w word_496DC-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_498EE-off_47CF4
-										dc.w word_49B48-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_49F7E-off_47CF4
-										dc.w word_4AA74-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_4ACEC-off_47CF4
-										dc.w word_4ACF8-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_4AE72-off_47CF4
-										dc.w word_4B1BC-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_4B2F2-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_4B6CE-off_47CF4
-										dc.w word_4B88C-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_4BCAA-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_4C07C-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_4C6A8-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_4CDB4-off_47CF4
-										dc.w word_4D09A-off_47CF4
-										dc.w word_4D4B6-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_4D9A4-off_47CF4
-										dc.w word_4DB94-off_47CF4
-										dc.w word_4DE8C-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_4EA94-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w word_4EF04-off_47CF4
-										dc.w word_4F35E-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
-										dc.w cs_Nothing+$10000-off_47CF4
+   include "asmscripts\battlecutscenes\cs_afterbattle.asm"		; After battle cutscenes
 
-; START OF FUNCTION CHUNK FOR sub_47CBC
+; START OF FUNCTION CHUNK FOR ExecuteAfterBattleCutscene
 
 loc_47D54:
 										
@@ -6364,7 +6148,7 @@ loc_47D54:
 										movem.l (sp)+,d0-d1
 										rts
 
-; END OF FUNCTION CHUNK FOR sub_47CBC
+; END OF FUNCTION CHUNK FOR ExecuteAfterBattleCutscene
 
 byte_47D6A:         dc.b 0
 										dc.b   0
@@ -6540,19 +6324,19 @@ loc_47EC2:
 
 	; End of function ExecuteBattleCutscene_Region
 
-   include "asmscripts\cs_regionactivated.asm"		; Battle cutscenes activated by reaching a zone
+   include "asmscripts\battlecutscenes\cs_regionactivated.asm"		; Region-activated cutscenes
 
 ; =============== S U B R O U T I N E =======================================
 
 executeFlashScreenScript:
 										
-										lea     FlashScreenScript(pc), a0
+										lea     cs_FlashScreen(pc), a0
 										trap    #6
 										rts
 
 	; End of function executeFlashScreenScript
 
-FlashScreenScript:  dc.w $41
+cs_FlashScreen:     dc.w $41
 										dc.w $1E
 										dc.w $FFFF
    include "asmscripts\cs_introendroutine.asm"		; Subroutine launching intro and end cutscenes
@@ -6732,7 +6516,270 @@ sub_493EC:
 										dc.b $1E
 										dc.b $FF
 										dc.b $FF
-   include "asmscripts\battlecutscenes\cs_battlecutscenes.asm"		; To be split later
+   include "asmscripts\battlecutscenes\battle01\bbcs.asm"		; Cutscene before battle 1
+   include "asmscripts\battlecutscenes\battle01\abcs.asm"		; Cutscene after battle 1
+   include "asmscripts\battlecutscenes\battle03\bbcs.asm"		; Cutscene before battle 3
+   include "asmscripts\battlecutscenes\battle04\bbcs.asm"		; Cutscene before battle 4
+   include "asmscripts\battlecutscenes\battle04\abcs.asm"		; Cutscene after battle 4
+   include "asmscripts\battlecutscenes\battle05\edcs.asm"		; Enemy defeated cutscene for battle 5
+   include "asmscripts\battlecutscenes\battle05\abcs.asm"		; Cutscene after battle 5
+   include "asmscripts\battlecutscenes\battle06\bbcs.asm"		; Cutscene before battle 6
+   include "asmscripts\battlecutscenes\battle07\bbcs.asm"		; Cutscene before battle 7
+   include "asmscripts\battlecutscenes\battle07\abcs.asm"		; Cutscene after battle 7
+   include "asmscripts\battlecutscenes\battle08\bbcs.asm"		; Cutscene before battle 8
+   include "asmscripts\battlecutscenes\battle08\abcs.asm"		; Cutscene after battle 8
+   include "asmscripts\battlecutscenes\battle11\bbcs.asm"		; Cutscene before battle 11
+   include "asmscripts\battlecutscenes\battle12\edcs.asm"		; Enemy defeated cutscene for battle 12
+   include "asmscripts\battlecutscenes\battle12\abcs.asm"		; Cutscene after battle 12
+   include "asmscripts\battlecutscenes\battle13\abcs.asm"		; Cutscene after battle 13
+   include "asmscripts\battlecutscenes\battle15\bbcs.asm"		; Cutscene before battle 15
+   include "asmscripts\battlecutscenes\battle15\abcs.asm"		; Cutscene after battle 15
+   include "asmscripts\battlecutscenes\battle16\bbcs.asm"		; Cutscene before battle 16
+   include "asmscripts\battlecutscenes\battle16\abcs.asm"		; Cutscene after battle 16
+   include "asmscripts\battlecutscenes\battle18\bbcs.asm"		; Cutscene before battle 18
+   include "asmscripts\battlecutscenes\battle18\abcs.asm"		; Cutscene after battle 18
+   include "asmscripts\battlecutscenes\battle20\abcs.asm"		; Cutscene after battle 20
+   include "asmscripts\battlecutscenes\battle21\bbcs.asm"		; Cutscene before battle 21
+   include "asmscripts\battlecutscenes\battle21\abcs.asm"		; Cutscene after battle 21
+   include "asmscripts\battlecutscenes\battle26\bbcs.asm"		; Cutscene before battle 26
+   include "asmscripts\battlecutscenes\battle26\abcs.asm"		; Cutscene after battle 26
+   include "asmscripts\battlecutscenes\battle27\bscs.asm"		; Start cutscene for battle 27
+   include "asmscripts\battlecutscenes\battle28\bbcs.asm"		; Cutscene before battle 28
+   include "asmscripts\battlecutscenes\battle28\abcs.asm"		; Cutscene after battle 28
+   include "asmscripts\battlecutscenes\battle29\bbcs.asm"		; Cutscene before battle 29
+   include "asmscripts\battlecutscenes\battle30\bbcs.asm"		; Cutscene before battle 30
+   include "asmscripts\battlecutscenes\battle30\abcs.asm"		; Cutscene after battle 30
+   include "asmscripts\battlecutscenes\battle31\bbcs.asm"		; Cutscene before battle 31
+   include "asmscripts\battlecutscenes\battle32\bbcs.asm"		; Cutscene before battle 32
+   include "asmscripts\battlecutscenes\battle32\rbcs_1.asm"		; Region-activated cutscene for battle 32
+   include "asmscripts\battlecutscenes\battle32\abcs.asm"		; Cutscene after battle 32
+   include "asmscripts\battlecutscenes\battle33\bbcs.asm"		; Cutscene before battle 33
+   include "asmscripts\battlecutscenes\battle33\abcs.asm"		; Cutscene after battle 33
+   include "asmscripts\battlecutscenes\battle34\bbcs.asm"		; Cutscene before battle 34
+   include "asmscripts\battlecutscenes\battle34\abcs.asm"		; Cutscene after battle 34
+   include "asmscripts\battlecutscenes\battle35\bbcs.asm"		; Cutscene before battle 35
+   include "asmscripts\battlecutscenes\battle36\bbcs.asm"		; Cutscene before battle 36
+   include "asmscripts\battlecutscenes\battle36\abcs.asm"		; Cutscene after battle 36
+   include "asmscripts\battlecutscenes\battle37\bbcs.asm"		; Cutscene before battle 37
+   include "asmscripts\battlecutscenes\battle37\abcs.asm"		; Cutscene after battle 37
+   include "asmscripts\battlecutscenes\battle38\bbcs.asm"		; Cutscene before battle 38
+   include "asmscripts\battlecutscenes\battle38\abcs.asm"		; Cutscene after battle 38
+   include "asmscripts\battlecutscenes\battle39\bbcs.asm"		; Cutscene before battle 39
+   include "asmscripts\battlecutscenes\battle40\bbcs.asm"		; Cutscene before battle 40
+   include "asmscripts\battlecutscenes\battle40\rbcs_1.asm"		; Region-activated cutscene 1 for battle 40
+   include "asmscripts\battlecutscenes\battle40\rbcs_2.asm"		; Region-activated cutscene 2 for battle 40
+   include "asmscripts\battlecutscenes\battle40\abcs.asm"		; Cutscene after battle 40
+   include "asmscripts\battlecutscenes\battle41\bbcs.asm"		; Cutscene before battle 41
+   include "asmscripts\battlecutscenes\battle42\bbcs.asm"		; Cutscene before battle 42
+   include "asmscripts\battlecutscenes\battle42\abcs.asm"		; Cutscene after battle 42
+   include "asmscripts\battlecutscenes\battle43\edcs.asm"		; Enemy defeated cutscene for battle 43
+   include "asmscripts\battlecutscenes\battle43\abcs.asm"		; Cutscene after battle 43
+   include "asmscripts\battlecutscenes\battle00\abcs.asm"		; Cutscene after battle 0
+
+; =============== S U B R O U T I N E =======================================
+
+sub_4F48A:
+										
+										movem.l d1-d5/a0,-(sp)
+										move.w  d0,d4
+										move.w  d1,d5
+										jsr     j_UpdateForce
+										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										move.w  ((RAM_CharIdxListSize-$1000000)).w,d3
+										subq.w  #1,d3
+loc_4F4A2:
+										
+										clr.w   d0
+										move.b  (a0)+,d0
+										clr.w   d1
+										jsr     j_GetItemAndNumberOfItems
+										cmp.w   #4,d2
+										bcs.w   loc_4F510
+										dbf     d3,loc_4F4A2
+										moveq   #1,d0
+										tst.w   d5
+										beq.w   loc_4F53C
+										move.w  d4,(RAM_Dialogue_NameIdx1).l
+										trap    #5
+										dc.w $D6
+										trap    #5
+										dc.w $FFFF
+										movem.w d4,-(sp)
+										bsr.w   sub_4F570
+										movem.w (sp)+,d1
+										move.w  d0,(RAM_Dialogue_NameIdx1).l
+										move.w  d2,(RAM_Dialogue_NameIdx2).l
+										jsr     j_AddItem
+										move.w  d1,(RAM_Dialogue_NameIdx3).l
+										trap    #0
+										dc.w MUSIC_ITEM
+										trap    #5
+										dc.w $D7
+										jsr     j_fadeOut_WaitForP2Input
+										jsr     (WaitForPlayerInput).w
+										trap    #5
+										dc.w $FFFF
+										moveq   #2,d0
+										bra.w   loc_4F53C
+loc_4F510:
+										
+										move.w  d4,d1
+										jsr     j_AddItem
+										move.w  d0,(RAM_Dialogue_NameIdx1).l
+										move.w  d1,(RAM_Dialogue_NameIdx2).l
+										trap    #0
+										dc.w MUSIC_ITEM
+										trap    #5
+										dc.w $D5
+										jsr     j_fadeOut_WaitForP2Input
+										jsr     (WaitForPlayerInput).w
+										trap    #5
+										dc.w $FFFF
+										clr.w   d0
+loc_4F53C:
+										
+										movem.l (sp)+,d1-d5/a0
+										rts
+
+	; End of function sub_4F48A
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_4F542:
+										
+										movem.w d1-d2,-(sp)
+										move.w  d0,d1
+										jsr     sub_81D0
+										cmp.w   #$FFFF,d0
+										beq.w   loc_4F56A
+										jsr     j_RemoveItemBySlot
+										move.w  #$FFFF,d0
+										cmp.w   #3,d2
+										beq.w   loc_4F56A
+										clr.w   d0
+loc_4F56A:
+										
+										movem.w (sp)+,d1-d2
+										rts
+
+	; End of function sub_4F542
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_4F570:
+										
+										movem.l d7-a1,-(sp)
+										link    a6,#-$C
+										jsr     j_UpdateForce
+										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     (byte_FFB0AE).l,a1
+										move.w  ((RAM_CharIdxListSize-$1000000)).w,(word_FFB12E).l
+										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										subq.w  #1,d7
+loc_4F596:
+										
+										move.b  (a0)+,(a1)+
+										dbf     d7,loc_4F596
+loc_4F59C:
+										
+										move.b  #1,(byte_FFB13C).l
+										jsr     sub_10044
+										cmp.w   #$FFFF,d0
+										bne.w   loc_4F5B6
+										bra.w   loc_4F6CA
+loc_4F5B6:
+										
+										move.w  d0,-2(a6)
+										move.w  d1,-6(a6)
+										move.w  d2,-4(a6)
+										move.w  -4(a6),d1
+										jsr     j_GetItemDefAddress
+										move.l  8(a0),-$A(a6)
+										move.b  -$A(a6),d1
+										and.b   #$10,d1
+										cmp.b   #0,d1
+										beq.s   loc_4F5F0
+										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
+										trap    #5
+										dc.w $25
+										bra.w   loc_4F6CA
+loc_4F5F0:
+										
+										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
+										trap    #5
+										dc.w $2C
+										jsr     j_YesNoChoiceBox
+										trap    #5
+										dc.w $FFFF
+										cmp.w   #0,d0
+										beq.w   loc_4F610
+										bra.s   loc_4F59C
+loc_4F610:
+										
+										move.w  -4(a6),d1
+										jsr     j_GetItemType
+										cmp.w   #1,d2
+										bne.s   loc_4F65C
+										move.w  -2(a6),d0
+										jsr     j_GetEquippedWeapon
+										cmp.w   #$FFFF,d1
+										beq.w   loc_4F69C
+										cmp.w   -6(a6),d2
+										bne.w   loc_4F69C
+										move.w  -4(a6),d1
+										jsr     j_isItemCursed
+										bcc.w   loc_4F69C
+										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
+										trap    #5
+										dc.w $1E
+										trap    #5
+										dc.w $FFFF
+										bra.w   loc_4F6CA
+loc_4F65C:
+										
+										cmp.w   #0,d2
+										beq.w   loc_4F69C
+										move.w  -2(a6),d0
+										jsr     j_GetEquippedRing
+										cmp.w   #$FFFF,d1
+										beq.w   loc_4F69C
+										cmp.w   -6(a6),d2
+										bne.w   loc_4F69C
+										move.w  -4(a6),d1
+										jsr     j_isItemCursed
+										bcc.w   loc_4F69C
+										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
+										trap    #5
+										dc.w $1E
+										bra.w   loc_4F6CA
+loc_4F69C:
+										
+										move.w  -2(a6),d0
+										move.w  -6(a6),d1
+										jsr     j_RemoveItemBySlot
+										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
+										move.b  -$A(a6),d1
+										and.b   #8,d1
+										cmp.b   #0,d1
+										beq.s   loc_4F6CE
+										move.w  -4(a6),d1
+										jsr     j_AddItemToDeals
+loc_4F6CA:
+										
+										bra.w   loc_4F59C
+loc_4F6CE:
+										
+										move.w  -2(a6),d0
+										move.w  -6(a6),d1
+										move.w  -4(a6),d2
+										unlk    a6
+										movem.l (sp)+,d7-a1
+										rts
+
+	; End of function sub_4F570
+
    include "asmscripts\mapsetups\mapsetupstable.asm"		; Map setups table
    include "asmscripts\mapsetups\mapsetups.asm"		; Map setups to be split later
 										align $4000

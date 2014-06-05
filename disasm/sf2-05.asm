@@ -6898,7 +6898,7 @@ loc_23CCC:
 										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
 										move.b  $10(a0,d0.w),((byte_FFA850-$1000000)).w
 										move.b  #0,((byte_FFA84C-$1000000)).w
-										jsr     sub_4404C
+										jsr     j_ExecuteAfterBattleCutscene
 										clr.w   d1
 										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d1
 										add.w   #$190,d1
@@ -6920,9 +6920,6 @@ loc_23D44:
 										bsr.w   sub_23E1A
 										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #0
-
-; END OF FUNCTION CHUNK FOR ExecuteBattleLoop
-
 										dc.w MUSIC_SAD_THEME_2  ; sad theme 2
 										trap    #TRAP_TEXTBOX
 										dc.w $16B               ; {LEADER} is exhausted.{W1}
@@ -6946,7 +6943,12 @@ loc_23D44:
 										jsr     sub_1AC04C
 										moveq   #$11,d0
 										clr.w   d4
-return_23D96:       rts
+return_23D96:
+										
+										rts
+
+; END OF FUNCTION CHUNK FOR ExecuteBattleLoop
+
 
 ; =============== S U B R O U T I N E =======================================
 

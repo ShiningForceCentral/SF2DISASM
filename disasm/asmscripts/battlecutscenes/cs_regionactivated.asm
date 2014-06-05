@@ -1,6 +1,6 @@
 
-; SCRIPT SECTION cs_regionactivated :
-; Battle cutscenes activated by reaching a zone
+; SCRIPT SECTION battlecutscenes\cs_regionactivated :
+; Region-activated cutscenes
 										dc.b $20                ; battle id
 										dc.b   0                ; region id
 										dc.w $182               ; associated flag
