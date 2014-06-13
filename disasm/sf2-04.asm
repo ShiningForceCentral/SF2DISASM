@@ -5133,7 +5133,7 @@ sub_1A848:
 										bclr    #7,d1
 										bne.s   loc_1A874
 										lea     unk_1A908(pc), a0
-										lea     off_1A8F4(pc), a1
+										lea     dword_1A8F4(pc), a1
 										moveq   #7,d4
 										bra.s   loc_1A87E
 loc_1A874:
@@ -5188,7 +5188,7 @@ loc_1A898:
 
 	; End of function sub_1A848
 
-off_1A8F4:          dc.l off_10             
+dword_1A8F4:        dc.l $10
 										dc.b   0
 										dc.b $20
 										dc.b   0

@@ -2396,7 +2396,7 @@ loc_2150E:
 										bsr.w   sub_22C60       
 										move.w  -8(a6),d4
 										move.w  -$C(a6),d5
-										jsr     sub_44088
+										jsr     sub_44088       
 										tst.w   d6
 										bne.w   loc_212A0
 										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
@@ -6523,7 +6523,7 @@ loc_23954:
 										bra.w   loc_23994
 loc_23978:
 										
-										jsr     sub_440B4
+										jsr     j_RunMapSetupFunction
 										bne.w   loc_23994
 										tst.w   d6
 										beq.s   loc_2398C
@@ -6920,6 +6920,9 @@ loc_23D44:
 										bsr.w   sub_23E1A
 										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #0
+
+; END OF FUNCTION CHUNK FOR ExecuteBattleLoop
+
 										dc.w MUSIC_SAD_THEME_2  ; sad theme 2
 										trap    #TRAP_TEXTBOX
 										dc.w $16B               ; {LEADER} is exhausted.{W1}
@@ -6943,12 +6946,7 @@ loc_23D44:
 										jsr     sub_1AC04C
 										moveq   #$11,d0
 										clr.w   d4
-return_23D96:
-										
-										rts
-
-; END OF FUNCTION CHUNK FOR ExecuteBattleLoop
-
+return_23D96:       rts
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -9595,7 +9593,7 @@ loc_257D0:
 										trap    #9
 										dc.w 0
 										jsr     j_getMapSetupEntities
-										jsr     sub_44004
+										jsr     j_InitMapEntities
 										jsr     (LoadMapEntitySprites).w
 										bsr.w   loc_2588A
 										trap    #2
@@ -9614,7 +9612,7 @@ loc_25836:
 										move.b  #0,((RAM_Battle_CurrentMovingEntity-$1000000)).w
 										jsr     (LoadMap).w     
 										bsr.w   SetBattleVIntFuncs
-										jsr     sub_440A8
+										jsr     j_RunMapSetupInitFunction
 										move.l  (dword_FFD084).l,d0
 										cmp.l   (dword_FFD004).l,d0
 										beq.s   loc_2586A       
@@ -9909,7 +9907,7 @@ loc_25A7C:
 										jsr     sub_4401C       
 										move.w  ((byte_FFA84C-$1000000)).w,d1
 										move.w  ((byte_FFA84E-$1000000)).w,d2
-										jsr     sub_44080
+										jsr     j_RunMapSetupSection3Function
 										rts
 
 ; END OF FUNCTION CHUNK FOR sub_2594A
@@ -10754,7 +10752,7 @@ loc_27C2C:
 										jsr     (disableDisplayAndVInt).w
 										move    #$2700,sr
 										movea.l (initStack).w,sp
-										movea.l (off_4).w,a0    
+										movea.l (p_Start).w,a0  
 										jmp     (a0)            ; reset
 
 	; End of function endGame

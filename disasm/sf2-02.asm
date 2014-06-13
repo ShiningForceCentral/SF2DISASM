@@ -3627,6 +3627,7 @@ loc_8E52:
 										bsr.s   RemoveAndArrangeItems
 loc_8E54:
 										movem.l (sp)+,d0/a0
+loc_8E58:
 										bra.w   ApplyStatusAndItemsOnStats
 
 	; End of function DropItemBySlot
@@ -3717,6 +3718,7 @@ loc_8EC2:
 										move.b  ITEMDEF_OFFSET_TYPE(a0),d1
 										and.b   d2,d1
 										beq.s   loc_8EE0
+loc_8EDA:
 										bclr    #ITEM_BIT_EQUIPPED,ITEM_OFFSET_IDXANDEQUIPBYTE(a1)
 loc_8EE0:
 										addq.w  #SIZE_ITEM,a1
@@ -3820,6 +3822,7 @@ isWeaponOrRingEquippable:
 getWeaponNewATKandDEF:
 										
 										movem.l d0/d4-d6/a0,-(sp)
+loc_8FA0:
 										bsr.w   GetCharEntryAddress
 										clr.w   d2
 										move.b  CHAR_OFFSET_ATK_CURRENT(a0),d2
@@ -4662,6 +4665,7 @@ loc_94E2:
 										move.b  (a0)+,d2
 										move.b  (a0)+,d3
 										move.b  (a0)+,d4
+loc_94FE:
 										bsr.w   GetMaxHP
 										bsr.w   sub_96BA
 										move.b  d1,1(a1)
@@ -4672,6 +4676,7 @@ loc_94E2:
 										bsr.w   GetMaxMP
 										bsr.w   sub_96BA
 										move.b  d1,2(a1)
+loc_9520:
 										bsr.w   IncreaseMaxMP
 										move.b  (a0)+,d2
 										move.b  (a0)+,d3
@@ -4701,6 +4706,7 @@ loc_94E2:
 										bsr.w   GetClass
 										cmp.w   #$B,d1
 										blt.s   loc_957E
+loc_957A:
 										add.w   #CHAR_CLASS_EXTRALEVEL,d5
 loc_957E:
 										move.b  #$FF,6(a1)
@@ -4742,12 +4748,14 @@ InitCharacterStats:
 										move.w  d1,-(sp)
 										move.w  d0,d2
 										lsl.w   #2,d2
+loc_95D0:
 										movea.l (p_pt_CharacterStats).l,a0
 										movea.l (a0,d2.w),a0
 										clr.w   d1
 										addq.l  #2,a0
 										move.b  (a0)+,d1
 										bsr.w   SetMaxHP
+loc_95E4:
 										bsr.w   SetCurrentHP
 										clr.w   d1
 										addq.l  #2,a0
@@ -5051,7 +5059,7 @@ loc_986E:
 										move.b  d0,((RAM_CurrentBattleIdx-$1000000)).w
 										move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
 										move.b  d0,((RAM_EgressMapIdx-$1000000)).w
-										move.l  #(off_57E3E+1),((SPECIAL_BATTLE_RECORD-$1000000)).w
+										move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
 										move.b  #2,((MESSAGE_SPEED-$1000000)).w
 										move.l  #$FFFFFFFF,((FOLLOWERS_LIST-$1000000)).w
 										move.w  #$FFFF,((byte_FFAF26-$1000000)).w
@@ -5476,15 +5484,18 @@ DebugModeSelectTargetEnemy:
 DebugModeSelectHits:
 										
 										movem.l d0/a0-a6,-(sp)
+loc_9B5C:
 										jsr     j_yesNoPrompt
 										tst.w   d0
 										seq     -$17(a2)
+loc_9B68:
 										jsr     j_yesNoPrompt
 										tst.w   d0
 										seq     -BCSTACK_OFFSET_DEBUGCRIT(a2)
 										jsr     j_yesNoPrompt
 										tst.w   d0
 										seq     -BCSTACK_OFFSET_DEBUGDOUBLE(a2)
+loc_9B80:
 										jsr     j_yesNoPrompt
 										tst.w   d0
 										seq     -$14(a2)
@@ -5508,12 +5519,16 @@ WriteSkirmishScript:
 										lea     (RAM_Start).l,a6; beginning of battle scene command list
 										move.b  #0,-$17(a2)
 										move.b  #0,-BCSTACK_OFFSET_DEBUGCRIT(a2)
+loc_9BB8:
 										move.b  #0,-BCSTACK_OFFSET_DEBUGDOUBLE(a2)
+loc_9BBE:
 										move.b  #0,-$14(a2)
+loc_9BC4:
 										tst.b   (RAM_DebugModeActivated).l
 										beq.s   loc_9BE4
 										btst    #INPUT_A_START_BIT,((RAM_Input_Player1_StateA-$1000000)).w
 										beq.s   loc_9BD8
+loc_9BD4:
 										bsr.w   DebugModeSelectAction
 loc_9BD8:
 										btst    #INPUT_A_START_BIT,((RAM_Input_Player2_StateA-$1000000)).w
@@ -5536,10 +5551,12 @@ loc_9BE4:
 										move.b  d1,-BCSTACK_OFFSET_RANGED(a2)
 										move.b  d1,-$F(a2)
 										move.b  d1,-BCSTACK_OFFSET_EXPLODE(a2)
+loc_9C22:
 										move.b  d1,-BCSTACK_OFFSET_INEFFECTIVEATTACK(a2)
 										bsr.w   DetermineTargetsByAction
 										bsr.w   InitSkirmishProperties
 										bsr.w   CheckForTaros
+loc_9C32:
 										bsr.w   InitSkirmishDisplayedChars
 										tst.b   -BCSTACK_OFFSET_INACTION_CURSE(a2)
 										beq.s   loc_9C5A
@@ -5639,21 +5656,25 @@ loc_9D3E:
 										bsr.w   WriteSkirmishScript_SwitchTargets
 										exg     a4,a5
 										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a5
+loc_9D84:
 										bsr.w   createBattleSceneText
 										bsr.w   createBattleSceneAnimation
 										bsr.w   WriteSkirmishScript_SwitchTargets
 										bsr.w   WriteSkirmishScript_DoAction
 										bsr.w   WriteSkirmishScript_EnemyDropItem
+loc_9D98:
 										bsr.w   WriteSkirmishScript_IdleSprite
 loc_9D9C:
 										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a4
 										lea     ((RAM_CharIdxList-$1000000)).w,a5
 										tst.b   -BCSTACK_OFFSET_EXPLODE(a2)
 										beq.s   loc_9DC4
+loc_9DAA:
 										move.b  #0,-BCSTACK_OFFSET_EXPLODE(a2)
 										move.w  #ACTION_BURSTROCK,(a3)
 										move.b  -BCSTACK_OFFSET_EXPLODECHAR(a2),(a4)
 										move.w  #$C,(a6)+
+loc_9DBC:
 										bsr.w   DetermineTargetsByAction
 										bra.w   loc_9C7E
 loc_9DC4:
@@ -5855,6 +5876,7 @@ loc_9F8E:
 										bne.s   loc_9FE6
 										move.b  (a4),d0
 										move.b  (a5),d1
+loc_9F98:
 										jsr     getDistanceBetweenEntities
 										cmp.w   #2,d2           ; check if block distance between attacker and target is >= 2
 										bcs.s   loc_9FB0
@@ -5863,6 +5885,7 @@ loc_9F8E:
 										move.b  #$FF,-BCSTACK_OFFSET_RANGED(a2)
 loc_9FB0:
 										move.b  (a4),d0
+loc_9FB2:
 										jsr     GetStatus
 										and.w   #CHAR_STATUS_MASK_CURSE,d1
 										beq.s   loc_9FCA
@@ -5982,17 +6005,21 @@ loc_A09E:
 										cmp.w   #$1F,d2
 										beq.w   loc_A132
 										cmp.w   #$20,d2 
+loc_A10E:
 										beq.w   loc_A132
 										move.w  2(a3),d2
 										move.w  #$119,d1
+loc_A11A:
 										cmp.w   #$28,d2 
 										beq.w   loc_A132
 										move.w  #$11A,d1
+loc_A126:
 										cmp.w   #$68,d2 
 										beq.w   loc_A132
 										move.w  #$112,d1
 loc_A132:
 										move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d2
+loc_A136:
 										move.w  ((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w,d3
 										addq.w  #1,d3
 										move.w  #$10,(a6)+
@@ -6012,6 +6039,7 @@ loc_A150:
 										move.w  d2,(a6)+
 										move.w  #0,(a6)+
 										move.w  #0,(a6)+
+loc_A170:
 										bra.w   loc_A1FA
 loc_A174:
 										cmp.w   #4,(a3)
@@ -6723,6 +6751,7 @@ sub_A872:
 										bra.w   loc_A8C4
 loc_A8A2:
 										move.b  (a5),d0
+loc_A8A4:
 										jsr     GetMaxHP
 										tst.w   d1
 										beq.w   loc_A8C4
@@ -8291,9 +8320,11 @@ sub_B680:
 										btst    #7,d0
 										bne.s   loc_B6A2
 										move.w  #$B,(a6)+
+loc_B692:
 										move.w  #0,(a6)+
 										move.w  #0,(a6)+
 										move.w  d1,(a6)+
+loc_B69C:
 										move.w  #2,(a6)+
 										bra.s   loc_B6B4
 loc_B6A2:
@@ -8302,6 +8333,7 @@ loc_B6A6:
 										move.w  #0,(a6)+
 										move.w  #0,(a6)+
 										move.w  d1,(a6)+
+loc_B6B0:
 										move.w  #2,(a6)+
 loc_B6B4:
 										moveq   #3,d0
@@ -9409,6 +9441,7 @@ getTerrainAtCoordOffset:
 setTerrain:
 										
 										movem.l d1-a6,-(sp)
+loc_C17A:
 										lea     (TERRAIN_DATA).l,a0
 										bsr.w   convertCoordToOffset
 										move.b  d0,(a0)
@@ -9423,6 +9456,7 @@ setTerrain:
 MemorizePath:
 										
 										movem.l d0-a6,-(sp)     ; copy current moving unit's terrain list to memory
+loc_C190:
 										jsr     GetUpperMoveType
 										lsl.w   #4,d1
 										lea     t_MoveTypeTerrainCosts(pc), a0
@@ -9431,7 +9465,9 @@ MemorizePath:
 										moveq   #$F,d7
 loc_C1A4:
 										move.b  (a0)+,d1
+loc_C1A6:
 										and.b   #$F,d1
+loc_C1AA:
 										cmp.b   #$F,d1
 										bne.s   loc_C1B2
 										moveq   #$FFFFFFFF,d1
@@ -9474,6 +9510,7 @@ GetMoveCost:
 										add.w   d0,a0
 										move.b  (a0),d1
 										lsr.b   #4,d1
+loc_C1FA:
 										and.b   #$F,d1
 										movem.l (sp)+,d0/d2-a6
 										rts
@@ -9490,8 +9527,10 @@ GetMoveCost:
 setMovableAtCoord:
 										
 										movem.l d0-a6,-(sp)
+loc_C208:
 										lea     ((byte_FF4000+$400)).l,a0
 										bsr.w   convertCoordToOffset
+loc_C212:
 										move.b  #0,(a0)
 										lea     ((byte_FF4A00+$300)).l,a0
 										bsr.w   convertCoordToOffset
@@ -9513,6 +9552,7 @@ getResistanceToSpell:
 										
 										movem.l d0-d1/d3-a6,-(sp)
 										and.b   #SPELL_MASK_IDX,d1
+loc_C232:
 										move.b  tbl_SpellElements(pc,d1.w),d2
 										jsr     GetCurrentResistance
 										and.w   #SPELL_MASK_ALLRESIST,d1
@@ -9569,12 +9609,14 @@ GetMoveInfo:
 										
 										movem.l d1-d2/d5-a1,-(sp)
 										bsr.w   MemorizePath
+loc_C2D0:
 										lea     ((byte_FF4000+$400)).l,a2
 										lea     ((byte_FF4A00+$300)).l,a3
 										lea     (TERRAIN_DATA).l,a4
 										lea     ((MOVE_COST_LIST-$1000000)).w,a5
 										jsr     GetXPos
 										move.w  d1,d3
+loc_C2EE:
 										jsr     GetYPos
 										move.w  d1,d4
 										jsr     GetCurrentMOV
@@ -9803,11 +9845,13 @@ loc_C4B8:
 loc_C4BC:
 										moveq   #$FFFFFFFF,d5
 										moveq   #0,d2
+loc_C4C0:
 										move.b  4(a0),d2
 										move.b  5(a0),d3
 										addq.b  #1,d2
 										lea     pt_SpellRanges(pc), a1
 										nop
+loc_C4D0:
 										move.w  d2,d4
 										lsl.w   #2,d4
 										add.w   d4,a1
@@ -9827,8 +9871,10 @@ loc_C4D8:
 
 sub_C4E8:
 										movem.l d0-a6,-(sp)
+loc_C4EC:
 										bsr.w   ClearTargetGrid 
 										bsr.w   ClearMovableGrid
+loc_C4F4:
 										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
 										bsr.w   MakeTargetList
 										moveq   #$FFFFFFFF,d5
@@ -9856,7 +9902,9 @@ applyRelativeCoordListToGrids:
 										cmp.w   #$FFFF,d1
 										beq.w   loc_C58A
 										move.w  d1,d3
+loc_C524:
 										jsr     GetYPos
+loc_C52A:
 										move.w  d1,d4
 										clr.w   d7
 										move.b  (a0)+,d7
@@ -9909,10 +9957,7 @@ SpellRange1:        dc.b   4
 										dc.b   1
 										dc.b   1
 										dc.b   0
-										dc.b   0
-										dc.b $FF
-										dc.b $FF
-										dc.b   0
+										dc.l byte_FFF7A8+$758   
 SpellRange2:        dc.b   8
 										dc.b   0
 										dc.b $FE 
@@ -10044,6 +10089,7 @@ loc_C688:
 
 sub_C68E:
 										movem.l d0-a6,-(sp)
+loc_C692:
 										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
 										lea     ((RAM_CharIdxList-$1000000)).w,a0
 										move.w  #0,d0
@@ -10056,6 +10102,7 @@ loc_C6A4:
 										jsr     GetXPos
 										cmp.b   #$FF,d1
 										beq.w   loc_C6CC
+loc_C6B8:
 										jsr     GetCurrentHP
 										tst.w   d1
 										beq.w   loc_C6CC
@@ -10251,6 +10298,7 @@ loc_C828:
 										bra.w   loc_C86E
 loc_C844:
 										jsr     GetYPos
+loc_C84A:
 										cmp.w   #MAP_SIZE_MAXHEIGHT,d1
 										bcc.w   loc_C86E
 										move.w  d1,d2
@@ -10262,6 +10310,7 @@ loc_C844:
 										move.b  d0,(a0)
 loc_C86E:
 										addq.b  #1,d0
+loc_C870:
 										dbf     d7,loc_C828
 										movem.l (sp)+,d0-a0
 										rts
@@ -10391,7 +10440,6 @@ sub_C958:
 										cmp.w   #$7F,d1 
 										beq.w   loc_CA02
 										bsr.w   MakeTargetListEverybody
-loc_C992:
 										bsr.w   GetTargetsReachableByItem
 										move.w  ((byte_FF8808-$1000000)).w,d7
 										subq.w  #1,d7
@@ -10421,6 +10469,7 @@ loc_C9CE:
 										lea     (word_FF880A).l,a0
 										move.w  d2,(a0)
 										jsr     GetItemDefAddress
+loc_C9DE:
 										move.b  9(a0),d1
 										lea     ((byte_FF886E-$1000000)).w,a0
 										lea     ((byte_FF88FE-$1000000)).w,a1
@@ -10939,6 +10988,7 @@ loc_CE56:
 										cmp.b   #1,d7
 										bne.s   loc_CE66
 										lea     (unk_DA22).l,a4
+loc_CE62:
 										bra.w   loc_CE80
 loc_CE66:
 										clr.l   d0
@@ -11039,17 +11089,20 @@ GetSlotContainingSpell:
 										moveq   #0,d3
 loc_CF1A:
 										move.w  d3,d1
+loc_CF1C:
 										jsr     GetSpellAndNumberOfSpells
 										move.w  d1,d2
 										and.b   #$3F,d2 
 										cmp.b   d4,d2
 										beq.w   loc_CF38
 										addq.w  #1,d3
+loc_CF30:
 										cmp.w   #4,d3
 										bcs.s   loc_CF1A
 										moveq   #$3F,d1 
 loc_CF38:
 										move.w  d3,d2
+loc_CF3A:
 										movem.l (sp)+,d0/d3-a6
 										rts
 
@@ -11066,17 +11119,20 @@ loc_CF38:
 GetSlotContainingItem:
 										
 										movem.l d0/d3-a6,-(sp)
+loc_CF44:
 										and.w   #$7F,d1 
 										move.w  d1,d4
 										moveq   #0,d3
 loc_CF4C:
 										move.w  d3,d1
+loc_CF4E:
 										jsr     GetCharItemAtSlotAndNumberOfItems
 										move.w  d1,d2
 										and.w   #$7F,d2 
 										cmp.w   d4,d2
 										beq.w   loc_CF6C
 										addq.w  #1,d3
+loc_CF62:
 										cmp.w   #4,d3
 										bcs.s   loc_CF4C
 										move.w  #$7F,d1 
@@ -11097,9 +11153,11 @@ GetNextUsableAttackSpell:
 										move.w  d1,d7
 										btst    #CHAR_BIT_ENEMY,d0
 										bne.s   loc_CF88
+loc_CF84:
 										move.w  #1,d7
 loc_CF88:
 										move.w  d3,d1
+loc_CF8A:
 										jsr     GetSpellAndNumberOfSpells
 										move.w  d1,d4
 										and.w   #SPELL_MASK_IDX,d4
@@ -11145,6 +11203,7 @@ loc_CFFC:
 										addq.w  #1,d3
 										cmp.w   #CHAR_SPELLSLOTS,d3
 										bcs.s   loc_CF88
+loc_D004:
 										move.w  #SPELLIDX_NOTHING,d1
 										bra.w   loc_D012
 loc_D00C:
@@ -11417,6 +11476,7 @@ loc_D23A:
 										bra.s   loc_D250
 loc_D248:
 										move.b  #$80,d0
+loc_D24C:
 										move.w  #$1F,d7
 loc_D250:
 										move.w  #0,(a1)
@@ -11431,6 +11491,7 @@ loc_D262:
 										jsr     GetXPos
 										bsr.w   GetClosestAttackPosition
 										cmp.b   #$FF,d1
+loc_D278:
 										beq.w   loc_D28A
 										addq.w  #1,(a1)
 										move.b  d0,(a2)+
@@ -11532,6 +11593,7 @@ sub_D326:
 sub_D336:
 										movem.l d1-d2,-(sp)
 										move.w  d1,d2
+loc_D33C:
 										jsr     GetCurrentHP
 
 	; End of function sub_D336
@@ -11585,6 +11647,7 @@ sub_D38A:
 										movem.l d1-d2,-(sp)
 										jsr     GetCurrentHP
 										move.w  d1,d2
+loc_D396:
 										jsr     GetMaxHP
 										bra.w   loc_D3BC
 										movem.l d1-d2,-(sp)
@@ -11734,6 +11797,7 @@ loc_D4B4:
 										tst.w   d1
 										beq.s   loc_D4D0
 										move.b  d1,(a0,d5.w)
+loc_D4C8:
 										move.b  d0,(a4,d5.w)
 										add.w   #1,d5
 loc_D4D0:
@@ -11770,9 +11834,11 @@ loc_D50E:
 										dbf     d5,loc_D50E
 										lea     ((byte_FF895E-$1000000)).w,a0
 										lea     ((byte_FF880E-$1000000)).w,a1
+loc_D51C:
 										lea     ((byte_FF883E-$1000000)).w,a4
 										clr.w   d4
 										clr.w   d5
+loc_D524:
 										lea     ((word_FF8806-$1000000)).w,a3
 										move.w  (a3),d6
 										sub.w   #1,d6
@@ -11827,11 +11893,13 @@ loc_D592:
 										dbf     d5,loc_D592
 										lea     ((word_FF8806-$1000000)).w,a0
 										move.w  (a0),d5
+loc_D5AE:
 										sub.w   #1,d5
 										lea     ((byte_FF883E-$1000000)).w,a0
 										lea     ((RAM_CharIdxList-$1000000)).w,a1
 loc_D5BA:
 										move.b  (a0)+,(a1)+
+loc_D5BC:
 										dbf     d5,loc_D5BA
 										lea     ((word_FF8806-$1000000)).w,a0
 										move.w  (a0),d5
@@ -11862,6 +11930,7 @@ loc_D5FE:
 										bra.w   loc_D626
 loc_D614:
 										sub.w   #1,d4
+loc_D618:
 										lea     ((byte_FF892E-$1000000)).w,a0
 										lea     ((byte_FF895E-$1000000)).w,a1
 loc_D620:
@@ -12232,7 +12301,7 @@ off_D982:           dc.l byte_D901
 										dc.l byte_D961
 										dc.l byte_D901
 off_D9A2:           dc.l unk_D941
-										dc.l unk_D941
+off_D9A6:           dc.l unk_D941
 										dc.l byte_D921
 										dc.l byte_D921
 										dc.l byte_D901
@@ -12538,6 +12607,7 @@ loc_DBBC:
 										move.b  (a2,d2.w),d4
 										tst.w   d4
 										bne.s   loc_DBCE
+loc_DBCA:
 										bra.w   loc_DD0A
 loc_DBCE:
 										subq.w  #1,d4
@@ -12563,8 +12633,10 @@ loc_DBFA:
 										subq.w  #1,d2
 										clr.b   d0
 										subq.w  #1,d2
+loc_DC00:
 										move.b  (a3,d2.w),d0
 										lsl.w   #8,d0
+loc_DC06:
 										move.b  (a2,d2.w),d0
 										tst.w   d0
 										bpl.s   loc_DC12
@@ -12674,6 +12746,7 @@ loc_DCE6:
 										moveq   #1,d5
 										moveq   #2,d3
 										sub.w   #$30,d2 
+loc_DCEE:
 										bra.w   loc_DD04
 loc_DCF2:
 										moveq   #2,d5
@@ -13083,6 +13156,7 @@ loc_E048:
 loc_E06A:
 										cmp.b   #2,d6
 										bne.s   loc_E076
+loc_E070:
 										jsr     sub_1AC030
 loc_E076:
 										move.w  d5,d1
@@ -13093,6 +13167,7 @@ loc_E076:
 										clr.w   d2
 										move.b  (a1),d2
 										add.w   #1,a1
+loc_E08C:
 										sub.b   #1,d2
 loc_E090:
 										clr.w   d1
@@ -13128,6 +13203,7 @@ loc_E0D2:
 										bsr.w   GetCurrentHP
 										tst.w   d1
 										bne.s   loc_E0DE
+loc_E0DA:
 										add.w   #1,d3
 loc_E0DE:
 										add.w   #1,d0
@@ -13327,14 +13403,8 @@ byte_E249:          dc.b 0
 										dc.b   2
 										dc.b   2
 										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b   2
-										dc.b   2
+										dc.l aSegaGenesis       
+										dc.l loc_10202
 										dc.b   0
 										dc.b   0
 										dc.b   0
@@ -13344,7 +13414,7 @@ unk_E25B:           dc.b   3
 										dc.b $16
 										dc.b $FF
 off_E260:           dc.l unk_E26C
-										dc.l unk_E277
+off_E264:           dc.l unk_E277
 										dc.l byte_E283
 unk_E26C:           dc.b   5
 										dc.b   4
@@ -13764,9 +13834,11 @@ loc_E6B0:
 loc_E6C0:
 										clr.w   d0
 										move.b  (a0,d6.w),d0
+loc_E6C6:
 										cmp.b   #$7F,-2(a6) 
 										beq.s   loc_E6DA
 										clr.w   d1
+loc_E6D0:
 										move.b  -2(a6),d1
 										bsr.w   GetItemRange
 										bra.s   loc_E6E4
@@ -13778,13 +13850,16 @@ loc_E6E4:
 										bsr.w   GetYPos
 										move.w  d1,d2
 										bsr.w   GetXPos
+loc_E6EE:
 										bsr.w   GetClosestAttackPosition
 										cmp.b   #$FF,d1
 										beq.s   loc_E6FC
+loc_E6F8:
 										bra.w   loc_E70A
 loc_E6FC:
 										add.w   #1,d6
 										subq.w  #1,d5
+loc_E702:
 										bne.w   loc_E660
 										bra.w   loc_E776
 loc_E70A:
@@ -13794,6 +13869,7 @@ loc_E70A:
 										lea     ((byte_FF4000+$400)).l,a3
 										bsr.w   sub_DD10
 										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a1
+loc_E722:
 										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a1
 										cmp.b   #$7F,-2(a6) 
 										bne.s   loc_E748
@@ -13812,6 +13888,7 @@ loc_E748:
 										move.w  d0,6(a1)
 										clr.w   d0
 										move.b  (a0,d6.w),d0
+loc_E75C:
 										move.w  d0,4(a1)
 										clr.w   d0
 										move.b  -4(a6),d0
@@ -13982,7 +14059,9 @@ loc_E94C:
 										move.w  d1,d0
 										move.w  d2,d1
 										lea     ((byte_FF4000+$400)).l,a2
+loc_E96E:
 										lea     ((byte_FF4A00+$300)).l,a3
+loc_E974:
 										bsr.w   sub_DD10
 										bra.w   loc_E984
 loc_E97C:
@@ -14006,6 +14085,7 @@ sub_E98C:
 										bne.s   loc_E9B2
 										move.b  #$FF,d1
 										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+loc_E9A2:
 										move.w  #3,(a0)
 										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
 										move.b  #$FF,(a0)
@@ -14014,6 +14094,7 @@ loc_E9B2:
 										move.b  d0,-1(a6)
 										move.b  d1,-2(a6)
 										move.b  d2,-4(a6)
+loc_E9BE:
 										bsr.w   GetCurrentMOV
 										tst.b   d1
 										bne.s   loc_E9DE
@@ -14031,20 +14112,24 @@ loc_E9DE:
 										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
 										move.w  #3,(a0)
 										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+loc_E9F8:
 										move.b  #$FF,(a0)
 										bra.w   loc_EB7A
 loc_EA00:
 										move.b  d1,-3(a6)
+loc_EA04:
 										btst    #6,d1
 										bne.s   loc_EA2E
 										clr.w   d0
 										move.b  d1,d0
+loc_EA0E:
 										bsr.w   GetCurrentHP
 										tst.w   d1
 										bne.s   loc_EA2E
 										move.b  #$FF,d1
 										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
 										move.w  #3,(a0)
+loc_EA22:
 										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EB7A
@@ -14083,6 +14168,7 @@ loc_EA78:
 										bra.w   loc_EB7A
 loc_EA9C:
 										jsr     j_clearTerrainListObstructions
+loc_EAA2:
 										move.b  -1(a6),d0
 										move.b  -3(a6),d1
 										bsr.w   sub_F7A0
@@ -14094,6 +14180,7 @@ loc_EA9C:
 										move.b  #$FF,(a0)
 										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
 										move.w  #3,(a0)
+loc_EACA:
 										bra.w   loc_EB7A
 										move.w  #$FFFF,d1
 										bra.s   loc_EAE2
@@ -14508,6 +14595,7 @@ loc_EF64:
 										cmp.b   (a3,d3.w),d4
 										bgt.s   loc_EF80
 										move.b  (a1,d3.w),(a4,d5.w)
+loc_EF70:
 										move.l  a6,-(sp)
 										add.w   d5,a6
 										move.b  (a2,d3.w),-$90(a6)
@@ -14900,6 +14988,7 @@ loc_F35E:
 										cmp.b   #1,d0
 										bgt.s   loc_F392
 										move.b  (a0,d5.w),d0
+loc_F368:
 										sub.b   1(a0,d5.w),d0
 										bpl.s   loc_F370
 										neg.b   d0
@@ -14964,6 +15053,7 @@ loc_F404:
 										move.w  d1,d3
 										move.w  #$80,d0 
 										lea     ((byte_FF4000+$400)).l,a2
+loc_F42A:
 										lea     ((byte_FF4A00+$300)).l,a3
 										lea     (TERRAIN_DATA).l,a4
 										lea     ((MOVE_COST_LIST-$1000000)).w,a5
@@ -14976,6 +15066,7 @@ loc_F43A:
 										bsr.w   GetYPos
 										move.w  d2,d0
 										bsr.w   j_makeEnemyMoveOrder
+loc_F454:
 										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
 										move.b  (a0),d0
 										cmp.b   #$FF,d0
@@ -15370,6 +15461,7 @@ loc_F8CE:
 										move.w  d2,d1
 										lea     ((byte_FF4000+$400)).l,a2
 										lea     ((byte_FF4A00+$300)).l,a3
+loc_F8DE:
 										bsr.w   sub_DD10
 loc_F8E2:
 										unlk    a6
@@ -15383,6 +15475,7 @@ loc_F8E2:
 
 sub_F8EA:
 										movem.l d0/d3-a6,-(sp)
+loc_F8EE:
 										link    a6,#-4
 										move.w  d0,d7
 										bsr.w   GetEnemyAISetting3233
@@ -15394,6 +15487,7 @@ sub_F8EA:
 										move.b  -3(a6),d0
 										cmp.b   #$FF,d0
 										beq.s   loc_F924
+loc_F916:
 										cmp.b   #$F,d1
 										beq.s   loc_F924
 										move.b  #1,d1
@@ -15402,6 +15496,7 @@ loc_F924:
 										move.b  -4(a6),d0
 										cmp.b   #$FF,d0
 										beq.s   loc_F93C
+loc_F92E:
 										cmp.b   #$F,d2
 										beq.s   loc_F93C
 										move.b  #1,d1
@@ -15410,6 +15505,7 @@ loc_F93C:
 										move.b  -3(a6),d0
 										cmp.b   #$FF,d0
 										beq.s   loc_F96E
+loc_F946:
 										move.b  -1(a6),d0
 										cmp.b   #$F,d0
 										bne.s   loc_F96E
@@ -15417,9 +15513,11 @@ loc_F93C:
 										cmp.b   #$FF,d0
 										bne.s   loc_F96E
 										move.b  -2(a6),d0
+loc_F95E:
 										cmp.b   #$F,d0
 										beq.s   loc_F96E
 										clr.w   d1
+loc_F966:
 										move.b  #1,d2
 										bra.w   loc_F9AC
 loc_F96E:
@@ -15431,9 +15529,11 @@ loc_F96E:
 										beq.s   loc_F98A
 										clr.w   d1
 										clr.w   d2
+loc_F986:
 										bra.w   loc_F9AC
 loc_F98A:
 										move.b  -4(a6),d0
+loc_F98E:
 										cmp.b   #$FF,d0
 										bne.s   loc_F9A6
 										move.b  -2(a6),d0
@@ -15471,4 +15571,4 @@ MoveCostData:       dc.b  $F                ; special move cost list for Kraken 
 SpellNames:         incbin "spells/spellnames.bin"
 AllyNames:          incbin "chardata/allynames.bin"
 EnemyNames:         incbin "chardata/enemynames.bin"
-										align $8000
+algn_FF87:          align $8000

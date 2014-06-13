@@ -69,7 +69,7 @@ word_4E544:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.w $2000
 										dc.w $B1D
 										dc.w $B06
-										dc.w 5                  ; 0005 PLAY SOUND 
+										dc.w 5                  ; 0005 PLAY SOUND MUSIC_STOP
 										dc.w $20
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30

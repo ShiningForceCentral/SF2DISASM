@@ -148,7 +148,7 @@ eas_LyingLeftBis:   dc.w $14                ; 0014 SET ANIM COUNTER $0
 										dc.w $A                 ; 000A UPDATE SPRITE
 										dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
-										dc.w $14                ; 0014 SET ANIM COUNTER $0
+eas_45F7C:          dc.w $14                ; 0014 SET ANIM COUNTER $0
 										dc.w 0
 										dc.w $1B                ; 001B SET FLIPPING $2
 										dc.w 2
@@ -162,7 +162,7 @@ eas_LyingRightBis:  dc.w $14                ; 0014 SET ANIM COUNTER $0
 										dc.w $A                 ; 000A UPDATE SPRITE
 										dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
-word_45F9C:         dc.w $20                ; 0020 SET ENTITY IN WATER $FFFF
+eas_45F9C:          dc.w $20                ; 0020 SET ENTITY IN WATER $FFFF
 										dc.w $FFFF
 										dc.w $A                 ; 000A UPDATE SPRITE
 										dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
@@ -410,7 +410,7 @@ eas_4618A:          dc.w $11                ; 0011  $101
 										dc.w $FEFF
 										dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
-										dc.w $11                ; 0011  $101
+eas_46198:          dc.w $11                ; 0011  $101
 										dc.w $101
 										dc.w $12                ; 0012  $FEFF
 										dc.w $FEFF
@@ -467,7 +467,7 @@ eas_461E4:          dc.w $22                ; 0022 SET FACING $1
 										dc.w $1E
 										dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
-										dc.w $10                ; 0010 SET SPEED X=$0 Y=$0
+eas_46212:          dc.w $10                ; 0010 SET SPEED X=$0 Y=$0
 										dc.b 0
 										dc.b 0
 										dc.w $11                ; 0011  $101
@@ -511,7 +511,7 @@ eas_46246:          dc.w $10                ; 0010 SET SPEED X=$0 Y=$0
 										dc.w 0
 word_46262:         dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $4C
 										dc.w word_462AE-word_46262
-										dc.w $10                ; 0010 SET SPEED X=$0 Y=$0
+eas_46266:          dc.w $10                ; 0010 SET SPEED X=$0 Y=$0
 										dc.b 0
 										dc.b 0
 										dc.w $11                ; 0011  $101
@@ -596,7 +596,7 @@ word_462DA:         dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FF
 										dc.w $A                 ; 000A UPDATE SPRITE
 										dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
-										dc.w $1F                ; 001F SET 1D BIT 3 $FFFF
+eas_46310:          dc.w $1F                ; 001F SET 1D BIT 3 $FFFF
 										dc.w $FFFF
 										dc.w $22                ; 0022 SET FACING $2
 										dc.w 2
@@ -808,39 +808,39 @@ eas_463AE:          dc.w 0                  ; 0000 WAIT value $5
 										dc.w $12
 										dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
-word_464BE:         dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$FFFF
+eas_464BE:          dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$FFFF
 										dc.w $FFFF
 										dc.w $FFFF
 										dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-										dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$1
+eas_464C6:          dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$1
 										dc.w $FFFF
 										dc.w 1
 										dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-										dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$1
+eas_464CE:          dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$1
 										dc.w 1
 										dc.w 1
 										dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-										dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$FFFF
+eas_464D6:          dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$FFFF
 										dc.w 1
 										dc.w $FFFF
 										dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
 word_464DE:         dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFE0
-										dc.w word_464BE+$10000-word_464DE
-word_464E2:         dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$1
+										dc.w eas_464BE+$10000-word_464DE
+eas_464E2:          dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$1
 										dc.w $FFFF
 										dc.w 1
 										dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-										dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$FFFF
+eas_464EA:          dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$FFFF
 										dc.w $FFFF
 										dc.w $FFFF
 										dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-										dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$FFFF
+eas_464F2:          dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$FFFF
 										dc.w 1
 										dc.w $FFFF
 										dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-										dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$1
+eas_464FA:          dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$1
 										dc.w 1
 										dc.w 1
 										dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
 word_46502:         dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFE0
-										dc.w word_464E2+$10000-word_46502
+										dc.w eas_464E2+$10000-word_46502

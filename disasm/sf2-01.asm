@@ -6,15 +6,15 @@
 
 
 initStack:          dc.l initStack          ; Initial Stack
-off_4:              dc.l Start              ; Start Address
+p_Start:            dc.l Start              ; Start Address
 										dc.l int_OtherError     ; Bus Error
 										dc.l int_AdressError    ; Address Error
-off_10:             dc.l int_IllegalInstruction
+										dc.l int_IllegalInstruction
 																						; Illegal instruction
 										dc.l int_ZeroDivide     ; Zero Divide
 										dc.l int_OtherError     ; CHK instruction
 										dc.l int_OtherError     ; TRAPV instruction
-off_20:             dc.l int_OtherError     ; Privilege Violation
+										dc.l int_OtherError     ; Privilege Violation
 										dc.l int_OtherError     ; Trace
 										dc.l int_OtherError     ; Line 1010 Emulator
 										dc.l int_OtherError     ; Line 1111 Emulator
@@ -22,16 +22,16 @@ off_20:             dc.l int_OtherError     ; Privilege Violation
 										dc.l int_OtherError     ; Reserved
 										dc.l int_OtherError     ; Reserved
 										dc.l int_OtherError     ; Unitialized Interrrupt
+off_40:             dc.l int_OtherError     ; Reserved
+off_44:             dc.l int_OtherError     ; Reserved
+										dc.l int_OtherError     ; Reserved
+off_4C:             dc.l int_OtherError     ; Reserved
 										dc.l int_OtherError     ; Reserved
 										dc.l int_OtherError     ; Reserved
 										dc.l int_OtherError     ; Reserved
-										dc.l int_OtherError     ; Reserved
-										dc.l int_OtherError     ; Reserved
-										dc.l int_OtherError     ; Reserved
-										dc.l int_OtherError     ; Reserved
-										dc.l int_OtherError     ; Reserved
+off_5C:             dc.l int_OtherError     ; Reserved
 										dc.l int_OtherError     ; Spurious Interrupt
-										dc.l int_ExternalInterrupt
+off_64:             dc.l int_ExternalInterrupt
 																						; Level 1 interrupt
 										dc.l int_ExternalInterrupt
 																						; Level 2/External  interrupt
@@ -43,17 +43,17 @@ off_20:             dc.l int_OtherError     ; Privilege Violation
 										dc.l VInt               ; Level 6/Vertical interrupt
 										dc.l IntLvl7            ; Level 7 interrupt
 										dc.l Trap0_SoundCommand 
-										dc.l Trap1_CheckFlag
+off_84:             dc.l Trap1_CheckFlag
 										dc.l Trap2_SetFlag
 										dc.l Trap3_ClearFlag
 										dc.l Trap4_CheckFlag
-										dc.l Trap5_TextBox
+off_94:             dc.l Trap5_TextBox
 										dc.l Trap6_TriggerAndExecuteMapScript
 										dc.l int_ExternalInterrupt
 																						; Trap
 										dc.l int_ExternalInterrupt
 																						; Trap
-										dc.l Trap9_ManageContextualFunctions
+off_A4:             dc.l Trap9_ManageContextualFunctions
 																						; Trap
 										dc.l int_ExternalInterrupt
 																						; Trap
@@ -68,6 +68,7 @@ off_20:             dc.l int_OtherError     ; Privilege Violation
 										dc.l int_ExternalInterrupt
 																						; Trap
 										dc.l int_OtherError     ; Reserved
+off_C4:             dc.l int_OtherError     ; Reserved
 										dc.l int_OtherError     ; Reserved
 										dc.l int_OtherError     ; Reserved
 										dc.l int_OtherError     ; Reserved
@@ -81,8 +82,7 @@ off_20:             dc.l int_OtherError     ; Privilege Violation
 										dc.l int_OtherError     ; Reserved
 										dc.l int_OtherError     ; Reserved
 										dc.l int_OtherError     ; Reserved
-										dc.l int_OtherError     ; Reserved
-										dc.l int_OtherError     ; Reserved
+off_FC:             dc.l int_OtherError     ; Reserved
 aSegaGenesis:       dc.b 'SEGA GENESIS    '
 aCSega1994_jul:     dc.b '(C)SEGA 1994.JUL'
 aShiningForce2:     dc.b 'SHINING FORCE 2 '
@@ -421,6 +421,7 @@ Trap0_SoundCommand:
 										movem.l d0-d1/a0,-(sp)
 										movea.l $E(sp),a0
 										move.w  (a0),d1         ; get interrupt param
+loc_466:
 										addq.l  #2,$E(sp)
 										cmp.w   #$FFFF,d1
 										bne.s   loc_472
@@ -470,6 +471,7 @@ int_IllegalInstruction:
 int_ZeroDivide:
 										
 										move.l  #'ZERO',(ERRCODE_BYTE0).l
+loc_4CE:
 										move.l  2(sp),(ERRCODE_BYTE4).l
 										bsr.w   saveErrorCode
 										bra.w   int_ExternalInterrupt
@@ -1028,6 +1030,7 @@ loc_97A:
 										bne.s   loc_994         ; if FC, then update music level
 										and.b   #$F,d1
 										move.b  d1,(Z80_SoundDriverMusicLevel).l
+loc_98A:
 										move.b  d0,(Z80_SoundDriverCommand).l
 										bra.w   loc_9F6
 loc_994:
@@ -1048,6 +1051,7 @@ loc_9AA:
 loc_9B8:
 										cmp.b   #$40,d0 
 										bgt.s   loc_9C6
+loc_9BE:
 										move.b  #$F,(Z80_SoundDriverFadeInData).l
 																						; if music, put this fade in parameter : no fade in
 loc_9C6:
@@ -1055,6 +1059,7 @@ loc_9C6:
 																						; send music/sfx command to Z80
 										cmp.b   #$40,d0 
 										bge.s   loc_9F6
+loc_9D2:
 										movem.l d7-a0,-(sp)
 										lea     ((WAIT_FOR_MUSIC_END-$1000000)).w,a0
 										moveq   #8,d7
@@ -1068,6 +1073,7 @@ loc_9DC:
 										addq.b  #1,((MUSIC_STACK_LENGTH-$1000000)).w
 loc_9F6:
 										bsr.w   UpdatePlayerInputs
+loc_9FA:
 										tst.b   ((byte_FFDE9D-$1000000)).w
 										bne.s   loc_A60
 										moveq   #2,d0
@@ -1084,6 +1090,7 @@ loc_9F6:
 										bgt.s   loc_A54         
 										move.b  ((PRIMARY_WALKING_DIRECTION-$1000000)).w,d0
 																						; get current walking direction
+loc_A26:
 										eor.b   d0,((RAM_Input_Player1_StateA-$1000000)).w
 																						; get new direction
 										moveq   #2,d0
@@ -1703,6 +1710,7 @@ DmaSpriteTable:
 										move.w  #$8134,(a6)     ; disable display, enable Vint, enable DMA
 										move.l  #$94019300,(a6) ; DMA Length : $100
 										move.l  #$96EE9540,(a6) ; from RAM 0xFFEE40
+loc_DF6:
 										move.w  #$977F,(a6)
 										move.w  #$6800,(a6)     ; to VRAM 0xE800
 										move.w  #$83,(TEMP_DMA_VALUE).l 
@@ -1741,6 +1749,7 @@ ClearScrollTableData:
 										
 										movem.l d7/a6,-(sp)
 										move.w  #$C000,d0       ; clear scroll A table
+loc_E42:
 										move.w  #$1000,d1
 										clr.w   d2
 										bsr.w   DmaVramFill     
@@ -1752,6 +1761,7 @@ ClearScrollTableData:
 										lea     ((byte_FFC000-$1000000)).w,a6
 loc_E62:
 										clr.l   (a6)+
+loc_E64:
 										dbf     d7,loc_E62
 										move.w  #$1FF,d7
 										add.w   #$1800,a6
@@ -1892,6 +1902,7 @@ sub_F3A:
 										move.w  a6,(a4)+
 loc_F50:
 										move.w  d0,(a4)+
+loc_F52:
 										move.l  a4,(dword_FFDED0).l
 										addq.b  #1,(byte_FFDE95).l
 										clr.l   d7
@@ -1926,6 +1937,7 @@ sub_F76:
 
 sub_F90:
 										movem.l d5-d7,-(sp)
+loc_F94:
 										lea     ($E000).l,a6
 										lsl.w   #1,d5
 										move.w  (FFD100_MaybeRelatedToHscroll+2).l,d7
@@ -1946,6 +1958,7 @@ sub_F90:
 										movem.l d5-d6,-(sp)
 										add.l   #$C000,a6
 										lsl.w   #1,d5
+loc_FD4:
 										move.w  (FFD100_MaybeRelatedToHscroll).l,d7
 										lsr.w   #2,d7
 										sub.w   d7,d5
@@ -1954,6 +1967,7 @@ sub_F90:
 										move.w  (FFD500_MaybeRelatedToVscroll).l,d7
 										lsl.w   #4,d7
 										add.w   d7,d6
+loc_FEE:
 										and.w   #$F80,d6
 										or.w    d6,d5
 										add.w   d5,a6
@@ -1983,10 +1997,12 @@ swapA6:
 sub_1014:
 										bsr.w   disableInterrupts
 										lea     (byte_FFDB80).l,a4
+loc_101E:
 										movem.l d5-d6,-(sp)
 										move.w  (word_FFDEA6).l,d5
 										lsr.w   #8,d5
 										move.w  (word_FFDEA6).l,d6
+loc_1030:
 										and.w   #$FF,d6
 										bsr.w   sub_F90
 										movem.l (sp)+,d5-d6
@@ -2000,6 +2016,7 @@ loc_103C:
 loc_104E:
 										or.l    #$FF0000,d3
 										movea.l d3,a3
+loc_1056:
 										movea.l (dword_FFDED0).l,a5
 										move.w  (word_FFDEA8).l,d3
 										and.l   #$FF,d3
@@ -2024,11 +2041,14 @@ loc_1088:
 										movem.l (sp)+,d3-d4/a3-a6
 										bsr.w   enableInterrupts
 										bra.w   setFFDE94b0andWait
+loc_10AC:
 										bsr.w   disableInterrupts
+loc_10B0:
 										lea     (byte_FFDB80).l,a4
 										movem.l d5-d6,-(sp)
 										move.w  (word_FFDEA6).l,d5
 										lsr.w   #8,d5
+loc_10C2:
 										move.w  (word_FFDEA6).l,d6
 										and.w   #$FF,d6
 										bsr.w   sub_F90
@@ -2045,12 +2065,14 @@ bwahDMAstuffAgain:
 										
 										move    sr,-(sp)
 										move    #$2700,sr
+loc_10E2:
 										move.w  #$100,(Z80BusReq).l
 loc_10EA:
 										btst    #0,(Z80BusReq).l
 										bne.s   loc_10EA        ; wait for Z80 bus free
 										movem.l d2,-(sp)
 										movem.l d0/a6,-(sp)
+loc_10FC:
 										lea     (VDP_Control).l,a6
 										cmp.w   #2,d1
 										beq.s   loc_1112
@@ -2067,6 +2089,7 @@ loc_1112:
 										lsr.w   #8,d0
 										swap    d0
 										move.w  d2,d0
+loc_1126:
 										or.l    #$94009300,d0
 										move.l  d0,(a6)
 										move.l  #$96009500,d2
@@ -2087,11 +2110,13 @@ loc_1112:
 										move.w  d0,(a6)
 										move.w  a1,d0
 										rol.w   #2,d0
+loc_115C:
 										and.w   #3,d0
 										or.b    #$80,d0
 										move.w  d0,(TEMP_DMA_VALUE).l
 										move.w  (TEMP_DMA_VALUE).l,(a6)
 										move.w  (FFDEAC_VdpReg01Status).l,(a6)
+loc_1176:
 										move.w  #0,(Z80BusReq).l
 										cmp.w   #2,d1
 										beq.s   loc_1188
@@ -2117,6 +2142,7 @@ loc_1188:
 bwahDMAstuffAgainbis:
 										
 										move    sr,-(sp)
+loc_11A0:
 										move    #$2700,sr
 										move.b  ((VINT_ENABLED-$1000000)).w,-(sp)
 										sf      ((VINT_ENABLED-$1000000)).w
@@ -2145,6 +2171,7 @@ bwahDMAstuffAgainbis:
 										swap    d2
 										move.l  d2,(a6)+
 										swap    d0
+loc_11EE:
 										or.w    #$9700,d0
 										move.w  d0,(a6)+
 										move.w  a1,d0
@@ -2153,10 +2180,13 @@ bwahDMAstuffAgainbis:
 										move.w  d0,(a6)+
 										move.w  a1,d0
 										rol.w   #2,d0
+loc_1204:
 										and.w   #3,d0
 										or.b    #$80,d0
 										move.w  d0,(a6)+
+loc_120E:
 										move.l  a6,(FFDED4_VdpRegCommands).l
+loc_1214:
 										addq.b  #1,(byte_FFDE96).l
 										movem.l (sp)+,d0/a6
 										moveq   #0,d2
@@ -2179,11 +2209,14 @@ sub_1234:
 										move.w  a6,d7
 										and.w   #$3FFF,d7
 										or.w    #$4000,d7
+loc_1242:
 										move.w  d7,(VDP_Control).l
 										move.w  a6,d7
 										lsr.w   #8,d7
 										lsr.w   #6,d7
+loc_124E:
 										move.w  d7,(VDP_Control).l
+loc_1254:
 										movem.w (sp)+,d7
 										rts
 
@@ -2195,6 +2228,7 @@ sub_1234:
 storeVdpCommands:
 										
 										movem.l a6,-(sp)
+loc_125E:
 										movea.l (FFDED4_VdpRegCommands).l,a6
 										move.w  #$8F02,(a6)+    ; auto-increment : 2
 										btst    #1,(byte_FFDEC1).l
@@ -2210,6 +2244,7 @@ loc_1284:
 										move.w  #$9580,(a6)+
 										move.w  #$977F,(a6)+    ; RAM to VRAM, address : 0x3FE880
 										move.w  #$6C00,(a6)+
+loc_1294:
 										move.w  #$83,(a6)+ ; Data Port stuff ?
 										move.l  a6,(FFDED4_VdpRegCommands).l
 										addq.b  #1,(byte_FFDE96).l
@@ -2256,6 +2291,7 @@ storeVdpCommandsbis:
 										movea.l (FFDED4_VdpRegCommands).l,a6
 										move.w  #$8F02,(a6)+    ; auto-inc : 2
 										btst    #2,(byte_FFDEC1).l
+loc_12E8:
 										bne.s   loc_12F4        
 										move.w  #$9400,(a6)+
 										move.w  #$9304,(a6)+    ; DMA length
@@ -2271,6 +2307,7 @@ loc_12FC:
 										move.w  #$90,(a6)+ ; Data port stuff ?
 										move.l  a6,(FFDED4_VdpRegCommands).l
 										addq.b  #1,(byte_FFDE96).l
+loc_131C:
 										movem.l (sp)+,a6
 										rts
 
@@ -2520,7 +2557,7 @@ PowersOfTen:        dc.l 1000000000
 										dc.l 1000000
 										dc.l 100000
 										dc.l 10000
-										dc.l 1000
+dword_14FA:         dc.l 1000
 										dc.l 100
 										dc.l 10
 										dc.l 1
@@ -2633,6 +2670,7 @@ sub_15A4:
 										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,d7
 										and.b   ((byte_FFDE9E-$1000000)).w,d7
 										beq.s   loc_15CA
+loc_15B2:
 										addq.b  #1,((byte_FFDE9F-$1000000)).w
 										move.b  ((byte_FFDE9F-$1000000)).w,d7
 										cmp.b   #$A,d7
@@ -3372,6 +3410,7 @@ loc_1AA2:
 										bcs.w   loc_1B10
 										move.l  (a0)+,(a1)+
 										add.w   d0,d0
+loc_1AC0:
 										bcs.w   loc_1B26
 										add.w   d0,d0
 										bcs.w   loc_1B10
@@ -3451,6 +3490,7 @@ loc_1B4E:
 loc_1B72:
 										move.w  -2(a1),d1
 										swap    d1
+loc_1B78:
 										move.w  -2(a1),d1
 										bclr    #0,d2
 										bne.s   loc_1B84
@@ -3475,17 +3515,23 @@ loc_1B88:
 										move.l  d1,(a1)+
 										move.l  d1,(a1)+
 										bra.w   loc_1AA2
+loc_1BAC:
 										movem.l d0-a2/a5,-(sp)
 										link    a6,#-$20
+loc_1BB4:
 										lea     -$20(a6),a5
 										moveq   #1,d3
 										move.l  d3,(a5)+
 										move.l  #$20003,(a5)+
 										move.l  #$40005,(a5)+
+loc_1BC8:
 										move.l  #$60007,(a5)+
+loc_1BCE:
 										move.l  #$80009,(a5)+
 										move.l  #$A000B,(a5)+
+loc_1BDA:
 										move.l  #$C000D,(a5)+
+loc_1BE0:
 										move.l  #$E000F,(a5)+
 										lea     -$20(a6),a5
 										clr.w   d3
@@ -3506,6 +3552,7 @@ loc_1C06:
 										add.w   d0,d0
 										bcs.s   loc_1C22
 										moveq   #0,d1
+loc_1C0C:
 										dbf     d3,loc_1C14
 										moveq   #$F,d3
 										move.w  (a0)+,d0
@@ -3513,6 +3560,7 @@ loc_1C14:
 										add.w   d0,d0
 										addx.w  d1,d1
 										bset    d1,d2
+loc_1C1A:
 										dbf     d4,loc_1BEE
 										bra.w   loc_1C7A
 loc_1C22:
@@ -3795,7 +3843,9 @@ loadTileData:
 										moveq   #0,d4
 										move.l  #$40005,(a5)+
 										move.l  #$60007,(a5)+
+loc_1E6C:
 										move.l  #$80009,(a5)+
+loc_1E72:
 										move.l  #$A000B,(a5)+
 										move.l  #$C000D,(a5)+
 										move.l  #$E000F,(a5)+
@@ -3931,6 +3981,7 @@ loc_1F68:
 										exg     d6,d4
 										add.w   d4,d7
 										dbf     d3,loc_1F30
+loc_1F72:
 										bra.w   loc_2040
 loc_1F76:
 										bne.s   loc_1F7E
@@ -4438,6 +4489,7 @@ loc_2346:
 										move.w  d4,(a2)+
 										cmp.w   d6,d1
 										beq.s   return_2370
+loc_234E:
 										dbf     d5,loc_235C
 										subq.w  #4,d2
 										bcc.s   return_235A
@@ -4482,18 +4534,21 @@ sub_2372:
 										move.w  #$32E,(a1)+
 										move.w  #$32F,(a1)+
 										move.w  #$B2E,(a1)+
+loc_23A0:
 										move.w  #$33E,(a1)+
 										move.w  #$33F,(a1)+
 										move.w  #$B3E,(a1)+
 										move.w  #$34E,(a1)+
 										move.w  #$34F,(a1)+
 										move.w  #$B4E,(a1)+
+loc_23B8:
 										move.w  #$32C,(a1)+
 										move.w  #$32D,(a1)+
 										move.w  #$B2C,(a1)+
 										move.w  #$33C,(a1)+
 										move.w  #$33D,(a1)+
 										move.w  #$B3C,(a1)+
+loc_23D0:
 										move.w  #$34E,(a1)+
 										move.w  #$34F,(a1)+
 										move.w  #$B4E,(a1)+
@@ -4531,6 +4586,7 @@ loc_241C:
 										move.w  (a0)+,d0
 loc_242A:
 										add.w   d0,d0
+loc_242C:
 										bcs.w   loc_2436
 										move.w  -2(a1),(a1)+
 										bra.s   loc_240A
@@ -4864,6 +4920,7 @@ loc_2772:
 										lea     (byte_FFE000).l,a0
 										lea     (byte_FFC000).l,a1
 										move.w  #$3C,d0 
+loc_2782:
 										move.w  #0,d1
 loc_2786:
 										addq.w  #8,((word_FFA804-$1000000)).w
@@ -4876,6 +4933,7 @@ loc_2796:
 loc_279A:
 										move.w  #$800,d3
 										bsr.w   sub_29A2
+loc_27A2:
 										bsr.w   WaitForVInt     
 										move.w  #$1F,d6
 										movem.l d0-d1,-(sp)
@@ -4898,11 +4956,14 @@ loc_27AE:
 										bsr.w   set_FFDE94_bit3 
 										movem.l (sp)+,d0-d1/a0-a1
 										dbf     d7,loc_2786
+loc_27F6:
 										bsr.w   WaitForVInt     
 										move.w  #8,((word_FFA804-$1000000)).w
+loc_2800:
 										move.w  #8,((word_FFA806-$1000000)).w
 										trap    #9
 										dc.w 3
+off_280A:
 										dc.l vintFunc_3930
 										jsr     sub_4344(pc)
 										nop
@@ -4959,6 +5020,7 @@ loc_2874:
 										movem.l (sp)+,d0-d1/a0-a1
 										dbf     d7,loc_284C
 										bsr.w   WaitForVInt     
+loc_28C0:
 										move.w  #$18,((word_FFA808-$1000000)).w
 										move.w  #$18,((word_FFA80A-$1000000)).w
 										trap    #9
@@ -5169,14 +5231,17 @@ loc_2AD4:
 										clr.w   (FFD080_Palette1bis).l
 										tst.b   (a5)+
 										blt.s   loc_2B1C
+loc_2B08:
 										lea     (byte_FF3000).l,a0
 										lea     ($2000).w,a1
+loc_2B12:
 										move.w  #$800,d0
 										moveq   #2,d1
 										bsr.w   bwahDMAstuffAgain
 loc_2B1C:
 										tst.b   (a5)+
 										blt.s   loc_2B34
+loc_2B20:
 										lea     (FF6802_LOADING_SPACE).l,a0
 										lea     ($3000).w,a1
 										move.w  #$800,d0
@@ -5189,11 +5254,13 @@ loc_2B34:
 										lea     ($4000).w,a1
 										move.w  #$800,d0
 										moveq   #2,d1
+loc_2B48:
 										bsr.w   bwahDMAstuffAgain
 loc_2B4C:
 										tst.b   (a5)+
 										blt.s   loc_2B64
 										lea     (byte_FF1000).l,a0
+loc_2B56:
 										lea     ($5000).w,a1
 										move.w  #$800,d0
 										moveq   #2,d1
@@ -5202,6 +5269,7 @@ loc_2B60:
 loc_2B64:
 										tst.b   (a5)+
 										blt.s   loc_2B7C
+loc_2B68:
 										lea     (FF2000_LOADING_SPACE).l,a0
 										lea     ($6000).w,a1
 										move.w  #$800,d0
@@ -5219,6 +5287,7 @@ loc_2B82:
 										move.w  (a4)+,d1
 										move.w  (a4)+,d2
 										move.w  (a4)+,d3
+loc_2B92:
 										mulu.w  #$180,d0
 										mulu.w  #$180,d1
 										mulu.w  #$180,d2
@@ -5229,6 +5298,7 @@ loc_2BA6:
 										move.w  (a4)+,d2
 										move.w  (a4)+,d3
 										mulu.w  #$180,d0
+loc_2BB0:
 										mulu.w  #$180,d1
 										mulu.w  #$180,d2
 										mulu.w  #$180,d3
@@ -5271,6 +5341,7 @@ loc_2C0C:
 loc_2C14:
 										bsr.w   sub_2DEC
 										move.w  (sp)+,d0
+loc_2C1A:
 										cmp.w   #$FFFF,d0
 										bne.s   loc_2C70
 										move.w  d4,d0
@@ -5278,6 +5349,7 @@ loc_2C14:
 										move.w  d0,d2
 										move.w  d1,d3
 										sub.w   #$780,d0
+loc_2C2C:
 										sub.w   #$780,d1
 										add.w   #$780,d2
 										add.w   #$600,d3
@@ -5287,6 +5359,7 @@ loc_2C14:
 loc_2C42:
 										cmp.w   ((word_FFA832-$1000000)).w,d2
 										ble.s   loc_2C50
+loc_2C48:
 										move.w  ((word_FFA832-$1000000)).w,d0
 										sub.w   #$F00,d0
 loc_2C50:
@@ -5297,6 +5370,7 @@ loc_2C5A:
 										cmp.w   ((word_FFA834-$1000000)).w,d3
 										ble.s   loc_2C68
 										move.w  ((word_FFA834-$1000000)).w,d1
+loc_2C64:
 										sub.w   #$D80,d1
 loc_2C68:
 										lsr.w   #7,d0
@@ -5321,6 +5395,7 @@ loc_2C70:
 										lsl.w   #7,d5
 										lsl.w   #7,d6
 										lsl.w   #7,d7
+loc_2C9A:
 										mulu.w  ((word_FFA83E-$1000000)).w,d0
 										lsr.l   #8,d0
 										mulu.w  ((word_FFA840-$1000000)).w,d1
@@ -5432,6 +5507,7 @@ loc_2DD0:
 loc_2DD4:
 										cmp.b   #$FF,((RAM_CurrentBattleIdx-$1000000)).w
 										beq.s   return_2DEA
+loc_2DDC:
 										move.w  ((byte_FFF706-$1000000)).w,d0
 										move.w  ((byte_FFF708-$1000000)).w,d1
 										clr.w   d2
@@ -5471,36 +5547,43 @@ loc_2E2C:
 										mulu.w  #3,d0
 										move.w  d0,((word_FFA836-$1000000)).w
 										move.w  (a4)+,d0
+loc_2E38:
 										mulu.w  #3,d0
 										move.w  d0,((word_FFA838-$1000000)).w
 										move.w  (a4)+,d0
 										mulu.w  #3,d0
 										move.w  d0,((word_FFA83A-$1000000)).w
 										move.w  (a4)+,d0
+loc_2E4C:
 										mulu.w  #3,d0
 										move.w  d0,((word_FFA83C-$1000000)).w
 										move.w  (a4)+,((word_FFA83E-$1000000)).w
 										move.w  (a4)+,((word_FFA840-$1000000)).w
 										move.w  (a4)+,((word_FFA842-$1000000)).w
+loc_2E60:
 										move.w  (a4)+,((word_FFA844-$1000000)).w
 										move.l  (a4)+,((RAM_Map_ForegroundAutoscrollX-$1000000)).w
 										move.b  (a4)+,((byte_FFAF46-$1000000)).w
+loc_2E6C:
 										move.b  (a4)+,((byte_FFB0AD-$1000000)).w
 										movea.l (a5),a4
 										move.w  #1,((TILE_ANIM_COUNTER-$1000000)).w
 										move.l  $18(a5),((TILE_ANIM_DATA_ADDR-$1000000)).w
 										blt.s   return_2EBE
+loc_2E80:
 										movea.l ((TILE_ANIM_DATA_ADDR-$1000000)).w,a1
 										move.w  (a1)+,d0
 										movea.l (p_pt_MapTiles).l,a0
 										lsl.w   #2,d0
 										movea.l (a0,d0.w),a0
 										move.l  a1,-(sp)
+loc_2E94:
 										lea     (FF6802_LOADING_SPACE).l,a1
 										bsr.w   loadTileData    
 										movea.l (sp)+,a1
 										move.w  (a1)+,d7
 										lea     (FF6802_LOADING_SPACE).l,a0
+loc_2EA8:
 										lea     (byte_FF9B04).l,a1
 										lsl.w   #5,d7
 										bsr.w   copyBytes       
@@ -5530,6 +5613,7 @@ sub_2EC0:
 										bsr.w   UpdateRandomSeed
 										move.w  d7,d3
 										move.w  #4,d4
+loc_2EF0:
 										move.w  #4,d5
 										move.w  #4,d6
 										move.w  #4,d7
@@ -5537,6 +5621,7 @@ sub_2EC0:
 										bsr.w   WaitForVInt     
 loc_2F04:
 										move.w  #$8721,d0
+loc_2F08:
 										bsr.w   setVdpReg       
 										move.w  #$8700,d0
 										bsr.w   setVdpReg       
@@ -5585,13 +5670,13 @@ loc_2F66:
 blackScreenLayout:  dcb.b $80,$22
 MaskSprites:        dc.l $800301            ; something like an initial sprite table
 										dc.l $C77C0080
-										dc.l Z80_Memory+$302
+off_2FF2:           dc.l Z80_Memory+$302
 										dc.l $C77C0080
 										dc.l $C00303
-										dc.l $C77C0080
+dword_2FFE:         dc.l $C77C0080
 										dc.l $E00304
 										dc.l $C77C0080
-										dc.l $1000305
+dword_300A:         dc.l $1000305
 										dc.l $C77C0080
 										dc.l $1200306
 										dc.l $C77C0080
@@ -5629,6 +5714,7 @@ displayBlackScreen:
 										moveq   #2,d1
 										bsr.w   bwahDMAstuffAgain
 										lea     MaskSprites(pc), a0
+loc_307E:
 										lea     (RAM_Struct_Sprite_Y).l,a1
 										moveq   #$38,d7 
 										bsr.w   copyBytes       
@@ -5669,6 +5755,7 @@ sub_30BE:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
+loc_30E6:
 										bsr.w   bwahDMAstuffAgainbis
 										bra.w   setFFDE94b3andWait
 
@@ -7047,6 +7134,7 @@ sub_3758:
 										beq.s   loc_3770
 										tst.b   ((byte_FFAF46-$1000000)).w
 										beq.s   loc_3770
+loc_376A:
 										move.w  #$2000,((word_FFA80E-$1000000)).w
 loc_3770:
 										move.w  ((word_FFA810-$1000000)).w,d4
@@ -7066,6 +7154,7 @@ loc_3770:
 										move.w  ((word_FFA804-$1000000)).w,d2
 										move.w  ((word_FFA808-$1000000)).w,d3
 										lea     (byte_FFC000).l,a1
+loc_37A8:
 										bsr.w   sub_3158
 										movem.w (sp)+,d0-d3
 return_37B0:
@@ -7094,13 +7183,17 @@ loc_37CA:
 										movem.w d0-d3,-(sp)
 										clr.w   d4
 										clr.w   d5
+loc_37E4:
 										move.w  ((word_FFA810-$1000000)).w,d0
 										asr.w   #4,d0
+loc_37EA:
 										move.w  ((word_FFA812-$1000000)).w,d1
 										asr.w   #4,d1
+loc_37F0:
 										add.w   #$100,d1
 										move.w  ((word_FFA804-$1000000)).w,d2
 										move.w  ((word_FFA808-$1000000)).w,d3
+loc_37FC:
 										lea     (byte_FFC000).l,a1
 										bsr.w   sub_30EE
 										movem.w (sp)+,d0-d3
@@ -7115,6 +7208,7 @@ return_380A:
 
 sub_380C:
 										clr.w   ((word_FFA80E-$1000000)).w
+loc_3810:
 										cmp.b   #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 										beq.s   loc_3824
 										tst.b   ((byte_FFAF46-$1000000)).w
@@ -7135,6 +7229,7 @@ loc_3824:
 										move.w  ((word_FFA816-$1000000)).w,d1
 										asr.w   #4,d1
 										add.w   #$100,d0
+loc_384E:
 										move.w  ((word_FFA806-$1000000)).w,d2
 										move.w  ((word_FFA80A-$1000000)).w,d3
 										lea     (byte_FFE000).l,a1
@@ -7168,6 +7263,7 @@ loc_387E:
 										clr.w   d5
 										move.w  ((word_FFA814-$1000000)).w,d0
 										asr.w   #4,d0
+loc_389E:
 										move.w  ((word_FFA816-$1000000)).w,d1
 										asr.w   #4,d1
 										add.w   #$100,d1
@@ -7192,6 +7288,7 @@ sub_38C0:
 										bpl.s   loc_38E6
 										tst.b   ((byte_FFAF46-$1000000)).w
 										bne.s   loc_38DC
+loc_38D2:
 										move.w  ((word_FFA810-$1000000)).w,d0
 										move.w  ((word_FFA812-$1000000)).w,d1
 										bra.s   loc_38E4
@@ -7210,6 +7307,7 @@ loc_38E6:
 										bne.s   loc_390A
 										sub.w   ((word_FFA814-$1000000)).w,d2
 										sub.w   ((word_FFA816-$1000000)).w,d3
+loc_3900:
 										move.w  ((word_FFA836-$1000000)).w,d0
 										move.w  ((word_FFA838-$1000000)).w,d1
 										bra.s   loc_391A
@@ -7250,6 +7348,7 @@ loc_3944:
 										beq.s   loc_3968
 										tst.b   ((byte_FFAF46-$1000000)).w
 										beq.s   loc_3968
+loc_3962:
 										move.w  #$2000,((word_FFA80E-$1000000)).w
 loc_3968:
 										btst    #3,((RAM_CameraScrollingMask-$1000000)).w
@@ -7873,11 +7972,14 @@ loc_3F60:
 										cmp.w   d0,d4
 										blt.w   loc_3FCA
 										cmp.w   d1,d5
+loc_3FB6:
 										blt.w   loc_3FCA
 										cmp.w   d2,d4
+loc_3FBC:
 										bgt.w   loc_3FCA
 										cmp.w   d3,d5
 										bgt.w   loc_3FCA
+loc_3FC6:
 										bra.w   loc_3FCE
 loc_3FCA:
 										addq.l  #8,a0
@@ -8403,6 +8505,7 @@ loc_44BC:
 										ext.w   d0
 										add.w   d1,d1
 										clr.w   d5
+loc_44D2:
 										move.b  1(a3,d1.w),d5
 										move.b  (a3,d1.w),d1
 										ext.w   d1
@@ -8415,6 +8518,7 @@ loc_44BC:
 										add.w   d5,d2
 										add.w   d2,d2
 										move.w  (a4,d0.w),d0
+loc_44F0:
 										cmp.w   #$C000,d0
 										bcs.s   loc_44FA
 										clr.w   d4
@@ -8436,6 +8540,7 @@ loc_44FE:
 										eor.w   d3,d2
 										btst    #6,d2
 										beq.s   loc_452A
+loc_4526:
 										sub.w   #$40,d3 
 loc_452A:
 										addq.w  #1,d0
@@ -8459,10 +8564,13 @@ LoadBattleMapMusic:
 										move.w  d0,-(sp)
 										clr.w   d0
 										move.b  ((byte_FFB0AD-$1000000)).w,d0
+loc_454C:
 										cmp.b   #$FF,((RAM_CurrentBattleIdx-$1000000)).w
 										beq.s   loc_4586
+loc_4554:
 										cmp.b   #0,d0
 										bne.s   loc_455E
+loc_455A:
 										move.w  #$21,d0 
 loc_455E:
 										cmp.b   #8,d0
@@ -9123,6 +9231,7 @@ sub_4AC8:
 										movem.l a0-a1,-(sp)
 										movem.w d0-d3/d6-d7,-(sp)
 										lea     (byte_FFC800).l,a1
+loc_4AD6:
 										bsr.w   sub_4BEA
 										move.w  d0,d1
 										ext.w   d0
@@ -9161,6 +9270,7 @@ loc_4B1C:
 										sub.w   #$40,d6 
 loc_4B30:
 										dbf     d1,loc_4B06
+loc_4B34:
 										movem.w (sp)+,d1-d2/d6
 loc_4B38:
 										addq.w  #1,d3
@@ -9203,6 +9313,7 @@ loc_4B86:
 loc_4B98:
 										tst.w   d2
 										bmi.w   loc_4BAC
+loc_4B9E:
 										cmp.w   #$20,d2 
 										bge.w   loc_4BAC
 										move.w  (a0,d6.w),(a1,d6.w)
@@ -9376,6 +9487,7 @@ loc_4D18:
 										tst.w   d7
 										bne.s   loc_4D2A
 										move.b  $11(a0),d5
+loc_4D20:
 										jsr     sub_20050
 										bra.w   loc_4DC4
 loc_4D2A:
@@ -9455,6 +9567,7 @@ loc_4DC4:
 										blt.w   loc_4E0A
 										cmp.w   #$100,d1
 										bgt.w   loc_4E0A
+loc_4E00:
 										jsr     sub_20020
 										bra.w   loc_4E10
 loc_4E0A:
@@ -9502,6 +9615,7 @@ loc_4E3E:
 loc_4E4C:
 										tst.b   (a0)+
 										beq.s   loc_4E5E
+loc_4E50:
 										move.w  #$3F,d0 
 										sub.w   d7,d0
 										move.b  d0,3(a1,d6.w)
@@ -10344,6 +10458,7 @@ loc_5646:
 										rts
 loc_5658:
 										add.w   #$20,a2 
+loc_565C:
 										dbf     d6,loc_5624     
 loc_5660:
 										clr.w   d4
@@ -10360,6 +10475,7 @@ loc_5660:
 esc07_:
 										link    a6,#-$A
 										move.l  ((word_FFA82E-$1000000)).w,-4(a6)
+loc_5672:
 										move.l  ((word_FFA832-$1000000)).w,-8(a6)
 										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,-$A(a6)
 										move.w  (a0),d0
@@ -10451,6 +10567,7 @@ loc_575C:
 										cmp.w   #$400,d3
 										bne.s   loc_5782
 										bsr.w   sub_3E40
+loc_577A:
 										move.w  (a4,d2.w),d3
 										and.w   #$3C00,d3
 loc_5782:
@@ -10458,10 +10575,12 @@ loc_5782:
 										bne.s   loc_5794
 										bsr.w   WarpIfSetAtPoint
 										movem.w (sp)+,d2-d3
+loc_5790:
 										bra.w   loc_57C0
 loc_5794:
 										cmp.w   #$3800,d3
 										bne.s   loc_57A2
+loc_579A:
 										movem.w (sp)+,d2-d3
 										bra.w   loc_57C0
 loc_57A2:
@@ -10469,6 +10588,7 @@ loc_57A2:
 										bcc.s   loc_57B8
 										move.w  #4,((RAM_MapEventType-$1000000)).w
 										movem.w (sp)+,d2-d3
+loc_57B4:
 										bra.w   loc_57E0
 loc_57B8:
 										movem.w (sp)+,d2-d3
@@ -10508,6 +10628,7 @@ esc08_:
 										clr.w   d4
 										clr.w   d5
 										moveq   #$FFFFFFFF,d6
+loc_5810:
 										btst    #INPUT_A_UP_BIT,-$A(a6)
 										beq.s   loc_582C
 										cmp.w   -2(a6),d1
@@ -11735,6 +11856,7 @@ loc_60B6:
 										subq.w  #1,d1
 										lsl.w   #2,d1
 										lea     (pt_EntitySprites).l,a0
+loc_60F4:
 										movea.l (a0,d1.w),a0
 										lea     (FF8002_LOADING_SPACE).l,a1
 										clr.w   d0
@@ -11742,6 +11864,7 @@ loc_60B6:
 										addq.b  #1,((NUM_SPRITES_TO_LOAD-$1000000)).w
 										mulu.w  #$240,d0        ; two sprites to load for the walking animation
 										lea     (a1,d0.w),a1
+loc_6110:
 										jsr     (loadSpriteData).w
 										movea.l a1,a0
 										move.w  (sp)+,d1
@@ -11931,6 +12054,7 @@ loc_6298:
 loc_62A8:
 										move.l  #RAM_Dialogue_NameIdx1,((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w
 										move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
+loc_62B6:
 										cmp.b   #1,((byte_FFB6D7-$1000000)).w
 																						; check length
 										beq.w   loc_62FE
@@ -11966,6 +12090,7 @@ loc_62FE:
 sub_6308:
 										cmp.b   #$CC,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 										bls.s   return_634C
+loc_6310:
 										bsr.w   ClearNextLineOfDialoguePixels
 																						; line end reached
 										move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
@@ -12578,7 +12703,6 @@ sub_676E:
 										addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 										bsr.w   sub_6872
 										move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
-loc_6784:
 										cmp.w   #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
 										bne.s   loc_6794
 										move.w  #$1D08,d0
@@ -12658,6 +12782,7 @@ loc_6844:
 										sub.w   #$80,d1 
 loc_684E:
 										dbf     d6,loc_6822
+loc_6852:
 										move.w  #$D060,d0
 										move.w  #$D061,d1
 										move.w  #$D860,d2
@@ -12693,6 +12818,7 @@ loc_6866:
 
 sub_6872:
 										clr.w   ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w
+loc_6876:
 										move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 loc_687C:
 										move.b  #0,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
@@ -12717,6 +12843,7 @@ HandleDialogueTypewriting:
 loc_68A8:
 										beq.w   return_68FA
 										move.w  d0,-(sp)
+loc_68AE:
 										bsr.w   HandleBlinkingDialogueCursor
 										move.w  (sp)+,d1
 										clr.w   d0
@@ -13669,6 +13796,7 @@ loc_6F34:
 										bra.w   loc_6F64
 loc_6F38:
 										lea     (SRAM_START).l,a0
+loc_6F3E:
 										move.w  #$1FFF,d7
 loc_6F42:
 										clr.b   (a0)
@@ -13697,6 +13825,7 @@ SaveGame:
 										tst.b   d0
 										bne.s   loc_6F88
 										lea     (SAVE1_CHARACTER_DATA).l,a1
+loc_6F7E:
 										lea     (SAVE1_CHECKSUM).l,a2
 										clr.w   d1
 										bra.s   loc_6F96
@@ -13806,7 +13935,6 @@ loc_7024:
 										add.b   (a0),d0
 										addq.l  #2,a0
 										dbf     d7,loc_7024
-loc_702E:
 										movem.l (sp)+,d7-a1
 										rts
 
@@ -13844,8 +13972,9 @@ loc_7068:
 										bsr.w   disableDisplayAndVInt
 										move    #$2700,sr
 										movea.l (initStack).w,sp
-										movea.l (off_4).w,a0    
+										movea.l (p_Start).w,a0  
 										jmp     (a0)
+loc_7094:
 										moveq   #$3C,d0 
 										bsr.w   Sleep           
 										bsr.w   sub_7BDE
@@ -14034,7 +14163,7 @@ loc_71EC:
 										bne.s   loc_724E        
 										move    #$2700,sr
 										movea.l (initStack).w,sp
-										movea.l (off_4).w,a0    
+										movea.l (p_Start).w,a0  
 										jmp     (a0)            ; reset
 loc_724E:           bsr.w   disableDisplayAndVInt
 																						; title screen -> witch menu
@@ -14810,6 +14939,7 @@ loc_7A1E:
 loc_7A24:
 										addq.l  #7,a0
 										addq.w  #1,d7
+loc_7A28:
 										dbf     d6,loc_79BA
 										moveq   #$FFFFFFFF,d7
 										move.w  (sp)+,d0
@@ -14950,6 +15080,7 @@ sub_7CDC:
 										lea     (byte_FFE000).l,a1
 										move.w  #$800,d7
 										bsr.w   copyBytes       
+loc_7CF0:
 										bra.w   sub_7D0C
 
 	; End of function sub_7CDC
@@ -14960,6 +15091,7 @@ sub_7CDC:
 sub_7CF4:
 										movea.l (p_witchLayout).l,a0
 										lea     $700(a0),a0
+loc_7CFE:
 										lea     (byte_FFE15C).l,a1
 										move.w  #$707,d1
 										bsr.w   sub_7D28

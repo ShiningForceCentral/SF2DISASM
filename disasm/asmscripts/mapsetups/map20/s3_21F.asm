@@ -1,0 +1,123 @@
+
+; SCRIPT SECTION mapsetups\map20\s3_21F :
+; 
+ms_map20_flag21F_Section3:
+										dc.b $13
+										dc.b $34
+										dc.w sub_632AC-ms_map20_flag21F_Section3
+										dc.b $1A
+										dc.b $FF
+										dc.w sub_632FA-ms_map20_flag21F_Section3
+										dc.b $1B
+										dc.b $34
+										dc.w sub_63330-ms_map20_flag21F_Section3
+										dc.w $FD00
+										dc.w nullsub_85-ms_map20_flag21F_Section3
+
+; =============== S U B R O U T I N E =======================================
+
+nullsub_85:
+										
+										rts
+
+	; End of function nullsub_85
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_632AC:
+										
+										trap    #0
+										dc.w $FD
+										lea     cs_632EA(pc), a0
+										trap    #6
+										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
+										trap    #5
+										dc.w $FAE
+										jsr     j_yesNoPrompt
+										tst.w   d0
+										bne.s   loc_632E0
+										lea     cs_633C4(pc), a0
+										trap    #6
+										jsr     sub_1AC068
+										moveq   #$FFFFFFFF,d0
+										jsr     PlayIntroOrEndCutscene
+										jmp     (loc_7094).w
+loc_632E0:
+										
+										trap    #0
+										dc.w $20
+										trap    #0
+										dc.w 8
+										rts
+
+	; End of function sub_632AC
+
+cs_632EA:           dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
+										dc.b 0
+										dc.b $FF
+										dc.l eas_Init           
+										dc.b $80                ; WAIT 1
+										dc.b 1
+										dc.w $2A                ; 002A MAKE ENTITY SHIVER 0
+										dc.w 0
+										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
+
+; =============== S U B R O U T I N E =======================================
+
+sub_632FA:
+										
+										trap    #1
+										dc.w $3D6
+										beq.s   return_6332E
+										trap    #1
+										dc.w $3D7
+										bne.s   return_6332E
+										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
+										move.w  #$80,d0 
+										jsr     GetEntityPortraitAndSpeechSound
+										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
+										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+										trap    #5
+										dc.w $FA9
+										trap    #5
+										dc.w $FAA
+										trap    #5
+										dc.w $FAB
+										trap    #2
+										dc.w $3D7
+return_6332E:
+										
+										rts
+
+	; End of function sub_632FA
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_63330:
+										
+										trap    #1
+										dc.w $3D8
+										bne.s   return_6335C
+										lea     cs_6335E(pc), a0
+										trap    #6
+										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
+										move.w  #$80,d0 
+										jsr     GetEntityPortraitAndSpeechSound
+										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
+										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+										trap    #5
+										dc.w $FAC
+										trap    #2
+										dc.w $3D8
+return_6335C:
+										
+										rts
+
+	; End of function sub_63330
+
+cs_6335E:           dc.w $23                ; 0023 SET ENTITY FACING 80 3
+										dc.b $80
+										dc.b 3
+										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

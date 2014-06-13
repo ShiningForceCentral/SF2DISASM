@@ -1,0 +1,9 @@
+
+; SCRIPT SECTION mapsetups\map08\pt_2C4 :
+; 
+ms_map8_flag2C4:    dc.l ms_map8_flag2C4_Entities
+										dc.l ms_map8_flag2C4_EntityEvents
+										dc.l ms_map8_flag2C4_Section3
+										dc.l ms_map8_flag2C4_Section4
+										dc.l ms_map8_flag2C4_Section5
+										dc.l ms_map8_flag2C4_InitFunction

@@ -68,7 +68,7 @@ abcs_battle33:      dc.w 4                  ; 0004 SET TEXT INDEX B3C
 										dc.w $15                ; 0015 SET ACTSCRIPT 1A FF 45F9C
 										dc.b $1A
 										dc.b $FF
-										dc.l word_45F9C         
+										dc.l eas_45F9C          
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
 										dc.w $1F

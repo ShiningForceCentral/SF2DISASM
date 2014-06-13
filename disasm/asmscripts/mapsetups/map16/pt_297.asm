@@ -1,0 +1,9 @@
+
+; SCRIPT SECTION mapsetups\map16\pt_297 :
+; 
+ms_map16_flag297:   dc.l ms_map16_flag297_Entities
+										dc.l ms_map16_flag297_EntityEvents
+										dc.l ms_map16_flag297_Section3
+										dc.l ms_map16_flag297_Section4
+										dc.l ms_map16_flag297_Section5
+										dc.l ms_map16_flag297_InitFunction
