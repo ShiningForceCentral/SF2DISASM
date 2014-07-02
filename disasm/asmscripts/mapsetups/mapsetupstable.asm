@@ -30,11 +30,11 @@ MapSetups:          dc.w 3                  ; list of map event addresses and fl
 										dc.l ms_map6_flag2BE
 										dc.w $FFFD
 										dc.w 7
-										dc.l ms_map7_flag2BE
+										dc.l ms_map7
 										dc.w $2BD
 										dc.l ms_map7_flag2BD
 										dc.w $2BE
-										dc.l ms_map7_flag2BE
+										dc.l ms_map7
 										dc.w $325
 										dc.l ms_map7_flag325
 										dc.w $FFFD
@@ -177,17 +177,17 @@ MapSetups:          dc.w 3                  ; list of map event addresses and fl
 										dc.l ms_map31_flag33E
 										dc.w $FFFD
 										dc.w $21
-										dc.l ms_map33_flag16
+										dc.l ms_map33
 										dc.w $20B
 										dc.l ms_map33_flag20B
 										dc.w $30F
-										dc.l ms_map33_flag16
+										dc.l ms_map33
 										dc.w $310
 										dc.l ms_map33_flag310
 										dc.w $312
 										dc.l ms_map33_flag312
 										dc.w $16
-										dc.l ms_map33_flag16
+										dc.l ms_map33
 										dc.w $FFFD
 										dc.w $22
 										dc.l ms_map34
@@ -213,11 +213,11 @@ MapSetups:          dc.w 3                  ; list of map event addresses and fl
 										dc.l ms_map39_flag33E
 										dc.w $FFFD
 										dc.w $28
-										dc.l ms_map40_flag1FB
+										dc.l ms_map40
 										dc.w $1FA
 										dc.l ms_map40_flag1FA
 										dc.w $1FB
-										dc.l ms_map40_flag1FB
+										dc.l ms_map40
 										dc.w $FFFD
 										dc.w $29
 										dc.l ms_map41

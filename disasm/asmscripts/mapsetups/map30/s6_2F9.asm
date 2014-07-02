@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map30_flag2F9_InitFunction:
+ms_map30_InitFunction:
 										
 										trap    #1
 										dc.w $2F9
@@ -22,7 +22,7 @@ return_5A30A:
 										
 										rts
 
-	; End of function ms_map30_flag2F9_InitFunction
+	; End of function ms_map30_InitFunction
 
 cs_5A30C:           dc.w $34                ; 0034 SET BLOCKS 1506 202 705
 										dc.w $1506

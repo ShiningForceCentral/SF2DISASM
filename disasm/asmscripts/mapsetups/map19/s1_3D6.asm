@@ -42,7 +42,7 @@ ms_map19_flag3D6_Entities:
 										dc.b 2
 										dc.b $1B
 										dc.l eas_Init           
-byte_62AAC:         dc.b $1C
+										dc.b $1C
 										dc.b $E
 										dc.b 1
 										dc.b $1A

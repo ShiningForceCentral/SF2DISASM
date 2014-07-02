@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION mapsetups\map20\s6_1FA :
 ; 
-ms_map20_flag1FA_InitFunction:
+loc_53988:
 										
 										trap    #1
 										dc.w $1FB

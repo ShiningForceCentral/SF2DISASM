@@ -1,12 +1,11 @@
 
 ; SCRIPT SECTION mapsetups\map34\s3_310 :
 ; 
-ms_map34_flag310_Section3:
-										dc.b $FF
+ms_map34_Section3:  dc.b $FF
 										dc.b $D
-										dc.w sub_5B69E-ms_map34_flag310_Section3
+										dc.w sub_5B69E-ms_map34_Section3
 										dc.w $FD00
-										dc.w return_5B6B2-ms_map34_flag310_Section3
+										dc.w return_5B6B2-ms_map34_Section3
 
 ; =============== S U B R O U T I N E =======================================
 

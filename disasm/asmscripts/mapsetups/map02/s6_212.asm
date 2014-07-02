@@ -4,9 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map2_flag212_InitFunction:
+ms_map2_InitFunction:
 										
 										rts
 
-	; End of function ms_map2_flag212_InitFunction
+	; End of function ms_map2_InitFunction
 

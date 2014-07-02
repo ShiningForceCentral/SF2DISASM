@@ -1,24 +1,24 @@
 
 ; SCRIPT SECTION mapsetups\map40\s2_1FB :
 ; 
-ms_map40_flag1FB_EntityEvents:
+ms_map40_EntityEvents:
 										dc.b $1C
 										dc.b 0
-										dc.w sub_53FA2-ms_map40_flag1FB_EntityEvents
+										dc.w sub_53FA2-ms_map40_EntityEvents
 										dc.b $80
 										dc.b 0
-										dc.w sub_53FAA-ms_map40_flag1FB_EntityEvents
+										dc.w sub_53FAA-ms_map40_EntityEvents
 										dc.b $81
 										dc.b 0
-										dc.w sub_53FAA-ms_map40_flag1FB_EntityEvents
+										dc.w sub_53FAA-ms_map40_EntityEvents
 										dc.w $FD00
-										dc.w return_53FB8-ms_map40_flag1FB_EntityEvents
+										dc.w return_53FB8-ms_map40_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_53FA2:
 										
-										lea     (Map24Section1+$44C-ms_map40_flag1FB_EntityEvents)(pc), a0
+										lea     (Map23Section1+$44C-ms_map40_EntityEvents)(pc), a0
 										trap    #6
 										rts
 

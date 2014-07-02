@@ -160,8 +160,6 @@ sub_5C19C:
 sub_5C1A4:
 										
 										moveq   #7,d0
-loc_5C1A6:
-										
 										jmp     sub_4790E
 
 	; End of function sub_5C1A4

@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map17_flag1F9_InitFunction:
+ms_map17_InitFunction:
 										
 										trap    #1
 										dc.w $294
@@ -28,7 +28,7 @@ loc_52476:
 										dc.w $263
 										rts
 
-	; End of function ms_map17_flag1F9_InitFunction
+	; End of function ms_map17_InitFunction
 
 cs_5247C:           dc.w $34                ; 0034 SET BLOCKS 3007 101 3008
 										dc.w $3007

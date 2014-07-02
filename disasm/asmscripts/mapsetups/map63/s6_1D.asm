@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map63_flag1D_InitFunction:
+ms_map63_InitFunction:
 										
 										trap    #1
 										dc.w $1D
@@ -15,7 +15,7 @@ return_5CA5C:
 										
 										rts
 
-	; End of function ms_map63_flag1D_InitFunction
+	; End of function ms_map63_InitFunction
 
 cs_5CA5E:           dc.w $1A                ; 001A SET ENTITY SPRITE 1D B0
 										dc.w $1D

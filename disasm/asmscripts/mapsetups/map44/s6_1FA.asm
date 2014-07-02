@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION mapsetups\map44\s6_1FA :
 ; 
-ms_map44_flag1FA_InitFunction:
+return_5456E:
 										
 										rts
 

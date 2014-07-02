@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map36_flag212_InitFunction:
+ms_map36_InitFunction:
 										
 										trap    #1
 										dc.w $16
@@ -15,7 +15,7 @@ return_5DA26:
 										
 										rts
 
-	; End of function ms_map36_flag212_InitFunction
+	; End of function ms_map36_InitFunction
 
 cs_5DA28:           dc.w 4                  ; 0004 SET TEXT INDEX CFB
 										dc.w $CFB

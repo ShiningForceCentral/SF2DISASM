@@ -1,12 +1,11 @@
 
 ; SCRIPT SECTION mapsetups\map22\s3_20A :
 ; 
-ms_map22_flag20A_Section3:
-										dc.b $FF
+ms_map22_Section3:  dc.b $FF
 										dc.b $10
-										dc.w sub_595E8-ms_map22_flag20A_Section3
+										dc.w sub_595E8-ms_map22_Section3
 										dc.w $FD00
-										dc.w nullsub_87-ms_map22_flag20A_Section3
+										dc.w nullsub_87-ms_map22_Section3
 
 ; =============== S U B R O U T I N E =======================================
 

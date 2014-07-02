@@ -4,6 +4,6 @@
 ms_map20_flag1F5:   dc.l ms_map20_flag1F5_Entities
 										dc.l ms_map20_flag1F5_EntityEvents
 										dc.l ms_map20_flag1F5_Section3
-										dc.l ms_map20_flag1FA_Section4
-										dc.l ms_map20_flag1FA_Section5
-										dc.l ms_map20_flag1FA_InitFunction
+										dc.l ms_map20_Section4
+										dc.l ms_map20_Section5
+										dc.l loc_53988

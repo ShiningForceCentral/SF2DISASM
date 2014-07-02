@@ -1,24 +1,23 @@
 
 ; SCRIPT SECTION mapsetups\map06\s3_2BE :
 ; 
-ms_map6_flag2BE_Section3:
-										dc.b $A
+ms_map6_Section3:   dc.b $A
 										dc.b 9
-										dc.w sub_54CE8-ms_map6_flag2BE_Section3
+										dc.w sub_54CE8-ms_map6_Section3
 										dc.b $B
 										dc.b 9
-										dc.w sub_54CE8-ms_map6_flag2BE_Section3
+										dc.w sub_54CE8-ms_map6_Section3
 										dc.b $13
 										dc.b $17
-										dc.w sub_54D12-ms_map6_flag2BE_Section3
+										dc.w sub_54D12-ms_map6_Section3
 										dc.b $13
 										dc.b $1D
-										dc.w sub_54D24-ms_map6_flag2BE_Section3
+										dc.w sub_54D24-ms_map6_Section3
 										dc.b $14
 										dc.b $1D
-										dc.w sub_54D24-ms_map6_flag2BE_Section3
+										dc.w sub_54D24-ms_map6_Section3
 										dc.w $FD00
-										dc.w return_54D3A-ms_map6_flag2BE_Section3
+										dc.w return_54D3A-ms_map6_Section3
 
 ; =============== S U B R O U T I N E =======================================
 

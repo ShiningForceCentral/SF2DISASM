@@ -4,11 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map62_flag4D_InitFunction:
+ms_map62_InitFunction:
 										
 										rts
 
-	; End of function ms_map62_flag4D_InitFunction
+	; End of function ms_map62_InitFunction
 
 cs_5C876:           dc.w 4                  ; 0004 SET TEXT INDEX E1D
 										dc.w $E1D

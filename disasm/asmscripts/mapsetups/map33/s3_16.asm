@@ -1,15 +1,14 @@
 
 ; SCRIPT SECTION mapsetups\map33\s3_16 :
 ; 
-ms_map33_flag16_Section3:
-										dc.b $F
+ms_map33_Section3:  dc.b $F
 										dc.b $15
-										dc.w sub_5AA98-ms_map33_flag16_Section3
+										dc.w sub_5AA98-ms_map33_Section3
 										dc.b $C
 										dc.b $E
-										dc.w sub_5AACA-ms_map33_flag16_Section3
+										dc.w sub_5AACA-ms_map33_Section3
 										dc.w $FD00
-										dc.w nullsub_94-ms_map33_flag16_Section3
+										dc.w nullsub_94-ms_map33_Section3
 
 ; =============== S U B R O U T I N E =======================================
 

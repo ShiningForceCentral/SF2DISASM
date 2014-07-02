@@ -4,9 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map37_flag3E7_Section4:
+ms_map37_Section4:
 										
 										rts
 
-	; End of function ms_map37_flag3E7_Section4
+	; End of function ms_map37_Section4
 

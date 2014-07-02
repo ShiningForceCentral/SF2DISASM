@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map6_flag2BD_Section4:
+ms_map6_Section4:
 										
 										move.w  #$FF4,d3
 										lea     word_54D9A(pc), a0
 										nop
 										jmp     sub_47722
 
-	; End of function ms_map6_flag2BD_Section4
+	; End of function ms_map6_Section4
 
 word_54D9A:         dc.w $507
 										dc.b 0
@@ -101,7 +101,7 @@ sub_54E04:
 										jsr     j_yesNoPrompt
 										tst.w   d0
 										bne.s   return_54E4A
-										or.b    #0,d0
+										ori.b   #0,d0
 										trap    #0
 										dc.w $58
 										moveq   #$32,d0 

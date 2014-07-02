@@ -4,11 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map61_flag2D9_InitFunction:
+ms_map61_InitFunction:
 										
 										rts
 
-	; End of function ms_map61_flag2D9_InitFunction
+	; End of function ms_map61_InitFunction
 
 cs_5C6CA:           dc.w 4                  ; 0004 SET TEXT INDEX E3A
 										dc.w $E3A

@@ -1,11 +1,17 @@
 
 ; SCRIPT SECTION mapsetups\map52\s6_200 :
 ; 
-ms_map52_flag200_InitFunction:
-										dc.w $4E41
-										dc.b 2
-										dc.b $CA
-										dc.w sub_62BB8-ms_map52_flag200_EntityEvents
+
+; =============== S U B R O U T I N E =======================================
+
+ms_map52_InitFunction:
+										
+										trap    #1
+										dc.w $2CA
+										beq.s   return_5C4EC
+
+	; End of function ms_map52_InitFunction
+
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -27,7 +33,7 @@ return_5C4EC:
 word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575
 										dc.w $575
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
-word_5C4F4:         dc.w $30
+										dc.w $30
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 										dc.b 0
 										dc.b $FF
@@ -137,7 +143,7 @@ word_5C4F4:         dc.w $30
 										dc.b $80                ; WAIT 28
 										dc.b $28
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 83
-byte_5C5A8:         dc.b $83
+										dc.b $83
 										dc.b $FF
 										dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
 										dc.b $30

@@ -1,96 +1,96 @@
 
 ; SCRIPT SECTION mapsetups\map22\s2_20A :
 ; 
-ms_map22_flag20A_EntityEvents:
+ms_map22_EntityEvents:
 										dc.b $E
 										dc.b 1
-										dc.w sub_5950A-ms_map22_flag20A_EntityEvents
+										dc.w sub_5950A-ms_map22_EntityEvents
 										dc.b $F
 										dc.b 1
-										dc.w sub_59514-ms_map22_flag20A_EntityEvents
+										dc.w sub_59514-ms_map22_EntityEvents
 										dc.b $80
 										dc.b 0
-										dc.w sub_594E4-ms_map22_flag20A_EntityEvents
+										dc.w sub_594E4-ms_map22_EntityEvents
 										dc.b $81
 										dc.b 3
-										dc.w sub_594EC-ms_map22_flag20A_EntityEvents
+										dc.w sub_594EC-ms_map22_EntityEvents
 										dc.b $82
 										dc.b 3
-										dc.w sub_594F6-ms_map22_flag20A_EntityEvents
+										dc.w sub_594F6-ms_map22_EntityEvents
 										dc.b $83
 										dc.b 1
-										dc.w sub_59500-ms_map22_flag20A_EntityEvents
+										dc.w sub_59500-ms_map22_EntityEvents
 										dc.b $84
 										dc.b 1
-										dc.w sub_59522-ms_map22_flag20A_EntityEvents
+										dc.w sub_59522-ms_map22_EntityEvents
 										dc.b $85
 										dc.b 1
-										dc.w sub_5952A-ms_map22_flag20A_EntityEvents
+										dc.w sub_5952A-ms_map22_EntityEvents
 										dc.b $86
 										dc.b 3
-										dc.w sub_59554-ms_map22_flag20A_EntityEvents
+										dc.w sub_59554-ms_map22_EntityEvents
 										dc.b $87
 										dc.b 3
-										dc.w sub_5957C-ms_map22_flag20A_EntityEvents
+										dc.w sub_5957C-ms_map22_EntityEvents
 										dc.b $88
 										dc.b 3
-										dc.w sub_59592-ms_map22_flag20A_EntityEvents
+										dc.w sub_59592-ms_map22_EntityEvents
 										dc.b $89
 										dc.b 0
-										dc.w sub_595D2-ms_map22_flag20A_EntityEvents
+										dc.w sub_595D2-ms_map22_EntityEvents
 										dc.b $8A
 										dc.b 0
-										dc.w sub_595CC-ms_map22_flag20A_EntityEvents
+										dc.w sub_595CC-ms_map22_EntityEvents
 										dc.b $8B
 										dc.b 0
-										dc.w sub_595C6-ms_map22_flag20A_EntityEvents
+										dc.w sub_595C6-ms_map22_EntityEvents
 										dc.b $8C
 										dc.b 0
-										dc.w sub_595C6-ms_map22_flag20A_EntityEvents
+										dc.w sub_595C6-ms_map22_EntityEvents
 										dc.b $8D
 										dc.b 0
-										dc.w sub_595C0-ms_map22_flag20A_EntityEvents
+										dc.w sub_595C0-ms_map22_EntityEvents
 										dc.b $8E
 										dc.b 0
-										dc.w sub_595C0-ms_map22_flag20A_EntityEvents
+										dc.w sub_595C0-ms_map22_EntityEvents
 										dc.b $8F
 										dc.b 0
-										dc.w sub_595B4-ms_map22_flag20A_EntityEvents
+										dc.w sub_595B4-ms_map22_EntityEvents
 										dc.b $90
 										dc.b 0
-										dc.w sub_595B4-ms_map22_flag20A_EntityEvents
+										dc.w sub_595B4-ms_map22_EntityEvents
 										dc.b $91
 										dc.b 0
-										dc.w sub_595CC-ms_map22_flag20A_EntityEvents
+										dc.w sub_595CC-ms_map22_EntityEvents
 										dc.b $92
 										dc.b 0
-										dc.w sub_595CC-ms_map22_flag20A_EntityEvents
+										dc.w sub_595CC-ms_map22_EntityEvents
 										dc.b $93
 										dc.b 0
-										dc.w sub_595BA-ms_map22_flag20A_EntityEvents
+										dc.w sub_595BA-ms_map22_EntityEvents
 										dc.b $94
 										dc.b 0
-										dc.w sub_595BA-ms_map22_flag20A_EntityEvents
+										dc.w sub_595BA-ms_map22_EntityEvents
 										dc.b $95
 										dc.b 0
-										dc.w sub_595BA-ms_map22_flag20A_EntityEvents
+										dc.w sub_595BA-ms_map22_EntityEvents
 										dc.b $96
 										dc.b 0
-										dc.w sub_595BA-ms_map22_flag20A_EntityEvents
+										dc.w sub_595BA-ms_map22_EntityEvents
 										dc.b $97
 										dc.b 0
-										dc.w sub_595BA-ms_map22_flag20A_EntityEvents
+										dc.w sub_595BA-ms_map22_EntityEvents
 										dc.b $98
 										dc.b 0
-										dc.w sub_595BA-ms_map22_flag20A_EntityEvents
+										dc.w sub_595BA-ms_map22_EntityEvents
 										dc.w $FD00
-										dc.w nullsub_128-ms_map22_flag20A_EntityEvents
+										dc.w nullsub_128-ms_map22_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_594E4:
 										
-										jsr     (MapTiles051+$F8-ms_map22_flag20A_EntityEvents)
+										jsr     (MapTiles051+$F8-ms_map22_EntityEvents)
 										rts
 
 	; End of function sub_594E4

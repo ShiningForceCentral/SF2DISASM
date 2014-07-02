@@ -266,7 +266,7 @@ SegaLogo:           incbin "misc/segalogo.bin"
 
 sub_28B12:
 										
-										cmp.b   #$FF,(a0)
+										cmpi.b  #$FF,(a0)
 										beq.w   loc_28B64
 										moveq   #3,d7
 										lea     (byte_FFDC98).l,a1
@@ -275,17 +275,17 @@ loc_28B26:
 										
 										clr.w   d0
 										move.b  (a0)+,d0
-										add.w   #$F0,d0 
+										addi.w  #$F0,d0 
 										move.w  d0,6(a1)
 										clr.w   d0
 										move.b  (a0)+,d0
 										neg.w   d0
-										add.w   #$E0,d0 
+										addi.w  #$E0,d0 
 										move.w  d0,(a1)
 										clr.w   d0
 										move.b  (a0)+,d0
 										lsl.w   #4,d0
-										add.w   #$100,d0
+										addi.w  #$100,d0
 										move.w  d0,4(a1)
 										move.w  (a2)+,2(a1)
 										subq.w  #8,a1
@@ -309,17 +309,17 @@ loc_28B7A:
 										
 										clr.w   d0
 										move.b  (a0)+,d0
-										add.w   #$F0,d0 
+										addi.w  #$F0,d0 
 										move.w  d0,6(a1)
 										clr.w   d0
 										move.b  (a0)+,d0
 										neg.w   d0
-										add.w   #$E0,d0 
+										addi.w  #$E0,d0 
 										move.w  d0,(a1)
 										clr.w   d0
 										move.b  (a0)+,d0
 										lsl.w   #4,d0
-										add.w   #$100,d0
+										addi.w  #$100,d0
 										move.w  d0,4(a1)
 										move.w  (a2)+,2(a1)
 										subq.w  #8,a1
@@ -1307,7 +1307,7 @@ return_28F96:
 CheckConfigurationModeCheat:
 										
 										movea.l ((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w,a0
-										cmp.b   #$FF,(a0)
+										cmpi.b  #$FF,(a0)
 										bne.s   loc_28FAE
 										move.b  #$FF,((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
 										trap    #0
@@ -1348,7 +1348,7 @@ ConfigurationModeInputSequence:
 CheckDebugModeCheat:
 										
 										movea.l ((dword_FFB1A0-$1000000)).w,a0
-										cmp.b   #$FF,(a0)
+										cmpi.b  #$FF,(a0)
 										bne.s   loc_28FE2
 										move.b  #$FF,((RAM_DebugModeActivated-$1000000)).w
 										trap    #0
@@ -2411,7 +2411,7 @@ loc_2C604:
 										
 										move.l  (a0),d0
 										lsr.l   #1,d0
-										and.l   #$EEE0EEE,d0
+										andi.l  #$EEE0EEE,d0
 										move.l  d0,(a0)+
 										dbf     d7,loc_2C604
 										lea     (PALETTE3_BIS).l,a0
@@ -2420,7 +2420,7 @@ loc_2C61C:
 										
 										move.l  (a0),d0
 										lsr.l   #1,d0
-										and.l   #$EEE0EEE,d0
+										andi.l  #$EEE0EEE,d0
 										move.l  d0,(a0)+
 										dbf     d7,loc_2C61C
 										lea     (FFD080_Palette1bis).l,a0
@@ -2455,10 +2455,10 @@ loc_2C664:
 										
 										move.w  d7,d0
 										move.w  d5,d2
-										and.w   #$3F,d2 
+										andi.w  #$3F,d2 
 										move.b  (a3,d2.w),d2
 										add.w   d2,d0
-										and.w   #$3F,d0 
+										andi.w  #$3F,d0 
 										move.b  (a3,d0.w),d0
 										move.w  d0,d1
 										move.w  d5,d2
@@ -2468,13 +2468,13 @@ loc_2C664:
 										move.b  (a0,d0.w),d2
 										btst    #0,d1
 										bne.s   loc_2C69A
-										and.b   #$F0,d2
-										and.b   #$F,(a2,d0.w)
+										andi.b  #$F0,d2
+										andi.b  #$F,(a2,d0.w)
 										bra.s   loc_2C6A4
 loc_2C69A:
 										
-										and.b   #$F,d2
-										and.b   #$F0,(a2,d0.w)
+										andi.b  #$F,d2
+										andi.b  #$F0,(a2,d0.w)
 loc_2C6A4:
 										
 										or.b    d2,(a2,d0.w)
@@ -2495,7 +2495,7 @@ loc_2C6A4:
 										jsr     (bwahDMAstuffAgainbis).w
 										jsr     (setFFDE94b3andWait).w
 										movem.l (sp)+,d0-a3
-										cmp.w   #$10,d7
+										cmpi.w  #$10,d7
 										bne.s   loc_2C6F6
 										bsr.w   sub_2C5E4
 loc_2C6F6:
@@ -8390,7 +8390,7 @@ HuffmanDecode:
 										lea     t_RelativeTreePointers(pc), a1
 										move.w  (a1,d1.w),d1
 										lea     (t_RelativeTreePointers+$1FE)(pc), a1
-										add.w   d1,a1
+										adda.w  d1,a1
 										movea.l a1,a2
 										clr.w   d3
 										clr.w   d5

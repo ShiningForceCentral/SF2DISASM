@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map22_flag20A_InitFunction:
+ms_map22_InitFunction:
 										
 										trap    #1
 										dc.w $308
@@ -29,7 +29,7 @@ return_59654:
 										
 										rts
 
-	; End of function ms_map22_flag20A_InitFunction
+	; End of function ms_map22_InitFunction
 
 cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4
 										dc.w $6D4

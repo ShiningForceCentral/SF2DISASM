@@ -176,9 +176,9 @@ pt_EntitySprites:   dc.l EntitySprite000
 										dc.l EntitySprite168
 										dc.l EntitySprite169
 										dc.l EntitySprite170
-										dc.l EntitySprite474
-										dc.l EntitySprite475
-										dc.l EntitySprite476
+										dc.l EntitySprite171
+										dc.l EntitySprite172
+										dc.l EntitySprite173
 										dc.l EntitySprite174
 										dc.l EntitySprite175
 										dc.l EntitySprite176
@@ -458,13 +458,13 @@ pt_EntitySprites:   dc.l EntitySprite000
 										dc.l EntitySprite450
 										dc.l EntitySprite451
 										dc.l EntitySprite452
-										dc.l EntitySprite459
-										dc.l EntitySprite459
-										dc.l EntitySprite459
-										dc.l EntitySprite459
-										dc.l EntitySprite459
-										dc.l EntitySprite459
-										dc.l EntitySprite459
+										dc.l EntitySprite453
+										dc.l EntitySprite453
+										dc.l EntitySprite453
+										dc.l EntitySprite453
+										dc.l EntitySprite453
+										dc.l EntitySprite453
+										dc.l EntitySprite453
 										dc.l EntitySprite460
 										dc.l EntitySprite461
 										dc.l EntitySprite462
@@ -479,43 +479,43 @@ pt_EntitySprites:   dc.l EntitySprite000
 										dc.l EntitySprite471
 										dc.l EntitySprite472
 										dc.l EntitySprite473
-										dc.l EntitySprite474
-										dc.l EntitySprite475
-										dc.l EntitySprite476
+										dc.l EntitySprite171
+										dc.l EntitySprite172
+										dc.l EntitySprite173
 										dc.l EntitySprite477
 										dc.l EntitySprite478
 										dc.l EntitySprite479
 										dc.l EntitySprite480
 										dc.l EntitySprite481
 										dc.l EntitySprite482
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite642
-										dc.l EntitySprite643
-										dc.l EntitySprite644
-										dc.l EntitySprite642
-										dc.l EntitySprite643
-										dc.l EntitySprite644
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
-										dc.l EntitySprite510
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite489
+										dc.l EntitySprite490
+										dc.l EntitySprite491
+										dc.l EntitySprite489
+										dc.l EntitySprite490
+										dc.l EntitySprite491
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
+										dc.l EntitySprite483
 										dc.l EntitySprite511
 										dc.l EntitySprite512
 										dc.l EntitySprite513
@@ -569,19 +569,19 @@ pt_EntitySprites:   dc.l EntitySprite000
 										dc.l EntitySprite561
 										dc.l EntitySprite562
 										dc.l EntitySprite563
-										dc.l EntitySprite609
-										dc.l EntitySprite610
-										dc.l EntitySprite611
+										dc.l EntitySprite564
+										dc.l EntitySprite565
+										dc.l EntitySprite566
 										dc.l EntitySprite567
 										dc.l EntitySprite568
 										dc.l EntitySprite569
 										dc.l EntitySprite570
 										dc.l EntitySprite571
 										dc.l EntitySprite572
-										dc.l EntitySprite576
-										dc.l EntitySprite576
-										dc.l EntitySprite576
-										dc.l EntitySprite576
+										dc.l EntitySprite573
+										dc.l EntitySprite573
+										dc.l EntitySprite573
+										dc.l EntitySprite573
 										dc.l EntitySprite577
 										dc.l EntitySprite578
 										dc.l EntitySprite579
@@ -614,9 +614,9 @@ pt_EntitySprites:   dc.l EntitySprite000
 										dc.l EntitySprite606
 										dc.l EntitySprite607
 										dc.l EntitySprite608
-										dc.l EntitySprite609
-										dc.l EntitySprite610
-										dc.l EntitySprite611
+										dc.l EntitySprite564
+										dc.l EntitySprite565
+										dc.l EntitySprite566
 										dc.l EntitySprite612
 										dc.l EntitySprite613
 										dc.l EntitySprite614
@@ -647,9 +647,9 @@ pt_EntitySprites:   dc.l EntitySprite000
 										dc.l EntitySprite639
 										dc.l EntitySprite640
 										dc.l EntitySprite641
-										dc.l EntitySprite642
-										dc.l EntitySprite643
-										dc.l EntitySprite644
+										dc.l EntitySprite489
+										dc.l EntitySprite490
+										dc.l EntitySprite491
 										dc.l EntitySprite645
 										dc.l EntitySprite646
 										dc.l EntitySprite647
@@ -716,15 +716,15 @@ pt_EntitySprites:   dc.l EntitySprite000
 										dc.l EntitySprite708
 										dc.l EntitySprite709
 										dc.l EntitySprite710
-										dc.l EntitySprite719
-										dc.l EntitySprite719
-										dc.l EntitySprite719
-										dc.l EntitySprite719
-										dc.l EntitySprite719
-										dc.l EntitySprite719
-										dc.l EntitySprite719
-										dc.l EntitySprite719
-										dc.l EntitySprite719
+										dc.l EntitySprite711
+										dc.l EntitySprite711
+										dc.l EntitySprite711
+										dc.l EntitySprite711
+										dc.l EntitySprite711
+										dc.l EntitySprite711
+										dc.l EntitySprite711
+										dc.l EntitySprite711
+										dc.l EntitySprite711
 EntitySprite000:    incbin "sprites/entities/entitysprite000.bin"
 EntitySprite001:    incbin "sprites/entities/entitysprite001.bin"
 EntitySprite002:    incbin "sprites/entities/entitysprite002.bin"
@@ -896,9 +896,9 @@ EntitySprite167:    incbin "sprites/entities/entitysprite167.bin"
 EntitySprite168:    incbin "sprites/entities/entitysprite168.bin"
 EntitySprite169:    incbin "sprites/entities/entitysprite169.bin"
 EntitySprite170:    incbin "sprites/entities/entitysprite170.bin"
-EntitySprite474:    incbin "sprites/entities/entitysprite474.bin"
-EntitySprite475:    incbin "sprites/entities/entitysprite475.bin"
-EntitySprite476:    incbin "sprites/entities/entitysprite476.bin"
+EntitySprite171:    incbin "sprites/entities/entitysprite171.bin"
+EntitySprite172:    incbin "sprites/entities/entitysprite172.bin"
+EntitySprite173:    incbin "sprites/entities/entitysprite173.bin"
 EntitySprite174:    incbin "sprites/entities/entitysprite174.bin"
 EntitySprite175:    incbin "sprites/entities/entitysprite175.bin"
 EntitySprite176:    incbin "sprites/entities/entitysprite176.bin"
@@ -1178,7 +1178,7 @@ EntitySprite449:    incbin "sprites/entities/entitysprite449.bin"
 EntitySprite450:    incbin "sprites/entities/entitysprite450.bin"
 EntitySprite451:    incbin "sprites/entities/entitysprite451.bin"
 EntitySprite452:    incbin "sprites/entities/entitysprite452.bin"
-EntitySprite459:    incbin "sprites/entities/entitysprite459.bin"
+EntitySprite453:    incbin "sprites/entities/entitysprite453.bin"
 EntitySprite460:    incbin "sprites/entities/entitysprite460.bin"
 EntitySprite461:    incbin "sprites/entities/entitysprite461.bin"
 EntitySprite462:    incbin "sprites/entities/entitysprite462.bin"
@@ -1199,7 +1199,7 @@ EntitySprite479:    incbin "sprites/entities/entitysprite479.bin"
 EntitySprite480:    incbin "sprites/entities/entitysprite480.bin"
 EntitySprite481:    incbin "sprites/entities/entitysprite481.bin"
 EntitySprite482:    incbin "sprites/entities/entitysprite482.bin"
-EntitySprite510:    incbin "sprites/entities/entitysprite510.bin"
+EntitySprite483:    incbin "sprites/entities/entitysprite483.bin"
 EntitySprite511:    incbin "sprites/entities/entitysprite511.bin"
 EntitySprite512:    incbin "sprites/entities/entitysprite512.bin"
 EntitySprite513:    incbin "sprites/entities/entitysprite513.bin"
@@ -1259,7 +1259,7 @@ EntitySprite569:    incbin "sprites/entities/entitysprite569.bin"
 EntitySprite570:    incbin "sprites/entities/entitysprite570.bin"
 EntitySprite571:    incbin "sprites/entities/entitysprite571.bin"
 EntitySprite572:    incbin "sprites/entities/entitysprite572.bin"
-EntitySprite576:    incbin "sprites/entities/entitysprite576.bin"
+EntitySprite573:    incbin "sprites/entities/entitysprite573.bin"
 EntitySprite577:    incbin "sprites/entities/entitysprite577.bin"
 EntitySprite578:    incbin "sprites/entities/entitysprite578.bin"
 EntitySprite579:    incbin "sprites/entities/entitysprite579.bin"
@@ -1292,9 +1292,9 @@ EntitySprite605:    incbin "sprites/entities/entitysprite605.bin"
 EntitySprite606:    incbin "sprites/entities/entitysprite606.bin"
 EntitySprite607:    incbin "sprites/entities/entitysprite607.bin"
 EntitySprite608:    incbin "sprites/entities/entitysprite608.bin"
-EntitySprite609:    incbin "sprites/entities/entitysprite609.bin"
-EntitySprite610:    incbin "sprites/entities/entitysprite610.bin"
-EntitySprite611:    incbin "sprites/entities/entitysprite611.bin"
+EntitySprite564:    incbin "sprites/entities/entitysprite564.bin"
+EntitySprite565:    incbin "sprites/entities/entitysprite565.bin"
+EntitySprite566:    incbin "sprites/entities/entitysprite566.bin"
 EntitySprite612:    incbin "sprites/entities/entitysprite612.bin"
 EntitySprite613:    incbin "sprites/entities/entitysprite613.bin"
 EntitySprite614:    incbin "sprites/entities/entitysprite614.bin"
@@ -1325,9 +1325,9 @@ EntitySprite638:    incbin "sprites/entities/entitysprite638.bin"
 EntitySprite639:    incbin "sprites/entities/entitysprite639.bin"
 EntitySprite640:    incbin "sprites/entities/entitysprite640.bin"
 EntitySprite641:    incbin "sprites/entities/entitysprite641.bin"
-EntitySprite642:    incbin "sprites/entities/entitysprite642.bin"
-EntitySprite643:    incbin "sprites/entities/entitysprite643.bin"
-EntitySprite644:    incbin "sprites/entities/entitysprite644.bin"
+EntitySprite489:    incbin "sprites/entities/entitysprite489.bin"
+EntitySprite490:    incbin "sprites/entities/entitysprite490.bin"
+EntitySprite491:    incbin "sprites/entities/entitysprite491.bin"
 EntitySprite645:    incbin "sprites/entities/entitysprite645.bin"
 EntitySprite646:    incbin "sprites/entities/entitysprite646.bin"
 EntitySprite647:    incbin "sprites/entities/entitysprite647.bin"
@@ -1394,5 +1394,5 @@ EntitySprite707:    incbin "sprites/entities/entitysprite707.bin"
 EntitySprite708:    incbin "sprites/entities/entitysprite708.bin"
 EntitySprite709:    incbin "sprites/entities/entitysprite709.bin"
 EntitySprite710:    incbin "sprites/entities/entitysprite710.bin"
-EntitySprite719:    incbin "sprites/entities/entitysprite719.bin"
+EntitySprite711:    incbin "sprites/entities/entitysprite711.bin"
 										align $8000

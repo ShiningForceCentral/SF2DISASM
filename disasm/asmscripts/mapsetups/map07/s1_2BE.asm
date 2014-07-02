@@ -1,8 +1,7 @@
 
 ; SCRIPT SECTION mapsetups\map07\s1_2BE :
 ; 
-ms_map7_flag2BE_Entities:
-										dc.b $C
+ms_map7_Entities:   dc.b $C
 										dc.b 5
 										dc.b 3
 										dc.b $CD

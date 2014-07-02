@@ -441,7 +441,7 @@ Map03:              dc.b 0
 										dc.l Map03Section6
 										dc.l Map03Section7
 										dc.l Map03Section8
-										dc.l Map04Section9
+										dc.l Map03Section9
 Map03Section2:      incbin "maps/map03/section2.bin"
 Map03Section3:      incbin "maps/map03/section3.bin"
 Map03Section4:      incbin "maps/map03/section4.bin"
@@ -451,7 +451,7 @@ Map03Section7:      incbin "maps/map03/section7.bin"
 Map03Section8:      incbin "maps/map03/section8.bin"
 Map03Section0:      incbin "maps/map03/section0.bin"
 Map03Section1:      incbin "maps/map03/section1.bin"
-Map04Section9:      incbin "maps/map04/section9.bin"
+Map03Section9:      incbin "maps/map04/section9.bin"
 Map04:              dc.b 0
 										dc.b 0
 										dc.b $25
@@ -467,7 +467,7 @@ Map04:              dc.b 0
 										dc.l Map04Section6
 										dc.l Map04Section7
 										dc.l Map04Section8
-										dc.l Map04Section9
+										dc.l Map03Section9
 Map04Section2:      incbin "maps/map04/section2.bin"
 Map04Section3:      incbin "maps/map04/section3.bin"
 Map04Section4:      incbin "maps/map04/section4.bin"
@@ -517,7 +517,7 @@ Map06:              dc.b 0
 										dc.l Map06Section6
 										dc.l Map06Section7
 										dc.l Map06Section8
-										dc.l Map53Section9
+										dc.l Map06Section9
 Map06Section2:      incbin "maps/map06/section2.bin"
 Map06Section3:      incbin "maps/map06/section3.bin"
 Map06Section4:      incbin "maps/map06/section4.bin"
@@ -527,15 +527,15 @@ Map06Section7:      incbin "maps/map06/section7.bin"
 Map06Section8:      incbin "maps/map06/section8.bin"
 Map06Section0:      incbin "maps/map06/section0.bin"
 Map06Section1:      incbin "maps/map06/section1.bin"
-Map53Section9:      incbin "maps/map53/section9.bin"
+Map06Section9:      incbin "maps/map53/section9.bin"
 Map07:              dc.b 0
 										dc.b 0
 										dc.b $2F
 										dc.b $30
 										dc.b $25
 										dc.b $39
-										dc.l Map46Section0
-										dc.l Map46Section1
+										dc.l Map07Section0
+										dc.l Map07Section1
 										dc.l Map07Section2
 										dc.l Map07Section3
 										dc.l Map07Section4
@@ -543,7 +543,7 @@ Map07:              dc.b 0
 										dc.l Map07Section6
 										dc.l Map07Section7
 										dc.l Map07Section8
-										dc.l Map53Section9
+										dc.l Map06Section9
 Map07Section2:      incbin "maps/map07/section2.bin"
 Map07Section3:      incbin "maps/map07/section3.bin"
 Map07Section4:      incbin "maps/map07/section4.bin"
@@ -551,8 +551,8 @@ Map07Section5:      incbin "maps/map07/section5.bin"
 Map07Section6:      incbin "maps/map07/section6.bin"
 Map07Section7:      incbin "maps/map07/section7.bin"
 Map07Section8:      incbin "maps/map07/section8.bin"
-Map46Section0:      incbin "maps/map46/section0.bin"
-Map46Section1:      incbin "maps/map46/section1.bin"
+Map07Section0:      incbin "maps/map46/section0.bin"
+Map07Section1:      incbin "maps/map46/section1.bin"
 Map08:              dc.b 0
 										dc.b 1
 										dc.b $27
@@ -593,7 +593,7 @@ Map09:              dc.b 0
 										dc.l Map09Section6
 										dc.l Map09Section7
 										dc.l Map09Section8
-										dc.l Map16Section9
+										dc.l Map09Section9
 Map09Section2:      incbin "maps/map09/section2.bin"
 Map09Section3:      incbin "maps/map09/section3.bin"
 Map09Section4:      incbin "maps/map09/section4.bin"
@@ -618,7 +618,7 @@ Map10:              dc.b 0
 										dc.l Map10Section6
 										dc.l Map10Section7
 										dc.l Map10Section8
-										dc.l Map53Section9
+										dc.l Map06Section9
 Map10Section2:      incbin "maps/map10/section2.bin"
 Map10Section3:      incbin "maps/map10/section3.bin"
 Map10Section4:      incbin "maps/map10/section4.bin"
@@ -744,7 +744,7 @@ Map15:              dc.b 0
 										dc.l Map15Section6
 										dc.l Map15Section7
 										dc.l Map15Section8
-										dc.l Map38Section9
+										dc.l Map15Section9
 Map15Section2:      incbin "maps/map15/section2.bin"
 Map15Section3:      incbin "maps/map15/section3.bin"
 Map15Section4:      incbin "maps/map15/section4.bin"
@@ -754,7 +754,7 @@ Map15Section7:      incbin "maps/map15/section7.bin"
 Map15Section8:      incbin "maps/map15/section8.bin"
 Map15Section0:      incbin "maps/map15/section0.bin"
 Map15Section1:      incbin "maps/map15/section1.bin"
-Map38Section9:      incbin "maps/map38/section9.bin"
+Map15Section9:      incbin "maps/map38/section9.bin"
 Map16:              dc.b 0
 										dc.b 0
 										dc.b $16
@@ -770,7 +770,7 @@ Map16:              dc.b 0
 										dc.l Map16Section6
 										dc.l Map16Section7
 										dc.l Map16Section8
-										dc.l Map16Section9
+										dc.l Map09Section9
 Map16Section2:      incbin "maps/map16/section2.bin"
 Map16Section3:      incbin "maps/map16/section3.bin"
 Map16Section4:      incbin "maps/map16/section4.bin"
@@ -780,7 +780,7 @@ Map16Section7:      incbin "maps/map16/section7.bin"
 Map16Section8:      incbin "maps/map16/section8.bin"
 Map16Section0:      incbin "maps/map16/section0.bin"
 Map16Section1:      incbin "maps/map16/section1.bin"
-Map16Section9:      incbin "maps/map16/section9.bin"
+Map09Section9:      incbin "maps/map16/section9.bin"
 Map17:              dc.b 0
 										dc.b 2
 										dc.b $16
@@ -937,8 +937,8 @@ Map23:              dc.b 3
 										dc.b $30
 										dc.b $25
 										dc.b $3A
-										dc.l Map24Section0
-										dc.l Map24Section1
+										dc.l Map23Section0
+										dc.l Map23Section1
 										dc.l Map23Section2
 										dc.l Map23Section3
 										dc.l Map23Section4
@@ -946,7 +946,7 @@ Map23:              dc.b 3
 										dc.l Map23Section6
 										dc.l Map23Section7
 										dc.l Map23Section8
-										dc.l Map53Section9
+										dc.l Map06Section9
 Map23Section2:      incbin "maps/map23/section2.bin"
 Map23Section3:      incbin "maps/map23/section3.bin"
 Map23Section4:      incbin "maps/map23/section4.bin"
@@ -954,16 +954,16 @@ Map23Section5:      incbin "maps/map23/section5.bin"
 Map23Section6:      incbin "maps/map23/section6.bin"
 Map23Section7:      incbin "maps/map23/section7.bin"
 Map23Section8:      incbin "maps/map23/section8.bin"
-Map24Section0:      incbin "maps/map24/section0.bin"
-Map24Section1:      incbin "maps/map24/section1.bin"
+Map23Section0:      incbin "maps/map24/section0.bin"
+Map23Section1:      incbin "maps/map24/section1.bin"
 Map24:              dc.b 3
 										dc.b 0
 										dc.b $59
 										dc.b $30
 										dc.b $25
 										dc.b $3A
-										dc.l Map24Section0
-										dc.l Map24Section1
+										dc.l Map23Section0
+										dc.l Map23Section1
 										dc.l Map24Section2
 										dc.l Map24Section3
 										dc.l Map24Section4
@@ -994,7 +994,7 @@ Map25:              dc.b 0
 										dc.l Map25Section6
 										dc.l Map25Section7
 										dc.l Map25Section8
-										dc.l Map53Section9
+										dc.l Map06Section9
 Map25Section2:      incbin "maps/map25/section2.bin"
 Map25Section3:      incbin "maps/map25/section3.bin"
 Map25Section4:      incbin "maps/map25/section4.bin"
@@ -1323,7 +1323,7 @@ Map38:              dc.b 0
 										dc.l Map38Section6
 										dc.l Map38Section7
 										dc.l Map38Section8
-										dc.l Map38Section9
+										dc.l Map15Section9
 Map38Section2:      incbin "maps/map38/section2.bin"
 Map38Section3:      incbin "maps/map38/section3.bin"
 Map38Section4:      incbin "maps/map38/section4.bin"
@@ -1348,7 +1348,7 @@ Map39:              dc.b 0
 										dc.l Map39Section6
 										dc.l Map39Section7
 										dc.l Map39Section8
-										dc.l Map53Section9
+										dc.l Map06Section9
 Map39Section2:      incbin "maps/map39/section2.bin"
 Map39Section3:      incbin "maps/map39/section3.bin"
 Map39Section4:      incbin "maps/map39/section4.bin"
@@ -1517,8 +1517,8 @@ Map46:              dc.b 0
 										dc.b $30
 										dc.b $25
 										dc.b $39
-										dc.l Map46Section0
-										dc.l Map46Section1
+										dc.l Map07Section0
+										dc.l Map07Section1
 										dc.l Map46Section2
 										dc.l Map46Section3
 										dc.l Map46Section4
@@ -1547,15 +1547,15 @@ Map47:              dc.b 0
 										dc.l Map47Section4
 										dc.l Map47Section5
 										dc.l Map47Section6
-										dc.l Map47Section8
-										dc.l Map47Section8
+										dc.l Map47Section7
+										dc.l Map47Section7
 										dc.l Map47Section9
 Map47Section2:      incbin "maps/map47/section2.bin"
 Map47Section3:      incbin "maps/map47/section3.bin"
 Map47Section4:      incbin "maps/map47/section4.bin"
 Map47Section5:      incbin "maps/map47/section5.bin"
 Map47Section6:      incbin "maps/map47/section6.bin"
-Map47Section8:      incbin "maps/map47/section8.bin"
+Map47Section7:      incbin "maps/map47/section8.bin"
 Map47Section9:      incbin "maps/map47/section9.bin"
 Map47Section0:      incbin "maps/map47/section0.bin"
 Map47Section1:      incbin "maps/map47/section1.bin"
@@ -1702,7 +1702,7 @@ Map53:              dc.b 3
 										dc.l Map53Section6
 										dc.l Map53Section7
 										dc.l Map53Section8
-										dc.l Map53Section9
+										dc.l Map06Section9
 Map53Section2:      incbin "maps/map53/section2.bin"
 Map53Section3:      incbin "maps/map53/section3.bin"
 Map53Section4:      incbin "maps/map53/section4.bin"
@@ -1826,15 +1826,15 @@ Map58:              dc.b $C
 										dc.l Map58Section4
 										dc.l Map58Section5
 										dc.l Map58Section6
-										dc.l Map58Section8
-										dc.l Map58Section8
+										dc.l Map58Section7
+										dc.l Map58Section7
 										dc.l $FFFFFFFF
 Map58Section2:      incbin "maps/map58/section2.bin"
 Map58Section3:      incbin "maps/map58/section3.bin"
 Map58Section4:      incbin "maps/map58/section4.bin"
 Map58Section5:      incbin "maps/map58/section5.bin"
 Map58Section6:      incbin "maps/map58/section6.bin"
-Map58Section8:      incbin "maps/map58/section8.bin"
+Map58Section7:      incbin "maps/map58/section8.bin"
 Map58Section0:      incbin "maps/map58/section0.bin"
 Map58Section1:      incbin "maps/map58/section1.bin"
 Map59:              dc.b $E

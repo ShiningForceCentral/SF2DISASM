@@ -52,7 +52,7 @@ cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61
 										dc.w $4A                ; 004A FADE IN FROM BLACK HALF
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
 										dc.w $8082
-word_612E8:         dc.w $26                ; 0026 MAKE ENTITY NOD 80
+										dc.w $26                ; 0026 MAKE ENTITY NOD 80
 										dc.w $80
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
 										dc.w $80
@@ -80,7 +80,7 @@ word_612E8:         dc.w $26                ; 0026 MAKE ENTITY NOD 80
 										dc.b $FF
 										dc.l eas_Init           
 										dc.b $80                ; WAIT 1E
-byte_6131D:         dc.b $1E
+										dc.b $1E
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 0
 										dc.w 0
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8082

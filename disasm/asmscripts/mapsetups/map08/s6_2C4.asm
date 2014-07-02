@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map8_flag2C4_InitFunction:
+ms_map8_InitFunction:
 										
 										trap    #1
 										dc.w 8
@@ -15,7 +15,7 @@ return_563B0:
 										
 										rts
 
-	; End of function ms_map8_flag2C4_InitFunction
+	; End of function ms_map8_InitFunction
 
 cs_563B2:           dc.w 4                  ; 0004 SET TEXT INDEX 50B
 										dc.w $50B

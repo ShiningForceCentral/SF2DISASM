@@ -1,18 +1,17 @@
 
 ; SCRIPT SECTION mapsetups\map09\s3_206 :
 ; 
-ms_map9_flag206_Section3:
-										dc.b 4
+ms_map9_Section3:   dc.b 4
 										dc.b $39
-										dc.w sub_56866-ms_map9_flag206_Section3
+										dc.w sub_56866-ms_map9_Section3
 										dc.b 4
 										dc.b $3A
-										dc.w sub_56866-ms_map9_flag206_Section3
+										dc.w sub_56866-ms_map9_Section3
 										dc.b 4
 										dc.b $3B
-										dc.w sub_56866-ms_map9_flag206_Section3
+										dc.w sub_56866-ms_map9_Section3
 										dc.w $FD00
-										dc.w nullsub_183-ms_map9_flag206_Section3
+										dc.w nullsub_183-ms_map9_Section3
 
 ; =============== S U B R O U T I N E =======================================
 

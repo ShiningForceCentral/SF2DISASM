@@ -1,9 +1,9 @@
 
 ; SCRIPT SECTION mapsetups\map43\s2_264 :
 ; 
-ms_map43_flag264_EntityEvents:
+ms_map43_EntityEvents:
 										dc.w $FD00
-										dc.w nullsub_145-ms_map43_flag264_EntityEvents
+										dc.w nullsub_145-ms_map43_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

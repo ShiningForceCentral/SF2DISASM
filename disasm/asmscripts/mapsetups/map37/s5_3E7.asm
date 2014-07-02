@@ -1,17 +1,16 @@
 
 ; SCRIPT SECTION mapsetups\map37\s5_3E7 :
 ; 
-ms_map37_flag3E7_Section5:
-										dc.b 8
+ms_map37_Section5:  dc.b 8
 										dc.b $B
 										dc.b 2
 										dc.b $71
-										dc.w sub_5FA38-ms_map37_flag3E7_Section5
+										dc.w sub_5FA38-ms_map37_Section5
 										dc.b $FD
 										dc.b 0
 										dc.b 0
 										dc.b 0
-										dc.w nullsub_68-ms_map37_flag3E7_Section5
+										dc.w nullsub_68-ms_map37_Section5
 
 ; =============== S U B R O U T I N E =======================================
 

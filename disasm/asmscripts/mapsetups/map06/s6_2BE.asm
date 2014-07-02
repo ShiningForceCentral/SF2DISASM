@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map6_flag2BE_InitFunction:
+ms_map6_InitFunction:
 										
 										trap    #1
 										dc.w $322
@@ -23,7 +23,7 @@ return_54E6E:
 										
 										rts
 
-	; End of function ms_map6_flag2BE_InitFunction
+	; End of function ms_map6_InitFunction
 
 cs_54E70:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 84 B 12 3
 										dc.b $84

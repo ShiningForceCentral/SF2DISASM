@@ -1,9 +1,8 @@
 
 ; SCRIPT SECTION mapsetups\map05\s3_28A :
 ; 
-ms_map5_flag28A_Section3:
-										dc.w $FD00
-										dc.w nullsub_72-ms_map5_flag28A_Section3
+ms_map5_Section3:   dc.w $FD00
+										dc.w nullsub_72-ms_map5_Section3
 
 ; =============== S U B R O U T I N E =======================================
 

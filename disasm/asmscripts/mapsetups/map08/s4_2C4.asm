@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map8_flag2C4_Section4:
+ms_map8_Section4:
 										
 										move.w  #$546,d3
 										lea     word_561FC(pc), a0
 										nop
 										jmp     sub_47722
 
-	; End of function ms_map8_flag2C4_Section4
+	; End of function ms_map8_Section4
 
 word_561FC:         dc.w $50F
 										dc.b 0

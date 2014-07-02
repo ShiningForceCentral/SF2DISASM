@@ -59,11 +59,11 @@ sub_4FE98:
 										dc.w $100
 										moveq   #$72,d1 
 										jsr     sub_81D0
-										cmp.w   #$FFFF,d0
+										cmpi.w  #$FFFF,d0
 										beq.s   loc_4FEF4
 										moveq   #$74,d1 
 										jsr     sub_81D0
-										cmp.w   #$FFFF,d0
+										cmpi.w  #$FFFF,d0
 										beq.s   loc_4FEE6
 										moveq   #$72,d0 
 										jsr     sub_4F542

@@ -4,11 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map34_flag310_InitFunction:
+ms_map34_InitFunction:
 										
 										rts
 
-	; End of function ms_map34_flag310_InitFunction
+	; End of function ms_map34_InitFunction
 
 cs_5B6C0:           dc.w 4                  ; 0004 SET TEXT INDEX C87
 										dc.w $C87

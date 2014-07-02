@@ -4,11 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map27_flag20B_InitFunction:
+ms_map27_InitFunction:
 										
 										rts
 
-	; End of function ms_map27_flag20B_InitFunction
+	; End of function ms_map27_InitFunction
 
 cs_59FB8:           dc.w 4                  ; 0004 SET TEXT INDEX 6C5
 										dc.w $6C5

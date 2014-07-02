@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION mapsetups\map43\s6_264 :
 ; 
-ms_map43_flag264_InitFunction:
+return_540BE:
 										
 										rts
 

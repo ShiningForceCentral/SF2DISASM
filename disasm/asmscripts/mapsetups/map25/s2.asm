@@ -147,8 +147,6 @@ sub_5D2D2:
 loc_5D2E0:
 										
 										jsr     j_ChurchActions
-return_5D2E6:
-										
 										rts
 
 	; End of function sub_5D2D2

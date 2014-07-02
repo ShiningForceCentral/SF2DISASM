@@ -1,12 +1,12 @@
 
 ; SCRIPT SECTION mapsetups\map63\s2_1D :
 ; 
-ms_map63_flag1D_EntityEvents:
+ms_map63_EntityEvents:
 										dc.b $1D
 										dc.b 0
-										dc.w sub_5C992-ms_map63_flag1D_EntityEvents
+										dc.w sub_5C992-ms_map63_EntityEvents
 										dc.w $FD00
-										dc.w return_5C9E0-ms_map63_flag1D_EntityEvents
+										dc.w return_5C9E0-ms_map63_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -17,7 +17,7 @@ sub_5C992:
 										bne.s   return_5C9E0
 										moveq   #$75,d1 
 										jsr     sub_81D0
-										cmp.w   #$FFFF,d0
+										cmpi.w  #$FFFF,d0
 										bne.s   loc_5C9D2
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										move.w  #$1D,d0

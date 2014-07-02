@@ -4,11 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map15_flag212_InitFunction:
+ms_map15_InitFunction:
 										
 										rts
 
-	; End of function ms_map15_flag212_InitFunction
+	; End of function ms_map15_InitFunction
 
 cs_5D04E:           dc.w 4                  ; 0004 SET TEXT INDEX 7D6
 										dc.w $7D6

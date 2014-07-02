@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map51_flag208_InitFunction:
+ms_map51_InitFunction:
 										
 										trap    #1
 										dc.w $1D6
@@ -15,7 +15,7 @@ return_5C3D6:
 										
 										rts
 
-	; End of function ms_map51_flag208_InitFunction
+	; End of function ms_map51_InitFunction
 
 cs_5C3D8:           dc.w 4                  ; 0004 SET TEXT INDEX 9F6
 										dc.w $9F6

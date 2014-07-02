@@ -12,15 +12,9 @@ ms_map55_Section3:  dc.b 7
 sub_5E250:
 										
 										trap    #1
-word_5E252:
-										
 										dc.w $216
 										beq.s   (Map66Section0+$6CA-ms_map55_EntityEvents)
-loc_5E256:
-										
 										lea     word_5E27C(pc), a0
-loc_5E25A:
-										
 										trap    #6
 return_5E25C:
 										

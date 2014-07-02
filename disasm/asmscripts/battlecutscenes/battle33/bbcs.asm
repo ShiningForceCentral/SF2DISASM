@@ -232,7 +232,7 @@ word_4D048:         dc.w $1A
 
 sub_4D078:
 										
-										cmp.w   #$FFFF,(RAM_Dialogue_NameIdx1).l
+										cmpi.w  #$FFFF,(RAM_Dialogue_NameIdx1).l
 										beq.s   return_4D098
 										jsr     (hideTextBox).l 
 										move.w  #$B3A,d0

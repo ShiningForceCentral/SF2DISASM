@@ -1,9 +1,9 @@
 
 ; SCRIPT SECTION mapsetups\map34\s2_310 :
 ; 
-ms_map34_flag310_EntityEvents:
+ms_map34_EntityEvents:
 										dc.w $FD00
-										dc.w nullsub_139-ms_map34_flag310_EntityEvents
+										dc.w nullsub_139-ms_map34_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -30,8 +30,8 @@ pt_BattleSceneGrounds:
 										dc.l battlesceneGround09
 										dc.l battlesceneGround10
 										dc.l battlesceneGround11
-										dc.l battlesceneGround22
-										dc.l battlesceneGround29
+										dc.l battlesceneGround12
+										dc.l battlesceneGround13
 										dc.l battlesceneGround14
 										dc.l battlesceneGround15
 										dc.l battlesceneGround16
@@ -39,133 +39,79 @@ pt_BattleSceneGrounds:
 										dc.l battlesceneGround18
 										dc.l battlesceneGround19
 										dc.l battlesceneGround20
-										dc.l battlesceneGround22
-										dc.l battlesceneGround22
+										dc.l battlesceneGround12
+										dc.l battlesceneGround12
 										dc.l battlesceneGround23
 										dc.l battlesceneGround24
 										dc.l battlesceneGround25
 										dc.l battlesceneGround26
 										dc.l battlesceneGround27
 										dc.l battlesceneGround28
-										dc.l battlesceneGround29
-battlesceneGround00:dc.w $24
-										dc.w $26A
-										dc.w $8E8
-bsg00_rpbase:       dc.w groundTiles24-bsg00_rpbase
-battlesceneGround01:dc.w $24
-										dc.w $26A
-										dc.w $8E8
-bsg01_rpbase:       dc.w groundTiles02-bsg01_rpbase
-battlesceneGround02:dc.w $24
-										dc.w $26A
-										dc.w $8E8
-bsg02_rpbase:       dc.w groundTiles02-bsg02_rpbase
-battlesceneGround03:dc.w $26
-										dc.w $6A
-										dc.w $48C
-bsg03_rpbase:       dc.w groundTiles28-bsg03_rpbase
-battlesceneGround04:dc.w $24
-										dc.w $26A
-										dc.w $8E8
-bsg04_rpbase:       dc.w groundTiles24-bsg04_rpbase
-battlesceneGround05:dc.w $268
-										dc.w $48A
-										dc.w $6AC
-bsg05_rpbase:       dc.w groundTiles06-bsg05_rpbase
-battlesceneGround06:dc.w $268
-										dc.w $48A
-										dc.w $6AC
-bsg06_rpbase:       dc.w groundTiles06-bsg06_rpbase
-battlesceneGround07:dc.w $268
-										dc.w $48A
-										dc.w $6AC
-bsg07_rpbase:       dc.w groundTiles28-bsg07_rpbase
-battlesceneGround08:dc.w $444
-										dc.w $666
-										dc.w $AAA
+										dc.l battlesceneGround13
+battlesceneGround00:incbin "battles/grounds/ground00_palette.bin"
+bsg00_rpbase:       dc.w groundTiles00-bsg00_rpbase
+battlesceneGround01:incbin "battles/grounds/ground01_palette.bin"
+bsg01_rpbase:       dc.w groundTiles01-bsg01_rpbase
+battlesceneGround02:incbin "battles/grounds/ground02_palette.bin"
+bsg02_rpbase:       dc.w groundTiles01-bsg02_rpbase
+battlesceneGround03:incbin "battles/grounds/ground03_palette.bin"
+bsg03_rpbase:       dc.w groundTiles03-bsg03_rpbase
+battlesceneGround04:incbin "battles/grounds/ground04_palette.bin"
+bsg04_rpbase:       dc.w groundTiles00-bsg04_rpbase
+battlesceneGround05:incbin "battles/grounds/ground05_palette.bin"
+bsg05_rpbase:       dc.w groundTiles05-bsg05_rpbase
+battlesceneGround06:incbin "battles/grounds/ground06_palette.bin"
+bsg06_rpbase:       dc.w groundTiles05-bsg06_rpbase
+battlesceneGround07:incbin "battles/grounds/ground07_palette.bin"
+bsg07_rpbase:       dc.w groundTiles03-bsg07_rpbase
+battlesceneGround08:incbin "battles/grounds/ground08_palette.bin"
 bsg08_rpbase:       dc.w groundTiles08-bsg08_rpbase
-battlesceneGround09:dc.w $444
-										dc.w $666
-										dc.w $AAA
-bsg09_rpbase:       dc.w groundTiles29-bsg09_rpbase
-battlesceneGround10:dc.w $464
-										dc.w $686
-										dc.w $8A8
-bsg10_rpbase:       dc.w groundTiles28-bsg10_rpbase
-battlesceneGround11:dc.w $268
-										dc.w $48A
-										dc.w $6AC
-bsg11_rpbase:       dc.w groundTiles28-bsg11_rpbase
-battlesceneGround22:dc.w $268
-										dc.w $48A
-										dc.w $6AC
-bsg22_rpbase:       dc.w groundTiles28-bsg22_rpbase
-battlesceneGround29:dc.w $464
-										dc.w $686
-										dc.w $8A8
-bsg29_rpbase:       dc.w groundTiles29-bsg29_rpbase
-battlesceneGround14:dc.w $26
-										dc.w $6A
-										dc.w $48C
-bsg14_rpbase:       dc.w groundTiles18-bsg14_rpbase
-battlesceneGround15:dc.w $268
-										dc.w $48A
-										dc.w $6AC
-bsg15_rpbase:       dc.w groundTiles29-bsg15_rpbase
-battlesceneGround16:dc.w $24
-										dc.w $26A
-										dc.w $8E8
-bsg16_rpbase:       dc.w groundTiles24-bsg16_rpbase
-battlesceneGround17:dc.w $644
-										dc.w $866
-										dc.w $CAA
-bsg17_rpbase:       dc.w groundTiles20-bsg17_rpbase
-battlesceneGround18:dc.w $26
-										dc.w $6A
-										dc.w $48C
-bsg18_rpbase:       dc.w groundTiles18-bsg18_rpbase
-battlesceneGround19:dc.w $24
-										dc.w $26A
-										dc.w $8E8
-bsg19_rpbase:       dc.w groundTiles24-bsg19_rpbase
-battlesceneGround20:dc.w $644
-										dc.w $866
-										dc.w $CAA
-bsg20_rpbase:       dc.w groundTiles20-bsg20_rpbase
-battlesceneGround23:dc.w $268
-										dc.w $48A
-										dc.w $6AC
-bsg23_rpbase:       dc.w groundTiles28-bsg23_rpbase
-battlesceneGround24:dc.w $24
-										dc.w $26A
-										dc.w $8E8
-bsg24_rpbase:       dc.w groundTiles24-bsg24_rpbase
-battlesceneGround25:dc.w $A22
-										dc.w $C66
-										dc.w $EAA
+battlesceneGround09:incbin "battles/grounds/ground09_palette.bin"
+bsg09_rpbase:       dc.w groundTiles09-bsg09_rpbase
+battlesceneGround10:incbin "battles/grounds/ground10_palette.bin"
+bsg10_rpbase:       dc.w groundTiles03-bsg10_rpbase
+battlesceneGround11:incbin "battles/grounds/ground11_palette.bin"
+bsg11_rpbase:       dc.w groundTiles03-bsg11_rpbase
+battlesceneGround12:incbin "battles/grounds/ground12_palette.bin"
+bsg12_rpbase:       dc.w groundTiles03-bsg12_rpbase
+battlesceneGround13:incbin "battles/grounds/ground13_palette.bin"
+bsg13_rpbase:       dc.w groundTiles09-bsg13_rpbase
+battlesceneGround14:incbin "battles/grounds/ground14_palette.bin"
+bsg14_rpbase:       dc.w groundTiles14-bsg14_rpbase
+battlesceneGround15:incbin "battles/grounds/ground15_palette.bin"
+bsg15_rpbase:       dc.w groundTiles09-bsg15_rpbase
+battlesceneGround16:incbin "battles/grounds/ground16_palette.bin"
+bsg16_rpbase:       dc.w groundTiles00-bsg16_rpbase
+battlesceneGround17:incbin "battles/grounds/ground17_palette.bin"
+bsg17_rpbase:       dc.w groundTiles17-bsg17_rpbase
+battlesceneGround18:incbin "battles/grounds/ground18_palette.bin"
+bsg18_rpbase:       dc.w groundTiles14-bsg18_rpbase
+battlesceneGround19:incbin "battles/grounds/ground19_palette.bin"
+bsg19_rpbase:       dc.w groundTiles00-bsg19_rpbase
+battlesceneGround20:incbin "battles/grounds/ground20_palette.bin"
+bsg20_rpbase:       dc.w groundTiles17-bsg20_rpbase
+battlesceneGround23:incbin "battles/grounds/ground23_palette.bin"
+bsg23_rpbase:       dc.w groundTiles03-bsg23_rpbase
+battlesceneGround24:incbin "battles/grounds/ground24_palette.bin"
+bsg24_rpbase:       dc.w groundTiles00-bsg24_rpbase
+battlesceneGround25:incbin "battles/grounds/ground25_palette.bin"
 bsg25_rpbase:       dc.w groundTiles25-bsg25_rpbase
-battlesceneGround26:dc.w $A22
-										dc.w $C66
-										dc.w $EAA
-bsg26_rpbase:       dc.w groundTiles27-bsg26_rpbase
-battlesceneGround27:dc.w $A22
-										dc.w $C66
-										dc.w $EAA
-bsg27_rpbase:       dc.w groundTiles27-bsg27_rpbase
-battlesceneGround28:dc.w $26
-										dc.w $6A
-										dc.w $48C
-bsg28_rpbase:       dc.w groundTiles28-bsg28_rpbase
-groundTiles24:      incbin "battles/grounds/ground24.bin"
-groundTiles02:      incbin "battles/grounds/ground02.bin"
-groundTiles06:      incbin "battles/grounds/ground06.bin"
-groundTiles18:      incbin "battles/grounds/ground18.bin"
-groundTiles28:      incbin "battles/grounds/ground28.bin"
+battlesceneGround26:incbin "battles/grounds/ground26_palette.bin"
+bsg26_rpbase:       dc.w groundTiles26-bsg26_rpbase
+battlesceneGround27:incbin "battles/grounds/ground27_palette.bin"
+bsg27_rpbase:       dc.w groundTiles26-bsg27_rpbase
+battlesceneGround28:incbin "battles/grounds/ground28_palette.bin"
+bsg28_rpbase:       dc.w groundTiles03-bsg28_rpbase
+groundTiles00:      incbin "battles/grounds/ground00.bin"
+groundTiles01:      incbin "battles/grounds/ground01.bin"
+groundTiles05:      incbin "battles/grounds/ground05.bin"
+groundTiles14:      incbin "battles/grounds/ground14.bin"
+groundTiles03:      incbin "battles/grounds/ground03.bin"
 groundTiles08:      incbin "battles/grounds/ground08.bin"
-groundTiles29:      incbin "battles/grounds/ground29.bin"
-groundTiles20:      incbin "battles/grounds/ground20.bin"
+groundTiles09:      incbin "battles/grounds/ground09.bin"
+groundTiles17:      incbin "battles/grounds/ground17.bin"
 groundTiles25:      incbin "battles/grounds/ground25.bin"
-groundTiles27:      incbin "battles/grounds/ground27.bin"
+groundTiles26:      incbin "battles/grounds/ground26.bin"
 pt_WeaponSprites:   dc.l WeaponSprite00
 										dc.l WeaponSprite01
 										dc.l WeaponSprite02

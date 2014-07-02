@@ -1,22 +1,21 @@
 
 ; SCRIPT SECTION mapsetups\map08\s5_2C4 :
 ; 
-ms_map8_flag2C4_Section5:
-										dc.b $F
+ms_map8_Section5:   dc.b $F
 										dc.b $13
 										dc.b 1
 										dc.b $70
-										dc.w sub_562F2-ms_map8_flag2C4_Section5
+										dc.w sub_562F2-ms_map8_Section5
 										dc.b $10
 										dc.b $13
 										dc.b 1
 										dc.b $70
-										dc.w sub_562F2-ms_map8_flag2C4_Section5
+										dc.w sub_562F2-ms_map8_Section5
 										dc.b $FD
 										dc.b 0
 										dc.b 0
 										dc.b 0
-										dc.w return_56312-ms_map8_flag2C4_Section5
+										dc.w return_56312-ms_map8_Section5
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -1,45 +1,45 @@
 
 ; SCRIPT SECTION mapsetups\map09\s2_206 :
 ; 
-ms_map9_flag206_EntityEvents:
+ms_map9_EntityEvents:
 										dc.b $B
 										dc.b 0
-										dc.w sub_567E6-ms_map9_flag206_EntityEvents
+										dc.w sub_567E6-ms_map9_EntityEvents
 										dc.b $C
 										dc.b 3
-										dc.w sub_56842-ms_map9_flag206_EntityEvents
+										dc.w sub_56842-ms_map9_EntityEvents
 										dc.b $80
 										dc.b 1
-										dc.w sub_56756-ms_map9_flag206_EntityEvents
+										dc.w sub_56756-ms_map9_EntityEvents
 										dc.b $81
 										dc.b 1
-										dc.w sub_5675C-ms_map9_flag206_EntityEvents
+										dc.w sub_5675C-ms_map9_EntityEvents
 										dc.b $82
 										dc.b 1
-										dc.w sub_56762-ms_map9_flag206_EntityEvents
+										dc.w sub_56762-ms_map9_EntityEvents
 										dc.b $83
 										dc.b 1
-										dc.w sub_56768-ms_map9_flag206_EntityEvents
+										dc.w sub_56768-ms_map9_EntityEvents
 										dc.b $84
 										dc.b 1
-										dc.w sub_56776-ms_map9_flag206_EntityEvents
+										dc.w sub_56776-ms_map9_EntityEvents
 										dc.b $85
 										dc.b 3
-										dc.w sub_56784-ms_map9_flag206_EntityEvents
+										dc.w sub_56784-ms_map9_EntityEvents
 										dc.b $86
 										dc.b 1
-										dc.w sub_5678C-ms_map9_flag206_EntityEvents
+										dc.w sub_5678C-ms_map9_EntityEvents
 										dc.b $87
 										dc.b 1
-										dc.w sub_567C8-ms_map9_flag206_EntityEvents
+										dc.w sub_567C8-ms_map9_EntityEvents
 										dc.b $88
 										dc.b 1
-										dc.w sub_567D2-ms_map9_flag206_EntityEvents
+										dc.w sub_567D2-ms_map9_EntityEvents
 										dc.b $89
 										dc.b 1
-										dc.w sub_567D8-ms_map9_flag206_EntityEvents
+										dc.w sub_567D8-ms_map9_EntityEvents
 										dc.w $FD00
-										dc.w nullsub_114-ms_map9_flag206_EntityEvents
+										dc.w nullsub_114-ms_map9_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -123,7 +123,7 @@ sub_5678C:
 										move.w  #$86,d0 
 										move.b  ((byte_FFB651-$1000000)).w,d1
 										addq.w  #2,d1
-										and.w   #3,d1
+										andi.w  #3,d1
 										jsr     sub_4781A
 										trap    #5
 										dc.w $556
@@ -183,7 +183,7 @@ sub_567E6:
 										bne.s   loc_5682A
 										moveq   #$3D,d1 
 										jsr     sub_81D0
-										cmp.w   #$FFFF,d0
+										cmpi.w  #$FFFF,d0
 										bne.s   loc_56804
 										trap    #5
 										dc.w $55B

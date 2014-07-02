@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map19_flag3D6_InitFunction:
+ms_map19_flag21F_InitFunction:
 										
 										trap    #1
 										dc.w $19
@@ -58,7 +58,7 @@ return_62D04:
 										
 										rts
 
-	; End of function ms_map19_flag3D6_InitFunction
+	; End of function ms_map19_flag21F_InitFunction
 
 cs_62D06:           dc.w $1A                ; 001A SET ENTITY SPRITE B AA
 										dc.w $B

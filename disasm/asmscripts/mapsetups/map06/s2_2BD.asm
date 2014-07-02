@@ -64,7 +64,7 @@ loc_549D0:
 										trap    #1
 										dc.w $322
 										bne.s   loc_549F2
-										cmp.b   #1,((byte_FFB651-$1000000)).w
+										cmpi.b  #1,((byte_FFB651-$1000000)).w
 										bne.s   loc_549EC
 										move.b  #$11,((RAM_CurrentShopIdx-$1000000)).w
 										jsr     j_ShopActions
@@ -78,7 +78,7 @@ loc_549F0:
 										bra.s   return_54A0C
 loc_549F2:
 										
-										cmp.b   #1,((byte_FFB651-$1000000)).w
+										cmpi.b  #1,((byte_FFB651-$1000000)).w
 										bne.s   loc_54A08
 										move.b  #$17,((RAM_CurrentShopIdx-$1000000)).w
 										jsr     j_ShopActions
@@ -246,7 +246,7 @@ loc_54AB8:
 										bra.s   loc_54ACE
 loc_54ABA:
 										
-										cmp.b   #1,((byte_FFB651-$1000000)).w
+										cmpi.b  #1,((byte_FFB651-$1000000)).w
 										bne.s   loc_54ACA
 										jsr     j_ChurchActions
 										bra.s   loc_54ACE
@@ -294,7 +294,7 @@ loc_54AF4:
 										trap    #1
 										dc.w $322
 										bne.s   loc_54B1A
-										cmp.b   #1,((byte_FFB651-$1000000)).w
+										cmpi.b  #1,((byte_FFB651-$1000000)).w
 										bne.s   loc_54B10
 										move.b  #2,((RAM_CurrentShopIdx-$1000000)).w
 										jsr     j_ShopActions
@@ -310,7 +310,7 @@ loc_54B18:
 										bra.s   return_54B34
 loc_54B1A:
 										
-										cmp.b   #1,((byte_FFB651-$1000000)).w
+										cmpi.b  #1,((byte_FFB651-$1000000)).w
 										bne.s   loc_54B30
 										move.b  #8,((RAM_CurrentShopIdx-$1000000)).w
 										jsr     j_ShopActions
@@ -584,7 +584,7 @@ loc_54C4C:
 										
 										moveq   #$72,d1 
 										jsr     sub_81D0
-										cmp.w   #$FFFF,d0
+										cmpi.w  #$FFFF,d0
 										bne.s   loc_54C8E
 										trap    #5
 										dc.w $45C

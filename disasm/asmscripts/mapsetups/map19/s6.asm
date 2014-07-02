@@ -15,6 +15,6 @@ loc_530F6:
 										
 										trap    #1
 										dc.w $260
-										beq.s   ms_map19_flag1F5_InitFunction
+										beq.s   return_53102
 										lea     cs_53104(pc), a0
 										trap    #6

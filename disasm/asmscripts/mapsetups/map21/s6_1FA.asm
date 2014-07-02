@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION mapsetups\map21\s6_1FA :
 ; 
-ms_map21_flag1FA_InitFunction:
+loc_53F1C:
 										
 										trap    #1
 										dc.w $1FB
@@ -12,7 +12,7 @@ return_53F28:
 										
 										rts
 
-	; End of function ms_map21_flag1F5_InitFunction
+	; End of function ms_map21_InitFunction
 
 cs_53F2A:           dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 80
 										dc.b $80

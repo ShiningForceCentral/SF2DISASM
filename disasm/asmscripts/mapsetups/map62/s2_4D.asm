@@ -1,15 +1,15 @@
 
 ; SCRIPT SECTION mapsetups\map62\s2_4D :
 ; 
-ms_map62_flag4D_EntityEvents:
+ms_map62_EntityEvents:
 										dc.b $80
 										dc.b 3
-										dc.w sub_5C7C2-ms_map62_flag4D_EntityEvents
+										dc.w sub_5C7C2-ms_map62_EntityEvents
 										dc.b $81
 										dc.b 3
-										dc.w sub_5C7F6-ms_map62_flag4D_EntityEvents
+										dc.w sub_5C7F6-ms_map62_EntityEvents
 										dc.w $FD00
-										dc.w return_5C81E-ms_map62_flag4D_EntityEvents
+										dc.w return_5C81E-ms_map62_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

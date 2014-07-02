@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map13_flag201_InitFunction:
+ms_map13_InitFunction:
 										
 										trap    #1
 										dc.w $2C7
@@ -30,7 +30,7 @@ return_5830E:
 										
 										rts
 
-	; End of function ms_map13_flag201_InitFunction
+	; End of function ms_map13_InitFunction
 
 cs_58310:           dc.w $23                ; 0023 SET ENTITY FACING 82 3
 										dc.b $82

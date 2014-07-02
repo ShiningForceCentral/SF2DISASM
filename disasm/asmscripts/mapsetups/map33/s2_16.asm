@@ -1,30 +1,30 @@
 
 ; SCRIPT SECTION mapsetups\map33\s2_16 :
 ; 
-ms_map33_flag16_EntityEvents:
+ms_map33_EntityEvents:
 										dc.b $80
 										dc.b 3
-										dc.w sub_5A788-ms_map33_flag16_EntityEvents
+										dc.w sub_5A788-ms_map33_EntityEvents
 										dc.b $81
 										dc.b 1
-										dc.w sub_5A7D2-ms_map33_flag16_EntityEvents
+										dc.w sub_5A7D2-ms_map33_EntityEvents
 										dc.b $82
 										dc.b 1
-										dc.w sub_5A7F0-ms_map33_flag16_EntityEvents
+										dc.w sub_5A7F0-ms_map33_EntityEvents
 										dc.b $E
 										dc.b 1
-										dc.w sub_5A842-ms_map33_flag16_EntityEvents
+										dc.w sub_5A842-ms_map33_EntityEvents
 										dc.b $10
 										dc.b 1
-										dc.w sub_5A864-ms_map33_flag16_EntityEvents
+										dc.w sub_5A864-ms_map33_EntityEvents
 										dc.b $11
 										dc.b 1
-										dc.w sub_5A886-ms_map33_flag16_EntityEvents
+										dc.w sub_5A886-ms_map33_EntityEvents
 										dc.b $F
 										dc.b 1
-										dc.w sub_5A8A8-ms_map33_flag16_EntityEvents
+										dc.w sub_5A8A8-ms_map33_EntityEvents
 										dc.w $FD00
-										dc.w nullsub_138-ms_map33_flag16_EntityEvents
+										dc.w nullsub_138-ms_map33_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

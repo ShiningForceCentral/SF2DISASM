@@ -1,33 +1,33 @@
 
 ; SCRIPT SECTION mapsetups\map39\s2_33E :
 ; 
-ms_map39_flag33E_EntityEvents:
+ms_map39_EntityEvents:
 										dc.b $1A
 										dc.b 0
-										dc.w sub_5E05C-ms_map39_flag33E_EntityEvents
+										dc.w sub_5E05C-ms_map39_EntityEvents
 										dc.b $80
 										dc.b 1
-										dc.w sub_5E072-ms_map39_flag33E_EntityEvents
+										dc.w sub_5E072-ms_map39_EntityEvents
 										dc.b $81
 										dc.b 1
-										dc.w sub_5E078-ms_map39_flag33E_EntityEvents
+										dc.w sub_5E078-ms_map39_EntityEvents
 										dc.b $82
 										dc.b 1
-										dc.w sub_5E07E-ms_map39_flag33E_EntityEvents
+										dc.w sub_5E07E-ms_map39_EntityEvents
 										dc.b $83
 										dc.b 3
-										dc.w sub_5E088-ms_map39_flag33E_EntityEvents
+										dc.w sub_5E088-ms_map39_EntityEvents
 										dc.b $84
 										dc.b 3
-										dc.w sub_5E08E-ms_map39_flag33E_EntityEvents
+										dc.w sub_5E08E-ms_map39_EntityEvents
 										dc.b $85
 										dc.b 1
-										dc.w sub_5E094-ms_map39_flag33E_EntityEvents
+										dc.w sub_5E094-ms_map39_EntityEvents
 										dc.b $86
 										dc.b 1
-										dc.w sub_5E09A-ms_map39_flag33E_EntityEvents
+										dc.w sub_5E09A-ms_map39_EntityEvents
 										dc.w $FD00
-										dc.w nullsub_142-ms_map39_flag33E_EntityEvents
+										dc.w nullsub_142-ms_map39_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

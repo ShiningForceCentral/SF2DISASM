@@ -32,7 +32,7 @@ sub_5F42C:
 										bne.s   loc_5F44C
 										moveq   #$43,d1 
 										jsr     sub_81D0
-										cmp.w   #$FFFF,d0
+										cmpi.w  #$FFFF,d0
 										bne.s   loc_5F446
 										trap    #5
 										dc.w $DB7

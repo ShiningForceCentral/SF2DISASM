@@ -6,8 +6,8 @@
 
 ms_map20_InitFunction:
 										
-										cmp.l   #$22803780,((RAM_Entity_StructOffset_XAndStart-$1000000)).w
-										bne.s   ms_map20_flag1FA_InitFunction
+										cmpi.l  #$22803780,((RAM_Entity_StructOffset_XAndStart-$1000000)).w
+										bne.s   loc_53988
 										trap    #1
 										dc.w $25D
 										bne.s   loc_53982
@@ -15,7 +15,7 @@ ms_map20_InitFunction:
 										trap    #6
 										trap    #2
 										dc.w $25D
-										bra.s   ms_map20_flag1FA_InitFunction
+										bra.s   loc_53988
 loc_53982:
 										
 										lea     cs_53B60(pc), a0

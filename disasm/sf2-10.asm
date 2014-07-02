@@ -77,15 +77,15 @@ loc_1000DE:
 										move.w  #$E,d0
 										sub.w   d7,d0
 										lsl.w   #3,d0
-										add.w   #$80,d0 
+										addi.w  #$80,d0 
 										move.w  d0,(a1)+
 										addq.l  #2,a1
-										or.w    #$2000,d1
+										ori.w   #$2000,d1
 										move.w  d1,(a1)+
 										move.w  #$1F,d0
 										sub.w   d6,d0
 										lsl.w   #3,d0
-										add.w   #$80,d0 
+										addi.w  #$80,d0 
 										move.w  d0,(a1)+
 										moveq   #$FFFFFFFF,d2
 loc_100104:
@@ -202,7 +202,7 @@ titleScreenEnd:
 										divs.w  #$1E,d0
 										swap    d0
 										addq.w  #1,d0
-										cmp.w   #$A,d0
+										cmpi.w  #$A,d0
 										ble.s   loc_100260
 										lea     $480(a0),a0
 loc_100260:
@@ -254,8 +254,8 @@ pt_Backgrounds:     dc.l Background00
 										dc.l Background09
 										dc.l Background10
 										dc.l Background11
-										dc.l Background22
-										dc.l Background29
+										dc.l Background12
+										dc.l Background13
 										dc.l Background14
 										dc.l Background15
 										dc.l Background16
@@ -263,15 +263,15 @@ pt_Backgrounds:     dc.l Background00
 										dc.l Background18
 										dc.l Background19
 										dc.l Background20
-										dc.l Background22
-										dc.l Background22
+										dc.l Background12
+										dc.l Background12
 										dc.l Background23
 										dc.l Background24
 										dc.l Background25
 										dc.l Background26
 										dc.l Background27
 										dc.l Background28
-										dc.l Background29
+										dc.l Background13
 Background00:       incbin "backgrounds/background00.bin"
 Background01:       incbin "backgrounds/background01.bin"
 Background02:       incbin "backgrounds/background02.bin"
@@ -284,8 +284,8 @@ Background08:       incbin "backgrounds/background08.bin"
 Background09:       incbin "backgrounds/background09.bin"
 Background10:       incbin "backgrounds/background10.bin"
 Background11:       incbin "backgrounds/background11.bin"
-Background22:       incbin "backgrounds/background22.bin"
-Background29:       incbin "backgrounds/background29.bin"
+Background12:       incbin "backgrounds/background12.bin"
+Background13:       incbin "backgrounds/background13.bin"
 Background14:       incbin "backgrounds/background14.bin"
 Background15:       incbin "backgrounds/background15.bin"
 Background16:       incbin "backgrounds/background16.bin"

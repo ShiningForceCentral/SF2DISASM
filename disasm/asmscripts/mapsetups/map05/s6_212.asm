@@ -13,7 +13,7 @@ ms_map5_flag212_InitFunction:
 										trap    #6
 										trap    #2
 										dc.w $3B0
-										bra.s   ms_map5_flag1C_InitFunction
+										bra.s   loc_60636
 loc_60630:
 										
 										lea     cs_6060E(pc), a0

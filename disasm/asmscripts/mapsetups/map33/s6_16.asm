@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map33_flag16_InitFunction:
+ms_map33_InitFunction:
 										
 										trap    #1
 										dc.w $20B
@@ -142,5 +142,5 @@ return_5AC54:
 										
 										rts
 
-	; End of function ms_map33_flag16_InitFunction
+	; End of function ms_map33_InitFunction
 

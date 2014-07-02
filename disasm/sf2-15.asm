@@ -39,9 +39,9 @@ pt_Portraits:       dc.l Portrait00
 										dc.l Portrait30
 										dc.l Portrait31
 										dc.l Portrait32
-										dc.l Portrait35
+										dc.l Portrait33
 										dc.l Portrait34
-										dc.l Portrait35
+										dc.l Portrait33
 										dc.l Portrait36
 										dc.l Portrait37
 										dc.l Portrait38
@@ -58,10 +58,10 @@ pt_Portraits:       dc.l Portrait00
 										dc.l Portrait49
 										dc.l Portrait50
 										dc.l Portrait51
-										dc.l Portrait55
-										dc.l Portrait55
-										dc.l Portrait55
-										dc.l Portrait55
+										dc.l Portrait52
+										dc.l Portrait52
+										dc.l Portrait52
+										dc.l Portrait52
 Portrait00:         incbin "portraits/portrait00.bin"
 Portrait01:         incbin "portraits/portrait01.bin"
 Portrait02:         incbin "portraits/portrait02.bin"
@@ -95,7 +95,7 @@ Portrait29:         incbin "portraits/portrait29.bin"
 Portrait30:         incbin "portraits/portrait30.bin"
 Portrait31:         incbin "portraits/portrait31.bin"
 Portrait32:         incbin "portraits/portrait32.bin"
-Portrait35:         incbin "portraits/portrait35.bin"
+Portrait33:         incbin "portraits/portrait33.bin"
 Portrait34:         incbin "portraits/portrait34.bin"
 Portrait36:         incbin "portraits/portrait36.bin"
 Portrait37:         incbin "portraits/portrait37.bin"
@@ -113,5 +113,5 @@ Portrait48:         incbin "portraits/portrait48.bin"
 Portrait49:         incbin "portraits/portrait49.bin"
 Portrait50:         incbin "portraits/portrait50.bin"
 Portrait51:         incbin "portraits/portrait51.bin"
-Portrait55:         incbin "portraits/portrait55.bin"
+Portrait52:         incbin "portraits/portrait52.bin"
 										align $8000

@@ -1,18 +1,17 @@
 
 ; SCRIPT SECTION mapsetups\map13\s3_201 :
 ; 
-ms_map13_flag201_Section3:
-										dc.b $18
+ms_map13_Section3:  dc.b $18
 										dc.b $FF
-										dc.w sub_5823A-ms_map13_flag201_Section3
+										dc.w sub_5823A-ms_map13_Section3
 										dc.b $FF
 										dc.b $B
-										dc.w sub_5827C-ms_map13_flag201_Section3
+										dc.w sub_5827C-ms_map13_Section3
 										dc.b $FF
 										dc.b $1E
-										dc.w sub_58294-ms_map13_flag201_Section3
+										dc.w sub_58294-ms_map13_Section3
 										dc.w $FD00
-										dc.w return_582AA-ms_map13_flag201_Section3
+										dc.w return_582AA-ms_map13_Section3
 
 ; =============== S U B R O U T I N E =======================================
 

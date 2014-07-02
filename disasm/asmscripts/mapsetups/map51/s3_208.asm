@@ -1,27 +1,26 @@
 
 ; SCRIPT SECTION mapsetups\map51\s3_208 :
 ; 
-ms_map51_flag208_Section3:
-										dc.b 9
+ms_map51_Section3:  dc.b 9
 										dc.b 6
-										dc.w sub_5C2F2-ms_map51_flag208_Section3
+										dc.w sub_5C2F2-ms_map51_Section3
 										dc.b 9
 										dc.b 7
-										dc.w sub_5C2F2-ms_map51_flag208_Section3
+										dc.w sub_5C2F2-ms_map51_Section3
 										dc.b 9
 										dc.b 8
-										dc.w sub_5C2F2-ms_map51_flag208_Section3
+										dc.w sub_5C2F2-ms_map51_Section3
 										dc.b 9
 										dc.b 9
-										dc.w sub_5C2F2-ms_map51_flag208_Section3
+										dc.w sub_5C2F2-ms_map51_Section3
 										dc.b 9
 										dc.b $18
-										dc.w sub_5C304-ms_map51_flag208_Section3
+										dc.w sub_5C304-ms_map51_Section3
 										dc.b $A
 										dc.b $18
-										dc.w sub_5C304-ms_map51_flag208_Section3
+										dc.w sub_5C304-ms_map51_Section3
 										dc.w $FD00
-										dc.w return_5C310-ms_map51_flag208_Section3
+										dc.w return_5C310-ms_map51_Section3
 
 ; =============== S U B R O U T I N E =======================================
 

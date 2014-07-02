@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map7_flag325_InitFunction:
+ms_map7_InitFunction:
 										
 										trap    #1
 										dc.w $2C3
@@ -20,7 +20,7 @@ return_55830:
 										
 										rts
 
-	; End of function ms_map7_flag325_InitFunction
+	; End of function ms_map7_InitFunction
 
 cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A
 										dc.w $50A
@@ -267,7 +267,7 @@ cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A
 										dc.b $87
 										dc.b 3
 										dc.w $44                ; 0044  553C6
-										dc.l ms_map7_flag2BE_Entities
+										dc.l ms_map7_Entities
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_559AE:         dc.w $B
 										dc.w 7
@@ -1087,20 +1087,20 @@ loc_55F06:
 										
 										moveq   #0,d1
 										move.w  (a0),d1
-										and.w   #$E00,d1
+										andi.w  #$E00,d1
 										lsr.w   #8,d1
 										lsr.w   #1,d1
 										move.w  (a0),d2
-										and.w   #$E,d2
+										andi.w  #$E,d2
 										add.w   d2,d1
 										move.w  (a0)+,d2
-										and.w   #$E0,d2 
+										andi.w  #$E0,d2 
 										lsr.w   #3,d2
 										add.w   d2,d1
 										divu.w  #7,d1
 										move.l  d1,d2
 										swap    d2
-										cmp.w   #4,d2
+										cmpi.w  #4,d2
 										bcs.s   loc_55F34
 										addq.w  #1,d1
 loc_55F34:

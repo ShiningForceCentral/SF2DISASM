@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map13_flag201_Section4:
+ms_map13_Section4:
 										
 										move.w  #$1003,d3
 										lea     word_582BC(pc), a0
 										nop
 										jmp     sub_47722
 
-	; End of function ms_map13_flag201_Section4
+	; End of function ms_map13_Section4
 
 word_582BC:         dc.w $1102
 										dc.b 0

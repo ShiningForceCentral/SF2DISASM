@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map9_flag206_InitFunction:
+ms_map9_InitFunction:
 										
 										trap    #1
 										dc.w $206
@@ -29,7 +29,7 @@ return_568F4:
 										
 										rts
 
-	; End of function ms_map9_flag206_InitFunction
+	; End of function ms_map9_InitFunction
 
 cs_568F6:           dc.w 4                  ; 0004 SET TEXT INDEX 55C
 										dc.w $55C

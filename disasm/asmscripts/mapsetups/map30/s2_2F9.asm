@@ -1,24 +1,24 @@
 
 ; SCRIPT SECTION mapsetups\map30\s2_2F9 :
 ; 
-ms_map30_flag2F9_EntityEvents:
+ms_map30_EntityEvents:
 										dc.b $80
 										dc.b 1
-										dc.w sub_5A224-ms_map30_flag2F9_EntityEvents
+										dc.w sub_5A224-ms_map30_EntityEvents
 										dc.b $81
 										dc.b 3
-										dc.w sub_5A236-ms_map30_flag2F9_EntityEvents
+										dc.w sub_5A236-ms_map30_EntityEvents
 										dc.b $82
 										dc.b 0
-										dc.w sub_5A240-ms_map30_flag2F9_EntityEvents
+										dc.w sub_5A240-ms_map30_EntityEvents
 										dc.b $83
 										dc.b 3
-										dc.w sub_5A25C-ms_map30_flag2F9_EntityEvents
+										dc.w sub_5A25C-ms_map30_EntityEvents
 										dc.b $84
 										dc.b 3
-										dc.w sub_5A272-ms_map30_flag2F9_EntityEvents
+										dc.w sub_5A272-ms_map30_EntityEvents
 										dc.w $FD00
-										dc.w return_5A276-ms_map30_flag2F9_EntityEvents
+										dc.w return_5A276-ms_map30_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -120,7 +120,7 @@ sub_5A278:
 										moveq   #0,d0
 										moveq   #0,d1
 										jsr     j_GetItemAndNumberOfItems
-										cmp.w   #4,d2
+										cmpi.w  #4,d2
 										bne.s   loc_5A296
 										trap    #5
 										dc.w $6C1

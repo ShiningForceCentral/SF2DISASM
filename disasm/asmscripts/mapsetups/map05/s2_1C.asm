@@ -1,24 +1,24 @@
 
 ; SCRIPT SECTION mapsetups\map05\s2_1C :
 ; 
-ms_map5_flag1C_EntityEvents:
+ms_map5_flag212_EntityEvents:
 										dc.b $1C
 										dc.b 3
-										dc.w sub_60452-ms_map5_flag1C_EntityEvents
+										dc.w sub_60452-ms_map5_flag212_EntityEvents
 										dc.b $1B
 										dc.b 1
-										dc.w sub_60458-ms_map5_flag1C_EntityEvents
+										dc.w sub_60458-ms_map5_flag212_EntityEvents
 										dc.b $80
 										dc.b 3
-										dc.w sub_60460-ms_map5_flag1C_EntityEvents
+										dc.w sub_60460-ms_map5_flag212_EntityEvents
 										dc.b $81
 										dc.b 3
-										dc.w sub_60468-ms_map5_flag1C_EntityEvents
+										dc.w sub_60468-ms_map5_flag212_EntityEvents
 										dc.b $82
 										dc.b 0
-										dc.w sub_60476-ms_map5_flag1C_EntityEvents
+										dc.w sub_60476-ms_map5_flag212_EntityEvents
 										dc.w $FD00
-										dc.w return_604C6-ms_map5_flag1C_EntityEvents
+										dc.w return_604C6-ms_map5_flag212_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

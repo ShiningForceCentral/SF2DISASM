@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map40_flag1FB_InitFunction:
+ms_map40_InitFunction:
 										
 										trap    #1
 										dc.w $1FB
@@ -15,7 +15,7 @@ return_53FD6:
 										
 										rts
 
-	; End of function ms_map40_flag1FB_InitFunction
+	; End of function ms_map40_InitFunction
 
 cs_53FD8:           dc.w 5                  ; 0005 PLAY SOUND MUSIC_BOSS_ATTACK
 										dc.w 6

@@ -1,21 +1,20 @@
 
 ; SCRIPT SECTION mapsetups\map63\s3_1D :
 ; 
-ms_map63_flag1D_Section3:
-										dc.b $F
+ms_map63_Section3:  dc.b $F
 										dc.b $37
-										dc.w sub_5C9F6-ms_map63_flag1D_Section3
+										dc.w sub_5C9F6-ms_map63_Section3
 										dc.b $D
 										dc.b $2A
-										dc.w sub_5C9F6-ms_map63_flag1D_Section3
+										dc.w sub_5C9F6-ms_map63_Section3
 										dc.b $A
 										dc.b $15
-										dc.w sub_5CA14-ms_map63_flag1D_Section3
+										dc.w sub_5CA14-ms_map63_Section3
 										dc.b 8
 										dc.b 7
-										dc.w sub_5CA1C-ms_map63_flag1D_Section3
+										dc.w sub_5CA1C-ms_map63_Section3
 										dc.w $FD00
-										dc.w return_5CA22-ms_map63_flag1D_Section3
+										dc.w return_5CA22-ms_map63_Section3
 
 ; =============== S U B R O U T I N E =======================================
 

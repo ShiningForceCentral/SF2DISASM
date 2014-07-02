@@ -1,8 +1,7 @@
 
 ; SCRIPT SECTION mapsetups\map33\s1_16 :
 ; 
-ms_map33_flag16_Entities:
-										dc.b $3F
+ms_map33_Entities:  dc.b $3F
 										dc.b $3F
 										dc.b 1
 										dc.b $CA

@@ -4,9 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map23_flag2FA_InitFunction:
+ms_map23_InitFunction:
 										
 										rts
 
-	; End of function ms_map23_flag2FA_InitFunction
+	; End of function ms_map23_InitFunction
 

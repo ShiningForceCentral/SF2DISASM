@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map16_flag297_InitFunction:
+ms_map16_InitFunction:
 										
 										trap    #1
 										dc.w $298
@@ -15,7 +15,7 @@ return_51F86:
 										
 										rts
 
-	; End of function ms_map16_flag297_InitFunction
+	; End of function ms_map16_InitFunction
 
 cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2
 										dc.w $3C2

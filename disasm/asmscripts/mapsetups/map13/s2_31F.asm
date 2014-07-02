@@ -1,48 +1,48 @@
 
 ; SCRIPT SECTION mapsetups\map13\s2_31F :
 ; 
-ms_map13_flag31F_EntityEvents:
+ms_map13_EntityEvents:
 										dc.b 9
 										dc.b 1
-										dc.w sub_58108-ms_map13_flag31F_EntityEvents
+										dc.w sub_58108-ms_map13_EntityEvents
 										dc.b $80
 										dc.b 1
-										dc.w sub_58056-ms_map13_flag31F_EntityEvents
+										dc.w sub_58056-ms_map13_EntityEvents
 										dc.b $81
 										dc.b 1
-										dc.w sub_58072-ms_map13_flag31F_EntityEvents
+										dc.w sub_58072-ms_map13_EntityEvents
 										dc.b $82
 										dc.b 0
-										dc.w sub_58078-ms_map13_flag31F_EntityEvents
+										dc.w sub_58078-ms_map13_EntityEvents
 										dc.b $83
 										dc.b 1
-										dc.w sub_58090-ms_map13_flag31F_EntityEvents
+										dc.w sub_58090-ms_map13_EntityEvents
 										dc.b $84
 										dc.b 1
-										dc.w sub_5809E-ms_map13_flag31F_EntityEvents
+										dc.w sub_5809E-ms_map13_EntityEvents
 										dc.b $85
 										dc.b 3
-										dc.w sub_580AC-ms_map13_flag31F_EntityEvents
+										dc.w sub_580AC-ms_map13_EntityEvents
 										dc.b $86
 										dc.b 3
-										dc.w sub_580C6-ms_map13_flag31F_EntityEvents
+										dc.w sub_580C6-ms_map13_EntityEvents
 										dc.b $87
 										dc.b 1
-										dc.w sub_580CE-ms_map13_flag31F_EntityEvents
+										dc.w sub_580CE-ms_map13_EntityEvents
 										dc.b $88
 										dc.b 1
-										dc.w sub_580D4-ms_map13_flag31F_EntityEvents
+										dc.w sub_580D4-ms_map13_EntityEvents
 										dc.b $89
 										dc.b 3
-										dc.w sub_580DA-ms_map13_flag31F_EntityEvents
+										dc.w sub_580DA-ms_map13_EntityEvents
 										dc.b $8A
 										dc.b 3
-										dc.w sub_58102-ms_map13_flag31F_EntityEvents
+										dc.w sub_58102-ms_map13_EntityEvents
 										dc.b $8C
 										dc.b 0
-										dc.w sub_5810E-ms_map13_flag31F_EntityEvents
+										dc.w sub_5810E-ms_map13_EntityEvents
 										dc.w $FD00
-										dc.w nullsub_116-ms_map13_flag31F_EntityEvents
+										dc.w nullsub_116-ms_map13_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

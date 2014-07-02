@@ -1,12 +1,12 @@
 
 ; SCRIPT SECTION mapsetups\map05\s5_1C :
 ; 
-ms_map5_flag1C_Section5:
+ms_map5_flag212_Section5:
 										dc.b $FD
 										dc.b 0
 										dc.b 0
 										dc.b 0
-										dc.w nullsub_180-ms_map5_flag1C_Section5
+										dc.w nullsub_180-ms_map5_flag212_Section5
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -1,12 +1,12 @@
 
 ; SCRIPT SECTION mapsetups\map05\s6_1C :
 ; 
-ms_map5_flag1C_InitFunction:
+loc_60636:
 										
 										trap    #1
 										dc.w $3AE
 										bne.s   loc_6067C
-										cmp.l   #$6005580,((RAM_Entity_StructOffset_XAndStart-$1000000)).w
+										cmpi.l  #$6005580,((RAM_Entity_StructOffset_XAndStart-$1000000)).w
 										bne.s   loc_6067C
 										trap    #1
 										dc.w $1C                ; if character 1C joined the Force : Lemon ?

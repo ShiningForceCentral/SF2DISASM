@@ -1,17 +1,16 @@
 
 ; SCRIPT SECTION mapsetups\map09\s5_206 :
 ; 
-ms_map9_flag206_Section5:
-										dc.b $10
+ms_map9_Section5:   dc.b $10
 										dc.b $3A
 										dc.b $FF
 										dc.b $3D
-										dc.w sub_568B0-ms_map9_flag206_Section5
+										dc.w sub_568B0-ms_map9_Section5
 										dc.b $FD
 										dc.b 0
 										dc.b 0
 										dc.b 0
-										dc.w return_568C2-ms_map9_flag206_Section5
+										dc.w return_568C2-ms_map9_Section5
 
 ; =============== S U B R O U T I N E =======================================
 

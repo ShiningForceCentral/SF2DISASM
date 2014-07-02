@@ -1,24 +1,23 @@
 
 ; SCRIPT SECTION mapsetups\map07\s3_325 :
 ; 
-ms_map7_flag325_Section3:
-										dc.b 9
+ms_map7_Section3:   dc.b 9
 										dc.b 8
-										dc.w sub_557B6-ms_map7_flag325_Section3
+										dc.w sub_557B6-ms_map7_Section3
 										dc.b $A
 										dc.b 8
-										dc.w sub_557B6-ms_map7_flag325_Section3
+										dc.w sub_557B6-ms_map7_Section3
 										dc.b $B
 										dc.b 8
-										dc.w sub_557B6-ms_map7_flag325_Section3
+										dc.w sub_557B6-ms_map7_Section3
 										dc.b $C
 										dc.b 8
-										dc.w sub_557B6-ms_map7_flag325_Section3
+										dc.w sub_557B6-ms_map7_Section3
 										dc.b $D
 										dc.b 8
-										dc.w sub_557B6-ms_map7_flag325_Section3
+										dc.w sub_557B6-ms_map7_Section3
 										dc.w $FD00
-										dc.w return_557EC-ms_map7_flag325_Section3
+										dc.w return_557EC-ms_map7_Section3
 
 ; =============== S U B R O U T I N E =======================================
 
