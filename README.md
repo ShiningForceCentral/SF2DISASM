@@ -23,7 +23,6 @@ By providing the original US rom file of the game, one will be able to use the p
 The assembled game will be perfectly identical to the original one. 
 Only tolerated differences :
 - few bytes (less than 10) should be different, simply because the current assembler does not use the same opcodes as the original assembler used by the game developers.
-- Unused spaces are padded by 0x00 hex values instead of 0xFF values. Might be fixable.
 
 
 Starting point for fan projects :
