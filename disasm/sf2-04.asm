@@ -3505,7 +3505,7 @@ loc_19D4C:
 										bcc.w   loc_19D90
 										movem.l d0/a0,-(sp)
 										jsr     j_GetClass      
-										lea     tbl_CharacterBattleSprites(pc), a0
+										lea     tbl_AllyBattleSprites(pc), a0
 										mulu.w  #9,d0
 										adda.w  d0,a0
 										moveq   #2,d0
@@ -3533,7 +3533,7 @@ loc_19D90:
 										
 										move.l  a0,-(sp)
 										jsr     j_GetEnemyID
-										lea     tbl_MonsterBattleSprites(pc), a0
+										lea     tbl_EnemyBattleSprites(pc), a0
 										add.w   d1,d1
 										move.b  1(a0,d1.w),d2
 										ext.w   d2
@@ -3561,7 +3561,7 @@ getWeaponSpriteAndPalette:
 										bcs.w   loc_19DF2
 										cmpi.w  #$6D,d1 
 										bhi.w   loc_19DF2
-										lea     tbl_ItemBattleSprites(pc), a0
+										lea     tbl_WeaponBattleSprites(pc), a0
 										subi.w  #$1A,d1
 										add.w   d1,d1
 										move.b  (a0,d1.w),d2
@@ -15008,15 +15008,15 @@ unk_1F7BE:          dc.b $81
 										dc.b   0
 										dc.b   0
 										dc.b   0
-tbl_CharacterBattleSprites:
-										incbin "sprites/charbattlesprites.bin"
+tbl_AllyBattleSprites:
+										incbin "data/allybattlesprites.bin"
 																						; table : class -> sprite
-tbl_MonsterBattleSprites:
-										incbin "sprites/enemybattlesprites.bin"
-tbl_ItemBattleSprites:
-										incbin "sprites/weaponsprites.bin"
+tbl_EnemyBattleSprites:
+										incbin "data/enemybattlesprites.bin"
+tbl_WeaponBattleSprites:
+										incbin "data/weaponsprites.bin"
 tbl_CustomBackgrounds:
-										incbin "backgrounds/custombackgrounds.bin"
+										incbin "data/custombackgrounds.bin"
 byte_1FAB8:         dc.b 0
 										dc.b   0
 										dc.b   0
@@ -15048,10 +15048,10 @@ byte_1FAB8:         dc.b 0
 										dc.b   0
 										dc.b   0
 tbl_AllyBSpriteIdleAnimate:
-										incbin "sprites/battlesprites/allyidlesprites.bin"
+										incbin "data/allyidlesprites.bin"
 																						; list of ally battle sprite indeces who do not animate while idle
 tbl_EnemyBSpriteIdleAnimate:
-										incbin "sprites/battlesprites/enemyidlesprites.bin"
+										incbin "data/enemyidlesprites.bin"
 																						; list of enemy battle sprite indeces who do not animate while idle
 somePlaneALayout:   dc.b 'c†c§c®c¨c–c‘cÿc‹d',0
 										dc.b $64 

@@ -5,7 +5,7 @@
 ; FREE SPACE : 6681 bytes.
 
 
-p_pt_ScriptBanks:   dc.l pt_ScriptBanks
+p_pt_ScriptBanks:   dc.l pt_TextBanks
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -260,13 +260,13 @@ segaLogoPalette:    dc.w 0
 										dc.w $A00
 										dc.w $C00
 										dc.w $E00
-SegaLogo:           incbin "misc/segalogo.bin"
+SegaLogo:           incbin "graphics/segalogo.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_28B12:
 										
-										cmp.b   #$FF,(a0)
+										cmpi.b  #$FF,(a0)
 										beq.w   loc_28B64
 										moveq   #3,d7
 										lea     (byte_FFDC98).l,a1
@@ -275,17 +275,17 @@ loc_28B26:
 										
 										clr.w   d0
 										move.b  (a0)+,d0
-										add.w   #$F0,d0 
+										addi.w  #$F0,d0 
 										move.w  d0,6(a1)
 										clr.w   d0
 										move.b  (a0)+,d0
 										neg.w   d0
-										add.w   #$E0,d0 
+										addi.w  #$E0,d0 
 										move.w  d0,(a1)
 										clr.w   d0
 										move.b  (a0)+,d0
 										lsl.w   #4,d0
-										add.w   #$100,d0
+										addi.w  #$100,d0
 										move.w  d0,4(a1)
 										move.w  (a2)+,2(a1)
 										subq.w  #8,a1
@@ -309,17 +309,17 @@ loc_28B7A:
 										
 										clr.w   d0
 										move.b  (a0)+,d0
-										add.w   #$F0,d0 
+										addi.w  #$F0,d0 
 										move.w  d0,6(a1)
 										clr.w   d0
 										move.b  (a0)+,d0
 										neg.w   d0
-										add.w   #$E0,d0 
+										addi.w  #$E0,d0 
 										move.w  d0,(a1)
 										clr.w   d0
 										move.b  (a0)+,d0
 										lsl.w   #4,d0
-										add.w   #$100,d0
+										addi.w  #$100,d0
 										move.w  d0,4(a1)
 										move.w  (a2)+,2(a1)
 										subq.w  #8,a1
@@ -1307,7 +1307,7 @@ return_28F96:
 CheckConfigurationModeCheat:
 										
 										movea.l ((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w,a0
-										cmp.b   #$FF,(a0)
+										cmpi.b  #$FF,(a0)
 										bne.s   loc_28FAE
 										move.b  #$FF,((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
 										trap    #0
@@ -1348,7 +1348,7 @@ ConfigurationModeInputSequence:
 CheckDebugModeCheat:
 										
 										movea.l ((dword_FFB1A0-$1000000)).w,a0
-										cmp.b   #$FF,(a0)
+										cmpi.b  #$FF,(a0)
 										bne.s   loc_28FE2
 										move.b  #$FF,((RAM_DebugModeActivated-$1000000)).w
 										trap    #0
@@ -1385,18 +1385,18 @@ DebugModeInputSequence:
 										dc.b   4
 										dc.b $FF
 										dc.b $FF
-VariableWidthFont:  incbin "misc/variablewidthfont.bin"
+VariableWidthFont:  incbin "graphics/fonts/variablewidthfont.bin"
 MenuTiles_Uncompressed:
-										incbin "misc/menutiles.bin"
-MenuTiles_Item:     incbin "misc/menutilesitem.bin"
+										incbin "graphics/menus/menutiles.bin"
+MenuTiles_Item:     incbin "graphics/menus/menutilesitem.bin"
 MenuTiles_BattleField:
-										incbin "misc/menutilesbattlefield.bin"
-MenuTiles_Church:   incbin "misc/menutileschurch.bin"
-MenuTiles_Shop:     incbin "misc/menutilesshop.bin"
-MenuTiles_Caravan:  incbin "misc/menutilescaravan.bin"
-MenuTiles_Depot:    incbin "misc/menutilesdepot.bin"
-MenuTiles_YesNo:    incbin "misc/menutilesyesno.bin"
-plt_WitchChoice:    incbin "misc/specialscreens/whitchchoicepalette.bin"
+										incbin "graphics/menus/menutilesbattlefield.bin"
+MenuTiles_Church:   incbin "graphics/menus/menutileschurch.bin"
+MenuTiles_Shop:     incbin "graphics/menus/menutilesshop.bin"
+MenuTiles_Caravan:  incbin "graphics/menus/menutilescaravan.bin"
+MenuTiles_Depot:    incbin "graphics/menus/menutilesdepot.bin"
+MenuTiles_YesNo:    incbin "graphics/menus/menutilesyesno.bin"
+plt_WitchChoice:    incbin "graphics/specialscreens/whitchchoicepalette.bin"
 unk_2C03E:          dc.b   1
 										dc.b   0
 										dc.b   1
@@ -2357,7 +2357,7 @@ unk_2C03E:          dc.b   1
 										dc.b $2B 
 										dc.b   9
 										dc.b $38 
-SpeechBalloonTiles: incbin "misc/specialscreens/speechballoontiles.bin"
+SpeechBalloonTiles: incbin "graphics/specialscreens/speechballoontiles.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2411,7 +2411,7 @@ loc_2C604:
 										
 										move.l  (a0),d0
 										lsr.l   #1,d0
-										and.l   #$EEE0EEE,d0
+										andi.l  #$EEE0EEE,d0
 										move.l  d0,(a0)+
 										dbf     d7,loc_2C604
 										lea     (PALETTE3_BIS).l,a0
@@ -2420,7 +2420,7 @@ loc_2C61C:
 										
 										move.l  (a0),d0
 										lsr.l   #1,d0
-										and.l   #$EEE0EEE,d0
+										andi.l  #$EEE0EEE,d0
 										move.l  d0,(a0)+
 										dbf     d7,loc_2C61C
 										lea     (FFD080_Palette1bis).l,a0
@@ -2455,10 +2455,10 @@ loc_2C664:
 										
 										move.w  d7,d0
 										move.w  d5,d2
-										and.w   #$3F,d2 
+										andi.w  #$3F,d2 
 										move.b  (a3,d2.w),d2
 										add.w   d2,d0
-										and.w   #$3F,d0 
+										andi.w  #$3F,d0 
 										move.b  (a3,d0.w),d0
 										move.w  d0,d1
 										move.w  d5,d2
@@ -2468,13 +2468,13 @@ loc_2C664:
 										move.b  (a0,d0.w),d2
 										btst    #0,d1
 										bne.s   loc_2C69A
-										and.b   #$F0,d2
-										and.b   #$F,(a2,d0.w)
+										andi.b  #$F0,d2
+										andi.b  #$F,(a2,d0.w)
 										bra.s   loc_2C6A4
 loc_2C69A:
 										
-										and.b   #$F,d2
-										and.b   #$F0,(a2,d0.w)
+										andi.b  #$F,d2
+										andi.b  #$F0,(a2,d0.w)
 loc_2C6A4:
 										
 										or.b    d2,(a2,d0.w)
@@ -2495,7 +2495,7 @@ loc_2C6A4:
 										jsr     (bwahDMAstuffAgainbis).w
 										jsr     (setFFDE94b3andWait).w
 										movem.l (sp)+,d0-a3
-										cmp.w   #$10,d7
+										cmpi.w  #$10,d7
 										bne.s   loc_2C6F6
 										bsr.w   sub_2C5E4
 loc_2C6F6:
@@ -8297,7 +8297,7 @@ UnusedCloudTiles:   dc.b $F7 ; no reference to that ? looks like compressed tile
 										dc.b   0
 										dc.b   8
 										dc.b $FF
-StaticWidthFont:    incbin "misc/staticwidthfont.bin"
+StaticWidthFont:    incbin "graphics/fonts/staticwidthfont.bin"
 																						; used for title screen
 word_2E08E:         dc.w $422
 										dc.w $EEE               ; palettes used for title screen
@@ -8387,10 +8387,10 @@ HuffmanDecode:
 										clr.w   d1
 										move.b  2(a3),d1
 										add.w   d1,d1
-										lea     t_RelativeTreePointers(pc), a1
+										lea     TextBankTreePointers(pc), a1
 										move.w  (a1,d1.w),d1
-										lea     (t_RelativeTreePointers+$1FE)(pc), a1
-										add.w   d1,a1
+										lea     TextBankTreeData(pc), a1
+										adda.w  d1,a1
 										movea.l a1,a2
 										clr.w   d3
 										clr.w   d5
@@ -8438,43 +8438,44 @@ loc_2E182:
 
 	; End of function HuffmanDecode
 
-t_RelativeTreePointers:
-										incbin "scriptbanks/scriptbanktrees.bin"
-ScriptBank00:       incbin "scriptbanks/scriptbank00.bin"
-ScriptBank01:       incbin "scriptbanks/scriptbank01.bin"
-ScriptBank02:       incbin "scriptbanks/scriptbank02.bin"
-ScriptBank03:       incbin "scriptbanks/scriptbank03.bin"
-ScriptBank04:       incbin "scriptbanks/scriptbank04.bin"
-ScriptBank05:       incbin "scriptbanks/scriptbank05.bin"
-ScriptBank06:       incbin "scriptbanks/scriptbank06.bin"
-ScriptBank07:       incbin "scriptbanks/scriptbank07.bin"
-ScriptBank08:       incbin "scriptbanks/scriptbank08.bin"
-ScriptBank09:       incbin "scriptbanks/scriptbank09.bin"
-ScriptBank10:       incbin "scriptbanks/scriptbank10.bin"
-ScriptBank11:       incbin "scriptbanks/scriptbank11.bin"
-ScriptBank12:       incbin "scriptbanks/scriptbank12.bin"
-ScriptBank13:       incbin "scriptbanks/scriptbank13.bin"
-ScriptBank14:       incbin "scriptbanks/scriptbank14.bin"
-ScriptBank15:       incbin "scriptbanks/scriptbank15.bin"
-ScriptBank16:       incbin "scriptbanks/scriptbank16.bin"
-pt_ScriptBanks:     dc.l ScriptBank00
-										dc.l ScriptBank01
-										dc.l ScriptBank02
-										dc.l ScriptBank03
-										dc.l ScriptBank04
-										dc.l ScriptBank05
-										dc.l ScriptBank06
-										dc.l ScriptBank07
-										dc.l ScriptBank08
-										dc.l ScriptBank09
-										dc.l ScriptBank10
-										dc.l ScriptBank11
-										dc.l ScriptBank12
-										dc.l ScriptBank13
-										dc.l ScriptBank14
-										dc.l ScriptBank15
-										dc.l ScriptBank16
-GameStaff:          incbin "misc/gamestaff.bin"
+TextBankTreePointers:
+										incbin "scripting/textbanks/textbanktreepointers.bin"
+TextBankTreeData:   incbin "scripting/textbanktreedata.bin"
+TextBank00:         incbin "scripting/textbanks/scriptbank00.bin"
+TextBank01:         incbin "scripting/textbanks/scriptbank01.bin"
+TextBank02:         incbin "scripting/textbanks/scriptbank02.bin"
+TextBank03:         incbin "scripting/textbanks/scriptbank03.bin"
+TextBank04:         incbin "scripting/textbanks/scriptbank04.bin"
+TextBank05:         incbin "scripting/textbanks/scriptbank05.bin"
+TextBank06:         incbin "scripting/textbanks/scriptbank06.bin"
+TextBank07:         incbin "scripting/textbanks/scriptbank07.bin"
+TextBank08:         incbin "scripting/textbanks/scriptbank08.bin"
+TextBank09:         incbin "scripting/textbanks/scriptbank09.bin"
+TextBank10:         incbin "scripting/textbanks/scriptbank10.bin"
+TextBank11:         incbin "scripting/textbanks/scriptbank11.bin"
+TextBank12:         incbin "scripting/textbanks/scriptbank12.bin"
+TextBank13:         incbin "scripting/textbanks/scriptbank13.bin"
+TextBank14:         incbin "scripting/textbanks/scriptbank14.bin"
+TextBank15:         incbin "scripting/textbanks/scriptbank15.bin"
+TextBank16:         incbin "scripting/textbanks/scriptbank16.bin"
+pt_TextBanks:       dc.l TextBank00
+										dc.l TextBank01
+										dc.l TextBank02
+										dc.l TextBank03
+										dc.l TextBank04
+										dc.l TextBank05
+										dc.l TextBank06
+										dc.l TextBank07
+										dc.l TextBank08
+										dc.l TextBank09
+										dc.l TextBank10
+										dc.l TextBank11
+										dc.l TextBank12
+										dc.l TextBank13
+										dc.l TextBank14
+										dc.l TextBank15
+										dc.l TextBank16
+GameStaff:          incbin "scripting/gamestaff.bin"
 										dc.l $FFFFFFFF
 										dc.w $FFFF
 										align $4000

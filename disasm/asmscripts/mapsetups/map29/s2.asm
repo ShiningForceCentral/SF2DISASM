@@ -30,7 +30,7 @@ ms_map29_EntityEvents:
 
 j_j_BlacksmithActions:
 										
-										jmp     (MapTiles053+$32-ms_map29_EntityEvents)
+										jmp     (MapTileset053+$32-ms_map29_EntityEvents)
 
 	; End of function j_j_BlacksmithActions
 

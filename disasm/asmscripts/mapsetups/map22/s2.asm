@@ -90,7 +90,7 @@ ms_map22_EntityEvents:
 
 sub_594E4:
 										
-										jsr     (MapTiles051+$F8-ms_map22_EntityEvents)
+										jsr     (MapTileset051+$F8-ms_map22_EntityEvents)
 										rts
 
 	; End of function sub_594E4

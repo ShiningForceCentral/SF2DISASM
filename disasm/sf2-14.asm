@@ -6,10 +6,10 @@
 
 
 p_pt_BattleSceneGrounds:
-										dc.l pt_BattleSceneGrounds
+										dc.l pt_Grounds
 p_pt_WeaponSprites: dc.l pt_WeaponSprites
 p_plt_BattleSceneWeaponColors:
-										dc.l plt_BattleSceneWeaponColors
+										dc.l plt_WeaponPalettes
 p_pt_SpellGraphics: dc.l pt_SpellGraphics
 p_plt_Witch:        dc.l plt_Witch
 p_witchLayout:      dc.l witchLayout
@@ -17,101 +17,100 @@ p_witchTiles:       dc.l witchTiles
 p_plt_WitchEnd:     dc.l plt_WitchEnd
 p_witchEndLayout:   dc.l witchEndLayout
 p_witchEndTiles:    dc.l witchEndTiles
-pt_BattleSceneGrounds:
-										dc.l battlesceneGround00
-										dc.l battlesceneGround01
-										dc.l battlesceneGround02
-										dc.l battlesceneGround03
-										dc.l battlesceneGround04
-										dc.l battlesceneGround05
-										dc.l battlesceneGround06
-										dc.l battlesceneGround07
-										dc.l battlesceneGround08
-										dc.l battlesceneGround09
-										dc.l battlesceneGround10
-										dc.l battlesceneGround11
-										dc.l battlesceneGround12
-										dc.l battlesceneGround13
-										dc.l battlesceneGround14
-										dc.l battlesceneGround15
-										dc.l battlesceneGround16
-										dc.l battlesceneGround17
-										dc.l battlesceneGround18
-										dc.l battlesceneGround19
-										dc.l battlesceneGround20
-										dc.l battlesceneGround12
-										dc.l battlesceneGround12
-										dc.l battlesceneGround23
-										dc.l battlesceneGround24
-										dc.l battlesceneGround25
-										dc.l battlesceneGround26
-										dc.l battlesceneGround27
-										dc.l battlesceneGround28
-										dc.l battlesceneGround13
-battlesceneGround00:incbin "battles/grounds/ground00_palette.bin"
-bsg00_rpbase:       dc.w groundTiles00-bsg00_rpbase
-battlesceneGround01:incbin "battles/grounds/ground01_palette.bin"
-bsg01_rpbase:       dc.w groundTiles01-bsg01_rpbase
-battlesceneGround02:incbin "battles/grounds/ground02_palette.bin"
-bsg02_rpbase:       dc.w groundTiles01-bsg02_rpbase
-battlesceneGround03:incbin "battles/grounds/ground03_palette.bin"
-bsg03_rpbase:       dc.w groundTiles03-bsg03_rpbase
-battlesceneGround04:incbin "battles/grounds/ground04_palette.bin"
-bsg04_rpbase:       dc.w groundTiles00-bsg04_rpbase
-battlesceneGround05:incbin "battles/grounds/ground05_palette.bin"
-bsg05_rpbase:       dc.w groundTiles05-bsg05_rpbase
-battlesceneGround06:incbin "battles/grounds/ground06_palette.bin"
-bsg06_rpbase:       dc.w groundTiles05-bsg06_rpbase
-battlesceneGround07:incbin "battles/grounds/ground07_palette.bin"
-bsg07_rpbase:       dc.w groundTiles03-bsg07_rpbase
-battlesceneGround08:incbin "battles/grounds/ground08_palette.bin"
-bsg08_rpbase:       dc.w groundTiles08-bsg08_rpbase
-battlesceneGround09:incbin "battles/grounds/ground09_palette.bin"
-bsg09_rpbase:       dc.w groundTiles09-bsg09_rpbase
-battlesceneGround10:incbin "battles/grounds/ground10_palette.bin"
-bsg10_rpbase:       dc.w groundTiles03-bsg10_rpbase
-battlesceneGround11:incbin "battles/grounds/ground11_palette.bin"
-bsg11_rpbase:       dc.w groundTiles03-bsg11_rpbase
-battlesceneGround12:incbin "battles/grounds/ground12_palette.bin"
-bsg12_rpbase:       dc.w groundTiles03-bsg12_rpbase
-battlesceneGround13:incbin "battles/grounds/ground13_palette.bin"
-bsg13_rpbase:       dc.w groundTiles09-bsg13_rpbase
-battlesceneGround14:incbin "battles/grounds/ground14_palette.bin"
-bsg14_rpbase:       dc.w groundTiles14-bsg14_rpbase
-battlesceneGround15:incbin "battles/grounds/ground15_palette.bin"
-bsg15_rpbase:       dc.w groundTiles09-bsg15_rpbase
-battlesceneGround16:incbin "battles/grounds/ground16_palette.bin"
-bsg16_rpbase:       dc.w groundTiles00-bsg16_rpbase
-battlesceneGround17:incbin "battles/grounds/ground17_palette.bin"
-bsg17_rpbase:       dc.w groundTiles17-bsg17_rpbase
-battlesceneGround18:incbin "battles/grounds/ground18_palette.bin"
-bsg18_rpbase:       dc.w groundTiles14-bsg18_rpbase
-battlesceneGround19:incbin "battles/grounds/ground19_palette.bin"
-bsg19_rpbase:       dc.w groundTiles00-bsg19_rpbase
-battlesceneGround20:incbin "battles/grounds/ground20_palette.bin"
-bsg20_rpbase:       dc.w groundTiles17-bsg20_rpbase
-battlesceneGround23:incbin "battles/grounds/ground23_palette.bin"
-bsg23_rpbase:       dc.w groundTiles03-bsg23_rpbase
-battlesceneGround24:incbin "battles/grounds/ground24_palette.bin"
-bsg24_rpbase:       dc.w groundTiles00-bsg24_rpbase
-battlesceneGround25:incbin "battles/grounds/ground25_palette.bin"
-bsg25_rpbase:       dc.w groundTiles25-bsg25_rpbase
-battlesceneGround26:incbin "battles/grounds/ground26_palette.bin"
-bsg26_rpbase:       dc.w groundTiles26-bsg26_rpbase
-battlesceneGround27:incbin "battles/grounds/ground27_palette.bin"
-bsg27_rpbase:       dc.w groundTiles26-bsg27_rpbase
-battlesceneGround28:incbin "battles/grounds/ground28_palette.bin"
-bsg28_rpbase:       dc.w groundTiles03-bsg28_rpbase
-groundTiles00:      incbin "battles/grounds/ground00.bin"
-groundTiles01:      incbin "battles/grounds/ground01.bin"
-groundTiles05:      incbin "battles/grounds/ground05.bin"
-groundTiles14:      incbin "battles/grounds/ground14.bin"
-groundTiles03:      incbin "battles/grounds/ground03.bin"
-groundTiles08:      incbin "battles/grounds/ground08.bin"
-groundTiles09:      incbin "battles/grounds/ground09.bin"
-groundTiles17:      incbin "battles/grounds/ground17.bin"
-groundTiles25:      incbin "battles/grounds/ground25.bin"
-groundTiles26:      incbin "battles/grounds/ground26.bin"
+pt_Grounds:         dc.l Ground00
+										dc.l Ground01
+										dc.l Ground02
+										dc.l Ground03
+										dc.l Ground04
+										dc.l Ground05
+										dc.l Ground06
+										dc.l Ground07
+										dc.l Ground08
+										dc.l Ground09
+										dc.l Ground10
+										dc.l Ground11
+										dc.l Ground12
+										dc.l Ground13
+										dc.l Ground14
+										dc.l Ground15
+										dc.l Ground16
+										dc.l Ground17
+										dc.l Ground18
+										dc.l Ground19
+										dc.l Ground20
+										dc.l Ground12
+										dc.l Ground12
+										dc.l Ground23
+										dc.l Ground24
+										dc.l Ground25
+										dc.l Ground26
+										dc.l Ground27
+										dc.l Ground28
+										dc.l Ground13
+Ground00:           incbin "graphics/grounds/ground00_palette.bin"
+bsg00_rpbase:       dc.w GroundTiles00-bsg00_rpbase
+Ground01:           incbin "graphics/grounds/ground01_palette.bin"
+bsg01_rpbase:       dc.w GroundTiles01-bsg01_rpbase
+Ground02:           incbin "graphics/grounds/ground02_palette.bin"
+bsg02_rpbase:       dc.w GroundTiles01-bsg02_rpbase
+Ground03:           incbin "graphics/grounds/ground03_palette.bin"
+bsg03_rpbase:       dc.w GroundTiles03-bsg03_rpbase
+Ground04:           incbin "graphics/grounds/ground04_palette.bin"
+bsg04_rpbase:       dc.w GroundTiles00-bsg04_rpbase
+Ground05:           incbin "graphics/grounds/ground05_palette.bin"
+bsg05_rpbase:       dc.w GroundTiles05-bsg05_rpbase
+Ground06:           incbin "graphics/grounds/ground06_palette.bin"
+bsg06_rpbase:       dc.w GroundTiles05-bsg06_rpbase
+Ground07:           incbin "graphics/grounds/ground07_palette.bin"
+bsg07_rpbase:       dc.w GroundTiles03-bsg07_rpbase
+Ground08:           incbin "graphics/grounds/ground08_palette.bin"
+bsg08_rpbase:       dc.w GroundTiles08-bsg08_rpbase
+Ground09:           incbin "graphics/grounds/ground09_palette.bin"
+bsg09_rpbase:       dc.w GroundTiles09-bsg09_rpbase
+Ground10:           incbin "graphics/grounds/ground10_palette.bin"
+bsg10_rpbase:       dc.w GroundTiles03-bsg10_rpbase
+Ground11:           incbin "graphics/grounds/ground11_palette.bin"
+bsg11_rpbase:       dc.w GroundTiles03-bsg11_rpbase
+Ground12:           incbin "graphics/grounds/ground12_palette.bin"
+bsg12_rpbase:       dc.w GroundTiles03-bsg12_rpbase
+Ground13:           incbin "graphics/grounds/ground13_palette.bin"
+bsg13_rpbase:       dc.w GroundTiles09-bsg13_rpbase
+Ground14:           incbin "graphics/grounds/ground14_palette.bin"
+bsg14_rpbase:       dc.w GroundTiles14-bsg14_rpbase
+Ground15:           incbin "graphics/grounds/ground15_palette.bin"
+bsg15_rpbase:       dc.w GroundTiles09-bsg15_rpbase
+Ground16:           incbin "graphics/grounds/ground16_palette.bin"
+bsg16_rpbase:       dc.w GroundTiles00-bsg16_rpbase
+Ground17:           incbin "graphics/grounds/ground17_palette.bin"
+bsg17_rpbase:       dc.w GroundTiles17-bsg17_rpbase
+Ground18:           incbin "graphics/grounds/ground18_palette.bin"
+bsg18_rpbase:       dc.w GroundTiles14-bsg18_rpbase
+Ground19:           incbin "graphics/grounds/ground19_palette.bin"
+bsg19_rpbase:       dc.w GroundTiles00-bsg19_rpbase
+Ground20:           incbin "graphics/grounds/ground20_palette.bin"
+bsg20_rpbase:       dc.w GroundTiles17-bsg20_rpbase
+Ground23:           incbin "graphics/grounds/ground23_palette.bin"
+bsg23_rpbase:       dc.w GroundTiles03-bsg23_rpbase
+Ground24:           incbin "graphics/grounds/ground24_palette.bin"
+bsg24_rpbase:       dc.w GroundTiles00-bsg24_rpbase
+Ground25:           incbin "graphics/grounds/ground25_palette.bin"
+bsg25_rpbase:       dc.w GroundTiles25-bsg25_rpbase
+Ground26:           incbin "graphics/grounds/ground26_palette.bin"
+bsg26_rpbase:       dc.w GroundTiles26-bsg26_rpbase
+Ground27:           incbin "graphics/grounds/ground27_palette.bin"
+bsg27_rpbase:       dc.w GroundTiles26-bsg27_rpbase
+Ground28:           incbin "graphics/grounds/ground28_palette.bin"
+bsg28_rpbase:       dc.w GroundTiles03-bsg28_rpbase
+GroundTiles00:      incbin "graphics/grounds/groundtiles00.bin"
+GroundTiles01:      incbin "graphics/grounds/groundtiles01.bin"
+GroundTiles05:      incbin "graphics/grounds/groundtiles05.bin"
+GroundTiles14:      incbin "graphics/grounds/groundtiles14.bin"
+GroundTiles03:      incbin "graphics/grounds/groundtiles03.bin"
+GroundTiles08:      incbin "graphics/grounds/groundtiles08.bin"
+GroundTiles09:      incbin "graphics/grounds/groundtiles09.bin"
+GroundTiles17:      incbin "graphics/grounds/groundtiles17.bin"
+GroundTiles25:      incbin "graphics/grounds/groundtiles25.bin"
+GroundTiles26:      incbin "graphics/grounds/groundtiles26.bin"
 pt_WeaponSprites:   dc.l WeaponSprite00
 										dc.l WeaponSprite01
 										dc.l WeaponSprite02
@@ -135,31 +134,30 @@ pt_WeaponSprites:   dc.l WeaponSprite00
 										dc.l WeaponSprite20
 										dc.l WeaponSprite21
 										dc.l WeaponSprite22
-WeaponSprite00:     incbin "sprites/weapons/weaponsprite00.bin"
-WeaponSprite01:     incbin "sprites/weapons/weaponsprite01.bin"
-WeaponSprite02:     incbin "sprites/weapons/weaponsprite02.bin"
-WeaponSprite03:     incbin "sprites/weapons/weaponsprite03.bin"
-WeaponSprite04:     incbin "sprites/weapons/weaponsprite04.bin"
-WeaponSprite05:     incbin "sprites/weapons/weaponsprite05.bin"
-WeaponSprite06:     incbin "sprites/weapons/weaponsprite06.bin"
-WeaponSprite07:     incbin "sprites/weapons/weaponsprite07.bin"
-WeaponSprite08:     incbin "sprites/weapons/weaponsprite08.bin"
-WeaponSprite09:     incbin "sprites/weapons/weaponsprite09.bin"
-WeaponSprite10:     incbin "sprites/weapons/weaponsprite10.bin"
-WeaponSprite11:     incbin "sprites/weapons/weaponsprite11.bin"
-WeaponSprite12:     incbin "sprites/weapons/weaponsprite12.bin"
-WeaponSprite13:     incbin "sprites/weapons/weaponsprite13.bin"
-WeaponSprite14:     incbin "sprites/weapons/weaponsprite14.bin"
-WeaponSprite15:     incbin "sprites/weapons/weaponsprite15.bin"
-WeaponSprite16:     incbin "sprites/weapons/weaponsprite16.bin"
-WeaponSprite17:     incbin "sprites/weapons/weaponsprite17.bin"
-WeaponSprite18:     incbin "sprites/weapons/weaponsprite18.bin"
-WeaponSprite19:     incbin "sprites/weapons/weaponsprite19.bin"
-WeaponSprite20:     incbin "sprites/weapons/weaponsprite20.bin"
-WeaponSprite21:     incbin "sprites/weapons/weaponsprite21.bin"
-WeaponSprite22:     incbin "sprites/weapons/weaponsprite22.bin"
-plt_BattleSceneWeaponColors:
-										incbin "sprites/weapons/weaponspalette.bin"
+WeaponSprite00:     incbin "graphics/weapons/weaponsprite00.bin"
+WeaponSprite01:     incbin "graphics/weapons/weaponsprite01.bin"
+WeaponSprite02:     incbin "graphics/weapons/weaponsprite02.bin"
+WeaponSprite03:     incbin "graphics/weapons/weaponsprite03.bin"
+WeaponSprite04:     incbin "graphics/weapons/weaponsprite04.bin"
+WeaponSprite05:     incbin "graphics/weapons/weaponsprite05.bin"
+WeaponSprite06:     incbin "graphics/weapons/weaponsprite06.bin"
+WeaponSprite07:     incbin "graphics/weapons/weaponsprite07.bin"
+WeaponSprite08:     incbin "graphics/weapons/weaponsprite08.bin"
+WeaponSprite09:     incbin "graphics/weapons/weaponsprite09.bin"
+WeaponSprite10:     incbin "graphics/weapons/weaponsprite10.bin"
+WeaponSprite11:     incbin "graphics/weapons/weaponsprite11.bin"
+WeaponSprite12:     incbin "graphics/weapons/weaponsprite12.bin"
+WeaponSprite13:     incbin "graphics/weapons/weaponsprite13.bin"
+WeaponSprite14:     incbin "graphics/weapons/weaponsprite14.bin"
+WeaponSprite15:     incbin "graphics/weapons/weaponsprite15.bin"
+WeaponSprite16:     incbin "graphics/weapons/weaponsprite16.bin"
+WeaponSprite17:     incbin "graphics/weapons/weaponsprite17.bin"
+WeaponSprite18:     incbin "graphics/weapons/weaponsprite18.bin"
+WeaponSprite19:     incbin "graphics/weapons/weaponsprite19.bin"
+WeaponSprite20:     incbin "graphics/weapons/weaponsprite20.bin"
+WeaponSprite21:     incbin "graphics/weapons/weaponsprite21.bin"
+WeaponSprite22:     incbin "graphics/weapons/weaponsprite22.bin"
+plt_WeaponPalettes: incbin "graphics/weapons/weaponspalettes.bin"
 pt_SpellGraphics:   dc.l SpellGraphics00
 										dc.l SpellGraphics01
 										dc.l SpellGraphics02
@@ -183,33 +181,33 @@ pt_SpellGraphics:   dc.l SpellGraphics00
 										dc.l SpellGraphics20
 										dc.l SpellGraphics21
 										dc.l SpellGraphics22
-SpellGraphics00:    incbin "spells/spellgraphics00.bin"
-SpellGraphics01:    incbin "spells/spellgraphics01.bin"
-SpellGraphics02:    incbin "spells/spellgraphics02.bin"
-SpellGraphics03:    incbin "spells/spellgraphics03.bin"
-SpellGraphics04:    incbin "spells/spellgraphics04.bin"
-SpellGraphics05:    incbin "spells/spellgraphics05.bin"
-SpellGraphics06:    incbin "spells/spellgraphics06.bin"
-SpellGraphics07:    incbin "spells/spellgraphics07.bin"
-SpellGraphics08:    incbin "spells/spellgraphics08.bin"
-SpellGraphics09:    incbin "spells/spellgraphics09.bin"
-SpellGraphics10:    incbin "spells/spellgraphics10.bin"
-SpellGraphics11:    incbin "spells/spellgraphics11.bin"
-SpellGraphics12:    incbin "spells/spellgraphics12.bin"
-SpellGraphics13:    incbin "spells/spellgraphics13.bin"
-SpellGraphics14:    incbin "spells/spellgraphics14.bin"
-SpellGraphics15:    incbin "spells/spellgraphics15.bin"
-SpellGraphics16:    incbin "spells/spellgraphics16.bin"
-SpellGraphics17:    incbin "spells/spellgraphics17.bin"
-SpellGraphics18:    incbin "spells/spellgraphics18.bin"
-SpellGraphics19:    incbin "spells/spellgraphics19.bin"
-SpellGraphics20:    incbin "spells/spellgraphics20.bin"
-SpellGraphics21:    incbin "spells/spellgraphics21.bin"
-SpellGraphics22:    incbin "spells/spellgraphics22.bin"
-plt_Witch:          incbin "misc/specialscreens/witchpalette.bin"
-witchLayout:        incbin "misc/specialscreens/witchlayout.bin"
-witchTiles:         incbin "misc/specialscreens/witchtiles.bin"
-plt_WitchEnd:       incbin "misc/specialscreens/endingwitchpalette.bin"
-witchEndLayout:     incbin "misc/specialscreens/endingwitchlayout.bin"
-witchEndTiles:      incbin "misc/specialscreens/endingwitchtiles.bin"
+SpellGraphics00:    incbin "graphics/spells/spellgraphics00.bin"
+SpellGraphics01:    incbin "graphics/spells/spellgraphics01.bin"
+SpellGraphics02:    incbin "graphics/spells/spellgraphics02.bin"
+SpellGraphics03:    incbin "graphics/spells/spellgraphics03.bin"
+SpellGraphics04:    incbin "graphics/spells/spellgraphics04.bin"
+SpellGraphics05:    incbin "graphics/spells/spellgraphics05.bin"
+SpellGraphics06:    incbin "graphics/spells/spellgraphics06.bin"
+SpellGraphics07:    incbin "graphics/spells/spellgraphics07.bin"
+SpellGraphics08:    incbin "graphics/spells/spellgraphics08.bin"
+SpellGraphics09:    incbin "graphics/spells/spellgraphics09.bin"
+SpellGraphics10:    incbin "graphics/spells/spellgraphics10.bin"
+SpellGraphics11:    incbin "graphics/spells/spellgraphics11.bin"
+SpellGraphics12:    incbin "graphics/spells/spellgraphics12.bin"
+SpellGraphics13:    incbin "graphics/spells/spellgraphics13.bin"
+SpellGraphics14:    incbin "graphics/spells/spellgraphics14.bin"
+SpellGraphics15:    incbin "graphics/spells/spellgraphics15.bin"
+SpellGraphics16:    incbin "graphics/spells/spellgraphics16.bin"
+SpellGraphics17:    incbin "graphics/spells/spellgraphics17.bin"
+SpellGraphics18:    incbin "graphics/spells/spellgraphics18.bin"
+SpellGraphics19:    incbin "graphics/spells/spellgraphics19.bin"
+SpellGraphics20:    incbin "graphics/spells/spellgraphics20.bin"
+SpellGraphics21:    incbin "graphics/spells/spellgraphics21.bin"
+SpellGraphics22:    incbin "graphics/spells/spellgraphics22.bin"
+plt_Witch:          incbin "graphics/specialscreens/witchpalette.bin"
+witchLayout:        incbin "graphics/specialscreens/witchlayout.bin"
+witchTiles:         incbin "graphics/specialscreens/witchtiles.bin"
+plt_WitchEnd:       incbin "graphics/specialscreens/endingwitchpalette.bin"
+witchEndLayout:     incbin "graphics/specialscreens/endingwitchlayout.bin"
+witchEndTiles:      incbin "graphics/specialscreens/endingwitchtiles.bin"
 										align $8000

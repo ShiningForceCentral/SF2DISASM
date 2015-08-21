@@ -15164,8 +15164,8 @@ VDPTileOrder_MemberStatsWindow:
 										dc.b $61 
 										dc.b $D8 
 										dc.b $60 
-ItemDefs:           incbin "misc/itemdefs.bin"
-SpellDefs:          incbin "spells/spelldefs.bin"
-ItemNames:          incbin "misc/itemnames.bin"
-ClassNames:         incbin "chardata/classnames.bin"
+ItemDefs:           incbin "data/itemdefs.bin"
+SpellDefs:          incbin "data/spelldefs.bin"
+ItemNames:          incbin "data/items/itemnames.bin"
+ClassNames:         incbin "data/classes/classnames.bin"
 										align $8000

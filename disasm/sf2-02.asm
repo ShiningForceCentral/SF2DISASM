@@ -9563,7 +9563,7 @@ loc_C232:
 
 	; End of function getResistanceToSpell
 
-tbl_SpellElements:  incbin "spells/spellelements.bin"
+tbl_SpellElements:  incbin "data/spellelements.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -12142,7 +12142,7 @@ loc_D81C:
 	; End of function sub_D7AA
 
 t_MoveTypeTerrainCosts:
-										incbin "battles/movetypeterraincosts.bin"
+										incbin "data/movetypeterraincosts.bin"
 unk_D8F4:           dc.b $FF
 										dc.b  $C
 										dc.b  $B
@@ -15560,7 +15560,7 @@ MoveCostData:       dc.b  $F                ; special move cost list for Kraken 
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
-SpellNames:         incbin "spells/spellnames.bin"
-AllyNames:          incbin "chardata/allynames.bin"
-EnemyNames:         incbin "chardata/enemynames.bin"
+SpellNames:         incbin "data/spells/spellnames.bin"
+AllyNames:          incbin "data/allynames.bin"
+EnemyNames:         incbin "data/enemynames.bin"
 algn_FF87:          align $8000

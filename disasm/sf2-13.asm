@@ -2717,7 +2717,7 @@ getAddrOfBattleDataSection:
 										clr.w   d0
 										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
 										lsl.w   #2,d0
-										lea     pt_BattleEntities(pc), a0
+										lea     pt_BattleSpriteSets(pc), a0
 										nop
 										movea.l (a0,d0.w),a0
 										tst.b   d2
@@ -3245,96 +3245,96 @@ loc_1B1A60:
 	; End of function sub_1B1A28
 
 EnemyData:          incbin "battles/enemydata.bin"
-pt_BattleEntities:  dc.l BattleEntitySetup00; battle entity data
-										dc.l BattleEntitySetup01
-										dc.l BattleEntitySetup02
-										dc.l BattleEntitySetup03
-										dc.l BattleEntitySetup04
-										dc.l BattleEntitySetup05
-										dc.l BattleEntitySetup06
-										dc.l BattleEntitySetup07
-										dc.l BattleEntitySetup08
-										dc.l BattleEntitySetup09
-										dc.l BattleEntitySetup10
-										dc.l BattleEntitySetup11
-										dc.l BattleEntitySetup12
-										dc.l BattleEntitySetup13
-										dc.l BattleEntitySetup14
-										dc.l BattleEntitySetup15
-										dc.l BattleEntitySetup16
-										dc.l BattleEntitySetup17
-										dc.l BattleEntitySetup18
-										dc.l BattleEntitySetup19
-										dc.l BattleEntitySetup20
-										dc.l BattleEntitySetup21
-										dc.l BattleEntitySetup22
-										dc.l BattleEntitySetup23
-										dc.l BattleEntitySetup24
-										dc.l BattleEntitySetup25
-										dc.l BattleEntitySetup26
-										dc.l BattleEntitySetup27
-										dc.l BattleEntitySetup28
-										dc.l BattleEntitySetup29
-										dc.l BattleEntitySetup30
-										dc.l BattleEntitySetup31
-										dc.l BattleEntitySetup32
-										dc.l BattleEntitySetup33
-										dc.l BattleEntitySetup34
-										dc.l BattleEntitySetup35
-										dc.l BattleEntitySetup36
-										dc.l BattleEntitySetup37
-										dc.l BattleEntitySetup38
-										dc.l BattleEntitySetup39
-										dc.l BattleEntitySetup40
-										dc.l BattleEntitySetup41
-										dc.l BattleEntitySetup42
-										dc.l BattleEntitySetup43
-										dc.l BattleEntitySetup44
-BattleEntitySetup00:incbin "battles/entitysetups/battleentitysetup00.bin"
-BattleEntitySetup01:incbin "battles/entitysetups/battleentitysetup01.bin"
-BattleEntitySetup02:incbin "battles/entitysetups/battleentitysetup02.bin"
-BattleEntitySetup03:incbin "battles/entitysetups/battleentitysetup03.bin"
-BattleEntitySetup04:incbin "battles/entitysetups/battleentitysetup04.bin"
-BattleEntitySetup05:incbin "battles/entitysetups/battleentitysetup05.bin"
-BattleEntitySetup06:incbin "battles/entitysetups/battleentitysetup06.bin"
-BattleEntitySetup07:incbin "battles/entitysetups/battleentitysetup07.bin"
-BattleEntitySetup08:incbin "battles/entitysetups/battleentitysetup08.bin"
-BattleEntitySetup09:incbin "battles/entitysetups/battleentitysetup09.bin"
-BattleEntitySetup10:incbin "battles/entitysetups/battleentitysetup10.bin"
-BattleEntitySetup11:incbin "battles/entitysetups/battleentitysetup11.bin"
-BattleEntitySetup12:incbin "battles/entitysetups/battleentitysetup12.bin"
-BattleEntitySetup13:incbin "battles/entitysetups/battleentitysetup13.bin"
-BattleEntitySetup14:incbin "battles/entitysetups/battleentitysetup14.bin"
-BattleEntitySetup15:incbin "battles/entitysetups/battleentitysetup15.bin"
-BattleEntitySetup16:incbin "battles/entitysetups/battleentitysetup16.bin"
-BattleEntitySetup17:incbin "battles/entitysetups/battleentitysetup17.bin"
-BattleEntitySetup18:incbin "battles/entitysetups/battleentitysetup18.bin"
-BattleEntitySetup19:incbin "battles/entitysetups/battleentitysetup19.bin"
-BattleEntitySetup20:incbin "battles/entitysetups/battleentitysetup20.bin"
-BattleEntitySetup21:incbin "battles/entitysetups/battleentitysetup21.bin"
-BattleEntitySetup22:incbin "battles/entitysetups/battleentitysetup22.bin"
-BattleEntitySetup23:incbin "battles/entitysetups/battleentitysetup23.bin"
-BattleEntitySetup24:incbin "battles/entitysetups/battleentitysetup24.bin"
-BattleEntitySetup25:incbin "battles/entitysetups/battleentitysetup25.bin"
-BattleEntitySetup26:incbin "battles/entitysetups/battleentitysetup26.bin"
-BattleEntitySetup27:incbin "battles/entitysetups/battleentitysetup27.bin"
-BattleEntitySetup28:incbin "battles/entitysetups/battleentitysetup28.bin"
-BattleEntitySetup29:incbin "battles/entitysetups/battleentitysetup29.bin"
-BattleEntitySetup30:incbin "battles/entitysetups/battleentitysetup30.bin"
-BattleEntitySetup31:incbin "battles/entitysetups/battleentitysetup31.bin"
-BattleEntitySetup32:incbin "battles/entitysetups/battleentitysetup32.bin"
-BattleEntitySetup33:incbin "battles/entitysetups/battleentitysetup33.bin"
-BattleEntitySetup34:incbin "battles/entitysetups/battleentitysetup34.bin"
-BattleEntitySetup35:incbin "battles/entitysetups/battleentitysetup35.bin"
-BattleEntitySetup36:incbin "battles/entitysetups/battleentitysetup36.bin"
-BattleEntitySetup37:incbin "battles/entitysetups/battleentitysetup37.bin"
-BattleEntitySetup38:incbin "battles/entitysetups/battleentitysetup38.bin"
-BattleEntitySetup39:incbin "battles/entitysetups/battleentitysetup39.bin"
-BattleEntitySetup40:incbin "battles/entitysetups/battleentitysetup40.bin"
-BattleEntitySetup41:incbin "battles/entitysetups/battleentitysetup41.bin"
-BattleEntitySetup42:incbin "battles/entitysetups/battleentitysetup42.bin"
-BattleEntitySetup43:incbin "battles/entitysetups/battleentitysetup43.bin"
-BattleEntitySetup44:incbin "battles/entitysetups/battleentitysetup44.bin"
+pt_BattleSpriteSets:dc.l BattleSpriteSet00  ; battle entity data
+										dc.l BattleSpriteSet01
+										dc.l BattleSpriteSet02
+										dc.l BattleSpriteSet03
+										dc.l BattleSpriteSet04
+										dc.l BattleSpriteSet05
+										dc.l BattleSpriteSet06
+										dc.l BattleSpriteSet07
+										dc.l BattleSpriteSet08
+										dc.l BattleSpriteSet09
+										dc.l BattleSpriteSet10
+										dc.l BattleSpriteSet11
+										dc.l BattleSpriteSet12
+										dc.l BattleSpriteSet13
+										dc.l BattleSpriteSet14
+										dc.l BattleSpriteSet15
+										dc.l BattleSpriteSet16
+										dc.l BattleSpriteSet17
+										dc.l BattleSpriteSet18
+										dc.l BattleSpriteSet19
+										dc.l BattleSpriteSet20
+										dc.l BattleSpriteSet21
+										dc.l BattleSpriteSet22
+										dc.l BattleSpriteSet23
+										dc.l BattleSpriteSet24
+										dc.l BattleSpriteSet25
+										dc.l BattleSpriteSet26
+										dc.l BattleSpriteSet27
+										dc.l BattleSpriteSet28
+										dc.l BattleSpriteSet29
+										dc.l BattleSpriteSet30
+										dc.l BattleSpriteSet31
+										dc.l BattleSpriteSet32
+										dc.l BattleSpriteSet33
+										dc.l BattleSpriteSet34
+										dc.l BattleSpriteSet35
+										dc.l BattleSpriteSet36
+										dc.l BattleSpriteSet37
+										dc.l BattleSpriteSet38
+										dc.l BattleSpriteSet39
+										dc.l BattleSpriteSet40
+										dc.l BattleSpriteSet41
+										dc.l BattleSpriteSet42
+										dc.l BattleSpriteSet43
+										dc.l BattleSpriteSet44
+BattleSpriteSet00:  incbin "battles/spritesets/battlespriteset00.bin"
+BattleSpriteSet01:  incbin "battles/spritesets/battlespriteset01.bin"
+BattleSpriteSet02:  incbin "battles/spritesets/battlespriteset02.bin"
+BattleSpriteSet03:  incbin "battles/spritesets/battlespriteset03.bin"
+BattleSpriteSet04:  incbin "battles/spritesets/battlespriteset04.bin"
+BattleSpriteSet05:  incbin "battles/spritesets/battlespriteset05.bin"
+BattleSpriteSet06:  incbin "battles/spritesets/battlespriteset06.bin"
+BattleSpriteSet07:  incbin "battles/spritesets/battlespriteset07.bin"
+BattleSpriteSet08:  incbin "battles/spritesets/battlespriteset08.bin"
+BattleSpriteSet09:  incbin "battles/spritesets/battlespriteset09.bin"
+BattleSpriteSet10:  incbin "battles/spritesets/battlespriteset10.bin"
+BattleSpriteSet11:  incbin "battles/spritesets/battlespriteset11.bin"
+BattleSpriteSet12:  incbin "battles/spritesets/battlespriteset12.bin"
+BattleSpriteSet13:  incbin "battles/spritesets/battlespriteset13.bin"
+BattleSpriteSet14:  incbin "battles/spritesets/battlespriteset14.bin"
+BattleSpriteSet15:  incbin "battles/spritesets/battlespriteset15.bin"
+BattleSpriteSet16:  incbin "battles/spritesets/battlespriteset16.bin"
+BattleSpriteSet17:  incbin "battles/spritesets/battlespriteset17.bin"
+BattleSpriteSet18:  incbin "battles/spritesets/battlespriteset18.bin"
+BattleSpriteSet19:  incbin "battles/spritesets/battlespriteset19.bin"
+BattleSpriteSet20:  incbin "battles/spritesets/battlespriteset20.bin"
+BattleSpriteSet21:  incbin "battles/spritesets/battlespriteset21.bin"
+BattleSpriteSet22:  incbin "battles/spritesets/battlespriteset22.bin"
+BattleSpriteSet23:  incbin "battles/spritesets/battlespriteset23.bin"
+BattleSpriteSet24:  incbin "battles/spritesets/battlespriteset24.bin"
+BattleSpriteSet25:  incbin "battles/spritesets/battlespriteset25.bin"
+BattleSpriteSet26:  incbin "battles/spritesets/battlespriteset26.bin"
+BattleSpriteSet27:  incbin "battles/spritesets/battlespriteset27.bin"
+BattleSpriteSet28:  incbin "battles/spritesets/battlespriteset28.bin"
+BattleSpriteSet29:  incbin "battles/spritesets/battlespriteset29.bin"
+BattleSpriteSet30:  incbin "battles/spritesets/battlespriteset30.bin"
+BattleSpriteSet31:  incbin "battles/spritesets/battlespriteset31.bin"
+BattleSpriteSet32:  incbin "battles/spritesets/battlespriteset32.bin"
+BattleSpriteSet33:  incbin "battles/spritesets/battlespriteset33.bin"
+BattleSpriteSet34:  incbin "battles/spritesets/battlespriteset34.bin"
+BattleSpriteSet35:  incbin "battles/spritesets/battlespriteset35.bin"
+BattleSpriteSet36:  incbin "battles/spritesets/battlespriteset36.bin"
+BattleSpriteSet37:  incbin "battles/spritesets/battlespriteset37.bin"
+BattleSpriteSet38:  incbin "battles/spritesets/battlespriteset38.bin"
+BattleSpriteSet39:  incbin "battles/spritesets/battlespriteset39.bin"
+BattleSpriteSet40:  incbin "battles/spritesets/battlespriteset40.bin"
+BattleSpriteSet41:  incbin "battles/spritesets/battlespriteset41.bin"
+BattleSpriteSet42:  incbin "battles/spritesets/battlespriteset42.bin"
+BattleSpriteSet43:  incbin "battles/spritesets/battlespriteset43.bin"
+BattleSpriteSet44:  incbin "battles/spritesets/battlespriteset44.bin"
 SpecialBattles:     incbin "battles/specialbattles.bin"
 unk_1B6DBC:         dc.b   5
 										dc.b   0
@@ -3366,6 +3366,6 @@ unk_1B6DD5:         dc.b   2
 										dc.b $54 
 										dc.b   1
 										dc.b $50 
-plt_endKiss:        incbin "misc/specialscreens/endingkisspalette.bin"
-endKissPicture:     incbin "misc/specialscreens/endingkisstiles.bin"
+plt_endKiss:        incbin "graphics/specialscreens/endingkisspalette.bin"
+endKissPicture:     incbin "graphics/specialscreens/endingkisstiles.bin"
 										align $4000

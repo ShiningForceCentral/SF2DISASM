@@ -12,7 +12,7 @@ ms_map14_flag1CA_EntityEvents:
 
 sub_58F44:
 										
-										jsr     (MapTiles050+$3D6-ms_map14_flag1CA_EntityEvents)
+										jsr     (MapTileset050+$3D6-ms_map14_flag1CA_EntityEvents)
 										rts
 
 	; End of function sub_58F44

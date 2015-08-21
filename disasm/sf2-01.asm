@@ -3954,13 +3954,14 @@ loc_1F3A:
 										dbf     d3,loc_1F30
 										bra.w   loc_2040
 loc_1F44:
-										bne.s   loc_1F4C
+										bne.s   word_1F4C       
 										move.w  (a0)+,d0
 										addx.w  d0,d0
 										bcc.s   loc_1F3A
-loc_1F4C:
-										exg     d6,d4
-										add.w   d4,d7
+word_1F4C:
+										
+										dc.w $CD44              ;  exg     d6,d4
+										dc.w $DE44              ;  add.w   d4,d7
 										dbf     d3,loc_1F30
 										bra.w   loc_2040
 loc_1F58:
@@ -3976,21 +3977,22 @@ loc_1F64:
 										bcs.s   loc_1F76
 loc_1F68:
 										exg     d6,a3
-										exg     d6,d4
-										add.w   d4,d7
+										dc.w $CD44              ; exg     d6,d4
+										dc.w $DE44              ; add.w   d4,d7
 										dbf     d3,loc_1F30
 loc_1F72:
 										bra.w   loc_2040
 loc_1F76:
-										bne.s   loc_1F7E
+										bne.s   word_1F7E       
 										move.w  (a0)+,d0
 										addx.w  d0,d0
 										bcc.s   loc_1F68
-loc_1F7E:
-										exg     a4,a3
-										exg     d6,a3
-										exg     d6,d4
-										add.w   d4,d7
+word_1F7E:
+										
+										dc.w $C94B              ; exg     a4,a3
+										dc.w $CD8B              ; exg     d6,a3
+										dc.w $CD44              ; exg     d6,d4
+										dc.w $DE44              ; add.w   d4,d7
 										dbf     d3,loc_1F30
 										bra.w   loc_2040
 loc_1F8E:
@@ -11852,7 +11854,7 @@ loc_60B6:
 										add.w   d6,d1
 										subq.w  #1,d1
 										lsl.w   #2,d1
-										lea     (pt_EntitySprites).l,a0
+										lea     (pt_MapSprites).l,a0
 loc_60F4:
 										movea.l (a0,d1.w),a0
 										lea     (FF8002_LOADING_SPACE).l,a1
@@ -11943,7 +11945,7 @@ loc_61BA:
 										add.w   d6,d1
 										subq.w  #1,d1
 										lsl.w   #2,d1
-										lea     (pt_EntitySprites).l,a0
+										lea     (pt_MapSprites).l,a0
 										movea.l (a0,d1.w),a0
 										lea     (FF8002_LOADING_SPACE).l,a1
 										jsr     (loadSpriteData).w
@@ -14863,7 +14865,7 @@ loc_7982:
 
 	; End of function AlterMapIndexIfChanged
 
-ListOfChangingMaps: dc.l ScriptBank01+$749  ; maps to change if flags are set
+ListOfChangingMaps: dc.l TextBank01+$749    ; maps to change if flags are set
 																						; map idx (word), flag (word), new map idx (word)
 										dc.b   0
 										dc.b   4

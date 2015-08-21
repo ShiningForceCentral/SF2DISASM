@@ -6,5 +6,5 @@
 
 
 p_Icons:            dc.l Icons
-Icons:              incbin "icons/icons.bin"
+Icons:              incbin "graphics/icons/icons.bin"
 										align $8000

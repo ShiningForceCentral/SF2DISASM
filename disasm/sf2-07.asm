@@ -746,8 +746,8 @@ return_44336:
 
 	; End of function sub_44298
 
-OverworldFollowers: incbin "misc/overworldfollowoers.bin"
-Followers:          incbin "misc/followers.bin"
+OverworldFollowers: incbin "maps/overworldfollowoers.bin"
+Followers:          incbin "maps/followers.bin"
 pt_eas_Followers:   dc.l eas_Follower1      
 										dc.l eas_Follower2      
 										dc.l eas_Follower3      
@@ -1387,7 +1387,7 @@ return_44A5C:
 
 	; End of function getCharacterSpriteIdx
 
-t_AllySprites:      incbin "chardata/allyspriteids.bin"
+t_AllySprites:      incbin "data/allyspriteids.bin"
 																						; sprite IDs for each force character in battle
 
 ; =============== S U B R O U T I N E =======================================
@@ -1408,7 +1408,7 @@ loc_44A8E:
 										move.w  d1,-(sp)
 										jsr     j_GetEnemyID
 										clr.w   d4
-										move.b  t_MonsterSprites(pc,d1.w),d4
+										move.b  t_EnemySprites(pc,d1.w),d4
 										move.w  (sp)+,d1
 loc_44A9E:
 										
@@ -1417,7 +1417,7 @@ loc_44A9E:
 
 	; End of function GetCombatantSpriteIdx
 
-t_MonsterSprites:   incbin "chardata/enemyspriteids.bin"
+t_EnemySprites:     incbin "data/enemyspriteids.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2100,7 +2100,7 @@ loc_45674:
 	; End of function GetEntityPortraitAndSpeechSound
 
 tbl_SpriteToPortraitnBlip:
-										incbin "chardata/spriteportraitsnblips.bin"
+										incbin "data/spriteportraitsnblips.bin"
 																						; bowie
 
 ; =============== S U B R O U T I N E =======================================
@@ -4658,7 +4658,7 @@ loc_470DA:
 										add.w   d6,d1
 										subq.w  #1,d1
 										lsl.w   #2,d1
-										lea     (pt_EntitySprites).l,a0
+										lea     (pt_MapSprites).l,a0
 										movea.l (a0,d1.w),a0
 										jsr     (loadSpriteData).w
 										movea.l a1,a0

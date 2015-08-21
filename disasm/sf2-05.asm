@@ -1923,7 +1923,7 @@ loc_21028:
 
 	; End of function ChurchActions
 
-promotion_data:     incbin "chardata/promotions.bin"
+Promotions:         incbin "data/promotions.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1997,7 +1997,7 @@ loc_21102:
 FindPromotionSection:
 										
 										movem.l d0/d6,-(sp)
-										lea     promotion_data(pc), a0
+										lea     Promotions(pc), a0
 										move.w  d2,d6
 										subq.w  #1,d6
 										bcs.w   loc_21126
@@ -3338,9 +3338,9 @@ loc_21F5C:
 	; End of function PickMithrilWeapon
 
 tbl_MithrilWeaponClassLists:
-										incbin "chardata/mithrilweaponclasses.bin"
+										incbin "data/mithrilweaponclasses.bin"
 tbl_MithrilWeaponLists:
-										incbin "chardata/mithrilweapons.bin"
+										incbin "data/mithrilweapons.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -5873,7 +5873,7 @@ loc_234DA:
 										add.w   d6,d1
 										subq.w  #1,d1
 										lsl.w   #2,d1
-										lea     (pt_EntitySprites).l,a0
+										lea     (pt_MapSprites).l,a0
 										movea.l (a0,d1.w),a0
 										lea     (FF6802_LOADING_SPACE).l,a1
 										jsr     (loadSpriteData).w
@@ -10316,16 +10316,16 @@ loc_25DF0:
 	; End of function sub_25D98
 
 specialSprites_Taros:
-										incbin "sprites/specialsprites/taros.bin"
+										incbin "graphics/specialsprites/taros.bin"
 specialSprites_Kraken:
-										incbin "sprites/specialsprites/kraken.bin"
+										incbin "graphics/specialsprites/kraken.bin"
 specialSprites_NazcaShip:
-										incbin "sprites/specialsprites/nazcaship.bin"
+										incbin "graphics/specialsprites/nazcaship.bin"
 specialSprites_EvilSpirit:
-										incbin "sprites/specialsprites/evilspirit.bin"
+										incbin "graphics/specialsprites/evilspirit.bin"
 specialSprites_EvilSpiritAlt:
-										incbin "sprites/specialsprites/evilspiritalt.bin"
-specialSprites_Zeon:incbin "sprites/specialsprites/zeon.bin"
+										incbin "graphics/specialsprites/evilspiritalt.bin"
+specialSprites_Zeon:incbin "graphics/specialsprites/zeon.bin"
 byte_2784C:         dc.b 0
 										dc.b $5C 
 										dc.b  $A
