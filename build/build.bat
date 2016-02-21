@@ -10,7 +10,7 @@ cd ../disasm/sound/
 ..\..\tools\asw\p2bin.exe ..\cube.p .\driver.bin -k -r $0000-$1fff
 cd ../
 echo Assembling game ...
-SET "buildname=sf1build-%date:~6,4%%date:~3,2%%date:~0,2%-%time:~0,2%%time:~3,2%%time:~6,2%.bin"
+SET "buildname=sf2build-%date:~6,4%%date:~3,2%%date:~0,2%-%time:~0,2%%time:~3,2%%time:~6,2%.bin"
 @"../tools/asm68k" /o ae- /p sf2.asm, "../build/%buildname%" > ../build/output.log
 echo End of assembly, produced %buildname%
 
