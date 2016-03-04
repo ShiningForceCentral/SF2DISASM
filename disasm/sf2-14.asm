@@ -12,11 +12,11 @@ p_plt_BattleSceneWeaponColors:
 										dc.l plt_WeaponPalettes
 p_pt_SpellGraphics: dc.l pt_SpellGraphics
 p_plt_Witch:        dc.l plt_Witch
-p_witchLayout:      dc.l witchLayout
-p_witchTiles:       dc.l witchTiles
+p_WitchLayout:      dc.l WitchLayout
+p_WitchTiles:       dc.l WitchTiles
 p_plt_WitchEnd:     dc.l plt_WitchEnd
-p_witchEndLayout:   dc.l witchEndLayout
-p_witchEndTiles:    dc.l witchEndTiles
+p_WitchEndLayout:   dc.l WitchEndLayout
+p_WitchEndTiles:    dc.l WitchEndTiles
 pt_Grounds:         dc.l Ground00
 										dc.l Ground01
 										dc.l Ground02
@@ -205,9 +205,9 @@ SpellGraphics20:    incbin "graphics/spells/spellgraphics20.bin"
 SpellGraphics21:    incbin "graphics/spells/spellgraphics21.bin"
 SpellGraphics22:    incbin "graphics/spells/spellgraphics22.bin"
 plt_Witch:          incbin "graphics/specialscreens/witchpalette.bin"
-witchLayout:        incbin "graphics/specialscreens/witchlayout.bin"
-witchTiles:         incbin "graphics/specialscreens/witchtiles.bin"
+WitchLayout:        incbin "graphics/specialscreens/witchlayout.bin"
+WitchTiles:         incbin "graphics/specialscreens/witchtiles.bin"
 plt_WitchEnd:       incbin "graphics/specialscreens/endingwitchpalette.bin"
-witchEndLayout:     incbin "graphics/specialscreens/endingwitchlayout.bin"
-witchEndTiles:      incbin "graphics/specialscreens/endingwitchtiles.bin"
+WitchEndLayout:     incbin "graphics/specialscreens/endingwitchlayout.bin"
+WitchEndTiles:      incbin "graphics/specialscreens/endingwitchtiles.bin"
 										align $8000

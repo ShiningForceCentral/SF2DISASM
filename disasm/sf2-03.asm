@@ -53,11 +53,11 @@ sub_10010:
 
 ; =============== S U B R O U T I N E =======================================
 
-CreateFighterMiniStatusWindow:
+j_CreateFighterMiniStatusWindow:
 										
-										jmp     CreateFighterMiniStatusWindow_0(pc)
+										jmp     CreateFighterMiniStatusWindow(pc)
 
-	; End of function CreateFighterMiniStatusWindow
+	; End of function j_CreateFighterMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -116,11 +116,11 @@ sub_1002C:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_memberStatsScreen:
+j_MemberStatsScreen:
 										
-										jmp     memberStatsScreen(pc)
+										jmp     MemberStatsScreen(pc)
 
-	; End of function j_memberStatsScreen
+	; End of function j_MemberStatsScreen
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -134,20 +134,20 @@ sub_10034:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_initPortraitWindow:
+j_InitPortraitWindow:
 										
-										jmp     initPortraitWindow(pc)
+										jmp     InitPortraitWindow(pc)
 
-	; End of function j_initPortraitWindow
+	; End of function j_InitPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_hidePortraitWindow:
+j_HidePortraitWindow:
 										
-										jmp     hidePortraitWindow(pc)
+										jmp     HidePortraitWindow(pc)
 
-	; End of function j_hidePortraitWindow
+	; End of function j_HidePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -242,11 +242,11 @@ sub_10064:
 
 ; =============== S U B R O U T I N E =======================================
 
-CreateLandEffectWindow:
+j_CreateLandEffectWindow:
 										
-										jmp     CreateLandEffectWindow_0(pc)
+										jmp     CreateLandEffectWindow(pc)
 
-	; End of function CreateLandEffectWindow
+	; End of function j_CreateLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -278,11 +278,11 @@ j_YesNoChoiceBox:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_yesNoPrompt:
+j_YesNoPrompt:
 										
-										jmp     yesNoPrompt(pc)
+										jmp     YesNoPrompt(pc)
 
-	; End of function j_yesNoPrompt
+	; End of function j_YesNoPrompt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -311,7 +311,7 @@ p_SpellData:        dc.l SpellDefs
 
 j_NumberPrompt:
 										
-										jmp     ExecuteNumberPrompt(pc)
+										jmp     NumberPrompt(pc)
 
 	; End of function j_NumberPrompt
 
@@ -327,11 +327,11 @@ j_DebugFlagSetter:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_specialBattle:
+j_SpecialBattle:
 										
-										jmp     specialBattle(pc)
+										jmp     SpecialBattle(pc)
 
-	; End of function j_specialBattle
+	; End of function j_SpecialBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -354,11 +354,11 @@ sub_100A4:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_witchSpeechBubbleMenu:
+j_WitchMainMenu:
 										
-										jmp     executeWitchMainMenu(pc)
+										jmp     WitchMainMenu(pc)
 
-	; End of function j_witchSpeechBubbleMenu
+	; End of function j_WitchMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -383,11 +383,11 @@ sub_100B0:
 
 ; related to end kiss
 
-sub_100B4:
+j_EndKiss:
 										
-										jmp     sub_12DEC(pc)   
+										jmp     EndKiss(pc)     
 
-	; End of function sub_100B4
+	; End of function j_EndKiss
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -401,23 +401,23 @@ sub_100B8:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_loadPortrait:
+j_LoadPortrait:
 										
-										jmp     loadPortrait(pc)
+										jmp     LoadPortrait(pc)
 
-	; End of function j_loadPortrait
+	; End of function j_LoadPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_getCharPortraitIdx:
+j_GetCharPortraitIdx:
 										
-										jmp     getCharPortraitIdx(pc)
+										jmp     GetCharPortraitIdx(pc)
 
-	; End of function j_getCharPortraitIdx
+	; End of function j_GetCharPortraitIdx
 
-pt_VDPTileOrder_MemberStatsWindow:
-										dc.l VDPTileOrder_MemberStatsWindow
+p_WindowLayout_MemberStats:
+										dc.l MemberStatsWindowLayout
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -628,8 +628,6 @@ ExecuteMenu:
 										addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 										link    a6,#-$C
 										move.w  d2,-4(a6)
-loc_10202:
-										
 										move.l  a0,-8(a6)
 										move.w  d1,-$A(a6)
 										move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
@@ -643,7 +641,7 @@ loc_1021C:
 										move.w  #$2015,d1
 loc_10220:
 										
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  d0,-$C(a6)
 										bsr.w   LoadDiamenuWindowVDPTileData
 										move.w  -4(a6),d0
@@ -655,7 +653,7 @@ loc_10220:
 										movea.l d0,a0
 										movea.l (a0),a0
 										lea     (DMA_SPACE_FF8804).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										bra.s   loc_1026E
 loc_10250:
 										
@@ -680,7 +678,7 @@ loc_1026E:
 										move.w  #$C15,d1
 										move.w  #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.l  -8(a6),d0
 										beq.s   loc_102A2
 										movea.l d0,a0
@@ -693,7 +691,7 @@ loc_102A4:
 										btst    #2,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_102B6
 										moveq   #1,d1
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_10328
 loc_102B6:
@@ -701,7 +699,7 @@ loc_102B6:
 										btst    #3,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_102C8
 										moveq   #2,d1
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_10328
 loc_102C8:
@@ -709,7 +707,7 @@ loc_102C8:
 										btst    #0,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_102DA
 										clr.w   d1
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_10328
 loc_102DA:
@@ -717,7 +715,7 @@ loc_102DA:
 										btst    #1,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_102EC
 										moveq   #3,d1
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_10328
 loc_102EC:
@@ -756,7 +754,7 @@ loc_10328:
 										bsr.w   LoadDiamenuWindowVDPTileData
 										move.w  -$C(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										move.l  -8(a6),d0
 										beq.s   loc_10356
 										movea.l d0,a0
@@ -795,7 +793,7 @@ loc_10398:
 										
 										move.w  #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  -$C(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).w
 										movem.w (sp)+,d0-d1
@@ -812,12 +810,12 @@ loc_10398:
 
 LoadDiamenuWindowVDPTileData:
 										
-										lea     DIAMENU_LAYOUT(pc), a0
+										lea     DiamondMenuLayout(pc), a0
 										move.w  -$C(a6),d0
 										clr.w   d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
 										move.w  #$D8,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										move.w  -4(a6),d0
 										lsl.w   #2,d0
 										lea     pt_MenuOptions(pc), a0
@@ -864,7 +862,7 @@ loc_10420:
 										lea     ($B800).l,a1
 										move.w  #$90,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function LoadVDPTileListForDiamenuIconTop
 
@@ -884,7 +882,7 @@ loc_10440:
 										lea     ($B920).l,a1
 										move.w  #$C0,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function LoadVDPTileListForDiamenuIconLeft
 
@@ -904,7 +902,7 @@ loc_1046A:
 										lea     ($BAA0).l,a1
 										move.w  #$C0,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function LoadVDPTileListForDiamenuIconRight
 
@@ -1006,7 +1004,7 @@ loc_10558:
 										lea     ($BC20).l,a1
 										move.w  #$90,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function LoadVDPTileListForDiamenuIconBottom
 
@@ -1052,18 +1050,18 @@ loc_105AE:
 										move.w  #$2015,d1
 loc_105B2:
 										
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  d0,-$C(a6)
 										bsr.w   sub_10748
 										lea     (DMA_SPACE_FF8804).l,a1
 										move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
-										bsr.w   loadHighlightableItemIcon
+										bsr.w   LoadHighlightableItemIcon
 										move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
-										bsr.w   loadHighlightableItemIcon
+										bsr.w   LoadHighlightableItemIcon
 										move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
-										bsr.w   loadHighlightableItemIcon
+										bsr.w   LoadHighlightableItemIcon
 										move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
-										bsr.w   loadHighlightableItemIcon
+										bsr.w   LoadHighlightableItemIcon
 										clr.w   d6
 										bsr.w   sub_10800
 										bsr.w   sub_10820
@@ -1073,7 +1071,7 @@ loc_105B2:
 										move.w  #$C15,d1
 										move.w  #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.l  -8(a6),d0
 										beq.s   loc_10614
 										movea.l d0,a0
@@ -1088,7 +1086,7 @@ loc_10616:
 										moveq   #1,d1
 										cmpi.w  #$7F,((DISPLAYED_ICON_2-$1000000)).w 
 										beq.s   loc_10630
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_106B4
 loc_10630:
@@ -1098,7 +1096,7 @@ loc_10630:
 										moveq   #2,d1
 										cmpi.w  #$7F,((DISPLAYED_ICON_3-$1000000)).w 
 										beq.s   loc_1064A
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_106B4
 loc_1064A:
@@ -1106,7 +1104,7 @@ loc_1064A:
 										btst    #0,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_1065C
 										clr.w   d1
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_106B4
 loc_1065C:
@@ -1116,7 +1114,7 @@ loc_1065C:
 										moveq   #3,d1
 										cmpi.w  #$7F,((DISPLAYED_ICON_4-$1000000)).w 
 										beq.s   loc_10676
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_106B4
 loc_10676:
@@ -1149,7 +1147,7 @@ loc_106B4:
 										clr.w   d0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 										clr.w   d6
-										bsr.w   somethingRelatedToMenuChoiceAgain
+										bsr.w   SomethingRelatedToMenuChoiceAgain
 										move.w  (sp)+,d0
 										move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 										bsr.w   sub_10748
@@ -1161,13 +1159,13 @@ loc_106D6:
 										
 										move.w  -$C(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										move.l  -8(a6),d0
 										moveq   #$1D,d6
 loc_106E8:
 										
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-										bsr.w   somethingRelatedToMenuChoiceAgain
+										bsr.w   SomethingRelatedToMenuChoiceAgain
 										subq.w  #1,d6
 										bne.s   loc_106F6
 										moveq   #$1E,d6
@@ -1198,7 +1196,7 @@ loc_10726:
 										
 										move.w  #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  -$C(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).w
 										movem.w (sp)+,d0-d1
@@ -1214,12 +1212,12 @@ loc_10726:
 
 sub_10748:
 										
-										lea     unk_10FCC(pc), a0
+										lea     UnidentifiedLayout02(pc), a0
 										move.w  -$C(a6),d0
 										clr.w   d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
 										move.w  #$D8,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lsl.w   #1,d0
 										lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -1269,14 +1267,14 @@ aNothing:           dc.b '\Nothing',0
 
 ; =============== S U B R O U T I N E =======================================
 
-somethingRelatedToMenuChoiceAgain:
+SomethingRelatedToMenuChoiceAgain:
 										
 										andi.w  #3,d0
 										add.w   d0,d0
 										move.w  rjt_107F8(pc,d0.w),d0
 										jmp     rjt_107F8(pc,d0.w)
 
-	; End of function somethingRelatedToMenuChoiceAgain
+	; End of function SomethingRelatedToMenuChoiceAgain
 
 rjt_107F8:          dc.w sub_10800-rjt_107F8
 										dc.w sub_10820-rjt_107F8
@@ -1296,7 +1294,7 @@ loc_10810:
 										lea     ($B800).l,a1
 										move.w  #$60,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function sub_10800
 
@@ -1316,7 +1314,7 @@ loc_10830:
 										lea     ($B8C0).l,a1
 										move.w  #$80,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function sub_10820
 
@@ -1336,7 +1334,7 @@ loc_1085A:
 										lea     ($BA80).l,a1
 										move.w  #$80,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function sub_1084A
 
@@ -1434,7 +1432,7 @@ loc_10930:
 										lea     ($B9C0).l,a1
 										move.w  #$60,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function sub_10920
 
@@ -1446,7 +1444,7 @@ loc_10930:
 ;         D0 = spell idx
 ;     Out: A1 = end of affected section after copy
 
-loadIHighlightableSpellIcon:
+LoadIHighlightableSpellIcon:
 										
 										andi.w  #$3F,d0 
 										cmpi.w  #$3F,d0 
@@ -1458,25 +1456,25 @@ loc_10950:
 										addi.w  #$82,d0 
 loc_10954:
 										
-										bra.w   loadHighlightableIcon
+										bra.w   LoadHighlightableIcon
 
-	; End of function loadIHighlightableSpellIcon
+	; End of function LoadIHighlightableSpellIcon
 
 
 ; =============== S U B R O U T I N E =======================================
 
-loadHighlightableItemIcon:
+LoadHighlightableItemIcon:
 										
 										cmpi.w  #$80,d0 
-										beq.s   loadHighlightableIcon
+										beq.s   LoadHighlightableIcon
 										andi.w  #$7F,d0 
 
-	; End of function loadHighlightableItemIcon
+	; End of function LoadHighlightableItemIcon
 
 
 ; =============== S U B R O U T I N E =======================================
 
-loadHighlightableIcon:
+LoadHighlightableIcon:
 										
 										adda.w  #$C0,a1 
 										mulu.w  #$C0,d0 
@@ -1493,200 +1491,9 @@ loc_1097A:
 										dbf     d1,loc_1097A
 										rts
 
-	; End of function loadHighlightableIcon
+	; End of function LoadHighlightableIcon
 
-IconHighlightTiles: dc.b $FE
-										dc.b $EE
-										dc.b $EE
-										dc.b $EE
-										dc.b $EE
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EE
-										dc.b $EE
-										dc.b $EE
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FE
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EE
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FE
-										dc.b $EE
-										dc.b $EE
-										dc.b $EE
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $EF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FE
-										dc.b $EF
-										dc.b $EE
-										dc.b $EE
-										dc.b $EE
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
-										dc.b $FF
+IconHighlightTiles: incbin "graphics/iconhighlighttiles.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1708,18 +1515,18 @@ loc_10A70:
 										move.w  #$2015,d1
 loc_10A74:
 										
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  d0,-$C(a6)
 										bsr.w   sub_10C22
 										lea     (DMA_SPACE_FF8804).l,a1
 										move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
-										bsr.w   loadIHighlightableSpellIcon
+										bsr.w   LoadIHighlightableSpellIcon
 										move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
-										bsr.w   loadIHighlightableSpellIcon
+										bsr.w   LoadIHighlightableSpellIcon
 										move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
-										bsr.w   loadIHighlightableSpellIcon
+										bsr.w   LoadIHighlightableSpellIcon
 										move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
-										bsr.w   loadIHighlightableSpellIcon
+										bsr.w   LoadIHighlightableSpellIcon
 										clr.w   d6
 										bsr.w   sub_10800
 										bsr.w   sub_10820
@@ -1729,7 +1536,7 @@ loc_10A74:
 										move.w  #$C15,d1
 										move.w  #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 loc_10ACC:
 										
 										move.l  -8(a6),d0
@@ -1746,7 +1553,7 @@ loc_10AD8:
 										moveq   #1,d1
 										cmpi.w  #$3F,((DISPLAYED_ICON_2-$1000000)).w 
 										beq.s   loc_10AF2
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_10B76
 loc_10AF2:
@@ -1756,7 +1563,7 @@ loc_10AF2:
 										moveq   #2,d1
 										cmpi.w  #$3F,((DISPLAYED_ICON_3-$1000000)).w 
 										beq.s   loc_10B0C
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_10B76
 loc_10B0C:
@@ -1764,7 +1571,7 @@ loc_10B0C:
 										btst    #0,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_10B1E
 										clr.w   d1
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_10B76
 loc_10B1E:
@@ -1774,7 +1581,7 @@ loc_10B1E:
 										moveq   #3,d1
 										cmpi.w  #$3F,((DISPLAYED_ICON_4-$1000000)).w 
 										beq.s   loc_10B38
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_10B76
 loc_10B38:
@@ -1807,13 +1614,13 @@ loc_10B76:
 										clr.w   d0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 										clr.w   d6
-										bsr.w   doSomethingRelatedToMenuChoiceBis
+										bsr.w   DoSomethingRelatedToMenuChoiceBis
 										move.w  (sp)+,d0
 										move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 										bsr.w   sub_10C22
 										move.w  -$C(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										move.l  -8(a6),d0
 										beq.s   loc_10BA4
 										movea.l d0,a0
@@ -1824,7 +1631,7 @@ loc_10BA4:
 loc_10BA6:
 										
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-										bsr.w   doSomethingRelatedToMenuChoiceBis
+										bsr.w   DoSomethingRelatedToMenuChoiceBis
 										subq.w  #1,d6
 										bne.s   loc_10BB4
 										moveq   #$1E,d6
@@ -1845,7 +1652,7 @@ loc_10BBC:
 										bsr.w   sub_10C22
 										move.w  -$C(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										bra.w   loc_10ACC
 loc_10BEC:
 										
@@ -1862,7 +1669,7 @@ loc_10C02:
 										
 										move.w  #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  -$C(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).w
 										movem.w (sp)+,d0-d1
@@ -1877,12 +1684,12 @@ loc_10C02:
 
 sub_10C22:
 										
-										lea     unk_10EF4(pc), a0
+										lea     UnidentifiedLayout01(pc), a0
 										move.w  -$C(a6),d0
 										clr.w   d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
 										move.w  #$D8,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lsl.w   #1,d0
 										lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -1910,12 +1717,12 @@ sub_10C22:
 										lsr.w   #4,d1
 										adda.w  d1,a0
 										moveq   #$C,d7
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										move.w  -$C(a6),d0
 										move.w  #$C04,d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
 										move.w  (sp)+,d1
-										jsr     j_getSpellCost
+										jsr     j_GetSpellCost
 										move.w  d1,d0
 										moveq   #3,d7
 										bsr.w   WriteTilesFromNumber
@@ -1926,14 +1733,14 @@ sub_10C22:
 
 ; =============== S U B R O U T I N E =======================================
 
-doSomethingRelatedToMenuChoiceBis:
+DoSomethingRelatedToMenuChoiceBis:
 										
 										andi.w  #3,d0
 										add.w   d0,d0
 										move.w  rjt_10CBE(pc,d0.w),d0
 										jmp     rjt_10CBE(pc,d0.w)
 
-	; End of function doSomethingRelatedToMenuChoiceBis
+	; End of function DoSomethingRelatedToMenuChoiceBis
 
 rjt_10CBE:          dc.w sub_10800+$10000-rjt_10CBE
 										dc.w sub_10820+$10000-rjt_10CBE
@@ -1944,15 +1751,15 @@ rjt_10CBE:          dc.w sub_10800+$10000-rjt_10CBE
 
 sub_10CC6:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										move.w  d0,-(sp)
 										lea     TextHighlightTiles(pc), a0
 										lea     ($BC00).l,a1
 										move.w  #$A0,d0 
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										move.w  (sp)+,d0
 										move.w  d0,d4
 										lsr.w   #6,d4
@@ -1987,15 +1794,9 @@ loc_10D1E:
 										beq.s   loc_10D32
 										moveq   #$FFFFFFFF,d0
 										jsr     (WaitForVInt).w 
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										rts
-
-	; End of function sub_10CC6
-
-
-; START OF FUNCTION CHUNK FOR sub_10CC6
-
 loc_10D32:
 										
 										btst    #6,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -2007,21 +1808,21 @@ loc_10D3E:
 										beq.w   loc_10DC0
 loc_10D48:
 										
-										trap    #0
-
-; END OF FUNCTION CHUNK FOR sub_10CC6
-
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										lsl.w   #6,d5
 										or.w    d5,d0
 										jsr     (WaitForVInt).w 
 										rts
 
+	; End of function sub_10CC6
+
+
 ; =============== S U B R O U T I N E =======================================
 
 sub_10D56:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										movem.w d0-d5,-(sp)
 										lsl.w   #2,d4
@@ -2035,13 +1836,13 @@ sub_10D56:
 										move.w  #$903,d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
 										move.w  #$C,d7
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										move.w  (sp)+,d1
 										lsl.w   #6,d5
 										andi.w  #$3F,d1 
 										or.w    d5,d1
 										move.w  d1,((word_FFB18C-$1000000)).w
-										jsr     j_getSpellCost
+										jsr     j_GetSpellCost
 										move.w  d1,d0
 										moveq   #3,d7
 										adda.w  #$2A,a1 
@@ -2054,7 +1855,7 @@ loc_10DAE:
 										
 										move.w  -$C(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										movem.w (sp)+,d0-d5
 										moveq   #$13,d6
 loc_10DC0:
@@ -2101,654 +1902,12 @@ loc_10E18:
 
 	; End of function sub_10DE2
 
-DIAMENU_LAYOUT:     dc.b   0                ; tile layout for diamond menus
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $C0 
-										dc.b $C5 
-										dc.b $C1 
-										dc.b $C5 
-										dc.b $C2 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $C9 
-										dc.b $C5 
-										dc.b $CA 
-										dc.b $C5 
-										dc.b $CB 
-										dc.b $C5 
-										dc.b $C3 
-										dc.b $C5 
-										dc.b $C4 
-										dc.b $C5 
-										dc.b $C5 
-										dc.b $C5 
-										dc.b $D5 
-										dc.b $C5 
-										dc.b $D6 
-										dc.b $C5 
-										dc.b $D7 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $CC 
-										dc.b $C5 
-										dc.b $CD 
-										dc.b $C5 
-										dc.b $CE 
-										dc.b $C5 
-										dc.b $C6 
-										dc.b $C5 
-										dc.b $C7 
-										dc.b $C5 
-										dc.b $C8 
-										dc.b $C5 
-										dc.b $D8 
-										dc.b $C5 
-										dc.b $D9 
-										dc.b $C5 
-										dc.b $DA 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $CF 
-										dc.b $C5 
-										dc.b $D0 
-										dc.b $C5 
-										dc.b $D1 
-										dc.b $C5 
-										dc.b $E1 
-										dc.b $C5 
-										dc.b $E2 
-										dc.b $C5 
-										dc.b $E3 
-										dc.b $C5 
-										dc.b $DB 
-										dc.b $C5 
-										dc.b $DC 
-										dc.b $C5 
-										dc.b $DD 
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C8 
-										dc.b $60 
-										dc.b $C5 
-										dc.b $D2 
-										dc.b $C5 
-										dc.b $D3 
-										dc.b $C5 
-										dc.b $D4 
-										dc.b $C5 
-										dc.b $E4 
-										dc.b $C5 
-										dc.b $E5 
-										dc.b $C5 
-										dc.b $E6 
-										dc.b $C5 
-										dc.b $DE 
-										dc.b $C5 
-										dc.b $DF 
-										dc.b $C5 
-										dc.b $E0 
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $E7 
-										dc.b $C5 
-										dc.b $E8 
-										dc.b $C5 
-										dc.b $E9 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $D0 
-										dc.b $60 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D8 
-										dc.b $60 
-unk_10EF4:          dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $C0 
-										dc.b $C5 
-										dc.b $C1 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-unk_10F0A:          dc.b   0
-unk_10F0B:          dc.b   0
-unk_10F0C:          dc.b   0
-unk_10F0D:          dc.b   0
-unk_10F0E:          dc.b   0
-unk_10F0F:          dc.b   0
-unk_10F10:          dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $C6 
-										dc.b $C5 
-										dc.b $C7 
-										dc.b $C5 
-										dc.b $C2 
-										dc.b $C5 
-										dc.b $C3 
-										dc.b $C5 
-										dc.b $D4 
-										dc.b $C5 
-										dc.b $D5 
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C8 
-										dc.b $60 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $C8 
-										dc.b $C5 
-										dc.b $C9 
-										dc.b $C5 
-										dc.b $C4 
-										dc.b $C5 
-										dc.b $C5 
-										dc.b $C5 
-										dc.b $D6 
-										dc.b $C5 
-										dc.b $D7 
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $CA 
-										dc.b $C5 
-										dc.b $CB 
-										dc.b $C5 
-										dc.b $CE 
-										dc.b $C5 
-										dc.b $CF 
-										dc.b $C5 
-										dc.b $D8 
-										dc.b $C5 
-										dc.b $D9 
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $CC 
-										dc.b $C5 
-										dc.b $CD 
-										dc.b $C5 
-										dc.b $D0 
-										dc.b $C5 
-										dc.b $D1 
-										dc.b $C5 
-										dc.b $DA 
-										dc.b $C5 
-										dc.b $DB 
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $4D 
-										dc.b $C0 
-										dc.b $50 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $D2 
-										dc.b $C5 
-										dc.b $D3 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $D0 
-										dc.b $60 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D8 
-										dc.b $60 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-unk_10FCC:          dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $C0 
-										dc.b $C5 
-										dc.b $C1 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $C6 
-										dc.b $C5 
-										dc.b $C7 
-										dc.b $C5 
-										dc.b $C2 
-										dc.b $C5 
-										dc.b $C3 
-										dc.b $C5 
-										dc.b $D4 
-										dc.b $C5 
-										dc.b $D5 
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C8 
-										dc.b $60 
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $C8 
-										dc.b $C5 
-										dc.b $C9 
-										dc.b $C5 
-										dc.b $C4 
-										dc.b $C5 
-										dc.b $C5 
-										dc.b $C5 
-										dc.b $D6 
-										dc.b $C5 
-										dc.b $D7 
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $CA 
-										dc.b $C5 
-										dc.b $CB 
-										dc.b $C5 
-										dc.b $CE 
-										dc.b $C5 
-										dc.b $CF 
-										dc.b $C5 
-										dc.b $D8 
-										dc.b $C5 
-										dc.b $D9 
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $CC 
-										dc.b $C5 
-										dc.b $CD 
-										dc.b $C5 
-										dc.b $D0 
-										dc.b $C5 
-										dc.b $D1 
-										dc.b $C5 
-										dc.b $DA 
-										dc.b $C5 
-										dc.b $DB 
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $D2 
-										dc.b $C5 
-										dc.b $D3 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $D0 
-										dc.b $60 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D8 
-										dc.b $60 
+DiamondMenuLayout:  incbin "graphics/menus/diamondmenulayout.bin"
+																						; tile layout for diamond menus
+UnidentifiedLayout01:
+										incbin "graphics/unidentifiedlayout01.bin"
+UnidentifiedLayout02:
+										incbin "graphics/unidentifiedlayout02.bin"
 pt_SpellLevelBarTiles:
 										dc.l unk_110E4
 										dc.l unk_110E4
@@ -3180,17 +2339,17 @@ sub_113C6:
 										movem.l d0-a2,-(sp)
 										move.w  #$A09,d0
 										move.w  #$F612,d1
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  d0,((byte_FFB18E-$1000000)).w
-										lea     aAAAAAAAAPATT99PPPPD(pc), a0
+										lea     BattleEquipWindowLayout(pc), a0
 										move.w  #$B4,d7 
-										jsr     (copyBytes).w   
-										bsr.w   drawBattleEquipWindowStats
+										jsr     (CopyBytes).w   
+										bsr.w   DrawBattleEquipWindowStats
 										move.w  ((byte_FFB18E-$1000000)).w,d0
 										move.w  #$212,d1
 										move.w  #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										movem.l (sp)+,d0-a2
 										rts
 
@@ -3202,10 +2361,10 @@ sub_113C6:
 sub_11404:
 										
 										movem.l d0-a2,-(sp)
-										bsr.w   drawBattleEquipWindowStats
+										bsr.w   DrawBattleEquipWindowStats
 										move.w  ((byte_FFB18E-$1000000)).w,d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										movem.l (sp)+,d0-a2
 										rts
 
@@ -3221,7 +2380,7 @@ sub_1141E:
 										move.w  #$F612,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  ((byte_FFB18E-$1000000)).w,d0
 										jsr     (ClearWindowAndUpdateEndPtr).w
 										movem.l (sp)+,d0-a2
@@ -3232,7 +2391,7 @@ sub_1141E:
 
 ; =============== S U B R O U T I N E =======================================
 
-drawBattleEquipWindowStats:
+DrawBattleEquipWindowStats:
 										
 										link    a6,#-4
 										move.w  ((byte_FFB18E-$1000000)).w,d0
@@ -3269,193 +2428,14 @@ drawBattleEquipWindowStats:
 										unlk    a6
 										rts
 
-	; End of function drawBattleEquipWindowStats
+	; End of function DrawBattleEquipWindowStats
 
-aAAAAAAAAPATT99PPPPD:
-										dc.b $C0 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C8 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $54 
-										dc.b $C0 
-										dc.b $54 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $39 
-										dc.b $C0 
-										dc.b $39 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $44 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $46 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $39 
-										dc.b $C0 
-										dc.b $39 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $47 
-										dc.b $C0 
-										dc.b $49 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $39 
-										dc.b $C0 
-										dc.b $39 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $4D 
-										dc.b $C0 
-										dc.b $4F 
-										dc.b $C0 
-										dc.b $56 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $39 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $D0 
-										dc.b $60 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D8 
-										dc.b $60 
+BattleEquipWindowLayout:
+										incbin "graphics/windowlayouts/battleequipwindowlayout.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
-CreateFighterMiniStatusWindow_0:
+CreateFighterMiniStatusWindow:
 										
 										addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 										movem.l d0-a2,-(sp)
@@ -3469,7 +2449,7 @@ CreateFighterMiniStatusWindow_0:
 										addi.w  #$15,d1
 loc_11594:
 										
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  d0,(a2)
 										clr.w   d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
@@ -3492,11 +2472,11 @@ loc_115C4:
 										jsr     (MoveWindowWithSFX).w
 										jsr     (WaitForVInt).w 
 										bsr.w   sub_11804
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										movem.l (sp)+,d0-a2
 										rts
 
-	; End of function CreateFighterMiniStatusWindow_0
+	; End of function CreateFighterMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3519,7 +2499,7 @@ loc_11600:
 										
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  (a2),d0
 										jsr     (ClearWindowAndUpdateEndPtr).w
 										movem.l (sp)+,d0-a2
@@ -3536,10 +2516,10 @@ sub_1161A:
 										jsr     (InitWindowProperties).w
 										move.w  #$1605,d0
 										move.w  #$2001,d1
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  #$1605,d0
 										move.w  #$2001,d1
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										rts
 
 	; End of function sub_1161A
@@ -3578,7 +2558,7 @@ loc_11674:
 										jsr     (MoveWindowWithoutSFX).l
 										jsr     (WaitForVInt).w 
 										bsr.w   sub_11804
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										movem.l (sp)+,d0-a1
 										rts
 loc_11694:
@@ -3624,7 +2604,7 @@ loc_116F6:
 										jsr     (MoveWindowWithoutSFX).l
 										jsr     (WaitForVInt).w 
 										bsr.w   sub_11804
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										movem.l (sp)+,d0-a1
 return_11714:
 										
@@ -3653,7 +2633,7 @@ sub_11716:
 
 ; =============== S U B R O U T I N E =======================================
 
-drawColoredStatBar:
+DrawColoredStatBar:
 										
 										movem.l d0-a1,-(sp)
 										tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
@@ -3752,7 +2732,7 @@ loc_117FA:
 										movem.l (sp)+,d0-a1
 										rts
 
-	; End of function drawColoredStatBar
+	; End of function DrawColoredStatBar
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3785,7 +2765,7 @@ loc_11830:
 										movea.w d2,a1
 										move.w  #$50,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function sub_11826
 
@@ -3835,7 +2815,7 @@ loc_1187A:
 ; check ASCII name at A0 for two special chars ???
 ; 
 
-adjustStringLengthForSpecialChars:
+AdjustStringLengthForSpecialChars:
 										
 										movem.w d0/a0,-(sp)
 										move.w  d7,d0
@@ -3859,7 +2839,7 @@ return_118BC:
 										
 										rts
 
-	; End of function adjustStringLengthForSpecialChars
+	; End of function AdjustStringLengthForSpecialChars
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3905,11 +2885,11 @@ loc_11916:
 										move.w  -2(a6),d0
 										blt.s   loc_11958
 										jsr     j_GetCharName
-										bsr.w   adjustStringLengthForSpecialChars
+										bsr.w   AdjustStringLengthForSpecialChars
 										move.w  d7,d4
 										jsr     j_GetClass      
-										jsr     j_getClassName
-										bsr.w   adjustStringLengthForSpecialChars
+										jsr     j_GetClassName
+										bsr.w   AdjustStringLengthForSpecialChars
 										add.w   d7,d4
 										addq.w  #4,d4
 										jsr     j_GetCurrentLevel
@@ -3922,7 +2902,7 @@ loc_11956:
 loc_11958:
 										
 										jsr     j_GetCharName
-										bsr.w   adjustStringLengthForSpecialChars
+										bsr.w   AdjustStringLengthForSpecialChars
 										move.w  d7,d4
 										addq.w  #2,d4
 loc_11966:
@@ -3936,24 +2916,24 @@ loc_11970:
 										move.w  d6,((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w
 										lea     unk_11AEC(pc), a0
 										movea.l -8(a6),a1
-										bsr.w   copyFighterMinistatusWindowTileColumn
-										bsr.w   copyFighterMinistatusWindowTileColumn
-										bsr.w   copyFighterMinistatusWindowTileColumn
+										bsr.w   CopyFighterMinistatusWindowTileColumn
+										bsr.w   CopyFighterMinistatusWindowTileColumn
+										bsr.w   CopyFighterMinistatusWindowTileColumn
 										move.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,d7
 										subi.w  #9,d7
 loc_11990:
 										
 										lea     unk_11B0A(pc), a0
 										nop
-										bsr.w   copyFighterMinistatusWindowTileColumn
+										bsr.w   CopyFighterMinistatusWindowTileColumn
 										dbf     d7,loc_11990
 										lea     unk_11B14(pc), a0
 										nop
-										bsr.w   copyFighterMinistatusWindowTileColumn
-										bsr.w   copyFighterMinistatusWindowTileColumn
-										bsr.w   copyFighterMinistatusWindowTileColumn
-										bsr.w   copyFighterMinistatusWindowTileColumn
-										bsr.w   copyFighterMinistatusWindowTileColumn
+										bsr.w   CopyFighterMinistatusWindowTileColumn
+										bsr.w   CopyFighterMinistatusWindowTileColumn
+										bsr.w   CopyFighterMinistatusWindowTileColumn
+										bsr.w   CopyFighterMinistatusWindowTileColumn
+										bsr.w   CopyFighterMinistatusWindowTileColumn
 										movem.w d0-d3,-(sp)
 										move.w  -2(a6),d0
 										jsr     j_GetCharName
@@ -3966,7 +2946,7 @@ loc_11990:
 										move.w  -2(a6),d0
 										blt.s   loc_11A0E
 										jsr     j_GetClass      
-										jsr     j_getClassName
+										jsr     j_GetClassName
 										move.w  #$FFD4,d1
 										bsr.w   WriteTilesFromASCII
 										move.w  -2(a6),d0
@@ -3991,7 +2971,7 @@ loc_11A0E:
 										move.l  a1,-(sp)
 										lea     (DMA_SPACE_FF8804).l,a0
 										moveq   #1,d2
-										bsr.w   drawColoredStatBar
+										bsr.w   DrawColoredStatBar
 										movea.l (sp)+,a1
 										adda.w  #$2C,a1 
 										movem.w (sp)+,d0-d1
@@ -3999,7 +2979,7 @@ loc_11A0E:
 										beq.s   loc_11A4C
 										lea     (byte_FF8A04).l,a0
 										moveq   #6,d2
-										bsr.w   drawColoredStatBar
+										bsr.w   DrawColoredStatBar
 loc_11A4C:
 										
 										movem.w (sp)+,d0-d3
@@ -4051,21 +3031,21 @@ WriteStatValue:
 										bge.s   loc_11ABC
 										ext.l   d0
 										bra.w   WriteTilesFromNumber
-										bra.s   aUnknownValue   
+										bra.s   UnknownValue    
 loc_11ABC:
 										
-										lea     aUnknownValue(pc), a0
+										lea     UnknownValue(pc), a0
 										bra.w   WriteTilesFromASCII
 
 	; End of function WriteStatValue
 
-aUnknownValue:      dc.b '??'
+UnknownValue:       dc.b '??'
 
 ; =============== S U B R O U T I N E =======================================
 
 ; draw tiles from A0 into A1 (one column)
 
-copyFighterMinistatusWindowTileColumn:
+CopyFighterMinistatusWindowTileColumn:
 										
 										movem.l a1,-(sp)
 										move.w  (a0)+,(a1)
@@ -4081,7 +3061,7 @@ copyFighterMinistatusWindowTileColumn:
 										addq.w  #2,a1
 										rts
 
-	; End of function copyFighterMinistatusWindowTileColumn
+	; End of function CopyFighterMinistatusWindowTileColumn
 
 unk_11AEC:          dc.b $C0 
 										dc.b $60 
@@ -4176,7 +3156,7 @@ unk_11B14:          dc.b $C0
 
 ; =============== S U B R O U T I N E =======================================
 
-initPortraitWindow:
+InitPortraitWindow:
 										
 										tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
 										bne.w   return_11BE0
@@ -4195,23 +3175,23 @@ initPortraitWindow:
 										addi.w  #$1500,d1
 loc_11B84:
 										
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										addq.w  #1,d0
 										move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
 										tst.b   ((PORTRAIT_IS_FLIPPED-$1000000)).w
 										bne.s   loc_11B9A
-										lea     windowBorderTiles(pc), a0
+										lea     WindowBorderTiles(pc), a0
 										bra.s   loc_11B9E
 loc_11B9A:
 										
-										lea     unk_126EE(pc), a0
+										lea     PortraitWindowLayout(pc), a0
 loc_11B9E:
 										
 										move.w  #$A0,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										move.w  (sp)+,d0
-										bsr.w   getCharPortraitIdx
-										bsr.w   loadPortrait    
+										bsr.w   GetCharPortraitIdx
+										bsr.w   LoadPortrait    
 										move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
 										subq.w  #1,d0
 										move.w  #$201,d1
@@ -4222,9 +3202,9 @@ loc_11BC4:
 										
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
-										trap    #9
-										dc.w 1
+										jsr     (WaitForVint_andFFA900Clear).w
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ADD
 										dc.l VInt_HandlePortraitBlinking
 										move.b  #$FF,((byte_FFB082-$1000000)).w
 										movem.l (sp)+,d0-a1
@@ -4232,12 +3212,12 @@ return_11BE0:
 										
 										rts
 
-	; End of function initPortraitWindow
+	; End of function InitPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-hidePortraitWindow:
+HidePortraitWindow:
 										
 										tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
 										beq.s   return_11BE0
@@ -4255,7 +3235,7 @@ loc_11C08:
 										
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
 										subq.w  #1,d0
 										jsr     (ClearWindowAndUpdateEndPtr).w
@@ -4264,7 +3244,7 @@ loc_11C08:
 										subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 										rts
 
-	; End of function hidePortraitWindow
+	; End of function HidePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4273,7 +3253,7 @@ loc_11C08:
 ; 
 ; In: D0 = character idx
 
-memberStatsScreen:
+MemberStatsScreen:
 										
 										addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 										movem.l d0-a2,-(sp)
@@ -4283,30 +3263,30 @@ memberStatsScreen:
 										clr.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
 										move.w  #WINDOW_MEMBER_STATS_SIZE,d0
 										move.w  #WINDOW_MEMBER_STATS_DEST,d1
-										jsr     (createWindow).w; stats window, on the right
+										jsr     (CreateWindow).w; stats window, on the right
 										move.w  d0,-4(a6)
 										move.w  #$80A,d0
 										move.w  #WINDOW_MEMBER_PORTRAIT_DEST,d1
-										jsr     (createWindow).w; portrait, upper left
+										jsr     (CreateWindow).w; portrait, upper left
 										move.w  d0,-6(a6)
 										addq.w  #1,d0
 										move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
 										move.w  #WINDOW_MEMBER_KD_SIZE,d0
 										move.w  #WINDOW_MEMBER_KD_DEST,d1
-										jsr     (createWindow).w; kills/defeat, middle left
+										jsr     (CreateWindow).w; kills/defeat, middle left
 										move.w  d0,-8(a6)
 										move.w  #WINDOW_MEMBER_GOLD_SIZE,d0
 										move.w  #WINDOW_MEMBER_GOLD_DEST,d1
-										jsr     (createWindow).w; gold, bottom left
+										jsr     (CreateWindow).w; gold, bottom left
 										move.w  d0,-$A(a6)
 										move.w  -2(a6),d0
-										bsr.w   getPortraitIdx  
+										bsr.w   GetPortraitIdx  
 										move.w  d0,-$C(a6)
 										bsr.w   LoadTileDataForMemberScreen
 										move.w  -$C(a6),d0
 										blt.s   loc_11CA6
-										bsr.w   getCharPortraitIdx
-										bsr.w   loadPortrait    
+										bsr.w   GetCharPortraitIdx
+										bsr.w   LoadPortrait    
 loc_11CA6:
 										
 										move.w  -4(a6),d0
@@ -4331,16 +3311,16 @@ loc_11CD2:
 										jsr     (MoveWindowWithSFX).w
 loc_11CE6:
 										
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  #$A7C0,((word_FFB07E-$1000000)).w
 										move.w  #$14,((BLINK_COUNTER-$1000000)).w
 										move.w  #6,((word_FFB07C-$1000000)).w
-										trap    #9
-										dc.w 1
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ADD
 										dc.l VInt_HandlePortraitBlinking
 										move.b  #$FF,((byte_FFB082-$1000000)).w
 										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
-										cmpi.b  #$FF,((RAM_CurrentBattleIdx-$1000000)).w
+										cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 										bne.s   loc_11D1A
 										clr.w   d0
 										bra.s   loc_11D32
@@ -4369,7 +3349,7 @@ loc_11D32:
 										adda.w  d0,a0
 										move.w  #$240,d0
 										move.w  #$740,d1
-										tst.b   ((byte_FFAF46-$1000000)).w
+										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
 										bne.s   loc_11D64
 										add.w   ((word_FFA814-$1000000)).w,d0
 										add.w   ((word_FFA816-$1000000)).w,d1
@@ -4391,11 +3371,11 @@ loc_11D6C:
 										move.w  d1,$E(a0)
 										move.b  #$40,$11(a0) 
 										andi.b  #$7F,$1D(a0) 
-										cmpi.b  #$FF,((RAM_CurrentBattleIdx-$1000000)).w
+										cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 										bne.s   loc_11DBC
 										clr.b   ((NUM_SPRITES_TO_LOAD-$1000000)).w
 										move.w  -2(a6),d0
-										jsr     j_getCharacterSpriteIdx
+										jsr     j_GetCharacterSpriteIdx
 										clr.w   d0
 										moveq   #3,d1
 										moveq   #$FFFFFFFF,d2
@@ -4432,8 +3412,8 @@ loc_11DDC:
 										move.b  d0,(a1)
 										movea.l (sp)+,a1
 										clr.b   ((byte_FFB082-$1000000)).w
-										trap    #9
-										dc.w 2
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_REMOVE
 										dc.l VInt_HandlePortraitBlinking
 										move.w  -4(a6),d0
 										move.w  #$2001,d1
@@ -4459,12 +3439,12 @@ loc_11E54:
 										
 										clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
 										jsr     (WaitForVInt).w 
-										cmpi.b  #$FF,((RAM_CurrentBattleIdx-$1000000)).w
+										cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 										bne.s   loc_11E94
 										clr.w   d0
 										tst.b   ((PLAYER_TYPE-$1000000)).w
 										bne.s   loc_11E74
-										jsr     j_getCharacterSpriteIdx
+										jsr     j_GetCharacterSpriteIdx
 										bra.s   loc_11E82
 loc_11E74:
 										
@@ -4491,7 +3471,7 @@ loc_11E94:
 										tst.w   d1
 										bne.s   loc_11EBA
 										clr.w   d0
-										jsr     j_getCharacterSpriteIdx
+										jsr     j_GetCharacterSpriteIdx
 										clr.w   d0
 										clr.w   d1
 										move.b  $10(a0),d1
@@ -4500,7 +3480,7 @@ loc_11E94:
 										jsr     (sub_6052).w    
 loc_11EBA:
 										
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  -$A(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).w
 										move.w  -8(a6),d0
@@ -4514,7 +3494,7 @@ loc_11EBA:
 										subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 										rts
 
-	; End of function memberStatsScreen
+	; End of function MemberStatsScreen
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4546,11 +3526,11 @@ LoadTileDataForMemberScreen:
 										move.w  -2(a6),d0
 										bsr.w   sub_11FF0
 										move.w  -8(a6),d0
-										lea     VDPTileOrder_MemberKDWindow(pc), a0
+										lea     AllyKillDefeatWindowLayout(pc), a0
 										clr.w   d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
 										move.w  #WINDOW_MEMBER_KD_VDPTILEORDER_BYTESIZE,d7
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
 										move.w  -2(a6),d0
 										tst.b   d0
@@ -4572,7 +3552,7 @@ loc_11F5A:
 										tst.b   ((RAM_DebugModeActivated-$1000000)).w
 										beq.s   loc_11FA6
 										move.w  -8(a6),d0
-										lea     VDPTileOrder_MemberKDWindow(pc), a0
+										lea     AllyKillDefeatWindowLayout(pc), a0
 										move.w  #$101,d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
 										move.w  -2(a6),d0       ; get character idx from stack
@@ -4605,17 +3585,17 @@ loc_11FA6:
 										move.w  -$C(a6),d0
 										blt.s   return_11FEA
 										move.w  -6(a6),d0
-										lea     windowBorderTiles(pc), a0
+										lea     WindowBorderTiles(pc), a0
 										clr.w   d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
 										move.w  #$A0,d7 
-										jsr     (copyBytes).w   
-										lea     unk_1284E(pc), a0
+										jsr     (CopyBytes).w   
+										lea     CharacterStatsWindowLayout(pc), a0
 										move.w  -$A(a6),d0
 										clr.w   d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
 										move.w  #$40,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										adda.w  #$22,a1 
 										jsr     j_GetGold
 										move.l  d1,d0
@@ -4627,10 +3607,10 @@ return_11FEA:
 
 	; End of function LoadTileDataForMemberScreen
 
-unk_11FEC:          dc.b $4E 
-										dc.b $2F 
-										dc.b $41 
-										dc.b   0
+byte_11FEC:         dc.b $4E
+										dc.b $2F
+										dc.b $41
+										dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -4639,16 +3619,16 @@ sub_11FF0:
 										link    a6,#-6
 										move.w  d0,-2(a6)
 										move.l  a1,-6(a6)
-										movea.l (pt_VDPTileOrder_MemberStatsWindow).l,a0
+										movea.l (p_WindowLayout_MemberStats).l,a0
 										move.w  #WINDOW_MEMBER_STATS_VDPTILEORDER_BYTESIZE,d7
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										move.w  -2(a6),d0
 										movea.l -6(a6),a1
 										adda.w  #WINDOW_MEMBER_STATS_TEXT_CLASS_OFFSET,a1
 										tst.b   d0
 										blt.s   loc_1202E
 										jsr     j_GetClass      
-										jsr     j_getClassName
+										jsr     j_GetClassName
 										moveq   #$FFFFFFD6,d1
 										bsr.w   WriteTilesFromASCII
 										addq.w  #2,a1
@@ -4795,12 +3775,12 @@ loc_1217E:
 										bra.s   loc_121E0
 loc_121BC:
 										
-										lea     unk_11FEC(pc), a0
+										lea     byte_11FEC(pc), a0
 										movea.l -6(a6),a1
 										adda.w  #$8C,a1 
 										moveq   #3,d7
 										bsr.w   WriteTilesFromASCII
-										lea     unk_11FEC(pc), a0
+										lea     byte_11FEC(pc), a0
 										movea.l -6(a6),a1
 										adda.w  #$188,a1
 										moveq   #3,d7
@@ -4897,7 +3877,7 @@ loc_12288:
 										adda.w  d1,a0
 										adda.w  #$58,a1 
 										moveq   #$C,d7
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										movem.l (sp)+,a0-a1
 										movem.w (sp)+,d6-d7
 										adda.w  #$7E,a1 
@@ -4985,7 +3965,7 @@ loc_123F2:
 										
 										move.w  -2(a6),d0
 										bne.s   loc_12446
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $180
 										beq.s   loc_12446
 										move.w  d7,-(sp)
@@ -5000,7 +3980,7 @@ loc_123F2:
 										adda.w  #$39E,a1
 										move.w  #$92,d1 
 										bsr.w   CopyMemberScreenIconsToVDPTileOrder
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $181
 										beq.s   loc_12446
 										movea.l -6(a6),a1
@@ -5036,7 +4016,7 @@ loc_1244E:
 										lsl.w   #6,d1
 										adda.w  d1,a0
 										move.w  #$C0,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										ori.b   #$F0,(a1)
 										ori.b   #$F,$23(a1)
 										ori.b   #$F0,$9C(a1)
@@ -5064,7 +4044,7 @@ loc_124BE:
 										mulu.w  #$C0,d1 
 										adda.w  d1,a0
 										move.w  #$C0,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										move.w  (sp)+,d1
 										btst    #$F,d1
 										beq.s   loc_12536
@@ -5113,7 +4093,7 @@ loc_12556:
 										lsl.w   #6,d1
 										adda.w  d1,a0
 										move.w  #$C0,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										ori.b   #$F0,(a1)
 										ori.b   #$F,$23(a1)
 										ori.b   #$F0,$9C(a1)
@@ -5127,7 +4107,7 @@ loc_12556:
 										lsl.w   #6,d1
 										adda.w  d1,a0
 										move.w  #$C0,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										ori.b   #$F0,(a1)
 										ori.b   #$F,$23(a1)
 										ori.b   #$F0,$9C(a1)
@@ -5137,15 +4117,14 @@ loc_12556:
 										lea     ($DA00).l,a1
 										move.w  #$300,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										unlk    a6
 										rts
 
 	; End of function sub_11FF0
 
-										dc.b $FF
-										dc.b $FF
+										dc.w $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -5187,8 +4166,8 @@ loc_1261C:
 										lea     ($E000).l,a1
 										move.w  #$800,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jmp     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jmp     (SetFFDE94b3andWait).w
 
 	; End of function sub_12606
 
@@ -5199,599 +4178,30 @@ loc_1261C:
 ;     In: D0 = char idx
 ;     Out: D0 = adjusted portrait idx
 
-getPortraitIdx:
+GetPortraitIdx:
 										
 										tst.b   d0
 										bpl.s   loc_12648
-										jsr     j_getEntityPortaitAndSpeechSound
+										jsr     j_GetEntityPortaitAndSpeechSound
 										move.w  d1,d0
 										bra.s   return_1264C
 loc_12648:
 										
-										bsr.w   getCharPortraitIdx
+										bsr.w   GetCharPortraitIdx
 return_1264C:
 										
 										rts
 
-	; End of function getPortraitIdx
+	; End of function GetPortraitIdx
 
-windowBorderTiles:  dc.b $C0                ; compressed
-										dc.b $F9
-										dc.b $C0
-										dc.b $FA
-										dc.b $C0
-										dc.b $FA
-										dc.b $C0
-										dc.b $FA
-										dc.b $C0
-										dc.b $FA
-										dc.b $C0
-										dc.b $FA
-										dc.b $C0
-										dc.b $FA
-										dc.b $C8
-										dc.b $F9
-										dc.b $C0
-										dc.b $FB
-										dc.b $A7
-										dc.b $C0
-										dc.b $A7
-										dc.b $C1
-										dc.b $A7
-										dc.b $C2
-										dc.b $A7
-										dc.b $C3
-										dc.b $A7
-										dc.b $C4
-										dc.b $A7
-										dc.b $C5
-										dc.b $C8
-										dc.b $FB
-										dc.b $C0
-										dc.b $FB
-										dc.b $A7
-										dc.b $C8
-										dc.b $A7
-										dc.b $C9
-										dc.b $A7
-										dc.b $CA
-										dc.b $A7
-										dc.b $CB
-										dc.b $A7
-										dc.b $CC
-										dc.b $A7
-										dc.b $CD
-										dc.b $C8
-										dc.b $FB
-										dc.b $C0
-										dc.b $FB
-										dc.b $A7
-										dc.b $D0
-										dc.b $A7
-										dc.b $D1
-										dc.b $A7
-										dc.b $D2
-										dc.b $A7
-										dc.b $D3
-										dc.b $A7
-										dc.b $D4
-										dc.b $A7
-										dc.b $D5
-										dc.b $C8
-										dc.b $FB
-										dc.b $C0
-										dc.b $FB
-										dc.b $A7
-										dc.b $D8
-										dc.b $A7
-										dc.b $D9
-										dc.b $A7
-										dc.b $DA
-										dc.b $A7
-										dc.b $DB
-										dc.b $A7
-										dc.b $DC
-										dc.b $A7
-										dc.b $DD
-										dc.b $C8
-										dc.b $FB
-										dc.b $C0
-										dc.b $FB
-										dc.b $A7
-										dc.b $E0
-										dc.b $A7
-										dc.b $E1
-										dc.b $A7
-										dc.b $E2
-										dc.b $A7
-										dc.b $E3
-										dc.b $A7
-										dc.b $E4
-										dc.b $A7
-										dc.b $E5
-										dc.b $C8
-										dc.b $FB
-										dc.b $C0
-										dc.b $FB
-										dc.b $A7
-										dc.b $E8
-										dc.b $A7
-										dc.b $E9
-										dc.b $A7
-										dc.b $EA
-										dc.b $A7
-										dc.b $EB
-										dc.b $A7
-										dc.b $EC
-										dc.b $A7
-										dc.b $ED
-										dc.b $C8
-										dc.b $FB
-										dc.b $C0
-										dc.b $FB
-										dc.b $A7
-										dc.b $F0
-										dc.b $A7
-										dc.b $F1
-										dc.b $A7
-										dc.b $F2
-										dc.b $A7
-										dc.b $F3
-										dc.b $A7
-										dc.b $F4
-										dc.b $A7
-										dc.b $F5
-										dc.b $C8
-										dc.b $FB
-										dc.b $C0
-										dc.b $FB
-										dc.b $A7
-										dc.b $F8
-										dc.b $A7
-										dc.b $F9
-										dc.b $A7
-										dc.b $FA
-										dc.b $A7
-										dc.b $FB
-										dc.b $A7
-										dc.b $FC
-										dc.b $A7
-										dc.b $FD
-										dc.b $C8
-										dc.b $FB
-										dc.b $D0
-										dc.b $F9
-										dc.b $D0
-										dc.b $FA
-										dc.b $D0
-										dc.b $FA
-										dc.b $D0
-										dc.b $FA
-										dc.b $D0
-										dc.b $FA
-										dc.b $D0
-										dc.b $FA
-										dc.b $D0
-										dc.b $FA
-										dc.b $D8
-										dc.b $F9
-unk_126EE:          dc.b $C0 
-										dc.b $F9 
-										dc.b $C0 
-										dc.b $FA 
-										dc.b $C0 
-										dc.b $FA 
-										dc.b $C0 
-										dc.b $FA 
-										dc.b $C0 
-										dc.b $FA 
-										dc.b $C0 
-										dc.b $FA 
-										dc.b $C0 
-										dc.b $FA 
-										dc.b $C8 
-										dc.b $F9 
-										dc.b $C0 
-										dc.b $FB 
-										dc.b $AF 
-										dc.b $C5 
-										dc.b $AF 
-										dc.b $C4 
-										dc.b $AF 
-										dc.b $C3 
-										dc.b $AF 
-										dc.b $C2 
-										dc.b $AF 
-										dc.b $C1 
-										dc.b $AF 
-										dc.b $C0 
-										dc.b $C8 
-										dc.b $FB 
-										dc.b $C0 
-										dc.b $FB 
-										dc.b $AF 
-										dc.b $CD 
-										dc.b $AF 
-										dc.b $CC 
-										dc.b $AF 
-										dc.b $CB 
-										dc.b $AF 
-										dc.b $CA 
-										dc.b $AF 
-										dc.b $C9 
-										dc.b $AF 
-										dc.b $C8 
-										dc.b $C8 
-										dc.b $FB 
-										dc.b $C0 
-										dc.b $FB 
-										dc.b $AF 
-										dc.b $D5 
-										dc.b $AF 
-										dc.b $D4 
-										dc.b $AF 
-										dc.b $D3 
-										dc.b $AF 
-										dc.b $D2 
-										dc.b $AF 
-										dc.b $D1 
-										dc.b $AF 
-										dc.b $D0 
-										dc.b $C8 
-										dc.b $FB 
-										dc.b $C0 
-										dc.b $FB 
-										dc.b $AF 
-										dc.b $DD 
-										dc.b $AF 
-										dc.b $DC 
-										dc.b $AF 
-										dc.b $DB 
-										dc.b $AF 
-										dc.b $DA 
-										dc.b $AF 
-										dc.b $D9 
-										dc.b $AF 
-										dc.b $D8 
-										dc.b $C8 
-										dc.b $FB 
-										dc.b $C0 
-										dc.b $FB 
-										dc.b $AF 
-										dc.b $E5 
-										dc.b $AF 
-										dc.b $E4 
-										dc.b $AF 
-										dc.b $E3 
-										dc.b $AF 
-										dc.b $E2 
-										dc.b $AF 
-										dc.b $E1 
-										dc.b $AF 
-										dc.b $E0 
-										dc.b $C8 
-										dc.b $FB 
-										dc.b $C0 
-										dc.b $FB 
-										dc.b $AF 
-										dc.b $ED 
-										dc.b $AF 
-										dc.b $EC 
-										dc.b $AF 
-										dc.b $EB 
-										dc.b $AF 
-										dc.b $EA 
-										dc.b $AF 
-										dc.b $E9 
-										dc.b $AF 
-										dc.b $E8 
-										dc.b $C8 
-										dc.b $FB 
-										dc.b $C0 
-										dc.b $FB 
-										dc.b $AF 
-										dc.b $F5 
-										dc.b $AF 
-										dc.b $F4 
-										dc.b $AF 
-										dc.b $F3 
-										dc.b $AF 
-										dc.b $F2 
-										dc.b $AF 
-										dc.b $F1 
-										dc.b $AF 
-										dc.b $F0 
-										dc.b $C8 
-										dc.b $FB 
-										dc.b $C0 
-										dc.b $FB 
-										dc.b $AF 
-										dc.b $FD 
-										dc.b $AF 
-										dc.b $FC 
-										dc.b $AF 
-										dc.b $FB 
-										dc.b $AF 
-										dc.b $FA 
-										dc.b $AF 
-										dc.b $F9 
-										dc.b $AF 
-										dc.b $F8 
-										dc.b $C8 
-										dc.b $FB 
-										dc.b $D0 
-										dc.b $F9 
-										dc.b $D0 
-										dc.b $FA 
-										dc.b $D0 
-										dc.b $FA 
-										dc.b $D0 
-										dc.b $FA 
-										dc.b $D0 
-										dc.b $FA 
-										dc.b $D0 
-										dc.b $FA 
-										dc.b $D0 
-										dc.b $FA 
-										dc.b $D8 
-										dc.b $F9 
-VDPTileOrder_MemberKDWindow:
-										dc.b $C0 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C8 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $4B 
-										dc.b $C0 
-										dc.b $49 
-										dc.b $C0 
-										dc.b $4C 
-										dc.b $C0 
-										dc.b $4C 
-										dc.b $C0 
-										dc.b $53 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $44 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $46 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $54 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $D0 
-										dc.b $60 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D8 
-										dc.b $60 
-unk_1284E:          dc.b $C0 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C8 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $47 
-										dc.b $C0 
-										dc.b $4F 
-										dc.b $C0 
-										dc.b $4C 
-										dc.b $C0 
-										dc.b $44 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $D0 
-										dc.b $60 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D8 
-										dc.b $60 
+WindowBorderTiles:  incbin "graphics/windowbordertiles.bin"
+																						; compressed
+PortraitWindowLayout:
+										incbin "graphics/windowlayouts/portraitwindowlayout.bin"
+AllyKillDefeatWindowLayout:
+										incbin "graphics/windowlayouts/allykilldefeatwindowlayout.bin"
+CharacterStatsWindowLayout:
+										incbin "graphics/windowlayouts/characterstatsdefeatwindowlayout.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -5830,7 +4240,7 @@ sub_12892:
 										move.l  (a0)+,(a1)+
 										move.l  $40(a0),$40(a1)
 										move.l  (a0)+,(a1)+
-										jsr     (storeVdpCommandster).w
+										jsr     (StoreVdpCommandster).w
 										move.b  #9,((FADING_SETTING-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
@@ -5848,7 +4258,7 @@ loc_1291E:
 										sub.w   -$C(a6),d1
 										lsr.w   #1,d1
 										ori.w   #$2000,d1
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  d0,-2(a6)
 										move.l  a1,-6(a6)
 										bsr.w   sub_12C46
@@ -5863,7 +4273,7 @@ loc_1291E:
 										move.w  -2(a6),d0
 										move.w  #6,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										bsr.w   sub_12CB0
 										move.w  -$E(a6),d0
 										neg.w   d0
@@ -5879,7 +4289,7 @@ loc_1291E:
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #5,((FADING_PALETTE_FLAGS-$1000000)).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  d0,-2(a6)
 										jsr     (ClearWindowAndUpdateEndPtr).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -5889,8 +4299,8 @@ loc_1291E:
 										lea     (FFD080_Palette1bis).l,a0
 										lea     (PALETTE_1).l,a1
 										move.w  #$80,d7 
-										jsr     (copyBytes).w   
-										jsr     (storeVdpCommandster).w
+										jsr     (CopyBytes).w   
+										jsr     (StoreVdpCommandster).w
 										unlk    a6
 										rts
 
@@ -5901,18 +4311,18 @@ loc_1291E:
 
 sub_129E8:
 										
-										move.w  ((word_FFA82E-$1000000)).w,d0
+										move.w  ((RAM_Map_AreaLayer1StartX-$1000000)).w,d0
 										lsr.w   #7,d0
 										ext.l   d0
 										divs.w  #3,d0
 										move.w  d0,-$14(a6)
-										move.w  ((word_FFA830-$1000000)).w,d0
+										move.w  ((RAM_Map_AreaLayer1StartY-$1000000)).w,d0
 										lsr.w   #7,d0
 										ext.l   d0
 										divs.w  #3,d0
 										move.w  d0,-$12(a6)
-										move.w  ((word_FFA832-$1000000)).w,d0
-										sub.w   ((word_FFA82E-$1000000)).w,d0
+										move.w  ((RAM_Map_AreaLayer1EndX-$1000000)).w,d0
+										sub.w   ((RAM_Map_AreaLayer1StartX-$1000000)).w,d0
 										lsr.w   #7,d0
 										ext.l   d0
 										divs.w  #3,d0
@@ -5922,8 +4332,8 @@ sub_129E8:
 loc_12A20:
 										
 										move.w  d0,-$A(a6)
-										move.w  ((word_FFA834-$1000000)).w,d1
-										sub.w   ((word_FFA830-$1000000)).w,d1
+										move.w  ((RAM_Map_AreaLayer1EndY-$1000000)).w,d1
+										sub.w   ((RAM_Map_AreaLayer1StartY-$1000000)).w,d1
 										lsr.w   #7,d1
 										ext.l   d1
 										divs.w  #3,d1
@@ -5972,7 +4382,7 @@ loc_12A9A:
 										sub.w   d6,d3
 										move.w  -$A(a6),d2
 										sub.w   d7,d2
-										jsr     (disableInterrupts).w
+										jsr     (DisableInterrupts).w
 										bsr.w   sub_12BA4
 										move.w  (VDP_Data).l,(a1)
 										move.w  (VDP_Data).l,d0
@@ -6009,13 +4419,13 @@ loc_12A9A:
 										move.w  (VDP_Data).l,$1A(a1)
 										move.w  (VDP_Data).l,d0
 										move.w  (VDP_Data).l,$1E(a1)
-										jsr     (enableInterrupts).w
+										jsr     (EnableInterrupts).w
 										adda.w  #$20,a1 
 										subq.w  #2,d7
 										bge.w   loc_12A9A
 										subq.w  #2,d6
 										bge.w   loc_12A96
-										jsr     (enableInterrupts).w
+										jsr     (EnableInterrupts).w
 										bra.w   loc_12BF4
 
 	; End of function sub_129E8
@@ -6062,22 +4472,22 @@ loc_12BF4:
 										lea     ($B800).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
+										jsr     (BwahDMAstuffAgainbis).w
 										lea     ($C800).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										lea     ($D000).l,a1
 										move.w  #$800,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										lea     ($F000).l,a1
 										move.w  #$800,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jmp     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jmp     (SetFFDE94b3andWait).w
 
 ; END OF FUNCTION CHUNK FOR sub_129E8
 
@@ -6278,13 +4688,12 @@ loc_12DDE:
 
 ; related to end kiss
 
-sub_12DEC:
-										
+EndKiss:
 										move.b  #$FF,(WINDOW_HIDING_FORBIDDEN).l
 										addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 										move.w  #$120E,d0
 										move.w  #$707,d1
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  d0,d4
 										move.w  #$A640,d5
 										moveq   #$F,d7
@@ -6317,22 +4726,22 @@ loc_12E3A:
 										lea     (Palette3).l,a0
 										lea     (Palette4).l,a1
 										move.w  #$20,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     (Palette3).l,a0
 										lea     (PALETTE3_BIS).l,a1
 										move.w  #$20,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										movea.l (p_plt_endKiss).l,a0
 										lea     (Palette2).l,a1
 										move.w  #$20,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     $80(a1),a1
-										jsr     (copyBytes).w   
-										jsr     (storeVdpCommandster).w
+										jsr     (CopyBytes).w   
+										jsr     (StoreVdpCommandster).w
 										lea     (PALETTE_1).l,a0
 										lea     (FFD080_Palette1bis).l,a1
 										move.w  #$80,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     (FF6802_LOADING_SPACE).l,a1
 										move.w  #$5FF,d0
 										moveq   #0,d1
@@ -6344,17 +4753,17 @@ loc_12EB4:
 										lea     ($C800).l,a1
 										move.w  #$600,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										lea     (byte_FF7402).l,a0
 										lea     ($D400).l,a1
 										move.w  #$600,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										move.w  d4,d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										jsr     j_EndKissPictureSequence
 										move.w  #$B4,d0 
 										jsr     (Sleep).w       
@@ -6363,7 +4772,7 @@ loc_12EB4:
 										subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 										rts
 
-	; End of function sub_12DEC
+	; End of function EndKiss
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6376,7 +4785,7 @@ sub_12F12:
 										link    a6,#-$20
 										move.w  #$904,d0
 										move.w  #$2017,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										addq.w  #1,d0
 										move.w  d0,((word_FFB086-$1000000)).w
 										move.l  a1,-$12(a6)
@@ -6386,7 +4795,7 @@ sub_12F12:
 										move.w  #$1617,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).l
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 										unlk    a6
 										movem.l (sp)+,d0-a1
 return_12F5C:
@@ -6413,7 +4822,7 @@ sub_12F5E:
 										move.w  ((word_FFB086-$1000000)).w,d0
 										subq.w  #1,d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										unlk    a6
 										movem.l (sp)+,d0-a1
 										rts
@@ -6441,7 +4850,7 @@ sub_12F9A:
 										jsr     (MoveWindowWithSFX).l
 loc_12FCA:
 										
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 										move.w  ((word_FFB086-$1000000)).w,d0
 										subq.w  #1,d0
 										jsr     (ClearWindowAndUpdateEndPtr).l
@@ -6502,20 +4911,20 @@ loc_1304C:
 loc_13066:
 										
 										link    a6,#-$10
-										bsr.w   getSelectedMember
+										bsr.w   GetSelectedMember
 										move.w  d0,-2(a6)
-										bsr.w   loadCharPortrait
+										bsr.w   LoadCharPortrait
 										move.w  #$1D0D,d0
 										move.w  #$220,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										move.w  d0,-4(a6)
 										move.w  #$80A,d0
 										move.w  #$F8F6,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										move.w  d0,-6(a6)
 										move.w  #$150D,d0
 										move.w  #$20F3,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										move.w  d0,-8(a6)
 										bsr.w   sub_1354C
 										move.w  -4(a6),d0
@@ -6533,9 +4942,9 @@ loc_13066:
 										lea     ($B800).l,a1
 										move.w  #$A0,d0 
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
+										jsr     (WaitForVint_andFFA900Clear).l
 										moveq   #$14,d1
 loc_13100:
 										
@@ -6556,7 +4965,7 @@ loc_13116:
 										beq.s   loc_13138
 										move.b  ((word_FFB13D-$1000000)).w,d0
 										addq.b  #1,d0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										cmp.b   d2,d0
 										ble.s   loc_13130
@@ -6571,7 +4980,7 @@ loc_13138:
 										beq.s   loc_13156
 										move.b  ((word_FFB13D-$1000000)).w,d0
 										subq.b  #1,d0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bge.s   loc_1314E
 										move.b  d2,d0
@@ -6588,7 +4997,7 @@ loc_13156:
 										blt.s   loc_1317A
 										clr.w   d1
 										bsr.w   sub_133A0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										move.w  d0,((word_FFB138-$1000000)).w
 										bsr.w   sub_13478
@@ -6600,7 +5009,7 @@ loc_1317A:
 										blt.s   loc_1319A
 										clr.w   d1
 										bsr.w   sub_133A0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										move.w  d0,((word_FFB136-$1000000)).w
 										move.b  #1,((word_FFAF9E-$1000000)).w
@@ -6619,7 +5028,7 @@ loc_1319A:
 										bge.s   loc_131CC
 										clr.w   d1
 										bsr.w   sub_133A0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										move.w  d0,((word_FFB138-$1000000)).w
 										bsr.w   sub_13478
@@ -6636,7 +5045,7 @@ loc_131CE:
 										bge.s   loc_131F6
 										clr.w   d1
 										bsr.w   sub_133A0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										move.w  d0,((word_FFB136-$1000000)).w
 										clr.b   ((word_FFAF9E-$1000000)).w
@@ -6662,7 +5071,7 @@ loc_13220:
 										move.b  (a0,d0.w),d0
 										bsr.w   sub_132BC
 										beq.s   loc_1323E
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_REFUSAL
 										moveq   #$A,d1
 										bra.s   loc_13214
@@ -6695,7 +5104,7 @@ loc_13256:
 										move.w  -8(a6),d0
 										move.w  #$20F3,d1
 										jsr     (MoveWindowWithSFX).l
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 										move.w  -4(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).l
 										move.w  -6(a6),d0
@@ -6828,13 +5237,13 @@ loc_13388:
 
 ;     In: D0 = char idx
 
-loadCharPortrait:
+LoadCharPortrait:
 										
 										move.w  -2(a6),d0
-										bsr.w   getPortraitIdx  
-										bra.w   loadPortrait    
+										bsr.w   GetPortraitIdx  
+										bra.w   LoadPortrait    
 
-	; End of function loadCharPortrait
+	; End of function LoadCharPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6932,7 +5341,7 @@ unk_13452:          dc.b   1
 ;     Get index of currently selected force member (in menus).
 ;     Out: D0 = selected index (capped to 255)
 
-getSelectedMember:
+GetSelectedMember:
 										
 										move.w  ((word_FFB136-$1000000)).w,d0
 										add.w   ((word_FFB138-$1000000)).w,d0
@@ -6941,7 +5350,7 @@ getSelectedMember:
 										andi.w  #$FF,d0
 										rts
 
-	; End of function getSelectedMember
+	; End of function GetSelectedMember
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6951,11 +5360,11 @@ sub_13478:
 										bsr.w   sub_1354C
 										move.w  -4(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										move.w  -8(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
-										bsr.w   loadCharPortrait
+										jsr     (SetWindowDestination).l
+										bsr.w   LoadCharPortrait
 										moveq   #$A,d1
 										rts
 
@@ -6964,13 +5373,13 @@ sub_13478:
 
 ; =============== S U B R O U T I N E =======================================
 
-copyWords:
+CopyWords:
 										
 										move.w  (a0)+,(a1)+
-										dbf     d7,copyWords
+										dbf     d7,CopyWords
 										rts
 
-	; End of function copyWords
+	; End of function CopyWords
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6987,41 +5396,41 @@ sub_134A8:
 										adda.w  #$74,a0 
 										adda.w  #$AE,a1 
 										move.w  #$20A,d7
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     unk_13EDE(pc), a0
 										suba.w  #$38,a1 
 										move.w  #$36,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										bra.s   loc_13510
 loc_134E0:
 										
 										adda.w  #$E8,a0 
 										adda.w  #$AE,a1 
 										move.w  #$1D0,d7
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     unk_13EDE(pc), a0
 										suba.w  #$38,a1 
 										move.w  #$36,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     unk_13EDE(pc), a0
 										adda.w  #$20A,a1
 										move.w  #$36,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 loc_13510:
 										
 										move.w  -4(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										jsr     (WaitForVInt).w 
 										bsr.w   sub_1354C
 										move.w  -4(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										move.w  -8(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										move.w  (sp)+,d0
-										bsr.w   loadCharPortrait
+										bsr.w   LoadCharPortrait
 										moveq   #$A,d1
 										rts
 
@@ -7042,18 +5451,18 @@ sub_1354C:
 										clr.w   d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
 										move.w  -2(a6),d0
-										bsr.w   writeMemberListText
+										bsr.w   WriteMemberListText
 										move.w  -8(a6),d0
 										clr.w   d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
 										move.w  -2(a6),d0
 										bsr.w   sub_137BC
 										move.w  -6(a6),d0
-										lea     windowBorderTiles(pc), a0
+										lea     WindowBorderTiles(pc), a0
 										clr.w   d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
 										move.w  #$A0,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										rts
 
 	; End of function sub_1354C
@@ -7061,13 +5470,13 @@ sub_1354C:
 
 ; =============== S U B R O U T I N E =======================================
 
-writeMemberListText:
+WriteMemberListText:
 										
 										link    a6,#-$10
 										move.w  d0,-2(a6)
 										move.l  a1,-6(a6)
 										move.w  #$1D0D,d0
-										bsr.w   copyWindowTilesToRAM
+										bsr.w   CopyWindowTilesToRAM
 										movea.l -6(a6),a1
 										move.w  #$FFC6,d1
 										suba.w  d1,a1
@@ -7129,7 +5538,7 @@ loc_1363C:
 										move.l  a1,-(sp)
 										move.w  -$10(a6),d0
 										jsr     j_GetClass      
-										jsr     j_getClassName
+										jsr     j_GetClassName
 										moveq   #$FFFFFFC6,d1
 										bsr.w   WriteTilesFromASCII
 										movea.l (sp)+,a1
@@ -7199,7 +5608,7 @@ loc_1371E:
 										bne.w   loc_13798
 										move.w  -$10(a6),d0
 										move.w  ((word_FFB13A-$1000000)).w,d1
-										jsr     j_isWeaponOrRingEquippable
+										jsr     j_IsWeaponOrRingEquippable
 										bcs.s   loc_13748
 										lea     aUnequippable(pc), a0
 										addq.l  #4,a1
@@ -7209,7 +5618,7 @@ loc_1371E:
 										bra.s   loc_13798
 loc_13748:
 										
-										jsr     j_getWeaponNewATKandDEF
+										jsr     j_GetWeaponNewATKandDEF
 										addq.l  #2,a1
 										move.w  -$10(a6),d0
 										jsr     j_GetCurrentATK
@@ -7245,7 +5654,7 @@ loc_13798:
 										unlk    a6
 										rts
 
-	; End of function writeMemberListText
+	; End of function WriteMemberListText
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -7268,7 +5677,7 @@ sub_137BC:
 										move.w  d0,-2(a6)
 										move.l  a1,-6(a6)
 										move.w  #$150D,d0
-										bsr.w   copyWindowTilesToRAM
+										bsr.w   CopyWindowTilesToRAM
 										move.w  -2(a6),d0
 										jsr     j_GetCharName
 										movea.l -6(a6),a1
@@ -7277,7 +5686,7 @@ sub_137BC:
 										bsr.w   WriteTilesFromASCII
 										move.w  -2(a6),d0
 										jsr     j_GetClass      
-										jsr     j_getClassName
+										jsr     j_GetClassName
 										addq.w  #2,a1
 										moveq   #$FFFFFFD6,d1
 										bsr.w   WriteTilesFromASCII
@@ -7363,23 +5772,23 @@ loc_138D6:
 										
 										move.b  ((word_FFAF8C-$1000000)).w,d0
 										bne.s   loc_138E2
-										bsr.w   writeMemberMiniStatus
+										bsr.w   WriteMemberMiniStatus
 										bra.s   loc_138FE
 loc_138E2:
 										
 										cmpi.b  #1,d0
 										bne.s   loc_138EE
-										bsr.w   writeItemsMiniStatus
+										bsr.w   WriteItemsMiniStatus
 										bra.s   loc_138FE
 loc_138EE:
 										
 										cmpi.b  #2,d0
 										bne.s   loc_138FA
-										bsr.w   writeMagicMiniStatus
+										bsr.w   WriteMagicMiniStatus
 										bra.s   loc_138FE
 loc_138FA:
 										
-										bsr.w   writeEquipMiniStatus
+										bsr.w   WriteEquipMiniStatus
 loc_138FE:
 										
 										unlk    a6
@@ -7390,7 +5799,7 @@ loc_138FE:
 
 ; =============== S U B R O U T I N E =======================================
 
-writeMemberMiniStatus:
+WriteMemberMiniStatus:
 										
 										movea.l -6(a6),a1
 										adda.w  #$80,a1 
@@ -7400,18 +5809,18 @@ writeMemberMiniStatus:
 										bsr.w   WriteTilesFromASCII
 										movea.l -6(a6),a1
 										adda.w  #$AC,a1 
-										bsr.w   writeMemberMagicList
+										bsr.w   WriteMemberMagicList
 										movea.l -6(a6),a1
 										adda.w  #$C0,a1 
-										bsr.w   writeMemberItemsList
+										bsr.w   WriteMemberItemsList
 										rts
 
-	; End of function writeMemberMiniStatus
+	; End of function WriteMemberMiniStatus
 
 
 ; =============== S U B R O U T I N E =======================================
 
-writeItemsMiniStatus:
+WriteItemsMiniStatus:
 										
 										movea.l -6(a6),a1
 										adda.w  #$82,a1 
@@ -7421,16 +5830,16 @@ writeItemsMiniStatus:
 										bsr.w   WriteTilesFromASCII
 										movea.l -6(a6),a1
 										adda.w  #$C0,a1 
-										bsr.w   writeMemberItemsList
-										bsr.w   drawMemberItemsIconsCross
+										bsr.w   WriteMemberItemsList
+										bsr.w   DrawMemberItemsIconsCross
 										rts
 
-	; End of function writeItemsMiniStatus
+	; End of function WriteItemsMiniStatus
 
 
 ; =============== S U B R O U T I N E =======================================
 
-writeMagicMiniStatus:
+WriteMagicMiniStatus:
 										
 										movea.l -6(a6),a1
 										adda.w  #$82,a1 
@@ -7440,16 +5849,16 @@ writeMagicMiniStatus:
 										bsr.w   WriteTilesFromASCII
 										movea.l -6(a6),a1
 										adda.w  #$C0,a1 
-										bsr.w   writeMemberMagicList
-										bsr.w   drawMemberMagicIconsCross
+										bsr.w   WriteMemberMagicList
+										bsr.w   DrawMemberMagicIconsCross
 										rts
 
-	; End of function writeMagicMiniStatus
+	; End of function WriteMagicMiniStatus
 
 
 ; =============== S U B R O U T I N E =======================================
 
-writeEquipMiniStatus:
+WriteEquipMiniStatus:
 										
 										movea.l -6(a6),a1
 										adda.w  #$82,a1 
@@ -7521,12 +5930,12 @@ loc_139A6:
 										bra.w   loc_13C36
 										rts
 
-	; End of function writeEquipMiniStatus
+	; End of function WriteEquipMiniStatus
 
 
 ; =============== S U B R O U T I N E =======================================
 
-writeMemberMagicList:
+WriteMemberMagicList:
 										
 										move.w  -2(a6),d0
 										clr.w   d1
@@ -7579,12 +5988,12 @@ loc_13AD8:
 										move.w  (sp)+,d7
 										rts
 
-	; End of function writeMemberMagicList
+	; End of function WriteMemberMagicList
 
 
 ; =============== S U B R O U T I N E =======================================
 
-writeMemberItemsList:
+WriteMemberItemsList:
 										
 										move.w  -2(a6),d0
 										clr.w   d1
@@ -7627,40 +6036,40 @@ loc_13B48:
 										move.w  (sp)+,d7
 										rts
 
-	; End of function writeMemberItemsList
+	; End of function WriteMemberItemsList
 
 
 ; =============== S U B R O U T I N E =======================================
 
-loadItemIcon:
+LoadItemIcon:
 										
 										andi.w  #ITEM_MASK_IDX,d1
 										movea.l (p_Icons).l,a0
-										bra.w   loadIcon
+										bra.w   LoadIcon
 
-	; End of function loadItemIcon
+	; End of function LoadItemIcon
 
 
 ; =============== S U B R O U T I N E =======================================
 
-loadSpellIcon:
+LoadSpellIcon:
 										
 										andi.w  #$3F,d1 
 										movea.l (p_Icons).l,a0
 										cmpi.w  #$3F,d1 
 										bne.s   loc_13B7E
 										move.w  #$7F,d1 
-										bra.s   loadIcon
+										bra.s   LoadIcon
 loc_13B7E:
 										
 										addi.w  #$82,d1 
 
-	; End of function loadSpellIcon
+	; End of function LoadSpellIcon
 
 
-; START OF FUNCTION CHUNK FOR loadItemIcon
+; START OF FUNCTION CHUNK FOR LoadItemIcon
 
-loadIcon:
+LoadIcon:
 										move.w  d1,d2
 										add.w   d1,d1
 										add.w   d2,d1
@@ -7677,57 +6086,57 @@ loc_13B8E:
 										ori.w   #$F000,-$C0(a1)
 										rts
 
-; END OF FUNCTION CHUNK FOR loadItemIcon
+; END OF FUNCTION CHUNK FOR LoadItemIcon
 
 
 ; =============== S U B R O U T I N E =======================================
 
-drawMemberItemsIconsCross:
+DrawMemberItemsIconsCross:
 										
 										move.w  -2(a6),d0
 										lea     (FF6802_LOADING_SPACE).l,a1
 										clr.w   d1
 										jsr     j_GetItemAndNumberOfItems
-										bsr.s   loadItemIcon
+										bsr.s   LoadItemIcon
 										moveq   #1,d1
 										jsr     j_GetItemAndNumberOfItems
-										bsr.s   loadItemIcon
+										bsr.s   LoadItemIcon
 										moveq   #2,d1
 										jsr     j_GetItemAndNumberOfItems
-										bsr.s   loadItemIcon
+										bsr.s   LoadItemIcon
 										moveq   #3,d1
 										jsr     j_GetItemAndNumberOfItems
-										bsr.w   loadItemIcon
+										bsr.w   LoadItemIcon
 										bra.w   loc_13C20
 
-	; End of function drawMemberItemsIconsCross
+	; End of function DrawMemberItemsIconsCross
 
 
 ; =============== S U B R O U T I N E =======================================
 
-drawMemberMagicIconsCross:
+DrawMemberMagicIconsCross:
 										
 										move.w  -2(a6),d0
 										lea     (FF6802_LOADING_SPACE).l,a1
 										clr.w   d1
 										jsr     j_GetSpellAndNumberOfSpells
-										bsr.w   loadSpellIcon
+										bsr.w   LoadSpellIcon
 										moveq   #1,d1
 										jsr     j_GetSpellAndNumberOfSpells
-										bsr.w   loadSpellIcon
+										bsr.w   LoadSpellIcon
 										moveq   #2,d1
 										jsr     j_GetSpellAndNumberOfSpells
-										bsr.w   loadSpellIcon
+										bsr.w   LoadSpellIcon
 										moveq   #3,d1
 										jsr     j_GetSpellAndNumberOfSpells
-										bsr.w   loadSpellIcon
+										bsr.w   LoadSpellIcon
 loc_13C20:
 										
 										lea     (FF6802_LOADING_SPACE).l,a0
 										lea     ($BC00).l,a1
 										move.w  #$180,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
+										jsr     (BwahDMAstuffAgainbis).w
 loc_13C36:
 										
 										movea.l -6(a6),a1
@@ -7745,12 +6154,12 @@ loc_13C36:
 										move.l  #$C5F6C5F7,$1D8(a1)
 										rts
 
-	; End of function drawMemberMagicIconsCross
+	; End of function DrawMemberMagicIconsCross
 
 
 ; =============== S U B R O U T I N E =======================================
 
-copyWindowTilesToRAM:
+CopyWindowTilesToRAM:
 										
 										movem.w d0-d1/d6-d7,-(sp)
 										clr.w   d1
@@ -7788,7 +6197,7 @@ loc_13CDE:
 										movem.w (sp)+,d0-d1/d6-d7
 										rts
 
-	; End of function copyWindowTilesToRAM
+	; End of function CopyWindowTilesToRAM
 
 aNameClassLevExp:   dc.b 'NAME    CLASS     LEV EXP',0
 aNameHpMpAtDfAgMv:  dc.b 'NAME    HP MP AT DF AG MV',0
@@ -7804,326 +6213,7 @@ aDef:               dc.b 'DEF  ',0
 aMov:               dc.b 'MOV  ',0
 aAgi:               dc.b 'AGI  ',0
 aNothing_2:         dc.b '\Nothing',0
-TextHighlightTiles: dc.b   0
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b  $A
-										dc.b $A0 
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b  $A
-										dc.b $A0 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
-										dc.b $AA 
+TextHighlightTiles: incbin "graphics/texthighlighttiles.bin"
 unk_13EDE:          dc.b $C0 
 										dc.b $20
 										dc.b $C0 
@@ -8184,7 +6274,7 @@ unk_13EDE:          dc.b $C0
 sub_13F14:
 										
 										movem.l d0/d3-a1,-(sp)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
 										moveq   #0,d1
@@ -8202,17 +6292,17 @@ sub_13F14:
 										clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
 										lea     (DMA_SPACE_FF8804).l,a1
 										move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
-										bsr.w   loadHighlightableItemIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadHighlightableItemIcon
+										bsr.w   CleanIconCorners
 										move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
-										bsr.w   loadHighlightableItemIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadHighlightableItemIcon
+										bsr.w   CleanIconCorners
 										move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
-										bsr.w   loadHighlightableItemIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadHighlightableItemIcon
+										bsr.w   CleanIconCorners
 										move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
-										bsr.w   loadHighlightableItemIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadHighlightableItemIcon
+										bsr.w   CleanIconCorners
 										jsr     (WaitForVInt).w 
 										moveq   #$1E,d6
 loc_13F88:
@@ -8222,7 +6312,7 @@ loc_13F88:
 										moveq   #1,d1
 										cmpi.w  #$7F,((DISPLAYED_ICON_2-$1000000)).w 
 										beq.s   loc_13FA2
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_1401E
 loc_13FA2:
@@ -8232,7 +6322,7 @@ loc_13FA2:
 										moveq   #2,d1
 										cmpi.w  #$7F,((DISPLAYED_ICON_3-$1000000)).w 
 										beq.s   loc_13FBC
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_1401E
 loc_13FBC:
@@ -8240,7 +6330,7 @@ loc_13FBC:
 										btst    #0,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_13FCE
 										clr.w   d1
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_1401E
 loc_13FCE:
@@ -8250,7 +6340,7 @@ loc_13FCE:
 										moveq   #3,d1
 										cmpi.w  #$7F,((DISPLAYED_ICON_4-$1000000)).w 
 										beq.s   loc_13FE8
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_1401E
 loc_13FE8:
@@ -8279,7 +6369,7 @@ loc_1401E:
 										clr.w   d0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 										clr.w   d6
-										bsr.w   doSomethingRelatedToMenuChoice
+										bsr.w   DoSomethingRelatedToMenuChoice
 										move.w  (sp)+,d0
 										move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 										moveq   #$1D,d6
@@ -8287,7 +6377,7 @@ loc_14034:
 										
 										clr.w   d0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-										bsr.w   doSomethingRelatedToMenuChoice
+										bsr.w   DoSomethingRelatedToMenuChoice
 										moveq   #$14,d1
 										bsr.w   sub_146AE
 										subq.w  #1,d6
@@ -8302,7 +6392,7 @@ loc_14052:
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d1
 										ext.w   d1
 										bpl.s   loc_14062
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										moveq   #$FFFFFFFF,d1
 										bra.s   loc_1406E
@@ -8322,14 +6412,14 @@ loc_1406E:
 
 ; =============== S U B R O U T I N E =======================================
 
-doSomethingRelatedToMenuChoice:
+DoSomethingRelatedToMenuChoice:
 										
 										moveq   #$7F,d7 
 										add.w   d0,d0           ; d0 is current diamond-menu choice
 										move.w  rjt_14080(pc,d0.w),d0
 										jmp     rjt_14080(pc,d0.w)
 
-	; End of function doSomethingRelatedToMenuChoice
+	; End of function DoSomethingRelatedToMenuChoice
 
 rjt_14080:          dc.w DMAicon1-rjt_14080
 										dc.w DMAicon2-rjt_14080
@@ -8348,7 +6438,7 @@ loc_14098:
 										lea     ($BC00).l,a1
 										move.w  #$60,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function DMAicon1
 
@@ -8365,7 +6455,7 @@ loc_140B8:
 										lea     ($BCC0).l,a1
 										move.w  #$60,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function DMAicon2
 
@@ -8382,7 +6472,7 @@ loc_140D8:
 										lea     ($BD80).l,a1
 										move.w  #$60,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function DMAicon3
 
@@ -8399,7 +6489,7 @@ loc_140F8:
 										lea     ($BE40).l,a1
 										move.w  #$60,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function DMAicon4
 
@@ -8427,7 +6517,7 @@ loc_1410C:
 										bpl.s   loc_1414A
 										moveq   #1,d7
 										bsr.w   sub_143E0
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										bra.w   loc_141C8
 loc_1414A:
 										
@@ -8459,7 +6549,7 @@ loc_14162:
 										bne.s   loc_141AC
 										moveq   #1,d7
 										bsr.w   sub_143E0
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										moveq   #$FFFFFFFF,d1
 										bra.w   loc_141C8
 loc_141AC:
@@ -8523,24 +6613,24 @@ loc_141FE:
 										move.w  d1,-$A(a6)
 										lea     (DMA_SPACE_FF8804).l,a1
 										move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
-										bsr.w   loadHighlightableIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadHighlightableIcon
+										bsr.w   CleanIconCorners
 										move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
-										bsr.w   loadHighlightableIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadHighlightableIcon
+										bsr.w   CleanIconCorners
 										move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
-										bsr.w   loadHighlightableIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadHighlightableIcon
+										bsr.w   CleanIconCorners
 										move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
-										bsr.w   loadHighlightableIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadHighlightableIcon
+										bsr.w   CleanIconCorners
 										clr.w   d6
 										moveq   #$1F,d7
 										bsr.w   DMAicon1
 										bsr.w   DMAicon2
 										bsr.w   DMAicon3
 										bsr.w   DMAicon4
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										moveq   #$1E,d6
 loc_14264:
 										
@@ -8549,7 +6639,7 @@ loc_14264:
 										moveq   #1,d1
 										cmpi.w  #$7F,((DISPLAYED_ICON_2-$1000000)).w 
 										beq.s   loc_1427E
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_142FA
 loc_1427E:
@@ -8559,7 +6649,7 @@ loc_1427E:
 										moveq   #2,d1
 										cmpi.w  #$7F,((DISPLAYED_ICON_3-$1000000)).w 
 										beq.s   loc_14298
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_142FA
 loc_14298:
@@ -8567,7 +6657,7 @@ loc_14298:
 										btst    #0,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_142AA
 										clr.w   d1
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_142FA
 loc_142AA:
@@ -8577,7 +6667,7 @@ loc_142AA:
 										moveq   #3,d1
 										cmpi.w  #$7F,((DISPLAYED_ICON_4-$1000000)).w 
 										beq.s   loc_142C4
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_142FA
 loc_142C4:
@@ -8606,7 +6696,7 @@ loc_142FA:
 										clr.w   d0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 										clr.w   d6
-										bsr.w   doSomethingRelatedToMenuChoice
+										bsr.w   DoSomethingRelatedToMenuChoice
 										move.w  (sp)+,d0
 										move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 										move.w  d0,d2
@@ -8637,13 +6727,13 @@ loc_1434A:
 										bsr.w   sub_137AC
 										move.w  -8(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										moveq   #$1D,d6
 loc_14366:
 										
 										clr.w   d0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-										bsr.w   doSomethingRelatedToMenuChoice
+										bsr.w   DoSomethingRelatedToMenuChoice
 										moveq   #$14,d1
 										bsr.w   sub_146AE
 										move.b  #$10,(byte_FFDCCB).l
@@ -8697,7 +6787,7 @@ sub_143E0:
 										move.w  #$2001,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.b  d7,((word_FFAF8C-$1000000)).w
 										clr.w   d5
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d5
@@ -8724,7 +6814,7 @@ sub_14422:
 										move.w  #$21C,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										movem.w (sp)+,d0-d2/d7
 										rts
 
@@ -8740,7 +6830,7 @@ sub_1443E:
 										move.w  #$20E,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										movem.w (sp)+,d0-d2/d7
 										rts
 
@@ -8752,7 +6842,7 @@ sub_1443E:
 sub_1445A:
 										
 										movem.l d0/d3-a1,-(sp)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
 										moveq   #0,d1
@@ -8774,17 +6864,17 @@ sub_1445A:
 										clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
 										lea     (DMA_SPACE_FF8804).l,a1
 										move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
-										bsr.w   loadIHighlightableSpellIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadIHighlightableSpellIcon
+										bsr.w   CleanIconCorners
 										move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
-										bsr.w   loadIHighlightableSpellIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadIHighlightableSpellIcon
+										bsr.w   CleanIconCorners
 										move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
-										bsr.w   loadIHighlightableSpellIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadIHighlightableSpellIcon
+										bsr.w   CleanIconCorners
 										move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
-										bsr.w   loadIHighlightableSpellIcon
-										bsr.w   cleanIconCorners
+										bsr.w   LoadIHighlightableSpellIcon
+										bsr.w   CleanIconCorners
 loc_144D8:
 										
 										jsr     (WaitForVInt).w 
@@ -8796,7 +6886,7 @@ loc_144DE:
 										moveq   #1,d1
 										cmpi.w  #$3F,((DISPLAYED_ICON_2-$1000000)).w 
 										beq.s   loc_144F8
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_14574
 loc_144F8:
@@ -8806,7 +6896,7 @@ loc_144F8:
 										moveq   #2,d1
 										cmpi.w  #$3F,((DISPLAYED_ICON_3-$1000000)).w 
 										beq.s   loc_14512
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_14574
 loc_14512:
@@ -8814,7 +6904,7 @@ loc_14512:
 										btst    #0,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_14524
 										clr.w   d1
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_14574
 loc_14524:
@@ -8824,7 +6914,7 @@ loc_14524:
 										moveq   #3,d1
 										cmpi.w  #$3F,((DISPLAYED_ICON_4-$1000000)).w 
 										beq.s   loc_1453E
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_14574
 loc_1453E:
@@ -8853,7 +6943,7 @@ loc_14574:
 										clr.w   d0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 										clr.w   d6
-										bsr.w   doSomethingRelatedToMenuChoice
+										bsr.w   DoSomethingRelatedToMenuChoice
 										move.w  (sp)+,d0
 										move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 										moveq   #$1D,d6
@@ -8861,7 +6951,7 @@ loc_1458A:
 										
 										clr.w   d0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-										bsr.w   doSomethingRelatedToMenuChoice
+										bsr.w   DoSomethingRelatedToMenuChoice
 										moveq   #$14,d1
 										bsr.w   sub_146AE
 										subq.w  #1,d6
@@ -8873,7 +6963,7 @@ loc_145A0:
 										bra.w   loc_144DE
 loc_145A8:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d1
 										ext.w   d1
@@ -8897,7 +6987,7 @@ loc_145BC:
 										moveq   #$1E,d6
 										clr.w   d0
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-										bsr.w   doSomethingRelatedToMenuChoice
+										bsr.w   DoSomethingRelatedToMenuChoice
 										move.w  (sp)+,d2
 										move.w  d2,d4
 										lsr.w   #6,d4
@@ -8913,7 +7003,7 @@ loc_145EA:
 										tst.w   d3
 										ble.s   loc_14600
 										subq.w  #1,d3
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 
 ; END OF FUNCTION CHUNK FOR sub_1445A
 
@@ -8929,7 +7019,7 @@ loc_14600:
 										cmp.w   d4,d3
 										bge.s   loc_14616
 										addq.w  #1,d3
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 
 ; END OF FUNCTION CHUNK FOR sub_1445A
 
@@ -8978,7 +7068,7 @@ loc_14654:
 										bsr.w   sub_146AE
 										tst.b   d3
 										bpl.s   loc_1466C
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 
 ; END OF FUNCTION CHUNK FOR sub_1445A
 
@@ -9005,7 +7095,7 @@ loc_1466C:
 
 ; =============== S U B R O U T I N E =======================================
 
-cleanIconCorners:
+CleanIconCorners:
 										
 										ori.w   #$F,-2(a1)
 										ori.w   #$F000,-$24(a1)
@@ -9017,7 +7107,7 @@ cleanIconCorners:
 										ori.w   #$F000,-$180(a1)
 										rts
 
-	; End of function cleanIconCorners
+	; End of function CleanIconCorners
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9136,7 +7226,7 @@ sub_1474C:
 										bsr.w   WriteTilesFromNumber
 										move.w  -8(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										rts
 
 	; End of function sub_1474C
@@ -9155,12 +7245,12 @@ sub_1477E:
 										cmp.w   d4,d1
 										beq.w   return_147E6
 										jsr     sub_14422(pc)
-										trap    #0
-										dc.w $1A                ; cursed item effect
-										trap    #5
+										trap    #TRAP_SOUNDCOM
+										dc.w MUSIC_CURSED_ITEM  ; cursed item effect
+										trap    #TRAP_TEXTBOX
 										dc.w $2B                ; Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}
-										bsr.w   waitForMusicResumeAndPlayerInput_0
-										trap    #5
+										bsr.w   WaitForMusicResumeAndPlayerInput_0
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										jsr     sub_1443E(pc)
 										bra.w   return_147E6
@@ -9172,12 +7262,12 @@ loc_147B8:
 										bne.w   return_147E6
 										move.w  d0,(RAM_Dialogue_NameIdx1).l
 										jsr     sub_14422(pc)
-										trap    #0
-										dc.w $1A                ; cursed item effect
-										trap    #5
+										trap    #TRAP_SOUNDCOM
+										dc.w MUSIC_CURSED_ITEM  ; cursed item effect
+										trap    #TRAP_TEXTBOX
 										dc.w $22                ; Gosh!  {NAME} is{N}cursed!{W2}
-										bsr.w   waitForMusicResumeAndPlayerInput_0
-										trap    #5
+										bsr.w   WaitForMusicResumeAndPlayerInput_0
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										jsr     sub_1443E(pc)
 return_147E6:
@@ -9189,16 +7279,16 @@ return_147E6:
 
 ; =============== S U B R O U T I N E =======================================
 
-waitForMusicResumeAndPlayerInput_0:
+WaitForMusicResumeAndPlayerInput_0:
 										
 										move.w  d0,-(sp)
 										move.w  #$FB,d0 
-										jsr     (playMusicAfterCurrentOne).w
+										jsr     (PlayMusicAfterCurrentOne).w
 										jsr     (WaitForPlayerInput).w
 										move.w  (sp)+,d0
 										rts
 
-	; End of function waitForMusicResumeAndPlayerInput_0
+	; End of function WaitForMusicResumeAndPlayerInput_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9217,19 +7307,19 @@ loc_14814:
 										link    a6,#-$F0
 										move.w  #$1B06,d0
 										move.w  #$2F7,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										move.w  d0,-2(a6)
 										move.l  a1,-6(a6)
 										bsr.w   sub_14BB0       
 										move.w  #$A05,d0
 										move.w  #$F606,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										move.w  d0,-8(a6)
 										move.l  a1,-$C(a6)
 										bsr.w   sub_14B68
 										move.w  #$904,d0
 										move.w  #$2017,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										move.w  d0,-$E(a6)
 										move.l  a1,-$12(a6)
 										bsr.w   sub_14B28
@@ -9253,7 +7343,7 @@ loc_14814:
 										lea     ($FE00).l,a1
 										move.w  #$100,d0
 										jsr     (DmaTilesViaFF8804bis).w
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 										bsr.w   sub_14EDE
 loc_148BC:
 										
@@ -9267,7 +7357,7 @@ loc_148BC:
 										cmp.w   ((word_FFB12E-$1000000)).w,d2
 										bge.s   loc_14906
 										addq.w  #1,d0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										cmp.w   ((word_FFB134-$1000000)).w,d0
 										blt.s   loc_148FA
@@ -9291,7 +7381,7 @@ loc_14906:
 										add.w   d0,d2
 										ble.s   loc_1494A
 										subq.w  #1,d0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bge.s   loc_1493E
 										subq.w  #1,((word_FFB130-$1000000)).w
@@ -9311,7 +7401,7 @@ loc_1494A:
 										tst.w   ((word_FFB130-$1000000)).w
 										beq.s   loc_1496A
 										subq.w  #1,((word_FFB130-$1000000)).w
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										move.b  #1,((word_FFAF9E-$1000000)).w
 										bsr.w   sub_14E62
@@ -9325,7 +7415,7 @@ loc_1496A:
 										cmp.w   ((word_FFB12E-$1000000)).w,d2
 										bge.s   loc_149C2
 										addq.w  #1,((word_FFB130-$1000000)).w
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										move.w  ((word_FFB132-$1000000)).w,d0
 										move.w  ((word_FFB130-$1000000)).w,d2
@@ -9402,7 +7492,7 @@ loc_14A26:
 										move.w  #$2017,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).l
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 										move.w  -$E(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).l
 										move.w  -8(a6),d0
@@ -9504,7 +7594,7 @@ sub_14B28:
 	; End of function sub_14B28
 
 aGold:              dc.b 'GOLD',0
-										dc.b   0
+										dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -9543,7 +7633,7 @@ sub_14BB0:
 										movea.l -6(a6),a1
 										lea     unk_1505C(pc), a0
 										move.w  #$144,d7
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										bsr.w   *+4
 										lea     (byte_FF6942).l,a0
 										move.w  #$63F,d7
@@ -9592,8 +7682,8 @@ loc_14C0E:
 										lea     ($B800).l,a1
 										move.w  #$3C0,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										rts
 
 	; End of function sub_14BB0
@@ -9709,24 +7799,24 @@ sub_14D0C:
 										adda.w  #$A2,a0 
 										adda.w  #$36,a1 
 										move.w  #$6C,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     unk_151A0(pc), a0
 										movea.l -6(a6),a1
 										adda.w  #$A2,a1 
 										move.w  #$36,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     unk_151A0(pc), a0
 										movea.l -6(a6),a1
 										adda.w  #$D8,a1 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 loc_14D4A:
 										
 										move.w  -2(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										move.w  -8(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										jmp     (WaitForVInt).w 
 
 	; End of function sub_14D0C
@@ -9740,23 +7830,23 @@ sub_14D6A:
 										movea.l -6(a6),a1
 										adda.w  #$36,a1 
 										move.w  #$36,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     unk_151A0(pc), a0
 										movea.l -6(a6),a1
 										adda.w  #$6C,a1 
 										move.w  #$36,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     -$F0(a6),a0
 										movea.l -6(a6),a1
 										adda.w  #$A2,a1 
 										move.w  #$6C,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										bsr.w   sub_14DBE
 										lea     -$F0(a6),a0
 										movea.l -6(a6),a1
 										adda.w  #$36,a1 
 										move.w  #$D8,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 
 	; End of function sub_14D6A
 
@@ -9780,17 +7870,17 @@ sub_14DC0:
 										adda.w  #$36,a0 
 										adda.w  #$A2,a1 
 										move.w  #$6C,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     unk_151A0(pc), a0
 										movea.l -6(a6),a1
 										adda.w  #$36,a1 
 										move.w  #$36,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     unk_151A0(pc), a0
 										movea.l -6(a6),a1
 										adda.w  #$6C,a1 
 										move.w  #$36,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										bra.w   loc_14D4A
 
 	; End of function sub_14DC0
@@ -9804,24 +7894,24 @@ sub_14E06:
 										movea.l -6(a6),a1
 										adda.w  #$A2,a1 
 										move.w  #$36,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     unk_151A0(pc), a0
 										movea.l -6(a6),a1
 										adda.w  #$D8,a1 
 										move.w  #$36,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     -$F0(a6),a0
 										movea.l -6(a6),a1
 										adda.w  #$6C,a0 
 										adda.w  #$36,a1 
 										move.w  #$6C,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										bsr.w   sub_14E5E
 										lea     -$F0(a6),a0
 										movea.l -6(a6),a1
 										adda.w  #$36,a1 
 										move.w  #$D8,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 
 	; End of function sub_14E06
 
@@ -9843,7 +7933,7 @@ sub_14E62:
 										adda.w  #$36,a0 
 										lea     -$F0(a6),a1
 										move.w  #$D8,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										tst.b   ((word_FFAF9E-$1000000)).w
 										bne.s   loc_14E82
 										bsr.w   sub_14D0C
@@ -9858,7 +7948,7 @@ loc_14E86:
 										adda.w  #$36,a0 
 										lea     -$F0(a6),a1
 										move.w  #$D8,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										tst.b   ((word_FFAF9E-$1000000)).w
 										bne.s   loc_14EAA
 										bsr.w   sub_14D6A
@@ -9883,7 +7973,7 @@ sub_14EC0:
 										
 										move.w  -8(a6),d0
 										move.w  #$2000,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										move.w  -2(a6),d0
 										move.w  #$201,d1
 										moveq   #4,d2
@@ -10803,13 +8893,13 @@ loc_15278:
 
 ; =============== S U B R O U T I N E =======================================
 
-yesNoPrompt:
+YesNoPrompt:
 										
 										clr.w   d0
 										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,d0
 										bra.s   loc_1528E
 
-	; End of function yesNoPrompt
+	; End of function YesNoPrompt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10821,7 +8911,7 @@ YesNoChoiceBox:
 	; End of function YesNoChoiceBox
 
 
-; START OF FUNCTION CHUNK FOR yesNoPrompt
+; START OF FUNCTION CHUNK FOR YesNoPrompt
 
 loc_1528E:
 										
@@ -10830,14 +8920,14 @@ loc_1528E:
 										move.w  d0,-(sp)
 										move.w  #$E03,d0
 										move.w  #$2011,d1
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  d0,-2(a6)
 										move.l  a1,-6(a6)
 										movea.l (p_MenuTiles_YesNo).l,a0
 										lea     (DMA_SPACE_FF8804).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
-										bsr.w   copyYesNoIconsToRAM
+										bsr.w   CopyYesNoIconsToRAM
 										clr.w   d6
 										bsr.w   sub_1542A
 										bsr.w   sub_1544A
@@ -10861,7 +8951,7 @@ loc_152F0:
 										jsr     (MoveWindowWithSFX).w
 loc_15302:
 										
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  (sp)+,d0
 										beq.w   loc_15312
 loc_1530C:
@@ -10876,28 +8966,28 @@ loc_15314:
 										btst    #2,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.w   loc_15328
 										clr.w   d1
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 
-; END OF FUNCTION CHUNK FOR yesNoPrompt
+; END OF FUNCTION CHUNK FOR YesNoPrompt
 
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_15378
 
-; START OF FUNCTION CHUNK FOR yesNoPrompt
+; START OF FUNCTION CHUNK FOR YesNoPrompt
 
 loc_15328:
 										
 										btst    #3,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.w   loc_1533C
 										moveq   #$FFFFFFFF,d1
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 
-; END OF FUNCTION CHUNK FOR yesNoPrompt
+; END OF FUNCTION CHUNK FOR YesNoPrompt
 
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_15378
 
-; START OF FUNCTION CHUNK FOR yesNoPrompt
+; START OF FUNCTION CHUNK FOR YesNoPrompt
 
 loc_1533C:
 										
@@ -10921,7 +9011,7 @@ loc_15364:
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 										bra.w   loc_153D6
 
-; END OF FUNCTION CHUNK FOR yesNoPrompt
+; END OF FUNCTION CHUNK FOR YesNoPrompt
 
 loc_15378:          move.w  d1,-(sp)
 										clr.w   d0
@@ -10930,15 +9020,15 @@ loc_15378:          move.w  d1,-(sp)
 										bsr.w   sub_15422       
 										move.w  (sp)+,d0
 										move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
-										bsr.w   copyYesNoIconsToRAM
+										bsr.w   CopyYesNoIconsToRAM
 										move.w  -2(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
 										beq.s   loc_153AC
 										subq.w  #1,d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 loc_153AC:          move.w  ((word_FFB086-$1000000)).w,d0
 										beq.s   loc_153BE
 										subq.w  #1,d0
@@ -10947,7 +9037,7 @@ loc_153AC:          move.w  ((word_FFB086-$1000000)).w,d0
 										jsr     (MoveWindowWithSFX).w
 loc_153BE:          moveq   #$13,d6
 
-; START OF FUNCTION CHUNK FOR yesNoPrompt
+; START OF FUNCTION CHUNK FOR YesNoPrompt
 
 loc_153C0:
 										
@@ -10982,7 +9072,7 @@ loc_153F6:
 										jsr     (MoveWindowWithSFX).w
 loc_15408:
 										
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  -2(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).w
 										unlk    a6
@@ -10991,7 +9081,7 @@ loc_15408:
 										ext.w   d0
 										rts
 
-; END OF FUNCTION CHUNK FOR yesNoPrompt
+; END OF FUNCTION CHUNK FOR YesNoPrompt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11019,7 +9109,7 @@ loc_1543A:
 										lea     ($B800).l,a1
 										move.w  #$90,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function sub_1542A
 
@@ -11037,26 +9127,26 @@ loc_1545A:
 										lea     ($B920).l,a1
 										move.w  #$90,d0 
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgainbis).w
+										jmp     (BwahDMAstuffAgainbis).w
 
 	; End of function sub_1544A
 
 
 ; =============== S U B R O U T I N E =======================================
 
-copyYesNoIconsToRAM:
+CopyYesNoIconsToRAM:
 										
 										movea.l -6(a6),a1
 										lea     asc_154A2(pc), a0
 										move.w  #$54,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										tst.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
 										bne.s   loc_15486
-										lea     s_Yes(pc), a0
+										lea     s_Yes(pc), a0   
 										bra.s   loc_1548A
 loc_15486:
 										
-										lea     s_No(pc), a0
+										lea     s_No(pc), a0    
 loc_1548A:
 										
 										movea.l -6(a6),a1
@@ -11066,13 +9156,10 @@ loc_1548A:
 										bsr.w   WriteTilesFromASCII
 										rts
 
-	; End of function copyYesNoIconsToRAM
+	; End of function CopyYesNoIconsToRAM
 
-s_Yes:              dc.b $59 
-										dc.b $65 
-										dc.b $73 
-s_No:               dc.b $4E 
-										dc.b $6F 
+s_Yes:              dc.b 'Yes'
+s_No:               dc.b 'No'
 										dc.b $20
 asc_154A2:          dc.b '≈¿≈¡≈¬',0
 										dc.b   0
@@ -11112,7 +9199,7 @@ loc_1550C:
 										
 										lea     ((BLINK_DATA-$1000000)).w,a2
 										move.w  ((BLINK_TILE_NUMBER-$1000000)).w,d7
-										bsr.w   updatePortrait  
+										bsr.w   UpdatePortrait  
 										move.w  (sp)+,d0
 										btst    #1,d0
 										bne.s   loc_15524
@@ -11125,7 +9212,7 @@ loc_15526:
 										
 										lea     ((MOUTH_DATA-$1000000)).w,a2
 										move.w  ((MOUTH_TILE_NUMBER-$1000000)).w,d7
-										bsr.w   updatePortrait  
+										bsr.w   UpdatePortrait  
 										rts
 
 	; End of function sub_154F6
@@ -11148,7 +9235,7 @@ VInt_HandlePortraitBlinking:
 										moveq   #1,d1
 										lea     ((BLINK_DATA-$1000000)).w,a2
 										move.w  ((BLINK_TILE_NUMBER-$1000000)).w,d7
-										bsr.w   updatePortrait  
+										bsr.w   UpdatePortrait  
 loc_1555E:
 										
 										tst.w   (a0)
@@ -11156,7 +9243,7 @@ loc_1555E:
 										clr.w   d1
 										lea     ((BLINK_DATA-$1000000)).w,a2
 										move.w  ((BLINK_TILE_NUMBER-$1000000)).w,d7
-										bsr.w   updatePortrait  
+										bsr.w   UpdatePortrait  
 										moveq   #$78,d6 
 										jsr     (UpdateRandomSeed).w
 										addi.w  #$1E,d7
@@ -11177,7 +9264,7 @@ loc_1558E:
 										moveq   #1,d1
 										lea     ((MOUTH_DATA-$1000000)).w,a2
 										move.w  ((MOUTH_TILE_NUMBER-$1000000)).w,d7
-										bsr.w   updatePortrait  
+										bsr.w   UpdatePortrait  
 loc_155A4:
 										
 										tst.w   (a0)
@@ -11187,7 +9274,7 @@ loc_155A8:
 										clr.w   d1
 										lea     ((MOUTH_DATA-$1000000)).w,a2
 										move.w  ((MOUTH_TILE_NUMBER-$1000000)).w,d7
-										bsr.w   updatePortrait  
+										bsr.w   UpdatePortrait  
 										moveq   #5,d6
 										jsr     (UpdateRandomSeed).w
 										addi.w  #$A,d7
@@ -11203,7 +9290,7 @@ return_155C2:
 
 ; d1 = alternate/original, d7 = tile number
 
-updatePortrait:
+UpdatePortrait:
 										
 										bne.s   loc_155C8
 										rts
@@ -11250,17 +9337,17 @@ loc_1560E:
 										move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
 										subq.w  #1,d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										rts
 
-	; End of function updatePortrait
+	; End of function UpdatePortrait
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ;     In: D0 = portrait idx
 
-loadPortrait:
+LoadPortrait:
 										
 										movem.l d0-a3,-(sp)
 										movea.l (p_pt_Portraits).l,a0
@@ -11299,18 +9386,18 @@ loc_15674:
 										move.l  (a0)+,(a3)+
 										dbf     d7,loc_15674
 										lea     (DMA_SPACE_FF8804).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										addq.b  #6,((byte_FFDEED-$1000000)).w
 										movea.l a1,a0
 										lea     ($F800).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (storeVdpCommandster).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (StoreVdpCommandster).w
 										movem.l (sp)+,d0-a3
 										rts
 
-	; End of function loadPortrait
+	; End of function LoadPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11346,10 +9433,10 @@ sub_156BC:
 sub_156CE:
 										
 										movem.l d7-a1,-(sp)
-										lea     menuLayout_15706(pc), a0
+										lea     MenuLayout_15706(pc), a0
 										lea     ((VDP_TILE_IDX_LIST-$1000000)).w,a1
 										move.w  #$30,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										movem.l (sp)+,d7-a1
 										jsr     j_GetCharName
 										move.w  d1,d7
@@ -11363,7 +9450,7 @@ sub_156CE:
 
 	; End of function sub_156CE
 
-menuLayout_15706:   dc.b $C0 
+MenuLayout_15706:   dc.b $C0 
 										dc.b $80 
 										dc.b $C0 
 										dc.b $81 
@@ -11418,14 +9505,14 @@ menuLayout_15706:   dc.b $C0
 ;     In: D0 = char idx
 ;     Out: D0 = adjusted portrait idx
 
-getCharPortraitIdx:
+GetCharPortraitIdx:
 										
 										move.w  d1,-(sp)
 										cmpi.b  #$1E,d0
 										bhi.w   loc_1576E
 										jsr     j_GetClass      
 										cmpi.b  #$C,d1          ; stupid CMP mechanism for alternate portraits, need to improve that one day
-										bne.s   loc_1574E
+										bne.s   loc_1574E       ; hardcoded promotion classes which trigger new portraits
 										moveq   #$2F,d0 
 loc_1574E:
 										
@@ -11452,20 +9539,20 @@ loc_1576E:
 										move.w  (sp)+,d1
 										rts
 
-	; End of function getCharPortraitIdx
+	; End of function GetCharPortraitIdx
 
 
 ; =============== S U B R O U T I N E =======================================
 
-CreateLandEffectWindow_0:
+CreateLandEffectWindow:
 										
 										movem.l d0-a2,-(sp)
 										move.w  #$805,d0
 										move.w  #$F801,d1
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										addq.w  #1,d0
 										move.w  d0,((LAND_EFFECT_WINDOW_IDX-$1000000)).w
-										bsr.w   drawLandEffectWindow
+										bsr.w   DrawLandEffectWindow
 										move.w  ((LAND_EFFECT_WINDOW_IDX-$1000000)).w,d0
 										subq.w  #1,d0
 										move.w  #$201,d1
@@ -11476,11 +9563,11 @@ CreateLandEffectWindow_0:
 loc_157A6:
 										
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										movem.l (sp)+,d0-a2
 										rts
 
-	; End of function CreateLandEffectWindow_0
+	; End of function CreateLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11495,7 +9582,7 @@ HideLandEffectWindow:
 										move.w  #$F801,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  ((LAND_EFFECT_WINDOW_IDX-$1000000)).w,d0
 										subq.w  #1,d0
 										jsr     (ClearWindowAndUpdateEndPtr).w
@@ -11515,13 +9602,13 @@ sub_157E8:
 										tst.w   ((LAND_EFFECT_WINDOW_IDX-$1000000)).w
 										beq.w   return_15810
 										movem.l d0-a2,-(sp)
-										bsr.w   drawLandEffectWindow
+										bsr.w   DrawLandEffectWindow
 										tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 										bne.s   loc_1580C
 										move.w  ((LAND_EFFECT_WINDOW_IDX-$1000000)).w,d0
 										subq.w  #1,d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 loc_1580C:
 										
 										movem.l (sp)+,d0-a2
@@ -11534,7 +9621,7 @@ return_15810:
 
 ; =============== S U B R O U T I N E =======================================
 
-drawLandEffectWindow:
+DrawLandEffectWindow:
 										
 										move.w  ((LAND_EFFECT_WINDOW_IDX-$1000000)).w,d0
 										subq.w  #1,d0
@@ -11542,7 +9629,7 @@ drawLandEffectWindow:
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
 										move.l  a1,d3
 										move.w  #$805,d0
-										bsr.w   copyWindowTilesToRAM
+										bsr.w   CopyWindowTilesToRAM
 										move.w  ((MOVING_BATTLE_ENTITY_IDX-$1000000)).w,d0
 										jsr     j_GetMoveCost
 										move.w  d1,d0
@@ -11562,7 +9649,7 @@ drawLandEffectWindow:
 										bsr.w   WriteTilesFromASCII
 										rts
 
-	; End of function drawLandEffectWindow
+	; End of function DrawLandEffectWindow
 
 aLandEffect:        dc.b 'LAND',$B,'EFFECT',0
 
@@ -11577,10 +9664,10 @@ sub_1586E:
 										move.b  ((DISPLAY_BATTLE_MESSAGES-$1000000)).w,-8(a6)
 										move.w  #$1309,d0
 										move.w  #$71C,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										move.w  d0,-6(a6)
 										move.l  a1,-4(a6)
-										bsr.w   copyBattlefieldOptionsMenuLayout
+										bsr.w   CopyBattlefieldOptionsMenuLayout
 										move.w  -6(a6),d0
 										move.w  #$712,d1
 										moveq   #4,d2
@@ -11590,8 +9677,8 @@ sub_1586E:
 										move.w  #$C0,d0 
 										moveq   #2,d1
 										jsr     (DmaTilesViaFF8804bis).w
-										jsr     (set_FFDE94_bit3).w
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (Set_FFDE94_bit3).w
+										jsr     (WaitForVint_andFFA900Clear).l
 										clr.w   d4
 										bsr.w   sub_15A20
 										moveq   #$14,d6
@@ -11646,7 +9733,7 @@ loc_1594C:
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).l
 										bsr.w   sub_1598C
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 										move.w  -6(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).l
 										unlk    a6
@@ -11659,14 +9746,14 @@ loc_1594C:
 
 ; =============== S U B R O U T I N E =======================================
 
-copyBattlefieldOptionsMenuLayout:
+CopyBattlefieldOptionsMenuLayout:
 										
-										lea     menuLayout_BattlefieldConfig(pc), a0
+										lea     BattleConfigWindowLayout(pc), a0
 										movea.l -4(a6),a1
 										move.w  #$156,d7
-										jmp     (copyBytes).w   
+										jmp     (CopyBytes).w   
 
-	; End of function copyBattlefieldOptionsMenuLayout
+	; End of function CopyBattlefieldOptionsMenuLayout
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11781,7 +9868,7 @@ loc_15A30:
 										andi.w  #1,d3
 loc_15A38:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										rts
 
@@ -11803,355 +9890,14 @@ loc_15A4C:
 										move.b  d3,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
 loc_15A54:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										rts
 
 	; End of function sub_15A3E
 
-menuLayout_BattlefieldConfig:
-										dc.b $C0 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C8 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $2D 
-										dc.b $C0 
-										dc.b $2D 
-										dc.b $C0 
-										dc.b $4D 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $53 
-										dc.b $C0 
-										dc.b $53 
-										dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $47 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $53 
-										dc.b $C0 
-										dc.b $50 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $44 
-										dc.b $C0 
-										dc.b $2D 
-										dc.b $C0 
-										dc.b $2D 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $53 
-										dc.b $C0 
-										dc.b $4C 
-										dc.b $C0 
-										dc.b $4F 
-										dc.b $C0 
-										dc.b $57 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $31 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $32 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $33 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $34 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $46 
-										dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $53 
-										dc.b $C0 
-										dc.b $54 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $2D 
-										dc.b $C0 
-										dc.b $2D 
-										dc.b $C0 
-										dc.b $42 
-										dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $54 
-										dc.b $C0 
-										dc.b $54 
-										dc.b $C0 
-										dc.b $4C 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $4D 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $53 
-										dc.b $C0 
-										dc.b $53 
-										dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $47 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $2D 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $44 
-										dc.b $C0 
-										dc.b $49 
-										dc.b $C0 
-										dc.b $53 
-										dc.b $C0 
-										dc.b $50 
-										dc.b $C0 
-										dc.b $4C 
-										dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $59 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $4E 
-										dc.b $C0 
-										dc.b $4F 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $44 
-										dc.b $C0 
-										dc.b $49 
-										dc.b $C0 
-										dc.b $53 
-										dc.b $C0 
-										dc.b $50 
-										dc.b $C0 
-										dc.b $2E 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $D0 
-										dc.b $60 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D8 
-										dc.b $60 
+BattleConfigWindowLayout:
+										incbin "graphics/windowlayouts/battleconfigwindowlayout.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -12165,30 +9911,30 @@ sub_15BB0:
 										move.w  #$C0,d0 
 										moveq   #2,d1
 										jsr     (DmaTilesViaFF8804bis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (SetFFDE94b3andWait).w
 										move.w  #$1C07,d0
 										move.w  #$21C,d1
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  d0,-$12(a6)
 										move.l  a1,-$C(a6)
 										move.w  #$903,d0
 										move.w  #$2008,d1
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  d0,-$10(a6)
 										move.l  a1,-8(a6)
 										move.w  #$80A,d0
 										move.w  #$F8F6,d1
-										jsr     (createWindow).w
+										jsr     (CreateWindow).w
 										move.w  d0,-$E(a6)
 										addq.w  #1,d0
 										move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
 										move.l  a1,-4(a6)
 										move.w  -$14(a6),d0
-										bsr.w   getPortraitIdx  
+										bsr.w   GetPortraitIdx  
 										move.w  d0,-$16(a6)
 										bsr.w   sub_1604A
 										move.w  -$16(a6),d0
-										bsr.w   loadPortrait    
+										bsr.w   LoadPortrait    
 										move.w  -$10(a6),d0
 										move.w  #$A08,d1
 										moveq   #4,d2
@@ -12199,7 +9945,7 @@ sub_15BB0:
 										move.w  -$E(a6),d0
 										move.w  #$201,d1
 										jsr     (MoveWindowWithSFX).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										jsr     sub_15CC4(pc)
 										nop
 										move.w  -$14(a6),d0
@@ -12221,7 +9967,7 @@ loc_15C72:
 										move.w  #$F8F6,d1
 										jsr     (MoveWindowWithSFX).w
 										clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
-										jsr     (waitForVint_andFFA900Clear).w
+										jsr     (WaitForVint_andFFA900Clear).w
 										move.w  -$12(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).w
 										move.w  -$10(a6),d0
@@ -12270,7 +10016,7 @@ loc_15D22:
 										bra.s   loc_15CDC
 loc_15D2C:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										clr.w   d0
 										move.b  ((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w,d0
@@ -12285,14 +10031,14 @@ loc_15D46:
 										move.b  ((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w,d2
 										mulu.w  #$38,d2 
 										add.w   d2,d0
-										lea     menuLayout_Alphabet(pc), a0
+										lea     (AlphabetWindowLayout+1)(pc), a0
 										move.w  (a0,d0.w),d0
 										tst.b   d0
 										bpl.s   loc_15D64
 										subi.b  #$20,d0 
 loc_15D64:
 										
-										bsr.w   sub_15DC2
+										bsr.w   loc_15DC2
 										move.b  d0,-1(a0)
 										clr.b   (a0)
 										addq.w  #1,-$18(a6)
@@ -12301,7 +10047,7 @@ loc_15D72:
 										bsr.w   sub_16026
 										move.w  -$10(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).w
+										jsr     (SetWindowDestination).w
 										jsr     (WaitForVInt).w 
 										moveq   #$14,d1
 										cmpi.w  #7,-$18(a6)
@@ -12318,19 +10064,13 @@ loc_15D9A:
 										bne.s   loc_15D46
 loc_15DAC:
 										
-										bsr.w   sub_15DC2
+										bsr.w   loc_15DC2
 										tst.w   -$18(a6)
 										beq.w   loc_15CDC
 										clr.b   -2(a0)
-										bsr.w   sub_15DC2
+										bsr.w   loc_15DC2
 										bra.s   loc_15D72
-
-	; End of function sub_15CC4
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_15DC2:
+loc_15DC2:
 										
 										lea     (byte_FF8805).l,a0
 										clr.w   -$18(a6)
@@ -12344,23 +10084,11 @@ loc_15DCC:
 return_15DD8:
 										
 										rts
-
-	; End of function sub_15DC2
-
-
-; START OF FUNCTION CHUNK FOR sub_15CC4
-
 loc_15DDA:
 										
-										trap    #0
-
-; END OF FUNCTION CHUNK FOR sub_15CC4
-
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										bra.s   loc_15DAC
-
-; START OF FUNCTION CHUNK FOR sub_15CC4
-
 loc_15DE0:
 										
 										cmpi.w  #7,-$18(a6)
@@ -12399,15 +10127,9 @@ loc_15E26:
 loc_15E2E:
 										
 										move.b  d0,((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w
-										trap    #0
-
-; END OF FUNCTION CHUNK FOR sub_15CC4
-
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_15D22
-
-; START OF FUNCTION CHUNK FOR sub_15CC4
-
 loc_15E3A:
 										
 										cmpi.w  #7,-$18(a6)
@@ -12446,15 +10168,9 @@ loc_15E80:
 loc_15E88:
 										
 										move.b  d0,((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w
-										trap    #0
-
-; END OF FUNCTION CHUNK FOR sub_15CC4
-
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_15D22
-
-; START OF FUNCTION CHUNK FOR sub_15CC4
-
 loc_15E94:
 										
 										cmpi.w  #7,-$18(a6)
@@ -12468,15 +10184,9 @@ loc_15EAC:
 										
 										move.b  d0,((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w
 										bsr.s   sub_15EE0
-										trap    #0
-
-; END OF FUNCTION CHUNK FOR sub_15CC4
-
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bra.w   loc_15D22
-
-; START OF FUNCTION CHUNK FOR sub_15CC4
-
 loc_15EBA:
 										
 										cmpi.w  #7,-$18(a6)
@@ -12489,13 +10199,13 @@ loc_15EBA:
 loc_15ED2:
 										
 										move.b  d0,((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w
-										trap    #0
-
-; END OF FUNCTION CHUNK FOR sub_15CC4
-
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										bsr.s   sub_15EE0
 										bra.w   loc_15D22
+
+	; End of function sub_15CC4
+
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -12623,10 +10333,10 @@ loc_15FC8:
 
 sub_15FD8:
 										
-										lea     menuLayout_AlphabetEnd(pc), a0
+										lea     AlphabetEndWindowLayout(pc), a0
 										movea.l -8(a6),a1
 										move.w  #$2A,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     (byte_FF8805).l,a0
 										move.w  -$14(a6),d0
 										jsr     j_GetCharName
@@ -12651,10 +10361,10 @@ loc_1601E:
 
 sub_16026:
 										
-										lea     menuLayout_AlphabetEnd(pc), a0
+										lea     AlphabetEndWindowLayout(pc), a0
 										movea.l -8(a6),a1
 										move.w  #$2A,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     (byte_FF8805).l,a0
 										moveq   #$A,d7
 										lea     $14(a1),a1
@@ -12669,470 +10379,28 @@ sub_16026:
 
 sub_1604A:
 										
-										lea     menuLayout_NameEntry(pc), a0
+										lea     NameEntryWindowLayout(pc), a0
 										movea.l -$C(a6),a1
 										move.w  #$366,d7
-										jsr     (copyBytes).w   
-										lea     menuLayout_AlphabetEnd(pc), a0
+										jsr     (CopyBytes).w   
+										lea     AlphabetEndWindowLayout(pc), a0
 										movea.l -8(a6),a1
 										move.w  #$2A,d7 
-										jsr     (copyBytes).w   
-										lea     windowBorderTiles(pc), a0
+										jsr     (CopyBytes).w   
+										lea     WindowBorderTiles(pc), a0
 										movea.l -4(a6),a1
 										move.w  #$A0,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										rts
 
 	; End of function sub_1604A
 
-menuLayout_NameEntry:
-										dc.b $C0 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C8 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $70 
-menuLayout_Alphabet:dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $42 
-										dc.b $C0 
-										dc.b $43 
-										dc.b $C0 
-										dc.b $44 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $46 
-										dc.b $C0 
-										dc.b $47 
-										dc.b $C0 
-										dc.b $48 
-										dc.b $C0 
-										dc.b $49 
-										dc.b $C0 
-										dc.b $4A 
-										dc.b $C0 
-										dc.b $4B 
-										dc.b $C0 
-										dc.b $4C 
-										dc.b $C0 
-										dc.b $4D 
-										dc.b $C0 
-										dc.b $4E 
-										dc.b $C0 
-										dc.b $4F 
-										dc.b $C0 
-										dc.b $50 
-										dc.b $C0 
-										dc.b $51 
-										dc.b $C0 
-										dc.b $52 
-										dc.b $C0 
-										dc.b $53 
-										dc.b $C0 
-										dc.b $54 
-										dc.b $C0 
-										dc.b $55 
-										dc.b $C0 
-										dc.b $56 
-										dc.b $C0 
-										dc.b $57 
-										dc.b $C0 
-										dc.b $58 
-										dc.b $C0 
-										dc.b $59 
-										dc.b $C0 
-										dc.b $5A 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $81 
-										dc.b $C0 
-										dc.b $82 
-										dc.b $C0 
-										dc.b $83 
-										dc.b $C0 
-										dc.b $84 
-										dc.b $C0 
-										dc.b $85 
-										dc.b $C0 
-										dc.b $86 
-										dc.b $C0 
-										dc.b $87 
-										dc.b $C0 
-										dc.b $88 
-										dc.b $C0 
-										dc.b $89 
-										dc.b $C0 
-										dc.b $8A 
-										dc.b $C0 
-										dc.b $8B 
-										dc.b $C0 
-										dc.b $8C 
-										dc.b $C0 
-										dc.b $8D 
-										dc.b $C0 
-										dc.b $8E 
-										dc.b $C0 
-										dc.b $8F 
-										dc.b $C0 
-										dc.b $90 
-										dc.b $C0 
-										dc.b $91 
-										dc.b $C0 
-										dc.b $92 
-										dc.b $C0 
-										dc.b $93 
-										dc.b $C0 
-										dc.b $94 
-										dc.b $C0 
-										dc.b $95 
-										dc.b $C0 
-										dc.b $96 
-										dc.b $C0 
-										dc.b $97 
-										dc.b $C0 
-										dc.b $98 
-										dc.b $C0 
-										dc.b $99 
-										dc.b $C0 
-										dc.b $9A 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $30 
-										dc.b $C0 
-										dc.b $31 
-										dc.b $C0 
-										dc.b $32 
-										dc.b $C0 
-										dc.b $33 
-										dc.b $C0 
-										dc.b $34 
-										dc.b $C0 
-										dc.b $35 
-										dc.b $C0 
-										dc.b $36 
-										dc.b $C0 
-										dc.b $37 
-										dc.b $C0 
-										dc.b $38 
-										dc.b $C0 
-										dc.b $39 
-										dc.b $C0 
-										dc.b $2C 
-										dc.b $C0 
-										dc.b $2E 
-										dc.b $C0 
-										dc.b $2D 
-										dc.b $C0 
-										dc.b $21 
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $23 
-										dc.b $C0 
-										dc.b $27 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $44 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $4C 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $4E 
-										dc.b $C0 
-										dc.b $44 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $D0 
-										dc.b $60 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D8 
-										dc.b $60 
-menuLayout_AlphabetEnd:
-										dc.b $C0 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C8 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $5F 
-										dc.b $C0 
-										dc.b $5F 
-										dc.b $C0 
-										dc.b $5F 
-										dc.b $C0 
-										dc.b $5F 
-										dc.b $C0 
-										dc.b $5F 
-										dc.b $C0 
-										dc.b $5F 
-										dc.b $C0 
-										dc.b $5F 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $D0 
-										dc.b $60 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D8 
-										dc.b $60 
+NameEntryWindowLayout:
+										incbin "graphics/windowlayouts/nameentrywindowlayout.bin"
+AlphabetWindowLayout:
+										incbin "graphics/windowlayouts/alphabetwindowlayout.bin"
+AlphabetEndWindowLayout:
+										incbin "graphics/windowlayouts/alphabetendwindowwindowlayout.bin"
 unk_1623A:          dc.b $3D 
 										dc.b $FF
 										dc.b $80 
@@ -13213,16 +10481,16 @@ unk_1623A:          dc.b $3D
 ;     D2 = max num
 ; Out: D0 = chosen num
 
-ExecuteNumberPrompt:
+NumberPrompt:
 										
 										movem.l d1-a1,-(sp)
-										link    a6,#-WINDOW_NUMPROMPT_STACK_NEGSIZE
+										link    a6,#$FFF0
 										move.w  d0,-WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6)
 										move.w  d1,-WINDOW_NUMPROMPT_STACK_OFFSET_MINNUM(a6)
 										move.w  d2,-WINDOW_NUMPROMPT_STACK_OFFSET_MAXNUM(a6)
 										move.w  #$703,d0
 										move.w  #$2001,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										move.w  d0,-WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6)
 										move.l  a1,-WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWTILESEND(a6)
 										bsr.w   sub_16376
@@ -13230,13 +10498,13 @@ ExecuteNumberPrompt:
 										move.w  #$1801,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).l
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 loc_162C6:
 										
 										bsr.w   sub_16376
 										move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_162E6
 										moveq   #1,d3
@@ -13282,7 +10550,7 @@ loc_1634A:
 										move.w  #$2001,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).l
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 										move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).l
 										move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6),d0
@@ -13290,7 +10558,7 @@ loc_1634A:
 										movem.l (sp)+,d1-a1
 										rts
 
-	; End of function ExecuteNumberPrompt
+	; End of function NumberPrompt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13299,7 +10567,7 @@ sub_16376:
 										
 										movea.l -4(a6),a1
 										move.w  #$703,d0
-										bsr.w   copyWindowTilesToRAM
+										bsr.w   CopyWindowTilesToRAM
 										movea.l -4(a6),a1
 										adda.w  #$10,a1
 										move.w  -8(a6),d0
@@ -13346,7 +10614,7 @@ DebugFlagSetter:
 										move.w  d0,-8(a6)
 										move.w  #$703,d0
 										move.w  #$2001,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										move.w  d0,-6(a6)
 										move.l  a1,-4(a6)
 										bsr.s   sub_16376
@@ -13354,13 +10622,13 @@ DebugFlagSetter:
 										move.w  #$1801,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).l
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 loc_163F6:
 										
 										bsr.w   sub_164AC
 										move.w  -6(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										btst    #3,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_16416
 										moveq   #1,d3
@@ -13397,14 +10665,14 @@ loc_1645E:
 										bra.s   loc_163F6
 loc_16464:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										move.w  -8(a6),d1
 										jsr     j_SetFlag
 										bra.s   loc_1645E
 loc_16474:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										move.w  -8(a6),d1
 										jsr     j_ClearFlag
@@ -13415,7 +10683,7 @@ loc_16484:
 										move.w  #$2001,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).l
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 										move.w  -6(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).l
 										unlk    a6
@@ -13431,7 +10699,7 @@ sub_164AC:
 										
 										movea.l -4(a6),a1
 										move.w  #$703,d0
-										bsr.w   copyWindowTilesToRAM
+										bsr.w   CopyWindowTilesToRAM
 										movea.l -4(a6),a1
 										adda.w  #$10,a1
 										move.w  -8(a6),d0
@@ -13472,7 +10740,7 @@ loc_164F8:
 loc_16502:
 										
 										move.w  d0,-8(a6)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										rts
 
@@ -13481,21 +10749,21 @@ loc_16502:
 
 ; =============== S U B R O U T I N E =======================================
 
-specialBattle:
+SpecialBattle:
 										
 										movem.l d0-d1/a0-a1,-(sp)
 										tst.w   ((TIMER_WINDOW_INDEX-$1000000)).w
 										bne.s   loc_1654C
 										move.w  #$804,d0        ; width height
 										move.w  #$117,d1        ; X-Y screen pos
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										bsr.w   sub_165C0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										addq.w  #1,d0
 										move.w  d0,((TIMER_WINDOW_INDEX-$1000000)).w
-										trap    #9
-										dc.w 1
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ADD
 										dc.l sub_16588
 										move.l  #$FFFFFFFF,((SPECIAL_BATTLE_TIME-$1000000)).w
 										addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
@@ -13504,7 +10772,7 @@ loc_1654C:
 										movem.l (sp)+,d0-d1/a0-a1
 										rts
 
-	; End of function specialBattle
+	; End of function SpecialBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13516,12 +10784,12 @@ sub_16552:
 										beq.s   loc_16582
 										subq.w  #1,d0
 										move.w  #$2020,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										jsr     (WaitForVInt).w 
 										jsr     (ClearWindowAndUpdateEndPtr).l
 										clr.w   ((TIMER_WINDOW_INDEX-$1000000)).w
-										trap    #9
-										dc.w 2
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_REMOVE
 										dc.l sub_16588
 										subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_16582:
@@ -13545,12 +10813,12 @@ sub_16588:
 										move.l  d1,((SPECIAL_BATTLE_TIME-$1000000)).w
 										subq.w  #1,d0
 										bsr.w   sub_165C0
-										trap    #0
+										trap    #VINTS_CLEAR
 										dc.w SFX_MENU_SELECTION
 										tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 										bne.s   loc_165BA
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 loc_165BA:
 										
 										movem.l (sp)+,d0-d1/a0-a1
@@ -13567,9 +10835,9 @@ sub_165C0:
 										clr.w   d1
 										jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
 										movem.l a1,-(sp)
-										lea     VDPTileOrder_TimerWindow(pc), a0
+										lea     TimerWindowLayout(pc), a0
 										moveq   #$40,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										movem.l (sp)+,a1
 										adda.w  #$22,a1 
 										move.l  ((SECONDS_COUNTER-$1000000)).w,d0
@@ -13596,75 +10864,11 @@ loc_165FA:
 
 	; End of function sub_165C0
 
-VDPTileOrder_TimerWindow:
-										dc.b $C0 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C8 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $54 
-										dc.b $C0 
-										dc.b $49 
-										dc.b $C0 
-										dc.b $4D 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $30 
-										dc.b $C0 
-										dc.b $30 
-										dc.b $C0 
-										dc.b $30 
-										dc.b $C0 
-										dc.b $3A 
-										dc.b $C0 
-										dc.b $30 
-										dc.b $C0 
-										dc.b $30 
-										dc.b $C8 
-										dc.b $70 
-										dc.b $D0 
-										dc.b $60 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D8 
-										dc.b $60 
+TimerWindowLayout:  incbin "graphics/windowlayouts/timerwindowwindowlayout.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
-executeWitchMainMenu:
+WitchMainMenu:
 										
 										movem.l d1-a1,-(sp)
 										link    a6,#-$10
@@ -13676,18 +10880,18 @@ executeWitchMainMenu:
 										movem.w d0,-(sp)
 										move.w  #$1C0C,d0
 										move.w  #$2001,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										move.w  d0,-6(a6)
 										move.l  a1,-4(a6)
 										movea.l (p_plt_WitchChoice).l,a0
 										lea     (Palette2).l,a1
 										move.w  #$20,d7 
-										jsr     (copyBytes).w   
-										jsr     (storeVdpCommandster).w
+										jsr     (CopyBytes).w   
+										jsr     (StoreVdpCommandster).w
 										bsr.w   sub_1679E
 										move.w  -6(a6),d0
 										move.w  #$202,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										jsr     (WaitForVInt).w 
 										movem.w (sp)+,d0
 loc_166C2:
@@ -13696,7 +10900,7 @@ loc_166C2:
 										movem.w d0,-(sp)
 										move.w  -6(a6),d0
 										move.w  #$8080,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										movem.w (sp)+,d0
 										btst    #3,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_166EA
@@ -13744,12 +10948,12 @@ loc_16756:
 										move.w  #$FFFF,d0
 loc_1675A:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION     ; validation
 										movem.w d0,-(sp)
 										move.w  -6(a6),d0
 										move.w  #$2001,d1
-										jsr     (setWindowDestination).l
+										jsr     (SetWindowDestination).l
 										jsr     (WaitForVInt).w 
 										move.w  -6(a6),d0
 										jsr     (ClearWindowAndUpdateEndPtr).l
@@ -13758,14 +10962,14 @@ loc_1675A:
 										movem.l (sp)+,d1-a1
 										rts
 
-	; End of function executeWitchMainMenu
+	; End of function WitchMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_1678A:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										add.w   d3,d0
 										andi.w  #3,d0
@@ -13793,7 +10997,7 @@ loc_167A6:
 										move.w  #0,d3
 										move.w  #0,d2
 										move.w  #$188,d1
-										bsr.w   drawWitchMenuBubble
+										bsr.w   DrawWitchMenuBubble
 loc_167C6:
 										
 										btst    #1,d6
@@ -13801,7 +11005,7 @@ loc_167C6:
 										move.w  #1,d3
 										move.w  #$F0,d2 
 										move.w  #4,d1
-										bsr.w   drawWitchMenuBubble
+										bsr.w   DrawWitchMenuBubble
 loc_167DC:
 										
 										btst    #2,d6
@@ -13809,7 +11013,7 @@ loc_167DC:
 										move.w  #2,d3
 										move.w  #$1E0,d2
 										move.w  #$24,d1 
-										bsr.w   drawWitchMenuBubble
+										bsr.w   DrawWitchMenuBubble
 loc_167F2:
 										
 										btst    #3,d6
@@ -13817,7 +11021,7 @@ loc_167F2:
 										move.w  #3,d3
 										move.w  #$2D0,d2
 										move.w  #$1B0,d1
-										bsr.w   drawWitchMenuBubble
+										bsr.w   DrawWitchMenuBubble
 return_16808:
 										
 										rts
@@ -13827,9 +11031,9 @@ return_16808:
 
 ; =============== S U B R O U T I N E =======================================
 
-drawWitchMenuBubble:
+DrawWitchMenuBubble:
 										
-										movea.l (p_28034).l,a0
+										movea.l (p_WitchBubbleAnimation).l,a0
 										movea.l -4(a6),a1
 										cmp.b   d0,d3
 										bne.s   loc_1683A
@@ -13902,7 +11106,7 @@ loc_168A4:
 										bsr.w   sub_1697C
 										rts
 
-	; End of function drawWitchMenuBubble
+	; End of function DrawWitchMenuBubble
 
 pt_s_DataMenu:      dc.l aData1             
 										dc.l aData1             
@@ -14010,7 +11214,7 @@ sub_169AE:
 										movem.w d0,-(sp)
 										move.w  #$A03,d0
 										move.w  #$F60B,d1
-										jsr     (createWindow).l
+										jsr     (CreateWindow).l
 										addq.w  #1,d0
 										move.w  d0,(word_FFB08C).l
 										move.w  #$A03,d0
@@ -14041,7 +11245,7 @@ loc_16A10:
 										move.w  #$10B,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).l
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 loc_16A2A:
 										
 										movem.l (sp)+,d0-a1
@@ -14061,7 +11265,7 @@ sub_16A30:
 										move.w  #$F60B,d1
 										moveq   #4,d2
 										jsr     (MoveWindowWithSFX).l
-										jsr     (waitForVint_andFFA900Clear).l
+										jsr     (WaitForVint_andFFA900Clear).l
 										jsr     (ClearWindowAndUpdateEndPtr).l
 										clr.w   (word_FFB08C).l
 loc_16A5C:
@@ -14071,1101 +11275,10 @@ loc_16A5C:
 
 	; End of function sub_16A30
 
-VDPTileOrder_MemberStatsWindow:
-										dc.b $C0 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C0 
-										dc.b $61 
-										dc.b $C8 
-										dc.b $60 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $4C 
-										dc.b $C0 
-										dc.b $56 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $54 
-										dc.b $C0 
-										dc.b $54 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $48 
-										dc.b $C0 
-										dc.b $50 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $2F 
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $44 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $46 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $4D 
-										dc.b $C0 
-										dc.b $50 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $2F 
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $47 
-										dc.b $C0 
-										dc.b $49 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $58 
-										dc.b $C0 
-										dc.b $50 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $4D 
-										dc.b $C0 
-										dc.b $4F 
-										dc.b $C0 
-										dc.b $56 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $3F 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $4D 
-										dc.b $C0 
-										dc.b $41 
-										dc.b $C0 
-										dc.b $47 
-										dc.b $C0 
-										dc.b $49 
-										dc.b $C0 
-										dc.b $43 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $49 
-										dc.b $C0 
-										dc.b $54 
-										dc.b $C0 
-										dc.b $45 
-										dc.b $C0 
-										dc.b $4D 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $70 
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C0 
-										dc.b $20
-										dc.b $C8 
-										dc.b $70 
-										dc.b $D0 
-										dc.b $60 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D0 
-										dc.b $61 
-										dc.b $D8 
-										dc.b $60 
-ItemDefs:           incbin "data/itemdefs.bin"
-SpellDefs:          incbin "data/spelldefs.bin"
+MemberStatsWindowLayout:
+										incbin "graphics/windowlayouts/memberstatswindowslayout.bin"
+ItemDefs:           incbin "data/items/itemdefs.bin"
+SpellDefs:          incbin "data/spells/spelldefs.bin"
 ItemNames:          incbin "data/items/itemnames.bin"
 ClassNames:         incbin "data/classes/classnames.bin"
 										align $8000

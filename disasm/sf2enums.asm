@@ -19,6 +19,15 @@ TRAP_VINTFUNCTIONS: equ $9
 
 ; ---------------------------------------------------------------------------
 
+; enum VintActions
+VINTS_CLEAR: equ $0
+VINTS_ADD: equ $1
+VINTS_REMOVE: equ $2
+VINTS_DEACTIVATE: equ $3
+VINTS_ACTIVATE: equ $4
+
+; ---------------------------------------------------------------------------
+
 ; enum GraphicsValues
 GFX_MAX_SPRITES_TO_LOAD: equ $7
 GFX_DIAMENU_ICON_NUM_PIXELS: equ $240

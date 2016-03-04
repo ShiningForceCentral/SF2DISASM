@@ -355,1999 +355,1999 @@ Map00:              dc.b 0
 										dc.b $28
 										dc.b $29
 										dc.b $2A
-										dc.l Map00Section0
-										dc.l Map00Section1
-										dc.l Map00Section2
-										dc.l Map00Section3
-										dc.l Map00Section4
-										dc.l Map00Section5
-										dc.l Map00Section6
-										dc.l Map00Section7
-										dc.l Map00Section8
-										dc.l Map00Section9
-Map00Section2:      incbin "maps/mapentries/map00/section2.bin"
-Map00Section3:      incbin "maps/mapentries/map00/section3.bin"
-Map00Section4:      incbin "maps/mapentries/map00/section4.bin"
-Map00Section5:      incbin "maps/mapentries/map00/section5.bin"
-Map00Section6:      incbin "maps/mapentries/map00/section6.bin"
-Map00Section7:      incbin "maps/mapentries/map00/section7.bin"
-Map00Section8:      incbin "maps/mapentries/map00/section8.bin"
-Map00Section0:      incbin "maps/mapentries/map00/section0.bin"
-Map00Section1:      incbin "maps/mapentries/map00/section1.bin"
-Map00Section9:      incbin "maps/mapentries/map00/section9.bin"
+										dc.l Map00s0_Blocks
+										dc.l Map00s1_Layout
+										dc.l Map00s2_Areas
+										dc.l Map00s3_FlagEvents
+										dc.l Map00s4_StepEvents
+										dc.l Map00s5_RootEvents
+										dc.l Map00s6_WarpEvents
+										dc.l Map00s7_ChestItems
+										dc.l Map00s8_OtherItems
+										dc.l Map00s9_Animations
+Map00s2_Areas:      incbin "maps/entries/map00/2-areas.bin"
+Map00s3_FlagEvents: incbin "maps/entries/map00/3-flag-events.bin"
+Map00s4_StepEvents: incbin "maps/entries/map00/4-step-events.bin"
+Map00s5_RootEvents: incbin "maps/entries/map00/5-roof-events.bin"
+Map00s6_WarpEvents: incbin "maps/entries/map00/6-warp-events.bin"
+Map00s7_ChestItems: incbin "maps/entries/map00/7-chest-items.bin"
+Map00s8_OtherItems: incbin "maps/entries/map00/8-other-items.bin"
+Map00s0_Blocks:     incbin "maps/entries/map00/0-blocks.bin"
+Map00s1_Layout:     incbin "maps/entries/map00/1-layout.bin"
+Map00s9_Animations: incbin "maps/entries/map00/9-animations.bin"
 Map01:              dc.b 0
 										dc.b 5
 										dc.b $FF
 										dc.b $28
 										dc.b $29
 										dc.b $2A
-										dc.l Map01Section0
-										dc.l Map01Section1
-										dc.l Map01Section2
-										dc.l Map01Section3
-										dc.l Map01Section4
-										dc.l Map01Section5
-										dc.l Map01Section6
-										dc.l Map01Section7
-										dc.l Map01Section8
-										dc.l Map01Section9
-Map01Section2:      incbin "maps/mapentries/map01/section2.bin"
-Map01Section3:      incbin "maps/mapentries/map01/section3.bin"
-Map01Section4:      incbin "maps/mapentries/map01/section4.bin"
-Map01Section5:      incbin "maps/mapentries/map01/section5.bin"
-Map01Section6:      incbin "maps/mapentries/map01/section6.bin"
-Map01Section7:      incbin "maps/mapentries/map01/section7.bin"
-Map01Section8:      incbin "maps/mapentries/map01/section8.bin"
-Map01Section0:      incbin "maps/mapentries/map01/section0.bin"
-Map01Section1:      incbin "maps/mapentries/map01/section1.bin"
-Map01Section9:      incbin "maps/mapentries/map01/section9.bin"
+										dc.l Map01s0_Blocks
+										dc.l Map01s1_Layout
+										dc.l Map01s2_Areas
+										dc.l Map01s3_FlagEvents
+										dc.l Map01s4_StepEvents
+										dc.l Map01s5_RootEvents
+										dc.l Map01s6_WarpEvents
+										dc.l Map01s7_ChestItems
+										dc.l Map01s8_OtherItems
+										dc.l Map01s9_Animations
+Map01s2_Areas:      incbin "maps/entries/map01/2-areas.bin"
+Map01s3_FlagEvents: incbin "maps/entries/map01/3-flag-events.bin"
+Map01s4_StepEvents: incbin "maps/entries/map01/4-step-events.bin"
+Map01s5_RootEvents: incbin "maps/entries/map01/5-roof-events.bin"
+Map01s6_WarpEvents: incbin "maps/entries/map01/6-warp-events.bin"
+Map01s7_ChestItems: incbin "maps/entries/map01/7-chest-items.bin"
+Map01s8_OtherItems: incbin "maps/entries/map01/8-other-items.bin"
+Map01s0_Blocks:     incbin "maps/entries/map01/0-blocks.bin"
+Map01s1_Layout:     incbin "maps/entries/map01/1-layout.bin"
+Map01s9_Animations: incbin "maps/entries/map01/9-animations.bin"
 Map02:              dc.b $A
 										dc.b 1
 										dc.b $5A
 										dc.b $32
 										dc.b $5B
 										dc.b $3A
-										dc.l Map02Section0
-										dc.l Map02Section1
-										dc.l Map02Section2
-										dc.l Map02Section3
-										dc.l Map02Section4
-										dc.l Map02Section5
-										dc.l Map02Section6
-										dc.l Map02Section7
-										dc.l Map02Section8
+										dc.l Map02s0_Blocks
+										dc.l Map02s1_Layout
+										dc.l Map02s2_Areas
+										dc.l Map02s3_FlagEvents
+										dc.l Map02s4_StepEvents
+										dc.l Map02s5_RootEvents
+										dc.l Map02s6_WarpEvents
+										dc.l Map02s7_ChestItems
+										dc.l Map02s8_OtherItems
 										dc.l $FFFFFFFF
-Map02Section2:      incbin "maps/mapentries/map02/section2.bin"
-Map02Section3:      incbin "maps/mapentries/map02/section3.bin"
-Map02Section4:      incbin "maps/mapentries/map02/section4.bin"
-Map02Section5:      incbin "maps/mapentries/map02/section5.bin"
-Map02Section6:      incbin "maps/mapentries/map02/section6.bin"
-Map02Section7:      incbin "maps/mapentries/map02/section7.bin"
-Map02Section8:      incbin "maps/mapentries/map02/section8.bin"
-Map02Section0:      incbin "maps/mapentries/map02/section0.bin"
-Map02Section1:      incbin "maps/mapentries/map02/section1.bin"
+Map02s2_Areas:      incbin "maps/entries/map02/2-areas.bin"
+Map02s3_FlagEvents: incbin "maps/entries/map02/3-flag-events.bin"
+Map02s4_StepEvents: incbin "maps/entries/map02/4-step-events.bin"
+Map02s5_RootEvents: incbin "maps/entries/map02/5-roof-events.bin"
+Map02s6_WarpEvents: incbin "maps/entries/map02/6-warp-events.bin"
+Map02s7_ChestItems: incbin "maps/entries/map02/7-chest-items.bin"
+Map02s8_OtherItems: incbin "maps/entries/map02/8-other-items.bin"
+Map02s0_Blocks:     incbin "maps/entries/map02/0-blocks.bin"
+Map02s1_Layout:     incbin "maps/entries/map02/1-layout.bin"
 Map03:              dc.b 0
 										dc.b 0
 										dc.b $25
 										dc.b $2B
 										dc.b $35
 										dc.b $42
-										dc.l Map03Section0
-										dc.l Map03Section1
-										dc.l Map03Section2
-										dc.l Map03Section3
-										dc.l Map03Section4
-										dc.l Map03Section5
-										dc.l Map03Section6
-										dc.l Map03Section7
-										dc.l Map03Section8
-										dc.l Map03Section9
-Map03Section2:      incbin "maps/mapentries/map03/section2.bin"
-Map03Section3:      incbin "maps/mapentries/map03/section3.bin"
-Map03Section4:      incbin "maps/mapentries/map03/section4.bin"
-Map03Section5:      incbin "maps/mapentries/map03/section5.bin"
-Map03Section6:      incbin "maps/mapentries/map03/section6.bin"
-Map03Section7:      incbin "maps/mapentries/map03/section7.bin"
-Map03Section8:      incbin "maps/mapentries/map03/section8.bin"
-Map03Section0:      incbin "maps/mapentries/map03/section0.bin"
-Map03Section1:      incbin "maps/mapentries/map03/section1.bin"
-Map03Section9:      incbin "maps/mapentries/map04/section9.bin"
+										dc.l Map03s0_Blocks
+										dc.l Map03s1_Layout
+										dc.l Map03s2_Areas
+										dc.l Map03s3_FlagEvents
+										dc.l Map03s4_StepEvents
+										dc.l Map03s5_RootEvents
+										dc.l Map03s6_WarpEvents
+										dc.l Map03s7_ChestItems
+										dc.l Map03s8_OtherItems
+										dc.l Map03s9_Animations
+Map03s2_Areas:      incbin "maps/entries/map03/2-areas.bin"
+Map03s3_FlagEvents: incbin "maps/entries/map03/3-flag-events.bin"
+Map03s4_StepEvents: incbin "maps/entries/map03/4-step-events.bin"
+Map03s5_RootEvents: incbin "maps/entries/map03/5-roof-events.bin"
+Map03s6_WarpEvents: incbin "maps/entries/map03/6-warp-events.bin"
+Map03s7_ChestItems: incbin "maps/entries/map03/7-chest-items.bin"
+Map03s8_OtherItems: incbin "maps/entries/map03/8-other-items.bin"
+Map03s0_Blocks:     incbin "maps/entries/map03/0-blocks.bin"
+Map03s1_Layout:     incbin "maps/entries/map03/1-layout.bin"
+Map03s9_Animations: incbin "maps/entries/map03/9-animations.bin"
 Map04:              dc.b 0
 										dc.b 0
 										dc.b $25
 										dc.b $2B
 										dc.b $35
 										dc.b $38
-										dc.l Map04Section0
-										dc.l Map04Section1
-										dc.l Map04Section2
-										dc.l Map04Section3
-										dc.l Map04Section4
-										dc.l Map04Section5
-										dc.l Map04Section6
-										dc.l Map04Section7
-										dc.l Map04Section8
-										dc.l Map03Section9
-Map04Section2:      incbin "maps/mapentries/map04/section2.bin"
-Map04Section3:      incbin "maps/mapentries/map04/section3.bin"
-Map04Section4:      incbin "maps/mapentries/map04/section4.bin"
-Map04Section5:      incbin "maps/mapentries/map04/section5.bin"
-Map04Section6:      incbin "maps/mapentries/map04/section6.bin"
-Map04Section7:      incbin "maps/mapentries/map04/section7.bin"
-Map04Section8:      incbin "maps/mapentries/map04/section8.bin"
-Map04Section0:      incbin "maps/mapentries/map04/section0.bin"
-Map04Section1:      incbin "maps/mapentries/map04/section1.bin"
+										dc.l Map04s0_Blocks
+										dc.l Map04s1_Layout
+										dc.l Map04s2_Areas
+										dc.l Map04s3_FlagEvents
+										dc.l Map04s4_StepEvents
+										dc.l Map04s5_RootEvents
+										dc.l Map04s6_WarpEvents
+										dc.l Map04s7_ChestItems
+										dc.l Map04s8_OtherItems
+										dc.l Map03s9_Animations
+Map04s2_Areas:      incbin "maps/entries/map04/2-areas.bin"
+Map04s3_FlagEvents: incbin "maps/entries/map04/3-flag-events.bin"
+Map04s4_StepEvents: incbin "maps/entries/map04/4-step-events.bin"
+Map04s5_RootEvents: incbin "maps/entries/map04/5-roof-events.bin"
+Map04s6_WarpEvents: incbin "maps/entries/map04/6-warp-events.bin"
+Map04s7_ChestItems: incbin "maps/entries/map04/7-chest-items.bin"
+Map04s8_OtherItems: incbin "maps/entries/map04/8-other-items.bin"
+Map04s0_Blocks:     incbin "maps/entries/map04/0-blocks.bin"
+Map04s1_Layout:     incbin "maps/entries/map04/1-layout.bin"
 Map05:              dc.b 0
 										dc.b 0
 										dc.b 8
 										dc.b $2B
 										dc.b $25
 										dc.b $3A
-										dc.l Map05Section0
-										dc.l Map05Section1
-										dc.l Map05Section2
-										dc.l Map05Section3
-										dc.l Map05Section4
-										dc.l Map05Section5
-										dc.l Map05Section6
-										dc.l Map05Section7
-										dc.l Map05Section8
+										dc.l Map05s0_Blocks
+										dc.l Map05s1_Layout
+										dc.l Map05s2_Areas
+										dc.l Map05s3_FlagEvents
+										dc.l Map05s4_StepEvents
+										dc.l Map05s5_RootEvents
+										dc.l Map05s6_WarpEvents
+										dc.l Map05s7_ChestItems
+										dc.l Map05s8_OtherItems
 										dc.l $FFFFFFFF
-Map05Section2:      incbin "maps/mapentries/map05/section2.bin"
-Map05Section3:      incbin "maps/mapentries/map05/section3.bin"
-Map05Section4:      incbin "maps/mapentries/map05/section4.bin"
-Map05Section5:      incbin "maps/mapentries/map05/section5.bin"
-Map05Section6:      incbin "maps/mapentries/map05/section6.bin"
-Map05Section7:      incbin "maps/mapentries/map05/section7.bin"
-Map05Section8:      incbin "maps/mapentries/map05/section8.bin"
-Map05Section0:      incbin "maps/mapentries/map05/section0.bin"
-Map05Section1:      incbin "maps/mapentries/map05/section1.bin"
+Map05s2_Areas:      incbin "maps/entries/map05/2-areas.bin"
+Map05s3_FlagEvents: incbin "maps/entries/map05/3-flag-events.bin"
+Map05s4_StepEvents: incbin "maps/entries/map05/4-step-events.bin"
+Map05s5_RootEvents: incbin "maps/entries/map05/5-roof-events.bin"
+Map05s6_WarpEvents: incbin "maps/entries/map05/6-warp-events.bin"
+Map05s7_ChestItems: incbin "maps/entries/map05/7-chest-items.bin"
+Map05s8_OtherItems: incbin "maps/entries/map05/8-other-items.bin"
+Map05s0_Blocks:     incbin "maps/entries/map05/0-blocks.bin"
+Map05s1_Layout:     incbin "maps/entries/map05/1-layout.bin"
 Map06:              dc.b 0
 										dc.b 0
 										dc.b $2F
 										dc.b $30
 										dc.b $25
 										dc.b $39
-										dc.l Map06Section0
-										dc.l Map06Section1
-										dc.l Map06Section2
-										dc.l Map06Section3
-										dc.l Map06Section4
-										dc.l Map06Section5
-										dc.l Map06Section6
-										dc.l Map06Section7
-										dc.l Map06Section8
-										dc.l Map06Section9
-Map06Section2:      incbin "maps/mapentries/map06/section2.bin"
-Map06Section3:      incbin "maps/mapentries/map06/section3.bin"
-Map06Section4:      incbin "maps/mapentries/map06/section4.bin"
-Map06Section5:      incbin "maps/mapentries/map06/section5.bin"
-Map06Section6:      incbin "maps/mapentries/map06/section6.bin"
-Map06Section7:      incbin "maps/mapentries/map06/section7.bin"
-Map06Section8:      incbin "maps/mapentries/map06/section8.bin"
-Map06Section0:      incbin "maps/mapentries/map06/section0.bin"
-Map06Section1:      incbin "maps/mapentries/map06/section1.bin"
-Map06Section9:      incbin "maps/mapentries/map53/section9.bin"
+										dc.l Map06s0_Blocks
+										dc.l Map06s1_Layout
+										dc.l Map06s2_Areas
+										dc.l Map06s3_FlagEvents
+										dc.l Map06s4_StepEvents
+										dc.l Map06s5_RootEvents
+										dc.l Map06s6_WarpEvents
+										dc.l Map06s7_ChestItems
+										dc.l Map06s8_OtherItems
+										dc.l Map06s9_Animations
+Map06s2_Areas:      incbin "maps/entries/map06/2-areas.bin"
+Map06s3_FlagEvents: incbin "maps/entries/map06/3-flag-events.bin"
+Map06s4_StepEvents: incbin "maps/entries/map06/4-step-events.bin"
+Map06s5_RootEvents: incbin "maps/entries/map06/5-roof-events.bin"
+Map06s6_WarpEvents: incbin "maps/entries/map06/6-warp-events.bin"
+Map06s7_ChestItems: incbin "maps/entries/map06/7-chest-items.bin"
+Map06s8_OtherItems: incbin "maps/entries/map06/8-other-items.bin"
+Map06s0_Blocks:     incbin "maps/entries/map06/0-blocks.bin"
+Map06s1_Layout:     incbin "maps/entries/map06/1-layout.bin"
+Map06s9_Animations: incbin "maps/entries/map06/9-animations.bin"
 Map07:              dc.b 0
 										dc.b 0
 										dc.b $2F
 										dc.b $30
 										dc.b $25
 										dc.b $39
-										dc.l Map07Section0
-										dc.l Map07Section1
-										dc.l Map07Section2
-										dc.l Map07Section3
-										dc.l Map07Section4
-										dc.l Map07Section5
-										dc.l Map07Section6
-										dc.l Map07Section7
-										dc.l Map07Section8
-										dc.l Map06Section9
-Map07Section2:      incbin "maps/mapentries/map07/section2.bin"
-Map07Section3:      incbin "maps/mapentries/map07/section3.bin"
-Map07Section4:      incbin "maps/mapentries/map07/section4.bin"
-Map07Section5:      incbin "maps/mapentries/map07/section5.bin"
-Map07Section6:      incbin "maps/mapentries/map07/section6.bin"
-Map07Section7:      incbin "maps/mapentries/map07/section7.bin"
-Map07Section8:      incbin "maps/mapentries/map07/section8.bin"
-Map07Section0:      incbin "maps/mapentries/map46/section0.bin"
-Map07Section1:      incbin "maps/mapentries/map46/section1.bin"
+										dc.l Map07s0_Blocks
+										dc.l Map07s1_Layout
+										dc.l Map07s2_Areas
+										dc.l Map07s3_FlagEvents
+										dc.l Map07s4_StepEvents
+										dc.l Map07s5_RootEvents
+										dc.l Map07s6_WarpEvents
+										dc.l Map07s7_ChestItems
+										dc.l Map07s8_OtherItems
+										dc.l Map06s9_Animations
+Map07s2_Areas:      incbin "maps/entries/map07/2-areas.bin"
+Map07s3_FlagEvents: incbin "maps/entries/map07/3-flag-events.bin"
+Map07s4_StepEvents: incbin "maps/entries/map07/4-step-events.bin"
+Map07s5_RootEvents: incbin "maps/entries/map07/5-roof-events.bin"
+Map07s6_WarpEvents: incbin "maps/entries/map07/6-warp-events.bin"
+Map07s7_ChestItems: incbin "maps/entries/map07/7-chest-items.bin"
+Map07s8_OtherItems: incbin "maps/entries/map07/8-other-items.bin"
+Map07s0_Blocks:     incbin "maps/entries/map07/0-blocks.bin"
+Map07s1_Layout:     incbin "maps/entries/map07/1-layout.bin"
 Map08:              dc.b 0
 										dc.b 1
 										dc.b $27
 										dc.b $2B
 										dc.b $26
 										dc.b $39
-										dc.l Map08Section0
-										dc.l Map08Section1
-										dc.l Map08Section2
-										dc.l Map08Section3
-										dc.l Map08Section4
-										dc.l Map08Section5
-										dc.l Map08Section6
-										dc.l Map08Section7
-										dc.l Map08Section8
+										dc.l Map08s0_Blocks
+										dc.l Map08s1_Layout
+										dc.l Map08s2_Areas
+										dc.l Map08s3_FlagEvents
+										dc.l Map08s4_StepEvents
+										dc.l Map08s5_RootEvents
+										dc.l Map08s6_WarpEvents
+										dc.l Map08s7_ChestItems
+										dc.l Map08s8_OtherItems
 										dc.l $FFFFFFFF
-Map08Section2:      incbin "maps/mapentries/map08/section2.bin"
-Map08Section3:      incbin "maps/mapentries/map08/section3.bin"
-Map08Section4:      incbin "maps/mapentries/map08/section4.bin"
-Map08Section5:      incbin "maps/mapentries/map08/section5.bin"
-Map08Section6:      incbin "maps/mapentries/map08/section6.bin"
-Map08Section7:      incbin "maps/mapentries/map08/section7.bin"
-Map08Section8:      incbin "maps/mapentries/map08/section8.bin"
-Map08Section0:      incbin "maps/mapentries/map08/section0.bin"
-Map08Section1:      incbin "maps/mapentries/map08/section1.bin"
+Map08s2_Areas:      incbin "maps/entries/map08/2-areas.bin"
+Map08s3_FlagEvents: incbin "maps/entries/map08/3-flag-events.bin"
+Map08s4_StepEvents: incbin "maps/entries/map08/4-step-events.bin"
+Map08s5_RootEvents: incbin "maps/entries/map08/5-roof-events.bin"
+Map08s6_WarpEvents: incbin "maps/entries/map08/6-warp-events.bin"
+Map08s7_ChestItems: incbin "maps/entries/map08/7-chest-items.bin"
+Map08s8_OtherItems: incbin "maps/entries/map08/8-other-items.bin"
+Map08s0_Blocks:     incbin "maps/entries/map08/0-blocks.bin"
+Map08s1_Layout:     incbin "maps/entries/map08/1-layout.bin"
 Map09:              dc.b 0
 										dc.b 1
 										dc.b $25
 										dc.b $31
 										dc.b $15
 										dc.b $3C
-										dc.l Map09Section0
-										dc.l Map09Section1
-										dc.l Map09Section2
-										dc.l Map09Section3
-										dc.l Map09Section4
-										dc.l Map09Section5
-										dc.l Map09Section6
-										dc.l Map09Section7
-										dc.l Map09Section8
-										dc.l Map09Section9
-Map09Section2:      incbin "maps/mapentries/map09/section2.bin"
-Map09Section3:      incbin "maps/mapentries/map09/section3.bin"
-Map09Section4:      incbin "maps/mapentries/map09/section4.bin"
-Map09Section5:      incbin "maps/mapentries/map09/section5.bin"
-Map09Section6:      incbin "maps/mapentries/map09/section6.bin"
-Map09Section7:      incbin "maps/mapentries/map09/section7.bin"
-Map09Section8:      incbin "maps/mapentries/map09/section8.bin"
-Map09Section0:      incbin "maps/mapentries/map09/section0.bin"
-Map09Section1:      incbin "maps/mapentries/map09/section1.bin"
+										dc.l Map09s0_Blocks
+										dc.l Map09s1_Layout
+										dc.l Map09s2_Areas
+										dc.l Map09s3_FlagEvents
+										dc.l Map09s4_StepEvents
+										dc.l Map09s5_RootEvents
+										dc.l Map09s6_WarpEvents
+										dc.l Map09s7_ChestItems
+										dc.l Map09s8_OtherItems
+										dc.l Map09s9_Animations
+Map09s2_Areas:      incbin "maps/entries/map09/2-areas.bin"
+Map09s3_FlagEvents: incbin "maps/entries/map09/3-flag-events.bin"
+Map09s4_StepEvents: incbin "maps/entries/map09/4-step-events.bin"
+Map09s5_RootEvents: incbin "maps/entries/map09/5-roof-events.bin"
+Map09s6_WarpEvents: incbin "maps/entries/map09/6-warp-events.bin"
+Map09s7_ChestItems: incbin "maps/entries/map09/7-chest-items.bin"
+Map09s8_OtherItems: incbin "maps/entries/map09/8-other-items.bin"
+Map09s0_Blocks:     incbin "maps/entries/map09/0-blocks.bin"
+Map09s1_Layout:     incbin "maps/entries/map09/1-layout.bin"
 Map10:              dc.b 0
 										dc.b 1
 										dc.b $27
 										dc.b $2B
 										dc.b $26
 										dc.b $39
-										dc.l Map10Section0
-										dc.l Map10Section1
-										dc.l Map10Section2
-										dc.l Map10Section3
-										dc.l Map10Section4
-										dc.l Map10Section5
-										dc.l Map10Section6
-										dc.l Map10Section7
-										dc.l Map10Section8
-										dc.l Map06Section9
-Map10Section2:      incbin "maps/mapentries/map10/section2.bin"
-Map10Section3:      incbin "maps/mapentries/map10/section3.bin"
-Map10Section4:      incbin "maps/mapentries/map10/section4.bin"
-Map10Section5:      incbin "maps/mapentries/map10/section5.bin"
-Map10Section6:      incbin "maps/mapentries/map10/section6.bin"
-Map10Section7:      incbin "maps/mapentries/map10/section7.bin"
-Map10Section8:      incbin "maps/mapentries/map10/section8.bin"
-Map10Section0:      incbin "maps/mapentries/map10/section0.bin"
-Map10Section1:      incbin "maps/mapentries/map10/section1.bin"
+										dc.l Map10s0_Blocks
+										dc.l Map10s1_Layout
+										dc.l Map10s2_Areas
+										dc.l Map10s3_FlagEvents
+										dc.l Map10s4_StepEvents
+										dc.l Map10s5_RootEvents
+										dc.l Map10s6_WarpEvents
+										dc.l Map10s7_ChestItems
+										dc.l Map10s8_OtherItems
+										dc.l Map06s9_Animations
+Map10s2_Areas:      incbin "maps/entries/map10/2-areas.bin"
+Map10s3_FlagEvents: incbin "maps/entries/map10/3-flag-events.bin"
+Map10s4_StepEvents: incbin "maps/entries/map10/4-step-events.bin"
+Map10s5_RootEvents: incbin "maps/entries/map10/5-roof-events.bin"
+Map10s6_WarpEvents: incbin "maps/entries/map10/6-warp-events.bin"
+Map10s7_ChestItems: incbin "maps/entries/map10/7-chest-items.bin"
+Map10s8_OtherItems: incbin "maps/entries/map10/8-other-items.bin"
+Map10s0_Blocks:     incbin "maps/entries/map10/0-blocks.bin"
+Map10s1_Layout:     incbin "maps/entries/map10/1-layout.bin"
 Map11:              dc.b 1
 										dc.b 1
 										dc.b $FF
 										dc.b $20
 										dc.b $21
 										dc.b $37
-										dc.l Map11Section0
-										dc.l Map11Section1
-										dc.l Map11Section2
-										dc.l Map11Section3
-										dc.l Map11Section4
-										dc.l Map11Section5
-										dc.l Map11Section6
-										dc.l Map11Section7
-										dc.l Map11Section8
+										dc.l Map11s0_Blocks
+										dc.l Map11s1_Layout
+										dc.l Map11s2_Areas
+										dc.l Map11s3_FlagEvents
+										dc.l Map11s4_StepEvents
+										dc.l Map11s5_RootEvents
+										dc.l Map11s6_WarpEvents
+										dc.l Map11s7_ChestItems
+										dc.l Map11s8_OtherItems
 										dc.l $FFFFFFFF
-Map11Section2:      incbin "maps/mapentries/map11/section2.bin"
-Map11Section3:      incbin "maps/mapentries/map11/section3.bin"
-Map11Section4:      incbin "maps/mapentries/map11/section4.bin"
-Map11Section5:      incbin "maps/mapentries/map11/section5.bin"
-Map11Section6:      incbin "maps/mapentries/map11/section6.bin"
-Map11Section7:      incbin "maps/mapentries/map11/section7.bin"
-Map11Section8:      incbin "maps/mapentries/map11/section8.bin"
-Map11Section0:      incbin "maps/mapentries/map11/section0.bin"
-Map11Section1:      incbin "maps/mapentries/map11/section1.bin"
+Map11s2_Areas:      incbin "maps/entries/map11/2-areas.bin"
+Map11s3_FlagEvents: incbin "maps/entries/map11/3-flag-events.bin"
+Map11s4_StepEvents: incbin "maps/entries/map11/4-step-events.bin"
+Map11s5_RootEvents: incbin "maps/entries/map11/5-roof-events.bin"
+Map11s6_WarpEvents: incbin "maps/entries/map11/6-warp-events.bin"
+Map11s7_ChestItems: incbin "maps/entries/map11/7-chest-items.bin"
+Map11s8_OtherItems: incbin "maps/entries/map11/8-other-items.bin"
+Map11s0_Blocks:     incbin "maps/entries/map11/0-blocks.bin"
+Map11s1_Layout:     incbin "maps/entries/map11/1-layout.bin"
 Map12:              dc.b 1
 										dc.b 0
 										dc.b $FF
 										dc.b $22
 										dc.b $23
 										dc.b $24
-										dc.l Map12Section0
-										dc.l Map12Section1
-										dc.l Map12Section2
-										dc.l Map12Section3
-										dc.l Map12Section4
-										dc.l Map12Section5
-										dc.l Map12Section6
-										dc.l Map12Section7
-										dc.l Map12Section8
+										dc.l Map12s0_Blocks
+										dc.l Map12s1_Layout
+										dc.l Map12s2_Areas
+										dc.l Map12s3_FlagEvents
+										dc.l Map12s4_StepEvents
+										dc.l Map12s5_RootEvents
+										dc.l Map12s6_WarpEvents
+										dc.l Map12s7_ChestItems
+										dc.l Map12s8_OtherItems
 										dc.l $FFFFFFFF
-Map12Section2:      incbin "maps/mapentries/map12/section2.bin"
-Map12Section3:      incbin "maps/mapentries/map12/section3.bin"
-Map12Section4:      incbin "maps/mapentries/map12/section4.bin"
-Map12Section5:      incbin "maps/mapentries/map12/section5.bin"
-Map12Section6:      incbin "maps/mapentries/map12/section6.bin"
-Map12Section7:      incbin "maps/mapentries/map12/section7.bin"
-Map12Section8:      incbin "maps/mapentries/map12/section8.bin"
-Map12Section0:      incbin "maps/mapentries/map12/section0.bin"
-Map12Section1:      incbin "maps/mapentries/map12/section1.bin"
+Map12s2_Areas:      incbin "maps/entries/map12/2-areas.bin"
+Map12s3_FlagEvents: incbin "maps/entries/map12/3-flag-events.bin"
+Map12s4_StepEvents: incbin "maps/entries/map12/4-step-events.bin"
+Map12s5_RootEvents: incbin "maps/entries/map12/5-roof-events.bin"
+Map12s6_WarpEvents: incbin "maps/entries/map12/6-warp-events.bin"
+Map12s7_ChestItems: incbin "maps/entries/map12/7-chest-items.bin"
+Map12s8_OtherItems: incbin "maps/entries/map12/8-other-items.bin"
+Map12s0_Blocks:     incbin "maps/entries/map12/0-blocks.bin"
+Map12s1_Layout:     incbin "maps/entries/map12/1-layout.bin"
 Map13:              dc.b 0
 										dc.b 1
 										dc.b 3
 										dc.b $32
 										dc.b $26
 										dc.b $3A
-										dc.l Map13Section0
-										dc.l Map13Section1
-										dc.l Map13Section2
-										dc.l Map13Section3
-										dc.l Map13Section4
-										dc.l Map13Section5
-										dc.l Map13Section6
-										dc.l Map13Section7
-										dc.l Map13Section8
+										dc.l Map13s0_Blocks
+										dc.l Map13s1_Layout
+										dc.l Map13s2_Areas
+										dc.l Map13s3_FlagEvents
+										dc.l Map13s4_StepEvents
+										dc.l Map13s5_RootEvents
+										dc.l Map13s6_WarpEvents
+										dc.l Map13s7_ChestItems
+										dc.l Map13s8_OtherItems
 										dc.l $FFFFFFFF
-Map13Section2:      incbin "maps/mapentries/map13/section2.bin"
-Map13Section3:      incbin "maps/mapentries/map13/section3.bin"
-Map13Section4:      incbin "maps/mapentries/map13/section4.bin"
-Map13Section5:      incbin "maps/mapentries/map13/section5.bin"
-Map13Section6:      incbin "maps/mapentries/map13/section6.bin"
-Map13Section7:      incbin "maps/mapentries/map13/section7.bin"
-Map13Section8:      incbin "maps/mapentries/map13/section8.bin"
-Map13Section0:      incbin "maps/mapentries/map13/section0.bin"
-Map13Section1:      incbin "maps/mapentries/map13/section1.bin"
+Map13s2_Areas:      incbin "maps/entries/map13/2-areas.bin"
+Map13s3_FlagEvents: incbin "maps/entries/map13/3-flag-events.bin"
+Map13s4_StepEvents: incbin "maps/entries/map13/4-step-events.bin"
+Map13s5_RootEvents: incbin "maps/entries/map13/5-roof-events.bin"
+Map13s6_WarpEvents: incbin "maps/entries/map13/6-warp-events.bin"
+Map13s7_ChestItems: incbin "maps/entries/map13/7-chest-items.bin"
+Map13s8_OtherItems: incbin "maps/entries/map13/8-other-items.bin"
+Map13s0_Blocks:     incbin "maps/entries/map13/0-blocks.bin"
+Map13s1_Layout:     incbin "maps/entries/map13/1-layout.bin"
 Map14:              dc.b 0
 										dc.b $B
 										dc.b $C
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
-										dc.l Map14Section0
-										dc.l Map14Section1
-										dc.l Map14Section2
-										dc.l Map14Section3
-										dc.l Map14Section4
-										dc.l Map14Section5
-										dc.l Map14Section6
-										dc.l Map14Section7
-										dc.l Map14Section8
-										dc.l Map14Section9
-Map14Section2:      incbin "maps/mapentries/map14/section2.bin"
-Map14Section3:      incbin "maps/mapentries/map14/section3.bin"
-Map14Section4:      incbin "maps/mapentries/map14/section4.bin"
-Map14Section5:      incbin "maps/mapentries/map14/section5.bin"
-Map14Section6:      incbin "maps/mapentries/map14/section6.bin"
-Map14Section7:      incbin "maps/mapentries/map14/section7.bin"
-Map14Section8:      incbin "maps/mapentries/map14/section8.bin"
-Map14Section0:      incbin "maps/mapentries/map14/section0.bin"
-Map14Section1:      incbin "maps/mapentries/map14/section1.bin"
-Map14Section9:      incbin "maps/mapentries/map14/section9.bin"
+										dc.l Map14s0_Blocks
+										dc.l Map14s1_Layout
+										dc.l Map14s2_Areas
+										dc.l Map14s3_FlagEvents
+										dc.l Map14s4_StepEvents
+										dc.l Map14s5_RootEvents
+										dc.l Map14s6_WarpEvents
+										dc.l Map14s7_ChestItems
+										dc.l Map14s8_OtherItems
+										dc.l Map14s9_Animations
+Map14s2_Areas:      incbin "maps/entries/map14/2-areas.bin"
+Map14s3_FlagEvents: incbin "maps/entries/map14/3-flag-events.bin"
+Map14s4_StepEvents: incbin "maps/entries/map14/4-step-events.bin"
+Map14s5_RootEvents: incbin "maps/entries/map14/5-roof-events.bin"
+Map14s6_WarpEvents: incbin "maps/entries/map14/6-warp-events.bin"
+Map14s7_ChestItems: incbin "maps/entries/map14/7-chest-items.bin"
+Map14s8_OtherItems: incbin "maps/entries/map14/8-other-items.bin"
+Map14s0_Blocks:     incbin "maps/entries/map14/0-blocks.bin"
+Map14s1_Layout:     incbin "maps/entries/map14/1-layout.bin"
+Map14s9_Animations: incbin "maps/entries/map14/9-animations.bin"
 Map15:              dc.b 0
 										dc.b 1
 										dc.b $11
 										dc.b $2D
 										dc.b $36
 										dc.b $3B
-										dc.l Map15Section0
-										dc.l Map15Section1
-										dc.l Map15Section2
-										dc.l Map15Section3
-										dc.l Map15Section4
-										dc.l Map15Section5
-										dc.l Map15Section6
-										dc.l Map15Section7
-										dc.l Map15Section8
-										dc.l Map15Section9
-Map15Section2:      incbin "maps/mapentries/map15/section2.bin"
-Map15Section3:      incbin "maps/mapentries/map15/section3.bin"
-Map15Section4:      incbin "maps/mapentries/map15/section4.bin"
-Map15Section5:      incbin "maps/mapentries/map15/section5.bin"
-Map15Section6:      incbin "maps/mapentries/map15/section6.bin"
-Map15Section7:      incbin "maps/mapentries/map15/section7.bin"
-Map15Section8:      incbin "maps/mapentries/map15/section8.bin"
-Map15Section0:      incbin "maps/mapentries/map15/section0.bin"
-Map15Section1:      incbin "maps/mapentries/map15/section1.bin"
-Map15Section9:      incbin "maps/mapentries/map38/section9.bin"
+										dc.l Map15s0_Blocks
+										dc.l Map15s1_Layout
+										dc.l Map15s2_Areas
+										dc.l Map15s3_FlagEvents
+										dc.l Map15s4_StepEvents
+										dc.l Map15s5_RootEvents
+										dc.l Map15s6_WarpEvents
+										dc.l Map15s7_ChestItems
+										dc.l Map15s8_OtherItems
+										dc.l Map15s9_Animations
+Map15s2_Areas:      incbin "maps/entries/map15/2-areas.bin"
+Map15s3_FlagEvents: incbin "maps/entries/map15/3-flag-events.bin"
+Map15s4_StepEvents: incbin "maps/entries/map15/4-step-events.bin"
+Map15s5_RootEvents: incbin "maps/entries/map15/5-roof-events.bin"
+Map15s6_WarpEvents: incbin "maps/entries/map15/6-warp-events.bin"
+Map15s7_ChestItems: incbin "maps/entries/map15/7-chest-items.bin"
+Map15s8_OtherItems: incbin "maps/entries/map15/8-other-items.bin"
+Map15s0_Blocks:     incbin "maps/entries/map15/0-blocks.bin"
+Map15s1_Layout:     incbin "maps/entries/map15/1-layout.bin"
+Map15s9_Animations: incbin "maps/entries/map15/9-animations.bin"
 Map16:              dc.b 0
 										dc.b 0
 										dc.b $16
 										dc.b $2C
 										dc.b $35
 										dc.b $40
-										dc.l Map16Section0
-										dc.l Map16Section1
-										dc.l Map16Section2
-										dc.l Map16Section3
-										dc.l Map16Section4
-										dc.l Map16Section5
-										dc.l Map16Section6
-										dc.l Map16Section7
-										dc.l Map16Section8
-										dc.l Map09Section9
-Map16Section2:      incbin "maps/mapentries/map16/section2.bin"
-Map16Section3:      incbin "maps/mapentries/map16/section3.bin"
-Map16Section4:      incbin "maps/mapentries/map16/section4.bin"
-Map16Section5:      incbin "maps/mapentries/map16/section5.bin"
-Map16Section6:      incbin "maps/mapentries/map16/section6.bin"
-Map16Section7:      incbin "maps/mapentries/map16/section7.bin"
-Map16Section8:      incbin "maps/mapentries/map16/section8.bin"
-Map16Section0:      incbin "maps/mapentries/map16/section0.bin"
-Map16Section1:      incbin "maps/mapentries/map16/section1.bin"
-Map09Section9:      incbin "maps/mapentries/map16/section9.bin"
+										dc.l Map16s0_Blocks
+										dc.l Map16s1_Layout
+										dc.l Map16s2_Areas
+										dc.l Map16s3_FlagEvents
+										dc.l Map16s4_StepEvents
+										dc.l Map16s5_RootEvents
+										dc.l Map16s6_WarpEvents
+										dc.l Map16s7_ChestItems
+										dc.l Map16s8_OtherItems
+										dc.l Map09s9_Animations
+Map16s2_Areas:      incbin "maps/entries/map16/2-areas.bin"
+Map16s3_FlagEvents: incbin "maps/entries/map16/3-flag-events.bin"
+Map16s4_StepEvents: incbin "maps/entries/map16/4-step-events.bin"
+Map16s5_RootEvents: incbin "maps/entries/map16/5-roof-events.bin"
+Map16s6_WarpEvents: incbin "maps/entries/map16/6-warp-events.bin"
+Map16s7_ChestItems: incbin "maps/entries/map16/7-chest-items.bin"
+Map16s8_OtherItems: incbin "maps/entries/map16/8-other-items.bin"
+Map16s0_Blocks:     incbin "maps/entries/map16/0-blocks.bin"
+Map16s1_Layout:     incbin "maps/entries/map16/1-layout.bin"
+Map09s9_Animations: incbin "maps/entries/map09/9-animations.bin"
 Map17:              dc.b 0
 										dc.b 2
 										dc.b $16
 										dc.b $2C
 										dc.b $35
 										dc.b $40
-										dc.l Map17Section0
-										dc.l Map17Section1
-										dc.l Map17Section2
-										dc.l Map17Section3
-										dc.l Map17Section4
-										dc.l Map17Section5
-										dc.l Map17Section6
-										dc.l Map17Section7
-										dc.l Map17Section8
+										dc.l Map17s0_Blocks
+										dc.l Map17s1_Layout
+										dc.l Map17s2_Areas
+										dc.l Map17s3_FlagEvents
+										dc.l Map17s4_StepEvents
+										dc.l Map17s5_RootEvents
+										dc.l Map17s6_WarpEvents
+										dc.l Map17s7_ChestItems
+										dc.l Map17s8_OtherItems
 										dc.l $FFFFFFFF
-Map17Section2:      incbin "maps/mapentries/map17/section2.bin"
-Map17Section3:      incbin "maps/mapentries/map17/section3.bin"
-Map17Section4:      incbin "maps/mapentries/map17/section4.bin"
-Map17Section5:      incbin "maps/mapentries/map17/section5.bin"
-Map17Section6:      incbin "maps/mapentries/map17/section6.bin"
-Map17Section7:      incbin "maps/mapentries/map17/section7.bin"
-Map17Section8:      incbin "maps/mapentries/map17/section8.bin"
-Map17Section0:      incbin "maps/mapentries/map17/section0.bin"
-Map17Section1:      incbin "maps/mapentries/map17/section1.bin"
+Map17s2_Areas:      incbin "maps/entries/map17/2-areas.bin"
+Map17s3_FlagEvents: incbin "maps/entries/map17/3-flag-events.bin"
+Map17s4_StepEvents: incbin "maps/entries/map17/4-step-events.bin"
+Map17s5_RootEvents: incbin "maps/entries/map17/5-roof-events.bin"
+Map17s6_WarpEvents: incbin "maps/entries/map17/6-warp-events.bin"
+Map17s7_ChestItems: incbin "maps/entries/map17/7-chest-items.bin"
+Map17s8_OtherItems: incbin "maps/entries/map17/8-other-items.bin"
+Map17s0_Blocks:     incbin "maps/entries/map17/0-blocks.bin"
+Map17s1_Layout:     incbin "maps/entries/map17/1-layout.bin"
 Map18:              dc.b 0
 										dc.b 2
 										dc.b $58
 										dc.b $2C
 										dc.b $35
 										dc.b $40
-										dc.l Map18Section0
-										dc.l Map18Section1
-										dc.l Map18Section2
-										dc.l Map18Section3
-										dc.l Map18Section4
-										dc.l Map18Section5
-										dc.l Map18Section6
-										dc.l Map18Section7
-										dc.l Map18Section8
+										dc.l Map18s0_Blocks
+										dc.l Map18s1_Layout
+										dc.l Map18s2_Areas
+										dc.l Map18s3_FlagEvents
+										dc.l Map18s4_StepEvents
+										dc.l Map18s5_RootEvents
+										dc.l Map18s6_WarpEvents
+										dc.l Map18s7_ChestItems
+										dc.l Map18s8_OtherItems
 										dc.l $FFFFFFFF
-Map18Section2:      incbin "maps/mapentries/map18/section2.bin"
-Map18Section3:      incbin "maps/mapentries/map18/section3.bin"
-Map18Section4:      incbin "maps/mapentries/map18/section4.bin"
-Map18Section5:      incbin "maps/mapentries/map18/section5.bin"
-Map18Section6:      incbin "maps/mapentries/map18/section6.bin"
-Map18Section7:      incbin "maps/mapentries/map18/section7.bin"
-Map18Section8:      incbin "maps/mapentries/map18/section8.bin"
-Map18Section0:      incbin "maps/mapentries/map18/section0.bin"
-Map18Section1:      incbin "maps/mapentries/map18/section1.bin"
+Map18s2_Areas:      incbin "maps/entries/map18/2-areas.bin"
+Map18s3_FlagEvents: incbin "maps/entries/map18/3-flag-events.bin"
+Map18s4_StepEvents: incbin "maps/entries/map18/4-step-events.bin"
+Map18s5_RootEvents: incbin "maps/entries/map18/5-roof-events.bin"
+Map18s6_WarpEvents: incbin "maps/entries/map18/6-warp-events.bin"
+Map18s7_ChestItems: incbin "maps/entries/map18/7-chest-items.bin"
+Map18s8_OtherItems: incbin "maps/entries/map18/8-other-items.bin"
+Map18s0_Blocks:     incbin "maps/entries/map18/0-blocks.bin"
+Map18s1_Layout:     incbin "maps/entries/map18/1-layout.bin"
 Map19:              dc.b 0
 										dc.b 6
 										dc.b $17
 										dc.b $2C
 										dc.b $35
 										dc.b $3E
-										dc.l Map19Section0
-										dc.l Map19Section1
-										dc.l Map19Section2
-										dc.l Map19Section3
-										dc.l Map19Section4
-										dc.l Map19Section5
-										dc.l Map19Section6
-										dc.l Map19Section7
-										dc.l Map19Section8
+										dc.l Map19s0_Blocks
+										dc.l Map19s1_Layout
+										dc.l Map19s2_Areas
+										dc.l Map19s3_FlagEvents
+										dc.l Map19s4_StepEvents
+										dc.l Map19s5_RootEvents
+										dc.l Map19s6_WarpEvents
+										dc.l Map19s7_ChestItems
+										dc.l Map19s8_OtherItems
 										dc.l $FFFFFFFF
-Map19Section2:      incbin "maps/mapentries/map19/section2.bin"
-Map19Section3:      incbin "maps/mapentries/map19/section3.bin"
-Map19Section4:      incbin "maps/mapentries/map19/section4.bin"
-Map19Section5:      incbin "maps/mapentries/map19/section5.bin"
-Map19Section6:      incbin "maps/mapentries/map19/section6.bin"
-Map19Section7:      incbin "maps/mapentries/map19/section7.bin"
-Map19Section8:      incbin "maps/mapentries/map19/section8.bin"
-Map19Section0:      incbin "maps/mapentries/map19/section0.bin"
-Map19Section1:      incbin "maps/mapentries/map19/section1.bin"
+Map19s2_Areas:      incbin "maps/entries/map19/2-areas.bin"
+Map19s3_FlagEvents: incbin "maps/entries/map19/3-flag-events.bin"
+Map19s4_StepEvents: incbin "maps/entries/map19/4-step-events.bin"
+Map19s5_RootEvents: incbin "maps/entries/map19/5-roof-events.bin"
+Map19s6_WarpEvents: incbin "maps/entries/map19/6-warp-events.bin"
+Map19s7_ChestItems: incbin "maps/entries/map19/7-chest-items.bin"
+Map19s8_OtherItems: incbin "maps/entries/map19/8-other-items.bin"
+Map19s0_Blocks:     incbin "maps/entries/map19/0-blocks.bin"
+Map19s1_Layout:     incbin "maps/entries/map19/1-layout.bin"
 Map20:              dc.b 0
 										dc.b 6
 										dc.b $17
 										dc.b $2C
 										dc.b $35
 										dc.b $3E
-										dc.l Map20Section0
-										dc.l Map20Section1
-										dc.l Map20Section2
-										dc.l Map20Section3
-										dc.l Map20Section4
-										dc.l Map20Section5
-										dc.l Map20Section6
-										dc.l Map20Section7
-										dc.l Map20Section8
+										dc.l Map20s0_Blocks
+										dc.l Map20s1_Layout
+										dc.l Map20s2_Areas
+										dc.l Map20s3_FlagEvents
+										dc.l Map20s4_StepEvents
+										dc.l Map20s5_RootEvents
+										dc.l Map20s6_WarpEvents
+										dc.l Map20s7_ChestItems
+										dc.l Map20s8_OtherItems
 										dc.l $FFFFFFFF
-Map20Section2:      incbin "maps/mapentries/map20/section2.bin"
-Map20Section3:      incbin "maps/mapentries/map20/section3.bin"
-Map20Section4:      incbin "maps/mapentries/map20/section4.bin"
-Map20Section5:      incbin "maps/mapentries/map20/section5.bin"
-Map20Section6:      incbin "maps/mapentries/map20/section6.bin"
-Map20Section7:      incbin "maps/mapentries/map20/section7.bin"
-Map20Section8:      incbin "maps/mapentries/map20/section8.bin"
-Map20Section0:      incbin "maps/mapentries/map20/section0.bin"
-Map20Section1:      incbin "maps/mapentries/map20/section1.bin"
+Map20s2_Areas:      incbin "maps/entries/map20/2-areas.bin"
+Map20s3_FlagEvents: incbin "maps/entries/map20/3-flag-events.bin"
+Map20s4_StepEvents: incbin "maps/entries/map20/4-step-events.bin"
+Map20s5_RootEvents: incbin "maps/entries/map20/5-roof-events.bin"
+Map20s6_WarpEvents: incbin "maps/entries/map20/6-warp-events.bin"
+Map20s7_ChestItems: incbin "maps/entries/map20/7-chest-items.bin"
+Map20s8_OtherItems: incbin "maps/entries/map20/8-other-items.bin"
+Map20s0_Blocks:     incbin "maps/entries/map20/0-blocks.bin"
+Map20s1_Layout:     incbin "maps/entries/map20/1-layout.bin"
 Map21:              dc.b 0
 										dc.b 6
 										dc.b $17
 										dc.b $2C
 										dc.b $35
 										dc.b 8
-										dc.l Map21Section0
-										dc.l Map21Section1
-										dc.l Map21Section2
-										dc.l Map21Section3
-										dc.l Map21Section4
-										dc.l Map21Section5
-										dc.l Map21Section6
-										dc.l Map21Section7
-										dc.l Map21Section8
+										dc.l Map21s0_Blocks
+										dc.l Map21s1_Layout
+										dc.l Map21s2_Areas
+										dc.l Map21s3_FlagEvents
+										dc.l Map21s4_StepEvents
+										dc.l Map21s5_RootEvents
+										dc.l Map21s6_WarpEvents
+										dc.l Map21s7_ChestItems
+										dc.l Map21s8_OtherItems
 										dc.l $FFFFFFFF
-Map21Section2:      incbin "maps/mapentries/map21/section2.bin"
-Map21Section3:      incbin "maps/mapentries/map21/section3.bin"
-Map21Section4:      incbin "maps/mapentries/map21/section4.bin"
-Map21Section5:      incbin "maps/mapentries/map21/section5.bin"
-Map21Section6:      incbin "maps/mapentries/map21/section6.bin"
-Map21Section7:      incbin "maps/mapentries/map21/section7.bin"
-Map21Section8:      incbin "maps/mapentries/map21/section8.bin"
-Map21Section0:      incbin "maps/mapentries/map21/section0.bin"
-Map21Section1:      incbin "maps/mapentries/map21/section1.bin"
+Map21s2_Areas:      incbin "maps/entries/map21/2-areas.bin"
+Map21s3_FlagEvents: incbin "maps/entries/map21/3-flag-events.bin"
+Map21s4_StepEvents: incbin "maps/entries/map21/4-step-events.bin"
+Map21s5_RootEvents: incbin "maps/entries/map21/5-roof-events.bin"
+Map21s6_WarpEvents: incbin "maps/entries/map21/6-warp-events.bin"
+Map21s7_ChestItems: incbin "maps/entries/map21/7-chest-items.bin"
+Map21s8_OtherItems: incbin "maps/entries/map21/8-other-items.bin"
+Map21s0_Blocks:     incbin "maps/entries/map21/0-blocks.bin"
+Map21s1_Layout:     incbin "maps/entries/map21/1-layout.bin"
 Map22:              dc.b 2
 										dc.b $43
 										dc.b $48
 										dc.b $FF
 										dc.b $FF
 										dc.b $42
-										dc.l Map22Section0
-										dc.l Map22Section1
-										dc.l Map22Section2
-										dc.l Map22Section3
-										dc.l Map22Section4
-										dc.l Map22Section5
-										dc.l Map22Section6
-										dc.l Map22Section7
-										dc.l Map22Section8
+										dc.l Map22s0_Blocks
+										dc.l Map22s1_Layout
+										dc.l Map22s2_Areas
+										dc.l Map22s3_FlagEvents
+										dc.l Map22s4_StepEvents
+										dc.l Map22s5_RootEvents
+										dc.l Map22s6_WarpEvents
+										dc.l Map22s7_ChestItems
+										dc.l Map22s8_OtherItems
 										dc.l $FFFFFFFF
-Map22Section2:      incbin "maps/mapentries/map22/section2.bin"
-Map22Section3:      incbin "maps/mapentries/map22/section3.bin"
-Map22Section4:      incbin "maps/mapentries/map22/section4.bin"
-Map22Section5:      incbin "maps/mapentries/map22/section5.bin"
-Map22Section6:      incbin "maps/mapentries/map22/section6.bin"
-Map22Section7:      incbin "maps/mapentries/map22/section7.bin"
-Map22Section8:      incbin "maps/mapentries/map22/section8.bin"
-Map22Section0:      incbin "maps/mapentries/map22/section0.bin"
-Map22Section1:      incbin "maps/mapentries/map22/section1.bin"
+Map22s2_Areas:      incbin "maps/entries/map22/2-areas.bin"
+Map22s3_FlagEvents: incbin "maps/entries/map22/3-flag-events.bin"
+Map22s4_StepEvents: incbin "maps/entries/map22/4-step-events.bin"
+Map22s5_RootEvents: incbin "maps/entries/map22/5-roof-events.bin"
+Map22s6_WarpEvents: incbin "maps/entries/map22/6-warp-events.bin"
+Map22s7_ChestItems: incbin "maps/entries/map22/7-chest-items.bin"
+Map22s8_OtherItems: incbin "maps/entries/map22/8-other-items.bin"
+Map22s0_Blocks:     incbin "maps/entries/map22/0-blocks.bin"
+Map22s1_Layout:     incbin "maps/entries/map22/1-layout.bin"
 Map23:              dc.b 3
 										dc.b 0
 										dc.b $59
 										dc.b $30
 										dc.b $25
 										dc.b $3A
-										dc.l Map23Section0
-										dc.l Map23Section1
-										dc.l Map23Section2
-										dc.l Map23Section3
-										dc.l Map23Section4
-										dc.l Map23Section5
-										dc.l Map23Section6
-										dc.l Map23Section7
-										dc.l Map23Section8
-										dc.l Map06Section9
-Map23Section2:      incbin "maps/mapentries/map23/section2.bin"
-Map23Section3:      incbin "maps/mapentries/map23/section3.bin"
-Map23Section4:      incbin "maps/mapentries/map23/section4.bin"
-Map23Section5:      incbin "maps/mapentries/map23/section5.bin"
-Map23Section6:      incbin "maps/mapentries/map23/section6.bin"
-Map23Section7:      incbin "maps/mapentries/map23/section7.bin"
-Map23Section8:      incbin "maps/mapentries/map23/section8.bin"
-Map23Section0:      incbin "maps/mapentries/map24/section0.bin"
-Map23Section1:      incbin "maps/mapentries/map24/section1.bin"
+										dc.l Map23s0_Blocks
+										dc.l Map23s1_Layout
+										dc.l Map23s2_Areas
+										dc.l Map23s3_FlagEvents
+										dc.l Map23s4_StepEvents
+										dc.l Map23s5_RootEvents
+										dc.l Map23s6_WarpEvents
+										dc.l Map23s7_ChestItems
+										dc.l Map23s8_OtherItems
+										dc.l Map06s9_Animations
+Map23s2_Areas:      incbin "maps/entries/map23/2-areas.bin"
+Map23s3_FlagEvents: incbin "maps/entries/map23/3-flag-events.bin"
+Map23s4_StepEvents: incbin "maps/entries/map23/4-step-events.bin"
+Map23s5_RootEvents: incbin "maps/entries/map23/5-roof-events.bin"
+Map23s6_WarpEvents: incbin "maps/entries/map23/6-warp-events.bin"
+Map23s7_ChestItems: incbin "maps/entries/map23/7-chest-items.bin"
+Map23s8_OtherItems: incbin "maps/entries/map23/8-other-items.bin"
+Map23s0_Blocks:     incbin "maps/entries/map23/0-blocks.bin"
+Map23s1_Layout:     incbin "maps/entries/map23/1-layout.bin"
 Map24:              dc.b 3
 										dc.b 0
 										dc.b $59
 										dc.b $30
 										dc.b $25
 										dc.b $3A
-										dc.l Map23Section0
-										dc.l Map23Section1
-										dc.l Map24Section2
-										dc.l Map24Section3
-										dc.l Map24Section4
-										dc.l Map24Section5
-										dc.l Map24Section6
-										dc.l Map24Section7
-										dc.l Map24Section8
+										dc.l Map23s0_Blocks
+										dc.l Map23s1_Layout
+										dc.l Map24s2_Areas
+										dc.l Map24s3_FlagEvents
+										dc.l Map24s4_StepEvents
+										dc.l Map24s5_RootEvents
+										dc.l Map24s6_WarpEvents
+										dc.l Map24s7_ChestItems
+										dc.l Map24s8_OtherItems
 										dc.l $FFFFFFFF
-Map24Section2:      incbin "maps/mapentries/map24/section2.bin"
-Map24Section3:      incbin "maps/mapentries/map24/section3.bin"
-Map24Section4:      incbin "maps/mapentries/map24/section4.bin"
-Map24Section5:      incbin "maps/mapentries/map24/section5.bin"
-Map24Section6:      incbin "maps/mapentries/map24/section6.bin"
-Map24Section7:      incbin "maps/mapentries/map24/section7.bin"
-Map24Section8:      incbin "maps/mapentries/map24/section8.bin"
+Map24s2_Areas:      incbin "maps/entries/map24/2-areas.bin"
+Map24s3_FlagEvents: incbin "maps/entries/map24/3-flag-events.bin"
+Map24s4_StepEvents: incbin "maps/entries/map24/4-step-events.bin"
+Map24s5_RootEvents: incbin "maps/entries/map24/5-roof-events.bin"
+Map24s6_WarpEvents: incbin "maps/entries/map24/6-warp-events.bin"
+Map24s7_ChestItems: incbin "maps/entries/map24/7-chest-items.bin"
+Map24s8_OtherItems: incbin "maps/entries/map24/8-other-items.bin"
 Map25:              dc.b 0
 										dc.b 1
 										dc.b $54
 										dc.b $32
 										dc.b $26
 										dc.b $3D
-										dc.l Map25Section0
-										dc.l Map25Section1
-										dc.l Map25Section2
-										dc.l Map25Section3
-										dc.l Map25Section4
-										dc.l Map25Section5
-										dc.l Map25Section6
-										dc.l Map25Section7
-										dc.l Map25Section8
-										dc.l Map06Section9
-Map25Section2:      incbin "maps/mapentries/map25/section2.bin"
-Map25Section3:      incbin "maps/mapentries/map25/section3.bin"
-Map25Section4:      incbin "maps/mapentries/map25/section4.bin"
-Map25Section5:      incbin "maps/mapentries/map25/section5.bin"
-Map25Section6:      incbin "maps/mapentries/map25/section6.bin"
-Map25Section7:      incbin "maps/mapentries/map25/section7.bin"
-Map25Section8:      incbin "maps/mapentries/map25/section8.bin"
-Map25Section0:      incbin "maps/mapentries/map25/section0.bin"
-Map25Section1:      incbin "maps/mapentries/map25/section1.bin"
+										dc.l Map25s0_Blocks
+										dc.l Map25s1_Layout
+										dc.l Map25s2_Areas
+										dc.l Map25s3_FlagEvents
+										dc.l Map25s4_StepEvents
+										dc.l Map25s5_RootEvents
+										dc.l Map25s6_WarpEvents
+										dc.l Map25s7_ChestItems
+										dc.l Map25s8_OtherItems
+										dc.l Map06s9_Animations
+Map25s2_Areas:      incbin "maps/entries/map25/2-areas.bin"
+Map25s3_FlagEvents: incbin "maps/entries/map25/3-flag-events.bin"
+Map25s4_StepEvents: incbin "maps/entries/map25/4-step-events.bin"
+Map25s5_RootEvents: incbin "maps/entries/map25/5-roof-events.bin"
+Map25s6_WarpEvents: incbin "maps/entries/map25/6-warp-events.bin"
+Map25s7_ChestItems: incbin "maps/entries/map25/7-chest-items.bin"
+Map25s8_OtherItems: incbin "maps/entries/map25/8-other-items.bin"
+Map25s0_Blocks:     incbin "maps/entries/map25/0-blocks.bin"
+Map25s1_Layout:     incbin "maps/entries/map25/1-layout.bin"
 Map26:              dc.b 2
 										dc.b $44
 										dc.b $45
 										dc.b $46
 										dc.b $47
 										dc.b $FF
-										dc.l Map26Section0
-										dc.l Map26Section1
-										dc.l Map26Section2
-										dc.l Map26Section3
-										dc.l Map26Section4
-										dc.l Map26Section5
-										dc.l Map26Section6
-										dc.l Map26Section7
-										dc.l Map26Section8
+										dc.l Map26s0_Blocks
+										dc.l Map26s1_Layout
+										dc.l Map26s2_Areas
+										dc.l Map26s3_FlagEvents
+										dc.l Map26s4_StepEvents
+										dc.l Map26s5_RootEvents
+										dc.l Map26s6_WarpEvents
+										dc.l Map26s7_ChestItems
+										dc.l Map26s8_OtherItems
 										dc.l $FFFFFFFF
-Map26Section2:      incbin "maps/mapentries/map26/section2.bin"
-Map26Section3:      incbin "maps/mapentries/map26/section3.bin"
-Map26Section4:      incbin "maps/mapentries/map26/section4.bin"
-Map26Section5:      incbin "maps/mapentries/map26/section5.bin"
-Map26Section6:      incbin "maps/mapentries/map26/section6.bin"
-Map26Section7:      incbin "maps/mapentries/map26/section7.bin"
-Map26Section8:      incbin "maps/mapentries/map26/section8.bin"
-Map26Section0:      incbin "maps/mapentries/map26/section0.bin"
-Map26Section1:      incbin "maps/mapentries/map26/section1.bin"
+Map26s2_Areas:      incbin "maps/entries/map26/2-areas.bin"
+Map26s3_FlagEvents: incbin "maps/entries/map26/3-flag-events.bin"
+Map26s4_StepEvents: incbin "maps/entries/map26/4-step-events.bin"
+Map26s5_RootEvents: incbin "maps/entries/map26/5-roof-events.bin"
+Map26s6_WarpEvents: incbin "maps/entries/map26/6-warp-events.bin"
+Map26s7_ChestItems: incbin "maps/entries/map26/7-chest-items.bin"
+Map26s8_OtherItems: incbin "maps/entries/map26/8-other-items.bin"
+Map26s0_Blocks:     incbin "maps/entries/map26/0-blocks.bin"
+Map26s1_Layout:     incbin "maps/entries/map26/1-layout.bin"
 Map27:              dc.b 2
 										dc.b $44
 										dc.b $45
 										dc.b $46
 										dc.b $47
 										dc.b $FF
-										dc.l Map27Section0
-										dc.l Map27Section1
-										dc.l Map27Section2
-										dc.l Map27Section3
-										dc.l Map27Section4
-										dc.l Map27Section5
-										dc.l Map27Section6
-										dc.l Map27Section7
-										dc.l Map27Section8
+										dc.l Map27s0_Blocks
+										dc.l Map27s1_Layout
+										dc.l Map27s2_Areas
+										dc.l Map27s3_FlagEvents
+										dc.l Map27s4_StepEvents
+										dc.l Map27s5_RootEvents
+										dc.l Map27s6_WarpEvents
+										dc.l Map27s7_ChestItems
+										dc.l Map27s8_OtherItems
 										dc.l $FFFFFFFF
-Map27Section2:      incbin "maps/mapentries/map27/section2.bin"
-Map27Section3:      incbin "maps/mapentries/map27/section3.bin"
-Map27Section4:      incbin "maps/mapentries/map27/section4.bin"
-Map27Section5:      incbin "maps/mapentries/map27/section5.bin"
-Map27Section6:      incbin "maps/mapentries/map27/section6.bin"
-Map27Section7:      incbin "maps/mapentries/map27/section7.bin"
-Map27Section8:      incbin "maps/mapentries/map27/section8.bin"
-Map27Section0:      incbin "maps/mapentries/map27/section0.bin"
-Map27Section1:      incbin "maps/mapentries/map27/section1.bin"
+Map27s2_Areas:      incbin "maps/entries/map27/2-areas.bin"
+Map27s3_FlagEvents: incbin "maps/entries/map27/3-flag-events.bin"
+Map27s4_StepEvents: incbin "maps/entries/map27/4-step-events.bin"
+Map27s5_RootEvents: incbin "maps/entries/map27/5-roof-events.bin"
+Map27s6_WarpEvents: incbin "maps/entries/map27/6-warp-events.bin"
+Map27s7_ChestItems: incbin "maps/entries/map27/7-chest-items.bin"
+Map27s8_OtherItems: incbin "maps/entries/map27/8-other-items.bin"
+Map27s0_Blocks:     incbin "maps/entries/map27/0-blocks.bin"
+Map27s1_Layout:     incbin "maps/entries/map27/1-layout.bin"
 Map28:              dc.b 0
 										dc.b $50
 										dc.b $51
 										dc.b $52
 										dc.b $FF
 										dc.b $FF
-										dc.l Map28Section0
-										dc.l Map28Section1
-										dc.l Map28Section2
-										dc.l Map28Section3
-										dc.l Map28Section4
-										dc.l Map28Section5
-										dc.l Map28Section6
-										dc.l Map28Section7
-										dc.l Map28Section8
-										dc.l Map28Section9
-Map28Section2:      incbin "maps/mapentries/map28/section2.bin"
-Map28Section3:      incbin "maps/mapentries/map28/section3.bin"
-Map28Section4:      incbin "maps/mapentries/map28/section4.bin"
-Map28Section5:      incbin "maps/mapentries/map28/section5.bin"
-Map28Section6:      incbin "maps/mapentries/map28/section6.bin"
-Map28Section7:      incbin "maps/mapentries/map28/section7.bin"
-Map28Section8:      incbin "maps/mapentries/map28/section8.bin"
-Map28Section0:      incbin "maps/mapentries/map28/section0.bin"
-Map28Section1:      incbin "maps/mapentries/map28/section1.bin"
-Map28Section9:      incbin "maps/mapentries/map28/section9.bin"
+										dc.l Map28s0_Blocks
+										dc.l Map28s1_Layout
+										dc.l Map28s2_Areas
+										dc.l Map28s3_FlagEvents
+										dc.l Map28s4_StepEvents
+										dc.l Map28s5_RootEvents
+										dc.l Map28s6_WarpEvents
+										dc.l Map28s7_ChestItems
+										dc.l Map28s8_OtherItems
+										dc.l Map28s9_Animations
+Map28s2_Areas:      incbin "maps/entries/map28/2-areas.bin"
+Map28s3_FlagEvents: incbin "maps/entries/map28/3-flag-events.bin"
+Map28s4_StepEvents: incbin "maps/entries/map28/4-step-events.bin"
+Map28s5_RootEvents: incbin "maps/entries/map28/5-roof-events.bin"
+Map28s6_WarpEvents: incbin "maps/entries/map28/6-warp-events.bin"
+Map28s7_ChestItems: incbin "maps/entries/map28/7-chest-items.bin"
+Map28s8_OtherItems: incbin "maps/entries/map28/8-other-items.bin"
+Map28s0_Blocks:     incbin "maps/entries/map28/0-blocks.bin"
+Map28s1_Layout:     incbin "maps/entries/map28/1-layout.bin"
+Map28s9_Animations: incbin "maps/entries/map28/9-animations.bin"
 Map29:              dc.b 3
 										dc.b 0
 										dc.b $59
 										dc.b $30
 										dc.b $FF
 										dc.b $41
-										dc.l Map29Section0
-										dc.l Map29Section1
-										dc.l Map29Section2
-										dc.l Map29Section3
-										dc.l Map29Section4
-										dc.l Map29Section5
-										dc.l Map29Section6
-										dc.l Map29Section7
-										dc.l Map29Section8
-										dc.l Map29Section9
-Map29Section2:      incbin "maps/mapentries/map29/section2.bin"
-Map29Section3:      incbin "maps/mapentries/map29/section3.bin"
-Map29Section4:      incbin "maps/mapentries/map29/section4.bin"
-Map29Section5:      incbin "maps/mapentries/map29/section5.bin"
-Map29Section6:      incbin "maps/mapentries/map29/section6.bin"
-Map29Section7:      incbin "maps/mapentries/map29/section7.bin"
-Map29Section8:      incbin "maps/mapentries/map29/section8.bin"
-Map29Section0:      incbin "maps/mapentries/map29/section0.bin"
-Map29Section1:      incbin "maps/mapentries/map29/section1.bin"
-Map29Section9:      incbin "maps/mapentries/map29/section9.bin"
+										dc.l Map29s0_Blocks
+										dc.l Map29s1_Layout
+										dc.l Map29s2_Areas
+										dc.l Map29s3_FlagEvents
+										dc.l Map29s4_StepEvents
+										dc.l Map29s5_RootEvents
+										dc.l Map29s6_WarpEvents
+										dc.l Map29s7_ChestItems
+										dc.l Map29s8_OtherItems
+										dc.l Map29s9_Animations
+Map29s2_Areas:      incbin "maps/entries/map29/2-areas.bin"
+Map29s3_FlagEvents: incbin "maps/entries/map29/3-flag-events.bin"
+Map29s4_StepEvents: incbin "maps/entries/map29/4-step-events.bin"
+Map29s5_RootEvents: incbin "maps/entries/map29/5-roof-events.bin"
+Map29s6_WarpEvents: incbin "maps/entries/map29/6-warp-events.bin"
+Map29s7_ChestItems: incbin "maps/entries/map29/7-chest-items.bin"
+Map29s8_OtherItems: incbin "maps/entries/map29/8-other-items.bin"
+Map29s0_Blocks:     incbin "maps/entries/map29/0-blocks.bin"
+Map29s1_Layout:     incbin "maps/entries/map29/1-layout.bin"
+Map29s9_Animations: incbin "maps/entries/map29/9-animations.bin"
 Map30:              dc.b 4
 										dc.b $A
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
-										dc.l Map30Section0
-										dc.l Map30Section1
-										dc.l Map30Section2
-										dc.l Map30Section3
-										dc.l Map30Section4
-										dc.l Map30Section5
-										dc.l Map30Section6
-										dc.l Map30Section7
-										dc.l Map30Section8
+										dc.l Map30s0_Blocks
+										dc.l Map30s1_Layout
+										dc.l Map30s2_Areas
+										dc.l Map30s3_FlagEvents
+										dc.l Map30s4_StepEvents
+										dc.l Map30s5_RootEvents
+										dc.l Map30s6_WarpEvents
+										dc.l Map30s7_ChestItems
+										dc.l Map30s8_OtherItems
 										dc.l $FFFFFFFF
-Map30Section2:      incbin "maps/mapentries/map30/section2.bin"
-Map30Section3:      incbin "maps/mapentries/map30/section3.bin"
-Map30Section4:      incbin "maps/mapentries/map30/section4.bin"
-Map30Section5:      incbin "maps/mapentries/map30/section5.bin"
-Map30Section6:      incbin "maps/mapentries/map30/section6.bin"
-Map30Section7:      incbin "maps/mapentries/map30/section7.bin"
-Map30Section8:      incbin "maps/mapentries/map30/section8.bin"
-Map30Section0:      incbin "maps/mapentries/map30/section0.bin"
-Map30Section1:      incbin "maps/mapentries/map30/section1.bin"
+Map30s2_Areas:      incbin "maps/entries/map30/2-areas.bin"
+Map30s3_FlagEvents: incbin "maps/entries/map30/3-flag-events.bin"
+Map30s4_StepEvents: incbin "maps/entries/map30/4-step-events.bin"
+Map30s5_RootEvents: incbin "maps/entries/map30/5-roof-events.bin"
+Map30s6_WarpEvents: incbin "maps/entries/map30/6-warp-events.bin"
+Map30s7_ChestItems: incbin "maps/entries/map30/7-chest-items.bin"
+Map30s8_OtherItems: incbin "maps/entries/map30/8-other-items.bin"
+Map30s0_Blocks:     incbin "maps/entries/map30/0-blocks.bin"
+Map30s1_Layout:     incbin "maps/entries/map30/1-layout.bin"
 Map31:              dc.b 0
 										dc.b 0
 										dc.b $59
 										dc.b $32
 										dc.b $35
 										dc.b $3F
-										dc.l Map31Section0
-										dc.l Map31Section1
-										dc.l Map31Section2
-										dc.l Map31Section3
-										dc.l Map31Section4
-										dc.l Map31Section5
-										dc.l Map31Section6
-										dc.l Map31Section7
-										dc.l Map31Section8
+										dc.l Map31s0_Blocks
+										dc.l Map31s1_Layout
+										dc.l Map31s2_Areas
+										dc.l Map31s3_FlagEvents
+										dc.l Map31s4_StepEvents
+										dc.l Map31s5_RootEvents
+										dc.l Map31s6_WarpEvents
+										dc.l Map31s7_ChestItems
+										dc.l Map31s8_OtherItems
 										dc.l $FFFFFFFF
-Map31Section2:      incbin "maps/mapentries/map31/section2.bin"
-Map31Section3:      incbin "maps/mapentries/map31/section3.bin"
-Map31Section4:      incbin "maps/mapentries/map31/section4.bin"
-Map31Section5:      incbin "maps/mapentries/map31/section5.bin"
-Map31Section6:      incbin "maps/mapentries/map31/section6.bin"
-Map31Section7:      incbin "maps/mapentries/map31/section7.bin"
-Map31Section8:      incbin "maps/mapentries/map31/section8.bin"
-Map31Section0:      incbin "maps/mapentries/map31/section0.bin"
-Map31Section1:      incbin "maps/mapentries/map31/section1.bin"
+Map31s2_Areas:      incbin "maps/entries/map31/2-areas.bin"
+Map31s3_FlagEvents: incbin "maps/entries/map31/3-flag-events.bin"
+Map31s4_StepEvents: incbin "maps/entries/map31/4-step-events.bin"
+Map31s5_RootEvents: incbin "maps/entries/map31/5-roof-events.bin"
+Map31s6_WarpEvents: incbin "maps/entries/map31/6-warp-events.bin"
+Map31s7_ChestItems: incbin "maps/entries/map31/7-chest-items.bin"
+Map31s8_OtherItems: incbin "maps/entries/map31/8-other-items.bin"
+Map31s0_Blocks:     incbin "maps/entries/map31/0-blocks.bin"
+Map31s1_Layout:     incbin "maps/entries/map31/1-layout.bin"
 Map32:              dc.b 4
 										dc.b 7
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
 										dc.b $39
-										dc.l Map32Section0
-										dc.l Map32Section1
-										dc.l Map32Section2
-										dc.l Map32Section3
-										dc.l Map32Section4
-										dc.l Map32Section5
-										dc.l Map32Section6
-										dc.l Map32Section7
-										dc.l Map32Section8
+										dc.l Map32s0_Blocks
+										dc.l Map32s1_Layout
+										dc.l Map32s2_Areas
+										dc.l Map32s3_FlagEvents
+										dc.l Map32s4_StepEvents
+										dc.l Map32s5_RootEvents
+										dc.l Map32s6_WarpEvents
+										dc.l Map32s7_ChestItems
+										dc.l Map32s8_OtherItems
 										dc.l $FFFFFFFF
-Map32Section2:      incbin "maps/mapentries/map32/section2.bin"
-Map32Section3:      incbin "maps/mapentries/map32/section3.bin"
-Map32Section4:      incbin "maps/mapentries/map32/section4.bin"
-Map32Section5:      incbin "maps/mapentries/map32/section5.bin"
-Map32Section6:      incbin "maps/mapentries/map32/section6.bin"
-Map32Section7:      incbin "maps/mapentries/map32/section7.bin"
-Map32Section8:      incbin "maps/mapentries/map32/section8.bin"
-Map32Section0:      incbin "maps/mapentries/map32/section0.bin"
-Map32Section1:      incbin "maps/mapentries/map32/section1.bin"
+Map32s2_Areas:      incbin "maps/entries/map32/2-areas.bin"
+Map32s3_FlagEvents: incbin "maps/entries/map32/3-flag-events.bin"
+Map32s4_StepEvents: incbin "maps/entries/map32/4-step-events.bin"
+Map32s5_RootEvents: incbin "maps/entries/map32/5-roof-events.bin"
+Map32s6_WarpEvents: incbin "maps/entries/map32/6-warp-events.bin"
+Map32s7_ChestItems: incbin "maps/entries/map32/7-chest-items.bin"
+Map32s8_OtherItems: incbin "maps/entries/map32/8-other-items.bin"
+Map32s0_Blocks:     incbin "maps/entries/map32/0-blocks.bin"
+Map32s1_Layout:     incbin "maps/entries/map32/1-layout.bin"
 Map33:              dc.b 0
 										dc.b 1
 										dc.b $FF
 										dc.b $32
 										dc.b $55
 										dc.b $56
-										dc.l Map33Section0
-										dc.l Map33Section1
-										dc.l Map33Section2
-										dc.l Map33Section3
-										dc.l Map33Section4
-										dc.l Map33Section5
-										dc.l Map33Section6
-										dc.l Map33Section7
-										dc.l Map33Section8
-										dc.l Map33Section9
-Map33Section2:      incbin "maps/mapentries/map33/section2.bin"
-Map33Section3:      incbin "maps/mapentries/map33/section3.bin"
-Map33Section4:      incbin "maps/mapentries/map33/section4.bin"
-Map33Section5:      incbin "maps/mapentries/map33/section5.bin"
-Map33Section6:      incbin "maps/mapentries/map33/section6.bin"
-Map33Section7:      incbin "maps/mapentries/map33/section7.bin"
-Map33Section8:      incbin "maps/mapentries/map33/section8.bin"
-Map33Section0:      incbin "maps/mapentries/map33/section0.bin"
-Map33Section1:      incbin "maps/mapentries/map33/section1.bin"
-Map33Section9:      incbin "maps/mapentries/map33/section9.bin"
+										dc.l Map33s0_Blocks
+										dc.l Map33s1_Layout
+										dc.l Map33s2_Areas
+										dc.l Map33s3_FlagEvents
+										dc.l Map33s4_StepEvents
+										dc.l Map33s5_RootEvents
+										dc.l Map33s6_WarpEvents
+										dc.l Map33s7_ChestItems
+										dc.l Map33s8_OtherItems
+										dc.l Map33s9_Animations
+Map33s2_Areas:      incbin "maps/entries/map33/2-areas.bin"
+Map33s3_FlagEvents: incbin "maps/entries/map33/3-flag-events.bin"
+Map33s4_StepEvents: incbin "maps/entries/map33/4-step-events.bin"
+Map33s5_RootEvents: incbin "maps/entries/map33/5-roof-events.bin"
+Map33s6_WarpEvents: incbin "maps/entries/map33/6-warp-events.bin"
+Map33s7_ChestItems: incbin "maps/entries/map33/7-chest-items.bin"
+Map33s8_OtherItems: incbin "maps/entries/map33/8-other-items.bin"
+Map33s0_Blocks:     incbin "maps/entries/map33/0-blocks.bin"
+Map33s1_Layout:     incbin "maps/entries/map33/1-layout.bin"
+Map33s9_Animations: incbin "maps/entries/map33/9-animations.bin"
 Map34:              dc.b 4
 										dc.b $12
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
-										dc.l Map34Section0
-										dc.l Map34Section1
-										dc.l Map34Section2
-										dc.l Map34Section3
-										dc.l Map34Section4
-										dc.l Map34Section5
-										dc.l Map34Section6
-										dc.l Map34Section7
-										dc.l Map34Section8
-										dc.l Map34Section9
-Map34Section2:      incbin "maps/mapentries/map34/section2.bin"
-Map34Section3:      incbin "maps/mapentries/map34/section3.bin"
-Map34Section4:      incbin "maps/mapentries/map34/section4.bin"
-Map34Section5:      incbin "maps/mapentries/map34/section5.bin"
-Map34Section6:      incbin "maps/mapentries/map34/section6.bin"
-Map34Section7:      incbin "maps/mapentries/map34/section7.bin"
-Map34Section8:      incbin "maps/mapentries/map34/section8.bin"
-Map34Section0:      incbin "maps/mapentries/map34/section0.bin"
-Map34Section1:      incbin "maps/mapentries/map34/section1.bin"
-Map34Section9:      incbin "maps/mapentries/map34/section9.bin"
+										dc.l Map34s0_Blocks
+										dc.l Map34s1_Layout
+										dc.l Map34s2_Areas
+										dc.l Map34s3_FlagEvents
+										dc.l Map34s4_StepEvents
+										dc.l Map34s5_RootEvents
+										dc.l Map34s6_WarpEvents
+										dc.l Map34s7_ChestItems
+										dc.l Map34s8_OtherItems
+										dc.l Map34s9_Animations
+Map34s2_Areas:      incbin "maps/entries/map34/2-areas.bin"
+Map34s3_FlagEvents: incbin "maps/entries/map34/3-flag-events.bin"
+Map34s4_StepEvents: incbin "maps/entries/map34/4-step-events.bin"
+Map34s5_RootEvents: incbin "maps/entries/map34/5-roof-events.bin"
+Map34s6_WarpEvents: incbin "maps/entries/map34/6-warp-events.bin"
+Map34s7_ChestItems: incbin "maps/entries/map34/7-chest-items.bin"
+Map34s8_OtherItems: incbin "maps/entries/map34/8-other-items.bin"
+Map34s0_Blocks:     incbin "maps/entries/map34/0-blocks.bin"
+Map34s1_Layout:     incbin "maps/entries/map34/1-layout.bin"
+Map34s9_Animations: incbin "maps/entries/map34/9-animations.bin"
 Map35:              dc.b 4
 										dc.b 8
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
 										dc.b $2A
-										dc.l Map35Section0
-										dc.l Map35Section1
-										dc.l Map35Section2
-										dc.l Map35Section3
-										dc.l Map35Section4
-										dc.l Map35Section5
-										dc.l Map35Section6
-										dc.l Map35Section7
-										dc.l Map35Section8
+										dc.l Map35s0_Blocks
+										dc.l Map35s1_Layout
+										dc.l Map35s2_Areas
+										dc.l Map35s3_FlagEvents
+										dc.l Map35s4_StepEvents
+										dc.l Map35s5_RootEvents
+										dc.l Map35s6_WarpEvents
+										dc.l Map35s7_ChestItems
+										dc.l Map35s8_OtherItems
 										dc.l $FFFFFFFF
-Map35Section2:      incbin "maps/mapentries/map35/section2.bin"
-Map35Section3:      incbin "maps/mapentries/map35/section3.bin"
-Map35Section4:      incbin "maps/mapentries/map35/section4.bin"
-Map35Section5:      incbin "maps/mapentries/map35/section5.bin"
-Map35Section6:      incbin "maps/mapentries/map35/section6.bin"
-Map35Section7:      incbin "maps/mapentries/map35/section7.bin"
-Map35Section8:      incbin "maps/mapentries/map35/section8.bin"
-Map35Section0:      incbin "maps/mapentries/map35/section0.bin"
-Map35Section1:      incbin "maps/mapentries/map35/section1.bin"
+Map35s2_Areas:      incbin "maps/entries/map35/2-areas.bin"
+Map35s3_FlagEvents: incbin "maps/entries/map35/3-flag-events.bin"
+Map35s4_StepEvents: incbin "maps/entries/map35/4-step-events.bin"
+Map35s5_RootEvents: incbin "maps/entries/map35/5-roof-events.bin"
+Map35s6_WarpEvents: incbin "maps/entries/map35/6-warp-events.bin"
+Map35s7_ChestItems: incbin "maps/entries/map35/7-chest-items.bin"
+Map35s8_OtherItems: incbin "maps/entries/map35/8-other-items.bin"
+Map35s0_Blocks:     incbin "maps/entries/map35/0-blocks.bin"
+Map35s1_Layout:     incbin "maps/entries/map35/1-layout.bin"
 Map36:              dc.b $A
 										dc.b $5A
 										dc.b $34
 										dc.b $32
 										dc.b $5C
 										dc.b $3A
-										dc.l Map36Section0
-										dc.l Map36Section1
-										dc.l Map36Section2
-										dc.l Map36Section3
-										dc.l Map36Section4
-										dc.l Map36Section5
-										dc.l Map36Section6
-										dc.l Map36Section7
-										dc.l Map36Section8
+										dc.l Map36s0_Blocks
+										dc.l Map36s1_Layout
+										dc.l Map36s2_Areas
+										dc.l Map36s3_FlagEvents
+										dc.l Map36s4_StepEvents
+										dc.l Map36s5_RootEvents
+										dc.l Map36s6_WarpEvents
+										dc.l Map36s7_ChestItems
+										dc.l Map36s8_OtherItems
 										dc.l $FFFFFFFF
-Map36Section2:      incbin "maps/mapentries/map36/section2.bin"
-Map36Section3:      incbin "maps/mapentries/map36/section3.bin"
-Map36Section4:      incbin "maps/mapentries/map36/section4.bin"
-Map36Section5:      incbin "maps/mapentries/map36/section5.bin"
-Map36Section6:      incbin "maps/mapentries/map36/section6.bin"
-Map36Section7:      incbin "maps/mapentries/map36/section7.bin"
-Map36Section8:      incbin "maps/mapentries/map36/section8.bin"
-Map36Section0:      incbin "maps/mapentries/map36/section0.bin"
-Map36Section1:      incbin "maps/mapentries/map36/section1.bin"
+Map36s2_Areas:      incbin "maps/entries/map36/2-areas.bin"
+Map36s3_FlagEvents: incbin "maps/entries/map36/3-flag-events.bin"
+Map36s4_StepEvents: incbin "maps/entries/map36/4-step-events.bin"
+Map36s5_RootEvents: incbin "maps/entries/map36/5-roof-events.bin"
+Map36s6_WarpEvents: incbin "maps/entries/map36/6-warp-events.bin"
+Map36s7_ChestItems: incbin "maps/entries/map36/7-chest-items.bin"
+Map36s8_OtherItems: incbin "maps/entries/map36/8-other-items.bin"
+Map36s0_Blocks:     incbin "maps/entries/map36/0-blocks.bin"
+Map36s1_Layout:     incbin "maps/entries/map36/1-layout.bin"
 Map37:              dc.b $B
 										dc.b $33
 										dc.b $FF
 										dc.b $5D
 										dc.b $FF
 										dc.b $24
-										dc.l Map37Section0
-										dc.l Map37Section1
-										dc.l Map37Section2
-										dc.l Map37Section3
-										dc.l Map37Section4
-										dc.l Map37Section5
-										dc.l Map37Section6
-										dc.l Map37Section7
-										dc.l Map37Section8
+										dc.l Map37s0_Blocks
+										dc.l Map37s1_Layout
+										dc.l Map37s2_Areas
+										dc.l Map37s3_FlagEvents
+										dc.l Map37s4_StepEvents
+										dc.l Map37s5_RootEvents
+										dc.l Map37s6_WarpEvents
+										dc.l Map37s7_ChestItems
+										dc.l Map37s8_OtherItems
 										dc.l $FFFFFFFF
-Map37Section2:      incbin "maps/mapentries/map37/section2.bin"
-Map37Section3:      incbin "maps/mapentries/map37/section3.bin"
-Map37Section4:      incbin "maps/mapentries/map37/section4.bin"
-Map37Section5:      incbin "maps/mapentries/map37/section5.bin"
-Map37Section6:      incbin "maps/mapentries/map37/section6.bin"
-Map37Section7:      incbin "maps/mapentries/map37/section7.bin"
-Map37Section8:      incbin "maps/mapentries/map37/section8.bin"
-Map37Section0:      incbin "maps/mapentries/map37/section0.bin"
-Map37Section1:      incbin "maps/mapentries/map37/section1.bin"
+Map37s2_Areas:      incbin "maps/entries/map37/2-areas.bin"
+Map37s3_FlagEvents: incbin "maps/entries/map37/3-flag-events.bin"
+Map37s4_StepEvents: incbin "maps/entries/map37/4-step-events.bin"
+Map37s5_RootEvents: incbin "maps/entries/map37/5-roof-events.bin"
+Map37s6_WarpEvents: incbin "maps/entries/map37/6-warp-events.bin"
+Map37s7_ChestItems: incbin "maps/entries/map37/7-chest-items.bin"
+Map37s8_OtherItems: incbin "maps/entries/map37/8-other-items.bin"
+Map37s0_Blocks:     incbin "maps/entries/map37/0-blocks.bin"
+Map37s1_Layout:     incbin "maps/entries/map37/1-layout.bin"
 Map38:              dc.b 0
 										dc.b 4
 										dc.b 3
 										dc.b $32
 										dc.b $26
 										dc.b $3B
-										dc.l Map38Section0
-										dc.l Map38Section1
-										dc.l Map38Section2
-										dc.l Map38Section3
-										dc.l Map38Section4
-										dc.l Map38Section5
-										dc.l Map38Section6
-										dc.l Map38Section7
-										dc.l Map38Section8
-										dc.l Map15Section9
-Map38Section2:      incbin "maps/mapentries/map38/section2.bin"
-Map38Section3:      incbin "maps/mapentries/map38/section3.bin"
-Map38Section4:      incbin "maps/mapentries/map38/section4.bin"
-Map38Section5:      incbin "maps/mapentries/map38/section5.bin"
-Map38Section6:      incbin "maps/mapentries/map38/section6.bin"
-Map38Section7:      incbin "maps/mapentries/map38/section7.bin"
-Map38Section8:      incbin "maps/mapentries/map38/section8.bin"
-Map38Section0:      incbin "maps/mapentries/map38/section0.bin"
-Map38Section1:      incbin "maps/mapentries/map38/section1.bin"
+										dc.l Map38s0_Blocks
+										dc.l Map38s1_Layout
+										dc.l Map38s2_Areas
+										dc.l Map38s3_FlagEvents
+										dc.l Map38s4_StepEvents
+										dc.l Map38s5_RootEvents
+										dc.l Map38s6_WarpEvents
+										dc.l Map38s7_ChestItems
+										dc.l Map38s8_OtherItems
+										dc.l Map15s9_Animations
+Map38s2_Areas:      incbin "maps/entries/map38/2-areas.bin"
+Map38s3_FlagEvents: incbin "maps/entries/map38/3-flag-events.bin"
+Map38s4_StepEvents: incbin "maps/entries/map38/4-step-events.bin"
+Map38s5_RootEvents: incbin "maps/entries/map38/5-roof-events.bin"
+Map38s6_WarpEvents: incbin "maps/entries/map38/6-warp-events.bin"
+Map38s7_ChestItems: incbin "maps/entries/map38/7-chest-items.bin"
+Map38s8_OtherItems: incbin "maps/entries/map38/8-other-items.bin"
+Map38s0_Blocks:     incbin "maps/entries/map38/0-blocks.bin"
+Map38s1_Layout:     incbin "maps/entries/map38/1-layout.bin"
 Map39:              dc.b 0
 										dc.b 0
 										dc.b 8
 										dc.b $30
 										dc.b $25
 										dc.b $3A
-										dc.l Map39Section0
-										dc.l Map39Section1
-										dc.l Map39Section2
-										dc.l Map39Section3
-										dc.l Map39Section4
-										dc.l Map39Section5
-										dc.l Map39Section6
-										dc.l Map39Section7
-										dc.l Map39Section8
-										dc.l Map06Section9
-Map39Section2:      incbin "maps/mapentries/map39/section2.bin"
-Map39Section3:      incbin "maps/mapentries/map39/section3.bin"
-Map39Section4:      incbin "maps/mapentries/map39/section4.bin"
-Map39Section5:      incbin "maps/mapentries/map39/section5.bin"
-Map39Section6:      incbin "maps/mapentries/map39/section6.bin"
-Map39Section7:      incbin "maps/mapentries/map39/section7.bin"
-Map39Section8:      incbin "maps/mapentries/map39/section8.bin"
-Map39Section0:      incbin "maps/mapentries/map39/section0.bin"
-Map39Section1:      incbin "maps/mapentries/map39/section1.bin"
+										dc.l Map39s0_Blocks
+										dc.l Map39s1_Layout
+										dc.l Map39s2_Areas
+										dc.l Map39s3_FlagEvents
+										dc.l Map39s4_StepEvents
+										dc.l Map39s5_RootEvents
+										dc.l Map39s6_WarpEvents
+										dc.l Map39s7_ChestItems
+										dc.l Map39s8_OtherItems
+										dc.l Map06s9_Animations
+Map39s2_Areas:      incbin "maps/entries/map39/2-areas.bin"
+Map39s3_FlagEvents: incbin "maps/entries/map39/3-flag-events.bin"
+Map39s4_StepEvents: incbin "maps/entries/map39/4-step-events.bin"
+Map39s5_RootEvents: incbin "maps/entries/map39/5-roof-events.bin"
+Map39s6_WarpEvents: incbin "maps/entries/map39/6-warp-events.bin"
+Map39s7_ChestItems: incbin "maps/entries/map39/7-chest-items.bin"
+Map39s8_OtherItems: incbin "maps/entries/map39/8-other-items.bin"
+Map39s0_Blocks:     incbin "maps/entries/map39/0-blocks.bin"
+Map39s1_Layout:     incbin "maps/entries/map39/1-layout.bin"
 Map40:              dc.b 3
 										dc.b $5E
 										dc.b $5F
 										dc.b $60
 										dc.b $61
 										dc.b $3A
-										dc.l Map40Section0
-										dc.l Map40Section1
-										dc.l Map40Section2
-										dc.l Map40Section3
-										dc.l Map40Section4
-										dc.l Map40Section5
-										dc.l Map40Section6
-										dc.l Map40Section7
-										dc.l Map40Section8
+										dc.l Map40s0_Blocks
+										dc.l Map40s1_Layout
+										dc.l Map40s2_Areas
+										dc.l Map40s3_FlagEvents
+										dc.l Map40s4_StepEvents
+										dc.l Map40s5_RootEvents
+										dc.l Map40s6_WarpEvents
+										dc.l Map40s7_ChestItems
+										dc.l Map40s8_OtherItems
 										dc.l $FFFFFFFF
-Map40Section2:      incbin "maps/mapentries/map40/section2.bin"
-Map40Section3:      incbin "maps/mapentries/map40/section3.bin"
-Map40Section4:      incbin "maps/mapentries/map40/section4.bin"
-Map40Section5:      incbin "maps/mapentries/map40/section5.bin"
-Map40Section6:      incbin "maps/mapentries/map40/section6.bin"
-Map40Section7:      incbin "maps/mapentries/map40/section7.bin"
-Map40Section8:      incbin "maps/mapentries/map40/section8.bin"
-Map40Section0:      incbin "maps/mapentries/map40/section0.bin"
-Map40Section1:      incbin "maps/mapentries/map40/section1.bin"
+Map40s2_Areas:      incbin "maps/entries/map40/2-areas.bin"
+Map40s3_FlagEvents: incbin "maps/entries/map40/3-flag-events.bin"
+Map40s4_StepEvents: incbin "maps/entries/map40/4-step-events.bin"
+Map40s5_RootEvents: incbin "maps/entries/map40/5-roof-events.bin"
+Map40s6_WarpEvents: incbin "maps/entries/map40/6-warp-events.bin"
+Map40s7_ChestItems: incbin "maps/entries/map40/7-chest-items.bin"
+Map40s8_OtherItems: incbin "maps/entries/map40/8-other-items.bin"
+Map40s0_Blocks:     incbin "maps/entries/map40/0-blocks.bin"
+Map40s1_Layout:     incbin "maps/entries/map40/1-layout.bin"
 Map41:              dc.b 0
 										dc.b 1
 										dc.b $1C
 										dc.b $FF
 										dc.b $FF
 										dc.b $56
-										dc.l Map41Section0
-										dc.l Map41Section1
-										dc.l Map41Section2
-										dc.l Map41Section3
-										dc.l Map41Section4
-										dc.l Map41Section5
-										dc.l Map41Section6
-										dc.l Map41Section7
-										dc.l Map41Section8
-										dc.l Map41Section9
-Map41Section2:      incbin "maps/mapentries/map41/section2.bin"
-Map41Section3:      incbin "maps/mapentries/map41/section3.bin"
-Map41Section4:      incbin "maps/mapentries/map41/section4.bin"
-Map41Section5:      incbin "maps/mapentries/map41/section5.bin"
-Map41Section6:      incbin "maps/mapentries/map41/section6.bin"
-Map41Section7:      incbin "maps/mapentries/map41/section7.bin"
-Map41Section8:      incbin "maps/mapentries/map41/section8.bin"
-Map41Section9:      incbin "maps/mapentries/map41/section9.bin"
-Map41Section0:      incbin "maps/mapentries/map41/section0.bin"
-Map41Section1:      incbin "maps/mapentries/map41/section1.bin"
+										dc.l Map41s0_Blocks
+										dc.l Map41s1_Layout
+										dc.l Map41s2_Areas
+										dc.l Map41s3_FlagEvents
+										dc.l Map41s4_StepEvents
+										dc.l Map41s5_RootEvents
+										dc.l Map41s6_WarpEvents
+										dc.l Map41s7_ChestItems
+										dc.l Map41s8_OtherItems
+										dc.l Map41s9_Animations
+Map41s2_Areas:      incbin "maps/entries/map41/2-areas.bin"
+Map41s3_FlagEvents: incbin "maps/entries/map41/3-flag-events.bin"
+Map41s4_StepEvents: incbin "maps/entries/map41/4-step-events.bin"
+Map41s5_RootEvents: incbin "maps/entries/map41/5-roof-events.bin"
+Map41s6_WarpEvents: incbin "maps/entries/map41/6-warp-events.bin"
+Map41s7_ChestItems: incbin "maps/entries/map41/7-chest-items.bin"
+Map41s8_OtherItems: incbin "maps/entries/map41/8-other-items.bin"
+Map41s9_Animations: incbin "maps/entries/map41/9-animations.bin"
+Map41s0_Blocks:     incbin "maps/entries/map41/0-blocks.bin"
+Map41s1_Layout:     incbin "maps/entries/map41/1-layout.bin"
 Map42:              dc.b 5
 										dc.b $5E
 										dc.b $4F
 										dc.b $22
 										dc.b $23
 										dc.b $24
-										dc.l Map42Section0
-										dc.l Map42Section1
-										dc.l Map42Section2
-										dc.l Map42Section3
-										dc.l Map42Section4
-										dc.l Map42Section5
-										dc.l Map42Section6
-										dc.l Map42Section7
-										dc.l Map42Section8
+										dc.l Map42s0_Blocks
+										dc.l Map42s1_Layout
+										dc.l Map42s2_Areas
+										dc.l Map42s3_FlagEvents
+										dc.l Map42s4_StepEvents
+										dc.l Map42s5_RootEvents
+										dc.l Map42s6_WarpEvents
+										dc.l Map42s7_ChestItems
+										dc.l Map42s8_OtherItems
 										dc.l $FFFFFFFF
-Map42Section2:      incbin "maps/mapentries/map42/section2.bin"
-Map42Section3:      incbin "maps/mapentries/map42/section3.bin"
-Map42Section4:      incbin "maps/mapentries/map42/section4.bin"
-Map42Section5:      incbin "maps/mapentries/map42/section5.bin"
-Map42Section6:      incbin "maps/mapentries/map42/section6.bin"
-Map42Section7:      incbin "maps/mapentries/map42/section7.bin"
-Map42Section8:      incbin "maps/mapentries/map42/section8.bin"
-Map42Section0:      incbin "maps/mapentries/map42/section0.bin"
-Map42Section1:      incbin "maps/mapentries/map42/section1.bin"
+Map42s2_Areas:      incbin "maps/entries/map42/2-areas.bin"
+Map42s3_FlagEvents: incbin "maps/entries/map42/3-flag-events.bin"
+Map42s4_StepEvents: incbin "maps/entries/map42/4-step-events.bin"
+Map42s5_RootEvents: incbin "maps/entries/map42/5-roof-events.bin"
+Map42s6_WarpEvents: incbin "maps/entries/map42/6-warp-events.bin"
+Map42s7_ChestItems: incbin "maps/entries/map42/7-chest-items.bin"
+Map42s8_OtherItems: incbin "maps/entries/map42/8-other-items.bin"
+Map42s0_Blocks:     incbin "maps/entries/map42/0-blocks.bin"
+Map42s1_Layout:     incbin "maps/entries/map42/1-layout.bin"
 Map43:              dc.b 0
 										dc.b 1
 										dc.b 3
 										dc.b $32
 										dc.b $26
 										dc.b $3A
-										dc.l Map43Section0
-										dc.l Map43Section1
-										dc.l Map43Section2
-										dc.l Map43Section3
-										dc.l Map43Section4
-										dc.l Map43Section5
-										dc.l Map43Section6
-										dc.l Map43Section7
-										dc.l Map43Section8
+										dc.l Map43s0_Blocks
+										dc.l Map43s1_Layout
+										dc.l Map43s2_Areas
+										dc.l Map43s3_FlagEvents
+										dc.l Map43s4_StepEvents
+										dc.l Map43s5_RootEvents
+										dc.l Map43s6_WarpEvents
+										dc.l Map43s7_ChestItems
+										dc.l Map43s8_OtherItems
 										dc.l $FFFFFFFF
-Map43Section2:      incbin "maps/mapentries/map43/section2.bin"
-Map43Section3:      incbin "maps/mapentries/map43/section3.bin"
-Map43Section4:      incbin "maps/mapentries/map43/section4.bin"
-Map43Section5:      incbin "maps/mapentries/map43/section5.bin"
-Map43Section6:      incbin "maps/mapentries/map43/section6.bin"
-Map43Section7:      incbin "maps/mapentries/map43/section7.bin"
-Map43Section8:      incbin "maps/mapentries/map43/section8.bin"
-Map43Section0:      incbin "maps/mapentries/map43/section0.bin"
-Map43Section1:      incbin "maps/mapentries/map43/section1.bin"
+Map43s2_Areas:      incbin "maps/entries/map43/2-areas.bin"
+Map43s3_FlagEvents: incbin "maps/entries/map43/3-flag-events.bin"
+Map43s4_StepEvents: incbin "maps/entries/map43/4-step-events.bin"
+Map43s5_RootEvents: incbin "maps/entries/map43/5-roof-events.bin"
+Map43s6_WarpEvents: incbin "maps/entries/map43/6-warp-events.bin"
+Map43s7_ChestItems: incbin "maps/entries/map43/7-chest-items.bin"
+Map43s8_OtherItems: incbin "maps/entries/map43/8-other-items.bin"
+Map43s0_Blocks:     incbin "maps/entries/map43/0-blocks.bin"
+Map43s1_Layout:     incbin "maps/entries/map43/1-layout.bin"
 Map44:              dc.b 0
 										dc.b $B
 										dc.b $C
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
-										dc.l Map44Section0
-										dc.l Map44Section1
-										dc.l Map44Section2
-										dc.l Map44Section3
-										dc.l Map44Section4
-										dc.l Map44Section5
-										dc.l Map44Section6
-										dc.l Map44Section7
-										dc.l Map44Section8
-										dc.l Map44Section9
-Map44Section2:      incbin "maps/mapentries/map44/section2.bin"
-Map44Section3:      incbin "maps/mapentries/map44/section3.bin"
-Map44Section4:      incbin "maps/mapentries/map44/section4.bin"
-Map44Section5:      incbin "maps/mapentries/map44/section5.bin"
-Map44Section6:      incbin "maps/mapentries/map44/section6.bin"
-Map44Section7:      incbin "maps/mapentries/map44/section7.bin"
-Map44Section8:      incbin "maps/mapentries/map44/section8.bin"
-Map44Section9:      incbin "maps/mapentries/map44/section9.bin"
-Map44Section0:      incbin "maps/mapentries/map44/section0.bin"
-Map44Section1:      incbin "maps/mapentries/map44/section1.bin"
+										dc.l Map44s0_Blocks
+										dc.l Map44s1_Layout
+										dc.l Map44s2_Areas
+										dc.l Map44s3_FlagEvents
+										dc.l Map44s4_StepEvents
+										dc.l Map44s5_RootEvents
+										dc.l Map44s6_WarpEvents
+										dc.l Map44s7_ChestItems
+										dc.l Map44s8_OtherItems
+										dc.l Map44s9_Animations
+Map44s2_Areas:      incbin "maps/entries/map44/2-areas.bin"
+Map44s3_FlagEvents: incbin "maps/entries/map44/3-flag-events.bin"
+Map44s4_StepEvents: incbin "maps/entries/map44/4-step-events.bin"
+Map44s5_RootEvents: incbin "maps/entries/map44/5-roof-events.bin"
+Map44s6_WarpEvents: incbin "maps/entries/map44/6-warp-events.bin"
+Map44s7_ChestItems: incbin "maps/entries/map44/7-chest-items.bin"
+Map44s8_OtherItems: incbin "maps/entries/map44/8-other-items.bin"
+Map44s9_Animations: incbin "maps/entries/map44/9-animations.bin"
+Map44s0_Blocks:     incbin "maps/entries/map44/0-blocks.bin"
+Map44s1_Layout:     incbin "maps/entries/map44/1-layout.bin"
 Map45:              dc.b 0
 										dc.b 4
 										dc.b $58
 										dc.b $2B
 										dc.b $26
 										dc.b $56
-										dc.l Map45Section0
-										dc.l Map45Section1
-										dc.l Map45Section2
-										dc.l Map45Section3
-										dc.l Map45Section4
-										dc.l Map45Section5
-										dc.l Map45Section6
-										dc.l Map45Section7
-										dc.l Map45Section8
-										dc.l Map45Section9
-Map45Section2:      incbin "maps/mapentries/map45/section2.bin"
-Map45Section3:      incbin "maps/mapentries/map45/section3.bin"
-Map45Section4:      incbin "maps/mapentries/map45/section4.bin"
-Map45Section5:      incbin "maps/mapentries/map45/section5.bin"
-Map45Section6:      incbin "maps/mapentries/map45/section6.bin"
-Map45Section7:      incbin "maps/mapentries/map45/section7.bin"
-Map45Section8:      incbin "maps/mapentries/map45/section8.bin"
-Map45Section9:      incbin "maps/mapentries/map45/section9.bin"
-Map45Section0:      incbin "maps/mapentries/map45/section0.bin"
-Map45Section1:      incbin "maps/mapentries/map45/section1.bin"
+										dc.l Map45s0_Blocks
+										dc.l Map45s1_Layout
+										dc.l Map45s2_Areas
+										dc.l Map45s3_FlagEvents
+										dc.l Map45s4_StepEvents
+										dc.l Map45s5_RootEvents
+										dc.l Map45s6_WarpEvents
+										dc.l Map45s7_ChestItems
+										dc.l Map45s8_OtherItems
+										dc.l Map45s9_Animations
+Map45s2_Areas:      incbin "maps/entries/map45/2-areas.bin"
+Map45s3_FlagEvents: incbin "maps/entries/map45/3-flag-events.bin"
+Map45s4_StepEvents: incbin "maps/entries/map45/4-step-events.bin"
+Map45s5_RootEvents: incbin "maps/entries/map45/5-roof-events.bin"
+Map45s6_WarpEvents: incbin "maps/entries/map45/6-warp-events.bin"
+Map45s7_ChestItems: incbin "maps/entries/map45/7-chest-items.bin"
+Map45s8_OtherItems: incbin "maps/entries/map45/8-other-items.bin"
+Map45s9_Animations: incbin "maps/entries/map45/9-animations.bin"
+Map45s0_Blocks:     incbin "maps/entries/map45/0-blocks.bin"
+Map45s1_Layout:     incbin "maps/entries/map45/1-layout.bin"
 Map46:              dc.b 0
 										dc.b 0
 										dc.b $2F
 										dc.b $30
 										dc.b $25
 										dc.b $39
-										dc.l Map07Section0
-										dc.l Map07Section1
-										dc.l Map46Section2
-										dc.l Map46Section3
-										dc.l Map46Section4
-										dc.l Map46Section5
-										dc.l Map46Section6
-										dc.l Map46Section7
-										dc.l Map46Section8
+										dc.l Map07s0_Blocks
+										dc.l Map07s1_Layout
+										dc.l Map46s2_Areas
+										dc.l Map46s3_FlagEvents
+										dc.l Map46s4_StepEvents
+										dc.l Map46s5_RootEvents
+										dc.l Map46s6_WarpEvents
+										dc.l Map46s7_ChestItems
+										dc.l Map46s8_OtherItems
 										dc.l $FFFFFFFF
-Map46Section2:      incbin "maps/mapentries/map46/section2.bin"
-Map46Section3:      incbin "maps/mapentries/map46/section3.bin"
-Map46Section4:      incbin "maps/mapentries/map46/section4.bin"
-Map46Section5:      incbin "maps/mapentries/map46/section5.bin"
-Map46Section6:      incbin "maps/mapentries/map46/section6.bin"
-Map46Section7:      incbin "maps/mapentries/map46/section7.bin"
-Map46Section8:      incbin "maps/mapentries/map46/section8.bin"
+Map46s2_Areas:      incbin "maps/entries/map46/2-areas.bin"
+Map46s3_FlagEvents: incbin "maps/entries/map46/3-flag-events.bin"
+Map46s4_StepEvents: incbin "maps/entries/map46/4-step-events.bin"
+Map46s5_RootEvents: incbin "maps/entries/map46/5-roof-events.bin"
+Map46s6_WarpEvents: incbin "maps/entries/map46/6-warp-events.bin"
+Map46s7_ChestItems: incbin "maps/entries/map46/7-chest-items.bin"
+Map46s8_OtherItems: incbin "maps/entries/map46/8-other-items.bin"
 Map47:              dc.b 0
 										dc.b 0
 										dc.b $18
 										dc.b $19
 										dc.b $1A
 										dc.b $39
-										dc.l Map47Section0
-										dc.l Map47Section1
-										dc.l Map47Section2
-										dc.l Map47Section3
-										dc.l Map47Section4
-										dc.l Map47Section5
-										dc.l Map47Section6
-										dc.l Map47Section7
-										dc.l Map47Section7
-										dc.l Map47Section9
-Map47Section2:      incbin "maps/mapentries/map47/section2.bin"
-Map47Section3:      incbin "maps/mapentries/map47/section3.bin"
-Map47Section4:      incbin "maps/mapentries/map47/section4.bin"
-Map47Section5:      incbin "maps/mapentries/map47/section5.bin"
-Map47Section6:      incbin "maps/mapentries/map47/section6.bin"
-Map47Section7:      incbin "maps/mapentries/map47/section8.bin"
-Map47Section9:      incbin "maps/mapentries/map47/section9.bin"
-Map47Section0:      incbin "maps/mapentries/map47/section0.bin"
-Map47Section1:      incbin "maps/mapentries/map47/section1.bin"
+										dc.l Map47s0_Blocks
+										dc.l Map47s1_Layout
+										dc.l Map47s2_Areas
+										dc.l Map47s3_FlagEvents
+										dc.l Map47s4_StepEvents
+										dc.l Map47s5_RootEvents
+										dc.l Map47s6_WarpEvents
+										dc.l Map47s7_ChestItems
+										dc.l Map47s7_ChestItems
+										dc.l Map47s9_Animations
+Map47s2_Areas:      incbin "maps/entries/map47/2-areas.bin"
+Map47s3_FlagEvents: incbin "maps/entries/map47/3-flag-events.bin"
+Map47s4_StepEvents: incbin "maps/entries/map47/4-step-events.bin"
+Map47s5_RootEvents: incbin "maps/entries/map47/5-roof-events.bin"
+Map47s6_WarpEvents: incbin "maps/entries/map47/6-warp-events.bin"
+Map47s7_ChestItems: incbin "maps/entries/map47/7-chest-items.bin"
+Map47s9_Animations: incbin "maps/entries/map47/9-animations.bin"
+Map47s0_Blocks:     incbin "maps/entries/map47/0-blocks.bin"
+Map47s1_Layout:     incbin "maps/entries/map47/1-layout.bin"
 Map48:              dc.b 4
 										dc.b 8
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
 										dc.b $24
-										dc.l Map48Section0
-										dc.l Map48Section1
-										dc.l Map48Section2
-										dc.l Map48Section3
-										dc.l Map48Section4
-										dc.l Map48Section5
-										dc.l Map48Section6
-										dc.l Map48Section7
-										dc.l Map48Section8
-										dc.l Map48Section9
-Map48Section2:      incbin "maps/mapentries/map48/section2.bin"
-Map48Section3:      incbin "maps/mapentries/map48/section3.bin"
-Map48Section4:      incbin "maps/mapentries/map48/section4.bin"
-Map48Section5:      incbin "maps/mapentries/map48/section5.bin"
-Map48Section6:      incbin "maps/mapentries/map48/section6.bin"
-Map48Section7:      incbin "maps/mapentries/map48/section7.bin"
-Map48Section8:      incbin "maps/mapentries/map48/section8.bin"
-Map48Section9:      incbin "maps/mapentries/map48/section9.bin"
-Map48Section0:      incbin "maps/mapentries/map48/section0.bin"
-Map48Section1:      incbin "maps/mapentries/map48/section1.bin"
+										dc.l Map48s0_Blocks
+										dc.l Map48s1_Layout
+										dc.l Map48s2_Areas
+										dc.l Map48s3_FlagEvents
+										dc.l Map48s4_StepEvents
+										dc.l Map48s5_RootEvents
+										dc.l Map48s6_WarpEvents
+										dc.l Map48s7_ChestItems
+										dc.l Map48s8_OtherItems
+										dc.l Map48s9_Animations
+Map48s2_Areas:      incbin "maps/entries/map48/2-areas.bin"
+Map48s3_FlagEvents: incbin "maps/entries/map48/3-flag-events.bin"
+Map48s4_StepEvents: incbin "maps/entries/map48/4-step-events.bin"
+Map48s5_RootEvents: incbin "maps/entries/map48/5-roof-events.bin"
+Map48s6_WarpEvents: incbin "maps/entries/map48/6-warp-events.bin"
+Map48s7_ChestItems: incbin "maps/entries/map48/7-chest-items.bin"
+Map48s8_OtherItems: incbin "maps/entries/map48/8-other-items.bin"
+Map48s9_Animations: incbin "maps/entries/map48/9-animations.bin"
+Map48s0_Blocks:     incbin "maps/entries/map48/0-blocks.bin"
+Map48s1_Layout:     incbin "maps/entries/map48/1-layout.bin"
 Map49:              dc.b $D
 										dc.b $E
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
-										dc.l Map49Section0
-										dc.l Map49Section1
-										dc.l Map49Section2
-										dc.l Map49Section3
-										dc.l Map49Section4
-										dc.l Map49Section5
-										dc.l Map49Section6
-										dc.l Map49Section7
-										dc.l Map49Section8
-										dc.l Map49Section9
-Map49Section2:      incbin "maps/mapentries/map49/section2.bin"
-Map49Section3:      incbin "maps/mapentries/map49/section3.bin"
-Map49Section4:      incbin "maps/mapentries/map49/section4.bin"
-Map49Section5:      incbin "maps/mapentries/map49/section5.bin"
-Map49Section6:      incbin "maps/mapentries/map49/section6.bin"
-Map49Section7:      incbin "maps/mapentries/map49/section7.bin"
-Map49Section8:      incbin "maps/mapentries/map49/section8.bin"
-Map49Section9:      incbin "maps/mapentries/map49/section9.bin"
-Map49Section0:      incbin "maps/mapentries/map49/section0.bin"
-Map49Section1:      incbin "maps/mapentries/map49/section1.bin"
+										dc.l Map49s0_Blocks
+										dc.l Map49s1_Layout
+										dc.l Map49s2_Areas
+										dc.l Map49s3_FlagEvents
+										dc.l Map49s4_StepEvents
+										dc.l Map49s5_RootEvents
+										dc.l Map49s6_WarpEvents
+										dc.l Map49s7_ChestItems
+										dc.l Map49s8_OtherItems
+										dc.l Map49s9_Animations
+Map49s2_Areas:      incbin "maps/entries/map49/2-areas.bin"
+Map49s3_FlagEvents: incbin "maps/entries/map49/3-flag-events.bin"
+Map49s4_StepEvents: incbin "maps/entries/map49/4-step-events.bin"
+Map49s5_RootEvents: incbin "maps/entries/map49/5-roof-events.bin"
+Map49s6_WarpEvents: incbin "maps/entries/map49/6-warp-events.bin"
+Map49s7_ChestItems: incbin "maps/entries/map49/7-chest-items.bin"
+Map49s8_OtherItems: incbin "maps/entries/map49/8-other-items.bin"
+Map49s9_Animations: incbin "maps/entries/map49/9-animations.bin"
+Map49s0_Blocks:     incbin "maps/entries/map49/0-blocks.bin"
+Map49s1_Layout:     incbin "maps/entries/map49/1-layout.bin"
 Map50:              dc.b 5
 										dc.b $11
 										dc.b $FF
 										dc.b $22
 										dc.b $23
 										dc.b $24
-										dc.l Map50Section0
-										dc.l Map50Section1
-										dc.l Map50Section2
-										dc.l Map50Section3
-										dc.l Map50Section4
-										dc.l Map50Section5
-										dc.l Map50Section6
-										dc.l Map50Section7
-										dc.l Map50Section8
-										dc.l Map50Section9
-Map50Section2:      incbin "maps/mapentries/map50/section2.bin"
-Map50Section3:      incbin "maps/mapentries/map50/section3.bin"
-Map50Section4:      incbin "maps/mapentries/map50/section4.bin"
-Map50Section5:      incbin "maps/mapentries/map50/section5.bin"
-Map50Section6:      incbin "maps/mapentries/map50/section6.bin"
-Map50Section7:      incbin "maps/mapentries/map50/section7.bin"
-Map50Section8:      incbin "maps/mapentries/map50/section8.bin"
-Map50Section9:      incbin "maps/mapentries/map50/section9.bin"
-Map50Section0:      incbin "maps/mapentries/map50/section0.bin"
-Map50Section1:      incbin "maps/mapentries/map50/section1.bin"
+										dc.l Map50s0_Blocks
+										dc.l Map50s1_Layout
+										dc.l Map50s2_Areas
+										dc.l Map50s3_FlagEvents
+										dc.l Map50s4_StepEvents
+										dc.l Map50s5_RootEvents
+										dc.l Map50s6_WarpEvents
+										dc.l Map50s7_ChestItems
+										dc.l Map50s8_OtherItems
+										dc.l Map50s9_Animations
+Map50s2_Areas:      incbin "maps/entries/map50/2-areas.bin"
+Map50s3_FlagEvents: incbin "maps/entries/map50/3-flag-events.bin"
+Map50s4_StepEvents: incbin "maps/entries/map50/4-step-events.bin"
+Map50s5_RootEvents: incbin "maps/entries/map50/5-roof-events.bin"
+Map50s6_WarpEvents: incbin "maps/entries/map50/6-warp-events.bin"
+Map50s7_ChestItems: incbin "maps/entries/map50/7-chest-items.bin"
+Map50s8_OtherItems: incbin "maps/entries/map50/8-other-items.bin"
+Map50s9_Animations: incbin "maps/entries/map50/9-animations.bin"
+Map50s0_Blocks:     incbin "maps/entries/map50/0-blocks.bin"
+Map50s1_Layout:     incbin "maps/entries/map50/1-layout.bin"
 Map51:              dc.b 0
 										dc.b 1
 										dc.b $10
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
-										dc.l Map51Section0
-										dc.l Map51Section1
-										dc.l Map51Section2
-										dc.l Map51Section3
-										dc.l Map51Section4
-										dc.l Map51Section5
-										dc.l Map51Section6
-										dc.l Map51Section7
-										dc.l Map51Section8
+										dc.l Map51s0_Blocks
+										dc.l Map51s1_Layout
+										dc.l Map51s2_Areas
+										dc.l Map51s3_FlagEvents
+										dc.l Map51s4_StepEvents
+										dc.l Map51s5_RootEvents
+										dc.l Map51s6_WarpEvents
+										dc.l Map51s7_ChestItems
+										dc.l Map51s8_OtherItems
 										dc.l $FFFFFFFF
-Map51Section2:      incbin "maps/mapentries/map51/section2.bin"
-Map51Section3:      incbin "maps/mapentries/map51/section3.bin"
-Map51Section4:      incbin "maps/mapentries/map51/section4.bin"
-Map51Section5:      incbin "maps/mapentries/map51/section5.bin"
-Map51Section6:      incbin "maps/mapentries/map51/section6.bin"
-Map51Section7:      incbin "maps/mapentries/map51/section7.bin"
-Map51Section8:      incbin "maps/mapentries/map51/section8.bin"
-Map51Section0:      incbin "maps/mapentries/map51/section0.bin"
-Map51Section1:      incbin "maps/mapentries/map51/section1.bin"
+Map51s2_Areas:      incbin "maps/entries/map51/2-areas.bin"
+Map51s3_FlagEvents: incbin "maps/entries/map51/3-flag-events.bin"
+Map51s4_StepEvents: incbin "maps/entries/map51/4-step-events.bin"
+Map51s5_RootEvents: incbin "maps/entries/map51/5-roof-events.bin"
+Map51s6_WarpEvents: incbin "maps/entries/map51/6-warp-events.bin"
+Map51s7_ChestItems: incbin "maps/entries/map51/7-chest-items.bin"
+Map51s8_OtherItems: incbin "maps/entries/map51/8-other-items.bin"
+Map51s0_Blocks:     incbin "maps/entries/map51/0-blocks.bin"
+Map51s1_Layout:     incbin "maps/entries/map51/1-layout.bin"
 Map52:              dc.b 0
 										dc.b 1
 										dc.b $1E
 										dc.b $1F
 										dc.b $FF
 										dc.b $FF
-										dc.l Map52Section0
-										dc.l Map52Section1
-										dc.l Map52Section2
-										dc.l Map52Section3
-										dc.l Map52Section4
-										dc.l Map52Section5
-										dc.l Map52Section6
-										dc.l Map52Section7
-										dc.l Map52Section8
+										dc.l Map52s0_Blocks
+										dc.l Map52s1_Layout
+										dc.l Map52s2_Areas
+										dc.l Map52s3_FlagEvents
+										dc.l Map52s4_StepEvents
+										dc.l Map52s5_RootEvents
+										dc.l Map52s6_WarpEvents
+										dc.l Map52s7_ChestItems
+										dc.l Map52s8_OtherItems
 										dc.l $FFFFFFFF
-Map52Section2:      incbin "maps/mapentries/map52/section2.bin"
-Map52Section3:      incbin "maps/mapentries/map52/section3.bin"
-Map52Section4:      incbin "maps/mapentries/map52/section4.bin"
-Map52Section5:      incbin "maps/mapentries/map52/section5.bin"
-Map52Section6:      incbin "maps/mapentries/map52/section6.bin"
-Map52Section7:      incbin "maps/mapentries/map52/section7.bin"
-Map52Section8:      incbin "maps/mapentries/map52/section8.bin"
-Map52Section0:      incbin "maps/mapentries/map52/section0.bin"
-Map52Section1:      incbin "maps/mapentries/map52/section1.bin"
+Map52s2_Areas:      incbin "maps/entries/map52/2-areas.bin"
+Map52s3_FlagEvents: incbin "maps/entries/map52/3-flag-events.bin"
+Map52s4_StepEvents: incbin "maps/entries/map52/4-step-events.bin"
+Map52s5_RootEvents: incbin "maps/entries/map52/5-roof-events.bin"
+Map52s6_WarpEvents: incbin "maps/entries/map52/6-warp-events.bin"
+Map52s7_ChestItems: incbin "maps/entries/map52/7-chest-items.bin"
+Map52s8_OtherItems: incbin "maps/entries/map52/8-other-items.bin"
+Map52s0_Blocks:     incbin "maps/entries/map52/0-blocks.bin"
+Map52s1_Layout:     incbin "maps/entries/map52/1-layout.bin"
 Map53:              dc.b 3
 										dc.b 0
 										dc.b $59
 										dc.b $FF
 										dc.b $FF
 										dc.b $39
-										dc.l Map53Section0
-										dc.l Map53Section1
-										dc.l Map53Section2
-										dc.l Map53Section3
-										dc.l Map53Section4
-										dc.l Map53Section5
-										dc.l Map53Section6
-										dc.l Map53Section7
-										dc.l Map53Section8
-										dc.l Map06Section9
-Map53Section2:      incbin "maps/mapentries/map53/section2.bin"
-Map53Section3:      incbin "maps/mapentries/map53/section3.bin"
-Map53Section4:      incbin "maps/mapentries/map53/section4.bin"
-Map53Section5:      incbin "maps/mapentries/map53/section5.bin"
-Map53Section6:      incbin "maps/mapentries/map53/section6.bin"
-Map53Section7:      incbin "maps/mapentries/map53/section7.bin"
-Map53Section8:      incbin "maps/mapentries/map53/section8.bin"
-Map53Section0:      incbin "maps/mapentries/map53/section0.bin"
-Map53Section1:      incbin "maps/mapentries/map53/section1.bin"
+										dc.l Map53s0_Blocks
+										dc.l Map53s1_Layout
+										dc.l Map53s2_Areas
+										dc.l Map53s3_FlagEvents
+										dc.l Map53s4_StepEvents
+										dc.l Map53s5_RootEvents
+										dc.l Map53s6_WarpEvents
+										dc.l Map53s7_ChestItems
+										dc.l Map53s8_OtherItems
+										dc.l Map06s9_Animations
+Map53s2_Areas:      incbin "maps/entries/map53/2-areas.bin"
+Map53s3_FlagEvents: incbin "maps/entries/map53/3-flag-events.bin"
+Map53s4_StepEvents: incbin "maps/entries/map53/4-step-events.bin"
+Map53s5_RootEvents: incbin "maps/entries/map53/5-roof-events.bin"
+Map53s6_WarpEvents: incbin "maps/entries/map53/6-warp-events.bin"
+Map53s7_ChestItems: incbin "maps/entries/map53/7-chest-items.bin"
+Map53s8_OtherItems: incbin "maps/entries/map53/8-other-items.bin"
+Map53s0_Blocks:     incbin "maps/entries/map53/0-blocks.bin"
+Map53s1_Layout:     incbin "maps/entries/map53/1-layout.bin"
 Map54:              dc.b 7
 										dc.b 0
 										dc.b $18
 										dc.b $1B
 										dc.b $FF
 										dc.b $70
-										dc.l Map54Section0
-										dc.l Map54Section1
-										dc.l Map54Section2
-										dc.l Map54Section3
-										dc.l Map54Section4
-										dc.l Map54Section5
-										dc.l Map54Section6
-										dc.l Map54Section7
-										dc.l Map54Section8
-										dc.l Map54Section9
-Map54Section2:      incbin "maps/mapentries/map54/section2.bin"
-Map54Section3:      incbin "maps/mapentries/map54/section3.bin"
-Map54Section4:      incbin "maps/mapentries/map54/section4.bin"
-Map54Section5:      incbin "maps/mapentries/map54/section5.bin"
-Map54Section6:      incbin "maps/mapentries/map54/section6.bin"
-Map54Section7:      incbin "maps/mapentries/map54/section7.bin"
-Map54Section8:      incbin "maps/mapentries/map54/section8.bin"
-Map54Section0:      incbin "maps/mapentries/map54/section0.bin"
-Map54Section1:      incbin "maps/mapentries/map54/section1.bin"
-Map54Section9:      incbin "maps/mapentries/map54/section9.bin"
+										dc.l Map54s0_Blocks
+										dc.l Map54s1_Layout
+										dc.l Map54s2_Areas
+										dc.l Map54s3_FlagEvents
+										dc.l Map54s4_StepEvents
+										dc.l Map54s5_RootEvents
+										dc.l Map54s6_WarpEvents
+										dc.l Map54s7_ChestItems
+										dc.l Map54s8_OtherItems
+										dc.l Map54s9_Animations
+Map54s2_Areas:      incbin "maps/entries/map54/2-areas.bin"
+Map54s3_FlagEvents: incbin "maps/entries/map54/3-flag-events.bin"
+Map54s4_StepEvents: incbin "maps/entries/map54/4-step-events.bin"
+Map54s5_RootEvents: incbin "maps/entries/map54/5-roof-events.bin"
+Map54s6_WarpEvents: incbin "maps/entries/map54/6-warp-events.bin"
+Map54s7_ChestItems: incbin "maps/entries/map54/7-chest-items.bin"
+Map54s8_OtherItems: incbin "maps/entries/map54/8-other-items.bin"
+Map54s0_Blocks:     incbin "maps/entries/map54/0-blocks.bin"
+Map54s1_Layout:     incbin "maps/entries/map54/1-layout.bin"
+Map54s9_Animations: incbin "maps/entries/map54/9-animations.bin"
 Map55:              dc.b 3
 										dc.b $14
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
-										dc.l Map55Section0
-										dc.l Map55Section1
-										dc.l Map55Section2
-										dc.l Map55Section3
-										dc.l Map55Section4
-										dc.l Map55Section5
-										dc.l Map55Section6
-										dc.l Map55Section7
-										dc.l Map55Section8
+										dc.l Map55s0_Blocks
+										dc.l Map55s1_Layout
+										dc.l Map55s2_Areas
+										dc.l Map55s3_FlagEvents
+										dc.l Map55s4_StepEvents
+										dc.l Map55s5_RootEvents
+										dc.l Map55s6_WarpEvents
+										dc.l Map55s7_ChestItems
+										dc.l Map55s8_OtherItems
 										dc.l $FFFFFFFF
-Map55Section2:      incbin "maps/mapentries/map55/section2.bin"
-Map55Section3:      incbin "maps/mapentries/map55/section3.bin"
-Map55Section4:      incbin "maps/mapentries/map55/section4.bin"
-Map55Section5:      incbin "maps/mapentries/map55/section5.bin"
-Map55Section6:      incbin "maps/mapentries/map55/section6.bin"
-Map55Section7:      incbin "maps/mapentries/map55/section7.bin"
-Map55Section8:      incbin "maps/mapentries/map55/section8.bin"
-Map55Section0:      incbin "maps/mapentries/map55/section0.bin"
-Map55Section1:      incbin "maps/mapentries/map55/section1.bin"
+Map55s2_Areas:      incbin "maps/entries/map55/2-areas.bin"
+Map55s3_FlagEvents: incbin "maps/entries/map55/3-flag-events.bin"
+Map55s4_StepEvents: incbin "maps/entries/map55/4-step-events.bin"
+Map55s5_RootEvents: incbin "maps/entries/map55/5-roof-events.bin"
+Map55s6_WarpEvents: incbin "maps/entries/map55/6-warp-events.bin"
+Map55s7_ChestItems: incbin "maps/entries/map55/7-chest-items.bin"
+Map55s8_OtherItems: incbin "maps/entries/map55/8-other-items.bin"
+Map55s0_Blocks:     incbin "maps/entries/map55/0-blocks.bin"
+Map55s1_Layout:     incbin "maps/entries/map55/1-layout.bin"
 Map56:              dc.b 9
 										dc.b $64
 										dc.b $5F
 										dc.b $5D
 										dc.b $FF
 										dc.b $FF
-										dc.l Map56Section0
-										dc.l Map56Section1
-										dc.l Map56Section2
-										dc.l Map56Section3
-										dc.l Map56Section4
-										dc.l Map56Section5
-										dc.l Map56Section6
-										dc.l Map56Section7
-										dc.l Map56Section8
+										dc.l Map56s0_Blocks
+										dc.l Map56s1_Layout
+										dc.l Map56s2_Areas
+										dc.l Map56s3_FlagEvents
+										dc.l Map56s4_StepEvents
+										dc.l Map56s5_RootEvents
+										dc.l Map56s6_WarpEvents
+										dc.l Map56s7_ChestItems
+										dc.l Map56s8_OtherItems
 										dc.l $FFFFFFFF
-Map56Section2:      incbin "maps/mapentries/map56/section2.bin"
-Map56Section3:      incbin "maps/mapentries/map56/section3.bin"
-Map56Section4:      incbin "maps/mapentries/map56/section4.bin"
-Map56Section5:      incbin "maps/mapentries/map56/section5.bin"
-Map56Section6:      incbin "maps/mapentries/map56/section6.bin"
-Map56Section7:      incbin "maps/mapentries/map56/section7.bin"
-Map56Section8:      incbin "maps/mapentries/map56/section8.bin"
-Map56Section0:      incbin "maps/mapentries/map56/section0.bin"
-Map56Section1:      incbin "maps/mapentries/map56/section1.bin"
+Map56s2_Areas:      incbin "maps/entries/map56/2-areas.bin"
+Map56s3_FlagEvents: incbin "maps/entries/map56/3-flag-events.bin"
+Map56s4_StepEvents: incbin "maps/entries/map56/4-step-events.bin"
+Map56s5_RootEvents: incbin "maps/entries/map56/5-roof-events.bin"
+Map56s6_WarpEvents: incbin "maps/entries/map56/6-warp-events.bin"
+Map56s7_ChestItems: incbin "maps/entries/map56/7-chest-items.bin"
+Map56s8_OtherItems: incbin "maps/entries/map56/8-other-items.bin"
+Map56s0_Blocks:     incbin "maps/entries/map56/0-blocks.bin"
+Map56s1_Layout:     incbin "maps/entries/map56/1-layout.bin"
 Map57:              dc.b 8
 										dc.b $5E
 										dc.b $62
 										dc.b $63
 										dc.b $FF
 										dc.b $FF
-										dc.l Map57Section0
-										dc.l Map57Section1
-										dc.l Map57Section2
-										dc.l Map57Section3
-										dc.l Map57Section4
-										dc.l Map57Section5
-										dc.l Map57Section6
-										dc.l Map57Section7
-										dc.l Map57Section8
+										dc.l Map57s0_Blocks
+										dc.l Map57s1_Layout
+										dc.l Map57s2_Areas
+										dc.l Map57s3_FlagEvents
+										dc.l Map57s4_StepEvents
+										dc.l Map57s5_RootEvents
+										dc.l Map57s6_WarpEvents
+										dc.l Map57s7_ChestItems
+										dc.l Map57s8_OtherItems
 										dc.l $FFFFFFFF
-Map57Section2:      incbin "maps/mapentries/map57/section2.bin"
-Map57Section3:      incbin "maps/mapentries/map57/section3.bin"
-Map57Section4:      incbin "maps/mapentries/map57/section4.bin"
-Map57Section5:      incbin "maps/mapentries/map57/section5.bin"
-Map57Section6:      incbin "maps/mapentries/map57/section6.bin"
-Map57Section7:      incbin "maps/mapentries/map57/section7.bin"
-Map57Section8:      incbin "maps/mapentries/map57/section8.bin"
-Map57Section0:      incbin "maps/mapentries/map57/section0.bin"
-Map57Section1:      incbin "maps/mapentries/map57/section1.bin"
+Map57s2_Areas:      incbin "maps/entries/map57/2-areas.bin"
+Map57s3_FlagEvents: incbin "maps/entries/map57/3-flag-events.bin"
+Map57s4_StepEvents: incbin "maps/entries/map57/4-step-events.bin"
+Map57s5_RootEvents: incbin "maps/entries/map57/5-roof-events.bin"
+Map57s6_WarpEvents: incbin "maps/entries/map57/6-warp-events.bin"
+Map57s7_ChestItems: incbin "maps/entries/map57/7-chest-items.bin"
+Map57s8_OtherItems: incbin "maps/entries/map57/8-other-items.bin"
+Map57s0_Blocks:     incbin "maps/entries/map57/0-blocks.bin"
+Map57s1_Layout:     incbin "maps/entries/map57/1-layout.bin"
 Map58:              dc.b $C
 										dc.b $5E
 										dc.b $62
 										dc.b $63
 										dc.b $FF
 										dc.b $FF
-										dc.l Map58Section0
-										dc.l Map58Section1
-										dc.l Map58Section2
-										dc.l Map58Section3
-										dc.l Map58Section4
-										dc.l Map58Section5
-										dc.l Map58Section6
-										dc.l Map58Section7
-										dc.l Map58Section7
+										dc.l Map58s0_Blocks
+										dc.l Map58s1_Layout
+										dc.l Map58s2_Areas
+										dc.l Map58s3_FlagEvents
+										dc.l Map58s4_StepEvents
+										dc.l Map58s5_RootEvents
+										dc.l Map58s6_WarpEvents
+										dc.l Map58s7_ChestItems
+										dc.l Map58s7_ChestItems
 										dc.l $FFFFFFFF
-Map58Section2:      incbin "maps/mapentries/map58/section2.bin"
-Map58Section3:      incbin "maps/mapentries/map58/section3.bin"
-Map58Section4:      incbin "maps/mapentries/map58/section4.bin"
-Map58Section5:      incbin "maps/mapentries/map58/section5.bin"
-Map58Section6:      incbin "maps/mapentries/map58/section6.bin"
-Map58Section7:      incbin "maps/mapentries/map58/section8.bin"
-Map58Section0:      incbin "maps/mapentries/map58/section0.bin"
-Map58Section1:      incbin "maps/mapentries/map58/section1.bin"
+Map58s2_Areas:      incbin "maps/entries/map58/2-areas.bin"
+Map58s3_FlagEvents: incbin "maps/entries/map58/3-flag-events.bin"
+Map58s4_StepEvents: incbin "maps/entries/map58/4-step-events.bin"
+Map58s5_RootEvents: incbin "maps/entries/map58/5-roof-events.bin"
+Map58s6_WarpEvents: incbin "maps/entries/map58/6-warp-events.bin"
+Map58s7_ChestItems: incbin "maps/entries/map58/7-chest-items.bin"
+Map58s0_Blocks:     incbin "maps/entries/map58/0-blocks.bin"
+Map58s1_Layout:     incbin "maps/entries/map58/1-layout.bin"
 Map59:              dc.b $E
 										dc.b $5E
 										dc.b $62
 										dc.b $63
 										dc.b $72
 										dc.b $FF
-										dc.l Map59Section0
-										dc.l Map59Section1
-										dc.l Map59Section2
-										dc.l Map59Section3
-										dc.l Map59Section4
-										dc.l Map59Section5
-										dc.l Map59Section6
-										dc.l Map59Section7
-										dc.l Map59Section8
+										dc.l Map59s0_Blocks
+										dc.l Map59s1_Layout
+										dc.l Map59s2_Areas
+										dc.l Map59s3_FlagEvents
+										dc.l Map59s4_StepEvents
+										dc.l Map59s5_RootEvents
+										dc.l Map59s6_WarpEvents
+										dc.l Map59s7_ChestItems
+										dc.l Map59s8_OtherItems
 										dc.l $FFFFFFFF
-Map59Section2:      incbin "maps/mapentries/map59/section2.bin"
-Map59Section3:      incbin "maps/mapentries/map59/section3.bin"
-Map59Section4:      incbin "maps/mapentries/map59/section4.bin"
-Map59Section5:      incbin "maps/mapentries/map59/section5.bin"
-Map59Section6:      incbin "maps/mapentries/map59/section6.bin"
-Map59Section7:      incbin "maps/mapentries/map59/section7.bin"
-Map59Section8:      incbin "maps/mapentries/map59/section8.bin"
-Map59Section0:      incbin "maps/mapentries/map59/section0.bin"
-Map59Section1:      incbin "maps/mapentries/map59/section1.bin"
+Map59s2_Areas:      incbin "maps/entries/map59/2-areas.bin"
+Map59s3_FlagEvents: incbin "maps/entries/map59/3-flag-events.bin"
+Map59s4_StepEvents: incbin "maps/entries/map59/4-step-events.bin"
+Map59s5_RootEvents: incbin "maps/entries/map59/5-roof-events.bin"
+Map59s6_WarpEvents: incbin "maps/entries/map59/6-warp-events.bin"
+Map59s7_ChestItems: incbin "maps/entries/map59/7-chest-items.bin"
+Map59s8_OtherItems: incbin "maps/entries/map59/8-other-items.bin"
+Map59s0_Blocks:     incbin "maps/entries/map59/0-blocks.bin"
+Map59s1_Layout:     incbin "maps/entries/map59/1-layout.bin"
 Map60:              dc.b $C
 										dc.b $5E
 										dc.b $62
 										dc.b $63
 										dc.b $FF
 										dc.b $FF
-										dc.l Map60Section0
-										dc.l Map60Section1
-										dc.l Map60Section2
-										dc.l Map60Section3
-										dc.l Map60Section4
-										dc.l Map60Section5
-										dc.l Map60Section6
-										dc.l Map60Section7
-										dc.l Map60Section8
+										dc.l Map60s0_Blocks
+										dc.l Map60s1_Layout
+										dc.l Map60s2_Areas
+										dc.l Map60s3_FlagEvents
+										dc.l Map60s4_StepEvents
+										dc.l Map60s5_RootEvents
+										dc.l Map60s6_WarpEvents
+										dc.l Map60s7_ChestItems
+										dc.l Map60s8_OtherItems
 										dc.l $FFFFFFFF
-Map60Section2:      incbin "maps/mapentries/map60/section2.bin"
-Map60Section3:      incbin "maps/mapentries/map60/section3.bin"
-Map60Section4:      incbin "maps/mapentries/map60/section4.bin"
-Map60Section5:      incbin "maps/mapentries/map60/section5.bin"
-Map60Section6:      incbin "maps/mapentries/map60/section6.bin"
-Map60Section7:      incbin "maps/mapentries/map60/section7.bin"
-Map60Section8:      incbin "maps/mapentries/map60/section8.bin"
-Map60Section0:      incbin "maps/mapentries/map60/section0.bin"
-Map60Section1:      incbin "maps/mapentries/map60/section1.bin"
+Map60s2_Areas:      incbin "maps/entries/map60/2-areas.bin"
+Map60s3_FlagEvents: incbin "maps/entries/map60/3-flag-events.bin"
+Map60s4_StepEvents: incbin "maps/entries/map60/4-step-events.bin"
+Map60s5_RootEvents: incbin "maps/entries/map60/5-roof-events.bin"
+Map60s6_WarpEvents: incbin "maps/entries/map60/6-warp-events.bin"
+Map60s7_ChestItems: incbin "maps/entries/map60/7-chest-items.bin"
+Map60s8_OtherItems: incbin "maps/entries/map60/8-other-items.bin"
+Map60s0_Blocks:     incbin "maps/entries/map60/0-blocks.bin"
+Map60s1_Layout:     incbin "maps/entries/map60/1-layout.bin"
 Map61:              dc.b 0
 										dc.b 0
 										dc.b $FF
 										dc.b $22
 										dc.b $23
 										dc.b $24
-										dc.l Map61Section0
-										dc.l Map61Section1
-										dc.l Map61Section2
-										dc.l Map61Section3
-										dc.l Map61Section4
-										dc.l Map61Section5
-										dc.l Map61Section6
-										dc.l Map61Section7
-										dc.l Map61Section8
+										dc.l Map61s0_Blocks
+										dc.l Map61s1_Layout
+										dc.l Map61s2_Areas
+										dc.l Map61s3_FlagEvents
+										dc.l Map61s4_StepEvents
+										dc.l Map61s5_RootEvents
+										dc.l Map61s6_WarpEvents
+										dc.l Map61s7_ChestItems
+										dc.l Map61s8_OtherItems
 										dc.l $FFFFFFFF
-Map61Section2:      incbin "maps/mapentries/map61/section2.bin"
-Map61Section3:      incbin "maps/mapentries/map61/section3.bin"
-Map61Section4:      incbin "maps/mapentries/map61/section4.bin"
-Map61Section5:      incbin "maps/mapentries/map61/section5.bin"
-Map61Section6:      incbin "maps/mapentries/map61/section6.bin"
-Map61Section7:      incbin "maps/mapentries/map61/section7.bin"
-Map61Section8:      incbin "maps/mapentries/map61/section8.bin"
-Map61Section0:      incbin "maps/mapentries/map61/section0.bin"
-Map61Section1:      incbin "maps/mapentries/map61/section1.bin"
+Map61s2_Areas:      incbin "maps/entries/map61/2-areas.bin"
+Map61s3_FlagEvents: incbin "maps/entries/map61/3-flag-events.bin"
+Map61s4_StepEvents: incbin "maps/entries/map61/4-step-events.bin"
+Map61s5_RootEvents: incbin "maps/entries/map61/5-roof-events.bin"
+Map61s6_WarpEvents: incbin "maps/entries/map61/6-warp-events.bin"
+Map61s7_ChestItems: incbin "maps/entries/map61/7-chest-items.bin"
+Map61s8_OtherItems: incbin "maps/entries/map61/8-other-items.bin"
+Map61s0_Blocks:     incbin "maps/entries/map61/0-blocks.bin"
+Map61s1_Layout:     incbin "maps/entries/map61/1-layout.bin"
 Map62:              dc.b 4
 										dc.b 0
 										dc.b $FF
 										dc.b $22
 										dc.b $23
 										dc.b $24
-										dc.l Map62Section0
-										dc.l Map62Section1
-										dc.l Map62Section2
-										dc.l Map62Section3
-										dc.l Map62Section4
-										dc.l Map62Section5
-										dc.l Map62Section6
-										dc.l Map62Section7
-										dc.l Map62Section8
+										dc.l Map62s0_Blocks
+										dc.l Map62s1_Layout
+										dc.l Map62s2_Areas
+										dc.l Map62s3_FlagEvents
+										dc.l Map62s4_StepEvents
+										dc.l Map62s5_RootEvents
+										dc.l Map62s6_WarpEvents
+										dc.l Map62s7_ChestItems
+										dc.l Map62s8_OtherItems
 										dc.l $FFFFFFFF
-Map62Section2:      incbin "maps/mapentries/map62/section2.bin"
-Map62Section3:      incbin "maps/mapentries/map62/section3.bin"
-Map62Section4:      incbin "maps/mapentries/map62/section4.bin"
-Map62Section5:      incbin "maps/mapentries/map62/section5.bin"
-Map62Section6:      incbin "maps/mapentries/map62/section6.bin"
-Map62Section7:      incbin "maps/mapentries/map62/section7.bin"
-Map62Section8:      incbin "maps/mapentries/map62/section8.bin"
-Map62Section0:      incbin "maps/mapentries/map62/section0.bin"
-Map62Section1:      incbin "maps/mapentries/map62/section1.bin"
+Map62s2_Areas:      incbin "maps/entries/map62/2-areas.bin"
+Map62s3_FlagEvents: incbin "maps/entries/map62/3-flag-events.bin"
+Map62s4_StepEvents: incbin "maps/entries/map62/4-step-events.bin"
+Map62s5_RootEvents: incbin "maps/entries/map62/5-roof-events.bin"
+Map62s6_WarpEvents: incbin "maps/entries/map62/6-warp-events.bin"
+Map62s7_ChestItems: incbin "maps/entries/map62/7-chest-items.bin"
+Map62s8_OtherItems: incbin "maps/entries/map62/8-other-items.bin"
+Map62s0_Blocks:     incbin "maps/entries/map62/0-blocks.bin"
+Map62s1_Layout:     incbin "maps/entries/map62/1-layout.bin"
 Map63:              dc.b 6
 										dc.b $11
 										dc.b $FF
 										dc.b $22
 										dc.b $23
 										dc.b $24
-										dc.l Map63Section0
-										dc.l Map63Section1
-										dc.l Map63Section2
-										dc.l Map63Section3
-										dc.l Map63Section4
-										dc.l Map63Section5
-										dc.l Map63Section6
-										dc.l Map63Section7
-										dc.l Map63Section8
+										dc.l Map63s0_Blocks
+										dc.l Map63s1_Layout
+										dc.l Map63s2_Areas
+										dc.l Map63s3_FlagEvents
+										dc.l Map63s4_StepEvents
+										dc.l Map63s5_RootEvents
+										dc.l Map63s6_WarpEvents
+										dc.l Map63s7_ChestItems
+										dc.l Map63s8_OtherItems
 										dc.l $FFFFFFFF
-Map63Section2:      incbin "maps/mapentries/map63/section2.bin"
-Map63Section3:      incbin "maps/mapentries/map63/section3.bin"
-Map63Section4:      incbin "maps/mapentries/map63/section4.bin"
-Map63Section5:      incbin "maps/mapentries/map63/section5.bin"
-Map63Section6:      incbin "maps/mapentries/map63/section6.bin"
-Map63Section7:      incbin "maps/mapentries/map63/section7.bin"
-Map63Section8:      incbin "maps/mapentries/map63/section8.bin"
-Map63Section0:      incbin "maps/mapentries/map63/section0.bin"
-Map63Section1:      incbin "maps/mapentries/map63/section1.bin"
+Map63s2_Areas:      incbin "maps/entries/map63/2-areas.bin"
+Map63s3_FlagEvents: incbin "maps/entries/map63/3-flag-events.bin"
+Map63s4_StepEvents: incbin "maps/entries/map63/4-step-events.bin"
+Map63s5_RootEvents: incbin "maps/entries/map63/5-roof-events.bin"
+Map63s6_WarpEvents: incbin "maps/entries/map63/6-warp-events.bin"
+Map63s7_ChestItems: incbin "maps/entries/map63/7-chest-items.bin"
+Map63s8_OtherItems: incbin "maps/entries/map63/8-other-items.bin"
+Map63s0_Blocks:     incbin "maps/entries/map63/0-blocks.bin"
+Map63s1_Layout:     incbin "maps/entries/map63/1-layout.bin"
 Map64:              dc.b 6
 										dc.b $11
 										dc.b $FF
 										dc.b $22
 										dc.b $23
 										dc.b $24
-										dc.l Map64Section0
-										dc.l Map64Section1
-										dc.l Map64Section2
-										dc.l Map64Section3
-										dc.l Map64Section4
-										dc.l Map64Section5
-										dc.l Map64Section6
-										dc.l Map64Section7
-										dc.l Map64Section8
+										dc.l Map64s0_Blocks
+										dc.l Map64s1_Layout
+										dc.l Map64s2_Areas
+										dc.l Map64s3_FlagEvents
+										dc.l Map64s4_StepEvents
+										dc.l Map64s5_RootEvents
+										dc.l Map64s6_WarpEvents
+										dc.l Map64s7_ChestItems
+										dc.l Map64s8_OtherItems
 										dc.l $FFFFFFFF
-Map64Section2:      incbin "maps/mapentries/map64/section2.bin"
-Map64Section3:      incbin "maps/mapentries/map64/section3.bin"
-Map64Section4:      incbin "maps/mapentries/map64/section4.bin"
-Map64Section5:      incbin "maps/mapentries/map64/section5.bin"
-Map64Section6:      incbin "maps/mapentries/map64/section6.bin"
-Map64Section7:      incbin "maps/mapentries/map64/section7.bin"
-Map64Section8:      incbin "maps/mapentries/map64/section8.bin"
-Map64Section0:      incbin "maps/mapentries/map64/section0.bin"
-Map64Section1:      incbin "maps/mapentries/map64/section1.bin"
+Map64s2_Areas:      incbin "maps/entries/map64/2-areas.bin"
+Map64s3_FlagEvents: incbin "maps/entries/map64/3-flag-events.bin"
+Map64s4_StepEvents: incbin "maps/entries/map64/4-step-events.bin"
+Map64s5_RootEvents: incbin "maps/entries/map64/5-roof-events.bin"
+Map64s6_WarpEvents: incbin "maps/entries/map64/6-warp-events.bin"
+Map64s7_ChestItems: incbin "maps/entries/map64/7-chest-items.bin"
+Map64s8_OtherItems: incbin "maps/entries/map64/8-other-items.bin"
+Map64s0_Blocks:     incbin "maps/entries/map64/0-blocks.bin"
+Map64s1_Layout:     incbin "maps/entries/map64/1-layout.bin"
 Map65:              dc.b $F
 										dc.b $53
 										dc.b $34
 										dc.b $2C
 										dc.b $35
 										dc.b $3E
-										dc.l Map65Section0
-										dc.l Map65Section1
-										dc.l Map65Section2
-										dc.l Map65Section3
-										dc.l Map65Section4
-										dc.l Map65Section5
-										dc.l Map65Section6
-										dc.l Map65Section7
-										dc.l Map65Section8
+										dc.l Map65s0_Blocks
+										dc.l Map65s1_Layout
+										dc.l Map65s2_Areas
+										dc.l Map65s3_FlagEvents
+										dc.l Map65s4_StepEvents
+										dc.l Map65s5_RootEvents
+										dc.l Map65s6_WarpEvents
+										dc.l Map65s7_ChestItems
+										dc.l Map65s8_OtherItems
 										dc.l $FFFFFFFF
-Map65Section2:      incbin "maps/mapentries/map65/section2.bin"
-Map65Section3:      incbin "maps/mapentries/map65/section3.bin"
-Map65Section4:      incbin "maps/mapentries/map65/section4.bin"
-Map65Section5:      incbin "maps/mapentries/map65/section5.bin"
-Map65Section6:      incbin "maps/mapentries/map65/section6.bin"
-Map65Section7:      incbin "maps/mapentries/map65/section7.bin"
-Map65Section8:      incbin "maps/mapentries/map65/section8.bin"
-Map65Section0:      incbin "maps/mapentries/map65/section0.bin"
-Map65Section1:      incbin "maps/mapentries/map65/section1.bin"
+Map65s2_Areas:      incbin "maps/entries/map65/2-areas.bin"
+Map65s3_FlagEvents: incbin "maps/entries/map65/3-flag-events.bin"
+Map65s4_StepEvents: incbin "maps/entries/map65/4-step-events.bin"
+Map65s5_RootEvents: incbin "maps/entries/map65/5-roof-events.bin"
+Map65s6_WarpEvents: incbin "maps/entries/map65/6-warp-events.bin"
+Map65s7_ChestItems: incbin "maps/entries/map65/7-chest-items.bin"
+Map65s8_OtherItems: incbin "maps/entries/map65/8-other-items.bin"
+Map65s0_Blocks:     incbin "maps/entries/map65/0-blocks.bin"
+Map65s1_Layout:     incbin "maps/entries/map65/1-layout.bin"
 Map66:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $67
 										dc.b $68
 										dc.b $69
-										dc.l Map66Section0
-										dc.l Map66Section1
-										dc.l Map66Section2
-										dc.l Map66Section3
-										dc.l Map66Section4
-										dc.l Map66Section5
-										dc.l Map66Section6
-										dc.l Map66Section7
-										dc.l Map66Section8
-										dc.l Map66Section9
-Map66Section2:      incbin "maps/mapentries/map66/section2.bin"
-Map66Section3:      incbin "maps/mapentries/map66/section3.bin"
-Map66Section4:      incbin "maps/mapentries/map66/section4.bin"
-Map66Section5:      incbin "maps/mapentries/map66/section5.bin"
-Map66Section6:      incbin "maps/mapentries/map66/section6.bin"
-Map66Section7:      incbin "maps/mapentries/map66/section7.bin"
-Map66Section8:      incbin "maps/mapentries/map66/section8.bin"
-Map66Section0:      incbin "maps/mapentries/map66/section0.bin"
-Map66Section1:      incbin "maps/mapentries/map66/section1.bin"
-Map66Section9:      incbin "maps/mapentries/map66/section9.bin"
+										dc.l Map66s0_Blocks
+										dc.l Map66s1_Layout
+										dc.l Map66s2_Areas
+										dc.l Map66s3_FlagEvents
+										dc.l Map66s4_StepEvents
+										dc.l Map66s5_RootEvents
+										dc.l Map66s6_WarpEvents
+										dc.l Map66s7_ChestItems
+										dc.l Map66s8_OtherItems
+										dc.l Map66s9_Animations
+Map66s2_Areas:      incbin "maps/entries/map66/2-areas.bin"
+Map66s3_FlagEvents: incbin "maps/entries/map66/3-flag-events.bin"
+Map66s4_StepEvents: incbin "maps/entries/map66/4-step-events.bin"
+Map66s5_RootEvents: incbin "maps/entries/map66/5-roof-events.bin"
+Map66s6_WarpEvents: incbin "maps/entries/map66/6-warp-events.bin"
+Map66s7_ChestItems: incbin "maps/entries/map66/7-chest-items.bin"
+Map66s8_OtherItems: incbin "maps/entries/map66/8-other-items.bin"
+Map66s0_Blocks:     incbin "maps/entries/map66/0-blocks.bin"
+Map66s1_Layout:     incbin "maps/entries/map66/1-layout.bin"
+Map66s9_Animations: incbin "maps/entries/map66/9-animations.bin"
 Map67:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $67
 										dc.b $68
 										dc.b $69
-										dc.l Map67Section0
-										dc.l Map67Section1
-										dc.l Map67Section2
-										dc.l Map67Section3
-										dc.l Map67Section4
-										dc.l Map67Section5
-										dc.l Map67Section6
-										dc.l Map67Section7
-										dc.l Map67Section8
-										dc.l Map67Section9
-Map67Section2:      incbin "maps/mapentries/map67/section2.bin"
-Map67Section3:      incbin "maps/mapentries/map67/section3.bin"
-Map67Section4:      incbin "maps/mapentries/map67/section4.bin"
-Map67Section5:      incbin "maps/mapentries/map67/section5.bin"
-Map67Section6:      incbin "maps/mapentries/map67/section6.bin"
-Map67Section7:      incbin "maps/mapentries/map67/section7.bin"
-Map67Section8:      incbin "maps/mapentries/map67/section8.bin"
-Map67Section0:      incbin "maps/mapentries/map67/section0.bin"
-Map67Section1:      incbin "maps/mapentries/map67/section1.bin"
-Map67Section9:      incbin "maps/mapentries/map67/section9.bin"
+										dc.l Map67s0_Blocks
+										dc.l Map67s1_Layout
+										dc.l Map67s2_Areas
+										dc.l Map67s3_FlagEvents
+										dc.l Map67s4_StepEvents
+										dc.l Map67s5_RootEvents
+										dc.l Map67s6_WarpEvents
+										dc.l Map67s7_ChestItems
+										dc.l Map67s8_OtherItems
+										dc.l Map67s9_Animations
+Map67s2_Areas:      incbin "maps/entries/map67/2-areas.bin"
+Map67s3_FlagEvents: incbin "maps/entries/map67/3-flag-events.bin"
+Map67s4_StepEvents: incbin "maps/entries/map67/4-step-events.bin"
+Map67s5_RootEvents: incbin "maps/entries/map67/5-roof-events.bin"
+Map67s6_WarpEvents: incbin "maps/entries/map67/6-warp-events.bin"
+Map67s7_ChestItems: incbin "maps/entries/map67/7-chest-items.bin"
+Map67s8_OtherItems: incbin "maps/entries/map67/8-other-items.bin"
+Map67s0_Blocks:     incbin "maps/entries/map67/0-blocks.bin"
+Map67s1_Layout:     incbin "maps/entries/map67/1-layout.bin"
+Map67s9_Animations: incbin "maps/entries/map67/9-animations.bin"
 Map68:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $67
 										dc.b $68
 										dc.b $69
-										dc.l Map68Section0
-										dc.l Map68Section1
-										dc.l Map68Section2
-										dc.l Map68Section3
-										dc.l Map68Section4
-										dc.l Map68Section5
-										dc.l Map68Section6
-										dc.l Map68Section7
-										dc.l Map68Section8
-										dc.l Map68Section9
-Map68Section2:      incbin "maps/mapentries/map68/section2.bin"
-Map68Section3:      incbin "maps/mapentries/map68/section3.bin"
-Map68Section4:      incbin "maps/mapentries/map68/section4.bin"
-Map68Section5:      incbin "maps/mapentries/map68/section5.bin"
-Map68Section6:      incbin "maps/mapentries/map68/section6.bin"
-Map68Section7:      incbin "maps/mapentries/map68/section7.bin"
-Map68Section8:      incbin "maps/mapentries/map68/section8.bin"
-Map68Section0:      incbin "maps/mapentries/map68/section0.bin"
-Map68Section1:      incbin "maps/mapentries/map68/section1.bin"
-Map68Section9:      incbin "maps/mapentries/map68/section9.bin"
+										dc.l Map68s0_Blocks
+										dc.l Map68s1_Layout
+										dc.l Map68s2_Areas
+										dc.l Map68s3_FlagEvents
+										dc.l Map68s4_StepEvents
+										dc.l Map68s5_RootEvents
+										dc.l Map68s6_WarpEvents
+										dc.l Map68s7_ChestItems
+										dc.l Map68s8_OtherItems
+										dc.l Map68s9_Animations
+Map68s2_Areas:      incbin "maps/entries/map68/2-areas.bin"
+Map68s3_FlagEvents: incbin "maps/entries/map68/3-flag-events.bin"
+Map68s4_StepEvents: incbin "maps/entries/map68/4-step-events.bin"
+Map68s5_RootEvents: incbin "maps/entries/map68/5-roof-events.bin"
+Map68s6_WarpEvents: incbin "maps/entries/map68/6-warp-events.bin"
+Map68s7_ChestItems: incbin "maps/entries/map68/7-chest-items.bin"
+Map68s8_OtherItems: incbin "maps/entries/map68/8-other-items.bin"
+Map68s0_Blocks:     incbin "maps/entries/map68/0-blocks.bin"
+Map68s1_Layout:     incbin "maps/entries/map68/1-layout.bin"
+Map68s9_Animations: incbin "maps/entries/map68/9-animations.bin"
 Map69:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $67
 										dc.b $68
 										dc.b $69
-										dc.l Map69Section0
-										dc.l Map69Section1
-										dc.l Map69Section2
-										dc.l Map69Section3
-										dc.l Map69Section4
-										dc.l Map69Section5
-										dc.l Map69Section6
-										dc.l Map69Section7
-										dc.l Map69Section8
-										dc.l Map69Section9
-Map69Section2:      incbin "maps/mapentries/map69/section2.bin"
-Map69Section3:      incbin "maps/mapentries/map69/section3.bin"
-Map69Section4:      incbin "maps/mapentries/map69/section4.bin"
-Map69Section5:      incbin "maps/mapentries/map69/section5.bin"
-Map69Section6:      incbin "maps/mapentries/map69/section6.bin"
-Map69Section7:      incbin "maps/mapentries/map69/section7.bin"
-Map69Section8:      incbin "maps/mapentries/map69/section8.bin"
-Map69Section0:      incbin "maps/mapentries/map69/section0.bin"
-Map69Section1:      incbin "maps/mapentries/map69/section1.bin"
-Map69Section9:      incbin "maps/mapentries/map69/section9.bin"
+										dc.l Map69s0_Blocks
+										dc.l Map69s1_Layout
+										dc.l Map69s2_Areas
+										dc.l Map69s3_FlagEvents
+										dc.l Map69s4_StepEvents
+										dc.l Map69s5_RootEvents
+										dc.l Map69s6_WarpEvents
+										dc.l Map69s7_ChestItems
+										dc.l Map69s8_OtherItems
+										dc.l Map69s9_Animations
+Map69s2_Areas:      incbin "maps/entries/map69/2-areas.bin"
+Map69s3_FlagEvents: incbin "maps/entries/map69/3-flag-events.bin"
+Map69s4_StepEvents: incbin "maps/entries/map69/4-step-events.bin"
+Map69s5_RootEvents: incbin "maps/entries/map69/5-roof-events.bin"
+Map69s6_WarpEvents: incbin "maps/entries/map69/6-warp-events.bin"
+Map69s7_ChestItems: incbin "maps/entries/map69/7-chest-items.bin"
+Map69s8_OtherItems: incbin "maps/entries/map69/8-other-items.bin"
+Map69s0_Blocks:     incbin "maps/entries/map69/0-blocks.bin"
+Map69s1_Layout:     incbin "maps/entries/map69/1-layout.bin"
+Map69s9_Animations: incbin "maps/entries/map69/9-animations.bin"
 Map70:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $67
 										dc.b $68
 										dc.b $69
-										dc.l Map70Section0
-										dc.l Map70Section1
-										dc.l Map70Section2
-										dc.l Map70Section3
-										dc.l Map70Section4
-										dc.l Map70Section5
-										dc.l Map70Section6
-										dc.l Map70Section7
-										dc.l Map70Section8
-										dc.l Map70Section9
-Map70Section2:      incbin "maps/mapentries/map70/section2.bin"
-Map70Section3:      incbin "maps/mapentries/map70/section3.bin"
-Map70Section4:      incbin "maps/mapentries/map70/section4.bin"
-Map70Section5:      incbin "maps/mapentries/map70/section5.bin"
-Map70Section6:      incbin "maps/mapentries/map70/section6.bin"
-Map70Section7:      incbin "maps/mapentries/map70/section7.bin"
-Map70Section8:      incbin "maps/mapentries/map70/section8.bin"
-Map70Section0:      incbin "maps/mapentries/map70/section0.bin"
-Map70Section1:      incbin "maps/mapentries/map70/section1.bin"
-Map70Section9:      incbin "maps/mapentries/map70/section9.bin"
+										dc.l Map70s0_Blocks
+										dc.l Map70s1_Layout
+										dc.l Map70s2_Areas
+										dc.l Map70s3_FlagEvents
+										dc.l Map70s4_StepEvents
+										dc.l Map70s5_RootEvents
+										dc.l Map70s6_WarpEvents
+										dc.l Map70s7_ChestItems
+										dc.l Map70s8_OtherItems
+										dc.l Map70s9_Animations
+Map70s2_Areas:      incbin "maps/entries/map70/2-areas.bin"
+Map70s3_FlagEvents: incbin "maps/entries/map70/3-flag-events.bin"
+Map70s4_StepEvents: incbin "maps/entries/map70/4-step-events.bin"
+Map70s5_RootEvents: incbin "maps/entries/map70/5-roof-events.bin"
+Map70s6_WarpEvents: incbin "maps/entries/map70/6-warp-events.bin"
+Map70s7_ChestItems: incbin "maps/entries/map70/7-chest-items.bin"
+Map70s8_OtherItems: incbin "maps/entries/map70/8-other-items.bin"
+Map70s0_Blocks:     incbin "maps/entries/map70/0-blocks.bin"
+Map70s1_Layout:     incbin "maps/entries/map70/1-layout.bin"
+Map70s9_Animations: incbin "maps/entries/map70/9-animations.bin"
 Map71:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $67
 										dc.b $68
 										dc.b $69
-										dc.l Map71Section0
-										dc.l Map71Section1
-										dc.l Map71Section2
-										dc.l Map71Section3
-										dc.l Map71Section4
-										dc.l Map71Section5
-										dc.l Map71Section6
-										dc.l Map71Section7
-										dc.l Map71Section8
-										dc.l Map71Section9
-Map71Section2:      incbin "maps/mapentries/map71/section2.bin"
-Map71Section3:      incbin "maps/mapentries/map71/section3.bin"
-Map71Section4:      incbin "maps/mapentries/map71/section4.bin"
-Map71Section5:      incbin "maps/mapentries/map71/section5.bin"
-Map71Section6:      incbin "maps/mapentries/map71/section6.bin"
-Map71Section7:      incbin "maps/mapentries/map71/section7.bin"
-Map71Section8:      incbin "maps/mapentries/map71/section8.bin"
-Map71Section0:      incbin "maps/mapentries/map71/section0.bin"
-Map71Section1:      incbin "maps/mapentries/map71/section1.bin"
-Map71Section9:      incbin "maps/mapentries/map71/section9.bin"
+										dc.l Map71s0_Blocks
+										dc.l Map71s1_Layout
+										dc.l Map71s2_Areas
+										dc.l Map71s3_FlagEvents
+										dc.l Map71s4_StepEvents
+										dc.l Map71s5_RootEvents
+										dc.l Map71s6_WarpEvents
+										dc.l Map71s7_ChestItems
+										dc.l Map71s8_OtherItems
+										dc.l Map71s9_Animations
+Map71s2_Areas:      incbin "maps/entries/map71/2-areas.bin"
+Map71s3_FlagEvents: incbin "maps/entries/map71/3-flag-events.bin"
+Map71s4_StepEvents: incbin "maps/entries/map71/4-step-events.bin"
+Map71s5_RootEvents: incbin "maps/entries/map71/5-roof-events.bin"
+Map71s6_WarpEvents: incbin "maps/entries/map71/6-warp-events.bin"
+Map71s7_ChestItems: incbin "maps/entries/map71/7-chest-items.bin"
+Map71s8_OtherItems: incbin "maps/entries/map71/8-other-items.bin"
+Map71s0_Blocks:     incbin "maps/entries/map71/0-blocks.bin"
+Map71s1_Layout:     incbin "maps/entries/map71/1-layout.bin"
+Map71s9_Animations: incbin "maps/entries/map71/9-animations.bin"
 Map72:              dc.b 0
 										dc.b $6A
 										dc.b $66
 										dc.b $6B
 										dc.b $6C
 										dc.b $69
-										dc.l Map72Section0
-										dc.l Map72Section1
-										dc.l Map72Section2
-										dc.l Map72Section3
-										dc.l Map72Section4
-										dc.l Map72Section5
-										dc.l Map72Section6
-										dc.l Map72Section7
-										dc.l Map72Section8
-										dc.l Map72Section9
-Map72Section2:      incbin "maps/mapentries/map72/section2.bin"
-Map72Section3:      incbin "maps/mapentries/map72/section3.bin"
-Map72Section4:      incbin "maps/mapentries/map72/section4.bin"
-Map72Section5:      incbin "maps/mapentries/map72/section5.bin"
-Map72Section6:      incbin "maps/mapentries/map72/section6.bin"
-Map72Section7:      incbin "maps/mapentries/map72/section7.bin"
-Map72Section8:      incbin "maps/mapentries/map72/section8.bin"
-Map72Section0:      incbin "maps/mapentries/map72/section0.bin"
-Map72Section1:      incbin "maps/mapentries/map72/section1.bin"
-Map72Section9:      incbin "maps/mapentries/map72/section9.bin"
+										dc.l Map72s0_Blocks
+										dc.l Map72s1_Layout
+										dc.l Map72s2_Areas
+										dc.l Map72s3_FlagEvents
+										dc.l Map72s4_StepEvents
+										dc.l Map72s5_RootEvents
+										dc.l Map72s6_WarpEvents
+										dc.l Map72s7_ChestItems
+										dc.l Map72s8_OtherItems
+										dc.l Map72s9_Animations
+Map72s2_Areas:      incbin "maps/entries/map72/2-areas.bin"
+Map72s3_FlagEvents: incbin "maps/entries/map72/3-flag-events.bin"
+Map72s4_StepEvents: incbin "maps/entries/map72/4-step-events.bin"
+Map72s5_RootEvents: incbin "maps/entries/map72/5-roof-events.bin"
+Map72s6_WarpEvents: incbin "maps/entries/map72/6-warp-events.bin"
+Map72s7_ChestItems: incbin "maps/entries/map72/7-chest-items.bin"
+Map72s8_OtherItems: incbin "maps/entries/map72/8-other-items.bin"
+Map72s0_Blocks:     incbin "maps/entries/map72/0-blocks.bin"
+Map72s1_Layout:     incbin "maps/entries/map72/1-layout.bin"
+Map72s9_Animations: incbin "maps/entries/map72/9-animations.bin"
 Map73:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $67
 										dc.b $68
 										dc.b $69
-										dc.l Map73Section0
-										dc.l Map73Section1
-										dc.l Map73Section2
-										dc.l Map73Section3
-										dc.l Map73Section4
-										dc.l Map73Section5
-										dc.l Map73Section6
-										dc.l Map73Section7
-										dc.l Map73Section8
-										dc.l Map73Section9
-Map73Section2:      incbin "maps/mapentries/map73/section2.bin"
-Map73Section3:      incbin "maps/mapentries/map73/section3.bin"
-Map73Section4:      incbin "maps/mapentries/map73/section4.bin"
-Map73Section5:      incbin "maps/mapentries/map73/section5.bin"
-Map73Section6:      incbin "maps/mapentries/map73/section6.bin"
-Map73Section7:      incbin "maps/mapentries/map73/section7.bin"
-Map73Section8:      incbin "maps/mapentries/map73/section8.bin"
-Map73Section0:      incbin "maps/mapentries/map73/section0.bin"
-Map73Section1:      incbin "maps/mapentries/map73/section1.bin"
-Map73Section9:      incbin "maps/mapentries/map73/section9.bin"
+										dc.l Map73s0_Blocks
+										dc.l Map73s1_Layout
+										dc.l Map73s2_Areas
+										dc.l Map73s3_FlagEvents
+										dc.l Map73s4_StepEvents
+										dc.l Map73s5_RootEvents
+										dc.l Map73s6_WarpEvents
+										dc.l Map73s7_ChestItems
+										dc.l Map73s8_OtherItems
+										dc.l Map73s9_Animations
+Map73s2_Areas:      incbin "maps/entries/map73/2-areas.bin"
+Map73s3_FlagEvents: incbin "maps/entries/map73/3-flag-events.bin"
+Map73s4_StepEvents: incbin "maps/entries/map73/4-step-events.bin"
+Map73s5_RootEvents: incbin "maps/entries/map73/5-roof-events.bin"
+Map73s6_WarpEvents: incbin "maps/entries/map73/6-warp-events.bin"
+Map73s7_ChestItems: incbin "maps/entries/map73/7-chest-items.bin"
+Map73s8_OtherItems: incbin "maps/entries/map73/8-other-items.bin"
+Map73s0_Blocks:     incbin "maps/entries/map73/0-blocks.bin"
+Map73s1_Layout:     incbin "maps/entries/map73/1-layout.bin"
+Map73s9_Animations: incbin "maps/entries/map73/9-animations.bin"
 Map74:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $6D
 										dc.b $6E
 										dc.b $69
-										dc.l Map74Section0
-										dc.l Map74Section1
-										dc.l Map74Section2
-										dc.l Map74Section3
-										dc.l Map74Section4
-										dc.l Map74Section5
-										dc.l Map74Section6
-										dc.l Map74Section7
-										dc.l Map74Section8
-										dc.l Map74Section9
-Map74Section2:      incbin "maps/mapentries/map74/section2.bin"
-Map74Section3:      incbin "maps/mapentries/map74/section3.bin"
-Map74Section4:      incbin "maps/mapentries/map74/section4.bin"
-Map74Section5:      incbin "maps/mapentries/map74/section5.bin"
-Map74Section6:      incbin "maps/mapentries/map74/section6.bin"
-Map74Section7:      incbin "maps/mapentries/map74/section7.bin"
-Map74Section8:      incbin "maps/mapentries/map74/section8.bin"
-Map74Section0:      incbin "maps/mapentries/map74/section0.bin"
-Map74Section1:      incbin "maps/mapentries/map74/section1.bin"
-Map74Section9:      incbin "maps/mapentries/map74/section9.bin"
+										dc.l Map74s0_Blocks
+										dc.l Map74s1_Layout
+										dc.l Map74s2_Areas
+										dc.l Map74s3_FlagEvents
+										dc.l Map74s4_StepEvents
+										dc.l Map74s5_RootEvents
+										dc.l Map74s6_WarpEvents
+										dc.l Map74s7_ChestItems
+										dc.l Map74s8_OtherItems
+										dc.l Map74s9_Animations
+Map74s2_Areas:      incbin "maps/entries/map74/2-areas.bin"
+Map74s3_FlagEvents: incbin "maps/entries/map74/3-flag-events.bin"
+Map74s4_StepEvents: incbin "maps/entries/map74/4-step-events.bin"
+Map74s5_RootEvents: incbin "maps/entries/map74/5-roof-events.bin"
+Map74s6_WarpEvents: incbin "maps/entries/map74/6-warp-events.bin"
+Map74s7_ChestItems: incbin "maps/entries/map74/7-chest-items.bin"
+Map74s8_OtherItems: incbin "maps/entries/map74/8-other-items.bin"
+Map74s0_Blocks:     incbin "maps/entries/map74/0-blocks.bin"
+Map74s1_Layout:     incbin "maps/entries/map74/1-layout.bin"
+Map74s9_Animations: incbin "maps/entries/map74/9-animations.bin"
 Map75:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $6D
 										dc.b $6E
 										dc.b $69
-										dc.l Map75Section0
-										dc.l Map75Section1
-										dc.l Map75Section2
-										dc.l Map75Section3
-										dc.l Map75Section4
-										dc.l Map75Section5
-										dc.l Map75Section6
-										dc.l Map75Section7
-										dc.l Map75Section8
-										dc.l Map75Section9
-Map75Section2:      incbin "maps/mapentries/map75/section2.bin"
-Map75Section3:      incbin "maps/mapentries/map75/section3.bin"
-Map75Section4:      incbin "maps/mapentries/map75/section4.bin"
-Map75Section5:      incbin "maps/mapentries/map75/section5.bin"
-Map75Section6:      incbin "maps/mapentries/map75/section6.bin"
-Map75Section7:      incbin "maps/mapentries/map75/section7.bin"
-Map75Section8:      incbin "maps/mapentries/map75/section8.bin"
-Map75Section0:      incbin "maps/mapentries/map75/section0.bin"
-Map75Section1:      incbin "maps/mapentries/map75/section1.bin"
-Map75Section9:      incbin "maps/mapentries/map75/section9.bin"
+										dc.l Map75s0_Blocks
+										dc.l Map75s1_Layout
+										dc.l Map75s2_Areas
+										dc.l Map75s3_FlagEvents
+										dc.l Map75s4_StepEvents
+										dc.l Map75s5_RootEvents
+										dc.l Map75s6_WarpEvents
+										dc.l Map75s7_ChestItems
+										dc.l Map75s8_OtherItems
+										dc.l Map75s9_Animations
+Map75s2_Areas:      incbin "maps/entries/map75/2-areas.bin"
+Map75s3_FlagEvents: incbin "maps/entries/map75/3-flag-events.bin"
+Map75s4_StepEvents: incbin "maps/entries/map75/4-step-events.bin"
+Map75s5_RootEvents: incbin "maps/entries/map75/5-roof-events.bin"
+Map75s6_WarpEvents: incbin "maps/entries/map75/6-warp-events.bin"
+Map75s7_ChestItems: incbin "maps/entries/map75/7-chest-items.bin"
+Map75s8_OtherItems: incbin "maps/entries/map75/8-other-items.bin"
+Map75s0_Blocks:     incbin "maps/entries/map75/0-blocks.bin"
+Map75s1_Layout:     incbin "maps/entries/map75/1-layout.bin"
+Map75s9_Animations: incbin "maps/entries/map75/9-animations.bin"
 Map76:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $67
 										dc.b $68
 										dc.b $69
-										dc.l Map76Section0
-										dc.l Map76Section1
-										dc.l Map76Section2
-										dc.l Map76Section3
-										dc.l Map76Section4
-										dc.l Map76Section5
-										dc.l Map76Section6
-										dc.l Map76Section7
-										dc.l Map76Section8
-										dc.l Map76Section9
-Map76Section2:      incbin "maps/mapentries/map76/section2.bin"
-Map76Section3:      incbin "maps/mapentries/map76/section3.bin"
-Map76Section4:      incbin "maps/mapentries/map76/section4.bin"
-Map76Section5:      incbin "maps/mapentries/map76/section5.bin"
-Map76Section6:      incbin "maps/mapentries/map76/section6.bin"
-Map76Section7:      incbin "maps/mapentries/map76/section7.bin"
-Map76Section8:      incbin "maps/mapentries/map76/section8.bin"
-Map76Section0:      incbin "maps/mapentries/map76/section0.bin"
-Map76Section1:      incbin "maps/mapentries/map76/section1.bin"
-Map76Section9:      incbin "maps/mapentries/map76/section9.bin"
+										dc.l Map76s0_Blocks
+										dc.l Map76s1_Layout
+										dc.l Map76s2_Areas
+										dc.l Map76s3_FlagEvents
+										dc.l Map76s4_StepEvents
+										dc.l Map76s5_RootEvents
+										dc.l Map76s6_WarpEvents
+										dc.l Map76s7_ChestItems
+										dc.l Map76s8_OtherItems
+										dc.l Map76s9_Animations
+Map76s2_Areas:      incbin "maps/entries/map76/2-areas.bin"
+Map76s3_FlagEvents: incbin "maps/entries/map76/3-flag-events.bin"
+Map76s4_StepEvents: incbin "maps/entries/map76/4-step-events.bin"
+Map76s5_RootEvents: incbin "maps/entries/map76/5-roof-events.bin"
+Map76s6_WarpEvents: incbin "maps/entries/map76/6-warp-events.bin"
+Map76s7_ChestItems: incbin "maps/entries/map76/7-chest-items.bin"
+Map76s8_OtherItems: incbin "maps/entries/map76/8-other-items.bin"
+Map76s0_Blocks:     incbin "maps/entries/map76/0-blocks.bin"
+Map76s1_Layout:     incbin "maps/entries/map76/1-layout.bin"
+Map76s9_Animations: incbin "maps/entries/map76/9-animations.bin"
 Map77:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $67
 										dc.b $68
 										dc.b $69
-										dc.l Map77Section0
-										dc.l Map77Section1
-										dc.l Map77Section2
-										dc.l Map77Section3
-										dc.l Map77Section4
-										dc.l Map77Section5
-										dc.l Map77Section6
-										dc.l Map77Section7
-										dc.l Map77Section8
-										dc.l Map77Section9
-Map77Section2:      incbin "maps/mapentries/map77/section2.bin"
-Map77Section3:      incbin "maps/mapentries/map77/section3.bin"
-Map77Section4:      incbin "maps/mapentries/map77/section4.bin"
-Map77Section5:      incbin "maps/mapentries/map77/section5.bin"
-Map77Section6:      incbin "maps/mapentries/map77/section6.bin"
-Map77Section7:      incbin "maps/mapentries/map77/section7.bin"
-Map77Section8:      incbin "maps/mapentries/map77/section8.bin"
-Map77Section0:      incbin "maps/mapentries/map77/section0.bin"
-Map77Section1:      incbin "maps/mapentries/map77/section1.bin"
-Map77Section9:      incbin "maps/mapentries/map77/section9.bin"
+										dc.l Map77s0_Blocks
+										dc.l Map77s1_Layout
+										dc.l Map77s2_Areas
+										dc.l Map77s3_FlagEvents
+										dc.l Map77s4_StepEvents
+										dc.l Map77s5_RootEvents
+										dc.l Map77s6_WarpEvents
+										dc.l Map77s7_ChestItems
+										dc.l Map77s8_OtherItems
+										dc.l Map77s9_Animations
+Map77s2_Areas:      incbin "maps/entries/map77/2-areas.bin"
+Map77s3_FlagEvents: incbin "maps/entries/map77/3-flag-events.bin"
+Map77s4_StepEvents: incbin "maps/entries/map77/4-step-events.bin"
+Map77s5_RootEvents: incbin "maps/entries/map77/5-roof-events.bin"
+Map77s6_WarpEvents: incbin "maps/entries/map77/6-warp-events.bin"
+Map77s7_ChestItems: incbin "maps/entries/map77/7-chest-items.bin"
+Map77s8_OtherItems: incbin "maps/entries/map77/8-other-items.bin"
+Map77s0_Blocks:     incbin "maps/entries/map77/0-blocks.bin"
+Map77s1_Layout:     incbin "maps/entries/map77/1-layout.bin"
+Map77s9_Animations: incbin "maps/entries/map77/9-animations.bin"
 Map78:              dc.b 0
 										dc.b $65
 										dc.b $66
 										dc.b $67
 										dc.b $68
 										dc.b $69
-										dc.l Map78Section0
-										dc.l Map78Section1
-										dc.l Map78Section2
-										dc.l Map78Section3
-										dc.l Map78Section4
-										dc.l Map78Section5
-										dc.l Map78Section6
-										dc.l Map78Section7
-										dc.l Map78Section8
-										dc.l Map78Section9
-Map78Section2:      incbin "maps/mapentries/map78/section2.bin"
-Map78Section3:      incbin "maps/mapentries/map78/section3.bin"
-Map78Section4:      incbin "maps/mapentries/map78/section4.bin"
-Map78Section5:      incbin "maps/mapentries/map78/section5.bin"
-Map78Section6:      incbin "maps/mapentries/map78/section6.bin"
-Map78Section7:      incbin "maps/mapentries/map78/section7.bin"
-Map78Section8:      incbin "maps/mapentries/map78/section8.bin"
-Map78Section0:      incbin "maps/mapentries/map78/section0.bin"
-Map78Section1:      incbin "maps/mapentries/map78/section1.bin"
-Map78Section9:      incbin "maps/mapentries/map78/section9.bin"
+										dc.l Map78s0_Blocks
+										dc.l Map78s1_Layout
+										dc.l Map78s2_Areas
+										dc.l Map78s3_FlagEvents
+										dc.l Map78s4_StepEvents
+										dc.l Map78s5_RootEvents
+										dc.l Map78s6_WarpEvents
+										dc.l Map78s7_ChestItems
+										dc.l Map78s8_OtherItems
+										dc.l Map78s9_Animations
+Map78s2_Areas:      incbin "maps/entries/map78/2-areas.bin"
+Map78s3_FlagEvents: incbin "maps/entries/map78/3-flag-events.bin"
+Map78s4_StepEvents: incbin "maps/entries/map78/4-step-events.bin"
+Map78s5_RootEvents: incbin "maps/entries/map78/5-roof-events.bin"
+Map78s6_WarpEvents: incbin "maps/entries/map78/6-warp-events.bin"
+Map78s7_ChestItems: incbin "maps/entries/map78/7-chest-items.bin"
+Map78s8_OtherItems: incbin "maps/entries/map78/8-other-items.bin"
+Map78s0_Blocks:     incbin "maps/entries/map78/0-blocks.bin"
+Map78s1_Layout:     incbin "maps/entries/map78/1-layout.bin"
+Map78s9_Animations: incbin "maps/entries/map78/9-animations.bin"
 										align $8000

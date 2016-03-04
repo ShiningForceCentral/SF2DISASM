@@ -55,7 +55,7 @@ sub_1AC010:
 
 j_getEnemyAITargetPos:
 										
-										jmp     getEnemyAITargetPos(pc)
+										jmp     GetEnemyAITargetPos(pc)
 
 	; End of function j_getEnemyAITargetPos
 
@@ -64,7 +64,7 @@ j_getEnemyAITargetPos:
 
 j_getAddrOfBattleCombatants:
 										
-										jmp     getAddrOfBattleDataSection(pc)
+										jmp     GetAddrOfBattleDataSection(pc)
 
 	; End of function j_getAddrOfBattleCombatants
 
@@ -163,7 +163,7 @@ j_GetListOfSpawningEnemies:
 
 j_randomLessThanD6:
 										
-										jmp     randomLessThanD6(pc)
+										jmp     RandomLessThanD6(pc)
 
 	; End of function j_randomLessThanD6
 
@@ -221,8 +221,8 @@ sub_1AC05C:
 
 	; End of function sub_1AC05C
 
-p_plt_endKiss:      dc.l plt_endKiss
-p_endKissPicture:   dc.l endKissPicture
+p_plt_endKiss:      dc.l plt_EndKiss
+p_endKissPicture:   dc.l EndKissPicture
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -232,12 +232,12 @@ sub_1AC068:
 										trap    #9
 										dc.w 0
 										jsr     (WaitForVInt).w 
-										jsr     (disableDisplayAndVInt).w
-										jsr     (clearVsramAndSprites).w
-										jsr     (enableDisplayAndInterrupts).w
-										jsr     (displayBlackScreen).w
+										jsr     (DisableDisplayAndVInt).w
+										jsr     (ClearVsramAndSprites).w
+										jsr     (EnableDisplayAndInterrupts).w
+										jsr     (InitDisplay).w 
 										bsr.w   sub_1AC1CC
-										jsr     (disableDisplayAndVInt).w
+										jsr     (DisableDisplayAndVInt).w
 										bsr.w   sub_1AC29C
 										lea     (byte_FFE000).l,a1
 										move.w  #$27C0,d1
@@ -257,17 +257,17 @@ loc_1AC09E:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgain).w
+										jsr     (BwahDMAstuffAgain).w
 										trap    #9
 										dc.w 0
-										jsr     (enableDisplayAndInterrupts).w
+										jsr     (EnableDisplayAndInterrupts).w
 										clr.w   d6
-										jsr     (clearHscrollStuff).w
-										jsr     (clearVscrollStuff).w
-										jsr     (clearOtherHscrollStuff).w
-										jsr     (clearOtherVscrollStuff).w
-										jsr     (set_FFDE94_bit3).w
-										jsr     (fadeInFromBlack).w
+										jsr     (ClearHscrollStuff).w
+										jsr     (ClearVscrollStuff).w
+										jsr     (ClearOtherHscrollStuff).w
+										jsr     (ClearOtherVscrollStuff).w
+										jsr     (Set_FFDE94_bit3).w
+										jsr     (FadeInFromBlack).w
 										move.l  (p_GameStaff).l,((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w
 										trap    #9
 										dc.w 1
@@ -283,8 +283,8 @@ loc_1AC10E:
 										movem.l d7-a0,-(sp)
 										clr.w   d0
 										move.b  (a0),d0
-										jsr     j_getCharPortraitIdx
-										jsr     j_loadPortrait
+										jsr     j_GetCharPortraitIdx
+										jsr     j_LoadPortrait
 										lea     (Palette2).l,a0 ; clear palette 2
 										clr.l   (a0)+
 										clr.l   (a0)+
@@ -294,7 +294,7 @@ loc_1AC10E:
 										clr.l   (a0)+
 										clr.l   (a0)+
 										clr.l   (a0)+
-										jsr     (storeVdpCommandster).w
+										jsr     (StoreVdpCommandster).w
 										move.w  #$40,d6 
 										jsr     (UpdateRandomSeed).w
 										addi.w  #$80,d7 
@@ -306,13 +306,13 @@ loc_1AC10E:
 										move.w  d7,(FFD502_MaybeRelatedToOtherVScrollStuff).l
 										move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
 										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.w  #$B4,d0 
 										jsr     (Sleep).w       
 										move.b  #2,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										moveq   #$2C,d0 
@@ -328,7 +328,7 @@ loc_1AC1A8:
 										bsr.w   sub_1AC1CC
 										move.w  #$B4,d0 
 										jsr     (Sleep).w       
-										jsr     (fadeOutToBlack).w
+										jsr     (FadeOutToBlack).w
 										move.w  #$78,d0 
 										jsr     (Sleep).w       
 										rts
@@ -361,7 +361,7 @@ sub_1AC1E4:
 										btst    #0,((byte_FFDEA0-$1000000)).w
 										bne.s   loc_1AC1F6
 										subq.w  #1,(FFD100_MaybeRelatedToHscroll+2).l
-										jsr     (storeVdpCommands).w
+										jsr     (StoreVdpCommands).w
 loc_1AC1F6:
 										
 										movea.l ((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w,a0
@@ -379,9 +379,9 @@ loc_1AC21A:
 										addq.w  #1,(FFD500_MaybeRelatedToVscroll).l
 loc_1AC220:
 										
-										jsr     (storeVdpCommands).w
-										jsr     (storeVdpCommandsbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommands).w
+										jsr     (StoreVdpCommandsbis).w
+										jsr     (Set_FFDE94_bit3).w
 										rts
 
 	; End of function sub_1AC1E4
@@ -430,7 +430,7 @@ loc_1AC280:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
+										jsr     (BwahDMAstuffAgainbis).w
 										rts
 
 	; End of function sub_1AC22E
@@ -440,9 +440,9 @@ loc_1AC280:
 
 sub_1AC29C:
 										
-										movea.l (p_baseTiles).l,a0
+										movea.l (p_BaseTiles).l,a0
 										lea     (FF6802_LOADING_SPACE).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										lea     (byte_FF6C02).l,a0
 										lea     (DMA_SPACE_FF8804).l,a1
 										moveq   #$3F,d7 
@@ -522,7 +522,7 @@ loc_1AC362:
 										lea     ($2000).w,a1    ; ?
 										move.w  #$800,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgain).w
+										jsr     (BwahDMAstuffAgain).w
 										rts
 
 	; End of function sub_1AC29C
@@ -565,7 +565,7 @@ loc_1AC3C4:
 										bra.w   loc_1AC434
 loc_1AC3DC:
 										
-										jsr     getEnemyAITargetPos
+										jsr     GetEnemyAITargetPos
 										clr.w   d5
 										cmp.w   d3,d1
 										bge.s   loc_1AC3EC
@@ -642,7 +642,7 @@ loc_1AC456:
 										bra.w   loc_1AC4EA
 loc_1AC46A:
 										
-										jsr     getEnemyAITargetPos
+										jsr     GetEnemyAITargetPos
 										clr.l   d5
 										clr.l   d6
 										move.w  d1,d5
@@ -734,7 +734,7 @@ loc_1AC52C:
 										bra.w   loc_1AC5A4
 loc_1AC540:
 										
-										jsr     getEnemyAITargetPos
+										jsr     GetEnemyAITargetPos
 										move.w  d1,d5
 										move.w  d2,d6
 										lea     (TERRAIN_DATA).l,a0
@@ -801,7 +801,7 @@ loc_1AC5C4:
 										bra.w   loc_1AC64E
 loc_1AC5D8:
 										
-										bsr.w   getEnemyAITargetPos
+										bsr.w   GetEnemyAITargetPos
 										move.w  d1,d5
 										move.w  d2,d6
 										move.w  #$2F,d4 
@@ -1041,12 +1041,12 @@ loc_1AC808:
 										add.b   (a0),d1
 										cmpi.w  #$30,d1 
 										bcc.w   loc_1AC83C
-										jsr     j_GetTerrainType
+										jsr     j_GetTerrain
 										cmpi.b  #$FF,d0
 										beq.s   loc_1AC83C
 										bclr    #7,d0
 										bclr    #6,d0
-										jsr     j_setTerrain
+										jsr     j_SetTerrain
 loc_1AC83C:
 										
 										addq.l  #2,a0
@@ -1151,7 +1151,7 @@ sub_1AC8A0:
 										
 										movem.l d0-a6,-(sp)
 										move.w  d0,d7
-										lea     ((RAM_CurrentBattleIdx-$1000000)).w,a0
+										lea     ((CURRENT_BATTLE-$1000000)).w,a0
 										clr.w   d2
 										move.b  (a0),d2
 										lea     unk_1AC9B8(pc), a0
@@ -1194,7 +1194,7 @@ loc_1AC8FE:
 										jsr     j_GetYPos
 										move.w  d1,d2
 										jsr     j_GetXPos
-										jsr     j_clearMovableGrid
+										jsr     j_ClearMovableGrid
 										tst.w   d6
 										bne.s   loc_1AC91E
 										addi.w  #1,d1
@@ -1219,8 +1219,8 @@ loc_1AC93C:
 										clr.w   d3
 loc_1AC942:
 										
-										jsr     j_setMovableAtCoord
-										jsr     j_GetUnitID
+										jsr     j_SetMovableAtCoord
+										jsr     j_GetTargetAtCoordOffset
 										cmpi.b  #$FF,d0
 										bne.s   loc_1AC958
 										bra.w   loc_1AC960
@@ -1345,7 +1345,7 @@ loc_1ACA0C:
 										
 										move.w  d0,d7
 										move.b  #3,d1
-										bsr.w   getAddrOfBattleDataSection
+										bsr.w   GetAddrOfBattleDataSection
 										cmp.b   d1,d7
 										ble.s   loc_1ACA1E
 										bra.w   loc_1ACA6A
@@ -1845,7 +1845,7 @@ UpdateTriggeredRegionsAndAI:
 										movem.l d0-a6,-(sp)
 										move.w  d0,d7
 										move.w  #3,d1
-										bsr.w   getAddrOfBattleDataSection
+										bsr.w   GetAddrOfBattleDataSection
 										tst.w   d1
 										bne.s   loc_1ACE60
 										bra.w   loc_1ACF2A
@@ -2103,7 +2103,7 @@ GetRandomValueSigned:
 
 ; =============== S U B R O U T I N E =======================================
 
-randomLessThanD6:
+RandomLessThanD6:
 										
 										movem.l d0-d5/a0-a6,-(sp)
 										move.b  d6,d1
@@ -2131,7 +2131,7 @@ loc_1AD0D4:
 										movem.l (sp)+,d0-d5/a0-a6
 										rts
 
-	; End of function randomLessThanD6
+	; End of function RandomLessThanD6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2143,13 +2143,13 @@ LoadBattleTerrainData:
 										movem.l d0-d6/a0-a5,-(sp)
 										lea     pt_BattleTerrainData(pc), a0
 										nop
-										lea     ((RAM_CurrentBattleIdx-$1000000)).w,a1
+										lea     ((CURRENT_BATTLE-$1000000)).w,a1
 										clr.l   d1
 										move.b  (a1),d1
 										lsl.l   #2,d1
 										movea.l (a0,d1.w),a0
 										lea     (TERRAIN_DATA).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										movem.l (sp)+,d0-d6/a0-a5
 										rts
 
@@ -2201,49 +2201,49 @@ pt_BattleTerrainData:
 										dc.l BattleTerrain42
 										dc.l BattleTerrain43
 										dc.l BattleTerrain44
-BattleTerrain00:    incbin "battles/terrains/battleterrain00.bin"
-BattleTerrain01:    incbin "battles/terrains/battleterrain01.bin"
-BattleTerrain02:    incbin "battles/terrains/battleterrain02.bin"
-BattleTerrain03:    incbin "battles/terrains/battleterrain03.bin"
-BattleTerrain05:    incbin "battles/terrains/battleterrain05.bin"
-BattleTerrain06:    incbin "battles/terrains/battleterrain06.bin"
-BattleTerrain07:    incbin "battles/terrains/battleterrain07.bin"
-BattleTerrain08:    incbin "battles/terrains/battleterrain08.bin"
-BattleTerrain09:    incbin "battles/terrains/battleterrain09.bin"
-BattleTerrain10:    incbin "battles/terrains/battleterrain10.bin"
-BattleTerrain11:    incbin "battles/terrains/battleterrain11.bin"
-BattleTerrain12:    incbin "battles/terrains/battleterrain12.bin"
-BattleTerrain13:    incbin "battles/terrains/battleterrain13.bin"
-BattleTerrain14:    incbin "battles/terrains/battleterrain14.bin"
-BattleTerrain15:    incbin "battles/terrains/battleterrain15.bin"
-BattleTerrain16:    incbin "battles/terrains/battleterrain16.bin"
-BattleTerrain17:    incbin "battles/terrains/battleterrain17.bin"
-BattleTerrain18:    incbin "battles/terrains/battleterrain18.bin"
-BattleTerrain19:    incbin "battles/terrains/battleterrain19.bin"
-BattleTerrain20:    incbin "battles/terrains/battleterrain20.bin"
-BattleTerrain21:    incbin "battles/terrains/battleterrain21.bin"
-BattleTerrain22:    incbin "battles/terrains/battleterrain22.bin"
-BattleTerrain23:    incbin "battles/terrains/battleterrain23.bin"
-BattleTerrain24:    incbin "battles/terrains/battleterrain24.bin"
-BattleTerrain25:    incbin "battles/terrains/battleterrain25.bin"
-BattleTerrain26:    incbin "battles/terrains/battleterrain26.bin"
-BattleTerrain27:    incbin "battles/terrains/battleterrain27.bin"
-BattleTerrain28:    incbin "battles/terrains/battleterrain28.bin"
-BattleTerrain29:    incbin "battles/terrains/battleterrain29.bin"
-BattleTerrain30:    incbin "battles/terrains/battleterrain30.bin"
-BattleTerrain31:    incbin "battles/terrains/battleterrain31.bin"
-BattleTerrain33:    incbin "battles/terrains/battleterrain33.bin"
-BattleTerrain34:    incbin "battles/terrains/battleterrain34.bin"
-BattleTerrain35:    incbin "battles/terrains/battleterrain35.bin"
-BattleTerrain36:    incbin "battles/terrains/battleterrain36.bin"
-BattleTerrain37:    incbin "battles/terrains/battleterrain37.bin"
-BattleTerrain38:    incbin "battles/terrains/battleterrain38.bin"
-BattleTerrain39:    incbin "battles/terrains/battleterrain39.bin"
-BattleTerrain40:    incbin "battles/terrains/battleterrain40.bin"
-BattleTerrain41:    incbin "battles/terrains/battleterrain41.bin"
-BattleTerrain42:    incbin "battles/terrains/battleterrain42.bin"
-BattleTerrain43:    incbin "battles/terrains/battleterrain43.bin"
-BattleTerrain44:    incbin "battles/terrains/battleterrain44.bin"
+BattleTerrain00:    incbin "battles/entries/battle00/terrain.bin"
+BattleTerrain01:    incbin "battles/entries/battle01/terrain.bin"
+BattleTerrain02:    incbin "battles/entries/battle02/terrain.bin"
+BattleTerrain03:    incbin "battles/entries/battle03/terrain.bin"
+BattleTerrain05:    incbin "battles/entries/battle05/terrain.bin"
+BattleTerrain06:    incbin "battles/entries/battle06/terrain.bin"
+BattleTerrain07:    incbin "battles/entries/battle07/terrain.bin"
+BattleTerrain08:    incbin "battles/entries/battle08/terrain.bin"
+BattleTerrain09:    incbin "battles/entries/battle09/terrain.bin"
+BattleTerrain10:    incbin "battles/entries/battle10/terrain.bin"
+BattleTerrain11:    incbin "battles/entries/battle11/terrain.bin"
+BattleTerrain12:    incbin "battles/entries/battle12/terrain.bin"
+BattleTerrain13:    incbin "battles/entries/battle13/terrain.bin"
+BattleTerrain14:    incbin "battles/entries/battle14/terrain.bin"
+BattleTerrain15:    incbin "battles/entries/battle15/terrain.bin"
+BattleTerrain16:    incbin "battles/entries/battle16/terrain.bin"
+BattleTerrain17:    incbin "battles/entries/battle17/terrain.bin"
+BattleTerrain18:    incbin "battles/entries/battle18/terrain.bin"
+BattleTerrain19:    incbin "battles/entries/battle19/terrain.bin"
+BattleTerrain20:    incbin "battles/entries/battle20/terrain.bin"
+BattleTerrain21:    incbin "battles/entries/battle21/terrain.bin"
+BattleTerrain22:    incbin "battles/entries/battle22/terrain.bin"
+BattleTerrain23:    incbin "battles/entries/battle23/terrain.bin"
+BattleTerrain24:    incbin "battles/entries/battle24/terrain.bin"
+BattleTerrain25:    incbin "battles/entries/battle25/terrain.bin"
+BattleTerrain26:    incbin "battles/entries/battle26/terrain.bin"
+BattleTerrain27:    incbin "battles/entries/battle27/terrain.bin"
+BattleTerrain28:    incbin "battles/entries/battle28/terrain.bin"
+BattleTerrain29:    incbin "battles/entries/battle29/terrain.bin"
+BattleTerrain30:    incbin "battles/entries/battle30/terrain.bin"
+BattleTerrain31:    incbin "battles/entries/battle31/terrain.bin"
+BattleTerrain33:    incbin "battles/entries/battle33/terrain.bin"
+BattleTerrain34:    incbin "battles/entries/battle34/terrain.bin"
+BattleTerrain35:    incbin "battles/entries/battle35/terrain.bin"
+BattleTerrain36:    incbin "battles/entries/battle36/terrain.bin"
+BattleTerrain37:    incbin "battles/entries/battle37/terrain.bin"
+BattleTerrain38:    incbin "battles/entries/battle38/terrain.bin"
+BattleTerrain39:    incbin "battles/entries/battle39/terrain.bin"
+BattleTerrain40:    incbin "battles/entries/battle40/terrain.bin"
+BattleTerrain41:    incbin "battles/entries/battle41/terrain.bin"
+BattleTerrain42:    incbin "battles/entries/battle42/terrain.bin"
+BattleTerrain43:    incbin "battles/entries/battle43/terrain.bin"
+BattleTerrain44:    incbin "battles/entries/battle44/terrain.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2263,7 +2263,7 @@ sub_1B120A:
 										jsr     j_RemoveItemFromCaravan
 										moveq   #0,d0
 										jsr     j_JoinForce
-										move.b  #0,((RAM_CurrentBattleIdx-$1000000)).w
+										move.b  #0,((CURRENT_BATTLE-$1000000)).w
 										jsr     sub_1AC010      ; init some enemy list ?
 										bsr.w   InitAllForceBattlePositions
 										bsr.w   InitAllEnemyBattlePositions
@@ -2272,7 +2272,7 @@ sub_1B120A:
 										jsr     j_SetXPos
 										move.w  #$AAAA,d1
 										bsr.w   UpdateEnemyStatsForRespawn
-										bsr.w   getEnemyAITargetPos
+										bsr.w   GetEnemyAITargetPos
 loc_1B126E:
 										
 										bra.s   loc_1B126E
@@ -2299,7 +2299,7 @@ loc_1B127E:
 										move.w  ((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w,d6
 										subq.w  #1,d6
 										moveq   #0,d1
-										bsr.w   getAddrOfBattleDataSection
+										bsr.w   GetAddrOfBattleDataSection
 										clr.w   d7
 										move.b  (a0),d7
 										subq.w  #1,d7
@@ -2361,7 +2361,7 @@ loc_1B12FC:
 InitEnemyBattlePosition:
 										
 										movem.l d0-a6,-(sp)
-										lea     ((RAM_CurrentBattleIdx-$1000000)).w,a0
+										lea     ((CURRENT_BATTLE-$1000000)).w,a0
 										move.b  (a0),d1
 										cmpi.b  #$20,d1 
 										bne.s   loc_1B132E
@@ -2374,7 +2374,7 @@ InitEnemyBattlePosition:
 loc_1B132E:
 										
 										moveq   #2,d1
-										bsr.w   getAddrOfBattleDataSection
+										bsr.w   GetAddrOfBattleDataSection
 										move.w  d1,d2
 										bset    #7,d2
 										clr.w   d1
@@ -2423,7 +2423,7 @@ UpdateEnemyStatsForRespawn:
 										movem.l d0-a6,-(sp)
 										move.w  d1,d2
 										moveq   #2,d1
-										bsr.w   getAddrOfBattleDataSection
+										bsr.w   GetAddrOfBattleDataSection
 										bset    #7,d1
 										cmp.b   d1,d0
 										bcc.w   loc_1B13E8
@@ -2513,7 +2513,7 @@ loc_1B142C:
 										andi.w  #$FFF,d1
 										or.w    d2,d1
 										jsr     j_SetCharacterWord34
-										bsr.w   setEnemyBaseATK 
+										bsr.w   SetEnemyBaseATK 
 										jsr     j_ApplyStatusAndItemsOnStats
 										movem.l (sp)+,d0-a1
 										rts
@@ -2533,7 +2533,7 @@ loc_1B14E2:
 										clr.l   (a1)+
 										dbf     d1,loc_1B14E2
 										moveq   #2,d1
-										bsr.w   getAddrOfBattleDataSection
+										bsr.w   GetAddrOfBattleDataSection
 										subq.w  #1,d1
 										lea     ((byte_FFB6A2-$1000000)).w,a1
 loc_1B14F4:
@@ -2638,7 +2638,7 @@ loc_1B15A4:
 
 ; sets Enemy ATK according to difficulty
 
-setEnemyBaseATK:
+SetEnemyBaseATK:
 										
 										move.l  d1,-(sp)
 										jsr     j_GetDifficulty
@@ -2668,14 +2668,14 @@ loc_1B15F4:
 										move.l  (sp)+,d1
 										rts
 
-	; End of function setEnemyBaseATK
+	; End of function SetEnemyBaseATK
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; coords of anchor point used in AI byte D0 -> D1, D2
 
-getEnemyAITargetPos:
+GetEnemyAITargetPos:
 										
 										movem.l d0/a0,-(sp)
 										btst    #6,d0
@@ -2687,7 +2687,7 @@ getEnemyAITargetPos:
 loc_1B1612:
 										
 										moveq   #4,d1
-										bsr.w   getAddrOfBattleDataSection
+										bsr.w   GetAddrOfBattleDataSection
 										andi.w  #$F,d0
 										add.w   d0,d0
 										adda.w  d0,a0
@@ -2700,7 +2700,7 @@ loc_1B162A:
 										movem.l (sp)+,d0/a0
 										rts
 
-	; End of function getEnemyAITargetPos
+	; End of function GetEnemyAITargetPos
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2709,13 +2709,13 @@ loc_1B162A:
 ;       
 ;                     if D1 = 2, size of monster list -> D1
 
-getAddrOfBattleDataSection:
+GetAddrOfBattleDataSection:
 										
 										movem.l d0/d2/a1,-(sp)
 										move.b  d1,d2
 										clr.w   d1
 										clr.w   d0
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d0
 										lsl.w   #2,d0
 										lea     pt_BattleSpriteSets(pc), a0
 										nop
@@ -2751,7 +2751,7 @@ loc_1B1698:
 										movem.l (sp)+,d0/d2/a1
 										rts
 
-	; End of function getAddrOfBattleDataSection
+	; End of function GetAddrOfBattleDataSection
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2764,7 +2764,7 @@ GetMonsterStartPos:
 										btst    #7,d0
 										bne.s   loc_1B16CA
 										move.w  #1,d1
-										bsr.s   getAddrOfBattleDataSection
+										bsr.s   GetAddrOfBattleDataSection
 										cmp.b   d0,d1
 										bge.s   loc_1B16BE
 										move.w  #$FFFF,d1
@@ -2779,7 +2779,7 @@ loc_1B16BE:
 loc_1B16CA:
 										
 										move.w  #2,d1
-										bsr.w   getAddrOfBattleDataSection
+										bsr.w   GetAddrOfBattleDataSection
 										cmp.b   d0,d1
 										bge.s   loc_1B16E2
 										move.w  #$FFFF,d1
@@ -2812,7 +2812,7 @@ sub_1B16FE:
 										move.w  d2,d7
 										move.w  d1,d6
 										move.w  #2,d1
-										bsr.w   getAddrOfBattleDataSection
+										bsr.w   GetAddrOfBattleDataSection
 										move.w  d1,d5
 										subi.w  #1,d5
 										move.w  #$80,d0 
@@ -2864,7 +2864,7 @@ DoesBattleUpgrade:
 										
 										movem.l d0/d2-a6,-(sp)
 										clr.w   d1              ; clear d1 for "false"
-										lea     ((RAM_CurrentBattleIdx-$1000000)).w,a0
+										lea     ((CURRENT_BATTLE-$1000000)).w,a0
 																						; point to battle index in RAM
 										clr.w   d7
 										move.b  (a0),d7         ; d7 contains battle index
@@ -2902,7 +2902,7 @@ loc_1B17B6:
 sub_1B17BC:
 										
 										movem.l d0-a6,-(sp)
-										lea     ((RAM_CurrentBattleIdx-$1000000)).w,a0
+										lea     ((CURRENT_BATTLE-$1000000)).w,a0
 										move.b  (a0),d7
 										lea     SpecialBattles(pc), a1
 										nop
@@ -2938,7 +2938,7 @@ loc_1B17F8:
 ShouldBattleUpgrade:
 										
 										movem.l d0/d2-a6,-(sp)
-										lea     ((RAM_CurrentBattleIdx-$1000000)).w,a0
+										lea     ((CURRENT_BATTLE-$1000000)).w,a0
 										move.b  (a0),d7
 										lea     SpecialBattles(pc), a1
 										nop
@@ -3101,7 +3101,7 @@ loc_1B193C:
 										addi.w  #$14,d2
 loc_1B195C:
 										
-										lea     ((RAM_CurrentBattleIdx-$1000000)).w,a1
+										lea     ((CURRENT_BATTLE-$1000000)).w,a1
 										clr.w   d1
 										move.b  (a1),d1
 										sub.w   d1,d2
@@ -3290,51 +3290,51 @@ pt_BattleSpriteSets:dc.l BattleSpriteSet00  ; battle entity data
 										dc.l BattleSpriteSet42
 										dc.l BattleSpriteSet43
 										dc.l BattleSpriteSet44
-BattleSpriteSet00:  incbin "battles/spritesets/battlespriteset00.bin"
-BattleSpriteSet01:  incbin "battles/spritesets/battlespriteset01.bin"
-BattleSpriteSet02:  incbin "battles/spritesets/battlespriteset02.bin"
-BattleSpriteSet03:  incbin "battles/spritesets/battlespriteset03.bin"
-BattleSpriteSet04:  incbin "battles/spritesets/battlespriteset04.bin"
-BattleSpriteSet05:  incbin "battles/spritesets/battlespriteset05.bin"
-BattleSpriteSet06:  incbin "battles/spritesets/battlespriteset06.bin"
-BattleSpriteSet07:  incbin "battles/spritesets/battlespriteset07.bin"
-BattleSpriteSet08:  incbin "battles/spritesets/battlespriteset08.bin"
-BattleSpriteSet09:  incbin "battles/spritesets/battlespriteset09.bin"
-BattleSpriteSet10:  incbin "battles/spritesets/battlespriteset10.bin"
-BattleSpriteSet11:  incbin "battles/spritesets/battlespriteset11.bin"
-BattleSpriteSet12:  incbin "battles/spritesets/battlespriteset12.bin"
-BattleSpriteSet13:  incbin "battles/spritesets/battlespriteset13.bin"
-BattleSpriteSet14:  incbin "battles/spritesets/battlespriteset14.bin"
-BattleSpriteSet15:  incbin "battles/spritesets/battlespriteset15.bin"
-BattleSpriteSet16:  incbin "battles/spritesets/battlespriteset16.bin"
-BattleSpriteSet17:  incbin "battles/spritesets/battlespriteset17.bin"
-BattleSpriteSet18:  incbin "battles/spritesets/battlespriteset18.bin"
-BattleSpriteSet19:  incbin "battles/spritesets/battlespriteset19.bin"
-BattleSpriteSet20:  incbin "battles/spritesets/battlespriteset20.bin"
-BattleSpriteSet21:  incbin "battles/spritesets/battlespriteset21.bin"
-BattleSpriteSet22:  incbin "battles/spritesets/battlespriteset22.bin"
-BattleSpriteSet23:  incbin "battles/spritesets/battlespriteset23.bin"
-BattleSpriteSet24:  incbin "battles/spritesets/battlespriteset24.bin"
-BattleSpriteSet25:  incbin "battles/spritesets/battlespriteset25.bin"
-BattleSpriteSet26:  incbin "battles/spritesets/battlespriteset26.bin"
-BattleSpriteSet27:  incbin "battles/spritesets/battlespriteset27.bin"
-BattleSpriteSet28:  incbin "battles/spritesets/battlespriteset28.bin"
-BattleSpriteSet29:  incbin "battles/spritesets/battlespriteset29.bin"
-BattleSpriteSet30:  incbin "battles/spritesets/battlespriteset30.bin"
-BattleSpriteSet31:  incbin "battles/spritesets/battlespriteset31.bin"
-BattleSpriteSet32:  incbin "battles/spritesets/battlespriteset32.bin"
-BattleSpriteSet33:  incbin "battles/spritesets/battlespriteset33.bin"
-BattleSpriteSet34:  incbin "battles/spritesets/battlespriteset34.bin"
-BattleSpriteSet35:  incbin "battles/spritesets/battlespriteset35.bin"
-BattleSpriteSet36:  incbin "battles/spritesets/battlespriteset36.bin"
-BattleSpriteSet37:  incbin "battles/spritesets/battlespriteset37.bin"
-BattleSpriteSet38:  incbin "battles/spritesets/battlespriteset38.bin"
-BattleSpriteSet39:  incbin "battles/spritesets/battlespriteset39.bin"
-BattleSpriteSet40:  incbin "battles/spritesets/battlespriteset40.bin"
-BattleSpriteSet41:  incbin "battles/spritesets/battlespriteset41.bin"
-BattleSpriteSet42:  incbin "battles/spritesets/battlespriteset42.bin"
-BattleSpriteSet43:  incbin "battles/spritesets/battlespriteset43.bin"
-BattleSpriteSet44:  incbin "battles/spritesets/battlespriteset44.bin"
+BattleSpriteSet00:  incbin "battles/entries/battle00/spriteset.bin"
+BattleSpriteSet01:  incbin "battles/entries/battle01/spriteset.bin"
+BattleSpriteSet02:  incbin "battles/entries/battle02/spriteset.bin"
+BattleSpriteSet03:  incbin "battles/entries/battle03/spriteset.bin"
+BattleSpriteSet04:  incbin "battles/entries/battle04/spriteset.bin"
+BattleSpriteSet05:  incbin "battles/entries/battle05/spriteset.bin"
+BattleSpriteSet06:  incbin "battles/entries/battle06/spriteset.bin"
+BattleSpriteSet07:  incbin "battles/entries/battle07/spriteset.bin"
+BattleSpriteSet08:  incbin "battles/entries/battle08/spriteset.bin"
+BattleSpriteSet09:  incbin "battles/entries/battle09/spriteset.bin"
+BattleSpriteSet10:  incbin "battles/entries/battle10/spriteset.bin"
+BattleSpriteSet11:  incbin "battles/entries/battle11/spriteset.bin"
+BattleSpriteSet12:  incbin "battles/entries/battle12/spriteset.bin"
+BattleSpriteSet13:  incbin "battles/entries/battle13/spriteset.bin"
+BattleSpriteSet14:  incbin "battles/entries/battle14/spriteset.bin"
+BattleSpriteSet15:  incbin "battles/entries/battle15/spriteset.bin"
+BattleSpriteSet16:  incbin "battles/entries/battle16/spriteset.bin"
+BattleSpriteSet17:  incbin "battles/entries/battle17/spriteset.bin"
+BattleSpriteSet18:  incbin "battles/entries/battle18/spriteset.bin"
+BattleSpriteSet19:  incbin "battles/entries/battle19/spriteset.bin"
+BattleSpriteSet20:  incbin "battles/entries/battle20/spriteset.bin"
+BattleSpriteSet21:  incbin "battles/entries/battle21/spriteset.bin"
+BattleSpriteSet22:  incbin "battles/entries/battle22/spriteset.bin"
+BattleSpriteSet23:  incbin "battles/entries/battle23/spriteset.bin"
+BattleSpriteSet24:  incbin "battles/entries/battle24/spriteset.bin"
+BattleSpriteSet25:  incbin "battles/entries/battle25/spriteset.bin"
+BattleSpriteSet26:  incbin "battles/entries/battle26/spriteset.bin"
+BattleSpriteSet27:  incbin "battles/entries/battle27/spriteset.bin"
+BattleSpriteSet28:  incbin "battles/entries/battle28/spriteset.bin"
+BattleSpriteSet29:  incbin "battles/entries/battle29/spriteset.bin"
+BattleSpriteSet30:  incbin "battles/entries/battle30/spriteset.bin"
+BattleSpriteSet31:  incbin "battles/entries/battle31/spriteset.bin"
+BattleSpriteSet32:  incbin "battles/entries/battle32/spriteset.bin"
+BattleSpriteSet33:  incbin "battles/entries/battle33/spriteset.bin"
+BattleSpriteSet34:  incbin "battles/entries/battle34/spriteset.bin"
+BattleSpriteSet35:  incbin "battles/entries/battle35/spriteset.bin"
+BattleSpriteSet36:  incbin "battles/entries/battle36/spriteset.bin"
+BattleSpriteSet37:  incbin "battles/entries/battle37/spriteset.bin"
+BattleSpriteSet38:  incbin "battles/entries/battle38/spriteset.bin"
+BattleSpriteSet39:  incbin "battles/entries/battle39/spriteset.bin"
+BattleSpriteSet40:  incbin "battles/entries/battle40/spriteset.bin"
+BattleSpriteSet41:  incbin "battles/entries/battle41/spriteset.bin"
+BattleSpriteSet42:  incbin "battles/entries/battle42/spriteset.bin"
+BattleSpriteSet43:  incbin "battles/entries/battle43/spriteset.bin"
+BattleSpriteSet44:  incbin "battles/entries/battle44/spriteset.bin"
 SpecialBattles:     incbin "battles/specialbattles.bin"
 unk_1B6DBC:         dc.b   5
 										dc.b   0
@@ -3366,6 +3366,6 @@ unk_1B6DD5:         dc.b   2
 										dc.b $54 
 										dc.b   1
 										dc.b $50 
-plt_endKiss:        incbin "graphics/specialscreens/endingkisspalette.bin"
-endKissPicture:     incbin "graphics/specialscreens/endingkisstiles.bin"
+plt_EndKiss:        incbin "graphics/specialscreens/endingkisspalette.bin"
+EndKissPicture:     incbin "graphics/specialscreens/endingkisstiles.bin"
 										align $4000

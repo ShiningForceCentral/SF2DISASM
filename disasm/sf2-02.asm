@@ -766,11 +766,11 @@ j_DecreaseCurrentAGI:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_getClassName:
+j_GetClassName:
 										
-										jmp     getClassName(pc)
+										jmp     GetClassName(pc)
 
-	; End of function j_getClassName
+	; End of function j_GetClassName
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -991,20 +991,20 @@ j_GetEquippableRings:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_isWeaponOrRingEquippable:
+j_IsWeaponOrRingEquippable:
 										
-										jmp     isWeaponOrRingEquippable(pc)
+										jmp     IsWeaponOrRingEquippable(pc)
 
-	; End of function j_isWeaponOrRingEquippable
+	; End of function j_IsWeaponOrRingEquippable
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_getWeaponNewATKandDEF:
+j_GetWeaponNewATKandDEF:
 										
-										jmp     getWeaponNewATKandDEF(pc)
+										jmp     GetWeaponNewATKandDEF(pc)
 
-	; End of function j_getWeaponNewATKandDEF
+	; End of function j_GetWeaponNewATKandDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1018,29 +1018,29 @@ j_OrderItems:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_isItemCursed:
+j_IsItemCursed:
 										
-										jmp     isItemCursed(pc)
+										jmp     IsItemCursed(pc)
 
-	; End of function j_isItemCursed
+	; End of function j_IsItemCursed
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_isItemUsableInBattle:
+j_IsItemUsableInBattle:
 										
-										jmp     isItemUsableInBattle(pc)
+										jmp     IsItemUsableInBattle(pc)
 
-	; End of function j_isItemUsableInBattle
+	; End of function j_IsItemUsableInBattle
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_isItemUsableWeaponInBattle:
+j_IsItemUsableWeaponInBattle:
 										
-										jmp     isItemUsableWeaponInBattle(pc)
+										jmp     IsItemUsableWeaponInBattle(pc)
 
-	; End of function j_isItemUsableWeaponInBattle
+	; End of function j_IsItemUsableWeaponInBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1054,10 +1054,11 @@ j_UnequipAllItemsIfNotCursed:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_81D0:
-										jmp     sub_9146(pc)
+j_sub_9146:
+										
+										jmp     j_sub_9146_0(pc)
 
-	; End of function sub_81D0
+	; End of function j_sub_9146
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1098,11 +1099,11 @@ j_GetSpellAndNumberOfSpells:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_getSpellCost:
+j_GetSpellCost:
 										
-										jmp     getSpellCost(pc)
+										jmp     GetSpellCost(pc)
 
-	; End of function j_getSpellCost
+	; End of function j_GetSpellCost
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1127,7 +1128,7 @@ j_GetCharacterRAMAddress_0:
 
 j_GetDistanceBetweenEntities:
 										
-										jmp     getDistanceBetweenEntities(pc)
+										jmp     GetDistanceBetweenEntities(pc)
 
 	; End of function j_GetDistanceBetweenEntities
 
@@ -1197,19 +1198,20 @@ j_WriteSkirmishScript:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8210:
-										jmp     sub_C404(pc)
+j_sub_C404:
+										
+										jmp     j_sub_C404_0(pc)
 
-	; End of function sub_8210
+	; End of function j_sub_C404
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_createSpellRangeGrid:
+j_CreateSpellRangeGrid:
 										
-										jmp     createSpellRangeGrid(pc)
+										jmp     CreateSpellRangeGrid(pc)
 
-	; End of function j_createSpellRangeGrid
+	; End of function j_CreateSpellRangeGrid
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1223,43 +1225,47 @@ j_CreateItemRangeGrid:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_821C:
-										jmp     sub_C4E8(pc)
-
-	; End of function sub_821C
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_8220:
-										jmp     sub_C5D6(pc)
-
-	; End of function sub_8220
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_8224:
-										jmp     sub_C5FA(pc)
-
-	; End of function sub_8224
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_createTargetGridFromSpell:
+j_sub_C4E8:
 										
-										jmp     createTargetGridFromSpell(pc)
+										jmp     j_sub_C4E8_0(pc)
 
-	; End of function j_createTargetGridFromSpell
+	; End of function j_sub_C4E8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_822C:
-										jmp     loc_C62E(pc)
+j_sub_C5D6:
+										
+										jmp     j_sub_C5D6_0(pc)
 
-	; End of function sub_822C
+	; End of function j_sub_C5D6
+
+
+; =============== S U B R O U T I N E =======================================
+
+j_sub_C5FA:
+										
+										jmp     j_sub_C5FA_0(pc)
+
+	; End of function j_sub_C5FA
+
+
+; =============== S U B R O U T I N E =======================================
+
+j_CreateTargetGridFromSpell:
+										
+										jmp     CreateTargetGridFromSpell(pc)
+
+	; End of function j_CreateTargetGridFromSpell
+
+
+; =============== S U B R O U T I N E =======================================
+
+j_CreateTargetGrid:
+										
+										jmp     CreateTargetGrid(pc)
+
+	; End of function j_CreateTargetGrid
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1318,38 +1324,38 @@ j_UpdateTargetListMonsters:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_convertCoordToOffset:
+j_ConvertCoordToOffset:
 										
-										jmp     convertCoordToOffset(pc)
+										jmp     ConvertCoordToOffset(pc)
 
-	; End of function j_convertCoordToOffset
+	; End of function j_ConvertCoordToOffset
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_clearMovableGrid:
+j_ClearMovableGrid:
 										
 										jmp     ClearMovableGrid(pc)
 
-	; End of function j_clearMovableGrid
+	; End of function j_ClearMovableGrid
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_clearTargetGrid:
+j_ClearTargetGrid:
 										
 										jmp     ClearTargetGrid(pc)
 
-	; End of function j_clearTargetGrid
+	; End of function j_ClearTargetGrid
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetUnitID:
+j_GetTargetAtCoordOffset:
 										
-										jmp     getTargetAtCoordOffset(pc)
+										jmp     GetTargetAtCoordOffset(pc)
 
-	; End of function j_GetUnitID
+	; End of function j_GetTargetAtCoordOffset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1372,11 +1378,11 @@ j_GetCurrentTerrainType:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_setMovableAtCoord:
+j_SetMovableAtCoord:
 										
-										jmp     setMovableAtCoord(pc)
+										jmp     SetMovableAtCoord(pc)
 
-	; End of function j_setMovableAtCoord
+	; End of function j_SetMovableAtCoord
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1522,10 +1528,11 @@ j_AddAllToStack:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82A0:
-										jmp     sub_DEFC(pc)    
+j_sub_DEFC:
+										
+										jmp     j_sub_DEFC_0(pc)
 
-	; End of function sub_82A0
+	; End of function j_sub_DEFC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1557,20 +1564,20 @@ MakeBattleEntityCancelMoveString:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetTerrainType:
+j_GetTerrain:
 										
-										jmp     getTerrainAtCoordOffset(pc)
+										jmp     GetTerrain(pc)  
 
-	; End of function j_GetTerrainType
+	; End of function j_GetTerrain
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_setTerrain:
+j_SetTerrain:
 										
-										jmp     setTerrain(pc)
+										jmp     SetTerrain(pc)
 
-	; End of function j_setTerrain
+	; End of function j_SetTerrain
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2056,7 +2063,7 @@ GetSomethingClassType:
 										bne.s   loc_8536
 										moveq   #0,d1
 										bsr.w   GetClass
-										move.b  tbl_classTypes(pc,d1.w),d1
+										move.b  ClassTypes(pc,d1.w),d1
 										mulu.w  #$1E,d1
 										add.w   d0,d1
 										bset    #$F,d1
@@ -2069,38 +2076,8 @@ return_8538:
 
 	; End of function GetSomethingClassType
 
-tbl_classTypes:     dc.b   0                ; 0,1,2 = base class, promoted class, special promoted class
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b   1
-										dc.b   2
-										dc.b   1
-										dc.b   2
-										dc.b   1
-										dc.b   2
-										dc.b   1
-										dc.b   2
-										dc.b   1
-										dc.b   2
-										dc.b   1
-										dc.b   1
-										dc.b   1
-										dc.b   1
-										dc.b   1
-										dc.b   1
-										dc.b   1
-										dc.b   1
-										dc.b $FF
+ClassTypes:         incbin "data/classes/classtypes.bin"
+																						; 0,1,2 = base class, promoted class, special promoted class
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2867,11 +2844,11 @@ DecreaseCurrentMOV:
 
 ; =============== S U B R O U T I N E =======================================
 
-getClassName:
+GetClassName:
 										
 										movea.l (p_ClassNames).l,a0
 
-	; End of function getClassName
+	; End of function GetClassName
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2902,7 +2879,7 @@ loc_8986:
 ; =============== S U B R O U T I N E =======================================
 
 SetGold:
-										move.l  d1,((RAM_Gold-$1000000)).w
+										move.l  d1,((CURRENT_GOLD-$1000000)).w
 																						; puts d1's value at F600 in RAM
 										rts
 
@@ -2912,7 +2889,7 @@ SetGold:
 ; =============== S U B R O U T I N E =======================================
 
 GetGold:
-										move.l  ((RAM_Gold-$1000000)).w,d1
+										move.l  ((CURRENT_GOLD-$1000000)).w,d1
 										rts
 
 	; End of function GetGold
@@ -2922,14 +2899,14 @@ GetGold:
 
 IncreaseGold:
 										
-										add.l   ((RAM_Gold-$1000000)).w,d1
+										add.l   ((CURRENT_GOLD-$1000000)).w,d1
 										bcs.s   loc_89A8
 										cmpi.l  #FORCE_MAX_GOLD,d1
 										bls.s   loc_89AE
 loc_89A8:
 										move.l  #FORCE_MAX_GOLD,d1
 loc_89AE:
-										move.l  d1,((RAM_Gold-$1000000)).w
+										move.l  d1,((CURRENT_GOLD-$1000000)).w
 										rts
 
 	; End of function IncreaseGold
@@ -2940,12 +2917,12 @@ loc_89AE:
 DecreaseGold:
 										
 										movem.l d0,-(sp)
-										move.l  ((RAM_Gold-$1000000)).w,d0
+										move.l  ((CURRENT_GOLD-$1000000)).w,d0
 										sub.l   d1,d0
 										bcc.s   loc_89C2
 										moveq   #0,d0
 loc_89C2:
-										move.l  d0,((RAM_Gold-$1000000)).w
+										move.l  d0,((CURRENT_GOLD-$1000000)).w
 										move.l  d0,d1
 										movem.l (sp)+,d0
 										rts
@@ -3760,7 +3737,7 @@ loc_8F38:
 										cmpi.w  #ITEMIDX_NOTHING,d1
 																						; skip if empty slot
 										beq.s   loc_8F4E
-										bsr.s   isItemEquippable
+										bsr.s   IsItemEquippable
 										bcc.s   loc_8F4E
 										move.w  d1,(a2)+
 										move.w  d4,(a2)+
@@ -3782,7 +3759,7 @@ loc_8F4E:
 ;     D2 = item type bitmask (for ANDing the item type bitfield)
 ;     D3 = class equip bitmask (for ANDing the item equip bitfield)
 
-isItemEquippable:
+IsItemEquippable:
 										
 										movem.l a0,-(sp)
 										bsr.w   GetItemDefAddress
@@ -3797,12 +3774,12 @@ loc_8F7A:
 										movem.l (sp)+,a0
 										rts
 
-	; End of function isItemEquippable
+	; End of function IsItemEquippable
 
 
 ; =============== S U B R O U T I N E =======================================
 
-isWeaponOrRingEquippable:
+IsWeaponOrRingEquippable:
 										
 										movem.l d0/d2-d6/a0,-(sp)
 										move.w  #ITEMTYPE_MASK_WEAPONORRING,d2
@@ -3810,16 +3787,16 @@ isWeaponOrRingEquippable:
 										move.b  CHAR_OFFSET_CLASS_IDX(a0),d0
 										moveq   #1,d3
 										lsl.l   d0,d3
-										bsr.s   isItemEquippable
+										bsr.s   IsItemEquippable
 										movem.l (sp)+,d0/d2-d6/a0
 										rts
 
-	; End of function isWeaponOrRingEquippable
+	; End of function IsWeaponOrRingEquippable
 
 
 ; =============== S U B R O U T I N E =======================================
 
-getWeaponNewATKandDEF:
+GetWeaponNewATKandDEF:
 										
 										movem.l d0/d4-d6/a0,-(sp)
 loc_8FA0:
@@ -3836,7 +3813,7 @@ loc_8FA0:
 										move.b  CHAR_OFFSET_CLASS_IDX(a0),d0
 										moveq   #1,d3
 										lsl.l   d0,d3
-										bsr.s   isItemEquippable
+										bsr.s   IsItemEquippable
 										movem.w (sp)+,d0/d2-d3
 										bcc.w   loc_8FE8
 										movem.l d1/a0,-(sp)
@@ -3851,7 +3828,7 @@ loc_8FE8:
 										movem.l (sp)+,d0/d4-d6/a0
 										rts
 
-	; End of function getWeaponNewATKandDEF
+	; End of function GetWeaponNewATKandDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3949,7 +3926,7 @@ loc_90A2:
 
 ; =============== S U B R O U T I N E =======================================
 
-isItemCursed:
+IsItemCursed:
 										
 										move.l  a0,-(sp)
 										bsr.w   GetItemDefAddress
@@ -3963,14 +3940,14 @@ loc_90C8:
 										movea.l (sp)+,a0
 										rts
 
-	; End of function isItemCursed
+	; End of function IsItemCursed
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; carry set : YES
 
-isItemUsableInBattle:
+IsItemUsableInBattle:
 										
 										move.l  a0,-(sp)
 										bsr.w   GetItemDefAddress
@@ -3986,22 +3963,22 @@ loc_90E2:
 										movea.l (sp)+,a0
 										rts
 
-	; End of function isItemUsableInBattle
+	; End of function IsItemUsableInBattle
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; carry set : NO
 
-isItemUsableWeaponInBattle:
+IsItemUsableWeaponInBattle:
 										
 										move.l  a0,-(sp)
 										bsr.w   GetItemType     
 										tst.w   d2
 										beq.s   loc_90FA
-										bsr.w   isWeaponOrRingEquippable
+										bsr.w   IsWeaponOrRingEquippable
 										bcc.s   loc_9100
-										bsr.s   isItemUsableInBattle
+										bsr.s   IsItemUsableInBattle
 										bcc.s   loc_9100
 loc_90FA:
 										ori     #1,ccr
@@ -4012,7 +3989,7 @@ loc_9102:
 										movea.l (sp)+,a0
 										rts
 
-	; End of function isItemUsableWeaponInBattle
+	; End of function IsItemUsableWeaponInBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4047,7 +4024,8 @@ loc_9138:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9146:
+j_sub_9146_0:
+										
 										movem.l d2-d3/d6-a0,-(sp)
 										move.w  d1,d3
 										bsr.w   UpdateForce     
@@ -4080,7 +4058,7 @@ loc_918E:
 										movem.l (sp)+,d2-d3/d6-a0
 										rts
 
-	; End of function sub_9146
+	; End of function j_sub_9146_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4243,7 +4221,7 @@ loc_9278:
 ;     In: D1 = spell index
 ;     Out: D1 = spell MP cost
 
-getSpellCost:
+GetSpellCost:
 										
 										move.l  a0,-(sp)
 										bsr.w   GetSpellDefAddress
@@ -4252,7 +4230,7 @@ getSpellCost:
 										movea.l (sp)+,a0
 										rts
 
-	; End of function getSpellCost
+	; End of function GetSpellCost
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4286,8 +4264,8 @@ loc_92C2:
 										movem.w (sp)+,d0-d1
 										move.l  #'CNUM',(ERRCODE_BYTE0).l
 										move.l  (sp),(ERRCODE_BYTE4).l
-										trap    #9
-										dc.w 3
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w TRAP_CLEARFLAG
 										dc.l 0
 loc_92DE:
 										bra.s   loc_92DE
@@ -4562,7 +4540,7 @@ loc_9416:
 ;     D1 = to entity
 ; Out: D2 = distance
 
-getDistanceBetweenEntities:
+GetDistanceBetweenEntities:
 										
 										movem.l d0-d1/d3-d5,-(sp)
 										move.w  d1,d5           ; d0 and d1 are character indexes
@@ -4603,7 +4581,7 @@ loc_947C:
 										movem.l (sp)+,d0-d1/d3-d5
 										rts
 
-	; End of function getDistanceBetweenEntities
+	; End of function GetDistanceBetweenEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4906,7 +4884,7 @@ loc_972E:
 
 NewGame:
 										movem.w d0-d1/d7,-(sp)
-										bsr.w   initGameSettings
+										bsr.w   InitGameSettings
 										moveq   #COM_ALLIES_COUNTER,d7
 loc_9740:
 										moveq   #COM_ALLIES_COUNTER,d0
@@ -5031,7 +5009,7 @@ Promote:
 
 ; Clear all flags and important game variables.
 
-initGameSettings:
+InitGameSettings:
 										
 										movem.l d0/d7-a0,-(sp)
 										moveq   #0,d0
@@ -5053,10 +5031,10 @@ loc_986E:
 										dbf     d7,loc_986E
 										moveq   #0,d0
 										move.w  d0,((NUM_ITEMS_IN_CARAVAN-$1000000)).w
-										move.w  d0,((RAM_Gold-$1000000)).w
+										move.w  d0,((CURRENT_GOLD-$1000000)).w
 										move.b  d0,((PLAYER_TYPE-$1000000)).w
-										move.b  d0,((RAM_CurrentMapIdx-$1000000)).w
-										move.b  d0,((RAM_CurrentBattleIdx-$1000000)).w
+										move.b  d0,((CURRENT_MAP-$1000000)).w
+										move.b  d0,((CURRENT_BATTLE-$1000000)).w
 										move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
 										move.b  d0,((RAM_EgressMapIdx-$1000000)).w
 										move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
@@ -5066,7 +5044,7 @@ loc_986E:
 										movem.l (sp)+,d0/d7-a0
 										rts
 
-	; End of function initGameSettings
+	; End of function InitGameSettings
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5451,13 +5429,13 @@ loc_9B06:
 										move.w  d0,(a0)+
 										bra.w   loc_9B3E
 loc_9B2C:
-										bra.w   loc_9B3E        ; ???
+										bra.w   loc_9B3E
 loc_9B30:
-										bra.w   loc_9B3E        ; explode
+										bra.w   loc_9B3E
 loc_9B34:
-										bra.w   loc_9B3E        ; do nothing
+										bra.w   loc_9B3E
 loc_9B38:
-										move.b  #$24,((RAM_CurrentBattleIdx-$1000000)).w 
+										move.b  #$24,((CURRENT_BATTLE-$1000000)).w 
 																						; use prism laser
 loc_9B3E:
 										movem.l (sp)+,d0-d3/a0
@@ -5485,20 +5463,20 @@ DebugModeSelectHits:
 										
 										movem.l d0/a0-a6,-(sp)
 loc_9B5C:
-										jsr     j_yesNoPrompt
+										jsr     j_YesNoPrompt
 										tst.w   d0
-										seq     -$17(a2)
+										seq     -BCSTACK_OFFSET_DEBUGDODGE(a2)
 loc_9B68:
-										jsr     j_yesNoPrompt
+										jsr     j_YesNoPrompt
 										tst.w   d0
 										seq     -BCSTACK_OFFSET_DEBUGCRIT(a2)
-										jsr     j_yesNoPrompt
+										jsr     j_YesNoPrompt
 										tst.w   d0
 										seq     -BCSTACK_OFFSET_DEBUGDOUBLE(a2)
 loc_9B80:
-										jsr     j_yesNoPrompt
+										jsr     j_YesNoPrompt
 										tst.w   d0
-										seq     -$14(a2)
+										seq     -BCSTACK_OFFSET_DEBUGCOUNTER(a2)
 										movem.l (sp)+,d0/a0-a6
 										rts
 
@@ -5512,17 +5490,17 @@ loc_9B80:
 WriteSkirmishScript:
 										
 										movem.l d0-a6,-(sp)
-										link    a2,#BTLSCENE_STACKNEGSIZE
+										link    a2,#-$98
 										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a3
 										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a4
 										lea     ((RAM_CharIdxList-$1000000)).w,a5
 										lea     (RAM_Start).l,a6; beginning of battle scene command list
-										move.b  #0,-$17(a2)
+										move.b  #0,-BCSTACK_OFFSET_DEBUGDODGE(a2)
 										move.b  #0,-BCSTACK_OFFSET_DEBUGCRIT(a2)
 loc_9BB8:
 										move.b  #0,-BCSTACK_OFFSET_DEBUGDOUBLE(a2)
 loc_9BBE:
-										move.b  #0,-$14(a2)
+										move.b  #0,-BCSTACK_OFFSET_DEBUGCOUNTER(a2)
 loc_9BC4:
 										tst.b   (RAM_DebugModeActivated).l
 										beq.s   loc_9BE4
@@ -5580,8 +5558,8 @@ loc_9C5A:
 										move.w  #0,(a6)+
 										bra.w   loc_9DC4
 loc_9C7E:
-										bsr.w   createBattleSceneText
-										bsr.w   createBattleSceneAnimation
+										bsr.w   CreateBattleSceneText
+										bsr.w   CreateBattleSceneAnimation
 										tst.b   -BCSTACK_OFFSET_SILENCED(a2)
 										beq.s   loc_9CAA
 										move.w  #$10,(a6)+
@@ -5630,8 +5608,8 @@ loc_9CE0:
 										exg     a4,a5
 										bsr.w   WriteSkirmishScript_SwitchTargets
 										exg     a4,a5
-										bsr.w   createBattleSceneText
-										bsr.w   createBattleSceneAnimation
+										bsr.w   CreateBattleSceneText
+										bsr.w   CreateBattleSceneAnimation
 										bsr.w   WriteSkirmishScript_SwitchTargets
 										bsr.w   WriteSkirmishScript_DoAction
 										bsr.w   WriteSkirmishScript_EnemyDropItem
@@ -5657,8 +5635,8 @@ loc_9D3E:
 										exg     a4,a5
 										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a5
 loc_9D84:
-										bsr.w   createBattleSceneText
-										bsr.w   createBattleSceneAnimation
+										bsr.w   CreateBattleSceneText
+										bsr.w   CreateBattleSceneAnimation
 										bsr.w   WriteSkirmishScript_SwitchTargets
 										bsr.w   WriteSkirmishScript_DoAction
 										bsr.w   WriteSkirmishScript_EnemyDropItem
@@ -5703,21 +5681,21 @@ loc_9DEA:
 										bne.s   loc_9E00
 										move.w  2(a3),d1
 										move.w  4(a3),d0
-										jsr     createTargetGridFromSpell
+										jsr     CreateTargetGridFromSpell
 										bra.s   loc_9E5A
 loc_9E00:
 										cmpi.w  #2,(a3)
 										bne.w   loc_9E18
 										move.w  2(a3),d1
 										move.w  4(a3),d0
-										jsr     sub_C5D6
+										jsr     j_sub_C5D6_0
 										bra.s   loc_9E5A
 loc_9E18:
 										cmpi.w  #4,(a3)
 										bne.w   loc_9E2E
 										move.b  (a4),d0
 										move.w  #$19,d1
-										jsr     createTargetGridFromSpell
+										jsr     CreateTargetGridFromSpell
 										bra.s   loc_9E5A
 loc_9E2E:
 										cmpi.w  #5,(a3)
@@ -5790,7 +5768,7 @@ loc_9EB2:
 CheckForTaros:
 										
 										movem.l d0-d1,-(sp)
-										cmpi.b  #BATTLEIDX_TAROS,((RAM_CurrentBattleIdx-$1000000)).w
+										cmpi.b  #BATTLEIDX_TAROS,((CURRENT_BATTLE-$1000000)).w
 										bne.w   loc_9F22
 										trap    #TRAP_CLEARFLAG
 										dc.w $70
@@ -5877,7 +5855,7 @@ loc_9F8E:
 										move.b  (a4),d0
 										move.b  (a5),d1
 loc_9F98:
-										jsr     getDistanceBetweenEntities
+										jsr     GetDistanceBetweenEntities
 										cmpi.w  #2,d2           ; check if block distance between attacker and target is >= 2
 										bcs.s   loc_9FB0
 										tst.b   -BCSTACK_OFFSET_MUDDLED(a2)
@@ -5953,7 +5931,7 @@ loc_A056:
 ; In: A3 = RAM index containing action type
 ;     A4 = RAM index containing attacker index
 
-createBattleSceneText:
+CreateBattleSceneText:
 										
 										movem.l d0-d3/a0,-(sp)
 										move.b  (a4),d0
@@ -5980,7 +5958,7 @@ loc_A09E:
 										cmpi.w  #1,(a3)
 										bne.w   loc_A150
 										move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d2
-										move.w  #$136,d1
+										move.w  #$136,d1        ; hardcoded spell text indexes !
 										cmpi.w  #$F,d2
 										beq.w   loc_A132
 										move.w  #$116,d1
@@ -6092,7 +6070,7 @@ loc_A1FA:
 										movem.l (sp)+,d0-d3/a0
 										rts
 
-	; End of function createBattleSceneText
+	; End of function CreateBattleSceneText
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6100,14 +6078,14 @@ loc_A1FA:
 ;     Loads proper battle scene sprite/magic animation properties.
 ;     In: A3 = 
 
-createBattleSceneAnimation:
+CreateBattleSceneAnimation:
 										
 										movem.l d0-d3/a0,-(sp)
 										move.b  (a4),d0
 										cmpi.w  #1,(a3)
 										bne.s   loc_A248
 										move.w  2(a3),d1
-										jsr     getSpellCost    
+										jsr     GetSpellCost    
 										move.w  d1,d2
 										neg.w   d2
 loc_A21A:
@@ -6137,7 +6115,7 @@ loc_A248:
 										bne.s   loc_A2B6
 										move.b  (a4),d0
 										jsr     GetClass
-										moveq   #$53,d5 
+										moveq   #$53,d5 ; hardcoded class-weapon association ?
 										cmpi.w  #$14,d1
 										beq.w   loc_A29C
 										moveq   #$55,d5 
@@ -6217,7 +6195,7 @@ loc_A348:
 										movem.l (sp)+,d0-d3/a0
 										rts
 
-	; End of function createBattleSceneAnimation
+	; End of function CreateBattleSceneAnimation
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6401,7 +6379,7 @@ FinalCounterAttackCheck:
 										beq.w   loc_A538
 										move.b  (a4),d0
 										move.b  (a5),d1
-										jsr     getDistanceBetweenEntities
+										jsr     GetDistanceBetweenEntities
 										move.b  (a4),d0
 										jsr     GetWeaponRange  
 										cmp.b   d3,d2
@@ -6687,7 +6665,7 @@ WriteSkirmishScript_EXPandGold:
 										move.w  ((RAM_BattleScene_EXPGain-$1000000)).w,d1
 										tst.b   -7(a2)
 										bne.w   loc_A81E
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d0
 										lea     unk_A870(pc), a0
 loc_A810:
 										cmpi.b  #$FF,(a0)
@@ -6762,7 +6740,7 @@ loc_A8A4:
 										bcc.s   loc_A8C0
 										moveq   #$A,d5
 loc_A8C0:
-										bsr.w   giveEXPandHealingCap
+										bsr.w   GiveEXPandHealingCap
 loc_A8C4:
 										movem.l (sp)+,d0-d3/a0
 										rts
@@ -6781,10 +6759,10 @@ CalculateDamageEXP:
 										jsr     GetMaxHP
 										tst.w   d1
 										beq.w   loc_A8F0
-										bsr.w   getAmountOfEXPForEncounter
+										bsr.w   GetAmountOfEXPForEncounter
 										mulu.w  d6,d5
 										divu.w  d1,d5
-										bsr.w   giveEXPandCap
+										bsr.w   GiveEXPandCap
 loc_A8F0:
 										movem.l (sp)+,d0-d3/a0
 										rts
@@ -6794,18 +6772,18 @@ loc_A8F0:
 
 ; =============== S U B R O U T I N E =======================================
 
-giveMagicDrainEXP:
+GiveMagicDrainEXP:
 										
 										movem.l d0-d3/a0,-(sp)
 										btst    #CHAR_BIT_ENEMY,(a4)
 										bne.w   loc_A908
 										moveq   #5,d5
-										bsr.w   giveEXPandCap
+										bsr.w   GiveEXPandCap
 loc_A908:
 										movem.l (sp)+,d0-d3/a0
 										rts
 
-	; End of function giveMagicDrainEXP
+	; End of function GiveMagicDrainEXP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6815,14 +6793,14 @@ GiveEXPandGoldForKill:
 										movem.l d0-d3/a0,-(sp)
 										btst    #CHAR_BIT_ENEMY,(a4)
 										bne.w   loc_A93A
-										bsr.w   getAmountOfEXPForEncounter
-										bsr.w   giveEXPandCap
+										bsr.w   GetAmountOfEXPForEncounter
+										bsr.w   GiveEXPandCap
 										move.b  (a5),d0
 										bpl.s   loc_A93A
 loc_A926:
 										jsr     GetEnemyID
 										add.w   d1,d1
-										lea     tbl_EnemyGold(pc), a0
+										lea     EnemyGold(pc), a0
 										adda.w  d1,a0
 										move.w  (a0),d0
 										add.w   d0,((RAM_BattleScene_GoldGain-$1000000)).w
@@ -6835,7 +6813,7 @@ loc_A93A:
 
 ; =============== S U B R O U T I N E =======================================
 
-giveEXPandCap:
+GiveEXPandCap:
 										
 										add.w   d5,((RAM_BattleScene_EXPGain-$1000000)).w
 										cmpi.w  #$31,((RAM_BattleScene_EXPGain-$1000000)).w 
@@ -6845,12 +6823,12 @@ return_A952:
 										
 										rts
 
-	; End of function giveEXPandCap
+	; End of function GiveEXPandCap
 
 
 ; =============== S U B R O U T I N E =======================================
 
-giveEXPandHealingCap:
+GiveEXPandHealingCap:
 										
 										add.w   d5,((RAM_BattleScene_EXPGain-$1000000)).w
 										cmpi.w  #$19,((RAM_BattleScene_EXPGain-$1000000)).w
@@ -6860,7 +6838,7 @@ return_A966:
 										
 										rts
 
-	; End of function giveEXPandHealingCap
+	; End of function GiveEXPandHealingCap
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6870,7 +6848,7 @@ return_A966:
 ;     A5 = address of target byte in RAM
 ; Out: D5 = amount of EXP
 
-getAmountOfEXPForEncounter:
+GetAmountOfEXPForEncounter:
 										
 										movem.l d0-d3/a0,-(sp)
 										move.b  (a5),d0
@@ -6905,7 +6883,7 @@ loc_A9C6:
 										movem.l (sp)+,d0-d3/a0
 										rts
 
-	; End of function getAmountOfEXPForEncounter
+	; End of function GetAmountOfEXPForEncounter
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6986,7 +6964,7 @@ loc_AA92:
 
 ; =============== S U B R O U T I N E =======================================
 
-oneSecondSleep:
+OneSecondSleep:
 										
 										move.l  d0,-(sp)
 										moveq   #$3C,d0 
@@ -6994,7 +6972,7 @@ oneSecondSleep:
 										move.l  (sp)+,d0
 										rts
 
-	; End of function oneSecondSleep
+	; End of function OneSecondSleep
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -7197,7 +7175,7 @@ CalculateCriticalHit:
 										andi.w  #CHAR_PROWESS_MASK_CRIT,d1
 										move.w  d1,d2
 										lsl.w   #1,d2
-										lea     tbl_CriticalHitSettings(pc,d2.w),a0
+										lea     CriticalHitSettings(pc,d2.w),a0
 										clr.w   d0
 										move.b  (a0),d0
 										beq.s   return_ACC8     ; skip function if 0 crit chance
@@ -7227,7 +7205,7 @@ loc_AC8C:
 										bne.s   loc_ACC0
 										move.b  (a5),d0
 										move.w  #SPELLIDX_DESOUL,d1
-										bsr.w   getResistanceToSpell
+										bsr.w   GetResistanceToSpell
 										cmpi.w  #3,d2
 										beq.s   loc_ACC0
 										move.b  #$FF,-BCSTACK_OFFSET_CUTOFF(a2)
@@ -7242,39 +7220,8 @@ return_ACC8:
 
 	; End of function CalculateCriticalHit
 
-tbl_CriticalHitSettings:
-										dc.b $20                ; values regarding critical hit chance/double attack/etc?
-										dc.b   1
-										dc.b $20
-										dc.b   2
-										dc.b $10
-										dc.b   1
-										dc.b $10
-										dc.b   2
-										dc.b   8
-										dc.b   1
-										dc.b   8
-										dc.b   2
-										dc.b   4
-										dc.b   1
-										dc.b   4
-										dc.b   2
-										dc.b   0
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b   4
-										dc.b   0
+CriticalHitSettings:incbin "data/criticalhitsettings.bin"
+																						; values regarding critical hit chance/double attack/etc?
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -7717,7 +7664,7 @@ WriteSkirmishScript_UseSpell:
 										
 										move.b  (a5),d0
 										move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d1
-										bsr.w   getResistanceToSpell
+										bsr.w   GetResistanceToSpell
 										add.w   d1,d1
 										move.w  rjt_ItemUsedEffects(pc,d1.w),d1
 										jmp     rjt_ItemUsedEffects(pc,d1.w)
@@ -7866,7 +7813,7 @@ loc_B1F4:
 										move.w  d1,(a6)+
 										move.w  #2,(a6)+
 loc_B206:
-										bsr.w   giveMagicDrainEXP
+										bsr.w   GiveMagicDrainEXP
 										btst    #0,d2
 										beq.s   loc_B226
 										move.w  #$10,(a6)+
@@ -7936,7 +7883,7 @@ loc_B2B6:
 										move.w  d1,(a6)+
 										move.w  #2,(a6)+
 loc_B2C8:
-										bsr.w   giveMagicDrainEXP
+										bsr.w   GiveMagicDrainEXP
 										jsr     GetBaseAGI
 										mulu.w  #3,d1
 										lsr.l   #3,d1
@@ -7992,7 +7939,7 @@ loc_B350:
 										move.w  d1,(a6)+
 										move.w  #1,(a6)+
 loc_B362:
-										bsr.w   giveMagicDrainEXP
+										bsr.w   GiveMagicDrainEXP
 
 	; End of function sub_B30E
 
@@ -8052,7 +7999,7 @@ loc_B3E2:
 										move.w  d1,(a6)+
 										move.w  #2,(a6)+
 loc_B3F4:
-										bsr.w   giveMagicDrainEXP
+										bsr.w   GiveMagicDrainEXP
 										jsr     GetBaseATK
 										mulu.w  #3,d1
 										lsr.l   #3,d1
@@ -8101,7 +8048,7 @@ loc_B45A:
 										move.w  d1,(a6)+
 										move.w  #1,(a6)+
 loc_B46C:
-										bsr.w   giveMagicDrainEXP
+										bsr.w   GiveMagicDrainEXP
 										move.w  #$10,(a6)+
 										move.w  #$14F,(a6)+
 										move.w  d0,(a6)+
@@ -8153,7 +8100,7 @@ loc_B4EA:
 										move.w  d1,(a6)+
 										move.w  #1,(a6)+
 loc_B4FC:
-										bsr.w   giveMagicDrainEXP
+										bsr.w   GiveMagicDrainEXP
 										move.w  #$10,(a6)+
 										move.w  d2,(a6)+
 										move.w  d0,(a6)+
@@ -8228,7 +8175,7 @@ loc_B5A8:
 										move.w  d1,(a6)+
 										move.w  #1,(a6)+
 loc_B5BA:
-										bsr.w   giveMagicDrainEXP
+										bsr.w   GiveMagicDrainEXP
 										move.w  #$10,(a6)+
 										move.w  #$152,(a6)+
 										move.w  d0,(a6)+
@@ -8291,7 +8238,7 @@ loc_B642:
 										move.w  d1,(a6)+
 										move.w  #2,(a6)+
 loc_B652:
-										bsr.w   giveMagicDrainEXP
+										bsr.w   GiveMagicDrainEXP
 										move.w  #$12,(a6)+
 										btst    #7,d0
 										bne.s   loc_B666
@@ -9034,7 +8981,7 @@ loc_BCC0:
 loc_BCC4:
 										move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d0
 										andi.w  #$7F,d0 
-										lea     tbl_ItemBreakMessages(pc), a0
+										lea     ItemBreakMessages(pc), a0
 loc_BCD0:
 										cmpi.w  #$FFFF,(a0)
 										beq.w   loc_BCEA
@@ -9052,59 +8999,7 @@ loc_BCEA:
 
 	; End of function GetItemBreakMessage
 
-tbl_ItemBreakMessages:
-										dc.b $13
-										dc.b   1
-										dc.b $14
-										dc.b   1
-										dc.b $15
-										dc.b   1
-										dc.b $16
-										dc.b   1
-										dc.b $17
-										dc.b   1
-										dc.b $18
-										dc.b   1
-										dc.b $19
-										dc.b   1
-										dc.b $1E
-										dc.b   1
-										dc.b $1F
-										dc.b   1
-										dc.b $28 
-										dc.b   0
-										dc.b $29 
-										dc.b   0
-										dc.b $2B 
-										dc.b   4
-										dc.b $36 
-										dc.b   2
-										dc.b $45 
-										dc.b   0
-										dc.b $46 
-										dc.b   4
-										dc.b $50 
-										dc.b   2
-										dc.b $51 
-										dc.b   2
-										dc.b $53 
-										dc.b   2
-										dc.b $5C 
-										dc.b   3
-										dc.b $5D 
-										dc.b   0
-										dc.b $5E 
-										dc.b   3
-										dc.b $60 
-										dc.b   3
-										dc.b $62 
-										dc.b   3
-										dc.b $63 
-										dc.b   3
-										dc.b $65 
-										dc.b   3
-										dc.b $FF
-										dc.b $FF
+ItemBreakMessages:  incbin "data/items/itembreakmessages.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -9122,8 +9017,8 @@ WriteSkirmishScript_EnemyDropItem:
 										beq.w   loc_BE4C
 										tst.b   -BCSTACK_OFFSET_TARGETDIES(a2)
 										beq.w   loc_BE4C
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d3
-										lea     tbl_EnemyItemDrops(pc), a0
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d3
+										lea     EnemyItemDrops(pc), a0
 loc_BD48:
 										cmp.b   (a0),d3
 										bne.w   loc_BD6A
@@ -9213,8 +9108,8 @@ loc_BE4C:
 
 	; End of function WriteSkirmishScript_EnemyDropItem
 
-tbl_EnemyItemDrops: incbin "battles/enemyitemdrops.bin"
-tbl_EnemyGold:      incbin "battles/enemygold.bin"
+EnemyItemDrops:     incbin "battles/enemyitemdrops.bin"
+EnemyGold:          incbin "battles/enemygold.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -9288,7 +9183,7 @@ loc_C082:
 ;         D2 = Y coord
 ;     Out: A0 = start of grid + offset
 
-convertCoordToOffset:
+ConvertCoordToOffset:
 										
 										move.l  d2,-(sp)
 										mulu.w  #$30,d2 
@@ -9297,7 +9192,7 @@ convertCoordToOffset:
 										move.l  (sp)+,d2
 										rts
 
-	; End of function convertCoordToOffset
+	; End of function ConvertCoordToOffset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9349,16 +9244,16 @@ loc_C0DA:
 ;         D2 = Y coord
 ;     Out: D0 = terrain at offset
 
-getTargetAtCoordOffset:
+GetTargetAtCoordOffset:
 										
 										movem.l d1-a6,-(sp)
 										lea     (byte_FF5600).l,a0
-										bsr.s   convertCoordToOffset
+										bsr.s   ConvertCoordToOffset
 										move.b  (a0),d0
 										movem.l (sp)+,d1-a6
 										rts
 
-	; End of function getTargetAtCoordOffset
+	; End of function GetTargetAtCoordOffset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9410,7 +9305,7 @@ GetCurrentTerrainType:
 										jsr     GetYPos
 										move.w  d1,d2
 										jsr     GetXPos
-										bsr.w   getTerrainAtCoordOffset
+										bsr.w   GetTerrain      
 										movem.l (sp)+,d1-a6
 										rts
 
@@ -9424,31 +9319,31 @@ GetCurrentTerrainType:
 ;         D2 = Y coord
 ;     Out: D0 = target at offset
 
-getTerrainAtCoordOffset:
+GetTerrain:
 										
 										movem.l d1-a6,-(sp)
 										lea     (TERRAIN_DATA).l,a0
-										bsr.w   convertCoordToOffset
+										bsr.w   ConvertCoordToOffset
 										move.b  (a0),d0
 										movem.l (sp)+,d1-a6
 										rts
 
-	; End of function getTerrainAtCoordOffset
+	; End of function GetTerrain
 
 
 ; =============== S U B R O U T I N E =======================================
 
-setTerrain:
+SetTerrain:
 										
 										movem.l d1-a6,-(sp)
 loc_C17A:
 										lea     (TERRAIN_DATA).l,a0
-										bsr.w   convertCoordToOffset
+										bsr.w   ConvertCoordToOffset
 										move.b  d0,(a0)
 										movem.l (sp)+,d1-a6
 										rts
 
-	; End of function setTerrain
+	; End of function SetTerrain
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9459,7 +9354,7 @@ MemorizePath:
 loc_C190:
 										jsr     GetUpperMoveType
 										lsl.w   #4,d1
-										lea     t_MoveTypeTerrainCosts(pc), a0
+										lea     MoveTypeTerrainCosts(pc), a0
 										adda.w  d1,a0
 										lea     ((MOVE_COST_LIST-$1000000)).w,a1
 										moveq   #$F,d7
@@ -9502,7 +9397,7 @@ GetMoveCost:
 										movem.l d0/d2-a6,-(sp)
 										jsr     GetUpperMoveType
 										lsl.w   #4,d1
-										lea     t_MoveTypeTerrainCosts(pc), a0
+										lea     MoveTypeTerrainCosts(pc), a0
 										adda.w  d1,a0
 										bsr.w   GetCurrentTerrainType
 										andi.w  #$F,d0
@@ -9523,21 +9418,21 @@ loc_C1FA:
 ;     In: D1 = X coord
 ;         D2 = Y coord
 
-setMovableAtCoord:
+SetMovableAtCoord:
 										
 										movem.l d0-a6,-(sp)
 loc_C208:
 										lea     ((byte_FF4000+$400)).l,a0
-										bsr.w   convertCoordToOffset
+										bsr.w   ConvertCoordToOffset
 loc_C212:
 										move.b  #0,(a0)
 										lea     ((byte_FF4A00+$300)).l,a0
-										bsr.w   convertCoordToOffset
+										bsr.w   ConvertCoordToOffset
 										move.b  #0,(a0)
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function setMovableAtCoord
+	; End of function SetMovableAtCoord
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9547,12 +9442,12 @@ loc_C212:
 ;         D1 = spell idx
 ;     Out: D2 = resistance bitmask
 
-getResistanceToSpell:
+GetResistanceToSpell:
 										
 										movem.l d0-d1/d3-a6,-(sp)
 										andi.b  #SPELL_MASK_IDX,d1
 loc_C232:
-										move.b  tbl_SpellElements(pc,d1.w),d2
+										move.b  SpellElements(pc,d1.w),d2
 										jsr     GetCurrentResistance
 										andi.w  #SPELL_MASK_ALLRESIST,d1
 										ror.w   d2,d1
@@ -9561,9 +9456,9 @@ loc_C232:
 										movem.l (sp)+,d0-d1/d3-a6
 										rts
 
-	; End of function getResistanceToSpell
+	; End of function GetResistanceToSpell
 
-tbl_SpellElements:  incbin "data/spellelements.bin"
+SpellElements:      incbin "data/spellelements.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -9758,7 +9653,8 @@ GenerateTargetRangeLists:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_C404:
+j_sub_C404_0:
+										
 										movem.l d0-a6,-(sp)
 										bsr.w   ClearTargetGrid 
 										bsr.w   ClearMovableGrid
@@ -9779,13 +9675,13 @@ sub_C404:
 										sub.b   d3,d2
 loc_C43C:
 										movea.l -(a1),a0
-										bsr.w   applyRelativeCoordListToGrids
+										bsr.w   ApplyRelativeCoordListToGrids
 										subq.w  #1,d2
 										bne.s   loc_C43C
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function sub_C404
+	; End of function j_sub_C404_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9803,7 +9699,7 @@ CreateItemRangeGrid:
 										move.b  9(a0),d1
 										cmpi.b  #$3F,d1 
 										beq.s   loc_C472
-										bsr.w   createSpellRangeGrid
+										bsr.w   CreateSpellRangeGrid
 loc_C472:
 										movem.l (sp)+,d0-a6
 										rts
@@ -9817,7 +9713,7 @@ loc_C472:
 ;     In: D0 = spell user
 ;         D1 = spell idx
 
-createSpellRangeGrid:
+CreateSpellRangeGrid:
 										
 										movem.l d0-a6,-(sp)
 										bsr.w   ClearTargetGrid 
@@ -9855,18 +9751,19 @@ loc_C4BC:
 										sub.b   d3,d2
 loc_C4D8:
 										movea.l -(a1),a0
-										bsr.w   applyRelativeCoordListToGrids
+										bsr.w   ApplyRelativeCoordListToGrids
 										subq.w  #1,d2
 										bne.s   loc_C4D8
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function createSpellRangeGrid
+	; End of function CreateSpellRangeGrid
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_C4E8:
+j_sub_C4E8_0:
+										
 										movem.l d0-a6,-(sp)
 										bsr.w   ClearTargetGrid 
 										bsr.w   ClearMovableGrid
@@ -9875,11 +9772,11 @@ sub_C4E8:
 										moveq   #$FFFFFFFF,d5
 										lea     SpellRange1(pc), a0
 										nop
-										bsr.w   applyRelativeCoordListToGrids
+										bsr.w   ApplyRelativeCoordListToGrids
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function sub_C4E8
+	; End of function j_sub_C4E8_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9890,7 +9787,7 @@ sub_C4E8:
 ;         D1 = starting X coord
 ;         D2 = starting Y coord
 
-applyRelativeCoordListToGrids:
+ApplyRelativeCoordListToGrids:
 										
 										movem.l d0-a6,-(sp)
 										jsr     GetXPos
@@ -9914,12 +9811,12 @@ loc_C53C:
 										bcc.w   loc_C584
 										tst.b   d5
 										beq.s   loc_C55E
-										bsr.w   getTerrainAtCoordOffset
+										bsr.w   GetTerrain      
 										cmpi.b  #$FF,d0
 										beq.s   loc_C55E
-										bsr.w   setMovableAtCoord
+										bsr.w   SetMovableAtCoord
 loc_C55E:
-										bsr.w   getTargetAtCoordOffset
+										bsr.w   GetTargetAtCoordOffset
 										cmpi.b  #$FF,d0
 										beq.w   loc_C584
 										jsr     GetCurrentHP
@@ -9936,109 +9833,121 @@ loc_C58A:
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function applyRelativeCoordListToGrids
+	; End of function ApplyRelativeCoordListToGrids
 
 pt_SpellRanges:     dc.l SpellRange0
 										dc.l SpellRange1
 										dc.l SpellRange2
 										dc.l SpellRange3
-SpellRange0:        dc.b   1
-										dc.b   0
-										dc.b   0
-SpellRange1:        dc.b   4
-										dc.b   0
-										dc.b   1
-										dc.b   1
-										dc.b   0
-										dc.l byte_FFF7A8+$758   
-SpellRange2:        dc.b   8
-										dc.b   0
-										dc.b $FE 
+SpellRange0:        dc.b 1
+										dc.b 0
+										dc.b 0
+SpellRange1:        dc.b 4
+										dc.b 0
+										dc.b 1
+										dc.b 1
+										dc.b 0
+										dc.b 0
 										dc.b $FF
 										dc.b $FF
-										dc.b $FE 
-										dc.b   0
+										dc.b 0
+SpellRange2:        dc.b 8
+										dc.b 0
+										dc.b $FE
 										dc.b $FF
-										dc.b   1
-										dc.b   0
-										dc.b   2
-										dc.b   1
-										dc.b   1
-										dc.b   2
-										dc.b   0
-										dc.b   1
 										dc.b $FF
-SpellRange3:        dc.b  $C
-										dc.b   0
-										dc.b   3
-										dc.b   1
-										dc.b   2
-										dc.b   2
-										dc.b   1
-										dc.b   3
-										dc.b   0
-										dc.b   2
+										dc.b $FE
+										dc.b 0
 										dc.b $FF
-										dc.b   1
-										dc.b $FE 
-										dc.b   0
-										dc.b $FD 
+										dc.b 1
+										dc.b 0
+										dc.b 2
+										dc.b 1
+										dc.b 1
+										dc.b 2
+										dc.b 0
+										dc.b 1
 										dc.b $FF
-										dc.b $FE 
-										dc.b $FE 
+SpellRange3:        dc.b $C
+										dc.b 0
+										dc.b 3
+										dc.b 1
+										dc.b 2
+										dc.b 2
+										dc.b 1
+										dc.b 3
+										dc.b 0
+										dc.b 2
 										dc.b $FF
-										dc.b $FD 
-										dc.b   0
-										dc.b $FE 
-										dc.b   1
+										dc.b 1
+										dc.b $FE
+										dc.b 0
+										dc.b $FD
 										dc.b $FF
-										dc.b   2
+										dc.b $FE
+										dc.b $FE
+										dc.b $FF
+										dc.b $FD
+										dc.b 0
+										dc.b $FE
+										dc.b 1
+										dc.b $FF
+										dc.b 2
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_C5D6:
+j_sub_C5D6_0:
+										
 										movem.l d0-a6,-(sp)
 										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
 										jsr     GetItemDefAddress
 										move.b  9(a0),d1
 										cmpi.b  #$FF,d1
 										beq.s   loc_C5F4
-										bsr.w   createTargetGridFromSpell
+										bsr.w   CreateTargetGridFromSpell
 loc_C5F4:
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function sub_C5D6
+	; End of function j_sub_C5D6_0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_C5FA:
+j_sub_C5FA_0:
+										
 										movem.l d0-a6,-(sp)
 										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
 										jsr     GetItemDefAddress
 										move.b  9(a0),d1
 										cmpi.b  #$FF,d1
 										beq.s   loc_C618
-										bsr.w   loc_C62E
+										bsr.w   CreateTargetGrid
 loc_C618:
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function sub_C5FA
+	; End of function j_sub_C5FA_0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-createTargetGridFromSpell:
+CreateTargetGridFromSpell:
 										
 										cmpi.b  #$19,d1
 										bne.s   loc_C62A
 										bsr.w   MakeTargetListEverybody
-										bra.s   loc_C62E
+										bra.s   CreateTargetGrid
 loc_C62A:
 										bsr.w   MakeTargetList
-loc_C62E:
+
+	; End of function CreateTargetGridFromSpell
+
+
+; =============== S U B R O U T I N E =======================================
+
+CreateTargetGrid:
+										
 										movem.l d0-a6,-(sp)
 										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
 										jsr     GetSpellDefAddress
@@ -10060,7 +9969,7 @@ loc_C668:
 										moveq   #0,d5
 loc_C66A:
 										movea.l -(a1),a0
-										bsr.w   applyRelativeCoordListToGrids
+										bsr.w   ApplyRelativeCoordListToGrids
 										subq.w  #1,d2
 										bne.s   loc_C66A
 										bra.w   loc_C688
@@ -10075,7 +9984,7 @@ loc_C688:
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function createTargetGridFromSpell
+	; End of function CreateTargetGrid
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10198,7 +10107,7 @@ loc_C760:
 										move.b  d0,d7
 										andi.w  #$FF,d1
 										andi.w  #$FF,d2
-										bsr.w   getTargetAtCoordOffset
+										bsr.w   GetTargetAtCoordOffset
 										cmpi.b  #$FF,d0
 										bne.w   loc_C7BE        ; already someone there, so it can't be chosen
 										move.b  d7,-5(a6)
@@ -10299,7 +10208,7 @@ loc_C84A:
 										cmpi.w  #MAP_SIZE_MAXWIDTH,d1
 										bcc.w   loc_C86E
 										lea     (byte_FF5600).l,a0
-										bsr.w   convertCoordToOffset
+										bsr.w   ConvertCoordToOffset
 										move.b  d0,(a0)
 loc_C86E:
 										addq.b  #1,d0
@@ -10352,7 +10261,7 @@ loc_C898:
 										cmpi.w  #MAP_SIZE_MAXWIDTH,d1
 										bcc.w   loc_C8F4
 										lea     (TERRAIN_DATA).l,a0
-										bsr.w   convertCoordToOffset
+										bsr.w   ConvertCoordToOffset
 										move.b  (a0),d4
 										cmpi.b  #$FF,d4
 										bne.s   loc_C8D8
@@ -10397,7 +10306,7 @@ loc_C90A:
 										cmpi.w  #$30,d1 
 										bcc.w   loc_C94C
 										lea     ((byte_FF4A00+$300)).l,a0
-										bsr.w   convertCoordToOffset
+										bsr.w   ConvertCoordToOffset
 										tst.w   d3
 										bne.s   loc_C948
 										bclr    #7,(a0)
@@ -10575,7 +10484,7 @@ sub_CAEA:
 loc_CAFE:
 										move.b  d0,d3
 										move.b  d2,d0
-										bsr.w   loc_C62E
+										bsr.w   CreateTargetGrid
 										tst.w   ((RAM_CharIdxListSize-$1000000)).w
 										beq.s   loc_CB12
 										move.b  d3,d0
@@ -10725,7 +10634,7 @@ loc_CC4A:
 GetSpellPowerAdjustedForResistance:
 										
 										movem.l d0-d5/d7-a0,-(sp)
-										bsr.w   getResistanceToSpell
+										bsr.w   GetResistanceToSpell
 										jsr     GetSpellDefAddress
 										moveq   #0,d6
 										move.b  SPELLDEF_OFFSET_POWER(a0),d6
@@ -10944,7 +10853,7 @@ loc_CE00:
 										bra.w   loc_CE30
 loc_CE0E:
 										bsr.w   GetUpperMoveType
-										lea     (unk_D8F4).l,a0
+										lea     (byte_D8F4).l,a0
 										move.w  #$D,d6
 										clr.w   d0
 loc_CE1E:
@@ -10980,7 +10889,7 @@ loc_CE4A:
 loc_CE56:
 										cmpi.b  #1,d7
 										bne.s   loc_CE66
-										lea     (unk_DA22).l,a4
+										lea     (byte_DA22).l,a4
 										bra.w   loc_CE80
 loc_CE66:
 										clr.l   d0
@@ -10988,7 +10897,7 @@ loc_CE66:
 										jsr     GetUpperMoveType
 										clr.l   d3
 										move.b  d1,d3
-										lea     (off_D9C2).l,a4
+										lea     (off_D9C2).l,a4 
 										lsl.l   #2,d3
 										movea.l (a4,d3.l),a4
 loc_CE80:
@@ -11306,7 +11215,7 @@ loc_D0C0:
 										bne.s   loc_D0D2
 										bra.w   loc_D0DC
 loc_D0D2:
-										jsr     isItemUsableInBattle
+										jsr     IsItemUsableInBattle
 										bcs.w   loc_D0E8
 loc_D0DC:
 										addq.w  #1,d3
@@ -11381,7 +11290,7 @@ loc_D164:
 										bra.w   loc_D1BA
 loc_D176:
 										move.w  d1,d7
-										jsr     isItemUsableInBattle
+										jsr     IsItemUsableInBattle
 										bcc.s   loc_D1BA
 										cmpi.b  #8,d7
 										beq.s   loc_D18E
@@ -11502,7 +11411,7 @@ loc_D28A:
 
 ; =============== S U B R O U T I N E =======================================
 
-isCharacterLessThanHalfHP:
+IsCharacterLessThanHalfHP:
 										
 										movem.l d1-d2,-(sp)
 										jsr     GetCurrentHP
@@ -11522,7 +11431,7 @@ loc_D2C8:
 										movem.l (sp)+,d1-d2
 										rts
 
-	; End of function isCharacterLessThanHalfHP
+	; End of function IsCharacterLessThanHalfHP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11785,7 +11694,7 @@ loc_D4AE:
 										move.b  (a1,d4.w),d0
 loc_D4B4:
 										move.w  #$46,d1 
-										bsr.w   loc_C62E
+										bsr.w   CreateTargetGrid
 										bsr.w   sub_D7AA
 										tst.w   d1
 										beq.s   loc_D4D0
@@ -11839,7 +11748,7 @@ loc_D52E:
 										clr.w   d0
 										move.b  (a1,d4.w),d0
 										move.w  #$46,d1 
-										bsr.w   loc_C62E
+										bsr.w   CreateTargetGrid
 										bsr.w   sub_D742
 										tst.w   d1
 										beq.s   loc_D550
@@ -11880,7 +11789,7 @@ loc_D592:
 										clr.w   d0
 										move.b  (a1)+,d0
 										move.w  #6,d1
-										bsr.w   loc_C62E
+										bsr.w   CreateTargetGrid
 										bsr.w   sub_D6F2
 										move.b  d1,(a2)+
 										dbf     d5,loc_D592
@@ -11958,7 +11867,7 @@ loc_D65A:
 										clr.w   d0
 										move.b  (a1)+,d0
 										move.w  #$47,d1 
-										bsr.w   loc_C62E
+										bsr.w   CreateTargetGrid
 										move.w  (a3),d2
 										move.b  d2,(a2)+
 										dbf     d5,loc_D65A
@@ -12141,151 +12050,151 @@ loc_D81C:
 
 	; End of function sub_D7AA
 
-t_MoveTypeTerrainCosts:
-										incbin "data/movetypeterraincosts.bin"
-unk_D8F4:           dc.b $FF
-										dc.b  $C
-										dc.b  $B
-										dc.b  $A
-										dc.b   9
-										dc.b   8
-										dc.b   6
-										dc.b   5
-										dc.b   4
-										dc.b   3
-										dc.b   2
-										dc.b   1
-										dc.b   7
+MoveTypeTerrainCosts:
+										incbin "battles/movetypeterraincosts.bin"
+byte_D8F4:          dc.b $FF                ; related to move types
+										dc.b $C
+										dc.b $B
+										dc.b $A
+										dc.b 9
+										dc.b 8
+										dc.b 6
+										dc.b 5
+										dc.b 4
+										dc.b 3
+										dc.b 2
+										dc.b 1
+										dc.b 7
 byte_D901:          dc.b 0
-										dc.b  $C
-										dc.b   3
+										dc.b $C
+										dc.b 3
 										dc.b $12
 										dc.b $11
-										dc.b   4
+										dc.b 4
 										dc.b $13
 										dc.b $14
-										dc.b   6
-										dc.b   9
+										dc.b 6
+										dc.b 9
 										dc.b $17
-										dc.b  $E
+										dc.b $E
 										dc.b $1A
-										dc.b  $A
+										dc.b $A
 										dc.b $1B
-										dc.b   5
-										dc.b   8
+										dc.b 5
+										dc.b 8
 										dc.b $15
 										dc.b $19
 										dc.b $16
-										dc.b   7
+										dc.b 7
 										dc.b $18
-										dc.b   1
-										dc.b  $D
+										dc.b 1
+										dc.b $D
 										dc.b $1D
-										dc.b   2
+										dc.b 2
 										dc.b $1F
 										dc.b $10
-										dc.b  $F
+										dc.b $F
 										dc.b $1E
-										dc.b  $B
+										dc.b $B
 										dc.b $1C
 byte_D921:          dc.b 0
-										dc.b  $C
-										dc.b  $B
+										dc.b $C
+										dc.b $B
 										dc.b $1C
 										dc.b $1E
-										dc.b   2
-										dc.b  $F
+										dc.b 2
+										dc.b $F
 										dc.b $10
 										dc.b $1F
 										dc.b $1D
-										dc.b   1
-										dc.b  $D
-										dc.b   7
+										dc.b 1
+										dc.b $D
+										dc.b 7
 										dc.b $18
-										dc.b   8
-										dc.b   5
+										dc.b 8
+										dc.b 5
 										dc.b $16
 										dc.b $19
 										dc.b $15
-										dc.b  $A
+										dc.b $A
 										dc.b $1B
-										dc.b   3
+										dc.b 3
 										dc.b $11
 										dc.b $12
-										dc.b   4
+										dc.b 4
 										dc.b $14
 										dc.b $13
-										dc.b   9
-										dc.b   6
+										dc.b 9
+										dc.b 6
 										dc.b $1A
-										dc.b  $E
+										dc.b $E
 										dc.b $17
-unk_D941:           dc.b   6
-										dc.b   9
+byte_D941:          dc.b 6
+										dc.b 9
 										dc.b $17
-										dc.b  $E
+										dc.b $E
 										dc.b $1A
-										dc.b   3
+										dc.b 3
 										dc.b $12
 										dc.b $11
-										dc.b   4
+										dc.b 4
 										dc.b $13
 										dc.b $14
-										dc.b   0
-										dc.b  $C
-										dc.b  $A
+										dc.b 0
+										dc.b $C
+										dc.b $A
 										dc.b $1B
-										dc.b   5
-										dc.b   8
+										dc.b 5
+										dc.b 8
 										dc.b $15
 										dc.b $19
 										dc.b $16
-										dc.b   7
+										dc.b 7
 										dc.b $18
-										dc.b   1
-										dc.b  $D
+										dc.b 1
+										dc.b $D
 										dc.b $1D
-										dc.b   2
+										dc.b 2
 										dc.b $1F
 										dc.b $10
-										dc.b  $F
+										dc.b $F
 										dc.b $1E
-										dc.b  $B
+										dc.b $B
 										dc.b $1C
 byte_D961:          dc.b 0
-										dc.b  $C
-										dc.b   3
+										dc.b $C
+										dc.b 3
 										dc.b $12
 										dc.b $11
-										dc.b   4
+										dc.b 4
 										dc.b $13
 										dc.b $14
-										dc.b   2
+										dc.b 2
 										dc.b $1F
 										dc.b $10
-										dc.b  $F
+										dc.b $F
 										dc.b $1E
-										dc.b   7
+										dc.b 7
 										dc.b $18
-										dc.b   1
-										dc.b  $D
+										dc.b 1
+										dc.b $D
 										dc.b $1D
-										dc.b  $B
+										dc.b $B
 										dc.b $1C
-										dc.b   6
-										dc.b   9
+										dc.b 6
+										dc.b 9
 										dc.b $17
-										dc.b  $E
+										dc.b $E
 										dc.b $1A
-										dc.b  $A
+										dc.b $A
 										dc.b $1B
-										dc.b   5
-										dc.b   8
+										dc.b 5
+										dc.b 8
 										dc.b $15
 										dc.b $19
 										dc.b $16
 										dc.b $FF
-off_D982:           dc.l byte_D901
+off_D982:           dc.l byte_D901          ; related to move type
 										dc.l byte_D901
 										dc.l byte_D901
 										dc.l byte_D901
@@ -12293,158 +12202,158 @@ off_D982:           dc.l byte_D901
 										dc.l byte_D961
 										dc.l byte_D961
 										dc.l byte_D901
-off_D9A2:           dc.l unk_D941
-off_D9A6:           dc.l unk_D941
+off_D9A2:           dc.l byte_D941
+off_D9A6:           dc.l byte_D941
 										dc.l byte_D921
 										dc.l byte_D921
 										dc.l byte_D901
 										dc.l byte_D901
 										dc.l byte_D901
 										dc.l byte_D901
-off_D9C2:           dc.l unk_DA02
-										dc.l unk_DA02
-										dc.l unk_DA02
-										dc.l unk_DA02
-										dc.l unk_DA02
-										dc.l unk_DA62
-										dc.l unk_DA62
-										dc.l unk_DA02
-										dc.l unk_DA42
-										dc.l unk_DA42
-										dc.l unk_DA22
-										dc.l unk_DA22
-										dc.l unk_DA02
-										dc.l unk_DA02
-off_D9FA:           dc.l unk_DA02
-										dc.l unk_DA02
-unk_DA02:           dc.b   4
-										dc.b   1
-										dc.b   0
-										dc.b   4
-										dc.b   4
-										dc.b   2
-										dc.b   2
-										dc.b   1
-										dc.b   2
-										dc.b   2
-										dc.b   2
-										dc.b   0
-										dc.b   4
-										dc.b   1
-										dc.b   2
-										dc.b   0
-										dc.b   0
-										dc.b   4
-										dc.b   4
-										dc.b   4
-										dc.b   4
-										dc.b   2
-										dc.b   2
-										dc.b   2
-										dc.b   1
-										dc.b   2
-										dc.b   2
-										dc.b   2
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   0
-unk_DA22:           dc.b   3
-										dc.b   1
-										dc.b   3
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   3
-										dc.b   3
-										dc.b   2
-										dc.b   0
-										dc.b   3
-										dc.b   3
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   3
-										dc.b   2
-										dc.b   3
-										dc.b   3
-unk_DA42:           dc.b   3
-										dc.b   1
-										dc.b   0
-										dc.b   3
-										dc.b   3
-										dc.b   2
-										dc.b   4
-										dc.b   2
-										dc.b   2
-										dc.b   4
-										dc.b   2
-										dc.b   0
-										dc.b   3
-										dc.b   1
-										dc.b   4
-										dc.b   0
-										dc.b   0
-										dc.b   3
-										dc.b   3
-										dc.b   3
-										dc.b   3
-										dc.b   2
-										dc.b   2
-										dc.b   4
-										dc.b   2
-										dc.b   2
-										dc.b   4
-										dc.b   2
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   0
-unk_DA62:           dc.b   3
-										dc.b   2
-										dc.b   2
-										dc.b   3
-										dc.b   3
-										dc.b   0
-										dc.b   1
-										dc.b   2
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   3
-										dc.b   2
-										dc.b   1
-										dc.b   2
-										dc.b   2
-										dc.b   3
-										dc.b   3
-										dc.b   3
-										dc.b   3
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b   2
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   2
-										dc.b   2
-										dc.b   2
+off_D9C2:           dc.l byte_DA02          ; Gives values from Upper Move Type and Class
+										dc.l byte_DA02
+										dc.l byte_DA02
+										dc.l byte_DA02
+										dc.l byte_DA02
+										dc.l byte_DA62
+										dc.l byte_DA62
+										dc.l byte_DA02
+										dc.l byte_DA42
+										dc.l byte_DA42
+										dc.l byte_DA22
+										dc.l byte_DA22
+										dc.l byte_DA02
+										dc.l byte_DA02
+off_D9FA:           dc.l byte_DA02
+										dc.l byte_DA02
+byte_DA02:          dc.b 4
+										dc.b 1
+										dc.b 0
+										dc.b 4
+										dc.b 4
+										dc.b 2
+										dc.b 2
+										dc.b 1
+										dc.b 2
+										dc.b 2
+										dc.b 2
+										dc.b 0
+										dc.b 4
+										dc.b 1
+										dc.b 2
+										dc.b 0
+										dc.b 0
+										dc.b 4
+										dc.b 4
+										dc.b 4
+										dc.b 4
+										dc.b 2
+										dc.b 2
+										dc.b 2
+										dc.b 1
+										dc.b 2
+										dc.b 2
+										dc.b 2
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 0
+byte_DA22:          dc.b 3
+										dc.b 1
+										dc.b 3
+										dc.b 0
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 3
+										dc.b 3
+										dc.b 2
+										dc.b 0
+										dc.b 3
+										dc.b 3
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 1
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 3
+										dc.b 2
+										dc.b 3
+										dc.b 3
+byte_DA42:          dc.b 3
+										dc.b 1
+										dc.b 0
+										dc.b 3
+										dc.b 3
+										dc.b 2
+										dc.b 4
+										dc.b 2
+										dc.b 2
+										dc.b 4
+										dc.b 2
+										dc.b 0
+										dc.b 3
+										dc.b 1
+										dc.b 4
+										dc.b 0
+										dc.b 0
+										dc.b 3
+										dc.b 3
+										dc.b 3
+										dc.b 3
+										dc.b 2
+										dc.b 2
+										dc.b 4
+										dc.b 2
+										dc.b 2
+										dc.b 4
+										dc.b 2
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 0
+byte_DA62:          dc.b 3
+										dc.b 2
+										dc.b 2
+										dc.b 3
+										dc.b 3
+										dc.b 0
+										dc.b 1
+										dc.b 2
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 3
+										dc.b 2
+										dc.b 1
+										dc.b 2
+										dc.b 2
+										dc.b 3
+										dc.b 3
+										dc.b 3
+										dc.b 3
+										dc.b 0
+										dc.b 0
+										dc.b 1
+										dc.b 2
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 2
+										dc.b 2
+										dc.b 2
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -13018,7 +12927,8 @@ loc_DEF6:
 
 ; In: D0 = char idx
 
-sub_DEFC:
+j_sub_DEFC_0:
+										
 										movem.l d0-a5,-(sp)
 										move.w  d0,d7
 										btst    #CHAR_BIT_ENEMY,d0
@@ -13038,10 +12948,10 @@ loc_DF1E:
 										beq.s   loc_DF30
 										bra.w   loc_DFA2
 loc_DF30:
-										lea     ((RAM_CurrentBattleIdx-$1000000)).w,a0
+										lea     ((CURRENT_BATTLE-$1000000)).w,a0
 										clr.w   d6
 										move.b  (a0),d6
-										lea     unk_E25B(pc), a0
+										lea     byte_E25B(pc), a0
 										nop
 										clr.w   d2
 										move.b  (a0),d2
@@ -13106,17 +13016,17 @@ loc_DFE6:
 										bsr.w   GetEnemyID
 										cmpi.w  #$5D,d1 ; check if Prism Flower
 										bne.s   loc_E000        
-										bsr.w   handleLineAttackerAI
+										bsr.w   HandleLineAttackerAI
 										bra.w   loc_E0AA
 loc_E000:
 										cmpi.w  #$26,d1 ; check if Zeon Guard
 										bne.s   loc_E00E        
-										bsr.w   handleLineAttackerAI
+										bsr.w   HandleLineAttackerAI
 										bra.w   loc_E0AA
 loc_E00E:
 										cmpi.w  #$20,d1 ; check if Burst Rock
 										bne.s   loc_E01C
-										bsr.w   handleExploderAI
+										bsr.w   HandleExploderAI
 										bra.w   loc_E0AA
 loc_E01C:
 										move.w  d7,d0
@@ -13138,7 +13048,7 @@ loc_E048:
 										move.w  d7,d0
 										bsr.w   GetLowerMoveType
 										move.w  d1,d5
-										lea     byte_E249(pc), a0
+										lea     word_E249(pc), a0
 										nop
 										move.b  (a0,d1.w),d6
 										tst.b   d6
@@ -13166,7 +13076,7 @@ loc_E090:
 										clr.w   d1
 										move.b  (a1),d1
 										move.b  d7,d0
-										bsr.w   handleEnemyAICommand
+										bsr.w   HandleEnemyAICommand
 										tst.b   d1
 										bne.s   loc_E0A2
 										bra.w   loc_E0AA
@@ -13178,7 +13088,7 @@ loc_E0AA:
 										movem.l (sp)+,d0-a5
 										rts
 
-	; End of function sub_DEFC
+	; End of function j_sub_DEFC_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13210,7 +13120,7 @@ loc_E0DE:
 
 ; =============== S U B R O U T I N E =======================================
 
-handleLineAttackerAI:
+HandleLineAttackerAI:
 										
 										movem.l d0-a6,-(sp)
 										move.w  d0,d7
@@ -13240,18 +13150,18 @@ loc_E13E:
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function handleLineAttackerAI
+	; End of function HandleLineAttackerAI
 
 
 ; =============== S U B R O U T I N E =======================================
 
-handleExploderAI:
+HandleExploderAI:
 										
 										movem.l d0-a6,-(sp)
 										move.w  d0,d5
 										bsr.w   MakeTargetListAllies
 										move.w  #$19,d1         ; Burst Rock spell
-										bsr.w   createTargetGridFromSpell
+										bsr.w   CreateTargetGridFromSpell
 										lea     ((RAM_CharIdxListSize-$1000000)).w,a0
 										move.w  (a0),d0
 										tst.w   d0
@@ -13271,188 +13181,193 @@ loc_E190:
 										move.w  d5,d0
 										move.w  #$B,d1
 										clr.w   d7
-										bsr.w   handleEnemyAICommand
+										bsr.w   HandleEnemyAICommand
 										lea     (RAM_BattleScene_ActionType).l,a0
 										move.w  #3,(a0)
 loc_E1A6:
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function handleExploderAI
+	; End of function HandleExploderAI
 
-off_E1AC:           dc.l unk_E1EC
-										dc.l unk_E1F2
-										dc.l unk_E1F9
-										dc.l unk_E200
-										dc.l unk_E207
-										dc.l unk_E20E
-										dc.l unk_E215
-										dc.l unk_E21B
-										dc.l unk_E222
-										dc.l unk_E229
-										dc.l unk_E227
-										dc.l unk_E227
-										dc.l unk_E231
-										dc.l unk_E239
-										dc.l unk_E239
-										dc.l unk_E241
-unk_E1EC:           dc.b   5
-										dc.b   0
-										dc.b   7
-										dc.b   3
-										dc.b  $B
-										dc.b  $E
-unk_E1F2:           dc.b   6
-										dc.b  $A
-										dc.b   0
-										dc.b   7
-										dc.b   3
-										dc.b  $C
-										dc.b  $E
-unk_E1F9:           dc.b   6
-										dc.b   1
+off_E1AC:           dc.l byte_E1EC
+										dc.l byte_E1F2
+										dc.l byte_E1F9
+										dc.l byte_E200
+										dc.l byte_E207
+										dc.l byte_E20E
+										dc.l byte_E215
+										dc.l byte_E21B
+										dc.l byte_E222
+										dc.l byte_E229
+										dc.l byte_E227
+										dc.l byte_E227
+										dc.l byte_E231
+										dc.l byte_E239
+										dc.l byte_E239
+										dc.l byte_E241
+byte_E1EC:          dc.b 5
+										dc.b 0
+										dc.b 7
+										dc.b 3
+										dc.b $B
+										dc.b $E
+byte_E1F2:          dc.b 6
+										dc.b $A
+										dc.b 0
+										dc.b 7
+										dc.b 3
+										dc.b $C
+										dc.b $E
+byte_E1F9:          dc.b 6
+										dc.b 1
 										dc.b $12
-										dc.b   7
-										dc.b   5
-										dc.b  $C
-										dc.b  $E
-unk_E200:           dc.b   6
-										dc.b   1
+										dc.b 7
+										dc.b 5
+										dc.b $C
+										dc.b $E
+byte_E200:          dc.b 6
+										dc.b 1
 										dc.b $12
-										dc.b   7
-										dc.b   5
-										dc.b  $B
-										dc.b  $E
-unk_E207:           dc.b   6
-										dc.b   2
+										dc.b 7
+										dc.b 5
+										dc.b $B
+										dc.b $E
+byte_E207:          dc.b 6
+										dc.b 2
 										dc.b $13
-										dc.b   7
-										dc.b   4
-										dc.b  $D
-										dc.b  $E
-unk_E20E:           dc.b   6
-										dc.b   2
+										dc.b 7
+										dc.b 4
+										dc.b $D
+										dc.b $E
+byte_E20E:          dc.b 6
+										dc.b 2
 										dc.b $13
-										dc.b   7
-										dc.b   4
-										dc.b  $D
-										dc.b  $E
-unk_E215:           dc.b   5
-										dc.b   3
-										dc.b   0
-										dc.b   7
-										dc.b  $B
-										dc.b  $E
-unk_E21B:           dc.b   6
-										dc.b  $A
-										dc.b   3
-										dc.b   0
-										dc.b   7
-										dc.b  $B
-										dc.b  $E
-unk_E222:           dc.b   4
-										dc.b   3
-										dc.b   0
-										dc.b   7
-										dc.b  $E
-unk_E227:           dc.b   1
-										dc.b  $E
-unk_E229:           dc.b   7
+										dc.b 7
+										dc.b 4
+										dc.b $D
+										dc.b $E
+byte_E215:          dc.b 5
+										dc.b 3
+										dc.b 0
+										dc.b 7
+										dc.b $B
+										dc.b $E
+byte_E21B:          dc.b 6
+										dc.b $A
+										dc.b 3
+										dc.b 0
+										dc.b 7
+										dc.b $B
+										dc.b $E
+byte_E222:          dc.b 4
+										dc.b 3
+										dc.b 0
+										dc.b 7
+										dc.b $E
+byte_E227:          dc.b 1
+										dc.b $E
+byte_E229:          dc.b 7
 										dc.b $11
-										dc.b   5
-										dc.b   1
-										dc.b   7
+										dc.b 5
+										dc.b 1
+										dc.b 7
 										dc.b $12
-										dc.b  $C
-										dc.b  $E
-unk_E231:           dc.b   7
+										dc.b $C
+										dc.b $E
+byte_E231:          dc.b 7
 										dc.b $12
-										dc.b   7
-										dc.b   5
-										dc.b   1
-										dc.b  $B
-										dc.b  $C
-										dc.b  $E
-unk_E239:           dc.b   7
+										dc.b 7
+										dc.b 5
+										dc.b 1
+										dc.b $B
+										dc.b $C
+										dc.b $E
+byte_E239:          dc.b 7
 										dc.b $13
-										dc.b   4
-										dc.b   2
-										dc.b   7
+										dc.b 4
+										dc.b 2
+										dc.b 7
 										dc.b $10
-										dc.b  $D
-										dc.b  $E
-unk_E241:           dc.b   7
-										dc.b  $A
-										dc.b   5
-										dc.b   1
-										dc.b   7
+										dc.b $D
+										dc.b $E
+byte_E241:          dc.b 7
+										dc.b $A
+										dc.b 5
+										dc.b 1
+										dc.b 7
 										dc.b $10
-										dc.b  $C
-										dc.b  $E
-byte_E249:          dc.b 0
-										dc.b   0
-										dc.b   1
-										dc.b   1
-										dc.b   2
-										dc.b   2
-										dc.b   0
-										dc.l aSegaGenesis       
-										dc.l loc_10202
-										dc.b   0
-										dc.b   0
-										dc.b   0
-unk_E25B:           dc.b   3
+										dc.b $C
+										dc.b $E
+word_E249:          dc.w 0
+										dc.b 1
+										dc.b 1
+										dc.b 2
+										dc.b 2
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 0
+										dc.b 1
+										dc.b 2
+										dc.b 2
+										dc.b 0
+										dc.b 0
+										dc.b 0
+byte_E25B:          dc.b 3
 										dc.b $10
 										dc.b $14
 										dc.b $16
 										dc.b $FF
-off_E260:           dc.l unk_E26C
-off_E264:           dc.l unk_E277
+off_E260:           dc.l byte_E26C
+off_E264:           dc.l byte_E277
 										dc.l byte_E283
-unk_E26C:           dc.b   5
-										dc.b   4
-										dc.b   2
-										dc.b   2
-										dc.b   3
-										dc.b   0
-										dc.b   0
-										dc.b   4
-										dc.b   1
-										dc.b   3
-										dc.b   0
-unk_E277:           dc.b   3
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   2
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   1
+byte_E26C:          dc.b 5
+										dc.b 4
+										dc.b 2
+										dc.b 2
+										dc.b 3
+										dc.b 0
+										dc.b 0
+										dc.b 4
+										dc.b 1
+										dc.b 3
+										dc.b 0
+byte_E277:          dc.b 3
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 2
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 1
 byte_E283:          dc.b 0
-										dc.b   0
-										dc.b   0
-										dc.b   6
-										dc.b   1
-										dc.b   3
-										dc.b   0
-										dc.b   1
-										dc.b   3
-										dc.b   6
-										dc.b   6
-										dc.b   1
-										dc.b   0
-										dc.b   3
-										dc.b   3
-										dc.b   0
+										dc.b 0
+										dc.b 0
+										dc.b 6
+										dc.b 1
+										dc.b 3
+										dc.b 0
+										dc.b 1
+										dc.b 3
+										dc.b 6
+										dc.b 6
+										dc.b 1
+										dc.b 0
+										dc.b 3
+										dc.b 3
+										dc.b 0
 										dc.b $FF
 
 ; =============== S U B R O U T I N E =======================================
 
-handleEnemyAICommand:
+HandleEnemyAICommand:
 										
 										movem.l d0/d2-a5,-(sp)
 										cmpi.b  #0,d1
@@ -13570,7 +13485,7 @@ loc_E3E8:
 										movem.l (sp)+,d0/d2-a5
 										rts
 
-	; End of function handleEnemyAICommand
+	; End of function HandleEnemyAICommand
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13601,7 +13516,7 @@ loc_E40A:
 										bsr.w   GetItemDefAddress
 										move.b  ITEMDEF_OFFSET_SPELL(a0),-1(a6)
 										move.w  #$80,d0 
-										bsr.w   isCharacterLessThanHalfHP
+										bsr.w   IsCharacterLessThanHalfHP
 										bcc.s   loc_E45E        
 										move.b  #$7F,-2(a6) 
 										move.b  #$3F,-1(a6) 
@@ -13720,7 +13635,7 @@ loc_E598:
 										move.b  (a0,d4.w),d0
 										clr.w   d1
 										move.b  -1(a6),d1
-										bsr.w   loc_C62E
+										bsr.w   CreateTargetGrid
 										move.w  ((RAM_CharIdxListSize-$1000000)).w,d5
 										tst.w   d5
 										bne.s   loc_E5B4
@@ -14665,7 +14580,7 @@ loc_F034:
 										jsr     GetUpperMoveType
 										clr.l   d3
 										move.b  d1,d3
-										lea     (off_D982).l,a4
+										lea     (off_D982).l,a4 
 										lsl.l   #2,d3
 										movea.l (a4,d3.l),a4
 										cmpi.b  #1,-$C3(a6)
@@ -14942,7 +14857,7 @@ loc_F300:
 										clr.w   d0
 										move.b  d7,d0
 										bsr.w   GetUpperMoveType
-										lea     (off_D982).l,a1
+										lea     (off_D982).l,a1 
 										lsl.l   #2,d1
 										movea.l (a1,d1.l),a1
 										move.w  ((RAM_CharIdxListSize-$1000000)).w,d6
@@ -15030,7 +14945,7 @@ loc_F3D0:
 										lea     ((byte_FF4000+$400)).l,a2
 										lea     ((byte_FF4A00+$300)).l,a3
 										lea     (TERRAIN_DATA).l,a4
-										lea     MoveCostData(pc), a5
+										lea     KrakenMoveCosts(pc), a5
 										nop
 										bra.w   loc_F43A
 loc_F404:
@@ -15346,17 +15261,17 @@ off_F78A:           dc.l byte_F792
 byte_F792:          dc.b 0
 										dc.b $FF
 										dc.b $FF
-										dc.b   1
-										dc.b   1
-										dc.b   1
+										dc.b 1
+										dc.b 1
+										dc.b 1
 byte_F798:          dc.b 0
 										dc.b $FF
 										dc.b $FF
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b   1
-										dc.b   0
+										dc.b 0
+										dc.b 0
+										dc.b 1
+										dc.b 1
+										dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -15544,15 +15459,15 @@ loc_F9AC:
 
 	; End of function sub_F8EA
 
-MoveCostData:       dc.b  $F                ; special move cost list for Kraken Arm, Kraken Leg, Kraken Head
-										dc.b   2
-										dc.b   2
-										dc.b   3
-										dc.b   4
-										dc.b   3
-										dc.b   3
+KrakenMoveCosts:    dc.b $F                 ; special move cost list for Kraken Arm, Kraken Leg, Kraken Head
+										dc.b 2
+										dc.b 2
+										dc.b 3
+										dc.b 4
+										dc.b 3
+										dc.b 3
 										dc.b $FF
-										dc.b   2
+										dc.b 2
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
@@ -15561,6 +15476,6 @@ MoveCostData:       dc.b  $F                ; special move cost list for Kraken 
 										dc.b $FF
 										dc.b $FF
 SpellNames:         incbin "data/spells/spellnames.bin"
-AllyNames:          incbin "data/allynames.bin"
-EnemyNames:         incbin "data/enemynames.bin"
+AllyNames:          incbin "data/allies/allynames.bin"
+EnemyNames:         incbin "data/enemies/enemynames.bin"
 algn_FF87:          align $8000

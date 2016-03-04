@@ -8,28 +8,28 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-jmp_rts:
+j_rts:
 										jmp     rts(pc)
 
-	; End of function jmp_rts
+	; End of function j_rts
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_bigBattleSceneFunction:
+j_BigBattleSceneFunction:
 										
-										jmp     bigBattleSceneFunction(pc)
+										jmp     BigBattleSceneFunction(pc)
 
-	; End of function j_bigBattleSceneFunction
+	; End of function j_BigBattleSceneFunction
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_executeBattlesceneScript:
+j_ExecuteBattlesceneScript:
 										
-										jmp     executeBattlesceneScript(pc)
+										jmp     ExecuteBattlesceneScript(pc)
 
-	; End of function j_executeBattlesceneScript
+	; End of function j_ExecuteBattlesceneScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -51,7 +51,7 @@ rts:
 
 ; =============== S U B R O U T I N E =======================================
 
-bigBattleSceneFunction:
+BigBattleSceneFunction:
 										
 										lea     ((dword_FFB3C0-$1000000)).w,a0
 										move.l  #byte_FFB59A,d2
@@ -64,22 +64,22 @@ loc_18026:
 										dbf     d2,loc_18026
 										move.w  d1,-(sp)
 										move.w  d0,((BATTLESCENE_ENEMY-$1000000)).w
-										bsr.w   getBattleSpriteAndPalette
+										bsr.w   GetBattleSpriteAndPalette
 										move.w  d1,((ENEMY_BATTLE_SPRITE-$1000000)).w
 										move.w  d2,((ENEMY_BATTLE_PALETTE-$1000000)).w
 										move.w  d3,((word_FFB3E6-$1000000)).w
 										move.w  (sp)+,d0
 										move.w  d0,((BATTLESCENE_CHARACTER-$1000000)).w
-										bsr.w   getBattleSpriteAndPalette
+										bsr.w   GetBattleSpriteAndPalette
 										move.w  d1,((CHARACTER_BATTLE_SPRITE-$1000000)).w
 										move.w  d2,((CHARACTER_BATTLE_PALETTE-$1000000)).w
 										move.w  d3,((BATTLESCENE_ACTOR-$1000000)).w
-										bsr.w   getWeaponSpriteAndPalette
+										bsr.w   GetWeaponSpriteAndPalette
 										move.w  d2,((CHARACTER_WEAPON_SPRITE-$1000000)).w
 										move.w  d3,((CHARACTER_WEAPON_PALETTE-$1000000)).w
 										move.b  #$FF,((BATTLE_BACKGROUND-$1000000)).w
-										bsr.w   fadeOutToBlackForBattlescene
-										trap    #0
+										bsr.w   FadeOutToBlackForBattlescene
+										trap    #TRAP_SOUNDCOM
 										dc.w SOUND_COMMAND_FADE_OUT
 										move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
 										bpl.s   loc_1807C
@@ -90,19 +90,19 @@ loc_1807C:
 										move.w  d1,d0
 										lea     (FF2000_LOADING_SPACE).l,a1
 																						; store it in RAM for DMA
-										bsr.w   LoadBattleBackgroundInRAM
+										bsr.w   LoadBattleBackground
 loc_1808C:
 										
 										jsr     (WaitForVInt).w 
 										tst.b   ((FADING_SETTING-$1000000)).w
 										bne.s   loc_1808C
-										trap    #9
-										dc.w 0
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_CLEAR
 										jsr     (WaitForVInt).w 
-										jsr     (disableDisplayAndVInt).w
+										jsr     (DisableDisplayAndVInt).w
 										move.w  #$8B07,d0       ; set VScroll : each 2 cells, HScroll : each 1 line
-										jsr     (setVdpReg).w   
-										jsr     (clearSpriteTable).w
+										jsr     (SetVdpReg).w   
+										jsr     (ClearSpriteTable).w
 										moveq   #$3F,d0 
 										jsr     (InitSprites).w 
 										jsr     (sub_19B0).w
@@ -119,28 +119,28 @@ loc_180CC:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgain).w
+										jsr     (BwahDMAstuffAgain).w
 										lea     (byte_FFC000).l,a0
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgain).w
+										jsr     (BwahDMAstuffAgain).w
 										bsr.w   sub_198C8
 										lea     (byte_FFC000).l,a0
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgain).w
+										jsr     (BwahDMAstuffAgain).w
 										lea     (FF2000_LOADING_SPACE).l,a0
 										lea     ($7400).w,a1
 										move.w  #$C00,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgain).w
+										jsr     (BwahDMAstuffAgain).w
 										lea     (byte_FF3800).l,a0
 										lea     ($8C00).l,a1
 										move.w  #$C00,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgain).w
+										jsr     (BwahDMAstuffAgain).w
 										lea     ((byte_FFB542-$1000000)).w,a0
 										lea     ((PALETTE_4-$1000000)).w,a1
 										moveq   #7,d0
@@ -168,7 +168,7 @@ loc_18198:
 										
 										cmpi.w  #$FFFF,((BATTLESCENE_CHARACTER-$1000000)).w
 										beq.w   loc_1828C
-										lea     unk_1F576(pc), a0
+										lea     byte_1F576(pc), a0
 										lea     ((dword_FFDC88-$1000000)).w,a1
 										lea     (byte_FFAFA1).l,a2
 										moveq   #8,d0
@@ -183,11 +183,11 @@ loc_181B2:
 										move.w  ((CHARACTER_BATTLE_SPRITE-$1000000)).w,d0
 										clr.w   d1
 										lea     ($2000).w,a1
-										bsr.w   loadBattleSpriteData
+										bsr.w   LoadAllyBattleSprite
 										move.w  ((CHARACTER_BATTLE_SPRITE-$1000000)).w,d0
 										bsr.w   GetAllyBattleSpriteIdleAnimate
 										lea     ($3200).w,a1
-										bsr.w   loadBattleSpriteData
+										bsr.w   LoadAllyBattleSprite
 										move.w  ((CHARACTER_BATTLE_SPRITE-$1000000)).w,d0
 										move.w  ((CHARACTER_BATTLE_PALETTE-$1000000)).w,d1
 										bsr.w   LoadPaletteForBattleScene
@@ -196,7 +196,7 @@ loc_181B2:
 										move.b  d1,((BATTLE_BACKGROUND-$1000000)).w
 										cmpi.w  #$FFFF,d1
 										beq.w   loc_1822A
-										lea     unk_1F686(pc), a0
+										lea     byte_1F686(pc), a0
 										lea     ((dword_FFDCF0-$1000000)).w,a1
 										lea     (word_FFAFAE).l,a2
 										moveq   #2,d0
@@ -207,13 +207,13 @@ loc_18218:
 										move.b  #1,(a2)+
 										dbf     d0,loc_18218
 										move.w  d1,d0
-										bsr.w   loadBattleSceneGround
+										bsr.w   LoadBattleSceneGround
 loc_1822A:
 										
 										move.w  ((CHARACTER_WEAPON_SPRITE-$1000000)).w,d0
 										cmpi.w  #$FFFF,d0
 										beq.w   loc_1828C
-										bsr.w   sub_19A5C       
+										bsr.w   LoadWeaponSprite
 										move.w  ((BATTLESCENE_ACTOR-$1000000)).w,d0
 										movea.l (p_pt_AllyAnimations).l,a0
 										lsl.w   #2,d0
@@ -232,9 +232,9 @@ loc_1822A:
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgain).w
+										jsr     (BwahDMAstuffAgain).w
 										move.w  ((CHARACTER_WEAPON_PALETTE-$1000000)).w,d0
-										bsr.w   sub_19A4C
+										bsr.w   LoadWeaponPalette
 loc_1828C:
 										
 										movea.l (p_statusAnimationTiles).l,a0
@@ -248,9 +248,9 @@ loc_1828C:
 										move.w  d0,((ALLY_BATTLESPRITE_ANIM_COUNTER-$1000000)).w
 										clr.b   ((byte_FFB581-$1000000)).w
 										move.b  #$20,((byte_FFB580-$1000000)).w 
-										jsr     (enableInterrupts).w
+										jsr     (EnableInterrupts).w
 										clr.w   d6
-										jsr     (clearHscrollStuff).w
+										jsr     (ClearHscrollStuff).w
 										move.w  #$FFD4,d6
 										bsr.w   sub_1F1CC
 										clr.w   d6
@@ -262,14 +262,14 @@ loc_1828C:
 										bsr.w   sub_1F254
 										jsr     (WaitForVInt).w 
 										jsr     (sub_1942).w    
-										trap    #9
-										dc.w 1
-										dc.l sub_1EE2C
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ADD
+										dc.l UpdateBattlesceneGraphics
 										jsr     sub_1001C
-										trap    #9
-										dc.w 1
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ADD
 										dc.l VInt_UpdateWindows
-										jsr     (enableDisplayAndInterrupts).w
+										jsr     (EnableDisplayAndInterrupts).w
 										move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
 										cmpi.w  #$FFFF,d0
 										beq.s   loc_18318
@@ -291,10 +291,10 @@ loc_18318:
 loc_18342:
 										
 										jsr     (WaitForVInt).w 
-										bsr.w   sub_19EAE
+										bsr.w   FadeInFromBlackIntoBattlescene
 										clr.w   d0
 										move.b  (SKIRMISH_MUSIC_INDEX).l,d0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										moveq   #$15,d0
 loc_18358:
@@ -323,14 +323,14 @@ loc_18390:
 										bne.s   loc_18390
 										rts
 
-	; End of function bigBattleSceneFunction
+	; End of function BigBattleSceneFunction
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; battlescene scripting ?
 
-executeBattlesceneScript:
+ExecuteBattlesceneScript:
 										
 										lea     (RAM_Start).l,a6
 										clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
@@ -342,42 +342,42 @@ loc_183AC:
 										cmpi.w  #$FFFF,d0
 										beq.s   loc_183EA
 										add.w   d0,d0
-										move.w  bt_battlesceneScriptCommands(pc,d0.w),d0
-										jsr     bt_battlesceneScriptCommands(pc,d0.w)
+										move.w  rjt_BattlesceneScriptCommands(pc,d0.w),d0
+										jsr     rjt_BattlesceneScriptCommands(pc,d0.w)
 										bra.s   loc_183AC
-bt_battlesceneScriptCommands:
+rjt_BattlesceneScriptCommands:
 										
-										dc.w bsc00_animateEnemyAction-bt_battlesceneScriptCommands
-										dc.w bsc01_animateAllyAction-bt_battlesceneScriptCommands
-										dc.w bsc02_moveEnemyBSprite-bt_battlesceneScriptCommands
+										dc.w bsc00_animateEnemyAction-rjt_BattlesceneScriptCommands
+										dc.w bsc01_animateAllyAction-rjt_BattlesceneScriptCommands
+										dc.w bsc02_moveEnemyBSprite-rjt_BattlesceneScriptCommands
 																						; not found any use case, still to figure out
-										dc.w bsc03_moveAllyBSprite-bt_battlesceneScriptCommands
+										dc.w bsc03_moveAllyBSprite-rjt_BattlesceneScriptCommands
 																						; same as previous command
-										dc.w bsc04_makeEnemyIdle-bt_battlesceneScriptCommands
-										dc.w bsc05_makeAllyIdle-bt_battlesceneScriptCommands
-										dc.w bsc06_switchEnemies-bt_battlesceneScriptCommands
-										dc.w bsc07_switchAllies-bt_battlesceneScriptCommands
-										dc.w bsc08_switchToEnemyAlone-bt_battlesceneScriptCommands
-										dc.w bsc09_switchToAllyAlone-bt_battlesceneScriptCommands
-										dc.w bsc0A_executeEnemyReaction-bt_battlesceneScriptCommands
-										dc.w bsc0B_executeAllyReaction-bt_battlesceneScriptCommands
-										dc.w bsc0C_makeActorIdleAndEndAnimation-bt_battlesceneScriptCommands
+										dc.w bsc04_makeEnemyIdle-rjt_BattlesceneScriptCommands
+										dc.w bsc05_makeAllyIdle-rjt_BattlesceneScriptCommands
+										dc.w bsc06_switchEnemies-rjt_BattlesceneScriptCommands
+										dc.w bsc07_switchAllies-rjt_BattlesceneScriptCommands
+										dc.w bsc08_switchToEnemyAlone-rjt_BattlesceneScriptCommands
+										dc.w bsc09_switchToAllyAlone-rjt_BattlesceneScriptCommands
+										dc.w bsc0A_executeEnemyReaction-rjt_BattlesceneScriptCommands
+										dc.w bsc0B_executeAllyReaction-rjt_BattlesceneScriptCommands
+										dc.w bsc0C_makeActorIdleAndEndAnimation-rjt_BattlesceneScriptCommands
 																						; still to figure out exactly, not found any use case yet
-										dc.w bsc0D_endAnimation-bt_battlesceneScriptCommands
+										dc.w bsc0D_endAnimation-rjt_BattlesceneScriptCommands
 																						; still to figure out more precisely
-										dc.w bsc0E_sleep-bt_battlesceneScriptCommands
-										dc.w bsc0F_giveEXP-bt_battlesceneScriptCommands
-										dc.w bsc10_displayMessage-bt_battlesceneScriptCommands
-										dc.w bsc11_displayMessageWithNoWait-bt_battlesceneScriptCommands
-										dc.w j_hideTextBox-bt_battlesceneScriptCommands
-										dc.w j_WaitForPlayerInput-bt_battlesceneScriptCommands
-										dc.w nullsub_10-bt_battlesceneScriptCommands
+										dc.w bsc0E_sleep-rjt_BattlesceneScriptCommands
+										dc.w bsc0F_giveEXP-rjt_BattlesceneScriptCommands
+										dc.w bsc10_displayMessage-rjt_BattlesceneScriptCommands
+										dc.w bsc11_displayMessageWithNoWait-rjt_BattlesceneScriptCommands
+										dc.w j_hideTextBox-rjt_BattlesceneScriptCommands
+										dc.w j_WaitForPlayerInput-rjt_BattlesceneScriptCommands
+										dc.w nullsub_10-rjt_BattlesceneScriptCommands
 loc_183EA:
 										
 										clr.w   d0
 										rts
 
-	; End of function executeBattlesceneScript
+	; End of function ExecuteBattlesceneScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -406,9 +406,9 @@ nullsub_10:
 bsc00_animateEnemyAction:
 										
 										cmpi.w  #$FFFF,((BATTLESCENE_ENEMY-$1000000)).w
-										beq.w   endBattlesceneAnimation
+										beq.w   EndBattlesceneAnimation
 										cmpi.w  #$FFFF,(a6)
-										beq.w   animateSpell
+										beq.w   AnimateSpell
 										move.b  #2,((ACTOR_TO_MAKE_IDLE-$1000000)).w
 										bclr    #3,((byte_FFB56E-$1000000)).w
 										bclr    #5,((byte_FFB56E-$1000000)).w
@@ -430,7 +430,7 @@ bsc00_animateEnemyAction:
 										move.l  a0,-(sp)
 										movem.w d5-d7,-(sp)
 										move.w  d5,d0
-										bsr.w   executeSpellAnimation
+										bsr.w   ExecuteSpellAnimation
 										movem.w (sp)+,d5-d7
 										movea.l (sp)+,a0
 loc_1844E:
@@ -458,7 +458,7 @@ loc_1845A:
 										move.l  a0,-(sp)
 										movem.w d5-d7,-(sp)
 										move.w  d5,d0
-										bsr.w   executeSpellAnimation
+										bsr.w   ExecuteSpellAnimation
 										movem.w (sp)+,d5-d7
 										movea.l (sp)+,a0
 loc_1848C:
@@ -477,19 +477,19 @@ loc_18496:
 
 ; =============== S U B R O U T I N E =======================================
 
-animateSpell:
+AnimateSpell:
 										
 										move.w  2(a6),d0
 										cmpi.w  #$FFFF,d0
-										beq.s   endBattlesceneAnimation
-										bsr.w   executeSpellAnimation
+										beq.s   EndBattlesceneAnimation
+										bsr.w   ExecuteSpellAnimation
 
-	; End of function animateSpell
+	; End of function AnimateSpell
 
 
 ; START OF FUNCTION CHUNK FOR bsc00_animateEnemyAction
 
-endBattlesceneAnimation:
+EndBattlesceneAnimation:
 										
 										addq.w  #4,a6
 										rts
@@ -541,14 +541,14 @@ return_184E6:
 bsc01_animateAllyAction:
 										
 										cmpi.w  #$FFFF,((BATTLESCENE_CHARACTER-$1000000)).w
-										beq.s   endBattlesceneAnimation
+										beq.s   EndBattlesceneAnimation
 										cmpi.w  #$FFFF,(a6)
-										beq.s   animateSpell
+										beq.s   AnimateSpell
 										move.b  #1,((ACTOR_TO_MAKE_IDLE-$1000000)).w
 										bclr    #1,((byte_FFB56E-$1000000)).w
 										bclr    #4,((byte_FFB56E-$1000000)).w
 										move.w  (a6)+,d1        ; animation type
-										bsr.w   getAllyAnimation
+										bsr.w   GetAllyAnimation
 										clr.w   d7
 										move.b  (a0)+,d7
 										clr.w   d6
@@ -566,7 +566,7 @@ bsc01_animateAllyAction:
 										move.l  a0,-(sp)
 										movem.w d5-d7,-(sp)
 										move.w  d5,d0
-										bsr.w   executeSpellAnimation
+										bsr.w   ExecuteSpellAnimation
 										movem.w (sp)+,d5-d7
 										movea.l (sp)+,a0
 loc_1853E:
@@ -599,8 +599,8 @@ loc_1854A:
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										move.w  #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 loc_18596:
 										
 										movem.w (sp)+,d5-d7
@@ -610,7 +610,7 @@ loc_18596:
 										move.l  a0,-(sp)
 										movem.w d5-d7,-(sp)
 										move.w  d5,d0
-										bsr.w   executeSpellAnimation
+										bsr.w   ExecuteSpellAnimation
 										movem.w (sp)+,d5-d7
 										movea.l (sp)+,a0
 loc_185B2:
@@ -701,8 +701,8 @@ loc_1862E:
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										move.w  #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 loc_18664:
 										
 										move.w  ((ALLY_BATTLESPRITE_ANIM_SPEED-$1000000)).w,d0
@@ -776,7 +776,7 @@ bsc07_switchAllies:
 										move.w  d7,d0
 										cmpi.w  #$FFFF,d0
 										beq.s   loc_18736
-										bsr.w   getBattleSpriteAndPalette
+										bsr.w   GetBattleSpriteAndPalette
 										move.w  d1,d0
 										bsr.w   sub_19AE4
 										move.w  d1,d0
@@ -787,17 +787,17 @@ bsc07_switchAllies:
 										cmpi.w  #$FFFF,d1
 										beq.s   loc_1871E
 										move.w  d1,d0
-										bsr.w   sub_19BCC
+										bsr.w   sub_19BCC       
 loc_1871E:
 										
 										move.w  d7,d0
-										bsr.w   getWeaponSpriteAndPalette
+										bsr.w   GetWeaponSpriteAndPalette
 										cmpi.w  #$FFFF,d2
 										beq.s   loc_18736
 										move.w  d2,d0
-										bsr.w   sub_19A5C       
+										bsr.w   LoadWeaponSprite
 										move.w  d3,d0
-										bsr.w   sub_19A4C
+										bsr.w   LoadWeaponPalette
 loc_18736:
 										
 										cmpi.w  #$FFFF,((BATTLESCENE_CHARACTER-$1000000)).w
@@ -821,11 +821,11 @@ loc_18758:
 										jsr     sub_10028
 										move.w  d7,((BATTLESCENE_CHARACTER-$1000000)).w
 										move.w  d7,d0
-										bsr.w   getBattleSpriteAndPalette
+										bsr.w   GetBattleSpriteAndPalette
 										move.w  d1,((CHARACTER_BATTLE_SPRITE-$1000000)).w
 										move.w  d2,((CHARACTER_BATTLE_PALETTE-$1000000)).w
 										move.w  d3,((BATTLESCENE_ACTOR-$1000000)).w
-										bsr.w   getWeaponSpriteAndPalette
+										bsr.w   GetWeaponSpriteAndPalette
 										move.w  d2,((CHARACTER_WEAPON_SPRITE-$1000000)).w
 										move.w  d3,((CHARACTER_WEAPON_PALETTE-$1000000)).w
 										clr.b   ((byte_FFB57E-$1000000)).w
@@ -857,14 +857,14 @@ loc_187BC:
 										lea     ($2000).w,a1
 										move.w  #$900,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										lea     (byte_FF7A02).l,a0
 										lea     ($3200).w,a1
 										move.w  #$900,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,d0
 										bsr.w   sub_19E6E
 										move.b  d1,((BATTLE_BACKGROUND-$1000000)).w
@@ -874,7 +874,7 @@ loc_187BC:
 										lea     ($F000).l,a1
 										move.w  #$300,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
+										jsr     (BwahDMAstuffAgainbis).w
 loc_18818:
 										
 										move.w  ((CHARACTER_WEAPON_SPRITE-$1000000)).w,d0
@@ -907,8 +907,8 @@ loc_18864:
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										move.w  #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 loc_1888C:
 										
 										bsr.w   sub_1892A
@@ -1027,18 +1027,18 @@ bsc06_switchEnemies:
 										bset    #7,8(a0)
 										bset    #7,$10(a0)
 										move.w  (a6),d0
-										bsr.w   getBattleSpriteAndPalette
+										bsr.w   GetBattleSpriteAndPalette
 										move.w  d1,d0
-										bsr.w   loadEnemyBattleSprite
+										bsr.w   LoadEnemyBattleSprite
 										movea.l (p_pt_battlesceneTransitionTiles).l,a2
 										movea.l (a2)+,a0
 										move.l  a2,-(sp)
 										lea     (FF6802_LOADING_SPACE).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										movea.l (sp)+,a2
 										movea.l (a2),a0
 										lea     (FF8002_LOADING_SPACE).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										move.w  (a6),d0
 										bpl.s   loc_189AE
 										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,d0
@@ -1048,7 +1048,7 @@ loc_189AE:
 										move.w  d1,d0
 										move.w  d0,-(sp)
 										lea     (FF2000_LOADING_SPACE).l,a1
-										bsr.w   LoadBattleBackgroundInRAM
+										bsr.w   LoadBattleBackground
 										move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
 										jsr     sub_1002C
 										bsr.w   sub_198C8
@@ -1097,7 +1097,7 @@ loc_18A2E:
 										dbf     d0,loc_18A18
 										move.w  (a6),d0
 										move.w  d0,((BATTLESCENE_ENEMY-$1000000)).w
-										bsr.w   getBattleSpriteAndPalette
+										bsr.w   GetBattleSpriteAndPalette
 										move.w  d1,((ENEMY_BATTLE_SPRITE-$1000000)).w
 										move.w  d2,((ENEMY_BATTLE_PALETTE-$1000000)).w
 										move.w  d3,((word_FFB3E6-$1000000)).w
@@ -1217,7 +1217,7 @@ loc_18B8C:
 										move.w  ((CHARACTER_WEAPON_SPRITE-$1000000)).w,d0
 										cmpi.w  #$FFFF,d0
 										beq.s   loc_18BA0
-										bsr.w   sub_19A5C       
+										bsr.w   LoadWeaponSprite
 loc_18BA0:
 										
 										addq.w  #4,a6
@@ -1243,21 +1243,21 @@ sub_18BAA:
 										beq.s   loc_18BD6
 										move.w  #$300,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
+										jsr     (BwahDMAstuffAgainbis).w
 										bra.s   loc_18BF4
 loc_18BD6:
 										
 										move.w  #$100,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
+										jsr     (BwahDMAstuffAgainbis).w
 										lea     (word_FF9802).l,a0
 										lea     ($4C00).w,a1
 										move.w  #$200,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
+										jsr     (BwahDMAstuffAgainbis).w
 loc_18BF4:
 										
-										jsr     (set_FFDE94_bit3).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,d0-d2/a0-a2
 return_18BFC:
 										
@@ -1285,8 +1285,8 @@ sub_18C1E:
 										bsr.w   sub_1F1CC
 										move.w  #$300,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.l a0-a2,-(sp)
 										bchg    #7,(a2)
 										bchg    #7,2(a2)
@@ -1307,8 +1307,8 @@ loc_18C5A:
 										lea     ($C180).l,a1
 										move.w  #$1A0,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,a0-a2
 										addq.w  #8,a2
 										move.w  (sp)+,d6
@@ -1327,8 +1327,8 @@ sub_18C94:
 										movem.l a0-a2,-(sp)
 										move.w  #$300,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 										bchg    #7,(a2)
 										bchg    #7,2(a2)
 										bchg    #7,4(a2)
@@ -1348,8 +1348,8 @@ loc_18CD0:
 										lea     ($C180).l,a1
 										move.w  #$1A0,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,a0-a2
 										lea     -$600(a0),a0
 										lea     -$600(a1),a1
@@ -1504,7 +1504,7 @@ loc_18E30:
 										
 										cmpi.w  #$8000,d1
 										beq.w   loc_18F26
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_LIGHTNING_1    ; enemy attack ?
 										bclr    #1,((byte_FFB56E-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,d0
@@ -1594,7 +1594,7 @@ loc_18F38:
 										rts
 loc_18F48:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_HEALING
 										rts
 
@@ -1660,7 +1660,7 @@ loc_18FC6:
 										
 										cmpi.w  #$8000,d1
 										beq.w   loc_19076
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_HIT_1          ; attack sfx ?
 										bclr    #3,((byte_FFB56E-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,d0
@@ -1729,7 +1729,7 @@ loc_19088:
 										rts
 loc_19098:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_HEALING        ; healing
 										bset    #1,((byte_FFB583-$1000000)).w
 										rts
@@ -1741,7 +1741,7 @@ loc_19098:
 
 bsc0C_makeActorIdleAndEndAnimation:
 										
-										bsr.w   makeActorIdle   
+										bsr.w   MakeActorIdle   
 										move.b  #3,((byte_FFB585-$1000000)).w
 										jsr     (WaitForVInt).w 
 										bsr.w   sub_1A24E
@@ -1819,15 +1819,15 @@ loc_1910C:
 										move.b  ((byte_FFB56F-$1000000)).w,d1
 										andi.w  #2,d1
 										jsr     sub_10020
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_LEVEL_UP       ; level up
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $F4                ; {NAME} became{N}level {#}!
 										moveq   #0,d0
 										move.b  (a5)+,d0
 										beq.s   loc_19174
 										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $10A               ; {D1}HP increased by {#}!
 loc_19174:
 										
@@ -1835,7 +1835,7 @@ loc_19174:
 										move.b  (a5)+,d0
 										beq.s   loc_19182
 										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $10B               ; {D1}MP increased by {#}!
 loc_19182:
 										
@@ -1843,7 +1843,7 @@ loc_19182:
 										move.b  (a5)+,d0
 										beq.s   loc_19190
 										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $10C               ; {D1}Attack increased by {#}!
 loc_19190:
 										
@@ -1851,7 +1851,7 @@ loc_19190:
 										move.b  (a5)+,d0
 										beq.s   loc_1919E
 										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $10D               ; {D1}Defense increased by {#}!
 loc_1919E:
 										
@@ -1859,7 +1859,7 @@ loc_1919E:
 										move.b  (a5)+,d0
 										beq.s   loc_191AC
 										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $10E               ; {D1}Agility increased by {#}!
 loc_191AC:
 										
@@ -1873,7 +1873,7 @@ loc_191AC:
 										bne.s   loc_191D0
 										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  d0,((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $10F               ; {D1}{NAME} learned the new{N}magic spell {SPELL}!
 										bra.s   return_191DE
 loc_191D0:
@@ -1881,7 +1881,7 @@ loc_191D0:
 										addq.w  #1,d1
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $110               ; {D1}{SPELL} increased to{N}level {#}!
 return_191DE:
 										
@@ -1909,7 +1909,7 @@ bsc10_displayMessage:
 										jsr     (DisplayText).l 
 										tst.b   ((MESSAGE_SPEED-$1000000)).w
 										bne.s   loc_1920C
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $16A               ; {DICT}{W2} <= wait for P1 input
 										rts
 loc_1920C:
@@ -1976,7 +1976,7 @@ loc_19258:
 										dbf     d0,loc_19258
 loc_19266:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SOUND_COMMAND_FADE_OUT
 										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,d0
 										cmpi.w  #$FFFF,d0
@@ -2187,7 +2187,7 @@ sub_193C4:
 										
 										cmpi.w  #$FFFF,((BATTLESCENE_CHARACTER-$1000000)).w
 										beq.s   return_1942A
-										lea     unk_1F576(pc), a0
+										lea     byte_1F576(pc), a0
 										btst    #1,((byte_FFB56F-$1000000)).w
 										beq.s   loc_193E0
 										lea     $48(a0),a0
@@ -2250,7 +2250,7 @@ loc_1944E:
 										lea     ($2000).w,a1
 loc_19452:
 										
-										bsr.w   sub_19A2A
+										bsr.w   sub_19A2A       
 return_19456:
 										
 										rts
@@ -2321,7 +2321,7 @@ sub_194AA:
 										move.w  ((ENEMY_BATTLE_SPRITE-$1000000)).w,d0
 										cmpi.w  #$FFFF,d0
 										beq.s   return_194FC
-										bsr.w   sub_19B24
+										bsr.w   sub_19B24       
 										lea     (DMA_SPACE_FF8804).l,a0
 										btst    #2,((byte_FFB56E-$1000000)).w
 										beq.s   loc_194D8
@@ -2334,12 +2334,12 @@ loc_194DC:
 										
 										move.w  #$600,d0
 										move.w  #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										move.w  #$600,d0
 										move.w  #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 return_194FC:
 										
 										rts
@@ -2364,7 +2364,7 @@ sub_19504:
 										
 										cmpi.b  #$FF,((BATTLE_BACKGROUND-$1000000)).w
 										beq.s   return_19544
-										lea     unk_1F686(pc), a0
+										lea     byte_1F686(pc), a0
 										btst    #0,((byte_FFB56F-$1000000)).w
 										beq.s   loc_19520
 										lea     $18(a0),a0
@@ -2452,7 +2452,7 @@ loc_1958E:
 										subi.w  #$70,d0 
 loc_195AC:
 										
-										lea     unk_1F606(pc), a0
+										lea     byte_1F606(pc), a0
 										andi.w  #$30,d7 
 										add.w   d7,d7
 										adda.w  d7,a0
@@ -2482,7 +2482,7 @@ return_195E0:
 
 ; make actor idle
 
-makeActorIdle:
+MakeActorIdle:
 										
 										move.b  ((ACTOR_TO_MAKE_IDLE-$1000000)).w,d0
 										subq.b  #1,d0
@@ -2499,7 +2499,7 @@ loc_195F8:
 										clr.b   ((ACTOR_TO_MAKE_IDLE-$1000000)).w
 										rts
 
-	; End of function makeActorIdle
+	; End of function MakeActorIdle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2511,7 +2511,7 @@ sub_195FE:
 										bclr    #1,((byte_FFB56E-$1000000)).w
 										clr.b   ((byte_FFB57E-$1000000)).w
 										bsr.w   sub_19AB0
-										lea     unk_196B4(pc), a1
+										lea     word_196B4(pc), a1
 										moveq   #7,d7
 loc_1961A:
 										
@@ -2569,54 +2569,38 @@ loc_19684:
 										
 										move.w  #$900,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										movea.l (sp)+,a0
 										cmpi.w  #$FFFF,((CHARACTER_WEAPON_SPRITE-$1000000)).w
 										beq.s   loc_196B0
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 loc_196B0:
 										
 										jmp     (WaitForVInt).w 
 
 	; End of function sub_19632
 
-unk_196B4:          dc.b  $F
-										dc.b $FF
-										dc.b   0
-										dc.b   0
-										dc.b  $F
-										dc.b $FF
-										dc.b   0
-										dc.b   4
-										dc.b $FF
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $FF
-										dc.b  $F
-										dc.b   0
-										dc.b   4
-										dc.b $F0 
-										dc.b $FF
-										dc.b   0
-										dc.b   0
-										dc.b $F0 
-										dc.b $FF
-										dc.b   0
-										dc.b   4
-										dc.b $FF
-										dc.b $F0 
-										dc.b   0
-										dc.b   0
-										dc.b $FF
-										dc.b $F0 
-										dc.b   0
-										dc.b   4
+word_196B4:         dc.w $FFF
+										dc.w 0
+										dc.w $FFF
+										dc.w 4
+										dc.w $FF0F
+										dc.w 0
+										dc.w $FF0F
+										dc.w 4
+										dc.w $F0FF
+										dc.w 0
+										dc.w $F0FF
+										dc.w 4
+										dc.w $FFF0
+										dc.w 0
+										dc.w $FFF0
+										dc.w 4
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2636,8 +2620,8 @@ loc_196F6:
 										bsr.w   GetEnemyBattleSpriteIdleAnimate
 loc_196FA:
 										
-										bsr.w   sub_19B24
-										lea     unk_19764(pc), a1
+										bsr.w   sub_19B24       
+										lea     word_19764(pc), a1
 										moveq   #7,d7
 loc_19704:
 										
@@ -2680,47 +2664,31 @@ loc_19748:
 										
 										move.w  #$600,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										move.w  #$600,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jmp     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jmp     (SetFFDE94b3andWait).w
 
 	; End of function sub_1971C
 
-unk_19764:          dc.b  $F
-										dc.b $FF
-										dc.b   0
-										dc.b   0
-										dc.b $FF
-										dc.b  $F
-										dc.b   0
-										dc.b   4
-										dc.b $FF
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b  $F
-										dc.b $FF
-										dc.b   0
-										dc.b   4
-										dc.b $F0 
-										dc.b $FF
-										dc.b   0
-										dc.b   0
-										dc.b $FF
-										dc.b $F0 
-										dc.b   0
-										dc.b   4
-										dc.b $FF
-										dc.b $F0 
-										dc.b   0
-										dc.b   0
-										dc.b $F0 
-										dc.b $FF
-										dc.b   0
-										dc.b   4
+word_19764:         dc.w $FFF
+										dc.w 0
+										dc.w $FF0F
+										dc.w 4
+										dc.w $FF0F
+										dc.w 0
+										dc.w $FFF
+										dc.w 4
+										dc.w $F0FF
+										dc.w 0
+										dc.w $FFF0
+										dc.w 4
+										dc.w $FFF0
+										dc.w 0
+										dc.w $F0FF
+										dc.w 4
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2764,7 +2732,7 @@ return_197C6:
 
 ; =============== S U B R O U T I N E =======================================
 
-getAllyAnimation:
+GetAllyAnimation:
 										
 										movem.l d1-d2,-(sp)
 										tst.w   d1
@@ -2808,7 +2776,7 @@ loc_19826:
 										movem.l (sp)+,d1-d2
 										rts
 
-	; End of function getAllyAnimation
+	; End of function GetAllyAnimation
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2848,7 +2816,7 @@ loc_19850:
 GetAllyBattleSpriteIdleAnimate:
 										
 										move.l  a0,-(sp)
-										lea     tbl_AllyBSpriteIdleAnimate(pc), a0
+										lea     AllyBSpriteIdleAnimate(pc), a0
 										bra.w   loc_19870
 
 	; End of function GetAllyBattleSpriteIdleAnimate
@@ -2863,7 +2831,7 @@ GetAllyBattleSpriteIdleAnimate:
 GetEnemyBattleSpriteIdleAnimate:
 										
 										move.l  a0,-(sp)
-										lea     tbl_EnemyBSpriteIdleAnimate(pc), a0
+										lea     EnemyBSpriteIdleAnimate(pc), a0
 loc_19870:
 										
 										moveq   #0,d1
@@ -2940,7 +2908,7 @@ loc_198E0:
 										
 										move.w  #$40F8,(a0)+
 										dbf     d0,loc_198E0
-										lea     somePlaneALayout(pc), a1
+										lea     SomePlaneALayout(pc), a1
 										move.w  #$BF,d0 
 loc_198F0:
 										
@@ -2993,8 +2961,8 @@ loc_19932:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jmp     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jmp     (Set_FFDE94_bit3).w
 
 	; End of function sub_19926
 
@@ -3076,7 +3044,7 @@ sub_199BC:
 										adda.w  d0,a0
 										move.w  #$C00,d0
 										jsr     (DmaTilesViaFF8804bis).w
-										jmp     (setFFDE94b3andWait).w
+										jmp     (SetFFDE94b3andWait).w
 
 	; End of function sub_199BC
 
@@ -3114,7 +3082,7 @@ loc_19A04:
 ;     In: D0 = battle sprite idx
 ;         D1 = frame idx
 
-loadBattleSpriteData:
+LoadAllyBattleSprite:
 										
 										movea.l (p_pt_AllyBattleSprites).l,a0
 										lsl.w   #2,d0
@@ -3127,10 +3095,12 @@ loadBattleSpriteData:
 										move.w  #$900,d0
 										jmp     (DmaTilesViaFF8804).w
 
-	; End of function loadBattleSpriteData
+	; End of function LoadAllyBattleSprite
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Load ally battlesprite and set FFDE94 bit 3 and wait
 
 sub_19A2A:
 										
@@ -3144,21 +3114,21 @@ sub_19A2A:
 										adda.w  d0,a0
 										move.w  #$900,d0
 										jsr     (DmaTilesViaFF8804bis).w
-										jmp     (setFFDE94b3andWait).w
+										jmp     (SetFFDE94b3andWait).w
 
 	; End of function sub_19A2A
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_19A4C:
+LoadWeaponPalette:
 										
 										movea.l (p_plt_BattleSceneWeaponColors).l,a0
 										lsl.w   #2,d0
 										move.l  (a0,d0.w),((dword_FFD09C-$1000000)).w
 										rts
 
-	; End of function sub_19A4C
+	; End of function LoadWeaponPalette
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3166,13 +3136,13 @@ sub_19A4C:
 ; ???
 ; In: D0 = weapon sprite idx
 
-sub_19A5C:
+LoadWeaponSprite:
 										
 										movea.l (p_pt_WeaponSprites).l,a0
 										lsl.w   #2,d0
 										movea.l (a0,d0.w),a0
 										lea     (FF2000_LOADING_SPACE).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										lea     (byte_FF4000).l,a0
 										move.w  #$1FF,d0
 loc_19A7C:
@@ -3181,12 +3151,12 @@ loc_19A7C:
 										dbf     d0,loc_19A7C
 										rts
 
-	; End of function sub_19A5C
+	; End of function LoadWeaponSprite
 
 
 ; =============== S U B R O U T I N E =======================================
 
-loadBattleSceneGround:
+LoadBattleSceneGround:
 										
 										movea.l (p_pt_BattleSceneGrounds).l,a0
 										lsl.w   #2,d0
@@ -3201,7 +3171,7 @@ loadBattleSceneGround:
 										jmp     (DmaTilesViaFF8804).w
 										rts
 
-	; End of function loadBattleSceneGround
+	; End of function LoadBattleSceneGround
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3224,7 +3194,7 @@ loc_19AD6:
 										move.w  (a0),d0
 										adda.w  d0,a0
 										lea     (DMA_SPACE_FF8804).l,a1
-										jmp     (loadTileData).w
+										jmp     (LoadTileData).w
 
 	; End of function sub_19AB0
 
@@ -3243,7 +3213,7 @@ sub_19AE4:
 										move.l  a0,-(sp)
 										adda.w  d0,a0
 										lea     (FF6802_LOADING_SPACE).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										movea.l (sp)+,a0
 										move.w  (sp)+,d0
 										bsr.w   GetAllyBattleSpriteIdleAnimate
@@ -3252,7 +3222,7 @@ sub_19AE4:
 										move.w  (a0),d0
 										adda.w  d0,a0
 										lea     (byte_FF7A02).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										move.w  (sp)+,d1
 										rts
 
@@ -3260,6 +3230,8 @@ sub_19AE4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; loads enemy battle sprite
 
 sub_19B24:
 										
@@ -3272,7 +3244,7 @@ sub_19B24:
 										move.w  (a0),d0
 										adda.w  d0,a0
 										lea     (DMA_SPACE_FF8804).l,a1
-										jmp     (loadTileData).w
+										jmp     (LoadTileData).w
 
 	; End of function sub_19B24
 
@@ -3281,7 +3253,7 @@ sub_19B24:
 
 ; d0 : battle sprite index
 
-loadEnemyBattleSprite:
+LoadEnemyBattleSprite:
 										
 										cmpi.w  #$FFFF,d0
 										beq.w   return_19B7E
@@ -3292,7 +3264,7 @@ loadEnemyBattleSprite:
 										move.w  (a0),d0
 										adda.w  d0,a0           ; offset to sprite frame
 										lea     (ENEMY_BATTLESPRITE_UNCOMP_SPACE).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										lea     (ENEMY_BATTLESPRITE_UNCOMP_SPACE).l,a0
 										lea     (ENEMY_BATTLESPRITE_LOADING_SPACE).l,a1
 										move.w  #$1FF,d0
@@ -3304,12 +3276,12 @@ return_19B7E:
 										
 										rts
 
-	; End of function loadEnemyBattleSprite
+	; End of function LoadEnemyBattleSprite
 
 
 ; =============== S U B R O U T I N E =======================================
 
-LoadBattleBackgroundInRAM:
+LoadBattleBackground:
 										
 										tst.w   d0
 										bmi.s   return_19BCA
@@ -3319,13 +3291,13 @@ LoadBattleBackgroundInRAM:
 										move.w  (a2)+,d0
 										movem.l a1-a2,-(sp)
 										lea     -2(a2,d0.w),a0
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										movem.l (sp)+,a1-a2
 										move.w  (a2)+,d0
 										move.l  a2,-(sp)
 										lea     -2(a2,d0.w),a0
 										lea     $1800(a1),a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										movea.l (sp)+,a2
 										move.w  (a2),d0
 										lea     (a2,d0.w),a0
@@ -3341,10 +3313,12 @@ return_19BCA:
 										
 										rts
 
-	; End of function LoadBattleBackgroundInRAM
+	; End of function LoadBattleBackground
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; loads battlescene ground
 
 sub_19BCC:
 										
@@ -3357,14 +3331,14 @@ sub_19BCC:
 										move.w  (a0),d0
 										adda.w  d0,a0
 										lea     (byte_FF8C02).l,a1
-										jmp     (loadTileData).w
+										jmp     (LoadTileData).w
 
 	; End of function sub_19BCC
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_19BF2:
+LoadInvocationSprite:
 										
 										movea.l (p_pt_InvocationSprites).l,a0
 										lsl.w   #2,d0
@@ -3392,41 +3366,41 @@ loc_19C14:
 										beq.s   loc_19C58
 										lea     ($2000).w,a1
 										jsr     (DmaTilesViaFF8804bis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (SetFFDE94b3andWait).w
 										movea.l (sp)+,a0
 										move.w  (a0),d0
 										adda.w  d0,a0
 										lea     ($3200).w,a1
 										move.w  #$900,d0
 										jsr     (DmaTilesViaFF8804bis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (SetFFDE94b3andWait).w
 										bra.s   loc_19CA0
 loc_19C58:
 										
 										lea     ($A400).l,a1
 										jsr     (DmaTilesViaFF8804bis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (SetFFDE94b3andWait).w
 										movea.l (sp)+,a0
 										move.w  (a0),d0
 										adda.w  d0,a0
 										lea     (DMA_SPACE_FF8804).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										lea     (DMA_SPACE_FF8804).l,a0
 										lea     (loc_B600).l,a1
 										move.w  #$500,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
+										jsr     (BwahDMAstuffAgainbis).w
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 loc_19CA0:
 										
 										movea.l (sp)+,a0
 										rts
 
-	; End of function sub_19BF2
+	; End of function LoadInvocationSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3434,7 +3408,7 @@ loc_19CA0:
 ;     Loads spell animation tiles.
 ;     In: D0 = spell animation tileset index
 
-loadSpellAnimationGraphics:
+LoadSpellGraphics:
 										
 										movea.l (p_pt_SpellGraphics).l,a0
 										lsl.w   #2,d0
@@ -3448,17 +3422,19 @@ loadSpellAnimationGraphics:
 										move.w  (a0)+,$1A(a2)
 										move.w  (a0),$1C(a1)
 										move.w  (a0)+,$1C(a2)
-										jsr     (storeVdpCommandster).w
+										jsr     (StoreVdpCommandster).w
 										lea     ($A400).l,a1
 										lsr.w   #1,d0
 										moveq   #2,d1
 										jsr     (DmaTilesViaFF8804bis).w
-										jmp     (setFFDE94b3andWait).w
+										jmp     (SetFFDE94b3andWait).w
 
-	; End of function loadSpellAnimationGraphics
+	; End of function LoadSpellGraphics
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; loads spell graphics
 
 sub_19CE8:
 										
@@ -3474,15 +3450,15 @@ sub_19CE8:
 										move.w  (a0)+,$1A(a2)
 										move.w  (a0),$1C(a1)
 										move.w  (a0)+,$1C(a2)
-										jsr     (storeVdpCommandster).w
+										jsr     (StoreVdpCommandster).w
 										lea     (DMA_SPACE_FF8804).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										lea     (DMA_SPACE_FF8804).l,a0
 										lea     ($F000).l,a1
 										move.w  #$300,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jmp     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jmp     (SetFFDE94b3andWait).w
 
 	; End of function sub_19CE8
 
@@ -3491,7 +3467,7 @@ sub_19CE8:
 
 ; get battle sprite # and palette # for character related to entity D0 -> D1 (sprite), D2 (palette)
 
-getBattleSpriteAndPalette:
+GetBattleSpriteAndPalette:
 										
 										cmpi.w  #$FFFF,d0
 										bne.s   loc_19D4C
@@ -3505,7 +3481,7 @@ loc_19D4C:
 										bcc.w   loc_19D90
 										movem.l d0/a0,-(sp)
 										jsr     j_GetClass      
-										lea     tbl_AllyBattleSprites(pc), a0
+										lea     AllyBattleSprites(pc), a0
 										mulu.w  #9,d0
 										adda.w  d0,a0
 										moveq   #2,d0
@@ -3533,7 +3509,7 @@ loc_19D90:
 										
 										move.l  a0,-(sp)
 										jsr     j_GetEnemyID
-										lea     tbl_EnemyBattleSprites(pc), a0
+										lea     EnemyBattleSprites(pc), a0
 										add.w   d1,d1
 										move.b  1(a0,d1.w),d2
 										ext.w   d2
@@ -3543,14 +3519,14 @@ loc_19D90:
 										movea.l (sp)+,a0
 										rts
 
-	; End of function getBattleSpriteAndPalette
+	; End of function GetBattleSpriteAndPalette
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; get battle sprite # and palette # for entity D0's equipped weapon -> D2 (sprite), D3 (palette)
 
-getWeaponSpriteAndPalette:
+GetWeaponSpriteAndPalette:
 										
 										movem.l d1/a0,-(sp)
 										cmpi.w  #$80,d0 
@@ -3561,7 +3537,7 @@ getWeaponSpriteAndPalette:
 										bcs.w   loc_19DF2
 										cmpi.w  #$6D,d1 
 										bhi.w   loc_19DF2
-										lea     tbl_WeaponBattleSprites(pc), a0
+										lea     WeaponBattleSprites(pc), a0
 										subi.w  #$1A,d1
 										add.w   d1,d1
 										move.b  (a0,d1.w),d2
@@ -3577,7 +3553,7 @@ loc_19DF2:
 										movem.l (sp)+,d1/a0
 										rts
 
-	; End of function getWeaponSpriteAndPalette
+	; End of function GetWeaponSpriteAndPalette
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3590,15 +3566,15 @@ GetBattleBackground:
 										cmpi.w  #$80,d0 
 										bcs.s   loc_19E20
 										jsr     j_GetEnemyID
-										cmpi.w  #$62,d1 ; if enemy is Zeon, get his own background
+										cmpi.w  #$62,d1 ; harcoded : if enemy is Zeon, get his own background
 										bne.s   loc_19E20
 										moveq   #$1B,d1
 										bra.w   loc_19E58
 loc_19E20:
 										
 										clr.w   d1
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d1
-										lea     tbl_CustomBackgrounds(pc), a0
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+										lea     CustomBackgrounds(pc), a0
 										move.b  (a0,d1.w),d1    ; get battle's own background if it has one
 										cmpi.b  #$FF,d1
 										bne.w   loc_19E58
@@ -3612,7 +3588,7 @@ loc_19E48:
 										
 										jsr     j_GetCurrentTerrainType
 										andi.w  #$F,d0          ; get background according to terrain type
-										move.b  tbl_TerrainBackgrounds(pc,d0.w),d1
+										move.b  TerrainBackgrounds(pc,d0.w),d1
 										ext.w   d1
 loc_19E58:
 										
@@ -3621,23 +3597,8 @@ loc_19E58:
 
 	; End of function GetBattleBackground
 
-tbl_TerrainBackgrounds:
-										dc.b 4                  ; mostly used for overworld battles, I guess !
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b   2
-										dc.b   3
-										dc.b   5
-										dc.b   4
-										dc.b   6
-										dc.b   3
-										dc.b   3
-										dc.b   3
-										dc.b   3
-										dc.b   3
-										dc.b   3
-										dc.b   3
+TerrainBackgrounds: incbin "battles/terrainbackgrounds.bin"
+																						; mostly used for overworld battles, I guess !
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -3678,37 +3639,37 @@ loc_19EA8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_19EAE:
+FadeInFromBlackIntoBattlescene:
 										
 										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 										rts
 
-	; End of function sub_19EAE
+	; End of function FadeInFromBlackIntoBattlescene
 
 
 ; =============== S U B R O U T I N E =======================================
 
-fadeOutToBlackForBattlescene:
+FadeOutToBlackForBattlescene:
 										
 										move.b  #2,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 										rts
 
-	; End of function fadeOutToBlackForBattlescene
+	; End of function FadeOutToBlackForBattlescene
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; spell animation subroutine
 
-executeSpellAnimation:
+ExecuteSpellAnimation:
 										
 										tst.b   ((byte_FFB584-$1000000)).w
 										bne.w   return_19F5C
@@ -3730,43 +3691,43 @@ loc_19F0A:
 										jmp     rjt_SpellAnimation(pc,d0.w)
 rjt_SpellAnimation:
 										
-										dc.w nullsub_11-rjt_SpellAnimation
-										dc.w sub_1A47A-rjt_SpellAnimation
-										dc.w sub_1A654-rjt_SpellAnimation
-										dc.w sub_1A73A-rjt_SpellAnimation
-										dc.w sub_1A848-rjt_SpellAnimation
-										dc.w sub_1A928-rjt_SpellAnimation
-										dc.w sub_1AA40-rjt_SpellAnimation
-										dc.w sub_1AA90-rjt_SpellAnimation
-										dc.w sub_1AB9E-rjt_SpellAnimation
-										dc.w loc_1ABF4-rjt_SpellAnimation
-										dc.w sub_1ACD8-rjt_SpellAnimation
-										dc.w loc_1ACE4-rjt_SpellAnimation
-										dc.w loc_1AD3E-rjt_SpellAnimation
-										dc.w loc_1ADA4-rjt_SpellAnimation
-										dc.w sub_1AEB0-rjt_SpellAnimation
-										dc.w sub_1AF0A-rjt_SpellAnimation
-										dc.w sub_1AF8C-rjt_SpellAnimation
-										dc.w sub_1B012-rjt_SpellAnimation
-										dc.w sub_1B0D0-rjt_SpellAnimation
-										dc.w sub_1B21A-rjt_SpellAnimation
-										dc.w sub_1B37C-rjt_SpellAnimation
-										dc.w loc_1B406-rjt_SpellAnimation
-										dc.w sub_1B488-rjt_SpellAnimation
-										dc.w sub_1B660-rjt_SpellAnimation
-										dc.w sub_1B4F6-rjt_SpellAnimation
-										dc.w loc_1ABA8-rjt_SpellAnimation
-										dc.w sub_1B618-rjt_SpellAnimation
-										dc.w loc_1ABFC-rjt_SpellAnimation
-										dc.w loc_1AC04-rjt_SpellAnimation
-										dc.w sub_1B6A8-rjt_SpellAnimation
-										dc.w sub_1B6EA-rjt_SpellAnimation
-										dc.w sub_1B716-rjt_SpellAnimation
+										dc.w sa00_Nothing-rjt_SpellAnimation
+										dc.w sa01_-rjt_SpellAnimation
+										dc.w sa02_-rjt_SpellAnimation
+										dc.w sa03_-rjt_SpellAnimation
+										dc.w sa04_-rjt_SpellAnimation
+										dc.w sa05_-rjt_SpellAnimation
+										dc.w sa06_-rjt_SpellAnimation
+										dc.w sa07_-rjt_SpellAnimation
+										dc.w sa08_-rjt_SpellAnimation
+										dc.w sa09_-rjt_SpellAnimation
+										dc.w sa0A_-rjt_SpellAnimation
+										dc.w sa0B_-rjt_SpellAnimation
+										dc.w sa0C_-rjt_SpellAnimation
+										dc.w sa0D_-rjt_SpellAnimation
+										dc.w sa0E_-rjt_SpellAnimation
+										dc.w sa0F_-rjt_SpellAnimation
+										dc.w sa10_-rjt_SpellAnimation
+										dc.w sa11_Dao-rjt_SpellAnimation
+										dc.w sa12_Atlas-rjt_SpellAnimation
+										dc.w sa13_Neptun-rjt_SpellAnimation
+										dc.w sa14_Apollo-rjt_SpellAnimation
+										dc.w sa15_-rjt_SpellAnimation
+										dc.w sa16_-rjt_SpellAnimation
+										dc.w sa17_IceBreath-rjt_SpellAnimation
+										dc.w sa18_-rjt_SpellAnimation
+										dc.w sa19_-rjt_SpellAnimation
+										dc.w sa1A_Detox-rjt_SpellAnimation
+										dc.w sa1B_-rjt_SpellAnimation
+										dc.w sa1C_-rjt_SpellAnimation
+										dc.w sa1D_Blast-rjt_SpellAnimation
+										dc.w sa1E_BurstRockExplosion-rjt_SpellAnimation
+										dc.w sa1F_OddeyeBeam-rjt_SpellAnimation
 return_19F5C:
 										
 										rts
 
-	; End of function executeSpellAnimation
+	; End of function ExecuteSpellAnimation
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3871,7 +3832,7 @@ word_1A020:         dc.w 1
 sub_1A028:
 										
 										tst.b   ((byte_FFB584-$1000000)).w
-										beq.w   return_1A090
+										beq.w   nullsub_184
 										bsr.w   sub_1A0AA
 
 	; End of function sub_1A028
@@ -3884,62 +3845,63 @@ sub_1A034:
 										clr.w   d0
 										move.b  ((byte_FFB587-$1000000)).w,d0
 										add.w   d0,d0
-										move.w  off_1A048(pc,d0.w),d0
-										jsr     off_1A048(pc,d0.w)
+										move.w  rjt_1A048(pc,d0.w),d0
+										jsr     rjt_1A048(pc,d0.w)
 										bra.w   loc_1A088
 
 	; End of function sub_1A034
 
-off_1A048:          dc.w return_1A090-off_1A048
-										dc.w sub_1A21C-off_1A048
-										dc.w sub_1A198-off_1A048
-										dc.w sub_1A198-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w sub_1A146-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w sub_1A11E-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w sub_1A146-off_1A048
-										dc.w sub_1A21C-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w sub_1A222-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w sub_1A11E-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w sub_1A198-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
-										dc.w return_1A090-off_1A048
+rjt_1A048:          dc.w nullsub_184-rjt_1A048
+																						; related to ally or enemy reaction
+										dc.w sub_1A21C-rjt_1A048
+										dc.w sub_1A198-rjt_1A048
+										dc.w sub_1A198-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w sub_1A146-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w sub_1A11E-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w sub_1A146-rjt_1A048
+										dc.w sub_1A21C-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w sub_1A222-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w sub_1A11E-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w sub_1A198-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
+										dc.w nullsub_184-rjt_1A048
 
 ; START OF FUNCTION CHUNK FOR sub_1A034
 
 loc_1A088:
 										
-										jsr     (storeVdpCommandster).w
-										jmp     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommandster).w
+										jmp     (Set_FFDE94_bit3).w
 
 ; END OF FUNCTION CHUNK FOR sub_1A034
 
 
-; START OF FUNCTION CHUNK FOR sub_1A028
+; =============== S U B R O U T I N E =======================================
 
-return_1A090:
+nullsub_184:
 										
 										rts
 
-; END OF FUNCTION CHUNK FOR sub_1A028
+	; End of function nullsub_184
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3948,8 +3910,8 @@ sub_1A092:
 										
 										tst.b   ((byte_FFB584-$1000000)).w
 										bne.s   loc_1A0A2
-										jsr     (storeVdpCommandster).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommandster).w
+										jsr     (Set_FFDE94_bit3).w
 										bra.s   return_1A0A8
 loc_1A0A2:
 										
@@ -4262,8 +4224,8 @@ loc_1A25C:
 										
 										move.l  (a1)+,(a0)+
 										dbf     d7,loc_1A25C
-										jsr     (storeVdpCommandster).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommandster).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,d7-a1
 										rts
 
@@ -4287,8 +4249,8 @@ loc_1A286:
 										lea     ((PALETTE_1-$1000000)).w,a0
 										move.l  (sp)+,$5A(a0)
 										move.w  (sp)+,$52(a0)
-										jsr     (storeVdpCommandster).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommandster).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,d7-a1
 										rts
 
@@ -4299,7 +4261,7 @@ loc_1A286:
 
 ;     In: D0 = color to flash
 
-execSpellAnimationFlash:
+ExecSpellAnimationFlash:
 										
 										move.w  d0,d6
 										moveq   #3,d7
@@ -4307,25 +4269,25 @@ loc_1A2AA:
 										
 										move.w  d6,((PALETTE_1-$1000000)).w
 										move.w  d6,((byte_FFD044-$1000000)).w
-										jsr     (storeVdpCommandster).w
+										jsr     (StoreVdpCommandster).w
 										moveq   #4,d0
 										jsr     (Sleep).w       
 										clr.w   ((PALETTE_1-$1000000)).w
 										clr.w   ((byte_FFD044-$1000000)).w
-										jsr     (storeVdpCommandster).w
+										jsr     (StoreVdpCommandster).w
 										moveq   #3,d0
 										jsr     (Sleep).w       
 										dbf     d7,loc_1A2AA
 										rts
 
-	; End of function execSpellAnimationFlash
+	; End of function ExecSpellAnimationFlash
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ;     Clears a portion at RAM:b406 and RAM:b532 for spell properties.
 
-clearSpellAnimationProperties:
+ClearSpellAnimationProperties:
 										
 										movem.l d7-a0,-(sp)
 										lea     ((byte_FFB406-$1000000)).w,a0
@@ -4343,7 +4305,7 @@ loc_1A2EA:
 										movem.l (sp)+,d7-a0
 										rts
 
-	; End of function clearSpellAnimationProperties
+	; End of function ClearSpellAnimationProperties
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4382,13 +4344,13 @@ loc_1A324:
 
 ; code for invocations
 
-sub_1A32C:
+LoadInvocationSpell:
 										
 										movem.l d0/a6,-(sp)
-										trap    #0              ; play spell sound
+										trap    #TRAP_SOUNDCOM  ; play spell sound
 										dc.w SFX_SPELL_CAST
 										move.w  #$CCE,d0
-										bsr.w   execSpellAnimationFlash
+										bsr.w   ExecSpellAnimationFlash
 										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,((word_FFB400-$1000000)).w
 										lea     ((byte_FFB562-$1000000)).w,a6
 										move.w  #$FFFF,(a6)
@@ -4397,17 +4359,17 @@ sub_1A32C:
 										movem.l (sp)+,d0/a6
 										jsr     (WaitForVInt).w 
 										clr.w   d1
-										bsr.w   sub_19BF2
+										bsr.w   LoadInvocationSprite
 										moveq   #8,d0
 										jsr     (Sleep).w       
 										bchg    #6,((byte_FFB56E-$1000000)).w
-										jsr     (storeVdpCommandster).w
+										jsr     (StoreVdpCommandster).w
 										bsr.w   sub_1A380
-										jsr     (setFFDE94b3andWait).w
+										jsr     (SetFFDE94b3andWait).w
 										bset    #4,((byte_FFB56F-$1000000)).w
 										rts
 
-	; End of function sub_1A32C
+	; End of function LoadInvocationSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4420,14 +4382,14 @@ sub_1A380:
 										bclr    #5,((byte_FFB56F-$1000000)).w
 										moveq   #5,d1
 										moveq   #2,d4
-										lea     (unk_1F776).l,a2
+										lea     (byte_1F776).l,a2
 										bra.s   loc_1A3AC
 loc_1A39C:
 										
 										bset    #5,((byte_FFB56F-$1000000)).w
 										moveq   #3,d1
 										moveq   #3,d4
-										lea     (unk_1F7BE).l,a2
+										lea     (byte_1F7BE).l,a2
 loc_1A3AC:
 										
 										btst    #6,((byte_FFB56E-$1000000)).w
@@ -4462,7 +4424,7 @@ loc_1A3C6:
 sub_1A3E8:
 										
 										lea     ((byte_FFDD24-$1000000)).w,a0
-										lea     (unk_1F776).l,a1
+										lea     (byte_1F776).l,a1
 										moveq   #$11,d0
 										btst    #5,((byte_FFB56F-$1000000)).w
 										beq.s   loc_1A402
@@ -4491,7 +4453,7 @@ loc_1A418:
 										beq.s   return_1A474
 										bsr.w   bsc0D_endAnimation
 										move.b  #2,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -4532,26 +4494,25 @@ nullsub_12:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_11:
+sa00_Nothing:
 										
 										rts
 
-	; End of function nullsub_11
+	; End of function sa00_Nothing
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A47A:
-										
+sa01_:
 										bsr.s   nullsub_12
 										move.w  d1,-(sp)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_SPELL_CAST
 										move.w  #$22E,d0
-										bsr.w   execSpellAnimationFlash
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ExecSpellAnimationFlash
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #2,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d1
 										btst    #7,d1
 										bne.s   loc_1A4A2
@@ -4559,7 +4520,7 @@ sub_1A47A:
 										bra.s   loc_1A4A6
 loc_1A4A2:
 										
-										lea     unk_1A5B2(pc), a1
+										lea     byte_1A5B2(pc), a1
 loc_1A4A6:
 										
 										andi.w  #7,d1
@@ -4580,7 +4541,7 @@ loc_1A4A6:
 										move.w  #5,2(a0)
 										moveq   #2,d0
 										bsr.w   sub_1A2F6
-										lea     unk_1A5E4(pc), a0
+										lea     byte_1A5E4(pc), a0
 										clr.w   d0
 										move.b  (a1),d0
 										lsl.w   #4,d0
@@ -4628,7 +4589,7 @@ loc_1A552:
 										dbf     d0,loc_1A552
 										moveq   #$2C,d0 
 										moveq   #8,d1
-										lea     unk_1A614(pc), a0
+										lea     byte_1A614(pc), a0
 										bsr.w   sub_19FAA
 loc_1A56E:
 										
@@ -4643,216 +4604,216 @@ loc_1A58A:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1A47A
+	; End of function sa01_
 
-										dc.b   0
-										dc.b $48 
-										dc.b $70 
-										dc.b $70 
-										dc.b   0
-										dc.b   0
-										dc.b $50 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b $44 
-										dc.b $60 
-										dc.b $80 
-										dc.b   0
-										dc.b  $A
-										dc.b $50 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   2
-										dc.b $40 
-										dc.b $50 
-										dc.b $70 
-										dc.b   1
-										dc.b  $E
-										dc.b $50 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-unk_1A5B2:          dc.b   2
-										dc.b $40 
-										dc.b $50 
-										dc.b $70 
-										dc.b   1
-										dc.b   4
-										dc.b $50 
+										dc.b 0
+										dc.b $48
+										dc.b $70
+										dc.b $70
+										dc.b 0
+										dc.b 0
+										dc.b $50
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 1
+										dc.b $44
+										dc.b $60
+										dc.b $80
+										dc.b 0
+										dc.b $A
+										dc.b $50
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 2
+										dc.b $40
+										dc.b $50
+										dc.b $70
+										dc.b 1
+										dc.b $E
+										dc.b $50
+										dc.b 0
+										dc.b 0
+										dc.b 0
+byte_1A5B2:         dc.b 2
+										dc.b $40
+										dc.b $50
+										dc.b $70
+										dc.b 1
+										dc.b 4
+										dc.b $50
 										dc.b $20
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b $B0 
-										dc.b $80 
-										dc.b $80 
-										dc.b   0
-										dc.b   0
-										dc.b $30 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b $AC 
-										dc.b $70 
-										dc.b $90 
-										dc.b   0
-										dc.b  $A
-										dc.b $30 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   2
-										dc.b $A8 
-										dc.b $60 
-										dc.b $80 
-										dc.b   1
-										dc.b  $E
-										dc.b $30 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   2
-										dc.b $A8 
-										dc.b $60 
-										dc.b $80 
-										dc.b   1
-										dc.b   4
-										dc.b $30 
-										dc.b $80 
+										dc.b 0
+										dc.b 0
+										dc.b $B0
+										dc.b $80
+										dc.b $80
+										dc.b 0
+										dc.b 0
+										dc.b $30
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 1
+										dc.b $AC
+										dc.b $70
+										dc.b $90
+										dc.b 0
+										dc.b $A
+										dc.b $30
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 2
+										dc.b $A8
+										dc.b $60
+										dc.b $80
+										dc.b 1
+										dc.b $E
+										dc.b $30
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 2
+										dc.b $A8
+										dc.b $60
+										dc.b $80
+										dc.b 1
+										dc.b 4
+										dc.b $30
+										dc.b $80
 										dc.b $20
-										dc.b   0
-unk_1A5E4:          dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $41 
-										dc.b   7
+										dc.b 0
+byte_1A5E4:         dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $41
+										dc.b 7
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $41 
-										dc.b   7
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $41
+										dc.b 7
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $51 
-										dc.b  $B
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $51
+										dc.b $B
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 0
+										dc.b 0
 										dc.b $20
-										dc.b   5
-										dc.b $5D 
-										dc.b   9
+										dc.b 5
+										dc.b $5D
+										dc.b 9
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $75 
-										dc.b  $F
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $75
+										dc.b $F
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 0
+										dc.b 0
 										dc.b $20
-										dc.b   5
-										dc.b $85 
-										dc.b  $F
+										dc.b 5
+										dc.b $85
+										dc.b $F
 										dc.b $20
-unk_1A614:          dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $31 
-										dc.b  $F
+byte_1A614:         dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $31
+										dc.b $F
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $28 
-										dc.b  $A
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $28
+										dc.b $A
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $28 
-										dc.b  $A
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $28
+										dc.b $A
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $28 
-										dc.b  $A
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $28
+										dc.b $A
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $28 
-										dc.b  $A
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $28
+										dc.b $A
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $28 
-										dc.b  $A
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $28
+										dc.b $A
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $24 
-										dc.b   5
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $24
+										dc.b 5
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
 										dc.b $20
-										dc.b   5
+										dc.b 5
 										dc.b $20
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A654:
-										
+sa02_:
 										bsr.w   nullsub_12
 										move.w  d1,-(sp)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_SPELL_CAST
 										move.w  #$E22,d0
-										bsr.w   execSpellAnimationFlash
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ExecSpellAnimationFlash
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #$B,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d1
 										lea     (loc_1A6CC+2)(pc), a0
+																						; need to fix that ugly offset reference with the true data begin label
 										bclr    #7,d1
 										beq.s   loc_1A680
 										lea     $30(a0),a0
@@ -4888,128 +4849,119 @@ loc_1A6CC:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1A654
+	; End of function sa02_
 
 errQuickWorkaroundPossibleSideEffects3:
-										dc.b   1
-										dc.b $70 
-										dc.b   0
-										dc.b $9E 
+										dc.b 1
+										dc.b $70
+										dc.b 0
+										dc.b $9E
 										dc.b $10
-										dc.b   0
-										dc.b   0
-										dc.b $A0 
+										dc.b 0
+										dc.b 0
+										dc.b $A0
 										dc.b $FF
-										dc.b $FA 
-										dc.b   0
-										dc.b $C8 
-										dc.b   1
-										dc.b $70 
-										dc.b   0
-										dc.b $9E 
+										dc.b $FA
+										dc.b 0
+										dc.b $C8
+										dc.b 1
+										dc.b $70
+										dc.b 0
+										dc.b $9E
 										dc.b $16
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
+										dc.b 0
+										dc.b 0
+										dc.b $C0
 										dc.b $FF
-										dc.b $FA 
-										dc.b   0
-										dc.b $C8 
-										dc.b   1
-										dc.b $70 
-										dc.b   0
-										dc.b $9E 
+										dc.b $FA
+										dc.b 0
+										dc.b $C8
+										dc.b 1
+										dc.b $70
+										dc.b 0
+										dc.b $9E
 										dc.b $1C
-										dc.b   0
-										dc.b   0
-										dc.b $E0 
+										dc.b 0
+										dc.b 0
+										dc.b $E0
 										dc.b $FF
-										dc.b $FA 
-										dc.b   0
-										dc.b $C8 
-										dc.b   1
-										dc.b $70 
-										dc.b   0
-										dc.b $9E 
-										dc.b $22 
-										dc.b   0
-										dc.b   1
-										dc.b   0
+										dc.b $FA
+										dc.b 0
+										dc.b $C8
+										dc.b 1
+										dc.b $70
+										dc.b 0
+										dc.b $9E
+										dc.b $22
+										dc.b 0
+										dc.b 1
+										dc.b 0
 										dc.b $FF
-										dc.b $FA 
-										dc.b   0
-										dc.b $C8 
-										dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $E2 
+										dc.b $FA
+										dc.b 0
+										dc.b $C8
+										dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $E2
 										dc.b $10
-										dc.b   0
-										dc.b   0
-										dc.b $A0 
-										dc.b   1
-										dc.b   6
-										dc.b   1
-										dc.b $38 
-										dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $E2 
+										dc.b 0
+										dc.b 0
+										dc.b $A0
+										dc.b 1
+										dc.b 6
+										dc.b 1
+										dc.b $38
+										dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $E2
 										dc.b $16
-										dc.b   0
-										dc.b   0
-										dc.b $C0 
-										dc.b   1
-										dc.b   6
-										dc.b   1
-										dc.b $38 
-										dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $E2 
+										dc.b 0
+										dc.b 0
+										dc.b $C0
+										dc.b 1
+										dc.b 6
+										dc.b 1
+										dc.b $38
+										dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $E2
 										dc.b $1C
-										dc.b   0
-										dc.b   0
-										dc.b $E0 
-										dc.b   1
-										dc.b   6
-										dc.b   1
-										dc.b $38 
-										dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $E2 
-										dc.b $22 
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   6
-										dc.b   1
-										dc.b $38 
+										dc.b 0
+										dc.b 0
+										dc.b $E0
+										dc.b 1
+										dc.b 6
+										dc.b 1
+										dc.b $38
+										dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $E2
+										dc.b $22
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 6
+										dc.b 1
+										dc.b $38
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A73A:
-										
+sa03_:
 										bsr.w   nullsub_12
 										move.w  d1,-(sp)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_SPELL_CAST
-
-	; End of function sub_1A73A
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_1A744:
-										
 										move.w  #$222,d0
-										bsr.w   execSpellAnimationFlash
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ExecSpellAnimationFlash
+										bsr.w   ClearSpellAnimationProperties
 										bsr.w   sub_1A00A
 										moveq   #$D,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d1
 										lea     ((byte_FFB532-$1000000)).w,a0
 										bclr    #7,d1
@@ -5046,13 +4998,13 @@ loc_1A786:
 										move.w  #$14,4(a0)
 										move.w  #$301,6(a0)
 										moveq   #$2A,d0 
-										lea     dword_1A810(pc), a0
+										lea     byte_1A810(pc), a0
 										bsr.w   sub_19F5E
 										bsr.w   sub_19F5E
 										addq.w  #2,d2
 loc_1A7E2:
 										
-										move.l  #unk_1A820,((dword_FFB3C0-$1000000)).w
+										move.l  #byte_1A820,((dword_FFB3C0-$1000000)).w
 										move.w  #1,((word_FFB3C4-$1000000)).w
 										move.b  #5,((byte_FFB583-$1000000)).w
 										move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -5061,85 +5013,87 @@ loc_1A7E2:
 										move.b  d2,((byte_FFB584-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1A744
+	; End of function sa03_
 
-dword_1A810:        dc.l $10001
-										dc.b   5
-										dc.b $80 
-										dc.b   5
+byte_1A810:         dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 5
+										dc.b $80
+										dc.b 5
 										dc.b $20
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   5
-										dc.b $84 
-										dc.b   5
-										dc.b $21 
-unk_1A820:          dc.b   0
-										dc.b $38 
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 5
+										dc.b $84
+										dc.b 5
+										dc.b $21
+byte_1A820:         dc.b 0
+										dc.b $38
 										dc.b $10
-										dc.b $60 
-										dc.b   0
-										dc.b   1
-										dc.b $A8 
-										dc.b $28 
-										dc.b   0
-										dc.b   5
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   3
-										dc.b   0
-										dc.b   0
+										dc.b $60
+										dc.b 0
+										dc.b 1
+										dc.b $A8
+										dc.b $28
+										dc.b 0
+										dc.b 5
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 3
+										dc.b 0
+										dc.b 0
 										dc.b $FF
-										dc.b $FD 
-										dc.b   0
-										dc.b   0
+										dc.b $FD
+										dc.b 0
+										dc.b 0
 										dc.b $FF
-										dc.b $FB 
-										dc.b   0
-										dc.b   0
+										dc.b $FB
+										dc.b 0
+										dc.b 0
 										dc.b $FF
-										dc.b $FB 
-										dc.b   0
-										dc.b   0
+										dc.b $FB
+										dc.b 0
+										dc.b 0
 										dc.b $FF
-										dc.b $FD 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   3
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b   0
-										dc.b   0
+										dc.b $FD
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 3
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b 0
+										dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A848:
-										
+sa04_:
 										move.w  d1,-(sp)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_SPELL_CAST
 										move.w  #$CAC,d0
-										bsr.w   execSpellAnimationFlash
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ExecSpellAnimationFlash
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #6,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d1
 										bclr    #7,d1
 										bne.s   loc_1A874
-										lea     unk_1A908(pc), a0
-										lea     dword_1A8F4(pc), a1
+										lea     byte_1A908(pc), a0
+										lea     byte_1A8F4(pc), a1
 										moveq   #7,d4
 										bra.s   loc_1A87E
 loc_1A874:
 										
-										lea     unk_1A918(pc), a0
-										lea     unk_1A8FE(pc), a1
+										lea     byte_1A918(pc), a0
+										lea     byte_1A8FE(pc), a1
 										moveq   #3,d4
 loc_1A87E:
 										
@@ -5186,71 +5140,73 @@ loc_1A898:
 										move.b  #1,((byte_FFB585-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1A848
+	; End of function sa04_
 
-dword_1A8F4:        dc.l $10
-										dc.b   0
+byte_1A8F4:         dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b $10
+										dc.b 0
 										dc.b $20
-										dc.b   0
-										dc.b $28 
-										dc.b   0
-										dc.b $34 
-unk_1A8FE:          dc.b   0
-										dc.b $35 
-										dc.b   0
-										dc.b $45 
-										dc.b   0
-										dc.b $55 
-										dc.b   0
-										dc.b $5D 
-										dc.b   0
-										dc.b $69 
-unk_1A908:          dc.b   1
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $30 
-										dc.b  $F
+										dc.b 0
+										dc.b $28
+										dc.b 0
+										dc.b $34
+byte_1A8FE:         dc.b 0
+										dc.b $35
+										dc.b 0
+										dc.b $45
+										dc.b 0
+										dc.b $55
+										dc.b 0
+										dc.b $5D
+										dc.b 0
+										dc.b $69
+byte_1A908:         dc.b 1
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $30
+										dc.b $F
 										dc.b $20
-										dc.b   1
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $40 
-										dc.b  $D
+										dc.b 1
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $40
+										dc.b $D
 										dc.b $20
-unk_1A918:          dc.b $FF
-										dc.b $E0 
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $65 
-										dc.b  $F
-										dc.b $21 
+byte_1A918:         dc.b $FF
+										dc.b $E0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $65
+										dc.b $F
+										dc.b $21
 										dc.b $FF
-										dc.b $E0 
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $75 
-										dc.b  $D
-										dc.b $21 
+										dc.b $E0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $75
+										dc.b $D
+										dc.b $21
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A928:
-										
+sa05_:
 										bsr.w   nullsub_12
 										move.w  d1,-(sp)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_SPELL_CAST
 										move.w  #$CC2,d0
-										bsr.w   execSpellAnimationFlash
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ExecSpellAnimationFlash
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #$F,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d1
 										lea     ((byte_FFB532-$1000000)).w,a2
 										bclr    #7,d1
@@ -5321,48 +5277,47 @@ loc_1AA06:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1A928
+	; End of function sa05_
 
 byte_1AA28:         dc.b 0
-										dc.b   8
-										dc.b   0
-										dc.b $30 
-										dc.b   5
-										dc.b $AB 
-										dc.b   5
+										dc.b 8
+										dc.b 0
+										dc.b $30
+										dc.b 5
+										dc.b $AB
+										dc.b 5
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $4B 
-										dc.b  $F
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $4B
+										dc.b $F
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 0
+										dc.b 0
 										dc.b $20
-										dc.b   5
-										dc.b $5B 
-										dc.b  $F
+										dc.b 5
+										dc.b $5B
+										dc.b $F
 										dc.b $20
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AA40:
-										
-										trap    #0
+sa06_:
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_SPELL_CAST
 										move.w  #$A8A,d0
-										bsr.w   execSpellAnimationFlash
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ExecSpellAnimationFlash
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #7,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										moveq   #1,d0
 										bsr.w   sub_1A2F6
 										move.w  #1,4(a0)
-										lea     unk_1AA88(pc), a0
+										lea     byte_1AA88(pc), a0
 										moveq   #$26,d0 
 										bsr.w   sub_19F5E
 										move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -5371,30 +5326,29 @@ sub_1AA40:
 										move.b  #1,((byte_FFB584-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1AA40
+	; End of function sa06_
 
-unk_1AA88:          dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $3B 
-										dc.b   0
+byte_1AA88:         dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $3B
+										dc.b 0
 										dc.b $20
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AA90:
-										
+sa07_:
 										bsr.w   nullsub_12
 										move.w  d1,-(sp)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_SPELL_CAST
 										move.w  #$ECA,d0
-										bsr.w   execSpellAnimationFlash
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ExecSpellAnimationFlash
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #4,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d1
 										lea     loc_1AB4A(pc), a1
 										andi.w  #7,d1
@@ -5425,7 +5379,7 @@ loc_1AAD4:
 										move.w  (a1),d0
 										mulu.w  #5,d0
 										addi.w  #$26,d0 
-										lea     unk_1AB5E(pc), a0
+										lea     byte_1AB5E(pc), a0
 										btst    #7,((byte_FFB586-$1000000)).w
 										beq.s   loc_1AB0C
 										lea     $20(a0),a0
@@ -5451,108 +5405,112 @@ loc_1AB4A:
 										
 										bra.w   sub_1A028
 
-	; End of function sub_1AA90
+	; End of function sa07_
 
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   2
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   3
-										dc.b   0
-										dc.b   2
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b   4
-unk_1AB5E:          dc.b   0
-										dc.b $C8 
-										dc.b   0
-										dc.b $C0 
-										dc.b   5
-										dc.b $B3 
-										dc.b  $F
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 2
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 3
+										dc.b 0
+										dc.b 2
+										dc.b 0
+										dc.b 4
+										dc.b 0
+										dc.b 4
+byte_1AB5E:         dc.b 0
+										dc.b $C8
+										dc.b 0
+										dc.b $C0
+										dc.b 5
+										dc.b $B3
+										dc.b $F
 										dc.b $20
-										dc.b   0
-										dc.b $98 
-										dc.b   0
-										dc.b $D8 
-										dc.b   5
-										dc.b $C3 
-										dc.b  $F
+										dc.b 0
+										dc.b $98
+										dc.b 0
+										dc.b $D8
+										dc.b 5
+										dc.b $C3
+										dc.b $F
 										dc.b $20
-										dc.b   0
-										dc.b $F8 
-										dc.b   0
-										dc.b $C8 
-										dc.b   5
-										dc.b $B3 
-										dc.b  $F
+										dc.b 0
+										dc.b $F8
+										dc.b 0
+										dc.b $C8
+										dc.b 5
+										dc.b $B3
+										dc.b $F
 										dc.b $20
-										dc.b   1
-										dc.b $30 
-										dc.b   0
-										dc.b $B8 
-										dc.b   5
-										dc.b $C3 
-										dc.b  $F
+										dc.b 1
+										dc.b $30
+										dc.b 0
+										dc.b $B8
+										dc.b 5
+										dc.b $C3
+										dc.b $F
 										dc.b $20
-										dc.b   0
-										dc.b $F8 
-										dc.b   0
-										dc.b $C8 
-										dc.b   5
-										dc.b $B3 
-										dc.b  $F
+										dc.b 0
+										dc.b $F8
+										dc.b 0
+										dc.b $C8
+										dc.b 5
+										dc.b $B3
+										dc.b $F
 										dc.b $20
-										dc.b   1
-										dc.b $30 
-										dc.b   0
-										dc.b $B8 
-										dc.b   5
-										dc.b $C3 
-										dc.b  $F
+										dc.b 1
+										dc.b $30
+										dc.b 0
+										dc.b $B8
+										dc.b 5
+										dc.b $C3
+										dc.b $F
 										dc.b $20
-										dc.b   0
-										dc.b $C8 
-										dc.b   0
-										dc.b $C0 
-										dc.b   5
-										dc.b $B3 
-										dc.b  $F
+										dc.b 0
+										dc.b $C8
+										dc.b 0
+										dc.b $C0
+										dc.b 5
+										dc.b $B3
+										dc.b $F
 										dc.b $20
-										dc.b   0
-										dc.b $98 
-										dc.b   0
-										dc.b $D8 
-										dc.b   5
-										dc.b $C3 
-										dc.b  $F
+										dc.b 0
+										dc.b $98
+										dc.b 0
+										dc.b $D8
+										dc.b 5
+										dc.b $C3
+										dc.b $F
 										dc.b $20
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AB9E:
-										
+sa08_:
 										move.w  #$FFFE,d0
 										moveq   #$1E,d1
 										bra.w   loc_1ABAC
-loc_1ABA8:
-										
+
+	; End of function sa08_
+
+
+; =============== S U B R O U T I N E =======================================
+
+sa19_:
 										moveq   #2,d0
 										moveq   #2,d1
 loc_1ABAC:
 										
 										movem.w d0-d1,-(sp)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_SPELL_CAST
 										move.w  #$2C2,d0
-										bsr.w   execSpellAnimationFlash
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ExecSpellAnimationFlash
+										bsr.w   ClearSpellAnimationProperties
 										movem.w (sp)+,d0-d1
 										move.w  d0,((byte_FFB532-$1000000)).w
 										moveq   #1,d0
@@ -5564,27 +5522,51 @@ loc_1ABAC:
 										move.b  #1,((byte_FFB585-$1000000)).w
 										move.b  #1,((byte_FFB584-$1000000)).w
 										bra.w   sub_1A028
-loc_1ABF4:
-										
-										lea     unk_1ACC6(pc), a0
+
+	; End of function sa19_
+
+
+; =============== S U B R O U T I N E =======================================
+
+sa09_:
+										lea     byte_1ACC6(pc), a0
 										bra.w   loc_1AC08
-loc_1ABFC:
-										
-										lea     unk_1ACCC(pc), a0
+
+	; End of function sa09_
+
+
+; =============== S U B R O U T I N E =======================================
+
+sa1B_:
+										lea     byte_1ACCC(pc), a0
 										bra.w   loc_1AC08
-loc_1AC04:
-										
-										lea     unk_1ACD2(pc), a0
+
+	; End of function sa1B_
+
+
+; =============== S U B R O U T I N E =======================================
+
+sa1C_:
+										lea     byte_1ACD2(pc), a0
+
+	; End of function sa1C_
+
+
+; START OF FUNCTION CHUNK FOR sa09_
+
 loc_1AC08:
 										
 										move.l  a0,-(sp)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
+
+; END OF FUNCTION CHUNK FOR sa09_
+
 										dc.w SFX_SPELL_CAST
 										move.w  #$E22,d0
-										bsr.w   execSpellAnimationFlash
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ExecSpellAnimationFlash
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #9,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										movea.l (sp)+,a0
 										lea     ((Palette3-$1000000)).w,a1
 										lea     ((PALETTE3_BIS-$1000000)).w,a2
@@ -5594,20 +5576,16 @@ loc_1AC08:
 										move.w  (a0)+,$1A(a2)
 										move.w  (a0),$1C(a1)
 										move.w  (a0),$1C(a2)
-										jsr     (storeVdpCommandster).w
+										jsr     (StoreVdpCommandster).w
 										lea     ((byte_FFB532-$1000000)).w,a0
 										btst    #7,((byte_FFB586-$1000000)).w
 										bne.s   loc_1AC5C
 										move.w  #$40,(a0)+ 
 										move.w  #$20,(a0) 
 										bra.s   loc_1AC64
-loc_1AC5C:
-										
-										move.w  #$A8,(a0)+ 
+loc_1AC5C:          move.w  #$A8,(a0)+ 
 										move.w  #$30,(a0) 
-loc_1AC64:
-										
-										moveq   #1,d0
+loc_1AC64:          moveq   #1,d0
 										bsr.w   sub_1A2F6
 										move.w  #1,4(a0)
 										moveq   #1,d0
@@ -5633,42 +5611,43 @@ loc_1AC64:
 										move.b  #1,((byte_FFB585-$1000000)).w
 										move.b  #4,((byte_FFB584-$1000000)).w
 										bra.w   sub_1A028
-
-	; End of function sub_1AB9E
-
-unk_1ACC6:          dc.b   8
-										dc.b $88 
-										dc.b  $B
-										dc.b $BB 
-										dc.b  $D
-										dc.b $DD 
-unk_1ACCC:          dc.b   8
-										dc.b $4E 
-										dc.b  $E
-										dc.b $C6 
-										dc.b  $F
-										dc.b $DA 
-unk_1ACD2:          dc.b   8
-										dc.b $4E 
-										dc.b   9
-										dc.b $8E 
-										dc.b  $D
-										dc.b $BF 
+byte_1ACC6:         dc.b 8
+										dc.b $88
+										dc.b $B
+										dc.b $BB
+										dc.b $D
+										dc.b $DD
+byte_1ACCC:         dc.b 8
+										dc.b $4E
+										dc.b $E
+										dc.b $C6
+										dc.b $F
+										dc.b $DA
+byte_1ACD2:         dc.b 8
+										dc.b $4E
+										dc.b 9
+										dc.b $8E
+										dc.b $D
+										dc.b $BF
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1ACD8:
-										
-										trap    #0
+sa0A_:
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_WARP
 										move.w  #$F,d0
-										bra.w   execSpellAnimationFlash
-loc_1ACE4:
-										
+										bra.w   ExecSpellAnimationFlash
+
+	; End of function sa0A_
+
+
+; =============== S U B R O U T I N E =======================================
+
+sa0B_:
 										move.w  d1,-(sp)
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #$16,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d1
 										lea     ((byte_FFB532-$1000000)).w,a1
 										cmpi.w  #$35,((ENEMY_BATTLE_SPRITE-$1000000)).w 
@@ -5690,12 +5669,17 @@ loc_1AD16:
 										move.b  #1,((byte_FFB584-$1000000)).w
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
-loc_1AD3E:
-										
+
+	; End of function sa0B_
+
+
+; =============== S U B R O U T I N E =======================================
+
+sa0C_:
 										move.w  d1,-(sp)
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #1,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d1
 										lea     ((byte_FFB532-$1000000)).w,a1
 										bclr    #7,d1
@@ -5722,16 +5706,21 @@ loc_1AD6A:
 										move.b  #1,((byte_FFB584-$1000000)).w
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
-loc_1ADA4:
-										
+
+	; End of function sa0C_
+
+
+; =============== S U B R O U T I N E =======================================
+
+sa0D_:
 										move.w  d1,-(sp)
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #5,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d0
 										clr.w   d1
-										lea     unk_1AE40(pc), a0
-										lea     $1AE18(pc), a1
+										lea     byte_1AE40(pc), a0
+										lea     (loc_1AE16+2)(pc), a1
 										bclr    #7,d0
 										beq.s   loc_1ADCA
 										lea     $30(a0),a0
@@ -5765,167 +5754,168 @@ loc_1ADDA:
 										move.b  #$D,((byte_FFB587-$1000000)).w
 										move.b  #1,((byte_FFB585-$1000000)).w
 										move.b  #1,((byte_FFB584-$1000000)).w
+loc_1AE16:
+										
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1ACD8
+	; End of function sa0D_
 
 errQuickWorkaroundPossibleSideEffects2:
-										dc.b $F2 
-										dc.b   0
-										dc.b   1
-										dc.b $90 
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b $E8 
-										dc.b $F2 
-										dc.b   0
-										dc.b   1
-										dc.b $90 
-										dc.b   1
-										dc.b $98 
-										dc.b   0
-										dc.b $E8 
-										dc.b $F2 
-										dc.b   0
-										dc.b   1
-										dc.b $90 
-										dc.b   1
-										dc.b $B0 
-										dc.b   0
-										dc.b $E8 
-										dc.b  $E
-										dc.b   0
-										dc.b   0
-										dc.b $60 
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b $F0 
-unk_1AE40:          dc.b  $E
-										dc.b   0
-										dc.b   0
-										dc.b $58 
-										dc.b   0
-										dc.b $78 
-										dc.b   0
-										dc.b $F0 
-										dc.b  $E
-										dc.b   0
-										dc.b   0
-										dc.b $40 
-										dc.b   0
-										dc.b $60 
-										dc.b   0
-										dc.b $F0 
-										dc.b   0
-										dc.b $98 
-										dc.b   0
-										dc.b $6C 
-										dc.b   5
+										dc.b $F2
+										dc.b 0
+										dc.b 1
+										dc.b $90
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b $E8
+										dc.b $F2
+										dc.b 0
+										dc.b 1
+										dc.b $90
+										dc.b 1
+										dc.b $98
+										dc.b 0
+										dc.b $E8
+										dc.b $F2
+										dc.b 0
+										dc.b 1
+										dc.b $90
+										dc.b 1
+										dc.b $B0
+										dc.b 0
+										dc.b $E8
+										dc.b $E
+										dc.b 0
+										dc.b 0
+										dc.b $60
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b $F0
+byte_1AE40:         dc.b $E
+										dc.b 0
+										dc.b 0
+										dc.b $58
+										dc.b 0
+										dc.b $78
+										dc.b 0
+										dc.b $F0
+										dc.b $E
+										dc.b 0
+										dc.b 0
+										dc.b $40
+										dc.b 0
+										dc.b $60
+										dc.b 0
+										dc.b $F0
+										dc.b 0
+										dc.b $98
+										dc.b 0
+										dc.b $6C
+										dc.b 5
 										dc.b $20
-										dc.b  $C
+										dc.b $C
 										dc.b $11
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $98 
-										dc.b   0
-										dc.b $6C 
-										dc.b   5
-										dc.b $28 
-										dc.b   0
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b $98
+										dc.b 0
+										dc.b $6C
+										dc.b 5
+										dc.b $28
+										dc.b 0
 										dc.b $11
-										dc.b   0
-										dc.b $A0 
-										dc.b   0
-										dc.b $6C 
-										dc.b   5
-										dc.b $24 
-										dc.b  $C
+										dc.b 0
+										dc.b $A0
+										dc.b 0
+										dc.b $6C
+										dc.b 5
+										dc.b $24
+										dc.b $C
 										dc.b $11
-										dc.b   0
-										dc.b $68 
-										dc.b   0
-										dc.b $60 
-										dc.b   5
-										dc.b $2D 
-										dc.b  $C
+										dc.b 0
+										dc.b $68
+										dc.b 0
+										dc.b $60
+										dc.b 5
+										dc.b $2D
+										dc.b $C
 										dc.b $11
-										dc.b   0
-										dc.b $88 
-										dc.b   0
-										dc.b $60 
-										dc.b   5
-										dc.b $29 
-										dc.b  $C
+										dc.b 0
+										dc.b $88
+										dc.b 0
+										dc.b $60
+										dc.b 5
+										dc.b $29
+										dc.b $C
 										dc.b $11
-										dc.b   0
-										dc.b $50 
-										dc.b   0
-										dc.b $64 
-										dc.b   5
+										dc.b 0
+										dc.b $50
+										dc.b 0
+										dc.b $64
+										dc.b 5
 										dc.b $20
-										dc.b  $C
+										dc.b $C
 										dc.b $10
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $50 
-										dc.b   0
-										dc.b $64 
-										dc.b   5
-										dc.b $24 
-										dc.b  $C
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b $50
+										dc.b 0
+										dc.b $64
+										dc.b 5
+										dc.b $24
+										dc.b $C
 										dc.b $10
-										dc.b   0
-										dc.b $70 
-										dc.b   0
-										dc.b $64 
-										dc.b   5
-										dc.b $28 
-										dc.b   0
+										dc.b 0
+										dc.b $70
+										dc.b 0
+										dc.b $64
+										dc.b 5
+										dc.b $28
+										dc.b 0
 										dc.b $10
-										dc.b   0
-										dc.b $50 
-										dc.b   0
-										dc.b $62 
-										dc.b   5
-										dc.b $29 
-										dc.b  $C
+										dc.b 0
+										dc.b $50
+										dc.b 0
+										dc.b $62
+										dc.b 5
+										dc.b $29
+										dc.b $C
 										dc.b $10
-										dc.b   0
-										dc.b $70 
-										dc.b   0
-										dc.b $62 
-										dc.b   5
-										dc.b $2D 
-										dc.b  $C
+										dc.b 0
+										dc.b $70
+										dc.b 0
+										dc.b $62
+										dc.b 5
+										dc.b $2D
+										dc.b $C
 										dc.b $10
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AEB0:
-										
+sa0E_:
 										move.w  d1,-(sp)
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #$12,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d0
-										lea     unk_1AEFA(pc), a1
+										lea     byte_1AEFA(pc), a1
 										btst    #7,d0
 										beq.s   loc_1AECA
 										addq.w  #8,a1
@@ -5943,36 +5933,35 @@ loc_1AECA:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1AEB0
+	; End of function sa0E_
 
-unk_1AEFA:          dc.b $F3 
-										dc.b   0
+byte_1AEFA:         dc.b $F3
+										dc.b 0
 										dc.b $FF
-										dc.b $C0 
-										dc.b   1
-										dc.b $80 
-										dc.b   0
-										dc.b $E8 
-										dc.b  $D
-										dc.b   0
-										dc.b   0
-										dc.b $40 
-										dc.b   0
-										dc.b $70 
-										dc.b   0
-										dc.b $F0 
+										dc.b $C0
+										dc.b 1
+										dc.b $80
+										dc.b 0
+										dc.b $E8
+										dc.b $D
+										dc.b 0
+										dc.b 0
+										dc.b $40
+										dc.b 0
+										dc.b $70
+										dc.b 0
+										dc.b $F0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AF0A:
-										
+sa0F_:
 										move.w  d1,-(sp)
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #$10,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d0
-										lea     unk_1AF7C(pc), a0
-										lea     unk_1AF64(pc), a1
+										lea     byte_1AF7C(pc), a0
+										lea     byte_1AF64(pc), a1
 										btst    #7,d0
 										beq.s   loc_1AF2C
 										addq.w  #8,a0
@@ -5994,60 +5983,59 @@ loc_1AF2C:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1AF0A
+	; End of function sa0F_
 
-unk_1AF64:          dc.b $F4 
-										dc.b   0
+byte_1AF64:         dc.b $F4
+										dc.b 0
 										dc.b $FF
-										dc.b $C0 
-										dc.b   1
-										dc.b $80 
-										dc.b   0
-										dc.b $E8 
-										dc.b   0
-										dc.b $50 
-										dc.b   0
-										dc.b $60 
-										dc.b  $C
-										dc.b   0
-										dc.b   0
-										dc.b $40 
-										dc.b   0
-										dc.b $70 
-										dc.b   0
-										dc.b $F0 
-										dc.b   0
-										dc.b $B8 
-										dc.b   0
-										dc.b $70 
-unk_1AF7C:          dc.b   1
+										dc.b $C0
+										dc.b 1
+										dc.b $80
+										dc.b 0
+										dc.b $E8
+										dc.b 0
+										dc.b $50
+										dc.b 0
+										dc.b $60
+										dc.b $C
+										dc.b 0
+										dc.b 0
+										dc.b $40
+										dc.b 0
+										dc.b $70
+										dc.b 0
+										dc.b $F0
+										dc.b 0
+										dc.b $B8
+										dc.b 0
+										dc.b $70
+byte_1AF7C:         dc.b 1
 										dc.b $20
-										dc.b   0
-										dc.b $E8 
-										dc.b   5
-										dc.b $6C 
-										dc.b   5
+										dc.b 0
+										dc.b $E8
+										dc.b 5
+										dc.b $6C
+										dc.b 5
 										dc.b $10
-										dc.b   0
-										dc.b $C8 
-										dc.b   0
-										dc.b $E0 
-										dc.b   5
-										dc.b $6C 
-										dc.b   5
+										dc.b 0
+										dc.b $C8
+										dc.b 0
+										dc.b $E0
+										dc.b 5
+										dc.b $6C
+										dc.b 5
 										dc.b $11
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AF8C:
-										
+sa10_:
 										move.w  d1,-(sp)
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #$11,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d0
-										lea     unk_1B002(pc), a0
-										lea     unk_1AFEA(pc), a1
+										lea     byte_1B002(pc), a0
+										lea     byte_1AFEA(pc), a1
 										btst    #7,d0
 										beq.s   loc_1AFAE
 										addq.w  #8,a0
@@ -6070,57 +6058,56 @@ loc_1AFAE:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1AF8C
+	; End of function sa10_
 
-unk_1AFEA:          dc.b $F3 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b $80 
-										dc.b   0
-										dc.b $E8 
-										dc.b   0
+byte_1AFEA:         dc.b $F3
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 1
+										dc.b $80
+										dc.b 0
+										dc.b $E8
+										dc.b 0
 										dc.b $20
-										dc.b   0
-										dc.b $38 
-										dc.b  $D
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $70 
-										dc.b   0
-										dc.b $F0 
-										dc.b   0
-										dc.b $88 
-										dc.b   0
-										dc.b $48 
-unk_1B002:          dc.b   1
-										dc.b $3E 
-										dc.b   0
-										dc.b $FA 
-										dc.b   5
+										dc.b 0
+										dc.b $38
+										dc.b $D
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b $70
+										dc.b 0
+										dc.b $F0
+										dc.b 0
+										dc.b $88
+										dc.b 0
+										dc.b $48
+byte_1B002:         dc.b 1
+										dc.b $3E
+										dc.b 0
+										dc.b $FA
+										dc.b 5
 										dc.b $20
-										dc.b   5
+										dc.b 5
 										dc.b $10
-										dc.b   0
-										dc.b $D0 
-										dc.b   0
-										dc.b $E0 
-										dc.b   5
+										dc.b 0
+										dc.b $D0
+										dc.b 0
+										dc.b $E0
+										dc.b 5
 										dc.b $20
-										dc.b   5
+										dc.b 5
 										dc.b $10
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B012:
-										
-										bsr.w   clearSpellAnimationProperties
+sa11_Dao:
+										bsr.w   ClearSpellAnimationProperties
 										bclr    #6,((byte_FFB56E-$1000000)).w
 										clr.w   d0
-										bsr.w   sub_1A32C       
+										bsr.w   LoadInvocationSpell
 										moveq   #1,d1
 										moveq   #6,d2
 loc_1B026:
@@ -6132,21 +6119,21 @@ loc_1B026:
 										bra.s   loc_1B040
 loc_1B036:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_INTRO_LIGHTNING
 										moveq   #$14,d0
 										jsr     (Sleep).w       
 loc_1B040:
 										
 										clr.w   d0
-										bsr.w   sub_19BF2
+										bsr.w   LoadInvocationSprite
 										bchg    #6,((byte_FFB56E-$1000000)).w
 										bsr.w   sub_1A3E8
 										movem.w (sp)+,d1-d2
 										addq.w  #1,d1
 										dbf     d2,loc_1B026
 										moveq   #3,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										moveq   #1,d0
 										bsr.w   sub_1A2F6
 										move.w  #$5A,((byte_FFB532-$1000000)).w 
@@ -6156,9 +6143,9 @@ loc_1B076:
 										
 										clr.l   (a0)+
 										dbf     d0,loc_1B076
-										move.l  #unk_1B0CC,((dword_FFB3C0-$1000000)).w
+										move.l  #byte_1B0CC,((dword_FFB3C0-$1000000)).w
 										move.w  #1,((word_FFB3C4-$1000000)).w
-										move.l  #unk_1B0CE,((dword_FFB3C6-$1000000)).w
+										move.l  #byte_1B0CE,((dword_FFB3C6-$1000000)).w
 										move.w  #$A,((word_FFB3CA-$1000000)).w
 										move.b  #$F,((byte_FFB583-$1000000)).w
 										move.b  #1,((byte_FFB56B-$1000000)).w
@@ -6170,22 +6157,22 @@ loc_1B076:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1B012
+	; End of function sa11_Dao
 
-unk_1B0CC:          dc.b   4
-										dc.b   1
-unk_1B0CE:          dc.b   3
+byte_1B0CC:         dc.b 4
+										dc.b 1
+byte_1B0CE:         dc.b 3
 										dc.b $14
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B0D0:
+sa12_Atlas:
 										
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										bclr    #6,((byte_FFB56E-$1000000)).w
 										moveq   #3,d0
-										bsr.w   sub_1A32C       
-										trap    #0
+										bsr.w   LoadInvocationSpell
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_INTRO_LIGHTNING
 										lea     ((dword_FFDD20-$1000000)).w,a0
 										moveq   #$15,d0
@@ -6203,45 +6190,45 @@ loc_1B0EE:
 										dbf     d0,loc_1B0EA
 										moveq   #3,d0
 										moveq   #1,d1
-										bsr.w   sub_19BF2
+										bsr.w   LoadInvocationSprite
 										moveq   #$1E,d0
 										jsr     (Sleep).w       
 										bchg    #6,((byte_FFB56E-$1000000)).w
 										bsr.w   sub_1A3E8
 										moveq   #3,d0
 										moveq   #2,d1
-										bsr.w   sub_19BF2
+										bsr.w   LoadInvocationSprite
 										moveq   #$13,d0
-										bsr.w   sub_19CE8
+										bsr.w   sub_19CE8       
 										lea     (byte_FF8B04).l,a0
 										lea     ($3000).w,a1
 										move.w  #$100,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 										lea     (byte_FF8D04).l,a0
 										lea     ($4200).w,a1
 										move.w  #$100,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 										lea     (byte_FF8F04).l,a0
 										lea     ($B400).l,a1
 										move.w  #$100,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 										lea     (byte_FF9104).l,a0
 										lea     ($DE00).l,a1
 										move.w  #$100,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										moveq   #$26,d0 
-										lea     unk_1B1FA(pc), a0
+										lea     byte_1B1FA(pc), a0
 										bsr.w   sub_19F5E
 										jsr     (WaitForVInt).w 
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_BATTLEFIELD_DEATH
 										lea     ((byte_FFDDB0-$1000000)).w,a0
 										moveq   #$13,d0
@@ -6258,7 +6245,7 @@ loc_1B1A4:
 										move.w  #2,4(a0)
 										moveq   #1,d0
 										bsr.w   sub_1A2F6
-										move.l  #unk_1B202,((dword_FFB3C0-$1000000)).w
+										move.l  #byte_1B202,((dword_FFB3C0-$1000000)).w
 										move.w  #1,((word_FFB3C4-$1000000)).w
 										move.b  #5,((byte_FFB583-$1000000)).w
 										move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -6268,58 +6255,58 @@ loc_1B1A4:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1B0D0
+	; End of function sa12_Atlas
 
-unk_1B1FA:          dc.b   1
+byte_1B1FA:         dc.b 1
 										dc.b $12
-										dc.b   0
-										dc.b $CB 
-										dc.b   7
-										dc.b $80 
-										dc.b   5
+										dc.b 0
+										dc.b $CB
+										dc.b 7
+										dc.b $80
+										dc.b 5
 										dc.b $20
-unk_1B202:          dc.b   0
-										dc.b $38 
-										dc.b   8
-										dc.b $60 
-										dc.b   0
-										dc.b   1
-										dc.b $B2 
-										dc.b  $A
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   2
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   0
+byte_1B202:         dc.b 0
+										dc.b $38
+										dc.b 8
+										dc.b $60
+										dc.b 0
+										dc.b 1
+										dc.b $B2
+										dc.b $A
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 2
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 0
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
-										dc.b $FE 
+										dc.b $FE
 										dc.b $FF
 										dc.b $FF
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B21A:
+sa13_Neptun:
 										
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										bclr    #6,((byte_FFB56E-$1000000)).w
 										moveq   #2,d0
-										bsr.w   sub_1A32C       
+										bsr.w   LoadInvocationSpell
 										moveq   #2,d0
 										moveq   #1,d1
-										bsr.w   sub_19BF2
-										trap    #0
+										bsr.w   LoadInvocationSprite
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_PRISM_LASER_FIRING
 										bset    #6,((byte_FFB56E-$1000000)).w
 										moveq   #$14,d1
 										moveq   #9,d2
-										lea     unk_1B358(pc), a0
+										lea     byte_1B358(pc), a0
 										lea     6(a0),a1
 loc_1B248:
 										
@@ -6345,15 +6332,15 @@ loc_1B268:
 										exg     a0,a1
 										dbf     d1,loc_1B248
 										moveq   #$E,d0
-										bsr.w   sub_19CE8
+										bsr.w   sub_19CE8       
 										moveq   #$26,d0 
-										lea     unk_1B364(pc), a0
+										lea     byte_1B364(pc), a0
 										bsr.w   sub_19F5E
 										moveq   #$19,d0
 										jsr     (Sleep).w       
 										bclr    #6,((byte_FFB56E-$1000000)).w
 										bsr.w   sub_1A3E8
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_DESOUL_HOVERING
 										moveq   #2,d0
 										moveq   #0,d1
@@ -6377,7 +6364,7 @@ loc_1B2BE:
 										jsr     (WaitForVInt).w 
 										dbf     d2,loc_1B2A0
 										moveq   #$E,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										moveq   #1,d0
 										bsr.w   sub_1A2F6
 										move.b  #1,4(a0)
@@ -6404,7 +6391,7 @@ loc_1B314:
 										dbf     d0,loc_1B314
 										moveq   #$14,d0
 										jsr     (Sleep).w       
-										move.l  #unk_1B36C,((dword_FFB3C0-$1000000)).w
+										move.l  #byte_1B36C,((dword_FFB3C0-$1000000)).w
 										move.w  #1,((word_FFB3C4-$1000000)).w
 										move.b  #5,((byte_FFB583-$1000000)).w
 										move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -6414,56 +6401,56 @@ loc_1B314:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1B21A
+	; End of function sa13_Neptun
 
-unk_1B358:          dc.b   1
-										dc.b   0
-										dc.b   0
-										dc.b $B0 
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   1
-unk_1B364:          dc.b   1
-										dc.b $28 
-										dc.b   0
-										dc.b $C0 
-										dc.b   7
-										dc.b $80 
-										dc.b   6
+byte_1B358:         dc.b 1
+										dc.b 0
+										dc.b 0
+										dc.b $B0
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 1
+byte_1B364:         dc.b 1
+										dc.b $28
+										dc.b 0
+										dc.b $C0
+										dc.b 7
+										dc.b $80
+										dc.b 6
 										dc.b $20
-unk_1B36C:          dc.b   0
-										dc.b $38 
-										dc.b   4
-										dc.b $60 
-										dc.b   0
-										dc.b   1
-										dc.b $B3 
-										dc.b $74 
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   0
+byte_1B36C:         dc.b 0
+										dc.b $38
+										dc.b 4
+										dc.b $60
+										dc.b 0
+										dc.b 1
+										dc.b $B3
+										dc.b $74
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 0
 										dc.b $FF
 										dc.b $FF
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B37C:
+sa14_Apollo:
 										
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										bclr    #6,((byte_FFB56E-$1000000)).w
 										moveq   #1,d0
-										bsr.w   sub_1A32C       
+										bsr.w   LoadInvocationSpell
 										moveq   #1,d0
 										moveq   #1,d1
-										bsr.w   sub_19BF2
+										bsr.w   LoadInvocationSprite
 										lea     ((byte_FFB532-$1000000)).w,a0
 										move.w  #$900,(a0)+
 										move.w  #$A00,(a0)+
@@ -6491,11 +6478,16 @@ loc_1B3D8:
 										move.b  #2,((byte_FFB584-$1000000)).w
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
-loc_1B406:
-										
-										bsr.w   clearSpellAnimationProperties
+
+	; End of function sa14_Apollo
+
+
+; =============== S U B R O U T I N E =======================================
+
+sa15_:
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #8,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										moveq   #1,d0
 										jsr     sub_1A2F6(pc)
 										cmpi.w  #$31,((ENEMY_BATTLE_SPRITE-$1000000)).w 
@@ -6517,7 +6509,7 @@ loc_1B42E:
 										addq.w  #1,d7
 										move.w  d7,2(a0)
 										dbf     d1,loc_1B42E
-										lea     unk_1B480(pc), a0
+										lea     byte_1B480(pc), a0
 										moveq   #$26,d0 
 										bsr.w   sub_19F5E
 										lea     (byte_FFAFC6).l,a1
@@ -6533,32 +6525,31 @@ loc_1B456:
 										move.b  #1,((byte_FFB589-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1B37C
+	; End of function sa15_
 
-unk_1B480:          dc.b   0
-										dc.b $B8 
-										dc.b   0
-										dc.b $D4 
-										dc.b   5
-										dc.b $23 
-										dc.b  $F
+byte_1B480:         dc.b 0
+										dc.b $B8
+										dc.b 0
+										dc.b $D4
+										dc.b 5
+										dc.b $23
+										dc.b $F
 										dc.b $20
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B488:
-										
+sa16_:
 										move.w  d1,-(sp)
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										clr.w   d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										moveq   #1,d0
 										bsr.w   sub_1A2F6
 										move.w  (sp)+,d1
 										andi.w  #7,d1
 										cmpi.w  #2,d1
 										bcs.s   loc_1B4CE
-										lea     unk_1B4F0(pc), a0
+										lea     byte_1B4F0(pc), a0
 										lea     ((Palette3-$1000000)).w,a1
 										lea     ((PALETTE3_BIS-$1000000)).w,a2
 										move.w  (a0),$12(a1)
@@ -6567,7 +6558,7 @@ sub_1B488:
 										move.w  (a0)+,$1A(a2)
 										move.w  (a0),$1C(a1)
 										move.w  (a0),$1C(a2)
-										jsr     (storeVdpCommandster).w
+										jsr     (StoreVdpCommandster).w
 loc_1B4CE:
 										
 										move.w  #$E4,((byte_FFB404-$1000000)).w 
@@ -6577,19 +6568,18 @@ loc_1B4CE:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1B488
+	; End of function sa16_
 
-unk_1B4F0:          dc.b  $C
-										dc.b $BF 
-										dc.b  $B
-										dc.b $9A 
-										dc.b  $B
-										dc.b $46 
+byte_1B4F0:         dc.b $C
+										dc.b $BF
+										dc.b $B
+										dc.b $9A
+										dc.b $B
+										dc.b $46
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B4F6:
-										
+sa18_:
 										andi.w  #7,d1
 										subq.w  #1,d1
 										beq.w   loc_1B508
@@ -6600,8 +6590,8 @@ loc_1B508:
 										
 										bclr    #3,((byte_FFB56E-$1000000)).w
 										move.w  #$EEE,d0
-										bsr.w   execSpellAnimationFlash
-										move.l  #unk_1B53A,((dword_FFB3C6-$1000000)).w
+										bsr.w   ExecSpellAnimationFlash
+										move.l  #byte_1B53A,((dword_FFB3C6-$1000000)).w
 										move.w  #1,((word_FFB3CA-$1000000)).w
 										move.b  #$A,((byte_FFB583-$1000000)).w
 loc_1B52A:
@@ -6611,11 +6601,11 @@ loc_1B52A:
 										clr.l   ((dword_FFB3C6-$1000000)).w
 										clr.b   ((byte_FFB583-$1000000)).w
 										rts
-unk_1B53A:
+byte_1B53A:
 										
-										dc.b   1
-										dc.b $28 
-										dc.b $68 
+										dc.b 1
+										dc.b $28
+										dc.b $68
 										dc.b $18
 loc_1B53E:
 										
@@ -6644,9 +6634,9 @@ loc_1B566:
 										rts
 loc_1B570:
 										
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #$A,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										lea     ((byte_FFB406-$1000000)).w,a5
 										lea     ((word_FFB3FA-$1000000)).w,a3
 										lea     word_1B608(pc), a0
@@ -6660,7 +6650,7 @@ loc_1B594:
 										moveq   #$26,d0 
 										bsr.w   sub_19F5E
 										jsr     (sub_1942).w    
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_PSHHH          ; long "psshhhh"
 										move.w  #5,4(a5)
 										lea     ((byte_FFDDB0-$1000000)).w,a4
@@ -6700,7 +6690,7 @@ loc_1B604:
 										
 										bra.w   sub_1A00A
 
-	; End of function sub_1B4F6
+	; End of function sa18_
 
 word_1B608:         dc.w $138
 										dc.w $110
@@ -6713,19 +6703,19 @@ word_1B608:         dc.w $138
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B618:
+sa1A_Detox:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_SPELL_CAST
 										move.w  #$8A8,d0
-										bsr.w   execSpellAnimationFlash
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ExecSpellAnimationFlash
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #7,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										moveq   #1,d0
 										bsr.w   sub_1A2F6
 										move.w  #1,4(a0)
-										lea     unk_1AA88(pc), a0
+										lea     byte_1AA88(pc), a0
 										moveq   #$26,d0 
 										bsr.w   sub_19F5E
 										move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -6734,16 +6724,16 @@ sub_1B618:
 										move.b  #1,((byte_FFB584-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1B618
+	; End of function sa1A_Detox
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B660:
+sa17_IceBreath:
 										
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #$C,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										lea     ((byte_FFB532-$1000000)).w,a1
 										btst    #7,((byte_FFB586-$1000000)).w
 										bne.s   loc_1B67C
@@ -6763,14 +6753,14 @@ loc_1B680:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1B660
+	; End of function sa17_IceBreath
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B6A8:
+sa1D_Blast:
 										
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										btst    #0,d1
 										beq.s   loc_1B6B6
 										moveq   #$14,d0
@@ -6780,7 +6770,7 @@ loc_1B6B6:
 										moveq   #$F,d0
 loc_1B6B8:
 										
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										moveq   #1,d0
 										bsr.w   sub_1A2F6
 										move.w  #$D0,4(a0) 
@@ -6791,16 +6781,16 @@ loc_1B6B8:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1B6A8
+	; End of function sa1D_Blast
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B6EA:
+sa1E_BurstRockExplosion:
 										
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #$10,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										moveq   #1,d0
 										bsr.w   sub_1A2F6
 										move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -6809,19 +6799,19 @@ sub_1B6EA:
 										move.b  #1,((byte_FFB584-$1000000)).w
 										bra.w   sub_1A028
 
-	; End of function sub_1B6EA
+	; End of function sa1E_BurstRockExplosion
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B716:
+sa1F_OddeyeBeam:
 										
 										move.w  d1,-(sp)
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										moveq   #$15,d0
-										bsr.w   loadSpellAnimationGraphics
+										bsr.w   LoadSpellGraphics
 										move.w  (sp)+,d1
-										lea     unk_1B794(pc), a0
+										lea     byte_1B794(pc), a0
 										btst    #7,d1
 										beq.s   loc_1B732
 										lea     $E(a0),a0
@@ -6838,12 +6828,6 @@ loc_1B732:
 										bne.s   loc_1B756
 										move.w  #$38,2(a0) 
 										bra.s   loc_1B75C
-
-	; End of function sub_1B716
-
-
-; START OF FUNCTION CHUNK FOR sub_1B716
-
 loc_1B756:
 										
 										move.w  #$102,2(a0)
@@ -6863,35 +6847,35 @@ loc_1B764:
 										move.b  #1,((byte_FFB588-$1000000)).w
 										bra.w   sub_1A028
 
-; END OF FUNCTION CHUNK FOR sub_1B716
+	; End of function sa1F_OddeyeBeam
 
-unk_1B794:          dc.b   1
-										dc.b   4
-										dc.b   0
-										dc.b $E9 
-										dc.b   8
-										dc.b   0
-										dc.b   1
+byte_1B794:         dc.b 1
+										dc.b 4
+										dc.b 0
+										dc.b $E9
+										dc.b 8
+										dc.b 0
+										dc.b 1
 										dc.b $1C
-										dc.b   0
-										dc.b $E5 
-										dc.b   5
+										dc.b 0
+										dc.b $E5
+										dc.b 5
 										dc.b $20
-										dc.b   5
-										dc.b $21 
-										dc.b   0
-										dc.b $D2 
-										dc.b   0
-										dc.b $CC 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $D2 
-										dc.b   0
-										dc.b $CC 
-										dc.b   5
-										dc.b $24 
-										dc.b  $C
+										dc.b 5
+										dc.b $21
+										dc.b 0
+										dc.b $D2
+										dc.b 0
+										dc.b $CC
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b $D2
+										dc.b 0
+										dc.b $CC
+										dc.b 5
+										dc.b $24
+										dc.b $C
 										dc.b $20
 
 ; =============== S U B R O U T I N E =======================================
@@ -6923,43 +6907,43 @@ loc_1B7D8:
 										clr.w   d7
 										move.b  ((byte_FFB587-$1000000)).w,d7
 										add.w   d7,d7
-										move.w  bt_1B7E8(pc,d7.w),d7
-										jmp     bt_1B7E8(pc,d7.w)
+										move.w  rjt_SpellAnimations(pc,d7.w),d7
+										jmp     rjt_SpellAnimations(pc,d7.w)
 
 	; End of function sub_1B7B0
 
-bt_1B7E8:           dc.w nullsub_13-bt_1B7E8
-										dc.w sub_1B93C-bt_1B7E8
-										dc.w sub_1BE9E-bt_1B7E8
-										dc.w sub_1C248-bt_1B7E8
-										dc.w sub_1C53E-bt_1B7E8
-										dc.w sub_1C7F6-bt_1B7E8
-										dc.w sub_1CC56-bt_1B7E8
-										dc.w boltAnimation-bt_1B7E8
-										dc.w sub_1CFFC-bt_1B7E8
-										dc.w sub_1D038-bt_1B7E8
-										dc.w nullsub_22-bt_1B7E8
-										dc.w sub_1D0FE-bt_1B7E8
-										dc.w sub_1D2E6-bt_1B7E8
-										dc.w sub_1D4E6-bt_1B7E8
-										dc.w sub_1D5C6-bt_1B7E8
-										dc.w sub_1D786-bt_1B7E8
-										dc.w sub_1D9FC-bt_1B7E8
-										dc.w sub_1DCE8-bt_1B7E8
-										dc.w sub_1DE24-bt_1B7E8
-										dc.w sub_1DFD4-bt_1B7E8
-										dc.w sub_1E134-bt_1B7E8
-										dc.w sub_1E2D4-bt_1B7E8
-										dc.w sub_1E5D0-bt_1B7E8
-										dc.w sub_1E7B2-bt_1B7E8
-										dc.w nullsub_22-bt_1B7E8
-										dc.w sub_1CFFC-bt_1B7E8
-										dc.w sub_1E958-bt_1B7E8
-										dc.w sub_1D038-bt_1B7E8
-										dc.w sub_1D038-bt_1B7E8
-										dc.w loc_1EA0C-bt_1B7E8
-										dc.w sub_1EBBA-bt_1B7E8
-										dc.w sub_1ECC8-bt_1B7E8
+rjt_SpellAnimations:dc.w nullsub_13-rjt_SpellAnimations
+										dc.w sub_1B93C-rjt_SpellAnimations
+										dc.w sub_1BE9E-rjt_SpellAnimations
+										dc.w sub_1C248-rjt_SpellAnimations
+										dc.w sub_1C53E-rjt_SpellAnimations
+										dc.w sub_1C7F6-rjt_SpellAnimations
+										dc.w sub_1CC56-rjt_SpellAnimations
+										dc.w spellanim_Bolt-rjt_SpellAnimations
+										dc.w sub_1CFFC-rjt_SpellAnimations
+										dc.w sub_1D038-rjt_SpellAnimations
+										dc.w nullsub_22-rjt_SpellAnimations
+										dc.w sub_1D0FE-rjt_SpellAnimations
+										dc.w sub_1D2E6-rjt_SpellAnimations
+										dc.w sub_1D4E6-rjt_SpellAnimations
+										dc.w sub_1D5C6-rjt_SpellAnimations
+										dc.w sub_1D786-rjt_SpellAnimations
+										dc.w sub_1D9FC-rjt_SpellAnimations
+										dc.w sub_1DCE8-rjt_SpellAnimations
+										dc.w sub_1DE24-rjt_SpellAnimations
+										dc.w sub_1DFD4-rjt_SpellAnimations
+										dc.w sub_1E134-rjt_SpellAnimations
+										dc.w sub_1E2D4-rjt_SpellAnimations
+										dc.w sub_1E5D0-rjt_SpellAnimations
+										dc.w sub_1E7B2-rjt_SpellAnimations
+										dc.w nullsub_22-rjt_SpellAnimations
+										dc.w sub_1CFFC-rjt_SpellAnimations
+										dc.w sub_1E958-rjt_SpellAnimations
+										dc.w sub_1D038-rjt_SpellAnimations
+										dc.w sub_1D038-rjt_SpellAnimations
+										dc.w loc_1EA0C-rjt_SpellAnimations
+										dc.w sub_1EBBA-rjt_SpellAnimations
+										dc.w sub_1ECC8-rjt_SpellAnimations
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6976,10 +6960,10 @@ sub_1B82A:
 										
 										clr.w   ((PALETTE_1-$1000000)).w
 										clr.w   ((byte_FFD044-$1000000)).w
-										jsr     (storeVdpCommandster).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommandster).w
+										jsr     (Set_FFDE94_bit3).w
 										bsr.w   sub_1A00A
-										bsr.w   clearSpellAnimationProperties
+										bsr.w   ClearSpellAnimationProperties
 										cmpi.b  #$11,((byte_FFB587-$1000000)).w
 										bcs.s   loc_1B858
 										cmpi.b  #$14,((byte_FFB587-$1000000)).w
@@ -7059,8 +7043,8 @@ loc_1B8DC:
 										move.b  d0,((byte_FFB569-$1000000)).w
 										move.w  d1,((PALETTE_1-$1000000)).w
 										move.w  d1,((byte_FFD044-$1000000)).w
-										jsr     (storeVdpCommandster).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommandster).w
+										jsr     (Set_FFDE94_bit3).w
 loc_1B8F8:
 										
 										movem.w (sp)+,d0-d1/d6-d7
@@ -7107,13 +7091,13 @@ word_1B930:
 	; End of function sub_1B90C
 
 										dc.b $FF
-										dc.b $FE 
-										dc.b   0
-										dc.b   2
-										dc.b   0
-										dc.b   3
+										dc.b $FE
+										dc.b 0
+										dc.b 2
+										dc.b 0
+										dc.b 3
 										dc.b $FF
-										dc.b $FD 
+										dc.b $FD
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -7125,6 +7109,8 @@ nullsub_13:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; desoul ?
 
 sub_1B93C:
 										
@@ -7156,7 +7142,7 @@ loc_1B982:
 										subq.w  #1,2(a5)
 										bne.w   loc_1B9BC
 										move.w  #5,2(a5)
-										lea     unk_1BE2A(pc), a0
+										lea     byte_1BE2A(pc), a0
 										bchg    #0,6(a5)
 										beq.s   loc_1B99E
 										addq.w  #4,a0
@@ -7208,7 +7194,7 @@ loc_1BA00:
 										subq.b  #1,3(a5)
 										bne.w   loc_1BBFA
 										move.w  #$106,2(a5)
-										lea     unk_1BE42(pc), a0
+										lea     byte_1BE42(pc), a0
 										tst.b   4(a3)
 										beq.s   loc_1BA30
 										lea     $20(a0),a0
@@ -7240,7 +7226,7 @@ loc_1BA70:
 										jsr     (UpdateRandomSeed).w
 										addi.w  #$700,d7
 										move.w  d7,6(a5)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_DESOUL_HOVERING
 										bra.w   loc_1BBFA
 loc_1BA8C:
@@ -7297,7 +7283,7 @@ loc_1BAF8:
 										move.b  3(a5),d1
 										andi.w  #$3F,d1 
 										bne.w   loc_1BBFA
-										lea     unk_1BE46(pc), a0
+										lea     byte_1BE46(pc), a0
 										moveq   #6,d1
 										btst    #6,3(a5)
 										bne.s   loc_1BB1C
@@ -7325,7 +7311,7 @@ loc_1BB46:
 										subq.b  #1,d1
 										bne.w   loc_1BB80
 										move.w  #$300,2(a5)
-										lea     unk_1BE52(pc), a0
+										lea     byte_1BE52(pc), a0
 										tst.b   4(a3)
 										beq.s   loc_1BB60
 										lea     $20(a0),a0
@@ -7337,7 +7323,7 @@ loc_1BB60:
 										move.w  d2,6(a4)
 										move.w  d3,(a4)
 										move.w  d3,$A(a5)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_BATTLEFIELD_DEATH
 										bsr.w   sub_1B8FE
 										bra.w   loc_1BBFA
@@ -7346,7 +7332,7 @@ loc_1BB80:
 										addq.b  #1,3(a5)
 										cmpi.b  #6,3(a5)
 										bne.s   loc_1BBAE
-										lea     unk_1BE5A(pc), a0
+										lea     byte_1BE5A(pc), a0
 										move.w  (a4),d3
 										move.w  6(a4),d2
 										tst.b   4(a3)
@@ -7549,7 +7535,7 @@ sub_1BD4C:
 										lea     ((byte_FFB496-$1000000)).w,a2
 										lsl.w   #2,d0
 										move.w  d0,-(sp)
-										lea     byte_1BE82(pc), a3
+										lea     word_1BE82(pc), a3
 										moveq   #6,d1
 loc_1BD6C:
 										
@@ -7645,135 +7631,134 @@ loc_1BE16:
 	; End of function sub_1BDA0
 
 byte_1BE1C:         dc.b 0
-										dc.b $E0 
-										dc.b $A0 
-										dc.b $D0 
-										dc.b $60 
-										dc.b   0
-										dc.b $90 
-										dc.b   0
+										dc.b $E0
+										dc.b $A0
+										dc.b $D0
+										dc.b $60
+										dc.b 0
+										dc.b $90
+										dc.b 0
 										dc.b $20
 										dc.b $10
-										dc.b   0
-										dc.b   0
-										dc.b $50 
+										dc.b 0
+										dc.b 0
+										dc.b $50
 										dc.b $FF
-unk_1BE2A:          dc.b   0
-										dc.b $21 
-										dc.b   0
-										dc.b $21 
-										dc.b   0
-										dc.b $29 
-										dc.b   0
-										dc.b $29 
-										dc.b   0
-										dc.b $31 
-										dc.b   0
-										dc.b $3D 
-										dc.b   0
-										dc.b $43 
-										dc.b   0
-										dc.b $4F 
-										dc.b   0
-										dc.b $55 
-										dc.b   0
-										dc.b $65 
-										dc.b   0
-										dc.b $75 
-										dc.b   0
-										dc.b $85 
-unk_1BE42:          dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $60 
-unk_1BE46:          dc.b   5
-										dc.b $B5 
-										dc.b   5
+byte_1BE2A:         dc.b 0
+										dc.b $21
+										dc.b 0
+										dc.b $21
+										dc.b 0
+										dc.b $29
+										dc.b 0
+										dc.b $29
+										dc.b 0
+										dc.b $31
+										dc.b 0
+										dc.b $3D
+										dc.b 0
+										dc.b $43
+										dc.b 0
+										dc.b $4F
+										dc.b 0
+										dc.b $55
+										dc.b 0
+										dc.b $65
+										dc.b 0
+										dc.b $75
+										dc.b 0
+										dc.b $85
+byte_1BE42:         dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $60
+byte_1BE46:         dc.b 5
+										dc.b $B5
+										dc.b 5
 										dc.b $20
-										dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $60 
-										dc.b   5
-										dc.b $B9 
-										dc.b   5
+										dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $60
+										dc.b 5
+										dc.b $B9
+										dc.b 5
 										dc.b $20
-unk_1BE52:          dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $60 
-										dc.b   5
-										dc.b $BD 
-										dc.b  $A
+byte_1BE52:         dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $60
+										dc.b 5
+										dc.b $BD
+										dc.b $A
 										dc.b $20
-unk_1BE5A:          dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $60 
-										dc.b   5
-										dc.b $C6 
-										dc.b   9
+byte_1BE5A:         dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $60
+										dc.b 5
+										dc.b $C6
+										dc.b 9
 										dc.b $20
-										dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $60 
-										dc.b   5
-										dc.b $CC 
-										dc.b  $A
+										dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $60
+										dc.b 5
+										dc.b $CC
+										dc.b $A
 										dc.b $20
-										dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $60 
-										dc.b   5
-										dc.b $D5 
-										dc.b  $A
+										dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $60
+										dc.b 5
+										dc.b $D5
+										dc.b $A
 										dc.b $20
-										dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $60 
-										dc.b   5
-										dc.b $DE 
-										dc.b  $F
+										dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $60
+										dc.b 5
+										dc.b $DE
+										dc.b $F
 										dc.b $20
-										dc.b   0
-										dc.b $80 
-										dc.b   0
-										dc.b $60 
-										dc.b   5
-										dc.b $EE 
-										dc.b  $F
+										dc.b 0
+										dc.b $80
+										dc.b 0
+										dc.b $60
+										dc.b 5
+										dc.b $EE
+										dc.b $F
 										dc.b $20
-byte_1BE82:         dc.b 0
-										dc.b  $C
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b  $C
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b  $C
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b  $C
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b  $C
-										dc.b   0
-										dc.b   4
-										dc.b   0
-										dc.b   8
-										dc.b   0
-										dc.b   8
-										dc.b   0
-										dc.b   8
-										dc.b   0
-										dc.b   8
+word_1BE82:         dc.w $C
+										dc.b 0
+										dc.b 4
+										dc.b 0
+										dc.b $C
+										dc.b 0
+										dc.b 4
+										dc.b 0
+										dc.b $C
+										dc.b 0
+										dc.b 4
+										dc.b 0
+										dc.b $C
+										dc.b 0
+										dc.b 4
+										dc.b 0
+										dc.b $C
+										dc.b 0
+										dc.b 4
+										dc.b 0
+										dc.b 8
+										dc.b 0
+										dc.b 8
+										dc.b 0
+										dc.b 8
+										dc.b 0
+										dc.b 8
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -8032,7 +8017,7 @@ loc_1C148:
 										dbf     d1,loc_1BF88
 										subq.b  #1,$E(a3)
 										bne.s   loc_1C178
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_TINKLING       ; related to bolt ?
 										moveq   #$E,d6
 										jsr     (UpdateRandomSeed).w
@@ -8042,7 +8027,7 @@ loc_1C170:
 										move.b  d7,$E(a3)
 loc_1C178:
 										
-										lea     unk_1C242(pc), a0
+										lea     byte_1C242(pc), a0
 										bsr.w   sub_1B8B2
 										tst.b   ((byte_FFB584-$1000000)).w
 loc_1C184:
@@ -8053,196 +8038,196 @@ loc_1C184:
 	; End of function sub_1BE9E
 
 errQuickWorkaroundPossibleSideEffects:
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
+										dc.b 0
+										dc.b 0
+										dc.b $C5
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b $C5 
-										dc.b $21 
-										dc.b   5
-										dc.b   0
-										dc.b $C5 
-										dc.b $22 
-										dc.b  $A
-										dc.b   0
-										dc.b $C5 
-										dc.b $26 
-										dc.b   0
-										dc.b   8
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $28 
-										dc.b   0
-										dc.b  $D
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b   0
+										dc.b 0
+										dc.b 0
+										dc.b $C5
+										dc.b $21
+										dc.b 5
+										dc.b 0
+										dc.b $C5
+										dc.b $22
+										dc.b $A
+										dc.b 0
+										dc.b $C5
+										dc.b $26
+										dc.b 0
+										dc.b 8
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b $28
+										dc.b 0
+										dc.b $D
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 1
+										dc.b 0
 										dc.b $12
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $29 
-										dc.b   0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b $29
+										dc.b 0
 										dc.b $17
-										dc.b   5
-										dc.b   0
-										dc.b   0
-										dc.b   2
-										dc.b   0
+										dc.b 5
+										dc.b 0
+										dc.b 0
+										dc.b 2
+										dc.b 0
 										dc.b $1C
-										dc.b   5
-										dc.b   0
-										dc.b   0
-										dc.b $2A 
-										dc.b   0
-										dc.b $22 
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   6
-										dc.b   0
-										dc.b $28 
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b $2E 
-										dc.b   0
-										dc.b   8
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $29 
-										dc.b   0
-										dc.b  $D
-										dc.b   5
-										dc.b   0
-										dc.b   0
-										dc.b   2
-										dc.b   0
+										dc.b 5
+										dc.b 0
+										dc.b 0
+										dc.b $2A
+										dc.b 0
+										dc.b $22
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b 6
+										dc.b 0
+										dc.b $28
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b $2E
+										dc.b 0
+										dc.b 8
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b $29
+										dc.b 0
+										dc.b $D
+										dc.b 5
+										dc.b 0
+										dc.b 0
+										dc.b 2
+										dc.b 0
 										dc.b $12
-										dc.b   5
-										dc.b   0
-										dc.b   0
-										dc.b $2A 
-										dc.b   0
+										dc.b 5
+										dc.b 0
+										dc.b 0
+										dc.b $2A
+										dc.b 0
 										dc.b $17
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   6
-										dc.b   0
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b 6
+										dc.b 0
 										dc.b $1C
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b $2E 
-										dc.b   0
-										dc.b $22 
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b  $F
-										dc.b   0
-										dc.b $28 
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b $37 
-										dc.b   0
-										dc.b   8
-										dc.b   5
-										dc.b   0
-										dc.b   0
-										dc.b $2A 
-										dc.b   0
-										dc.b  $D
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   6
-										dc.b   0
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b $2E
+										dc.b 0
+										dc.b $22
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b $F
+										dc.b 0
+										dc.b $28
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b $37
+										dc.b 0
+										dc.b 8
+										dc.b 5
+										dc.b 0
+										dc.b 0
+										dc.b $2A
+										dc.b 0
+										dc.b $D
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b 6
+										dc.b 0
 										dc.b $12
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b $2E 
-										dc.b   0
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b $2E
+										dc.b 0
 										dc.b $17
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b  $F
-										dc.b   0
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b $F
+										dc.b 0
 										dc.b $1C
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b $37 
-										dc.b   0
-										dc.b $22 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b $37
+										dc.b 0
+										dc.b $22
+										dc.b $F
+										dc.b 0
+										dc.b 0
 										dc.b $18
-										dc.b   0
-										dc.b $28 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $40 
-										dc.b   0
-										dc.b   8
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b $2E 
-										dc.b   0
-										dc.b  $D
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b  $F
-										dc.b   0
+										dc.b 0
+										dc.b $28
+										dc.b $F
+										dc.b 0
+										dc.b 0
+										dc.b $40
+										dc.b 0
+										dc.b 8
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b $2E
+										dc.b 0
+										dc.b $D
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b $F
+										dc.b 0
 										dc.b $12
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b $37 
-										dc.b   0
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b $37
+										dc.b 0
 										dc.b $17
-										dc.b  $F
-										dc.b   0
-										dc.b   0
+										dc.b $F
+										dc.b 0
+										dc.b 0
 										dc.b $18
-										dc.b   0
+										dc.b 0
 										dc.b $1C
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $40 
-										dc.b   0
-										dc.b $22 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
+										dc.b $F
+										dc.b 0
+										dc.b 0
+										dc.b $40
+										dc.b 0
+										dc.b $22
+										dc.b $F
+										dc.b 0
+										dc.b 0
 										dc.b $18
-										dc.b   0
-										dc.b $28 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $40 
-unk_1C242:          dc.b  $E
-										dc.b $44 
-										dc.b   0
-										dc.b   8
-										dc.b   0
-										dc.b   1
+										dc.b 0
+										dc.b $28
+										dc.b $F
+										dc.b 0
+										dc.b 0
+										dc.b $40
+byte_1C242:         dc.b $E
+										dc.b $44
+										dc.b 0
+										dc.b 8
+										dc.b 0
+										dc.b 1
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -8286,7 +8271,7 @@ loc_1C288:
 										bset    #1,6(a5)
 loc_1C2B4:
 										
-										lea     unk_1C51E(pc), a0
+										lea     byte_1C51E(pc), a0
 										moveq   #2,d4
 										bsr.w   sub_1C4D8
 loc_1C2BE:
@@ -8301,7 +8286,7 @@ loc_1C2C0:
 										bclr    #1,6(a5)
 loc_1C2D2:
 										
-										lea     unk_1C4FE(pc), a0
+										lea     word_1C4FE(pc), a0
 										moveq   #1,d4
 										bsr.w   sub_1C4D8
 loc_1C2DC:
@@ -8389,7 +8374,7 @@ loc_1C3C4:
 										bne.w   loc_1C42A
 										subq.b  #1,5(a5)
 										bne.w   loc_1C43A
-										lea     unk_1C4FE(pc), a0
+										lea     word_1C4FE(pc), a0
 										btst    #1,6(a5)
 										beq.s   loc_1C3E6
 										lea     $20(a0),a0
@@ -8408,7 +8393,7 @@ loc_1C3E6:
 										addi.w  #$30,$1C(a4) 
 										addq.w  #1,4(a3)
 										move.b  #$20,5(a5) 
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_DESOUL
 										bsr.w   sub_1B8FE
 										bra.w   loc_1C43A
@@ -8501,77 +8486,76 @@ sub_1C4D8:
 										move.b  d4,(a0)+
 										move.b  d4,(a0)
 										move.b  #$E,5(a5)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_DESOUL_HOVERING
 										move.w  (sp)+,d0
 										rts
 
 	; End of function sub_1C4D8
 
-unk_1C4FE:          dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
+word_1C4FE:         dc.w 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
 										dc.b $20
-										dc.b  $F
+										dc.b $F
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 0
+										dc.b 0
 										dc.b $20
-										dc.b   5
-										dc.b $30 
-										dc.b  $D
+										dc.b 5
+										dc.b $30
+										dc.b $D
 										dc.b $20
-										dc.b   0
+										dc.b 0
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $38 
-										dc.b  $F
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $38
+										dc.b $F
 										dc.b $20
-										dc.b   0
+										dc.b 0
 										dc.b $20
-										dc.b   0
+										dc.b 0
 										dc.b $20
-										dc.b   5
-										dc.b $48 
-										dc.b  $D
+										dc.b 5
+										dc.b $48
+										dc.b $D
 										dc.b $20
-unk_1C51E:          dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $38 
-										dc.b  $F
-										dc.b $21 
-										dc.b   0
-										dc.b   0
-										dc.b   0
+byte_1C51E:         dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $38
+										dc.b $F
+										dc.b $21
+										dc.b 0
+										dc.b 0
+										dc.b 0
 										dc.b $20
-										dc.b   5
-										dc.b $48 
-										dc.b  $D
-										dc.b $21 
-										dc.b   0
+										dc.b 5
+										dc.b $48
+										dc.b $D
+										dc.b $21
+										dc.b 0
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   5
+										dc.b 0
+										dc.b 0
+										dc.b 5
 										dc.b $20
-										dc.b  $F
-										dc.b $21 
-										dc.b   0
+										dc.b $F
+										dc.b $21
+										dc.b 0
 										dc.b $20
-										dc.b   0
+										dc.b 0
 										dc.b $20
-										dc.b   5
-										dc.b $30 
-										dc.b  $D
-										dc.b $21 
+										dc.b 5
+										dc.b $30
+										dc.b $D
+										dc.b $21
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -8741,7 +8725,7 @@ loc_1C6CC:
 loc_1C6E0:
 										
 										addq.w  #1,2(a5)
-										lea     unk_1C7EE(pc), a0
+										lea     byte_1C7EE(pc), a0
 										btst    #2,3(a5)
 										beq.s   loc_1C6F2
 										addq.w  #4,a0
@@ -8829,14 +8813,14 @@ loc_1C7D8:
 
 	; End of function sub_1C53E
 
-unk_1C7EE:          dc.b   0
-										dc.b $60 
-										dc.b   0
-										dc.b $80 
-										dc.b   1
-										dc.b $80 
-										dc.b   0
-										dc.b $80 
+byte_1C7EE:         dc.b 0
+										dc.b $60
+										dc.b 0
+										dc.b $80
+										dc.b 1
+										dc.b $80
+										dc.b 0
+										dc.b $80
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -8896,7 +8880,7 @@ loc_1C872:
 										move.w  d7,d0
 										add.w   d7,d7
 										add.w   d0,d7
-										lea     unk_1CBBA(pc), a0
+										lea     byte_1CBBA(pc), a0
 										adda.w  d7,a0
 										moveq   #$20,d6 
 										jsr     (UpdateRandomSeed).w
@@ -8933,7 +8917,7 @@ loc_1C8D8:
 										move.w  d7,6(a5)
 										move.w  #1,(a5)
 										clr.l   8(a5)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_BLAST_SPELL
 										bra.w   loc_1C9A0
 loc_1C8EC:
@@ -8941,7 +8925,7 @@ loc_1C8EC:
 										addq.w  #1,(a5)
 										cmpi.w  #$A,(a5)
 										bcc.w   loc_1C918
-										lea     byte_1CBDE(pc), a0
+										lea     word_1CBDE(pc), a0
 										tst.w   6(a3)
 										beq.s   loc_1C904
 										lea     $18(a0),a0
@@ -9053,13 +9037,13 @@ loc_1C9A0:
 										add.w   d2,d7
 										add.w   (a3),d7
 										move.w  d7,6(a4)
-										lea     unk_1CC44(pc), a1
+										lea     byte_1CC44(pc), a1
 										bra.w   loc_1CA76
 loc_1CA22:
 										
 										subq.w  #1,d0
 										bne.w   loc_1CA38
-										lea     unk_1CC46(pc), a1
+										lea     byte_1CC46(pc), a1
 										move.w  4(a5),d0
 										bsr.w   sub_1CBA6
 										bra.w   loc_1CA76
@@ -9074,7 +9058,7 @@ loc_1CA38:
 										add.w   d1,6(a4)
 										move.b  5(a0),d1
 										add.w   d1,(a4)
-										lea     unk_1CC48(pc), a1
+										lea     byte_1CC48(pc), a1
 										bra.w   loc_1CA76
 loc_1CA5E:
 										
@@ -9196,7 +9180,7 @@ loc_1CB6E:
 										bchg    #0,5(a5)
 loc_1CB94:
 										
-										lea     unk_1CC0E(pc), a0
+										lea     byte_1CC0E(pc), a0
 										bsr.w   sub_1B8B2
 										tst.w   ((byte_FFB404-$1000000)).w
 										beq.w   sub_1B82A
@@ -9210,7 +9194,7 @@ loc_1CB94:
 sub_1CBA6:
 										
 										move.w  d0,-(sp)
-										lea     unk_1CC14(pc), a0
+										lea     byte_1CC14(pc), a0
 										add.w   d0,d0
 										move.w  d0,d1
 										add.w   d0,d0
@@ -9221,162 +9205,160 @@ sub_1CBA6:
 
 	; End of function sub_1CBA6
 
-unk_1CBBA:          dc.b $FF
-										dc.b $D0 
+byte_1CBBA:         dc.b $FF
+										dc.b $D0
 										dc.b $FF
-										dc.b $D0 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $30 
+										dc.b $D0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b $30
 										dc.b $FF
-										dc.b $D0 
-										dc.b   8
-										dc.b   0
+										dc.b $D0
+										dc.b 8
+										dc.b 0
 										dc.b $FF
-										dc.b $D0 
-										dc.b   0
-										dc.b $30 
+										dc.b $D0
+										dc.b 0
+										dc.b $30
 										dc.b $10
-										dc.b   0
-										dc.b   0
-										dc.b $30 
-										dc.b   0
-										dc.b $30 
+										dc.b 0
+										dc.b 0
+										dc.b $30
+										dc.b 0
+										dc.b $30
 										dc.b $18
-										dc.b   0
+										dc.b 0
 										dc.b $FF
-										dc.b $CC 
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b $34 
-										dc.b   0
-										dc.b   0
-										dc.b   8
-										dc.b   0
-byte_1CBDE:         dc.b 0
-										dc.b   5
-										dc.b   5
-										dc.b   0
-										dc.b   0
-										dc.b   1
-										dc.b   0
-										dc.b   9
-										dc.b   6
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b   0
-										dc.b   5
-										dc.b   5
-										dc.b   0
-										dc.b   0
+										dc.b $CC
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b $34
+										dc.b 0
+										dc.b 0
+										dc.b 8
+										dc.b 0
+word_1CBDE:         dc.w 5
+										dc.w $500
+										dc.b 0
+										dc.b 1
+										dc.b 0
+										dc.b 9
+										dc.b 6
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b 0
+										dc.b 5
+										dc.b 5
+										dc.b 0
+										dc.b 0
 										dc.b $19
-										dc.b   0
-										dc.b   9
-										dc.b   9
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 9
+										dc.b 9
+										dc.b 0
+										dc.b 0
 										dc.b $1D
-										dc.b   0
-										dc.b   5
-										dc.b   6
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b   0
-										dc.b   9
-										dc.b  $B
-										dc.b   0
-										dc.b   0
-										dc.b  $B
-										dc.b   0
-										dc.b   5
-										dc.b   9
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 5
+										dc.b 6
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b 0
+										dc.b 9
+										dc.b $B
+										dc.b 0
+										dc.b 0
+										dc.b $B
+										dc.b 0
+										dc.b 5
+										dc.b 9
+										dc.b 0
+										dc.b 0
 										dc.b $1D
-										dc.b   0
-										dc.b   9
-										dc.b  $D
-										dc.b   0
-										dc.b   0
-										dc.b $23 
-unk_1CC0E:          dc.b  $C
-										dc.b $C4 
-										dc.b   0
-										dc.b  $A
-										dc.b   0
-										dc.b   1
-unk_1CC14:          dc.b $18
+										dc.b 0
+										dc.b 9
+										dc.b $D
+										dc.b 0
+										dc.b 0
+										dc.b $23
+byte_1CC0E:         dc.b $C
+										dc.b $C4
+										dc.b 0
+										dc.b $A
+										dc.b 0
+										dc.b 1
+byte_1CC14:         dc.b $18
 										dc.b $18
-										dc.b   1
+										dc.b 1
 										dc.b $10
-										dc.b   8
-										dc.b   0
-										dc.b   0
+										dc.b 8
+										dc.b 0
+										dc.b 0
 										dc.b $18
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   8
-										dc.b $E8 
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 8
+										dc.b $E8
 										dc.b $18
-										dc.b   1
+										dc.b 1
 										dc.b $18
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 0
 										dc.b $18
-										dc.b   0
-										dc.b   2
-										dc.b   0
-										dc.b   8
-										dc.b   8
-										dc.b $E8 
-										dc.b   0
-										dc.b   2
-										dc.b   8
-										dc.b   8
-										dc.b   8
+										dc.b 0
+										dc.b 2
+										dc.b 0
+										dc.b 8
+										dc.b 8
+										dc.b $E8
+										dc.b 0
+										dc.b 2
+										dc.b 8
+										dc.b 8
+										dc.b 8
 										dc.b $18
-										dc.b $E8 
-										dc.b   1
-										dc.b   0
-										dc.b   8
-										dc.b   0
-										dc.b   0
-										dc.b $E8 
-										dc.b   0
+										dc.b $E8
+										dc.b 1
+										dc.b 0
+										dc.b 8
+										dc.b 0
+										dc.b 0
+										dc.b $E8
+										dc.b 0
 										dc.b $10
-										dc.b   0
-										dc.b   0
-										dc.b $E8 
-										dc.b $E8 
-										dc.b   1
-										dc.b   8
-										dc.b   0
-										dc.b   0
-unk_1CC44:          dc.b $50 
-										dc.b $97 
-unk_1CC46:          dc.b $70 
-										dc.b $9B 
-unk_1CC48:          dc.b $60 
-										dc.b $A3 
-										dc.b $50 
-										dc.b $A9 
-										dc.b $D0 
-										dc.b $AD 
-										dc.b $90 
-										dc.b $B5 
-										dc.b $50 
-										dc.b $BB 
-										dc.b $F0 
-										dc.b $BF 
-										dc.b $60 
-										dc.b $CF 
+										dc.b 0
+										dc.b 0
+										dc.b $E8
+										dc.b $E8
+										dc.b 1
+										dc.b 8
+										dc.b 0
+										dc.b 0
+byte_1CC44:         dc.b $50
+										dc.b $97
+byte_1CC46:         dc.b $70
+										dc.b $9B
+byte_1CC48:         dc.b $60
+										dc.b $A3
+										dc.b $50
+										dc.b $A9
+										dc.b $D0
+										dc.b $AD
+										dc.b $90
+										dc.b $B5
+										dc.b $50
+										dc.b $BB
+										dc.b $F0
+										dc.b $BF
+										dc.b $60
+										dc.b $CF
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -9501,7 +9483,7 @@ loc_1CD7A:
 										bne.w   loc_1CDBC
 										lea     (byte_FFAFA0).l,a1
 										adda.w  d0,a1
-										lea     unk_1CE48(pc), a0
+										lea     byte_1CE48(pc), a0
 										bsr.w   sub_19F5E
 										move.w  4(a5),6(a4)
 										move.w  6(a5),(a4)
@@ -9538,79 +9520,79 @@ loc_1CDF2:
 	; End of function sub_1CC56
 
 byte_1CE0C:         dc.b 0
-										dc.b   8
-										dc.b   0
-										dc.b   0
-										dc.b   0
+										dc.b 8
+										dc.b 0
+										dc.b 0
+										dc.b 0
 										dc.b $1A
-										dc.b   0
-										dc.b  $E
-										dc.b   5
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b $E
+										dc.b 5
+										dc.b 0
+										dc.b 0
 										dc.b $16
-										dc.b   0
+										dc.b 0
 										dc.b $14
-										dc.b   5
-										dc.b   0
-										dc.b   0
+										dc.b 5
+										dc.b 0
+										dc.b 0
 										dc.b $12
-										dc.b   0
+										dc.b 0
 										dc.b $1A
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   9
-										dc.b   0
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b 9
+										dc.b 0
 										dc.b $20
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   0
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b 0
 byte_1CE2A:         dc.b 0
-										dc.b   8
-										dc.b  $A
-										dc.b   0
-										dc.b   0
-										dc.b   9
-										dc.b   0
-										dc.b  $E
-										dc.b   5
-										dc.b   0
-										dc.b   0
+										dc.b 8
+										dc.b $A
+										dc.b 0
+										dc.b 0
+										dc.b 9
+										dc.b 0
+										dc.b $E
+										dc.b 5
+										dc.b 0
+										dc.b 0
 										dc.b $12
-										dc.b   0
+										dc.b 0
 										dc.b $14
-										dc.b   5
-										dc.b   0
-										dc.b   0
+										dc.b 5
+										dc.b 0
+										dc.b 0
 										dc.b $16
-										dc.b   0
+										dc.b 0
 										dc.b $1A
-										dc.b   0
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 0
+										dc.b 0
 										dc.b $1A
-										dc.b   0
+										dc.b 0
 										dc.b $20
-										dc.b   0
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 0
+										dc.b 0
 										dc.b $1B
-unk_1CE48:          dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
-										dc.b $3C 
-										dc.b   0
+byte_1CE48:         dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
+										dc.b $3C
+										dc.b 0
 										dc.b $20
 
 ; =============== S U B R O U T I N E =======================================
 
 ; looks related to BOLT
 
-boltAnimation:
+spellanim_Bolt:
 										
 										lea     ((byte_FFB406-$1000000)).w,a5
 										lea     ((byte_FFDDB0-$1000000)).w,a4
@@ -9644,7 +9626,7 @@ loc_1CEA0:
 										
 										cmpi.w  #2,d1
 										bne.s   loc_1CEAA
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_BOLT_SPELL
 loc_1CEAA:
 										
@@ -9705,7 +9687,7 @@ loc_1CF28:
 										subq.w  #1,d1
 										cmpi.w  #6,d1
 										bne.w   loc_1CEAA
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_BOLT_SPELL
 										bra.w   loc_1CE86
 loc_1CF42:
@@ -9784,7 +9766,7 @@ loc_1CFEA:
 										lea     word_1CFF6(pc), a0
 										bra.w   sub_1B8B2
 
-	; End of function boltAnimation
+	; End of function spellanim_Bolt
 
 word_1CFF6:         dc.w $EAA
 										dc.w $E
@@ -9809,7 +9791,7 @@ sub_1CFFC:
 										bcc.w   sub_1B82A
 										move.w  d0,2(a5)
 										move.w  d0,4(a5)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_PSH
 return_1D036:
 										
@@ -9857,7 +9839,7 @@ loc_1D090:
 										move.w  #5,4(a5)
 										subq.w  #1,d1
 										bne.w   loc_1D0C2
-										lea     unk_1D0EE(pc), a0
+										lea     byte_1D0EE(pc), a0
 										moveq   #1,d1
 										moveq   #$20,d6 
 										jsr     (UpdateRandomSeed).w
@@ -9889,21 +9871,22 @@ loc_1D0D4:
 
 	; End of function sub_1D038
 
-unk_1D0EE:          dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
+byte_1D0EE:         dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
 										dc.b $20
-										dc.w $F20
+										dc.b $F
+										dc.b $20
 byte_1D0F6:         dc.b 0
 										dc.b $10
-										dc.b   0
+										dc.b 0
 										dc.b $20
-										dc.b   0
+										dc.b 0
 										dc.b $10
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -9931,11 +9914,11 @@ loc_1D10E:
 										subi.w  #$300,d7
 										move.w  d7,6(a5)
 										clr.l   8(a5)
-										lea     unk_1D2A2(pc), a0
+										lea     byte_1D2A2(pc), a0
 										bsr.w   sub_19F5E
 										move.w  (a3),6(a4)
 										move.w  2(a3),(a4)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_DEMON_BREATH
 										bra.w   loc_1D288
 loc_1D15E:
@@ -10041,7 +10024,7 @@ loc_1D25A:
 										add.w   d0,6(a4)
 										tst.w   4(a3)
 										beq.s   loc_1D272
-										lea     byte_1D2AA(pc), a0
+										lea     word_1D2AA(pc), a0
 										moveq   #$A,d0
 										bsr.w   sub_1B884
 loc_1D272:
@@ -10065,74 +10048,73 @@ loc_1D288:
 
 	; End of function sub_1D0FE
 
-unk_1D2A2:          dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   0
-										dc.b   5
+byte_1D2A2:         dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 0
+										dc.b 5
 										dc.b $20
-										dc.b  $F
+										dc.b $F
 										dc.b $20
-byte_1D2AA:         dc.b 0
+word_1D2AA:         dc.w $20
+										dc.b $F
+										dc.b 0
+										dc.b 0
+										dc.b $30
+										dc.b 0
+										dc.b $24
+										dc.b $F
+										dc.b 0
+										dc.b 0
 										dc.b $20
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $30 
-										dc.b   0
-										dc.b $24 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
+										dc.b 0
+										dc.b $28
+										dc.b $F
+										dc.b 0
+										dc.b 0
+										dc.b $30
+										dc.b 0
+										dc.b $2C
+										dc.b $F
+										dc.b 0
+										dc.b 0
 										dc.b $20
-										dc.b   0
-										dc.b $28 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $30 
-										dc.b   0
-										dc.b $2C 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $20
-										dc.b   0
-										dc.b $30 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $40 
-										dc.b   0
-										dc.b $34 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $50 
-										dc.b   0
-										dc.b $38 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $40 
-										dc.b   0
-										dc.b $3C 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $50 
-										dc.b   0
-										dc.b $40 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $40 
-										dc.b   0
-										dc.b $44 
-										dc.b  $F
-										dc.b   0
-										dc.b   0
-										dc.b $50 
+										dc.b 0
+										dc.b $30
+										dc.b $F
+										dc.b 0
+										dc.b 0
+										dc.b $40
+										dc.b 0
+										dc.b $34
+										dc.b $F
+										dc.b 0
+										dc.b 0
+										dc.b $50
+										dc.b 0
+										dc.b $38
+										dc.b $F
+										dc.b 0
+										dc.b 0
+										dc.b $40
+										dc.b 0
+										dc.b $3C
+										dc.b $F
+										dc.b 0
+										dc.b 0
+										dc.b $50
+										dc.b 0
+										dc.b $40
+										dc.b $F
+										dc.b 0
+										dc.b 0
+										dc.b $40
+										dc.b 0
+										dc.b $44
+										dc.b $F
+										dc.b 0
+										dc.b 0
+										dc.b $50
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -10151,7 +10133,7 @@ loc_1D2F6:
 										addq.w  #1,(a5)
 										cmpi.w  #2,(a5)
 										bne.w   loc_1D348
-										lea     unk_1D4A0(pc), a0
+										lea     byte_1D4A0(pc), a0
 										btst    #7,((byte_FFB586-$1000000)).w
 										beq.w   loc_1D33C
 										addq.w  #8,a0
@@ -10168,7 +10150,7 @@ loc_1D2F6:
 loc_1D33C:
 										
 										bsr.w   sub_19F5E
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_DOOR_OPEN
 										bra.w   loc_1D424
 loc_1D348:
@@ -10315,7 +10297,7 @@ loc_1D494:
 
 	; End of function sub_1D2E6
 
-unk_1D4A0:          dc.b   1
+byte_1D4A0:         dc.b 1
 										dc.b $1C
 										dc.b   0
 										dc.b $DE 
@@ -10502,7 +10484,7 @@ loc_1D5D6:
 										beq.w   loc_1D748
 										move.w  2(a5),d1
 										bne.w   loc_1D612
-										lea     unk_1D776(pc), a0
+										lea     byte_1D776(pc), a0
 										btst    #7,((byte_FFB586-$1000000)).w
 										beq.s   loc_1D5F6
 										addq.w  #8,a0
@@ -10671,21 +10653,21 @@ return_1D774:
 
 	; End of function sub_1D762
 
-unk_1D776:          dc.b   1
+byte_1D776:         dc.b 1
 										dc.b $14
-										dc.b   0
-										dc.b $E8 
-										dc.b   5
+										dc.b 0
+										dc.b $E8
+										dc.b 5
 										dc.b $20
-										dc.b  $C
+										dc.b $C
 										dc.b $10
-										dc.b   0
-										dc.b $D0 
-										dc.b   0
-										dc.b $E0 
-										dc.b   5
+										dc.b 0
+										dc.b $D0
+										dc.b 0
+										dc.b $E0
+										dc.b 5
 										dc.b $20
-										dc.b  $C
+										dc.b $C
 										dc.b $11
 
 ; =============== S U B R O U T I N E =======================================
@@ -10824,7 +10806,7 @@ loc_1D8B6:
 										bne.w   loc_1D928
 										moveq   #2,d6
 										jsr     (UpdateRandomSeed).w
-										lea     unk_1D9CE(pc), a0
+										lea     byte_1D9CE(pc), a0
 										move.b  d7,$A(a5)
 										beq.s   loc_1D8DC
 										addq.w  #8,a0
@@ -10855,7 +10837,7 @@ loc_1D912:
 loc_1D91C:
 										
 										addq.w  #1,2(a5)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_BATTLEFIELD_DEATH
 										bra.w   loc_1D998
 loc_1D928:
@@ -10931,7 +10913,7 @@ loc_1D9C8:
 
 	; End of function sub_1D9B2
 
-unk_1D9CE:          dc.b   0
+byte_1D9CE:         dc.b 0
 										dc.b   0
 										dc.b   0
 										dc.b   0
@@ -11099,7 +11081,7 @@ loc_1DB00:
 										clr.w   2(a5)
 										move.w  #1,4(a5)
 										move.w  #1,$C(a3)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_BIG_DOOR_RUMBLE
 										bra.w   loc_1DBF8
 loc_1DB2E:
@@ -11111,7 +11093,7 @@ loc_1DB2E:
 										bne.s   loc_1DB62
 										bsr.w   sub_1DC36
 										move.b  #4,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -11125,7 +11107,7 @@ loc_1DB62:
 										bne.s   loc_1DB8E
 										bsr.w   sub_1DC48
 										move.b  #3,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -11133,7 +11115,7 @@ loc_1DB8E:
 										
 										cmpi.w  #$36,(a5) 
 										bne.s   loc_1DB9C
-										bsr.w   loadPalette1FromFFB41E
+										bsr.w   LoadPalette1FromFFB41E
 										clr.b   ((byte_FFB588-$1000000)).w
 loc_1DB9C:
 										
@@ -11167,7 +11149,7 @@ loc_1DBDE:
 										
 										moveq   #$26,d0 
 										moveq   #$C,d1
-										lea     unk_1DC88(pc), a0
+										lea     byte_1DC88(pc), a0
 										bsr.w   sub_19FAA
 										moveq   #4,d0
 										moveq   #$B,d1
@@ -11260,7 +11242,7 @@ loc_1DC56:
 
 ; =============== S U B R O U T I N E =======================================
 
-loadPalette1FromFFB41E:
+LoadPalette1FromFFB41E:
 										
 										lea     ((FFD080_Palette1bis-$1000000)).w,a0
 										lea     ((byte_FFB41E-$1000000)).w,a1
@@ -11271,9 +11253,9 @@ loc_1DC80:
 										dbf     d0,loc_1DC80
 										rts
 
-	; End of function loadPalette1FromFFB41E
+	; End of function LoadPalette1FromFFB41E
 
-unk_1DC88:          dc.b   0
+byte_1DC88:         dc.b 0
 										dc.b   0
 										dc.b   0
 										dc.b   0
@@ -11400,7 +11382,7 @@ loc_1DCFC:
 										moveq   #3,d6
 										jsr     (UpdateRandomSeed).w
 										lsl.w   #3,d7
-										lea     unk_1DE06(pc), a0
+										lea     byte_1DE06(pc), a0
 										adda.w  d7,a0
 										bsr.w   sub_19F5E
 										move.w  #$100,d6
@@ -11421,7 +11403,7 @@ loc_1DD60:
 										bset    #4,4(a4)
 loc_1DD6C:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_BIG_DOOR_RUMBLE
 										bra.w   loc_1DDE8
 loc_1DD74:
@@ -11472,7 +11454,7 @@ loc_1DDE8:
 										addq.w  #8,a4
 										lea     $C(a5),a5
 										dbf     d0,loc_1DCFC
-										lea     unk_1DE1E(pc), a0
+										lea     byte_1DE1E(pc), a0
 										bsr.w   sub_1B8B2
 										tst.b   ((byte_FFB584-$1000000)).w
 										beq.w   sub_1B82A
@@ -11480,7 +11462,7 @@ loc_1DDE8:
 
 	; End of function sub_1DCE8
 
-unk_1DE06:          dc.b   0
+byte_1DE06:         dc.b 0
 										dc.b   0
 										dc.b   0
 										dc.b   0
@@ -11504,7 +11486,7 @@ unk_1DE06:          dc.b   0
 										dc.b $27 
 										dc.b  $B
 										dc.b $20
-unk_1DE1E:          dc.b   2
+byte_1DE1E:         dc.b 2
 										dc.b $48 
 										dc.b   0
 										dc.b $1E
@@ -11530,7 +11512,7 @@ loc_1DE3E:
 										move.w  #6,4(a5)
 										bchg    #6,((byte_FFB56E-$1000000)).w
 										bsr.w   sub_1A3E8
-										lea     unk_1DFA2(pc), a0
+										lea     byte_1DFA2(pc), a0
 										bchg    #0,3(a5)
 										bne.s   loc_1DE64
 										addq.w  #8,a0
@@ -11574,11 +11556,11 @@ loc_1DEA0:
 										move.b  d1,6(a5)
 										andi.w  #$18,d7
 										move.b  d7,7(a5)
-										lea     unk_1DFB2(pc), a0
+										lea     byte_1DFB2(pc), a0
 										tst.b   d1
 										beq.s   loc_1DECE
 										addq.w  #8,a0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_BATTLEFIELD_DEATH
 loc_1DECE:
 										
@@ -11613,7 +11595,7 @@ loc_1DF24:
 										move.w  2(a5),d1
 										cmpi.w  #4,d1
 										bcc.w   loc_1DF6A
-										lea     unk_1DFC0(pc), a0
+										lea     byte_1DFC0(pc), a0
 										tst.b   6(a5)
 										beq.s   loc_1DF4A
 										addq.w  #6,a0
@@ -11651,7 +11633,7 @@ loc_1DF7E:
 
 	; End of function sub_1DE24
 
-unk_1DFA2:          dc.b   1
+byte_1DFA2:         dc.b 1
 										dc.b $12
 										dc.b   0
 										dc.b $CB 
@@ -11667,7 +11649,7 @@ unk_1DFA2:          dc.b   1
 										dc.b $84 
 										dc.b   5
 										dc.b $20
-unk_1DFB2:          dc.b   0
+byte_1DFB2:         dc.b 0
 										dc.b $80 
 										dc.b   0
 										dc.b $90 
@@ -11681,7 +11663,7 @@ unk_1DFB2:          dc.b   0
 										dc.b $90 
 										dc.b   6
 										dc.b $F0 
-unk_1DFC0:          dc.b  $F
+byte_1DFC0:         dc.b $F
 										dc.b $20
 										dc.b   7
 										dc.b $90 
@@ -11718,7 +11700,7 @@ loc_1DFEA:
 										subq.b  #1,4(a5)
 										bne.w   loc_1E010
 										move.b  #3,4(a5)
-										lea     unk_1E10E(pc), a0
+										lea     byte_1E10E(pc), a0
 										lea     ((dword_FFDC88-$1000000)).w,a4
 										moveq   #7,d0
 										bsr.w   sub_1E0DA
@@ -11741,14 +11723,14 @@ loc_1E01C:
 										bne.w   loc_1E05E
 										subq.w  #1,4(a5)
 										bne.w   loc_1E0C0
-										lea     unk_1E106(pc), a0
+										lea     byte_1E106(pc), a0
 										bsr.w   sub_19F5E
 										move.w  #$100,d6
 										jsr     (UpdateRandomSeed).w
 										add.w   d7,6(a4)
 										addq.w  #1,2(a5)
 										move.w  #5,4(a5)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_WING_FLAP
 										bra.w   loc_1E0C0
 loc_1E05E:
@@ -11825,7 +11807,7 @@ sub_1E0DA:
 
 	; End of function sub_1E0DA
 
-unk_1E106:          dc.b   0
+byte_1E106:         dc.b 0
 										dc.b $80 
 										dc.b   1
 										dc.b   0
@@ -11833,7 +11815,7 @@ unk_1E106:          dc.b   0
 										dc.b $3E 
 										dc.b   5
 										dc.b $20
-unk_1E10E:          dc.b   0
+byte_1E10E:         dc.b 0
 										dc.b $88 
 										dc.b   0
 										dc.b $95 
@@ -11905,13 +11887,13 @@ sub_1E160:
 										tst.w   8(a5)
 										bne.s   loc_1E17C
 										lea     ((byte_FFB532-$1000000)).w,a3
-										lea     unk_1E290(pc), a0
+										lea     byte_1E290(pc), a0
 										move.w  #$10,d0
 										bra.s   loc_1E188
 loc_1E17C:
 										
 										lea     ((dword_FFB536-$1000000)).w,a3
-										lea     unk_1F7BE(pc), a0
+										lea     byte_1F7BE(pc), a0
 										move.w  #$130,d0
 loc_1E188:
 										
@@ -11989,12 +11971,12 @@ loc_1E228:
 										jsr     (UpdateRandomSeed).w
 										tst.w   d7
 										bne.s   loc_1E240
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_HIT_1
 										bra.s   loc_1E244
 loc_1E240:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_HIT_2
 loc_1E244:
 										
@@ -12036,7 +12018,7 @@ loc_1E26E:
 
 	; End of function sub_1E160
 
-unk_1E290:          dc.b $89 
+byte_1E290:         dc.b $89
 										dc.b $60 
 										dc.b $89 
 										dc.b $70 
@@ -12145,11 +12127,11 @@ loc_1E33C:
 										tst.w   6(a5)
 										bne.s   loc_1E36C
 										move.w  #$C563,4(a4)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_PRISM_LASER_FIRING
 																						; prism laser firing
 										move.b  #4,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -12163,7 +12145,7 @@ loc_1E36C:
 										addq.w  #1,2(a5)
 										move.w  #$1E,4(a5)
 										move.b  #3,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -12203,7 +12185,7 @@ loc_1E404:
 										bne.w   loc_1E432
 										tst.w   6(a5)
 										bne.s   loc_1E414
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_PRISM_LASER_FIRING
 loc_1E414:
 										
@@ -12391,7 +12373,7 @@ loc_1E596:
 										jsr     (UpdateRandomSeed).w
 										addq.w  #1,d7
 										move.w  d7,2(a5)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_PRISM_LASER_LOADING
 										bra.s   loc_1E5C6
 loc_1E5C2:
@@ -12431,10 +12413,10 @@ loc_1E5DC:
 										subi.w  #$200,d7
 										move.w  d7,4(a5)
 										movem.w (sp)+,d6-d7
-										lea     unk_1E786(pc), a0
+										lea     byte_1E786(pc), a0
 										move.w  d6,d0
 										bsr.w   sub_19F5E
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_LANDSTALKER_SWITCH
 										bra.w   loc_1E730
 loc_1E622:
@@ -12583,7 +12565,7 @@ loc_1E770:
 
 	; End of function sub_1E5D0
 
-unk_1E786:          dc.b   0
+byte_1E786:         dc.b 0
 										dc.b $D4 
 										dc.b   0
 										dc.b $F8 
@@ -12647,7 +12629,7 @@ loc_1E7CC:
 										addq.w  #1,(a5)
 										cmpi.w  #2,(a5)
 										bne.w   loc_1E806
-										lea     unk_1E8E2(pc), a0
+										lea     byte_1E8E2(pc), a0
 										btst    #7,((byte_FFB586-$1000000)).w
 										beq.s   loc_1E7EE
 										addq.w  #8,a0
@@ -12739,7 +12721,7 @@ loc_1E8AA:
 										move.b  2(a3),d0
 										andi.w  #3,d0
 										bne.s   loc_1E8D6
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_TINKLING
 loc_1E8D6:
 										
@@ -12749,7 +12731,7 @@ loc_1E8D6:
 
 	; End of function sub_1E7B2
 
-unk_1E8E2:          dc.b   1
+byte_1E8E2:         dc.b 1
 										dc.b $1C
 										dc.b   0
 										dc.b $DE 
@@ -12953,9 +12935,9 @@ loc_1EA22:
 										addq.w  #1,(a5)
 										cmpi.w  #2,(a5)
 										bne.w   loc_1EA46
-										lea     unk_1EB88(pc), a0
+										lea     byte_1EB88(pc), a0
 										bsr.w   sub_19F5E
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_LANDSTALKER_SWITCH
 										bra.w   loc_1EA98
 loc_1EA46:
@@ -13000,7 +12982,7 @@ loc_1EAB2:
 										addq.w  #1,(a5)
 										move.w  2(a5),d0
 										bne.w   loc_1EAD4
-										lea     unk_1EBA2(pc), a0
+										lea     byte_1EBA2(pc), a0
 										moveq   #$26,d0 
 										bsr.w   sub_19F5E
 										addq.w  #1,2(a5)
@@ -13015,9 +12997,9 @@ loc_1EAD4:
 										moveq   #2,d1
 										clr.w   d2
 										clr.w   d3
-										lea     unk_1EBAA(pc), a0
+										lea     byte_1EBAA(pc), a0
 										bsr.w   sub_19FAA
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_DESOUL_HOVERING
 										addq.w  #1,2(a5)
 										bra.w   loc_1EB7E
@@ -13073,7 +13055,7 @@ loc_1EB7E:
 
 	; End of function sub_1E958
 
-unk_1EB88:          dc.b   1
+byte_1EB88:         dc.b 1
 										dc.b $1C
 										dc.b   0
 										dc.b $D4 
@@ -13099,7 +13081,7 @@ byte_1EB90:         dc.b 0
 										dc.b   0
 										dc.b   0
 										dc.b $30 
-unk_1EBA2:          dc.b   0
+byte_1EBA2:         dc.b 0
 										dc.b $FD 
 										dc.b   0
 										dc.b $DD 
@@ -13107,7 +13089,7 @@ unk_1EBA2:          dc.b   0
 										dc.b $DF 
 										dc.b  $F
 										dc.b $23 
-unk_1EBAA:          dc.b   0
+byte_1EBAA:         dc.b 0
 										dc.b $6E 
 										dc.b   0
 										dc.b $4E 
@@ -13142,7 +13124,7 @@ loc_1EBC6:
 										bne.w   loc_1EC22
 										moveq   #7,d6
 										jsr     (UpdateRandomSeed).w
-										lea     unk_1EC9A(pc), a0
+										lea     byte_1EC9A(pc), a0
 										bclr    #0,d7
 										bne.s   loc_1EBF2
 										move.b  #1,2(a5)
@@ -13160,7 +13142,7 @@ loc_1EBF2:
 										jsr     (UpdateRandomSeed).w
 										addi.w  #$A0,d7 
 										move.w  d7,(a4)
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_BATTLEFIELD_DEATH
 										bra.w   loc_1EC80
 loc_1EC22:
@@ -13211,7 +13193,7 @@ loc_1EC80:
 
 	; End of function sub_1EBBA
 
-unk_1EC9A:          dc.b   0
+byte_1EC9A:         dc.b 0
 										dc.b   0
 										dc.b   0
 										dc.b   0
@@ -13393,7 +13375,9 @@ sub_1EE1A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1EE2C:
+; and other stuff ?
+
+UpdateBattlesceneGraphics:
 										
 										addq.w  #1,((BATTLESCENE_FRAME_COUNTER-$1000000)).w
 										clr.b   ((byte_FFB56D-$1000000)).w
@@ -13406,7 +13390,7 @@ sub_1EE2C:
 										bsr.w   sub_1F176
 										jmp     (sub_1942).w    
 
-	; End of function sub_1EE2C
+	; End of function UpdateBattlesceneGraphics
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13438,7 +13422,7 @@ UpdateAllyBSprite:
 										beq.s   return_1EE94
 										subq.w  #1,((ALLY_BATTLESPRITE_ANIM_COUNTER-$1000000)).w
 										bne.s   return_1EE94
-										bsr.s   sub_1EE96
+										bsr.s   UpdateWeaponSprite
 										move.w  ((ALLY_BATTLESPRITE_ANIM_SPEED-$1000000)).w,((ALLY_BATTLESPRITE_ANIM_COUNTER-$1000000)).w
 return_1EE94:
 										
@@ -13449,7 +13433,7 @@ return_1EE94:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1EE96:
+UpdateWeaponSprite:
 										
 										bchg    #0,((byte_FFB56E-$1000000)).w
 										beq.s   loc_1EEAA
@@ -13464,7 +13448,7 @@ loc_1EEAA:
 										move.b  ((WEAPON_IDLE_FRAME2_Y-$1000000)).w,d4
 loc_1EEB6:
 										
-										lea     unk_1F57A(pc), a0
+										lea     byte_1F57A(pc), a0
 										btst    #0,((byte_FFB56F-$1000000)).w
 										beq.s   loc_1EEC6
 										lea     $48(a0),a0
@@ -13489,7 +13473,7 @@ loc_1EECC:
 										bchg    #4,d7
 loc_1EEF6:
 										
-										lea     unk_1F606(pc), a0
+										lea     byte_1F606(pc), a0
 										andi.w  #$30,d7 
 										add.w   d7,d7
 										adda.w  d7,a0
@@ -13514,7 +13498,7 @@ return_1EF2C:
 										
 										rts
 
-	; End of function sub_1EE96
+	; End of function UpdateWeaponSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13536,7 +13520,7 @@ sub_1EF36:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jmp     (bwahDMAstuffAgain).w
+										jmp     (BwahDMAstuffAgain).w
 
 	; End of function sub_1EF36
 
@@ -13607,8 +13591,8 @@ loc_1EFB0:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 return_1EFD6:
 										
 										rts
@@ -13788,8 +13772,8 @@ loc_1F120:
 word_1F140:         dc.w 1
 										dc.b $FF
 										dc.b $FF
-										dc.b   0
-										dc.b   1
+										dc.b 0
+										dc.b 1
 										dc.b $FF
 										dc.b $FF
 
@@ -13873,8 +13857,8 @@ loc_1F1DA:
 										move.w  d6,(a0)
 										addq.w  #4,a0
 										dbf     d0,loc_1F1DA
-										jsr     (storeVdpCommands).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommands).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,d0/a0
 										rts
 
@@ -13894,8 +13878,8 @@ loc_1F1FE:
 										move.w  d6,(a0)
 										addq.w  #4,a0
 										dbf     d0,loc_1F1FE
-										jsr     (storeVdpCommandsbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommandsbis).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,d0/a0
 										rts
 
@@ -13926,8 +13910,8 @@ loc_1F23E:
 										move.w  d6,(a0)
 										addq.w  #4,a0
 										dbf     d0,loc_1F23E
-										jsr     (storeVdpCommands).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommands).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,d0/a0
 										rts
 
@@ -13952,8 +13936,8 @@ loc_1F26C:
 										move.w  d6,(a0)
 										addq.w  #4,a0
 										dbf     d0,loc_1F26C
-										jsr     (storeVdpCommandsbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommandsbis).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,d0/a0
 										rts
 
@@ -14077,8 +14061,8 @@ loc_1F368:
 loc_1F378:
 										
 										dbf     d0,loc_1F368
-										jsr     (storeVdpCommands).w
-										jmp     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommands).w
+										jmp     (Set_FFDE94_bit3).w
 loc_1F384:
 										
 										move.w  4(a5),d0
@@ -14107,8 +14091,8 @@ loc_1F3BA:
 										
 										addq.w  #4,a0
 										dbf     d1,loc_1F3B0
-										jsr     (storeVdpCommands).w
-										jmp     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommands).w
+										jmp     (Set_FFDE94_bit3).w
 loc_1F3C8:
 										
 										clr.w   4(a5)
@@ -14117,7 +14101,7 @@ loc_1F3C8:
 
 byte_1F3CC:         dc.b $4E
 										dc.b $75 
-										dc.b   4
+										dc.b 4
 										dc.b   3
 										dc.b   3
 										dc.b   3
@@ -14221,7 +14205,7 @@ loc_1F470:
 										addq.w  #4,a1
 										add.w   d0,d1
 										dbf     d2,loc_1F470
-										jmp     (storeVdpCommands).w
+										jmp     (StoreVdpCommands).w
 
 	; End of function sub_1F45E
 
@@ -14251,8 +14235,8 @@ loc_1F4A8:
 										addq.w  #4,a1
 										add.w   d0,d1
 										dbf     d2,loc_1F4A8
-										jsr     (storeVdpCommandsbis).w
-										jmp     (set_FFDE94_bit3).w
+										jsr     (StoreVdpCommandsbis).w
+										jmp     (Set_FFDE94_bit3).w
 
 	; End of function sub_1F496
 
@@ -14265,7 +14249,7 @@ loc_1F4D2:
 										movea.l (a5),a0
 										clr.w   d1
 										move.b  1(a0),d1
-										lea     unk_1F530(pc), a0
+										lea     byte_1F530(pc), a0
 										move.w  d0,d2
 										andi.w  #$F,d2
 										move.b  (a0,d2.w),d2
@@ -14278,7 +14262,7 @@ loc_1F4F6:
 										add.w   d2,(a3)
 										addq.w  #4,a3
 										dbf     d3,loc_1F4F6
-										jsr     (storeVdpCommands).w
+										jsr     (StoreVdpCommands).w
 loc_1F502:
 										
 										lea     byte_1F528(pc), a0
@@ -14294,10 +14278,10 @@ loc_1F518:
 										add.w   d2,(a4)
 										addq.w  #4,a4
 										dbf     d3,loc_1F518
-										jsr     (storeVdpCommandsbis).w
+										jsr     (StoreVdpCommandsbis).w
 loc_1F524:
 										
-										jmp     (set_FFDE94_bit3).w
+										jmp     (Set_FFDE94_bit3).w
 
 ; END OF FUNCTION CHUNK FOR sub_1F282
 
@@ -14309,7 +14293,7 @@ byte_1F528:         dc.b 0
 										dc.b $FE 
 										dc.b   1
 										dc.b   0
-unk_1F530:          dc.b $FF
+byte_1F530:         dc.b $FF
 										dc.b   2
 										dc.b $FD 
 										dc.b   0
@@ -14352,11 +14336,11 @@ return_1F574:
 
 	; End of function sub_1F540
 
-unk_1F576:          dc.b   0
+byte_1F576:         dc.b 0
 										dc.b $C0 
 										dc.b  $F
 										dc.b   0
-unk_1F57A:          dc.b $81 
+byte_1F57A:         dc.b $81
 										dc.b   0
 										dc.b   1
 										dc.b   8
@@ -14496,7 +14480,7 @@ unk_1F57A:          dc.b $81
 										dc.b $80 
 										dc.b   1
 										dc.b   8
-unk_1F606:          dc.b   0
+byte_1F606:         dc.b 0
 										dc.b $C0 
 										dc.b  $F
 										dc.b   0
@@ -14624,7 +14608,7 @@ unk_1F606:          dc.b   0
 										dc.b $F0 
 										dc.b   1
 										dc.b   8
-unk_1F686:          dc.b   1
+byte_1F686:         dc.b 1
 										dc.b  $C
 										dc.b  $F
 										dc.b   0
@@ -14864,7 +14848,7 @@ byte_1F6B6:         dc.b 0
 										dc.b $B7 
 										dc.b $BB 
 										dc.b $BF 
-unk_1F776:          dc.b $81 
+byte_1F776:         dc.b $81
 										dc.b   0
 										dc.b $81 
 										dc.b $10
@@ -14936,7 +14920,7 @@ unk_1F776:          dc.b $81
 										dc.b $E0 
 										dc.b $86 
 										dc.b $F0 
-unk_1F7BE:          dc.b $81 
+byte_1F7BE:         dc.b $81
 										dc.b   0
 										dc.b $81 
 										dc.b $10
@@ -15008,15 +14992,11 @@ unk_1F7BE:          dc.b $81
 										dc.b   0
 										dc.b   0
 										dc.b   0
-tbl_AllyBattleSprites:
-										incbin "data/allybattlesprites.bin"
+AllyBattleSprites:  incbin "data/allies/allybattlesprites.bin"
 																						; table : class -> sprite
-tbl_EnemyBattleSprites:
-										incbin "data/enemybattlesprites.bin"
-tbl_WeaponBattleSprites:
-										incbin "data/weaponsprites.bin"
-tbl_CustomBackgrounds:
-										incbin "data/custombackgrounds.bin"
+EnemyBattleSprites: incbin "data/enemies/enemybattlesprites.bin"
+WeaponBattleSprites:incbin "data/items/weaponsprites.bin"
+CustomBackgrounds:  incbin "battles/custombackgrounds.bin"
 byte_1FAB8:         dc.b 0
 										dc.b   0
 										dc.b   0
@@ -15047,13 +15027,30 @@ byte_1FAB8:         dc.b 0
 										dc.b   1
 										dc.b   0
 										dc.b   0
-tbl_AllyBSpriteIdleAnimate:
-										incbin "data/allyidlesprites.bin"
+AllyBSpriteIdleAnimate:
+										incbin "data/allies/allyidlesprites.bin"
 																						; list of ally battle sprite indeces who do not animate while idle
-tbl_EnemyBSpriteIdleAnimate:
-										incbin "data/enemyidlesprites.bin"
+EnemyBSpriteIdleAnimate:
+										incbin "data/enemies/enemyidlesprites.bin"
 																						; list of enemy battle sprite indeces who do not animate while idle
-somePlaneALayout:   dc.b 'c†c§c®c¨c–c‘cÿc‹d',0
+SomePlaneALayout:   dc.b $63
+										dc.b $A0 
+										dc.b $63 
+										dc.b $A4 
+										dc.b $63 
+										dc.b $A8 
+										dc.b $63 
+										dc.b $AC 
+										dc.b $63 
+										dc.b $D0 
+										dc.b $63 
+										dc.b $D4 
+										dc.b $63 
+										dc.b $D8 
+										dc.b $63 
+										dc.b $DC 
+										dc.b $64 
+										dc.b   0
 										dc.b $64 
 										dc.b   4
 										dc.b $64 

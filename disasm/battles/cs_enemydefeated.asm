@@ -1,0 +1,52 @@
+
+; SCRIPT SECTION battles\cs_enemydefeated :
+; Enemy defeated cutscenes
+rpt_EnemyDefeatedCutscenes:
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w edcs_battle5-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w edcs_battle12-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w edcs_battle43-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes
+										dc.w cs_Nothing+$10000-rpt_EnemyDefeatedCutscenes

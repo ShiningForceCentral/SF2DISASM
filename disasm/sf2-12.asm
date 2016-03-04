@@ -8,7 +8,7 @@
 p_pt_AllyBattleSprites:
 										dc.l pt_AllyBattleSprites
 p_statusAnimationTiles:
-										dc.l statusAnimationTiles
+										dc.l StatusAnimationTiles
 p_pt_battlesceneTransitionTiles:
 										dc.l pt_battlesceneTransitionTiles
 p_BoltAnimData_A:   dc.l BoltAnimData_A
@@ -81,14 +81,14 @@ AllyBattleSprite28: incbin "graphics/battlesprites/allies/allybattlesprite28.bin
 AllyBattleSprite29: incbin "graphics/battlesprites/allies/allybattlesprite29.bin"
 AllyBattleSprite30: incbin "graphics/battlesprites/allies/allybattlesprite30.bin"
 AllyBattleSprite31: incbin "graphics/battlesprites/allies/allybattlesprite31.bin"
-statusAnimationTiles:
+StatusAnimationTiles:
 										incbin "graphics/statusanimationtiles.bin"
 pt_battlesceneTransitionTiles:
-										dc.l battlesceneTransitionTilesA
-										dc.l battlesceneTransitionTilesB
-battlesceneTransitionTilesA:
+										dc.l BattlesceneTransitionTilesA
+										dc.l BattlesceneTransitionTilesB
+BattlesceneTransitionTilesA:
 										incbin "graphics/battlescenetransitiontilesa.bin"
-battlesceneTransitionTilesB:
+BattlesceneTransitionTilesB:
 										incbin "graphics/battlescenetransitiontilesb.bin"
 BoltAnimData_A:     incbin "graphics/spells/animations/boltanimdataa.bin"
 BoltAnimData_B:     incbin "graphics/spells/animations/boltanimdatab.bin"

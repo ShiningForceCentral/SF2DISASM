@@ -14,45 +14,45 @@ p_pt_InvocationSprites:
 titleScreen:
 										
 										jmp     *+4(pc)
-										jsr     (disableDisplayAndVInt).w
-										jsr     (clearVsramAndSprites).w
+										jsr     (DisableDisplayAndVInt).w
+										jsr     (ClearVsramAndSprites).w
 										move.w  #$8C00,d0
-										jsr     (setVdpReg).w   
+										jsr     (SetVdpReg).w   
 										move.w  #$9000,d0
-										jsr     (setVdpReg).w   
+										jsr     (SetVdpReg).w   
 										move.w  #$8230,d0
-										jsr     (setVdpReg).w   
+										jsr     (SetVdpReg).w   
 										move.w  #$8407,d0
-										jsr     (setVdpReg).w   
+										jsr     (SetVdpReg).w   
 										move.w  #$8B00,d0
-										jsr     (setVdpReg).w   
-										lea     titleScreenTiles(pc), a0
+										jsr     (SetVdpReg).w   
+										lea     TitleScreenTiles(pc), a0
 										lea     (FF6802_LOADING_SPACE).l,a1
-										jsr     (loadTileData).w
+										jsr     (LoadTileData).w
 										lea     (FF6802_LOADING_SPACE).l,a0
 										lea     ($2000).w,a1
 										move.w  #$1000,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgain).w
-										lea     titleScreenLayoutA(pc), a0
+										jsr     (BwahDMAstuffAgain).w
+										lea     TitleScreenLayoutA(pc), a0
 										lea     (byte_FFC000).l,a1
 										move.w  #$700,d7
-										jsr     (copyBytes).w   
-										lea     titleScreenLayoutA(pc), a0
+										jsr     (CopyBytes).w   
+										lea     TitleScreenLayoutA(pc), a0
 										lea     (byte_FFC358).l,a1
 										moveq   #$10,d7
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     (byte_FFC398).l,a1
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     (byte_FFC480).l,a1
 										moveq   #$40,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     (byte_FFC000).l,a0
 										lea     ($C000).l,a1
 										move.w  #$380,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgain).w
-										lea     titleScreenLayoutB(pc), a0
+										jsr     (BwahDMAstuffAgain).w
+										lea     TitleScreenLayoutB(pc), a0
 										lea     (byte_FFDCA8).l,a1
 										moveq   #$A,d7
 loc_1000B8:
@@ -96,22 +96,22 @@ loc_100104:
 										lea     plt_TitleScreen(pc), a0
 										lea     (FFD080_Palette1bis).l,a1
 										move.w  #$80,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										jsr     j_LoadTitleScreenFont
 										move.l  #$AE0405,(dword_FFDCA0).l
 										move.l  #$C062014E,(dword_FFDCA4).l
-										jsr     (enableDisplayAndInterrupts).w
+										jsr     (EnableDisplayAndInterrupts).w
 										move.w  #$18,d6
-										jsr     (clearOtherVscrollStuff).w
+										jsr     (ClearOtherVscrollStuff).w
 										move.w  #$FFE8,d6
-										jsr     (clearVscrollStuff).w
+										jsr     (ClearVscrollStuff).w
 										move.w  #0,d6
-										jsr     (clearOtherHscrollStuff).w
+										jsr     (ClearOtherHscrollStuff).w
 										move.w  #0,d6
-										jsr     (clearHscrollStuff).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (ClearHscrollStuff).w
+										jsr     (Set_FFDE94_bit3).w
 										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -120,7 +120,7 @@ loc_100104:
 										moveq   #$20,d0 
 										bsr.w   sub_100218
 										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -129,7 +129,7 @@ loc_100104:
 										moveq   #$32,d0 
 										bsr.w   WaitForPlayer1InputStart
 										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((word_FFDFAA-$1000000)).w
+										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #4,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -139,7 +139,7 @@ loc_100104:
 										bsr.w   WaitForPlayer1InputStart
 										move.w  #$258,d0
 										bsr.w   titleScreenEnd
-										jsr     (fadeOutToWhite).w
+										jsr     (FadeOutToWhite).w
 										lea     (FFD080_Palette1bis).l,a0
 										moveq   #$1F,d7
 loc_1001EC:
@@ -148,7 +148,7 @@ loc_1001EC:
 										dbf     d7,loc_1001EC
 										moveq   #$1E,d0
 										bsr.w   WaitForPlayer1InputStart
-										jsr     (fadeOutToBlack).w
+										jsr     (FadeOutToBlack).w
 										clr.w   d0
 										rts
 
@@ -181,8 +181,8 @@ sub_100218:
 										subq.w  #1,(FFD502_MaybeRelatedToOtherVScrollStuff).l
 loc_10022C:
 										
-										jsr     (storeVdpCommandsbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (StoreVdpCommandsbis).w
+										jsr     (SetFFDE94b3andWait).w
 										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
 										bne.w   loc_10029E
 										subq.w  #1,d0
@@ -197,7 +197,7 @@ loc_10022C:
 titleScreenEnd:
 										
 										movem.w d0,-(sp)
-										lea     titleScreenLayoutA(pc), a0
+										lea     TitleScreenLayoutA(pc), a0
 										ext.l   d0
 										divs.w  #$1E,d0
 										swap    d0
@@ -209,13 +209,13 @@ loc_100260:
 										
 										lea     (byte_FFC480).l,a1
 										moveq   #$40,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										lea     (byte_FFC000).l,a0
 										lea     ($C000).l,a1
 										move.w  #$380,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.w (sp)+,d0
 										jsr     (WaitForVInt).w 
 										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
@@ -227,21 +227,21 @@ loc_10029E:
 										
 										move.l  (sp)+,d0
 										clr.w   d6
-										jsr     (clearOtherVscrollStuff).w
-										jsr     (clearVscrollStuff).w
-										jsr     (clearOtherHscrollStuff).w
-										jsr     (clearHscrollStuff).w
-										jsr     (set_FFDE94_bit3).w
-										jsr     (fadeOutToBlack).w
+										jsr     (ClearOtherVscrollStuff).w
+										jsr     (ClearVscrollStuff).w
+										jsr     (ClearOtherHscrollStuff).w
+										jsr     (ClearHscrollStuff).w
+										jsr     (Set_FFDE94_bit3).w
+										jsr     (FadeOutToBlack).w
 										moveq   #$FFFFFFFF,d0
 										rts
 
 	; End of function titleScreenEnd
 
 plt_TitleScreen:    incbin "graphics/specialscreens/titlepalettes.bin"
-titleScreenTiles:   incbin "graphics/specialscreens/titletiles.bin"
-titleScreenLayoutA: incbin "graphics/specialscreens/titlelayoutA.bin"
-titleScreenLayoutB: incbin "graphics/specialscreens/titlelayoutB.bin"
+TitleScreenTiles:   incbin "graphics/specialscreens/titletiles.bin"
+TitleScreenLayoutA: incbin "graphics/specialscreens/titlelayoutA.bin"
+TitleScreenLayoutB: incbin "graphics/specialscreens/titlelayoutB.bin"
 pt_Backgrounds:     dc.l Background00
 										dc.l Background01
 										dc.l Background02
@@ -300,15 +300,15 @@ Background26:       incbin "graphics/backgrounds/background26.bin"
 Background27:       incbin "graphics/backgrounds/background27.bin"
 Background28:       incbin "graphics/backgrounds/background28.bin"
 pt_InvocationSprites:
-										dc.l invocationSpriteDao
-										dc.l invocationSpriteApollo
-										dc.l invocationSpriteNeptun
-										dc.l invocationSpriteAtlas
-invocationSpriteDao:incbin "graphics/spells/invocations/dao.bin"
-invocationSpriteApollo:
+										dc.l InvocationSpriteDao
+										dc.l InvocationSpriteApollo
+										dc.l InvocationSpriteNeptun
+										dc.l InvocationSpriteAtlas
+InvocationSpriteDao:incbin "graphics/spells/invocations/dao.bin"
+InvocationSpriteApollo:
 										incbin "graphics/spells/invocations/apollo.bin"
-invocationSpriteNeptun:
+InvocationSpriteNeptun:
 										incbin "graphics/spells/invocations/neptun.bin"
-invocationSpriteAtlas:
+InvocationSpriteAtlas:
 										incbin "graphics/spells/invocations/atlas.bin"
 										align $8000

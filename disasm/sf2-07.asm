@@ -53,20 +53,20 @@ j_WaitForEntityToStopMoving:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_setControlledEntityActScript:
+j_SetControlledEntityActScript:
 										
-										jmp     setControlledEntityActScript(pc)
+										jmp     SetControlledEntityActScript(pc)
 
-	; End of function j_setControlledEntityActScript
+	; End of function j_SetControlledEntityActScript
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_makeEntityIdle:
+j_MakeEntityIdle:
 										
-										jmp     makeEntityIdle(pc)
+										jmp     MakeEntityIdle(pc)
 
-	; End of function j_makeEntityIdle
+	; End of function j_MakeEntityIdle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -100,11 +100,11 @@ sub_44024:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_setUnitCursorActscript:
+j_SetUnitCursorActscript:
 										
-										jmp     setUnitCursorActscript(pc)
+										jmp     SetUnitCursorActscript(pc)
 
-	; End of function j_setUnitCursorActscript
+	; End of function j_SetUnitCursorActscript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -127,11 +127,11 @@ sub_44030:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_44034:
+j_ExecuteDebugMapScript:
 										
-										jmp     sub_4710E(pc)
+										jmp     ExecuteDebugMapScript(pc)
 
-	; End of function sub_44034
+	; End of function j_ExecuteDebugMapScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -208,11 +208,11 @@ j_ExecuteBattleCutscene_Region:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_launchFading:
+j_LaunchFading:
 										
-										jmp     executeFadingKeepCounterMax(pc)
+										jmp     LaunchFading(pc)
 
-	; End of function j_launchFading
+	; End of function j_LaunchFading
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -327,11 +327,11 @@ sub_44088:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_getMapSetupEntities:
+j_GetMapSetupEntities:
 										
-										jmp     getMapSetupEntityList(pc)
+										jmp     GetMapSetupEntityList(pc)
 
-	; End of function j_getMapSetupEntities
+	; End of function j_GetMapSetupEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -410,11 +410,11 @@ sub_440AC:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_getCharacterSpriteIdx:
+j_GetCharacterSpriteIdx:
 										
-										jmp     getCharacterSpriteIdx(pc)
+										jmp     GetCharacterSpriteIdx(pc)
 
-	; End of function j_getCharacterSpriteIdx
+	; End of function j_GetCharacterSpriteIdx
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -446,27 +446,27 @@ j_PlayIntroOrEndCutscene:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_executeFlashScreenScript:
+j_ExecuteFlashScreenScript:
 										
-										jmp     executeFlashScreenScript(pc)
+										jmp     ExecuteFlashScreenScript(pc)
 
-	; End of function j_executeFlashScreenScript
+	; End of function j_ExecuteFlashScreenScript
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_getEntityPortaitAndSpeechSound:
+j_GetEntityPortaitAndSpeechSound:
 										
 										jmp     GetEntityPortraitAndSpeechSound(pc)
 
-	; End of function j_getEntityPortaitAndSpeechSound
+	; End of function j_GetEntityPortaitAndSpeechSound
 
 
 ; =============== S U B R O U T I N E =======================================
 
 j_ClearEntities:
 										
-										jmp     clearEntities(pc)
+										jmp     ClearEntities(pc)
 
 	; End of function j_ClearEntities
 
@@ -499,7 +499,7 @@ loc_440E2:
 										
 										mulu.w  #$180,d1
 										mulu.w  #$180,d2
-										bsr.w   clearEntities   
+										bsr.w   ClearEntities   
 										lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a1
 										lea     $20(a1),a2
 										lea     ((FOLLOWERS_LIST-$1000000)).w,a3
@@ -544,7 +544,7 @@ loc_4415A:
 										movem.w d0-d1,-(sp)
 										clr.w   d0
 										move.b  d4,d0
-										bsr.w   getCharacterSpriteIdx
+										bsr.w   GetCharacterSpriteIdx
 										movem.w (sp)+,d0-d1
 										bra.s   loc_44172
 loc_44170:
@@ -565,7 +565,7 @@ loc_44180:
 										movem.w (sp)+,d1-d3
 										clr.w   d0
 										clr.l   d6
-										bsr.w   getCharacterSpriteIdx
+										bsr.w   GetCharacterSpriteIdx
 										move.l  #eas_Idle,d5    
 										bsr.w   DeclareNewEntity
 										move.w  #$10,((SPRITE_SIZE-$1000000)).w
@@ -607,7 +607,7 @@ loc_441F0:
 										trap    #TRAP_CHECKFLAG
 										dc.w $40
 										beq.w   loc_44262
-										move.b  ((RAM_CurrentMapIdx-$1000000)).w,d0
+										move.b  ((CURRENT_MAP-$1000000)).w,d0
 										cmp.b   ((RAM_Raft_MapIdx-$1000000)).w,d0
 										bne.s   loc_44248
 										move.b  ((RAM_Raft_X-$1000000)).w,d1
@@ -657,7 +657,7 @@ loc_44272:
 										
 										move.b  (a0)+,d0
 										bmi.w   loc_44282
-										cmp.b   ((RAM_CurrentMapIdx-$1000000)).w,d0
+										cmp.b   ((CURRENT_MAP-$1000000)).w,d0
 										bne.s   loc_44280
 										addq.w  #1,d1
 loc_44280:
@@ -677,10 +677,10 @@ OverworldMaps:      incbin "maps/overworldmaps.bin"
 
 sub_44298:
 										
-										cmpi.b  #$2E,((RAM_CurrentMapIdx-$1000000)).w 
+										cmpi.b  #$2E,((CURRENT_MAP-$1000000)).w 
 																						; new granseal headquarters
 										beq.w   return_44336
-										cmpi.b  #$25,((RAM_CurrentMapIdx-$1000000)).w 
+										cmpi.b  #$25,((CURRENT_MAP-$1000000)).w 
 																						; nazca ship headquarters
 										beq.w   return_44336
 										movem.l a6,-(sp)
@@ -688,7 +688,7 @@ sub_44298:
 										lea     pt_eas_Followers(pc), a6
 										lea     ((byte_FFAFB0-$1000000)).w,a5
 										move.b  #1,(a5)
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $41                ; check if raft available
 										beq.s   loc_442D2
 										bsr.s   isOverworldMap
@@ -710,7 +710,7 @@ loc_442D2:
 										move.b  1(a4),d0
 										cmpi.b  #$1E,d0
 										bcc.s   loc_44302
-										bsr.w   getCharacterSpriteIdx
+										bsr.w   GetCharacterSpriteIdx
 										bra.s   loc_44308
 loc_44302:
 										
@@ -769,7 +769,7 @@ sub_443B2:
 										movem.l a6,-(sp)
 										lea     Followers(pc), a4
 										lea     pt_eas_Followers(pc), a6
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $41
 										beq.s   loc_443D2
 										bsr.w   isOverworldMap
@@ -810,10 +810,10 @@ loc_44404:
 										bra.w   loc_4443C
 loc_44420:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $40
 										beq.w   return_4446A
-										move.b  ((RAM_CurrentMapIdx-$1000000)).w,d0
+										move.b  ((CURRENT_MAP-$1000000)).w,d0
 										cmp.b   ((RAM_Raft_MapIdx-$1000000)).w,d0
 										bne.w   return_4446A
 										move.b  ((RAM_Raft_X-$1000000)).w,d1
@@ -914,8 +914,8 @@ loc_4450A:
 										adda.w  d6,a1
 										move.w  #$120,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (setFFDE94b3andWait).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (SetFFDE94b3andWait).w
 										movem.l (sp)+,a0-a1
 										movem.l (sp)+,d0-d7
 										unlk    a6
@@ -967,7 +967,7 @@ sub_44570:
 										move.w  d0,-(sp)
 										tst.b   d0
 										blt.s   loc_4457E
-										bsr.w   getCharacterSpriteIdx
+										bsr.w   GetCharacterSpriteIdx
 loc_4457E:
 										
 										lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
@@ -1076,7 +1076,7 @@ loc_4463C:
 
 ; clear entities in memory
 
-clearEntities:
+ClearEntities:
 										
 										movem.l d7-a0,-(sp)
 										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
@@ -1103,7 +1103,7 @@ loc_44688:
 										movem.l (sp)+,d7-a0
 										rts
 
-	; End of function clearEntities
+	; End of function ClearEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1112,7 +1112,7 @@ MoveEntitiesToBattlePositions:
 										
 										movem.l d0-a1,-(sp)
 										link    a6,#-$10
-										bsr.s   clearEntities   
+										bsr.s   ClearEntities   
 										lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a1
 										moveq   #$1D,d7
 										clr.w   -4(a6)
@@ -1238,14 +1238,14 @@ loc_447FA:
 										addq.w  #1,-4(a6)
 										dbf     d7,loc_4474A
 										clr.w   d1
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d1
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 										addi.w  #$1F4,d1
 										jsr     j_CheckFlag
 										bne.w   loc_448BC
 										lea     ((byte_FFB160-$1000000)).w,a1
-										lea     t_BattleNeutralEntities(pc), a0
+										lea     BattleNeutralEntities(pc), a0
 										clr.w   d1
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d1
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 loc_44824:
 										
 										cmpi.w  #$FFFF,(a0)
@@ -1309,8 +1309,8 @@ loc_448BC:
 
 	; End of function MoveEntitiesToBattlePositions
 
-   include "asmscripts\battleneutralentities.asm"		; Battle entities which are not force members or enemies
-   include "asmscripts\eas_battleneutralentities.asm"		; Entity actscripts for battle entities which are not force members or enemies
+   include "battles\battleneutralentities.asm"		; Battle entities which are not force members or enemies
+   include "battles\eas_battleneutralentities.asm"		; Entity actscripts for battle entities which are not force members or enemies
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1319,7 +1319,7 @@ loc_448BC:
 ; 
 ; wtf I need to figure out that implementation, many strange exceptions
 
-getCharacterSpriteIdx:
+GetCharacterSpriteIdx:
 										
 										cmpi.w  #$1E,d0
 										blt.s   loc_449D2
@@ -1328,7 +1328,7 @@ getCharacterSpriteIdx:
 loc_449D2:
 										
 										movem.w d1,-(sp)
-										cmpi.b  #$FF,((RAM_CurrentBattleIdx-$1000000)).w
+										cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 										bne.s   loc_449F0
 										jsr     j_GetCurrentHP
 										tst.w   d1
@@ -1348,7 +1348,7 @@ loc_44A04:
 										
 										move.w  d0,d4
 										andi.w  #$1F,d4
-										move.b  t_AllySprites(pc,d4.w),d4
+										move.b  AllySprites(pc,d4.w),d4
 										jsr     j_GetClass      
 										cmpi.b  #$C,d1          ; HERO
 										beq.w   loc_44A5A
@@ -1385,9 +1385,9 @@ return_44A5C:
 										
 										rts
 
-	; End of function getCharacterSpriteIdx
+	; End of function GetCharacterSpriteIdx
 
-t_AllySprites:      incbin "data/allyspriteids.bin"
+AllySprites:        incbin "data/allies/allyspriteids.bin"
 																						; sprite IDs for each force character in battle
 
 ; =============== S U B R O U T I N E =======================================
@@ -1401,14 +1401,14 @@ GetCombatantSpriteIdx:
 										move.w  -4(a6),d0
 										tst.b   d0
 										blt.s   loc_44A8E
-										bsr.w   getCharacterSpriteIdx
+										bsr.w   GetCharacterSpriteIdx
 										bra.s   loc_44A9E
 loc_44A8E:
 										
 										move.w  d1,-(sp)
 										jsr     j_GetEnemyID
 										clr.w   d4
-										move.b  t_EnemySprites(pc,d1.w),d4
+										move.b  EnemySprites(pc,d1.w),d4
 										move.w  (sp)+,d1
 loc_44A9E:
 										
@@ -1417,7 +1417,7 @@ loc_44A9E:
 
 	; End of function GetCombatantSpriteIdx
 
-t_EnemySprites:     incbin "data/enemyspriteids.bin"
+EnemySprites:       incbin "data/enemies/enemyspriteids.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1436,7 +1436,7 @@ setEntityActscript:
 
 ; =============== S U B R O U T I N E =======================================
 
-setControlledEntityActScript:
+SetControlledEntityActScript:
 										
 										move.w  d0,-(sp)
 										move.l  a0,-(sp)
@@ -1462,7 +1462,7 @@ loc_44B8E:
 										move.w  (sp)+,d0
 										rts
 
-	; End of function setControlledEntityActScript
+	; End of function SetControlledEntityActScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1482,7 +1482,7 @@ sub_44B94:
 
 ; =============== S U B R O U T I N E =======================================
 
-setUnitCursorActscript:
+SetUnitCursorActscript:
 										
 										move.w  d0,-(sp)
 										move.l  a0,-(sp)
@@ -1492,7 +1492,7 @@ setUnitCursorActscript:
 										move.w  (sp)+,d0
 										rts
 
-	; End of function setUnitCursorActscript
+	; End of function SetUnitCursorActscript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1527,7 +1527,7 @@ sub_44BD6:
 
 ; =============== S U B R O U T I N E =======================================
 
-makeEntityIdle:
+MakeEntityIdle:
 										
 										move.w  d0,-(sp)
 										move.l  a0,-(sp)
@@ -1537,7 +1537,7 @@ makeEntityIdle:
 										move.w  (sp)+,d0
 										rts
 
-	; End of function makeEntityIdle
+	; End of function MakeEntityIdle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1583,7 +1583,7 @@ sub_44C2E:
 										move.l  a1,$14(a0)
 										lea     eas_Follower1(pc), a0
 										move.w  #$2A,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										addi.l  #$2A,(dword_FFB1A0).l 
 										move.w  d1,$1E(a1)
 										move.w  d2,$20(a1)
@@ -1658,7 +1658,7 @@ setWalkingActscript:
 										move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
 										lea     eas_Walking(pc), a0
 										move.w  #$32,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										addi.l  #$32,(dword_FFB1A0).l 
 										move.w  d1,$22(a1)
 										move.w  d2,$24(a1)
@@ -1682,7 +1682,7 @@ sub_44D0E:
 										move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
 										lea     eas_Walking(pc), a0
 										move.w  #$20,d7 
-										jsr     (copyBytes).w   
+										jsr     (CopyBytes).w   
 										addi.l  #$20,(dword_FFB1A0).l 
 										movea.l (dword_FFB1A0).l,a1
 										movea.l d5,a2
@@ -1776,7 +1776,7 @@ GetEntityRAMAddress:
 
 	; End of function GetEntityRAMAddress
 
-   include "asmscripts\eas_main.asm"		; Main entity actscripts
+   include "scripting\entityactscripts\eas_main.asm"		; Main entity actscripts
 										dc.w eas_Idle+$10000-word_45200
 
 ; =============== S U B R O U T I N E =======================================
@@ -1881,7 +1881,7 @@ return_45266:
 sub_45268:
 										
 										clr.w   d0
-										bsr.w   makeEntityIdle
+										bsr.w   MakeEntityIdle
 										lea     byte_45284(pc), a0
 										trap    #6
 										lea     word_45316(pc), a1
@@ -1892,14 +1892,14 @@ sub_45268:
 
 	; End of function sub_45268
 
-   include "asmscripts\ms_caravanin.asm"		; Mapscript for getting into Caravan ?
+   include "scripting\mapscripts\ms_caravanin.asm"		; Mapscript for getting into Caravan ?
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_45322:
 										
 										clr.w   d0
-										bsr.w   makeEntityIdle
+										bsr.w   MakeEntityIdle
 										lea     word_45348(pc), a0
 										trap    #6
 										lea     word_45368(pc), a1
@@ -1911,7 +1911,7 @@ sub_45322:
 
 	; End of function sub_45322
 
-   include "asmscripts\ms_caravanout.asm"		; Mapscript for getting out of Caravan ?
+   include "scripting\mapscripts\ms_caravanout.asm"		; Mapscript for getting out of Caravan ?
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1920,7 +1920,7 @@ sub_453C6:
 										bsr.w   sub_454AC
 										bne.w   return_453F0
 										clr.w   d0
-										bsr.w   makeEntityIdle
+										bsr.w   MakeEntityIdle
 										clr.b   ((byte_FFAFB0-$1000000)).w
 										lea     byte_453F2(pc), a0
 										trap    #6
@@ -1934,7 +1934,7 @@ return_453F0:
 
 	; End of function sub_453C6
 
-   include "asmscripts\ms_raftin.asm"		; Mapscript for getting into Raft ?
+   include "scripting\mapscripts\ms_raftin.asm"		; Mapscript for getting into Raft ?
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1942,7 +1942,7 @@ sub_45440:
 										
 										bsr.w   sub_454E4
 										clr.w   d0
-										bsr.w   makeEntityIdle
+										bsr.w   MakeEntityIdle
 										move.b  #1,((byte_FFAFB0-$1000000)).w
 										lea     byte_45470(pc), a0
 										trap    #6
@@ -1955,7 +1955,7 @@ sub_45440:
 
 	; End of function sub_45440
 
-   include "asmscripts\ms_raftout.asm"		; Mapscript for getting out of Raft ?
+   include "scripting\mapscripts\ms_raftout.asm"		; Mapscript for getting out of Raft ?
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1999,7 +1999,7 @@ sub_454E4:
 										ext.l   d1
 										divs.w  #$180,d0
 										divs.w  #$180,d1
-										move.b  ((RAM_CurrentMapIdx-$1000000)).w,((RAM_Raft_MapIdx-$1000000)).w
+										move.b  ((CURRENT_MAP-$1000000)).w,((RAM_Raft_MapIdx-$1000000)).w
 										move.b  d0,((RAM_Raft_X-$1000000)).w
 										move.b  d1,((RAM_Raft_Y-$1000000)).w
 										movem.l (sp)+,d0-d1/a0
@@ -2014,9 +2014,9 @@ sub_45514:
 										
 										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
 										clr.w   d0
-										bsr.w   makeEntityIdle
+										bsr.w   MakeEntityIdle
 										moveq   #1,d0
-										bsr.w   makeEntityIdle
+										bsr.w   MakeEntityIdle
 										lea     byte_45546(pc), a0
 										trap    #6
 										lea     eas_ShrinkIn(pc), a1
@@ -2029,7 +2029,7 @@ sub_45514:
 
 	; End of function sub_45514
 
-   include "asmscripts\ms_shrinkin.asm"		; Mapscript for shrinking in ?
+   include "scripting\mapscripts\ms_shrinkin.asm"		; Mapscript for shrinking in ?
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2038,7 +2038,7 @@ sub_45514:
 sub_455AC:
 										
 										clr.w   d0
-										bsr.w   makeEntityIdle
+										bsr.w   MakeEntityIdle
 										lea     byte_455D2(pc), a0
 										trap    #6
 										lea     eas_GrowOut(pc), a1
@@ -2050,7 +2050,7 @@ sub_455AC:
 
 	; End of function sub_455AC
 
-   include "asmscripts\ms_growout.asm"		; Mapscript for growing out ?
+   include "scripting\mapscripts\ms_growout.asm"		; Mapscript for growing out ?
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2076,7 +2076,7 @@ GetEntityPortraitAndSpeechSound:
 										clr.w   d2
 										bsr.w   getEntityAddressFromPlayableCharacterIdx
 										move.b  $13(a5),d0      ; sprite number
-										lea     tbl_SpriteToPortraitnBlip(pc), a0
+										lea     SpriteToPortraitnBlip(pc), a0
 loc_45650:
 										
 										cmp.b   (a0),d0         ; get sprite's owner (it implies that each force member has a unique sprite !!)
@@ -2099,7 +2099,7 @@ loc_45674:
 
 	; End of function GetEntityPortraitAndSpeechSound
 
-tbl_SpriteToPortraitnBlip:
+SpriteToPortraitnBlip:
 										incbin "data/spriteportraitsnblips.bin"
 																						; bowie
 
@@ -2810,7 +2810,7 @@ loc_45E36:
 
 	; End of function sub_45E10
 
-   include "asmscripts\eas_actions.asm"		; Entity scripts for cutscene actions
+   include "scripting\entityactscripts\eas_actions.asm"		; Entity scripts for cutscene actions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2820,7 +2820,7 @@ csc32_setCameraDestInTiles:
 										nop
 										move.w  (a6)+,d2
 										move.w  (a6)+,d3
-										jsr     j_setCameraDestInTiles
+										jsr     j_SetCameraDestInTiles
 										jsr     (WaitForCameraToCatchUp).w
 										rts
 
@@ -2915,7 +2915,7 @@ csc36_:
 csc37_loadMapAndFadeIn:
 										
 										move.b  #2,((FADING_SETTING-$1000000)).w
-										clr.w   (word_FFDFAA).l 
+										clr.w   (unk_FFDFAA).l  
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -2950,7 +2950,7 @@ loc_465C4:
 										move.l  a6,-(sp)
 										jsr     (LoadMap).w     
 										movea.l (sp)+,a6
-										jsr     (enableDisplayAndInterrupts).w
+										jsr     (EnableDisplayAndInterrupts).w
 										trap    #9
 										dc.w 4
 										dc.l 0
@@ -2964,7 +2964,7 @@ loc_465C4:
 
 csc39_fadeInFromBlack:
 										
-										jsr     (fadeInFromBlack).w
+										jsr     (FadeInFromBlack).w
 										rts
 
 	; End of function csc39_fadeInFromBlack
@@ -2974,7 +2974,7 @@ csc39_fadeInFromBlack:
 
 csc3A_fadeOutToBlack:
 										
-										jsr     (fadeOutToBlack).w
+										jsr     (FadeOutToBlack).w
 										rts
 
 	; End of function csc3A_fadeOutToBlack
@@ -2986,7 +2986,7 @@ csc3B_slowFadeInFromBlack:
 										
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,d0
 										move.b  #6,((FADING_COUNTER_MAX-$1000000)).w
-										jsr     (fadeInFromBlack).w
+										jsr     (FadeInFromBlack).w
 										move.b  d0,((FADING_COUNTER_MAX-$1000000)).w
 										rts
 
@@ -2999,7 +2999,7 @@ csc3C_slowFadeOutToBlack:
 										
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,d0
 										move.b  #6,((FADING_COUNTER_MAX-$1000000)).w
-										jsr     (fadeOutToBlack).w
+										jsr     (FadeOutToBlack).w
 										move.b  d0,((FADING_COUNTER_MAX-$1000000)).w
 										rts
 
@@ -3013,7 +3013,7 @@ csc3D_tintMap:
 										moveq   #1,d0
 										moveq   #6,d1
 										moveq   #9,d2
-										jsr     executeFadingKeepCounterMax(pc)
+										jsr     LaunchFading(pc)
 										nop
 										rts
 
@@ -3026,7 +3026,7 @@ csc3E_:
 										moveq   #1,d0
 										moveq   #6,d1
 										moveq   #$A,d2
-										jsr     executeFadingKeepCounterMax(pc)
+										jsr     LaunchFading(pc)
 										nop
 										rts
 
@@ -3040,7 +3040,7 @@ csc3F_fadeMapOutToWhite:
 										moveq   #1,d0
 										moveq   #1,d1
 										moveq   #4,d2
-										jsr     executeFadingKeepCounterMax(pc)
+										jsr     LaunchFading(pc)
 										nop
 										rts
 
@@ -3054,7 +3054,7 @@ csc40_fadeMapInFromWhite:
 										moveq   #1,d0
 										moveq   #1,d1
 										moveq   #3,d2
-										jsr     executeFadingKeepCounterMax(pc)
+										jsr     LaunchFading(pc)
 										nop
 										rts
 
@@ -3072,10 +3072,10 @@ csc41_flashScreenWhite:
 										moveq   #$B,d2
 loc_4667A:
 										
-										jsr     executeFadingKeepCounterMax(pc)
+										jsr     LaunchFading(pc)
 										nop
 										dbf     d7,loc_4667A
-										jsr     (duplicatePalettes).w
+										jsr     (DuplicatePalettes).w
 										rts
 
 	; End of function csc41_flashScreenWhite
@@ -3087,14 +3087,14 @@ csc42_:
 										trap    #9
 										dc.w 3
 										dc.l 0
-										jsr     (disableDisplayAndVInt).w
+										jsr     (DisableDisplayAndVInt).w
 										movea.l (a6)+,a0
 										move.w  (a0)+,d1
 										move.w  (a0)+,d2
 										move.w  (a0)+,d3
 										jsr     InitMapEntities
 										jsr     (LoadMapEntitySprites).w
-										jsr     (enableDisplayAndInterrupts).w
+										jsr     (EnableDisplayAndInterrupts).w
 										trap    #9
 										dc.w 4
 										dc.l 0
@@ -3173,7 +3173,7 @@ csc46_:
 										move.l  a6,-(sp)
 										jsr     (LoadMap).w     
 										movea.l (sp)+,a6
-										jsr     (enableDisplayAndInterrupts).w
+										jsr     (EnableDisplayAndInterrupts).w
 										trap    #9
 										dc.w 4
 										dc.l 0
@@ -3202,14 +3202,14 @@ csc49_:
 										trap    #9
 										dc.w 3
 										dc.l 0
-										jsr     (disableDisplayAndVInt).w
-										jsr     getMapSetupEntityList
+										jsr     (DisableDisplayAndVInt).w
+										jsr     GetMapSetupEntityList
 										move.w  (a6)+,d1
 										move.w  (a6)+,d2
 										move.w  (a6)+,d3
 										jsr     j_InitMapEntities
 										jsr     (LoadMapEntitySprites).w
-										jsr     (enableDisplayAndInterrupts).w
+										jsr     (EnableDisplayAndInterrupts).w
 										trap    #9
 										dc.w 4
 										dc.l 0
@@ -3225,7 +3225,7 @@ csc4A_fadeInFromBlackHalf:
 										moveq   #$F,d0
 										moveq   #6,d1
 										moveq   #$E,d2
-										jsr     executeFadingKeepCounterMax(pc)
+										jsr     LaunchFading(pc)
 										nop
 										rts
 
@@ -3239,7 +3239,7 @@ csc4B_fadeOutToBlackHalf:
 										moveq   #$F,d0
 										moveq   #6,d1
 										moveq   #$F,d2
-										jsr     executeFadingKeepCounterMax(pc)
+										jsr     LaunchFading(pc)
 										nop
 										rts
 
@@ -3248,11 +3248,11 @@ csc4B_fadeOutToBlackHalf:
 
 ; =============== S U B R O U T I N E =======================================
 
-executeFadingKeepCounterMax:
+LaunchFading:
 										
 										move.b  d3,-(sp)
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,d3
-										clr.w   (word_FFDFAA).l 
+										clr.w   (unk_FFDFAA).l  
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  d0,((FADING_PALETTE_FLAGS-$1000000)).w
 										move.b  d1,((FADING_COUNTER_MAX-$1000000)).w
@@ -3269,7 +3269,7 @@ loc_467C6:
 										move.b  (sp)+,d3
 										rts
 
-	; End of function executeFadingKeepCounterMax
+	; End of function LaunchFading
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3690,7 +3690,7 @@ csc1A_setEntitySprite:
 										move.w  (a6)+,d0
 										cmpi.w  #$1E,d0
 										bcc.s   loc_46A5E
-										jsr     getCharacterSpriteIdx
+										jsr     GetCharacterSpriteIdx
 										move.w  d4,d0
 loc_46A5E:
 										
@@ -3762,7 +3762,7 @@ loc_46AB6:
 										move.w  d1,d0
 										move.w  d3,d1
 										move.w  d4,d2
-										jsr     j_initPortraitWindow
+										jsr     j_InitPortraitWindow
 return_46AD0:
 										
 										rts
@@ -3775,7 +3775,7 @@ return_46AD0:
 csc1E_hidePortrait:
 										
 										jsr     (WaitForCameraToCatchUp).w
-										jsr     j_hidePortraitWindow
+										jsr     j_HidePortraitWindow
 										rts
 
 	; End of function csc1E_hidePortrait
@@ -4630,8 +4630,8 @@ sub_4709E:
 										adda.w  d1,a1
 										move.w  #$120,d0
 										moveq   #2,d1
-										jsr     (bwahDMAstuffAgainbis).w
-										jsr     (set_FFDE94_bit3).w
+										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,d0-d1/a0-a1
 										rts
 
@@ -4660,20 +4660,20 @@ loc_470DA:
 										lsl.w   #2,d1
 										lea     (pt_MapSprites).l,a0
 										movea.l (a0,d1.w),a0
-										jsr     (loadSpriteData).w
+										jsr     (LoadSpriteData).w
 										movea.l a1,a0
 										movem.l (sp)+,d0-d1/d6/a1
 										rts
 
 	; End of function sub_470CA
 
-off_47102:          dc.l word_4931C         
+DebugMapScripts:    dc.l word_4931C         
 										dc.l bbcs_08            
 										dc.l abcs_battle08      
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4710E:
+ExecuteDebugMapScript:
 										
 										clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
 										moveq   #0,d0
@@ -4681,11 +4681,11 @@ sub_4710E:
 										moveq   #$A,d2
 										jsr     j_NumberPrompt
 										lsl.w   #2,d0
-										movea.l off_47102(pc,d0.w),a0
+										movea.l DebugMapScripts(pc,d0.w),a0
 										bsr.w   ExecuteMapScript
 										rts
 
-	; End of function sub_4710E
+	; End of function ExecuteDebugMapScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4878,7 +4878,7 @@ loc_47270:
 										jsr     (DisplayText).l 
 										addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
 																						; increment script number (move forward in script bank)
-										jsr     j_hidePortraitWindow
+										jsr     j_HidePortraitWindow
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										moveq   #$A,d0
@@ -4919,7 +4919,7 @@ loc_472BE:
 										jsr     (WaitForCameraToCatchUp).w
 										jsr     (DisplayText).l 
 										addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
-										jsr     j_hidePortraitWindow
+										jsr     j_HidePortraitWindow
 										trap    #5
 										dc.w $FFFF
 										moveq   #$A,d0
@@ -5057,12 +5057,12 @@ csc08_joinForce:
 										move.w  (a6)+,d0
 										bclr    #$F,d0
 										bne.s   loc_473B0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_JOIN         ; join music
 										bra.s   loc_473B4
 loc_473B0:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_SAD_JOIN     ; sad join music
 loc_473B4:
 										
@@ -5072,7 +5072,7 @@ loc_473B4:
 										jsr     j_JoinForce
 										move.w  #2,d0
 										jsr     j_JoinForce
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $1BF               ; {NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force.
 										bra.s   loc_473EC
 loc_473D4:
@@ -5081,12 +5081,12 @@ loc_473D4:
 										jsr     j_GetClass      
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  d1,((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $1BE               ; {NAME} the {CLASS} {N}has joined the force.
 loc_473EC:
 										
-										jsr     j_fadeOut_WaitForP2Input
-										trap    #5
+										jsr     j_FadeOut_WaitForP2Input
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										moveq   #$A,d0
 										jsr     (Sleep).w       
@@ -5101,8 +5101,8 @@ loc_473EC:
 
 csc09_hideTextBoxAndPortrait:
 										
-										jsr     j_hidePortraitWindow
-										trap    #5
+										jsr     j_HidePortraitWindow
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -5250,7 +5250,7 @@ return_4748E:
 csc11_promptYesNoForStoryFlow:
 										
 										move.l  a6,-(sp)
-										jsr     j_yesNoPrompt
+										jsr     j_YesNoPrompt
 										movea.l (sp)+,a6
 										moveq   #$59,d1 ; flag index : last answer to story-related yes/no question
 										tst.w   d0
@@ -5316,7 +5316,7 @@ csc13_setStoryFlag:
 sub_474EE:
 										
 										moveq   #0,d0
-										move.b  #$11,((RAM_CurrentMapIdx-$1000000)).w
+										move.b  #$11,((CURRENT_MAP-$1000000)).w
 																						; Mt Volcanon Shrine ?
 										bsr.w   ExecuteEntityEvent
 										rts
@@ -5383,7 +5383,7 @@ loc_47566:
 loc_4756A:
 										
 										jsr     (a0)
-										jsr     j_hidePortraitWindow
+										jsr     j_HidePortraitWindow
 										trap    #5
 										dc.w $FFFF
 loc_47576:
@@ -5449,8 +5449,8 @@ loc_475FA:
 loc_475FE:
 										
 										jsr     (a0)
-										jsr     j_hidePortraitWindow
-										trap    #5
+										jsr     j_HidePortraitWindow
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 loc_4760A:
 										
@@ -5525,8 +5525,8 @@ loc_47680:
 										jsr     (sub_6052).w    
 loc_476A8:
 										
-										trap    #9
-										dc.w 3
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w TRAP_CLEARFLAG
 										dc.l VInt_UpdateEntities
 										jsr     (a0)
 										movem.w (sp)+,d0-d2/d6
@@ -5537,11 +5537,11 @@ loc_476A8:
 										jsr     (sub_6052).w    
 loc_476C4:
 										
-										jsr     j_hidePortraitWindow
-										trap    #5
+										jsr     j_HidePortraitWindow
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
-										trap    #9
-										dc.w 4
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ACTIVATE
 										dc.l VInt_UpdateEntities
 loc_476D6:
 										
@@ -5555,8 +5555,8 @@ loc_476D6:
 
 sub_476DC:
 										
-										trap    #9
-										dc.w 4
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ACTIVATE
 										dc.l VInt_UpdateEntities
 										bra.w   ExecuteMapScript
 
@@ -5574,7 +5574,7 @@ LoadAndDisplayCurrentPortrait:
 										blt.s   loc_476FC
 										clr.w   d1
 										clr.w   d2
-										jsr     j_initPortraitWindow
+										jsr     j_InitPortraitWindow
 loc_476FC:
 										
 										movem.w (sp)+,d0-d2
@@ -5640,8 +5640,8 @@ loc_4774C:
 										jsr     (DisplayText).w 
 loc_4776E:
 										
-										jsr     j_hidePortraitWindow
-										trap    #5
+										jsr     j_HidePortraitWindow
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										moveq   #$FFFFFFFF,d7
 										rts
@@ -5664,7 +5664,7 @@ loc_4778C:
 
 ; returns entity list of map setup in a0
 
-getMapSetupEntityList:
+GetMapSetupEntityList:
 										
 										bsr.w   getCurrentMapSetup
 										cmpi.w  #$FFFF,(a0)
@@ -5674,7 +5674,7 @@ return_4779C:
 										
 										rts
 
-	; End of function getMapSetupEntityList
+	; End of function GetMapSetupEntityList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5685,7 +5685,7 @@ getCurrentMapSetup:
 										
 										movem.l d0-d1/a1,-(sp)
 										clr.w   d0
-										move.b  ((RAM_CurrentMapIdx-$1000000)).w,d0
+										move.b  ((CURRENT_MAP-$1000000)).w,d0
 										lea     MapSetups(pc), a1
 loc_477AC:
 										
@@ -5827,9 +5827,9 @@ loc_47896:
 										move.l  #$100FF,((RAM_MapEventType-$1000000)).w
 										move.w  #$7530,((word_FFB196-$1000000)).w
 										jsr     (WaitForCameraToCatchUp).w
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_BOOST          ; boost effect ?
-										bsr.w   executeFlashScreenScript
+										bsr.w   ExecuteFlashScreenScript
 loc_478C0:
 										
 										movem.l (sp)+,d1/d6-d7
@@ -5902,7 +5902,7 @@ sub_47948:
 										moveq   #1,d0
 										moveq   #$1C,d7
 										lea     ((byte_FFA922-$1000000)).w,a0
-										lea     unk_47A38(pc), a2
+										lea     byte_47A38(pc), a2
 loc_47958:
 										
 										move.w  d0,d1
@@ -5934,7 +5934,7 @@ sub_47992:
 										moveq   #1,d0
 										moveq   #$1C,d7
 										lea     ((byte_FFA922-$1000000)).w,a0
-										lea     unk_47A38(pc), a2
+										lea     byte_47A38(pc), a2
 loc_479A2:
 										
 										move.w  d0,d1
@@ -5967,7 +5967,7 @@ loc_479D0:
 										move.b  #3,$10(a0)
 										move.l  #eas_Idle,$14(a0)
 										movem.w d0-d4,-(sp)
-										jsr     j_getCharacterSpriteIdx
+										jsr     j_GetCharacterSpriteIdx
 										move.w  #3,d1
 										moveq   #$FFFFFFFF,d2
 										move.w  d4,d3
@@ -5984,7 +5984,7 @@ loc_47A28:
 
 	; End of function sub_47992
 
-unk_47A38:          dc.b $11
+byte_47A38:         dc.b $11
 										dc.b   7
 										dc.b $12
 										dc.b   7
@@ -6016,13 +6016,13 @@ j_ExecuteBattleCutscene_Intro_0:
 										
 										movem.l d1,-(sp)
 										clr.w   d1
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d1
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 										addi.w  #$1C2,d1
 										jsr     j_CheckFlag
 										bne.w   loc_47AE8
 										movem.l d0/a0,-(sp)
 										clr.w   d0
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d0
 										add.w   d0,d0
 										move.w  rpt_BeforeBattleCutscenes(pc,d0.w),d0
 																						; rpt_BattleCutscenes
@@ -6030,7 +6030,7 @@ j_ExecuteBattleCutscene_Intro_0:
 										bsr.w   ExecuteMapScript
 										movem.l (sp)+,d0/a0
 										bra.w   loc_47AE8
-   include "asmscripts\battlecutscenes\cs_beforebattle.asm"		; Before battle cutscenes
+   include "battles\cs_beforebattle.asm"		; Before battle cutscenes
 loc_47AE8:
 										
 										movem.l (sp)+,d1
@@ -6049,21 +6049,21 @@ ExecuteBattleCutscene_Start:
 										
 										movem.l d1,-(sp)
 										clr.w   d1
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d1
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 										addi.w  #$1C2,d1
 										jsr     j_CheckFlag
 										bne.w   loc_47B8C
 										jsr     j_SetFlag
 										movem.l d0/a0,-(sp)
 										clr.w   d0
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d0
 										add.w   d0,d0
 										move.w  rpt_BattleStartCutscenes(pc,d0.w),d0
 										lea     rpt_BattleStartCutscenes(pc,d0.w),a0
 										bsr.w   ExecuteMapScript
 										movem.l (sp)+,d0/a0
 										bra.w   loc_47B8C
-   include "asmscripts\battlecutscenes\cs_battlestart.asm"		; Battle start cutscenes
+   include "battles\cs_battlestart.asm"		; Battle start cutscenes
 loc_47B8C:
 										
 										movem.l (sp)+,d1
@@ -6086,13 +6086,13 @@ ExecuteBattleCutscene_Defeated:
 										tst.w   d1
 										bne.w   loc_47C88
 										clr.w   d1
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d1
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 										addi.w  #$1F4,d1
 										jsr     j_CheckFlag
 										bne.w   loc_47C48
 										movem.l d0/a0,-(sp)
 										clr.w   d0
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d0
 										add.w   d0,d0
 										move.w  rpt_EnemyDefeatedCutscenes(pc,d0.w),d0
 										lea     rpt_EnemyDefeatedCutscenes(pc,d0.w),a0
@@ -6102,14 +6102,14 @@ ExecuteBattleCutscene_Defeated:
 
 	; End of function ExecuteBattleCutscene_Defeated
 
-   include "asmscripts\battlecutscenes\cs_enemydefeated.asm"		; Enemy defeated cutscenes
+   include "battles\cs_enemydefeated.asm"		; Enemy defeated cutscenes
 
 ; START OF FUNCTION CHUNK FOR ExecuteBattleCutscene_Defeated
 
 loc_47C48:
 										
 										clr.w   d0
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d0
 										move.b  EnemyLeaderPresence(pc,d0.w),d0
 										tst.b   d0
 										beq.s   loc_47C88
@@ -6144,13 +6144,13 @@ ExecuteAfterBattleCutscene:
 										
 										movem.l d0-d1,-(sp)
 										clr.w   d1
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d1
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 										addi.w  #$1F4,d1
 										jsr     j_CheckFlag
 										bne.w   loc_47D54
 										movem.l d0/a0,-(sp)
 										clr.w   d0
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d0
 										add.w   d0,d0
 										move.w  rpt_AfterBattleCutscenes(pc,d0.w),d0
 										lea     rpt_AfterBattleCutscenes(pc,d0.w),a0
@@ -6160,14 +6160,14 @@ ExecuteAfterBattleCutscene:
 
 	; End of function ExecuteAfterBattleCutscene
 
-   include "asmscripts\battlecutscenes\cs_afterbattle.asm"		; After battle cutscenes
+   include "battles\cs_afterbattle.asm"		; After battle cutscenes
 
 ; START OF FUNCTION CHUNK FOR ExecuteAfterBattleCutscene
 
 loc_47D54:
 										
 										clr.w   d0
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d0
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d0
 										move.b  byte_47D6A(pc,d0.w),d0
 										jsr     j_JoinForce
 										movem.l (sp)+,d0-d1
@@ -6243,7 +6243,7 @@ sub_47D9E:
 										bne.w   loc_47E66
 										lea     word_47E6C(pc), a0
 										clr.w   d1
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d1
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 loc_47DCA:
 										
 										cmpi.w  #$FFFF,(a0)
@@ -6327,7 +6327,7 @@ loc_47E8A:
 										addq.w  #8,a0
 										cmpi.w  #$FFFF,(a0)
 										beq.w   loc_47EC2
-										move.b  ((RAM_CurrentBattleIdx-$1000000)).w,d1
+										move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 										cmp.b   (a0),d1
 										bne.s   loc_47E8A
 										move.w  2(a0),d1
@@ -6349,26 +6349,26 @@ loc_47EC2:
 
 	; End of function ExecuteBattleCutscene_Region
 
-   include "asmscripts\battlecutscenes\cs_regionactivated.asm"		; Region-activated cutscenes
+   include "battles\cs_regionactivated.asm"		; Region-activated cutscenes
 
 ; =============== S U B R O U T I N E =======================================
 
-executeFlashScreenScript:
+ExecuteFlashScreenScript:
 										
 										lea     cs_FlashScreen(pc), a0
 										trap    #6
 										rts
 
-	; End of function executeFlashScreenScript
+	; End of function ExecuteFlashScreenScript
 
 cs_FlashScreen:     dc.w $41
 										dc.w $1E
 										dc.w $FFFF
-   include "asmscripts\cs_introendroutine.asm"		; Subroutine launching intro and end cutscenes
-   include "asmscripts\cs_intro1.asm"		; Intro cutscene 1
-   include "asmscripts\cs_intro2.asm"		; Intro cutscene 2
-   include "asmscripts\cs_intro3.asm"		; Intro cutscene 3
-   include "asmscripts\cs_intro4.asm"		; Intro cutscene 4
+   include "scripting\cutscenes\cs_introendroutine.asm"		; Subroutine launching intro and end cutscenes
+   include "scripting\cutscenes\cs_intro1.asm"		; Intro cutscene 1
+   include "scripting\cutscenes\cs_intro2.asm"		; Intro cutscene 2
+   include "scripting\cutscenes\cs_intro3.asm"		; Intro cutscene 3
+   include "scripting\cutscenes\cs_intro4.asm"		; Intro cutscene 4
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6390,7 +6390,7 @@ loc_49006:
 										
 										move.l  (a0)+,(a1)+
 										dbf     d0,loc_49006
-										jsr     (storeVdpCommandster).w
+										jsr     (StoreVdpCommandster).w
 										moveq   #$A,d0
 										jsr     (Sleep).w       
 										lea     ((byte_FFDF2A-$1000000)).w,a0
@@ -6400,7 +6400,7 @@ loc_49022:
 										
 										move.l  (a0)+,(a1)+
 										dbf     d0,loc_49022
-										jsr     (storeVdpCommandster).w
+										jsr     (StoreVdpCommandster).w
 										moveq   #$A,d0
 										jsr     (Sleep).w       
 										movem.l (sp)+,d0/a0-a1
@@ -6424,7 +6424,7 @@ plt_2toFigureOut:   dc.w 0
 										dc.w $6AE
 										dc.w $AEE
 										dc.w $EEE
-   include "asmscripts\cs_end.asm"		; End cutscene
+   include "scripting\cutscenes\cs_end.asm"		; End cutscene
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6541,65 +6541,65 @@ sub_493EC:
 										dc.b $1E
 										dc.b $FF
 										dc.b $FF
-   include "asmscripts\battlecutscenes\battle01\bbcs.asm"		; Cutscene before battle 1
-   include "asmscripts\battlecutscenes\battle01\abcs.asm"		; Cutscene after battle 1
-   include "asmscripts\battlecutscenes\battle03\bbcs.asm"		; Cutscene before battle 3
-   include "asmscripts\battlecutscenes\battle04\bbcs.asm"		; Cutscene before battle 4
-   include "asmscripts\battlecutscenes\battle04\abcs.asm"		; Cutscene after battle 4
-   include "asmscripts\battlecutscenes\battle05\edcs.asm"		; Enemy defeated cutscene for battle 5
-   include "asmscripts\battlecutscenes\battle05\abcs.asm"		; Cutscene after battle 5
-   include "asmscripts\battlecutscenes\battle06\bbcs.asm"		; Cutscene before battle 6
-   include "asmscripts\battlecutscenes\battle07\bbcs.asm"		; Cutscene before battle 7
-   include "asmscripts\battlecutscenes\battle07\abcs.asm"		; Cutscene after battle 7
-   include "asmscripts\battlecutscenes\battle08\bbcs.asm"		; Cutscene before battle 8
-   include "asmscripts\battlecutscenes\battle08\abcs.asm"		; Cutscene after battle 8
-   include "asmscripts\battlecutscenes\battle11\bbcs.asm"		; Cutscene before battle 11
-   include "asmscripts\battlecutscenes\battle12\edcs.asm"		; Enemy defeated cutscene for battle 12
-   include "asmscripts\battlecutscenes\battle12\abcs.asm"		; Cutscene after battle 12
-   include "asmscripts\battlecutscenes\battle13\abcs.asm"		; Cutscene after battle 13
-   include "asmscripts\battlecutscenes\battle15\bbcs.asm"		; Cutscene before battle 15
-   include "asmscripts\battlecutscenes\battle15\abcs.asm"		; Cutscene after battle 15
-   include "asmscripts\battlecutscenes\battle16\bbcs.asm"		; Cutscene before battle 16
-   include "asmscripts\battlecutscenes\battle16\abcs.asm"		; Cutscene after battle 16
-   include "asmscripts\battlecutscenes\battle18\bbcs.asm"		; Cutscene before battle 18
-   include "asmscripts\battlecutscenes\battle18\abcs.asm"		; Cutscene after battle 18
-   include "asmscripts\battlecutscenes\battle20\abcs.asm"		; Cutscene after battle 20
-   include "asmscripts\battlecutscenes\battle21\bbcs.asm"		; Cutscene before battle 21
-   include "asmscripts\battlecutscenes\battle21\abcs.asm"		; Cutscene after battle 21
-   include "asmscripts\battlecutscenes\battle26\bbcs.asm"		; Cutscene before battle 26
-   include "asmscripts\battlecutscenes\battle26\abcs.asm"		; Cutscene after battle 26
-   include "asmscripts\battlecutscenes\battle27\bscs.asm"		; Start cutscene for battle 27
-   include "asmscripts\battlecutscenes\battle28\bbcs.asm"		; Cutscene before battle 28
-   include "asmscripts\battlecutscenes\battle28\abcs.asm"		; Cutscene after battle 28
-   include "asmscripts\battlecutscenes\battle29\bbcs.asm"		; Cutscene before battle 29
-   include "asmscripts\battlecutscenes\battle30\bbcs.asm"		; Cutscene before battle 30
-   include "asmscripts\battlecutscenes\battle30\abcs.asm"		; Cutscene after battle 30
-   include "asmscripts\battlecutscenes\battle31\bbcs.asm"		; Cutscene before battle 31
-   include "asmscripts\battlecutscenes\battle32\bbcs.asm"		; Cutscene before battle 32
-   include "asmscripts\battlecutscenes\battle32\rbcs_1.asm"		; Region-activated cutscene for battle 32
-   include "asmscripts\battlecutscenes\battle32\abcs.asm"		; Cutscene after battle 32
-   include "asmscripts\battlecutscenes\battle33\bbcs.asm"		; Cutscene before battle 33
-   include "asmscripts\battlecutscenes\battle33\abcs.asm"		; Cutscene after battle 33
-   include "asmscripts\battlecutscenes\battle34\bbcs.asm"		; Cutscene before battle 34
-   include "asmscripts\battlecutscenes\battle34\abcs.asm"		; Cutscene after battle 34
-   include "asmscripts\battlecutscenes\battle35\bbcs.asm"		; Cutscene before battle 35
-   include "asmscripts\battlecutscenes\battle36\bbcs.asm"		; Cutscene before battle 36
-   include "asmscripts\battlecutscenes\battle36\abcs.asm"		; Cutscene after battle 36
-   include "asmscripts\battlecutscenes\battle37\bbcs.asm"		; Cutscene before battle 37
-   include "asmscripts\battlecutscenes\battle37\abcs.asm"		; Cutscene after battle 37
-   include "asmscripts\battlecutscenes\battle38\bbcs.asm"		; Cutscene before battle 38
-   include "asmscripts\battlecutscenes\battle38\abcs.asm"		; Cutscene after battle 38
-   include "asmscripts\battlecutscenes\battle39\bbcs.asm"		; Cutscene before battle 39
-   include "asmscripts\battlecutscenes\battle40\bbcs.asm"		; Cutscene before battle 40
-   include "asmscripts\battlecutscenes\battle40\rbcs_1.asm"		; Region-activated cutscene 1 for battle 40
-   include "asmscripts\battlecutscenes\battle40\rbcs_2.asm"		; Region-activated cutscene 2 for battle 40
-   include "asmscripts\battlecutscenes\battle40\abcs.asm"		; Cutscene after battle 40
-   include "asmscripts\battlecutscenes\battle41\bbcs.asm"		; Cutscene before battle 41
-   include "asmscripts\battlecutscenes\battle42\bbcs.asm"		; Cutscene before battle 42
-   include "asmscripts\battlecutscenes\battle42\abcs.asm"		; Cutscene after battle 42
-   include "asmscripts\battlecutscenes\battle43\edcs.asm"		; Enemy defeated cutscene for battle 43
-   include "asmscripts\battlecutscenes\battle43\abcs.asm"		; Cutscene after battle 43
-   include "asmscripts\battlecutscenes\battle00\abcs.asm"		; Cutscene after battle 0
+   include "battles\entries\battle01\bbcs.asm"		; Cutscene before battle 1
+   include "battles\entries\battle01\abcs.asm"		; Cutscene after battle 1
+   include "battles\entries\battle03\bbcs.asm"		; Cutscene before battle 3
+   include "battles\entries\battle04\bbcs.asm"		; Cutscene before battle 4
+   include "battles\entries\battle04\abcs.asm"		; Cutscene after battle 4
+   include "battles\entries\battle05\edcs.asm"		; Enemy defeated cutscene for battle 5
+   include "battles\entries\battle05\abcs.asm"		; Cutscene after battle 5
+   include "battles\entries\battle06\bbcs.asm"		; Cutscene before battle 6
+   include "battles\entries\battle07\bbcs.asm"		; Cutscene before battle 7
+   include "battles\entries\battle07\abcs.asm"		; Cutscene after battle 7
+   include "battles\entries\battle08\bbcs.asm"		; Cutscene before battle 8
+   include "battles\entries\battle08\abcs.asm"		; Cutscene after battle 8
+   include "battles\entries\battle11\bbcs.asm"		; Cutscene before battle 11
+   include "battles\entries\battle12\edcs.asm"		; Enemy defeated cutscene for battle 12
+   include "battles\entries\battle12\abcs.asm"		; Cutscene after battle 12
+   include "battles\entries\battle13\abcs.asm"		; Cutscene after battle 13
+   include "battles\entries\battle15\bbcs.asm"		; Cutscene before battle 15
+   include "battles\entries\battle15\abcs.asm"		; Cutscene after battle 15
+   include "battles\entries\battle16\bbcs.asm"		; Cutscene before battle 16
+   include "battles\entries\battle16\abcs.asm"		; Cutscene after battle 16
+   include "battles\entries\battle18\bbcs.asm"		; Cutscene before battle 18
+   include "battles\entries\battle18\abcs.asm"		; Cutscene after battle 18
+   include "battles\entries\battle20\abcs.asm"		; Cutscene after battle 20
+   include "battles\entries\battle21\bbcs.asm"		; Cutscene before battle 21
+   include "battles\entries\battle21\abcs.asm"		; Cutscene after battle 21
+   include "battles\entries\battle26\bbcs.asm"		; Cutscene before battle 26
+   include "battles\entries\battle26\abcs.asm"		; Cutscene after battle 26
+   include "battles\entries\battle27\bscs.asm"		; Start cutscene for battle 27
+   include "battles\entries\battle28\bbcs.asm"		; Cutscene before battle 28
+   include "battles\entries\battle28\abcs.asm"		; Cutscene after battle 28
+   include "battles\entries\battle29\bbcs.asm"		; Cutscene before battle 29
+   include "battles\entries\battle30\bbcs.asm"		; Cutscene before battle 30
+   include "battles\entries\battle30\abcs.asm"		; Cutscene after battle 30
+   include "battles\entries\battle31\bbcs.asm"		; Cutscene before battle 31
+   include "battles\entries\battle32\bbcs.asm"		; Cutscene before battle 32
+   include "battles\entries\battle32\rbcs_1.asm"		; Region-activated cutscene for battle 32
+   include "battles\entries\battle32\abcs.asm"		; Cutscene after battle 32
+   include "battles\entries\battle33\bbcs.asm"		; Cutscene before battle 33
+   include "battles\entries\battle33\abcs.asm"		; Cutscene after battle 33
+   include "battles\entries\battle34\bbcs.asm"		; Cutscene before battle 34
+   include "battles\entries\battle34\abcs.asm"		; Cutscene after battle 34
+   include "battles\entries\battle35\bbcs.asm"		; Cutscene before battle 35
+   include "battles\entries\battle36\bbcs.asm"		; Cutscene before battle 36
+   include "battles\entries\battle36\abcs.asm"		; Cutscene after battle 36
+   include "battles\entries\battle37\bbcs.asm"		; Cutscene before battle 37
+   include "battles\entries\battle37\abcs.asm"		; Cutscene after battle 37
+   include "battles\entries\battle38\bbcs.asm"		; Cutscene before battle 38
+   include "battles\entries\battle38\abcs.asm"		; Cutscene after battle 38
+   include "battles\entries\battle39\bbcs.asm"		; Cutscene before battle 39
+   include "battles\entries\battle40\bbcs.asm"		; Cutscene before battle 40
+   include "battles\entries\battle40\rbcs_1.asm"		; Region-activated cutscene 1 for battle 40
+   include "battles\entries\battle40\rbcs_2.asm"		; Region-activated cutscene 2 for battle 40
+   include "battles\entries\battle40\abcs.asm"		; Cutscene after battle 40
+   include "battles\entries\battle41\bbcs.asm"		; Cutscene before battle 41
+   include "battles\entries\battle42\bbcs.asm"		; Cutscene before battle 42
+   include "battles\entries\battle42\abcs.asm"		; Cutscene after battle 42
+   include "battles\entries\battle43\edcs.asm"		; Enemy defeated cutscene for battle 43
+   include "battles\entries\battle43\abcs.asm"		; Cutscene after battle 43
+   include "battles\entries\battle00\abcs.asm"		; Cutscene after battle 0
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6640,7 +6640,7 @@ loc_4F4A2:
 										dc.w MUSIC_ITEM
 										trap    #5
 										dc.w $D7
-										jsr     j_fadeOut_WaitForP2Input
+										jsr     j_FadeOut_WaitForP2Input
 										jsr     (WaitForPlayerInput).w
 										trap    #5
 										dc.w $FFFF
@@ -6656,7 +6656,7 @@ loc_4F510:
 										dc.w MUSIC_ITEM
 										trap    #5
 										dc.w $D5
-										jsr     j_fadeOut_WaitForP2Input
+										jsr     j_FadeOut_WaitForP2Input
 										jsr     (WaitForPlayerInput).w
 										trap    #5
 										dc.w $FFFF
@@ -6675,7 +6675,7 @@ sub_4F542:
 										
 										movem.w d1-d2,-(sp)
 										move.w  d0,d1
-										jsr     sub_81D0
+										jsr     j_sub_9146
 										cmpi.w  #$FFFF,d0
 										beq.w   loc_4F56A
 										jsr     j_RemoveItemBySlot
@@ -6754,7 +6754,7 @@ loc_4F610:
 										cmp.w   -6(a6),d2
 										bne.w   loc_4F69C
 										move.w  -4(a6),d1
-										jsr     j_isItemCursed
+										jsr     j_IsItemCursed
 										bcc.w   loc_4F69C
 										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
 										trap    #5
@@ -6773,7 +6773,7 @@ loc_4F65C:
 										cmp.w   -6(a6),d2
 										bne.w   loc_4F69C
 										move.w  -4(a6),d1
-										jsr     j_isItemCursed
+										jsr     j_IsItemCursed
 										bcc.w   loc_4F69C
 										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
 										trap    #5
@@ -6805,678 +6805,678 @@ loc_4F6CE:
 
 	; End of function sub_4F570
 
-   include "asmscripts\mapsetups\mapsetupstable.asm"		; Map setups table
-   include "asmscripts\mapsetups\map66\pt.asm"		; 
-   include "asmscripts\mapsetups\map66\s1.asm"		; 
-   include "asmscripts\mapsetups\map66\s2.asm"		; 
-   include "asmscripts\mapsetups\map66\s3.asm"		; 
-   include "asmscripts\mapsetups\map66\s4.asm"		; 
-   include "asmscripts\mapsetups\map66\s5.asm"		; 
-   include "asmscripts\mapsetups\map66\s6.asm"		; 
-   include "asmscripts\mapsetups\map67\pt.asm"		; 
-   include "asmscripts\mapsetups\map67\s1.asm"		; 
-   include "asmscripts\mapsetups\map67\s2.asm"		; 
-   include "asmscripts\mapsetups\map67\s3.asm"		; 
-   include "asmscripts\mapsetups\map67\s4.asm"		; 
-   include "asmscripts\mapsetups\map67\s5.asm"		; 
-   include "asmscripts\mapsetups\map67\s6.asm"		; 
-   include "asmscripts\mapsetups\map68\pt.asm"		; 
-   include "asmscripts\mapsetups\map68\s1.asm"		; 
-   include "asmscripts\mapsetups\map68\s2.asm"		; 
-   include "asmscripts\mapsetups\map68\s3.asm"		; 
-   include "asmscripts\mapsetups\map68\s4.asm"		; 
-   include "asmscripts\mapsetups\map68\s5.asm"		; 
-   include "asmscripts\mapsetups\map68\s6.asm"		; 
-   include "asmscripts\mapsetups\map69\pt.asm"		; 
-   include "asmscripts\mapsetups\map69\s1.asm"		; 
-   include "asmscripts\mapsetups\map69\s3.asm"		; 
-   include "asmscripts\mapsetups\map69\s2.asm"		; 
-   include "asmscripts\mapsetups\map69\s4.asm"		; 
-   include "asmscripts\mapsetups\map69\s5.asm"		; 
-   include "asmscripts\mapsetups\map69\s6.asm"		; 
-   include "asmscripts\mapsetups\map70\pt.asm"		; 
-   include "asmscripts\mapsetups\map70\s1.asm"		; 
-   include "asmscripts\mapsetups\map70\s3.asm"		; 
-   include "asmscripts\mapsetups\map70\s2.asm"		; 
-   include "asmscripts\mapsetups\map70\s4.asm"		; 
-   include "asmscripts\mapsetups\map70\s5.asm"		; 
-   include "asmscripts\mapsetups\map70\s6.asm"		; 
-   include "asmscripts\mapsetups\map72\pt.asm"		; 
-   include "asmscripts\mapsetups\map72\s1.asm"		; 
-   include "asmscripts\mapsetups\map72\s2.asm"		; 
-   include "asmscripts\mapsetups\map72\s3.asm"		; 
-   include "asmscripts\mapsetups\map72\s4.asm"		; 
-   include "asmscripts\mapsetups\map72\s5.asm"		; 
-   include "asmscripts\mapsetups\map72\s6.asm"		; 
-   include "asmscripts\mapsetups\map73\pt.asm"		; 
-   include "asmscripts\mapsetups\map73\s1.asm"		; 
-   include "asmscripts\mapsetups\map73\s3.asm"		; 
-   include "asmscripts\mapsetups\map73\s2.asm"		; 
-   include "asmscripts\mapsetups\map73\s4.asm"		; 
-   include "asmscripts\mapsetups\map73\s5.asm"		; 
-   include "asmscripts\mapsetups\map73\s6.asm"		; 
-   include "asmscripts\mapsetups\map74\pt.asm"		; 
-   include "asmscripts\mapsetups\map74\s1.asm"		; 
-   include "asmscripts\mapsetups\map74\s3.asm"		; 
-   include "asmscripts\mapsetups\map74\s2.asm"		; 
-   include "asmscripts\mapsetups\map74\s4.asm"		; 
-   include "asmscripts\mapsetups\map74\s5.asm"		; 
-   include "asmscripts\mapsetups\map74\s6.asm"		; 
-   include "asmscripts\mapsetups\map75\pt.asm"		; 
-   include "asmscripts\mapsetups\map75\s1.asm"		; 
-   include "asmscripts\mapsetups\map75\s3.asm"		; 
-   include "asmscripts\mapsetups\map75\s2.asm"		; 
-   include "asmscripts\mapsetups\map75\s4.asm"		; 
-   include "asmscripts\mapsetups\map75\s5.asm"		; 
-   include "asmscripts\mapsetups\map75\s6.asm"		; 
-   include "asmscripts\mapsetups\map76\pt.asm"		; 
-   include "asmscripts\mapsetups\map76\s1.asm"		; 
-   include "asmscripts\mapsetups\map76\s3.asm"		; 
-   include "asmscripts\mapsetups\map76\s2.asm"		; 
-   include "asmscripts\mapsetups\map76\s4.asm"		; 
-   include "asmscripts\mapsetups\map76\s5.asm"		; 
-   include "asmscripts\mapsetups\map76\s6.asm"		; 
-   include "asmscripts\mapsetups\map77\pt.asm"		; 
-   include "asmscripts\mapsetups\map77\s1.asm"		; 
-   include "asmscripts\mapsetups\map77\s3.asm"		; 
-   include "asmscripts\mapsetups\map77\s2.asm"		; 
-   include "asmscripts\mapsetups\map77\s4.asm"		; 
-   include "asmscripts\mapsetups\map77\s5.asm"		; 
-   include "asmscripts\mapsetups\map77\s6.asm"		; 
-   include "asmscripts\mapsetups\map03\pt.asm"		; 
-   include "asmscripts\mapsetups\map03\pt_261.asm"		; 
-   include "asmscripts\mapsetups\map03\pt_1FA.asm"		; 
-   include "asmscripts\mapsetups\map03\s1.asm"		; 
-   include "asmscripts\mapsetups\map03\s1_261.asm"		; 
-   include "asmscripts\mapsetups\map03\s1_1FA.asm"		; 
-   include "asmscripts\mapsetups\map03\s3.asm"		; 
-   include "asmscripts\mapsetups\map03\s3_261.asm"		; 
-   include "asmscripts\mapsetups\map03\s3_1FA.asm"		; 
-   include "asmscripts\mapsetups\map03\s2.asm"		; 
-   include "asmscripts\mapsetups\map03\s2_261.asm"		; 
-   include "asmscripts\mapsetups\map03\s2_1FA.asm"		; 
-   include "asmscripts\mapsetups\map03\s4.asm"		; 
-   include "asmscripts\mapsetups\map03\s5.asm"		; 
-   include "asmscripts\mapsetups\map03\s6_1FA.asm"		; 
-   include "asmscripts\mapsetups\map03\s6.asm"		; 
-   include "asmscripts\mapsetups\map03\s6_261.asm"		; 
-   include "asmscripts\mapsetups\map04\pt.asm"		; 
-   include "asmscripts\mapsetups\map04\s1.asm"		; 
-   include "asmscripts\mapsetups\map04\s3.asm"		; 
-   include "asmscripts\mapsetups\map04\s2.asm"		; 
-   include "asmscripts\mapsetups\map04\s4.asm"		; 
-   include "asmscripts\mapsetups\map04\s5.asm"		; 
-   include "asmscripts\mapsetups\map04\s6.asm"		; 
-   include "asmscripts\mapsetups\map05\pt.asm"		; 
-   include "asmscripts\mapsetups\map05\pt_28A.asm"		; 
-   include "asmscripts\mapsetups\map05\s1.asm"		; 
-   include "asmscripts\mapsetups\map05\s1_28A.asm"		; 
-   include "asmscripts\mapsetups\map05\s2.asm"		; 
-   include "asmscripts\mapsetups\map05\s2_28A.asm"		; 
-   include "asmscripts\mapsetups\map05\s3.asm"		; 
-   include "asmscripts\mapsetups\map05\s4.asm"		; 
-   include "asmscripts\mapsetups\map05\s5.asm"		; 
-   include "asmscripts\mapsetups\map05\s6.asm"		; 
-   include "asmscripts\mapsetups\map16\pt_297.asm"		; 
-   include "asmscripts\mapsetups\map16\pt.asm"		; 
-   include "asmscripts\mapsetups\map16\s1_297.asm"		; 
-   include "asmscripts\mapsetups\map16\s1.asm"		; 
-   include "asmscripts\mapsetups\map16\s2_297.asm"		; 
-   include "asmscripts\mapsetups\map16\s2.asm"		; 
-   include "asmscripts\mapsetups\map16\s3.asm"		; 
-   include "asmscripts\mapsetups\map16\s4.asm"		; 
-   include "asmscripts\mapsetups\map16\s5.asm"		; 
-   include "asmscripts\mapsetups\map16\s6.asm"		; 
-   include "asmscripts\mapsetups\map17\pt.asm"		; 
-   include "asmscripts\mapsetups\map17\pt_1F9.asm"		; 
-   include "asmscripts\mapsetups\map17\s1.asm"		; 
-   include "asmscripts\mapsetups\map17\s1_1F9.asm"		; 
-   include "asmscripts\mapsetups\map17\s2.asm"		; 
-   include "asmscripts\mapsetups\map17\s3.asm"		; 
-   include "asmscripts\mapsetups\map17\s3_1F9.asm"		; 
-   include "asmscripts\mapsetups\map17\s4.asm"		; 
-   include "asmscripts\mapsetups\map17\s5.asm"		; 
-   include "asmscripts\mapsetups\map17\s6.asm"		; 
-   include "asmscripts\mapsetups\map18\pt.asm"		; 
-   include "asmscripts\mapsetups\map18\s1.asm"		; 
-   include "asmscripts\mapsetups\map18\s2.asm"		; 
-   include "asmscripts\mapsetups\map18\s3.asm"		; 
-   include "asmscripts\mapsetups\map18\s4.asm"		; 
-   include "asmscripts\mapsetups\map18\s5.asm"		; 
-   include "asmscripts\mapsetups\map18\s6.asm"		; 
-   include "asmscripts\mapsetups\map19\pt.asm"		; 
-   include "asmscripts\mapsetups\map19\pt_1F5.asm"		; 
-   include "asmscripts\mapsetups\map19\pt_261.asm"		; 
-   include "asmscripts\mapsetups\map19\pt_1FA.asm"		; 
-   include "asmscripts\mapsetups\map19\pt_1FB.asm"		; 
-   include "asmscripts\mapsetups\map19\s1.asm"		; 
-   include "asmscripts\mapsetups\map19\s1_1F5.asm"		; 
-   include "asmscripts\mapsetups\map19\s1_261.asm"		; 
-   include "asmscripts\mapsetups\map19\s1_1FA.asm"		; 
-   include "asmscripts\mapsetups\map19\s1_1FB.asm"		; 
-   include "asmscripts\mapsetups\map19\s3.asm"		; 
-   include "asmscripts\mapsetups\map19\s3_1FA.asm"		; 
-   include "asmscripts\mapsetups\map19\s3_1FB.asm"		; 
-   include "asmscripts\mapsetups\map19\s2.asm"		; 
-   include "asmscripts\mapsetups\map19\s2_1F5.asm"		; 
-   include "asmscripts\mapsetups\map19\s2_261.asm"		; 
-   include "asmscripts\mapsetups\map19\s2_1FA.asm"		; 
-   include "asmscripts\mapsetups\map19\s2_1FB.asm"		; 
-   include "asmscripts\mapsetups\map19\s4.asm"		; 
-   include "asmscripts\mapsetups\map19\s5.asm"		; 
-   include "asmscripts\mapsetups\map19\s6.asm"		; 
-   include "asmscripts\mapsetups\map19\s6_261.asm"		; 
-   include "asmscripts\mapsetups\map19\s6_1FA.asm"		; 
-   include "asmscripts\mapsetups\map19\s6_1FB.asm"		; 
-   include "asmscripts\mapsetups\map20\pt.asm"		; 
-   include "asmscripts\mapsetups\map20\pt_1F5.asm"		; 
-   include "asmscripts\mapsetups\map20\pt_261.asm"		; 
-   include "asmscripts\mapsetups\map20\pt_1FA.asm"		; 
-   include "asmscripts\mapsetups\map20\s1.asm"		; 
-   include "asmscripts\mapsetups\map20\s1_1F5.asm"		; 
-   include "asmscripts\mapsetups\map20\s1_261.asm"		; 
-   include "asmscripts\mapsetups\map20\s1_1FA.asm"		; 
-   include "asmscripts\mapsetups\map20\s3.asm"		; 
-   include "asmscripts\mapsetups\map20\s3_1F5.asm"		; 
-   include "asmscripts\mapsetups\map20\s2.asm"		; 
-   include "asmscripts\mapsetups\map20\s2_1F5.asm"		; 
-   include "asmscripts\mapsetups\map20\s2_261.asm"		; 
-   include "asmscripts\mapsetups\map20\s2_1FA.asm"		; 
-   include "asmscripts\mapsetups\map20\s4.asm"		; 
-   include "asmscripts\mapsetups\map20\s5.asm"		; 
-   include "asmscripts\mapsetups\map20\s6.asm"		; 
-   include "asmscripts\mapsetups\map21\pt.asm"		; 
-   include "asmscripts\mapsetups\map21\pt_1F5.asm"		; 
-   include "asmscripts\mapsetups\map21\pt_261.asm"		; 
-   include "asmscripts\mapsetups\map21\pt_1FA.asm"		; 
-   include "asmscripts\mapsetups\map21\s1.asm"		; 
-   include "asmscripts\mapsetups\map21\s1_261.asm"		; 
-   include "asmscripts\mapsetups\map21\s1_1FA.asm"		; 
-   include "asmscripts\mapsetups\map21\s3.asm"		; 
-   include "asmscripts\mapsetups\map21\s2.asm"		; 
-   include "asmscripts\mapsetups\map21\s2_1F5.asm"		; 
-   include "asmscripts\mapsetups\map21\s2_261.asm"		; 
-   include "asmscripts\mapsetups\map21\s2_1FA.asm"		; 
-   include "asmscripts\mapsetups\map21\s4.asm"		; 
-   include "asmscripts\mapsetups\map21\s5.asm"		; 
-   include "asmscripts\mapsetups\map21\s6.asm"		; 
-   include "asmscripts\mapsetups\map40\pt_1FA.asm"		; 
-   include "asmscripts\mapsetups\map40\pt.asm"		; 
-   include "asmscripts\mapsetups\map40\s1_1FA.asm"		; 
-   include "asmscripts\mapsetups\map40\s1.asm"		; 
-   include "asmscripts\mapsetups\map40\s2.asm"		; 
-   include "asmscripts\mapsetups\map40\s3.asm"		; 
-   include "asmscripts\mapsetups\map40\s4.asm"		; 
-   include "asmscripts\mapsetups\map40\s5.asm"		; 
-   include "asmscripts\mapsetups\map40\s6.asm"		; 
-   include "asmscripts\mapsetups\map43\pt.asm"		; 
-   include "asmscripts\mapsetups\map43\pt_264.asm"		; 
-   include "asmscripts\mapsetups\map43\s1.asm"		; 
-   include "asmscripts\mapsetups\map43\s1_264.asm"		; 
-   include "asmscripts\mapsetups\map43\s3.asm"		; 
-   include "asmscripts\mapsetups\map43\s2.asm"		; 
-   include "asmscripts\mapsetups\map43\s5.asm"		; 
-   include "asmscripts\mapsetups\map43\s4.asm"		; 
-   include "asmscripts\mapsetups\map43\s6.asm"		; 
-   include "asmscripts\mapsetups\map44\pt.asm"		; 
-   include "asmscripts\mapsetups\map44\pt_261.asm"		; 
-   include "asmscripts\mapsetups\map44\pt_1FA.asm"		; 
-   include "asmscripts\mapsetups\map44\pt_1FB.asm"		; 
-   include "asmscripts\mapsetups\map44\s1.asm"		; 
-   include "asmscripts\mapsetups\map44\s1_261.asm"		; 
-   include "asmscripts\mapsetups\map44\s1_1FA.asm"		; 
-   include "asmscripts\mapsetups\map44\s1_1FB.asm"		; 
-   include "asmscripts\mapsetups\map44\s3.asm"		; 
-   include "asmscripts\mapsetups\map44\s2.asm"		; 
-   include "asmscripts\mapsetups\map44\s2_261.asm"		; 
-   include "asmscripts\mapsetups\map44\s2_1FA.asm"		; 
-   include "asmscripts\mapsetups\map44\s2_1FB.asm"		; 
-   include "asmscripts\mapsetups\map44\s5.asm"		; 
-   include "asmscripts\mapsetups\map44\s4.asm"		; 
-   include "asmscripts\mapsetups\map44\s6_1FB.asm"		; 
-   include "asmscripts\mapsetups\map06\pt_2BE.asm"		; 
-   include "asmscripts\mapsetups\map06\pt.asm"		; 
-   include "asmscripts\mapsetups\map06\pt_2BD.asm"		; 
-   include "asmscripts\mapsetups\map06\s1_2BE.asm"		; 
-   include "asmscripts\mapsetups\map06\s1.asm"		; 
-   include "asmscripts\mapsetups\map06\s1_2BD.asm"		; 
-   include "asmscripts\mapsetups\map06\s2_2BE.asm"		; 
-   include "asmscripts\mapsetups\map06\s2.asm"		; 
-   include "asmscripts\mapsetups\map06\s2_2BD.asm"		; 
-   include "asmscripts\mapsetups\map06\s3.asm"		; 
-   include "asmscripts\mapsetups\map06\s4_2BE.asm"		; 
-   include "asmscripts\mapsetups\map06\s4.asm"		; 
-   include "asmscripts\mapsetups\map06\s5.asm"		; 
-   include "asmscripts\mapsetups\map06\s6.asm"		; 
-   include "asmscripts\mapsetups\map07\pt.asm"		; 
-   include "asmscripts\mapsetups\map07\pt_2BD.asm"		; 
-   include "asmscripts\mapsetups\map07\pt_325.asm"		; 
-   include "asmscripts\mapsetups\map07\s1.asm"		; 
-   include "asmscripts\mapsetups\map07\s1_2BD.asm"		; 
-   include "asmscripts\mapsetups\map07\s1_325.asm"		; 
-   include "asmscripts\mapsetups\map07\s2.asm"		; 
-   include "asmscripts\mapsetups\map07\s2_2BD.asm"		; 
-   include "asmscripts\mapsetups\map07\s2_325.asm"		; 
-   include "asmscripts\mapsetups\map07\s3.asm"		; 
-   include "asmscripts\mapsetups\map07\s4.asm"		; 
-   include "asmscripts\mapsetups\map07\s5.asm"		; 
-   include "asmscripts\mapsetups\map07\s6.asm"		; 
-   include "asmscripts\mapsetups\map08\pt_2C4.asm"		; 
-   include "asmscripts\mapsetups\map08\pt.asm"		; 
-   include "asmscripts\mapsetups\map08\s1_2C4.asm"		; 
-   include "asmscripts\mapsetups\map08\s1.asm"		; 
-   include "asmscripts\mapsetups\map08\s2_2C4.asm"		; 
-   include "asmscripts\mapsetups\map08\s2.asm"		; 
-   include "asmscripts\mapsetups\map08\s3.asm"		; 
-   include "asmscripts\mapsetups\map08\s4.asm"		; 
-   include "asmscripts\mapsetups\map08\s5.asm"		; 
-   include "asmscripts\mapsetups\map08\s6.asm"		; 
-   include "asmscripts\mapsetups\map09\pt.asm"		; 
-   include "asmscripts\mapsetups\map09\pt_206.asm"		; 
-   include "asmscripts\mapsetups\map09\s1.asm"		; 
-   include "asmscripts\mapsetups\map09\s1_206.asm"		; 
-   include "asmscripts\mapsetups\map09\s2.asm"		; 
-   include "asmscripts\mapsetups\map09\s3.asm"		; 
-   include "asmscripts\mapsetups\map09\s4.asm"		; 
-   include "asmscripts\mapsetups\map09\s5.asm"		; 
-   include "asmscripts\mapsetups\map09\s6.asm"		; 
-   include "asmscripts\mapsetups\map10\pt.asm"		; 
-   include "asmscripts\mapsetups\map10\pt_2D2.asm"		; 
-   include "asmscripts\mapsetups\map10\s1.asm"		; 
-   include "asmscripts\mapsetups\map10\s1_2D2.asm"		; 
-   include "asmscripts\mapsetups\map10\s2.asm"		; 
-   include "asmscripts\mapsetups\map10\s2_2D2.asm"		; 
-   include "asmscripts\mapsetups\map10\s3.asm"		; 
-   include "asmscripts\mapsetups\map10\s3_2D2.asm"		; 
-   include "asmscripts\mapsetups\map10\s4.asm"		; 
-   include "asmscripts\mapsetups\map10\s5.asm"		; 
-   include "asmscripts\mapsetups\map10\s6.asm"		; 
-   include "asmscripts\mapsetups\map10\s6_2D2.asm"		; 
-   include "asmscripts\mapsetups\map11\pt.asm"		; 
-   include "asmscripts\mapsetups\map11\s1.asm"		; 
-   include "asmscripts\mapsetups\map11\s2.asm"		; 
-   include "asmscripts\mapsetups\map11\s3.asm"		; 
-   include "asmscripts\mapsetups\map11\s4.asm"		; 
-   include "asmscripts\mapsetups\map11\s5.asm"		; 
-   include "asmscripts\mapsetups\map11\s6.asm"		; 
-   include "asmscripts\mapsetups\map12\pt.asm"		; 
-   include "asmscripts\mapsetups\map12\s1.asm"		; 
-   include "asmscripts\mapsetups\map12\s2.asm"		; 
-   include "asmscripts\mapsetups\map12\s3.asm"		; 
-   include "asmscripts\mapsetups\map12\s4.asm"		; 
-   include "asmscripts\mapsetups\map12\s5.asm"		; 
-   include "asmscripts\mapsetups\map12\s6.asm"		; 
-   include "asmscripts\mapsetups\map13\pt.asm"		; 
-   include "asmscripts\mapsetups\map13\pt_2C6.asm"		; 
-   include "asmscripts\mapsetups\map13\pt_31F.asm"		; 
-   include "asmscripts\mapsetups\map13\pt_201.asm"		; 
-   include "asmscripts\mapsetups\map13\s1.asm"		; 
-   include "asmscripts\mapsetups\map13\s1_2C6.asm"		; 
-   include "asmscripts\mapsetups\map13\s1_31F.asm"		; 
-   include "asmscripts\mapsetups\map13\s1_201.asm"		; 
-   include "asmscripts\mapsetups\map13\s2.asm"		; 
-   include "asmscripts\mapsetups\map13\s2_201.asm"		; 
-   include "asmscripts\mapsetups\map13\s3.asm"		; 
-   include "asmscripts\mapsetups\map13\s4.asm"		; 
-   include "asmscripts\mapsetups\map13\s5.asm"		; 
-   include "asmscripts\mapsetups\map13\s6.asm"		; 
-   include "asmscripts\mapsetups\map14\pt.asm"		; 
-   include "asmscripts\mapsetups\map14\pt_1CA.asm"		; 
-   include "asmscripts\mapsetups\map14\s3.asm"		; 
-   include "asmscripts\mapsetups\map14\s2.asm"		; 
-   include "asmscripts\mapsetups\map14\s1.asm"		; 
-   include "asmscripts\mapsetups\map14\s4.asm"		; 
-   include "asmscripts\mapsetups\map14\s6.asm"		; 
-   include "asmscripts\mapsetups\map14\s1_1CA.asm"		; 
-   include "asmscripts\mapsetups\map14\s2_1CA.asm"		; 
-   include "asmscripts\mapsetups\map14\s3_1CA.asm"		; 
-   include "asmscripts\mapsetups\map14\s6_1CA.asm"		; 
-   include "asmscripts\mapsetups\map14\s5.asm"		; 
-   include "asmscripts\mapsetups\map22\pt.asm"		; 
-   include "asmscripts\mapsetups\map22\pt_20A.asm"		; 
-   include "asmscripts\mapsetups\map22\s1.asm"		; 
-   include "asmscripts\mapsetups\map22\s1_20A.asm"		; 
-   include "asmscripts\mapsetups\map22\s2.asm"		; 
-   include "asmscripts\mapsetups\map22\s3.asm"		; 
-   include "asmscripts\mapsetups\map22\s4.asm"		; 
-   include "asmscripts\mapsetups\map22\s5.asm"		; 
-   include "asmscripts\mapsetups\map22\s6.asm"		; 
-   include "asmscripts\mapsetups\map23\pt.asm"		; 
-   include "asmscripts\mapsetups\map23\pt_2FA.asm"		; 
-   include "asmscripts\mapsetups\map23\s1.asm"		; 
-   include "asmscripts\mapsetups\map23\s1_2FA.asm"		; 
-   include "asmscripts\mapsetups\map23\s2.asm"		; 
-   include "asmscripts\mapsetups\map23\s2_2FA.asm"		; 
-   include "asmscripts\mapsetups\map23\s3.asm"		; 
-   include "asmscripts\mapsetups\map23\s4.asm"		; 
-   include "asmscripts\mapsetups\map23\s5.asm"		; 
-   include "asmscripts\mapsetups\map23\s6.asm"		; 
-   include "asmscripts\mapsetups\map24\pt.asm"		; 
-   include "asmscripts\mapsetups\map24\s1.asm"		; 
-   include "asmscripts\mapsetups\map24\s2.asm"		; 
-   include "asmscripts\mapsetups\map24\s3.asm"		; 
-   include "asmscripts\mapsetups\map24\s4.asm"		; 
-   include "asmscripts\mapsetups\map24\s5.asm"		; 
-   include "asmscripts\mapsetups\map24\s6.asm"		; 
-   include "asmscripts\mapsetups\map26\pt.asm"		; 
-   include "asmscripts\mapsetups\map26\s1.asm"		; 
-   include "asmscripts\mapsetups\map26\s2.asm"		; 
-   include "asmscripts\mapsetups\map26\s3.asm"		; 
-   include "asmscripts\mapsetups\map26\s4.asm"		; 
-   include "asmscripts\mapsetups\map26\s5.asm"		; 
-   include "asmscripts\mapsetups\map26\s6.asm"		; 
-   include "asmscripts\mapsetups\map27\pt.asm"		; 
-   include "asmscripts\mapsetups\map27\pt_20B.asm"		; 
-   include "asmscripts\mapsetups\map27\s1.asm"		; 
-   include "asmscripts\mapsetups\map27\s1_20B.asm"		; 
-   include "asmscripts\mapsetups\map27\s2.asm"		; 
-   include "asmscripts\mapsetups\map27\s3.asm"		; 
-   include "asmscripts\mapsetups\map27\s4.asm"		; 
-   include "asmscripts\mapsetups\map27\s5.asm"		; 
-   include "asmscripts\mapsetups\map27\s6.asm"		; 
-   include "asmscripts\mapsetups\map29\pt.asm"		; 
-   include "asmscripts\mapsetups\map29\s1.asm"		; 
-   include "asmscripts\mapsetups\map29\s2.asm"		; 
-   include "asmscripts\mapsetups\map29\s3.asm"		; 
-   include "asmscripts\mapsetups\map29\s4.asm"		; 
-   include "asmscripts\mapsetups\map29\s5.asm"		; 
-   include "asmscripts\mapsetups\map29\s6.asm"		; 
-   include "asmscripts\mapsetups\map30\pt.asm"		; 
-   include "asmscripts\mapsetups\map30\pt_311.asm"		; 
-   include "asmscripts\mapsetups\map30\pt_2F9.asm"		; 
-   include "asmscripts\mapsetups\map30\s1.asm"		; 
-   include "asmscripts\mapsetups\map30\s1_311.asm"		; 
-   include "asmscripts\mapsetups\map30\s1_2F9.asm"		; 
-   include "asmscripts\mapsetups\map30\s2.asm"		; 
-   include "asmscripts\mapsetups\map30\s3.asm"		; 
-   include "asmscripts\mapsetups\map30\s4.asm"		; 
-   include "asmscripts\mapsetups\map30\s5.asm"		; 
-   include "asmscripts\mapsetups\map30\s6.asm"		; 
-   include "asmscripts\mapsetups\map33\pt.asm"		; 
-   include "asmscripts\mapsetups\map33\pt_20B.asm"		; 
-   include "asmscripts\mapsetups\map33\pt_310.asm"		; 
-   include "asmscripts\mapsetups\map33\pt_312.asm"		; 
-   include "asmscripts\mapsetups\map33\s1.asm"		; 
-   include "asmscripts\mapsetups\map33\s1_20B.asm"		; 
-   include "asmscripts\mapsetups\map33\s1_310.asm"		; 
-   include "asmscripts\mapsetups\map33\s1_312.asm"		; 
-   include "asmscripts\mapsetups\map33\s2.asm"		; 
-   include "asmscripts\mapsetups\map33\s3.asm"		; 
-   include "asmscripts\mapsetups\map33\s4.asm"		; 
-   include "asmscripts\mapsetups\map33\s5.asm"		; 
-   include "asmscripts\mapsetups\map33\s6.asm"		; 
-   include "asmscripts\mapsetups\map33\s6_312.asm"		; 
-   include "asmscripts\mapsetups\map34\pt.asm"		; 
-   include "asmscripts\mapsetups\map34\pt_310.asm"		; 
-   include "asmscripts\mapsetups\map34\s1.asm"		; 
-   include "asmscripts\mapsetups\map34\s1_310.asm"		; 
-   include "asmscripts\mapsetups\map34\s2.asm"		; 
-   include "asmscripts\mapsetups\map34\s3.asm"		; 
-   include "asmscripts\mapsetups\map34\s4.asm"		; 
-   include "asmscripts\mapsetups\map34\s5.asm"		; 
-   include "asmscripts\mapsetups\map34\s6.asm"		; 
-   include "asmscripts\mapsetups\map46\pt.asm"		; 
-   include "asmscripts\mapsetups\map46\s1.asm"		; 
-   include "asmscripts\mapsetups\map46\s2.asm"		; 
-   include "asmscripts\mapsetups\map46\s3.asm"		; 
-   include "asmscripts\mapsetups\map46\s4.asm"		; 
-   include "asmscripts\mapsetups\map46\s5.asm"		; 
-   include "asmscripts\mapsetups\map46\s6.asm"		; 
-   include "asmscripts\mapsetups\map51\pt.asm"		; 
-   include "asmscripts\mapsetups\map51\pt_208.asm"		; 
-   include "asmscripts\mapsetups\map51\s1.asm"		; 
-   include "asmscripts\mapsetups\map51\s1_208.asm"		; 
-   include "asmscripts\mapsetups\map51\s2.asm"		; 
-   include "asmscripts\mapsetups\map51\s3.asm"		; 
-   include "asmscripts\mapsetups\map51\s4.asm"		; 
-   include "asmscripts\mapsetups\map51\s5.asm"		; 
-   include "asmscripts\mapsetups\map51\s6.asm"		; 
-   include "asmscripts\mapsetups\map52\pt.asm"		; 
-   include "asmscripts\mapsetups\map52\pt_200.asm"		; 
-   include "asmscripts\mapsetups\map52\s1.asm"		; 
-   include "asmscripts\mapsetups\map52\s1_200.asm"		; 
-   include "asmscripts\mapsetups\map52\s2.asm"		; 
-   include "asmscripts\mapsetups\map52\s3.asm"		; 
-   include "asmscripts\mapsetups\map52\s4.asm"		; 
-   include "asmscripts\mapsetups\map52\s5.asm"		; 
-   include "asmscripts\mapsetups\map52\s6.asm"		; 
-   include "asmscripts\mapsetups\map61\pt_2D9.asm"		; 
-   include "asmscripts\mapsetups\map61\pt.asm"		; 
-   include "asmscripts\mapsetups\map61\s1.asm"		; 
-   include "asmscripts\mapsetups\map61\s1_2D9.asm"		; 
-   include "asmscripts\mapsetups\map61\s2.asm"		; 
-   include "asmscripts\mapsetups\map61\s3.asm"		; 
-   include "asmscripts\mapsetups\map61\s4.asm"		; 
-   include "asmscripts\mapsetups\map61\s5.asm"		; 
-   include "asmscripts\mapsetups\map61\s6.asm"		; 
-   include "asmscripts\mapsetups\map62\pt.asm"		; 
-   include "asmscripts\mapsetups\map62\pt_4D.asm"		; 
-   include "asmscripts\mapsetups\map62\s1.asm"		; 
-   include "asmscripts\mapsetups\map62\s1_4D.asm"		; 
-   include "asmscripts\mapsetups\map62\s2.asm"		; 
-   include "asmscripts\mapsetups\map62\s3.asm"		; 
-   include "asmscripts\mapsetups\map62\s4.asm"		; 
-   include "asmscripts\mapsetups\map62\s5.asm"		; 
-   include "asmscripts\mapsetups\map62\s6.asm"		; 
-   include "asmscripts\mapsetups\map63\pt_1D.asm"		; 
-   include "asmscripts\mapsetups\map63\pt.asm"		; 
-   include "asmscripts\mapsetups\map63\s1.asm"		; 
-   include "asmscripts\mapsetups\map63\s1_1D.asm"		; 
-   include "asmscripts\mapsetups\map63\s2.asm"		; 
-   include "asmscripts\mapsetups\map63\s3.asm"		; 
-   include "asmscripts\mapsetups\map63\s4.asm"		; 
-   include "asmscripts\mapsetups\map63\s5.asm"		; 
-   include "asmscripts\mapsetups\map63\s6.asm"		; 
-   include "asmscripts\mapsetups\map15\pt.asm"		; 
-   include "asmscripts\mapsetups\map15\pt_212.asm"		; 
-   include "asmscripts\mapsetups\map15\s1.asm"		; 
-   include "asmscripts\mapsetups\map15\s1_212.asm"		; 
-   include "asmscripts\mapsetups\map15\s2.asm"		; 
-   include "asmscripts\mapsetups\map15\s2_212.asm"		; 
-   include "asmscripts\mapsetups\map15\s3.asm"		; 
-   include "asmscripts\mapsetups\map15\s3_212.asm"		; 
-   include "asmscripts\mapsetups\map15\s4.asm"		; 
-   include "asmscripts\mapsetups\map15\s5.asm"		; 
-   include "asmscripts\mapsetups\map15\s6.asm"		; 
-   include "asmscripts\mapsetups\map25\pt.asm"		; 
-   include "asmscripts\mapsetups\map25\s1.asm"		; 
-   include "asmscripts\mapsetups\map25\s2.asm"		; 
-   include "asmscripts\mapsetups\map25\s3.asm"		; 
-   include "asmscripts\mapsetups\map25\s4.asm"		; 
-   include "asmscripts\mapsetups\map25\s5.asm"		; 
-   include "asmscripts\mapsetups\map25\s6.asm"		; 
-   include "asmscripts\mapsetups\map31\pt.asm"		; 
-   include "asmscripts\mapsetups\map31\pt_33E.asm"		; 
-   include "asmscripts\mapsetups\map31\s1.asm"		; 
-   include "asmscripts\mapsetups\map31\s1_33E.asm"		; 
-   include "asmscripts\mapsetups\map31\s2.asm"		; 
-   include "asmscripts\mapsetups\map31\s2_33E.asm"		; 
-   include "asmscripts\mapsetups\map31\s3.asm"		; 
-   include "asmscripts\mapsetups\map31\s3_33E.asm"		; 
-   include "asmscripts\mapsetups\map31\s4.asm"		; 
-   include "asmscripts\mapsetups\map31\s5.asm"		; 
-   include "asmscripts\mapsetups\map31\s5_33E.asm"		; 
-   include "asmscripts\mapsetups\map31\s6.asm"		; 
-   include "asmscripts\mapsetups\map31\s6_33E.asm"		; 
-   include "asmscripts\mapsetups\map36\pt.asm"		; 
-   include "asmscripts\mapsetups\map36\pt_212.asm"		; 
-   include "asmscripts\mapsetups\map36\s1.asm"		; 
-   include "asmscripts\mapsetups\map36\s1_212.asm"		; 
-   include "asmscripts\mapsetups\map36\s2.asm"		; 
-   include "asmscripts\mapsetups\map36\s2_212.asm"		; 
-   include "asmscripts\mapsetups\map36\s3.asm"		; 
-   include "asmscripts\mapsetups\map36\s4.asm"		; 
-   include "asmscripts\mapsetups\map36\s5.asm"		; 
-   include "asmscripts\mapsetups\map36\s6.asm"		; 
-   include "asmscripts\mapsetups\map38\pt.asm"		; 
-   include "asmscripts\mapsetups\map38\s1.asm"		; 
-   include "asmscripts\mapsetups\map38\s2.asm"		; 
-   include "asmscripts\mapsetups\map38\s3.asm"		; 
-   include "asmscripts\mapsetups\map38\s4.asm"		; 
-   include "asmscripts\mapsetups\map38\s5.asm"		; 
-   include "asmscripts\mapsetups\map38\s6.asm"		; 
-   include "asmscripts\mapsetups\map39\pt.asm"		; 
-   include "asmscripts\mapsetups\map39\pt_33E.asm"		; 
-   include "asmscripts\mapsetups\map39\s1.asm"		; 
-   include "asmscripts\mapsetups\map39\s1_33E.asm"		; 
-   include "asmscripts\mapsetups\map39\s2.asm"		; 
-   include "asmscripts\mapsetups\map39\s3.asm"		; 
-   include "asmscripts\mapsetups\map39\s3_33E.asm"		; 
-   include "asmscripts\mapsetups\map39\s4.asm"		; 
-   include "asmscripts\mapsetups\map39\s5.asm"		; 
-   include "asmscripts\mapsetups\map39\s6.asm"		; 
-   include "asmscripts\mapsetups\map39\s6_33E.asm"		; 
-   include "asmscripts\mapsetups\map55\pt.asm"		; 
-   include "asmscripts\mapsetups\map55\s1.asm"		; 
-   include "asmscripts\mapsetups\map55\s2.asm"		; 
-   include "asmscripts\mapsetups\map55\s3.asm"		; 
-   include "asmscripts\mapsetups\map55\s4.asm"		; 
-   include "asmscripts\mapsetups\map55\s5.asm"		; 
-   include "asmscripts\mapsetups\map55\s6.asm"		; 
-   include "asmscripts\mapsetups\map00\pt.asm"		; 
-   include "asmscripts\mapsetups\map00\s1.asm"		; 
-   include "asmscripts\mapsetups\map00\s2.asm"		; 
-   include "asmscripts\mapsetups\map00\s3.asm"		; 
-   include "asmscripts\mapsetups\map00\s4.asm"		; 
-   include "asmscripts\mapsetups\map00\s5.asm"		; 
-   include "asmscripts\mapsetups\map00\s6.asm"		; 
-   include "asmscripts\mapsetups\map01\pt.asm"		; 
-   include "asmscripts\mapsetups\map01\s1.asm"		; 
-   include "asmscripts\mapsetups\map01\s2.asm"		; 
-   include "asmscripts\mapsetups\map01\s3.asm"		; 
-   include "asmscripts\mapsetups\map01\s4.asm"		; 
-   include "asmscripts\mapsetups\map01\s5.asm"		; 
-   include "asmscripts\mapsetups\map01\s6.asm"		; 
-   include "asmscripts\mapsetups\map02\pt.asm"		; 
-   include "asmscripts\mapsetups\map02\pt_212.asm"		; 
-   include "asmscripts\mapsetups\map02\s1.asm"		; 
-   include "asmscripts\mapsetups\map02\s1_212.asm"		; 
-   include "asmscripts\mapsetups\map02\s2.asm"		; 
-   include "asmscripts\mapsetups\map02\s2_212.asm"		; 
-   include "asmscripts\mapsetups\map02\s3.asm"		; 
-   include "asmscripts\mapsetups\map02\s4.asm"		; 
-   include "asmscripts\mapsetups\map02\s4_212.asm"		; 
-   include "asmscripts\mapsetups\map02\s5.asm"		; 
-   include "asmscripts\mapsetups\map02\s6.asm"		; 
-   include "asmscripts\mapsetups\map59\pt.asm"		; 
-   include "asmscripts\mapsetups\map59\s1.asm"		; 
-   include "asmscripts\mapsetups\map59\s2.asm"		; 
-   include "asmscripts\mapsetups\map59\s3.asm"		; 
-   include "asmscripts\mapsetups\map59\s4.asm"		; 
-   include "asmscripts\mapsetups\map59\s5.asm"		; 
-   include "asmscripts\mapsetups\map59\s6.asm"		; 
-   include "asmscripts\mapsetups\map28\pt.asm"		; 
-   include "asmscripts\mapsetups\map28\s1.asm"		; 
-   include "asmscripts\mapsetups\map28\s2.asm"		; 
-   include "asmscripts\mapsetups\map28\s3.asm"		; 
-   include "asmscripts\mapsetups\map28\s4.asm"		; 
-   include "asmscripts\mapsetups\map28\s5.asm"		; 
-   include "asmscripts\mapsetups\map28\s6.asm"		; 
-   include "asmscripts\mapsetups\map41\pt.asm"		; 
-   include "asmscripts\mapsetups\map41\s1.asm"		; 
-   include "asmscripts\mapsetups\map41\s2.asm"		; 
-   include "asmscripts\mapsetups\map41\s3.asm"		; 
-   include "asmscripts\mapsetups\map41\s4.asm"		; 
-   include "asmscripts\mapsetups\map41\s5.asm"		; 
-   include "asmscripts\mapsetups\map41\s6.asm"		; 
-   include "asmscripts\mapsetups\map37\pt.asm"		; 
-   include "asmscripts\mapsetups\map37\pt_3E7.asm"		; 
-   include "asmscripts\mapsetups\map37\s1.asm"		; 
-   include "asmscripts\mapsetups\map37\s1_3E7.asm"		; 
-   include "asmscripts\mapsetups\map37\s2.asm"		; 
-   include "asmscripts\mapsetups\map37\s2_3E7.asm"		; 
-   include "asmscripts\mapsetups\map37\s3.asm"		; 
-   include "asmscripts\mapsetups\map37\s4.asm"		; 
-   include "asmscripts\mapsetups\map37\s5.asm"		; 
-   include "asmscripts\mapsetups\map37\s6.asm"		; 
-   include "asmscripts\mapsetups\map37\s6_3E7.asm"		; 
-   include "asmscripts\mapsetups\map42\pt.asm"		; 
-   include "asmscripts\mapsetups\map42\s1.asm"		; 
-   include "asmscripts\mapsetups\map42\s2.asm"		; 
-   include "asmscripts\mapsetups\map42\s3.asm"		; 
-   include "asmscripts\mapsetups\map42\s4.asm"		; 
-   include "asmscripts\mapsetups\map42\s5.asm"		; 
-   include "asmscripts\mapsetups\map42\s6.asm"		; 
-   include "asmscripts\mapsetups\map45\pt.asm"		; 
-   include "asmscripts\mapsetups\map45\s1.asm"		; 
-   include "asmscripts\mapsetups\map45\s2.asm"		; 
-   include "asmscripts\mapsetups\map45\s3.asm"		; 
-   include "asmscripts\mapsetups\map45\s4.asm"		; 
-   include "asmscripts\mapsetups\map45\s5.asm"		; 
-   include "asmscripts\mapsetups\map45\s6.asm"		; 
-   include "asmscripts\mapsetups\map05\pt_212.asm"		; 
-   include "asmscripts\mapsetups\map05\pt_1C.asm"		; 
-   include "asmscripts\mapsetups\map05\s1_212.asm"		; 
-   include "asmscripts\mapsetups\map05\s1_1C.asm"		; 
-   include "asmscripts\mapsetups\map05\s2_212.asm"		; 
-   include "asmscripts\mapsetups\map05\s3_212.asm"		; 
-   include "asmscripts\mapsetups\map05\s4_212.asm"		; 
-   include "asmscripts\mapsetups\map05\s5_212.asm"		; 
-   include "asmscripts\mapsetups\map05\s6_212.asm"		; 
-   include "asmscripts\mapsetups\map16\pt_212.asm"		; 
-   include "asmscripts\mapsetups\map16\s1_212.asm"		; 
-   include "asmscripts\mapsetups\map16\s2_212.asm"		; 
-   include "asmscripts\mapsetups\map16\s3_212.asm"		; 
-   include "asmscripts\mapsetups\map16\s4_212.asm"		; 
-   include "asmscripts\mapsetups\map16\s5_212.asm"		; 
-   include "asmscripts\mapsetups\map16\s6_212.asm"		; 
-   include "asmscripts\mapsetups\map17\pt_212.asm"		; 
-   include "asmscripts\mapsetups\map17\s1_212.asm"		; 
-   include "asmscripts\mapsetups\map17\s2_212.asm"		; 
-   include "asmscripts\mapsetups\map17\s3_212.asm"		; 
-   include "asmscripts\mapsetups\map17\s4_212.asm"		; 
-   include "asmscripts\mapsetups\map17\s5_212.asm"		; 
-   include "asmscripts\mapsetups\map17\s6_212.asm"		; 
-   include "asmscripts\mapsetups\map18\pt_212.asm"		; 
-   include "asmscripts\mapsetups\map18\s1_212.asm"		; 
-   include "asmscripts\mapsetups\map18\s2_212.asm"		; 
-   include "asmscripts\mapsetups\map18\s3_212.asm"		; 
-   include "asmscripts\mapsetups\map18\s4_212.asm"		; 
-   include "asmscripts\mapsetups\map18\s5_212.asm"		; 
-   include "asmscripts\mapsetups\map18\s6_212.asm"		; 
-   include "asmscripts\mapsetups\map56\pt.asm"		; 
-   include "asmscripts\mapsetups\map56\s1.asm"		; 
-   include "asmscripts\mapsetups\map56\s2.asm"		; 
-   include "asmscripts\mapsetups\map56\s3.asm"		; 
-   include "asmscripts\mapsetups\map56\s4.asm"		; 
-   include "asmscripts\mapsetups\map56\s5.asm"		; 
-   include "asmscripts\mapsetups\map56\s6.asm"		; 
-   include "asmscripts\mapsetups\map59\pt_21F.asm"		; 
-   include "asmscripts\mapsetups\map59\s1_21F.asm"		; 
-   include "asmscripts\mapsetups\map59\s2_21F.asm"		; 
-   include "asmscripts\mapsetups\map59\s3_21F.asm"		; 
-   include "asmscripts\mapsetups\map59\s4_21F.asm"		; 
-   include "asmscripts\mapsetups\map59\s5_21F.asm"		; 
-   include "asmscripts\mapsetups\map59\s6_21F.asm"		; 
-   include "asmscripts\mapsetups\map03\pt_21F.asm"		; 
-   include "asmscripts\mapsetups\map03\s1_21F.asm"		; 
-   include "asmscripts\mapsetups\map03\s2_21F.asm"		; 
-   include "asmscripts\mapsetups\map03\s3_21F.asm"		; 
-   include "asmscripts\mapsetups\map03\s4_21F.asm"		; 
-   include "asmscripts\mapsetups\map03\s5_21F.asm"		; 
-   include "asmscripts\mapsetups\map03\s6_21F.asm"		; 
-   include "asmscripts\mapsetups\map19\pt_21F.asm"		; 
-   include "asmscripts\mapsetups\map19\pt_3D6.asm"		; 
-   include "asmscripts\mapsetups\map19\s1_21F.asm"		; 
-   include "asmscripts\mapsetups\map19\s1_3D6.asm"		; 
-   include "asmscripts\mapsetups\map19\s2_21F.asm"		; 
-   include "asmscripts\mapsetups\map19\s2_3D6.asm"		; 
-   include "asmscripts\mapsetups\map19\s3_21F.asm"		; 
-   include "asmscripts\mapsetups\map19\s4_21F.asm"		; 
-   include "asmscripts\mapsetups\map19\s5_21F.asm"		; 
-   include "asmscripts\mapsetups\map19\s6_21F.asm"		; 
-   include "asmscripts\mapsetups\map20\pt_21F.asm"		; 
-   include "asmscripts\mapsetups\map20\s1_21F.asm"		; 
-   include "asmscripts\mapsetups\map20\s2_21F.asm"		; 
-   include "asmscripts\mapsetups\map20\s3_21F.asm"		; 
-   include "asmscripts\mapsetups\map20\s4_21F.asm"		; 
-   include "asmscripts\mapsetups\map20\s5_21F.asm"		; 
-   include "asmscripts\mapsetups\map20\s6_21F.asm"		; 
-   include "asmscripts\mapsetups\map21\pt_21F.asm"		; 
-   include "asmscripts\mapsetups\map21\s1_21F.asm"		; 
-   include "asmscripts\mapsetups\map21\s2_21F.asm"		; 
-   include "asmscripts\mapsetups\map21\s3_21F.asm"		; 
-   include "asmscripts\mapsetups\map21\s4_21F.asm"		; 
-   include "asmscripts\mapsetups\map21\s5_21F.asm"		; 
-   include "asmscripts\mapsetups\map21\s6_21F.asm"		; 
+   include "maps\mapsetupstable.asm"		; Map setups table
+   include "maps\entries\map66\mapsetups\pt.asm"		; 
+   include "maps\entries\map66\mapsetups\s1.asm"		; 
+   include "maps\entries\map66\mapsetups\s2.asm"		; 
+   include "maps\entries\map66\mapsetups\s3.asm"		; 
+   include "maps\entries\map66\mapsetups\s4.asm"		; 
+   include "maps\entries\map66\mapsetups\s5.asm"		; 
+   include "maps\entries\map66\mapsetups\s6.asm"		; 
+   include "maps\entries\map67\mapsetups\pt.asm"		; 
+   include "maps\entries\map67\mapsetups\s1.asm"		; 
+   include "maps\entries\map67\mapsetups\s2.asm"		; 
+   include "maps\entries\map67\mapsetups\s3.asm"		; 
+   include "maps\entries\map67\mapsetups\s4.asm"		; 
+   include "maps\entries\map67\mapsetups\s5.asm"		; 
+   include "maps\entries\map67\mapsetups\s6.asm"		; 
+   include "maps\entries\map68\mapsetups\pt.asm"		; 
+   include "maps\entries\map68\mapsetups\s1.asm"		; 
+   include "maps\entries\map68\mapsetups\s2.asm"		; 
+   include "maps\entries\map68\mapsetups\s3.asm"		; 
+   include "maps\entries\map68\mapsetups\s4.asm"		; 
+   include "maps\entries\map68\mapsetups\s5.asm"		; 
+   include "maps\entries\map68\mapsetups\s6.asm"		; 
+   include "maps\entries\map69\mapsetups\pt.asm"		; 
+   include "maps\entries\map69\mapsetups\s1.asm"		; 
+   include "maps\entries\map69\mapsetups\s3.asm"		; 
+   include "maps\entries\map69\mapsetups\s2.asm"		; 
+   include "maps\entries\map69\mapsetups\s4.asm"		; 
+   include "maps\entries\map69\mapsetups\s5.asm"		; 
+   include "maps\entries\map69\mapsetups\s6.asm"		; 
+   include "maps\entries\map70\mapsetups\pt.asm"		; 
+   include "maps\entries\map70\mapsetups\s1.asm"		; 
+   include "maps\entries\map70\mapsetups\s3.asm"		; 
+   include "maps\entries\map70\mapsetups\s2.asm"		; 
+   include "maps\entries\map70\mapsetups\s4.asm"		; 
+   include "maps\entries\map70\mapsetups\s5.asm"		; 
+   include "maps\entries\map70\mapsetups\s6.asm"		; 
+   include "maps\entries\map72\mapsetups\pt.asm"		; 
+   include "maps\entries\map72\mapsetups\s1.asm"		; 
+   include "maps\entries\map72\mapsetups\s2.asm"		; 
+   include "maps\entries\map72\mapsetups\s3.asm"		; 
+   include "maps\entries\map72\mapsetups\s4.asm"		; 
+   include "maps\entries\map72\mapsetups\s5.asm"		; 
+   include "maps\entries\map72\mapsetups\s6.asm"		; 
+   include "maps\entries\map73\mapsetups\pt.asm"		; 
+   include "maps\entries\map73\mapsetups\s1.asm"		; 
+   include "maps\entries\map73\mapsetups\s3.asm"		; 
+   include "maps\entries\map73\mapsetups\s2.asm"		; 
+   include "maps\entries\map73\mapsetups\s4.asm"		; 
+   include "maps\entries\map73\mapsetups\s5.asm"		; 
+   include "maps\entries\map73\mapsetups\s6.asm"		; 
+   include "maps\entries\map74\mapsetups\pt.asm"		; 
+   include "maps\entries\map74\mapsetups\s1.asm"		; 
+   include "maps\entries\map74\mapsetups\s3.asm"		; 
+   include "maps\entries\map74\mapsetups\s2.asm"		; 
+   include "maps\entries\map74\mapsetups\s4.asm"		; 
+   include "maps\entries\map74\mapsetups\s5.asm"		; 
+   include "maps\entries\map74\mapsetups\s6.asm"		; 
+   include "maps\entries\map75\mapsetups\pt.asm"		; 
+   include "maps\entries\map75\mapsetups\s1.asm"		; 
+   include "maps\entries\map75\mapsetups\s3.asm"		; 
+   include "maps\entries\map75\mapsetups\s2.asm"		; 
+   include "maps\entries\map75\mapsetups\s4.asm"		; 
+   include "maps\entries\map75\mapsetups\s5.asm"		; 
+   include "maps\entries\map75\mapsetups\s6.asm"		; 
+   include "maps\entries\map76\mapsetups\pt.asm"		; 
+   include "maps\entries\map76\mapsetups\s1.asm"		; 
+   include "maps\entries\map76\mapsetups\s3.asm"		; 
+   include "maps\entries\map76\mapsetups\s2.asm"		; 
+   include "maps\entries\map76\mapsetups\s4.asm"		; 
+   include "maps\entries\map76\mapsetups\s5.asm"		; 
+   include "maps\entries\map76\mapsetups\s6.asm"		; 
+   include "maps\entries\map77\mapsetups\pt.asm"		; 
+   include "maps\entries\map77\mapsetups\s1.asm"		; 
+   include "maps\entries\map77\mapsetups\s3.asm"		; 
+   include "maps\entries\map77\mapsetups\s2.asm"		; 
+   include "maps\entries\map77\mapsetups\s4.asm"		; 
+   include "maps\entries\map77\mapsetups\s5.asm"		; 
+   include "maps\entries\map77\mapsetups\s6.asm"		; 
+   include "maps\entries\map03\mapsetups\pt.asm"		; 
+   include "maps\entries\map03\mapsetups\pt_261.asm"		; 
+   include "maps\entries\map03\mapsetups\pt_1FA.asm"		; 
+   include "maps\entries\map03\mapsetups\s1.asm"		; 
+   include "maps\entries\map03\mapsetups\s1_261.asm"		; 
+   include "maps\entries\map03\mapsetups\s1_1FA.asm"		; 
+   include "maps\entries\map03\mapsetups\s3.asm"		; 
+   include "maps\entries\map03\mapsetups\s3_261.asm"		; 
+   include "maps\entries\map03\mapsetups\s3_1FA.asm"		; 
+   include "maps\entries\map03\mapsetups\s2.asm"		; 
+   include "maps\entries\map03\mapsetups\s2_261.asm"		; 
+   include "maps\entries\map03\mapsetups\s2_1FA.asm"		; 
+   include "maps\entries\map03\mapsetups\s4.asm"		; 
+   include "maps\entries\map03\mapsetups\s5.asm"		; 
+   include "maps\entries\map03\mapsetups\s6_1FA.asm"		; 
+   include "maps\entries\map03\mapsetups\s6.asm"		; 
+   include "maps\entries\map03\mapsetups\s6_261.asm"		; 
+   include "maps\entries\map04\mapsetups\pt.asm"		; 
+   include "maps\entries\map04\mapsetups\s1.asm"		; 
+   include "maps\entries\map04\mapsetups\s3.asm"		; 
+   include "maps\entries\map04\mapsetups\s2.asm"		; 
+   include "maps\entries\map04\mapsetups\s4.asm"		; 
+   include "maps\entries\map04\mapsetups\s5.asm"		; 
+   include "maps\entries\map04\mapsetups\s6.asm"		; 
+   include "maps\entries\map05\mapsetups\pt.asm"		; 
+   include "maps\entries\map05\mapsetups\pt_28A.asm"		; 
+   include "maps\entries\map05\mapsetups\s1.asm"		; 
+   include "maps\entries\map05\mapsetups\s1_28A.asm"		; 
+   include "maps\entries\map05\mapsetups\s2.asm"		; 
+   include "maps\entries\map05\mapsetups\s2_28A.asm"		; 
+   include "maps\entries\map05\mapsetups\s3.asm"		; 
+   include "maps\entries\map05\mapsetups\s4.asm"		; 
+   include "maps\entries\map05\mapsetups\s5.asm"		; 
+   include "maps\entries\map05\mapsetups\s6.asm"		; 
+   include "maps\entries\map16\mapsetups\pt_297.asm"		; 
+   include "maps\entries\map16\mapsetups\pt.asm"		; 
+   include "maps\entries\map16\mapsetups\s1_297.asm"		; 
+   include "maps\entries\map16\mapsetups\s1.asm"		; 
+   include "maps\entries\map16\mapsetups\s2_297.asm"		; 
+   include "maps\entries\map16\mapsetups\s2.asm"		; 
+   include "maps\entries\map16\mapsetups\s3.asm"		; 
+   include "maps\entries\map16\mapsetups\s4.asm"		; 
+   include "maps\entries\map16\mapsetups\s5.asm"		; 
+   include "maps\entries\map16\mapsetups\s6.asm"		; 
+   include "maps\entries\map17\mapsetups\pt.asm"		; 
+   include "maps\entries\map17\mapsetups\pt_1F9.asm"		; 
+   include "maps\entries\map17\mapsetups\s1.asm"		; 
+   include "maps\entries\map17\mapsetups\s1_1F9.asm"		; 
+   include "maps\entries\map17\mapsetups\s2.asm"		; 
+   include "maps\entries\map17\mapsetups\s3.asm"		; 
+   include "maps\entries\map17\mapsetups\s3_1F9.asm"		; 
+   include "maps\entries\map17\mapsetups\s4.asm"		; 
+   include "maps\entries\map17\mapsetups\s5.asm"		; 
+   include "maps\entries\map17\mapsetups\s6.asm"		; 
+   include "maps\entries\map18\mapsetups\pt.asm"		; 
+   include "maps\entries\map18\mapsetups\s1.asm"		; 
+   include "maps\entries\map18\mapsetups\s2.asm"		; 
+   include "maps\entries\map18\mapsetups\s3.asm"		; 
+   include "maps\entries\map18\mapsetups\s4.asm"		; 
+   include "maps\entries\map18\mapsetups\s5.asm"		; 
+   include "maps\entries\map18\mapsetups\s6.asm"		; 
+   include "maps\entries\map19\mapsetups\pt.asm"		; 
+   include "maps\entries\map19\mapsetups\pt_1F5.asm"		; 
+   include "maps\entries\map19\mapsetups\pt_261.asm"		; 
+   include "maps\entries\map19\mapsetups\pt_1FA.asm"		; 
+   include "maps\entries\map19\mapsetups\pt_1FB.asm"		; 
+   include "maps\entries\map19\mapsetups\s1.asm"		; 
+   include "maps\entries\map19\mapsetups\s1_1F5.asm"		; 
+   include "maps\entries\map19\mapsetups\s1_261.asm"		; 
+   include "maps\entries\map19\mapsetups\s1_1FA.asm"		; 
+   include "maps\entries\map19\mapsetups\s1_1FB.asm"		; 
+   include "maps\entries\map19\mapsetups\s3.asm"		; 
+   include "maps\entries\map19\mapsetups\s3_1FA.asm"		; 
+   include "maps\entries\map19\mapsetups\s3_1FB.asm"		; 
+   include "maps\entries\map19\mapsetups\s2.asm"		; 
+   include "maps\entries\map19\mapsetups\s2_1F5.asm"		; 
+   include "maps\entries\map19\mapsetups\s2_261.asm"		; 
+   include "maps\entries\map19\mapsetups\s2_1FA.asm"		; 
+   include "maps\entries\map19\mapsetups\s2_1FB.asm"		; 
+   include "maps\entries\map19\mapsetups\s4.asm"		; 
+   include "maps\entries\map19\mapsetups\s5.asm"		; 
+   include "maps\entries\map19\mapsetups\s6.asm"		; 
+   include "maps\entries\map19\mapsetups\s6_261.asm"		; 
+   include "maps\entries\map19\mapsetups\s6_1FA.asm"		; 
+   include "maps\entries\map19\mapsetups\s6_1FB.asm"		; 
+   include "maps\entries\map20\mapsetups\pt.asm"		; 
+   include "maps\entries\map20\mapsetups\pt_1F5.asm"		; 
+   include "maps\entries\map20\mapsetups\pt_261.asm"		; 
+   include "maps\entries\map20\mapsetups\pt_1FA.asm"		; 
+   include "maps\entries\map20\mapsetups\s1.asm"		; 
+   include "maps\entries\map20\mapsetups\s1_1F5.asm"		; 
+   include "maps\entries\map20\mapsetups\s1_261.asm"		; 
+   include "maps\entries\map20\mapsetups\s1_1FA.asm"		; 
+   include "maps\entries\map20\mapsetups\s3.asm"		; 
+   include "maps\entries\map20\mapsetups\s3_1F5.asm"		; 
+   include "maps\entries\map20\mapsetups\s2.asm"		; 
+   include "maps\entries\map20\mapsetups\s2_1F5.asm"		; 
+   include "maps\entries\map20\mapsetups\s2_261.asm"		; 
+   include "maps\entries\map20\mapsetups\s2_1FA.asm"		; 
+   include "maps\entries\map20\mapsetups\s4.asm"		; 
+   include "maps\entries\map20\mapsetups\s5.asm"		; 
+   include "maps\entries\map20\mapsetups\s6.asm"		; 
+   include "maps\entries\map21\mapsetups\pt.asm"		; 
+   include "maps\entries\map21\mapsetups\pt_1F5.asm"		; 
+   include "maps\entries\map21\mapsetups\pt_261.asm"		; 
+   include "maps\entries\map21\mapsetups\pt_1FA.asm"		; 
+   include "maps\entries\map21\mapsetups\s1.asm"		; 
+   include "maps\entries\map21\mapsetups\s1_261.asm"		; 
+   include "maps\entries\map21\mapsetups\s1_1FA.asm"		; 
+   include "maps\entries\map21\mapsetups\s3.asm"		; 
+   include "maps\entries\map21\mapsetups\s2.asm"		; 
+   include "maps\entries\map21\mapsetups\s2_1F5.asm"		; 
+   include "maps\entries\map21\mapsetups\s2_261.asm"		; 
+   include "maps\entries\map21\mapsetups\s2_1FA.asm"		; 
+   include "maps\entries\map21\mapsetups\s4.asm"		; 
+   include "maps\entries\map21\mapsetups\s5.asm"		; 
+   include "maps\entries\map21\mapsetups\s6.asm"		; 
+   include "maps\entries\map40\mapsetups\pt_1FA.asm"		; 
+   include "maps\entries\map40\mapsetups\pt.asm"		; 
+   include "maps\entries\map40\mapsetups\s1_1FA.asm"		; 
+   include "maps\entries\map40\mapsetups\s1.asm"		; 
+   include "maps\entries\map40\mapsetups\s2.asm"		; 
+   include "maps\entries\map40\mapsetups\s3.asm"		; 
+   include "maps\entries\map40\mapsetups\s4.asm"		; 
+   include "maps\entries\map40\mapsetups\s5.asm"		; 
+   include "maps\entries\map40\mapsetups\s6.asm"		; 
+   include "maps\entries\map43\mapsetups\pt.asm"		; 
+   include "maps\entries\map43\mapsetups\pt_264.asm"		; 
+   include "maps\entries\map43\mapsetups\s1.asm"		; 
+   include "maps\entries\map43\mapsetups\s1_264.asm"		; 
+   include "maps\entries\map43\mapsetups\s3.asm"		; 
+   include "maps\entries\map43\mapsetups\s2.asm"		; 
+   include "maps\entries\map43\mapsetups\s5.asm"		; 
+   include "maps\entries\map43\mapsetups\s4.asm"		; 
+   include "maps\entries\map43\mapsetups\s6.asm"		; 
+   include "maps\entries\map44\mapsetups\pt.asm"		; 
+   include "maps\entries\map44\mapsetups\pt_261.asm"		; 
+   include "maps\entries\map44\mapsetups\pt_1FA.asm"		; 
+   include "maps\entries\map44\mapsetups\pt_1FB.asm"		; 
+   include "maps\entries\map44\mapsetups\s1.asm"		; 
+   include "maps\entries\map44\mapsetups\s1_261.asm"		; 
+   include "maps\entries\map44\mapsetups\s1_1FA.asm"		; 
+   include "maps\entries\map44\mapsetups\s1_1FB.asm"		; 
+   include "maps\entries\map44\mapsetups\s3.asm"		; 
+   include "maps\entries\map44\mapsetups\s2.asm"		; 
+   include "maps\entries\map44\mapsetups\s2_261.asm"		; 
+   include "maps\entries\map44\mapsetups\s2_1FA.asm"		; 
+   include "maps\entries\map44\mapsetups\s2_1FB.asm"		; 
+   include "maps\entries\map44\mapsetups\s5.asm"		; 
+   include "maps\entries\map44\mapsetups\s4.asm"		; 
+   include "maps\entries\map44\mapsetups\s6_1FB.asm"		; 
+   include "maps\entries\map06\mapsetups\pt_2BE.asm"		; 
+   include "maps\entries\map06\mapsetups\pt.asm"		; 
+   include "maps\entries\map06\mapsetups\pt_2BD.asm"		; 
+   include "maps\entries\map06\mapsetups\s1_2BE.asm"		; 
+   include "maps\entries\map06\mapsetups\s1.asm"		; 
+   include "maps\entries\map06\mapsetups\s1_2BD.asm"		; 
+   include "maps\entries\map06\mapsetups\s2_2BE.asm"		; 
+   include "maps\entries\map06\mapsetups\s2.asm"		; 
+   include "maps\entries\map06\mapsetups\s2_2BD.asm"		; 
+   include "maps\entries\map06\mapsetups\s3.asm"		; 
+   include "maps\entries\map06\mapsetups\s4_2BE.asm"		; 
+   include "maps\entries\map06\mapsetups\s4.asm"		; 
+   include "maps\entries\map06\mapsetups\s5.asm"		; 
+   include "maps\entries\map06\mapsetups\s6.asm"		; 
+   include "maps\entries\map07\mapsetups\pt.asm"		; 
+   include "maps\entries\map07\mapsetups\pt_2BD.asm"		; 
+   include "maps\entries\map07\mapsetups\pt_325.asm"		; 
+   include "maps\entries\map07\mapsetups\s1.asm"		; 
+   include "maps\entries\map07\mapsetups\s1_2BD.asm"		; 
+   include "maps\entries\map07\mapsetups\s1_325.asm"		; 
+   include "maps\entries\map07\mapsetups\s2.asm"		; 
+   include "maps\entries\map07\mapsetups\s2_2BD.asm"		; 
+   include "maps\entries\map07\mapsetups\s2_325.asm"		; 
+   include "maps\entries\map07\mapsetups\s3.asm"		; 
+   include "maps\entries\map07\mapsetups\s4.asm"		; 
+   include "maps\entries\map07\mapsetups\s5.asm"		; 
+   include "maps\entries\map07\mapsetups\s6.asm"		; 
+   include "maps\entries\map08\mapsetups\pt_2C4.asm"		; 
+   include "maps\entries\map08\mapsetups\pt.asm"		; 
+   include "maps\entries\map08\mapsetups\s1_2C4.asm"		; 
+   include "maps\entries\map08\mapsetups\s1.asm"		; 
+   include "maps\entries\map08\mapsetups\s2_2C4.asm"		; 
+   include "maps\entries\map08\mapsetups\s2.asm"		; 
+   include "maps\entries\map08\mapsetups\s3.asm"		; 
+   include "maps\entries\map08\mapsetups\s4.asm"		; 
+   include "maps\entries\map08\mapsetups\s5.asm"		; 
+   include "maps\entries\map08\mapsetups\s6.asm"		; 
+   include "maps\entries\map09\mapsetups\pt.asm"		; 
+   include "maps\entries\map09\mapsetups\pt_206.asm"		; 
+   include "maps\entries\map09\mapsetups\s1.asm"		; 
+   include "maps\entries\map09\mapsetups\s1_206.asm"		; 
+   include "maps\entries\map09\mapsetups\s2.asm"		; 
+   include "maps\entries\map09\mapsetups\s3.asm"		; 
+   include "maps\entries\map09\mapsetups\s4.asm"		; 
+   include "maps\entries\map09\mapsetups\s5.asm"		; 
+   include "maps\entries\map09\mapsetups\s6.asm"		; 
+   include "maps\entries\map10\mapsetups\pt.asm"		; 
+   include "maps\entries\map10\mapsetups\pt_2D2.asm"		; 
+   include "maps\entries\map10\mapsetups\s1.asm"		; 
+   include "maps\entries\map10\mapsetups\s1_2D2.asm"		; 
+   include "maps\entries\map10\mapsetups\s2.asm"		; 
+   include "maps\entries\map10\mapsetups\s2_2D2.asm"		; 
+   include "maps\entries\map10\mapsetups\s3.asm"		; 
+   include "maps\entries\map10\mapsetups\s3_2D2.asm"		; 
+   include "maps\entries\map10\mapsetups\s4.asm"		; 
+   include "maps\entries\map10\mapsetups\s5.asm"		; 
+   include "maps\entries\map10\mapsetups\s6.asm"		; 
+   include "maps\entries\map10\mapsetups\s6_2D2.asm"		; 
+   include "maps\entries\map11\mapsetups\pt.asm"		; 
+   include "maps\entries\map11\mapsetups\s1.asm"		; 
+   include "maps\entries\map11\mapsetups\s2.asm"		; 
+   include "maps\entries\map11\mapsetups\s3.asm"		; 
+   include "maps\entries\map11\mapsetups\s4.asm"		; 
+   include "maps\entries\map11\mapsetups\s5.asm"		; 
+   include "maps\entries\map11\mapsetups\s6.asm"		; 
+   include "maps\entries\map12\mapsetups\pt.asm"		; 
+   include "maps\entries\map12\mapsetups\s1.asm"		; 
+   include "maps\entries\map12\mapsetups\s2.asm"		; 
+   include "maps\entries\map12\mapsetups\s3.asm"		; 
+   include "maps\entries\map12\mapsetups\s4.asm"		; 
+   include "maps\entries\map12\mapsetups\s5.asm"		; 
+   include "maps\entries\map12\mapsetups\s6.asm"		; 
+   include "maps\entries\map13\mapsetups\pt.asm"		; 
+   include "maps\entries\map13\mapsetups\pt_2C6.asm"		; 
+   include "maps\entries\map13\mapsetups\pt_31F.asm"		; 
+   include "maps\entries\map13\mapsetups\pt_201.asm"		; 
+   include "maps\entries\map13\mapsetups\s1.asm"		; 
+   include "maps\entries\map13\mapsetups\s1_2C6.asm"		; 
+   include "maps\entries\map13\mapsetups\s1_31F.asm"		; 
+   include "maps\entries\map13\mapsetups\s1_201.asm"		; 
+   include "maps\entries\map13\mapsetups\s2.asm"		; 
+   include "maps\entries\map13\mapsetups\s2_201.asm"		; 
+   include "maps\entries\map13\mapsetups\s3.asm"		; 
+   include "maps\entries\map13\mapsetups\s4.asm"		; 
+   include "maps\entries\map13\mapsetups\s5.asm"		; 
+   include "maps\entries\map13\mapsetups\s6.asm"		; 
+   include "maps\entries\map14\mapsetups\pt.asm"		; 
+   include "maps\entries\map14\mapsetups\pt_1CA.asm"		; 
+   include "maps\entries\map14\mapsetups\s3.asm"		; 
+   include "maps\entries\map14\mapsetups\s2.asm"		; 
+   include "maps\entries\map14\mapsetups\s1.asm"		; 
+   include "maps\entries\map14\mapsetups\s4.asm"		; 
+   include "maps\entries\map14\mapsetups\s6.asm"		; 
+   include "maps\entries\map14\mapsetups\s1_1CA.asm"		; 
+   include "maps\entries\map14\mapsetups\s2_1CA.asm"		; 
+   include "maps\entries\map14\mapsetups\s3_1CA.asm"		; 
+   include "maps\entries\map14\mapsetups\s6_1CA.asm"		; 
+   include "maps\entries\map14\mapsetups\s5.asm"		; 
+   include "maps\entries\map22\mapsetups\pt.asm"		; 
+   include "maps\entries\map22\mapsetups\pt_20A.asm"		; 
+   include "maps\entries\map22\mapsetups\s1.asm"		; 
+   include "maps\entries\map22\mapsetups\s1_20A.asm"		; 
+   include "maps\entries\map22\mapsetups\s2.asm"		; 
+   include "maps\entries\map22\mapsetups\s3.asm"		; 
+   include "maps\entries\map22\mapsetups\s4.asm"		; 
+   include "maps\entries\map22\mapsetups\s5.asm"		; 
+   include "maps\entries\map22\mapsetups\s6.asm"		; 
+   include "maps\entries\map23\mapsetups\pt.asm"		; 
+   include "maps\entries\map23\mapsetups\pt_2FA.asm"		; 
+   include "maps\entries\map23\mapsetups\s1.asm"		; 
+   include "maps\entries\map23\mapsetups\s1_2FA.asm"		; 
+   include "maps\entries\map23\mapsetups\s2.asm"		; 
+   include "maps\entries\map23\mapsetups\s2_2FA.asm"		; 
+   include "maps\entries\map23\mapsetups\s3.asm"		; 
+   include "maps\entries\map23\mapsetups\s4.asm"		; 
+   include "maps\entries\map23\mapsetups\s5.asm"		; 
+   include "maps\entries\map23\mapsetups\s6.asm"		; 
+   include "maps\entries\map24\mapsetups\pt.asm"		; 
+   include "maps\entries\map24\mapsetups\s1.asm"		; 
+   include "maps\entries\map24\mapsetups\s2.asm"		; 
+   include "maps\entries\map24\mapsetups\s3.asm"		; 
+   include "maps\entries\map24\mapsetups\s4.asm"		; 
+   include "maps\entries\map24\mapsetups\s5.asm"		; 
+   include "maps\entries\map24\mapsetups\s6.asm"		; 
+   include "maps\entries\map26\mapsetups\pt.asm"		; 
+   include "maps\entries\map26\mapsetups\s1.asm"		; 
+   include "maps\entries\map26\mapsetups\s2.asm"		; 
+   include "maps\entries\map26\mapsetups\s3.asm"		; 
+   include "maps\entries\map26\mapsetups\s4.asm"		; 
+   include "maps\entries\map26\mapsetups\s5.asm"		; 
+   include "maps\entries\map26\mapsetups\s6.asm"		; 
+   include "maps\entries\map27\mapsetups\pt.asm"		; 
+   include "maps\entries\map27\mapsetups\pt_20B.asm"		; 
+   include "maps\entries\map27\mapsetups\s1.asm"		; 
+   include "maps\entries\map27\mapsetups\s1_20B.asm"		; 
+   include "maps\entries\map27\mapsetups\s2.asm"		; 
+   include "maps\entries\map27\mapsetups\s3.asm"		; 
+   include "maps\entries\map27\mapsetups\s4.asm"		; 
+   include "maps\entries\map27\mapsetups\s5.asm"		; 
+   include "maps\entries\map27\mapsetups\s6.asm"		; 
+   include "maps\entries\map29\mapsetups\pt.asm"		; 
+   include "maps\entries\map29\mapsetups\s1.asm"		; 
+   include "maps\entries\map29\mapsetups\s2.asm"		; 
+   include "maps\entries\map29\mapsetups\s3.asm"		; 
+   include "maps\entries\map29\mapsetups\s4.asm"		; 
+   include "maps\entries\map29\mapsetups\s5.asm"		; 
+   include "maps\entries\map29\mapsetups\s6.asm"		; 
+   include "maps\entries\map30\mapsetups\pt.asm"		; 
+   include "maps\entries\map30\mapsetups\pt_311.asm"		; 
+   include "maps\entries\map30\mapsetups\pt_2F9.asm"		; 
+   include "maps\entries\map30\mapsetups\s1.asm"		; 
+   include "maps\entries\map30\mapsetups\s1_311.asm"		; 
+   include "maps\entries\map30\mapsetups\s1_2F9.asm"		; 
+   include "maps\entries\map30\mapsetups\s2.asm"		; 
+   include "maps\entries\map30\mapsetups\s3.asm"		; 
+   include "maps\entries\map30\mapsetups\s4.asm"		; 
+   include "maps\entries\map30\mapsetups\s5.asm"		; 
+   include "maps\entries\map30\mapsetups\s6.asm"		; 
+   include "maps\entries\map33\mapsetups\pt.asm"		; 
+   include "maps\entries\map33\mapsetups\pt_20B.asm"		; 
+   include "maps\entries\map33\mapsetups\pt_310.asm"		; 
+   include "maps\entries\map33\mapsetups\pt_312.asm"		; 
+   include "maps\entries\map33\mapsetups\s1.asm"		; 
+   include "maps\entries\map33\mapsetups\s1_20B.asm"		; 
+   include "maps\entries\map33\mapsetups\s1_310.asm"		; 
+   include "maps\entries\map33\mapsetups\s1_312.asm"		; 
+   include "maps\entries\map33\mapsetups\s2.asm"		; 
+   include "maps\entries\map33\mapsetups\s3.asm"		; 
+   include "maps\entries\map33\mapsetups\s4.asm"		; 
+   include "maps\entries\map33\mapsetups\s5.asm"		; 
+   include "maps\entries\map33\mapsetups\s6.asm"		; 
+   include "maps\entries\map33\mapsetups\s6_312.asm"		; 
+   include "maps\entries\map34\mapsetups\pt.asm"		; 
+   include "maps\entries\map34\mapsetups\pt_310.asm"		; 
+   include "maps\entries\map34\mapsetups\s1.asm"		; 
+   include "maps\entries\map34\mapsetups\s1_310.asm"		; 
+   include "maps\entries\map34\mapsetups\s2.asm"		; 
+   include "maps\entries\map34\mapsetups\s3.asm"		; 
+   include "maps\entries\map34\mapsetups\s4.asm"		; 
+   include "maps\entries\map34\mapsetups\s5.asm"		; 
+   include "maps\entries\map34\mapsetups\s6.asm"		; 
+   include "maps\entries\map46\mapsetups\pt.asm"		; 
+   include "maps\entries\map46\mapsetups\s1.asm"		; 
+   include "maps\entries\map46\mapsetups\s2.asm"		; 
+   include "maps\entries\map46\mapsetups\s3.asm"		; 
+   include "maps\entries\map46\mapsetups\s4.asm"		; 
+   include "maps\entries\map46\mapsetups\s5.asm"		; 
+   include "maps\entries\map46\mapsetups\s6.asm"		; 
+   include "maps\entries\map51\mapsetups\pt.asm"		; 
+   include "maps\entries\map51\mapsetups\pt_208.asm"		; 
+   include "maps\entries\map51\mapsetups\s1.asm"		; 
+   include "maps\entries\map51\mapsetups\s1_208.asm"		; 
+   include "maps\entries\map51\mapsetups\s2.asm"		; 
+   include "maps\entries\map51\mapsetups\s3.asm"		; 
+   include "maps\entries\map51\mapsetups\s4.asm"		; 
+   include "maps\entries\map51\mapsetups\s5.asm"		; 
+   include "maps\entries\map51\mapsetups\s6.asm"		; 
+   include "maps\entries\map52\mapsetups\pt.asm"		; 
+   include "maps\entries\map52\mapsetups\pt_200.asm"		; 
+   include "maps\entries\map52\mapsetups\s1.asm"		; 
+   include "maps\entries\map52\mapsetups\s1_200.asm"		; 
+   include "maps\entries\map52\mapsetups\s2.asm"		; 
+   include "maps\entries\map52\mapsetups\s3.asm"		; 
+   include "maps\entries\map52\mapsetups\s4.asm"		; 
+   include "maps\entries\map52\mapsetups\s5.asm"		; 
+   include "maps\entries\map52\mapsetups\s6.asm"		; 
+   include "maps\entries\map61\mapsetups\pt_2D9.asm"		; 
+   include "maps\entries\map61\mapsetups\pt.asm"		; 
+   include "maps\entries\map61\mapsetups\s1.asm"		; 
+   include "maps\entries\map61\mapsetups\s1_2D9.asm"		; 
+   include "maps\entries\map61\mapsetups\s2.asm"		; 
+   include "maps\entries\map61\mapsetups\s3.asm"		; 
+   include "maps\entries\map61\mapsetups\s4.asm"		; 
+   include "maps\entries\map61\mapsetups\s5.asm"		; 
+   include "maps\entries\map61\mapsetups\s6.asm"		; 
+   include "maps\entries\map62\mapsetups\pt.asm"		; 
+   include "maps\entries\map62\mapsetups\pt_4D.asm"		; 
+   include "maps\entries\map62\mapsetups\s1.asm"		; 
+   include "maps\entries\map62\mapsetups\s1_4D.asm"		; 
+   include "maps\entries\map62\mapsetups\s2.asm"		; 
+   include "maps\entries\map62\mapsetups\s3.asm"		; 
+   include "maps\entries\map62\mapsetups\s4.asm"		; 
+   include "maps\entries\map62\mapsetups\s5.asm"		; 
+   include "maps\entries\map62\mapsetups\s6.asm"		; 
+   include "maps\entries\map63\mapsetups\pt_1D.asm"		; 
+   include "maps\entries\map63\mapsetups\pt.asm"		; 
+   include "maps\entries\map63\mapsetups\s1.asm"		; 
+   include "maps\entries\map63\mapsetups\s1_1D.asm"		; 
+   include "maps\entries\map63\mapsetups\s2.asm"		; 
+   include "maps\entries\map63\mapsetups\s3.asm"		; 
+   include "maps\entries\map63\mapsetups\s4.asm"		; 
+   include "maps\entries\map63\mapsetups\s5.asm"		; 
+   include "maps\entries\map63\mapsetups\s6.asm"		; 
+   include "maps\entries\map15\mapsetups\pt.asm"		; 
+   include "maps\entries\map15\mapsetups\pt_212.asm"		; 
+   include "maps\entries\map15\mapsetups\s1.asm"		; 
+   include "maps\entries\map15\mapsetups\s1_212.asm"		; 
+   include "maps\entries\map15\mapsetups\s2.asm"		; 
+   include "maps\entries\map15\mapsetups\s2_212.asm"		; 
+   include "maps\entries\map15\mapsetups\s3.asm"		; 
+   include "maps\entries\map15\mapsetups\s3_212.asm"		; 
+   include "maps\entries\map15\mapsetups\s4.asm"		; 
+   include "maps\entries\map15\mapsetups\s5.asm"		; 
+   include "maps\entries\map15\mapsetups\s6.asm"		; 
+   include "maps\entries\map25\mapsetups\pt.asm"		; 
+   include "maps\entries\map25\mapsetups\s1.asm"		; 
+   include "maps\entries\map25\mapsetups\s2.asm"		; 
+   include "maps\entries\map25\mapsetups\s3.asm"		; 
+   include "maps\entries\map25\mapsetups\s4.asm"		; 
+   include "maps\entries\map25\mapsetups\s5.asm"		; 
+   include "maps\entries\map25\mapsetups\s6.asm"		; 
+   include "maps\entries\map31\mapsetups\pt.asm"		; 
+   include "maps\entries\map31\mapsetups\pt_33E.asm"		; 
+   include "maps\entries\map31\mapsetups\s1.asm"		; 
+   include "maps\entries\map31\mapsetups\s1_33E.asm"		; 
+   include "maps\entries\map31\mapsetups\s2.asm"		; 
+   include "maps\entries\map31\mapsetups\s2_33E.asm"		; 
+   include "maps\entries\map31\mapsetups\s3.asm"		; 
+   include "maps\entries\map31\mapsetups\s3_33E.asm"		; 
+   include "maps\entries\map31\mapsetups\s4.asm"		; 
+   include "maps\entries\map31\mapsetups\s5.asm"		; 
+   include "maps\entries\map31\mapsetups\s5_33E.asm"		; 
+   include "maps\entries\map31\mapsetups\s6.asm"		; 
+   include "maps\entries\map31\mapsetups\s6_33E.asm"		; 
+   include "maps\entries\map36\mapsetups\pt.asm"		; 
+   include "maps\entries\map36\mapsetups\pt_212.asm"		; 
+   include "maps\entries\map36\mapsetups\s1.asm"		; 
+   include "maps\entries\map36\mapsetups\s1_212.asm"		; 
+   include "maps\entries\map36\mapsetups\s2.asm"		; 
+   include "maps\entries\map36\mapsetups\s2_212.asm"		; 
+   include "maps\entries\map36\mapsetups\s3.asm"		; 
+   include "maps\entries\map36\mapsetups\s4.asm"		; 
+   include "maps\entries\map36\mapsetups\s5.asm"		; 
+   include "maps\entries\map36\mapsetups\s6.asm"		; 
+   include "maps\entries\map38\mapsetups\pt.asm"		; 
+   include "maps\entries\map38\mapsetups\s1.asm"		; 
+   include "maps\entries\map38\mapsetups\s2.asm"		; 
+   include "maps\entries\map38\mapsetups\s3.asm"		; 
+   include "maps\entries\map38\mapsetups\s4.asm"		; 
+   include "maps\entries\map38\mapsetups\s5.asm"		; 
+   include "maps\entries\map38\mapsetups\s6.asm"		; 
+   include "maps\entries\map39\mapsetups\pt.asm"		; 
+   include "maps\entries\map39\mapsetups\pt_33E.asm"		; 
+   include "maps\entries\map39\mapsetups\s1.asm"		; 
+   include "maps\entries\map39\mapsetups\s1_33E.asm"		; 
+   include "maps\entries\map39\mapsetups\s2.asm"		; 
+   include "maps\entries\map39\mapsetups\s3.asm"		; 
+   include "maps\entries\map39\mapsetups\s3_33E.asm"		; 
+   include "maps\entries\map39\mapsetups\s4.asm"		; 
+   include "maps\entries\map39\mapsetups\s5.asm"		; 
+   include "maps\entries\map39\mapsetups\s6.asm"		; 
+   include "maps\entries\map39\mapsetups\s6_33E.asm"		; 
+   include "maps\entries\map55\mapsetups\pt.asm"		; 
+   include "maps\entries\map55\mapsetups\s1.asm"		; 
+   include "maps\entries\map55\mapsetups\s2.asm"		; 
+   include "maps\entries\map55\mapsetups\s3.asm"		; 
+   include "maps\entries\map55\mapsetups\s4.asm"		; 
+   include "maps\entries\map55\mapsetups\s5.asm"		; 
+   include "maps\entries\map55\mapsetups\s6.asm"		; 
+   include "maps\entries\map00\mapsetups\pt.asm"		; 
+   include "maps\entries\map00\mapsetups\s1.asm"		; 
+   include "maps\entries\map00\mapsetups\s2.asm"		; 
+   include "maps\entries\map00\mapsetups\s3.asm"		; 
+   include "maps\entries\map00\mapsetups\s4.asm"		; 
+   include "maps\entries\map00\mapsetups\s5.asm"		; 
+   include "maps\entries\map00\mapsetups\s6.asm"		; 
+   include "maps\entries\map01\mapsetups\pt.asm"		; 
+   include "maps\entries\map01\mapsetups\s1.asm"		; 
+   include "maps\entries\map01\mapsetups\s2.asm"		; 
+   include "maps\entries\map01\mapsetups\s3.asm"		; 
+   include "maps\entries\map01\mapsetups\s4.asm"		; 
+   include "maps\entries\map01\mapsetups\s5.asm"		; 
+   include "maps\entries\map01\mapsetups\s6.asm"		; 
+   include "maps\entries\map02\mapsetups\pt.asm"		; 
+   include "maps\entries\map02\mapsetups\pt_212.asm"		; 
+   include "maps\entries\map02\mapsetups\s1.asm"		; 
+   include "maps\entries\map02\mapsetups\s1_212.asm"		; 
+   include "maps\entries\map02\mapsetups\s2.asm"		; 
+   include "maps\entries\map02\mapsetups\s2_212.asm"		; 
+   include "maps\entries\map02\mapsetups\s3.asm"		; 
+   include "maps\entries\map02\mapsetups\s4.asm"		; 
+   include "maps\entries\map02\mapsetups\s4_212.asm"		; 
+   include "maps\entries\map02\mapsetups\s5.asm"		; 
+   include "maps\entries\map02\mapsetups\s6.asm"		; 
+   include "maps\entries\map59\mapsetups\pt.asm"		; 
+   include "maps\entries\map59\mapsetups\s1.asm"		; 
+   include "maps\entries\map59\mapsetups\s2.asm"		; 
+   include "maps\entries\map59\mapsetups\s3.asm"		; 
+   include "maps\entries\map59\mapsetups\s4.asm"		; 
+   include "maps\entries\map59\mapsetups\s5.asm"		; 
+   include "maps\entries\map59\mapsetups\s6.asm"		; 
+   include "maps\entries\map28\mapsetups\pt.asm"		; 
+   include "maps\entries\map28\mapsetups\s1.asm"		; 
+   include "maps\entries\map28\mapsetups\s2.asm"		; 
+   include "maps\entries\map28\mapsetups\s3.asm"		; 
+   include "maps\entries\map28\mapsetups\s4.asm"		; 
+   include "maps\entries\map28\mapsetups\s5.asm"		; 
+   include "maps\entries\map28\mapsetups\s6.asm"		; 
+   include "maps\entries\map41\mapsetups\pt.asm"		; 
+   include "maps\entries\map41\mapsetups\s1.asm"		; 
+   include "maps\entries\map41\mapsetups\s2.asm"		; 
+   include "maps\entries\map41\mapsetups\s3.asm"		; 
+   include "maps\entries\map41\mapsetups\s4.asm"		; 
+   include "maps\entries\map41\mapsetups\s5.asm"		; 
+   include "maps\entries\map41\mapsetups\s6.asm"		; 
+   include "maps\entries\map37\mapsetups\pt.asm"		; 
+   include "maps\entries\map37\mapsetups\pt_3E7.asm"		; 
+   include "maps\entries\map37\mapsetups\s1.asm"		; 
+   include "maps\entries\map37\mapsetups\s1_3E7.asm"		; 
+   include "maps\entries\map37\mapsetups\s2.asm"		; 
+   include "maps\entries\map37\mapsetups\s2_3E7.asm"		; 
+   include "maps\entries\map37\mapsetups\s3.asm"		; 
+   include "maps\entries\map37\mapsetups\s4.asm"		; 
+   include "maps\entries\map37\mapsetups\s5.asm"		; 
+   include "maps\entries\map37\mapsetups\s6.asm"		; 
+   include "maps\entries\map37\mapsetups\s6_3E7.asm"		; 
+   include "maps\entries\map42\mapsetups\pt.asm"		; 
+   include "maps\entries\map42\mapsetups\s1.asm"		; 
+   include "maps\entries\map42\mapsetups\s2.asm"		; 
+   include "maps\entries\map42\mapsetups\s3.asm"		; 
+   include "maps\entries\map42\mapsetups\s4.asm"		; 
+   include "maps\entries\map42\mapsetups\s5.asm"		; 
+   include "maps\entries\map42\mapsetups\s6.asm"		; 
+   include "maps\entries\map45\mapsetups\pt.asm"		; 
+   include "maps\entries\map45\mapsetups\s1.asm"		; 
+   include "maps\entries\map45\mapsetups\s2.asm"		; 
+   include "maps\entries\map45\mapsetups\s3.asm"		; 
+   include "maps\entries\map45\mapsetups\s4.asm"		; 
+   include "maps\entries\map45\mapsetups\s5.asm"		; 
+   include "maps\entries\map45\mapsetups\s6.asm"		; 
+   include "maps\entries\map05\mapsetups\pt_212.asm"		; 
+   include "maps\entries\map05\mapsetups\pt_1C.asm"		; 
+   include "maps\entries\map05\mapsetups\s1_212.asm"		; 
+   include "maps\entries\map05\mapsetups\s1_1C.asm"		; 
+   include "maps\entries\map05\mapsetups\s2_212.asm"		; 
+   include "maps\entries\map05\mapsetups\s3_212.asm"		; 
+   include "maps\entries\map05\mapsetups\s4_212.asm"		; 
+   include "maps\entries\map05\mapsetups\s5_212.asm"		; 
+   include "maps\entries\map05\mapsetups\s6_212.asm"		; 
+   include "maps\entries\map16\mapsetups\pt_212.asm"		; 
+   include "maps\entries\map16\mapsetups\s1_212.asm"		; 
+   include "maps\entries\map16\mapsetups\s2_212.asm"		; 
+   include "maps\entries\map16\mapsetups\s3_212.asm"		; 
+   include "maps\entries\map16\mapsetups\s4_212.asm"		; 
+   include "maps\entries\map16\mapsetups\s5_212.asm"		; 
+   include "maps\entries\map16\mapsetups\s6_212.asm"		; 
+   include "maps\entries\map17\mapsetups\pt_212.asm"		; 
+   include "maps\entries\map17\mapsetups\s1_212.asm"		; 
+   include "maps\entries\map17\mapsetups\s2_212.asm"		; 
+   include "maps\entries\map17\mapsetups\s3_212.asm"		; 
+   include "maps\entries\map17\mapsetups\s4_212.asm"		; 
+   include "maps\entries\map17\mapsetups\s5_212.asm"		; 
+   include "maps\entries\map17\mapsetups\s6_212.asm"		; 
+   include "maps\entries\map18\mapsetups\pt_212.asm"		; 
+   include "maps\entries\map18\mapsetups\s1_212.asm"		; 
+   include "maps\entries\map18\mapsetups\s2_212.asm"		; 
+   include "maps\entries\map18\mapsetups\s3_212.asm"		; 
+   include "maps\entries\map18\mapsetups\s4_212.asm"		; 
+   include "maps\entries\map18\mapsetups\s5_212.asm"		; 
+   include "maps\entries\map18\mapsetups\s6_212.asm"		; 
+   include "maps\entries\map56\mapsetups\pt.asm"		; 
+   include "maps\entries\map56\mapsetups\s1.asm"		; 
+   include "maps\entries\map56\mapsetups\s2.asm"		; 
+   include "maps\entries\map56\mapsetups\s3.asm"		; 
+   include "maps\entries\map56\mapsetups\s4.asm"		; 
+   include "maps\entries\map56\mapsetups\s5.asm"		; 
+   include "maps\entries\map56\mapsetups\s6.asm"		; 
+   include "maps\entries\map59\mapsetups\pt_21F.asm"		; 
+   include "maps\entries\map59\mapsetups\s1_21F.asm"		; 
+   include "maps\entries\map59\mapsetups\s2_21F.asm"		; 
+   include "maps\entries\map59\mapsetups\s3_21F.asm"		; 
+   include "maps\entries\map59\mapsetups\s4_21F.asm"		; 
+   include "maps\entries\map59\mapsetups\s5_21F.asm"		; 
+   include "maps\entries\map59\mapsetups\s6_21F.asm"		; 
+   include "maps\entries\map03\mapsetups\pt_21F.asm"		; 
+   include "maps\entries\map03\mapsetups\s1_21F.asm"		; 
+   include "maps\entries\map03\mapsetups\s2_21F.asm"		; 
+   include "maps\entries\map03\mapsetups\s3_21F.asm"		; 
+   include "maps\entries\map03\mapsetups\s4_21F.asm"		; 
+   include "maps\entries\map03\mapsetups\s5_21F.asm"		; 
+   include "maps\entries\map03\mapsetups\s6_21F.asm"		; 
+   include "maps\entries\map19\mapsetups\pt_21F.asm"		; 
+   include "maps\entries\map19\mapsetups\pt_3D6.asm"		; 
+   include "maps\entries\map19\mapsetups\s1_21F.asm"		; 
+   include "maps\entries\map19\mapsetups\s1_3D6.asm"		; 
+   include "maps\entries\map19\mapsetups\s2_21F.asm"		; 
+   include "maps\entries\map19\mapsetups\s2_3D6.asm"		; 
+   include "maps\entries\map19\mapsetups\s3_21F.asm"		; 
+   include "maps\entries\map19\mapsetups\s4_21F.asm"		; 
+   include "maps\entries\map19\mapsetups\s5_21F.asm"		; 
+   include "maps\entries\map19\mapsetups\s6_21F.asm"		; 
+   include "maps\entries\map20\mapsetups\pt_21F.asm"		; 
+   include "maps\entries\map20\mapsetups\s1_21F.asm"		; 
+   include "maps\entries\map20\mapsetups\s2_21F.asm"		; 
+   include "maps\entries\map20\mapsetups\s3_21F.asm"		; 
+   include "maps\entries\map20\mapsetups\s4_21F.asm"		; 
+   include "maps\entries\map20\mapsetups\s5_21F.asm"		; 
+   include "maps\entries\map20\mapsetups\s6_21F.asm"		; 
+   include "maps\entries\map21\mapsetups\pt_21F.asm"		; 
+   include "maps\entries\map21\mapsetups\s1_21F.asm"		; 
+   include "maps\entries\map21\mapsetups\s2_21F.asm"		; 
+   include "maps\entries\map21\mapsetups\s3_21F.asm"		; 
+   include "maps\entries\map21\mapsetups\s4_21F.asm"		; 
+   include "maps\entries\map21\mapsetups\s5_21F.asm"		; 
+   include "maps\entries\map21\mapsetups\s6_21F.asm"		; 
 										align $4000
