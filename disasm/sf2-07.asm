@@ -671,7 +671,7 @@ loc_44282:
 
 	; End of function isOverworldMap
 
-OverworldMaps:      incbin "maps/overworldmaps.bin"
+OverworldMaps:      incbin "maps/global/overworldmaps.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -746,8 +746,8 @@ return_44336:
 
 	; End of function sub_44298
 
-OverworldFollowers: incbin "maps/overworldfollowoers.bin"
-Followers:          incbin "maps/followers.bin"
+OverworldFollowers: incbin "data/overworldfollowers.bin"
+Followers:          incbin "data/followers.bin"
 pt_eas_Followers:   dc.l eas_Follower1      
 										dc.l eas_Follower2      
 										dc.l eas_Follower3      
@@ -1309,8 +1309,8 @@ loc_448BC:
 
 	; End of function MoveEntitiesToBattlePositions
 
-   include "battles\battleneutralentities.asm"		; Battle entities which are not force members or enemies
-   include "battles\eas_battleneutralentities.asm"		; Entity actscripts for battle entities which are not force members or enemies
+   include "battles\global\battleneutralentities.asm"		; Battle entities which are not force members or enemies
+   include "battles\global\eas_battleneutralentities.asm"		; Entity actscripts for battle entities which are not force members or enemies
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2100,7 +2100,7 @@ loc_45674:
 	; End of function GetEntityPortraitAndSpeechSound
 
 SpriteToPortraitnBlip:
-										incbin "data/spriteportraitsnblips.bin"
+										incbin "data/spritedialogdefs.bin"
 																						; bowie
 
 ; =============== S U B R O U T I N E =======================================
@@ -6030,7 +6030,7 @@ j_ExecuteBattleCutscene_Intro_0:
 										bsr.w   ExecuteMapScript
 										movem.l (sp)+,d0/a0
 										bra.w   loc_47AE8
-   include "battles\cs_beforebattle.asm"		; Before battle cutscenes
+   include "battles\global\beforebattlecutscenes.asm"		; Before battle cutscenes
 loc_47AE8:
 										
 										movem.l (sp)+,d1
@@ -6063,7 +6063,7 @@ ExecuteBattleCutscene_Start:
 										bsr.w   ExecuteMapScript
 										movem.l (sp)+,d0/a0
 										bra.w   loc_47B8C
-   include "battles\cs_battlestart.asm"		; Battle start cutscenes
+   include "battles\global\battlestartcutscenes.asm"		; Battle start cutscenes
 loc_47B8C:
 										
 										movem.l (sp)+,d1
@@ -6102,7 +6102,7 @@ ExecuteBattleCutscene_Defeated:
 
 	; End of function ExecuteBattleCutscene_Defeated
 
-   include "battles\cs_enemydefeated.asm"		; Enemy defeated cutscenes
+   include "battles\global\battleendcutscenes.asm"		; Enemy defeated cutscenes
 
 ; START OF FUNCTION CHUNK FOR ExecuteBattleCutscene_Defeated
 
@@ -6136,7 +6136,7 @@ loc_47C88:
 
 ; END OF FUNCTION CHUNK FOR ExecuteBattleCutscene_Defeated
 
-EnemyLeaderPresence:incbin "battles/enemyleaderpresence.bin"
+EnemyLeaderPresence:incbin "battles/global/enemyleaderpresence.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6160,7 +6160,7 @@ ExecuteAfterBattleCutscene:
 
 	; End of function ExecuteAfterBattleCutscene
 
-   include "battles\cs_afterbattle.asm"		; After battle cutscenes
+   include "battles\global\afterbattlecutscenes.asm"		; After battle cutscenes
 
 ; START OF FUNCTION CHUNK FOR ExecuteAfterBattleCutscene
 
@@ -6349,7 +6349,7 @@ loc_47EC2:
 
 	; End of function ExecuteBattleCutscene_Region
 
-   include "battles\cs_regionactivated.asm"		; Region-activated cutscenes
+   include "battles\global\regionactivatedcutscenes.asm"		; Region-activated cutscenes
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6541,65 +6541,65 @@ sub_493EC:
 										dc.b $1E
 										dc.b $FF
 										dc.b $FF
-   include "battles\entries\battle01\bbcs.asm"		; Cutscene before battle 1
-   include "battles\entries\battle01\abcs.asm"		; Cutscene after battle 1
-   include "battles\entries\battle03\bbcs.asm"		; Cutscene before battle 3
-   include "battles\entries\battle04\bbcs.asm"		; Cutscene before battle 4
-   include "battles\entries\battle04\abcs.asm"		; Cutscene after battle 4
-   include "battles\entries\battle05\edcs.asm"		; Enemy defeated cutscene for battle 5
-   include "battles\entries\battle05\abcs.asm"		; Cutscene after battle 5
-   include "battles\entries\battle06\bbcs.asm"		; Cutscene before battle 6
-   include "battles\entries\battle07\bbcs.asm"		; Cutscene before battle 7
-   include "battles\entries\battle07\abcs.asm"		; Cutscene after battle 7
-   include "battles\entries\battle08\bbcs.asm"		; Cutscene before battle 8
-   include "battles\entries\battle08\abcs.asm"		; Cutscene after battle 8
-   include "battles\entries\battle11\bbcs.asm"		; Cutscene before battle 11
-   include "battles\entries\battle12\edcs.asm"		; Enemy defeated cutscene for battle 12
-   include "battles\entries\battle12\abcs.asm"		; Cutscene after battle 12
-   include "battles\entries\battle13\abcs.asm"		; Cutscene after battle 13
-   include "battles\entries\battle15\bbcs.asm"		; Cutscene before battle 15
-   include "battles\entries\battle15\abcs.asm"		; Cutscene after battle 15
-   include "battles\entries\battle16\bbcs.asm"		; Cutscene before battle 16
-   include "battles\entries\battle16\abcs.asm"		; Cutscene after battle 16
-   include "battles\entries\battle18\bbcs.asm"		; Cutscene before battle 18
-   include "battles\entries\battle18\abcs.asm"		; Cutscene after battle 18
-   include "battles\entries\battle20\abcs.asm"		; Cutscene after battle 20
-   include "battles\entries\battle21\bbcs.asm"		; Cutscene before battle 21
-   include "battles\entries\battle21\abcs.asm"		; Cutscene after battle 21
-   include "battles\entries\battle26\bbcs.asm"		; Cutscene before battle 26
-   include "battles\entries\battle26\abcs.asm"		; Cutscene after battle 26
-   include "battles\entries\battle27\bscs.asm"		; Start cutscene for battle 27
-   include "battles\entries\battle28\bbcs.asm"		; Cutscene before battle 28
-   include "battles\entries\battle28\abcs.asm"		; Cutscene after battle 28
-   include "battles\entries\battle29\bbcs.asm"		; Cutscene before battle 29
-   include "battles\entries\battle30\bbcs.asm"		; Cutscene before battle 30
-   include "battles\entries\battle30\abcs.asm"		; Cutscene after battle 30
-   include "battles\entries\battle31\bbcs.asm"		; Cutscene before battle 31
-   include "battles\entries\battle32\bbcs.asm"		; Cutscene before battle 32
-   include "battles\entries\battle32\rbcs_1.asm"		; Region-activated cutscene for battle 32
-   include "battles\entries\battle32\abcs.asm"		; Cutscene after battle 32
-   include "battles\entries\battle33\bbcs.asm"		; Cutscene before battle 33
-   include "battles\entries\battle33\abcs.asm"		; Cutscene after battle 33
-   include "battles\entries\battle34\bbcs.asm"		; Cutscene before battle 34
-   include "battles\entries\battle34\abcs.asm"		; Cutscene after battle 34
-   include "battles\entries\battle35\bbcs.asm"		; Cutscene before battle 35
-   include "battles\entries\battle36\bbcs.asm"		; Cutscene before battle 36
-   include "battles\entries\battle36\abcs.asm"		; Cutscene after battle 36
-   include "battles\entries\battle37\bbcs.asm"		; Cutscene before battle 37
-   include "battles\entries\battle37\abcs.asm"		; Cutscene after battle 37
-   include "battles\entries\battle38\bbcs.asm"		; Cutscene before battle 38
-   include "battles\entries\battle38\abcs.asm"		; Cutscene after battle 38
-   include "battles\entries\battle39\bbcs.asm"		; Cutscene before battle 39
-   include "battles\entries\battle40\bbcs.asm"		; Cutscene before battle 40
-   include "battles\entries\battle40\rbcs_1.asm"		; Region-activated cutscene 1 for battle 40
-   include "battles\entries\battle40\rbcs_2.asm"		; Region-activated cutscene 2 for battle 40
-   include "battles\entries\battle40\abcs.asm"		; Cutscene after battle 40
-   include "battles\entries\battle41\bbcs.asm"		; Cutscene before battle 41
-   include "battles\entries\battle42\bbcs.asm"		; Cutscene before battle 42
-   include "battles\entries\battle42\abcs.asm"		; Cutscene after battle 42
-   include "battles\entries\battle43\edcs.asm"		; Enemy defeated cutscene for battle 43
-   include "battles\entries\battle43\abcs.asm"		; Cutscene after battle 43
-   include "battles\entries\battle00\abcs.asm"		; Cutscene after battle 0
+   include "battles\entries\battle01\cs_beforebattle.asm"		; Cutscene before battle 1
+   include "battles\entries\battle01\cs_afterbattle.asm"		; Cutscene after battle 1
+   include "battles\entries\battle03\cs_beforebattle.asm"		; Cutscene before battle 3
+   include "battles\entries\battle04\cs_beforebattle.asm"		; Cutscene before battle 4
+   include "battles\entries\battle04\cs_afterbattle.asm"		; Cutscene after battle 4
+   include "battles\entries\battle05\cs_battleend.asm"		; Enemy defeated cutscene for battle 5
+   include "battles\entries\battle05\cs_afterbattle.asm"		; Cutscene after battle 5
+   include "battles\entries\battle06\cs_beforebattle.asm"		; Cutscene before battle 6
+   include "battles\entries\battle07\cs_beforebattle.asm"		; Cutscene before battle 7
+   include "battles\entries\battle07\cs_afterbattle.asm"		; Cutscene after battle 7
+   include "battles\entries\battle08\cs_beforebattle.asm"		; Cutscene before battle 8
+   include "battles\entries\battle08\cs_afterbattle.asm"		; Cutscene after battle 8
+   include "battles\entries\battle11\cs_beforebattle.asm"		; Cutscene before battle 11
+   include "battles\entries\battle12\cs_battleend.asm"		; Enemy defeated cutscene for battle 12
+   include "battles\entries\battle12\cs_afterbattle.asm"		; Cutscene after battle 12
+   include "battles\entries\battle13\cs_afterbattle.asm"		; Cutscene after battle 13
+   include "battles\entries\battle15\cs_beforebattle.asm"		; Cutscene before battle 15
+   include "battles\entries\battle15\cs_afterbattle.asm"		; Cutscene after battle 15
+   include "battles\entries\battle16\cs_beforebattle.asm"		; Cutscene before battle 16
+   include "battles\entries\battle16\cs_afterbattle.asm"		; Cutscene after battle 16
+   include "battles\entries\battle18\cs_beforebattle.asm"		; Cutscene before battle 18
+   include "battles\entries\battle18\cs_afterbattle.asm"		; Cutscene after battle 18
+   include "battles\entries\battle20\cs_afterbattle.asm"		; Cutscene after battle 20
+   include "battles\entries\battle21\cs_beforebattle.asm"		; Cutscene before battle 21
+   include "battles\entries\battle21\cs_afterbattle.asm"		; Cutscene after battle 21
+   include "battles\entries\battle26\cs_beforebattle.asm"		; Cutscene before battle 26
+   include "battles\entries\battle26\cs_afterbattle.asm"		; Cutscene after battle 26
+   include "battles\entries\battle27\cs_battlestart.asm"		; Start cutscene for battle 27
+   include "battles\entries\battle28\cs_beforebattle.asm"		; Cutscene before battle 28
+   include "battles\entries\battle28\cs_afterbattle.asm"		; Cutscene after battle 28
+   include "battles\entries\battle29\cs_beforebattle.asm"		; Cutscene before battle 29
+   include "battles\entries\battle30\cs_beforebattle.asm"		; Cutscene before battle 30
+   include "battles\entries\battle30\cs_afterbattle.asm"		; Cutscene after battle 30
+   include "battles\entries\battle31\cs_beforebattle.asm"		; Cutscene before battle 31
+   include "battles\entries\battle32\cs_beforebattle.asm"		; Cutscene before battle 32
+   include "battles\entries\battle32\cs_regiontriggered_1.asm"		; Region-activated cutscene for battle 32
+   include "battles\entries\battle32\cs_afterbattle.asm"		; Cutscene after battle 32
+   include "battles\entries\battle33\cs_beforebattle.asm"		; Cutscene before battle 33
+   include "battles\entries\battle33\cs_afterbattle.asm"		; Cutscene after battle 33
+   include "battles\entries\battle34\cs_beforebattle.asm"		; Cutscene before battle 34
+   include "battles\entries\battle34\cs_afterbattle.asm"		; Cutscene after battle 34
+   include "battles\entries\battle35\cs_beforebattle.asm"		; Cutscene before battle 35
+   include "battles\entries\battle36\cs_beforebattle.asm"		; Cutscene before battle 36
+   include "battles\entries\battle36\cs_afterbattle.asm"		; Cutscene after battle 36
+   include "battles\entries\battle37\cs_beforebattle.asm"		; Cutscene before battle 37
+   include "battles\entries\battle37\cs_afterbattle.asm"		; Cutscene after battle 37
+   include "battles\entries\battle38\cs_beforebattle.asm"		; Cutscene before battle 38
+   include "battles\entries\battle38\cs_afterbattle.asm"		; Cutscene after battle 38
+   include "battles\entries\battle39\cs_beforebattle.asm"		; Cutscene before battle 39
+   include "battles\entries\battle40\cs_beforebattle.asm"		; Cutscene before battle 40
+   include "battles\entries\battle40\cs_regiontriggered_1.asm"		; Region-activated cutscene 1 for battle 40
+   include "battles\entries\battle40\cs_regiontriggered_2.asm"		; Region-activated cutscene 2 for battle 40
+   include "battles\entries\battle40\cs_afterbattle.asm"		; Cutscene after battle 40
+   include "battles\entries\battle41\cs_beforebattle.asm"		; Cutscene before battle 41
+   include "battles\entries\battle42\cs_beforebattle.asm"		; Cutscene before battle 42
+   include "battles\entries\battle42\cs_afterbattle.asm"		; Cutscene after battle 42
+   include "battles\entries\battle43\cs_battleend.asm"		; Enemy defeated cutscene for battle 43
+   include "battles\entries\battle43\cs_afterbattle.asm"		; Cutscene after battle 43
+   include "battles\entries\battle00\cs_afterbattle.asm"		; Cutscene after battle 0
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6805,7 +6805,7 @@ loc_4F6CE:
 
 	; End of function sub_4F570
 
-   include "maps\mapsetupstable.asm"		; Map setups table
+   include "maps\global\mapsetups.asm"		; Map setups table
    include "maps\entries\map66\mapsetups\pt.asm"		; 
    include "maps\entries\map66\mapsetups\s1.asm"		; 
    include "maps\entries\map66\mapsetups\s2.asm"		; 

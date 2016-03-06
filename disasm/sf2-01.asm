@@ -1197,7 +1197,7 @@ return_B1C:
 
 	; End of function ParseFadingFX
 
-FadingData:         incbin "graphics/fadingdata.bin"
+FadingData:         incbin "graphics/technical/fadingdata.bin"
 																						; 80 : end
 																						; 8x : go x backward
 
@@ -5609,7 +5609,7 @@ loc_307E:
 
 	; End of function InitDisplay
 
-plt_DisplayInit:    incbin "graphics/displayinitpalette.bin"
+plt_DisplayInit:    incbin "graphics/technical/displayinitpalette.bin"
 																						; Palette for UI/Sprites
 
 ; =============== S U B R O U T I N E =======================================
@@ -5719,7 +5719,7 @@ loc_3196:
 
 	; End of function sub_3158
 
-MapOffsetHashTable: incbin "maps/mapoffsethashtable.bin"
+MapOffsetHashTable: incbin "maps/global/mapoffsethashtable.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -12769,7 +12769,7 @@ loc_7118:
 	; End of function Main
 
 DebugModeAvailableMaps:
-										incbin "maps/debugmodeavailablemaps.bin"
+										incbin "maps/global/debugmodeavailablemaps.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -13530,7 +13530,7 @@ loc_7982:
 
 	; End of function AlterMapIndexIfChanged
 
-FlagSwitchedMaps:   incbin "maps/flagswitchedmaps.bin"
+FlagSwitchedMaps:   incbin "maps/global/flagswitchedmaps.bin"
 																						; maps to change if flags are set
 																						; map idx (word), flag (word), new map idx (word)
 
@@ -13598,9 +13598,9 @@ loc_7A30:
 
 	; End of function GetNextBattleOnMap
 
-BattleMapCoords:    incbin "battles/battlemapcoords.bin"
-SavepointMapCoords: incbin "maps/savepointmapcoords.bin"
-RaftResetMapCoords: incbin "maps/raftresetmapcoords.bin"
+BattleMapCoords:    incbin "battles/global/battlemapcoords.bin"
+SavepointMapCoords: incbin "maps/global/savepointmapcoords.bin"
+RaftResetMapCoords: incbin "maps/global/raftresetmapcoords.bin"
 
 ; =============== S U B R O U T I N E =======================================
 

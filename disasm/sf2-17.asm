@@ -91,15 +91,15 @@ AllyStats27:        incbin "data/allies/stats/allystats27.bin"
 AllyStats28:        incbin "data/allies/stats/allystats28.bin"
 AllyStats29:        incbin "data/allies/stats/allystats29.bin"
 AllyStartData:      incbin "data/allies/allystartdata.bin"
-ClassData:          incbin "data/classes/classdata.bin"
+ClassData:          incbin "data/allies/classes/classdata.bin"
 JewelsEndScreenLayout:
-										incbin "graphics/specialscreens/endingjewelslayout.bin"
-plt_JewelsEndScreen:incbin "graphics/specialscreens/endingjewelspalette.bin"
+										incbin "graphics/specialscreens/endingjewels/endingjewelslayout.bin"
+plt_JewelsEndScreen:incbin "graphics/specialscreens/endingjewels/endingjewelspalette.bin"
 JewelsEndScreenTiles:
-										incbin "graphics/specialscreens/endingjewelstiles.bin"
-plt_SuspendString:  incbin "graphics/specialscreens/suspendstringpalette.bin"
-SuspendStringTiles: incbin "graphics/specialscreens/suspendstringtiles.bin"
-BasePalette:        incbin "graphics/basepalette.bin"
+										incbin "graphics/specialscreens/endingjewels/endingjewelstiles.bin"
+plt_SuspendString:  incbin "graphics/specialscreens/suspendscreen/suspendstringpalette.bin"
+SuspendStringTiles: incbin "graphics/specialscreens/suspendscreen/suspendstringtiles.bin"
+BasePalette:        incbin "graphics/technical/basepalette.bin"
 																						; two almost identical palettes which look like UI/sprites palette
-BaseTiles:          incbin "graphics/basetiles.bin"
+BaseTiles:          incbin "graphics/technical/basetiles.bin"
 										align $8000

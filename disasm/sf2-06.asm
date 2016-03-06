@@ -181,9 +181,9 @@ loc_2818E:
 
 	; End of function CheckStartButtonAtSegaLogo
 
-SegaLogoColors:     incbin "graphics/segalogocolors.bin"
-SegaLogoPalette:    incbin "graphics/segalogopalette.bin"
-SegaLogo:           incbin "graphics/segalogo.bin"
+SegaLogoColors:     incbin "graphics/technical/segalogocolors.bin"
+SegaLogoPalette:    incbin "graphics/technical/segalogopalette.bin"
+SegaLogo:           incbin "graphics/technical/segalogo.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1249,7 +1249,7 @@ return_28FBA:
 	; End of function CheckConfigurationModeCheat
 
 InputSequence_ConfigurationMode:
-										incbin "data/inputsequence_configurationmode.bin"
+										incbin "data/technical/configurationmodeinputsequence.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1275,22 +1275,22 @@ return_28FEE:
 	; End of function CheckDebugModeCheat
 
 InputSequence_DebugMode:
-										incbin "data/inputsequence_debugmode.bin"
-VariableWidthFont:  incbin "graphics/fonts/variablewidthfont.bin"
+										incbin "data/technical/debugmodeinputsequence.bin"
+VariableWidthFont:  incbin "graphics/technical/fonts/variablewidthfont.bin"
 MenuTiles_Uncompressed:
-										incbin "graphics/menus/menutiles.bin"
-MenuTiles_Item:     incbin "graphics/menus/menutilesitem.bin"
+										incbin "graphics/technical/menus/menutiles.bin"
+MenuTiles_Item:     incbin "graphics/technical/menus/menutilesitem.bin"
 MenuTiles_BattleField:
-										incbin "graphics/menus/menutilesbattlefield.bin"
-MenuTiles_Church:   incbin "graphics/menus/menutileschurch.bin"
-MenuTiles_Shop:     incbin "graphics/menus/menutilesshop.bin"
-MenuTiles_Caravan:  incbin "graphics/menus/menutilescaravan.bin"
-MenuTiles_Depot:    incbin "graphics/menus/menutilesdepot.bin"
-MenuTiles_YesNo:    incbin "graphics/menus/menutilesyesno.bin"
-plt_WitchChoice:    incbin "graphics/specialscreens/whitchchoicepalette.bin"
+										incbin "graphics/technical/menus/menutilesbattlefield.bin"
+MenuTiles_Church:   incbin "graphics/technical/menus/menutileschurch.bin"
+MenuTiles_Shop:     incbin "graphics/technical/menus/menutilesshop.bin"
+MenuTiles_Caravan:  incbin "graphics/technical/menus/menutilescaravan.bin"
+MenuTiles_Depot:    incbin "graphics/technical/menus/menutilesdepot.bin"
+MenuTiles_YesNo:    incbin "graphics/technical/menus/menutilesyesno.bin"
+plt_WitchChoice:    incbin "graphics/specialscreens/witchscreen/witchchoicepalette.bin"
 WitchBubbleAnimation:
-										incbin "graphics/specialscreens/whitchbubbleanimation.bin"
-SpeechBalloonTiles: incbin "graphics/specialscreens/speechballoontiles.bin"
+										incbin "graphics/specialscreens/witchscreen/witchbubbleanimation.bin"
+SpeechBalloonTiles: incbin "graphics/specialscreens/witchscreen/speechballoontiles.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1536,11 +1536,11 @@ loc_2C76E:
 
 	; End of function LoadTitleScreenFont
 
-UnusedCloudTiles:   incbin "graphics/unusedcloudtiles.bin"
+UnusedCloudTiles:   incbin "graphics/technical/unusedcloudtiles.bin"
 																						; no reference to that ? looks like compressed tiles but no idea of what they represent (32x8 tiles)
-StaticWidthFont:    incbin "graphics/fonts/staticwidthfont.bin"
+StaticWidthFont:    incbin "graphics/technical/fonts/staticwidthfont.bin"
 																						; used for title screen
-TitleScreenPalettes:incbin "graphics/specialscreens/titlescreenpalettes.bin"
+TitleScreenPalettes:incbin "graphics/specialscreens/titlescreen/titlescreenpalettes.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1618,24 +1618,24 @@ loc_2E182:
 
 TextBankTreePointers:
 										incbin "scripting/textbanks/textbanktreepointers.bin"
-TextBankTreeData:   incbin "scripting/textbanktreedata.bin"
-TextBank00:         incbin "scripting/textbanks/scriptbank00.bin"
-TextBank01:         incbin "scripting/textbanks/scriptbank01.bin"
-TextBank02:         incbin "scripting/textbanks/scriptbank02.bin"
-TextBank03:         incbin "scripting/textbanks/scriptbank03.bin"
-TextBank04:         incbin "scripting/textbanks/scriptbank04.bin"
-TextBank05:         incbin "scripting/textbanks/scriptbank05.bin"
-TextBank06:         incbin "scripting/textbanks/scriptbank06.bin"
-TextBank07:         incbin "scripting/textbanks/scriptbank07.bin"
-TextBank08:         incbin "scripting/textbanks/scriptbank08.bin"
-TextBank09:         incbin "scripting/textbanks/scriptbank09.bin"
-TextBank10:         incbin "scripting/textbanks/scriptbank10.bin"
-TextBank11:         incbin "scripting/textbanks/scriptbank11.bin"
-TextBank12:         incbin "scripting/textbanks/scriptbank12.bin"
-TextBank13:         incbin "scripting/textbanks/scriptbank13.bin"
-TextBank14:         incbin "scripting/textbanks/scriptbank14.bin"
-TextBank15:         incbin "scripting/textbanks/scriptbank15.bin"
-TextBank16:         incbin "scripting/textbanks/scriptbank16.bin"
+TextBankTreeData:   incbin "scripting/textbanks/textbanktreedata.bin"
+TextBank00:         incbin "scripting/textbanks/textbank00.bin"
+TextBank01:         incbin "scripting/textbanks/textbank01.bin"
+TextBank02:         incbin "scripting/textbanks/textbank02.bin"
+TextBank03:         incbin "scripting/textbanks/textbank03.bin"
+TextBank04:         incbin "scripting/textbanks/textbank04.bin"
+TextBank05:         incbin "scripting/textbanks/textbank05.bin"
+TextBank06:         incbin "scripting/textbanks/textbank06.bin"
+TextBank07:         incbin "scripting/textbanks/textbank07.bin"
+TextBank08:         incbin "scripting/textbanks/textbank08.bin"
+TextBank09:         incbin "scripting/textbanks/textbank09.bin"
+TextBank10:         incbin "scripting/textbanks/textbank10.bin"
+TextBank11:         incbin "scripting/textbanks/textbank11.bin"
+TextBank12:         incbin "scripting/textbanks/textbank12.bin"
+TextBank13:         incbin "scripting/textbanks/textbank13.bin"
+TextBank14:         incbin "scripting/textbanks/textbank14.bin"
+TextBank15:         incbin "scripting/textbanks/textbank15.bin"
+TextBank16:         incbin "scripting/textbanks/textbank16.bin"
 pt_TextBanks:       dc.l TextBank00
 										dc.l TextBank01
 										dc.l TextBank02

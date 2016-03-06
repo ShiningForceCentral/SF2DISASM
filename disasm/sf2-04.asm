@@ -3597,7 +3597,7 @@ loc_19E58:
 
 	; End of function GetBattleBackground
 
-TerrainBackgrounds: incbin "battles/terrainbackgrounds.bin"
+TerrainBackgrounds: incbin "battles/global/terrainbackgrounds.bin"
 																						; mostly used for overworld battles, I guess !
 
 ; =============== S U B R O U T I N E =======================================
@@ -14996,7 +14996,7 @@ AllyBattleSprites:  incbin "data/allies/allybattlesprites.bin"
 																						; table : class -> sprite
 EnemyBattleSprites: incbin "data/enemies/enemybattlesprites.bin"
 WeaponBattleSprites:incbin "data/items/weaponsprites.bin"
-CustomBackgrounds:  incbin "battles/custombackgrounds.bin"
+CustomBackgrounds:  incbin "battles/global/custombackgrounds.bin"
 byte_1FAB8:         dc.b 0
 										dc.b   0
 										dc.b   0

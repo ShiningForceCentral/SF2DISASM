@@ -2076,7 +2076,7 @@ return_8538:
 
 	; End of function GetSomethingClassType
 
-ClassTypes:         incbin "data/classes/classtypes.bin"
+ClassTypes:         incbin "data/allies/classes/classtypes.bin"
 																						; 0,1,2 = base class, promoted class, special promoted class
 
 ; =============== S U B R O U T I N E =======================================
@@ -7220,7 +7220,7 @@ return_ACC8:
 
 	; End of function CalculateCriticalHit
 
-CriticalHitSettings:incbin "data/criticalhitsettings.bin"
+CriticalHitSettings:incbin "data/allies/classes/criticalhitsettings.bin"
 																						; values regarding critical hit chance/double attack/etc?
 
 ; =============== S U B R O U T I N E =======================================
@@ -9108,8 +9108,8 @@ loc_BE4C:
 
 	; End of function WriteSkirmishScript_EnemyDropItem
 
-EnemyItemDrops:     incbin "battles/enemyitemdrops.bin"
-EnemyGold:          incbin "battles/enemygold.bin"
+EnemyItemDrops:     incbin "battles/global/enemyitemdrops.bin"
+EnemyGold:          incbin "battles/global/enemygold.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -9458,7 +9458,7 @@ loc_C232:
 
 	; End of function GetResistanceToSpell
 
-SpellElements:      incbin "data/spellelements.bin"
+SpellElements:      incbin "data/spells/spellelements.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -12051,7 +12051,7 @@ loc_D81C:
 	; End of function sub_D7AA
 
 MoveTypeTerrainCosts:
-										incbin "battles/movetypeterraincosts.bin"
+										incbin "battles/global/movetypeterraincosts.bin"
 byte_D8F4:          dc.b $FF                ; related to move types
 										dc.b $C
 										dc.b $B

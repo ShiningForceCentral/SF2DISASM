@@ -2947,7 +2947,7 @@ loc_21F5C:
 	; End of function PickMithrilWeapon
 
 MithrilWeaponClassLists:
-										incbin "data/classes/mithrilweaponclasses.bin"
+										incbin "data/allies/classes/mithrilweaponclasses.bin"
 MithrilWeaponLists: incbin "data/items/mithrilweapons.bin"
 
 ; =============== S U B R O U T I N E =======================================
@@ -5643,7 +5643,7 @@ sub_2364C:
 
 	; End of function sub_2364C
 
-UnitCursorTiles:    incbin "graphics/unitcursortiles.bin"
+UnitCursorTiles:    incbin "graphics/technical/unitcursortiles.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -5945,7 +5945,7 @@ GetChestGoldAmount:
 
 	; End of function GetChestGoldAmount
 
-ChestGoldAmounts:   incbin "data/chestgoldamounts.bin"
+ChestGoldAmounts:   incbin "maps/global/chestgoldamounts.bin"
 
 ; START OF FUNCTION CHUNK FOR sub_23862
 

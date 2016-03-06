@@ -6,8 +6,8 @@ echo -------------------------------------------------------------
 echo Start of assembly
 echo Assembling sound driver ...
 cd ../disasm/sound/
-..\..\tools\asw\asw.exe ..\cube.asm
-..\..\tools\asw\p2bin.exe ..\cube.p .\sounddriver.bin -k -r $0000-$1fff
+..\..\tools\asw\asw.exe ..\sounddriver.asm
+..\..\tools\asw\p2bin.exe ..\sounddriver.p .\sounddriver.bin -k -r $0000-$1fff
 cd ../
 echo Assembling game ...
 SET "buildname=sf2build-%date:~6,4%%date:~3,2%%date:~0,2%-%time:~0,2%%time:~3,2%%time:~6,2%.bin"

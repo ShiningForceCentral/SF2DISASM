@@ -3244,7 +3244,7 @@ loc_1B1A60:
 
 	; End of function sub_1B1A28
 
-EnemyData:          incbin "battles/enemydata.bin"
+EnemyData:          incbin "battles/global/enemydata.bin"
 pt_BattleSpriteSets:dc.l BattleSpriteSet00  ; battle entity data
 										dc.l BattleSpriteSet01
 										dc.l BattleSpriteSet02
@@ -3335,7 +3335,7 @@ BattleSpriteSet41:  incbin "battles/entries/battle41/spriteset.bin"
 BattleSpriteSet42:  incbin "battles/entries/battle42/spriteset.bin"
 BattleSpriteSet43:  incbin "battles/entries/battle43/spriteset.bin"
 BattleSpriteSet44:  incbin "battles/entries/battle44/spriteset.bin"
-SpecialBattles:     incbin "battles/specialbattles.bin"
+SpecialBattles:     incbin "battles/global/specialbattles.bin"
 unk_1B6DBC:         dc.b   5
 										dc.b   0
 										dc.b $23 
@@ -3366,6 +3366,6 @@ unk_1B6DD5:         dc.b   2
 										dc.b $54 
 										dc.b   1
 										dc.b $50 
-plt_EndKiss:        incbin "graphics/specialscreens/endingkisspalette.bin"
-EndKissPicture:     incbin "graphics/specialscreens/endingkisstiles.bin"
+plt_EndKiss:        incbin "graphics/specialscreens/endingkiss/endingkisspalette.bin"
+EndKissPicture:     incbin "graphics/specialscreens/endingkiss/endingkisstiles.bin"
 										align $4000

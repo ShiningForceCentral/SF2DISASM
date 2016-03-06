@@ -1493,7 +1493,7 @@ loc_1097A:
 
 	; End of function LoadHighlightableIcon
 
-IconHighlightTiles: incbin "graphics/iconhighlighttiles.bin"
+IconHighlightTiles: incbin "graphics/technical/iconhighlighttiles.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1902,12 +1902,12 @@ loc_10E18:
 
 	; End of function sub_10DE2
 
-DiamondMenuLayout:  incbin "graphics/menus/diamondmenulayout.bin"
+DiamondMenuLayout:  incbin "graphics/technical/menus/diamondmenulayout.bin"
 																						; tile layout for diamond menus
 UnidentifiedLayout01:
-										incbin "graphics/unidentifiedlayout01.bin"
+										incbin "graphics/technical/menus/unidentifiedlayout01.bin"
 UnidentifiedLayout02:
-										incbin "graphics/unidentifiedlayout02.bin"
+										incbin "graphics/technical/menus/unidentifiedlayout02.bin"
 pt_SpellLevelBarTiles:
 										dc.l unk_110E4
 										dc.l unk_110E4
@@ -2431,7 +2431,7 @@ DrawBattleEquipWindowStats:
 	; End of function DrawBattleEquipWindowStats
 
 BattleEquipWindowLayout:
-										incbin "graphics/windowlayouts/battleequipwindowlayout.bin"
+										incbin "graphics/technical/windowlayouts/battleequipwindowlayout.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -4194,14 +4194,14 @@ return_1264C:
 
 	; End of function GetPortraitIdx
 
-WindowBorderTiles:  incbin "graphics/windowbordertiles.bin"
+WindowBorderTiles:  incbin "graphics/technical/windowbordertiles.bin"
 																						; compressed
 PortraitWindowLayout:
-										incbin "graphics/windowlayouts/portraitwindowlayout.bin"
+										incbin "graphics/technical/windowlayouts/portraitwindowlayout.bin"
 AllyKillDefeatWindowLayout:
-										incbin "graphics/windowlayouts/allykilldefeatwindowlayout.bin"
+										incbin "graphics/technical/windowlayouts/allykilldefeatwindowlayout.bin"
 CharacterStatsWindowLayout:
-										incbin "graphics/windowlayouts/characterstatsdefeatwindowlayout.bin"
+										incbin "graphics/technical/windowlayouts/characterstatsdefeatwindowlayout.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6213,7 +6213,7 @@ aDef:               dc.b 'DEF  ',0
 aMov:               dc.b 'MOV  ',0
 aAgi:               dc.b 'AGI  ',0
 aNothing_2:         dc.b '\Nothing',0
-TextHighlightTiles: incbin "graphics/texthighlighttiles.bin"
+TextHighlightTiles: incbin "graphics/technical/texthighlighttiles.bin"
 unk_13EDE:          dc.b $C0 
 										dc.b $20
 										dc.b $C0 
@@ -9897,7 +9897,7 @@ loc_15A54:
 	; End of function sub_15A3E
 
 BattleConfigWindowLayout:
-										incbin "graphics/windowlayouts/battleconfigwindowlayout.bin"
+										incbin "graphics/technical/windowlayouts/battleconfigwindowlayout.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -10396,11 +10396,11 @@ sub_1604A:
 	; End of function sub_1604A
 
 NameEntryWindowLayout:
-										incbin "graphics/windowlayouts/nameentrywindowlayout.bin"
+										incbin "graphics/technical/windowlayouts/nameentrywindowlayout.bin"
 AlphabetWindowLayout:
-										incbin "graphics/windowlayouts/alphabetwindowlayout.bin"
+										incbin "graphics/technical/windowlayouts/alphabetwindowlayout.bin"
 AlphabetEndWindowLayout:
-										incbin "graphics/windowlayouts/alphabetendwindowwindowlayout.bin"
+										incbin "graphics/technical/windowlayouts/alphabetendwindowwindowlayout.bin"
 unk_1623A:          dc.b $3D 
 										dc.b $FF
 										dc.b $80 
@@ -10864,7 +10864,7 @@ loc_165FA:
 
 	; End of function sub_165C0
 
-TimerWindowLayout:  incbin "graphics/windowlayouts/timerwindowwindowlayout.bin"
+TimerWindowLayout:  incbin "graphics/technical/windowlayouts/timerwindowwindowlayout.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -11276,9 +11276,9 @@ loc_16A5C:
 	; End of function sub_16A30
 
 MemberStatsWindowLayout:
-										incbin "graphics/windowlayouts/memberstatswindowslayout.bin"
+										incbin "graphics/technical/windowlayouts/memberstatswindowslayout.bin"
 ItemDefs:           incbin "data/items/itemdefs.bin"
 SpellDefs:          incbin "data/spells/spelldefs.bin"
 ItemNames:          incbin "data/items/itemnames.bin"
-ClassNames:         incbin "data/classes/classnames.bin"
+ClassNames:         incbin "data/allies/classes/classnames.bin"
 										align $8000

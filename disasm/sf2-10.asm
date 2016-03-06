@@ -238,10 +238,10 @@ loc_10029E:
 
 	; End of function titleScreenEnd
 
-plt_TitleScreen:    incbin "graphics/specialscreens/titlepalettes.bin"
-TitleScreenTiles:   incbin "graphics/specialscreens/titletiles.bin"
-TitleScreenLayoutA: incbin "graphics/specialscreens/titlelayoutA.bin"
-TitleScreenLayoutB: incbin "graphics/specialscreens/titlelayoutB.bin"
+plt_TitleScreen:    incbin "graphics/specialscreens/titlescreen/titlepalettes.bin"
+TitleScreenTiles:   incbin "graphics/specialscreens/titlescreen/titletiles.bin"
+TitleScreenLayoutA: incbin "graphics/specialscreens/titlescreen/titlelayoutA.bin"
+TitleScreenLayoutB: incbin "graphics/specialscreens/titlescreen/titlelayoutB.bin"
 pt_Backgrounds:     dc.l Background00
 										dc.l Background01
 										dc.l Background02
@@ -272,43 +272,43 @@ pt_Backgrounds:     dc.l Background00
 										dc.l Background27
 										dc.l Background28
 										dc.l Background13
-Background00:       incbin "graphics/backgrounds/background00.bin"
-Background01:       incbin "graphics/backgrounds/background01.bin"
-Background02:       incbin "graphics/backgrounds/background02.bin"
-Background03:       incbin "graphics/backgrounds/background03.bin"
-Background04:       incbin "graphics/backgrounds/background04.bin"
-Background05:       incbin "graphics/backgrounds/background05.bin"
-Background06:       incbin "graphics/backgrounds/background06.bin"
-Background07:       incbin "graphics/backgrounds/background07.bin"
-Background08:       incbin "graphics/backgrounds/background08.bin"
-Background09:       incbin "graphics/backgrounds/background09.bin"
-Background10:       incbin "graphics/backgrounds/background10.bin"
-Background11:       incbin "graphics/backgrounds/background11.bin"
-Background12:       incbin "graphics/backgrounds/background12.bin"
-Background13:       incbin "graphics/backgrounds/background13.bin"
-Background14:       incbin "graphics/backgrounds/background14.bin"
-Background15:       incbin "graphics/backgrounds/background15.bin"
-Background16:       incbin "graphics/backgrounds/background16.bin"
-Background17:       incbin "graphics/backgrounds/background17.bin"
-Background18:       incbin "graphics/backgrounds/background18.bin"
-Background19:       incbin "graphics/backgrounds/background19.bin"
-Background20:       incbin "graphics/backgrounds/background20.bin"
-Background23:       incbin "graphics/backgrounds/background23.bin"
-Background24:       incbin "graphics/backgrounds/background24.bin"
-Background25:       incbin "graphics/backgrounds/background25.bin"
-Background26:       incbin "graphics/backgrounds/background26.bin"
-Background27:       incbin "graphics/backgrounds/background27.bin"
-Background28:       incbin "graphics/backgrounds/background28.bin"
+Background00:       incbin "graphics/battles/backgrounds/background00.bin"
+Background01:       incbin "graphics/battles/backgrounds/background01.bin"
+Background02:       incbin "graphics/battles/backgrounds/background02.bin"
+Background03:       incbin "graphics/battles/backgrounds/background03.bin"
+Background04:       incbin "graphics/battles/backgrounds/background04.bin"
+Background05:       incbin "graphics/battles/backgrounds/background05.bin"
+Background06:       incbin "graphics/battles/backgrounds/background06.bin"
+Background07:       incbin "graphics/battles/backgrounds/background07.bin"
+Background08:       incbin "graphics/battles/backgrounds/background08.bin"
+Background09:       incbin "graphics/battles/backgrounds/background09.bin"
+Background10:       incbin "graphics/battles/backgrounds/background10.bin"
+Background11:       incbin "graphics/battles/backgrounds/background11.bin"
+Background12:       incbin "graphics/battles/backgrounds/background12.bin"
+Background13:       incbin "graphics/battles/backgrounds/background13.bin"
+Background14:       incbin "graphics/battles/backgrounds/background14.bin"
+Background15:       incbin "graphics/battles/backgrounds/background15.bin"
+Background16:       incbin "graphics/battles/backgrounds/background16.bin"
+Background17:       incbin "graphics/battles/backgrounds/background17.bin"
+Background18:       incbin "graphics/battles/backgrounds/background18.bin"
+Background19:       incbin "graphics/battles/backgrounds/background19.bin"
+Background20:       incbin "graphics/battles/backgrounds/background20.bin"
+Background23:       incbin "graphics/battles/backgrounds/background23.bin"
+Background24:       incbin "graphics/battles/backgrounds/background24.bin"
+Background25:       incbin "graphics/battles/backgrounds/background25.bin"
+Background26:       incbin "graphics/battles/backgrounds/background26.bin"
+Background27:       incbin "graphics/battles/backgrounds/background27.bin"
+Background28:       incbin "graphics/battles/backgrounds/background28.bin"
 pt_InvocationSprites:
 										dc.l InvocationSpriteDao
 										dc.l InvocationSpriteApollo
 										dc.l InvocationSpriteNeptun
 										dc.l InvocationSpriteAtlas
-InvocationSpriteDao:incbin "graphics/spells/invocations/dao.bin"
+InvocationSpriteDao:incbin "graphics/battles/spells/invocations/dao.bin"
 InvocationSpriteApollo:
-										incbin "graphics/spells/invocations/apollo.bin"
+										incbin "graphics/battles/spells/invocations/apollo.bin"
 InvocationSpriteNeptun:
-										incbin "graphics/spells/invocations/neptun.bin"
+										incbin "graphics/battles/spells/invocations/neptun.bin"
 InvocationSpriteAtlas:
-										incbin "graphics/spells/invocations/atlas.bin"
+										incbin "graphics/battles/spells/invocations/atlas.bin"
 										align $8000
