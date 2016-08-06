@@ -159,6 +159,7 @@
 #dir	battles/entries/battle41
 #dir	battles/entries/battle42
 #dir	battles/entries/battle43
+#dir	battles/entries/battle44
 #dir	data/
 #dir	data/items
 #dir	data/spells
