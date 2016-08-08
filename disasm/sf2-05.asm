@@ -4129,7 +4129,7 @@ loc_229C4:
 sub_229CA:
 										
 										moveq   #0,d2
-										lea     byte_229E2(pc), a0
+										lea     UsableOutsideBattleItems(pc), a0
 										nop
 loc_229D2:
 										
@@ -4144,16 +4144,8 @@ return_229E0:
 
 	; End of function sub_229CA
 
-byte_229E2:         dc.b 3
-										dc.b   5
-										dc.b   9
-										dc.b  $A
-										dc.b  $B
-										dc.b  $C
-										dc.b  $D
-										dc.b  $E
-										dc.b  $F
-										dc.b $FF
+UsableOutsideBattleItems:
+										incbin "data/items/usableoutsidebattleitems.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
