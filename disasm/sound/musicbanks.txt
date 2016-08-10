@@ -1,0 +1,283 @@
+Songs are stored in 32KB banks ($8000) accessed by Z80 from the ROM.
+The music bank starts with a pointer table of $20 entries, each entry being
+the offset of a song in the bank.
+This pointer table is usually at the very beginning of the bank, but some games use the same bank
+to store other data like YM instruments, so the pointer table can be somewhere further in the bank.
+So yeah, you can have up to $20 songs in the same 32KB bank.
+
+In Shining Force II, music banks are found at ROM offsets 0x1F0000 and 0x1F8000.
+
+
+MUSIC DATA LAYOUT : 
+
+byte 0 : 	Always $00. If not, then instead of loading a music, load SFX of index byte 0. So yeah, always 0, really.
+byte 1 : 	$00 if music uses Channel 6 in DAC mode, $01 if not.
+byte 2 :	Always $00. I guess it could have been used as the second byte needed for YM Timer value if Timer A was used instead of B.
+byte 3 : 	YM Timer B value. This defines the tempo of the music.
+bytes $04-$17 :	Pointer Table of 10 entries, each entry being the data to parse for each respective Channel.
+
+The following bytes are the actual data to parse for each channel :
+- for YM Channels 1,2,3,4,5, follow the "YM commands" description 
+- for YM Channel 6, follow "YM Channel 6 DAC commands" if music uses DAC mode, or else follow "YM commands" like other YM Channels
+- for PSG Tone Channels 1,2,3, follow "PSG Tone commands"
+- for PSG Noise Channel, follow "PSG Noise commands"
+
+Note : This music format described below is actually also used for SFX data !
+
+
+
+
+YM commands : 
+
+
+FF xx xx	now, parse data from offset xxxx
+
+FF xx 00	Only for YM Channels 1,2,3 : set new operation xx (play music/sfx xx, fade out ...)
+
+FF 00 00	no more data to parse, mute channel
+
+FE xx		Use Instrument xx
+
+FD 0x		Set Output Level x
+
+FC xx		Set Key Release or Pitch Slides :
+		- if xx < 80, release notes key at (note length - xx)
+		- if xx = 80, key is never released, even between different notes.
+		- if 80<xx<FF, make slides between notes. xx bits 6-0 = slide speed. The higher the value, the quicker the slide.
+		- if xx = FF, stop pitch slides.
+
+FB xy		Load Vibrato x, triggered at Note Length 2*y
+
+FA xx		Set Stereo :
+		- xx bit 7 : 1 for LEFT output ON, 0 for OFF
+		- xx bit 6 : 1 for RIGHT output ON, 0 for OFF
+
+F9 xy		Note/Frequency Shifting :
+		- bit 7 : note shift up (0) or down (1)
+		- bits 6-5-4 : add value * 2 to note frequencies, to shift them slightly. 	
+		- nibble y : shift notes by y notes up/down depending on bit 7
+
+F8 		Loop Command, more details below
+
+F0 xx		Set Note Length xx and Play Silence for that length
+
+70		Play Silence for Note Length
+
+Any other parsed byte is considered as a New Note to Play :
+
+xx (yy)		- Play Note xx bits 6-0. The YM note table contains $54 entries, so note index range : $00-$53. 
+		- if bit 7 is set, then Set New Note Length yy
+
+
+
+
+
+YM Channel 6 DAC commands :
+
+FF xx xx	now, parse data from offset xxxx
+
+FF 00 00	no more data to parse, mute channel
+
+FC xx		- if bit 7 = 1, ignore play length : samples are played until they end or until another sample is played.
+		- else, stop sample play at (sample play length - xx)
+
+FA xx		Set Stereo :
+		- xx bit 7 : 1 for LEFT output ON, 0 for OFF
+		- xx bit 6 : 1 for RIGHT output ON, 0 for OFF
+
+F8 		Loop Command, more details below
+
+F0 xx		Set Sample Play Length xx and Play Silence for that length
+
+70		Play Silence for Sample Play Length
+
+Any other parse byte is considered as a New Sample to Play :
+
+xx (yy)		- Play Sample xx bits 6-0.
+		- if bit 7 is set, then Set New Sample Play Length yy
+
+
+
+
+
+
+PSG Tone commands :
+
+FF xx xx	now, parse data from offset xxxx
+
+FF 00 00	no more data to parse, mute channel
+
+FD xy		Load PSG Instrument x at total level y
+
+FC xx		Set Key Release :
+		- bits 6-0 : key release value. Key is released at (note length - key release value).
+		- bit 7 : if bit 7 is set to 1, then never release key.
+
+FB xy		Load Vibrato x, triggered at Note Length 2*y
+
+FA xx		set YM Timer value with xx
+
+F9 xy		Note/Frequency Shifting :
+		- bit 7 : note shift up (0) or down (1)
+		- bits 6-5-4 : add value * 2 to note frequencies, to shift them slightly. 	
+		- nibble y : shift notes by y notes up/down depending on bit 7
+
+F8 		Loop Command, more details below
+
+F0 xx		Set New Note Length xx and Wait xx before parsing anything else.
+
+70		Do Nothing for note length.
+
+Any other parsed byte is considered as a New Noise to Play :
+
+xx (yy)		- Play Note xx bits 6-0. The PSG note table contains $40 entries, so note index range : $00-$3F. 
+		- if bit 7 is set, then Set New Note Length yy
+
+
+
+
+
+
+PSG Noise commands :
+
+FF xx xx	now, parse data from offset xxxx
+
+FF 00 00	no more data to parse, mute channel
+
+FD xy		Load PSG Instrument x at total level y
+
+FC xx		Set Key Release :
+		- bits 6-0 : key release value. Key is released at (note length - key release value).
+		- bit 7 : if bit 7 is set to 1, then never release key.
+
+F8 		Loop Command, more details below
+
+F0 xx		Set New Note Length xx and Wait xx before parsing anything else.
+
+70		Do Nothing for note length.
+
+Any other parsed byte is considered as a New Noise to Play :
+
+xx (yy)		- Play Noise for note length. Bit 2 is feedback, bits 1-0 are frequency. More details in Genesis Technical Overview.
+		- if bit 7 is set, then Set New Note Length yy
+		
+		
+		
+		
+		
+		
+LOOP COMMANDS :
+
+The F8 command is subdivided into 8 loop related subcommands, depending on bits 7-6-5 of next byte. (So F8 Cx is subcommand 6)
+
+But before I try to describe them, I have to explain that each channel has a 32-byte area in RAM to manage them with temporary dynamic values such as counters and pointers etc ... and these loop commands will interact with some of those Channel RAM bytes. Those 10 Channel RAM areas start from 0x1380. They are followed by 3 more areas of the same kind, dedicated to SFX.
+
+So here are the subcommands, including the two subcommands that I still don't understand :
+
+- subcommand 0 (F8 00) : Start Loop A. Puts loop A start pointer (first byte after F8 00) in Channel RAM bytes $13-$14. Wait for command 5 (value F8 A1) to go back to loop start. It seems that this kind of loop never stops.
+
+- subcommand 1 (F8 20) : Start Loop B. Puts loop B start pointer (yes, first byte after F8 20) in Channel RAM bytes $15-$16, AND clears bytes $1A and $1B, which will be used in the mysterious commands 2 and 3 . Wait for command 5 (value F8 A0 this time) to go back to loop start. It also seems to never stop. From what I've seen, a loop B is used inside a loop A.
+
+- subcommand 2 (F8 40) : This is where I don't really get what it does, or at least why it does that ! I'll try to explain :
+
+    - The first time it is executed, Channel byte $1A is cleared, so it puts value 1 into it and that's all.
+    - The next time it is executed, Channel byte $1A is set. So now, it checks the next two bytes after F8 40. And if they are not F8 60 (command 3), it checks next bytes again, until it finds F8 60 ! Then it points back to the beginning of this F8 60 so that command 3 is executed just after.
+
+    So, at first loop, it does nothing, but after first loop, it ignores everything until it finds command 3. So between subcommands 2 and 3, you can put commands that will be executed only once ?
+
+
+
+- subcommand 3 (F8 60) : it works in the same way as subcommand 2, but now it checks and sets Channel byte $1B at first loop, and after first loop, it ignores everything until it finds command 4 (F8 80). Then command 4 is executed.
+So everything between subcommands 3 and 4 is only executed once, if I understand correctly.
+
+- subcommand 4 (F8 80) : .... it does nothing ! so its purpose is just to indicate the end for subcommand 3 I guess. .............. I don't really get the meaning of those subcommands 2-3-4 o_O. I'll show an example below.
+
+- subcommand 5 (F8 A0 or F8 A1) : if F8 A0, then go back to loop B start. if F8 A1, then go back to loop A start.
+
+- subcommand 6 (F8 Cx or F8 Ex) : Start Loop C. And this loop C has a good name since it has a Counter ! The loop will be repeated x+1 times, x being the first 5 bytes of parameter, actually. Hence the possibility to have E instead of C. So, with this loop C, you can loop from 1 to 33 times. Oh, yes, it puts loop start pointer into Channel bytes $17-$18, and the loop counter in $19.
+
+- subcommand 7 (F8 E0) : go back to loop C start. Decrements counter in byte $19, naturally.
+
+
+
+So you can manage 3 different loops at the same time, independently for each channel. I guess this is a good optimization, but I wonder how it can be easily managed in a Tracker ...
+From what I've seen (I've just looked into channel data of one song of Shining Force II), a loop B is always inside a loop A, so subcommands 2-3-4 can be used to go back to loop B start this first time, and ignore it next time to find the rest of loop A ... or something like that :-/ ... help ! XD
+
+Anyway, let's look at an example with channel 5 data of song 9 (intro music) :
+
+
+ROM:001F8191 dc.b $FA; · ; start of channel 5 data of song 9
+ROM:001F8192 dc.b $40; @ ; so, let look at F8 commands only
+ROM:001F8193 dc.b $FB; ¹
+ROM:001F8194 dc.b $2C; ,
+
+...
+
+ROM:001F81BF dc.b $F0; ­
+ROM:001F81C0 dc.b $D8; Ï
+ROM:001F81C1 dc.b $70; p
+ROM:001F81C2 dc.b $F8; ° ; F8 00 ! beginning of loop A
+ROM:001F81C3 dc.b 0
+ROM:001F81C4 dc.b $F8; ° ; F8 20 : immediately at the beginning of loop A, also beginning of loop B !
+ROM:001F81C5 dc.b $20
+ROM:001F81C6 dc.b $F0; ­ ;so we have some unidentified stuff in the loop
+ROM:001F81C7 dc.b $36; 6
+ROM:001F81C8 dc.b $FE; ¦
+ROM:001F81C9 dc.b $3E; >
+ROM:001F81CA dc.b $FD; ²
+ROM:001F81CB dc.b 0
+ROM:001F81CC dc.b $8C; î
+ROM:001F81CD dc.b 6
+ROM:001F81CE dc.b $FD; ²
+ROM:001F81CF dc.b 1
+ROM:001F81D0 dc.b $C
+ROM:001F81D1 dc.b $FD; ²
+ROM:001F81D2 dc.b 2
+ROM:001F81D3 dc.b $C
+ROM:001F81D4 dc.b $FD; ²
+ROM:001F81D5 dc.b 3
+ROM:001F81D6 dc.b $C
+ROM:001F81D7 dc.b $FD; ²
+ROM:001F81D8 dc.b 4
+ROM:001F81D9 dc.b $C
+ROM:001F81DA dc.b $FD; ²
+ROM:001F81DB dc.b 6
+ROM:001F81DC dc.b $C
+ROM:001F81DD dc.b $FD; ²
+ROM:001F81DE dc.b 8
+ROM:001F81DF dc.b $C
+ROM:001F81E0 dc.b $FD; ²
+ROM:001F81E1 dc.b $A
+ROM:001F81E2 dc.b $C
+ROM:001F81E3 dc.b $FD; ²
+ROM:001F81E4 dc.b $C
+ROM:001F81E5 dc.b $C
+ROM:001F81E6 dc.b $FD; ²
+ROM:001F81E7 dc.b $D
+ROM:001F81E8 dc.b $8C; î
+ROM:001F81E9 dc.b $6C; l
+ROM:001F81EA dc.b $70; p
+ROM:001F81EB dc.b $F8; ° ; F8 40 : subcommand 2 ! it does nothing the first time and lets the following commands being executed
+ROM:001F81EC dc.b $40; @
+ROM:001F81ED dc.b $F0; ­ ; F0 D8, unidentified command that will be executed only once
+ROM:001F81EE dc.b $D8; Ï
+ROM:001F81EF dc.b $F8; ° ; F8 A0 : go back to loop B start ! so subcommand 2 will be executed again, and this time F0 D8 and F8 A0 will be ignored
+ROM:001F81F0 dc.b $A0; á
+ROM:001F81F1 dc.b $F8; ° ; F8 60 : subcommand 3 is found by subcommand 2 ! so we enter subcommand 3, which does nothing the first time
+ROM:001F81F2 dc.b $60; `
+ROM:001F81F3 dc.b $F8; ° ; F8 A0 : but ... go back to loop B start again ! and subcommand 2 ignores next commands again and finds subcommand 3 which, this time, will ignore anything before subcommand 4
+ROM:001F81F4 dc.b $A0; á
+ROM:001F81F5 dc.b $F8; ° ; F8 80 : subcommand 4 found ! execute it, it does nothing.
+ROM:001F81F6 dc.b $80; Ç
+ROM:001F81F7 dc.b $F0; ­ ;F0 6C : unidentified command
+ROM:001F81F8 dc.b $6C; l
+ROM:001F81F9 dc.b $F8; ° ; end of loop A ! go back to loop A start ... and since it goes back to loop A start, then loop B is started again ! so it clears Channel bytes $1A and $1B and does everything again, executing F0 D8 and F8 A0 once etc ...
+ROM:001F81FA dc.b $A1; í ; this is the last byte of this channel data
+
+
+So chronologically the content of loop A does this :
+- execute loop B content a 1st time
+- execute command F0 D8
+- execute loop B content a 2nd time
+- execute loop B content a 3rd time
+- execute command F0 6C

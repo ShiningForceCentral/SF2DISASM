@@ -1,0 +1,51 @@
+Map definitions
+
+Byte 1      palette index
+Byte 2      tileset 1 index
+Byte 3      tileset 2 index
+Byte 4      tileset 3 index
+Byte 5      tileset 4 index
+Byte 6      tileset 5 index
+Byte 7...   10 pointers
+
+Address 1   Blocks
+Address 2   Layout
+Address 3   Areas
+  Repeat following section for each area :
+    Byte 00-01  Layer 1 start X
+    Byte 02-03  Layer 1 start Y
+    Byte 04-05  Layer 1 end X
+    Byte 06-07  Layer 1 end Y
+    Byte 08-09  Foreground Layer 2 start X - No layer 2 coordinates set = no layer 2.
+    Byte 0a-0b  Foreground Layer 2 start Y
+    Byte 0c-0d  Background Layer 2 start X 
+    Byte 0e-0f  Background Layer 2 start Y
+    Byte 10-11  Layer 1 X Parallax
+    Byte 12-13  Layer 1 Y Parallax
+    Byte 14-15  Layer 2 X Parallax - Default = 256. Mitula's Shrine sky = 16. Far landscape backgrounds (Ancient Tower, Tristan Bridge) = 128. 
+    Byte 16-17  Layer 2 Y Parallax
+    Byte 18     Layer 1 X Autoscroll - Default = 0. Mitula's Shrine = 1.
+    Byte 19     Layer 1 Y Autoscroll
+    Byte 1a     Layer 2 X Autoscroll
+    Byte 1b     Layer 2 Y Autoscroll
+    Byte 1c     Layer Type - $00 = Foreground Layer, else $FF = Background Layer. Overworld maps have value $FE, but no Layer 2 ...
+                Note : disassembled code seems to only care about this byte being set or not, so values $FE and $FF may have the same effect !
+    Byte 1d     music to play
+  Section ends with value $FFFF. 
+    
+Address 4   Flag Events
+
+    Byte 00-01  flag
+    Byte 02     top-left X coord of source
+    Byte 03     top-left Y coord of source
+    Byte 04     width to copy
+    Byte 05     height to copy
+    Byte 06     top-left X coord of dest
+    Byte 07     top-left Y coord of dest
+
+Address 5   Step Events
+Address 6   Roof Events (x trig coord, y trig coord, x copy coord, y copy coord, width, height, x dest, y dest) - copy tiles to hide roof?
+Address 7   Warp Events
+Address 8   Chest Items (4 bytes each (x, y, flag, item idx), terminated with FFFF)
+Address 9   Other Items (4 bytes each (x, y, flag, item idx), terminated with FFFF)
+Address 10  Animations

@@ -1,0 +1,42 @@
+ Starting Info -
+
+32 6-byte entries :
+
+ [Class][Level][Item][Item][Item][Item] 
+
+ Wholly simple here. If not mentioned elsewhere - just add 80 in hex (or 128 in decimal) to
+ the base item code of an item to have it equipped.
+ 
+ 
+Entry index : 
+
+Bowie, 0
+Sarah, 1
+Chester, 2
+Jaha, 3
+Kazin, 4
+Slade, 5
+Kiwi, 6
+Peter, 7
+May, 8
+Gerhalt, 9
+Luke, 10
+Rohde, 11
+Rick, 12
+Elric, 13
+Eric, 14
+Karna, 15
+Randolf, 16
+Tyrin, 17
+Janet, 18
+Higins, 19
+Skreech, 20
+Taya, 21
+Frayja, 22
+Jaro, 23
+Gyan, 24
+Sheela, 25
+Zynk, 26
+Chaz, 27
+Lemon, 28
+Claude, 29

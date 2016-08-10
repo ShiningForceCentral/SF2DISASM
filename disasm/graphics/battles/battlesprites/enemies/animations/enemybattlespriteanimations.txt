@@ -1,0 +1,32 @@
+------ Animation Entry Format
+
+Byte 0      number of frames in attack anim
+Byte 1      frame # to start spell anim idx
+Byte 2      spell anim idx to play during attack, FF for none
+Byte 3      whether or not to terminate spell anim when battle sprite anim finishes
+
+Byte 4      weapon sprite frame, idle anim
+Byte 5      weapon sprite z-index, idle anim
+Byte 6      weapon sprite x offset, frame 1 of idle anim
+Byte 7      weapon sprite y offset, frame 1 of idle anim
+Byte 8
+Byte 9
+Byte 10
+Byte 11
+Byte 12
+Byte 13
+Byte 14     weapon sprite x offset, frame 2 of idle anim
+Byte 15     weapon sprite y offset, frame 2 of idle anim
+
+Frame Entries
+
+    Byte 0      frame idx
+    Byte 1      number of ticks to display
+    Byte 2      battle sprite x offset
+    Byte 3      battle sprite y offset
+    Byte 4      weapon sprite frame (0 = up, going clockwise, up to 3; 0x10 = flip horizontally, 0x20 = flip vertically)
+    Byte 5      weapon sprite z-index (1 = under character, 2 = over character)
+    Byte 6      weapon sprite x offset
+    Byte 7      weapon sprite y offset
+    
+(weapon sprites are displayed at same location as battle sprite)

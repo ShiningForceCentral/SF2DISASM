@@ -1,0 +1,96 @@
+
+Layout :
+[Item index][Dialog line]
+Ends with $FFFF word value.
+
+Available lines :
+Bank 5
+[...]
+0174: But smoke rose from{N}the {ITEM}.{D1}
+0175: But a crack appears in the{N}{ITEM}.{D1}
+0176: But, the {ITEM} has{N}a big crack.{D1}
+0177: But, the {ITEM} is{N}distorted.{D1}
+0178: But, the {ITEM} is{N}clouded.{D1}
+0179: But, the {ITEM}{N}burst into flames.
+017a: But, the {ITEM}{N}broke into pieces.
+017b: But, the {ITEM}{N}split in two.
+017c: But, the {ITEM}{N}became mangled.
+017d: But, the {ITEM}{N}completely rusted over.
+017e: And smoke emerged from{N}the {ITEM}.{D1}
+017f: And the {ITEM} {N}cracked.{D1}
+Bank 6
+0180: And the {ITEM}{N}cracked.{D1}
+0181: And the {ITEM}{N}distorted.{D1}
+0182: And the {ITEM}{N}clouded.{D1}
+0183: And the {ITEM}{N}burst into flames.
+0184: And the {ITEM}{N}fell to pieces.
+0185: And the {ITEM}{N}split in two.
+0186: And the {ITEM}{N}became mangled.
+0187: And the {ITEM}{N}completely rusted over.
+[...]
+
+
+ROM:0000BC9A ; =============== S U B R O U T I N E =======================================
+ROM:0000BC9A
+ROM:0000BC9A ; In: A2 = skirmish properties stack
+ROM:0000BC9A ;     D0 = whether item is already damaged (0=no, 1=yes)
+ROM:0000BC9A ; Out: D3 = message idx
+ROM:0000BC9A
+ROM:0000BC9A GetItemBreakMessage:                    ; CODE XREF: WriteSkirmishScript_BreakUsedItem+4Cp
+ROM:0000BC9A                                         ; WriteSkirmishScript_BreakUsedItem+78p
+ROM:0000BC9A                 movem.l d0/a0,-(sp)
+ROM:0000BC9E                 tst.b   d0
+ROM:0000BCA0                 bne.s   loc_BCB4
+ROM:0000BCA2                 tst.b   -5(a2)
+ROM:0000BCA6                 bne.s   loc_BCAE        ; And smoke emerged from{N}the {ITEM}.{D1}
+ROM:0000BCA8
+ROM:0000BCA8 loc_BCA8:                               ; But smoke rose from{N}the {ITEM}.{D1}
+ROM:0000BCA8                 move.w  #$174,d3
+ROM:0000BCAC                 bra.s   loc_BCB2
+ROM:0000BCAE ; ---------------------------------------------------------------------------
+ROM:0000BCAE
+ROM:0000BCAE loc_BCAE:                               ; CODE XREF: GetItemBreakMessage+Cj
+ROM:0000BCAE                 move.w  #$17E,d3        ; And smoke emerged from{N}the {ITEM}.{D1}
+ROM:0000BCB2
+ROM:0000BCB2 loc_BCB2:                               ; CODE XREF: GetItemBreakMessage+12j
+ROM:0000BCB2                 bra.s   loc_BCC4
+ROM:0000BCB4 ; ---------------------------------------------------------------------------
+ROM:0000BCB4
+ROM:0000BCB4 loc_BCB4:                               ; CODE XREF: GetItemBreakMessage+6j
+ROM:0000BCB4                 tst.b   -5(a2)
+ROM:0000BCB8                 bne.s   loc_BCC0        ; And the {ITEM}{N}burst into flames.
+ROM:0000BCBA                 move.w  #$179,d3        ; But, the {ITEM}{N}burst into flames.
+ROM:0000BCBE                 bra.s   loc_BCC4
+ROM:0000BCC0 ; ---------------------------------------------------------------------------
+ROM:0000BCC0
+ROM:0000BCC0 loc_BCC0:                               ; CODE XREF: GetItemBreakMessage+1Ej
+ROM:0000BCC0                 move.w  #$183,d3        ; And the {ITEM}{N}burst into flames.
+ROM:0000BCC4
+ROM:0000BCC4 loc_BCC4:                               ; CODE XREF: GetItemBreakMessage:loc_BCB2j
+ROM:0000BCC4                                         ; GetItemBreakMessage+24j
+ROM:0000BCC4                 move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d0
+ROM:0000BCC8                 andi.w  #$7F,d0 ; ''
+ROM:0000BCCC                 lea     ItemBreakMessages(pc), a0
+ROM:0000BCD0
+ROM:0000BCD0 loc_BCD0:                               ; CODE XREF: GetItemBreakMessage+46j
+ROM:0000BCD0                 cmpi.w  #$FFFF,(a0)
+ROM:0000BCD4                 beq.w   loc_BCEA
+ROM:0000BCD8                 cmp.b   (a0),d0
+ROM:0000BCDA                 beq.w   loc_BCE2
+ROM:0000BCDE                 addq.l  #2,a0
+ROM:0000BCE0                 bra.s   loc_BCD0
+ROM:0000BCE2 ; ---------------------------------------------------------------------------
+ROM:0000BCE2
+ROM:0000BCE2 loc_BCE2:                               ; CODE XREF: GetItemBreakMessage+40j
+ROM:0000BCE2                 moveq   #0,d0
+ROM:0000BCE4                 move.b  1(a0),d0
+ROM:0000BCE8                 add.w   d0,d3
+ROM:0000BCEA
+ROM:0000BCEA loc_BCEA:                               ; CODE XREF: GetItemBreakMessage+3Aj
+ROM:0000BCEA                 movem.l (sp)+,d0/a0
+ROM:0000BCEE                 rts
+ROM:0000BCEE ; End of function GetItemBreakMessage
+ROM:0000BCEE
+ROM:0000BCEE ; ---------------------------------------------------------------------------
+ROM:0000BCF0 ItemBreakMessages:incbin "data/items/itembreakmessages.bin"
+ROM:0000BCF0                                         ; DATA XREF: GetItemBreakMessage+32o

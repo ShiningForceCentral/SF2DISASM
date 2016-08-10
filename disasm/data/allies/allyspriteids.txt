@@ -1,0 +1,103 @@
+Base map sprite for each ally.
+
+Tightly linked to the way its function is implemented.
+Unpromoted sprites are scandalously hardcoded ! 
+Will have to be re-implemented more properly to rely on tables entirely.
+
+
+ROM:000449C6 ; =============== S U B R O U T I N E =======================================
+ROM:000449C6
+ROM:000449C6 ; In: D0 = char idx
+ROM:000449C6 ; Out: D4 = sprite idx
+ROM:000449C6 ;
+ROM:000449C6 ; wtf I need to figure out that implementation, many strange exceptions
+ROM:000449C6
+ROM:000449C6 GetCharacterSpriteIdx:                  ; CODE XREF: j_GetCharacterSpriteIdxj
+ROM:000449C6                                         ; InitMapEntities+9Ap
+ROM:000449C6                                         ; InitMapEntities+BCp
+ROM:000449C6                                         ; sub_44298+64p
+ROM:000449C6                                         ; sub_44570+Ap
+ROM:000449C6                                         ; GetCombatantSpriteIdx+Cp
+ROM:000449C6                                         ; csc1A_setEntitySprite+Ep
+ROM:000449C6                 cmpi.w  #$1E,d0
+ROM:000449CA                 blt.s   loc_449D2
+ROM:000449CC                 move.w  d0,d4
+ROM:000449CE                 bra.w   return_44A5C
+ROM:000449D2 ; ---------------------------------------------------------------------------
+ROM:000449D2
+ROM:000449D2 loc_449D2:                              ; CODE XREF: GetCharacterSpriteIdx+4j
+ROM:000449D2                 movem.w d1,-(sp)
+ROM:000449D6                 cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w ; holds which battle we're currently doing
+ROM:000449DC                 bne.s   loc_449F0
+ROM:000449DE                 jsr     j_GetCurrentHP
+ROM:000449E4                 tst.w   d1
+ROM:000449E6                 bne.s   loc_449F0
+ROM:000449E8                 move.w  #$BE,d4 ; '¥'   ; dead !
+ROM:000449EC                 bra.w   loc_44A5A
+ROM:000449F0 ; ---------------------------------------------------------------------------
+ROM:000449F0
+ROM:000449F0 loc_449F0:                              ; CODE XREF: GetCharacterSpriteIdx+16j
+ROM:000449F0                                         ; GetCharacterSpriteIdx+20j
+ROM:000449F0                 cmpi.b  #$B,d0          ; Rhode !
+ROM:000449F4                 bne.s   loc_44A04
+ROM:000449F6                 trap    #TRAP_CHECKFLAG
+ROM:000449F6 ; ---------------------------------------------------------------------------
+ROM:000449F8                 dc.w $B                 ; if Rhode joined the force
+ROM:000449FA ; ---------------------------------------------------------------------------
+ROM:000449FA                 bne.s   loc_44A04
+ROM:000449FC                 move.w  #$AA,d4 ; '¬'
+ROM:00044A00                 bra.w   loc_44A5A
+ROM:00044A04 ; ---------------------------------------------------------------------------
+ROM:00044A04
+ROM:00044A04 loc_44A04:                              ; CODE XREF: GetCharacterSpriteIdx+2Ej
+ROM:00044A04                                         ; GetCharacterSpriteIdx+34j
+ROM:00044A04                 move.w  d0,d4
+ROM:00044A06                 andi.w  #$1F,d4
+ROM:00044A0A                 move.b  AllySprites(pc,d4.w),d4 ; sprite IDs for each force character in battle
+ROM:00044A0E                 jsr     j_GetClass      ; get entity's class index ?
+ROM:00044A14                 cmpi.b  #$C,d1          ; HERO
+ROM:00044A18                 beq.w   loc_44A5A
+ROM:00044A1C                 cmpi.b  #0,d1
+ROM:00044A20                 bne.s   loc_44A28
+ROM:00044A22                 subq.w  #1,d4           ; if SDMN, d4 = 0 ?
+ROM:00044A24                 bra.w   loc_44A5A
+ROM:00044A28 ; ---------------------------------------------------------------------------
+ROM:00044A28
+ROM:00044A28 loc_44A28:                              ; CODE XREF: GetCharacterSpriteIdx+5Aj
+ROM:00044A28                 cmpi.b  #$17,d1         ; BDBT ?
+ROM:00044A2C                 bge.w   loc_44A5A
+ROM:00044A30                 cmpi.b  #6,d1           ; BDMN
+ROM:00044A34                 blt.s   loc_44A42
+ROM:00044A36                 cmpi.b  #$B,d1          ; TORT
+ROM:00044A3A                 bgt.s   loc_44A42
+ROM:00044A3C                 subq.w  #1,d4
+ROM:00044A3E                 bra.w   loc_44A5A
+ROM:00044A42 ; ---------------------------------------------------------------------------
+ROM:00044A42
+ROM:00044A42 loc_44A42:                              ; CODE XREF: GetCharacterSpriteIdx+6Ej
+ROM:00044A42                                         ; GetCharacterSpriteIdx+74j
+ROM:00044A42                 cmpi.b  #5,d1
+ROM:00044A46                 bgt.s   loc_44A4E
+ROM:00044A48                 subq.w  #2,d4
+ROM:00044A4A                 bra.w   loc_44A5A
+ROM:00044A4E ; ---------------------------------------------------------------------------
+ROM:00044A4E
+ROM:00044A4E loc_44A4E:                              ; CODE XREF: GetCharacterSpriteIdx+80j
+ROM:00044A4E                 btst    #0,d1
+ROM:00044A52                 beq.s   loc_44A5A
+ROM:00044A54                 subq.w  #1,d4
+ROM:00044A56                 bra.w   *+4
+ROM:00044A5A
+ROM:00044A5A loc_44A5A:                              ; CODE XREF: GetCharacterSpriteIdx+26j
+ROM:00044A5A                                         ; GetCharacterSpriteIdx+3Aj
+ROM:00044A5A                                         ; GetCharacterSpriteIdx+52j
+ROM:00044A5A                                         ; GetCharacterSpriteIdx+5Ej
+ROM:00044A5A                                         ; GetCharacterSpriteIdx+66j
+ROM:00044A5A                                         ; GetCharacterSpriteIdx+78j
+ROM:00044A5A                                         ; GetCharacterSpriteIdx+84j
+ROM:00044A5A                                         ; GetCharacterSpriteIdx+8Cj
+ROM:00044A5A                 move.w  (sp)+,d1
+ROM:00044A5C
+ROM:00044A5C return_44A5C:                           ; CODE XREF: GetCharacterSpriteIdx+8j
+ROM:00044A5C                 rts
+ROM:00044A5C ; End of function GetCharacterSpriteIdx

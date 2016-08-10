@@ -1,0 +1,188 @@
+
+
+8 Bytes
+[Spell Code][MP Cost][Animation][Type][Max Range][Min Range][AoE][Damage]
+ 
+ ---- Notes
+
+- Aura 4's range is hardcoded. (ROM:c63e)
+- Right of Hope's range is hardcoded. (ROM:c646)
+ 
+ 
+Spell codes : 
+ 
+Upper two bits indicate spell level
+ 
+&H3F, Nothing
+&H0, Heal 1
+&H40, Heal 2
+&H80, Heal 3
+&HC0, Heal 4
+&H1, Aura 1
+&H41, Aura 2
+&H81, Aura 3
+&HC1, Aura 4
+&HB, Blaze 1
+&H4B, Blaze 2
+&H8B, Blaze 3
+&HCB, Blaze 4
+&HC, Freeze 1
+&H4C, Freeze 2
+&H8C, Freeze 3
+&HCC, Freeze 4
+&HD, Bolt 1
+&H4D, Bolt 2
+&H8D, Bolt 3
+&HCD, Bolt 4
+&HE, Blast 1
+&H4E, Blast 2
+&H8E, Blast 3
+&HCE, Blast 4
+&H3, Boost 1
+&H43, Boost 2
+&H4, Slow 1
+&H44, Slow 2
+&H5, Attack 1
+&H6, Dispel 1
+&H7, Muddle 1
+&H47, Muddle 2
+&H8, Desoul 1
+&H48, Desoul 2
+&H9, Sleep 1
+&HA, Egress 1
+&H2, Detox 1
+&H42, Detox 2
+&H82, Detox 3
+&HC2, Detox 4
+&H1B, Katon 1
+&H5B, Katon 2
+&H9B, Katon 3
+&H1C, Raijin 1
+&H5C, Raijin 2
+&H9C, Raijin 3
+&H1D, Dao 1
+&H5D, Dao 2
+&H1E, Apollo 1
+&H5E, Apollo 2
+&H1F, Neptune 1
+&H5F, Neptune 2
+&H20, Atlas 1
+&H60, Atlas 2
+&H11, Flame Breath
+&H51, Flame Breath 2
+&H91, Flame Breath 3
+&H12, Snow Breath
+&H52, Snow Breath 2
+&H92, Snow Breath 3
+&H13, Demon Breath
+&H53, Demon Breath 2
+&H29, Kiwi Flame Breath
+&H69, Kiwi Flame Breath 2
+&HA9, Kiwi Flame Breath 3
+&HE9, Kiwi Flame Breath 4
+&H28, Kraken Bubble Breath
+&H2B, Odd Eye Laser
+&HF, Magic Drain
+&H10, Medical Herb
+&H14, Power Water
+&H15, Protect Milk
+&H16, Quick Chicken
+&H17, Running Pimento
+&H18, Cheerful Bread
+&H19, Burst Rock
+&H1A, Laser
+&H21, Fairy Powder
+&H22, Restore MP?
+&H23, Bright Honey
+&H24, Brave Apple
+&H25, Shining Ball
+&H26, Blizzard
+&H27, Holy Thunder
+&H2A, Right of Hope
+&H37, Freeze Game
+&H45, Attack Boost
+&H49, Ally Sleep
+&H4A, Fairy of Nothing (Egress 2?)
+&H4F, MP Ally Absorb
+&H50, Healing Seed
+&H54, Attack Increase
+&H55, Defense Increase
+&H56, Agility Increase
+&H57, Move Increase
+&H58, Max HP Increase
+&H62, Fairy Tear
+&H63, Max MP Increase
+&H64, Level Up
+&H66, Damage Fairy
+&H68, Bubble Breath
+&H6A, MP Recover
+&H83, Boost Item
+&H84, Unboost Item
+&H85, Attack Item
+&H86, Silence Fairy
+&H87, Muddle Fairy
+&H88, Desoul Fairy
+&H89, Sleep Fairy
+&H8F, MP Absorb Fairy
+&H90, Healing Drop
+&H94, Attack Increase
+&H95, Defense Increase
+&H96, Agility Increase
+&H97, Move Increase
+&H98, Max HP Increase
+&HA2, MP Restore
+&HA3, Max MP Increase
+&HA4, Level Up
+&HC3, Adjacent Boost
+&HC4, Adjacent Unboost
+&HCF, MP Absorb Fairy
+&H45, Attack 2
+ 
+ 
+Animation indexes :
+ 
+ HEAL :		4
+AURA :		4
+DETOX :		6
+BOOST :		8
+SLOW :		9
+ATTACK :	8
+DISPEL :	9
+MUDDLE :	9
+DESOUL :	3
+BLAZE :		1
+FREEZE :	2
+BOLT :		7
+BLAST :		5
+Magic Drain :	10
+Flame Breath :	12
+Snow Breath :	23
+Demon Breath :	11
+Burst Rock :	30
+Invocations :	17-18-19-20
+Bubble Breath :	22
+
+shots :		15-16-17
+flower laser :	21
+24 : nothing ?
+56 : attack block ?
+25 : slow ?
+26 : detox ?
+27 : blue muddle
+28 : red muddle
+29 : Peter's attack !
+
+
+Spell types :
+
+0, Special Attack
+3, Magic Drain
+65, Heal Item
+67, Buff Item
+128, Attack
+130, Debuff
+193, Heal
+194, Buff
+195, Egress
+
+

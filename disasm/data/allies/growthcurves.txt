@@ -1,0 +1,18 @@
+
+
+
+
+
+
+
+
+
+
+
+
+0, None
+1, Linear
+2, Late
+3, Early
+4, Middle
+5, Early+Late

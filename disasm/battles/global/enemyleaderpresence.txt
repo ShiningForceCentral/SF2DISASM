@@ -1,0 +1,1 @@
+data table for whether or not battle is won by beating first enemy (boss) (1 byte: 00 or FF)

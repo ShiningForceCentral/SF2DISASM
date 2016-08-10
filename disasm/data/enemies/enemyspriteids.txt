@@ -1,0 +1,1 @@
+Map sprite index for each enemy, in order.

@@ -1,0 +1,3 @@
+ In-Battle Sprite -
+
+ [Model][Color Palette]

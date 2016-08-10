@@ -1,0 +1,24 @@
+Both input sequences are checked from Player 1 input.
+Sequence ends with $FFFF word value.
+
+Input byte values : 
+80=start
+40=A
+20=C
+10=B
+08=right
+04=left
+02=down 
+01=up
+
+
+DEBUG MODE :
+UP UP DOWN UP B C RIGHT LEFT UP UP DOWN UP B C RIGHT LEFT
+00000000h: 01 01 02 01 10 20 08 04 01 01 02 01 10 20 08 04 ; ..... ....... ..
+00000010h: FF FF                                           ; ÿÿ
+
+
+CONFIGURATION MODE : 
+UP DOWN UP DOWN LEFT RIGHT LEFT RIGHT UP RIGHT DOWN LEFT UP B
+00000000h: 01 02 01 02 04 08 04 08 01 08 02 04 01 10 FF FF ; ..............ÿÿ
+

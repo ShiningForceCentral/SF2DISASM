@@ -1,0 +1,14 @@
+Uncompressed graphics.
+
+4 bits per pixel (to indicate color from usual MD 16-color palette)
+Palette to apply :
+graphics/technical/basepalette.bin
+
+Layout :
+2x3 tiles (16x24 pixels) with tiles ordered per row.
+
+Displayed      Stored
+ tiles         tiles
+  1 2
+  3 4      -> 1 2 3 4 5 6
+  5 6

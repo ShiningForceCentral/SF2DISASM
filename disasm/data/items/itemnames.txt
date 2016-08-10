@@ -1,0 +1,3 @@
+Entriy layout : 
+[Length][ASCII String]
+Ended with $FF value.

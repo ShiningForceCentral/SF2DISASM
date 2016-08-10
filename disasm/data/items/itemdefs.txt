@@ -1,0 +1,427 @@
+BNC's notes.txt :
+
+Item definition
+
+Byte 0-3    possible equip bitstring
+Byte 4      max range of use
+Byte 5      min range of use
+Byte 6-7    gold cost
+Byte 8      various item parameters (bit string)
+
+    Bit 07
+    Bit 06  item is cursed
+    Bit 05  item is non-discardable
+    Bit 04
+
+    Bit 03  item is rare (shows up in deals)
+    Bit 02  item is an accessory
+    Bit 01  item is a weapon (and thus appears in battle scene)
+    Bit 00
+
+Byte 9      spell effect when used
+Byte 10-11  stat 1 augmented when equipped, and how much (based on address table at 8ADE, 0 if none)
+Byte 12-13  stat 2 augmented when equipped, and how much (based on address table at 8ADE, 0 if none)
+Byte 14-15  stat 3 augmented when equipped, and how much (based on address table at 8ADE, 0 if none)
+
+Constants
+
+19DC8       index of first weapon item
+19DD0       index of last weapon item ???
+19DDC       index of first weapon item again
+
+Various info
+
+- Cost of removing a curse is 1/3 the item cost.
+
+
+
+
+Space King's DevNotes.txt :
+
+ Items
+ -----
+
+ Items are stored in blocks of 16 bytes:
+
+ [4 bytes for equipment table][Max Range][Min Range][Gold][Gold][Type]
+ [On use skill][Ability Code][Ability Value][Ability Code][Ability Value][0][0]
+
+ I think the two zeroes are just a buffer to make it an even 16 bytes - however
+ I've neglected to look at every item to see if these are blank for everything.
+
+ Ability Codes tell the game if the next number increases/decreases a stat, or
+ does something else. There are several Ability Codes I'm not entirely sure of their
+ function - see AttributeCodes.txt to see/change what my editor uses for these.
+
+ It isn't clear where items that regenerate HP or MP get their mojo from - I have
+ not a clue.
+
+
+
+Space King's SF2Info.txt :
+
+Item Layout Known:
+
+[4 bytes for equipment table][Max Range][Min Range][Gold][Gold][Type][On use skill][Ability Code][Ability Value][Ability code][Ability value]
+
+Ability Codes for items:
+
+01 Evade Up ?
+02 Critical Up
+03 Double Attack Up?
+04 Counter Up
+
+06 Atk up
+07 Def up
+08 Agi up
+09 MOVE up
+0A Atk Down
+0B Def down
+0c Agi down
+0D Move down 
+
+0E Instant kill?
+
+The critical/counter swords have a value of One, dunno if it's a simple binary yes/no or if using a big number makes these actions more likely.
+
+
+Types:
+
+Empty, &H0
+Normal Weapon, &H2
+Special Item, &H8
+Special Weapon, &HA
+Normal Ring, &HC
+Story Item, &H18
+Force Sword, &H1A
+Normal Item, &H20
+Battle Item, &H28
+Cursed - Glove Axe Shot Lance, &H4A
+Indra Staff?, &H82
+Magic Weapon, &H8A
+Magic Ring, &H8C
+Cursed - Sword Rod, &HCA
+Cursed Ring, &HCC
+
+
+Equip Codes:
+00000001 Swordsman
+00000002 Knight
+00000004 Warrior
+00000008 Mage
+00000010 Priest
+00000020 Archer
+00000040 Birdman
+00000080 Wolfman
+00000100 Ranger
+00000200 Phoenik
+00000400 Thief
+00000800 Tortise
+00001000 Hero
+00002000 Paladin
+00004000 Pegasus Knight
+00008000 Gladiator
+00010000 Baron
+00020000 Wizard
+00040000 Sorcerer
+00080000 Vicar
+00100000 Master Monk
+00200000 Sniper
+00400000 Brass Gunner
+00800000 Bird Battler
+01000000 Wolf Baron
+02000000 Bow Knight
+04000000 Phoenix
+08000000 Ninja
+10000000 Monster
+20000000 Robot
+40000000 Golem
+80000000 Red Baron
+
+
+Ability Codes:
+00 Heal 1
+01 Aura 1
+02 Detox 1
+03 Boost 1
+04 Slow 1
+05 Attack 1
+06 Dispel 1
+07 Muddle 1
+08 Desoul 1
+09 Sleep 1
+0A Burn Item (Egress???)
+0B Blaze 1
+0C Freeze 1
+0D Bolt 1
+0E Blast 1
+0F Magic Drain
+10 Heal 1
+11 Flame Breath
+12 Snow Breath
+13 Demon Breath
+14 Self Attack Increase
+15 Self Defense Increase
+16 Self Agility Increase
+17 Self Move Increase
+18 Self Max HP Increase
+19 No effect
+1A No effect
+1B Katon 1
+1C Raijin 1
+1D Dao 1
+1E Apollo 1
+1F Neptune 1
+20 Atlas 1
+21 Antidote?
+22 Restore MP - Fairy Tear?
+23 Self Max MP Increase
+24 Self Level Up
+25 Fire Breath
+26 Freeze Breath
+27 Bolt Breath
+28 Kraken Bubble Breath
+29 Kiwi Flame Breath
+2A Restore MP to All - Light of Hope?
+2B Odd Eye Laser
+2C Freeze Game
+2D Freeze Game
+2E Freeze Game
+2F Freeze Game
+30 Freeze Game
+3A More Different Frozen Game
+3E Freeze Game
+3F Nothing
+40 Heal 2
+41 Aura 2
+42 Detox 2
+43 Boost 2
+44 Slow 2
+45 Attack Boost
+46 No effect fairy
+47 Muddle 2
+48 Desoul 2
+49 Ally Sleep
+4A Fairy of Nothing
+4B Blaze 2
+4C Freeze 2
+4D Bolt 2
+4E Blast 2
+4F MP Ally Absorb
+50 HP Healing Item
+51 Flame Breath 2
+52 Wind Breath 2
+53 Demon Breath 2
+54 Attack Increase
+55 Defense Increase
+56 Agility Increase
+57 Move Increase
+58 Max HP Increase
+59 Fairy of Nothing
+5A Fairy of Nothing
+5B Katon 2
+5C Raijin 2
+5D Dao 2
+5E Apollo 2
+5F Neptune 2
+60 Atlas 2
+61 More Better Game Crash
+62 MP Recover
+63 Max MP Increase
+64 Level Up
+65 Game Freeze
+66 Fairy of Hurt
+67 Fairy of Hurt
+68 Light bubble Breath
+69 Flame Breath 3
+6A MP Recover
+6B Damage Fairy
+6C Game Freeze
+6D Game Freeze
+6E Weirdly Aimed Game Freeze
+6F Game Freeze
+74 Freeze
+7F Nothing Fairy
+80 Heal 3
+81 Aura 3
+82 Detox 3
+83 Boost Item
+84 Unboost Item
+85 Attack Item
+86 Silence Fairy
+87 Muddle Fairy
+88 Desoul Fairy
+89 Sleep Fairy
+8A Nothing Fairy
+8B Blaze 3
+8C Freeze 3
+8D Bolt 3
+8E Blast 3
+8F MP Absorb Fairy
+90 Heal 4?
+91 Flame Breath 3
+92 Wind Breath 3
+93 Hurt Fairy
+94 Attack Increase
+95 Defense Increase
+96 Agility Increase
+97 Move Increase
+98 Max HP Increase
+99 Nothing Fairy
+9B Katon 3
+9C Raijin 3
+A0 Hurt Fairy
+A1 Nothing Fairy
+A2 MP Restore
+(Getting sick of this task around here)
+A3 Max MP Increase
+A4 Level Up
+A5 Damage Fairy
+A6 Damage Fairy
+A7 (Crash fairy, let's just fast forward shall we?)
+C0 Heal 4
+C1 Aura 4
+C2 Detox 4
+C3 Adjacent Boost
+C4 Adjacent Unboost (argh! seen this all already, fast forward? Used a save state editing FAQ on GameFAQs - the codes for character spells and weapon affects appear to be the same.)
+CB Blaze 4
+CC Freeze 4
+CD Bolt 4
+CE Blast 4
+CF MP Absorb Fairy
+- Everything above this seems to recycle the same dummy skills and game crashes over and over, so, I 'blah' in their general direction. -
+FF Nothing
+
+Oozes resist Neptune/Ice... note for monster stat testing
+
+
+Item Indexes : 
+
+$H0, Medical Herb
+&H1, Healing Seed
+&H2, Healing Drop
+&H3, Antidote
+&H4, Angel Wing
+&H5, Fairy Powder
+&H6, Healing Water
+&H7, Fairy Tear
+&H8, Healing Rain
+&H9, Power Water
+&HA, Protect Milk
+&HB, Quick Chicken
+&HC, Running Pimento
+&HD, Cheerful Bread
+&HE, Bright Honey
+&HF, Brave Apple
+&H10, Shining Ball
+&H11, Blizzard
+&H12, Holy Thunder
+&H13, Power Ring
+&H14, Protect Ring
+&H15, Quick Ring
+&H16, Running Ring
+&H17, White Ring
+&H18, Black Ring
+&H19, Evil Ring
+&H1A, Leather Glove
+&H1B, Power Glove
+&H1C, Brass Knuckles
+&H1D, Iron Knuckles
+&H1E, Misty Knuckles
+&H1F, Giant Knuckles
+&H20, Evil Knuckles
+&H21, Short Axe
+&H22, Hand Axe
+&H23, Middle Axe
+&H24, Power Axe
+&H25, Battle Axe
+&H26, Large Axe
+&H27, Great Axe
+&H28, Heat Axe
+&H29, Atlas Axe
+&H2A, Ground Axe
+&H2B, Rune Axe
+&H2C, Evil Axe
+&H2D, Wooden Arrow
+&H2E, Iron Arrow
+&H2F, Steel Arrow
+&H30, Robin Arrow
+&H31, Assault Shell
+&H32, Great Shot
+&H33, Nazca Cannon
+&H34, Buster Shot
+&H35, Hyper Cannon
+&H36, Grand Cannon
+&H37, Evil Shot
+&H38, Wooden Stick
+&H39, Short Sword
+&H3A, Middle Sword
+&H3B, Long Sword
+&H3C, Steel Sword
+&H3D, Achilles Sword
+&H3E, Broad Sword
+&H3F, Buster Sword
+&H40, Great Sword
+&H41, Critical Sword
+&H42, Battle Sword
+&H43, Force Sword
+&H44, Counter Sword
+&H45, Levanter
+&H46, Dark Sword
+&H47, Wooden Sword
+&H48, Short Spear
+&H49, Bronze Lance
+&H4A, Spear
+&H4B, Steel Lance
+&H4C, Power Spear
+&H4D, Heavy Lance
+&H4E, Javelin
+&H4F, Chrome Lance
+&H50, Valkyrie
+&H51, Holy Lance
+&H52, Mist Javelin
+&H53, Halberd
+&H54, Evil Lance
+&H55, Wooden Rod
+&H56, Short Rod
+&H57, Bronze Rod
+&H58, Iron Rod
+&H59, Power Stick
+&H5A, Flail
+&H5B, Guardian Staff
+&H5C, Indra Staff
+&H5D, Mage Staff
+&H5E, Wish Staff
+&H5F, Great Rod
+&H60, Supply Staff
+&H61, Holy Staff
+&H62, Freeze Staff
+&H63, Goddess Staff
+&H64, Mystery Staff
+&H65, Demon Rod
+&H66, Iron Ball
+&H67, Short Knife
+&H68, Dagger
+&H69, Knife
+&H6A, Thieve's Dagger
+&H6B, Katana
+&H6C, Ninja Katana
+&H6D, Gisarme
+&H6E, Taros Sword
+&H6F, Right of Hope
+&H70, Wooden Pannel
+&H71, Sky Orb
+&H72, Cannon
+&H73, Dry Stone
+&H74, Dynamite
+&H75, Arm of Golem
+&H76, Pegasus Wing
+&H77, Warrior's Pride
+&H78, Silver Tank
+&H79, Secret Book
+&H7A, Vigor Ball
+&H7B, Mithril
+&H7C, Life Ring
+&H7D, Cotton Balloon
+&H7E, Chirrup Sandles
+&H7F, Empty

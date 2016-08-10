@@ -1,0 +1,1 @@
+custom battle background to use for all tiles per battle (one byte per battle, FF means base it on tile)

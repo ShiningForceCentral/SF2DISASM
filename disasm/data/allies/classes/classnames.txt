@@ -1,0 +1,3 @@
+Entriy layout : 
+[Length][ASCII String]
+No byte to end data so searched index must not go over max entry index.

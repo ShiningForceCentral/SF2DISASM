@@ -1,0 +1,26 @@
+FORMAT:
+- Each letter is 32 bytes.
+- The lower half of byte 1 represents that character's width in pixels.
+  0 will be 0 pixels, and F will be 15 pixels, and so on.
+- The upper half of byte 1 is ignored.
+- Characters may be up to 15 pixels wide, but there is only space for 12 pixels wide of graphical data.
+- The pixels will overlap if there are set pixels beyond the edge of the width that character has been defined as having.
+- The following 15 pairs of bytes represent each row of the character.
+- To determine if a pixel is set or unset, check each bit. A 0 is unset, a 1 is set.
+- The leftmost pixel corresponds with the leftmost bit, and it continues in order, from left to right.
+- The upper half of byte 2,4,6... represents pixels 1,2,3,4 of each row.
+- The lower half of byte 2,4,6... represents pixels 5,6,7,8 of each row.
+- The upper half of byte 3,5,7... represents pixels 9,10,11,12 of each row.
+- The lower half of byte 3,5,7... is ignored.
+- A set pixel is color 15 in palette 2.
+- An unset pixel is color 1 in palette 2.
+
+For example, a byte pair of 3F C0 would result in this binary pattern:
+00111111 11000000
+so the first two pixels are unset, the next 8 are set, and the last 2 are not set for that row.
+
+Order
+
+(space) A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+_ - . , ! ? " " ' ( ) # % & + / : 

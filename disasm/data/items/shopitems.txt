@@ -1,0 +1,9 @@
+ Stores
+ ------
+
+ [Store Length][Item Code 1][..]
+
+ Store length tells how many item slots ahead of that byte to read in. At the end of 
+ this list is an "uber store" with every item in it - it may or may not be accessable
+ by a sekrit code or some such. There is a max size a store can take without glitching up,
+ which is 128, I assume.

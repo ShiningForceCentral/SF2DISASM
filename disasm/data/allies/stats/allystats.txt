@@ -1,0 +1,5 @@
+ Growth Info -
+
+ [Class][HP Growth Type][Base HP][Projected HP][MP Growth Type][Base MP][Projected MP]
+ [ATK Growth Type][Base ATK][Projected ATK][DEF Growth Type][Base DEF][Projected DEF]
+ [AGI Growth Type][Base AGI][Projected AGI][Level Learned At][Spell Code][..][..][FF or FE]

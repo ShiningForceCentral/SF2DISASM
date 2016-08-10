@@ -1,0 +1,29 @@
+0x1EB000..0x1E910 YM Instruments (80d entries of 29d bytes each)
+
+29 bytes per instrument :
+
+- 7 groups of 4 bytes :
+Each group represents an YM register, with a byte value for each of the 4 operators of an YM channel :
+- byte 1 : operator 1 value
+- byte 2 : operator 2 value
+- byte 3 : operator 3 value
+- byte 4 : operator 4 value
+
+General meaning of each group :
+(look at YM2612 doc for exact information about how values are stored : http://www.smspower.org/maxim/docs/ym2612/ )
+
+bytes 1-4 : Register $30, Detune and Multiple
+
+bytes 5-8 : Register $40, Total Level (value $7F for slot operators since their level will depend on the note being played)
+
+bytes 9-12 : Register $50, Rate Scaling and Attack Rate
+
+bytes 13-16 : Register $60, First Decay Rate and Amplitude Modulation
+
+bytes 17-20 : Register $70, Secondary Decay Rate
+
+bytes 21-24 : Register $80, Secondary Amplitude and Release Rate
+
+bytes 25-28 : Register $90, SSG-EG
+
+- last byte : Register $B0, Feedback and Algorithm 
