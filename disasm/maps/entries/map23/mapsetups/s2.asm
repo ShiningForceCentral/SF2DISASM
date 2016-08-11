@@ -27,10 +27,10 @@ ms_map23_EntityEvents:
 
 sub_59B60:
 										
-										trap    #5
-										dc.w $69A
-										trap    #5
-										dc.w $69B
+										trap    #TRAP_TEXTBOX
+										dc.w $69A               ; "Welcome.  Travelers often{N}stop by here to rest.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $69B               ; "You may stay here as{N}long as you like.{W1}"
 										rts
 
 	; End of function sub_59B60
@@ -40,8 +40,8 @@ sub_59B60:
 
 sub_59B6A:
 										
-										trap    #5
-										dc.w $69C
+										trap    #TRAP_TEXTBOX
+										dc.w $69C               ; "They say a fairy lives{N}around here.{N}Do you know her?{W1}"
 										rts
 
 	; End of function sub_59B6A
@@ -51,10 +51,10 @@ sub_59B6A:
 
 sub_59B70:
 										
-										trap    #5
-										dc.w $69D
-										trap    #5
-										dc.w $69E
+										trap    #TRAP_TEXTBOX
+										dc.w $69D               ; "Fairy?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $69E               ; "She has not returned{N}from Creed's mansion.{W1}"
 										rts
 
 	; End of function sub_59B70
@@ -64,10 +64,10 @@ sub_59B70:
 
 sub_59B7A:
 										
-										trap    #5
-										dc.w $69F
-										trap    #5
-										dc.w $6A0
+										trap    #TRAP_TEXTBOX
+										dc.w $69F               ; "To Creed Mansion?{N}Only the fairy knows how to{N}get there.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $6A0               ; "But, maybe {NAME;13} knows{N}because he is a friend of{N}the fairy.{W1}"
 										rts
 
 	; End of function sub_59B7A
@@ -80,17 +80,17 @@ sub_59B84:
 										trap    #1
 										dc.w $D
 										bne.s   loc_59B94
-										trap    #5
-										dc.w $6A1
-										trap    #5
-										dc.w $6A2
+										trap    #TRAP_TEXTBOX
+										dc.w $6A1               ; "{NAME;13} is out.{N}He went to find the fairy{N}to help a sick dwarf.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $6A2               ; "The forest to the west is{N}very dangerous.{W1}"
 										bra.s   return_59B9C
 loc_59B94:
 										
-										trap    #5
-										dc.w $6A3
-										trap    #5
-										dc.w $6A4
+										trap    #TRAP_TEXTBOX
+										dc.w $6A3               ; "A forest elf always returns{N}one's kindness.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $6A4               ; "{LEADER}, I think{N}{NAME;13} will help you.{W1}"
 return_59B9C:
 										
 										rts

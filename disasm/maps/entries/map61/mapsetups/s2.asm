@@ -15,16 +15,16 @@ sub_5C67A:
 										trap    #1
 										dc.w $100
 										bne.s   loc_5C684
-										trap    #5
-										dc.w $E3D
+										trap    #TRAP_TEXTBOX
+										dc.w $E3D               ; "I'm Paseran of Ribble.{N}I'm studying the ancient{N}petroglyphs.{W2}"
 loc_5C684:
 										
-										trap    #5
-										dc.w $E3E
-										trap    #5
-										dc.w $E3F
-										trap    #5
-										dc.w $E40
+										trap    #TRAP_TEXTBOX
+										dc.w $E3E               ; "{NAME;11} told me about{N}a family who has an ancient{N}tomb in Parmecia.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $E3F               ; "According to my studies,{N}his house should be around{N}here somewhere.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $E40               ; "Or, maybe it's to the east.{W1}"
 										trap    #2
 										dc.w $100
 return_5C694:

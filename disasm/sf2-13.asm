@@ -109,7 +109,7 @@ sub_1AC028:
 
 j_getMoveListForEnemyTarget:
 										
-										jmp     getEnemyAITargetMoveList(pc)
+										jmp     GetEnemyAITargetMoveList(pc)
 
 	; End of function j_getMoveListForEnemyTarget
 
@@ -127,7 +127,7 @@ sub_1AC030:
 
 j_clearTerrainListObstructions:
 										
-										jmp     clearTerrainListObstructions(pc)
+										jmp     ClearTerrainListObstructions(pc)
 
 	; End of function j_clearTerrainListObstructions
 
@@ -620,7 +620,7 @@ loc_1AC434:
 
 ; =============== S U B R O U T I N E =======================================
 
-getEnemyAITargetMoveList:
+GetEnemyAITargetMoveList:
 										
 										movem.l d0-a6,-(sp)
 										move.b  d0,d7
@@ -693,7 +693,7 @@ loc_1AC4EA:
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function getEnemyAITargetMoveList
+	; End of function GetEnemyAITargetMoveList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -854,7 +854,7 @@ loc_1AC64E:
 
 ; clear upper two bits from all tiles in terrain list
 
-clearTerrainListObstructions:
+ClearTerrainListObstructions:
 										
 										movem.l d0-a6,-(sp)
 										move.w  #$2F,d4 
@@ -883,7 +883,7 @@ loc_1AC684:
 										movem.l (sp)+,d0-a6
 										rts
 
-	; End of function clearTerrainListObstructions
+	; End of function ClearTerrainListObstructions
 
 
 ; =============== S U B R O U T I N E =======================================

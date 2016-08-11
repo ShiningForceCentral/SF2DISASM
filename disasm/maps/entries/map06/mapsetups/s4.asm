@@ -102,15 +102,15 @@ sub_54E04:
 										tst.w   d0
 										bne.s   return_54E4A
 										ori.b   #0,d0
-										trap    #0
-										dc.w $58
+										trap    #TRAP_SOUNDCOM
+										dc.w SFX_FALLING
 										moveq   #$32,d0 
 										jsr     (Sleep).w       
 										trap    #1
 										dc.w $322
 										bne.s   loc_54E38
-										trap    #0
-										dc.w $64
+										trap    #TRAP_SOUNDCOM
+										dc.w SFX_BLO
 										move.w  #$FFF,d0
 										jsr     (DisplayText).w 
 										bra.s   return_54E4A
@@ -118,8 +118,8 @@ loc_54E38:
 										
 										moveq   #$32,d0 
 										jsr     (Sleep).w       
-										trap    #0
-										dc.w $64
+										trap    #TRAP_SOUNDCOM
+										dc.w SFX_BLO
 										move.w  #$1000,d0
 										jsr     (DisplayText).w 
 return_54E4A:

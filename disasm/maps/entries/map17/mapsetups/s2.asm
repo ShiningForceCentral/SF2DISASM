@@ -57,8 +57,8 @@ sub_52352:
 										trap    #1
 										dc.w $295
 										bne.s   return_5235C
-										trap    #5
-										dc.w $37D
+										trap    #TRAP_TEXTBOX
+										dc.w $37D               ; "We're talking about{N}Ground Seal.{N}Please, join in.{W1}"
 return_5235C:
 										
 										rts
@@ -73,8 +73,8 @@ sub_5235E:
 										trap    #1
 										dc.w $295
 										bne.s   return_52368
-										trap    #5
-										dc.w $380
+										trap    #TRAP_TEXTBOX
+										dc.w $380               ; "Hey!  Don't interrupt!{N}Sit down next to me!{W1}"
 return_52368:
 										
 										rts
@@ -89,8 +89,8 @@ sub_5236A:
 										trap    #1
 										dc.w $295
 										bne.s   return_52374
-										trap    #5
-										dc.w $37F
+										trap    #TRAP_TEXTBOX
+										dc.w $37F               ; "Hey, {LEADER}!{N}King Galam also knows about{N}Ground Seal!{W1}"
 return_52374:
 										
 										rts
@@ -102,8 +102,8 @@ return_52374:
 
 sub_52376:
 										
-										trap    #5
-										dc.w $3B1
+										trap    #TRAP_TEXTBOX
+										dc.w $3B1               ; "I didn't mean to...{W1}"
 										rts
 
 	; End of function sub_52376
@@ -113,8 +113,8 @@ sub_52376:
 
 sub_5237C:
 										
-										trap    #5
-										dc.w $343
+										trap    #TRAP_TEXTBOX
+										dc.w $343               ; "This is the treasure room!{N}You may not pass!{W1}"
 										rts
 
 	; End of function sub_5237C
@@ -124,12 +124,12 @@ sub_5237C:
 
 sub_52382:
 										
-										trap    #5
-										dc.w $344
-										trap    #5
-										dc.w $345
-										trap    #5
-										dc.w $346
+										trap    #TRAP_TEXTBOX
+										dc.w $344               ; "It's true that the messenger{N}met with an unnatural death.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $345               ; "But, that doesn't mean that{N}Granseal did it....{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $346               ; "I don't understand.{N}Why is King Galam so{N}impatient?{W1}"
 										rts
 
 	; End of function sub_52382
@@ -139,14 +139,14 @@ sub_52382:
 
 sub_52390:
 										
-										trap    #5
-										dc.w $347
-										trap    #5
-										dc.w $348
-										trap    #5
-										dc.w $349
-										trap    #5
-										dc.w $34A
+										trap    #TRAP_TEXTBOX
+										dc.w $347               ; "When the messenger was found{N}dead, the King suffured a{N}great deal of pain.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $348               ; "Thank goodness, he{N}recovered quickly.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $349               ; "It's Granseals fault!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $34A               ; "I believe in my King!{W1}"
 										rts
 
 	; End of function sub_52390
@@ -159,13 +159,13 @@ sub_523A2:
 										trap    #1
 										dc.w $295
 										bne.s   loc_523AE
-										trap    #5
-										dc.w $37E
+										trap    #TRAP_TEXTBOX
+										dc.w $37E               ; "You got a raw deal, huh?{N}The same thing happened to{N}the rat next door.{W1}"
 										bra.s   return_523B2
 loc_523AE:
 										
-										trap    #5
-										dc.w $381
+										trap    #TRAP_TEXTBOX
+										dc.w $381               ; "There are a lot of Galam{N}soldiers upstairs.{N}You still want to go?{W1}"
 return_523B2:
 										
 										rts
@@ -177,8 +177,8 @@ return_523B2:
 
 sub_523B4:
 										
-										trap    #5
-										dc.w $382
+										trap    #TRAP_TEXTBOX
+										dc.w $382               ; "You're so brave.{N}Good luck!{W1}"
 										rts
 
 	; End of function sub_523B4
@@ -198,8 +198,8 @@ sub_523BA:
 										bra.s   return_523D0
 loc_523CC:
 										
-										trap    #5
-										dc.w $383
+										trap    #TRAP_TEXTBOX
+										dc.w $383               ; "Don't tell anybody{N}that I neglected my work.{N}If you do{D1}.{D1}.{D1}.{D1}I'll kill you!{W1}"
 return_523D0:
 										
 										rts
@@ -211,8 +211,8 @@ return_523D0:
 
 sub_523D2:
 										
-										trap    #5
-										dc.w $384
+										trap    #TRAP_TEXTBOX
+										dc.w $384               ; "Oh, I'm so busy!{W1}"
 										rts
 
 	; End of function sub_523D2
@@ -231,10 +231,10 @@ nullsub_120:
 
 sub_523DA:
 										
-										trap    #5
-										dc.w $384
-										trap    #5
-										dc.w $384
+										trap    #TRAP_TEXTBOX
+										dc.w $384               ; "Oh, I'm so busy!{W1}"
+										trap    #TRAP_TEXTBOX
+										dc.w $384               ; "Oh, I'm so busy!{W1}"
 										rts
 
 	; End of function sub_523DA

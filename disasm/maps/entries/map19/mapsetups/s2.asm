@@ -51,14 +51,14 @@ sub_52E3A:
 										trap    #1
 										dc.w $100
 										bne.s   loc_52E48
-										trap    #5
-										dc.w $21F
+										trap    #TRAP_TEXTBOX
+										dc.w $21F               ; "I hate fighting.{W2}{N}But I've almost forgotten{N}how to fight fight in this{N}peaceful kingdom.{W1}"
 										trap    #2
 										dc.w $100
 loc_52E48:
 										
-										trap    #5
-										dc.w $220
+										trap    #TRAP_TEXTBOX
+										dc.w $220               ; "I'm going to the Ancient{N}Shrine in the south to{N}kill some rats.{W1}"
 										rts
 
 	; End of function sub_52E3A
@@ -71,14 +71,14 @@ sub_52E4E:
 										trap    #1
 										dc.w $101
 										bne.s   loc_52E5C
-										trap    #5
-										dc.w $221
+										trap    #TRAP_TEXTBOX
+										dc.w $221               ; "Northern Galam is a country{N}on our border, but we are{N}allies.{W2}{N}Do we really need to guard{N}our country?{W2}"
 										trap    #2
 										dc.w $101
 loc_52E5C:
 										
-										trap    #5
-										dc.w $222
+										trap    #TRAP_TEXTBOX
+										dc.w $222               ; "Some younger soldiers{N}think that peace is boring,{N}but they're wrong.{W1}"
 										rts
 
 	; End of function sub_52E4E
@@ -88,8 +88,8 @@ loc_52E5C:
 
 sub_52E62:
 										
-										trap    #5
-										dc.w $223
+										trap    #TRAP_TEXTBOX
+										dc.w $223               ; "Zzzzz....{N}Zzzzz....{W1}"
 										rts
 
 	; End of function sub_52E62
@@ -99,8 +99,8 @@ sub_52E62:
 
 sub_52E68:
 										
-										trap    #5
-										dc.w $224
+										trap    #TRAP_TEXTBOX
+										dc.w $224               ; "Zz...huh...who are you?{N}I'm tired because I was{N}standing watch all night{W2}{N}long...zzzz....{W1}"
 										rts
 
 	; End of function sub_52E68
@@ -113,14 +113,14 @@ sub_52E6E:
 										trap    #1
 										dc.w $102
 										bne.s   loc_52E7C
-										trap    #5
-										dc.w $225
+										trap    #TRAP_TEXTBOX
+										dc.w $225               ; "Weapons storage!{W2}"
 										trap    #2
 										dc.w $102
 loc_52E7C:
 										
-										trap    #5
-										dc.w $226
+										trap    #TRAP_TEXTBOX
+										dc.w $226               ; "The weapons inside could{N}be rusty.  We haven't{N}opened the door for many{W2}{N}years.{W1}"
 										rts
 
 	; End of function sub_52E6E
@@ -133,14 +133,14 @@ sub_52E82:
 										trap    #1
 										dc.w $103
 										bne.s   loc_52E90
-										trap    #5
-										dc.w $227
+										trap    #TRAP_TEXTBOX
+										dc.w $227               ; "This is King Granseal's{N}public room!{W2}{N}Oh, you must be pupils{N}of Sir Astral.{W2}{N}You look too young to work{N}for the King!{W2}"
 										trap    #2
 										dc.w $103
 loc_52E90:
 										
-										trap    #5
-										dc.w $228
+										trap    #TRAP_TEXTBOX
+										dc.w $228               ; "Why don't you go back to{N}school?{W1}"
 										rts
 
 	; End of function sub_52E82
@@ -153,14 +153,14 @@ sub_52E96:
 										trap    #1
 										dc.w $104
 										bne.s   loc_52EA4
-										trap    #5
-										dc.w $229
+										trap    #TRAP_TEXTBOX
+										dc.w $229               ; "I saw Sir Astral going into{N}the King's bedroom.{W2}"
 										trap    #2
 										dc.w $104
 loc_52EA4:
 										
-										trap    #5
-										dc.w $22A
+										trap    #TRAP_TEXTBOX
+										dc.w $22A               ; "He was in such a hurry.{N}Do you know why?{W1}"
 										rts
 
 	; End of function sub_52E96
@@ -173,14 +173,14 @@ sub_52EAA:
 										trap    #1
 										dc.w $105
 										bne.s   loc_52EB8
-										trap    #5
-										dc.w $22B
+										trap    #TRAP_TEXTBOX
+										dc.w $22B               ; "What's wrong with the{N}King?  He is usually{N}down here by now.{W2}"
 										trap    #2
 										dc.w $105
 loc_52EB8:
 										
-										trap    #5
-										dc.w $22C
+										trap    #TRAP_TEXTBOX
+										dc.w $22C               ; "I thought the King would{N}be the last person to{N}oversleep.{W1}"
 										rts
 
 	; End of function sub_52EAA
@@ -193,14 +193,14 @@ sub_52EBE:
 										trap    #1
 										dc.w $106
 										bne.s   loc_52ECC
-										trap    #5
-										dc.w $22D
+										trap    #TRAP_TEXTBOX
+										dc.w $22D               ; "How busy I am!  Soldiers{N}eat here everyday{N}without doing any work.{W2}"
 										trap    #2
 										dc.w $106
 loc_52ECC:
 										
-										trap    #5
-										dc.w $22E
+										trap    #TRAP_TEXTBOX
+										dc.w $22E               ; "But I think that's OK.{N}A soldier's job is fighting.{W1}"
 										rts
 
 	; End of function sub_52EBE
@@ -210,8 +210,8 @@ loc_52ECC:
 
 sub_52ED2:
 										
-										trap    #5
-										dc.w $22F
+										trap    #TRAP_TEXTBOX
+										dc.w $22F               ; "What is she doing now?{N}She brought the King his{N}breakfast over an hour ago.{W1}"
 										rts
 
 	; End of function sub_52ED2
@@ -224,14 +224,14 @@ sub_52ED8:
 										trap    #1
 										dc.w $107
 										bne.s   loc_52EE6
-										trap    #5
-										dc.w $230
+										trap    #TRAP_TEXTBOX
+										dc.w $230               ; "I'm a messenger from Galam.{N}I came here to see the King.{W2}"
 										trap    #2
 										dc.w $107
 loc_52EE6:
 										
-										trap    #5
-										dc.w $231
+										trap    #TRAP_TEXTBOX
+										dc.w $231               ; "But, he's still sleeping.{N}Did I arrive too early?{W1}"
 										rts
 
 	; End of function sub_52ED8
@@ -241,8 +241,8 @@ loc_52EE6:
 
 sub_52EEC:
 										
-										trap    #5
-										dc.w $232
+										trap    #TRAP_TEXTBOX
+										dc.w $232               ; "The cook said that the{N}King didn't eat today.{N}I wonder why?{W1}"
 										rts
 
 	; End of function sub_52EEC

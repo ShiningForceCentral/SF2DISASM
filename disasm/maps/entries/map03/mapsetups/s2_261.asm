@@ -93,14 +93,14 @@ sub_510CC:
 										trap    #1
 										dc.w $100
 										bne.s   loc_510DA
-										trap    #5
-										dc.w $273
+										trap    #TRAP_TEXTBOX
+										dc.w $273               ; "The castle guard said the{N}King chose you to lead a{N}mission.{N}{LEADER}, my dear,{W2}{N}I didn't know you were old{N}enough to work for the{N}King.{W1}"
 										trap    #2
 										dc.w $100
 loc_510DA:
 										
-										trap    #5
-										dc.w $274
+										trap    #TRAP_TEXTBOX
+										dc.w $274               ; "Good luck, {LEADER}.{N}Your father would have{N}been proud of you.{W1}"
 										rts
 
 	; End of function sub_510CC
@@ -113,14 +113,14 @@ sub_510E0:
 										trap    #1
 										dc.w $101
 										bne.s   loc_510EE
-										trap    #5
-										dc.w $275
+										trap    #TRAP_TEXTBOX
+										dc.w $275               ; "I knew your father very{N}well.{N}He was a great leader.{W2}"
 										trap    #2
 										dc.w $101
 loc_510EE:
 										
-										trap    #5
-										dc.w $276
+										trap    #TRAP_TEXTBOX
+										dc.w $276               ; "{LEADER}, you have to{N}study hard and be a fine{N}man like him.{W1}"
 										rts
 
 	; End of function sub_510E0
@@ -130,8 +130,8 @@ loc_510EE:
 
 sub_510F4:
 										
-										trap    #5
-										dc.w $277
+										trap    #TRAP_TEXTBOX
+										dc.w $277               ; "He thinks of you as his{N}grandson.{W2}{N}Sometimes he may annoy{N}you, but it's because he{N}loves you.{W1}"
 										rts
 
 	; End of function sub_510F4
@@ -152,8 +152,8 @@ sub_510FA:
 
 sub_51108:
 										
-										trap    #5
-										dc.w $278
+										trap    #TRAP_TEXTBOX
+										dc.w $278               ; "Why don't you stop by my{N}shop before you set out{N}on your journey?{W1}"
 										rts
 
 	; End of function sub_51108
@@ -163,8 +163,8 @@ sub_51108:
 
 sub_5110E:
 										
-										trap    #5
-										dc.w $279
+										trap    #TRAP_TEXTBOX
+										dc.w $279               ; "That Galam messenger rushed{N}out of town.{N}He looked pale.{W1}"
 										rts
 
 	; End of function sub_5110E
@@ -174,8 +174,8 @@ sub_5110E:
 
 sub_51114:
 										
-										trap    #5
-										dc.w $27A
+										trap    #TRAP_TEXTBOX
+										dc.w $27A               ; "Don't listen to what that{N}fortune teller says.{N}She's a liar.{W1}"
 										rts
 
 	; End of function sub_51114
@@ -185,10 +185,10 @@ sub_51114:
 
 sub_5111A:
 										
-										trap    #5
-										dc.w $27B
-										trap    #5
-										dc.w $27C
+										trap    #TRAP_TEXTBOX
+										dc.w $27B               ; "Hear what I have to say!{N}I can see the ruins in my{N}crystal!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $27C               ; "The war!  Granseal will{N}fall in the war! {N}Believe me!{W1}"
 										rts
 
 	; End of function sub_5111A
@@ -198,8 +198,8 @@ sub_5111A:
 
 sub_51124:
 										
-										trap    #5
-										dc.w $27D
+										trap    #TRAP_TEXTBOX
+										dc.w $27D               ; "You heard about it?{N}The King was sick.{W1}"
 										rts
 
 	; End of function sub_51124
@@ -209,8 +209,8 @@ sub_51124:
 
 sub_5112A:
 										
-										trap    #5
-										dc.w $27E
+										trap    #TRAP_TEXTBOX
+										dc.w $27E               ; "Yes, I heard about it.{N}Soldiers of the castle{N}were talking about it.{W2}{N}It must be true!{W1}"
 										rts
 
 	; End of function sub_5112A
@@ -220,8 +220,8 @@ sub_5112A:
 
 sub_51130:
 										
-										trap    #5
-										dc.w $27F
+										trap    #TRAP_TEXTBOX
+										dc.w $27F               ; "The Minister said you{N}could enter anytime you{N}want.{W1}"
 										rts
 
 	; End of function sub_51130
@@ -231,10 +231,10 @@ sub_51130:
 
 sub_51136:
 										
-										trap    #5
-										dc.w $280
-										trap    #5
-										dc.w $281
+										trap    #TRAP_TEXTBOX
+										dc.w $280               ; "Welcome!{N}We have very novel animals{N}from the mainland!!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $281               ; "You don't want a pet?{N}I'll lower my prices for{N}you!{W1}"
 										rts
 
 	; End of function sub_51136
@@ -244,8 +244,8 @@ sub_51136:
 
 sub_51140:
 										
-										trap    #5
-										dc.w $282
+										trap    #TRAP_TEXTBOX
+										dc.w $282               ; "He looks so sad...{N}I feel sorry for him.{W1}"
 										rts
 
 	; End of function sub_51140
@@ -255,8 +255,8 @@ sub_51140:
 
 sub_51146:
 										
-										trap    #5
-										dc.w $283
+										trap    #TRAP_TEXTBOX
+										dc.w $283               ; "Bok-bok-bok.{N}Bok-gawk!{W1}"
 										rts
 
 	; End of function sub_51146
@@ -266,8 +266,8 @@ sub_51146:
 
 sub_5114C:
 										
-										trap    #5
-										dc.w $284
+										trap    #TRAP_TEXTBOX
+										dc.w $284               ; "Watch out!{N}Don't loiter around here!{N}Ever!{W1}"
 										rts
 
 	; End of function sub_5114C
@@ -277,8 +277,8 @@ sub_5114C:
 
 sub_51152:
 										
-										trap    #5
-										dc.w $285
+										trap    #TRAP_TEXTBOX
+										dc.w $285               ; "Sorry, my husband is{N}angry.  He didn't catch any{N}fish today.{W1}"
 										rts
 
 	; End of function sub_51152
@@ -288,8 +288,8 @@ sub_51152:
 
 sub_51158:
 										
-										trap    #5
-										dc.w $286
+										trap    #TRAP_TEXTBOX
+										dc.w $286               ; "Granseal harbor is behind{N}me.{W2}{N}A ship just docked a few{N}minutes ago.{W1}"
 										rts
 
 	; End of function sub_51158
@@ -299,8 +299,8 @@ sub_51158:
 
 sub_5115E:
 										
-										trap    #5
-										dc.w $287
+										trap    #TRAP_TEXTBOX
+										dc.w $287               ; "The human caught me when{N}I was taking a walk in{N}Parmecia.{W1}"
 										rts
 
 	; End of function sub_5115E
@@ -310,8 +310,8 @@ sub_5115E:
 
 sub_51164:
 										
-										trap    #5
-										dc.w $288
+										trap    #TRAP_TEXTBOX
+										dc.w $288               ; "Release me! Get me out of{N}here or I shall eat you up!!{W1}"
 										rts
 
 	; End of function sub_51164
@@ -321,8 +321,8 @@ sub_51164:
 
 sub_5116A:
 										
-										trap    #5
-										dc.w $289
+										trap    #TRAP_TEXTBOX
+										dc.w $289               ; "Me...(sob)...so hungry.{N}Hungry....{W1}"
 										rts
 
 	; End of function sub_5116A
@@ -342,8 +342,8 @@ sub_51170:
 
 sub_51178:
 										
-										trap    #5
-										dc.w $28A
+										trap    #TRAP_TEXTBOX
+										dc.w $28A               ; "I envy you!  You saw{N}the beautiful Princess Elis!{W1}"
 										rts
 
 	; End of function sub_51178
@@ -356,15 +356,15 @@ sub_5117E:
 										trap    #1
 										dc.w $116
 										bne.s   loc_5118E
-										trap    #5
-										dc.w $28B
+										trap    #TRAP_TEXTBOX
+										dc.w $28B               ; "A pet shop has newly opened,{N}but Mom never lets me go?{N}Why?{W1}"
 										trap    #2
 										dc.w $116
 										bra.s   return_51192
 loc_5118E:
 										
-										trap    #5
-										dc.w $291
+										trap    #TRAP_TEXTBOX
+										dc.w $291               ; "Well, {LEADER}!{N}Come and play with me{N}later!  Promise?{W1}"
 return_51192:
 										
 										rts
@@ -379,14 +379,14 @@ sub_51194:
 										trap    #1
 										dc.w $117
 										bne.s   loc_511A2
-										trap    #5
-										dc.w $292
+										trap    #TRAP_TEXTBOX
+										dc.w $292               ; "Strangers from the mainland{N}opened a pet shop.{W2}"
 										trap    #2
 										dc.w $117
 loc_511A2:
 										
-										trap    #5
-										dc.w $293
+										trap    #TRAP_TEXTBOX
+										dc.w $293               ; "I don't think it's right{N}to hold animals captive.{W1}"
 										rts
 
 	; End of function sub_51194
@@ -399,14 +399,14 @@ sub_511A8:
 										trap    #1
 										dc.w $118
 										bne.s   loc_511B6
-										trap    #5
-										dc.w $294
+										trap    #TRAP_TEXTBOX
+										dc.w $294               ; "(Sniff, sniff)...have you{N}seen or smelt any sulfur?{W2}"
 										trap    #2
 										dc.w $118
 loc_511B6:
 										
-										trap    #5
-										dc.w $295
+										trap    #TRAP_TEXTBOX
+										dc.w $295               ; "I'm an inventor.{N}I'm looking for some sulfur.{W1}"
 										rts
 
 	; End of function sub_511A8

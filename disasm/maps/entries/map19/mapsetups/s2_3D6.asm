@@ -63,8 +63,8 @@ ms_map19_flag3D6_EntityEvents:
 
 sub_62C16:
 										
-										trap    #5
-										dc.w $FA8
+										trap    #TRAP_TEXTBOX
+										dc.w $FA8               ; "The Minister is waiting{N}for you.{W1}"
 										rts
 
 	; End of function sub_62C16
@@ -74,8 +74,8 @@ sub_62C16:
 
 sub_62C1C:
 										
-										trap    #5
-										dc.w $FA9
+										trap    #TRAP_TEXTBOX
+										dc.w $FA9               ; "Oh, {LEADER}!{N}I really respect you.{W2}"
 										rts
 
 	; End of function sub_62C1C
@@ -85,8 +85,8 @@ sub_62C1C:
 
 sub_62C22:
 										
-										trap    #5
-										dc.w $FBD
+										trap    #TRAP_TEXTBOX
+										dc.w $FBD               ; "It's OK...{W2}{N}I'll find a girl someday!{W1}"
 										rts
 
 	; End of function sub_62C22
@@ -96,8 +96,8 @@ sub_62C22:
 
 sub_62C28:
 										
-										trap    #5
-										dc.w $F9D
+										trap    #TRAP_TEXTBOX
+										dc.w $F9D               ; "What does he mean?{N}I don't understand!{W1}"
 										rts
 
 	; End of function sub_62C28
@@ -107,8 +107,8 @@ sub_62C28:
 
 sub_62C2E:
 										
-										trap    #5
-										dc.w $FBE
+										trap    #TRAP_TEXTBOX
+										dc.w $FBE               ; "Don't worry.{N}He's tough.{W1}"
 										rts
 
 	; End of function sub_62C2E
@@ -118,10 +118,10 @@ sub_62C2E:
 
 sub_62C34:
 										
-										trap    #5
-										dc.w $FBA
-										trap    #5
-										dc.w $FBB
+										trap    #TRAP_TEXTBOX
+										dc.w $FBA               ; "Hurry, {LEADER}!{N}Princess Elis is upstairs!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $FBB               ; "You were so cool in our{N}adventure two years ago!{W1}"
 										rts
 
 	; End of function sub_62C34
@@ -131,8 +131,8 @@ sub_62C34:
 
 sub_62C3E:
 										
-										trap    #5
-										dc.w $F92
+										trap    #TRAP_TEXTBOX
+										dc.w $F92               ; "{LEADER} is a human!{N}They will make a cute couple!{W1}"
 										rts
 
 	; End of function sub_62C3E
@@ -142,8 +142,8 @@ sub_62C3E:
 
 sub_62C44:
 										
-										trap    #5
-										dc.w $F9E
+										trap    #TRAP_TEXTBOX
+										dc.w $F9E               ; "They remind me of when I{N}was young.{W1}"
 										rts
 
 	; End of function sub_62C44
@@ -153,8 +153,8 @@ sub_62C44:
 
 sub_62C4A:
 										
-										trap    #5
-										dc.w $FBC
+										trap    #TRAP_TEXTBOX
+										dc.w $FBC               ; "{LEADER}, go kiss her!{W1}"
 										rts
 
 	; End of function sub_62C4A
@@ -164,8 +164,8 @@ sub_62C4A:
 
 sub_62C50:
 										
-										trap    #5
-										dc.w $F94
+										trap    #TRAP_TEXTBOX
+										dc.w $F94               ; "I think he's the best{N}choice.{W1}"
 										rts
 
 	; End of function sub_62C50
@@ -175,8 +175,8 @@ sub_62C50:
 
 sub_62C56:
 										
-										trap    #5
-										dc.w $FBF
+										trap    #TRAP_TEXTBOX
+										dc.w $FBF               ; "You're blushing!{N}Just be cool!{W1}"
 										rts
 
 	; End of function sub_62C56
@@ -186,10 +186,10 @@ sub_62C56:
 
 sub_62C5C:
 										
-										trap    #5
-										dc.w $FA2
-										trap    #5
-										dc.w $FA3
+										trap    #TRAP_TEXTBOX
+										dc.w $FA2               ; "{NAME;4} will take care{N}of {NAME;1}.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $FA3               ; "Everything went as you{N}expected, huh?{W1}"
 										rts
 
 	; End of function sub_62C5C
@@ -199,8 +199,8 @@ sub_62C5C:
 
 sub_62C66:
 										
-										trap    #5
-										dc.w $FC0
+										trap    #TRAP_TEXTBOX
+										dc.w $FC0               ; "He was young before?{W1}"
 										rts
 
 	; End of function sub_62C66

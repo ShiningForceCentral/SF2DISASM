@@ -7248,7 +7248,7 @@ sub_1477E:
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_CURSED_ITEM  ; cursed item effect
 										trap    #TRAP_TEXTBOX
-										dc.w $2B                ; Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}
+										dc.w $2B                ; "Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}"
 										bsr.w   WaitForMusicResumeAndPlayerInput_0
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
@@ -7265,7 +7265,7 @@ loc_147B8:
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_CURSED_ITEM  ; cursed item effect
 										trap    #TRAP_TEXTBOX
-										dc.w $22                ; Gosh!  {NAME} is{N}cursed!{W2}
+										dc.w $22                ; "Gosh!  {NAME} is{N}cursed!{W2}"
 										bsr.w   WaitForMusicResumeAndPlayerInput_0
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
@@ -10484,7 +10484,7 @@ unk_1623A:          dc.b $3D
 NumberPrompt:
 										
 										movem.l d1-a1,-(sp)
-										link    a6,#$FFF0
+										link    a6,#-WINDOW_NUMPROMPT_STACK_NEGSIZE
 										move.w  d0,-WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6)
 										move.w  d1,-WINDOW_NUMPROMPT_STACK_OFFSET_MINNUM(a6)
 										move.w  d2,-WINDOW_NUMPROMPT_STACK_OFFSET_MAXNUM(a6)
@@ -10813,7 +10813,7 @@ sub_16588:
 										move.l  d1,((SPECIAL_BATTLE_TIME-$1000000)).w
 										subq.w  #1,d0
 										bsr.w   sub_165C0
-										trap    #VINTS_CLEAR
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SELECTION
 										tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 										bne.s   loc_165BA

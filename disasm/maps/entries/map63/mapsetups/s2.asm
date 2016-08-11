@@ -25,11 +25,11 @@ sub_5C992:
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #5
-										dc.w $1051
-										trap    #5
-										dc.w $1052
-										trap    #5
+										trap    #TRAP_TEXTBOX
+										dc.w $1051              ; "Olooooo...Oloo....{N}Have you seen my arm?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $1052              ; "I can't move...without my{N}arm...oloooo....{W1}"
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										bra.s   return_5C9E0
 loc_5C9D2:

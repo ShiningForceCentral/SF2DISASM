@@ -31,8 +31,8 @@ sub_53FAA:
 										
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #5
-										dc.w $3E8
+										trap    #TRAP_TEXTBOX
+										dc.w $3E8               ; "He's already dead.{N}{LEADER} feels regret.{W1}"
 return_53FB8:
 										
 										rts

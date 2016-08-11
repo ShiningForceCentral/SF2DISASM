@@ -389,8 +389,8 @@ sub_5C254:
 
 sub_5C25C:
 										
-										trap    #5
-										dc.w $B
+										trap    #TRAP_TEXTBOX
+										dc.w $B                 ; "{LEADER}, take it easy!{W1}"
 										rts
 
 	; End of function sub_5C25C

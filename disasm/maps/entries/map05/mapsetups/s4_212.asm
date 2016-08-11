@@ -78,8 +78,8 @@ sub_60590:
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #5
-										dc.w $D9B
+										trap    #TRAP_TEXTBOX
+										dc.w $D9B               ; "I can't believe it!{N}I want to die, but I can't!{W1}"
 										trap    #2
 										dc.w $3B1
 										bra.s   return_60604
@@ -94,18 +94,18 @@ loc_605C4:
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #5
-										dc.w $D9B
+										trap    #TRAP_TEXTBOX
+										dc.w $D9B               ; "I can't believe it!{N}I want to die, but I can't!{W1}"
 										bra.s   return_60604
 loc_605EE:
 										
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
 										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #5
-										dc.w $1A7
-										trap    #5
-										dc.w $FF2
+										trap    #TRAP_TEXTBOX
+										dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+										trap    #TRAP_TEXTBOX
+										dc.w $FF2               ; "A hole.{W1}"
 return_60604:
 										
 										rts

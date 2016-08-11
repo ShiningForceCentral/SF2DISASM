@@ -5490,7 +5490,7 @@ loc_9B80:
 WriteSkirmishScript:
 										
 										movem.l d0-a6,-(sp)
-										link    a2,#-$98
+										link    a2,#BTLSCENE_STACKNEGSIZE
 										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a3
 										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a4
 										lea     ((RAM_CharIdxList-$1000000)).w,a5
@@ -6977,33 +6977,33 @@ OneSecondSleep:
 
 ; =============== S U B R O U T I N E =======================================
 
-nopOnce:
+NopOnce:
 										nop
 										rts
 
-	; End of function nopOnce
+	; End of function NopOnce
 
 
 ; =============== S U B R O U T I N E =======================================
 
-nopTwice:
+NopTwice:
 										nop
 										nop
 										rts
 
-	; End of function nopTwice
+	; End of function NopTwice
 
 
 ; =============== S U B R O U T I N E =======================================
 
-nopThrice:
+NopThrice:
 										
 										nop
 										nop
 										nop
 										rts
 
-	; End of function nopThrice
+	; End of function NopThrice
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -8963,21 +8963,21 @@ GetItemBreakMessage:
 										tst.b   d0
 										bne.s   loc_BCB4
 										tst.b   -5(a2)
-										bne.s   loc_BCAE
+										bne.s   loc_BCAE        
 loc_BCA8:
-										move.w  #$174,d3
+										move.w  #$174,d3        ; But smoke rose from{N}the {ITEM}.{D1}
 										bra.s   loc_BCB2
 loc_BCAE:
-										move.w  #$17E,d3
+										move.w  #$17E,d3        ; And smoke emerged from{N}the {ITEM}.{D1}
 loc_BCB2:
 										bra.s   loc_BCC4
 loc_BCB4:
 										tst.b   -5(a2)
-										bne.s   loc_BCC0
-										move.w  #$179,d3
+										bne.s   loc_BCC0        
+										move.w  #$179,d3        ; But, the {ITEM}{N}burst into flames.
 										bra.s   loc_BCC4
 loc_BCC0:
-										move.w  #$183,d3
+										move.w  #$183,d3        ; And the {ITEM}{N}burst into flames.
 loc_BCC4:
 										move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d0
 										andi.w  #$7F,d0 

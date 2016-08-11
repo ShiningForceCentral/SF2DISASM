@@ -58,8 +58,8 @@ sub_5A11C:
 
 sub_5A128:
 										
-										trap    #5
-										dc.w $84D
+										trap    #TRAP_TEXTBOX
+										dc.w $84D               ; "I think...I've met you{N}somewhere before.{W1}"
 										rts
 
 	; End of function sub_5A128
@@ -69,10 +69,10 @@ sub_5A128:
 
 sub_5A12E:
 										
-										trap    #5
-										dc.w $84E
-										trap    #5
-										dc.w $84F
+										trap    #TRAP_TEXTBOX
+										dc.w $84E               ; "It's very dangerous outside.{N}We can't go to Galam.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $84F               ; "But, we have to leave here{N}very soon.{W1}"
 										rts
 
 	; End of function sub_5A12E
@@ -82,10 +82,10 @@ sub_5A12E:
 
 sub_5A138:
 										
-										trap    #5
-										dc.w $850
-										trap    #5
-										dc.w $851
+										trap    #TRAP_TEXTBOX
+										dc.w $850               ; "The Dwarven Blacksmith is{N}very good.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $851               ; "You can place a custom order{N}with him.{W1}"
 										rts
 
 	; End of function sub_5A138
@@ -95,10 +95,10 @@ sub_5A138:
 
 sub_5A142:
 										
-										trap    #5
-										dc.w $852
-										trap    #5
-										dc.w $853
+										trap    #TRAP_TEXTBOX
+										dc.w $852               ; "Mithril is very hard to find.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $853               ; "Go see the blacksmith if you{N}have any Mithril.{W1}"
 										rts
 
 	; End of function sub_5A142

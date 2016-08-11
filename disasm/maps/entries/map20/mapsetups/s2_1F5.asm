@@ -30,8 +30,8 @@ ms_map20_flag1F5_EntityEvents:
 
 sub_53850:
 										
-										trap    #5
-										dc.w $896
+										trap    #TRAP_TEXTBOX
+										dc.w $896               ; "Guooooorrrr!{W1}"
 										rts
 
 	; End of function sub_53850
@@ -41,8 +41,8 @@ sub_53850:
 
 sub_53856:
 										
-										trap    #5
-										dc.w $250
+										trap    #TRAP_TEXTBOX
+										dc.w $250               ; "Let me pass!{N}I must see my father!{W1}"
 										rts
 
 	; End of function sub_53856
@@ -66,14 +66,14 @@ sub_53864:
 										trap    #1
 										dc.w $103
 										bne.s   loc_53872
-										trap    #5
-										dc.w $251
+										trap    #TRAP_TEXTBOX
+										dc.w $251               ; "I saw a devil enter the{N}King's body...{W2}"
 										trap    #2
 										dc.w $103
 loc_53872:
 										
-										trap    #5
-										dc.w $252
+										trap    #TRAP_TEXTBOX
+										dc.w $252               ; "and the King became{N}violent!{W1}"
 										rts
 
 	; End of function sub_53864
@@ -86,14 +86,14 @@ sub_53878:
 										trap    #1
 										dc.w $104
 										bne.s   loc_53886
-										trap    #5
-										dc.w $253
+										trap    #TRAP_TEXTBOX
+										dc.w $253               ; "Hurry to the Princess's{N}bedroom!  Hold the King{N}down!{W1}"
 										trap    #2
 										dc.w $104
 loc_53886:
 										
-										trap    #5
-										dc.w $254
+										trap    #TRAP_TEXTBOX
+										dc.w $254               ; "The King knocked down{N}the Princess....{W1}"
 										rts
 
 	; End of function sub_53878
@@ -106,14 +106,14 @@ sub_5388C:
 										trap    #1
 										dc.w $105
 										bne.s   loc_5389A
-										trap    #5
-										dc.w $24C
+										trap    #TRAP_TEXTBOX
+										dc.w $24C               ; "Ooo, ouch!{N}I didn't think he could{N}be so strong!{W2}"
 										trap    #2
 										dc.w $105
 loc_5389A:
 										
-										trap    #5
-										dc.w $24D
+										trap    #TRAP_TEXTBOX
+										dc.w $24D               ; "Ouch!  I was knocked down!{W1}"
 										rts
 
 	; End of function sub_5388C
@@ -126,14 +126,14 @@ sub_538A0:
 										trap    #1
 										dc.w $106
 										bne.s   loc_538AE
-										trap    #5
-										dc.w $24E
+										trap    #TRAP_TEXTBOX
+										dc.w $24E               ; "Princess Elis!{N}I can't let you up there.{W2}"
 										trap    #2
 										dc.w $106
 loc_538AE:
 										
-										trap    #5
-										dc.w $24F
+										trap    #TRAP_TEXTBOX
+										dc.w $24F               ; "Trust Sir Astral!{N}He knows how to cure{N}the King!{W1}"
 										rts
 
 	; End of function sub_538A0

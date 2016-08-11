@@ -45,8 +45,8 @@ ms_map9_EntityEvents:
 
 sub_56756:
 										
-										trap    #5
-										dc.w $553
+										trap    #TRAP_TEXTBOX
+										dc.w $553               ; "Hassan is a port town.{W2}{N}But, we've had no trading{N}recently.{W1}"
 										rts
 
 	; End of function sub_56756
@@ -56,8 +56,8 @@ sub_56756:
 
 sub_5675C:
 										
-										trap    #5
-										dc.w $554
+										trap    #TRAP_TEXTBOX
+										dc.w $554               ; "Our ancestors came here from{N}Rune by way of the sea.{W2}{N}They should've avoided such{N}an inconvenient place like{N}this.{W1}"
 										rts
 
 	; End of function sub_5675C
@@ -67,8 +67,8 @@ sub_5675C:
 
 sub_56762:
 										
-										trap    #5
-										dc.w $565
+										trap    #TRAP_TEXTBOX
+										dc.w $565               ; "I think I'll take a nap{N}now.  Bye.{W1}"
 										rts
 
 	; End of function sub_56762
@@ -113,8 +113,8 @@ sub_5678C:
 										trap    #1
 										dc.w $2D5
 										bne.s   loc_567C2
-										trap    #5
-										dc.w $555
+										trap    #TRAP_TEXTBOX
+										dc.w $555               ; "Dr. {NAME;11} lives in the{N}house over there.{W2}"
 										move.w  #$86,d0 
 										moveq   #3,d1
 										jsr     sub_4781A
@@ -125,13 +125,13 @@ sub_5678C:
 										addq.w  #2,d1
 										andi.w  #3,d1
 										jsr     sub_4781A
-										trap    #5
-										dc.w $556
+										trap    #TRAP_TEXTBOX
+										dc.w $556               ; "He is eccentric.{N}He hates talking, but...{W2}{N}a historical topic may{N}interest him.{W1}"
 										bra.s   return_567C6
 loc_567C2:
 										
-										trap    #5
-										dc.w $55A
+										trap    #TRAP_TEXTBOX
+										dc.w $55A               ; "Dr. {NAME;11}!  Hmmm,{N}are you a magician?{W1}"
 return_567C6:
 										
 										rts
@@ -143,10 +143,10 @@ return_567C6:
 
 sub_567C8:
 										
-										trap    #5
-										dc.w $557
-										trap    #5
-										dc.w $558
+										trap    #TRAP_TEXTBOX
+										dc.w $557               ; "How on earth did you come{N}to Hassan?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $558               ; "By raft?  Wow!{N}You killed the Kraken?!{W1}"
 										rts
 
 	; End of function sub_567C8
@@ -156,8 +156,8 @@ sub_567C8:
 
 sub_567D2:
 										
-										trap    #5
-										dc.w $559
+										trap    #TRAP_TEXTBOX
+										dc.w $559               ; "The river is drying up{N}because of the drought.{W2}{N}To the west?{N}If you really want to go,{N}ask Dr. {NAME;11}....{W1}"
 										rts
 
 	; End of function sub_567D2
@@ -185,8 +185,8 @@ sub_567E6:
 										jsr     j_sub_9146
 										cmpi.w  #$FFFF,d0
 										bne.s   loc_56804
-										trap    #5
-										dc.w $55B
+										trap    #TRAP_TEXTBOX
+										dc.w $55B               ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
 										trap    #2
 										dc.w $31E
 										bra.s   loc_56828
@@ -195,10 +195,10 @@ loc_56804:
 										trap    #1
 										dc.w $31E
 										bne.s   loc_5681E
-										trap    #5
-										dc.w $55B
+										trap    #TRAP_TEXTBOX
+										dc.w $55B               ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
 										jsr     j_HidePortraitWindow
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										moveq   #$28,d0 
 										jsr     (Sleep).w       

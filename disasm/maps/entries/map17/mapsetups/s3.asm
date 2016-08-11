@@ -47,10 +47,10 @@ sub_52406:
 										bra.s   return_5242C
 loc_5241E:
 										
-										trap    #5
-										dc.w $3B4
-										trap    #5
-										dc.w $3B7
+										trap    #TRAP_TEXTBOX
+										dc.w $3B4               ; "You'll be captured if you go{N}that way.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $3B7               ; "Now, go out through this{N}short cut!{W1}"
 										lea     cs_528CA(pc), a0
 										trap    #6
 return_5242C:

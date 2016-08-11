@@ -57,8 +57,8 @@ nullsub_140:
 
 sub_5D884:
 										
-										trap    #5
-										dc.w $CD1
+										trap    #TRAP_TEXTBOX
+										dc.w $CD1               ; "Are you from South Parmecia?{N}Oh, great!{W1}"
 										rts
 
 	; End of function sub_5D884
@@ -68,10 +68,10 @@ sub_5D884:
 
 sub_5D88A:
 										
-										trap    #5
-										dc.w $CD2
-										trap    #5
-										dc.w $CD3
+										trap    #TRAP_TEXTBOX
+										dc.w $CD2               ; "It's been dry here since the{N}devils appeared.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CD3               ; "They must have done something{N}to Goddess Mitula!{W1}"
 										rts
 
 	; End of function sub_5D88A
@@ -81,10 +81,10 @@ sub_5D88A:
 
 sub_5D894:
 										
-										trap    #5
-										dc.w $CD4
-										trap    #5
-										dc.w $CD5
+										trap    #TRAP_TEXTBOX
+										dc.w $CD4               ; "Brave Pacalons?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CD5               ; "None at all.  There are no{N}soldiers who can fight{N}against the devils.{W1}"
 										rts
 
 	; End of function sub_5D894
@@ -97,9 +97,9 @@ sub_5D89E:
 										trap    #1
 										dc.w $32A
 										bne.s   loc_5D8B6
-										trap    #5
-										dc.w $CD6
-										trap    #5
+										trap    #TRAP_TEXTBOX
+										dc.w $CD6               ; "Devils are coming to town?{N}OK, I'll beat them up!{W1}"
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										lea     cs_5DA7A(pc), a0
 										trap    #6
@@ -107,8 +107,8 @@ sub_5D89E:
 										dc.w $32A
 loc_5D8B6:
 										
-										trap    #5
-										dc.w $CD7
+										trap    #TRAP_TEXTBOX
+										dc.w $CD7               ; "Oh, I can't.  I'm too hungry!{W1}"
 										rts
 
 	; End of function sub_5D89E
@@ -118,12 +118,12 @@ loc_5D8B6:
 
 sub_5D8BC:
 										
-										trap    #5
-										dc.w $CD8
-										trap    #5
-										dc.w $CD9
-										trap    #5
-										dc.w $CDA
+										trap    #TRAP_TEXTBOX
+										dc.w $CD8               ; "They came from Nazca, which{N}is west of Moun.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CD9               ; "We locked the gate of Moun{N}to stop their progress.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CDA               ; "Vicar {NAME;22} has the{N}key to open the gate.{W1}"
 										rts
 
 	; End of function sub_5D8BC
@@ -133,12 +133,12 @@ sub_5D8BC:
 
 sub_5D8CA:
 										
-										trap    #5
-										dc.w $CDB
-										trap    #5
-										dc.w $CDC
-										trap    #5
-										dc.w $CDD
+										trap    #TRAP_TEXTBOX
+										dc.w $CDB               ; "Devils came to Pacalon{N}through Moun.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CDC               ; "We blocked the invaders{N}by locking the gate of Moun.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CDD               ; "That means, we abandoned{N}the people living there.{W1}"
 										rts
 
 	; End of function sub_5D8CA
@@ -148,10 +148,10 @@ sub_5D8CA:
 
 sub_5D8D8:
 										
-										trap    #5
-										dc.w $CDE
-										trap    #5
-										dc.w $CDF
+										trap    #TRAP_TEXTBOX
+										dc.w $CDE               ; "We don't have enough food{N}because of the long drought.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CDF               ; "Just one rainfall would make{N}us happy.{W1}"
 										rts
 
 	; End of function sub_5D8D8
@@ -161,12 +161,12 @@ sub_5D8D8:
 
 sub_5D8E2:
 										
-										trap    #5
-										dc.w $CE0
-										trap    #5
-										dc.w $CE1
-										trap    #5
-										dc.w $CE2
+										trap    #TRAP_TEXTBOX
+										dc.w $CE0               ; "{NAME;19} asked you to drop{N}by here?  Thank you!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CE1               ; "May I ask you a favor?{N}Please save Mitula.{N}She's in Tristan.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CE2               ; "We will be ruined by the{N}drought long before the{N}devils destroy us.{W1}"
 										rts
 
 	; End of function sub_5D8E2
@@ -176,10 +176,10 @@ sub_5D8E2:
 
 sub_5D8F0:
 										
-										trap    #5
-										dc.w $CE3
-										trap    #5
-										dc.w $CE4
+										trap    #TRAP_TEXTBOX
+										dc.w $CE3               ; "You'll see a route through{N}the mountains when you go{N}north from here.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CE4               ; "You can get to Tristan by{N}traveling along that route.{W1}"
 										rts
 
 	; End of function sub_5D8F0
@@ -189,10 +189,10 @@ sub_5D8F0:
 
 sub_5D8FA:
 										
-										trap    #5
-										dc.w $CE5
-										trap    #5
-										dc.w $CE6
+										trap    #TRAP_TEXTBOX
+										dc.w $CE5               ; "I committed a sin....{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CE6               ; "I abandoned the people of{N}Moun to protect the{N}Parmecia continent.{W1}"
 										rts
 
 	; End of function sub_5D8FA
@@ -202,10 +202,10 @@ sub_5D8FA:
 
 sub_5D904:
 										
-										trap    #5
-										dc.w $CE7
-										trap    #5
-										dc.w $CE8
+										trap    #TRAP_TEXTBOX
+										dc.w $CE7               ; "What happened to the{N}soldiers who went into{N}Mitula's Shrine?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CE8               ; "Were they all killed?{W1}"
 										rts
 
 	; End of function sub_5D904
@@ -215,12 +215,12 @@ sub_5D904:
 
 sub_5D90E:
 										
-										trap    #5
-										dc.w $CE9
-										trap    #5
-										dc.w $CEA
-										trap    #5
-										dc.w $CEB
+										trap    #TRAP_TEXTBOX
+										dc.w $CE9               ; "I saw it!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CEA               ; "The Princess ate food in the{N}kitchen one night.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $CEB               ; "I didn't wish to see such{N}an uncouth princess.{W1}"
 										rts
 
 	; End of function sub_5D90E

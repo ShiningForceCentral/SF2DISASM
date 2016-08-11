@@ -74,10 +74,10 @@ sub_5D5BE:
 										trap    #1
 										dc.w $343
 										bne.s   return_5D60C
-										trap    #5
-										dc.w $7E1
-										trap    #5
-										dc.w $7E2
+										trap    #TRAP_TEXTBOX
+										dc.w $7E1               ; "{LEADER} found the Arm of{N}Golem.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7E2               ; "Pick it up?"
 										jsr     j_YesNoPrompt
 										tst.w   d0
 										bne.s   loc_5D608
@@ -93,17 +93,17 @@ sub_5D5BE:
 										bra.s   loc_5D606
 loc_5D5FE:
 										
-										trap    #5
-										dc.w $7E4
-										trap    #5
-										dc.w $7E7
+										trap    #TRAP_TEXTBOX
+										dc.w $7E4               ; "But {LEADER}'s hands{N}are full.{W1}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7E7               ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 loc_5D606:
 										
 										bra.s   return_5D60C
 loc_5D608:
 										
-										trap    #5
-										dc.w $7E7
+										trap    #TRAP_TEXTBOX
+										dc.w $7E7               ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 return_5D60C:
 										
 										rts

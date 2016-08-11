@@ -39,19 +39,19 @@ sub_63252:
 										trap    #1
 										dc.w $3D6
 										bne.s   loc_63266
-										trap    #5
-										dc.w $F66
-										trap    #5
-										dc.w $F67
-										trap    #5
-										dc.w $F68
+										trap    #TRAP_TEXTBOX
+										dc.w $F66               ; "{LEADER}!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F67               ; "I'm waiting for Sir Astral.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F68               ; "{LEADER}, will you go{N}see him?{W1}"
 										bra.s   return_6326E
 loc_63266:
 										
-										trap    #5
-										dc.w $FAA
-										trap    #5
-										dc.w $FAB
+										trap    #TRAP_TEXTBOX
+										dc.w $FAA               ; "You shouldered quite a{N}burden for the kingdom.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $FAB               ; "I'll be happy if you rule{N}this kingdom with Princess{N}Elis!{W1}"
 return_6326E:
 										
 										rts
@@ -65,8 +65,8 @@ sub_63270:
 										
 										moveq   #1,d0
 										jsr     sub_100B8
-										trap    #5
-										dc.w $FAF
+										trap    #TRAP_TEXTBOX
+										dc.w $FAF               ; "Zzzzz....{W1}"
 										rts
 
 	; End of function sub_63270
@@ -76,8 +76,8 @@ sub_63270:
 
 sub_6327E:
 										
-										trap    #5
-										dc.w $FB0
+										trap    #TRAP_TEXTBOX
+										dc.w $FB0               ; "I'm splitting firewood!{N}My back hurts!{W1}"
 										rts
 
 	; End of function sub_6327E
@@ -87,8 +87,8 @@ sub_6327E:
 
 sub_63284:
 										
-										trap    #5
-										dc.w $FB6
+										trap    #TRAP_TEXTBOX
+										dc.w $FB6               ; "This is the east tower.{N}I'm on watch.{W1}"
 										rts
 
 	; End of function sub_63284
@@ -98,8 +98,8 @@ sub_63284:
 
 sub_6328A:
 										
-										trap    #5
-										dc.w $FB7
+										trap    #TRAP_TEXTBOX
+										dc.w $FB7               ; "What a view!{N}Parmecia is beautiful!{W1}"
 										rts
 
 	; End of function sub_6328A
@@ -109,10 +109,10 @@ sub_6328A:
 
 sub_63290:
 										
-										trap    #5
-										dc.w $FB8
-										trap    #5
-										dc.w $FB9
+										trap    #TRAP_TEXTBOX
+										dc.w $FB8               ; "Yeeee!  Who are you!?{N}{LEADER}!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $FB9               ; "I wouldn't have screamed{N}if I knew it was you.{W1}"
 										rts
 
 	; End of function sub_63290

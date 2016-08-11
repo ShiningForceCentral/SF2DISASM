@@ -1797,8 +1797,8 @@ bsc0F_giveEXP:
 										btst    #$F,d1
 										bne.s   loc_1910C
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #5
-										btst    d0,d7
+										trap    #TRAP_TEXTBOX
+										dc.w $107               ; "{NAME} earned {#}{N}EXP. points.{D1}"
 loc_1910C:
 										
 										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,d0
@@ -1822,13 +1822,13 @@ loc_1910C:
 										trap    #TRAP_SOUNDCOM
 										dc.w SFX_LEVEL_UP       ; level up
 										trap    #TRAP_TEXTBOX
-										dc.w $F4                ; {NAME} became{N}level {#}!
+										dc.w $F4                ; "{NAME} became{N}level {#}!"
 										moveq   #0,d0
 										move.b  (a5)+,d0
 										beq.s   loc_19174
 										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10A               ; {D1}HP increased by {#}!
+										dc.w $10A               ; "{D1}HP increased by {#}!"
 loc_19174:
 										
 										moveq   #0,d0
@@ -1836,7 +1836,7 @@ loc_19174:
 										beq.s   loc_19182
 										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10B               ; {D1}MP increased by {#}!
+										dc.w $10B               ; "{D1}MP increased by {#}!"
 loc_19182:
 										
 										moveq   #0,d0
@@ -1844,7 +1844,7 @@ loc_19182:
 										beq.s   loc_19190
 										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10C               ; {D1}Attack increased by {#}!
+										dc.w $10C               ; "{D1}Attack increased by {#}!"
 loc_19190:
 										
 										moveq   #0,d0
@@ -1852,7 +1852,7 @@ loc_19190:
 										beq.s   loc_1919E
 										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10D               ; {D1}Defense increased by {#}!
+										dc.w $10D               ; "{D1}Defense increased by {#}!"
 loc_1919E:
 										
 										moveq   #0,d0
@@ -1860,7 +1860,7 @@ loc_1919E:
 										beq.s   loc_191AC
 										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10E               ; {D1}Agility increased by {#}!
+										dc.w $10E               ; "{D1}Agility increased by {#}!"
 loc_191AC:
 										
 										moveq   #0,d0
@@ -1874,7 +1874,7 @@ loc_191AC:
 										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  d0,((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10F               ; {D1}{NAME} learned the new{N}magic spell {SPELL}!
+										dc.w $10F               ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
 										bra.s   return_191DE
 loc_191D0:
 										
@@ -1882,7 +1882,7 @@ loc_191D0:
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $110               ; {D1}{SPELL} increased to{N}level {#}!
+										dc.w $110               ; "{D1}{SPELL} increased to{N}level {#}!"
 return_191DE:
 										
 										rts
@@ -1909,8 +1909,8 @@ bsc10_displayMessage:
 										jsr     (DisplayText).l 
 										tst.b   ((MESSAGE_SPEED-$1000000)).w
 										bne.s   loc_1920C
-										trap    #TRAP_TEXTBOX
-										dc.w $16A               ; {DICT}{W2} <= wait for P1 input
+										trap    #TRAP_TEXTBOX   ; Wait for P1 input
+										dc.w $16A               ; "{DICT}{W2}"
 										rts
 loc_1920C:
 										
@@ -1953,7 +1953,7 @@ bsc11_displayMessageWithNoWait:
 
 j_hideTextBox:
 										
-										jmp     (hideTextBox).l 
+										jmp     (HideTextBox).l 
 
 	; End of function j_hideTextBox
 

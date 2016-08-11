@@ -42,47 +42,47 @@ sub_5A788:
 										trap    #1
 										dc.w $16
 										beq.s   loc_5A7A0
-										trap    #5
-										dc.w $7A0
-										trap    #5
-										dc.w $7A1
-										trap    #5
-										dc.w $7A2
-										trap    #5
-										dc.w $7A3
+										trap    #TRAP_TEXTBOX
+										dc.w $7A0               ; "(Sob, sob){N}(Sob, sob){N}Oh, {LEADER}!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7A1               ; "Oddler regained his memory{N}and suddenly went berserk.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7A2               ; "He had a fearful face,{N}but my master seemed to{N}understand everything.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7A3               ; "He fell into the sea to stop{N}Oddler.{N}Is Mr. Creed still alive?{W1}"
 										bra.s   return_5A7D0
 loc_5A7A0:
 										
 										trap    #1
 										dc.w $312
 										beq.s   loc_5A7B0
-										trap    #5
-										dc.w $79E
-										trap    #5
-										dc.w $79F
+										trap    #TRAP_TEXTBOX
+										dc.w $79E               ; "Is he getting back his{N}memory yet?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $79F               ; "He's suffering from a very{N}bad headache.{W1}"
 										bra.s   return_5A7D0
 loc_5A7B0:
 										
 										trap    #1
 										dc.w $310
 										beq.s   loc_5A7C0
-										trap    #5
-										dc.w $771
-										trap    #5
-										dc.w $772
+										trap    #TRAP_TEXTBOX
+										dc.w $771               ; "My master would like to{N}help you, {LEADER}.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $772               ; "Please choose one.{W1}"
 										bra.s   return_5A7D0
 loc_5A7C0:
 										
 										trap    #1
 										dc.w $30F
 										beq.s   loc_5A7CC
-										trap    #5
-										dc.w $770
+										trap    #TRAP_TEXTBOX
+										dc.w $770               ; "Arc Valley was unsealed and{N}Zeon woke up?{W2}{N}This is a nightmare!{W1}"
 										bra.s   return_5A7D0
 loc_5A7CC:
 										
-										trap    #5
-										dc.w $723
+										trap    #TRAP_TEXTBOX
+										dc.w $723               ; "Mr. Creed is too busy!{N}Go away!{W1}"
 return_5A7D0:
 										
 										rts
@@ -97,19 +97,19 @@ sub_5A7D2:
 										trap    #1
 										dc.w $312
 										beq.s   loc_5A7E2
-										trap    #5
-										dc.w $79A
-										trap    #5
-										dc.w $79B
+										trap    #TRAP_TEXTBOX
+										dc.w $79A               ; "We devils can't help you.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $79B               ; "People of the Earth have{N}to seal Zeon again by{N}themselves.{W1}"
 										bra.s   return_5A7EE
 loc_5A7E2:
 										
-										trap    #5
-										dc.w $76A
-										trap    #5
-										dc.w $76B
-										trap    #5
-										dc.w $76C
+										trap    #TRAP_TEXTBOX
+										dc.w $76A               ; "Maybe the Jewel of Evil has{N}a secret.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $76B               ; "Storytellers in Tristan might{N}know something.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $76C               ; "Tristan is in North Parmecia.{W1}"
 return_5A7EE:
 										
 										rts
@@ -124,28 +124,28 @@ sub_5A7F0:
 										trap    #1
 										dc.w $312
 										beq.s   loc_5A800
-										trap    #5
-										dc.w $79C
-										trap    #5
-										dc.w $79D
+										trap    #TRAP_TEXTBOX
+										dc.w $79C               ; "Hello, {LEADER}.{N}How are you?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $79D               ; "I'm well...but, I've had a{N}bad headache lately.{W1}"
 										bra.s   return_5A826
 loc_5A800:
 										
 										trap    #1
 										dc.w $2F7
 										bne.s   loc_5A80C
-										trap    #5
-										dc.w $77F
+										trap    #TRAP_TEXTBOX
+										dc.w $77F               ; "Hey, you're going east,{N}right?{N}I'm going with you!{W1}"
 										bra.s   loc_5A814
 loc_5A80C:
 										
-										trap    #5
-										dc.w $76D
-										trap    #5
-										dc.w $76E
+										trap    #TRAP_TEXTBOX
+										dc.w $76D               ; "Oh, is a dwarf sick?{N}Really?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $76E               ; "OK, I think I can help him.{N}Bring me to him.{W1}"
 loc_5A814:
 										
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										lea     cs_5A828(pc), a0
 										trap    #6
@@ -188,8 +188,8 @@ sub_5A842:
 										dc.w $6004
 loc_5A856:
 										
-										trap    #5
-										dc.w $775
+										trap    #TRAP_TEXTBOX
+										dc.w $775               ; "What a pity...then, I wish{N}happiness to all of you.{W1}"
 										bra.s   return_5A862
 loc_5A85C:
 										
@@ -217,8 +217,8 @@ sub_5A864:
 										dc.w $6004
 loc_5A878:
 										
-										trap    #5
-										dc.w $778
+										trap    #TRAP_TEXTBOX
+										dc.w $778               ; "Tut!  OK, I have a{N}comfortable life here.{W1}"
 										bra.s   return_5A884
 loc_5A87E:
 										
@@ -246,8 +246,8 @@ sub_5A886:
 										bra.s   loc_5A89E
 loc_5A89A:
 										
-										trap    #5
-										dc.w $77B
+										trap    #TRAP_TEXTBOX
+										dc.w $77B               ; "My magic could've been a{N}great help to you.{W1}"
 loc_5A89E:
 										
 										bra.s   return_5A8A6
@@ -277,8 +277,8 @@ sub_5A8A8:
 										bra.s   loc_5A8C0
 loc_5A8BC:
 										
-										trap    #5
-										dc.w $77E
+										trap    #TRAP_TEXTBOX
+										dc.w $77E               ; "You...snot nose!{W1}"
 loc_5A8C0:
 										
 										bra.s   return_5A8C8

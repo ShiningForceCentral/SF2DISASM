@@ -23,12 +23,12 @@ sub_6282A:
 										
 										lea     cs_6283E(pc), a0
 										trap    #6
-										trap    #5
-										dc.w $F48
-										trap    #5
-										dc.w $F49
-										trap    #5
-										dc.w $F4A
+										trap    #TRAP_TEXTBOX
+										dc.w $F48               ; "Wait, wait!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F49               ; "Sir Astral told me not to{N}let you go out today!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F4A               ; "You have to be here.{W1}"
 										rts
 
 	; End of function sub_6282A

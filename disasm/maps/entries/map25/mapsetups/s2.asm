@@ -33,8 +33,8 @@ ms_map25_EntityEvents:
 
 sub_5D248:
 										
-										trap    #5
-										dc.w $7A4
+										trap    #TRAP_TEXTBOX
+										dc.w $7A4               ; "Ketto is on the southern{N}edge of North Parmecia.{W1}"
 										rts
 
 	; End of function sub_5D248
@@ -44,12 +44,12 @@ sub_5D248:
 
 sub_5D24E:
 										
-										trap    #5
-										dc.w $7A5
-										trap    #5
-										dc.w $7A6
-										trap    #5
-										dc.w $7A7
+										trap    #TRAP_TEXTBOX
+										dc.w $7A5               ; "Where did you come from,{N}boy?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7A6               ; "From South Parmecia?{N}Really?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7A7               ; "The tunnel to the south is{N}blocked.{W1}"
 										rts
 
 	; End of function sub_5D24E
@@ -59,12 +59,12 @@ sub_5D24E:
 
 sub_5D25C:
 										
-										trap    #5
-										dc.w $7A8
-										trap    #5
-										dc.w $7A9
-										trap    #5
-										dc.w $7AA
+										trap    #TRAP_TEXTBOX
+										dc.w $7A8               ; "From South Parmecia?{N}Why did you come here?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7A9               ; "Pacalon has become isolated{N}since we opposed the devils.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7AA               ; "If I were you, I'd leave.{W1}"
 										rts
 
 	; End of function sub_5D25C
@@ -74,10 +74,10 @@ sub_5D25C:
 
 sub_5D26A:
 										
-										trap    #5
-										dc.w $7AB
-										trap    #5
-										dc.w $7AC
+										trap    #TRAP_TEXTBOX
+										dc.w $7AB               ; "It's unusually hot!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7AC               ; "Is Mitula as sick as I've{N}heard?{W1}"
 										rts
 
 	; End of function sub_5D26A
@@ -87,8 +87,8 @@ sub_5D26A:
 
 sub_5D274:
 										
-										trap    #5
-										dc.w $7AD
+										trap    #TRAP_TEXTBOX
+										dc.w $7AD               ; "The devils forbade us to go{N}out. {W1}"
 										rts
 
 	; End of function sub_5D274
@@ -104,17 +104,17 @@ sub_5D27A:
 										move.b  ((MESSAGE_SPEED-$1000000)).w,d0
 										movem.l d0,-(sp)
 										move.b  #0,((MESSAGE_SPEED-$1000000)).w
-										trap    #5
-										dc.w $7AE
+										trap    #TRAP_TEXTBOX
+										dc.w $7AE               ; "Blast!  I hate devils....{W1}"
 										move.b  #1,((MESSAGE_SPEED-$1000000)).w
-										trap    #5
-										dc.w $7AF
+										trap    #TRAP_TEXTBOX
+										dc.w $7AF               ; "Ah, are you a customer?{N}Wow!{W2}"
 										move.b  #2,((MESSAGE_SPEED-$1000000)).w
-										trap    #5
-										dc.w $7B0
+										trap    #TRAP_TEXTBOX
+										dc.w $7B0               ; "It's a secret, OK?{N}I have very good weapons.{N}Hee, hee.{W2}"
 										move.b  #3,((MESSAGE_SPEED-$1000000)).w
-										trap    #5
-										dc.w $7B1
+										trap    #TRAP_TEXTBOX
+										dc.w $7B1               ; "Do you want to buy one?{N}Oh, you do?!  OK, come to my{N}shop!{W1}"
 										movem.l (sp)+,d0
 										move.b  d0,((MESSAGE_SPEED-$1000000)).w
 										trap    #2
@@ -140,8 +140,8 @@ sub_5D2D2:
 										trap    #1
 										dc.w $100
 										bne.s   loc_5D2E0
-										trap    #5
-										dc.w $7B3
+										trap    #TRAP_TEXTBOX
+										dc.w $7B3               ; "Sorry, I can't open my{N}church for you.{N}Please understand.{W1}"
 										trap    #2
 										dc.w $100
 loc_5D2E0:
@@ -171,26 +171,26 @@ sub_5D2EA:
 										trap    #1
 										dc.w $101
 										bne.s   loc_5D324
-										trap    #5
-										dc.w $7B4
+										trap    #TRAP_TEXTBOX
+										dc.w $7B4               ; "Hey, listen to me.{W1}"
 										jsr     j_YesNoPrompt
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										tst.w   d0
 										bne.s   loc_5D316
-										trap    #5
-										dc.w $7B5
-										trap    #5
-										dc.w $7B6
-										trap    #5
-										dc.w $7B7
+										trap    #TRAP_TEXTBOX
+										dc.w $7B5               ; "Pacalon was always a good{N}customer for us!{N}They bought a lot!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7B6               ; "But, now we can't sell our{N}weapons because of the{N}devils!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7B7               ; "Annoying devils!{W1}"
 										bra.s   loc_5D31E
 loc_5D316:
 										
-										trap    #5
-										dc.w $7B8
-										trap    #5
-										dc.w $7B9
+										trap    #TRAP_TEXTBOX
+										dc.w $7B8               ; "Oh, sorry.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7B9               ; "I don't want to bother you.{W1}"
 loc_5D31E:
 										
 										trap    #2
@@ -198,8 +198,8 @@ loc_5D31E:
 										bra.s   loc_5D328
 loc_5D324:
 										
-										trap    #5
-										dc.w $7BA
+										trap    #TRAP_TEXTBOX
+										dc.w $7BA               ; "You again?{N}Bye now.{W1}"
 loc_5D328:
 										
 										bra.s   return_5D336

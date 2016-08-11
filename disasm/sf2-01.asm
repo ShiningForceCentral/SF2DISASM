@@ -100,9 +100,8 @@ aJ:                 dc.b 'J               '
 										dc.l $FF0000            ; Ram Start Adress
 										dc.l $FFFFFF            ; Ram End Adress
 										dc.l $5241F820          ; SRam data
-										dc.l SRAM_START         ; Sram Start Address
-										dc.l SAVE2_CHARACTER_DATA+$1FC4
-																						; Sram End Address
+										dc.l $200001            ; Sram Start Address
+										dc.l $203FFF            ; Sram End Address
 										dc.b '            '     ; Modem data
 										dc.b '                    '
 																						; Memo
@@ -538,7 +537,7 @@ Trap5_TextBox:
 										move.w  (a6)+,d0
 										cmpi.w  #$FFFF,d0
 										bne.s   loc_570
-										bsr.w   hideTextBox     
+										bsr.w   HideTextBox     
 										bra.s   loc_574
 loc_570:
 										bsr.w   DisplayText     
@@ -7741,7 +7740,7 @@ CopyFFC000toFFC800:
 
 MoveWindowWithSFX:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_MENU_SWITCH
 
 	; End of function MoveWindowWithSFX
@@ -8837,7 +8836,7 @@ loc_530C:
 										ble.s   loc_531E
 										subq.w  #1,((word_FFB196-$1000000)).w
 loc_531E:
-										bsr.w   updateEntitySprite
+										bsr.w   UpdateEntitySprite
 										addq.l  #2,a1
 										bra.w   esc_goToNextEntity
 
@@ -8945,7 +8944,7 @@ esc04_moveToRelativeDest:
 										muls.w  #$180,d1
 										add.w   (a0),d0         ; get new pos
 										add.w   ENTITYDEF_OFFSET_Y(a0),d1
-										bsr.w   checkIfSameDestForOtherEntity
+										bsr.w   CheckIfSameDestForOtherEntity
 										bne.w   esc_goToNextEntity
 										addq.l  #6,a1
 										bra.w   loc_55C8
@@ -8961,7 +8960,7 @@ esc05_moveToAbsoluteDest:
 										move.w  4(a1),d1
 										mulu.w  #$180,d0
 										mulu.w  #$180,d1
-										bsr.w   checkIfSameDestForOtherEntity
+										bsr.w   CheckIfSameDestForOtherEntity
 										bne.w   esc_goToNextEntity
 										addq.l  #6,a1
 										bra.w   loc_55C8
@@ -9091,7 +9090,7 @@ loc_5596:
 										movem.w (sp)+,d2-d3
 										bcc.w   loc_55B8
 loc_55B0:
-										bsr.w   checkIfSameDestForOtherEntity
+										bsr.w   CheckIfSameDestForOtherEntity
 										beq.w   loc_55C4
 loc_55B8:
 										move.w  (sp)+,d6
@@ -9147,7 +9146,7 @@ loc_5600:
 ; check if another entity has the same destination as current entity
 ; Z=1 if that's the case
 
-checkIfSameDestForOtherEntity:
+CheckIfSameDestForOtherEntity:
 										
 										movem.w d4-d6,-(sp)
 										btst    #5,$1C(a0)      ; end if not obstructed by people
@@ -9184,7 +9183,7 @@ loc_5660:
 										movem.w (sp)+,d4-d6
 										rts
 
-	; End of function checkIfSameDestForOtherEntity
+	; End of function CheckIfSameDestForOtherEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9324,7 +9323,7 @@ loc_57D8:
 										add.w   d4,ENTITYDEF_OFFSET_XDEST(a0)
 										add.w   d5,ENTITYDEF_OFFSET_YDEST(a0)
 loc_57E0:
-										bsr.w   updateEntitySprite
+										bsr.w   UpdateEntitySprite
 										addq.l  #2,a1
 										bra.w   esc_goToNextEntity
 
@@ -9464,7 +9463,7 @@ loc_595A:
 										add.w   d4,ENTITYDEF_OFFSET_XDEST(a0)
 										add.w   d5,ENTITYDEF_OFFSET_YDEST(a0)
 loc_5962:
-										bsr.w   updateEntitySprite
+										bsr.w   UpdateEntitySprite
 										addq.l  #2,a1
 										bra.w   esc_goToNextEntity
 
@@ -9564,7 +9563,7 @@ esc0A_updateEntitySprite:
 										cmpi.b  #7,((NUM_SPRITES_TO_LOAD-$1000000)).w
 										bgt.w   esc_goToNextEntity
 										move.b  ENTITYDEF_OFFSET_FACING(a0),d6
-										bsr.w   changeEntitySprite
+										bsr.w   ChangeEntitySprite
 										addq.l  #2,a1
 										bra.w   esc_clearTimerGoToNextCommand
 
@@ -9621,7 +9620,7 @@ esc0D_clonePosition:
 										move.l  8(a1),8(a0)
 										move.b  ENTITYDEF_OFFSET_FACING(a1),d6
 										move.b  d6,ENTITYDEF_OFFSET_FACING(a0)
-										bsr.w   changeEntitySprite
+										bsr.w   ChangeEntitySprite
 										movea.l (sp)+,a1
 										addq.l  #4,a1
 										bra.w   esc_clearTimerGoToNextCommand
@@ -9984,7 +9983,7 @@ esc22_setEntityFacing:
 esc23_sendSoundCommand:
 										
 										move.w  2(a1),d0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										addq.l  #4,a1
 										bra.w   esc_clearTimerGoToNextCommand
@@ -10322,7 +10321,7 @@ loc_5ED6:
 										lsr.w   #5,d0
 										add.b   d0,ENTITYDEF_OFFSET_ANIMCOUNTER(a0)
 loc_5EE6:
-										bsr.w   updateEntitySprite
+										bsr.w   UpdateEntitySprite
 										movem.w (sp)+,d4-d5
 										move.w  (a0),d0
 										move.w  ENTITYDEF_OFFSET_Y(a0),d1
@@ -10375,7 +10374,7 @@ loc_5F76:
 										btst    #5,d1
 										beq.s   loc_5F8A
 										move.b  ENTITYDEF_OFFSET_FACING(a0),d6
-										bsr.w   changeEntitySprite
+										bsr.w   ChangeEntitySprite
 loc_5F8A:
 										movem.w (sp)+,d0-d3
 loc_5F8E:
@@ -10521,7 +10520,7 @@ loc_6072:
 loc_607C:
 										move.w  d1,d6
 										andi.w  #3,d6
-										bsr.w   changeEntitySprite
+										bsr.w   ChangeEntitySprite
 										movem.l (sp)+,d0-a2
 										rts
 
@@ -10530,7 +10529,7 @@ loc_607C:
 
 ; =============== S U B R O U T I N E =======================================
 
-updateEntitySprite:
+UpdateEntitySprite:
 										
 										btst    #6,$1D(a0)
 										beq.w   return_6180
@@ -10539,7 +10538,7 @@ updateEntitySprite:
 										cmpi.b  #7,((NUM_SPRITES_TO_LOAD-$1000000)).w
 										bge.w   return_6180
 
-	; End of function updateEntitySprite
+	; End of function UpdateEntitySprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10547,7 +10546,7 @@ updateEntitySprite:
 ; a0 : entity address
 ; d6 : facing
 
-changeEntitySprite:
+ChangeEntitySprite:
 										
 										move.b  d6,ENTITYDEF_OFFSET_FACING(a0)
 										ext.w   d6
@@ -10627,7 +10626,7 @@ return_6180:
 										
 										rts
 
-	; End of function changeEntitySprite
+	; End of function ChangeEntitySprite
 
 FacingValues:       dc.b 0                  ; 8 bytes holding facing values for sprites (not sure what it's for)
 										dc.b 1
@@ -10947,7 +10946,7 @@ loc_6472:
 										move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
 										andi.b  #$7F,d1 
 										beq.s   loc_6472
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SFX_VALIDATION
 										clr.w   d2
 										bsr.s   sub_64A8
@@ -11578,7 +11577,7 @@ loc_68C2:
 										beq.s   loc_68DC
 										move.w  d0,-(sp)
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,d0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										move.w  (sp)+,d0
 loc_68DC:
@@ -11700,7 +11699,7 @@ loc_6A0C:
 
 ; related to text box
 
-hideTextBox:
+HideTextBox:
 										
 										move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
 										subq.w  #1,d0
@@ -11730,7 +11729,7 @@ return_6A7E:
 										
 										rts
 
-	; End of function hideTextBox
+	; End of function HideTextBox
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -12673,7 +12672,7 @@ WitchSuspend:
 										move.w  #6,((word_FFB07C-$1000000)).w
 										move.b  #$FF,((byte_FFB082-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $F0
+										dc.w $F0                ; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.b   ((byte_FFB082-$1000000)).w
@@ -12702,7 +12701,7 @@ loc_7094:
 										move.w  #6,((word_FFB07C-$1000000)).w
 										move.b  #$FF,((byte_FFB082-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $EE                ; Finally, you've fulfilled my{N}wish!{N}{D2}{D2}Thanks to you, I can{N}escape from this forest!{D2}{N}Are you really that{N}surprised?{D2}{D2}{D2}
+										dc.w $EE                ; "Finally, you've fulfilled my{N}wish!{N}{D2}{D2}Thanks to you, I can{N}escape from this forest!{D2}{N}Are you really that{N}surprised?{D2}{D2}{D2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.b   ((byte_FFB082-$1000000)).w
@@ -12823,7 +12822,7 @@ loc_71EC:
 										bsr.w   DisableDisplayAndVInt
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_TITLE
-										jsr     titleScreen
+										jsr     TitleScreen
 										bne.s   loc_724E        
 										move    #$2700,sr
 										movea.l (InitStack).w,sp
@@ -12884,7 +12883,7 @@ loc_729C:           move.b  #0,((byte_FFB082-$1000000)).w
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_CORRUPTED_SAVE
 										trap    #TRAP_TEXTBOX
-										dc.w $ED                ; Ooops!  Record {#} has{N}vanished!{W2}
+										dc.w $ED                ; "Ooops!  Record {#} has{N}vanished!{W2}"
 										jsr     j_FadeOut_WaitForP2Input
 loc_7332:           tst.w   d1
 										bpl.s   loc_734C
@@ -12892,12 +12891,12 @@ loc_7332:           tst.w   d1
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_CORRUPTED_SAVE
 										trap    #TRAP_TEXTBOX
-										dc.w $ED
+										dc.w $ED                ; "Ooops!  Record {#} has{N}vanished!{W2}"
 										jsr     j_FadeOut_WaitForP2Input
 loc_734C:           btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
 										bne.w   loc_73AA
 										trap    #TRAP_TEXTBOX
-										dc.w $D8                ; {CLEAR}Hee, hee, hee...{N}You're finally here!{W2}
+										dc.w $D8                ; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
 										bsr.w   WaitForVInt     
 										bsr.w   sub_7CF4
 										bsr.w   WaitForVInt     
@@ -12905,19 +12904,19 @@ loc_734C:           btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
 										move.w  #6,((word_FFB07C-$1000000)).w
 										move.b  #$FF,((byte_FFB082-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $D9                ; Ah, you look so confused.{N}You don't know why you're{N}here?{W2}
+										dc.w $D9                ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
 loc_737C:           btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
 										bne.w   loc_73C2
 										trap    #TRAP_TEXTBOX
-										dc.w $DA                ; Yes, yes...I used a spell{N}on you.{W2}
+										dc.w $DA                ; "Yes, yes...I used a spell{N}on you.{W2}"
 										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
 										bne.w   loc_73C2
 										trap    #TRAP_TEXTBOX
-										dc.w $DB                ; Ha, ha.  Where are you{N}going?  You can't escape{W2}
+										dc.w $DB                ; "Ha, ha.  Where are you{N}going?  You can't escape{W2}"
 										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
 										bne.w   loc_73C2
 										trap    #TRAP_TEXTBOX
-										dc.w $DC                ; from this mystery forest{N}unless you help me.{W2}
+										dc.w $DC                ; "from this mystery forest{N}unless you help me.{W2}"
 										bra.w   loc_73C2
 loc_73AA:           bsr.w   WaitForVInt     
 										bsr.w   sub_7CF4
@@ -12932,7 +12931,7 @@ loc_73C2:
 
 ; END OF FUNCTION CHUNK FOR WitchDel
 
-										dc.w $DD                ; {CLEAR}Whatcha gonna do?
+										dc.w $DD                ; "{CLEAR}Whatcha gonna do?"
 										move.b  (SAVE_FLAGS).l,d3
 										andi.w  #3,d3
 										bne.s   loc_73D8
@@ -12961,7 +12960,7 @@ rjt_WitchChoice:    dc.w WitchNew-rjt_WitchChoice
 
 WitchNew:
 										trap    #TRAP_TEXTBOX
-										dc.w $DE                ; What should I call you?{W2}
+										dc.w $DE                ; "What should I call you?{W2}"
 										move.b  (SAVE_FLAGS).l,d2
 										andi.w  #3,d2
 										eori.w  #3,d2
@@ -13000,10 +12999,10 @@ loc_746A:
 										dbf     d7,loc_7464
 loc_7476:
 										trap    #TRAP_TEXTBOX
-										dc.w $DF                ; {NAME;0}....{N}Nice name, huh?{W2}
+										dc.w $DF                ; "{NAME;0}....{N}Nice name, huh?{W2}"
 										bsr.w   CheatModeConfiguration
 										trap    #TRAP_TEXTBOX
-										dc.w $E8                ; I'll let you decide the{N}difficulty level at this time.
+										dc.w $E8                ; "I'll let you decide the{N}difficulty level at this time."
 										clr.w   d0
 										moveq   #3,d1
 										moveq   #$F,d2
@@ -13025,7 +13024,7 @@ loc_74A8:
 										addi.w  #$E9,d0 
 										bsr.w   DisplayText     
 										trap    #TRAP_TEXTBOX
-										dc.w $E0                ; Now, good luck!{N}You have no time to waste!{W1}
+										dc.w $E0                ; "Now, good luck!{N}You have no time to waste!{W1}"
 loc_74B4:
 										move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
 										move.b  #3,((CURRENT_MAP-$1000000)).w
@@ -13049,7 +13048,7 @@ loc_74DE:
 WitchLoad:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $E1                ; By the way, who are you?
+										dc.w $E1                ; "By the way, who are you?"
 										move.b  (SAVE_FLAGS).l,d2
 										andi.w  #3,d2
 										lsl.w   #1,d2
@@ -13068,10 +13067,10 @@ loc_74FE:
 										move.w  d0,((SAVE_SLOT_BEING_USED-$1000000)).w
 										bsr.w   LoadGame
 										trap    #TRAP_TEXTBOX
-										dc.w $E2                ; {NAME;0}, yes!  I knew it!{W2}
+										dc.w $E2                ; "{NAME;0}, yes!  I knew it!{W2}"
 										bsr.w   CheatModeConfiguration
 										trap    #TRAP_TEXTBOX
-										dc.w $E0                ; Now, good luck!{N}You have no time to waste!{W1}
+										dc.w $E0                ; "Now, good luck!{N}You have no time to waste!{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
@@ -13096,7 +13095,7 @@ loc_753A:
 WitchCopy:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $E3                ; Copy?  Really?
+										dc.w $E3                ; "Copy?  Really?"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.w   loc_73C2
@@ -13105,7 +13104,7 @@ WitchCopy:
 										subq.w  #1,d0
 										bsr.w   CopySave
 										trap    #TRAP_TEXTBOX
-										dc.w $E4                ; Hee, hee!  It's done.{W2}
+										dc.w $E4                ; "Hee, hee!  It's done.{W2}"
 										bra.w   loc_73C2
 
 	; End of function WitchCopy
@@ -13115,7 +13114,7 @@ WitchCopy:
 
 WitchDel:
 										trap    #TRAP_TEXTBOX
-										dc.w $E5                ; Delete which one?
+										dc.w $E5                ; "Delete which one?"
 										move.b  (SAVE_FLAGS).l,d2
 										andi.w  #3,d2
 										lsl.w   #1,d2
@@ -13133,14 +13132,14 @@ loc_7590:
 										subq.w  #1,d0
 										move.w  d0,((SAVE_SLOT_BEING_USED-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $E6                ; Delete?  Are you sure?
+										dc.w $E6                ; "Delete?  Are you sure?"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.w   loc_73C2
 										move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
 										bsr.w   ClearSaveSlotFlag
 										trap    #TRAP_TEXTBOX
-										dc.w $E7                ; Hee, hee!  It's gone!{W2}
+										dc.w $E7                ; "Hee, hee!  It's gone!{W2}"
 										bra.w   loc_73C2
 
 	; End of function WitchDel
@@ -13360,7 +13359,7 @@ DebugModeBattleTest:
 										bsr.w   CheatModeConfiguration
 loc_77DE:
 										trap    #TRAP_TEXTBOX
-										dc.w $1C8               ; Battle number?{D1}
+										dc.w $1C8               ; "Battle number?{D1}"
 										clr.w   d0
 										clr.w   d1
 										move.w  #$31,d2 
@@ -13399,7 +13398,7 @@ loc_7820:
 										jsr     j_ExecuteBattleLoop
 										jsr     j_ChurchActions
 										trap    #TRAP_TEXTBOX
-										dc.w $1CC               ; Shop number?{D1}
+										dc.w $1CC               ; "Shop number?{D1}"
 										move.w  #0,d0
 										move.w  #0,d1
 										move.w  #$64,d2 
@@ -13422,7 +13421,7 @@ loc_7894:
 										movem.l (sp)+,d0-a6
 										bra.s   loc_78BA
 loc_78B6:
-										bsr.w   levelUpWholeForce
+										bsr.w   LevelUpWholeForce
 loc_78BA:
 										bra.s   loc_7894
 
@@ -13466,7 +13465,7 @@ loc_78C6:
 
 ; =============== S U B R O U T I N E =======================================
 
-levelUpWholeForce:
+LevelUpWholeForce:
 										
 										moveq   #$1D,d7
 										clr.w   d0
@@ -13476,7 +13475,7 @@ loc_7924:
 										dbf     d7,loc_7924
 										rts
 
-	; End of function levelUpWholeForce
+	; End of function LevelUpWholeForce
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13836,30 +13835,30 @@ loc_7E58:
 										tst.b   ((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
 										beq.w   return_7EC4
 										trap    #TRAP_TEXTBOX
-										dc.w $1C0               ; Configuration....{D3}
+										dc.w $1C0               ; "Configuration....{D3}"
 										trap    #TRAP_TEXTBOX
-										dc.w $1C2               ; {CLEAR}Special Turbo
+										dc.w $1C2               ; "{CLEAR}Special Turbo"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.s   loc_7E78
 										move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
 loc_7E78:
 										trap    #TRAP_TEXTBOX
-										dc.w $1C3               ; {CLEAR}Control Opponent
+										dc.w $1C3               ; "{CLEAR}Control Opponent"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.s   loc_7E8C
 										move.b  #$FF,((CONTROL_OPPONENT_CHEAT-$1000000)).w
 loc_7E8C:
 										trap    #TRAP_TEXTBOX
-										dc.w $1C4               ; {CLEAR}Auto Battle
+										dc.w $1C4               ; "{CLEAR}Auto Battle"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.s   loc_7EA0
 										move.b  #$FF,((AUTO_BATTLE_CHEAT-$1000000)).w
 loc_7EA0:
 										trap    #TRAP_TEXTBOX
-										dc.w $1C7               ; {CLEAR}Game Completed
+										dc.w $1C7               ; "{CLEAR}Game Completed"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.s   loc_7EB8
@@ -13869,7 +13868,7 @@ loc_7EB8:
 										bclr    #7,(SAVE_FLAGS).l
 loc_7EC0:
 										trap    #TRAP_TEXTBOX
-										dc.w $1CD               ; Configuration is done.{N}Go ahead!{W1}
+										dc.w $1CD               ; "Configuration is done.{N}Go ahead!{W1}"
 return_7EC4:
 										
 										rts

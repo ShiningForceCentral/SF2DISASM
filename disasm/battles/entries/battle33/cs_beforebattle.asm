@@ -234,10 +234,10 @@ sub_4D078:
 										
 										cmpi.w  #$FFFF,(RAM_Dialogue_NameIdx1).l
 										beq.s   return_4D098
-										jsr     (hideTextBox).l 
+										jsr     (HideTextBox).l 
 										move.w  #$B3A,d0
 										jsr     (DisplayText).l 
-										jsr     (hideTextBox).l 
+										jsr     (HideTextBox).l 
 return_4D098:
 										
 										rts

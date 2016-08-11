@@ -46,10 +46,10 @@ sub_50D74:
 										jsr     GetEntityPortraitAndSpeechSound
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #5
-										dc.w $1F2
-										trap    #5
-										dc.w $1F3
+										trap    #TRAP_TEXTBOX
+										dc.w $1F2               ; "You unruly boy!{N}Where on earth are you{N}going?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $1F3               ; "There is no school outside!{N}Go to school!{W1}"
 loc_50DA6:
 										
 										trap    #2
@@ -77,8 +77,8 @@ sub_50DAC:
 										jsr     GetEntityPortraitAndSpeechSound
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #5
-										dc.w $1F1
+										trap    #TRAP_TEXTBOX
+										dc.w $1F1               ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 loc_50DE0:
 										
 										trap    #2
@@ -118,8 +118,8 @@ sub_50DF8:
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     (WaitForCameraToCatchUp).l
-										trap    #5
-										dc.w $1F1
+										trap    #TRAP_TEXTBOX
+										dc.w $1F1               ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 loc_50E2C:
 										
 										trap    #2
@@ -180,8 +180,8 @@ sub_50E66:
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #5
-										dc.w $201
+										trap    #TRAP_TEXTBOX
+										dc.w $201               ; "Mmm...aahh...{N}Oh, yeah!  It must be....{N}No, it's not a....{W1}"
 										bra.s   return_50ED0
 loc_50E96:
 										
@@ -194,12 +194,12 @@ loc_50E96:
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #5
-										dc.w $202
-										trap    #5
-										dc.w $203
-										trap    #5
-										dc.w $204
+										trap    #TRAP_TEXTBOX
+										dc.w $202               ; "By the way, {LEADER},{N}what did you think of the{N}storm last night?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $203               ; "Did you feel something evil,{N}or anything?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $204               ; "No, nothing?!{N}Perhaps it was just my{N}imagination.  Sorry.{W1}"
 										lea     cs_5148C(pc), a0
 										trap    #6
 										trap    #2

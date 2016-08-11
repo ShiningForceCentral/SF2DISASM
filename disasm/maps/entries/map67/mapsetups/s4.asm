@@ -24,12 +24,12 @@ word_4FCDE:         dc.w $3917
 sub_4FCE6:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $1A8
+										dc.w $1A8               ; "{NAME} investigated.{W2}{CLEAR}"
 										trap    #TRAP_CHECKFLAG
 										dc.w $2EF
 										bne.s   loc_4FD3C
 										trap    #TRAP_TEXTBOX
-										dc.w $A1E
+										dc.w $A1E               ; "There's a wobbly rock.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
@@ -42,7 +42,7 @@ sub_4FCE6:
 										bne.s   loc_4FD22
 										jsr     LoadAndDisplayCurrentPortrait
 										trap    #TRAP_TEXTBOX
-										dc.w $A1F
+										dc.w $A1F               ; "That rock looks{N}suspicious....{W1}"
 										bra.s   loc_4FD3A
 loc_4FD22:
 										
@@ -52,14 +52,14 @@ loc_4FD22:
 										bne.s   loc_4FD3A
 										jsr     LoadAndDisplayCurrentPortrait
 										trap    #TRAP_TEXTBOX
-										dc.w $A20
+										dc.w $A20               ; "Maybe {NAME;13} can{N}help us.{W1}"
 loc_4FD3A:
 										
 										bra.s   return_4FD40
 loc_4FD3C:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $1B2
+										dc.w $1B2               ; "Nothing special there.{W1}"
 return_4FD40:
 										
 										rts

@@ -244,7 +244,7 @@ ShopActions:
 loc_2007A:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $9E
+										dc.w $9E                ; "What's up, boy!{N}We guarantee all items to{N}be in good condition!{D3}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
@@ -267,7 +267,7 @@ loc_200A2:
 loc_200B0:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $A1
+										dc.w $A1                ; "{CLEAR}Thank you!  Come again!{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
@@ -281,7 +281,7 @@ loc_200C6:
 loc_200CE:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $A2
+										dc.w $A2                ; "What do you want to buy?"
 										jsr     sub_207E6(pc)
 										nop
 										jsr     sub_1004C
@@ -295,14 +295,14 @@ loc_200CE:
 										clr.l   ((RAM_Dialog_NumberToPrint-$1000000)).w
 										move.w  -4(a6),((word_FFB778-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $A3
+										dc.w $A3                ; "The {ITEM} costs{N}{#} gold coins.{N}OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_20120
 loc_20118:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $A4
+										dc.w $A4                ; "{CLEAR}Oh...shucks!{W2}"
 										bra.w   loc_202C2
 loc_20120:
 										
@@ -313,12 +313,12 @@ loc_20120:
 										cmp.l   d0,d1
 										bcc.s   loc_2013C
 										trap    #TRAP_TEXTBOX
-										dc.w $A5
+										dc.w $A5                ; "You need more money to buy{N}it.{W2}"
 										bra.w   loc_202C2
 loc_2013C:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $A6
+										dc.w $A6                ; "Who gets it?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										jsr     j_UpdateForce
@@ -345,7 +345,7 @@ loc_2015E:
 										bcs.s   loc_201AC
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $A8
+										dc.w $A8                ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_2013C
@@ -362,7 +362,7 @@ loc_201AC:
 										bcs.s   loc_201E4
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $A7
+										dc.w $A7                ; "{NAME} can't be{N}equipped with it.  OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										bne.w   loc_2013C
@@ -379,7 +379,7 @@ loc_201E4:
 										jsr     j_IsWeaponOrRingEquippable
 										bcc.w   loc_202BE
 										trap    #TRAP_TEXTBOX
-										dc.w $AD
+										dc.w $AD                ; "{CLEAR}Equip it now?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										bne.w   loc_202BE
@@ -397,7 +397,7 @@ loc_201E4:
 										bne.w   loc_2028A
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $B0
+										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_202BE
 loc_2025E:
 										
@@ -411,7 +411,7 @@ loc_2025E:
 										bne.w   loc_2028A
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $B0
+										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_202BE
 loc_2028A:
 										
@@ -428,19 +428,19 @@ loc_2028A:
 										nop
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $AF
+										dc.w $AF                ; "Gee, {NAME} gets{N}cursed.{W2}"
 										bra.s   loc_202BC
 loc_202B8:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $AE
+										dc.w $AE                ; "Ah, it suits you!{W2}"
 loc_202BC:
 										
 										bra.s   loc_202C2
 loc_202BE:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $A9
+										dc.w $A9                ; "{CLEAR}Here ya go!{N}Use it wisely!{W2}"
 loc_202C2:
 										
 										trap    #TRAP_TEXTBOX
@@ -453,7 +453,7 @@ loc_202CA:
 loc_202D2:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $B1
+										dc.w $B1                ; "Whose and which item do{N}you want to sell?{D3}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										jsr     j_UpdateForce
@@ -491,7 +491,7 @@ loc_202F4:
 										cmpi.b  #0,d1
 										beq.s   loc_20364
 										trap    #TRAP_TEXTBOX
-										dc.w $B4
+										dc.w $B4                ; "{CLEAR}Sorry, I can't buy that....{W2}"
 										bra.w   loc_2043A
 loc_20364:
 										
@@ -502,19 +502,19 @@ loc_20364:
 										beq.s   loc_20384
 										move.w  #1,-$16(a6)
 										trap    #TRAP_TEXTBOX
-										dc.w $B7
+										dc.w $B7                ; "Wow, it's a rare bird.{N}I'll pay {#} gold coins{N}for it. OK?"
 										bra.s   loc_20388
 loc_20384:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $B2
+										dc.w $B2                ; "I'll pay {#} gold coins{N}for it, OK?"
 loc_20388:
 										
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_2039C
 										trap    #TRAP_TEXTBOX
-										dc.w $B3
+										dc.w $B3                ; "{CLEAR}Too bad.{W2}"
 										bra.w   loc_2043A
 loc_2039C:
 										
@@ -532,7 +532,7 @@ loc_2039C:
 										jsr     j_IsItemCursed
 										bcc.w   loc_2040C
 										trap    #TRAP_TEXTBOX
-										dc.w $B8
+										dc.w $B8                ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
 										bra.w   loc_2043A
 loc_203DC:
 										
@@ -546,7 +546,7 @@ loc_203DC:
 										jsr     j_IsItemCursed
 										bcc.w   loc_2040C
 										trap    #TRAP_TEXTBOX
-										dc.w $B8
+										dc.w $B8                ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
 										bra.w   loc_2043A
 loc_2040C:
 										
@@ -562,7 +562,7 @@ loc_2040C:
 loc_20436:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $B5
+										dc.w $B5                ; "{CLEAR}Yeah, I got it.{W2}"
 loc_2043A:
 										
 										trap    #TRAP_TEXTBOX
@@ -575,7 +575,7 @@ loc_20442:
 loc_2044A:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $BA
+										dc.w $BA                ; "Whose and which item{N}should I repair?{D1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										jsr     j_UpdateForce
@@ -613,19 +613,19 @@ loc_2046C:
 										btst    #$F,d2
 										bne.w   loc_204DC
 										trap    #TRAP_TEXTBOX
-										dc.w $BC
+										dc.w $BC                ; "It's not damaged.{W2}"
 										bra.w   loc_205AC
 loc_204DC:
 										
 										clr.l   ((RAM_Dialog_NumberToPrint-$1000000)).w
 										move.w  -4(a6),((word_FFB778-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $BB
+										dc.w $BB                ; "{CLEAR}Will you pay {#} gold{N}coins to repair it?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_204FE
 										trap    #TRAP_TEXTBOX
-										dc.w $B3
+										dc.w $B3                ; "{CLEAR}Too bad.{W2}"
 										bra.w   loc_205AC
 loc_204FE:
 										
@@ -636,7 +636,7 @@ loc_204FE:
 										cmp.l   d0,d1
 										bcc.s   loc_2051A
 										trap    #TRAP_TEXTBOX
-										dc.w $BD
+										dc.w $BD                ; "You don't have enough{N}money...{W2}"
 										bra.w   loc_205AC
 loc_2051A:
 										
@@ -654,7 +654,7 @@ loc_2051A:
 										jsr     j_IsItemCursed
 										bcc.w   loc_2058A
 										trap    #TRAP_TEXTBOX
-										dc.w $BE
+										dc.w $BE                ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
 										bra.w   loc_205AC
 loc_2055A:
 										
@@ -668,7 +668,7 @@ loc_2055A:
 										jsr     j_IsItemCursed
 										bcc.w   loc_2058A
 										trap    #TRAP_TEXTBOX
-										dc.w $BE
+										dc.w $BE                ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
 										bra.w   loc_205AC
 loc_2058A:
 										
@@ -679,9 +679,9 @@ loc_2058A:
 										move.w  -$E(a6),d1
 										jsr     j_RepairItemBySlot
 										trap    #TRAP_TEXTBOX
-										dc.w $BF
+										dc.w $BF                ; "{CLEAR}OK, one moment please!{W2}"
 										trap    #TRAP_TEXTBOX
-										dc.w $C0
+										dc.w $C0                ; "{CLEAR}Here you go!{N}Beautiful, huh?{W2}"
 loc_205AC:
 										
 										trap    #TRAP_TEXTBOX
@@ -694,12 +694,12 @@ loc_205B4:
 										tst.w   ((word_FFB12E-$1000000)).w
 										bne.s   loc_205C8
 										trap    #TRAP_TEXTBOX
-										dc.w $AC
+										dc.w $AC                ; "I'm very sorry!{N}I'm out of stock!{W2}"
 										bra.w   loc_207CC
 loc_205C8:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $AB
+										dc.w $AB                ; "You must be surprised!{D1}{N}What would you like?"
 										jsr     sub_1004C
 										cmpi.w  #$FFFF,d0
 										beq.w   loc_207CC
@@ -711,14 +711,14 @@ loc_205C8:
 										clr.l   ((RAM_Dialog_NumberToPrint-$1000000)).w
 										move.w  -4(a6),((word_FFB778-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $A3
+										dc.w $A3                ; "The {ITEM} costs{N}{#} gold coins.{N}OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_20614
 loc_2060C:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $A4
+										dc.w $A4                ; "{CLEAR}Oh...shucks!{W2}"
 										bra.w   loc_207C4
 loc_20614:
 										
@@ -729,12 +729,12 @@ loc_20614:
 										cmp.l   d0,d1
 										bcc.s   loc_20630
 										trap    #TRAP_TEXTBOX
-										dc.w $A5
+										dc.w $A5                ; "You need more money to buy{N}it.{W2}"
 										bra.w   loc_207C4
 loc_20630:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $A6
+										dc.w $A6                ; "Who gets it?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										jsr     j_UpdateForce
@@ -761,7 +761,7 @@ loc_20652:
 										bcs.s   loc_206A0
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $A8
+										dc.w $A8                ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_20630
@@ -778,7 +778,7 @@ loc_206A0:
 										bcs.s   loc_206D8
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $A7
+										dc.w $A7                ; "{NAME} can't be{N}equipped with it.  OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										bne.w   loc_20630
@@ -797,7 +797,7 @@ loc_206D8:
 										jsr     j_IsWeaponOrRingEquippable
 										bcc.w   loc_207C0
 										trap    #TRAP_TEXTBOX
-										dc.w $AD
+										dc.w $AD                ; "{CLEAR}Equip it now?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										bne.w   loc_207C0
@@ -815,7 +815,7 @@ loc_206D8:
 										bne.w   loc_20788
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $B0
+										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_207C0
 loc_2075C:
 										
@@ -829,7 +829,7 @@ loc_2075C:
 										bne.w   loc_20788
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $B0
+										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_207C0
 loc_20788:
 										
@@ -846,21 +846,21 @@ loc_20788:
 										nop
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $AF
+										dc.w $AF                ; "Gee, {NAME} gets{N}cursed.{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										bra.s   loc_207BE
 loc_207BA:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $AE
+										dc.w $AE                ; "Ah, it suits you!{W2}"
 loc_207BE:
 										
 										bra.s   loc_207C4
 loc_207C0:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $A9
+										dc.w $A9                ; "{CLEAR}Here ya go!{N}Use it wisely!{W2}"
 loc_207C4:
 										
 										trap    #TRAP_TEXTBOX
@@ -1000,9 +1000,9 @@ ChurchActions:
 loc_20A18:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $6E                ; Welcome!{W2}{N}Your desire will be fulfilled!{W2}
+										dc.w $6E                ; "Welcome!{W2}{N}Your desire will be fulfilled!{W2}"
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_END
+										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 loc_20A26:
 										
@@ -1023,7 +1023,7 @@ loc_20A40:
 loc_20A4E:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $71
+										dc.w $71                ; "{CLEAR}Be careful.  The light{N}is always on your side.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
@@ -1035,7 +1035,7 @@ loc_20A64:
 										cmpi.w  #0,d0
 										bne.w   loc_20B58
 										trap    #TRAP_TEXTBOX
-										dc.w $76
+										dc.w $76                ; "Let me investigate all{N}of you.{W2}"
 										bsr.w   Church_GetCurrentForceMemberInfo
 										clr.w   -$E(a6)
 loc_20A78:
@@ -1049,7 +1049,7 @@ loc_20A78:
 										addi.w  #1,-$E(a6)
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $81
+										dc.w $81                ; "Gosh!  {NAME} is{N}exhausted!{W2}"
 										jsr     j_GetCurrentLevel
 										mulu.w  #$A,d1
 										move.l  d1,-8(a6)
@@ -1063,14 +1063,14 @@ loc_20AC8:
 										
 										move.l  -8(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $82
+										dc.w $82                ; "But I can recall the soul.{W2}{N}It will cost {#} gold{N}coins.  OK?"
 										jsr     sub_10050
 										jsr     j_YesNoChoiceBox
 										jsr     sub_10058
 										cmpi.w  #0,d0
 										beq.w   loc_20AF4
 										trap    #TRAP_TEXTBOX
-										dc.w $7C
+										dc.w $7C                ; "You don't need my help?{W2}"
 										bra.w   loc_20B42
 loc_20AF4:
 										
@@ -1080,7 +1080,7 @@ loc_20AF4:
 										cmp.l   d0,d1
 										bcc.s   loc_20B0C
 										trap    #TRAP_TEXTBOX
-										dc.w $7D
+										dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 										bra.s   loc_20B42
 loc_20B0C:
 										
@@ -1098,21 +1098,21 @@ loc_20B0C:
 										bsr.w   sub_2124A
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $83
+										dc.w $83                ; "{NAME} is revived!{W2}"
 loc_20B42:
 										
 										dbf     d7,loc_20A78
 										cmpi.w  #0,-$E(a6)
 										bne.w   loc_21028
 										trap    #TRAP_TEXTBOX
-										dc.w $80
+										dc.w $80                ; "Nobody is dead.{W2}"
 										bra.w   loc_21028
 loc_20B58:
 										
 										cmpi.w  #1,d0
 										bne.w   loc_20D3A
 										trap    #TRAP_TEXTBOX
-										dc.w $76
+										dc.w $76                ; "Let me investigate all{N}of you.{W2}"
 										bsr.w   Church_GetCurrentForceMemberInfo
 										clr.w   -$10(a6)
 										clr.w   -$12(a6)
@@ -1132,18 +1132,18 @@ loc_20B74:
 										addi.w  #1,-$10(a6)
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $79
+										dc.w $79                ; "Gosh!  {NAME} is{N}poisoned!{W2}"
 										move.l  #$A,-8(a6)
 										move.l  -8(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $7B
+										dc.w $7B                ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
 										jsr     sub_10050
 										jsr     j_YesNoChoiceBox
 										jsr     sub_10058
 										cmpi.w  #0,d0
 										beq.w   loc_20BDA
 										trap    #TRAP_TEXTBOX
-										dc.w $7C
+										dc.w $7C                ; "You don't need my help?{W2}"
 										bra.w   loc_20C24
 loc_20BDA:
 										
@@ -1153,7 +1153,7 @@ loc_20BDA:
 										cmp.l   d0,d1
 										bcc.s   loc_20BF4
 										trap    #TRAP_TEXTBOX
-										dc.w $7D
+										dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 										clr.w   d7
 										bra.s   loc_20C24
 loc_20BF4:
@@ -1171,7 +1171,7 @@ loc_20BF4:
 										nop
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $7E
+										dc.w $7E                ; "{NAME} is no longer{N}poisoned.{W2}"
 loc_20C24:
 										
 										movem.l (sp)+,a0
@@ -1179,7 +1179,7 @@ loc_20C24:
 										cmpi.w  #0,-$10(a6)
 										bne.w   loc_20C3A
 										trap    #TRAP_TEXTBOX
-										dc.w $77
+										dc.w $77                ; "Nobody is poisoned.{W2}"
 loc_20C3A:
 										
 										bsr.w   ChurchCure
@@ -1198,7 +1198,7 @@ loc_20C42:
 										addi.w  #1,-$12(a6)
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $7A
+										dc.w $7A                ; "Gosh!  {NAME} is{N}cursed!{W2}"
 										clr.w   d1
 										jsr     j_GetItemAndNumberOfItems
 										move.w  d2,-$14(a6)
@@ -1222,14 +1222,14 @@ loc_20CA8:
 										move.l  d3,-8(a6)
 										move.l  -8(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $7B
+										dc.w $7B                ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
 										jsr     sub_10050
 										jsr     j_YesNoChoiceBox
 										jsr     sub_10058
 										cmpi.w  #0,d0
 										beq.w   loc_20CDC
 										trap    #TRAP_TEXTBOX
-										dc.w $7C
+										dc.w $7C                ; "You don't need my help?{W2}"
 										bra.w   loc_20D20
 loc_20CDC:
 										
@@ -1239,7 +1239,7 @@ loc_20CDC:
 										cmp.l   d0,d1
 										bcc.s   loc_20CF6
 										trap    #TRAP_TEXTBOX
-										dc.w $7D
+										dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 										clr.w   d7
 										bra.s   loc_20D20
 loc_20CF6:
@@ -1255,7 +1255,7 @@ loc_20CF6:
 										nop
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $7F
+										dc.w $7F                ; "{NAME} is no longer{N}cursed.{W2}"
 loc_20D20:
 										
 										movem.l (sp)+,a0
@@ -1263,24 +1263,24 @@ loc_20D20:
 										cmpi.w  #0,-$12(a6)
 										bne.w   loc_21028
 										trap    #TRAP_TEXTBOX
-										dc.w $78
+										dc.w $78                ; "Nobody is cursed.{W2}"
 										bra.w   loc_21028
 loc_20D3A:
 										
 										cmpi.w  #2,d0
 										bne.w   loc_20FCC
 										trap    #TRAP_TEXTBOX
-										dc.w $76
+										dc.w $76                ; "Let me investigate all{N}of you.{W2}"
 										bsr.w   sub_21072
 										cmpi.w  #0,-$16(a6)
 										bne.w   loc_20D5C
 										trap    #TRAP_TEXTBOX
-										dc.w $87
+										dc.w $87                ; "{CLEAR}Well, nobody can be{N}promoted now.{W2}"
 										bra.w   loc_21028
 loc_20D5C:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $88
+										dc.w $88                ; "{CLEAR}Who do you want to{N}promote?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										move.b  #0,((byte_FFB13C-$1000000)).w
@@ -1288,7 +1288,7 @@ loc_20D5C:
 										cmpi.w  #$FFFF,d0
 										bne.w   loc_20D80
 										trap    #TRAP_TEXTBOX
-										dc.w $89
+										dc.w $89                ; "Oh, I'm wrong.{W2}"
 										bra.w   loc_21028
 loc_20D80:
 										
@@ -1301,7 +1301,7 @@ loc_20D80:
 										beq.w   loc_20DAE
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $8E
+										dc.w $8E                ; "Hmmm...{D1} {NAME} had{N}better remain the current{N}class.{W2}"
 										bra.w   loc_20FC8
 loc_20DAE:
 										
@@ -1310,19 +1310,19 @@ loc_20DAE:
 										bcc.w   loc_20DCA
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $8A
+										dc.w $8A                ; "Hmmm...{NAME} needs{N}more experience!{W2}"
 										bra.w   loc_20FC8
 loc_20DCA:
 										
 										clr.w   -$1C(a6)
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $8B
+										dc.w $8B                ; "{NAME} wants to be{N}promoted to the a fighting{N}class, right?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.w   loc_20DEE
 										trap    #TRAP_TEXTBOX
-										dc.w $89
+										dc.w $89                ; "Oh, I'm wrong.{W2}"
 										bra.w   loc_20FC8
 loc_20DEE:
 										
@@ -1385,14 +1385,14 @@ loc_20E7C:
 										move.w  -$1E(a6),((RAM_Dialogue_NameIdx3-$1000000)).w
 										move.w  -$1C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $8F
+										dc.w $8F                ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
 										trap    #TRAP_TEXTBOX
-										dc.w $93
+										dc.w $93                ; "OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.w   loc_20EB6
 										trap    #TRAP_TEXTBOX
-										dc.w $90
+										dc.w $90                ; "Then"
 										bra.w   loc_20EEA
 loc_20EB6:
 										
@@ -1400,7 +1400,7 @@ loc_20EB6:
 										bne.w   loc_20ED8
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $91
+										dc.w $91                ; "{NAME} loses all spells{N}that were learned.{N}OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										bne.w   loc_20FC8
@@ -1429,7 +1429,7 @@ loc_20F08:
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  -$1C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $92
+										dc.w $92                ; "{NAME} can be promoted{N}to {CLASS}.{N}OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										bne.w   loc_20FC8
@@ -1439,7 +1439,7 @@ loc_20F30:
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										move.w  -$1C(a6),((RAM_Dialogue_NameIdx3-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $8C
+										dc.w $8C                ; "Now, let me conduct the{N}rite.{D1}  The light blesses...{N}{D1}{CLASS} {NAME}...{W2}{N}with a class of {CLASS}!{W2}"
 										move.w  -$C(a6),d0
 										move.w  -$1C(a6),d1
 										jsr     j_SetClass
@@ -1472,7 +1472,7 @@ loc_20F90:
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  -$1C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $8D
+										dc.w $8D                ; "{NAME} was successfully{N}promoted to {CLASS}.{W2}"
 										move.w  -$C(a6),d0
 										move.b  #1,d1
 										jsr     j_SetLevel
@@ -1484,12 +1484,12 @@ loc_20FC8:
 loc_20FCC:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $72
+										dc.w $72                ; "May I record your adventure{N}now?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.w   loc_20FE6
 										trap    #TRAP_TEXTBOX
-										dc.w $7C
+										dc.w $7C                ; "You don't need my help?{W2}"
 										bra.w   loc_21028
 loc_20FE6:
 										
@@ -1503,14 +1503,14 @@ loc_20FE6:
 										jsr     WaitForMusicResumeAndPlayerInput_2(pc)
 										nop
 										trap    #TRAP_TEXTBOX
-										dc.w $73                ; {CLEAR}The light allows you to{N}resume your adventure!{W1}
+										dc.w $73                ; "{CLEAR}The light allows you to{N}resume your adventure!{W1}"
 										trap    #TRAP_TEXTBOX
-										dc.w $74                ; {CLEAR}Will you continue your{N}adventure?
+										dc.w $74                ; "{CLEAR}Will you continue your{N}adventure?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.w   loc_20A40
 										trap    #TRAP_TEXTBOX
-										dc.w $75                ; {CLEAR}Then, take a rest before{N}you continue.{W1}
+										dc.w $75                ; "{CLEAR}Then, take a rest before{N}you continue.{W1}"
 										jsr     (FadeOutToBlack).w
 										jmp     (WitchSuspend).w
 										bra.w   *+4
@@ -1519,7 +1519,7 @@ loc_21028:
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										trap    #TRAP_TEXTBOX
-										dc.w $70
+										dc.w $70                ; "{CLEAR}Do you have another desire?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										bne.w   loc_20A40
@@ -1677,18 +1677,18 @@ loc_21170:
 										addi.w  #1,-$18(a6)
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $84
+										dc.w $84                ; "Gosh!  {NAME} is{N}paralyzed.{W2}"
 										move.l  #$14,-8(a6)
 										move.l  -8(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $7B
+										dc.w $7B                ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
 										jsr     sub_10050
 										jsr     j_YesNoChoiceBox
 										jsr     sub_10058
 										cmpi.w  #0,d0
 										beq.w   loc_211D6
 										trap    #TRAP_TEXTBOX
-										dc.w $7C
+										dc.w $7C                ; "You don't need my help?{W2}"
 										bra.w   loc_21220
 loc_211D6:
 										
@@ -1698,7 +1698,7 @@ loc_211D6:
 										cmp.l   d0,d1
 										bcc.s   loc_211F0
 										trap    #TRAP_TEXTBOX
-										dc.w $7D
+										dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 										clr.w   d7
 										bra.s   loc_21220
 loc_211F0:
@@ -1716,7 +1716,7 @@ loc_211F0:
 										nop
 										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $85
+										dc.w $85                ; "{NAME} is no longer{N}paralyzed.{W2}"
 loc_21220:
 										
 										movem.l (sp)+,a0
@@ -1724,7 +1724,7 @@ loc_21220:
 										cmpi.w  #0,-$18(a6)
 										bne.w   return_21236
 										trap    #TRAP_TEXTBOX
-										dc.w $86
+										dc.w $86                ; "Nobody is paralyzed.{W2}"
 return_21236:
 										
 										rts
@@ -1841,7 +1841,7 @@ loc_212E0:
 										move.w  -$1C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										move.l  -$20(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $F3                ; {NAME} cast{N}{SPELL} level {#}!
+										dc.w $F3                ; "{NAME} cast{N}{SPELL} level {#}!"
 										trap    #TRAP_SOUNDCOM
 										dc.w SFX_SPELL_CAST
 										trap    #TRAP_TEXTBOX
@@ -1851,7 +1851,7 @@ loc_212E0:
 loc_21348:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $138               ; But nothing happened.
+										dc.w $138               ; "But nothing happened."
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_21478
@@ -1885,7 +1885,7 @@ loc_21366:
 loc_213A8:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $6C                ; Use magic on whom?{D1}
+										dc.w $6C                ; "Use magic on whom?{D1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										move.b  #0,((byte_FFB13C-$1000000)).w
@@ -1898,7 +1898,7 @@ loc_213A8:
 										move.w  -$1C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										move.l  -$20(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX   ; {NAME} cast{N}{SPELL} level {#}!
-										dc.w $F3
+										dc.w $F3                ; "{NAME} cast{N}{SPELL} level {#}!"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										move.b  -$1A(a6),d1
@@ -1917,7 +1917,7 @@ loc_213A8:
 										beq.s   loc_2143C
 										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $12F               ; {NAME} is no longer{N}cursed.
+										dc.w $12F               ; "{NAME} is no longer{N}cursed."
 										moveq   #$FFFFFFFF,d2
 										jsr     j_UnequipAllItemsIfNotCursed
 loc_2143C:
@@ -1926,7 +1926,7 @@ loc_2143C:
 										beq.s   loc_2144E
 										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $12E               ; {NAME} is no longer{N}stunned.
+										dc.w $12E               ; "{NAME} is no longer{N}stunned."
 										moveq   #$FFFFFFFF,d2
 loc_2144E:
 										
@@ -1934,14 +1934,14 @@ loc_2144E:
 										beq.s   loc_21460
 										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $12D               ; {NAME} is no longer{N}poisoned.
+										dc.w $12D               ; "{NAME} is no longer{N}poisoned."
 										moveq   #$FFFFFFFF,d2
 loc_21460:
 										
 										tst.w   d2
 										bne.s   loc_21468
 										trap    #TRAP_TEXTBOX
-										dc.w $1A6
+										dc.w $1A6               ; "But nothing happened.{D1}"
 loc_21468:
 										
 										trap    #TRAP_TEXTBOX
@@ -1991,7 +1991,7 @@ loc_214A4:
 										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $49                ; {NAME} used the{N}{ITEM}.{W2}
+										dc.w $49                ; "{NAME} used the{N}{ITEM}.{W2}"
 										bra.w   loc_21366
 loc_2150E:
 										
@@ -2008,10 +2008,10 @@ loc_2150E:
 										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $49                ; {NAME} used the{N}{ITEM}.{W2}
+										dc.w $49                ; "{NAME} used the{N}{ITEM}.{W2}"
 										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $1A6
+										dc.w $1A6               ; "But nothing happened.{D1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_2158E
@@ -2070,7 +2070,7 @@ loc_215C0:
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_CURSED_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $37                ; {LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}
+										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 										bsr.w   WaitForMusicResumeAndPlayerInput_2
 										bra.s   loc_2159E
 loc_21618:
@@ -2090,7 +2090,7 @@ loc_21618:
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_CURSED_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $37                ; {LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}
+										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 										bsr.w   WaitForMusicResumeAndPlayerInput_2
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
@@ -2099,7 +2099,7 @@ loc_21662:
 										
 										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $36                ; Pass the {ITEM}{N}to whom?{D1}
+										dc.w $36                ; "Pass the {ITEM}{N}to whom?{D1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										move.b  #2,((byte_FFB13C-$1000000)).w
@@ -2130,14 +2130,14 @@ loc_2168E:
 										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $4A                ; {NAME} changed hands{N}to hold the {ITEM}.{W2}
+										dc.w $4A                ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
 										bra.s   loc_216F4
 loc_216E4:
 										
 										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  -6(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $41                ; The {ITEM} now{N}belongs to {NAME}.{W2}
+										dc.w $41                ; "The {ITEM} now{N}belongs to {NAME}.{W2}"
 loc_216F4:
 										
 										bra.w   loc_2184E
@@ -2163,7 +2163,7 @@ loc_216F8:
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_CURSED_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $37                ; {LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}
+										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 										bsr.w   WaitForMusicResumeAndPlayerInput_2
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
@@ -2185,7 +2185,7 @@ loc_21758:
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_CURSED_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $37                ; {LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}
+										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 										bsr.w   WaitForMusicResumeAndPlayerInput_2
 										bra.w   loc_21662
 loc_2179E:
@@ -2231,7 +2231,7 @@ loc_2181A:
 										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $4A                ; {NAME} changed hands{N}to hold the {ITEM}.{W2}
+										dc.w $4A                ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
 										bra.s   loc_2184E
 loc_21838:
 										
@@ -2239,7 +2239,7 @@ loc_21838:
 										move.w  -6(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx3-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $42                ; The {ITEM} was{N}exchanged for {NAME}'s{N}{ITEM}.{W2}
+										dc.w $42                ; "The {ITEM} was{N}exchanged for {NAME}'s{N}{ITEM}.{W2}"
 loc_2184E:
 										
 										trap    #TRAP_TEXTBOX
@@ -2262,7 +2262,7 @@ loc_21880:
 										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $46                ; {NAME} is already{N}equipped with the{N}{ITEM}.{W2}
+										dc.w $46                ; "{NAME} is already{N}equipped with the{N}{ITEM}.{W2}"
 loc_21894:
 										
 										bra.w   loc_219D8
@@ -2289,13 +2289,13 @@ loc_218BA:
 										beq.s   loc_218F2
 										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $3E                ; {LEADER}!  You can't{N}discard the {ITEM}!{W2}
+										dc.w $3E                ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
 										bra.w   loc_219D0
 loc_218F2:
 										
 										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $45                ; The {ITEM} will be{N}discarded.  OK?
+										dc.w $45                ; "The {ITEM} will be{N}discarded.  OK?"
 										jsr     j_YesNoChoiceBox
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
@@ -2321,7 +2321,7 @@ loc_21910:
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_CURSED_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $37                ; {LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}
+										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 										bsr.w   WaitForMusicResumeAndPlayerInput_2
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
@@ -2341,7 +2341,7 @@ loc_21962:
 										bcc.w   loc_219A0
 										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $37                ; {LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}
+										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 										bra.w   loc_219D0
 loc_219A0:
 										
@@ -2350,7 +2350,7 @@ loc_219A0:
 										jsr     j_RemoveItemBySlot
 										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $43                ; The {ITEM} is discarded.{W2}
+										dc.w $43                ; "The {ITEM} is discarded.{W2}"
 										move.b  -$14(a6),d1
 										andi.b  #8,d1
 										cmpi.b  #0,d1
@@ -2441,7 +2441,7 @@ BlacksmithActions:
 loc_21A50:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $C2
+										dc.w $C2                ; "Welcome to the Dwarf{N}Craftsman!{D3}"
 										jsr     j_HidePortraitWindow
 										clr.w   -$12(a6)
 										clr.w   -$E(a6)
@@ -2455,7 +2455,7 @@ loc_21A50:
 loc_21A7C:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $C6
+										dc.w $C6                ; "{CLEAR}Thank you very much!{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
@@ -2507,26 +2507,26 @@ loc_21AE8:
 										cmpi.w  #4,d0
 										beq.w   return_21B40
 										trap    #TRAP_TEXTBOX
-										dc.w $C4
+										dc.w $C4                ; "{CLEAR}Anything else?"
 										bra.w   loc_21B3C
 loc_21B0E:
 										
 										cmpi.w  #0,-$E(a6)
 										beq.w   loc_21B38
 										trap    #TRAP_TEXTBOX
-										dc.w $CE
+										dc.w $CE                ; "Oops...{N}I needs some more time.{W1}"
 										move.w  -$12(a6),d0
 										add.w   -$E(a6),d0
 										sub.w   -$10(a6),d0
 										cmpi.w  #4,d0
 										beq.w   return_21B40
 										trap    #TRAP_TEXTBOX
-										dc.w $C4
+										dc.w $C4                ; "{CLEAR}Anything else?"
 										bra.w   loc_21B3C
 loc_21B38:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $C3
+										dc.w $C3                ; "We can create a great and{N}special weapon for you if you{N}have some special material.{W1}"
 loc_21B3C:
 										
 										bsr.w   loc_21CDA
@@ -2544,9 +2544,9 @@ sub_21B42:
 										movem.l d0-a1,-(sp)
 										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $CF
+										dc.w $CF                ; "{CLEAR}I've been waiting!{N}This {ITEM} is for{N}you.  Isn't it great?!{W1}"
 										trap    #TRAP_TEXTBOX
-										dc.w $A6
+										dc.w $A6                ; "Who gets it?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 loc_21B58:
@@ -2559,7 +2559,7 @@ loc_21B58:
 										cmpi.w  #$FFFF,d0
 										bne.s   loc_21B7C
 										trap    #TRAP_TEXTBOX
-										dc.w $C5
+										dc.w $C5                ; "{CLEAR}What a pity!{W2}"
 										bra.w   loc_21CD4
 loc_21B7C:
 										
@@ -2570,12 +2570,12 @@ loc_21B7C:
 										bcs.s   loc_21BAC
 										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $D0
+										dc.w $D0                ; "{NAME}'s hands are are{N}full.  May I pass it to{N}somebody else?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_21B58
 										trap    #TRAP_TEXTBOX
-										dc.w $C5
+										dc.w $C5                ; "{CLEAR}What a pity!{W2}"
 										bra.w   loc_21CD4
 loc_21BAC:
 										
@@ -2589,7 +2589,7 @@ loc_21BAC:
 										bcs.s   loc_21BE4
 										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $A7
+										dc.w $A7                ; "{NAME} can't be{N}equipped with it.  OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										bne.w   loc_21B58
@@ -2611,7 +2611,7 @@ loc_21BE4:
 										jsr     j_IsWeaponOrRingEquippable
 										bcc.w   loc_21CD0
 										trap    #TRAP_TEXTBOX
-										dc.w $AD
+										dc.w $AD                ; "{CLEAR}Equip it now?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										bne.w   loc_21CD0
@@ -2629,7 +2629,7 @@ loc_21BE4:
 										bne.w   loc_21C9A
 										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $B0
+										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_21CD0
 loc_21C6E:
 										
@@ -2643,7 +2643,7 @@ loc_21C6E:
 										bne.w   loc_21C9A
 										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $B0
+										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_21CD0
 loc_21C9A:
 										
@@ -2656,20 +2656,20 @@ loc_21C9A:
 										bne.s   loc_21CC8
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_CURSED_ITEM
-										bsr.w   waitForMusicResumeAndPlayerInput_3
+										bsr.w   WaitForMusicResumeAndPlayerInput_3
 										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $AF
+										dc.w $AF                ; "Gee, {NAME} gets{N}cursed.{W2}"
 										bra.w   loc_21CD4
 loc_21CC8:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $AE
+										dc.w $AE                ; "Ah, it suits you!{W2}"
 										bra.w   loc_21CD4
 loc_21CD0:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $D1
+										dc.w $D1                ; "{CLEAR}Here you go!{N}It's a great weapon!{W2}"
 loc_21CD4:
 										
 										movem.l (sp)+,d0-a1
@@ -2680,7 +2680,7 @@ loc_21CDA:
 loc_21CDE:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $C7
+										dc.w $C7                ; "What kind of material do you{N}have?{D1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										move.b  #1,((byte_FFB13C-$1000000)).w
@@ -2694,12 +2694,12 @@ loc_21CDE:
 										cmpi.w  #$7B,d2 
 										beq.w   loc_21D1A
 										trap    #TRAP_TEXTBOX
-										dc.w $C8
+										dc.w $C8                ; "Sorry, I've never worked{N}with that before....{W1}"
 										bra.s   loc_21CDE
 loc_21D1A:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $C9
+										dc.w $C9                ; "{CLEAR}Whose weapon should I{N}make?{D1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										move.b  #0,((byte_FFB13C-$1000000)).w
@@ -2714,7 +2714,7 @@ loc_21D1A:
 										bcc.w   loc_21D5C
 										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $D3
+										dc.w $D3                ; "{NAME} has to be promoted{N}first.{W1}"
 										bra.s   loc_21D1A
 loc_21D5C:
 										
@@ -2723,21 +2723,21 @@ loc_21D5C:
 										beq.w   loc_21D74
 										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $D4
+										dc.w $D4                ; "Sorry, I can't create a{N}weapon for {NAME}.{W1}"
 										bra.s   loc_21D1A
 loc_21D74:
 										
 										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  #$1388,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $CA
+										dc.w $CA                ; "For {NAME}!  It will cost{N}{#} gold coins.  OK?"
 										jsr     sub_10050
 										jsr     j_YesNoChoiceBox
 										jsr     sub_10058
 										cmpi.w  #0,d0
 										beq.s   loc_21DA6
 										trap    #TRAP_TEXTBOX
-										dc.w $C5
+										dc.w $C5                ; "{CLEAR}What a pity!{W2}"
 										bra.w   loc_21D1A
 loc_21DA6:
 										
@@ -2746,7 +2746,7 @@ loc_21DA6:
 										cmpi.l  #$1388,d1
 										bcc.w   loc_21DC2
 										trap    #TRAP_TEXTBOX
-										dc.w $CB
+										dc.w $CB                ; "You have to bring more{N}money.{W2}"
 										bra.w   loc_21E30
 loc_21DC2:
 										
@@ -2760,9 +2760,9 @@ loc_21DC2:
 										move.w  #$50,d1 
 										jsr     j_ClearFlag
 										trap    #TRAP_TEXTBOX
-										dc.w $CC
+										dc.w $CC                ; "{CLEAR}Great!{W2}"
 										trap    #TRAP_TEXTBOX
-										dc.w $CD
+										dc.w $CD                ; "Please stop by shortly.{N}I'll surprise you!{W1}"
 										move.w  -$E(a6),d0
 										move.w  -$12(a6),d1
 										move.w  -$10(a6),d2
@@ -2771,17 +2771,17 @@ loc_21DC2:
 										cmpi.w  #4,d0
 										bne.s   loc_21E16
 										trap    #TRAP_TEXTBOX
-										dc.w $D2
+										dc.w $D2                ; "Sorry, that's all for today.{W1}"
 										bra.w   loc_21E30
 loc_21E16:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $C4
+										dc.w $C4                ; "{CLEAR}Anything else?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.w   loc_21CDE
 										trap    #TRAP_TEXTBOX
-										dc.w $C5
+										dc.w $C5                ; "{CLEAR}What a pity!{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 loc_21E30:
@@ -2794,7 +2794,7 @@ loc_21E30:
 
 ; =============== S U B R O U T I N E =======================================
 
-waitForMusicResumeAndPlayerInput_3:
+WaitForMusicResumeAndPlayerInput_3:
 										
 										move.w  d0,-(sp)
 										move.w  #$FB,d0 
@@ -2803,7 +2803,7 @@ waitForMusicResumeAndPlayerInput_3:
 										move.w  (sp)+,d0
 										rts
 
-	; End of function waitForMusicResumeAndPlayerInput_3
+	; End of function WaitForMusicResumeAndPlayerInput_3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3013,7 +3013,7 @@ sub_22028:
 										bne.s   loc_22070
 										move.w  -2(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $13
+										dc.w $13                ; "{NAME} is dead.{N}Are you sure?"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.w   loc_220FE
@@ -3056,7 +3056,7 @@ loc_220DC:
 loc_220DE:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 loc_220E6:
@@ -3065,7 +3065,7 @@ loc_220E6:
 loc_220E8:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										rts
@@ -3120,7 +3120,7 @@ loc_22142:
 loc_22144:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										rts
@@ -3217,19 +3217,19 @@ loc_221C0:
 										tst.w   d2
 										bne.s   loc_221E8
 										trap    #TRAP_TEXTBOX
-										dc.w $5C
+										dc.w $5C                ; "It's a tool.{W2}"
 										bra.s   loc_221F8
 loc_221E8:
 										
 										cmpi.w  #1,d2
 										bne.s   loc_221F4
 										trap    #TRAP_TEXTBOX
-										dc.w $5A
+										dc.w $5A                ; "It's a weapon.{W2}"
 										bra.s   loc_221F8
 loc_221F4:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $5B
+										dc.w $5B                ; "It's a ring.{W2}"
 loc_221F8:
 										
 										move.w  -4(a6),d1
@@ -3237,12 +3237,12 @@ loc_221F8:
 										cmpi.b  #SPELLIDX_NOTHING,ITEMDEF_OFFSET_SPELL(a0)
 										beq.s   loc_22210
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CARAVANDESC_ITEMHASEFFECT
+										dc.w $5D                ; "It has a special effect when{N}used in battle.{W2}"
 										bra.s   loc_22214
 loc_22210:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CARAVANDESC_ITEMHASNOEFFECT
+										dc.w $5E                ; "It has no effect in battle.{W2}"
 loc_22214:
 										
 										move.w  -4(a6),d1
@@ -3260,7 +3260,7 @@ loc_22214:
 										move.w  -4(a6),d1
 										move.w  d1,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CARAVANDESC_ITEMISFOR
+										dc.w $60                ; "The {ITEM} is for{N}"
 										jsr     j_UpdateForce
 										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
 										subq.w  #1,d7
@@ -3275,37 +3275,37 @@ loc_22266:
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 																						; argument (char idx) for trap #5 using a {NAME} command
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CARAVANDESC_ITEMFORNAME
+										dc.w $62                ; "{DICT}{NAME},"
 										addq.w  #1,d6
 										cmpi.w  #1,d6
 										bne.s   loc_22284
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CARAVANDESC_NEWLINE
+										dc.w $63                ; "{N}"
 loc_22284:
 										
 										cmpi.w  #4,d6
 										bne.s   loc_2228E
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CARAVANDESC_NEWLINE
+										dc.w $63                ; "{N}"
 loc_2228E:
 										
 										dbf     d7,loc_22266
 										tst.w   d6
 										bne.s   loc_2229C
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CARAVANDESC_ITEMFORNOBODY
+										dc.w $61                ; "nobody so far.{W2}"
 										bra.s   loc_222A0
 loc_2229C:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CARAVANDESC_TOEQUIP
+										dc.w $64                ; "to equip.{W2}"
 loc_222A0:
 										
 										bra.w   loc_222A8
 loc_222A4:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CARAVANDESC_EVERYBODY
+										dc.w $5F                ; "Everybody can equip it.{W2}"
 loc_222A8:
 										
 										move.w  -4(a6),d1
@@ -3313,7 +3313,7 @@ loc_222A8:
 										btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
 										beq.s   loc_222C0
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CARAVANDESC_UNSELLABLE
+										dc.w $66                ; "You can't sell it at a shop.{W2}"
 										bra.s   loc_222D4
 loc_222C0:
 										
@@ -3323,19 +3323,19 @@ loc_222C0:
 										lsr.l   #ITEM_SELLPRICE_BITSHIFTRIGHT,d1
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CARAVANDESC_SELLPRICE
+										dc.w $65                ; "It brings {#} gold coins{N}at a shop.{W2}"
 loc_222D4:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_END
+										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 										bra.s   loc_222EA
 loc_222E0:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CHANGEYOURMIND
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_END
+										dc.w $FFFF
 										rts
 
 	; End of function Caravan_DescribeItem
@@ -3391,7 +3391,7 @@ sub_222FA:
 loc_2236A:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CHANGEYOURMIND
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										rts
@@ -3484,7 +3484,7 @@ loc_2247C:
 loc_2247E:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_CHANGEYOURMIND
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										rts
@@ -3529,7 +3529,7 @@ sub_22498:
 										beq.s   loc_2251E
 										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $2C
+										dc.w $2C                ; "The {ITEM} will be{N}discarded.  Are you sure?"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.s   loc_22518
@@ -3549,14 +3549,14 @@ loc_22508:
 loc_22518:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 loc_2251C:
 										
 										bra.s   loc_22528
 loc_2251E:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										rts
@@ -3657,7 +3657,7 @@ loc_22574:
 loc_225E4:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 loc_225E8:
 										
 										bra.s   loc_225F8
@@ -3672,7 +3672,7 @@ loc_225F8:
 loc_225FA:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										rts
@@ -3780,14 +3780,14 @@ loc_22758:
 loc_2275A:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 loc_2275E:
 										
 										bra.s   loc_2276A
 loc_22760:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										rts
@@ -3822,7 +3822,7 @@ loc_2277E:
 										cmpi.w  #$FFFF,d0
 										bne.s   loc_227A6
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										rts
@@ -3866,7 +3866,7 @@ loc_227B8:
 										bcs.w   loc_22858
 										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $2C
+										dc.w $2C                ; "The {ITEM} will be{N}discarded.  Are you sure?"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.s   loc_22844
@@ -3887,7 +3887,7 @@ loc_22834:
 loc_22844:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 loc_2284C:
@@ -3896,7 +3896,7 @@ loc_2284C:
 loc_2284E:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w 4
+										dc.w 4                  ; "Did you change your mind?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										rts
@@ -3978,7 +3978,7 @@ loc_228BA:
 										move.l  (sp)+,d0
 										jsr     (DisplayText).w 
 										trap    #TRAP_TEXTBOX
-										dc.w TEXTIDX_END
+										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 										movem.l (sp)+,d0-d1
 										rts
@@ -4212,12 +4212,12 @@ FieldItem_CurePoison:
 										beq.s   loc_22A64
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $95
+										dc.w $95                ; "{NAME} is no longer{N}poisoned.{W2}"
 										bra.s   loc_22A68
 loc_22A64:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $94
+										dc.w $94                ; "It has no use.{W2}"
 loc_22A68:
 										
 										jsr     j_SetStatus
@@ -4236,7 +4236,7 @@ FieldItem_CurePoisonAndParalysis:
 										beq.s   loc_22A88
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $95
+										dc.w $95                ; "{NAME} is no longer{N}poisoned.{W2}"
 										moveq   #$FFFFFFFF,d2
 loc_22A88:
 										
@@ -4244,14 +4244,14 @@ loc_22A88:
 										beq.s   loc_22A98
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $9C
+										dc.w $9C                ; "{NAME} is no longer{N}paralyzed.{W2}"
 										moveq   #$FFFFFFFF,d2
 loc_22A98:
 										
 										tst.w   d2
 										bne.s   loc_22AA0
 										trap    #TRAP_TEXTBOX
-										dc.w $94
+										dc.w $94                ; "It has no use.{W2}"
 loc_22AA0:
 										
 										jsr     j_SetStatus
@@ -4273,7 +4273,7 @@ FieldItem_IncreaseATK:
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $96
+										dc.w $96                ; "{NAME}'s attack{N}power is boosted by {#}.{W2}"
 										jsr     j_IncreaseBaseATK
 										move.w  d7,d1
 										jsr     j_IncreaseCurrentATK
@@ -4294,7 +4294,7 @@ FieldItem_IncreaseDEF:
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $97
+										dc.w $97                ; "{NAME}'s defensive{N}power is boosted by {#}.{W2}"
 										jsr     j_IncreaseBaseDEF
 										move.w  d7,d1
 										jsr     j_IncreaseCurrentDEF
@@ -4315,7 +4315,7 @@ FieldItem_IncreaseAGI:
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $98
+										dc.w $98                ; "{NAME}'s agility{N}is boosted by {#}.{W2}"
 										jsr     j_IncreaseAGI
 										move.w  d7,d1
 										jsr     j_IncreaseCurrentAGI
@@ -4343,7 +4343,7 @@ loc_22B42:
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $99
+										dc.w $99                ; "{NAME}'s movement{N}range enlarged by {#}.{W2}"
 										jsr     j_IncreaseBaseMOV
 										move.w  d7,d1
 										jsr     j_IncreaseCurrentMOV
@@ -4364,7 +4364,7 @@ FieldItem_IncreaseHP:
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $9A
+										dc.w $9A                ; "{NAME}'s max. HP{N}are raised by {#}.{W2}"
 										jsr     j_IncreaseMaxHP
 										move.w  d7,d1
 										jsr     j_IncreaseCurrentHP
@@ -4388,7 +4388,7 @@ FieldItem_IncreaseMP:
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $9B
+										dc.w $9B                ; "{NAME}'s max. MP{N}are raised by {#}.{W2}"
 										jsr     j_IncreaseMP
 										move.w  d7,d1
 										jsr     j_IncreaseCurrentMP
@@ -4396,7 +4396,7 @@ FieldItem_IncreaseMP:
 loc_22BBC:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $94
+										dc.w $94                ; "It has no use.{W2}"
 return_22BC0:
 										
 										rts
@@ -4418,46 +4418,46 @@ LevelUpCutscene:
 										cmpi.b  #$FF,d1
 										bne.s   loc_22BEA
 										trap    #TRAP_TEXTBOX
-										dc.w $94
+										dc.w $94                ; "It has no use.{W2}"
 										bra.w   loc_22C5A
 loc_22BEA:
 										
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $F4
+										dc.w $F4                ; "{NAME} became{N}level {#}!"
 										move.b  (a5)+,d1
 										beq.s   loc_22BFE
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10A
+										dc.w $10A               ; "{D1}HP increased by {#}!"
 loc_22BFE:
 										
 										move.b  (a5)+,d1
 										beq.s   loc_22C0A
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10B
+										dc.w $10B               ; "{D1}MP increased by {#}!"
 loc_22C0A:
 										
 										move.b  (a5)+,d1
 										beq.s   loc_22C16
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10C
+										dc.w $10C               ; "{D1}Attack increased by {#}!"
 loc_22C16:
 										
 										move.b  (a5)+,d1
 										beq.s   loc_22C22
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10D
+										dc.w $10D               ; "{D1}Defense increased by {#}!"
 loc_22C22:
 										
 										move.b  (a5)+,d1
 										beq.s   loc_22C2E
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10E
+										dc.w $10E               ; "{D1}Agility increased by {#}!"
 loc_22C2E:
 										
 										move.b  (a5)+,d1
@@ -4469,7 +4469,7 @@ loc_22C2E:
 										bne.s   loc_22C4C
 										move.w  d2,((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $10F
+										dc.w $10F               ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
 										bra.s   loc_22C5A
 loc_22C4C:
 										
@@ -4477,11 +4477,11 @@ loc_22C4C:
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										move.w  d2,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $110
+										dc.w $110               ; "{D1}{SPELL} increased to{N}level {#}!"
 loc_22C5A:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $DC3
+										dc.w $DC3               ; "{W1}"
 										rts
 
 	; End of function LevelUpCutscene
@@ -4931,7 +4931,7 @@ loc_2306A:
 loc_23074:
 										
 										move.w  ((RAM_MoveSound-$1000000)).w,d0
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										bsr.w   UpdateControlledUnitPos
 										move.w  -2(a6),d0
@@ -5832,13 +5832,13 @@ loc_2386C:
 										bne.s   loc_238E8
 										jsr     (OpenChest).w
 										trap    #TRAP_TEXTBOX
-										dc.w $193
+										dc.w $193               ; "{NAME} opened the chest.{W2}{CLEAR}"
 										move.w  d2,d0
 										andi.w  #$7F,d0 
 										cmpi.b  #$7F,d0 
 										bne.w   loc_239C8
 										trap    #TRAP_TEXTBOX
-										dc.w $198
+										dc.w $198               ; "But, it was empty.{W1}"
 										bra.w   loc_23994
 loc_238E8:
 										
@@ -5846,13 +5846,13 @@ loc_238E8:
 										bne.s   loc_2390C
 										jsr     (OpenVaseOrBarrel).w
 										trap    #TRAP_TEXTBOX
-										dc.w $194
+										dc.w $194               ; "{NAME} investigated{N}the vase.{W2}{CLEAR}"
 										move.w  d2,d0
 										andi.w  #$7F,d0 
 										cmpi.b  #$7F,d0 
 										bne.w   loc_239C8
 										trap    #TRAP_TEXTBOX
-										dc.w $199
+										dc.w $199               ; "It was dark inside.{W1}"
 										bra.w   loc_23994
 loc_2390C:
 										
@@ -5860,13 +5860,13 @@ loc_2390C:
 										bne.s   loc_23930
 										jsr     (OpenVaseOrBarrel).w
 										trap    #TRAP_TEXTBOX
-										dc.w $195
+										dc.w $195               ; "{NAME} looked in{N}the barrel.{W2}{CLEAR}"
 										move.w  d2,d0
 										andi.w  #$7F,d0 
 										cmpi.b  #$7F,d0 
 										bne.w   loc_239C8
 										trap    #TRAP_TEXTBOX
-										dc.w $19A
+										dc.w $19A               ; "It was empty.{W1}"
 										bra.w   loc_23994
 loc_23930:
 										
@@ -5874,13 +5874,13 @@ loc_23930:
 										bne.s   loc_23954
 										jsr     (OpenVaseOrBarrel).w
 										trap    #TRAP_TEXTBOX
-										dc.w $1AB
+										dc.w $1AB               ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
 										move.w  d2,d0
 										andi.w  #$7F,d0 
 										cmpi.b  #$7F,d0 
 										bne.w   loc_239C8
 										trap    #TRAP_TEXTBOX
-										dc.w $19C
+										dc.w $19C               ; "Nothing was there.{W1}"
 										bra.w   loc_23994
 loc_23954:
 										
@@ -5888,13 +5888,13 @@ loc_23954:
 										bne.s   loc_23978
 										jsr     (OpenVaseOrBarrel).w
 										trap    #TRAP_TEXTBOX
-										dc.w $1A7
+										dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
 										move.w  d2,d0
 										andi.w  #$7F,d0 
 										cmpi.b  #$7F,d0 
 										bne.w   loc_239C8
 										trap    #TRAP_TEXTBOX
-										dc.w $19C
+										dc.w $19C               ; "Nothing was there.{W1}"
 										bra.w   loc_23994
 loc_23978:
 										
@@ -5907,9 +5907,9 @@ loc_23978:
 loc_2398C:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $1A7
+										dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
 										trap    #TRAP_TEXTBOX
-										dc.w $19C
+										dc.w $19C               ; "Nothing was there.{W1}"
 loc_23994:
 										
 										trap    #TRAP_TEXTBOX
@@ -5956,7 +5956,7 @@ loc_239C8:
 
 										dc.w MUSIC_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $19E
+										dc.w $19E               ; "{NAME} found {#} gold{N}coins."
 										bsr.w   FadeOut_WaitForP2Input
 										bra.s   loc_23994
 
@@ -5969,7 +5969,7 @@ loc_239EE:
 
 ; END OF FUNCTION CHUNK FOR sub_23862
 
-										dc.w $19D
+										dc.w $19D               ; "{NAME} found{N}{ITEM}.{W2}{CLEAR}"
 										clr.w   d1
 										jsr     j_GetItemAndNumberOfItems
 										cmpi.w  #4,d2
@@ -5979,7 +5979,7 @@ loc_239EE:
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $19F
+										dc.w $19F               ; "{NAME} recieved{N}{ITEM}."
 										bsr.w   FadeOut_WaitForP2Input
 										bra.w   loc_23994
 loc_23A1E:          jsr     j_UpdateForce
@@ -5999,7 +5999,7 @@ loc_23A32:          clr.w   d0
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $1A0
+										dc.w $1A0               ; "{NAME} passed the{N}{ITEM} to {NAME}."
 										bsr.w   FadeOut_WaitForP2Input
 										bra.w   loc_23994
 loc_23A62:          dbf     d7,loc_23A32
@@ -6007,7 +6007,7 @@ loc_23A66:          move.w  ((RAM_Dialogue_NameIdx2-$1000000)).w,d3
 										clr.w   d0
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $1A1
+										dc.w $1A1               ; "But, everyone's hands are{N}full.{W1}"
 										move.w  d4,d0
 										move.w  d5,d1
 										jsr     (CloseChest).w
@@ -6288,7 +6288,7 @@ loc_23D44:
 
 										dc.w MUSIC_SAD_THEME_2  ; sad theme 2
 										trap    #TRAP_TEXTBOX
-										dc.w $16B               ; {LEADER} is exhausted.{W1}
+										dc.w $16B               ; "{LEADER} is exhausted.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.w   d0
@@ -6323,7 +6323,7 @@ sub_23D98:
 										move.w  ((word_FFB630-$1000000)).w,((RAM_Dialogue_NameIdx2-$1000000)).w
 										andi.w  #ITEM_MASK_IDX,((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $113               ; {NAME} used{N}{ITEM}!
+										dc.w $113               ; "{NAME} used{N}{ITEM}!"
 										bra.w   loc_23DFA
 loc_23DC4:
 										
@@ -6337,7 +6337,7 @@ loc_23DC4:
 										andi.w  #SPELL_MASK_IDX,((RAM_Dialogue_NameIdx2-$1000000)).w
 										move.l  #1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $112               ; {NAME} cast{N}{SPELL} level {#}!
+										dc.w $112               ; "{NAME} cast{N}{SPELL} level {#}!"
 loc_23DFA:
 										
 										trap    #TRAP_SOUNDCOM
@@ -6779,13 +6779,13 @@ HandleAfterTurnEffects:
 										tst.w   d7
 										bne.s   loc_24288
 										trap    #TRAP_TEXTBOX
-										dc.w $166
+										dc.w $166               ; "{CLEAR}{NAME} is no longer stunned.{D3}"
 										clr.w   d1
 										bra.s   loc_2428C
 loc_24288:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $135
+										dc.w $135               ; "{NAME} is stunned.{D3}"
 loc_2428C:
 										
 										or.w    d2,d1
@@ -6803,13 +6803,13 @@ loc_24294:
 										andi.w  #$C0,d7 
 										bne.s   loc_242BE
 										trap    #TRAP_TEXTBOX
-										dc.w $162
+										dc.w $162               ; "{CLEAR}{NAME} has awakened.{D3}"
 										clr.w   d1
 										bra.s   loc_242C6
 loc_242BE:
 										
 										trap    #TRAP_TEXTBOX
-										dc.w $132
+										dc.w $132               ; "{NAME} is sleeping.{D3}"
 										subi.w  #$40,d1 
 loc_242C6:
 										
@@ -6828,7 +6828,7 @@ loc_242CE:
 										bne.s   loc_242FC
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $163
+										dc.w $163               ; "{CLEAR}{NAME} is fine.{D3}"
 										clr.w   d1
 										andi.w  #$FFF7,d2
 										bra.s   loc_24300
@@ -6853,7 +6853,7 @@ loc_24308:
 										move.w  #6,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.w  d0,((RAM_Dialogue_NameIdx2-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $15F
+										dc.w $15F               ; "{CLEAR}{SPELL} expired.{N}{NAME} is no longer{N}silenced.{D3}"
 										clr.w   d1
 										bra.s   loc_2433C
 loc_24338:
@@ -6874,7 +6874,7 @@ loc_24344:
 										bne.s   loc_24366
 										move.w  #4,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $15D
+										dc.w $15D               ; "{CLEAR}{SPELL} expired.{N}Agility and defense{N}return to normal.{D3}"
 loc_24366:
 										
 										or.w    d2,d1
@@ -6890,7 +6890,7 @@ loc_2436E:
 										bne.s   loc_24390
 										move.w  #5,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $15E
+										dc.w $15E               ; "{CLEAR}{SPELL} expired.{N}Attack returns to normal.{D3}"
 loc_24390:
 										
 										or.w    d2,d1
@@ -6906,7 +6906,7 @@ loc_24398:
 										bne.s   loc_243BA
 										move.w  #3,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $15C
+										dc.w $15C               ; "{CLEAR}{SPELL} expired.{N}Agility and defense{N}return to normal.{D3}"
 loc_243BA:
 										
 										or.w    d2,d1
@@ -6926,7 +6926,7 @@ loc_243C2:
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $164
+										dc.w $164               ; "{CLEAR}{NAME} recovered{N}{#} hit points.{D3}"
 loc_243F0:
 										
 										jsr     j_GetEquippedWeapon
@@ -6942,7 +6942,7 @@ loc_243F0:
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $165
+										dc.w $165               ; "{CLEAR}{NAME} recovered{N}{#} magic points.{D3}"
 loc_2441E:
 										
 										jsr     j_GetEquippedRing
@@ -6958,7 +6958,7 @@ loc_2441E:
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $164
+										dc.w $164               ; "{CLEAR}{NAME} recovered{N}{#} hit points.{D3}"
 loc_2444C:
 										
 										jsr     j_GetStatus
@@ -6968,12 +6968,12 @@ loc_2444C:
 										moveq   #2,d1
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $133
+										dc.w $133               ; "{CLEAR}{NAME} gets damaged{N}by {#} because of the poison.{D3}"
 										jsr     j_DecreaseCurrentHP
 										tst.w   d1
 										bne.s   loc_2447C
 										trap    #TRAP_TEXTBOX
-										dc.w $134
+										dc.w $134               ; "{NAME} is exhausted.{D3}"
 										addq.w  #1,((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
 										move.b  d0,((DEAD_COMBATANTS_LIST-$1000000)).w
 loc_2447C:
@@ -7039,7 +7039,7 @@ loc_244D4:
 										dc.w SFX_LANDSTALKER_SWITCH
 										move.w  -2(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $18D               ; {CLEAR}{NAME} appeared!{D3}
+										dc.w $18D               ; "{CLEAR}{NAME} appeared!{D3}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										unlk    a6
@@ -7321,7 +7321,7 @@ loc_247C6:
 										tst.w   ((RAM_CharIdxListSize-$1000000)).w
 										bne.w   loc_247F0
 										trap    #TRAP_TEXTBOX
-										dc.w $1B3               ; No opponent there.{W1}
+										dc.w $1B3               ; "No opponent there.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
@@ -7360,7 +7360,7 @@ loc_2483C:
 										tst.w   d2
 										bne.w   loc_24864
 										trap    #TRAP_TEXTBOX
-										dc.w $1B4               ; Learned no new magic spell.{W1}
+										dc.w $1B4               ; "Learned no new magic spell.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
@@ -7407,7 +7407,7 @@ loc_248BA:
 										sub.w   d1,d3
 										bge.w   loc_248E6
 										trap    #TRAP_TEXTBOX
-										dc.w $1B5               ; More MP needed.{W1}
+										dc.w $1B5               ; "More MP needed.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
@@ -7421,7 +7421,7 @@ loc_248E6:
 										tst.w   ((RAM_CharIdxListSize-$1000000)).w
 										bne.w   loc_2490C
 										trap    #TRAP_TEXTBOX
-										dc.w $1B3
+										dc.w $1B3               ; "No opponent there.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
@@ -7487,7 +7487,7 @@ loc_24982:
 
 ; END OF FUNCTION CHUNK FOR sub_24662
 
-										dc.w $1B6
+										dc.w $1B6               ; "You have no item.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_24746
@@ -7552,7 +7552,7 @@ loc_24A24:
 
 ; END OF FUNCTION CHUNK FOR sub_24662
 
-										dc.w $1B7
+										dc.w $1B7               ; "It has no effect.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
@@ -7572,7 +7572,7 @@ loc_24A4A:
 
 ; END OF FUNCTION CHUNK FOR sub_24662
 
-										dc.w $1B7
+										dc.w $1B7               ; "It has no effect.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
@@ -7646,7 +7646,7 @@ loc_24B06:
 
 ; END OF FUNCTION CHUNK FOR sub_24662
 
-										dc.w $1BC
+										dc.w $1BC               ; "You have nothing to equip.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
@@ -7810,7 +7810,7 @@ loc_24C94:
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_CURSED_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $2B                ; Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}
+										dc.w $2B                ; "Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}"
 										bra.w   loc_24CE6
 loc_24CC4:
 										
@@ -7823,7 +7823,7 @@ loc_24CC4:
 										dc.w MUSIC_CURSED_ITEM
 										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $22                ; Gosh!  {NAME} is{N}cursed!{W2}
+										dc.w $22                ; "Gosh!  {NAME} is{N}cursed!{W2}"
 loc_24CE6:
 										
 										bsr.w   FadeOut_WaitForP2Input
@@ -7908,7 +7908,7 @@ loc_24D6C:
 
 ; END OF FUNCTION CHUNK FOR sub_24662
 
-										dc.w $1B3               ; No opponent there.{W1}
+										dc.w $1B3               ; "No opponent there.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
@@ -7944,7 +7944,7 @@ loc_24DF0:
 
 										dc.w MUSIC_CURSED_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $1B9               ; The equipment is cursed.{W1}
+										dc.w $1B9               ; "The equipment is cursed.{W1}"
 										bsr.w   FadeOut_WaitForP2Input
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
@@ -8023,7 +8023,7 @@ loc_24EDE:
 
 										dc.w MUSIC_CURSED_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $1B9               ; The equipment is cursed.{W1}
+										dc.w $1B9               ; "The equipment is cursed.{W1}"
 										bsr.w   FadeOut_WaitForP2Input
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
@@ -8100,7 +8100,7 @@ loc_24FC2:
 
 										dc.w MUSIC_CURSED_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $1B9               ; The equipment is cursed.{W1}
+										dc.w $1B9               ; "The equipment is cursed.{W1}"
 										bsr.w   FadeOut_WaitForP2Input
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
@@ -8120,7 +8120,7 @@ loc_24FFA:
 
 ; END OF FUNCTION CHUNK FOR sub_24662
 
-										dc.w $1BB
+										dc.w $1BB               ; "Are you sure?"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
@@ -8135,7 +8135,7 @@ loc_25022:
 
 ; END OF FUNCTION CHUNK FOR sub_24662
 
-										dc.w $2C
+										dc.w $2C                ; "The {ITEM} will be{N}discarded.  Are you sure?"
 										jsr     j_YesNoChoiceBox
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
@@ -8151,7 +8151,7 @@ loc_25022:
 										move.w  ((word_FFB634-$1000000)).w,d0
 										jsr     j_AddItemToDeals
 loc_25066:          trap    #TRAP_TEXTBOX
-										dc.w $2A
+										dc.w $2A                ; "Discarded the {ITEM}.{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_24746
@@ -8178,7 +8178,7 @@ loc_25088:
 
 ; END OF FUNCTION CHUNK FOR sub_24662
 
-										dc.w $1A2
+										dc.w $1A2               ; "{NAME} is distributing{N}items from the open chest.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
@@ -8193,7 +8193,7 @@ loc_250B0:
 
 ; END OF FUNCTION CHUNK FOR sub_24662
 
-										dc.w $193
+										dc.w $193               ; "{NAME} opened the chest.{W2}{CLEAR}"
 										move.w  ((byte_FFB180-$1000000)).w,d1
 										andi.w  #ITEM_MASK_IDX,d1
 										cmpi.w  #$7F,d1 
@@ -8221,7 +8221,7 @@ loc_250FC:          move.w  ((byte_FFB180-$1000000)).w,d2
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $19E
+										dc.w $19E               ; "{NAME} found {#} gold{N}coins."
 										bsr.w   FadeOut_WaitForP2Input
 										bra.w   loc_2517C
 loc_25124:          move.w  ((byte_FFB180-$1000000)).w,d1
@@ -8236,13 +8236,13 @@ loc_25124:          move.w  ((byte_FFB180-$1000000)).w,d1
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_ITEM
 										trap    #TRAP_TEXTBOX
-										dc.w $19F
+										dc.w $19F               ; "{NAME} recieved{N}{ITEM}."
 										bsr.w   FadeOut_WaitForP2Input
 										bra.w   loc_2517C
 loc_2515A:          trap    #TRAP_TEXTBOX
-										dc.w $19D
+										dc.w $19D               ; "{NAME} found{N}{ITEM}.{W2}{CLEAR}"
 										trap    #TRAP_TEXTBOX
-										dc.w $1A3
+										dc.w $1A3               ; "{NAME} hands are full.{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										move.w  -2(a6),d0
@@ -8251,7 +8251,7 @@ loc_2515A:          trap    #TRAP_TEXTBOX
 										clr.w   d1
 										bra.w   loc_24746
 loc_25178:          trap    #TRAP_TEXTBOX
-										dc.w $198
+										dc.w $198               ; "But, it was empty.{W1}"
 loc_2517C:          trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										move.w  #3,((RAM_BattleScene_ActionType-$1000000)).w
@@ -8382,7 +8382,7 @@ loc_252A6:
 
 ; END OF FUNCTION CHUNK FOR sub_2519E
 
-										dc.w 0
+										dc.w 0                  ; "The game will be suspended.{N}OK?"
 										jsr     j_YesNoChoiceBox
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
@@ -8892,7 +8892,7 @@ PrintActivatedDefCon:
 										ext.l   d1
 										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
 										trap    #TRAP_TEXTBOX
-										dc.w $1CF               ; DEF-CON No. {#} has been{N}implemented.{D3}
+										dc.w $1CF               ; "DEF-CON No. {#} has been{N}implemented.{D3}"
 loc_2578A:
 										
 										move.w  (sp)+,d1
@@ -9993,7 +9993,7 @@ EndGame:
 										dc.l sub_27CA4
 										move.w  #$46,((CURRENT_SPEAK_SOUND-$1000000)).w 
 										trap    #TRAP_TEXTBOX
-										dc.w $EF
+										dc.w $EF                ; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										move.w  #$5A,d0 
@@ -10091,7 +10091,7 @@ EndGame:
 										move.w  #$2A30,d0       ; wait for 3 minutes
 										jsr     (Sleep).w       
 										trap    #TRAP_TEXTBOX
-										dc.w $1D1
+										dc.w $1D1               ; "And more...{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										move.b  #3,((FADING_COUNTER_MAX-$1000000)).w

@@ -24,8 +24,8 @@ ms_map5_flag212_EntityEvents:
 
 sub_60452:
 										
-										trap    #5
-										dc.w $D9B
+										trap    #TRAP_TEXTBOX
+										dc.w $D9B               ; "I can't believe it!{N}I want to die, but I can't!{W1}"
 										rts
 
 	; End of function sub_60452
@@ -73,10 +73,10 @@ sub_60476:
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
 										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #5
-										dc.w $1A7
-										trap    #5
-										dc.w $FF2
+										trap    #TRAP_TEXTBOX
+										dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+										trap    #TRAP_TEXTBOX
+										dc.w $FF2               ; "A hole.{W1}"
 										bra.s   return_604C6
 loc_60494:
 										
@@ -91,8 +91,8 @@ loc_60494:
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #5
-										dc.w $D9B
+										trap    #TRAP_TEXTBOX
+										dc.w $D9B               ; "I can't believe it!{N}I want to die, but I can't!{W1}"
 										trap    #2
 										dc.w $3B1
 return_604C6:

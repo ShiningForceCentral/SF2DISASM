@@ -27,8 +27,8 @@ sub_5A224:
 										trap    #1
 										dc.w $2F8
 										bne.s   loc_5A230
-										trap    #5
-										dc.w $6A9
+										trap    #TRAP_TEXTBOX
+										dc.w $6A9               ; "We came from Grans to look{N}for Mithril.{W1}"
 										bra.s   return_5A234
 loc_5A230:
 										
@@ -44,8 +44,8 @@ return_5A234:
 
 sub_5A236:
 										
-										trap    #5
-										dc.w $6AA
+										trap    #TRAP_TEXTBOX
+										dc.w $6AA               ; "Recent earthquakes have{N}buried the tunnel.{W2}{N}My friend is sick now, and{N}we can't dig out the tunnel{N}without him.{W1}"
 										trap    #2
 										dc.w $2F7
 										rts
@@ -59,8 +59,8 @@ sub_5A240:
 										
 										lea     cs_5A256(pc), a0
 										trap    #6
-										trap    #5
-										dc.w $6AB
+										trap    #TRAP_TEXTBOX
+										dc.w $6AB               ; "(Shiver)...cold...{N}Oh...I'm so cold....{W1}"
 										lea     cs_5A256(pc), a0
 										trap    #6
 										trap    #2
@@ -80,15 +80,15 @@ sub_5A25C:
 										trap    #1
 										dc.w $2F9
 										bne.s   loc_5A26C
-										trap    #5
-										dc.w $6AC
+										trap    #TRAP_TEXTBOX
+										dc.w $6AC               ; "One of us went to look for{N}the fairy.{W2}{N}I hope he's alright.{W1}"
 										trap    #2
 										dc.w $2F7
 										bra.s   return_5A270
 loc_5A26C:
 										
-										trap    #5
-										dc.w $6AE
+										trap    #TRAP_TEXTBOX
+										dc.w $6AE               ; "Hey, visit us in the Dwarven{N}Village when you come to{N}Grans!{W1}"
 return_5A270:
 										
 										rts
@@ -100,8 +100,8 @@ return_5A270:
 
 sub_5A272:
 										
-										trap    #5
-										dc.w $6AD
+										trap    #TRAP_TEXTBOX
+										dc.w $6AD               ; "Dig, dig!{N}Hey hoo, hey hoo!{W2}{N}To Grans we are a diggin'!{N}Hey hoo, hey hoo!{W1}"
 return_5A276:
 										
 										rts
@@ -113,35 +113,35 @@ return_5A276:
 
 sub_5A278:
 										
-										trap    #5
-										dc.w $6BE
-										trap    #5
-										dc.w $6BF
+										trap    #TRAP_TEXTBOX
+										dc.w $6BE               ; "Thanks to you, he recovered.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $6BF               ; "We all thank you.{N}Take this gift.{W1}"
 										moveq   #0,d0
 										moveq   #0,d1
 										jsr     j_GetItemAndNumberOfItems
 										cmpi.w  #4,d2
 										bne.s   loc_5A296
-										trap    #5
-										dc.w $6C1
+										trap    #TRAP_TEXTBOX
+										dc.w $6C1               ; "Oh, your hands are full.{N}I'll give it to you later.{W1}"
 										bra.s   return_5A2C0
 loc_5A296:
 										
 										moveq   #0,d0
 										moveq   #$72,d1 
 										jsr     j_AddItem
-										trap    #0
-										dc.w $1B
-										trap    #5
-										dc.w $6C0
+										trap    #TRAP_SOUNDCOM
+										dc.w MUSIC_ITEM
+										trap    #TRAP_TEXTBOX
+										dc.w $6C0               ; "{LEADER} is given a{N}Cannon.{W1}"
 										moveq   #$64,d0 
 										jsr     (Sleep).w       
-										trap    #5
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										trap    #2
 										dc.w $2F9
-										trap    #0
-										dc.w $FB
+										trap    #TRAP_SOUNDCOM
+										dc.w SOUND_COMMAND_PLAY_PREVIOUS_MUSIC
 										lea     cs_5A4FE(pc), a0
 										trap    #6
 return_5A2C0:

@@ -11,7 +11,7 @@ p_pt_InvocationSprites:
 
 ; =============== S U B R O U T I N E =======================================
 
-titleScreen:
+TitleScreen:
 										
 										jmp     *+4(pc)
 										jsr     (DisableDisplayAndVInt).w
@@ -138,7 +138,7 @@ loc_100104:
 										move.w  #$12C,d0
 										bsr.w   WaitForPlayer1InputStart
 										move.w  #$258,d0
-										bsr.w   titleScreenEnd
+										bsr.w   TitleScreenEnd
 										jsr     (FadeOutToWhite).w
 										lea     (FFD080_Palette1bis).l,a0
 										moveq   #$1F,d7
@@ -152,7 +152,7 @@ loc_1001EC:
 										clr.w   d0
 										rts
 
-	; End of function titleScreen
+	; End of function TitleScreen
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -194,7 +194,7 @@ loc_10022C:
 
 ; =============== S U B R O U T I N E =======================================
 
-titleScreenEnd:
+TitleScreenEnd:
 										
 										movem.w d0,-(sp)
 										lea     TitleScreenLayoutA(pc), a0
@@ -221,7 +221,7 @@ loc_100260:
 										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
 										bne.w   loc_10029E
 										subq.w  #1,d0
-										bne.s   titleScreenEnd
+										bne.s   TitleScreenEnd
 										rts
 loc_10029E:
 										
@@ -236,7 +236,7 @@ loc_10029E:
 										moveq   #$FFFFFFFF,d0
 										rts
 
-	; End of function titleScreenEnd
+	; End of function TitleScreenEnd
 
 plt_TitleScreen:    incbin "graphics/specialscreens/titlescreen/titlepalettes.bin"
 TitleScreenTiles:   incbin "graphics/specialscreens/titlescreen/titletiles.bin"

@@ -66,14 +66,14 @@ sub_50F54:
 										trap    #1
 										dc.w $100
 										bne.s   loc_50F6A
-										trap    #5
-										dc.w $200
+										trap    #TRAP_TEXTBOX
+										dc.w $200               ; "Hi, {LEADER}!{N}How are you?{W2}"
 loc_50F6A:
 										
-										trap    #5
-										dc.w $1E0
-										trap    #5
-										dc.w $1E1
+										trap    #TRAP_TEXTBOX
+										dc.w $1E0               ; "Sir Astral is in the{N}basement, but he looks{N}"
+										trap    #TRAP_TEXTBOX
+										dc.w $1E1               ; "strange today.{W1}"
 										trap    #1
 										dc.w $100
 										bne.s   loc_50F82
@@ -86,8 +86,8 @@ loc_50F82:
 										bra.s   loc_50F88
 loc_50F84:
 										
-										trap    #5
-										dc.w $1F6
+										trap    #TRAP_TEXTBOX
+										dc.w $1F6               ; "What's wrong with you?{N}Your seat is next to{N}{NAME;2}!{W1}"
 loc_50F88:
 										
 										bra.s   return_50F96
@@ -115,22 +115,22 @@ sub_50F98:
 										trap    #1
 										dc.w $25A
 										bne.s   loc_50FAA
-										trap    #5
-										dc.w $1E2
+										trap    #TRAP_TEXTBOX
+										dc.w $1E2               ; "Hooo...I'm sleepy.{N}{NAME;3} must be sleeping{N}soundly about now.{W1}"
 										bra.s   loc_50FB2
 loc_50FAA:
 										
-										trap    #5
-										dc.w $1F7
-										trap    #5
-										dc.w $1F8
+										trap    #TRAP_TEXTBOX
+										dc.w $1F7               ; "Zzzzz...zzzzz...{N}...ye...yes!{W1}"
+										trap    #TRAP_TEXTBOX
+										dc.w $1F8               ; "Oh, it's you, {LEADER}.{N}I thought it was Sir Astral!{W1}"
 loc_50FB2:
 										
 										bra.s   return_50FB8
 loc_50FB4:
 										
-										trap    #5
-										dc.w $1FB
+										trap    #TRAP_TEXTBOX
+										dc.w $1FB               ; "Yeah, I do want to go to{N}the castle, but {LEADER},{N}how about you?{W1}"
 return_50FB8:
 										
 										rts
@@ -145,13 +145,13 @@ sub_50FBA:
 										trap    #1
 										dc.w $25A
 										bne.s   loc_50FC6
-										trap    #5
-										dc.w $1E3
+										trap    #TRAP_TEXTBOX
+										dc.w $1E3               ; "Hurry to school!{N}Sir Astral and {NAME;1} must{N}be waiting.{W1}"
 										bra.s   return_50FCA
 loc_50FC6:
 										
-										trap    #5
-										dc.w $1F9
+										trap    #TRAP_TEXTBOX
+										dc.w $1F9               ; "I'm busy!{N}The storm last night{N}messed up the house.{W1}"
 return_50FCA:
 										
 										rts
@@ -163,10 +163,10 @@ return_50FCA:
 
 sub_50FCC:
 										
-										trap    #5
-										dc.w $1E4
-										trap    #5
-										dc.w $1E5
+										trap    #TRAP_TEXTBOX
+										dc.w $1E4               ; "He thinks of you as his own{N}grandson.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $1E5               ; "Sometimes he may badger{N}you, but that's because he{N}loves you.{W1}"
 										rts
 
 	; End of function sub_50FCC
@@ -176,12 +176,12 @@ sub_50FCC:
 
 sub_50FD6:
 										
-										trap    #5
-										dc.w $1E6
-										trap    #5
-										dc.w $1E7
-										trap    #5
-										dc.w $1E8
+										trap    #TRAP_TEXTBOX
+										dc.w $1E6               ; "Hi, boy!  Good morning.{N}Are you going to school?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $1E7               ; "Say, Sir Astral certainly{N}is a great person.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $1E8               ; "He even teaches a{N}mischievous kid like you.{W1}"
 										rts
 
 	; End of function sub_50FD6
@@ -191,8 +191,8 @@ sub_50FD6:
 
 sub_50FE4:
 										
-										trap    #5
-										dc.w $1E9
+										trap    #TRAP_TEXTBOX
+										dc.w $1E9               ; "Good morning {LEADER}!{N}It's a wonderful day,{N}isn't it?{W1}"
 										rts
 
 	; End of function sub_50FE4
@@ -202,8 +202,8 @@ sub_50FE4:
 
 sub_50FEA:
 										
-										trap    #5
-										dc.w $1EA
+										trap    #TRAP_TEXTBOX
+										dc.w $1EA               ; "Zzzzz...zzzzz....{W1}"
 										rts
 
 	; End of function sub_50FEA
@@ -213,12 +213,12 @@ sub_50FEA:
 
 sub_50FF0:
 										
-										trap    #5
-										dc.w $1EB
-										trap    #5
-										dc.w $1EC
-										trap    #5
-										dc.w $1ED
+										trap    #TRAP_TEXTBOX
+										dc.w $1EB               ; "Sir Astral is the wisest{N}person in Granseal.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $1EC               ; "He's such a great man, he{N}opened a school all{N}by himself.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $1ED               ; "You must realize how lucky{N}you are.{W1}"
 										rts
 
 	; End of function sub_50FF0
@@ -228,8 +228,8 @@ sub_50FF0:
 
 sub_50FFE:
 										
-										trap    #5
-										dc.w $1EE
+										trap    #TRAP_TEXTBOX
+										dc.w $1EE               ; "Hi, would-be customer!{N}Sorry, we are not open yet.{W1}"
 										rts
 
 	; End of function sub_50FFE
@@ -239,10 +239,10 @@ sub_50FFE:
 
 sub_51004:
 										
-										trap    #5
-										dc.w $1EF
-										trap    #5
-										dc.w $1F0
+										trap    #TRAP_TEXTBOX
+										dc.w $1EF               ; "Granseal's harbor is behind{N}me.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $1F0               ; "All ships left early this{N}morning.{W1}"
 										rts
 
 	; End of function sub_51004
@@ -255,13 +255,13 @@ sub_5100E:
 										trap    #1
 										dc.w $25C
 										bne.s   loc_5101A
-										trap    #5
-										dc.w $1F1
+										trap    #TRAP_TEXTBOX
+										dc.w $1F1               ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 										bra.s   return_5101E
 loc_5101A:
 										
-										trap    #5
-										dc.w $1FC
+										trap    #TRAP_TEXTBOX
+										dc.w $1FC               ; "To deliver him a package?{N}Really?{W1}"
 return_5101E:
 										
 										rts
@@ -276,13 +276,13 @@ sub_51020:
 										trap    #1
 										dc.w $25C
 										bne.s   loc_5102C
-										trap    #5
-										dc.w $1F1
+										trap    #TRAP_TEXTBOX
+										dc.w $1F1               ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 										bra.s   return_51030
 loc_5102C:
 										
-										trap    #5
-										dc.w $1FD
+										trap    #TRAP_TEXTBOX
+										dc.w $1FD               ; "(Cough!)  Be good in the{N}castle, OK?{W1}"
 return_51030:
 										
 										rts
@@ -294,10 +294,10 @@ return_51030:
 
 sub_51032:
 										
-										trap    #5
-										dc.w $1F2
-										trap    #5
-										dc.w $1F3
+										trap    #TRAP_TEXTBOX
+										dc.w $1F2               ; "You unruly boy!{N}Where on earth are you{N}going?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $1F3               ; "There is no school outside!{N}Go to school!{W1}"
 										rts
 
 	; End of function sub_51032
@@ -320,14 +320,14 @@ sub_51044:
 										trap    #1
 										dc.w $105
 										bne.s   loc_51052
-										trap    #5
-										dc.w $1F4
+										trap    #TRAP_TEXTBOX
+										dc.w $1F4               ; "Oh, morning {LEADER}.{N}When did you come in?{W2}"
 										trap    #2
 										dc.w $105
 loc_51052:
 										
-										trap    #5
-										dc.w $1F5
+										trap    #TRAP_TEXTBOX
+										dc.w $1F5               ; "Is it time to start school?{N}OK, I'm coming up soon.{W1}"
 										trap    #2
 										dc.w $25A
 return_5105A:

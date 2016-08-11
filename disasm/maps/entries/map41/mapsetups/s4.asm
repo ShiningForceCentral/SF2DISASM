@@ -34,22 +34,22 @@ sub_5F42C:
 										jsr     j_sub_9146
 										cmpi.w  #$FFFF,d0
 										bne.s   loc_5F446
-										trap    #5
-										dc.w $DB7
+										trap    #TRAP_TEXTBOX
+										dc.w $DB7               ; "A statue of a devil's head.{N}It looks ready to bite you.{W1}"
 										bra.s   loc_5F44A
 loc_5F446:
 										
-										trap    #5
-										dc.w $DB8
+										trap    #TRAP_TEXTBOX
+										dc.w $DB8               ; "A statue of a fierce{N}devil's head.  There's a{N}slit at its mouth.{W1}"
 loc_5F44A:
 										
 										bra.s   return_5F454
 loc_5F44C:
 										
-										trap    #5
-										dc.w $1A7
-										trap    #5
-										dc.w $19C
+										trap    #TRAP_TEXTBOX
+										dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+										trap    #TRAP_TEXTBOX
+										dc.w $19C               ; "Nothing was there.{W1}"
 return_5F454:
 										
 										rts
@@ -64,15 +64,15 @@ sub_5F456:
 										trap    #1
 										dc.w $3A2
 										bne.s   loc_5F462
-										trap    #5
-										dc.w $DB7
+										trap    #TRAP_TEXTBOX
+										dc.w $DB7               ; "A statue of a devil's head.{N}It looks ready to bite you.{W1}"
 										bra.s   return_5F46A
 loc_5F462:
 										
-										trap    #5
-										dc.w $1A7
-										trap    #5
-										dc.w $19C
+										trap    #TRAP_TEXTBOX
+										dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+										trap    #TRAP_TEXTBOX
+										dc.w $19C               ; "Nothing was there.{W1}"
 return_5F46A:
 										
 										rts

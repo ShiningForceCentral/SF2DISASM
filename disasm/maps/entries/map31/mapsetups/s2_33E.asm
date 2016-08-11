@@ -39,10 +39,10 @@ ms_map31_flag33E_EntityEvents:
 
 sub_5D4CA:
 										
-										trap    #5
-										dc.w $7F0
-										trap    #5
-										dc.w $7F1
+										trap    #TRAP_TEXTBOX
+										dc.w $7F0               ; "Moun was the busiest town in{N}Parmecia.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7F1               ; "But now, it's like a ghost{N}town.{W1}"
 										rts
 
 	; End of function sub_5D4CA
@@ -63,8 +63,8 @@ sub_5D4D4:
 
 sub_5D4E2:
 										
-										trap    #5
-										dc.w $7F2
+										trap    #TRAP_TEXTBOX
+										dc.w $7F2               ; "You saved us!{N}You saved our town!{W1}"
 										rts
 
 	; End of function sub_5D4E2
@@ -74,10 +74,10 @@ sub_5D4E2:
 
 sub_5D4E8:
 										
-										trap    #5
-										dc.w $7F3
-										trap    #5
-										dc.w $7F4
+										trap    #TRAP_TEXTBOX
+										dc.w $7F3               ; "The priest once told me that{N}golems were made by the{N}ancients.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7F4               ; "Some golems are bad, some{N}are good.  I want to see a{N}good golem!{W1}"
 										rts
 
 	; End of function sub_5D4E8
@@ -87,18 +87,18 @@ sub_5D4E8:
 
 sub_5D4F2:
 										
-										trap    #5
-										dc.w $7F8
+										trap    #TRAP_TEXTBOX
+										dc.w $7F8               ; "Did you see the Arm of Golem{N}in town?{N}"
 										jsr     j_YesNoPrompt
 										btst    #0,d0
 										bne.s   loc_5D508
-										trap    #5
-										dc.w $7F9
+										trap    #TRAP_TEXTBOX
+										dc.w $7F9               ; "It moves around as if it's{N}searching for something.{N}Maybe it's body?{W1}"
 										bra.s   return_5D50C
 loc_5D508:
 										
-										trap    #5
-										dc.w $7FA
+										trap    #TRAP_TEXTBOX
+										dc.w $7FA               ; "Hmmm...where is it now?{N}It surprises us everyday.{W1}"
 return_5D50C:
 										
 										rts
@@ -110,8 +110,8 @@ return_5D50C:
 
 sub_5D50E:
 										
-										trap    #5
-										dc.w $7F5
+										trap    #TRAP_TEXTBOX
+										dc.w $7F5               ; "We'll really miss you,{N}{NAME;26}....{W1}"
 										rts
 
 	; End of function sub_5D50E
@@ -121,10 +121,10 @@ sub_5D50E:
 
 sub_5D514:
 										
-										trap    #5
-										dc.w $7F6
-										trap    #5
-										dc.w $7F7
+										trap    #TRAP_TEXTBOX
+										dc.w $7F6               ; "The Arm of Golem suddenly{N}moved a little.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7F7               ; "Will you get rid of it?{W1}"
 										rts
 
 	; End of function sub_5D514

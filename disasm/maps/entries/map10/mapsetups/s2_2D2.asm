@@ -93,10 +93,10 @@ sub_56F0C:
 										trap    #1
 										dc.w $31F
 										bne.s   loc_56F3A
-										trap    #5
-										dc.w $643
-										trap    #5
-										dc.w $644
+										trap    #TRAP_TEXTBOX
+										dc.w $643               ; "God Volcanon has forsaken{N}the people of the Earth.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $644               ; "Are you going to kill Zeon{N}as he demanded?{W1}"
 										jsr     j_YesNoPrompt
 										tst.w   d0
 										bne.s   loc_56F30
@@ -107,17 +107,17 @@ sub_56F0C:
 										bra.s   loc_56F38
 loc_56F30:
 										
-										trap    #5
-										dc.w $645
-										trap    #5
-										dc.w $646
+										trap    #TRAP_TEXTBOX
+										dc.w $645               ; "Then you may stay in Bedoe.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $646               ; "You'll be safe here.{W1}"
 loc_56F38:
 										
 										bra.s   return_56F3E
 loc_56F3A:
 										
-										trap    #5
-										dc.w $64E
+										trap    #TRAP_TEXTBOX
+										dc.w $64E               ; "{LEADER}, good luck!{W1}"
 return_56F3E:
 										
 										rts
@@ -129,12 +129,12 @@ return_56F3E:
 
 sub_56F40:
 										
-										trap    #5
-										dc.w $63E
-										trap    #5
-										dc.w $63F
-										trap    #5
-										dc.w $640
+										trap    #TRAP_TEXTBOX
+										dc.w $63E               ; "We can't calm down{N}Volcanon.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $63F               ; "Without his protection, the{N}people that live on the{N}ground will perish.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $640               ; "Only Tristan and Bedoe{N}will survive.{W1}"
 										rts
 
 	; End of function sub_56F40
@@ -144,10 +144,10 @@ sub_56F40:
 
 sub_56F4E:
 										
-										trap    #5
-										dc.w $63A
-										trap    #5
-										dc.w $63B
+										trap    #TRAP_TEXTBOX
+										dc.w $63A               ; "Something happened in{N}North Parmecia.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $63B               ; "I saw a strange cloud!{W1}"
 										rts
 
 	; End of function sub_56F4E
@@ -157,10 +157,10 @@ sub_56F4E:
 
 sub_56F58:
 										
-										trap    #5
-										dc.w $63C
-										trap    #5
-										dc.w $63D
+										trap    #TRAP_TEXTBOX
+										dc.w $63C               ; "Goddess Mitula lives on the{N}north side of Tristan through{N}the mountains.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $63D               ; "The people living in Tristan{N}are kind, but weak.{N}I wonder if they are alright?{W1}"
 										rts
 
 	; End of function sub_56F58
@@ -170,8 +170,8 @@ sub_56F58:
 
 sub_56F62:
 										
-										trap    #5
-										dc.w $64F
+										trap    #TRAP_TEXTBOX
+										dc.w $64F               ; "Shhhh!  My hatchling is{N}sleeping.  Quiet!{W1}"
 										rts
 
 	; End of function sub_56F62
@@ -191,8 +191,8 @@ sub_56F68:
 										bra.s   return_56F7E
 loc_56F7A:
 										
-										trap    #5
-										dc.w $695
+										trap    #TRAP_TEXTBOX
+										dc.w $695               ; "See.  I told you!{N}I can fly...sort of.{W1}"
 return_56F7E:
 										
 										rts
@@ -204,10 +204,10 @@ return_56F7E:
 
 sub_56F80:
 										
-										trap    #5
-										dc.w $641
-										trap    #5
-										dc.w $642
+										trap    #TRAP_TEXTBOX
+										dc.w $641               ; "Volcanon was very angry,{N}wasn't he?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $642               ; "We can no longer depend on{N}him.  We must do it{N}ourselves!{W1}"
 										rts
 
 	; End of function sub_56F80

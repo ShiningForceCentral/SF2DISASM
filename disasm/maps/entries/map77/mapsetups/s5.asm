@@ -26,8 +26,8 @@ nullsub_168:
 sub_50A9A:
 										
 										move.w  #$73,((RAM_Dialogue_NameIdx1-$1000000)).w 
-										trap    #5
-										dc.w $1A5
+										trap    #TRAP_TEXTBOX
+										dc.w $1A5               ; "{LEADER} uses the {ITEM}.{D3}"
 										trap    #1
 										dc.w $384
 										bne.s   loc_50AB6
@@ -38,8 +38,8 @@ sub_50A9A:
 										bra.s   loc_50ABA
 loc_50AB6:
 										
-										trap    #5
-										dc.w $1A6
+										trap    #TRAP_TEXTBOX
+										dc.w $1A6               ; "But nothing happened.{D1}"
 loc_50ABA:
 										
 										moveq   #$FFFFFFFF,d6

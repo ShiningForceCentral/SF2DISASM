@@ -39,10 +39,10 @@ ms_map15_flag212_EntityEvents:
 
 sub_5CFCA:
 										
-										trap    #5
-										dc.w $7CD
-										trap    #5
-										dc.w $7CE
+										trap    #TRAP_TEXTBOX
+										dc.w $7CD               ; "I heard that Zeon, the{N}legendary devil, is{N}approaching Parmecia.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7CE               ; "Will Tristan be attacked?{W1}"
 										rts
 
 	; End of function sub_5CFCA
@@ -52,10 +52,10 @@ sub_5CFCA:
 
 sub_5CFD4:
 										
-										trap    #5
-										dc.w $7CF
-										trap    #5
-										dc.w $7D0
+										trap    #TRAP_TEXTBOX
+										dc.w $7CF               ; "It's said that some devils{N}steal your spirit.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7D0               ; "If your spirit is stolen, you{N}become a vampire.{W1}"
 										rts
 
 	; End of function sub_5CFD4
@@ -65,10 +65,10 @@ sub_5CFD4:
 
 sub_5CFDE:
 										
-										trap    #5
-										dc.w $7D1
-										trap    #5
-										dc.w $7D2
+										trap    #TRAP_TEXTBOX
+										dc.w $7D1               ; "Have you seen a vampire?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $7D2               ; "A vampire becomes a mortal{N}again if the devil is purged{N}from the body.{W1}"
 										rts
 
 	; End of function sub_5CFDE
@@ -78,8 +78,8 @@ sub_5CFDE:
 
 sub_5CFE8:
 										
-										trap    #5
-										dc.w $7D3
+										trap    #TRAP_TEXTBOX
+										dc.w $7D3               ; "I did see a ship in the{N}western sky!{W1}"
 										rts
 
 	; End of function sub_5CFE8
@@ -89,8 +89,8 @@ sub_5CFE8:
 
 sub_5CFEE:
 										
-										trap    #5
-										dc.w $7D4
+										trap    #TRAP_TEXTBOX
+										dc.w $7D4               ; "Thank you.  You saved Mitula{N}and Pacalon!{W1}"
 										rts
 
 	; End of function sub_5CFEE
@@ -100,8 +100,8 @@ sub_5CFEE:
 
 sub_5CFF4:
 										
-										trap    #5
-										dc.w $7D5
+										trap    #TRAP_TEXTBOX
+										dc.w $7D5               ; "To keep the devils out,{N}Moun gate has been closed.{W1}"
 										rts
 
 	; End of function sub_5CFF4

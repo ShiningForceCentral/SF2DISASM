@@ -63,10 +63,10 @@ nullsub_111:
 
 sub_6277A:
 										
-										trap    #5
-										dc.w $F4F
-										trap    #5
-										dc.w $F50
+										trap    #TRAP_TEXTBOX
+										dc.w $F4F               ; "{LEADER}, did you hear?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F50               ; "The Princess' face turned{N}pink!{W1}"
 										rts
 
 	; End of function sub_6277A
@@ -76,10 +76,10 @@ sub_6277A:
 
 sub_62784:
 										
-										trap    #5
-										dc.w $F51
-										trap    #5
-										dc.w $F52
+										trap    #TRAP_TEXTBOX
+										dc.w $F51               ; "Ah, {LEADER}!{N}I'm so happy!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F52               ; "I heard Princess Elis is{N}going to awaken today!{W1}"
 										rts
 
 	; End of function sub_62784
@@ -89,8 +89,8 @@ sub_62784:
 
 sub_6278E:
 										
-										trap    #5
-										dc.w $F53
+										trap    #TRAP_TEXTBOX
+										dc.w $F53               ; "Thanks to Galam and{N}Pacalon, Granseal is{N}now the same as before!{W1}"
 										rts
 
 	; End of function sub_6278E
@@ -100,8 +100,8 @@ sub_6278E:
 
 sub_62794:
 										
-										trap    #5
-										dc.w $F54
+										trap    #TRAP_TEXTBOX
+										dc.w $F54               ; "Galam is making a statue of{N}{NAME;28} as a memorial.{W1}"
 										rts
 
 	; End of function sub_62794
@@ -111,10 +111,10 @@ sub_62794:
 
 sub_6279A:
 										
-										trap    #5
-										dc.w $F55
-										trap    #5
-										dc.w $F56
+										trap    #TRAP_TEXTBOX
+										dc.w $F55               ; "{LEADER}, you...will...{N}kiss...her...?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F56               ; "I don't like you anymore.{N}(Sigh){W1}"
 										rts
 
 	; End of function sub_6279A
@@ -124,8 +124,8 @@ sub_6279A:
 
 sub_627A4:
 										
-										trap    #5
-										dc.w $F57
+										trap    #TRAP_TEXTBOX
+										dc.w $F57               ; "I'm so happy.  I'll get to{N}see Elis again!{W1}"
 										rts
 
 	; End of function sub_627A4
@@ -135,10 +135,10 @@ sub_627A4:
 
 sub_627AA:
 										
-										trap    #5
-										dc.w $F58
-										trap    #5
-										dc.w $F59
+										trap    #TRAP_TEXTBOX
+										dc.w $F58               ; "{NAME;2} had better not{N}be the one who kisses her.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F59               ; "If he kisses her, he'll have{N}my hoofprints on his rump!{W1}"
 										rts
 
 	; End of function sub_627AA
@@ -159,10 +159,10 @@ sub_627B4:
 
 sub_627BC:
 										
-										trap    #5
-										dc.w $F5A
-										trap    #5
-										dc.w $F5B
+										trap    #TRAP_TEXTBOX
+										dc.w $F5A               ; "I heard a rumor!{N}Are you going to kiss her?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F5B               ; "Shucks, I wish I were as{N}young as you.{W1}"
 										rts
 
 	; End of function sub_627BC
@@ -172,10 +172,10 @@ sub_627BC:
 
 sub_627C6:
 										
-										trap    #5
-										dc.w $F46
-										trap    #5
-										dc.w $F47
+										trap    #TRAP_TEXTBOX
+										dc.w $F46               ; "Why am I here?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F47               ; "We have no more enemies.{W1}"
 										rts
 
 	; End of function sub_627C6
@@ -185,15 +185,15 @@ sub_627C6:
 
 sub_627D0:
 										
-										trap    #5
-										dc.w $F5C
-										trap    #5
-										dc.w $F5D
+										trap    #TRAP_TEXTBOX
+										dc.w $F5C               ; "Morning, {LEADER}.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F5D               ; "Are you ready to go to{N}the castle?{W1}"
 										jsr     j_YesNoPrompt
 										tst.w   d0
 										bne.s   loc_627F2
-										trap    #5
-										dc.w $FC1
+										trap    #TRAP_TEXTBOX
+										dc.w $FC1               ; "Now, let's go see the King!{W1}"
 										trap    #2
 										dc.w $3D5
 										lea     cs_6290C(pc), a0
@@ -201,8 +201,8 @@ sub_627D0:
 										bra.s   return_627F6
 loc_627F2:
 										
-										trap    #5
-										dc.w $FC2
+										trap    #TRAP_TEXTBOX
+										dc.w $FC2               ; "No?  You said NO?{N}We have no time to waste!{W1}"
 return_627F6:
 										
 										rts
@@ -214,10 +214,10 @@ return_627F6:
 
 sub_627F8:
 										
-										trap    #5
-										dc.w $F5E
-										trap    #5
-										dc.w $F5F
+										trap    #TRAP_TEXTBOX
+										dc.w $F5E               ; "I know somebody must kiss{N}her....{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F5F               ; "Who will it be?{N}What will I do if...{N}it's...?{W1}"
 										rts
 
 	; End of function sub_627F8
@@ -227,10 +227,10 @@ sub_627F8:
 
 sub_62802:
 										
-										trap    #5
-										dc.w $F60
-										trap    #5
-										dc.w $F61
+										trap    #TRAP_TEXTBOX
+										dc.w $F60               ; "I don't think it's going to{N}be me 'cause I'm a centaur.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F61               ; "Who will it be?{N}Does Sir Astral know?{W1}"
 										rts
 
 	; End of function sub_62802
@@ -240,10 +240,10 @@ sub_62802:
 
 sub_6280C:
 										
-										trap    #5
-										dc.w $F62
-										trap    #5
-										dc.w $F63
+										trap    #TRAP_TEXTBOX
+										dc.w $F62               ; "I will do anything for{N}Princess Elis!!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F63               ; "I hope Sir Astral chooses{N}me!{W1}"
 										rts
 
 	; End of function sub_6280C
@@ -253,10 +253,10 @@ sub_6280C:
 
 sub_62816:
 										
-										trap    #5
-										dc.w $F64
-										trap    #5
-										dc.w $F65
+										trap    #TRAP_TEXTBOX
+										dc.w $F64               ; "She's no longer poisoned,{N}but she's still asleep.{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $F65               ; "And Sir Astral called us{N}here!{N}Who's going to kiss her?{W1}"
 										rts
 
 	; End of function sub_62816

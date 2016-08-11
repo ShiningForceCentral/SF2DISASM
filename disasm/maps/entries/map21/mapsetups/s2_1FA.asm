@@ -15,19 +15,19 @@ sub_53EAE:
 										trap    #1
 										dc.w $100
 										bne.s   loc_53EC2
-										trap    #5
-										dc.w $238
+										trap    #TRAP_TEXTBOX
+										dc.w $238               ; "This west tower leads to{N}the Ancient Tower.{W2}"
 										trap    #2
 										dc.w $100
 loc_53EC2:
 										
-										trap    #5
-										dc.w $239
+										trap    #TRAP_TEXTBOX
+										dc.w $239               ; "The Ancient Tower is a{N}sacred place where only the{N}King can go.{W1}"
 										bra.s   return_53EDC
 loc_53EC8:
 										
-										trap    #5
-										dc.w $243
+										trap    #TRAP_TEXTBOX
+										dc.w $243               ; "Sir Astral is already{N}inside the tower.  Hurry!{W1}"
 										trap    #1
 										dc.w $100
 										bne.s   return_53EDC
@@ -48,8 +48,8 @@ sub_53EDE:
 										
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #5
-										dc.w $244
+										trap    #TRAP_TEXTBOX
+										dc.w $244               ; "He's fainted.{W1}"
 										rts
 
 	; End of function sub_53EDE
@@ -59,8 +59,8 @@ sub_53EDE:
 
 sub_53EEE:
 										
-										trap    #5
-										dc.w $245
+										trap    #TRAP_TEXTBOX
+										dc.w $245               ; "It was a devil!{N}I don't want to stand{N}here any more!{W2}{N}Hey, you!  Can you stand{N}guard for me here?{W1}"
 nullsub_126:
 										
 										rts

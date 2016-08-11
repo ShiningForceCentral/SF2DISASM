@@ -43,7 +43,7 @@ loc_62CCE:
 										bra.s   loc_62CFA
 loc_62CF2:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_TOWN
 										jsr     (FadeInFromBlack).w
 loc_62CFA:
@@ -51,7 +51,7 @@ loc_62CFA:
 										bra.s   return_62D04
 loc_62CFC:
 										
-										trap    #0
+										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_TOWN
 										jsr     (FadeInFromBlack).w
 return_62D04:

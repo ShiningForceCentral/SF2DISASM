@@ -37,8 +37,8 @@ return_5F9F6:
 
 sub_5F9F8:
 										
-										trap    #5
-										dc.w $D24
+										trap    #TRAP_TEXTBOX
+										dc.w $D24               ; "Was it...too wild?{W1}"
 										rts
 
 	; End of function sub_5F9F8
@@ -69,13 +69,13 @@ sub_5FA10:
 										trap    #1
 										dc.w $101
 										bne.s   loc_5FA1C
-										trap    #5
-										dc.w $D23
+										trap    #TRAP_TEXTBOX
+										dc.w $D23               ; "{LEADER}, come on!{W1}"
 										bra.s   return_5FA20
 loc_5FA1C:
 										
-										trap    #5
-										dc.w $D2A
+										trap    #TRAP_TEXTBOX
+										dc.w $D2A               ; "We must finish our{N}preparations before Geshp{N}finds us.{W1}"
 return_5FA20:
 										
 										rts

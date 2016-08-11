@@ -21,11 +21,11 @@ sub_614B2:
 										dc.w $387
 loc_614C2:
 										
-										trap    #5
-										dc.w $E1B
-										trap    #5
-										dc.w $E1C
-										trap    #5
+										trap    #TRAP_TEXTBOX
+										dc.w $E1B               ; "There is no church around{N}here.  Think of me as a{N}priest.{W1}"
+										trap    #TRAP_TEXTBOX
+										dc.w $E1C               ; "Now, what can I do for you?{W1}"
+										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										jmp     j_ChurchActions
 return_614D4:

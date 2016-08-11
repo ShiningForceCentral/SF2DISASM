@@ -51,18 +51,18 @@ sub_58056:
 										trap    #1
 										dc.w $100
 										bne.s   loc_58068
-										trap    #5
-										dc.w $58C
-										trap    #5
-										dc.w $58D
+										trap    #TRAP_TEXTBOX
+										dc.w $58C               ; "How did you come to{N}Polca Village?{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $58D               ; "Through the cave?{N}Nobody has come to this{N}village since...{W2}"
 										trap    #2
 										dc.w $100
 loc_58068:
 										
-										trap    #5
-										dc.w $58E
-										trap    #5
-										dc.w $58F
+										trap    #TRAP_TEXTBOX
+										dc.w $58E               ; "Oh, you defeated that{N}hobgoblin?  Wow!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $58F               ; "Now we can use that tunnel{N}to travel between Polca and{N}the wilderness area!{W1}"
 										rts
 
 	; End of function sub_58056
@@ -72,8 +72,8 @@ loc_58068:
 
 sub_58072:
 										
-										trap    #5
-										dc.w $590
+										trap    #TRAP_TEXTBOX
+										dc.w $590               ; "Breathe deeply....{W2}{N}Wonderful air, huh?{W1}"
 										rts
 
 	; End of function sub_58072
@@ -93,8 +93,8 @@ sub_58078:
 										bra.s   return_5808E
 loc_5808A:
 										
-										trap    #5
-										dc.w $591
+										trap    #TRAP_TEXTBOX
+										dc.w $591               ; "In ancient times, there{N}were magic tunnels.{W2}{N}People traveled easily{N}through the tunnels.{W1}"
 return_5808E:
 										
 										rts
@@ -131,17 +131,17 @@ sub_580AC:
 										trap    #1
 										dc.w $2C6
 										bne.s   loc_580B8
-										trap    #5
-										dc.w $592
+										trap    #TRAP_TEXTBOX
+										dc.w $592               ; "To the east is the sacred{N}area of Volcanon.{W1}"
 										bra.s   return_580C4
 loc_580B8:
 										
-										trap    #5
-										dc.w $5B9
-										trap    #5
-										dc.w $5BA
-										trap    #5
-										dc.w $5BB
+										trap    #TRAP_TEXTBOX
+										dc.w $5B9               ; "He came down from the{N}mountain....{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $5BA               ; "He's not from Polca, or{N}Bedoe....{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $5BB               ; "Where did he come from?{W1}"
 return_580C4:
 										
 										rts
@@ -163,8 +163,8 @@ sub_580C6:
 
 sub_580CE:
 										
-										trap    #5
-										dc.w $593
+										trap    #TRAP_TEXTBOX
+										dc.w $593               ; "Mt. Volcano is home to{N}beastmen.{W2}{N}We were a warlike tribe, but{N}we've almost forgotten how{N}to fight.{W1}"
 										rts
 
 	; End of function sub_580CE
@@ -174,8 +174,8 @@ sub_580CE:
 
 sub_580D4:
 										
-										trap    #5
-										dc.w $594
+										trap    #TRAP_TEXTBOX
+										dc.w $594               ; "Young men these days are{N}lucky!  I wish I was young{N}again!{W1}"
 										rts
 
 	; End of function sub_580D4
@@ -198,17 +198,17 @@ sub_580DA:
 										bra.s   loc_580FA
 loc_580F2:
 										
-										trap    #5
-										dc.w $597
-										trap    #5
-										dc.w $598
+										trap    #TRAP_TEXTBOX
+										dc.w $597               ; "Whoa!  Mt. Volcano erupted!{W2}"
+										trap    #TRAP_TEXTBOX
+										dc.w $598               ; "It's an evil omen.{W1}"
 loc_580FA:
 										
 										bra.s   return_58100
 loc_580FC:
 										
-										trap    #5
-										dc.w $5B7
+										trap    #TRAP_TEXTBOX
+										dc.w $5B7               ; "Oh, this is serious!{N}I hope he survives the night.{W1}"
 return_58100:
 										
 										rts
@@ -220,8 +220,8 @@ return_58100:
 
 sub_58102:
 										
-										trap    #5
-										dc.w $599
+										trap    #TRAP_TEXTBOX
+										dc.w $599               ; "Clank!  Clank!{N}All of our weapons are made{N}by me!{W2}{N}But, who uses them in this{N}peaceful country?{W1}"
 										rts
 
 	; End of function sub_58102
@@ -231,8 +231,8 @@ sub_58102:
 
 sub_58108:
 										
-										trap    #5
-										dc.w $59A
+										trap    #TRAP_TEXTBOX
+										dc.w $59A               ; "Hirsute?  'Cause I'm a{N}beastman.{W2}{N}I'm not hairy enough though.{N}I envy those hairy guys!{W1}"
 										rts
 
 	; End of function sub_58108
@@ -242,8 +242,8 @@ sub_58108:
 
 sub_5810E:
 										
-										trap    #5
-										dc.w $5B8
+										trap    #TRAP_TEXTBOX
+										dc.w $5B8               ; "Ah...stop...no!{N}I don't want...to see....{N}My...head...aches....{W1}"
 										rts
 
 	; End of function sub_5810E
