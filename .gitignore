@@ -8,6 +8,8 @@
 # No Ultra Edit backup files
 *.bak
 
+# No side project stuff
+sf2edit.conf
 
 #################
 ## Below is the default ignore file, kept as is.

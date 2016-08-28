@@ -11,27 +11,27 @@ PlayIntroOrEndCutscene:
 										move.b  #$FF,((byte_FFB198-$1000000)).w
 										move.b  #$FF,((WINDOW_HIDING_FORBIDDEN-$1000000)).w
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 0
+										dc.w VINTS_CLEAR
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 1
+										dc.w VINTS_ADD
 										dc.l VInt_4744
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 1
+										dc.w VINTS_ADD
 										dc.l VInt_UpdateEntities
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 1
+										dc.w VINTS_ADD
 										dc.l VInt_AdjustCameraToPlayer
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 1
-										dc.l VintFunc_3930      
+										dc.w VINTS_ADD
+										dc.l VInt_3930          
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 1
+										dc.w VINTS_ADD
 										dc.l VInt_UpdateSprites
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 1
+										dc.w VINTS_ADD
 										dc.l VInt_UpdateWindows
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 1
+										dc.w VINTS_ADD
 										dc.l VInt_UpdateAnimatingTiles
 										move.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 										jsr     (sub_4EC6).w

@@ -4265,7 +4265,7 @@ loc_92C2:
 										move.l  #'CNUM',(ERRCODE_BYTE0).l
 										move.l  (sp),(ERRCODE_BYTE4).l
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w TRAP_CLEARFLAG
+										dc.w VINTS_DEACTIVATE
 										dc.l 0
 loc_92DE:
 										bra.s   loc_92DE
@@ -5490,7 +5490,7 @@ loc_9B80:
 WriteSkirmishScript:
 										
 										movem.l d0-a6,-(sp)
-										link    a2,#BTLSCENE_STACKNEGSIZE
+										link    a2,#-$98
 										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a3
 										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a4
 										lea     ((RAM_CharIdxList-$1000000)).w,a5

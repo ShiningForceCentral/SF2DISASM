@@ -2936,8 +2936,8 @@ loc_465C4:
 										jsr     (WaitForVInt).w 
 										tst.b   ((FADING_SETTING-$1000000)).w
 										bne.s   loc_465C4
-										trap    #9
-										dc.w 3
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_DEACTIVATE
 										dc.l 0
 										clr.l   d0
 										move.w  (a6)+,d1
@@ -2951,8 +2951,8 @@ loc_465C4:
 										jsr     (LoadMap).w     
 										movea.l (sp)+,a6
 										jsr     (EnableDisplayAndInterrupts).w
-										trap    #9
-										dc.w 4
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ACTIVATE
 										dc.l 0
 										jsr     (WaitForVInt).w 
 										rts
@@ -3084,8 +3084,8 @@ loc_4667A:
 ; =============== S U B R O U T I N E =======================================
 
 csc42_:
-										trap    #9
-										dc.w 3
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_DEACTIVATE
 										dc.l 0
 										jsr     (DisableDisplayAndVInt).w
 										movea.l (a6)+,a0
@@ -3095,8 +3095,8 @@ csc42_:
 										jsr     InitMapEntities
 										jsr     (LoadMapEntitySprites).w
 										jsr     (EnableDisplayAndInterrupts).w
-										trap    #9
-										dc.w 4
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ACTIVATE
 										dc.l 0
 										rts
 
@@ -3119,8 +3119,8 @@ csc43_:
 ; =============== S U B R O U T I N E =======================================
 
 csc44_:
-										trap    #9
-										dc.w 3
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_DEACTIVATE
 										dc.l 0
 										moveq   #0,d0
 										bsr.w   GetEntityAddressFromPlayableCharacterIdx
@@ -3134,8 +3134,8 @@ csc44_:
 										move.b  ENTITYDEF_OFFSET_FACING(a5),d3
 										movea.l (a6)+,a0
 										jsr     InitMapEntities
-										trap    #9
-										dc.w 4
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ACTIVATE
 										dc.l 0
 										rts
 
@@ -3159,8 +3159,8 @@ csc45_:
 csc46_:
 										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
 										nop
-										trap    #9
-										dc.w 3
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_DEACTIVATE
 										dc.l 0
 										clr.l   d0
 										moveq   #$FFFFFFFF,d1
@@ -3174,8 +3174,8 @@ csc46_:
 										jsr     (LoadMap).w     
 										movea.l (sp)+,a6
 										jsr     (EnableDisplayAndInterrupts).w
-										trap    #9
-										dc.w 4
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ACTIVATE
 										dc.l 0
 										jsr     (WaitForVInt).w 
 										rts
@@ -3199,8 +3199,8 @@ csc47_:
 ; =============== S U B R O U T I N E =======================================
 
 csc49_:
-										trap    #9
-										dc.w 3
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_DEACTIVATE
 										dc.l 0
 										jsr     (DisableDisplayAndVInt).w
 										jsr     GetMapSetupEntityList
@@ -3210,8 +3210,8 @@ csc49_:
 										jsr     j_InitMapEntities
 										jsr     (LoadMapEntitySprites).w
 										jsr     (EnableDisplayAndInterrupts).w
-										trap    #9
-										dc.w 4
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ACTIVATE
 										dc.l 0
 										rts
 

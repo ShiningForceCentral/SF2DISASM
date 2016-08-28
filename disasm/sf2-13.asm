@@ -229,8 +229,8 @@ p_endKissPicture:   dc.l EndKissPicture
 sub_1AC068:
 										
 										jmp     *+4(pc)
-										trap    #9
-										dc.w 0
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_CLEAR
 										jsr     (WaitForVInt).w 
 										jsr     (DisableDisplayAndVInt).w
 										jsr     (ClearVsramAndSprites).w
@@ -258,8 +258,8 @@ loc_1AC09E:
 										move.w  #$400,d0
 										moveq   #2,d1
 										jsr     (BwahDMAstuffAgain).w
-										trap    #9
-										dc.w 0
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_CLEAR
 										jsr     (EnableDisplayAndInterrupts).w
 										clr.w   d6
 										jsr     (ClearHscrollStuff).w
@@ -269,9 +269,9 @@ loc_1AC09E:
 										jsr     (Set_FFDE94_bit3).w
 										jsr     (FadeInFromBlack).w
 										move.l  (p_GameStaff).l,((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w
-										trap    #9
-										dc.w 1
-										dc.l sub_1AC1E4
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_ADD
+										dc.l VInt_1AC1E4
 										moveq   #$78,d0 
 										jsr     (Sleep).w       
 										jsr     j_UpdateForce
@@ -356,7 +356,7 @@ sub_1AC1CC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AC1E4:
+VInt_1AC1E4:
 										
 										btst    #0,((byte_FFDEA0-$1000000)).w
 										bne.s   loc_1AC1F6
@@ -384,7 +384,7 @@ loc_1AC220:
 										jsr     (Set_FFDE94_bit3).w
 										rts
 
-	; End of function sub_1AC1E4
+	; End of function VInt_1AC1E4
 
 
 ; =============== S U B R O U T I N E =======================================

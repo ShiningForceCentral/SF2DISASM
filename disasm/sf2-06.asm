@@ -108,12 +108,12 @@ loc_280AA:
 										jsr     (EnableDisplayAndInterrupts).w
 										move.l  #InputSequence_ConfigurationMode,((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 1
-										dc.l CheckConfigurationModeCheat
+										dc.w VINTS_ADD
+										dc.l VInt_CheckConfigurationModeCheat
 										move.l  #InputSequence_DebugMode,((dword_FFB1A0-$1000000)).w
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 1
-										dc.l CheckDebugModeCheat
+										dc.w VINTS_ADD
+										dc.l VInt_CheckDebugModeCheat
 										move.b  #1,((FADING_SETTING-$1000000)).w
 										clr.w   ((unk_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
@@ -157,7 +157,7 @@ loc_28164:
 										bne.s   loc_28164
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_REMOVE
-										dc.l CheckConfigurationModeCheat
+										dc.l VInt_CheckConfigurationModeCheat
 										jsr     (FadeOutToBlack).w
 										clr.w   d0
 										rts
@@ -1227,7 +1227,7 @@ return_28F96:
 
 ; =============== S U B R O U T I N E =======================================
 
-CheckConfigurationModeCheat:
+VInt_CheckConfigurationModeCheat:
 										
 										movea.l ((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w,a0
 										cmpi.b  #$FF,(a0)
@@ -1246,14 +1246,14 @@ return_28FBA:
 										
 										rts
 
-	; End of function CheckConfigurationModeCheat
+	; End of function VInt_CheckConfigurationModeCheat
 
 InputSequence_ConfigurationMode:
 										incbin "data/technical/configurationmodeinputsequence.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
-CheckDebugModeCheat:
+VInt_CheckDebugModeCheat:
 										
 										movea.l ((dword_FFB1A0-$1000000)).w,a0
 										cmpi.b  #$FF,(a0)
@@ -1272,7 +1272,7 @@ return_28FEE:
 										
 										rts
 
-	; End of function CheckDebugModeCheat
+	; End of function VInt_CheckDebugModeCheat
 
 InputSequence_DebugMode:
 										incbin "data/technical/debugmodeinputsequence.bin"

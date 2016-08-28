@@ -264,7 +264,7 @@ loc_1828C:
 										jsr     (sub_1942).w    
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_ADD
-										dc.l UpdateBattlesceneGraphics
+										dc.l VInt_UpdateBattlesceneGraphics
 										jsr     sub_1001C
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_ADD
@@ -13377,7 +13377,7 @@ sub_1EE1A:
 
 ; and other stuff ?
 
-UpdateBattlesceneGraphics:
+VInt_UpdateBattlesceneGraphics:
 										
 										addq.w  #1,((BATTLESCENE_FRAME_COUNTER-$1000000)).w
 										clr.b   ((byte_FFB56D-$1000000)).w
@@ -13390,7 +13390,7 @@ UpdateBattlesceneGraphics:
 										bsr.w   sub_1F176
 										jmp     (sub_1942).w    
 
-	; End of function UpdateBattlesceneGraphics
+	; End of function VInt_UpdateBattlesceneGraphics
 
 
 ; =============== S U B R O U T I N E =======================================

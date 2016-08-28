@@ -100,8 +100,9 @@ aJ:                 dc.b 'J               '
 										dc.l $FF0000            ; Ram Start Adress
 										dc.l $FFFFFF            ; Ram End Adress
 										dc.l $5241F820          ; SRam data
-										dc.l $200001            ; Sram Start Address
-										dc.l $203FFF            ; Sram End Address
+										dc.l SRAM_START         ; Sram Start Address
+										dc.l SAVE2_CHARACTER_DATA+$1FC4
+																						; Sram End Address
 										dc.b '            '     ; Modem data
 										dc.b '                    '
 																						; Memo
@@ -556,7 +557,7 @@ Trap6_TriggerAndExecuteMapScript:
 										
 										movem.l d0-a6,-(sp)
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 4
+										dc.w VINTS_ACTIVATE
 										dc.l VInt_UpdateEntities
 										jsr     j_ExecuteMapScript
 										movem.l (sp)+,d0-a6
@@ -4689,7 +4690,7 @@ loc_2632:
 										dc.l 0
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_ACTIVATE
-										dc.l VintFunc_3930      
+										dc.l VInt_3930          
 										bsr.w   sub_2D58
 										movea.l (a5)+,a4
 										move.w  (a4)+,d0
@@ -4779,7 +4780,7 @@ loc_26E8:
 										move.w  #0,((word_FFA806-$1000000)).w
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_DEACTIVATE
-										dc.l VintFunc_3930      
+										dc.l VInt_3930          
 										jsr     sub_4344(pc)
 										nop
 										rts
@@ -4845,7 +4846,7 @@ loc_2800:
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_DEACTIVATE
 off_280A:
-										dc.l VintFunc_3930      
+										dc.l VInt_3930          
 										jsr     sub_4344(pc)
 										nop
 										rts
@@ -4906,7 +4907,7 @@ loc_28C0:
 										move.w  #$18,((word_FFA80A-$1000000)).w
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_DEACTIVATE
-										dc.l VintFunc_3930      
+										dc.l VInt_3930          
 										jsr     sub_4344(pc)
 										nop
 										rts
@@ -4966,7 +4967,7 @@ loc_293A:
 										move.w  #8,((word_FFA80A-$1000000)).w
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_DEACTIVATE
-										dc.l VintFunc_3930      
+										dc.l VInt_3930          
 										jsr     sub_4344(pc)
 										nop
 										rts
@@ -6051,7 +6052,7 @@ loc_392A:
 
 ; Related to camera position ?
 
-VintFunc_3930:
+VInt_3930:
 										
 										link    a6,#-2
 										move.b  ((RAM_CameraScrollingMask-$1000000)).w,d0
@@ -6428,7 +6429,7 @@ loc_3D38:
 loc_3D40:
 										bset    #0,((RAM_CameraScrollingMask-$1000000)).w
 
-	; End of function VintFunc_3930
+	; End of function VInt_3930
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13343,7 +13344,7 @@ DebugModeBattleTest:
 										bsr.w   EnableDisplayAndInterrupts
 										bsr.w   FadeInFromBlack
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 1
+										dc.w VINTS_ADD
 										dc.l VInt_UpdateWindows
 										bsr.w   InitWindowProperties
 										move.w  #$1E,(word_FFB12E).l

@@ -8734,7 +8734,7 @@ LoadBattle:
 										jsr     (LoadMapTilesets).w
 										bsr.w   WaitForFadeToFinish
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 0
+										dc.w VINTS_CLEAR
 										jsr     (WaitForVInt).w 
 										jsr     j_MoveEntitiesToBattlePositions
 										move.w  (sp)+,d0
@@ -8954,7 +8954,7 @@ loc_257D0:
 										movem.w (sp)+,d1-d3
 										bsr.w   WaitForFadeToFinish
 										trap    #TRAP_VINTFUNCTIONS
-										dc.w 0
+										dc.w VINTS_CLEAR
 										jsr     j_GetMapSetupEntities
 										jsr     j_InitMapEntities
 										jsr     (LoadMapEntitySprites).w
@@ -9059,7 +9059,7 @@ sub_258EA:
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_DEACTIVATE
-										dc.l VintFunc_3930      
+										dc.l VInt_3930          
 										rts
 
 	; End of function sub_258EA
@@ -9296,7 +9296,7 @@ SetBattleVIntFuncs:
 										dc.l VInt_AdjustCameraToPlayer
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_ADD
-										dc.l VintFunc_3930      
+										dc.l VInt_3930          
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_UpdateSprites
@@ -9990,7 +9990,7 @@ EndGame:
 										move.b  #$FF,((byte_FFB082-$1000000)).w
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_ADD
-										dc.l sub_27CA4
+										dc.l VInt_27CA4
 										move.w  #$46,((CURRENT_SPEAK_SOUND-$1000000)).w 
 										trap    #TRAP_TEXTBOX
 										dc.w $EF                ; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
@@ -10008,7 +10008,7 @@ EndGame:
 										clr.b   ((byte_FFB082-$1000000)).w
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_REMOVE
-										dc.l sub_27CA4
+										dc.l VInt_27CA4
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_VscrollThing
@@ -10157,7 +10157,7 @@ VInt_VscrollThing:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_27CA4:
+VInt_27CA4:
 										
 										link    a6,#-2
 										tst.b   ((byte_FFB082-$1000000)).w
@@ -10237,6 +10237,6 @@ loc_27D8A:
 										unlk    a6
 										rts
 
-	; End of function sub_27CA4
+	; End of function VInt_27CA4
 
 										align $8000

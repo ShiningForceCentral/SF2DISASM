@@ -345,11 +345,11 @@ sub_100A0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_100A4:
+j_VintFunc_16588:
 										
-										jmp     sub_16588(pc)
+										jmp     VInt_16588(pc)
 
-	; End of function sub_100A4
+	; End of function j_VintFunc_16588
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3222,8 +3222,8 @@ HidePortraitWindow:
 										tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
 										beq.s   return_11BE0
 										movem.l d0-a1,-(sp)
-										trap    #9
-										dc.w 2
+										trap    #TRAP_VINTFUNCTIONS
+										dc.w VINTS_REMOVE
 										dc.l VInt_HandlePortraitBlinking
 										move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
 										subq.w  #1,d0
@@ -10484,7 +10484,7 @@ unk_1623A:          dc.b $3D
 NumberPrompt:
 										
 										movem.l d1-a1,-(sp)
-										link    a6,#-WINDOW_NUMPROMPT_STACK_NEGSIZE
+										link    a6,#$FFF0
 										move.w  d0,-WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6)
 										move.w  d1,-WINDOW_NUMPROMPT_STACK_OFFSET_MINNUM(a6)
 										move.w  d2,-WINDOW_NUMPROMPT_STACK_OFFSET_MAXNUM(a6)
@@ -10764,7 +10764,7 @@ SpecialBattle:
 										move.w  d0,((TIMER_WINDOW_INDEX-$1000000)).w
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_ADD
-										dc.l sub_16588
+										dc.l VInt_16588
 										move.l  #$FFFFFFFF,((SPECIAL_BATTLE_TIME-$1000000)).w
 										addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_1654C:
@@ -10790,7 +10790,7 @@ sub_16552:
 										clr.w   ((TIMER_WINDOW_INDEX-$1000000)).w
 										trap    #TRAP_VINTFUNCTIONS
 										dc.w VINTS_REMOVE
-										dc.l sub_16588
+										dc.l VInt_16588
 										subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_16582:
 										
@@ -10802,7 +10802,7 @@ loc_16582:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_16588:
+VInt_16588:
 										
 										movem.l d0-d1/a0-a1,-(sp)
 										move.w  ((TIMER_WINDOW_INDEX-$1000000)).w,d0
@@ -10824,7 +10824,7 @@ loc_165BA:
 										movem.l (sp)+,d0-d1/a0-a1
 										rts
 
-	; End of function sub_16588
+	; End of function VInt_16588
 
 
 ; =============== S U B R O U T I N E =======================================
