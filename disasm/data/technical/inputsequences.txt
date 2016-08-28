@@ -16,7 +16,7 @@ DEBUG MODE :
 UP UP DOWN UP B C RIGHT LEFT UP UP DOWN UP B C RIGHT LEFT
 00000000h: 01 01 02 01 10 20 08 04 01 01 02 01 10 20 08 04 ; ..... ....... ..
 00000010h: FF FF                                           ; ÿÿ
-
+(then, hold up for battle test, down for debug mode)
 
 CONFIGURATION MODE : 
 UP DOWN UP DOWN LEFT RIGHT LEFT RIGHT UP RIGHT DOWN LEFT UP B
