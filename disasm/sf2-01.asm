@@ -10746,46 +10746,48 @@ DisplayText:
 										move.w  d0,-(sp)
 										bsr.w   sub_676E
 										move.w  (sp)+,d0
-										move.b  #1,((TYPEWRITING-$1000000)).w
+										move.b  #1,((CURRENTLY_TYPEWRITING-$1000000)).w
 																						; "Currently typewriting"
 										movem.w d0,-(sp)        ; save string #
-										lsr.w   #6,d0           ; load bank #
-										andi.b  #$FC,d0
+										lsr.w   #6,d0
+										andi.b  #$FC,d0         ; string # -> bank pointer offset
 										movea.l (p_pt_ScriptBanks).l,a0
 																						; load script bank pointer
 										movea.l (a0,d0.w),a0
 										movem.w (sp)+,d0        ; restore string #
 										andi.w  #$FF,d0         ; restrict to range 0-255
 										moveq   #0,d7
-										bra.s   loc_6298
+										bra.s   loc_6298        
 GoToNextString:
 										
-										move.b  (a0),d7
+										move.b  (a0),d7         ; first string byte : string length
 										adda.l  d7,a0
 										addq.l  #1,a0
 loc_6298:
 										dbf     d0,GoToNextString
+																						; loop until wanted string reached
 										clr.l   ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
 																						; get ready
 										clr.b   ((byte_FFB6D8-$1000000)).w
-										move.b  (a0)+,((byte_FFB6D7-$1000000)).w
+										move.b  (a0)+,((COMPRESSED_STRING_LENGTH-$1000000)).w
 																						; keep length of current string
 loc_62A8:
 										move.l  #RAM_Dialogue_NameIdx1,((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w
 										move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
 loc_62B6:
-										cmpi.b  #1,((byte_FFB6D7-$1000000)).w
+										cmpi.b  #1,((COMPRESSED_STRING_LENGTH-$1000000)).w
 																						; check length
 										beq.w   loc_62FE
 										jsr     j_InitDecoder   ; initialize decoder
-										move.l  a0,((ADDR_CURRENT_HUFFMAN_BYTE-$1000000)).w
+										move.l  a0,((COMPRESSED_STRING_POINTER-$1000000)).w
 																						; keep string pointer
 loc_62CA:
-										bsr.w   sub_634E
+										bsr.w   GetNextTextSymbol
 										cmpi.b  #$FE,d0
 										beq.s   loc_62FE
 										cmpi.b  #$EE,d0
-										bcc.w   DecodeTextSymbol
+										bcc.w   ParseSpecialTextSymbol
+																						; if symbol >= $EE
 										bset    #0,((byte_FFB6D8-$1000000)).w
 										bne.s   loc_62F2
 										cmpi.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
@@ -10797,7 +10799,7 @@ loc_62F2:
 										bsr.w   HandleDialogueTypewriting
 										bra.s   loc_62CA
 loc_62FE:
-										clr.b   ((TYPEWRITING-$1000000)).w
+										clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 										movem.l (sp)+,d0-a6
 										rts
 
@@ -10842,12 +10844,13 @@ return_634C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_634E:
+GetNextTextSymbol:
+										
 										tst.l   ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
 										bne.w   loc_6366
-										movea.l ((ADDR_CURRENT_HUFFMAN_BYTE-$1000000)).w,a0
+										movea.l ((COMPRESSED_STRING_POINTER-$1000000)).w,a0
 										jsr     j_HuffmanDecode
-										move.l  a0,((ADDR_CURRENT_HUFFMAN_BYTE-$1000000)).w
+										move.l  a0,((COMPRESSED_STRING_POINTER-$1000000)).w
 										rts
 loc_6366:
 										movea.l ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w,a1
@@ -10864,12 +10867,12 @@ return_6384:
 										
 										rts
 
-	; End of function sub_634E
+	; End of function GetNextTextSymbol
 
 
 ; =============== S U B R O U T I N E =======================================
 
-DecodeTextSymbol:
+ParseSpecialTextSymbol:
 										
 										cmpi.b  #$EE,d0         ; regular tile
 										beq.w   loc_640A
@@ -10899,9 +10902,9 @@ DecodeTextSymbol:
 										beq.w   spell
 										cmpi.b  #$FB,d0         ; clear
 										beq.w   clear
-										cmpi.b  #$FD,d0         ; color
+										cmpi.b  #$FD,d0         ; color #
 										beq.w   color
-										cmpi.b  #$FC,d0         ; player
+										cmpi.b  #$FC,d0         ; name #
 										beq.w   player
 										bra.w   loc_62CA
 loc_640A:
@@ -10909,12 +10912,12 @@ loc_640A:
 										bra.w   loc_62CA
 loc_6414:
 										move.w  #$77,d0 
-										move.b  ((TYPEWRITING-$1000000)).w,d2
+										move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
 										movem.w d2,-(sp)
-										clr.b   ((TYPEWRITING-$1000000)).w
+										clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 										bsr.w   Sleep           
 										movem.w (sp)+,d0
-										move.b  d0,((TYPEWRITING-$1000000)).w
+										move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
 										bra.w   loc_62CA
 loc_6434:
 										bsr.w   ClearNextLineOfDialoguePixels
@@ -10932,9 +10935,9 @@ loc_645C:
 loc_6462:
 										bra.w   loc_62CA
 loc_6466:
-										move.b  ((TYPEWRITING-$1000000)).w,d2
+										move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
 										move.w  d2,-(sp)
-										clr.b   ((TYPEWRITING-$1000000)).w
+										clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 										moveq   #$14,d2
 loc_6472:
 										movem.l d6-d7,-(sp)
@@ -10952,10 +10955,10 @@ loc_6472:
 										clr.w   d2
 										bsr.s   sub_64A8
 										move.w  (sp)+,d0
-										move.b  d0,((TYPEWRITING-$1000000)).w
+										move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
 										bra.w   loc_62CA
 
-	; End of function DecodeTextSymbol
+	; End of function ParseSpecialTextSymbol
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11007,7 +11010,7 @@ UpdateForceAndGetFirstForceMemberIndex:
 	; End of function UpdateForceAndGetFirstForceMemberIndex
 
 
-; START OF FUNCTION CHUNK FOR DecodeTextSymbol
+; START OF FUNCTION CHUNK FOR ParseSpecialTextSymbol
 
 leader:
 										bsr.s   UpdateForceAndGetFirstForceMemberIndex
@@ -11016,7 +11019,7 @@ leader:
 										bsr.w   CopyASCIIBytesForDialogueString
 										bra.w   loc_62CA
 player:
-										bsr.w   sub_634E
+										bsr.w   GetNextTextSymbol
 loc_651C:
 										jsr     j_GetCharName
 										moveq   #CHAR_NAMELENGTH,d7
@@ -11057,9 +11060,9 @@ class:
 loc_658C:
 										bra.w   loc_62CA
 wait:
-										move.b  ((TYPEWRITING-$1000000)).w,d2
+										move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
 										move.w  d2,-(sp)
-										clr.b   ((TYPEWRITING-$1000000)).w
+										clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 										moveq   #$14,d2
 loc_659C:
 										movem.l d6-d7,-(sp)
@@ -11073,14 +11076,14 @@ loc_65B4:
 										andi.b  #$7F,d1 
 										beq.s   loc_659C
 										move.w  (sp)+,d0
-										move.b  d0,((TYPEWRITING-$1000000)).w
+										move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
 										bra.w   loc_62CA
 delay1:
 										move.w  #$15,d0
 loc_65CC:
-										move.b  ((TYPEWRITING-$1000000)).w,d2
+										move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
 										movem.w d2,-(sp)
-										clr.b   ((TYPEWRITING-$1000000)).w
+										clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 loc_65D8:
 										tst.b   ((byte_FFB198-$1000000)).w
 										bne.s   loc_65EC
@@ -11092,7 +11095,7 @@ loc_65EC:
 										dbf     d0,loc_65D8
 loc_65F0:
 										movem.w (sp)+,d0
-										move.b  d0,((TYPEWRITING-$1000000)).w
+										move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
 										bra.w   loc_62CA
 delay3:
 										move.w  #$77,d0 
@@ -11117,12 +11120,12 @@ clear:
 										bsr.w   WaitForVInt     
 										bra.w   loc_62CA
 color:
-										bsr.w   sub_634E
+										bsr.w   GetNextTextSymbol
 										move.b  d0,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
 loc_6644:
 										bra.w   loc_62CA
 
-; END OF FUNCTION CHUNK FOR DecodeTextSymbol
+; END OF FUNCTION CHUNK FOR ParseSpecialTextSymbol
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13777,7 +13780,7 @@ loc_7D8A:
 										move.w  d7,(a2)
 loc_7DB4:
 										lea     ((word_FFB07C-$1000000)).w,a2
-										tst.b   ((TYPEWRITING-$1000000)).w
+										tst.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 										bne.s   loc_7DC6
 										cmpi.w  #5,(a2)
 										ble.s   loc_7DEE

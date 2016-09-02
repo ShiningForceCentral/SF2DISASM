@@ -9251,7 +9251,7 @@ loc_1555E:
 loc_1557C:
 										
 										lea     ((word_FFB07C-$1000000)).w,a0
-										tst.b   ((TYPEWRITING-$1000000)).w
+										tst.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 										bne.s   loc_1558E
 										cmpi.w  #5,(a0)
 										ble.s   loc_155A8

@@ -10190,7 +10190,7 @@ loc_27CDC:
 loc_27D08:
 										
 										lea     ((word_FFB07C-$1000000)).w,a2
-										tst.b   ((TYPEWRITING-$1000000)).w
+										tst.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 										bne.s   loc_27D1A
 										cmpi.w  #5,(a2)
 										ble.s   loc_27D42
