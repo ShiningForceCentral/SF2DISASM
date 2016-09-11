@@ -1591,8 +1591,8 @@
 #split	0x2C7A0,0x2DDDE,graphics/technical/unusedcloudtiles.bin
 #split	0x2DDDE,0x2E08E,graphics/technical/fonts/staticwidthfont.bin
 #split	0x2E08E,0x2E10E,graphics/specialscreens/titlescreen/titlescreenpalettes.bin
-#split	0x2E196,0x2E394,scripting/textbanks/textbanktreepointers.bin
-#split	0x2E394,0x2EB34,scripting/textbanks/textbanktreedata.bin
+#split	0x2E196,0x2E394,scripting/textbanks/huffmantreeoffsets.bin
+#split	0x2E394,0x2EB34,scripting/textbanks/huffmantrees.bin
 #split	0x4201E,0x425ED,scripting/gamestaff.bin
 #split	0x4428A,0x44298,maps/global/overworldmaps.bin
 #split	0x44338,0x4433C,data/overworldfollowers.bin
