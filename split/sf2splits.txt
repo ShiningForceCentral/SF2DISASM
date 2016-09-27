@@ -2511,6 +2511,6 @@
 #split	0x3DD71,0x3F173,scripting/textbanks/textbank13.bin
 #split	0x3F173,0x40378,scripting/textbanks/textbank14.bin
 #split	0x40378,0x4151E,scripting/textbanks/textbank15.bin
-#split	0x4151E,0x41FDA,scripting/textbanks/textbank16.bin
+#split	0x4151E,0x41FD9,scripting/textbanks/textbank16.bin
 
 split	0x0,0x0,\0x0 - .bin
