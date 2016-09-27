@@ -234,3 +234,4 @@ pip-log.txt
 .mr.developer.cfg
 *.jar
 *.csv
+*.png
