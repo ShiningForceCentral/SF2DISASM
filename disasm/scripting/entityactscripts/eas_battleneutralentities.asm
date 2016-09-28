@@ -1,5 +1,5 @@
 
-; SCRIPT SECTION battles\global\eas_battleneutralentities :
+; SCRIPT SECTION scripting\entityactscripts\eas_battleneutralentities :
 ; Entity actscripts for battle entities which are not force members or enemies
 eas_LyingLeft:      dc.w $1B                ; 001B SET FLIPPING $1
 										dc.w 1
