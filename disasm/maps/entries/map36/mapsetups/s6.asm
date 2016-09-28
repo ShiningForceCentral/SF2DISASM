@@ -17,7 +17,7 @@ return_5DA26:
 
 	; End of function ms_map36_InitFunction
 
-cs_5DA28:           dc.w 4                  ; 0004 SET TEXT INDEX CFB
+cs_5DA28:           dc.w 4                  ; 0004 SET TEXT INDEX CFB : "You defeated Zalbard and{N}saved Mitula.{W2}"
 										dc.w $CFB
 										dc.w $52                ; 0052 RELATED TO TWO ENTITIES 7 83
 										dc.w 7
@@ -25,27 +25,27 @@ cs_5DA28:           dc.w 4                  ; 0004 SET TEXT INDEX CFB
 										dc.w $52                ; 0052 RELATED TO TWO ENTITIES 1F 83
 										dc.w $1F
 										dc.w $83
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 16
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 16 : "You defeated Zalbard and{N}saved Mitula.{W2}"
 										dc.w $16
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 16
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 16 : "You are trustworthy{N}soldiers, so...would you{N}do me a favor?{W2}"
 										dc.w $16
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16 : "Please go to Moun with me.{W1}"
 										dc.w $16
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "What are you going to do{N}there?{W1}"
 										dc.w $1F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 16
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 16 : "I believe there are{N}survivors in Moun.{W2}"
 										dc.w $16
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16 : "I would like to save them.{W1}"
 										dc.w $16
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "We have to go through Moun{N}to get to Nazka, right?{W2}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "{LEADER}, let's go{N}together.{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16 : "Alright.{W1}"
 										dc.w $16
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{LEADER} decides to take{N}{NAME;22} with him.{W1}"
 										dc.w $FFFF
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16 : "Thank you very much.{W1}"
 										dc.w $16
 										dc.w $2C                ; 002C FOLLOW ENTITY 16 1F 2
 										dc.w $16

@@ -17,9 +17,9 @@ return_51F86:
 
 	; End of function ms_map16_InitFunction
 
-cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2
+cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2 : "Listen, everybody!{N}We're going to Granseal!{W1}"
 										dc.w $3C2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Listen, everybody!{N}We're going to Granseal!{W1}"
 										dc.w $C080
 										dc.w $23                ; 0023 SET ENTITY FACING 5 3
 										dc.b 5
@@ -30,15 +30,15 @@ cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2
 										dc.w $32                ; 0032 SET CAMERA DEST C B
 										dc.w $C
 										dc.w $B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C005 : "We're too late!{W1}"
 										dc.w $C005
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "As you may know, my{N}messenger was killed!{W2}"
 										dc.w $C080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "Granseal must have done{N}this.{W2}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "So we're invading them to{N}retaliate!{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "Murmur...murmur....{W1}"
 										dc.w $FFFF
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -56,13 +56,13 @@ cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2
 										dc.w $1C
 										dc.w $10
 										dc.w $11
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C : "Quiet!  Everybody listen{N}to me!{W1}"
 										dc.w $1C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C : "I also don't understand{N}this march!{W2}"
 										dc.w $1C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C : "But, King Galam must{N}have a good reason!{W2}"
 										dc.w $1C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C : "I believe the King!{N}How about you?{N}Anyone disagree?{W1}"
 										dc.w $1C
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -72,7 +72,7 @@ cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2
 										dc.l eas_461B6          
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "No?  Good!{W1}"
 										dc.w $1C
 										dc.w $23                ; 0023 SET ENTITY FACING 1C 3
 										dc.b $1C
@@ -99,14 +99,14 @@ cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2
 										dc.w $23                ; 0023 SET ENTITY FACING 1C 3
 										dc.b $1C
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Well done, {NAME;28}.{W1}"
 										dc.w $C080
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "King Galam, victory is{N}ours!{W1}"
 										dc.w $1C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Guards!{N}Open the gate!{N}Lower the bridge!{W1}"
 										dc.w $C080
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -117,18 +117,18 @@ cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "{NAME;28}, prove your{N}allegiance.{W1}"
 										dc.w $C080
 										dc.w $23                ; 0023 SET ENTITY FACING 1C 0
 										dc.b $1C
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "What do you mean?{W1}"
 										dc.w $1C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Show no mercy!{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "My Lord...{W1}"
 										dc.w $1C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Now, go!{W1}"
 										dc.w $C080
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
@@ -211,7 +211,7 @@ cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2
 										dc.w $23                ; 0023 SET ENTITY FACING 90 3
 										dc.b $90
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Crush Granseal!{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 1C 0 3 7
 										dc.b $1C
@@ -366,7 +366,7 @@ cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2
 										dc.w $8F
 										dc.w $2E                ; 002E HIDE ENTITY 90
 										dc.w $90
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C005
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C005 : "They've gone.{N}The war begins.{W1}"
 										dc.w $C005
 										dc.w $23                ; 0023 SET ENTITY FACING 5 2
 										dc.b 5
@@ -374,14 +374,14 @@ cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0
 										dc.b 0
 										dc.b 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C005
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C005 : "So, what should we do?{N}Are you still going to{N}Granseal?{W1}"
 										dc.w $C005
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C005
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C005 : "You're serious?{N}Do you think you can stop{N}the war?{W2}"
 										dc.w $C005
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5 : "I will leave you once I'm{N}outside the gate!{W1}"
 										dc.w 5
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_521BA:           dc.w 4                  ; 0004 SET TEXT INDEX 3DA
+cs_521BA:           dc.w 4                  ; 0004 SET TEXT INDEX 3DA : "You!{W1}"
 										dc.w $3DA
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 92 11 10 1
 										dc.b $92
@@ -393,12 +393,12 @@ cs_521BA:           dc.w 4                  ; 0004 SET TEXT INDEX 3DA
 										dc.b $11
 										dc.b $F
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 91
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 91 : "You!{W1}"
 										dc.w $91
 										dc.w $32                ; 0032 SET CAMERA DEST 0 11
 										dc.w 0
 										dc.w $11
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 91
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 91 : "How did you get out?{W1}"
 										dc.w $91
 										dc.w $15                ; 0015 SET ACTSCRIPT 5 FF 460CE
 										dc.b 5
@@ -416,16 +416,16 @@ cs_521BA:           dc.w 4                  ; 0004 SET TEXT INDEX 3DA
 										dc.w 5
 										dc.w 4
 										dc.w $13
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5 : "I...{W1}"
 										dc.w 5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 92
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 92 : "Wow, great jewel!{W1}"
 										dc.w $92
 										dc.w $32                ; 0032 SET CAMERA DEST C A
 										dc.w $C
 										dc.w $A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 93
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 93 : "Oh, this?{N}The King gave it to me!{W1}"
 										dc.w $93
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 92
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 92 : "Because you captured that{N}rat?{W1}"
 										dc.w $92
 										dc.w $32                ; 0032 SET CAMERA DEST 0 D
 										dc.w 0
@@ -436,9 +436,9 @@ cs_521BA:           dc.w 4                  ; 0004 SET TEXT INDEX 3DA
 										dc.w $23                ; 0023 SET ENTITY FACING 5 2
 										dc.b 5
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 93
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 93 : "Yes.  I presented them to{N}King Galam.{W2}"
 										dc.w $93
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 93
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 93 : "He was so kind to give me{N}one of the pair, the Jewel{N}of Light!{W1}"
 										dc.w $93
 										dc.w $2D                ; 002D MOVE ENTITY 0 0 0 1
 										dc.b 0
@@ -452,7 +452,7 @@ cs_521BA:           dc.w 4                  ; 0004 SET TEXT INDEX 3DA
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 91
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 91 : "Wait!{W1}"
 										dc.w $91
 										dc.w $23                ; 0023 SET ENTITY FACING 0 3
 										dc.b 0
@@ -463,7 +463,7 @@ cs_521BA:           dc.w 4                  ; 0004 SET TEXT INDEX 3DA
 										dc.w $32                ; 0032 SET CAMERA DEST 0 12
 										dc.w 0
 										dc.w $12
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 91
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 91 : "How did you escape?{W1}"
 										dc.w $91
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0
 										dc.b 0
@@ -491,7 +491,7 @@ cs_521BA:           dc.w 4                  ; 0004 SET TEXT INDEX 3DA
 										dc.b $91
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 91
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 91 : "Intruders!  Intruders!{N}Arrest them!{W1}"
 										dc.w $91
 										dc.w $13                ; 0013 SET STORY FLAG 5
 										dc.w 5

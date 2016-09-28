@@ -257,9 +257,9 @@ nullsub_116:
 
 	; End of function nullsub_116
 
-cs_58116:           dc.w 4                  ; 0004 SET TEXT INDEX 595
+cs_58116:           dc.w 4                  ; 0004 SET TEXT INDEX 595 : "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
 										dc.w $595
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89 : "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
 										dc.w $89
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -267,7 +267,7 @@ cs_58116:           dc.w 4                  ; 0004 SET TEXT INDEX 595
 										dc.w $8002
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 4002
 										dc.w $4002
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89 : "...like that!  And, it's getting{N}worse.{N}What's wrong you ask?{W1}"
 										dc.w $89
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
@@ -281,8 +281,8 @@ cs_58116:           dc.w 4                  ; 0004 SET TEXT INDEX 595
 										dc.w 0
 										dc.w $27                ; 0027 MAKE ENTITY SHAKE HEAD 89
 										dc.w $89
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 89
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 89 : "Whoa!  Mt. Volcano erupted!{W2}"
 										dc.w $89
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89 : "It's an evil omen.{W1}"
 										dc.w $89
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

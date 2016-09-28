@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle40\cs_afterbattle :
 ; Cutscene after battle 40
-abcs_battle40:      dc.w 4                  ; 0004 SET TEXT INDEX BF9
+abcs_battle40:      dc.w 4                  ; 0004 SET TEXT INDEX BF9 : "{LEADER}, you won?{N}You've become so strong.{W2}"
 										dc.w $BF9
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 36 A 4
 										dc.w $36
@@ -102,37 +102,37 @@ word_4EAEE:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83 : "{LEADER}, you won?{N}You've become so strong.{W2}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "I knew you would....{W1}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C000
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C000 : "Oh, really?{W1}"
 										dc.w $C000
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83 : "Your friends are very good.{N}I knew that when I was{N}traveling with you.{W2}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "Yes, it was interesting...{N}I miss that time....{W1}"
 										dc.w $83
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 45E44
 										dc.b 7
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "Odd Eye...no, Oddler!{N}Did you...?{W1}"
 										dc.w $C007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "No, {NAME;7}.  I did my{N}best.  You were just better{N}than me.{W1}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C000
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C000 : "We had to be.{W1}"
 										dc.w $C000
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83 : "I wouldn't have had to{N}fight if I never had gotten{N}my memory back.{W2}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "It's funny, fighting was{N}everything to me.{W1}"
 										dc.w $83
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 7
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "Oddler, please don't die!{W1}"
 										dc.w $C007
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83 : "Thank you, {NAME;7}.{N}I learned a lot from you.{W2}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "Oh, the pain!{N}Let me say good-bye.{W1}"
 										dc.w $83
 										dc.w $2D                ; 002D MOVE ENTITY 0 0 1 1
 										dc.b 0
@@ -146,7 +146,7 @@ word_4EAEE:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "If possible, I want to{N}relive my life...not as{N}a devil...next time....{W1}"
 										dc.w $83
 										dc.w $18                ; 0018 FLASH ENTITY WHITE 83 1E
 										dc.w $83
@@ -294,22 +294,22 @@ word_4EAEE:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.w $23                ; 0023 SET ENTITY FACING 7 1
 										dc.b 7
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "(Sob, sob)...how sad.{N}{LEADER}, Sir Astral...{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 1C 3
 										dc.b $1C
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "Oddler had a pure spirit...{N}I'll miss him.{W1}"
 										dc.w $1C
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Don't cry for him now.{N}This is Zeon's doing.{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "We shall go onward and{N}remember Oddler in our{N}hearts.{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 1C FF 2 1
 										dc.b $1C

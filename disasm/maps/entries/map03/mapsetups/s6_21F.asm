@@ -10,11 +10,11 @@ ms_map3_flag21F_InitFunction:
 
 	; End of function ms_map3_flag21F_InitFunction
 
-cs_628C8:           dc.w 4                  ; 0004 SET TEXT INDEX F4B
+cs_628C8:           dc.w 4                  ; 0004 SET TEXT INDEX F4B : "I envy you.{N}I'm an old woman now.{W2}"
 										dc.w $F4B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87 : "I envy you.{N}I'm an old woman now.{W2}"
 										dc.w $87
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87 : "Nobody kisses me anymore.{W1}"
 										dc.w $87
 										dc.w $29                ; 0029 SET ENTITY DEST 0 19 1C
 										dc.w 0
@@ -33,9 +33,9 @@ cs_628C8:           dc.w 4                  ; 0004 SET TEXT INDEX F4B
 										dc.w $23                ; 0023 SET ENTITY FACING 87 2
 										dc.b $87
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 88
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 88 : "You're wrong!{W2}"
 										dc.w $88
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "I'll kiss you!{W1}"
 										dc.w $88
 										dc.b $80                ; WAIT A
 										dc.b $A

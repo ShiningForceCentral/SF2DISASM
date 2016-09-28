@@ -21,15 +21,15 @@ cs_53FD8:           dc.w 5                  ; 0005 PLAY SOUND MUSIC_BOSS_ATTACK
 										dc.w 6
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_53FE0:           dc.w 4                  ; 0004 SET TEXT INDEX 3E5
+cs_53FE0:           dc.w 4                  ; 0004 SET TEXT INDEX 3E5 : "Oh....{N}Go and save her....{W2}"
 										dc.w $3E5
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 1C
 										dc.w $1C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C : "Oh....{N}Go and save her....{W2}"
 										dc.w $1C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C : "Sir Astral was right....{N}That's not my King.{N}That's a devil!{W2}"
 										dc.w $1C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "Me?  I'm almost a goner.{N}A strange black cloud{N}enveloped me...(cough)....{W1}"
 										dc.w $1C
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 1C
 										dc.w $1C

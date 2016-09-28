@@ -42,22 +42,22 @@ cs_5D644:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 89 
 										dc.w $89
 										dc.w 5
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5D652:           dc.w 4                  ; 0004 SET TEXT INDEX 7E8
+cs_5D652:           dc.w 4                  ; 0004 SET TEXT INDEX 7E8 : "Oh, you're cute!{N}(Cough)...well...{W1}"
 										dc.w $7E8
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "Oh, you're cute!{N}(Cough)...well...{W1}"
 										dc.w $88
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 88
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 88 : "May I paint your portrait?"
 										dc.w $88
-word_5D65E:         dc.w 4                  ; 0004 SET TEXT INDEX 7EB
+word_5D65E:         dc.w 4                  ; 0004 SET TEXT INDEX 7EB : "Excellent!{W1}"
 										dc.w $7EB
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 59 5D712
 										dc.w $59
 										dc.l word_5D712         
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "Excellent!{W1}"
 										dc.w $88
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "Then, would you stand over{N}there, in front of the{N}flowers?{W1}"
 										dc.w $88
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7
@@ -138,7 +138,7 @@ word_5D65E:         dc.w 4                  ; 0004 SET TEXT INDEX 7EB
 										dc.w $23                ; 0023 SET ENTITY FACING 88 1
 										dc.b $88
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "Finished!{W1}"
 										dc.w $88
 										dc.w $2D                ; 002D MOVE ENTITY 88 FF 0 1
 										dc.b $88
@@ -158,19 +158,19 @@ word_5D65E:         dc.w 4                  ; 0004 SET TEXT INDEX 7EB
 										dc.w 7
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-word_5D712:         dc.w 4                  ; 0004 SET TEXT INDEX 7EA
+word_5D712:         dc.w 4                  ; 0004 SET TEXT INDEX 7EA : "Oh, please!  It won't take{N}long.  Will you pose{N}for me?"
 										dc.w $7EA
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 88
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 88 : "Oh, please!  It won't take{N}long.  Will you pose{N}for me?"
 										dc.w $88
 										dc.w $B                 ; 000B JUMP 5D65E
 										dc.l word_5D65E         
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-word_5D724:         dc.w 4                  ; 0004 SET TEXT INDEX 7EE
+word_5D724:         dc.w 4                  ; 0004 SET TEXT INDEX 7EE : "It's you!{W2}"
 										dc.w $7EE
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 88
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 88 : "It's you!{W2}"
 										dc.w $88
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "Ah, how talented I am!{N}Hmmmm?{W1}"
 										dc.w $88
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 cs_5D732:           dc.w $A                 ; 000A EXECUTE SUBROUTINE 5D73E

@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle36\cs_afterbattle :
 ; Cutscene after battle 36
-abcs_battle36:      dc.w 4                  ; 0004 SET TEXT INDEX B89
+abcs_battle36:      dc.w 4                  ; 0004 SET TEXT INDEX B89 : "Prism Flowers?{W2}"
 										dc.w $B89
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 6 11
 										dc.w $35
@@ -65,14 +65,14 @@ word_4D9F0:         dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Prism Flowers?{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "My Prism Flowers!{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "{LEADER}, I shall return{N}with Red Baron!{N}You'll pay for this!{W1}"
 										dc.w $80
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 80
 										dc.w $80

@@ -15,7 +15,7 @@ nullsub_178:
 
 	; End of function nullsub_178
 
-cs_58FA4:           dc.w 4                  ; 0004 SET TEXT INDEX 8D6
+cs_58FA4:           dc.w 4                  ; 0004 SET TEXT INDEX 8D6 : "Somebody, take that plank{N}from him!{W1}"
 										dc.w $8D6
 										dc.w $46                ; 0046  8 7
 										dc.w 8
@@ -60,7 +60,7 @@ cs_58FA4:           dc.w 4                  ; 0004 SET TEXT INDEX 8D6
 										dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
 										dc.w $8080              ; 0014 END OF MANUAL ACTSCRIPT
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Somebody, take that plank{N}from him!{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 0
 										dc.b $80
@@ -80,7 +80,7 @@ cs_58FA4:           dc.w 4                  ; 0004 SET TEXT INDEX 8D6
 										dc.w $23                ; 0023 SET ENTITY FACING 82 2
 										dc.b $82
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "I got it!{W1}"
 										dc.w $82
 										dc.w $2D                ; 002D MOVE ENTITY 82 FF 2 2
 										dc.b $82
@@ -112,7 +112,7 @@ cs_58FA4:           dc.w 4                  ; 0004 SET TEXT INDEX 8D6
 										dc.w $23                ; 0023 SET ENTITY FACING 82 1
 										dc.b $82
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "Thank you, boy!{W1}"
 										dc.w $82
 										dc.w $23                ; 0023 SET ENTITY FACING 82 3
 										dc.b $82
@@ -137,11 +137,11 @@ cs_58FA4:           dc.w 4                  ; 0004 SET TEXT INDEX 8D6
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{LEADER} hands over{N}the plank.{W1}"
 										dc.w $FFFF
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "We need a lot of planks{N}for our new town!{W1}"
 										dc.w $82
 										dc.w $2D                ; 002D MOVE ENTITY 82 0 3 7
 										dc.b $82
@@ -187,13 +187,13 @@ cs_58FA4:           dc.w 4                  ; 0004 SET TEXT INDEX 8D6
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "We can't go back to {N}Granseal without a ship...{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "There's no Granseal on{N}Grans Island now...{N}I know that, but...{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "Somebody, help!{W1}"
 										dc.w $83
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 83
 										dc.b $83
@@ -229,17 +229,17 @@ cs_58FA4:           dc.w 4                  ; 0004 SET TEXT INDEX 8D6
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "What's wrong?{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
 										dc.w $1B                ; 001B START ENTITY ANIM 83
 										dc.w $83
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83 : "One of my friends has not{N}returned from North Cliff.{W2}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "He may be in trouble.{W1}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "This isn't good.{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
@@ -256,27 +256,27 @@ cs_58FA4:           dc.w 4                  ; 0004 SET TEXT INDEX 8D6
 										dc.b 1
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "{LEADER}, did you{N}hear that?{W2}"
 										dc.w $80
-word_59122:         dc.w 4                  ; 0004 SET TEXT INDEX 8E3
+word_59122:         dc.w 4                  ; 0004 SET TEXT INDEX 8E3 : "Would you go to North{N}Cliff and check on his{N}friend?{D1}"
 										dc.w $8E3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Would you go to North{N}Cliff and check on his{N}friend?{D1}"
 										dc.w $80
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 59142
 										dc.w $59
 										dc.l word_59142         
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "What did you say?{N}I didn't hear you.{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "OK, once again!{W1}"
 										dc.w $80
 										dc.w $B                 ; 000B JUMP 59122
 										dc.l word_59122         
-word_59142:         dc.w 4                  ; 0004 SET TEXT INDEX 8E6
+word_59142:         dc.w 4                  ; 0004 SET TEXT INDEX 8E6 : "Oh, you're so brave!{W2}"
 										dc.w $8E6
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Oh, you're so brave!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Hey, he's going with you!{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 2 1
 										dc.b $80
@@ -287,7 +287,7 @@ word_59142:         dc.w 4                  ; 0004 SET TEXT INDEX 8E6
 										dc.w $23                ; 0023 SET ENTITY FACING 80 0
 										dc.b $80
 										dc.b 0
-										dc.w 4                  ; 0004 SET TEXT INDEX 8E8
+										dc.w 4                  ; 0004 SET TEXT INDEX 8E8 : "{LEADER}, thank you!{W2}"
 										dc.w $8E8
 										dc.w $2D                ; 002D MOVE ENTITY 83 FF 1 2
 										dc.b $83
@@ -295,9 +295,9 @@ word_59142:         dc.w 4                  ; 0004 SET TEXT INDEX 8E6
 										dc.b 1
 										dc.b 2
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83 : "{LEADER}, thank you!{W2}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "I'll show you to North Cliff.{N}Follow me.{W1}"
 										dc.w $83
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -328,11 +328,11 @@ word_59142:         dc.w 4                  ; 0004 SET TEXT INDEX 8E6
 										dc.w $32                ; 0032 SET CAMERA DEST 8 A
 										dc.w 8
 										dc.w $A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 3
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 3 : "{LEADER}, wait.  Wait!{W1}"
 										dc.w 3
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "Hey, you're all wet.{W1}"
 										dc.w 1
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 4 D A 3
 										dc.b 4
@@ -421,13 +421,13 @@ word_59142:         dc.w 4                  ; 0004 SET TEXT INDEX 8E6
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "Are you leaving?{N}Say it isn't so!{W1}"
 										dc.w 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "I think it's too dangerous{N}out there alone.{W1}"
 										dc.w 4
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83 : "And...{W2}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "It would be safer if we came{N}along.  Let's go.{W1}"
 										dc.w $83
 										dc.b $80                ; WAIT 3C
 										dc.b $3C

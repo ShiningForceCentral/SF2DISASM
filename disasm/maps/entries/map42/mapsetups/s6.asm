@@ -10,11 +10,11 @@ ms_map42_InitFunction:
 
 	; End of function ms_map42_InitFunction
 
-cs_5FE9A:           dc.w 4                  ; 0004 SET TEXT INDEX D09
+cs_5FE9A:           dc.w 4                  ; 0004 SET TEXT INDEX D09 : "The Jewel of Light begins{N}to glow.{W2}"
 										dc.w $D09
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "The Jewel of Light begins{N}to glow.{W2}"
 										dc.w $FFFF
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "The light seems to pull{N}{LEADER}.{D3}"
 										dc.w $FFFF
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 										dc.b 0
@@ -60,7 +60,7 @@ cs_5FE9A:           dc.w 4                  ; 0004 SET TEXT INDEX D09
 										dc.w $8080
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "The jewel glows even{N}brighter.{W1}"
 										dc.w $FFFF
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
 										dc.b $80                ; WAIT 28
@@ -81,10 +81,10 @@ cs_5FE9A:           dc.w 4                  ; 0004 SET TEXT INDEX D09
 										dc.w 0
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Oh, an opening!{N}The light is leading us!{W1}"
 										dc.w $1F
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5FF06:           dc.w 4                  ; 0004 SET TEXT INDEX D07
+cs_5FF06:           dc.w 4                  ; 0004 SET TEXT INDEX D07 : "Sounds like something opened{N}somewhere.{W1}"
 										dc.w $D07
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
 										dc.w $18                ; 0018 FLASH ENTITY WHITE 0 3C
@@ -122,9 +122,9 @@ cs_5FF06:           dc.w 4                  ; 0004 SET TEXT INDEX D07
 										dc.b $14
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 0
 										dc.w 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "Sounds like something opened{N}somewhere.{W1}"
 										dc.w $FFFF
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "You got it!  All we have to{N}do is find the door to the{N}tower!{W1}"
 										dc.w $1F
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 

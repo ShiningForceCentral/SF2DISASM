@@ -35,7 +35,7 @@ cs_51742:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 80 
 										dc.b 0
 										dc.b 0
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_51750:           dc.w 4                  ; 0004 SET TEXT INDEX 2CB
+cs_51750:           dc.w 4                  ; 0004 SET TEXT INDEX 2CB : "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
 										dc.w $2CB
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 0 1D 4 3
 										dc.b 0
@@ -64,7 +64,7 @@ cs_51750:           dc.w 4                  ; 0004 SET TEXT INDEX 2CB
 										dc.b $1E
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 1
 										dc.w 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 3 1
 										dc.b $1F
@@ -72,16 +72,16 @@ cs_51750:           dc.w 4                  ; 0004 SET TEXT INDEX 2CB
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "You didn't escape?{N}Why are you here?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "We've been waiting for you.{N}Chasms are appearing in the{N}ground.{W2}{N}Everybody is on the ship{N}to avoid falling into a{N}hole.{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 0
 										dc.b $1F
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Thank you.  {LEADER},{N}hurry to the harbor.{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Wooooo!{N}Help! Heeeeelp....{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
@@ -177,7 +177,7 @@ cs_51750:           dc.w 4                  ; 0004 SET TEXT INDEX 2CB
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 0
 										dc.b $1F
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "That's too cruel....{N}{W2}{LEADER}, go to the{N}harbor from the east side.{N}It's safer.{W1}"
 										dc.w $1F
 										dc.w $15                ; 0015 SET ACTSCRIPT 1F 0 44F2E
 										dc.b $1F

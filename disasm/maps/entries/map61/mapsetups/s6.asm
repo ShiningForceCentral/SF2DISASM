@@ -10,7 +10,7 @@ ms_map61_InitFunction:
 
 	; End of function ms_map61_InitFunction
 
-cs_5C6CA:           dc.w 4                  ; 0004 SET TEXT INDEX E3A
+cs_5C6CA:           dc.w 4                  ; 0004 SET TEXT INDEX E3A : "It's my job!{W1}"
 										dc.w $E3A
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7
@@ -55,12 +55,12 @@ cs_5C6CA:           dc.w 4                  ; 0004 SET TEXT INDEX E3A
 										dc.w $23                ; 0023 SET ENTITY FACING 1E 3
 										dc.b $1E
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "It's my job!{W1}"
 										dc.w $1E
 										dc.w $23                ; 0023 SET ENTITY FACING 1E 1
 										dc.b $1E
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "Row...sham...bow!{W1}"
 										dc.w $1E
 										dc.w $18                ; 0018 FLASH ENTITY WHITE 1E 28
 										dc.w $1E
@@ -80,7 +80,7 @@ cs_5C6CA:           dc.w 4                  ; 0004 SET TEXT INDEX E3A
 										dc.w $23                ; 0023 SET ENTITY FACING 1E 3
 										dc.b $1E
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "OK, you go first!{W1}"
 										dc.w $1E
 										dc.w $13                ; 0013 SET STORY FLAG F
 										dc.w $F

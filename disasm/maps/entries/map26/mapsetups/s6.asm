@@ -27,7 +27,7 @@ return_59E02:
 
 	; End of function ms_map26_InitFunction
 
-cs_59E04:           dc.w 4                  ; 0004 SET TEXT INDEX 6CB
+cs_59E04:           dc.w 4                  ; 0004 SET TEXT INDEX 6CB : "The Cotton Balloon popped.{W1}"
 										dc.w $6CB
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF
@@ -191,7 +191,7 @@ cs_59E04:           dc.w 4                  ; 0004 SET TEXT INDEX 6CB
 										dc.w $84
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "The Cotton Balloon popped.{W1}"
 										dc.w $FFFF
 										dc.w $2C                ; 002C FOLLOW ENTITY 7 0 2
 										dc.w 7
@@ -202,16 +202,16 @@ cs_59E04:           dc.w 4                  ; 0004 SET TEXT INDEX 6CB
 										dc.w 7
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_59F20:           dc.w 4                  ; 0004 SET TEXT INDEX 6CC
+cs_59F20:           dc.w 4                  ; 0004 SET TEXT INDEX 6CC : "Ungh!{W2}"
 										dc.w $6CC
 										dc.w $32                ; 0032 SET CAMERA DEST 0 14
 										dc.w 0
 										dc.w $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Ungh!{W2}"
 										dc.w $81
 										dc.b $80                ; WAIT 32
 										dc.b $32
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "It's too heavy. I can't{N}lift it.  I give up!{W1}"
 										dc.w $81
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 1 8
 										dc.b $81

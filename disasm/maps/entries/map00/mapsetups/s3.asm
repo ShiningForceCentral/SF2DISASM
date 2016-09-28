@@ -27,7 +27,7 @@ return_5E3C0:
 
 	; End of function sub_5E3B0
 
-cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
+cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB : "Welcome, Granseal force!{W1}"
 										dc.w $AAB
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7
@@ -37,7 +37,7 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.b $1F
 										dc.b $FF
 										dc.l eas_Init           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Welcome, Granseal force!{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 1F 0 45E44
 										dc.b $1F
@@ -54,7 +54,7 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.w $23                ; 0023 SET ENTITY FACING 7 3
 										dc.b 7
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "What?{W1}"
 										dc.w 7
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -67,7 +67,7 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "I heard a voice from the{N}other side of the door.{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 0 1
 										dc.b 0
@@ -89,7 +89,7 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.w $32                ; 0032 SET CAMERA DEST 8 9
 										dc.w 8
 										dc.w 9
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I'm Zalbard.  I'm one of{N}the greater devils.{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 46172
 										dc.b $1F
@@ -121,35 +121,35 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.b 3
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Do come in.  Of course, you{N}can go back now and abandon{N}Mitula!{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
 										dc.b 7
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "Sir Astral...{W2}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "The greater devil that{N}attacked Bedoe was as{N}strong as Volcanon.{W1}"
 										dc.w 7
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Are you talking about{N}Sir Odd Eye?{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Did he fight against{N}Volcanon at Bedoe?{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 7 1
 										dc.b 7
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Yes.  And he lost.{W1}"
 										dc.w $1F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "I can't believe it!{N}Odd Eye is the strongest{N}devil among us.{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "But, we haven't been able to{N}contact him lately.{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "This is good news for me.{N}If I get the Jewel of Evil, I{N}can take his place.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Now, enter the shrine.{N}Mitula is here.{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "What should we do?{N}A greater devil awaits us{N}inside.{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
 										dc.b 7
@@ -177,9 +177,9 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.b 2
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Odd Eye...Odd Eye...{N}Odd...Eye....{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Sir Astral?{W1}"
 										dc.w 7
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 0 2
 										dc.b $1F
@@ -187,7 +187,7 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.b 0
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "I think I've heard that{N}name before....{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 3 1
 										dc.b 7
@@ -246,9 +246,9 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.b 7
 										dc.b $FF
 										dc.l eas_461AA          
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Sir Astral?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Hmmmm....{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 1F 0 3 2
 										dc.b $1F
@@ -268,7 +268,7 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.b 7
 										dc.b $FF
 										dc.l eas_461AA          
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Sir Astral!!!{W1}"
 										dc.w 7
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 1F
 										dc.b $1F
@@ -293,7 +293,7 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.b 1
 										dc.b 4
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Whhhhhhat?{N}{NAME;7}, don't scare me!{W1}"
 										dc.w $1F
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 1F
 										dc.w $1F
@@ -315,11 +315,11 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.b 1
 										dc.b 3
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "What's wrong with you?{W2}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Should we go into the shrine{N}now?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Oh, sorry.{W1}"
 										dc.w $1F
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 1F
 										dc.b $1F
@@ -343,13 +343,13 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "Zalbard...at least he's not{N}as strong as Odd Eye.{W2}"
 										dc.w $1F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "But still, he's a greater{N}devil.{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "We had better complete our{N}preparations before we go in.{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 0
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 0 : "OK.{W1}"
 										dc.w 0
 										dc.w $26                ; 0026 MAKE ENTITY NOD 7
 										dc.w 7

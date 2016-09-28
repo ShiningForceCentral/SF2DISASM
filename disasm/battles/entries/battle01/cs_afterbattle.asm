@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle01\cs_afterbattle :
 ; Cutscene after battle 1
-abcs_battle01:      dc.w 4                  ; 0004 SET TEXT INDEX 901
+abcs_battle01:      dc.w 4                  ; 0004 SET TEXT INDEX 901 : "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
 										dc.w $901
 										dc.w $55                ; 0055 RESET FORCE BATTLE STATS
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 39 2 0
@@ -27,7 +27,7 @@ abcs_battle01:      dc.w 4                  ; 0004 SET TEXT INDEX 901
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b $80                ; WAIT 28
 										dc.b $28
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
 										dc.w $81
 										dc.w $23                ; 0023 SET ENTITY FACING 81 1
 										dc.b $81
@@ -90,7 +90,7 @@ abcs_battle01:      dc.w 4                  ; 0004 SET TEXT INDEX 901
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Oh, it disappeared?!{W1}"
 										dc.w $81
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -106,7 +106,7 @@ abcs_battle01:      dc.w 4                  ; 0004 SET TEXT INDEX 901
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Oh, there it is!{W1}"
 										dc.w $81
 										dc.w $23                ; 0023 SET ENTITY FACING 0 3
 										dc.b 0
@@ -140,12 +140,12 @@ abcs_battle01:      dc.w 4                  ; 0004 SET TEXT INDEX 901
 										dc.w $40                ; 0040 FADE MAP IN FROM WHITE
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "It disappeared again.{W1}"
 										dc.w $81
 										dc.w $32                ; 0032 SET CAMERA DEST 2 A
 										dc.w 2
 										dc.w $A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "There it is!{W1}"
 										dc.w $81
 										dc.w $2D                ; 002D MOVE ENTITY 80 0 3 4
 										dc.b $80
@@ -166,7 +166,7 @@ abcs_battle01:      dc.w 4                  ; 0004 SET TEXT INDEX 901
 										dc.w $23                ; 0023 SET ENTITY FACING 81 0
 										dc.b $81
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "We must hurry to the King!{W1}"
 										dc.w $81
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 3 6
 										dc.b $81

@@ -21,9 +21,9 @@ return_58E5A:
 
 	; End of function sub_58E50
 
-cs_58E5C:           dc.w 4                  ; 0004 SET TEXT INDEX 8D5
+cs_58E5C:           dc.w 4                  ; 0004 SET TEXT INDEX 8D5 : "Bring up the plank?"
 										dc.w $8D5
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "Bring up the plank?"
 										dc.w $FFFF
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 59 58EB8

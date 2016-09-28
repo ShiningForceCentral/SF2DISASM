@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle26\cs_beforebattle :
 ; Cutscene before battle 26
-bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
+bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24 : "Answer me!{N}Where are you going?{W1}"
 										dc.w $A24
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 48 2 14
 										dc.w $48
@@ -39,20 +39,20 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 										dc.w $30
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Answer me!{N}Where are you going?{W1}"
 										dc.w $80
 										dc.w $32                ; 0032 SET CAMERA DEST D 9
 										dc.w $D
 										dc.w 9
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "Ah...I...{W1}"
 										dc.w $C013
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "You were going to South{N}Parmecia to get help, right?{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "I...uh...{W1}"
 										dc.w $C013
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Paladins of Pacalon are{N}cowards!  {NAME;19}, don't{N}you have any pride?{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Wimp!{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 85 FF 1 2
 										dc.b $85
@@ -65,22 +65,22 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.w $23                ; 0023 SET ENTITY FACING 85 1
 										dc.b $85
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C085
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C085 : "Shut up!  Mr. {NAME;19} is{N}the bravest soldier in the{N}world!{W1}"
 										dc.w $C085
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "I can defend myself.{W1}"
 										dc.w $C013
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Come on, you half-breed!{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Are you afraid of me?{N}I'll turn my back to you.{N}Now, run away you cowards!{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 85 FF 45E44
 										dc.b $85
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C085
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C085 : "You've gone too far!{W1}"
 										dc.w $C085
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 85
 										dc.b $85
@@ -158,7 +158,7 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.b $85
 										dc.b $FF
 										dc.l eas_JumpLeft       
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C085
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C085 : "Aaaauuuuu!{W1}"
 										dc.w $C085
 										dc.w $15                ; 0015 SET ACTSCRIPT 85 FF 46024
 										dc.b $85
@@ -175,7 +175,7 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 80
 										dc.w $80
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Pacalon soldiers have no{N}honor.  They attack while{N}my back is turned!{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 86 FF 45E44
 										dc.b $86
@@ -197,17 +197,17 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C086
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C086 : "What?!{W2}"
 										dc.w $C086
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C086
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C086 : "If Mr. {NAME;19} was not{N}ill, you'd be history!{W1}"
 										dc.w $C086
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Oh, is {NAME;19} ill?{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "In that case, you can try{N}and take me.{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C086
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C086 : "I can no longer put up with{N}these insults!{W1}"
 										dc.w $C086
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "No, no!{W1}"
 										dc.w $C013
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 81 D 12 0
 										dc.b $81
@@ -267,7 +267,7 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.b $86
 										dc.b $FF
 										dc.l eas_JumpRight      
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C086
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C086 : "Grruuu....{W1}"
 										dc.w $C086
 										dc.w $15                ; 0015 SET ACTSCRIPT 86 FF 46024
 										dc.b $86
@@ -282,23 +282,23 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.b 1
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "You look so sad,{N}{NAME;19}....{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "You're not just a normal{N}devil soldier.{W1}"
 										dc.w $C013
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "You're right, {NAME;19}.{N}I see why you're the leader{N}of the Pacalon Army.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I'm Geshp!  An adviser for{N}Zeon!{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "How did you know my name?{W1}"
 										dc.w $C013
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I know everything.{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C013
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C013 : "Now, tell me the reason why{N}"
 										dc.w $C013
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "you're keeping me alive.{W1}"
 										dc.w $C013
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Ha, ha!  You're smart!{W1}"
 										dc.w $80
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 84
 										dc.w $84
@@ -317,7 +317,7 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 84
 										dc.w $84
 										dc.w 5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "What did you do?{W1}"
 										dc.w $C013
 										dc.w $2D                ; 002D MOVE ENTITY 84 FF 3 1
 										dc.b $84
@@ -328,15 +328,15 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 84
 										dc.w $84
 										dc.w 4
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "I...can't...!{N}My body won't...{W1}"
 										dc.w $C013
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 13
 										dc.w $13
 										dc.w $1C                ; 001C STOP ENTITY ANIM 13
 										dc.w $13
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "I came here to borrow your{N}body.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Ha, ha!  Welcome our new{N}leader!{W1}"
 										dc.w $80
 										dc.w $1C                ; 001C STOP ENTITY ANIM 13
 										dc.w $13
@@ -351,7 +351,7 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
 										dc.w $8080              ; 0014 END OF MANUAL ACTSCRIPT
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "Stop!!!{W1}"
 										dc.w $C01F
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 81
 										dc.b $81
@@ -393,7 +393,7 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.b 2
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Who said that?{W1}"
 										dc.w $80
 										dc.w $32                ; 0032 SET CAMERA DEST 2 14
 										dc.w 2
@@ -403,13 +403,13 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.w $32                ; 0032 SET CAMERA DEST D F
 										dc.w $D
 										dc.w $F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "A force from the south?{N}How?{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Where did you come from?{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "We're from Granseal!{W1}"
 										dc.w $C01F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "But, that's on the other....{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b $80
@@ -430,12 +430,12 @@ bbcs_26:            dc.w 4                  ; 0004 SET TEXT INDEX A24
 										dc.b 0
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I'd better leave...{W2}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Devil soldiers!  Stop that{N}force from Granseal!{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80

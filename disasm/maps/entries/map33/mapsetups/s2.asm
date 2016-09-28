@@ -163,9 +163,9 @@ cs_5A828:           dc.w $34                ; 0034 SET BLOCKS 110D 101 905
 										dc.w $110D
 										dc.w $101
 										dc.w $905
-										dc.w 4                  ; 0004 SET TEXT INDEX 76F
+										dc.w 4                  ; 0004 SET TEXT INDEX 76F : "{LEADER} decides to{N}take the fairy with him.{W1}"
 										dc.w $76F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{LEADER} decides to{N}take the fairy with him.{W1}"
 										dc.w $FFFF
 										dc.w $2C                ; 002C FOLLOW ENTITY 82 1F 2
 										dc.w $82
@@ -292,17 +292,17 @@ return_5A8C8:
 
 	; End of function sub_5A8A8
 
-cs_5A8CA:           dc.w 4                  ; 0004 SET TEXT INDEX 773
+cs_5A8CA:           dc.w 4                  ; 0004 SET TEXT INDEX 773 : "I'm {NAME;14}, a knight.{N}I was looking for a magic{N}sword.{W2}"
 										dc.w $773
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX E
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX E : "I'm {NAME;14}, a knight.{N}I was looking for a magic{N}sword.{W2}"
 										dc.w $E
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX E
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX E : "I would do anything for{N}Mr. Creed!  Please choose me.{W1}"
 										dc.w $E
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 5A8E6
 										dc.w $59
 										dc.l cs_5A8E6           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX E : "What a pity...then, I wish{N}happiness to all of you.{W1}"
 										dc.w $E
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 cs_5A8E6:           dc.w 8                  ; 0008 JOIN FORCE E
@@ -325,17 +325,17 @@ cs_5A8E6:           dc.w 8                  ; 0008 JOIN FORCE E
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY E
 										dc.w $E
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5A90E:           dc.w 4                  ; 0004 SET TEXT INDEX 780
+cs_5A90E:           dc.w 4                  ; 0004 SET TEXT INDEX 780 : "I really want to find the{N}legendary magic sword....{W2}"
 										dc.w $780
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX E
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX E : "I really want to find the{N}legendary magic sword....{W2}"
 										dc.w $E
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX E
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX E : "But I can't do that if I'm{N}stuck here.{W2}{N}May I join your force?{W1}"
 										dc.w $E
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 5A92A
 										dc.w $59
 										dc.l word_5A92A         
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX E : "No?  Then I'll continue my{N}search for the legendary{N}magic sword alone.{W1}"
 										dc.w $E
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_5A92A:         dc.w 8                  ; 0008 JOIN FORCE E
@@ -346,17 +346,17 @@ word_5A92A:         dc.w 8                  ; 0008 JOIN FORCE E
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY E
 										dc.w $E
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5A93A:           dc.w 4                  ; 0004 SET TEXT INDEX 776
+cs_5A93A:           dc.w 4                  ; 0004 SET TEXT INDEX 776 : "Hee, hee...I'm not only a{N}dwarf, I'm {NAME;16}.{W2}"
 										dc.w $776
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 10
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 10 : "Hee, hee...I'm not only a{N}dwarf, I'm {NAME;16}.{W2}"
 										dc.w $10
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 10
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 10 : "I'm known as the strongest{N}warrior of my people.{W1}"
 										dc.w $10
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 5A956
 										dc.w $59
 										dc.l word_5A956         
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 10
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 10 : "Tut!  OK, I have a{N}comfortable life here.{W1}"
 										dc.w $10
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_5A956:         dc.w 8                  ; 0008 JOIN FORCE 10
@@ -379,17 +379,17 @@ word_5A956:         dc.w 8                  ; 0008 JOIN FORCE 10
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY 10
 										dc.w $10
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5A97E:           dc.w 4                  ; 0004 SET TEXT INDEX 783
+cs_5A97E:           dc.w 4                  ; 0004 SET TEXT INDEX 783 : "I was surprised to find I{N}had returned to my original{N}size!{W2}"
 										dc.w $783
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 10
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 10 : "I was surprised to find I{N}had returned to my original{N}size!{W2}"
 										dc.w $10
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 10
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 10 : "What should I do now?{N}I can go anywhere...{N}maybe...with you?{W1}"
 										dc.w $10
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 5A99A
 										dc.w $59
 										dc.l word_5A99A         
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 10
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 10 : "Fine!  I'll stay in this{N}mansion then.{W1}"
 										dc.w $10
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_5A99A:         dc.w 8                  ; 0008 JOIN FORCE 10
@@ -400,17 +400,17 @@ word_5A99A:         dc.w 8                  ; 0008 JOIN FORCE 10
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY 10
 										dc.w $10
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5A9AA:           dc.w 4                  ; 0004 SET TEXT INDEX 779
+cs_5A9AA:           dc.w 4                  ; 0004 SET TEXT INDEX 779 : "I'm {NAME;17}, a mage.{N}I studied magic in Ponpei.{W2}"
 										dc.w $779
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 11
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 11 : "I'm {NAME;17}, a mage.{N}I studied magic in Ponpei.{W2}"
 										dc.w $11
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 11
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 11 : "I'll miss my friends, but if{N}I can be of help, I'll go{N}with you!{W1}"
 										dc.w $11
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 5A9C6
 										dc.w $59
 										dc.l word_5A9C6         
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 11
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 11 : "My magic could've been a{N}great help to you.{W1}"
 										dc.w $11
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_5A9C6:         dc.w 8                  ; 0008 JOIN FORCE 11
@@ -433,17 +433,17 @@ word_5A9C6:         dc.w 8                  ; 0008 JOIN FORCE 11
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY 11
 										dc.w $11
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5A9EE:           dc.w 4                  ; 0004 SET TEXT INDEX 786
+cs_5A9EE:           dc.w 4                  ; 0004 SET TEXT INDEX 786 : "I'm not sure why, but I'm{N}free.{W2}"
 										dc.w $786
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 11
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 11 : "I'm not sure why, but I'm{N}free.{W2}"
 										dc.w $11
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 11
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 11 : "Can I join your force?{W1}"
 										dc.w $11
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 5AA0A
 										dc.w $59
 										dc.l word_5AA0A         
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 11
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 11 : "You may regret refusing me.{W1}"
 										dc.w $11
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_5AA0A:         dc.w 8                  ; 0008 JOIN FORCE 11
@@ -454,17 +454,17 @@ word_5AA0A:         dc.w 8                  ; 0008 JOIN FORCE 11
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY 11
 										dc.w $11
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5AA1A:           dc.w 4                  ; 0004 SET TEXT INDEX 77C
+cs_5AA1A:           dc.w 4                  ; 0004 SET TEXT INDEX 77C : "I'm {NAME;15}, a priest.{N}I think I'm rather young{N}for my profession....{W2}"
 										dc.w $77C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX F : "I'm {NAME;15}, a priest.{N}I think I'm rather young{N}for my profession....{W2}"
 										dc.w $F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX F : "I don't want to stay in this{N}awful place forever.{N}Choose me!{W1}"
 										dc.w $F
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 5AA36
 										dc.w $59
 										dc.l word_5AA36         
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX F : "You...snot nose!{W1}"
 										dc.w $F
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_5AA36:         dc.w 8                  ; 0008 JOIN FORCE F
@@ -487,17 +487,17 @@ word_5AA36:         dc.w 8                  ; 0008 JOIN FORCE F
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY F
 										dc.w $F
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5AA5E:           dc.w 4                  ; 0004 SET TEXT INDEX 789
+cs_5AA5E:           dc.w 4                  ; 0004 SET TEXT INDEX 789 : "I'm free!  Fresh air smells{N}so good!{W2}"
 										dc.w $789
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX F : "I'm free!  Fresh air smells{N}so good!{W2}"
 										dc.w $F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX F : "Where should I go?{N}Hey, may I go with you?{W1}"
 										dc.w $F
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 5AA7A
 										dc.w $59
 										dc.l word_5AA7A         
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX F : "Why, how rude!{W1}"
 										dc.w $F
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_5AA7A:         dc.w 8                  ; 0008 JOIN FORCE F

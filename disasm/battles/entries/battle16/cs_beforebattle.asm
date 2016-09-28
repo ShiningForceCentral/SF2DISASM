@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle16\cs_beforebattle :
 ; Cutscene before battle 16
-bbcs_16:            dc.w 4                  ; 0004 SET TEXT INDEX 9D1
+bbcs_16:            dc.w 4                  ; 0004 SET TEXT INDEX 9D1 : "Huh?  The raft stopped!{W1}"
 										dc.w $9D1
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 31 9 A
 										dc.w $31
@@ -105,7 +105,7 @@ bbcs_16:            dc.w 4                  ; 0004 SET TEXT INDEX 9D1
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "Huh?  The raft stopped!{W1}"
 										dc.w $C007
 										dc.w $23                ; 0023 SET ENTITY FACING 0 2
 										dc.b 0
@@ -116,7 +116,7 @@ bbcs_16:            dc.w 4                  ; 0004 SET TEXT INDEX 9D1
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 0
 										dc.b $1F
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Did the water stop flowing?{N}What's happening?{W1}"
 										dc.w $1F
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -133,7 +133,7 @@ bbcs_16:            dc.w 4                  ; 0004 SET TEXT INDEX 9D1
 										dc.b 7
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "Wow!{D1}  What's that?{W1}"
 										dc.w $C007
 										dc.w $23                ; 0023 SET ENTITY FACING 0 1
 										dc.b 0
@@ -149,7 +149,7 @@ bbcs_16:            dc.w 4                  ; 0004 SET TEXT INDEX 9D1
 										dc.b 1
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "{LEADER}, look there!{W1}"
 										dc.w $C007
 										dc.w $32                ; 0032 SET CAMERA DEST 9 0
 										dc.w 9
@@ -250,11 +250,11 @@ bbcs_16:            dc.w 4                  ; 0004 SET TEXT INDEX 9D1
 										dc.w 5
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 4002
 										dc.w $4002
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "M...{D1}monster!{N}It appeared from the river!{W1}"
 										dc.w $C007
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "It must be the monster they{N}mentioned in Polca.{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Watch out!{W1}"
 										dc.w $1F
 										dc.b $80                ; WAIT 3C
 										dc.b $3C

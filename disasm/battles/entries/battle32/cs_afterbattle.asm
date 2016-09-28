@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle32\cs_afterbattle :
 ; Cutscene after battle 32
-abcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B25
+abcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B25 : "I can't believe it!{N}You might have been killed{N}by the devils.{W1}"
 										dc.w $B25
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 4A 5 14
 										dc.w $4A
@@ -65,9 +65,9 @@ abcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B25
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "I can't believe it!{N}You might have been killed{N}by the devils.{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Indeed!  Why did you{N}change your mind?{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 17 FF 3 1
 										dc.b $17
@@ -75,9 +75,9 @@ abcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B25
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C017
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C017 : "I'm {NAME;23}, from Galam.{N}I was waiting for the chance{N}to escape from them.{W2}"
 										dc.w $C017
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C017
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C017 : "I can't stand their wicked{N}ways!{W1}"
 										dc.w $C017
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 1 1
 										dc.b 7
@@ -91,16 +91,16 @@ abcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B25
 										dc.w $23                ; 0023 SET ENTITY FACING 17 0
 										dc.b $17
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "You have the same opinion{N}of them as we do.{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C017
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C017 : "Please let me join you!{N}I could be a great help to{N}you.{W2}"
 										dc.w $C017
 										dc.w $23                ; 0023 SET ENTITY FACING 17 3
 										dc.b $17
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C017
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C017 : "You need a professional{N}soldier like me.{W1}"
 										dc.w $C017
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Oh, we welcome you.{W1}"
 										dc.w $1F
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 46172
 										dc.b 7
@@ -112,7 +112,7 @@ abcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B25
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "But, he was on the other{N}side just an minute ago.{W1}"
 										dc.w 7
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 1 1
 										dc.b $1F
@@ -123,12 +123,12 @@ abcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B25
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 0
 										dc.b $1F
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "I don't care, {NAME;7}.{N}He has seen the error of his{N}ways.{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, don't you want{N}{NAME;23} to join our{N}force?{W1}"
 										dc.w $1F
 										dc.w $26                ; 0026 MAKE ENTITY NOD 0
 										dc.w 0
@@ -143,7 +143,7 @@ abcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B25
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C017
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C017 : "Oh, thank you!{W2}"
 										dc.w $C017
 										dc.w $15                ; 0015 SET ACTSCRIPT 17 FF 45E44
 										dc.b $17
@@ -153,7 +153,7 @@ abcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B25
 										dc.b $17
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C017
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C017 : "I'll try to do my best!{W1}"
 										dc.w $C017
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 4CEE4
 										dc.l sub_4CEE4

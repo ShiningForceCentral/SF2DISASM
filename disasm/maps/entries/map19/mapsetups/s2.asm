@@ -270,33 +270,33 @@ return_52F0A:
 
 	; End of function sub_52EF2
 
-cs_52F0C:           dc.w 4                  ; 0004 SET TEXT INDEX 23F
+cs_52F0C:           dc.w 4                  ; 0004 SET TEXT INDEX 23F : "I didn't want to involve{N}you, my children...but{N}this might be a good{W2}{N}opportunity for you to{N}learn how to properly{N}serve your King.{W2}{N}Are you ready, {LEADER}?{W1}"
 										dc.w $23F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8C : "I didn't want to involve{N}you, my children...but{N}this might be a good{W2}{N}opportunity for you to{N}learn how to properly{N}serve your King.{W2}{N}Are you ready, {LEADER}?{W1}"
 										dc.w $8C
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 52F40
 										dc.w $59                ; Unkown command : 59
 										dc.l cs_52F40           ; 0005 PLAY SOUND 
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8C : "Then, I'll wait for you here.{W2}{N}We have to hurry.{N}Come back when you're{N}ready.{W1}"
 										dc.w $8C
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_52F24:           dc.w 4                  ; 0004 SET TEXT INDEX 241
+cs_52F24:           dc.w 4                  ; 0004 SET TEXT INDEX 241 : "Are you ready, {LEADER}?{W1}"
 										dc.w $241
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8C : "Are you ready, {LEADER}?{W1}"
 										dc.w $8C
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 52F40
 										dc.w $59
 										dc.l cs_52F40           ; 0005 PLAY SOUND 
-										dc.w 4                  ; 0004 SET TEXT INDEX 240
+										dc.w 4                  ; 0004 SET TEXT INDEX 240 : "Then, I'll wait for you here.{W2}{N}We have to hurry.{N}Come back when you're{N}ready.{W1}"
 										dc.w $240
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8C : "Then, I'll wait for you here.{W2}{N}We have to hurry.{N}Come back when you're{N}ready.{W1}"
 										dc.w $8C
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_52F40:           dc.w 4                  ; 0004 SET TEXT INDEX 242
+cs_52F40:           dc.w 4                  ; 0004 SET TEXT INDEX 242 : "Good!{N}Let's go to the tower.{N}Follow me.{W1}"
 										dc.w $242
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8C : "Good!{N}Let's go to the tower.{N}Follow me.{W1}"
 										dc.w $8C
 										dc.w $2D                ; 002D MOVE ENTITY 8C FF 1 1
 										dc.b $8C

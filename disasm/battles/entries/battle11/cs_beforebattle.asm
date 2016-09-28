@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle11\cs_beforebattle :
 ; Cutscene before battle 11
-bbcs_11:            dc.w 4                  ; 0004 SET TEXT INDEX 9B3
+bbcs_11:            dc.w 4                  ; 0004 SET TEXT INDEX 9B3 : "You'll come to the foot of{N}Mt. Volcano through this{N}dark cave.{W2}"
 										dc.w $9B3
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 0
 										dc.w 0
@@ -30,7 +30,7 @@ bbcs_11:            dc.w 4                  ; 0004 SET TEXT INDEX 9B3
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "You'll come to the foot of{N}Mt. Volcano through this{N}dark cave.{W2}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
@@ -38,11 +38,11 @@ bbcs_11:            dc.w 4                  ; 0004 SET TEXT INDEX 9B3
 										dc.w $23                ; 0023 SET ENTITY FACING 0 2
 										dc.b 0
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "But, I heard this cave is{N}home to a hobgoblin.{W1}"
 										dc.w 7
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Yes, it is!{W1}"
 										dc.w $80
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_ENEMY_ATTACK
 										dc.w 5
@@ -75,15 +75,15 @@ bbcs_11:            dc.w 4                  ; 0004 SET TEXT INDEX 9B3
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Wh...Who said that?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Me!  The hobgoblin!{W1}"
 										dc.w $80
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 20
 										dc.w $20
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Welcome to my home.{W2}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 3 1
 										dc.b $80
@@ -91,7 +91,7 @@ bbcs_11:            dc.w 4                  ; 0004 SET TEXT INDEX 9B3
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Enjoy your visit because{N}you're not leaving!{W1}"
 										dc.w $80
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FD

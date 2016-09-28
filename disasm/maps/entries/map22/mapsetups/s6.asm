@@ -31,7 +31,7 @@ return_59654:
 
 	; End of function ms_map22_InitFunction
 
-cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4
+cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4 : "What happened?{W2}"
 										dc.w $6D4
 										dc.w $46                ; 0046  0 13
 										dc.w 0
@@ -230,15 +230,15 @@ cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4
 										dc.b 2
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C01F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C01F : "What happened?{W2}"
 										dc.w $C01F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C01F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C01F : "A strange feeling swept over{N}me when I entered that door.{W2}"
 										dc.w $C01F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "Then, it felt like...I was{N}lifted upward!{W1}"
 										dc.w $C01F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "It's very difficult to explain{N}what's happened to us....{W2}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Anyway, we're very small now.{W1}"
 										dc.w 7
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 1F
 										dc.b $1F
@@ -255,7 +255,7 @@ cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4
 										dc.b 2
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "Small?  How small?{W1}"
 										dc.w $C01F
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -290,9 +290,9 @@ cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Let's see...now we're on a{N}desk...and it's very large,{N}like a village.{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Exactly.{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 0 0 2 1
 										dc.b 0
@@ -377,7 +377,7 @@ cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4
 										dc.b 7
 										dc.b $FF
 										dc.l eas_Init           
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "Goliath!{W2}"
 										dc.w 7
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 45E44
 										dc.b 7
@@ -389,11 +389,11 @@ cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4
 										dc.l eas_Jump           
 										dc.b $80                ; WAIT A
 										dc.b $A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Hey, what did you do to us?{W1}"
 										dc.w 7
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "I told you not to go in{N}there.  You didn't listen{N}to my warning.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "You guys look so cute!{N}Ha, ha!{N}Bye, little kiddies!{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -461,9 +461,9 @@ cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "{LEADER}, cheer up!{W2}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Let's look around this{N}Desktop Kingdom.{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0
 										dc.b 0
@@ -471,7 +471,7 @@ cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 2
 										dc.b $1F
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "I agree!  We can meet Creed{N}later.{W1}"
 										dc.w $1F
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 										dc.b 0
@@ -494,23 +494,23 @@ cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4
 										dc.w 7
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5994E:           dc.w 4                  ; 0004 SET TEXT INDEX 700
+cs_5994E:           dc.w 4                  ; 0004 SET TEXT INDEX 700 : "Are you ready?{W2}"
 										dc.w $700
 										dc.b $80                ; WAIT 32
 										dc.b $32
 										dc.w $32                ; 0032 SET CAMERA DEST A 0
 										dc.w $A
 										dc.w 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 86
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 86 : "Are you ready?{W2}"
 										dc.w $86
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 86
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 86 : "Now, start the battle!{N}Do your best!{W1}"
 										dc.w $86
 										dc.w $13                ; 0013 SET STORY FLAG 16
 										dc.w $16
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 16000000
 										dc.l $16000000
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5996E:           dc.w 4                  ; 0004 SET TEXT INDEX 702
+cs_5996E:           dc.w 4                  ; 0004 SET TEXT INDEX 702 : "Checkmate!{N}This is for you.{W1}"
 										dc.w $702
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF
@@ -533,14 +533,14 @@ cs_5996E:           dc.w 4                  ; 0004 SET TEXT INDEX 702
 										dc.b $D
 										dc.b 1
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 86
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 86 : "Checkmate!{N}This is for you.{W1}"
 										dc.w $86
 										dc.w $32                ; 0032 SET CAMERA DEST 14 7
 										dc.w $14
 										dc.w 7
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 86
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 86 : "A Cotton Balloon is inside.{W2}"
 										dc.w $86
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 86
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 86 : "With it you can leave{N}Desktop Kingdom safely.{N}Good luck!{W1}"
 										dc.w $86
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 cs_599A4:           dc.w $2D                ; 002D MOVE ENTITY 88 FF 1 1

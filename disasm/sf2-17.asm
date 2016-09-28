@@ -16,10 +16,8 @@ p_CharacterStartData:
 p_ClassData:        dc.l ClassData
 p_JewelEndScreenTiles:
 										dc.l JewelsEndScreenTiles
-																						; jewel end screen tile data ?
 p_JewelEndScreenLayout:
 										dc.l JewelsEndScreenLayout
-																						; jewel end screen layout data ?
 p_plt_JewelsEndScreen:
 										dc.l plt_JewelsEndScreen
 p_plt_SuspendString:dc.l plt_SuspendString

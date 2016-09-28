@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle34\cs_beforebattle :
 ; Cutscene before battle 34
-bbcs_34:            dc.w 4                  ; 0004 SET TEXT INDEX B4F
+bbcs_34:            dc.w 4                  ; 0004 SET TEXT INDEX B4F : "Hello, Granseal soldiers.{W1}"
 										dc.w $B4F
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 37 15 16
 										dc.w $37
@@ -84,7 +84,7 @@ word_4D3C6:         dc.w $2D                ; 002D MOVE ENTITY 1F FF 2 3
 										dc.b 2
 										dc.b 3
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Hello, Granseal soldiers.{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 45E44
 										dc.b 7
@@ -93,9 +93,9 @@ word_4D3C6:         dc.w $2D                ; 002D MOVE ENTITY 1F FF 2 3
 										dc.w $32                ; 0032 SET CAMERA DEST 7 5
 										dc.w 7
 										dc.w 5
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Remember?  I promised that I{N}would see you again.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Come on.  Let's party!{W1}"
 										dc.w $80
 										dc.w $32                ; 0032 SET CAMERA DEST 7 4
 										dc.w 7
@@ -103,16 +103,16 @@ word_4D3C6:         dc.w $2D                ; 002D MOVE ENTITY 1F FF 2 3
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 81
 										dc.w $81
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Stop!  You need my war plan!{W1}"
 										dc.w $C081
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "You again, Geshp?  Why don't{N}you leave me alone?{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081 : "Zeon left me in charge.{W2}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "It doesn't matter if you are{N}killed or not.{W1}"
 										dc.w $C081
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 1 1
 										dc.b $80
@@ -120,9 +120,9 @@ word_4D3C6:         dc.w $2D                ; 002D MOVE ENTITY 1F FF 2 3
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Then kill me, if you've{N}got the guts to do it!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I know.  You want me to be{N}die!{W1}"
 										dc.w $80
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 80
 										dc.b $80
@@ -162,12 +162,12 @@ word_4D3C6:         dc.w $2D                ; 002D MOVE ENTITY 1F FF 2 3
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Geshp, you coward!{N}I'll kill you first!{W1}"
 										dc.w $80
 										dc.w $3D                ; 003D TINT MAP
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081 : "I have no time to waste.{N}I must go.{W2}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Silly Cameela.{N}You can't survive without my{N}brains.{W1}"
 										dc.w $C081
 										dc.w $3E                ; 003E SIMILAR TO TINT MAP
 										dc.w $32                ; 0032 SET CAMERA DEST 7 3
@@ -182,16 +182,16 @@ word_4D3C6:         dc.w $2D                ; 002D MOVE ENTITY 1F FF 2 3
 										dc.w $23                ; 0023 SET ENTITY FACING 80 0
 										dc.b $80
 										dc.b 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "{LEADER}, did you hear that?{N}He said you would win!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "He must be a bad{N}fortuneteller.{W1}"
 										dc.w $80
 										dc.w $32                ; 0032 SET CAMERA DEST 15 16
 										dc.w $15
 										dc.w $16
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "We can get a ship and return{N}to Grans if we defeat her.{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, get her!{W1}"
 										dc.w $1F
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_4D48E:         dc.w $1D

@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle33\cs_afterbattle :
 ; Cutscene after battle 33
-abcs_battle33:      dc.w 4                  ; 0004 SET TEXT INDEX B3C
+abcs_battle33:      dc.w 4                  ; 0004 SET TEXT INDEX B3C : "There may be some survivors{N}somewhere.{W1}"
 										dc.w $B3C
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 1F 8 6
 										dc.w $1F
@@ -70,7 +70,7 @@ abcs_battle33:      dc.w 4                  ; 0004 SET TEXT INDEX B3C
 										dc.b $FF
 										dc.l eas_45F9C          
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "There may be some survivors{N}somewhere.{W1}"
 										dc.w $1F
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -210,7 +210,7 @@ abcs_battle33:      dc.w 4                  ; 0004 SET TEXT INDEX B3C
 										dc.b 1
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Do not touch my rock!{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 45E44
 										dc.b 7
@@ -259,9 +259,9 @@ abcs_battle33:      dc.w 4                  ; 0004 SET TEXT INDEX B3C
 										dc.b $80
 										dc.b $FF
 										dc.l eas_461AA          
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Did you defeat all those{N}devils?{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I was wondering why it became{N}quiet so suddenly.{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 1F 0 0 3
 										dc.b $1F
@@ -283,19 +283,19 @@ abcs_battle33:      dc.w 4                  ; 0004 SET TEXT INDEX B3C
 										dc.w $23                ; 0023 SET ENTITY FACING 0 1
 										dc.b 0
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Are you a survivor?{N}Are you from Moun?{N}What's your name?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I am {NAME;26}.{N}I am not from Moun.{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Then, where are you from?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "The past.{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "What do you mean?{W1}"
 										dc.w $1F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "I cannot explain.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I am what I am.{N}That is all that I am.{W1}"
 										dc.w $80
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 80
 										dc.b $80
@@ -350,17 +350,17 @@ abcs_battle33:      dc.w 4                  ; 0004 SET TEXT INDEX B3C
 										dc.b $14
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 0
 										dc.w 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "I've never seen anyone like{N}you.{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Where are the people of{N}Moun?  Were there any{N}survivors?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01A : "Some.{W1}"
 										dc.w $C01A
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "That's good news.{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "And where are they?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01A : "Down here.  Follow me.{W1}"
 										dc.w $C01A
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 1A 3F 3F 3
 										dc.b $1A
@@ -382,9 +382,9 @@ abcs_battle33:      dc.w 4                  ; 0004 SET TEXT INDEX B3C
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "{LEADER}, hurry!{N}Follow {NAME;26}!{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{NAME;26} knows where{N}they're hiding.{W1}"
 										dc.w $1F
 										dc.w $2C                ; 002C FOLLOW ENTITY 1F 0 2
 										dc.w $1F

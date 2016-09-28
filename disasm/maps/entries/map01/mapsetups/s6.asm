@@ -17,7 +17,7 @@ return_5E770:
 
 	; End of function ms_map1_InitFunction
 
-cs_5E772:           dc.w 4                  ; 0004 SET TEXT INDEX E41
+cs_5E772:           dc.w 4                  ; 0004 SET TEXT INDEX E41 : "I feel...a power returning{N}me to human.{W2}"
 										dc.w $E41
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -74,9 +74,9 @@ cs_5E772:           dc.w 4                  ; 0004 SET TEXT INDEX E41
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "I feel...a power returning{N}me to human.{W2}"
 										dc.w $8015
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "Hey!  The evil is gone!{N}Did you chase them away?{W1}"
 										dc.w $8015
 										dc.w $1B                ; 001B START ENTITY ANIM 15
 										dc.w $15
@@ -89,18 +89,18 @@ cs_5E772:           dc.w 4                  ; 0004 SET TEXT INDEX E41
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "{LEADER}, who is she?{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 15 2
 										dc.b $15
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "Did you say {LEADER}?{N}Oh, you're from Granseal!{W1}"
 										dc.w $8015
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Yes, we are, but who are{N}you?{W1}"
 										dc.w 7
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 15
 										dc.w $15
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "Do you know how long I've{N}been here as a stone statue?{W1}"
 										dc.w $8015
 										dc.w $2D                ; 002D MOVE ENTITY 0 FF 3 1
 										dc.b 0
@@ -132,30 +132,30 @@ cs_5E772:           dc.w 4                  ; 0004 SET TEXT INDEX E41
 										dc.w $23                ; 0023 SET ENTITY FACING 0 1
 										dc.b 0
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "How do you know {LEADER}?{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 15 3
 										dc.b $15
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "Oh, I'm sorry.{W2}"
 										dc.w $8015
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "I'm {NAME;21}, a sorceress.{N}Goddess Mitula told me about{N}you.{W1}"
 										dc.w $8015
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "She did?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "Yes.  She was worried about{N}you.{W2}"
 										dc.w $8015
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "You are fated to fight Zeon.{W2}"
 										dc.w $8015
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "But, she is unable to help{N}you.  It's an order from{N}Volcanon.{W2}"
 										dc.w $8015
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "But, I'm here for her.{N}I'm here to help you.{W1}"
 										dc.w $8015
 										dc.w 8                  ; 0008 JOIN FORCE 15
 										dc.w $15
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "You want to go to Grans,{N}right?  Then, I think we{N}can use the ancient ship.{W2}"
 										dc.w $8015
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8015 : "Let's go to Nazca.{W1}"
 										dc.w $8015
 										dc.w $2C                ; 002C FOLLOW ENTITY 7 0 2
 										dc.w 7

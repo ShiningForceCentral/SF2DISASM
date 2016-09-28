@@ -152,9 +152,9 @@ cs_5F594:           dc.w $2B                ; 002B  1C 6 F 1 FF
 										dc.b $F
 										dc.b 1
 										dc.b $FF
-										dc.w 4                  ; 0004 SET TEXT INDEX DB9
+										dc.w 4                  ; 0004 SET TEXT INDEX DB9 : "Sir Astral!  {LEADER}!{W1}"
 										dc.w $DB9
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "Sir Astral!  {LEADER}!{W1}"
 										dc.w $1C
 										dc.w $29                ; 0029 SET ENTITY DEST 1F 6 A
 										dc.w $1F
@@ -172,7 +172,7 @@ cs_5F594:           dc.w $2B                ; 002B  1C 6 F 1 FF
 										dc.w $32                ; 0032 SET CAMERA DEST 1 6
 										dc.w 1
 										dc.w 6
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "{LEADER}, wait!{W1}"
 										dc.w $1C
 										dc.w $2D                ; 002D MOVE ENTITY 1C FF 1 4
 										dc.b $1C
@@ -180,7 +180,7 @@ cs_5F594:           dc.w $2B                ; 002B  1C 6 F 1 FF
 										dc.b 1
 										dc.b 4
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "May I join your force?{W1}"
 										dc.w $1C
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -189,23 +189,23 @@ cs_5F594:           dc.w $2B                ; 002B  1C 6 F 1 FF
 										dc.b 1
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801F : "Well...{W1}"
 										dc.w $801F
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C : "You can trust me.{N}I'm a born fighter.{W2}"
 										dc.w $1C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1C : "As you know, I want to die.{W2}"
 										dc.w $1C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "I will die fighting for your{N}cause, if you let me.{W1}"
 										dc.w $1C
 										dc.b $80                ; WAIT 28
 										dc.b $28
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801F : "He's a hero in Galam.{N}I think he should join us.{W1}"
 										dc.w $801F
 										dc.w $26                ; 0026 MAKE ENTITY NOD 7
 										dc.w 7
@@ -218,7 +218,7 @@ cs_5F594:           dc.w $2B                ; 002B  1C 6 F 1 FF
 										dc.b $14
 										dc.w $26                ; 0026 MAKE ENTITY NOD 1F
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{NAME;28}, please come{N}with us.  You'll be a great{N}help.{W1}"
 										dc.w $1F
 										dc.w 8                  ; 0008 JOIN FORCE 1C
 										dc.w $1C
@@ -230,7 +230,7 @@ cs_5F594:           dc.w $2B                ; 002B  1C 6 F 1 FF
 										dc.b $1C
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "Oh, thank you!  I know I can{N}take the King of the Devils!{W1}"
 										dc.w $1C
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F

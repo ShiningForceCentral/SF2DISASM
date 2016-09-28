@@ -1643,7 +1643,7 @@ TextBank13:         incbin "scripting/textbanks/textbank13.bin"
 TextBank14:         incbin "scripting/textbanks/textbank14.bin"
 TextBank15:         incbin "scripting/textbanks/textbank15.bin"
 TextBank16:         incbin "scripting/textbanks/textbank16.bin"
-										align $2
+										align 2                 ; added align $2 to make sure we're on an even address
 pt_TextBanks:       dc.l TextBank00
 										dc.l TextBank01
 										dc.l TextBank02

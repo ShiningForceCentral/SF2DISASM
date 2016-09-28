@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle33\cs_beforebattle :
 ; Cutscene before battle 33
-bbcs_33:            dc.w 4                  ; 0004 SET TEXT INDEX B32
+bbcs_33:            dc.w 4                  ; 0004 SET TEXT INDEX B32 : "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
 										dc.w $B32
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 1F 16 1D
 										dc.w $1F
@@ -71,7 +71,7 @@ bbcs_33:            dc.w 4                  ; 0004 SET TEXT INDEX B32
 										dc.w $23                ; 0023 SET ENTITY FACING 16 3
 										dc.b $16
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16 : "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
 										dc.w $16
 										dc.w $2D                ; 002D MOVE ENTITY 16 FF 1 1
 										dc.b $16
@@ -79,7 +79,7 @@ bbcs_33:            dc.w 4                  ; 0004 SET TEXT INDEX B32
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "Vicar {NAME;22} uses{N}the gate key.{W1}"
 										dc.w $FFFF
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -148,13 +148,13 @@ bbcs_33:            dc.w 4                  ; 0004 SET TEXT INDEX B32
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Welcome, losers!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Will you follow the example{N}of the people of Moun and die{N}without resistance?{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 16
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 16 : "No!  I'm too late.{N}I killed a lot of people.{W2}"
 										dc.w $16
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16 : "I can never forgive myself!{W1}"
 										dc.w $16
 										dc.w $32                ; 0032 SET CAMERA DEST 15 19
 										dc.w $15
@@ -165,7 +165,7 @@ bbcs_33:            dc.w 4                  ; 0004 SET TEXT INDEX B32
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 16 : "{LEADER}, please let me{N}fight with you.  They must{N}die!{W1}"
 										dc.w $16
 										dc.w 8                  ; 0008 JOIN FORCE 16
 										dc.w $16
@@ -181,15 +181,15 @@ bbcs_33:            dc.w 4                  ; 0004 SET TEXT INDEX B32
 										dc.w $23                ; 0023 SET ENTITY FACING 0 2
 										dc.b 0
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, {NAME;22} will be{N}a great asset.{W1}"
 										dc.w $1F
 										dc.w $51                ; 0051  16
 										dc.w $16
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 4D078
 										dc.l sub_4D078
-										dc.w 4                  ; 0004 SET TEXT INDEX B3B
+										dc.w 4                  ; 0004 SET TEXT INDEX B3B : "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
 										dc.w $B3B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
 										dc.w $1F
 										dc.w $10                ; 0010 SET FLAG 33F FFFF
 										dc.w $33F

@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle32\cs_regiontriggered_1 :
 ; Region-activated cutscene for battle 32
-rbcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B21
+rbcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B21 : "I'm tired of this.  I can no{N}longer fight for devils.{W1}"
 										dc.w $B21
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 4CD56
 										dc.l sub_4CD56
@@ -11,13 +11,13 @@ rbcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B21
 										dc.w $17
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 17
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 17 : "I'm tired of this.  I can no{N}longer fight for devils.{W1}"
 										dc.w $17
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 80
 										dc.w $80
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "{NAME;23}, what?{W1}"
 										dc.w $80
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 17
 										dc.w $17
@@ -26,12 +26,12 @@ rbcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B21
 										dc.w $23                ; 0023 SET ENTITY FACING 17 1
 										dc.b $17
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 17
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 17 : "Didn't you hear me?{W1}"
 										dc.w $17
 										dc.w $23                ; 0023 SET ENTITY FACING 17 3
 										dc.b $17
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 17
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 17 : "Hey, Granseal guys!{N}I'm on your side from now{N}on! OK?{W1}"
 										dc.w $17
 										dc.w $54                ; 0054  17 FFFF
 										dc.w $17

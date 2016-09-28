@@ -10,7 +10,7 @@ ms_map15_InitFunction:
 
 	; End of function ms_map15_InitFunction
 
-cs_5D04E:           dc.w 4                  ; 0004 SET TEXT INDEX 7D6
+cs_5D04E:           dc.w 4                  ; 0004 SET TEXT INDEX 7D6 : "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
 										dc.w $7D6
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0
 										dc.b 0
@@ -154,7 +154,7 @@ cs_5D04E:           dc.w 4                  ; 0004 SET TEXT INDEX 7D6
 										dc.w $23                ; 0023 SET ENTITY FACING 14 2
 										dc.b $14
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8014
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8014 : "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
 										dc.w $8014
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 0 2
 										dc.b 7
@@ -168,15 +168,15 @@ cs_5D04E:           dc.w 4                  ; 0004 SET TEXT INDEX 7D6
 										dc.w $23                ; 0023 SET ENTITY FACING 14 1
 										dc.b $14
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Yes, he's {LEADER},{N}but who are you?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8014
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8014 : "I'm {NAME;20} of Bedoe.{W1}"
 										dc.w $8014
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 7
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Bedoe?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8014
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8014 : "{LEADER} saved my life{N}there.{W1}"
 										dc.w $8014
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 45E44
 										dc.b 7
@@ -186,13 +186,13 @@ cs_5D04E:           dc.w 4                  ; 0004 SET TEXT INDEX 7D6
 										dc.b 7
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "{LEADER} saved...{W2}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Oh, yes!  I remember!{W1}"
 										dc.w 7
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8014
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8014 : "You remember me?{W2}"
 										dc.w $8014
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8014
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8014 : "Let me thank you.{N}May I go with you?{W1}"
 										dc.w $8014
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 2 1
 										dc.b 7
@@ -227,9 +227,9 @@ cs_5D04E:           dc.w 4                  ; 0004 SET TEXT INDEX 7D6
 										dc.w $23                ; 0023 SET ENTITY FACING 14 2
 										dc.b $14
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "You grew up quickly, huh?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8014
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8014 : "Yeah, I learned how to fight.{W1}"
 										dc.w $8014
 										dc.w 8                  ; 0008 JOIN FORCE 14
 										dc.w $14

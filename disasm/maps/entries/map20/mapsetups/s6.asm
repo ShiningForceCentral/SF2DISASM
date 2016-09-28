@@ -33,7 +33,7 @@ return_53994:
 
 	; End of function ms_map20_InitFunction
 
-cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
+cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880 : "Mmmm....{N}Hmmm...mmmm....{W1}"
 										dc.w $880
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 0 17 27 3
 										dc.b 0
@@ -76,9 +76,9 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.w $23                ; 0023 SET ENTITY FACING 0 3
 										dc.b 0
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Mmmm....{N}Hmmm...mmmm....{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Oh, father!{N}Please wake up.{W1}"
 										dc.w $81
 										dc.w $2D                ; 002D MOVE ENTITY 83 FF 0 1
 										dc.b $83
@@ -89,9 +89,9 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.w $23                ; 0023 SET ENTITY FACING 83 1
 										dc.b $83
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "Sir Astral?{W1}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Hmmm.  Nothing is wrong{N}with his body, but...{W1}"
 										dc.w $8082
 										dc.w $53                ; 0053  82 0
 										dc.w $82
@@ -107,12 +107,12 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.b $83
 										dc.b $FF
 										dc.l eas_BumpUp         
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "He is suffering badly from{N}something....{W1}"
 										dc.w $83
 										dc.w $23                ; 0023 SET ENTITY FACING 82 3
 										dc.b $82
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Perhaps...it might be...{N}{D1}Well?{W1}"
 										dc.w $8082
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -151,7 +151,7 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.b $82
 										dc.b $FF
 										dc.l eas_Init           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "What are you doing here?!{W1}"
 										dc.w $82
 										dc.w $32                ; 0032 SET CAMERA DEST 11 22
 										dc.w $11
@@ -180,7 +180,7 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.b 2
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8002
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8002 : "Oops!{W1}"
 										dc.w $8002
 										dc.w $2D                ; 002D MOVE ENTITY 2 FF 2 2
 										dc.b 2
@@ -190,7 +190,7 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8002
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8002 : "Sorry, sir!{W1}"
 										dc.w $8002
 										dc.w $2D                ; 002D MOVE ENTITY 1 FF 2 1
 										dc.b 1
@@ -204,7 +204,7 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.w $23                ; 0023 SET ENTITY FACING 0 2
 										dc.b 0
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8001
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8001 : "Well, we just followed you....{W1}"
 										dc.w $8001
 										dc.w $2D                ; 002D MOVE ENTITY 82 FF 0 1
 										dc.b $82
@@ -215,7 +215,7 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.w $23                ; 0023 SET ENTITY FACING 82 1
 										dc.b $82
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Don't lie to me.{N}You wanted to see the{N}castle, didn't you?{W1}"
 										dc.w $8082
 										dc.w $2D                ; 002D MOVE ENTITY 83 FF 1 1
 										dc.b $83
@@ -226,7 +226,7 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.w $23                ; 0023 SET ENTITY FACING 83 0
 										dc.b $83
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "Sir Astral, who are they?{W1}"
 										dc.w $83
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -234,7 +234,7 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.b $82
 										dc.b 0
 										dc.l eas_461B6          
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Oh...{D1}well...{D1}(mumble)...{D1}{N}They're my pupils....{W1}"
 										dc.w $8082
 										dc.w $2D                ; 002D MOVE ENTITY 83 FF 0 1
 										dc.b $83
@@ -245,11 +245,11 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.w $23                ; 0023 SET ENTITY FACING 82 2
 										dc.b $82
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83 : "So they are.   They look{N}like good kids.{W1}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "You must have a special{N}reason to have them here,{N}right?{W1}"
 										dc.w $83
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Um...{D1}I didn't mean for...{W1}"
 										dc.w $8082
 										dc.w $23                ; 0023 SET ENTITY FACING 82 1
 										dc.b $82
@@ -261,7 +261,7 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.b 0
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "Astral glares at {LEADER}.{W1}"
 										dc.w $FFFF
 										dc.w $2D                ; 002D MOVE ENTITY 82 FF 2 1
 										dc.b $82
@@ -269,7 +269,7 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.b 2
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "(Cough){N}You said the door of the{N}Ancient Tower is open.{W2}{N}There must be a connection{N}between the open door and{N}the King's sickness.{W1}"
 										dc.w $8082
 										dc.w $23                ; 0023 SET ENTITY FACING 82 3
 										dc.b $82
@@ -279,7 +279,7 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.w $23                ; 0023 SET ENTITY FACING 82 2
 										dc.b $82
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "I called them here to help{N}me investigate the tower.{W1}"
 										dc.w $8082
 										dc.w $26                ; 0026 MAKE ENTITY NOD 83
 										dc.w $83
@@ -289,12 +289,12 @@ cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Now, pupils.  Follow me.{W1}"
 										dc.w $8082
 										dc.w $23                ; 0023 SET ENTITY FACING 82 1
 										dc.b $82
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Don't give me any more{N}trouble!{W1}"
 										dc.w $8082
 										dc.w $2D                ; 002D MOVE ENTITY 1 0 1 1
 										dc.b 1
@@ -325,7 +325,7 @@ cs_53B60:           dc.w $2E                ; 002E HIDE ENTITY 82
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 cs_53B66:           dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FD
-										dc.w 4                  ; 0004 SET TEXT INDEX 895
+										dc.w 4                  ; 0004 SET TEXT INDEX 895 : "King Granseal!{N}Calm down!{W1}"
 										dc.w $895
 										dc.w $15                ; 0015 SET ACTSCRIPT 82 FF 46172
 										dc.b $82
@@ -390,9 +390,9 @@ cs_53B66:           dc.w 5                  ; 0005 PLAY SOUND
 										dc.w $8080
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "King Granseal!{N}Calm down!{W1}"
 										dc.w $8082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Guooooorrrr!{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 0 0 2
 										dc.b $80
@@ -414,7 +414,7 @@ cs_53B66:           dc.w 5                  ; 0005 PLAY SOUND
 										dc.b $82
 										dc.b $FF
 										dc.l eas_JumpRight      
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "He's possessed!  He needs{N}an exorcism right now!{W1}"
 										dc.w $8082
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 82
 										dc.w $82
@@ -459,7 +459,7 @@ cs_53B66:           dc.w 5                  ; 0005 PLAY SOUND
 cs_53C42:           dc.w $32                ; 0032 SET CAMERA DEST 13 30
 										dc.w $13
 										dc.w $30
-										dc.w 4                  ; 0004 SET TEXT INDEX 898
+										dc.w 4                  ; 0004 SET TEXT INDEX 898 : "Yeow!  My head!{N}No, I'm OK, {LEADER}.{W2}"
 										dc.w $898
 										dc.w $15                ; 0015 SET ACTSCRIPT 82 FF 460CE
 										dc.b $82
@@ -477,9 +477,9 @@ cs_53C42:           dc.w $32                ; 0032 SET CAMERA DEST 13 30
 										dc.w $23                ; 0023 SET ENTITY FACING 82 1
 										dc.b $82
 										dc.b 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8082
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8082 : "Yeow!  My head!{N}No, I'm OK, {LEADER}.{W2}"
 										dc.w $8082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "I must use a powerful spell.{N}It may be dangerous.{N}Stay back!{W1}"
 										dc.w $8082
 										dc.w $2D                ; 002D MOVE ENTITY 0 FF 1 1
 										dc.b 0
@@ -554,7 +554,7 @@ cs_53C42:           dc.w $32                ; 0032 SET CAMERA DEST 13 30
 										dc.b $18
 										dc.b $35
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Evil spirit inside the King,{N}begone, HAAA!{W1}"
 										dc.w $8082
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 88
 										dc.b $88
@@ -619,7 +619,7 @@ cs_53C42:           dc.w $32                ; 0032 SET CAMERA DEST 13 30
 										dc.b 2
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "King...Granseal?{W1}"
 										dc.w $8082
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
@@ -633,7 +633,7 @@ cs_53C42:           dc.w $32                ; 0032 SET CAMERA DEST 13 30
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 87
 										dc.w $87
 										dc.w 5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Did it work?{W1}"
 										dc.w $8082
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 87
 										dc.w $87
@@ -660,7 +660,7 @@ cs_53C42:           dc.w $32                ; 0032 SET CAMERA DEST 13 30
 										dc.w $87
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Ooh....{W1}"
 										dc.w $80
 										dc.w $1B                ; 001B START ENTITY ANIM 80
 										dc.w $80
@@ -687,15 +687,15 @@ cs_53C42:           dc.w $32                ; 0032 SET CAMERA DEST 13 30
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Astral, wha...what{N}happened?{W1}"
 										dc.w $80
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 82
 										dc.w $82
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8082
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8082 : "Are you alright?{W2}"
 										dc.w $8082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Let me use your soldiers.{N}We must kill it before it{N}finds another victim.{W1}"
 										dc.w $8082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "What are you talking about?{N}I don't understand.{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 32
 										dc.b $32
@@ -710,9 +710,9 @@ cs_53C42:           dc.w $32                ; 0032 SET CAMERA DEST 13 30
 										dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
 										dc.w $8080              ; 0014 END OF MANUAL ACTSCRIPT
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "(Sigh){W1}"
 										dc.w $8082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Astral!{W1}"
 										dc.w $80
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FD
@@ -726,7 +726,7 @@ cs_53C42:           dc.w $32                ; 0032 SET CAMERA DEST 13 30
 										dc.w 0
 										dc.b $80                ; WAIT 1
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "Astral is exhausted.{N}He won't wake up!{W2}{N}The Minister summons the{N}soldiers to the hall to kill{N}the evil spirit.{W1}"
 										dc.w $FFFF
 										dc.w $10                ; 0010 SET FLAG 261 FFFF
 										dc.w $261

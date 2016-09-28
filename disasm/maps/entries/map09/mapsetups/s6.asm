@@ -31,7 +31,7 @@ return_568F4:
 
 	; End of function ms_map9_InitFunction
 
-cs_568F6:           dc.w 4                  ; 0004 SET TEXT INDEX 55C
+cs_568F6:           dc.w 4                  ; 0004 SET TEXT INDEX 55C : "Where are you from?{W1}"
 										dc.w $55C
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0
 										dc.b 0
@@ -49,7 +49,7 @@ cs_568F6:           dc.w 4                  ; 0004 SET TEXT INDEX 55C
 										dc.w $23                ; 0023 SET ENTITY FACING 82 2
 										dc.b $82
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082 : "Where are you from?{W1}"
 										dc.w $C082
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -60,7 +60,7 @@ cs_568F6:           dc.w 4                  ; 0004 SET TEXT INDEX 55C
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "{LEADER} came from{N}Grans Island.{W1}"
 										dc.w 7
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 82
 										dc.b $82
@@ -77,7 +77,7 @@ cs_568F6:           dc.w 4                  ; 0004 SET TEXT INDEX 55C
 										dc.b 2
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082 : "Then we could be related.{W1}"
 										dc.w $C082
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -86,7 +86,7 @@ cs_568F6:           dc.w 4                  ; 0004 SET TEXT INDEX 55C
 										dc.b 1
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "What do you mean?{W1}"
 										dc.w 7
 										dc.b $80                ; WAIT 28
 										dc.b $28
@@ -131,21 +131,21 @@ cs_568F6:           dc.w 4                  ; 0004 SET TEXT INDEX 55C
 										dc.w $23                ; 0023 SET ENTITY FACING 82 2
 										dc.b $82
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C082
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C082 : "Our ancestors came to{N}Parmecia to chase after{N}a soldier called Max.{W2}"
 										dc.w $C082
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C082
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C082 : "They lost his trail at the{N}shore and then split into{N}two groups.{W2}"
 										dc.w $C082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082 : "One group went back to{N}Grans by way of Devil's Tail.{W1}"
 										dc.w $C082
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Hmmm...and what happened{N}to Max?{W1}"
 										dc.w 7
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C082
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C082 : "He wasn't found in Parmecia,{N}so maybe he went to Grans.{N}I'm not really sure.{W2}"
 										dc.w $C082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082 : "I think I'll take a nap{N}now.  Bye.{W1}"
 										dc.w $C082
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -166,7 +166,7 @@ cs_568F6:           dc.w 4                  ; 0004 SET TEXT INDEX 55C
 										dc.w 0
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_569BC:           dc.w 4                  ; 0004 SET TEXT INDEX 566
+cs_569BC:           dc.w 4                  ; 0004 SET TEXT INDEX 566 : "(Sniff)...(sniff)...I smell{N}something old....{W1}"
 										dc.w $566
 										dc.w $29                ; 0029 SET ENTITY DEST 7 F 39
 										dc.w 7
@@ -178,12 +178,12 @@ cs_569BC:           dc.w 4                  ; 0004 SET TEXT INDEX 566
 										dc.w $23                ; 0023 SET ENTITY FACING 0 3
 										dc.b 0
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B : "(Sniff)...(sniff)...I smell{N}something old....{W1}"
 										dc.w $C00B
 										dc.w $23                ; 0023 SET ENTITY FACING B 1
 										dc.b $B
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B : "That sword must be really{N}old.  Oh, my!{N}It's the Achilles Sword!{W2}"
 										dc.w $C00B
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT B
 										dc.b $B
@@ -221,9 +221,9 @@ cs_569BC:           dc.w 4                  ; 0004 SET TEXT INDEX 566
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B : "You're an adventurer, right?{N}Don't you need a vehicle?{N}Huh?{W2}"
 										dc.w $C00B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B : "You can get the Ancient{N}Caravan with that sword!{W1}"
 										dc.w $C00B
 										dc.w $29                ; 0029 SET ENTITY DEST 7 F 3A
 										dc.w 7
@@ -232,21 +232,21 @@ cs_569BC:           dc.w 4                  ; 0004 SET TEXT INDEX 566
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "You wouldn't listen to us{N}just a short time ago!{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING B 2
 										dc.b $B
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B : "I was busy and...{W1}"
 										dc.w $C00B
 										dc.w $23                ; 0023 SET ENTITY FACING B 1
 										dc.b $B
 										dc.b 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B : "Let me join you!{W2}"
 										dc.w $C00B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B : "I'm the only one who can{N}drive it!{W2}"
 										dc.w $C00B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B : "You are going to get the{N}Caravan, aren't you?!{W1}"
 										dc.w $C00B
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 56A82
@@ -271,20 +271,20 @@ cs_569BC:           dc.w 4                  ; 0004 SET TEXT INDEX 566
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-word_56A70:         dc.w 4                  ; 0004 SET TEXT INDEX 56F
+word_56A70:         dc.w 4                  ; 0004 SET TEXT INDEX 56F : "You don't know what you'll{N}be missing!{W1}"
 										dc.w $56F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B : "You don't know what you'll{N}be missing!{W1}"
 										dc.w $C00B
 										dc.w $23                ; 0023 SET ENTITY FACING B 3
 										dc.b $B
 										dc.b 3
 										dc.w $B                 ; 000B JUMP 56AD4
 										dc.l word_56AD4         
-word_56A82:         dc.w 4                  ; 0004 SET TEXT INDEX 572
+word_56A82:         dc.w 4                  ; 0004 SET TEXT INDEX 572 : "Great!  Good lad!{W1}"
 										dc.w $572
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B : "Great!  Good lad!{W1}"
 										dc.w $C00B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{CLEAR}{LEADER} decides to take{N}Dr. {NAME;11} with him.{W1}{CLEAR}"
 										dc.w $FFFF
 										dc.w $15                ; 0015 SET ACTSCRIPT B FF 460CE
 										dc.b $B
@@ -304,7 +304,7 @@ word_56A82:         dc.w 4                  ; 0004 SET TEXT INDEX 572
 										dc.b $B
 										dc.b 0
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B : "Let's go!{W1}"
 										dc.w $C00B
 										dc.w $53                ; 0053  0 FFFF
 										dc.w 0
@@ -330,11 +330,11 @@ word_56AD4:         dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 										dc.w 0
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_56AE6:           dc.w 4                  ; 0004 SET TEXT INDEX 570
+cs_56AE6:           dc.w 4                  ; 0004 SET TEXT INDEX 570 : "You again?!{W1}"
 										dc.w $570
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B : "You again?!{W1}"
 										dc.w $C00B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B : "You changed your mind?{N}Hmmm....{W1}"
 										dc.w $C00B
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 56A82
@@ -342,7 +342,7 @@ cs_56AE6:           dc.w 4                  ; 0004 SET TEXT INDEX 570
 										dc.l word_56A82         
 										dc.w $B                 ; 000B JUMP 56A70
 										dc.l word_56A70         
-cs_56B02:           dc.w 4                  ; 0004 SET TEXT INDEX 583
+cs_56B02:           dc.w 4                  ; 0004 SET TEXT INDEX 583 : "Are you the boy who killed{N}the legendary Kraken?{W2}"
 										dc.w $583
 										dc.w $53                ; 0053  C FFFF
 										dc.w $C
@@ -350,11 +350,11 @@ cs_56B02:           dc.w 4                  ; 0004 SET TEXT INDEX 583
 										dc.w $53                ; 0053  0 0
 										dc.w 0
 										dc.w 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C : "Are you the boy who killed{N}the legendary Kraken?{W2}"
 										dc.w $C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C : "I got to Hassan thanks to{N}you.{W2}"
 										dc.w $C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C : "I didn't know this was such a{N}dull town.{W1}"
 										dc.w $C
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -372,7 +372,7 @@ cs_56B02:           dc.w 4                  ; 0004 SET TEXT INDEX 583
 										dc.w $52                ; 0052 RELATED TO TWO ENTITIES C 0
 										dc.w $C
 										dc.w 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C : "Wh...what's that?!{W1}"
 										dc.w $C
 										dc.w $52                ; 0052 RELATED TO TWO ENTITIES 7 C
 										dc.w 7
@@ -380,22 +380,22 @@ cs_56B02:           dc.w 4                  ; 0004 SET TEXT INDEX 583
 										dc.w $52                ; 0052 RELATED TO TWO ENTITIES C 7
 										dc.w $C
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "It's the Caravan...an ancient{N}vehicle found in the shrine.{W1}"
 										dc.w $C007
 										dc.b $80                ; WAIT 14
 										dc.b $14
 										dc.w $52                ; 0052 RELATED TO TWO ENTITIES C 0
 										dc.w $C
 										dc.w 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C : "I love interesting{N}things like that!{W2}"
 										dc.w $C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C : "Wow!  You found it?!{W2}"
 										dc.w $C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C : "I want to go with you to{N}see some more interesting{N}things!{W1}"
 										dc.w $C
 										dc.w 8                  ; 0008 JOIN FORCE C
 										dc.w $C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C : "Adventure!{N}Yo Ho!  Let's go!{W1}"
 										dc.w $C
 										dc.w $15                ; 0015 SET ACTSCRIPT C FF 45E44
 										dc.b $C

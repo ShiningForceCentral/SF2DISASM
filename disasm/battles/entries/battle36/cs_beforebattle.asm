@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle36\cs_beforebattle :
 ; Cutscene before battle 36
-bbcs_36:            dc.w 4                  ; 0004 SET TEXT INDEX B82
+bbcs_36:            dc.w 4                  ; 0004 SET TEXT INDEX B82 : "You're early!{N}{W2}"
 										dc.w $B82
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 F 0
 										dc.w $35
@@ -72,16 +72,16 @@ word_4D8D6:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_BATTLE_THEME
 										dc.b 3
 										dc.b 4
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "You're early!{N}{W2}"
 										dc.w $80
 										dc.w $32                ; 0032 SET CAMERA DEST A E
 										dc.w $A
 										dc.w $E
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Darn you, Granseal swine!{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "But, don't worry.  I just{N}finished my preparations.{N}Yes...everything's ready.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "It's show time!{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 82 0 45FB2
 										dc.b $82
@@ -107,12 +107,12 @@ word_4D8D6:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_BATTLE_THEME
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Sir Astral, why is he smiling?{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 2
 										dc.b $1F
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "He believes this is the place{N}where we will die....{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
@@ -120,7 +120,7 @@ word_4D8D6:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_BATTLE_THEME
 										dc.w $23                ; 0023 SET ENTITY FACING 0 1
 										dc.b 0
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, be careful!{W1}"
 										dc.w $1F
 										dc.w $26                ; 0026 MAKE ENTITY NOD 0
 										dc.w 0

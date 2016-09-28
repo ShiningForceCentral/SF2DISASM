@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle38\cs_beforebattle :
 ; Cutscene before battle 38
-bbcs_38:            dc.w 4                  ; 0004 SET TEXT INDEX BBB
+bbcs_38:            dc.w 4                  ; 0004 SET TEXT INDEX BBB : "Stop!{W1}"
 										dc.w $BBB
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 42 9 6
 										dc.w $42
@@ -81,14 +81,14 @@ word_4DDFE:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_BATTLE_THEME
 										dc.b 3
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Stop!{W1}"
 										dc.w $80
 										dc.w $32                ; 0032 SET CAMERA DEST 9 13
 										dc.w 9
 										dc.w $13
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Finally, you've arrived.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "It was a mistake to{N}underestimate you.{W2}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 1 2
 										dc.b $80
@@ -96,17 +96,17 @@ word_4DDFE:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_BATTLE_THEME
 										dc.b 1
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "But, the game is not over.{N}At the risk of my life,{N}you'll proceed no further!{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C01F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C01F : "Geshp is serious.{N}He finally considers us{N}worthy opponents.{W2}"
 										dc.w $C01F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "{LEADER}, be careful.{N}We mustn't underrate his{N}power.{W1}"
 										dc.w $C01F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "You're right, Astral!{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Zeon doesn't trust me,{N}thanks to you!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "This is my last chance.{N}I can't see him again 'til I{N}bring him your head.{W1}"
 										dc.w $80
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 4
 										dc.w 4

@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle28\cs_beforebattle :
 ; Cutscene before battle 28
-bbcs_28:            dc.w 4                  ; 0004 SET TEXT INDEX A65
+bbcs_28:            dc.w 4                  ; 0004 SET TEXT INDEX A65 : "Wow, look at that?{W1}"
 										dc.w $A65
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 2F 0 4
 										dc.w $2F
@@ -79,7 +79,7 @@ bbcs_28:            dc.w 4                  ; 0004 SET TEXT INDEX A65
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 0
 										dc.b $1F
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Wow, look at that?{W1}"
 										dc.w $1F
 										dc.w $32                ; 0032 SET CAMERA DEST 7 B
 										dc.w 7
@@ -107,9 +107,9 @@ bbcs_28:            dc.w 4                  ; 0004 SET TEXT INDEX A65
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Those monsters are eating{N}the bridge.{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Help!  Help me!{W1}"
 										dc.w $81
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 0 45E44
 										dc.b 0
@@ -210,9 +210,9 @@ bbcs_28:            dc.w 4                  ; 0004 SET TEXT INDEX A65
 										dc.b 0
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 0
 										dc.w 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "Look!{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "She's stranded on the{N}bridge.{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
@@ -222,11 +222,11 @@ bbcs_28:            dc.w 4                  ; 0004 SET TEXT INDEX A65
 										dc.w $32                ; 0032 SET CAMERA DEST 7 15
 										dc.w 7
 										dc.w $15
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Get away from the bridge{N}before it falls into the{N}river!{W1}"
 										dc.w 7
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "I sprained my ankle!{N}Please help me!{W2}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "I can't stand up!{W1}"
 										dc.w $81
 										dc.w $32                ; 0032 SET CAMERA DEST 0 6
 										dc.w 0
@@ -248,7 +248,7 @@ bbcs_28:            dc.w 4                  ; 0004 SET TEXT INDEX A65
 										dc.w 0
 										dc.w $27                ; 0027 MAKE ENTITY SHAKE HEAD 0
 										dc.w 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, defeat all the{N}monsters!  Hurry!{W1}"
 										dc.w $1F
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 0 45E44
 										dc.b 7

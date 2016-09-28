@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle42\cs_beforebattle :
 ; Cutscene before battle 42
-bbcs_42:            dc.w 4                  ; 0004 SET TEXT INDEX C10
+bbcs_42:            dc.w 4                  ; 0004 SET TEXT INDEX C10 : "I can't see!  Is anybody{N}there?{W1}"
 										dc.w $C10
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 3B 8 1D
 										dc.w $3B
@@ -78,9 +78,9 @@ word_4EDE8:         dc.w $1C                ; 001C STOP ENTITY ANIM 81
 										dc.b 1
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "I can't see!  Is anybody{N}there?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Welcome...{W1}"
 										dc.w $C080
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 0 45E44
 										dc.b 0
@@ -104,12 +104,12 @@ word_4EDE8:         dc.w $1C                ; 001C STOP ENTITY ANIM 81
 										dc.b 1
 										dc.b 3
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "King Galam?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Is it too dark?{N}Let there be light!{W1}"
 										dc.w $C080
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Is that better?{W1}"
 										dc.w $C080
 										dc.w $2D                ; 002D MOVE ENTITY 0 0 1 2
 										dc.b 0
@@ -125,7 +125,7 @@ word_4EDE8:         dc.w $1C                ; 001C STOP ENTITY ANIM 81
 										dc.w $8080
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 1F
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "King Galam!{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 0 0 2 1
 										dc.b 0
@@ -148,20 +148,20 @@ word_4EDE8:         dc.w $1C                ; 001C STOP ENTITY ANIM 81
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "Oh, Princess Elis is here!{W1}"
 										dc.w $1C
 										dc.w $32                ; 0032 SET CAMERA DEST 8 D
 										dc.w 8
 										dc.w $D
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Nice to see you again,{N}Astral.  I see {NAME;28} is{N}with you.{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Where's Zeon?{W1}"
 										dc.w $1F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "He has not revived fully yet.{W2}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "So I came to welcome you for{N}him.{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "She isn't moving!{N}Is she dead?{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
@@ -171,17 +171,17 @@ word_4EDE8:         dc.w $1C                ; 001C STOP ENTITY ANIM 81
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "We haven't killed her yet.{N}She will be the first{N}sacrifice for King Zeon.{W1}"
 										dc.w $C080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "What?!{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Zeon said, you'd return her{N}in exchange for the jewel!{W1}"
 										dc.w $1F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "Ha, ha, ha!  He lied.{W2}"
 										dc.w $C080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "You killed our greater{N}devils.{N}I can't allow this to go on.{W2}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "You shall never see Zeon!{N}I'll kill you before that!{W1}"
 										dc.w $C080
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 3
 										dc.w 3

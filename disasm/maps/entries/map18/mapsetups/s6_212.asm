@@ -23,7 +23,7 @@ loc_612A8:
 
 	; End of function ms_map18_flag212_InitFunction
 
-cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61
+cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61 : "{LEADER} defeated Red{N}Baron too?  Is that what{N}you said, Geshp?{W1}"
 										dc.w $E61
 										dc.w $48                ; 0048 LOAD MAP 3B 8 4
 										dc.w $3B
@@ -50,24 +50,24 @@ cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61
 										dc.b $3F
 										dc.b 3
 										dc.w $4A                ; 004A FADE IN FROM BLACK HALF
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "{LEADER} defeated Red{N}Baron too?  Is that what{N}you said, Geshp?{W1}"
 										dc.w $8082
 										dc.w $26                ; 0026 MAKE ENTITY NOD 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Yes, sir...I'm sorry.{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8082
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8082 : "Once again, my minions have{N}failed me.{W2}"
 										dc.w $8082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Are my soldiers that weak?{W1}"
 										dc.w $8082
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
 										dc.w $50                ; 0050 SET ENTITY SIZE 80 15 
 										dc.w $80
 										dc.w $15
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Yes...oh, no!  I mean, they{N}were strong enough.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "But {LEADER} and his force{N}were smarter.{W1}"
 										dc.w $80
 										dc.w 5                  ; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
 										dc.w $5D
@@ -83,9 +83,9 @@ cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61
 										dc.b $1E
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 0
 										dc.w 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8082
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8082 : "No more excuses!{W2}"
 										dc.w $8082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "This is your last chance.{N}Kill {LEADER} this time,{N}or I'll kill you!{W1}"
 										dc.w $8082
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b $80
@@ -108,11 +108,11 @@ cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61
 										dc.w $8080
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Ah...yes, sir.  I'll kill{N}{LEADER} this time.{N}I stake my life on it.{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "Bring the Jewel of Evil back{N}to me!{W1}"
 										dc.w $8082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Yes, sir!{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
@@ -185,7 +185,7 @@ cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61
 										dc.w $81
 										dc.b $80                ; WAIT 32
 										dc.b $32
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "You were right, Odd Eye.{W1}"
 										dc.w $8082
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 1 1
 										dc.b $81
@@ -193,15 +193,15 @@ cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Of course.{W1}"
 										dc.w $81
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8082
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8082 : "I can't trust Geshp anymore.{W2}"
 										dc.w $8082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8082 : "If he fails, you must battle{N}{LEADER}.{W1}"
 										dc.w $8082
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 81
 										dc.w $81
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "You want me to kill{N}{LEADER}?{W2}"
 										dc.w $81
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 81
 										dc.b $81
@@ -222,7 +222,7 @@ cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61
 										dc.w $8080
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "He's probably much stronger{N}now.{N}Hmmm, sounds interesting.{W2}"
 										dc.w $81
 										dc.w $15                ; 0015 SET ACTSCRIPT 81 FF 460CE
 										dc.b $81
@@ -231,7 +231,7 @@ cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61
 										dc.w $23                ; 0023 SET ENTITY FACING 81 1
 										dc.b $81
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "I'll do it.  If this comes{N}to pass, it will be his final{N}battle.{W1}"
 										dc.w $81
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -256,7 +256,7 @@ loc_61434:
 
 	; End of function sub_61426
 
-cs_6143C:           dc.w 4                  ; 0004 SET TEXT INDEX 36F
+cs_6143C:           dc.w 4                  ; 0004 SET TEXT INDEX 36F : "Sorry, {LEADER}.{N}I'm going back to Roft.{N}I'm worried about Petro.{W1}"
 										dc.w $36F
 										dc.w $15                ; 0015 SET ACTSCRIPT 1A FF 460CE
 										dc.b $1A
@@ -270,7 +270,7 @@ cs_6143C:           dc.w 4                  ; 0004 SET TEXT INDEX 36F
 										dc.b 0
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "Sorry, {LEADER}.{N}I'm going back to Roft.{N}I'm worried about Petro.{W1}"
 										dc.w $1A
 										dc.b $80                ; WAIT 1E
 										dc.b $1E

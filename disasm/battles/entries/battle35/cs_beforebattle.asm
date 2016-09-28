@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle35\cs_beforebattle :
 ; Cutscene before battle 35
-bbcs_35:            dc.w 4                  ; 0004 SET TEXT INDEX B76
+bbcs_35:            dc.w 4                  ; 0004 SET TEXT INDEX B76 : "You're still alive?{W1}"
 										dc.w $B76
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 4C 25 5
 										dc.w $4C
@@ -55,7 +55,7 @@ bbcs_35:            dc.w 4                  ; 0004 SET TEXT INDEX B76
 word_4D728:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 										dc.w $30
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "You're still alive?{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 0 45E44
 										dc.b 0
@@ -69,7 +69,7 @@ word_4D728:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b $1F
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "Geshp!{W1}"
 										dc.w $C01F
 										dc.w $32                ; 0032 SET CAMERA DEST 16 B
 										dc.w $16
@@ -77,19 +77,19 @@ word_4D728:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $23                ; 0023 SET ENTITY FACING 80 0
 										dc.b $80
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Unbelievable!{N}You really are persistent.{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007 : "We'll never stop!{W2}"
 										dc.w $C007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "We will not die until we{N}destroy all of you.{W1}"
 										dc.w $C007
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C01F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C01F : "{LEADER}, kill him!{W2}"
 										dc.w $C01F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "We have to kill him now!{W1}"
 										dc.w $C01F
 										dc.b $80                ; WAIT 28
 										dc.b $28
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I'm very sorry, but I have{N}to go.{W1}"
 										dc.w $80
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 80
 										dc.w $80
@@ -148,7 +148,7 @@ word_4D728:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Don't let them advance!{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 81 0 45E44
 										dc.b $81
@@ -198,7 +198,7 @@ word_4D728:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b 2
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "He escaped again!{W1}"
 										dc.w 7
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 2 1
 										dc.b $1F
@@ -206,9 +206,9 @@ word_4D728:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b 2
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "Geshp sure is a tricky{N}devil.{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "After him, now!{W1}"
 										dc.w $1F
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_4D832:         dc.w $2B

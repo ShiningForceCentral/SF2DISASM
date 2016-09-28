@@ -24,7 +24,7 @@ cs_5E0EE:           dc.w $2B                ; 002B  1A 4 C 1 FF
 										dc.b 1
 										dc.b $FF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5E0F8:           dc.w 4                  ; 0004 SET TEXT INDEX 805
+cs_5E0F8:           dc.w 4                  ; 0004 SET TEXT INDEX 805 : "Well, you're not from{N}Pacalon, are you?{W1}"
 										dc.w $805
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 18
 										dc.w $18
@@ -54,23 +54,23 @@ cs_5E0F8:           dc.w 4                  ; 0004 SET TEXT INDEX 805
 										dc.w $23                ; 0023 SET ENTITY FACING 18 2
 										dc.b $18
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "Well, you're not from{N}Pacalon, are you?{W1}"
 										dc.w $18
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "We're from Granseal,{N}Mr. {NAME;24}.{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "Granseal...I've never heard{N}of it....{W1}"
 										dc.w $18
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "It's near Ribble in South{N}Parmecia.{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "Near my home?{N}Are you sure?{W1}"
 										dc.w $18
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "We settled there just over{N}a year ago.{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "The blocked tunnel is open{N}now?{W1}"
 										dc.w $18
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Yes.  Now you can go back{N}home.{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "I've been waiting for this{N}day!{W1}"
 										dc.w $18
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 3 1
 										dc.b $1F
@@ -113,14 +113,14 @@ cs_5E0F8:           dc.w 4                  ; 0004 SET TEXT INDEX 805
 										dc.b 0
 										dc.b $80                ; WAIT A
 										dc.b $A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "By the way, why did you{N}come to North Parmecia?{W1}"
 										dc.w $18
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "To defeat devils!{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 18 3
 										dc.b $18
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "Really?{W1}"
 										dc.w $18
 										dc.w $2D                ; 002D MOVE ENTITY 0 FF 0 1
 										dc.b 0
@@ -143,9 +143,9 @@ cs_5E0F8:           dc.w 4                  ; 0004 SET TEXT INDEX 805
 										dc.w $23                ; 0023 SET ENTITY FACING 18 0
 										dc.b $18
 										dc.b 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "We don't want another{N}tragedy like Moun.{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "We're going to Grans Island{N}to kill the King of the{N}Devils.{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 18 2
 										dc.b $18
@@ -153,31 +153,31 @@ cs_5E0F8:           dc.w 4                  ; 0004 SET TEXT INDEX 805
 										dc.w $23                ; 0023 SET ENTITY FACING 18 0
 										dc.b $18
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "Hmmm....{W2}"
 										dc.w $18
 										dc.w $23                ; 0023 SET ENTITY FACING 18 1
 										dc.b $18
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "I can't go back now!{W1}"
 										dc.w $18
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 1F
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "But...your family...{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 18 0
 										dc.b $18
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "I know.  I'll miss them.{W2}"
 										dc.w $18
 										dc.w $23                ; 0023 SET ENTITY FACING 18 2
 										dc.b $18
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "But, I believe they'll{N}understand.{W2}"
 										dc.w $18
 										dc.w $23                ; 0023 SET ENTITY FACING 18 0
 										dc.b $18
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 18 : "Let me go with you!{W1}"
 										dc.w $18
 										dc.w 8                  ; 0008 JOIN FORCE 18
 										dc.w $18
@@ -199,20 +199,20 @@ cs_5E0F8:           dc.w 4                  ; 0004 SET TEXT INDEX 805
 										dc.b $C
 										dc.b 1
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5E20A:           dc.w 4                  ; 0004 SET TEXT INDEX 819
+cs_5E20A:           dc.w 4                  ; 0004 SET TEXT INDEX 819 : "I happened to overhear your{N}conversation with {NAME;24}.{W2}"
 										dc.w $819
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "I happened to overhear your{N}conversation with {NAME;24}.{W2}"
 										dc.w $1A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "I want to go to Grans, too.{W1}"
 										dc.w $1A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "They decide to take the{N}ancient soldier {NAME;26}{N}with them.{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 1A 3
 										dc.b $1A
 										dc.b 3
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 1A
 										dc.w $1A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "There is no time to waste!{W1}"
 										dc.w $1A
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY 1A
 										dc.w $1A

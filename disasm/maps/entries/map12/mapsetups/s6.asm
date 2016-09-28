@@ -24,7 +24,7 @@ return_57D20:
 
 	; End of function ms_map12_InitFunction
 
-cs_57D22:           dc.w 4                  ; 0004 SET TEXT INDEX C7D
+cs_57D22:           dc.w 4                  ; 0004 SET TEXT INDEX C7D : "Stop!{W1}"
 										dc.w $C7D
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 										dc.w $30
@@ -74,7 +74,7 @@ cs_57D22:           dc.w 4                  ; 0004 SET TEXT INDEX C7D
 										dc.b 1
 										dc.b 5
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Stop!{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT A
 										dc.b $A
@@ -136,16 +136,16 @@ cs_57D22:           dc.w 4                  ; 0004 SET TEXT INDEX C7D
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Who said that?{W1}"
 										dc.w $8007
 										dc.w $32                ; 0032 SET CAMERA DEST 7 5
 										dc.w 7
 										dc.w 5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Wow, what a huge guy!{W1}"
 										dc.w $8007
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Leave here!{N}I'll attack you if you don't!{W1}"
 										dc.w $80
 										dc.w $32                ; 0032 SET CAMERA DEST 7 15
 										dc.w 7
@@ -165,15 +165,15 @@ cs_57D22:           dc.w 4                  ; 0004 SET TEXT INDEX C7D
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
 										dc.b 7
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8007
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8007 : "Attack us?!  {LEADER},{N}let's get out of here!{W2}"
 										dc.w $8007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "We don't want to fight him!{W1}"
 										dc.w $8007
 										dc.b $80                ; WAIT 14
 										dc.b $14
 										dc.w $26                ; 0026 MAKE ENTITY NOD 0
 										dc.w 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "OK, hurry!{W1}"
 										dc.w $8007
 										dc.w $2D                ; 002D MOVE ENTITY 0 0 3 5
 										dc.b 0

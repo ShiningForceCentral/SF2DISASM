@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle08\cs_beforebattle :
 ; Cutscene before battle 8
-bbcs_08:            dc.w 4                  ; 0004 SET TEXT INDEX 99D
+bbcs_08:            dc.w 4                  ; 0004 SET TEXT INDEX 99D : "It's over there!{N}There he is!{W1}"
 										dc.w $99D
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 48 1 2E
 										dc.w $48
@@ -37,7 +37,7 @@ bbcs_08:            dc.w 4                  ; 0004 SET TEXT INDEX 99D
 word_4A994:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_MAIN_THEME
 										dc.w 1
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "The game will be suspended.{N}OK?"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 0 2
 										dc.b $80
@@ -56,7 +56,7 @@ word_4A994:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_MAIN_THEME
 										dc.w $8080
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 81
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "....{W1}"
 										dc.w $80
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_ENEMY_ATTACK
 										dc.w 5
@@ -89,18 +89,18 @@ word_4A994:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_MAIN_THEME
 										dc.b $C
 										dc.b $25
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082 : "{LEADER}, are you ready{N}for battle?{D3}"
 										dc.w $C082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082 : "Do you need more preparations?"
 										dc.w $C082
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C082
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C082 : "Did you change your mind?{W2}"
 										dc.w $C082
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082 : "Be careful.{D1}{N}Haste makes waste.{D1}"
 										dc.w $C082
 										dc.w $23                ; 0023 SET ENTITY FACING 82 1
 										dc.b $82
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C082 : "{LEADER}, you had better{N}take a rest now.{D3}"
 										dc.w $C082
 										dc.w $15                ; 0015 SET ACTSCRIPT 83 0 45E44
 										dc.b $83

@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle39\cs_beforebattle :
 ; Cutscene before battle 39
-bbcs_39:            dc.w 4                  ; 0004 SET TEXT INDEX BD5
+bbcs_39:            dc.w 4                  ; 0004 SET TEXT INDEX BD5 : "I just heard that Geshp{N}lost.{W2}"
 										dc.w $BD5
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 42 3 5
 										dc.w $42
@@ -50,9 +50,9 @@ word_4E41A:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $32                ; 0032 SET CAMERA DEST 3 12
 										dc.w 3
 										dc.w $12
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "I just heard that Geshp{N}lost.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "All greater devils have been{N}defeated except for Odd Eye.{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 3 1
 										dc.b $80
@@ -60,9 +60,9 @@ word_4E41A:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "This is a good chance for us{N}to become greater devils!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I'm sure Zeon will promote{N}us if we can get the jewel.{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 81 0 45E44
 										dc.b $81
@@ -88,7 +88,7 @@ word_4E41A:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "Look over there!{W1}"
 										dc.w $83
 										dc.w $2D                ; 002D MOVE ENTITY 84 FF 1 1
 										dc.b $84
@@ -107,7 +107,7 @@ word_4E41A:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $32                ; 0032 SET CAMERA DEST 3 12
 										dc.w 3
 										dc.w $12
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "They're coming!{W1}"
 										dc.w $83
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 80
 										dc.b $80
@@ -127,7 +127,7 @@ word_4E41A:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Excellent!{N}Welcome to your graveyard!{W1}"
 										dc.w $80
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_4E4AC:         dc.w 8

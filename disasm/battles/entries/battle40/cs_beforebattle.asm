@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle40\cs_beforebattle :
 ; Cutscene before battle 40
-bbcs_40:            dc.w 4                  ; 0004 SET TEXT INDEX BDC
+bbcs_40:            dc.w 4                  ; 0004 SET TEXT INDEX BDC : "{LEADER}, you're finally{N}here.{W1}"
 										dc.w $BDC
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 36 B 22
 										dc.w $36
@@ -104,7 +104,7 @@ word_4E544:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.b 1
 										dc.b 3
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "{LEADER}, you're finally{N}here.{W1}"
 										dc.w $C081
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 0 45E44
 										dc.b 0
@@ -159,39 +159,39 @@ word_4E544:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.w 2
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_BATTLE_THEME_3
 										dc.w $21
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Is that...?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Did you forget about me,{N}{LEADER} and {NAME;7}!{W1}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Oddler, are you Odd Eye?{N}Zalbard said...{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Yes, I am he.{W1}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "You're the leader of the Devil{N}Army who attacked Bedoe...{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Yes I am, Sir Astral.{W1}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "How do you know me?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "{LEADER} told me about{N}you repeatedly.{W1}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "What do YOU want?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Don't talk to me like that.{N}I'm very sad.{W1}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Sad?{N}You've got to be joking!{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 81 2
 										dc.b $81
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Well, yes I am.{N}I'm really quite evil.{W1}"
 										dc.w $C081
 										dc.w $23                ; 0023 SET ENTITY FACING 81 3
 										dc.b $81
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Don't you think so, Red{N}Baron?{W1}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "Uhh...(shiver).{W1}"
 										dc.w $1C
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 3 1
 										dc.b $81
@@ -199,25 +199,25 @@ word_4E544:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081 : "Anyway, I came here to{N}deliver an ultimatum.{W2}"
 										dc.w $C081
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081 : "Think long and well before{N}answering me.{W2}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Leave the jewel, your{N}weapons, and your items{N}here...or DIE!{W1}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "That means...we don't have{N}to fight him.{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "True, but we can't take the{N}easy way out.  We mustn't{N}give him the jewel.{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "You know how strong I am.{N}I think you had better{N}accept the offer.{W1}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 0
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 0 : "Hmmm....{W1}"
 										dc.w 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Oh, what should we do?!{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "We have to fight!{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Times up!  We need space{N}to battle.{W1}"
 										dc.w $C081
 										dc.w $18                ; 0018 FLASH ENTITY WHITE 81 1E
 										dc.w $81
@@ -522,7 +522,7 @@ word_4E544:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.w $2C00
 										dc.w $B1D
 										dc.w $B06
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "I'm very sorry, {LEADER},{N}but I must kill you!{W1}"
 										dc.w $C081
 										dc.w $32                ; 0032 SET CAMERA DEST B 1F
 										dc.w $B
@@ -533,7 +533,7 @@ word_4E544:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.w $23                ; 0023 SET ENTITY FACING 0 2
 										dc.b 0
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "{LEADER}, are we really{N}going to fight Oddler?{W1}"
 										dc.w 7
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 2 1
 										dc.b $1F
@@ -547,7 +547,7 @@ word_4E544:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.w $23                ; 0023 SET ENTITY FACING 1C 0
 										dc.b $1C
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "That's enough out of you!{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 0 1
 										dc.b $1F
@@ -561,7 +561,7 @@ word_4E544:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.w $23                ; 0023 SET ENTITY FACING 0 3
 										dc.b 0
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, let's do it!{W1}"
 										dc.w $1F
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 0 45E44
 										dc.b 7

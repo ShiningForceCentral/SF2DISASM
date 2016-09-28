@@ -17,7 +17,7 @@ return_5C3D6:
 
 	; End of function ms_map51_InitFunction
 
-cs_5C3D8:           dc.w 4                  ; 0004 SET TEXT INDEX 9F6
+cs_5C3D8:           dc.w 4                  ; 0004 SET TEXT INDEX 9F6 : "It's coming from this{N}direction.{W1}"
 										dc.w $9F6
 										dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 460CE
 										dc.b $1F
@@ -60,7 +60,7 @@ cs_5C3D8:           dc.w 4                  ; 0004 SET TEXT INDEX 9F6
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "It's coming from this{N}direction.{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 1 2
 										dc.b 7
@@ -68,18 +68,18 @@ cs_5C3D8:           dc.w 4                  ; 0004 SET TEXT INDEX 9F6
 										dc.b 1
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Look!  Over there!{W1}"
 										dc.w 7
 										dc.w $32                ; 0032 SET CAMERA DEST 2 2
 										dc.w 2
 										dc.w 2
 										dc.b $80                ; WAIT 32
 										dc.b $32
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00D
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00D : "Help me!{W1}"
 										dc.w $C00D
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "An...elven boy?{N}He's stuck in the pond.{W2}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "He must be very tired.{N}Let's pull him out.{W1}"
 										dc.w 7
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 0
 										dc.w 0

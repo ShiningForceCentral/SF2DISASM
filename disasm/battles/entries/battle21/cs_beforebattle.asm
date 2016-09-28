@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle21\cs_beforebattle :
 ; Cutscene before battle 21
-bbcs_21:            dc.w 4                  ; 0004 SET TEXT INDEX A10
+bbcs_21:            dc.w 4                  ; 0004 SET TEXT INDEX A10 : "(Sniff, sniff)...I smell{N}more invaders from the east.{W2}"
 										dc.w $A10
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 43 5 12
 										dc.w $43
@@ -39,9 +39,9 @@ bbcs_21:            dc.w 4                  ; 0004 SET TEXT INDEX A10
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 										dc.w $30
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "(Sniff, sniff)...I smell{N}more invaders from the east.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "This is the territory of{N}Mr. Creed.{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 0
 										dc.b $80
@@ -57,7 +57,7 @@ bbcs_21:            dc.w 4                  ; 0004 SET TEXT INDEX A10
 										dc.w $32                ; 0032 SET CAMERA DEST 17 12
 										dc.w $17
 										dc.w $12
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Go away!{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 2 2
 										dc.b 7
@@ -65,9 +65,9 @@ bbcs_21:            dc.w 4                  ; 0004 SET TEXT INDEX A10
 										dc.b 2
 										dc.b 2
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "But we have to see him.{W2}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Please let us pass!{W1}"
 										dc.w 7
 										dc.w $32                ; 0032 SET CAMERA DEST 5 12
 										dc.w 5
@@ -78,7 +78,7 @@ bbcs_21:            dc.w 4                  ; 0004 SET TEXT INDEX A10
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "No!  Leave now!{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 32
 										dc.b $32
@@ -103,7 +103,7 @@ bbcs_21:            dc.w 4                  ; 0004 SET TEXT INDEX A10
 										dc.b 0
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Never mind.  Get 'em boys!{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 83 0 45E44
 										dc.b $83

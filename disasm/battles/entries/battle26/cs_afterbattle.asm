@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle26\cs_afterbattle :
 ; Cutscene after battle 26
-abcs_battle26:      dc.w 4                  ; 0004 SET TEXT INDEX A4D
+abcs_battle26:      dc.w 4                  ; 0004 SET TEXT INDEX A4D : "Is he alright?{W1}"
 										dc.w $A4D
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 48 D B
 										dc.w $48
@@ -63,9 +63,9 @@ abcs_battle26:      dc.w 4                  ; 0004 SET TEXT INDEX A4D
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Is he alright?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "We have to save him before{N}he is possessed by an evil...{W1}"
 										dc.w $1F
 										dc.w $18                ; 0018 FLASH ENTITY WHITE 1F 3C
 										dc.w $1F
@@ -133,7 +133,7 @@ abcs_battle26:      dc.w 4                  ; 0004 SET TEXT INDEX A4D
 										dc.b 3
 										dc.w $27                ; 0027 MAKE ENTITY SHAKE HEAD 13
 										dc.w $13
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "What happened?{W2}"
 										dc.w $C013
 										dc.w $2D                ; 002D MOVE ENTITY 13 FF 1 1
 										dc.b $13
@@ -145,7 +145,7 @@ abcs_battle26:      dc.w 4                  ; 0004 SET TEXT INDEX A4D
 										dc.b $13
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "Ah...I was almost possessed{N}by that devil.{W1}"
 										dc.w $C013
 										dc.w $2D                ; 002D MOVE ENTITY 13 FF 3 2
 										dc.b $13
@@ -153,17 +153,17 @@ abcs_battle26:      dc.w 4                  ; 0004 SET TEXT INDEX A4D
 										dc.b 3
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "Thank you.{N}How can I repay you for{N}your kindness?{W1}"
 										dc.w $C013
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "Are you OK now?  Good.{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "May I ask you, where were{N}you going in such a wounded{N}state?{W1}"
 										dc.w $1F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C013
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C013 : "Pacalon, my country.  We{N}are fighting against the{N}devils.{W2}"
 										dc.w $C013
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C013
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C013 : "But, no country in North{N}Parmecia has enough power{N}to resist them.{W2}"
 										dc.w $C013
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "So, I was heading south to{N}find some allies.{W1}"
 										dc.w $C013
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 1 1
 										dc.b 7
@@ -174,41 +174,41 @@ abcs_battle26:      dc.w 4                  ; 0004 SET TEXT INDEX A4D
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "You don't have to go any{N}further.{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 13 2
 										dc.b $13
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "Then, you're from South{N}Parmecia?{W1}"
 										dc.w $C013
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Yes, Granseal.{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 13 3
 										dc.b $13
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "Oh, how lucky!  Please{N}come with me to Pacalon!{W1}"
 										dc.w $C013
 										dc.w $26                ; 0026 MAKE ENTITY NOD 13
 										dc.w $13
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "But, we have to go to{N}Tristan.{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 13 2
 										dc.b $13
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C013
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C013 : "Oh, please...I can't return{N}to Pacalon without allies.{W2}"
 										dc.w $C013
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C013
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C013 : "Maybe, when you're done...{W2}"
 										dc.w $C013
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "OK, I'll go with you.{W1}"
 										dc.w $C013
 										dc.w 8                  ; 0008 JOIN FORCE 13
 										dc.w $13
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "But, you're injured{N}Mr. {NAME;19}.{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 13 3
 										dc.b $13
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "No problem.  I don't know{N}why, but I'm much better.{W1}"
 										dc.w $C013
 										dc.w $15                ; 0015 SET ACTSCRIPT 13 0 45FBC
 										dc.b $13
@@ -233,7 +233,7 @@ abcs_battle26:      dc.w 4                  ; 0004 SET TEXT INDEX A4D
 										dc.l eas_Init           
 										dc.w $1B                ; 001B START ENTITY ANIM 13
 										dc.w $13
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C013 : "Let's go to Pacalon.{W1}"
 										dc.w $C013
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY 13
 										dc.w $13

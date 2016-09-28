@@ -123,7 +123,7 @@ return_53814:
 
 	; End of function sub_537FE
 
-cs_53816:           dc.w 4                  ; 0004 SET TEXT INDEX 234
+cs_53816:           dc.w 4                  ; 0004 SET TEXT INDEX 234 : "(Scream!)...who are you?!{N}Get out of here!{W2}"
 										dc.w $234
 										dc.w $15                ; 0015 SET ACTSCRIPT 87 FF 45E44
 										dc.b $87
@@ -132,8 +132,8 @@ cs_53816:           dc.w 4                  ; 0004 SET TEXT INDEX 234
 										dc.w $23                ; 0023 SET ENTITY FACING 87 2
 										dc.b $87
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87 : "(Scream!)...who are you?!{N}Get out of here!{W2}"
 										dc.w $87
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87 : "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
 										dc.w $87
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

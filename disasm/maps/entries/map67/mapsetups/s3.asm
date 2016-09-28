@@ -70,7 +70,7 @@ sub_4FB58:
 
 	; End of function sub_4FB58
 
-cs_4FB64:           dc.w 4                  ; 0004 SET TEXT INDEX 9EF
+cs_4FB64:           dc.w 4                  ; 0004 SET TEXT INDEX 9EF : "Wait!{W1}"
 										dc.w $9EF
 										dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 460CE
 										dc.b $1F
@@ -88,7 +88,7 @@ cs_4FB64:           dc.w 4                  ; 0004 SET TEXT INDEX 9EF
 										dc.b $1F
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Wait!{W1}"
 										dc.w $1F
 										dc.w $29                ; 0029 SET ENTITY DEST 1F 3C 1B
 										dc.w $1F
@@ -112,7 +112,7 @@ cs_4FB64:           dc.w 4                  ; 0004 SET TEXT INDEX 9EF
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "What's wrong, Oddler?{W1}"
 										dc.w $C007
 										dc.w $29                ; 0029 SET ENTITY DEST 0 3C 1A
 										dc.w 0
@@ -124,9 +124,9 @@ cs_4FB64:           dc.w 4                  ; 0004 SET TEXT INDEX 9EF
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}...{NAME;7}...can{N}you hear that?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "Hear what?{W1}"
 										dc.w $C007
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -139,7 +139,7 @@ cs_4FB64:           dc.w 4                  ; 0004 SET TEXT INDEX 9EF
 										dc.w $23                ; 0023 SET ENTITY FACING 7 3
 										dc.b 7
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "I don't hear anything.{W1}"
 										dc.w $C007
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 3 1
 										dc.b $1F
@@ -155,9 +155,9 @@ cs_4FB64:           dc.w 4                  ; 0004 SET TEXT INDEX 9EF
 										dc.l eas_461B6          
 										dc.b $80                ; WAIT 78
 										dc.b $78
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "Somebody is crying for help...{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "from...over here.{W1}"
 										dc.w $1F
 										dc.w $29                ; 0029 SET ENTITY DEST 1F 39 19
 										dc.w $1F
@@ -191,7 +191,7 @@ cs_4FB64:           dc.w 4                  ; 0004 SET TEXT INDEX 9EF
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 330B1601
 										dc.l $330B1601
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_4FC32:           dc.w 4                  ; 0004 SET TEXT INDEX A21
+cs_4FC32:           dc.w 4                  ; 0004 SET TEXT INDEX A21 : "Fairy said, move this rock{N}in this manner, and...{W1}"
 										dc.w $A21
 										dc.w $2B                ; 002B  D 39 19 1 FF
 										dc.w $D
@@ -218,7 +218,7 @@ cs_4FC32:           dc.w 4                  ; 0004 SET TEXT INDEX A21
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX D
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX D : "Fairy said, move this rock{N}in this manner, and...{W1}"
 										dc.w $D
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -237,7 +237,7 @@ cs_4FC32:           dc.w 4                  ; 0004 SET TEXT INDEX A21
 										dc.b $D
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX D
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX D : "Got it!  Thanks, fairy!{W1}"
 										dc.w $D
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 1
 										dc.w 1
@@ -265,7 +265,7 @@ cs_4FC32:           dc.w 4                  ; 0004 SET TEXT INDEX A21
 										dc.w $23                ; 0023 SET ENTITY FACING D 3
 										dc.b $D
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX D
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX D : "{LEADER}, come on.{W1}"
 										dc.w $D
 										dc.w $2D                ; 002D MOVE ENTITY D FF 1 1
 										dc.b $D

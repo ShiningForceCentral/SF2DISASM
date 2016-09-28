@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle18\cs_beforebattle :
 ; Cutscene before battle 18
-bbcs_18:            dc.w 4                  ; 0004 SET TEXT INDEX 9D8
+bbcs_18:            dc.w 4                  ; 0004 SET TEXT INDEX 9D8 : "Stop!{W1}"
 										dc.w $9D8
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN C 7 16
 										dc.w $C
@@ -71,7 +71,7 @@ bbcs_18:            dc.w 4                  ; 0004 SET TEXT INDEX 9D8
 										dc.b 1
 										dc.b 6
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Stop!{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -105,7 +105,7 @@ bbcs_18:            dc.w 4                  ; 0004 SET TEXT INDEX 9D8
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "Who IS that big guy?{W1}"
 										dc.w $C007
 										dc.w $2D                ; 002D MOVE ENTITY B FF 1 1
 										dc.b $B
@@ -113,7 +113,7 @@ bbcs_18:            dc.w 4                  ; 0004 SET TEXT INDEX 9D8
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "Don't you know?{W1}"
 										dc.w $B
 										dc.w $23                ; 0023 SET ENTITY FACING 0 1
 										dc.b 0
@@ -128,9 +128,9 @@ bbcs_18:            dc.w 4                  ; 0004 SET TEXT INDEX 9D8
 										dc.b $1E
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "That's Taros.  The guardian of{N}this ancient shrine.{W1}"
 										dc.w $B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Again, stop right there, or{N}I'll attack you.{W1}"
 										dc.w $80
 										dc.w $32                ; 0032 SET CAMERA DEST 7 16
 										dc.w 7
@@ -144,12 +144,12 @@ bbcs_18:            dc.w 4                  ; 0004 SET TEXT INDEX 9D8
 										dc.w $23                ; 0023 SET ENTITY FACING B 0
 										dc.b $B
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "What should we do?{W1}"
 										dc.w $C007
 										dc.w $23                ; 0023 SET ENTITY FACING 0 2
 										dc.b 0
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "The Caravan is there, behind{N}him.  We must have it!{W1}"
 										dc.w $B
 										dc.w $23                ; 0023 SET ENTITY FACING 0 1
 										dc.b 0
@@ -160,7 +160,7 @@ bbcs_18:            dc.w 4                  ; 0004 SET TEXT INDEX 9D8
 										dc.w $23                ; 0023 SET ENTITY FACING B 1
 										dc.b $B
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Time's up!  Now we battle.{W1}"
 										dc.w $80
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_4B2DA:         dc.w $C

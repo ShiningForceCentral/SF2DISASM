@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle15\cs_afterbattle :
 ; Cutscene after battle 15
-abcs_battle15:      dc.w 4                  ; 0004 SET TEXT INDEX 9CA
+abcs_battle15:      dc.w 4                  ; 0004 SET TEXT INDEX 9CA : "It was lucky for me that I{N}met you.  Thank you.{W1}"
 										dc.w $9CA
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 32 9 A
 										dc.w $32
@@ -39,12 +39,12 @@ abcs_battle15:      dc.w 4                  ; 0004 SET TEXT INDEX 9CA
 										dc.b 1
 										dc.b 5
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "It was lucky for me that I{N}met you.  Thank you.{W1}"
 										dc.w $1E
 										dc.w $23                ; 0023 SET ENTITY FACING 1E 0
 										dc.b $1E
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "Follow me to the Ancient{N}Tunnel.{W1}"
 										dc.w $1E
 										dc.w $2D                ; 002D MOVE ENTITY 1E FF 0 2
 										dc.b $1E
@@ -81,9 +81,9 @@ abcs_battle15:      dc.w 4                  ; 0004 SET TEXT INDEX 9CA
 										dc.w $15
 										dc.w 5
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1E
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1E : "Why is this door closed?{N}That's strange...{W2}"
 										dc.w $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "Oh well, let's go in.{W1}"
 										dc.w $1E
 										dc.w $18                ; 0018 FLASH ENTITY WHITE 1E 28
 										dc.w $1E
@@ -94,7 +94,7 @@ abcs_battle15:      dc.w 4                  ; 0004 SET TEXT INDEX 9CA
 										dc.b $1E
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "What?  Let me try again.{W1}"
 										dc.w $1E
 										dc.w $18                ; 0018 FLASH ENTITY WHITE 1E 32
 										dc.w $1E
@@ -107,7 +107,7 @@ abcs_battle15:      dc.w 4                  ; 0004 SET TEXT INDEX 9CA
 										dc.w 0
 										dc.b $80                ; WAIT 5A
 										dc.b $5A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "Petro, my grandson, locked{N}the door.{W1}"
 										dc.w $1E
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 1E
 										dc.b $1E
@@ -124,7 +124,7 @@ abcs_battle15:      dc.w 4                  ; 0004 SET TEXT INDEX 9CA
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "Sorry, guys!  We can't go to{N}Grans Island this way.{W1}"
 										dc.w $1E
 										dc.w $2D                ; 002D MOVE ENTITY 1E 0 3 2
 										dc.b $1E

@@ -64,7 +64,7 @@ cs_62D06:           dc.w $1A                ; 001A SET ENTITY SPRITE B AA
 										dc.w $B
 										dc.w $AA
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
+cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F : "King Granseal, {LEADER}{N}is here!{W1}"
 										dc.w $F7F
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 81
 										dc.w $81
@@ -177,17 +177,17 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
 										dc.w $8080
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "King Granseal, {LEADER}{N}is here!{W1}"
 										dc.w $81
 										dc.w $26                ; 0026 MAKE ENTITY NOD 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080 : "Please explain what is{N}happening.{W1}"
 										dc.w $8080
 										dc.b $80                ; WAIT A
 										dc.b $A
 										dc.w $26                ; 0026 MAKE ENTITY NOD 81
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Yes, sir.{W1}"
 										dc.w $81
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 0 1
 										dc.b $81
@@ -245,11 +245,11 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
 										dc.b 1
 										dc.b $80                ; WAIT A
 										dc.b $A
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "Listen up!{W2}"
 										dc.w $81
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "It took two years, but the{N}Princess finally recovered{N}from the poison.{W2}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "But she's still sleeping.{N}We've decided to take{N}Mitula's advice.{W1}"
 										dc.w $81
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 45E44
 										dc.b 7
@@ -259,7 +259,7 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
 										dc.b 7
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Mitula...you mean, somebody{N}gets to kiss her?{W1}"
 										dc.w $8007
 										dc.b $80                ; WAIT A
 										dc.b $A
@@ -276,19 +276,19 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
 										dc.w $80
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Yes.{N}We feel this is the right{N}time.{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
 										dc.w $23                ; 0023 SET ENTITY FACING 81 3
 										dc.b $81
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "And we need to decide which{N}one of you will kiss{N}Elis.{W1}"
 										dc.w $81
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
 										dc.b 7
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "We don't have to decide.{N}It's {LEADER}.{N}{NAME;10}, don't you agree?{W1}"
 										dc.w $8007
 										dc.w $23                ; 0023 SET ENTITY FACING 7 3
 										dc.b 7
@@ -299,14 +299,14 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
 										dc.w $A
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 800A
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 800A : "Ha, ha!  Yes, {NAME;7}!{W2}"
 										dc.w $800A
 										dc.b $80                ; WAIT A
 										dc.b $A
 										dc.w $23                ; 0023 SET ENTITY FACING A 2
 										dc.b $A
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 800A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 800A : "I always thought {LEADER}{N}was the best choice!{W1}"
 										dc.w $800A
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 0 2
 										dc.b $81
@@ -322,7 +322,7 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
 										dc.w $23                ; 0023 SET ENTITY FACING A 1
 										dc.b $A
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Are you sure?{N}Anybody disagree?{W1}"
 										dc.w $81
 										dc.w $23                ; 0023 SET ENTITY FACING 7 3
 										dc.b 7
@@ -340,7 +340,7 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
 										dc.w $23                ; 0023 SET ENTITY FACING 7 1
 										dc.b 7
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Nobody?{W1}"
 										dc.w $81
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -436,9 +436,9 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
 										dc.w $23                ; 0023 SET ENTITY FACING 0 3
 										dc.b 0
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 3
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 3 : "I understand what my friends{N}are saying, but...I love{N}her.{W2}"
 										dc.w 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 3
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 3 : "May I kiss her?{N}Somebody, say yes!{W1}"
 										dc.w 3
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -478,7 +478,7 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
 										dc.w $23                ; 0023 SET ENTITY FACING 3 0
 										dc.b 3
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Sorry, but...I don't think{N}{NAME;3} is the right{N}choice.{W1}"
 										dc.w $8007
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 3
 										dc.w 3
@@ -495,9 +495,9 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
 										dc.w $23                ; 0023 SET ENTITY FACING 3 2
 										dc.b 3
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 5
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 5 : "I understand {NAME;3}, but{N}she is a human.{W2}"
 										dc.w 5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5 : "A human is the best choice.{W1}"
 										dc.w 5
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 3
 										dc.w 3
@@ -512,11 +512,11 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F
 										dc.b 8
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8 : "{LEADER} is a human!{N}They will make a cute couple!{W1}"
 										dc.w 8
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 3
 										dc.w 3
-word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
+word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93 : "{LEADER} is a good lad{N}with the manner of a{N}knight!{W2}"
 										dc.w $F93
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 1 1
 										dc.b 7
@@ -535,9 +535,9 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.w $23                ; 0023 SET ENTITY FACING 3 0
 										dc.b 3
 										dc.b 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8013
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8013 : "{LEADER} is a good lad{N}with the manner of a{N}knight!{W2}"
 										dc.w $8013
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8013
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8013 : "I think he's the best{N}choice.{W1}"
 										dc.w $8013
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 3
 										dc.w 3
@@ -551,7 +551,7 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "{NAME;1}, what do you{N}think?{W1}"
 										dc.w $81
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 1
 										dc.w 1
@@ -576,11 +576,11 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.w $23                ; 0023 SET ENTITY FACING 0 1
 										dc.b 0
 										dc.b 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8001
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8001 : "M...me?  Well...{W2}"
 										dc.w $8001
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 1
 										dc.w 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8001
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8001 : "I'm worried about her...{N}but...I...{W2}"
 										dc.w $8001
 										dc.w $23                ; 0023 SET ENTITY FACING 1 2
 										dc.b 1
@@ -592,7 +592,7 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.b 1
 										dc.b $80                ; WAIT A
 										dc.b $A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8001
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8001 : "Yes, a good choice....{N}{LEADER} will make her...{N}...happy....{W1}"
 										dc.w $8001
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 1
 										dc.b 1
@@ -675,7 +675,7 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.w $8080
 										dc.b $80                ; WAIT 32
 										dc.b $32
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 2
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 2 : "Does she love {LEADER}?{N}I didn't know that.{W1}"
 										dc.w 2
 										dc.w $15                ; 0015 SET ACTSCRIPT 4 FF 45E44
 										dc.b 4
@@ -700,7 +700,7 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.w $23                ; 0023 SET ENTITY FACING 2 0
 										dc.b 2
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8004
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8004 : "Stop!{N}I will go and comfort her.{W1}"
 										dc.w $8004
 										dc.w $23                ; 0023 SET ENTITY FACING 2 3
 										dc.b 2
@@ -721,12 +721,12 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.b 2
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 2
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 2 : "{NAME;4}!{N}I'll go with you!{W1}"
 										dc.w 2
 										dc.w $23                ; 0023 SET ENTITY FACING 4 1
 										dc.b 4
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8004
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8004 : "Oh, c'mon.{N}She needs someone like me.{W1}"
 										dc.w $8004
 										dc.w $2D                ; 002D MOVE ENTITY 4 FF 3 5
 										dc.b 4
@@ -738,7 +738,7 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.w 4
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 2
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 2 : "What does he mean?{N}I don't understand!{W1}"
 										dc.w 2
 										dc.w $2D                ; 002D MOVE ENTITY B FF 0 2
 										dc.b $B
@@ -752,7 +752,7 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.b $B
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 800B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 800B : "They remind me of when I{N}was young.{W1}"
 										dc.w $800B
 										dc.w $2D                ; 002D MOVE ENTITY 1A FF 0 3
 										dc.b $1A
@@ -764,7 +764,7 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.b 8
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "{NAME;11}, you were young{N}once?{W1}"
 										dc.w $1A
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 1A
 										dc.w $1A
@@ -779,7 +779,7 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.b $B
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 800B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 800B : "Be quiet, you bucket of bolts!{W1}"
 										dc.w $800B
 										dc.w $32                ; 0032 SET CAMERA DEST 18 5
 										dc.w $18
@@ -818,27 +818,27 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.w $23                ; 0023 SET ENTITY FACING 0 1
 										dc.b 0
 										dc.b 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 800A
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 800A : "You heard everyone.{N}We think {LEADER} is the{N}right choice.{W2}"
 										dc.w $800A
 										dc.w $23                ; 0023 SET ENTITY FACING A 3
 										dc.b $A
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 800A
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 800A : "{NAME;4} will take care{N}of {NAME;1}.{W2}"
 										dc.w $800A
 										dc.w $26                ; 0026 MAKE ENTITY NOD 81
 										dc.w $81
 										dc.w $23                ; 0023 SET ENTITY FACING A 1
 										dc.b $A
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 800A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 800A : "Everything went as you{N}expected, huh?{W1}"
 										dc.w $800A
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 81
 										dc.w $81
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "You knew that?{N}{NAME;10}, you're smart.{W2}"
 										dc.w $81
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "But I didn't know what{N}{NAME;1} or {NAME;3} would do.{W2}I didn't want to hurt their{N}feelings.{W1}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "{LEADER}, I choose you.{W1}"
 										dc.w $81
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 80
 										dc.b $80
@@ -862,7 +862,7 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.w $23                ; 0023 SET ENTITY FACING 81 1
 										dc.b $81
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080 : "Now, {LEADER}.{N}Please go awaken her.{W1}"
 										dc.w $8080
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 2 1
 										dc.b $80
@@ -872,7 +872,7 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080 : "The Minister is waiting{N}for you.{W1}"
 										dc.w $8080
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 1 2
 										dc.b $80
@@ -890,6 +890,6 @@ word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93
 										dc.b $B
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Oh, {LEADER}!{N}I really respect you.{W2}"
 										dc.w $81
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

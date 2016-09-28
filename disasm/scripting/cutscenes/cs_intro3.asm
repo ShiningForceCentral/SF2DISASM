@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION scripting\cutscenes\cs_intro3 :
 ; Intro cutscene 3
-IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
+IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077 : "Well?{D2}"
 										dc.w $1077
 										dc.w $48                ; 0048 LOAD MAP 2A 15 1
 										dc.w $2A
@@ -18,7 +18,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.w $46                ; 0046  15 1
 										dc.w $15
 										dc.w 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Well?{D2}"
 										dc.w $8005
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 2A 15 1
 										dc.w $2A
@@ -35,7 +35,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.w $80
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Ugh!  Ugghhh!{N}Phew...I can't...{D2}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 1 1
 										dc.b $81
@@ -48,7 +48,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.w $23                ; 0023 SET ENTITY FACING 80 0
 										dc.b $80
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "You wimp!{N}Let me do it!{D2}"
 										dc.w $81
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
@@ -77,7 +77,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.w $23                ; 0023 SET ENTITY FACING 81 3
 										dc.b $81
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Yeah, right.{D2}"
 										dc.w $81
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -101,7 +101,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.b 3
 										dc.w $27                ; 0027 MAKE ENTITY SHAKE HEAD 81
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Blast!  It won't budge!{D2}"
 										dc.w $81
 										dc.w $2D                ; 002D MOVE ENTITY 5 FF 1 1
 										dc.b 5
@@ -122,7 +122,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.w $23                ; 0023 SET ENTITY FACING 81 3
 										dc.b $81
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "You idiots!{N}Let me do it.{D2}"
 										dc.w $8005
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 81
 										dc.w $81
@@ -284,7 +284,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.b 2
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Well, that didn't work.{D2}"
 										dc.w $8005
 										dc.w $23                ; 0023 SET ENTITY FACING 5 2
 										dc.b 5
@@ -305,7 +305,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.w 5
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "This time, I'll pull both of{N}the jewels at the same time!{D2}"
 										dc.w $8005
 										dc.w $15                ; 0015 SET ACTSCRIPT 5 FF 460CE
 										dc.b 5
@@ -341,15 +341,15 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.w $1A                ; 001A SET ENTITY SPRITE 5 BB
 										dc.w 5
 										dc.w $BB
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{NAME;5} the thief{N}grabbed the two jewels.{D2}"
 										dc.w $FFFF
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "One...two...{D2}"
 										dc.w $8005
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 5
 										dc.w 5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "THREE!{D2}"
 										dc.w $8005
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 5
 										dc.w 5
@@ -468,11 +468,11 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.b 1
 										dc.b $80
 										dc.b $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Are you OK?{D2}"
 										dc.w $80
 										dc.b $80                ; WAIT 28
 										dc.b $28
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Yeah.  I feel just great.{D2}"
 										dc.w $8005
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 1 1
 										dc.b $80
@@ -497,7 +497,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "You did it!{N}You have the legendary{N}jewels!{D2}"
 										dc.w $81
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -511,7 +511,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.b 5
 										dc.b $FF
 										dc.l eas_Init           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "I did?{D2}"
 										dc.w $8005
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -520,7 +520,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.w 5
 										dc.w $27                ; 0027 MAKE ENTITY SHAKE HEAD 5
 										dc.w 5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Oh, I got them!{N}I have the legendary{N}jewels!  Bravo!{D2}"
 										dc.w $8005
 										dc.w $15                ; 0015 SET ACTSCRIPT 5 FF 45E44
 										dc.b 5
@@ -583,7 +583,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.w $23                ; 0023 SET ENTITY FACING 5 1
 										dc.b 5
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "What's happening?!{D2}"
 										dc.w $80
 										dc.w $27                ; 0027 MAKE ENTITY SHAKE HEAD 80
 										dc.w $80
@@ -597,7 +597,7 @@ IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077
 										dc.b $3C
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 0
 										dc.w 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "We must escape from the{N}shrine!  Follow me!{D2}"
 										dc.w $8005
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 5
 										dc.w 5

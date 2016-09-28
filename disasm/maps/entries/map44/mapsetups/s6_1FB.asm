@@ -18,16 +18,16 @@ cs_54570:           dc.w 5                  ; 0005 PLAY SOUND MUSIC_BOSS_ATTACK
 										dc.w 6
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_54578:           dc.w 4                  ; 0004 SET TEXT INDEX 3F5
+cs_54578:           dc.w 4                  ; 0004 SET TEXT INDEX 3F5 : "OK.  Let's go!{W1}"
 										dc.w $3F5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "OK.  Let's go!{W1}"
 										dc.w $1F
 										dc.w $26                ; 0026 MAKE ENTITY NOD 8A
 										dc.w $8A
 										dc.w $23                ; 0023 SET ENTITY FACING 8A 3
 										dc.b $8A
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8A : "Weigh anchor!{W1}"
 										dc.w $8A
 										dc.w $29                ; 0029 SET ENTITY DEST 0 B D
 										dc.w 0
@@ -142,17 +142,17 @@ byte_545B6:         dc.b 3
 										dc.w $23                ; 0023 SET ENTITY FACING 9F 0
 										dc.b $9F
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9F : "Sir Astral, where are we{N}headed?{W1}"
 										dc.w $9F
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 2
 										dc.b $1F
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "This earthquake must{N}have caused damage all{N}over the island.{W1}"
 										dc.w $C01F
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "Maybe...to the east...to...{N}Oh, yes!  To the mainland!{W1}"
 										dc.w $C01F
 										dc.w $15                ; 0015 SET ACTSCRIPT 9F FF 45E44
 										dc.b $9F
@@ -162,12 +162,12 @@ byte_545B6:         dc.b 3
 										dc.b $9F
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9F : "To Parmecia?!{N}Hmmmm....{W1}"
 										dc.w $9F
 										dc.w $23                ; 0023 SET ENTITY FACING 1E 0
 										dc.b $1E
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "What?  To the mainland?{N}No!{W2}{N}What about Elis?!  No,{N}we'll stay here on Grans!{W1}"
 										dc.w $1E
 										dc.w $23                ; 0023 SET ENTITY FACING 1E 3
 										dc.b $1E
@@ -183,7 +183,7 @@ byte_545B6:         dc.b 3
 										dc.w $32                ; 0032 SET CAMERA DEST B C
 										dc.w $B
 										dc.w $C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "It's too dangerous to stay{N}here.{N}Weigh anchor right now!{W1}"
 										dc.w $C01F
 										dc.w $10                ; 0010 SET FLAG 4A 0
 										dc.w $4A

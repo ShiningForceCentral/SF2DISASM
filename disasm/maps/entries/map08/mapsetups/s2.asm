@@ -218,20 +218,20 @@ cs_56146:           dc.w $15                ; 0015 SET ACTSCRIPT 8 FF 460CE
 										dc.w $52                ; 0052 RELATED TO TWO ENTITIES 8 0
 										dc.w 8
 										dc.w 0
-										dc.w 4                  ; 0004 SET TEXT INDEX 543
+										dc.w 4                  ; 0004 SET TEXT INDEX 543 : "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"
 										dc.w $543
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8 : "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"
 										dc.w 8
 										dc.w 8                  ; 0008 JOIN FORCE 8
 										dc.w 8
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8 : "Now, let's go!{W1}"
 										dc.w 8
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY 8
 										dc.w 8
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_56172:           dc.w 4                  ; 0004 SET TEXT INDEX 534
+cs_56172:           dc.w 4                  ; 0004 SET TEXT INDEX 534 : "To Mt. Volcano?{W1}"
 										dc.w $534
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87 : "To Mt. Volcano?{W1}"
 										dc.w $87
 										dc.w $15                ; 0015 SET ACTSCRIPT 87 0 45E44
 										dc.b $87
@@ -252,15 +252,15 @@ cs_56172:           dc.w 4                  ; 0004 SET TEXT INDEX 534
 										dc.w $23                ; 0023 SET ENTITY FACING 86 3
 										dc.b $86
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 86
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 86 : "Go east and then go north{N}along the river.  A cave is{N}there.{W2}"
 										dc.w $86
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 86
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 86 : "But, I don't recommend you{N}enter such a terrible place!{W1}"
 										dc.w $86
 										dc.w $23                ; 0023 SET ENTITY FACING 87 3
 										dc.b $87
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87 : "We call it the Cave of{N}Darkness.  You can't see{N}anything inside.{W2}"
 										dc.w $87
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87 : "The cave is the only way to{N}get to Mt. Volcano.{W1}"
 										dc.w $87
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

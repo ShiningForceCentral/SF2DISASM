@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle30\cs_beforebattle :
 ; Cutscene before battle 30
-bbcs_30:            dc.w 4                  ; 0004 SET TEXT INDEX AC8
+bbcs_30:            dc.w 4                  ; 0004 SET TEXT INDEX AC8 : "What a pleasure!{N}Nice to meet you.{W1}"
 										dc.w $AC8
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 1 7 15
 										dc.w 1
@@ -52,7 +52,7 @@ bbcs_30:            dc.w 4                  ; 0004 SET TEXT INDEX AC8
 										dc.b 1
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "What a pleasure!{N}Nice to meet you.{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 45E44
 										dc.b 7
@@ -68,7 +68,7 @@ bbcs_30:            dc.w 4                  ; 0004 SET TEXT INDEX AC8
 										dc.w $8080
 										dc.w $26                ; 0026 MAKE ENTITY NOD 1F
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "Ohhh....{N}He's ugly, isn't he?{W1}"
 										dc.w $C01F
 										dc.w $32                ; 0032 SET CAMERA DEST 7 0
 										dc.w 7
@@ -87,9 +87,9 @@ bbcs_30:            dc.w 4                  ; 0004 SET TEXT INDEX AC8
 										dc.b 3
 										dc.b 2
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "What?!{N}You dare insult me?!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I've never...{N}For that you will die!{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 3 1
 										dc.b $80
@@ -97,7 +97,7 @@ bbcs_30:            dc.w 4                  ; 0004 SET TEXT INDEX AC8
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Are you ready to die?{W1}"
 										dc.w $80
 										dc.w 5                  ; 0005 PLAY SOUND SFX_INTRO_LIGHTNING
 										dc.w $76

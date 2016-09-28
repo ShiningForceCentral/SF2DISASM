@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle41\cs_beforebattle :
 ; Cutscene before battle 41
-bbcs_41:            dc.w 4                  ; 0004 SET TEXT INDEX C0B
+bbcs_41:            dc.w 4                  ; 0004 SET TEXT INDEX C0B : "Who are you?!{N}Oh, are you from Granseal?{W1}"
 										dc.w $C0B
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 38 C 15
 										dc.w $38
@@ -39,7 +39,7 @@ bbcs_41:            dc.w 4                  ; 0004 SET TEXT INDEX C0B
 word_4ED48:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_BATTLE_THEME_3
 										dc.w $21
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Who are you?!{N}Oh, are you from Granseal?{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 0 1
 										dc.b 0
@@ -47,7 +47,7 @@ word_4ED48:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_BATTLE_THEME
 										dc.w $32                ; 0032 SET CAMERA DEST C 4
 										dc.w $C
 										dc.w 4
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "But, Odd Eye went to...{W2}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 3 2
 										dc.b $80
@@ -55,11 +55,11 @@ word_4ED48:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_BATTLE_THEME
 										dc.b 3
 										dc.b 2
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Impossible!{N}He was defeated?{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Inconceivable!  But...{N}OK, I'll stop you here.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "You shall die now!{W1}"
 										dc.w $80
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_4ED76:         dc.w $11

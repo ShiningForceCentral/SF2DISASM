@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION scripting\cutscenes\cs_intro1 :
 ; Intro cutscene 1
-IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A
+IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A : "Stay here, OK?{D2}"
 										dc.w $105A
 										dc.w $48                ; 0048 LOAD MAP 2A 2 5
 										dc.w $2A
@@ -246,7 +246,7 @@ IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A
 										dc.w $23                ; 0023 SET ENTITY FACING 5 3
 										dc.b 5
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Stay here, OK?{D2}"
 										dc.w $8005
 										dc.w $26                ; 0026 MAKE ENTITY NOD 80
 										dc.w $80
@@ -274,7 +274,7 @@ IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A
 										dc.w 5
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Oops, a dead end!{D2}"
 										dc.w $8005
 										dc.w $2D                ; 002D MOVE ENTITY 5 FF 1 3
 										dc.b 5
@@ -323,7 +323,7 @@ IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A
 										dc.w 5
 										dc.b $80                ; WAIT 28
 										dc.b $28
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Hey!  I found some hidden{N}stairs!{D2}"
 										dc.w $8005
 										dc.w $2D                ; 002D MOVE ENTITY 5 FF 1 2
 										dc.b 5
@@ -334,9 +334,9 @@ IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A
 										dc.b 1
 										dc.b $80
 										dc.b $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Hey, guys!{N}Follow me!{D2}"
 										dc.w $8005
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Alright!{D2}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 0 45E44
 										dc.b $80
@@ -435,7 +435,7 @@ IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A
 										dc.w $8080
 										dc.b $80                ; WAIT A
 										dc.b $A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Finally, I found the hidden{N}room of the Ancient Shrine!{D2}"
 										dc.w $8005
 										dc.w $2D                ; 002D MOVE ENTITY 5 0 3 1
 										dc.b 5
@@ -477,7 +477,7 @@ IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A
 										dc.b 5
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "A treasure chest!{D2}"
 										dc.w $8005
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 5
 										dc.b 5
@@ -529,21 +529,21 @@ IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A
 										dc.w 5
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 5
 										dc.w 5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "I wonder if they're here?{D2}"
 										dc.w $8005
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{NAME;5} the thief opened{N}the chest.{D2}"
 										dc.w $FFFF
 										dc.w $34                ; 0034 SET BLOCKS 703 101 130A
 										dc.w $703
 										dc.w $101
 										dc.w $130A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "He found Power Water.{D2}"
 										dc.w $FFFF
 										dc.w $27                ; 0027 MAKE ENTITY SHAKE HEAD 5
 										dc.w 5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "No, I don't want this!{D2}"
 										dc.w $8005
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{NAME;5} discarded the{N}Power Water.{D2}"
 										dc.w $FFFF
 										dc.w $34                ; 0034 SET BLOCKS 403 101 130A
 										dc.w $403
@@ -573,14 +573,14 @@ IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A
 										dc.b 8
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Where on Earth are those{N}jewels?{D2}"
 										dc.w $81
 										dc.b $80                ; WAIT A
 										dc.b $A
 										dc.w $23                ; 0023 SET ENTITY FACING 5 2
 										dc.b 5
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "I'm not sure.{D2}"
 										dc.w $8005
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -637,7 +637,7 @@ IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A
 										dc.b 1
 										dc.b $80
 										dc.b $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Something is shining over{N}there...!{D2}"
 										dc.w $8005
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
@@ -648,7 +648,7 @@ IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A
 										dc.w $32                ; 0032 SET CAMERA DEST 15 1
 										dc.w $15
 										dc.w 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Oh, they must be the jewels{N}of light and evil!{D2}"
 										dc.w $8005
 										dc.b $80                ; WAIT 14
 										dc.b $14

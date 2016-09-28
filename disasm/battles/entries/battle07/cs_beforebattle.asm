@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle07\cs_beforebattle :
 ; Cutscene before battle 7
-bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935
+bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935 : "Astral, you're so persistent!{W1}"
 										dc.w $935
 										dc.w $10                ; 0010 SET FLAG 53 0
 										dc.w $53
@@ -22,21 +22,21 @@ bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 28
 										dc.w $28
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Astral, you're so persistent!{W1}"
 										dc.w $C080
 										dc.w $32                ; 0032 SET CAMERA DEST 8 F
 										dc.w 8
 										dc.w $F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "King Galam, what do you{N}intend to do?{W1}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "You wouldn't understand.{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "Astral, save her!{W1}"
 										dc.w $83
 										dc.w $32                ; 0032 SET CAMERA DEST 8 D
 										dc.w 8
 										dc.w $D
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "Father!{W1}"
 										dc.w $82
 										dc.w $2D                ; 002D MOVE ENTITY 82 FF 3 1
 										dc.b $82
@@ -73,11 +73,11 @@ bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935
 										dc.w $23                ; 0023 SET ENTITY FACING 81 3
 										dc.b $81
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "King Granseal and{N}{LEADER}!{W1}"
 										dc.w $81
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "Blast!{W2}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Give up now, King Granseal!{N}Do you want her to die?!{W1}"
 										dc.w $C080
 										dc.w $32                ; 0032 SET CAMERA DEST 8 F
 										dc.w 8
@@ -85,11 +85,11 @@ bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935
 										dc.w $23                ; 0023 SET ENTITY FACING 81 1
 										dc.b $81
 										dc.b 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "No!  You give up!{N}We've got reinforcements!{W2}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Your great magic cannot{N}defeat all of our soldiers!{W1}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "I'll kill you before they{N}have a chance to attack!{W1}"
 										dc.w $C080
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 3 1
 										dc.b $80
@@ -97,7 +97,7 @@ bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Just try it!{W1}"
 										dc.w $81
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 1 1
 										dc.b $81
@@ -199,9 +199,9 @@ bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Astral...{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Gguuu....{W1}"
 										dc.w $81
 										dc.w $1C                ; 001C STOP ENTITY ANIM 80
 										dc.w $80
@@ -232,16 +232,16 @@ bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "I've beaten you!{N}You've lost!{W1}"
 										dc.w $C080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "But, so have you!{N}Or had you not noticed?{W2}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "You cannot move.{N}Princess Elis, run away!{W1}"
 										dc.w $81
 										dc.w $32                ; 0032 SET CAMERA DEST 8 D
 										dc.w 8
 										dc.w $D
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "I'll try.{W1}"
 										dc.w $82
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 82
 										dc.b $82
@@ -270,13 +270,13 @@ bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935
 										dc.w 5
 										dc.w $16                ; 0016 WAIT UNTIL IDLE ENTITY 82
 										dc.w $82
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 85
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 85 : "Stop, my dear!{W1}"
 										dc.w $85
 										dc.w $15                ; 0015 SET ACTSCRIPT 82 FF 45E44
 										dc.b $82
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "Oh!{W1}"
 										dc.w $82
 										dc.w $2D                ; 002D MOVE ENTITY 82 FF 1 2
 										dc.b $82
@@ -287,17 +287,17 @@ bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935
 										dc.w $32                ; 0032 SET CAMERA DEST 8 F
 										dc.w 8
 										dc.w $F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Hee, hee, hee...{N}I won't lose her now.{W1}"
 										dc.w $C080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "What should I do?{N}{LEADER}, can you hear{N}me?{W1}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Save her.{W1}"
 										dc.w $81
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
 										dc.w $1C                ; 001C STOP ENTITY ANIM 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "I've no time to play with{N}these kids.{N}Devils!  I summon thee!{W1}"
 										dc.w $C080
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 86 E 12 3
 										dc.b $86
@@ -314,13 +314,13 @@ bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935
 										dc.w $23                ; 0023 SET ENTITY FACING 85 3
 										dc.b $85
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 86
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 86 : "Yeeeeee!{W1}"
 										dc.w $86
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "Forget about Astral.{N}"
 										dc.w $C080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "I'll kill him!{W2}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Eat them all up before{N}they reach her!{W1}"
 										dc.w $C080
 										dc.w $15                ; 0015 SET ACTSCRIPT 85 0 45E44
 										dc.b $85

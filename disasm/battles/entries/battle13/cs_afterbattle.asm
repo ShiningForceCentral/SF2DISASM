@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle13\cs_afterbattle :
 ; Cutscene after battle 13
-abcs_battle13:      dc.w 4                  ; 0004 SET TEXT INDEX 9BF
+abcs_battle13:      dc.w 4                  ; 0004 SET TEXT INDEX 9BF : "{NAME;10}, are you OK?  {NAME;10}!{W1}"
 										dc.w $9BF
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FD
@@ -36,7 +36,7 @@ abcs_battle13:      dc.w 4                  ; 0004 SET TEXT INDEX 9BF
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b $80                ; WAIT 32
 										dc.b $32
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "{NAME;10}, are you OK?  {NAME;10}!{W1}"
 										dc.w 7
 										dc.b $80                ; WAIT 32
 										dc.b $32
@@ -50,7 +50,7 @@ abcs_battle13:      dc.w 4                  ; 0004 SET TEXT INDEX 9BF
 										dc.l eas_Jump           
 										dc.w $27                ; 0027 MAKE ENTITY SHAKE HEAD A
 										dc.w $A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00A : "Squawk!  They knocked me{N}senseless.{W1}"
 										dc.w $C00A
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -60,26 +60,26 @@ abcs_battle13:      dc.w 4                  ; 0004 SET TEXT INDEX 9BF
 										dc.l eas_461B6          
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00A
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00A : "Where are the devils?{N}{LEADER}, did you defeat{N}them?{W2}"
 										dc.w $C00A
 										dc.w $23                ; 0023 SET ENTITY FACING A 1
 										dc.b $A
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00A : "Nobody in Bedoe can fight{N}like that.  Thank you.{W1}"
 										dc.w $C00A
 										dc.w $23                ; 0023 SET ENTITY FACING A 2
 										dc.b $A
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "He's a great fighter.{N}Volcanon doesn't know how{N}good he is!{W1}"
 										dc.w 7
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00A
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00A : "He'll learn.{W2}"
 										dc.w $C00A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00A : "Let's go see the mayor and{N}get a raft!{W1}"
 										dc.w $C00A
 										dc.w $23                ; 0023 SET ENTITY FACING A 1
 										dc.b $A
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{CLEAR}{LEADER} decides to take{N}{NAME;10} the BDMN with him.{W1}{CLEAR}"
 										dc.w $FFFF
 										dc.w $10                ; 0010 SET FLAG 4B FFFF
 										dc.w $4B

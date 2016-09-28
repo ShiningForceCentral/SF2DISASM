@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle21\cs_afterbattle :
 ; Cutscene after battle 21
-abcs_battle21:      dc.w 4                  ; 0004 SET TEXT INDEX A17
+abcs_battle21:      dc.w 4                  ; 0004 SET TEXT INDEX A17 : "Hurry!  Let's go into{N}Creed's mansion.{W1}"
 										dc.w $A17
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 43 4 12
 										dc.w $43
@@ -69,17 +69,17 @@ abcs_battle21:      dc.w 4                  ; 0004 SET TEXT INDEX A17
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 0
 										dc.b $1F
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Hurry!  Let's go into{N}Creed's mansion.{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "Oddler, can you see?{W1}"
 										dc.w $C007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "No, why?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "You're moving around as{N}if you can see.{W1}"
 										dc.w $C007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Am I?  Maybe my other{N}senses have sharpened{N}since I lost my sight.{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "Oh, I see.{W1}"
 										dc.w $C007
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 2 1
 										dc.b 7
@@ -90,7 +90,7 @@ abcs_battle21:      dc.w 4                  ; 0004 SET TEXT INDEX A17
 										dc.w $23                ; 0023 SET ENTITY FACING 7 1
 										dc.b 7
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "{LEADER}, let's go see{N}Mr. Creed!{W1}"
 										dc.w $C007
 										dc.w $23                ; 0023 SET ENTITY FACING 0 3
 										dc.b 0

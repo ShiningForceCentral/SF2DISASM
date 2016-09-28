@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle32\cs_beforebattle :
 ; Cutscene before battle 32
-bbcs_32:            dc.w 4                  ; 0004 SET TEXT INDEX B1D
+bbcs_32:            dc.w 4                  ; 0004 SET TEXT INDEX B1D : "I heard about you from{N}Geshp.{W1}"
 										dc.w $B1D
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 4A A 26
 										dc.w $4A
@@ -82,14 +82,14 @@ bbcs_32:            dc.w 4                  ; 0004 SET TEXT INDEX B1D
 										dc.b 1
 										dc.b 3
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I heard about you from{N}Geshp.{W1}"
 										dc.w $80
 										dc.w $32                ; 0032 SET CAMERA DEST A 12
 										dc.w $A
 										dc.w $12
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "He ordered me to take out{N}some of your people.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "But, it's not enough.{N}This is the end of your{N}resistance.{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
@@ -109,7 +109,7 @@ bbcs_32:            dc.w 4                  ; 0004 SET TEXT INDEX B1D
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Kill them, kill them all!{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 81 0 45E44
 										dc.b $81

@@ -22,7 +22,7 @@ return_55830:
 
 	; End of function ms_map7_InitFunction
 
-cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A
+cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A : "One year has passed.{W1}"
 										dc.w $50A
 										dc.w $48                ; 0048 LOAD MAP 7 6 2
 										dc.w 7
@@ -39,9 +39,9 @@ cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A
 										dc.w $46                ; 0046  6 2
 										dc.w 6
 										dc.w 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "One year has passed.{W1}"
 										dc.w $FFFF
-										dc.w 4                  ; 0004 SET TEXT INDEX 470
+										dc.w 4                  ; 0004 SET TEXT INDEX 470 : "(Cough)...our town is being{N}rebuilt, as you can see.{W2}"
 										dc.w $470
 										dc.w $1C                ; 001C STOP ENTITY ANIM 81
 										dc.w $81
@@ -65,42 +65,42 @@ cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A
 										dc.b 3
 										dc.w $26                ; 0026 MAKE ENTITY NOD 80
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "(Cough)...our town is being{N}rebuilt, as you can see.{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "But, we will be better off{N}if there are no accidents.{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "You're too young to spend{N}your time guarding our new{N}home.{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "You are the soldiers of{N}Granseal!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Do your best to improve our{N}new home!{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "King Granseal!{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "(Cough)...(cough)...{N}King Granseal!{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 14
 										dc.b $14
 										dc.w $1B                ; 001B START ENTITY ANIM 81
 										dc.w $81
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "All the people of Granseal{N}have been working hard for{N}an entire year.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Please thank them for their{N}hard work.{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Ah...I have nothing to say.{W1}"
 										dc.w $81
 										dc.w $1C                ; 001C STOP ENTITY ANIM 81
 										dc.w $81
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "N...nothing?{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Mmmm...alright.{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
@@ -108,11 +108,11 @@ cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 0
 										dc.b $8B
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Sir Astral, please speak in{N}place of our King.{W1}"
 										dc.w $80
 										dc.w $26                ; 0026 MAKE ENTITY NOD 8B
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Ummmm...OK, I got it.{W1}"
 										dc.w $8B
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -141,15 +141,15 @@ cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A
 										dc.b 3
 										dc.b $80                ; WAIT 28
 										dc.b $28
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "One year has passed since{N}we came here.{W2}"
 										dc.w $8B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "The castle, the town...{N}everything is coming along{N}nicely.{W2}"
 										dc.w $8B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "But we lack something.{N}What is it?  It's trading!{W2}"
 										dc.w $8B
 										dc.w $26                ; 0026 MAKE ENTITY NOD 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "We need to make alliances{N}with other towns.{W1}"
 										dc.w $8B
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 0
 										dc.b $8B
@@ -157,7 +157,7 @@ cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Indeed, indeed.{N}Thank you, sir!{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -167,7 +167,7 @@ cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "That's all for today.{N}You may go now.{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 82 0 3 1
 										dc.b $82
@@ -353,22 +353,22 @@ word_559AE:         dc.w $B
 										dc.b 2
 										dc.l eas_Init           
 										dc.w $FFFF
-cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
+cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE : "Are you a phoenix?{N}The legendary bird?{W1}"
 										dc.w $4AE
 										dc.w $32                ; 0032 SET CAMERA DEST 6 2
 										dc.w 6
 										dc.w 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Are you a phoenix?{N}The legendary bird?{W1}"
 										dc.w $8B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007 : "Y...yeah, I'm a phoenix.{W2}"
 										dc.w $C007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "But...legendary?{N}I don't know about that.{W1}"
 										dc.w $C007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "You are legendary, {NAME;7}!{N}I read that a phoenix serves{N}a god.{W1}"
 										dc.w $81
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007 : "God?  Ah, Volcanon!{N}{NAME;10} calls him a god. {W2}"
 										dc.w $C007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "As long as he watches over{N}us, nothing can break the{N}peace of Parmecia.{W1}"
 										dc.w $C007
 										dc.w $2D                ; 002D MOVE ENTITY 8B FF 1 1
 										dc.b $8B
@@ -376,9 +376,9 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "Volcanon?  The great being{N}who created the Earth?{W2}"
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Oh, this is the happiest day{N}of my life!{W1}"
 										dc.w $8B
 										dc.w $2D                ; 002D MOVE ENTITY 8B FF 3 1
 										dc.b $8B
@@ -389,19 +389,19 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 0
 										dc.b $8B
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Please let me go with you{N}and meet Volcanon!{W1}"
 										dc.w $8B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007 : "Ummm...OK.{W2}"
 										dc.w $C007
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007 : "To tell the truth, I hurt{N}my wing during this trip.{W2}"
 										dc.w $C007
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007 : "I stopped by here to ask{N}for help.{W2}"
 										dc.w $C007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "But, I don't want to trouble{N}you....{W1}"
 										dc.w $C007
 										dc.w $26                ; 0026 MAKE ENTITY NOD 8B
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Don't worry.  These lads{N}love trouble.{W1}"
 										dc.w $8B
 										dc.w $2D                ; 002D MOVE ENTITY 8B FF 3 1
 										dc.b $8B
@@ -417,15 +417,15 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.w $23                ; 0023 SET ENTITY FACING 7 3
 										dc.b 7
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "{LEADER}!{W2}"
 										dc.w $8B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "Why didn't you tell me you{N}were here?  Did you listen{N}to our conversation?{W2}"
 										dc.w $8B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "You know, it's time for us to{N}set out!{W2}"
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "We're going to Mt. Volcano{N}with {NAME;7}.{N}It's in the far east!{W1}"
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Sir Astral!{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 3 2
 										dc.b $80
@@ -439,7 +439,7 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 0
 										dc.b $8B
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "You said, you're going too?{N}No!{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 8B FF 45E6C
 										dc.b $8B
@@ -453,17 +453,17 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Wh...why not?{W1}"
 										dc.w $8B
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "We came here just a year{N}ago.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "We're still learning about{N}this country.  You're needed{N}here.{W1}"
 										dc.w $80
 										dc.w $26                ; 0026 MAKE ENTITY NOD 81
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "He's right.  You must stay.{W1}"
 										dc.w $81
 										dc.w $2D                ; 002D MOVE ENTITY 80 0 1 1
 										dc.b $80
@@ -482,23 +482,23 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.w $23                ; 0023 SET ENTITY FACING 7 1
 										dc.b 7
 										dc.b 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "{LEADER}, please take your{N}party and go with{N}{NAME;7}.{W2}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Astral, do you agree?{W1}"
 										dc.w $81
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 3
 										dc.b $8B
 										dc.b 3
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "Hmmmmm....{W2}"
 										dc.w $8B
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 1
 										dc.b $8B
 										dc.b 1
 										dc.w $26                ; 0026 MAKE ENTITY NOD 8B
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Y...yes.{W1}"
 										dc.w $8B
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 1 1
 										dc.b 7
@@ -506,7 +506,7 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "Then, they're my companions!{W1}"
 										dc.w $C007
 										dc.w $26                ; 0026 MAKE ENTITY NOD 81
 										dc.w $81
@@ -516,13 +516,13 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.b 3
 										dc.b 2
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007 : "I'm {NAME;7}.{W2}"
 										dc.w $C007
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C007 : "I really appreciate your{N}kindness.{W2}"
 										dc.w $C007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "Mt. Volcano is in the east....{N}It's very far away.{W1}"
 										dc.w $C007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{CLEAR}{LEADER} decides to take{N}{NAME;7} with him.{W1}{CLEAR}"
 										dc.w $FFFF
 										dc.w $54                ; 0054  7 FFFF
 										dc.w 7
@@ -555,11 +555,11 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.w 6
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Minister, bring the gift!{W1}"
 										dc.w $81
 										dc.w $26                ; 0026 MAKE ENTITY NOD 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Yes, sir.{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 0 2
 										dc.b $80
@@ -582,9 +582,9 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.b 3
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "A parting gift.  Take it.{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{LEADER} receives 100{N}gold coins.{W1}"
 										dc.w $FFFF
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 1 1
 										dc.b $80
@@ -605,9 +605,9 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Good luck, {LEADER}.{W2}"
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Find as many friends as you{N}can on your journey with{N}{NAME;7}.{W1}"
 										dc.w $8B
 										dc.w $26                ; 0026 MAKE ENTITY NOD 0
 										dc.w 0
@@ -624,13 +624,13 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 60B0103
 										dc.l $60B0103
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1
+cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1 : "Welcome back, {LEADER}.{W1}"
 										dc.w $4E1
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7
 										dc.b $FF
 										dc.l eas_Init           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Welcome back, {LEADER}.{W1}"
 										dc.w $80
 										dc.w $29                ; 0029 SET ENTITY DEST 8000 B 7
 										dc.w $8000
@@ -649,24 +649,24 @@ cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1
 										dc.w $23                ; 0023 SET ENTITY FACING 7 1
 										dc.b 7
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Thanks to you, Granseal has{N}many allies to trade with.{W1}"
 										dc.w $8B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "You've also made a lot of{N}new friends!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Great job!{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "I heard about everything{N}from Bedoe.{W2}"
 										dc.w $8B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "I never imagined Zeon could{N}be revived!{W1}"
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "I understand that Volcanon{N}is angry.{W1}"
 										dc.w $8B
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "So Princess Elis must be...{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "She's alive.{W1}"
 										dc.w 7
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 81
 										dc.b $81
@@ -761,13 +761,13 @@ cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1
 										dc.b 7
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "What did you say?!{N}Is she alive?{W1}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Y...yes!{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Is it true?{N}Is it true?!{W1}"
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Yes, it is.{W1}"
 										dc.w 7
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 81
 										dc.b $81
@@ -872,7 +872,7 @@ cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1
 										dc.l eas_Jump           
 										dc.w $26                ; 0026 MAKE ENTITY NOD 0
 										dc.w 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{LEADER} and {NAME;7}{N}explain in detail.{W1}"
 										dc.w $FFFF
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 2 1
 										dc.b 7
@@ -920,11 +920,11 @@ cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1
 										dc.w $23                ; 0023 SET ENTITY FACING 0 1
 										dc.b 0
 										dc.b 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "About the ancient ruins{N}and Creed....{W2}"
 										dc.w $FFFF
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "And Zeon's message through{N}Evil Spilit.{W2}"
 										dc.w $FFFF
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "They explain everything.{W1}"
 										dc.w $FFFF
 										dc.w $2D                ; 002D MOVE ENTITY 7 0 3 1
 										dc.b 7
@@ -948,23 +948,23 @@ cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1
 										dc.l sub_55F82
 										dc.b $80                ; WAIT A
 										dc.b $A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Amazing!{N}{LEADER}!  And {NAME;7}...{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "you've experienced a great{N}deal.{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "Hmmm...mmmm....{W1}"
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Sir Astral?{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 0
 										dc.b $8B
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "What should we do now?{W1}"
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Easy, we have to defeat{N}Zeon and save Elis!{W1}"
 										dc.w $C081
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 80
 										dc.b $80
@@ -984,14 +984,14 @@ cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Impossible!{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 32
 										dc.b $32
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 1
 										dc.b $8B
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "The King is right.{W1}"
 										dc.w $8B
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 45E44
 										dc.b $80
@@ -1000,11 +1000,11 @@ cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "What?{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081 : "Astral, thank you.{W2}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "What do we have to do first?{W1}"
 										dc.w $C081
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 0 1
 										dc.b $80
@@ -1015,52 +1015,52 @@ cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "We have to go to North{N}Parmecia.{W2}"
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "We'd better go and see the{N}storytellers in Tristan.{W1}"
 										dc.w $8B
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Sir!{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 0
 										dc.b $8B
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "Astral winks at the Minister{N}and smiles.{W1}"
 										dc.w $FFFF
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 1
 										dc.b $8B
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "It's an important job. Will{N}you allow me to go with{N}{LEADER}?{W1}"
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Sure, sure!  Just bring{N}Elis back to me!{W1}"
 										dc.w $C081
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Be careful, Astral.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "It's dangerous out there.{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 0
 										dc.b $8B
 										dc.b 0
 										dc.w $26                ; 0026 MAKE ENTITY NOD 8B
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "I will!{W1}"
 										dc.w $8B
 										dc.w $23                ; 0023 SET ENTITY FACING 8B 3
 										dc.b $8B
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8B : "{LEADER}.{W2}"
 										dc.w $8B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "I'm going with you as an{N}adviser.{W1}"
 										dc.w $8B
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_JOIN
 										dc.w $13
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "Adviser Astral has joined the{N}force."
 										dc.w $FFFF
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 20044
 										dc.l j_FadeOut_WaitForP2Input
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8B : "We have to remove the rocks{N}blocking the passageway{N}leading to North Parmecia.{W2}{N}Maybe we can use an{N}explosive!{W1}"
 										dc.w $8B
 										dc.w $26                ; 0026 MAKE ENTITY NOD 0
 										dc.w 0

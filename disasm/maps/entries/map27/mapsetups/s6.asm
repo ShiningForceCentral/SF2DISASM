@@ -10,7 +10,7 @@ ms_map27_InitFunction:
 
 	; End of function ms_map27_InitFunction
 
-cs_59FB8:           dc.w 4                  ; 0004 SET TEXT INDEX 6C5
+cs_59FB8:           dc.w 4                  ; 0004 SET TEXT INDEX 6C5 : "(Sniff, sniff)...{N}It smells like a ditch!{W1}"
 										dc.w $6C5
 										dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 460CE
 										dc.b $1F
@@ -37,7 +37,7 @@ cs_59FB8:           dc.w 4                  ; 0004 SET TEXT INDEX 6C5
 										dc.l eas_461B6          
 										dc.b $80                ; WAIT 78
 										dc.b $78
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "(Sniff, sniff)...{N}It smells like a ditch!{W1}"
 										dc.w $1F
 										dc.w $29                ; 0029 SET ENTITY DEST 7 1B 14
 										dc.w 7
@@ -48,7 +48,7 @@ cs_59FB8:           dc.w 4                  ; 0004 SET TEXT INDEX 6C5
 										dc.b 0
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 7
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Is this the smell of the{N}devils that they were{N}talking about?{W1}"
 										dc.w 7
 										dc.w $32                ; 0032 SET CAMERA DEST 24 11
 										dc.w $24
@@ -57,7 +57,7 @@ cs_59FB8:           dc.w 4                  ; 0004 SET TEXT INDEX 6C5
 										dc.w $81
 										dc.w $29
 										dc.w $15
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Hee, hee!{W1}"
 										dc.w $C081
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 0 45FF0
 										dc.b $80
@@ -112,11 +112,11 @@ cs_59FB8:           dc.w 4                  ; 0004 SET TEXT INDEX 6C5
 										dc.w $81
 										dc.w $1B                ; 001B START ENTITY ANIM 82
 										dc.w $82
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "What huge rats!{W1}"
 										dc.w 7
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081 : "Welcome!{W2}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "It's dinner time!{W1}"
 										dc.w $C081
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 0 45E44
 										dc.b $80

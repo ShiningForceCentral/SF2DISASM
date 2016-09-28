@@ -27,12 +27,12 @@ return_4FF40:
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_SAD_THEME_3
 										dc.w $F
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 4                  ; 0004 SET TEXT INDEX F0
+										dc.w 4                  ; 0004 SET TEXT INDEX F0 : "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
 										dc.w $F0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 0
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 0 : "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
 										dc.w 0
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_4FF5A:           dc.w 4                  ; 0004 SET TEXT INDEX 614
+cs_4FF5A:           dc.w 4                  ; 0004 SET TEXT INDEX 614 : "Now, let's go to Devil's Tail{N}to see Creed!{W1}"
 										dc.w $614
 										dc.w $2B                ; 002B  A 2B 2F 3 FF
 										dc.w $A
@@ -67,7 +67,7 @@ cs_4FF5A:           dc.w 4                  ; 0004 SET TEXT INDEX 614
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b $80                ; WAIT 28
 										dc.b $28
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX A : "Now, let's go to Devil's Tail{N}to see Creed!{W1}"
 										dc.w $A
 										dc.w $15                ; 0015 SET ACTSCRIPT A FF 45E44
 										dc.b $A
@@ -85,23 +85,23 @@ cs_4FF5A:           dc.w 4                  ; 0004 SET TEXT INDEX 614
 										dc.w $23                ; 0023 SET ENTITY FACING A 0
 										dc.b $A
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "It sounds like {NAME;10} is{N}going with us.{W1}"
 										dc.w $C007
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX A
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX A : "I am.  I want to fight with{N}{LEADER}.{W2}"
 										dc.w $A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX A : "This might be exciting!{W1}"
 										dc.w $A
 										dc.w 8                  ; 0008 JOIN FORCE A
 										dc.w $A
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "I didn't know you were such{N}an adventurer!{W1}"
 										dc.w $C007
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
 										dc.b 7
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX A : "Alright!{N}Wow!  Let's go!{W1}"
 										dc.w $A
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -116,7 +116,7 @@ cs_4FF5A:           dc.w 4                  ; 0004 SET TEXT INDEX 614
 										dc.w $13                ; 0013 SET STORY FLAG 10
 										dc.w $10
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D
+cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D : "{NAME;11}, {NAME;11}!{W1}"
 										dc.w $D0D
 										dc.w $2B                ; 002B  B 3F 3F 1 B
 										dc.w $B
@@ -200,9 +200,9 @@ cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{NAME;11}, {NAME;11}!{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "Yes?{W1}"
 										dc.w $B
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING B 1B 27 0
 										dc.b $B
@@ -218,11 +218,11 @@ cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D
 										dc.w $23                ; 0023 SET ENTITY FACING B 1
 										dc.b $B
 										dc.b 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "You know about devices like{N}this, right?{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER} has a cannon and{N}some dynamite here.  Can you{N}remove those rocks?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "Ah...OK, let me try.{W1}"
 										dc.w $B
 										dc.w $2D                ; 002D MOVE ENTITY B FF 1 1
 										dc.b $B
@@ -243,7 +243,7 @@ cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D
 										dc.b 1
 										dc.w $26                ; 0026 MAKE ENTITY NOD 0
 										dc.w 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{NAME;11} gets the dynamite{N}from {LEADER}.{W1}"
 										dc.w $FFFF
 										dc.w $2D                ; 002D MOVE ENTITY B FF 0 1
 										dc.b $B
@@ -262,7 +262,7 @@ cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "Stand back.  Ready?{W1}"
 										dc.w $B
 										dc.w $32                ; 0032 SET CAMERA DEST 15 20
 										dc.w $15
@@ -322,7 +322,7 @@ cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Perfect!  We can now go to{N}North Parmecia.{W1}"
 										dc.w $1F
 										dc.b $80                ; WAIT 28
 										dc.b $28
@@ -330,7 +330,7 @@ cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D
 										dc.b $B
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "Wow!  This cannon is great!{W1}"
 										dc.w $B
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
@@ -395,20 +395,20 @@ cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D
 										dc.b 1
 										dc.b $80                ; WAIT 19
 										dc.b $19
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "I can attend the battles{N}with this weapon.{W1}"
 										dc.w $B
 										dc.w $23                ; 0023 SET ENTITY FACING B 2
 										dc.b $B
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX B : "{LEADER}, do you need{N}this any more?{W2}"
 										dc.w $B
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX B
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX B : "May I use it?  Huh?{W2}"
 										dc.w $B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "Wow, now I can fight along{N}side you!{W1}"
 										dc.w $B
 										dc.w 8                  ; 0008 JOIN FORCE B
 										dc.w $B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "Please call me when you{N}need my help.{W1}"
 										dc.w $B
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b $80
@@ -466,12 +466,12 @@ cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D
 										dc.b 2
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{NAME;11} is hooked.{N}Ha, ha!{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "OK, {LEADER}.  Let's go{N}to North Parmecia!{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 0 3
 										dc.b 0
@@ -502,7 +502,7 @@ cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D
 										dc.w $13                ; 0013 SET STORY FLAG 19
 										dc.w $19
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5023E:           dc.w 4                  ; 0004 SET TEXT INDEX D1D
+cs_5023E:           dc.w 4                  ; 0004 SET TEXT INDEX D1D : "What?!  You forgot to bring{N}the {ITEM} with you?{N}{LEADER}, are you serious?{W2}"
 										dc.w $D1D
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7
@@ -569,7 +569,7 @@ cs_5023E:           dc.w 4                  ; 0004 SET TEXT INDEX D1D
 										dc.b 0
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "What?!  You forgot to bring{N}the {ITEM} with you?{N}{LEADER}, are you serious?{W2}"
 										dc.w $1F
 										dc.w $1C                ; 001C STOP ENTITY ANIM 0
 										dc.w 0
@@ -600,7 +600,7 @@ cs_5023E:           dc.w 4                  ; 0004 SET TEXT INDEX D1D
 										dc.b $1F
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "You fool!  Go back and{N}bring it here!{W1}"
 										dc.w $1F
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 										dc.b 0

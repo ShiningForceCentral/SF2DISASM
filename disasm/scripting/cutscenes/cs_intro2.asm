@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION scripting\cutscenes\cs_intro2 :
 ; Intro cutscene 2
-IntroCutscene2:     dc.w 4                  ; 0004 SET TEXT INDEX 106A
+IntroCutscene2:     dc.w 4                  ; 0004 SET TEXT INDEX 106A : "Quite a storm.{D2}"
 										dc.w $106A
 										dc.w $48                ; 0048 LOAD MAP 41 7 2
 										dc.w $41
@@ -21,7 +21,7 @@ IntroCutscene2:     dc.w 4                  ; 0004 SET TEXT INDEX 106A
 										dc.w $46                ; 0046  7 2
 										dc.w 7
 										dc.w 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080 : "Quite a storm.{D2}"
 										dc.w $8080
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 41 7 2
 										dc.w $41
@@ -41,9 +41,9 @@ IntroCutscene2:     dc.w 4                  ; 0004 SET TEXT INDEX 106A
 										dc.w $23                ; 0023 SET ENTITY FACING 81 0
 										dc.b $81
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Excuse me?{D2}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080 : "It's a stormy night.{D2}"
 										dc.w $8080
 										dc.w $23                ; 0023 SET ENTITY FACING 81 1
 										dc.b $81
@@ -65,11 +65,11 @@ IntroCutscene2:     dc.w 4                  ; 0004 SET TEXT INDEX 106A
 										dc.w $81
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "It's unusual for this time{N}of year.{D2}"
 										dc.w $81
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "Excuse me, your majesty.{D2}"
 										dc.w $82
 										dc.w $23                ; 0023 SET ENTITY FACING 81 3
 										dc.b $81
@@ -83,11 +83,11 @@ IntroCutscene2:     dc.w 4                  ; 0004 SET TEXT INDEX 106A
 										dc.w $32                ; 0032 SET CAMERA DEST 7 4
 										dc.w 7
 										dc.w 4
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Is it time to go to the{N}Ancient Tower?{D2}"
 										dc.w $81
 										dc.w $26                ; 0026 MAKE ENTITY NOD 82
 										dc.w $82
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "Yes, sire.{D2}"
 										dc.w $82
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 3 1
 										dc.b $81
@@ -99,7 +99,7 @@ IntroCutscene2:     dc.w 4                  ; 0004 SET TEXT INDEX 106A
 										dc.b $B
 										dc.b $A
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "It's stormy outside.{N}Be careful.{D2}"
 										dc.w $81
 										dc.w $26                ; 0026 MAKE ENTITY NOD 82
 										dc.w $82
@@ -134,14 +134,14 @@ IntroCutscene2:     dc.w 4                  ; 0004 SET TEXT INDEX 106A
 										dc.b $28
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080 : "Hmmm....{D2}"
 										dc.w $8080
 										dc.w $23                ; 0023 SET ENTITY FACING 81 1
 										dc.b $81
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Excuse me, sire?{D2}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080 : "I have a bad feeling...{N}Oh, well.{D2}"
 										dc.w $8080
 										dc.b $80                ; WAIT 28
 										dc.b $28
@@ -171,7 +171,7 @@ IntroCutscene2:     dc.w 4                  ; 0004 SET TEXT INDEX 106A
 										dc.b $80
 										dc.w 5                  ; 0005 PLAY SOUND SFX_SPELL_CAST
 										dc.w $4D
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Oh, a gust of wind!{D2}"
 										dc.w $81
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -180,7 +180,7 @@ IntroCutscene2:     dc.w 4                  ; 0004 SET TEXT INDEX 106A
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8080 : "Make sure all the doors and{N}windows are shut!{D2}"
 										dc.w $8080
 										dc.w 5                  ; 0005 PLAY SOUND SFX_SPELL_CAST
 										dc.w $4D

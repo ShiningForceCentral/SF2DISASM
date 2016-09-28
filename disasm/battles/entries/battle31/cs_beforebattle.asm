@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle31\cs_beforebattle :
 ; Cutscene before battle 31
-bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB
+bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB : "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
 										dc.w $AFB
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 2 10 2
 										dc.w 2
@@ -55,7 +55,7 @@ bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 										dc.w $30
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
 										dc.w $C080
 										dc.w $32                ; 0032 SET CAMERA DEST 10 5
 										dc.w $10
@@ -63,9 +63,9 @@ bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 80
 										dc.w $80
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Geshp!{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "So, you remember me. {W1}"
 										dc.w $C080
 										dc.w $32                ; 0032 SET CAMERA DEST 10 2
 										dc.w $10
@@ -76,25 +76,25 @@ bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "What do you want?{W1}"
 										dc.w $1F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "I have plans for you.{W2}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "I'm very happy that you came{N}out of the castle.{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Why?{W1}"
 										dc.w $1F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "I have been waiting for{N}{NAME;22}.{W2}"
 										dc.w $C080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "Vicar {NAME;22}, you locked{N}the gate of Moun, remember?{W2}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "My faithful soldiers can't{N}enter Parmecia.{N}Now, you will open it!{W1}"
 										dc.w $C080
 										dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 45E44
 										dc.b $1F
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "It's a trap!{W2}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 1 1
 										dc.b $1F
@@ -108,7 +108,7 @@ bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 2
 										dc.b $1F
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{NAME;22}, run!{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 16 FF 1 1
 										dc.b $16
@@ -139,7 +139,7 @@ bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Ha, ha.  He can't.{W1}"
 										dc.w $C080
 										dc.w $32                ; 0032 SET CAMERA DEST 10 6
 										dc.w $10
@@ -147,20 +147,20 @@ bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
 										dc.b $80
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Cameela!  Cameeeeeela!{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Cameela?!  We met her in{N}Pangoat Valley.{W1}"
 										dc.w 7
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 81
 										dc.w $81
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "What?{W1}"
 										dc.w $81
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "Ah, Cameela.  You're here.{W2}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Get the key for me!{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Geshp, you're as devious as{N}usual.{W1}"
 										dc.w $81
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 3 1
 										dc.b $80
@@ -168,9 +168,9 @@ bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "That I am.  Now, get the key!{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Me?!  Why?{W1}"
 										dc.w $81
 										dc.w $1C                ; 001C STOP ENTITY ANIM 80
 										dc.w $80
@@ -205,22 +205,22 @@ bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB
 										dc.w $8080
 										dc.w $1B                ; 001B START ENTITY ANIM 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Cameela!{W1}"
 										dc.w $C080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "I hate you!{N}I won't help you.{W2}"
 										dc.w $81
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "You want the key?{N}You get it!{N}You can use my army.{W2}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "See you later.{W1}"
 										dc.w $81
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 81
 										dc.w $81
 										dc.w 6
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "That witch!{W2}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Cameela!  Cameela!!{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "They're divided....{W1}"
 										dc.w 7
 										dc.b $80                ; WAIT 28
 										dc.b $28
@@ -231,9 +231,9 @@ bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
 										dc.b 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "I don't need your help,{N}Cameela!{W2}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Come on, devils!{N}Kill {LEADER} now!{W1}"
 										dc.w $C080
 										dc.w $32                ; 0032 SET CAMERA DEST 10 D
 										dc.w $10
@@ -281,13 +281,13 @@ bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB
 										dc.w $32                ; 0032 SET CAMERA DEST 10 6
 										dc.w $10
 										dc.w 6
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Bye, {LEADER}.{W1}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "You're not staying?{W1}"
 										dc.w 7
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C080 : "I'm good at using my brains,{N}not my strength.{W2}"
 										dc.w $C080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "I'll return by the time{N}you're defeated.{W1}"
 										dc.w $C080
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 80
 										dc.w $80

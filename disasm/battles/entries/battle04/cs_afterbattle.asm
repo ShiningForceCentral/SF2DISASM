@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle04\cs_afterbattle :
 ; Cutscene after battle 4
-abcs_battle04:      dc.w 4                  ; 0004 SET TEXT INDEX 90F
+abcs_battle04:      dc.w 4                  ; 0004 SET TEXT INDEX 90F : "Your battle strategy was{N}wonderful!  I praise you.{W1}"
 										dc.w $90F
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 42 9 10
 										dc.w $42
@@ -36,7 +36,7 @@ abcs_battle04:      dc.w 4                  ; 0004 SET TEXT INDEX 90F
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $26                ; 0026 MAKE ENTITY NOD 0
 										dc.w 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "Your battle strategy was{N}wonderful!  I praise you.{W1}"
 										dc.w $1C
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -97,7 +97,7 @@ abcs_battle04:      dc.w 4                  ; 0004 SET TEXT INDEX 90F
 										dc.w $23                ; 0023 SET ENTITY FACING 4 0
 										dc.b 4
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "But, I can't let you escape.{W1}"
 										dc.w $1C
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 1C
 										dc.b $1C
@@ -198,7 +198,7 @@ abcs_battle04:      dc.w 4                  ; 0004 SET TEXT INDEX 90F
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "That lad is their leader.{N}Take him!{W1}"
 										dc.w $1C
 										dc.w $2D                ; 002D MOVE ENTITY 82 0 1 1
 										dc.b $82
@@ -226,7 +226,7 @@ abcs_battle04:      dc.w 4                  ; 0004 SET TEXT INDEX 90F
 										dc.w $23                ; 0023 SET ENTITY FACING 1C 3
 										dc.b $1C
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "Don't worry.  He has only{N}fainted.  Take them to Galam!{W1}"
 										dc.w $1C
 										dc.w $2D                ; 002D MOVE ENTITY 1C FF 0 1
 										dc.b $1C

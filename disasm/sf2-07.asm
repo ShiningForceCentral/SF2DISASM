@@ -1310,7 +1310,7 @@ loc_448BC:
 	; End of function MoveEntitiesToBattlePositions
 
    include "battles\global\battleneutralentities.asm"		; Battle entities which are not force members or enemies
-   include "battles\global\eas_battleneutralentities.asm"		; Entity actscripts for battle entities which are not force members or enemies
+   include "scripting\entityactscripts\eas_battleneutralentities.asm"		; Entity actscripts for battle entities which are not force members or enemies
 
 ; =============== S U B R O U T I N E =======================================
 

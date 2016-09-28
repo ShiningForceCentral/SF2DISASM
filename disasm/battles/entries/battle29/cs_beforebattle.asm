@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle29\cs_beforebattle :
 ; Cutscene before battle 29
-bbcs_29:            dc.w 4                  ; 0004 SET TEXT INDEX A9E
+bbcs_29:            dc.w 4                  ; 0004 SET TEXT INDEX A9E : "You can't enter Mitula{N}Shrine now.{W1}"
 										dc.w $A9E
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 0 A 1C
 										dc.w 0
@@ -54,14 +54,14 @@ bbcs_29:            dc.w 4                  ; 0004 SET TEXT INDEX A9E
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "You can't enter Mitula{N}Shrine now.{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
 										dc.b 7
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Sir Astral, what do we do{N}now?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Hmmm....{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 1 1
 										dc.b $1F
@@ -72,12 +72,12 @@ bbcs_29:            dc.w 4                  ; 0004 SET TEXT INDEX A9E
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 0
 										dc.b $1F
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, what do you{N}think?{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 0 2
 										dc.b 0
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 0
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 0 : "I'm not sure.{W1}"
 										dc.w 0
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 1 1
 										dc.b 7
@@ -88,16 +88,16 @@ bbcs_29:            dc.w 4                  ; 0004 SET TEXT INDEX A9E
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
 										dc.b 7
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "{LEADER}, it's obvious!{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0
 										dc.b 0
 										dc.b 0
 										dc.w $26                ; 0026 MAKE ENTITY NOD 1F
 										dc.w $1F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "I agree.  We have to see the{N}storytellers and listen to{N}the legends.{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Make a break for it!{W1}"
 										dc.w $1F
 										dc.w $32                ; 0032 SET CAMERA DEST A 1A
 										dc.w $A
@@ -177,9 +177,9 @@ bbcs_29:            dc.w 4                  ; 0004 SET TEXT INDEX A9E
 										dc.b 3
 										dc.w $16                ; 0016 WAIT UNTIL IDLE ENTITY 7
 										dc.w 7
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Wait, wait.  You must not{N}enter the holy shrine.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "So be it!  Let the truth be{N}known!{W1}"
 										dc.w $80
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FD
@@ -289,11 +289,11 @@ bbcs_29:            dc.w 4                  ; 0004 SET TEXT INDEX A9E
 										dc.b 3
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Go away!  The devils already{N}occupy this shrine!{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "Devils again!{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, attack!{W1}"
 										dc.w $1F
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_4C5AE:         dc.w $F

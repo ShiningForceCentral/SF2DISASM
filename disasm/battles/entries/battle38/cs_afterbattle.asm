@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle38\cs_afterbattle :
 ; Cutscene after battle 38
-abcs_battle38:      dc.w 4                  ; 0004 SET TEXT INDEX BC4
+abcs_battle38:      dc.w 4                  ; 0004 SET TEXT INDEX BC4 : "My traps...{W1}"
 										dc.w $BC4
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 42 3 16
 										dc.w $42
@@ -108,7 +108,7 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b $3C
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 88
 										dc.w $88
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "My traps...{W1}"
 										dc.w $88
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
@@ -128,7 +128,7 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.w $23                ; 0023 SET ENTITY FACING 88 1
 										dc.b $88
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "I'm...at the end of my rope.{N}I...must...escape.{W1}"
 										dc.w $88
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 88
 										dc.b $88
@@ -269,7 +269,7 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b $88
 										dc.b $FF
 										dc.l eas_46172          
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "Nooooooo!{W1}"
 										dc.w $88
 										dc.w $2D                ; 002D MOVE ENTITY 88 FF 1 2
 										dc.b $88
@@ -277,7 +277,7 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b 1
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "Please...please let me go.{W1}"
 										dc.w $88
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 1 1
 										dc.b $1F
@@ -285,9 +285,9 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "We don't want to kill{N}you.{N}You've lost your powers.{W1}"
 										dc.w $C01F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "I know...(sob, sob)....{W1}"
 										dc.w $88
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 0 1
 										dc.b 7
@@ -295,12 +295,12 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C007 : "You may go.{W1}"
 										dc.w $C007
 										dc.w $23                ; 0023 SET ENTITY FACING 88 2
 										dc.b $88
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "Thank you.{W1}"
 										dc.w $88
 										dc.w $15                ; 0015 SET ACTSCRIPT 88 FF 460CE
 										dc.b $88
@@ -367,7 +367,7 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.w $23                ; 0023 SET ENTITY FACING 88 3
 										dc.b $88
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "I won't forget this.{W1}"
 										dc.w $88
 										dc.w $2D                ; 002D MOVE ENTITY 88 FF 1 3
 										dc.b $88
@@ -399,7 +399,7 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b $88
 										dc.b 3
 										dc.w $3D                ; 003D TINT MAP
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C089
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C089 : "Where are you going, Geshp?{W1}"
 										dc.w $C089
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 88
 										dc.b $88
@@ -430,15 +430,15 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C089
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C089 : "Do you remember your vow?{W1}"
 										dc.w $C089
 										dc.w $27                ; 0027 MAKE ENTITY SHAKE HEAD 88
 										dc.w $88
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C089
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C089 : "You failed to get the jewel{N}from {LEADER}.{W2}"
 										dc.w $C089
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C089
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C089 : "Now, you will pay with your{N}life.{W1}"
 										dc.w $C089
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "No, please...NO!{W1}"
 										dc.w $88
 										dc.w $53                ; 0053  88 0
 										dc.w $88
@@ -734,7 +734,7 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b 1
 										dc.b 3
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Zeon is such an unfeeling{N}devil...(shiver).{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 0 1
 										dc.b 7
@@ -744,9 +744,9 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b 1
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "He will do the same to us{N}if we lose to him.{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "We must not be defeated.{W1}"
 										dc.w $1F
 										dc.w $2C                ; 002C FOLLOW ENTITY 1E 0 2
 										dc.w $1E

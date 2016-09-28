@@ -30,7 +30,7 @@ return_5C4EC:
 
 	; End of function sub_5C4DC
 
-word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575
+word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575 : "Who are they?{W1}"
 										dc.w $575
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 										dc.w $30
@@ -57,7 +57,7 @@ word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575
 										dc.b 1
 										dc.b $80
 										dc.b $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Who are they?{W1}"
 										dc.w 7
 										dc.w $32                ; 0032 SET CAMERA DEST 10 4
 										dc.w $10
@@ -74,7 +74,7 @@ word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575
 										dc.b $82
 										dc.b 0
 										dc.l eas_461B6          
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "They're looking for something.{W1}"
 										dc.w 7
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -96,7 +96,7 @@ word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575
 										dc.w $8080
 										dc.b $80                ; WAIT 28
 										dc.b $28
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "He's not here...not under{N}the cliff....{W1}"
 										dc.w $83
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 1 2
 										dc.b $81
@@ -109,15 +109,15 @@ word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "There are marks of a battle{N}here and there!{W2}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Against the birdmen of{N}Bedoe?{W1}"
 										dc.w $81
 										dc.w $26                ; 0026 MAKE ENTITY NOD 80
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Could be...{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "see those volcanic rocks?{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -127,12 +127,12 @@ word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575
 										dc.l eas_461E4          
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Nobody but Volcanon can do{N}that!{W2}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 81 0
 										dc.b $81
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "He has never before killed{N}birdmen, but...{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 83 FF 3 1
 										dc.b $83
@@ -160,7 +160,7 @@ word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575
 										dc.b 2
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "Who's that?{W1}"
 										dc.w $83
 										dc.w $23                ; 0023 SET ENTITY FACING 83 3
 										dc.b $83
@@ -194,7 +194,7 @@ word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575
 										dc.b 1
 										dc.b $80
 										dc.b $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "Stupid Polca kids!{W1}"
 										dc.w $83
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 3 2
 										dc.b $80
@@ -207,7 +207,7 @@ word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575
 										dc.b 1
 										dc.b $80
 										dc.b $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Polcan people are cowards that{N}live in peace.{W2}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
@@ -215,7 +215,7 @@ word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575
 										dc.w $23                ; 0023 SET ENTITY FACING 83 1
 										dc.b $83
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "They shall never return{N}alive!{W1}"
 										dc.w $80
 										dc.w $13                ; 0013 SET STORY FLAG C
 										dc.w $C
@@ -228,11 +228,11 @@ word_5C622:         dc.w $19                ; 0019 SET ENTITY POS AND FACING 7 1
 										dc.b $16
 										dc.b 8
 										dc.b 0
-										dc.w 4                  ; 0004 SET TEXT INDEX 9BD
+										dc.w 4                  ; 0004 SET TEXT INDEX 9BD : "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"
 										dc.w $9BD
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Why do the devils want you?{W1}"
 										dc.w 7
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

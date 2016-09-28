@@ -47,7 +47,7 @@ cs_5A31E:           dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 82
 										dc.w $1C                ; 001C STOP ENTITY ANIM 82
 										dc.w $82
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
+cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF : "Where is the sick dwarf?{W1}"
 										dc.w $6AF
 										dc.w $32                ; 0032 SET CAMERA DEST 0 7
 										dc.w 0
@@ -73,7 +73,7 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
 										dc.w $9E
 										dc.w 8
 										dc.w $B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9E : "Where is the sick dwarf?{W1}"
 										dc.w $9E
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -95,7 +95,7 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
 										dc.w $23                ; 0023 SET ENTITY FACING 9E 0
 										dc.b $9E
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Oh, thank goodness.{N}I sure am glad to see you.{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 45E44
 										dc.b $80
@@ -114,7 +114,7 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Here, please examine him.{W1}"
 										dc.w $80
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 9E
 										dc.w $9E
@@ -136,9 +136,9 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
 										dc.b 0
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 9E
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 9E : "Oh, I hope I'm not too late.{W2}"
 										dc.w $9E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9E : "Ok, let's see.{W1}"
 										dc.w $9E
 										dc.b $80                ; WAIT 32
 										dc.b $32
@@ -177,13 +177,13 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
 										dc.w $23                ; 0023 SET ENTITY FACING 81 2
 										dc.b $81
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "How is he?{W1}"
 										dc.w $81
 										dc.b $80                ; WAIT F
 										dc.b $F
 										dc.w $27                ; 0027 MAKE ENTITY SHAKE HEAD 84
 										dc.w $84
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 84
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 84 : "I don't know yet....{W1}"
 										dc.w $84
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
@@ -197,7 +197,7 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
 										dc.l eas_Jump           
 										dc.w $1B                ; 001B START ENTITY ANIM 82
 										dc.w $82
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "Whoa!{W1}"
 										dc.w $82
 										dc.b $80                ; WAIT 5
 										dc.b 5
@@ -210,7 +210,7 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
 										dc.w $23                ; 0023 SET ENTITY FACING 82 1
 										dc.b $82
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "What?{W1}"
 										dc.w $82
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 1 1
 										dc.b $81
@@ -224,9 +224,9 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
 										dc.w $23                ; 0023 SET ENTITY FACING 82 0
 										dc.b $82
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Hey, are you OK?{W1}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "I'm OK.  I'm fine.{N}I feel great!{W1}"
 										dc.w $82
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -254,13 +254,13 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
 										dc.w $23                ; 0023 SET ENTITY FACING 9E 1
 										dc.b $9E
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Oh, how can we thank you?{W1}"
 										dc.w $80
 										dc.w $26                ; 0026 MAKE ENTITY NOD 82
 										dc.w $82
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 9E
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 9E : "I don't need anything.{W2}"
 										dc.w $9E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9E : "But, why don't you help{N}{LEADER}?{W1}"
 										dc.w $9E
 										dc.b $80                ; WAIT F
 										dc.b $F
@@ -291,7 +291,7 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
 										dc.b 2
 										dc.b 3
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 9E : "{LEADER}, I'm  going now.{W2}{N}I hope your journey is safe{N}and uneventful.  Bye!{W1}"
 										dc.w $9E
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF
@@ -340,7 +340,7 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF
 										dc.b 3
 										dc.w $8080
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5A4FE:           dc.w 4                  ; 0004 SET TEXT INDEX 6C2
+cs_5A4FE:           dc.w 4                  ; 0004 SET TEXT INDEX 6C2 : "We use it to destroy large{N}rocks.{W1}"
 										dc.w $6C2
 										dc.w $23                ; 0023 SET ENTITY FACING 81 2
 										dc.b $81
@@ -357,7 +357,7 @@ cs_5A4FE:           dc.w 4                  ; 0004 SET TEXT INDEX 6C2
 										dc.w $32                ; 0032 SET CAMERA DEST 6 7
 										dc.w 6
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "We use it to destroy large{N}rocks.{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 0 1
 										dc.b $80
@@ -365,9 +365,9 @@ cs_5A4FE:           dc.w 4                  ; 0004 SET TEXT INDEX 6C2
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "OK, guys!{N}Let's go back to Grans{N}Island!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Everybody dig!{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 81 0 45E44
 										dc.b $81

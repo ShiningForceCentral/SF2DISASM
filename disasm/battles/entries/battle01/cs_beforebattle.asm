@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle01\cs_beforebattle :
 ; Cutscene before battle 1
-bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4
+bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4 : "There you are, {LEADER}.{N}Stay here.{W2}"
 										dc.w $8F4
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 39 2 A
 										dc.w $39
@@ -36,9 +36,9 @@ bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4
 										dc.w $23                ; 0023 SET ENTITY FACING 87 3
 										dc.b $87
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87 : "There you are, {LEADER}.{N}Stay here.{W2}"
 										dc.w $87
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87 : "I'll take a look inside the{N}tower.{W1}"
 										dc.w $87
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 87
 										dc.w $87
@@ -56,7 +56,7 @@ bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4
 										dc.l eas_461B6          
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87 : "Hmm, what a mysterious{N}tower.  I wonder who built{N}it?{W1}"
 										dc.w $87
 										dc.w $2D                ; 002D MOVE ENTITY 87 FF 1 1
 										dc.b $87
@@ -70,7 +70,7 @@ bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4
 										dc.w $8080
 										dc.b $80                ; WAIT 32
 										dc.b $32
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87 : "I have a strange feeling{N}about this place.{W1}"
 										dc.w $87
 										dc.w $2D                ; 002D MOVE ENTITY 87 FF 1 3
 										dc.b $87
@@ -78,7 +78,7 @@ bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4
 										dc.b 1
 										dc.b 3
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87 : "Oh, what's this?{N}I think I have seen this{N}symbol before....{W1}"
 										dc.w $87
 										dc.b $80                ; WAIT 28
 										dc.b $28
@@ -117,7 +117,7 @@ bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4
 										dc.l eas_461B6          
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 2
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 2 : "What's happening?{W1}"
 										dc.w 2
 										dc.w $2D                ; 002D MOVE ENTITY 1 FF 1 1
 										dc.b 1
@@ -125,7 +125,7 @@ bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "Look!  Something is{N}appearing.  What's that?{W1}"
 										dc.w 1
 										dc.w $23                ; 0023 SET ENTITY FACING 87 1
 										dc.b $87
@@ -155,9 +155,9 @@ bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87 : "An evil Gizmo!  A devil{N}that possesses people!{W2}"
 										dc.w $87
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87 : "Why are you here?{W1}"
 										dc.w $87
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -173,7 +173,7 @@ bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87 : "Where are you going?{N}What...wait!  You're here to{N}possess the King, aren't you?{W1}"
 										dc.w $87
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 2 1
 										dc.b $80
@@ -187,7 +187,7 @@ bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4
 										dc.b 2
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87 : "I won't let you pass.{N}You shall not harm the King!{W1}"
 										dc.w $87
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
@@ -303,12 +303,12 @@ bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4
 										dc.w $80
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87 : "This doesn't look good.{W2}"
 										dc.w $87
 										dc.w $23                ; 0023 SET ENTITY FACING 87 3
 										dc.b $87
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 87 : "We'll stop the evil Gizmo{N}here.  {LEADER}, defeat{N}these fiends!{W1}"
 										dc.w $87
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_49694:         dc.w 7

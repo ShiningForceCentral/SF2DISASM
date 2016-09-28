@@ -20,7 +20,7 @@ return_5FABA:
 
 	; End of function ms_map37_flag3E7_InitFunction
 
-cs_5FABC:           dc.w 4                  ; 0004 SET TEXT INDEX D1F
+cs_5FABC:           dc.w 4                  ; 0004 SET TEXT INDEX D1F : "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
 										dc.w $D1F
 										dc.w $46                ; 0046  6 6
 										dc.w 6
@@ -50,9 +50,9 @@ cs_5FABC:           dc.w 4                  ; 0004 SET TEXT INDEX D1F
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_STOP
 										dc.w $20
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8007
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8007 : "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
 										dc.w $8007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Where's Sir Astral?{W1}"
 										dc.w $8007
 										dc.w $23                ; 0023 SET ENTITY FACING 7 0
 										dc.b 7
@@ -76,7 +76,7 @@ cs_5FABC:           dc.w 4                  ; 0004 SET TEXT INDEX D1F
 										dc.b $14
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 7
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Oh, there he is!{W1}"
 										dc.w $8007
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7
@@ -90,15 +90,15 @@ cs_5FABC:           dc.w 4                  ; 0004 SET TEXT INDEX D1F
 										dc.b 9
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Sir Astral!  Are you OK?{W1}"
 										dc.w $8007
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
 										dc.b 7
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "{LEADER}, come on!{W1}"
 										dc.w $8007
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5FB30:           dc.w 4                  ; 0004 SET TEXT INDEX D25
+cs_5FB30:           dc.w 4                  ; 0004 SET TEXT INDEX D25 : "Phew!  We've made it to{N}Grans Island!{W1}"
 										dc.w $D25
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 460CE
 										dc.b $80
@@ -109,15 +109,15 @@ cs_5FB30:           dc.w 4                  ; 0004 SET TEXT INDEX D25
 										dc.b 3
 										dc.w $27                ; 0027 MAKE ENTITY SHAKE HEAD 80
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Phew!  We've made it to{N}Grans Island!{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "{LEADER}, Geshp's probably{N}coming for us!{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Evacuate the ship!{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "What are you doing?{N}Get off the ship!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I'll go first.{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 0 4
 										dc.b $80
@@ -132,7 +132,7 @@ cs_5FB30:           dc.w 4                  ; 0004 SET TEXT INDEX D25
 										dc.w $2E                ; 002E HIDE ENTITY 80
 										dc.w $80
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5FB6A:           dc.w 4                  ; 0004 SET TEXT INDEX D31
+cs_5FB6A:           dc.w 4                  ; 0004 SET TEXT INDEX D31 : "Wow, the ship is vibrating!{W1}"
 										dc.w $D31
 										dc.w 5                  ; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
 										dc.w $5D
@@ -161,12 +161,12 @@ cs_5FB6A:           dc.w 4                  ; 0004 SET TEXT INDEX D31
 										dc.b 7
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Wow, the ship is vibrating!{W1}"
 										dc.w $8007
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "What's going on?{W1}"
 										dc.w $80
 										dc.w $29                ; 0029 SET ENTITY DEST 1A B B
 										dc.w $1A
@@ -187,13 +187,13 @@ cs_5FB6A:           dc.w 4                  ; 0004 SET TEXT INDEX D31
 										dc.w $23                ; 0023 SET ENTITY FACING 1A 3
 										dc.b $1A
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "Don't worry. {W1}"
 										dc.w $1A
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 45E44
 										dc.b 7
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "But...but...{N}Woooooow!{W1}"
 										dc.w $8007
 										dc.w $32                ; 0032 SET CAMERA DEST 4 6
 										dc.w 4
@@ -247,7 +247,7 @@ cs_5FB6A:           dc.w 4                  ; 0004 SET TEXT INDEX D31
 										dc.w $23                ; 0023 SET ENTITY FACING 7 1
 										dc.b 7
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "It's floating!  This big{N}ship is floating!{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 1A 2
 										dc.b $1A
@@ -255,7 +255,7 @@ cs_5FB6A:           dc.w 4                  ; 0004 SET TEXT INDEX D31
 										dc.w $32                ; 0032 SET CAMERA DEST B 6
 										dc.w $B
 										dc.w 6
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A : "We're going higher and{N}higher....{W1}"
 										dc.w $801A
 										dc.b $80                ; WAIT 28
 										dc.b $28
@@ -281,7 +281,7 @@ cs_5FB6A:           dc.w 4                  ; 0004 SET TEXT INDEX D31
 										dc.l sub_5FD7C
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "I've never experienced{N}anything like this in my{N}seventy years of life!{W1}"
 										dc.w $1F
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
@@ -324,7 +324,7 @@ cs_5FB6A:           dc.w 4                  ; 0004 SET TEXT INDEX D31
 										dc.b $B
 										dc.b 2
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A : "OK, now we'll head to{N}Grans Island.{W1}"
 										dc.w $801A
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 1
 										dc.w 1
@@ -337,9 +337,9 @@ cs_5FB6A:           dc.w 4                  ; 0004 SET TEXT INDEX D31
 										dc.w $23                ; 0023 SET ENTITY FACING 80 2
 										dc.b $80
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Oh, we're flying!{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "The Ancients were greater{N}than we thought!{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 80 1
 										dc.b $80
@@ -347,7 +347,7 @@ cs_5FB6A:           dc.w 4                  ; 0004 SET TEXT INDEX D31
 										dc.w $23                ; 0023 SET ENTITY FACING 1A 3
 										dc.b $1A
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A : "Oh, thank you very much.{W1}"
 										dc.w $801A
 										dc.b $80                ; WAIT 3C
 										dc.b $3C

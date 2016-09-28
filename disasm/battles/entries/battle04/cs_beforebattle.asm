@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle04\cs_beforebattle :
 ; Cutscene before battle 4
-bbcs_04:            dc.w 4                  ; 0004 SET TEXT INDEX 907
+bbcs_04:            dc.w 4                  ; 0004 SET TEXT INDEX 907 : "Who are they?{W1}"
 										dc.w $907
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 42 1 5
 										dc.w $42
@@ -23,22 +23,22 @@ bbcs_04:            dc.w 4                  ; 0004 SET TEXT INDEX 907
 										dc.b 4
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Who are they?{W1}"
 										dc.w 4
 										dc.w $32                ; 0032 SET CAMERA DEST 7 D
 										dc.w 7
 										dc.w $D
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Galam soldiers!{W1}"
 										dc.w 4
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01C : "Greetings, Granseal scum!{W1}"
 										dc.w $C01C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Why did you kill Sir{N}Hawel?  How could you be{N}so mean?{W1}"
 										dc.w 4
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01C : "Ummm....{W1}"
 										dc.w $C01C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 4
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 4 : "Answer me!{W1}"
 										dc.w 4
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "{LEADER}, we must{N}defeat them so we can learn{N}the truth!{W1}"
 										dc.w 4
 										dc.w $23                ; 0023 SET ENTITY FACING 1C 3
 										dc.b $1C
@@ -53,7 +53,7 @@ bbcs_04:            dc.w 4                  ; 0004 SET TEXT INDEX 907
 										dc.b 2
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01C
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01C : "Capture them alive!{W1}"
 										dc.w $C01C
 										dc.w $26                ; 0026 MAKE ENTITY NOD 80
 										dc.w $80

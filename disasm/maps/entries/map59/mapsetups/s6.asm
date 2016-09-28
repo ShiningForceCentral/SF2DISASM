@@ -64,7 +64,7 @@ loc_5EB3C:
 
 	; End of function sub_5EB34
 
-cs_5EB44:           dc.w 4                  ; 0004 SET TEXT INDEX E73
+cs_5EB44:           dc.w 4                  ; 0004 SET TEXT INDEX E73 : "{LEADER} is almost here{N}already?{W1}"
 										dc.w $E73
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF
@@ -88,46 +88,46 @@ cs_5EB44:           dc.w 4                  ; 0004 SET TEXT INDEX E73
 										dc.b 0
 										dc.l eas_Transparent    
 										dc.w $4A                ; 004A FADE IN FROM BLACK HALF
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "{LEADER} is almost here{N}already?{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "Yes, sir.  With an ancient{N}aircraft.  He'll be passing{N}over the cape soon.{W1}"
 										dc.w $8081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Good.  I'll do anything to{N}get my powers back.{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8081 : "They're stronger than we{N}thought.{W2}"
 										dc.w $8081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "But, I have an idea.  Please{N}let me try it.{W1}"
 										dc.w $8081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Well?{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8081 : "I think it's better for us{N}to shoot them down over the{N}"
 										dc.w $8081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "cape.{W1}"
 										dc.w $8081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I agree.{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8081 : "Thank you.  Then... may I{W2}"
 										dc.w $8081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "borrow Odd Eye?{W1}"
 										dc.w $8081
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "He's still damaged from his{N}battle against Volcanon.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Take Red Baron instead.{W1}"
 										dc.w $80
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 81
 										dc.w $81
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 81
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "Thank you, sir.{W1}"
 										dc.w $8081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "They'll be passing over the{N}cape soon.  Go!{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "Yes, sir!{W1}"
 										dc.w $8081
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 81
 										dc.w $81
 										dc.w 6
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "That Geshp!  He wants{N}everything.{W1}"
 										dc.w $82
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 82 9 9 3
 										dc.b $82
@@ -145,28 +145,28 @@ cs_5EB44:           dc.w 4                  ; 0004 SET TEXT INDEX E73
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "You noticed that too?{W1}"
 										dc.w $80
 										dc.w $26                ; 0026 MAKE ENTITY NOD 82
 										dc.w $82
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 82
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 82 : "Yes, King Zeon.{W2}"
 										dc.w $82
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "I'm afraid Geshp can't stop{N}{LEADER}'s advance.{W1}"
 										dc.w $82
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "You really think so?{W1}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 82
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 82 : "I was just thinking of{N}{LEADER}'s hidden powers.{W2}"
 										dc.w $82
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "We must never underestimate{N}him.{W1}"
 										dc.w $82
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Anyway, it will be a{N}fantastic show!  Ha, ha!{W1}"
 										dc.w $80
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 cs_5EBFC:           dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 8 E
 										dc.w $35
 										dc.w 8
 										dc.w $E
-										dc.w 4                  ; 0004 SET TEXT INDEX E8B
+										dc.w 4                  ; 0004 SET TEXT INDEX E8B : "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
 										dc.w $E8B
 										dc.w $42                ; 0042 RELATED TO LOADING MAP ENTITIES 5F1DE
 										dc.l word_5F1DE
@@ -273,7 +273,7 @@ cs_5EBFC:           dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 8 E
 										dc.b $1E
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
 										dc.w $80
 										dc.w $32                ; 0032 SET CAMERA DEST A E
 										dc.w $A
@@ -286,11 +286,11 @@ cs_5EBFC:           dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 8 E
 										dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 81
 										dc.w $81
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "How are the Prism Flowers?{W1}"
 										dc.w $8081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "They're ready!{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "Excellent!{W1}"
 										dc.w $8081
 										dc.w $26                ; 0026 MAKE ENTITY NOD 81
 										dc.w $81
@@ -307,16 +307,16 @@ cs_5EBFC:           dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 8 E
 										dc.w $23                ; 0023 SET ENTITY FACING 81 0
 										dc.b $81
 										dc.b 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8081 : "Now, c'mon Granseal losers!{W2}"
 										dc.w $8081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "The Prism Flowers are waiting{N}for you!  Hee, heee!{W1}"
 										dc.w $8081
 										dc.w $26                ; 0026 MAKE ENTITY NOD 81
 										dc.w $81
 										dc.w $26                ; 0026 MAKE ENTITY NOD 81
 										dc.w $81
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5ED06:           dc.w 4                  ; 0004 SET TEXT INDEX E91
+cs_5ED06:           dc.w 4                  ; 0004 SET TEXT INDEX E91 : "There's Grans Island!{W1}"
 										dc.w $E91
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 49 0 0
 										dc.w $49
@@ -339,11 +339,11 @@ cs_5ED06:           dc.w 4                  ; 0004 SET TEXT INDEX E91
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 5FD92
 										dc.l sub_5FD92
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A : "There's Grans Island!{W1}"
 										dc.w $801A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Alright!{W1}"
 										dc.w $8007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "We've finally come home.{W1}"
 										dc.w $1F
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 A D
 										dc.w $35
@@ -366,7 +366,7 @@ cs_5ED06:           dc.w 4                  ; 0004 SET TEXT INDEX E91
 										dc.w $1C                ; 001C STOP ENTITY ANIM 84
 										dc.w $84
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "I see the Nazca Ship!{N}Everybody, get ready!{W1}"
 										dc.w $8081
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 49 0 0
 										dc.w $49
@@ -389,16 +389,16 @@ cs_5ED06:           dc.w 4                  ; 0004 SET TEXT INDEX E91
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 5FD92
 										dc.l sub_5FD92
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "What's that?  I saw a flash{N}of light over there.{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "I didn't see it.  You must be{N}seeing things because you're{N}so old!  Ha, ha!{W1}"
 										dc.w $8007
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "(Grumble)....{W2}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Someday, {NAME;7}....{W1}"
 										dc.w $1F
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5EDB8:           dc.w 4                  ; 0004 SET TEXT INDEX E99
+cs_5EDB8:           dc.w 4                  ; 0004 SET TEXT INDEX E99 : "NOW!{W1}"
 										dc.w $E99
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 A D
 										dc.w $35
@@ -456,7 +456,7 @@ cs_5EDB8:           dc.w 4                  ; 0004 SET TEXT INDEX E99
 										dc.w $23                ; 0023 SET ENTITY FACING 81 2
 										dc.b $81
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "NOW!{W1}"
 										dc.w $8081
 										dc.w $2D                ; 002D MOVE ENTITY 81 FF 0 1
 										dc.b $81
@@ -464,7 +464,7 @@ cs_5EDB8:           dc.w 4                  ; 0004 SET TEXT INDEX E99
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8081 : "Shoot them!  Shoot them!{W1}"
 										dc.w $8081
 										dc.w 5                  ; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
 										dc.w $74
@@ -674,7 +674,7 @@ eas_5EF46:          dc.w $1E                ; 001E SET ANIM SPEED X2 $FFFF
 										dc.b $40
 										dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
-cs_5EF60:           dc.w 4                  ; 0004 SET TEXT INDEX E9B
+cs_5EF60:           dc.w 4                  ; 0004 SET TEXT INDEX E9B : "I did see something!{W1}"
 										dc.w $E9B
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 25 4 6
 										dc.w $25
@@ -723,15 +723,15 @@ cs_5EF60:           dc.w 4                  ; 0004 SET TEXT INDEX E9B
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I did see something!{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Well, I didn't.{W1}"
 										dc.w $8007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "This could be bad.{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A : "Sir Astral!  {LEADER}!{N}Something is coming straight{N}towards us!{W1}"
 										dc.w $801A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "What is it?{W1}"
 										dc.w $80
 										dc.w 5                  ; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
 										dc.w $74
@@ -762,7 +762,7 @@ cs_5EF60:           dc.w 4                  ; 0004 SET TEXT INDEX E9B
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
 										dc.b 7
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Oooouu!!  What was that?!{N}Lightning?{W1}"
 										dc.w $8007
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0
 										dc.b 0
@@ -770,9 +770,9 @@ cs_5EF60:           dc.w 4                  ; 0004 SET TEXT INDEX E9B
 										dc.w $23                ; 0023 SET ENTITY FACING 1A 3
 										dc.b $1A
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 801A
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 801A : "An attack from the ground.{W2}"
 										dc.w $801A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A : "I can't control the ship!{W1}"
 										dc.w $801A
 										dc.w 5                  ; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
 										dc.w $74
@@ -798,9 +798,9 @@ cs_5EF60:           dc.w 4                  ; 0004 SET TEXT INDEX E9B
 										dc.w 1
 										dc.b $80                ; WAIT A
 										dc.b $A
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 801A
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 801A : "We've sustained damage to{N}the engine!{W2}"
 										dc.w $801A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A : "We might crash!{W1}"
 										dc.w $801A
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 0 1
 										dc.b $80
@@ -813,9 +813,9 @@ cs_5EF60:           dc.w 4                  ; 0004 SET TEXT INDEX E9B
 										dc.b 1
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Crash?!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A : "Geshp's trap!  Darn!{W1}"
 										dc.w $801A
 										dc.w 5                  ; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
 										dc.w $74
@@ -845,13 +845,13 @@ cs_5EF60:           dc.w 4                  ; 0004 SET TEXT INDEX E9B
 										dc.b 7
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8007
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8007 : "I don't want to crash!{W2}"
 										dc.w $8007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Sir Astral, please help us!{W1}"
 										dc.w $8007
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "{NAME;26}, can you land on{N}that cape before the ship{N}crashes?{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A : "I'm not sure,{W2}"
 										dc.w $801A
 										dc.w 5                  ; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
 										dc.w $74
@@ -863,7 +863,7 @@ cs_5EF60:           dc.w 4                  ; 0004 SET TEXT INDEX E9B
 										dc.w 1
 										dc.b $80                ; WAIT A
 										dc.b $A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 801A : "but I'll try.{W1}"
 										dc.w $801A
 										dc.w 5                  ; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
 										dc.w $74

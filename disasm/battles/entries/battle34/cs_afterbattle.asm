@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle34\cs_afterbattle :
 ; Cutscene after battle 34
-abcs_battle34:      dc.w 4                  ; 0004 SET TEXT INDEX B5F
+abcs_battle34:      dc.w 4                  ; 0004 SET TEXT INDEX B5F : "{LEADER}, I lost?!{N}Take this.{W1}"
 										dc.w $B5F
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 37 2 7
 										dc.w $37
@@ -65,23 +65,23 @@ word_4D502:         dc.w $1C                ; 001C STOP ENTITY ANIM 80
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "{LEADER}, I lost?!{N}Take this.{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "Cameela reveals the Sky Orb.{W1}"
 										dc.w $FFFF
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 83 7 A 2
 										dc.b $83
 										dc.b 7
 										dc.b $A
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "This is the Sky Orb.  With{N}it, you can drive the Nazca{N}Ship.{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Listen.  You have to be very{N}careful from now on.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Geshp has Prism Flowers.{N}He will...{W1}"
 										dc.w $80
 										dc.w $3D                ; 003D TINT MAP
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Your life is over,{N}Cameela!{W1}"
 										dc.w $C081
 										dc.w $41                ; 0041 FLASH SCREEN WHITE 2
 										dc.w 2
@@ -121,11 +121,11 @@ word_4D592:         dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 45E44
 										dc.b $1F
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Geshp!{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Ha, ha, ha!  You acted just{N}as I planned!{W1}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Ouuuuu...Ges...{W1}"
 										dc.w $80
 										dc.w $1A                ; 001A SET ENTITY SPRITE 80 9C
 										dc.w $80
@@ -134,13 +134,13 @@ word_4D592:         dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 45E44
 										dc.b $80
 										dc.b $FF
 										dc.l eas_Die            
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "How horrible!{W1}"
 										dc.w $1F
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081 : "It's the law.  Traitors{N}die by fire.{W2}"
 										dc.w $C081
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C081 : "Congratulations!{N}You have a ship now!{N}Come to Grans!{W2}"
 										dc.w $C081
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "I have to go now and{N}prepare your welcoming{N}party!{W1}"
 										dc.w $C081
 										dc.w $3E                ; 003E SIMILAR TO TINT MAP
 										dc.b $80                ; WAIT 3C
@@ -148,14 +148,14 @@ word_4D592:         dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 45E44
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
 										dc.b 7
 										dc.b 2
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "I really hate him!{W2}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Prism Flowers?{N}What are they?{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 0
 										dc.b $1F
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "I have no idea, but it's{N}probably a trap.{W1}"
 										dc.w $1F
 										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D620
 										dc.w $4C
@@ -177,7 +177,7 @@ word_4D592:         dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 45E44
 										dc.b 2
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "Ancient flower.{W1}"
 										dc.w $1A
 										dc.w $2D                ; 002D MOVE ENTITY 1F FF 0 1
 										dc.b $1F
@@ -185,20 +185,20 @@ word_4D592:         dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 45E44
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Excuse me?{W1}"
 										dc.w $1F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "Ancient countries had those{N}flowers along their borders.{W1}"
 										dc.w $1A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "What kind of flowers are{N}they?{W1}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 1A 1
 										dc.b $1A
 										dc.b 1
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "I cannot explain....{W1}"
 										dc.w $1A
-word_4D620:         dc.w 4                  ; 0004 SET TEXT INDEX B74
+word_4D620:         dc.w 4                  ; 0004 SET TEXT INDEX B74 : "We will see them when we{N}arrive at Grans.{W1}"
 										dc.w $B74
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 2 1
 										dc.b 7
@@ -206,9 +206,9 @@ word_4D620:         dc.w 4                  ; 0004 SET TEXT INDEX B74
 										dc.b 2
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "We will see them when we{N}arrive at Grans.{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, grab the Sky{N}Orb.{N}Let's go.{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 1 1
 										dc.b 7

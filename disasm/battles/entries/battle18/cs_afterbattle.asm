@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle18\cs_afterbattle :
 ; Cutscene after battle 18
-abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
+abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0 : "{LEADER}, you're much{N}stronger than I thought.{W1}"
 										dc.w $9E0
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN C 7 5
 										dc.w $C
@@ -45,7 +45,7 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "{LEADER}, you're much{N}stronger than I thought.{W1}"
 										dc.w $B
 										dc.w $23                ; 0023 SET ENTITY FACING 0 2
 										dc.b 0
@@ -135,7 +135,7 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.b 2
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "It's so small.  I'll just{N}try to...get inside....{W1}"
 										dc.w $B
 										dc.w $2D                ; 002D MOVE ENTITY B 0 2 1
 										dc.b $B
@@ -279,7 +279,7 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 3
 										dc.b $1F
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Oh, he's gone!{W1}"
 										dc.w 7
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
@@ -292,7 +292,7 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 2
 										dc.b $1F
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "I hope he comes back.{N}Did {NAME;11} lie to us?{W1}"
 										dc.w 7
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -476,7 +476,7 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.b 3
 										dc.b 3
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "I never lie!{W1}"
 										dc.w $B
 										dc.w $2D                ; 002D MOVE ENTITY B FF 2 2
 										dc.b $B
@@ -487,7 +487,7 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.w $23                ; 0023 SET ENTITY FACING B 3
 										dc.b $B
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "The Ancients were...how{N}should I say this...great!{W1}"
 										dc.w $B
 										dc.w $2D                ; 002D MOVE ENTITY B FF 0 1
 										dc.b $B
@@ -498,7 +498,7 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.w $23                ; 0023 SET ENTITY FACING B 1
 										dc.b $B
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "No wonder the Caravan is so{N}small.  It carries miniaturized{N}people and items.{W2}"
 										dc.w $B
 										dc.w $2D                ; 002D MOVE ENTITY B FF 1 2
 										dc.b $B
@@ -509,11 +509,11 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.w $23                ; 0023 SET ENTITY FACING B 3
 										dc.b $B
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "I can drive this excellent{N}vehicle.  May I go with you{N}as a driver?{W1}"
 										dc.w $B
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{NAME;11} the historian{N}tags along with the force.{W1}"
 										dc.w $FFFF
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 1 1
 										dc.b 7
@@ -521,7 +521,7 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "You're kidding, right?{W1}"
 										dc.w 7
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 3 1
 										dc.b 7
@@ -538,7 +538,7 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 2
 										dc.b $1F
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Well, at least we can bring{N}a lot of soldiers with us.{W1}"
 										dc.w 7
 										dc.w $2D                ; 002D MOVE ENTITY B FF 3 1
 										dc.b $B
@@ -555,9 +555,9 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "But soldiers in the Caravan{N}cannot enter battle 'cause{N}they've been miniaturized.{W1}"
 										dc.w $B
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "We'll just have to see.{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0
 										dc.b 0
@@ -568,7 +568,7 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 2
 										dc.b $1F
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "Humph.  I don't like this guy.{W1}"
 										dc.w 7
 										dc.w $2D                ; 002D MOVE ENTITY B FF 1 1
 										dc.b $B
@@ -598,7 +598,7 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 1
 										dc.b $1F
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX B : "I wonder what adventures{N}we'll find with this Caravan!{W1}"
 										dc.w $B
 										dc.b $80                ; WAIT 1E
 										dc.b $1E

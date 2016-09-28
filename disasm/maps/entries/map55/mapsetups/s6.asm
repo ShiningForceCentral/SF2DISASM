@@ -117,7 +117,7 @@ byte_5E33E:         dc.b 0
 										dc.b 0
 										dc.b 3
 										dc.w $FFFF
-cs_5E346:           dc.w 4                  ; 0004 SET TEXT INDEX D2B
+cs_5E346:           dc.w 4                  ; 0004 SET TEXT INDEX D2B : "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
 										dc.w $D2B
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 										dc.b 0
@@ -146,12 +146,12 @@ cs_5E346:           dc.w 4                  ; 0004 SET TEXT INDEX D2B
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0
 										dc.b 0
 										dc.b 0
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1F : "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
 										dc.w $1F
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 2
 										dc.b $1F
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Anyway, we have to go to{N}Arc Valley.{N}{LEADER}, let's go.{W1}"
 										dc.w $1F
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF

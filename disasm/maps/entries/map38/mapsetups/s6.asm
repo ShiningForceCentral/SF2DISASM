@@ -53,7 +53,7 @@ cs_5DD9C:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 80 
 										dc.b $E
 										dc.b $1A
 										dc.b 3
-										dc.w 4                  ; 0004 SET TEXT INDEX 854
+										dc.w 4                  ; 0004 SET TEXT INDEX 854 : "Galam soldiers!  Run!{W1}"
 										dc.w $854
 										dc.b $80                ; WAIT 1
 										dc.b 1
@@ -84,7 +84,7 @@ word_5DDC2:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_TOWN
 										dc.b $80
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Galam soldiers!  Run!{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 2 2
 										dc.b $80
@@ -113,12 +113,12 @@ word_5DDC2:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_TOWN
 										dc.w $23                ; 0023 SET ENTITY FACING 1F 2
 										dc.b $1F
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "No, wait!  We're not Galam{N}soldiers!{W1}"
 										dc.w 7
 										dc.w $23                ; 0023 SET ENTITY FACING 80 0
 										dc.b $80
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "No...?{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 80 FF 3 2
 										dc.b $80
@@ -132,9 +132,9 @@ word_5DDC2:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_TOWN
 										dc.b 0
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Oops.  My mistake.{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Oh, it's obvious.  I can see{N}it in your eyes.{W1}"
 										dc.w $80
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 cs_5DE22:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 1A F 1D 1
@@ -144,7 +144,7 @@ cs_5DE22:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 1A 
 										dc.b 1
 										dc.w $B                 ; 000B JUMP 5DDC2
 										dc.l word_5DDC2         
-cs_5DE2E:           dc.w 4                  ; 0004 SET TEXT INDEX 86A
+cs_5DE2E:           dc.w 4                  ; 0004 SET TEXT INDEX 86A : "Sir Petro, don't leave me{N}alone!{W1}"
 										dc.w $86A
 										dc.w $1C                ; 001C STOP ENTITY ANIM 8E
 										dc.w $8E
@@ -157,30 +157,30 @@ cs_5DE2E:           dc.w 4                  ; 0004 SET TEXT INDEX 86A
 										dc.w $89
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_SAD_THEME_3
 										dc.w $F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89 : "Sir Petro, don't leave me{N}alone!{W1}"
 										dc.w $89
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8E : "Paseran...I'm sorry.{W1}"
 										dc.w $8E
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 89
 										dc.w $89
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89 : "You promised to fly me in{N}the sky!{W1}"
 										dc.w $89
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8E
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8E : "I know...with the Nazca{N}Ship...I promised...{W2}"
 										dc.w $8E
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8E
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8E : "I'd fly home...to see my{N}family....{W2}"
 										dc.w $8E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8E : "To show them how wonderful{N}the ancients were....{W1}"
 										dc.w $8E
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 89
 										dc.w $89
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FD
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89 : "Petro!  No!{W1}"
 										dc.w $89
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FB
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5DE76:           dc.w 4                  ; 0004 SET TEXT INDEX 879
+cs_5DE76:           dc.w 4                  ; 0004 SET TEXT INDEX 879 : "What's wrong with {NAME;26}?{W1}"
 										dc.w $879
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7
@@ -279,9 +279,9 @@ cs_5DE76:           dc.w 4                  ; 0004 SET TEXT INDEX 879
 										dc.b $1A
 										dc.b 0
 										dc.l eas_Jump           
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "What's wrong with {NAME;26}?{W1}"
 										dc.w 7
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "I have no idea, but he's{N}obviously disturbed!{W1}"
 										dc.w $1F
 										dc.w $2D                ; 002D MOVE ENTITY 1A FF 1 1
 										dc.b $1A
@@ -314,20 +314,20 @@ cs_5DE76:           dc.w 4                  ; 0004 SET TEXT INDEX 879
 										dc.w $23                ; 0023 SET ENTITY FACING 1A 0
 										dc.b $1A
 										dc.b 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "{LEADER}, Sir Astral!{N}I am angry!{W2}"
 										dc.w $1A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "I cannot forgive the{N}devils!{W2}"
 										dc.w $1A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "I have overridden my{N}restrictions on fighting.{W2}"
 										dc.w $1A
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "I am joining your force as{N}a soldier!{W1}"
 										dc.w $1A
 										dc.w 8                  ; 0008 JOIN FORCE 1A
 										dc.w $1A
 										dc.w $10                ; 0010 SET FLAG 4C 0
 										dc.w $4C
 										dc.w 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "Let us go defeat the Devil{N}Army!{W1}"
 										dc.w $1A
 										dc.w $2C                ; 002C FOLLOW ENTITY 7 0 2
 										dc.w 7

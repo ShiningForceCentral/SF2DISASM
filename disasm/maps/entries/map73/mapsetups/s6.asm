@@ -85,7 +85,7 @@ sub_5039E:
 
 	; End of function sub_5039E
 
-cs_503A6:           dc.w 4                  ; 0004 SET TEXT INDEX 8BF
+cs_503A6:           dc.w 4                  ; 0004 SET TEXT INDEX 8BF : "The people of Granseal have{N}arrived at their new home.{W1}"
 										dc.w $8BF
 										dc.w $55                ; 0055 RESET FORCE BATTLE STATS
 										dc.w $46                ; 0046  0 0
@@ -106,62 +106,62 @@ cs_503A6:           dc.w 4                  ; 0004 SET TEXT INDEX 8BF
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_TOWN
 										dc.w 8
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 4                  ; 0004 SET TEXT INDEX 8A5
+										dc.w 4                  ; 0004 SET TEXT INDEX 8A5 : "We were almost swallowed{N}by that chasm.{W1}"
 										dc.w $8A5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "We were almost swallowed{N}by that chasm.{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C000
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C000 : "That was close!{W1}"
 										dc.w $C000
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C001
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C001 : "Sir Astral, where should{N}we go now?{W1}"
 										dc.w $C001
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "I think we should to go{N}to the mainland.{N}Don't you agree, Minister?{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "We have no choice.{W1}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C003
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C003 : "Then, let's go to the{N}continent of Parmecia!{W1}"
 										dc.w $C003
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 5036E
 										dc.l sub_5036E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "And so the ship heads east{N}for Parmecia.{W1}"
 										dc.w $FFFF
 										dc.b $80                ; WAIT 78
 										dc.b $78
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "I feel...sick...to my...{N}stomach...ohhh....{W1}"
 										dc.w 1
 										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 6 50426
 										dc.w 6
 										dc.l word_50426         
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C006
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C006 : "{NAME;1}, look!{W1}"
 										dc.w $C006
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "Sorry, {NAME;6}...I can't{N}do anything right now....{W1}"
 										dc.w 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C006
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C006 : "That's not what...{W1}"
 										dc.w $C006
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "Sorry...ohhh...!{W1}"
 										dc.w 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C006
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C006 : "Hooray, land ho!{W1}"
 										dc.w $C006
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "What?  Oh, it's true!{N}Sir Astral, we can see the {N}mainland!{W1}"
 										dc.w 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Finally we've arrived.{N}King Granseal, can you see{N}Parmecia?{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "Oh, that's good...{W1}"
 										dc.w $82
-word_50426:         dc.w 4                  ; 0004 SET TEXT INDEX 8B5
+word_50426:         dc.w 4                  ; 0004 SET TEXT INDEX 8B5 : "Minister, we're approaching{N}Parmecia!{W1}"
 										dc.w $8B5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Minister, we're approaching{N}Parmecia!{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Land the ship, captain.{W1}"
 										dc.w $81
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C083
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C083 : "Where?{W1}"
 										dc.w $C083
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Anywhere.  There!{N}No!  There!{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8083
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8083 : "But, the ship will be{N}destroyed!{W1}"
 										dc.w $8083
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "It doesn't matter.  The ship{N}will be used for lumber after{N}we land, anyway.{W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8083
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8083 : "Are you serious?  Just{N}don't complain that we{N}don't have a ship later!{W1}"
 										dc.w $8083
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 50380
 										dc.l sub_50380
@@ -192,11 +192,11 @@ word_50426:         dc.w 4                  ; 0004 SET TEXT INDEX 8B5
 										dc.b 0
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5 : "Whoa!{W1}"
 										dc.w 5
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "The ship has crashed into{N}the shore!  Oh, no!{W1}"
 										dc.w 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 83 : "Ouch!  Ouch!{N}That's what I call good{N}seamanship!{W1}"
 										dc.w $83
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 0
 										dc.w 0
@@ -208,9 +208,9 @@ word_50426:         dc.w 4                  ; 0004 SET TEXT INDEX 8B5
 										dc.w $84
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 4                  ; 0004 SET TEXT INDEX 8BF
+										dc.w 4                  ; 0004 SET TEXT INDEX 8BF : "The people of Granseal have{N}arrived at their new home.{W1}"
 										dc.w $8BF
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "The people of Granseal have{N}arrived at their new home.{W1}"
 										dc.w $FFFF
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN E 12 19
 										dc.w $E
@@ -310,7 +310,7 @@ word_50426:         dc.w 4                  ; 0004 SET TEXT INDEX 8B5
 										dc.b 2
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Everybody, listen up!{W1}"
 										dc.w $80
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -352,11 +352,11 @@ word_50426:         dc.w 4                  ; 0004 SET TEXT INDEX 8B5
 										dc.w $23                ; 0023 SET ENTITY FACING 8C 3
 										dc.b $8C
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Let's build a new Granseal{N}here!{W2}"
 										dc.w $80
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "The ship will be a good{N}source of timber!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Break the ship apart and{N}bring the timber onto the{N}land!{W1}"
 										dc.w $80
 										dc.w $15                ; 0015 SET ACTSCRIPT 81 0 45054
 										dc.b $81
@@ -444,20 +444,20 @@ word_50624:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 3
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 3 : "We're going to break the{N}ship up into pieces and build{N}our new town....{W2}"
 										dc.w 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 3
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 3 : "That means, we can't go back{N}to Grans Island!{W2}"
 										dc.w 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 3
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 3 : "Hey, listen to me!{W1}"
 										dc.w 3
 										dc.w $23                ; 0023 SET ENTITY FACING 1 1
 										dc.b 1
 										dc.b 1
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX C001
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX C001 : "Be quiet!  We know that.{W2}"
 										dc.w $C001
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "Help me remove this plank!{W1}"
 										dc.w 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 3
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 3 : "OK, I'm coming.{W1}"
 										dc.w 3
 										dc.w $2D                ; 002D MOVE ENTITY 3 FF 3 2
 										dc.b 3
@@ -473,9 +473,9 @@ word_50624:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $3B
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 3
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 3 : "Ugh...ugghhh...{N}It's stuck!{W2}"
 										dc.w 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 3
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 3 : "Heave!  Heave!{N}Come oooooooooon!{W1}"
 										dc.w 3
 										dc.w $15                ; 0015 SET ACTSCRIPT 3 FF 46172
 										dc.b 3
@@ -518,7 +518,7 @@ word_50624:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w 0
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5 : "Oh, what a klutz!{W1}"
 										dc.w 5
 										dc.w $2D                ; 002D MOVE ENTITY 5 FF 0 2
 										dc.b 5
@@ -531,14 +531,14 @@ word_50624:         dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.b 1
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C001
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C001 : "That's OK.  {NAME;3} needed{N}a bath anyway.{W1}"
 										dc.w $C001
 										dc.b $80                ; WAIT 14
 										dc.b $14
 										dc.w $32                ; 0032 SET CAMERA DEST 22 4
 										dc.w $22
 										dc.w 4
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "{LEADER}, bring that plank{N}above deck.{W1}"
 										dc.w 4
 										dc.w $53                ; 0053  0 0
 										dc.w 0
@@ -729,7 +729,7 @@ word_5079E:         dc.w $28
 										dc.b $B3
 										dc.l eas_Init           
 										dc.w $FFFF
-cs_50806:           dc.w 4                  ; 0004 SET TEXT INDEX 8F0
+cs_50806:           dc.w 4                  ; 0004 SET TEXT INDEX 8F0 : "Look at that, {LEADER}!{N}They've finished breaking{N}up the ship.{W1}"
 										dc.w $8F0
 										dc.w $42                ; 0042 RELATED TO LOADING MAP ENTITIES 5094A
 										dc.l word_5094A
@@ -817,7 +817,7 @@ cs_50806:           dc.w 4                  ; 0004 SET TEXT INDEX 8F0
 										dc.b 0
 										dc.b 0
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Look at that, {LEADER}!{N}They've finished breaking{N}up the ship.{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 0 3
 										dc.b 0
@@ -873,9 +873,9 @@ cs_50806:           dc.w 4                  ; 0004 SET TEXT INDEX 8F0
 										dc.w $1830
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Wow, there's our new town!{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "But, our Granseal was much{N}more beautiful.{N}Cheer up!{W1}"
 										dc.w $80
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF
@@ -920,7 +920,7 @@ cs_50806:           dc.w 4                  ; 0004 SET TEXT INDEX 8F0
 										dc.b 3
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "They worked hard to build{N}their new town.{W1}"
 										dc.w $FFFF
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FD

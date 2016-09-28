@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle15\cs_beforebattle :
 ; Cutscene before battle 15
-bbcs_15:            dc.w 4                  ; 0004 SET TEXT INDEX 9C7
+bbcs_15:            dc.w 4                  ; 0004 SET TEXT INDEX 9C7 : "This is the Ancient Hall{N}that leads to the Ancient{N}Tunnel...{W1}"
 										dc.w $9C7
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 32 9 F
 										dc.w $32
@@ -43,7 +43,7 @@ bbcs_15:            dc.w 4                  ; 0004 SET TEXT INDEX 9C7
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 										dc.w $30
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "This is the Ancient Hall{N}that leads to the Ancient{N}Tunnel...{W1}"
 										dc.w $1E
 										dc.w $2D                ; 002D MOVE ENTITY 1E FF 1 1
 										dc.b $1E
@@ -81,12 +81,12 @@ bbcs_15:            dc.w 4                  ; 0004 SET TEXT INDEX 9C7
 										dc.w $32                ; 0032 SET CAMERA DEST 9 F
 										dc.w 9
 										dc.w $F
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "There are more monsters here!{W2}"
 										dc.w $1E
 										dc.w $23                ; 0023 SET ENTITY FACING 1E 3
 										dc.b $1E
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "{LEADER}, take 'em out!{W1}"
 										dc.w $1E
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_4AE42:         dc.w $E

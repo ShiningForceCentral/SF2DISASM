@@ -21,7 +21,7 @@ return_540BE:
 
 	; End of function ms_map43_InitFunction
 
-cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
+cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B : "This is Hawel's house.{W1}"
 										dc.w $32B
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 										dc.b 0
@@ -73,7 +73,7 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.b 0
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "This is Hawel's house.{W1}"
 										dc.w 4
 										dc.w $2D                ; 002D MOVE ENTITY 4 FF 2 1
 										dc.b 4
@@ -85,7 +85,7 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.b $C
 										dc.b $14
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Sir Hawel!{N}Granseal friends are here!{W1}"
 										dc.w 4
 										dc.b $80                ; WAIT 46
 										dc.b $46
@@ -94,7 +94,7 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.b 0
 										dc.b $80                ; WAIT 28
 										dc.b $28
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Strange...{N}There's no answer.{W2}{N}Has he gone somewhere?{N}Well, why don't you wait{N}for him inside?{W1}"
 										dc.w 4
 										dc.w $26                ; 0026 MAKE ENTITY NOD 0
 										dc.w 0
@@ -147,7 +147,7 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.b 1
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FE
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Wh...who are you?{N}Oh, Sir Hawel!{W1}"
 										dc.w 4
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_ENEMY_ATTACK
 										dc.w 5
@@ -160,7 +160,7 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.w $23                ; 0023 SET ENTITY FACING 82 3
 										dc.b $82
 										dc.b 3
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Oops!  You came back early!{W1}"
 										dc.w $81
 										dc.w $2D                ; 002D MOVE ENTITY 4 FF 1 1
 										dc.b 4
@@ -168,7 +168,7 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "You!  What did you{N}do to Sir Hawel?!{W1}"
 										dc.w 4
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
@@ -293,7 +293,7 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.w $8080
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FD
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Ohhh...{NAME;4}....{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 4 FF 2 1
 										dc.b 4
@@ -304,11 +304,11 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.w $23                ; 0023 SET ENTITY FACING 4 1
 										dc.b 4
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Sir...you're alive!{W1}"
 										dc.w 4
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_SAD_THEME_1
 										dc.w $10
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "...It's no use running after{N}them....{W1}"
 										dc.w $80
 										dc.w $2D                ; 002D MOVE ENTITY 4 FF 2 1
 										dc.b 4
@@ -318,9 +318,9 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.b 1
 										dc.b 2
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Are you OK, sir?{N}Why did they do such a{N}cruel thing?{W1}"
 										dc.w 4
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "They were Galam soldiers.{N}They demanded my notes on{N}Ground Seal.{W2}{N}They suddenly snatched at{N}them, and...(cough)...{W1}"
 										dc.w $80
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
@@ -340,34 +340,34 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.w $23                ; 0023 SET ENTITY FACING 4 2
 										dc.b 4
 										dc.b 2
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 0
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 0 : "(Whisper)....{W1}"
 										dc.w 0
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Who...is...it?{N}What...did he...say?{W1}"
 										dc.w $80
 										dc.w $23                ; 0023 SET ENTITY FACING 4 1
 										dc.b 4
 										dc.b 1
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "He's {LEADER} from{N}Granseal.  He said that{N}Ground Seal has opened.{W1}{N}And a serious disaster{N}took place!{W1}{N}He came to see you for{N}more information.{W1}"
 										dc.w 4
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
 										dc.w $1C                ; 001C STOP ENTITY ANIM 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "What?!  The door opened?{N}Who broke the ancient{N}seal?! {W1}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Calm down, sir.{N}Why are you so excited?{W1}"
 										dc.w 4
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "(Cough, cough)...{NAME;4},{N}listen to me carefully.{N}Grans Island is lost!{W2}{N}That tower is the sacred{N}seal that confines a terrible{N}devil.{W2}{N}Two jewels...(cough)...{N}were...installed to...{W1}"
 										dc.w $80
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 80
 										dc.w $80
 										dc.w $1C                ; 001C STOP ENTITY ANIM 80
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Stop talking, or you'll die.{W1}"
 										dc.w 4
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "I'm almost dead anyway...{N}(cough)...(cough)....{W2}"
 										dc.w $80
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "{NAME;4}, look for the jewels...{N}to seal...ancient...{W1}"
 										dc.w $80
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FD
@@ -386,7 +386,7 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.b 1
 										dc.b 1
 										dc.w $8080
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Sir!  Sir Hawel!{N}Don't leave me alone!{N}Oh, no...!{W1}"
 										dc.w 4
 										dc.w $1C                ; 001C STOP ENTITY ANIM 4
 										dc.w 4
@@ -408,13 +408,13 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B
 										dc.w $23                ; 0023 SET ENTITY FACING 4 3
 										dc.b 4
 										dc.b 3
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 4
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 4 : "Sir Hawel passed away.{W2}{N}I'm going to seal the tower.{N}It's Sir Hawel's last wish.{W2}"
 										dc.w 4
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "{LEADER}, please!{N}His wish is related to{N}your mission, right?{W2}{N}Can you go with me and{N}seal the tower?{W1}"
 										dc.w 4
 										dc.w 8                  ; 0008 JOIN FORCE 8004
 										dc.w $8004
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 4 : "Now, let's go to the{N}Ancient Shrine!{W1}"
 										dc.w 4
 										dc.w $2C                ; 002C FOLLOW ENTITY 4 0 2
 										dc.w 4

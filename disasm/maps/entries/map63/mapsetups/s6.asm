@@ -210,16 +210,16 @@ cs_5CB34:           dc.w $35                ; 0035 SIMILAR TO SET BLOCKS 1035 10
 										dc.b $80                ; WAIT 1
 										dc.b 1
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5CBB4:           dc.w 4                  ; 0004 SET TEXT INDEX 1053
+cs_5CBB4:           dc.w 4                  ; 0004 SET TEXT INDEX 1053 : "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
 										dc.w $1053
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
 										dc.w $FFFF
 										dc.w $1A                ; 001A SET ENTITY SPRITE 1D 1D
 										dc.w $1D
 										dc.w $1D
 										dc.w $1B                ; 001B START ENTITY ANIM 1D
 										dc.w $1D
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1D
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1D : "O...ooo...wow!{W1}"
 										dc.w $1D
 										dc.w $15                ; 0015 SET ACTSCRIPT 1D FF 45E44
 										dc.b $1D
@@ -267,11 +267,11 @@ cs_5CBB4:           dc.w 4                  ; 0004 SET TEXT INDEX 1053
 										dc.w 0
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1D
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1D : "That feels good....{N}My power is back!{W1}"
 										dc.w $1D
-										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1D
+										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1D : "Thank you.{N}I can move again!{N}How can I express...{W1}"
 										dc.w $1D
-										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1D
+										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1D : "Oh, yes!  I'll join you!{N}I'll protect you!{W1}"
 										dc.w $1D
 										dc.w 8                  ; 0008 JOIN FORCE 1D
 										dc.w $1D
