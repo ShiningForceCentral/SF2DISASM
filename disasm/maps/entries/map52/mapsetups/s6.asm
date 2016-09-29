@@ -22,8 +22,8 @@ sub_5C4DC:
 										bne.s   return_5C4EC
 										lea     word_5C622(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2C8
+										trap    #TRAP_SETFLAG
+										dc.w $2C8               ; set after Peter delivers his lines after the cliffs before Bedoe battle
 return_5C4EC:
 										
 										rts
@@ -217,7 +217,7 @@ word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575 : "Who are
 										dc.b 1
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "They shall never return{N}alive!{W1}"
 										dc.w $80
-										dc.w $13                ; 0013 SET STORY FLAG C
+										dc.w $13                ; 0013 SET STORY FLAG C : Battle 12 unlocked
 										dc.w $C
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 34000000
 										dc.l $34000000

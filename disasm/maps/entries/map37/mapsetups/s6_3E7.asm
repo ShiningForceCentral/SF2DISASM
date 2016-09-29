@@ -12,8 +12,8 @@ ms_map37_flag3E7_InitFunction:
 										bne.s   return_5FABA
 										lea     cs_5FABC(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_5FABA:
 										
 										rts

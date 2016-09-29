@@ -133,7 +133,7 @@ bbcs_06:            dc.w 4                  ; 0004 SET TEXT INDEX 926 : "Halt!{W
 										dc.w $80
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C005 : "Oops!  That didn't work!{W1}"
 										dc.w $C005
-										dc.w $13                ; 0013 SET STORY FLAG 7
+										dc.w $13                ; 0013 SET STORY FLAG 7 : Battle 7 unlocked
 										dc.w 7
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_49CBA:         dc.w $1E

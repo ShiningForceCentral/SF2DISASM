@@ -54,8 +54,8 @@ nullsub_121:
 
 sub_52352:
 										
-										trap    #1
-										dc.w $295
+										trap    #TRAP_CHECKFLAG
+										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 										bne.s   return_5235C
 										trap    #TRAP_TEXTBOX
 										dc.w $37D               ; "We're talking about{N}Ground Seal.{N}Please, join in.{W1}"
@@ -70,8 +70,8 @@ return_5235C:
 
 sub_5235E:
 										
-										trap    #1
-										dc.w $295
+										trap    #TRAP_CHECKFLAG
+										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 										bne.s   return_52368
 										trap    #TRAP_TEXTBOX
 										dc.w $380               ; "Hey!  Don't interrupt!{N}Sit down next to me!{W1}"
@@ -86,8 +86,8 @@ return_52368:
 
 sub_5236A:
 										
-										trap    #1
-										dc.w $295
+										trap    #TRAP_CHECKFLAG
+										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 										bne.s   return_52374
 										trap    #TRAP_TEXTBOX
 										dc.w $37F               ; "Hey, {LEADER}!{N}King Galam also knows about{N}Ground Seal!{W1}"
@@ -156,8 +156,8 @@ sub_52390:
 
 sub_523A2:
 										
-										trap    #1
-										dc.w $295
+										trap    #TRAP_CHECKFLAG
+										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 										bne.s   loc_523AE
 										trap    #TRAP_TEXTBOX
 										dc.w $37E               ; "You got a raw deal, huh?{N}The same thing happened to{N}the rat next door.{W1}"
@@ -188,13 +188,13 @@ sub_523B4:
 
 sub_523BA:
 										
-										trap    #1
-										dc.w $100
+										trap    #TRAP_CHECKFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_523CC
 										lea     cs_52A3C(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bra.s   return_523D0
 loc_523CC:
 										

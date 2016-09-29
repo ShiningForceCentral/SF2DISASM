@@ -8765,7 +8765,7 @@ loc_5220:
 										cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 										bne.s   loc_5256
 										trap    #TRAP_CHECKFLAG
-										dc.w $41                ; check if raft available ?!
+										dc.w $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 										beq.s   loc_5256
 										move.w  #2,((RAM_MapEventType-$1000000)).w
 										movem.w (sp)+,d2-d3
@@ -8776,7 +8776,7 @@ loc_5256:
 										cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 										bne.s   loc_5278
 										trap    #TRAP_CHECKFLAG
-										dc.w $40                ; check if last character is in battle party ?
+										dc.w $40                ; Raft is unlocked (0x05264)
 										beq.s   loc_5278
 										move.w  #3,((RAM_MapEventType-$1000000)).w
 										movem.w (sp)+,d2-d3
@@ -12753,7 +12753,7 @@ loc_7118:
 										move.b  #$FF,((RAM_DebugModeActivated-$1000000)).w
 										bsr.w   InitWindowProperties
 										trap    #TRAP_SETFLAG
-										dc.w FLAGIDX_BTLCUTSCENE_GIZMOS
+										dc.w $18F               ; set after first battle's cutscene OR first save? Checked at witch screens
 										moveq   #0,d0
 										moveq   #0,d1
 										moveq   #$38,d2 
@@ -13018,12 +13018,12 @@ loc_7494:
 										btst    #0,d0
 										beq.s   loc_749E
 										trap    #TRAP_SETFLAG
-										dc.w $4E
+										dc.w $4E                ; set in loc_7494
 loc_749E:
 										btst    #1,d0
 										beq.s   loc_74A8
 										trap    #TRAP_SETFLAG
-										dc.w $4F
+										dc.w $4F                ; both of these can be set in the witch screens...
 loc_74A8:
 										addi.w  #$E9,d0 
 										bsr.w   DisplayText     
@@ -13078,8 +13078,8 @@ loc_74FE:
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
 										clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
-										trap    #1
-										dc.w $58
+										trap    #TRAP_CHECKFLAG
+										dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 										beq.s   loc_753A
 										jsr     j_ExecuteBattleLoop
 										bra.w   loc_75E0
@@ -13189,7 +13189,7 @@ loc_75E4:
 GetEgressPositionForMap:
 										
 										trap    #TRAP_CHECKFLAG
-										dc.w FLAGIDX_BTLCUTSCENE_GIZMOS
+										dc.w $18F               ; set after first battle's cutscene OR first save? Checked at witch screens
 										bne.s   loc_75FC        ; egress always goes back to granseal church if you haven't triggered the gizmos cutscene
 										moveq   #3,d0           ; default egress position
 										moveq   #$38,d1 
@@ -13216,7 +13216,7 @@ loc_7618:
 										move.b  (a0)+,d3
 loc_7620:
 										trap    #TRAP_CHECKFLAG
-										dc.w FLAGIDX_RAFT
+										dc.w $40                ; Raft is unlocked (0x05264)
 										beq.s   loc_764A
 										lea     RaftResetMapCoords(pc), a0
 																						; separate raft egress locations?

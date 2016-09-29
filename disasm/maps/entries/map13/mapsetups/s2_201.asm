@@ -117,7 +117,7 @@ sub_581A2:
 										bne.s   loc_581C4
 										trap    #TRAP_TEXTBOX
 										dc.w $5A8               ; "Pl...please...take that boy{N}with you!{W1}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $104
 										bra.s   loc_58204
 loc_581C4:
@@ -127,7 +127,7 @@ loc_581C4:
 										bne.s   loc_581D4
 										trap    #TRAP_TEXTBOX
 										dc.w $5A9               ; "Ddddd...don't kill me!{W1}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $105
 										bra.s   loc_58204
 loc_581D4:
@@ -137,17 +137,17 @@ loc_581D4:
 										bne.s   loc_581E4
 										trap    #TRAP_TEXTBOX
 										dc.w $5AA               ; "Please, take him!{W1}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $106
 										bra.s   loc_58204
 loc_581E4:
 										
 										lea     cs_58856(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2CC
-										trap    #2
-										dc.w $40
+										trap    #TRAP_SETFLAG
+										dc.w $2CC               ; set after your raft-giving conversation with the mayor in Polca
+										trap    #TRAP_SETFLAG
+										dc.w $40                ; Raft is unlocked (0x05264)
 										move.b  #$48,((RAM_Raft_MapIdx-$1000000)).w 
 										move.b  #$2B,((RAM_Raft_X-$1000000)).w 
 										move.b  #$30,((RAM_Raft_Y-$1000000)).w 

@@ -15,7 +15,7 @@ edcs_battle12:      dc.w 4                  ; 0004 SET TEXT INDEX 9BA : "How can
 										dc.w $80
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "It's you, {LEADER}.{N}We've been waiting for you.{W1}"
 										dc.w $80
-										dc.w $10                ; 0010 SET FLAG 2CA FFFF
+										dc.w $10                ; 0010 SET FLAG 2CA FFFF : set after winning the cliff battle outside Bedoe, before Peter delivers lines
 										dc.w $2CA
 										dc.w $FFFF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

@@ -194,7 +194,7 @@ sub_627D0:
 										bne.s   loc_627F2
 										trap    #TRAP_TEXTBOX
 										dc.w $FC1               ; "Now, let's go see the King!{W1}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $3D5
 										lea     cs_6290C(pc), a0
 										trap    #6

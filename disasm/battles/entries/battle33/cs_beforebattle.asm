@@ -191,10 +191,10 @@ bbcs_33:            dc.w 4                  ; 0004 SET TEXT INDEX B32 : "I'm ope
 										dc.w $B3B
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
 										dc.w $1F
-										dc.w $10                ; 0010 SET FLAG 33F FFFF
+										dc.w $10                ; 0010 SET FLAG 33F FFFF : set after Frayja forces his way into the party just before the battle in Moun
 										dc.w $33F
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 52 0
+										dc.w $10                ; 0010 SET FLAG 52 0 : Frayja is a follower
 										dc.w $52
 										dc.w 0
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

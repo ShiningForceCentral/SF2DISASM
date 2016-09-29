@@ -28,8 +28,8 @@ sub_54CE8:
 										bne.s   loc_54CFA
 										lea     cs_54E86(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2C2
+										trap    #TRAP_SETFLAG
+										dc.w $2C2               ; set after the scene with the sailor and soldier in New Granseal (Peter intro)
 										bra.s   return_54D10
 loc_54CFA:
 										
@@ -41,8 +41,8 @@ loc_54CFA:
 										bne.s   return_54D10
 										lea     cs_55242(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $323
+										trap    #TRAP_SETFLAG
+										dc.w $323               ; set after returning to New Granseal, when the soldier greets you
 return_54D10:
 										
 										rts
@@ -59,8 +59,8 @@ sub_54D12:
 										bne.s   return_54D22
 										lea     cs_54F26(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2BD
+										trap    #TRAP_SETFLAG
+										dc.w $2BD               ; set after the scene with Peter and the kids in New Granseal
 return_54D22:
 										
 										rts
@@ -80,8 +80,8 @@ sub_54D24:
 										bne.s   return_54D3A
 										lea     cs_55288(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $326
+										trap    #TRAP_SETFLAG
+										dc.w $326               ; set after the scene with Janet, when you go to leave New Granseal
 return_54D3A:
 										
 										rts

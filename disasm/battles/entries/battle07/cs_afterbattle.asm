@@ -1151,7 +1151,7 @@ abcs_battle07:      dc.w 4                  ; 0004 SET TEXT INDEX 951 : "King Ga
 										dc.w $28
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "The two jewels merge{N}together.{W1}"
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 181 FFFF
+										dc.w $10                ; 0010 SET FLAG 181 FFFF : set after Bowie obtains King Galam's jewel
 										dc.w $181
 										dc.w $FFFF
 										dc.w $32                ; 0032 SET CAMERA DEST 8 3
@@ -1442,10 +1442,10 @@ abcs_battle07:      dc.w 4                  ; 0004 SET TEXT INDEX 951 : "King Ga
 										dc.w $86
 										dc.w $85
 										dc.w 2
-										dc.w $10                ; 0010 SET FLAG 4A FFFF
+										dc.w $10                ; 0010 SET FLAG 4A FFFF : Astral + King are followers
 										dc.w $4A
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 280 FFFF
+										dc.w $10                ; 0010 SET FLAG 280 FFFF : set after the end of battle 7's long sequence, cleared at docks?
 										dc.w $280
 										dc.w $FFFF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

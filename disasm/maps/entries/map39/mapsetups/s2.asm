@@ -38,10 +38,10 @@ sub_5E05C:
 										beq.s   return_5E070
 										lea     cs_5E20A(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $4C
-										trap    #2
-										dc.w $344
+										trap    #TRAP_SETFLAG
+										dc.w $4C                ; Zynk is a follower
+										trap    #TRAP_SETFLAG
+										dc.w $344               ; set after the scene where Zynk stops you as you leave the Moun underground
 return_5E070:
 										
 										rts

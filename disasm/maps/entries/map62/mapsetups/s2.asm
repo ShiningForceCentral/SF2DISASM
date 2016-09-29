@@ -30,7 +30,7 @@ sub_5C7C2:
 										trap    #1
 										dc.w $2D9
 										beq.s   loc_5C7E4
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $102
 loc_5C7E4:
 										
@@ -67,15 +67,15 @@ sub_5C7F6:
 										bne.s   loc_5C80E
 										lea     cs_5C8D4(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2D8
+										trap    #TRAP_SETFLAG
+										dc.w $2D8               ; ???
 										bra.s   loc_5C818
 loc_5C80E:
 										
 										lea     cs_5C914(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2D9
+										trap    #TRAP_SETFLAG
+										dc.w $2D9               ; ???
 loc_5C818:
 										
 										bra.s   return_5C81E

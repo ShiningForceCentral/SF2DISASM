@@ -17,10 +17,10 @@ sub_61262:
 										beq.s   return_61276
 										lea     cs_6143C(pc), a0
 										trap    #6
-										trap    #3
-										dc.w $4C
-										trap    #2
-										dc.w $399
+										trap    #TRAP_CLEARFLAG
+										dc.w $4C                ; Zynk is a follower
+										trap    #TRAP_SETFLAG
+										dc.w $399               ; set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
 return_61276:
 										
 										rts

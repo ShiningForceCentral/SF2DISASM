@@ -2597,10 +2597,10 @@ cs_62658:           dc.w $33                ; 0033 SET QUAKE AMOUNT 5
 										dc.w $FFFF
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "Wow, is it true?{N}Did Elis' face turn pink?{W1}"
 										dc.w $88
-										dc.w $10                ; 0010 SET FLAG 180 0
+										dc.w $10                ; 0010 SET FLAG 180 0 : set after Bowie obtains the jewel of light/evil... whichever it is
 										dc.w $180
 										dc.w 0
-										dc.w $10                ; 0010 SET FLAG 181 0
+										dc.w $10                ; 0010 SET FLAG 181 0 : set after Bowie obtains King Galam's jewel
 										dc.w $181
 										dc.w 0
 										dc.w $55                ; 0055 RESET FORCE BATTLE STATS

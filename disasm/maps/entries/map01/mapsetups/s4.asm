@@ -35,8 +35,8 @@ sub_5E746:
 										bne.s   return_5E756
 										lea     cs_5E772(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $349
+										trap    #TRAP_SETFLAG
+										dc.w $349               ; set after the Taya join scene has played inside the Mitula Shrine
 return_5E756:
 										
 										rts

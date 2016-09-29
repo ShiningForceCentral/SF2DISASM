@@ -6,8 +6,8 @@
 
 ms_map19_flag1FA_InitFunction:
 										
-										trap    #1
-										dc.w $26C
+										trap    #TRAP_CHECKFLAG
+										dc.w $26C               ; set after Astral talks Lemon into heading to the Ancient Tower
 										beq.s   loc_5314C
 										move.w  #$1C,d0
 										jsr     MoveEntityOutOfMap
@@ -19,8 +19,8 @@ ms_map19_flag1FA_InitFunction:
 										jsr     MoveEntityOutOfMap
 loc_5314C:
 										
-										trap    #1
-										dc.w $26D
+										trap    #TRAP_CHECKFLAG
+										dc.w $26D               ; set after stepping in front of the Minister
 										beq.s   return_53166
 										move.w  #$81,d0 
 										jsr     MoveEntityOutOfMap

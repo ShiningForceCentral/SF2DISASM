@@ -31,7 +31,7 @@ bbcs_34:            dc.w 4                  ; 0004 SET TEXT INDEX B4F : "Hello, 
 										dc.b $1E
 										dc.b $1E
 										dc.b 2
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D38E
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D38E : Zynk is a follower
 										dc.w $4C
 										dc.l word_4D38E         
 										dc.w $15                ; 0015 SET ACTSCRIPT 1A FF 460CE
@@ -69,7 +69,7 @@ word_4D38E:         dc.w $22                ; 0022 ANIMATE ENTITY FADE INOUT 81
 										dc.b 2
 										dc.b 3
 										dc.w $8080
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D3C6
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D3C6 : Zynk is a follower
 										dc.w $4C
 										dc.l word_4D3C6         
 										dc.w $2D                ; 002D MOVE ENTITY 1A 0 2 3

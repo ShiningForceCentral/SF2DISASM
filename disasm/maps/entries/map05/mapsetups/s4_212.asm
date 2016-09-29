@@ -80,8 +80,8 @@ sub_60590:
 										jsr     LoadAndDisplayCurrentPortrait
 										trap    #TRAP_TEXTBOX
 										dc.w $D9B               ; "I can't believe it!{N}I want to die, but I can't!{W1}"
-										trap    #2
-										dc.w $3B1
+										trap    #TRAP_SETFLAG
+										dc.w $3B1               ; set after recruiting Lemon in Yeel
 										bra.s   return_60604
 loc_605C4:
 										

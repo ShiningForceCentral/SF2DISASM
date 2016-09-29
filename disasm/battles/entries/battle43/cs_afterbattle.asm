@@ -132,16 +132,16 @@ abcs_battle43:      dc.w $32                ; 0032 SET CAMERA DEST 8 2
 										dc.l $3B0C0B01
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 0
 										dc.w 0
-										dc.w $10                ; 0010 SET FLAG 43 0
+										dc.w $10                ; 0010 SET FLAG 43 0 : Peter is a follower
 										dc.w $43
 										dc.w 0
-										dc.w $10                ; 0010 SET FLAG 46 0
+										dc.w $10                ; 0010 SET FLAG 46 0 : Astral is a follower
 										dc.w $46
 										dc.w 0
-										dc.w $10                ; 0010 SET FLAG 47 0
+										dc.w $10                ; 0010 SET FLAG 47 0 : Lemon is a follower
 										dc.w $47
 										dc.w 0
-										dc.w $10                ; 0010 SET FLAG 4C 0
+										dc.w $10                ; 0010 SET FLAG 4C 0 : Zynk is a follower
 										dc.w $4C
 										dc.w 0
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

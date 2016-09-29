@@ -56,8 +56,8 @@ sub_5FE68:
 										bne.s   loc_5FE7A
 										lea     cs_5FF06(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $386
+										trap    #TRAP_SETFLAG
+										dc.w $386               ; set after you pull the Force Sword out
 										bra.s   return_5FE8E
 loc_5FE7A:
 										

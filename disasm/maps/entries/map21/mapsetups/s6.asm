@@ -6,15 +6,15 @@
 
 ms_map21_InitFunction:
 										
-										trap    #1
-										dc.w $1F5
+										trap    #TRAP_CHECKFLAG
+										dc.w $1F5               ; Battle 1 completed
 										beq.s   loc_53F1C
 										lea     cs_53F2A(pc), a0
 										trap    #6
 loc_53F1C:
 										
-										trap    #1
-										dc.w $1FB
+										trap    #TRAP_CHECKFLAG
+										dc.w $1FB               ; Battle 7 completed
 										beq.s   return_53F28
 										lea     cs_53FD8(pc), a0
 										trap    #6

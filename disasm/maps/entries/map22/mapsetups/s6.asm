@@ -11,8 +11,8 @@ ms_map22_InitFunction:
 										bne.s   loc_5963E
 										lea     cs_59656(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $308
+										trap    #TRAP_SETFLAG
+										dc.w $308               ; set after the scene where Goliath places you on the Desktop
 loc_5963E:
 										
 										trap    #1
@@ -23,8 +23,8 @@ loc_5963E:
 										bne.s   return_59654
 										lea     cs_5996E(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $30A
+										trap    #TRAP_SETFLAG
+										dc.w $30A               ; set after the scene that plays after you win the chess battle
 return_59654:
 										
 										rts
@@ -505,7 +505,7 @@ cs_5994E:           dc.w 4                  ; 0004 SET TEXT INDEX 700 : "Are you
 										dc.w $86
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 86 : "Now, start the battle!{N}Do your best!{W1}"
 										dc.w $86
-										dc.w $13                ; 0013 SET STORY FLAG 16
+										dc.w $13                ; 0013 SET STORY FLAG 16 : Battle 22 unlocked
 										dc.w $16
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 16000000
 										dc.l $16000000

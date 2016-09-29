@@ -28,8 +28,8 @@ sub_5DCDE:
 										bne.s   return_5DCEE
 										lea     cs_5DE2E(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $38F
+										trap    #TRAP_SETFLAG
+										dc.w $38F               ; set after the Petro death scene in Roft
 return_5DCEE:
 										
 										rts
@@ -49,8 +49,8 @@ sub_5DCF0:
 										beq.s   loc_5DD08
 										lea     cs_5DE76(pc), a0
 										trap    #6
-										trap    #3
-										dc.w $4C
+										trap    #TRAP_CLEARFLAG
+										dc.w $4C                ; Zynk is a follower
 										bra.s   return_5DD24
 loc_5DD08:
 										
@@ -65,8 +65,8 @@ loc_5DD08:
 										beq.s   return_5DD24
 										lea     cs_5DE76(pc), a0
 										trap    #6
-										trap    #3
-										dc.w $4C
+										trap    #TRAP_CLEARFLAG
+										dc.w $4C                ; Zynk is a follower
 return_5DD24:
 										
 										rts

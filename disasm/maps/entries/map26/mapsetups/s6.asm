@@ -11,8 +11,8 @@ ms_map26_InitFunction:
 										bne.s   loc_59DF2
 										lea     cs_59E04(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $30B
+										trap    #TRAP_SETFLAG
+										dc.w $30B               ; set after the Cotton Balloon pops and you land in Floor World
 										move.b  #$1A,((RAM_EgressMapIdx-$1000000)).w
 loc_59DF2:
 										

@@ -53,7 +53,7 @@ abcs_battle38:      dc.w 4                  ; 0004 SET TEXT INDEX BC4 : "My trap
 										dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
 										dc.w $8080              ; 0014 END OF MANUAL ACTSCRIPT
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4DF00
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4DF00 : Zynk is a follower
 										dc.w $4C
 										dc.l word_4DF00         
 										dc.w $15                ; 0015 SET ACTSCRIPT 1A FF 460CE

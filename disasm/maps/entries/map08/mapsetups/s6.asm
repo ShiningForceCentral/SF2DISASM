@@ -390,7 +390,7 @@ cs_56422:           dc.w 4                  ; 0004 SET TEXT INDEX 50E : "Who are
 										dc.w $2003
 										dc.w $201
 										dc.w $60F
-										dc.w $10                ; 0010 SET FLAG 2C5 FFFF
+										dc.w $10                ; 0010 SET FLAG 2C5 FFFF : set after the mayor in Ribble scene... this flag unlocks the doors
 										dc.w $2C5
 										dc.w $FFFF
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 56632

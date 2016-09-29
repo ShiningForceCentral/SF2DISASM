@@ -37,7 +37,7 @@ loc_62CCE:
 										bne.s   loc_62CF2
 										lea     cs_62D0E(pc), a0
 										trap    #6
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $3D6
 										move.b  #$FF,((FOLLOWERS_LIST-$1000000)).w
 										bra.s   loc_62CFA
@@ -501,7 +501,7 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F : "King Gr
 										dc.w 5
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 3
 										dc.w 3
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 8 62FB0
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 8 62FB0 : May joined
 										dc.w 8
 										dc.l word_62FB0         
 										dc.w $2D                ; 002D MOVE ENTITY 8 FF 3 1

@@ -30,15 +30,15 @@ sub_5F47A:
 										bne.s   return_5F49E
 										lea     cs_5F4B8(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $3A2
+										trap    #TRAP_SETFLAG
+										dc.w $3A2               ; set after opening Devil's Head with the Force Sword
 										trap    #1
 										dc.w $1C
 										bne.s   loc_5F49A
 										lea     cs_5F594(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $47
+										trap    #TRAP_SETFLAG
+										dc.w $47                ; Lemon is a follower
 loc_5F49A:
 										
 										move.w  #$FFFF,d6

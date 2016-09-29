@@ -11,8 +11,8 @@ ms_map10_InitFunction:
 										bne.s   loc_57040
 										lea     cs_570B0(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2CF
+										trap    #TRAP_SETFLAG
+										dc.w $2CF               ; set after the initial Bedoe scene (where the guards confront you)
 loc_57040:
 										
 										trap    #1

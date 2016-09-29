@@ -31,7 +31,7 @@ abcs_battle34:      dc.w 4                  ; 0004 SET TEXT INDEX B5F : "{LEADER
 										dc.b 5
 										dc.b $B
 										dc.b 1
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D502
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D502 : Zynk is a follower
 										dc.w $4C
 										dc.l word_4D502         
 										dc.w $15                ; 0015 SET ACTSCRIPT 1A FF 460CE
@@ -110,7 +110,7 @@ word_4D502:         dc.w $1C                ; 001C STOP ENTITY ANIM 80
 										dc.b 7
 										dc.b 0
 										dc.l eas_Jump           
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D592
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D592 : Zynk is a follower
 										dc.w $4C
 										dc.l word_4D592         
 										dc.w $15                ; 0015 SET ACTSCRIPT 1A 0 45E44
@@ -157,7 +157,7 @@ word_4D592:         dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 45E44
 										dc.b 0
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "I have no idea, but it's{N}probably a trap.{W1}"
 										dc.w $1F
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D620
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D620 : Zynk is a follower
 										dc.w $4C
 										dc.l word_4D620         
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 1A
@@ -219,7 +219,7 @@ word_4D620:         dc.w 4                  ; 0004 SET TEXT INDEX B74 : "We will
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
 										dc.b 7
 										dc.b 2
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D654
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D654 : Zynk is a follower
 										dc.w $4C
 										dc.l word_4D654         
 										dc.w $2D                ; 002D MOVE ENTITY 1A FF 0 1
@@ -255,7 +255,7 @@ word_4D654:         dc.w $26                ; 0026 MAKE ENTITY NOD 0
 										dc.w $1F
 										dc.w $82
 										dc.w 3
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D692
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D692 : Zynk is a follower
 										dc.w $4C
 										dc.l word_4D692         
 										dc.w $2C                ; 002C FOLLOW ENTITY 1A 82 2

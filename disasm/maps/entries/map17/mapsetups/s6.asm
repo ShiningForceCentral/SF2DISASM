@@ -6,17 +6,17 @@
 
 ms_map17_InitFunction:
 										
-										trap    #1
-										dc.w $294
+										trap    #TRAP_CHECKFLAG
+										dc.w $294               ; set after initial wake-up in prison sequence
 										bne.s   loc_52460
 										lea     cs_5249E(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $294
+										trap    #TRAP_SETFLAG
+										dc.w $294               ; set after initial wake-up in prison sequence
 loc_52460:
 										
-										trap    #1
-										dc.w $297
+										trap    #TRAP_CHECKFLAG
+										dc.w $297               ; set after Galam and Lemon leave with their army
 										beq.s   loc_52476
 										move.w  #$83,d0 
 										jsr     MoveEntityOutOfMap
@@ -24,8 +24,8 @@ loc_52460:
 										trap    #6
 loc_52476:
 										
-										trap    #2
-										dc.w $263
+										trap    #TRAP_SETFLAG
+										dc.w $263               ; set after prison wake-up sequence IF 0297 is *not* also set
 										rts
 
 	; End of function ms_map17_InitFunction

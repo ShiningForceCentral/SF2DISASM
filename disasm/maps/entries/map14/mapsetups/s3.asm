@@ -13,7 +13,7 @@ sub_58E50:
 										
 										lea     (Map42s0_Blocks+$146-ms_map14_Section3)(pc), a0
 										trap    #6
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 return_58E5A:
 										
@@ -26,7 +26,7 @@ cs_58E5C:           dc.w 4                  ; 0004 SET TEXT INDEX 8D5 : "Bring u
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "Bring up the plank?"
 										dc.w $FFFF
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 59 58EB8
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 59 58EB8 : YES/NO prompt answer
 										dc.w $59
 										dc.l word_58EB8         
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT

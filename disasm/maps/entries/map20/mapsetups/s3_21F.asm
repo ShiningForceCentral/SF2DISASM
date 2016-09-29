@@ -84,7 +84,7 @@ sub_632FA:
 										dc.w $FAA               ; "You shouldered quite a{N}burden for the kingdom.{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $FAB               ; "I'll be happy if you rule{N}this kingdom with Princess{N}Elis!{W1}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $3D7
 return_6332E:
 										
@@ -109,7 +109,7 @@ sub_63330:
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										trap    #TRAP_TEXTBOX
 										dc.w $FAC               ; "{LEADER}, please kiss{N}her.{W1}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $3D8
 return_6335C:
 										

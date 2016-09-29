@@ -394,7 +394,7 @@ abcs_battle33:      dc.w 4                  ; 0004 SET TEXT INDEX B3C : "There m
 										dc.w 7
 										dc.w $1F
 										dc.w 2
-										dc.w $10                ; 0010 SET FLAG 341 FFFF
+										dc.w $10                ; 0010 SET FLAG 341 FFFF : set after the scene after you win the battle in Moun plays out
 										dc.w $341
 										dc.w $FFFF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

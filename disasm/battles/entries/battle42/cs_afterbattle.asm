@@ -40,7 +40,7 @@ abcs_battle42:      dc.w 4                  ; 0004 SET TEXT INDEX C22 : "Auuugh.
 										dc.b $C
 										dc.b $13
 										dc.b 0
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4EF5E
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4EF5E : Zynk is a follower
 										dc.w $4C
 										dc.l word_4EF5E         
 										dc.w $15                ; 0015 SET ACTSCRIPT 1A FF 460CE
@@ -654,7 +654,7 @@ word_4EF5E:         dc.w $1C                ; 001C STOP ENTITY ANIM 80
 										dc.b 1
 										dc.w $26                ; 0026 MAKE ENTITY NOD 0
 										dc.w 0
-										dc.w $13                ; 0013 SET STORY FLAG 2B
+										dc.w $13                ; 0013 SET STORY FLAG 2B : Battle 43 unlocked
 										dc.w $2B
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 word_4F328:         dc.w $D

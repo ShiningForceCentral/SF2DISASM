@@ -34,8 +34,8 @@ loc_58254:
 										jsr     MoveEntityOutOfMap
 loc_5825E:
 										
-										trap    #2
-										dc.w $2C6
+										trap    #TRAP_SETFLAG
+										dc.w $2C6               ; set after Oddler wanders down from the mountain
 										bra.s   return_5827A
 loc_58264:
 										
@@ -47,8 +47,8 @@ loc_58264:
 										bne.s   return_5827A
 										lea     cs_585FE(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2CB
+										trap    #TRAP_SETFLAG
+										dc.w $2CB               ; set after returning to Polca from Bedoe and seeing the devils vs. birds scene
 return_5827A:
 										
 										rts
@@ -68,8 +68,8 @@ sub_5827C:
 										bne.s   return_58292
 										lea     cs_58AE2(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2CD
+										trap    #TRAP_SETFLAG
+										dc.w $2CD               ; set after the mayor first tries to have you take Oddler with you (Peter declines)
 return_58292:
 										
 										rts
@@ -89,8 +89,8 @@ sub_58294:
 										bne.s   return_582AA
 										lea     cs_58BEA(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2CE
+										trap    #TRAP_SETFLAG
+										dc.w $2CE               ; set after Oddler runs after you as you leave Polca, and tags along
 return_582AA:
 										
 										rts

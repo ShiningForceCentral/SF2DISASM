@@ -103,8 +103,8 @@ sub_5D89E:
 										dc.w $FFFF
 										lea     cs_5DA7A(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $32A
+										trap    #TRAP_SETFLAG
+										dc.w $32A               ; set after speaking to a centaur at Pacalon castle (the one who moves and shivers)
 loc_5D8B6:
 										
 										trap    #TRAP_TEXTBOX

@@ -12,10 +12,10 @@ ms_map7_InitFunction:
 										move.b  #6,((RAM_EgressMapIdx-$1000000)).w
 										lea     cs_55832(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2C3
-										trap    #2
-										dc.w $19B
+										trap    #TRAP_SETFLAG
+										dc.w $2C3               ; set after the "one year has passed" text, after New Granseal is built
+										trap    #TRAP_SETFLAG
+										dc.w $19B               ; Battle 11 unlocked
 return_55830:
 										
 										rts
@@ -1070,7 +1070,7 @@ cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1 : "Welcome
 										dc.w 2
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY 8B
 										dc.w $8B
-										dc.w $10                ; 0010 SET FLAG 46 FFFF
+										dc.w $10                ; 0010 SET FLAG 46 FFFF : Astral is a follower
 										dc.w $46
 										dc.w $FFFF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

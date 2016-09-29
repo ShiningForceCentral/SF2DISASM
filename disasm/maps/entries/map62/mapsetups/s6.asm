@@ -129,7 +129,7 @@ cs_5C914:           dc.w 4                  ; 0004 SET TEXT INDEX E2D : "I came 
 										dc.w $81
 										dc.w $1F
 										dc.w 2
-										dc.w $10                ; 0010 SET FLAG 4D FFFF
+										dc.w $10                ; 0010 SET FLAG 4D FFFF : Old man is a follower
 										dc.w $4D
 										dc.w $FFFF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

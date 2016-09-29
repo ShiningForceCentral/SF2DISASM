@@ -28,8 +28,8 @@ sub_5AA98:
 										bne.s   loc_5AAAA
 										lea     cs_5AC58(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $306
+										trap    #TRAP_SETFLAG
+										dc.w $306               ; set after the first scene with Goliath at Creed's Mansion
 										bra.s   return_5AAC8
 loc_5AAAA:
 										
@@ -41,12 +41,12 @@ loc_5AAAA:
 										bne.s   return_5AAC8
 										lea     cs_5B466(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $312
-										trap    #2
-										dc.w $45
-										trap    #3
-										dc.w $44
+										trap    #TRAP_SETFLAG
+										dc.w $312               ; set after Oddler elects to stay behind at Creed's Mansion
+										trap    #TRAP_SETFLAG
+										dc.w $45                ; Fairy is a follower
+										trap    #TRAP_CLEARFLAG
+										dc.w $44                ; Oddler is a follower
 return_5AAC8:
 										
 										rts

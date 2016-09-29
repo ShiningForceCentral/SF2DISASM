@@ -20,10 +20,10 @@ sub_5A2CA:
 										lea     cs_5A33A(pc), a0
 										trap    #6
 										bsr.s   sub_5A278
-										trap    #2
-										dc.w $2F8
-										trap    #3
-										dc.w $45
+										trap    #TRAP_SETFLAG
+										dc.w $2F8               ; set after the fairy cures the sick dwarf in the mine
+										trap    #TRAP_CLEARFLAG
+										dc.w $45                ; Fairy is a follower
 return_5A2E6:
 										
 										rts

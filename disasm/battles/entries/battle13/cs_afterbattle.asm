@@ -81,7 +81,7 @@ abcs_battle13:      dc.w 4                  ; 0004 SET TEXT INDEX 9BF : "{NAME;1
 										dc.b 1
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{CLEAR}{LEADER} decides to take{N}{NAME;10} the BDMN with him.{W1}{CLEAR}"
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 4B FFFF
+										dc.w $10                ; 0010 SET FLAG 4B FFFF : Luke is a follower
 										dc.w $4B
 										dc.w $FFFF
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT D100C03

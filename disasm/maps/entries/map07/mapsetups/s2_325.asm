@@ -64,8 +64,8 @@ loc_555CE:
 										dc.w $4A4               ; "{LEADER}, you can't{N}understand my regret....{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $4A5               ; "It was the last chance to see{N}Volcanon in my{N}lifetime!{W1}"
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bra.s   return_555E6
 loc_555E2:
 										

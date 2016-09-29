@@ -47,10 +47,10 @@ sub_5D954:
 										bne.s   return_5D968
 										lea     cs_5DA28(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $32B
-										trap    #2
-										dc.w $52
+										trap    #TRAP_SETFLAG
+										dc.w $32B               ; set after Frayja asks to go to Moun with you
+										trap    #TRAP_SETFLAG
+										dc.w $52                ; Frayja is a follower
 return_5D968:
 										
 										rts
@@ -115,7 +115,7 @@ sub_5D98A:
 										bne.s   loc_5D998
 										trap    #TRAP_TEXTBOX
 										dc.w $CF2               ; "Practice!  Who needs{N}practice?!  Ha!{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 loc_5D998:
 										

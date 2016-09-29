@@ -5771,7 +5771,7 @@ CheckForTaros:
 										cmpi.b  #BATTLEIDX_TAROS,((CURRENT_BATTLE-$1000000)).w
 										bne.w   loc_9F22
 										trap    #TRAP_CLEARFLAG
-										dc.w $70
+										dc.w $70                ; cleared, set, and checked in ASM x09EC4..x09F27 (CheckForTaros ASM)
 										tst.b   (a4)
 										bne.w   loc_9F08
 										cmpi.w  #ACTION_ATTACK,(a3)
@@ -5785,14 +5785,14 @@ CheckForTaros:
 										cmpi.w  #ITEMIDX_ACHILLES_SWORD,d1
 										bne.w   loc_9F08
 										trap    #TRAP_SETFLAG
-										dc.w $70
+										dc.w $70                ; cleared, set, and checked in ASM x09EC4..x09F27 (CheckForTaros ASM)
 loc_9F08:
 										move.b  (a5),d0
 										jsr     GetEnemyID
 										cmpi.w  #$58,d1 
 										bne.s   loc_9F22
 										trap    #TRAP_CHECKFLAG
-										dc.w $70
+										dc.w $70                ; cleared, set, and checked in ASM x09EC4..x09F27 (CheckForTaros ASM)
 										bne.s   loc_9F22
 										move.b  #$FF,-$E(a2)
 loc_9F22:

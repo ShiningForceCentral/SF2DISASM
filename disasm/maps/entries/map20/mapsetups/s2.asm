@@ -30,13 +30,13 @@ ms_map20_EntityEvents:
 
 sub_537CC:
 										
-										trap    #1
-										dc.w $100
+										trap    #TRAP_CHECKFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_537DA
 										trap    #TRAP_TEXTBOX
 										dc.w $23A               ; "Legend regarding the{N}tower?  Mmmm, do I have{N}"
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_537DA:
 										
 										trap    #TRAP_TEXTBOX
@@ -105,12 +105,12 @@ sub_537F8:
 
 sub_537FE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_53810
 										lea     cs_53816(pc), a0
 										trap    #6
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 										bra.s   return_53814
 loc_53810:

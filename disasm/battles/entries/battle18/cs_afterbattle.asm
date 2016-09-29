@@ -661,10 +661,10 @@ abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0 : "{LEADER
 										dc.b 3
 										dc.b $80                ; WAIT B4
 										dc.b $B4
-										dc.w $10                ; 0010 SET FLAG 41 FFFF
+										dc.w $10                ; 0010 SET FLAG 41 FFFF : Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 										dc.w $41
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 54 0
+										dc.w $10                ; 0010 SET FLAG 54 0 : Rohde is a follower
 										dc.w $54
 										dc.w 0
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

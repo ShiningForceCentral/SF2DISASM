@@ -40,7 +40,7 @@ bbcs_35:            dc.w 4                  ; 0004 SET TEXT INDEX B76 : "You're 
 										dc.b $2C
 										dc.b 9
 										dc.b 2
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D728
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4D728 : Zynk is a follower
 										dc.w $4C
 										dc.l word_4D728         
 										dc.w $15                ; 0015 SET ACTSCRIPT 1A FF 460CE

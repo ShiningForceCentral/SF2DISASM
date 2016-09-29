@@ -48,13 +48,13 @@ ms_map19_EntityEvents:
 
 sub_52E3A:
 										
-										trap    #1
-										dc.w $100
+										trap    #TRAP_CHECKFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_52E48
 										trap    #TRAP_TEXTBOX
 										dc.w $21F               ; "I hate fighting.{W2}{N}But I've almost forgotten{N}how to fight fight in this{N}peaceful kingdom.{W1}"
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_52E48:
 										
 										trap    #TRAP_TEXTBOX
@@ -68,12 +68,12 @@ loc_52E48:
 
 sub_52E4E:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_52E5C
 										trap    #TRAP_TEXTBOX
 										dc.w $221               ; "Northern Galam is a country{N}on our border, but we are{N}allies.{W2}{N}Do we really need to guard{N}our country?{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 loc_52E5C:
 										
@@ -110,12 +110,12 @@ sub_52E68:
 
 sub_52E6E:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $102
 										bne.s   loc_52E7C
 										trap    #TRAP_TEXTBOX
 										dc.w $225               ; "Weapons storage!{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $102
 loc_52E7C:
 										
@@ -130,12 +130,12 @@ loc_52E7C:
 
 sub_52E82:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $103
 										bne.s   loc_52E90
 										trap    #TRAP_TEXTBOX
 										dc.w $227               ; "This is King Granseal's{N}public room!{W2}{N}Oh, you must be pupils{N}of Sir Astral.{W2}{N}You look too young to work{N}for the King!{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $103
 loc_52E90:
 										
@@ -150,12 +150,12 @@ loc_52E90:
 
 sub_52E96:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $104
 										bne.s   loc_52EA4
 										trap    #TRAP_TEXTBOX
 										dc.w $229               ; "I saw Sir Astral going into{N}the King's bedroom.{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $104
 loc_52EA4:
 										
@@ -170,12 +170,12 @@ loc_52EA4:
 
 sub_52EAA:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $105
 										bne.s   loc_52EB8
 										trap    #TRAP_TEXTBOX
 										dc.w $22B               ; "What's wrong with the{N}King?  He is usually{N}down here by now.{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $105
 loc_52EB8:
 										
@@ -190,12 +190,12 @@ loc_52EB8:
 
 sub_52EBE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $106
 										bne.s   loc_52ECC
 										trap    #TRAP_TEXTBOX
 										dc.w $22D               ; "How busy I am!  Soldiers{N}eat here everyday{N}without doing any work.{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $106
 loc_52ECC:
 										
@@ -221,12 +221,12 @@ sub_52ED2:
 
 sub_52ED8:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $107
 										bne.s   loc_52EE6
 										trap    #TRAP_TEXTBOX
 										dc.w $230               ; "I'm a messenger from Galam.{N}I came here to see the King.{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $107
 loc_52EE6:
 										
@@ -252,13 +252,13 @@ sub_52EEC:
 
 sub_52EF2:
 										
-										trap    #1
-										dc.w $25F
+										trap    #TRAP_CHECKFLAG
+										dc.w $25F               ; set after talking to Astral about going to the tower
 										bne.s   loc_52F04
 										lea     cs_52F0C(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $25F
+										trap    #TRAP_SETFLAG
+										dc.w $25F               ; set after talking to Astral about going to the tower
 										bra.s   return_52F0A
 loc_52F04:
 										
@@ -275,7 +275,7 @@ cs_52F0C:           dc.w 4                  ; 0004 SET TEXT INDEX 23F : "I didn'
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8C : "I didn't want to involve{N}you, my children...but{N}this might be a good{W2}{N}opportunity for you to{N}learn how to properly{N}serve your King.{W2}{N}Are you ready, {LEADER}?{W1}"
 										dc.w $8C
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 59 52F40
+										dc.w $C                 ; 000C JUMP IF SET FLAG 59 52F40 : YES/NO prompt answer
 										dc.w $59                ; Unkown command : 59
 										dc.l cs_52F40           ; 0005 PLAY SOUND 
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8C : "Then, I'll wait for you here.{W2}{N}We have to hurry.{N}Come back when you're{N}ready.{W1}"
@@ -286,7 +286,7 @@ cs_52F24:           dc.w 4                  ; 0004 SET TEXT INDEX 241 : "Are you
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8C : "Are you ready, {LEADER}?{W1}"
 										dc.w $8C
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 59 52F40
+										dc.w $C                 ; 000C JUMP IF SET FLAG 59 52F40 : YES/NO prompt answer
 										dc.w $59
 										dc.l cs_52F40           ; 0005 PLAY SOUND 
 										dc.w 4                  ; 0004 SET TEXT INDEX 240 : "Then, I'll wait for you here.{W2}{N}We have to hurry.{N}Come back when you're{N}ready.{W1}"
@@ -311,7 +311,7 @@ cs_52F40:           dc.w 4                  ; 0004 SET TEXT INDEX 242 : "Good!{N
 										dc.b $3F
 										dc.b $3F
 										dc.b 2
-										dc.w $10                ; 0010 SET FLAG 260 FFFF
+										dc.w $10                ; 0010 SET FLAG 260 FFFF : set after agreeing to go to the tower with Astral
 										dc.w $260
 										dc.w $FFFF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

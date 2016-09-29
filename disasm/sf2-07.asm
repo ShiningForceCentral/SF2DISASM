@@ -605,7 +605,7 @@ loc_441D2:
 loc_441F0:
 										
 										trap    #TRAP_CHECKFLAG
-										dc.w $40
+										dc.w $40                ; Raft is unlocked (0x05264)
 										beq.w   loc_44262
 										move.b  ((CURRENT_MAP-$1000000)).w,d0
 										cmp.b   ((RAM_Raft_MapIdx-$1000000)).w,d0
@@ -689,7 +689,7 @@ sub_44298:
 										lea     ((byte_FFAFB0-$1000000)).w,a5
 										move.b  #1,(a5)
 										trap    #TRAP_CHECKFLAG
-										dc.w $41                ; check if raft available
+										dc.w $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 										beq.s   loc_442D2
 										bsr.s   IsOverworldMap
 										beq.s   loc_442D2
@@ -770,7 +770,7 @@ sub_443B2:
 										lea     Followers(pc), a4
 										lea     pt_eas_Followers(pc), a6
 										trap    #TRAP_CHECKFLAG
-										dc.w $41
+										dc.w $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 										beq.s   loc_443D2
 										bsr.w   IsOverworldMap
 										beq.s   loc_443D2
@@ -811,7 +811,7 @@ loc_44404:
 loc_44420:
 										
 										trap    #TRAP_CHECKFLAG
-										dc.w $40
+										dc.w $40                ; Raft is unlocked (0x05264)
 										beq.w   return_4446A
 										move.b  ((CURRENT_MAP-$1000000)).w,d0
 										cmp.b   ((RAM_Raft_MapIdx-$1000000)).w,d0
@@ -1339,8 +1339,8 @@ loc_449F0:
 										
 										cmpi.b  #$B,d0          ; Rhode !
 										bne.s   loc_44A04
-										trap    #1
-										dc.w $B                 ; if Rhode joined the force
+										trap    #TRAP_CHECKFLAG
+										dc.w $B                 ; Rohde joined
 										bne.s   loc_44A04
 										move.w  #$AA,d4 
 										bra.w   loc_44A5A

@@ -1496,7 +1496,7 @@ loc_20FE6:
 										move.b  ((CURRENT_MAP-$1000000)).w,((RAM_EgressMapIdx-$1000000)).w
 										move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
 										trap    #TRAP_SETFLAG
-										dc.w $18F
+										dc.w $18F               ; set after first battle's cutscene OR first save? Checked at witch screens
 										jsr     (SaveGame).w
 										trap    #TRAP_SOUNDCOM
 										dc.w MUSIC_SAVE         ; save jingle
@@ -3198,7 +3198,7 @@ Caravan_DescribeItem:
 										cmpi.w  #$FFFF,d0
 										beq.w   loc_222E0
 										trap    #TRAP_CHECKFLAG
-										dc.w $46
+										dc.w $46                ; Astral is a follower
 										bne.s   loc_221BE
 										moveq   #$B,d0
 										bra.s   loc_221C0
@@ -3963,8 +3963,7 @@ sub_228A8:
 										movem.l d0-d1,-(sp)
 										move.l  d1,-(sp)
 										trap    #TRAP_CHECKFLAG
-										dc.w FLAGIDX_FOLLOWERS_ASTRAL
-																						; check if followed by Astral
+										dc.w $46                ; Astral is a follower
 										bne.s   loc_228B8       
 										moveq   #$B,d0          ; ROHDE portrait idx
 										bra.s   loc_228BA
@@ -6023,13 +6022,13 @@ ExecuteBattleLoop:
 										
 										clr.b   ((PLAYER_TYPE-$1000000)).w
 										trap    #TRAP_SETFLAG
-										dc.w $18F
+										dc.w $18F               ; set after first battle's cutscene OR first save? Checked at witch screens
 										trap    #TRAP_CHECKFLAG
-										dc.w $58
+										dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 										beq.s   loc_23AB2
 										move.l  ((SECONDS_COUNTER_FROM_SRAM-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
 										trap    #TRAP_CLEARFLAG
-										dc.w $58                ; clear "game begun" flag ?
+										dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 										jsr     j_ClearEnemyMoveInfo
 										clr.b   ((RAM_Battle_CurrentMovingEntity-$1000000)).w
 										bsr.w   LoadBattle      
@@ -6303,9 +6302,9 @@ loc_23D44:
 										cmpi.b  #4,((CURRENT_BATTLE-$1000000)).w
 										bne.s   return_23D96
 										trap    #TRAP_CLEARFLAG
-										dc.w $194
+										dc.w $194               ; Battle 4 unlocked
 										trap    #TRAP_SETFLAG
-										dc.w $1F8
+										dc.w $1F8               ; Battle 4 completed
 										jsr     sub_1AC04C
 										moveq   #$11,d0
 										clr.w   d4
@@ -6395,13 +6394,13 @@ GetEgressPositionForBattle:
 										cmpi.b  #$26,d7 
 										bne.s   loc_23E60
 										trap    #TRAP_CLEARFLAG
-										dc.w $1B6
+										dc.w $1B6               ; Battle 38 unlocked
 loc_23E60:
 										
 										cmpi.b  #$27,d7 
 										bne.s   loc_23E6A
 										trap    #TRAP_CLEARFLAG
-										dc.w $1B7
+										dc.w $1B7               ; Battle 39 unlocked
 loc_23E6A:
 										
 										cmpi.b  #$10,d7
@@ -6462,7 +6461,7 @@ loc_23EC4:
 										tst.w   -2(a6)
 										bne.s   loc_23EDA
 										trap    #TRAP_CLEARFLAG
-										dc.w $70
+										dc.w $70                ; cleared, set, and checked in ASM x09EC4..x09F27 (CheckForTaros ASM)
 loc_23EDA:
 										
 										jsr     j_GetCurrentHP
@@ -8390,7 +8389,7 @@ loc_252A6:
 										bmi.w   loc_25236
 										move.l  ((SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER_FROM_SRAM-$1000000)).w
 										trap    #TRAP_SETFLAG
-										dc.w $58                ; set when game is saved from a battle
+										dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 										move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
 										jsr     (SaveGame).l
 										tst.b   ((RAM_DebugModeActivated-$1000000)).w
@@ -8402,7 +8401,7 @@ loc_252E6:          trap    #TRAP_SOUNDCOM
 										jsr     (FadeOutToBlack).w
 										jmp     (WitchSuspend).w
 loc_252F2:          trap    #TRAP_CLEARFLAG
-										dc.w $58
+										dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 										bra.w   loc_25236
 
 ; =============== S U B R O U T I N E =======================================
@@ -8960,7 +8959,7 @@ loc_257D0:
 										jsr     (LoadMapEntitySprites).w
 										bsr.w   loc_2588A
 										trap    #TRAP_SETFLAG
-										dc.w $50
+										dc.w $50                ; set @ loc_257D0 (battle won?)
 										bra.s   loc_25836
 loc_25828:
 										
@@ -9173,7 +9172,7 @@ loc_259CC:
 										cmpi.b  #$47,d0 
 										bne.s   loc_259E8       ; check if map is pacalon, switch if water not restored (HARDCODE)
 										trap    #TRAP_CHECKFLAG
-										dc.w $212
+										dc.w $212               ; Battle 30 completed
 										beq.s   loc_259E8
 										move.w  #$4E,d0 
 loc_259E8:
@@ -10103,8 +10102,8 @@ loc_27C2C:
 										clr.l   (a0)+
 										dbf     d7,loc_27C2C
 										jsr     j_ClearEntities
-										trap    #2
-										bclr    d0,(a0)
+										trap    #TRAP_SETFLAG
+										dc.w $190               ; Battle 0 unlocked
 										move.w  #$3F,d0 
 										jsr     (GetNextBattleOnMap).w
 										move.w  d7,d1

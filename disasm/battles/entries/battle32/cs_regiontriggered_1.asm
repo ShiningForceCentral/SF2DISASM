@@ -36,7 +36,7 @@ rbcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B21 : "I'm tir
 										dc.w $54                ; 0054  17 FFFF
 										dc.w $17
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 182 FFFF
+										dc.w $10                ; 0010 SET FLAG 182 FFFF : set during battle 32, after Jaro switches sides
 										dc.w $182
 										dc.w $FFFF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

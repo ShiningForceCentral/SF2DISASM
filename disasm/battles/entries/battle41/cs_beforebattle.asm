@@ -28,7 +28,7 @@ bbcs_41:            dc.w 4                  ; 0004 SET TEXT INDEX C0B : "Who are
 										dc.b $E
 										dc.b $18
 										dc.b 0
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4ED48
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4ED48 : Zynk is a follower
 										dc.w $4C
 										dc.l word_4ED48         
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 1A D 18 0

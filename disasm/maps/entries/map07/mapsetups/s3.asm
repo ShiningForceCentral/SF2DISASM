@@ -34,10 +34,10 @@ sub_557B6:
 										bne.s   loc_557D6
 										lea     cs_55A36(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2BE
-										trap    #2
-										dc.w $43
+										trap    #TRAP_SETFLAG
+										dc.w $2BE               ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+										trap    #TRAP_SETFLAG
+										dc.w $43                ; Peter is a follower
 loc_557D6:
 										
 										bra.s   return_557EC
@@ -48,10 +48,10 @@ loc_557D8:
 										bne.s   return_557EC
 										lea     cs_55BEE(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $325
-										trap    #2
-										dc.w $46
+										trap    #TRAP_SETFLAG
+										dc.w $325               ; set after coming back to New Granseal after Creed's Mansion,when Astral joins
+										trap    #TRAP_SETFLAG
+										dc.w $46                ; Astral is a follower
 return_557EC:
 										
 										rts

@@ -82,7 +82,7 @@ cs_5C6CA:           dc.w 4                  ; 0004 SET TEXT INDEX E3A : "It's my
 										dc.b 3
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1E : "OK, you go first!{W1}"
 										dc.w $1E
-										dc.w $13                ; 0013 SET STORY FLAG F
+										dc.w $13                ; 0013 SET STORY FLAG F : Battle 15 unlocked
 										dc.w $F
 										dc.w $2C                ; 002C FOLLOW ENTITY 7 0 2
 										dc.w 7

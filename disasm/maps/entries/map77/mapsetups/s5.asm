@@ -28,11 +28,11 @@ sub_50A9A:
 										move.w  #$73,((RAM_Dialogue_NameIdx1-$1000000)).w 
 										trap    #TRAP_TEXTBOX
 										dc.w $1A5               ; "{LEADER} uses the {ITEM}.{D3}"
-										trap    #1
-										dc.w $384
+										trap    #TRAP_CHECKFLAG
+										dc.w $384               ; set after using the Dry Stone to open the way to the Dwarven Village
 										bne.s   loc_50AB6
-										trap    #2
-										dc.w $384
+										trap    #TRAP_SETFLAG
+										dc.w $384               ; set after using the Dry Stone to open the way to the Dwarven Village
 										lea     cs_50ABE(pc), a0
 										trap    #6
 										bra.s   loc_50ABA

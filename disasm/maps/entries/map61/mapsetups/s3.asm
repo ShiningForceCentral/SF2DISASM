@@ -25,8 +25,8 @@ sub_5C6A6:
 										beq.s   return_5C6BC
 										lea     cs_5C6CA(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2DA
+										trap    #TRAP_SETFLAG
+										dc.w $2DA               ; set after the old man opens the door to the Woodel Panel shrine interior
 return_5C6BC:
 										
 										rts

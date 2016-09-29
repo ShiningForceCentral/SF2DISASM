@@ -26,7 +26,7 @@ bbcs_08:            dc.w 4                  ; 0004 SET TEXT INDEX 99D : "It's ov
 										dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
 										dc.w $8080              ; 0014 END OF MANUAL ACTSCRIPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 6 4A994
+										dc.w $C                 ; 000C JUMP IF SET FLAG 6 4A994 : Kiwi joined
 										dc.w 6
 										dc.l word_4A994         
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 6 3F 3F 3

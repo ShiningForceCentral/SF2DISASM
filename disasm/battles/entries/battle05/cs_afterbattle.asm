@@ -36,7 +36,7 @@ abcs_battle05:      dc.w 4                  ; 0004 SET TEXT INDEX 91C : "This is
 										dc.l eas_Jump           
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 5 : "{LEADER}, did you use{N}magic?{W2}"
 										dc.w 5
-										dc.w $10                ; 0010 SET FLAG 180 FFFF
+										dc.w $10                ; 0010 SET FLAG 180 FFFF : set after Bowie obtains the jewel of light/evil... whichever it is
 										dc.w $180
 										dc.w $FFFF
 										dc.b $80                ; WAIT 1E
@@ -59,10 +59,10 @@ abcs_battle05:      dc.w 4                  ; 0004 SET TEXT INDEX 91C : "This is
 										dc.w 5
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5 : "Let's go to Granseal!{W1}"
 										dc.w 5
-										dc.w $10                ; 0010 SET FLAG 49 0
+										dc.w $10                ; 0010 SET FLAG 49 0 : Slade is a follower
 										dc.w $49
 										dc.w 0
-										dc.w $13                ; 0013 SET STORY FLAG 6
+										dc.w $13                ; 0013 SET STORY FLAG 6 : Battle 6 unlocked
 										dc.w 6
 										dc.w $2C                ; 002C FOLLOW ENTITY 5 0 2
 										dc.w 5

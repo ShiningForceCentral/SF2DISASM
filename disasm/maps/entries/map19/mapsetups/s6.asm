@@ -6,15 +6,15 @@
 
 ms_map19_InitFunction:
 										
-										trap    #1
-										dc.w $25D
+										trap    #TRAP_CHECKFLAG
+										dc.w $25D               ; set after the scene in the King's bedroom
 										bne.s   loc_530F6
 										lea     cs_53104(pc), a0
 										trap    #6
 loc_530F6:
 										
-										trap    #1
-										dc.w $260
+										trap    #TRAP_CHECKFLAG
+										dc.w $260               ; set after agreeing to go to the tower with Astral
 										beq.s   return_53102
 										lea     cs_53104(pc), a0
 										trap    #6

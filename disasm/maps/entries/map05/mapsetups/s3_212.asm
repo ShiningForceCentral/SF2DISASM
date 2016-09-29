@@ -44,8 +44,8 @@ loc_604F6:
 										trap    #6
 loc_604FC:
 										
-										trap    #2
-										dc.w $3AD
+										trap    #TRAP_SETFLAG
+										dc.w $3AD               ; set after Chaz and the priest go downstars in Yeel
 return_60500:
 										
 										rts
@@ -65,10 +65,10 @@ sub_60502:
 										beq.s   return_6051C
 										lea     cs_60708(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $47
-										trap    #2
-										dc.w $3B1
+										trap    #TRAP_SETFLAG
+										dc.w $47                ; Lemon is a follower
+										trap    #TRAP_SETFLAG
+										dc.w $3B1               ; set after recruiting Lemon in Yeel
 return_6051C:
 										
 										rts

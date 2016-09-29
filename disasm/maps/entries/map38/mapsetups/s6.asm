@@ -9,8 +9,8 @@ ms_map38_InitFunction:
 										trap    #1
 										dc.w $399
 										beq.s   loc_5DD78
-										trap    #2
-										dc.w $38F
+										trap    #TRAP_SETFLAG
+										dc.w $38F               ; set after the Petro death scene in Roft
 										trap    #1
 										dc.w $1A
 										bne.s   loc_5DD78
@@ -19,7 +19,7 @@ ms_map38_InitFunction:
 										bne.s   loc_5DD78
 										lea     cs_5DD8E(pc), a0
 										trap    #6
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $104
 loc_5DD78:
 										
@@ -28,9 +28,9 @@ loc_5DD78:
 										bne.s   return_5DD8C
 										lea     cs_5DD9C(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $38E
-										trap    #2
+										trap    #TRAP_SETFLAG
+										dc.w $38E               ; set after the initial scene on entering Roft (where the guy thinks you're Galam)
+										trap    #TRAP_SETFLAG
 										dc.w $102
 return_5DD8C:
 										
@@ -72,7 +72,7 @@ cs_5DD9C:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 80 
 										dc.b $E
 										dc.b $1D
 										dc.b 1
-										dc.w $C                 ; 000C JUMP IF SET FLAG 4C 5DE22
+										dc.w $C                 ; 000C JUMP IF SET FLAG 4C 5DE22 : Zynk is a follower
 										dc.w $4C
 										dc.l cs_5DE22           
 word_5DDC2:         dc.w 5                  ; 0005 PLAY SOUND MUSIC_TOWN
@@ -324,7 +324,7 @@ cs_5DE76:           dc.w 4                  ; 0004 SET TEXT INDEX 879 : "What's 
 										dc.w $1A
 										dc.w 8                  ; 0008 JOIN FORCE 1A
 										dc.w $1A
-										dc.w $10                ; 0010 SET FLAG 4C 0
+										dc.w $10                ; 0010 SET FLAG 4C 0 : Zynk is a follower
 										dc.w $4C
 										dc.w 0
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "Let us go defeat the Devil{N}Army!{W1}"

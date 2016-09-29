@@ -186,10 +186,10 @@ abcs_battle15:      dc.w 4                  ; 0004 SET TEXT INDEX 9CA : "It was 
 										dc.w $8080
 										dc.w $2E                ; 002E HIDE ENTITY 1E
 										dc.w $1E
-										dc.w $10                ; 0010 SET FLAG 4D 0
+										dc.w $10                ; 0010 SET FLAG 4D 0 : Old man is a follower
 										dc.w $4D
 										dc.w 0
-										dc.w $10                ; 0010 SET FLAG 2DC FFFF
+										dc.w $10                ; 0010 SET FLAG 2DC FFFF : set after the old man fails to open the way to Grans in the Wooden Panel shrine
 										dc.w $2DC
 										dc.w $FFFF
 										dc.w $2C                ; 002C FOLLOW ENTITY 7 0 2

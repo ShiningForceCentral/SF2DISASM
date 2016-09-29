@@ -117,8 +117,8 @@ sub_5D27A:
 										dc.w $7B1               ; "Do you want to buy one?{N}Oh, you do?!  OK, come to my{N}shop!{W1}"
 										movem.l (sp)+,d0
 										move.b  d0,((MESSAGE_SPEED-$1000000)).w
-										trap    #2
-										dc.w $320
+										trap    #TRAP_SETFLAG
+										dc.w $320               ; set after the merchant in Ketto runs to his store
 										lea     cs_5D3B8(pc), a0
 										trap    #6
 										bra.s   return_5D2D0
@@ -142,8 +142,8 @@ sub_5D2D2:
 										bne.s   loc_5D2E0
 										trap    #TRAP_TEXTBOX
 										dc.w $7B3               ; "Sorry, I can't open my{N}church for you.{N}Please understand.{W1}"
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_5D2E0:
 										
 										jsr     j_ChurchActions
@@ -193,7 +193,7 @@ loc_5D316:
 										dc.w $7B9               ; "I don't want to bother you.{W1}"
 loc_5D31E:
 										
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 										bra.s   loc_5D328
 loc_5D324:

@@ -26,7 +26,7 @@ cs_58F5C:           dc.w $28                ; 0028 MOVE ENTITY NEXT TO PLAYER 81
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "Are you ready?{W1}"
 										dc.w $81
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 59 58F7E
+										dc.w $C                 ; 000C JUMP IF SET FLAG 59 58F7E : YES/NO prompt answer
 										dc.w $59
 										dc.l word_58F7E         
 										dc.w 4                  ; 0004 SET TEXT INDEX C86 : "I want to leave soon.{N}Finish your preparations.{W1}"

@@ -29,8 +29,8 @@ sub_5D008:
 										bne.s   return_5D01E
 										lea     cs_5D04E(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $334
+										trap    #TRAP_SETFLAG
+										dc.w $334               ; set after Skreech's join scene has played in Tristan
 return_5D01E:
 										
 										rts

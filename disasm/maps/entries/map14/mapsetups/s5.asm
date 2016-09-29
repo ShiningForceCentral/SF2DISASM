@@ -263,7 +263,7 @@ word_59122:         dc.w 4                  ; 0004 SET TEXT INDEX 8E3 : "Would y
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Would you go to North{N}Cliff and check on his{N}friend?{D1}"
 										dc.w $80
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 59 59142
+										dc.w $C                 ; 000C JUMP IF SET FLAG 59 59142 : YES/NO prompt answer
 										dc.w $59
 										dc.l word_59142         
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "What did you say?{N}I didn't hear you.{W2}"
@@ -481,7 +481,7 @@ word_59142:         dc.w 4                  ; 0004 SET TEXT INDEX 8E6 : "Oh, you
 										dc.b 3
 										dc.b 7
 										dc.w $8080
-										dc.w $13                ; 0013 SET STORY FLAG 8
+										dc.w $13                ; 0013 SET STORY FLAG 8 : Battle 8 unlocked
 										dc.w 8
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 48010103
 										dc.l $48010103

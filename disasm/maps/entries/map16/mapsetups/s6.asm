@@ -6,8 +6,8 @@
 
 ms_map16_InitFunction:
 										
-										trap    #1
-										dc.w $298
+										trap    #TRAP_CHECKFLAG
+										dc.w $298               ; set after the Galam guards catch you sneaking around, but before battle
 										beq.s   return_51F86
 										move.w  #$91,d0 
 										jsr     MoveEntityOutOfMap
@@ -493,7 +493,7 @@ cs_521BA:           dc.w 4                  ; 0004 SET TEXT INDEX 3DA : "You!{W1
 										dc.l eas_Jump           
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 91 : "Intruders!  Intruders!{N}Arrest them!{W1}"
 										dc.w $91
-										dc.w $13                ; 0013 SET STORY FLAG 5
+										dc.w $13                ; 0013 SET STORY FLAG 5 : Battle 5 unlocked
 										dc.w 5
 cs_5227C:           dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 10000000
 										dc.l $10000000

@@ -19,17 +19,17 @@ ms_map59_InitFunction:
 										trap    #6
 										lea     cs_5EF60(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $3E7
+										trap    #TRAP_SETFLAG
+										dc.w $3E7               ; set after the Nazca ship shootdown scene
 										move.b  #$2D,((RAM_EgressMapIdx-$1000000)).w 
-										trap    #2
-										dc.w $1B4
-										trap    #2
-										dc.w $1B8
-										trap    #2
-										dc.w $1BA
-										trap    #2
-										dc.w $1BB
+										trap    #TRAP_SETFLAG
+										dc.w $1B4               ; Battle 36 unlocked
+										trap    #TRAP_SETFLAG
+										dc.w $1B8               ; Battle 40 unlocked
+										trap    #TRAP_SETFLAG
+										dc.w $1BA               ; Battle 42 unlocked
+										trap    #TRAP_SETFLAG
+										dc.w $1BB               ; Battle 43 unlocked
 										rts
 loc_5EB18:
 										

@@ -28,11 +28,11 @@ sub_4FDB2:
 
 sub_4FDBE:
 										
-										trap    #1
-										dc.w $1FD
+										trap    #TRAP_CHECKFLAG
+										dc.w $1FD               ; Battle 9 completed
 										bne.s   return_4FDD0
-										trap    #2
-										dc.w $199
+										trap    #TRAP_SETFLAG
+										dc.w $199               ; Battle 9 unlocked
 										move.l  #$100FF,((RAM_MapEventType-$1000000)).w
 return_4FDD0:
 										

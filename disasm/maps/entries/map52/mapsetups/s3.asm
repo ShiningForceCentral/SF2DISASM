@@ -19,8 +19,8 @@ sub_5C4B6:
 										bne.s   return_5C4CA
 										lea     word_5C4EE(pc), a0
 										jsr     ExecuteMapScript
-										trap    #2
-										dc.w $2C9
+										trap    #TRAP_SETFLAG
+										dc.w $2C9               ; set after the scene at the cliffs before Bedoe, where the devils are searching
 return_5C4CA:
 										
 										rts

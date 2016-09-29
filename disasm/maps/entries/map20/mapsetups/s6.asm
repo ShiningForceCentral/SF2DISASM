@@ -8,13 +8,13 @@ ms_map20_InitFunction:
 										
 										cmpi.l  #$22803780,((RAM_Entity_StructOffset_XAndStart-$1000000)).w
 										bne.s   loc_53988
-										trap    #1
-										dc.w $25D
+										trap    #TRAP_CHECKFLAG
+										dc.w $25D               ; set after the scene in the King's bedroom
 										bne.s   loc_53982
 										lea     cs_53996(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $25D
+										trap    #TRAP_SETFLAG
+										dc.w $25D               ; set after the scene in the King's bedroom
 										bra.s   loc_53988
 loc_53982:
 										
@@ -22,8 +22,8 @@ loc_53982:
 										trap    #6
 loc_53988:
 										
-										trap    #1
-										dc.w $1FB
+										trap    #TRAP_CHECKFLAG
+										dc.w $1FB               ; Battle 7 completed
 										beq.s   return_53994
 										lea     cs_53FD8(pc), a0
 										trap    #6
@@ -728,7 +728,7 @@ cs_53C42:           dc.w $32                ; 0032 SET CAMERA DEST 13 30
 										dc.b 1
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "Astral is exhausted.{N}He won't wake up!{W2}{N}The Minister summons the{N}soldiers to the hall to kill{N}the evil spirit.{W1}"
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 261 FFFF
+										dc.w $10                ; 0010 SET FLAG 261 FFFF : set after the scene where Astral exorcises the Gizmo
 										dc.w $261
 										dc.w $FFFF
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 131D0801

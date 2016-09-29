@@ -6,8 +6,8 @@
 
 ms_map3_flag261_InitFunction:
 										
-										trap    #1
-										dc.w 3
+										trap    #TRAP_CHECKFLAG
+										dc.w 3                  ; Jaha joined
 										beq.s   return_513CC
 										lea     cs_513CE(pc), a0
 										trap    #6
@@ -36,7 +36,7 @@ cs_513E2:           dc.w 4                  ; 0004 SET TEXT INDEX 216 : "{LEADER
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1 : "{LEADER}, so you decided{N}to go?{W1}"
 										dc.w 1
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 59 51406
+										dc.w $C                 ; 000C JUMP IF SET FLAG 59 51406 : YES/NO prompt answer
 										dc.w $59                ; Unkown command : 59
 										dc.l word_51406         ; 0005 PLAY SOUND 
 										dc.w 4                  ; 0004 SET TEXT INDEX 214 : "No?  Really?{N}Then I'm not going either!{W2}"
@@ -56,10 +56,10 @@ word_51406:         dc.w 4                  ; 0004 SET TEXT INDEX 217 : "Great!{
 										dc.b 2
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 2 : "What?  {LEADER}, are you{N}going?  I'm going too!{W1}"
 										dc.w 2
-										dc.w $10                ; 0010 SET FLAG 258 FFFF
+										dc.w $10                ; 0010 SET FLAG 258 FFFF : set after agreeing to try getting into the castle
 										dc.w $258
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 42 FFFF
+										dc.w $10                ; 0010 SET FLAG 42 FFFF : Sarah + Chester are followers
 										dc.w $42
 										dc.w $FFFF
 										dc.w 8                  ; 0008 JOIN FORCE 80
@@ -369,7 +369,7 @@ cs_5149A:           dc.w 4                  ; 0004 SET TEXT INDEX 205 : "Is ever
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX C001 : "{LEADER}, maybe we can{N}meet the Princess!{N}Are you going with us?{W1}"
 										dc.w $C001
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 59 51614
+										dc.w $C                 ; 000C JUMP IF SET FLAG 59 51614 : YES/NO prompt answer
 										dc.w $59                ; Unkown command : 59
 										dc.l word_51614         ; 0005 PLAY SOUND 
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1 : "No?  Really?{N}Then I'm not going either!{W2}"
@@ -398,10 +398,10 @@ word_51614:         dc.w 4                  ; 0004 SET TEXT INDEX 217 : "Great!{
 										dc.b 2
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 2 : "What?  {LEADER}, are you{N}going?  I'm going too!{W1}"
 										dc.w 2
-										dc.w $10                ; 0010 SET FLAG 258 FFFF
+										dc.w $10                ; 0010 SET FLAG 258 FFFF : set after agreeing to try getting into the castle
 										dc.w $258
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 42 FFFF
+										dc.w $10                ; 0010 SET FLAG 42 FFFF : Sarah + Chester are followers
 										dc.w $42
 										dc.w $FFFF
 										dc.w 8                  ; 0008 JOIN FORCE 80

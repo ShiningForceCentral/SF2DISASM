@@ -11,8 +11,8 @@ ms_map5_flag212_InitFunction:
 										bne.s   loc_60630
 										lea     cs_607DE(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $3B0
+										trap    #TRAP_SETFLAG
+										dc.w $3B0               ; set after Lemon jumps off the cliff in Yeel
 										bra.s   loc_60636
 loc_60630:
 										
@@ -54,8 +54,8 @@ loc_60672:
 										trap    #6
 loc_60678:
 										
-										trap    #2
-										dc.w $3AE
+										trap    #TRAP_SETFLAG
+										dc.w $3AE               ; set after the scene in underground Yeel where Chaz paces and consults books
 loc_6067C:
 										
 										trap    #1
@@ -91,8 +91,8 @@ loc_606B4:
 										trap    #1
 										dc.w $1C
 										beq.s   loc_606BE
-										trap    #2
-										dc.w $3B1
+										trap    #TRAP_SETFLAG
+										dc.w $3B1               ; set after recruiting Lemon in Yeel
 loc_606BE:
 										
 										trap    #1
@@ -1532,7 +1532,7 @@ cs_60F64:           dc.w 4                  ; 0004 SET TEXT INDEX D98 : "It's a 
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "It's a fine-looking piano.{N}Will you play it?{W1}"
 										dc.w $FFFF
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 59 60FA4
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 59 60FA4 : YES/NO prompt answer
 										dc.w $59
 										dc.l word_60FA4         
 										dc.w 4                  ; 0004 SET TEXT INDEX D99 : "Something opened somewhere.{W1}"
@@ -1557,7 +1557,7 @@ cs_60F64:           dc.w 4                  ; 0004 SET TEXT INDEX D98 : "It's a 
 										dc.w $202D
 										dc.w $101
 										dc.w $B04
-										dc.w $10                ; 0010 SET FLAG 3AC FFFF
+										dc.w $10                ; 0010 SET FLAG 3AC FFFF : set after playing the piano in Yeel (during the late game)
 										dc.w $3AC
 										dc.w $FFFF
 										dc.b $FF                ; END OF CUTSCENE SCRIPT

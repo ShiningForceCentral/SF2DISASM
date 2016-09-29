@@ -171,8 +171,8 @@ sub_51250:
 
 sub_51256:
 										
-										trap    #1
-										dc.w 6
+										trap    #TRAP_CHECKFLAG
+										dc.w 6                  ; Kiwi joined
 										bne.s   return_512B8
 										trap    #TRAP_TEXTBOX
 										dc.w $2A2               ; "(Shiver)...ooouu....{W1}"

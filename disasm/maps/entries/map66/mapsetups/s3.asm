@@ -17,14 +17,14 @@ ms_map66_Section3:  dc.b $FF
 
 sub_4FAA0:
 										
-										trap    #1
-										dc.w $219
+										trap    #TRAP_CHECKFLAG
+										dc.w $219               ; Battle 37 completed
 										beq.s   return_4FAB8
 										trap    #TRAP_CHECKFLAG
-										dc.w $21A
+										dc.w $21A               ; Battle 38 completed
 										bne.s   return_4FAB8
 										trap    #TRAP_SETFLAG
-										dc.w $1B6
+										dc.w $1B6               ; Battle 38 unlocked
 										move.l  #$100FF,((RAM_MapEventType-$1000000)).w
 return_4FAB8:
 										
@@ -38,13 +38,13 @@ return_4FAB8:
 sub_4FABA:
 										
 										trap    #TRAP_CHECKFLAG
-										dc.w $21A
+										dc.w $21A               ; Battle 38 completed
 										beq.s   return_4FAD2
 										trap    #TRAP_CHECKFLAG
-										dc.w $21B
+										dc.w $21B               ; Battle 39 completed
 										bne.s   return_4FAD2
 										trap    #TRAP_SETFLAG
-										dc.w $1B7
+										dc.w $1B7               ; Battle 39 unlocked
 										move.l  #$100FF,((RAM_MapEventType-$1000000)).w
 return_4FAD2:
 										

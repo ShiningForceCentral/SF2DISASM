@@ -37,7 +37,7 @@ sub_50D74:
 										
 										lea     (Map16s0_Blocks+$B0E-ms_map3_Section3)(pc), a0
 										trap    #6
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_50DA6
 										jsr     (WaitForCameraToCatchUp).l
@@ -52,7 +52,7 @@ sub_50D74:
 										dc.w $1F3               ; "There is no school outside!{N}Go to school!{W1}"
 loc_50DA6:
 										
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 										rts
 
@@ -63,12 +63,12 @@ loc_50DA6:
 
 sub_50DAC:
 										
-										trap    #1
-										dc.w $258
+										trap    #TRAP_CHECKFLAG
+										dc.w $258               ; set after agreeing to try getting into the castle
 										bne.s   loc_50DE6
 										lea     cs_5144C(pc), a0
 										trap    #6
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $102
 										bne.s   loc_50DE0
 										jsr     (WaitForCameraToCatchUp).l
@@ -81,18 +81,18 @@ sub_50DAC:
 										dc.w $1F1               ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 loc_50DE0:
 										
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $102
 										bra.s   return_50DF6
 loc_50DE6:
 										
-										trap    #1
-										dc.w $25C
+										trap    #TRAP_CHECKFLAG
+										dc.w $25C               ; set after the guards have listened to Sarah and allowed you into the castle
 										bne.s   return_50DF6
 										lea     cs_51652(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $25C
+										trap    #TRAP_SETFLAG
+										dc.w $25C               ; set after the guards have listened to Sarah and allowed you into the castle
 return_50DF6:
 										
 										rts
@@ -104,12 +104,12 @@ return_50DF6:
 
 sub_50DF8:
 										
-										trap    #1
-										dc.w $258
+										trap    #TRAP_CHECKFLAG
+										dc.w $258               ; set after agreeing to try getting into the castle
 										bne.s   loc_50E32
 										lea     cs_51454(pc), a0
 										trap    #6
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $103
 										bne.s   loc_50E2C
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
@@ -122,18 +122,18 @@ sub_50DF8:
 										dc.w $1F1               ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 loc_50E2C:
 										
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $103
 										bra.s   return_50E42
 loc_50E32:
 										
-										trap    #1
-										dc.w $25C
+										trap    #TRAP_CHECKFLAG
+										dc.w $25C               ; set after the guards have listened to Sarah and allowed you into the castle
 										bne.s   return_50E42
 										lea     cs_51652(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $25C
+										trap    #TRAP_SETFLAG
+										dc.w $25C               ; set after the guards have listened to Sarah and allowed you into the castle
 return_50E42:
 										
 										rts
@@ -145,8 +145,8 @@ return_50E42:
 
 sub_50E44:
 										
-										trap    #1
-										dc.w $259
+										trap    #TRAP_CHECKFLAG
+										dc.w $259               ; set after Bowie is intercepted by his mother going downstairs
 										bne.s   return_50E64
 										lea     cs_5145C(pc), a0
 										trap    #6
@@ -155,8 +155,8 @@ sub_50E44:
 										moveq   #6,d2
 										moveq   #1,d3
 										jsr     sub_47808
-										trap    #2
-										dc.w $259
+										trap    #TRAP_SETFLAG
+										dc.w $259               ; set after Bowie is intercepted by his mother going downstairs
 return_50E64:
 										
 										rts
@@ -168,11 +168,11 @@ return_50E64:
 
 sub_50E66:
 										
-										trap    #1
-										dc.w $25B
+										trap    #TRAP_CHECKFLAG
+										dc.w $25B               ; set after the messenger scene
 										bne.s   return_50ED0
-										trap    #1
-										dc.w $25A
+										trap    #TRAP_CHECKFLAG
+										dc.w $25A               ; set after Astral's second basement line
 										bne.s   loc_50E96
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										move.w  #$8E,d0 
@@ -185,7 +185,7 @@ sub_50E66:
 										bra.s   return_50ED0
 loc_50E96:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $104
 										bne.s   return_50ED0
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
@@ -202,7 +202,7 @@ loc_50E96:
 										dc.w $204               ; "No, nothing?!{N}Perhaps it was just my{N}imagination.  Sorry.{W1}"
 										lea     cs_5148C(pc), a0
 										trap    #6
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $104
 return_50ED0:
 										
@@ -215,16 +215,16 @@ return_50ED0:
 
 sub_50ED2:
 										
-										trap    #1
-										dc.w $25A
+										trap    #TRAP_CHECKFLAG
+										dc.w $25A               ; set after Astral's second basement line
 										beq.s   return_50EE8
-										trap    #1
-										dc.w $25B
+										trap    #TRAP_CHECKFLAG
+										dc.w $25B               ; set after the messenger scene
 										bne.s   return_50EE8
 										lea     cs_5149A(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $25B
+										trap    #TRAP_SETFLAG
+										dc.w $25B               ; set after the messenger scene
 return_50EE8:
 										
 										rts

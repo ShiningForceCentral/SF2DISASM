@@ -8,11 +8,11 @@ ms_map76_Section3:  dc.w $FD00
 
 sub_50A28:
 										
-										trap    #1
-										dc.w $217
+										trap    #TRAP_CHECKFLAG
+										dc.w $217               ; Battle 35 completed
 										bne.s   return_50A3A
-										trap    #2
-										dc.w $1B3
+										trap    #TRAP_SETFLAG
+										dc.w $1B3               ; Battle 35 unlocked
 										move.l  #$100FF,((RAM_MapEventType-$1000000)).w
 return_50A3A:
 										

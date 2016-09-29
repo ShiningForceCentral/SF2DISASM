@@ -6,11 +6,11 @@
 
 ms_map72_InitFunction:
 										
-										trap    #1
-										dc.w $2CC
+										trap    #TRAP_CHECKFLAG
+										dc.w $2CC               ; set after your raft-giving conversation with the mayor in Polca
 										beq.s   return_4FF40
-										trap    #1
-										dc.w $A
+										trap    #TRAP_CHECKFLAG
+										dc.w $A                 ; Luke joined
 										bne.s   return_4FF40
 										lea     cs_4FF5A(pc), a0
 										trap    #6
@@ -113,7 +113,7 @@ cs_4FF5A:           dc.w 4                  ; 0004 SET TEXT INDEX 614 : "Now, le
 										dc.w $8080
 										dc.w $2E                ; 002E HIDE ENTITY A
 										dc.w $A
-										dc.w $13                ; 0013 SET STORY FLAG 10
+										dc.w $13                ; 0013 SET STORY FLAG 10 : Battle 16 unlocked
 										dc.w $10
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D : "{NAME;11}, {NAME;11}!{W1}"
@@ -499,7 +499,7 @@ cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D : "{NAME;1
 										dc.w $1F
 										dc.w $1E
 										dc.w 3
-										dc.w $13                ; 0013 SET STORY FLAG 19
+										dc.w $13                ; 0013 SET STORY FLAG 19 : Battle 25 unlocked
 										dc.w $19
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 cs_5023E:           dc.w 4                  ; 0004 SET TEXT INDEX D1D : "What?!  You forgot to bring{N}the {ITEM} with you?{N}{LEADER}, are you serious?{W2}"

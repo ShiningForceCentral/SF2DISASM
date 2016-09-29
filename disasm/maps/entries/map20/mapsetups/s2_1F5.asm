@@ -63,12 +63,12 @@ sub_5385C:
 
 sub_53864:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $103
 										bne.s   loc_53872
 										trap    #TRAP_TEXTBOX
 										dc.w $251               ; "I saw a devil enter the{N}King's body...{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $103
 loc_53872:
 										
@@ -83,12 +83,12 @@ loc_53872:
 
 sub_53878:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $104
 										bne.s   loc_53886
 										trap    #TRAP_TEXTBOX
 										dc.w $253               ; "Hurry to the Princess's{N}bedroom!  Hold the King{N}down!{W1}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $104
 loc_53886:
 										
@@ -103,12 +103,12 @@ loc_53886:
 
 sub_5388C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $105
 										bne.s   loc_5389A
 										trap    #TRAP_TEXTBOX
 										dc.w $24C               ; "Ooo, ouch!{N}I didn't think he could{N}be so strong!{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $105
 loc_5389A:
 										
@@ -123,12 +123,12 @@ loc_5389A:
 
 sub_538A0:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $106
 										bne.s   loc_538AE
 										trap    #TRAP_TEXTBOX
 										dc.w $24E               ; "Princess Elis!{N}I can't let you up there.{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $106
 loc_538AE:
 										

@@ -57,14 +57,14 @@ ms_map3_EntityEvents:
 
 sub_50F54:
 										
-										trap    #1
-										dc.w $25B
+										trap    #TRAP_CHECKFLAG
+										dc.w $25B               ; set after the messenger scene
 										bne.s   loc_50F8A
-										trap    #1
-										dc.w $25A
+										trap    #TRAP_CHECKFLAG
+										dc.w $25A               ; set after Astral's second basement line
 										bne.s   loc_50F84
-										trap    #1
-										dc.w $100
+										trap    #TRAP_CHECKFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_50F6A
 										trap    #TRAP_TEXTBOX
 										dc.w $200               ; "Hi, {LEADER}!{N}How are you?{W2}"
@@ -74,13 +74,13 @@ loc_50F6A:
 										dc.w $1E0               ; "Sir Astral is in the{N}basement, but he looks{N}"
 										trap    #TRAP_TEXTBOX
 										dc.w $1E1               ; "strange today.{W1}"
-										trap    #1
-										dc.w $100
+										trap    #TRAP_CHECKFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_50F82
 										lea     cs_513D6(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_50F82:
 										
 										bra.s   loc_50F88
@@ -93,8 +93,8 @@ loc_50F88:
 										bra.s   return_50F96
 loc_50F8A:
 										
-										trap    #1
-										dc.w $42
+										trap    #TRAP_CHECKFLAG
+										dc.w $42                ; Sarah + Chester are followers
 										bne.s   return_50F96
 										lea     cs_513E2(pc), a0
 										trap    #6
@@ -109,11 +109,11 @@ return_50F96:
 
 sub_50F98:
 										
-										trap    #1
-										dc.w $25B
+										trap    #TRAP_CHECKFLAG
+										dc.w $25B               ; set after the messenger scene
 										bne.s   loc_50FB4
-										trap    #1
-										dc.w $25A
+										trap    #TRAP_CHECKFLAG
+										dc.w $25A               ; set after Astral's second basement line
 										bne.s   loc_50FAA
 										trap    #TRAP_TEXTBOX
 										dc.w $1E2               ; "Hooo...I'm sleepy.{N}{NAME;3} must be sleeping{N}soundly about now.{W1}"
@@ -142,8 +142,8 @@ return_50FB8:
 
 sub_50FBA:
 										
-										trap    #1
-										dc.w $25A
+										trap    #TRAP_CHECKFLAG
+										dc.w $25A               ; set after Astral's second basement line
 										bne.s   loc_50FC6
 										trap    #TRAP_TEXTBOX
 										dc.w $1E3               ; "Hurry to school!{N}Sir Astral and {NAME;1} must{N}be waiting.{W1}"
@@ -252,8 +252,8 @@ sub_51004:
 
 sub_5100E:
 										
-										trap    #1
-										dc.w $25C
+										trap    #TRAP_CHECKFLAG
+										dc.w $25C               ; set after the guards have listened to Sarah and allowed you into the castle
 										bne.s   loc_5101A
 										trap    #TRAP_TEXTBOX
 										dc.w $1F1               ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
@@ -273,8 +273,8 @@ return_5101E:
 
 sub_51020:
 										
-										trap    #1
-										dc.w $25C
+										trap    #TRAP_CHECKFLAG
+										dc.w $25C               ; set after the guards have listened to Sarah and allowed you into the castle
 										bne.s   loc_5102C
 										trap    #TRAP_TEXTBOX
 										dc.w $1F1               ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
@@ -317,19 +317,19 @@ sub_5103C:
 
 sub_51044:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $105
 										bne.s   loc_51052
 										trap    #TRAP_TEXTBOX
 										dc.w $1F4               ; "Oh, morning {LEADER}.{N}When did you come in?{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $105
 loc_51052:
 										
 										trap    #TRAP_TEXTBOX
 										dc.w $1F5               ; "Is it time to start school?{N}OK, I'm coming up soon.{W1}"
-										trap    #2
-										dc.w $25A
+										trap    #TRAP_SETFLAG
+										dc.w $25A               ; set after Astral's second basement line
 return_5105A:
 										
 										rts

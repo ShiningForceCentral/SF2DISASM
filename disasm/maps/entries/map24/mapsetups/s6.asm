@@ -53,7 +53,7 @@ return_59C9C:
 										rts
 cs_StartSpecialBattle:
 										
-										dc.w $13                ; 0013 SET STORY FLAG 2C
+										dc.w $13                ; 0013 SET STORY FLAG 2C : Battle 44 unlocked
 										dc.w $2C
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 18011802
 										dc.l $18011802
@@ -100,8 +100,8 @@ loc_59CF4:
 										dc.w $FFFF
 										lea     cs_LeaveSpecialBattle(pc), a0
 										trap    #6
-										trap    #3
-										dc.w $220
+										trap    #TRAP_CLEARFLAG
+										dc.w $220               ; Battle 44 completed
 										rts
 
 	; End of function ms_map24_InitFunction

@@ -249,7 +249,7 @@ cs_569BC:           dc.w 4                  ; 0004 SET TEXT INDEX 566 : "(Sniff)
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B : "You are going to get the{N}Caravan, aren't you?!{W1}"
 										dc.w $C00B
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 59 56A82
+										dc.w $C                 ; 000C JUMP IF SET FLAG 59 56A82 : YES/NO prompt answer
 										dc.w $59
 										dc.l word_56A82         
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT B
@@ -309,13 +309,13 @@ word_56A82:         dc.w 4                  ; 0004 SET TEXT INDEX 572 : "Great! 
 										dc.w $53                ; 0053  0 FFFF
 										dc.w 0
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 2D5 FFFF
+										dc.w $10                ; 0010 SET FLAG 2D5 FFFF : set after telling Rohde that you're going to get the Caravan
 										dc.w $2D5
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 54 FFFF
+										dc.w $10                ; 0010 SET FLAG 54 FFFF : Rohde is a follower
 										dc.w $54
 										dc.w $FFFF
-										dc.w $13                ; 0013 SET STORY FLAG 12
+										dc.w $13                ; 0013 SET STORY FLAG 12 : Battle 18 unlocked
 										dc.w $12
 										dc.w $2C                ; 002C FOLLOW ENTITY B 1F 2
 										dc.w $B
@@ -337,7 +337,7 @@ cs_56AE6:           dc.w 4                  ; 0004 SET TEXT INDEX 570 : "You aga
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B : "You changed your mind?{N}Hmmm....{W1}"
 										dc.w $C00B
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 59 56A82
+										dc.w $C                 ; 000C JUMP IF SET FLAG 59 56A82 : YES/NO prompt answer
 										dc.w $59
 										dc.l word_56A82         
 										dc.w $B                 ; 000B JUMP 56A70

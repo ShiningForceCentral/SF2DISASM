@@ -53,7 +53,7 @@ sub_5F9FE:
 										bne.s   return_5FA0E
 										lea     cs_5FB30(pc), a0
 										trap    #6
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 return_5FA0E:
 										

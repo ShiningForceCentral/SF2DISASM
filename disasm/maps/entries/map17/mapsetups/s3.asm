@@ -17,13 +17,13 @@ ms_map17_Section3:  dc.b $35
 
 sub_523F4:
 										
-										trap    #1
-										dc.w $295
+										trap    #TRAP_CHECKFLAG
+										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 										bne.s   return_52404
 										lea     cs_52530(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $295
+										trap    #TRAP_SETFLAG
+										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 return_52404:
 										
 										rts
@@ -35,15 +35,15 @@ return_52404:
 
 sub_52406:
 										
-										trap    #1
-										dc.w $296
+										trap    #TRAP_CHECKFLAG
+										dc.w $296               ; set after you try to go upstairs, and Slade opens the secret tunnel
 										bne.s   loc_5241E
 										lea     cs_528D4(pc), a0
 										trap    #6
 										lea     cs_528CA(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $296
+										trap    #TRAP_SETFLAG
+										dc.w $296               ; set after you try to go upstairs, and Slade opens the secret tunnel
 										bra.s   return_5242C
 loc_5241E:
 										
@@ -64,13 +64,13 @@ return_5242C:
 
 sub_5242E:
 										
-										trap    #1
-										dc.w $296
+										trap    #TRAP_CHECKFLAG
+										dc.w $296               ; set after you try to go upstairs, and Slade opens the secret tunnel
 										beq.s   return_5243E
 										lea     cs_52938(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $49
+										trap    #TRAP_SETFLAG
+										dc.w $49                ; Slade is a follower
 return_5243E:
 										
 										rts

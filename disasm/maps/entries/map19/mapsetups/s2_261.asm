@@ -59,12 +59,12 @@ sub_52FC8:
 
 sub_52FCE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_52FDC
 										trap    #TRAP_TEXTBOX
 										dc.w $262               ; "Sir Astral is sleeping in{N}the King's bedroom.{W2}{N}He needs some more rest{N}because he is so old.{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 loc_52FDC:
 										

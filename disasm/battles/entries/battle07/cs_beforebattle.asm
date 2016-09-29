@@ -3,7 +3,7 @@
 ; Cutscene before battle 7
 bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935 : "Astral, you're so persistent!{W1}"
 										dc.w $935
-										dc.w $10                ; 0010 SET FLAG 53 0
+										dc.w $10                ; 0010 SET FLAG 53 0 : King + Minister are followers
 										dc.w $53
 										dc.w 0
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 3A 8 1D

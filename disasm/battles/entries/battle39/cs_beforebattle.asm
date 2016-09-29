@@ -28,7 +28,7 @@ bbcs_39:            dc.w 4                  ; 0004 SET TEXT INDEX BD5 : "I just 
 										dc.b 8
 										dc.b 8
 										dc.b 3
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4E40C
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4E40C : Zynk is a follower
 										dc.w $4C
 										dc.l word_4E40C         
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 1A 8 7 3
@@ -36,7 +36,7 @@ bbcs_39:            dc.w 4                  ; 0004 SET TEXT INDEX BD5 : "I just 
 										dc.b 8
 										dc.b 7
 										dc.b 3
-word_4E40C:         dc.w $D                 ; 000D JUMP IF CLEAR FLAG 47 4E41A
+word_4E40C:         dc.w $D                 ; 000D JUMP IF CLEAR FLAG 47 4E41A : Lemon is a follower
 										dc.w $47
 										dc.l word_4E41A         
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 1C 3F 3E 3

@@ -147,8 +147,8 @@ sub_5D526:
 										trap    #1
 										dc.w $340
 										bne.s   loc_5D538
-										trap    #2
-										dc.w $340
+										trap    #TRAP_SETFLAG
+										dc.w $340               ; set after talking to the painter in Moun for the first time
 										lea     cs_5D652(pc), a0
 										trap    #6
 										bra.s   return_5D53E

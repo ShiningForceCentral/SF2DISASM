@@ -17,8 +17,8 @@ sub_614B2:
 										bne.s   loc_614C2
 										lea     cs_6150A(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $387
+										trap    #TRAP_SETFLAG
+										dc.w $387               ; set after the first time you talk to Creed on path up Ancient Tower
 loc_614C2:
 										
 										trap    #TRAP_TEXTBOX

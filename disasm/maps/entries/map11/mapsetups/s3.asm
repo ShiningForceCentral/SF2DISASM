@@ -25,10 +25,10 @@ sub_57A72:
 										bne.s   return_57A86
 										lea     cs_57AAA(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2D2
-										trap    #2
-										dc.w $2C7
+										trap    #TRAP_SETFLAG
+										dc.w $2D2               ; set after speaking with Volcanon
+										trap    #TRAP_SETFLAG
+										dc.w $2C7               ; set after you dislodge the turtle/fairy in Polca
 return_57A86:
 										
 										rts

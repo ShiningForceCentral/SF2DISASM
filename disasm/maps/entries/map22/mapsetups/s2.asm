@@ -192,8 +192,8 @@ loc_59536:
 										dc.w $706               ; "He's just kidding, but to{N}tell the truth, the Cotton{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $707               ; "Balloon is a very special{N}treasure.{W1}"
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bra.s   return_59552
 loc_5954A:
 										
@@ -228,8 +228,8 @@ loc_5956C:
 										
 										trap    #TRAP_TEXTBOX
 										dc.w $6F5               ; "You may go to the chessboard{N}now.{W1}"
-										trap    #2
-										dc.w $309
+										trap    #TRAP_SETFLAG
+										dc.w $309               ; set after the Desktop King tells you to fight on the chessboard
 										bra.s   return_5957A
 loc_59576:
 										
@@ -284,7 +284,7 @@ loc_5959E:
 										bne.s   return_595B2
 										lea     cs_599A4(pc), a0
 										trap    #6
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $102
 return_595B2:
 										

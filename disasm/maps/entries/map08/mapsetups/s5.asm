@@ -30,8 +30,8 @@ loc_562FC:
 										
 										lea     cs_56314(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2DB
+										trap    #TRAP_SETFLAG
+										dc.w $2DB               ; set after you open the tree in Ribble with the wooden plank
 										moveq   #$70,d0 
 										jsr     sub_4F542
 										move.w  #$FFFF,d6

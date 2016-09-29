@@ -25,9 +25,9 @@ sub_561BE:
 										bne.s   return_561D8
 										lea     cs_563B2(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2BF
-										trap    #2
+										trap    #TRAP_SETFLAG
+										dc.w $2BF               ; set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
+										trap    #TRAP_SETFLAG
 										dc.w $102
 return_561D8:
 										
@@ -45,8 +45,8 @@ sub_561DA:
 										bne.s   return_561EA
 										lea     cs_56422(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2C4
+										trap    #TRAP_SETFLAG
+										dc.w $2C4               ; set after the scene in Ribble where the mayor confronts Bowie
 return_561EA:
 										
 										rts

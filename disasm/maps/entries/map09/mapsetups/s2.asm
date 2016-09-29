@@ -187,8 +187,8 @@ sub_567E6:
 										bne.s   loc_56804
 										trap    #TRAP_TEXTBOX
 										dc.w $55B               ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
-										trap    #2
-										dc.w $31E
+										trap    #TRAP_SETFLAG
+										dc.w $31E               ; set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
 										bra.s   loc_56828
 loc_56804:
 										
@@ -206,8 +206,8 @@ loc_5681E:
 										
 										lea     cs_569BC(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2D7
+										trap    #TRAP_SETFLAG
+										dc.w $2D7               ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 loc_56828:
 										
 										bra.s   return_56840
@@ -236,8 +236,8 @@ sub_56842:
 										bne.s   return_56852
 										lea     cs_56B02(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_56852:
 										
 										rts

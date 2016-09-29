@@ -18,13 +18,13 @@ ms_map19_flag1F5_EntityEvents:
 
 sub_52F70:
 										
-										trap    #1
-										dc.w $100
+										trap    #TRAP_CHECKFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_52F7E
 										trap    #TRAP_TEXTBOX
 										dc.w $249               ; "Well, boy.  Did you hear a{N}strange noise?{W2}"
-										trap    #2
-										btst    d0,d0
+										trap    #TRAP_SETFLAG
+										btst    d0,d0           ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_52F7E:
 										
 										trap    #TRAP_TEXTBOX

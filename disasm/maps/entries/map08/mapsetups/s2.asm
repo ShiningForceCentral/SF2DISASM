@@ -18,8 +18,8 @@ sub_56090:
 										trap    #1
 										dc.w $100
 										bne.s   loc_560A6
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										trap    #TRAP_TEXTBOX
 										dc.w $529               ; "Our ancestors came from{N}Rune, a southern island,{N}long ago.{W2}"
 										trap    #TRAP_TEXTBOX

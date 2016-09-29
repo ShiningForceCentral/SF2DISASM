@@ -19,8 +19,8 @@ sub_5E3B0:
 										bne.s   return_5E3C0
 										lea     cs_5E3C2(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $321
+										trap    #TRAP_SETFLAG
+										dc.w $321               ; set after Zalbard taunts you in the scene outside the Mitula Shrine
 return_5E3C0:
 										
 										rts
@@ -373,7 +373,7 @@ cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB : "Welcome
 										dc.w $26
 										dc.w $203
 										dc.w $E0A
-										dc.w $10                ; 0010 SET FLAG 348 FFFF
+										dc.w $10                ; 0010 SET FLAG 348 FFFF : set after the door to the Mitula Shrine is opened
 										dc.w $348
 										dc.w $FFFF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

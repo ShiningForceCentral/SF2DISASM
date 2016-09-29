@@ -6,26 +6,26 @@
 
 ms_map73_InitFunction:
 										
-										trap    #1
-										dc.w $2BC
+										trap    #TRAP_CHECKFLAG
+										dc.w $2BC               ; set after ship arrives in Parmecia and you regain control of Bowie
 										bne.s   loc_50354
 										lea     cs_503A6(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2BC
+										trap    #TRAP_SETFLAG
+										dc.w $2BC               ; set after ship arrives in Parmecia and you regain control of Bowie
 										rts
 loc_50354:
 										
-										trap    #1
-										dc.w $1FC
+										trap    #TRAP_CHECKFLAG
+										dc.w $1FC               ; Battle 8 completed
 										beq.s   return_5036C
-										trap    #1
-										dc.w $2C1
+										trap    #TRAP_CHECKFLAG
+										dc.w $2C1               ; set after you automatically walk into New Granseal after it is built
 										bne.s   return_5036C
 										lea     cs_50806(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2C1
+										trap    #TRAP_SETFLAG
+										dc.w $2C1               ; set after you automatically walk into New Granseal after it is built
 										rts
 return_5036C:
 										
@@ -128,7 +128,7 @@ cs_503A6:           dc.w 4                  ; 0004 SET TEXT INDEX 8BF : "The peo
 										dc.b $78
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "I feel...sick...to my...{N}stomach...ohhh....{W1}"
 										dc.w 1
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 6 50426
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 6 50426 : Kiwi joined
 										dc.w 6
 										dc.l word_50426         
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C006 : "{NAME;1}, look!{W1}"
@@ -432,7 +432,7 @@ word_50426:         dc.w 4                  ; 0004 SET TEXT INDEX 8B5 : "Ministe
 										dc.w $84
 										dc.w $1C                ; 001C STOP ENTITY ANIM 85
 										dc.w $85
-										dc.w $C                 ; 000C JUMP IF SET FLAG 6 50624
+										dc.w $C                 ; 000C JUMP IF SET FLAG 6 50624 : Kiwi joined
 										dc.w 6
 										dc.l word_50624         
 										dc.w $2E                ; 002E HIDE ENTITY 6

@@ -19,8 +19,8 @@ sub_5FE0C:
 										bne.s   return_5FE22
 										lea     cs_5FE9A(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $385
+										trap    #TRAP_SETFLAG
+										dc.w $385               ; set after the you're pulled toward the Force Sword in the Jewel Cave
 return_5FE22:
 										
 										rts

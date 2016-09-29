@@ -31,8 +31,8 @@ sub_5C2F2:
 										bne.s   return_5C302
 										lea     cs_5C312(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $1D6
+										trap    #TRAP_SETFLAG
+										dc.w $1D6               ; set after you approach the pond to rescue Elric at the Harpy Pond
 return_5C302:
 										
 										rts
@@ -136,7 +136,7 @@ cs_5C312:           dc.w 4                  ; 0004 SET TEXT INDEX 9FB : "Did you
 										dc.b $82
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w $13                ; 0013 SET STORY FLAG 14
+										dc.w $13                ; 0013 SET STORY FLAG 14 : Battle 20 unlocked
 										dc.w $14
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 33000000
 										dc.l $33000000

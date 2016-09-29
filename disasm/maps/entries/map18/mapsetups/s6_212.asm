@@ -11,8 +11,8 @@ ms_map18_flag212_InitFunction:
 										bne.s   loc_612A8
 										lea     cs_612BE(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $398
+										trap    #TRAP_SETFLAG
+										dc.w $398               ; set after the scene with Zeon plays as you leave the Galam Drawbridge area
 loc_612A8:
 										
 										move.w  #$80,d0 

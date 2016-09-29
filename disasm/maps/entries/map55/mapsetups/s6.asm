@@ -37,7 +37,7 @@ word_5E27C:         dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 5E2C4
 										dc.b $1F
 										dc.b $FF
 										dc.l eas_5E2C4          
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 5E2BC
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 5E2BC : Zynk is a follower
 										dc.w $4C
 										dc.l cs_5E2BC           
 										dc.w $15                ; 0015 SET ACTSCRIPT 1A FF 460CE

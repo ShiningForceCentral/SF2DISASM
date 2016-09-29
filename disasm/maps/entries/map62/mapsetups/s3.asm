@@ -28,8 +28,8 @@ sub_5C834:
 										bne.s   return_5C84A
 										lea     cs_5C876(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_5C84A:
 										
 										rts
@@ -52,7 +52,7 @@ sub_5C84C:
 										bne.s   return_5C868
 										lea     cs_5C8FE(pc), a0
 										trap    #6
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 return_5C868:
 										

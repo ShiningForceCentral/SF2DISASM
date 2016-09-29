@@ -26,8 +26,8 @@ sub_5D560:
 										bne.s   return_5D570
 										lea     cs_5D644(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $342
+										trap    #TRAP_SETFLAG
+										dc.w $342               ; set after making the Arm of Golem appear in Moun
 return_5D570:
 										
 										rts

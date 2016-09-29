@@ -31,8 +31,8 @@ sub_56F9C:
 										bne.s   return_56FAC
 										lea     cs_573EC(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2D0
+										trap    #TRAP_SETFLAG
+										dc.w $2D0               ; set after the King of Bedoe speaks to his soldiers and they disperse
 return_56FAC:
 										
 										rts
@@ -49,8 +49,8 @@ sub_56FAE:
 										bne.s   return_56FBE
 										lea     cs_574A6(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2D1
+										trap    #TRAP_SETFLAG
+										dc.w $2D1               ; set after you approach the King of Bedoe, starts with Luke speaking to Peter
 return_56FBE:
 										
 										rts

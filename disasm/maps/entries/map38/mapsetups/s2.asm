@@ -183,8 +183,8 @@ sub_5DC08:
 										dc.w $871               ; "(Sob...sob...){N}He's gone....{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $872               ; "We never had a chance to fly{N}in the Nazca Ship!{W1}"
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bra.s   loc_5DC32
 loc_5DC2E:
 										
@@ -205,8 +205,8 @@ loc_5DC34:
 										dc.w $875               ; "The Nazca Ship crashed?{W1}"
 										trap    #TRAP_TEXTBOX
 										dc.w $876               ; "I hope Petro gets on the{N}Nazca Ship in the great{N}beyond.{W1}"
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bra.w   return_5DC54
 loc_5DC50:
 										
@@ -239,7 +239,7 @@ sub_5DC56:
 										dc.w $873               ; "The devils killed Petro.{N}They lied to us!{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $874               ; "How cruel they are!{W1}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 										bra.s   loc_5DC80
 loc_5DC7C:
@@ -261,7 +261,7 @@ loc_5DC82:
 										dc.w $877               ; "The devils lied, and then{N}killed Petro.{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $878               ; "Please defeat the devils for{N}him!{W1}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 										bra.w   return_5DCA2
 loc_5DC9E:

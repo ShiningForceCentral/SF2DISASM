@@ -25,8 +25,8 @@ loc_5C684:
 										dc.w $E3F               ; "According to my studies,{N}his house should be around{N}here somewhere.{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $E40               ; "Or, maybe it's to the east.{W1}"
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_5C694:
 										
 										rts

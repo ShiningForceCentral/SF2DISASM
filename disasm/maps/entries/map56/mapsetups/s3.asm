@@ -19,14 +19,14 @@ sub_614DE:
 										bne.s   loc_614F4
 										lea     cs_6150A(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $387
+										trap    #TRAP_SETFLAG
+										dc.w $387               ; set after the first time you talk to Creed on path up Ancient Tower
 loc_614F4:
 										
-										trap    #2
-										dc.w $1B9
-										trap    #2
-										dc.w $388
+										trap    #TRAP_SETFLAG
+										dc.w $1B9               ; Battle 41 unlocked
+										trap    #TRAP_SETFLAG
+										dc.w $388               ; will be set with the 0387, but only if the event isn't triggered by speaking
 return_614FC:
 										
 										rts

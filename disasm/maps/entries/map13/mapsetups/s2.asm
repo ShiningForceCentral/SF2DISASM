@@ -55,8 +55,8 @@ sub_58056:
 										dc.w $58C               ; "How did you come to{N}Polca Village?{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $58D               ; "Through the cave?{N}Nobody has come to this{N}village since...{W2}"
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_58068:
 										
 										trap    #TRAP_TEXTBOX
@@ -88,8 +88,8 @@ sub_58078:
 										bne.s   loc_5808A
 										lea     cs_58512(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2C7
+										trap    #TRAP_SETFLAG
+										dc.w $2C7               ; set after you dislodge the turtle/fairy in Polca
 										bra.s   return_5808E
 loc_5808A:
 										
@@ -193,7 +193,7 @@ sub_580DA:
 										bne.s   loc_580F2
 										lea     cs_58116(pc), a0
 										trap    #6
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 										bra.s   loc_580FA
 loc_580F2:

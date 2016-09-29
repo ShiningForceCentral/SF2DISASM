@@ -6,8 +6,8 @@
 
 ms_map19_flag1FB_InitFunction:
 										
-										trap    #1
-										dc.w $1FB
+										trap    #TRAP_CHECKFLAG
+										dc.w $1FB               ; Battle 7 completed
 										beq.s   return_53174
 										lea     cs_53FD8(pc), a0
 										trap    #6
@@ -519,7 +519,7 @@ cs_53176:           dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8C : "I don't think this is a{N}difficult job.{N}Will you go?{W1}"
 										dc.w $8C
 word_53482:         dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 59 534AC
+										dc.w $C                 ; 000C JUMP IF SET FLAG 59 534AC : YES/NO prompt answer
 										dc.w $59
 										dc.l word_534AC         
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT

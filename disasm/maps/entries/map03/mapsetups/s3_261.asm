@@ -15,15 +15,15 @@ ms_map3_flag261_Section3:
 
 sub_50EF6:
 										
-										trap    #1
-										dc.w 3
+										trap    #TRAP_CHECKFLAG
+										dc.w 3                  ; Jaha joined
 										bne.s   return_50F0A
 										lea     cs_516A8(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $192
-										trap    #3
-										dc.w $42
+										trap    #TRAP_SETFLAG
+										dc.w $192               ; Battle 2 unlocked
+										trap    #TRAP_CLEARFLAG
+										dc.w $42                ; Sarah + Chester are followers
 return_50F0A:
 										
 										rts

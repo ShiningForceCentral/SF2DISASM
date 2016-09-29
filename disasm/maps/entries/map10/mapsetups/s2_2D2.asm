@@ -102,8 +102,8 @@ sub_56F0C:
 										bne.s   loc_56F30
 										lea     cs_5797A(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $31F
+										trap    #TRAP_SETFLAG
+										dc.w $31F               ; set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
 										bra.s   loc_56F38
 loc_56F30:
 										
@@ -186,8 +186,8 @@ sub_56F68:
 										bne.s   loc_56F7A
 										lea     cs_5766C(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2D3
+										trap    #TRAP_SETFLAG
+										dc.w $2D3               ; set after the hatchling in Bedoe shows you he can almost fly
 										bra.s   return_56F7E
 loc_56F7A:
 										

@@ -19,8 +19,8 @@ loc_5D62A:
 										trap    #1
 										dc.w $343
 										bne.s   return_5D63A
-										trap    #3
-										dc.w $342
+										trap    #TRAP_CLEARFLAG
+										dc.w $342               ; set after making the Arm of Golem appear in Moun
 return_5D63A:
 										
 										rts
@@ -51,7 +51,7 @@ cs_5D652:           dc.w 4                  ; 0004 SET TEXT INDEX 7E8 : "Oh, you
 word_5D65E:         dc.w 4                  ; 0004 SET TEXT INDEX 7EB : "Excellent!{W1}"
 										dc.w $7EB
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 59 5D712
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 59 5D712 : YES/NO prompt answer
 										dc.w $59
 										dc.l word_5D712         
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT

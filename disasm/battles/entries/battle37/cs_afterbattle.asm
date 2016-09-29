@@ -40,7 +40,7 @@ abcs_battle37:      dc.w 4                  ; 0004 SET TEXT INDEX B9C : "Sir Ast
 										dc.b $25
 										dc.b $3B
 										dc.b 2
-										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4DBEE
+										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 4C 4DBEE : Zynk is a follower
 										dc.w $4C
 										dc.l word_4DBEE         
 										dc.w $15                ; 0015 SET ACTSCRIPT 1A FF 460CE

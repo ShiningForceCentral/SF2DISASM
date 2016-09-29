@@ -483,7 +483,7 @@ cs_5CCF6:           dc.w $18                ; 0018 FLASH ENTITY WHITE 0 32
 										dc.l eas_Init           
 										dc.w $1B                ; 001B START ENTITY ANIM 0
 										dc.w 0
-										dc.w $C                 ; 000C JUMP IF SET FLAG 1D 5CDDA
+										dc.w $C                 ; 000C JUMP IF SET FLAG 1D 5CDDA : Claude joined
 										dc.w $1D
 										dc.l word_5CDDA         
 										dc.w $1A                ; 001A SET ENTITY SPRITE 1D B0

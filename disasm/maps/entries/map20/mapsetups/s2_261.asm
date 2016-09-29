@@ -41,12 +41,12 @@ sub_538D4:
 
 sub_538DA:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_538E8
 										trap    #TRAP_TEXTBOX
 										dc.w $259               ; "Thank you, {LEADER}.{N}You've saved the King's{N}life.{W2}{N}I heard that you are going{N}to Yeel.{W2}{N}I'll take care of Sir Astral{N}for you.{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 loc_538E8:
 										
@@ -61,12 +61,12 @@ loc_538E8:
 
 sub_538EE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $102
 										bne.s   loc_538FC
 										trap    #TRAP_TEXTBOX
 										dc.w $25B               ; "Are you going to see{N}Mr. Hawel?{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $102
 loc_538FC:
 										
@@ -81,12 +81,12 @@ loc_538FC:
 
 sub_53902:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $104
 										bne.s   loc_53910
 										trap    #TRAP_TEXTBOX
 										dc.w $25D               ; "Princess Elis has not rested{N}since the King collapsed.{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $104
 loc_53910:
 										

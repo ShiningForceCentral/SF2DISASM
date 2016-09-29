@@ -86,8 +86,8 @@ sub_5D5BE:
 										jsr     sub_4F48A
 										btst    #0,d0
 										bne.s   loc_5D5FE
-										trap    #2
-										dc.w $343
+										trap    #TRAP_SETFLAG
+										dc.w $343               ; set after picking up the Arm of Golem in Moun
 										move.w  #$89,d0 
 										jsr     MoveEntityOutOfMap
 										bra.s   loc_5D606

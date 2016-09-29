@@ -46,8 +46,8 @@ sub_5A236:
 										
 										trap    #TRAP_TEXTBOX
 										dc.w $6AA               ; "Recent earthquakes have{N}buried the tunnel.{W2}{N}My friend is sick now, and{N}we can't dig out the tunnel{N}without him.{W1}"
-										trap    #2
-										dc.w $2F7
+										trap    #TRAP_SETFLAG
+										dc.w $2F7               ; set after talking to one of the dwarves in the mine near the Fairy Woods
 										rts
 
 	; End of function sub_5A236
@@ -63,8 +63,8 @@ sub_5A240:
 										dc.w $6AB               ; "(Shiver)...cold...{N}Oh...I'm so cold....{W1}"
 										lea     cs_5A256(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2F7
+										trap    #TRAP_SETFLAG
+										dc.w $2F7               ; set after talking to one of the dwarves in the mine near the Fairy Woods
 										rts
 
 	; End of function sub_5A240
@@ -82,8 +82,8 @@ sub_5A25C:
 										bne.s   loc_5A26C
 										trap    #TRAP_TEXTBOX
 										dc.w $6AC               ; "One of us went to look for{N}the fairy.{W2}{N}I hope he's alright.{W1}"
-										trap    #2
-										dc.w $2F7
+										trap    #TRAP_SETFLAG
+										dc.w $2F7               ; set after talking to one of the dwarves in the mine near the Fairy Woods
 										bra.s   return_5A270
 loc_5A26C:
 										
@@ -138,8 +138,8 @@ loc_5A296:
 										jsr     (Sleep).w       
 										trap    #TRAP_TEXTBOX
 										dc.w $FFFF
-										trap    #2
-										dc.w $2F9
+										trap    #TRAP_SETFLAG
+										dc.w $2F9               ; set after the dwarf gives Bowie the cannon
 										trap    #TRAP_SOUNDCOM
 										dc.w SOUND_COMMAND_PLAY_PREVIOUS_MUSIC
 										lea     cs_5A4FE(pc), a0

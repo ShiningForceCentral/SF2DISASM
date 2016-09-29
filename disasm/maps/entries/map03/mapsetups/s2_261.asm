@@ -90,13 +90,13 @@ ms_map3_flag261_EntityEvents:
 
 sub_510CC:
 										
-										trap    #1
-										dc.w $100
+										trap    #TRAP_CHECKFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_510DA
 										trap    #TRAP_TEXTBOX
 										dc.w $273               ; "The castle guard said the{N}King chose you to lead a{N}mission.{N}{LEADER}, my dear,{W2}{N}I didn't know you were old{N}enough to work for the{N}King.{W1}"
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_510DA:
 										
 										trap    #TRAP_TEXTBOX
@@ -110,12 +110,12 @@ loc_510DA:
 
 sub_510E0:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_510EE
 										trap    #TRAP_TEXTBOX
 										dc.w $275               ; "I knew your father very{N}well.{N}He was a great leader.{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $101
 loc_510EE:
 										
@@ -353,12 +353,12 @@ sub_51178:
 
 sub_5117E:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $116
 										bne.s   loc_5118E
 										trap    #TRAP_TEXTBOX
 										dc.w $28B               ; "A pet shop has newly opened,{N}but Mom never lets me go?{N}Why?{W1}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $116
 										bra.s   return_51192
 loc_5118E:
@@ -376,12 +376,12 @@ return_51192:
 
 sub_51194:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $117
 										bne.s   loc_511A2
 										trap    #TRAP_TEXTBOX
 										dc.w $292               ; "Strangers from the mainland{N}opened a pet shop.{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $117
 loc_511A2:
 										
@@ -396,12 +396,12 @@ loc_511A2:
 
 sub_511A8:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $118
 										bne.s   loc_511B6
 										trap    #TRAP_TEXTBOX
 										dc.w $294               ; "(Sniff, sniff)...have you{N}seen or smelt any sulfur?{W2}"
-										trap    #2
+										trap    #TRAP_SETFLAG
 										dc.w $118
 loc_511B6:
 										

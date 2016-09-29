@@ -77,8 +77,8 @@ sub_51AC2:
 										dc.w $313               ; "Sir Hawel lives just outside{N}of this village.{W1}"
 										lea     cs_51B14(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $48
+										trap    #TRAP_SETFLAG
+										dc.w $48                ; Kazin is a follower
 										rts
 
 	; End of function sub_51AC2
@@ -245,8 +245,8 @@ sub_51B80:
 
 sub_51B8E:
 										
-										trap    #1
-										dc.w $48
+										trap    #TRAP_CHECKFLAG
+										dc.w $48                ; Kazin is a follower
 										bne.s   loc_51B9E
 										trap    #TRAP_TEXTBOX
 										dc.w $30E               ; "Want to see Hawel?{W2}"

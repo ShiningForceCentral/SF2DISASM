@@ -51,11 +51,11 @@ cs_5DA28:           dc.w 4                  ; 0004 SET TEXT INDEX CFB : "You def
 										dc.w $16
 										dc.w $1F
 										dc.w 2
-										dc.w $13                ; 0013 SET STORY FLAG 1F
+										dc.w $13                ; 0013 SET STORY FLAG 1F : Battle 31 unlocked
 										dc.w $1F
-										dc.w $13                ; 0013 SET STORY FLAG 21
+										dc.w $13                ; 0013 SET STORY FLAG 21 : Battle 33 unlocked
 										dc.w $21
-										dc.w $13                ; 0013 SET STORY FLAG 22
+										dc.w $13                ; 0013 SET STORY FLAG 22 : Battle 34 unlocked
 										dc.w $22
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 cs_5DA7A:           dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 83

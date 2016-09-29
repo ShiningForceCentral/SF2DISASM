@@ -46,17 +46,17 @@ sub_4FE8C:
 
 sub_4FE98:
 										
-										trap    #1
-										dc.w $2EE
+										trap    #TRAP_CHECKFLAG
+										dc.w $2EE               ; set after Rohde clears the blockage at the North Cliff cave
 										bne.s   return_4FF04
-										trap    #1
-										dc.w $325
+										trap    #TRAP_CHECKFLAG
+										dc.w $325               ; set after coming back to New Granseal after Creed's Mansion,when Astral joins
 										beq.s   return_4FF04
-										trap    #1
-										dc.w $100
+										trap    #TRAP_CHECKFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   return_4FF04
-										trap    #3
-										dc.w $100
+										trap    #TRAP_CLEARFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										moveq   #$72,d1 
 										jsr     j_sub_9146
 										cmpi.w  #$FFFF,d0
@@ -71,8 +71,8 @@ sub_4FE98:
 										jsr     sub_4F542
 										lea     cs_4FFDA(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2EE
+										trap    #TRAP_SETFLAG
+										dc.w $2EE               ; set after Rohde clears the blockage at the North Cliff cave
 										bra.s   loc_4FEF2
 loc_4FEE6:
 										
@@ -89,8 +89,8 @@ loc_4FEF4:
 										trap    #6
 loc_4FF00:
 										
-										trap    #2
-										dc.w $100
+										trap    #TRAP_SETFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_4FF04:
 										
 										rts
@@ -102,8 +102,8 @@ return_4FF04:
 
 sub_4FF06:
 										
-										trap    #1
-										dc.w $20B
+										trap    #TRAP_CHECKFLAG
+										dc.w $20B               ; Battle 23 completed
 										bne.s   loc_4FF18
 										move.w  #8,d0
 										jsr     sub_47856

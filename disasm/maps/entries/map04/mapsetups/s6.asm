@@ -6,13 +6,13 @@
 
 ms_map4_InitFunction:
 										
-										trap    #1
-										dc.w $270
+										trap    #TRAP_CHECKFLAG
+										dc.w $270               ; set after the soldiers are swallowed up by the earthquake
 										bne.s   loc_5173A
 										lea     cs_51750(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $270
+										trap    #TRAP_SETFLAG
+										dc.w $270               ; set after the soldiers are swallowed up by the earthquake
 										bra.s   return_51740
 loc_5173A:
 										

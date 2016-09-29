@@ -23,8 +23,8 @@ ms_map67_Section3:  dc.b $39
 
 sub_4FB24:
 										
-										trap    #1
-										dc.w $208
+										trap    #TRAP_CHECKFLAG
+										dc.w $208               ; Battle 20 completed
 										bne.s   return_4FB30
 										lea     cs_4FB64(pc), a0
 										trap    #TRAP_MAPSCRIPT
@@ -40,10 +40,10 @@ return_4FB30:
 sub_4FB32:
 										
 										trap    #TRAP_CHECKFLAG
-										dc.w $2EF
+										dc.w $2EF               ; set after Elric opens the passage to Devil's Tail
 										bne.s   return_4FB56
 										trap    #TRAP_CHECKFLAG
-										dc.w $D
+										dc.w $D                 ; Elric joined
 										beq.s   return_4FB56
 										move.w  #$D,d0
 										jsr     j_GetCurrentHP
@@ -52,7 +52,7 @@ sub_4FB32:
 										lea     cs_4FC32(pc), a0
 										trap    #TRAP_MAPSCRIPT
 										trap    #TRAP_SETFLAG
-										dc.w $2EF
+										dc.w $2EF               ; set after Elric opens the passage to Devil's Tail
 return_4FB56:
 										
 										rts

@@ -126,7 +126,7 @@ cs_59FB8:           dc.w 4                  ; 0004 SET TEXT INDEX 6C5 : "(Sniff,
 										dc.b $82
 										dc.b $FF
 										dc.l eas_Jump           
-										dc.w $13                ; 0013 SET STORY FLAG 17
+										dc.w $13                ; 0013 SET STORY FLAG 17 : Battle 23 unlocked
 										dc.w $17
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 1B000000
 										dc.l $1B000000

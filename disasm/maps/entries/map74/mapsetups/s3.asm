@@ -11,29 +11,29 @@ ms_map74_Section3:  dc.b $FF
 
 sub_5098C:
 										
-										trap    #1
-										dc.w $20F
+										trap    #TRAP_CHECKFLAG
+										dc.w $20F               ; Battle 27 completed
 										bne.s   loc_509AC
-										trap    #2
-										dc.w $1AB
+										trap    #TRAP_SETFLAG
+										dc.w $1AB               ; Battle 27 unlocked
 										move.l  #$100FF,((RAM_MapEventType-$1000000)).w
-										trap    #2
-										dc.w $1AC
-										trap    #2
-										dc.w $1AD
-										trap    #2
-										dc.w $1AE
+										trap    #TRAP_SETFLAG
+										dc.w $1AC               ; Battle 28 unlocked
+										trap    #TRAP_SETFLAG
+										dc.w $1AD               ; Battle 29 unlocked
+										trap    #TRAP_SETFLAG
+										dc.w $1AE               ; Battle 30 unlocked
 										bra.s   return_509C4
 loc_509AC:
 										
-										trap    #1
-										dc.w $32B
+										trap    #TRAP_CHECKFLAG
+										dc.w $32B               ; set after Frayja asks to go to Moun with you
 										beq.s   return_509C4
-										trap    #1
-										dc.w $214
+										trap    #TRAP_CHECKFLAG
+										dc.w $214               ; Battle 32 completed
 										bne.s   return_509C4
-										trap    #2
-										dc.w $1B0
+										trap    #TRAP_SETFLAG
+										dc.w $1B0               ; Battle 32 unlocked
 										move.l  #$100FF,((RAM_MapEventType-$1000000)).w
 return_509C4:
 										

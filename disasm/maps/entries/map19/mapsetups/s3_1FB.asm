@@ -27,13 +27,13 @@ nullsub_82:
 
 sub_52DB6:
 										
-										trap    #1
-										dc.w $26C
+										trap    #TRAP_CHECKFLAG
+										dc.w $26C               ; set after Astral talks Lemon into heading to the Ancient Tower
 										bne.s   return_52DC6
 										lea     cs_534D2(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $26C
+										trap    #TRAP_SETFLAG
+										dc.w $26C               ; set after Astral talks Lemon into heading to the Ancient Tower
 return_52DC6:
 										
 										rts
@@ -45,15 +45,15 @@ return_52DC6:
 
 sub_52DC8:
 										
-										trap    #1
-										dc.w $26D
+										trap    #TRAP_CHECKFLAG
+										dc.w $26D               ; set after stepping in front of the Minister
 										bne.s   return_52DDC
 										lea     cs_535FA(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $53
-										trap    #2
-										dc.w $26D
+										trap    #TRAP_SETFLAG
+										dc.w $53                ; King + Minister are followers
+										trap    #TRAP_SETFLAG
+										dc.w $26D               ; set after stepping in front of the Minister
 return_52DDC:
 										
 										rts
@@ -65,13 +65,13 @@ return_52DDC:
 
 sub_52DDE:
 										
-										trap    #1
-										dc.w $26E
+										trap    #TRAP_CHECKFLAG
+										dc.w $26E               ; set after Astral delivers an "oh crap, earthquake" line in the castle
 										bne.s   return_52DEE
 										lea     cs_53620(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $26E
+										trap    #TRAP_SETFLAG
+										dc.w $26E               ; set after Astral delivers an "oh crap, earthquake" line in the castle
 return_52DEE:
 										
 										rts
@@ -83,13 +83,13 @@ return_52DEE:
 
 sub_52DF0:
 										
-										trap    #1
-										dc.w $26F
+										trap    #TRAP_CHECKFLAG
+										dc.w $26F               ; set after Astral delivers his "should be safe" line in castle
 										bne.s   return_52E00
 										lea     cs_5362A(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $26F
+										trap    #TRAP_SETFLAG
+										dc.w $26F               ; set after Astral delivers his "should be safe" line in castle
 return_52E00:
 										
 										rts

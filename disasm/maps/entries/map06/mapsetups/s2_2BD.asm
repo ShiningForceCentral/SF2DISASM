@@ -620,8 +620,8 @@ loc_54C8E:
 										bsr.w   sub_4F48A
 										btst    #0,d0
 										bne.s   loc_54CBA
-										trap    #2
-										dc.w $324
+										trap    #TRAP_SETFLAG
+										dc.w $324               ; set after the dwarf gives you dynamite
 										bra.s   loc_54CBE
 loc_54CBA:
 										

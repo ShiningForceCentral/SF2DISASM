@@ -11,8 +11,8 @@ ms_map14_InitFunction:
 										bne.s   return_58F28
 										lea     cs_58FA4(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2BF
+										trap    #TRAP_SETFLAG
+										dc.w $2BF               ; set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
 										move.b  #$E,((RAM_EgressMapIdx-$1000000)).w
 return_58F28:
 										

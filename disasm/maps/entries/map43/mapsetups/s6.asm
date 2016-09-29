@@ -8,12 +8,12 @@ ms_map43_InitFunction:
 										
 										lea     cs_540C0(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $264
-										trap    #2
-										dc.w $28A
-										trap    #3
-										dc.w $48
+										trap    #TRAP_SETFLAG
+										dc.w $264               ; set after event at Hawel's house
+										trap    #TRAP_SETFLAG
+										dc.w $28A               ; set after event at Hawel's house
+										trap    #TRAP_CLEARFLAG
+										dc.w $48                ; Kazin is a follower
 										move.b  #$2B,((RAM_EgressMapIdx-$1000000)).w 
 return_540BE:
 										
@@ -420,9 +420,9 @@ cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B : "This is
 										dc.w 4
 										dc.w 0
 										dc.w 2
-										dc.w $10                ; 0010 SET FLAG 48 0
+										dc.w $10                ; 0010 SET FLAG 48 0 : Kazin is a follower
 										dc.w $48
 										dc.w 0
-										dc.w $13                ; 0013 SET STORY FLAG 4
+										dc.w $13                ; 0013 SET STORY FLAG 4 : Battle 4 unlocked
 										dc.w 4
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

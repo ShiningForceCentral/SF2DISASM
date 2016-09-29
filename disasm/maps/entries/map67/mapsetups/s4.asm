@@ -26,7 +26,7 @@ sub_4FCE6:
 										trap    #TRAP_TEXTBOX
 										dc.w $1A8               ; "{NAME} investigated.{W2}{CLEAR}"
 										trap    #TRAP_CHECKFLAG
-										dc.w $2EF
+										dc.w $2EF               ; set after Elric opens the passage to Devil's Tail
 										bne.s   loc_4FD3C
 										trap    #TRAP_TEXTBOX
 										dc.w $A1E               ; "There's a wobbly rock.{W1}"
@@ -37,8 +37,8 @@ sub_4FCE6:
 										jsr     GetEntityPortraitAndSpeechSound
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #1
-										dc.w $D
+										trap    #TRAP_CHECKFLAG
+										dc.w $D                 ; Elric joined
 										bne.s   loc_4FD22
 										jsr     LoadAndDisplayCurrentPortrait
 										trap    #TRAP_TEXTBOX

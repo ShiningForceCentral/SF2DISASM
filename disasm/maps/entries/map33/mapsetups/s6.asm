@@ -14,8 +14,8 @@ ms_map33_InitFunction:
 										bne.s   loc_5AB98
 										lea     cs_5B016(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $30F
+										trap    #TRAP_SETFLAG
+										dc.w $30F               ; set after the scene where Creed restores the Force and heads down the basement
 										move.b  #9,((RAM_EgressMapIdx-$1000000)).w
 loc_5AB98:
 										

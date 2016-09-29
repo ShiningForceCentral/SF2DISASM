@@ -154,7 +154,7 @@ rbcs_battle40_1:    dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO P
 										dc.w $B0B
 										dc.w $101
 										dc.w $1316
-										dc.w $10                ; 0010 SET FLAG 183 FFFF
+										dc.w $10                ; 0010 SET FLAG 183 FFFF : set after the first set of tile changes in the Oddeye battle
 										dc.w $183
 										dc.w $FFFF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

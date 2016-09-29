@@ -21,8 +21,8 @@ sub_568B0:
 										bne.s   return_568C2
 										lea     cs_569BC(pc), a0
 										trap    #6
-										trap    #2
-										dc.w $2D7
+										trap    #TRAP_SETFLAG
+										dc.w $2D7               ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 										moveq   #$FFFFFFFF,d6
 return_568C2:
 										

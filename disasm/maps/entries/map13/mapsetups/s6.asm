@@ -867,7 +867,7 @@ cs_585FE:           dc.w 5                  ; 0005 PLAY SOUND
 										dc.w $80
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "For that you shall die!!{W1}"
 										dc.w $80
-										dc.w $13                ; 0013 SET STORY FLAG D
+										dc.w $13                ; 0013 SET STORY FLAG D : Battle 13 unlocked
 										dc.w $D
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT D000000
 										dc.l $D000000
@@ -1342,7 +1342,7 @@ cs_58AE2:           dc.w 4                  ; 0004 SET TEXT INDEX 5ED : "Just a 
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8007 : "him with us?{W1}"
 										dc.w $8007
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 59 58B7A
+										dc.w $C                 ; 000C JUMP IF SET FLAG 59 58B7A : YES/NO prompt answer
 										dc.w $59
 										dc.l cs_58B7A           
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "I agree.  Our journey will{N}be too difficult on him,{N}as he is blind.{W2}"
@@ -1497,7 +1497,7 @@ cs_58BEA:           dc.w 4                  ; 0004 SET TEXT INDEX 605 : "Wait, w
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8007 : "him with us?{W1}"
 										dc.w $8007
 										dc.w $11                ; 0011 STORY YESNO PROMPT
-										dc.w $C                 ; 000C JUMP IF SET FLAG 59 58D4C
+										dc.w $C                 ; 000C JUMP IF SET FLAG 59 58D4C : YES/NO prompt answer
 										dc.w $59
 										dc.l cs_58D4C           
 										dc.w 4                  ; 0004 SET TEXT INDEX 607 : "Huh?{W1}"
@@ -1771,13 +1771,13 @@ word_58DD2:         dc.w 4                  ; 0004 SET TEXT INDEX 600 : "I'm Odd
 										dc.w $A
 										dc.w $8C
 										dc.w 2
-										dc.w $10                ; 0010 SET FLAG 44 FFFF
+										dc.w $10                ; 0010 SET FLAG 44 FFFF : Oddler is a follower
 										dc.w $44
 										dc.w $FFFF
-										dc.w $10                ; 0010 SET FLAG 4B 0
+										dc.w $10                ; 0010 SET FLAG 4B 0 : Luke is a follower
 										dc.w $4B
 										dc.w 0
-										dc.w $10                ; 0010 SET FLAG 2CE FFFF
+										dc.w $10                ; 0010 SET FLAG 2CE FFFF : set after Oddler runs after you as you leave Polca, and tags along
 										dc.w $2CE
 										dc.w $FFFF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

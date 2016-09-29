@@ -185,7 +185,7 @@ byte_545B6:         dc.b 3
 										dc.w $C
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C01F : "It's too dangerous to stay{N}here.{N}Weigh anchor right now!{W1}"
 										dc.w $C01F
-										dc.w $10                ; 0010 SET FLAG 4A 0
+										dc.w $10                ; 0010 SET FLAG 4A 0 : Astral + King are followers
 										dc.w $4A
 										dc.w 0
 										dc.w $32                ; 0032 SET CAMERA DEST B D
@@ -272,7 +272,7 @@ byte_545B6:         dc.b 3
 										dc.b $78
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 491A0D00
 										dc.l $491A0D00
-										dc.w $10                ; 0010 SET FLAG 280 0
+										dc.w $10                ; 0010 SET FLAG 280 0 : set after the end of battle 7's long sequence, cleared at docks?
 										dc.w $280
 										dc.w 0
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT

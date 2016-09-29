@@ -3966,7 +3966,7 @@ loc_123F2:
 										move.w  -2(a6),d0
 										bne.s   loc_12446
 										trap    #TRAP_CHECKFLAG
-										dc.w $180
+										dc.w $180               ; set after Bowie obtains the jewel of light/evil... whichever it is
 										beq.s   loc_12446
 										move.w  d7,-(sp)
 										lea     aJewel(pc), a0  
@@ -3981,7 +3981,7 @@ loc_123F2:
 										move.w  #$92,d1 
 										bsr.w   CopyMemberScreenIconsToVDPTileOrder
 										trap    #TRAP_CHECKFLAG
-										dc.w $181
+										dc.w $181               ; set after Bowie obtains King Galam's jewel
 										beq.s   loc_12446
 										movea.l -6(a6),a1
 										adda.w  #$3A2,a1
