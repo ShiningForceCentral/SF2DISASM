@@ -1,17 +1,17 @@
 
 ; SCRIPT SECTION maps\entries\map26\mapsetups\s3 :
 ; 
-ms_map26_Section3:  dc.b $E
+ms_map26_ZoneEvents:dc.b $E
 										dc.b $FF
-										dc.w sub_59DBE-ms_map26_Section3
+										dc.w sub_59DBE-ms_map26_ZoneEvents
 										dc.w $FD00
-										dc.w nullsub_91-ms_map26_Section3
+										dc.w nullsub_91-ms_map26_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_59DBE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $30C
 										bne.s   return_59DCE
 										lea     cs_59F20(pc), a0

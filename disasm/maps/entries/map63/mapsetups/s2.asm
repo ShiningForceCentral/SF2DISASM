@@ -12,7 +12,7 @@ ms_map63_EntityEvents:
 
 sub_5C992:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1D
 										bne.s   return_5C9E0
 										moveq   #$75,d1 

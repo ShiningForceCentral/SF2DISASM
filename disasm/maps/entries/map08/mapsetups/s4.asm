@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map8_Section4:
+ms_map8_AreaDescriptions:
 										
 										move.w  #$546,d3
 										lea     word_561FC(pc), a0
 										nop
-										jmp     sub_47722
+										jmp     DisplayAreaDescription
 
-	; End of function ms_map8_Section4
+	; End of function ms_map8_AreaDescriptions
 
 word_561FC:         dc.w $50F
 										dc.b 0
@@ -71,7 +71,7 @@ word_561FC:         dc.w $50F
 
 sub_56246:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2C4
 										bne.s   loc_56256
 										move.w  #$546,d0
@@ -95,7 +95,7 @@ return_5626A:
 
 sub_5626C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2C4
 										bne.s   loc_56284
 										move.w  #$547,d0
@@ -131,7 +131,7 @@ sub_5629A:
 										jmp     (DisplayText).w 
 loc_562BA:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2DB
 										bne.s   loc_562CA
 										move.w  #$54A,d0

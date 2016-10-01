@@ -94,7 +94,7 @@ sub_5D894:
 
 sub_5D89E:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $32A
 										bne.s   loc_5D8B6
 										trap    #TRAP_TEXTBOX

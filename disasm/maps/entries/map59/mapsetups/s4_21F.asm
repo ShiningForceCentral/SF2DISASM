@@ -4,9 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map59_flag21F_Section4:
+ms_map59_flag21F_AreaDescriptions:
 										
 										rts
 
-	; End of function ms_map59_flag21F_Section4
+	; End of function ms_map59_flag21F_AreaDescriptions
 

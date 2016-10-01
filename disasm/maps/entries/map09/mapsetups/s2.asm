@@ -110,8 +110,8 @@ sub_56784:
 
 sub_5678C:
 										
-										trap    #1
-										dc.w $2D5
+										trap    #TRAP_CHECKFLAG
+										dc.w $2D5               ; set after telling Rohde that you're going to get the Caravan
 										bne.s   loc_567C2
 										trap    #TRAP_TEXTBOX
 										dc.w $555               ; "Dr. {NAME;11} lives in the{N}house over there.{W2}"
@@ -178,8 +178,8 @@ sub_567D8:
 
 sub_567E6:
 										
-										trap    #1
-										dc.w $2D7
+										trap    #TRAP_CHECKFLAG
+										dc.w $2D7               ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 										bne.s   loc_5682A
 										moveq   #$3D,d1 
 										jsr     j_sub_9146
@@ -192,8 +192,8 @@ sub_567E6:
 										bra.s   loc_56828
 loc_56804:
 										
-										trap    #1
-										dc.w $31E
+										trap    #TRAP_CHECKFLAG
+										dc.w $31E               ; set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
 										bne.s   loc_5681E
 										trap    #TRAP_TEXTBOX
 										dc.w $55B               ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
@@ -213,8 +213,8 @@ loc_56828:
 										bra.s   return_56840
 loc_5682A:
 										
-										trap    #1
-										dc.w $2D5
+										trap    #TRAP_CHECKFLAG
+										dc.w $2D5               ; set after telling Rohde that you're going to get the Caravan
 										bne.s   return_56840
 										move.w  #$B,d0
 										jsr     sub_47832
@@ -231,8 +231,8 @@ return_56840:
 
 sub_56842:
 										
-										trap    #1
-										dc.w $100
+										trap    #TRAP_CHECKFLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   return_56852
 										lea     cs_56B02(pc), a0
 										trap    #6

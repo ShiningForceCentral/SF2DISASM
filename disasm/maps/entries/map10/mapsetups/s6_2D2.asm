@@ -6,14 +6,14 @@
 
 ms_map10_flag2D2_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $31F
 										beq.s   loc_5709E
 										move.w  #$A,d0
 										jsr     MoveEntityOutOfMap
 loc_5709E:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2D4
 										beq.s   return_570AE
 										move.w  #$98,d0 

@@ -77,7 +77,7 @@ sub_59B7A:
 
 sub_59B84:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $D
 										bne.s   loc_59B94
 										trap    #TRAP_TEXTBOX

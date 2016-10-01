@@ -1,11 +1,11 @@
 
 ; SCRIPT SECTION maps\entries\map22\mapsetups\s3 :
 ; 
-ms_map22_Section3:  dc.b $FF
+ms_map22_ZoneEvents:dc.b $FF
 										dc.b $10
-										dc.w sub_595E8-ms_map22_Section3
+										dc.w sub_595E8-ms_map22_ZoneEvents
 										dc.w $FD00
-										dc.w nullsub_87-ms_map22_Section3
+										dc.w nullsub_87-ms_map22_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -20,10 +20,10 @@ nullsub_87:
 
 sub_595E8:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $309
 										beq.s   return_59600
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $20A
 										bne.s   return_59600
 										move.b  #$16,((RAM_EgressMapIdx-$1000000)).w

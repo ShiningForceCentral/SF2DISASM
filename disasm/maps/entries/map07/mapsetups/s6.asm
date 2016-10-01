@@ -6,7 +6,7 @@
 
 ms_map7_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2C3
 										bne.s   return_55830
 										move.b  #6,((RAM_EgressMapIdx-$1000000)).w

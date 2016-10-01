@@ -36,7 +36,7 @@ nullsub_125:
 
 sub_63252:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3D6
 										bne.s   loc_63266
 										trap    #TRAP_TEXTBOX

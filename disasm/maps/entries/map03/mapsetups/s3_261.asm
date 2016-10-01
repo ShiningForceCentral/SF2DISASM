@@ -1,15 +1,15 @@
 
 ; SCRIPT SECTION maps\entries\map03\mapsetups\s3_261 :
 ; 
-ms_map3_flag261_Section3:
+ms_map3_flag261_ZoneEvents:
 										dc.b 2
 										dc.b $17
-										dc.w return_50F0A-ms_map3_flag261_Section3
+										dc.w return_50F0A-ms_map3_flag261_ZoneEvents
 										dc.b 2
 										dc.b $FF
-										dc.w sub_50EF6-ms_map3_flag261_Section3
+										dc.w sub_50EF6-ms_map3_flag261_ZoneEvents
 										dc.w $FD00
-										dc.w return_50EE8+$10000-ms_map3_flag261_Section3
+										dc.w return_50EE8+$10000-ms_map3_flag261_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

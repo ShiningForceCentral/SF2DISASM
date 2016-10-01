@@ -1,8 +1,8 @@
 
 ; SCRIPT SECTION maps\entries\map76\mapsetups\s3 :
 ; 
-ms_map76_Section3:  dc.w $FD00
-										dc.w sub_50A28-ms_map76_Section3
+ms_map76_ZoneEvents:dc.w $FD00
+										dc.w sub_50A28-ms_map76_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

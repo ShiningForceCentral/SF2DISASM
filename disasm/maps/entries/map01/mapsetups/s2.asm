@@ -149,7 +149,7 @@ sub_5E704:
 
 sub_5E70E:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $349
 										bne.s   return_5E71E
 										lea     cs_5E772(pc), a0

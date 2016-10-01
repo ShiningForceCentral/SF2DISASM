@@ -6,7 +6,7 @@
 
 ms_map39_flag33E_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $344
 										bne.s   return_5E0EC
 										lea     cs_5E0EE(pc), a0

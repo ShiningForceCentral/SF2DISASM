@@ -6,14 +6,14 @@
 
 ms_map12_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2D5
 										bne.s   loc_57D10
 										lea     cs_57D22(pc), a0
 										trap    #6
 loc_57D10:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $206
 										beq.s   return_57D20
 										move.w  #$80,d0 

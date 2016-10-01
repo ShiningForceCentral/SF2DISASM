@@ -6,7 +6,7 @@
 
 ms_map59_flag21F_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $21F
 										beq.s   return_615E4
 										lea     cs_615E6(pc), a0

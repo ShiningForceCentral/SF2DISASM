@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map38_Section4:
+ms_map38_AreaDescriptions:
 										
 										move.w  #$104B,d3
 										lea     word_5DD36(pc), a0
 										nop
-										jmp     sub_47722
+										jmp     DisplayAreaDescription
 
-	; End of function ms_map38_Section4
+	; End of function ms_map38_AreaDescriptions
 
 word_5DD36:         dc.w $30E
 										dc.b 0

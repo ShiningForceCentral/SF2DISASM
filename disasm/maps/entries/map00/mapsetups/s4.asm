@@ -4,9 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map0_Section4:
+ms_map0_AreaDescriptions:
 										
 										rts
 
-	; End of function ms_map0_Section4
+	; End of function ms_map0_AreaDescriptions
 

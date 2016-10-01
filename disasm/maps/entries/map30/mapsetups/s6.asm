@@ -6,14 +6,14 @@
 
 ms_map30_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2F9
 										beq.s   loc_5A2FE
 										lea     cs_5A30C(pc), a0
 										trap    #6
 loc_5A2FE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2F8
 										bne.s   return_5A30A
 										lea     cs_5A31E(pc), a0

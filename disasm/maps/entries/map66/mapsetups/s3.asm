@@ -1,17 +1,17 @@
 
 ; SCRIPT SECTION maps\entries\map66\mapsetups\s3 :
 ; 
-ms_map66_Section3:  dc.b $FF
+ms_map66_ZoneEvents:dc.b $FF
 										dc.b 9
-										dc.w sub_4FAA0-ms_map66_Section3
+										dc.w sub_4FAA0-ms_map66_ZoneEvents
 										dc.b $FF
 										dc.b $A
-										dc.w sub_4FAA0-ms_map66_Section3
+										dc.w sub_4FAA0-ms_map66_ZoneEvents
 										dc.b $FF
 										dc.b $1C
-										dc.w sub_4FABA-ms_map66_Section3
+										dc.w sub_4FABA-ms_map66_ZoneEvents
 										dc.w $FD00
-										dc.w sub_4FAD4-ms_map66_Section3
+										dc.w sub_4FAD4-ms_map66_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -57,7 +57,7 @@ return_4FAD2:
 
 sub_4FAD4:
 										
-										move.w  #3,d0
+										move.w  #3,d0           ; flag $1F7 : Battle 3 completed
 										jsr     sub_47856
 										rts
 

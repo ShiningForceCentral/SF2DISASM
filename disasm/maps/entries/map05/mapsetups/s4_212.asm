@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map5_flag212_Section4:
+ms_map5_flag212_AreaDescriptions:
 										
 										move.w  #$D9C,d3
 										lea     word_60558(pc), a0
 										nop
-										jmp     sub_47722
+										jmp     DisplayAreaDescription
 
-	; End of function ms_map5_flag212_Section4
+	; End of function ms_map5_flag212_AreaDescriptions
 
 word_60558:         dc.w $90F
 										dc.b 0
@@ -51,7 +51,7 @@ word_60558:         dc.w $90F
 
 sub_60582:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3AC
 										bne.s   return_6058E
 										lea     cs_60F64(pc), a0
@@ -67,7 +67,7 @@ return_6058E:
 
 sub_60590:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3B1
 										bne.s   loc_605C4
 										lea     cs_6060E(pc), a0
@@ -85,7 +85,7 @@ sub_60590:
 										bra.s   return_60604
 loc_605C4:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1C
 										bne.s   loc_605EE
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w

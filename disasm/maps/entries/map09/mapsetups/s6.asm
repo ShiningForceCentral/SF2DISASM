@@ -6,22 +6,22 @@
 
 ms_map9_InitFunction:
 										
-										trap    #1
-										dc.w $206
+										trap    #TRAP_CHECKFLAG
+										dc.w $206               ; Battle 18 completed
 										bne.s   loc_568D4
 										move.w  #$89,d0 
 										jsr     MoveEntityOutOfMap
 loc_568D4:
 										
-										trap    #1
-										dc.w $41
+										trap    #TRAP_CHECKFLAG
+										dc.w $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 										beq.s   loc_568E4
 										move.w  #$B,d0
 										jsr     MoveEntityOutOfMap
 loc_568E4:
 										
-										trap    #1
-										dc.w $C
+										trap    #TRAP_CHECKFLAG
+										dc.w $C                 ; Rick joined
 										beq.s   return_568F4
 										move.w  #$C,d0
 										jsr     MoveEntityOutOfMap

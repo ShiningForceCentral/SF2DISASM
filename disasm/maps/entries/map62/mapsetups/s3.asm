@@ -1,29 +1,29 @@
 
 ; SCRIPT SECTION maps\entries\map62\mapsetups\s3 :
 ; 
-ms_map62_Section3:  dc.b 5
+ms_map62_ZoneEvents:dc.b 5
 										dc.b $F
-										dc.w sub_5C834-ms_map62_Section3
+										dc.w sub_5C834-ms_map62_ZoneEvents
 										dc.b 6
 										dc.b $F
-										dc.w sub_5C834-ms_map62_Section3
+										dc.w sub_5C834-ms_map62_ZoneEvents
 										dc.b 5
 										dc.b $10
-										dc.w sub_5C84C-ms_map62_Section3
+										dc.w sub_5C84C-ms_map62_ZoneEvents
 										dc.b 6
 										dc.b $10
-										dc.w sub_5C84C-ms_map62_Section3
+										dc.w sub_5C84C-ms_map62_ZoneEvents
 										dc.w $FD00
-										dc.w return_5C868-ms_map62_Section3
+										dc.w return_5C868-ms_map62_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C834:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2D9
 										bne.s   return_5C84A
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $100
 										bne.s   return_5C84A
 										lea     cs_5C876(pc), a0
@@ -41,13 +41,13 @@ return_5C84A:
 
 sub_5C84C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2D9
 										bne.s   return_5C868
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $100
 										beq.s   return_5C868
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   return_5C868
 										lea     cs_5C8FE(pc), a0

@@ -1,26 +1,26 @@
 
 ; SCRIPT SECTION maps\entries\map70\mapsetups\s3 :
 ; 
-ms_map70_Section3:  dc.b $10
+ms_map70_ZoneEvents:dc.b $10
 										dc.b $FF
-										dc.w sub_4FE12-ms_map70_Section3
+										dc.w sub_4FE12-ms_map70_ZoneEvents
 										dc.b $11
 										dc.b $FF
-										dc.w sub_4FE12-ms_map70_Section3
+										dc.w sub_4FE12-ms_map70_ZoneEvents
 										dc.b $12
 										dc.b $FF
-										dc.w sub_4FE12-ms_map70_Section3
+										dc.w sub_4FE12-ms_map70_ZoneEvents
 										dc.b $13
 										dc.b $FF
-off_4FE0C:          dc.w sub_4FE12-ms_map70_Section3
+off_4FE0C:          dc.w sub_4FE12-ms_map70_ZoneEvents
 										dc.w $FD00
-										dc.w sub_4FE1E-ms_map70_Section3
+										dc.w sub_4FE1E-ms_map70_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FE12:
 										
-										move.w  #(off_4FE0C-ms_map70_Section3),d0
+										move.w  #(off_4FE0C-ms_map70_ZoneEvents),d0
 										jsr     sub_47856
 										rts
 

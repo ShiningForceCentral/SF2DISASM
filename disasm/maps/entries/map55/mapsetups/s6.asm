@@ -6,7 +6,7 @@
 
 ms_map55_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3E7
 										beq.s   (Map66s0_Blocks+$6E8-ms_map55_EntityEvents)
 										lea     word_5E320(pc), a0

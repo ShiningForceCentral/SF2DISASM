@@ -6,7 +6,7 @@
 
 ms_map52_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2CA
 										beq.s   return_5C4EC
 
@@ -17,7 +17,7 @@ ms_map52_InitFunction:
 
 sub_5C4DC:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2C8
 										bne.s   return_5C4EC
 										lea     word_5C622(pc), a0

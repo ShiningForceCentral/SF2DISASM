@@ -1,9 +1,9 @@
 
 ; SCRIPT SECTION maps\entries\map19\mapsetups\s3_21F :
 ; 
-ms_map19_flag21F_Section3:
+ms_map19_flag21F_ZoneEvents:
 										dc.w $FD00
-										dc.w nullsub_83-ms_map19_flag21F_Section3
+										dc.w nullsub_83-ms_map19_flag21F_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

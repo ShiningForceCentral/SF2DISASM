@@ -25,11 +25,11 @@ nullsub_68:
 
 sub_5FA38:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3E7
 										bne.s   return_5FA86
 										move.w  #$71,((RAM_Dialogue_NameIdx1-$1000000)).w 
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $344
 										bne.s   loc_5FA76
 										trap    #TRAP_TEXTBOX

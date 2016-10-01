@@ -16,7 +16,7 @@ ms_map63_Section5:  dc.b $15
 
 sub_5CA32:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1D
 										bne.s   loc_5CA4C
 										moveq   #$75,d0 

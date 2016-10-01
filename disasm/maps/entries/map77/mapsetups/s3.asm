@@ -1,8 +1,8 @@
 
 ; SCRIPT SECTION maps\entries\map77\mapsetups\s3 :
 ; 
-ms_map77_Section3:  dc.w $FD00
-										dc.w sub_50A6E-ms_map77_Section3
+ms_map77_ZoneEvents:dc.w $FD00
+										dc.w sub_50A6E-ms_map77_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

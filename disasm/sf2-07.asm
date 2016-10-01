@@ -5605,7 +5605,7 @@ loc_4771A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47722:
+DisplayAreaDescription:
 										
 										lsl.w   #8,d0
 										andi.w  #$FF,d1
@@ -5633,7 +5633,8 @@ loc_4774C:
 										move.b  4(a0,d7.w),d0
 										clr.w   d1
 										move.b  5(a0,d7.w),d1
-										addi.w  #$1A7,d0
+										addi.w  #$1A7,d0        ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+																						; Followed by all other "investigation" lines
 										jsr     (DisplayText).w 
 										move.w  d1,d0
 										add.w   d3,d0
@@ -5657,7 +5658,7 @@ loc_4778C:
 										addq.w  #6,d7
 										bra.s   loc_4772C
 
-	; End of function sub_47722
+	; End of function DisplayAreaDescription
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5790,7 +5791,7 @@ sub_47832:
 sub_47856:
 										
 										movem.l d1/d6-d7,-(sp)
-										move.w  #$1F4,d1
+										move.w  #$1F4,d1        ; Battle completed flags
 										add.w   d0,d1
 										jsr     j_CheckFlag
 										bne.s   loc_4786E

@@ -1,17 +1,17 @@
 
 ; SCRIPT SECTION maps\entries\map17\mapsetups\s3 :
 ; 
-ms_map17_Section3:  dc.b $35
+ms_map17_ZoneEvents:dc.b $35
 										dc.b 5
-										dc.w sub_523F4-ms_map17_Section3
+										dc.w sub_523F4-ms_map17_ZoneEvents
 										dc.b $2B
 										dc.b 9
-										dc.w sub_52406-ms_map17_Section3
+										dc.w sub_52406-ms_map17_ZoneEvents
 										dc.b $39
 										dc.b 5
-										dc.w sub_5242E-ms_map17_Section3
+										dc.w sub_5242E-ms_map17_ZoneEvents
 										dc.w $FD00
-										dc.w nullsub_79-ms_map17_Section3
+										dc.w nullsub_79-ms_map17_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

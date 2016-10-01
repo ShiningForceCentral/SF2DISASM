@@ -15,7 +15,7 @@ ms_map8_EntityEvents:
 
 sub_56090:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $100
 										bne.s   loc_560A6
 										trap    #TRAP_SETFLAG
@@ -85,7 +85,7 @@ sub_560BE:
 
 sub_560CC:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2DB
 										bne.s   loc_560DC
 										trap    #TRAP_TEXTBOX
@@ -196,7 +196,7 @@ sub_56126:
 
 sub_56138:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w 8
 										bne.s   return_56144
 										lea     cs_56146(pc), a0

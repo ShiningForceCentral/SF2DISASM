@@ -6,15 +6,15 @@
 
 ms_map38_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $399
 										beq.s   loc_5DD78
 										trap    #TRAP_SETFLAG
 										dc.w $38F               ; set after the Petro death scene in Roft
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1A
 										bne.s   loc_5DD78
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $104
 										bne.s   loc_5DD78
 										lea     cs_5DD8E(pc), a0
@@ -23,7 +23,7 @@ ms_map38_InitFunction:
 										dc.w $104
 loc_5DD78:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $38E
 										bne.s   return_5DD8C
 										lea     cs_5DD9C(pc), a0

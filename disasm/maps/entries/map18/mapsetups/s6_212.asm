@@ -6,7 +6,7 @@
 
 ms_map18_flag212_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $398
 										bne.s   loc_612A8
 										lea     cs_612BE(pc), a0

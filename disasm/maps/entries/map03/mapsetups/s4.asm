@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map3_Section4:
+ms_map3_AreaDescriptions:
 										
 										move.w  #$FC3,d3
 										lea     word_512F0(pc), a0
 										nop
-										jmp     sub_47722
+										jmp     DisplayAreaDescription
 
-	; End of function ms_map3_Section4
+	; End of function ms_map3_AreaDescriptions
 
 word_512F0:         dc.w $916
 										dc.b 0

@@ -6,21 +6,21 @@
 
 ms_map19_flag21F_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $19
 										bne.s   loc_62CAE
 										move.w  #$19,d0
 										jsr     MoveEntityOutOfMap
 loc_62CAE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w 8
 										bne.s   loc_62CBE
 										move.w  #8,d0
 										jsr     MoveEntityOutOfMap
 loc_62CBE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1B
 										bne.s   loc_62CCE
 										move.w  #$1B,d0
@@ -29,10 +29,10 @@ loc_62CCE:
 										
 										lea     cs_62D06(pc), a0
 										trap    #6
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3D5
 										beq.s   loc_62CFC
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3D6
 										bne.s   loc_62CF2
 										lea     cs_62D0E(pc), a0

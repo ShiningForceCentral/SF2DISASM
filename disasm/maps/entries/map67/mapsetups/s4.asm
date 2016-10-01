@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map67_Section4:
+ms_map67_AreaDescriptions:
 										
 										move.w  #$1B2,d3
 										lea     word_4FCDE(pc), a0
 										nop
-										jmp     sub_47722
+										jmp     DisplayAreaDescription
 
-	; End of function ms_map67_Section4
+	; End of function ms_map67_AreaDescriptions
 
 word_4FCDE:         dc.w $3917
 										dc.b 0

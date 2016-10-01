@@ -39,7 +39,7 @@ nullsub_138:
 
 sub_5A788:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $16
 										beq.s   loc_5A7A0
 										trap    #TRAP_TEXTBOX
@@ -53,7 +53,7 @@ sub_5A788:
 										bra.s   return_5A7D0
 loc_5A7A0:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $312
 										beq.s   loc_5A7B0
 										trap    #TRAP_TEXTBOX
@@ -63,7 +63,7 @@ loc_5A7A0:
 										bra.s   return_5A7D0
 loc_5A7B0:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $310
 										beq.s   loc_5A7C0
 										trap    #TRAP_TEXTBOX
@@ -73,7 +73,7 @@ loc_5A7B0:
 										bra.s   return_5A7D0
 loc_5A7C0:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $30F
 										beq.s   loc_5A7CC
 										trap    #TRAP_TEXTBOX
@@ -94,7 +94,7 @@ return_5A7D0:
 
 sub_5A7D2:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $312
 										beq.s   loc_5A7E2
 										trap    #TRAP_TEXTBOX
@@ -121,7 +121,7 @@ return_5A7EE:
 
 sub_5A7F0:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $312
 										beq.s   loc_5A800
 										trap    #TRAP_TEXTBOX
@@ -131,7 +131,7 @@ sub_5A7F0:
 										bra.s   return_5A826
 loc_5A800:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2F7
 										bne.s   loc_5A80C
 										trap    #TRAP_TEXTBOX
@@ -177,10 +177,10 @@ cs_5A828:           dc.w $34                ; 0034 SET BLOCKS 110D 101 905
 
 sub_5A842:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $16
 										bne.s   loc_5A85C
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $313
 										bne.s   loc_5A856
 										lea     cs_5A8CA(pc), a0
@@ -206,10 +206,10 @@ return_5A862:
 
 sub_5A864:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $16
 										bne.s   loc_5A87E
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $313
 										bne.s   loc_5A878
 										lea     cs_5A93A(pc), a0
@@ -235,10 +235,10 @@ return_5A884:
 
 sub_5A886:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $16
 										bne.s   loc_5A8A0
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $313
 										bne.s   loc_5A89A
 										lea     cs_5A9AA(pc), a0
@@ -266,10 +266,10 @@ return_5A8A6:
 
 sub_5A8A8:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $16
 										bne.s   loc_5A8C2
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $313
 										bne.s   loc_5A8BC
 										lea     cs_5AA1A(pc), a0

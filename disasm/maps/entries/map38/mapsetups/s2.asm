@@ -167,16 +167,16 @@ sub_5DC02:
 
 sub_5DC08:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $38E
 										beq.s   return_5DC54
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $102
 										beq.s   loc_5DC34
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $38F
 										beq.s   loc_5DC32
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $100
 										bne.s   loc_5DC2E
 										trap    #TRAP_TEXTBOX
@@ -195,10 +195,10 @@ loc_5DC32:
 										bra.s   return_5DC54
 loc_5DC34:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $38F
 										beq.s   return_5DC54
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $100
 										bne.s   loc_5DC50
 										trap    #TRAP_TEXTBOX
@@ -223,16 +223,16 @@ return_5DC54:
 
 sub_5DC56:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $38E
 										beq.s   return_5DCA2
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $102
 										beq.s   loc_5DC82
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $38F
 										beq.s   loc_5DC80
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_5DC7C
 										trap    #TRAP_TEXTBOX
@@ -251,10 +251,10 @@ loc_5DC80:
 										bra.s   return_5DCA2
 loc_5DC82:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $38F
 										beq.s   return_5DCA2
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_5DC9E
 										trap    #TRAP_TEXTBOX

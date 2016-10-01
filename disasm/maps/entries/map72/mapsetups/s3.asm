@@ -1,35 +1,35 @@
 
 ; SCRIPT SECTION maps\entries\map72\mapsetups\s3 :
 ; 
-ms_map72_Section3:  dc.b $20
+ms_map72_ZoneEvents:dc.b $20
 										dc.b $FF
-										dc.w sub_4FE8C-ms_map72_Section3
+										dc.w sub_4FE8C-ms_map72_ZoneEvents
 										dc.b $21
 										dc.b $FF
-										dc.w sub_4FE8C-ms_map72_Section3
+										dc.w sub_4FE8C-ms_map72_ZoneEvents
 										dc.b $22
 										dc.b $FF
-										dc.w sub_4FE8C-ms_map72_Section3
+										dc.w sub_4FE8C-ms_map72_ZoneEvents
 										dc.b $19
 										dc.b $25
-										dc.w sub_4FE98-ms_map72_Section3
+										dc.w sub_4FE98-ms_map72_ZoneEvents
 										dc.b $1A
 										dc.b $25
-										dc.w sub_4FE98-ms_map72_Section3
+										dc.w sub_4FE98-ms_map72_ZoneEvents
 										dc.b $1B
 										dc.b $25
-										dc.w sub_4FE98-ms_map72_Section3
+										dc.w sub_4FE98-ms_map72_ZoneEvents
 										dc.b $1C
 										dc.b $25
-										dc.w sub_4FE98-ms_map72_Section3
+										dc.w sub_4FE98-ms_map72_ZoneEvents
 										dc.b $1D
 										dc.b $25
-										dc.w sub_4FE98-ms_map72_Section3
+										dc.w sub_4FE98-ms_map72_ZoneEvents
 										dc.b $1E
 										dc.b $25
-										dc.w sub_4FE98-ms_map72_Section3
+										dc.w sub_4FE98-ms_map72_ZoneEvents
 										dc.w $FD00
-										dc.w sub_4FF06-ms_map72_Section3
+										dc.w sub_4FF06-ms_map72_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

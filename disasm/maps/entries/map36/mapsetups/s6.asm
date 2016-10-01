@@ -6,7 +6,7 @@
 
 ms_map36_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $16
 										beq.s   return_5DA26
 										move.w  #$16,d0

@@ -90,8 +90,8 @@ ms_map10_flag2D2_EntityEvents:
 
 sub_56F0C:
 										
-										trap    #1
-										dc.w $31F
+										trap    #TRAP_CHECKFLAG
+										dc.w $31F               ; set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
 										bne.s   loc_56F3A
 										trap    #TRAP_TEXTBOX
 										dc.w $643               ; "God Volcanon has forsaken{N}the people of the Earth.{W2}"
@@ -181,8 +181,8 @@ sub_56F62:
 
 sub_56F68:
 										
-										trap    #1
-										dc.w $2D3
+										trap    #TRAP_CHECKFLAG
+										dc.w $2D3               ; set after the hatchling in Bedoe shows you he can almost fly
 										bne.s   loc_56F7A
 										lea     cs_5766C(pc), a0
 										trap    #6

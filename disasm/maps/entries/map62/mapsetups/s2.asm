@@ -15,10 +15,10 @@ ms_map62_EntityEvents:
 
 sub_5C7C2:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2DC
 										bne.s   loc_5C7F0
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $102
 										bne.s   loc_5C7E6
 										trap    #TRAP_TEXTBOX
@@ -27,7 +27,7 @@ sub_5C7C2:
 										dc.w $E29               ; "It is quite old.{N}He deduced that our{N}ancestors could fly.{W2}"
 										trap    #TRAP_TEXTBOX
 										dc.w $E2A               ; "The last known location of{N}the Nazca Ship was Grans.{W1}"
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2D9
 										beq.s   loc_5C7E4
 										trap    #TRAP_SETFLAG
@@ -59,10 +59,10 @@ return_5C7F4:
 
 sub_5C7F6:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2D9
 										bne.s   loc_5C81A
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2D8
 										bne.s   loc_5C80E
 										lea     cs_5C8D4(pc), a0

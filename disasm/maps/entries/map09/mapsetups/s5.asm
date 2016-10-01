@@ -16,8 +16,8 @@ ms_map9_Section5:   dc.b $10
 
 sub_568B0:
 										
-										trap    #1
-										dc.w $2D7
+										trap    #TRAP_CHECKFLAG
+										dc.w $2D7               ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 										bne.s   return_568C2
 										lea     cs_569BC(pc), a0
 										trap    #6

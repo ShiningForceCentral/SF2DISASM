@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map6_Section4:
+ms_map6_AreaDescriptions:
 										
 										move.w  #$FF4,d3
 										lea     word_54D9A(pc), a0
 										nop
-										jmp     sub_47722
+										jmp     DisplayAreaDescription
 
-	; End of function ms_map6_Section4
+	; End of function ms_map6_AreaDescriptions
 
 word_54D9A:         dc.w $507
 										dc.b 0
@@ -72,7 +72,7 @@ word_54D9A:         dc.w $507
 
 sub_54DDE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BE
 										bne.s   loc_54DEE
 										move.w  #$FFB,d0
@@ -106,7 +106,7 @@ sub_54E04:
 										dc.w SFX_FALLING
 										moveq   #$32,d0 
 										jsr     (Sleep).w       
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   loc_54E38
 										trap    #TRAP_SOUNDCOM

@@ -12,7 +12,7 @@ ms_map61_EntityEvents:
 
 sub_5C67A:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $100
 										bne.s   loc_5C684
 										trap    #TRAP_TEXTBOX

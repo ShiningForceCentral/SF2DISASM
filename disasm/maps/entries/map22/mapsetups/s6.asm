@@ -6,7 +6,7 @@
 
 ms_map22_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $308
 										bne.s   loc_5963E
 										lea     cs_59656(pc), a0
@@ -15,10 +15,10 @@ ms_map22_InitFunction:
 										dc.w $308               ; set after the scene where Goliath places you on the Desktop
 loc_5963E:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $20A
 										beq.s   return_59654
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $30A
 										bne.s   return_59654
 										lea     cs_5996E(pc), a0

@@ -177,7 +177,7 @@ sub_59522:
 
 sub_5952A:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $20A
 										bne.s   loc_59536
 										trap    #TRAP_TEXTBOX
@@ -185,7 +185,7 @@ sub_5952A:
 										bra.s   return_59552
 loc_59536:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $100
 										bne.s   loc_5954A
 										trap    #TRAP_TEXTBOX
@@ -212,10 +212,10 @@ return_59552:
 
 sub_59554:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $20A
 										bne.s   loc_59576
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $309
 										bne.s   loc_5956C
 										trap    #TRAP_TEXTBOX
@@ -246,7 +246,7 @@ return_5957A:
 
 sub_5957C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $309
 										bne.s   loc_5958C
 										trap    #TRAP_TEXTBOX
@@ -269,7 +269,7 @@ return_59590:
 
 sub_59592:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $D4
 										bne.s   loc_5959E
 										trap    #TRAP_TEXTBOX
@@ -279,7 +279,7 @@ loc_5959E:
 										
 										trap    #TRAP_TEXTBOX
 										dc.w $70B               ; "Floor World is very{N}dangerous.  Take care!{W1}"
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $102
 										bne.s   return_595B2
 										lea     cs_599A4(pc), a0

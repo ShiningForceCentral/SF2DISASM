@@ -42,7 +42,7 @@ ms_map36_flag212_EntityEvents:
 
 sub_5D954:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $32B
 										bne.s   return_5D968
 										lea     cs_5DA28(pc), a0
@@ -110,7 +110,7 @@ sub_5D984:
 
 sub_5D98A:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_5D998
 										trap    #TRAP_TEXTBOX

@@ -1,12 +1,12 @@
 
 ; SCRIPT SECTION maps\entries\map59\mapsetups\s3_21F :
 ; 
-ms_map59_flag21F_Section3:
+ms_map59_flag21F_ZoneEvents:
 										dc.b $FF
 										dc.b $24
-										dc.w sub_615C0-ms_map59_flag21F_Section3
+										dc.w sub_615C0-ms_map59_flag21F_ZoneEvents
 										dc.w $FD00
-										dc.w nullsub_106-ms_map59_flag21F_Section3
+										dc.w nullsub_106-ms_map59_flag21F_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -21,7 +21,7 @@ nullsub_106:
 
 sub_615C0:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $21F
 										beq.s   return_615CC
 										lea     cs_62658(pc), a0

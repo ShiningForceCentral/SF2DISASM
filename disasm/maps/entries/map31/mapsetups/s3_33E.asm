@@ -1,12 +1,12 @@
 
 ; SCRIPT SECTION maps\entries\map31\mapsetups\s3_33E :
 ; 
-ms_map31_flag33E_Section3:
+ms_map31_flag33E_ZoneEvents:
 										dc.b 5
 										dc.b 2
-										dc.w sub_5D560-ms_map31_flag33E_Section3
+										dc.w sub_5D560-ms_map31_flag33E_ZoneEvents
 										dc.w $FD00
-										dc.w nullsub_93-ms_map31_flag33E_Section3
+										dc.w nullsub_93-ms_map31_flag33E_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -21,7 +21,7 @@ nullsub_93:
 
 sub_5D560:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $342
 										bne.s   return_5D570
 										lea     cs_5D644(pc), a0

@@ -6,17 +6,17 @@
 
 ms_map31_flag33E_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $340
 										beq.s   loc_5D62A
 										lea     cs_5D63C(pc), a0
 										trap    #6
 loc_5D62A:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $342
 										beq.s   return_5D63A
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $343
 										bne.s   return_5D63A
 										trap    #TRAP_CLEARFLAG

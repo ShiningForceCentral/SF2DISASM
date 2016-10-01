@@ -144,7 +144,7 @@ sub_5D51E:
 
 sub_5D526:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $340
 										bne.s   loc_5D538
 										trap    #TRAP_SETFLAG

@@ -1,21 +1,21 @@
 
 ; SCRIPT SECTION maps\entries\map10\mapsetups\s3_2D2 :
 ; 
-ms_map10_flag2D2_Section3:
+ms_map10_flag2D2_ZoneEvents:
 										dc.b 6
 										dc.b $17
-										dc.w sub_56FC8-ms_map10_flag2D2_Section3
+										dc.w sub_56FC8-ms_map10_flag2D2_ZoneEvents
 										dc.w $FD00
-										dc.w nullsub_74+$10000-ms_map10_flag2D2_Section3
+										dc.w nullsub_74+$10000-ms_map10_flag2D2_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_56FC8:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $D
 										bne.s   return_56FDE
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2D4
 										bne.s   return_56FDE
 										lea     cs_5779C(pc), a0

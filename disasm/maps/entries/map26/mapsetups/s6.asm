@@ -6,7 +6,7 @@
 
 ms_map26_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $30B
 										bne.s   loc_59DF2
 										lea     cs_59E04(pc), a0
@@ -16,7 +16,7 @@ ms_map26_InitFunction:
 										move.b  #$1A,((RAM_EgressMapIdx-$1000000)).w
 loc_59DF2:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $30C
 										beq.s   return_59E02
 										move.w  #$81,d0 

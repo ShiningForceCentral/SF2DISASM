@@ -48,7 +48,7 @@ sub_5F9F8:
 
 sub_5F9FE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   return_5FA0E
 										lea     cs_5FB30(pc), a0
@@ -66,7 +66,7 @@ return_5FA0E:
 
 sub_5FA10:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_5FA1C
 										trap    #TRAP_TEXTBOX

@@ -103,16 +103,16 @@ sub_5819C:
 
 sub_581A2:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2CE
 										bne.s   loc_58212
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2CD
 										bne.s   loc_5820C
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2CC
 										bne.s   loc_58206
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $104
 										bne.s   loc_581C4
 										trap    #TRAP_TEXTBOX
@@ -122,7 +122,7 @@ sub_581A2:
 										bra.s   loc_58204
 loc_581C4:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $105
 										bne.s   loc_581D4
 										trap    #TRAP_TEXTBOX
@@ -132,7 +132,7 @@ loc_581C4:
 										bra.s   loc_58204
 loc_581D4:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $106
 										bne.s   loc_581E4
 										trap    #TRAP_TEXTBOX

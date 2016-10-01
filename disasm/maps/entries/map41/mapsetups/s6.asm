@@ -6,7 +6,7 @@
 
 ms_map41_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3A2
 										beq.s   return_5F4AC
 										lea     cs_5F4AE(pc), a0

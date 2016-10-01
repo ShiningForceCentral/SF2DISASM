@@ -7,7 +7,7 @@
 ms_map37_InitFunction:
 										
 										jsr     sub_47948
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $344
 										beq.s   return_5FA9A
 										lea     cs_5FA9C(pc), a0

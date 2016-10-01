@@ -42,10 +42,10 @@ ms_map7_flag325_EntityEvents:
 
 sub_555B4:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   return_555E6
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BE
 										bne.s   loc_555CE
 										trap    #TRAP_TEXTBOX
@@ -57,7 +57,7 @@ sub_555B4:
 										bra.s   return_555E6
 loc_555CE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $100
 										bne.s   loc_555E2
 										trap    #TRAP_TEXTBOX
@@ -82,10 +82,10 @@ return_555E6:
 
 sub_555E8:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   loc_55618
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BE
 										bne.s   loc_55602
 										trap    #TRAP_TEXTBOX
@@ -97,7 +97,7 @@ sub_555E8:
 										bra.s   loc_55616
 loc_55602:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BF
 										bne.s   loc_55612
 										trap    #TRAP_TEXTBOX
@@ -127,10 +127,10 @@ return_5561C:
 
 sub_5561E:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   loc_5563E
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BE
 										bne.s   loc_55638
 										trap    #TRAP_TEXTBOX
@@ -164,7 +164,7 @@ return_55646:
 
 sub_55648:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   loc_55658
 										trap    #TRAP_TEXTBOX
@@ -187,7 +187,7 @@ return_5565C:
 
 sub_5565E:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   loc_5566E
 										trap    #TRAP_TEXTBOX
@@ -210,13 +210,13 @@ return_55672:
 
 sub_55674:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   loc_556A0
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BE
 										bne.s   loc_5569A
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BD
 										bne.s   loc_55694
 										trap    #TRAP_TEXTBOX
@@ -242,7 +242,7 @@ loc_5569E:
 										bra.s   return_556B0
 loc_556A0:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $325
 										bne.s   loc_556AC
 										trap    #TRAP_TEXTBOX
@@ -263,10 +263,10 @@ return_556B0:
 
 sub_556B2:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   loc_556DA
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BD
 										bne.s   loc_556C4
 										trap    #TRAP_TEXTBOX
@@ -274,7 +274,7 @@ sub_556B2:
 										bra.s   loc_556D8
 loc_556C4:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BE
 										bne.s   loc_556D4
 										trap    #TRAP_TEXTBOX
@@ -306,10 +306,10 @@ return_556E2:
 
 sub_556E4:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   loc_556FC
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BE
 										bne.s   loc_556F6
 										trap    #TRAP_TEXTBOX
@@ -337,13 +337,13 @@ return_55700:
 
 sub_55702:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   loc_5572A
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BE
 										bne.s   loc_55724
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BD
 										bne.s   loc_5571E
 										trap    #TRAP_TEXTBOX
@@ -380,10 +380,10 @@ return_5572E:
 
 sub_55730:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   loc_55760
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BD
 										bne.s   loc_55746
 										trap    #TRAP_TEXTBOX
@@ -393,7 +393,7 @@ sub_55730:
 										bra.s   loc_5575E
 loc_55746:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BE
 										bne.s   loc_55756
 										trap    #TRAP_TEXTBOX
@@ -412,7 +412,7 @@ loc_5575E:
 										bra.s   return_55774
 loc_55760:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										btst    d1,-(a5)
 										bne.s   loc_5576C
 										trap    #TRAP_TEXTBOX
@@ -446,7 +446,7 @@ sub_55776:
 
 sub_5577C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $322
 										bne.s   loc_5578C
 										trap    #TRAP_TEXTBOX

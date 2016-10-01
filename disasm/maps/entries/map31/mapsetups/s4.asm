@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map31_Section4:
+ms_map31_AreaDescriptions:
 										
 										move.w  #$1045,d3
 										lea     word_5D584(pc), a0
 										nop
-										jmp     sub_47722
+										jmp     DisplayAreaDescription
 
-	; End of function ms_map31_Section4
+	; End of function ms_map31_AreaDescriptions
 
 word_5D584:         dc.w $81A
 										dc.b 0
@@ -52,7 +52,7 @@ word_5D584:         dc.w $81A
 
 sub_5D5B0:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $340
 										beq.s   return_5D5BC
 										lea     cs_5D732(pc), a0
@@ -68,10 +68,10 @@ return_5D5BC:
 
 sub_5D5BE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $342
 										beq.s   return_5D60C
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $343
 										bne.s   return_5D60C
 										trap    #TRAP_TEXTBOX

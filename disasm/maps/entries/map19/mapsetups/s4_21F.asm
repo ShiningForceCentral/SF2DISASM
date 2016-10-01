@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map19_flag21F_Section4:
+ms_map19_flag21F_AreaDescriptions:
 										
 										move.w  #$FD4,d3
 										lea     word_62C82(pc), a0
 										nop
-										jmp     sub_47722
+										jmp     DisplayAreaDescription
 
-	; End of function ms_map19_flag21F_Section4
+	; End of function ms_map19_flag21F_AreaDescriptions
 
 word_62C82:         dc.w $1303
 										dc.b 0

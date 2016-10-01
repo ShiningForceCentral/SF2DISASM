@@ -1,20 +1,20 @@
 
 ; SCRIPT SECTION maps\entries\map00\mapsetups\s3 :
 ; 
-ms_map0_Section3:   dc.b $E
+ms_map0_ZoneEvents: dc.b $E
 										dc.b $C
-										dc.w sub_5E3B0-ms_map0_Section3
+										dc.w sub_5E3B0-ms_map0_ZoneEvents
 										dc.b $F
 										dc.b $C
-										dc.w sub_5E3B0-ms_map0_Section3
+										dc.w sub_5E3B0-ms_map0_ZoneEvents
 										dc.w $FD00
-										dc.w return_5E3C0-ms_map0_Section3
+										dc.w return_5E3C0-ms_map0_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_5E3B0:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $321
 										bne.s   return_5E3C0
 										lea     cs_5E3C2(pc), a0

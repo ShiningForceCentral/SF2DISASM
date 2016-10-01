@@ -1,41 +1,41 @@
 
 ; SCRIPT SECTION maps\entries\map03\mapsetups\s3 :
 ; 
-ms_map3_Section3:   dc.b 2
+ms_map3_ZoneEvents: dc.b 2
 										dc.b $FF
-										dc.w sub_50D74-ms_map3_Section3
+										dc.w sub_50D74-ms_map3_ZoneEvents
 										dc.b $1B
 										dc.b 5
-										dc.w sub_50DAC-ms_map3_Section3
+										dc.w sub_50DAC-ms_map3_ZoneEvents
 										dc.b $1C
 										dc.b 5
-										dc.w sub_50DAC-ms_map3_Section3
+										dc.w sub_50DAC-ms_map3_ZoneEvents
 										dc.b $1D
 										dc.b 5
-										dc.w sub_50DAC-ms_map3_Section3
+										dc.w sub_50DAC-ms_map3_ZoneEvents
 										dc.b $1E
 										dc.b 5
-										dc.w sub_50DF8-ms_map3_Section3
+										dc.w sub_50DF8-ms_map3_ZoneEvents
 										dc.b $1F
 										dc.b 5
-										dc.w sub_50DF8-ms_map3_Section3
+										dc.w sub_50DF8-ms_map3_ZoneEvents
 										dc.b 4
 										dc.b 4
-										dc.w sub_50E44-ms_map3_Section3
+										dc.w sub_50E44-ms_map3_ZoneEvents
 										dc.b $3A
 										dc.b $D
-										dc.w sub_50E66-ms_map3_Section3
+										dc.w sub_50E66-ms_map3_ZoneEvents
 										dc.b $2B
 										dc.b $A
-										dc.w sub_50ED2-ms_map3_Section3
+										dc.w sub_50ED2-ms_map3_ZoneEvents
 										dc.w $FD00
-										dc.w return_50EE8-ms_map3_Section3
+										dc.w return_50EE8-ms_map3_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_50D74:
 										
-										lea     (Map16s0_Blocks+$B0E-ms_map3_Section3)(pc), a0
+										lea     cs_51444(pc), a0
 										trap    #6
 										trap    #TRAP_CHECKFLAG
 										dc.w $101

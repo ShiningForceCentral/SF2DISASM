@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map41_Section4:
+ms_map41_AreaDescriptions:
 										
 										move.w  #$DB7,d3
 										lea     word_5F41E(pc), a0
 										nop
-										jmp     sub_47722
+										jmp     DisplayAreaDescription
 
-	; End of function ms_map41_Section4
+	; End of function ms_map41_AreaDescriptions
 
 word_5F41E:         dc.w $607
 										dc.b $FF
@@ -27,7 +27,7 @@ word_5F41E:         dc.w $607
 
 sub_5F42C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3A2
 										bne.s   loc_5F44C
 										moveq   #$43,d1 
@@ -61,7 +61,7 @@ return_5F454:
 
 sub_5F456:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3A2
 										bne.s   loc_5F462
 										trap    #TRAP_TEXTBOX

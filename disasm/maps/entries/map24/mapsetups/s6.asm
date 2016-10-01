@@ -10,7 +10,7 @@ ms_map24_InitFunction:
 										dc.w MUSIC_HEADQUARTERS
 										jsr     (FadeInFromBlack).w
 										move.w  #$46,((CURRENT_SPEAK_SOUND-$1000000)).w 
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $220               ; battle 44 completed, fairy woods secret battle ?
 										bne.w   loc_59CB2
 										trap    #TRAP_TEXTBOX

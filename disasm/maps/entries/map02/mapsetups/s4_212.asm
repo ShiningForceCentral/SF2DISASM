@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ms_map2_flag212_Section4:
+ms_map2_flag212_AreaDescriptions:
 										
 										move.w  #$1030,d3
 										lea     word_5EA72(pc), a0
 										nop
-										jmp     sub_47722
+										jmp     DisplayAreaDescription
 
-	; End of function ms_map2_flag212_Section4
+	; End of function ms_map2_flag212_AreaDescriptions
 
 word_5EA72:         dc.w $80D
 										dc.b 0

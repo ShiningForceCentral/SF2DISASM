@@ -1,17 +1,17 @@
 
 ; SCRIPT SECTION maps\entries\map34\mapsetups\s3 :
 ; 
-ms_map34_Section3:  dc.b $FF
+ms_map34_ZoneEvents:dc.b $FF
 										dc.b $D
-										dc.w sub_5B69E-ms_map34_Section3
+										dc.w sub_5B69E-ms_map34_ZoneEvents
 										dc.w $FD00
-										dc.w return_5B6B2-ms_map34_Section3
+										dc.w return_5B6B2-ms_map34_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_5B69E:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $310
 										bne.s   return_5B6B2
 										lea     cs_5B6C0(pc), a0

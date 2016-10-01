@@ -6,14 +6,14 @@
 
 ms_map13_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2C7
 										bne.s   loc_582EC
 										lea     cs_58310(pc), a0
 										trap    #6
 loc_582EC:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2CC
 										beq.s   loc_582FE
 										move.w  #$89,d0 
@@ -21,7 +21,7 @@ loc_582EC:
 										jsr     sub_4781A
 loc_582FE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2CE
 										beq.s   return_5830E
 										move.w  #$8C,d0 

@@ -1,18 +1,18 @@
 
 ; SCRIPT SECTION maps\entries\map18\mapsetups\s3_212 :
 ; 
-ms_map18_flag212_Section3:
+ms_map18_flag212_ZoneEvents:
 										dc.b $FF
 										dc.b $16
-										dc.w sub_61262-ms_map18_flag212_Section3
+										dc.w sub_61262-ms_map18_flag212_ZoneEvents
 										dc.w $FD00
-										dc.w return_61276-ms_map18_flag212_Section3
+										dc.w return_61276-ms_map18_flag212_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_61262:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $4C
 										beq.s   return_61276
 										lea     cs_6143C(pc), a0

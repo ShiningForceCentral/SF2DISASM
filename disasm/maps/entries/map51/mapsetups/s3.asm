@@ -1,32 +1,32 @@
 
 ; SCRIPT SECTION maps\entries\map51\mapsetups\s3 :
 ; 
-ms_map51_Section3:  dc.b 9
+ms_map51_ZoneEvents:dc.b 9
 										dc.b 6
-										dc.w sub_5C2F2-ms_map51_Section3
+										dc.w sub_5C2F2-ms_map51_ZoneEvents
 										dc.b 9
 										dc.b 7
-										dc.w sub_5C2F2-ms_map51_Section3
+										dc.w sub_5C2F2-ms_map51_ZoneEvents
 										dc.b 9
 										dc.b 8
-										dc.w sub_5C2F2-ms_map51_Section3
+										dc.w sub_5C2F2-ms_map51_ZoneEvents
 										dc.b 9
 										dc.b 9
-										dc.w sub_5C2F2-ms_map51_Section3
+										dc.w sub_5C2F2-ms_map51_ZoneEvents
 										dc.b 9
 										dc.b $18
-										dc.w sub_5C304-ms_map51_Section3
+										dc.w sub_5C304-ms_map51_ZoneEvents
 										dc.b $A
 										dc.b $18
-										dc.w sub_5C304-ms_map51_Section3
+										dc.w sub_5C304-ms_map51_ZoneEvents
 										dc.w $FD00
-										dc.w return_5C310-ms_map51_Section3
+										dc.w return_5C310-ms_map51_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C2F2:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1D6
 										bne.s   return_5C302
 										lea     cs_5C312(pc), a0
@@ -44,7 +44,7 @@ return_5C302:
 
 sub_5C304:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1D6
 										bne.s   return_5C310
 										lea     cs_5C3AA(pc), a0

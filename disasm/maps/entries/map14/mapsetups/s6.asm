@@ -6,7 +6,7 @@
 
 ms_map14_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2BF
 										bne.s   return_58F28
 										lea     cs_58FA4(pc), a0

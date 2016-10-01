@@ -6,7 +6,7 @@
 
 ms_map51_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1D6
 										bne.s   return_5C3D6
 										lea     cs_5C3D8(pc), a0

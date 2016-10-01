@@ -48,7 +48,7 @@ ms_map13_EntityEvents:
 
 sub_58056:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $100
 										bne.s   loc_58068
 										trap    #TRAP_TEXTBOX
@@ -83,7 +83,7 @@ sub_58072:
 
 sub_58078:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2C7
 										bne.s   loc_5808A
 										lea     cs_58512(pc), a0
@@ -128,7 +128,7 @@ sub_5809E:
 
 sub_580AC:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2C6
 										bne.s   loc_580B8
 										trap    #TRAP_TEXTBOX
@@ -185,10 +185,10 @@ sub_580D4:
 
 sub_580DA:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2C6
 										bne.s   loc_580FC
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_580F2
 										lea     cs_58116(pc), a0

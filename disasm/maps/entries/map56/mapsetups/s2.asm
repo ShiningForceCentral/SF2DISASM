@@ -12,7 +12,7 @@ ms_map56_EntityEvents:
 
 sub_614B2:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $387
 										bne.s   loc_614C2
 										lea     cs_6150A(pc), a0

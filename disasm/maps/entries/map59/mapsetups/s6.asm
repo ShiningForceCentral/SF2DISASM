@@ -6,7 +6,7 @@
 
 ms_map59_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3E7
 										bne.s   loc_5EB18
 										lea     cs_5EB44(pc), a0
@@ -33,7 +33,7 @@ ms_map59_InitFunction:
 										rts
 loc_5EB18:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1BB
 										beq.s   return_5EB24
 										lea     cs_5EB26(pc), a0

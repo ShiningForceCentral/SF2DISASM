@@ -7,7 +7,7 @@ Address 2   entity-activated events (entity #, facing, offset to cutscene script
 Address 3   zone-activated events
 Address 4   interactive things (notes, books, wells, etc)
 Address 5   flag + tile locations + ??? (seems rather special; only Ribble, Hassan, DesktopWorld, Nazca Ship, Devil's Head, etc have it)
-Address 6   custom script on map load
+Address 6   map initialization function
 
 
 

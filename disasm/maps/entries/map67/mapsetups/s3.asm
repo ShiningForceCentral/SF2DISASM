@@ -1,23 +1,23 @@
 
 ; SCRIPT SECTION maps\entries\map67\mapsetups\s3 :
 ; 
-ms_map67_Section3:  dc.b $39
+ms_map67_ZoneEvents:dc.b $39
 										dc.b $19
-										dc.w sub_4FB32-ms_map67_Section3
+										dc.w sub_4FB32-ms_map67_ZoneEvents
 										dc.b $38
 										dc.b $1A
-										dc.w sub_4FB24-ms_map67_Section3
+										dc.w sub_4FB24-ms_map67_ZoneEvents
 										dc.b $39
 										dc.b $1A
-										dc.w sub_4FB24-ms_map67_Section3
+										dc.w sub_4FB24-ms_map67_ZoneEvents
 										dc.b $3A
 										dc.b $18
-										dc.w sub_4FB24-ms_map67_Section3
+										dc.w sub_4FB24-ms_map67_ZoneEvents
 										dc.b $3A
 										dc.b $19
-										dc.w sub_4FB24-ms_map67_Section3
+										dc.w sub_4FB24-ms_map67_ZoneEvents
 										dc.w $FD00
-										dc.w sub_4FB58-ms_map67_Section3
+										dc.w sub_4FB58-ms_map67_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

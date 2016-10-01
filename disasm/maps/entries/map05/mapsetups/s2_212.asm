@@ -67,7 +67,7 @@ sub_60468:
 
 sub_60476:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1C
 										beq.s   loc_60494
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
@@ -80,7 +80,7 @@ sub_60476:
 										bra.s   return_604C6
 loc_60494:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3B1
 										bne.s   return_604C6
 										lea     cs_6060E(pc), a0

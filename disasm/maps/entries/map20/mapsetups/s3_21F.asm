@@ -1,18 +1,18 @@
 
 ; SCRIPT SECTION maps\entries\map20\mapsetups\s3_21F :
 ; 
-ms_map20_flag21F_Section3:
+ms_map20_flag21F_ZoneEvents:
 										dc.b $13
 										dc.b $34
-										dc.w sub_632AC-ms_map20_flag21F_Section3
+										dc.w sub_632AC-ms_map20_flag21F_ZoneEvents
 										dc.b $1A
 										dc.b $FF
-										dc.w sub_632FA-ms_map20_flag21F_Section3
+										dc.w sub_632FA-ms_map20_flag21F_ZoneEvents
 										dc.b $1B
 										dc.b $34
-										dc.w sub_63330-ms_map20_flag21F_Section3
+										dc.w sub_63330-ms_map20_flag21F_ZoneEvents
 										dc.w $FD00
-										dc.w nullsub_85-ms_map20_flag21F_Section3
+										dc.w nullsub_85-ms_map20_flag21F_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -67,10 +67,10 @@ cs_632EA:           dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 
 sub_632FA:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3D6
 										beq.s   return_6332E
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3D7
 										bne.s   return_6332E
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
@@ -97,7 +97,7 @@ return_6332E:
 
 sub_63330:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3D8
 										bne.s   return_6335C
 										lea     cs_6335E(pc), a0

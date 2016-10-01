@@ -33,7 +33,7 @@ ms_map39_EntityEvents:
 
 sub_5E05C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $33E
 										beq.s   return_5E070
 										lea     cs_5E20A(pc), a0
@@ -121,7 +121,7 @@ sub_5E094:
 
 sub_5E09A:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $33E
 										bne.s   loc_5E0AA
 										trap    #TRAP_TEXTBOX

@@ -1,28 +1,28 @@
 
 ; SCRIPT SECTION maps\entries\map13\mapsetups\s3 :
 ; 
-ms_map13_Section3:  dc.b $18
+ms_map13_ZoneEvents:dc.b $18
 										dc.b $FF
-										dc.w sub_5823A-ms_map13_Section3
+										dc.w sub_5823A-ms_map13_ZoneEvents
 										dc.b $FF
 										dc.b $B
-										dc.w sub_5827C-ms_map13_Section3
+										dc.w sub_5827C-ms_map13_ZoneEvents
 										dc.b $FF
 										dc.b $1E
-										dc.w sub_58294-ms_map13_Section3
+										dc.w sub_58294-ms_map13_ZoneEvents
 										dc.w $FD00
-										dc.w return_582AA-ms_map13_Section3
+										dc.w return_582AA-ms_map13_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_5823A:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2C6
 										bne.s   loc_58264
 										lea     cs_58330(pc), a0
 										trap    #6
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2C7
 										bne.s   loc_58254
 										lea     cs_58310(pc), a0
@@ -39,10 +39,10 @@ loc_5825E:
 										bra.s   return_5827A
 loc_58264:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $31F
 										beq.s   return_5827A
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2CB
 										bne.s   return_5827A
 										lea     cs_585FE(pc), a0
@@ -60,10 +60,10 @@ return_5827A:
 
 sub_5827C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2CC
 										beq.s   return_58292
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2CD
 										bne.s   return_58292
 										lea     cs_58AE2(pc), a0
@@ -81,10 +81,10 @@ return_58292:
 
 sub_58294:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2CC
 										beq.s   return_582AA
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2CE
 										bne.s   return_582AA
 										lea     cs_58BEA(pc), a0

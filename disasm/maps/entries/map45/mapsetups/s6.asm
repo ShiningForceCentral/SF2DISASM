@@ -6,7 +6,7 @@
 
 ms_map45_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $19
 										beq.s   loc_600AA
 										move.w  #$19,d0

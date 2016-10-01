@@ -1,8 +1,8 @@
 
 ; SCRIPT SECTION maps\entries\map28\mapsetups\s3 :
 ; 
-ms_map28_Section3:  dc.w $FD00
-										dc.w sub_5F370-ms_map28_Section3
+ms_map28_ZoneEvents:dc.w $FD00
+										dc.w sub_5F370-ms_map28_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

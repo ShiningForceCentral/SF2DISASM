@@ -1,20 +1,20 @@
 
 ; SCRIPT SECTION maps\entries\map52\mapsetups\s3 :
 ; 
-ms_map52_Section3:  dc.b 3
+ms_map52_ZoneEvents:dc.b 3
 										dc.b $17
-										dc.w sub_5C4B6-ms_map52_Section3
+										dc.w sub_5C4B6-ms_map52_ZoneEvents
 										dc.b 4
 										dc.b $17
-										dc.w sub_5C4B6-ms_map52_Section3
+										dc.w sub_5C4B6-ms_map52_ZoneEvents
 										dc.w $FD00
-										dc.w return_5C4CA-ms_map52_Section3
+										dc.w return_5C4CA-ms_map52_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C4B6:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2C9
 										bne.s   return_5C4CA
 										lea     word_5C4EE(pc), a0

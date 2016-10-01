@@ -6,7 +6,7 @@
 
 ms_map25_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $320
 										beq.s   return_5D3A8
 										lea     cs_5D3AA(pc), a0

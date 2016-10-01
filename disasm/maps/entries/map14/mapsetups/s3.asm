@@ -1,17 +1,17 @@
 
 ; SCRIPT SECTION maps\entries\map14\mapsetups\s3 :
 ; 
-ms_map14_Section3:  dc.b $2D
+ms_map14_ZoneEvents:dc.b $2D
 										dc.b 5
-										dc.w sub_58E50-ms_map14_Section3
+										dc.w sub_58E50-ms_map14_ZoneEvents
 										dc.w $FD00
-										dc.w return_58E5A-ms_map14_Section3
+										dc.w return_58E5A-ms_map14_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_58E50:
 										
-										lea     (Map42s0_Blocks+$146-ms_map14_Section3)(pc), a0
+										lea     (Map42s0_Blocks+$146-ms_map14_ZoneEvents)(pc), a0
 										trap    #6
 										trap    #TRAP_SETFLAG
 										dc.w $101

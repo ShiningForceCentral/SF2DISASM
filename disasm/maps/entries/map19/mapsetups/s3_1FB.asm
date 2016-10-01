@@ -1,18 +1,18 @@
 
 ; SCRIPT SECTION maps\entries\map19\mapsetups\s3_1FB :
 ; 
-ms_map19_flag1FB_Section3:
+ms_map19_flag1FB_ZoneEvents:
 										dc.b $10
 										dc.b 5
-										dc.w sub_52DDE-ms_map19_flag1FB_Section3
+										dc.w sub_52DDE-ms_map19_flag1FB_ZoneEvents
 										dc.b $19
 										dc.b $D
-										dc.w sub_52DF0-ms_map19_flag1FB_Section3
+										dc.w sub_52DF0-ms_map19_flag1FB_ZoneEvents
 										dc.b $19
 										dc.b $E
-										dc.w sub_52DF0-ms_map19_flag1FB_Section3
+										dc.w sub_52DF0-ms_map19_flag1FB_ZoneEvents
 										dc.w $FD00
-										dc.w nullsub_82-ms_map19_flag1FB_Section3
+										dc.w nullsub_82-ms_map19_flag1FB_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -6,7 +6,7 @@
 
 ms_map5_flag212_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3B0
 										bne.s   loc_60630
 										lea     cs_607DE(pc), a0
@@ -20,12 +20,12 @@ loc_60630:
 										trap    #6
 loc_60636:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3AE
 										bne.s   loc_6067C
 										cmpi.l  #$6005580,((RAM_Entity_StructOffset_XAndStart-$1000000)).w
 										bne.s   loc_6067C
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1C                ; if character 1C joined the Force : Lemon ?
 										beq.s   loc_6065E
 										lea     cs_60656(pc), a0
@@ -42,7 +42,7 @@ loc_6065E:
 										
 										lea     cs_60C42(pc), a0
 										trap    #6
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3A2
 										beq.s   loc_60672
 										lea     cs_60EB2(pc), a0
@@ -58,21 +58,21 @@ loc_60678:
 										dc.w $3AE               ; set after the scene in underground Yeel where Chaz paces and consults books
 loc_6067C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1B
 										beq.s   loc_6068C
 										move.w  #$1B,d0
 										jsr     MoveEntityOutOfMap
 loc_6068C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3B0
 										bne.s   loc_6069C
 										move.w  #$82,d0 
 										jsr     MoveEntityOutOfMap
 loc_6069C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3AD
 										beq.s   loc_606B4
 										lea     cs_606AC(pc), a0
@@ -88,22 +88,22 @@ cs_606AC:
 										dc.b $FF
 loc_606B4:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1C
 										beq.s   loc_606BE
 										trap    #TRAP_SETFLAG
 										dc.w $3B1               ; set after recruiting Lemon in Yeel
 loc_606BE:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3AC
 										beq.s   return_606E8
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3AD
 										bne.s   return_606E8
 										lea     cs_606EA(pc), a0
 										trap    #6
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $1C
 										beq.s   return_606E8
 										lea     cs_606E0(pc), a0

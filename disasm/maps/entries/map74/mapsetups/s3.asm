@@ -1,11 +1,11 @@
 
 ; SCRIPT SECTION maps\entries\map74\mapsetups\s3 :
 ; 
-ms_map74_Section3:  dc.b $FF
+ms_map74_ZoneEvents:dc.b $FF
 										dc.b $3D
-										dc.w sub_5098C-ms_map74_Section3
+										dc.w sub_5098C-ms_map74_ZoneEvents
 										dc.w $FD00
-										dc.w return_509C4-ms_map74_Section3
+										dc.w return_509C4-ms_map74_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

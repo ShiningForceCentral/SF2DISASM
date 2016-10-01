@@ -98,7 +98,7 @@ sub_5D274:
 
 sub_5D27A:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $320
 										bne.s   loc_5D2C4
 										move.b  ((MESSAGE_SPEED-$1000000)).w,d0
@@ -137,7 +137,7 @@ return_5D2D0:
 
 sub_5D2D2:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $100
 										bne.s   loc_5D2E0
 										trap    #TRAP_TEXTBOX
@@ -165,10 +165,10 @@ nullsub_131:
 
 sub_5D2EA:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $320
 										bne.s   loc_5D32A
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $101
 										bne.s   loc_5D324
 										trap    #TRAP_TEXTBOX

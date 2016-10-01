@@ -6,7 +6,7 @@
 
 ms_map20_flag21F_InitFunction:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $3D6
 										beq.s   loc_633BA
 										lea     cs_633B2(pc), a0

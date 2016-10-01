@@ -1,26 +1,26 @@
 
 ; SCRIPT SECTION maps\entries\map63\mapsetups\s3 :
 ; 
-ms_map63_Section3:  dc.b $F
+ms_map63_ZoneEvents:dc.b $F
 										dc.b $37
-										dc.w sub_5C9F6-ms_map63_Section3
+										dc.w sub_5C9F6-ms_map63_ZoneEvents
 										dc.b $D
 										dc.b $2A
-										dc.w sub_5C9F6-ms_map63_Section3
+										dc.w sub_5C9F6-ms_map63_ZoneEvents
 										dc.b $A
 										dc.b $15
-										dc.w sub_5CA14-ms_map63_Section3
+										dc.w sub_5CA14-ms_map63_ZoneEvents
 										dc.b 8
 										dc.b 7
-										dc.w sub_5CA1C-ms_map63_Section3
+										dc.w sub_5CA1C-ms_map63_ZoneEvents
 										dc.w $FD00
-										dc.w return_5CA22-ms_map63_Section3
+										dc.w return_5CA22-ms_map63_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C9F6:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $100
 										bne.s   loc_5CA08
 										lea     cs_5CA6E(pc), a0

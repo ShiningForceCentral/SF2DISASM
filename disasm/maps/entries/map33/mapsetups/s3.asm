@@ -1,14 +1,14 @@
 
 ; SCRIPT SECTION maps\entries\map33\mapsetups\s3 :
 ; 
-ms_map33_Section3:  dc.b $F
+ms_map33_ZoneEvents:dc.b $F
 										dc.b $15
-										dc.w sub_5AA98-ms_map33_Section3
+										dc.w sub_5AA98-ms_map33_ZoneEvents
 										dc.b $C
 										dc.b $E
-										dc.w sub_5AACA-ms_map33_Section3
+										dc.w sub_5AACA-ms_map33_ZoneEvents
 										dc.w $FD00
-										dc.w nullsub_94-ms_map33_Section3
+										dc.w nullsub_94-ms_map33_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -23,7 +23,7 @@ nullsub_94:
 
 sub_5AA98:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $306
 										bne.s   loc_5AAAA
 										lea     cs_5AC58(pc), a0
@@ -33,10 +33,10 @@ sub_5AA98:
 										bra.s   return_5AAC8
 loc_5AAAA:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $311
 										beq.s   return_5AAC8
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $312
 										bne.s   return_5AAC8
 										lea     cs_5B466(pc), a0
@@ -58,7 +58,7 @@ return_5AAC8:
 
 sub_5AACA:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $30F
 										bne.s   return_5AAD6
 										lea     cs_5AF36(pc), a0

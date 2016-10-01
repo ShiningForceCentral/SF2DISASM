@@ -24,7 +24,7 @@ ms_map30_EntityEvents:
 
 sub_5A224:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2F8
 										bne.s   loc_5A230
 										trap    #TRAP_TEXTBOX
@@ -77,7 +77,7 @@ cs_5A256:           dc.w $2A                ; 002A MAKE ENTITY SHIVER 82
 
 sub_5A25C:
 										
-										trap    #1
+										trap    #TRAP_CHECKFLAG
 										dc.w $2F9
 										bne.s   loc_5A26C
 										trap    #TRAP_TEXTBOX
