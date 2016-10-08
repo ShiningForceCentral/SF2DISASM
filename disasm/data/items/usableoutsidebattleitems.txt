@@ -1,0 +1,13 @@
+List of item indexes, ended with $FF value.
+
+00000000h: 03 05 09 0A 0B 0C 0D 0E 0F FF                   
+
+Antidote
+Fairy Powder
+Power Water
+Protect Milk
+Quick Chicken
+Running Pimento
+Cheerful Bread
+Bright Honey
+Brave Apple

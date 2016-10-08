@@ -1,0 +1,9 @@
+[Item index][Description Length][Description start index]
+
+Actual data : only one entry !
+00000000h: 7E 02 00 67 FF FF                               
+- Item $7E : Chirrup sandals
+- 2 text lines to read
+- Description starts from text line index $0067 :
+    0067 : Chirrup sandals.{W2}
+    0068 : They make you happy when{N}you wear them.{W1}
