@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle04\cs_beforebattle :
 ; Cutscene before battle 4
-bbcs_04:            dc.w 4                  ; 0004 SET TEXT INDEX 907 : "Who are they?{W1}"
+bbcs_04:            dc.w 4                  ; 0004 INIT TEXT CURSOR 907 : "Who are they?{W1}"
 										dc.w $907
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 42 1 5
 										dc.w $42

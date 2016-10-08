@@ -9,13 +9,13 @@ ANIM_SPRITE_DEATH_NUM_SPINS: equ $B
 ; ---------------------------------------------------------------------------
 
 ; enum Traps
-TRAP_SOUNDCOM: equ $0
-TRAP_CHECKFLAG: equ $1
-TRAP_SETFLAG: equ $2
-TRAP_CLEARFLAG: equ $3
-TRAP_TEXTBOX: equ $5
-TRAP_MAPSCRIPT: equ $6
-TRAP_VINTFUNCTIONS: equ $9
+SOUND_COMMAND: equ $0
+CHECK_FLAG: equ $1
+SET_FLAG: equ $2
+CLEAR_FLAG: equ $3
+TEXTBOX: equ $5
+MAPSCRIPT: equ $6
+VINT_FUNCTIONS: equ $9
 
 ; ---------------------------------------------------------------------------
 
@@ -648,3 +648,22 @@ STATUSEFFECT_LASTING_EFFECTS_MASK: equ $7
 
 ; enum Gold
 GOLD_STARTING_AMOUNT: equ $3C
+
+; ---------------------------------------------------------------------------
+
+; enum Fading
+IN_FROM_BLACK: equ $1
+OUT_TO_BLACK: equ $2
+IN_FROM_WHITE: equ $3
+OUT_TO_WHITE: equ $4
+PULSATING_1: equ $5
+PULSATING_2: equ $6
+FLASH_QUICKLY_1: equ $7
+NOTHING: equ $8
+HALF_OUT_TO_BLACK: equ $9
+FLICKER_ONCE: equ $A
+FLASH_QUICKLY_2: equ $B
+INSTANT_BLACK: equ $C
+NOTHING_2: equ $D
+HALF_IN_FROM_BLACK: equ $E
+OUT_TO_BLACK_2: equ $F

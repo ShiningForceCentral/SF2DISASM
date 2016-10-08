@@ -6,24 +6,24 @@
 
 ms_map22_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $308
 										bne.s   loc_5963E
 										lea     cs_59656(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $308               ; set after the scene where Goliath places you on the Desktop
 loc_5963E:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $20A
 										beq.s   return_59654
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $30A
 										bne.s   return_59654
 										lea     cs_5996E(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $30A               ; set after the scene that plays after you win the chess battle
 return_59654:
 										
@@ -31,7 +31,7 @@ return_59654:
 
 	; End of function ms_map22_InitFunction
 
-cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4 : "What happened?{W2}"
+cs_59656:           dc.w 4                  ; 0004 INIT TEXT CURSOR 6D4 : "What happened?{W2}"
 										dc.w $6D4
 										dc.w $46                ; 0046  0 13
 										dc.w 0
@@ -494,7 +494,7 @@ cs_59656:           dc.w 4                  ; 0004 SET TEXT INDEX 6D4 : "What ha
 										dc.w 7
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5994E:           dc.w 4                  ; 0004 SET TEXT INDEX 700 : "Are you ready?{W2}"
+cs_5994E:           dc.w 4                  ; 0004 INIT TEXT CURSOR 700 : "Are you ready?{W2}"
 										dc.w $700
 										dc.b $80                ; WAIT 32
 										dc.b $32
@@ -510,7 +510,7 @@ cs_5994E:           dc.w 4                  ; 0004 SET TEXT INDEX 700 : "Are you
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 16000000
 										dc.l $16000000
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5996E:           dc.w 4                  ; 0004 SET TEXT INDEX 702 : "Checkmate!{N}This is for you.{W1}"
+cs_5996E:           dc.w 4                  ; 0004 INIT TEXT CURSOR 702 : "Checkmate!{N}This is for you.{W1}"
 										dc.w $702
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF

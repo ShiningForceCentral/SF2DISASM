@@ -6,7 +6,7 @@
 
 ms_map3_flag261_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w 3                  ; Jaha joined
 										beq.s   return_513CC
 										lea     cs_513CE(pc), a0
@@ -31,15 +31,15 @@ cs_513D6:           dc.w $2D                ; 002D MOVE ENTITY 1 FF 2 1
 										dc.b 1
 										dc.w $8080
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_513E2:           dc.w 4                  ; 0004 SET TEXT INDEX 216 : "{LEADER}, so you decided{N}to go?{W1}"
+cs_513E2:           dc.w 4                  ; 0004 INIT TEXT CURSOR 216 : "{LEADER}, so you decided{N}to go?{W1}"
 										dc.w $216
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1 : "{LEADER}, so you decided{N}to go?{W1}"
 										dc.w 1
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 51406 : YES/NO prompt answer
-										dc.w $59                ; Unkown command : 59
-										dc.l word_51406         ; 0005 PLAY SOUND 
-										dc.w 4                  ; 0004 SET TEXT INDEX 214 : "No?  Really?{N}Then I'm not going either!{W2}"
+										dc.w $59
+										dc.l word_51406         
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 214 : "No?  Really?{N}Then I'm not going either!{W2}"
 										dc.w $214
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 1 : "No?  Really?{N}Then I'm not going either!{W2}"
 										dc.w 1
@@ -47,7 +47,7 @@ cs_513E2:           dc.w 4                  ; 0004 SET TEXT INDEX 216 : "{LEADER
 										dc.w 1
 										dc.w $B                 ; 000B JUMP 51650
 										dc.l word_51650         
-word_51406:         dc.w 4                  ; 0004 SET TEXT INDEX 217 : "Great!{N}Let's go right now!{N}Hurry!{W1}"
+word_51406:         dc.w 4                  ; 0004 INIT TEXT CURSOR 217 : "Great!{N}Let's go right now!{N}Hurry!{W1}"
 										dc.w $217
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "Great!{N}Let's go right now!{N}Hurry!{W1}"
 										dc.w 1
@@ -63,7 +63,7 @@ word_51406:         dc.w 4                  ; 0004 SET TEXT INDEX 217 : "Great!{
 										dc.w $42
 										dc.w $FFFF
 										dc.w 8                  ; 0008 JOIN FORCE 80
-										dc.w $80
+										dc.w $80                ; Special use case value $80, hardcoded in command function
 										dc.w $2C                ; 002C FOLLOW ENTITY 1 0 2
 										dc.w 1
 										dc.w 0
@@ -107,13 +107,13 @@ cs_5145C:           dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 460CE
 										dc.b $A
 										dc.b $14
 										dc.w $8080
-										dc.w 4                  ; 0004 SET TEXT INDEX 1FE : "Good morning {LEADER}!{N}You woke up late this{N}morning.{W2}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 1FE : "Good morning {LEADER}!{N}You woke up late this{N}morning.{W2}"
 										dc.w $1FE
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Good morning {LEADER}!{N}You woke up late this{N}morning.{W2}"
 										dc.w $80
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Did the storm wake you up?{W2}"
 										dc.w $80
-										dc.w 4                  ; 0004 SET TEXT INDEX 1E3 : "Hurry to school!{N}Sir Astral and {NAME;1} must{N}be waiting.{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 1E3 : "Hurry to school!{N}Sir Astral and {NAME;1} must{N}be waiting.{W1}"
 										dc.w $1E3
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Hurry to school!{N}Sir Astral and {NAME;1} must{N}be waiting.{W1}"
 										dc.w $80
@@ -133,7 +133,7 @@ cs_5148C:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 1 2
 										dc.b 4
 										dc.b 1
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5149A:           dc.w 4                  ; 0004 SET TEXT INDEX 205 : "Is everybody here?{N}OK, let's start.{W2}"
+cs_5149A:           dc.w 4                  ; 0004 INIT TEXT CURSOR 205 : "Is everybody here?{N}OK, let's start.{W2}"
 										dc.w $205
 										dc.b $80                ; WAIT 14
 										dc.b $14
@@ -389,7 +389,7 @@ cs_5149A:           dc.w 4                  ; 0004 SET TEXT INDEX 205 : "Is ever
 										dc.b 1
 										dc.w $B                 ; 000B JUMP 51650
 										dc.l word_51650         
-word_51614:         dc.w 4                  ; 0004 SET TEXT INDEX 217 : "Great!{N}Let's go right now!{N}Hurry!{W1}"
+word_51614:         dc.w 4                  ; 0004 INIT TEXT CURSOR 217 : "Great!{N}Let's go right now!{N}Hurry!{W1}"
 										dc.w $217
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1 : "Great!{N}Let's go right now!{N}Hurry!{W1}"
 										dc.w 1
@@ -425,7 +425,7 @@ word_51614:         dc.w 4                  ; 0004 SET TEXT INDEX 217 : "Great!{
 										dc.b 3
 										dc.b 3
 word_51650:         dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_51652:           dc.w 4                  ; 0004 SET TEXT INDEX 219 : "Halt!{N}Where do you think you're{N}going?{W1}"
+cs_51652:           dc.w 4                  ; 0004 INIT TEXT CURSOR 219 : "Halt!{N}Where do you think you're{N}going?{W1}"
 										dc.w $219
 										dc.w $2D                ; 002D MOVE ENTITY 8A 0 0 1
 										dc.b $8A
@@ -482,7 +482,7 @@ cs_51652:           dc.w 4                  ; 0004 SET TEXT INDEX 219 : "Halt!{N
 										dc.b $8B
 										dc.b 3
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_516A8:           dc.w 4                  ; 0004 SET TEXT INDEX 296 : "Here you are!{N}I've been waiting.{W1}"
+cs_516A8:           dc.w 4                  ; 0004 INIT TEXT CURSOR 296 : "Here you are!{N}I've been waiting.{W1}"
 										dc.w $296
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 3 : "Here you are!{N}I've been waiting.{W1}"
 										dc.w 3

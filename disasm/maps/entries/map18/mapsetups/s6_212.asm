@@ -6,12 +6,12 @@
 
 ms_map18_flag212_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $398
 										bne.s   loc_612A8
 										lea     cs_612BE(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $398               ; set after the scene with Zeon plays as you leave the Galam Drawbridge area
 loc_612A8:
 										
@@ -23,7 +23,7 @@ loc_612A8:
 
 	; End of function ms_map18_flag212_InitFunction
 
-cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61 : "{LEADER} defeated Red{N}Baron too?  Is that what{N}you said, Geshp?{W1}"
+cs_612BE:           dc.w 4                  ; 0004 INIT TEXT CURSOR E61 : "{LEADER} defeated Red{N}Baron too?  Is that what{N}you said, Geshp?{W1}"
 										dc.w $E61
 										dc.w $48                ; 0048 LOAD MAP 3B 8 4
 										dc.w $3B
@@ -246,7 +246,7 @@ cs_612BE:           dc.w 4                  ; 0004 SET TEXT INDEX E61 : "{LEADER
 sub_61426:
 										
 										lea     (PALETTE_1).l,a0
-										lea     (FFD080_Palette1bis).l,a1
+										lea     (PALETTE_1_BIS).l,a1
 										moveq   #$F,d0
 loc_61434:
 										
@@ -256,7 +256,7 @@ loc_61434:
 
 	; End of function sub_61426
 
-cs_6143C:           dc.w 4                  ; 0004 SET TEXT INDEX 36F : "Sorry, {LEADER}.{N}I'm going back to Roft.{N}I'm worried about Petro.{W1}"
+cs_6143C:           dc.w 4                  ; 0004 INIT TEXT CURSOR 36F : "Sorry, {LEADER}.{N}I'm going back to Roft.{N}I'm worried about Petro.{W1}"
 										dc.w $36F
 										dc.w $15                ; 0015 SET ACTSCRIPT 1A FF 460CE
 										dc.b $1A

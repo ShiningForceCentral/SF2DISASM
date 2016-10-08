@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION scripting\cutscenes\cs_intro4 :
 ; Intro cutscene 4
-IntroCutscene4:     dc.w 4                  ; 0004 SET TEXT INDEX 1089 : "Somebody bring a light to{N}the King's chamber!{D2}"
+IntroCutscene4:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Somebody bring a light to{N}the King's chamber!{D2}"
 										dc.w $1089
 										dc.w $48                ; 0048 LOAD MAP 41 7 3
 										dc.w $41
@@ -30,7 +30,7 @@ IntroCutscene4:     dc.w 4                  ; 0004 SET TEXT INDEX 1089 : "Somebo
 										dc.l sub_48FE2
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
-										dc.w 4                  ; 0004 SET TEXT INDEX 1089 : "Somebody bring a light to{N}the King's chamber!{D2}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Somebody bring a light to{N}the King's chamber!{D2}"
 										dc.w $1089
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Somebody bring a light to{N}the King's chamber!{D2}"
 										dc.w $81

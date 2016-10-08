@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle01\cs_afterbattle :
 ; Cutscene after battle 1
-abcs_battle01:      dc.w 4                  ; 0004 SET TEXT INDEX 901 : "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
+abcs_battle01:      dc.w 4                  ; 0004 INIT TEXT CURSOR 901 : "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
 										dc.w $901
 										dc.w $55                ; 0055 RESET FORCE BATTLE STATS
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 39 2 0

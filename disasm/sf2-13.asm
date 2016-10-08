@@ -229,7 +229,7 @@ p_endKissPicture:   dc.l EndKissPicture
 sub_1AC068:
 										
 										jmp     *+4(pc)
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_CLEAR
 										jsr     (WaitForVInt).w 
 										jsr     (DisableDisplayAndVInt).w
@@ -257,8 +257,8 @@ loc_1AC09E:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
-										trap    #TRAP_VINTFUNCTIONS
+										jsr     (sub_10DC).w    
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_CLEAR
 										jsr     (EnableDisplayAndInterrupts).w
 										clr.w   d6
@@ -269,15 +269,15 @@ loc_1AC09E:
 										jsr     (Set_FFDE94_bit3).w
 										jsr     (FadeInFromBlack).w
 										move.l  (p_GameStaff).l,((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_1AC1E4
 										moveq   #$78,d0 
 										jsr     (Sleep).w       
 										jsr     j_UpdateForce
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #1,d7
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 loc_1AC10E:
 										
 										movem.l d7-a0,-(sp)
@@ -285,7 +285,7 @@ loc_1AC10E:
 										move.b  (a0),d0
 										jsr     j_GetCharPortraitIdx
 										jsr     j_LoadPortrait
-										lea     (Palette2).l,a0 ; clear palette 2
+										lea     (PALETTE_2).l,a0; clear palette 2
 										clr.l   (a0)+
 										clr.l   (a0)+
 										clr.l   (a0)+
@@ -298,21 +298,21 @@ loc_1AC10E:
 										move.w  #$40,d6 
 										jsr     (UpdateRandomSeed).w
 										addi.w  #$80,d7 
-										move.w  d7,(FFD100_MaybeRelatedToHscroll+2).l
+										move.w  d7,(dword_FFD100+2).l
 										move.w  #$60,d6 
 										jsr     (UpdateRandomSeed).w
 										addi.w  #$20,d7 
 										neg.w   d7
-										move.w  d7,(FFD502_MaybeRelatedToOtherVScrollStuff).l
+										move.w  d7,(word_FFD502).l
 										move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
 										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.w  #$B4,d0 
 										jsr     (Sleep).w       
 										move.b  #2,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										moveq   #$2C,d0 
@@ -340,7 +340,7 @@ loc_1AC1A8:
 
 sub_1AC1CC:
 										
-										lea     (Palette2bis).l,a0
+										lea     (PALLETE_2_BIS).l,a0
 										clr.l   (a0)+
 										clr.l   (a0)+
 										clr.l   (a0)+
@@ -360,7 +360,7 @@ VInt_1AC1E4:
 										
 										btst    #0,((byte_FFDEA0-$1000000)).w
 										bne.s   loc_1AC1F6
-										subq.w  #1,(FFD100_MaybeRelatedToHscroll+2).l
+										subq.w  #1,(dword_FFD100+2).l
 										jsr     (StoreVdpCommands).w
 loc_1AC1F6:
 										
@@ -370,13 +370,13 @@ loc_1AC1F6:
 										move.b  ((byte_FFDEA0-$1000000)).w,d0
 										andi.b  #1,d0
 										bne.s   loc_1AC220
-										move.w  (FFD500_MaybeRelatedToVscroll).l,d0
+										move.w  (word_FFD500).l,d0
 										andi.w  #$F,d0
 										bne.s   loc_1AC21A
 										bsr.w   sub_1AC22E
 loc_1AC21A:
 										
-										addq.w  #1,(FFD500_MaybeRelatedToVscroll).l
+										addq.w  #1,(word_FFD500).l
 loc_1AC220:
 										
 										jsr     (StoreVdpCommands).w
@@ -393,7 +393,7 @@ sub_1AC22E:
 										
 										move.b  (a0)+,d1
 										lea     (byte_FFC000).l,a1
-										move.w  (FFD500_MaybeRelatedToVscroll).l,d0
+										move.w  (word_FFD500).l,d0
 										lsr.w   #3,d0
 										addi.w  #$1C,d0
 										andi.w  #$1F,d0
@@ -430,7 +430,7 @@ loc_1AC280:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										rts
 
 	; End of function sub_1AC22E
@@ -496,7 +496,7 @@ loc_1AC31E:
 										addq.l  #4,a1
 										dbf     d7,loc_1AC2E0
 										lea     (DMA_SPACE_FF8804).l,a0
-										lea     (RAM_Battle_BattleEntityMoveString).l,a1
+										lea     (BATTLE_ENTITY_MOVE_STRING).l,a1
 										clr.l   (a1)+
 										move.w  #$3FE,d7
 loc_1AC344:
@@ -507,7 +507,7 @@ loc_1AC344:
 										move.l  d0,(a1)+
 										dbf     d7,loc_1AC344
 										lea     (DMA_SPACE_FF8804).l,a0
-										lea     (RAM_Battle_BattleEntityMoveString).l,a1
+										lea     (BATTLE_ENTITY_MOVE_STRING).l,a1
 										move.w  #$3FE,d7
 loc_1AC362:
 										
@@ -522,7 +522,7 @@ loc_1AC362:
 										lea     ($2000).w,a1    ; ?
 										move.w  #$800,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										rts
 
 	; End of function sub_1AC29C
@@ -706,7 +706,7 @@ sub_1AC4F0:
 										move.b  d0,d7
 										clr.w   d1
 										move.b  d0,d1
-										lea     (EnemyTargettingCommandList).l,a0
+										lea     (ENEMY_TARGETTING_COMMAND_LIST).l,a0
 										andi.b  #$7F,d1 
 										move.b  (a0,d1.w),d1
 										cmpi.b  #$FF,d1
@@ -1215,7 +1215,7 @@ loc_1AC932:
 										addi.w  #1,d2
 loc_1AC93C:
 										
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										clr.w   d3
 loc_1AC942:
 										
@@ -1265,7 +1265,7 @@ loc_1AC9AA:
 										bra.s   loc_1AC942
 loc_1AC9AC:
 										
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
 										move.w  d3,(a0)
 										movem.l (sp)+,d0-a6
 										rts
@@ -1946,7 +1946,7 @@ GetListOfSpawningEnemies:
 										move.w  #$20,d7 
 										move.w  #$80,d4 
 										move.w  d4,d0
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										clr.w   d5
 loc_1ACF44:
 										
@@ -2016,7 +2016,7 @@ loc_1ACFEA:
 										move.w  d4,d0
 										subq.w  #1,d7
 										bne.w   loc_1ACF44
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
 										move.w  d5,(a0)
 										movem.l (sp)+,d0-a6
 										rts
@@ -2295,7 +2295,7 @@ loc_1B127E:
 										addq.b  #1,d0
 										dbf     d7,loc_1B127E
 										jsr     j_UpdateForce
-										lea     ((RAM_Force_CurrentList-$1000000)).w,a1
+										lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a1
 										move.w  ((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w,d6
 										subq.w  #1,d6
 										moveq   #0,d1
@@ -3219,10 +3219,10 @@ sub_1B1A28:
 										
 										movem.l d0/d2-a6,-(sp)
 										jsr     j_UpdateForce
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
 										move.w  (a0),d7
 										subi.w  #1,d7
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										clr.l   d6
 loc_1B1A42:
 										

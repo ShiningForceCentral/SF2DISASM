@@ -28,12 +28,12 @@ sub_4FDB2:
 
 sub_4FDBE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1FD               ; Battle 9 completed
 										bne.s   return_4FDD0
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $199               ; Battle 9 unlocked
-										move.l  #$100FF,((RAM_MapEventType-$1000000)).w
+										move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_4FDD0:
 										
 										rts

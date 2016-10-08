@@ -36,9 +36,9 @@ ms_map2_flag212_EntityEvents:
 
 sub_5E9F0:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E0B               ; "This is Pacalon, a kingdom{N}of fine centaurs.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E0C               ; "We welcome you.{W1}"
 										rts
 
@@ -49,7 +49,7 @@ sub_5E9F0:
 
 sub_5E9FA:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E0D               ; "Rain!  This must be a{N}present from the gods!{W1}"
 										rts
 
@@ -60,7 +60,7 @@ sub_5E9FA:
 
 sub_5EA00:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E0E               ; "Thanks to the rain, I'm no{N}longer thirsty.{N}But, I'm still hungry.{W1}"
 										rts
 
@@ -71,9 +71,9 @@ sub_5EA00:
 
 sub_5EA06:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E0F               ; "Did you save Mitula?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E10               ; "Then, why don't you defeat{N}those devils?{W1}"
 										rts
 
@@ -84,9 +84,9 @@ sub_5EA06:
 
 sub_5EA10:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E11               ; "Was Tristan occupied by{N}devils?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E12               ; "That's why we've had no{N}rain lately.{W1}"
 										rts
 
@@ -97,7 +97,7 @@ sub_5EA10:
 
 sub_5EA1A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E13               ; "I see Geshp frequently.{N}He always stares at the{N}castle.{W1}"
 										rts
 

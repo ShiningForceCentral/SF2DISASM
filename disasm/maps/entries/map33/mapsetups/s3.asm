@@ -23,29 +23,29 @@ nullsub_94:
 
 sub_5AA98:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $306
 										bne.s   loc_5AAAA
 										lea     cs_5AC58(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $306               ; set after the first scene with Goliath at Creed's Mansion
 										bra.s   return_5AAC8
 loc_5AAAA:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $311
 										beq.s   return_5AAC8
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $312
 										bne.s   return_5AAC8
 										lea     cs_5B466(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $312               ; set after Oddler elects to stay behind at Creed's Mansion
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $45                ; Fairy is a follower
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG
 										dc.w $44                ; Oddler is a follower
 return_5AAC8:
 										
@@ -58,7 +58,7 @@ return_5AAC8:
 
 sub_5AACA:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $30F
 										bne.s   return_5AAD6
 										lea     cs_5AF36(pc), a0

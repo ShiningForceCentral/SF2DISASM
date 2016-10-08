@@ -25,19 +25,19 @@ nullsub_69:
 
 sub_5F47A:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3A2
 										bne.s   return_5F49E
 										lea     cs_5F4B8(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3A2               ; set after opening Devil's Head with the Force Sword
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1C
 										bne.s   loc_5F49A
 										lea     cs_5F594(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $47                ; Lemon is a follower
 loc_5F49A:
 										

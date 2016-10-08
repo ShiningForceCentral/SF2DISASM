@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle05\cs_afterbattle :
 ; Cutscene after battle 5
-abcs_battle05:      dc.w 4                  ; 0004 SET TEXT INDEX 91C : "This is the Jewel of Light{N}that I stole from the shrine.{W2}"
+abcs_battle05:      dc.w 4                  ; 0004 INIT TEXT CURSOR 91C : "This is the Jewel of Light{N}that I stole from the shrine.{W2}"
 										dc.w $91C
 										dc.w $15                ; 0015 SET ACTSCRIPT 5 FF 460CE
 										dc.b 5

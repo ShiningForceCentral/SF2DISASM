@@ -10,7 +10,7 @@ ms_map15_InitFunction:
 
 	; End of function ms_map15_InitFunction
 
-cs_5D04E:           dc.w 4                  ; 0004 SET TEXT INDEX 7D6 : "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
+cs_5D04E:           dc.w 4                  ; 0004 INIT TEXT CURSOR 7D6 : "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
 										dc.w $7D6
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0
 										dc.b 0

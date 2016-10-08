@@ -25,31 +25,31 @@ nullsub_68:
 
 sub_5FA38:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3E7
 										bne.s   return_5FA86
-										move.w  #$71,((RAM_Dialogue_NameIdx1-$1000000)).w 
-										trap    #TRAP_CHECKFLAG
+										move.w  #$71,((TEXT_NAME_INDEX_1-$1000000)).w 
+										trap    #CHECK_FLAG
 										dc.w $344
 										bne.s   loc_5FA76
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D2D               ; "{LEADER} tries to use{N}the {ITEM}.{W2}{N}But, he doesn't know how.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										move.w  #$80,d0 
-										jsr     GetEntityPortraitAndSpeechSound
+										jsr     GetEntityPortraitAndSpeechSfx
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D2E               ; "Well, {LEADER}.  Let's go{N}back to look for someone{N}who knows about this ship.{W1}"
 										bra.s   loc_5FA84
 loc_5FA76:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D2F               ; "{LEADER} fit the {ITEM}{N}into the cockpit.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										lea     cs_5FB6A(pc), a0
 										trap    #6

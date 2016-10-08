@@ -6,7 +6,7 @@
 
 ms_map8_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w 8                  ; May joined
 										beq.s   return_563B0
 										moveq   #8,d0
@@ -17,7 +17,7 @@ return_563B0:
 
 	; End of function ms_map8_InitFunction
 
-cs_563B2:           dc.w 4                  ; 0004 SET TEXT INDEX 50B : "Hmmm?{W1}"
+cs_563B2:           dc.w 4                  ; 0004 INIT TEXT CURSOR 50B : "Hmmm?{W1}"
 										dc.w $50B
 										dc.w $15                ; 0015 SET ACTSCRIPT 81 FF 46172
 										dc.b $81
@@ -87,7 +87,7 @@ cs_563B2:           dc.w 4                  ; 0004 SET TEXT INDEX 50B : "Hmmm?{W
 										dc.b 7
 										dc.b 3
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_56422:           dc.w 4                  ; 0004 SET TEXT INDEX 50E : "Who are you?{N}What are you?{W1}"
+cs_56422:           dc.w 4                  ; 0004 INIT TEXT CURSOR 50E : "Who are you?{N}What are you?{W1}"
 										dc.w $50E
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7

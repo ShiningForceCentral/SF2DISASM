@@ -6,7 +6,7 @@
 
 ms_map55_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3E7
 										beq.s   (Map66s0_Blocks+$6E8-ms_map55_EntityEvents)
 										lea     word_5E320(pc), a0
@@ -117,7 +117,7 @@ byte_5E33E:         dc.b 0
 										dc.b 0
 										dc.b 3
 										dc.w $FFFF
-cs_5E346:           dc.w 4                  ; 0004 SET TEXT INDEX D2B : "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
+cs_5E346:           dc.w 4                  ; 0004 INIT TEXT CURSOR D2B : "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
 										dc.w $D2B
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 										dc.b 0

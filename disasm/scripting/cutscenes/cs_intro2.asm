@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION scripting\cutscenes\cs_intro2 :
 ; Intro cutscene 2
-IntroCutscene2:     dc.w 4                  ; 0004 SET TEXT INDEX 106A : "Quite a storm.{D2}"
+IntroCutscene2:     dc.w 4                  ; 0004 INIT TEXT CURSOR 106A : "Quite a storm.{D2}"
 										dc.w $106A
 										dc.w $48                ; 0048 LOAD MAP 41 7 2
 										dc.w $41

@@ -6,7 +6,7 @@
 
 ms_map16_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $298               ; set after the Galam guards catch you sneaking around, but before battle
 										beq.s   return_51F86
 										move.w  #$91,d0 
@@ -17,7 +17,7 @@ return_51F86:
 
 	; End of function ms_map16_InitFunction
 
-cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2 : "Listen, everybody!{N}We're going to Granseal!{W1}"
+cs_51F88:           dc.w 4                  ; 0004 INIT TEXT CURSOR 3C2 : "Listen, everybody!{N}We're going to Granseal!{W1}"
 										dc.w $3C2
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C080 : "Listen, everybody!{N}We're going to Granseal!{W1}"
 										dc.w $C080
@@ -381,7 +381,7 @@ cs_51F88:           dc.w 4                  ; 0004 SET TEXT INDEX 3C2 : "Listen,
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5 : "I will leave you once I'm{N}outside the gate!{W1}"
 										dc.w 5
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_521BA:           dc.w 4                  ; 0004 SET TEXT INDEX 3DA : "You!{W1}"
+cs_521BA:           dc.w 4                  ; 0004 INIT TEXT CURSOR 3DA : "You!{W1}"
 										dc.w $3DA
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 92 11 10 1
 										dc.b $92

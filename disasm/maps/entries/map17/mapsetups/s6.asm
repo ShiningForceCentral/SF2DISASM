@@ -6,16 +6,16 @@
 
 ms_map17_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $294               ; set after initial wake-up in prison sequence
 										bne.s   loc_52460
 										lea     cs_5249E(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $294               ; set after initial wake-up in prison sequence
 loc_52460:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $297               ; set after Galam and Lemon leave with their army
 										beq.s   loc_52476
 										move.w  #$83,d0 
@@ -24,7 +24,7 @@ loc_52460:
 										trap    #6
 loc_52476:
 										
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $263               ; set after prison wake-up sequence IF 0297 is *not* also set
 										rts
 
@@ -58,7 +58,7 @@ cs_5249E:           dc.w 5                  ; 0005 PLAY SOUND
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 4                  ; 0004 SET TEXT INDEX 370 : "Impossible!{N}Galam and Granseal are{N}allies!{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 370 : "Impossible!{N}Galam and Granseal are{N}allies!{W1}"
 										dc.w $370
 										dc.w $46                ; 0046  34 1
 										dc.w $34
@@ -119,7 +119,7 @@ cs_5249E:           dc.w 5                  ; 0005 PLAY SOUND
 										dc.w $23                ; 0023 SET ENTITY FACING 2 0
 										dc.b 2
 										dc.b 0
-										dc.w 4                  ; 0004 SET TEXT INDEX 37C : "{LEADER}!{N}You finally woke up!{W2}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 37C : "{LEADER}!{N}You finally woke up!{W2}"
 										dc.w $37C
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 2 : "{LEADER}!{N}You finally woke up!{W2}"
 										dc.w 2
@@ -129,7 +129,7 @@ cs_5249E:           dc.w 5                  ; 0005 PLAY SOUND
 										dc.b 2
 										dc.b 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_52530:           dc.w 4                  ; 0004 SET TEXT INDEX 385 : "What's wrong with the seal?{W1}"
+cs_52530:           dc.w 4                  ; 0004 INIT TEXT CURSOR 385 : "What's wrong with the seal?{W1}"
 										dc.w $385
 										dc.w $32                ; 0032 SET CAMERA DEST 30 0
 										dc.w $30
@@ -435,7 +435,7 @@ cs_52530:           dc.w 4                  ; 0004 SET TEXT INDEX 385 : "What's 
 										dc.w $3E14
 										dc.w $102
 										dc.w $3014
-										dc.w 4                  ; 0004 SET TEXT INDEX 3A3 : "{NAME;5} sticks a short wire{N}into the keyhole.{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 3A3 : "{NAME;5} sticks a short wire{N}into the keyhole.{W1}"
 										dc.w $3A3
 										dc.w $2D                ; 002D MOVE ENTITY 5 FF 3 2
 										dc.b 5
@@ -697,7 +697,7 @@ cs_528CA:           dc.w $2D                ; 002D MOVE ENTITY 0 FF 0 1
 										dc.b 1
 										dc.w $8080
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_528D4:           dc.w 4                  ; 0004 SET TEXT INDEX 3B3 : "Wait!{W1}"
+cs_528D4:           dc.w 4                  ; 0004 INIT TEXT CURSOR 3B3 : "Wait!{W1}"
 										dc.w $3B3
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5 : "Wait!{W1}"
 										dc.w 5
@@ -759,7 +759,7 @@ cs_528D4:           dc.w 4                  ; 0004 SET TEXT INDEX 3B3 : "Wait!{W
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 5 : "Now, go out through this{N}short cut!{W1}"
 										dc.w 5
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_52938:           dc.w 4                  ; 0004 SET TEXT INDEX 3B8 : "You're right.  I did it.{W2}"
+cs_52938:           dc.w 4                  ; 0004 INIT TEXT CURSOR 3B8 : "You're right.  I did it.{W2}"
 										dc.w $3B8
 										dc.w $2D                ; 002D MOVE ENTITY 5 FF 3 1
 										dc.b 5
@@ -910,7 +910,7 @@ cs_52A3C:           dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 										dc.w $23                ; 0023 SET ENTITY FACING 83 2
 										dc.b $83
 										dc.b 2
-										dc.w 4                  ; 0004 SET TEXT INDEX 3BE : "Hey, it's noisy next door.{W2}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 3BE : "Hey, it's noisy next door.{W2}"
 										dc.w $3BE
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 83 : "Hey, it's noisy next door.{W2}"
 										dc.w $83

@@ -21,9 +21,9 @@ ms_map45_EntityEvents:
 
 sub_60038:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $81D               ; "Monks are dedicated to{N}studying the powers of the{N}mind.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $81E               ; "We train very hard.{W1}"
 										rts
 
@@ -34,7 +34,7 @@ sub_60038:
 
 sub_60042:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $81F               ; "Don't approach my back!{N}You will die!{W1}"
 										rts
 
@@ -45,7 +45,7 @@ sub_60042:
 
 sub_60048:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $820               ; "I'm always in control of my{N}mind.{W1}"
 										rts
 
@@ -56,9 +56,9 @@ sub_60048:
 
 sub_6004E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $821               ; "Where are you from?{N}I used to be a priest.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $822               ; "Do you need my help?{W1}"
 										jsr     j_ChurchActions
 										rts

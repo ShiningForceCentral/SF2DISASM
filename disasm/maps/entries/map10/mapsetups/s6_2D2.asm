@@ -6,15 +6,15 @@
 
 ms_map10_flag2D2_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $31F
+										trap    #CHECK_FLAG
+										dc.w $31F               ; set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
 										beq.s   loc_5709E
 										move.w  #$A,d0
 										jsr     MoveEntityOutOfMap
 loc_5709E:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2D4
+										trap    #CHECK_FLAG
+										dc.w $2D4               ; set after the scene where Skreech falls in Bedoe
 										beq.s   return_570AE
 										move.w  #$98,d0 
 										jsr     MoveEntityOutOfMap
@@ -24,7 +24,7 @@ return_570AE:
 
 	; End of function ms_map10_flag2D2_InitFunction
 
-cs_570B0:           dc.w 4                  ; 0004 SET TEXT INDEX 650 : "Who are you?{W1}"
+cs_570B0:           dc.w 4                  ; 0004 INIT TEXT CURSOR 650 : "Who are you?{W1}"
 										dc.w $650
 										dc.w $46                ; 0046  6 13
 										dc.w 6
@@ -550,7 +550,7 @@ cs_570B0:           dc.w 4                  ; 0004 SET TEXT INDEX 650 : "Who are
 										dc.b $33
 										dc.b 1
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_573EC:           dc.w 4                  ; 0004 SET TEXT INDEX 669 : "Yes, the greater devil was{N}very strong.{W1}"
+cs_573EC:           dc.w 4                  ; 0004 INIT TEXT CURSOR 669 : "Yes, the greater devil was{N}very strong.{W1}"
 										dc.w $669
 										dc.w $32                ; 0032 SET CAMERA DEST 1F 2F
 										dc.w $1F
@@ -675,7 +675,7 @@ cs_573EC:           dc.w 4                  ; 0004 SET TEXT INDEX 669 : "Yes, th
 										dc.b 1
 										dc.w $8080
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_574A6:           dc.w 4                  ; 0004 SET TEXT INDEX 673 : "{NAME;7}, {NAME;7}!{W1}"
+cs_574A6:           dc.w 4                  ; 0004 INIT TEXT CURSOR 673 : "{NAME;7}, {NAME;7}!{W1}"
 										dc.w $673
 										dc.w $32                ; 0032 SET CAMERA DEST 22 2F
 										dc.w $22
@@ -967,7 +967,7 @@ cs_574A6:           dc.w 4                  ; 0004 SET TEXT INDEX 673 : "{NAME;7
 										dc.w 0
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5766C:           dc.w 4                  ; 0004 SET TEXT INDEX 690 : "I had a dream last night.{N}I flew!{W2}"
+cs_5766C:           dc.w 4                  ; 0004 INIT TEXT CURSOR 690 : "I had a dream last night.{N}I flew!{W2}"
 										dc.w $690
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 99
 										dc.w $99
@@ -1155,7 +1155,7 @@ cs_5766C:           dc.w 4                  ; 0004 SET TEXT INDEX 690 : "I had a
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 99 : "See.  I told you!{N}I can fly...sort of.{W1}"
 										dc.w $99
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5779C:           dc.w 4                  ; 0004 SET TEXT INDEX 696 : "Ha, ha, ha!{W1}"
+cs_5779C:           dc.w 4                  ; 0004 INIT TEXT CURSOR 696 : "Ha, ha, ha!{W1}"
 										dc.w $696
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 99 6 A 3
 										dc.b $99
@@ -1452,7 +1452,7 @@ cs_5779C:           dc.w 4                  ; 0004 SET TEXT INDEX 696 : "Ha, ha,
 										dc.w 0
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5797A:           dc.w 4                  ; 0004 SET TEXT INDEX 647 : "You're a man of honor!{N}Why don't you go see Creed?{W2}"
+cs_5797A:           dc.w 4                  ; 0004 INIT TEXT CURSOR 647 : "You're a man of honor!{N}Why don't you go see Creed?{W2}"
 										dc.w $647
 										dc.w $52                ; 0052 RELATED TO TWO ENTITIES 7 93
 										dc.w 7

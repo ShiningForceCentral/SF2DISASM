@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle42\cs_afterbattle :
 ; Cutscene after battle 42
-abcs_battle42:      dc.w 4                  ; 0004 SET TEXT INDEX C22 : "Auuugh...{W1}"
+abcs_battle42:      dc.w 4                  ; 0004 INIT TEXT CURSOR C22 : "Auuugh...{W1}"
 										dc.w $C22
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 3B 8 D
 										dc.w $3B

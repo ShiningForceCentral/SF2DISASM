@@ -6,7 +6,7 @@
 
 ms_map3_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w 1                  ; Sarah joined
 										beq.s   loc_51390
 										lea     cs_513BA(pc), a0
@@ -14,7 +14,7 @@ ms_map3_InitFunction:
 										bra.s   loc_513A8
 loc_51390:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $25A               ; set after Astral's second basement line
 										beq.s   loc_513A8
 										lea     cs_513A0(pc), a0
@@ -30,7 +30,7 @@ cs_513A0:
 										dc.b $FF
 loc_513A8:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $25B               ; set after the messenger scene
 										beq.s   return_513B8
 										move.w  #$8E,d0

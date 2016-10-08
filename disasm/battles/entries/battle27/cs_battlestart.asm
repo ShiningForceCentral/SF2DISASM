@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle27\cs_battlestart :
 ; Start cutscene for battle 27
-bscs_battle27:      dc.w 4                  ; 0004 SET TEXT INDEX A62 : "Where did you come from?{N}What are you doing here?{W1}"
+bscs_battle27:      dc.w 4                  ; 0004 INIT TEXT CURSOR A62 : "Where did you come from?{N}What are you doing here?{W1}"
 										dc.w $A62
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 										dc.w $30

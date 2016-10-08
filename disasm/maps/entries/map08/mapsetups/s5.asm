@@ -21,8 +21,8 @@ ms_map8_Section5:   dc.b $F
 
 sub_562F2:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2DB
+										trap    #CHECK_FLAG
+										dc.w $2DB               ; set after you open the tree in Ribble with the wooden plank
 										beq.s   loc_562FC
 										moveq   #0,d6
 										bra.s   return_56312
@@ -30,7 +30,7 @@ loc_562FC:
 										
 										lea     cs_56314(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2DB               ; set after you open the tree in Ribble with the wooden plank
 										moveq   #$70,d0 
 										jsr     sub_4F542       ; remove wooden panel from items ?

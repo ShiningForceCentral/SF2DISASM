@@ -23,11 +23,11 @@ sub_6282A:
 										
 										lea     cs_6283E(pc), a0
 										trap    #6
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $F48               ; "Wait, wait!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $F49               ; "Sir Astral told me not to{N}let you go out today!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $F4A               ; "You have to be here.{W1}"
 										rts
 

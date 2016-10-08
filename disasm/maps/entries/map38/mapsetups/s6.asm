@@ -6,31 +6,31 @@
 
 ms_map38_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $399
 										beq.s   loc_5DD78
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $38F               ; set after the Petro death scene in Roft
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1A
 										bne.s   loc_5DD78
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $104
 										bne.s   loc_5DD78
 										lea     cs_5DD8E(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $104
 loc_5DD78:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $38E
 										bne.s   return_5DD8C
 										lea     cs_5DD9C(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $38E               ; set after the initial scene on entering Roft (where the guy thinks you're Galam)
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $102
 return_5DD8C:
 										
@@ -53,7 +53,7 @@ cs_5DD9C:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 80 
 										dc.b $E
 										dc.b $1A
 										dc.b 3
-										dc.w 4                  ; 0004 SET TEXT INDEX 854 : "Galam soldiers!  Run!{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 854 : "Galam soldiers!  Run!{W1}"
 										dc.w $854
 										dc.b $80                ; WAIT 1
 										dc.b 1
@@ -144,7 +144,7 @@ cs_5DE22:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 1A 
 										dc.b 1
 										dc.w $B                 ; 000B JUMP 5DDC2
 										dc.l word_5DDC2         
-cs_5DE2E:           dc.w 4                  ; 0004 SET TEXT INDEX 86A : "Sir Petro, don't leave me{N}alone!{W1}"
+cs_5DE2E:           dc.w 4                  ; 0004 INIT TEXT CURSOR 86A : "Sir Petro, don't leave me{N}alone!{W1}"
 										dc.w $86A
 										dc.w $1C                ; 001C STOP ENTITY ANIM 8E
 										dc.w $8E
@@ -180,7 +180,7 @@ cs_5DE2E:           dc.w 4                  ; 0004 SET TEXT INDEX 86A : "Sir Pet
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FB
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5DE76:           dc.w 4                  ; 0004 SET TEXT INDEX 879 : "What's wrong with {NAME;26}?{W1}"
+cs_5DE76:           dc.w 4                  ; 0004 INIT TEXT CURSOR 879 : "What's wrong with {NAME;26}?{W1}"
 										dc.w $879
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7

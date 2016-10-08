@@ -4,11 +4,11 @@
    include "sf2const.asm"
 
    include "sf2-01.asm"		; Technical Layer, Low Level Game Engine, Map/Exploration Engine, Entity Script Commands, Witch Functions
-   include "sf2-02.asm"		; Character Stats Engine, Item Effects Engine
+   include "sf2-02.asm"		; Character Stats Engine, Battle engine, Enemy AI Engine, Item Effects Engine
    include "sf2-03.asm"		; Menu Engine
    include "sf2-04.asm"		; BattleScene Engine
-   include "sf2-05.asm"		; Battle Engine, Special Sprites, Shop/Church/Blacksmith/Caravan engine
-   include "sf2-06.asm"		; Fonts, Menu Tiles, Text Decoding Functions, SEGA Logo, Game Staff, Conf/Debug modes, End Kiss Sequence, Script Huffman Trees, Scriptbanks
+   include "sf2-05.asm"		; Battle Engine, Special Sprites, Shop/Church/Blacksmith/Caravan engine, Battle Engine, Exploration Engine, Special Sprites
+   include "sf2-06.asm"		; Fonts, Menu Tiles, Text Decoding Functions, SEGA Logo, Game Staff, Conf/Debug modes, End Kiss Sequence, Text Huffman Trees, Textbanks
    include "sf2-07.asm"		; Entity ActScripts, CutScene Scripts, Battle CutScenes, Intro cutscene, End cutscene, Map Setups
    include "sf2-08.asm"		; Map Tiles, Map Palettes, Map Data
    include "sf2-09.asm"		; Entity Sprites

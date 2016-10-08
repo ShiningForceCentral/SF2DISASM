@@ -33,7 +33,7 @@ TitleScreen:
 										lea     ($2000).w,a1
 										move.w  #$1000,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										lea     TitleScreenLayoutA(pc), a0
 										lea     (byte_FFC000).l,a1
 										move.w  #$700,d7
@@ -51,7 +51,7 @@ TitleScreen:
 										lea     ($C000).l,a1
 										move.w  #$380,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										lea     TitleScreenLayoutB(pc), a0
 										lea     (byte_FFDCA8).l,a1
 										moveq   #$A,d7
@@ -94,7 +94,7 @@ loc_100104:
 										dbf     d6,loc_1000BC
 										dbf     d7,loc_1000B8
 										lea     plt_TitleScreen(pc), a0
-										lea     (FFD080_Palette1bis).l,a1
+										lea     (PALETTE_1_BIS).l,a1
 										move.w  #$80,d7 
 										jsr     (CopyBytes).w   
 										jsr     j_LoadTitleScreenFont
@@ -110,8 +110,8 @@ loc_100104:
 										move.w  #0,d6
 										jsr     (ClearHscrollStuff).w
 										jsr     (Set_FFDE94_bit3).w
-										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -119,8 +119,8 @@ loc_100104:
 										bsr.w   WaitForPlayer1InputStart
 										moveq   #$20,d0 
 										bsr.w   sub_100218
-										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -128,8 +128,8 @@ loc_100104:
 										bsr.w   sub_100218
 										moveq   #$32,d0 
 										bsr.w   WaitForPlayer1InputStart
-										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #4,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -140,7 +140,7 @@ loc_100104:
 										move.w  #$258,d0
 										bsr.w   TitleScreenEnd
 										jsr     (FadeOutToWhite).w
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										moveq   #$1F,d7
 loc_1001EC:
 										
@@ -162,7 +162,7 @@ loc_1001EC:
 WaitForPlayer1InputStart:
 										
 										jsr     (WaitForVInt).w 
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #7,((P1_INPUT-$1000000)).w
 										bne.w   loc_10029E
 										subq.w  #1,d0
 										bne.s   WaitForPlayer1InputStart
@@ -177,13 +177,13 @@ sub_100218:
 										
 										btst    #0,((byte_FFDEA0-$1000000)).w
 										bne.s   loc_10022C
-										addq.w  #1,(FFD500_MaybeRelatedToVscroll).l
-										subq.w  #1,(FFD502_MaybeRelatedToOtherVScrollStuff).l
+										addq.w  #1,(word_FFD500).l
+										subq.w  #1,(word_FFD502).l
 loc_10022C:
 										
 										jsr     (StoreVdpCommandsbis).w
 										jsr     (SetFFDE94b3andWait).w
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #7,((P1_INPUT-$1000000)).w
 										bne.w   loc_10029E
 										subq.w  #1,d0
 										bne.s   sub_100218
@@ -214,11 +214,11 @@ loc_100260:
 										lea     ($C000).l,a1
 										move.w  #$380,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 										movem.w (sp)+,d0
 										jsr     (WaitForVInt).w 
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
 										bne.w   loc_10029E
 										subq.w  #1,d0
 										bne.s   TitleScreenEnd

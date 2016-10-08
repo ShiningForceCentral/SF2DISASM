@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle18\cs_afterbattle :
 ; Cutscene after battle 18
-abcs_battle18:      dc.w 4                  ; 0004 SET TEXT INDEX 9E0 : "{LEADER}, you're much{N}stronger than I thought.{W1}"
+abcs_battle18:      dc.w 4                  ; 0004 INIT TEXT CURSOR 9E0 : "{LEADER}, you're much{N}stronger than I thought.{W1}"
 										dc.w $9E0
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN C 7 5
 										dc.w $C

@@ -8,20 +8,20 @@ ms_map43_InitFunction:
 										
 										lea     cs_540C0(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $264               ; set after event at Hawel's house
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $28A               ; set after event at Hawel's house
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG
 										dc.w $48                ; Kazin is a follower
-										move.b  #$2B,((RAM_EgressMapIdx-$1000000)).w 
+										move.b  #$2B,((EGRESS_MAP_INDEX-$1000000)).w 
 return_540BE:
 										
 										rts
 
 	; End of function ms_map43_InitFunction
 
-cs_540C0:           dc.w 4                  ; 0004 SET TEXT INDEX 32B : "This is Hawel's house.{W1}"
+cs_540C0:           dc.w 4                  ; 0004 INIT TEXT CURSOR 32B : "This is Hawel's house.{W1}"
 										dc.w $32B
 										dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 										dc.b 0

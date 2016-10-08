@@ -8,12 +8,12 @@ ms_map77_ZoneEvents:dc.w $FD00
 
 sub_50A6E:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $219               ; Battle 37 completed
 										bne.s   return_50A80
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $1B5               ; Battle 37 unlocked
-										move.l  #$100FF,((RAM_MapEventType-$1000000)).w
+										move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_50A80:
 										
 										rts

@@ -6,14 +6,14 @@
 
 ms_map30_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2F9
 										beq.s   loc_5A2FE
 										lea     cs_5A30C(pc), a0
 										trap    #6
 loc_5A2FE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2F8
 										bne.s   return_5A30A
 										lea     cs_5A31E(pc), a0
@@ -47,7 +47,7 @@ cs_5A31E:           dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 82
 										dc.w $1C                ; 001C STOP ENTITY ANIM 82
 										dc.w $82
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF : "Where is the sick dwarf?{W1}"
+cs_5A33A:           dc.w 4                  ; 0004 INIT TEXT CURSOR 6AF : "Where is the sick dwarf?{W1}"
 										dc.w $6AF
 										dc.w $32                ; 0032 SET CAMERA DEST 0 7
 										dc.w 0
@@ -340,7 +340,7 @@ cs_5A33A:           dc.w 4                  ; 0004 SET TEXT INDEX 6AF : "Where i
 										dc.b 3
 										dc.w $8080
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5A4FE:           dc.w 4                  ; 0004 SET TEXT INDEX 6C2 : "We use it to destroy large{N}rocks.{W1}"
+cs_5A4FE:           dc.w 4                  ; 0004 INIT TEXT CURSOR 6C2 : "We use it to destroy large{N}rocks.{W1}"
 										dc.w $6C2
 										dc.w $23                ; 0023 SET ENTITY FACING 81 2
 										dc.b $81

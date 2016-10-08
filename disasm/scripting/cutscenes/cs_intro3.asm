@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION scripting\cutscenes\cs_intro3 :
 ; Intro cutscene 3
-IntroCutscene3:     dc.w 4                  ; 0004 SET TEXT INDEX 1077 : "Well?{D2}"
+IntroCutscene3:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1077 : "Well?{D2}"
 										dc.w $1077
 										dc.w $48                ; 0048 LOAD MAP 2A 15 1
 										dc.w $2A

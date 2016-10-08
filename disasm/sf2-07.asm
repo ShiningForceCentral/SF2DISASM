@@ -298,11 +298,11 @@ j_ExecuteEntityEvent:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_RunMapSetupSection3Function:
+j_RunMapSetupZoneEvent:
 										
-										jmp     RunMapSetupSection3Function(pc)
+										jmp     RunMapSetupZoneEvent(pc)
 
-	; End of function j_RunMapSetupSection3Function
+	; End of function j_RunMapSetupZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -457,7 +457,7 @@ j_ExecuteFlashScreenScript:
 
 j_GetEntityPortaitAndSpeechSound:
 										
-										jmp     GetEntityPortraitAndSpeechSound(pc)
+										jmp     GetEntityPortraitAndSpeechSfx(pc)
 
 	; End of function j_GetEntityPortaitAndSpeechSound
 
@@ -486,7 +486,7 @@ InitMapEntities:
 sub_440D4:
 										
 										movem.l d0-a5,-(sp)
-										lea     GetEntityPortraitAndSpeechSound(pc), a0
+										lea     GetEntityPortraitAndSpeechSfx(pc), a0
 										lsl.w   #2,d0
 										movea.l (a0,d0.w),a0
 
@@ -589,7 +589,7 @@ sub_441AA:
 										mulu.w  #$180,d1
 										mulu.w  #$180,d2
 										lea     ((FOLLOWERS_LIST-$1000000)).w,a0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a1
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a1
 loc_441D2:
 										
 										clr.w   d0
@@ -604,14 +604,14 @@ loc_441D2:
 										bra.s   loc_441D2
 loc_441F0:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $40                ; Raft is unlocked (0x05264)
 										beq.w   loc_44262
 										move.b  ((CURRENT_MAP-$1000000)).w,d0
-										cmp.b   ((RAM_Raft_MapIdx-$1000000)).w,d0
+										cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0
 										bne.s   loc_44248
-										move.b  ((RAM_Raft_X-$1000000)).w,d1
-										move.b  ((RAM_Raft_Y-$1000000)).w,d2
+										move.b  ((RAFT_X-$1000000)).w,d1
+										move.b  ((RAFT_Y-$1000000)).w,d2
 										move.w  #$1F,d0
 										andi.w  #$7F,d1 
 										muls.w  #$180,d1
@@ -688,7 +688,7 @@ sub_44298:
 										lea     pt_eas_Followers(pc), a6
 										lea     ((byte_FFAFB0-$1000000)).w,a5
 										move.b  #1,(a5)
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 										beq.s   loc_442D2
 										bsr.s   IsOverworldMap
@@ -769,7 +769,7 @@ sub_443B2:
 										movem.l a6,-(sp)
 										lea     Followers(pc), a4
 										lea     pt_eas_Followers(pc), a6
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 										beq.s   loc_443D2
 										bsr.w   IsOverworldMap
@@ -810,14 +810,14 @@ loc_44404:
 										bra.w   loc_4443C
 loc_44420:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $40                ; Raft is unlocked (0x05264)
 										beq.w   return_4446A
 										move.b  ((CURRENT_MAP-$1000000)).w,d0
-										cmp.b   ((RAM_Raft_MapIdx-$1000000)).w,d0
+										cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0
 										bne.w   return_4446A
-										move.b  ((RAM_Raft_X-$1000000)).w,d1
-										move.b  ((RAM_Raft_Y-$1000000)).w,d2
+										move.b  ((RAFT_X-$1000000)).w,d1
+										move.b  ((RAFT_Y-$1000000)).w,d2
 loc_4443C:
 										
 										move.w  #$1F,d0
@@ -914,7 +914,7 @@ loc_4450A:
 										adda.w  d6,a1
 										move.w  #$120,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 										movem.l (sp)+,a0-a1
 										movem.l (sp)+,d0-d7
@@ -1017,7 +1017,7 @@ DeclareNewEntity:
 										
 										move.l  a0,-(sp)
 										move.w  d0,-(sp)
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										lsl.w   #5,d0
 										adda.w  d0,a0
 										move.w  (sp)+,d0
@@ -1079,7 +1079,7 @@ loc_4463C:
 ClearEntities:
 										
 										movem.l d7-a0,-(sp)
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										move.w  #$30,d7 
 loc_44666:
 										
@@ -1317,7 +1317,7 @@ loc_448BC:
 ; In: D0 = char idx
 ; Out: D4 = sprite idx
 ; 
-; wtf I need to figure out that implementation, many strange exceptions
+; HARDCODED values
 
 GetCharacterSpriteIdx:
 										
@@ -1339,7 +1339,7 @@ loc_449F0:
 										
 										cmpi.b  #$B,d0          ; Rhode !
 										bne.s   loc_44A04
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $B                 ; Rohde joined
 										bne.s   loc_44A04
 										move.w  #$AA,d4 
@@ -1351,7 +1351,7 @@ loc_44A04:
 										move.b  AllySprites(pc,d4.w),d4
 										jsr     j_GetClass      
 										cmpi.b  #$C,d1          ; HERO
-										beq.w   loc_44A5A
+										beq.w   loc_44A5A       ; HARDCODED class->sprite ?
 										cmpi.b  #0,d1
 										bne.s   loc_44A28
 										subq.w  #1,d4           ; if SDMN, d4 = 0 ?
@@ -1769,7 +1769,7 @@ loc_44DD0:
 GetEntityRAMAddress:
 										
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 																						; start of entity information
 										adda.w  d0,a0
 										rts
@@ -1883,7 +1883,7 @@ sub_45268:
 										clr.w   d0
 										bsr.w   MakeEntityIdle
 										lea     byte_45284(pc), a0
-										trap    #6
+										trap    #MAPSCRIPT
 										lea     word_45316(pc), a1
 										bsr.s   ApplyActscriptToFollowers
 										bsr.s   WaitForFollowersStopped
@@ -1901,7 +1901,7 @@ sub_45322:
 										clr.w   d0
 										bsr.w   MakeEntityIdle
 										lea     word_45348(pc), a0
-										trap    #6
+										trap    #MAPSCRIPT
 										lea     word_45368(pc), a1
 										bsr.w   ApplyActscriptToFollowers
 										bsr.w   WaitForFollowersStopped
@@ -1923,7 +1923,7 @@ sub_453C6:
 										bsr.w   MakeEntityIdle
 										clr.b   ((byte_FFAFB0-$1000000)).w
 										lea     byte_453F2(pc), a0
-										trap    #6
+										trap    #MAPSCRIPT
 										lea     word_45434(pc), a1
 										bsr.w   ApplyActscriptToHeroAndFollowers
 										bsr.w   WaitForHeroAndFollowersStopped
@@ -1945,7 +1945,7 @@ sub_45440:
 										bsr.w   MakeEntityIdle
 										move.b  #1,((byte_FFAFB0-$1000000)).w
 										lea     byte_45470(pc), a0
-										trap    #6
+										trap    #MAPSCRIPT
 										lea     word_45488(pc), a1
 										bsr.w   ApplyActscriptToHeroAndFollowers
 										bsr.w   WaitForHeroAndFollowersStopped
@@ -1962,7 +1962,7 @@ sub_45440:
 sub_454AC:
 										
 										movem.l d0-d1/a0,-(sp)
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										move.w  $C(a0),d0
 										move.w  $E(a0),d1
 										clr.w   d3
@@ -1992,16 +1992,16 @@ loc_454DC:
 sub_454E4:
 										
 										movem.l d0-d1/a0,-(sp)
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										move.w  $C(a0),d0
 										move.w  $E(a0),d1
 										ext.l   d0
 										ext.l   d1
 										divs.w  #$180,d0
 										divs.w  #$180,d1
-										move.b  ((CURRENT_MAP-$1000000)).w,((RAM_Raft_MapIdx-$1000000)).w
-										move.b  d0,((RAM_Raft_X-$1000000)).w
-										move.b  d1,((RAM_Raft_Y-$1000000)).w
+										move.b  ((CURRENT_MAP-$1000000)).w,((RAFT_MAP_INDEX-$1000000)).w
+										move.b  d0,((RAFT_X-$1000000)).w
+										move.b  d1,((RAFT_Y-$1000000)).w
 										movem.l (sp)+,d0-d1/a0
 										rts
 
@@ -2012,13 +2012,13 @@ sub_454E4:
 
 sub_45514:
 										
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										clr.w   d0
 										bsr.w   MakeEntityIdle
 										moveq   #1,d0
 										bsr.w   MakeEntityIdle
 										lea     byte_45546(pc), a0
-										trap    #6
+										trap    #MAPSCRIPT
 										lea     eas_ShrinkIn(pc), a1
 										bsr.w   ApplyActscriptToFollowers
 										bsr.w   WaitForFollowersStopped
@@ -2040,7 +2040,7 @@ sub_455AC:
 										clr.w   d0
 										bsr.w   MakeEntityIdle
 										lea     byte_455D2(pc), a0
-										trap    #6
+										trap    #MAPSCRIPT
 										lea     eas_GrowOut(pc), a1
 										bsr.w   ApplyActscriptToFollowers
 										bsr.w   WaitForFollowersStopped
@@ -2068,7 +2068,7 @@ sub_45634:
 ; Out: D1 = portrait idx
 ;      D2 = speech sound idx
 
-GetEntityPortraitAndSpeechSound:
+GetEntityPortraitAndSpeechSfx:
 										
 										movem.l d0/a0/a5,-(sp)
 										andi.w  #$FF,d0
@@ -2097,7 +2097,7 @@ loc_45674:
 										movem.l (sp)+,d0/a0/a5
 										rts
 
-	; End of function GetEntityPortraitAndSpeechSound
+	; End of function GetEntityPortraitAndSpeechSfx
 
 SpriteToPortraitnBlip:
 										incbin "data/spritedialogdefs.bin"
@@ -2816,7 +2816,7 @@ loc_45E36:
 
 csc32_setCameraDestInTiles:
 										
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										nop
 										move.w  (a6)+,d2
 										move.w  (a6)+,d3
@@ -2914,8 +2914,8 @@ csc36_:
 
 csc37_loadMapAndFadeIn:
 										
-										move.b  #2,((FADING_SETTING-$1000000)).w
-										clr.w   (unk_FFDFAA).l  
+										move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
+										clr.w   (byte_FFDFAA).l 
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -2927,7 +2927,7 @@ csc37_loadMapAndFadeIn:
 
 csc48_loadMap:
 										
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										nop
 										move.w  (a6),d1
 										jsr     (LoadMapTilesets).w
@@ -2936,7 +2936,7 @@ loc_465C4:
 										jsr     (WaitForVInt).w 
 										tst.b   ((FADING_SETTING-$1000000)).w
 										bne.s   loc_465C4
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l 0
 										clr.l   d0
@@ -2951,7 +2951,7 @@ loc_465C4:
 										jsr     (LoadMap).w     
 										movea.l (sp)+,a6
 										jsr     (EnableDisplayAndInterrupts).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l 0
 										jsr     (WaitForVInt).w 
@@ -3012,7 +3012,7 @@ csc3D_tintMap:
 										
 										moveq   #1,d0
 										moveq   #6,d1
-										moveq   #9,d2
+										moveq   #HALF_OUT_TO_BLACK,d2
 										jsr     LaunchFading(pc)
 										nop
 										rts
@@ -3022,15 +3022,16 @@ csc3D_tintMap:
 
 ; =============== S U B R O U T I N E =======================================
 
-csc3E_:
+csc3E_FlickerOnce:
+										
 										moveq   #1,d0
 										moveq   #6,d1
-										moveq   #$A,d2
+										moveq   #FLICKER_ONCE,d2
 										jsr     LaunchFading(pc)
 										nop
 										rts
 
-	; End of function csc3E_
+	; End of function csc3E_FlickerOnce
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3039,7 +3040,7 @@ csc3F_fadeMapOutToWhite:
 										
 										moveq   #1,d0
 										moveq   #1,d1
-										moveq   #4,d2
+										moveq   #OUT_TO_WHITE,d2
 										jsr     LaunchFading(pc)
 										nop
 										rts
@@ -3053,7 +3054,7 @@ csc40_fadeMapInFromWhite:
 										
 										moveq   #1,d0
 										moveq   #1,d1
-										moveq   #3,d2
+										moveq   #IN_FROM_WHITE,d2
 										jsr     LaunchFading(pc)
 										nop
 										rts
@@ -3069,7 +3070,7 @@ csc41_flashScreenWhite:
 										lsr.w   #3,d7
 										moveq   #$F,d0
 										moveq   #1,d1
-										moveq   #$B,d2
+										moveq   #FLASH_QUICKLY_2,d2
 loc_4667A:
 										
 										jsr     LaunchFading(pc)
@@ -3084,7 +3085,7 @@ loc_4667A:
 ; =============== S U B R O U T I N E =======================================
 
 csc42_:
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l 0
 										jsr     (DisableDisplayAndVInt).w
@@ -3095,7 +3096,7 @@ csc42_:
 										jsr     InitMapEntities
 										jsr     (LoadMapEntitySprites).w
 										jsr     (EnableDisplayAndInterrupts).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l 0
 										rts
@@ -3119,7 +3120,7 @@ csc43_:
 ; =============== S U B R O U T I N E =======================================
 
 csc44_:
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l 0
 										moveq   #0,d0
@@ -3134,7 +3135,7 @@ csc44_:
 										move.b  ENTITYDEF_OFFSET_FACING(a5),d3
 										movea.l (a6)+,a0
 										jsr     InitMapEntities
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l 0
 										rts
@@ -3157,9 +3158,9 @@ csc45_:
 ; =============== S U B R O U T I N E =======================================
 
 csc46_:
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										nop
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l 0
 										clr.l   d0
@@ -3174,7 +3175,7 @@ csc46_:
 										jsr     (LoadMap).w     
 										movea.l (sp)+,a6
 										jsr     (EnableDisplayAndInterrupts).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l 0
 										jsr     (WaitForVInt).w 
@@ -3190,7 +3191,7 @@ csc47_:
 										move.w  (a6)+,d1
 										mulu.w  #$180,d0
 										mulu.w  #$180,d1
-										jsr     (sub_3E40).w
+										jsr     (sub_3E40).w    
 										rts
 
 	; End of function csc47_
@@ -3199,7 +3200,7 @@ csc47_:
 ; =============== S U B R O U T I N E =======================================
 
 csc49_:
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l 0
 										jsr     (DisableDisplayAndVInt).w
@@ -3210,7 +3211,7 @@ csc49_:
 										jsr     j_InitMapEntities
 										jsr     (LoadMapEntitySprites).w
 										jsr     (EnableDisplayAndInterrupts).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l 0
 										rts
@@ -3224,7 +3225,7 @@ csc4A_fadeInFromBlackHalf:
 										
 										moveq   #$F,d0
 										moveq   #6,d1
-										moveq   #$E,d2
+										moveq   #HALF_IN_FROM_BLACK,d2
 										jsr     LaunchFading(pc)
 										nop
 										rts
@@ -3238,7 +3239,7 @@ csc4B_fadeOutToBlackHalf:
 										
 										moveq   #$F,d0
 										moveq   #6,d1
-										moveq   #$F,d2
+										moveq   #OUT_TO_BLACK_2,d2
 										jsr     LaunchFading(pc)
 										nop
 										rts
@@ -3252,7 +3253,7 @@ LaunchFading:
 										
 										move.b  d3,-(sp)
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,d3
-										clr.w   (unk_FFDFAA).l  
+										clr.w   (byte_FFDFAA).l 
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  d0,((FADING_PALETTE_FLAGS-$1000000)).w
 										move.b  d1,((FADING_COUNTER_MAX-$1000000)).w
@@ -3756,7 +3757,7 @@ loc_46AAC:
 loc_46AB6:
 										
 										jsr     (WaitForCameraToCatchUp).w
-										bsr.w   GetEntityPortraitAndSpeechSound
+										bsr.w   GetEntityPortraitAndSpeechSfx
 										cmpi.w  #$FFFF,d1
 										beq.s   return_46AD0
 										move.w  d1,d0
@@ -4018,7 +4019,7 @@ loc_46C4A:
 										move.b  (a5,d0.w),d0
 loc_46C52:
 										
-										move.b  d0,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										nop
 										rts
 
@@ -4368,14 +4369,14 @@ csc50_setEntitySize:
 ; =============== S U B R O U T I N E =======================================
 
 csc51_:
-										move.w  #$FFFF,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  #$FFFF,((TEXT_NAME_INDEX_1-$1000000)).w
 										nop
 										move.w  (a6)+,d0
 										jsr     j_IsInBattleParty
 										bne.w   return_46F56
 										move.w  d0,d6
 										jsr     j_UpdateForce
-										lea     ((RAM_Force_CurrentList-$1000000)).w,a0
+										lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
 										nop
 										move.w  ((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w,d7
 										nop
@@ -4391,7 +4392,7 @@ loc_46F2C:
 loc_46F40:
 										
 										move.b  (a0),d0
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										nop
 										jsr     j_LeaveBattleParty
 										move.b  d6,d0
@@ -4571,7 +4572,7 @@ loc_4705A:
 										move.b  (a5,d0.w),d0
 										move.l  d0,-(sp)
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a5
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a5
 										adda.w  d0,a5
 										move.l  (sp)+,d0
 										rts
@@ -4630,7 +4631,7 @@ sub_4709E:
 										adda.w  d1,a1
 										move.w  #$120,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,d0-d1/a0-a1
 										rts
@@ -4709,10 +4710,10 @@ ExecuteMapScript:
 										clr.b   ((AVOID_CUTSCENE_DIALOGS-$1000000)).w
 loc_47140:
 										
-										btst    #7,((RAM_Input_Player2_StateA-$1000000)).w
+										btst    #INPUT_A_START_BIT,((P2_INPUT-$1000000)).w
 																						; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
 										beq.s   loc_47156
-										tst.b   (RAM_DebugModeActivated).l
+										tst.b   (DEBUG_MODE_ACTIVATED).l
 										beq.s   loc_47156
 										move.b  #$FF,((AVOID_CUTSCENE_DIALOGS-$1000000)).w
 loc_47156:
@@ -4801,7 +4802,7 @@ rjt_cutsceneScriptCommands:
 										dc.w csc3B_slowFadeInFromBlack+$10000-rjt_cutsceneScriptCommands
 										dc.w csc3C_slowFadeOutToBlack+$10000-rjt_cutsceneScriptCommands
 										dc.w csc3D_tintMap+$10000-rjt_cutsceneScriptCommands
-										dc.w csc3E_+$10000-rjt_cutsceneScriptCommands
+										dc.w csc3E_FlickerOnce+$10000-rjt_cutsceneScriptCommands
 										dc.w csc3F_fadeMapOutToWhite+$10000-rjt_cutsceneScriptCommands
 										dc.w csc40_fadeMapInFromWhite+$10000-rjt_cutsceneScriptCommands
 										dc.w csc41_flashScreenWhite+$10000-rjt_cutsceneScriptCommands
@@ -4864,7 +4865,7 @@ csc00_displaySingleTextbox:
 										bsr.w   csc1D_showPortrait
 										movea.l (sp)+,a6
 										move.w  (a6),d0
-										bsr.w   GetEntityPortraitAndSpeechSound
+										bsr.w   GetEntityPortraitAndSpeechSfx
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										bra.s   loc_47270
 loc_4726A:
@@ -4879,7 +4880,7 @@ loc_47270:
 										addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
 																						; increment script number (move forward in script bank)
 										jsr     j_HidePortraitWindow
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										moveq   #$A,d0
 										jsr     (Sleep).w       
@@ -4904,7 +4905,7 @@ csc01_displaySingleTextboxWithVars:
 										bsr.w   csc1D_showPortrait
 										movea.l (sp)+,a6
 										move.w  (a6),d0
-										bsr.w   GetEntityPortraitAndSpeechSound
+										bsr.w   GetEntityPortraitAndSpeechSfx
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										bra.s   loc_472BE
 loc_472B8:
@@ -4913,14 +4914,14 @@ loc_472B8:
 loc_472BE:
 										
 										adda.w  #2,a6
-										move.w  (a6)+,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  (a6)+,((RAM_Dialogue_NameIdx2-$1000000)).w
+										move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
 										move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
 										jsr     (WaitForCameraToCatchUp).w
 										jsr     (DisplayText).l 
 										addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
 										jsr     j_HidePortraitWindow
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										moveq   #$A,d0
 										jsr     (Sleep).w       
@@ -4941,7 +4942,7 @@ csc02_displayTextbox:
 										bsr.w   csc1D_showPortrait
 										movea.l (sp)+,a6
 										move.w  (a6),d0
-										bsr.w   GetEntityPortraitAndSpeechSound
+										bsr.w   GetEntityPortraitAndSpeechSfx
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										bra.s   loc_47314
 loc_4730E:
@@ -4975,7 +4976,7 @@ csc03_displayTextboxWithVars:
 										bsr.w   csc1D_showPortrait
 										movea.l (sp)+,a6
 										move.w  (a6),d0
-										bsr.w   GetEntityPortraitAndSpeechSound
+										bsr.w   GetEntityPortraitAndSpeechSfx
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										bra.s   loc_47352
 loc_4734C:
@@ -4984,8 +4985,8 @@ loc_4734C:
 loc_47352:
 										
 										adda.w  #2,a6
-										move.w  (a6)+,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  (a6)+,((RAM_Dialogue_NameIdx2-$1000000)).w
+										move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
 										move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
 										jsr     (WaitForCameraToCatchUp).w
 										jsr     (DisplayText).l 
@@ -5014,7 +5015,7 @@ csc04_setTextIndex:
 csc05_playSound:
 										
 										move.w  (a6)+,d0
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										rts
 
@@ -5034,7 +5035,7 @@ csc06_doNothing:
 
 csc07_executeMapSystemEvent:
 										
-										lea     ((RAM_MapEventType-$1000000)).w,a0
+										lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
 										move.w  #1,(a0)+
 										move.b  #0,(a0)+
 										move.b  (a6)+,(a0)+
@@ -5057,36 +5058,36 @@ csc08_joinForce:
 										move.w  (a6)+,d0
 										bclr    #$F,d0
 										bne.s   loc_473B0
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_JOIN         ; join music
-										bra.s   loc_473B4
+										bra.s   loc_473B4       
 loc_473B0:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_SAD_JOIN     ; sad join music
 loc_473B4:
 										
-										cmpi.w  #$80,d0 
+										cmpi.w  #$80,d0 ; HARDCODED use case
 										bne.s   loc_473D4
 										move.w  #1,d0           ; make sarah and chester join at the same time
 										jsr     j_JoinForce
 										move.w  #2,d0
 										jsr     j_JoinForce
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1BF               ; "{NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force."
 										bra.s   loc_473EC
 loc_473D4:
 										
 										jsr     j_JoinForce
 										jsr     j_GetClass      
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  d1,((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $1BE               ; "{NAME} the {CLASS} {N}has joined the force."
 loc_473EC:
 										
 										jsr     j_FadeOut_WaitForP2Input
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										moveq   #$A,d0
 										jsr     (Sleep).w       
@@ -5102,7 +5103,7 @@ loc_473EC:
 csc09_hideTextBoxAndPortrait:
 										
 										jsr     j_HidePortraitWindow
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -5347,7 +5348,7 @@ loc_47514:
 
 ; =============== S U B R O U T I N E =======================================
 
-RunMapSetupSection3Function:
+RunMapSetupZoneEvent:
 										
 										movem.l d0-a1,-(sp)
 										bsr.w   GetCurrentMapSetup
@@ -5384,7 +5385,7 @@ loc_4756A:
 										
 										jsr     (a0)
 										jsr     j_HidePortraitWindow
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 loc_47576:
 										
@@ -5394,7 +5395,7 @@ loc_47576:
 										movem.l (sp)+,d0-a1
 										rts
 
-	; End of function RunMapSetupSection3Function
+	; End of function RunMapSetupZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5450,7 +5451,7 @@ loc_475FE:
 										
 										jsr     (a0)
 										jsr     j_HidePortraitWindow
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 loc_4760A:
 										
@@ -5497,7 +5498,7 @@ loc_4765A:
 										bra.s   loc_47638
 loc_4765E:
 										
-										bsr.w   GetEntityPortraitAndSpeechSound
+										bsr.w   GetEntityPortraitAndSpeechSfx
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										blt.s   loc_47670
@@ -5525,8 +5526,8 @@ loc_47680:
 										jsr     (sub_6052).w    
 loc_476A8:
 										
-										trap    #TRAP_VINTFUNCTIONS
-										dc.w TRAP_CLEARFLAG
+										trap    #VINT_FUNCTIONS
+										dc.w CLEAR_FLAG
 										dc.l VInt_UpdateEntities
 										jsr     (a0)
 										movem.w (sp)+,d0-d2/d6
@@ -5538,9 +5539,9 @@ loc_476A8:
 loc_476C4:
 										
 										jsr     j_HidePortraitWindow
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l VInt_UpdateEntities
 loc_476D6:
@@ -5555,7 +5556,7 @@ loc_476D6:
 
 sub_476DC:
 										
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l VInt_UpdateEntities
 										bra.w   ExecuteMapScript
@@ -5642,7 +5643,7 @@ loc_4774C:
 loc_4776E:
 										
 										jsr     j_HidePortraitWindow
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										moveq   #$FFFFFFFF,d7
 										rts
@@ -5825,10 +5826,10 @@ loc_47896:
 										move.w  #$190,d1
 										add.w   d0,d1
 										jsr     j_SetFlag
-										move.l  #$100FF,((RAM_MapEventType-$1000000)).w
+										move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 										move.w  #$7530,((word_FFB196-$1000000)).w
 										jsr     (WaitForCameraToCatchUp).w
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BOOST          ; boost effect ?
 										bsr.w   ExecuteFlashScreenScript
 loc_478C0:
@@ -5867,32 +5868,32 @@ loc_478CE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4790E:
+DisplayHeadquartersQuote:
 										
 										jsr     sub_100AC
 										jsr     j_GetCurrentHP
 										tst.w   d1
 										bne.s   loc_47924
 										move.w  #1,d0
-										bra.s   loc_4793C
+										bra.s   loc_4793C       
 loc_47924:
 										
 										move.w  d0,d1
-										addi.w  #$20,d1 
+										addi.w  #$20,d1 ; "in active party" flags
 										jsr     j_CheckFlag
-										beq.s   loc_47938
-										addi.w  #$DC3,d0
-										bra.s   loc_4793C
+										beq.s   loc_47938       
+										addi.w  #$DC3,d0        ; 0DC3={W1}
+										bra.s   loc_4793C       ; start of headquarters quotes
 loc_47938:
 										
-										addi.w  #$DE1,d0
+										addi.w  #$DE1,d0        ; 0DE1={W1}
 loc_4793C:
 										
-										jsr     (DisplayText).w 
+										jsr     (DisplayText).w ; alternate quotes ?
 										jsr     sub_100B0
 										rts
 
-	; End of function sub_4790E
+	; End of function DisplayHeadquartersQuote
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6170,14 +6171,15 @@ loc_47D54:
 										clr.w   d0
 										move.b  ((CURRENT_BATTLE-$1000000)).w,d0
 										move.b  byte_47D6A(pc,d0.w),d0
-										jsr     j_JoinForce
+																						; unused feature to make an ally join force after battle ?
+										jsr     j_JoinForce     ; unused probably because cutscenes can already trigger force joins
 										movem.l (sp)+,d0-d1
 										rts
 
 ; END OF FUNCTION CHUNK FOR ExecuteAfterBattleCutscene
 
 byte_47D6A:         dc.b 0
-										dc.b   0
+										dc.b   0                ; unused list of after-battle joins ?
 										dc.b   0
 										dc.b   0
 										dc.b   0
@@ -6357,7 +6359,7 @@ loc_47EC2:
 ExecuteFlashScreenScript:
 										
 										lea     cs_FlashScreen(pc), a0
-										trap    #6
+										trap    #MAPSCRIPT
 										rts
 
 	; End of function ExecuteFlashScreenScript
@@ -6431,7 +6433,7 @@ plt_2toFigureOut:   dc.w 0
 
 sub_493EC:
 										
-										move.w  #$18A,d0
+										move.w  #$18A,d0        ; 018A={NAME} found{N}the {ITEM}.{D1}
 										jsr     (DisplayText).l 
 										moveq   #$78,d0 
 										rts
@@ -6610,8 +6612,8 @@ sub_4F48A:
 										move.w  d0,d4
 										move.w  d1,d5
 										jsr     j_UpdateForce
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d3
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d3
 										subq.w  #1,d3
 loc_4F4A2:
 										
@@ -6625,25 +6627,25 @@ loc_4F4A2:
 										moveq   #1,d0
 										tst.w   d5
 										beq.w   loc_4F53C
-										move.w  d4,(RAM_Dialogue_NameIdx1).l
-										trap    #TRAP_TEXTBOX
+										move.w  d4,(TEXT_NAME_INDEX_1).l
+										trap    #TEXTBOX
 										dc.w $D6                ; "Found the {ITEM}, but{N}can't carry it.{N}You must discard something.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										movem.w d4,-(sp)
 										bsr.w   sub_4F570
 										movem.w (sp)+,d1
-										move.w  d0,(RAM_Dialogue_NameIdx1).l
-										move.w  d2,(RAM_Dialogue_NameIdx2).l
+										move.w  d0,(TEXT_NAME_INDEX_1).l
+										move.w  d2,(TEXT_NAME_INDEX_2).l
 										jsr     j_AddItem
-										move.w  d1,(RAM_Dialogue_NameIdx3).l
-										trap    #TRAP_SOUNDCOM
+										move.w  d1,(TEXT_NAME_INDEX_3).l
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D7                ; "{NAME} discarded{N}the {ITEM} and{N}picked up the {ITEM}."
 										jsr     j_FadeOut_WaitForP2Input
 										jsr     (WaitForPlayerInput).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										moveq   #2,d0
 										bra.w   loc_4F53C
@@ -6651,15 +6653,15 @@ loc_4F510:
 										
 										move.w  d4,d1
 										jsr     j_AddItem
-										move.w  d0,(RAM_Dialogue_NameIdx1).l
-										move.w  d1,(RAM_Dialogue_NameIdx2).l
-										trap    #TRAP_SOUNDCOM
+										move.w  d0,(TEXT_NAME_INDEX_1).l
+										move.w  d1,(TEXT_NAME_INDEX_2).l
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D5                ; "{NAME} received the{N}{ITEM}."
 										jsr     j_FadeOut_WaitForP2Input
 										jsr     (WaitForPlayerInput).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d0
 loc_4F53C:
@@ -6699,10 +6701,10 @@ sub_4F570:
 										movem.l d7-a1,-(sp)
 										link    a6,#-$C
 										jsr     j_UpdateForce
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										lea     (byte_FFB0AE).l,a1
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,(word_FFB12E).l
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,(word_FFB12E).l
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #1,d7
 loc_4F596:
 										
@@ -6727,17 +6729,17 @@ loc_4F5B6:
 										andi.b  #$10,d1
 										cmpi.b  #0,d1
 										beq.s   loc_4F5F0
-										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),(TEXT_NAME_INDEX_1).l
+										trap    #TEXTBOX
 										dc.w $25                ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
 										bra.w   loc_4F6CA
 loc_4F5F0:
 										
-										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),(TEXT_NAME_INDEX_1).l
+										trap    #TEXTBOX
 										dc.w $2C                ; "The {ITEM} will be{N}discarded.  Are you sure?"
 										jsr     j_YesNoChoiceBox
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										cmpi.w  #0,d0
 										beq.w   loc_4F610
@@ -6757,10 +6759,10 @@ loc_4F610:
 										move.w  -4(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_4F69C
-										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),(TEXT_NAME_INDEX_1).l
+										trap    #TEXTBOX
 										dc.w $1E                ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_4F6CA
 loc_4F65C:
@@ -6776,8 +6778,8 @@ loc_4F65C:
 										move.w  -4(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_4F69C
-										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),(TEXT_NAME_INDEX_1).l
+										trap    #TEXTBOX
 										dc.w $1E                ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
 										bra.w   loc_4F6CA
 loc_4F69C:
@@ -6785,7 +6787,7 @@ loc_4F69C:
 										move.w  -2(a6),d0
 										move.w  -6(a6),d1
 										jsr     j_RemoveItemBySlot
-										move.w  -4(a6),(RAM_Dialogue_NameIdx1).l
+										move.w  -4(a6),(TEXT_NAME_INDEX_1).l
 										move.b  -$A(a6),d1
 										andi.b  #8,d1
 										cmpi.b  #0,d1

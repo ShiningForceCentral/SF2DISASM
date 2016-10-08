@@ -21,7 +21,7 @@ sub_58F54:
 cs_58F5C:           dc.w $28                ; 0028 MOVE ENTITY NEXT TO PLAYER 81 3
 										dc.w $81
 										dc.w 3
-										dc.w 4                  ; 0004 SET TEXT INDEX C84 : "Are you ready?{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR C84 : "Are you ready?{W1}"
 										dc.w $C84
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "Are you ready?{W1}"
 										dc.w $81
@@ -29,7 +29,7 @@ cs_58F5C:           dc.w $28                ; 0028 MOVE ENTITY NEXT TO PLAYER 81
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 58F7E : YES/NO prompt answer
 										dc.w $59
 										dc.l word_58F7E         
-										dc.w 4                  ; 0004 SET TEXT INDEX C86 : "I want to leave soon.{N}Finish your preparations.{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR C86 : "I want to leave soon.{N}Finish your preparations.{W1}"
 										dc.w $C86
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "I want to leave soon.{N}Finish your preparations.{W1}"
 										dc.w $81

@@ -1,6 +1,6 @@
 
 ; GAME SECTION 02 :
-; Character Stats Engine, Item Effects Engine
+; Character Stats Engine, Battle engine, Enemy AI Engine, Item Effects Engine
 
 ; FREE SPACE : 121 bytes.
 
@@ -3723,7 +3723,7 @@ loc_8F00:
 										moveq   #1,d3
 										lsl.l   d0,d3           ; place class bit in long value
 										lea     CHAR_OFFSET_ITEM_0(a0),a1
-										lea     ((RAM_EquippableItemList-$1000000)).w,a2
+										lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a2
 										move.l  #$7F0004,(a2)
 										move.l  #$7F0004,4(a2)
 										move.l  #$7F0004,8(a2)
@@ -3747,7 +3747,7 @@ loc_8F4E:
 										dbf     d5,loc_8F38
 										move.w  d0,d1
 										movem.l (sp)+,d0/d2-d6/a1-a2
-										lea     ((RAM_EquippableItemList-$1000000)).w,a0
+										lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a0
 										rts
 
 	; End of function GetEquippableWeapons
@@ -4029,8 +4029,8 @@ j_sub_9146_0:
 										movem.l d2-d3/d6-a0,-(sp)
 										move.w  d1,d3
 										bsr.w   UpdateForce     
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d6
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d6
 										subq.w  #1,d6           ; one enemy down ?
 loc_915A:
 										move.b  (a0)+,d0
@@ -4264,7 +4264,7 @@ loc_92C2:
 										movem.w (sp)+,d0-d1
 										move.l  #'CNUM',(ERRCODE_BYTE0).l
 										move.l  (sp),(ERRCODE_BYTE4).l
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l 0
 loc_92DE:
@@ -5036,7 +5036,7 @@ loc_986E:
 										move.b  d0,((CURRENT_MAP-$1000000)).w
 										move.b  d0,((CURRENT_BATTLE-$1000000)).w
 										move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
-										move.b  d0,((RAM_EgressMapIdx-$1000000)).w
+										move.b  d0,((EGRESS_MAP_INDEX-$1000000)).w
 										move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
 										move.b  #2,((MESSAGE_SPEED-$1000000)).w
 										move.l  #$FFFFFFFF,((FOLLOWERS_LIST-$1000000)).w
@@ -5111,9 +5111,9 @@ GetFlag:
 UpdateForce:
 										
 										movem.l d0-d4/d7/a2-a4,-(sp)
-										lea     ((RAM_CharIdxList-$1000000)).w,a2
-										lea     ((RAM_Force_CurrentList-$1000000)).w,a3
-										lea     ((RAM_Force_ReservesList-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a2
+										lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a3
+										lea     ((RESERVE_MEMBERS-$1000000)).w,a4
 										moveq   #0,d2
 										moveq   #0,d3
 										moveq   #0,d4
@@ -5140,7 +5140,7 @@ loc_993A:
 loc_993E:
 										addq.b  #1,d0
 										dbf     d7,loc_991A
-										move.w  d2,((RAM_CharIdxListSize-$1000000)).w
+										move.w  d2,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										move.w  d3,((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w
 										move.w  d4,((NUMBER_OF_OTHER_PARTY_MEMBERS-$1000000)).w
 										movem.l (sp)+,d0-d4/d7/a2-a4
@@ -5372,7 +5372,7 @@ loc_9A94:
 DebugModeSelectAction:
 										
 										movem.l d0-d3/a0,-(sp)
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										moveq   #0,d0
 										moveq   #0,d1
 										moveq   #6,d2
@@ -5491,10 +5491,10 @@ WriteSkirmishScript:
 										
 										movem.l d0-a6,-(sp)
 										link    a2,#BTLSCENE_STACKNEGSIZE
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a3
-										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a4
-										lea     ((RAM_CharIdxList-$1000000)).w,a5
-										lea     (RAM_Start).l,a6; beginning of battle scene command list
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a3
+										lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
+										lea     (RAM_START).l,a6; beginning of battle scene command list
 										move.b  #0,-BCSTACK_OFFSET_DEBUGDODGE(a2)
 										move.b  #0,-BCSTACK_OFFSET_DEBUGCRIT(a2)
 loc_9BB8:
@@ -5502,18 +5502,18 @@ loc_9BB8:
 loc_9BBE:
 										move.b  #0,-BCSTACK_OFFSET_DEBUGCOUNTER(a2)
 loc_9BC4:
-										tst.b   (RAM_DebugModeActivated).l
+										tst.b   (DEBUG_MODE_ACTIVATED).l
 										beq.s   loc_9BE4
-										btst    #INPUT_A_START_BIT,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
 										beq.s   loc_9BD8
 loc_9BD4:
 										bsr.w   DebugModeSelectAction
 loc_9BD8:
-										btst    #INPUT_A_START_BIT,((RAM_Input_Player2_StateA-$1000000)).w
+										btst    #INPUT_A_START_BIT,((P2_INPUT-$1000000)).w
 										beq.s   loc_9BE4
 										bsr.w   DebugModeSelectHits
 loc_9BE4:
-										move.b  d0,((RAM_BattleScene_CurrentAttacker-$1000000)).w
+										move.b  d0,((BATTLESCENE_ATTACKER-$1000000)).w
 										move.b  d0,((word_FFB64F-$1000000)).w
 										moveq   #0,d1
 										move.w  d1,((RAM_BattleScene_EXPGain-$1000000)).w
@@ -5572,7 +5572,7 @@ loc_9C7E:
 										bra.w   loc_9DC4
 loc_9CAA:
 										moveq   #1,d6
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #1,d7
 										bcs.w   loc_9DC4
 loc_9CB6:
@@ -5591,8 +5591,8 @@ loc_9CB6:
 loc_9CE0:
 										bsr.w   WriteSkirmishScript_IdleSprite
 										bsr.w   WriteSkirmishScript_BreakUsedItem
-										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a4
-										lea     ((RAM_CharIdxList-$1000000)).w,a5
+										lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
 										bsr.w   FinalDoubleAttackCheck
 										tst.b   -BCSTACK_OFFSET_DOUBLE(a2)
 										beq.s   loc_9D3E
@@ -5615,8 +5615,8 @@ loc_9CE0:
 										bsr.w   WriteSkirmishScript_EnemyDropItem
 										bsr.w   WriteSkirmishScript_IdleSprite
 loc_9D3E:
-										lea     ((RAM_CharIdxList-$1000000)).w,a4
-										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
+										lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
 										bsr.w   FinalCounterAttackCheck
 										tst.b   -$C(a2)
 										beq.s   loc_9D9C
@@ -5633,7 +5633,7 @@ loc_9D3E:
 										exg     a4,a5
 										bsr.w   WriteSkirmishScript_SwitchTargets
 										exg     a4,a5
-										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a5
+										lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
 loc_9D84:
 										bsr.w   CreateBattleSceneText
 										bsr.w   CreateBattleSceneAnimation
@@ -5643,8 +5643,8 @@ loc_9D84:
 loc_9D98:
 										bsr.w   WriteSkirmishScript_IdleSprite
 loc_9D9C:
-										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a4
-										lea     ((RAM_CharIdxList-$1000000)).w,a5
+										lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
 										tst.b   -BCSTACK_OFFSET_EXPLODE(a2)
 										beq.s   loc_9DC4
 loc_9DAA:
@@ -5656,7 +5656,7 @@ loc_9DBC:
 										bsr.w   DetermineTargetsByAction
 										bra.w   loc_9C7E
 loc_9DC4:
-										move.b  ((word_FFB64F-$1000000)).w,((RAM_BattleScene_CurrentAttacker-$1000000)).w
+										move.b  ((word_FFB64F-$1000000)).w,((BATTLESCENE_ATTACKER-$1000000)).w
 										bsr.w   sub_A34E
 										unlk    a2
 										movem.l (sp)+,d0-a6
@@ -5673,8 +5673,8 @@ DetermineTargetsByAction:
 										
 										cmpi.w  #0,(a3)
 										bne.s   loc_9DEA
-										move.w  #1,((RAM_CharIdxListSize-$1000000)).w
-										move.b  3(a3),((RAM_CharIdxList-$1000000)).w
+										move.w  #1,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+										move.b  3(a3),((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w
 										bra.s   loc_9E5A
 loc_9DEA:
 										cmpi.w  #1,(a3)
@@ -5700,13 +5700,13 @@ loc_9E18:
 loc_9E2E:
 										cmpi.w  #5,(a3)
 										bne.w   loc_9E3E
-										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
+										move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										bra.s   loc_9E5A
 loc_9E3E:
 										cmpi.w  #6,(a3)
 										bne.w   loc_9E5A
 										jsr     MakeTargetListEverybody
-										move.b  #$FF,((RAM_CharIdxList-$1000000)).w
+										move.b  #$FF,((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w
 										move.b  (a4),d0
 										jsr     sub_1AC05C
 loc_9E5A:
@@ -5770,7 +5770,7 @@ CheckForTaros:
 										movem.l d0-d1,-(sp)
 										cmpi.b  #BATTLEIDX_TAROS,((CURRENT_BATTLE-$1000000)).w
 										bne.w   loc_9F22
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG
 										dc.w $70                ; cleared, set, and checked in ASM x09EC4..x09F27 (CheckForTaros ASM)
 										tst.b   (a4)
 										bne.w   loc_9F08
@@ -5784,17 +5784,17 @@ CheckForTaros:
 										jsr     GetEquippedWeapon
 										cmpi.w  #ITEMIDX_ACHILLES_SWORD,d1
 										bne.w   loc_9F08
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $70                ; cleared, set, and checked in ASM x09EC4..x09F27 (CheckForTaros ASM)
 loc_9F08:
 										move.b  (a5),d0
 										jsr     GetEnemyID
 										cmpi.w  #$58,d1 
 										bne.s   loc_9F22
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $70                ; cleared, set, and checked in ASM x09EC4..x09F27 (CheckForTaros ASM)
 										bne.s   loc_9F22
-										move.b  #$FF,-$E(a2)
+										move.b  #$FF,-BCSTACK_OFFSET_INEFFECTIVEATTACK(a2)
 loc_9F22:
 										movem.l (sp)+,d0-d1
 										rts
@@ -5930,21 +5930,22 @@ loc_A056:
 ; Loads proper battle scene text script depending on attack action.
 ; In: A3 = RAM index containing action type
 ;     A4 = RAM index containing attacker index
+; HARDCODED enemy and text indexes
 
 CreateBattleSceneText:
 										
 										movem.l d0-d3/a0,-(sp)
 										move.b  (a4),d0
 										cmpi.w  #0,(a3)
-										bne.s   loc_A09E
+										bne.s   loc_A09E        ; HARDCODED attack lines
 										move.w  ((RAM_BattleScene_AttackNumber-$1000000)).w,d2
-										move.w  #$111,d1
+										move.w  #$111,d1        ; {NAME}'s attack!
 										tst.w   d2
 										beq.w   loc_A086
-										move.w  #$125,d1
+										move.w  #$125,d1        ; {NAME}'s second{N}attack!
 										cmpi.w  #1,d2
 										beq.w   loc_A086
-										move.w  #$124,d1
+										move.w  #$124,d1        ; {NAME}'s counter{N}attack!
 loc_A086:
 										move.w  #$10,(a6)+
 										move.w  d1,(a6)+
@@ -5956,26 +5957,26 @@ loc_A08E:
 										bra.w   loc_A1FA
 loc_A09E:
 										cmpi.w  #1,(a3)
-										bne.w   loc_A150
+										bne.w   loc_A150        ; HARDCODED spell text indexes !
 										move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d2
-										move.w  #$136,d1        ; hardcoded spell text indexes !
+										move.w  #$136,d1        ; {NAME} put on{N}a demon's smile.
 										cmpi.w  #$F,d2
 										beq.w   loc_A132
-										move.w  #$116,d1
+										move.w  #$116,d1        ; {NAME} belched{N}out flames!
 										cmpi.w  #$11,d2
 										beq.w   loc_A132
 										cmpi.w  #$29,d2 
 										beq.w   loc_A132
-										move.w  #$117,d1
+										move.w  #$117,d1        ; {NAME} blew out{N}a snowstorm!
 										cmpi.w  #$12,d2
 										beq.w   loc_A132
-										move.w  #$114,d1
+										move.w  #$114,d1        ; {NAME} cast{N}demon breath!
 										cmpi.w  #$13,d2
 										beq.w   loc_A132
-										move.w  #$140,d1
+										move.w  #$140,d1        ; Odd-eye beam!
 										cmpi.w  #$2B,d2 
 										beq.w   loc_A132
-										move.w  #$11B,d1
+										move.w  #$11B,d1        ; {NAME} summoned{N}{SPELL}!{D1}
 										cmpi.w  #$1D,d2
 										beq.w   loc_A132
 										cmpi.w  #$1E,d2
@@ -5986,15 +5987,15 @@ loc_A09E:
 loc_A10E:
 										beq.w   loc_A132
 										move.w  2(a3),d2
-										move.w  #$119,d1
+										move.w  #$119,d1        ; {NAME} blew out{N}aqua-breath!
 loc_A11A:
 										cmpi.w  #$28,d2 
 										beq.w   loc_A132
-										move.w  #$11A,d1
+										move.w  #$11A,d1        ; {NAME} blew out{N}bubble-breath!
 loc_A126:
 										cmpi.w  #$68,d2 
 										beq.w   loc_A132
-										move.w  #$112,d1
+										move.w  #$112,d1        ; {NAME} cast{N}{SPELL} level {#}!
 loc_A132:
 										move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d2
 loc_A136:
@@ -6032,8 +6033,8 @@ loc_A174:
 loc_A194:
 										cmpi.w  #5,(a3)
 										bne.w   loc_A1CA
-										move.w  d0,d2
-										move.w  #$142,d1
+										move.w  d0,d2           ; random MUDDLE lines
+										move.w  #$142,d1        ; {NAME} did nothing.
 										moveq   #$10,d0
 										jsr     (GetRandomOrDebugValue).w
 										cmpi.w  #9,d0
@@ -6055,7 +6056,7 @@ loc_A1CA:
 										jsr     GetEnemyID
 										cmpi.w  #$26,d1 
 										bne.s   loc_A1E2
-										move.w  #$141,d1
+										move.w  #$141,d1        ; Demon laser!
 										bra.s   loc_A1E6
 loc_A1E2:
 										move.w  #$13F,d1
@@ -6203,11 +6204,11 @@ loc_A348:
 sub_A34E:
 										movem.l d0-d3/a0,-(sp)
 										move.w  #$D,(a6)+
-										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a5
+										lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
 										moveq   #3,d6
 										bsr.w   WriteSkirmishScript_SwitchTargets
-										lea     ((RAM_BattleScene_CurrentAttacker-$1000000)).w,a4
-										lea     ((RAM_CharIdxList-$1000000)).w,a5
+										lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
 										tst.b   -BCSTACK_OFFSET_INACTION_CURSE(a2)
 										bne.w   loc_A3B2
 										tst.b   -BCSTACK_OFFSET_SILENCED(a2)
@@ -6405,6 +6406,7 @@ loc_A548:
 ; In: A2 = cutscene stack
 ;     A3 = battle action in RAM
 ; Out: D4 = effect idx
+; HARDCODED class, enemy and weapon indexes
 
 GetEffectGraphicsIdx:
 										
@@ -6666,7 +6668,7 @@ WriteSkirmishScript_EXPandGold:
 										tst.b   -7(a2)
 										bne.w   loc_A81E
 										move.b  ((CURRENT_BATTLE-$1000000)).w,d0
-										lea     unk_A870(pc), a0
+										lea     byte_A870(pc), a0
 loc_A810:
 										cmpi.b  #$FF,(a0)
 										beq.w   loc_A81E
@@ -6709,7 +6711,7 @@ loc_A86A:
 
 	; End of function WriteSkirmishScript_EXPandGold
 
-unk_A870:           dc.b   1
+byte_A870:          dc.b 1
 										dc.b $FF
 
 ; =============== S U B R O U T I N E =======================================
@@ -6863,7 +6865,7 @@ GetAmountOfEXPForEncounter:
 										addi.w  #CHAR_CLASS_EXTRALEVEL,d1
 loc_A990:
 										sub.w   d2,d1
-										moveq   #$32,d5 
+										moveq   #$32,d5 ; HARDCODED EXP amounts
 										cmpi.b  #3,d1
 										bmi.w   loc_A9C6
 										moveq   #$28,d5 
@@ -6891,8 +6893,8 @@ loc_A9C6:
 SortTargets:
 										
 										movem.l d0-d2/d6-a0,-(sp)
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #1,d7
 										bls.w   loc_AA92
 loc_A9DE:
@@ -6905,9 +6907,9 @@ loc_A9DE:
 										move.b  d0,(a0,d7.w)
 loc_A9F8:
 										dbf     d7,loc_A9DE
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										moveq   #0,d0
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #1,d7
 										subq.w  #1,d7
 loc_AA0A:
@@ -6921,12 +6923,12 @@ loc_AA0E:
 										move.b  d2,(a0,d1.w)
 loc_AA22:
 										addq.w  #1,d1
-										cmp.w   ((RAM_CharIdxListSize-$1000000)).w,d1
+										cmp.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d1
 										bcs.w   loc_AA0E
 										addq.w  #1,d0
 										dbf     d7,loc_AA0A
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #1,d7
 										subq.w  #1,d7
 										moveq   #0,d6
@@ -6948,8 +6950,8 @@ loc_AA40:
 loc_AA78:
 										addq.w  #1,d6
 										dbf     d7,loc_AA40
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #1,d7
 loc_AA88:
 										andi.b  #$BF,(a0,d7.w)
@@ -6967,7 +6969,7 @@ loc_AA92:
 OneSecondSleep:
 										
 										move.l  d0,-(sp)
-										moveq   #$3C,d0 
+										moveq   #60,d0
 										jsr     (Sleep).w       
 										move.l  (sp)+,d0
 										rts
@@ -7745,21 +7747,17 @@ loc_B14A:
 										bne.s   loc_B16A
 										move.w  #$B,(a6)+
 										move.w  d6,(a6)+
-										dc.b $3C 
-										dc.b $FC 
-										dc.l loc_3CBE+3
-										dc.b $3C 
-										dc.b $FC 
-										dc.b   0
-										dc.b   2
-										dc.b $60 
-										dc.b $10
+										move.w  #0,(a6)+
+										move.w  d1,(a6)+
+										move.w  #2,(a6)+
+										bra.s   loc_B17A
 loc_B16A:
 										move.w  #$A,(a6)+
 										move.w  d6,(a6)+
 										move.w  #0,(a6)+
 										move.w  d1,(a6)+
 										move.w  #2,(a6)+
+loc_B17A:
 										move.w  #$10,(a6)+
 										move.w  #$12A,(a6)+
 										move.w  d0,(a6)+
@@ -8839,7 +8837,7 @@ GetSpellPowerAdjustedForClass:
 										lsr.w   #2,d6
 loc_BB78:
 										move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d1
-										cmpi.w  #SPELLIDX_DAO,d1
+										cmpi.w  #SPELLIDX_DAO,d1; HARDCODED spell indexes
 										beq.w   loc_BBA0
 										cmpi.w  #SPELLIDX_APOLLO,d1
 										beq.w   loc_BBA0
@@ -8849,7 +8847,7 @@ loc_BB78:
 										beq.w   loc_BBA0
 										bra.w   loc_BBB2
 loc_BBA0:
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d0
 										beq.w   loc_BBB2
 										andi.w  #$FFFF,d6
 										divu.w  d0,d6
@@ -9062,7 +9060,7 @@ loc_BD9C:
 loc_BDC4:
 										clr.w   d0
 										move.b  3(a0),d0
-										lea     ((RAM_Flags_EnemyItemDrops-$1000000)).w,a0
+										lea     ((ENEMY_ITEM_DROPS-$1000000)).w,a0
 										divu.w  #8,d0
 										adda.w  d0,a0
 										swap    d0
@@ -9116,7 +9114,7 @@ EnemyGold:          incbin "battles/global/enemygold.bin"
 GetEnemyDestination:
 										
 										movem.l d0/a0,-(sp)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										jsr     GetYPos
 										move.w  d1,d2
 										jsr     GetXPos
@@ -9159,7 +9157,7 @@ loc_C06A:
 ClearEnemyMoveInfo:
 										
 										movem.l d0-a6,-(sp)
-										lea     ((EnemyTargettingCommandList-$1000000)).w,a0
+										lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a0
 										lea     ((byte_FFB1DC-$1000000)).w,a1
 										clr.w   d0
 										move.w  #$30,d1 
@@ -9658,7 +9656,7 @@ j_sub_C404_0:
 										movem.l d0-a6,-(sp)
 										bsr.w   ClearTargetGrid 
 										bsr.w   ClearMovableGrid
-										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
+										move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										eori.w  #$FFFF,d0
 										bsr.w   MakeTargetList
 										eori.w  #$FFFF,d0
@@ -9694,7 +9692,7 @@ CreateItemRangeGrid:
 										movem.l d0-a6,-(sp)
 										bsr.w   ClearTargetGrid 
 										bsr.w   ClearMovableGrid
-										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
+										move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										jsr     GetItemDefAddress
 										move.b  9(a0),d1
 										cmpi.b  #$3F,d1 
@@ -9718,7 +9716,7 @@ CreateSpellRangeGrid:
 										movem.l d0-a6,-(sp)
 										bsr.w   ClearTargetGrid 
 										bsr.w   ClearMovableGrid
-										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
+										move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										jsr     GetSpellDefAddress
 										btst    #7,d0
 										bne.s   loc_C4AA
@@ -9767,7 +9765,7 @@ j_sub_C4E8_0:
 										movem.l d0-a6,-(sp)
 										bsr.w   ClearTargetGrid 
 										bsr.w   ClearMovableGrid
-										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
+										move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										bsr.w   MakeTargetList
 										moveq   #$FFFFFFFF,d5
 										lea     SpellRange1(pc), a0
@@ -9822,10 +9820,10 @@ loc_C55E:
 										jsr     GetCurrentHP
 										tst.w   d1
 										beq.w   loc_C584
-										lea     ((RAM_CharIdxList-$1000000)).w,a1
-										adda.w  ((RAM_CharIdxListSize-$1000000)).w,a1
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
+										adda.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a1
 										move.b  d0,(a1)
-										addq.w  #1,((RAM_CharIdxListSize-$1000000)).w
+										addq.w  #1,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 loc_C584:
 										addq.l  #2,a0
 										dbf     d7,loc_C532
@@ -9899,7 +9897,7 @@ SpellRange3:        dc.b $C
 j_sub_C5D6_0:
 										
 										movem.l d0-a6,-(sp)
-										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
+										move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										jsr     GetItemDefAddress
 										move.b  9(a0),d1
 										cmpi.b  #$FF,d1
@@ -9917,7 +9915,7 @@ loc_C5F4:
 j_sub_C5FA_0:
 										
 										movem.l d0-a6,-(sp)
-										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
+										move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										jsr     GetItemDefAddress
 										move.b  9(a0),d1
 										cmpi.b  #$FF,d1
@@ -9949,7 +9947,7 @@ loc_C62A:
 CreateTargetGrid:
 										
 										movem.l d0-a6,-(sp)
-										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
+										move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										jsr     GetSpellDefAddress
 										cmpi.b  #$C1,d1
 										beq.w   loc_C678
@@ -9992,8 +9990,8 @@ loc_C688:
 sub_C68E:
 										movem.l d0-a6,-(sp)
 loc_C692:
-										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										move.w  #0,d0
 										bra.s   loc_C6A4
 loc_C6A2:
@@ -10010,7 +10008,7 @@ loc_C6B8:
 										beq.w   loc_C6CC
 										move.b  d0,(a0)
 										addq.l  #1,a0
-										addq.w  #1,((RAM_CharIdxListSize-$1000000)).w
+										addq.w  #1,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 loc_C6CC:
 										bra.s   loc_C6A2
 loc_C6CE:
@@ -10024,8 +10022,8 @@ loc_C6CE:
 
 sub_C6D4:
 										movem.l d0-a6,-(sp)
-										move.w  #0,((RAM_CharIdxListSize-$1000000)).w
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										move.w  #$80,d0 
 										bra.s   loc_C6EA
 loc_C6E8:
@@ -10041,7 +10039,7 @@ loc_C6EA:
 										beq.w   loc_C712
 										move.b  d0,(a0)
 										addq.l  #1,a0
-										addq.w  #1,((RAM_CharIdxListSize-$1000000)).w
+										addq.w  #1,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 loc_C712:
 										bra.s   loc_C6E8
 loc_C714:
@@ -10485,7 +10483,7 @@ loc_CAFE:
 										move.b  d0,d3
 										move.b  d2,d0
 										bsr.w   CreateTargetGrid
-										tst.w   ((RAM_CharIdxListSize-$1000000)).w
+										tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										beq.s   loc_CB12
 										move.b  d3,d0
 										bsr.w   sub_CBA2
@@ -10571,9 +10569,9 @@ loc_CBC4:
 										movea.l off_CB62(pc,d2.w),a0
 										move.b  d3,d1
 										moveq   #0,d3
-										lea     ((RAM_CharIdxList-$1000000)).w,a1
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
 loc_CBE0:
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #1,d7
 										bcs.w   loc_CC04
 loc_CBEA:
@@ -10682,7 +10680,7 @@ sub_CCA0:
 										bne.s   loc_CCAE
 										addi.w  #$F,d6
 loc_CCAE:
-										lea     (EnemyTargettingCommandList).l,a1
+										lea     (ENEMY_TARGETTING_COMMAND_LIST).l,a1
 										clr.w   d5
 										move.b  d4,d5
 										andi.b  #$7F,d5 
@@ -10716,7 +10714,7 @@ loc_CCEA:
 										bcs.s   loc_CCF2
 										addq.w  #1,d6
 loc_CCF2:
-										lea     (EnemyTargettingCommandList).l,a1
+										lea     (ENEMY_TARGETTING_COMMAND_LIST).l,a1
 										clr.w   d5
 										move.b  d4,d5
 										andi.b  #$7F,d5 
@@ -11783,8 +11781,8 @@ loc_D57C:
 										subi.w  #1,d5
 										lea     ((byte_FF883E-$1000000)).w,a1
 										lea     ((byte_FF895E-$1000000)).w,a2
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a3
-										lea     ((RAM_CharIdxList-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
 loc_D592:
 										clr.w   d0
 										move.b  (a1)+,d0
@@ -11798,7 +11796,7 @@ loc_D592:
 loc_D5AE:
 										subi.w  #1,d5
 										lea     ((byte_FF883E-$1000000)).w,a0
-										lea     ((RAM_CharIdxList-$1000000)).w,a1
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
 loc_D5BA:
 										move.b  (a0)+,(a1)+
 loc_D5BC:
@@ -11808,8 +11806,8 @@ loc_D5BC:
 										subi.w  #1,d5
 										lea     ((byte_FF883E-$1000000)).w,a1
 										lea     ((byte_FF895E-$1000000)).w,a2
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a3
-										lea     ((RAM_CharIdxList-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
 										lea     ((byte_FF892E-$1000000)).w,a5
 										clr.w   d4
 										clr.w   d3
@@ -11862,7 +11860,7 @@ loc_D648:
 										subi.w  #1,d5
 										lea     ((byte_FF883E-$1000000)).w,a1
 										lea     ((byte_FF895E-$1000000)).w,a2
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a3
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
 loc_D65A:
 										clr.w   d0
 										move.b  (a1)+,d0
@@ -11875,7 +11873,7 @@ loc_D65A:
 										move.w  (a0),d5
 										subi.w  #1,d5
 										lea     ((byte_FF883E-$1000000)).w,a0
-										lea     ((RAM_CharIdxList-$1000000)).w,a1
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
 loc_D680:
 										move.b  (a0)+,(a1)+
 										dbf     d5,loc_D680
@@ -11884,8 +11882,8 @@ loc_D680:
 										subi.w  #1,d5
 										lea     ((byte_FF883E-$1000000)).w,a1
 										lea     ((byte_FF895E-$1000000)).w,a2
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a3
-										lea     ((RAM_CharIdxList-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
 										lea     ((byte_FF892E-$1000000)).w,a5
 										clr.w   d4
 										clr.w   d3
@@ -11925,8 +11923,8 @@ loc_D6EC:
 
 sub_D6F2:
 										movem.l d0/d2-a6,-(sp)
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a0
-										lea     ((RAM_CharIdxList-$1000000)).w,a1
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
 										move.w  (a0),d7
 										subi.w  #1,d7
 										clr.w   d6
@@ -11960,10 +11958,10 @@ loc_D732:
 
 sub_D742:
 										movem.l d0/d2-a6,-(sp)
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
-										lea     ((EnemyTargettingCommandList-$1000000)).w,a2
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+										lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
 										clr.w   d4
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a3
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
 										clr.w   d5
 										move.w  (a3),d6
 										tst.w   d6
@@ -12005,11 +12003,11 @@ loc_D7A2:
 
 sub_D7AA:
 										movem.l d0/d2-a6,-(sp)
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
-										lea     ((EnemyTargettingCommandList-$1000000)).w,a2
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+										lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
 										clr.w   d4
 										clr.w   d5
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a3
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
 										move.w  (a3),d6
 										tst.w   d6
 										bne.s   loc_D7C8
@@ -12501,7 +12499,7 @@ sub_DBA8:
 										mulu.w  #$30,d2 
 										andi.w  #$FF,d0
 										add.w   d0,d2
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										clr.b   d3
 loc_DBBC:
 										move.b  (a3,d2.w),d4
@@ -12674,7 +12672,7 @@ loc_DD0A:
 sub_DD10:
 										movem.l d0-d6/a0-a5,-(sp)
 										bsr.w   sub_DBA8
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a1
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
 										move.w  a0,d0
 										move.w  a1,d1
 										sub.w   d1,d0
@@ -12754,7 +12752,7 @@ MakeEnemyMoveOrder:
 										bpl.s   loc_DD9A
 										clr.w   d6
 loc_DD9A:
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										clr.b   d3
 loc_DDA0:
 										move.b  (a3,d2.w),d4
@@ -12983,9 +12981,9 @@ loc_DF84:
 										bsr.w   sub_E0B6
 										cmp.b   d1,d0
 										ble.s   loc_DFA2
-										lea     (RAM_BattleScene_ActionType).l,a0
+										lea     (BATTLESCENE_ACTION_TYPE).l,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_E0AA
 loc_DFA2:
@@ -13006,7 +13004,7 @@ loc_DFC2:
 										btst    #0,d1
 										bne.s   loc_DFE6
 										bsr.w   sub_F522
-										lea     (RAM_BattleScene_ActionType).l,a0
+										lea     (BATTLESCENE_ACTION_TYPE).l,a0
 										move.w  #3,(a0)
 										bra.w   loc_E0AA
 loc_DFE6:
@@ -13127,24 +13125,24 @@ HandleLineAttackerAI:
 										bsr.w   MakeTargetListAllies
 										move.w  d7,d0
 										jsr     sub_1AC05C
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
 										move.w  (a0),d0
 										tst.w   d0
 										beq.s   loc_E12C
-										lea     (RAM_BattleScene_ActionType).l,a0
+										lea     (BATTLESCENE_ACTION_TYPE).l,a0
 										move.w  #6,(a0)
-										lea     ((RAM_CharIdxList-$1000000)).w,a1
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
 										clr.w   d1
-										move.b  ((RAM_CharIdxList-$1000000)).w,d1
+										move.b  ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,d1
 										move.w  d1,2(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.s   loc_E13E
 loc_E12C:
-										lea     (RAM_BattleScene_ActionType).l,a0
+										lea     (BATTLESCENE_ACTION_TYPE).l,a0
 loc_E132:
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 loc_E13E:
 										movem.l (sp)+,d0-a6
@@ -13162,7 +13160,7 @@ HandleExploderAI:
 										bsr.w   MakeTargetListAllies
 										move.w  #$19,d1         ; Burst Rock spell
 										bsr.w   CreateTargetGridFromSpell
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
 										move.w  (a0),d0
 										tst.w   d0
 										beq.s   loc_E190
@@ -13170,11 +13168,11 @@ HandleExploderAI:
 										jsr     j_randomLessThanD6
 										cmpi.b  #4,d7
 										bne.s   loc_E190
-										lea     (RAM_BattleScene_ActionType).l,a0
+										lea     (BATTLESCENE_ACTION_TYPE).l,a0
 										move.w  #4,(a0)
 										move.w  #$19,2(a0)
 										move.w  d5,4(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_E1A6
 loc_E190:
@@ -13182,7 +13180,7 @@ loc_E190:
 										move.w  #$B,d1
 										clr.w   d7
 										bsr.w   HandleEnemyAICommand
-										lea     (RAM_BattleScene_ActionType).l,a0
+										lea     (BATTLESCENE_ACTION_TYPE).l,a0
 										move.w  #3,(a0)
 loc_E1A6:
 										movem.l (sp)+,d0-a6
@@ -13446,9 +13444,9 @@ loc_E366:
 loc_E378:
 										cmpi.b  #$E,d1
 										bne.s   loc_E394
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										clr.w   d0
 										bra.w   loc_E3E8
@@ -13522,7 +13520,7 @@ loc_E40A:
 										move.b  #$3F,-1(a6) 
 										bra.w   loc_E490
 loc_E45E:
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a1
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a1
 																						; enemy 0 has less than half HP, and we have a healing rain, so use it
 										move.w  #2,(a1)
 										clr.w   d0
@@ -13534,7 +13532,7 @@ loc_E45E:
 										clr.w   d1
 										move.b  -2(a6),d1
 										move.w  d1,2(a1)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a1
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
 										move.w  #$FF,(a1)
 										bra.w   loc_E782
 loc_E490:
@@ -13626,7 +13624,7 @@ loc_E56C:
 loc_E582:
 										lea     ((byte_FF880E-$1000000)).w,a1
 										lea     ((byte_FF895E-$1000000)).w,a2
-										lea     ((RAM_CharIdxList-$1000000)).w,a3
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a3
 										clr.w   d4
 										lea     ((DMA_SPACE_FF8804-$1000000)).w,a4
 										move.w  #0,(a4)
@@ -13636,7 +13634,7 @@ loc_E598:
 										clr.w   d1
 										move.b  -1(a6),d1
 										bsr.w   CreateTargetGrid
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d5
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d5
 										tst.w   d5
 										bne.s   loc_E5B4
 										bra.w   loc_E5E2
@@ -13776,9 +13774,9 @@ loc_E70A:
 										lea     ((byte_FF4000+$400)).l,a2
 										lea     ((byte_FF4000+$400)).l,a3
 										bsr.w   sub_DD10
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a1
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
 loc_E722:
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a1
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a1
 										cmpi.b  #$7F,-2(a6) 
 										bne.s   loc_E748
 										move.w  #1,(a1)
@@ -13829,9 +13827,9 @@ sub_E78C:
 										bsr.w   sub_EDD6
 										cmpi.b  #3,d2
 										bne.s   loc_E7B6
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_E97C
 loc_E7B6:
@@ -13842,16 +13840,16 @@ loc_E7B6:
 										tst.w   d3
 										beq.s   loc_E7DE
 										movem.l (sp)+,d0-d3
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #5,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_E984
 loc_E7DE:
 										movem.l (sp)+,d0-d3
 										cmpi.b  #2,d2
 										bne.w   loc_E86C
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #2,(a0)
 										lea     ((word_FF880A-$1000000)).w,a1
 										move.w  (a1),6(a0)
@@ -13860,7 +13858,7 @@ loc_E7DE:
 										move.w  (a1),d1
 										bsr.w   GetCharItemAtSlotAndNumberOfItems
 										move.w  d1,2(a0)
-										lea     ((EnemyTargettingCommandList-$1000000)).w,a2
+										lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
 										move.w  d7,d1
 										btst    #7,d1
 										beq.s   loc_E81E
@@ -13875,7 +13873,7 @@ loc_E81E:
 										move.b  9(a0),d1
 										bsr.w   GetSpellRange
 										bsr.w   MakeTargetListEverybody
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  4(a0),d0
 										jsr     GetYPos
 										move.w  d1,d2
@@ -13890,12 +13888,12 @@ loc_E81E:
 loc_E86C:
 										cmpi.b  #1,d2
 										bne.s   loc_E8D0
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #1,(a0)
 										lea     ((word_FF880C-$1000000)).w,a1
 										move.w  (a1),2(a0)
 										move.w  d0,4(a0)
-										lea     ((EnemyTargettingCommandList-$1000000)).w,a2
+										lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
 										move.w  d7,d1
 										btst    #7,d1
 										beq.s   loc_E89A
@@ -13918,10 +13916,10 @@ loc_E89A:
 loc_E8D0:
 										tst.b   d2
 										bne.w   loc_E97C
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #0,(a0)
 										move.w  d0,2(a0)
-										lea     ((EnemyTargettingCommandList-$1000000)).w,a2
+										lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
 										move.w  d7,d1
 										btst    #7,d1
 										beq.s   loc_E8F6
@@ -13992,10 +13990,10 @@ sub_E98C:
 										btst    #7,d0
 										bne.s   loc_E9B2
 										move.b  #$FF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 loc_E9A2:
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EB7A
 loc_E9B2:
@@ -14007,9 +14005,9 @@ loc_E9BE:
 										tst.b   d1
 										bne.s   loc_E9DE
 										move.b  #$FF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EB7A
 loc_E9DE:
@@ -14017,9 +14015,9 @@ loc_E9DE:
 										cmpi.b  #$FF,d1
 										bne.s   loc_EA00
 										move.b  #$FF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 loc_E9F8:
 										move.b  #$FF,(a0)
 										bra.w   loc_EB7A
@@ -14035,10 +14033,10 @@ loc_EA0E:
 										tst.w   d1
 										bne.s   loc_EA2E
 										move.b  #$FF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
 loc_EA22:
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EB7A
 loc_EA2E:
@@ -14058,9 +14056,9 @@ loc_EA2E:
 										tst.b   d1
 										bne.s   loc_EA78
 										move.w  #$FFFF,d1
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
 										bra.w   loc_EB7A
 loc_EA78:
@@ -14080,20 +14078,20 @@ loc_EAA2:
 										move.b  -1(a6),d0
 										move.b  -3(a6),d1
 										bsr.w   sub_F7A0
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  (a0),d1
 										cmpi.b  #$FF,d1
 										bne.s   loc_EAD4
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
 loc_EACA:
 										bra.w   loc_EB7A
 										move.w  #$FFFF,d1
 										bra.s   loc_EAE2
 loc_EAD4:
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
 										clr.w   d1
 										bra.w   loc_EB7A
@@ -14107,9 +14105,9 @@ loc_EAE6:
 										tst.b   d1
 										bne.s   loc_EB10
 										move.w  #$FFFF,d1
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
 										bra.w   loc_EB7A
 loc_EB10:
@@ -14128,20 +14126,20 @@ loc_EB34:
 										move.b  -1(a6),d0
 										move.b  -3(a6),d1
 										bsr.w   sub_F7A0
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  (a0),d1
 										cmpi.b  #$FF,d1
 										bne.s   loc_EB6C
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
 										bra.w   loc_EB7A
 										move.w  #$FFFF,d1
 										bra.s   loc_EB7A
 loc_EB6C:
 										clr.w   d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
 										bra.w   *+4
 loc_EB7A:
@@ -14174,10 +14172,10 @@ sub_EBA4:
 										btst    #CHAR_BIT_ENEMY,d0
 										bne.s   loc_EBC8
 										move.w  #$FFFF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 loc_EBB8:
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EDD0
 loc_EBC8:
@@ -14185,9 +14183,9 @@ loc_EBC8:
 										tst.b   d1
 										beq.s   loc_EBE8
 										move.w  #$FFFF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EDD0
 loc_EBE8:
@@ -14197,9 +14195,9 @@ loc_EBE8:
 										cmpi.w  #$3F,d1 
 										bne.s   loc_EC0E
 										move.w  #$FFFF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EDD0
 loc_EC0E:
@@ -14212,9 +14210,9 @@ loc_EC18:
 										bra.w   loc_EC3A
 loc_EC22:
 										move.w  #$FFFF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EDD0
 loc_EC3A:
@@ -14229,9 +14227,9 @@ loc_EC3A:
 										cmp.b   d2,d1
 										bge.s   loc_EC6E
 										move.w  #$FFFF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EDD0
 loc_EC6E:
@@ -14282,9 +14280,9 @@ loc_ECDA:
 										bra.w   loc_ED00
 loc_ECE8:
 										move.w  #$FFFF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EDD0
 loc_ED00:
@@ -14293,9 +14291,9 @@ loc_ED00:
 										tst.w   d5
 										bne.s   loc_ED22
 										move.w  #$FFFF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EDD0
 loc_ED22:
@@ -14318,13 +14316,13 @@ loc_ED46:
 										cmpi.b  #$FF,d0
 										bne.s   loc_ED6C
 										move.w  #$FFFF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EDD0
 loc_ED6C:
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #1,(a0)
 										move.w  d6,2(a0)
 										move.w  d0,4(a0)
@@ -14340,9 +14338,9 @@ loc_ED8A:
 										cmpi.w  #$FF,d1
 										bne.s   loc_EDBA
 										move.w  #$FFFF,d1
-										lea     ((RAM_BattleScene_ActionType-$1000000)).w,a0
+										lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
 										move.w  #3,(a0)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_EDD0
 loc_EDBA:
@@ -14495,7 +14493,7 @@ loc_EF40:
 										bra.w   loc_EF8E
 loc_EF52:
 										move.b  #$F,-$C2(a6)
-										lea     ((RAM_CharIdxList-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
 										move.w  (a0),d3
 										subi.w  #1,d3
 										clr.w   d5
@@ -14510,11 +14508,11 @@ loc_EF64:
 										addi.w  #1,d5
 loc_EF80:
 										dbf     d3,loc_EF64
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a4
 										move.w  d5,(a4)
 										bra.w   loc_EFC0
 loc_EF8E:
-										lea     ((RAM_CharIdxList-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
 										move.w  (a0),d3
 										subi.w  #1,d3
 										clr.w   d5
@@ -14529,12 +14527,12 @@ loc_EF9A:
 										addi.w  #1,d5
 loc_EFB6:
 										dbf     d3,loc_EF9A
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a4
 										move.w  d5,(a4)
 loc_EFC0:
 										cmpi.b  #1,d5
 										bne.s   loc_EFD8
-										lea     ((RAM_CharIdxList-$1000000)).w,a4
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
 										move.b  (a4),d0
 										move.b  -$C2(a6),d1
 										move.b  -$C3(a6),d2
@@ -14545,11 +14543,11 @@ loc_EFD8:
 										btst    #7,d0
 										bne.w   loc_F008
 										clr.l   d4
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a5
 										move.w  (a5),d4
 										move.b  d4,-$C4(a6)
 										move.w  d4,d6
-										lea     ((RAM_CharIdxList-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
 										clr.l   d5
 loc_EFFA:
 										move.b  (a5)+,-$30(a6,d5.w)
@@ -14562,11 +14560,11 @@ loc_F008:
 										cmpi.b  #$F,d0
 										bge.s   loc_F034
 										clr.l   d4
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a5
 										move.w  (a5),d4
 										move.b  d4,-$C4(a6)
 										move.w  d4,d6
-										lea     ((RAM_CharIdxList-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
 										clr.l   d5
 loc_F026:
 										move.b  (a5)+,-$30(a6,d5.w)
@@ -14588,19 +14586,19 @@ loc_F034:
 										lea     (byte_D921).l,a4
 loc_F05E:
 										clr.l   d4
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a5
 										move.w  (a5),d4
 										move.w  d4,d6
-										lea     ((RAM_CharIdxList-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
 										clr.l   d5
 loc_F06E:
 										move.b  (a5)+,-$30(a6,d5.w)
 										addq.l  #1,d5
 										subq.w  #1,d4
 										bne.s   loc_F06E
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a5
 										move.w  #0,(a5)
-										lea     ((RAM_CharIdxList-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
 										clr.l   d5
 loc_F086:
 										clr.l   d4
@@ -14616,9 +14614,9 @@ loc_F098:
 										beq.s   loc_F0A8
 										bra.w   loc_F0D8
 loc_F0A8:
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a5
 										move.w  (a5),d2
-										lea     ((RAM_CharIdxList-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
 										move.b  d0,(a5,d2.w)
 										move.b  d1,-$60(a6,d2.w)
 										move.l  a6,-(sp)
@@ -14629,7 +14627,7 @@ loc_F0A8:
 										adda.w  d2,a6
 										move.b  d0,-$C0(a6)
 										movea.l (sp)+,a6
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a5
 										move.w  (a5),d2
 										addq.w  #1,d2
 										move.w  d2,(a5)
@@ -14655,9 +14653,9 @@ loc_F0FE:
 										clr.l   d6
 										clr.l   d2
 										move.b  -$60(a6,d2.w),d2
-										lea     ((RAM_CharIdxListSize-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a5
 										move.w  (a5),d7
-										lea     ((RAM_CharIdxList-$1000000)).w,a5
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
 										clr.l   d4
 loc_F118:
 										move.b  -$60(a6,d4.w),d5
@@ -14780,7 +14778,7 @@ loc_F23E:
 										clr.w   d0
 										move.w  #$1D,d6
 loc_F244:
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										clr.w   d2
 loc_F24A:
 										bsr.w   GetCurrentHP    ; iterate through force or monsters
@@ -14803,7 +14801,7 @@ loc_F26E:
 loc_F276:
 										addq.w  #1,d0
 										dbf     d6,loc_F24A
-										move.w  d2,((RAM_CharIdxListSize-$1000000)).w
+										move.w  d2,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										move.w  d2,d6
 										clr.w   d2
 loc_F284:
@@ -14814,14 +14812,14 @@ loc_F284:
 										addi.w  #1,d2
 										subq.w  #1,d6
 										bne.s   loc_F284
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d1
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d1
 										cmpi.w  #1,d1
 										bgt.s   loc_F2A8
 										bra.w   loc_F39A
 loc_F2A8:
 										subq.w  #2,d1
 										move.b  #0,d2
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 loc_F2B2:
 										tst.b   d2
 										bpl.s   loc_F2BA
@@ -14860,7 +14858,7 @@ loc_F300:
 										lea     (off_D982).l,a1 
 										lsl.l   #2,d1
 										movea.l (a1,d1.l),a1
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d6
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d6
 										clr.w   d5
 loc_F31A:
 										clr.w   d0
@@ -14882,7 +14880,7 @@ loc_F340:
 										addq.b  #1,d5
 										subq.w  #1,d6
 										bne.s   loc_F31A
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d6
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d6
 										subi.w  #2,d6
 										clr.w   d5
 loc_F350:
@@ -14921,7 +14919,7 @@ loc_F39E:
 										btst    #7,d0
 										beq.w   loc_F404
 										bsr.w   GetEnemyID
-										cmpi.b  #$A,d1
+										cmpi.b  #$A,d1          ; HARDCODED enemy indexes
 										bne.s   loc_F3B8
 										bra.w   loc_F3D0
 loc_F3B8:
@@ -14974,13 +14972,13 @@ loc_F43A:
 										move.w  d2,d0
 										bsr.w   j_makeEnemyMoveOrder
 loc_F454:
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  (a0),d0
 										cmpi.b  #$FF,d0
 										bne.s   loc_F476
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
-										lea     (RAM_BattleScene_ActionType).l,a0
+										lea     (BATTLESCENE_ACTION_TYPE).l,a0
 										move.w  #3,(a0)
 										bra.w   loc_F512
 loc_F476:
@@ -15021,9 +15019,9 @@ loc_F49A:
 										bsr.w   GetClosestAttackPosition
 										cmpi.b  #$FF,d1
 										bne.s   loc_F4FE
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
-										lea     (RAM_BattleScene_ActionType).l,a0
+										lea     (BATTLESCENE_ACTION_TYPE).l,a0
 										move.w  #3,(a0)
 										bra.w   loc_F512
 loc_F4FE:
@@ -15052,34 +15050,34 @@ sub_F522:
 										jsr     j_randomLessThanD6
 										cmpi.b  #2,d7
 										bne.s   loc_F554
-										lea     (RAM_BattleScene_ActionType).l,a2
+										lea     (BATTLESCENE_ACTION_TYPE).l,a2
 										move.w  #3,(a2)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a2
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
 										move.b  #$FF,(a2)
 										bra.w   loc_F782
 loc_F554:
 										cmpi.b  #4,d7
 										bne.s   loc_F570
-										lea     (RAM_BattleScene_ActionType).l,a2
+										lea     (BATTLESCENE_ACTION_TYPE).l,a2
 										move.w  #3,(a2)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a2
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
 										move.b  #$FF,(a2)
 										bra.w   loc_F782
 loc_F570:
 										cmpi.b  #6,d7
 										bne.s   loc_F58C
-										lea     (RAM_BattleScene_ActionType).l,a2
+										lea     (BATTLESCENE_ACTION_TYPE).l,a2
 										move.w  #3,(a2)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a2
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
 										move.b  #$FF,(a2)
 										bra.w   loc_F782
 loc_F58C:
 										bsr.w   sub_F8EA
 										tst.b   d1
 										beq.s   loc_F5AA
-										lea     (RAM_BattleScene_ActionType).l,a2
+										lea     (BATTLESCENE_ACTION_TYPE).l,a2
 										move.w  #3,(a2)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a2
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
 										move.b  #$FF,(a2)
 										bra.w   loc_F782
 loc_F5AA:
@@ -15190,9 +15188,9 @@ loc_F6AC:
 										andi.b  #$7F,d0 
 										adda.w  d0,a0
 										move.b  #0,(a0)
-										lea     (RAM_BattleScene_ActionType).l,a2
+										lea     (BATTLESCENE_ACTION_TYPE).l,a2
 										move.w  #3,(a2)
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a2
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
 										move.b  #$FF,(a2)
 										bra.w   loc_F782
 loc_F6EA:
@@ -15247,7 +15245,7 @@ loc_F72E:
 										lea     ((byte_FF4000+$400)).l,a2
 										lea     ((byte_FF4A00+$300)).l,a3
 										bsr.w   sub_DD10
-										lea     (RAM_BattleScene_ActionType).l,a2
+										lea     (BATTLESCENE_ACTION_TYPE).l,a2
 										move.w  #3,(a2)
 loc_F782:
 										unlk    a6
@@ -15306,7 +15304,7 @@ sub_F7A0:
 										bsr.w   GetYPos
 										move.w  d2,d0
 										bsr.w   j_makeEnemyMoveOrder
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  (a0),d0
 										cmpi.b  #$FF,d0
 										bne.s   loc_F820
@@ -15360,7 +15358,7 @@ loc_F8A4:
 										beq.s   loc_F8C2
 										bra.w   loc_F8CE
 loc_F8C2:
-										lea     ((RAM_Battle_BattleEntityMoveString-$1000000)).w,a0
+										lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 										move.b  #$FF,(a0)
 										bra.w   loc_F8E2
 loc_F8CE:

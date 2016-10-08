@@ -23,12 +23,12 @@ nullsub_97:
 
 sub_5DCDE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $38F
 										bne.s   return_5DCEE
 										lea     cs_5DE2E(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $38F               ; set after the Petro death scene in Roft
 return_5DCEE:
 										
@@ -41,31 +41,31 @@ return_5DCEE:
 
 sub_5DCF0:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $38F
 										beq.s   return_5DD24
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $4C
 										beq.s   loc_5DD08
 										lea     cs_5DE76(pc), a0
 										trap    #6
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG
 										dc.w $4C                ; Zynk is a follower
 										bra.s   return_5DD24
 loc_5DD08:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $399
 										beq.s   return_5DD24
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1A
 										bne.s   return_5DD24
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										btst    d0,d0
 										beq.s   return_5DD24
 										lea     cs_5DE76(pc), a0
 										trap    #6
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG
 										dc.w $4C                ; Zynk is a follower
 return_5DD24:
 										

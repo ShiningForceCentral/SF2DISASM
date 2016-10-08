@@ -24,15 +24,15 @@ nullsub_73:
 
 sub_604D6:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3AC
 										beq.s   return_60500
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3AD
 										bne.s   return_60500
 										lea     cs_6093A(pc), a0
 										trap    #6
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3A2
 										beq.s   loc_604F6
 										lea     cs_60BA6(pc), a0
@@ -44,7 +44,7 @@ loc_604F6:
 										trap    #6
 loc_604FC:
 										
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3AD               ; set after Chaz and the priest go downstars in Yeel
 return_60500:
 										
@@ -57,17 +57,17 @@ return_60500:
 
 sub_60502:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1C
 										bne.s   return_6051C
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1B
 										beq.s   return_6051C
 										lea     cs_60708(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $47                ; Lemon is a follower
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3B1               ; set after recruiting Lemon in Yeel
 return_6051C:
 										

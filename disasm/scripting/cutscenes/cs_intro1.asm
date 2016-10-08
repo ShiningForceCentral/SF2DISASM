@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION scripting\cutscenes\cs_intro1 :
 ; Intro cutscene 1
-IntroCutscene1:     dc.w 4                  ; 0004 SET TEXT INDEX 105A : "Stay here, OK?{D2}"
+IntroCutscene1:     dc.w 4                  ; 0004 INIT TEXT CURSOR 105A : "Stay here, OK?{D2}"
 										dc.w $105A
 										dc.w $48                ; 0048 LOAD MAP 2A 2 5
 										dc.w $2A

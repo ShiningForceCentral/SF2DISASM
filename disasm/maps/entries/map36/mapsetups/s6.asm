@@ -6,7 +6,7 @@
 
 ms_map36_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $16
 										beq.s   return_5DA26
 										move.w  #$16,d0
@@ -17,7 +17,7 @@ return_5DA26:
 
 	; End of function ms_map36_InitFunction
 
-cs_5DA28:           dc.w 4                  ; 0004 SET TEXT INDEX CFB : "You defeated Zalbard and{N}saved Mitula.{W2}"
+cs_5DA28:           dc.w 4                  ; 0004 INIT TEXT CURSOR CFB : "You defeated Zalbard and{N}saved Mitula.{W2}"
 										dc.w $CFB
 										dc.w $52                ; 0052 RELATED TO TWO ENTITIES 7 83
 										dc.w 7

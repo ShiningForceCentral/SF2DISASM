@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle11\cs_beforebattle :
 ; Cutscene before battle 11
-bbcs_11:            dc.w 4                  ; 0004 SET TEXT INDEX 9B3 : "You'll come to the foot of{N}Mt. Volcano through this{N}dark cave.{W2}"
+bbcs_11:            dc.w 4                  ; 0004 INIT TEXT CURSOR 9B3 : "You'll come to the foot of{N}Mt. Volcano through this{N}dark cave.{W2}"
 										dc.w $9B3
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 0
 										dc.w 0

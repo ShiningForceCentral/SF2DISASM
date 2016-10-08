@@ -10,7 +10,7 @@ ms_map62_InitFunction:
 
 	; End of function ms_map62_InitFunction
 
-cs_5C876:           dc.w 4                  ; 0004 SET TEXT INDEX E1D : "Who is it?  Petro?{W1}"
+cs_5C876:           dc.w 4                  ; 0004 INIT TEXT CURSOR E1D : "Who is it?  Petro?{W1}"
 										dc.w $E1D
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 45E44
 										dc.b $80
@@ -65,7 +65,7 @@ cs_5C876:           dc.w 4                  ; 0004 SET TEXT INDEX E1D : "Who is 
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "Oh, you're not Petro.{N}Who...are you?{W1}"
 										dc.w $81
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5C8D4:           dc.w 4                  ; 0004 SET TEXT INDEX E23 : "Ancient stone?  Yes, my{N}family had it for a long{N}time.{W2}"
+cs_5C8D4:           dc.w 4                  ; 0004 INIT TEXT CURSOR E23 : "Ancient stone?  Yes, my{N}family had it for a long{N}time.{W2}"
 										dc.w $E23
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "Ancient stone?  Yes, my{N}family had it for a long{N}time.{W2}"
 										dc.w $81
@@ -90,7 +90,7 @@ cs_5C8D4:           dc.w 4                  ; 0004 SET TEXT INDEX E23 : "Ancient
 										dc.b 6
 										dc.w $8080
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5C8FE:           dc.w 4                  ; 0004 SET TEXT INDEX E2B : "You need my help?{W1}"
+cs_5C8FE:           dc.w 4                  ; 0004 INIT TEXT CURSOR E2B : "You need my help?{W1}"
 										dc.w $E2B
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "You need my help?{W1}"
 										dc.w $81
@@ -103,7 +103,7 @@ cs_5C8FE:           dc.w 4                  ; 0004 SET TEXT INDEX E2B : "You nee
 										dc.b 1
 										dc.w $8080
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5C914:           dc.w 4                  ; 0004 SET TEXT INDEX E2D : "I came here looking for{N}ancient treasure, and found{N}the Sky Orb.{W2}"
+cs_5C914:           dc.w 4                  ; 0004 INIT TEXT CURSOR E2D : "I came here looking for{N}ancient treasure, and found{N}the Sky Orb.{W2}"
 										dc.w $E2D
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "I came here looking for{N}ancient treasure, and found{N}the Sky Orb.{W2}"
 										dc.w $81

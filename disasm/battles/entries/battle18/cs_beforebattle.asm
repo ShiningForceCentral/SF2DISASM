@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle18\cs_beforebattle :
 ; Cutscene before battle 18
-bbcs_18:            dc.w 4                  ; 0004 SET TEXT INDEX 9D8 : "Stop!{W1}"
+bbcs_18:            dc.w 4                  ; 0004 INIT TEXT CURSOR 9D8 : "Stop!{W1}"
 										dc.w $9D8
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN C 7 16
 										dc.w $C

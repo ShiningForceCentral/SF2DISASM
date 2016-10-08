@@ -6,21 +6,21 @@
 
 ms_map9_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $206               ; Battle 18 completed
 										bne.s   loc_568D4
 										move.w  #$89,d0 
 										jsr     MoveEntityOutOfMap
 loc_568D4:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 										beq.s   loc_568E4
 										move.w  #$B,d0
 										jsr     MoveEntityOutOfMap
 loc_568E4:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $C                 ; Rick joined
 										beq.s   return_568F4
 										move.w  #$C,d0
@@ -31,7 +31,7 @@ return_568F4:
 
 	; End of function ms_map9_InitFunction
 
-cs_568F6:           dc.w 4                  ; 0004 SET TEXT INDEX 55C : "Where are you from?{W1}"
+cs_568F6:           dc.w 4                  ; 0004 INIT TEXT CURSOR 55C : "Where are you from?{W1}"
 										dc.w $55C
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0
 										dc.b 0
@@ -166,7 +166,7 @@ cs_568F6:           dc.w 4                  ; 0004 SET TEXT INDEX 55C : "Where a
 										dc.w 0
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_569BC:           dc.w 4                  ; 0004 SET TEXT INDEX 566 : "(Sniff)...(sniff)...I smell{N}something old....{W1}"
+cs_569BC:           dc.w 4                  ; 0004 INIT TEXT CURSOR 566 : "(Sniff)...(sniff)...I smell{N}something old....{W1}"
 										dc.w $566
 										dc.w $29                ; 0029 SET ENTITY DEST 7 F 39
 										dc.w 7
@@ -271,7 +271,7 @@ cs_569BC:           dc.w 4                  ; 0004 SET TEXT INDEX 566 : "(Sniff)
 										dc.b 3
 										dc.b 1
 										dc.w $8080
-word_56A70:         dc.w 4                  ; 0004 SET TEXT INDEX 56F : "You don't know what you'll{N}be missing!{W1}"
+word_56A70:         dc.w 4                  ; 0004 INIT TEXT CURSOR 56F : "You don't know what you'll{N}be missing!{W1}"
 										dc.w $56F
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B : "You don't know what you'll{N}be missing!{W1}"
 										dc.w $C00B
@@ -280,7 +280,7 @@ word_56A70:         dc.w 4                  ; 0004 SET TEXT INDEX 56F : "You don
 										dc.b 3
 										dc.w $B                 ; 000B JUMP 56AD4
 										dc.l word_56AD4         
-word_56A82:         dc.w 4                  ; 0004 SET TEXT INDEX 572 : "Great!  Good lad!{W1}"
+word_56A82:         dc.w 4                  ; 0004 INIT TEXT CURSOR 572 : "Great!  Good lad!{W1}"
 										dc.w $572
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C00B : "Great!  Good lad!{W1}"
 										dc.w $C00B
@@ -330,7 +330,7 @@ word_56AD4:         dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 										dc.w 0
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_56AE6:           dc.w 4                  ; 0004 SET TEXT INDEX 570 : "You again?!{W1}"
+cs_56AE6:           dc.w 4                  ; 0004 INIT TEXT CURSOR 570 : "You again?!{W1}"
 										dc.w $570
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX C00B : "You again?!{W1}"
 										dc.w $C00B
@@ -342,7 +342,7 @@ cs_56AE6:           dc.w 4                  ; 0004 SET TEXT INDEX 570 : "You aga
 										dc.l word_56A82         
 										dc.w $B                 ; 000B JUMP 56A70
 										dc.l word_56A70         
-cs_56B02:           dc.w 4                  ; 0004 SET TEXT INDEX 583 : "Are you the boy who killed{N}the legendary Kraken?{W2}"
+cs_56B02:           dc.w 4                  ; 0004 INIT TEXT CURSOR 583 : "Are you the boy who killed{N}the legendary Kraken?{W2}"
 										dc.w $583
 										dc.w $53                ; 0053  C FFFF
 										dc.w $C

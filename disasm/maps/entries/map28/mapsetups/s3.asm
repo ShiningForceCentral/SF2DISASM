@@ -8,7 +8,7 @@ ms_map28_ZoneEvents:dc.w $FD00
 
 sub_5F370:
 										
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l VInt_UpdateEntities
 										clr.w   d0
@@ -16,12 +16,12 @@ sub_5F370:
 										tst.b   ((ENTITY_DATA_STRUCT_FACING-$1000000)).w
 										bne.s   loc_5F38E
 										lea     cs_5F3A2(pc), a0
-										trap    #TRAP_MAPSCRIPT
+										trap    #MAPSCRIPT
 										bra.s   return_5F394
 loc_5F38E:
 										
 										lea     cs_5F3C4(pc), a0
-										trap    #TRAP_MAPSCRIPT
+										trap    #MAPSCRIPT
 return_5F394:
 										
 										rts

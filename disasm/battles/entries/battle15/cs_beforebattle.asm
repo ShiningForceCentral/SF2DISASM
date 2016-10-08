@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle15\cs_beforebattle :
 ; Cutscene before battle 15
-bbcs_15:            dc.w 4                  ; 0004 SET TEXT INDEX 9C7 : "This is the Ancient Hall{N}that leads to the Ancient{N}Tunnel...{W1}"
+bbcs_15:            dc.w 4                  ; 0004 INIT TEXT CURSOR 9C7 : "This is the Ancient Hall{N}that leads to the Ancient{N}Tunnel...{W1}"
 										dc.w $9C7
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 32 9 F
 										dc.w $32

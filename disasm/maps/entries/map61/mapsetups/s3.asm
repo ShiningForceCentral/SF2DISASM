@@ -17,15 +17,15 @@ ms_map61_ZoneEvents:dc.b 4
 
 sub_5C6A6:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2DA
 										bne.s   return_5C6BC
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $4D
 										beq.s   return_5C6BC
 										lea     cs_5C6CA(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2DA               ; set after the old man opens the door to the Woodel Panel shrine interior
 return_5C6BC:
 										

@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle40\cs_afterbattle :
 ; Cutscene after battle 40
-abcs_battle40:      dc.w 4                  ; 0004 SET TEXT INDEX BF9 : "{LEADER}, you won?{N}You've become so strong.{W2}"
+abcs_battle40:      dc.w 4                  ; 0004 INIT TEXT CURSOR BF9 : "{LEADER}, you won?{N}You've become so strong.{W2}"
 										dc.w $BF9
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 36 A 4
 										dc.w $36

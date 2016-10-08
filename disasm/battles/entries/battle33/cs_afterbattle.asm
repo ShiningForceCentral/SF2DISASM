@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle33\cs_afterbattle :
 ; Cutscene after battle 33
-abcs_battle33:      dc.w 4                  ; 0004 SET TEXT INDEX B3C : "There may be some survivors{N}somewhere.{W1}"
+abcs_battle33:      dc.w 4                  ; 0004 INIT TEXT CURSOR B3C : "There may be some survivors{N}somewhere.{W1}"
 										dc.w $B3C
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 1F 8 6
 										dc.w $1F

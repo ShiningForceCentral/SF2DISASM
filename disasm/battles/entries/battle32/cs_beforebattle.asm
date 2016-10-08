@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle32\cs_beforebattle :
 ; Cutscene before battle 32
-bbcs_32:            dc.w 4                  ; 0004 SET TEXT INDEX B1D : "I heard about you from{N}Geshp.{W1}"
+bbcs_32:            dc.w 4                  ; 0004 INIT TEXT CURSOR B1D : "I heard about you from{N}Geshp.{W1}"
 										dc.w $B1D
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 4A A 26
 										dc.w $4A

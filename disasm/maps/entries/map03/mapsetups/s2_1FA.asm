@@ -61,7 +61,7 @@ sub_51210:
 										
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2A6               ; "Already passed away...{N}{LEADER} feels pity.{W1}"
 										rts
 
@@ -72,7 +72,7 @@ sub_51210:
 
 sub_51220:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $299               ; "(Shiver)....{N}The Galam Army was so{N}rude.{W1}"
 										rts
 
@@ -83,7 +83,7 @@ sub_51220:
 
 sub_51226:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $29A               ; "Galam soldiers rushed into{N}the castle.  What's going{N}on?{W1}"
 										rts
 
@@ -94,7 +94,7 @@ sub_51226:
 
 sub_5122C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $29B               ; "Be quiet when the Galam{N}Army comes in!  Got it?{W1}"
 										rts
 
@@ -105,7 +105,7 @@ sub_5122C:
 
 sub_51232:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $29C               ; "I'm not afraid of Galam!{N}Grown-ups are cowards.{W1}"
 										rts
 
@@ -116,7 +116,7 @@ sub_51232:
 
 sub_51238:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $29D               ; "It has been so quiet since{N}they forced their way into{N}the castle.{W2}{N}What's going on?{W1}"
 										rts
 
@@ -127,7 +127,7 @@ sub_51238:
 
 sub_5123E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $29E               ; "Why did Galam invade our{N}country so suddenly?  Why?{N}We are allies.{W1}"
 										rts
 
@@ -138,7 +138,7 @@ sub_5123E:
 
 sub_51244:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $29F               ; "I can't believe it!{W2}{N}The Galam Army went into{N}the castle with Mr. {NAME;28}{N}in the lead.{W1}"
 										rts
 
@@ -149,7 +149,7 @@ sub_51244:
 
 sub_5124A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2A0               ; "See, see!{N}Galam soldiers destroyed{N}the cages!{W2}{N}The strange animals ran{N}away!{W1}"
 										rts
 
@@ -160,7 +160,7 @@ sub_5124A:
 
 sub_51250:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2A1               ; "{LEADER}, are you{N}alright?{W2}{N}Please do not go into{N}the castle, {LEADER}.{W1}"
 										rts
 
@@ -171,34 +171,34 @@ sub_51250:
 
 sub_51256:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w 6                  ; Kiwi joined
 										bne.s   return_512B8
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2A2               ; "(Shiver)...ooouu....{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2A3               ; "{CLEAR}He is shivering.{N}Will you name him?"
 										jsr     j_YesNoPrompt
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										tst.w   d0
 										bne.s   return_512B8
 										move.w  #6,d0
 										jsr     sub_1007C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2A4               ; "{LEADER} named him{N}{NAME;6} and beckoned.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.w  ((word_FFB09E-$1000000)).w,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2A5               ; "Oooo!  Ooooo!{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 										lea     cs_512BA(pc), a0

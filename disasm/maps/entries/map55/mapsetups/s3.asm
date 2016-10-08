@@ -11,7 +11,7 @@ ms_map55_ZoneEvents:dc.b 7
 
 sub_5E250:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $216
 										beq.s   (Map66s0_Blocks+$6CA-ms_map55_EntityEvents)
 										lea     word_5E27C(pc), a0

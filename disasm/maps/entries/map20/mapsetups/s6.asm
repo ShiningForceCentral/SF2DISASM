@@ -6,14 +6,14 @@
 
 ms_map20_InitFunction:
 										
-										cmpi.l  #$22803780,((RAM_Entity_StructOffset_XAndStart-$1000000)).w
+										cmpi.l  #$22803780,((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w
 										bne.s   loc_53988
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $25D               ; set after the scene in the King's bedroom
 										bne.s   loc_53982
 										lea     cs_53996(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $25D               ; set after the scene in the King's bedroom
 										bra.s   loc_53988
 loc_53982:
@@ -22,7 +22,7 @@ loc_53982:
 										trap    #6
 loc_53988:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1FB               ; Battle 7 completed
 										beq.s   return_53994
 										lea     cs_53FD8(pc), a0
@@ -33,7 +33,7 @@ return_53994:
 
 	; End of function ms_map20_InitFunction
 
-cs_53996:           dc.w 4                  ; 0004 SET TEXT INDEX 880 : "Mmmm....{N}Hmmm...mmmm....{W1}"
+cs_53996:           dc.w 4                  ; 0004 INIT TEXT CURSOR 880 : "Mmmm....{N}Hmmm...mmmm....{W1}"
 										dc.w $880
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 0 17 27 3
 										dc.b 0
@@ -325,7 +325,7 @@ cs_53B60:           dc.w $2E                ; 002E HIDE ENTITY 82
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 cs_53B66:           dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FD
-										dc.w 4                  ; 0004 SET TEXT INDEX 895 : "King Granseal!{N}Calm down!{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 895 : "King Granseal!{N}Calm down!{W1}"
 										dc.w $895
 										dc.w $15                ; 0015 SET ACTSCRIPT 82 FF 46172
 										dc.b $82
@@ -459,7 +459,7 @@ cs_53B66:           dc.w 5                  ; 0005 PLAY SOUND
 cs_53C42:           dc.w $32                ; 0032 SET CAMERA DEST 13 30
 										dc.w $13
 										dc.w $30
-										dc.w 4                  ; 0004 SET TEXT INDEX 898 : "Yeow!  My head!{N}No, I'm OK, {LEADER}.{W2}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 898 : "Yeow!  My head!{N}No, I'm OK, {LEADER}.{W2}"
 										dc.w $898
 										dc.w $15                ; 0015 SET ACTSCRIPT 82 FF 460CE
 										dc.b $82

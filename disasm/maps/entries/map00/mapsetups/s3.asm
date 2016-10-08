@@ -14,12 +14,12 @@ ms_map0_ZoneEvents: dc.b $E
 
 sub_5E3B0:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $321
 										bne.s   return_5E3C0
 										lea     cs_5E3C2(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $321               ; set after Zalbard taunts you in the scene outside the Mitula Shrine
 return_5E3C0:
 										
@@ -27,7 +27,7 @@ return_5E3C0:
 
 	; End of function sub_5E3B0
 
-cs_5E3C2:           dc.w 4                  ; 0004 SET TEXT INDEX AAB : "Welcome, Granseal force!{W1}"
+cs_5E3C2:           dc.w 4                  ; 0004 INIT TEXT CURSOR AAB : "Welcome, Granseal force!{W1}"
 										dc.w $AAB
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7

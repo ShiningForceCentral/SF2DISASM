@@ -18,7 +18,7 @@ cs_54570:           dc.w 5                  ; 0005 PLAY SOUND MUSIC_BOSS_ATTACK
 										dc.w 6
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_54578:           dc.w 4                  ; 0004 SET TEXT INDEX 3F5 : "OK.  Let's go!{W1}"
+cs_54578:           dc.w 4                  ; 0004 INIT TEXT CURSOR 3F5 : "OK.  Let's go!{W1}"
 										dc.w $3F5
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "OK.  Let's go!{W1}"
 										dc.w $1F
@@ -284,14 +284,14 @@ sub_54714:
 										moveq   #$F,d7
 loc_54716:
 										
-										subq.b  #1,((RAM_Map_AreaLayer1AutoscrollX-$1000000)).w
+										subq.b  #1,((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
 										moveq   #4,d0
 										jsr     (Sleep).w       
 										dbf     d7,loc_54716
 										moveq   #$17,d7
 loc_54726:
 										
-										addq.b  #1,((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										addq.b  #1,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										moveq   #4,d0
 										jsr     (Sleep).w       
 										dbf     d7,loc_54726

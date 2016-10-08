@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle15\cs_afterbattle :
 ; Cutscene after battle 15
-abcs_battle15:      dc.w 4                  ; 0004 SET TEXT INDEX 9CA : "It was lucky for me that I{N}met you.  Thank you.{W1}"
+abcs_battle15:      dc.w 4                  ; 0004 INIT TEXT CURSOR 9CA : "It was lucky for me that I{N}met you.  Thank you.{W1}"
 										dc.w $9CA
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 32 9 A
 										dc.w $32

@@ -6,7 +6,7 @@
 
 ms_map59_flag21F_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $21F
 										beq.s   return_615E4
 										lea     cs_615E6(pc), a0
@@ -17,7 +17,7 @@ return_615E4:
 
 	; End of function ms_map59_flag21F_InitFunction
 
-cs_615E6:           dc.w 4                  ; 0004 SET TEXT INDEX EB0 : "Where am I?{N}What's going on?{W2}"
+cs_615E6:           dc.w 4                  ; 0004 INIT TEXT CURSOR EB0 : "Where am I?{N}What's going on?{W2}"
 										dc.w $EB0
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF
@@ -2591,7 +2591,7 @@ cs_62658:           dc.w $33                ; 0033 SET QUAKE AMOUNT 5
 										dc.w $46                ; 0046  0 0
 										dc.w 0
 										dc.w 0
-										dc.w 4                  ; 0004 SET TEXT INDEX F44 : "Two years have passed{N}since Mitula resealed Zeon.{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR F44 : "Two years have passed{N}since Mitula resealed Zeon.{W1}"
 										dc.w $F44
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "Two years have passed{N}since Mitula resealed Zeon.{W1}"
 										dc.w $FFFF

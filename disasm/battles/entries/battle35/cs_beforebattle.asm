@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle35\cs_beforebattle :
 ; Cutscene before battle 35
-bbcs_35:            dc.w 4                  ; 0004 SET TEXT INDEX B76 : "You're still alive?{W1}"
+bbcs_35:            dc.w 4                  ; 0004 INIT TEXT CURSOR B76 : "You're still alive?{W1}"
 										dc.w $B76
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 4C 25 5
 										dc.w $4C

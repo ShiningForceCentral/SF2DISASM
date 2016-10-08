@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle26\cs_afterbattle :
 ; Cutscene after battle 26
-abcs_battle26:      dc.w 4                  ; 0004 SET TEXT INDEX A4D : "Is he alright?{W1}"
+abcs_battle26:      dc.w 4                  ; 0004 INIT TEXT CURSOR A4D : "Is he alright?{W1}"
 										dc.w $A4D
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 48 D B
 										dc.w $48

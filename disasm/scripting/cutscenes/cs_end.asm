@@ -518,7 +518,7 @@ word_4934A:         dc.w $18                ; 0018 FLASH ENTITY WHITE 0 B4
 										dc.w $B                 ; 000B JUMP 4934A
 										dc.l word_4934A         
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-										dc.w 4                  ; 0004 SET TEXT INDEX 142 : "{NAME} did nothing."
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 142 : "{NAME} did nothing."
 										dc.w $142
 										dc.w $15                ; 0015 SET ACTSCRIPT 1 1 44E3E
 										dc.b 1

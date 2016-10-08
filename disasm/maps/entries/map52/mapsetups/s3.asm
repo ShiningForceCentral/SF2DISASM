@@ -14,12 +14,12 @@ ms_map52_ZoneEvents:dc.b 3
 
 sub_5C4B6:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2C9
 										bne.s   return_5C4CA
 										lea     word_5C4EE(pc), a0
 										jsr     ExecuteMapScript
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2C9               ; set after the scene at the cliffs before Bedoe, where the devils are searching
 return_5C4CA:
 										

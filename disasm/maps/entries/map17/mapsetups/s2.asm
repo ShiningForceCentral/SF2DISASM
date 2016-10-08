@@ -54,10 +54,10 @@ nullsub_121:
 
 sub_52352:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 										bne.s   return_5235C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $37D               ; "We're talking about{N}Ground Seal.{N}Please, join in.{W1}"
 return_5235C:
 										
@@ -70,10 +70,10 @@ return_5235C:
 
 sub_5235E:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 										bne.s   return_52368
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $380               ; "Hey!  Don't interrupt!{N}Sit down next to me!{W1}"
 return_52368:
 										
@@ -86,10 +86,10 @@ return_52368:
 
 sub_5236A:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 										bne.s   return_52374
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $37F               ; "Hey, {LEADER}!{N}King Galam also knows about{N}Ground Seal!{W1}"
 return_52374:
 										
@@ -102,7 +102,7 @@ return_52374:
 
 sub_52376:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $3B1               ; "I didn't mean to...{W1}"
 										rts
 
@@ -113,7 +113,7 @@ sub_52376:
 
 sub_5237C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $343               ; "This is the treasure room!{N}You may not pass!{W1}"
 										rts
 
@@ -124,11 +124,11 @@ sub_5237C:
 
 sub_52382:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $344               ; "It's true that the messenger{N}met with an unnatural death.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $345               ; "But, that doesn't mean that{N}Granseal did it....{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $346               ; "I don't understand.{N}Why is King Galam so{N}impatient?{W1}"
 										rts
 
@@ -139,13 +139,13 @@ sub_52382:
 
 sub_52390:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $347               ; "When the messenger was found{N}dead, the King suffured a{N}great deal of pain.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $348               ; "Thank goodness, he{N}recovered quickly.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $349               ; "It's Granseals fault!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $34A               ; "I believe in my King!{W1}"
 										rts
 
@@ -156,15 +156,15 @@ sub_52390:
 
 sub_523A2:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 										bne.s   loc_523AE
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $37E               ; "You got a raw deal, huh?{N}The same thing happened to{N}the rat next door.{W1}"
 										bra.s   return_523B2
 loc_523AE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $381               ; "There are a lot of Galam{N}soldiers upstairs.{N}You still want to go?{W1}"
 return_523B2:
 										
@@ -177,7 +177,7 @@ return_523B2:
 
 sub_523B4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $382               ; "You're so brave.{N}Good luck!{W1}"
 										rts
 
@@ -188,17 +188,17 @@ sub_523B4:
 
 sub_523BA:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_523CC
 										lea     cs_52A3C(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bra.s   return_523D0
 loc_523CC:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $383               ; "Don't tell anybody{N}that I neglected my work.{N}If you do{D1}.{D1}.{D1}.{D1}I'll kill you!{W1}"
 return_523D0:
 										
@@ -211,7 +211,7 @@ return_523D0:
 
 sub_523D2:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $384               ; "Oh, I'm so busy!{W1}"
 										rts
 
@@ -231,9 +231,9 @@ nullsub_120:
 
 sub_523DA:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $384               ; "Oh, I'm so busy!{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $384               ; "Oh, I'm so busy!{W1}"
 										rts
 

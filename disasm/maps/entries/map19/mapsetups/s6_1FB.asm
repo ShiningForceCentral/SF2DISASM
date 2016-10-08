@@ -6,7 +6,7 @@
 
 ms_map19_flag1FB_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1FB               ; Battle 7 completed
 										beq.s   return_53174
 										lea     cs_53FD8(pc), a0
@@ -19,7 +19,7 @@ return_53174:
 
 cs_53176:           dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF
-										dc.w 4                  ; 0004 SET TEXT INDEX 2D1 : "That's all the info I can{N}give you about the mission.{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 2D1 : "That's all the info I can{N}give you about the mission.{W1}"
 										dc.w $2D1
 										dc.w $2B                ; 002B  90 1D 9 1 CF
 										dc.w $90
@@ -523,7 +523,7 @@ word_53482:         dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $59
 										dc.l word_534AC         
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
-										dc.w 4                  ; 0004 SET TEXT INDEX 2F5 : "You refuse the King's{N}wish?!{N}Answer again!{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 2F5 : "You refuse the King's{N}wish?!{N}Answer again!{W1}"
 										dc.w $2F5
 										dc.w $15                ; 0015 SET ACTSCRIPT 8A FF 45E44
 										dc.b $8A
@@ -546,7 +546,7 @@ word_534AC:         dc.w $2D                ; 002D MOVE ENTITY 8C FF 3 1
 										dc.w $23                ; 0023 SET ENTITY FACING 8C 2
 										dc.b $8C
 										dc.b 2
-										dc.w 4                  ; 0004 SET TEXT INDEX 2F6 : "Thank you.{N}Depart to fetch Hawel{N}immediately.{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 2F6 : "Thank you.{N}Depart to fetch Hawel{N}immediately.{W1}"
 										dc.w $2F6
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8C : "Thank you.{N}Depart to fetch Hawel{N}immediately.{W1}"
 										dc.w $8C
@@ -559,7 +559,7 @@ word_534AC:         dc.w $2D                ; 002D MOVE ENTITY 8C FF 3 1
 										dc.w 1
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_534D2:           dc.w 4                  ; 0004 SET TEXT INDEX 2B6 : "Stop, please stop!{N}Don't make me use my{N}sword any more!{W1}"
+cs_534D2:           dc.w 4                  ; 0004 INIT TEXT CURSOR 2B6 : "Stop, please stop!{N}Don't make me use my{N}sword any more!{W1}"
 										dc.w $2B6
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "Stop, please stop!{N}Don't make me use my{N}sword any more!{W1}"
 										dc.w $1C
@@ -749,7 +749,7 @@ cs_534D2:           dc.w 4                  ; 0004 SET TEXT INDEX 2B6 : "Stop, p
 										dc.w $2E                ; 002E HIDE ENTITY 85
 										dc.w $85
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_535FA:           dc.w 4                  ; 0004 SET TEXT INDEX 2B2 : "Oh, it's you, {LEADER}!{W2}"
+cs_535FA:           dc.w 4                  ; 0004 INIT TEXT CURSOR 2B2 : "Oh, it's you, {LEADER}!{W2}"
 										dc.w $2B2
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 81 : "Oh, it's you, {LEADER}!{W2}"
 										dc.w $81
@@ -768,12 +768,12 @@ cs_535FA:           dc.w 4                  ; 0004 SET TEXT INDEX 2B2 : "Oh, it'
 										dc.w $82
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_53620:           dc.w 4                  ; 0004 SET TEXT INDEX 2C9 : "Strange earthquake....{N}{LEADER}, you must{N}escape!{W1}"
+cs_53620:           dc.w 4                  ; 0004 INIT TEXT CURSOR 2C9 : "Strange earthquake....{N}{LEADER}, you must{N}escape!{W1}"
 										dc.w $2C9
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Strange earthquake....{N}{LEADER}, you must{N}escape!{W1}"
 										dc.w $80
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5362A:           dc.w 4                  ; 0004 SET TEXT INDEX 2CA : "OK, everybody is safe.{W1}"
+cs_5362A:           dc.w 4                  ; 0004 INIT TEXT CURSOR 2CA : "OK, everybody is safe.{W1}"
 										dc.w $2CA
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "OK, everybody is safe.{W1}"
 										dc.w $80

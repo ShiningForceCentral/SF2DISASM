@@ -6,17 +6,17 @@
 
 ms_map26_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $30B
 										bne.s   loc_59DF2
 										lea     cs_59E04(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $30B               ; set after the Cotton Balloon pops and you land in Floor World
-										move.b  #$1A,((RAM_EgressMapIdx-$1000000)).w
+										move.b  #$1A,((EGRESS_MAP_INDEX-$1000000)).w
 loc_59DF2:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $30C
 										beq.s   return_59E02
 										move.w  #$81,d0 
@@ -27,7 +27,7 @@ return_59E02:
 
 	; End of function ms_map26_InitFunction
 
-cs_59E04:           dc.w 4                  ; 0004 SET TEXT INDEX 6CB : "The Cotton Balloon popped.{W1}"
+cs_59E04:           dc.w 4                  ; 0004 INIT TEXT CURSOR 6CB : "The Cotton Balloon popped.{W1}"
 										dc.w $6CB
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF
@@ -202,7 +202,7 @@ cs_59E04:           dc.w 4                  ; 0004 SET TEXT INDEX 6CB : "The Cot
 										dc.w 7
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_59F20:           dc.w 4                  ; 0004 SET TEXT INDEX 6CC : "Ungh!{W2}"
+cs_59F20:           dc.w 4                  ; 0004 INIT TEXT CURSOR 6CC : "Ungh!{W2}"
 										dc.w $6CC
 										dc.w $32                ; 0032 SET CAMERA DEST 0 14
 										dc.w 0

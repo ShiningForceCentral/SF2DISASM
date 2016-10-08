@@ -10,7 +10,7 @@ ms_map3_flag21F_InitFunction:
 
 	; End of function ms_map3_flag21F_InitFunction
 
-cs_628C8:           dc.w 4                  ; 0004 SET TEXT INDEX F4B : "I envy you.{N}I'm an old woman now.{W2}"
+cs_628C8:           dc.w 4                  ; 0004 INIT TEXT CURSOR F4B : "I envy you.{N}I'm an old woman now.{W2}"
 										dc.w $F4B
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 87 : "I envy you.{N}I'm an old woman now.{W2}"
 										dc.w $87

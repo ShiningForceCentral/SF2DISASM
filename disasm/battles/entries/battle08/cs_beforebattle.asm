@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle08\cs_beforebattle :
 ; Cutscene before battle 8
-bbcs_08:            dc.w 4                  ; 0004 SET TEXT INDEX 99D : "It's over there!{N}There he is!{W1}"
+bbcs_08:            dc.w 4                  ; 0004 INIT TEXT CURSOR 99D : "It's over there!{N}There he is!{W1}"
 										dc.w $99D
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 48 1 2E
 										dc.w $48

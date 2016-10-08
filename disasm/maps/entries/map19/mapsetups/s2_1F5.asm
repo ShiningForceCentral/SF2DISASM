@@ -18,16 +18,16 @@ ms_map19_flag1F5_EntityEvents:
 
 sub_52F70:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_52F7E
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $249               ; "Well, boy.  Did you hear a{N}strange noise?{W2}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										btst    d0,d0           ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_52F7E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $24A               ; "I don't know why, but{N}everybody ignores my{N}questions....{W1}"
 										rts
 
@@ -38,7 +38,7 @@ loc_52F7E:
 
 sub_52F84:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $247               ; "The Minister ordered me{N}to stand here.{N}What's happening upstairs?{W1}"
 										rts
 
@@ -49,7 +49,7 @@ sub_52F84:
 
 sub_52F8A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $248               ; "By the Minister's order,{N}I cannot let you pass.{N}Sorry!{W1}"
 										rts
 

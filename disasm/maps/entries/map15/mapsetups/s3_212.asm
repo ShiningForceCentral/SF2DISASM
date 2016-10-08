@@ -21,15 +21,15 @@ nullsub_77:
 
 sub_5D008:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2D4
 										beq.s   return_5D01E
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $334
 										bne.s   return_5D01E
 										lea     cs_5D04E(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $334               ; set after Skreech's join scene has played in Tristan
 return_5D01E:
 										

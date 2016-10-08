@@ -6,25 +6,25 @@
 
 ms_map73_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2BC               ; set after ship arrives in Parmecia and you regain control of Bowie
 										bne.s   loc_50354
 										lea     cs_503A6(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2BC               ; set after ship arrives in Parmecia and you regain control of Bowie
 										rts
 loc_50354:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1FC               ; Battle 8 completed
 										beq.s   return_5036C
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2C1               ; set after you automatically walk into New Granseal after it is built
 										bne.s   return_5036C
 										lea     cs_50806(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2C1               ; set after you automatically walk into New Granseal after it is built
 										rts
 return_5036C:
@@ -41,7 +41,7 @@ sub_5036E:
 										moveq   #$A,d7
 loc_50370:
 										
-										addq.b  #1,((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										addq.b  #1,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										moveq   #4,d0
 										jsr     (Sleep).w       
 										dbf     d7,loc_50370
@@ -68,7 +68,7 @@ sub_5038E:
 										moveq   #$A,d7
 loc_50390:
 										
-										subq.b  #1,((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										subq.b  #1,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										jsr     (WaitForVInt).w 
 										dbf     d7,loc_50390
 										rts
@@ -80,12 +80,12 @@ loc_50390:
 
 sub_5039E:
 										
-										move.b  #0,((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										move.b  #0,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										rts
 
 	; End of function sub_5039E
 
-cs_503A6:           dc.w 4                  ; 0004 SET TEXT INDEX 8BF : "The people of Granseal have{N}arrived at their new home.{W1}"
+cs_503A6:           dc.w 4                  ; 0004 INIT TEXT CURSOR 8BF : "The people of Granseal have{N}arrived at their new home.{W1}"
 										dc.w $8BF
 										dc.w $55                ; 0055 RESET FORCE BATTLE STATS
 										dc.w $46                ; 0046  0 0
@@ -106,7 +106,7 @@ cs_503A6:           dc.w 4                  ; 0004 SET TEXT INDEX 8BF : "The peo
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_TOWN
 										dc.w 8
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 4                  ; 0004 SET TEXT INDEX 8A5 : "We were almost swallowed{N}by that chasm.{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 8A5 : "We were almost swallowed{N}by that chasm.{W1}"
 										dc.w $8A5
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "We were almost swallowed{N}by that chasm.{W1}"
 										dc.w $80
@@ -147,7 +147,7 @@ cs_503A6:           dc.w 4                  ; 0004 SET TEXT INDEX 8BF : "The peo
 										dc.w $80
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "Oh, that's good...{W1}"
 										dc.w $82
-word_50426:         dc.w 4                  ; 0004 SET TEXT INDEX 8B5 : "Minister, we're approaching{N}Parmecia!{W1}"
+word_50426:         dc.w 4                  ; 0004 INIT TEXT CURSOR 8B5 : "Minister, we're approaching{N}Parmecia!{W1}"
 										dc.w $8B5
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 80 : "Minister, we're approaching{N}Parmecia!{W1}"
 										dc.w $80
@@ -208,7 +208,7 @@ word_50426:         dc.w 4                  ; 0004 SET TEXT INDEX 8B5 : "Ministe
 										dc.w $84
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
-										dc.w 4                  ; 0004 SET TEXT INDEX 8BF : "The people of Granseal have{N}arrived at their new home.{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 8BF : "The people of Granseal have{N}arrived at their new home.{W1}"
 										dc.w $8BF
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "The people of Granseal have{N}arrived at their new home.{W1}"
 										dc.w $FFFF
@@ -729,7 +729,7 @@ word_5079E:         dc.w $28
 										dc.b $B3
 										dc.l eas_Init           
 										dc.w $FFFF
-cs_50806:           dc.w 4                  ; 0004 SET TEXT INDEX 8F0 : "Look at that, {LEADER}!{N}They've finished breaking{N}up the ship.{W1}"
+cs_50806:           dc.w 4                  ; 0004 INIT TEXT CURSOR 8F0 : "Look at that, {LEADER}!{N}They've finished breaking{N}up the ship.{W1}"
 										dc.w $8F0
 										dc.w $42                ; 0042 RELATED TO LOADING MAP ENTITIES 5094A
 										dc.l word_5094A

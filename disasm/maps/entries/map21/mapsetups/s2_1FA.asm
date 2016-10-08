@@ -9,31 +9,31 @@ ms_map21_flag1FA_EntityEvents:
 
 sub_53EAE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $260               ; set after agreeing to go to the tower with Astral
 										bne.s   loc_53EC8
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_53EC2
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $238               ; "This west tower leads to{N}the Ancient Tower.{W2}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_53EC2:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $239               ; "The Ancient Tower is a{N}sacred place where only the{N}King can go.{W1}"
 										bra.s   return_53EDC
 loc_53EC8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $243               ; "Sir Astral is already{N}inside the tower.  Hurry!{W1}"
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   return_53EDC
 										lea     cs_53EF4(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_53EDC:
 										
@@ -48,7 +48,7 @@ sub_53EDE:
 										
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $244               ; "He's fainted.{W1}"
 										rts
 
@@ -59,7 +59,7 @@ sub_53EDE:
 
 sub_53EEE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $245               ; "It was a devil!{N}I don't want to stand{N}here any more!{W2}{N}Hey, you!  Can you stand{N}guard for me here?{W1}"
 nullsub_126:
 										

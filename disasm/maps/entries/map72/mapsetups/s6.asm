@@ -6,10 +6,10 @@
 
 ms_map72_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2CC               ; set after your raft-giving conversation with the mayor in Polca
 										beq.s   return_4FF40
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $A                 ; Luke joined
 										bne.s   return_4FF40
 										lea     cs_4FF5A(pc), a0
@@ -27,12 +27,12 @@ return_4FF40:
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_SAD_THEME_3
 										dc.w $F
 										dc.w $39                ; 0039 FADE IN FROM BLACK
-										dc.w 4                  ; 0004 SET TEXT INDEX F0 : "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR F0 : "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
 										dc.w $F0
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 0 : "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
 										dc.w 0
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_4FF5A:           dc.w 4                  ; 0004 SET TEXT INDEX 614 : "Now, let's go to Devil's Tail{N}to see Creed!{W1}"
+cs_4FF5A:           dc.w 4                  ; 0004 INIT TEXT CURSOR 614 : "Now, let's go to Devil's Tail{N}to see Creed!{W1}"
 										dc.w $614
 										dc.w $2B                ; 002B  A 2B 2F 3 FF
 										dc.w $A
@@ -116,7 +116,7 @@ cs_4FF5A:           dc.w 4                  ; 0004 SET TEXT INDEX 614 : "Now, le
 										dc.w $13                ; 0013 SET STORY FLAG 10 : Battle 16 unlocked
 										dc.w $10
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D : "{NAME;11}, {NAME;11}!{W1}"
+cs_4FFDA:           dc.w 4                  ; 0004 INIT TEXT CURSOR D0D : "{NAME;11}, {NAME;11}!{W1}"
 										dc.w $D0D
 										dc.w $2B                ; 002B  B 3F 3F 1 B
 										dc.w $B
@@ -502,7 +502,7 @@ cs_4FFDA:           dc.w 4                  ; 0004 SET TEXT INDEX D0D : "{NAME;1
 										dc.w $13                ; 0013 SET STORY FLAG 19 : Battle 25 unlocked
 										dc.w $19
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5023E:           dc.w 4                  ; 0004 SET TEXT INDEX D1D : "What?!  You forgot to bring{N}the {ITEM} with you?{N}{LEADER}, are you serious?{W2}"
+cs_5023E:           dc.w 4                  ; 0004 INIT TEXT CURSOR D1D : "What?!  You forgot to bring{N}the {ITEM} with you?{N}{LEADER}, are you serious?{W2}"
 										dc.w $D1D
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7

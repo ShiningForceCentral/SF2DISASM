@@ -10,7 +10,7 @@ ms_map42_InitFunction:
 
 	; End of function ms_map42_InitFunction
 
-cs_5FE9A:           dc.w 4                  ; 0004 SET TEXT INDEX D09 : "The Jewel of Light begins{N}to glow.{W2}"
+cs_5FE9A:           dc.w 4                  ; 0004 INIT TEXT CURSOR D09 : "The Jewel of Light begins{N}to glow.{W2}"
 										dc.w $D09
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "The Jewel of Light begins{N}to glow.{W2}"
 										dc.w $FFFF
@@ -84,7 +84,7 @@ cs_5FE9A:           dc.w 4                  ; 0004 SET TEXT INDEX D09 : "The Jew
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Oh, an opening!{N}The light is leading us!{W1}"
 										dc.w $1F
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5FF06:           dc.w 4                  ; 0004 SET TEXT INDEX D07 : "Sounds like something opened{N}somewhere.{W1}"
+cs_5FF06:           dc.w 4                  ; 0004 INIT TEXT CURSOR D07 : "Sounds like something opened{N}somewhere.{W1}"
 										dc.w $D07
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
 										dc.w $18                ; 0018 FLASH ENTITY WHITE 0 3C

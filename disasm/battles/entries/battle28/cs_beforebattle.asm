@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle28\cs_beforebattle :
 ; Cutscene before battle 28
-bbcs_28:            dc.w 4                  ; 0004 SET TEXT INDEX A65 : "Wow, look at that?{W1}"
+bbcs_28:            dc.w 4                  ; 0004 INIT TEXT CURSOR A65 : "Wow, look at that?{W1}"
 										dc.w $A65
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 2F 0 4
 										dc.w $2F

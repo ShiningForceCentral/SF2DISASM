@@ -13,7 +13,7 @@ p_Start:            dc.l Start              ; Start Address
 																						; Illegal instruction
 										dc.l Int_ZeroDivide     ; Zero Divide
 										dc.l Int_OtherError     ; CHK instruction
-										dc.l Int_OtherError     ; TRAPV instruction
+off_1C:             dc.l Int_OtherError     ; TRAPV instruction
 										dc.l Int_OtherError     ; Privilege Violation
 										dc.l Int_OtherError     ; Trace
 										dc.l Int_OtherError     ; Line 1010 Emulator
@@ -96,7 +96,7 @@ aGmMk13150:         dc.b 'GM MK-1315 -0'    ; Serial Number
 										dc.w $8921              ; checksum
 aJ:                 dc.b 'J               '
 										dc.l 0                  ; Rom Start Adress
-										dc.l $1FFFFF            ; Rom End Adress
+RomEndAddress:      dc.l $1FFFFF            ; Rom End Adress
 										dc.l $FF0000            ; Ram Start Adress
 										dc.l $FFFFFF            ; Ram End Adress
 										dc.l $5241F820          ; SRam data
@@ -111,21 +111,21 @@ aU:                 dc.b 'U               ' ; Countries codes
 
 ; =============== S U B R O U T I N E =======================================
 
-Initialize:
+SystemInit:
 										
 										bsr.s   VDP_init
 										bsr.w   InitZ80
 										bsr.s   InitRamVdpData
-										jmp     (Main).l
+										jmp     (GameInit).l
 
-	; End of function Initialize
+	; End of function SystemInit
 
 
 ; =============== S U B R O U T I N E =======================================
 
 VDP_init:
 										move.w  #$3FFE,d0
-										lea     (RAM_Start).l,a0
+										lea     (RAM_START).l,a0
 loc_218:
 										clr.l   (a0)+           ; clear all RAM !
 										dbf     d0,loc_218      
@@ -151,24 +151,24 @@ loc_22E:
 InitRamVdpData:
 										
 										move.l  #byte_FFD780,(dword_FFDED0).l
-										move.l  #byte_FFD550,(FFDED4_VdpRegCommands).l
+										move.l  #byte_FFD550,(VDP_REG_COMMANDS).l
 										moveq   #$40,d0 ; PD2 output mode ?
 										move.b  d0,(CTRL1_BIS).l
 										move.b  d0,(CTRL2).l
 										move.b  d0,(CTRL3_BIS).l
-										lea     (FFD100_MaybeRelatedToHscroll).l,a0
+										lea     (dword_FFD100).l,a0
 										move.w  #$FF,d0
 loc_276:
 										move.w  #0,(a0)+        ; clear from FFD100 to FFD500
 										move.w  #0,(a0)+
 										dbf     d0,loc_276      
-										lea     (FFD500_MaybeRelatedToVscroll).l,a0
+										lea     (word_FFD500).l,a0
 										move.w  #$13,d0
 loc_28C:
 										move.w  #0,(a0)+        ; clear next 80d bytes
 										move.w  #0,(a0)+
 										dbf     d0,loc_28C      
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										moveq   #$7F,d1 
 loc_2A0:
 										clr.w   (a0)+           ; clear palette replicas ?
@@ -350,7 +350,7 @@ loc_3DE:
 										move.w  (VDP_Control).l,d0
 										andi.w  #2,d0           ; wait for free DMA
 										bne.s   loc_3DE
-										bra.w   Initialize
+										bra.w   SystemInit
 
 	; End of function Start
 
@@ -556,7 +556,7 @@ loc_574:
 Trap6_TriggerAndExecuteMapScript:
 										
 										movem.l d0-a6,-(sp)
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l VInt_UpdateEntities
 										jsr     j_ExecuteMapScript
@@ -585,13 +585,13 @@ VInt:
 										bsr.w   RelatedToBits031_sub_674
 										bsr.w   EnableDisplay
 										bsr.w   RelatedToBit4_sub_700
-										bsr.w   ParseFadingFX   
+										bsr.w   ParseFadingFX
 										bsr.w   UpdateSoundAndInputAndPalettes
 										andi    #$F800,sr       ; disable interrupts
 										clr.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 										tst.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
 										bne.s   loc_5DA
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #7,((P1_INPUT-$1000000)).w
 																						; if Start pushed, hide windows
 										beq.s   loc_5DA
 										move.b  #$FF,((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
@@ -603,10 +603,10 @@ loc_5DA:
 loc_5EC:
 										addq.b  #1,((byte_FFDEA0-$1000000)).w
 										clr.b   (byte_FFDEA1).l
-										move.w  (FFDEAA_VdpReg00Status).l,(VDP_Control).l
+										move.w  (VDP_REG00_STATUS).l,(VDP_Control).l
 										move.l  ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w,d0
 										beq.s   loc_620
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #7,((P1_INPUT-$1000000)).w
 																						; if we're currently playing the Intro, check if Start is pushed
 										beq.s   loc_620
 										clr.l   ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
@@ -657,8 +657,8 @@ loc_658:
 
 DisableDisplay:
 										
-										andi.b  #$BF,(FFDEAD_VdpReg01Value).l
-										move.w  (FFDEAC_VdpReg01Status).l,(VDP_Control).l
+										andi.b  #$BF,(VDP_REG01_VALUE).l
+										move.w  (VDP_REG01_STATUS).l,(VDP_Control).l
 										rts
 
 	; End of function DisableDisplay
@@ -774,7 +774,7 @@ loc_75C:
 										beq.s   loc_7BA
 										lea     (byte_FFD550).l,a0
 										lea     (VDP_Control).l,a6
-										move.w  (FFDEAC_VdpReg01Status).l,d7
+										move.w  (VDP_REG01_STATUS).l,d7
 										ori.b   #$10,d7
 										move.w  d7,(a6)
 loc_794:
@@ -786,11 +786,11 @@ loc_794:
 										move.w  (TEMP_DMA_VALUE).l,(a6)
 										subq.b  #1,(byte_FFDE96).l
 										bne.s   loc_794
-										move.w  (FFDEAC_VdpReg01Status).l,(a6)
+										move.w  (VDP_REG01_STATUS).l,(a6)
 										move.w  #$8F02,(a6)
 loc_7BA:
 										move.w  #0,(Z80BusReq).l
-										move.l  #byte_FFD550,(FFDED4_VdpRegCommands).l
+										move.l  #byte_FFD550,(VDP_REG_COMMANDS).l
 return_7CC:
 										
 										rts
@@ -1077,7 +1077,7 @@ loc_9FA:
 										tst.b   ((byte_FFDE9D-$1000000)).w
 										bne.s   loc_A60
 										moveq   #2,d0
-										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,d1
+										move.b  ((P1_INPUT-$1000000)).w,d1
 										lsr.w   #1,d1
 										dbcc    d0,*+4
 										lsr.w   #1,d1
@@ -1091,10 +1091,10 @@ loc_9FA:
 										move.b  ((PRIMARY_WALKING_DIRECTION-$1000000)).w,d0
 																						; get current walking direction
 loc_A26:
-										eor.b   d0,((RAM_Input_Player1_StateA-$1000000)).w
+										eor.b   d0,((P1_INPUT-$1000000)).w
 																						; get new direction
 										moveq   #2,d0
-										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,d1
+										move.b  ((P1_INPUT-$1000000)).w,d1
 										lsr.w   #1,d1
 										dbcc    d0,*+4
 										lsr.w   #1,d1
@@ -1105,30 +1105,30 @@ loc_A26:
 										dbcc    d0,*+4
 										tst.w   d0
 										bgt.s   loc_A52
-										andi.b  #3,((RAM_Input_Player1_StateA-$1000000)).w
+										andi.b  #3,((P1_INPUT-$1000000)).w
 																						; if both directions are new, only keep vertical one
 loc_A52:
 										bra.s   loc_A60
 loc_A54:
-										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,d1
+										move.b  ((P1_INPUT-$1000000)).w,d1
 																						; if only one direction pushed, set it as primary
 										andi.w  #$F,d1
 										move.b  d1,((PRIMARY_WALKING_DIRECTION-$1000000)).w
 loc_A60:
-										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,d0
+										move.b  ((P1_INPUT-$1000000)).w,d0
 										move.b  d0,((CURRENT_PLAYER_INPUT-$1000000)).w
 																						; overwrite P2 6-button data with P1 state with walking direction
 										cmp.b   ((LAST_PLAYER_INPUT-$1000000)).w,d0
 										bne.s   loc_A86         
-										addq.b  #1,((byte_FFDEED-$1000000)).w
+										addq.b  #1,((INPUT_REPEAT_DELAYER-$1000000)).w
 																						; if input is the same then increment counter and ignore input
-										cmpi.b  #$18,((byte_FFDEED-$1000000)).w
+										cmpi.b  #$18,((INPUT_REPEAT_DELAYER-$1000000)).w
 										bcc.s   loc_A80
 										clr.b   ((CURRENT_PLAYER_INPUT-$1000000)).w
 																						; keep current input only when counter reaches $18
 										bra.s   loc_A84
 loc_A80:
-										subq.b  #6,((byte_FFDEED-$1000000)).w
+										subq.b  #6,((INPUT_REPEAT_DELAYER-$1000000)).w
 loc_A84:
 										bra.s   loc_AAC
 loc_A86:
@@ -1144,7 +1144,7 @@ loc_A94:
 										tst.b   d2
 										bne.w   loc_AAC
 loc_AA8:
-										clr.b   ((byte_FFDEED-$1000000)).w
+										clr.b   ((INPUT_REPEAT_DELAYER-$1000000)).w
 loc_AAC:
 										move.w  #0,(Z80BusReq).l
 										bsr.w   sub_19F8        
@@ -1154,8 +1154,6 @@ loc_AAC:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; fade subroutine to comment again ;_;
 
 ParseFadingFX:
 										
@@ -1183,7 +1181,7 @@ loc_AEC:
 										bne.s   loc_B0A
 										andi.w  #$F,d1          ; go x backwards
 										sub.b   d1,((FADING_POINTER-$1000000)).w
-										bra.w   ParseFadingFX   
+										bra.w   ParseFadingFX
 loc_B0A:
 										ext.w   d1
 										move.w  d1,d0
@@ -1225,7 +1223,7 @@ loc_B9A:
 GetVdpRegStatus:
 										
 										movem.l a0,-(sp)
-										lea     (FFDEAA_VdpReg00Status).l,a0
+										lea     (VDP_REG00_STATUS).l,a0
 										add.w   d0,d0
 										move.w  (a0,d0.w),d0
 										movem.l (sp)+,a0
@@ -1242,7 +1240,7 @@ SetVdpReg:
 										
 										bsr.s   WaitForDMAFree  
 										movem.l d0-d1/a0,-(sp)
-										lea     (FFDEAA_VdpReg00Status).l,a0
+										lea     (VDP_REG00_STATUS).l,a0
 										move.w  d0,(VDP_Control).l
 										move.w  d0,d1
 										andi.w  #$7F00,d0
@@ -1260,7 +1258,7 @@ VdpEnableDisplay:
 										
 										bsr.s   WaitForDMAFree  
 										movem.l d0-d1/a0,-(sp)
-										lea     (FFDEAA_VdpReg00Status).l,a0
+										lea     (VDP_REG00_STATUS).l,a0
 										add.w   d0,d0
 										or.b    d1,1(a0,d0.w)   ; enable display
 										bra.s   SendVDPCommand
@@ -1274,7 +1272,7 @@ VdpDisableDisplay:
 										
 										bsr.s   WaitForDMAFree  
 										movem.l d0-d1/a0,-(sp)
-										lea     (FFDEAA_VdpReg00Status).l,a0
+										lea     (VDP_REG00_STATUS).l,a0
 										add.w   d0,d0
 										and.b   d1,1(a0,d0.w)   ; disable display
 
@@ -1384,7 +1382,7 @@ SetFFDE94bit1:
 DuplicatePalettes:
 										
 										movem.l d7/a5-a6,-(sp)
-										lea     (FFD080_Palette1bis).l,a5
+										lea     (PALETTE_1_BIS).l,a5
 										lea     (PALETTE_1).l,a6
 										move.w  #$3F,d7 
 loc_C76:
@@ -1402,7 +1400,7 @@ StoreVdpCommandster:
 										move    sr,-(sp)
 										move    #$2700,sr       ; disable interrupts
 										movem.l a6,-(sp)
-										movea.l (FFDED4_VdpRegCommands).l,a6
+										movea.l (VDP_REG_COMMANDS).l,a6
 										move.w  #$8F02,(a6)+    ; auto increment : 2
 										move.w  #$9400,(a6)+    ; DMA length
 										move.w  #$9340,(a6)+
@@ -1411,7 +1409,7 @@ StoreVdpCommandster:
 										move.w  #$977F,(a6)+    ; RAM to VRAM, address : 0x3FE800
 										move.w  #$C000,(a6)+
 										move.w  #$80,(a6)+ ; data port stuff ?
-										move.l  a6,(FFDED4_VdpRegCommands).l
+										move.l  a6,(VDP_REG_COMMANDS).l
 										addq.b  #1,(byte_FFDE96).l
 										movem.l (sp)+,a6
 										move    (sp)+,sr
@@ -1426,7 +1424,7 @@ StoreVdpCommandster:
 
 CopyPaletteIncomplete:
 										
-										lea     (FFD080_Palette1bis).l,a1
+										lea     (PALETTE_1_BIS).l,a1
 										move.w  #$F,d0
 loc_CCE:
 										move.w  (a0)+,(a1)+
@@ -1440,7 +1438,7 @@ loc_CCE:
 
 FadeInFromBlack:
 										
-										move.b  #1,((FADING_SETTING-$1000000)).w
+										move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
 										bra.w   ExecuteFading
 
 	; End of function FadeInFromBlack
@@ -1450,7 +1448,7 @@ FadeInFromBlack:
 
 FadeOutToBlack:
 										
-										move.b  #2,((FADING_SETTING-$1000000)).w
+										move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
 										bra.w   ExecuteFading
 
 	; End of function FadeOutToBlack
@@ -1460,7 +1458,7 @@ FadeOutToBlack:
 
 FadeInFromWhite:
 										
-										move.b  #3,((FADING_SETTING-$1000000)).w
+										move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
 										bra.w   ExecuteFading
 
 	; End of function FadeInFromWhite
@@ -1470,7 +1468,7 @@ FadeInFromWhite:
 
 FadeOutToWhite:
 										
-										move.b  #4,((FADING_SETTING-$1000000)).w
+										move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
 
 	; End of function FadeOutToWhite
 
@@ -1479,7 +1477,7 @@ FadeOutToWhite:
 
 ExecuteFading:
 										
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -1499,7 +1497,7 @@ loc_D0E:
 DoSomethingWithPalettes1or2:
 										
 										movem.l d2-a2,-(sp)
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										lea     (PALETTE_1).l,a1
 										moveq   #3,d6
 loc_D30:
@@ -1597,8 +1595,8 @@ loc_DF6:
 										move.w  #$6800,(a6)     ; to VRAM 0xE800
 										move.w  #$83,(TEMP_DMA_VALUE).l 
 										move.w  (TEMP_DMA_VALUE).l,(a6)
-										move.w  (FFDEAC_VdpReg01Status).l,(a6)
-																						; WTF, shouldn't it go to reg 01 with value 81 instead of 83 ??
+										move.w  (VDP_REG01_STATUS).l,(a6)
+																						; Shouldn't it go to reg 01 with value 81 instead of 83 ??
 										rts
 
 	; End of function DmaSpriteTable
@@ -1609,7 +1607,7 @@ loc_DF6:
 ClearSpriteTable:
 										
 										movem.l d0-d1/a0,-(sp)
-										lea     (RAM_Struct_Sprite_Y).l,a0
+										lea     (SPRITE_Y).l,a0 
 										moveq   #$3F,d1 
 										moveq   #1,d0
 loc_E22:
@@ -1661,7 +1659,7 @@ loc_E70:
 DoDMAstuffbis:
 										
 										movem.l d0-d3,-(sp)
-										move.w  (FFDEAC_VdpReg01Status).l,d3
+										move.w  (VDP_REG01_STATUS).l,d3
 										ori.b   #$10,d3
 										move.w  d3,(VDP_Control).l
 										move.w  #$8F01,(VDP_Control).l
@@ -1679,7 +1677,7 @@ loc_EC8:
 										move.w  (VDP_Control).l,d0
 										andi.w  #2,d0           ; wait for DMA free
 										bne.s   loc_EC8
-										move.w  (FFDEAC_VdpReg01Status).l,d3
+										move.w  (VDP_REG01_STATUS).l,d3
 										move.w  d3,(VDP_Control).l
 										move.w  #$8F02,(VDP_Control).l
 																						; auto increment : 2
@@ -1691,7 +1689,7 @@ loc_EC8:
 
 ; =============== S U B R O U T I N E =======================================
 
-; wait until VInt func is called, which clears RAM:def7
+; Wait until VInt func is called, i.e. next frame
 
 WaitForVInt:
 										
@@ -1708,7 +1706,7 @@ loc_EFC:
 
 ; =============== S U B R O U T I N E =======================================
 
-; wait for D0 Vints
+; wait for D0 Vints/frames
 
 Sleep:
 										movem.w d0,-(sp)
@@ -1822,13 +1820,13 @@ sub_F90:
 loc_F94:
 										lea     ($E000).l,a6
 										lsl.w   #1,d5
-										move.w  (FFD100_MaybeRelatedToHscroll+2).l,d7
+										move.w  (dword_FFD100+2).l,d7
 										addq.w  #4,d7
 										lsr.w   #2,d7
 										sub.w   d7,d5
 										andi.w  #$7E,d5 
 										lsl.w   #7,d6
-										move.w  (FFD502_MaybeRelatedToOtherVScrollStuff).l,d7
+										move.w  (word_FFD502).l,d7
 										subq.w  #8,d7
 										lsl.w   #4,d7
 										add.w   d7,d6
@@ -1841,12 +1839,12 @@ loc_F94:
 										adda.l  #$C000,a6
 										lsl.w   #1,d5
 loc_FD4:
-										move.w  (FFD100_MaybeRelatedToHscroll).l,d7
+										move.w  (dword_FFD100).l,d7
 										lsr.w   #2,d7
 										sub.w   d7,d5
 										andi.w  #$7E,d5 
 										lsl.w   #7,d6
-										move.w  (FFD500_MaybeRelatedToVscroll).l,d7
+										move.w  (word_FFD500).l,d7
 										lsl.w   #4,d7
 										add.w   d7,d6
 loc_FEE:
@@ -1943,8 +1941,9 @@ loc_10C2:
 
 ; =============== S U B R O U T I N E =======================================
 
-BwahDMAstuffAgain:
-										
+; DMA stuff
+
+sub_10DC:
 										move    sr,-(sp)
 										move    #$2700,sr
 loc_10E2:
@@ -1964,7 +1963,7 @@ loc_10FC:
 										move.l  d2,d1
 loc_1112:
 										moveq   #$10,d2
-										or.w    (FFDEAC_VdpReg01Status).l,d2
+										or.w    (VDP_REG01_STATUS).l,d2
 										move.w  d2,(a6)
 										clr.w   d2
 										move.b  d0,d2
@@ -1997,7 +1996,7 @@ loc_115C:
 										ori.b   #$80,d0
 										move.w  d0,(TEMP_DMA_VALUE).l
 										move.w  (TEMP_DMA_VALUE).l,(a6)
-										move.w  (FFDEAC_VdpReg01Status).l,(a6)
+										move.w  (VDP_REG01_STATUS).l,(a6)
 loc_1176:
 										move.w  #0,(Z80BusReq).l
 										cmpi.w  #2,d1
@@ -2014,15 +2013,14 @@ loc_1188:
 										move    (sp)+,sr
 										rts
 
-	; End of function BwahDMAstuffAgain
+	; End of function sub_10DC
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; d0 = DMA destination ?
+; DMA stuff. d0 = DMA destination ?
 
-BwahDMAstuffAgainbis:
-										
+sub_119E:
 										move    sr,-(sp)
 loc_11A0:
 										move    #$2700,sr
@@ -2031,7 +2029,7 @@ loc_11A0:
 																						; gives msb sign
 										movem.l d2,-(sp)
 										movem.l d0/a6,-(sp)
-										movea.l (FFDED4_VdpRegCommands).l,a6
+										movea.l (VDP_REG_COMMANDS).l,a6
 										move.l  d1,d2
 										addi.w  #-$7100,d1
 										move.w  d1,(a6)+
@@ -2067,7 +2065,7 @@ loc_1204:
 										ori.b   #$80,d0
 										move.w  d0,(a6)+
 loc_120E:
-										move.l  a6,(FFDED4_VdpRegCommands).l
+										move.l  a6,(VDP_REG_COMMANDS).l
 loc_1214:
 										addq.b  #1,(byte_FFDE96).l
 										movem.l (sp)+,d0/a6
@@ -2081,7 +2079,7 @@ loc_1214:
 										move    (sp)+,sr
 										rts
 
-	; End of function BwahDMAstuffAgainbis
+	; End of function sub_119E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2111,7 +2109,7 @@ StoreVdpCommands:
 										
 										movem.l a6,-(sp)
 loc_125E:
-										movea.l (FFDED4_VdpRegCommands).l,a6
+										movea.l (VDP_REG_COMMANDS).l,a6
 										move.w  #$8F02,(a6)+    ; auto-increment : 2
 										btst    #1,(byte_FFDEC1).l
 										bne.s   loc_127C        
@@ -2128,7 +2126,7 @@ loc_1284:
 										move.w  #$6C00,(a6)+
 loc_1294:
 										move.w  #$83,(a6)+ ; Data Port stuff ?
-										move.l  a6,(FFDED4_VdpRegCommands).l
+										move.l  a6,(VDP_REG_COMMANDS).l
 										addq.b  #1,(byte_FFDE96).l
 										movem.l (sp)+,a6
 										rts
@@ -2141,7 +2139,7 @@ loc_1294:
 ClearHscrollStuff:
 										
 										movem.l d7/a6,-(sp)
-										lea     (FFD100_MaybeRelatedToHscroll).l,a6
+										lea     (dword_FFD100).l,a6
 loc_12B4:
 										move.w  #$FF,d7
 loc_12B8:
@@ -2159,7 +2157,7 @@ loc_12B8:
 ClearOtherHscrollStuff:
 										
 										movem.l d7/a6,-(sp)
-										lea     ((FFD100_MaybeRelatedToHscroll+2)).l,a6
+										lea     ((dword_FFD100+2)).l,a6
 										bra.s   loc_12B4
 
 	; End of function ClearOtherHscrollStuff
@@ -2170,7 +2168,7 @@ ClearOtherHscrollStuff:
 StoreVdpCommandsbis:
 										
 										movem.l a6,-(sp)
-										movea.l (FFDED4_VdpRegCommands).l,a6
+										movea.l (VDP_REG_COMMANDS).l,a6
 										move.w  #$8F02,(a6)+    ; auto-inc : 2
 										btst    #2,(byte_FFDEC1).l
 										bne.s   loc_12F4        
@@ -2186,7 +2184,7 @@ loc_12FC:
 										move.w  #$977F,(a6)+    ; RAM to VRAM, address 0x3FEA80
 										move.w  #$4000,(a6)+
 										move.w  #$90,(a6)+ ; Data port stuff ?
-										move.l  a6,(FFDED4_VdpRegCommands).l
+										move.l  a6,(VDP_REG_COMMANDS).l
 										addq.b  #1,(byte_FFDE96).l
 										movem.l (sp)+,a6
 										rts
@@ -2199,7 +2197,7 @@ loc_12FC:
 ClearVscrollStuff:
 										
 										movem.l d7/a6,-(sp)
-										lea     (FFD500_MaybeRelatedToVscroll).l,a6
+										lea     (word_FFD500).l,a6
 loc_132C:
 										move.w  #$13,d7
 loc_1330:
@@ -2217,7 +2215,7 @@ loc_1330:
 ClearOtherVscrollStuff:
 										
 										movem.l d7/a6,-(sp)
-										lea     (FFD502_MaybeRelatedToOtherVScrollStuff).l,a6
+										lea     (word_FFD502).l,a6
 										bra.s   loc_132C
 
 	; End of function ClearOtherVscrollStuff
@@ -2225,12 +2223,10 @@ ClearOtherVscrollStuff:
 
 ; =============== S U B R O U T I N E =======================================
 
-; beforeBwahDMAstuffAgain
-
 sub_134A:
 										movem.w d1,-(sp)
 										bsr.s   PrepareSomethingForDMA
-										bsr.w   BwahDMAstuffAgain
+										bsr.w   sub_10DC        
 										movem.w (sp)+,d1
 										rts
 
@@ -2253,15 +2249,16 @@ PrepareSomethingForDMA:
 
 ; =============== S U B R O U T I N E =======================================
 
-BeforeBwahDMAstuffAgainbis:
-										
+; DMA preparation stuff
+
+sub_1372:
 										movem.w d1,-(sp)
 										bsr.s   PrepareSomethingForDMA
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										movem.w (sp)+,d1
 										rts
 
-	; End of function BeforeBwahDMAstuffAgainbis
+	; End of function sub_1372
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2270,7 +2267,7 @@ DmaTilesViaFF8804:
 										
 										movem.w d1,-(sp)
 										bsr.s   LoadTilesAtFF8804
-										bsr.w   BwahDMAstuffAgain
+										bsr.w   sub_10DC        
 										movem.w (sp)+,d1
 										rts
 
@@ -2298,7 +2295,7 @@ DmaTilesViaFF8804bis:
 										
 										movem.w d1,-(sp)
 										bsr.s   LoadTilesAtFF8804
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										movem.w (sp)+,d1
 										rts
 
@@ -2307,42 +2304,45 @@ DmaTilesViaFF8804bis:
 
 ; =============== S U B R O U T I N E =======================================
 
-DMAforever:
-										
+; DMA stuff
+
+sub_13C0:
 										movem.l d0-d1/a0-a1,-(sp)
 										lea     ((byte_FFC000-$1000000)).w,a0
 										lea     ($C000).l,a1
 										move.w  #$800,d0
 										move.w  #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 										movem.l (sp)+,d0-d1/a0-a1
 										rts
 
-	; End of function DMAforever
+	; End of function sub_13C0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-DMAagain:
+; DMA stuff
+
+sub_13E4:
 										movem.l d0-d1/a0-a1,-(sp)
 										lea     ((byte_FFC000-$1000000)).w,a0
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										move.w  #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 										movem.l (sp)+,d0-d1/a0-a1
 										rts
 
-	; End of function DMAagain
+	; End of function sub_13E4
 
 
 ; =============== S U B R O U T I N E =======================================
 
 DMAandWait:
 										
-										bsr.s   DMAforever
+										bsr.s   sub_13C0        
 										bra.w   WaitForVInt     
 
 	; End of function DMAandWait
@@ -2355,7 +2355,7 @@ DMAandWait:
 DmaVramFill:
 										
 										movem.l d0-d3,-(sp)
-										move.w  (FFDEAC_VdpReg01Status).l,d3
+										move.w  (VDP_REG01_STATUS).l,d3
 																						; get last 16+ vdp reg config command ?
 										ori.b   #$10,d3         ; make sure it concerns a 16+ vdp reg
 										move.w  d3,(VDP_Control).l
@@ -2388,7 +2388,7 @@ loc_1480:
 										move.w  (VDP_Control).l,d0
 										andi.w  #2,d0           ; wait for DMA free
 										bne.s   loc_1480
-										move.w  (FFDEAC_VdpReg01Status).l,d3
+										move.w  (VDP_REG01_STATUS).l,d3
 																						; get last vdp 16+ reg config command and send it
 										move.w  d3,(VDP_Control).l
 										move.w  #$8F02,(VDP_Control).l
@@ -2466,7 +2466,7 @@ nullsub_4:
 
 UpdatePlayerInputs:
 										
-										lea     ((RAM_Input_Player1_StateA-$1000000)).w,a5
+										lea     ((P1_INPUT-$1000000)).w,a5
 										lea     (DATA1).l,a6    
 										bsr.s   loc_151C        ; do it with DATA1 and then DATA2
 										addq.w  #2,a6
@@ -2527,12 +2527,12 @@ return_1584:
 
 WaitForPlayer1NewButtonPush:
 										
-										andi.b  #$FF,((RAM_Input_Player1_StateA-$1000000)).w
+										andi.b  #$FF,((P1_INPUT-$1000000)).w
 										beq.s   loc_1594
 										bsr.w   WaitForVInt     
 										bra.s   WaitForPlayer1NewButtonPush
 loc_1594:
-										andi.b  #$FF,((RAM_Input_Player1_StateA-$1000000)).w
+										andi.b  #$FF,((P1_INPUT-$1000000)).w
 										bne.s   return_15A2
 										bsr.w   WaitForVInt     
 										bra.s   loc_1594
@@ -2547,7 +2547,7 @@ return_15A2:
 
 sub_15A4:
 										movem.l d7,-(sp)
-										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,d7
+										move.b  ((P1_INPUT-$1000000)).w,d7
 										and.b   ((byte_FFDE9E-$1000000)).w,d7
 										beq.s   loc_15CA
 loc_15B2:
@@ -2555,7 +2555,7 @@ loc_15B2:
 										move.b  ((byte_FFDE9F-$1000000)).w,d7
 										cmpi.b  #$A,d7
 										bcc.s   loc_15CA
-										clr.b   ((RAM_Input_Player1_StateA-$1000000)).w
+										clr.b   ((P1_INPUT-$1000000)).w
 										movem.l (sp)+,d7
 										rts
 loc_15CA:
@@ -2574,7 +2574,7 @@ WaitForInputFor1Second:
 										movem.l d5,-(sp)
 										moveq   #$3B,d5 
 loc_15DE:
-										andi.b  #$FF,((RAM_Input_Player1_StateA-$1000000)).w
+										andi.b  #$FF,((P1_INPUT-$1000000)).w
 										bne.s   loc_15EE
 										bsr.w   WaitForVInt     
 										dbf     d5,loc_15DE
@@ -2672,19 +2672,19 @@ GetRandomOrDebugValue:
 										
 										movem.l d6-d7,-(sp)
 										move.w  d0,d6
-										tst.b   (RAM_DebugModeActivated).l
+										tst.b   (DEBUG_MODE_ACTIVATED).l
 										beq.s   loc_16B2
-										moveq   #0,d0
-										btst    #3,((RAM_Input_Player1_StateA-$1000000)).w
+										moveq   #INPUT_A_UP_BIT,d0
+										btst    #3,((P1_INPUT-$1000000)).w
 										bne.w   loc_16B8
-										moveq   #1,d0
-										btst    #0,((RAM_Input_Player1_StateA-$1000000)).w
+										moveq   #INPUT_A_DOWN_BIT,d0
+										btst    #0,((P1_INPUT-$1000000)).w
 										bne.w   loc_16B8
-										moveq   #2,d0
-										btst    #2,((RAM_Input_Player1_StateA-$1000000)).w
+										moveq   #INPUT_A_LEFT_BIT,d0
+										btst    #2,((P1_INPUT-$1000000)).w
 										bne.w   loc_16B8
-										moveq   #3,d0
-										btst    #1,((RAM_Input_Player1_StateA-$1000000)).w
+										moveq   #INPUT_A_RIGHT_BIT,d0
+										btst    #1,((P1_INPUT-$1000000)).w
 										bne.w   loc_16B8
 loc_16B2:
 										bsr.w   UpdateRandomSeed
@@ -2702,10 +2702,10 @@ loc_16B8:
 
 PlayMusicAfterCurrentOne:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_WAIT_MUSIC_END
 																						; Wait for current music to end
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 																						; get d0 value, if $FB : play previous music
 loc_16C6:
@@ -2823,7 +2823,7 @@ Trap3_ClearFlag:
 InitSprites:
 										
 										movem.l d0-d1/a0,-(sp)
-										lea     (RAM_Struct_Sprite_Y).l,a0
+										lea     (SPRITE_Y).l,a0 
 										move.w  #1,d1
 loc_177E:
 										move.w  #1,(a0)+
@@ -2841,6 +2841,8 @@ loc_177E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; related to spell animations
 
 sub_179C:
 										movem.l d0/d2/a0,-(sp)
@@ -2886,7 +2888,7 @@ sub_17EC:
 										movem.l d1/d3,-(sp)
 										move.w  d1,d3
 										lsr.w   #1,d3
-										bsr.s   sub_179C
+										bsr.s   sub_179C        
 										move.w  d1,d2
 										muls.w  d3,d2
 										asr.l   #8,d2
@@ -2909,7 +2911,7 @@ sub_17EC:
 sub_1812:
 										movem.l d1/d3,-(sp)
 										move.l  d1,d3
-										bsr.s   sub_179C
+										bsr.s   sub_179C        
 										move.w  d1,d2
 										lsr.w   #1,d3
 										muls.w  d3,d2
@@ -2929,7 +2931,7 @@ sub_1812:
 
 	; End of function sub_1812
 
-byte_183C:          dc.b 6
+byte_183C:          dc.b 6                  ; related to spell animations
 										dc.b $B
 										dc.b $C
 										dc.b 1
@@ -3078,7 +3080,7 @@ loc_193C:
 
 sub_1942:
 										movem.l d0-d2/d7-a1,-(sp)
-										lea     (RAM_Struct_Sprite_Link).l,a1
+										lea     (SPRITE_LINK).l,a1
 										clr.w   d1
 										moveq   #2,d0
 										bsr.w   sub_196C
@@ -3157,14 +3159,14 @@ loc_19BC:
 
 sub_19C8:
 										movem.l d7-a1,-(sp)
-										lea     (FFD080_Palette1bis).l,a1
+										lea     (PALETTE_1_BIS).l,a1
 										move.w  #$80,d7 
 										jsr     CopyBytes(pc)   
 										lea     (PALETTE_1).l,a0
 										lea     ((byte_FFDF2A-$1000000)).w,a1
 										move.w  #$80,d7 
 										jsr     CopyBytes(pc)   
-										move.b  #$20,((unk_FFDFAA-$1000000)).w 
+										move.b  #$20,((byte_FFDFAA-$1000000)).w 
 										movem.l (sp)+,d7-a1
 										rts
 
@@ -3177,16 +3179,16 @@ sub_19C8:
 
 sub_19F8:
 										clr.w   d6
-										move.b  ((unk_FFDFAA-$1000000)).w,d6
+										move.b  ((byte_FFDFAA-$1000000)).w,d6
 										bne.s   loc_1A02
 										rts
 loc_1A02:
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										lea     (PALETTE_1).l,a1
 										lea     ((byte_FFDF2A-$1000000)).w,a2
 										moveq   #$3F,d7 
 										subq.w  #1,d6
-										move.b  d6,((unk_FFDFAA-$1000000)).w
+										move.b  d6,((byte_FFDFAA-$1000000)).w
 										lsr.w   #2,d6
 loc_1A1C:
 										clr.w   d0
@@ -3225,7 +3227,7 @@ loc_1A1C:
 										move.w  (sp)+,d7
 										dbf     d7,loc_1A1C
 										jsr     StoreVdpCommandster(pc)
-										tst.b   ((unk_FFDFAA-$1000000)).w
+										tst.b   ((byte_FFDFAA-$1000000)).w
 										bne.s   return_1A7E
 										lea     ((byte_FFDF2A-$1000000)).w,a0
 										tst.b   ((byte_FFDFAB-$1000000)).w
@@ -4685,10 +4687,10 @@ loc_260E:
 										bsr.w   SetFFDE94b3andWait
 loc_2632:
 										addq.l  #1,a5
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l 0
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l VInt_3930          
 										bsr.w   sub_2D58
@@ -4702,7 +4704,7 @@ loc_2632:
 										mulu.w  #$180,d2
 										mulu.w  #$180,d3
 										bsr.w   sub_2670        
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l 0
 										rts
@@ -4771,14 +4773,14 @@ loc_26E8:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 										movem.l (sp)+,d0-d1/a0-a1
 										dbf     d7,loc_26C0
 										bsr.w   WaitForVInt     
 										move.w  #0,((word_FFA804-$1000000)).w
 										move.w  #0,((word_FFA806-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l VInt_3930          
 										jsr     sub_4344(pc)
@@ -4834,7 +4836,7 @@ loc_27AE:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 										movem.l (sp)+,d0-d1/a0-a1
 										dbf     d7,loc_2786
@@ -4843,7 +4845,7 @@ loc_27F6:
 										move.w  #8,((word_FFA804-$1000000)).w
 loc_2800:
 										move.w  #8,((word_FFA806-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 off_280A:
 										dc.l VInt_3930          
@@ -4897,7 +4899,7 @@ loc_2874:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 										movem.l (sp)+,d0-d1/a0-a1
 										dbf     d7,loc_284C
@@ -4905,7 +4907,7 @@ loc_2874:
 loc_28C0:
 										move.w  #$18,((word_FFA808-$1000000)).w
 										move.w  #$18,((word_FFA80A-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l VInt_3930          
 										jsr     sub_4344(pc)
@@ -4958,14 +4960,14 @@ loc_293A:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 										movem.l (sp)+,d0-d1/a0-a1
 										dbf     d7,loc_2912
 										bsr.w   WaitForVInt     
 										move.w  #8,((word_FFA808-$1000000)).w
 										move.w  #8,((word_FFA80A-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l VInt_3930          
 										jsr     sub_4344(pc)
@@ -5045,7 +5047,7 @@ loc_2A32:
 										blt.s   loc_2A4E
 										lsl.w   #2,d0
 										movea.l (a0,d0.w),a0
-										lea     (RAM_Start).l,a1
+										lea     (RAM_START).l,a1
 										bsr.w   LoadTileData    
 loc_2A4E:
 										movea.l (p_pt_MapTiles).l,a0
@@ -5081,7 +5083,7 @@ LoadMap:
 										move.l  ((word_FFA81C-$1000000)).w,((word_FFA814-$1000000)).w
 										clr.l   ((word_FFA820-$1000000)).w
 										clr.l   ((word_FFA824-$1000000)).w
-										clr.b   ((RAM_CameraScrollingMask-$1000000)).w
+										clr.b   ((CAMERA_SCROLLING_MASK-$1000000)).w
 										move.w  d0,-(sp)
 										move.w  d1,-(sp)
 										bsr.w   InitDisplay     
@@ -5107,10 +5109,10 @@ loc_2AD4:
 										move.b  (a5)+,d0
 										lsl.w   #2,d0
 										movea.l (a0,d0.w),a0
-										lea     (FFD080_Palette1bis).l,a1
+										lea     (PALETTE_1_BIS).l,a1
 										move.w  #$20,d7 
 										bsr.w   CopyBytes       
-										clr.w   (FFD080_Palette1bis).l
+										clr.w   (PALETTE_1_BIS).l
 										tst.b   (a5)+
 										blt.s   loc_2B1C
 loc_2B08:
@@ -5119,7 +5121,7 @@ loc_2B08:
 loc_2B12:
 										move.w  #$800,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgain
+										bsr.w   sub_10DC        
 loc_2B1C:
 										tst.b   (a5)+
 										blt.s   loc_2B34
@@ -5128,16 +5130,16 @@ loc_2B20:
 										lea     ($3000).w,a1
 										move.w  #$800,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgain
+										bsr.w   sub_10DC        
 loc_2B34:
 										tst.b   (a5)+
 										blt.s   loc_2B4C
-										lea     (RAM_Start).l,a0; something to do with tile pixel data
+										lea     (RAM_START).l,a0; something to do with tile pixel data
 										lea     ($4000).w,a1
 										move.w  #$800,d0
 										moveq   #2,d1
 loc_2B48:
-										bsr.w   BwahDMAstuffAgain
+										bsr.w   sub_10DC        
 loc_2B4C:
 										tst.b   (a5)+
 										blt.s   loc_2B64
@@ -5147,7 +5149,7 @@ loc_2B56:
 										move.w  #$800,d0
 										moveq   #2,d1
 loc_2B60:
-										bsr.w   BwahDMAstuffAgain
+										bsr.w   sub_10DC        
 loc_2B64:
 										tst.b   (a5)+
 										blt.s   loc_2B7C
@@ -5156,7 +5158,7 @@ loc_2B68:
 										lea     ($6000).w,a1
 										move.w  #$800,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgain
+										bsr.w   sub_10DC        
 loc_2B7C:
 										bsr.w   sub_2D58
 loc_2B80:
@@ -5190,13 +5192,13 @@ loc_2BC0:
 										cmpi.w  #$FFFF,d4
 										bne.s   loc_2BE6
 										move.l  a0,-(sp)
-										move.b  ((RAM_Battle_CurrentMovingEntity-$1000000)).w,d4
+										move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d4
 										bpl.s   loc_2BD0
 										clr.w   d4
 loc_2BD0:
 										andi.w  #$3F,d4 
 										lsl.w   #5,d4
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										move.w  2(a0,d4.w),d5
 										move.w  (a0,d4.w),d4
 										movea.l (sp)+,a0
@@ -5235,23 +5237,23 @@ loc_2C2C:
 										subi.w  #$780,d1
 										addi.w  #$780,d2
 										addi.w  #$600,d3
-										cmp.w   ((RAM_Map_AreaLayer1StartX-$1000000)).w,d0
+										cmp.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
 										bge.s   loc_2C42
-										move.w  ((RAM_Map_AreaLayer1StartX-$1000000)).w,d0
+										move.w  ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
 loc_2C42:
-										cmp.w   ((RAM_Map_AreaLayer1EndX-$1000000)).w,d2
+										cmp.w   ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d2
 										ble.s   loc_2C50
 loc_2C48:
-										move.w  ((RAM_Map_AreaLayer1EndX-$1000000)).w,d0
+										move.w  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d0
 										subi.w  #$F00,d0
 loc_2C50:
-										cmp.w   ((RAM_Map_AreaLayer1StartY-$1000000)).w,d1
+										cmp.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d1
 										bge.s   loc_2C5A
-										move.w  ((RAM_Map_AreaLayer1StartY-$1000000)).w,d1
+										move.w  ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d1
 loc_2C5A:
-										cmp.w   ((RAM_Map_AreaLayer1EndY-$1000000)).w,d3
+										cmp.w   ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d3
 										ble.s   loc_2C68
-										move.w  ((RAM_Map_AreaLayer1EndY-$1000000)).w,d1
+										move.w  ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d1
 loc_2C64:
 										subi.w  #$D80,d1
 loc_2C68:
@@ -5265,10 +5267,10 @@ loc_2C70:
 										lsr.w   #8,d0
 										move.w  d0,d2
 										move.w  d1,d3
-										move.w  ((RAM_Map_AreaForegroundLayer2StartX-$1000000)).w,d4
-										move.w  ((RAM_Map_AreaForegroundLayer2StartY-$1000000)).w,d5
-										move.w  ((RAM_Map_AreaBackgroundLayer2StartX-$1000000)).w,d6
-										move.w  ((RAM_Map_AreaBackgroundLayer2StartY-$1000000)).w,d7
+										move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d4
+										move.w  ((MAP_AREA_LAYER2_STARTY-$1000000)).w,d5
+										move.w  ((MAP_AREA_BACKGROUND_STARTX-$1000000)).w,d6
+										move.w  ((MAP_AREA_BACKGROUND_STARTY-$1000000)).w,d7
 										lsl.w   #7,d0
 										lsl.w   #7,d1
 										lsl.w   #7,d2
@@ -5278,13 +5280,13 @@ loc_2C70:
 										lsl.w   #7,d6
 										lsl.w   #7,d7
 loc_2C9A:
-										mulu.w  ((RAM_Map_AreaLayer1XParallax-$1000000)).w,d0
+										mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d0
 										lsr.l   #8,d0
-										mulu.w  ((RAM_Map_AreaLayer1YParallax-$1000000)).w,d1
+										mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d1
 										lsr.l   #8,d1
-										mulu.w  ((RAM_Map_AreaLayer2XParallax-$1000000)).w,d2
+										mulu.w  ((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w,d2
 										lsr.l   #8,d2
-										mulu.w  ((RAM_Map_AreaLayer2YParallax-$1000000)).w,d3
+										mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d3
 										lsr.l   #8,d3
 										add.w   d4,d0
 										move.w  d0,((word_FFA810-$1000000)).w
@@ -5295,19 +5297,19 @@ loc_2C9A:
 										add.w   d7,d3
 										move.w  d3,((word_FFA816-$1000000)).w
 										bsr.w   sub_38C0
-										tst.b   ((RAM_Map_AreaLayer1AutoscrollX-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
 										beq.s   loc_2CD8
 										move.w  d0,((word_FFA810-$1000000)).w
 loc_2CD8:
-										tst.b   ((RAM_Map_AreaLayer1AutoscrollY-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
 										beq.s   loc_2CE2
 										move.w  d1,((word_FFA812-$1000000)).w
 loc_2CE2:
-										tst.b   ((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										beq.s   loc_2CEC
 										move.w  d0,((word_FFA814-$1000000)).w
 loc_2CEC:
-										tst.b   ((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 										beq.s   loc_2CF6
 										move.w  d1,((word_FFA816-$1000000)).w
 loc_2CF6:
@@ -5351,7 +5353,7 @@ sub_2D58:
 										lea     (FF2000_LOADING_SPACE).l,a1
 										bsr.w   sub_2372
 										movea.l (a5)+,a0
-										lea     (RAM_Start).l,a1
+										lea     (RAM_START).l,a1
 										bsr.w   LoadMapLayoutData
 										movea.l 4(a5),a0
 loc_2D74:
@@ -5368,7 +5370,7 @@ loc_2D98:
 										addq.l  #8,a0
 										bra.s   loc_2D74
 loc_2D9C:
-										lea     (RAM_Start).l,a1
+										lea     (RAM_START).l,a1
 										movea.l $14(a5),a0
 loc_2DA6:
 										cmpi.w  #$FFFF,(a0)
@@ -5407,10 +5409,10 @@ LoadMapArea:
 										
 										cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 										bne.s   loc_2E06
-										move.w  d0,((RAM_Map_AreaLayer1StartX-$1000000)).w
-										move.w  d1,((RAM_Map_AreaLayer1StartY-$1000000)).w
-										move.w  d2,((RAM_Map_AreaLayer1EndX-$1000000)).w
-										move.w  d3,((RAM_Map_AreaLayer1EndY-$1000000)).w
+										move.w  d0,((MAP_AREA_LAYER1_STARTX-$1000000)).w
+										move.w  d1,((MAP_AREA_LAYER1_STARTY-$1000000)).w
+										move.w  d2,((MAP_AREA_LAYER1_ENDX-$1000000)).w
+										move.w  d3,((MAP_AREA_LAYER1_ENDY-$1000000)).w
 										bra.s   loc_2E2C
 loc_2E06:
 										move.w  ((byte_FFF708-$1000000)).w,d0
@@ -5421,34 +5423,34 @@ loc_2E06:
 										lsr.w   #8,d0
 										subq.w  #1,d0
 										mulu.w  #$180,d0
-										clr.w   ((RAM_Map_AreaLayer1StartX-$1000000)).w
-										clr.w   ((RAM_Map_AreaLayer1StartY-$1000000)).w
-										move.w  d0,((RAM_Map_AreaLayer1EndX-$1000000)).w
-										move.w  d1,((RAM_Map_AreaLayer1EndY-$1000000)).w
+										clr.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w
+										clr.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w
+										move.w  d0,((MAP_AREA_LAYER1_ENDX-$1000000)).w
+										move.w  d1,((MAP_AREA_LAYER1_ENDY-$1000000)).w
 loc_2E2C:
 										move.w  (a4)+,d0
 										mulu.w  #3,d0
-										move.w  d0,((RAM_Map_AreaForegroundLayer2StartX-$1000000)).w
+										move.w  d0,((MAP_AREA_LAYER2_STARTX-$1000000)).w
 										move.w  (a4)+,d0
 loc_2E38:
 										mulu.w  #3,d0
-										move.w  d0,((RAM_Map_AreaForegroundLayer2StartY-$1000000)).w
+										move.w  d0,((MAP_AREA_LAYER2_STARTY-$1000000)).w
 										move.w  (a4)+,d0
 										mulu.w  #3,d0
-										move.w  d0,((RAM_Map_AreaBackgroundLayer2StartX-$1000000)).w
+										move.w  d0,((MAP_AREA_BACKGROUND_STARTX-$1000000)).w
 										move.w  (a4)+,d0
 loc_2E4C:
 										mulu.w  #3,d0
-										move.w  d0,((RAM_Map_AreaBackgroundLayer2StartY-$1000000)).w
-										move.w  (a4)+,((RAM_Map_AreaLayer1XParallax-$1000000)).w
-										move.w  (a4)+,((RAM_Map_AreaLayer1YParallax-$1000000)).w
-										move.w  (a4)+,((RAM_Map_AreaLayer2XParallax-$1000000)).w
+										move.w  d0,((MAP_AREA_BACKGROUND_STARTY-$1000000)).w
+										move.w  (a4)+,((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w
+										move.w  (a4)+,((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w
+										move.w  (a4)+,((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w
 loc_2E60:
-										move.w  (a4)+,((RAM_Map_AreaLayer2YParallax-$1000000)).w
-										move.l  (a4)+,((RAM_Map_AreaLayer1AutoscrollX-$1000000)).w
-										move.b  (a4)+,((RAM_Map_AreaProp1C-$1000000)).w
+										move.w  (a4)+,((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w
+										move.l  (a4)+,((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
+										move.b  (a4)+,((MAP_AREA_PROP_1C-$1000000)).w
 loc_2E6C:
-										move.b  (a4)+,((RAM_Map_AreaMusicIndex-$1000000)).w
+										move.b  (a4)+,((MAP_AREA_MUSIC_INDEX-$1000000)).w
 										movea.l (a5),a4
 										move.w  #1,((TILE_ANIM_COUNTER-$1000000)).w
 										move.l  $18(a5),((TILE_ANIM_DATA_ADDR-$1000000)).w
@@ -5471,7 +5473,7 @@ loc_2EA8:
 										lsl.w   #5,d7
 										bsr.w   CopyBytes       
 										addq.l  #4,((TILE_ANIM_DATA_ADDR-$1000000)).w
-										move.b  ((CURRENT_MAP-$1000000)).w,((RAM_TileAnimMapIdx-$1000000)).w
+										move.b  ((CURRENT_MAP-$1000000)).w,((TILE_ANIM_MAP_INDEX-$1000000)).w
 return_2EBE:
 										
 										rts
@@ -5510,7 +5512,7 @@ loc_2F08:
 										bsr.w   SetVdpReg       
 										bsr.w   WaitForVInt     
 										bsr.w   sub_2F24
-										tst.b   ((RAM_CameraScrollingMask-$1000000)).w
+										tst.b   ((CAMERA_SCROLLING_MASK-$1000000)).w
 										bne.s   loc_2F04
 										rts
 
@@ -5553,7 +5555,7 @@ loc_2F66:
 BlackScreenLayout:  dcb.b $80,$22
 MaskSprites:        dc.l $800301
 										dc.l $C77C0080
-off_2FF2:           dc.l Z80_Memory+$302
+dword_2FF2:         dc.l $A00302
 										dc.l $C77C0080
 										dc.l $C00303
 dword_2FFE:         dc.l $C77C0080
@@ -5572,7 +5574,7 @@ dword_300A:         dc.l $1000305
 
 InitDisplay:
 										
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE   ; clear all triggers
 										dc.l 0
 										bsr.w   WaitForVInt     
@@ -5595,10 +5597,10 @@ InitDisplay:
 										lea     ($EF80).l,a1
 										move.w  #$40,d0 
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgain
+										bsr.w   sub_10DC        
 										lea     MaskSprites(pc), a0
 loc_307E:
-										lea     (RAM_Struct_Sprite_Y).l,a1
+										lea     (SPRITE_Y).l,a1 
 										moveq   #$38,d7 
 										bsr.w   CopyBytes       
 										lea     plt_DisplayInit(pc), a0
@@ -5619,13 +5621,13 @@ sub_30BE:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										lea     (byte_FFE000).l,a0
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
 loc_30E6:
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bra.w   SetFFDE94b3andWait
 
 	; End of function sub_30BE
@@ -5653,7 +5655,7 @@ sub_30EE:
 										lsr.w   #3,d0
 										lsr.w   #3,d1
 										lea     MapOffsetHashTable(pc), a3
-										lea     (RAM_Start).l,a4
+										lea     (RAM_START).l,a4
 										lea     (FF2000_LOADING_SPACE).l,a5
 loc_312C:
 										bsr.w   sub_364E
@@ -5665,7 +5667,7 @@ loc_312C:
 										movea.l a1,a0
 										moveq   #$20,d0 
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 										movem.w (sp)+,d0-d5/d7
 										movem.l (sp)+,a0-a5
@@ -5696,7 +5698,7 @@ sub_3158:
 										lsr.w   #3,d0
 										lsr.w   #3,d1
 										lea     MapOffsetHashTable(pc), a3
-										lea     (RAM_Start).l,a4
+										lea     (RAM_START).l,a4
 										lea     (FF2000_LOADING_SPACE).l,a5
 loc_3196:
 										bsr.w   sub_364E
@@ -5711,7 +5713,7 @@ loc_3196:
 										movea.l a2,a0
 										moveq   #$20,d0 
 										moveq   #$40,d1 
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 										movem.w (sp)+,d0-d5/d7
 										movem.l (sp)+,a0-a5
@@ -5784,48 +5786,48 @@ sub_36B2:
 										lsl.w   #7,d2
 										lsl.w   #7,d3
 loc_36BE:
-										move.w  ((RAM_Map_AreaForegroundLayer2StartX-$1000000)).w,d4
-										move.w  ((RAM_Map_AreaForegroundLayer2StartY-$1000000)).w,d5
-										move.w  ((RAM_Map_AreaBackgroundLayer2StartX-$1000000)).w,d6
-										move.w  ((RAM_Map_AreaBackgroundLayer2StartY-$1000000)).w,d7
+										move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d4
+										move.w  ((MAP_AREA_LAYER2_STARTY-$1000000)).w,d5
+										move.w  ((MAP_AREA_BACKGROUND_STARTX-$1000000)).w,d6
+										move.w  ((MAP_AREA_BACKGROUND_STARTY-$1000000)).w,d7
 										lsl.w   #7,d4
 										lsl.w   #7,d5
 										lsl.w   #7,d6
 										lsl.w   #7,d7
-										mulu.w  ((RAM_Map_AreaLayer1XParallax-$1000000)).w,d0
+										mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d0
 										lsr.l   #8,d0
-										mulu.w  ((RAM_Map_AreaLayer1YParallax-$1000000)).w,d1
+										mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d1
 										lsr.l   #8,d1
-										mulu.w  ((RAM_Map_AreaLayer2XParallax-$1000000)).w,d2
+										mulu.w  ((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w,d2
 										lsr.l   #8,d2
-										mulu.w  ((RAM_Map_AreaLayer2YParallax-$1000000)).w,d3
+										mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d3
 										lsr.l   #8,d3
 										add.w   d4,d0
 										add.w   d5,d1
 										add.w   d6,d2
 										add.w   d7,d3
-										tst.b   ((RAM_Map_AreaLayer1AutoscrollX-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
 										bne.s   loc_3702
 										move.w  d0,((word_FFA818-$1000000)).w
 										bra.s   loc_3706
 loc_3702:
 										move.w  ((word_FFA810-$1000000)).w,d0
 loc_3706:
-										tst.b   ((RAM_Map_AreaLayer1AutoscrollY-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
 										bne.s   loc_3712
 										move.w  d1,((word_FFA81A-$1000000)).w
 										bra.s   loc_3716
 loc_3712:
 										move.w  ((word_FFA812-$1000000)).w,d1
 loc_3716:
-										tst.b   ((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										bne.s   loc_3722
 										move.w  d2,((word_FFA81C-$1000000)).w
 										bra.s   loc_3726
 loc_3722:
 										move.w  ((word_FFA814-$1000000)).w,d2
 loc_3726:
-										tst.b   ((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 										bne.s   loc_3732
 										move.w  d3,((word_FFA81E-$1000000)).w
 										bra.s   loc_3736
@@ -5850,7 +5852,7 @@ sub_3758:
 										clr.w   ((word_FFA80E-$1000000)).w
 										cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 										beq.s   loc_3770
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										beq.s   loc_3770
 loc_376A:
 										move.w  #$2000,((word_FFA80E-$1000000)).w
@@ -5858,7 +5860,7 @@ loc_3770:
 										move.w  ((word_FFA810-$1000000)).w,d4
 										cmp.w   d0,d4
 										beq.s   return_37B0
-										bset    #3,((RAM_CameraScrollingMask-$1000000)).w
+										bset    #3,((CAMERA_SCROLLING_MASK-$1000000)).w
 										cmp.w   d0,d4
 										bge.s   return_37B0
 										movem.w d0-d3,-(sp)
@@ -5888,14 +5890,14 @@ sub_37B2:
 										clr.w   ((word_FFA80E-$1000000)).w
 										cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 										beq.s   loc_37CA
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										beq.s   loc_37CA
 										move.w  #$2000,((word_FFA80E-$1000000)).w
 loc_37CA:
 										move.w  ((word_FFA812-$1000000)).w,d4
 										cmp.w   d1,d4
 										beq.s   return_380A
-										bset    #2,((RAM_CameraScrollingMask-$1000000)).w
+										bset    #2,((CAMERA_SCROLLING_MASK-$1000000)).w
 										cmp.w   d1,d4
 										bge.s   return_380A
 										movem.w d0-d3,-(sp)
@@ -5929,14 +5931,14 @@ sub_380C:
 loc_3810:
 										cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 										beq.s   loc_3824
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										bne.s   loc_3824
 										move.w  #$2000,((word_FFA80E-$1000000)).w
 loc_3824:
 										move.w  ((word_FFA814-$1000000)).w,d4
 										cmp.w   d2,d4
 										beq.s   return_3864
-										bset    #1,((RAM_CameraScrollingMask-$1000000)).w
+										bset    #1,((CAMERA_SCROLLING_MASK-$1000000)).w
 										cmp.w   d2,d4
 										bge.s   return_3864
 										movem.w d0-d3,-(sp)
@@ -5966,14 +5968,14 @@ sub_3866:
 										clr.w   ((word_FFA80E-$1000000)).w
 										cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 										beq.s   loc_387E
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										bne.s   loc_387E
 										move.w  #$2000,((word_FFA80E-$1000000)).w
 loc_387E:
 										move.w  ((word_FFA816-$1000000)).w,d4
 										cmp.w   d3,d4
 										beq.s   return_38BE
-										bset    #0,((RAM_CameraScrollingMask-$1000000)).w
+										bset    #0,((CAMERA_SCROLLING_MASK-$1000000)).w
 										cmp.w   d3,d4
 										bge.s   return_38BE
 										movem.w d0-d3,-(sp)
@@ -6002,9 +6004,9 @@ return_38BE:
 sub_38C0:
 										movem.l d2-d3/a0,-(sp)
 										clr.w   d2
-										move.b  ((RAM_Battle_CurrentMovingEntity-$1000000)).w,d2
+										move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d2
 										bpl.s   loc_38E6
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										bne.s   loc_38DC
 loc_38D2:
 										move.w  ((word_FFA810-$1000000)).w,d0
@@ -6017,23 +6019,23 @@ loc_38E4:
 										bra.s   loc_392A
 loc_38E6:
 										lsl.w   #5,d2
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										adda.w  d2,a0
 										move.w  (a0)+,d2
 										move.w  (a0)+,d3
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										bne.s   loc_390A
 										sub.w   ((word_FFA814-$1000000)).w,d2
 										sub.w   ((word_FFA816-$1000000)).w,d3
 loc_3900:
-										move.w  ((RAM_Map_AreaForegroundLayer2StartX-$1000000)).w,d0
-										move.w  ((RAM_Map_AreaForegroundLayer2StartY-$1000000)).w,d1
+										move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d0
+										move.w  ((MAP_AREA_LAYER2_STARTY-$1000000)).w,d1
 										bra.s   loc_391A
 loc_390A:
 										sub.w   ((word_FFA810-$1000000)).w,d2
 										sub.w   ((word_FFA812-$1000000)).w,d3
-										move.w  ((RAM_Map_AreaBackgroundLayer2StartX-$1000000)).w,d0
-										move.w  ((RAM_Map_AreaBackgroundLayer2StartY-$1000000)).w,d1
+										move.w  ((MAP_AREA_BACKGROUND_STARTX-$1000000)).w,d0
+										move.w  ((MAP_AREA_BACKGROUND_STARTY-$1000000)).w,d1
 loc_391A:
 										lsl.w   #7,d0
 										lsl.w   #7,d1
@@ -6055,23 +6057,23 @@ loc_392A:
 VInt_3930:
 										
 										link    a6,#-2
-										move.b  ((RAM_CameraScrollingMask-$1000000)).w,d0
+										move.b  ((CAMERA_SCROLLING_MASK-$1000000)).w,d0
 										andi.b  #$C,d0
 										beq.s   loc_3944
 										move.b  #$FF,((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 loc_3944:
-										tst.b   ((RAM_CameraScrollingMask-$1000000)).w
+										tst.b   ((CAMERA_SCROLLING_MASK-$1000000)).w
 										beq.w   loc_3C44
 										movem.w d0-d7,-(sp)
 										clr.w   ((word_FFA80E-$1000000)).w
 										cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 										beq.s   loc_3968
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										beq.s   loc_3968
 loc_3962:
 										move.w  #$2000,((word_FFA80E-$1000000)).w
 loc_3968:
-										btst    #3,((RAM_CameraScrollingMask-$1000000)).w
+										btst    #3,((CAMERA_SCROLLING_MASK-$1000000)).w
 										beq.w   loc_3A1A
 										move.w  ((word_FFA810-$1000000)).w,d0
 										move.w  d0,d5
@@ -6112,14 +6114,14 @@ loc_39D4:
 										sub.w   d1,d4
 										bne.s   loc_39E6
 										move.w  d1,d0
-										bclr    #3,((RAM_CameraScrollingMask-$1000000)).w
+										bclr    #3,((CAMERA_SCROLLING_MASK-$1000000)).w
 loc_39E6:
 										eor.w   d5,d4
 										bge.s   loc_39F2
 										move.w  d1,d0
-										bclr    #3,((RAM_CameraScrollingMask-$1000000)).w
+										bclr    #3,((CAMERA_SCROLLING_MASK-$1000000)).w
 loc_39F2:
-										tst.b   ((RAM_Map_AreaLayer1AutoscrollX-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
 										beq.s   loc_3A0A
 										tst.w   d0
 										bge.s   loc_3A00
@@ -6135,7 +6137,7 @@ loc_3A0A:
 										andi.w  #$FF,d0
 										move.w  d0,((word_FFA804-$1000000)).w
 loc_3A1A:
-										btst    #2,((RAM_CameraScrollingMask-$1000000)).w
+										btst    #2,((CAMERA_SCROLLING_MASK-$1000000)).w
 										beq.w   loc_3AC8
 										move.w  ((word_FFA812-$1000000)).w,d0
 										move.w  d0,d5
@@ -6176,14 +6178,14 @@ loc_3A82:
 										sub.w   d1,d4
 										bne.s   loc_3A94
 										move.w  d1,d0
-										bclr    #2,((RAM_CameraScrollingMask-$1000000)).w
+										bclr    #2,((CAMERA_SCROLLING_MASK-$1000000)).w
 loc_3A94:
 										eor.w   d5,d4
 										bge.s   loc_3AA0
 										move.w  d1,d0
-										bclr    #2,((RAM_CameraScrollingMask-$1000000)).w
+										bclr    #2,((CAMERA_SCROLLING_MASK-$1000000)).w
 loc_3AA0:
-										tst.b   ((RAM_Map_AreaLayer1AutoscrollY-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
 										beq.s   loc_3AB8
 										tst.w   d0
 										bge.s   loc_3AAE
@@ -6202,11 +6204,11 @@ loc_3AC8:
 										clr.w   ((word_FFA80E-$1000000)).w
 										cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 										beq.s   loc_3AE0
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										bne.s   loc_3AE0
 										move.w  #$2000,((word_FFA80E-$1000000)).w
 loc_3AE0:
-										btst    #1,((RAM_CameraScrollingMask-$1000000)).w
+										btst    #1,((CAMERA_SCROLLING_MASK-$1000000)).w
 										beq.w   loc_3B92
 										move.w  ((word_FFA814-$1000000)).w,d0
 										move.w  d0,d5
@@ -6247,14 +6249,14 @@ loc_3B4C:
 										sub.w   d1,d4
 										bne.s   loc_3B5E
 										move.w  d1,d0
-										bclr    #1,((RAM_CameraScrollingMask-$1000000)).w
+										bclr    #1,((CAMERA_SCROLLING_MASK-$1000000)).w
 loc_3B5E:
 										eor.w   d5,d4
 										bge.s   loc_3B6A
 										move.w  d1,d0
-										bclr    #1,((RAM_CameraScrollingMask-$1000000)).w
+										bclr    #1,((CAMERA_SCROLLING_MASK-$1000000)).w
 loc_3B6A:
-										tst.b   ((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										beq.s   loc_3B82
 										tst.w   d0
 										bge.s   loc_3B78
@@ -6270,7 +6272,7 @@ loc_3B82:
 										andi.w  #$FF,d0
 										move.w  d0,((word_FFA806-$1000000)).w
 loc_3B92:
-										btst    #0,((RAM_CameraScrollingMask-$1000000)).w
+										btst    #0,((CAMERA_SCROLLING_MASK-$1000000)).w
 										beq.w   loc_3C40
 										move.w  ((word_FFA816-$1000000)).w,d0
 										move.w  d0,d5
@@ -6311,14 +6313,14 @@ loc_3BFA:
 										sub.w   d1,d4
 										bne.s   loc_3C0C
 										move.w  d1,d0
-										bclr    #0,((RAM_CameraScrollingMask-$1000000)).w
+										bclr    #0,((CAMERA_SCROLLING_MASK-$1000000)).w
 loc_3C0C:
 										eor.w   d5,d4
 										bge.s   loc_3C18
 										move.w  d1,d0
-										bclr    #0,((RAM_CameraScrollingMask-$1000000)).w
+										bclr    #0,((CAMERA_SCROLLING_MASK-$1000000)).w
 loc_3C18:
-										tst.b   ((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 										beq.s   loc_3C30
 										tst.w   d0
 										bge.s   loc_3C26
@@ -6337,7 +6339,7 @@ loc_3C40:
 										movem.w (sp)+,d0-d7
 loc_3C44:
 										unlk    a6
-										move.b  ((RAM_Map_AreaLayer1AutoscrollX-$1000000)).w,d0
+										move.b  ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w,d0
 										beq.s   loc_3C88
 										cmpi.b  #$80,d0
 										bne.s   loc_3C6C
@@ -6358,9 +6360,9 @@ loc_3C7A:
 										move.w  d0,((word_FFA820-$1000000)).w
 										move.w  d1,((word_FFA818-$1000000)).w
 loc_3C82:
-										bset    #3,((RAM_CameraScrollingMask-$1000000)).w
+										bset    #3,((CAMERA_SCROLLING_MASK-$1000000)).w
 loc_3C88:
-										move.b  ((RAM_Map_AreaLayer1AutoscrollY-$1000000)).w,d0
+										move.b  ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w,d0
 										beq.s   loc_3CC4
 										cmpi.b  #$80,d0
 										bne.s   loc_3CA8
@@ -6380,9 +6382,9 @@ loc_3CB6:
 										move.w  d0,((word_FFA822-$1000000)).w
 										move.w  d1,((word_FFA81A-$1000000)).w
 loc_3CBE:
-										bset    #2,((RAM_CameraScrollingMask-$1000000)).w
+										bset    #2,((CAMERA_SCROLLING_MASK-$1000000)).w
 loc_3CC4:
-										move.b  ((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w,d0
+										move.b  ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w,d0
 										beq.s   loc_3D08
 										cmpi.b  #$80,d0
 										bne.s   loc_3CEC
@@ -6404,9 +6406,9 @@ loc_3CFA:
 										move.w  d0,((word_FFA824-$1000000)).w
 										move.w  d1,((word_FFA81C-$1000000)).w
 loc_3D02:
-										bset    #1,((RAM_CameraScrollingMask-$1000000)).w
+										bset    #1,((CAMERA_SCROLLING_MASK-$1000000)).w
 loc_3D08:
-										move.b  ((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w,d0
+										move.b  ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w,d0
 										beq.s   sub_3D46
 										cmpi.b  #$80,d0
 										bne.s   loc_3D2A
@@ -6427,7 +6429,7 @@ loc_3D38:
 										move.w  d0,((word_FFA826-$1000000)).w
 										move.w  d1,((word_FFA81E-$1000000)).w
 loc_3D40:
-										bset    #0,((RAM_CameraScrollingMask-$1000000)).w
+										bset    #0,((CAMERA_SCROLLING_MASK-$1000000)).w
 
 	; End of function VInt_3930
 
@@ -6435,17 +6437,17 @@ loc_3D40:
 ; =============== S U B R O U T I N E =======================================
 
 sub_3D46:
-										move.l  ((word_FFA808-$1000000)).w,(FFD500_MaybeRelatedToVscroll).l
-										move.l  ((word_FFA804-$1000000)).w,(FFD100_MaybeRelatedToHscroll).l
+										move.l  ((word_FFA808-$1000000)).w,(word_FFD500).l
+										move.l  ((word_FFA804-$1000000)).w,(dword_FFD100).l
 										move.w  ((word_FFA80C-$1000000)).w,d6
 										beq.s   loc_3D7E
 										addq.w  #1,d6
 										bsr.w   GetRandomValue
-										add.w   d0,(FFD100_MaybeRelatedToHscroll).l
-										add.w   d0,(FFD100_MaybeRelatedToHscroll+2).l
+										add.w   d0,(dword_FFD100).l
+										add.w   d0,(dword_FFD100+2).l
 										bsr.w   GetRandomValue
-										add.w   d0,(FFD500_MaybeRelatedToVscroll).l
-										add.w   d0,(FFD502_MaybeRelatedToOtherVScrollStuff).l
+										add.w   d0,(word_FFD500).l
+										add.w   d0,(word_FFD502).l
 loc_3D7E:
 										bsr.w   StoreVdpCommands
 										bsr.w   StoreVdpCommandsbis
@@ -6471,7 +6473,7 @@ GetRandomValue:
 
 sub_3D96:
 										bsr.w   sub_3DB0
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										beq.s   loc_3DA8
 										bset    #0,((byte_FFA82D-$1000000)).w
 										bra.s   return_3DAE
@@ -6506,7 +6508,7 @@ sub_3DB0:
 										lsl.w   #6,d1
 										add.w   d1,d0
 										add.w   d0,d0
-										lea     (RAM_Start).l,a2
+										lea     (RAM_START).l,a2
 loc_3DDE:
 										movem.w d0/d2/d6,-(sp)
 loc_3DE2:
@@ -6527,7 +6529,7 @@ loc_3DE2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_3E06:
-										lea     (RAM_Start).l,a2
+										lea     (RAM_START).l,a2
 										move.w  #$7FF,d7
 loc_3E10:
 										clr.l   (a2)+
@@ -6546,6 +6548,8 @@ loc_3E10:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; uses door open SFX
 
 sub_3E40:
 										cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
@@ -6594,7 +6598,7 @@ loc_3E80:
 										lsl.w   #6,d1
 										add.w   d1,d0
 										add.w   d0,d0
-										lea     (RAM_Start).l,a2
+										lea     (RAM_START).l,a2
 										tst.w   d1
 										blt.s   loc_3EEC
 loc_3EC8:
@@ -6619,9 +6623,9 @@ loc_3EF0:
 										addi.w  #$80,d2 
 										dbf     d7,loc_3EEC
 loc_3F06:
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_DOOR_OPEN      ; door open
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										beq.s   loc_3F18
 										bset    #0,((byte_FFA82D-$1000000)).w
 										bra.s   loc_3F1E
@@ -6647,13 +6651,13 @@ loc_3F24:
 ToggleRoofOnMapLoad:
 										
 										movem.l d0-a1,-(sp)
-										move.b  ((RAM_Battle_CurrentMovingEntity-$1000000)).w,d4
+										move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d4
 										bpl.s   loc_3F38
 										clr.w   d4
 loc_3F38:
 										andi.w  #$3F,d4 
 										lsl.w   #5,d4
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										move.w  2(a0,d4.w),d5
 										move.w  (a0,d4.w),d4
 										clr.w   d1
@@ -6665,10 +6669,10 @@ loc_3F38:
 loc_3F60:
 										tst.b   (a0)
 										bmi.w   loc_3FE4
-										move.w  ((RAM_Map_AreaForegroundLayer2StartX-$1000000)).w,d2
+										move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d2
 										ext.l   d2
 										divs.w  #3,d2
-										move.w  ((RAM_Map_AreaForegroundLayer2StartY-$1000000)).w,d3
+										move.w  ((MAP_AREA_LAYER2_STARTY-$1000000)).w,d3
 										ext.l   d3
 										divs.w  #3,d3
 										clr.w   d0
@@ -6775,7 +6779,7 @@ loc_4028:
 										lsl.w   #6,d1
 										add.w   d1,d0
 										add.w   d0,d0
-										lea     (RAM_Start).l,a2
+										lea     (RAM_START).l,a2
 										lea     (byte_FF5C08).l,a3
 										tst.w   d1
 										blt.s   loc_40BA
@@ -6804,7 +6808,7 @@ loc_40BE:
 										dbf     d7,loc_40BA
 loc_40D8:
 										move.w  #$FFFF,(a3)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_NOTHING
 										bset    #0,((byte_FFA82D-$1000000)).w
 loc_40E6:
@@ -6832,7 +6836,7 @@ sub_40F2:
 										lsl.w   #6,d3
 										add.w   d3,d2
 										add.w   d2,d2
-										lea     (RAM_Start).l,a2
+										lea     (RAM_START).l,a2
 										lea     (byte_FF5C08).l,a3
 loc_412C:
 										movem.w d2/d6,-(sp)
@@ -6843,7 +6847,7 @@ loc_4130:
 										movem.w (sp)+,d2/d6
 										addi.w  #$80,d2 
 										dbf     d7,loc_412C
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_NOTHING
 										bset    #0,((byte_FFA82D-$1000000)).w
 loc_4150:
@@ -6868,7 +6872,7 @@ loc_416E:
 										jsr     j_SetFlag
 										move.w  #MAP_BLOCKIDX_OPENCHEST,(a2,d0.w)
 																						; set block idx to open chest
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										beq.s   loc_4188
 										bset    #0,((byte_FFA82D-$1000000)).w
 										bra.s   loc_418E
@@ -6891,7 +6895,7 @@ CloseChest:
 										blt.s   loc_41C0
 										jsr     j_ClearFlag
 										move.w  #MAP_BLOCKIDX_CLOSEDCHEST,(a2,d0.w)
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										beq.s   loc_41BA
 										bset    #0,((byte_FFA82D-$1000000)).w
 										bra.s   loc_41C0
@@ -6996,7 +7000,7 @@ loc_4262:
 										beq.w   loc_4290        ; if we are not in battle branch
 										movem.l a0,-(sp)
 										lea     (BattleMapCoords).w,a0
-										mulu.w  #5,d2           ; THE MOST TERRIBLE BUG OF VIDEO GAME HISTORY
+										mulu.w  #5,d2           ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
 										add.b   1(a0,d2.w),d0
 										add.b   2(a0,d2.w),d1   ; add x1 and y1 of battle camera bounds
 										movem.l (sp)+,a0
@@ -7024,7 +7028,7 @@ loc_42C6:
 										move.w  d0,d1
 										move.w  d0,d2
 loc_42CC:
-										lea     (RAM_Start).l,a2
+										lea     (RAM_START).l,a2
 										movem.w (sp)+,d4-d5
 										rts
 loc_42D8:
@@ -7062,7 +7066,7 @@ loc_4314:
 										cmp.b   1(a2),d1
 										bne.w   loc_4340
 loc_4322:
-										move.w  #1,((RAM_MapEventType-$1000000)).w
+										move.w  #1,((MAP_EVENT_TYPE-$1000000)).w
 										move.l  2(a2),((byte_FFA84C-$1000000)).w
 										move.w  6(a2),((byte_FFA850-$1000000)).w
 										move.w  #$59,((word_FFB1A8-$1000000)).w 
@@ -7081,7 +7085,7 @@ loc_4340:
 sub_4344:
 										movem.l a0-a1,-(sp)
 										movem.w d7,-(sp)
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										bne.s   loc_4358
 										clr.w   ((word_FFA80E-$1000000)).w
 										bra.s   loc_435E
@@ -7101,7 +7105,7 @@ loc_435E:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 loc_439A:
 										movem.w (sp)+,d7
 										movem.l (sp)+,a0-a1
@@ -7115,7 +7119,7 @@ loc_439A:
 sub_43A4:
 										movem.l a0-a1,-(sp)
 										movem.w d7,-(sp)
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										beq.s   loc_43B8
 										clr.w   ((word_FFA80E-$1000000)).w
 										bra.s   loc_43BE
@@ -7132,7 +7136,7 @@ loc_43BE:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										movem.w (sp)+,d7
 										movem.l (sp)+,a0-a1
 										rts
@@ -7158,7 +7162,7 @@ loc_4400:
 										lsr.w   #7,d0
 										lsr.w   #7,d1
 										lea     MapOffsetHashTable(pc), a3
-										lea     (RAM_Start).l,a4
+										lea     (RAM_START).l,a4
 										lea     (FF2000_LOADING_SPACE).l,a5
 										cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 										bne.w   loc_44B4
@@ -7282,7 +7286,7 @@ LoadBattleMusic:
 										
 										move.w  d0,-(sp)
 										clr.w   d0
-										move.b  ((RAM_Map_AreaMusicIndex-$1000000)).w,d0
+										move.b  ((MAP_AREA_MUSIC_INDEX-$1000000)).w,d0
 loc_454C:
 										cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 										beq.s   loc_4586
@@ -7291,6 +7295,7 @@ loc_4554:
 										bne.s   loc_455E
 loc_455A:
 										move.w  #MUSIC_BATTLE_THEME_3,d0
+																						; HARDCODED music indexes here
 loc_455E:
 										cmpi.b  #MUSIC_TOWN,d0
 										bne.s   loc_4568
@@ -7308,7 +7313,7 @@ loc_457C:
 										bne.s   loc_4586
 										move.w  #MUSIC_BATTLE_THEME_1,d0
 loc_4586:
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										move.w  (sp)+,d0
 										rts
@@ -7343,14 +7348,14 @@ sub_458E:
 VInt_AdjustCameraToPlayer:
 										
 										clr.w   d0
-										move.b  ((RAM_Battle_CurrentMovingEntity-$1000000)).w,d0
+										move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d0
 										bmi.w   loc_468C
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										adda.w  d0,a0
 										move.w  (a0)+,d4
 										move.w  (a0)+,d5
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										bne.s   loc_45E8
 										move.w  ((word_FFA814-$1000000)).w,d2
 										move.w  ((word_FFA816-$1000000)).w,d3
@@ -7366,7 +7371,7 @@ loc_45F0:
 										addi.w  #$600,d7
 										cmp.w   d7,d4
 										bge.s   loc_4616
-										cmp.w   ((RAM_Map_AreaLayer1StartX-$1000000)).w,d2
+										cmp.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d2
 										ble.w   loc_4638
 										subi.w  #$180,d2
 										addq.w  #1,d6
@@ -7376,7 +7381,7 @@ loc_4616:
 										addi.w  #$900,d7
 										cmp.w   d7,d4
 										ble.s   loc_4638
-										move.w  ((RAM_Map_AreaLayer1EndX-$1000000)).w,d7
+										move.w  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d7
 										subi.w  #$F00,d7
 										cmp.w   d7,d2
 										bge.w   loc_4638
@@ -7388,7 +7393,7 @@ loc_4638:
 										addi.w  #$600,d7
 										cmp.w   d7,d5
 										bge.s   loc_4654
-										cmp.w   ((RAM_Map_AreaLayer1StartY-$1000000)).w,d3
+										cmp.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d3
 										ble.w   loc_4676
 										subi.w  #$180,d3
 										addq.w  #1,d6
@@ -7398,7 +7403,7 @@ loc_4654:
 										addi.w  #$900,d7
 										cmp.w   d7,d5
 										ble.s   loc_4676
-										move.w  ((RAM_Map_AreaLayer1EndY-$1000000)).w,d7
+										move.w  ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d7
 										subi.w  #$D80,d7
 										cmp.w   d7,d3
 										bge.w   loc_4676
@@ -7424,7 +7429,7 @@ loc_468C:
 loc_469C:
 										move.w  #$18,d7
 loc_46A0:
-										cmpi.b  #$30,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										cmpi.b  #$30,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										bne.s   loc_46AA
 										moveq   #$40,d7 
 loc_46AA:
@@ -7436,31 +7441,31 @@ loc_46B4:
 										beq.s   loc_46BE
 										move.w  ((word_FFB194-$1000000)).w,d7
 loc_46BE:
-										tst.b   ((RAM_Map_AreaLayer1AutoscrollX-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
 										bne.s   loc_46D0
 										move.w  d7,d0
-										mulu.w  ((RAM_Map_AreaLayer1XParallax-$1000000)).w,d0
+										mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d0
 										lsr.w   #8,d0
 										move.w  d0,((word_FFA820-$1000000)).w
 loc_46D0:
-										tst.b   ((RAM_Map_AreaLayer1AutoscrollY-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
 										bne.s   loc_46E2
 										move.w  d7,d0
-										mulu.w  ((RAM_Map_AreaLayer1YParallax-$1000000)).w,d0
+										mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d0
 										lsr.w   #8,d0
 										move.w  d0,((word_FFA822-$1000000)).w
 loc_46E2:
-										tst.b   ((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										bne.s   loc_46F4
 										move.w  d7,d0
-										mulu.w  ((RAM_Map_AreaLayer2XParallax-$1000000)).w,d0
+										mulu.w  ((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w,d0
 										lsr.w   #8,d0
 										move.w  d0,((word_FFA824-$1000000)).w
 loc_46F4:
-										tst.b   ((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 										bne.s   return_4706
 										move.w  d7,d0
-										mulu.w  ((RAM_Map_AreaLayer2YParallax-$1000000)).w,d0
+										mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d0
 										lsr.w   #8,d0
 										move.w  d0,((word_FFA826-$1000000)).w
 return_4706:
@@ -7501,12 +7506,12 @@ loc_4716:
 
 IsMapScrollingToFollowCameraTarget:
 										
-										move.b  ((RAM_CameraScrollingMask-$1000000)).w,d7
-										tst.w   ((RAM_Map_AreaLayer1AutoscrollX-$1000000)).w
+										move.b  ((CAMERA_SCROLLING_MASK-$1000000)).w,d7
+										tst.w   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
 										beq.s   loc_4736
 										andi.b  #3,d7
 loc_4736:
-										tst.w   ((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										tst.w   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										beq.s   loc_4740
 										andi.b  #$C,d7
 loc_4740:
@@ -7551,7 +7556,7 @@ VInt_UpdateAnimatingTiles:
 										move.w  (a0)+,d1
 										bge.w   loc_47A2
 										clr.w   d0
-										move.b  (RAM_TileAnimMapIdx).l,d0
+										move.b  (TILE_ANIM_MAP_INDEX).l,d0
 										movea.l (p_pt_MapData).l,a0
 										lsl.w   #2,d0
 										movea.l (a0,d0.w),a0
@@ -7570,7 +7575,7 @@ loc_47A2:
 										movea.w d2,a1
 										lsl.w   #4,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 return_47C4:
 										
 										rts
@@ -7741,7 +7746,7 @@ CopyFFC000toFFC800:
 
 MoveWindowWithSFX:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_MENU_SWITCH
 
 	; End of function MoveWindowWithSFX
@@ -7934,7 +7939,7 @@ loc_4AA2:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 										clr.b   ((byte_FFA8FF-$1000000)).w
 return_4AC6:
@@ -8076,15 +8081,15 @@ sub_4BEA:
 										asl.w   #5,d6
 										add.w   d1,d6
 										add.w   d6,d6
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   return_4C36
-										move.w  (FFD500_MaybeRelatedToVscroll).l,d1
+										move.w  (word_FFD500).l,d1
 										addq.w  #4,d1
 										lsr.w   #3,d1
 										lsl.w   #6,d1
 										add.w   d1,d6
 										andi.w  #$7FF,d6
-										move.w  (FFD100_MaybeRelatedToHscroll).l,d1
+										move.w  (dword_FFD100).l,d1
 										addq.w  #4,d1
 										lsr.w   #3,d1
 										add.w   d1,d1
@@ -8157,25 +8162,25 @@ loc_4C74:
 										subq.b  #1,((byte_FFAF69-$1000000)).w
 										move.b  ((byte_FFAF69-$1000000)).w,d6
 										sub.b   ((byte_FFAF6B-$1000000)).w,d6
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										lea     (byte_FFDD00).l,a1
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										bne.s   loc_4CB2
 										move.w  ((word_FFA806-$1000000)).w,d2
-										sub.w   (FFD100_MaybeRelatedToHscroll+2).l,d2
+										sub.w   (dword_FFD100+2).l,d2
 										asl.w   #4,d2
 										add.w   ((word_FFA814-$1000000)).w,d2
-										move.w  (FFD502_MaybeRelatedToOtherVScrollStuff).l,d3
+										move.w  (word_FFD502).l,d3
 										sub.w   ((word_FFA80A-$1000000)).w,d3
 										asl.w   #4,d3
 										add.w   ((word_FFA816-$1000000)).w,d3
 										bra.s   loc_4CD2
 loc_4CB2:
 										move.w  ((word_FFA804-$1000000)).w,d2
-										sub.w   (FFD100_MaybeRelatedToHscroll).l,d2
+										sub.w   (dword_FFD100).l,d2
 										asl.w   #4,d2
 										add.w   ((word_FFA810-$1000000)).w,d2
-										move.w  (FFD500_MaybeRelatedToVscroll).l,d3
+										move.w  (word_FFD500).l,d3
 										sub.w   ((word_FFA808-$1000000)).w,d3
 										asl.w   #4,d3
 										add.w   ((word_FFA812-$1000000)).w,d3
@@ -8318,7 +8323,7 @@ sub_4E1E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4E24:
-										lea     (RAM_Struct_Sprite_Y).l,a1
+										lea     (SPRITE_Y).l,a1 
 										moveq   #7,d7
 										move.w  #$40,d6 
 loc_4E30:
@@ -8367,7 +8372,7 @@ sub_4E86:
 										movem.l a0-a1,-(sp)
 										move.w  d0,-(sp)
 										lea     ((byte_FFAF47-$1000000)).w,a1
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										moveq   #$1F,d7
 loc_4E96:
 										clr.w   d0
@@ -8416,7 +8421,7 @@ sub_4ED8:
 VInt_UpdateEntities:
 										
 										clr.b   ((NUM_SPRITES_TO_LOAD-$1000000)).w
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										moveq   #$30,d7 ; do that for each entity
 loc_4EF4:
 										move.w  (a0),d0
@@ -8567,8 +8572,8 @@ esc01_waitUntilDestination:
 
 esc02_:
 										link    a6,#-$A
-										move.l  ((RAM_Map_AreaLayer1StartX-$1000000)).w,-4(a6)
-										move.l  ((RAM_Map_AreaLayer1EndX-$1000000)).w,-8(a6)
+										move.l  ((MAP_AREA_LAYER1_STARTX-$1000000)).w,-4(a6)
+										move.l  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,-8(a6)
 										tst.w   d7
 										bne.s   loc_502C
 										move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,-$A(a6)
@@ -8579,7 +8584,7 @@ loc_5018:
 										subi.w  #$180,-6(a6)
 										bra.s   loc_5032
 loc_502C:
-										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,-$A(a6)
+										move.b  ((P1_INPUT-$1000000)).w,-$A(a6)
 loc_5032:
 										move.w  (a0),d0
 										move.w  ENTITYDEF_OFFSET_Y(a0),d1
@@ -8635,9 +8640,9 @@ loc_50AE:
 loc_50BC:
 										btst    #6,$1C(a0)
 										beq.w   loc_51A8
-										tst.b   ((RAM_DebugModeActivated-$1000000)).w
+										tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
 										beq.s   loc_50D6
-										btst    #4,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #4,((P1_INPUT-$1000000)).w
 										bne.w   loc_51A8
 loc_50D6:
 										btst    #0,d6
@@ -8715,12 +8720,12 @@ loc_51A8:
 										btst    #5,$1C(a0)
 										beq.w   loc_5220
 										moveq   #$1F,d6
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a2
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a2
 loc_51C0:
-										btst    #7,$1C(a2)
+										btst    #7,ENTITYDEF_OFFSET_FLAGS_A(a2)
 										beq.w   loc_5218
 										move.w  (a2),d4
-										move.w  2(a2),d5
+										move.w  ENTITYDEF_OFFSET_Y(a2),d5
 										sub.w   d0,d4
 										bpl.s   loc_51D6
 										neg.w   d4
@@ -8734,8 +8739,8 @@ loc_51E4:
 										cmpi.w  #$100,d5
 										blt.w   loc_5210
 loc_51EC:
-										move.w  $C(a2),d4
-										move.w  $E(a2),d5
+										move.w  ENTITYDEF_OFFSET_XDEST(a2),d4
+										move.w  ENTITYDEF_OFFSET_YDEST(a2),d5
 										sub.w   d0,d4
 										bpl.s   loc_51FA
 										neg.w   d4
@@ -8764,10 +8769,10 @@ loc_5220:
 										bne.s   loc_5256
 										cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 										bne.s   loc_5256
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 										beq.s   loc_5256
-										move.w  #2,((RAM_MapEventType-$1000000)).w
+										move.w  #2,((MAP_EVENT_TYPE-$1000000)).w
 										movem.w (sp)+,d2-d3
 										bra.w   loc_531E
 loc_5256:
@@ -8775,16 +8780,16 @@ loc_5256:
 										bne.s   loc_5278
 										cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 										bne.s   loc_5278
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $40                ; Raft is unlocked (0x05264)
 										beq.s   loc_5278
-										move.w  #3,((RAM_MapEventType-$1000000)).w
+										move.w  #3,((MAP_EVENT_TYPE-$1000000)).w
 										movem.w (sp)+,d2-d3
 										bra.w   loc_531E
 loc_5278:
 										cmpi.w  #$400,d3
 										bne.s   loc_528A
-										bsr.w   sub_3E40
+										bsr.w   sub_3E40        
 										move.w  (a4,d2.w),d3
 										andi.w  #$3C00,d3
 loc_528A:
@@ -8794,7 +8799,7 @@ loc_528A:
 loc_5294:
 										cmpi.w  #$1400,d3
 										bne.s   loc_52C0
-										move.w  #6,((RAM_MapEventType-$1000000)).w
+										move.w  #6,((MAP_EVENT_TYPE-$1000000)).w
 										move.w  $C(a0),d3
 										add.w   d4,d3
 										ext.l   d3
@@ -8810,17 +8815,17 @@ loc_52C0:
 										cmpi.w  #$C000,(a4,d2.w)
 										movem.w (sp)+,d2-d3
 										bcs.w   loc_52E8
-										tst.b   ((RAM_DebugModeActivated-$1000000)).w
+										tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
 										beq.s   loc_52DE
-										btst    #4,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #4,((P1_INPUT-$1000000)).w
 										bne.w   loc_52E8
 loc_52DE:
 										btst    #6,$1C(a0)
 										bne.w   loc_531E
 loc_52E8:
 										move.w  d0,-(sp)
-										move.w  ((RAM_MoveSound-$1000000)).w,d0
-										trap    #TRAP_SOUNDCOM
+										move.w  ((MOVE_SOUND-$1000000)).w,d0
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										move.w  (sp)+,d0
 										move.w  d2,4(a0)
@@ -8850,7 +8855,7 @@ esc03_:
 										move.w  (a0),d0
 										move.w  ENTITYDEF_OFFSET_Y(a0),d1
 										move.l  a0,-(sp)
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										move.w  2(a1),d2
 										lsl.w   #5,d2
 										adda.w  d2,a0
@@ -8873,9 +8878,9 @@ loc_5354:
 										movea.l (sp)+,a0
 										bra.w   loc_53F8
 loc_5360:
-										move.b  $10(a0),d4
-										move.w  $C(a0),d0
-										move.w  $E(a0),d1
+										move.b  ENTITYDEF_OFFSET_FACING(a0),d4
+										move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
+										move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
 										move.w  4(a1),d2
 										lsl.w   #4,d2
 										move.w  6(a1),d3
@@ -8884,12 +8889,12 @@ loc_5360:
 										bsr.w   GetMapPixelCoordRAMOffset
 										cmpi.w  #$C000,(a4,d2.w)
 										bcs.s   loc_53B4
-										move.w  $C(a0),d0
-										move.w  $E(a0),d1
+										move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
+										move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
 										move.w  4(a1),d2
 										lsl.w   #4,d2
 										clr.w   d3
-										move.b  $10(a0),d4
+										move.b  ENTITYDEF_OFFSET_FACING(a0),d4
 										bsr.w   sub_5FAC
 										bsr.w   GetMapPixelCoordRAMOffset
 										cmpi.w  #$C000,(a4,d2.w)
@@ -9153,7 +9158,7 @@ CheckIfSameDestForOtherEntity:
 										btst    #5,$1C(a0)      ; end if not obstructed by people
 										beq.w   loc_5660
 										moveq   #$30,d6 
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a2
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a2
 loc_5624:
 										cmpi.w  #$7000,(a2)     ; test each entity
 										beq.w   loc_5658
@@ -9193,10 +9198,10 @@ loc_5660:
 
 esc07_:
 										link    a6,#-$A
-										move.l  ((RAM_Map_AreaLayer1StartX-$1000000)).w,-4(a6)
+										move.l  ((MAP_AREA_LAYER1_STARTX-$1000000)).w,-4(a6)
 loc_5672:
-										move.l  ((RAM_Map_AreaLayer1EndX-$1000000)).w,-8(a6)
-										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,-$A(a6)
+										move.l  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,-8(a6)
+										move.b  ((P1_INPUT-$1000000)).w,-$A(a6)
 										move.w  (a0),d0
 										move.w  2(a0),d1        ; get pos
 										clr.w   d2
@@ -9254,9 +9259,9 @@ loc_5708:
 										btst    #5,$1C(a0)
 										beq.w   loc_575C
 										moveq   #$1F,d6
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a2
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a2
 loc_5720:
-										btst    #7,$1C(a2)
+										btst    #7,ENTITYDEF_OFFSET_FLAGS_A(a2)
 										beq.w   loc_5754
 										move.w  (a2),d4
 										move.w  2(a2),d5
@@ -9285,7 +9290,7 @@ loc_575C:
 										andi.w  #$3C00,d3
 										cmpi.w  #$400,d3
 										bne.s   loc_5782
-										bsr.w   sub_3E40
+										bsr.w   sub_3E40        
 loc_577A:
 										move.w  (a4,d2.w),d3
 										andi.w  #$3C00,d3
@@ -9305,7 +9310,7 @@ loc_579A:
 loc_57A2:
 										cmpi.w  #$C000,(a4,d2.w)
 										bcc.s   loc_57B8
-										move.w  #4,((RAM_MapEventType-$1000000)).w
+										move.w  #4,((MAP_EVENT_TYPE-$1000000)).w
 										movem.w (sp)+,d2-d3
 loc_57B4:
 										bra.w   loc_57E0
@@ -9337,9 +9342,9 @@ loc_57E0:
 
 esc08_:
 										link    a6,#-$A
-										move.l  ((RAM_Map_AreaLayer1StartX-$1000000)).w,-4(a6)
-										move.l  ((RAM_Map_AreaLayer1EndX-$1000000)).w,-8(a6)
-										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,-$A(a6)
+										move.l  ((MAP_AREA_LAYER1_STARTX-$1000000)).w,-4(a6)
+										move.l  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,-8(a6)
+										move.b  ((P1_INPUT-$1000000)).w,-$A(a6)
 										move.w  (a0),d0
 										move.w  ENTITYDEF_OFFSET_Y(a0),d1
 										clr.w   d2
@@ -9398,7 +9403,7 @@ loc_588A:
 										btst    #5,$1C(a0)
 										beq.w   loc_58DE
 										moveq   #$1F,d6
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a2
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a2
 loc_58A2:
 										btst    #7,$1C(a2)
 										beq.w   loc_58D6
@@ -9429,7 +9434,7 @@ loc_58DE:
 										andi.w  #$3C00,d3
 										cmpi.w  #$400,d3
 										bne.s   loc_5904
-										bsr.w   sub_3E40
+										bsr.w   sub_3E40        
 										move.w  (a4,d2.w),d3
 										andi.w  #$3C00,d3
 loc_5904:
@@ -9446,7 +9451,7 @@ loc_5916:
 loc_5924:
 										cmpi.w  #$C000,(a4,d2.w)
 										bcc.s   loc_593A
-										move.w  #5,((RAM_MapEventType-$1000000)).w
+										move.w  #5,((MAP_EVENT_TYPE-$1000000)).w
 										movem.w (sp)+,d2-d3
 										bra.w   loc_5962
 loc_593A:
@@ -9531,7 +9536,7 @@ esc0E_:
 										move.w  6(a1),d3
 										move.w  2(a1),d0
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a1
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a1
 										adda.w  d0,a1
 										move.b  ENTITYDEF_OFFSET_FACING(a1),d0
 																						; other entity facing
@@ -9614,7 +9619,7 @@ esc0D_clonePosition:
 										move.l  a1,-(sp)
 										move.w  2(a1),d0
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a1
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a1
 										adda.w  d0,a1
 										move.l  (a1),(a0)
 										move.l  ENTITYDEF_OFFSET_XDEST(a1),ENTITYDEF_OFFSET_XDEST(a0)
@@ -9635,7 +9640,7 @@ esc0F_waitUntilOtherEntityReachesDest:
 										
 										move.l  a0,-(sp)
 										move.w  2(a1),d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										lsl.w   #5,d0
 										adda.w  d0,a0
 										move.w  (a0),d0         ; pos
@@ -9984,7 +9989,7 @@ esc22_setEntityFacing:
 esc23_sendSoundCommand:
 										
 										move.w  2(a1),d0
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										addq.l  #4,a1
 										bra.w   esc_clearTimerGoToNextCommand
@@ -10111,7 +10116,7 @@ esc41_Pass:
 	; End of function esc41_Pass
 
 
-; START OF FUNCTION CHUNK FOR esc00_wait
+; =============== S U B R O U T I N E =======================================
 
 esc_clearTimerGoToNextCommand:
 										
@@ -10119,7 +10124,7 @@ esc_clearTimerGoToNextCommand:
 										move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
 										bra.w   loc_4F06
 
-; END OF FUNCTION CHUNK FOR esc00_wait
+	; End of function esc_clearTimerGoToNextCommand
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10301,7 +10306,7 @@ loc_5EAA:
 										add.w   d1,d0
 										movem.w (sp)+,d2-d3
 										move.l  a1,-(sp)
-										lea     unk_5F9C(pc), a1
+										lea     byte_5F9C(pc), a1
 										nop
 										move.b  (a1,d0.w),d6
 										bpl.s   loc_5EC8
@@ -10389,17 +10394,17 @@ return_5F9A:
 
 	; End of function UpdateEntityData
 
-unk_5F9C:           dc.b   5
-										dc.b   2
-										dc.b   6
+byte_5F9C:          dc.b 5
+										dc.b 2
+										dc.b 6
 										dc.b $FF
-										dc.b   1
+										dc.b 1
 										dc.b $FF
-										dc.b   3
+										dc.b 3
 										dc.b $FF
-										dc.b   4
-										dc.b   0
-										dc.b   7
+										dc.b 4
+										dc.b 0
+										dc.b 7
 										dc.b $FF
 										dc.b $FF
 										dc.b $FF
@@ -10475,7 +10480,7 @@ return_6022:
 LoadMapEntitySprites:
 										
 										bsr.w   DisableDisplayAndVInt
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										moveq   #$2F,d7 
 loc_602E:
 										cmpi.w  #$7000,(a0)
@@ -10507,7 +10512,7 @@ FacingValuesbis:    dc.b 0
 sub_6052:
 										movem.l d0-a2,-(sp)
 										lsl.w   #ENTITYDEF_SIZE_BITS,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										adda.w  d0,a0
 										cmpi.b  #$FF,d2
 										beq.s   loc_6072
@@ -10619,7 +10624,7 @@ loc_615E:
 										adda.w  d1,a1
 										move.w  #$120,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 loc_617C:
 										movem.l (sp)+,a0-a1
@@ -10679,7 +10684,7 @@ loc_61BA:
 										adda.w  d1,a1
 										move.w  #$120,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgain
+										bsr.w   sub_10DC        
 loc_61F6:
 										movem.l (sp)+,a0-a1
 										rts
@@ -10700,14 +10705,14 @@ GetMapPixelCoordRAMOffset:
 										bne.s   loc_622E        
 										tst.b   $11(a0)
 										beq.s   loc_622E        
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										bne.s   loc_621E
-										move.w  ((RAM_Map_AreaForegroundLayer2StartX-$1000000)).w,d2
-										move.w  ((RAM_Map_AreaForegroundLayer2StartY-$1000000)).w,d3
+										move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d2
+										move.w  ((MAP_AREA_LAYER2_STARTY-$1000000)).w,d3
 										bra.s   loc_6226
 loc_621E:
-										move.w  ((RAM_Map_AreaBackgroundLayer2StartX-$1000000)).w,d2
-										move.w  ((RAM_Map_AreaBackgroundLayer2StartY-$1000000)).w,d3
+										move.w  ((MAP_AREA_BACKGROUND_STARTX-$1000000)).w,d2
+										move.w  ((MAP_AREA_BACKGROUND_STARTY-$1000000)).w,d3
 loc_6226:
 										lsl.w   #7,d2
 										lsl.w   #7,d3
@@ -10716,7 +10721,7 @@ loc_6226:
 loc_622E:
 										lea     MapOffsetHashTable(pc), a3
 																						; jump here if not in battle
-										lea     (RAM_Start).l,a4
+										lea     (RAM_START).l,a4
 										move.w  d0,d2
 										move.w  d1,d3
 										lsr.w   #7,d2
@@ -10772,7 +10777,7 @@ loc_6298:
 										move.b  (a0)+,((COMPRESSED_STRING_LENGTH-$1000000)).w
 																						; keep length of current string
 loc_62A8:
-										move.l  #RAM_Dialogue_NameIdx1,((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w
+										move.l  #TEXT_NAME_INDEX_1,((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w
 										move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
 loc_62B6:
 										cmpi.b  #1,((COMPRESSED_STRING_LENGTH-$1000000)).w
@@ -10816,7 +10821,7 @@ loc_6310:
 																						; line end reached
 										move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 										addi.b  #$10,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										beq.s   loc_6332
 										cmpi.b  #$20,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w 
 										bra.s   loc_6338
@@ -10923,7 +10928,7 @@ loc_6434:
 										bsr.w   ClearNextLineOfDialoguePixels
 										move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 										addi.b  #$10,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										beq.s   loc_6456
 										cmpi.b  #$20,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w 
 										bra.s   loc_645C
@@ -10950,7 +10955,7 @@ loc_6472:
 										move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
 										andi.b  #$7F,d1 
 										beq.s   loc_6472
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_VALIDATION
 										clr.w   d2
 										bsr.s   sub_64A8
@@ -10968,7 +10973,7 @@ sub_64A8:
 										beq.s   loc_64B0
 										moveq   #1,d2
 loc_64B0:
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   loc_64C2
 loc_64BA:
 										lea     (byte_FFDCB8).l,a0
@@ -11004,7 +11009,7 @@ UpdateForceAndGetFirstForceMemberIndex:
 										
 										jsr     j_UpdateForce
 										clr.w   d0
-										move.b  (RAM_Force_CurrentList).l,d0
+										move.b  (BATTLE_PARTY_MEMBERS).l,d0
 										rts
 
 	; End of function UpdateForceAndGetFirstForceMemberIndex
@@ -11037,7 +11042,7 @@ item:
 										bsr.w   CopyASCIIBytesForDialogueString
 										bra.w   loc_62CA
 number:
-										move.l  ((RAM_Dialog_NumberToPrint-$1000000)).w,d0
+										move.l  ((TEXT_NUMBER-$1000000)).w,d0
 										jsr     (WriteAsciiNumber).w
 										lea     ((RAM_Dialog_StringToPrint-$1000000)).w,a1
 										move.l  a1,((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
@@ -11425,7 +11430,7 @@ sub_676E:
 										addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 										bsr.w   sub_6872
 										move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   loc_6794
 										move.w  #$1D08,d0
 										bra.s   loc_6798
@@ -11437,7 +11442,7 @@ loc_6798:
 										addq.w  #1,d0
 										move.w  d0,((TEXT_WINDOW_INDEX-$1000000)).w
 										bsr.w   sub_67E6
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   loc_67CE
 										move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
 										subq.w  #1,d0
@@ -11465,7 +11470,7 @@ return_67E4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_67E6:
-										cmpi.w  #VDPTILE_IDX_SCREEN_BLACKBAR,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #VDPTILE_IDX_SCREEN_BLACKBAR,(SPRITE_VDP_TILE_INDEX).l
 																						; check if we are on the map or in battle (by checking for presence of black bar sprites)
 										bne.s   loc_67F6
 										move.w  #WINDOW_DIALOGUE_TILELINECOUNTER_EVENT,d6
@@ -11490,7 +11495,7 @@ loc_6822:
 										bsr.w   CopyLineOfVDPTileOrderForDialogueWindowToRAM
 										move.w  (sp)+,d1
 										addi.w  #$20,d1 
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   loc_6844
 loc_6838:
 										cmpi.w  #$C700,d1
@@ -11581,7 +11586,7 @@ loc_68C2:
 										beq.s   loc_68DC
 										move.w  d0,-(sp)
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,d0
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										move.w  (sp)+,d0
 loc_68DC:
@@ -11594,7 +11599,7 @@ loc_68E2:
 loc_68E6:
 										tst.b   ((byte_FFB198-$1000000)).w
 										bne.s   loc_68F2
-										tst.b   ((RAM_Input_Player1_StateA-$1000000)).w
+										tst.b   ((P1_INPUT-$1000000)).w
 										bne.s   return_68FA
 loc_68F2:
 										bsr.w   WaitForVInt     
@@ -11616,26 +11621,26 @@ loc_6900:
 loc_690C:
 										move.w  #$1B0,d0
 										move.w  #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										lea     (byte_FF6C02).l,a0
 										lea     ($CC00).l,a1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										lea     (byte_FF7002).l,a0
 										lea     ($D000).l,a1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   SetFFDE94b3andWait
 										lea     (byte_FF7402).l,a0
 										lea     ($D400).l,a1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 loc_694C:
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   loc_6976
 										lea     (byte_FF7802).l,a0
 										lea     ($D800).l,a1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										lea     (byte_FF7C02).l,a0
 										lea     ($DC00).l,a1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 loc_6976:
 										bra.w   Set_FFDE94_bit3 
 
@@ -11649,7 +11654,7 @@ HandleBlinkingDialogueCursor:
 										move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d0
 										lsl.w   #3,d0
 										add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   loc_699A
 										cmpi.b  #$30,d0 
 										blt.s   loc_6998
@@ -11667,10 +11672,10 @@ loc_69A4:
 										lea     ($C800).l,a1
 										move.w  #$1B0,d0
 										move.w  #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										lea     (byte_FF6C02).l,a0
 										lea     ($CC00).l,a1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bra.w   SetFFDE94b3andWait
 loc_69D8:
 										cmpi.b  #$20,d0 
@@ -11680,20 +11685,20 @@ loc_69DC:
 										lea     ($D000).l,a1
 										move.w  #$1B0,d0
 										move.w  #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										lea     (byte_FF7402).l,a0
 										lea     ($D400).l,a1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bra.w   SetFFDE94b3andWait
 loc_6A0C:
 										lea     (byte_FF7802).l,a0
 										lea     ($D800).l,a1
 										move.w  #$1B0,d0
 										move.w  #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										lea     (byte_FF7C02).l,a0
 										lea     ($DC00).l,a1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bra.w   SetFFDE94b3andWait
 
 	; End of function HandleBlinkingDialogueCursor
@@ -11710,7 +11715,7 @@ HideTextBox:
 										blt.s   return_6A7E
 										move.w  #$21D,d1
 loc_6A44:
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   loc_6A56
 										moveq   #8,d2
 										bsr.w   MoveWindowWithoutSFX
@@ -11750,7 +11755,7 @@ loc_6A90:
 										lsl.w   #3,d0
 										add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
 loc_6A96:
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   loc_6AAC
 										cmpi.b  #$30,d0 
 										blt.s   loc_6AAA
@@ -11792,7 +11797,7 @@ sub_6AE0:
 										move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d0
 										move.w  d0,-(sp)
 										addq.w  #1,d0
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   loc_6AF8
 										cmpi.w  #6,d0
 										bra.s   loc_6AFC
@@ -11817,7 +11822,7 @@ loc_6B18:
 										move.w  (sp)+,d0
 										lsl.w   #3,d0
 										add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   loc_6B42
 										cmpi.b  #$30,d0 
 										blt.s   loc_6B40
@@ -11836,7 +11841,7 @@ loc_6B4C:
 										adda.w  d0,a1
 										move.w  #$1B0,d0
 										move.w  #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 										rts
 
@@ -11911,7 +11916,7 @@ sub_6BDE:
 										move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d3
 										lsl.w   #3,d3
 										add.b   d3,d0
-										cmpi.w  #$C77C,(RAM_Struct_Sprite_VDPTileIdx).l
+										cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 										bne.s   loc_6C04
 										cmpi.b  #$30,d0 
 										blt.s   loc_6C02
@@ -12174,7 +12179,7 @@ sub_6D66:
 
 	; End of function sub_6D66
 
-										dc.b   0
+										dc.b   0                ; unused layout ?
 										dc.b $EE 
 										dc.b $EE 
 										dc.b $EE 
@@ -12669,15 +12674,15 @@ loc_7024:
 
 WitchSuspend:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_SUSPEND
 										bsr.w   sub_7BDE
 										move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 										move.w  #6,((word_FFB07C-$1000000)).w
 										move.b  #$FF,((byte_FFB082-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $F0                ; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.b   ((byte_FFB082-$1000000)).w
 										bsr.w   sub_7CDC
@@ -12685,12 +12690,12 @@ WitchSuspend:
 										move.w  #$258,d0
 loc_7068:
 										bsr.w   WaitForVInt     
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #7,((P1_INPUT-$1000000)).w
 										dbne    d0,loc_7068
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_FADE_OUT
 										bsr.w   FadeOutToBlack
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_CLEAR
 										bsr.w   DisableDisplayAndVInt
 										move    #$2700,sr
@@ -12704,16 +12709,16 @@ loc_7094:
 										move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 										move.w  #6,((word_FFB07C-$1000000)).w
 										move.b  #$FF,((byte_FFB082-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $EE                ; "Finally, you've fulfilled my{N}wish!{N}{D2}{D2}Thanks to you, I can{N}escape from this forest!{D2}{N}Are you really that{N}surprised?{D2}{D2}{D2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.b   ((byte_FFB082-$1000000)).w
 										bsr.w   sub_7CDC
 										bsr.w   FadeOutToWhite
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_REMOVE
-										dc.l VInt_7D54
+										dc.l VInt_WitchBlink    
 										jmp     j_EndGame
 
 	; End of function WitchSuspend
@@ -12721,38 +12726,42 @@ loc_7094:
 
 ; =============== S U B R O U T I N E =======================================
 
-Main:
+GameInit:
 										move    #$2300,sr
 										bsr.w   LoadBaseTiles
 										bsr.w   CheckRegion
 										jsr     j_NewGame
 										jsr     j_DisplaySegaLogo
 										bne.w   loc_71EC
-										tst.b   ((RAM_DebugModeActivated-$1000000)).w
-										beq.w   PlayIntro
+										tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+										beq.w   GameIntro
 										bsr.w   EnableDisplayAndInterrupts
 										bsr.w   WaitForVInt     
-										btst    #INPUT_A_START_BIT,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
 										beq.s   loc_7118
 										jsr     (EnableDisplayAndInterrupts).w
 										bsr.w   InitDisplay     
 										jsr     (EnableDisplayAndInterrupts).w
 										jmp     j_rts
 loc_7118:
-										btst    #INPUT_A_UP_BIT,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #INPUT_A_UP_BIT,((P1_INPUT-$1000000)).w
 										bne.w   DebugModeBattleTest
-										btst    #INPUT_A_DOWN_BIT,((RAM_Input_Player1_StateA-$1000000)).w
-										beq.w   j_PlayIntro
+										btst    #INPUT_A_DOWN_BIT,((P1_INPUT-$1000000)).w
+										beq.w   j_GameIntro
 										jsr     (EnableDisplayAndInterrupts).w
 										bsr.w   InitDisplay     
 										bsr.w   EnableDisplayAndInterrupts
 										bsr.w   FadeInFromBlack
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
+word_713E:
+										
 										dc.w VINTS_ADD
 										dc.l VInt_UpdateWindows
-										move.b  #$FF,((RAM_DebugModeActivated-$1000000)).w
+										move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
 										bsr.w   InitWindowProperties
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
+word_7150:
+										
 										dc.w $18F               ; set after first battle's cutscene OR first save? Checked at witch screens
 										moveq   #0,d0
 										moveq   #0,d1
@@ -12769,18 +12778,18 @@ loc_7118:
 										jsr     j_ExecuteExplorationLoop
 										bra.w   MainBattleAndExplorationLoop
 
-	; End of function Main
+	; End of function GameInit
 
 DebugModeAvailableMaps:
 										incbin "maps/global/debugmodeavailablemaps.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
-j_PlayIntro:
+j_GameIntro:
 										
-										bra.w   PlayIntro
+										bra.w   GameIntro
 
-	; End of function j_PlayIntro
+	; End of function j_GameIntro
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -12792,9 +12801,9 @@ sub_71C4:
 	; End of function sub_71C4
 
 
-; START OF FUNCTION CHUNK FOR Main
+; =============== S U B R O U T I N E =======================================
 
-PlayIntro:
+GameIntro:
 										
 										move.l  sp,(SECONDS_COUNTER_0).l
 										move.l  #loc_71EC,((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
@@ -12807,14 +12816,13 @@ loc_71EC:
 										move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
 										bsr.w   EnableInterrupts
 										lea     (PALETTE_1).l,a0
-										lea     (FFD080_Palette1bis).l,a1
+										lea     (PALETTE_1_BIS).l,a1
 										move.w  #$80,d7 
 										bsr.w   CopyBytes       
 										bsr.w   FadeOutToBlack
-										trap    #TRAP_VINTFUNCTIONS
-
-; END OF FUNCTION CHUNK FOR Main
-
+										trap    #VINT_FUNCTIONS
+word_7214:
+										
 										dc.w VINTS_CLEAR
 										clr.w   d6
 										jsr     (ClearHscrollStuff).w
@@ -12824,7 +12832,9 @@ loc_71EC:
 										jsr     (SetFFDE94b3andWait).w
 										bsr.w   InitDisplay     
 										bsr.w   DisableDisplayAndVInt
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
+word_7236:
+										
 										dc.w MUSIC_TITLE
 										jsr     TitleScreen
 										bne.s   loc_724E        
@@ -12832,12 +12842,15 @@ loc_71EC:
 										movea.l (InitStack).w,sp
 										movea.l (p_Start).w,a0  
 										jmp     (a0)            ; reset
-loc_724E:           bsr.w   DisableDisplayAndVInt
+loc_724E:
+										bsr.w   DisableDisplayAndVInt
 																						; title screen -> witch menu
 										bsr.w   ClearVsramAndSprites
 										bsr.w   EnableDisplayAndInterrupts
 										move.b  #$FF,((WINDOW_HIDING_FORBIDDEN-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
+word_7262:
+										
 										dc.w VINTS_CLEAR
 										clr.w   d6
 										jsr     (ClearHscrollStuff).w
@@ -12852,7 +12865,8 @@ loc_724E:           bsr.w   DisableDisplayAndVInt
 										bsr.w   sub_7C5E
 										move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 										move.w  #6,((word_FFB07C-$1000000)).w
-loc_729C:           move.b  #0,((byte_FFB082-$1000000)).w
+loc_729C:
+										move.b  #0,((byte_FFB082-$1000000)).w
 										jsr     j_ClearEntities
 										movea.l (p_SpeechBalloonTiles).l,a0
 										lea     ($8000).l,a1
@@ -12860,17 +12874,23 @@ loc_729C:           move.b  #0,((byte_FFB082-$1000000)).w
 										moveq   #2,d1
 										jsr     (DmaTilesViaFF8804).w
 										bsr.w   EnableDisplayAndInterrupts
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
+word_72C4:
+										
 										dc.w MUSIC_WITCH
 										bsr.w   FadeInFromBlack
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
+word_72CC:
+										
 										dc.w VINTS_ADD
 										dc.l VInt_UpdateWindows
 										bsr.w   InitWindowProperties
 										bsr.w   WaitForVInt     
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
+word_72DC:
+										
 										dc.w VINTS_ADD
-										dc.l VInt_7D54
+										dc.l VInt_WitchBlink    
 										bsr.w   CheckSRAM       
 										moveq   #$20,d7 
 										move.b  d7,(SAVED_ERRCODE_BYTE0).l
@@ -12883,23 +12903,35 @@ loc_729C:           move.b  #0,((byte_FFB082-$1000000)).w
 										move.b  d7,(SAVED_ERRCODE_BYTE7).l
 										tst.w   d0
 										bpl.s   loc_7332
-										move.l  #1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_SOUNDCOM
+										move.l  #1,((TEXT_NUMBER-$1000000)).w
+										trap    #SOUND_COMMAND
+word_7326:
+										
 										dc.w MUSIC_CORRUPTED_SAVE
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
+word_732A:
+										
 										dc.w $ED                ; "Ooops!  Record {#} has{N}vanished!{W2}"
 										jsr     j_FadeOut_WaitForP2Input
-loc_7332:           tst.w   d1
+loc_7332:
+										tst.w   d1
 										bpl.s   loc_734C
-										move.l  #2,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_SOUNDCOM
+										move.l  #2,((TEXT_NUMBER-$1000000)).w
+										trap    #SOUND_COMMAND
+word_7340:
+										
 										dc.w MUSIC_CORRUPTED_SAVE
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
+word_7344:
+										
 										dc.w $ED                ; "Ooops!  Record {#} has{N}vanished!{W2}"
 										jsr     j_FadeOut_WaitForP2Input
-loc_734C:           btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+loc_734C:
+										btst    #7,((P1_INPUT-$1000000)).w
 										bne.w   loc_73AA
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
+word_7358:
+										
 										dc.w $D8                ; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
 										bsr.w   WaitForVInt     
 										bsr.w   sub_7CF4
@@ -12907,34 +12939,38 @@ loc_734C:           btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
 										move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 										move.w  #6,((word_FFB07C-$1000000)).w
 										move.b  #$FF,((byte_FFB082-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
+word_737A:
+										
 										dc.w $D9                ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
-loc_737C:           btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+loc_737C:
+										btst    #7,((P1_INPUT-$1000000)).w
 										bne.w   loc_73C2
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
+word_7388:
+										
 										dc.w $DA                ; "Yes, yes...I used a spell{N}on you.{W2}"
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #7,((P1_INPUT-$1000000)).w
 										bne.w   loc_73C2
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
+word_7396:
+										
 										dc.w $DB                ; "Ha, ha.  Where are you{N}going?  You can't escape{W2}"
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #7,((P1_INPUT-$1000000)).w
 										bne.w   loc_73C2
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
+word_73A4:
+										
 										dc.w $DC                ; "from this mystery forest{N}unless you help me.{W2}"
 										bra.w   loc_73C2
-loc_73AA:           bsr.w   WaitForVInt     
+loc_73AA:
+										bsr.w   WaitForVInt     
 										bsr.w   sub_7CF4
 										bsr.w   WaitForVInt     
 										move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 										move.b  #$FF,((byte_FFB082-$1000000)).w
-
-; START OF FUNCTION CHUNK FOR WitchDel
-
 loc_73C2:
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR WitchDel
-
+										trap    #TEXTBOX
 										dc.w $DD                ; "{CLEAR}Whatcha gonna do?"
 										move.b  (SAVE_FLAGS).l,d3
 										andi.w  #3,d3
@@ -12942,19 +12978,25 @@ loc_73C2:
 										clr.w   d0
 										moveq   #1,d2
 										bra.s   loc_73E8
-loc_73D8:           moveq   #1,d0
+loc_73D8:
+										moveq   #1,d0
 										cmpi.w  #3,d3
 										bne.s   loc_73E4
 										moveq   #6,d2
 										bra.s   loc_73E8
-loc_73E4:           move.w  #$F,d2
-loc_73E8:           clr.w   d1
+loc_73E4:
+										move.w  #$F,d2
+loc_73E8:
+										clr.w   d1
 										jsr     j_WitchMainMenu
 										tst.w   d0
 										bmi.s   loc_73C2
 										add.w   d0,d0
 										move.w  rjt_WitchChoice(pc,d0.w),d0
 										jmp     rjt_WitchChoice(pc,d0.w)
+
+	; End of function GameIntro
+
 rjt_WitchChoice:    dc.w WitchNew-rjt_WitchChoice
 										dc.w WitchLoad-rjt_WitchChoice
 										dc.w WitchDel-rjt_WitchChoice
@@ -12963,7 +13005,7 @@ rjt_WitchChoice:    dc.w WitchNew-rjt_WitchChoice
 ; =============== S U B R O U T I N E =======================================
 
 WitchNew:
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DE                ; "What should I call you?{W2}"
 										move.b  (SAVE_FLAGS).l,d2
 										andi.w  #3,d2
@@ -12984,13 +13026,13 @@ loc_7428:
 										subq.w  #1,d0
 										move.w  d0,((SAVE_SLOT_BEING_USED-$1000000)).w
 										jsr     j_NewGame
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d0
 										jsr     sub_1007C
 										btst    #7,(SAVE_FLAGS).l
 										beq.w   loc_7476
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #7,((P1_INPUT-$1000000)).w
 										beq.w   loc_7476
 										moveq   #1,d0
 										moveq   #$1B,d7
@@ -13002,10 +13044,10 @@ loc_746A:
 										beq.s   loc_746A
 										dbf     d7,loc_7464
 loc_7476:
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DF                ; "{NAME;0}....{N}Nice name, huh?{W2}"
 										bsr.w   CheatModeConfiguration
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E8                ; "I'll let you decide the{N}difficulty level at this time."
 										clr.w   d0
 										moveq   #3,d1
@@ -13017,24 +13059,24 @@ loc_7476:
 loc_7494:
 										btst    #0,d0
 										beq.s   loc_749E
-										trap    #TRAP_SETFLAG
-										dc.w $4E                ; set in loc_7494
+										trap    #SET_FLAG
+										dc.w $4E                ; Difficulty
 loc_749E:
 										btst    #1,d0
-										beq.s   loc_74A8
-										trap    #TRAP_SETFLAG
-										dc.w $4F                ; both of these can be set in the witch screens...
+										beq.s   loc_74A8        
+										trap    #SET_FLAG
+										dc.w $4F                ; Difficulty
 loc_74A8:
-										addi.w  #$E9,d0 
+										addi.w  #$E9,d0 ; difficulty choice reactions
 										bsr.w   DisplayText     
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E0                ; "Now, good luck!{N}You have no time to waste!{W1}"
 loc_74B4:
 										move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
 										move.b  #3,((CURRENT_MAP-$1000000)).w
-										move.b  #3,((RAM_EgressMapIdx-$1000000)).w
+										move.b  #3,((EGRESS_MAP_INDEX-$1000000)).w
 										bsr.w   SaveGame
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.b  #3,d0
 										move.w  #$38,d1 
@@ -13051,7 +13093,7 @@ loc_74DE:
 
 WitchLoad:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E1                ; "By the way, who are you?"
 										move.b  (SAVE_FLAGS).l,d2
 										andi.w  #3,d2
@@ -13070,15 +13112,15 @@ loc_74FE:
 										subq.w  #1,d0
 										move.w  d0,((SAVE_SLOT_BEING_USED-$1000000)).w
 										bsr.w   LoadGame
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E2                ; "{NAME;0}, yes!  I knew it!{W2}"
 										bsr.w   CheatModeConfiguration
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E0                ; "Now, good luck!{N}You have no time to waste!{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 										beq.s   loc_753A
 										jsr     j_ExecuteBattleLoop
@@ -13098,7 +13140,7 @@ loc_753A:
 
 WitchCopy:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E3                ; "Copy?  Really?"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
@@ -13107,7 +13149,7 @@ WitchCopy:
 										andi.w  #3,d0
 										subq.w  #1,d0
 										bsr.w   CopySave
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E4                ; "Hee, hee!  It's done.{W2}"
 										bra.w   loc_73C2
 
@@ -13117,7 +13159,7 @@ WitchCopy:
 ; =============== S U B R O U T I N E =======================================
 
 WitchDel:
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E5                ; "Delete which one?"
 										move.b  (SAVE_FLAGS).l,d2
 										andi.w  #3,d2
@@ -13135,14 +13177,14 @@ loc_7590:
 										bmi.w   loc_73C2
 										subq.w  #1,d0
 										move.w  d0,((SAVE_SLOT_BEING_USED-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E6                ; "Delete?  Are you sure?"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.w   loc_73C2
 										move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
 										bsr.w   ClearSaveSlotFlag
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E7                ; "Hee, hee!  It's gone!{W2}"
 										bra.w   loc_73C2
 
@@ -13188,10 +13230,10 @@ loc_75E4:
 
 GetEgressPositionForMap:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $18F               ; set after first battle's cutscene OR first save? Checked at witch screens
-										bne.s   loc_75FC        ; egress always goes back to granseal church if you haven't triggered the gizmos cutscene
-										moveq   #3,d0           ; default egress position
+										bne.s   loc_75FC        ; egress always goes back to granseal church (Wiz : or is it Bowie's room ?) if you haven't triggered the gizmos cutscene
+										moveq   #3,d0           ; HARDCODED default egress position
 										moveq   #$38,d1 
 										moveq   #3,d2
 										moveq   #3,d3
@@ -13215,7 +13257,7 @@ loc_7618:
 										move.b  (a0)+,d2
 										move.b  (a0)+,d3
 loc_7620:
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $40                ; Raft is unlocked (0x05264)
 										beq.s   loc_764A
 										lea     RaftResetMapCoords(pc), a0
@@ -13227,9 +13269,9 @@ loc_762A:
 										cmp.b   (a0),d0
 										bne.s   loc_762A
 loc_7638:
-										move.b  1(a0),((RAM_Raft_MapIdx-$1000000)).w
-										move.b  2(a0),((RAM_Raft_X-$1000000)).w
-										move.b  3(a0),((RAM_Raft_Y-$1000000)).w
+										move.b  1(a0),((RAFT_MAP_INDEX-$1000000)).w
+										move.b  2(a0),((RAFT_X-$1000000)).w
+										move.b  3(a0),((RAFT_Y-$1000000)).w
 loc_764A:
 										movea.l (sp)+,a0
 										rts
@@ -13270,7 +13312,7 @@ LoadBaseTiles:
 
 DebugModeBattleTest:
 										
-										move.b  #$FF,((RAM_DebugModeActivated-$1000000)).w
+										move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
 										move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
 										moveq   #1,d0
 										bsr.w   j_JoinForce
@@ -13340,13 +13382,13 @@ DebugModeBattleTest:
 										bsr.w   j_SetCurrentATK
 										bsr.w   j_SetCurrentDEF
 										bsr.w   j_SetCurrentHP
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_BATTLE_THEME_3
 										bsr.w   EnableDisplayAndInterrupts
 										bsr.w   InitDisplay     
 										bsr.w   EnableDisplayAndInterrupts
 										bsr.w   FadeInFromBlack
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_UpdateWindows
 										bsr.w   InitWindowProperties
@@ -13362,13 +13404,13 @@ DebugModeBattleTest:
 										move.l  #$1C1D1E1F,(a0)+
 										bsr.w   CheatModeConfiguration
 loc_77DE:
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1C8               ; "Battle number?{D1}"
 										clr.w   d0
 										clr.w   d1
 										move.w  #$31,d2 
 										jsr     j_NumberPrompt
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										tst.w   d0
 										blt.w   loc_7894
@@ -13401,15 +13443,15 @@ loc_7820:
 										move.b  (a0)+,((byte_FFF709-$1000000)).w
 										jsr     j_ExecuteBattleLoop
 										jsr     j_ChurchActions
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1CC               ; "Shop number?{D1}"
 										move.w  #0,d0
 										move.w  #0,d1
 										move.w  #$64,d2 
 										jsr     j_NumberPrompt
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
-										move.b  d0,((RAM_CurrentShopIdx-$1000000)).w
+										move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
 										jsr     j_ShopActions
 										jsr     j_MainMenuActions
 										jsr     j_CaravanActions
@@ -13437,7 +13479,7 @@ loc_78BA:
 sub_78BC:
 										moveq   #$1D,d7
 										clr.w   d0
-										lea     (RAM_Start).l,a0
+										lea     (RAM_START).l,a0
 loc_78C6:
 										bsr.w   j_GetCurrentLevel
 										bsr.w   sub_7930
@@ -13609,7 +13651,7 @@ RaftResetMapCoords: incbin "maps/global/raftresetmapcoords.bin"
 
 sub_7BDE:
 										move.b  #$FF,((WINDOW_HIDING_FORBIDDEN-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_CLEAR
 										clr.w   d6
 										jsr     (ClearHscrollStuff).w
@@ -13633,14 +13675,14 @@ sub_7BDE:
 										bsr.w   sub_7D28
 										bsr.w   sub_7D0C
 										bsr.w   FadeInFromBlack
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_UpdateWindows
 										bsr.w   InitWindowProperties
 										bsr.w   WaitForVInt     
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
-										dc.l VInt_7D54
+										dc.l VInt_WitchBlink    
 										rts
 
 	; End of function sub_7BDE
@@ -13658,7 +13700,7 @@ sub_7C5E:
 										lea     ($2000).w,a1
 										move.w  #$2000,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgain
+										bsr.w   sub_10DC        
 										movea.l (p_WitchLayout).l,a0
 										lea     (byte_FFE000).l,a1
 										move.w  #$800,d7
@@ -13667,9 +13709,9 @@ sub_7C5E:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgain
+										bsr.w   sub_10DC        
 										movea.l (p_plt_Witch).l,a0
-										lea     (FFD080_Palette1bis).l,a1
+										lea     (PALETTE_1_BIS).l,a1
 										moveq   #$20,d7 
 										bsr.w   CopyBytes       
 										lea     $20(a0),a0
@@ -13716,7 +13758,7 @@ sub_7D0C:
 										lea     ($E000).l,a1
 										move.w  #$220,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   SetFFDE94b3andWait
 										rts
 
@@ -13749,7 +13791,9 @@ loc_7D3C:
 
 ; =============== S U B R O U T I N E =======================================
 
-VInt_7D54:
+; witch blink function ?
+
+VInt_WitchBlink:
 										
 										link    a6,#-2
 										tst.b   ((byte_FFB082-$1000000)).w
@@ -13816,52 +13860,52 @@ loc_7E16:
 										lea     ($E000).l,a1
 										move.w  #$200,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										bsr.w   Set_FFDE94_bit3 
 loc_7E36:
 										unlk    a6
 										rts
 
-	; End of function VInt_7D54
+	; End of function VInt_WitchBlink
 
 
 ; =============== S U B R O U T I N E =======================================
 
 CheatModeConfiguration:
 										
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #7,((P1_INPUT-$1000000)).w
 										beq.w   return_7EC4
-										btst    #0,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #0,((P1_INPUT-$1000000)).w
 										beq.s   loc_7E58
 										btst    #7,(SAVE_FLAGS).l
 										bne.w   nullsub_17
 loc_7E58:
 										tst.b   ((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
 										beq.w   return_7EC4
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1C0               ; "Configuration....{D3}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1C2               ; "{CLEAR}Special Turbo"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.s   loc_7E78
 										move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
 loc_7E78:
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1C3               ; "{CLEAR}Control Opponent"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.s   loc_7E8C
 										move.b  #$FF,((CONTROL_OPPONENT_CHEAT-$1000000)).w
 loc_7E8C:
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1C4               ; "{CLEAR}Auto Battle"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
 										bne.s   loc_7EA0
 										move.b  #$FF,((AUTO_BATTLE_CHEAT-$1000000)).w
 loc_7EA0:
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1C7               ; "{CLEAR}Game Completed"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
@@ -13871,7 +13915,7 @@ loc_7EA0:
 loc_7EB8:
 										bclr    #7,(SAVE_FLAGS).l
 loc_7EC0:
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1CD               ; "Configuration is done.{N}Go ahead!{W1}"
 return_7EC4:
 										
@@ -13902,7 +13946,7 @@ CheckRegion:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										bsr.w   BwahDMAstuffAgainbis
+										bsr.w   sub_119E        
 										lea     (PALETTE_1).l,a0
 										move.l  #$EEE,(a0)+
 										clr.l   (a0)+

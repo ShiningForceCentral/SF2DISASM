@@ -6,7 +6,7 @@
 
 ms_map39_flag33E_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $344
 										bne.s   return_5E0EC
 										lea     cs_5E0EE(pc), a0
@@ -24,7 +24,7 @@ cs_5E0EE:           dc.w $2B                ; 002B  1A 4 C 1 FF
 										dc.b 1
 										dc.b $FF
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5E0F8:           dc.w 4                  ; 0004 SET TEXT INDEX 805 : "Well, you're not from{N}Pacalon, are you?{W1}"
+cs_5E0F8:           dc.w 4                  ; 0004 INIT TEXT CURSOR 805 : "Well, you're not from{N}Pacalon, are you?{W1}"
 										dc.w $805
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 18
 										dc.w $18
@@ -199,7 +199,7 @@ cs_5E0F8:           dc.w 4                  ; 0004 SET TEXT INDEX 805 : "Well, y
 										dc.b $C
 										dc.b 1
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5E20A:           dc.w 4                  ; 0004 SET TEXT INDEX 819 : "I happened to overhear your{N}conversation with {NAME;24}.{W2}"
+cs_5E20A:           dc.w 4                  ; 0004 INIT TEXT CURSOR 819 : "I happened to overhear your{N}conversation with {NAME;24}.{W2}"
 										dc.w $819
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "I happened to overhear your{N}conversation with {NAME;24}.{W2}"
 										dc.w $1A

@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle12\cs_battleend :
 ; Enemy defeated cutscene for battle 12
-edcs_battle12:      dc.w 4                  ; 0004 SET TEXT INDEX 9BA : "How can you...defeat...{N}devils?{W1}"
+edcs_battle12:      dc.w 4                  ; 0004 INIT TEXT CURSOR 9BA : "How can you...defeat...{N}devils?{W1}"
 										dc.w $9BA
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 20
 										dc.w $20

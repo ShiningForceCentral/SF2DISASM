@@ -37,7 +37,7 @@ return_5F9F6:
 
 sub_5F9F8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D24               ; "Was it...too wild?{W1}"
 										rts
 
@@ -48,12 +48,12 @@ sub_5F9F8:
 
 sub_5F9FE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $101
 										bne.s   return_5FA0E
 										lea     cs_5FB30(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $101
 return_5FA0E:
 										
@@ -66,15 +66,15 @@ return_5FA0E:
 
 sub_5FA10:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $101
 										bne.s   loc_5FA1C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D23               ; "{LEADER}, come on!{W1}"
 										bra.s   return_5FA20
 loc_5FA1C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D2A               ; "We must finish our{N}preparations before Geshp{N}finds us.{W1}"
 return_5FA20:
 										

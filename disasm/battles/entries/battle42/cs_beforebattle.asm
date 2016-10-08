@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle42\cs_beforebattle :
 ; Cutscene before battle 42
-bbcs_42:            dc.w 4                  ; 0004 SET TEXT INDEX C10 : "I can't see!  Is anybody{N}there?{W1}"
+bbcs_42:            dc.w 4                  ; 0004 INIT TEXT CURSOR C10 : "I can't see!  Is anybody{N}there?{W1}"
 										dc.w $C10
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 3B 8 1D
 										dc.w $3B

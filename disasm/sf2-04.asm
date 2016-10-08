@@ -79,7 +79,7 @@ loc_18026:
 										move.w  d3,((CHARACTER_WEAPON_PALETTE-$1000000)).w
 										move.b  #$FF,((BATTLE_BACKGROUND-$1000000)).w
 										bsr.w   FadeOutToBlackForBattlescene
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_FADE_OUT
 										move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
 										bpl.s   loc_1807C
@@ -96,7 +96,7 @@ loc_1808C:
 										jsr     (WaitForVInt).w 
 										tst.b   ((FADING_SETTING-$1000000)).w
 										bne.s   loc_1808C
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_CLEAR
 										jsr     (WaitForVInt).w 
 										jsr     (DisableDisplayAndVInt).w
@@ -119,30 +119,30 @@ loc_180CC:
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										lea     (byte_FFC000).l,a0
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										bsr.w   sub_198C8
 										lea     (byte_FFC000).l,a0
 										lea     ($C000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										lea     (FF2000_LOADING_SPACE).l,a0
 										lea     ($7400).w,a1
 										move.w  #$C00,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										lea     (byte_FF3800).l,a0
 										lea     ($8C00).l,a1
 										move.w  #$C00,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										lea     ((byte_FFB542-$1000000)).w,a0
-										lea     ((PALETTE_4-$1000000)).w,a1
+										lea     ((PALETTE_4_BIS-$1000000)).w,a1
 										moveq   #7,d0
 loc_1814E:
 										
@@ -232,7 +232,7 @@ loc_1822A:
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										move.w  ((CHARACTER_WEAPON_PALETTE-$1000000)).w,d0
 										bsr.w   LoadWeaponPalette
 loc_1828C:
@@ -262,11 +262,11 @@ loc_1828C:
 										bsr.w   sub_1F254
 										jsr     (WaitForVInt).w 
 										jsr     (sub_1942).w    
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_UpdateBattlesceneGraphics
 										jsr     sub_1001C
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_UpdateWindows
 										jsr     (EnableDisplayAndInterrupts).w
@@ -294,7 +294,7 @@ loc_18342:
 										bsr.w   FadeInFromBlackIntoBattlescene
 										clr.w   d0
 										move.b  (SKIRMISH_MUSIC_INDEX).l,d0
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										moveq   #$15,d0
 loc_18358:
@@ -328,11 +328,9 @@ loc_18390:
 
 ; =============== S U B R O U T I N E =======================================
 
-; battlescene scripting ?
-
 ExecuteBattlesceneScript:
 										
-										lea     (RAM_Start).l,a6
+										lea     (RAM_START).l,a6
 										clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
 										move.b  #$FF,((DEAD_COMBATANTS_LIST-$1000000)).w
 										clr.b   ((ACTOR_TO_MAKE_IDLE-$1000000)).w
@@ -599,7 +597,7 @@ loc_1854A:
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										move.w  #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 loc_18596:
 										
@@ -701,7 +699,7 @@ loc_1862E:
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										move.w  #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 loc_18664:
 										
@@ -857,13 +855,13 @@ loc_187BC:
 										lea     ($2000).w,a1
 										move.w  #$900,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 										lea     (byte_FF7A02).l,a0
 										lea     ($3200).w,a1
 										move.w  #$900,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,d0
 										bsr.w   sub_19E6E
@@ -874,7 +872,7 @@ loc_187BC:
 										lea     ($F000).l,a1
 										move.w  #$300,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 loc_18818:
 										
 										move.w  ((CHARACTER_WEAPON_SPRITE-$1000000)).w,d0
@@ -907,7 +905,7 @@ loc_18864:
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										move.w  #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 loc_1888C:
 										
@@ -993,7 +991,7 @@ return_18928:
 
 sub_1892A:
 										
-										lea     ((FFD080_Palette1bis-$1000000)).w,a0
+										lea     ((PALETTE_1_BIS-$1000000)).w,a0
 										lea     ((PALETTE_1-$1000000)).w,a1
 										moveq   #$1F,d0
 loc_18934:
@@ -1136,7 +1134,7 @@ loc_18A96:
 loc_18AAC:
 										
 										lea     ((byte_FFB542-$1000000)).w,a0
-										lea     ((PALETTE_4-$1000000)).w,a1
+										lea     ((PALETTE_4_BIS-$1000000)).w,a1
 										moveq   #7,d0
 loc_18AB6:
 										
@@ -1243,18 +1241,18 @@ sub_18BAA:
 										beq.s   loc_18BD6
 										move.w  #$300,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										bra.s   loc_18BF4
 loc_18BD6:
 										
 										move.w  #$100,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										lea     (word_FF9802).l,a0
 										lea     ($4C00).w,a1
 										move.w  #$200,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 loc_18BF4:
 										
 										jsr     (Set_FFDE94_bit3).w
@@ -1285,7 +1283,7 @@ sub_18C1E:
 										bsr.w   sub_1F1CC
 										move.w  #$300,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 										movem.l a0-a2,-(sp)
 										bchg    #7,(a2)
@@ -1307,7 +1305,7 @@ loc_18C5A:
 										lea     ($C180).l,a1
 										move.w  #$1A0,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,a0-a2
 										addq.w  #8,a2
@@ -1327,7 +1325,7 @@ sub_18C94:
 										movem.l a0-a2,-(sp)
 										move.w  #$300,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 										bchg    #7,(a2)
 										bchg    #7,2(a2)
@@ -1348,7 +1346,7 @@ loc_18CD0:
 										lea     ($C180).l,a1
 										move.w  #$1A0,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,a0-a2
 										lea     -$600(a0),a0
@@ -1504,7 +1502,7 @@ loc_18E30:
 										
 										cmpi.w  #$8000,d1
 										beq.w   loc_18F26
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_LIGHTNING_1    ; enemy attack ?
 										bclr    #1,((byte_FFB56E-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,d0
@@ -1594,7 +1592,7 @@ loc_18F38:
 										rts
 loc_18F48:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_HEALING
 										rts
 
@@ -1660,7 +1658,7 @@ loc_18FC6:
 										
 										cmpi.w  #$8000,d1
 										beq.w   loc_19076
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_HIT_1          ; attack sfx ?
 										bclr    #3,((byte_FFB56E-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,d0
@@ -1729,7 +1727,7 @@ loc_19088:
 										rts
 loc_19098:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_HEALING        ; healing
 										bset    #1,((byte_FFB583-$1000000)).w
 										rts
@@ -1792,12 +1790,12 @@ bsc0F_giveEXP:
 										move.l  d1,-(sp)
 										andi.w  #$7FFF,d1
 										jsr     j_IncreaseEXP
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										move.l  (sp)+,d1
 										btst    #$F,d1
 										bne.s   loc_1910C
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $107               ; "{NAME} earned {#}{N}EXP. points.{D1}"
 loc_1910C:
 										
@@ -1809,57 +1807,57 @@ loc_1910C:
 										jsr     j_LevelUp
 										clr.w   (CURRENT_SPEAK_SOUND).l
 										lea     (byte_FFAF82).l,a5
-										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
 										moveq   #0,d0
 										move.b  (a5)+,d0
 										cmpi.b  #$FF,d0
 										beq.w   return_191DE
-										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
+										move.l  d0,((TEXT_NUMBER-$1000000)).w
 										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,d0
 										move.b  ((byte_FFB56F-$1000000)).w,d1
 										andi.w  #2,d1
 										jsr     sub_10020
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_LEVEL_UP       ; level up
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $F4                ; "{NAME} became{N}level {#}!"
 										moveq   #0,d0
 										move.b  (a5)+,d0
 										beq.s   loc_19174
-										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d0,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10A               ; "{D1}HP increased by {#}!"
 loc_19174:
 										
 										moveq   #0,d0
 										move.b  (a5)+,d0
 										beq.s   loc_19182
-										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d0,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10B               ; "{D1}MP increased by {#}!"
 loc_19182:
 										
 										moveq   #0,d0
 										move.b  (a5)+,d0
 										beq.s   loc_19190
-										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d0,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10C               ; "{D1}Attack increased by {#}!"
 loc_19190:
 										
 										moveq   #0,d0
 										move.b  (a5)+,d0
 										beq.s   loc_1919E
-										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d0,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10D               ; "{D1}Defense increased by {#}!"
 loc_1919E:
 										
 										moveq   #0,d0
 										move.b  (a5)+,d0
 										beq.s   loc_191AC
-										move.l  d0,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d0,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10E               ; "{D1}Agility increased by {#}!"
 loc_191AC:
 										
@@ -1871,17 +1869,17 @@ loc_191AC:
 										andi.w  #$3F,d0 
 										lsr.w   #6,d1
 										bne.s   loc_191D0
-										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  d0,((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10F               ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
 										bra.s   return_191DE
 loc_191D0:
 										
 										addq.w  #1,d1
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $110               ; "{D1}{SPELL} increased to{N}level {#}!"
 return_191DE:
 										
@@ -1900,16 +1898,16 @@ return_191DE:
 bsc10_displayMessage:
 										
 										move.w  (a6)+,d0
-										move.w  (a6)+,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  (a6)+,((RAM_Dialogue_NameIdx2-$1000000)).w
-										move.l  (a6)+,((RAM_Dialog_NumberToPrint-$1000000)).w
+										move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
+										move.l  (a6)+,((TEXT_NUMBER-$1000000)).w
 										clr.w   (CURRENT_SPEAK_SOUND).l
 										tst.b   ((DISPLAY_BATTLE_MESSAGES-$1000000)).w
 										bne.s   loc_1920C
 										jsr     (DisplayText).l 
 										tst.b   ((MESSAGE_SPEED-$1000000)).w
 										bne.s   loc_1920C
-										trap    #TRAP_TEXTBOX   ; Wait for P1 input
+										trap    #TEXTBOX        ; Wait for P1 input
 										dc.w $16A               ; "{DICT}{W2}"
 										rts
 loc_1920C:
@@ -1922,7 +1920,7 @@ loc_1920C:
 										bset    d1,d0
 loc_1921A:
 										
-										tst.b   ((RAM_Input_Player1_StateA-$1000000)).w
+										tst.b   ((P1_INPUT-$1000000)).w
 										bne.s   return_19228
 										jsr     (WaitForVInt).w 
 										dbf     d0,loc_1921A
@@ -1940,9 +1938,9 @@ return_19228:
 bsc11_displayMessageWithNoWait:
 										
 										move.w  (a6)+,d0
-										move.w  (a6)+,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  (a6)+,((RAM_Dialogue_NameIdx2-$1000000)).w
-										move.l  (a6)+,((RAM_Dialog_NumberToPrint-$1000000)).w
+										move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
+										move.l  (a6)+,((TEXT_NUMBER-$1000000)).w
 										clr.w   (CURRENT_SPEAK_SOUND).l
 										jmp     (DisplayText).l 
 
@@ -1970,13 +1968,13 @@ sub_1924A:
 										bset    d1,d0
 loc_19258:
 										
-										tst.b   ((RAM_Input_Player1_StateA-$1000000)).w
+										tst.b   ((P1_INPUT-$1000000)).w
 										bne.s   loc_19266
 										jsr     (WaitForVInt).w 
 										dbf     d0,loc_19258
 loc_19266:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_FADE_OUT
 										move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,d0
 										cmpi.w  #$FFFF,d0
@@ -2334,11 +2332,11 @@ loc_194DC:
 										
 										move.w  #$600,d0
 										move.w  #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 										move.w  #$600,d0
 										move.w  #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 return_194FC:
 										
@@ -2569,7 +2567,7 @@ loc_19684:
 										
 										move.w  #$900,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 										movea.l (sp)+,a0
 										cmpi.w  #$FFFF,((CHARACTER_WEAPON_SPRITE-$1000000)).w
@@ -2577,7 +2575,7 @@ loc_19684:
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 loc_196B0:
 										
@@ -2664,11 +2662,11 @@ loc_19748:
 										
 										move.w  #$600,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 										move.w  #$600,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jmp     (SetFFDE94b3andWait).w
 
 	; End of function sub_1971C
@@ -2856,7 +2854,7 @@ loc_19880:
 
 sub_19884:
 										
-										lea     ((FFD080_Palette1bis-$1000000)).w,a0
+										lea     ((PALETTE_1_BIS-$1000000)).w,a0
 										lea     ((PALETTE_1-$1000000)).w,a1
 										moveq   #$1F,d0
 loc_1988E:
@@ -2961,7 +2959,7 @@ loc_19932:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jmp     (Set_FFDE94_bit3).w
 
 	; End of function sub_19926
@@ -2999,7 +2997,7 @@ sub_19970:
 										adda.w  d0,a0
 										lsl.w   #5,d1
 										adda.w  d1,a0
-										lea     ((Palette2bis-$1000000)).w,a1
+										lea     ((PALLETE_2_BIS-$1000000)).w,a1
 										clr.w   (a1)+
 										addq.w  #2,a0
 										moveq   #$E,d0
@@ -3064,7 +3062,7 @@ LoadPaletteForBattleScene:
 										adda.w  d0,a0
 										lsl.w   #5,d1
 										adda.w  d1,a0
-										lea     ((FFD080_Palette1bis-$1000000)).w,a1
+										lea     ((PALETTE_1_BIS-$1000000)).w,a1
 										clr.w   (a1)+
 										addq.w  #2,a0
 										moveq   #$E,d0
@@ -3389,11 +3387,11 @@ loc_19C58:
 										lea     (loc_B600).l,a1
 										move.w  #$500,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										lea     ($D800).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 loc_19CA0:
 										
@@ -3414,7 +3412,7 @@ LoadSpellGraphics:
 										lsl.w   #2,d0
 										movea.l (a0,d0.w),a0
 										move.w  (a0)+,d0
-										lea     ((Palette3-$1000000)).w,a1
+										lea     ((PALETTE_3-$1000000)).w,a1
 										lea     ((PALETTE3_BIS-$1000000)).w,a2
 										move.w  (a0),$12(a1)
 										move.w  (a0)+,$12(a2)
@@ -3442,7 +3440,7 @@ sub_19CE8:
 										lsl.w   #2,d0
 										movea.l (a0,d0.w),a0
 										move.w  (a0)+,d0        ; load bytes 0-1
-										lea     ((Palette3-$1000000)).w,a1
+										lea     ((PALETTE_3-$1000000)).w,a1
 										lea     ((PALETTE3_BIS-$1000000)).w,a2
 										move.w  (a0),$12(a1)    ; load 3 colors on 3rd palette
 										move.w  (a0)+,$12(a2)
@@ -3457,7 +3455,7 @@ sub_19CE8:
 										lea     ($F000).l,a1
 										move.w  #$300,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jmp     (SetFFDE94b3andWait).w
 
 	; End of function sub_19CE8
@@ -3566,7 +3564,7 @@ GetBattleBackground:
 										cmpi.w  #$80,d0 
 										bcs.s   loc_19E20
 										jsr     j_GetEnemyID
-										cmpi.w  #$62,d1 ; harcoded : if enemy is Zeon, get his own background
+										cmpi.w  #$62,d1 ; HARDCODED : if enemy is Zeon, get his own background
 										bne.s   loc_19E20
 										moveq   #$1B,d1
 										bra.w   loc_19E58
@@ -3641,8 +3639,8 @@ loc_19EA8:
 
 FadeInFromBlackIntoBattlescene:
 										
-										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -3655,8 +3653,8 @@ FadeInFromBlackIntoBattlescene:
 
 FadeOutToBlackForBattlescene:
 										
-										move.b  #2,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -3739,7 +3737,7 @@ sub_19F5E:
 										move.b  7(a0),d1
 										lsr.b   #4,d1
 										move.b  d1,(a1,d0.w)
-										lea     ((RAM_Struct_Sprite_Y-$1000000)).w,a1
+										lea     ((SPRITE_Y-$1000000)).w,a1
 										move.w  d0,d1
 										lsl.w   #3,d1
 										adda.w  d1,a1
@@ -3774,7 +3772,7 @@ sub_19FAA:
 										lea     (byte_FFAFA0).l,a2
 										adda.w  d0,a2
 										lsl.w   #3,d0
-										lea     ((RAM_Struct_Sprite_Y-$1000000)).w,a1
+										lea     ((SPRITE_Y-$1000000)).w,a1
 										adda.w  d0,a1
 loc_19FC8:
 										
@@ -3930,7 +3928,7 @@ sub_1A0AA:
 										
 										movem.l d7-a1,-(sp)
 										lea     ((PALETTE_1-$1000000)).w,a0
-										lea     ((FFD080_Palette1bis-$1000000)).w,a1
+										lea     ((PALETTE_1_BIS-$1000000)).w,a1
 										moveq   #$1F,d7
 loc_1A0B8:
 										
@@ -3947,7 +3945,7 @@ loc_1A0B8:
 sub_1A0C4:
 										
 										movem.l a0-a1,-(sp)
-										lea     ((Palette3-$1000000)).w,a0
+										lea     ((PALETTE_3-$1000000)).w,a0
 										lea     ((PALETTE3_BIS-$1000000)).w,a1
 										move.w  $12(a0),$12(a1)
 										move.l  $1A(a0),$1A(a1)
@@ -3962,7 +3960,7 @@ sub_1A0C4:
 sub_1A0E2:
 										
 										movem.l a0-a1,-(sp)
-										lea     ((Palette3-$1000000)).w,a0
+										lea     ((PALETTE_3-$1000000)).w,a0
 										lea     ((PALETTE3_BIS-$1000000)).w,a1
 										move.w  $12(a1),$12(a0)
 										move.l  $1A(a1),$1A(a0)
@@ -4193,7 +4191,7 @@ sub_1A222:
 										movem.l d0/a0-a1,-(sp)
 										bsr.s   sub_1A1F6
 										lea     ((PALETTE_1-$1000000)).w,a0
-										lea     ((FFD080_Palette1bis-$1000000)).w,a1
+										lea     ((PALETTE_1_BIS-$1000000)).w,a1
 										moveq   #7,d0
 loc_1A232:
 										
@@ -4218,7 +4216,7 @@ sub_1A24E:
 										
 										movem.l d7-a1,-(sp)
 										lea     ((PALETTE_1-$1000000)).w,a0
-										lea     ((FFD080_Palette1bis-$1000000)).w,a1
+										lea     ((PALETTE_1_BIS-$1000000)).w,a1
 										moveq   #$1F,d7
 loc_1A25C:
 										
@@ -4238,7 +4236,7 @@ sub_1A270:
 										
 										movem.l d7-a1,-(sp)
 										lea     ((PALETTE_1-$1000000)).w,a0
-										lea     ((FFD080_Palette1bis-$1000000)).w,a1
+										lea     ((PALETTE_1_BIS-$1000000)).w,a1
 										move.w  $52(a0),-(sp)
 										move.l  $5A(a0),-(sp)
 										moveq   #$1F,d7
@@ -4347,7 +4345,7 @@ loc_1A324:
 LoadInvocationSpell:
 										
 										movem.l d0/a6,-(sp)
-										trap    #TRAP_SOUNDCOM  ; play spell sound
+										trap    #SOUND_COMMAND  ; play spell sound
 										dc.w SFX_SPELL_CAST
 										move.w  #$CCE,d0
 										bsr.w   ExecSpellAnimationFlash
@@ -4452,11 +4450,11 @@ loc_1A418:
 										btst    #4,((byte_FFB56F-$1000000)).w
 										beq.s   return_1A474
 										bsr.w   bsc0D_endAnimation
-										move.b  #2,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-										move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
+										move.b  #IN_FROM_BLACK,((FADING_PALETTE_FLAGS-$1000000)).w
 loc_1A43E:
 										
 										tst.b   ((FADING_SETTING-$1000000)).w
@@ -4506,7 +4504,7 @@ sa00_Nothing:
 sa01_:
 										bsr.s   nullsub_12
 										move.w  d1,-(sp)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
 										move.w  #$22E,d0
 										bsr.w   ExecSpellAnimationFlash
@@ -4804,7 +4802,7 @@ byte_1A614:         dc.b 0
 sa02_:
 										bsr.w   nullsub_12
 										move.w  d1,-(sp)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
 										move.w  #$E22,d0
 										bsr.w   ExecSpellAnimationFlash
@@ -4851,7 +4849,6 @@ loc_1A6CC:
 
 	; End of function sa02_
 
-errQuickWorkaroundPossibleSideEffects3:
 										dc.b 1
 										dc.b $70
 										dc.b 0
@@ -4954,7 +4951,7 @@ errQuickWorkaroundPossibleSideEffects3:
 sa03_:
 										bsr.w   nullsub_12
 										move.w  d1,-(sp)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
 										move.w  #$222,d0
 										bsr.w   ExecSpellAnimationFlash
@@ -5076,7 +5073,7 @@ byte_1A820:         dc.b 0
 
 sa04_:
 										move.w  d1,-(sp)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
 										move.w  #$CAC,d0
 										bsr.w   ExecSpellAnimationFlash
@@ -5200,7 +5197,7 @@ byte_1A918:         dc.b $FF
 sa05_:
 										bsr.w   nullsub_12
 										move.w  d1,-(sp)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
 										move.w  #$CC2,d0
 										bsr.w   ExecSpellAnimationFlash
@@ -5307,7 +5304,7 @@ byte_1AA28:         dc.b 0
 ; =============== S U B R O U T I N E =======================================
 
 sa06_:
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
 										move.w  #$A8A,d0
 										bsr.w   ExecSpellAnimationFlash
@@ -5342,7 +5339,7 @@ byte_1AA88:         dc.b 0
 sa07_:
 										bsr.w   nullsub_12
 										move.w  d1,-(sp)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
 										move.w  #$ECA,d0
 										bsr.w   ExecSpellAnimationFlash
@@ -5506,7 +5503,7 @@ sa19_:
 loc_1ABAC:
 										
 										movem.w d0-d1,-(sp)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
 										move.w  #$2C2,d0
 										bsr.w   ExecSpellAnimationFlash
@@ -5557,10 +5554,7 @@ sa1C_:
 loc_1AC08:
 										
 										move.l  a0,-(sp)
-										trap    #TRAP_SOUNDCOM
-
-; END OF FUNCTION CHUNK FOR sa09_
-
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
 										move.w  #$E22,d0
 										bsr.w   ExecSpellAnimationFlash
@@ -5568,7 +5562,7 @@ loc_1AC08:
 										moveq   #9,d0
 										bsr.w   LoadSpellGraphics
 										movea.l (sp)+,a0
-										lea     ((Palette3-$1000000)).w,a1
+										lea     ((PALETTE_3-$1000000)).w,a1
 										lea     ((PALETTE3_BIS-$1000000)).w,a2
 										move.w  (a0),$12(a1)
 										move.w  (a0)+,$12(a2)
@@ -5583,9 +5577,13 @@ loc_1AC08:
 										move.w  #$40,(a0)+ 
 										move.w  #$20,(a0) 
 										bra.s   loc_1AC64
-loc_1AC5C:          move.w  #$A8,(a0)+ 
+loc_1AC5C:
+										
+										move.w  #$A8,(a0)+ 
 										move.w  #$30,(a0) 
-loc_1AC64:          moveq   #1,d0
+loc_1AC64:
+										
+										moveq   #1,d0
 										bsr.w   sub_1A2F6
 										move.w  #1,4(a0)
 										moveq   #1,d0
@@ -5611,6 +5609,9 @@ loc_1AC64:          moveq   #1,d0
 										move.b  #1,((byte_FFB585-$1000000)).w
 										move.b  #4,((byte_FFB584-$1000000)).w
 										bra.w   sub_1A028
+
+; END OF FUNCTION CHUNK FOR sa09_
+
 byte_1ACC6:         dc.b 8
 										dc.b $88
 										dc.b $B
@@ -5633,7 +5634,7 @@ byte_1ACD2:         dc.b 8
 ; =============== S U B R O U T I N E =======================================
 
 sa0A_:
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_WARP
 										move.w  #$F,d0
 										bra.w   ExecSpellAnimationFlash
@@ -5761,7 +5762,6 @@ loc_1AE16:
 
 	; End of function sa0D_
 
-errQuickWorkaroundPossibleSideEffects2:
 										dc.b $F2
 										dc.b 0
 										dc.b 1
@@ -6119,7 +6119,7 @@ loc_1B026:
 										bra.s   loc_1B040
 loc_1B036:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_INTRO_LIGHTNING
 										moveq   #$14,d0
 										jsr     (Sleep).w       
@@ -6172,7 +6172,7 @@ sa12_Atlas:
 										bclr    #6,((byte_FFB56E-$1000000)).w
 										moveq   #3,d0
 										bsr.w   LoadInvocationSpell
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_INTRO_LIGHTNING
 										lea     ((dword_FFDD20-$1000000)).w,a0
 										moveq   #$15,d0
@@ -6204,31 +6204,31 @@ loc_1B0EE:
 										lea     ($3000).w,a1
 										move.w  #$100,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 										lea     (byte_FF8D04).l,a0
 										lea     ($4200).w,a1
 										move.w  #$100,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 										lea     (byte_FF8F04).l,a0
 										lea     ($B400).l,a1
 										move.w  #$100,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 										lea     (byte_FF9104).l,a0
 										lea     ($DE00).l,a1
 										move.w  #$100,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 										moveq   #$26,d0 
 										lea     byte_1B1FA(pc), a0
 										bsr.w   sub_19F5E
 										jsr     (WaitForVInt).w 
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BATTLEFIELD_DEATH
 										lea     ((byte_FFDDB0-$1000000)).w,a0
 										moveq   #$13,d0
@@ -6301,7 +6301,7 @@ sa13_Neptun:
 										moveq   #2,d0
 										moveq   #1,d1
 										bsr.w   LoadInvocationSprite
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_PRISM_LASER_FIRING
 										bset    #6,((byte_FFB56E-$1000000)).w
 										moveq   #$14,d1
@@ -6340,7 +6340,7 @@ loc_1B268:
 										jsr     (Sleep).w       
 										bclr    #6,((byte_FFB56E-$1000000)).w
 										bsr.w   sub_1A3E8
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_DESOUL_HOVERING
 										moveq   #2,d0
 										moveq   #0,d1
@@ -6550,7 +6550,7 @@ sa16_:
 										cmpi.w  #2,d1
 										bcs.s   loc_1B4CE
 										lea     byte_1B4F0(pc), a0
-										lea     ((Palette3-$1000000)).w,a1
+										lea     ((PALETTE_3-$1000000)).w,a1
 										lea     ((PALETTE3_BIS-$1000000)).w,a2
 										move.w  (a0),$12(a1)
 										move.w  (a0)+,$12(a2)
@@ -6650,7 +6650,7 @@ loc_1B594:
 										moveq   #$26,d0 
 										bsr.w   sub_19F5E
 										jsr     (sub_1942).w    
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_PSHHH          ; long "psshhhh"
 										move.w  #5,4(a5)
 										lea     ((byte_FFDDB0-$1000000)).w,a4
@@ -6705,7 +6705,7 @@ word_1B608:         dc.w $138
 
 sa1A_Detox:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
 										move.w  #$8A8,d0
 										bsr.w   ExecSpellAnimationFlash
@@ -7226,7 +7226,7 @@ loc_1BA70:
 										jsr     (UpdateRandomSeed).w
 										addi.w  #$700,d7
 										move.w  d7,6(a5)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_DESOUL_HOVERING
 										bra.w   loc_1BBFA
 loc_1BA8C:
@@ -7323,7 +7323,7 @@ loc_1BB60:
 										move.w  d2,6(a4)
 										move.w  d3,(a4)
 										move.w  d3,$A(a5)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BATTLEFIELD_DEATH
 										bsr.w   sub_1B8FE
 										bra.w   loc_1BBFA
@@ -7433,7 +7433,7 @@ loc_1BC66:
 loc_1BC7E:
 										
 										bsr.w   sub_1BD4C
-										jsr     (sub_179C).w
+										jsr     (sub_179C).w    
 										move.w  d1,d0
 										muls.w  d2,d0
 										asr.l   #7,d0
@@ -7903,7 +7903,7 @@ loc_1C024:
 										add.w   d1,d0
 										andi.w  #$FF,d0
 										move.b  d0,3(a5)
-										jsr     (sub_179C).w
+										jsr     (sub_179C).w    
 										lsl.w   #3,d1
 										add.w   6(a5),d1
 										tst.w   d1
@@ -8017,7 +8017,7 @@ loc_1C148:
 										dbf     d1,loc_1BF88
 										subq.b  #1,$E(a3)
 										bne.s   loc_1C178
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_TINKLING       ; related to bolt ?
 										moveq   #$E,d6
 										jsr     (UpdateRandomSeed).w
@@ -8037,7 +8037,6 @@ loc_1C184:
 
 	; End of function sub_1BE9E
 
-errQuickWorkaroundPossibleSideEffects:
 										dc.b 0
 										dc.b 0
 										dc.b $C5
@@ -8393,7 +8392,7 @@ loc_1C3E6:
 										addi.w  #$30,$1C(a4) 
 										addq.w  #1,4(a3)
 										move.b  #$20,5(a5) 
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_DESOUL
 										bsr.w   sub_1B8FE
 										bra.w   loc_1C43A
@@ -8486,7 +8485,7 @@ sub_1C4D8:
 										move.b  d4,(a0)+
 										move.b  d4,(a0)
 										move.b  #$E,5(a5)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_DESOUL_HOVERING
 										move.w  (sp)+,d0
 										rts
@@ -8646,7 +8645,7 @@ loc_1C622:
 										
 										move.w  d2,6(a5)
 										lsr.w   #4,d0
-										jsr     (sub_179C).w
+										jsr     (sub_179C).w    
 										move.w  d1,d0
 										muls.w  d2,d0
 										asr.l   #8,d0
@@ -8917,7 +8916,7 @@ loc_1C8D8:
 										move.w  d7,6(a5)
 										move.w  #1,(a5)
 										clr.l   8(a5)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BLAST_SPELL
 										bra.w   loc_1C9A0
 loc_1C8EC:
@@ -9590,8 +9589,6 @@ byte_1CE48:         dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-; looks related to BOLT
-
 spellanim_Bolt:
 										
 										lea     ((byte_FFB406-$1000000)).w,a5
@@ -9626,7 +9623,7 @@ loc_1CEA0:
 										
 										cmpi.w  #2,d1
 										bne.s   loc_1CEAA
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BOLT_SPELL
 loc_1CEAA:
 										
@@ -9687,7 +9684,7 @@ loc_1CF28:
 										subq.w  #1,d1
 										cmpi.w  #6,d1
 										bne.w   loc_1CEAA
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BOLT_SPELL
 										bra.w   loc_1CE86
 loc_1CF42:
@@ -9791,7 +9788,7 @@ sub_1CFFC:
 										bcc.w   sub_1B82A
 										move.w  d0,2(a5)
 										move.w  d0,4(a5)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_PSH
 return_1D036:
 										
@@ -9918,7 +9915,7 @@ loc_1D10E:
 										bsr.w   sub_19F5E
 										move.w  (a3),6(a4)
 										move.w  2(a3),(a4)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_DEMON_BREATH
 										bra.w   loc_1D288
 loc_1D15E:
@@ -10150,13 +10147,13 @@ loc_1D2F6:
 loc_1D33C:
 										
 										bsr.w   sub_19F5E
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_DOOR_OPEN
 										bra.w   loc_1D424
 loc_1D348:
 										
 										move.w  2(a5),d0
-										jsr     (sub_179C).w
+										jsr     (sub_179C).w    
 										move.w  d1,d0
 										asl.w   #1,d1
 										add.w   d0,d1
@@ -10837,7 +10834,7 @@ loc_1D912:
 loc_1D91C:
 										
 										addq.w  #1,2(a5)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BATTLEFIELD_DEATH
 										bra.w   loc_1D998
 loc_1D928:
@@ -11081,7 +11078,7 @@ loc_1DB00:
 										clr.w   2(a5)
 										move.w  #1,4(a5)
 										move.w  #1,$C(a3)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BIG_DOOR_RUMBLE
 										bra.w   loc_1DBF8
 loc_1DB2E:
@@ -11092,8 +11089,8 @@ loc_1DB2E:
 										cmpi.w  #2,(a5)
 										bne.s   loc_1DB62
 										bsr.w   sub_1DC36
-										move.b  #4,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -11106,8 +11103,8 @@ loc_1DB62:
 										bcs.w   loc_1DBF8
 										bne.s   loc_1DB8E
 										bsr.w   sub_1DC48
-										move.b  #3,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -11162,7 +11159,7 @@ loc_1DBF8:
 										
 										tst.w   ((byte_FFB404-$1000000)).w
 										bne.s   return_1DC12
-										lea     ((FFD080_Palette1bis-$1000000)).w,a0
+										lea     ((PALETTE_1_BIS-$1000000)).w,a0
 										lea     ((byte_FFB41E-$1000000)).w,a1
 										moveq   #$1F,d0
 loc_1DC08:
@@ -11222,7 +11219,7 @@ loc_1DC40:
 sub_1DC48:
 										
 										lea     ((byte_FFB41E-$1000000)).w,a0
-										lea     ((FFD080_Palette1bis-$1000000)).w,a1
+										lea     ((PALETTE_1_BIS-$1000000)).w,a1
 										movem.l a0-a1,-(sp)
 										moveq   #$3F,d0 
 loc_1DC56:
@@ -11244,7 +11241,7 @@ loc_1DC56:
 
 LoadPalette1FromFFB41E:
 										
-										lea     ((FFD080_Palette1bis-$1000000)).w,a0
+										lea     ((PALETTE_1_BIS-$1000000)).w,a0
 										lea     ((byte_FFB41E-$1000000)).w,a1
 										moveq   #$1F,d0
 loc_1DC80:
@@ -11403,7 +11400,7 @@ loc_1DD60:
 										bset    #4,4(a4)
 loc_1DD6C:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BIG_DOOR_RUMBLE
 										bra.w   loc_1DDE8
 loc_1DD74:
@@ -11560,7 +11557,7 @@ loc_1DEA0:
 										tst.b   d1
 										beq.s   loc_1DECE
 										addq.w  #8,a0
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BATTLEFIELD_DEATH
 loc_1DECE:
 										
@@ -11730,7 +11727,7 @@ loc_1E01C:
 										add.w   d7,6(a4)
 										addq.w  #1,2(a5)
 										move.w  #5,4(a5)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_WING_FLAP
 										bra.w   loc_1E0C0
 loc_1E05E:
@@ -11971,12 +11968,12 @@ loc_1E228:
 										jsr     (UpdateRandomSeed).w
 										tst.w   d7
 										bne.s   loc_1E240
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_HIT_1
 										bra.s   loc_1E244
 loc_1E240:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_HIT_2
 loc_1E244:
 										
@@ -12127,11 +12124,11 @@ loc_1E33C:
 										tst.w   6(a5)
 										bne.s   loc_1E36C
 										move.w  #$C563,4(a4)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_PRISM_LASER_FIRING
 																						; prism laser firing
-										move.b  #4,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -12144,8 +12141,8 @@ loc_1E36C:
 										bcs.w   return_1E452
 										addq.w  #1,2(a5)
 										move.w  #$1E,4(a5)
-										move.b  #3,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -12185,7 +12182,7 @@ loc_1E404:
 										bne.w   loc_1E432
 										tst.w   6(a5)
 										bne.s   loc_1E414
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_PRISM_LASER_FIRING
 loc_1E414:
 										
@@ -12373,7 +12370,7 @@ loc_1E596:
 										jsr     (UpdateRandomSeed).w
 										addq.w  #1,d7
 										move.w  d7,2(a5)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_PRISM_LASER_LOADING
 										bra.s   loc_1E5C6
 loc_1E5C2:
@@ -12416,7 +12413,7 @@ loc_1E5DC:
 										lea     byte_1E786(pc), a0
 										move.w  d6,d0
 										bsr.w   sub_19F5E
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_LANDSTALKER_SWITCH
 										bra.w   loc_1E730
 loc_1E622:
@@ -12645,7 +12642,7 @@ loc_1E7EE:
 loc_1E806:
 										
 										move.w  2(a5),d0
-										jsr     (sub_179C).w
+										jsr     (sub_179C).w    
 										asl.w   #2,d1
 										add.w   4(a5),d1
 										tst.w   d1
@@ -12721,7 +12718,7 @@ loc_1E8AA:
 										move.b  2(a3),d0
 										andi.w  #3,d0
 										bne.s   loc_1E8D6
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_TINKLING
 loc_1E8D6:
 										
@@ -12937,7 +12934,7 @@ loc_1EA22:
 										bne.w   loc_1EA46
 										lea     byte_1EB88(pc), a0
 										bsr.w   sub_19F5E
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_LANDSTALKER_SWITCH
 										bra.w   loc_1EA98
 loc_1EA46:
@@ -12999,7 +12996,7 @@ loc_1EAD4:
 										clr.w   d3
 										lea     byte_1EBAA(pc), a0
 										bsr.w   sub_19FAA
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_DESOUL_HOVERING
 										addq.w  #1,2(a5)
 										bra.w   loc_1EB7E
@@ -13142,7 +13139,7 @@ loc_1EBF2:
 										jsr     (UpdateRandomSeed).w
 										addi.w  #$A0,d7 
 										move.w  d7,(a4)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BATTLEFIELD_DEATH
 										bra.w   loc_1EC80
 loc_1EC22:
@@ -13520,7 +13517,7 @@ sub_1EF36:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jmp     (BwahDMAstuffAgain).w
+										jmp     (sub_10DC).w    
 
 	; End of function sub_1EF36
 
@@ -13591,7 +13588,7 @@ loc_1EFB0:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 return_1EFD6:
 										
@@ -13871,7 +13868,7 @@ sub_1F1F0:
 										
 										movem.l d0/a0,-(sp)
 										move.w  d6,((word_FFB3EE-$1000000)).w
-										lea     ((FFD500_MaybeRelatedToVscroll-$1000000)).w,a0
+										lea     ((word_FFD500-$1000000)).w,a0
 										moveq   #$13,d0
 loc_1F1FE:
 										
@@ -13903,7 +13900,7 @@ loc_1F232:
 										addi.w  #$10,d6
 loc_1F236:
 										
-										lea     ((FFD100_MaybeRelatedToHscroll+2-$1000000)).w,a0
+										lea     ((dword_FFD100+2-$1000000)).w,a0
 										move.w  #$FF,d0
 loc_1F23E:
 										
@@ -13929,7 +13926,7 @@ sub_1F254:
 										subq.w  #8,d6
 loc_1F266:
 										
-										lea     ((FFD502_MaybeRelatedToOtherVScrollStuff-$1000000)).w,a0
+										lea     ((word_FFD502-$1000000)).w,a0
 										moveq   #$13,d0
 loc_1F26C:
 										
@@ -13956,8 +13953,8 @@ sub_1F282:
 										beq.s   return_1F2F4
 										tst.w   ((word_FFB3C4-$1000000)).w
 										beq.s   return_1F2F4
-										lea     ((FFD100_MaybeRelatedToHscroll-$1000000)).w,a3
-										lea     ((FFD500_MaybeRelatedToVscroll-$1000000)).w,a4
+										lea     ((dword_FFD100-$1000000)).w,a3
+										lea     ((word_FFD500-$1000000)).w,a4
 										lea     ((dword_FFB3C0-$1000000)).w,a5
 										bra.s   loc_1F2D0
 loc_1F2AE:
@@ -13968,8 +13965,8 @@ loc_1F2AE:
 										beq.s   return_1F2F4
 										tst.w   ((word_FFB3CA-$1000000)).w
 										beq.s   return_1F2F4
-										lea     ((FFD100_MaybeRelatedToHscroll+2-$1000000)).w,a3
-										lea     ((FFD502_MaybeRelatedToOtherVScrollStuff-$1000000)).w,a4
+										lea     ((dword_FFD100+2-$1000000)).w,a3
+										lea     ((word_FFD502-$1000000)).w,a4
 										lea     ((dword_FFB3C6-$1000000)).w,a5
 loc_1F2D0:
 										
@@ -14068,7 +14065,7 @@ loc_1F384:
 										move.w  4(a5),d0
 										cmpi.w  #$10,d0
 										bcc.s   loc_1F3C8
-										move.b  byte_1F3CC(pc,d0.w),d0
+										move.b  return_1F3CC(pc,d0.w),d0
 										movea.l (a5),a2
 										clr.w   d3
 										move.b  1(a2),d3
@@ -14096,11 +14093,12 @@ loc_1F3BA:
 loc_1F3C8:
 										
 										clr.w   4(a5)
+return_1F3CC:
+										
+										rts
 
 ; END OF FUNCTION CHUNK FOR sub_1F282
 
-byte_1F3CC:         dc.b $4E
-										dc.b $75 
 										dc.b 4
 										dc.b   3
 										dc.b   3
@@ -14993,7 +14991,6 @@ byte_1F7BE:         dc.b $81
 										dc.b   0
 										dc.b   0
 AllyBattleSprites:  incbin "data/allies/allybattlesprites.bin"
-																						; table : class -> sprite
 EnemyBattleSprites: incbin "data/enemies/enemybattlesprites.bin"
 WeaponBattleSprites:incbin "data/items/weaponsprites.bin"
 CustomBackgrounds:  incbin "battles/global/custombackgrounds.bin"

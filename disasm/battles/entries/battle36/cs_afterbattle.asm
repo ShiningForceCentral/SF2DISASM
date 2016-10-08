@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle36\cs_afterbattle :
 ; Cutscene after battle 36
-abcs_battle36:      dc.w 4                  ; 0004 SET TEXT INDEX B89 : "Prism Flowers?{W2}"
+abcs_battle36:      dc.w 4                  ; 0004 INIT TEXT CURSOR B89 : "Prism Flowers?{W2}"
 										dc.w $B89
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 6 11
 										dc.w $35

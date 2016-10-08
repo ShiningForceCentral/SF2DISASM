@@ -1,10 +1,10 @@
 
 ; SCRIPT SECTION battles\entries\battle32\cs_regiontriggered_1 :
 ; Region-activated cutscene for battle 32
-rbcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B21 : "I'm tired of this.  I can no{N}longer fight for devils.{W1}"
+rbcs_battle32:      dc.w 4                  ; 0004 INIT TEXT CURSOR B21 : "I'm tired of this.  I can no{N}longer fight for devils.{W1}"
 										dc.w $B21
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 4CD56
-										dc.l sub_4CD56
+										dc.l sub_4CD56          
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 38
 										dc.w $38
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 17
@@ -42,6 +42,8 @@ rbcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B21 : "I'm tir
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 
 ; =============== S U B R O U T I N E =======================================
+
+; Jaro joins the Force
 
 sub_4CD56:
 										

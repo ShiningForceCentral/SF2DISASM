@@ -3,7 +3,7 @@
 ; 
 ms_map37_EntityEvents:
 										dc.b 1
-byte_5F86D:         dc.b 3
+										dc.b 3
 										dc.w sub_5F8E0-ms_map37_EntityEvents
 										dc.b 2
 										dc.b 3
@@ -93,8 +93,8 @@ byte_5F86D:         dc.b 3
 
 sub_5F8E0:
 										
-										moveq   #(byte_5F86D-ms_map37_EntityEvents),d0
-										jmp     sub_4790E
+										moveq   #1,d0
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F8E0
 
@@ -104,7 +104,7 @@ sub_5F8E0:
 sub_5F8E8:
 										
 										moveq   #2,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F8E8
 
@@ -114,7 +114,7 @@ sub_5F8E8:
 sub_5F8F0:
 										
 										moveq   #3,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F8F0
 
@@ -124,7 +124,7 @@ sub_5F8F0:
 sub_5F8F8:
 										
 										moveq   #4,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F8F8
 
@@ -134,7 +134,7 @@ sub_5F8F8:
 sub_5F900:
 										
 										moveq   #5,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F900
 
@@ -144,7 +144,7 @@ sub_5F900:
 sub_5F908:
 										
 										moveq   #6,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F908
 
@@ -154,7 +154,7 @@ sub_5F908:
 sub_5F910:
 										
 										moveq   #7,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F910
 
@@ -164,7 +164,7 @@ sub_5F910:
 sub_5F918:
 										
 										moveq   #8,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F918
 
@@ -174,7 +174,7 @@ sub_5F918:
 sub_5F920:
 										
 										moveq   #9,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F920
 
@@ -184,7 +184,7 @@ sub_5F920:
 sub_5F928:
 										
 										moveq   #$A,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F928
 
@@ -194,7 +194,7 @@ sub_5F928:
 sub_5F930:
 										
 										moveq   #$B,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F930
 
@@ -204,7 +204,7 @@ sub_5F930:
 sub_5F938:
 										
 										moveq   #$C,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F938
 
@@ -214,7 +214,7 @@ sub_5F938:
 sub_5F940:
 										
 										moveq   #$D,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F940
 
@@ -224,7 +224,7 @@ sub_5F940:
 sub_5F948:
 										
 										moveq   #$E,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F948
 
@@ -234,7 +234,7 @@ sub_5F948:
 sub_5F950:
 										
 										moveq   #$F,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F950
 
@@ -244,7 +244,7 @@ sub_5F950:
 sub_5F958:
 										
 										moveq   #$10,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F958
 
@@ -254,7 +254,7 @@ sub_5F958:
 sub_5F960:
 										
 										moveq   #$11,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F960
 
@@ -264,7 +264,7 @@ sub_5F960:
 sub_5F968:
 										
 										moveq   #$12,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F968
 
@@ -274,7 +274,7 @@ sub_5F968:
 sub_5F970:
 										
 										moveq   #$13,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F970
 
@@ -284,7 +284,7 @@ sub_5F970:
 sub_5F978:
 										
 										moveq   #$14,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F978
 
@@ -294,7 +294,7 @@ sub_5F978:
 sub_5F980:
 										
 										moveq   #$15,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F980
 
@@ -304,7 +304,7 @@ sub_5F980:
 sub_5F988:
 										
 										moveq   #$16,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F988
 
@@ -314,7 +314,7 @@ sub_5F988:
 sub_5F990:
 										
 										moveq   #$17,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F990
 
@@ -324,7 +324,7 @@ sub_5F990:
 sub_5F998:
 										
 										moveq   #$18,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F998
 
@@ -334,7 +334,7 @@ sub_5F998:
 sub_5F9A0:
 										
 										moveq   #$19,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F9A0
 
@@ -343,7 +343,7 @@ sub_5F9A0:
 
 sub_5F9A8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D30               ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
 										rts
 
@@ -355,7 +355,7 @@ sub_5F9A8:
 sub_5F9AE:
 										
 										moveq   #$1B,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F9AE
 
@@ -365,7 +365,7 @@ sub_5F9AE:
 sub_5F9B6:
 										
 										moveq   #$1C,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F9B6
 
@@ -375,7 +375,7 @@ sub_5F9B6:
 sub_5F9BE:
 										
 										moveq   #$1D,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5F9BE
 
@@ -384,7 +384,7 @@ sub_5F9BE:
 
 sub_5F9C6:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B                 ; "{LEADER}, take it easy!{W1}"
 										rts
 
@@ -395,7 +395,7 @@ sub_5F9C6:
 
 sub_5F9CC:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B                 ; "{LEADER}, take it easy!{W1}"
 return_5F9D0:
 										

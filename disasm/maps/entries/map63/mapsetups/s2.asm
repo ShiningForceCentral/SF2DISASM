@@ -12,7 +12,7 @@ ms_map63_EntityEvents:
 
 sub_5C992:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1D
 										bne.s   return_5C9E0
 										moveq   #$75,d1 
@@ -21,15 +21,15 @@ sub_5C992:
 										bne.s   loc_5C9D2
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										move.w  #$1D,d0
-										jsr     GetEntityPortraitAndSpeechSound
+										jsr     GetEntityPortraitAndSpeechSfx
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1051              ; "Olooooo...Oloo....{N}Have you seen my arm?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1052              ; "I can't move...without my{N}arm...oloooo....{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.s   return_5C9E0
 loc_5C9D2:

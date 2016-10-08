@@ -31,12 +31,12 @@ sub_4FE12:
 
 sub_4FE1E:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1FE               ; Battle 10 completed
 										bne.s   return_4FE30
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $19A               ; Battle 10 unlocked
-										move.l  #$100FF,((RAM_MapEventType-$1000000)).w
+										move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_4FE30:
 										
 										rts

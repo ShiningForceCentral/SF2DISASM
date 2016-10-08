@@ -6,20 +6,20 @@
 
 ms_map31_flag33E_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $340
 										beq.s   loc_5D62A
 										lea     cs_5D63C(pc), a0
 										trap    #6
 loc_5D62A:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $342
 										beq.s   return_5D63A
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $343
 										bne.s   return_5D63A
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG
 										dc.w $342               ; set after making the Arm of Golem appear in Moun
 return_5D63A:
 										
@@ -42,13 +42,13 @@ cs_5D644:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 89 
 										dc.w $89
 										dc.w 5
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5D652:           dc.w 4                  ; 0004 SET TEXT INDEX 7E8 : "Oh, you're cute!{N}(Cough)...well...{W1}"
+cs_5D652:           dc.w 4                  ; 0004 INIT TEXT CURSOR 7E8 : "Oh, you're cute!{N}(Cough)...well...{W1}"
 										dc.w $7E8
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 88 : "Oh, you're cute!{N}(Cough)...well...{W1}"
 										dc.w $88
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 88 : "May I paint your portrait?"
 										dc.w $88
-word_5D65E:         dc.w 4                  ; 0004 SET TEXT INDEX 7EB : "Excellent!{W1}"
+word_5D65E:         dc.w 4                  ; 0004 INIT TEXT CURSOR 7EB : "Excellent!{W1}"
 										dc.w $7EB
 										dc.w $11                ; 0011 STORY YESNO PROMPT
 										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 59 5D712 : YES/NO prompt answer
@@ -158,7 +158,7 @@ word_5D65E:         dc.w 4                  ; 0004 SET TEXT INDEX 7EB : "Excelle
 										dc.w 7
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-word_5D712:         dc.w 4                  ; 0004 SET TEXT INDEX 7EA : "Oh, please!  It won't take{N}long.  Will you pose{N}for me?"
+word_5D712:         dc.w 4                  ; 0004 INIT TEXT CURSOR 7EA : "Oh, please!  It won't take{N}long.  Will you pose{N}for me?"
 										dc.w $7EA
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 88 : "Oh, please!  It won't take{N}long.  Will you pose{N}for me?"
@@ -166,7 +166,7 @@ word_5D712:         dc.w 4                  ; 0004 SET TEXT INDEX 7EA : "Oh, ple
 										dc.w $B                 ; 000B JUMP 5D65E
 										dc.l word_5D65E         
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-word_5D724:         dc.w 4                  ; 0004 SET TEXT INDEX 7EE : "It's you!{W2}"
+word_5D724:         dc.w 4                  ; 0004 INIT TEXT CURSOR 7EE : "It's you!{W2}"
 										dc.w $7EE
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 88 : "It's you!{W2}"
 										dc.w $88

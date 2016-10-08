@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle40\cs_beforebattle :
 ; Cutscene before battle 40
-bbcs_40:            dc.w 4                  ; 0004 SET TEXT INDEX BDC : "{LEADER}, you're finally{N}here.{W1}"
+bbcs_40:            dc.w 4                  ; 0004 INIT TEXT CURSOR BDC : "{LEADER}, you're finally{N}here.{W1}"
 										dc.w $BDC
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 36 B 22
 										dc.w $36
@@ -225,13 +225,13 @@ word_4E544:         dc.w $34                ; 0034 SET BLOCKS B06 B1D 2C00
 										dc.w $3D                ; 003D TINT MAP
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w $3E                ; 003E SIMILAR TO TINT MAP
+										dc.w $3E                ; 003E FLICKER ONCE
 										dc.b $80                ; WAIT A
 										dc.b $A
 										dc.w $3D                ; 003D TINT MAP
 										dc.b $80                ; WAIT 14
 										dc.b $14
-										dc.w $3E                ; 003E SIMILAR TO TINT MAP
+										dc.w $3E                ; 003E FLICKER ONCE
 										dc.w $15                ; 0015 SET ACTSCRIPT 82 0 45FB2
 										dc.b $82
 										dc.b 0

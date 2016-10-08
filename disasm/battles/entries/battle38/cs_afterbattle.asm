@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle38\cs_afterbattle :
 ; Cutscene after battle 38
-abcs_battle38:      dc.w 4                  ; 0004 SET TEXT INDEX BC4 : "My traps...{W1}"
+abcs_battle38:      dc.w 4                  ; 0004 INIT TEXT CURSOR BC4 : "My traps...{W1}"
 										dc.w $BC4
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 42 3 16
 										dc.w $42
@@ -722,7 +722,7 @@ word_4DF00:         dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 46172
 										dc.b $88
 										dc.b $FF
 										dc.l eas_Die            
-										dc.w $3E                ; 003E SIMILAR TO TINT MAP
+										dc.w $3E                ; 003E FLICKER ONCE
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 										dc.w $30
 										dc.w $32                ; 0032 SET CAMERA DEST 3 14

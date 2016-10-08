@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle21\cs_afterbattle :
 ; Cutscene after battle 21
-abcs_battle21:      dc.w 4                  ; 0004 SET TEXT INDEX A17 : "Hurry!  Let's go into{N}Creed's mansion.{W1}"
+abcs_battle21:      dc.w 4                  ; 0004 INIT TEXT CURSOR A17 : "Hurry!  Let's go into{N}Creed's mansion.{W1}"
 										dc.w $A17
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 43 4 12
 										dc.w $43

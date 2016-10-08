@@ -6,7 +6,7 @@
 
 ms_map21_flag21F_InitFunction:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_TOWN
 										jsr     (FadeInFromBlack).w
 										rts

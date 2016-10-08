@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle34\cs_beforebattle :
 ; Cutscene before battle 34
-bbcs_34:            dc.w 4                  ; 0004 SET TEXT INDEX B4F : "Hello, Granseal soldiers.{W1}"
+bbcs_34:            dc.w 4                  ; 0004 INIT TEXT CURSOR B4F : "Hello, Granseal soldiers.{W1}"
 										dc.w $B4F
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 37 15 16
 										dc.w $37
@@ -169,7 +169,7 @@ word_4D3C6:         dc.w $2D                ; 002D MOVE ENTITY 1F FF 2 3
 										dc.w $C081
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "Silly Cameela.{N}You can't survive without my{N}brains.{W1}"
 										dc.w $C081
-										dc.w $3E                ; 003E SIMILAR TO TINT MAP
+										dc.w $3E                ; 003E FLICKER ONCE
 										dc.w $32                ; 0032 SET CAMERA DEST 7 3
 										dc.w 7
 										dc.w 3

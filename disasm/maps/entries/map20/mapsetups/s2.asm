@@ -30,16 +30,16 @@ ms_map20_EntityEvents:
 
 sub_537CC:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_537DA
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $23A               ; "Legend regarding the{N}tower?  Mmmm, do I have{N}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_537DA:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $23B               ; "to go to school again?{W1}"
 										rts
 
@@ -50,7 +50,7 @@ loc_537DA:
 
 sub_537E0:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $23C               ; "Oh, father...are you{N}alright?{W1}"
 										rts
 
@@ -61,7 +61,7 @@ sub_537E0:
 
 sub_537E6:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $23D               ; "Mmmmm....{N}Hmmmmmm....{W1}"
 										rts
 
@@ -72,7 +72,7 @@ sub_537E6:
 
 sub_537EC:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $237               ; "How fine the view is!{N}I can see the eastern{N}continent from here.{W1}"
 										rts
 
@@ -83,7 +83,7 @@ sub_537EC:
 
 sub_537F2:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $236               ; "This east tower was built{N}in order to watch for{N}invaders.{W1}"
 										rts
 
@@ -94,7 +94,7 @@ sub_537F2:
 
 sub_537F8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $233               ; "It has been very{N}warm lately.{W1}"
 										rts
 
@@ -105,17 +105,17 @@ sub_537F8:
 
 sub_537FE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $101
 										bne.s   loc_53810
 										lea     cs_53816(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $101
 										bra.s   return_53814
 loc_53810:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $235               ; "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
 return_53814:
 										
@@ -123,7 +123,7 @@ return_53814:
 
 	; End of function sub_537FE
 
-cs_53816:           dc.w 4                  ; 0004 SET TEXT INDEX 234 : "(Scream!)...who are you?!{N}Get out of here!{W2}"
+cs_53816:           dc.w 4                  ; 0004 INIT TEXT CURSOR 234 : "(Scream!)...who are you?!{N}Get out of here!{W2}"
 										dc.w $234
 										dc.w $15                ; 0015 SET ACTSCRIPT 87 FF 45E44
 										dc.b $87

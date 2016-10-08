@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle28\cs_afterbattle :
 ; Cutscene after battle 28
-abcs_battle28:      dc.w 4                  ; 0004 SET TEXT INDEX A6E : "Phew!  That was close!{W1}"
+abcs_battle28:      dc.w 4                  ; 0004 INIT TEXT CURSOR A6E : "Phew!  That was close!{W1}"
 										dc.w $A6E
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 2F 7 19
 										dc.w $2F

@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle37\cs_afterbattle :
 ; Cutscene after battle 37
-abcs_battle37:      dc.w 4                  ; 0004 SET TEXT INDEX B9C : "Sir Astral, he's...crying!{W1}"
+abcs_battle37:      dc.w 4                  ; 0004 INIT TEXT CURSOR B9C : "Sir Astral, he's...crying!{W1}"
 										dc.w $B9C
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 4D 1F 36
 										dc.w $4D

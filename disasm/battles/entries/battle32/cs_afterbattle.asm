@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle32\cs_afterbattle :
 ; Cutscene after battle 32
-abcs_battle32:      dc.w 4                  ; 0004 SET TEXT INDEX B25 : "I can't believe it!{N}You might have been killed{N}by the devils.{W1}"
+abcs_battle32:      dc.w 4                  ; 0004 INIT TEXT CURSOR B25 : "I can't believe it!{N}You might have been killed{N}by the devils.{W1}"
 										dc.w $B25
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 4A 5 14
 										dc.w $4A

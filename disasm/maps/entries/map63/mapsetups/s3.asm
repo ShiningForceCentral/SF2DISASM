@@ -20,19 +20,19 @@ ms_map63_ZoneEvents:dc.b $F
 
 sub_5C9F6:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100
 										bne.s   loc_5CA08
 										lea     cs_5CA6E(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bra.s   return_5CA12
 loc_5CA08:
 										
 										lea     cs_5CB34(pc), a0
 										trap    #6
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_5CA12:
 										

@@ -12,20 +12,20 @@ ms_map61_EntityEvents:
 
 sub_5C67A:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100
 										bne.s   loc_5C684
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E3D               ; "I'm Paseran of Ribble.{N}I'm studying the ancient{N}petroglyphs.{W2}"
 loc_5C684:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E3E               ; "{NAME;11} told me about{N}a family who has an ancient{N}tomb in Parmecia.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E3F               ; "According to my studies,{N}his house should be around{N}here somewhere.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $E40               ; "Or, maybe it's to the east.{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_5C694:
 										

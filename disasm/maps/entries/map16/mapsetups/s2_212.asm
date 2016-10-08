@@ -63,9 +63,9 @@ ms_map16_flag212_EntityEvents:
 
 sub_610A4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DA0               ; "Red Baron is {NAME;28}.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DA1               ; "He was running around and{N}crying for somebody to kill{N}him.{W1}"
 										rts
 
@@ -76,7 +76,7 @@ sub_610A4:
 
 sub_610AE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DA2               ; "{NAME;28} went south.{N}He was acting strange.{W1}"
 										rts
 
@@ -87,7 +87,7 @@ sub_610AE:
 
 sub_610B4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DA3               ; "King Galam has not returned{N}from the war against{N}Granseal.{W1}"
 										rts
 
@@ -98,9 +98,9 @@ sub_610B4:
 
 sub_610BA:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DA4               ; "{NAME;28} made that hole.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DA5               ; "He jumped off the top of the{N}castle, but he didn't die!{W1}"
 										rts
 
@@ -111,9 +111,9 @@ sub_610BA:
 
 sub_610C4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DA6               ; "My boyfriend has not{N}returned from the war...{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DA7               ; "I hope he's alive...{W1}"
 										rts
 
@@ -124,9 +124,9 @@ sub_610C4:
 
 sub_610CE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DA8               ; "I heard from a soldier that{N}Yeel is haunted.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DA9               ; "He said that he heard the{N}sound of a piano playing.{W1}"
 										rts
 
@@ -137,7 +137,7 @@ sub_610CE:
 
 sub_610D8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DAA               ; "From Granseal?  I didn't{N}know anyone survived that{N}earthquake.{W1}"
 										rts
 
@@ -148,7 +148,7 @@ sub_610D8:
 
 sub_610DE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DAB               ; "The priest of Yeel liked the{N}piano.  The ghost may be him.{W1}"
 										rts
 
@@ -159,7 +159,7 @@ sub_610DE:
 
 sub_610E4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DAC               ; "Do you know about the stautue{N}of the devil?  It appeared{N}at the Ancient Tower.{W1}"
 										rts
 
@@ -170,7 +170,7 @@ sub_610E4:
 
 sub_610EA:
 										
-										move.b  #$1D,((RAM_CurrentShopIdx-$1000000)).w
+										move.b  #$1D,((CURRENT_SHOP_INDEX-$1000000)).w
 										jsr     j_ShopActions
 										rts
 
@@ -191,9 +191,9 @@ sub_610F8:
 
 sub_61100:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DAD               ; "Red Baron was looking for{N}something at the Ancient{N}Tower.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DAE               ; "Nobody returned from that{N}trip.  I didn't go. I was{N}smart!{W1}"
 										rts
 
@@ -204,7 +204,7 @@ sub_61100:
 
 sub_6110A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DB1               ; "I...I saw them...many devils{N}came from the tower....{W1}"
 										rts
 
@@ -215,7 +215,7 @@ sub_6110A:
 
 sub_61110:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DB6               ; "Good weapons and armor, huh?{W1}"
 										rts
 
@@ -228,10 +228,10 @@ sub_61116:
 										
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FF2               ; "A hole.{W1}"
 										rts
 
@@ -242,7 +242,7 @@ sub_61116:
 
 sub_6112E:
 										
-										move.b  #$E,((RAM_CurrentShopIdx-$1000000)).w
+										move.b  #$E,((CURRENT_SHOP_INDEX-$1000000)).w
 										jsr     j_ShopActions
 										rts
 
@@ -253,9 +253,9 @@ sub_6112E:
 
 sub_6113C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DB3               ; "You want to enter the tower?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DB4               ; "Impossible.  It's buried in{N}the ground and there is no{N}door.{W1}"
 										rts
 

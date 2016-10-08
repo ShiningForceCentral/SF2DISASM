@@ -10,7 +10,7 @@ ms_map33_flag312_InitFunction:
 
 	; End of function ms_map33_flag312_InitFunction
 
-cs_5AC58:           dc.w 4                  ; 0004 SET TEXT INDEX 70C : "You may go now.{N}I need to talk to fairy.{W1}"
+cs_5AC58:           dc.w 4                  ; 0004 INIT TEXT CURSOR 70C : "You may go now.{N}I need to talk to fairy.{W1}"
 										dc.w $70C
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 81 : "You may go now.{N}I need to talk to fairy.{W1}"
 										dc.w $81
@@ -468,7 +468,7 @@ cs_5AC58:           dc.w 4                  ; 0004 SET TEXT INDEX 70C : "You may
 										dc.w 7
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5AF36:           dc.w 4                  ; 0004 SET TEXT INDEX 72A : "No, don't go in there!{N}That door is...!{W1}"
+cs_5AF36:           dc.w 4                  ; 0004 INIT TEXT CURSOR 72A : "No, don't go in there!{N}That door is...!{W1}"
 										dc.w $72A
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 460CE
 										dc.b $80
@@ -600,7 +600,7 @@ cs_5AF36:           dc.w 4                  ; 0004 SET TEXT INDEX 72A : "No, don
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 16000003
 										dc.l $16000003
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5B016:           dc.w 4                  ; 0004 SET TEXT INDEX 730 : "Goliath...Goliath!{W1}"
+cs_5B016:           dc.w 4                  ; 0004 INIT TEXT CURSOR 730 : "Goliath...Goliath!{W1}"
 										dc.w $730
 										dc.w $46                ; 0046  C 2
 										dc.w $C
@@ -1285,7 +1285,7 @@ cs_5B016:           dc.w 4                  ; 0004 SET TEXT INDEX 730 : "Goliath
 										dc.w 7
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5B466:           dc.w 4                  ; 0004 SET TEXT INDEX 78C : "Oddler?{W1}"
+cs_5B466:           dc.w 4                  ; 0004 INIT TEXT CURSOR 78C : "Oddler?{W1}"
 										dc.w $78C
 										dc.w $32                ; 0032 SET CAMERA DEST C F
 										dc.w $C

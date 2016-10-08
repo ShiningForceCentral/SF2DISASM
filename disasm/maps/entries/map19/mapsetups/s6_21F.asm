@@ -6,21 +6,21 @@
 
 ms_map19_flag21F_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $19
 										bne.s   loc_62CAE
 										move.w  #$19,d0
 										jsr     MoveEntityOutOfMap
 loc_62CAE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w 8
 										bne.s   loc_62CBE
 										move.w  #8,d0
 										jsr     MoveEntityOutOfMap
 loc_62CBE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1B
 										bne.s   loc_62CCE
 										move.w  #$1B,d0
@@ -29,21 +29,21 @@ loc_62CCE:
 										
 										lea     cs_62D06(pc), a0
 										trap    #6
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3D5
 										beq.s   loc_62CFC
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3D6
 										bne.s   loc_62CF2
 										lea     cs_62D0E(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3D6
 										move.b  #$FF,((FOLLOWERS_LIST-$1000000)).w
 										bra.s   loc_62CFA
 loc_62CF2:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_TOWN
 										jsr     (FadeInFromBlack).w
 loc_62CFA:
@@ -51,7 +51,7 @@ loc_62CFA:
 										bra.s   return_62D04
 loc_62CFC:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_TOWN
 										jsr     (FadeInFromBlack).w
 return_62D04:
@@ -64,7 +64,7 @@ cs_62D06:           dc.w $1A                ; 001A SET ENTITY SPRITE B AA
 										dc.w $B
 										dc.w $AA
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F : "King Granseal, {LEADER}{N}is here!{W1}"
+cs_62D0E:           dc.w 4                  ; 0004 INIT TEXT CURSOR F7F : "King Granseal, {LEADER}{N}is here!{W1}"
 										dc.w $F7F
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 81
 										dc.w $81
@@ -516,7 +516,7 @@ cs_62D0E:           dc.w 4                  ; 0004 SET TEXT INDEX F7F : "King Gr
 										dc.w 8
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 3
 										dc.w 3
-word_62FB0:         dc.w 4                  ; 0004 SET TEXT INDEX F93 : "{LEADER} is a good lad{N}with the manner of a{N}knight!{W2}"
+word_62FB0:         dc.w 4                  ; 0004 INIT TEXT CURSOR F93 : "{LEADER} is a good lad{N}with the manner of a{N}knight!{W2}"
 										dc.w $F93
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 1 1
 										dc.b 7

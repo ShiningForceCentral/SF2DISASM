@@ -21,7 +21,7 @@ ms_map23_flag2FA_EntityEvents:
 
 sub_59BBC:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6A5               ; "Hey, you met Creed, didn't{N}you?{W1}"
 										rts
 
@@ -32,7 +32,7 @@ sub_59BBC:
 
 sub_59BC2:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6A6               ; "The evil has completely{N}lifted from the forest.{W1}"
 										rts
 
@@ -43,9 +43,9 @@ sub_59BC2:
 
 sub_59BC8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6A7               ; "Is that sick dwarf better?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6A8               ; "Can he see the fairy now?{W1}"
 										rts
 

@@ -51,7 +51,7 @@ word_60558:         dc.w $90F
 
 sub_60582:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3AC
 										bne.s   return_6058E
 										lea     cs_60F64(pc), a0
@@ -67,44 +67,44 @@ return_6058E:
 
 sub_60590:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3B1
 										bne.s   loc_605C4
 										lea     cs_6060E(pc), a0
 										trap    #6
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										move.w  #$1C,d0
-										jsr     GetEntityPortraitAndSpeechSound
+										jsr     GetEntityPortraitAndSpeechSfx
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D9B               ; "I can't believe it!{N}I want to die, but I can't!{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3B1               ; set after recruiting Lemon in Yeel
 										bra.s   return_60604
 loc_605C4:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1C
 										bne.s   loc_605EE
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										move.w  #$1C,d0
-										jsr     GetEntityPortraitAndSpeechSound
+										jsr     GetEntityPortraitAndSpeechSfx
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D9B               ; "I can't believe it!{N}I want to die, but I can't!{W1}"
 										bra.s   return_60604
 loc_605EE:
 										
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FF2               ; "A hole.{W1}"
 return_60604:
 										

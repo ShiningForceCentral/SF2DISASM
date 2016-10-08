@@ -11,7 +11,7 @@ ms_map8_flag2C4_Entities:
 										dc.b $17
 										dc.b 3
 										dc.b $C4
-										dc.b $FF
+										dc.b off_FC+3           
 										dc.b $E
 										dc.b $17
 										dc.b 2
@@ -19,7 +19,7 @@ ms_map8_flag2C4_Entities:
 										dc.b $17
 										dc.b 3
 										dc.b $C5
-										dc.b $FF
+										dc.b off_FC+3           
 										dc.b 6
 										dc.b $17
 										dc.b 1
@@ -32,7 +32,7 @@ ms_map8_flag2C4_Entities:
 										dc.b $12
 										dc.b 3
 										dc.b $C4
-										dc.b $FF
+										dc.b off_FC+3           
 										dc.b $1C
 										dc.b $12
 										dc.b 2
@@ -55,7 +55,7 @@ ms_map8_flag2C4_Entities:
 										dc.b 9
 										dc.b 3
 										dc.b $C4
-										dc.b $FF
+										dc.b off_FC+3           
 										dc.b $1A
 										dc.b 9
 										dc.b 1
@@ -83,7 +83,7 @@ ms_map8_flag2C4_Entities:
 										dc.b $1B
 										dc.b 3
 										dc.b 8
-										dc.b $FF
+										dc.b off_FC+3           
 										dc.b $12
 										dc.b $1B
 										dc.b 2

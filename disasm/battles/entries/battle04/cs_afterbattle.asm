@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle04\cs_afterbattle :
 ; Cutscene after battle 4
-abcs_battle04:      dc.w 4                  ; 0004 SET TEXT INDEX 90F : "Your battle strategy was{N}wonderful!  I praise you.{W1}"
+abcs_battle04:      dc.w 4                  ; 0004 INIT TEXT CURSOR 90F : "Your battle strategy was{N}wonderful!  I praise you.{W1}"
 										dc.w $90F
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 42 9 10
 										dc.w $42

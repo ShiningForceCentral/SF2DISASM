@@ -27,12 +27,12 @@ nullsub_85:
 
 sub_632AC:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_FADE_OUT
 										lea     cs_632EA(pc), a0
 										trap    #6
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FAE               ; "The Princess is asleep.{N}Will you kiss her?"
 										jsr     j_YesNoPrompt
 										tst.w   d0
@@ -45,9 +45,9 @@ sub_632AC:
 										jmp     (loc_7094).w
 loc_632E0:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_INIT_DRIVER
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_TOWN
 										rts
 
@@ -67,24 +67,24 @@ cs_632EA:           dc.w $15                ; 0015 SET ACTSCRIPT 0 FF 460CE
 
 sub_632FA:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3D6
 										beq.s   return_6332E
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3D7
 										bne.s   return_6332E
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										move.w  #$80,d0 
-										jsr     GetEntityPortraitAndSpeechSound
+										jsr     GetEntityPortraitAndSpeechSfx
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FA9               ; "Oh, {LEADER}!{N}I really respect you.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FAA               ; "You shouldered quite a{N}burden for the kingdom.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FAB               ; "I'll be happy if you rule{N}this kingdom with Princess{N}Elis!{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3D7
 return_6332E:
 										
@@ -97,19 +97,19 @@ return_6332E:
 
 sub_63330:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3D8
 										bne.s   return_6335C
 										lea     cs_6335E(pc), a0
 										trap    #6
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										move.w  #$80,d0 
-										jsr     GetEntityPortraitAndSpeechSound
+										jsr     GetEntityPortraitAndSpeechSfx
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FAC               ; "{LEADER}, please kiss{N}her.{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3D8
 return_6335C:
 										

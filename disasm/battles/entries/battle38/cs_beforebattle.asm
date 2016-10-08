@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle38\cs_beforebattle :
 ; Cutscene before battle 38
-bbcs_38:            dc.w 4                  ; 0004 SET TEXT INDEX BBB : "Stop!{W1}"
+bbcs_38:            dc.w 4                  ; 0004 INIT TEXT CURSOR BBB : "Stop!{W1}"
 										dc.w $BBB
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 42 9 6
 										dc.w $42

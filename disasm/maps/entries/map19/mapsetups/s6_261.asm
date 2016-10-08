@@ -6,12 +6,12 @@
 
 ms_map19_flag261_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $262               ; set after you agree to go to see Hawel
 										bne.s   return_5311C
 										lea     cs_53176(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $262               ; set after you agree to go to see Hawel
 return_5311C:
 										

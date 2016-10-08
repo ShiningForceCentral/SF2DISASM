@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle01\cs_beforebattle :
 ; Cutscene before battle 1
-bbcs_01:            dc.w 4                  ; 0004 SET TEXT INDEX 8F4 : "There you are, {LEADER}.{N}Stay here.{W2}"
+bbcs_01:            dc.w 4                  ; 0004 INIT TEXT CURSOR 8F4 : "There you are, {LEADER}.{N}Stay here.{W2}"
 										dc.w $8F4
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 39 2 A
 										dc.w $39

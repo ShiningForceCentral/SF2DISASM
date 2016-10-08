@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle36\cs_beforebattle :
 ; Cutscene before battle 36
-bbcs_36:            dc.w 4                  ; 0004 SET TEXT INDEX B82 : "You're early!{N}{W2}"
+bbcs_36:            dc.w 4                  ; 0004 INIT TEXT CURSOR B82 : "You're early!{N}{W2}"
 										dc.w $B82
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 F 0
 										dc.w $35

@@ -6,7 +6,7 @@
 
 ms_map45_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $19
 										beq.s   loc_600AA
 										move.w  #$19,d0
@@ -37,7 +37,7 @@ cs_600B2:           dc.w $15                ; 0015 SET ACTSCRIPT 19 FF 45F9C
 										dc.b $19
 										dc.b 1
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_600CE:           dc.w 4                  ; 0004 SET TEXT INDEX 823 : "Who's there!{W1}"
+cs_600CE:           dc.w 4                  ; 0004 INIT TEXT CURSOR 823 : "Who's there!{W1}"
 										dc.w $823
 										dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 460CE
 										dc.b $1F

@@ -6,7 +6,7 @@
 
 ms_map51_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1D6
 										bne.s   return_5C3D6
 										lea     cs_5C3D8(pc), a0
@@ -17,7 +17,7 @@ return_5C3D6:
 
 	; End of function ms_map51_InitFunction
 
-cs_5C3D8:           dc.w 4                  ; 0004 SET TEXT INDEX 9F6 : "It's coming from this{N}direction.{W1}"
+cs_5C3D8:           dc.w 4                  ; 0004 INIT TEXT CURSOR 9F6 : "It's coming from this{N}direction.{W1}"
 										dc.w $9F6
 										dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 460CE
 										dc.b $1F

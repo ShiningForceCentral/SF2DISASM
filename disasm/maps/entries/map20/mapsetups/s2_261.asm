@@ -30,7 +30,7 @@ ms_map20_flag261_EntityEvents:
 
 sub_538D4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $256               ; "Sir Astral is sleeping{N}in the King's bedroom.{N}Don't worry!{W1}"
 										rts
 
@@ -41,16 +41,16 @@ sub_538D4:
 
 sub_538DA:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $101
 										bne.s   loc_538E8
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $259               ; "Thank you, {LEADER}.{N}You've saved the King's{N}life.{W2}{N}I heard that you are going{N}to Yeel.{W2}{N}I'll take care of Sir Astral{N}for you.{W2}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $101
 loc_538E8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $25A               ; "Please be careful.{W1}"
 										rts
 
@@ -61,16 +61,16 @@ loc_538E8:
 
 sub_538EE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $102
 										bne.s   loc_538FC
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $25B               ; "Are you going to see{N}Mr. Hawel?{W2}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $102
 loc_538FC:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $25C               ; "I wouldn't let you go alone{N}if I weren't...{W2}{N}I trust you, son.{W1}"
 										rts
 
@@ -81,16 +81,16 @@ loc_538FC:
 
 sub_53902:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $104
 										bne.s   loc_53910
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $25D               ; "Princess Elis has not rested{N}since the King collapsed.{W2}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $104
 loc_53910:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $25E               ; "I understand her reasoning,{N}but she might get sick, too.{W1}"
 										rts
 
@@ -101,7 +101,7 @@ loc_53910:
 
 sub_53916:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $236               ; "This east tower was built{N}in order to watch for{N}invaders.{W1}"
 										rts
 
@@ -112,7 +112,7 @@ sub_53916:
 
 sub_5391C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $25F               ; "She has been shrivering like{N}this since she came back{N}from the King's room.{W2}{N}She won't work.{W1}"
 										rts
 
@@ -123,7 +123,7 @@ sub_5391C:
 
 sub_53922:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $260               ; "I...I've never seen such a{N}horrible face....{W2}{N}I can't tell anybody.{N}They wouldn't believe me.{W1}"
 										rts
 

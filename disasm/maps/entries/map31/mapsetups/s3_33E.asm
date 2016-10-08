@@ -21,12 +21,12 @@ nullsub_93:
 
 sub_5D560:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $342
 										bne.s   return_5D570
 										lea     cs_5D644(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $342               ; set after making the Arm of Golem appear in Moun
 return_5D570:
 										

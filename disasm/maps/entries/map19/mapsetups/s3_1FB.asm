@@ -27,12 +27,12 @@ nullsub_82:
 
 sub_52DB6:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $26C               ; set after Astral talks Lemon into heading to the Ancient Tower
 										bne.s   return_52DC6
 										lea     cs_534D2(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $26C               ; set after Astral talks Lemon into heading to the Ancient Tower
 return_52DC6:
 										
@@ -45,14 +45,14 @@ return_52DC6:
 
 sub_52DC8:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $26D               ; set after stepping in front of the Minister
 										bne.s   return_52DDC
 										lea     cs_535FA(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $53                ; King + Minister are followers
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $26D               ; set after stepping in front of the Minister
 return_52DDC:
 										
@@ -65,12 +65,12 @@ return_52DDC:
 
 sub_52DDE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $26E               ; set after Astral delivers an "oh crap, earthquake" line in the castle
 										bne.s   return_52DEE
 										lea     cs_53620(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $26E               ; set after Astral delivers an "oh crap, earthquake" line in the castle
 return_52DEE:
 										
@@ -83,12 +83,12 @@ return_52DEE:
 
 sub_52DF0:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $26F               ; set after Astral delivers his "should be safe" line in castle
 										bne.s   return_52E00
 										lea     cs_5362A(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $26F               ; set after Astral delivers his "should be safe" line in castle
 return_52E00:
 										

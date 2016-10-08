@@ -6,7 +6,7 @@
 
 ms_map6_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $322
 										beq.s   loc_54E62
 										lea     cs_54E70(pc), a0
@@ -14,7 +14,7 @@ ms_map6_InitFunction:
 										rts
 loc_54E62:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2C2
 										beq.s   return_54E6E
 										lea     cs_54E78(pc), a0
@@ -42,7 +42,7 @@ cs_54E78:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 8A 
 										dc.b $17
 										dc.b 3
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_54E86:           dc.w 4                  ; 0004 SET TEXT INDEX 42A : "A strange animal?{N}Really?{W1}"
+cs_54E86:           dc.w 4                  ; 0004 INIT TEXT CURSOR 42A : "A strange animal?{N}Really?{W1}"
 										dc.w $42A
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA 8B
 										dc.w $8B
@@ -149,7 +149,7 @@ cs_54E86:           dc.w 4                  ; 0004 SET TEXT INDEX 42A : "A stran
 										dc.w $2E                ; 002E HIDE ENTITY 8A
 										dc.w $8A
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_54F26:           dc.w 4                  ; 0004 SET TEXT INDEX 432 : "Oooo...it's big!{N}I want to touch him!{W1}"
+cs_54F26:           dc.w 4                  ; 0004 INIT TEXT CURSOR 432 : "Oooo...it's big!{N}I want to touch him!{W1}"
 										dc.w $432
 										dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 7
 										dc.b 7
@@ -689,7 +689,7 @@ cs_54F26:           dc.w 4                  ; 0004 SET TEXT INDEX 432 : "Oooo...
 										dc.b $82
 										dc.b 3
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_55242:           dc.w 4                  ; 0004 SET TEXT INDEX 463 : "Welcome back, {LEADER}!{N}I heard your journey was{N}hard.{W2}"
+cs_55242:           dc.w 4                  ; 0004 INIT TEXT CURSOR 463 : "Welcome back, {LEADER}!{N}I heard your journey was{N}hard.{W2}"
 										dc.w $463
 										dc.w $2B                ; 002B  8E B 0 3 CE
 										dc.w $8E
@@ -733,7 +733,7 @@ cs_55242:           dc.w 4                  ; 0004 SET TEXT INDEX 463 : "Welcome
 										dc.w $2E                ; 002E HIDE ENTITY 8E
 										dc.w $8E
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_55288:           dc.w 4                  ; 0004 SET TEXT INDEX 466 : "I finally found you.{N}You're {LEADER}, right?{W1}"
+cs_55288:           dc.w 4                  ; 0004 INIT TEXT CURSOR 466 : "I finally found you.{N}You're {LEADER}, right?{W1}"
 										dc.w $466
 										dc.w $2B                ; 002B  12 10 16 3 12
 										dc.w $12

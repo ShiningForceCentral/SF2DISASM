@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle05\cs_battleend :
 ; Enemy defeated cutscene for battle 5
-edcs_battle5:       dc.w 4                  ; 0004 SET TEXT INDEX 913 : "You, rat!  I threw you into{N}jail after I took your{N}jewels....{W1}"
+edcs_battle5:       dc.w 4                  ; 0004 INIT TEXT CURSOR 913 : "You, rat!  I threw you into{N}jail after I took your{N}jewels....{W1}"
 										dc.w $913
 										dc.w $1C                ; 001C STOP ENTITY ANIM 80
 										dc.w $80

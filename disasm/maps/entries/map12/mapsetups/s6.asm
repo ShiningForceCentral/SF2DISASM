@@ -6,15 +6,15 @@
 
 ms_map12_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2D5
+										trap    #CHECK_FLAG
+										dc.w $2D5               ; set after telling Rohde that you're going to get the Caravan
 										bne.s   loc_57D10
 										lea     cs_57D22(pc), a0
 										trap    #6
 loc_57D10:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $206
+										trap    #CHECK_FLAG
+										dc.w $206               ; Battle 18 completed
 										beq.s   return_57D20
 										move.w  #$80,d0 
 										jsr     MoveEntityOutOfMap
@@ -24,7 +24,7 @@ return_57D20:
 
 	; End of function ms_map12_InitFunction
 
-cs_57D22:           dc.w 4                  ; 0004 SET TEXT INDEX C7D : "Stop!{W1}"
+cs_57D22:           dc.w 4                  ; 0004 INIT TEXT CURSOR C7D : "Stop!{W1}"
 										dc.w $C7D
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 										dc.w $30

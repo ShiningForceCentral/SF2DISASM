@@ -30,7 +30,7 @@ ms_map20_flag1F5_EntityEvents:
 
 sub_53850:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $896               ; "Guooooorrrr!{W1}"
 										rts
 
@@ -41,7 +41,7 @@ sub_53850:
 
 sub_53856:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $250               ; "Let me pass!{N}I must see my father!{W1}"
 										rts
 
@@ -63,16 +63,16 @@ sub_5385C:
 
 sub_53864:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $103
 										bne.s   loc_53872
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $251               ; "I saw a devil enter the{N}King's body...{W2}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $103
 loc_53872:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $252               ; "and the King became{N}violent!{W1}"
 										rts
 
@@ -83,16 +83,16 @@ loc_53872:
 
 sub_53878:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $104
 										bne.s   loc_53886
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $253               ; "Hurry to the Princess's{N}bedroom!  Hold the King{N}down!{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $104
 loc_53886:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $254               ; "The King knocked down{N}the Princess....{W1}"
 										rts
 
@@ -103,16 +103,16 @@ loc_53886:
 
 sub_5388C:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $105
 										bne.s   loc_5389A
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $24C               ; "Ooo, ouch!{N}I didn't think he could{N}be so strong!{W2}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $105
 loc_5389A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $24D               ; "Ouch!  I was knocked down!{W1}"
 										rts
 
@@ -123,16 +123,16 @@ loc_5389A:
 
 sub_538A0:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $106
 										bne.s   loc_538AE
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $24E               ; "Princess Elis!{N}I can't let you up there.{W2}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $106
 loc_538AE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $24F               ; "Trust Sir Astral!{N}He knows how to cure{N}the King!{W1}"
 										rts
 

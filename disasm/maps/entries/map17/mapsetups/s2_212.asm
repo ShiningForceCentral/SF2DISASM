@@ -18,9 +18,9 @@ ms_map17_flag212_EntityEvents:
 
 sub_611F0:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DAF               ; "I think he was looking for{N}the Holy Sword.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DB0               ; "Please don't tell anybody{N}that I told you.{W1}"
 										rts
 
@@ -31,7 +31,7 @@ sub_611F0:
 
 sub_611FA:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DB2               ; "Why am I guarding the{N}kitchen?!{W1}"
 										rts
 
@@ -42,7 +42,7 @@ sub_611FA:
 
 sub_61200:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DB5               ; "I heard a rumor that a{N}handsome boy is leading{N}the devils now.{W1}"
 										rts
 

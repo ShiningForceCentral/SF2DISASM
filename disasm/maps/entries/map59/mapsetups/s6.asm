@@ -6,7 +6,7 @@
 
 ms_map59_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3E7
 										bne.s   loc_5EB18
 										lea     cs_5EB44(pc), a0
@@ -19,21 +19,21 @@ ms_map59_InitFunction:
 										trap    #6
 										lea     cs_5EF60(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3E7               ; set after the Nazca ship shootdown scene
-										move.b  #$2D,((RAM_EgressMapIdx-$1000000)).w 
-										trap    #TRAP_SETFLAG
+										move.b  #$2D,((EGRESS_MAP_INDEX-$1000000)).w 
+										trap    #SET_FLAG
 										dc.w $1B4               ; Battle 36 unlocked
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $1B8               ; Battle 40 unlocked
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $1BA               ; Battle 42 unlocked
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $1BB               ; Battle 43 unlocked
 										rts
 loc_5EB18:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1BB
 										beq.s   return_5EB24
 										lea     cs_5EB26(pc), a0
@@ -54,7 +54,7 @@ cs_5EB26:           dc.w $A                 ; 000A EXECUTE SUBROUTINE 5EB34
 
 sub_5EB34:
 										
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										moveq   #$1F,d7
 loc_5EB3C:
 										
@@ -64,7 +64,7 @@ loc_5EB3C:
 
 	; End of function sub_5EB34
 
-cs_5EB44:           dc.w 4                  ; 0004 SET TEXT INDEX E73 : "{LEADER} is almost here{N}already?{W1}"
+cs_5EB44:           dc.w 4                  ; 0004 INIT TEXT CURSOR E73 : "{LEADER} is almost here{N}already?{W1}"
 										dc.w $E73
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF
@@ -166,7 +166,7 @@ cs_5EBFC:           dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 8 E
 										dc.w $35
 										dc.w 8
 										dc.w $E
-										dc.w 4                  ; 0004 SET TEXT INDEX E8B : "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR E8B : "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
 										dc.w $E8B
 										dc.w $42                ; 0042 RELATED TO LOADING MAP ENTITIES 5F1DE
 										dc.l word_5F1DE
@@ -316,7 +316,7 @@ cs_5EBFC:           dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 8 E
 										dc.w $26                ; 0026 MAKE ENTITY NOD 81
 										dc.w $81
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5ED06:           dc.w 4                  ; 0004 SET TEXT INDEX E91 : "There's Grans Island!{W1}"
+cs_5ED06:           dc.w 4                  ; 0004 INIT TEXT CURSOR E91 : "There's Grans Island!{W1}"
 										dc.w $E91
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 49 0 0
 										dc.w $49
@@ -398,7 +398,7 @@ cs_5ED06:           dc.w 4                  ; 0004 SET TEXT INDEX E91 : "There's
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "Someday, {NAME;7}....{W1}"
 										dc.w $1F
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5EDB8:           dc.w 4                  ; 0004 SET TEXT INDEX E99 : "NOW!{W1}"
+cs_5EDB8:           dc.w 4                  ; 0004 INIT TEXT CURSOR E99 : "NOW!{W1}"
 										dc.w $E99
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 35 A D
 										dc.w $35
@@ -674,7 +674,7 @@ eas_5EF46:          dc.w $1E                ; 001E SET ANIM SPEED X2 $FFFF
 										dc.b $40
 										dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 										dc.l eas_Idle           
-cs_5EF60:           dc.w 4                  ; 0004 SET TEXT INDEX E9B : "I did see something!{W1}"
+cs_5EF60:           dc.w 4                  ; 0004 INIT TEXT CURSOR E9B : "I did see something!{W1}"
 										dc.w $E9B
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 25 4 6
 										dc.w $25
@@ -951,10 +951,10 @@ cs_5EF60:           dc.w 4                  ; 0004 SET TEXT INDEX E9B : "I did s
 sub_5F14C:
 										
 										lea     plt_5F17E(pc), a0
-										lea     (PALETTE_4).l,a1
+										lea     (PALETTE_4_BIS).l,a1
 										moveq   #$20,d7 
 										jsr     (CopyBytes).w   
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										clr.b   ((byte_FFDFAB-$1000000)).w
 										jsr     (sub_19C8).w    
 										rts
@@ -1232,7 +1232,7 @@ word_5F28E:         dc.w 0
 
 sub_5F31E:
 										
-										move.b  #$F0,((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										move.b  #$F0,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										nop
 loc_5F326:
 										
@@ -1246,7 +1246,7 @@ loc_5F326:
 
 sub_5F32E:
 										
-										move.b  #$F8,((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										move.b  #$F8,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										nop
 										rts
 
@@ -1260,7 +1260,7 @@ sub_5F338:
 										moveq   #$F,d7
 loc_5F33A:
 										
-										subq.b  #1,((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										subq.b  #1,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										nop
 										moveq   #4,d0
 										jsr     (Sleep).w       

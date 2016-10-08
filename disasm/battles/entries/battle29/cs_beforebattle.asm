@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle29\cs_beforebattle :
 ; Cutscene before battle 29
-bbcs_29:            dc.w 4                  ; 0004 SET TEXT INDEX A9E : "You can't enter Mitula{N}Shrine now.{W1}"
+bbcs_29:            dc.w 4                  ; 0004 INIT TEXT CURSOR A9E : "You can't enter Mitula{N}Shrine now.{W1}"
 										dc.w $A9E
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 0 A 1C
 										dc.w 0

@@ -54,9 +54,9 @@ ms_map38_EntityEvents:
 
 sub_5DBB6:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $859               ; "Welcome to Roft.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $85A               ; "Every peaceful person is{N}welcome!{W1}"
 										rts
 
@@ -67,7 +67,7 @@ sub_5DBB6:
 
 sub_5DBC0:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $85B               ; "Mr. Petro and Mr. Paseran{N}came from the south.{W1}"
 										rts
 
@@ -78,7 +78,7 @@ sub_5DBC0:
 
 sub_5DBC6:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $85C               ; "{NAME;26}, are you OK?{N}You were captured by the{N}devils!{W1}"
 										rts
 
@@ -89,7 +89,7 @@ sub_5DBC6:
 
 sub_5DBCC:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $85D               ; "The devils kidnapped{N}Mr. Petro and stole the{N}Nazca Ship.{W1}"
 										rts
 
@@ -100,11 +100,11 @@ sub_5DBCC:
 
 sub_5DBD2:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $85E               ; "Mr. Paseran came here{N}through the tunnel in the{N}south.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $85F               ; "We've been told that devils{N}live there.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $860               ; "And we have seen many{N}devils here since he came{N}to Roft.{W1}"
 										rts
 
@@ -115,9 +115,9 @@ sub_5DBD2:
 
 sub_5DBE0:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $861               ; "Red Baron is a cruel killer.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $862               ; "He has smeared his armor with{N}the blood of his enemies.{W1}"
 										rts
 
@@ -128,11 +128,11 @@ sub_5DBE0:
 
 sub_5DBEA:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $863               ; "Do you know of Mithril?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $864               ; "Mithril weapons are awfully{N}strong.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $865               ; "They may help you in your{N}battles.{W1}"
 										rts
 
@@ -143,9 +143,9 @@ sub_5DBEA:
 
 sub_5DBF8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $866               ; "We were able to find Mithril{N}on Grans before.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $867               ; "The Dwarven Blacksmith lives{N}in Grans Forest.{W1}"
 										rts
 
@@ -156,7 +156,7 @@ sub_5DBF8:
 
 sub_5DC02:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $868               ; "Nobody but the Dwarven{N}Blacksmith can work with{N}Mithril.{W1}"
 										rts
 
@@ -167,50 +167,50 @@ sub_5DC02:
 
 sub_5DC08:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $38E
 										beq.s   return_5DC54
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $102
 										beq.s   loc_5DC34
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $38F
 										beq.s   loc_5DC32
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100
 										bne.s   loc_5DC2E
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $871               ; "(Sob...sob...){N}He's gone....{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $872               ; "We never had a chance to fly{N}in the Nazca Ship!{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bra.s   loc_5DC32
 loc_5DC2E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $871               ; "(Sob...sob...){N}He's gone....{W2}"
 loc_5DC32:
 										
 										bra.s   return_5DC54
 loc_5DC34:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $38F
 										beq.s   return_5DC54
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100
 										bne.s   loc_5DC50
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $875               ; "The Nazca Ship crashed?{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $876               ; "I hope Petro gets on the{N}Nazca Ship in the great{N}beyond.{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bra.w   return_5DC54
 loc_5DC50:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $875               ; "The Nazca Ship crashed?{W1}"
 return_5DC54:
 										
@@ -223,50 +223,50 @@ return_5DC54:
 
 sub_5DC56:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $38E
 										beq.s   return_5DCA2
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $102
 										beq.s   loc_5DC82
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $38F
 										beq.s   loc_5DC80
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $101
 										bne.s   loc_5DC7C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $873               ; "The devils killed Petro.{N}They lied to us!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $874               ; "How cruel they are!{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $101
 										bra.s   loc_5DC80
 loc_5DC7C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $873               ; "The devils killed Petro.{N}They lied to us!{W2}"
 loc_5DC80:
 										
 										bra.s   return_5DCA2
 loc_5DC82:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $38F
 										beq.s   return_5DCA2
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $101
 										bne.s   loc_5DC9E
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $877               ; "The devils lied, and then{N}killed Petro.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $878               ; "Please defeat the devils for{N}him!{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $101
 										bra.w   return_5DCA2
 loc_5DC9E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $877               ; "The devils lied, and then{N}killed Petro.{W2}"
 return_5DCA2:
 										
@@ -289,7 +289,7 @@ sub_5DCA4:
 
 sub_5DCAC:
 										
-										move.b  #$D,((RAM_CurrentShopIdx-$1000000)).w
+										move.b  #$D,((CURRENT_SHOP_INDEX-$1000000)).w
 										jsr     j_ShopActions
 										rts
 
@@ -300,7 +300,7 @@ sub_5DCAC:
 
 sub_5DCBA:
 										
-										move.b  #$1C,((RAM_CurrentShopIdx-$1000000)).w
+										move.b  #$1C,((CURRENT_SHOP_INDEX-$1000000)).w
 										jsr     j_ShopActions
 										rts
 
@@ -311,7 +311,7 @@ sub_5DCBA:
 
 sub_5DCC8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $869               ; "Huh!  Huh!{W1}"
 										rts
 

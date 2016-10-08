@@ -10,7 +10,7 @@ ms_map34_InitFunction:
 
 	; End of function ms_map34_InitFunction
 
-cs_5B6C0:           dc.w 4                  ; 0004 SET TEXT INDEX C87 : "Yeeenn...queeen...{N}tillooora...synooora...{N}hear my voice....{W2}"
+cs_5B6C0:           dc.w 4                  ; 0004 INIT TEXT CURSOR C87 : "Yeeenn...queeen...{N}tillooora...synooora...{N}hear my voice....{W2}"
 										dc.w $C87
 										dc.w $32                ; 0032 SET CAMERA DEST 2 4
 										dc.w 2

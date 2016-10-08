@@ -21,7 +21,7 @@ nullsub_106:
 
 sub_615C0:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $21F
 										beq.s   return_615CC
 										lea     cs_62658(pc), a0

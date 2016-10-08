@@ -13,7 +13,7 @@ sub_58E50:
 										
 										lea     (Map42s0_Blocks+$146-ms_map14_ZoneEvents)(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $101
 return_58E5A:
 										
@@ -21,7 +21,7 @@ return_58E5A:
 
 	; End of function sub_58E50
 
-cs_58E5C:           dc.w 4                  ; 0004 SET TEXT INDEX 8D5 : "Bring up the plank?"
+cs_58E5C:           dc.w 4                  ; 0004 INIT TEXT CURSOR 8D5 : "Bring up the plank?"
 										dc.w $8D5
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "Bring up the plank?"
 										dc.w $FFFF

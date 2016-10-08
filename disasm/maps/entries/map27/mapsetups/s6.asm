@@ -10,7 +10,7 @@ ms_map27_InitFunction:
 
 	; End of function ms_map27_InitFunction
 
-cs_59FB8:           dc.w 4                  ; 0004 SET TEXT INDEX 6C5 : "(Sniff, sniff)...{N}It smells like a ditch!{W1}"
+cs_59FB8:           dc.w 4                  ; 0004 INIT TEXT CURSOR 6C5 : "(Sniff, sniff)...{N}It smells like a ditch!{W1}"
 										dc.w $6C5
 										dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 460CE
 										dc.b $1F

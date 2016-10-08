@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle21\cs_beforebattle :
 ; Cutscene before battle 21
-bbcs_21:            dc.w 4                  ; 0004 SET TEXT INDEX A10 : "(Sniff, sniff)...I smell{N}more invaders from the east.{W2}"
+bbcs_21:            dc.w 4                  ; 0004 INIT TEXT CURSOR A10 : "(Sniff, sniff)...I smell{N}more invaders from the east.{W2}"
 										dc.w $A10
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 43 5 12
 										dc.w $43

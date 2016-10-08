@@ -6,12 +6,12 @@
 
 ms_map4_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $270               ; set after the soldiers are swallowed up by the earthquake
 										bne.s   loc_5173A
 										lea     cs_51750(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $270               ; set after the soldiers are swallowed up by the earthquake
 										bra.s   return_51740
 loc_5173A:
@@ -35,7 +35,7 @@ cs_51742:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 80 
 										dc.b 0
 										dc.b 0
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_51750:           dc.w 4                  ; 0004 SET TEXT INDEX 2CB : "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
+cs_51750:           dc.w 4                  ; 0004 INIT TEXT CURSOR 2CB : "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
 										dc.w $2CB
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 0 1D 4 3
 										dc.b 0

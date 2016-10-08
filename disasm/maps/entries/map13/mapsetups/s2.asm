@@ -48,20 +48,20 @@ ms_map13_EntityEvents:
 
 sub_58056:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $100
+										trap    #CHECK_FLAG
+										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 										bne.s   loc_58068
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $58C               ; "How did you come to{N}Polca Village?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $58D               ; "Through the cave?{N}Nobody has come to this{N}village since...{W2}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_58068:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $58E               ; "Oh, you defeated that{N}hobgoblin?  Wow!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $58F               ; "Now we can use that tunnel{N}to travel between Polca and{N}the wilderness area!{W1}"
 										rts
 
@@ -72,7 +72,7 @@ loc_58068:
 
 sub_58072:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $590               ; "Breathe deeply....{W2}{N}Wonderful air, huh?{W1}"
 										rts
 
@@ -83,17 +83,17 @@ sub_58072:
 
 sub_58078:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2C7
+										trap    #CHECK_FLAG
+										dc.w $2C7               ; set after you dislodge the turtle/fairy in Polca
 										bne.s   loc_5808A
 										lea     cs_58512(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2C7               ; set after you dislodge the turtle/fairy in Polca
 										bra.s   return_5808E
 loc_5808A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $591               ; "In ancient times, there{N}were magic tunnels.{W2}{N}People traveled easily{N}through the tunnels.{W1}"
 return_5808E:
 										
@@ -106,7 +106,7 @@ return_5808E:
 
 sub_58090:
 										
-										move.b  #4,((RAM_CurrentShopIdx-$1000000)).w
+										move.b  #4,((CURRENT_SHOP_INDEX-$1000000)).w
 										jsr     j_ShopActions
 										rts
 
@@ -117,7 +117,7 @@ sub_58090:
 
 sub_5809E:
 										
-										move.b  #$13,((RAM_CurrentShopIdx-$1000000)).w
+										move.b  #$13,((CURRENT_SHOP_INDEX-$1000000)).w
 										jsr     j_ShopActions
 										rts
 
@@ -128,19 +128,19 @@ sub_5809E:
 
 sub_580AC:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2C6
+										trap    #CHECK_FLAG
+										dc.w $2C6               ; set after Oddler wanders down from the mountain
 										bne.s   loc_580B8
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $592               ; "To the east is the sacred{N}area of Volcanon.{W1}"
 										bra.s   return_580C4
 loc_580B8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $5B9               ; "He came down from the{N}mountain....{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $5BA               ; "He's not from Polca, or{N}Bedoe....{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $5BB               ; "Where did he come from?{W1}"
 return_580C4:
 										
@@ -163,7 +163,7 @@ sub_580C6:
 
 sub_580CE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $593               ; "Mt. Volcano is home to{N}beastmen.{W2}{N}We were a warlike tribe, but{N}we've almost forgotten how{N}to fight.{W1}"
 										rts
 
@@ -174,7 +174,7 @@ sub_580CE:
 
 sub_580D4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $594               ; "Young men these days are{N}lucky!  I wish I was young{N}again!{W1}"
 										rts
 
@@ -185,29 +185,29 @@ sub_580D4:
 
 sub_580DA:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2C6
+										trap    #CHECK_FLAG
+										dc.w $2C6               ; set after Oddler wanders down from the mountain
 										bne.s   loc_580FC
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $101
 										bne.s   loc_580F2
 										lea     cs_58116(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $101
 										bra.s   loc_580FA
 loc_580F2:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $597               ; "Whoa!  Mt. Volcano erupted!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $598               ; "It's an evil omen.{W1}"
 loc_580FA:
 										
 										bra.s   return_58100
 loc_580FC:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $5B7               ; "Oh, this is serious!{N}I hope he survives the night.{W1}"
 return_58100:
 										
@@ -220,7 +220,7 @@ return_58100:
 
 sub_58102:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $599               ; "Clank!  Clank!{N}All of our weapons are made{N}by me!{W2}{N}But, who uses them in this{N}peaceful country?{W1}"
 										rts
 
@@ -231,7 +231,7 @@ sub_58102:
 
 sub_58108:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $59A               ; "Hirsute?  'Cause I'm a{N}beastman.{W2}{N}I'm not hairy enough though.{N}I envy those hairy guys!{W1}"
 										rts
 
@@ -242,7 +242,7 @@ sub_58108:
 
 sub_5810E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $5B8               ; "Ah...stop...no!{N}I don't want...to see....{N}My...head...aches....{W1}"
 										rts
 
@@ -257,7 +257,7 @@ nullsub_116:
 
 	; End of function nullsub_116
 
-cs_58116:           dc.w 4                  ; 0004 SET TEXT INDEX 595 : "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
+cs_58116:           dc.w 4                  ; 0004 INIT TEXT CURSOR 595 : "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
 										dc.w $595
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89 : "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
 										dc.w $89

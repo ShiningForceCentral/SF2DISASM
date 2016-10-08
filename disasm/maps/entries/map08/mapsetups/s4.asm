@@ -71,15 +71,15 @@ word_561FC:         dc.w $50F
 
 sub_56246:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2C4
+										trap    #CHECK_FLAG
+										dc.w $2C4               ; set after the scene in Ribble where the mayor confronts Bowie
 										bne.s   loc_56256
 										move.w  #$546,d0
 										jsr     (DisplayText).w 
 										bra.s   return_5626A
 loc_56256:
 										
-										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
+										clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$1A8,d0
 										jsr     (DisplayText).w 
 										move.w  #$1B2,d0
@@ -95,8 +95,8 @@ return_5626A:
 
 sub_5626C:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2C4
+										trap    #CHECK_FLAG
+										dc.w $2C4               ; set after the scene in Ribble where the mayor confronts Bowie
 										bne.s   loc_56284
 										move.w  #$547,d0
 										jsr     (DisplayText).w 
@@ -105,7 +105,7 @@ sub_5626C:
 										bra.s   return_56298
 loc_56284:
 										
-										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
+										clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$1A8,d0
 										jsr     (DisplayText).w 
 										move.w  #$1B2,d0
@@ -131,15 +131,15 @@ sub_5629A:
 										jmp     (DisplayText).w 
 loc_562BA:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2DB
+										trap    #CHECK_FLAG
+										dc.w $2DB               ; set after you open the tree in Ribble with the wooden plank
 										bne.s   loc_562CA
 										move.w  #$54A,d0
 										jmp     (DisplayText).w 
 										dc.w $6014
 loc_562CA:
 										
-										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
+										clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$1A8,d0
 										jsr     (DisplayText).w 
 										move.w  #$1B2,d0

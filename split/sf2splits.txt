@@ -1543,7 +1543,7 @@
 #split	0x15A5A,0x15BB0,graphics/technical/windowlayouts/battleconfigwindowlayout.bin
 #split	0x1607C,0x160B5,graphics/technical/windowlayouts/nameentrywindowlayout.bin
 #split	0x160B5,0x16204,graphics/technical/windowlayouts/alphabetwindowlayout.bin
-#split	0x16204,0x1623A,graphics/technical/windowlayouts/alphabetendwindowwindowlayout.bin
+#split	0x16204,0x1623A,graphics/technical/windowlayouts/alphabetendwindowlayout.bin
 #split	0x16618,0x16658,graphics/technical/windowlayouts/timerwindowwindowlayout.bin
 #split	0x16A62,0x16EA6,graphics/technical/windowlayouts/memberstatswindowslayout.bin
 #split	0x16EA6,0x176A6,data/items/itemdefs.bin
@@ -1577,7 +1577,7 @@
 #split	0x28FBC,0x28FCC,data/technical/configurationmodeinputsequence.bin
 #split	0x28FF0,0x29002,data/technical/debugmodeinputsequence.bin
 #split	0x29002,0x29A02,graphics/technical/fonts/variablewidthfont.bin
-#split	0x29A02,0x2A9C2,graphics/technical/menus/menutiles.bin
+#split	0x29A02,0x2A9C2,graphics/technical/menus/mainmenutiles.bin
 #split	0x2A9C2,0x2ACF6,graphics/technical/menus/menutilesitem.bin
 #split	0x2ACF6,0x2B072,graphics/technical/menus/menutilesbattlefield.bin
 #split	0x2B072,0x2B418,graphics/technical/menus/menutileschurch.bin

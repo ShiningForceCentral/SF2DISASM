@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle20\cs_afterbattle :
 ; Cutscene after battle 20
-abcs_battle20:      dc.w 4                  ; 0004 SET TEXT INDEX A06 : "I'm {NAME;13}, an archer.{N}I had no idea how dangerous{N}this pond was.{W2}"
+abcs_battle20:      dc.w 4                  ; 0004 INIT TEXT CURSOR A06 : "I'm {NAME;13}, an archer.{N}I had no idea how dangerous{N}this pond was.{W2}"
 										dc.w $A06
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 33 2 6
 										dc.w $33

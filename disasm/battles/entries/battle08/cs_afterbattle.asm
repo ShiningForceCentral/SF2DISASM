@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle08\cs_afterbattle :
 ; Cutscene after battle 8
-abcs_battle08:      dc.w 4                  ; 0004 SET TEXT INDEX 9A4 : "Oh, my...hey!{N}Are you OK?!{W1}"
+abcs_battle08:      dc.w 4                  ; 0004 INIT TEXT CURSOR 9A4 : "Oh, my...hey!{N}Are you OK?!{W1}"
 										dc.w $9A4
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 48 8 20
 										dc.w $48

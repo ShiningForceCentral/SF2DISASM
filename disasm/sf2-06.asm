@@ -1,6 +1,6 @@
 
 ; GAME SECTION 06 :
-; Fonts, Menu Tiles, Text Decoding Functions, SEGA Logo, Game Staff, Conf/Debug modes, End Kiss Sequence, Script Huffman Trees, Scriptbanks
+; Fonts, Menu Tiles, Text Decoding Functions, SEGA Logo, Game Staff, Conf/Debug modes, End Kiss Sequence, Text Huffman Trees, Textbanks
 
 ; FREE SPACE : 6681 bytes.
 
@@ -25,8 +25,7 @@ j_HuffmanDecode:
 	; End of function j_HuffmanDecode
 
 p_VariableWidthFont:dc.l VariableWidthFont
-p_MenuTiles_Uncompressed:
-										dc.l MenuTiles_Uncompressed
+p_MainMenuTiles:    dc.l MenuTiles_Uncompressed
 p_MenuTiles_Item:   dc.l MenuTiles_Item
 p_MenuTiles_BattleField:
 										dc.l MenuTiles_BattleField
@@ -73,9 +72,9 @@ j_LoadTitleScreenFont:
 
 DisplaySegaLogo:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_INIT_DRIVER
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_CLEAR
 										jsr     (DisableDisplayAndVInt).w
 										jsr     (ClearVsramAndSprites).w
@@ -96,7 +95,7 @@ DisplaySegaLogo:
 										jsr     (DmaTilesViaFF8804).w
 										lea     SegaLogoPalette(pc), a0
 										lea     (PALETTE_1).l,a1
-										lea     (FFD080_Palette1bis).l,a2
+										lea     (PALETTE_1_BIS).l,a2
 										moveq   #7,d7
 loc_280AA:
 										
@@ -107,19 +106,19 @@ loc_280AA:
 										jsr     (Set_FFDE94_bit3).w
 										jsr     (EnableDisplayAndInterrupts).w
 										move.l  #InputSequence_ConfigurationMode,((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_CheckConfigurationModeCheat
 										move.l  #InputSequence_DebugMode,((dword_FFB1A0-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_CheckDebugModeCheat
-										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
-										bsr.w   sub_28F62
+										bsr.w   sub_28F62       
 										lea     byte_28BB8(pc), a0
 										nop
 										bsr.w   sub_28B12
@@ -151,11 +150,11 @@ loc_2812E:
 loc_28164:
 										
 										jsr     (WaitForVInt).w 
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
 										bne.w   loc_2818E
 										subq.w  #1,d0
 										bne.s   loc_28164
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_REMOVE
 										dc.l VInt_CheckConfigurationModeCheat
 										jsr     (FadeOutToBlack).w
@@ -169,7 +168,7 @@ loc_28164:
 
 CheckStartButtonAtSegaLogo:
 										
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
 										beq.s   loc_2812E       
 loc_2818E:
 										
@@ -214,7 +213,7 @@ loc_28B26:
 										subq.w  #8,a1
 										dbf     d7,loc_28B26
 										jsr     (WaitForVInt).w 
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
 										bne.s   loc_28B68
 										bra.s   sub_28B12
 loc_28B64:
@@ -1197,26 +1196,29 @@ LoadSegaLogoPalette:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Something related to P2 START during SEGA logo ... some kind of checksum calculation ?
+
 sub_28F62:
 										
 										jsr     (WaitForVInt).w 
-										btst    #7,((RAM_Input_Player2_StateA-$1000000)).w
+										btst    #INPUT_A_START_BIT,((P2_INPUT-$1000000)).w
 										beq.s   return_28F96
-										lea     ($1A4).w,a0
+										lea     (RomEndAddress).w,a0
+																						; get ROM end address 0x1FFFFF ?
 										move.l  (a0),d1
-										addq.l  #1,d1
+										addq.l  #1,d1           ; 0x200000
 										movea.l #$200,a0
-										sub.l   a0,d1
-										asr.l   #1,d1
+										sub.l   a0,d1           ; 0x1FFE00 ?
+										asr.l   #1,d1           ; 0xFFF80 ?
 										move.w  d1,d2
-										subq.w  #1,d2
+										subq.w  #1,d2           ; FFF7F ?
 										swap    d1
 										moveq   #0,d0
 loc_28F88:
 										
-										add.w   (a0)+,d0
-										dbf     d2,loc_28F88
-										dbf     d1,loc_28F88
+										add.w   (a0)+,d0        ; big ROM content sum stored in a RAM word
+										dbf     d2,loc_28F88    
+										dbf     d1,loc_28F88    
 										move.w  d0,((dword_FFB0A4-$1000000)).w
 return_28F96:
 										
@@ -1233,13 +1235,13 @@ VInt_CheckConfigurationModeCheat:
 										cmpi.b  #$FF,(a0)
 										bne.s   loc_28FAE
 										move.b  #$FF,((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_ITEM
 										rts
 loc_28FAE:
 										
 										move.b  (a0),d0
-										cmp.b   ((RAM_Input_Player1_StateA-$1000000)).w,d0
+										cmp.b   ((P1_INPUT-$1000000)).w,d0
 										bne.s   return_28FBA
 										addq.l  #1,((CONFIGURATION_MODE_SEQUENCE_POINTER-$1000000)).w
 return_28FBA:
@@ -1258,14 +1260,14 @@ VInt_CheckDebugModeCheat:
 										movea.l ((dword_FFB1A0-$1000000)).w,a0
 										cmpi.b  #$FF,(a0)
 										bne.s   loc_28FE2
-										move.b  #$FF,((RAM_DebugModeActivated-$1000000)).w
-										trap    #TRAP_SOUNDCOM
+										move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
 										rts
 loc_28FE2:
 										
 										move.b  (a0),d0
-										cmp.b   ((RAM_Input_Player1_StateA-$1000000)).w,d0
+										cmp.b   ((P1_INPUT-$1000000)).w,d0
 										bne.s   return_28FEE
 										addq.l  #1,((dword_FFB1A0-$1000000)).w
 return_28FEE:
@@ -1278,7 +1280,8 @@ InputSequence_DebugMode:
 										incbin "data/technical/debugmodeinputsequence.bin"
 VariableWidthFont:  incbin "graphics/technical/fonts/variablewidthfont.bin"
 MenuTiles_Uncompressed:
-										incbin "graphics/technical/menus/menutiles.bin"
+										incbin "graphics/technical/menus/mainmenutiles.bin"
+																						; uncompressed
 MenuTiles_Item:     incbin "graphics/technical/menus/menutilesitem.bin"
 MenuTiles_BattleField:
 										incbin "graphics/technical/menus/menutilesbattlefield.bin"
@@ -1304,24 +1307,24 @@ EndKissPictureSequence:
 										bsr.w   sub_2C642
 										move.w  #$168,d0
 										jsr     (Sleep).w       ; wait for 6 seconds
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										moveq   #7,d7
 loc_2C5A6:
 										
 										clr.l   (a0)+
 										dbf     d7,loc_2C5A6
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										clr.b   (byte_FFDFAB).l
 										jsr     (sub_19C8).w    
 										move.w  #$366,d0        ; wait for 14 seconds
 										jsr     (Sleep).w       
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										moveq   #$1F,d7
 loc_2C5CC:
 										
 										clr.l   (a0)+
 										dbf     d7,loc_2C5CC
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										clr.b   (byte_FFDFAB).l
 										jsr     (sub_19C8).w    
 										rts
@@ -1335,10 +1338,10 @@ sub_2C5E4:
 										
 										movem.l d0-a3,-(sp)
 										lea     (PALETTE_1).l,a0
-										lea     (FFD080_Palette1bis).l,a1
+										lea     (PALETTE_1_BIS).l,a1
 										move.w  #$80,d7 
 										jsr     (CopyBytes).w   
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										moveq   #7,d7
 loc_2C604:
 										
@@ -1356,7 +1359,7 @@ loc_2C61C:
 										andi.l  #$EEE0EEE,d0
 										move.l  d0,(a0)+
 										dbf     d7,loc_2C61C
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										clr.b   (byte_FFDFAB).l
 										jsr     (sub_19C8).w    
 										movem.l (sp)+,d0-a3
@@ -1370,12 +1373,12 @@ loc_2C61C:
 sub_2C642:
 										
 										move.w  #$BFF,d7
-										lea     (RAM_Start).l,a2
+										lea     (RAM_START).l,a2
 loc_2C64C:
 										
 										clr.l   (a2)+
 										dbf     d7,loc_2C64C
-										lea     (RAM_Start).l,a2
+										lea     (RAM_START).l,a2
 										lea     byte_2C6FC(pc), a3
 										moveq   #$3F,d7 
 loc_2C65E:
@@ -1414,10 +1417,10 @@ loc_2C6A4:
 										dbf     d5,loc_2C664
 										dbf     d6,loc_2C660
 										movem.l d0-a3,-(sp)
-										lea     (RAM_Start).l,a0
+										lea     (RAM_START).l,a0
 										move.w  #$600,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 										movem.l (sp)+,d0-a3
 										movem.l d0-a3,-(sp)
@@ -1425,7 +1428,7 @@ loc_2C6A4:
 										lea     (byte_FF0C00).l,a0
 										move.w  #$600,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 										movem.l (sp)+,d0-a3
 										cmpi.w  #$10,d7
@@ -1514,7 +1517,7 @@ LoadTitleScreenFont:
 										lea     ($B000).l,a1
 										move.w  #$800,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										lea     (byte_FFE000).l,a0
 										move.w  #$6200,d0
 										move.w  #$3FF,d7
@@ -1527,9 +1530,9 @@ loc_2C76E:
 										lea     ($E000).l,a1
 										move.w  #$380,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										lea     TitleScreenPalettes(pc), a0
-										lea     (PALETTE_4).l,a1
+										lea     (PALETTE_4_BIS).l,a1
 										moveq   #$20,d7 
 										jsr     (CopyBytes).w   
 										rts

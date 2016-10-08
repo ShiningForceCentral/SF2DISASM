@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle13\cs_afterbattle :
 ; Cutscene after battle 13
-abcs_battle13:      dc.w 4                  ; 0004 SET TEXT INDEX 9BF : "{NAME;10}, are you OK?  {NAME;10}!{W1}"
+abcs_battle13:      dc.w 4                  ; 0004 INIT TEXT CURSOR 9BF : "{NAME;10}, are you OK?  {NAME;10}!{W1}"
 										dc.w $9BF
 										dc.w 5                  ; 0005 PLAY SOUND 
 										dc.w $FD

@@ -6,7 +6,7 @@
 
 ms_map52_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2CA
 										beq.s   return_5C4EC
 
@@ -17,12 +17,12 @@ ms_map52_InitFunction:
 
 sub_5C4DC:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2C8
 										bne.s   return_5C4EC
 										lea     word_5C622(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2C8               ; set after Peter delivers his lines after the cliffs before Bedoe battle
 return_5C4EC:
 										
@@ -30,7 +30,7 @@ return_5C4EC:
 
 	; End of function sub_5C4DC
 
-word_5C4EE:         dc.w 4                  ; 0004 SET TEXT INDEX 575 : "Who are they?{W1}"
+word_5C4EE:         dc.w 4                  ; 0004 INIT TEXT CURSOR 575 : "Who are they?{W1}"
 										dc.w $575
 										dc.w $45                ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 										dc.w $30
@@ -228,7 +228,7 @@ word_5C622:         dc.w $19                ; 0019 SET ENTITY POS AND FACING 7 1
 										dc.b $16
 										dc.b 8
 										dc.b 0
-										dc.w 4                  ; 0004 SET TEXT INDEX 9BD : "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 9BD : "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"
 										dc.w $9BD
 										dc.w $39                ; 0039 FADE IN FROM BLACK
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 7 : "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"

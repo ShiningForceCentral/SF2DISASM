@@ -10,7 +10,7 @@ ms_map56_InitFunction:
 
 	; End of function ms_map56_InitFunction
 
-cs_6150A:           dc.w 4                  ; 0004 SET TEXT INDEX E14 : "Unbelievable!  You've{N}finally arrived.{W1}"
+cs_6150A:           dc.w 4                  ; 0004 INIT TEXT CURSOR E14 : "Unbelievable!  You've{N}finally arrived.{W1}"
 										dc.w $E14
 										dc.w $52                ; 0052 RELATED TO TWO ENTITIES 80 0
 										dc.w $80

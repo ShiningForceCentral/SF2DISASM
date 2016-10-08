@@ -23,11 +23,11 @@ ms_map67_ZoneEvents:dc.b $39
 
 sub_4FB24:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $208               ; Battle 20 completed
 										bne.s   return_4FB30
 										lea     cs_4FB64(pc), a0
-										trap    #TRAP_MAPSCRIPT
+										trap    #MAPSCRIPT
 return_4FB30:
 										
 										rts
@@ -39,10 +39,10 @@ return_4FB30:
 
 sub_4FB32:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2EF               ; set after Elric opens the passage to Devil's Tail
 										bne.s   return_4FB56
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $D                 ; Elric joined
 										beq.s   return_4FB56
 										move.w  #$D,d0
@@ -50,8 +50,8 @@ sub_4FB32:
 										tst.w   d1
 										beq.s   return_4FB56
 										lea     cs_4FC32(pc), a0
-										trap    #TRAP_MAPSCRIPT
-										trap    #TRAP_SETFLAG
+										trap    #MAPSCRIPT
+										trap    #SET_FLAG
 										dc.w $2EF               ; set after Elric opens the passage to Devil's Tail
 return_4FB56:
 										
@@ -70,7 +70,7 @@ sub_4FB58:
 
 	; End of function sub_4FB58
 
-cs_4FB64:           dc.w 4                  ; 0004 SET TEXT INDEX 9EF : "Wait!{W1}"
+cs_4FB64:           dc.w 4                  ; 0004 INIT TEXT CURSOR 9EF : "Wait!{W1}"
 										dc.w $9EF
 										dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 460CE
 										dc.b $1F
@@ -191,7 +191,7 @@ cs_4FB64:           dc.w 4                  ; 0004 SET TEXT INDEX 9EF : "Wait!{W
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 330B1601
 										dc.l $330B1601
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_4FC32:           dc.w 4                  ; 0004 SET TEXT INDEX A21 : "Fairy said, move this rock{N}in this manner, and...{W1}"
+cs_4FC32:           dc.w 4                  ; 0004 INIT TEXT CURSOR A21 : "Fairy said, move this rock{N}in this manner, and...{W1}"
 										dc.w $A21
 										dc.w $2B                ; 002B  D 39 19 1 FF
 										dc.w $D

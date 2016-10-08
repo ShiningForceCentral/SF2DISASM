@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle16\cs_beforebattle :
 ; Cutscene before battle 16
-bbcs_16:            dc.w 4                  ; 0004 SET TEXT INDEX 9D1 : "Huh?  The raft stopped!{W1}"
+bbcs_16:            dc.w 4                  ; 0004 INIT TEXT CURSOR 9D1 : "Huh?  The raft stopped!{W1}"
 										dc.w $9D1
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 31 9 A
 										dc.w $31

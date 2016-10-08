@@ -6,14 +6,14 @@
 
 ms_map14_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2BF
+										trap    #CHECK_FLAG
+										dc.w $2BF               ; set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
 										bne.s   return_58F28
 										lea     cs_58FA4(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2BF               ; set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
-										move.b  #$E,((RAM_EgressMapIdx-$1000000)).w
+										move.b  #$E,((EGRESS_MAP_INDEX-$1000000)).w
 return_58F28:
 										
 										rts

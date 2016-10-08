@@ -6,7 +6,7 @@
 
 ms_map1_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $15
 										beq.s   return_5E770
 										move.w  #$88,d0 
@@ -17,7 +17,7 @@ return_5E770:
 
 	; End of function ms_map1_InitFunction
 
-cs_5E772:           dc.w 4                  ; 0004 SET TEXT INDEX E41 : "I feel...a power returning{N}me to human.{W2}"
+cs_5E772:           dc.w 4                  ; 0004 INIT TEXT CURSOR E41 : "I feel...a power returning{N}me to human.{W2}"
 										dc.w $E41
 										dc.b $80                ; WAIT 1E
 										dc.b $1E

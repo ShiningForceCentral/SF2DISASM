@@ -24,10 +24,10 @@ ms_map30_EntityEvents:
 
 sub_5A224:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2F8
 										bne.s   loc_5A230
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6A9               ; "We came from Grans to look{N}for Mithril.{W1}"
 										bra.s   return_5A234
 loc_5A230:
@@ -44,9 +44,9 @@ return_5A234:
 
 sub_5A236:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6AA               ; "Recent earthquakes have{N}buried the tunnel.{W2}{N}My friend is sick now, and{N}we can't dig out the tunnel{N}without him.{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2F7               ; set after talking to one of the dwarves in the mine near the Fairy Woods
 										rts
 
@@ -59,11 +59,11 @@ sub_5A240:
 										
 										lea     cs_5A256(pc), a0
 										trap    #6
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6AB               ; "(Shiver)...cold...{N}Oh...I'm so cold....{W1}"
 										lea     cs_5A256(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2F7               ; set after talking to one of the dwarves in the mine near the Fairy Woods
 										rts
 
@@ -77,17 +77,17 @@ cs_5A256:           dc.w $2A                ; 002A MAKE ENTITY SHIVER 82
 
 sub_5A25C:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2F9
 										bne.s   loc_5A26C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6AC               ; "One of us went to look for{N}the fairy.{W2}{N}I hope he's alright.{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2F7               ; set after talking to one of the dwarves in the mine near the Fairy Woods
 										bra.s   return_5A270
 loc_5A26C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6AE               ; "Hey, visit us in the Dwarven{N}Village when you come to{N}Grans!{W1}"
 return_5A270:
 										
@@ -100,7 +100,7 @@ return_5A270:
 
 sub_5A272:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6AD               ; "Dig, dig!{N}Hey hoo, hey hoo!{W2}{N}To Grans we are a diggin'!{N}Hey hoo, hey hoo!{W1}"
 return_5A276:
 										
@@ -113,16 +113,16 @@ return_5A276:
 
 sub_5A278:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6BE               ; "Thanks to you, he recovered.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6BF               ; "We all thank you.{N}Take this gift.{W1}"
 										moveq   #0,d0
 										moveq   #0,d1
 										jsr     j_GetItemAndNumberOfItems
 										cmpi.w  #4,d2
 										bne.s   loc_5A296
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6C1               ; "Oh, your hands are full.{N}I'll give it to you later.{W1}"
 										bra.s   return_5A2C0
 loc_5A296:
@@ -130,17 +130,17 @@ loc_5A296:
 										moveq   #0,d0
 										moveq   #$72,d1 
 										jsr     j_AddItem
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6C0               ; "{LEADER} is given a{N}Cannon.{W1}"
 										moveq   #$64,d0 
 										jsr     (Sleep).w       
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2F9               ; set after the dwarf gives Bowie the cannon
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_PLAY_PREVIOUS_MUSIC
 										lea     cs_5A4FE(pc), a0
 										trap    #6

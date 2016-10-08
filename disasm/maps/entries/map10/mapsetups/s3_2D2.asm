@@ -12,15 +12,15 @@ ms_map10_flag2D2_ZoneEvents:
 
 sub_56FC8:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $D
+										trap    #CHECK_FLAG
+										dc.w $D                 ; Elric joined
 										bne.s   return_56FDE
-										trap    #TRAP_CHECKFLAG
-										dc.w $2D4
+										trap    #CHECK_FLAG
+										dc.w $2D4               ; set after the scene where Skreech falls in Bedoe
 										bne.s   return_56FDE
 										lea     cs_5779C(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2D4               ; set after the scene where Skreech falls in Bedoe
 return_56FDE:
 										

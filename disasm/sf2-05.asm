@@ -1,6 +1,6 @@
 
 ; GAME SECTION 05 :
-; Battle Engine, Special Sprites, Shop/Church/Blacksmith/Caravan engine
+; Battle Engine, Special Sprites, Shop/Church/Blacksmith/Caravan engine, Battle Engine, Exploration Engine, Special Sprites
 
 ; FREE SPACE : 626 bytes.
 
@@ -10,7 +10,7 @@
 
 j_ShopActions:
 										
-										jmp     ShopActions(pc)
+										jmp     ShopMenuActions(pc)
 
 	; End of function j_ShopActions
 
@@ -19,7 +19,7 @@ j_ShopActions:
 
 j_ChurchActions:
 										
-										jmp     ChurchActions(pc)
+										jmp     ChurchMenuActions(pc)
 
 	; End of function j_ChurchActions
 
@@ -46,7 +46,7 @@ j_BlacksmithActions:
 
 j_CaravanActions:
 										
-										jmp     CaravanActions(pc)
+										jmp     CaravanMenuActions(pc)
 
 	; End of function j_CaravanActions
 
@@ -163,7 +163,7 @@ j_GetEntityIndex:
 
 j_FadeOut_WaitForP2Input:
 										
-										jmp     FadeOut_WaitForP2Input(pc)
+										jmp     FadeOut_WaitForP1Input(pc)
 
 	; End of function j_FadeOut_WaitForP2Input
 
@@ -233,7 +233,7 @@ j_SuspendGame:
 
 ; =============== S U B R O U T I N E =======================================
 
-ShopActions:
+ShopMenuActions:
 										
 										movem.l d0-a5,-(sp)
 										link    a6,#-$16
@@ -243,9 +243,9 @@ ShopActions:
 										jsr     j_InitPortraitWindow
 loc_2007A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $9E                ; "What's up, boy!{N}We guarantee all items to{N}be in good condition!{D3}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 loc_20088:
@@ -266,9 +266,9 @@ loc_200A2:
 										jsr     j_InitPortraitWindow
 loc_200B0:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A1                ; "{CLEAR}Thank you!  Come again!{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 										unlk    a6
@@ -280,7 +280,7 @@ loc_200C6:
 										bne.w   loc_202CA
 loc_200CE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A2                ; "What do you want to buy?"
 										jsr     sub_207E6(pc)
 										nop
@@ -291,17 +291,17 @@ loc_200CE:
 										move.w  d0,d1
 										jsr     j_GetItemDefAddress
 										move.w  6(a0),-4(a6)
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										clr.l   ((RAM_Dialog_NumberToPrint-$1000000)).w
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										clr.l   ((TEXT_NUMBER-$1000000)).w
 										move.w  -4(a6),((word_FFB778-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A3                ; "The {ITEM} costs{N}{#} gold coins.{N}OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_20120
 loc_20118:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A4                ; "{CLEAR}Oh...shucks!{W2}"
 										bra.w   loc_202C2
 loc_20120:
@@ -312,26 +312,26 @@ loc_20120:
 										move.w  -4(a6),d0
 										cmp.l   d0,d1
 										bcc.s   loc_2013C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A5                ; "You need more money to buy{N}it.{W2}"
 										bra.w   loc_202C2
 loc_2013C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A6                ; "Who gets it?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_UpdateForce
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,((word_FFB12E-$1000000)).w
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										lea     ((byte_FFB0AE-$1000000)).w,a1
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.b  #1,d7
 loc_2015E:
 										
 										move.b  (a0)+,(a1)+
 										dbf     d7,loc_2015E
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.w  -$C(a6),((word_FFB13A-$1000000)).w
 										move.b  #0,((byte_FFB13C-$1000000)).w
@@ -343,8 +343,8 @@ loc_2015E:
 										jsr     j_GetItemAndNumberOfItems
 										cmpi.w  #4,d2
 										bcs.s   loc_201AC
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $A8                ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
@@ -360,8 +360,8 @@ loc_201AC:
 										move.w  -$A(a6),d0
 										jsr     j_IsWeaponOrRingEquippable
 										bcs.s   loc_201E4
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $A7                ; "{NAME} can't be{N}equipped with it.  OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
@@ -378,7 +378,7 @@ loc_201E4:
 										move.w  -$A(a6),d0
 										jsr     j_IsWeaponOrRingEquippable
 										bcc.w   loc_202BE
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $AD                ; "{CLEAR}Equip it now?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
@@ -395,8 +395,8 @@ loc_201E4:
 										jsr     j_UnequipItemIfNotCursed
 										cmpi.w  #2,d2
 										bne.w   loc_2028A
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_202BE
 loc_2025E:
@@ -409,8 +409,8 @@ loc_2025E:
 										jsr     j_UnequipItemIfNotCursed
 										cmpi.w  #2,d2
 										bne.w   loc_2028A
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_202BE
 loc_2028A:
@@ -422,28 +422,28 @@ loc_2028A:
 										jsr     j_EquipItem
 										cmpi.w  #2,d2
 										bne.s   loc_202B8
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM  ; cursed item
-										jsr     WaitForMusicResumeAndPlayerInput_1(pc)
+										jsr     WaitForMusicResumeAndPlayerInput_Shop(pc)
 										nop
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $AF                ; "Gee, {NAME} gets{N}cursed.{W2}"
 										bra.s   loc_202BC
 loc_202B8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $AE                ; "Ah, it suits you!{W2}"
 loc_202BC:
 										
 										bra.s   loc_202C2
 loc_202BE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A9                ; "{CLEAR}Here ya go!{N}Use it wisely!{W2}"
 loc_202C2:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_200CE
 loc_202CA:
@@ -452,21 +452,21 @@ loc_202CA:
 										bne.w   loc_20442
 loc_202D2:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B1                ; "Whose and which item do{N}you want to sell?{D3}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_UpdateForce
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,((word_FFB12E-$1000000)).w
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										lea     ((byte_FFB0AE-$1000000)).w,a1
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.b  #1,d7
 loc_202F4:
 										
 										move.b  (a0)+,(a1)+
 										dbf     d7,loc_202F4
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.b  #1,((byte_FFB13C-$1000000)).w
 										move.w  #$7F,((word_FFB13A-$1000000)).w 
@@ -490,30 +490,30 @@ loc_202F4:
 										andi.b  #ITEMTYPE_MASK_UNSELLABLE,d1
 										cmpi.b  #0,d1
 										beq.s   loc_20364
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B4                ; "{CLEAR}Sorry, I can't buy that....{W2}"
 										bra.w   loc_2043A
 loc_20364:
 										
-										move.l  -8(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
+										move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
 										move.b  -$14(a6),d1
 										andi.b  #ITEMTYPE_MASK_RARE,d1
 										cmpi.b  #0,d1
 										beq.s   loc_20384
 										move.w  #1,-$16(a6)
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B7                ; "Wow, it's a rare bird.{N}I'll pay {#} gold coins{N}for it. OK?"
 										bra.s   loc_20388
 loc_20384:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B2                ; "I'll pay {#} gold coins{N}for it, OK?"
 loc_20388:
 										
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_2039C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B3                ; "{CLEAR}Too bad.{W2}"
 										bra.w   loc_2043A
 loc_2039C:
@@ -531,7 +531,7 @@ loc_2039C:
 										move.w  -$C(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_2040C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B8                ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
 										bra.w   loc_2043A
 loc_203DC:
@@ -545,7 +545,7 @@ loc_203DC:
 										move.w  -$C(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_2040C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B8                ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
 										bra.w   loc_2043A
 loc_2040C:
@@ -561,11 +561,11 @@ loc_2040C:
 										jsr     j_AddItemToDeals
 loc_20436:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B5                ; "{CLEAR}Yeah, I got it.{W2}"
 loc_2043A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_202D2
 loc_20442:
@@ -574,21 +574,21 @@ loc_20442:
 										bne.w   loc_205B4
 loc_2044A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $BA                ; "Whose and which item{N}should I repair?{D1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_UpdateForce
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,((word_FFB12E-$1000000)).w
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										lea     ((byte_FFB0AE-$1000000)).w,a1
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.b  #1,d7
 loc_2046C:
 										
 										move.b  (a0)+,(a1)+
 										dbf     d7,loc_2046C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.b  #1,((byte_FFB13C-$1000000)).w
 										move.w  #$7F,((word_FFB13A-$1000000)).w 
@@ -612,19 +612,19 @@ loc_2046C:
 										move.w  (a0),d2
 										btst    #$F,d2
 										bne.w   loc_204DC
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $BC                ; "It's not damaged.{W2}"
 										bra.w   loc_205AC
 loc_204DC:
 										
-										clr.l   ((RAM_Dialog_NumberToPrint-$1000000)).w
+										clr.l   ((TEXT_NUMBER-$1000000)).w
 										move.w  -4(a6),((word_FFB778-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $BB                ; "{CLEAR}Will you pay {#} gold{N}coins to repair it?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_204FE
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B3                ; "{CLEAR}Too bad.{W2}"
 										bra.w   loc_205AC
 loc_204FE:
@@ -635,7 +635,7 @@ loc_204FE:
 										move.w  -4(a6),d0
 										cmp.l   d0,d1
 										bcc.s   loc_2051A
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $BD                ; "You don't have enough{N}money...{W2}"
 										bra.w   loc_205AC
 loc_2051A:
@@ -653,7 +653,7 @@ loc_2051A:
 										move.w  -$C(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_2058A
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $BE                ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
 										bra.w   loc_205AC
 loc_2055A:
@@ -667,7 +667,7 @@ loc_2055A:
 										move.w  -$C(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_2058A
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $BE                ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
 										bra.w   loc_205AC
 loc_2058A:
@@ -678,13 +678,13 @@ loc_2058A:
 										move.w  -$A(a6),d0
 										move.w  -$E(a6),d1
 										jsr     j_RepairItemBySlot
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $BF                ; "{CLEAR}OK, one moment please!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C0                ; "{CLEAR}Here you go!{N}Beautiful, huh?{W2}"
 loc_205AC:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_2044A
 loc_205B4:
@@ -693,12 +693,12 @@ loc_205B4:
 										nop
 										tst.w   ((word_FFB12E-$1000000)).w
 										bne.s   loc_205C8
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $AC                ; "I'm very sorry!{N}I'm out of stock!{W2}"
 										bra.w   loc_207CC
 loc_205C8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $AB                ; "You must be surprised!{D1}{N}What would you like?"
 										jsr     sub_1004C
 										cmpi.w  #$FFFF,d0
@@ -707,17 +707,17 @@ loc_205C8:
 										move.w  d0,d1
 										jsr     j_GetItemDefAddress
 										move.w  6(a0),-4(a6)
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										clr.l   ((RAM_Dialog_NumberToPrint-$1000000)).w
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										clr.l   ((TEXT_NUMBER-$1000000)).w
 										move.w  -4(a6),((word_FFB778-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A3                ; "The {ITEM} costs{N}{#} gold coins.{N}OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_20614
 loc_2060C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A4                ; "{CLEAR}Oh...shucks!{W2}"
 										bra.w   loc_207C4
 loc_20614:
@@ -728,26 +728,26 @@ loc_20614:
 										move.w  -4(a6),d0
 										cmp.l   d0,d1
 										bcc.s   loc_20630
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A5                ; "You need more money to buy{N}it.{W2}"
 										bra.w   loc_207C4
 loc_20630:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A6                ; "Who gets it?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_UpdateForce
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,((word_FFB12E-$1000000)).w
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										lea     ((byte_FFB0AE-$1000000)).w,a1
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.b  #1,d7
 loc_20652:
 										
 										move.b  (a0)+,(a1)+
 										dbf     d7,loc_20652
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.w  -$C(a6),((word_FFB13A-$1000000)).w
 										move.b  #0,((byte_FFB13C-$1000000)).w
@@ -759,8 +759,8 @@ loc_20652:
 										jsr     j_GetItemAndNumberOfItems
 										cmpi.w  #4,d2
 										bcs.s   loc_206A0
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $A8                ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
@@ -776,8 +776,8 @@ loc_206A0:
 										move.w  -$A(a6),d0
 										jsr     j_IsWeaponOrRingEquippable
 										bcs.s   loc_206D8
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $A7                ; "{NAME} can't be{N}equipped with it.  OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
@@ -796,7 +796,7 @@ loc_206D8:
 										move.w  -$A(a6),d0
 										jsr     j_IsWeaponOrRingEquippable
 										bcc.w   loc_207C0
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $AD                ; "{CLEAR}Equip it now?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
@@ -813,8 +813,8 @@ loc_206D8:
 										jsr     j_UnequipItemIfNotCursed
 										cmpi.w  #2,d2
 										bne.w   loc_20788
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_207C0
 loc_2075C:
@@ -827,8 +827,8 @@ loc_2075C:
 										jsr     j_UnequipItemIfNotCursed
 										cmpi.w  #2,d2
 										bne.w   loc_20788
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_207C0
 loc_20788:
@@ -840,44 +840,44 @@ loc_20788:
 										jsr     j_EquipItem
 										cmpi.w  #2,d2
 										bne.s   loc_207BA
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										jsr     WaitForMusicResumeAndPlayerInput_1(pc)
+										jsr     WaitForMusicResumeAndPlayerInput_Shop(pc)
 										nop
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $AF                ; "Gee, {NAME} gets{N}cursed.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.s   loc_207BE
 loc_207BA:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $AE                ; "Ah, it suits you!{W2}"
 loc_207BE:
 										
 										bra.s   loc_207C4
 loc_207C0:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A9                ; "{CLEAR}Here ya go!{N}Use it wisely!{W2}"
 loc_207C4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_205B4
 loc_207CC:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_20088
 
-	; End of function ShopActions
+	; End of function ShopMenuActions
 
 
 ; =============== S U B R O U T I N E =======================================
 
-WaitForMusicResumeAndPlayerInput_1:
+WaitForMusicResumeAndPlayerInput_Shop:
 										
 										move.w  d0,-(sp)
 										move.w  #$FB,d0 
@@ -886,7 +886,7 @@ WaitForMusicResumeAndPlayerInput_1:
 										move.w  (sp)+,d0
 										rts
 
-	; End of function WaitForMusicResumeAndPlayerInput_1
+	; End of function WaitForMusicResumeAndPlayerInput_Shop
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -968,7 +968,7 @@ GetCurrentShopDefAddress:
 										movem.l d0/d7,-(sp)
 										lea     ShopItems(pc), a0
 										clr.w   d7
-										move.b  (RAM_CurrentShopIdx).l,d7
+										move.b  (CURRENT_SHOP_INDEX).l,d7
 										subq.b  #1,d7
 										bcs.w   loc_20872
 										clr.w   d0
@@ -985,11 +985,10 @@ loc_20872:
 	; End of function GetCurrentShopDefAddress
 
 ShopItems:          incbin "data/items/shopitems.bin"
-																						; related to shop index
 
 ; =============== S U B R O U T I N E =======================================
 
-ChurchActions:
+ChurchMenuActions:
 										
 										movem.l d0-a5,-(sp)
 										link    a6,#-$24
@@ -999,9 +998,9 @@ ChurchActions:
 										jsr     j_InitPortraitWindow
 loc_20A18:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6E                ; "Welcome!{W2}{N}Your desire will be fulfilled!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 loc_20A26:
@@ -1022,9 +1021,9 @@ loc_20A40:
 										jsr     j_InitPortraitWindow
 loc_20A4E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $71                ; "{CLEAR}Be careful.  The light{N}is always on your side.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 										unlk    a6
@@ -1034,7 +1033,7 @@ loc_20A64:
 										
 										cmpi.w  #0,d0
 										bne.w   loc_20B58
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $76                ; "Let me investigate all{N}of you.{W2}"
 										bsr.w   Church_GetCurrentForceMemberInfo
 										clr.w   -$E(a6)
@@ -1047,8 +1046,8 @@ loc_20A78:
 										tst.w   d1
 										bhi.w   loc_20B42
 										addi.w  #1,-$E(a6)
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $81                ; "Gosh!  {NAME} is{N}exhausted!{W2}"
 										jsr     j_GetCurrentLevel
 										mulu.w  #$A,d1
@@ -1061,15 +1060,15 @@ loc_20A78:
 										addi.l  #$C8,-8(a6) 
 loc_20AC8:
 										
-										move.l  -8(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $82                ; "But I can recall the soul.{W2}{N}It will cost {#} gold{N}coins.  OK?"
 										jsr     sub_10050
 										jsr     j_YesNoChoiceBox
 										jsr     sub_10058
 										cmpi.w  #0,d0
 										beq.w   loc_20AF4
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7C                ; "You don't need my help?{W2}"
 										bra.w   loc_20B42
 loc_20AF4:
@@ -1079,7 +1078,7 @@ loc_20AF4:
 										move.l  -8(a6),d0
 										cmp.l   d0,d1
 										bcc.s   loc_20B0C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 										bra.s   loc_20B42
 loc_20B0C:
@@ -1090,28 +1089,28 @@ loc_20B0C:
 										move.w  -$C(a6),d0
 										move.w  #$C8,d1 
 										jsr     j_IncreaseCurrentHP
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_REVIVE
-										jsr     WaitForMusicResumeAndPlayerInput_2(pc)
+										jsr     WaitForMusicResumeAndPlayerInput(pc)
 										nop
 										move.w  -$C(a6),d0
 										bsr.w   sub_2124A
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $83                ; "{NAME} is revived!{W2}"
 loc_20B42:
 										
 										dbf     d7,loc_20A78
 										cmpi.w  #0,-$E(a6)
 										bne.w   loc_21028
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $80                ; "Nobody is dead.{W2}"
 										bra.w   loc_21028
 loc_20B58:
 										
 										cmpi.w  #1,d0
 										bne.w   loc_20D3A
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $76                ; "Let me investigate all{N}of you.{W2}"
 										bsr.w   Church_GetCurrentForceMemberInfo
 										clr.w   -$10(a6)
@@ -1130,19 +1129,19 @@ loc_20B74:
 										andi.w  #2,d3
 										beq.w   loc_20C24
 										addi.w  #1,-$10(a6)
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $79                ; "Gosh!  {NAME} is{N}poisoned!{W2}"
 										move.l  #$A,-8(a6)
-										move.l  -8(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $7B                ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
 										jsr     sub_10050
 										jsr     j_YesNoChoiceBox
 										jsr     sub_10058
 										cmpi.w  #0,d0
 										beq.w   loc_20BDA
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7C                ; "You don't need my help?{W2}"
 										bra.w   loc_20C24
 loc_20BDA:
@@ -1152,7 +1151,7 @@ loc_20BDA:
 										move.l  -8(a6),d0
 										cmp.l   d0,d1
 										bcc.s   loc_20BF4
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 										clr.w   d7
 										bra.s   loc_20C24
@@ -1165,12 +1164,12 @@ loc_20BF4:
 										move.w  d2,d1
 										andi.w  #$FFFD,d1
 										jsr     j_SetStatus
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURE
-										jsr     WaitForMusicResumeAndPlayerInput_2(pc)
+										jsr     WaitForMusicResumeAndPlayerInput(pc)
 										nop
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $7E                ; "{NAME} is no longer{N}poisoned.{W2}"
 loc_20C24:
 										
@@ -1178,7 +1177,7 @@ loc_20C24:
 										dbf     d7,loc_20B74
 										cmpi.w  #0,-$10(a6)
 										bne.w   loc_20C3A
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $77                ; "Nobody is poisoned.{W2}"
 loc_20C3A:
 										
@@ -1196,8 +1195,8 @@ loc_20C42:
 										andi.w  #4,d2
 										beq.w   loc_20D20
 										addi.w  #1,-$12(a6)
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $7A                ; "Gosh!  {NAME} is{N}cursed!{W2}"
 										clr.w   d1
 										jsr     j_GetItemAndNumberOfItems
@@ -1220,15 +1219,15 @@ loc_20CA8:
 										
 										dbf     d6,loc_20C86
 										move.l  d3,-8(a6)
-										move.l  -8(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $7B                ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
 										jsr     sub_10050
 										jsr     j_YesNoChoiceBox
 										jsr     sub_10058
 										cmpi.w  #0,d0
 										beq.w   loc_20CDC
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7C                ; "You don't need my help?{W2}"
 										bra.w   loc_20D20
 loc_20CDC:
@@ -1238,7 +1237,7 @@ loc_20CDC:
 										move.l  -8(a6),d0
 										cmp.l   d0,d1
 										bcc.s   loc_20CF6
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 										clr.w   d7
 										bra.s   loc_20D20
@@ -1249,12 +1248,12 @@ loc_20CF6:
 										jsr     j_DecreaseGold
 										move.w  -$C(a6),d0
 										jsr     j_UnequipAllItemsIfNotCursed
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURE
-										jsr     WaitForMusicResumeAndPlayerInput_2(pc)
+										jsr     WaitForMusicResumeAndPlayerInput(pc)
 										nop
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $7F                ; "{NAME} is no longer{N}cursed.{W2}"
 loc_20D20:
 										
@@ -1262,32 +1261,32 @@ loc_20D20:
 										dbf     d7,loc_20C42
 										cmpi.w  #0,-$12(a6)
 										bne.w   loc_21028
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $78                ; "Nobody is cursed.{W2}"
 										bra.w   loc_21028
 loc_20D3A:
 										
 										cmpi.w  #2,d0
 										bne.w   loc_20FCC
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $76                ; "Let me investigate all{N}of you.{W2}"
 										bsr.w   sub_21072
 										cmpi.w  #0,-$16(a6)
 										bne.w   loc_20D5C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $87                ; "{CLEAR}Well, nobody can be{N}promoted now.{W2}"
 										bra.w   loc_21028
 loc_20D5C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $88                ; "{CLEAR}Who do you want to{N}promote?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.b  #0,((byte_FFB13C-$1000000)).w
 										jsr     sub_10040
 										cmpi.w  #$FFFF,d0
 										bne.w   loc_20D80
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $89                ; "Oh, I'm wrong.{W2}"
 										bra.w   loc_21028
 loc_20D80:
@@ -1299,8 +1298,8 @@ loc_20D80:
 										bsr.w   sub_210D0
 										cmpi.w  #0,-$24(a6)
 										beq.w   loc_20DAE
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $8E                ; "Hmmm...{D1} {NAME} had{N}better remain the current{N}class.{W2}"
 										bra.w   loc_20FC8
 loc_20DAE:
@@ -1308,20 +1307,20 @@ loc_20DAE:
 										jsr     j_GetCurrentLevel
 										cmpi.w  #$14,d1
 										bcc.w   loc_20DCA
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $8A                ; "Hmmm...{NAME} needs{N}more experience!{W2}"
 										bra.w   loc_20FC8
 loc_20DCA:
 										
 										clr.w   -$1C(a6)
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $8B                ; "{NAME} wants to be{N}promoted to the a fighting{N}class, right?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.w   loc_20DEE
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $89                ; "Oh, I'm wrong.{W2}"
 										bra.w   loc_20FC8
 loc_20DEE:
@@ -1341,8 +1340,8 @@ loc_20E18:
 										
 										move.b  (a0)+,-$1E(a6)
 										dbf     d7,loc_20E18
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d6
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d6
 										subq.w  #1,d6
 loc_20E2A:
 										
@@ -1381,25 +1380,25 @@ loc_20E7C:
 										move.b  (a0)+,d0
 										dbf     d7,loc_20E7C
 										move.w  d0,-$1C(a6)
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -$1E(a6),((RAM_Dialogue_NameIdx3-$1000000)).w
-										move.w  -$1C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -$1E(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+										move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $8F                ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $93                ; "OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.w   loc_20EB6
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $90                ; "Then"
 										bra.w   loc_20EEA
 loc_20EB6:
 										
 										cmpi.w  #CLASSIDX_SORC,-$1C(a6)
 										bne.w   loc_20ED8
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $91                ; "{NAME} loses all spells{N}that were learned.{N}OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
@@ -1426,19 +1425,19 @@ loc_20F08:
 										move.b  (a0)+,d0
 										dbf     d7,loc_20F08
 										move.w  d0,-$1C(a6)
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -$1C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $92                ; "{NAME} can be promoted{N}to {CLASS}.{N}OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										bne.w   loc_20FC8
 loc_20F30:
 										
-										move.w  -$1A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										move.w  -$1C(a6),((RAM_Dialogue_NameIdx3-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$1A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -$C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										move.w  -$1C(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $8C                ; "Now, let me conduct the{N}rite.{D1}  The light blesses...{N}{D1}{CLASS} {NAME}...{W2}{N}with a class of {CLASS}!{W2}"
 										move.w  -$C(a6),d0
 										move.w  -$1C(a6),d1
@@ -1463,15 +1462,15 @@ loc_20F7A:
 										jsr     j_UnequipWeapon
 loc_20F90:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_PROMOTION
-										jsr     WaitForMusicResumeAndPlayerInput_2(pc)
+										jsr     WaitForMusicResumeAndPlayerInput(pc)
 										nop
 										move.w  -$C(a6),d0
 										bsr.w   sub_2124A
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -$1C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $8D                ; "{NAME} was successfully{N}promoted to {CLASS}.{W2}"
 										move.w  -$C(a6),d0
 										move.b  #1,d1
@@ -1483,51 +1482,51 @@ loc_20FC8:
 										bra.w   loc_20D5C
 loc_20FCC:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $72                ; "May I record your adventure{N}now?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.w   loc_20FE6
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7C                ; "You don't need my help?{W2}"
 										bra.w   loc_21028
 loc_20FE6:
 										
-										move.b  ((CURRENT_MAP-$1000000)).w,((RAM_EgressMapIdx-$1000000)).w
+										move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP_INDEX-$1000000)).w
 										move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $18F               ; set after first battle's cutscene OR first save? Checked at witch screens
 										jsr     (SaveGame).w
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_SAVE         ; save jingle
-										jsr     WaitForMusicResumeAndPlayerInput_2(pc)
+										jsr     WaitForMusicResumeAndPlayerInput(pc)
 										nop
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $73                ; "{CLEAR}The light allows you to{N}resume your adventure!{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $74                ; "{CLEAR}Will you continue your{N}adventure?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.w   loc_20A40
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $75                ; "{CLEAR}Then, take a rest before{N}you continue.{W1}"
 										jsr     (FadeOutToBlack).w
 										jmp     (WitchSuspend).w
 										bra.w   *+4
 loc_21028:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $70                ; "{CLEAR}Do you have another desire?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										bne.w   loc_20A40
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_20A26
 
-	; End of function ChurchActions
+	; End of function ChurchMenuActions
 
 Promotions:         incbin "data/allies/promotions.bin"
 
@@ -1538,9 +1537,9 @@ sub_21072:
 										movem.l d7-a1,-(sp)
 										jsr     j_UpdateForce
 										clr.w   -$16(a6)
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,((word_FFB12E-$1000000)).w
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										lea     ((byte_FFB0AE-$1000000)).w,a1
 										subq.b  #1,d7
 loc_21094:
@@ -1648,9 +1647,9 @@ loc_2113E:
 Church_GetCurrentForceMemberInfo:
 										
 										jsr     j_UpdateForce
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,-$A(a6)
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,-$A(a6)
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.b  #1,d7
 										rts
 
@@ -1675,19 +1674,19 @@ loc_21170:
 										andi.w  #1,d3
 										beq.w   loc_21220
 										addi.w  #1,-$18(a6)
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $84                ; "Gosh!  {NAME} is{N}paralyzed.{W2}"
 										move.l  #$14,-8(a6)
-										move.l  -8(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $7B                ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
 										jsr     sub_10050
 										jsr     j_YesNoChoiceBox
 										jsr     sub_10058
 										cmpi.w  #0,d0
 										beq.w   loc_211D6
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7C                ; "You don't need my help?{W2}"
 										bra.w   loc_21220
 loc_211D6:
@@ -1697,7 +1696,7 @@ loc_211D6:
 										move.l  -8(a6),d0
 										cmp.l   d0,d1
 										bcc.s   loc_211F0
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 										clr.w   d7
 										bra.s   loc_21220
@@ -1710,12 +1709,12 @@ loc_211F0:
 										move.w  d2,d1
 										andi.w  #$FFFE,d1
 										jsr     j_SetStatus
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURE
-										jsr     WaitForMusicResumeAndPlayerInput_2(pc)
+										jsr     WaitForMusicResumeAndPlayerInput(pc)
 										nop
-										move.w  -$C(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $85                ; "{NAME} is no longer{N}paralyzed.{W2}"
 loc_21220:
 										
@@ -1723,7 +1722,7 @@ loc_21220:
 										dbf     d7,loc_21170
 										cmpi.w  #0,-$18(a6)
 										bne.w   return_21236
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $86                ; "Nobody is paralyzed.{W2}"
 return_21236:
 										
@@ -1734,7 +1733,7 @@ return_21236:
 
 ; =============== S U B R O U T I N E =======================================
 
-WaitForMusicResumeAndPlayerInput_2:
+WaitForMusicResumeAndPlayerInput:
 										
 										move.w  d0,-(sp)
 										move.w  #$FB,d0 
@@ -1743,7 +1742,7 @@ WaitForMusicResumeAndPlayerInput_2:
 										move.w  (sp)+,d0
 										rts
 
-	; End of function WaitForMusicResumeAndPlayerInput_2
+	; End of function WaitForMusicResumeAndPlayerInput
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1803,7 +1802,7 @@ loc_212A8:
 										cmpi.w  #0,d0
 										bne.w   loc_212D8
 										bsr.w   sub_219EC       
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 loc_212B8:
 										
@@ -1837,22 +1836,22 @@ loc_212E0:
 										move.l  d1,-$20(a6)
 										cmpi.w  #2,-$1C(a6)
 										beq.w   loc_213A8
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -$1C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										move.l  -$20(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										move.l  -$20(a6),((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $F3                ; "{NAME} cast{N}{SPELL} level {#}!"
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										cmpi.w  #$A,-$1C(a6)
 										beq.w   loc_21354
 loc_21348:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $138               ; "But nothing happened."
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_21478
 loc_21354:
@@ -1871,9 +1870,9 @@ loc_21366:
 										move.w  -4(a6),d0
 										jsr     j_DecreaseCurrentMP
 										jsr     j_ExecuteFlashScreenScript
-										move.b  ((RAM_EgressMapIdx-$1000000)).w,d0
+										move.b  ((EGRESS_MAP_INDEX-$1000000)).w,d0
 										jsr     (GetEgressPositionForMap).w
-										lea     ((RAM_MapEventType-$1000000)).w,a0
+										lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
 										move.w  #1,(a0)+
 										move.b  #0,(a0)+
 										move.b  d0,(a0)+
@@ -1884,9 +1883,9 @@ loc_21366:
 										bra.w   loc_212A0
 loc_213A8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $6C                ; "Use magic on whom?{D1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.b  #0,((byte_FFB13C-$1000000)).w
 										move.w  #$7F,((word_FFB13A-$1000000)).w 
@@ -1894,12 +1893,12 @@ loc_213A8:
 										move.w  d0,-6(a6)
 										cmpi.w  #$FFFF,d0
 										beq.w   loc_212E0
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -$1C(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										move.l  -$20(a6),((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX   ; {NAME} cast{N}{SPELL} level {#}!
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										move.l  -$20(a6),((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX        ; {NAME} cast{N}{SPELL} level {#}!
 										dc.w $F3                ; "{NAME} cast{N}{SPELL} level {#}!"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.b  -$1A(a6),d1
 										jsr     j_GetSpellDefAddress
@@ -1915,8 +1914,8 @@ loc_213A8:
 										beq.w   loc_2143C
 										bclr    #2,d1
 										beq.s   loc_2143C
-										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $12F               ; "{NAME} is no longer{N}cursed."
 										moveq   #$FFFFFFFF,d2
 										jsr     j_UnequipAllItemsIfNotCursed
@@ -1924,27 +1923,27 @@ loc_2143C:
 										
 										bclr    #0,d1
 										beq.s   loc_2144E
-										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $12E               ; "{NAME} is no longer{N}stunned."
 										moveq   #$FFFFFFFF,d2
 loc_2144E:
 										
 										bclr    #1,d1
 										beq.s   loc_21460
-										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $12D               ; "{NAME} is no longer{N}poisoned."
 										moveq   #$FFFFFFFF,d2
 loc_21460:
 										
 										tst.w   d2
 										bne.s   loc_21468
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1A6               ; "But nothing happened.{D1}"
 loc_21468:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_SetStatus
 										jsr     j_ApplyStatusAndItemsOnStats
@@ -1988,9 +1987,9 @@ loc_214A4:
 										move.w  -4(a6),d0
 										move.w  -$C(a6),d1
 										jsr     j_RemoveItemBySlot
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $49                ; "{NAME} used the{N}{ITEM}.{W2}"
 										bra.w   loc_21366
 loc_2150E:
@@ -2005,21 +2004,21 @@ loc_2150E:
 										jsr     sub_44088       
 										tst.w   d6
 										bne.w   loc_212A0
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $49                ; "{NAME} used the{N}{ITEM}.{W2}"
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $1A6               ; "But nothing happened.{D1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_2158E
 loc_21558:
 										
 										move.w  -8(a6),d1
 										move.w  #$32,d1 
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.b  #0,((byte_FFB13C-$1000000)).w
 										jsr     sub_10040
@@ -2032,7 +2031,7 @@ loc_21558:
 										jsr     j_RemoveItemBySlot
 loc_2158E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_219D8
 loc_21596:
@@ -2066,12 +2065,12 @@ loc_215C0:
 										move.w  -8(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_21662
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_SOUNDCOM
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
-										bsr.w   WaitForMusicResumeAndPlayerInput_2
+										bsr.w   WaitForMusicResumeAndPlayerInput
 										bra.s   loc_2159E
 loc_21618:
 										
@@ -2086,21 +2085,21 @@ loc_21618:
 										move.w  -8(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_21662
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_SOUNDCOM
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
-										bsr.w   WaitForMusicResumeAndPlayerInput_2
-										trap    #TRAP_TEXTBOX
+										bsr.w   WaitForMusicResumeAndPlayerInput
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_2159E
 loc_21662:
 										
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $36                ; "Pass the {ITEM}{N}to whom?{D1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.b  #2,((byte_FFB13C-$1000000)).w
 										move.w  -8(a6),((word_FFB13A-$1000000)).w
@@ -2127,16 +2126,16 @@ loc_2168E:
 										move.w  -6(a6),d1
 										cmp.w   d0,d1
 										bne.s   loc_216E4
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $4A                ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
 										bra.s   loc_216F4
 loc_216E4:
 										
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -6(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -6(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $41                ; "The {ITEM} now{N}belongs to {NAME}.{W2}"
 loc_216F4:
 										
@@ -2159,13 +2158,13 @@ loc_216F8:
 										move.w  -$A(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_2179E
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_SOUNDCOM
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
-										bsr.w   WaitForMusicResumeAndPlayerInput_2
-										trap    #TRAP_TEXTBOX
+										bsr.w   WaitForMusicResumeAndPlayerInput
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_21662
 loc_21758:
@@ -2181,12 +2180,12 @@ loc_21758:
 										move.w  -$A(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_2179E
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_SOUNDCOM
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
-										bsr.w   WaitForMusicResumeAndPlayerInput_2
+										bsr.w   WaitForMusicResumeAndPlayerInput
 										bra.w   loc_21662
 loc_2179E:
 										
@@ -2228,21 +2227,21 @@ loc_2181A:
 										move.w  -6(a6),d1
 										cmp.w   d0,d1
 										bne.s   loc_21838
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $4A                ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
 										bra.s   loc_2184E
 loc_21838:
 										
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -6(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx3-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -6(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										move.w  -$A(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $42                ; "The {ITEM} was{N}exchanged for {NAME}'s{N}{ITEM}.{W2}"
 loc_2184E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_219D8
 loc_21856:
@@ -2259,9 +2258,9 @@ loc_21856:
 loc_21880:
 										
 										bra.w   loc_21894
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $46                ; "{NAME} is already{N}equipped with the{N}{ITEM}.{W2}"
 loc_21894:
 										
@@ -2287,17 +2286,17 @@ loc_218BA:
 										andi.b  #$10,d1
 										cmpi.b  #0,d1
 										beq.s   loc_218F2
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $3E                ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
 										bra.w   loc_219D0
 loc_218F2:
 										
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $45                ; "The {ITEM} will be{N}discarded.  OK?"
 										jsr     j_YesNoChoiceBox
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										cmpi.w  #0,d0
 										beq.w   loc_21910
@@ -2317,13 +2316,13 @@ loc_21910:
 										move.w  -8(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_219A0
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_SOUNDCOM
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
-										bsr.w   WaitForMusicResumeAndPlayerInput_2
-										trap    #TRAP_TEXTBOX
+										bsr.w   WaitForMusicResumeAndPlayerInput
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_219D0
 loc_21962:
@@ -2339,8 +2338,8 @@ loc_21962:
 										move.w  -8(a6),d1
 										jsr     j_IsItemCursed
 										bcc.w   loc_219A0
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 										bra.w   loc_219D0
 loc_219A0:
@@ -2348,8 +2347,8 @@ loc_219A0:
 										move.w  -4(a6),d0
 										move.w  -$C(a6),d1
 										jsr     j_RemoveItemBySlot
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $43                ; "The {ITEM} is discarded.{W2}"
 										move.b  -$14(a6),d1
 										andi.b  #8,d1
@@ -2359,7 +2358,7 @@ loc_219A0:
 										jsr     j_AddItemToDeals
 loc_219D0:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   *+4
 loc_219D8:
@@ -2385,10 +2384,10 @@ sub_219EC:
 										
 										movem.l d7-a1,-(sp)
 										jsr     j_UpdateForce
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										lea     ((byte_FFB0AE-$1000000)).w,a1
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,((word_FFB12E-$1000000)).w
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #1,d7
 loc_21A0A:
 										
@@ -2440,7 +2439,7 @@ BlacksmithActions:
 										jsr     j_InitPortraitWindow
 loc_21A50:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C2                ; "Welcome to the Dwarf{N}Craftsman!{D3}"
 										jsr     j_HidePortraitWindow
 										clr.w   -$12(a6)
@@ -2454,9 +2453,9 @@ loc_21A50:
 										jsr     j_InitPortraitWindow
 loc_21A7C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C6                ; "{CLEAR}Thank you very much!{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 										unlk    a6
@@ -2471,10 +2470,10 @@ loc_21A7C:
 sub_21A92:
 										
 										jsr     j_UpdateForce
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,((word_FFB12E-$1000000)).w
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										lea     ((byte_FFB0AE-$1000000)).w,a1
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.b  #1,d7
 loc_21AAC:
 										
@@ -2485,7 +2484,7 @@ loc_21AAC:
 										bne.w   loc_21AE8
 										move.w  #4,d7
 										subq.w  #1,d7
-										lea     ((byte_FFF7A8-$1000000)).w,a0
+										lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
 loc_21ACA:
 										
 										move.w  (a0)+,-$A(a6)
@@ -2506,26 +2505,26 @@ loc_21AE8:
 										sub.w   -$10(a6),d0
 										cmpi.w  #4,d0
 										beq.w   return_21B40
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C4                ; "{CLEAR}Anything else?"
 										bra.w   loc_21B3C
 loc_21B0E:
 										
 										cmpi.w  #0,-$E(a6)
 										beq.w   loc_21B38
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $CE                ; "Oops...{N}I needs some more time.{W1}"
 										move.w  -$12(a6),d0
 										add.w   -$E(a6),d0
 										sub.w   -$10(a6),d0
 										cmpi.w  #4,d0
 										beq.w   return_21B40
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C4                ; "{CLEAR}Anything else?"
 										bra.w   loc_21B3C
 loc_21B38:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C3                ; "We can create a great and{N}special weapon for you if you{N}have some special material.{W1}"
 loc_21B3C:
 										
@@ -2542,23 +2541,23 @@ return_21B40:
 sub_21B42:
 										
 										movem.l d0-a1,-(sp)
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $CF                ; "{CLEAR}I've been waiting!{N}This {ITEM} is for{N}you.  Isn't it great?!{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $A6                ; "Who gets it?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 loc_21B58:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.w  -$A(a6),((word_FFB13A-$1000000)).w
 										move.b  #0,((byte_FFB13C-$1000000)).w
 										jsr     sub_10044
 										cmpi.w  #$FFFF,d0
 										bne.s   loc_21B7C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C5                ; "{CLEAR}What a pity!{W2}"
 										bra.w   loc_21CD4
 loc_21B7C:
@@ -2568,13 +2567,13 @@ loc_21B7C:
 										jsr     j_GetItemAndNumberOfItems
 										cmpi.w  #4,d2
 										bcs.s   loc_21BAC
-										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $D0                ; "{NAME}'s hands are are{N}full.  May I pass it to{N}somebody else?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.s   loc_21B58
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C5                ; "{CLEAR}What a pity!{W2}"
 										bra.w   loc_21CD4
 loc_21BAC:
@@ -2587,8 +2586,8 @@ loc_21BAC:
 										move.w  -6(a6),d0
 										jsr     j_IsWeaponOrRingEquippable
 										bcs.s   loc_21BE4
-										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $A7                ; "{NAME} can't be{N}equipped with it.  OK?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
@@ -2600,7 +2599,7 @@ loc_21BE4:
 										jsr     j_AddItem
 										move.w  #4,d6
 										sub.w   -$16(a6),d6
-										lea     ((byte_FFF7A8-$1000000)).w,a1
+										lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a1
 										lsl.w   #1,d6
 										adda.w  d6,a1
 										move.w  (a1),d2
@@ -2610,7 +2609,7 @@ loc_21BE4:
 										move.w  -6(a6),d0
 										jsr     j_IsWeaponOrRingEquippable
 										bcc.w   loc_21CD0
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $AD                ; "{CLEAR}Equip it now?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
@@ -2627,8 +2626,8 @@ loc_21BE4:
 										jsr     j_UnequipItemIfNotCursed
 										cmpi.w  #2,d2
 										bne.w   loc_21C9A
-										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_21CD0
 loc_21C6E:
@@ -2641,8 +2640,8 @@ loc_21C6E:
 										jsr     j_UnequipItemIfNotCursed
 										cmpi.w  #2,d2
 										bne.w   loc_21C9A
-										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 										bra.s   loc_21CD0
 loc_21C9A:
@@ -2654,21 +2653,21 @@ loc_21C9A:
 										jsr     j_EquipItem
 										cmpi.w  #2,d2
 										bne.s   loc_21CC8
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										bsr.w   WaitForMusicResumeAndPlayerInput_3
-										move.w  -6(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										bsr.w   WaitForMusicResumeAndPlayerInput_Blacksmith
+										move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $AF                ; "Gee, {NAME} gets{N}cursed.{W2}"
 										bra.w   loc_21CD4
 loc_21CC8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $AE                ; "Ah, it suits you!{W2}"
 										bra.w   loc_21CD4
 loc_21CD0:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D1                ; "{CLEAR}Here you go!{N}It's a great weapon!{W2}"
 loc_21CD4:
 										
@@ -2679,9 +2678,9 @@ loc_21CDA:
 										movem.l d0-d2,-(sp)
 loc_21CDE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C7                ; "What kind of material do you{N}have?{D1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.b  #1,((byte_FFB13C-$1000000)).w
 										move.w  #ITEMIDX_NOTHING,((word_FFB13A-$1000000)).w
@@ -2693,14 +2692,14 @@ loc_21CDE:
 										move.w  d2,-$A(a6)
 										cmpi.w  #$7B,d2 
 										beq.w   loc_21D1A
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C8                ; "Sorry, I've never worked{N}with that before....{W1}"
 										bra.s   loc_21CDE
 loc_21D1A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C9                ; "{CLEAR}Whose weapon should I{N}make?{D1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.b  #0,((byte_FFB13C-$1000000)).w
 										move.w  #ITEMIDX_NOTHING,((word_FFB13A-$1000000)).w
@@ -2712,8 +2711,8 @@ loc_21D1A:
 										move.w  d1,-$18(a6)
 										cmpi.w  #$C,d1
 										bcc.w   loc_21D5C
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $D3                ; "{NAME} has to be promoted{N}first.{W1}"
 										bra.s   loc_21D1A
 loc_21D5C:
@@ -2721,22 +2720,22 @@ loc_21D5C:
 										bsr.w   sub_21E8E
 										cmpi.w  #0,d0
 										beq.w   loc_21D74
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $D4                ; "Sorry, I can't create a{N}weapon for {NAME}.{W1}"
 										bra.s   loc_21D1A
 loc_21D74:
 										
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.l  #$1388,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.l  #$1388,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $CA                ; "For {NAME}!  It will cost{N}{#} gold coins.  OK?"
 										jsr     sub_10050
 										jsr     j_YesNoChoiceBox
 										jsr     sub_10058
 										cmpi.w  #0,d0
 										beq.s   loc_21DA6
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C5                ; "{CLEAR}What a pity!{W2}"
 										bra.w   loc_21D1A
 loc_21DA6:
@@ -2745,7 +2744,7 @@ loc_21DA6:
 										move.l  d1,-4(a6)
 										cmpi.l  #$1388,d1
 										bcc.w   loc_21DC2
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $CB                ; "You have to bring more{N}money.{W2}"
 										bra.w   loc_21E30
 loc_21DC2:
@@ -2759,9 +2758,9 @@ loc_21DC2:
 										bsr.w   PickMithrilWeapon
 										move.w  #$50,d1 
 										jsr     j_ClearFlag
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $CC                ; "{CLEAR}Great!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $CD                ; "Please stop by shortly.{N}I'll surprise you!{W1}"
 										move.w  -$E(a6),d0
 										move.w  -$12(a6),d1
@@ -2770,19 +2769,19 @@ loc_21DC2:
 										sub.w   d2,d0
 										cmpi.w  #4,d0
 										bne.s   loc_21E16
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D2                ; "Sorry, that's all for today.{W1}"
 										bra.w   loc_21E30
 loc_21E16:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C4                ; "{CLEAR}Anything else?"
 										jsr     j_YesNoChoiceBox
 										cmpi.w  #0,d0
 										beq.w   loc_21CDE
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $C5                ; "{CLEAR}What a pity!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 loc_21E30:
 										
@@ -2794,7 +2793,7 @@ loc_21E30:
 
 ; =============== S U B R O U T I N E =======================================
 
-WaitForMusicResumeAndPlayerInput_3:
+WaitForMusicResumeAndPlayerInput_Blacksmith:
 										
 										move.w  d0,-(sp)
 										move.w  #$FB,d0 
@@ -2803,7 +2802,7 @@ WaitForMusicResumeAndPlayerInput_3:
 										move.w  (sp)+,d0
 										rts
 
-	; End of function WaitForMusicResumeAndPlayerInput_3
+	; End of function WaitForMusicResumeAndPlayerInput_Blacksmith
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2818,7 +2817,7 @@ loc_21E5C:
 										
 										move.w  #4,d7
 										subq.w  #1,d7
-										lea     ((byte_FFF7A8-$1000000)).w,a0
+										lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
 loc_21E66:
 										
 										move.w  (a0)+,d1
@@ -2926,7 +2925,7 @@ loc_21F22:
 										dbf     d5,loc_21F22
 loc_21F3C:
 										
-										lea     ((byte_FFF7A8-$1000000)).w,a0
+										lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
 										move.w  #3,d7
 loc_21F44:
 										
@@ -2952,7 +2951,7 @@ MithrilWeaponLists: incbin "data/items/mithrilweapons.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
-CaravanActions:
+CaravanMenuActions:
 										
 										movem.l d0-a5,-(sp)
 										link    a6,#-$C
@@ -2978,8 +2977,8 @@ loc_21FEA:
 rjt_CaravanActions:
 										
 										dc.w sub_22028-rjt_CaravanActions
-										dc.w sub_22154-rjt_CaravanActions
-										dc.w sub_22538-rjt_CaravanActions
+										dc.w CaravanDepotActions-rjt_CaravanActions
+										dc.w ItemMenuActions-rjt_CaravanActions
 										dc.w sub_22102-rjt_CaravanActions
 loc_22014:
 										
@@ -2991,7 +2990,7 @@ loc_22014:
 										movem.l (sp)+,d0-a5
 										rts
 
-	; End of function CaravanActions
+	; End of function CaravanMenuActions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3011,8 +3010,8 @@ sub_22028:
 										jsr     j_GetCurrentHP
 										tst.w   d1
 										bne.s   loc_22070
-										move.w  -2(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $13                ; "{NAME} is dead.{N}Are you sure?"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
@@ -3025,7 +3024,7 @@ loc_22070:
 										bcc.s   loc_22098
 										move.w  -2(a6),d0
 										jsr     j_JoinBattleParty
-										move.w  -2(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$15,d1
 										bsr.w   sub_228A8       
 										bra.s   loc_220E6
@@ -3038,11 +3037,11 @@ loc_22098:
 										beq.s   loc_220DE
 										tst.w   d0
 										beq.s   loc_220D4
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										jsr     j_LeaveBattleParty
 										move.w  -2(a6),d0
 										jsr     j_JoinBattleParty
-										move.w  -2(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
+										move.w  -2(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 										move.w  #$11,d1
 										bsr.w   sub_228A8       
 										bra.s   loc_220DC
@@ -3055,18 +3054,18 @@ loc_220DC:
 										bra.s   loc_220E6
 loc_220DE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 loc_220E6:
 										
 										bra.s   loc_220F2
 loc_220E8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -3106,7 +3105,7 @@ sub_22102:
 										tst.w   d0
 										beq.s   loc_2213A
 										jsr     j_LeaveBattleParty
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$16,d1
 										bsr.w   sub_228A8       
 										bra.s   loc_22142
@@ -3119,9 +3118,9 @@ loc_22142:
 										bra.s   loc_2214E
 loc_22144:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -3145,7 +3144,7 @@ loc_22152:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22154:
+CaravanDepotActions:
 										
 										moveq   #0,d1
 										bra.w   loc_2215C
@@ -3165,7 +3164,7 @@ loc_2215C:
 										jsr     rjt_CaravanItemActions(pc,d0.w)
 										bra.s   loc_2215A
 
-	; End of function sub_22154
+	; End of function CaravanDepotActions
 
 rjt_CaravanItemActions:
 										dc.w Caravan_DescribeItem-rjt_CaravanItemActions
@@ -3173,13 +3172,13 @@ rjt_CaravanItemActions:
 										dc.w sub_22384-rjt_CaravanItemActions
 										dc.w sub_22498-rjt_CaravanItemActions
 
-; START OF FUNCTION CHUNK FOR sub_22154
+; START OF FUNCTION CHUNK FOR CaravanDepotActions
 
 return_22186:
 										
 										rts
 
-; END OF FUNCTION CHUNK FOR sub_22154
+; END OF FUNCTION CHUNK FOR CaravanDepotActions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3197,7 +3196,7 @@ Caravan_DescribeItem:
 										move.w  d2,-4(a6)
 										cmpi.w  #$FFFF,d0
 										beq.w   loc_222E0
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $46                ; Astral is a follower
 										bne.s   loc_221BE
 										moveq   #$B,d0
@@ -3216,19 +3215,19 @@ loc_221C0:
 										jsr     j_GetItemType
 										tst.w   d2
 										bne.s   loc_221E8
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $5C                ; "It's a tool.{W2}"
 										bra.s   loc_221F8
 loc_221E8:
 										
 										cmpi.w  #1,d2
 										bne.s   loc_221F4
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $5A                ; "It's a weapon.{W2}"
 										bra.s   loc_221F8
 loc_221F4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $5B                ; "It's a ring.{W2}"
 loc_221F8:
 										
@@ -3236,12 +3235,12 @@ loc_221F8:
 										jsr     j_GetItemDefAddress
 										cmpi.b  #SPELLIDX_NOTHING,ITEMDEF_OFFSET_SPELL(a0)
 										beq.s   loc_22210
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $5D                ; "It has a special effect when{N}used in battle.{W2}"
 										bra.s   loc_22214
 loc_22210:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $5E                ; "It has no effect in battle.{W2}"
 loc_22214:
 										
@@ -3258,53 +3257,53 @@ loc_22214:
 										cmpi.w  #ITEMIDX_RUNNING_RING,d1
 										beq.w   loc_222A4
 										move.w  -4(a6),d1
-										move.w  d1,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $60                ; "The {ITEM} is for{N}"
 										jsr     j_UpdateForce
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #1,d7
 										bcs.w   loc_222A8
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										clr.w   d6
 loc_22266:
 										
 										move.b  (a0)+,d0
 										jsr     j_IsWeaponOrRingEquippable
 										bcc.s   loc_2228E
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 																						; argument (char idx) for trap #5 using a {NAME} command
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $62                ; "{DICT}{NAME},"
 										addq.w  #1,d6
 										cmpi.w  #1,d6
 										bne.s   loc_22284
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $63                ; "{N}"
 loc_22284:
 										
 										cmpi.w  #4,d6
 										bne.s   loc_2228E
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $63                ; "{N}"
 loc_2228E:
 										
 										dbf     d7,loc_22266
 										tst.w   d6
 										bne.s   loc_2229C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $61                ; "nobody so far.{W2}"
 										bra.s   loc_222A0
 loc_2229C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $64                ; "to equip.{W2}"
 loc_222A0:
 										
 										bra.w   loc_222A8
 loc_222A4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $5F                ; "Everybody can equip it.{W2}"
 loc_222A8:
 										
@@ -3312,7 +3311,7 @@ loc_222A8:
 										jsr     j_GetItemDefAddress
 										btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
 										beq.s   loc_222C0
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $66                ; "You can't sell it at a shop.{W2}"
 										bra.s   loc_222D4
 loc_222C0:
@@ -3321,20 +3320,20 @@ loc_222C0:
 										move.w  ITEMDEF_OFFSET_PRICE(a0),d1
 										mulu.w  #ITEM_SELLPRICE_MULTIPLIER,d1
 										lsr.l   #ITEM_SELLPRICE_BITSHIFTRIGHT,d1
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $65                ; "It brings {#} gold coins{N}at a shop.{W2}"
 loc_222D4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 										bra.s   loc_222EA
 loc_222E0:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -3383,16 +3382,16 @@ sub_222FA:
 										jsr     j_AddItemToCaravan
 										move.w  -6(a6),d1
 										jsr     j_DropItemBySlot
-										move.w  -2(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -4(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
+										move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 										move.w  #$57,d1 
 										bsr.w   sub_228A8       
 										bra.s   loc_22374
 loc_2236A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 loc_22374:
@@ -3433,7 +3432,7 @@ sub_22384:
 										beq.w   loc_2247E
 										moveq   #0,d1
 										bsr.w   sub_228D8
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$54,d1 
 										bsr.w   sub_228A8       
 										move.b  #2,((byte_FFB13C-$1000000)).w
@@ -3452,8 +3451,8 @@ sub_22384:
 										jsr     j_AddItem
 										move.w  -6(a6),d1
 										jsr     j_RemoveItemFromCaravan
-										move.w  -8(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -4(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
+										move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 										move.w  #$58,d1 
 										bsr.w   sub_228A8       
 										bra.s   loc_2247C
@@ -3473,9 +3472,9 @@ loc_22422:
 										jsr     j_AddItem
 										move.w  -$A(a6),d1
 										jsr     j_AddItemToCaravan
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx3-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										move.w  -$A(a6),((TEXT_NAME_INDEX_3-$1000000)).w
 										move.w  #$29,d1 
 										bsr.w   sub_228A8       
 loc_2247C:
@@ -3483,9 +3482,9 @@ loc_2247C:
 										bra.s   loc_22488
 loc_2247E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -3527,8 +3526,8 @@ sub_22498:
 										bcs.w   loc_22534
 										cmpi.w  #$FFFF,-4(a6)
 										beq.s   loc_2251E
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $2C                ; "The {ITEM} will be{N}discarded.  Are you sure?"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
@@ -3542,22 +3541,22 @@ sub_22498:
 										jsr     j_AddItemToDeals
 loc_22508:
 										
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$2A,d1 
 										bsr.w   sub_228A8       
 										bra.s   loc_2251C
 loc_22518:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
 loc_2251C:
 										
 										bra.s   loc_22528
 loc_2251E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -3583,7 +3582,7 @@ loc_22534:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22538:
+ItemMenuActions:
 										
 										moveq   #0,d1
 										bra.w   loc_22540
@@ -3599,24 +3598,24 @@ loc_22540:
 										cmpi.w  #$FFFF,d0
 										beq.w   return_2256A
 										add.w   d0,d0
-										move.w  rjt_22562(pc,d0.w),d0
-										jsr     rjt_22562(pc,d0.w)
+										move.w  rjt_ItemActions(pc,d0.w),d0
+										jsr     rjt_ItemActions(pc,d0.w)
 										bra.s   loc_2253E
 
-	; End of function sub_22538
+	; End of function ItemMenuActions
 
-rjt_22562:          dc.w sub_2256C-rjt_22562
-										dc.w sub_22610-rjt_22562
-										dc.w sub_22776-rjt_22562
-										dc.w sub_227B0-rjt_22562
+rjt_ItemActions:    dc.w sub_2256C-rjt_ItemActions
+										dc.w sub_22610-rjt_ItemActions
+										dc.w sub_22776-rjt_ItemActions
+										dc.w sub_227B0-rjt_ItemActions
 
-; START OF FUNCTION CHUNK FOR sub_22538
+; START OF FUNCTION CHUNK FOR ItemMenuActions
 
 return_2256A:
 										
 										rts
 
-; END OF FUNCTION CHUNK FOR sub_22538
+; END OF FUNCTION CHUNK FOR ItemMenuActions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3641,7 +3640,7 @@ loc_22574:
 										jsr     sub_229CA
 										tst.w   d2
 										bne.s   loc_225EA
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$19,d1
 										bsr.w   sub_228A8       
 										move.b  #0,((byte_FFB13C-$1000000)).w
@@ -3656,14 +3655,14 @@ loc_22574:
 										bra.s   loc_225E8
 loc_225E4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
 loc_225E8:
 										
 										bra.s   loc_225F8
 loc_225EA:
 										
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$1A,d1
 										bsr.w   sub_228A8       
 loc_225F8:
@@ -3671,9 +3670,9 @@ loc_225F8:
 										bra.s   loc_22604
 loc_225FA:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -3711,7 +3710,7 @@ loc_22618:
 										beq.w   loc_22760
 										bsr.w   sub_2294C       
 										bcs.w   loc_2276A
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$1D,d1
 										bsr.w   sub_228A8       
 										move.b  #2,((byte_FFB13C-$1000000)).w
@@ -3729,8 +3728,8 @@ loc_22618:
 										jsr     j_RemoveItemBySlot
 										move.w  -4(a6),d1
 										jsr     j_AddItem
-										move.w  -2(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -4(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
+										move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 										move.w  #$30,d1 
 										bsr.w   sub_228A8       
 										bra.w   loc_22758
@@ -3746,8 +3745,8 @@ loc_226B6:
 										move.w  -2(a6),d0
 										move.w  -6(a6),d1
 										jsr     j_RemoveItemBySlot
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 										move.w  #$28,d1 
 										bsr.w   sub_228A8       
 										bra.s   loc_22758
@@ -3769,9 +3768,9 @@ loc_226F6:
 										move.w  -2(a6),d0
 										move.w  -$A(a6),d1
 										jsr     j_AddItem
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  -8(a6),((RAM_Dialogue_NameIdx2-$1000000)).w
-										move.w  -$A(a6),((RAM_Dialogue_NameIdx3-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+										move.w  -$A(a6),((TEXT_NAME_INDEX_3-$1000000)).w
 										move.w  #$29,d1 
 										bsr.w   sub_228A8       
 loc_22758:
@@ -3779,16 +3778,16 @@ loc_22758:
 										bra.s   loc_2275E
 loc_2275A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
 loc_2275E:
 										
 										bra.s   loc_2276A
 loc_22760:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -3821,9 +3820,9 @@ loc_2277E:
 										jsr     sub_10044
 										cmpi.w  #$FFFF,d0
 										bne.s   loc_227A6
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -3864,8 +3863,8 @@ loc_227B8:
 										move.w  -4(a6),d1
 										jsr     sub_2299E
 										bcs.w   loc_22858
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $2C                ; "The {ITEM} will be{N}discarded.  Are you sure?"
 										jsr     j_YesNoChoiceBox
 										tst.w   d0
@@ -3880,24 +3879,24 @@ loc_227B8:
 										jsr     j_AddItemToDeals
 loc_22834:
 										
-										move.w  -4(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$2A,d1 
 										bsr.w   sub_228A8       
 										bra.s   loc_2284C
 loc_22844:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 loc_2284C:
 										
 										bra.s   loc_22858
 loc_2284E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w 4                  ; "Did you change your mind?{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -3962,7 +3961,7 @@ sub_228A8:
 										
 										movem.l d0-d1,-(sp)
 										move.l  d1,-(sp)
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $46                ; Astral is a follower
 										bne.s   loc_228B8       
 										moveq   #$B,d0          ; ROHDE portrait idx
@@ -3976,7 +3975,7 @@ loc_228BA:
 										jsr     j_InitPortraitWindow
 										move.l  (sp)+,d0
 										jsr     (DisplayText).w 
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     j_HidePortraitWindow
 										movem.l (sp)+,d0-d1
@@ -3993,25 +3992,25 @@ sub_228D8:
 										jsr     j_UpdateForce
 										tst.w   d1
 										bne.s   loc_228F0
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										bra.s   loc_22908
 loc_228F0:
 										
 										cmpi.w  #1,d1
 										bne.s   loc_22900
-										lea     ((RAM_Force_CurrentList-$1000000)).w,a0
+										lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
 										move.w  ((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w,d7
 										bra.s   loc_22908
 loc_22900:
 										
-										lea     ((RAM_Force_ReservesList-$1000000)).w,a0
+										lea     ((RESERVE_MEMBERS-$1000000)).w,a0
 										move.w  ((NUMBER_OF_OTHER_PARTY_MEMBERS-$1000000)).w,d7
 loc_22908:
 										
 										lea     ((byte_FFB0AE-$1000000)).w,a1
 										move.w  d7,((word_FFB12E-$1000000)).w
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #1,d7
 										bcs.w   loc_22920
 loc_2291A:
@@ -4063,11 +4062,11 @@ sub_2294C:
 										beq.s   loc_22988
 										jsr     j_IsItemCursed
 										bcc.w   loc_22986
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
 										move.w  #$3C,d0 
 										jsr     (Sleep).w       
-										move.w  d1,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$1E,d1
 										bsr.w   sub_228A8       
 										bsr.w   PlayPreviousMusicAfterCurrentOne
@@ -4107,7 +4106,7 @@ sub_2299E:
 										jsr     j_GetItemDefAddress
 										btst    #4,8(a0)
 										beq.s   loc_229C2
-										move.w  d1,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$25,d1 
 										bsr.w   sub_228A8       
 										ori     #1,ccr
@@ -4209,13 +4208,13 @@ FieldItem_CurePoison:
 										jsr     j_GetStatus
 										bclr    #CHAR_STATUS_BIT_POISON,d1
 										beq.s   loc_22A64
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $95                ; "{NAME} is no longer{N}poisoned.{W2}"
 										bra.s   loc_22A68
 loc_22A64:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $94                ; "It has no use.{W2}"
 loc_22A68:
 										
@@ -4233,23 +4232,23 @@ FieldItem_CurePoisonAndParalysis:
 										moveq   #0,d2
 										bclr    #1,d1
 										beq.s   loc_22A88
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $95                ; "{NAME} is no longer{N}poisoned.{W2}"
 										moveq   #$FFFFFFFF,d2
 loc_22A88:
 										
 										bclr    #0,d1
 										beq.s   loc_22A98
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $9C                ; "{NAME} is no longer{N}paralyzed.{W2}"
 										moveq   #$FFFFFFFF,d2
 loc_22A98:
 										
 										tst.w   d2
 										bne.s   loc_22AA0
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $94                ; "It has no use.{W2}"
 loc_22AA0:
 										
@@ -4269,9 +4268,9 @@ FieldItem_IncreaseATK:
 										addq.w  #2,d7
 										clr.l   d1
 										move.w  d7,d1
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $96                ; "{NAME}'s attack{N}power is boosted by {#}.{W2}"
 										jsr     j_IncreaseBaseATK
 										move.w  d7,d1
@@ -4290,9 +4289,9 @@ FieldItem_IncreaseDEF:
 										addq.w  #2,d7
 										clr.l   d1
 										move.w  d7,d1
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $97                ; "{NAME}'s defensive{N}power is boosted by {#}.{W2}"
 										jsr     j_IncreaseBaseDEF
 										move.w  d7,d1
@@ -4311,9 +4310,9 @@ FieldItem_IncreaseAGI:
 										addq.w  #2,d7
 										clr.l   d1
 										move.w  d7,d1
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $98                ; "{NAME}'s agility{N}is boosted by {#}.{W2}"
 										jsr     j_IncreaseAGI
 										move.w  d7,d1
@@ -4339,9 +4338,9 @@ loc_22B42:
 										
 										clr.l   d1
 										move.w  d7,d1
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $99                ; "{NAME}'s movement{N}range enlarged by {#}.{W2}"
 										jsr     j_IncreaseBaseMOV
 										move.w  d7,d1
@@ -4360,9 +4359,9 @@ FieldItem_IncreaseHP:
 										addq.w  #2,d7
 										clr.l   d1
 										move.w  d7,d1
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $9A                ; "{NAME}'s max. HP{N}are raised by {#}.{W2}"
 										jsr     j_IncreaseMaxHP
 										move.w  d7,d1
@@ -4384,9 +4383,9 @@ FieldItem_IncreaseMP:
 										addq.w  #2,d7
 										clr.l   d1
 										move.w  d7,d1
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $9B                ; "{NAME}'s max. MP{N}are raised by {#}.{W2}"
 										jsr     j_IncreaseMP
 										move.w  d7,d1
@@ -4394,7 +4393,7 @@ FieldItem_IncreaseMP:
 										bra.s   return_22BC0
 loc_22BBC:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $94                ; "It has no use.{W2}"
 return_22BC0:
 										
@@ -4411,51 +4410,51 @@ LevelUpCutscene:
 										jsr     j_SetCurrentEXP
 										jsr     j_LevelUp
 										lea     ((byte_FFAF82-$1000000)).w,a5
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										clr.l   d1
 										move.b  (a5)+,d1
 										cmpi.b  #$FF,d1
 										bne.s   loc_22BEA
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $94                ; "It has no use.{W2}"
 										bra.w   loc_22C5A
 loc_22BEA:
 										
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $F4                ; "{NAME} became{N}level {#}!"
 										move.b  (a5)+,d1
 										beq.s   loc_22BFE
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10A               ; "{D1}HP increased by {#}!"
 loc_22BFE:
 										
 										move.b  (a5)+,d1
 										beq.s   loc_22C0A
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10B               ; "{D1}MP increased by {#}!"
 loc_22C0A:
 										
 										move.b  (a5)+,d1
 										beq.s   loc_22C16
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10C               ; "{D1}Attack increased by {#}!"
 loc_22C16:
 										
 										move.b  (a5)+,d1
 										beq.s   loc_22C22
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10D               ; "{D1}Defense increased by {#}!"
 loc_22C22:
 										
 										move.b  (a5)+,d1
 										beq.s   loc_22C2E
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10E               ; "{D1}Agility increased by {#}!"
 loc_22C2E:
 										
@@ -4466,20 +4465,20 @@ loc_22C2E:
 										andi.w  #$3F,d2 
 										lsr.w   #6,d1
 										bne.s   loc_22C4C
-										move.w  d2,((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $10F               ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
 										bra.s   loc_22C5A
 loc_22C4C:
 										
 										addq.w  #1,d1
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										move.w  d2,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										move.w  d2,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $110               ; "{D1}{SPELL} increased to{N}level {#}!"
 loc_22C5A:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $DC3               ; "{W1}"
 										rts
 
@@ -4492,7 +4491,7 @@ loc_22C5A:
 
 sub_22C60:
 										
-										move.w  (RAM_Entity_StructOffset_XAndStart).l,d1
+										move.w  (ENTITY_DATA_STRUCT_X_AND_START).l,d1
 										move.w  (ENTITY_DATA_STRUCT_Y).l,d2
 										move.b  (ENTITY_DATA_STRUCT_FACING).l,d3
 										ext.l   d1
@@ -4534,7 +4533,7 @@ loc_22C9E:
 										dbf     d7,loc_22C8C
 										movem.l (sp)+,d6-a1
 										movem.l d0/a0,-(sp)
-										lea     (Palette2bis).l,a0
+										lea     (PALLETE_2_BIS).l,a0
 										moveq   #7,d0
 loc_22CC2:
 										
@@ -4554,18 +4553,18 @@ GetBattleMapProperties:
 																						;          A1 = address of map tile at top-left battle map X/Y
 																						;          D6 = width of battle map
 																						;          D7 = height of battle map
-										move.w  ((RAM_Map_AreaLayer1StartY-$1000000)).w,d7
+										move.w  ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d7
 										lsl.w   #6,d7
-										add.w   ((RAM_Map_AreaLayer1StartX-$1000000)).w,d7
+										add.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d7
 										add.w   d7,d7
-										lea     (RAM_Start).l,a1
+										lea     (RAM_START).l,a1
 										adda.w  d7,a1
-										move.w  ((RAM_Map_AreaLayer1EndX-$1000000)).w,d6
-										sub.w   ((RAM_Map_AreaLayer1StartX-$1000000)).w,d6
+										move.w  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d6
+										sub.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d6
 										ext.l   d6
 										divs.w  #$180,d6
-										move.w  ((RAM_Map_AreaLayer1EndY-$1000000)).w,d7
-										sub.w   ((RAM_Map_AreaLayer1StartY-$1000000)).w,d7
+										move.w  ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d7
+										sub.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d7
 										ext.l   d7
 										divs.w  #$180,d7
 										rts
@@ -4596,7 +4595,7 @@ loc_22D2A:
 										move.b  #1,((FADING_COUNTER-$1000000)).w
 loc_22D56:
 										
-										tst.b   ((RAM_Map_AreaProp1C-$1000000)).w
+										tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 										beq.s   loc_22D6A
 										bset    #0,((byte_FFA82D-$1000000)).w
 										move.b  #$FF,((byte_FFA8FF-$1000000)).w
@@ -4616,11 +4615,11 @@ return_22D70:
 HideUnitCursor:
 										
 										movem.l d0/a0,-(sp)
-										lea     ((RAM_Entity_UnitCursor-$1000000)).w,a0
+										lea     ((ENTITY_UNIT_CURSOR-$1000000)).w,a0
 										move.w  #$6F00,d0
 										move.w  d0,(a0)
 										move.w  d0,ENTITYDEF_OFFSET_XDEST(a0)
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										movem.l (sp)+,d0/a0
 										rts
 
@@ -4634,21 +4633,21 @@ ControlUnitCursor:
 										bsr.w   LoadUnitCursorTileData
 										clr.w   d2
 										clr.w   d3
-										move.b  ((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w,d2
-										move.b  ((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w,d3
+										move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d2
+										move.b  ((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w,d3
 										mulu.w  #$180,d2
 										mulu.w  #$180,d3
 										moveq   #$30,d0 
 										jsr     sub_44024
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										adda.w  d0,a0
 										move.w  d2,(a0)
 										move.w  d3,2(a0)
 										move.w  d2,$C(a0)
 										move.w  d3,$E(a0)
 										move.b  #$FF,((byte_FFDE9D-$1000000)).w
-										move.b  #$30,((RAM_Battle_CurrentMovingEntity-$1000000)).w 
+										move.b  #$30,((BATTLE_CURRENT_ENTITY-$1000000)).w 
 loc_22DD2:
 										
 										jsr     (WaitForVInt).w 
@@ -4661,14 +4660,14 @@ loc_22DD2:
 										ext.l   d3
 										divs.w  #$180,d2
 										divs.w  #$180,d3
-										move.b  d2,((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w
-										move.b  d3,((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w
+										move.b  d2,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
+										move.b  d3,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 										moveq   #$30,d0 
 										jsr     j_SetEntityMovescriptToIdle
 										move.w  #$6F00,(a0)
 										move.w  #$6F00,$C(a0)
 										clr.b   ((byte_FFDE9D-$1000000)).w
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										rts
 
 	; End of function ControlUnitCursor
@@ -4684,7 +4683,7 @@ ControlBattleUnit:
 										
 										movem.l d0-d1/a0-a1,-(sp)
 										link    a6,#-2
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a1
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a1
 										bsr.w   GetEntityCombatantNumber
 										move.w  d0,-2(a6)
 										lsl.w   #ENTITYDEF_SIZE_BITS,d0
@@ -4716,18 +4715,18 @@ loc_22E68:
 										move.w  (sp)+,d0
 										move.b  d0,$12(a1)
 										bsr.w   sub_234C8
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										move.w  ENTITYDEF_OFFSET_XDEST(a1),d2
 										ext.l   d2
 										divs.w  #$180,d2
 										move.w  ENTITYDEF_OFFSET_YDEST(a1),d3
 										ext.l   d3
 										divs.w  #$180,d3
-										move.b  d2,((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w
-										move.b  d3,((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w
+										move.b  d2,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
+										move.b  d3,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 										move.w  -2(a6),d0
 										jsr     j_SetEntityMovescriptToIdle
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										unlk    a6
 										movem.l (sp)+,d0-d1/a0-a1
 										rts
@@ -4850,10 +4849,10 @@ MoveBattleEntityByMoveString:
 										move.b  -1(a0),d1
 										movem.l d1/a0,-(sp)
 										move.b  #$FF,-1(a0)
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a1
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a1
 										bsr.s   GetEntityCombatantNumber
 										move.w  d0,-2(a6)
-										move.b  d0,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										lsl.w   #5,d0
 										adda.w  d0,a1
 										move.b  $12(a1),d0
@@ -4929,8 +4928,8 @@ loc_2306A:
 										ori.b   #$C,$1C(a1)
 loc_23074:
 										
-										move.w  ((RAM_MoveSound-$1000000)).w,d0
-										trap    #TRAP_SOUNDCOM
+										move.w  ((MOVE_SOUND-$1000000)).w,d0
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										bsr.w   UpdateControlledUnitPos
 										move.w  -2(a6),d0
@@ -4944,15 +4943,15 @@ loc_2308E:
 										move.w  (sp)+,d0
 										move.b  d0,$12(a1)
 										bsr.w   sub_234C8
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										move.w  (a1),d2
 										ext.l   d2
 										divs.w  #$180,d2
 										move.w  2(a1),d3
 										ext.l   d3
 										divs.w  #$180,d3
-										move.b  d2,((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w
-										move.b  d3,((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w
+										move.b  d2,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
+										move.b  d3,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 										move.w  -2(a6),d0
 										addi.w  #$10,d0
 										lea     ((byte_FFAFA0-$1000000)).w,a0
@@ -4971,7 +4970,7 @@ loc_2308E:
 sub_230E2:
 										
 										movem.l d1-a0,-(sp)
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										bne.s   loc_230F2
 										moveq   #$FFFFFFFF,d0
 										bra.w   loc_2321E
@@ -4979,7 +4978,7 @@ loc_230F2:
 										
 										jsr     (WaitForVInt).w 
 										move.w  d0,d6
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 										clr.w   d1
 										bra.w   loc_23110
 loc_23102:
@@ -5043,7 +5042,7 @@ loc_23186:
 										jsr     (WaitForVInt).w 
 										cmpi.w  #1,d7
 										beq.s   loc_231E0
-										btst    #0,((CURRENT_PLAYER_INPUT-$1000000)).w
+										btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_231A4
 										subq.w  #1,d1
 										bge.s   loc_231A0
@@ -5054,7 +5053,7 @@ loc_231A0:
 										bra.w   loc_23102
 loc_231A4:
 										
-										btst    #2,((CURRENT_PLAYER_INPUT-$1000000)).w
+										btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_231B8
 										subq.w  #1,d1
 										bge.s   loc_231B4
@@ -5065,7 +5064,7 @@ loc_231B4:
 										bra.w   loc_23102
 loc_231B8:
 										
-										btst    #1,((CURRENT_PLAYER_INPUT-$1000000)).w
+										btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_231CC
 										addq.w  #1,d1
 										cmp.w   d7,d1
@@ -5076,7 +5075,7 @@ loc_231C8:
 										bra.w   loc_23102
 loc_231CC:
 										
-										btst    #3,((CURRENT_PLAYER_INPUT-$1000000)).w
+										btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_231E0
 										addq.w  #1,d1
 										cmp.w   d7,d1
@@ -5087,21 +5086,21 @@ loc_231DC:
 										bra.w   loc_23102
 loc_231E0:
 										
-										btst    #4,((CURRENT_PLAYER_INPUT-$1000000)).w
+										btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_231F6
 										jsr     j_HideFighterMiniStatusWindow
 										move.w  #$FFFF,d0
 										bra.w   loc_2321E
 loc_231F6:
 										
-										btst    #5,((CURRENT_PLAYER_INPUT-$1000000)).w
+										btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_23208
 										clr.w   d0
 										move.b  (a0,d1.w),d0
 										bra.w   loc_2321E
 loc_23208:
 										
-										btst    #6,((CURRENT_PLAYER_INPUT-$1000000)).w
+										btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 										beq.s   loc_2321A
 										clr.w   d0
 										move.b  (a0,d1.w),d0
@@ -5111,7 +5110,7 @@ loc_2321A:
 										bra.w   loc_23186
 loc_2321E:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_VALIDATION
 										bsr.w   HideUnitCursor
 										movem.l (sp)+,d1-a0
@@ -5130,7 +5129,7 @@ sub_2322C:
 										jsr     j_GetYPos
 										move.w  d1,d3
 										bsr.w   GetEntityNumberOfCombatant
-										move.b  d0,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										jsr     (WaitForVInt).w 
 										bsr.w   sub_23256
 										movem.l (sp)+,d0-a0
@@ -5146,10 +5145,10 @@ sub_23256:
 										bsr.w   LoadUnitCursorTileData
 										clr.w   d4
 										clr.w   d5
-										move.b  ((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w,d4
-										move.b  ((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w,d5
-										move.b  d2,((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w
-										move.b  d3,((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w
+										move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d4
+										move.b  ((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w,d5
+										move.b  d2,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
+										move.b  d3,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 										mulu.w  #$180,d2
 										mulu.w  #$180,d3
 										mulu.w  #$180,d4
@@ -5157,7 +5156,7 @@ sub_23256:
 										moveq   #$30,d0 
 										jsr     sub_4402C
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										adda.w  d0,a0
 										move.w  d4,(a0)
 										move.w  d5,2(a0)
@@ -5165,7 +5164,7 @@ sub_23256:
 										move.w  d3,$E(a0)
 										bsr.w   sub_23414
 										bsr.w   WaitForUnitCursor
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										rts
 
 	; End of function sub_23256
@@ -5195,10 +5194,10 @@ SetUnitCursorDestinationToNextBattleEntity:
 										bsr.w   LoadUnitCursorTileData
 										clr.w   d4
 										clr.w   d5
-										move.b  ((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w,d4
-										move.b  ((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w,d5
-										move.b  d2,((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w
-										move.b  d3,((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w
+										move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d4
+										move.b  ((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w,d5
+										move.b  d2,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
+										move.b  d3,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 										mulu.w  #$180,d2
 										mulu.w  #$180,d3
 										mulu.w  #$180,d4
@@ -5207,7 +5206,7 @@ SetUnitCursorDestinationToNextBattleEntity:
 										jsr     j_SetUnitCursorActscript
 										jsr     (WaitForVInt).w 
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										adda.w  d0,a0
 										move.w  d4,(a0)
 										move.w  d5,ENTITYDEF_OFFSET_Y(a0)
@@ -5254,34 +5253,34 @@ loc_23368:
 										move.w  #$80,d1 
 loc_23376:
 										
-										tst.b   ((RAM_Map_AreaLayer1AutoscrollX-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
 										bne.s   loc_23388
 										move.w  d0,d7
-										mulu.w  ((RAM_Map_AreaLayer1XParallax-$1000000)).w,d7
+										mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d7
 										lsr.w   #8,d7
 										move.w  d7,((word_FFA820-$1000000)).w
 loc_23388:
 										
-										tst.b   ((RAM_Map_AreaLayer1AutoscrollY-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
 										bne.s   loc_2339A
 										move.w  d1,d7
-										mulu.w  ((RAM_Map_AreaLayer1YParallax-$1000000)).w,d7
+										mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d7
 										lsr.w   #8,d7
 										move.w  d7,((word_FFA822-$1000000)).w
 loc_2339A:
 										
-										tst.b   ((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										bne.s   loc_233AC
 										move.w  d0,d7
-										mulu.w  ((RAM_Map_AreaLayer2XParallax-$1000000)).w,d7
+										mulu.w  ((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w,d7
 										lsr.w   #8,d7
 										move.w  d7,((word_FFA824-$1000000)).w
 loc_233AC:
 										
-										tst.b   ((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w
+										tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 										bne.s   loc_233BE
 										move.w  d1,d7
-										mulu.w  ((RAM_Map_AreaLayer2YParallax-$1000000)).w,d7
+										mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d7
 										lsr.w   #8,d7
 										move.w  d7,((word_FFA826-$1000000)).w
 loc_233BE:
@@ -5294,25 +5293,25 @@ loc_233BE:
 										subi.w  #$780,d1
 										addi.w  #$780,d2
 										addi.w  #$600,d3
-										cmp.w   ((RAM_Map_AreaLayer1StartX-$1000000)).w,d0
+										cmp.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
 										bge.s   loc_233E4
-										move.w  ((RAM_Map_AreaLayer1StartX-$1000000)).w,d0
+										move.w  ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
 loc_233E4:
 										
-										cmp.w   ((RAM_Map_AreaLayer1EndX-$1000000)).w,d2
+										cmp.w   ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d2
 										ble.s   loc_233F2
-										move.w  ((RAM_Map_AreaLayer1EndX-$1000000)).w,d0
+										move.w  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d0
 										subi.w  #$F00,d0
 loc_233F2:
 										
-										cmp.w   ((RAM_Map_AreaLayer1StartY-$1000000)).w,d1
+										cmp.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d1
 										bge.s   loc_233FC
-										move.w  ((RAM_Map_AreaLayer1StartY-$1000000)).w,d1
+										move.w  ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d1
 loc_233FC:
 										
-										cmp.w   ((RAM_Map_AreaLayer1EndY-$1000000)).w,d3
+										cmp.w   ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d3
 										ble.s   loc_2340A
-										move.w  ((RAM_Map_AreaLayer1EndY-$1000000)).w,d1
+										move.w  ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d1
 										subi.w  #$D80,d1
 loc_2340A:
 										
@@ -5372,7 +5371,7 @@ SetEntityBlinkingFlag:
 										movem.l d0/a0,-(sp)
 										bsr.w   GetEntityNumberOfCombatant
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										bset    #7,$1D(a0,d0.w)
 										movem.l (sp)+,d0/a0
 										rts
@@ -5387,7 +5386,7 @@ ClearEntityBlinkingFlag:
 										movem.l d0/a0,-(sp)
 										bsr.w   GetEntityNumberOfCombatant
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										bclr    #7,$1D(a0,d0.w)
 										movem.l (sp)+,d0/a0
 										rts
@@ -5468,7 +5467,7 @@ loc_234DA:
 										adda.w  d1,a1
 										move.w  #$120,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 loc_23538:
 										
@@ -5638,7 +5637,7 @@ UnitCursorTiles:    incbin "graphics/technical/unitcursortiles.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
-FadeOut_WaitForP2Input:
+FadeOut_WaitForP1Input:
 										
 										move.w  d0,-(sp)
 										move.w  #$FB,d0 
@@ -5647,7 +5646,7 @@ FadeOut_WaitForP2Input:
 										move.w  (sp)+,d0
 										rts
 
-	; End of function FadeOut_WaitForP2Input
+	; End of function FadeOut_WaitForP1Input
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5659,13 +5658,13 @@ FadeOut_WaitForP2Input:
 SetEntityPosition:
 										
 										movem.l d0/a0,-(sp)
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										lsl.w   #5,d0
 										adda.w  d0,a0
 										move.w  d1,(a0)
-										move.w  d2,2(a0)
-										move.w  d1,$C(a0)
-										move.w  d2,$E(a0)
+										move.w  d2,ENTITYDEF_OFFSET_Y(a0)
+										move.w  d1,ENTITYDEF_OFFSET_XDEST(a0)
+										move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
 										movem.l (sp)+,d0/a0
 										rts
 
@@ -5688,14 +5687,14 @@ tbl_PixelOffsets_Y: dc.w 0
 
 GetActivatedEntity:
 										
-										move.b  ((RAM_Battle_CurrentMovingEntity-$1000000)).w,d0
+										move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d0
 										ext.w   d0
 										bpl.s   loc_237A4
 										rts
 loc_237A4:
 										
 										movem.l d3-a0,-(sp)
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										lsl.w   #5,d0
 										adda.w  d0,a0
 										move.w  (a0,d0.w),d1    ; get X
@@ -5718,7 +5717,7 @@ loc_237C8:
 										lsl.w   #6,d7
 										add.w   d6,d7
 										add.w   d7,d7
-										lea     (RAM_Start).l,a1
+										lea     (RAM_START).l,a1
 										move.w  (a1,d7.w),d7
 										andi.w  #$3C00,d7
 										cmpi.w  #$2800,d7
@@ -5727,7 +5726,7 @@ loc_237C8:
 										moveq   #$2F,d7 
 loc_237FE:
 										
-										cmp.b   ((RAM_Battle_CurrentMovingEntity-$1000000)).w,d0
+										cmp.b   ((BATTLE_CURRENT_ENTITY-$1000000)).w,d0
 										beq.w   loc_2382A       ; skip this entity because it's the player!
 										bsr.w   CheckIfEntityIsFollower
 										bne.w   loc_2382A       ; skip this entity because it's a follower!
@@ -5793,15 +5792,15 @@ loc_2385C:
 
 sub_23862:
 										
-										move.b  ((RAM_Battle_CurrentMovingEntity-$1000000)).w,d0
+										move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d0
 										ext.w   d0
 										bpl.s   loc_2386C
 										rts
 loc_2386C:
 										
-										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
+										clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										lsl.w   #5,d0
 										adda.w  d0,a0
 										move.w  (a0,d0.w),d2
@@ -5824,19 +5823,19 @@ loc_2386C:
 										lsl.w   #6,d3
 										add.w   d0,d3
 										add.w   d3,d3
-										lea     (RAM_Start).l,a0
+										lea     (RAM_START).l,a0
 										move.w  (a0,d3.w),d3
 										andi.w  #$3C00,d3
 										cmpi.w  #$1800,d3
 										bne.s   loc_238E8
 										jsr     (OpenChest).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $193               ; "{NAME} opened the chest.{W2}{CLEAR}"
 										move.w  d2,d0
 										andi.w  #$7F,d0 
 										cmpi.b  #$7F,d0 
 										bne.w   loc_239C8
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $198               ; "But, it was empty.{W1}"
 										bra.w   loc_23994
 loc_238E8:
@@ -5844,13 +5843,13 @@ loc_238E8:
 										cmpi.w  #$2C00,d3
 										bne.s   loc_2390C
 										jsr     (OpenVaseOrBarrel).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $194               ; "{NAME} investigated{N}the vase.{W2}{CLEAR}"
 										move.w  d2,d0
 										andi.w  #$7F,d0 
 										cmpi.b  #$7F,d0 
 										bne.w   loc_239C8
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $199               ; "It was dark inside.{W1}"
 										bra.w   loc_23994
 loc_2390C:
@@ -5858,13 +5857,13 @@ loc_2390C:
 										cmpi.w  #$3000,d3
 										bne.s   loc_23930
 										jsr     (OpenVaseOrBarrel).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $195               ; "{NAME} looked in{N}the barrel.{W2}{CLEAR}"
 										move.w  d2,d0
 										andi.w  #$7F,d0 
 										cmpi.b  #$7F,d0 
 										bne.w   loc_239C8
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $19A               ; "It was empty.{W1}"
 										bra.w   loc_23994
 loc_23930:
@@ -5872,13 +5871,13 @@ loc_23930:
 										cmpi.w  #$3400,d3
 										bne.s   loc_23954
 										jsr     (OpenVaseOrBarrel).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1AB               ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
 										move.w  d2,d0
 										andi.w  #$7F,d0 
 										cmpi.b  #$7F,d0 
 										bne.w   loc_239C8
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $19C               ; "Nothing was there.{W1}"
 										bra.w   loc_23994
 loc_23954:
@@ -5886,13 +5885,13 @@ loc_23954:
 										cmpi.w  #$1C00,d3
 										bne.s   loc_23978
 										jsr     (OpenVaseOrBarrel).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
 										move.w  d2,d0
 										andi.w  #$7F,d0 
 										cmpi.b  #$7F,d0 
 										bne.w   loc_239C8
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $19C               ; "Nothing was there.{W1}"
 										bra.w   loc_23994
 loc_23978:
@@ -5905,13 +5904,13 @@ loc_23978:
 										bra.w   return_2399A
 loc_2398C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $19C               ; "Nothing was there.{W1}"
 loc_23994:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										moveq   #$FFFFFFFF,d0
 return_2399A:
@@ -5943,75 +5942,77 @@ ChestGoldAmounts:   incbin "maps/global/chestgoldamounts.bin"
 loc_239C8:
 										
 										clr.w   d0
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										cmpi.w  #$80,d2 
 										blt.s   loc_239EE
 										bsr.s   GetChestGoldAmount
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
 										jsr     j_IncreaseGold
-										trap    #TRAP_SOUNDCOM
-
-; END OF FUNCTION CHUNK FOR sub_23862
-
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $19E               ; "{NAME} found {#} gold{N}coins."
-										bsr.w   FadeOut_WaitForP2Input
+										bsr.w   FadeOut_WaitForP1Input
 										bra.s   loc_23994
-
-; START OF FUNCTION CHUNK FOR sub_23862
-
 loc_239EE:
 										
-										move.w  d2,((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_23862
-
+										move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $19D               ; "{NAME} found{N}{ITEM}.{W2}{CLEAR}"
 										clr.w   d1
 										jsr     j_GetItemAndNumberOfItems
 										cmpi.w  #4,d2
 										bge.s   loc_23A1E
-										move.w  ((RAM_Dialogue_NameIdx2-$1000000)).w,d1
+										move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d1
 										jsr     j_AddItem
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $19F               ; "{NAME} recieved{N}{ITEM}."
-										bsr.w   FadeOut_WaitForP2Input
+										bsr.w   FadeOut_WaitForP1Input
 										bra.w   loc_23994
-loc_23A1E:          jsr     j_UpdateForce
+loc_23A1E:
+										
+										jsr     j_UpdateForce
 										lea     ((byte_FFB653-$1000000)).w,a0
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										subq.w  #2,d7
 										bmi.w   loc_23A66
-loc_23A32:          clr.w   d0
+loc_23A32:
+										
+										clr.w   d0
 										move.b  (a0)+,d0
 										clr.w   d1
 										jsr     j_GetItemAndNumberOfItems
 										cmpi.w  #4,d2
 										bge.s   loc_23A62
-										move.w  ((RAM_Dialogue_NameIdx2-$1000000)).w,d1
+										move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d1
 										jsr     j_AddItem
-										move.w  d0,((RAM_Dialogue_NameIdx3-$1000000)).w
-										trap    #TRAP_SOUNDCOM
+										move.w  d0,((TEXT_NAME_INDEX_3-$1000000)).w
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1A0               ; "{NAME} passed the{N}{ITEM} to {NAME}."
-										bsr.w   FadeOut_WaitForP2Input
+										bsr.w   FadeOut_WaitForP1Input
 										bra.w   loc_23994
-loc_23A62:          dbf     d7,loc_23A32
-loc_23A66:          move.w  ((RAM_Dialogue_NameIdx2-$1000000)).w,d3
+loc_23A62:
+										
+										dbf     d7,loc_23A32
+loc_23A66:
+										
+										move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d3
 										clr.w   d0
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $1A1               ; "But, everyone's hands are{N}full.{W1}"
 										move.w  d4,d0
 										move.w  d5,d1
 										jsr     (CloseChest).w
 										jsr     (CloseVaseOrBarrel).w
 										bra.w   loc_23994
+
+; END OF FUNCTION CHUNK FOR sub_23862
+
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6021,16 +6022,16 @@ loc_23A66:          move.w  ((RAM_Dialogue_NameIdx2-$1000000)).w,d3
 ExecuteBattleLoop:
 										
 										clr.b   ((PLAYER_TYPE-$1000000)).w
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $18F               ; set after first battle's cutscene OR first save? Checked at witch screens
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 										beq.s   loc_23AB2
 										move.l  ((SECONDS_COUNTER_FROM_SRAM-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG
 										dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 										jsr     j_ClearEnemyMoveInfo
-										clr.b   ((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										clr.b   ((BATTLE_CURRENT_ENTITY-$1000000)).w
 										bsr.w   LoadBattle      
 										bra.w   loc_23B40       
 										bra.w   loc_23B0A       
@@ -6063,16 +6064,16 @@ loc_23B0A:
 										
 										bsr.w   UpdateAllEnemyAI; start of battle loop
 										jsr     j_ExecuteBattleCutscene_Region
-										tst.b   ((RAM_DebugModeActivated-$1000000)).w
+										tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
 										beq.s   loc_23B1E
 										bsr.w   PrintAllActivatedDefCons
 loc_23B1E:
 										
 										jsr     j_GetListOfSpawningEnemies
-										move.w  ((RAM_CharIdxListSize-$1000000)).w,d7
+										move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 										beq.s   loc_23B3C
 										subq.w  #1,d7
-										lea     ((RAM_CharIdxList-$1000000)).w,a0
+										lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 loc_23B30:
 										
 										clr.w   d0
@@ -6085,15 +6086,15 @@ loc_23B3C:
 loc_23B40:
 										
 										clr.w   d0              ; start of individual turn execution
-										move.b  ((RAM_Battle_CurrentTurnOffset-$1000000)).w,d0
-										lea     ((RAM_Battle_TurnOrder-$1000000)).w,a0
+										move.b  ((BATTLE_CURRENT_TURN_OFFSET-$1000000)).w,d0
+										lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
 										move.b  (a0,d0.w),d0
 										cmpi.b  #$FF,d0
 										beq.s   loc_23B0A       
 										bsr.w   sub_23EB0       
-										tst.b   ((RAM_DebugModeActivated-$1000000)).w
+										tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
 										beq.s   loc_23B6A
-										cmpi.b  #$71,((RAM_Input_Player1_StateA-$1000000)).w
+										cmpi.b  #$71,((P1_INPUT-$1000000)).w
 										bne.s   loc_23B6A
 										bsr.w   loc_23BB4       
 loc_23B6A:
@@ -6107,8 +6108,8 @@ loc_23B6A:
 										tst.w   d3
 										beq.w   loc_23CBA
 										clr.w   d0
-										move.b  ((RAM_Battle_CurrentTurnOffset-$1000000)).w,d0
-										lea     ((RAM_Battle_TurnOrder-$1000000)).w,a0
+										move.b  ((BATTLE_CURRENT_TURN_OFFSET-$1000000)).w,d0
+										lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
 										move.b  (a0,d0.w),d0
 										bsr.w   HandleAfterTurnEffects
 										jsr     HandleKilledCombatants(pc)
@@ -6118,7 +6119,7 @@ loc_23B6A:
 										beq.w   loc_23D44
 										tst.w   d3
 										beq.w   loc_23CBA
-										addq.b  #2,((RAM_Battle_CurrentTurnOffset-$1000000)).w
+										addq.b  #2,((BATTLE_CURRENT_TURN_OFFSET-$1000000)).w
 										bra.s   loc_23B40       
 loc_23BB4:
 										
@@ -6257,7 +6258,7 @@ loc_23CCC:
 										move.b  d1,((byte_FFA84F-$1000000)).w
 										bsr.w   GetEntityNumberOfCombatant
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										move.b  $10(a0,d0.w),((byte_FFA850-$1000000)).w
 										move.b  #0,((byte_FFA84C-$1000000)).w
 										jsr     j_ExecuteAfterBattleCutscene
@@ -6280,15 +6281,12 @@ loc_23CCC:
 loc_23D44:
 										
 										bsr.w   sub_23E1A
-										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_SOUNDCOM
-
-; END OF FUNCTION CHUNK FOR ExecuteBattleLoop
-
+										clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_SAD_THEME_2  ; sad theme 2
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $16B               ; "{LEADER} is exhausted.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d0
 										jsr     j_GetMaxHP
@@ -6301,14 +6299,19 @@ loc_23D44:
 										moveq   #$FFFFFFFF,d4
 										cmpi.b  #4,((CURRENT_BATTLE-$1000000)).w
 										bne.s   return_23D96
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG     ; HARDCODED battle 4 behaviour : you can lose this battle
 										dc.w $194               ; Battle 4 unlocked
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $1F8               ; Battle 4 completed
 										jsr     sub_1AC04C
 										moveq   #$11,d0
 										clr.w   d4
-return_23D96:       rts
+return_23D96:
+										
+										rts
+
+; END OF FUNCTION CHUNK FOR ExecuteBattleLoop
+
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -6318,10 +6321,10 @@ sub_23D98:
 										move.w  ((word_FFB634-$1000000)).w,d1
 										jsr     j_RemoveItemBySlot
 										bsr.w   sub_23E38
-										move.w  -2(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  ((word_FFB630-$1000000)).w,((RAM_Dialogue_NameIdx2-$1000000)).w
-										andi.w  #ITEM_MASK_IDX,((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  ((word_FFB630-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
+										andi.w  #ITEM_MASK_IDX,((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $113               ; "{NAME} used{N}{ITEM}!"
 										bra.w   loc_23DFA
 loc_23DC4:
@@ -6331,18 +6334,18 @@ loc_23DC4:
 										jsr     j_GetSpellCost
 										jsr     j_DecreaseCurrentMP
 										bsr.w   sub_23E38
-										move.w  -2(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  ((word_FFB630-$1000000)).w,((RAM_Dialogue_NameIdx2-$1000000)).w
-										andi.w  #SPELL_MASK_IDX,((RAM_Dialogue_NameIdx2-$1000000)).w
-										move.l  #1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  ((word_FFB630-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
+										andi.w  #SPELL_MASK_IDX,((TEXT_NAME_INDEX_2-$1000000)).w
+										move.l  #1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $112               ; "{NAME} cast{N}{SPELL} level {#}!"
 loc_23DFA:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_SPELL_CAST
 										jsr     j_ExecuteFlashScreenScript
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bsr.w   sub_23E1A
 										unlk    a6
@@ -6387,19 +6390,21 @@ sub_23E38:
 
 ; =============== S U B R O U T I N E =======================================
 
+; HARDCODED battle->map relationship ?
+
 GetEgressPositionForBattle:
 										
 										clr.b   d7
 										move.b  ((CURRENT_BATTLE-$1000000)).w,d7
 										cmpi.b  #$26,d7 
 										bne.s   loc_23E60
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG
 										dc.w $1B6               ; Battle 38 unlocked
 loc_23E60:
 										
 										cmpi.b  #$27,d7 
 										bne.s   loc_23E6A
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG
 										dc.w $1B7               ; Battle 39 unlocked
 loc_23E6A:
 										
@@ -6433,7 +6438,7 @@ loc_23E9A:
 										bra.w   loc_23EAA
 loc_23EA6:
 										
-										move.b  ((RAM_EgressMapIdx-$1000000)).w,d0
+										move.b  ((EGRESS_MAP_INDEX-$1000000)).w,d0
 loc_23EAA:
 										
 										jsr     (GetEgressPositionForMap).w
@@ -6460,7 +6465,7 @@ loc_23EC4:
 										bne.s   loc_23EDA
 										tst.w   -2(a6)
 										bne.s   loc_23EDA
-										trap    #TRAP_CLEARFLAG
+										trap    #CLEAR_FLAG
 										dc.w $70                ; cleared, set, and checked in ASM x09EC4..x09F27 (CheckForTaros ASM)
 loc_23EDA:
 										
@@ -6477,7 +6482,7 @@ loc_23EDA:
 										clr.b   ((word_FFAF8E-$1000000)).w
 										move.w  -2(a6),d0
 										bsr.w   GetEntityNumberOfCombatant
-										move.b  d0,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										move.w  -2(a6),d0
 										bsr.w   SetUnitCursorDestinationToNextCombatant
 										move.w  -2(a6),d0
@@ -6566,7 +6571,7 @@ loc_24036:
 										bsr.w   sub_252FA
 loc_2403A:
 										
-										cmpi.w  #ACTION_SPELL,((RAM_BattleScene_ActionType-$1000000)).w
+										cmpi.w  #ACTION_SPELL,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										bne.s   loc_24052
 										move.w  ((word_FFB630-$1000000)).w,d0
 										andi.w  #SPELL_MASK_IDX,d0
@@ -6574,7 +6579,7 @@ loc_2403A:
 										beq.w   loc_23DC4
 loc_24052:
 										
-										cmpi.w  #ACTION_ITEM,((RAM_BattleScene_ActionType-$1000000)).w
+										cmpi.w  #ACTION_ITEM,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										bne.s   loc_2406A
 										move.w  ((word_FFB630-$1000000)).w,d0
 										andi.w  #ITEM_MASK_IDX,d0
@@ -6582,11 +6587,11 @@ loc_24052:
 										beq.w   sub_23D98
 loc_2406A:
 										
-										cmpi.w  #3,((RAM_BattleScene_ActionType-$1000000)).w
+										cmpi.w  #3,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										beq.w   loc_2420E
-										cmpi.w  #$80,((RAM_BattleScene_ActionType-$1000000)).w 
+										cmpi.w  #$80,((BATTLESCENE_ACTION_TYPE-$1000000)).w 
 										bne.w   loc_24090
-										clr.w   ((RAM_BattleScene_ActionType-$1000000)).w
+										clr.w   ((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										move.w  ((word_FFB630-$1000000)).w,d0
 										move.w  -2(a6),((word_FFB630-$1000000)).w
 										move.w  d0,-2(a6)
@@ -6596,14 +6601,14 @@ loc_24090:
 										jsr     j_GetClass      
 										cmpi.w  #$1C,d1
 										bne.s   loc_240E6
-										tst.w   ((RAM_BattleScene_ActionType-$1000000)).w
+										tst.w   ((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										bne.s   loc_240E6
 										moveq   #4,d6
 										jsr     (UpdateRandomSeed).w
 										tst.w   d7
 										bne.s   loc_240E6
 										move.w  ((word_FFB630-$1000000)).w,((word_FFB632-$1000000)).w
-										move.w  #1,((RAM_BattleScene_ActionType-$1000000)).w
+										move.w  #1,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										jsr     j_GetCurrentLevel
 										clr.w   d0
 										cmpi.w  #$20,d1 
@@ -6639,7 +6644,7 @@ loc_240F4:
 										tst.b   d0
 										blt.s   loc_2412C       
 										jsr     j_GetClass      
-										cmpi.w  #$C,d1
+										cmpi.w  #$C,d1          ; HARDCODED music choices
 										bge.s   loc_24122
 										move.b  #MUSIC_ATTACK,((SKIRMISH_MUSIC_INDEX-$1000000)).w
 										bra.s   loc_24128
@@ -6729,7 +6734,7 @@ loc_241C4:
 										nop
 										jsr     (WaitForVInt).w 
 										clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										movem.l (sp)+,a6
 										bra.s   loc_2423E
 loc_2420E:
@@ -6766,24 +6771,24 @@ HandleAfterTurnEffects:
 										jsr     j_GetCurrentHP
 										tst.w   d1
 										beq.w   loc_24486       ; skip all this if character died
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										jsr     j_GetStatus
 										move.w  d1,d2
 										andi.w  #1,d1
 										beq.s   loc_24294
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										andi.w  #$FFFE,d2
 										move.w  #2,d6
 										jsr     (UpdateRandomSeed).w
 										tst.w   d7
 										bne.s   loc_24288
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $166               ; "{CLEAR}{NAME} is no longer stunned.{D3}"
 										clr.w   d1
 										bra.s   loc_2428C
 loc_24288:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $135               ; "{NAME} is stunned.{D3}"
 loc_2428C:
 										
@@ -6795,19 +6800,19 @@ loc_24294:
 										move.w  d1,d2
 										andi.w  #$C0,d1 
 										beq.s   loc_242CE
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										andi.w  #$FF3F,d2
 										move.w  d1,d6
 										jsr     (UpdateRandomSeed).w
 										andi.w  #$C0,d7 
 										bne.s   loc_242BE
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $162               ; "{CLEAR}{NAME} has awakened.{D3}"
 										clr.w   d1
 										bra.s   loc_242C6
 loc_242BE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $132               ; "{NAME} is sleeping.{D3}"
 										subi.w  #$40,d1 
 loc_242C6:
@@ -6825,8 +6830,8 @@ loc_242CE:
 										jsr     (UpdateRandomSeed).w
 										andi.w  #$30,d7 
 										bne.s   loc_242FC
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $163               ; "{CLEAR}{NAME} is fine.{D3}"
 										clr.w   d1
 										andi.w  #$FFF7,d2
@@ -6849,9 +6854,9 @@ loc_24308:
 										jsr     (UpdateRandomSeed).w
 										andi.w  #$300,d7
 										bne.s   loc_24338
-										move.w  #6,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  d0,((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  #6,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $15F               ; "{CLEAR}{SPELL} expired.{N}{NAME} is no longer{N}silenced.{D3}"
 										clr.w   d1
 										bra.s   loc_2433C
@@ -6871,8 +6876,8 @@ loc_24344:
 										andi.w  #$F3FF,d2
 										subi.w  #$400,d1
 										bne.s   loc_24366
-										move.w  #4,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  #4,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $15D               ; "{CLEAR}{SPELL} expired.{N}Agility and defense{N}return to normal.{D3}"
 loc_24366:
 										
@@ -6887,8 +6892,8 @@ loc_2436E:
 										andi.w  #$3FFF,d2
 										subi.w  #$4000,d1
 										bne.s   loc_24390
-										move.w  #5,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  #5,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $15E               ; "{CLEAR}{SPELL} expired.{N}Attack returns to normal.{D3}"
 loc_24390:
 										
@@ -6903,8 +6908,8 @@ loc_24398:
 										andi.w  #$CFFF,d2
 										subi.w  #$1000,d1
 										bne.s   loc_243BA
-										move.w  #3,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  #3,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $15C               ; "{CLEAR}{SPELL} expired.{N}Agility and defense{N}return to normal.{D3}"
 loc_243BA:
 										
@@ -6922,9 +6927,9 @@ loc_243C2:
 										sub.w   d2,d1
 										ble.s   loc_243F0
 										ext.l   d1
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $164               ; "{CLEAR}{NAME} recovered{N}{#} hit points.{D3}"
 loc_243F0:
 										
@@ -6938,9 +6943,9 @@ loc_243F0:
 										sub.w   d2,d1
 										ble.s   loc_2441E
 										ext.l   d1
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $165               ; "{CLEAR}{NAME} recovered{N}{#} magic points.{D3}"
 loc_2441E:
 										
@@ -6954,31 +6959,31 @@ loc_2441E:
 										sub.w   d2,d1
 										ble.s   loc_2444C
 										ext.l   d1
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $164               ; "{CLEAR}{NAME} recovered{N}{#} hit points.{D3}"
 loc_2444C:
 										
 										jsr     j_GetStatus
 										andi.w  #2,d1
 										beq.s   loc_2447C
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										moveq   #2,d1
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $133               ; "{CLEAR}{NAME} gets damaged{N}by {#} because of the poison.{D3}"
 										jsr     j_DecreaseCurrentHP
 										tst.w   d1
 										bne.s   loc_2447C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $134               ; "{NAME} is exhausted.{D3}"
 										addq.w  #1,((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
 										move.b  d0,((DEAD_COMBATANTS_LIST-$1000000)).w
 loc_2447C:
 										
 										jsr     j_ApplyStatusAndItemsOnStats
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 loc_24486:
 										
@@ -6989,8 +6994,6 @@ loc_24486:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; ?
 
 SpawnEnemySkipCamera:
 										
@@ -7012,7 +7015,7 @@ loc_24492:
 										clr.b   ((word_FFAF8E-$1000000)).w
 										move.w  -2(a6),d0
 										bsr.w   GetEntityNumberOfCombatant
-										move.b  d0,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										move.w  -2(a6),d0
 										bsr.w   SetUnitCursorDestinationToNextCombatant
 										bsr.w   WaitForUnitCursor
@@ -7034,12 +7037,12 @@ loc_244D4:
 										moveq   #3,d0
 										jsr     (Sleep).w       
 										dbf     d7,loc_244D4
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_LANDSTALKER_SWITCH
-										move.w  -2(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $18D               ; "{CLEAR}{NAME} appeared!{D3}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										unlk    a6
 										movem.l (sp)+,d7-a0
@@ -7095,7 +7098,7 @@ loc_2455E:
 										moveq   #ANIM_SPRITE_DEATH_SPIN_DELAY,d0
 										jsr     (Sleep).w       
 										dbf     d6,loc_24526    
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BATTLEFIELD_DEATH
 										moveq   #2,d6
 loc_2457A:
@@ -7204,7 +7207,7 @@ loc_2466C:
 										move.w  -2(a6),d0
 										bsr.w   ClearEntityBlinkingFlag
 										bsr.w   GetEntityNumberOfCombatant
-										move.b  d0,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										move.w  -2(a6),d0
 										bsr.w   UpdateMoveSound
 										bsr.w   ControlBattleUnit
@@ -7227,9 +7230,9 @@ loc_2466C:
 										movem.w (sp)+,d0-d1
 										jsr     MakeBattleEntityCancelMoveString
 										move.w  -2(a6),d0
-										lea     (RAM_Battle_BattleEntityMoveString).l,a0
+										lea     (BATTLE_ENTITY_MOVE_STRING).l,a0
 										bsr.w   MoveBattleEntityByMoveString
-										move.w  #$FFFF,((RAM_BattleScene_ActionType-$1000000)).w
+										move.w  #$FFFF,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										moveq   #$FFFFFFFF,d0
 										bra.w   loc_25188
 loc_246EC:
@@ -7246,7 +7249,7 @@ loc_246F0:
 										jsr     j_GetYPos
 										cmp.w   d1,d3
 										bne.w   loc_24718
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_REFUSAL
 										beq.w   loc_2466C
 loc_24718:
@@ -7286,7 +7289,7 @@ loc_2476E:
 										
 										move.w  -2(a6),d0
 										jsr     j_sub_C404
-										tst.w   ((RAM_CharIdxListSize-$1000000)).w
+										tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										bne.s   loc_24782
 										moveq   #3,d0
 										bra.s   loc_24784
@@ -7317,11 +7320,11 @@ loc_247C6:
 										move.w  -2(a6),d0
 										jsr     j_sub_C404
 										bsr.w   CreateMoveableRangeForUnit
-										tst.w   ((RAM_CharIdxListSize-$1000000)).w
+										tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										bne.w   loc_247F0
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1B3               ; "No opponent there.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.w   loc_24746
@@ -7346,7 +7349,7 @@ loc_2482A:
 										
 										move.w  d0,((word_FFB630-$1000000)).w
 										move.w  d0,-4(a6)
-										clr.w   ((RAM_BattleScene_ActionType-$1000000)).w
+										clr.w   ((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										clr.w   d0
 										bra.w   loc_25188
 loc_2483C:
@@ -7358,9 +7361,9 @@ loc_2483C:
 										jsr     j_GetSpellAndNumberOfSpells
 										tst.w   d2
 										bne.w   loc_24864
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1B4               ; "Learned no new magic spell.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.w   loc_24746
@@ -7405,9 +7408,9 @@ loc_248BA:
 										jsr     j_GetSpellCost
 										sub.w   d1,d3
 										bge.w   loc_248E6
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1B5               ; "More MP needed.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.s   loc_24866
@@ -7417,11 +7420,11 @@ loc_248E6:
 										move.w  -2(a6),d0
 										jsr     j_CreateSpellRangeGrid
 										bsr.w   CreateMoveableRangeForUnit
-										tst.w   ((RAM_CharIdxListSize-$1000000)).w
+										tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										bne.w   loc_2490C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1B3               ; "No opponent there.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.w   loc_24866
@@ -7447,7 +7450,7 @@ loc_24952:
 										
 										move.w  d0,((word_FFB632-$1000000)).w
 										move.w  d0,-4(a6)
-										move.w  #1,((RAM_BattleScene_ActionType-$1000000)).w
+										move.w  #1,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										clr.w   d0
 										bra.w   loc_25188
 
@@ -7482,17 +7485,11 @@ loc_24982:
 										jsr     j_GetItemAndNumberOfItems
 										tst.w   d2
 										bne.w   loc_249A8
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										trap    #TEXTBOX
 										dc.w $1B6               ; "You have no item.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_24746
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_249A8:
 										
 										clr.w   d1
@@ -7547,38 +7544,26 @@ loc_24A24:
 										move.w  -2(a6),d0
 										jsr     j_IsItemUsableWeaponInBattle
 										bcs.w   loc_24A4A
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										trap    #TEXTBOX
 										dc.w $1B7               ; "It has no effect.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.w   loc_24746
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24A4A:
 										
 										move.w  ((word_FFB630-$1000000)).w,d1
 										move.w  -2(a6),d0
 										jsr     j_CreateItemRangeGrid
 										bsr.w   CreateMoveableRangeForUnit
-										tst.w   ((RAM_CharIdxListSize-$1000000)).w
+										tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										bne.w   loc_24A72
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										trap    #TEXTBOX
 										dc.w $1B7               ; "It has no effect.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.w   loc_249CE
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24A72:
 										
 										move.w  ((word_FFB630-$1000000)).w,d1
@@ -7600,24 +7585,17 @@ loc_24A72:
 										bsr.w   sub_2322C
 										moveq   #$FFFFFFFF,d1
 										bra.w   loc_24746
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 										bra.w   loc_249CE
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24AC8:
 										
 										move.w  d0,((word_FFB632-$1000000)).w
 										move.w  d0,-4(a6)
-										move.w  #ACTION_ITEM,((RAM_BattleScene_ActionType-$1000000)).w
+										move.w  #ACTION_ITEM,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										clr.w   d0
 										bra.w   loc_25188
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
-loc_24ADC:          movem.l d0-a6,-(sp)
+loc_24ADC:
+										
+										movem.l d0-a6,-(sp)
 										move.w  ((MOVING_BATTLE_ENTITY_IDX-$1000000)).w,d0
 										move.w  ((word_FFB18C-$1000000)).w,d1
 										jsr     j_IsItemUsableWeaponInBattle
@@ -7625,12 +7603,13 @@ loc_24ADC:          movem.l d0-a6,-(sp)
 										jsr     j_CreateItemRangeGrid
 										bsr.w   CreateMoveableRangeForUnit
 										bra.s   loc_24B00
-loc_24AFC:          bsr.w   ClearFadingBlockRange
-loc_24B00:          movem.l (sp)+,d0-a6
+loc_24AFC:
+										
+										bsr.w   ClearFadingBlockRange
+loc_24B00:
+										
+										movem.l (sp)+,d0-a6
 										rts
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24B06:
 										
 										cmpi.w  #2,d0
@@ -7641,18 +7620,12 @@ loc_24B06:
 										jsr     j_GetEquippableRings
 										add.w   d2,d1
 										bne.w   loc_24B34
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										trap    #TEXTBOX
 										dc.w $1BC               ; "You have nothing to equip.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.w   loc_249AA
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24B34:
 										
 										bsr.w   HideUnitCursor
@@ -7690,7 +7663,7 @@ loc_24B40:
 										bra.w   loc_24C44
 loc_24BA0:
 										
-										lea     ((RAM_EquippableItemList-$1000000)).w,a2
+										lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a2
 										lsl.w   #2,d1
 										move.w  (a2,d1.w),d2
 										move.w  2(a2,d1.w),d1
@@ -7736,7 +7709,7 @@ loc_24C22:
 										bra.w   loc_24B40
 loc_24C26:
 										
-										lea     ((RAM_EquippableItemList-$1000000)).w,a2
+										lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a2
 										lsl.w   #2,d1
 										move.w  (a2,d1.w),d2
 										move.w  2(a2,d1.w),d1
@@ -7806,9 +7779,9 @@ loc_24C94:
 										cmp.w   d4,d1
 										beq.w   return_24CF4
 										jsr     sub_10064
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2B                ; "Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}"
 										bra.w   loc_24CE6
 loc_24CC4:
@@ -7818,15 +7791,15 @@ loc_24CC4:
 										cmpi.w  #2,d2
 										bne.w   return_24CF4
 										jsr     sub_10064
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $22                ; "Gosh!  {NAME} is{N}cursed!{W2}"
 loc_24CE6:
 										
-										bsr.w   FadeOut_WaitForP2Input
-										trap    #TRAP_TEXTBOX
+										bsr.w   FadeOut_WaitForP1Input
+										trap    #TEXTBOX
 										dc.w $FFFF
 										jsr     sub_1005C
 return_24CF4:
@@ -7841,7 +7814,7 @@ loc_24CF6:
 										clr.w   d2
 										move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d2
 										lsl.w   #2,d2
-										lea     ((RAM_EquippableItemList-$1000000)).w,a2
+										lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a2
 										move.w  (a2,d2.w),d5
 										move.w  2(a2,d2.w),d6
 										move.w  (a2),d1
@@ -7901,21 +7874,15 @@ loc_24D6C:
 										move.w  -2(a6),d0
 										jsr     j_sub_C4E8
 										bsr.w   CreateMoveableRangeForUnit
-										tst.w   ((RAM_CharIdxListSize-$1000000)).w
+										tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 										bne.w   loc_24DCC
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										trap    #TEXTBOX
 										dc.w $1B3               ; "No opponent there.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bsr.w   ClearFadingBlockRange
 										bra.w   loc_249AA
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24DCC:
 										
 										bsr.w   HideUnitCursor
@@ -7937,21 +7904,15 @@ loc_24DF0:
 										jsr     j_GetItemDefAddress
 										btst    #6,8(a0)
 										beq.w   loc_24E26
-										trap    #TRAP_SOUNDCOM
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1B9               ; "The equipment is cursed.{W1}"
-										bsr.w   FadeOut_WaitForP2Input
-										trap    #TRAP_TEXTBOX
+										bsr.w   FadeOut_WaitForP1Input
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.s   loc_24DCC
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24E26:
 										
 										clr.b   ((word_FFAF8E-$1000000)).w
@@ -8009,28 +7970,22 @@ loc_24E8E:
 loc_24EDE:
 										
 										move.w  d0,((word_FFB632-$1000000)).w
-										move.w  d1,((RAM_BattleScene_ActionType-$1000000)).w
+										move.w  d1,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										btst    #7,d0
 										beq.w   loc_24F16
 										move.w  d0,d1
 										jsr     j_GetItemDefAddress
 										btst    #6,8(a0)
 										beq.w   loc_24F16
-										trap    #TRAP_SOUNDCOM
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1B9               ; "The equipment is cursed.{W1}"
-										bsr.w   FadeOut_WaitForP2Input
-										trap    #TRAP_TEXTBOX
+										bsr.w   FadeOut_WaitForP1Input
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.w   loc_24E8E
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24F16:
 										
 										move.w  ((word_FFB630-$1000000)).w,d1
@@ -8039,7 +7994,7 @@ loc_24F16:
 										jsr     j_RemoveItemBySlot
 										move.w  ((word_FFB634-$1000000)).w,d1
 										move.w  d1,-(sp)
-										move.w  ((RAM_BattleScene_ActionType-$1000000)).w,d1
+										move.w  ((BATTLESCENE_ACTION_TYPE-$1000000)).w,d1
 										andi.w  #3,d1
 										move.w  -4(a6),d0
 										jsr     j_RemoveItemBySlot
@@ -8053,7 +8008,7 @@ loc_24F16:
 										jsr     j_AddItem
 loc_24F62:
 										
-										move.w  #3,((RAM_BattleScene_ActionType-$1000000)).w
+										move.w  #3,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										clr.w   d0
 										bra.w   loc_25188
 loc_24F6E:
@@ -8093,50 +8048,35 @@ loc_24FC2:
 										jsr     j_GetItemDefAddress
 										btst    #6,8(a0)
 										beq.w   loc_24FFA
-										trap    #TRAP_SOUNDCOM
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CURSED_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1B9               ; "The equipment is cursed.{W1}"
-										bsr.w   FadeOut_WaitForP2Input
-										trap    #TRAP_TEXTBOX
+										bsr.w   FadeOut_WaitForP1Input
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.w   loc_24F6E
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24FFA:
 										
 										move.w  ((word_FFB634-$1000000)).w,d1
 										jsr     j_GetItemDefAddress
 										btst    #4,8(a0)
 										beq.w   loc_25022
-										move.w  -2(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $1BB               ; "Are you sure?"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.w   loc_24F6E
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_25022:
 										
-										move.w  ((word_FFB634-$1000000)).w,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										move.w  ((word_FFB634-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $2C                ; "The {ITEM} will be{N}discarded.  Are you sure?"
 										jsr     j_YesNoChoiceBox
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										tst.w   d0
 										bne.w   loc_24746
@@ -8149,49 +8089,39 @@ loc_25022:
 										beq.s   loc_25066
 										move.w  ((word_FFB634-$1000000)).w,d0
 										jsr     j_AddItemToDeals
-loc_25066:          trap    #TRAP_TEXTBOX
+loc_25066:
+										
+										trap    #TEXTBOX
 										dc.w $2A                ; "Discarded the {ITEM}.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										bra.w   loc_24746
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_25072:
 										
 										cmpi.w  #$FFFF,((byte_FFB180-$1000000)).w
 										bne.w   loc_25088
-										move.w  #3,((RAM_BattleScene_ActionType-$1000000)).w
+										move.w  #3,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										clr.w   d0
 										bra.w   loc_25188
 loc_25088:
 										
 										move.w  -2(a6),d0
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										bsr.w   GetEntityPositionAfterApplyingFacing
 										bsr.w   sub_256E6
 										cmpi.w  #$FFFF,d3
 										beq.s   loc_250B0
-										move.w  d3,((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										move.w  d3,((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $1A2               ; "{NAME} is distributing{N}items from the open chest.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										clr.w   d1
 										bra.w   loc_24746
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_250B0:
 										
 										jsr     (OpenChest).w
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
+										trap    #TEXTBOX
 										dc.w $193               ; "{NAME} opened the chest.{W2}{CLEAR}"
 										move.w  ((byte_FFB180-$1000000)).w,d1
 										andi.w  #ITEM_MASK_IDX,d1
@@ -8204,60 +8134,67 @@ loc_250B0:
 										jsr     sub_1AC054
 										cmpi.w  #$FFFF,d0
 										beq.w   loc_250FC
-										move.w  #$80,((RAM_BattleScene_ActionType-$1000000)).w 
+										move.w  #$80,((BATTLESCENE_ACTION_TYPE-$1000000)).w 
 										move.w  d0,((word_FFB630-$1000000)).w
 										move.w  d0,-4(a6)
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_CORRUPTED_SAVE
 										bsr.w   SpawnEnemySkipCamera
 										bra.w   loc_25188
-loc_250FC:          move.w  ((byte_FFB180-$1000000)).w,d2
+loc_250FC:
+										
+										move.w  ((byte_FFB180-$1000000)).w,d2
 										cmpi.w  #$80,d2 
 										blt.s   loc_25124
 										bsr.w   GetChestGoldAmount
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
 										jsr     j_IncreaseGold
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $19E               ; "{NAME} found {#} gold{N}coins."
-										bsr.w   FadeOut_WaitForP2Input
+										bsr.w   FadeOut_WaitForP1Input
 										bra.w   loc_2517C
-loc_25124:          move.w  ((byte_FFB180-$1000000)).w,d1
-										move.w  d1,((RAM_Dialogue_NameIdx2-$1000000)).w
+loc_25124:
+										
+										move.w  ((byte_FFB180-$1000000)).w,d1
+										move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
 										move.w  -2(a6),d0
-										move.w  d0,((RAM_Dialogue_NameIdx1-$1000000)).w
+										move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 										jsr     j_AddItem
 										tst.w   d2
 										bne.w   loc_2515A
-										move.w  -2(a6),((RAM_Dialogue_NameIdx1-$1000000)).w
-										move.w  d1,((RAM_Dialogue_NameIdx2-$1000000)).w
-										trap    #TRAP_SOUNDCOM
+										move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+										move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_ITEM
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $19F               ; "{NAME} recieved{N}{ITEM}."
-										bsr.w   FadeOut_WaitForP2Input
+										bsr.w   FadeOut_WaitForP1Input
 										bra.w   loc_2517C
-loc_2515A:          trap    #TRAP_TEXTBOX
+loc_2515A:
+										
+										trap    #TEXTBOX
 										dc.w $19D               ; "{NAME} found{N}{ITEM}.{W2}{CLEAR}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1A3               ; "{NAME} hands are full.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.w  -2(a6),d0
 										bsr.w   GetEntityPositionAfterApplyingFacing
 										jsr     (CloseChest).w
 										clr.w   d1
 										bra.w   loc_24746
-loc_25178:          trap    #TRAP_TEXTBOX
+loc_25178:
+										
+										trap    #TEXTBOX
 										dc.w $198               ; "But, it was empty.{W1}"
-loc_2517C:          trap    #TRAP_TEXTBOX
+loc_2517C:
+										
+										trap    #TEXTBOX
 										dc.w $FFFF
-										move.w  #3,((RAM_BattleScene_ActionType-$1000000)).w
+										move.w  #3,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 										clr.w   d0
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_25188:
 										
 										move.w  d0,-(sp)
@@ -8276,19 +8213,19 @@ loc_25188:
 sub_2519E:
 										
 										clr.b   ((word_FFAF8E-$1000000)).w
-										clr.w   ((RAM_MoveSound-$1000000)).w
+										clr.w   ((MOVE_SOUND-$1000000)).w
 										bsr.w   ControlUnitCursor
-										btst    #4,((RAM_Input_Player1_StateA-$1000000)).w
-										beq.s   loc_251B8
+										btst    #INPUT_A_B_BIT,((P1_INPUT-$1000000)).w
+										beq.s   BattlefieldMenuActions
 										move.w  -2(a6),d0
 										rts
 
 	; End of function sub_2519E
 
 
-; START OF FUNCTION CHUNK FOR sub_2519E
+; =============== S U B R O U T I N E =======================================
 
-loc_251B8:
+BattlefieldMenuActions:
 										
 										moveq   #$3D,d7 
 										clr.w   d0
@@ -8304,7 +8241,7 @@ loc_251BC:
 										cmp.w   d1,d3
 										bne.w   loc_25226
 										jsr     (WaitForCameraToCatchUp).w
-										btst    #6,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #6,((P1_INPUT-$1000000)).w
 										beq.s   loc_251F4
 										jsr     j_MemberStatsScreen
 										bra.s   loc_2521C
@@ -8351,7 +8288,7 @@ loc_25236:
 										beq.s   loc_25236
 										move.w  ((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w,d7
 										move.w  d7,((word_FFB12E-$1000000)).w
-										lea     ((RAM_Force_CurrentList-$1000000)).w,a0
+										lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
 										lea     ((byte_FFB0AE-$1000000)).w,a1
 										jsr     (CopyBytes).w   
 loc_25274:
@@ -8377,32 +8314,36 @@ loc_252A6:
 										
 										tst.b   ((CURRENT_BATTLE-$1000000)).w
 										beq.s   loc_25236
-										trap    #TRAP_TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_2519E
-
+										trap    #TEXTBOX
 										dc.w 0                  ; "The game will be suspended.{N}OK?"
 										jsr     j_YesNoChoiceBox
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										tst.w   d0
 										bmi.w   loc_25236
 										move.l  ((SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER_FROM_SRAM-$1000000)).w
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 										move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
 										jsr     (SaveGame).l
-										tst.b   ((RAM_DebugModeActivated-$1000000)).w
+										tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
 										beq.w   loc_252E6
-										btst    #7,((RAM_Input_Player1_StateA-$1000000)).w
+										btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
 										bne.w   loc_252F2
-loc_252E6:          trap    #TRAP_SOUNDCOM
+loc_252E6:
+										
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_FADE_OUT
 										jsr     (FadeOutToBlack).w
 										jmp     (WitchSuspend).w
-loc_252F2:          trap    #TRAP_CLEARFLAG
+loc_252F2:
+										
+										trap    #CLEAR_FLAG
 										dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 										bra.w   loc_25236
+
+	; End of function BattlefieldMenuActions
+
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -8415,7 +8356,7 @@ sub_252FA:
 										move.w  -2(a6),d0
 										move.w  -2(a6),d0
 										bsr.w   UpdateMoveSound
-										lea     (RAM_Battle_BattleEntityMoveString).l,a0
+										lea     (BATTLE_ENTITY_MOVE_STRING).l,a0
 										jsr     MoveBattleEntityByMoveString
 										move.w  -2(a6),d0
 										move.w  d2,d1
@@ -8425,7 +8366,7 @@ sub_252FA:
 										bsr.w   ClearFadingBlockRange
 										move.w  -2(a6),d0
 										bsr.w   SetEntityBlinkingFlag
-										move.w  ((RAM_BattleScene_ActionType-$1000000)).w,d0
+										move.w  ((BATTLESCENE_ACTION_TYPE-$1000000)).w,d0
 										cmpi.w  #3,d0
 										beq.w   loc_25480
 										tst.w   d0
@@ -8572,7 +8513,7 @@ loc_254D4:
 										jsr     j_CreateFighterMiniStatusWindow
 										moveq   #$F,d0
 										jsr     (Sleep).w       
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_VALIDATION
 										rts
 
@@ -8620,7 +8561,7 @@ return_25542:
 
 CreateRandomizedTurnOrder:
 										
-										lea     ((RAM_Battle_TurnOrder-$1000000)).w,a0
+										lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
 										move.l  a0,-(sp)
 										moveq   #$3F,d7 
 loc_2554C:
@@ -8650,7 +8591,7 @@ loc_2556E:
 loc_2557E:
 										
 										moveq   #$3E,d7 
-										lea     ((RAM_Battle_TurnOrder-$1000000)).w,a0
+										lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
 loc_25584:
 										
 										move.w  (a0),d0
@@ -8664,7 +8605,7 @@ loc_25594:
 										addq.l  #2,a0
 										dbf     d7,loc_25584
 										dbf     d6,loc_2557E
-										clr.b   ((RAM_Battle_CurrentTurnOffset-$1000000)).w
+										clr.b   ((BATTLE_CURRENT_TURN_OFFSET-$1000000)).w
 										rts
 
 	; End of function CreateRandomizedTurnOrder
@@ -8729,32 +8670,32 @@ LoadBattle:
 										clr.w   d1
 										move.b  ((CURRENT_MAP-$1000000)).w,d1
 										bsr.w   sub_258EA
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										jsr     (LoadMapTilesets).w
 										bsr.w   WaitForFadeToFinish
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_CLEAR
 										jsr     (WaitForVInt).w 
 										jsr     j_MoveEntitiesToBattlePositions
 										move.w  (sp)+,d0
 										bsr.w   GetEntityNumberOfCombatant
-										move.b  d0,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										bpl.s   loc_25646
 										clr.w   d0
 loc_25646:
 										
 										andi.w  #$3F,d0 
 										lsl.w   #5,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										adda.w  d0,a0
 										move.w  (a0)+,d0
 										ext.l   d0
 										divs.w  #$180,d0
-										move.b  d0,((RAM_Battle_CurrentMovingEntityChosenX-$1000000)).w
+										move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
 										move.w  (a0)+,d0
 										ext.l   d0
 										divs.w  #$180,d0
-										move.b  d0,((RAM_Battle_CurrentMovingEntityChosenY-$1000000)).w
+										move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 										moveq   #$3F,d0 
 										jsr     (InitSprites).w 
 										move.w  #$FFFF,d0
@@ -8800,7 +8741,7 @@ GetEntityPositionAfterApplyingFacing:
 										jsr     j_GetYPos
 										bsr.w   GetEntityCombatantNumber
 										lsl.w   #ENTITYDEF_SIZE_BITS,d0
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										clr.w   d3
 										move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),d3
 										move.w  d2,d0
@@ -8871,7 +8812,7 @@ PrintAllActivatedDefCons:
 										bsr.w   PrintActivatedDefCon
 										bsr.w   PrintActivatedDefCon
 										bsr.w   PrintActivatedDefCon
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										rts
 
@@ -8889,8 +8830,8 @@ PrintActivatedDefCon:
 										beq.s   loc_2578A
 										subi.w  #$5A,d1 
 										ext.l   d1
-										move.l  d1,((RAM_Dialog_NumberToPrint-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										move.l  d1,((TEXT_NUMBER-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $1CF               ; "DEF-CON No. {#} has been{N}implemented.{D3}"
 loc_2578A:
 										
@@ -8907,18 +8848,18 @@ UpdateMoveSound:
 										
 										cmpi.b  #CODE_NOTHING_BYTE,((CURRENT_BATTLE-$1000000)).w
 										bne.s   loc_2579E
-										clr.w   ((RAM_MoveSound-$1000000)).w
+										clr.w   ((MOVE_SOUND-$1000000)).w
 										bra.s   loc_257A4
 loc_2579E:
 										
-										move.w  #SFX_WALKING,((RAM_MoveSound-$1000000)).w
+										move.w  #SFX_WALKING,((MOVE_SOUND-$1000000)).w
 loc_257A4:
 										
 										movem.w d0-d7,-(sp)
 										jsr     j_GetEquippedRing
 										cmpi.w  #ITEMIDX_CHIRRUP_SANDALS,d1
 										bne.s   loc_257BA
-										move.w  #SFX_BLOAB,((RAM_MoveSound-$1000000)).w
+										move.w  #SFX_BLOAB,((MOVE_SOUND-$1000000)).w
 loc_257BA:
 										
 										movem.w (sp)+,d0-d7
@@ -8931,7 +8872,7 @@ loc_257BA:
 
 ExecuteExplorationLoop:
 										
-										clr.w   ((RAM_MapEventType-$1000000)).w
+										clr.w   ((MAP_EVENT_TYPE-$1000000)).w
 										subi.w  #$4E20,((word_FFB196-$1000000)).w
 										bge.s   loc_257D0
 										clr.w   ((word_FFB196-$1000000)).w
@@ -8940,7 +8881,7 @@ loc_257D0:
 										jsr     HealAliveCharsAndImmortals
 										jsr     sub_258EA(pc)
 										nop
-										move.b  #$FF,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										move.w  d0,-(sp)
 										cmpi.b  #$FF,d0         ; map idx is FF, not provided
 										beq.s   loc_25828
@@ -8952,13 +8893,13 @@ loc_257D0:
 										jsr     (LoadMapTilesets).w
 										movem.w (sp)+,d1-d3
 										bsr.w   WaitForFadeToFinish
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_CLEAR
 										jsr     j_GetMapSetupEntities
 										jsr     j_InitMapEntities
 										jsr     (LoadMapEntitySprites).w
 										bsr.w   loc_2588A
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $50                ; set @ loc_257D0 (battle won?)
 										bra.s   loc_25836
 loc_25828:
@@ -8971,7 +8912,7 @@ loc_25836:
 										jsr     (sub_4EC6).w
 										move.w  (sp)+,d1
 										move.w  #$FFFF,d0
-										move.b  #0,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #0,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										jsr     (LoadMap).w     
 										bsr.w   SetBattleVIntFuncs
 										jsr     j_RunMapSetupInitFunction
@@ -9019,7 +8960,7 @@ loc_25896:
 sub_258A8:
 										
 										movem.l d0-d3/a0,-(sp)
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										tst.b   d1
 										blt.s   loc_258BE
 										mulu.w  #$180,d1
@@ -9052,11 +8993,11 @@ loc_258CE:
 sub_258EA:
 										
 										move.b  #2,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l VInt_3930          
 										rts
@@ -9083,16 +9024,16 @@ return_2591A:
 
 WaitForEvent:
 										
-										move.w  ((RAM_MapEventType-$1000000)).w,d0
+										move.w  ((MAP_EVENT_TYPE-$1000000)).w,d0
 										bne.s   loc_25930       
-										move.b  #0,((RAM_Battle_CurrentMovingEntity-$1000000)).w
+										move.b  #0,((BATTLE_CURRENT_ENTITY-$1000000)).w
 										clr.w   d0
 										jsr     j_SetControlledEntityActScript
 loc_25930:
 										
 										clr.w   d0              ; SECONDARY MAP LOOP - wait for map event
 										clr.w   d1
-										move.w  ((RAM_MapEventType-$1000000)).w,d0
+										move.w  ((MAP_EVENT_TYPE-$1000000)).w,d0
 										beq.s   loc_2593C
 										rts
 loc_2593C:
@@ -9114,7 +9055,7 @@ loc_25948:
 
 sub_2594A:
 										
-										clr.w   ((RAM_MapEventType-$1000000)).w
+										clr.w   ((MAP_EVENT_TYPE-$1000000)).w
 										subq.w  #1,d0
 										beq.w   loc_25978
 										subq.w  #1,d0
@@ -9127,7 +9068,7 @@ sub_2594A:
 										beq.w   loc_25A64
 										subq.w  #1,d0
 										beq.w   loc_25A7C
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SFX_BATTLEFIELD_DEATH
 																						; big door slam ?
 										rts
@@ -9137,7 +9078,7 @@ loc_25978:
 										bne.w   loc_259CC
 										movem.w d0,-(sp)
 										move.w  ((word_FFB1A8-$1000000)).w,d0
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_GET_D0_PARAMETER
 										clr.w   ((word_FFB1A8-$1000000)).w
 										movem.w (sp)+,d0
@@ -9170,8 +9111,8 @@ loc_259CC:
 										jsr     j_MakeEntityIdle
 										move.b  ((byte_FFA84D-$1000000)).w,d0
 										cmpi.b  #$47,d0 
-										bne.s   loc_259E8       ; check if map is pacalon, switch if water not restored (HARDCODE)
-										trap    #TRAP_CHECKFLAG
+										bne.s   loc_259E8       ; HARDCODED check if map is pacalon, switch if water not restored
+										trap    #CHECK_FLAG
 										dc.w $212               ; Battle 30 completed
 										beq.s   loc_259E8
 										move.w  #$4E,d0 
@@ -9183,7 +9124,7 @@ loc_259E8:
 										move.b  ((byte_FFA84E-$1000000)).w,d0
 										blt.s   loc_25A04
 										mulu.w  #$180,d0
-										move.w  d0,((RAM_Entity_StructOffset_XAndStart-$1000000)).w
+										move.w  d0,((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w
 										move.w  d0,((ENTITY_DATA_STRUCT_X_DEST-$1000000)).w
 loc_25A04:
 										
@@ -9210,7 +9151,7 @@ loc_25A18:
 sub_25A2A:
 										
 										move.l  a0,-(sp)
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										move.w  (a0),d1
 										ext.l   d1
 										divs.w  #$180,d1
@@ -9269,7 +9210,7 @@ loc_25A7C:
 										jsr     sub_4401C       
 										move.w  ((byte_FFA84C-$1000000)).w,d1
 										move.w  ((byte_FFA84E-$1000000)).w,d2
-										jsr     j_RunMapSetupSection3Function
+										jsr     j_RunMapSetupZoneEvent
 										rts
 
 ; END OF FUNCTION CHUNK FOR sub_2594A
@@ -9282,27 +9223,27 @@ loc_25A7C:
 SetBattleVIntFuncs:
 										
 										jsr     (InitWindowProperties).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_CLEAR
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_4744
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_UpdateEntities
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_AdjustCameraToPlayer
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_3930          
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_UpdateSprites
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_UpdateWindows
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_UpdateAnimatingTiles
 										rts
@@ -9314,7 +9255,7 @@ SetBattleVIntFuncs:
 
 sub_25AD6:
 										
-										move.b  ((RAM_Input_Player1_StateA-$1000000)).w,d7
+										move.b  ((P1_INPUT-$1000000)).w,d7
 										clr.w   d0
 										jsr     j_MakeEntityIdle
 										clr.w   d0
@@ -9327,9 +9268,9 @@ sub_25AD6:
 										rts
 loc_25B02:
 										
-										tst.b   ((RAM_DebugModeActivated-$1000000)).w
+										tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
 										beq.s   loc_25B40
-										btst    #INPUT_A_B_BIT,((RAM_Input_Player2_StateA-$1000000)).w
+										btst    #INPUT_A_B_BIT,((P2_INPUT-$1000000)).w
 										beq.s   loc_25B22
 										move.w  #$258,d0
 										jsr     j_DebugFlagSetter
@@ -9337,16 +9278,16 @@ loc_25B02:
 										rts
 loc_25B22:
 										
-										btst    #INPUT_A_C_BIT,((RAM_Input_Player2_StateA-$1000000)).w
+										btst    #INPUT_A_C_BIT,((P2_INPUT-$1000000)).w
 										bne.w   loc_25BF4
-										btst    #INPUT_A_A_BIT,((RAM_Input_Player2_StateA-$1000000)).w
+										btst    #INPUT_A_A_BIT,((P2_INPUT-$1000000)).w
 										beq.s   loc_25B40
 										jsr     (FadeOutToBlack).w
 										jsr     j_DebugModeSelectAction
 										rts
 loc_25B40:
 										
-										lea     ((RAM_Entity_StructOffset_XAndStart-$1000000)).w,a0
+										lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 										cmpi.b  #$3E,$33(a0) 
 										bne.s   loc_25BAA
 										move.w  $C(a0),d0
@@ -9363,28 +9304,28 @@ loc_25B64:
 										
 										add.w   d1,d0
 										bne.s   loc_25BAA
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_FADE_OUT
 										bsr.w   sub_25A6C
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w MUSIC_HEADQUARTERS ; headquarters
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l VInt_UpdateEntities
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l VInt_AdjustCameraToPlayer
 										jsr     j_CaravanActions
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l VInt_AdjustCameraToPlayer
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l VInt_UpdateEntities
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_FADE_OUT
 										bsr.w   sub_25A74
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_PLAY_PREVIOUS_MUSIC
 										bra.w   return_25BF2
 loc_25BAA:
@@ -9402,17 +9343,17 @@ loc_25BC0:
 										bne.w   return_25BF2
 loc_25BCC:
 										
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l VInt_UpdateEntities
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_DEACTIVATE
 										dc.l VInt_AdjustCameraToPlayer
 										jsr     j_MainMenuActions
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l VInt_AdjustCameraToPlayer
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ACTIVATE
 										dc.l VInt_UpdateEntities
 return_25BF2:
@@ -9447,7 +9388,7 @@ sub_25C24:
 										move.w  d0,d1
 										lsl.w   #2,d0
 										movea.l pt_SpecialSprites(pc,d0.w),a0
-										lea     (PALETTE_4).l,a1
+										lea     (PALETTE_4_BIS).l,a1
 										move.l  (a0)+,(a1)+
 										move.l  (a0)+,(a1)+
 										move.l  (a0)+,(a1)+
@@ -9483,7 +9424,7 @@ sub_25C6C:
 										lea     ($AF00).l,a1
 										move.w  #$480,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										bra.w   loc_25CB0
 
 	; End of function sub_25C6C
@@ -9500,7 +9441,7 @@ sub_25C8E:
 										lea     ($A3C0).l,a1
 										move.w  #$A20,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										bra.w   *+4
 loc_25CB0:
 										
@@ -9534,7 +9475,7 @@ loc_25CD2:
 										lea     ($AF00).l,a1
 										move.w  #$480,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 										movem.l (sp)+,d0-d2/a0-a1
 										rts
@@ -9911,14 +9852,14 @@ SuspendGame:
 										lea     ($8000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 										movea.l (p_plt_SuspendString).l,a0
-										lea     (Palette2bis).l,a1
+										lea     (PALLETE_2_BIS).l,a1
 										moveq   #$20,d7 
 										jsr     (CopyBytes).w   
 										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -9936,7 +9877,7 @@ SuspendGame:
 										lea     ($C000).l,a1
 										move.w  #$380,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (SetFFDE94b3andWait).w
 										rts
 
@@ -9958,7 +9899,7 @@ EndGame:
 										lea     ($2000).w,a1
 										move.w  #$2000,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										movea.l (p_WitchEndLayout).l,a0
 										lea     (byte_FFE000).l,a1
 										move.w  #$800,d7
@@ -9967,16 +9908,16 @@ EndGame:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										lea     (byte_FFC000).l,a0
 										move.l  #$21382139,$21E(a0)
 										move.l  #$21422143,$25E(a0)
 										lea     ($C000).l,a1
 										move.w  #$380,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										movea.l (p_plt_WitchEnd).l,a0
-										lea     (FFD080_Palette1bis).l,a1
+										lea     (PALETTE_1_BIS).l,a1
 										moveq   #$20,d7 
 										jsr     (CopyBytes).w   
 										lea     $20(a1),a1
@@ -9987,40 +9928,40 @@ EndGame:
 										jsr     (FadeInFromWhite).w
 										move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 										move.b  #$FF,((byte_FFB082-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
-										dc.l VInt_27CA4
+										dc.l VInt_WitchEndBlink
 										move.w  #$46,((CURRENT_SPEAK_SOUND-$1000000)).w 
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $EF                ; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.w  #$5A,d0 
 										jsr     (Sleep).w       
 										move.b  #2,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
 										moveq   #$3C,d0 
 										jsr     (Sleep).w       
 										clr.b   ((byte_FFB082-$1000000)).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_REMOVE
-										dc.l VInt_27CA4
-										trap    #TRAP_VINTFUNCTIONS
+										dc.l VInt_WitchEndBlink
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_ADD
 										dc.l VInt_VscrollThing
 										moveq   #$1E,d0
 										jsr     (Sleep).w       
-										move.b  #2,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
 										moveq   #$3C,d0 
 										jsr     (Sleep).w       
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_REMOVE
 										dc.l VInt_VscrollThing
 										jsr     (DisableDisplayAndVInt).w
@@ -10030,7 +9971,7 @@ EndGame:
 										lea     ($C000).l,a1
 										move.w  #$380,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										movea.l (p_JewelEndScreenTiles).l,a0
 										lea     (FF6802_LOADING_SPACE).l,a1
 										move.l  a1,-(sp)
@@ -10039,7 +9980,7 @@ EndGame:
 										lea     (loc_2000).w,a1
 										move.w  #$2000,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										movea.l (p_JewelEndScreenLayout).l,a0
 										lea     (byte_FFE000).l,a1
 										move.w  #$800,d7
@@ -10048,14 +9989,14 @@ EndGame:
 										lea     ($E000).l,a1
 										move.w  #$400,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgain).w
+										jsr     (sub_10DC).w    
 										movea.l (p_plt_JewelsEndScreen).l,a0
-										lea     (FFD080_Palette1bis).l,a1
+										lea     (PALETTE_1_BIS).l,a1
 										moveq   #$40,d7 
 										jsr     (CopyBytes).w   
 										jsr     (EnableDisplayAndInterrupts).w
-										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -10078,38 +10019,38 @@ EndGame:
 										nop
 										moveq   #$78,d0 
 										jsr     (Sleep).w       
-										move.b  #1,((FADING_SETTING-$1000000)).w
-										clr.w   ((unk_FFDFAA-$1000000)).w
+										move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
+										clr.w   ((byte_FFDFAA-$1000000)).w
 										clr.b   ((FADING_POINTER-$1000000)).w
 										move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 										move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
 										move.w  #$12C,d0
 										jsr     (Sleep).w       
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 										dc.w SOUND_COMMAND_FADE_OUT
 										move.w  #$2A30,d0       ; wait for 3 minutes
 										jsr     (Sleep).w       
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $1D1               ; "And more...{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FFFF
 										move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
 										jsr     (FadeOutToBlack).w
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										moveq   #$1F,d7
 loc_27C2C:
 										
 										clr.l   (a0)+
 										dbf     d7,loc_27C2C
 										jsr     j_ClearEntities
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $190               ; Battle 0 unlocked
 										move.w  #$3F,d0 
 										jsr     (GetNextBattleOnMap).w
 										move.w  d7,d1
 										bsr.w   ExecuteBattleLoop
 										jsr     (FadeOutToWhite).w
-										trap    #TRAP_VINTFUNCTIONS
+										trap    #VINT_FUNCTIONS
 										dc.w VINTS_CLEAR
 										jsr     (DisableDisplayAndVInt).w
 										move    #$2700,sr
@@ -10146,7 +10087,7 @@ sub_27C64:
 
 VInt_VscrollThing:
 										
-										subq.w  #1,(FFD500_MaybeRelatedToVscroll).l
+										subq.w  #1,(word_FFD500).l
 										jsr     (StoreVdpCommandsbis).w
 										jsr     (Set_FFDE94_bit3).w
 										rts
@@ -10156,7 +10097,7 @@ VInt_VscrollThing:
 
 ; =============== S U B R O U T I N E =======================================
 
-VInt_27CA4:
+VInt_WitchEndBlink:
 										
 										link    a6,#-2
 										tst.b   ((byte_FFB082-$1000000)).w
@@ -10229,13 +10170,13 @@ loc_27D6A:
 										lea     ($E000).l,a1
 										move.w  #$200,d0
 										moveq   #2,d1
-										jsr     (BwahDMAstuffAgainbis).w
+										jsr     (sub_119E).w    
 										jsr     (Set_FFDE94_bit3).w
 loc_27D8A:
 										
 										unlk    a6
 										rts
 
-	; End of function VInt_27CA4
+	; End of function VInt_WitchEndBlink
 
 										align $8000

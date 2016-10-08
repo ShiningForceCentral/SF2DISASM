@@ -20,15 +20,15 @@ ms_map62_ZoneEvents:dc.b 5
 
 sub_5C834:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2D9
 										bne.s   return_5C84A
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100
 										bne.s   return_5C84A
 										lea     cs_5C876(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_5C84A:
 										
@@ -41,18 +41,18 @@ return_5C84A:
 
 sub_5C84C:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2D9
 										bne.s   return_5C868
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100
 										beq.s   return_5C868
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $101
 										bne.s   return_5C868
 										lea     cs_5C8FE(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $101
 return_5C868:
 										

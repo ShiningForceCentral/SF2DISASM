@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle31\cs_beforebattle :
 ; Cutscene before battle 31
-bbcs_31:            dc.w 4                  ; 0004 SET TEXT INDEX AFB : "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
+bbcs_31:            dc.w 4                  ; 0004 INIT TEXT CURSOR AFB : "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
 										dc.w $AFB
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 2 10 2
 										dc.w 2

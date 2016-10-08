@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle39\cs_beforebattle :
 ; Cutscene before battle 39
-bbcs_39:            dc.w 4                  ; 0004 SET TEXT INDEX BD5 : "I just heard that Geshp{N}lost.{W2}"
+bbcs_39:            dc.w 4                  ; 0004 INIT TEXT CURSOR BD5 : "I just heard that Geshp{N}lost.{W2}"
 										dc.w $BD5
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 42 3 5
 										dc.w $42

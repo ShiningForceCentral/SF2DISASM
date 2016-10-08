@@ -30,12 +30,12 @@ word_5E736:         dc.w $B03
 
 sub_5E746:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $349
 										bne.s   return_5E756
 										lea     cs_5E772(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $349               ; set after the Taya join scene has played inside the Mitula Shrine
 return_5E756:
 										

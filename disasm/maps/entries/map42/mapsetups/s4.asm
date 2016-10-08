@@ -27,7 +27,7 @@ word_5FE34:         dc.w $2702
 
 sub_5FE42:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $386
 										bne.s   loc_5FE52
 										move.w  #$D06,d0
@@ -35,7 +35,7 @@ sub_5FE42:
 										bra.s   return_5FE66
 loc_5FE52:
 										
-										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
+										clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$1A8,d0
 										jsr     (DisplayText).w 
 										move.w  #$1B2,d0
@@ -51,17 +51,17 @@ return_5FE66:
 
 sub_5FE68:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $386
 										bne.s   loc_5FE7A
 										lea     cs_5FF06(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $386               ; set after you pull the Force Sword out
 										bra.s   return_5FE8E
 loc_5FE7A:
 										
-										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
+										clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 										move.w  #$1A8,d0
 										jsr     (DisplayText).w 
 										move.w  #$1B2,d0

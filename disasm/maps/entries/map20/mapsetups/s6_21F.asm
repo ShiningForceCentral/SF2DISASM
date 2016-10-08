@@ -6,7 +6,7 @@
 
 ms_map20_flag21F_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3D6
 										beq.s   loc_633BA
 										lea     cs_633B2(pc), a0
@@ -26,7 +26,7 @@ cs_633B2:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 80 
 
 loc_633BA:
 										
-										trap    #TRAP_SOUNDCOM
+										trap    #SOUND_COMMAND
 
 ; END OF FUNCTION CHUNK FOR ms_map20_flag21F_InitFunction
 

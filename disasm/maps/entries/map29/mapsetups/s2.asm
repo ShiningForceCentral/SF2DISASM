@@ -48,7 +48,7 @@ j_j_ChurchActions_0:
 
 sub_5A11C:
 										
-										move.b  #$1C,((RAM_CurrentShopIdx-$1000000)).w
+										move.b  #$1C,((CURRENT_SHOP_INDEX-$1000000)).w
 										jmp     j_ShopActions
 
 	; End of function sub_5A11C
@@ -58,7 +58,7 @@ sub_5A11C:
 
 sub_5A128:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $84D               ; "I think...I've met you{N}somewhere before.{W1}"
 										rts
 
@@ -69,9 +69,9 @@ sub_5A128:
 
 sub_5A12E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $84E               ; "It's very dangerous outside.{N}We can't go to Galam.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $84F               ; "But, we have to leave here{N}very soon.{W1}"
 										rts
 
@@ -82,9 +82,9 @@ sub_5A12E:
 
 sub_5A138:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $850               ; "The Dwarven Blacksmith is{N}very good.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $851               ; "You can place a custom order{N}with him.{W1}"
 										rts
 
@@ -95,9 +95,9 @@ sub_5A138:
 
 sub_5A142:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $852               ; "Mithril is very hard to find.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $853               ; "Go see the blacksmith if you{N}have any Mithril.{W1}"
 										rts
 

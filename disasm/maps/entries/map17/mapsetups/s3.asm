@@ -17,12 +17,12 @@ ms_map17_ZoneEvents:dc.b $35
 
 sub_523F4:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 										bne.s   return_52404
 										lea     cs_52530(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $295               ; set after prison scene, ending in Slade unlocking/Sarah accusing
 return_52404:
 										
@@ -35,21 +35,21 @@ return_52404:
 
 sub_52406:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $296               ; set after you try to go upstairs, and Slade opens the secret tunnel
 										bne.s   loc_5241E
 										lea     cs_528D4(pc), a0
 										trap    #6
 										lea     cs_528CA(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $296               ; set after you try to go upstairs, and Slade opens the secret tunnel
 										bra.s   return_5242C
 loc_5241E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $3B4               ; "You'll be captured if you go{N}that way.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $3B7               ; "Now, go out through this{N}short cut!{W1}"
 										lea     cs_528CA(pc), a0
 										trap    #6
@@ -64,12 +64,12 @@ return_5242C:
 
 sub_5242E:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $296               ; set after you try to go upstairs, and Slade opens the secret tunnel
 										beq.s   return_5243E
 										lea     cs_52938(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $49                ; Slade is a follower
 return_5243E:
 										

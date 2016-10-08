@@ -20,7 +20,7 @@ nullsub_103:
 
 sub_6006A:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $19
 										bne.s   return_60076
 										lea     cs_600CE(pc), a0

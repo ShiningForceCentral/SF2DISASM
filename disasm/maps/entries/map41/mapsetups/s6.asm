@@ -6,7 +6,7 @@
 
 ms_map41_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3A2
 										beq.s   return_5F4AC
 										lea     cs_5F4AE(pc), a0
@@ -152,7 +152,7 @@ cs_5F594:           dc.w $2B                ; 002B  1C 6 F 1 FF
 										dc.b $F
 										dc.b 1
 										dc.b $FF
-										dc.w 4                  ; 0004 SET TEXT INDEX DB9 : "Sir Astral!  {LEADER}!{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR DB9 : "Sir Astral!  {LEADER}!{W1}"
 										dc.w $DB9
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1C : "Sir Astral!  {LEADER}!{W1}"
 										dc.w $1C

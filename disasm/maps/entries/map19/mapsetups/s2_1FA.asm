@@ -71,7 +71,7 @@ sub_53070:
 										
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2A6               ; "Already passed away...{N}{LEADER} feels pity.{W1}"
 										rts
 
@@ -82,7 +82,7 @@ sub_53070:
 
 sub_53080:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2A7               ; "This is a nightmare.{W1}"
 										rts
 
@@ -93,11 +93,11 @@ sub_53080:
 
 sub_53086:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2A8               ; "The Galam soldiers scared{N}me.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2A9               ; "But when Sir Astral made{N}an incantation, King Galam{N}screamed.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2AA               ; "He ran upstairs with a{N}pained look on his face.{W1}"
 										rts
 
@@ -108,9 +108,9 @@ sub_53086:
 
 sub_53094:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2AB               ; "We Granseal soldiers{N}fought against Galam with{N}all our strength.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2AC               ; "But we were powerless{N}against King Galam's magic.{W1}"
 										rts
 
@@ -121,9 +121,9 @@ sub_53094:
 
 sub_5309E:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2AD               ; "What King Galam said was{N}wrong!{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2AE               ; "We did not attack Galam!{W1}"
 										rts
 
@@ -134,7 +134,7 @@ sub_5309E:
 
 sub_530A8:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2AF               ; "Nobody knew that King Galam{N}was a wizard!{W1}"
 										rts
 
@@ -145,7 +145,7 @@ sub_530A8:
 
 sub_530AE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2B0               ; "Why are we at war?{W1}"
 										rts
 
@@ -156,7 +156,7 @@ sub_530AE:
 
 sub_530B4:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $2B1               ; "The Princess was taken{N}away...and I'm paralyzed{N}with fear.{W1}"
 										rts
 

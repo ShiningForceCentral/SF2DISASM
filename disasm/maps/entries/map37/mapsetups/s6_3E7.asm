@@ -7,12 +7,12 @@
 ms_map37_flag3E7_InitFunction:
 										
 										jsr     sub_47948
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $100
 										bne.s   return_5FABA
 										lea     cs_5FABC(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_5FABA:
 										
@@ -20,7 +20,7 @@ return_5FABA:
 
 	; End of function ms_map37_flag3E7_InitFunction
 
-cs_5FABC:           dc.w 4                  ; 0004 SET TEXT INDEX D1F : "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
+cs_5FABC:           dc.w 4                  ; 0004 INIT TEXT CURSOR D1F : "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
 										dc.w $D1F
 										dc.w $46                ; 0046  6 6
 										dc.w 6
@@ -98,7 +98,7 @@ cs_5FABC:           dc.w 4                  ; 0004 SET TEXT INDEX D1F : "Ouch!  
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "{LEADER}, come on!{W1}"
 										dc.w $8007
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5FB30:           dc.w 4                  ; 0004 SET TEXT INDEX D25 : "Phew!  We've made it to{N}Grans Island!{W1}"
+cs_5FB30:           dc.w 4                  ; 0004 INIT TEXT CURSOR D25 : "Phew!  We've made it to{N}Grans Island!{W1}"
 										dc.w $D25
 										dc.w $15                ; 0015 SET ACTSCRIPT 80 FF 460CE
 										dc.b $80
@@ -132,7 +132,7 @@ cs_5FB30:           dc.w 4                  ; 0004 SET TEXT INDEX D25 : "Phew!  
 										dc.w $2E                ; 002E HIDE ENTITY 80
 										dc.w $80
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5FB6A:           dc.w 4                  ; 0004 SET TEXT INDEX D31 : "Wow, the ship is vibrating!{W1}"
+cs_5FB6A:           dc.w 4                  ; 0004 INIT TEXT CURSOR D31 : "Wow, the ship is vibrating!{W1}"
 										dc.w $D31
 										dc.w 5                  ; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
 										dc.w $5D
@@ -401,7 +401,7 @@ sub_5FD3A:
 										moveq   #7,d7
 loc_5FD3C:
 										
-										subq.b  #1,((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w
+										subq.b  #1,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 										moveq   #4,d0
 										jsr     (Sleep).w       
 										dbf     d7,loc_5FD3C
@@ -417,7 +417,7 @@ sub_5FD4C:
 										moveq   #7,d7
 loc_5FD4E:
 										
-										subq.b  #1,((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										subq.b  #1,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										moveq   #4,d0
 										jsr     (Sleep).w       
 										dbf     d7,loc_5FD4E
@@ -443,8 +443,8 @@ sub_5FD66:
 										moveq   #$B,d7
 loc_5FD68:
 										
-										subq.b  #1,((RAM_Map_AreaLayer1AutoscrollX-$1000000)).w
-										subq.b  #1,((RAM_Map_AreaLayer2AutoscrollX-$1000000)).w
+										subq.b  #1,((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
+										subq.b  #1,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 										moveq   #4,d0
 										jsr     (Sleep).w       
 										dbf     d7,loc_5FD68
@@ -476,10 +476,10 @@ sub_5FD92:
 										
 										move.b  #1,((byte_FFDFAB-$1000000)).w
 										lea     plt_5FDB4(pc), a0
-										lea     (PALETTE_4).l,a1
+										lea     (PALETTE_4_BIS).l,a1
 										moveq   #$20,d7 
 										jsr     (CopyBytes).w   
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										jsr     (sub_19C8).w    
 										rts
 

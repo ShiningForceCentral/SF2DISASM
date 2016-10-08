@@ -20,13 +20,13 @@ nullsub_87:
 
 sub_595E8:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $309
 										beq.s   return_59600
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $20A
 										bne.s   return_59600
-										move.b  #$16,((RAM_EgressMapIdx-$1000000)).w
+										move.b  #$16,((EGRESS_MAP_INDEX-$1000000)).w
 										lea     cs_5994E(pc), a0
 										trap    #6
 return_59600:

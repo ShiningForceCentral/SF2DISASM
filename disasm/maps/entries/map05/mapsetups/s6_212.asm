@@ -6,12 +6,12 @@
 
 ms_map5_flag212_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3B0
 										bne.s   loc_60630
 										lea     cs_607DE(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3B0               ; set after Lemon jumps off the cliff in Yeel
 										bra.s   loc_60636
 loc_60630:
@@ -20,12 +20,12 @@ loc_60630:
 										trap    #6
 loc_60636:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3AE
 										bne.s   loc_6067C
-										cmpi.l  #$6005580,((RAM_Entity_StructOffset_XAndStart-$1000000)).w
+										cmpi.l  #$6005580,((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w
 										bne.s   loc_6067C
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1C                ; if character 1C joined the Force : Lemon ?
 										beq.s   loc_6065E
 										lea     cs_60656(pc), a0
@@ -42,7 +42,7 @@ loc_6065E:
 										
 										lea     cs_60C42(pc), a0
 										trap    #6
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3A2
 										beq.s   loc_60672
 										lea     cs_60EB2(pc), a0
@@ -54,25 +54,25 @@ loc_60672:
 										trap    #6
 loc_60678:
 										
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3AE               ; set after the scene in underground Yeel where Chaz paces and consults books
 loc_6067C:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1B
 										beq.s   loc_6068C
 										move.w  #$1B,d0
 										jsr     MoveEntityOutOfMap
 loc_6068C:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3B0
 										bne.s   loc_6069C
 										move.w  #$82,d0 
 										jsr     MoveEntityOutOfMap
 loc_6069C:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3AD
 										beq.s   loc_606B4
 										lea     cs_606AC(pc), a0
@@ -88,22 +88,22 @@ cs_606AC:
 										dc.b $FF
 loc_606B4:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1C
 										beq.s   loc_606BE
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3B1               ; set after recruiting Lemon in Yeel
 loc_606BE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3AC
 										beq.s   return_606E8
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3AD
 										bne.s   return_606E8
 										lea     cs_606EA(pc), a0
 										trap    #6
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1C
 										beq.s   return_606E8
 										lea     cs_606E0(pc), a0
@@ -147,7 +147,7 @@ cs_606EA:           dc.w $19                ; 0019 SET ENTITY POS AND FACING 0 B
 										dc.b $A
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF
-cs_60708:           dc.w 4                  ; 0004 SET TEXT INDEX DB9 : "Sir Astral!  {LEADER}!{W1}"
+cs_60708:           dc.w 4                  ; 0004 INIT TEXT CURSOR DB9 : "Sir Astral!  {LEADER}!{W1}"
 										dc.w $DB9
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 1C 15 21 3
 										dc.b $1C
@@ -284,7 +284,7 @@ cs_60708:           dc.w 4                  ; 0004 SET TEXT INDEX DB9 : "Sir Ast
 										dc.w 2
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF
-cs_607DE:           dc.w 4                  ; 0004 SET TEXT INDEX D3C : "I'm guilty!{W1}"
+cs_607DE:           dc.w 4                  ; 0004 INIT TEXT CURSOR D3C : "I'm guilty!{W1}"
 										dc.w $D3C
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 82 3F 3F 3
 										dc.b $82
@@ -505,7 +505,7 @@ cs_607DE:           dc.w 4                  ; 0004 SET TEXT INDEX D3C : "I'm gui
 										dc.w $1C
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF
-cs_6093A:           dc.w 4                  ; 0004 SET TEXT INDEX D44 : "Ah, devils finally found the{N}hidden door.{W1}"
+cs_6093A:           dc.w 4                  ; 0004 INIT TEXT CURSOR D44 : "Ah, devils finally found the{N}hidden door.{W1}"
 										dc.w $D44
 										dc.w $53                ; 0053  1B 0
 										dc.w $1B
@@ -794,7 +794,7 @@ cs_6093A:           dc.w 4                  ; 0004 SET TEXT INDEX D44 : "Ah, dev
 										dc.w $801F
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF
-cs_60B10:           dc.w 4                  ; 0004 SET TEXT INDEX D62 : "I came back to Yeel to{N}continue my father's work.{W1}"
+cs_60B10:           dc.w 4                  ; 0004 INIT TEXT CURSOR D62 : "I came back to Yeel to{N}continue my father's work.{W1}"
 										dc.w $D62
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1B : "I came back to Yeel to{N}continue my father's work.{W1}"
 										dc.w $1B
@@ -897,7 +897,7 @@ cs_60B10:           dc.w 4                  ; 0004 SET TEXT INDEX D62 : "I came 
 										dc.w 2
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF
-cs_60BA6:           dc.w 4                  ; 0004 SET TEXT INDEX D6A : "I heard you're going to{N}defeat the devils....{W1}"
+cs_60BA6:           dc.w 4                  ; 0004 INIT TEXT CURSOR D6A : "I heard you're going to{N}defeat the devils....{W1}"
 										dc.w $D6A
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1B : "I heard you're going to{N}defeat the devils....{W1}"
 										dc.w $1B
@@ -1006,7 +1006,7 @@ cs_60BA6:           dc.w 4                  ; 0004 SET TEXT INDEX D6A : "I heard
 										dc.w 2
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF
-cs_60C42:           dc.w 4                  ; 0004 SET TEXT INDEX D72 : "...and now we're here.{W1}"
+cs_60C42:           dc.w 4                  ; 0004 INIT TEXT CURSOR D72 : "...and now we're here.{W1}"
 										dc.w $D72
 										dc.w $15                ; 0015 SET ACTSCRIPT 1C FF 460CE
 										dc.b $1C
@@ -1067,7 +1067,7 @@ cs_60C42:           dc.w 4                  ; 0004 SET TEXT INDEX D72 : "...and 
 										dc.w $1B
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF
-cs_60CA4:           dc.w 4                  ; 0004 SET TEXT INDEX D76 : "That's right.  We have to{N}find out where the Holy{N}Sword is.{W1}"
+cs_60CA4:           dc.w 4                  ; 0004 INIT TEXT CURSOR D76 : "That's right.  We have to{N}find out where the Holy{N}Sword is.{W1}"
 										dc.w $D76
 										dc.w $26                ; 0026 MAKE ENTITY NOD 1F
 										dc.w $1F
@@ -1418,7 +1418,7 @@ cs_60CA4:           dc.w 4                  ; 0004 SET TEXT INDEX D76 : "That's 
 										dc.b $80
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF
-cs_60EB2:           dc.w 4                  ; 0004 SET TEXT INDEX D8C : "Yes, that's the truth.{W1}"
+cs_60EB2:           dc.w 4                  ; 0004 INIT TEXT CURSOR D8C : "Yes, that's the truth.{W1}"
 										dc.w $D8C
 										dc.w $26                ; 0026 MAKE ENTITY NOD 1F
 										dc.w $1F
@@ -1487,7 +1487,7 @@ cs_60EB2:           dc.w 4                  ; 0004 SET TEXT INDEX D8C : "Yes, th
 										dc.b $80
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF
-cs_60F18:           dc.w 4                  ; 0004 SET TEXT INDEX D8F : "{LEADER}, would you mind{N}if I went with you?{W1}"
+cs_60F18:           dc.w 4                  ; 0004 INIT TEXT CURSOR D8F : "{LEADER}, would you mind{N}if I went with you?{W1}"
 										dc.w $D8F
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1B : "{LEADER}, would you mind{N}if I went with you?{W1}"
 										dc.w $1B
@@ -1527,7 +1527,7 @@ cs_60F18:           dc.w 4                  ; 0004 SET TEXT INDEX D8F : "{LEADER
 										dc.w 5
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF
-cs_60F64:           dc.w 4                  ; 0004 SET TEXT INDEX D98 : "It's a fine-looking piano.{N}Will you play it?{W1}"
+cs_60F64:           dc.w 4                  ; 0004 INIT TEXT CURSOR D98 : "It's a fine-looking piano.{N}Will you play it?{W1}"
 										dc.w $D98
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "It's a fine-looking piano.{N}Will you play it?{W1}"
 										dc.w $FFFF
@@ -1535,7 +1535,7 @@ cs_60F64:           dc.w 4                  ; 0004 SET TEXT INDEX D98 : "It's a 
 										dc.w $D                 ; 000D JUMP IF CLEAR FLAG 59 60FA4 : YES/NO prompt answer
 										dc.w $59
 										dc.l word_60FA4         
-										dc.w 4                  ; 0004 SET TEXT INDEX D99 : "Something opened somewhere.{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR D99 : "Something opened somewhere.{W1}"
 										dc.w $D99
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_PIANO_THEME
 										dc.w $11
@@ -1562,7 +1562,7 @@ cs_60F64:           dc.w 4                  ; 0004 SET TEXT INDEX D98 : "It's a 
 										dc.w $FFFF
 										dc.b $FF                ; END OF CUTSCENE SCRIPT
 										dc.b $FF
-word_60FA4:         dc.w 4                  ; 0004 SET TEXT INDEX D9A : "{LEADER}, can't you play?{W1}"
+word_60FA4:         dc.w 4                  ; 0004 INIT TEXT CURSOR D9A : "{LEADER}, can't you play?{W1}"
 										dc.w $D9A
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{LEADER}, can't you play?{W1}"
 										dc.w $FFFF

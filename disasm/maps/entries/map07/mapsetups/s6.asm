@@ -6,15 +6,15 @@
 
 ms_map7_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2C3
 										bne.s   return_55830
-										move.b  #6,((RAM_EgressMapIdx-$1000000)).w
+										move.b  #6,((EGRESS_MAP_INDEX-$1000000)).w
 										lea     cs_55832(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2C3               ; set after the "one year has passed" text, after New Granseal is built
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $19B               ; Battle 11 unlocked
 return_55830:
 										
@@ -22,7 +22,7 @@ return_55830:
 
 	; End of function ms_map7_InitFunction
 
-cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A : "One year has passed.{W1}"
+cs_55832:           dc.w 4                  ; 0004 INIT TEXT CURSOR 50A : "One year has passed.{W1}"
 										dc.w $50A
 										dc.w $48                ; 0048 LOAD MAP 7 6 2
 										dc.w 7
@@ -41,7 +41,7 @@ cs_55832:           dc.w 4                  ; 0004 SET TEXT INDEX 50A : "One yea
 										dc.w 2
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX FFFF : "One year has passed.{W1}"
 										dc.w $FFFF
-										dc.w 4                  ; 0004 SET TEXT INDEX 470 : "(Cough)...our town is being{N}rebuilt, as you can see.{W2}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 470 : "(Cough)...our town is being{N}rebuilt, as you can see.{W2}"
 										dc.w $470
 										dc.w $1C                ; 001C STOP ENTITY ANIM 81
 										dc.w $81
@@ -353,7 +353,7 @@ word_559AE:         dc.w $B
 										dc.b 2
 										dc.l eas_Init           
 										dc.w $FFFF
-cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE : "Are you a phoenix?{N}The legendary bird?{W1}"
+cs_55A36:           dc.w 4                  ; 0004 INIT TEXT CURSOR 4AE : "Are you a phoenix?{N}The legendary bird?{W1}"
 										dc.w $4AE
 										dc.w $32                ; 0032 SET CAMERA DEST 6 2
 										dc.w 6
@@ -624,7 +624,7 @@ cs_55A36:           dc.w 4                  ; 0004 SET TEXT INDEX 4AE : "Are you
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 60B0103
 										dc.l $60B0103
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1 : "Welcome back, {LEADER}.{W1}"
+cs_55BEE:           dc.w 4                  ; 0004 INIT TEXT CURSOR 4E1 : "Welcome back, {LEADER}.{W1}"
 										dc.w $4E1
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7
@@ -1080,7 +1080,7 @@ cs_55BEE:           dc.w 4                  ; 0004 SET TEXT INDEX 4E1 : "Welcome
 sub_55EF4:
 										
 										lea     (PALETTE_1).l,a0
-										lea     (FFD080_Palette1bis).l,a1
+										lea     (PALETTE_1_BIS).l,a1
 										lea     plt_55F6A(pc), a2
 										moveq   #$3F,d0 
 loc_55F06:
@@ -1122,7 +1122,7 @@ loc_55F34:
 										move.w  d4,(a1)+
 										dbf     d0,loc_55F06
 										clr.b   ((byte_FFDFAB-$1000000)).w
-										lea     (FFD080_Palette1bis).l,a0
+										lea     (PALETTE_1_BIS).l,a0
 										jmp     (sub_19C8).w    
 
 	; End of function sub_55EF4

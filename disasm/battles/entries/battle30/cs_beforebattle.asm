@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle30\cs_beforebattle :
 ; Cutscene before battle 30
-bbcs_30:            dc.w 4                  ; 0004 SET TEXT INDEX AC8 : "What a pleasure!{N}Nice to meet you.{W1}"
+bbcs_30:            dc.w 4                  ; 0004 INIT TEXT CURSOR AC8 : "What a pleasure!{N}Nice to meet you.{W1}"
 										dc.w $AC8
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 1 7 15
 										dc.w 1

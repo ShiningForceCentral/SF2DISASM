@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle07\cs_afterbattle :
 ; Cutscene after battle 7
-abcs_battle07:      dc.w 4                  ; 0004 SET TEXT INDEX 951 : "King Galam!  You've lost{N}your followers!{W1}"
+abcs_battle07:      dc.w 4                  ; 0004 INIT TEXT CURSOR 951 : "King Galam!  You've lost{N}your followers!{W1}"
 										dc.w $951
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 3A 8 10
 										dc.w $3A

@@ -24,7 +24,7 @@ ms_map5_flag212_EntityEvents:
 
 sub_60452:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D9B               ; "I can't believe it!{N}I want to die, but I can't!{W1}"
 										rts
 
@@ -56,7 +56,7 @@ sub_60460:
 
 sub_60468:
 										
-										move.b  #$1D,((RAM_CurrentShopIdx-$1000000)).w
+										move.b  #$1D,((CURRENT_SHOP_INDEX-$1000000)).w
 										jsr     j_ShopActions
 										rts
 
@@ -67,33 +67,33 @@ sub_60468:
 
 sub_60476:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1C
 										beq.s   loc_60494
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-										clr.w   ((RAM_Dialogue_NameIdx1-$1000000)).w
-										trap    #TRAP_TEXTBOX
+										clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
+										trap    #TEXTBOX
 										dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $FF2               ; "A hole.{W1}"
 										bra.s   return_604C6
 loc_60494:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $3B1
 										bne.s   return_604C6
 										lea     cs_6060E(pc), a0
 										trap    #6
 										move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 										move.w  #$1C,d0
-										jsr     GetEntityPortraitAndSpeechSound
+										jsr     GetEntityPortraitAndSpeechSfx
 										move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 										move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 										jsr     LoadAndDisplayCurrentPortrait
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $D9B               ; "I can't believe it!{N}I want to die, but I can't!{W1}"
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $3B1               ; set after recruiting Lemon in Yeel
 return_604C6:
 										

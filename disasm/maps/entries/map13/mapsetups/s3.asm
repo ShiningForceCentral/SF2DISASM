@@ -17,13 +17,13 @@ ms_map13_ZoneEvents:dc.b $18
 
 sub_5823A:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2C6
+										trap    #CHECK_FLAG
+										dc.w $2C6               ; set after Oddler wanders down from the mountain
 										bne.s   loc_58264
 										lea     cs_58330(pc), a0
 										trap    #6
-										trap    #TRAP_CHECKFLAG
-										dc.w $2C7
+										trap    #CHECK_FLAG
+										dc.w $2C7               ; set after you dislodge the turtle/fairy in Polca
 										bne.s   loc_58254
 										lea     cs_58310(pc), a0
 										trap    #6
@@ -34,20 +34,20 @@ loc_58254:
 										jsr     MoveEntityOutOfMap
 loc_5825E:
 										
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2C6               ; set after Oddler wanders down from the mountain
 										bra.s   return_5827A
 loc_58264:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $31F
+										trap    #CHECK_FLAG
+										dc.w $31F               ; set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
 										beq.s   return_5827A
-										trap    #TRAP_CHECKFLAG
-										dc.w $2CB
+										trap    #CHECK_FLAG
+										dc.w $2CB               ; set after returning to Polca from Bedoe and seeing the devils vs. birds scene
 										bne.s   return_5827A
 										lea     cs_585FE(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2CB               ; set after returning to Polca from Bedoe and seeing the devils vs. birds scene
 return_5827A:
 										
@@ -60,15 +60,15 @@ return_5827A:
 
 sub_5827C:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2CC
+										trap    #CHECK_FLAG
+										dc.w $2CC               ; set after your raft-giving conversation with the mayor in Polca
 										beq.s   return_58292
-										trap    #TRAP_CHECKFLAG
-										dc.w $2CD
+										trap    #CHECK_FLAG
+										dc.w $2CD               ; set after the mayor first tries to have you take Oddler with you (Peter declines)
 										bne.s   return_58292
 										lea     cs_58AE2(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2CD               ; set after the mayor first tries to have you take Oddler with you (Peter declines)
 return_58292:
 										
@@ -81,15 +81,15 @@ return_58292:
 
 sub_58294:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2CC
+										trap    #CHECK_FLAG
+										dc.w $2CC               ; set after your raft-giving conversation with the mayor in Polca
 										beq.s   return_582AA
-										trap    #TRAP_CHECKFLAG
-										dc.w $2CE
+										trap    #CHECK_FLAG
+										dc.w $2CE               ; set after Oddler runs after you as you leave Polca, and tags along
 										bne.s   return_582AA
 										lea     cs_58BEA(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2CE               ; set after Oddler runs after you as you leave Polca, and tags along
 return_582AA:
 										

@@ -52,7 +52,7 @@ word_5D584:         dc.w $81A
 
 sub_5D5B0:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $340
 										beq.s   return_5D5BC
 										lea     cs_5D732(pc), a0
@@ -68,15 +68,15 @@ return_5D5BC:
 
 sub_5D5BE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $342
 										beq.s   return_5D60C
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $343
 										bne.s   return_5D60C
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7E1               ; "{LEADER} found the Arm of{N}Golem.{W2}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7E2               ; "Pick it up?"
 										jsr     j_YesNoPrompt
 										tst.w   d0
@@ -86,23 +86,23 @@ sub_5D5BE:
 										jsr     sub_4F48A
 										btst    #0,d0
 										bne.s   loc_5D5FE
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $343               ; set after picking up the Arm of Golem in Moun
 										move.w  #$89,d0 
 										jsr     MoveEntityOutOfMap
 										bra.s   loc_5D606
 loc_5D5FE:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7E4               ; "But {LEADER}'s hands{N}are full.{W1}"
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7E7               ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 loc_5D606:
 										
 										bra.s   return_5D60C
 loc_5D608:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $7E7               ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 return_5D60C:
 										

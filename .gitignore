@@ -235,3 +235,6 @@ pip-log.txt
 *.jar
 *.csv
 *.png
+disasm/data/flags/flagmap.txt
+disasm/data/flags/sf2 flags.txt
+disasm/data/flags/SF2_debug_list.doc

@@ -23,25 +23,25 @@ ms_map6_ZoneEvents: dc.b $A
 
 sub_54CE8:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2C2
 										bne.s   loc_54CFA
 										lea     cs_54E86(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2C2               ; set after the scene with the sailor and soldier in New Granseal (Peter intro)
 										bra.s   return_54D10
 loc_54CFA:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $322
 										beq.s   return_54D10
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $323
 										bne.s   return_54D10
 										lea     cs_55242(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $323               ; set after returning to New Granseal, when the soldier greets you
 return_54D10:
 										
@@ -54,12 +54,12 @@ return_54D10:
 
 sub_54D12:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $2BD
 										bne.s   return_54D22
 										lea     cs_54F26(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2BD               ; set after the scene with Peter and the kids in New Granseal
 return_54D22:
 										
@@ -72,15 +72,15 @@ return_54D22:
 
 sub_54D24:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $325
 										beq.s   return_54D3A
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $326
 										bne.s   return_54D3A
 										lea     cs_55288(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $326               ; set after the scene with Janet, when you go to leave New Granseal
 return_54D3A:
 										

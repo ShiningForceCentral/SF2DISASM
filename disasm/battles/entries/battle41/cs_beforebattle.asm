@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle41\cs_beforebattle :
 ; Cutscene before battle 41
-bbcs_41:            dc.w 4                  ; 0004 SET TEXT INDEX C0B : "Who are you?!{N}Oh, are you from Granseal?{W1}"
+bbcs_41:            dc.w 4                  ; 0004 INIT TEXT CURSOR C0B : "Who are you?!{N}Oh, are you from Granseal?{W1}"
 										dc.w $C0B
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 38 C 15
 										dc.w $38

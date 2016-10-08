@@ -15,7 +15,7 @@ nullsub_178:
 
 	; End of function nullsub_178
 
-cs_58FA4:           dc.w 4                  ; 0004 SET TEXT INDEX 8D6 : "Somebody, take that plank{N}from him!{W1}"
+cs_58FA4:           dc.w 4                  ; 0004 INIT TEXT CURSOR 8D6 : "Somebody, take that plank{N}from him!{W1}"
 										dc.w $8D6
 										dc.w $46                ; 0046  8 7
 										dc.w 8
@@ -258,7 +258,7 @@ cs_58FA4:           dc.w 4                  ; 0004 SET TEXT INDEX 8D6 : "Somebod
 										dc.b $1E
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "{LEADER}, did you{N}hear that?{W2}"
 										dc.w $80
-word_59122:         dc.w 4                  ; 0004 SET TEXT INDEX 8E3 : "Would you go to North{N}Cliff and check on his{N}friend?{D1}"
+word_59122:         dc.w 4                  ; 0004 INIT TEXT CURSOR 8E3 : "Would you go to North{N}Cliff and check on his{N}friend?{D1}"
 										dc.w $8E3
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Would you go to North{N}Cliff and check on his{N}friend?{D1}"
 										dc.w $80
@@ -272,7 +272,7 @@ word_59122:         dc.w 4                  ; 0004 SET TEXT INDEX 8E3 : "Would y
 										dc.w $80
 										dc.w $B                 ; 000B JUMP 59122
 										dc.l word_59122         
-word_59142:         dc.w 4                  ; 0004 SET TEXT INDEX 8E6 : "Oh, you're so brave!{W2}"
+word_59142:         dc.w 4                  ; 0004 INIT TEXT CURSOR 8E6 : "Oh, you're so brave!{W2}"
 										dc.w $8E6
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 80 : "Oh, you're so brave!{W2}"
 										dc.w $80
@@ -287,7 +287,7 @@ word_59142:         dc.w 4                  ; 0004 SET TEXT INDEX 8E6 : "Oh, you
 										dc.w $23                ; 0023 SET ENTITY FACING 80 0
 										dc.b $80
 										dc.b 0
-										dc.w 4                  ; 0004 SET TEXT INDEX 8E8 : "{LEADER}, thank you!{W2}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 8E8 : "{LEADER}, thank you!{W2}"
 										dc.w $8E8
 										dc.w $2D                ; 002D MOVE ENTITY 83 FF 1 2
 										dc.b $83

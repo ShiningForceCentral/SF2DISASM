@@ -11,12 +11,12 @@ ms_map27_ZoneEvents:dc.b $FF
 
 sub_59F9A:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $30D
 										bne.s   return_59FAA
 										lea     cs_59FB8(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $30D               ; set after the scene where you're surprised by Willard inside the wall
 return_59FAA:
 										

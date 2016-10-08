@@ -6,20 +6,20 @@
 
 ms_map33_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $20B
 										beq.s   loc_5AB98
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $30F
 										bne.s   loc_5AB98
 										lea     cs_5B016(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $30F               ; set after the scene where Creed restores the Force and heads down the basement
-										move.b  #9,((RAM_EgressMapIdx-$1000000)).w
+										move.b  #9,((EGRESS_MAP_INDEX-$1000000)).w
 loc_5AB98:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $16
 										beq.s   loc_5ABB2
 										lea     cs_5ABA8(pc), a0
@@ -37,14 +37,14 @@ loc_5ABB0:
 										bra.s   loc_5ABEE
 loc_5ABB2:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $310
 										beq.s   loc_5ABBC
 										nop
 										bra.s   loc_5ABEE
 loc_5ABBC:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $30F
 										beq.s   loc_5ABD6
 										lea     cs_5ABCC(pc), a0
@@ -62,7 +62,7 @@ loc_5ABD4:
 										bra.s   loc_5ABEE
 loc_5ABD6:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $306
 										beq.s   loc_5ABEE
 										lea     cs_5ABE6(pc), a0
@@ -77,10 +77,10 @@ cs_5ABE6:
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 loc_5ABEE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $310
 										beq.s   return_5AC54
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $E
 										bne.s   loc_5AC0C
 										lea     cs_5AC04(pc), a0
@@ -95,7 +95,7 @@ cs_5AC04:
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 loc_5AC0C:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $10
 										bne.s   loc_5AC24
 										lea     cs_5AC1C(pc), a0
@@ -110,7 +110,7 @@ cs_5AC1C:
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 loc_5AC24:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $11
 										bne.s   loc_5AC3C
 										lea     cs_5AC34(pc), a0
@@ -125,7 +125,7 @@ cs_5AC34:
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 loc_5AC3C:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $F
 										bne.s   return_5AC54
 										lea     cs_5AC4C(pc), a0

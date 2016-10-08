@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle33\cs_beforebattle :
 ; Cutscene before battle 33
-bbcs_33:            dc.w 4                  ; 0004 SET TEXT INDEX B32 : "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
+bbcs_33:            dc.w 4                  ; 0004 INIT TEXT CURSOR B32 : "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
 										dc.w $B32
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 1F 16 1D
 										dc.w $1F
@@ -187,7 +187,7 @@ bbcs_33:            dc.w 4                  ; 0004 SET TEXT INDEX B32 : "I'm ope
 										dc.w $16
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 4D078
 										dc.l sub_4D078
-										dc.w 4                  ; 0004 SET TEXT INDEX B3B : "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR B3B : "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
 										dc.w $B3B
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
 										dc.w $1F
@@ -232,7 +232,7 @@ word_4D048:         dc.w $1A
 
 sub_4D078:
 										
-										cmpi.w  #$FFFF,(RAM_Dialogue_NameIdx1).l
+										cmpi.w  #$FFFF,(TEXT_NAME_INDEX_1).l
 										beq.s   return_4D098
 										jsr     (HideTextBox).l 
 										move.w  #$B3A,d0

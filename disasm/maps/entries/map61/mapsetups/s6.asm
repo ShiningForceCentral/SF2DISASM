@@ -10,7 +10,7 @@ ms_map61_InitFunction:
 
 	; End of function ms_map61_InitFunction
 
-cs_5C6CA:           dc.w 4                  ; 0004 SET TEXT INDEX E3A : "It's my job!{W1}"
+cs_5C6CA:           dc.w 4                  ; 0004 INIT TEXT CURSOR E3A : "It's my job!{W1}"
 										dc.w $E3A
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7

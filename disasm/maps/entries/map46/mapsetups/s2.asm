@@ -3,7 +3,7 @@
 ; 
 ms_map46_EntityEvents:
 										dc.b 1
-byte_5C0F9:         dc.b 1
+										dc.b 1
 										dc.w sub_5C174-ms_map46_EntityEvents
 										dc.b 2
 										dc.b 1
@@ -99,8 +99,8 @@ byte_5C0F9:         dc.b 1
 
 sub_5C174:
 										
-										moveq   #(byte_5C0F9-ms_map46_EntityEvents),d0
-										jmp     sub_4790E
+										moveq   #1,d0
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C174
 
@@ -110,7 +110,7 @@ sub_5C174:
 sub_5C17C:
 										
 										moveq   #2,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C17C
 
@@ -120,7 +120,7 @@ sub_5C17C:
 sub_5C184:
 										
 										moveq   #3,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C184
 
@@ -130,7 +130,7 @@ sub_5C184:
 sub_5C18C:
 										
 										moveq   #4,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C18C
 
@@ -140,7 +140,7 @@ sub_5C18C:
 sub_5C194:
 										
 										moveq   #5,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C194
 
@@ -150,7 +150,7 @@ sub_5C194:
 sub_5C19C:
 										
 										moveq   #6,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C19C
 
@@ -160,7 +160,7 @@ sub_5C19C:
 sub_5C1A4:
 										
 										moveq   #7,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1A4
 
@@ -170,7 +170,7 @@ sub_5C1A4:
 sub_5C1AC:
 										
 										moveq   #8,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1AC
 
@@ -180,7 +180,7 @@ sub_5C1AC:
 sub_5C1B4:
 										
 										moveq   #9,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1B4
 
@@ -190,7 +190,7 @@ sub_5C1B4:
 sub_5C1BC:
 										
 										moveq   #$A,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1BC
 
@@ -200,7 +200,7 @@ sub_5C1BC:
 sub_5C1C4:
 										
 										moveq   #$B,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1C4
 
@@ -210,7 +210,7 @@ sub_5C1C4:
 sub_5C1CC:
 										
 										moveq   #$C,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1CC
 
@@ -220,7 +220,7 @@ sub_5C1CC:
 sub_5C1D4:
 										
 										moveq   #$D,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1D4
 
@@ -230,7 +230,7 @@ sub_5C1D4:
 sub_5C1DC:
 										
 										moveq   #$E,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1DC
 
@@ -240,7 +240,7 @@ sub_5C1DC:
 sub_5C1E4:
 										
 										moveq   #$F,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1E4
 
@@ -250,7 +250,7 @@ sub_5C1E4:
 sub_5C1EC:
 										
 										moveq   #$10,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1EC
 
@@ -260,7 +260,7 @@ sub_5C1EC:
 sub_5C1F4:
 										
 										moveq   #$11,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1F4
 
@@ -270,7 +270,7 @@ sub_5C1F4:
 sub_5C1FC:
 										
 										moveq   #$12,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C1FC
 
@@ -280,7 +280,7 @@ sub_5C1FC:
 sub_5C204:
 										
 										moveq   #$13,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C204
 
@@ -290,7 +290,7 @@ sub_5C204:
 sub_5C20C:
 										
 										moveq   #$14,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C20C
 
@@ -300,7 +300,7 @@ sub_5C20C:
 sub_5C214:
 										
 										moveq   #$15,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C214
 
@@ -310,7 +310,7 @@ sub_5C214:
 sub_5C21C:
 										
 										moveq   #$16,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C21C
 
@@ -320,7 +320,7 @@ sub_5C21C:
 sub_5C224:
 										
 										moveq   #$17,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C224
 
@@ -330,7 +330,7 @@ sub_5C224:
 sub_5C22C:
 										
 										moveq   #$18,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C22C
 
@@ -340,7 +340,7 @@ sub_5C22C:
 sub_5C234:
 										
 										moveq   #$19,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C234
 
@@ -350,7 +350,7 @@ sub_5C234:
 sub_5C23C:
 										
 										moveq   #$1A,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C23C
 
@@ -360,7 +360,7 @@ sub_5C23C:
 sub_5C244:
 										
 										moveq   #$1B,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C244
 
@@ -370,7 +370,7 @@ sub_5C244:
 sub_5C24C:
 										
 										moveq   #$1C,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C24C
 
@@ -380,7 +380,7 @@ sub_5C24C:
 sub_5C254:
 										
 										moveq   #$1D,d0
-										jmp     sub_4790E
+										jmp     DisplayHeadquartersQuote
 
 	; End of function sub_5C254
 
@@ -389,7 +389,7 @@ sub_5C254:
 
 sub_5C25C:
 										
-										trap    #TRAP_TEXTBOX
+										trap    #TEXTBOX
 										dc.w $B                 ; "{LEADER}, take it easy!{W1}"
 										rts
 

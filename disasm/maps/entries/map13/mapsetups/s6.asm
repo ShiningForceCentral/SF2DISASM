@@ -6,23 +6,23 @@
 
 ms_map13_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2C7
+										trap    #CHECK_FLAG
+										dc.w $2C7               ; set after you dislodge the turtle/fairy in Polca
 										bne.s   loc_582EC
 										lea     cs_58310(pc), a0
 										trap    #6
 loc_582EC:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2CC
+										trap    #CHECK_FLAG
+										dc.w $2CC               ; set after your raft-giving conversation with the mayor in Polca
 										beq.s   loc_582FE
 										move.w  #$89,d0 
 										moveq   #3,d1
 										jsr     sub_4781A
 loc_582FE:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2CE
+										trap    #CHECK_FLAG
+										dc.w $2CE               ; set after Oddler runs after you as you leave Polca, and tags along
 										beq.s   return_5830E
 										move.w  #$8C,d0 
 										jsr     MoveEntityOutOfMap
@@ -81,7 +81,7 @@ cs_58330:           dc.w 5                  ; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBL
 										dc.l eas_461B6          
 										dc.b $80                ; WAIT 64
 										dc.b $64
-										dc.w 4                  ; 0004 SET TEXT INDEX 5AC : "Oh!{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 5AC : "Oh!{W1}"
 										dc.w $5AC
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 8C 1D 7 2
 										dc.b $8C
@@ -367,7 +367,7 @@ cs_58512:           dc.w $14                ; 0014 SET MANUAL ACTSCRIPT 82
 										dc.w $8080              ; 0014 END OF MANUAL ACTSCRIPT
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF
-										dc.w 4                  ; 0004 SET TEXT INDEX 59B : "Help!  Help!{N}I can't...get up!{W2}{N}You, please turn me over!{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 59B : "Help!  Help!{N}I can't...get up!{W2}{N}You, please turn me over!{W1}"
 										dc.w $59B
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "Help!  Help!{N}I can't...get up!{W2}{N}You, please turn me over!{W1}"
 										dc.w $82
@@ -537,7 +537,7 @@ cs_585FE:           dc.w 5                  ; 0005 PLAY SOUND
 										dc.b $84
 										dc.b $FF
 										dc.l eas_46172          
-										dc.w 4                  ; 0004 SET TEXT INDEX 5BC : "Bedoe soldiers are cowards!{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 5BC : "Bedoe soldiers are cowards!{W1}"
 										dc.w $5BC
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7
@@ -872,7 +872,7 @@ cs_585FE:           dc.w 5                  ; 0005 PLAY SOUND
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT D000000
 										dc.l $D000000
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_58856:           dc.w 4                  ; 0004 SET TEXT INDEX 5CF : "Heeeeee!{W1}"
+cs_58856:           dc.w 4                  ; 0004 INIT TEXT CURSOR 5CF : "Heeeeee!{W1}"
 										dc.w $5CF
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7
@@ -1272,7 +1272,7 @@ cs_58856:           dc.w 4                  ; 0004 SET TEXT INDEX 5CF : "Heeeeee
 										dc.w 7
 										dc.w 2
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_58AE2:           dc.w 4                  ; 0004 SET TEXT INDEX 5ED : "Just a minute.{W1}"
+cs_58AE2:           dc.w 4                  ; 0004 INIT TEXT CURSOR 5ED : "Just a minute.{W1}"
 										dc.w $5ED
 										dc.w $32                ; 0032 SET CAMERA DEST 10 8
 										dc.w $10
@@ -1369,7 +1369,7 @@ cs_58AE2:           dc.w 4                  ; 0004 SET TEXT INDEX 5ED : "Just a 
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 89 : "B...but....{W1}"
 										dc.w $89
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_58B7A:           dc.w 4                  ; 0004 SET TEXT INDEX 5F8 : "Are you serious?{N}{LEADER}, you're too nice.{W1}"
+cs_58B7A:           dc.w 4                  ; 0004 INIT TEXT CURSOR 5F8 : "Are you serious?{N}{LEADER}, you're too nice.{W1}"
 										dc.w $5F8
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Are you serious?{N}{LEADER}, you're too nice.{W1}"
 										dc.w $8007
@@ -1444,7 +1444,7 @@ cs_58B7A:           dc.w 4                  ; 0004 SET TEXT INDEX 5F8 : "Are you
 										dc.b 0
 										dc.w $B                 ; 000B JUMP 58D4C
 										dc.l cs_58D4C           
-cs_58BEA:           dc.w 4                  ; 0004 SET TEXT INDEX 605 : "Wait, wait!{W1}"
+cs_58BEA:           dc.w 4                  ; 0004 INIT TEXT CURSOR 605 : "Wait, wait!{W1}"
 										dc.w $605
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8C : "Wait, wait!{W1}"
 										dc.w $8C
@@ -1490,7 +1490,7 @@ cs_58BEA:           dc.w 4                  ; 0004 SET TEXT INDEX 605 : "Wait, w
 										dc.w $32                ; 0032 SET CAMERA DEST A 16
 										dc.w $A
 										dc.w $16
-										dc.w 4                  ; 0004 SET TEXT INDEX 5F3 : "{LEADER}, will you take{N}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 5F3 : "{LEADER}, will you take{N}"
 										dc.w $5F3
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8007 : "{LEADER}, will you take{N}"
 										dc.w $8007
@@ -1500,7 +1500,7 @@ cs_58BEA:           dc.w 4                  ; 0004 SET TEXT INDEX 605 : "Wait, w
 										dc.w $C                 ; 000C JUMP IF SET FLAG 59 58D4C : YES/NO prompt answer
 										dc.w $59
 										dc.l cs_58D4C           
-										dc.w 4                  ; 0004 SET TEXT INDEX 607 : "Huh?{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 607 : "Huh?{W1}"
 										dc.w $607
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8C : "Huh?{W1}"
@@ -1652,7 +1652,7 @@ cs_58BEA:           dc.w 4                  ; 0004 SET TEXT INDEX 605 : "Wait, w
 										dc.b 1
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8007 : "OK.  Let's go.{W1}"
 										dc.w $8007
-										dc.w 4                  ; 0004 SET TEXT INDEX 5FC : "Thank you very much.{W1}"
+										dc.w 4                  ; 0004 INIT TEXT CURSOR 5FC : "Thank you very much.{W1}"
 										dc.w $5FC
 										dc.w $26                ; 0026 MAKE ENTITY NOD 8C
 										dc.w $8C
@@ -1663,7 +1663,7 @@ cs_58BEA:           dc.w 4                  ; 0004 SET TEXT INDEX 605 : "Wait, w
 										dc.b 3
 										dc.w $B                 ; 000B JUMP 58DD2
 										dc.l word_58DD2         
-cs_58D4C:           dc.w 4                  ; 0004 SET TEXT INDEX 5FC : "Thank you very much.{W1}"
+cs_58D4C:           dc.w 4                  ; 0004 INIT TEXT CURSOR 5FC : "Thank you very much.{W1}"
 										dc.w $5FC
 										dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
 										dc.b $80                ; WAIT 14
@@ -1745,7 +1745,7 @@ cs_58D4C:           dc.w 4                  ; 0004 SET TEXT INDEX 5FC : "Thank y
 										dc.w $8C
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 8C : "Yes, I will....{W1}"
 										dc.w $8C
-word_58DD2:         dc.w 4                  ; 0004 SET TEXT INDEX 600 : "I'm Oddler.{N}I was nearly dead when I{N}came here.{W2}"
+word_58DD2:         dc.w 4                  ; 0004 INIT TEXT CURSOR 600 : "I'm Oddler.{N}I was nearly dead when I{N}came here.{W2}"
 										dc.w $600
 										dc.w 2                  ; 0002 DISPLAY TEXT BOX 8C : "I'm Oddler.{N}I was nearly dead when I{N}came here.{W2}"
 										dc.w $8C

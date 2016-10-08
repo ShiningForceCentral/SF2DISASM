@@ -10,7 +10,7 @@ ms_map11_InitFunction:
 
 	; End of function ms_map11_InitFunction
 
-cs_57AAA:           dc.w 4                  ; 0004 SET TEXT INDEX C4F : "God Volcanon!{N}I'm back!{W1}"
+cs_57AAA:           dc.w 4                  ; 0004 INIT TEXT CURSOR C4F : "God Volcanon!{N}I'm back!{W1}"
 										dc.w $C4F
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7

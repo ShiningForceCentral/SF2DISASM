@@ -11,12 +11,12 @@ ms_map26_ZoneEvents:dc.b $E
 
 sub_59DBE:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $30C
 										bne.s   return_59DCE
 										lea     cs_59F20(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $30C               ; set after the man tries to lift the giant ring in Floor World
 return_59DCE:
 										

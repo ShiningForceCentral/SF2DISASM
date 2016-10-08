@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle34\cs_afterbattle :
 ; Cutscene after battle 34
-abcs_battle34:      dc.w 4                  ; 0004 SET TEXT INDEX B5F : "{LEADER}, I lost?!{N}Take this.{W1}"
+abcs_battle34:      dc.w 4                  ; 0004 INIT TEXT CURSOR B5F : "{LEADER}, I lost?!{N}Take this.{W1}"
 										dc.w $B5F
 										dc.w $37                ; 0037 LOAD MAP AND FADE IN 37 2 7
 										dc.w $37
@@ -142,7 +142,7 @@ word_4D592:         dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 45E44
 										dc.w $C081
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX C081 : "I have to go now and{N}prepare your welcoming{N}party!{W1}"
 										dc.w $C081
-										dc.w $3E                ; 003E SIMILAR TO TINT MAP
+										dc.w $3E                ; 003E FLICKER ONCE
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
 										dc.w $23                ; 0023 SET ENTITY FACING 7 2
@@ -198,7 +198,7 @@ word_4D592:         dc.w $15                ; 0015 SET ACTSCRIPT 1F FF 45E44
 										dc.b $1E
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 1A : "I cannot explain....{W1}"
 										dc.w $1A
-word_4D620:         dc.w 4                  ; 0004 SET TEXT INDEX B74 : "We will see them when we{N}arrive at Grans.{W1}"
+word_4D620:         dc.w 4                  ; 0004 INIT TEXT CURSOR B74 : "We will see them when we{N}arrive at Grans.{W1}"
 										dc.w $B74
 										dc.w $2D                ; 002D MOVE ENTITY 7 FF 2 1
 										dc.b 7

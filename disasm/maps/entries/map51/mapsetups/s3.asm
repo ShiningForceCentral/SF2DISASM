@@ -26,12 +26,12 @@ ms_map51_ZoneEvents:dc.b 9
 
 sub_5C2F2:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1D6
 										bne.s   return_5C302
 										lea     cs_5C312(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $1D6               ; set after you approach the pond to rescue Elric at the Harpy Pond
 return_5C302:
 										
@@ -44,7 +44,7 @@ return_5C302:
 
 sub_5C304:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1D6
 										bne.s   return_5C310
 										lea     cs_5C3AA(pc), a0
@@ -55,7 +55,7 @@ return_5C310:
 
 	; End of function sub_5C304
 
-cs_5C312:           dc.w 4                  ; 0004 SET TEXT INDEX 9FB : "Did you come to help me?{N}Oh, thank you!{W2}"
+cs_5C312:           dc.w 4                  ; 0004 INIT TEXT CURSOR 9FB : "Did you come to help me?{N}Oh, thank you!{W2}"
 										dc.w $9FB
 										dc.w $15                ; 0015 SET ACTSCRIPT 7 FF 460CE
 										dc.b 7
@@ -141,7 +141,7 @@ cs_5C312:           dc.w 4                  ; 0004 SET TEXT INDEX 9FB : "Did you
 										dc.w 7                  ; 0007 EXECUTE MAP SYSTEM EVENT 33000000
 										dc.l $33000000
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5C3AA:           dc.w 4                  ; 0004 SET TEXT INDEX A05 : "{LEADER}, we have to{N}save him!{W1}"
+cs_5C3AA:           dc.w 4                  ; 0004 INIT TEXT CURSOR A05 : "{LEADER}, we have to{N}save him!{W1}"
 										dc.w $A05
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 7 : "{LEADER}, we have to{N}save him!{W1}"
 										dc.w 7

@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle07\cs_beforebattle :
 ; Cutscene before battle 7
-bbcs_07:            dc.w 4                  ; 0004 SET TEXT INDEX 935 : "Astral, you're so persistent!{W1}"
+bbcs_07:            dc.w 4                  ; 0004 INIT TEXT CURSOR 935 : "Astral, you're so persistent!{W1}"
 										dc.w $935
 										dc.w $10                ; 0010 SET FLAG 53 0 : King + Minister are followers
 										dc.w $53

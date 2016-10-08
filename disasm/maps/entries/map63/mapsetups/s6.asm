@@ -6,7 +6,7 @@
 
 ms_map63_InitFunction:
 										
-										trap    #TRAP_CHECKFLAG
+										trap    #CHECK_FLAG
 										dc.w $1D
 										bne.s   return_5CA5C
 										lea     cs_5CA5E(pc), a0
@@ -210,7 +210,7 @@ cs_5CB34:           dc.w $35                ; 0035 SIMILAR TO SET BLOCKS 1035 10
 										dc.b $80                ; WAIT 1
 										dc.b 1
 										dc.w $FFFF              ; END OF CUTSCENE SCRIPT
-cs_5CBB4:           dc.w 4                  ; 0004 SET TEXT INDEX 1053 : "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
+cs_5CBB4:           dc.w 4                  ; 0004 INIT TEXT CURSOR 1053 : "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
 										dc.w $1053
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
 										dc.w $FFFF
@@ -500,7 +500,7 @@ word_5CDDA:         dc.w $FFFF              ; END OF CUTSCENE SCRIPT
 
 sub_5CDDC:
 										
-										move.b  #$A9,((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w
+										move.b  #$A9,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 										rts
 
 	; End of function sub_5CDDC
@@ -510,7 +510,7 @@ sub_5CDDC:
 
 sub_5CDE4:
 										
-										move.b  #$57,((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w 
+										move.b  #$57,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w 
 										rts
 
 	; End of function sub_5CDE4
@@ -520,7 +520,7 @@ sub_5CDE4:
 
 sub_5CDEC:
 										
-										subq.b  #4,((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w
+										subq.b  #4,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 										rts
 
 	; End of function sub_5CDEC
@@ -530,7 +530,7 @@ sub_5CDEC:
 
 sub_5CDF2:
 										
-										addq.b  #4,((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w
+										addq.b  #4,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 										rts
 
 	; End of function sub_5CDF2
@@ -540,7 +540,7 @@ sub_5CDF2:
 
 sub_5CDF8:
 										
-										clr.b   ((RAM_Map_AreaLayer2AutoscrollY-$1000000)).w
+										clr.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 										rts
 
 	; End of function sub_5CDF8

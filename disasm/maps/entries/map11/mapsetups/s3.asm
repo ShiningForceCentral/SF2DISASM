@@ -20,14 +20,14 @@ nullsub_75:
 
 sub_57A72:
 										
-										trap    #TRAP_CHECKFLAG
-										dc.w $2D2
+										trap    #CHECK_FLAG
+										dc.w $2D2               ; set after speaking with Volcanon
 										bne.s   return_57A86
 										lea     cs_57AAA(pc), a0
 										trap    #6
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2D2               ; set after speaking with Volcanon
-										trap    #TRAP_SETFLAG
+										trap    #SET_FLAG
 										dc.w $2C7               ; set after you dislodge the turtle/fairy in Polca
 return_57A86:
 										

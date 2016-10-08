@@ -1,7 +1,7 @@
 
 ; SCRIPT SECTION battles\entries\battle00\cs_afterbattle :
 ; Cutscene after battle 0
-abcs_battle00:      dc.w 4                  ; 0004 SET TEXT INDEX 1D2 : "Game over!{W1}"
+abcs_battle00:      dc.w 4                  ; 0004 INIT TEXT CURSOR 1D2 : "Game over!{W1}"
 										dc.w $1D2
 										dc.w 5                  ; 0005 PLAY SOUND MUSIC_ITEM
 										dc.w $1B
