@@ -33,7 +33,7 @@ loc_633BA:
 										dc.w MUSIC_TOWN
 										jsr     (FadeInFromBlack).w
 										rts
-cs_633C4:           dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
+cs_EndKiss:         dc.w 9                  ; 0009 HIDE TEXTBOX AND PORTRAIT
 										dc.w $24                ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
 										dc.w $FFFF
 										dc.w $23                ; 0023 SET ENTITY FACING 0 0

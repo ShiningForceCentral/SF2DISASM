@@ -33,9 +33,9 @@ IntroCutscene2:     dc.w 4                  ; 0004 INIT TEXT CURSOR 106A : "Quit
 										dc.w 5                  ; 0005 PLAY SOUND SFX_DEMON_BREATH
 										dc.w $75
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
 										dc.w $23                ; 0023 SET ENTITY FACING 81 0
@@ -53,9 +53,9 @@ IntroCutscene2:     dc.w 4                  ; 0004 INIT TEXT CURSOR 106A : "Quit
 										dc.w 5                  ; 0005 PLAY SOUND SFX_DEMON_BREATH
 										dc.w $75
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.b $80                ; WAIT 28
 										dc.b $28
 										dc.w $23                ; 0023 SET ENTITY FACING 81 0
@@ -209,17 +209,17 @@ IntroCutscene2:     dc.w 4                  ; 0004 INIT TEXT CURSOR 106A : "Quit
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.b $80                ; WAIT 28
 										dc.b $28
 										dc.w 5                  ; 0005 PLAY SOUND SFX_DEMON_BREATH
 										dc.w $75
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.b $80                ; WAIT 5
 										dc.b 5
 										dc.w $15                ; 0015 SET ACTSCRIPT 81 0 461B6

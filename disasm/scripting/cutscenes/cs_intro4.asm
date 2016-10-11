@@ -25,9 +25,9 @@ IntroCutscene4:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Some
 										dc.w 5                  ; 0005 PLAY SOUND SFX_INTRO_LIGHTNING
 										dc.w $76
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.b $80                ; WAIT 3C
 										dc.b $3C
 										dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Somebody bring a light to{N}the King's chamber!{D2}"
@@ -39,9 +39,9 @@ IntroCutscene4:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Some
 										dc.w 5                  ; 0005 PLAY SOUND SFX_DEMON_BREATH
 										dc.w $75
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
 										dc.w $23                ; 0023 SET ENTITY FACING 81 1
@@ -54,7 +54,7 @@ IntroCutscene4:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Some
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $33                ; 0033 SET QUAKE AMOUNT 3
 										dc.w 3
 										dc.w $41                ; 0041 FLASH SCREEN WHITE A
@@ -181,9 +181,9 @@ IntroCutscene4:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Some
 										dc.w 5                  ; 0005 PLAY SOUND SFX_DEMON_BREATH
 										dc.w $75
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
 										dc.w 0                  ; 0000 DISPLAY SINGLE TEXTBOX 82 : "Minister!{D2}"
@@ -424,9 +424,9 @@ IntroCutscene4:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Some
 										dc.w 5                  ; 0005 PLAY SOUND SFX_DEMON_BREATH
 										dc.w $75
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.b $80                ; WAIT 1E
 										dc.b $1E
 										dc.w $23                ; 0023 SET ENTITY FACING 80 3
@@ -512,9 +512,9 @@ IntroCutscene4:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Some
 										dc.b $B
 										dc.b 1
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 84 3F 3F 1
 										dc.b $84
 										dc.b $3F
@@ -550,9 +550,9 @@ IntroCutscene4:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Some
 										dc.b $B
 										dc.b 1
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 84 3F 3F 1
 										dc.b $84
 										dc.b $3F
@@ -585,9 +585,9 @@ IntroCutscene4:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Some
 										dc.b $B
 										dc.b 1
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 84 3F 3F 1
 										dc.b $84
 										dc.b $3F
@@ -613,9 +613,9 @@ IntroCutscene4:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Some
 										dc.b $B
 										dc.b 1
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $19                ; 0019 SET ENTITY POS AND FACING 84 3F 3F 1
 										dc.b $84
 										dc.b $3F
@@ -817,11 +817,11 @@ IntroCutscene4:     dc.w 4                  ; 0004 INIT TEXT CURSOR 1089 : "Some
 										dc.w 5                  ; 0005 PLAY SOUND SFX_INTRO_LIGHTNING
 										dc.w $76
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.w $A                 ; 000A EXECUTE SUBROUTINE 48FE2
-										dc.l sub_48FE2
+										dc.l ApplyStormEffect
 										dc.b $80                ; WAIT 28
 										dc.b $28
 										dc.w $2A                ; 002A MAKE ENTITY SHIVER 83

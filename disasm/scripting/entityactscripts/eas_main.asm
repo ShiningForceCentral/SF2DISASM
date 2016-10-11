@@ -560,3 +560,4 @@ eas_Standing:       dc.w $10                ; 0010 SET SPEED X=$20 Y=$20
 eas_Idle:           dc.w 0                  ; 0000 WAIT value $1
 										dc.w 1
 word_45200:         dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFFC
+										dc.w eas_Idle+$10000-word_45200

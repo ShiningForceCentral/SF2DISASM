@@ -37,12 +37,12 @@ sub_632AC:
 										jsr     j_YesNoPrompt
 										tst.w   d0
 										bne.s   loc_632E0
-										lea     cs_633C4(pc), a0
-										trap    #6
-										jsr     sub_1AC068
+										lea     cs_EndKiss(pc), a0
+										trap    #MAPSCRIPT
+										jsr     PlayEndCredits
 										moveq   #$FFFFFFFF,d0
 										jsr     PlayIntroOrEndCutscene
-										jmp     (loc_7094).w
+										jmp     (WitchEnd).w
 loc_632E0:
 										
 										trap    #SOUND_COMMAND

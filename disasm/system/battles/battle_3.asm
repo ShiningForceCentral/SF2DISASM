@@ -1,0 +1,34 @@
+
+; SCRIPT SECTION system\battles\battle_3 :
+; Data related to UpgradeUnitIdx function
+SpecialBattles:     incbin "battles/global/specialbattles.bin"
+unk_1B6DBC:         dc.b   5
+										dc.b   0
+										dc.b $23 
+										dc.b   6
+										dc.b  $A
+										dc.b  $D
+										dc.b  $E
+										dc.b  $F
+										dc.b $20
+										dc.b $26 
+unk_1B6DC6:         dc.b   2
+										dc.b $28 
+										dc.b $34 
+										dc.b   0
+unk_1B6DCA:         dc.b   2
+										dc.b $38 
+										dc.b $41 
+										dc.b   2
+										dc.b $3B 
+										dc.b $3D 
+unk_1B6DD0:         dc.b   1
+										dc.b $43 
+										dc.b $4A 
+										dc.b   1
+										dc.b $47 
+unk_1B6DD5:         dc.b   2
+										dc.b $4C 
+										dc.b $54 
+										dc.b   1
+										dc.b $50 

@@ -206,7 +206,7 @@ eas_51840:          dc.w $10                ; 0010 SET SPEED X=$0 Y=$0
 										dc.w 2
 										dc.w $1F                ; 001F SET 1D BIT 3 $FFFF
 										dc.w $FFFF
-										dc.w $23                ; 0023 SEND SOUND COMMAND $58
+										dc.w $23                ; 0023 SEND SOUND COMMAND $SFX_FALLING
 										dc.w $58
 										dc.w $22                ; 0022 SET FACING $0
 										dc.w 0

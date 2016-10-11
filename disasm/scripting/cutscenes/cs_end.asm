@@ -488,7 +488,7 @@ word_492CC:         dc.w $3F
 										dc.b $CC
 										dc.l eas_Init           
 										dc.w $FFFF
-word_4931C:         dc.w $52                ; 0052 RELATED TO TWO ENTITIES 86 0
+dms_01:             dc.w $52                ; 0052 RELATED TO TWO ENTITIES 86 0
 										dc.w $86
 										dc.w 0
 										dc.w $56                ; 0056 SOMETHING WITH AN ENTITY 5
@@ -594,3 +594,119 @@ word_493CA:         dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $BA
 										dc.w $1D
 										dc.w 0                  ; 0000 WAIT value $FFFF
 										dc.w $FFFF
+
+; =============== S U B R O U T I N E =======================================
+
+sub_493EC:
+										
+										move.w  #$18A,d0        ; 018A={NAME} found{N}the {ITEM}.{D1}
+										jsr     (DisplayText).l 
+										moveq   #$78,d0 
+										rts
+
+	; End of function sub_493EC
+
+										dc.w $20
+										dc.w $1F
+										dc.w 7
+										dc.w $1F
+										dc.w 1
+										dc.w $1F
+										dc.w 2
+										dc.w $1F
+										dc.w 6
+										dc.w $21
+										dc.w $80
+										dc.w $21
+										dc.w $96
+										dc.w $1F
+										dc.w 3
+										dc.w $1D
+										dc.w 0
+										dc.w $FFFF
+										dc.w $24
+										dc.w $FFFF
+										dc.w $18
+										dc.w 0
+										dc.w $28
+										dc.w $2E
+										dc.w 0
+										dc.w $19
+										dc.w $60D
+										dc.w $1703
+										dc.w $18
+										dc.w 6
+										dc.w $28
+										dc.w $22
+										dc.w 6
+										dc.w 7
+										dc.w 5
+										dc.w 4
+										dc.w $FFFF
+										dc.w 4
+										dc.w $18A
+										dc.w $1D
+										dc.w 0
+										dc.w 3
+										dc.w 0
+										dc.w 3
+										dc.w $A
+										dc.w 1
+										dc.w 0
+										dc.w 4
+										dc.w $14
+										dc.w $1D
+										dc.w 0
+										dc.w $8078
+										dc.w $1E
+										dc.w 4
+										dc.w $142
+										dc.w 2
+										dc.w 0
+										dc.w 0
+										dc.w 0
+										dc.w $FFFF
+										dc.w $14
+										dc.w $501
+										dc.w $15
+										dc.w 0
+										dc.w $11
+										dc.w 1
+										dc.w $10
+										dc.b 0
+										dc.b $20
+										dc.w $12
+										dc.w 0
+										dc.w $13
+										dc.w $FFFF
+										dc.w 4
+										dc.w 0
+										dc.w $FFFF
+										dc.w 0
+										dc.w 5
+										dc.w 4
+										dc.w 0
+										dc.w 1
+										dc.w 0
+										dc.w 5
+										dc.w 4
+										dc.w 0
+										dc.w 0
+										dc.w 0
+										dc.w 5
+										dc.w $15
+										dc.w $FFFF
+										dc.w $30
+										dc.w $BD50
+										dc.b $80
+										dc.b $80
+										dc.b 0
+										dc.b $1D
+										dc.b 0
+										dc.b 0
+										dc.b $80
+										dc.b $3C
+										dc.b 0
+										dc.b $1E
+										dc.b $FF
+										dc.b $FF

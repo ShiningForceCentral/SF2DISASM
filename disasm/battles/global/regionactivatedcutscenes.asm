@@ -1,6 +1,6 @@
 
 ; SCRIPT SECTION battles\global\regionactivatedcutscenes :
-; Region-activated cutscenes
+; Region-activated cutscenes data
 										dc.b $20                ; battle id
 										dc.b   0                ; region id
 										dc.w $182               ; associated flag

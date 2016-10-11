@@ -288,7 +288,7 @@ eas_Die:            dc.w $14                ; 0014 SET ANIM COUNTER $0
 										dc.w $A                 ; 000A UPDATE SPRITE
 										dc.w 0                  ; 0000 WAIT value $3
 										dc.w 3
-										dc.w $23                ; 0023 SEND SOUND COMMAND $74
+										dc.w $23                ; 0023 SEND SOUND COMMAND $SFX_BATTLEFIELD_DEATH
 										dc.w $74
 										dc.w $17                ; 0017 SET ENTITY SPRITE $3F
 										dc.w $3F
@@ -572,7 +572,7 @@ word_462AE:         dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FF
 										dc.w $3C
 word_462DA:         dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFA8
 										dc.w word_46282+$10000-word_462DA
-										dc.w $23                ; 0023 SEND SOUND COMMAND $57
+										dc.w $23                ; 0023 SEND SOUND COMMAND $SFX_JUMP
 										dc.w $57
 										dc.w $17                ; 0017 SET ENTITY SPRITE $3F
 										dc.w $3F
