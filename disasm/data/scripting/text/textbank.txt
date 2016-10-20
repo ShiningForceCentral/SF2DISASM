@@ -1,0 +1,38 @@
+- 4267 Strings
+- 255 strings per bank -> 17 banks
+- Strings are stored sequentially 
+- String 1st byte : compressed data length
+- String data :
+	- 0 expresses "go LEFT in Huffman tree"
+		-> Just keep searching for the leaf
+	- 1 expresses "go RIGHT in Huffman tree"
+		-> Count skipped leafs on the left -> add to number of symbols to skip
+		-> Then keep searching on the right
+	- When tree leaf encountered, get symbol right after skipped ones.
+
+ 
+Algorithm for reading next symbol, with 
+- the text string's bits,
+- and the Huffman tree bits
+	
+If Huffman tree bit 0 (non-leaf node)	
+	If string bit = 0 
+		-> go left 
+		-> load next Huffman tree bit
+	If string bit = 1 
+		-> go right 
+		-> count skipped left sub-tree leafs
+			if Huffman tree bit 0
+				-> increment nodes to explore
+				-> load next Huffman tree bit
+			if Huffman tree bit 1
+				-> increment symbol skip counter
+				-> if nodes remain to explore
+					-> decrement nodes to explore
+					-> continue to count symbols to skip with next Huffman tree bit
+If Huffman tree bit 1 (leaf node)
+	-> Get Symbol after skipped ones (read backwards from tree offset)
+
+
+
+	 

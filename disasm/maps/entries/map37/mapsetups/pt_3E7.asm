@@ -1,9 +1,0 @@
-
-; SCRIPT SECTION maps\entries\map37\mapsetups\pt_3E7 :
-; 
-ms_map37_flag3E7:   dc.l ms_map37_flag3E7_Entities
-										dc.l ms_map37_flag3E7_EntityEvents
-										dc.l ms_map37_ZoneEvents
-										dc.l ms_map37_AreaDescriptions
-										dc.l ms_map37_Section5
-										dc.l ms_map37_flag3E7_InitFunction

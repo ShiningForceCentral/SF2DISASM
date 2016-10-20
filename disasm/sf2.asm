@@ -3,4 +3,4 @@
    include "sf2enums.asm"
    include "sf2const.asm"
 
-   include "romlayout\sf2-00-romlayout.asm"
+   include "layout\sf2-00-romlayout.asm"

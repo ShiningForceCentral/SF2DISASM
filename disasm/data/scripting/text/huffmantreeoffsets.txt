@@ -1,0 +1,8 @@
+256 two-byte entries.
+Each entry is the offset of the corresponding symbol's Huffman tree.
+Ex:
+Symbol 01 (" ") starts at tree data offset 0x0045.
+Warning : a Huffman tree offset is not the beginning of its data :
+- Tree Symbols are stored before offset
+- Tree Nodes start from offset
+More details in huffmantrees.txt

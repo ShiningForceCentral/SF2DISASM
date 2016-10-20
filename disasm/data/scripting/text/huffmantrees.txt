@@ -1,0 +1,10 @@
+- Huffman trees :
+	- One tree per symbol
+	- Before tree offset : 
+		symbol values going backwards,
+		corresponding to huffman tree leafs,
+		and going from left to right of huffman tree
+	- Starting from tree offset : 
+		actual huffman tree :
+			- 0 expresses a non-leaf node
+			- 1 expresses a leaf

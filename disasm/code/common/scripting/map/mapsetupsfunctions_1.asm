@@ -1,0 +1,524 @@
+
+; ASM FILE code\common\scripting\map\mapsetupsfunctions_1.asm :
+; 0x474FC..0x478C6 : Map setups functions
+
+; =============== S U B R O U T I N E =======================================
+
+RunMapSetupInitFunction:
+		
+		movem.l d0-a1,-(sp)
+		bsr.w   GetCurrentMapSetup
+		cmpi.w  #$FFFF,(a0)
+		bne.s   loc_4750E
+		bra.w   loc_47514
+loc_4750E:
+		
+		movea.l $14(a0),a0
+		jsr     (a0)
+loc_47514:
+		
+		movem.l (sp)+,d0-a1
+		rts
+
+	; End of function RunMapSetupInitFunction
+
+
+; =============== S U B R O U T I N E =======================================
+
+RunMapSetupZoneEvent:
+		
+		movem.l d0-a1,-(sp)
+		bsr.w   GetCurrentMapSetup
+		cmpi.w  #$FFFF,(a0)
+		beq.w   loc_47576
+		movea.l 8(a0),a0
+		clr.w   d7
+loc_47530:
+		
+		cmpi.b  #$FD,(a0,d7.w)
+		bne.s   loc_4753E
+		adda.w  2(a0,d7.w),a0
+		bra.s   loc_4756A
+loc_4753E:
+		
+		cmpi.b  #$FF,(a0,d7.w)
+		beq.w   loc_47550
+		cmp.b   (a0,d7.w),d1
+		bne.w   loc_47562
+loc_47550:
+		
+		cmpi.b  #$FF,1(a0,d7.w)
+		beq.w   loc_47566
+		cmp.b   1(a0,d7.w),d2
+		beq.w   loc_47566
+loc_47562:
+		
+		addq.w  #4,d7
+		bra.s   loc_47530
+loc_47566:
+		
+		adda.w  2(a0,d7.w),a0
+loc_4756A:
+		
+		jsr     (a0)
+		jsr     j_HidePortraitWindow
+		trap    #TEXTBOX
+		dc.w $FFFF
+loc_47576:
+		
+		jsr     (WaitForVInt).w 
+		moveq   #0,d0
+		bsr.w   WaitForEntityToStopMoving
+		movem.l (sp)+,d0-a1
+		rts
+
+	; End of function RunMapSetupZoneEvent
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_47586:
+		
+		movem.l d0-d5/d7-a1,-(sp)
+		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
+		andi.w  #ITEM_MASK_IDX,d4
+		move.b  d2,((byte_FFB651-$1000000)).w
+		moveq   #0,d6
+		bsr.w   GetCurrentMapSetup
+		cmpi.w  #$FFFF,(a0)
+		beq.w   loc_4760A
+		movea.l $10(a0),a0
+		clr.w   d7
+loc_475AA:
+		
+		cmpi.b  #$FD,(a0,d7.w)
+		bne.s   loc_475B8
+		adda.w  4(a0,d7.w),a0
+		bra.s   loc_475FE
+loc_475B8:
+		
+		cmpi.b  #$FF,(a0,d7.w)
+		beq.w   loc_475CA
+		cmp.b   (a0,d7.w),d1
+		bne.w   loc_475F6
+loc_475CA:
+		
+		cmpi.b  #$FF,1(a0,d7.w)
+		beq.w   loc_475DC
+		cmp.b   1(a0,d7.w),d2
+		bne.w   loc_475F6
+loc_475DC:
+		
+		cmpi.b  #$FF,2(a0,d7.w)
+		beq.w   loc_475EE
+		cmp.b   2(a0,d7.w),d3
+		bne.w   loc_475F6
+loc_475EE:
+		
+		cmp.b   3(a0,d7.w),d4
+		beq.w   loc_475FA
+loc_475F6:
+		
+		addq.w  #6,d7
+		bra.s   loc_475AA
+loc_475FA:
+		
+		adda.w  4(a0,d7.w),a0
+loc_475FE:
+		
+		jsr     (a0)
+		jsr     j_HidePortraitWindow
+		trap    #TEXTBOX
+		dc.w $FFFF
+loc_4760A:
+		
+		jsr     (WaitForVInt).w 
+		moveq   #0,d0
+		bsr.w   WaitForEntityToStopMoving
+		movem.l (sp)+,d0-d5/d7-a1
+		rts
+
+	; End of function sub_47586
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: D0 = entity event idx
+
+ExecuteEntityEvent:
+		
+		movem.l d0-a1,-(sp)
+		move.b  d2,((byte_FFB651-$1000000)).w
+		bsr.w   GetCurrentMapSetup
+		cmpi.w  #$FFFF,(a0)
+		beq.w   loc_476D6
+		movem.w d1-d2,-(sp)
+		movea.l 4(a0),a0
+		clr.w   d7
+loc_47638:
+		
+		cmpi.b  #$FD,(a0,d7.w)
+		bne.s   loc_4764A       
+						; not default case
+		move.b  1(a0,d7.w),d6
+		adda.w  2(a0,d7.w),a0
+		bra.s   loc_4765E
+loc_4764A:
+		
+		cmp.b   (a0,d7.w),d0
+		bne.s   loc_4765A       
+						; not the right event
+		move.b  1(a0,d7.w),d6
+		adda.w  2(a0,d7.w),a0
+		bra.s   loc_4765E
+loc_4765A:
+		
+		addq.w  #4,d7
+		bra.s   loc_47638
+loc_4765E:
+		
+		bsr.w   GetEntityPortraitAndSpeechSfx
+		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
+		blt.s   loc_47670
+		bsr.w   LoadAndDisplayCurrentPortrait
+loc_47670:
+		
+		movem.w (sp)+,d1-d2
+		lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a1
+		tst.b   d0
+		bpl.s   loc_47680
+		subi.b  #$60,d0 
+loc_47680:
+		
+		andi.w  #$FF,d0
+		move.b  (a1,d0.w),d0
+		movem.w d0-d2/d6,-(sp)
+		btst    #0,d6
+		beq.s   loc_476A8
+		jsr     (WaitForVInt).w 
+		addi.w  #2,d2
+		andi.w  #3,d2
+		move.w  d2,d1
+		moveq   #$FFFFFFFF,d2
+		moveq   #$FFFFFFFF,d3
+		jsr     (sub_6052).w    
+loc_476A8:
+		
+		trap    #VINT_FUNCTIONS
+		dc.w CLEAR_FLAG
+		dc.l VInt_UpdateEntities
+		jsr     (a0)
+		movem.w (sp)+,d0-d2/d6
+		btst    #1,d6
+		beq.s   loc_476C4
+		moveq   #$FFFFFFFF,d2
+		moveq   #$FFFFFFFF,d3
+		jsr     (sub_6052).w    
+loc_476C4:
+		
+		jsr     j_HidePortraitWindow
+		trap    #TEXTBOX
+		dc.w $FFFF
+		trap    #VINT_FUNCTIONS
+		dc.w VINTS_ACTIVATE
+		dc.l VInt_UpdateEntities
+loc_476D6:
+		
+		movem.l (sp)+,d0-a1
+		rts
+
+	; End of function ExecuteEntityEvent
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_476DC:
+		
+		trap    #VINT_FUNCTIONS
+		dc.w VINTS_ACTIVATE
+		dc.l VInt_UpdateEntities
+		bra.w   ExecuteMapScript
+
+	; End of function sub_476DC
+
+
+; =============== S U B R O U T I N E =======================================
+
+;     Get index of current portrait for textbox and load it.
+
+LoadAndDisplayCurrentPortrait:
+		
+		movem.w d0-d2,-(sp)
+		move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
+		blt.s   loc_476FC
+		clr.w   d1
+		clr.w   d2
+		jsr     j_InitPortraitWindow
+loc_476FC:
+		
+		movem.w (sp)+,d0-d2
+		rts
+
+	; End of function LoadAndDisplayCurrentPortrait
+
+
+; =============== S U B R O U T I N E =======================================
+
+RunMapSetupFunction:
+		
+		movem.l d0-a1,-(sp)
+		bsr.w   GetCurrentMapSetup
+		clr.w   d7
+		cmpi.w  #$FFFF,(a0)
+		beq.w   loc_4771A
+		movea.l $C(a0),a0
+		jsr     (a0)
+loc_4771A:
+		
+		tst.w   d7
+		movem.l (sp)+,d0-a1
+		rts
+
+	; End of function RunMapSetupFunction
+
+
+; =============== S U B R O U T I N E =======================================
+
+DisplayAreaDescription:
+		
+		lsl.w   #8,d0
+		andi.w  #$FF,d1
+		or.w    d1,d0
+		clr.w   d7
+loc_4772C:
+		
+		cmpi.b  #$FD,(a0,d7.w)
+		bne.s   loc_47738
+		clr.w   d7
+		rts
+loc_47738:
+		
+		cmp.w   (a0,d7.w),d0
+		bne.w   loc_4778C
+		tst.b   2(a0,d7.w)
+		beq.s   loc_4774C
+		tst.w   d6
+		bne.w   loc_4778C
+loc_4774C:
+		
+		tst.b   3(a0,d7.w)
+		bne.s   loc_4777C
+		clr.w   d0
+		move.b  4(a0,d7.w),d0
+		clr.w   d1
+		move.b  5(a0,d7.w),d1
+		addi.w  #$1A7,d0        
+						; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+														; Followed by all other "investigation" lines
+		jsr     (DisplayText).w 
+		move.w  d1,d0
+		add.w   d3,d0
+		jsr     (DisplayText).w 
+loc_4776E:
+		
+		jsr     j_HidePortraitWindow
+		trap    #TEXTBOX
+		dc.w $FFFF
+		moveq   #$FFFFFFFF,d7
+		rts
+loc_4777C:
+		
+		adda.w  4(a0,d7.w),a0
+		movem.w d6,-(sp)
+		jsr     (a0)
+		movem.w (sp)+,d6
+		bra.s   loc_4776E
+loc_4778C:
+		
+		addq.w  #6,d7
+		bra.s   loc_4772C
+
+	; End of function DisplayAreaDescription
+
+
+; =============== S U B R O U T I N E =======================================
+
+; returns entity list of map setup in a0
+
+GetMapSetupEntityList:
+		
+		bsr.w   GetCurrentMapSetup
+		cmpi.w  #$FFFF,(a0)
+		beq.s   return_4779C
+		movea.l (a0),a0
+return_4779C:
+		
+		rts
+
+	; End of function GetMapSetupEntityList
+
+
+; =============== S U B R O U T I N E =======================================
+
+; returns map setup address in a0
+
+GetCurrentMapSetup:
+		
+		movem.l d0-d1/a1,-(sp)
+		clr.w   d0
+		move.b  ((CURRENT_MAP-$1000000)).w,d0
+		lea     MapSetups(pc), a1
+loc_477AC:
+		
+		cmpi.w  #$FFFF,(a1)
+		bne.s   loc_477BA
+		lea     ms_Void(pc), a0
+		bra.w   loc_477E2
+loc_477BA:
+		
+		cmp.w   (a1)+,d0
+		bne.s   loc_477DA
+		movea.l (a1)+,a0
+loc_477C0:
+		
+		move.w  (a1)+,d1
+		cmpi.w  #$FFFD,d1
+		beq.w   loc_477E2
+		jsr     j_CheckFlag
+		beq.s   loc_477D4
+		movea.l (a1),a0
+loc_477D4:
+		
+		adda.w  #4,a1
+		bra.s   loc_477C0
+loc_477DA:
+		
+		cmpi.w  #$FFFD,(a1)+
+		bne.s   loc_477DA
+		bra.s   loc_477AC
+loc_477E2:
+		
+		movem.l (sp)+,d0-d1/a1
+		rts
+
+	; End of function GetCurrentMapSetup
+
+ms_Void:
+		dc.w $FFFF
+
+; =============== S U B R O U T I N E =======================================
+
+MoveEntityOutOfMap:
+		
+		movem.l d0-d3,-(sp)
+		jsr     j_GetEntityIndex
+		move.w  #$7000,d1
+		move.w  #$7000,d2
+		jsr     j_SetEntityPosition
+		movem.l (sp)+,d0-d3
+		rts
+
+	; End of function MoveEntityOutOfMap
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_47808:
+		
+		move.l  d0,-(sp)
+		jsr     j_GetEntityIndex
+		jsr     SetWalkingActscript
+		move.l  (sp)+,d0
+		rts
+
+	; End of function sub_47808
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_4781A:
+		
+		movem.l d0-d3,-(sp)
+		jsr     j_GetEntityIndex
+		moveq   #$FFFFFFFF,d2
+		moveq   #$FFFFFFFF,d3
+		jsr     (sub_6052).w    
+		movem.l (sp)+,d0-d3
+		rts
+
+	; End of function sub_4781A
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_47832:
+		
+		movem.l d0-d3,-(sp)
+		jsr     j_GetEntityIndex
+		move.b  ((byte_FFB651-$1000000)).w,d1
+		addi.w  #2,d1
+		andi.w  #3,d1
+		moveq   #$FFFFFFFF,d2
+		moveq   #$FFFFFFFF,d3
+		jsr     (sub_6052).w    
+		movem.l (sp)+,d0-d3
+		rts
+
+	; End of function sub_47832
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_47856:
+		
+		movem.l d1/d6-d7,-(sp)
+		move.w  #$1F4,d1        
+						; Battle completed flags
+		add.w   d0,d1
+		jsr     j_CheckFlag
+		bne.s   loc_4786E
+		moveq   #$FFFFFFFF,d1
+		bra.w   loc_47896
+loc_4786E:
+		
+		tst.w   ((word_FFB196-$1000000)).w
+		beq.s   loc_4787A
+		clr.w   d1
+		bra.w   loc_47896
+loc_4787A:
+		
+		moveq   #8,d6
+		jsr     (UpdateRandomSeed).w
+		tst.w   d7
+		bne.s   loc_47888
+		moveq   #$FFFFFFFF,d1
+		bra.s   loc_47896
+loc_47888:
+		
+		clr.w   d1
+		moveq   #4,d6
+		jsr     (UpdateRandomSeed).w
+		addq.l  #2,d7
+		move.w  d7,((word_FFB196-$1000000)).w
+loc_47896:
+		
+		tst.w   d1
+		beq.s   loc_478C0
+		move.w  #$190,d1
+		add.w   d0,d1
+		jsr     j_SetFlag
+		move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
+		move.w  #$7530,((word_FFB196-$1000000)).w
+		jsr     (WaitForCameraToCatchUp).w
+		trap    #SOUND_COMMAND
+		dc.w SFX_BOOST          
+						; boost effect ?
+		bsr.w   ExecuteFlashScreenScript
+loc_478C0:
+		
+		movem.l (sp)+,d1/d6-d7
+		rts
+
+	; End of function sub_47856
+

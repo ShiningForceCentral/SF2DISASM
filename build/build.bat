@@ -10,10 +10,10 @@ set seconds=%Second%
 echo -------------------------------------------------------------
 echo Start of assembly
 echo Assembling sound driver ...
-cd ../disasm/sound/
-..\..\tools\asw\asw.exe ..\sounddriver.asm
-..\..\tools\asw\p2bin.exe ..\sounddriver.p .\sounddriver.bin -k -r $0000-$1fff
-cd ../
+cd ../disasm/data/sound/
+..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\sounddriver.asm
+..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\sounddriver.p .\sounddriver.bin -k -r $0000-$1fff
+cd ../../
 echo Assembling game ...
 SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%.bin"
 @"../tools/asm68k" /o ae- /p sf2.asm, "../build/%buildname%" > ../build/output.log
