@@ -1,0 +1,48 @@
+Compressed graphics.
+Compression type : basic.
+
+Once decoded : 
+4 bits per pixel (color index from usual MD 16-color palette)
+
+Pixel Layout :
+8x8 pixels per tile.
+1  2  3  4  5  6  7  8 
+9 10 11 12 13 14 15 16
+17 ...
+
+
+
+          ... 62 63 64
+
+
+Tile Layout :
+2x3x3 tiles (2 frames of 24x24 pixels) with tiles ordered per column.
+
+Displayed      Stored
+ tiles         tiles
+  1  4  7
+  2  5  8     -> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
+  3  6  9
+  10 13 16
+  11 14 17
+  12 15 18
+  
+  
+  
+Basic compression format :
+Stores graphics as 4-pixel words which can be :
+- repeated
+- or copied from previously decoded words
+This is particularly efficient when both frames of a map sprite are mostly identical :
+Most of the second frame's pixels are sequential copies from the first frame.
+
+
+- Data is read word by word.
+- 3 types of words : 
+	- Command word : a bitmap indicating the nature of the following 16 words (graphics or repeat command)
+	- Graphics word : 4-sequence copied in the output pixel stream
+	- Repeat command : 2 types of commands.
+		- If (word & 0xFE00)==$200, then copy last graphics word (33-(word & 0x1F)) times
+		- If (word & 0xFE00)>$200, then copy previous words from output stream at (current position - ((word & 0xFE00)>>5))) with length ((33-(word & 0x1F))
+		- If repeat word is $0000, then end of sprite data, stop decoding.
+  
