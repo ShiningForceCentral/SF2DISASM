@@ -1,0 +1,73 @@
+Stack decompression :
+
+
+Read data as a bit stream.
+Write data as a word stream.
+Apply steps 1 and 2 in a loop, as long as there is data to decompress (special case to end function : section copy with offset 0).
+
+Step 1 - Generate command word : a bitmap of following commands to apply to data
+	input bitstring	==> 4 command bits : 0 = word value, 1 = section copy
+	0 		==> 0000 (4 word values, most frequent pattern, naturally)
+	100 		==> 0001 (3 word values, then 1 section copy)
+	101 		==> 0010 (2 word values etc ...)
+	110 		==> 0100
+	1110 		==> 1000 
+	1111 xxxx 	==> xxxx (custom command pattern)
+
+Step 2 : parse commands
+	command 0 : word value built from four 4-bit values taken from history stack
+		Initial history stack order : 0 1 2 3 4 5 6 7 8 9 A B C D E F
+		input bitstring	==> ouput 4-bit value
+		00 		==> 0 : history index, most recent value
+		01 		==> 1 : second most recent value
+		100 		==> 2 : etc...
+		101 		==> 3
+		110 		==> 4
+		11100 		==> 5
+		11101 		==> 6
+		11110 		==> 7
+		1111100 	==> 8
+		1111101 	==> 9
+		1111110 	==> A
+		111111100 	==> B
+		111111101 	==> C
+		111111110 	==> D
+		1111111110 	==> E
+		1111111111 	==> F
+	command 1 : section copy
+		next 11 bits : relative offset in words (number of words backwards from current output position, to start section copy from)
+			0 = NO MORE DATA, END OF DECOMPRESSION.
+		next bits : repeat length = 2 + 2 * number of "00" + 1 * number of "01"
+			Input bitstring ends with "01" if present, or directly "1".
+
+
+
+Simulation of a single step-1-2 pass on the SEGA logo graphics :
+
+Compressed input data :
+00000000h: D2 7A 80 00 12 02 80 0F 20 04 80 02 54 20 13 94 ; Òz€...€. .€.T .”
+00000010h: 00 4C 84 00 4C 80 00 81 36 79 ...               ; .L„.L€.
+
+Bits :
+110 100 100 1111 0101   00000000 00000000001 001 00000001 01000000 00000111100 100000000 0010010000 00000000010 01 01010000 100000000 1001110010100 00000000010 01 10010000100 00000000010 01 1001000000 00000000010 000001 00110110 01111001...  
+
+Step 1 :                Step 2 :
+Command word $4115 ==>  0        1               0        0        0           0         0          1              0        0         0             1              0           1              0          1                  Start of new command word $0044 with following data                 
+                        0000     4 words         0001     0000     0015        0000      0155       3 words        1555     0000      1455          3 words        1445        3 words        1444       7 words
+                                 from 1 word                                                        from 2 words                                    from 2 words               from 2 words              from 2 words back
+                                 back                                                               back                                            back                       back
+
+Command word detail :
+D27A 8... ==> 110 100 100 1111 0101 ==> 4115 ==> 0100 0001 0001 0101
+4 ==> 0100 ==> 1 word, 1 section copy, 2 words
+1 ==> 0001 ==> 3 words, 1 section copy
+1 ==> 0001 ==> 3 words, 1 section copy
+5 ==> 0101 ==> custom pattern : 1 word, 1 section copy, 1 word, 1 section copy
+
+Decompressed output data (dump from VRAM) :
+00002000h: 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 15 ; ................
+00002010h: 00 00 01 55 00 00 01 55 00 00 15 55 00 00 14 55 ; ...U...U...U...U
+00002020h: 00 00 14 55 00 00 14 45 00 00 14 45 00 00 14 44 ; ...U...E...E...D
+00002030h: 00 00 14 44 00 00 14 44 00 00 14 44 00 00       ; ...D...D...
+
+
