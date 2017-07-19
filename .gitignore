@@ -232,7 +232,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-*.jar
+#*.jar
 *.csv
 *.png
 disasm/data/flags/flagmap.txt
