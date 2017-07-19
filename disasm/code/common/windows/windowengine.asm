@@ -320,8 +320,6 @@ loc_49D8:
 		clr.w   d6
 		move.b  $C(a2),d6
 		clr.w   d5
-loc_4A00:
-		
 		move.b  $D(a2),d5
 		move.w  8(a2),d3
 		move.w  d3,d4

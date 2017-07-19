@@ -1,6 +1,6 @@
 
-; ASM FILE code\common\tech\randomizing.asm :
-; 0x1600..0x16BE : Randomizing function
+; ASM FILE code\common\tech\randomnumbergenerator.asm :
+; 0x1600..0x16BE : RNG functions
 
 ; =============== S U B R O U T I N E =======================================
 

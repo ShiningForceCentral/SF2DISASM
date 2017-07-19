@@ -8,7 +8,7 @@ EndKissPictureSequence:
 		
 		movea.l (p_endKissPicture).l,a0
 		lea     (FF6802_LOADING_SPACE).l,a1
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		lea     (FF6802_LOADING_SPACE).l,a0
 		lea     ($C800).l,a1
 		bsr.w   sub_2C642
@@ -22,7 +22,7 @@ loc_2C5A6:
 		clr.l   (a0)+
 		dbf     d7,loc_2C5A6
 		lea     (PALETTE_1_BIS).l,a0
-		clr.b   (word_FFDFAA+1).l
+		clr.b   (byte_FFDFAB).l
 		jsr     (sub_19C8).w    
 		move.w  #$366,d0        
 						; wait for 14 seconds
@@ -34,7 +34,7 @@ loc_2C5CC:
 		clr.l   (a0)+
 		dbf     d7,loc_2C5CC
 		lea     (PALETTE_1_BIS).l,a0
-		clr.b   ((word_FFDFAA+1)).l
+		clr.b   (byte_FFDFAB).l
 		jsr     (sub_19C8).w    
 		rts
 
@@ -69,7 +69,7 @@ loc_2C61C:
 		move.l  d0,(a0)+
 		dbf     d7,loc_2C61C
 		lea     (PALETTE_1_BIS).l,a0
-		clr.b   (word_FFDFAA+1).l
+		clr.b   (byte_FFDFAB).l
 		jsr     (sub_19C8).w    
 		movem.l (sp)+,d0-a3
 		rts
@@ -82,12 +82,12 @@ loc_2C61C:
 sub_2C642:
 		
 		move.w  #$BFF,d7
-		lea     (RAM_START).l,a2
+		lea     (FF0000_RAM_START).l,a2
 loc_2C64C:
 		
 		clr.l   (a2)+
 		dbf     d7,loc_2C64C
-		lea     (RAM_START).l,a2
+		lea     (FF0000_RAM_START).l,a2
 		lea     byte_2C6FC(pc), a3
 		moveq   #$3F,d7 
 loc_2C65E:
@@ -126,7 +126,7 @@ loc_2C6A4:
 		dbf     d5,loc_2C664
 		dbf     d6,loc_2C660
 		movem.l d0-a3,-(sp)
-		lea     (RAM_START).l,a0
+		lea     (FF0000_RAM_START).l,a0
 		move.w  #$600,d0
 		moveq   #2,d1
 		jsr     (sub_119E).w    

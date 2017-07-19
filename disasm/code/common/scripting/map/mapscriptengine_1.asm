@@ -107,7 +107,7 @@ csc36_:
 csc37_loadMapAndFadeIn:
 		
 		move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-		clr.w   (word_FFDFAA).l 
+		clr.w   (unk_FFDFAA).l  
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -452,7 +452,7 @@ LaunchFading:
 		
 		move.b  d3,-(sp)
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,d3
-		clr.w   (word_FFDFAA).l 
+		clr.w   (unk_FFDFAA).l  
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  d0,((FADING_PALETTE_FLAGS-$1000000)).w
 		move.b  d1,((FADING_COUNTER_MAX-$1000000)).w

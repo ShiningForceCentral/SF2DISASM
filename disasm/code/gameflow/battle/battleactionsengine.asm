@@ -13,7 +13,7 @@ WriteSkirmishScript:
 		lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a3
 		lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
-		lea     (RAM_START).l,a6
+		lea     (FF0000_RAM_START).l,a6
 						; beginning of battle scene command list
 		move.b  #0,-BCSTACK_OFFSET_DEBUGDODGE(a2)
 		move.b  #0,-BCSTACK_OFFSET_DEBUGCRIT(a2)

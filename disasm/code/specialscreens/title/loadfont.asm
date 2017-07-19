@@ -8,7 +8,7 @@ LoadTitleScreenFont:
 		
 		lea     StaticWidthFont(pc), a0
 		lea     (FF6802_LOADING_SPACE).l,a1
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		lea     (FF6802_LOADING_SPACE).l,a0
 		lea     ($B000).l,a1
 		move.w  #$800,d0

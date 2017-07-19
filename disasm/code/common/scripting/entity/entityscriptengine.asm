@@ -1107,8 +1107,6 @@ loc_55F2:
 loc_55FC:
 		
 		move.w  d0,8(a0)
-loc_5600:
-		
 		move.w  d1,$A(a0)
 		move.w  d4,4(a0)
 		move.w  d5,6(a0)
@@ -2874,7 +2872,7 @@ loc_622E:
 		
 		lea     MapOffsetHashTable(pc), a3
 						; jump here if not in battle
-		lea     (RAM_START).l,a4
+		lea     (FF0000_RAM_START).l,a4
 		move.w  d0,d2
 		move.w  d1,d3
 		lsr.w   #7,d2

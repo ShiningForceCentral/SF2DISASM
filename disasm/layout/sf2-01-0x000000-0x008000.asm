@@ -7,13 +7,18 @@
 		include "code\romheader.asm"		; ROM Header
 		include "code\gameflow\start\systeminit.asm"		; System init functions
 		include "code\gameflow\start\gamestart.asm"		; Start function
-		include "code\common\tech\interrupts\interruptsengine.asm"		; Interrupts engine
+		include "code\common\tech\interrupts\trap0_soundcommand.asm"		; Trap 0 - Sound Command
+		include "code\common\tech\interrupts\errors.asm"		; Error interrupts
+		include "code\common\tech\interrupts\trap5_textbox.asm"		; Trap 5 - Text Box
+		include "code\common\tech\interrupts\trap6_mapscript.asm"		; Trap 6 - Map Script
+		include "code\common\tech\interrupts\hint.asm"		; Horizontal Interrupt - Triggered at each line display
+		include "code\common\tech\interrupts\vintengine.asm"		; Vertical Interrupt Engine - Main Technical Engine - Triggered at each frame display
 		include "code\common\scripting\text\asciinumber.asm"		; ASCII number function
 		include "code\common\tech\input.asm"		; Input functions
-		include "code\common\tech\randomizing.asm"		; Randomizing function
+		include "code\common\tech\randomnumbergenerator.asm"		; RNG functions
 		include "code\common\tech\sound\music.asm"		; Sound function
 		include "code\common\tech\bytecopy.asm"		; Byte-copy function
-		include "code\common\tech\interrupts\flags.asm"		; Flag function
+		include "code\common\tech\interrupts\trap1-4_flags.asm"		; Trap 1-4 - Flag Functions
 		include "code\common\tech\graphics\graphics.asm"		; Graphics functions
 		include "code\common\maps\mapload.asm"		; Map loading functions
 		include "code\common\tech\graphics\display.asm"		; Display function

@@ -21,7 +21,7 @@ TitleScreen:
 		jsr     (SetVdpReg).w   
 		lea     TitleScreenTiles(pc), a0
 		lea     (FF6802_LOADING_SPACE).l,a1
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		lea     (FF6802_LOADING_SPACE).l,a0
 		lea     ($2000).w,a1
 		move.w  #$1000,d0
@@ -104,7 +104,7 @@ loc_100104:
 		jsr     (ClearHscrollStuff).w
 		jsr     (Set_FFDE94_bit3).w
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -113,7 +113,7 @@ loc_100104:
 		moveq   #$20,d0 
 		bsr.w   sub_100218
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -122,7 +122,7 @@ loc_100104:
 		moveq   #$32,d0 
 		bsr.w   WaitForPlayer1InputStart
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #4,((FADING_PALETTE_FLAGS-$1000000)).w

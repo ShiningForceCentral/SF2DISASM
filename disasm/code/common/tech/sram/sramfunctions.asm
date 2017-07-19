@@ -26,7 +26,7 @@ loc_6EB6:
 loc_6ED2:
 		
 		lea     (SAVE2_CHARACTER_DATA).l,a0
-		lea     (DMA_SPACE_FF8804).l,a1
+		lea     (FF8804_LOADING_SPACE).l,a1
 loc_6EDE:
 		
 		move.w  #$FB0,d7
@@ -48,7 +48,7 @@ loc_6EFC:
 loc_6F0A:
 		
 		lea     (SAVE1_CHARACTER_DATA).l,a0
-		lea     (DMA_SPACE_FF8804).l,a1
+		lea     (FF8804_LOADING_SPACE).l,a1
 		move.w  #$FB0,d7
 		bsr.w   CopyBytesFromSRAM
 		cmp.b   (SAVE1_CHECKSUM).l,d0

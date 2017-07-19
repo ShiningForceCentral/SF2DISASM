@@ -27,7 +27,7 @@ p_plt_SuspendString:
 		dc.l plt_SuspendString
 p_SuspendStringTiles:
 		dc.l SuspendStringTiles
-		dc.l BasePalette        
+		dc.l unused_BasePalettes
 p_BaseTiles:
 		dc.l BaseTiles
 StatGrowthCurves:
@@ -47,8 +47,8 @@ plt_SuspendString:
 		incbin "data/graphics/specialscreens/suspendscreen/suspendstringpalette.bin"
 SuspendStringTiles:
 		incbin "data/graphics/specialscreens/suspendscreen/suspendstringtiles.bin"
-BasePalette:
-		incbin "data/graphics/tech/basepalette.bin"
+unused_BasePalettes:
+		incbin "data/graphics/tech/unusedbasepalettes.bin"
 						; two almost identical palettes which look like UI/sprites palette
 BaseTiles:
 		incbin "data/graphics/tech/basetiles.bin"

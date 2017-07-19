@@ -130,7 +130,7 @@ loc_258CE:
 sub_258EA:
 		
 		move.b  #2,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w

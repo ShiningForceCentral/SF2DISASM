@@ -135,7 +135,7 @@ loc_180CC:
 		move.w  #$C00,d0
 		moveq   #2,d1
 		jsr     (sub_10DC).w    
-		lea     (byte_FF3800).l,a0
+		lea     (FF3800_LOADING_SPACE).l,a0
 		lea     ($8C00).l,a1
 		move.w  #$C00,d0
 		moveq   #2,d1
@@ -329,7 +329,7 @@ loc_18390:
 
 ExecuteBattlesceneScript:
 		
-		lea     (RAM_START).l,a6
+		lea     (FF0000_RAM_START).l,a6
 		clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
 		move.b  #$FF,((DEAD_COMBATANTS_LIST-$1000000)).w
 		clr.b   ((ACTOR_TO_MAKE_IDLE-$1000000)).w
@@ -777,7 +777,7 @@ bsc07_switchAllies:
 		beq.s   loc_18736
 		bsr.w   GetBattleSpriteAndPalette
 		move.w  d1,d0
-		bsr.w   sub_19AE4
+		bsr.w   LoadNewAllyBattleSprite
 		move.w  d1,d0
 		move.w  d2,d1
 		bsr.w   LoadPaletteForBattleScene
@@ -858,7 +858,7 @@ loc_187BC:
 		moveq   #2,d1
 		jsr     (sub_119E).w    
 		jsr     (SetFFDE94b3andWait).w
-		lea     (byte_FF7A02).l,a0
+		lea     (FF7A02_LOADING_SPACE).l,a0
 		lea     ($3200).w,a1
 		move.w  #$900,d0
 		moveq   #2,d1
@@ -1033,11 +1033,11 @@ bsc06_switchEnemies:
 		movea.l (a2)+,a0
 		move.l  a2,-(sp)
 		lea     (FF6802_LOADING_SPACE).l,a1
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		movea.l (sp)+,a2
 		movea.l (a2),a0
 		lea     (FF8002_LOADING_SPACE).l,a1
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		move.w  (a6),d0
 		bpl.s   loc_189AE
 		move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,d0
@@ -1263,14 +1263,14 @@ return_18BFC:
 		rts
 off_18BFE:
 		
-		dc.l ENEMY_BATTLESPRITE_LOADING_SPACE
-		dc.l loc_4400
-		dc.l byte_FF5600
-		dc.l loc_4A00
-		dc.l byte_FF9C02
+		dc.l FF5000_LOADING_SPACE
+		dc.l $4400
+		dc.l FF5600_LOADING_SPACE
+		dc.l $4A00
+		dc.l FF9C02_LOADING_SPACE
 		dc.l $5000
-		dc.l byte_FFA202
-		dc.l loc_5600
+		dc.l FFA202_LOADING_SPACE
+		dc.l $5600
 
 	; End of function sub_18BAA
 
@@ -2336,7 +2336,7 @@ sub_194AA:
 		cmpi.w  #$FFFF,d0
 		beq.s   return_194FC
 		bsr.w   sub_19B24       
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		btst    #2,((byte_FFB56E-$1000000)).w
 		beq.s   loc_194D8
 		lea     ($4400).w,a1
@@ -2548,7 +2548,7 @@ return_19630:
 
 sub_19632:
 		
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		adda.w  d1,a0
 		move.w  #$23F,d7
 loc_1963E:
@@ -2571,7 +2571,7 @@ loc_19660:
 		dbf     d7,loc_19660
 		movea.l (sp)+,a0
 		move.l  a0,-(sp)
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		btst    #0,((byte_FFB56E-$1000000)).w
 		bne.s   loc_19680
 		lea     ($2000).w,a1
@@ -2659,7 +2659,7 @@ return_1971A:
 
 sub_1971C:
 		
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		adda.w  d1,a0
 		move.w  #$2FF,d7
 loc_19728:
@@ -2667,7 +2667,7 @@ loc_19728:
 		and.l   d0,(a0)
 		addq.w  #8,a0
 		dbf     d7,loc_19728
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		btst    #2,((byte_FFB56E-$1000000)).w
 		bne.s   loc_19744
 		lea     ($4400).w,a1
@@ -2968,14 +2968,14 @@ loc_1991C:
 
 sub_19926:
 		
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		move.w  #$1FF,d0
 		moveq   #0,d1
 loc_19932:
 		
 		move.l  d1,(a0)+
 		dbf     d0,loc_19932
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		lea     ($E000).l,a1
 		move.w  #$400,d0
 		moveq   #2,d1
@@ -3012,7 +3012,7 @@ sub_19970:
 		lsl.w   #2,d0
 		movea.l (a0,d0.w),a0
 		move.w  (a0)+,((ENEMY_BATTLESPRITE_ANIM_SPEED-$1000000)).w
-		move.w  (a0)+,((byte_FFB57C-$1000000)).w
+		move.w  (a0)+,((ENEMY_BATTLESPRITE_PROP1-$1000000)).w
 		move.w  (a0),d0
 		adda.w  d0,a0
 		lsl.w   #5,d1
@@ -3077,7 +3077,7 @@ LoadPaletteForBattleScene:
 		lsl.w   #2,d0
 		movea.l (a0,d0.w),a0
 		move.w  (a0)+,((ALLY_BATTLESPRITE_ANIM_SPEED-$1000000)).w
-		move.w  (a0)+,((byte_FFB57A-$1000000)).w
+		move.w  (a0)+,((ALLY_BATTLESPRITE_PROP1-$1000000)).w
 		move.w  (a0),d0
 		adda.w  d0,a0
 		lsl.w   #5,d1
@@ -3143,7 +3143,7 @@ LoadWeaponPalette:
 		
 		movea.l (p_plt_BattleSceneWeaponColors).l,a0
 		lsl.w   #2,d0
-		move.l  (a0,d0.w),((dword_FFD09C-$1000000)).w
+		move.l  (a0,d0.w),((WEAPON_PALETTE-$1000000)).w
 		rts
 
 	; End of function LoadWeaponPalette
@@ -3160,7 +3160,7 @@ LoadWeaponSprite:
 		lsl.w   #2,d0
 		movea.l (a0,d0.w),a0
 		lea     (FF2000_LOADING_SPACE).l,a1
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		lea     (byte_FF4000).l,a0
 		move.w  #$1FF,d0
 loc_19A7C:
@@ -3211,15 +3211,15 @@ loc_19AD6:
 		
 		move.w  (a0),d0
 		adda.w  d0,a0
-		lea     (DMA_SPACE_FF8804).l,a1
-		jmp     (LoadTileData).w
+		lea     (FF8804_LOADING_SPACE).l,a1
+		jmp     (LoadCompressedData).w
 
 	; End of function sub_19AB0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_19AE4:
+LoadNewAllyBattleSprite:
 		
 		move.w  d1,-(sp)
 		move.w  d0,-(sp)
@@ -3231,7 +3231,7 @@ sub_19AE4:
 		move.l  a0,-(sp)
 		adda.w  d0,a0
 		lea     (FF6802_LOADING_SPACE).l,a1
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		movea.l (sp)+,a0
 		move.w  (sp)+,d0
 		bsr.w   GetAllyBattleSpriteIdleAnimate
@@ -3239,12 +3239,12 @@ sub_19AE4:
 		adda.w  d1,a0
 		move.w  (a0),d0
 		adda.w  d0,a0
-		lea     (byte_FF7A02).l,a1
-		jsr     (LoadTileData).w
+		lea     (FF7A02_LOADING_SPACE).l,a1
+		jsr     (LoadCompressedData).w
 		move.w  (sp)+,d1
 		rts
 
-	; End of function sub_19AE4
+	; End of function LoadNewAllyBattleSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3261,8 +3261,8 @@ sub_19B24:
 		adda.w  d1,a0
 		move.w  (a0),d0
 		adda.w  d0,a0
-		lea     (DMA_SPACE_FF8804).l,a1
-		jmp     (LoadTileData).w
+		lea     (FF8804_LOADING_SPACE).l,a1
+		jmp     (LoadCompressedData).w
 
 	; End of function sub_19B24
 
@@ -3283,9 +3283,9 @@ LoadEnemyBattleSprite:
 		adda.w  d0,a0           
 						; offset to sprite frame
 		lea     (ENEMY_BATTLESPRITE_UNCOMP_SPACE).l,a1
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		lea     (ENEMY_BATTLESPRITE_UNCOMP_SPACE).l,a0
-		lea     (ENEMY_BATTLESPRITE_LOADING_SPACE).l,a1
+		lea     (FF5000_LOADING_SPACE).l,a1
 		move.w  #$1FF,d0
 loc_19B78:
 		
@@ -3307,16 +3307,18 @@ LoadBattleBackground:
 		movea.l (p_pt_Backgrounds).l,a2
 		lsl.w   #2,d0
 		movea.l (a2,d0.w),a2
-		move.w  (a2)+,d0
+		move.w  (a2)+,d0        
+						; tiles offset
 		movem.l a1-a2,-(sp)
 		lea     -2(a2,d0.w),a0
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		movem.l (sp)+,a1-a2
 		move.w  (a2)+,d0
 		move.l  a2,-(sp)
-		lea     -2(a2,d0.w),a0
+		lea     -2(a2,d0.w),a0  
+						; another tile offset ?
 		lea     $1800(a1),a1
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		movea.l (sp)+,a2
 		move.w  (a2),d0
 		lea     (a2,d0.w),a0
@@ -3350,7 +3352,7 @@ sub_19BCC:
 		move.w  (a0),d0
 		adda.w  d0,a0
 		lea     (byte_FF8C02).l,a1
-		jmp     (LoadTileData).w
+		jmp     (LoadCompressedData).w
 
 	; End of function sub_19BCC
 
@@ -3402,9 +3404,9 @@ loc_19C58:
 		movea.l (sp)+,a0
 		move.w  (a0),d0
 		adda.w  d0,a0
-		lea     (DMA_SPACE_FF8804).l,a1
-		jsr     (LoadTileData).w
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a1
+		jsr     (LoadCompressedData).w
+		lea     (FF8804_LOADING_SPACE).l,a0
 		lea     (loc_B600).l,a1
 		move.w  #$500,d0
 		moveq   #2,d1
@@ -3472,9 +3474,9 @@ sub_19CE8:
 		move.w  (a0),$1C(a1)
 		move.w  (a0)+,$1C(a2)
 		jsr     (StoreVdpCommandster).w
-		lea     (DMA_SPACE_FF8804).l,a1
-		jsr     (LoadTileData).w
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a1
+		jsr     (LoadCompressedData).w
+		lea     (FF8804_LOADING_SPACE).l,a0
 		lea     ($F000).l,a1
 		move.w  #$300,d0
 		moveq   #2,d1
@@ -3667,7 +3669,7 @@ loc_19EA8:
 FadeInFromBlackIntoBattlescene:
 		
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -3681,7 +3683,7 @@ FadeInFromBlackIntoBattlescene:
 FadeOutToBlackForBattlescene:
 		
 		move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -4481,7 +4483,7 @@ loc_1A418:
 		beq.s   return_1A474
 		bsr.w   bsc0D_endAnimation
 		move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -5609,6 +5611,9 @@ loc_1AC08:
 		
 		move.l  a0,-(sp)
 		trap    #SOUND_COMMAND
+
+; END OF FUNCTION CHUNK FOR sa09_
+
 		dc.w SFX_SPELL_CAST
 		move.w  #$E22,d0
 		bsr.w   ExecSpellAnimationFlash
@@ -5632,11 +5637,9 @@ loc_1AC08:
 		move.w  #$20,(a0) 
 		bra.s   loc_1AC64
 loc_1AC5C:
-		
 		move.w  #$A8,(a0)+ 
 		move.w  #$30,(a0) 
 loc_1AC64:
-		
 		moveq   #1,d0
 		bsr.w   sub_1A2F6
 		move.w  #1,4(a0)
@@ -5663,9 +5666,6 @@ loc_1AC64:
 		move.b  #1,((byte_FFB585-$1000000)).w
 		move.b  #4,((byte_FFB584-$1000000)).w
 		bra.w   sub_1A028
-
-; END OF FUNCTION CHUNK FOR sa09_
-
 byte_1ACC6:
 		dc.b 8
 		dc.b $88
@@ -6208,7 +6208,7 @@ loc_1B040:
 		moveq   #1,d0
 		bsr.w   sub_1A2F6
 		move.w  #$5A,((byte_FFB532-$1000000)).w 
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		move.w  #$3FF,d0
 loc_1B076:
 		
@@ -11212,7 +11212,7 @@ loc_1DB2E:
 		bne.s   loc_1DB62
 		bsr.w   sub_1DC36
 		move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -11226,7 +11226,7 @@ loc_1DB62:
 		bne.s   loc_1DB8E
 		bsr.w   sub_1DC48
 		move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -12260,7 +12260,7 @@ loc_1E33C:
 		dc.w SFX_PRISM_LASER_FIRING
 						; prism laser firing
 		move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -12274,7 +12274,7 @@ loc_1E36C:
 		addq.w  #1,2(a5)
 		move.w  #$1E,4(a5)
 		move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -13757,16 +13757,16 @@ sub_1EFD8:
 		clr.w   d0
 loc_1EFFE:
 		
-		move.b  ((byte_FFB57B-$1000000)).w,d1
+		move.b  ((ALLY_BATTLESPRITE_PROP2-$1000000)).w,d1
 		ext.w   d1
 		btst    #1,((byte_FFB56F-$1000000)).w
 		bne.s   loc_1F012
-		move.b  ((byte_FFB57A-$1000000)).w,d4
+		move.b  ((ALLY_BATTLESPRITE_PROP1-$1000000)).w,d4
 		bra.s   loc_1F01A
 loc_1F012:
 		
 		move.b  #$60,d4 
-		sub.b   ((byte_FFB57A-$1000000)).w,d4
+		sub.b   ((ALLY_BATTLESPRITE_PROP1-$1000000)).w,d4
 loc_1F01A:
 		
 		ext.w   d4
@@ -13793,16 +13793,16 @@ loc_1F01A:
 		clr.w   d0
 loc_1F066:
 		
-		move.b  ((byte_FFB57D-$1000000)).w,d1
+		move.b  ((ENEMY_BATTLESPRITE_PROP2-$1000000)).w,d1
 		ext.w   d1
 		btst    #2,((byte_FFB56F-$1000000)).w
 		bne.s   loc_1F07A
-		move.b  ((byte_FFB57C-$1000000)).w,d4
+		move.b  ((ENEMY_BATTLESPRITE_PROP1-$1000000)).w,d4
 		bra.s   loc_1F082
 loc_1F07A:
 		
 		move.b  #$80,d4
-		sub.b   ((byte_FFB57C-$1000000)).w,d4
+		sub.b   ((ENEMY_BATTLESPRITE_PROP1-$1000000)).w,d4
 loc_1F082:
 		
 		ext.w   d4
@@ -14328,7 +14328,7 @@ sub_1F45E:
 		
 		lea     $17C(a3),a0
 		lea     $180(a3),a1
-		lea     (DMA_SPACE_FF8804).l,a2
+		lea     (FF8804_LOADING_SPACE).l,a2
 		asr.w   #1,d1
 		moveq   #$3F,d2 
 loc_1F470:
@@ -14462,7 +14462,7 @@ sub_1F540:
 		beq.s   return_1F574
 		movem.l d0/a0,-(sp)
 		move.w  #1,((word_FFB3C4-$1000000)).w
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		move.w  #$3FF,d0
 loc_1F55A:
 		

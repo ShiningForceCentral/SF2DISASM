@@ -54,7 +54,6 @@ InitDisplay:
 						; H Scroll table VRAM address : EC00
 		bsr.w   SetVdpReg       
 		lea     BlackScreenLayout(pc), a0
-						; it's actually filled with character '"' <_< ...
 		lea     ($EF80).l,a1
 		move.w  #$40,d0 
 		moveq   #2,d1
@@ -65,7 +64,7 @@ loc_307E:
 		lea     (SPRITE_Y).l,a1 
 		moveq   #$38,d7 
 		bsr.w   CopyBytes       
-		lea     plt_DisplayInit(pc), a0
+		lea     plt_BasePalette(pc), a0
 		lea     (PALETTE3_BIS).l,a1
 		move.w  #$20,d7 
 		bsr.w   CopyBytes       
@@ -73,8 +72,8 @@ loc_307E:
 
 	; End of function InitDisplay
 
-plt_DisplayInit:
-		incbin "data/graphics/tech/displayinitpalette.bin"
+plt_BasePalette:
+		incbin "data/graphics/tech/basepalette.bin"
 						; Palette for UI/Sprites
 
 ; =============== S U B R O U T I N E =======================================
@@ -121,7 +120,7 @@ sub_30EE:
 		lsr.w   #3,d0
 		lsr.w   #3,d1
 		lea     MapOffsetHashTable(pc), a3
-		lea     (RAM_START).l,a4
+		lea     (FF0000_RAM_START).l,a4
 		lea     (FF2000_LOADING_SPACE).l,a5
 loc_312C:
 		
@@ -166,7 +165,7 @@ sub_3158:
 		lsr.w   #3,d0
 		lsr.w   #3,d1
 		lea     MapOffsetHashTable(pc), a3
-		lea     (RAM_START).l,a4
+		lea     (FF0000_RAM_START).l,a4
 		lea     (FF2000_LOADING_SPACE).l,a5
 loc_3196:
 		

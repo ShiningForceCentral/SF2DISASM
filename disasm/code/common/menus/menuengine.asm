@@ -655,12 +655,12 @@ loc_10220:
 		bne.s   loc_10250
 		movea.l d0,a0
 		movea.l (a0),a0
-		lea     (DMA_SPACE_FF8804).l,a1
-		jsr     (LoadTileData).w
+		lea     (FF8804_LOADING_SPACE).l,a1
+		jsr     (LoadCompressedData).w
 		bra.s   loc_1026E
 loc_10250:
 		
-		lea     (DMA_SPACE_FF8804).l,a1
+		lea     (FF8804_LOADING_SPACE).l,a1
 		rol.l   #8,d0
 		bsr.w   LoadMainMenuIcon
 		rol.l   #8,d0
@@ -860,7 +860,7 @@ rjt_10408:
 
 LoadVDPTileListForDiamenuIconTop:
 		
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		cmpi.w  #$F,d6
 		blt.s   loc_10420
 		adda.w  #$120,a0
@@ -1060,7 +1060,7 @@ loc_105B2:
 		jsr     (CreateWindow).w
 		move.w  d0,-$C(a6)
 		bsr.w   sub_10748
-		lea     (DMA_SPACE_FF8804).l,a1
+		lea     (FF8804_LOADING_SPACE).l,a1
 		move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
 		bsr.w   LoadHighlightableItemIcon
 		move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
@@ -1297,7 +1297,7 @@ rjt_107F8:
 
 sub_10800:
 		
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		cmpi.w  #$F,d6
 		blt.s   loc_10810
 		adda.w  #$C0,a0 
@@ -1532,7 +1532,7 @@ loc_10A74:
 		jsr     (CreateWindow).w
 		move.w  d0,-$C(a6)
 		bsr.w   sub_10C22
-		lea     (DMA_SPACE_FF8804).l,a1
+		lea     (FF8804_LOADING_SPACE).l,a1
 		move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
 		bsr.w   LoadIHighlightableSpellIcon
 		move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
@@ -2830,7 +2830,7 @@ loc_117FA:
 sub_11804:
 		
 		movem.l d0-d2/a0-a1,-(sp)
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		moveq   #1,d2
 		bsr.w   sub_11826
 		lea     (byte_FF8A04).l,a0
@@ -3060,7 +3060,7 @@ loc_11A0E:
 		adda.w  #$58,a1 
 		addq.w  #6,a1
 		move.l  a1,-(sp)
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		moveq   #1,d2
 		bsr.w   DrawColoredStatBar
 		movea.l (sp)+,a1
@@ -4469,7 +4469,7 @@ loc_12A56:
 		lsr.w   #1,d0
 		addq.w  #3,d0
 		move.w  d0,-$C(a6)
-		lea     (RAM_START).l,a0
+		lea     (FF0000_RAM_START).l,a0
 		lea     (FF2000_LOADING_SPACE).l,a2
 		lea     (FF6802_LOADING_SPACE).l,a1
 		move.w  -$A(a6),d5
@@ -6414,7 +6414,7 @@ sub_13F14:
 		jsr     j_GetItemAndNumberOfItems
 		move.w  d1,(a0)+
 		clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
-		lea     (DMA_SPACE_FF8804).l,a1
+		lea     (FF8804_LOADING_SPACE).l,a1
 		move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
 		bsr.w   LoadHighlightableItemIcon
 		bsr.w   CleanIconCorners
@@ -6558,7 +6558,7 @@ rjt_14080:
 
 DMAicon1:
 		
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		cmpi.w  #$F,d6
 		blt.s   loc_14098
 		adda.w  #$C0,a0 
@@ -6743,7 +6743,7 @@ loc_141FE:
 		bsr.w   sub_143E0
 		jsr     j_GetStatus
 		move.w  d1,-$A(a6)
-		lea     (DMA_SPACE_FF8804).l,a1
+		lea     (FF8804_LOADING_SPACE).l,a1
 		move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
 		bsr.w   LoadHighlightableIcon
 		bsr.w   CleanIconCorners
@@ -6994,7 +6994,7 @@ sub_1445A:
 		andi.w  #$7F,d1 
 		move.w  d1,(a0)+
 		clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
-		lea     (DMA_SPACE_FF8804).l,a1
+		lea     (FF8804_LOADING_SPACE).l,a1
 		move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
 		bsr.w   LoadIHighlightableSpellIcon
 		bsr.w   CleanIconCorners
@@ -7136,8 +7136,14 @@ loc_145EA:
 		ble.s   loc_14600
 		subq.w  #1,d3
 		trap    #SOUND_COMMAND
+
+; END OF FUNCTION CHUNK FOR sub_1445A
+
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_1463E
+
+; START OF FUNCTION CHUNK FOR sub_1445A
+
 loc_14600:
 		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -7146,8 +7152,14 @@ loc_14600:
 		bge.s   loc_14616
 		addq.w  #1,d3
 		trap    #SOUND_COMMAND
+
+; END OF FUNCTION CHUNK FOR sub_1445A
+
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_1463E
+
+; START OF FUNCTION CHUNK FOR sub_1445A
+
 loc_14616:
 		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -7164,10 +7176,15 @@ loc_14632:
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14644
 		bra.w   loc_14654
+
+; END OF FUNCTION CHUNK FOR sub_1445A
+
 loc_1463E:
-		
 		bsr.w   sub_1474C
 		moveq   #$13,d1
+
+; START OF FUNCTION CHUNK FOR sub_1445A
+
 loc_14644:
 		
 		bsr.w   sub_146AE
@@ -7185,10 +7202,16 @@ loc_14654:
 		tst.b   d3
 		bpl.s   loc_1466C
 		trap    #SOUND_COMMAND
+
+; END OF FUNCTION CHUNK FOR sub_1445A
+
 		dc.w SFX_VALIDATION
 		move.w  d4,d3
 		bsr.w   sub_1474C
 		bra.w   loc_144D8
+
+; START OF FUNCTION CHUNK FOR sub_1445A
+
 loc_1466C:
 		
 		move.w  d2,d1
@@ -9051,8 +9074,8 @@ loc_1528E:
 		move.w  d0,-2(a6)
 		move.l  a1,-6(a6)
 		movea.l (p_MenuTiles_YesNo).l,a0
-		lea     (DMA_SPACE_FF8804).l,a1
-		jsr     (LoadTileData).w
+		lea     (FF8804_LOADING_SPACE).l,a1
+		jsr     (LoadCompressedData).w
 		clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
 		bsr.w   CopyYesNoIconsToRAM
 		clr.w   d6
@@ -9094,16 +9117,28 @@ loc_15314:
 		beq.w   loc_15328
 		clr.w   d1
 		trap    #SOUND_COMMAND
+
+; END OF FUNCTION CHUNK FOR YesNoPrompt
+
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_15378
+
+; START OF FUNCTION CHUNK FOR YesNoPrompt
+
 loc_15328:
 		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.w   loc_1533C
 		moveq   #$FFFFFFFF,d1
 		trap    #SOUND_COMMAND
+
+; END OF FUNCTION CHUNK FOR YesNoPrompt
+
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_15378
+
+; START OF FUNCTION CHUNK FOR YesNoPrompt
+
 loc_1533C:
 		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -9125,8 +9160,10 @@ loc_15364:
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_153D6
+
+; END OF FUNCTION CHUNK FOR YesNoPrompt
+
 loc_15378:
-		
 		move.w  d1,-(sp)
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -9144,7 +9181,6 @@ loc_15378:
 		move.w  #$8080,d1
 		jsr     (SetWindowDestination).w
 loc_153AC:
-		
 		move.w  ((word_FFB086-$1000000)).w,d0
 		beq.s   loc_153BE
 		subq.w  #1,d0
@@ -9152,8 +9188,10 @@ loc_153AC:
 		moveq   #4,d2
 		jsr     (MoveWindowWithSFX).w
 loc_153BE:
-		
 		moveq   #$13,d6
+
+; START OF FUNCTION CHUNK FOR YesNoPrompt
+
 loc_153C0:
 		
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -9215,7 +9253,7 @@ sub_15422:
 
 sub_1542A:
 		
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		cmpi.w  #$A,d6
 		blt.s   loc_1543A
 		adda.w  #$120,a0
@@ -9503,8 +9541,8 @@ loc_15674:
 		move.l  (a0),(a2)+
 		move.l  (a0)+,(a3)+
 		dbf     d7,loc_15674
-		lea     (DMA_SPACE_FF8804).l,a1
-		jsr     (LoadTileData).w
+		lea     (FF8804_LOADING_SPACE).l,a1
+		jsr     (LoadCompressedData).w
 		addq.b  #6,((INPUT_REPEAT_DELAYER-$1000000)).w
 						; Allow hold input to be applied directly. ... why ?
 		movea.l a1,a0
@@ -10111,7 +10149,7 @@ loc_15C72:
 
 sub_15CC4:
 		
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		clr.l   (a0)+
 		clr.l   (a0)+
 		clr.l   (a0)
@@ -11269,7 +11307,7 @@ sub_168D8:
 		lea     (SAVE2_CHARACTER_DATA).l,a0
 loc_168F4:
 		
-		lea     (DMA_SPACE_FF8804).l,a1
+		lea     (FF8804_LOADING_SPACE).l,a1
 		moveq   #9,d7
 loc_168FC:
 		
@@ -11280,7 +11318,7 @@ loc_168FC:
 		adda.w  #$72,a1 
 		move.l  a1,-(sp)
 		lsl.w   #2,d3
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		moveq   #5,d7
 		bsr.w   sub_1697C
 		movea.l (sp)+,a1

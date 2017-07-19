@@ -800,7 +800,7 @@ loc_E582:
 		lea     ((byte_FF895E-$1000000)).w,a2
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a3
 		clr.w   d4
-		lea     ((DMA_SPACE_FF8804-$1000000)).w,a4
+		lea     ((FF8804_LOADING_SPACE-$1000000)).w,a4
 		move.w  #0,(a4)
 loc_E598:
 		
@@ -1640,7 +1640,7 @@ sub_EDD6:
 		move.b  #0,-$C2(a6)
 		move.b  #0,-$C3(a6)
 		clr.w   d3
-		lea     ((DMA_SPACE_FF8804-$1000000)).w,a0
+		lea     ((FF8804_LOADING_SPACE-$1000000)).w,a0
 		tst.w   (a0)
 		beq.s   loc_EDFC
 		bset    #0,d3
@@ -1670,7 +1670,7 @@ loc_EE24:
 		andi.b  #6,d4
 		tst.b   d4
 		bne.s   loc_EE48
-		lea     ((DMA_SPACE_FF8804-$1000000)).w,a0
+		lea     ((FF8804_LOADING_SPACE-$1000000)).w,a0
 		lea     ((byte_FF880E-$1000000)).w,a1
 		lea     ((byte_FF889E-$1000000)).w,a2
 		lea     ((byte_FF892E-$1000000)).w,a3
@@ -1747,7 +1747,7 @@ loc_EEDC:
 		bra.w   loc_EEFA
 loc_EEE0:
 		
-		lea     ((DMA_SPACE_FF8804-$1000000)).w,a0
+		lea     ((FF8804_LOADING_SPACE-$1000000)).w,a0
 		lea     ((byte_FF880E-$1000000)).w,a1
 		lea     ((byte_FF889E-$1000000)).w,a2
 		lea     ((byte_FF892E-$1000000)).w,a3

@@ -1292,7 +1292,7 @@ sub_5F14C:
 		moveq   #$20,d7 
 		jsr     (CopyBytes).w   
 		lea     (PALETTE_1_BIS).l,a0
-		clr.b   ((word_FFDFAA+1-$1000000)).w
+		clr.b   ((byte_FFDFAB-$1000000)).w
 		jsr     (sub_19C8).w    
 		rts
 

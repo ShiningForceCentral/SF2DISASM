@@ -11,7 +11,7 @@ EndGame:
 		movea.l (p_WitchEndTiles).l,a0
 		lea     (FF6802_LOADING_SPACE).l,a1
 		move.l  a1,-(sp)
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		movea.l (sp)+,a0
 		lea     ($2000).w,a1
 		move.w  #$2000,d0
@@ -57,7 +57,7 @@ EndGame:
 		move.w  #$5A,d0 
 		jsr     (Sleep).w       
 		move.b  #2,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -73,7 +73,7 @@ EndGame:
 		moveq   #$1E,d0
 		jsr     (Sleep).w       
 		move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -93,9 +93,9 @@ EndGame:
 		movea.l (p_JewelEndScreenTiles).l,a0
 		lea     (FF6802_LOADING_SPACE).l,a1
 		move.l  a1,-(sp)
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		movea.l (sp)+,a0
-		lea     (loc_2000).w,a1
+		lea     ($2000).w,a1
 		move.w  #$2000,d0
 		moveq   #2,d1
 		jsr     (sub_10DC).w    
@@ -114,7 +114,7 @@ EndGame:
 		jsr     (CopyBytes).w   
 		jsr     (EnableDisplayAndInterrupts).w
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -138,7 +138,7 @@ EndGame:
 		moveq   #$78,d0 
 		jsr     (Sleep).w       
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w

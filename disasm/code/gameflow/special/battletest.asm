@@ -181,7 +181,7 @@ sub_78BC:
 		
 		moveq   #$1D,d7
 		clr.w   d0
-		lea     (RAM_START).l,a0
+		lea     (FF0000_RAM_START).l,a0
 loc_78C6:
 		
 		bsr.w   j_GetCurrentLevel

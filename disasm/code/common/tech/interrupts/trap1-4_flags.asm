@@ -1,6 +1,6 @@
 
-; ASM FILE code\common\tech\interrupts\flags.asm :
-; 0x1700..0x1770 : Flag function
+; ASM FILE code\common\tech\interrupts\trap1-4_flags.asm :
+; 0x1700..0x1770 : Trap 1-4 - Flag Functions
 
 ; =============== S U B R O U T I N E =======================================
 

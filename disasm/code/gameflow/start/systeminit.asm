@@ -19,7 +19,7 @@ SystemInit:
 VDP_init:
 		
 		move.w  #$3FFE,d0
-		lea     (RAM_START).l,a0
+		lea     (FF0000_RAM_START).l,a0
 loc_218:
 		
 		clr.l   (a0)+           

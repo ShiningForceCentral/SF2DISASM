@@ -159,9 +159,9 @@ RomEndAddress:
 						; Ram End Adress
 		dc.l $5241F820          
 						; SRam data
-		dc.l $200001            
+		dc.l SRAM_START         
 						; Sram Start Address
-		dc.l $203FFF            
+		dc.l SAVE2_CHARACTER_DATA+$1FC4
 						; Sram End Address
 		dc.b '            '     
 						; Modem data

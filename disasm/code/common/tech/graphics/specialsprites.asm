@@ -56,7 +56,7 @@ LoadBattleSpecialSprite:
 		
 		lea     (FF8002_LOADING_SPACE).l,a1
 		move.l  a1,-(sp)
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		movea.l (sp)+,a0
 		lea     ($AF00).l,a1
 		move.w  #$480,d0
@@ -73,7 +73,7 @@ LoadExplorationSpecialSprite:
 		
 		lea     ((byte_FF4A00+$300)).l,a1
 		move.l  a1,-(sp)
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		movea.l (sp)+,a0
 		lea     ($A3C0).l,a1
 		move.w  #$A20,d0
@@ -107,7 +107,7 @@ loc_25CD2:
 		
 		lea     (FF6802_LOADING_SPACE).l,a1
 		move.l  a1,-(sp)
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		movea.l (sp)+,a0
 		lea     ($AF00).l,a1
 		move.w  #$480,d0

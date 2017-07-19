@@ -8,9 +8,9 @@ sub_1AC29C:
 		
 		movea.l (p_BaseTiles).l,a0
 		lea     (FF6802_LOADING_SPACE).l,a1
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		lea     (byte_FF6C02).l,a0
-		lea     (DMA_SPACE_FF8804).l,a1
+		lea     (FF8804_LOADING_SPACE).l,a1
 		moveq   #$3F,d7 
 loc_1AC2BA:
 		
@@ -61,7 +61,7 @@ loc_1AC31E:
 		clr.l   (a1)+
 		addq.l  #4,a1
 		dbf     d7,loc_1AC2E0
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		lea     (BATTLE_ENTITY_MOVE_STRING).l,a1
 		clr.l   (a1)+
 		move.w  #$3FE,d7
@@ -72,7 +72,7 @@ loc_1AC344:
 		mulu.w  #2,d0
 		move.l  d0,(a1)+
 		dbf     d7,loc_1AC344
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		lea     (BATTLE_ENTITY_MOVE_STRING).l,a1
 		move.w  #$3FE,d7
 loc_1AC362:
@@ -84,7 +84,7 @@ loc_1AC362:
 		and.l   (a1)+,d0
 		or.l    d0,(a0)+
 		dbf     d7,loc_1AC362
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		lea     ($2000).w,a1    
 						; ?
 		move.w  #$800,d0
@@ -1729,7 +1729,7 @@ LoadBattleTerrainData:
 		lsl.l   #2,d1
 		movea.l (a0,d1.w),a0
 		lea     (TERRAIN_DATA).l,a1
-		jsr     (LoadTileData).w
+		jsr     (LoadCompressedData).w
 		movem.l (sp)+,d0-d6/a0-a5
 		rts
 

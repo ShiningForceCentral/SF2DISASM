@@ -1101,8 +1101,8 @@ LoadMapTilesets:
 		blt.s   loc_2A16
 		lsl.w   #2,d0
 		movea.l (a0,d0.w),a0
-		lea     (byte_FF3000).l,a1
-		bsr.w   LoadTileData    
+		lea     (FF3000_MAP_TILESET_1).l,a1
+		bsr.w   LoadCompressedData
 loc_2A16:
 		
 		movea.l (p_pt_MapTiles).l,a0
@@ -1112,7 +1112,7 @@ loc_2A16:
 		lsl.w   #2,d0
 		movea.l (a0,d0.w),a0
 		lea     (FF6802_LOADING_SPACE).l,a1
-		bsr.w   LoadTileData    
+		bsr.w   LoadCompressedData
 loc_2A32:
 		
 		movea.l (p_pt_MapTiles).l,a0
@@ -1121,8 +1121,8 @@ loc_2A32:
 		blt.s   loc_2A4E
 		lsl.w   #2,d0
 		movea.l (a0,d0.w),a0
-		lea     (RAM_START).l,a1
-		bsr.w   LoadTileData    
+		lea     (FF0000_RAM_START).l,a1
+		bsr.w   LoadCompressedData
 loc_2A4E:
 		
 		movea.l (p_pt_MapTiles).l,a0
@@ -1131,8 +1131,8 @@ loc_2A4E:
 		blt.s   loc_2A6A
 		lsl.w   #2,d0
 		movea.l (a0,d0.w),a0
-		lea     (byte_FF1000).l,a1
-		bsr.w   LoadTileData    
+		lea     (FF1000_MAP_TILESET_4).l,a1
+		bsr.w   LoadCompressedData
 loc_2A6A:
 		
 		movea.l (p_pt_MapTiles).l,a0
@@ -1142,7 +1142,7 @@ loc_2A6A:
 		lsl.w   #2,d0
 		movea.l (a0,d0.w),a0
 		lea     (FF2000_LOADING_SPACE).l,a1
-		bsr.w   LoadTileData    
+		bsr.w   LoadCompressedData
 loc_2A86:
 		
 		movem.l (sp)+,d0-d1/a0-a1/a5
@@ -1167,8 +1167,9 @@ LoadMap:
 		bsr.w   InitDisplay     
 		move.w  (sp)+,d1
 		ext.w   d1
-		bpl.s   loc_2ACC
-		clr.w   d1
+		bpl.s   loc_2ACC        
+		clr.w   d1              
+						; If D1<0, re-load current map
 		move.b  ((CURRENT_MAP-$1000000)).w,d1
 		movea.l (p_pt_MapData).l,a5
 		lsl.w   #2,d1
@@ -1179,6 +1180,7 @@ LoadMap:
 loc_2ACC:
 		
 		clr.w   ((word_FFAF42-$1000000)).w
+						; Load new map D1
 		move.b  d1,((CURRENT_MAP-$1000000)).w
 loc_2AD4:
 		
@@ -1198,7 +1200,7 @@ loc_2AD4:
 		blt.s   loc_2B1C
 loc_2B08:
 		
-		lea     (byte_FF3000).l,a0
+		lea     (FF3000_MAP_TILESET_1).l,a0
 		lea     ($2000).w,a1
 loc_2B12:
 		
@@ -1220,7 +1222,7 @@ loc_2B34:
 		
 		tst.b   (a5)+
 		blt.s   loc_2B4C
-		lea     (RAM_START).l,a0
+		lea     (FF0000_RAM_START).l,a0
 						; something to do with tile pixel data
 		lea     ($4000).w,a1
 		move.w  #$800,d0
@@ -1232,7 +1234,7 @@ loc_2B4C:
 		
 		tst.b   (a5)+
 		blt.s   loc_2B64
-		lea     (byte_FF1000).l,a0
+		lea     (FF1000_MAP_TILESET_4).l,a0
 loc_2B56:
 		
 		lea     ($5000).w,a1
@@ -1474,7 +1476,7 @@ sub_2D58:
 		lea     (FF2000_LOADING_SPACE).l,a1
 		bsr.w   sub_2372
 		movea.l (a5)+,a0
-		lea     (RAM_START).l,a1
+		lea     (FF0000_RAM_START).l,a1
 		bsr.w   LoadMapLayoutData
 		movea.l 4(a5),a0
 loc_2D74:
@@ -1494,7 +1496,7 @@ loc_2D98:
 		bra.s   loc_2D74
 loc_2D9C:
 		
-		lea     (RAM_START).l,a1
+		lea     (FF0000_RAM_START).l,a1
 		movea.l $14(a5),a0
 loc_2DA6:
 		
@@ -1600,7 +1602,7 @@ loc_2E80:
 loc_2E94:
 		
 		lea     (FF6802_LOADING_SPACE).l,a1
-		bsr.w   LoadTileData    
+		bsr.w   LoadCompressedData
 		movea.l (sp)+,a1
 		move.w  (a1)+,d7
 		lea     (FF6802_LOADING_SPACE).l,a0

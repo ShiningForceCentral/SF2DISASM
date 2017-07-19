@@ -66,7 +66,7 @@ eas_452BA:
 						; 001F SET 1D BIT 3 $FFFF
 		dc.w $FFFF
 		dc.w $23                
-						; 0023 SEND SOUND COMMAND $SFX_WARP
+						; 0023 SEND SOUND COMMAND SFX_WARP
 		dc.w $59
 		dc.w $B                 
 						; 000B SET SPRITE SIZE $16
@@ -196,7 +196,7 @@ eas_4536C:
 						; 001F SET 1D BIT 3 $FFFF
 		dc.w $FFFF
 		dc.w $23                
-						; 0023 SEND SOUND COMMAND $SFX_WARP
+						; 0023 SEND SOUND COMMAND SFX_WARP
 		dc.w $59
 		dc.w $B                 
 						; 000B SET SPRITE SIZE $C
@@ -317,7 +317,7 @@ word_45414:
 						; 0000 WAIT value $6
 		dc.w 6
 		dc.w $23                
-						; 0023 SEND SOUND COMMAND $SFX_WARP
+						; 0023 SEND SOUND COMMAND SFX_WARP
 		dc.w $59
 		dc.w 1                  
 						; 0001 WAIT UNTIL DESTINATION
@@ -394,7 +394,7 @@ eas_4548C:
 		dc.w 0
 		dc.w 1
 		dc.w $23                
-						; 0023 SEND SOUND COMMAND $SFX_WARP
+						; 0023 SEND SOUND COMMAND SFX_WARP
 		dc.w $59
 		dc.w 1                  
 						; 0001 WAIT UNTIL DESTINATION
@@ -509,7 +509,7 @@ eas_ShrinkIn:
 						; 001F SET 1D BIT 3 $FFFF
 		dc.w $FFFF
 		dc.w $23                
-						; 0023 SEND SOUND COMMAND $SFX_WARP
+						; 0023 SEND SOUND COMMAND SFX_WARP
 		dc.w $59
 		dc.w $B                 
 						; 000B SET SPRITE SIZE $16
@@ -597,7 +597,7 @@ eas_GrowOut:
 						; 001F SET 1D BIT 3 $FFFF
 		dc.w $FFFF
 		dc.w $23                
-						; 0023 SEND SOUND COMMAND $SFX_WARP
+						; 0023 SEND SOUND COMMAND SFX_WARP
 		dc.w $59
 		dc.w $B                 
 						; 000B SET SPRITE SIZE $C

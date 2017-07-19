@@ -277,7 +277,7 @@ eas_51840:
 						; 001F SET 1D BIT 3 $FFFF
 		dc.w $FFFF
 		dc.w $23                
-						; 0023 SEND SOUND COMMAND $SFX_FALLING
+						; 0023 SEND SOUND COMMAND SFX_FALLING
 		dc.w $58
 		dc.w $22                
 						; 0022 SET FACING $0

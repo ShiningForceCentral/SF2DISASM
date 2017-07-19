@@ -1454,7 +1454,7 @@ loc_55F34:
 		or.w    d3,d4
 		move.w  d4,(a1)+
 		dbf     d0,loc_55F06
-		clr.b   ((word_FFDFAA+1-$1000000)).w
+		clr.b   ((byte_FFDFAB-$1000000)).w
 		lea     (PALETTE_1_BIS).l,a0
 		jmp     (sub_19C8).w    
 
@@ -1478,7 +1478,7 @@ plt_55F6A:
 
 sub_55F82:
 		
-		clr.b   ((word_FFDFAA+1-$1000000)).w
+		clr.b   ((byte_FFDFAB-$1000000)).w
 		lea     ((byte_FFDF2A-$1000000)).w,a0
 		jmp     (sub_19C8).w    
 

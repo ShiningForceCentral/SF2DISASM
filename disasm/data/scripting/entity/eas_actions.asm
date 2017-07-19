@@ -451,7 +451,7 @@ eas_Die:
 						; 0000 WAIT value $3
 		dc.w 3
 		dc.w $23                
-						; 0023 SEND SOUND COMMAND $SFX_BATTLEFIELD_DEATH
+						; 0023 SEND SOUND COMMAND SFX_BATTLEFIELD_DEATH
 		dc.w $74
 		dc.w $17                
 						; 0017 SET ENTITY SPRITE $3F
@@ -901,7 +901,7 @@ word_462DA:
 						; 0030 BRANCH TO CURRENT ADDR. + $FFA8
 		dc.w word_46282+$10000-word_462DA
 		dc.w $23                
-						; 0023 SEND SOUND COMMAND $SFX_JUMP
+						; 0023 SEND SOUND COMMAND SFX_JUMP
 		dc.w $57
 		dc.w $17                
 						; 0017 SET ENTITY SPRITE $3F

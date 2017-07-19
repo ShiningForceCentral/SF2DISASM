@@ -233,7 +233,7 @@ loc_44688:
 		
 		clr.l   (a0)+
 		dbf     d7,loc_44688
-		move.l  #byte_FF5600,(dword_FFB1A0).l
+		move.l  #FF5600_LOADING_SPACE,(dword_FFB1A0).l
 		jsr     (sub_19B0).w
 		movem.l (sp)+,d7-a0
 		rts

@@ -52,7 +52,7 @@ sub_7C5E:
 		movea.l (p_WitchTiles).l,a0
 		lea     (FF6802_LOADING_SPACE).l,a1
 		move.l  a1,-(sp)
-		bsr.w   LoadTileData    
+		bsr.w   LoadCompressedData
 		movea.l (sp)+,a0
 		lea     ($2000).w,a1
 		move.w  #$2000,d0

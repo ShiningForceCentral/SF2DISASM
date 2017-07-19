@@ -67,7 +67,7 @@ j_SuspendGame:
 		include "code\gameflow\battle\battlevints.asm"		; Battle VInt functions
 		include "code\gameflow\exploration\explorationvints.asm"		; Exploration VInt functions
 		include "code\common\tech\graphics\specialsprites.asm"		; Special Sprites functions
-		include "code\specialscreens\suspend\suepend.asm"		; Suspend functions
+		include "code\specialscreens\suspend\suspend.asm"		; Suspend functions
 		include "code\specialscreens\witchend\witchend.asm"		; Witch end functions
 		rts
 

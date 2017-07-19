@@ -889,7 +889,7 @@ sub_3DB0:
 		lsl.w   #6,d1
 		add.w   d1,d0
 		add.w   d0,d0
-		lea     (RAM_START).l,a2
+		lea     (FF0000_RAM_START).l,a2
 loc_3DDE:
 		
 		movem.w d0/d2/d6,-(sp)
@@ -913,7 +913,7 @@ loc_3DE2:
 
 sub_3E06:
 		
-		lea     (RAM_START).l,a2
+		lea     (FF0000_RAM_START).l,a2
 		move.w  #$7FF,d7
 loc_3E10:
 		
@@ -926,7 +926,8 @@ loc_3E10:
 		move.l  #$C0F8C0F8,(a2)+
 		move.w  #$C0F8,(a2)+
 		clr.w   d0
-		moveq   #$FFFFFFFF,d1
+		moveq   #$FFFFFFFF,d1   
+						; reload current map ?
 		bra.w   LoadMap         
 
 	; End of function sub_3E06
@@ -985,7 +986,7 @@ loc_3E80:
 		lsl.w   #6,d1
 		add.w   d1,d0
 		add.w   d0,d0
-		lea     (RAM_START).l,a2
+		lea     (FF0000_RAM_START).l,a2
 		tst.w   d1
 		blt.s   loc_3EEC
 loc_3EC8:
@@ -1186,7 +1187,7 @@ loc_4028:
 		lsl.w   #6,d1
 		add.w   d1,d0
 		add.w   d0,d0
-		lea     (RAM_START).l,a2
+		lea     (FF0000_RAM_START).l,a2
 		lea     (byte_FF5C08).l,a3
 		tst.w   d1
 		blt.s   loc_40BA
@@ -1251,7 +1252,7 @@ sub_40F2:
 		lsl.w   #6,d3
 		add.w   d3,d2
 		add.w   d2,d2
-		lea     (RAM_START).l,a2
+		lea     (FF0000_RAM_START).l,a2
 		lea     (byte_FF5C08).l,a3
 loc_412C:
 		
@@ -1472,7 +1473,7 @@ loc_42C6:
 		move.w  d0,d2
 loc_42CC:
 		
-		lea     (RAM_START).l,a2
+		lea     (FF0000_RAM_START).l,a2
 		movem.w (sp)+,d4-d5
 		rts
 loc_42D8:
@@ -1609,8 +1610,6 @@ sub_43F8:
 		neg.w   d2
 		andi.w  #$FF,d2
 		lsr.w   #3,d2
-loc_4400:
-		
 		add.w   d2,d2
 		subq.w  #8,d3
 		andi.w  #$FF,d3
@@ -1622,7 +1621,7 @@ loc_4400:
 		lsr.w   #7,d0
 		lsr.w   #7,d1
 		lea     MapOffsetHashTable(pc), a3
-		lea     (RAM_START).l,a4
+		lea     (FF0000_RAM_START).l,a4
 		lea     (FF2000_LOADING_SPACE).l,a5
 		cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 		bne.w   loc_44B4

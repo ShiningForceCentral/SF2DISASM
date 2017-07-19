@@ -29,7 +29,7 @@ ConvertCoordToOffset:
 ClearTargetGrid:
 		
 		movem.l d0-d1/a0,-(sp)
-		lea     (byte_FF5600).l,a0
+		lea     (FF5600_LOADING_SPACE).l,a0
 		move.w  #$240,d0
 		moveq   #$FFFFFFFF,d1
 loc_C0B8:
@@ -76,7 +76,7 @@ loc_C0DA:
 GetTargetAtCoordOffset:
 		
 		movem.l d1-a6,-(sp)
-		lea     (byte_FF5600).l,a0
+		lea     (FF5600_LOADING_SPACE).l,a0
 		bsr.s   ConvertCoordToOffset
 		move.b  (a0),d0
 		movem.l (sp)+,d1-a6
@@ -1115,7 +1115,7 @@ loc_C84A:
 		jsr     GetXPos
 		cmpi.w  #MAP_SIZE_MAXWIDTH,d1
 		bcc.w   loc_C86E
-		lea     (byte_FF5600).l,a0
+		lea     (FF5600_LOADING_SPACE).l,a0
 		bsr.w   ConvertCoordToOffset
 		move.b  d0,(a0)
 loc_C86E:
@@ -1255,7 +1255,7 @@ sub_C958:
 		bsr.w   UpdateTargetList
 		clr.w   ((byte_FF8808-$1000000)).w
 		clr.w   ((word_FF8806-$1000000)).w
-		clr.w   ((DMA_SPACE_FF8804-$1000000)).w
+		clr.w   ((FF8804_LOADING_SPACE-$1000000)).w
 		move.l  (sp)+,d0
 		moveq   #0,d3
 		bsr.w   GetNextUsableAttackItem
@@ -1363,7 +1363,7 @@ loc_CA7A:
 		
 		bsr.w   MakeTargetListEverybody
 		bsr.w   GetTargetsReachableByAttack
-		move.w  ((DMA_SPACE_FF8804-$1000000)).w,d7
+		move.w  ((FF8804_LOADING_SPACE-$1000000)).w,d7
 		subq.w  #1,d7
 		bcs.w   loc_CAE4
 		move.l  d1,-(sp)
@@ -2379,7 +2379,7 @@ loc_D1C6:
 GetTargetsReachableByAttack:
 		
 		movem.l d0-d5/d7-a3,-(sp)
-		lea     ((DMA_SPACE_FF8804-$1000000)).w,a1
+		lea     ((FF8804_LOADING_SPACE-$1000000)).w,a1
 		lea     ((byte_FF880E-$1000000)).w,a2
 		lea     ((byte_FF889E-$1000000)).w,a3
 		bsr.w   GetWeaponRange  

@@ -1,184 +1,6 @@
 
-; ASM FILE code\common\tech\interrupts\interruptsengine.asm :
-; 0x45A..0x14A6 : Interrupts engine
-		rts
-
-	; End of function CopyByteToZ80
-
-
-; =============== S U B R O U T I N E =======================================
-
-; if xxxx = $FFFF, then get d0.w
-
-Trap0_SoundCommand:
-		
-		movem.l d0-d1/a0,-(sp)
-		movea.l $E(sp),a0
-		move.w  (a0),d1         
-						; get interrupt param
-loc_466:
-		
-		addq.l  #2,$E(sp)
-		cmpi.w  #$FFFF,d1
-		bne.s   loc_472
-		move.w  d0,d1           
-						; if param = FFFF, then get param from d0
-loc_472:
-		
-		tst.b   ((DONT_SEND_SOUND_COMMANDS-$1000000)).w
-		bne.s   loc_48A
-		lea     (SOUND_COMMAND_QUEUE).l,a0
-		moveq   #3,d0
-loc_480:
-		
-		tst.w   (a0)+
-		dbeq    d0,loc_480
-		move.w  d1,-2(a0)       
-						; add new sound command to send
-loc_48A:
-		
-		movem.l (sp)+,d0-d1/a0
-		rte
-
-	; End of function Trap0_SoundCommand
-
-
-; =============== S U B R O U T I N E =======================================
-
-Int_AdressError:
-		
-		move.l  #'ADDR',(ERRCODE_BYTE0).l
-		move.l  $A(sp),(ERRCODE_BYTE4).l
-		bsr.w   SaveErrorCode
-		bra.w   Int_ExternalInterrupt
-
-	; End of function Int_AdressError
-
-
-; =============== S U B R O U T I N E =======================================
-
-Int_IllegalInstruction:
-		
-		move.l  #'BAD ',(ERRCODE_BYTE0).l
-		move.l  2(sp),(ERRCODE_BYTE4).l
-		bsr.w   SaveErrorCode
-		bra.w   Int_ExternalInterrupt
-
-	; End of function Int_IllegalInstruction
-
-
-; =============== S U B R O U T I N E =======================================
-
-Int_ZeroDivide:
-		
-		move.l  #'ZERO',(ERRCODE_BYTE0).l
-loc_4CE:
-		
-		move.l  2(sp),(ERRCODE_BYTE4).l
-		bsr.w   SaveErrorCode
-		bra.w   Int_ExternalInterrupt
-
-	; End of function Int_ZeroDivide
-
-
-; =============== S U B R O U T I N E =======================================
-
-Int_OtherError:
-		
-		move.l  #'OTHR',(ERRCODE_BYTE0).l
-		move.l  2(sp),(ERRCODE_BYTE4).l
-		bsr.w   SaveErrorCode
-		bra.w   Int_ExternalInterrupt
-
-	; End of function Int_OtherError
-
-
-; =============== S U B R O U T I N E =======================================
-
-SaveErrorCode:
-		
-		move.b  (ERRCODE_BYTE0).l,(SAVED_ERRCODE_BYTE0).l
-		move.b  (ERRCODE_BYTE1).l,(SAVED_ERRCODE_BYTE1).l
-		move.b  (ERRCODE_BYTE2).l,(SAVED_ERRCODE_BYTE2).l
-		move.b  (ERRCODE_BYTE3).l,(SAVED_ERRCODE_BYTE3).l
-		move.b  (ERRCODE_BYTE4).l,(SAVED_ERRCODE_BYTE4).l
-		move.b  (ERRCODE_BYTE5).l,(SAVED_ERRCODE_BYTE5).l
-		move.b  (ERRCODE_BYTE6).l,(SAVED_ERRCODE_BYTE6).l
-		move.b  ($FFFFFF).l,(SAVED_ERRCODE_BYTE7).l
-
-	; End of function SaveErrorCode
-
-
-; START OF FUNCTION CHUNK FOR Int_AdressError
-
-Int_ExternalInterrupt:
-		
-		move    #$2700,sr
-		nop
-		nop
-		bra.s   Int_ExternalInterrupt
-
-; END OF FUNCTION CHUNK FOR Int_AdressError
-
-
-; =============== S U B R O U T I N E =======================================
-
-IntLvl7:
-		
-		nop
-		bra.s   IntLvl7
-
-	; End of function IntLvl7
-
-
-; =============== S U B R O U T I N E =======================================
-
-Trap5_TextBox:
-		
-		movem.l d0-a6,-(sp)
-		movea.l $3E(sp),a6
-		addq.l  #2,$3E(sp)
-		move.w  (a6)+,d0
-		cmpi.w  #$FFFF,d0
-		bne.s   loc_570
-		bsr.w   HideTextBox     
-		bra.s   loc_574
-loc_570:
-		
-		bsr.w   DisplayText     
-loc_574:
-		
-		movem.l (sp)+,d0-a6
-		rte
-
-	; End of function Trap5_TextBox
-
-
-; =============== S U B R O U T I N E =======================================
-
-; execute map script at a0
-
-Trap6_TriggerAndExecuteMapScript:
-		
-		movem.l d0-a6,-(sp)
-		trap    #VINT_FUNCTIONS
-		dc.w VINTS_ACTIVATE
-		dc.l VInt_UpdateEntities
-		jsr     j_ExecuteMapScript
-		movem.l (sp)+,d0-a6
-		rte
-
-	; End of function Trap6_TriggerAndExecuteMapScript
-
-
-; =============== S U B R O U T I N E =======================================
-
-HInt:
-		
-		rte
-
-	; End of function HInt
-
+; ASM FILE code\common\tech\interrupts\vintengine.asm :
+; 0x594..0x14A6 : Vertical Interrupt Engine - Main Technical Engine - Triggered at each frame display
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1181,7 +1003,7 @@ FadeOutToWhite:
 
 ExecuteFading:
 		
-		clr.w   ((word_FFDFAA-$1000000)).w
+		clr.w   ((unk_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -2036,7 +1858,7 @@ PrepareSomethingForDMA:
 		
 		movem.l d0-d1/a1,-(sp)
 		bsr.w   rts1
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a0
 		movem.l (sp)+,d0-d1/a1
 		move.w  #2,d1
 		rts
@@ -2077,9 +1899,9 @@ DmaTilesViaFF8804:
 LoadTilesAtFF8804:
 		
 		movem.l d0-d1/a1,-(sp)
-		lea     (DMA_SPACE_FF8804).l,a1
-		bsr.w   LoadTileData    
-		lea     (DMA_SPACE_FF8804).l,a0
+		lea     (FF8804_LOADING_SPACE).l,a1
+		bsr.w   LoadCompressedData
+		lea     (FF8804_LOADING_SPACE).l,a0
 		movem.l (sp)+,d0-d1/a1
 		move.w  #2,d1
 		rts

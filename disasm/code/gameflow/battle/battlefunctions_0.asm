@@ -167,7 +167,7 @@ GetBattleMapProperties:
 		lsl.w   #6,d7
 		add.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d7
 		add.w   d7,d7
-		lea     (RAM_START).l,a1
+		lea     (FF0000_RAM_START).l,a1
 		adda.w  d7,a1
 		move.w  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d6
 		sub.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d6
