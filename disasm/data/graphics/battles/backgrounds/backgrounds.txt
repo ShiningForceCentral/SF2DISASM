@@ -10,3 +10,19 @@ Tilesets 1 and 2 : graphics data using the stack compression algorithm.
 
 Theoretically, data can be stored in any order, but in practice they're always stored in following order : palette, tileset 1, tileset 2. 
 Hence the fixed values for 1st and 3rd offsets.
+
+Tile layout : 
+384 tiles in 4*4 blocks with blocks arranged in 4*3 screen halves
+
+ 1  5  9 13 49 53                  193 197
+ 2  6 10 14 50  .                  194   .
+ 3  7 11 15 51  .                  195   .
+ 4  8 12 16 52  .                  196   .
+17 21 25 29  
+18 22 26 30
+19 23 27 31
+20 24 28 32
+33 37 41 45                  . 189                    . 381
+34 38 42 46                  . 190                    . 382
+35 39 43 47                  . 191                    . 383
+36 40 44 48                188 192                  380 384
