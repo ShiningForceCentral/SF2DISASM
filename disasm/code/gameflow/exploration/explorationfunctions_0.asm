@@ -14,6 +14,7 @@ GetActivatedEntity:
 		ext.w   d0
 		bpl.s   loc_237A4
 		rts
+; get X/Y/facing/size of player entity
 loc_237A4:
 		
 		movem.l d3-a0,-(sp)
@@ -31,6 +32,7 @@ loc_237A4:
 		andi.w  #3,d3
 		move.w  d3,d5
 		lsl.w   #2,d5
+; convert X/Y position from pixels into an offset for the Block table
 loc_237C8:
 		
 		add.w   tbl_PixelOffsets_X(pc,d5.w),d1
@@ -60,6 +62,7 @@ loc_237FE:
 		bsr.w   CheckIfEntityIsFollower
 		bne.w   loc_2382A       
 						; skip this entity because it's a follower!
+; get distance from activated block
 		move.w  (a0),d5
 		move.w  2(a0),d6
 		sub.w   d1,d5
@@ -83,6 +86,7 @@ loc_2382A:
 		dbf     d7,loc_237FE
 		moveq   #$FFFFFFFF,d0
 		bra.w   loc_23840
+; distance is less than one block, 
 loc_2383A:
 		
 		move.w  d3,d2
@@ -159,6 +163,7 @@ loc_2386C:
 		andi.w  #$3C00,d3
 		cmpi.w  #$1800,d3
 		bne.s   loc_238E8
+; block has chest flag set
 		jsr     (OpenChest).w
 		trap    #TEXTBOX
 		dc.w $193               
@@ -251,6 +256,7 @@ loc_2398C:
 		trap    #TEXTBOX
 		dc.w $19C               
 						; "Nothing was there.{W1}"
+; finish up by closing windows
 loc_23994:
 		
 		trap    #TEXTBOX

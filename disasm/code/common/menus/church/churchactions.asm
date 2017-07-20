@@ -553,7 +553,9 @@ loc_20FE6:
 		trap    #SET_FLAG
 		dc.w $18F               
 						; set after first battle's cutscene OR first save? Checked at witch screens
+                enableSram
 		jsr     (SaveGame).w
+                disableSram
 		trap    #SOUND_COMMAND
 		dc.w MUSIC_SAVE         
 						; save jingle

@@ -155,11 +155,13 @@ ExecuteEntityEvent:
 		movem.w d1-d2,-(sp)
 		movea.l 4(a0),a0
 		clr.w   d7
+; event check loop: see if next event matches idx
 loc_47638:
 		
 		cmpi.b  #$FD,(a0,d7.w)
 		bne.s   loc_4764A       
 						; not default case
+; "default" case reached; execute this event
 		move.b  1(a0,d7.w),d6
 		adda.w  2(a0,d7.w),a0
 		bra.s   loc_4765E
@@ -182,6 +184,7 @@ loc_4765E:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		blt.s   loc_47670
 		bsr.w   LoadAndDisplayCurrentPortrait
+; get entity idx that will trigger this event
 loc_47670:
 		
 		movem.w (sp)+,d1-d2
@@ -212,6 +215,7 @@ loc_476A8:
 		movem.w (sp)+,d0-d2/d6
 		btst    #1,d6
 		beq.s   loc_476C4
+; finish event by closing windows
 		moveq   #$FFFFFFFF,d2
 		moveq   #$FFFFFFFF,d3
 		jsr     (sub_6052).w    

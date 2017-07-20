@@ -10,4 +10,24 @@ align:	macro
 	dcb.b \1-(*%\1),\2
 	endc
 	endm
+	
+	
+declareRomEnd:	macro
+	if (EXPANDED_ROM=0)
+	dc.l $1FFFFF
+	else
+	dc.l $3FFFFF
+	endc
+	endm	
 
+enableSram:	macro
+	if (EXPANDED_ROM=1)
+	move.b #$01,($a130f1).l
+	endc
+	endm
+	
+disableSram:	macro
+	if (EXPANDED_ROM=1)
+	move.b #$00,($a130f1).l
+	endc
+	endm	

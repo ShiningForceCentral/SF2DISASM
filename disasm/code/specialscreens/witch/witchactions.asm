@@ -94,6 +94,7 @@ loc_74B4:
 		move.b  #3,((CURRENT_MAP-$1000000)).w
 		move.b  #3,((EGRESS_MAP_INDEX-$1000000)).w
 		bsr.w   SaveGame
+                disableSram
 		trap    #TEXTBOX
 		dc.w $FFFF
 		move.b  #3,d0
@@ -134,6 +135,7 @@ loc_74FE:
 		subq.w  #1,d0
 		move.w  d0,((SAVE_SLOT_BEING_USED-$1000000)).w
 		bsr.w   LoadGame
+                disableSram
 		trap    #TEXTBOX
 		dc.w $E2                
 						; "{NAME;0}, yes!  I knew it!{W2}"

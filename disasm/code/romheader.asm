@@ -1,6 +1,7 @@
 
 ; ASM FILE code\romheader.asm :
 ; 0x0..0x200 : ROM Header
+; File Name   : D:\SEGADEV\IDB\SF2\sf2.bin
 InitStack:
 		dc.l InitStack          
 						; Initial Stack
@@ -151,7 +152,7 @@ aJ: dc.b 'J               '
 		dc.l 0                  
 						; Rom Start Adress
 RomEndAddress:
-		dc.l $1FFFFF            
+		declareRomEnd           
 						; Rom End Adress
 		dc.l $FF0000            
 						; Ram Start Adress

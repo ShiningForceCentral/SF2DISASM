@@ -42,9 +42,6 @@ loc_71EC:
 		bsr.w   CopyBytes       
 		bsr.w   FadeOutToBlack
 		trap    #VINT_FUNCTIONS
-
-; END OF FUNCTION CHUNK FOR GameInit
-
 		dc.w VINTS_CLEAR
 		clr.w   d6
 		jsr     (ClearHscrollStuff).w
@@ -64,6 +61,7 @@ loc_71EC:
 		jmp     (a0)            
 						; reset
 loc_724E:
+		
 		bsr.w   DisableDisplayAndVInt
 						; title screen -> witch menu
 		bsr.w   ClearVsramAndSprites
@@ -85,6 +83,7 @@ loc_724E:
 		move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 		move.w  #6,((word_FFB07C-$1000000)).w
 loc_729C:
+		
 		move.b  #0,((byte_FFB082-$1000000)).w
 		jsr     j_ClearEntities
 		movea.l (p_SpeechBalloonTiles).l,a0
@@ -104,6 +103,7 @@ loc_729C:
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_ADD
 		dc.l VInt_WitchBlink
+                enableSram
 		bsr.w   CheckSRAM
 		moveq   #$20,d7 
 		move.b  d7,(SAVED_ERRCODE_BYTE0).l
@@ -124,6 +124,7 @@ loc_729C:
 						; "Ooops!  Record {#} has{N}vanished!{W2}"
 		jsr     j_FadeOut_WaitForP2Input
 loc_7332:
+		
 		tst.w   d1
 		bpl.s   loc_734C
 		move.l  #2,((TEXT_NUMBER-$1000000)).w
@@ -134,6 +135,7 @@ loc_7332:
 						; "Ooops!  Record {#} has{N}vanished!{W2}"
 		jsr     j_FadeOut_WaitForP2Input
 loc_734C:
+		
 		btst    #7,((P1_INPUT-$1000000)).w
 		bne.w   loc_73AA
 		trap    #TEXTBOX
@@ -149,6 +151,7 @@ loc_734C:
 		dc.w $D9                
 						; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
 loc_737C:
+		
 		btst    #7,((P1_INPUT-$1000000)).w
 		bne.w   loc_73C2
 		trap    #TEXTBOX
@@ -166,20 +169,15 @@ loc_737C:
 						; "from this mystery forest{N}unless you help me.{W2}"
 		bra.w   loc_73C2
 loc_73AA:
+		
 		bsr.w   WaitForVInt     
 		bsr.w   sub_7CF4
 		bsr.w   WaitForVInt     
 		move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 		move.b  #$FF,((byte_FFB082-$1000000)).w
-
-; START OF FUNCTION CHUNK FOR WitchDel
-
 loc_73C2:
 		
 		trap    #TEXTBOX
-
-; END OF FUNCTION CHUNK FOR WitchDel
-
 		dc.w $DD                
 						; "{CLEAR}Whatcha gonna do?"
 		move.b  (SAVE_FLAGS).l,d3
@@ -189,14 +187,17 @@ loc_73C2:
 		moveq   #1,d2
 		bra.s   loc_73E8
 loc_73D8:
+		
 		moveq   #1,d0
 		cmpi.w  #3,d3
 		bne.s   loc_73E4
 		moveq   #6,d2
 		bra.s   loc_73E8
 loc_73E4:
+		
 		move.w  #$F,d2
 loc_73E8:
+		
 		clr.w   d1
 		jsr     j_WitchMainMenu
 		tst.w   d0
@@ -205,7 +206,11 @@ loc_73E8:
 		move.w  rjt_WitchChoice(pc,d0.w),d0
 		jmp     rjt_WitchChoice(pc,d0.w)
 rjt_WitchChoice:
+		
 		dc.w WitchNew-rjt_WitchChoice
 		dc.w WitchLoad-rjt_WitchChoice
 		dc.w WitchDel-rjt_WitchChoice
 		dc.w WitchCopy-rjt_WitchChoice
+
+; END OF FUNCTION CHUNK FOR GameInit
+

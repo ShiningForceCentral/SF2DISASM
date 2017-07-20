@@ -52,7 +52,7 @@ loc_280AA:
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
-		bsr.w   sub_28F62       
+		bsr.w   CalculateRomChecksum
 		lea     byte_28BB8(pc), a0
 		nop
 		bsr.w   sub_28B12
@@ -1136,15 +1136,15 @@ LoadSegaLogoPalette:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Something related to P2 START during SEGA logo ... some kind of checksum calculation ?
+; Checksum
 
-sub_28F62:
+CalculateRomChecksum:
 		
 		jsr     (WaitForVInt).w 
 		btst    #INPUT_A_START_BIT,((P2_INPUT-$1000000)).w
-		beq.s   return_28F96
+		beq.s   return_28F96    
+						; execute only if P2 START pressed
 		lea     (RomEndAddress).w,a0
-						; get ROM end address 0x1FFFFF ?
 		move.l  (a0),d1
 		addq.l  #1,d1           
 						; 0x200000
@@ -1164,12 +1164,12 @@ loc_28F88:
 						; big ROM content sum stored in a RAM word
 		dbf     d2,loc_28F88    
 		dbf     d1,loc_28F88    
-		move.w  d0,((dword_FFB0A4-$1000000)).w
+		move.w  d0,((ROM_CHECKSUM-$1000000)).w
 return_28F96:
 		
 		rts
 
-	; End of function sub_28F62
+	; End of function CalculateRomChecksum
 
 
 ; =============== S U B R O U T I N E =======================================
