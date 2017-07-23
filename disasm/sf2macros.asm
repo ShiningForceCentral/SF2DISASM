@@ -31,3 +31,24 @@ disableSram:	macro
 	move.b #$00,($a130f1).l
 	endc
 	endm	
+
+
+conditionalRomExpand:	macro
+	if (EXPANDED_ROM=1)
+	include "layout\sf2-expanded-19-0x200000-0x400000.asm"
+	endc
+	endm
+	
+conditionalPc:	macro
+	if (EXPANDED_ROM=0)
+	\1 \2(pc),\3
+	else
+	\1 \2,\3
+	endc
+	endm	
+	
+includeIfVanillaRom:	macro
+	if (EXPANDED_ROM=0)
+	include \1
+	endc
+	endm

@@ -475,7 +475,7 @@ GetAddrOfBattleDataSection:
 		clr.w   d0
 		move.b  ((CURRENT_BATTLE-$1000000)).w,d0
 		lsl.w   #2,d0
-		lea     pt_BattleSpriteSets(pc), a0
+		conditionalPc lea,pt_BattleSpriteSets,a0
 		nop
 		movea.l (a0,d0.w),a0
 		tst.b   d2

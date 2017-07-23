@@ -1,5 +1,5 @@
 
-   EXPANDED_ROM: equ $0
+
 
    include "sf2macros.asm"
    include "sf2enums.asm"

@@ -22,7 +22,7 @@ cd ../disasm/data/sound/
 cd ../../
 echo Assembling game ...
 SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%.bin"
-@"../tools/asm68k" /o ae- /p sf2-expanded.asm, "../build/%buildname%" > ../build/output.log
+@"../tools/asm68k" /e EXPANDED_ROM=1 /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%" > ../build/output.log
 echo End of assembly, produced %buildname%
 
 echo -------------------------------------------------------------

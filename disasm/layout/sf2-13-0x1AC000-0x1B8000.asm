@@ -11,7 +11,7 @@
 		include "code\gameflow\battle\battle_s13_2.asm"		; Battle init, terrain, AI stuff to split more properly
 EnemyData:
 		incbin "data/battles/global/enemydata.bin"
-		include "data\battles\global\spritesetentries.asm"		; Battle sprite sets
+		includeIfVanillaRom "data\battles\global\spritesetentries.asm"		; Battle sprite sets
 		include "code\gameflow\battle\battle_s13_3.asm"		; Data related to UpgradeUnitIdx function
 plt_EndKiss:
 		incbin "data/graphics/specialscreens/endingkiss/endingkisspalette.bin"
