@@ -29,16 +29,6 @@ p_WitchEndTiles:
 plt_WeaponPalettes:
 		incbin "data/graphics/battles/weapons/weaponpalettes.bin"
 		include "data\graphics\battles\spells\entries.asm"		; Spell Graphics
-plt_Witch:
-		incbin "data/graphics/specialscreens/witchscreen/witchpalette.bin"
-WitchLayout:
-		incbin "data/graphics/specialscreens/witchscreen/witchlayout.bin"
-WitchTiles:
-		incbin "data/graphics/specialscreens/witchscreen/witchtiles.bin"
-plt_WitchEnd:
-		incbin "data/graphics/specialscreens/witchscreen/endingwitchpalette.bin"
-WitchEndLayout:
-		incbin "data/graphics/specialscreens/witchscreen/endingwitchlayout.bin"
-WitchEndTiles:
-		incbin "data/graphics/specialscreens/witchscreen/endingwitchtiles.bin"
-		align $8000
+		includeIfVanillaRom "code\specialscreens\witch\graphics.asm"		; Witch Screen
+		includeIfVanillaRom "code\specialscreens\witchend\graphics.asm"		; Witch End Screen
+		align $1C8000

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\tech\graphics\specialsprites.asm :
-; 0x25BFC..0x2791C : Special Sprites functions
+; 0x25BFC..0x25DF6 : Special Sprites functions
 pt_SpecialSprites:
 		dc.l SpecialSprites_Taros
 		dc.l SpecialSprites_Kraken
@@ -93,16 +93,16 @@ loc_25CB0:
 sub_25CB6:
 		
 		movem.l d0-d2/a0-a1,-(sp)
-		lea     (SpecialSprites_EvilSpirit+$20)(pc), a0
+		conditionalPc lea,(SpecialSprites_EvilSpirit+$20),a0
 		tst.w   d0
 		beq.s   loc_25CD2
 		cmpi.b  #1,d0
 		bne.s   loc_25CCE
-		lea     SpecialSprites_EvilSpiritAlt(pc), a0
+		conditionalPc lea,SpecialSprites_EvilSpiritAlt,a0
 		bra.s   loc_25CD2
 loc_25CCE:
 		
-		lea     (SpecialSprites_Zeon+$20)(pc), a0
+		conditionalPc lea,(SpecialSprites_Zeon+$20),a0
 loc_25CD2:
 		
 		lea     (FF6802_LOADING_SPACE).l,a1
@@ -256,226 +256,3 @@ loc_25DF0:
 
 	; End of function UpdateExplorationSpecialSprite
 
-SpecialSprites_Taros:
-		incbin "data/graphics/specialsprites/taros.bin"
-SpecialSprites_Kraken:
-		incbin "data/graphics/specialsprites/kraken.bin"
-SpecialSprites_NazcaShip:
-		incbin "data/graphics/specialsprites/nazcaship.bin"
-SpecialSprites_EvilSpirit:
-		incbin "data/graphics/specialsprites/evilspirit.bin"
-SpecialSprites_EvilSpiritAlt:
-		incbin "data/graphics/specialsprites/evilspiritalt.bin"
-SpecialSprites_Zeon:
-		incbin "data/graphics/specialsprites/zeon.bin"
-byte_2784C:
-		dc.b 0
-		dc.b $5C 
-		dc.b  $A
-		dc.b $3D 
-		dc.b $65 
-		dc.b $78 
-		dc.b   0
-		dc.b $74 
-		dc.b   0
-		dc.b $74 
-		dc.b  $A
-		dc.b $3E 
-		dc.b $65 
-		dc.b $81 
-		dc.b   0
-		dc.b $74 
-		dc.b   0
-		dc.b $5C 
-		dc.b  $A
-		dc.b $3F 
-		dc.b $65 
-		dc.b $8A 
-		dc.b   0
-		dc.b $8C 
-		dc.b   0
-		dc.b $74 
-		dc.b  $A
-		dc.b   0
-		dc.b $65 
-		dc.b $93 
-		dc.b   0
-		dc.b $8C 
-byte_2786C:
-		dc.b 0
-		dc.b $5C 
-		dc.b  $A
-		dc.b $3D 
-		dc.b $65 
-		dc.b $9C 
-		dc.b   0
-		dc.b $74 
-		dc.b   0
-		dc.b $74 
-		dc.b  $A
-		dc.b $3E 
-		dc.b $65 
-		dc.b $A5 
-		dc.b   0
-		dc.b $74 
-		dc.b   0
-		dc.b $5C 
-		dc.b  $A
-		dc.b $3F 
-		dc.b $65 
-		dc.b $AE 
-		dc.b   0
-		dc.b $8C 
-		dc.b   0
-		dc.b $74 
-		dc.b  $A
-		dc.b   0
-		dc.b $65 
-		dc.b $B7 
-		dc.b   0
-		dc.b $8C 
-byte_2788C:
-		dc.b 0
-		dc.b $60 
-		dc.b  $A
-		dc.b $38 
-		dc.b $65 
-		dc.b $1E
-		dc.b   0
-		dc.b $68 
-		dc.b   0
-		dc.b $78 
-		dc.b  $A
-		dc.b $39 
-		dc.b $65 
-		dc.b $27 
-		dc.b   0
-		dc.b $68 
-		dc.b   0
-		dc.b $90 
-		dc.b  $A
-		dc.b $3A 
-		dc.b $65 
-		dc.b $30 
-		dc.b   0
-		dc.b $68 
-		dc.b   0
-		dc.b $60 
-		dc.b  $A
-		dc.b $3B 
-		dc.b $65 
-		dc.b $39 
-		dc.b   0
-		dc.b $80 
-		dc.b   0
-		dc.b $78 
-		dc.b  $A
-		dc.b $3C 
-		dc.b $65 
-		dc.b $42 
-		dc.b   0
-		dc.b $80 
-		dc.b   0
-		dc.b $90 
-		dc.b  $A
-		dc.b $3D 
-		dc.b $65 
-		dc.b $4B 
-		dc.b   0
-		dc.b $80 
-		dc.b   0
-		dc.b $90 
-		dc.b  $A
-		dc.b $3E 
-		dc.b $65 
-		dc.b $54 
-		dc.b   0
-		dc.b $98 
-		dc.b   0
-		dc.b $78 
-		dc.b  $A
-		dc.b $3F 
-		dc.b $65 
-		dc.b $5D 
-		dc.b   0
-		dc.b $98 
-		dc.b   0
-		dc.b $90 
-		dc.b  $A
-		dc.b   0
-		dc.b $65 
-		dc.b $66 
-		dc.b   0
-		dc.b $98 
-		dc.b   0
-		dc.b $60 
-		dc.b  $A
-		dc.b $38 
-		dc.b $65 
-		dc.b $6F 
-		dc.b   0
-		dc.b $68 
-		dc.b   0
-		dc.b $78 
-		dc.b  $A
-		dc.b $39 
-		dc.b $65 
-		dc.b $78 
-		dc.b   0
-		dc.b $68 
-		dc.b   0
-		dc.b $90 
-		dc.b  $A
-		dc.b $3A 
-		dc.b $65 
-		dc.b $81 
-		dc.b   0
-		dc.b $68 
-		dc.b   0
-		dc.b $60 
-		dc.b  $A
-		dc.b $3B 
-		dc.b $65 
-		dc.b $8A 
-		dc.b   0
-		dc.b $80 
-		dc.b   0
-		dc.b $78 
-		dc.b  $A
-		dc.b $3C 
-		dc.b $65 
-		dc.b $93 
-		dc.b   0
-		dc.b $80 
-		dc.b   0
-		dc.b $90 
-		dc.b  $A
-		dc.b $3D 
-		dc.b $65 
-		dc.b $9C 
-		dc.b   0
-		dc.b $80 
-		dc.b   0
-		dc.b $90 
-		dc.b  $A
-		dc.b $3E 
-		dc.b $65 
-		dc.b $A5 
-		dc.b   0
-		dc.b $98 
-		dc.b   0
-		dc.b $78 
-		dc.b  $A
-		dc.b $3F 
-		dc.b $65 
-		dc.b $AE 
-		dc.b   0
-		dc.b $98 
-		dc.b   0
-		dc.b $90 
-		dc.b  $A
-		dc.b   0
-		dc.b $65 
-		dc.b $B7 
-		dc.b   0
-		dc.b $98 

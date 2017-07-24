@@ -10,7 +10,9 @@ p_pt_MapPalettes:
 		dc.l pt_MapPalettes
 p_pt_MapData:
 		dc.l pt_MapData
-		include "data\maps\global\maptilesets.asm"		; Map palettes table
-		include "data\maps\global\mappalettes.asm"		; Map palettes table
-		includeIfVanillaRom "data\maps\entries\mapentries.asm"		; Map entries table
+		include "data\maps\global\maptilesets.asm"		; Map Tilesets
+		includeIfVanillaRom "data\maps\global\mappalettes.asm"		; Map palettes
+		includeIfVanillaRom "data\maps\entries\mapentries.asm"		; Map entries
+		alignIfExpandedRom $C7000
+		includeIfExpandedRom "data\maps\global\mappalettes.asm"		; Map palettes
 		align $C8000

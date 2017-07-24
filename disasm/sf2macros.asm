@@ -45,7 +45,19 @@ conditionalPc:	macro
 	else
 	\1 \2,\3
 	endc
-	endm	
+	endm
+	
+alignIfVanillaRom:	macro
+	if (EXPANDED_ROM=0)
+	align \1
+	endc
+	endm
+	
+alignIfExpandedRom:	macro
+	if (EXPANDED_ROM=1)
+	align \1
+	endc
+	endm
 	
 includeIfVanillaRom:	macro
 	if (EXPANDED_ROM=0)
@@ -55,6 +67,18 @@ includeIfVanillaRom:	macro
 	
 incbinIfVanillaRom:	macro
 	if (EXPANDED_ROM=0)
+	incbin \1
+	endc
+	endm
+
+includeIfExpandedRom:	macro
+	if (EXPANDED_ROM=1)
+	include \1
+	endc
+	endm
+	
+incbinIfExpandedRom:	macro
+	if (EXPANDED_ROM=1)
 	incbin \1
 	endc
 	endm

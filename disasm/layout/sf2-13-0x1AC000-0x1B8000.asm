@@ -13,8 +13,5 @@ EnemyData:
 		incbin "data/battles/global/enemydata.bin"
 		includeIfVanillaRom "data\battles\global\spritesetentries.asm"		; Battle sprite sets
 		include "code\gameflow\battle\battle_s13_3.asm"		; Data related to UpgradeUnitIdx function
-plt_EndKiss:
-		incbin "data/graphics/specialscreens/endingkiss/endingkisspalette.bin"
-EndKissPicture:
-		incbin "data/graphics/specialscreens/endingkiss/endingkisstiles.bin"
-		align $4000
+		includeIfVanillaRom "code\specialscreens\endkiss\graphics.asm"		; End Kiss Graphics
+		align $1B8000

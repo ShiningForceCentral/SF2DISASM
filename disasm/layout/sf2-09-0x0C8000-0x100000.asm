@@ -4,5 +4,5 @@
 ; FREE SPACE : 1315 bytes.
 
 
-		include "data\graphics\mapsprites\entries.asm"		; Map sprites
-		align $8000
+		includeIfVanillaRom "data\graphics\mapsprites\entries.asm"		; Map sprites
+		align $100000

@@ -17,6 +17,6 @@ TitleScreenLayoutA:
 		incbin "data/graphics/specialscreens/titlescreen/titlelayoutA.bin"
 TitleScreenLayoutB:
 		incbin "data/graphics/specialscreens/titlescreen/titlelayoutB.bin"
-		include "data\graphics\battles\backgrounds\entries.asm"		; Backgrounds
+		includeIfVanillaRom "data\graphics\battles\backgrounds\entries.asm"		; Backgrounds
 		include "data\graphics\battles\spells\invocations\entries.asm"		; Invocation sprites
-		align $8000
+		align $130000

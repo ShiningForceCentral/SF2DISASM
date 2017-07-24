@@ -6,5 +6,5 @@
 
 p_pt_Portraits:
 		dc.l pt_Portraits
-		include "data\graphics\portraits\entries.asm"		; Portraits
-		align $8000
+		includeIfVanillaRom "data\graphics\portraits\entries.asm"		; Portraits
+		align $1D8000

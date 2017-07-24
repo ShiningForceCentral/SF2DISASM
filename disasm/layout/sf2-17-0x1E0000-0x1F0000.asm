@@ -37,15 +37,8 @@ AllyStartData:
 		incbin "data/stats/allies/allystartdata.bin"
 ClassData:
 		incbin "data/stats/allies/classes/classdata.bin"
-JewelsEndScreenLayout:
-		incbin "data/graphics/specialscreens/endingjewels/endingjewelslayout.bin"
-plt_JewelsEndScreen:
-		incbin "data/graphics/specialscreens/endingjewels/endingjewelspalette.bin"
-JewelsEndScreenTiles:
-		incbin "data/graphics/specialscreens/endingjewels/endingjewelstiles.bin"
-plt_SuspendString:
-		incbin "data/graphics/specialscreens/suspendscreen/suspendstringpalette.bin"
-		includeIfVanillaRom "code\specialscreens\suspend\suspendstring.asm"		; Suspend String
+		includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"		; Jewel End Graphics
+		includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"		; Suspend String Graphics
 unused_BasePalettes:
 		incbin "data/graphics/tech/unusedbasepalettes.bin"
 						; two almost identical palettes which look like UI/sprites palette

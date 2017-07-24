@@ -18,7 +18,7 @@ p_pt_AllyAnimations:
 		dc.l pt_AlliesAnimations
 p_pt_EnemyAnimations:
 		dc.l pt_EnemyAnimations
-		include "data\graphics\battles\battlesprites\allies\entries.asm"		; Ally battlesprites
+		includeIfVanillaRom "data\graphics\battles\battlesprites\allies\entries.asm"		; Ally battlesprites
 StatusAnimationTiles:
 		incbin "data/graphics/tech/statusanimationtiles.bin"
 pt_battlesceneTransitionTiles:
@@ -34,4 +34,4 @@ BoltAnimData_B:
 		incbin "data/graphics/battles/spells/animations/boltanimdatab.bin"
 		include "data\graphics\battles\battlesprites\allies\animations\entries.asm"		; Ally animations
 		include "data\graphics\battles\battlesprites\enemies\animations\entries.asm"		; Enemy animations
-		align $4000
+		align $1AC000
