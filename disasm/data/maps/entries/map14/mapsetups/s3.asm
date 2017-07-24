@@ -12,7 +12,7 @@ ms_map14_ZoneEvents:
 
 sub_58E50:
 		
-		lea     (Map42s0_Blocks+$146-ms_map14_ZoneEvents)(pc), a0
+		lea     cs_58E5C(pc), a0
 		trap    #6
 		trap    #SET_FLAG
 		dc.w $101

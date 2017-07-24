@@ -45,11 +45,10 @@ JewelsEndScreenTiles:
 		incbin "data/graphics/specialscreens/endingjewels/endingjewelstiles.bin"
 plt_SuspendString:
 		incbin "data/graphics/specialscreens/suspendscreen/suspendstringpalette.bin"
-SuspendStringTiles:
-		incbin "data/graphics/specialscreens/suspendscreen/suspendstringtiles.bin"
+		includeIfVanillaRom "code\specialscreens\suspend\suspendstring.asm"		; Suspend String
 unused_BasePalettes:
 		incbin "data/graphics/tech/unusedbasepalettes.bin"
 						; two almost identical palettes which look like UI/sprites palette
 BaseTiles:
 		incbin "data/graphics/tech/basetiles.bin"
-		align $8000
+		align $1F0000

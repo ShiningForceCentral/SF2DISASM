@@ -52,3 +52,9 @@ includeIfVanillaRom:	macro
 	include \1
 	endc
 	endm
+	
+incbinIfVanillaRom:	macro
+	if (EXPANDED_ROM=0)
+	incbin \1
+	endc
+	endm

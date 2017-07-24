@@ -12,7 +12,7 @@ ms_map14_flag1CA_ZoneEvents:
 
 sub_58F54:
 		
-		lea     (Map42s1_Layout+$DC-ms_map14_flag1CA_ZoneEvents)(pc), a0
+		lea     cs_58F5C(pc), a0
 		trap    #6
 		rts
 

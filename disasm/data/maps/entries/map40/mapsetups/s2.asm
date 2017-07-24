@@ -18,7 +18,7 @@ ms_map40_EntityEvents:
 
 sub_53FA2:
 		
-		lea     (Map23s1_Layout+$44C-ms_map40_EntityEvents)(pc), a0
+		lea     cs_53FE0(pc), a0
 		trap    #6
 		rts
 

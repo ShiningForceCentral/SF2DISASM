@@ -8,11 +8,13 @@ ms_map55_InitFunction:
 		
 		trap    #CHECK_FLAG
 		dc.w $3E7
-		beq.s   (Map66s0_Blocks+$6E8-ms_map55_EntityEvents)
+		beq.s   return_5E27A
 		lea     word_5E320(pc), a0
 		trap    #6
-		lea     (Map66s0_Blocks+$7B4-ms_map55_EntityEvents)(pc), a0
+		lea     cs_5E346(pc), a0
 		trap    #6
+return_5E27A:
+		
 		rts
 
 	; End of function ms_map55_InitFunction
