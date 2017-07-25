@@ -8,4 +8,4 @@ p_Icons:
 		dc.l Icons
 Icons:
 		incbin "data/graphics/icons/icons.bin"
-		align $8000
+		align $1E0000

@@ -4,7 +4,7 @@
 ; FREE SPACE : 6681 bytes.
 
 
-p_pt_ScriptBanks:
+p_pt_TextBanks:
 		dc.l pt_TextBanks
 j_InitDecoder:		
 		jmp     InitDecoder(pc) 
@@ -83,7 +83,12 @@ TextBankTreeOffsets:
 		incbin "data/scripting/text/huffmantreeoffsets.bin"
 TextBankTreeData:
 		incbin "data/scripting/text/huffmantrees.bin"
-		include "data\scripting\text\entries.asm"		; Textbank entries
-GameStaff:
-		incbin "data/scripting/gamestaff.bin"
-		align $4000
+		includeIfVanillaRom "data\scripting\text\entries.asm"		; Textbank entries
+		alignIfExpandedRom $30000
+		includeIfExpandedRom "data\graphics\battles\grounds\entries.asm"		; Grounds
+		alignIfExpandedRom $38000
+		includeIfExpandedRom "data\graphics\battles\weapons\entries.asm"		; Weapons
+		includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm"		; Game Staff
+		alignIfExpandedRom $43C00
+		includeIfExpandedRom "data\battles\global\battleneutralentities.asm"		; Battle entities which are not force members or enemies
+		align $44000

@@ -24,11 +24,11 @@ p_WitchEndLayout:
 		dc.l WitchEndLayout
 p_WitchEndTiles:
 		dc.l WitchEndTiles
-		include "data\graphics\battles\grounds\entries.asm"		; Grounds
-		include "data\graphics\battles\weapons\entries.asm"		; Weapons
+		includeIfVanillaRom "data\graphics\battles\grounds\entries.asm"		; Grounds
+		includeIfVanillaRom "data\graphics\battles\weapons\entries.asm"		; Weapons
 plt_WeaponPalettes:
 		incbin "data/graphics/battles/weapons/weaponpalettes.bin"
-		include "data\graphics\battles\spells\entries.asm"		; Spell Graphics
+		includeIfVanillaRom "data\graphics\battles\spells\entries.asm"		; Spell Graphics
 		includeIfVanillaRom "code\specialscreens\witch\graphics.asm"		; Witch Screen
 		includeIfVanillaRom "code\specialscreens\witchend\graphics.asm"		; Witch End Screen
 		align $1C8000

@@ -378,7 +378,7 @@ loc_447FA:
 		jsr     j_CheckFlag
 		bne.w   loc_448BC
 		lea     ((byte_FFB160-$1000000)).w,a1
-		lea     BattleNeutralEntities(pc), a0
+		conditionalPc lea,BattleNeutralEntities,a0
 		clr.w   d1
 		move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 loc_44824:

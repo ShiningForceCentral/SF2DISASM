@@ -19,7 +19,7 @@ TitleScreen:
 		jsr     (SetVdpReg).w   
 		move.w  #$8B00,d0
 		jsr     (SetVdpReg).w   
-		lea     TitleScreenTiles(pc), a0
+		conditionalPc lea,TitleScreenTiles,a0
 		lea     (FF6802_LOADING_SPACE).l,a1
 		jsr     (LoadCompressedData).w
 		lea     (FF6802_LOADING_SPACE).l,a0
@@ -27,11 +27,11 @@ TitleScreen:
 		move.w  #$1000,d0
 		moveq   #2,d1
 		jsr     (sub_10DC).w    
-		lea     TitleScreenLayoutA(pc), a0
+		conditionalPc lea,TitleScreenLayoutA,a0
 		lea     (byte_FFC000).l,a1
 		move.w  #$700,d7
 		jsr     (CopyBytes).w   
-		lea     TitleScreenLayoutA(pc), a0
+		conditionalPc lea,TitleScreenLayoutA,a0
 		lea     (byte_FFC358).l,a1
 		moveq   #$10,d7
 		jsr     (CopyBytes).w   
@@ -45,7 +45,7 @@ TitleScreen:
 		move.w  #$380,d0
 		moveq   #2,d1
 		jsr     (sub_10DC).w    
-		lea     TitleScreenLayoutB(pc), a0
+		conditionalPc lea,TitleScreenLayoutB,a0
 		lea     (byte_FFDCA8).l,a1
 		moveq   #$A,d7
 loc_1000B8:
@@ -86,7 +86,7 @@ loc_100104:
 		addq.l  #2,a0
 		dbf     d6,loc_1000BC
 		dbf     d7,loc_1000B8
-		lea     plt_TitleScreen(pc), a0
+		conditionalPc lea,plt_TitleScreen,a0
 		lea     (PALETTE_1_BIS).l,a1
 		move.w  #$80,d7 
 		jsr     (CopyBytes).w   
@@ -190,7 +190,7 @@ loc_10022C:
 TitleScreenEnd:
 		
 		movem.w d0,-(sp)
-		lea     TitleScreenLayoutA(pc), a0
+		conditionalPc lea,TitleScreenLayoutA,a0
 		ext.l   d0
 		divs.w  #$1E,d0
 		swap    d0

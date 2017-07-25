@@ -1,6 +1,6 @@
 
 ; ASM FILE data\maps\global\maptilesets.asm :
-; 0x6400C..0x9494A : Map palettes table
+; 0x6400C..0x9494A : Map Tilesets
 pt_MapTilesets:
 		dc.l MapTileset000
 		dc.l MapTileset001

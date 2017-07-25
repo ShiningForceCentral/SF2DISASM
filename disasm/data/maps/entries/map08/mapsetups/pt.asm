@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map08\mapsetups\pt.asm :
 ; 0x55FA6..0x55FC4 : 
 ms_map8:
-		dc.l ms_map8_Entities
+		dc.l $56036
 		dc.l ms_map8_EntityEvents
 		dc.l ms_map8_ZoneEvents
 		dc.l ms_map8_AreaDescriptions

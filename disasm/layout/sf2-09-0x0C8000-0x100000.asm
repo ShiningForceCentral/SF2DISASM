@@ -5,4 +5,5 @@
 
 
 		includeIfVanillaRom "data\graphics\mapsprites\entries.asm"		; Map sprites
+		includeIfExpandedRom "data\graphics\battles\spells\entries.asm"		; Spell Graphics
 		align $100000

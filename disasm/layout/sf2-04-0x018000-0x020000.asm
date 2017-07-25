@@ -6,4 +6,4 @@
 
 		include "code\gameflow\battle\battlescenes\battlesceneengine.asm"		; Battlescene engine
 		dc.b $FF
-		align $8000
+		align $20000

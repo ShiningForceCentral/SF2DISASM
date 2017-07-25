@@ -1,6 +1,6 @@
 
 ; ASM FILE data\maps\entries\mapentries.asm :
-; 0x94B8A..0xC7ECC : Map entries table
+; 0x94B8A..0xC7ECC : Map entries
 pt_MapData:
 		dc.l Map00
 		dc.l Map01

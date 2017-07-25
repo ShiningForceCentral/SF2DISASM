@@ -13,4 +13,4 @@ ItemNames:
 		incbin "data/stats/items/itemnames.bin"
 ClassNames:
 		incbin "data/stats/allies/classes/classnames.bin"
-		align $8000
+		align $18000

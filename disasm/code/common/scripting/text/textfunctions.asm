@@ -19,7 +19,7 @@ DisplayText:
 		lsr.w   #6,d0
 		andi.b  #$FC,d0         
 						; string # -> bank pointer offset
-		movea.l (p_pt_ScriptBanks).l,a0
+		movea.l (p_pt_TextBanks).l,a0
 						; load script bank pointer
 		movea.l (a0,d0.w),a0
 		movem.w (sp)+,d0        
