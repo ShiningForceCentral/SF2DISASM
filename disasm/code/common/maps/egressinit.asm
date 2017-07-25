@@ -29,7 +29,7 @@ loc_75FC:
 		moveq   #1,d1
 		moveq   #1,d2
 		moveq   #1,d3
-		lea     SavepointMapCoords(pc), a0
+		conditionalPc lea,SavepointMapCoords,a0
 loc_7608:
 		
 		cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
@@ -50,7 +50,7 @@ loc_7620:
 		dc.w $40                
 						; Raft is unlocked (0x05264)
 		beq.s   loc_764A
-		lea     RaftResetMapCoords(pc), a0
+		conditionalPc lea,RaftResetMapCoords,a0
 						; separate raft egress locations?
 loc_762A:
 		

@@ -41,6 +41,7 @@
 		include "code\gameflow\start\basetiles.asm"		; Base tiles loading
 		include "code\gameflow\special\battletest.asm"		; Battle test functions
 		include "code\common\maps\mapinit_0.asm"		; Map init functions
+		includeIfVanillaRom "code\common\maps\mapcoords.asm"		; Map coords data
 		include "code\specialscreens\witch\witchfunctions.asm"		; Witch functions
 		include "code\gameflow\special\configurationmode.asm"		; Configuration mode function
 		include "code\gameflow\start\regioncheck.asm"		; Region check function

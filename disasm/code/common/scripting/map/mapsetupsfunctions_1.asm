@@ -372,7 +372,7 @@ GetCurrentMapSetup:
 		movem.l d0-d1/a1,-(sp)
 		clr.w   d0
 		move.b  ((CURRENT_MAP-$1000000)).w,d0
-		lea     MapSetups(pc), a1
+		conditionalPc lea,MapSetups,a1
 loc_477AC:
 		
 		cmpi.w  #$FFFF,(a1)

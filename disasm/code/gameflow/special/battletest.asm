@@ -130,7 +130,7 @@ loc_7820:
 		clr.w   d1
 		move.b  d0,d1
 		mulu.w  #7,d0
-		lea     BattleMapCoords(pc), a0
+		conditionalPc lea,BattleMapCoords,a0
 		nop
 		adda.w  d0,a0
 		move.b  (a0)+,d0

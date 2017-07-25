@@ -29,6 +29,6 @@ p_WitchEndTiles:
 plt_WeaponPalettes:
 		incbin "data/graphics/battles/weapons/weaponpalettes.bin"
 		includeIfVanillaRom "data\graphics\battles\spells\entries.asm"		; Spell Graphics
-		includeIfVanillaRom "code\specialscreens\witch\graphics.asm"		; Witch Screen
-		includeIfVanillaRom "code\specialscreens\witchend\graphics.asm"		; Witch End Screen
+		include "code\specialscreens\witch\graphics.asm"		; Witch Screen
+		include "code\specialscreens\witchend\graphics.asm"		; Witch End Screen
 		align $1C8000

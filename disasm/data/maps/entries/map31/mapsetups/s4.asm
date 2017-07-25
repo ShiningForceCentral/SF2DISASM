@@ -86,7 +86,7 @@ sub_5D5BE:
 		bne.s   loc_5D608
 		move.w  #$75,d0 
 		moveq   #0,d1
-		jsr     sub_4F48A
+		jsr     sub_4F48A       
 		btst    #0,d0
 		bne.s   loc_5D5FE
 		trap    #SET_FLAG

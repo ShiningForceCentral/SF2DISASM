@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\maps\mapinit_0.asm :
-; 0x7956..0x7BDE : Map init functions
+; 0x7956..0x7A36 : Map init functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -60,7 +60,7 @@ GetNextBattleOnMap:
 		move.b  ((CURRENT_MAP-$1000000)).w,d0
 loc_79B2:
 		
-		lea     BattleMapCoords(pc), a0
+		conditionalPc lea,BattleMapCoords,a0
 		moveq   #$2C,d6 
 						; set number of maps to iterate
 		clr.w   d7
@@ -113,9 +113,3 @@ loc_7A30:
 
 	; End of function GetNextBattleOnMap
 
-BattleMapCoords:
-		incbin "data/battles/global/battlemapcoords.bin"
-SavepointMapCoords:
-		incbin "data/maps/global/savepointmapcoords.bin"
-RaftResetMapCoords:
-		incbin "data/maps/global/raftresetmapcoords.bin"

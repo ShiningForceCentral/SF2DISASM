@@ -89,6 +89,8 @@ TextBankTreeData:
 		alignIfExpandedRom $38000
 		includeIfExpandedRom "data\graphics\battles\weapons\entries.asm"		; Weapons
 		includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm"		; Game Staff
+		alignIfExpandedRom $43800
+		includeIfExpandedRom "code\common\maps\mapcoords.asm"		; Map coords data
 		alignIfExpandedRom $43C00
 		includeIfExpandedRom "data\battles\global\battleneutralentities.asm"		; Battle entities which are not force members or enemies
 		align $44000

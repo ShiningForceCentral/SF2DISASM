@@ -36,14 +36,6 @@ p_Start:
 						; Reserved
 		dc.l Int_OtherError     
 						; Unitialized Interrrupt
-off_40:
-		dc.l Int_OtherError     
-						; Reserved
-		dc.l Int_OtherError     
-						; Reserved
-		dc.l Int_OtherError     
-						; Reserved
-off_4C:
 		dc.l Int_OtherError     
 						; Reserved
 		dc.l Int_OtherError     
@@ -52,7 +44,12 @@ off_4C:
 						; Reserved
 		dc.l Int_OtherError     
 						; Reserved
-off_5C:
+		dc.l Int_OtherError     
+						; Reserved
+		dc.l Int_OtherError     
+						; Reserved
+		dc.l Int_OtherError     
+						; Reserved
 		dc.l Int_OtherError     
 						; Reserved
 		dc.l Int_OtherError     
@@ -76,7 +73,6 @@ off_5C:
 		dc.l Trap2_SetFlag
 		dc.l Trap3_ClearFlag
 		dc.l Trap4_CheckFlag
-off_94:
 		dc.l Trap5_TextBox
 		dc.l Trap6_TriggerAndExecuteMapScript
 		dc.l Int_ExternalInterrupt
@@ -127,7 +123,6 @@ off_94:
 						; Reserved
 		dc.l Int_OtherError     
 						; Reserved
-off_FC:
 		dc.l Int_OtherError     
 						; Reserved
 aSegaGenesis:
@@ -160,9 +155,9 @@ RomEndAddress:
 						; Ram End Adress
 		dc.l $5241F820          
 						; SRam data
-		dc.l SRAM_START         
+		dc.l $200001            
 						; Sram Start Address
-		dc.l SAVE2_CHARACTER_DATA+$1FC4
+		dc.l $203FFF            
 						; Sram End Address
 		dc.b '            '     
 						; Modem data

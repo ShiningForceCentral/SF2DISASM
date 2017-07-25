@@ -22,7 +22,7 @@ declareRomEnd:	macro
 
 enableSram:	macro
 	if (EXPANDED_ROM=1)
-	move.b #$01,($a130f1).l
+	move.b #$03,($a130f1).l
 	endc
 	endm
 	
@@ -46,6 +46,22 @@ conditionalPc:	macro
 	\1 \2,\3
 	endc
 	endm
+	
+conditionalBsr:	macro
+	if (EXPANDED_ROM=0)
+	bsr.w \1
+	else
+	jsr \1
+	endc
+	endm
+	
+conditionalWordAddr:	macro
+	if (EXPANDED_ROM=0)
+	\1 (\2).w,\3
+	else
+	\1 (\2).l,\3
+	endc
+	endm	
 	
 alignIfVanillaRom:	macro
 	if (EXPANDED_ROM=0)

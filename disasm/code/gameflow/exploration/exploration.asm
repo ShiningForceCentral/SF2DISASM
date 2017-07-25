@@ -1436,7 +1436,7 @@ loc_4262:
 		beq.w   loc_4290        
 						; if we are not in battle branch
 		movem.l a0,-(sp)
-		lea     (BattleMapCoords).w,a0
+		conditionalWordAddr lea,BattleMapCoords,a0
 		mulu.w  #5,d2           
 						; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
 		add.b   1(a0,d2.w),d0

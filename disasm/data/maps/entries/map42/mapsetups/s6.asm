@@ -173,7 +173,7 @@ sub_5FF56:
 		
 		move.w  #$43,d0 
 		moveq   #1,d1
-		jmp     sub_4F48A
+		jmp     sub_4F48A       
 
 	; End of function sub_5FF56
 

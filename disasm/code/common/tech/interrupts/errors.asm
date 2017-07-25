@@ -56,16 +56,14 @@ Int_OtherError:
 
 SaveErrorCode:
 		
-		enableSram
-                move.b  (ERRCODE_BYTE0).l,(SAVED_ERRCODE_BYTE0).l
+		move.b  (ERRCODE_BYTE0).l,(SAVED_ERRCODE_BYTE0).l
 		move.b  (ERRCODE_BYTE1).l,(SAVED_ERRCODE_BYTE1).l
 		move.b  (ERRCODE_BYTE2).l,(SAVED_ERRCODE_BYTE2).l
 		move.b  (ERRCODE_BYTE3).l,(SAVED_ERRCODE_BYTE3).l
 		move.b  (ERRCODE_BYTE4).l,(SAVED_ERRCODE_BYTE4).l
 		move.b  (ERRCODE_BYTE5).l,(SAVED_ERRCODE_BYTE5).l
 		move.b  (ERRCODE_BYTE6).l,(SAVED_ERRCODE_BYTE6).l
-                move.b  ($FFFFFF).l,(SAVED_ERRCODE_BYTE7).l
-		disableSram
+		move.b  ($FFFFFF).l,(SAVED_ERRCODE_BYTE7).l
 
 	; End of function SaveErrorCode
 
