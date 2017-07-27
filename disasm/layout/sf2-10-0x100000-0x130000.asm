@@ -11,5 +11,6 @@ p_pt_InvocationSprites:
 		include "code\specialscreens\title\title.asm"		; Title screen functions
 		includeIfVanillaRom "code\specialscreens\title\graphics.asm"		; Title Screen Graphics
 		includeIfVanillaRom "data\graphics\battles\backgrounds\entries.asm"		; Backgrounds
+		includeIfExpandedRom "data\graphics\portraits\entries.asm"		; Portraits
 		include "data\graphics\battles\spells\invocations\entries.asm"		; Invocation sprites
 		align $130000

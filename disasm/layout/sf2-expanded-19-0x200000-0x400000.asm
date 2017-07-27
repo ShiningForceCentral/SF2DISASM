@@ -18,8 +18,6 @@
 		include "data\graphics\battles\battlesprites\allies\entries.asm"		; Ally battlesprites
 		align $320000
 		include "data\graphics\battles\backgrounds\entries.asm"		; Backgrounds
-		align $360000
-		include "data\graphics\portraits\entries.asm"		; Portraits
 		align $380000
 		include "data\maps\entries\mapentries.asm"		; Map entries table
 		align $400000
