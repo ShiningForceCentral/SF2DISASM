@@ -6,7 +6,7 @@ ms_map10_flag2D2_ZoneEvents:
 		dc.b $17
 		dc.w sub_56FC8-ms_map10_flag2D2_ZoneEvents
 		dc.w $FD00
-		dc.w nullsub_74+$10000-ms_map10_flag2D2_ZoneEvents
+		dc.w (nullsub_74-ms_map10_flag2D2_ZoneEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

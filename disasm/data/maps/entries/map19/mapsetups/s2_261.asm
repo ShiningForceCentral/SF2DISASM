@@ -13,13 +13,13 @@ ms_map19_flag261_EntityEvents:
 		dc.w sub_52FEE-ms_map19_flag261_EntityEvents
 		dc.b $83
 		dc.b 3
-		dc.w sub_52E4E+$10000-ms_map19_flag261_EntityEvents
+		dc.w (sub_52E4E-ms_map19_flag261_EntityEvents) & $FFFF
 		dc.b $85
 		dc.b 1
 		dc.w sub_52FE8-ms_map19_flag261_EntityEvents
 		dc.b $84
 		dc.b 1
-		dc.w sub_52E62+$10000-ms_map19_flag261_EntityEvents
+		dc.w (sub_52E62-ms_map19_flag261_EntityEvents) & $FFFF
 		dc.b $86
 		dc.b 0
 		dc.w sub_52FE2-ms_map19_flag261_EntityEvents
@@ -42,7 +42,7 @@ ms_map19_flag261_EntityEvents:
 		dc.b 1
 		dc.w sub_53016-ms_map19_flag261_EntityEvents
 		dc.w $FD00
-		dc.w return_52F0A+$10000-ms_map19_flag261_EntityEvents
+		dc.w (return_52F0A-ms_map19_flag261_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

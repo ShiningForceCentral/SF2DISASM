@@ -684,7 +684,7 @@ loc_54C8E:
 		dc.w $FFFF
 		move.w  #$74,d0 
 		moveq   #0,d1
-		conditionalBsr sub_4F48A
+		bsr.w   sub_4F48A       
 		btst    #0,d0
 		bne.s   loc_54CBA
 		trap    #SET_FLAG

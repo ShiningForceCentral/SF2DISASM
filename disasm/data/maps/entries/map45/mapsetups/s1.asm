@@ -126,4 +126,4 @@ eas_5FFC8:
 word_60020:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFA8
-		dc.w eas_5FFC8+$10000-word_60020
+		dc.w (eas_5FFC8-word_60020) & $FFFF

@@ -12,7 +12,7 @@ ms_map19_flag1F5_EntityEvents:
 		dc.b 3
 		dc.w sub_52F8A-ms_map19_flag1F5_EntityEvents
 		dc.w $FD00
-		dc.w return_52F0A+$10000-ms_map19_flag1F5_EntityEvents
+		dc.w (return_52F0A-ms_map19_flag1F5_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

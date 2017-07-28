@@ -6,7 +6,7 @@ ms_map14_flag1CA_EntityEvents:
 		dc.b 1
 		dc.w sub_58F44-ms_map14_flag1CA_EntityEvents
 		dc.w $FD01
-		dc.w return_58EE2+$10000-ms_map14_flag1CA_EntityEvents
+		dc.w (return_58EE2-ms_map14_flag1CA_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

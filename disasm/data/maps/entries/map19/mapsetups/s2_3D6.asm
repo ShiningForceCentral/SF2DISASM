@@ -43,21 +43,21 @@ ms_map19_flag3D6_EntityEvents:
 		dc.w sub_62C1C-ms_map19_flag3D6_EntityEvents
 		dc.b $82
 		dc.b 3
-		dc.w sub_62BAC+$10000-ms_map19_flag3D6_EntityEvents
+		dc.w (sub_62BAC-ms_map19_flag3D6_EntityEvents) & $FFFF
 		dc.b $83
 		dc.b 1
-		dc.w sub_62BB2+$10000-ms_map19_flag3D6_EntityEvents
+		dc.w (sub_62BB2-ms_map19_flag3D6_EntityEvents) & $FFFF
 		dc.b $84
 		dc.b 1
-		dc.w sub_62BB8+$10000-ms_map19_flag3D6_EntityEvents
+		dc.w (sub_62BB8-ms_map19_flag3D6_EntityEvents) & $FFFF
 		dc.b $85
 		dc.b 0
-		dc.w sub_62BBE+$10000-ms_map19_flag3D6_EntityEvents
+		dc.w (sub_62BBE-ms_map19_flag3D6_EntityEvents) & $FFFF
 		dc.b $86
 		dc.b 0
-		dc.w sub_62BC4+$10000-ms_map19_flag3D6_EntityEvents
+		dc.w (sub_62BC4-ms_map19_flag3D6_EntityEvents) & $FFFF
 		dc.w $FD00
-		dc.w nullsub_124+$10000-ms_map19_flag3D6_EntityEvents
+		dc.w (nullsub_124-ms_map19_flag3D6_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

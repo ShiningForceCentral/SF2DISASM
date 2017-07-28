@@ -112,7 +112,7 @@ j_ClearEntities:
 		include "code\common\scripting\map\mapfunctions.asm"		; Map functions
 		include "code\common\scripting\map\followersfunctions.asm"		; Followers functions
 		include "code\common\scripting\entity\entityfunctions_1.asm"		; Entity functions
-		includeIfVanillaRom "data\battles\global\battleneutralentities.asm"		; Battle entities which are not force members or enemies
+		include "data\battles\global\battleneutralentities.asm"		; Battle entities which are not force members or enemies
 		include "data\scripting\entity\eas_battleneutralentities.asm"		; Entity actscripts for battle entities which are not force members or enemies
 		include "code\common\scripting\entity\entityfunctions_2.asm"		; Entity functions
 		include "data\scripting\entity\eas_main.asm"		; Main entity actscripts
@@ -157,5 +157,6 @@ j_ClearEntities:
 		include data\battles\entries\battlecutscenesstorage.asm
 		include "code\common\stats\items\itemfunctions_s7_0.asm"		; Unidentified item functions
 		include "data\maps\global\mapsetups.asm"		; Map setups table
+		;includeIfVanillaRom data\maps\global\mapsetupsstorage.asm
 		include data\maps\global\mapsetupsstorage.asm
 		align $64000

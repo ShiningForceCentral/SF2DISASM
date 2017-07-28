@@ -65,73 +65,73 @@ rjt_cutsceneScriptCommands:
 		dc.w csc11_promptYesNoForStoryFlow-rjt_cutsceneScriptCommands
 		dc.w csc12_executeContextMenu-rjt_cutsceneScriptCommands
 		dc.w csc13_setStoryFlag-rjt_cutsceneScriptCommands
-		dc.w csc14_setEntityActscriptManual+$10000-rjt_cutsceneScriptCommands
-		dc.w csc15_setEntityActscript+$10000-rjt_cutsceneScriptCommands
-		dc.w csc16_waitUntilEntityIdle+$10000-rjt_cutsceneScriptCommands
-		dc.w csc17_setEntityPosAndFacingWithFlash+$10000-rjt_cutsceneScriptCommands
-		dc.w csc18_flashEntityWhite+$10000-rjt_cutsceneScriptCommands
-		dc.w csc19_setEntityPosAndFacing+$10000-rjt_cutsceneScriptCommands
-		dc.w csc1A_setEntitySprite+$10000-rjt_cutsceneScriptCommands
-		dc.w csc1B_startEntityAnim+$10000-rjt_cutsceneScriptCommands
-		dc.w csc1C_stopEntityAnim+$10000-rjt_cutsceneScriptCommands
-		dc.w csc1D_showPortrait+$10000-rjt_cutsceneScriptCommands
-		dc.w csc1E_hidePortrait+$10000-rjt_cutsceneScriptCommands
-		dc.w csc1F_declareForceMemberDead+$10000-rjt_cutsceneScriptCommands
-		dc.w csc20_addForceMembersOnMapToList+$10000-rjt_cutsceneScriptCommands
-		dc.w csc21_removeForceMemberFromList+$10000-rjt_cutsceneScriptCommands
-		dc.w csc22_animateEntityFadeInOrOut+$10000-rjt_cutsceneScriptCommands
-		dc.w csc23_setEntityFacing+$10000-rjt_cutsceneScriptCommands
-		dc.w csc24_setCameraTargetEntity+$10000-rjt_cutsceneScriptCommands
-		dc.w csc25_cloneEntity+$10000-rjt_cutsceneScriptCommands
-		dc.w csc26_entityNodHead+$10000-rjt_cutsceneScriptCommands
-		dc.w csc27_entityShakeHead+$10000-rjt_cutsceneScriptCommands
-		dc.w csc28_moveEntityNextToPlayer+$10000-rjt_cutsceneScriptCommands
-		dc.w csc29_setEntityDest+$10000-rjt_cutsceneScriptCommands
-		dc.w csc2A_entityShiver+$10000-rjt_cutsceneScriptCommands
-		dc.w csc2B_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc2C_followEntity+$10000-rjt_cutsceneScriptCommands
-		dc.w csc2D_moveEntity+$10000-rjt_cutsceneScriptCommands
-		dc.w csc2E_hideEntity+$10000-rjt_cutsceneScriptCommands
-		dc.w csc2F_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc30_removeEntityShadow+$10000-rjt_cutsceneScriptCommands
-		dc.w csc31_moveEntityAboveEntity+$10000-rjt_cutsceneScriptCommands
-		dc.w csc32_setCameraDestInTiles+$10000-rjt_cutsceneScriptCommands
-		dc.w csc33_setQuakeAmount+$10000-rjt_cutsceneScriptCommands
-		dc.w csc34_setBlocks+$10000-rjt_cutsceneScriptCommands
-		dc.w csc35_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc36_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc37_loadMapAndFadeIn+$10000-rjt_cutsceneScriptCommands
+		dc.w (csc14_setEntityActscriptManual-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc15_setEntityActscript-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc16_waitUntilEntityIdle-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc17_setEntityPosAndFacingWithFlash-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc18_flashEntityWhite-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc19_setEntityPosAndFacing-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc1A_setEntitySprite-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc1B_startEntityAnim-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc1C_stopEntityAnim-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc1D_showPortrait-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc1E_hidePortrait-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc1F_declareForceMemberDead-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc20_addForceMembersOnMapToList-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc21_removeForceMemberFromList-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc22_animateEntityFadeInOrOut-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc23_setEntityFacing-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc24_setCameraTargetEntity-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc25_cloneEntity-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc26_entityNodHead-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc27_entityShakeHead-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc28_moveEntityNextToPlayer-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc29_setEntityDest-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc2A_entityShiver-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc2B_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc2C_followEntity-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc2D_moveEntity-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc2E_hideEntity-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc2F_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc30_removeEntityShadow-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc31_moveEntityAboveEntity-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc32_setCameraDestInTiles-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc33_setQuakeAmount-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc34_setBlocks-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc35_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc36_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc37_loadMapAndFadeIn-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
-		dc.w csc39_fadeInFromBlack+$10000-rjt_cutsceneScriptCommands
-		dc.w csc3A_fadeOutToBlack+$10000-rjt_cutsceneScriptCommands
-		dc.w csc3B_slowFadeInFromBlack+$10000-rjt_cutsceneScriptCommands
-		dc.w csc3C_slowFadeOutToBlack+$10000-rjt_cutsceneScriptCommands
-		dc.w csc3D_tintMap+$10000-rjt_cutsceneScriptCommands
-		dc.w csc3E_FlickerOnce+$10000-rjt_cutsceneScriptCommands
-		dc.w csc3F_fadeMapOutToWhite+$10000-rjt_cutsceneScriptCommands
-		dc.w csc40_fadeMapInFromWhite+$10000-rjt_cutsceneScriptCommands
-		dc.w csc41_flashScreenWhite+$10000-rjt_cutsceneScriptCommands
-		dc.w csc42_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc43_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc44_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc45_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc46_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc47_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc48_loadMap+$10000-rjt_cutsceneScriptCommands
-		dc.w csc49_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc4A_fadeInFromBlackHalf+$10000-rjt_cutsceneScriptCommands
-		dc.w csc4B_fadeOutToBlackHalf+$10000-rjt_cutsceneScriptCommands
-		dc.w csc_doNothing-rjt_cutsceneScriptCommands
-		dc.w csc_doNothing-rjt_cutsceneScriptCommands
+		dc.w (csc39_fadeInFromBlack-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc3A_fadeOutToBlack-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc3B_slowFadeInFromBlack-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc3C_slowFadeOutToBlack-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc3D_tintMap-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc3E_FlickerOnce-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc3F_fadeMapOutToWhite-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc40_fadeMapInFromWhite-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc41_flashScreenWhite-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc42_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc43_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc44_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc45_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc46_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc47_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc48_loadMap-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc49_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc4A_fadeInFromBlackHalf-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc4B_fadeOutToBlackHalf-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
-		dc.w csc50_setEntitySize+$10000-rjt_cutsceneScriptCommands
-		dc.w csc51_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc52_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc53_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc54_+$10000-rjt_cutsceneScriptCommands
-		dc.w csc55_resetCharacterBattleStats+$10000-rjt_cutsceneScriptCommands
-		dc.w csc56_+$10000-rjt_cutsceneScriptCommands
+		dc.w csc_doNothing-rjt_cutsceneScriptCommands
+		dc.w csc_doNothing-rjt_cutsceneScriptCommands
+		dc.w (csc50_setEntitySize-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc51_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc52_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc53_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc54_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc55_resetCharacterBattleStats-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc56_-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands

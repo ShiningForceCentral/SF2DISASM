@@ -24,7 +24,7 @@ eas_LyingRight:
 word_4498E:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFF2
-		dc.w eas_Motionless+$10000-word_4498E
+		dc.w (eas_Motionless-word_4498E) & $FFFF
 eas_WhirlsInWater:
 		dc.w $20                
 						; 0020 SET ENTITY IN WATER $FFFF
@@ -68,4 +68,4 @@ word_4499A:
 word_449C2:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFD8
-		dc.w word_4499A+$10000-word_449C2
+		dc.w (word_4499A-word_449C2) & $FFFF

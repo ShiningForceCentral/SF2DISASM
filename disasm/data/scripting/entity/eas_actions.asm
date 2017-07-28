@@ -309,7 +309,7 @@ eas_RotateRight:
 word_45FEC:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFD0
-		dc.w eas_RotateRight+$10000-word_45FEC
+		dc.w (eas_RotateRight-word_45FEC) & $FFFF
 eas_RotateRightHighSpeed:
 		dc.w $14                
 						; 0014 SET ANIM COUNTER $0
@@ -352,7 +352,7 @@ eas_RotateRightHighSpeed:
 word_46020:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFD0
-		dc.w eas_RotateRightHighSpeed+$10000-word_46020
+		dc.w (eas_RotateRightHighSpeed-word_46020) & $FFFF
 eas_Die:
 		dc.w $14                
 						; 0014 SET ANIM COUNTER $0
@@ -775,7 +775,7 @@ word_4622E:
 word_46242:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFEC
-		dc.w word_4622E+$10000-word_46242
+		dc.w (word_4622E-word_46242) & $FFFF
 eas_46246:
 		dc.w $10                
 						; 0010 SET SPEED X=$0 Y=$0
@@ -899,7 +899,7 @@ word_462AE:
 word_462DA:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFA8
-		dc.w word_46282+$10000-word_462DA
+		dc.w (word_46282-word_462DA) & $FFFF
 		dc.w $23                
 						; 0023 SEND SOUND COMMAND SFX_JUMP
 		dc.w $57
@@ -1302,7 +1302,7 @@ eas_464D6:
 word_464DE:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFE0
-		dc.w eas_464BE+$10000-word_464DE
+		dc.w (eas_464BE-word_464DE) & $FFFF
 eas_464E2:
 		dc.w 4                  
 						; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$1
@@ -1334,4 +1334,4 @@ eas_464FA:
 word_46502:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFE0
-		dc.w eas_464E2+$10000-word_46502
+		dc.w (eas_464E2-word_46502) & $FFFF

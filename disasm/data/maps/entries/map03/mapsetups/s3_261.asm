@@ -9,7 +9,7 @@ ms_map3_flag261_ZoneEvents:
 		dc.b $FF
 		dc.w sub_50EF6-ms_map3_flag261_ZoneEvents
 		dc.w $FD00
-		dc.w return_50EE8+$10000-ms_map3_flag261_ZoneEvents
+		dc.w (return_50EE8-ms_map3_flag261_ZoneEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

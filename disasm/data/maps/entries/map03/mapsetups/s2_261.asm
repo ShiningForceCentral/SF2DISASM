@@ -84,7 +84,7 @@ ms_map3_flag261_EntityEvents:
 		dc.b 3
 		dc.w sub_511BC-ms_map3_flag261_EntityEvents
 		dc.w $FD00
-		dc.w return_5105A+$10000-ms_map3_flag261_EntityEvents
+		dc.w (return_5105A-ms_map3_flag261_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

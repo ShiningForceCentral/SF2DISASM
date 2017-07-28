@@ -1761,10 +1761,10 @@ sub_10CB0:
 	; End of function sub_10CB0
 
 rjt_10CBE:
-		dc.w sub_10800+$10000-rjt_10CBE
-		dc.w sub_10820+$10000-rjt_10CBE
-		dc.w sub_1084A+$10000-rjt_10CBE
-		dc.w sub_10920+$10000-rjt_10CBE
+		dc.w (sub_10800-rjt_10CBE) & $FFFF
+		dc.w (sub_10820-rjt_10CBE) & $FFFF
+		dc.w (sub_1084A-rjt_10CBE) & $FFFF
+		dc.w (sub_10920-rjt_10CBE) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

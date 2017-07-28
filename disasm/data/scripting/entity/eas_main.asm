@@ -110,7 +110,7 @@ word_44E5A:
 word_44E60:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFFA
-		dc.w word_44E5A+$10000-word_44E60
+		dc.w (word_44E5A-word_44E60) & $FFFF
 eas_Raft:
 		dc.w $18                
 						; 0018 SET 1C BIT 7 $FFFF
@@ -144,7 +144,7 @@ word_44E80:
 word_44E86:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFFA
-		dc.w word_44E80+$10000-word_44E86
+		dc.w (word_44E80-word_44E86) & $FFFF
 eas_Caravan:
 		dc.w $18                
 						; 0018 SET 1C BIT 7 $FFFF
@@ -178,7 +178,7 @@ word_44EA6:
 word_44EAC:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFFA
-		dc.w word_44EA6+$10000-word_44EAC
+		dc.w (word_44EA6-word_44EAC) & $FFFF
 eas_UnitCursorSpeedx2:
 		dc.w $18                
 						; 0018 SET 1C BIT 7 $0
@@ -210,7 +210,7 @@ word_44ECC:
 word_44ED0:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFFC
-		dc.w word_44ECC+$10000-word_44ED0
+		dc.w (word_44ECC-word_44ED0) & $FFFF
 eas_UnitCursor:
 		dc.w $18                
 						; 0018 SET 1C BIT 7 $0
@@ -239,7 +239,7 @@ word_44EEC:
 word_44EF2:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFFA
-		dc.w word_44EEC+$10000-word_44EF2
+		dc.w (word_44EEC-word_44EF2) & $FFFF
 eas_44EF6:
 		dc.w $18                
 						; 0018 SET 1C BIT 7 $0
@@ -266,7 +266,7 @@ eas_44EF6:
 word_44F12:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFDA
-		dc.w word_44EEC+$10000-word_44F12
+		dc.w (word_44EEC-word_44F12) & $FFFF
 eas_44F16:
 		dc.w $18                
 						; 0018 SET 1C BIT 7 $0
@@ -287,7 +287,7 @@ eas_44F16:
 word_44F2A:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFC2
-		dc.w word_44EEC+$10000-word_44F2A
+		dc.w (word_44EEC-word_44F2A) & $FFFF
 eas_Follower1:
 		dc.w $10                
 						; 0010 SET SPEED X=$20 Y=$20
@@ -322,7 +322,7 @@ word_44F4A:
 word_44F54:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFF6
-		dc.w word_44F4A+$10000-word_44F54
+		dc.w (word_44F4A-word_44F54) & $FFFF
 eas_Follower2:
 		dc.w $10                
 						; 0010 SET SPEED X=$20 Y=$20
@@ -357,7 +357,7 @@ word_44F74:
 word_44F7E:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFF6
-		dc.w word_44F74+$10000-word_44F7E
+		dc.w (word_44F74-word_44F7E) & $FFFF
 eas_Follower3:
 		dc.w $10                
 						; 0010 SET SPEED X=$20 Y=$20
@@ -392,7 +392,7 @@ word_44F9E:
 word_44FA8:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFF6
-		dc.w word_44F9E+$10000-word_44FA8
+		dc.w (word_44F9E-word_44FA8) & $FFFF
 eas_OverworldFollower2:
 		dc.w $10                
 						; 0010 SET SPEED X=$20 Y=$20
@@ -429,7 +429,7 @@ word_44FC8:
 word_44FD4:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFF4
-		dc.w word_44FC8+$10000-word_44FD4
+		dc.w (word_44FC8-word_44FD4) & $FFFF
 eas_OverworldFollower3:
 		dc.w $10                
 						; 0010 SET SPEED X=$20 Y=$20
@@ -462,7 +462,7 @@ word_44FF4:
 word_44FFC:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFF8
-		dc.w word_44FF4+$10000-word_44FFC
+		dc.w (word_44FF4-word_44FFC) & $FFFF
 eas_Follower4:
 		dc.w $10                
 						; 0010 SET SPEED X=$20 Y=$20
@@ -497,7 +497,7 @@ word_4501C:
 word_45026:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFF6
-		dc.w word_4501C+$10000-word_45026
+		dc.w (word_4501C-word_45026) & $FFFF
 eas_OverworldFollower5:
 		dc.w $10                
 						; 0010 SET SPEED X=$20 Y=$20
@@ -532,7 +532,7 @@ word_45046:
 word_45050:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFF6
-		dc.w word_45046+$10000-word_45050
+		dc.w (word_45046-word_45050) & $FFFF
 eas_Walking:
 		dc.w 0                  
 						; 0000 WAIT value $1E
@@ -573,7 +573,7 @@ word_45074:
 word_45082:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFF2
-		dc.w word_45074+$10000-word_45082
+		dc.w (word_45074-word_45082) & $FFFF
 word_45086:
 		dc.w $11                
 						; 0011  $102
@@ -655,7 +655,7 @@ eas_4509E:
 word_450E6:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFA0
-		dc.w word_45086+$10000-word_450E6
+		dc.w (word_45086-word_450E6) & $FFFF
 word_450EA:
 		dc.w $11                
 						; 0011  $102
@@ -736,7 +736,7 @@ word_450EA:
 word_4514A:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFA0
-		dc.w word_450EA+$10000-word_4514A
+		dc.w (word_450EA-word_4514A) & $FFFF
 		dc.w $14                
 						; 0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -882,4 +882,4 @@ eas_Idle:
 word_45200:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFFC
-		dc.w eas_Idle+$10000-word_45200
+		dc.w (eas_Idle-word_45200) & $FFFF

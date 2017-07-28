@@ -6,7 +6,7 @@ ms_map14_flag1CA_ZoneEvents:
 		dc.b $F
 		dc.w sub_58F54-ms_map14_flag1CA_ZoneEvents
 		dc.w $FD00
-		dc.w return_58E5A+$10000-ms_map14_flag1CA_ZoneEvents
+		dc.w (return_58E5A-ms_map14_flag1CA_ZoneEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

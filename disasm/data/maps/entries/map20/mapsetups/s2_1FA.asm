@@ -3,4 +3,4 @@
 ; 0x53928..0x5392C : 
 ms_map20_flag1FA_EntityEvents:
 		dc.w $FD00
-		dc.w return_53814+$10000-ms_map20_flag1FA_EntityEvents
+		dc.w (return_53814-ms_map20_flag1FA_EntityEvents) & $FFFF

@@ -31,10 +31,10 @@ ms_map3_flag1FA_EntityEvents:
 		dc.w sub_51244-ms_map3_flag1FA_EntityEvents
 		dc.b $89
 		dc.b 3
-		dc.w sub_51170+$10000-ms_map3_flag1FA_EntityEvents
+		dc.w (sub_51170-ms_map3_flag1FA_EntityEvents) & $FFFF
 		dc.b $8A
 		dc.b 3
-		dc.w sub_510FA+$10000-ms_map3_flag1FA_EntityEvents
+		dc.w (sub_510FA-ms_map3_flag1FA_EntityEvents) & $FFFF
 		dc.b $8B
 		dc.b 0
 		dc.w sub_51210-ms_map3_flag1FA_EntityEvents
@@ -46,12 +46,12 @@ ms_map3_flag1FA_EntityEvents:
 		dc.w sub_51250-ms_map3_flag1FA_EntityEvents
 		dc.b $8E
 		dc.b 3
-		dc.w sub_511BC+$10000-ms_map3_flag1FA_EntityEvents
+		dc.w (sub_511BC-ms_map3_flag1FA_EntityEvents) & $FFFF
 		dc.b 6
 		dc.b 0
 		dc.w sub_51256-ms_map3_flag1FA_EntityEvents
 		dc.w $FD00
-		dc.w return_5105A+$10000-ms_map3_flag1FA_EntityEvents
+		dc.w (return_5105A-ms_map3_flag1FA_EntityEvents) & $FFFF
 		dc.b $FF
 		dc.b $FF
 

@@ -24,7 +24,7 @@ ms_map20_flag1F5_EntityEvents:
 		dc.b 0
 		dc.w sub_538A0-ms_map20_flag1F5_EntityEvents
 		dc.w $FD00
-		dc.w return_53814+$10000-ms_map20_flag1F5_EntityEvents
+		dc.w (return_53814-ms_map20_flag1F5_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

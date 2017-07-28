@@ -13,9 +13,9 @@ ms_map23_flag2FA_EntityEvents:
 		dc.w sub_59BC8-ms_map23_flag2FA_EntityEvents
 		dc.b $83
 		dc.b 1
-		dc.w sub_59B9E+$10000-ms_map23_flag2FA_EntityEvents
+		dc.w (sub_59B9E-ms_map23_flag2FA_EntityEvents) & $FFFF
 		dc.w $FD00
-		dc.w nullsub_129+$10000-ms_map23_flag2FA_EntityEvents
+		dc.w (nullsub_129-ms_map23_flag2FA_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

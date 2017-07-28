@@ -4,7 +4,7 @@
 ms_map15_flag212_EntityEvents:
 		dc.b $80
 		dc.b 1
-		dc.w sub_5CF1E+$10000-ms_map15_flag212_EntityEvents
+		dc.w (sub_5CF1E-ms_map15_flag212_EntityEvents) & $FFFF
 		dc.b $81
 		dc.b 1
 		dc.w sub_5CFCA-ms_map15_flag212_EntityEvents
@@ -25,15 +25,15 @@ ms_map15_flag212_EntityEvents:
 		dc.w sub_5CFF4-ms_map15_flag212_EntityEvents
 		dc.b $87
 		dc.b 1
-		dc.w sub_5CF78+$10000-ms_map15_flag212_EntityEvents
+		dc.w (sub_5CF78-ms_map15_flag212_EntityEvents) & $FFFF
 		dc.b $88
 		dc.b 1
-		dc.w sub_5CF86+$10000-ms_map15_flag212_EntityEvents
+		dc.w (sub_5CF86-ms_map15_flag212_EntityEvents) & $FFFF
 		dc.b $89
 		dc.b 3
-		dc.w sub_5CF8E+$10000-ms_map15_flag212_EntityEvents
+		dc.w (sub_5CF8E-ms_map15_flag212_EntityEvents) & $FFFF
 		dc.w $FD00
-		dc.w nullsub_117+$10000-ms_map15_flag212_EntityEvents
+		dc.w (nullsub_117-ms_map15_flag212_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

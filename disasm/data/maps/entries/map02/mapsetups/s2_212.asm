@@ -22,15 +22,15 @@ ms_map2_flag212_EntityEvents:
 		dc.w sub_5EA1A-ms_map2_flag212_EntityEvents
 		dc.b $86
 		dc.b 1
-		dc.w sub_5E9A4+$10000-ms_map2_flag212_EntityEvents
+		dc.w (sub_5E9A4-ms_map2_flag212_EntityEvents) & $FFFF
 		dc.b $87
 		dc.b 1
-		dc.w sub_5E9B2+$10000-ms_map2_flag212_EntityEvents
+		dc.w (sub_5E9B2-ms_map2_flag212_EntityEvents) & $FFFF
 		dc.b $88
 		dc.b 1
-		dc.w sub_5E9C0+$10000-ms_map2_flag212_EntityEvents
+		dc.w (sub_5E9C0-ms_map2_flag212_EntityEvents) & $FFFF
 		dc.w $FD00
-		dc.w nullsub_154+$10000-ms_map2_flag212_EntityEvents
+		dc.w (nullsub_154-ms_map2_flag212_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

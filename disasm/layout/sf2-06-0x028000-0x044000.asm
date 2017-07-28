@@ -92,5 +92,4 @@ TextBankTreeData:
 		alignIfExpandedRom $43800
 		includeIfExpandedRom "code\common\maps\mapcoords.asm"		; Map coords data
 		alignIfExpandedRom $43C00
-		includeIfExpandedRom "data\battles\global\battleneutralentities.asm"		; Battle entities which are not force members or enemies
 		align $44000

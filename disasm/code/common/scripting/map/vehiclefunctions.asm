@@ -51,7 +51,7 @@ eas_452A4:
 word_452AE:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FF4E
-		dc.w eas_Idle+$10000-word_452AE
+		dc.w (eas_Idle-word_452AE) & $FFFF
 eas_452B2:
 		dc.w $E                 
 						; 000E  $1 $0 $0
@@ -121,7 +121,7 @@ eas_452BA:
 word_45304:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FEF8
-		dc.w eas_Idle+$10000-word_45304
+		dc.w (eas_Idle-word_45304) & $FFFF
 eas_45308:
 		dc.w $17                
 						; 0017 SET ENTITY SPRITE $3E
@@ -134,7 +134,7 @@ eas_45308:
 word_45312:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FEEA
-		dc.w eas_Idle+$10000-word_45312
+		dc.w (eas_Idle-word_45312) & $FFFF
 word_45316:
 		dc.w $E                 
 						; 000E  $0 $0 $0
@@ -144,7 +144,7 @@ word_45316:
 word_4531E:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FF9C
-		dc.w eas_452BA+$10000-word_4531E
+		dc.w (eas_452BA-word_4531E) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -182,7 +182,7 @@ eas_45360:
 word_45364:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FE98
-		dc.w eas_Idle+$10000-word_45364
+		dc.w (eas_Idle-word_45364) & $FFFF
 word_45368:
 		dc.w $D                 
 						; 000D CLONE POSITION FROM ENTITY $1
@@ -259,7 +259,7 @@ eas_4536C:
 word_453C2:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FE3A
-		dc.w eas_Idle+$10000-word_453C2
+		dc.w (eas_Idle-word_453C2) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -327,7 +327,7 @@ word_45414:
 word_45422:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FDDA
-		dc.w eas_Idle+$10000-word_45422
+		dc.w (eas_Idle-word_45422) & $FFFF
 eas_45426:
 		dc.w $17                
 						; 0017 SET ENTITY SPRITE $3D
@@ -340,7 +340,7 @@ eas_45426:
 word_45430:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FDCC
-		dc.w eas_Idle+$10000-word_45430
+		dc.w (eas_Idle-word_45430) & $FFFF
 word_45434:
 		dc.w $E                 
 						; 000E  $0 $0 $0
@@ -350,7 +350,7 @@ word_45434:
 word_4543C:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FFD8
-		dc.w word_45414+$10000-word_4543C
+		dc.w (word_45414-word_4543C) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -401,7 +401,7 @@ eas_4548C:
 word_45498:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FD64
-		dc.w eas_Idle+$10000-word_45498
+		dc.w (eas_Idle-word_45498) & $FFFF
 word_4549C:
 		dc.w $180
 word_4549E:
@@ -564,7 +564,7 @@ eas_ShrinkIn:
 word_455A8:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FC54
-		dc.w eas_Idle+$10000-word_455A8
+		dc.w (eas_Idle-word_455A8) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -660,4 +660,4 @@ eas_GrowOut:
 word_45630:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $FBCC
-		dc.w eas_Idle+$10000-word_45630
+		dc.w (eas_Idle-word_45630) & $FFFF

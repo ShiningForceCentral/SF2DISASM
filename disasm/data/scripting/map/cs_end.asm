@@ -759,7 +759,7 @@ eas_493A2:
 word_493CA:
 		dc.w $30                
 						; 0030 BRANCH TO CURRENT ADDR. + $BA74
-		dc.w eas_ControlledCharacter+$10000-word_493CA
+		dc.w (eas_ControlledCharacter-word_493CA) & $FFFF
 		dc.w 4                  
 						; 0004 SET TEXT INDEX 142
 		dc.w $142

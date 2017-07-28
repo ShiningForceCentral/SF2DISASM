@@ -3,4 +3,4 @@
 ; 0x52442..0x52446 : 
 ms_map17_flag1F9_ZoneEvents:
 		dc.w $FD00
-		dc.w nullsub_79+$10000-ms_map17_flag1F9_ZoneEvents
+		dc.w (nullsub_79-ms_map17_flag1F9_ZoneEvents) & $FFFF

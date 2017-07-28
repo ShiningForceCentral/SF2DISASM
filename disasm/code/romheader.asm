@@ -123,6 +123,7 @@ p_Start:
 						; Reserved
 		dc.l Int_OtherError     
 						; Reserved
+off_FC:
 		dc.l Int_OtherError     
 						; Reserved
 aSegaGenesis:
