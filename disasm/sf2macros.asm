@@ -3,6 +3,8 @@
 ; input: length to align to, value to use as padding (default is $FF)
 ; ---------------------------------------------------------------------------
 
+	include "sf2cutscenemacros.asm"
+
 align:	macro
 	if (narg=1)
 	dcb.b \1-(*%\1),$FF
@@ -11,6 +13,22 @@ align:	macro
 	endc
 	endm
 	
+headerRegion:	macro
+	if (EXPANDED_ROM=0)
+	dc.b 'U               '
+	else
+	dc.b 'JUE             '
+	endc
+	endm
+	
+regionCheck:	macro
+	if (EXPANDED_ROM=0)
+	bsr.w   CheckRegion
+	else
+	nop
+	nop
+	endc
+	endm
 	
 declareRomEnd:	macro
 	if (EXPANDED_ROM=0)
