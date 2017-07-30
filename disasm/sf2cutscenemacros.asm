@@ -161,11 +161,11 @@ csc10:	macro
 	dc.w \2
 	endm
 	
-setFlag:	macro ;alias
+setF:	macro ;alias
 	csc10 \1,$FFFF
 	endm
 	
-clearFlag:	macro ;alias
+clearF:	macro ;alias
 	csc10 \1,0
 	endm
 	
@@ -173,7 +173,7 @@ csc11:	macro
 	dc.w $11
 	endm
 	
-yesNoPrompt:	macro ;alias
+yesNo:	macro ;alias
 	csc11
 	endm
 	
@@ -188,67 +188,147 @@ contextualMenu:	macro ;alias
 	
 csc13:	macro
 	dc.w $13
+	dc.w \1
 	endm
 	
 setStoryFlag:	macro ;alias
-	csc13 \1-$190
+	csc13 \1
 	endm
 	
 csc14:	macro
 	dc.w $14
+	dc.b \1
+	dc.b \2
 	endm
+	
+customActscript:	macro ;alias
+	csc14 \1,\2
+	endm	
 	
 csc15:	macro
 	dc.w $15
+	dc.b \1
+	dc.b \2
+	dc.l \3
 	endm
+	
+setActscript:	macro ;alias
+	csc15 \1,\2,\3
+	endm	
 	
 csc16:	macro
 	dc.w $16
+	dc.w \1
+	endm
+	
+waitIdle:	macro ;alias
+	csc16 \1
 	endm
 	
 csc17:	macro
 	dc.w $17
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	endm
+	
+entityPosDirFlash:	macro ;alias
+	csc17 \1,\2,\3,\4
 	endm
 	
 csc18:	macro
 	dc.w $18
+	dc.w \1
+	dc.w \2
 	endm
+	
+entityFlashWhite:	macro ;alias
+	csc18 \1,\2
+	endm	
 	
 csc19:	macro
 	dc.w $19
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	endm
+
+entityPosDir:	macro ;alias
+	csc19 \1,\2,\3,\4
 	endm
 	
 csc1A:	macro
 	dc.w $1A
+	dc.w \1
+	dc.w \2
+	endm
+
+entitySprite:	macro ;alias
+	csc1A \1,\2
 	endm
 	
 csc1B:	macro
 	dc.w $1B
+	dc.w \1
 	endm
+	
+startEntity:	macro ;alias
+	csc1B \1
+	endm	
 	
 csc1C:	macro
 	dc.w $1C
+	dc.w \1
 	endm
+	
+stopEntity:	macro ;alias
+	csc1C \1
+	endm		
 	
 csc1D:	macro
 	dc.w $1D
+	dc.w \1
 	endm
+	
+showPortrait:	macro ;alias
+	csc1D \1
+	endm		
 	
 csc1E:	macro
 	dc.w $1E
 	endm
 	
+hidePortrait:	macro ;alias
+	csc1E
+	endm	
+	
 csc1F:	macro
 	dc.w $1F
+	dc.w \1
 	endm
+	
+declareForceMemberDead:	macro ;alias
+	csc1F \1
+	endm	
 	
 csc20:	macro
 	dc.w $20
 	endm
 	
+declareForceMembersDead:	macro ;alias
+	csc20
+	endm	
+	
 csc21:	macro
 	dc.w $21
+	dc.w \1
 	endm
+	
+revive:	macro ;alias
+	csc21 \1
+	endm	
 	
 csc22:	macro
 	dc.w $22
