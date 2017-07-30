@@ -157,18 +157,41 @@ jumpIfAlive:	macro ;alias
 	
 csc10:	macro
 	dc.w $10
+	dc.w \1
+	dc.w \2
+	endm
+	
+setFlag:	macro ;alias
+	csc10 \1,$FFFF
+	endm
+	
+clearFlag:	macro ;alias
+	csc10 \1,0
 	endm
 	
 csc11:	macro
 	dc.w $11
 	endm
 	
+yesNoPrompt:	macro ;alias
+	csc11
+	endm
+	
 csc12:	macro
 	dc.w $12
+	dc.w \1
+	endm
+	
+contextualMenu:	macro ;alias
+	csc12 \1
 	endm
 	
 csc13:	macro
 	dc.w $13
+	endm
+	
+setStoryFlag:	macro ;alias
+	csc13 \1-$190
 	endm
 	
 csc14:	macro
