@@ -332,122 +332,179 @@ revive:	macro ;alias
 	
 csc22:	macro
 	dc.w $22
+	dc.w \1
+	dc.w \2
 	endm
+		
+animEntityFadeInOut:	macro ;alias
+	csc22 \1,\2
+	endm	
 	
 csc23:	macro
 	dc.w $23
+	dc.b \1
+	dc.b \2
 	endm
+		
+setEntityDir:	macro ;alias
+	csc23 \1,\2
+	endm	
 	
 csc24:	macro
 	dc.w $24
+	dc.w \1
 	endm
+		
+setCameraEntity:	macro ;alias
+	csc24 \1
+	endm	
 	
 csc25:	macro
 	dc.w $25
+	dc.w \1
+	dc.w \2
 	endm
+		
+cloneEntity:	macro ;alias
+	csc25 \1,\2
+	endm	
 	
 csc26:	macro
 	dc.w $26
+	dc.w \1
 	endm
+	
+entityNod:	macro ;alias
+	csc26 \1
+	endm	
 	
 csc27:	macro
 	dc.w $27
+	dc.w \1
 	endm
 	
+entityShakeHead:	macro ;alias
+	csc27 \1
+	endm
+		
 csc28:	macro
 	dc.w $28
+	dc.w \1
+	dc.w \2
 	endm
+		
+moveEntityNextToPlayer:	macro ;alias
+	csc28 \1,\2
+	endm	
 	
 csc29:	macro
 	dc.w $29
+	dc.w \1
+	dc.w \2
+	dc.w \3
 	endm
+		
+setEntityDest:	macro ;alias
+	csc29 \1,\2,\3
+	endm	
 	
 csc2A:	macro
 	dc.w $2A
+	dc.w \1
 	endm
+		
+entityShiver:	macro ;alias
+	csc2A \1
+	endm	
 	
 csc2B:	macro
 	dc.w $2B
-	endm
+	dc.w \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.b \5
+	endm	
 	
 csc2C:	macro
 	dc.w $2C
+	dc.w \1
+	dc.w \2
+	dc.w \3
+	endm
+		
+followEntity:	macro ;alias
+	csc2C \1,\2,\3
 	endm
 	
 csc2D:	macro
 	dc.w $2D
+	dc.w \1
+	dc.w \2
+	dc.w \3
+	dc.w \4
+	endm
+		
+moveEntity:	macro ;alias
+	csc2D \1,\2,\3,\4
 	endm
 	
 csc2D:	macro
 	dc.w $2D
+	dc.w \1
 	endm
 	
-csc2D:	macro
-	dc.w $2D
+csc2E:	macro
+	dc.w $2E
+	dc.w \1
 	endm
-	
-csc2D:	macro
-	dc.w $2D
-	endm
-	
-csc2D:	macro
-	dc.w $2D
-	endm
-	
-csc2D:	macro
-	dc.w $2D
-	endm
-	
-csc2D:	macro
-	dc.w $2D
-	endm
-	
-csc2D:	macro
-	dc.w $2D
-	endm
-	
-csc2D:	macro
-	dc.w $2D
-	endm
-	
-csc2D:	macro
-	dc.w $2D
-	endm
-	
-csc2D:	macro
-	dc.w $2D
-	endm
-	
-csc2D:	macro
-	dc.w $2D
-	endm
-	
-csc2D:	macro
-	dc.w $2D
-	endm
-	
-csc2D:	macro
-	dc.w $2D
+		
+hideEntity:	macro ;alias
+	csc2E \1
 	endm
 	
 csc2F:	macro
 	dc.w $2F
+	dc.w \1
+	dc.w \2
 	endm
 	
 csc30:	macro
 	dc.w $30
+	dc.w \1
+	endm
+		
+removeEntityShadow:	macro ;alias
+	csc30 \1
 	endm
 	
 csc31:	macro
 	dc.w $31
+	dc.w \1
+	dc.w \2
+	endm
+		
+moveEntityAboveAnother:	macro ;alias
+	csc31 \1,\2
 	endm
 	
 csc32:	macro
 	dc.w $32
+	dc.w \1
+	dc.w \2
+	endm
+		
+setCamDest:	macro ;alias
+	csc32 \1,\2
 	endm
 	
 csc33:	macro
 	dc.w $33
+	dc.w \1
+	endm
+		
+setQuakeAmount:	macro ;alias
+	csc33 \1
 	endm
 	
 csc34:	macro
