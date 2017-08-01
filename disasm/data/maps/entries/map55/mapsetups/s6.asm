@@ -9,7 +9,7 @@ ms_map55_InitFunction:
 		trap    #CHECK_FLAG
 		dc.w $3E7
 		beq.s   return_5E27A
-		lea     word_5E320(pc), a0
+		lea     byte_5E320(pc), a0
 		trap    #6
 		lea     cs_5E346(pc), a0
 		trap    #6
@@ -19,57 +19,34 @@ return_5E27A:
 
 	; End of function ms_map55_InitFunction
 
-word_5E27C:
-		dc.w $15                
+byte_5E27C:
+		setActscript $0,$FF,eas_5E2C4
 						; 0015 SET ACTSCRIPT 0 FF 5E2C4
-		dc.b 0
-		dc.b $FF
-		dc.l eas_5E2C4          
-		dc.w $15                
+		setActscript $7,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $7,$FF,eas_5E2C4
 						; 0015 SET ACTSCRIPT 7 FF 5E2C4
-		dc.b 7
-		dc.b $FF
-		dc.l eas_5E2C4          
-		dc.w $15                
+		setActscript $1F,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $1F,$FF,eas_5E2C4
 						; 0015 SET ACTSCRIPT 1F FF 5E2C4
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_5E2C4          
-		dc.w $D                 
-						; 000D JUMP IF CLEAR FLAG 4C 5E2BC : Zynk is a follower
-		dc.w $4C
-		dc.l cs_5E2BC           
-		dc.w $15                
+		jumpIfFlagClear $4C,cs_5E2BC
+						; Zynk is a follower
+		setActscript $1A,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1A FF 460CE
-		dc.b $1A
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $1A,$FF,eas_5E2C4
 						; 0015 SET ACTSCRIPT 1A FF 5E2C4
-		dc.b $1A
-		dc.b $FF
-		dc.l eas_5E2C4          
 cs_5E2BC:
-		dc.w 7                  
+		mapSysEvent $251D0802   
 						; 0007 EXECUTE MAP SYSTEM EVENT 251D0802
-		dc.l $251D0802
-		dc.b $FF                
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-		dc.b $FF
 eas_5E2C4:
-		dc.w $1A                
+		dc.b   0                
 						; 001A SET 1C BIT 5 $0
-		dc.w 0
+		dc.b $1A
+		dc.b   0
+		dc.b   0
 		dc.w 5                  
 						; 0005 MOVE TO ABSOLUTE DEST X=$7 Y=$7
 		dc.w 7
@@ -138,28 +115,20 @@ eas_5E2C4:
 		dc.w $34                
 						; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-word_5E320:
-		dc.w $48                
+byte_5E320:
+		mapLoad $4B,$8,$E       
 						; 0048 LOAD MAP 4B 8 E
-		dc.w $4B
-		dc.w 8
-		dc.w $E
-		dc.w $42                
-						; 0042 RELATED TO LOADING MAP ENTITIES 5E33E
-		dc.l byte_5E33E
-		dc.w $15                
+		loadMapEntities ce_5E33E
+						; Entity data to figure out and format
+		setActscript $0,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w 5                  
+		playSound MUSIC_MAIN_THEME
 						; 0005 PLAY SOUND MUSIC_MAIN_THEME
-		dc.w 1
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-byte_5E33E:
+ce_5E33E:
 		dc.b 0
 		dc.b $C
 		dc.w $13
@@ -167,53 +136,29 @@ byte_5E33E:
 		dc.b 3
 		dc.w $FFFF
 cs_5E346:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR D2B : "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
-		dc.w $D2B
-		dc.w $15                
+		textCursor $D2B         
+						; Initial text line $D2B : "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
+		setActscript $0,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $2D                
+		moveEntity $0,$FF,$2,$1 
 						; 002D MOVE ENTITY 0 FF 2 1
-		dc.b 0
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.b 2
-		dc.b 1
-		dc.b $80
-		dc.b $80
-		dc.b $80                
+		moreMove $2,$1
+		endMove $8080
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
+		setEntityDir $7,$0      
 						; 0023 SET ENTITY FACING 7 0
-		dc.b 7
-		dc.b 0
-		dc.w $23                
+		setEntityDir $1A,$0     
 						; 0023 SET ENTITY FACING 1A 0
-		dc.b $1A
-		dc.b 0
-		dc.w $23                
+		setEntityDir $1F,$0     
 						; 0023 SET ENTITY FACING 1F 0
-		dc.b $1F
-		dc.b 0
-		dc.w $23                
+		setEntityDir $0,$0      
 						; 0023 SET ENTITY FACING 0 0
-		dc.b 0
-		dc.b 0
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1F : "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
-		dc.w $1F
-		dc.w $23                
+		nextText $0,$1F         
+						; "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
+		setEntityDir $1F,$2     
 						; 0023 SET ENTITY FACING 1F 2
-		dc.b $1F
-		dc.b 2
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "Anyway, we have to go to{N}Arc Valley.{N}{LEADER}, let's go.{W1}"
-		dc.w $1F
-		dc.b $FF                
+		nextSingleText $0,$1F   
+						; "Anyway, we have to go to{N}Arc Valley.{N}{LEADER}, let's go.{W1}"
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-		dc.b $FF

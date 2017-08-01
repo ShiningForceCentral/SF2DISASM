@@ -18,104 +18,63 @@ return_5DA26:
 	; End of function ms_map36_InitFunction
 
 cs_5DA28:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR CFB : "You defeated Zalbard and{N}saved Mitula.{W2}"
-		dc.w $CFB
-		dc.w $52                
-						; 0052 RELATED TO TWO ENTITIES 7 83
-		dc.w 7
-		dc.w $83
-		dc.w $52                
-						; 0052 RELATED TO TWO ENTITIES 1F 83
-		dc.w $1F
-		dc.w $83
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 16 : "You defeated Zalbard and{N}saved Mitula.{W2}"
-		dc.w $16
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 16 : "You are trustworthy{N}soldiers, so...would you{N}do me a favor?{W2}"
-		dc.w $16
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 16 : "Please go to Moun with me.{W1}"
-		dc.w $16
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "What are you going to do{N}there?{W1}"
-		dc.w $1F
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 16 : "I believe there are{N}survivors in Moun.{W2}"
-		dc.w $16
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 16 : "I would like to save them.{W1}"
-		dc.w $16
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 7 : "We have to go through Moun{N}to get to Nazka, right?{W2}"
-		dc.w 7
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "{LEADER}, let's go{N}together.{W1}"
-		dc.w 7
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 16 : "Alright.{W1}"
-		dc.w $16
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{LEADER} decides to take{N}{NAME;22} with him.{W1}"
-		dc.w $FFFF
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 16 : "Thank you very much.{W1}"
-		dc.w $16
-		dc.w $2C                
+		textCursor $CFB         
+						; Initial text line $CFB : "You defeated Zalbard and{N}saved Mitula.{W2}"
+		csc52 $7,$83            
+						; 0052 UNKNOWN, RELATED TO TWO ENTITIES
+		csc52 $1F,$83           
+						; 0052 UNKNOWN, RELATED TO TWO ENTITIES
+		nextText $0,$16         
+						; "You defeated Zalbard and{N}saved Mitula.{W2}"
+		nextText $0,$16         
+						; "You are trustworthy{N}soldiers, so...would you{N}do me a favor?{W2}"
+		nextSingleText $0,$16   
+						; "Please go to Moun with me.{W1}"
+		nextSingleText $0,$1F   
+						; "What are you going to do{N}there?{W1}"
+		nextText $0,$16         
+						; "I believe there are{N}survivors in Moun.{W2}"
+		nextSingleText $0,$16   
+						; "I would like to save them.{W1}"
+		nextText $0,$7          
+						; "We have to go through Moun{N}to get to Nazka, right?{W2}"
+		nextSingleText $0,$7    
+						; "{LEADER}, let's go{N}together.{W1}"
+		nextSingleText $0,$16   
+						; "Alright.{W1}"
+		nextSingleText $FF,$FF  
+						; "{LEADER} decides to take{N}{NAME;22} with him.{W1}"
+		nextSingleText $0,$16   
+						; "Thank you very much.{W1}"
+		followEntity $16,$1F,$2 
 						; 002C FOLLOW ENTITY 16 1F 2
-		dc.w $16
-		dc.w $1F
-		dc.w 2
-		dc.w $13                
-						; 0013 SET STORY FLAG 1F : Battle 31 unlocked
-		dc.w $1F
-		dc.w $13                
-						; 0013 SET STORY FLAG 21 : Battle 33 unlocked
-		dc.w $21
-		dc.w $13                
-						; 0013 SET STORY FLAG 22 : Battle 34 unlocked
-		dc.w $22
-		dc.w $FFFF              
+		setStoryFlag $1F        
+						; Battle 31 unlocked
+		setStoryFlag $21        
+						; Battle 33 unlocked
+		setStoryFlag $22        
+						; Battle 34 unlocked
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_5DA7A:
-		dc.w $24                
+		setCameraEntity $83     
 						; 0024 SET ENTITY FOLLOWED BY CAMERA 83
-		dc.w $83
-		dc.w $29                
+		setEntityDest $0,$4,$17 
 						; 0029 SET ENTITY DEST 0 4 17
-		dc.w 0
-		dc.w 4
-		dc.w $17
-		dc.w $23                
+		setEntityDir $0,$1      
 						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.w $2D                
+		moveEntity $83,$FF,$0,$2
 						; 002D MOVE ENTITY 83 FF 0 2
-		dc.b $83
-		dc.b $FF
-		dc.b 0
-		dc.b 2
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $83,$FF,$3,$1
 						; 002D MOVE ENTITY 83 FF 3 1
-		dc.b $83
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		endMove $8080
+		setEntityDir $0,$0      
 						; 0023 SET ENTITY FACING 0 0
-		dc.b 0
-		dc.b 0
-		dc.b $80                
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w $14                
+		customActscript $83,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 83
-		dc.b $83
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$10 Y=$10
 		dc.b $10
@@ -124,30 +83,20 @@ cs_5DA7A:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $83,$FF,$0,$2
 						; 002D MOVE ENTITY 83 FF 0 2
-		dc.b $83
-		dc.b $FF
-		dc.b 0
-		dc.b 2
-		dc.w $8080
-		dc.w $27                
+		endMove $8080
+		entityShakeHead $83     
 						; 0027 MAKE ENTITY SHAKE HEAD 83
-		dc.w $83
-		dc.w $2A                
+		entityShiver $83        
 						; 002A MAKE ENTITY SHIVER 83
-		dc.w $83
-		dc.b $80                
+		csWait $78              
 						; WAIT 78
-		dc.b $78
-		dc.w $2A                
+		entityShiver $83        
 						; 002A MAKE ENTITY SHIVER 83
-		dc.w $83
-		dc.w $14                
+		customActscript $83,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 83
-		dc.b $83
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$8 Y=$8
 		dc.b 8
@@ -156,16 +105,11 @@ cs_5DA7A:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $83,$FF,$0,$1
 						; 002D MOVE ENTITY 83 FF 0 1
-		dc.b $83
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w $2A                
+		endMove $8080
+		entityShiver $83        
 						; 002A MAKE ENTITY SHIVER 83
-		dc.w $83
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

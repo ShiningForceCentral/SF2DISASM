@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map20\mapsetups\s2_1F5.asm :
 ; 0x53830..0x538B4 : 
 ms_map20_flag1F5_EntityEvents:
-		dc.b $80
-		dc.b 0
+		dc.b $80 
+		dc.b   0
 		dc.w sub_53850-ms_map20_flag1F5_EntityEvents
 		dc.b $81
 		dc.b 0

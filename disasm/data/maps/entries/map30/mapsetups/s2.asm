@@ -75,17 +75,16 @@ sub_5A240:
 	; End of function sub_5A240
 
 cs_5A256:
-		dc.w $2A                
+		entityShiver $82        
 						; 002A MAKE ENTITY SHIVER 82
-		dc.w $82
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A25C:
 		
-		trap    #CHECK_FLAG
+		trap    #1
 		dc.w $2F9
 		bne.s   loc_5A26C
 		trap    #TEXTBOX

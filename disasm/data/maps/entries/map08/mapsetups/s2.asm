@@ -231,84 +231,50 @@ return_56144:
 	; End of function sub_56138
 
 cs_56146:
-		dc.w $15                
+		setActscript $8,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 8 FF 460CE
-		dc.b 8
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $8,$FF,eas_461AA
 						; 0015 SET ACTSCRIPT 8 FF 461AA
-		dc.b 8
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.w $52                
-						; 0052 RELATED TO TWO ENTITIES 8 0
-		dc.w 8
-		dc.w 0
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 543 : "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"
-		dc.w $543
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8 : "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"
-		dc.w 8
-		dc.w 8                  
+		csc52 $8,$0             
+						; 0052 UNKNOWN, RELATED TO TWO ENTITIES
+		textCursor $543         
+						; Initial text line $543 : "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"
+		nextSingleText $0,$8    
+						; "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"
+		join $8                 
 						; 0008 JOIN FORCE 8
-		dc.w 8
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8 : "Now, let's go!{W1}"
-		dc.w 8
-		dc.w $56                
-						; 0056 SOMETHING WITH AN ENTITY 8
-		dc.w 8
-		dc.w $FFFF              
+		nextSingleText $0,$8    
+						; "Now, let's go!{W1}"
+		csc56 $8                
+						; 0056 UNKNOWN, SOMETHING WITH AN ENTITY
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_56172:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 534 : "To Mt. Volcano?{W1}"
-		dc.w $534
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 87 : "To Mt. Volcano?{W1}"
-		dc.w $87
-		dc.w $15                
+		textCursor $534         
+						; Initial text line $534 : "To Mt. Volcano?{W1}"
+		nextSingleText $0,$87   
+						; "To Mt. Volcano?{W1}"
+		setActscript $87,$0,eas_Jump
 						; 0015 SET ACTSCRIPT 87 0 45E44
-		dc.b $87
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $86,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 86 FF 45E44
-		dc.b $86
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $23                
+		setEntityDir $86,$0     
 						; 0023 SET ENTITY FACING 86 0
-		dc.b $86
-		dc.b 0
-		dc.w $23                
+		setEntityDir $87,$2     
 						; 0023 SET ENTITY FACING 87 2
-		dc.b $87
-		dc.b 2
-		dc.b $80                
+		csWait $39              
 						; WAIT 39
-		dc.b $39
-		dc.w $23                
+		setEntityDir $86,$3     
 						; 0023 SET ENTITY FACING 86 3
-		dc.b $86
-		dc.b 3
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 86 : "Go east and then go north{N}along the river.  A cave is{N}there.{W2}"
-		dc.w $86
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 86 : "But, I don't recommend you{N}enter such a terrible place!{W1}"
-		dc.w $86
-		dc.w $23                
+		nextText $0,$86         
+						; "Go east and then go north{N}along the river.  A cave is{N}there.{W2}"
+		nextSingleText $0,$86   
+						; "But, I don't recommend you{N}enter such a terrible place!{W1}"
+		setEntityDir $87,$3     
 						; 0023 SET ENTITY FACING 87 3
-		dc.b $87
-		dc.b 3
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 87 : "We call it the Cave of{N}Darkness.  You can't see{N}anything inside.{W2}"
-		dc.w $87
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 87 : "The cave is the only way to{N}get to Mt. Volcano.{W1}"
-		dc.w $87
-		dc.w $FFFF              
+		nextText $0,$87         
+						; "We call it the Cave of{N}Darkness.  You can't see{N}anything inside.{W2}"
+		nextSingleText $0,$87   
+						; "The cave is the only way to{N}get to Mt. Volcano.{W1}"
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

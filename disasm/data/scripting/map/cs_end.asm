@@ -2,23 +2,11 @@
 ; ASM FILE data\scripting\map\cs_end.asm :
 ; 0x49058..0x494BC : End cutscene
 EndCutscene:
-		dc.w $48                
-						; 0048 LOAD MAP 14 13 21
-		dc.w $14
-		dc.w $13
-		dc.w $21
-		dc.w $42                
-						; 0042 RELATED TO LOADING MAP ENTITIES 492CC
-		dc.l word_492CC
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 0
-		dc.b 0
-		dc.b $FF
+		mapLoad $14,$13,$21
+		loadMapEntities ce_492CC
+						; Entity data to figure out and format
+		setActscript $0,$FF,eas_Init
+		customActscript $0,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$14 Y=$14
 		dc.b $14
@@ -27,12 +15,9 @@ EndCutscene:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
+		customActscript $80,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$14 Y=$14
 		dc.b $14
@@ -41,12 +26,9 @@ EndCutscene:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 81
-		dc.b $81
-		dc.b $FF
+		customActscript $81,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$14 Y=$14
 		dc.b $14
@@ -55,12 +37,9 @@ EndCutscene:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 82
-		dc.b $82
-		dc.b $FF
+		customActscript $82,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$14 Y=$14
 		dc.b $14
@@ -69,12 +48,9 @@ EndCutscene:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 83
-		dc.b $83
-		dc.b $FF
+		customActscript $83,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$14 Y=$14
 		dc.b $14
@@ -83,498 +59,145 @@ EndCutscene:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $1A                
-						; 001A SET ENTITY SPRITE B AA
-		dc.w $B
-		dc.w $AA
-		dc.w $39                
-						; 0039 FADE IN FROM BLACK
-		dc.b $80                
-						; WAIT 3C
-		dc.b $3C
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 0 19 23 0
-		dc.b 0
-		dc.b $19
-		dc.b $23
-		dc.b 0
-		dc.w $2D                
-						; 002D MOVE ENTITY 0 FF 7 1
-		dc.b 0
-		dc.b $FF
-		dc.b 7
-		dc.b 1
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $2D                
-						; 002D MOVE ENTITY 0 FF 3 4
-		dc.b 0
-		dc.b $FF
-		dc.b 3
-		dc.b 4
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 2
-		dc.b 0
-		dc.b 2
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 FF 0 1
-		dc.b $80
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 81 FF 0 1
-		dc.b $81
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 3C
-		dc.b $3C
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 80
-		dc.w $80
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 81
-		dc.w $81
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 0
-		dc.w 0
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $2D                
-						; 002D MOVE ENTITY 0 FF 1 4
-		dc.b 0
-		dc.b $FF
-		dc.b 1
-		dc.b 4
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 2
-		dc.b 0
-		dc.b 2
-		dc.b $80                
-						; WAIT 50
-		dc.b $50
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 83 19 23 0
-		dc.b $83
-		dc.b $19
-		dc.b $23
-		dc.b 0
-		dc.w $2D                
-						; 002D MOVE ENTITY 83 FF 7 1
-		dc.b $83
-		dc.b $FF
-		dc.b 7
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 0
-		dc.w 0
-		dc.b $80                
-						; WAIT 3C
-		dc.b $3C
-		dc.w $2D                
-						; 002D MOVE ENTITY 0 0 3 4
-		dc.b 0
-		dc.b 0
-		dc.b 3
-		dc.b 4
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 83 FF 0 1
-		dc.b $83
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.b 3
-		dc.b 3
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 2
-		dc.b 0
-		dc.b 2
-		dc.w $23                
-						; 0023 SET ENTITY FACING 83 2
-		dc.b $83
-		dc.b 2
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 0 45E44
-		dc.b $80
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 0 45E44
-		dc.b $81
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 82 FF 45E44
-		dc.b $82
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $23                
-						; 0023 SET ENTITY FACING 82 3
-		dc.b $82
-		dc.b 3
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 1
-		dc.b $81
-		dc.b 1
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 82
-		dc.w $82
-		dc.b $80                
-						; WAIT 3C
-		dc.b $3C
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 1
-		dc.b $80
-		dc.b 1
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 3
-		dc.b $81
-		dc.b 3
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 80
-		dc.w $80
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 0
-		dc.b $81
-		dc.b 0
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 0
-		dc.b $80
-		dc.b 0
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $23                
-						; 0023 SET ENTITY FACING 83 3
-		dc.b $83
-		dc.b 3
-		dc.b $80                
-						; WAIT 3C
-		dc.b $3C
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 2
-		dc.b 0
-		dc.b 2
-		dc.b $80                
-						; WAIT A
-		dc.b $A
-		dc.w $23                
-						; 0023 SET ENTITY FACING 83 2
-		dc.b $83
-		dc.b 2
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $2D                
-						; 002D MOVE ENTITY 0 0 2 4
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 4
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 83 FF 2 4
-		dc.b $83
-		dc.b $FF
-		dc.b 2
-		dc.b 4
-		dc.w $8080
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 81
-		dc.w $81
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 83
-		dc.w $83
-		dc.b $80                
-						; WAIT 3C
-		dc.b $3C
-		dc.w $23                
-						; 0023 SET ENTITY FACING 82 1
-		dc.b $82
-		dc.b 1
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 82 FF 45E44
-		dc.b $82
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $2D                
-						; 002D MOVE ENTITY 82 FF 1 1
-		dc.b $82
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 82 3
-		dc.b $82
-		dc.b 3
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING B 17 25 3
-		dc.b $B
-		dc.b $17
-		dc.b $25
-		dc.b 3
-		dc.w $2D                
-						; 002D MOVE ENTITY B 0 3 1
-		dc.b $B
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.b 2
-		dc.b 2
-		dc.b 3
-		dc.b 2
-		dc.w $8080
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 2 17 25 3
-		dc.b 2
-		dc.b $17
-		dc.b $25
-		dc.b 3
-		dc.w $2D                
-						; 002D MOVE ENTITY 2 0 3 1
-		dc.b 2
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.b 2
-		dc.b 2
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING A 17 25 3
-		dc.b $A
-		dc.b $17
-		dc.b $25
-		dc.b 3
-		dc.w $2D                
-						; 002D MOVE ENTITY A 0 3 1
-		dc.b $A
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.b 2
-		dc.b 2
-		dc.w $8080
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 3 17 25 3
-		dc.b 3
-		dc.b $17
-		dc.b $25
-		dc.b 3
-		dc.w $2D                
-						; 002D MOVE ENTITY 3 0 3 1
-		dc.b 3
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.b 2
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 7 17 25 3
-		dc.b 7
-		dc.b $17
-		dc.b $25
-		dc.b 3
-		dc.w $2D                
-						; 002D MOVE ENTITY 7 0 3 1
-		dc.b 7
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING B 0
-		dc.b $B
-		dc.b 0
-		dc.b $80                
-						; WAIT A
-		dc.b $A
-		dc.w $23                
-						; 0023 SET ENTITY FACING 2 0
-		dc.b 2
-		dc.b 0
-		dc.b $80                
-						; WAIT A
-		dc.b $A
-		dc.w $23                
-						; 0023 SET ENTITY FACING A 3
-		dc.b $A
-		dc.b 3
-		dc.b $80                
-						; WAIT A
-		dc.b $A
-		dc.w $23                
-						; 0023 SET ENTITY FACING 3 3
-		dc.b 3
-		dc.b 3
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.w $23                
-						; 0023 SET ENTITY FACING 83 1
-		dc.b $83
-		dc.b 1
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 2
-		dc.b 0
-		dc.b 2
-		dc.w $23                
-						; 0023 SET ENTITY FACING 83 2
-		dc.b $83
-		dc.b 2
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.w $23                
-						; 0023 SET ENTITY FACING 83 1
-		dc.b $83
-		dc.b 1
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $15                
-						; 0015 SET ACTSCRIPT B 0 45E44
-		dc.b $B
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 2 0 45E44
-		dc.b 2
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT A 0 45E44
-		dc.b $A
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 3 0 45E44
-		dc.b 3
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 0 45E44
-		dc.b 7
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $23                
-						; 0023 SET ENTITY FACING 83 2
-		dc.b $83
-		dc.b 2
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 80
-		dc.w $80
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 2
-		dc.b 0
-		dc.b 2
-		dc.b $80                
-						; WAIT 32
-		dc.b $32
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 0
-		dc.w 0
-		dc.w $15                
-						; 0015 SET ACTSCRIPT B 0 45E44
-		dc.b $B
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 2 0 45E44
-		dc.b 2
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT A 0 45E44
-		dc.b $A
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 3 0 45E44
-		dc.b 3
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 0 45E44
-		dc.b 7
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $3A                
-						; 003A FADE OUT TO BLACK
-		dc.b $FF                
+		entitySprite $B,$AA
+		fadeInB
+		csWait $3C
+		entityPosDir $0,$19,$23,$0
+		moveEntity $0,$FF,$7,$1
+		moreMove $0,$1
+		endMove $8080
+		csWait $1E
+		moveEntity $0,$FF,$3,$4
+		endMove $8080
+		setEntityDir $0,$2
+		moveEntity $80,$FF,$0,$1
+		endMove $8080
+		moveEntity $81,$FF,$0,$1
+		endMove $8080
+		csWait $3C
+		entityNod $80
+		entityNod $81
+		entityNod $0
+		csWait $28
+		moveEntity $0,$FF,$1,$4
+		endMove $8080
+		setEntityDir $0,$2
+		csWait $50
+		entityPosDir $83,$19,$23,$0
+		moveEntity $83,$FF,$7,$1
+		endMove $8080
+		csWait $28
+		entityNod $0
+		csWait $3C
+		moveEntity $0,$0,$3,$4
+		endMove $8080
+		moveEntity $83,$FF,$0,$1
+		moreMove $3,$3
+		endMove $8080
+		setEntityDir $0,$2
+		setEntityDir $83,$2
+		setActscript $80,$0,eas_Jump
+		setActscript $81,$0,eas_Jump
+		setActscript $82,$FF,eas_Jump
+		csWait $28
+		setEntityDir $82,$3
+		csWait $1E
+		setEntityDir $81,$1
+		entityNod $82
+		csWait $3C
+		setEntityDir $80,$1
+		csWait $1E
+		setEntityDir $81,$3
+		entityNod $80
+		csWait $28
+		setEntityDir $81,$0
+		csWait $14
+		setEntityDir $80,$0
+		csWait $28
+		setEntityDir $0,$1
+		csWait $14
+		setEntityDir $83,$3
+		csWait $3C
+		setEntityDir $0,$2
+		csWait $A
+		setEntityDir $83,$2
+		csWait $1E
+		moveEntity $0,$0,$2,$4
+		endMove $8080
+		moveEntity $83,$FF,$2,$4
+		endMove $8080
+		entityNod $81
+		entityNod $83
+		csWait $3C
+		setEntityDir $82,$1
+		csWait $1E
+		setActscript $82,$FF,eas_Jump
+		csWait $1E
+		moveEntity $82,$FF,$1,$1
+		endMove $8080
+		setEntityDir $82,$3
+		entityPosDir $B,$17,$25,$3
+		moveEntity $B,$0,$3,$1
+		moreMove $2,$2
+		moreMove $3,$2
+		endMove $8080
+		csWait $14
+		entityPosDir $2,$17,$25,$3
+		moveEntity $2,$0,$3,$1
+		moreMove $2,$2
+		moreMove $3,$1
+		endMove $8080
+		csWait $14
+		entityPosDir $A,$17,$25,$3
+		moveEntity $A,$0,$3,$1
+		moreMove $2,$2
+		endMove $8080
+		csWait $14
+		entityPosDir $3,$17,$25,$3
+		moveEntity $3,$0,$3,$1
+		moreMove $2,$1
+		endMove $8080
+		csWait $14
+		entityPosDir $7,$17,$25,$3
+		moveEntity $7,$0,$3,$1
+		endMove $8080
+		setEntityDir $B,$0
+		csWait $A
+		setEntityDir $2,$0
+		csWait $A
+		setEntityDir $A,$3
+		csWait $A
+		setEntityDir $3,$3
+		setEntityDir $0,$1
+		setEntityDir $83,$1
+		csWait $1E
+		setEntityDir $0,$2
+		setEntityDir $83,$2
+		csWait $1E
+		setEntityDir $0,$1
+		setEntityDir $83,$1
+		csWait $28
+		setActscript $B,$0,eas_Jump
+		setActscript $2,$0,eas_Jump
+		setActscript $A,$0,eas_Jump
+		setActscript $3,$0,eas_Jump
+		setActscript $7,$0,eas_Jump
+		setEntityDir $83,$2
+		entityNod $80
+		setEntityDir $0,$2
+		csWait $32
+		entityNod $0
+		setActscript $B,$0,eas_Jump
+		setActscript $2,$0,eas_Jump
+		setActscript $A,$0,eas_Jump
+		setActscript $3,$0,eas_Jump
+		setActscript $7,$0,eas_Jump
+		fadeOutB
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-		dc.b $FF
-word_492CC:
+ce_492CC:
 		dc.w $3F
 		dc.w $3F
 		dc.w 3
@@ -625,102 +248,47 @@ word_492CC:
 		dc.l eas_Init           
 		dc.w $FFFF
 dms_01:
-		dc.w $52                
-						; 0052 RELATED TO TWO ENTITIES 86 0
-		dc.w $86
-		dc.w 0
-		dc.w $56                
-						; 0056 SOMETHING WITH AN ENTITY 5
-		dc.w 5
-		dc.w $56                
-						; 0056 SOMETHING WITH AN ENTITY 3
-		dc.w 3
-		dc.w $56                
-						; 0056 SOMETHING WITH AN ENTITY 1A
-		dc.w $1A
-		dc.w $2C                
-						; 002C FOLLOW ENTITY 7 0 2
-		dc.w 7
-		dc.w 0
-		dc.w 2
-		dc.w $31                
-						; 0031 MOVE ENTITY ABOVE ENTITY 0 0
-		dc.w 0
-		dc.w 0
-		dc.b $FF                
+		csc52 $86,$0            
+						; 0052 UNKNOWN, RELATED TO TWO ENTITIES
+		csc56 $5                
+						; 0056 UNKNOWN, SOMETHING WITH AN ENTITY
+		csc56 $3                
+						; 0056 UNKNOWN, SOMETHING WITH AN ENTITY
+		csc56 $1A               
+						; 0056 UNKNOWN, SOMETHING WITH AN ENTITY
+		followEntity $7,$0,$2
+		moveEntityAboveAnother $0,$0
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-		dc.b $FF
-		dc.w $24                
-						; 0024 SET ENTITY FOLLOWED BY CAMERA 0
-		dc.w 0
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 0 44E3E
-		dc.b 0
-		dc.b 0
-		dc.l eas_ControlledCharacter
-word_4934A:
-		dc.w $18                
-						; 0018 FLASH ENTITY WHITE 0 B4
-		dc.w 0
-		dc.w $B4
-		dc.w $B                 
-						; 000B JUMP 4934A
-		dc.l word_4934A         
-		dc.w $FFFF              
+		setCameraEntity $0
+		setActscript $0,$0,eas_ControlledCharacter
+cs_4934A:
+		entityFlashWhite $0,$B4
+		jump cs_4934A
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 142 : "{NAME} did nothing."
-		dc.w $142
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1 1 44E3E
-		dc.b 1
-		dc.b 1
-		dc.l eas_ControlledCharacter
-		dc.w $1D                
-						; 001D SHOW PORTRAIT 0
-		dc.w 0
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 8002
-		dc.w $8002
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 4002
-		dc.w $4002
-		dc.w $37                
-						; 0037 LOAD MAP AND FADE IN 0 D D
-		dc.w 0
-		dc.w $D
-		dc.w $D
-		dc.w $41                
-						; 0041 FLASH SCREEN WHITE 3C
-		dc.w $3C
-		dc.w $FFFF              
+		textCursor $142         
+						; Initial text line $142 : "{NAME} did nothing."
+		setActscript $1,$1,eas_ControlledCharacter
+		showPortrait $0
+		setQuakeAmount $8002
+		setQuakeAmount $4002
+		loadMapFadeIn $0,$D,$D
+		flashScreenWhite $3C
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-		dc.w $41
+		dc.b   0
+		dc.b $41 
 		dc.w $3C
 		dc.w $FFFF
-		dc.w $1C                
-						; 001C STOP ENTITY ANIM 4
-		dc.w 4
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1 1 493A2
-		dc.b 1
-		dc.b 1
-		dc.l eas_493A2          
-		dc.w $16                
-						; 0016 WAIT UNTIL IDLE ENTITY 1
-		dc.w 1
-		dc.w $1D                
-						; 001D SHOW PORTRAIT 0
-		dc.w 0
-		dc.b $80                
-						; WAIT 3C
-		dc.b $3C
-		dc.w $1B                
-						; 001B START ENTITY ANIM 4
-		dc.w 4
-		dc.w $1E                
-						; 001E HIDE PORTRAIT
-		dc.w $FFFF              
+		stopEntity $4
+		setActscript $1,$1,eas_493A2
+		waitIdle $1
+		showPortrait $0
+		csWait $3C
+		startEntity $4
+		hidePortrait
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 eas_493A2:
 		dc.w $18                

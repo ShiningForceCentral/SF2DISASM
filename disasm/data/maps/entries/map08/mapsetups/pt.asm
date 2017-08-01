@@ -8,7 +8,7 @@ ms_map8:
 		dc.l ms_map8_AreaDescriptions
 		dc.l ms_map8_Section5
 		dc.l ms_map8_InitFunction
-word_55FBE:
+ce_55FBE:
 		dc.w $E
 		dc.w $D
 		dc.w 1

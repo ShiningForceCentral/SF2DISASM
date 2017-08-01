@@ -27,10 +27,8 @@ return_53F28:
 	; End of function ms_map21_InitFunction
 
 cs_53F2A:
-		dc.w $14                
+		customActscript $80,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
 		dc.w $14                
 						;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -43,12 +41,8 @@ cs_53F2A:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $19                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		entityPosDir $80,$6,$10,$3
 						; 0019 SET ENTITY POS AND FACING 80 6 10 3
-		dc.b $80
-		dc.b 6
-		dc.b $10
-		dc.b 3
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

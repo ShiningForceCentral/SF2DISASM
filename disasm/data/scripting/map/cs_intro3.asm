@@ -2,192 +2,73 @@
 ; ASM FILE data\scripting\map\cs_intro3.asm :
 ; 0x48540..0x48A78 : Intro cutscene 3
 IntroCutscene3:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 1077 : "Well?{D2}"
-		dc.w $1077
-		dc.w $48                
-						; 0048 LOAD MAP 2A 15 1
-		dc.w $2A
-		dc.w $15
-		dc.w 1
-		dc.w $42                
-						; 0042 RELATED TO LOADING MAP ENTITIES 48A50
-		dc.l word_48A50
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $36                
-						; 0036 RELATED TO LOADING A MAP
-		dc.w $39                
-						; 0039 FADE IN FROM BLACK
-		dc.w $46                
-						; 0046  15 1
-		dc.w $15
-		dc.w 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Well?{D2}"
-		dc.w $8005
-		dc.w $37                
-						; 0037 LOAD MAP AND FADE IN 2A 15 1
-		dc.w $2A
-		dc.w $15
-		dc.w 1
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 82 0 45FA8
-		dc.b $82
-		dc.b 0
-		dc.l eas_Transparent    
-		dc.w $4A                
-						; 004A FADE IN FROM BLACK HALF
-		dc.w $24                
-						; 0024 SET ENTITY FOLLOWED BY CAMERA 5
-		dc.w 5
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 80
-		dc.w $80
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 80
-		dc.w $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Ugh!  Ugghhh!{N}Phew...I can't...{D2}"
-		dc.w $80
-		dc.w $2D                
-						; 002D MOVE ENTITY 81 FF 1 1
-		dc.b $81
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.b $A
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 0
-		dc.b $80
-		dc.b 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "You wimp!{N}Let me do it!{D2}"
-		dc.w $81
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 80
-		dc.w $80
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $2D                
-						; 002D MOVE ENTITY 81 0 2 1
-		dc.b $81
-		dc.b 0
-		dc.b 2
-		dc.b 1
-		dc.b $B
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 FF 2 1
-		dc.b $80
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.b 3
-		dc.b 1
-		dc.b 9
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 3
-		dc.b $81
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "Yeah, right.{D2}"
-		dc.w $81
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 1
-		dc.b $81
-		dc.b 1
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 81
-		dc.w $81
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 81
-		dc.w $81
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 81
-		dc.w $81
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 3
-		dc.b $81
-		dc.b 3
-		dc.w $27                
-						; 0027 MAKE ENTITY SHAKE HEAD 81
-		dc.w $81
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "Blast!  It won't budge!{D2}"
-		dc.w $81
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 FF 1 1
-		dc.b 5
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT A
-		dc.b $A
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 45E44
-		dc.b 5
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 45E44
-		dc.b 5
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 3
-		dc.b $81
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8005 : "You idiots!{N}Let me do it.{D2}"
-		dc.w $8005
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 81
-		dc.w $81
-		dc.w $2D                
-						; 002D MOVE ENTITY 81 FF 0 1
-		dc.b $81
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.b 3
-		dc.b 1
-		dc.b 9
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 5
-		dc.b 5
-		dc.b $FF
+		textCursor $1077        
+						; Initial text line $1077 : "Well?{D2}"
+		mapLoad $2A,$15,$1
+		loadMapEntities ce_48A50
+						; Entity data to figure out and format
+		setActscript $0,$FF,eas_Init
+		csc36                   
+						; 0036 UNKNOWN, RELATED TO LOADING A MAP
+		fadeInB
+		csc46 $15,$1            
+						; 0046 UNKNOWN
+		nextSingleText $80,$5   
+						; "Well?{D2}"
+		loadMapFadeIn $2A,$15,$1
+		setActscript $82,$0,eas_Transparent
+		fadeInFromBlackHalf
+		setCameraEntity $5
+		entityShiver $80
+		entityShiver $80
+		nextSingleText $0,$80   
+						; "Ugh!  Ugghhh!{N}Phew...I can't...{D2}"
+		moveEntity $81,$FF,$1,$1
+		moreMove $A,$1
+		endMove $8080
+		setEntityDir $80,$0
+		nextSingleText $0,$81   
+						; "You wimp!{N}Let me do it!{D2}"
+		entityShiver $80
+		csWait $14
+		moveEntity $81,$0,$2,$1
+		moreMove $B,$1
+		endMove $8080
+		moveEntity $80,$FF,$2,$1
+		moreMove $3,$1
+		moreMove $9,$1
+		endMove $8080
+		csWait $1E
+		setEntityDir $81,$3
+		nextSingleText $0,$81   
+						; "Yeah, right.{D2}"
+		csWait $14
+		setEntityDir $81,$1
+		csWait $1E
+		entityShiver $81
+		entityShiver $81
+		csWait $1E
+		entityShiver $81
+		csWait $1E
+		setEntityDir $81,$3
+		entityShakeHead $81
+		nextSingleText $0,$81   
+						; "Blast!  It won't budge!{D2}"
+		moveEntity $5,$FF,$1,$1
+		endMove $8080
+		csWait $A
+		setActscript $5,$FF,eas_Jump
+		setActscript $5,$FF,eas_Jump
+		setEntityDir $81,$3
+		nextSingleText $80,$5   
+						; "You idiots!{N}Let me do it.{D2}"
+		entityShiver $81
+		moveEntity $81,$FF,$0,$1
+		moreMove $3,$1
+		moreMove $9,$1
+		endMove $8080
+		csWait $14
+		customActscript $5,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$10 Y=$10
 		dc.b $10
@@ -196,144 +77,42 @@ IntroCutscene3:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 FF 1 1
-		dc.b 5
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 5
-		dc.w 5
-		dc.b $80                
-						; WAIT A
-		dc.b $A
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 0 1 1
-		dc.b 5
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 6
-		dc.b 6
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 461AA
-		dc.b 5
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.w $23                
-						; 0023 SET ENTITY FACING 5 3
-		dc.b 5
-		dc.b 3
-		dc.w $1A                
-						; 001A SET ENTITY SPRITE 5 BB
-		dc.w 5
-		dc.w $BB
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 5
-		dc.w 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 0 45E44
-		dc.b $80
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 FF 45E44
-		dc.b $81
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 0 45E44
-		dc.b $80
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 FF 45E44
-		dc.b $81
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 5
-		dc.w 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 0 45E44
-		dc.b $80
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 FF 45E44
-		dc.b $81
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 0 45E44
-		dc.b $80
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 FF 45E44
-		dc.b $81
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 5
-		dc.w 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 0 45E44
-		dc.b $80
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 FF 45E44
-		dc.b $81
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 0 45E44
-		dc.b $80
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 FF 45E44
-		dc.b $81
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 5
-		dc.w 5
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 0 3 1
-		dc.b 5
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 6
-		dc.b 6
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 461AA
-		dc.b 5
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 5
-		dc.b 5
-		dc.b $FF
+		moveEntity $5,$FF,$1,$1
+		endMove $8080
+		csWait $14
+		entityNod $5
+		csWait $A
+		moveEntity $5,$0,$1,$1
+		endMove $8080
+		csWait $6
+		setActscript $5,$FF,eas_461AA
+		setEntityDir $5,$3
+		entitySprite $5,$BB
+		csWait $14
+		entityShiver $5
+		setActscript $80,$0,eas_Jump
+		setActscript $81,$FF,eas_Jump
+		setActscript $80,$0,eas_Jump
+		setActscript $81,$FF,eas_Jump
+		entityShiver $5
+		setActscript $80,$0,eas_Jump
+		setActscript $81,$FF,eas_Jump
+		setActscript $80,$0,eas_Jump
+		setActscript $81,$FF,eas_Jump
+		entityShiver $5
+		setActscript $80,$0,eas_Jump
+		setActscript $81,$FF,eas_Jump
+		setActscript $80,$0,eas_Jump
+		setActscript $81,$FF,eas_Jump
+		entityShiver $5
+		csWait $1E
+		moveEntity $5,$0,$3,$1
+		endMove $8080
+		csWait $6
+		setActscript $5,$FF,eas_461AA
+		customActscript $5,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$8 Y=$8
 		dc.b 8
@@ -342,137 +121,49 @@ IntroCutscene3:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 46172
-		dc.b 5
-		dc.b $FF
-		dc.l eas_46172          
-		dc.w $1A                
-						; 001A SET ENTITY SPRITE 5 5
-		dc.w 5
-		dc.w 5
-		dc.w $23                
-						; 0023 SET ENTITY FACING 5 1
-		dc.b 5
-		dc.b 1
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 FF 3 1
-		dc.b 5
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 0
-		dc.b $80
-		dc.b 0
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 2
-		dc.b $81
-		dc.b 2
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Well, that didn't work.{D2}"
-		dc.w $8005
-		dc.w $23                
-						; 0023 SET ENTITY FACING 5 2
-		dc.b 5
-		dc.b 2
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
-						; 0023 SET ENTITY FACING 5 0
-		dc.b 5
-		dc.b 0
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
-						; 0023 SET ENTITY FACING 5 1
-		dc.b 5
-		dc.b 1
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 5
-		dc.w 5
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8005 : "This time, I'll pull both of{N}the jewels at the same time!{D2}"
-		dc.w $8005
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 460CE
-		dc.b 5
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 FF 1 1
-		dc.b 5
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 1
-		dc.b $80
-		dc.b 1
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 1
-		dc.b $81
-		dc.b 1
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 0 1 1
-		dc.b 5
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 6
-		dc.b 6
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 461AA
-		dc.b 5
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.w $23                
-						; 0023 SET ENTITY FACING 5 3
-		dc.b 5
-		dc.b 3
-		dc.w $1A                
-						; 001A SET ENTITY SPRITE 5 BB
-		dc.w 5
-		dc.w $BB
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX FFFF : "{NAME;5} the thief{N}grabbed the two jewels.{D2}"
-		dc.w $FFFF
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8005 : "One...two...{D2}"
-		dc.w $8005
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 5
-		dc.w 5
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8005 : "THREE!{D2}"
-		dc.w $8005
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 5
-		dc.w 5
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 5
-		dc.b 5
-		dc.b $FF
+		setActscript $5,$FF,eas_46172
+		entitySprite $5,$5
+		setEntityDir $5,$1
+		moveEntity $5,$FF,$3,$1
+		endMove $8080
+		setEntityDir $80,$0
+		setEntityDir $81,$2
+		csWait $14
+		nextSingleText $80,$5   
+						; "Well, that didn't work.{D2}"
+		setEntityDir $5,$2
+		csWait $1E
+		setEntityDir $5,$0
+		csWait $1E
+		setEntityDir $5,$1
+		csWait $14
+		entityNod $5
+		csWait $14
+		nextSingleText $80,$5   
+						; "This time, I'll pull both of{N}the jewels at the same time!{D2}"
+		setActscript $5,$FF,eas_Init
+		moveEntity $5,$FF,$1,$1
+		endMove $8080
+		setEntityDir $80,$1
+		setEntityDir $81,$1
+		moveEntity $5,$0,$1,$1
+		endMove $8080
+		csWait $6
+		setActscript $5,$FF,eas_461AA
+		setEntityDir $5,$3
+		entitySprite $5,$BB
+		nextSingleText $FF,$FF  
+						; "{NAME;5} the thief{N}grabbed the two jewels.{D2}"
+		csWait $14
+		nextSingleText $80,$5   
+						; "One...two...{D2}"
+		entityShiver $5
+		nextSingleText $80,$5   
+						; "THREE!{D2}"
+		entityShiver $5
+		customActscript $5,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$40 Y=$40
 		dc.b $40
@@ -481,82 +172,27 @@ IntroCutscene3:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 46172
-		dc.b 5
-		dc.b $FF
-		dc.l eas_46172          
-		dc.w $2E                
-						; 002E HIDE ENTITY 82
-		dc.w $82
-		dc.w $34                
-						; 0034 SET BLOCKS 1A12 101 1A04
-		dc.w $1A12
-		dc.w $101
-		dc.w $1A04
-		dc.w $1A                
-						; 001A SET ENTITY SPRITE 5 5
-		dc.w 5
-		dc.w 5
-		dc.w $23                
-						; 0023 SET ENTITY FACING 5 1
-		dc.b 5
-		dc.b 1
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 0 3 1
-		dc.b 5
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 3
-		dc.b 3
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 461AA
-		dc.b 5
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 FF 3 5
-		dc.b 5
-		dc.b $FF
-		dc.b 3
-		dc.b 5
-		dc.w $8080
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 3
-		dc.w 3
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 460CE
-		dc.b 5
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 3
-		dc.b $80
-		dc.b 3
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 3
-		dc.b $81
-		dc.b 3
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 FF 1 2
-		dc.b 5
-		dc.b $FF
-		dc.b 1
-		dc.b 2
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 5 2
-		dc.b 5
-		dc.b 2
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 5
-		dc.b 5
-		dc.b $FF
+		setActscript $5,$FF,eas_46172
+		hideEntity $82
+		setBlocks $1A12,$101,$1A04
+		entitySprite $5,$5
+		setEntityDir $5,$1
+		moveEntity $5,$0,$3,$1
+		endMove $8080
+		csWait $3
+		setActscript $5,$FF,eas_461AA
+		moveEntity $5,$FF,$3,$5
+		endMove $8080
+		setQuakeAmount $3
+		setActscript $5,$FF,eas_Init
+		setEntityDir $80,$3
+		setEntityDir $81,$3
+		moveEntity $5,$FF,$1,$2
+		endMove $8080
+		setEntityDir $5,$2
+		customActscript $5,$FF
 		dc.w $14                
 						;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -569,241 +205,81 @@ IntroCutscene3:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 0 45E44
-		dc.b $80
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 FF 45E44
-		dc.b $81
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 0 45E44
-		dc.b $80
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 FF 45E44
-		dc.b $81
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 3 2
-		dc.b $80
-		dc.b 0
-		dc.b 3
-		dc.b 2
-		dc.b 8
-		dc.b 1
-		dc.b $80
-		dc.b $80
-		dc.w $2D                
-						; 002D MOVE ENTITY 81 FF 3 2
-		dc.b $81
-		dc.b $FF
-		dc.b 3
-		dc.b 2
-		dc.b $A
-		dc.b 1
-		dc.b $80
-		dc.b $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Are you OK?{D2}"
-		dc.w $80
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Yeah.  I feel just great.{D2}"
-		dc.w $8005
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 FF 1 1
-		dc.b $80
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.b 0
-		dc.b 1
-		dc.b 9
-		dc.b $28
-		dc.w $8080
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 45E44
-		dc.b $80
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 45E44
-		dc.b $80
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 3
-		dc.b $80
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "You did it!{N}You have the legendary{N}jewels!{D2}"
-		dc.w $81
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $23                
-						; 0023 SET ENTITY FACING 5 1
-		dc.b 5
-		dc.b 1
-		dc.w $1A                
-						; 001A SET ENTITY SPRITE 5 3B
-		dc.w 5
-		dc.w $3B
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 460CE
-		dc.b 5
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8005 : "I did?{D2}"
-		dc.w $8005
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $1A                
-						; 001A SET ENTITY SPRITE 5 5
-		dc.w 5
-		dc.w 5
-		dc.w $27                
-						; 0027 MAKE ENTITY SHAKE HEAD 5
-		dc.w 5
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8005 : "Oh, I got them!{N}I have the legendary{N}jewels!  Bravo!{D2}"
-		dc.w $8005
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 45E44
-		dc.b 5
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 45E44
-		dc.b 5
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 FF 45E44
-		dc.b 5
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 0 45E44
-		dc.b 5
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 1
-		dc.w 1
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.b $80                
-						; WAIT 3C
-		dc.b $3C
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 2
-		dc.w 2
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.b $80                
-						; WAIT 5
-		dc.b 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 5 0 461B6
-		dc.b 5
-		dc.b 0
-		dc.l eas_461B6          
-		dc.b $80                
-						; WAIT 5
-		dc.b 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 0 461E4
-		dc.b $80
-		dc.b 0
-		dc.l eas_461E4          
-		dc.b $80                
-						; WAIT 5
-		dc.b 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 0 461E4
-		dc.b $81
-		dc.b 0
-		dc.l eas_461E4          
-		dc.b $80                
-						; WAIT 3C
-		dc.b $3C
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 3
-		dc.w 3
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.w $23                
-						; 0023 SET ENTITY FACING 5 1
-		dc.b 5
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "What's happening?!{D2}"
-		dc.w $80
-		dc.w $27                
-						; 0027 MAKE ENTITY SHAKE HEAD 80
-		dc.w $80
-		dc.w $27                
-						; 0027 MAKE ENTITY SHAKE HEAD 81
-		dc.w $81
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 4
-		dc.w 4
-		dc.b $80                
-						; WAIT 3C
-		dc.b $3C
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8005 : "We must escape from the{N}shrine!  Follow me!{D2}"
-		dc.w $8005
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 5
-		dc.w 5
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 5
-		dc.b 5
-		dc.b $FF
+		setQuakeAmount $0
+		setActscript $80,$0,eas_Jump
+		setActscript $81,$FF,eas_Jump
+		setActscript $80,$0,eas_Jump
+		setActscript $81,$FF,eas_Jump
+		csWait $14
+		moveEntity $80,$0,$3,$2
+		moreMove $8,$1
+		endMove $8080
+		moveEntity $81,$FF,$3,$2
+		moreMove $A,$1
+		endMove $8080
+		nextSingleText $0,$80   
+						; "Are you OK?{D2}"
+		csWait $28
+		nextSingleText $80,$5   
+						; "Yeah.  I feel just great.{D2}"
+		moveEntity $80,$FF,$1,$1
+		moreMove $0,$1
+		moreMove $9,$28
+		endMove $8080
+		setActscript $80,$FF,eas_Jump
+		setActscript $80,$FF,eas_Jump
+		csWait $14
+		setEntityDir $80,$3
+		nextSingleText $0,$81   
+						; "You did it!{N}You have the legendary{N}jewels!{D2}"
+		csWait $14
+		setEntityDir $5,$1
+		entitySprite $5,$3B
+		setActscript $5,$FF,eas_Init
+		nextSingleText $80,$5   
+						; "I did?{D2}"
+		csWait $1E
+		entitySprite $5,$5
+		entityShakeHead $5
+		nextSingleText $80,$5   
+						; "Oh, I got them!{N}I have the legendary{N}jewels!  Bravo!{D2}"
+		setActscript $5,$FF,eas_Jump
+		setActscript $5,$FF,eas_Jump
+		csWait $28
+		setActscript $5,$FF,eas_Jump
+		setActscript $5,$0,eas_Jump
+		setQuakeAmount $1
+		csWait $28
+		setQuakeAmount $0
+		csWait $3C
+		setQuakeAmount $2
+		csWait $28
+		setQuakeAmount $0
+		csWait $5
+		setActscript $5,$0,eas_461B6
+		csWait $5
+		setActscript $80,$0,eas_461E4
+		csWait $5
+		setActscript $81,$0,eas_461E4
+		csWait $3C
+		setQuakeAmount $3
+		csWait $28
+		setQuakeAmount $0
+		setEntityDir $5,$1
+		nextSingleText $0,$80   
+						; "What's happening?!{D2}"
+		entityShakeHead $80
+		entityShakeHead $81
+		csWait $28
+		setQuakeAmount $4
+		csWait $3C
+		setQuakeAmount $0
+		nextSingleText $80,$5   
+						; "We must escape from the{N}shrine!  Follow me!{D2}"
+		setQuakeAmount $5
+		customActscript $5,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -812,11 +288,8 @@ IntroCutscene3:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
+						; 0014 END OF CUSTOM ACTSCRIPT
+		customActscript $80,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -825,12 +298,9 @@ IntroCutscene3:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 81
-		dc.b $81
-		dc.b $FF
+		customActscript $81,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -839,136 +309,48 @@ IntroCutscene3:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 0 3 1
-		dc.b 5
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.b 2
-		dc.b 7
-		dc.b 1
-		dc.b 6
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 3 2
-		dc.b $80
-		dc.b 0
-		dc.b 3
-		dc.b 2
-		dc.b 2
-		dc.b 7
-		dc.b 1
-		dc.b 5
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 81 FF B A
-		dc.b $81
-		dc.b $FF
-		dc.b $B
-		dc.b $A
-		dc.b 3
-		dc.b 1
-		dc.b 2
-		dc.b 8
-		dc.b 1
-		dc.b 4
-		dc.w $8080
-		dc.w 5                  
-						; 0005 PLAY SOUND SFX_WARP
-		dc.w $59
-		dc.w $4B                
-						; 004B FADE OUT TO BLACK HALF
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 5 2 8 3
-		dc.b 5
-		dc.b 2
-		dc.b 8
-		dc.b 3
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 80 2 8 3
-		dc.b $80
-		dc.b 2
-		dc.b 8
-		dc.b 3
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 81 2 8 3
-		dc.b $81
-		dc.b 2
-		dc.b 8
-		dc.b 3
-		dc.w $46                
-						; 0046  0 3
-		dc.w 0
-		dc.w 3
-		dc.b $80                
-						; WAIT A
-		dc.b $A
-		dc.w $4A                
-						; 004A FADE IN FROM BLACK HALF
-		dc.w $24                
-						; 0024 SET ENTITY FOLLOWED BY CAMERA 5
-		dc.w 5
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 FF 1 1
-		dc.b 5
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 0 1 1
-		dc.b 5
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 FF 1 1
-		dc.b $80
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 0 1 1
-		dc.b 5
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.b 0
-		dc.b 3
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 1 2
-		dc.b $80
-		dc.b 0
-		dc.b 1
-		dc.b 2
-		dc.b 0
-		dc.b 2
-		dc.b $80
-		dc.b $80
-		dc.w $2D                
-						; 002D MOVE ENTITY 81 FF 1 3
-		dc.b $81
-		dc.b $FF
-		dc.b 1
-		dc.b 3
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 81 FF 0 1
-		dc.b $81
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 81
-		dc.b $81
-		dc.b $FF
+		moveEntity $5,$0,$3,$1
+		moreMove $2,$7
+		moreMove $1,$6
+		endMove $8080
+		moveEntity $80,$0,$3,$2
+		moreMove $2,$7
+		moreMove $1,$5
+		endMove $8080
+		moveEntity $81,$FF,$B,$A
+		moreMove $3,$1
+		moreMove $2,$8
+		moreMove $1,$4
+		endMove $8080
+		playSound SFX_WARP
+		fadeOutToBlackHalf
+		entityPosDir $5,$2,$8,$3
+		entityPosDir $80,$2,$8,$3
+		entityPosDir $81,$2,$8,$3
+		csc46 $0,$3             
+						; 0046 UNKNOWN
+		csWait $A
+		fadeInFromBlackHalf
+		setCameraEntity $5
+		moveEntity $5,$FF,$1,$1
+		endMove $8080
+		moveEntity $5,$0,$1,$1
+		endMove $8080
+		moveEntity $80,$FF,$1,$1
+		endMove $8080
+		moveEntity $5,$0,$1,$1
+		moreMove $0,$3
+		endMove $8080
+		moveEntity $80,$0,$1,$2
+		moreMove $0,$2
+		endMove $8080
+		moveEntity $81,$FF,$1,$3
+		endMove $8080
+		moveEntity $81,$FF,$0,$1
+		endMove $8080
+		customActscript $81,$FF
 		dc.w $14                
 						;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -981,66 +363,24 @@ IntroCutscene3:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 0 0 2
-		dc.b 5
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 FF 0 2
-		dc.b $80
-		dc.b $FF
-		dc.b 0
-		dc.b 2
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 5 2
-		dc.b 5
-		dc.b 2
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 2
-		dc.b $80
-		dc.b 2
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 0 2 2
-		dc.b 5
-		dc.b 0
-		dc.b 2
-		dc.b 2
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 FF 2 2
-		dc.b $80
-		dc.b $FF
-		dc.b 2
-		dc.b 2
-		dc.w $8080
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 FF 460CE
-		dc.b $81
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 3
-		dc.b $81
-		dc.b 3
-		dc.w $27                
-						; 0027 MAKE ENTITY SHAKE HEAD 81
-		dc.w $81
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 81
-		dc.b $81
-		dc.b $FF
+		moveEntity $5,$0,$0,$2
+		endMove $8080
+		moveEntity $80,$FF,$0,$2
+		endMove $8080
+		setEntityDir $5,$2
+		setEntityDir $80,$2
+		csWait $1E
+		moveEntity $5,$0,$2,$2
+		endMove $8080
+		moveEntity $80,$FF,$2,$2
+		endMove $8080
+		csWait $1E
+		setActscript $81,$FF,eas_Init
+		setEntityDir $81,$3
+		entityShakeHead $81
+		customActscript $81,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -1049,46 +389,22 @@ IntroCutscene3:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.b $80                
-						; 0014 END OF MANUAL ACTSCRIPT
+						; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		dc.w $2D                
-						; 002D MOVE ENTITY 5 0 0 2
-		dc.b 5
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 3
-		dc.b $A
-		dc.b $80
-		dc.b $80
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 0 3
-		dc.b $80
-		dc.b 0
-		dc.b 0
-		dc.b 3
-		dc.b 3
-		dc.b 9
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 81 FF 0 4
-		dc.b $81
-		dc.b $FF
-		dc.b 0
-		dc.b 4
-		dc.b 3
-		dc.b 8
-		dc.b $80
-		dc.b $80
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.w $4B                
-						; 004B FADE OUT TO BLACK HALF
-		dc.b $FF                
+		moveEntity $5,$0,$0,$2
+		moreMove $3,$A
+		endMove $8080
+		moveEntity $80,$0,$0,$3
+		moreMove $3,$9
+		endMove $8080
+		moveEntity $81,$FF,$0,$4
+		moreMove $3,$8
+		endMove $8080
+		setQuakeAmount $0
+		fadeOutToBlackHalf
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-		dc.b $FF
-word_48A50:
+ce_48A50:
 		dc.w $3F
 		dc.w $3F
 		dc.w 1

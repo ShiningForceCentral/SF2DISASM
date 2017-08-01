@@ -9,7 +9,7 @@ ms_map16_ZoneEvents:
 		dc.b $FF
 		dc.w sub_51F02-ms_map16_ZoneEvents
 		dc.w $FD00
-		dc.w return_51F28-ms_map16_ZoneEvents
+		dc.w sub_51F28-ms_map16_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -60,5 +60,12 @@ return_51F26:
 
 	; End of function sub_51F02
 
-return_51F28:
+
+; =============== S U B R O U T I N E =======================================
+
+sub_51F28:
+		
 		rts
+
+	; End of function sub_51F28
+

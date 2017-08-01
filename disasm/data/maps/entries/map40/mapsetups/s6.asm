@@ -19,34 +19,26 @@ return_53FD6:
 	; End of function ms_map40_InitFunction
 
 cs_53FD8:
-		dc.w 5                  
+		playSound MUSIC_BOSS_ATTACK
 						; 0005 PLAY SOUND MUSIC_BOSS_ATTACK
-		dc.w 6
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_53FE0:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 3E5 : "Oh....{N}Go and save her....{W2}"
-		dc.w $3E5
-		dc.w $2A                
+		textCursor $3E5         
+						; Initial text line $3E5 : "Oh....{N}Go and save her....{W2}"
+		entityShiver $1C        
 						; 002A MAKE ENTITY SHIVER 1C
-		dc.w $1C
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1C : "Oh....{N}Go and save her....{W2}"
-		dc.w $1C
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1C : "Sir Astral was right....{N}That's not my King.{N}That's a devil!{W2}"
-		dc.w $1C
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1C : "Me?  I'm almost a goner.{N}A strange black cloud{N}enveloped me...(cough)....{W1}"
-		dc.w $1C
-		dc.w $2A                
+		nextText $0,$1C         
+						; "Oh....{N}Go and save her....{W2}"
+		nextText $0,$1C         
+						; "Sir Astral was right....{N}That's not my King.{N}That's a devil!{W2}"
+		nextSingleText $0,$1C   
+						; "Me?  I'm almost a goner.{N}A strange black cloud{N}enveloped me...(cough)....{W1}"
+		entityShiver $1C        
 						; 002A MAKE ENTITY SHIVER 1C
-		dc.w $1C
-		dc.w $1C                
+		stopEntity $1C          
 						; 001C STOP ENTITY ANIM 1C
-		dc.w $1C
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

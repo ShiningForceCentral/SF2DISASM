@@ -15,7 +15,7 @@ sub_5E250:
 		trap    #CHECK_FLAG
 		dc.w $216
 		beq.s   return_5E25C
-		lea     word_5E27C(pc), a0
+		lea     byte_5E27C(pc), a0
 		trap    #6
 return_5E25C:
 		

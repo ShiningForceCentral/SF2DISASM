@@ -27,93 +27,50 @@ return_51740:
 	; End of function ms_map4_InitFunction
 
 cs_51742:
-		dc.w $19                
+		entityPosDir $80,$0,$0,$0
 						; 0019 SET ENTITY POS AND FACING 80 0 0 0
-		dc.b $80
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.w $19                
+		entityPosDir $81,$0,$0,$0
 						; 0019 SET ENTITY POS AND FACING 81 0 0 0
-		dc.b $81
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_51750:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 2CB : "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
-		dc.w $2CB
-		dc.w $19                
+		textCursor $2CB         
+						; Initial text line $2CB : "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
+		entityPosDir $0,$1D,$4,$3
 						; 0019 SET ENTITY POS AND FACING 0 1D 4 3
-		dc.b 0
-		dc.b $1D
-		dc.b 4
-		dc.b 3
-		dc.w $19                
+		entityPosDir $1F,$1C,$3,$3
 						; 0019 SET ENTITY POS AND FACING 1F 1C 3 3
-		dc.b $1F
-		dc.b $1C
-		dc.b 3
-		dc.b 3
-		dc.w $19                
+		entityPosDir $1E,$1D,$3,$3
 						; 0019 SET ENTITY POS AND FACING 1E 1D 3 3
-		dc.b $1E
-		dc.b $1D
-		dc.b 3
-		dc.b 3
-		dc.w $19                
+		entityPosDir $9F,$1E,$3,$3
 						; 0019 SET ENTITY POS AND FACING 9F 1E 3 3
-		dc.b $9F
-		dc.b $1E
-		dc.b 3
-		dc.b 3
-		dc.w $33                
+		setQuakeAmount $1       
 						; 0033 SET QUAKE AMOUNT 1
-		dc.w 1
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $33                
+		setQuakeAmount $1       
 						; 0033 SET QUAKE AMOUNT 1
-		dc.w 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
-		dc.w $80
-		dc.w $2D                
+		nextSingleText $0,$80   
+						; "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
+		moveEntity $1F,$FF,$3,$1
 						; 002D MOVE ENTITY 1F FF 3 1
-		dc.b $1F
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "You didn't escape?{N}Why are you here?{W1}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "We've been waiting for you.{N}Chasms are appearing in the{N}ground.{W2}{N}Everybody is on the ship{N}to avoid falling into a{N}hole.{W1}"
-		dc.w $80
-		dc.w $23                
+		endMove $8080
+		nextSingleText $0,$1F   
+						; "You didn't escape?{N}Why are you here?{W1}"
+		nextSingleText $0,$80   
+						; "We've been waiting for you.{N}Chasms are appearing in the{N}ground.{W2}{N}Everybody is on the ship{N}to avoid falling into a{N}hole.{W1}"
+		setEntityDir $1F,$0     
 						; 0023 SET ENTITY FACING 1F 0
-		dc.b $1F
-		dc.b 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "Thank you.  {LEADER},{N}hurry to the harbor.{W1}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Wooooo!{N}Help! Heeeeelp....{W1}"
-		dc.w $80
-		dc.w $23                
+		nextSingleText $0,$1F   
+						; "Thank you.  {LEADER},{N}hurry to the harbor.{W1}"
+		nextSingleText $0,$80   
+						; "Wooooo!{N}Help! Heeeeelp....{W1}"
+		setEntityDir $1F,$3     
 						; 0023 SET ENTITY FACING 1F 3
-		dc.b $1F
-		dc.b 3
-		dc.w $14                
+		customActscript $80,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$4 Y=$4
 		dc.b 4
@@ -122,11 +79,9 @@ cs_51750:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $14                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		customActscript $81,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 81
-		dc.b $81
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$8 Y=$8
 		dc.b 8
@@ -135,121 +90,72 @@ cs_51750:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $80,$0,$3,$1 
 						; 002D MOVE ENTITY 80 0 3 1
-		dc.b $80
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $81,$0,$0,$1 
 						; 002D MOVE ENTITY 81 0 0 1
-		dc.b $81
-		dc.b 0
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w 5                  
+		endMove $8080
+		playSound SFX_BIG_DOOR_RUMBLE
 						; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		dc.w $5D
-		dc.w $33                
+		setQuakeAmount $3       
 						; 0033 SET QUAKE AMOUNT 3
-		dc.w 3
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $34                
+		setBlocks $3312,$B07,$1803
 						; 0034 SET BLOCKS 3312 B07 1803
-		dc.w $3312
-		dc.w $B07
-		dc.w $1803
-		dc.b $80                
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $34                
+		setBlocks $3319,$B07,$1803
 						; 0034 SET BLOCKS 3319 B07 1803
-		dc.w $3319
-		dc.w $B07
-		dc.w $1803
-		dc.b $80                
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $34                
+		setBlocks $3320,$B07,$1803
 						; 0034 SET BLOCKS 3320 B07 1803
-		dc.w $3320
-		dc.w $B07
-		dc.w $1803
-		dc.b $80                
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $15                
+		setActscript $80,$0,eas_51840
 						; 0015 SET ACTSCRIPT 80 0 51840
-		dc.b $80
-		dc.b 0
-		dc.l eas_51840          
-		dc.b $80                
+		csWait $5               
 						; WAIT 5
-		dc.b 5
-		dc.w $15                
+		setActscript $81,$FF,eas_51840
 						; 0015 SET ACTSCRIPT 81 FF 51840
-		dc.b $81
-		dc.b $FF
-		dc.l eas_51840          
-		dc.w 5                  
+		playSound SFX_BIG_DOOR_RUMBLE
 						; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		dc.w $5D
-		dc.w $34                
+		setBlocks $3300,$504,$1B00
 						; 0034 SET BLOCKS 3300 504 1B00
-		dc.w $3300
-		dc.w $504
-		dc.w $1B00
-		dc.b $80                
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $34                
+		setBlocks $3304,$504,$1B00
 						; 0034 SET BLOCKS 3304 504 1B00
-		dc.w $3304
-		dc.w $504
-		dc.w $1B00
-		dc.b $80                
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $34                
+		setBlocks $3308,$504,$1B00
 						; 0034 SET BLOCKS 3308 504 1B00
-		dc.w $3308
-		dc.w $504
-		dc.w $1B00
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $33                
+		setQuakeAmount $1       
 						; 0033 SET QUAKE AMOUNT 1
-		dc.w 1
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
+		setEntityDir $1F,$0     
 						; 0023 SET ENTITY FACING 1F 0
-		dc.b $1F
-		dc.b 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "That's too cruel....{N}{W2}{LEADER}, go to the{N}harbor from the east side.{N}It's safer.{W1}"
-		dc.w $1F
-		dc.w $15                
+		nextSingleText $0,$1F   
+						; "That's too cruel....{N}{W2}{LEADER}, go to the{N}harbor from the east side.{N}It's safer.{W1}"
+		setActscript $1F,$0,eas_Follower1
 						; 0015 SET ACTSCRIPT 1F 0 44F2E
-		dc.b $1F
-		dc.b 0
-		dc.l eas_Follower1      
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 eas_51840:
-		dc.w $10                
+		dc.b   0                
 						; 0010 SET SPEED X=$0 Y=$0
-		dc.b 0
-		dc.b 0
-		dc.w $11                
+		dc.b $10
+		dc.b   0
+		dc.b   0
+		dc.b   0                
 						; 0011  $101
+		dc.b $11
 		dc.w $101
 		dc.w $12                
 						; 0012  $FEFF

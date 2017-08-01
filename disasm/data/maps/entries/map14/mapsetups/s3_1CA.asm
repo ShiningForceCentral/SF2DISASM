@@ -19,50 +19,32 @@ sub_58F54:
 	; End of function sub_58F54
 
 cs_58F5C:
-		dc.w $28                
+		moveEntityNextToPlayer $81,$3
 						; 0028 MOVE ENTITY NEXT TO PLAYER 81 3
-		dc.w $81
-		dc.w 3
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR C84 : "Are you ready?{W1}"
-		dc.w $C84
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 81 : "Are you ready?{W1}"
-		dc.w $81
-		dc.w $11                
+		textCursor $C84         
+						; Initial text line $C84 : "Are you ready?{W1}"
+		nextText $0,$81         
+						; "Are you ready?{W1}"
+		yesNo                   
 						; 0011 STORY YESNO PROMPT
-		dc.w $C                 
-						; 000C JUMP IF SET FLAG 59 58F7E : YES/NO prompt answer
-		dc.w $59
-		dc.l word_58F7E         
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR C86 : "I want to leave soon.{N}Finish your preparations.{W1}"
-		dc.w $C86
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "I want to leave soon.{N}Finish your preparations.{W1}"
-		dc.w $81
-		dc.w $FFFF              
+		jumpIfFlagSet $59,cs_58F7E
+						; YES/NO prompt answer
+		textCursor $C86         
+						; Initial text line $C86 : "I want to leave soon.{N}Finish your preparations.{W1}"
+		nextSingleText $0,$81   
+						; "I want to leave soon.{N}Finish your preparations.{W1}"
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-word_58F7E:
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "The game will be suspended.{N}OK?"
-		dc.w $81
-		dc.w $2D                
+cs_58F7E:
+		nextSingleText $0,$81   
+						; "The game will be suspended.{N}OK?"
+		moveEntity $81,$0,$3,$4 
 						; 002D MOVE ENTITY 81 0 3 4
-		dc.b $81
-		dc.b 0
-		dc.b 3
-		dc.b 4
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $0,$FF,$3,$4 
 						; 002D MOVE ENTITY 0 FF 3 4
-		dc.b 0
-		dc.b $FF
-		dc.b 3
-		dc.b 4
-		dc.w $8080
-		dc.w 7                  
+		endMove $8080
+		mapSysEvent $48010103   
 						; 0007 EXECUTE MAP SYSTEM EVENT 48010103
-		dc.l $48010103
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

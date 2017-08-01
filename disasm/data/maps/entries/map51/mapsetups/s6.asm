@@ -18,104 +18,55 @@ return_5C3D6:
 	; End of function ms_map51_InitFunction
 
 cs_5C3D8:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 9F6 : "It's coming from this{N}direction.{W1}"
-		dc.w $9F6
-		dc.w $15                
+		textCursor $9F6         
+						; Initial text line $9F6 : "It's coming from this{N}direction.{W1}"
+		setActscript $1F,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $7,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
+		entityPosDir $0,$B,$16,$1
 						; 0019 SET ENTITY POS AND FACING 0 B 16 1
-		dc.b 0
-		dc.b $B
-		dc.b $16
-		dc.b 1
-		dc.w $19                
+		entityPosDir $1F,$A,$16,$1
 						; 0019 SET ENTITY POS AND FACING 1F A 16 1
-		dc.b $1F
-		dc.b $A
-		dc.b $16
-		dc.b 1
-		dc.w $19                
+		entityPosDir $7,$9,$16,$1
 						; 0019 SET ENTITY POS AND FACING 7 9 16 1
-		dc.b 7
-		dc.b 9
-		dc.b $16
-		dc.b 1
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.w $2D                
+		moveEntity $1F,$FF,$1,$2
 						; 002D MOVE ENTITY 1F FF 1 2
-		dc.b $1F
-		dc.b $FF
-		dc.b 1
-		dc.b 2
-		dc.w $8080
-		dc.b $80                
+		endMove $8080
+		csWait $5               
 						; WAIT 5
-		dc.b 5
-		dc.w $15                
+		setActscript $1F,$0,eas_461B6
 						; 0015 SET ACTSCRIPT 1F 0 461B6
-		dc.b $1F
-		dc.b 0
-		dc.l eas_461B6          
-		dc.b $80                
+		csWait $78              
 						; WAIT 78
-		dc.b $78
-		dc.w $23                
+		setEntityDir $1F,$1     
 						; 0023 SET ENTITY FACING 1F 1
-		dc.b $1F
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "It's coming from this{N}direction.{W1}"
-		dc.w $1F
-		dc.w $2D                
+		nextSingleText $0,$1F   
+						; "It's coming from this{N}direction.{W1}"
+		moveEntity $7,$FF,$1,$2 
 						; 002D MOVE ENTITY 7 FF 1 2
-		dc.b 7
-		dc.b $FF
-		dc.b 1
-		dc.b 2
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "Look!  Over there!{W1}"
-		dc.w 7
-		dc.w $32                
+		endMove $8080
+		nextSingleText $0,$7    
+						; "Look!  Over there!{W1}"
+		setCamDest $2,$2        
 						; 0032 SET CAMERA DEST 2 2
-		dc.w 2
-		dc.w 2
-		dc.b $80                
+		csWait $32              
 						; WAIT 32
-		dc.b $32
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C00D : "Help me!{W1}"
-		dc.w $C00D
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 7 : "An...elven boy?{N}He's stuck in the pond.{W2}"
-		dc.w 7
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "He must be very tired.{N}Let's pull him out.{W1}"
-		dc.w 7
-		dc.w $24                
+		nextSingleText $C0,$D   
+						; "Help me!{W1}"
+		nextText $0,$7          
+						; "An...elven boy?{N}He's stuck in the pond.{W2}"
+		nextSingleText $0,$7    
+						; "He must be very tired.{N}Let's pull him out.{W1}"
+		setCameraEntity $0      
 						; 0024 SET ENTITY FOLLOWED BY CAMERA 0
-		dc.w 0
-		dc.w $2C                
+		followEntity $7,$0,$2   
 						; 002C FOLLOW ENTITY 7 0 2
-		dc.w 7
-		dc.w 0
-		dc.w 2
-		dc.w $2C                
+		followEntity $1F,$7,$2  
 						; 002C FOLLOW ENTITY 1F 7 2
-		dc.w $1F
-		dc.w 7
-		dc.w 2
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 		dc.b $FF
 		dc.b $FF

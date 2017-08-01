@@ -63,7 +63,7 @@ SaveErrorCode:
 		move.b  (ERRCODE_BYTE4).l,(SAVED_ERRCODE_BYTE4).l
 		move.b  (ERRCODE_BYTE5).l,(SAVED_ERRCODE_BYTE5).l
 		move.b  (ERRCODE_BYTE6).l,(SAVED_ERRCODE_BYTE6).l
-		move.b  ($FFFFFF).l,(SAVED_ERRCODE_BYTE7).l
+		move.b  (ERRCODE_BYTE7).l,(SAVED_ERRCODE_BYTE7).l
 
 	; End of function SaveErrorCode
 

@@ -2,56 +2,19 @@
 ; ASM FILE data\battles\entries\battle21\cs_afterbattle.asm :
 ; 0x4B88C..0x4B958 : Cutscene after battle 21
 abcs_battle21:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR A17 : "Hurry!  Let's go into{N}Creed's mansion.{W1}"
-		dc.w $A17
-		dc.w $37                
-						; 0037 LOAD MAP AND FADE IN 43 4 12
-		dc.w $43
-		dc.w 4
-		dc.w $12
-		dc.w $42                
-						; 0042 RELATED TO LOADING MAP ENTITIES 4B948
-		dc.l word_4B948
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 7 B 17 2
-		dc.b 7
-		dc.b $B
-		dc.b $17
-		dc.b 2
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1F B 15 2
-		dc.b $1F
-		dc.b $B
-		dc.b $15
-		dc.b 2
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1E B 16 2
-		dc.b $1E
-		dc.b $B
-		dc.b $16
-		dc.b 2
-		dc.w $39                
-						; 0039 FADE IN FROM BLACK
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 1F
-		dc.b $1F
-		dc.b $FF
+		textCursor $A17         
+						; Initial text line $A17 : "Hurry!  Let's go into{N}Creed's mansion.{W1}"
+		loadMapFadeIn $43,$4,$12
+		loadMapEntities ce_4B948
+						; Entity data to figure out and format
+		setActscript $0,$FF,eas_Init
+		setActscript $7,$FF,eas_Init
+		entityPosDir $7,$B,$17,$2
+		setActscript $1F,$FF,eas_Init
+		entityPosDir $1F,$B,$15,$2
+		entityPosDir $1E,$B,$16,$2
+		fadeInB
+		customActscript $1F,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$1C Y=$1C
 		dc.b $1C
@@ -60,98 +23,46 @@ abcs_battle21:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.b $80                
-						; WAIT 5
-		dc.b 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F 0 461B6
-		dc.b $1F
-		dc.b 0
-		dc.l eas_461B6          
-		dc.b $80                
-						; WAIT 78
-		dc.b $78
-		dc.w $2D                
-						; 002D MOVE ENTITY 1F FF 2 3
-		dc.b $1F
-		dc.b $FF
-		dc.b 2
-		dc.b 3
-		dc.b 3
-		dc.b 1
-		dc.b 2
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $23                
-						; 0023 SET ENTITY FACING 1F 0
-		dc.b $1F
-		dc.b 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "Hurry!  Let's go into{N}Creed's mansion.{W1}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C007 : "Oddler, can you see?{W1}"
-		dc.w $C007
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "No, why?{W1}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C007 : "You're moving around as{N}if you can see.{W1}"
-		dc.w $C007
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "Am I?  Maybe my other{N}senses have sharpened{N}since I lost my sight.{W1}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C007 : "Oh, I see.{W1}"
-		dc.w $C007
-		dc.w $2D                
-						; 002D MOVE ENTITY 7 FF 2 1
-		dc.b 7
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 7 1
-		dc.b 7
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C007 : "{LEADER}, let's go see{N}Mr. Creed!{W1}"
-		dc.w $C007
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 3
-		dc.b 0
-		dc.b 3
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 0
-		dc.w 0
-		dc.w $2C                
-						; 002C FOLLOW ENTITY 1E 0 2
-		dc.w $1E
-		dc.w 0
-		dc.w 2
-		dc.w $2C                
-						; 002C FOLLOW ENTITY 7 1E 1
-		dc.w 7
-		dc.w $1E
-		dc.w 1
-		dc.w $2C                
-						; 002C FOLLOW ENTITY 1F 1E 3
-		dc.w $1F
-		dc.w $1E
-		dc.w 3
-		dc.w 7                  
-						; 0007 EXECUTE MAP SYSTEM EVENT 431A1703
-		dc.l $431A1703
-		dc.w $FFFF              
+						; 0014 END OF CUSTOM ACTSCRIPT
+		csWait $5
+		setActscript $1F,$0,eas_461B6
+		csWait $78
+		moveEntity $1F,$FF,$2,$3
+		moreMove $3,$1
+		moreMove $2,$1
+		endMove $8080
+		csWait $28
+		setEntityDir $1F,$0
+		nextSingleText $0,$1F   
+						; "Hurry!  Let's go into{N}Creed's mansion.{W1}"
+		nextSingleText $C0,$7   
+						; "Oddler, can you see?{W1}"
+		nextSingleText $0,$1F   
+						; "No, why?{W1}"
+		nextSingleText $C0,$7   
+						; "You're moving around as{N}if you can see.{W1}"
+		nextSingleText $0,$1F   
+						; "Am I?  Maybe my other{N}senses have sharpened{N}since I lost my sight.{W1}"
+		nextSingleText $C0,$7   
+						; "Oh, I see.{W1}"
+		moveEntity $7,$FF,$2,$1
+		endMove $8080
+		setEntityDir $7,$1
+		nextSingleText $C0,$7   
+						; "{LEADER}, let's go see{N}Mr. Creed!{W1}"
+		setEntityDir $0,$3
+		entityNod $0
+		followEntity $1E,$0,$2
+		followEntity $7,$1E,$1
+		followEntity $1F,$1E,$3
+		mapSysEvent $431A1703
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-word_4B948:
-		dc.w $A
-		dc.w $16
+ce_4B948:
+		dc.b   0
+		dc.b  $A
+		dc.b   0
+		dc.b $16
 		dc.w 2
 		dc.b $B
 		dc.b $17

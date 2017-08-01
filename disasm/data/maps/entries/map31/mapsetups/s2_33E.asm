@@ -166,7 +166,7 @@ sub_5D526:
 		bra.s   return_5D53E
 loc_5D538:
 		
-		lea     word_5D724(pc), a0
+		lea     byte_5D724(pc), a0
 		trap    #6
 return_5D53E:
 		
@@ -174,7 +174,15 @@ return_5D53E:
 
 	; End of function sub_5D526
 
+
+; =============== S U B R O U T I N E =======================================
+
+sub_5D540:
+		
 		rts
+
+	; End of function sub_5D540
+
 
 ; =============== S U B R O U T I N E =======================================
 

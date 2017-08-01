@@ -282,47 +282,33 @@ nullsub_116:
 	; End of function nullsub_116
 
 cs_58116:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 595 : "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
-		dc.w $595
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 89 : "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
-		dc.w $89
-		dc.b $80                
+		textCursor $595         
+						; Initial text line $595 : "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
+		nextSingleText $0,$89   
+						; "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $33                
+		setQuakeAmount $8002    
 						; 0033 SET QUAKE AMOUNT 8002
-		dc.w $8002
-		dc.w $33                
+		setQuakeAmount $4002    
 						; 0033 SET QUAKE AMOUNT 4002
-		dc.w $4002
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 89 : "...like that!  And, it's getting{N}worse.{N}What's wrong you ask?{W1}"
-		dc.w $89
-		dc.b $80                
+		nextSingleText $0,$89   
+						; "...like that!  And, it's getting{N}worse.{N}What's wrong you ask?{W1}"
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w 5                  
+		playSound SFX_BIG_DOOR_RUMBLE
 						; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		dc.w $5D
-		dc.w $33                
+		setQuakeAmount $5       
 						; 0033 SET QUAKE AMOUNT 5
-		dc.w 5
-		dc.w $41                
+		flashScreenWhite $46    
 						; 0041 FLASH SCREEN WHITE 46
-		dc.w $46
-		dc.w $33                
+		setQuakeAmount $0       
 						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.w $27                
+		entityShakeHead $89     
 						; 0027 MAKE ENTITY SHAKE HEAD 89
-		dc.w $89
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 89 : "Whoa!  Mt. Volcano erupted!{W2}"
-		dc.w $89
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 89 : "It's an evil omen.{W1}"
-		dc.w $89
-		dc.w $FFFF              
+		nextText $0,$89         
+						; "Whoa!  Mt. Volcano erupted!{W2}"
+		nextSingleText $0,$89   
+						; "It's an evil omen.{W1}"
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

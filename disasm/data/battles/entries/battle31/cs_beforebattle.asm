@@ -2,243 +2,94 @@
 ; ASM FILE data\battles\entries\battle31\cs_beforebattle.asm :
 ; 0x4C994..0x4CBE2 : Cutscene before battle 31
 bbcs_31:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR AFB : "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
-		dc.w $AFB
-		dc.w $37                
-						; 0037 LOAD MAP AND FADE IN 2 10 2
-		dc.w 2
-		dc.w $10
-		dc.w 2
-		dc.w $42                
-						; 0042 RELATED TO LOADING MAP ENTITIES 4CB92
-		dc.l word_4CB92
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 7 14 3 3
-		dc.b 7
-		dc.b $14
-		dc.b 3
-		dc.b 3
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1F 16 3 3
-		dc.b $1F
-		dc.b $16
-		dc.b 3
-		dc.b 3
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 16 FF 460CE
-		dc.b $16
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 16 15 3 3
-		dc.b $16
-		dc.b $15
-		dc.b 3
-		dc.b 3
-		dc.w $22                
-						; 0022 ANIMATE ENTITY FADE INOUT 80
-		dc.w $80
-		dc.w 6
-		dc.w $22                
-						; 0022 ANIMATE ENTITY FADE INOUT 81
-		dc.w $81
-		dc.w 6
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 82 0 45FB2
-		dc.b $82
-		dc.b 0
-		dc.l eas_AnimSpeedx2    
-		dc.w 5                  
-						; 0005 PLAY SOUND MUSIC_BATTLE_THEME_1
-		dc.w $22
-		dc.w $39                
-						; 0039 FADE IN FROM BLACK
-		dc.w $45                
-						; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
-		dc.w $30
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
-		dc.w $C080
-		dc.w $32                
-						; 0032 SET CAMERA DEST 10 5
-		dc.w $10
-		dc.w 5
-		dc.w $22                
-						; 0022 ANIMATE ENTITY FADE INOUT 80
-		dc.w $80
-		dc.w 7
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "Geshp!{W1}"
-		dc.w 7
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "So, you remember me. {W1}"
-		dc.w $C080
-		dc.w $32                
-						; 0032 SET CAMERA DEST 10 2
-		dc.w $10
-		dc.w 2
-		dc.w $2D                
-						; 002D MOVE ENTITY 1F FF 3 1
-		dc.b $1F
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "What do you want?{W1}"
-		dc.w $1F
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C080 : "I have plans for you.{W2}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "I'm very happy that you came{N}out of the castle.{W1}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "Why?{W1}"
-		dc.w $1F
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C080 : "I have been waiting for{N}{NAME;22}.{W2}"
-		dc.w $C080
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C080 : "Vicar {NAME;22}, you locked{N}the gate of Moun, remember?{W2}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "My faithful soldiers can't{N}enter Parmecia.{N}Now, you will open it!{W1}"
-		dc.w $C080
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F FF 45E44
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "It's a trap!{W2}"
-		dc.w $1F
-		dc.w $2D                
-						; 002D MOVE ENTITY 1F FF 1 1
-		dc.b $1F
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $32                
-						; 0032 SET CAMERA DEST 10 0
-		dc.w $10
-		dc.w 0
-		dc.w $23                
-						; 0023 SET ENTITY FACING 1F 2
-		dc.b $1F
-		dc.b 2
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "{NAME;22}, run!{W1}"
-		dc.w $1F
-		dc.w $2D                
-						; 002D MOVE ENTITY 16 FF 1 1
-		dc.b $16
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $41                
-						; 0041 FLASH SCREEN WHITE 2
-		dc.w 2
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 82 15 1 2
-		dc.b $82
-		dc.b $15
-		dc.b 1
-		dc.b 2
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 16 FF 45E44
-		dc.b $16
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 16 FF 46172
-		dc.b $16
-		dc.b $FF
-		dc.l eas_46172          
-		dc.w $2D                
-						; 002D MOVE ENTITY 16 FF 3 1
-		dc.b $16
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Ha, ha.  He can't.{W1}"
-		dc.w $C080
-		dc.w $32                
-						; 0032 SET CAMERA DEST 10 6
-		dc.w $10
-		dc.w 6
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 3
-		dc.b $80
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Cameela!  Cameeeeeela!{W1}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "Cameela?!  We met her in{N}Pangoat Valley.{W1}"
-		dc.w 7
-		dc.w $22                
-						; 0022 ANIMATE ENTITY FADE INOUT 81
-		dc.w $81
-		dc.w 7
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "What?{W1}"
-		dc.w $81
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C080 : "Ah, Cameela.  You're here.{W2}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Get the key for me!{W1}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "Geshp, you're as devious as{N}usual.{W1}"
-		dc.w $81
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 FF 3 1
-		dc.b $80
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "That I am.  Now, get the key!{W1}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "Me?!  Why?{W1}"
-		dc.w $81
-		dc.w $1C                
-						; 001C STOP ENTITY ANIM 80
-		dc.w $80
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
+		textCursor $AFB         
+						; Initial text line $AFB : "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
+		loadMapFadeIn $2,$10,$2
+		loadMapEntities ce_4CB92
+						; Entity data to figure out and format
+		setActscript $0,$FF,eas_Init
+		setActscript $7,$FF,eas_Init
+		entityPosDir $7,$14,$3,$3
+		setActscript $1F,$FF,eas_Init
+		entityPosDir $1F,$16,$3,$3
+		setActscript $16,$FF,eas_Init
+		entityPosDir $16,$15,$3,$3
+		animEntityFadeInOut $80,$6
+		animEntityFadeInOut $81,$6
+		setActscript $82,$0,eas_AnimSpeedx2
+		playSound MUSIC_BATTLE_THEME_1
+		fadeInB
+		csc45 $30               
+						; (null)
+		nextSingleText $C0,$80  
+						; "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
+		setCamDest $10,$5
+		animEntityFadeInOut $80,$7
+		nextSingleText $0,$7    
+						; "Geshp!{W1}"
+		nextSingleText $C0,$80  
+						; "So, you remember me. {W1}"
+		setCamDest $10,$2
+		moveEntity $1F,$FF,$3,$1
+		endMove $8080
+		nextSingleText $0,$1F   
+						; "What do you want?{W1}"
+		nextText $C0,$80        
+						; "I have plans for you.{W2}"
+		nextSingleText $C0,$80  
+						; "I'm very happy that you came{N}out of the castle.{W1}"
+		nextSingleText $0,$1F   
+						; "Why?{W1}"
+		nextText $C0,$80        
+						; "I have been waiting for{N}{NAME;22}.{W2}"
+		nextText $C0,$80        
+						; "Vicar {NAME;22}, you locked{N}the gate of Moun, remember?{W2}"
+		nextSingleText $C0,$80  
+						; "My faithful soldiers can't{N}enter Parmecia.{N}Now, you will open it!{W1}"
+		setActscript $1F,$FF,eas_Jump
+		nextSingleText $0,$1F   
+						; "It's a trap!{W2}"
+		moveEntity $1F,$FF,$1,$1
+		endMove $8080
+		setCamDest $10,$0
+		setEntityDir $1F,$2
+		nextSingleText $0,$1F   
+						; "{NAME;22}, run!{W1}"
+		moveEntity $16,$FF,$1,$1
+		endMove $8080
+		flashScreenWhite $2
+		entityPosDir $82,$15,$1,$2
+		csWait $1E
+		setActscript $16,$FF,eas_Jump
+		setActscript $16,$FF,eas_46172
+		moveEntity $16,$FF,$3,$1
+		endMove $8080
+		nextSingleText $C0,$80  
+						; "Ha, ha.  He can't.{W1}"
+		setCamDest $10,$6
+		setEntityDir $80,$3
+		nextSingleText $C0,$80  
+						; "Cameela!  Cameeeeeela!{W1}"
+		nextSingleText $0,$7    
+						; "Cameela?!  We met her in{N}Pangoat Valley.{W1}"
+		animEntityFadeInOut $81,$7
+		nextSingleText $0,$81   
+						; "What?{W1}"
+		nextText $C0,$80        
+						; "Ah, Cameela.  You're here.{W2}"
+		nextSingleText $C0,$80  
+						; "Get the key for me!{W1}"
+		nextSingleText $0,$81   
+						; "Geshp, you're as devious as{N}usual.{W1}"
+		moveEntity $80,$FF,$3,$1
+		endMove $8080
+		nextSingleText $C0,$80  
+						; "That I am.  Now, get the key!{W1}"
+		nextSingleText $0,$81   
+						; "Me?!  Why?{W1}"
+		stopEntity $80
+		csWait $28
+		customActscript $80,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -247,155 +98,64 @@ bbcs_31:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 45E44
-		dc.b $80
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 45E44
-		dc.b $80
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 46172
-		dc.b $80
-		dc.b $FF
-		dc.l eas_46172          
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 FF 1 1
-		dc.b $80
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $1B                
-						; 001B START ENTITY ANIM 80
-		dc.w $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Cameela!{W1}"
-		dc.w $C080
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 81 : "I hate you!{N}I won't help you.{W2}"
-		dc.w $81
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 81 : "You want the key?{N}You get it!{N}You can use my army.{W2}"
-		dc.w $81
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "See you later.{W1}"
-		dc.w $81
-		dc.w $22                
-						; 0022 ANIMATE ENTITY FADE INOUT 81
-		dc.w $81
-		dc.w 6
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C080 : "That witch!{W2}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Cameela!  Cameela!!{W1}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "They're divided....{W1}"
-		dc.w 7
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 80
-		dc.w $80
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 1
-		dc.b $80
-		dc.b 1
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C080 : "I don't need your help,{N}Cameela!{W2}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Come on, devils!{N}Kill {LEADER} now!{W1}"
-		dc.w $C080
-		dc.w $32                
-						; 0032 SET CAMERA DEST 10 D
-		dc.w $10
-		dc.w $D
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 83 13 12 1
-		dc.b $83
-		dc.b $13
-		dc.b $12
-		dc.b 1
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 84 15 13 1
-		dc.b $84
-		dc.b $15
-		dc.b $13
-		dc.b 1
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 85 16 12 1
-		dc.b $85
-		dc.b $16
-		dc.b $12
-		dc.b 1
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 86 17 F 1
-		dc.b $86
-		dc.b $17
-		dc.b $F
-		dc.b 1
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 83 0 45E44
-		dc.b $83
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 84 0 45E44
-		dc.b $84
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 85 0 45E44
-		dc.b $85
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 86 FF 45E44
-		dc.b $86
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $32                
-						; 0032 SET CAMERA DEST 10 6
-		dc.w $10
-		dc.w 6
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Bye, {LEADER}.{W1}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "You're not staying?{W1}"
-		dc.w 7
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C080 : "I'm good at using my brains,{N}not my strength.{W2}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "I'll return by the time{N}you're defeated.{W1}"
-		dc.w $C080
-		dc.w $22                
-						; 0022 ANIMATE ENTITY FADE INOUT 80
-		dc.w $80
-		dc.w 6
-		dc.w $FFFF              
+						; 0014 END OF CUSTOM ACTSCRIPT
+		setActscript $80,$FF,eas_Jump
+		setActscript $80,$FF,eas_Jump
+		setActscript $80,$FF,eas_46172
+		moveEntity $80,$FF,$1,$1
+		endMove $8080
+		startEntity $80
+		nextSingleText $C0,$80  
+						; "Cameela!{W1}"
+		nextText $0,$81         
+						; "I hate you!{N}I won't help you.{W2}"
+		nextText $0,$81         
+						; "You want the key?{N}You get it!{N}You can use my army.{W2}"
+		nextSingleText $0,$81   
+						; "See you later.{W1}"
+		animEntityFadeInOut $81,$6
+		nextText $C0,$80        
+						; "That witch!{W2}"
+		nextSingleText $C0,$80  
+						; "Cameela!  Cameela!!{W1}"
+		nextSingleText $0,$7    
+						; "They're divided....{W1}"
+		csWait $28
+		entityShiver $80
+		csWait $28
+		setEntityDir $80,$1
+		nextText $C0,$80        
+						; "I don't need your help,{N}Cameela!{W2}"
+		nextSingleText $C0,$80  
+						; "Come on, devils!{N}Kill {LEADER} now!{W1}"
+		setCamDest $10,$D
+		csWait $28
+		entityPosDir $83,$13,$12,$1
+		entityPosDir $84,$15,$13,$1
+		entityPosDir $85,$16,$12,$1
+		entityPosDir $86,$17,$F,$1
+		setActscript $83,$0,eas_Jump
+		setActscript $84,$0,eas_Jump
+		setActscript $85,$0,eas_Jump
+		setActscript $86,$FF,eas_Jump
+		csWait $1E
+		setCamDest $10,$6
+		nextSingleText $C0,$80  
+						; "Bye, {LEADER}.{W1}"
+		nextSingleText $0,$7    
+						; "You're not staying?{W1}"
+		nextText $C0,$80        
+						; "I'm good at using my brains,{N}not my strength.{W2}"
+		nextSingleText $C0,$80  
+						; "I'll return by the time{N}you're defeated.{W1}"
+		animEntityFadeInOut $80,$6
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-word_4CB92:
-		dc.w $15
-		dc.w 4
+ce_4CB92:
+		dc.b   0
+		dc.b $15
+		dc.b   0
+		dc.b   4
 		dc.w 3
 		dc.b $14
 		dc.b 3

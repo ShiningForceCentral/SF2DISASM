@@ -6,8 +6,7 @@
 
 ms_map67_AreaDescriptions:
 		
-		move.w  #$1B2,d3        
-						; 01B2=Nothing special there.{W1}
+		move.w  #$1B2,d3
 		lea     word_4FCDE(pc), a0
 		nop
 		jmp     DisplayAreaDescription

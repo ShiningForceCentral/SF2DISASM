@@ -2,204 +2,60 @@
 ; ASM FILE data\battles\entries\battle33\cs_afterbattle.asm :
 ; 0x4D09A..0x4D342 : Cutscene after battle 33
 abcs_battle33:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR B3C : "There may be some survivors{N}somewhere.{W1}"
-		dc.w $B3C
-		dc.w $37                
-						; 0037 LOAD MAP AND FADE IN 1F 8 6
-		dc.w $1F
-		dc.w 8
-		dc.w 6
-		dc.w $42                
-						; 0042 RELATED TO LOADING MAP ENTITIES 4D322
-		dc.l word_4D322
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 7 D B 1
-		dc.b 7
-		dc.b $D
-		dc.b $B
-		dc.b 1
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1F C 9 3
-		dc.b $1F
-		dc.b $C
-		dc.b 9
-		dc.b 3
-		dc.w $34                
-						; 0034 SET BLOCKS 327 101 1008
-		dc.w $327
-		dc.w $101
-		dc.w $1008
-		dc.w $1C                
-						; 001C STOP ENTITY ANIM 80
-		dc.w $80
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 46172
-		dc.b $80
-		dc.b $FF
-		dc.l eas_46172          
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 3 1
-		dc.b $80
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 4
-		dc.b 4
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 461AA
-		dc.b $80
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.w $2D                
-						; 002D MOVE ENTITY 1A 0 3 1
-		dc.b $1A
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 2
-		dc.b 2
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1A FF 461AA
-		dc.b $1A
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1A FF 45F9C
-		dc.b $1A
-		dc.b $FF
-		dc.l eas_45F9C          
-		dc.w $39                
-						; 0039 FADE IN FROM BLACK
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "There may be some survivors{N}somewhere.{W1}"
-		dc.w $1F
-		dc.b $80                
-						; WAIT 5
-		dc.b 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 0 461B6
-		dc.b 0
-		dc.b 0
-		dc.l eas_461B6          
-		dc.b $80                
-						; WAIT 5
-		dc.b 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F 0 461E4
-		dc.b $1F
-		dc.b 0
-		dc.l eas_461E4          
-		dc.b $80                
-						; WAIT 5
-		dc.b 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 0 461B6
-		dc.b 7
-		dc.b 0
-		dc.l eas_461B6          
-		dc.b $80                
-						; WAIT 78
-		dc.b $78
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 1 1
-		dc.b $80
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 3
-		dc.b 3
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 3 1
-		dc.b $80
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 3
-		dc.b 3
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 1 1
-		dc.b $80
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 3
-		dc.b 3
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 3 1
-		dc.b $80
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 3
-		dc.b 3
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 461AA
-		dc.b $80
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.w $23                
-						; 0023 SET ENTITY FACING 7 0
-		dc.b 7
-		dc.b 0
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 FF 45E44
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $2D                
-						; 002D MOVE ENTITY 7 FF 0 3
-		dc.b 7
-		dc.b $FF
-		dc.b 0
-		dc.b 3
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 7 1
-		dc.b 7
-		dc.b 1
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 0
-		dc.b 0
-		dc.b 0
-		dc.w $23                
-						; 0023 SET ENTITY FACING 1F 0
-		dc.b $1F
-		dc.b 0
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
+		textCursor $B3C         
+						; Initial text line $B3C : "There may be some survivors{N}somewhere.{W1}"
+		loadMapFadeIn $1F,$8,$6
+		loadMapEntities ce_4D322
+						; Entity data to figure out and format
+		setActscript $0,$FF,eas_Init
+		setActscript $7,$FF,eas_Init
+		entityPosDir $7,$D,$B,$1
+		setActscript $1F,$FF,eas_Init
+		entityPosDir $1F,$C,$9,$3
+		setBlocks $327,$101,$1008
+		stopEntity $80
+		setActscript $80,$FF,eas_46172
+		moveEntity $80,$0,$3,$1
+		endMove $8080
+		csWait $4
+		setActscript $80,$FF,eas_461AA
+		moveEntity $1A,$0,$3,$1
+		endMove $8080
+		csWait $2
+		setActscript $1A,$FF,eas_461AA
+		setActscript $1A,$FF,eas_45F9C
+		fadeInB
+		nextSingleText $0,$1F   
+						; "There may be some survivors{N}somewhere.{W1}"
+		csWait $5
+		setActscript $0,$0,eas_461B6
+		csWait $5
+		setActscript $1F,$0,eas_461E4
+		csWait $5
+		setActscript $7,$0,eas_461B6
+		csWait $78
+		moveEntity $80,$0,$1,$1
+		endMove $8080
+		csWait $3
+		moveEntity $80,$0,$3,$1
+		endMove $8080
+		csWait $3
+		moveEntity $80,$0,$1,$1
+		endMove $8080
+		csWait $3
+		moveEntity $80,$0,$3,$1
+		endMove $8080
+		csWait $3
+		setActscript $80,$FF,eas_461AA
+		setEntityDir $7,$0
+		setActscript $7,$FF,eas_Jump
+		csWait $28
+		moveEntity $7,$FF,$0,$3
+		endMove $8080
+		setEntityDir $7,$1
+		setEntityDir $0,$0
+		setEntityDir $1F,$0
+		customActscript $80,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$18 Y=$18
 		dc.b $18
@@ -208,29 +64,13 @@ abcs_battle33:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 1 1
-		dc.b $80
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 8
-		dc.b 8
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 461AA
-		dc.b $80
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.b $80                
-						; WAIT 32
-		dc.b $32
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $80,$0,$1,$1
+		endMove $8080
+		csWait $8
+		setActscript $80,$FF,eas_461AA
+		csWait $32
+		customActscript $80,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -239,58 +79,22 @@ abcs_battle33:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 3 1
-		dc.b $80
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 4
-		dc.b 4
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 2
-		dc.w 2
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 461AA
-		dc.b $80
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.b $80                
-						; WAIT A
-		dc.b $A
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $2D                
-						; 002D MOVE ENTITY 7 FF 1 2
-		dc.b 7
-		dc.b $FF
-		dc.b 1
-		dc.b 2
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Do not touch my rock!{W1}"
-		dc.w $80
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 FF 45E44
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 FF 46172
-		dc.b 7
-		dc.b $FF
-		dc.l eas_46172          
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 7
-		dc.b 7
-		dc.b $FF
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $80,$0,$3,$1
+		endMove $8080
+		csWait $4
+		setQuakeAmount $2
+		setActscript $80,$FF,eas_461AA
+		csWait $A
+		setQuakeAmount $0
+		csWait $28
+		moveEntity $7,$FF,$1,$2
+		endMove $8080
+		nextSingleText $0,$80   
+						; "Do not touch my rock!{W1}"
+		setActscript $7,$FF,eas_Jump
+		setActscript $7,$FF,eas_46172
+		customActscript $7,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -299,22 +103,11 @@ abcs_battle33:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
-						; 002D MOVE ENTITY 7 FF 3 2
-		dc.b 7
-		dc.b $FF
-		dc.b 3
-		dc.b 2
-		dc.w $8080
-		dc.w $32                
-						; 0032 SET CAMERA DEST A 6
-		dc.w $A
-		dc.w 6
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $7,$FF,$3,$2
+		endMove $8080
+		setCamDest $A,$6
+		customActscript $80,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$18 Y=$18
 		dc.b $18
@@ -323,77 +116,37 @@ abcs_battle33:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 1 1
-		dc.b $80
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 8
-		dc.b 8
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 461AA
-		dc.b $80
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 80 : "Did you defeat all those{N}devils?{W2}"
-		dc.w $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "I was wondering why it became{N}quiet so suddenly.{W1}"
-		dc.w $80
-		dc.w $2D                
-						; 002D MOVE ENTITY 1F 0 0 3
-		dc.b $1F
-		dc.b 0
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 0 FF 0 4
-		dc.b 0
-		dc.b $FF
-		dc.b 0
-		dc.b 4
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 1F 0
-		dc.b $1F
-		dc.b 0
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "Are you a survivor?{N}Are you from Moun?{N}What's your name?{W1}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "I am {NAME;26}.{N}I am not from Moun.{W1}"
-		dc.w $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "Then, where are you from?{W1}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "The past.{W1}"
-		dc.w $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "What do you mean?{W1}"
-		dc.w $1F
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 80 : "I cannot explain.{W2}"
-		dc.w $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "I am what I am.{N}That is all that I am.{W1}"
-		dc.w $80
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $80,$0,$1,$1
+		endMove $8080
+		csWait $8
+		setActscript $80,$FF,eas_461AA
+		nextText $0,$80         
+						; "Did you defeat all those{N}devils?{W2}"
+		nextSingleText $0,$80   
+						; "I was wondering why it became{N}quiet so suddenly.{W1}"
+		moveEntity $1F,$0,$0,$3
+		moreMove $1,$1
+		endMove $8080
+		moveEntity $0,$FF,$0,$4
+		endMove $8080
+		setEntityDir $1F,$0
+		setEntityDir $0,$1
+		nextSingleText $0,$1F   
+						; "Are you a survivor?{N}Are you from Moun?{N}What's your name?{W1}"
+		nextSingleText $0,$80   
+						; "I am {NAME;26}.{N}I am not from Moun.{W1}"
+		nextSingleText $0,$1F   
+						; "Then, where are you from?{W1}"
+		nextSingleText $0,$80   
+						; "The past.{W1}"
+		nextSingleText $0,$1F   
+						; "What do you mean?{W1}"
+		nextText $0,$80         
+						; "I cannot explain.{W2}"
+		nextSingleText $0,$80   
+						; "I am what I am.{N}That is all that I am.{W1}"
+		customActscript $80,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$28 Y=$28
 		dc.b $28
@@ -402,16 +155,9 @@ abcs_battle33:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 45E94
-		dc.b $80
-		dc.b $FF
-		dc.l eas_JumpRight      
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
+						; 0014 END OF CUSTOM ACTSCRIPT
+		setActscript $80,$FF,eas_JumpRight
+		customActscript $80,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$38 Y=$38
 		dc.b $38
@@ -420,115 +166,50 @@ abcs_battle33:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 46172
-		dc.b $80
-		dc.b $FF
-		dc.l eas_46172          
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 0 3 1
-		dc.b $80
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1A 10 8 3
-		dc.b $1A
-		dc.b $10
-		dc.b 8
-		dc.b 3
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1A FF 460CE
-		dc.b $1A
-		dc.b $FF
-		dc.l eas_Init           
-		dc.b $80                
-						; WAIT 3
-		dc.b 3
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 80 FF 461AA
-		dc.b $80
-		dc.b $FF
-		dc.l eas_461AA          
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 2
-		dc.w 2
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1F : "I've never seen anyone like{N}you.{W2}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "Where are the people of{N}Moun?  Were there any{N}survivors?{W1}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C01A : "Some.{W1}"
-		dc.w $C01A
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1F : "That's good news.{W2}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "And where are they?{W1}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C01A : "Down here.  Follow me.{W1}"
-		dc.w $C01A
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1A 3F 3F 3
-		dc.b $1A
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 FF 45E44
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $2D                
-						; 002D MOVE ENTITY 7 FF 1 2
-		dc.b 7
-		dc.b $FF
-		dc.b 1
-		dc.b 2
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 1F 3
-		dc.b $1F
-		dc.b 3
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1F : "{LEADER}, hurry!{N}Follow {NAME;26}!{W2}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "{NAME;26} knows where{N}they're hiding.{W1}"
-		dc.w $1F
-		dc.w $2C                
-						; 002C FOLLOW ENTITY 1F 0 2
-		dc.w $1F
-		dc.w 0
-		dc.w 2
-		dc.w $2C                
-						; 002C FOLLOW ENTITY 7 1F 2
-		dc.w 7
-		dc.w $1F
-		dc.w 2
-		dc.w $10                
-						; 0010 SET FLAG 341 FFFF : set after the scene after you win the battle in Moun plays out
-		dc.w $341
-		dc.w $FFFF
-		dc.w $FFFF              
+						; 0014 END OF CUSTOM ACTSCRIPT
+		setActscript $80,$FF,eas_46172
+		moveEntity $80,$0,$3,$1
+		endMove $8080
+		entityPosDir $1A,$10,$8,$3
+		setActscript $1A,$FF,eas_Init
+		csWait $3
+		setActscript $80,$FF,eas_461AA
+		setQuakeAmount $2
+		csWait $14
+		setQuakeAmount $0
+		nextText $0,$1F         
+						; "I've never seen anyone like{N}you.{W2}"
+		nextSingleText $0,$1F   
+						; "Where are the people of{N}Moun?  Were there any{N}survivors?{W1}"
+		nextSingleText $C0,$1A  
+						; "Some.{W1}"
+		nextText $0,$1F         
+						; "That's good news.{W2}"
+		nextSingleText $0,$1F   
+						; "And where are they?{W1}"
+		nextSingleText $C0,$1A  
+						; "Down here.  Follow me.{W1}"
+		entityPosDir $1A,$3F,$3F,$3
+		setActscript $7,$FF,eas_Jump
+		csWait $1E
+		moveEntity $7,$FF,$1,$2
+		endMove $8080
+		setEntityDir $1F,$3
+		nextText $0,$1F         
+						; "{LEADER}, hurry!{N}Follow {NAME;26}!{W2}"
+		nextSingleText $0,$1F   
+						; "{NAME;26} knows where{N}they're hiding.{W1}"
+		followEntity $1F,$0,$2
+		followEntity $7,$1F,$2
+		setF $341               
+						; set after the scene after you win the battle in Moun plays out
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-word_4D322:
-		dc.w $B
-		dc.w $B
+ce_4D322:
+		dc.b   0
+		dc.b  $B
+		dc.b   0
+		dc.b  $B
 		dc.w 1
 		dc.b $D
 		dc.b $B

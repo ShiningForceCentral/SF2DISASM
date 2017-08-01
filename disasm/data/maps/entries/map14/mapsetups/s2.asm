@@ -2,9 +2,10 @@
 ; ASM FILE data\maps\entries\map14\mapsetups\s2.asm :
 ; 0x58EBA..0x58F0E : 
 ms_map14_EntityEvents:
-		dc.b 1
-		dc.b 1
-		dc.w sub_58EDE-ms_map14_EntityEvents
+		dc.b   1
+		dc.b   1
+		dc.b   0
+		dc.b $24 
 		dc.b 2
 		dc.b 0
 		dc.w sub_58EE4-ms_map14_EntityEvents

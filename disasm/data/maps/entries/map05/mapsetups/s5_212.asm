@@ -17,16 +17,9 @@ nullsub_180:
 	; End of function nullsub_180
 
 cs_6060E:
-		dc.w $15                
+		setActscript $1C,$FF,eas_45F9C
 						; 0015 SET ACTSCRIPT 1C FF 45F9C
-		dc.b $1C
-		dc.b $FF
-		dc.l eas_45F9C          
-		dc.w $19                
+		entityPosDir $1C,$13,$21,$3
 						; 0019 SET ENTITY POS AND FACING 1C 13 21 3
-		dc.b $1C
-		dc.b $13
-		dc.b $21
-		dc.b 3
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

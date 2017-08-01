@@ -15,5 +15,4 @@ AllyNames:
 		incbin "data/stats/allies/allynames.bin"
 EnemyNames:
 		incbin "data/stats/enemies/enemynames.bin"
-algn_FF87:
 		align $8000

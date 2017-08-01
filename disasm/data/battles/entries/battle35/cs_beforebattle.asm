@@ -2,286 +2,97 @@
 ; ASM FILE data\battles\entries\battle35\cs_beforebattle.asm :
 ; 0x4D6CE..0x4D88A : Cutscene before battle 35
 bbcs_35:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR B76 : "You're still alive?{W1}"
-		dc.w $B76
-		dc.w $37                
-						; 0037 LOAD MAP AND FADE IN 4C 25 5
-		dc.w $4C
-		dc.w $25
-		dc.w 5
-		dc.w $42                
-						; 0042 RELATED TO LOADING MAP ENTITIES 4D832
-		dc.l word_4D832
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 7 2C A 2
-		dc.b 7
-		dc.b $2C
-		dc.b $A
-		dc.b 2
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1F 2C 8 2
-		dc.b $1F
-		dc.b $2C
-		dc.b 8
-		dc.b 2
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1E FF 460CE
-		dc.b $1E
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1E 2C 9 2
-		dc.b $1E
-		dc.b $2C
-		dc.b 9
-		dc.b 2
-		dc.w $D                 
-						; 000D JUMP IF CLEAR FLAG 4C 4D728 : Zynk is a follower
-		dc.w $4C
-		dc.l word_4D728         
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1A FF 460CE
-		dc.b $1A
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1A 3F 3E 3
-		dc.b $1A
-		dc.b $3F
-		dc.b $3E
-		dc.b 3
-word_4D728:
-		dc.w $39                
-						; 0039 FADE IN FROM BLACK
-		dc.w $45                
-						; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
-		dc.w $30
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "You're still alive?{W1}"
-		dc.w $80
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 0 45E44
-		dc.b 0
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 0 45E44
-		dc.b 7
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F FF 45E44
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C01F : "Geshp!{W1}"
-		dc.w $C01F
-		dc.w $32                
-						; 0032 SET CAMERA DEST 16 B
-		dc.w $16
-		dc.w $B
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 0
-		dc.b $80
-		dc.b 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Unbelievable!{N}You really are persistent.{W1}"
-		dc.w $80
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C007 : "We'll never stop!{W2}"
-		dc.w $C007
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C007 : "We will not die until we{N}destroy all of you.{W1}"
-		dc.w $C007
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C01F : "{LEADER}, kill him!{W2}"
-		dc.w $C01F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C01F : "We have to kill him now!{W1}"
-		dc.w $C01F
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "I'm very sorry, but I have{N}to go.{W1}"
-		dc.w $80
-		dc.w $22                
-						; 0022 ANIMATE ENTITY FADE INOUT 80
-		dc.w $80
-		dc.w 6
-		dc.w $32                
-						; 0032 SET CAMERA DEST 16 14
-		dc.w $16
-		dc.w $14
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 80 1C 18 3
-		dc.b $80
-		dc.b $1C
-		dc.b $18
-		dc.b 3
-		dc.w $22                
-						; 0022 ANIMATE ENTITY FADE INOUT 80
-		dc.w $80
-		dc.w 7
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 3
-		dc.b $81
-		dc.b 3
-		dc.w $23                
-						; 0023 SET ENTITY FACING 82 3
-		dc.b $82
-		dc.b 3
-		dc.w $23                
-						; 0023 SET ENTITY FACING 83 2
-		dc.b $83
-		dc.b 2
-		dc.w $23                
-						; 0023 SET ENTITY FACING 85 0
-		dc.b $85
-		dc.b 0
-		dc.w $23                
-						; 0023 SET ENTITY FACING 86 0
-		dc.b $86
-		dc.b 0
-		dc.w $23                
-						; 0023 SET ENTITY FACING 87 0
-		dc.b $87
-		dc.b 0
-		dc.w $23                
-						; 0023 SET ENTITY FACING 88 0
-		dc.b $88
-		dc.b 0
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 2
-		dc.b $80
-		dc.b 2
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 1
-		dc.b $80
-		dc.b 1
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 0
-		dc.b $80
-		dc.b 0
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 3
-		dc.b $80
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Don't let them advance!{W1}"
-		dc.w $80
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 81 0 45E44
-		dc.b $81
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 82 0 45E44
-		dc.b $82
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 83 0 45E44
-		dc.b $83
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 84 0 45E44
-		dc.b $84
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 85 0 45E44
-		dc.b $85
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 86 0 45E44
-		dc.b $86
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 87 0 45E44
-		dc.b $87
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 88 0 45E44
-		dc.b $88
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $22                
-						; 0022 ANIMATE ENTITY FADE INOUT 80
-		dc.w $80
-		dc.w 6
-		dc.b $80                
-						; WAIT 32
-		dc.b $32
-		dc.w $32                
-						; 0032 SET CAMERA DEST 25 5
-		dc.w $25
-		dc.w 5
-		dc.w $2D                
-						; 002D MOVE ENTITY 7 FF 3 1
-		dc.b 7
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.b 2
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "He escaped again!{W1}"
-		dc.w 7
-		dc.w $2D                
-						; 002D MOVE ENTITY 1F FF 2 1
-		dc.b $1F
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.w $8080
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1F : "Geshp sure is a tricky{N}devil.{W2}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "After him, now!{W1}"
-		dc.w $1F
-		dc.w $FFFF              
+		textCursor $B76         
+						; Initial text line $B76 : "You're still alive?{W1}"
+		loadMapFadeIn $4C,$25,$5
+		loadMapEntities ce_4D832
+						; Entity data to figure out and format
+		setActscript $0,$FF,eas_Init
+		setActscript $7,$FF,eas_Init
+		entityPosDir $7,$2C,$A,$2
+		setActscript $1F,$FF,eas_Init
+		entityPosDir $1F,$2C,$8,$2
+		setActscript $1E,$FF,eas_Init
+		entityPosDir $1E,$2C,$9,$2
+		jumpIfFlagClear $4C,cs_4D728
+						; Zynk is a follower
+		setActscript $1A,$FF,eas_Init
+		entityPosDir $1A,$3F,$3E,$3
+cs_4D728:
+		fadeInB
+		csc45 $30               
+						; (null)
+		nextSingleText $0,$80   
+						; "You're still alive?{W1}"
+		setActscript $0,$0,eas_Jump
+		setActscript $7,$0,eas_Jump
+		setActscript $1F,$FF,eas_Jump
+		nextSingleText $C0,$1F  
+						; "Geshp!{W1}"
+		setCamDest $16,$B
+		setEntityDir $80,$0
+		nextSingleText $0,$80   
+						; "Unbelievable!{N}You really are persistent.{W1}"
+		nextText $C0,$7         
+						; "We'll never stop!{W2}"
+		nextSingleText $C0,$7   
+						; "We will not die until we{N}destroy all of you.{W1}"
+		nextText $C0,$1F        
+						; "{LEADER}, kill him!{W2}"
+		nextSingleText $C0,$1F  
+						; "We have to kill him now!{W1}"
+		csWait $28
+		nextSingleText $0,$80   
+						; "I'm very sorry, but I have{N}to go.{W1}"
+		animEntityFadeInOut $80,$6
+		setCamDest $16,$14
+		entityPosDir $80,$1C,$18,$3
+		animEntityFadeInOut $80,$7
+		csWait $28
+		setEntityDir $81,$3
+		setEntityDir $82,$3
+		setEntityDir $83,$2
+		setEntityDir $85,$0
+		setEntityDir $86,$0
+		setEntityDir $87,$0
+		setEntityDir $88,$0
+		csWait $14
+		setEntityDir $80,$2
+		csWait $1E
+		setEntityDir $80,$1
+		csWait $1E
+		setEntityDir $80,$0
+		csWait $1E
+		setEntityDir $80,$3
+		nextSingleText $0,$80   
+						; "Don't let them advance!{W1}"
+		setActscript $81,$0,eas_Jump
+		setActscript $82,$0,eas_Jump
+		setActscript $83,$0,eas_Jump
+		setActscript $84,$0,eas_Jump
+		setActscript $85,$0,eas_Jump
+		setActscript $86,$0,eas_Jump
+		setActscript $87,$0,eas_Jump
+		setActscript $88,$0,eas_Jump
+		animEntityFadeInOut $80,$6
+		csWait $32
+		setCamDest $25,$5
+		moveEntity $7,$FF,$3,$1
+		moreMove $2,$1
+		endMove $8080
+		nextSingleText $0,$7    
+						; "He escaped again!{W1}"
+		moveEntity $1F,$FF,$2,$1
+		endMove $8080
+		nextText $0,$1F         
+						; "Geshp sure is a tricky{N}devil.{W2}"
+		nextSingleText $0,$1F   
+						; "After him, now!{W1}"
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-word_4D832:
-		dc.w $2B
+ce_4D832:
+		dc.b   0
+		dc.b $2B 
 		dc.w 9
 		dc.w 2
 		dc.b $2C

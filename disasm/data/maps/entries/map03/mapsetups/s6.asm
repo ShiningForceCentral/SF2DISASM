@@ -24,18 +24,13 @@ loc_51390:
 		bra.w   loc_513A8
 cs_513A0:
 		
-		dc.w $19                
+		entityPosDir $1,$29,$A,$1
 						; 0019 SET ENTITY POS AND FACING 1 29 A 1
-		dc.b 1
-		dc.b $29
-		dc.b $A
-		dc.b 1
-		dc.b $FF                
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-		dc.b $FF
 loc_513A8:
 		
-		trap    #CHECK_FLAG
+		trap    #1
 		dc.w $25B               
 						; set after the messenger scene
 		beq.s   return_513B8
@@ -48,9 +43,7 @@ return_513B8:
 	; End of function ms_map3_InitFunction
 
 cs_513BA:
-		dc.w $2E                
+		hideEntity $8E          
 						; 002E HIDE ENTITY 8E
-		dc.w $8E
-		dc.b $FF                
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-		dc.b $FF

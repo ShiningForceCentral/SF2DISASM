@@ -2,9 +2,10 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\s2_1F5.asm :
 ; 0x52F60..0x52F90 : 
 ms_map19_flag1F5_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_52F70-ms_map19_flag1F5_EntityEvents
+		dc.b $80 
+		dc.b   1
+		dc.b   0
+		dc.b $10
 		dc.b $81
 		dc.b 3
 		dc.w sub_52F84-ms_map19_flag1F5_EntityEvents

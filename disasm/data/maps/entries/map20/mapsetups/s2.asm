@@ -134,23 +134,15 @@ return_53814:
 	; End of function sub_537FE
 
 cs_53816:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 234 : "(Scream!)...who are you?!{N}Get out of here!{W2}"
-		dc.w $234
-		dc.w $15                
+		textCursor $234         
+						; Initial text line $234 : "(Scream!)...who are you?!{N}Get out of here!{W2}"
+		setActscript $87,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 87 FF 45E44
-		dc.b $87
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $23                
+		setEntityDir $87,$2     
 						; 0023 SET ENTITY FACING 87 2
-		dc.b $87
-		dc.b 2
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 87 : "(Scream!)...who are you?!{N}Get out of here!{W2}"
-		dc.w $87
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 87 : "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
-		dc.w $87
-		dc.w $FFFF              
+		nextText $0,$87         
+						; "(Scream!)...who are you?!{N}Get out of here!{W2}"
+		nextText $0,$87         
+						; "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

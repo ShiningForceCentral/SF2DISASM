@@ -37,9 +37,7 @@ sub_6282A:
 	; End of function sub_6282A
 
 cs_6283E:
-		dc.w $28                
+		moveEntityNextToPlayer $89,$2
 						; 0028 MOVE ENTITY NEXT TO PLAYER 89 2
-		dc.w $89
-		dc.w 2
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

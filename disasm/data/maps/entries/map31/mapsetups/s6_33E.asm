@@ -29,215 +29,122 @@ return_5D63A:
 	; End of function ms_map31_flag33E_InitFunction
 
 cs_5D63C:
-		dc.w $19                
+		entityPosDir $88,$1E,$6,$2
 						; 0019 SET ENTITY POS AND FACING 88 1E 6 2
-		dc.b $88
-		dc.b $1E
-		dc.b 6
-		dc.b 2
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_5D644:
-		dc.w $19                
+		entityPosDir $89,$8,$3,$2
 						; 0019 SET ENTITY POS AND FACING 89 8 3 2
-		dc.b $89
-		dc.b 8
-		dc.b 3
-		dc.b 2
-		dc.w $22                
+		animEntityFadeInOut $89,$5
 						; 0022 ANIMATE ENTITY FADE INOUT 89
-		dc.w $89
-		dc.w 5
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_5D652:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 7E8 : "Oh, you're cute!{N}(Cough)...well...{W1}"
-		dc.w $7E8
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 88 : "Oh, you're cute!{N}(Cough)...well...{W1}"
-		dc.w $88
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 88 : "May I paint your portrait?"
-		dc.w $88
-word_5D65E:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 7EB : "Excellent!{W1}"
-		dc.w $7EB
-		dc.w $11                
+		textCursor $7E8         
+						; Initial text line $7E8 : "Oh, you're cute!{N}(Cough)...well...{W1}"
+		nextSingleText $0,$88   
+						; "Oh, you're cute!{N}(Cough)...well...{W1}"
+		nextText $0,$88         
+						; "May I paint your portrait?"
+cs_5D65E:
+		textCursor $7EB         
+						; Initial text line $7EB : "Excellent!{W1}"
+		yesNo                   
 						; 0011 STORY YESNO PROMPT
-		dc.w $D                 
-						; 000D JUMP IF CLEAR FLAG 59 5D712 : YES/NO prompt answer
-		dc.w $59
-		dc.l word_5D712         
-		dc.w 9                  
+		jumpIfFlagClear $59,cs_5D712
+						; YES/NO prompt answer
+		hideText                
 						; 0009 HIDE TEXTBOX AND PORTRAIT
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 88 : "Excellent!{W1}"
-		dc.w $88
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 88 : "Then, would you stand over{N}there, in front of the{N}flowers?{W1}"
-		dc.w $88
-		dc.w $15                
+		nextSingleText $0,$88   
+						; "Excellent!{W1}"
+		nextSingleText $0,$88   
+						; "Then, would you stand over{N}there, in front of the{N}flowers?{W1}"
+		setActscript $7,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $1F,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $29                
+		setEntityDest $0,$1C,$3 
 						; 0029 SET ENTITY DEST 0 1C 3
-		dc.w 0
-		dc.w $1C
-		dc.w 3
-		dc.w $23                
+		setEntityDir $0,$3      
 						; 0023 SET ENTITY FACING 0 3
-		dc.b 0
-		dc.b 3
-		dc.w $29                
+		setEntityDest $7,$1B,$4 
 						; 0029 SET ENTITY DEST 7 1B 4
-		dc.w 7
-		dc.w $1B
-		dc.w 4
-		dc.w $29                
+		setEntityDest $1F,$1B,$5
 						; 0029 SET ENTITY DEST 1F 1B 5
-		dc.w $1F
-		dc.w $1B
-		dc.w 5
-		dc.w $23                
+		setEntityDir $88,$1     
 						; 0023 SET ENTITY FACING 88 1
-		dc.b $88
-		dc.b 1
-		dc.w $15                
+		setActscript $88,$FF,eas_46172
 						; 0015 SET ACTSCRIPT 88 FF 46172
-		dc.b $88
-		dc.b $FF
-		dc.l eas_46172          
-		dc.w $2D                
+		moveEntity $88,$FF,$2,$1
 						; 002D MOVE ENTITY 88 FF 2 1
-		dc.b $88
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $88,$FF,$0,$1
 						; 002D MOVE ENTITY 88 FF 0 1
-		dc.b $88
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
+		endMove $8080
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w $2D                
+		moveEntity $88,$FF,$2,$1
 						; 002D MOVE ENTITY 88 FF 2 1
-		dc.b $88
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
+		endMove $8080
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $2D                
+		moveEntity $88,$FF,$0,$1
 						; 002D MOVE ENTITY 88 FF 0 1
-		dc.b $88
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $88,$FF,$2,$1
 						; 002D MOVE ENTITY 88 FF 2 1
-		dc.b $88
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $88,$FF,$0,$1
 						; 002D MOVE ENTITY 88 FF 0 1
-		dc.b $88
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
+		endMove $8080
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w $15                
+		setActscript $88,$FF,eas_Init2
 						; 0015 SET ACTSCRIPT 88 FF 46102
-		dc.b $88
-		dc.b $FF
-		dc.l eas_Init2          
-		dc.w $23                
+		setEntityDir $88,$1     
 						; 0023 SET ENTITY FACING 88 1
-		dc.b $88
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 88 : "Finished!{W1}"
-		dc.w $88
-		dc.w $2D                
+		nextSingleText $0,$88   
+						; "Finished!{W1}"
+		moveEntity $88,$FF,$0,$1
 						; 002D MOVE ENTITY 88 FF 0 1
-		dc.b $88
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		endMove $8080
+		setEntityDir $88,$2     
 						; 0023 SET ENTITY FACING 88 2
-		dc.b $88
-		dc.b 2
-		dc.w $2C                
+		followEntity $7,$0,$2   
 						; 002C FOLLOW ENTITY 7 0 2
-		dc.w 7
-		dc.w 0
-		dc.w 2
-		dc.w $2C                
+		followEntity $1F,$7,$2  
 						; 002C FOLLOW ENTITY 1F 7 2
-		dc.w $1F
-		dc.w 7
-		dc.w 2
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-word_5D712:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 7EA : "Oh, please!  It won't take{N}long.  Will you pose{N}for me?"
-		dc.w $7EA
-		dc.w 9                  
+cs_5D712:
+		textCursor $7EA         
+						; Initial text line $7EA : "Oh, please!  It won't take{N}long.  Will you pose{N}for me?"
+		hideText                
 						; 0009 HIDE TEXTBOX AND PORTRAIT
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 88 : "Oh, please!  It won't take{N}long.  Will you pose{N}for me?"
-		dc.w $88
-		dc.w $B                 
+		nextText $0,$88         
+						; "Oh, please!  It won't take{N}long.  Will you pose{N}for me?"
+		jump cs_5D65E           
 						; 000B JUMP 5D65E
-		dc.l word_5D65E         
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-word_5D724:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 7EE : "It's you!{W2}"
-		dc.w $7EE
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 88 : "It's you!{W2}"
-		dc.w $88
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 88 : "Ah, how talented I am!{N}Hmmmm?{W1}"
-		dc.w $88
-		dc.w $FFFF              
+byte_5D724:
+		textCursor $7EE         
+						; Initial text line $7EE : "It's you!{W2}"
+		nextText $0,$88         
+						; "It's you!{W2}"
+		nextSingleText $0,$88   
+						; "Ah, how talented I am!{N}Hmmmm?{W1}"
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_5D732:
-		dc.w $A                 
+		executeSubroutine sub_5D73E
 						; 000A EXECUTE SUBROUTINE 5D73E
-		dc.l sub_5D73E
-		dc.b $80                
+		csWait $B4              
 						; WAIT B4
-		dc.b $B4
-		dc.w 9                  
+		hideText                
 						; 0009 HIDE TEXTBOX AND PORTRAIT
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 
 ; =============== S U B R O U T I N E =======================================

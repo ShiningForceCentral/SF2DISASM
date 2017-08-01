@@ -1,6 +1,12 @@
 
 ; ASM FILE data\maps\entries\map55\mapsetups\s4.asm :
 ; 0x5E25E..0x5E260 : 
+
+; =============== S U B R O U T I N E =======================================
+
 ms_map55_AreaDescriptions:
-		dc.b $4E
-		dc.b $75
+		
+		rts
+
+	; End of function ms_map55_AreaDescriptions
+

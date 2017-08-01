@@ -35,5 +35,12 @@ return_5D570:
 
 	; End of function sub_5D560
 
-		dc.b $4E 
-		dc.b $75 
+
+; =============== S U B R O U T I N E =======================================
+
+sub_5D572:
+		
+		rts
+
+	; End of function sub_5D572
+

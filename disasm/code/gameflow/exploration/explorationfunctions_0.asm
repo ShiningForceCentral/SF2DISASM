@@ -299,25 +299,16 @@ loc_239C8:
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		jsr     j_IncreaseGold
 		trap    #SOUND_COMMAND
-
-; END OF FUNCTION CHUNK FOR sub_23862
-
 		dc.w MUSIC_ITEM
 		trap    #TEXTBOX
 		dc.w $19E               
 						; "{NAME} found {#} gold{N}coins."
 		bsr.w   FadeOut_WaitForP1Input
 		bra.s   loc_23994
-
-; START OF FUNCTION CHUNK FOR sub_23862
-
 loc_239EE:
 		
 		move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
 		trap    #TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_23862
-
 		dc.w $19D               
 						; "{NAME} found{N}{ITEM}.{W2}{CLEAR}"
 		clr.w   d1
@@ -334,12 +325,14 @@ loc_239EE:
 		bsr.w   FadeOut_WaitForP1Input
 		bra.w   loc_23994
 loc_23A1E:
+		
 		jsr     j_UpdateForce
 		lea     ((byte_FFB653-$1000000)).w,a0
 		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 		subq.w  #2,d7
 		bmi.w   loc_23A66
 loc_23A32:
+		
 		clr.w   d0
 		move.b  (a0)+,d0
 		clr.w   d1
@@ -357,8 +350,10 @@ loc_23A32:
 		bsr.w   FadeOut_WaitForP1Input
 		bra.w   loc_23994
 loc_23A62:
+		
 		dbf     d7,loc_23A32
 loc_23A66:
+		
 		move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d3
 		clr.w   d0
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
@@ -370,3 +365,6 @@ loc_23A66:
 		jsr     (CloseChest).w
 		jsr     (CloseVaseOrBarrel).w
 		bra.w   loc_23994
+
+; END OF FUNCTION CHUNK FOR sub_23862
+

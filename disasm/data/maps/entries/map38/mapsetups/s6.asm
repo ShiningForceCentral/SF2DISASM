@@ -41,404 +41,208 @@ return_5DD8C:
 	; End of function ms_map38_InitFunction
 
 cs_5DD8E:
-		dc.w $2B                
+		csc2B $1A,$B,$8,$3,$FF  
 						; 002B  1A B 8 3 FF
-		dc.w $1A
-		dc.b $B
-		dc.b 8
-		dc.b 3
-		dc.b $FF
-		dc.w $23                
+		setEntityDir $1A,$3     
 						; 0023 SET ENTITY FACING 1A 3
-		dc.b $1A
-		dc.b 3
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_5DD9C:
-		dc.w $19                
+		entityPosDir $80,$E,$1A,$3
 						; 0019 SET ENTITY POS AND FACING 80 E 1A 3
-		dc.b $80
-		dc.b $E
-		dc.b $1A
-		dc.b 3
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 854 : "Galam soldiers!  Run!{W1}"
-		dc.w $854
-		dc.b $80                
+		textCursor $854         
+						; Initial text line $854 : "Galam soldiers!  Run!{W1}"
+		csWait $1               
 						; WAIT 1
-		dc.b 1
-		dc.w $19                
+		entityPosDir $0,$E,$1C,$1
 						; 0019 SET ENTITY POS AND FACING 0 E 1C 1
-		dc.b 0
-		dc.b $E
-		dc.b $1C
-		dc.b 1
-		dc.w $19                
+		entityPosDir $7,$D,$1D,$1
 						; 0019 SET ENTITY POS AND FACING 7 D 1D 1
-		dc.b 7
-		dc.b $D
-		dc.b $1D
-		dc.b 1
-		dc.w $19                
+		entityPosDir $1F,$E,$1D,$1
 						; 0019 SET ENTITY POS AND FACING 1F E 1D 1
-		dc.b $1F
-		dc.b $E
-		dc.b $1D
-		dc.b 1
-		dc.w $C                 
-						; 000C JUMP IF SET FLAG 4C 5DE22 : Zynk is a follower
-		dc.w $4C
-		dc.l cs_5DE22           
-word_5DDC2:
-		dc.w 5                  
+		jumpIfFlagSet $4C,cs_5DE22
+						; Zynk is a follower
+cs_5DDC2:
+		playSound MUSIC_TOWN    
 						; 0005 PLAY SOUND MUSIC_TOWN
-		dc.w 8
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.w $24                
+		setCameraEntity $80     
 						; 0024 SET ENTITY FOLLOWED BY CAMERA 80
-		dc.w $80
-		dc.w $15                
+		setActscript $80,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 80 FF 45E44
-		dc.b $80
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Galam soldiers!  Run!{W1}"
-		dc.w $80
-		dc.w $2D                
+		nextSingleText $0,$80   
+						; "Galam soldiers!  Run!{W1}"
+		moveEntity $80,$FF,$2,$2
 						; 002D MOVE ENTITY 80 FF 2 2
-		dc.b $80
-		dc.b $FF
-		dc.b 2
-		dc.b 2
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $80,$FF,$1,$1
 						; 002D MOVE ENTITY 80 FF 1 1
-		dc.b $80
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $80,$FF,$2,$2
 						; 002D MOVE ENTITY 80 FF 2 2
-		dc.b $80
-		dc.b $FF
-		dc.b 2
-		dc.b 2
-		dc.w $8080
-		dc.w $23                
+		endMove $8080
+		setEntityDir $0,$2      
 						; 0023 SET ENTITY FACING 0 2
-		dc.b 0
-		dc.b 2
-		dc.w $23                
+		setEntityDir $7,$2      
 						; 0023 SET ENTITY FACING 7 2
-		dc.b 7
-		dc.b 2
-		dc.w $23                
+		setEntityDir $1F,$2     
 						; 0023 SET ENTITY FACING 1F 2
-		dc.b $1F
-		dc.b 2
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "No, wait!  We're not Galam{N}soldiers!{W1}"
-		dc.w 7
-		dc.w $23                
+		nextSingleText $0,$7    
+						; "No, wait!  We're not Galam{N}soldiers!{W1}"
+		setEntityDir $80,$0     
 						; 0023 SET ENTITY FACING 80 0
-		dc.b $80
-		dc.b 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "No...?{W1}"
-		dc.w $80
-		dc.w $2D                
+		nextSingleText $0,$80   
+						; "No...?{W1}"
+		moveEntity $80,$FF,$3,$2
 						; 002D MOVE ENTITY 80 FF 3 2
-		dc.b $80
-		dc.b $FF
-		dc.b 3
-		dc.b 2
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $80,$FF,$0,$2
 						; 002D MOVE ENTITY 80 FF 0 2
-		dc.b $80
-		dc.b $FF
-		dc.b 0
-		dc.b 2
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Oops.  My mistake.{W2}"
-		dc.w $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Oh, it's obvious.  I can see{N}it in your eyes.{W1}"
-		dc.w $80
-		dc.w $FFFF              
+		endMove $8080
+		nextSingleText $0,$80   
+						; "Oops.  My mistake.{W2}"
+		nextSingleText $0,$80   
+						; "Oh, it's obvious.  I can see{N}it in your eyes.{W1}"
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_5DE22:
-		dc.w $19                
+		entityPosDir $1A,$F,$1D,$1
 						; 0019 SET ENTITY POS AND FACING 1A F 1D 1
-		dc.b $1A
-		dc.b $F
-		dc.b $1D
-		dc.b 1
-		dc.w $B                 
+		jump cs_5DDC2           
 						; 000B JUMP 5DDC2
-		dc.l word_5DDC2         
 cs_5DE2E:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 86A : "Sir Petro, don't leave me{N}alone!{W1}"
-		dc.w $86A
-		dc.w $1C                
+		textCursor $86A         
+						; Initial text line $86A : "Sir Petro, don't leave me{N}alone!{W1}"
+		stopEntity $8E          
 						; 001C STOP ENTITY ANIM 8E
-		dc.w $8E
-		dc.w 5                  
+		playSound $FD           
 						; 0005 PLAY SOUND 
-		dc.w $FD
-		dc.w $32                
+		setCamDest $8,$0        
 						; 0032 SET CAMERA DEST 8 0
-		dc.w 8
-		dc.w 0
-		dc.w $2A                
+		entityShiver $89        
 						; 002A MAKE ENTITY SHIVER 89
-		dc.w $89
-		dc.w 5                  
+		playSound MUSIC_SAD_THEME_3
 						; 0005 PLAY SOUND MUSIC_SAD_THEME_3
-		dc.w $F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 89 : "Sir Petro, don't leave me{N}alone!{W1}"
-		dc.w $89
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8E : "Paseran...I'm sorry.{W1}"
-		dc.w $8E
-		dc.w $2A                
+		nextSingleText $0,$89   
+						; "Sir Petro, don't leave me{N}alone!{W1}"
+		nextSingleText $0,$8E   
+						; "Paseran...I'm sorry.{W1}"
+		entityShiver $89        
 						; 002A MAKE ENTITY SHIVER 89
-		dc.w $89
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 89 : "You promised to fly me in{N}the sky!{W1}"
-		dc.w $89
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 8E : "I know...with the Nazca{N}Ship...I promised...{W2}"
-		dc.w $8E
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 8E : "I'd fly home...to see my{N}family....{W2}"
-		dc.w $8E
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8E : "To show them how wonderful{N}the ancients were....{W1}"
-		dc.w $8E
-		dc.w $2A                
+		nextSingleText $0,$89   
+						; "You promised to fly me in{N}the sky!{W1}"
+		nextText $0,$8E         
+						; "I know...with the Nazca{N}Ship...I promised...{W2}"
+		nextText $0,$8E         
+						; "I'd fly home...to see my{N}family....{W2}"
+		nextSingleText $0,$8E   
+						; "To show them how wonderful{N}the ancients were....{W1}"
+		entityShiver $89        
 						; 002A MAKE ENTITY SHIVER 89
-		dc.w $89
-		dc.w 5                  
+		playSound $FD           
 						; 0005 PLAY SOUND 
-		dc.w $FD
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 89 : "Petro!  No!{W1}"
-		dc.w $89
-		dc.w 5                  
+		nextSingleText $0,$89   
+						; "Petro!  No!{W1}"
+		playSound $FB           
 						; 0005 PLAY SOUND 
-		dc.w $FB
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_5DE76:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 879 : "What's wrong with {NAME;26}?{W1}"
-		dc.w $879
-		dc.w $15                
+		textCursor $879         
+						; Initial text line $879 : "What's wrong with {NAME;26}?{W1}"
+		setActscript $7,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $1F,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $24                
+		setCameraEntity $1A     
 						; 0024 SET ENTITY FOLLOWED BY CAMERA 1A
-		dc.w $1A
-		dc.w $29                
+		setEntityDest $0,$C,$9  
 						; 0029 SET ENTITY DEST 0 C 9
-		dc.w 0
-		dc.w $C
-		dc.w 9
-		dc.w $29                
+		setEntityDest $7,$C,$8  
 						; 0029 SET ENTITY DEST 7 C 8
-		dc.w 7
-		dc.w $C
-		dc.w 8
-		dc.w $29                
+		setEntityDest $7,$D,$8  
 						; 0029 SET ENTITY DEST 7 D 8
-		dc.w 7
-		dc.w $D
-		dc.w 8
-		dc.w $29                
+		setEntityDest $1F,$C,$8 
 						; 0029 SET ENTITY DEST 1F C 8
-		dc.w $1F
-		dc.w $C
-		dc.w 8
-		dc.w $29                
+		setEntityDest $1F,$E,$8 
 						; 0029 SET ENTITY DEST 1F E 8
-		dc.w $1F
-		dc.w $E
-		dc.w 8
-		dc.w $15                
+		setActscript $1A,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1A FF 460CE
-		dc.b $1A
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $29                
+		setEntityDest $1A,$B,$8 
 						; 0029 SET ENTITY DEST 1A B 8
-		dc.w $1A
-		dc.w $B
-		dc.w 8
-		dc.w $23                
+		setEntityDir $0,$2      
 						; 0023 SET ENTITY FACING 0 2
-		dc.b 0
-		dc.b 2
-		dc.w $23                
+		setEntityDir $7,$2      
 						; 0023 SET ENTITY FACING 7 2
-		dc.b 7
-		dc.b 2
-		dc.w $23                
+		setEntityDir $1F,$2     
 						; 0023 SET ENTITY FACING 1F 2
-		dc.b $1F
-		dc.b 2
-		dc.w $2D                
+		moveEntity $1A,$FF,$2,$2
 						; 002D MOVE ENTITY 1A FF 2 2
-		dc.b $1A
-		dc.b $FF
-		dc.b 2
-		dc.b 2
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $7,$FF,$2,$2 
 						; 002D MOVE ENTITY 7 FF 2 2
-		dc.b 7
-		dc.b $FF
-		dc.b 2
-		dc.b 2
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $1F,$FF,$2,$1
 						; 002D MOVE ENTITY 1F FF 2 1
-		dc.b $1F
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $1A,$FF,$3,$1
 						; 002D MOVE ENTITY 1A FF 3 1
-		dc.b $1A
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $1A,$FF,$0,$1
 						; 002D MOVE ENTITY 1A FF 0 1
-		dc.b $1A
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $1A,$FF,$1,$1
 						; 002D MOVE ENTITY 1A FF 1 1
-		dc.b $1A
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $1A,$FF,$2,$2
 						; 002D MOVE ENTITY 1A FF 2 2
-		dc.b $1A
-		dc.b $FF
-		dc.b 2
-		dc.b 2
-		dc.w $8080
-		dc.w $15                
+		endMove $8080
+		setActscript $1A,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 1A FF 45E44
-		dc.b $1A
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $1A,$0,eas_Jump
 						; 0015 SET ACTSCRIPT 1A 0 45E44
-		dc.b $1A
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "What's wrong with {NAME;26}?{W1}"
-		dc.w 7
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "I have no idea, but he's{N}obviously disturbed!{W1}"
-		dc.w $1F
-		dc.w $2D                
+		nextSingleText $0,$7    
+						; "What's wrong with {NAME;26}?{W1}"
+		nextSingleText $0,$1F   
+						; "I have no idea, but he's{N}obviously disturbed!{W1}"
+		moveEntity $1A,$FF,$1,$1
 						; 002D MOVE ENTITY 1A FF 1 1
-		dc.b $1A
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $1A,$FF,$0,$1
 						; 002D MOVE ENTITY 1A FF 0 1
-		dc.b $1A
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $1A,$FF,$3,$1
 						; 002D MOVE ENTITY 1A FF 3 1
-		dc.b $1A
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $1A,$FF,$2,$2
 						; 002D MOVE ENTITY 1A FF 2 2
-		dc.b $1A
-		dc.b $FF
-		dc.b 2
-		dc.b 2
-		dc.w $8080
-		dc.b $80                
+		endMove $8080
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $26                
+		entityNod $1A           
 						; 0026 MAKE ENTITY NOD 1A
-		dc.w $1A
-		dc.w $23                
+		setEntityDir $1A,$0     
 						; 0023 SET ENTITY FACING 1A 0
-		dc.b $1A
-		dc.b 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1A : "{LEADER}, Sir Astral!{N}I am angry!{W2}"
-		dc.w $1A
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1A : "I cannot forgive the{N}devils!{W2}"
-		dc.w $1A
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1A : "I have overridden my{N}restrictions on fighting.{W2}"
-		dc.w $1A
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1A : "I am joining your force as{N}a soldier!{W1}"
-		dc.w $1A
-		dc.w 8                  
+		nextSingleText $0,$1A   
+						; "{LEADER}, Sir Astral!{N}I am angry!{W2}"
+		nextSingleText $0,$1A   
+						; "I cannot forgive the{N}devils!{W2}"
+		nextSingleText $0,$1A   
+						; "I have overridden my{N}restrictions on fighting.{W2}"
+		nextSingleText $0,$1A   
+						; "I am joining your force as{N}a soldier!{W1}"
+		join $1A                
 						; 0008 JOIN FORCE 1A
-		dc.w $1A
-		dc.w $10                
-						; 0010 SET FLAG 4C 0 : Zynk is a follower
-		dc.w $4C
-		dc.w 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1A : "Let us go defeat the Devil{N}Army!{W1}"
-		dc.w $1A
-		dc.w $2C                
+		clearF $4C              
+						; Zynk is a follower
+		nextSingleText $0,$1A   
+						; "Let us go defeat the Devil{N}Army!{W1}"
+		followEntity $7,$0,$2   
 						; 002C FOLLOW ENTITY 7 0 2
-		dc.w 7
-		dc.w 0
-		dc.w 2
-		dc.w $2C                
+		followEntity $1F,$7,$2  
 						; 002C FOLLOW ENTITY 1F 7 2
-		dc.w $1F
-		dc.w 7
-		dc.w 2
-		dc.w $2C                
+		followEntity $1A,$1F,$2 
 						; 002C FOLLOW ENTITY 1A 1F 2
-		dc.w $1A
-		dc.w $1F
-		dc.w 2
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

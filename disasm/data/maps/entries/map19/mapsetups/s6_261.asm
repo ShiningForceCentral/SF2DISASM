@@ -6,7 +6,7 @@
 
 ms_map19_flag261_InitFunction:
 		
-		trap    #CHECK_FLAG
+		trap    #1
 		dc.w $262               
 						; set after you agree to go to see Hawel
 		bne.s   return_5311C

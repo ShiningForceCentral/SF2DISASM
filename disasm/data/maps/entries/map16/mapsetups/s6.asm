@@ -19,645 +19,343 @@ return_51F86:
 	; End of function ms_map16_InitFunction
 
 cs_51F88:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 3C2 : "Listen, everybody!{N}We're going to Granseal!{W1}"
-		dc.w $3C2
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Listen, everybody!{N}We're going to Granseal!{W1}"
-		dc.w $C080
-		dc.w $23                
+		textCursor $3C2         
+						; Initial text line $3C2 : "Listen, everybody!{N}We're going to Granseal!{W1}"
+		nextSingleText $C0,$80  
+						; "Listen, everybody!{N}We're going to Granseal!{W1}"
+		setEntityDir $5,$3      
 						; 0023 SET ENTITY FACING 5 3
-		dc.b 5
-		dc.b 3
-		dc.w $23                
+		setEntityDir $0,$3      
 						; 0023 SET ENTITY FACING 0 3
-		dc.b 0
-		dc.b 3
-		dc.w $32                
+		setCamDest $C,$B        
 						; 0032 SET CAMERA DEST C B
-		dc.w $C
-		dc.w $B
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C005 : "We're too late!{W1}"
-		dc.w $C005
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C080 : "As you may know, my{N}messenger was killed!{W2}"
-		dc.w $C080
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C080 : "Granseal must have done{N}this.{W2}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "So we're invading them to{N}retaliate!{W1}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX FFFF : "Murmur...murmur....{W1}"
-		dc.w $FFFF
-		dc.b $80                
+		nextSingleText $C0,$5   
+						; "We're too late!{W1}"
+		nextText $C0,$80        
+						; "As you may know, my{N}messenger was killed!{W2}"
+		nextText $C0,$80        
+						; "Granseal must have done{N}this.{W2}"
+		nextSingleText $C0,$80  
+						; "So we're invading them to{N}retaliate!{W1}"
+		nextSingleText $FF,$FF  
+						; "Murmur...murmur....{W1}"
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $23                
+		setEntityDir $1C,$0     
 						; 0023 SET ENTITY FACING 1C 0
-		dc.b $1C
-		dc.b 0
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $23                
+		setEntityDir $1C,$2     
 						; 0023 SET ENTITY FACING 1C 2
-		dc.b $1C
-		dc.b 2
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $29                
+		setEntityDest $1C,$10,$11
 						; 0029 SET ENTITY DEST 1C 10 11
-		dc.w $1C
-		dc.w $10
-		dc.w $11
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1C : "Quiet!  Everybody listen{N}to me!{W1}"
-		dc.w $1C
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1C : "I also don't understand{N}this march!{W2}"
-		dc.w $1C
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1C : "But, King Galam must{N}have a good reason!{W2}"
-		dc.w $1C
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1C : "I believe the King!{N}How about you?{N}Anyone disagree?{W1}"
-		dc.w $1C
-		dc.b $80                
+		nextText $0,$1C         
+						; "Quiet!  Everybody listen{N}to me!{W1}"
+		nextText $0,$1C         
+						; "I also don't understand{N}this march!{W2}"
+		nextText $0,$1C         
+						; "But, King Galam must{N}have a good reason!{W2}"
+		nextText $0,$1C         
+						; "I believe the King!{N}How about you?{N}Anyone disagree?{W1}"
+		csWait $5               
 						; WAIT 5
-		dc.b 5
-		dc.w $15                
+		setActscript $1C,$0,eas_461B6
 						; 0015 SET ACTSCRIPT 1C 0 461B6
-		dc.b $1C
-		dc.b 0
-		dc.l eas_461B6          
-		dc.b $80                
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1C : "No?  Good!{W1}"
-		dc.w $1C
-		dc.w $23                
+		nextSingleText $0,$1C   
+						; "No?  Good!{W1}"
+		setEntityDir $1C,$3     
 						; 0023 SET ENTITY FACING 1C 3
-		dc.b $1C
-		dc.b 3
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $23                
+		setEntityDir $1C,$1     
 						; 0023 SET ENTITY FACING 1C 1
-		dc.b $1C
-		dc.b 1
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $29                
+		setEntityDest $1C,$10,$10
 						; 0029 SET ENTITY DEST 1C 10 10
-		dc.w $1C
-		dc.w $10
-		dc.w $10
-		dc.w $23                
+		setEntityDir $1C,$0     
 						; 0023 SET ENTITY FACING 1C 0
-		dc.b $1C
-		dc.b 0
-		dc.w $23                
+		setEntityDir $80,$2     
 						; 0023 SET ENTITY FACING 80 2
-		dc.b $80
-		dc.b 2
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $23                
+		setEntityDir $1C,$3     
 						; 0023 SET ENTITY FACING 1C 3
-		dc.b $1C
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Well done, {NAME;28}.{W1}"
-		dc.w $C080
-		dc.w $23                
+		nextSingleText $C0,$80  
+						; "Well done, {NAME;28}.{W1}"
+		setEntityDir $80,$3     
 						; 0023 SET ENTITY FACING 80 3
-		dc.b $80
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1C : "King Galam, victory is{N}ours!{W1}"
-		dc.w $1C
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Guards!{N}Open the gate!{N}Lower the bridge!{W1}"
-		dc.w $C080
-		dc.b $80                
+		nextSingleText $0,$1C   
+						; "King Galam, victory is{N}ours!{W1}"
+		nextSingleText $C0,$80  
+						; "Guards!{N}Open the gate!{N}Lower the bridge!{W1}"
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w 5                  
+		playSound SFX_BIG_DOOR_RUMBLE
 						; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		dc.w $5D
-		dc.b $80                
+		csWait $96              
 						; WAIT 96
-		dc.b $96
-		dc.w $23                
+		setEntityDir $80,$2     
 						; 0023 SET ENTITY FACING 80 2
-		dc.b $80
-		dc.b 2
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "{NAME;28}, prove your{N}allegiance.{W1}"
-		dc.w $C080
-		dc.w $23                
+		nextSingleText $C0,$80  
+						; "{NAME;28}, prove your{N}allegiance.{W1}"
+		setEntityDir $1C,$0     
 						; 0023 SET ENTITY FACING 1C 0
-		dc.b $1C
-		dc.b 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1C : "What do you mean?{W1}"
-		dc.w $1C
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Show no mercy!{W1}"
-		dc.w $C080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1C : "My Lord...{W1}"
-		dc.w $1C
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX C080 : "Now, go!{W1}"
-		dc.w $C080
-		dc.w $23                
+		nextSingleText $0,$1C   
+						; "What do you mean?{W1}"
+		nextSingleText $C0,$80  
+						; "Show no mercy!{W1}"
+		nextSingleText $0,$1C   
+						; "My Lord...{W1}"
+		nextSingleText $C0,$80  
+						; "Now, go!{W1}"
+		setEntityDir $80,$3     
 						; 0023 SET ENTITY FACING 80 3
-		dc.b $80
-		dc.b 3
-		dc.w $23                
+		setEntityDir $1C,$3     
 						; 0023 SET ENTITY FACING 1C 3
-		dc.b $1C
-		dc.b 3
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $32                
+		setCamDest $C,$12       
 						; 0032 SET CAMERA DEST C 12
-		dc.w $C
-		dc.w $12
-		dc.w $29                
+		setEntityDest $80,$11,$17
 						; 0029 SET ENTITY DEST 80 11 17
-		dc.w $80
-		dc.w $11
-		dc.w $17
-		dc.w $29                
+		setEntityDest $1C,$11,$11
 						; 0029 SET ENTITY DEST 1C 11 11
-		dc.w $1C
-		dc.w $11
-		dc.w $11
-		dc.w $29                
+		setEntityDest $1C,$11,$16
 						; 0029 SET ENTITY DEST 1C 11 16
-		dc.w $1C
-		dc.w $11
-		dc.w $16
-		dc.w $29                
+		setEntityDest $1C,$12,$18
 						; 0029 SET ENTITY DEST 1C 12 18
-		dc.w $1C
-		dc.w $12
-		dc.w $18
-		dc.w $23                
+		setEntityDir $80,$1     
 						; 0023 SET ENTITY FACING 80 1
-		dc.b $80
-		dc.b 1
-		dc.w $23                
+		setEntityDir $1C,$1     
 						; 0023 SET ENTITY FACING 1C 1
-		dc.b $1C
-		dc.b 1
-		dc.w $23                
+		setEntityDir $81,$3     
 						; 0023 SET ENTITY FACING 81 3
-		dc.b $81
-		dc.b 3
-		dc.w $23                
+		setEntityDir $82,$3     
 						; 0023 SET ENTITY FACING 82 3
-		dc.b $82
-		dc.b 3
-		dc.w $23                
+		setEntityDir $83,$3     
 						; 0023 SET ENTITY FACING 83 3
-		dc.b $83
-		dc.b 3
-		dc.w $23                
+		setEntityDir $84,$3     
 						; 0023 SET ENTITY FACING 84 3
-		dc.b $84
-		dc.b 3
-		dc.w $23                
+		setEntityDir $85,$3     
 						; 0023 SET ENTITY FACING 85 3
-		dc.b $85
-		dc.b 3
-		dc.w $23                
+		setEntityDir $86,$3     
 						; 0023 SET ENTITY FACING 86 3
-		dc.b $86
-		dc.b 3
-		dc.w $23                
+		setEntityDir $87,$3     
 						; 0023 SET ENTITY FACING 87 3
-		dc.b $87
-		dc.b 3
-		dc.w $23                
+		setEntityDir $88,$3     
 						; 0023 SET ENTITY FACING 88 3
-		dc.b $88
-		dc.b 3
-		dc.w $23                
+		setEntityDir $89,$3     
 						; 0023 SET ENTITY FACING 89 3
-		dc.b $89
-		dc.b 3
-		dc.w $23                
+		setEntityDir $8A,$3     
 						; 0023 SET ENTITY FACING 8A 3
-		dc.b $8A
-		dc.b 3
-		dc.w $23                
+		setEntityDir $8B,$3     
 						; 0023 SET ENTITY FACING 8B 3
-		dc.b $8B
-		dc.b 3
-		dc.w $23                
+		setEntityDir $8C,$3     
 						; 0023 SET ENTITY FACING 8C 3
-		dc.b $8C
-		dc.b 3
-		dc.w $23                
+		setEntityDir $8D,$3     
 						; 0023 SET ENTITY FACING 8D 3
-		dc.b $8D
-		dc.b 3
-		dc.w $23                
+		setEntityDir $8E,$3     
 						; 0023 SET ENTITY FACING 8E 3
-		dc.b $8E
-		dc.b 3
-		dc.w $23                
+		setEntityDir $8F,$3     
 						; 0023 SET ENTITY FACING 8F 3
-		dc.b $8F
-		dc.b 3
-		dc.w $23                
+		setEntityDir $90,$3     
 						; 0023 SET ENTITY FACING 90 3
-		dc.b $90
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Crush Granseal!{W1}"
-		dc.w $80
-		dc.w $2D                
+		nextSingleText $0,$80   
+						; "Crush Granseal!{W1}"
+		moveEntity $1C,$0,$3,$7 
 						; 002D MOVE ENTITY 1C 0 3 7
-		dc.b $1C
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $80,$0,$3,$7 
 						; 002D MOVE ENTITY 80 0 3 7
-		dc.b $80
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $81,$0,$3,$7 
 						; 002D MOVE ENTITY 81 0 3 7
-		dc.b $81
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $82,$0,$3,$7 
 						; 002D MOVE ENTITY 82 0 3 7
-		dc.b $82
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $83,$0,$3,$7 
 						; 002D MOVE ENTITY 83 0 3 7
-		dc.b $83
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $84,$0,$3,$7 
 						; 002D MOVE ENTITY 84 0 3 7
-		dc.b $84
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $85,$0,$3,$7 
 						; 002D MOVE ENTITY 85 0 3 7
-		dc.b $85
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $86,$0,$3,$7 
 						; 002D MOVE ENTITY 86 0 3 7
-		dc.b $86
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $87,$0,$3,$7 
 						; 002D MOVE ENTITY 87 0 3 7
-		dc.b $87
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $88,$0,$3,$7 
 						; 002D MOVE ENTITY 88 0 3 7
-		dc.b $88
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $89,$0,$3,$7 
 						; 002D MOVE ENTITY 89 0 3 7
-		dc.b $89
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $8A,$0,$3,$7 
 						; 002D MOVE ENTITY 8A 0 3 7
-		dc.b $8A
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $8B,$0,$3,$7 
 						; 002D MOVE ENTITY 8B 0 3 7
-		dc.b $8B
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $8C,$0,$3,$7 
 						; 002D MOVE ENTITY 8C 0 3 7
-		dc.b $8C
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $8D,$0,$3,$7 
 						; 002D MOVE ENTITY 8D 0 3 7
-		dc.b $8D
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $8E,$0,$3,$7 
 						; 002D MOVE ENTITY 8E 0 3 7
-		dc.b $8E
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $8F,$0,$3,$7 
 						; 002D MOVE ENTITY 8F 0 3 7
-		dc.b $8F
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $90,$0,$3,$7 
 						; 002D MOVE ENTITY 90 0 3 7
-		dc.b $90
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $23                
+		endMove $8080
+		setEntityDir $5,$3      
 						; 0023 SET ENTITY FACING 5 3
-		dc.b 5
-		dc.b 3
-		dc.w $23                
+		setEntityDir $0,$3      
 						; 0023 SET ENTITY FACING 0 3
-		dc.b 0
-		dc.b 3
-		dc.w $32                
+		setCamDest $C,$5        
 						; 0032 SET CAMERA DEST C 5
-		dc.w $C
-		dc.w 5
-		dc.w $2E                
+		hideEntity $1C          
 						; 002E HIDE ENTITY 1C
-		dc.w $1C
-		dc.w $2E                
+		hideEntity $80          
 						; 002E HIDE ENTITY 80
-		dc.w $80
-		dc.w $2E                
+		hideEntity $81          
 						; 002E HIDE ENTITY 81
-		dc.w $81
-		dc.w $2E                
+		hideEntity $82          
 						; 002E HIDE ENTITY 82
-		dc.w $82
-		dc.w $2E                
+		hideEntity $83          
 						; 002E HIDE ENTITY 83
-		dc.w $83
-		dc.w $2E                
+		hideEntity $84          
 						; 002E HIDE ENTITY 84
-		dc.w $84
-		dc.w $2E                
+		hideEntity $85          
 						; 002E HIDE ENTITY 85
-		dc.w $85
-		dc.w $2E                
+		hideEntity $86          
 						; 002E HIDE ENTITY 86
-		dc.w $86
-		dc.w $2E                
+		hideEntity $87          
 						; 002E HIDE ENTITY 87
-		dc.w $87
-		dc.w $2E                
+		hideEntity $88          
 						; 002E HIDE ENTITY 88
-		dc.w $88
-		dc.w $2E                
+		hideEntity $89          
 						; 002E HIDE ENTITY 89
-		dc.w $89
-		dc.w $2E                
+		hideEntity $8A          
 						; 002E HIDE ENTITY 8A
-		dc.w $8A
-		dc.w $2E                
+		hideEntity $8B          
 						; 002E HIDE ENTITY 8B
-		dc.w $8B
-		dc.w $2E                
+		hideEntity $8C          
 						; 002E HIDE ENTITY 8C
-		dc.w $8C
-		dc.w $2E                
+		hideEntity $8D          
 						; 002E HIDE ENTITY 8D
-		dc.w $8D
-		dc.w $2E                
+		hideEntity $8E          
 						; 002E HIDE ENTITY 8E
-		dc.w $8E
-		dc.w $2E                
+		hideEntity $8F          
 						; 002E HIDE ENTITY 8F
-		dc.w $8F
-		dc.w $2E                
+		hideEntity $90          
 						; 002E HIDE ENTITY 90
-		dc.w $90
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C005 : "They've gone.{N}The war begins.{W1}"
-		dc.w $C005
-		dc.w $23                
+		nextText $C0,$5         
+						; "They've gone.{N}The war begins.{W1}"
+		setEntityDir $5,$2      
 						; 0023 SET ENTITY FACING 5 2
-		dc.b 5
-		dc.b 2
-		dc.w $23                
+		setEntityDir $0,$0      
 						; 0023 SET ENTITY FACING 0 0
-		dc.b 0
-		dc.b 0
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C005 : "So, what should we do?{N}Are you still going to{N}Granseal?{W1}"
-		dc.w $C005
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX C005 : "You're serious?{N}Do you think you can stop{N}the war?{W2}"
-		dc.w $C005
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 5 : "I will leave you once I'm{N}outside the gate!{W1}"
-		dc.w 5
-		dc.w $FFFF              
+		nextText $C0,$5         
+						; "So, what should we do?{N}Are you still going to{N}Granseal?{W1}"
+		nextText $C0,$5         
+						; "You're serious?{N}Do you think you can stop{N}the war?{W2}"
+		nextSingleText $0,$5    
+						; "I will leave you once I'm{N}outside the gate!{W1}"
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_521BA:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 3DA : "You!{W1}"
-		dc.w $3DA
-		dc.w $19                
+		textCursor $3DA         
+						; Initial text line $3DA : "You!{W1}"
+		entityPosDir $92,$11,$10,$1
 						; 0019 SET ENTITY POS AND FACING 92 11 10 1
-		dc.b $92
-		dc.b $11
-		dc.b $10
-		dc.b 1
-		dc.w $19                
+		entityPosDir $93,$11,$F,$3
 						; 0019 SET ENTITY POS AND FACING 93 11 F 3
-		dc.b $93
-		dc.b $11
-		dc.b $F
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 91 : "You!{W1}"
-		dc.w $91
-		dc.w $32                
+		nextSingleText $0,$91   
+						; "You!{W1}"
+		setCamDest $0,$11       
 						; 0032 SET CAMERA DEST 0 11
-		dc.w 0
-		dc.w $11
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 91 : "How did you get out?{W1}"
-		dc.w $91
-		dc.w $15                
+		nextSingleText $0,$91   
+						; "How did you get out?{W1}"
+		setActscript $5,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 5 FF 460CE
-		dc.b 5
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $0,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $29                
+		setEntityDest $0,$3,$13 
 						; 0029 SET ENTITY DEST 0 3 13
-		dc.w 0
-		dc.w 3
-		dc.w $13
-		dc.w $29                
+		setEntityDest $5,$4,$13 
 						; 0029 SET ENTITY DEST 5 4 13
-		dc.w 5
-		dc.w 4
-		dc.w $13
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 5 : "I...{W1}"
-		dc.w 5
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 92 : "Wow, great jewel!{W1}"
-		dc.w $92
-		dc.w $32                
+		nextSingleText $0,$5    
+						; "I...{W1}"
+		nextSingleText $0,$92   
+						; "Wow, great jewel!{W1}"
+		setCamDest $C,$A        
 						; 0032 SET CAMERA DEST C A
-		dc.w $C
-		dc.w $A
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 93 : "Oh, this?{N}The King gave it to me!{W1}"
-		dc.w $93
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 92 : "Because you captured that{N}rat?{W1}"
-		dc.w $92
-		dc.w $32                
+		nextSingleText $0,$93   
+						; "Oh, this?{N}The King gave it to me!{W1}"
+		nextSingleText $0,$92   
+						; "Because you captured that{N}rat?{W1}"
+		setCamDest $0,$D        
 						; 0032 SET CAMERA DEST 0 D
-		dc.w 0
-		dc.w $D
-		dc.w $23                
+		setEntityDir $0,$0      
 						; 0023 SET ENTITY FACING 0 0
-		dc.b 0
-		dc.b 0
-		dc.w $23                
+		setEntityDir $5,$2      
 						; 0023 SET ENTITY FACING 5 2
-		dc.b 5
-		dc.b 2
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 93 : "Yes.  I presented them to{N}King Galam.{W2}"
-		dc.w $93
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 93 : "He was so kind to give me{N}one of the pair, the Jewel{N}of Light!{W1}"
-		dc.w $93
-		dc.w $2D                
+		nextText $0,$93         
+						; "Yes.  I presented them to{N}King Galam.{W2}"
+		nextSingleText $0,$93   
+						; "He was so kind to give me{N}one of the pair, the Jewel{N}of Light!{W1}"
+		moveEntity $0,$0,$0,$1  
 						; 002D MOVE ENTITY 0 0 0 1
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $5,$FF,$0,$1 
 						; 002D MOVE ENTITY 5 FF 0 1
-		dc.b 5
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 91 : "Wait!{W1}"
-		dc.w $91
-		dc.w $23                
+		endMove $8080
+		nextSingleText $0,$91   
+						; "Wait!{W1}"
+		setEntityDir $0,$3      
 						; 0023 SET ENTITY FACING 0 3
-		dc.b 0
-		dc.b 3
-		dc.w $23                
+		setEntityDir $5,$3      
 						; 0023 SET ENTITY FACING 5 3
-		dc.b 5
-		dc.b 3
-		dc.w $32                
+		setCamDest $0,$12       
 						; 0032 SET CAMERA DEST 0 12
-		dc.w 0
-		dc.w $12
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 91 : "How did you escape?{W1}"
-		dc.w $91
-		dc.w $23                
+		nextSingleText $0,$91   
+						; "How did you escape?{W1}"
+		setEntityDir $0,$0      
 						; 0023 SET ENTITY FACING 0 0
-		dc.b 0
-		dc.b 0
-		dc.w $23                
+		setEntityDir $5,$2      
 						; 0023 SET ENTITY FACING 5 2
-		dc.b 5
-		dc.b 2
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $23                
+		setEntityDir $0,$3      
 						; 0023 SET ENTITY FACING 0 3
-		dc.b 0
-		dc.b 3
-		dc.w $23                
+		setEntityDir $5,$3      
 						; 0023 SET ENTITY FACING 5 3
-		dc.b 5
-		dc.b 3
-		dc.w $29                
+		setEntityDest $91,$9,$17
 						; 0029 SET ENTITY DEST 91 9 17
-		dc.w $91
-		dc.w 9
-		dc.w $17
-		dc.w $15                
+		setActscript $91,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 91 FF 45E44
-		dc.b $91
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $91,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 91 FF 45E44
-		dc.b $91
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 91 : "Intruders!  Intruders!{N}Arrest them!{W1}"
-		dc.w $91
-		dc.w $13                
-						; 0013 SET STORY FLAG 5 : Battle 5 unlocked
-		dc.w 5
+		nextSingleText $0,$91   
+						; "Intruders!  Intruders!{N}Arrest them!{W1}"
+		setStoryFlag $5         
+						; Battle 5 unlocked
 cs_5227C:
-		dc.w 7                  
+		mapSysEvent $10000000   
 						; 0007 EXECUTE MAP SYSTEM EVENT 10000000
-		dc.l $10000000
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

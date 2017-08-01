@@ -22,11 +22,11 @@ j_InitializeBattleScene:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_ExecuteBattlesceneScript:
+j_ExecuteBattleSceneScript:
 		
-		jmp     ExecuteBattlesceneScript(pc)
+		jmp     ExecuteBattleSceneScript(pc)
 
-	; End of function j_ExecuteBattlesceneScript
+	; End of function j_ExecuteBattleSceneScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -327,7 +327,7 @@ loc_18390:
 
 ; =============== S U B R O U T I N E =======================================
 
-ExecuteBattlesceneScript:
+ExecuteBattleSceneScript:
 		
 		lea     (FF0000_RAM_START).l,a6
 		clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
@@ -374,7 +374,7 @@ loc_183EA:
 		clr.w   d0
 		rts
 
-	; End of function ExecuteBattlesceneScript
+	; End of function ExecuteBattleSceneScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4876,6 +4876,8 @@ loc_1A6B4:
 		moveq   #1,d0
 		bsr.w   sub_1A2F6
 		move.w  #$FFFF,((byte_FFB404-$1000000)).w
+loc_1A6C0:
+		
 		move.b  #2,((byte_FFB587-$1000000)).w
 		move.b  #1,((byte_FFB585-$1000000)).w
 loc_1A6CC:
@@ -5611,9 +5613,6 @@ loc_1AC08:
 		
 		move.l  a0,-(sp)
 		trap    #SOUND_COMMAND
-
-; END OF FUNCTION CHUNK FOR sa09_
-
 		dc.w SFX_SPELL_CAST
 		move.w  #$E22,d0
 		bsr.w   ExecSpellAnimationFlash
@@ -5637,9 +5636,11 @@ loc_1AC08:
 		move.w  #$20,(a0) 
 		bra.s   loc_1AC64
 loc_1AC5C:
+		
 		move.w  #$A8,(a0)+ 
 		move.w  #$30,(a0) 
 loc_1AC64:
+		
 		moveq   #1,d0
 		bsr.w   sub_1A2F6
 		move.w  #1,4(a0)
@@ -5666,6 +5667,9 @@ loc_1AC64:
 		move.b  #1,((byte_FFB585-$1000000)).w
 		move.b  #4,((byte_FFB584-$1000000)).w
 		bra.w   sub_1A028
+
+; END OF FUNCTION CHUNK FOR sa09_
+
 byte_1ACC6:
 		dc.b 8
 		dc.b $88

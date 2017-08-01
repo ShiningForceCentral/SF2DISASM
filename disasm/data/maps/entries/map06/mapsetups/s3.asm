@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map06\mapsetups\s3.asm :
 ; 0x54CD0..0x54D3C : 
 ms_map6_ZoneEvents:
-		dc.b $A
-		dc.b 9
+		dc.b  $A
+		dc.b   9
 		dc.w sub_54CE8-ms_map6_ZoneEvents
 		dc.b $B
 		dc.b 9

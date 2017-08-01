@@ -21,17 +21,14 @@ loc_5136C:
 	; End of function ms_map3_flag1FA_InitFunction
 
 cs_51374:
-		dc.w $2E                
+		hideEntity $6           
 						; 002E HIDE ENTITY 6
-		dc.w 6
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_5137A:
-		dc.w 5                  
+		playSound MUSIC_SAD_THEME_2
 						; 0005 PLAY SOUND MUSIC_SAD_THEME_2
-		dc.w $C
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.b $FF                
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-		dc.b $FF

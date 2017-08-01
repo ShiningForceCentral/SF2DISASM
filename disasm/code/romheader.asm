@@ -123,7 +123,6 @@ p_Start:
 						; Reserved
 		dc.l Int_OtherError     
 						; Reserved
-off_FC:
 		dc.l Int_OtherError     
 						; Reserved
 aSegaGenesis:
@@ -148,7 +147,7 @@ aJ: dc.b 'J               '
 		dc.l 0                  
 						; Rom Start Adress
 RomEndAddress:
-		declareRomEnd           
+		dc.l $1FFFFF            
 						; Rom End Adress
 		dc.l $FF0000            
 						; Ram Start Adress

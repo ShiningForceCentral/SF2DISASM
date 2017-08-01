@@ -684,7 +684,7 @@ loc_54C8E:
 		dc.w $FFFF
 		move.w  #$74,d0 
 		moveq   #0,d1
-		bsr.w   sub_4F48A       
+		bsr.w   sub_4F48A
 		btst    #0,d0
 		bne.s   loc_54CBA
 		trap    #SET_FLAG
@@ -711,12 +711,9 @@ return_54CC4:
 	; End of function sub_54C10
 
 cs_54CC6:
-		dc.w $23                
+		setEntityDir $1F,$1     
 						; 0023 SET ENTITY FACING 1F 1
-		dc.b $1F
-		dc.b 1
-		dc.w $26                
+		entityNod $1F           
 						; 0026 MAKE ENTITY NOD 1F
-		dc.w $1F
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

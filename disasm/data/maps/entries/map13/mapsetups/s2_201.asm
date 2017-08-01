@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s2_201.asm :
 ; 0x5814C..0x5822A : 
 ms_map13_flag201_EntityEvents:
-		dc.b $80
-		dc.b 1
+		dc.b $80 
+		dc.b   1
 		dc.w sub_58184-ms_map13_flag201_EntityEvents
 		dc.b $81
 		dc.b 1

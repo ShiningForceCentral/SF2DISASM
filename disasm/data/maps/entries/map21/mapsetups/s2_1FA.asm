@@ -78,19 +78,12 @@ nullsub_126:
 	; End of function sub_53EEE
 
 cs_53EF4:
-		dc.w $2D                
+		moveEntity $80,$FF,$0,$1
 						; 002D MOVE ENTITY 80 FF 0 1
-		dc.b $80
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		endMove $8080
+		setEntityDir $87,$3     
 						; 0023 SET ENTITY FACING 87 3
-		dc.b $87
-		dc.b 3
-		dc.w $13                
-						; 0013 SET STORY FLAG 1 : Battle 1 unlocked
-		dc.w 1
-		dc.w $FFFF              
+		setStoryFlag $1         
+						; Battle 1 unlocked
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

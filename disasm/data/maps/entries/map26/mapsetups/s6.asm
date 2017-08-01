@@ -29,44 +29,26 @@ return_59E02:
 	; End of function ms_map26_InitFunction
 
 cs_59E04:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 6CB : "The Cotton Balloon popped.{W1}"
-		dc.w $6CB
-		dc.w $24                
+		textCursor $6CB         
+						; Initial text line $6CB : "The Cotton Balloon popped.{W1}"
+		setCameraEntity $FFFF   
 						; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
-		dc.w $FFFF
-		dc.w $46                
-						; 0046  15 8
-		dc.w $15
-		dc.w 8
-		dc.w $15                
+		csc46 $15,$8            
+						; 0046 UNKNOWN
+		setActscript $0,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $7,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $1F,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $1C                
+		stopEntity $0           
 						; 001C STOP ENTITY ANIM 0
-		dc.w 0
-		dc.w $1C                
+		stopEntity $7           
 						; 001C STOP ENTITY ANIM 7
-		dc.w 7
-		dc.w $1C                
+		stopEntity $1F          
 						; 001C STOP ENTITY ANIM 1F
-		dc.w $1F
-		dc.w $14                
+		customActscript $0,$FF  
 						; 0014 SET MANUAL ACTSCRIPT 0
-		dc.b 0
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$A Y=$A
 		dc.b $A
@@ -75,11 +57,9 @@ cs_59E04:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $14                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		customActscript $7,$FF  
 						; 0014 SET MANUAL ACTSCRIPT 7
-		dc.b 7
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$A Y=$A
 		dc.b $A
@@ -88,11 +68,9 @@ cs_59E04:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $14                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		customActscript $1F,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 1F
-		dc.b $1F
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$A Y=$A
 		dc.b $A
@@ -101,11 +79,9 @@ cs_59E04:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $14                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		customActscript $82,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 82
-		dc.b $82
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$A Y=$A
 		dc.b $A
@@ -114,11 +90,9 @@ cs_59E04:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $14                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		customActscript $83,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 83
-		dc.b $83
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$A Y=$A
 		dc.b $A
@@ -127,11 +101,9 @@ cs_59E04:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $14                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		customActscript $84,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 84
-		dc.b $84
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$A Y=$A
 		dc.b $A
@@ -140,155 +112,80 @@ cs_59E04:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $19                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		entityPosDir $0,$1A,$7,$3
 						; 0019 SET ENTITY POS AND FACING 0 1A 7 3
-		dc.b 0
-		dc.b $1A
-		dc.b 7
-		dc.b 3
-		dc.w $19                
+		entityPosDir $7,$1B,$6,$3
 						; 0019 SET ENTITY POS AND FACING 7 1B 6 3
-		dc.b 7
-		dc.b $1B
-		dc.b 6
-		dc.b 3
-		dc.w $19                
+		entityPosDir $1F,$19,$6,$3
 						; 0019 SET ENTITY POS AND FACING 1F 19 6 3
-		dc.b $1F
-		dc.b $19
-		dc.b 6
-		dc.b 3
-		dc.w $19                
+		entityPosDir $82,$1A,$6,$1
 						; 0019 SET ENTITY POS AND FACING 82 1A 6 1
-		dc.b $82
-		dc.b $1A
-		dc.b 6
-		dc.b 1
-		dc.w $19                
+		entityPosDir $83,$19,$5,$1
 						; 0019 SET ENTITY POS AND FACING 83 19 5 1
-		dc.b $83
-		dc.b $19
-		dc.b 5
-		dc.b 1
-		dc.w $19                
+		entityPosDir $84,$1B,$5,$1
 						; 0019 SET ENTITY POS AND FACING 84 1B 5 1
-		dc.b $84
-		dc.b $1B
-		dc.b 5
-		dc.b 1
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.w $2D                
+		moveEntity $0,$0,$3,$7  
 						; 002D MOVE ENTITY 0 0 3 7
-		dc.b 0
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $7,$0,$3,$7  
 						; 002D MOVE ENTITY 7 0 3 7
-		dc.b 7
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $1F,$0,$3,$7 
 						; 002D MOVE ENTITY 1F 0 3 7
-		dc.b $1F
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $82,$0,$3,$7 
 						; 002D MOVE ENTITY 82 0 3 7
-		dc.b $82
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $83,$0,$3,$7 
 						; 002D MOVE ENTITY 83 0 3 7
-		dc.b $83
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $84,$FF,$3,$7
 						; 002D MOVE ENTITY 84 FF 3 7
-		dc.b $84
-		dc.b $FF
-		dc.b 3
-		dc.b 7
-		dc.w $8080
-		dc.b $80                
+		endMove $8080
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $1B                
+		startEntity $0          
 						; 001B START ENTITY ANIM 0
-		dc.w 0
-		dc.w $1B                
+		startEntity $7          
 						; 001B START ENTITY ANIM 7
-		dc.w 7
-		dc.w $1B                
+		startEntity $1F         
 						; 001B START ENTITY ANIM 1F
-		dc.w $1F
-		dc.b $80                
+		csWait $28              
 						; WAIT 28
-		dc.b $28
-		dc.w $2E                
+		hideEntity $82          
 						; 002E HIDE ENTITY 82
-		dc.w $82
-		dc.w $2E                
+		hideEntity $83          
 						; 002E HIDE ENTITY 83
-		dc.w $83
-		dc.w $2E                
+		hideEntity $84          
 						; 002E HIDE ENTITY 84
-		dc.w $84
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX FFFF : "The Cotton Balloon popped.{W1}"
-		dc.w $FFFF
-		dc.w $2C                
+		nextSingleText $FF,$FF  
+						; "The Cotton Balloon popped.{W1}"
+		followEntity $7,$0,$2   
 						; 002C FOLLOW ENTITY 7 0 2
-		dc.w 7
-		dc.w 0
-		dc.w 2
-		dc.w $2C                
+		followEntity $1F,$7,$2  
 						; 002C FOLLOW ENTITY 1F 7 2
-		dc.w $1F
-		dc.w 7
-		dc.w 2
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_59F20:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR 6CC : "Ungh!{W2}"
-		dc.w $6CC
-		dc.w $32                
+		textCursor $6CC         
+						; Initial text line $6CC : "Ungh!{W2}"
+		setCamDest $0,$14       
 						; 0032 SET CAMERA DEST 0 14
-		dc.w 0
-		dc.w $14
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "Ungh!{W2}"
-		dc.w $81
-		dc.b $80                
+		nextSingleText $0,$81   
+						; "Ungh!{W2}"
+		csWait $32              
 						; WAIT 32
-		dc.b $32
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "It's too heavy. I can't{N}lift it.  I give up!{W1}"
-		dc.w $81
-		dc.w $2D                
+		nextSingleText $0,$81   
+						; "It's too heavy. I can't{N}lift it.  I give up!{W1}"
+		moveEntity $81,$FF,$1,$8
 						; 002D MOVE ENTITY 81 FF 1 8
-		dc.b $81
-		dc.b $FF
-		dc.b 1
-		dc.b 8
-		dc.w $8080
-		dc.w $2E                
+		endMove $8080
+		hideEntity $81          
 						; 002E HIDE ENTITY 81
-		dc.w $81
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

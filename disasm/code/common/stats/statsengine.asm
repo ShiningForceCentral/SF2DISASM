@@ -3805,8 +3805,6 @@ loc_8EC2:
 		move.b  ITEMDEF_OFFSET_TYPE(a0),d1
 		and.b   d2,d1
 		beq.s   loc_8EE0
-loc_8EDA:
-		
 		bclr    #ITEM_BIT_EQUIPPED,ITEM_OFFSET_IDXANDEQUIPBYTE(a1)
 loc_8EE0:
 		

@@ -12,41 +12,47 @@ csWait:	macro
 
 csc00:	macro
 	dc.w $00
-	dc.w \1
+	dc.b \1
+	dc.b \2
 	endm
 
 nextSingleText:	macro ;alias
-	csc00 \1
+	csc00 \1,\2
 	endm
 	
 csc01:	macro
 	dc.w $01
-	dc.w \1
-	dc.w \2
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
 	endm
 
 nextSingleTextVar:	macro ;alias
-	csc01 \1,\2 
+	csc01 \1,\2,\3,\4 
 	endm
 	
 csc02:	macro
 	dc.w $02
-	dc.w \1
+	dc.b \1
+	dc.b \2
 	endm
 	
 nextText:	macro ;alias
-	csc02 \1
+	csc02 \1,\2
 	endm	
 	
 csc03:	macro
 	dc.w $03
-	dc.w \1
-	dc.w \2
-	dc.w \3
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.w \5
 	endm
 
 nextTextVar:	macro ;alias
-	csc03 \1,\2,\3 
+	csc03 \1,\2,\3,\4,\5 
 	endm
 		
 csc04:	macro
@@ -439,18 +445,22 @@ followEntity:	macro ;alias
 	
 csc2D:	macro
 	dc.w $2D
-	dc.w \1
-	dc.w \2
-	dc.w \3
-	dc.w \4
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
 	endm
 		
 moveEntity:	macro ;alias
 	csc2D \1,\2,\3,\4
 	endm
 	
-csc2D:	macro
-	dc.w $2D
+moreMove:	macro
+	dc.b \1
+	dc.b \2
+	endm
+
+endMove:	macro
 	dc.w \1
 	endm
 	
@@ -509,10 +519,20 @@ setQuakeAmount:	macro ;alias
 	
 csc34:	macro
 	dc.w $34
+	dc.w \1
+	dc.w \2
+	dc.w \3
 	endm
+	
+setBlocks:	macro ;alias
+	csc34 \1,\2,\3
+	endm	
 	
 csc35:	macro
 	dc.w $35
+	dc.w \1
+	dc.w \2
+	dc.w \3
 	endm
 	
 csc36:	macro
@@ -521,110 +541,203 @@ csc36:	macro
 	
 csc37:	macro
 	dc.w $37
+	dc.w \1
+	dc.w \2
+	dc.w \3
 	endm
+
+loadMapFadeIn:	macro ;alias
+	csc37 \1,\2,\3
+	endm		
 	
 csc39:	macro
 	dc.w $39
 	endm
 	
+fadeInB:	macro ;alias
+	csc39
+	endm	
+	
 csc3A:	macro
 	dc.w $3A
+	endm
+	
+fadeOutB:	macro ;alias
+	csc3A
 	endm
 	
 csc3B:	macro
 	dc.w $3B
 	endm
 	
+slowFadeInB:	macro ;alias
+	csc3B
+	endm
+	
 csc3C:	macro
 	dc.w $3C
+	endm
+	
+slowFadeOutB:	macro ;alias
+	csc3C
 	endm
 	
 csc3D:	macro
 	dc.w $3D
 	endm
 	
+tintMap:	macro ;alias
+	csc3D
+	endm
+	
 csc3E:	macro
 	dc.w $3E
+	endm
+	
+flickerOnce:	macro ;alias
+	csc3E
 	endm
 	
 csc3F:	macro
 	dc.w $3F
 	endm
 	
+mapFadeOutToWhite:	macro ;alias
+	csc3F
+	endm
+	
 csc40:	macro
 	dc.w $40
 	endm
 	
+mapFadeInFromWhite:	macro ;alias
+	csc40
+	endm
+	
 csc41:	macro
 	dc.w $41
+	dc.w \1
+	endm
+	
+flashScreenWhite:	macro ;alias
+	csc41 \1
 	endm
 	
 csc42:	macro
 	dc.w $42
+	dc.l \1
+	endm
+	
+loadMapEntities:	macro ;alias
+	csc42 \1
 	endm
 	
 csc43:	macro
 	dc.w $43
+	dc.w \1
+	dc.w \2
 	endm
 	
 csc44:	macro
 	dc.w $44
+	dc.l \1
 	endm
 	
 csc45:	macro
 	dc.w $45
+	dc.w \1
 	endm
 	
 csc46:	macro
 	dc.w $46
+	dc.w \1
+	dc.w \2
 	endm
 	
 csc47:	macro
 	dc.w $47
+	dc.w \1
+	dc.w \2
 	endm
 	
 csc48:	macro
 	dc.w $48
+	dc.w \1
+	dc.w \2
+	dc.w \3
 	endm
+	
+mapLoad:	macro ;alias
+	csc48 \1,\2,\3
+	endm	
 	
 csc49:	macro
 	dc.w $49
+	dc.w \1
+	dc.w \2
+	dc.w \3
 	endm
 	
 csc4A:	macro
 	dc.w $4A
 	endm
 	
+fadeInFromBlackHalf:	macro ;alias
+	csc4A
+	endm
+	
 csc4B:	macro
 	dc.w $4B
 	endm
 	
+fadeOutToBlackHalf:	macro ;alias
+	csc4B
+	endm
+	
 csc50:	macro
 	dc.w $50
+	dc.w \1
+	dc.w \2
 	endm
+	
+setEntitySize:	macro ;alias
+	csc50 \1,\2
+	endm	
 	
 csc51:	macro
 	dc.w $51
+	dc.w \1
 	endm
 	
 csc52:	macro
 	dc.w $52
+	dc.w \1
+	dc.w \2
 	endm
 	
 csc53:	macro
 	dc.w $53
+	dc.w \1
+	dc.w \2
 	endm
 	
 csc54:	macro
 	dc.w $54
+	dc.w \1
+	dc.w \2
 	endm
 	
 csc55:	macro
 	dc.w $55
 	endm
 	
+resetForceBattleStats:	macro ;alias
+	csc55
+	endm	
+	
 csc56:	macro
 	dc.w $56
+	dc.w \1
 	endm
 	
 cscNop:	macro

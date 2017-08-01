@@ -89,19 +89,16 @@ sub_51AC2:
 	; End of function sub_51AC2
 
 cs_51B14:
-		dc.w $2C                
+		followEntity $4,$0,$2   
 						; 002C FOLLOW ENTITY 4 0 2
-		dc.w 4
-		dc.w 0
-		dc.w 2
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_51B1E:
 		
-		trap    #TEXTBOX
+		trap    #5
 		dc.w $2F8               
 						; "Welcome to Yeel.{W1}"
 		rts

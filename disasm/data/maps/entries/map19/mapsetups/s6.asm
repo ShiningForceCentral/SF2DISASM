@@ -27,11 +27,7 @@ return_53102:
 	; End of function ms_map19_InitFunction
 
 cs_53104:
-		dc.w $19                
+		entityPosDir $8C,$3F,$3F,$2
 						; 0019 SET ENTITY POS AND FACING 8C 3F 3F 2
-		dc.b $8C
-		dc.b $3F
-		dc.b $3F
-		dc.b 2
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

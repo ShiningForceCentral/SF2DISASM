@@ -55,25 +55,20 @@ loc_632E0:
 	; End of function sub_632AC
 
 cs_632EA:
-		dc.w $15                
+		setActscript $0,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.b $80                
+		csWait $1               
 						; WAIT 1
-		dc.b 1
-		dc.w $2A                
+		entityShiver $0         
 						; 002A MAKE ENTITY SHIVER 0
-		dc.w 0
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_632FA:
 		
-		trap    #CHECK_FLAG
+		trap    #1
 		dc.w $3D6
 		beq.s   return_6332E
 		trap    #CHECK_FLAG
@@ -128,9 +123,7 @@ return_6335C:
 	; End of function sub_63330
 
 cs_6335E:
-		dc.w $23                
+		setEntityDir $80,$3     
 						; 0023 SET ENTITY FACING 80 3
-		dc.b $80
-		dc.b 3
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

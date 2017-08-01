@@ -2443,7 +2443,7 @@ rjt_ItemUsedEffects:
 		dc.w sub_B488-rjt_ItemUsedEffects
 		dc.w sub_B516-rjt_ItemUsedEffects
 		dc.w sub_B57E-rjt_ItemUsedEffects
-		dc.w nullsub_8-rjt_ItemUsedEffects
+		dc.w NoItemEffect-rjt_ItemUsedEffects
 		dc.w sub_BADC-rjt_ItemUsedEffects
 		dc.w sub_BAE2-rjt_ItemUsedEffects
 		dc.w sub_BAF4-rjt_ItemUsedEffects
@@ -2458,8 +2458,8 @@ rjt_ItemUsedEffects:
 		dc.w sub_B74C-rjt_ItemUsedEffects
 		dc.w sub_B7B2-rjt_ItemUsedEffects
 		dc.w sub_B826-rjt_ItemUsedEffects
-		dc.w nullsub_8-rjt_ItemUsedEffects
-		dc.w nullsub_8-rjt_ItemUsedEffects
+		dc.w NoItemEffect-rjt_ItemUsedEffects
+		dc.w NoItemEffect-rjt_ItemUsedEffects
 		dc.w sub_BADC-rjt_ItemUsedEffects
 		dc.w sub_BAF4-rjt_ItemUsedEffects
 		dc.w sub_BAFA-rjt_ItemUsedEffects
@@ -2511,15 +2511,10 @@ loc_B14A:
 		bne.s   loc_B16A
 		move.w  #$B,(a6)+
 		move.w  d6,(a6)+
-		dc.b $3C 
-		dc.b $FC 
-		dc.l loc_3CBE+3
-		dc.b $3C 
-		dc.b $FC 
-		dc.b   0
-		dc.b   2
-		dc.b $60 
-		dc.b $10
+		move.w  #0,(a6)+
+		move.w  d1,(a6)+
+		move.w  #2,(a6)+
+		bra.s   loc_B17A
 loc_B16A:
 		
 		move.w  #$A,(a6)+
@@ -2527,6 +2522,8 @@ loc_B16A:
 		move.w  #0,(a6)+
 		move.w  d1,(a6)+
 		move.w  #2,(a6)+
+loc_B17A:
+		
 		move.w  #$10,(a6)+
 		move.w  #$12A,(a6)+
 		move.w  d0,(a6)+
@@ -3534,11 +3531,11 @@ loc_BA7C:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_8:
+NoItemEffect:
 		
 		rts
 
-	; End of function nullsub_8
+	; End of function NoItemEffect
 
 
 ; =============== S U B R O U T I N E =======================================

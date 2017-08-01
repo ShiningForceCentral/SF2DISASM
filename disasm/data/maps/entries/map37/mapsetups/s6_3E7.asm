@@ -22,475 +22,257 @@ return_5FABA:
 	; End of function ms_map37_flag3E7_InitFunction
 
 cs_5FABC:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR D1F : "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
-		dc.w $D1F
-		dc.w $46                
-						; 0046  6 6
-		dc.w 6
-		dc.w 6
-		dc.w $19                
+		textCursor $D1F         
+						; Initial text line $D1F : "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
+		csc46 $6,$6             
+						; 0046 UNKNOWN
+		entityPosDir $0,$8,$C,$1
 						; 0019 SET ENTITY POS AND FACING 0 8 C 1
-		dc.b 0
-		dc.b 8
-		dc.b $C
-		dc.b 1
-		dc.w $19                
+		entityPosDir $7,$D,$C,$1
 						; 0019 SET ENTITY POS AND FACING 7 D C 1
-		dc.b 7
-		dc.b $D
-		dc.b $C
-		dc.b 1
-		dc.w $19                
+		entityPosDir $1A,$A,$A,$3
 						; 0019 SET ENTITY POS AND FACING 1A A A 3
-		dc.b $1A
-		dc.b $A
-		dc.b $A
-		dc.b 3
-		dc.w $19                
+		entityPosDir $80,$A,$B,$1
 						; 0019 SET ENTITY POS AND FACING 80 A B 1
-		dc.b $80
-		dc.b $A
-		dc.b $B
-		dc.b 1
-		dc.w $1C                
+		stopEntity $80          
 						; 001C STOP ENTITY ANIM 80
-		dc.w $80
-		dc.w 5                  
+		playSound MUSIC_STOP    
 						; 0005 PLAY SOUND MUSIC_STOP
-		dc.w $20
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 8007 : "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
-		dc.w $8007
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Where's Sir Astral?{W1}"
-		dc.w $8007
-		dc.w $23                
+		nextText $80,$7         
+						; "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
+		nextSingleText $80,$7   
+						; "Where's Sir Astral?{W1}"
+		setEntityDir $7,$0      
 						; 0023 SET ENTITY FACING 7 0
-		dc.b 7
-		dc.b 0
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $23                
+		setEntityDir $7,$2      
 						; 0023 SET ENTITY FACING 7 2
-		dc.b 7
-		dc.b 2
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $23                
+		setEntityDir $7,$0      
 						; 0023 SET ENTITY FACING 7 0
-		dc.b 7
-		dc.b 0
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $23                
+		setEntityDir $7,$2      
 						; 0023 SET ENTITY FACING 7 2
-		dc.b 7
-		dc.b 2
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $2A                
+		entityShiver $7         
 						; 002A MAKE ENTITY SHIVER 7
-		dc.w 7
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Oh, there he is!{W1}"
-		dc.w $8007
-		dc.w $15                
+		nextSingleText $80,$7   
+						; "Oh, there he is!{W1}"
+		setActscript $7,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $2D                
+		moveEntity $7,$FF,$2,$3 
 						; 002D MOVE ENTITY 7 FF 2 3
-		dc.b 7
-		dc.b $FF
-		dc.b 2
-		dc.b 3
-		dc.b 9
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Sir Astral!  Are you OK?{W1}"
-		dc.w $8007
-		dc.w $23                
+		moreMove $9,$1
+		endMove $8080
+		nextSingleText $80,$7   
+						; "Sir Astral!  Are you OK?{W1}"
+		setEntityDir $7,$2      
 						; 0023 SET ENTITY FACING 7 2
-		dc.b 7
-		dc.b 2
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "{LEADER}, come on!{W1}"
-		dc.w $8007
-		dc.w $FFFF              
+		nextSingleText $80,$7   
+						; "{LEADER}, come on!{W1}"
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_5FB30:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR D25 : "Phew!  We've made it to{N}Grans Island!{W1}"
-		dc.w $D25
-		dc.w $15                
+		textCursor $D25         
+						; Initial text line $D25 : "Phew!  We've made it to{N}Grans Island!{W1}"
+		setActscript $80,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 80 FF 460CE
-		dc.b $80
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $23                
+		setEntityDir $80,$3     
 						; 0023 SET ENTITY FACING 80 3
-		dc.b $80
-		dc.b 3
-		dc.w $27                
+		entityShakeHead $80     
 						; 0027 MAKE ENTITY SHAKE HEAD 80
-		dc.w $80
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 80 : "Phew!  We've made it to{N}Grans Island!{W1}"
-		dc.w $80
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 80 : "{LEADER}, Geshp's probably{N}coming for us!{W2}"
-		dc.w $80
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 80 : "Evacuate the ship!{W1}"
-		dc.w $80
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 80 : "What are you doing?{N}Get off the ship!{W2}"
-		dc.w $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "I'll go first.{W1}"
-		dc.w $80
-		dc.w $2D                
+		nextText $0,$80         
+						; "Phew!  We've made it to{N}Grans Island!{W1}"
+		nextText $0,$80         
+						; "{LEADER}, Geshp's probably{N}coming for us!{W2}"
+		nextText $0,$80         
+						; "Evacuate the ship!{W1}"
+		nextText $0,$80         
+						; "What are you doing?{N}Get off the ship!{W2}"
+		nextSingleText $0,$80   
+						; "I'll go first.{W1}"
+		moveEntity $80,$FF,$0,$4
 						; 002D MOVE ENTITY 80 FF 0 4
-		dc.b $80
-		dc.b $FF
-		dc.b 0
-		dc.b 4
-		dc.b 4
-		dc.b 1
-		dc.b 0
-		dc.b 3
-		dc.w $8080
-		dc.w $2E                
+		moreMove $4,$1
+		moreMove $0,$3
+		endMove $8080
+		hideEntity $80          
 						; 002E HIDE ENTITY 80
-		dc.w $80
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_5FB6A:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR D31 : "Wow, the ship is vibrating!{W1}"
-		dc.w $D31
-		dc.w 5                  
+		textCursor $D31         
+						; Initial text line $D31 : "Wow, the ship is vibrating!{W1}"
+		playSound SFX_BIG_DOOR_RUMBLE
 						; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		dc.w $5D
-		dc.w $33                
+		setQuakeAmount $1       
 						; 0033 SET QUAKE AMOUNT 1
-		dc.w 1
-		dc.w $15                
+		setActscript $7,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $80,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 80 FF 460CE
-		dc.b $80
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $1A,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1A FF 460CE
-		dc.b $1A
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $32                
+		setCamDest $B,$6        
 						; 0032 SET CAMERA DEST B 6
-		dc.w $B
-		dc.w 6
-		dc.w $15                
+		setActscript $7,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 7 FF 45E44
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $7,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 7 FF 45E44
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Wow, the ship is vibrating!{W1}"
-		dc.w $8007
-		dc.w $23                
+		nextSingleText $80,$7   
+						; "Wow, the ship is vibrating!{W1}"
+		setEntityDir $80,$1     
 						; 0023 SET ENTITY FACING 80 1
-		dc.b $80
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "What's going on?{W1}"
-		dc.w $80
-		dc.w $29                
+		nextSingleText $0,$80   
+						; "What's going on?{W1}"
+		setEntityDest $1A,$B,$B 
 						; 0029 SET ENTITY DEST 1A B B
-		dc.w $1A
-		dc.w $B
-		dc.w $B
-		dc.w $29                
+		setEntityDest $1A,$E,$B 
 						; 0029 SET ENTITY DEST 1A E B
-		dc.w $1A
-		dc.w $E
-		dc.w $B
-		dc.w $29                
+		setEntityDest $1A,$F,$A 
 						; 0029 SET ENTITY DEST 1A F A
-		dc.w $1A
-		dc.w $F
-		dc.w $A
-		dc.w $29                
+		setEntityDest $1A,$10,$A
 						; 0029 SET ENTITY DEST 1A 10 A
-		dc.w $1A
-		dc.w $10
-		dc.w $A
-		dc.w $23                
+		setEntityDir $1A,$3     
 						; 0023 SET ENTITY FACING 1A 3
-		dc.b $1A
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1A : "Don't worry. {W1}"
-		dc.w $1A
-		dc.w $15                
+		nextSingleText $0,$1A   
+						; "Don't worry. {W1}"
+		setActscript $7,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 7 FF 45E44
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "But...but...{N}Woooooow!{W1}"
-		dc.w $8007
-		dc.w $32                
+		nextSingleText $80,$7   
+						; "But...but...{N}Woooooow!{W1}"
+		setCamDest $4,$6        
 						; 0032 SET CAMERA DEST 4 6
-		dc.w 4
-		dc.w 6
-		dc.w $23                
+		setEntityDir $0,$1      
 						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.w 5                  
+		playSound $FE           
 						; 0005 PLAY SOUND 
-		dc.w $FE
-		dc.w 5                  
+		playSound SFX_BIG_DOOR_RUMBLE
 						; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		dc.w $5D
-		dc.w $33                
+		setQuakeAmount $3       
 						; 0033 SET QUAKE AMOUNT 3
-		dc.w 3
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $33                
+		setQuakeAmount $1       
 						; 0033 SET QUAKE AMOUNT 1
-		dc.w 1
-		dc.w 5                  
+		playSound MUSIC_MITULA_SHRINE
 						; 0005 PLAY SOUND MUSIC_MITULA_SHRINE
-		dc.w $28
-		dc.w $A                 
+		executeSubroutine csub_5FD3A
 						; 000A EXECUTE SUBROUTINE 5FD3A
-		dc.l sub_5FD3A
-		dc.w $33                
+		setQuakeAmount $0       
 						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.w $2D                
+		moveEntity $80,$0,$1,$1 
 						; 002D MOVE ENTITY 80 0 1 1
-		dc.b $80
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.b 2
-		dc.b 1
-		dc.b 6
-		dc.b 1
-		dc.b 2
-		dc.b 6
-		dc.w $8080
-		dc.w $2D                
+		moreMove $2,$1
+		moreMove $6,$1
+		moreMove $2,$6
+		endMove $8080
+		moveEntity $7,$FF,$1,$1 
 						; 002D MOVE ENTITY 7 FF 1 1
-		dc.b 7
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.b 2
-		dc.b 2
-		dc.b 6
-		dc.b 1
-		dc.b 2
-		dc.b 5
-		dc.w $8080
-		dc.w $23                
+		moreMove $2,$2
+		moreMove $6,$1
+		moreMove $2,$5
+		endMove $8080
+		setEntityDir $80,$1     
 						; 0023 SET ENTITY FACING 80 1
-		dc.b $80
-		dc.b 1
-		dc.w $23                
+		setEntityDir $7,$1      
 						; 0023 SET ENTITY FACING 7 1
-		dc.b 7
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "It's floating!  This big{N}ship is floating!{W1}"
-		dc.w 7
-		dc.w $23                
+		nextSingleText $0,$7    
+						; "It's floating!  This big{N}ship is floating!{W1}"
+		setEntityDir $1A,$2     
 						; 0023 SET ENTITY FACING 1A 2
-		dc.b $1A
-		dc.b 2
-		dc.w $32                
+		setCamDest $B,$6        
 						; 0032 SET CAMERA DEST B 6
-		dc.w $B
-		dc.w 6
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 801A : "We're going higher and{N}higher....{W1}"
-		dc.w $801A
-		dc.b $80                
+		nextSingleText $80,$1A  
+						; "We're going higher and{N}higher....{W1}"
+		csWait $28              
 						; WAIT 28
-		dc.b $28
-		dc.w $3A                
+		fadeOutB                
 						; 003A FADE OUT TO BLACK
-		dc.w $24                
+		setCameraEntity $FFFF   
 						; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
-		dc.w $FFFF
-		dc.w $48                
+		mapLoad $4B,$28,$C      
 						; 0048 LOAD MAP 4B 28 C
-		dc.w $4B
-		dc.w $28
-		dc.w $C
-		dc.w $42                
-						; 0042 RELATED TO LOADING MAP ENTITIES 5FDD4
-		dc.l word_5FDD4
-		dc.w $15                
+		loadMapEntities ce_5FDD4
+						; Entity data to figure out and format
+		setActscript $0,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $34                
+		setBlocks $3C3B,$405,$2C0F
 						; 0034 SET BLOCKS 3C3B 405 2C0F
-		dc.w $3C3B
-		dc.w $405
-		dc.w $2C0F
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.w $A                 
+		executeSubroutine sub_5FD7C
 						; 000A EXECUTE SUBROUTINE 5FD7C
-		dc.l sub_5FD7C
-		dc.b $80                
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "I've never experienced{N}anything like this in my{N}seventy years of life!{W1}"
-		dc.w $1F
-		dc.b $80                
+		nextSingleText $0,$1F   
+						; "I've never experienced{N}anything like this in my{N}seventy years of life!{W1}"
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w $3A                
+		fadeOutB                
 						; 003A FADE OUT TO BLACK
-		dc.w $48                
+		mapLoad $25,$4,$6       
 						; 0048 LOAD MAP 25 4 6
-		dc.w $25
-		dc.w 4
-		dc.w 6
-		dc.w $49                
-						; 0049  9 B 0
-		dc.w 9
-		dc.w $B
-		dc.w 0
-		dc.b $80                
+		csc49 $9,$B,$0          
+						; 0049 UNKNOWN
+		csWait $1               
 						; WAIT 1
-		dc.b 1
-		dc.w $15                
+		setActscript $7,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $80,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 80 FF 460CE
-		dc.b $80
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $1A,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1A FF 460CE
-		dc.b $1A
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
+		entityPosDir $80,$9,$C,$1
 						; 0019 SET ENTITY POS AND FACING 80 9 C 1
-		dc.b $80
-		dc.b 9
-		dc.b $C
-		dc.b 1
-		dc.w $19                
+		entityPosDir $7,$A,$C,$1
 						; 0019 SET ENTITY POS AND FACING 7 A C 1
-		dc.b 7
-		dc.b $A
-		dc.b $C
-		dc.b 1
-		dc.w $19                
+		entityPosDir $1A,$A,$B,$2
 						; 0019 SET ENTITY POS AND FACING 1A A B 2
-		dc.b $1A
-		dc.b $A
-		dc.b $B
-		dc.b 2
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 801A : "OK, now we'll head to{N}Grans Island.{W1}"
-		dc.w $801A
-		dc.w $33                
+		nextSingleText $80,$1A  
+						; "OK, now we'll head to{N}Grans Island.{W1}"
+		setQuakeAmount $1       
 						; 0033 SET QUAKE AMOUNT 1
-		dc.w 1
-		dc.b $80                
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $33                
+		setQuakeAmount $0       
 						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.w $A                 
+		executeSubroutine sub_5FD4C
 						; 000A EXECUTE SUBROUTINE 5FD4C
-		dc.l sub_5FD4C
-		dc.w $23                
+		setEntityDir $80,$2     
 						; 0023 SET ENTITY FACING 80 2
-		dc.b $80
-		dc.b 2
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Oh, we're flying!{W1}"
-		dc.w $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "The Ancients were greater{N}than we thought!{W1}"
-		dc.w 7
-		dc.w $23                
+		nextSingleText $0,$80   
+						; "Oh, we're flying!{W1}"
+		nextSingleText $0,$7    
+						; "The Ancients were greater{N}than we thought!{W1}"
+		setEntityDir $80,$1     
 						; 0023 SET ENTITY FACING 80 1
-		dc.b $80
-		dc.b 1
-		dc.w $23                
+		setEntityDir $1A,$3     
 						; 0023 SET ENTITY FACING 1A 3
-		dc.b $1A
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 801A : "Oh, thank you very much.{W1}"
-		dc.w $801A
-		dc.b $80                
+		nextSingleText $80,$1A  
+						; "Oh, thank you very much.{W1}"
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w $3A                
+		fadeOutB                
 						; 003A FADE OUT TO BLACK
-		dc.w $48                
+		mapLoad $4B,$28,$C      
 						; 0048 LOAD MAP 4B 28 C
-		dc.w $4B
-		dc.w $28
-		dc.w $C
-		dc.w $42                
-						; 0042 RELATED TO LOADING MAP ENTITIES 5FDD4
-		dc.l word_5FDD4
-		dc.w $15                
+		loadMapEntities ce_5FDD4
+						; Entity data to figure out and format
+		setActscript $0,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $34                
+		setBlocks $3C3B,$405,$2C0F
 						; 0034 SET BLOCKS 3C3B 405 2C0F
-		dc.w $3C3B
-		dc.w $405
-		dc.w $2C0F
-		dc.w $14                
+		customActscript $80,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$10 Y=$10
 		dc.b $10
@@ -499,48 +281,39 @@ cs_5FB6A:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $80,$0,$2,$1E
 						; 002D MOVE ENTITY 80 0 2 1E
-		dc.b $80
-		dc.b 0
-		dc.b 2
-		dc.b $1E
-		dc.w $8080
-		dc.w $A                 
+		endMove $8080
+		executeSubroutine sub_5FD5E
 						; 000A EXECUTE SUBROUTINE 5FD5E
-		dc.l sub_5FD5E
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.b $80                
+		csWait $F               
 						; WAIT F
-		dc.b $F
-		dc.w $A                 
+		executeSubroutine sub_5FD66
 						; 000A EXECUTE SUBROUTINE 5FD66
-		dc.l sub_5FD66
-		dc.b $80                
+		csWait $78              
 						; WAIT 78
-		dc.b $78
-		dc.w 7                  
+		mapSysEvent $3B3F3F00   
 						; 0007 EXECUTE MAP SYSTEM EVENT 3B3F3F00
-		dc.l $3B3F3F00
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FD3A:
+csub_5FD3A:
 		
 		moveq   #7,d7
 loc_5FD3C:
 		
-		subq.b  #1,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
+		subq.b  #1,($FFFFA849).w
 		moveq   #4,d0
 		jsr     (Sleep).w       
 		dbf     d7,loc_5FD3C
 		rts
 
-	; End of function sub_5FD3A
+	; End of function csub_5FD3A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -635,7 +408,7 @@ plt_5FDB4:
 		dc.w $ECC
 		dc.w 0
 		dc.w $EEE
-word_5FDD4:
+ce_5FDD4:
 		dc.w 0
 		dc.w 0
 		dc.w 3

@@ -18,7 +18,7 @@ sub_5C4B6:
 		trap    #CHECK_FLAG
 		dc.w $2C9
 		bne.s   return_5C4CA
-		lea     word_5C4EE(pc), a0
+		lea     byte_5C4EE(pc), a0
 		jsr     ExecuteMapScript
 		trap    #SET_FLAG
 		dc.w $2C9               

@@ -27,226 +27,113 @@ return_57D20:
 	; End of function ms_map12_InitFunction
 
 cs_57D22:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR C7D : "Stop!{W1}"
-		dc.w $C7D
-		dc.w $45                
-						; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
-		dc.w $30
-		dc.w $15                
+		textCursor $C7D         
+						; Initial text line $C7D : "Stop!{W1}"
+		csc45 $30               
+						; (null)
+		setActscript $0,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $7,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $1F,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
+		entityPosDir $0,$C,$1F,$1
 						; 0019 SET ENTITY POS AND FACING 0 C 1F 1
-		dc.b 0
-		dc.b $C
-		dc.b $1F
-		dc.b 1
-		dc.w $19                
+		entityPosDir $7,$D,$1F,$1
 						; 0019 SET ENTITY POS AND FACING 7 D 1F 1
-		dc.b 7
-		dc.b $D
-		dc.b $1F
-		dc.b 1
-		dc.w $19                
+		entityPosDir $1F,$B,$1F,$1
 						; 0019 SET ENTITY POS AND FACING 1F B 1F 1
-		dc.b $1F
-		dc.b $B
-		dc.b $1F
-		dc.b 1
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.w $2D                
+		moveEntity $0,$0,$1,$5  
 						; 002D MOVE ENTITY 0 0 1 5
-		dc.b 0
-		dc.b 0
-		dc.b 1
-		dc.b 5
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $7,$0,$1,$5  
 						; 002D MOVE ENTITY 7 0 1 5
-		dc.b 7
-		dc.b 0
-		dc.b 1
-		dc.b 5
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $1F,$FF,$1,$5
 						; 002D MOVE ENTITY 1F FF 1 5
-		dc.b $1F
-		dc.b $FF
-		dc.b 1
-		dc.b 5
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Stop!{W1}"
-		dc.w $80
-		dc.b $80                
+		endMove $8080
+		nextSingleText $0,$80   
+						; "Stop!{W1}"
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $15                
+		setActscript $0,$0,eas_Jump
 						; 0015 SET ACTSCRIPT 0 0 45E44
-		dc.b 0
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $7,$0,eas_Jump
 						; 0015 SET ACTSCRIPT 7 0 45E44
-		dc.b 7
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $1F,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 1F FF 45E44
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $0,$0,eas_Jump
 						; 0015 SET ACTSCRIPT 0 0 45E44
-		dc.b 0
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $7,$0,eas_Jump
 						; 0015 SET ACTSCRIPT 7 0 45E44
-		dc.b 7
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $1F,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 1F FF 45E44
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.b $80                
+		csWait $5               
 						; WAIT 5
-		dc.b 5
-		dc.w $15                
+		setActscript $0,$0,eas_461B6
 						; 0015 SET ACTSCRIPT 0 0 461B6
-		dc.b 0
-		dc.b 0
-		dc.l eas_461B6          
-		dc.b $80                
+		csWait $5               
 						; WAIT 5
-		dc.b 5
-		dc.w $15                
+		setActscript $7,$0,eas_461E4
 						; 0015 SET ACTSCRIPT 7 0 461E4
-		dc.b 7
-		dc.b 0
-		dc.l eas_461E4          
-		dc.b $80                
+		csWait $5               
 						; WAIT 5
-		dc.b 5
-		dc.w $15                
+		setActscript $1F,$0,eas_461B6
 						; 0015 SET ACTSCRIPT 1F 0 461B6
-		dc.b $1F
-		dc.b 0
-		dc.l eas_461B6          
-		dc.b $80                
+		csWait $50              
 						; WAIT 50
-		dc.b $50
-		dc.w $2D                
+		moveEntity $7,$FF,$1,$1 
 						; 002D MOVE ENTITY 7 FF 1 1
-		dc.b 7
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		endMove $8080
+		setEntityDir $0,$1      
 						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.w $23                
+		setEntityDir $1F,$1     
 						; 0023 SET ENTITY FACING 1F 1
-		dc.b $1F
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Who said that?{W1}"
-		dc.w $8007
-		dc.w $32                
+		nextSingleText $80,$7   
+						; "Who said that?{W1}"
+		setCamDest $7,$5        
 						; 0032 SET CAMERA DEST 7 5
-		dc.w 7
-		dc.w 5
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Wow, what a huge guy!{W1}"
-		dc.w $8007
-		dc.b $80                
+		nextSingleText $80,$7   
+						; "Wow, what a huge guy!{W1}"
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Leave here!{N}I'll attack you if you don't!{W1}"
-		dc.w $80
-		dc.w $32                
+		nextSingleText $0,$80   
+						; "Leave here!{N}I'll attack you if you don't!{W1}"
+		setCamDest $7,$15       
 						; 0032 SET CAMERA DEST 7 15
-		dc.w 7
-		dc.w $15
-		dc.w $2D                
+		moveEntity $7,$FF,$3,$1 
 						; 002D MOVE ENTITY 7 FF 3 1
-		dc.b 7
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		endMove $8080
+		setEntityDir $0,$0      
 						; 0023 SET ENTITY FACING 0 0
-		dc.b 0
-		dc.b 0
-		dc.w $23                
+		setEntityDir $1F,$0     
 						; 0023 SET ENTITY FACING 1F 0
-		dc.b $1F
-		dc.b 0
-		dc.w $23                
+		setEntityDir $7,$2      
 						; 0023 SET ENTITY FACING 7 2
-		dc.b 7
-		dc.b 2
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 8007 : "Attack us?!  {LEADER},{N}let's get out of here!{W2}"
-		dc.w $8007
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "We don't want to fight him!{W1}"
-		dc.w $8007
-		dc.b $80                
+		nextText $80,$7         
+						; "Attack us?!  {LEADER},{N}let's get out of here!{W2}"
+		nextSingleText $80,$7   
+						; "We don't want to fight him!{W1}"
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $26                
+		entityNod $0            
 						; 0026 MAKE ENTITY NOD 0
-		dc.w 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "OK, hurry!{W1}"
-		dc.w $8007
-		dc.w $2D                
+		nextSingleText $80,$7   
+						; "OK, hurry!{W1}"
+		moveEntity $0,$0,$3,$5  
 						; 002D MOVE ENTITY 0 0 3 5
-		dc.b 0
-		dc.b 0
-		dc.b 3
-		dc.b 5
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $7,$0,$3,$5  
 						; 002D MOVE ENTITY 7 0 3 5
-		dc.b 7
-		dc.b 0
-		dc.b 3
-		dc.b 5
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $1F,$FF,$3,$5
 						; 002D MOVE ENTITY 1F FF 3 5
-		dc.b $1F
-		dc.b $FF
-		dc.b 3
-		dc.b 5
-		dc.w $8080
-		dc.w 7                  
+		endMove $8080
+		mapSysEvent $44372C03   
 						; 0007 EXECUTE MAP SYSTEM EVENT 44372C03
-		dc.l $44372C03
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

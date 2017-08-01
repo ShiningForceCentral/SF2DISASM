@@ -53,37 +53,25 @@ loc_50ABA:
 	; End of function sub_50A9A
 
 cs_50ABE:
-		dc.w 5                  
+		playSound SFX_BIG_DOOR_RUMBLE
 						; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		dc.w $5D
-		dc.w $33                
+		setQuakeAmount $1       
 						; 0033 SET QUAKE AMOUNT 1
-		dc.w 1
-		dc.b $80                
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w 5                  
+		playSound SFX_BOOST     
 						; 0005 PLAY SOUND SFX_BOOST
-		dc.w $6D
-		dc.w $41                
+		flashScreenWhite $14    
 						; 0041 FLASH SCREEN WHITE 14
-		dc.w $14
-		dc.w $34                
+		setBlocks $101,$101,$2A2A
 						; 0034 SET BLOCKS 101 101 2A2A
-		dc.w $101
-		dc.w $101
-		dc.w $2A2A
-		dc.w $41                
+		flashScreenWhite $14    
 						; 0041 FLASH SCREEN WHITE 14
-		dc.w $14
-		dc.b $80                
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w $33                
+		setQuakeAmount $0       
 						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.b $80                
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

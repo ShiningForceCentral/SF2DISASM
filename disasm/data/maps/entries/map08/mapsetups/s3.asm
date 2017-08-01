@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map08\mapsetups\s3.asm :
 ; 0x561AE..0x561EC : 
 ms_map8_ZoneEvents:
-		dc.b $F
+		dc.b  $F
 		dc.b $1C
 		dc.w sub_561BE-ms_map8_ZoneEvents
 		dc.b $10

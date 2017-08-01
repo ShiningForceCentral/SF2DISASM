@@ -62,24 +62,21 @@ return_59C9C:
 		rts
 cs_StartSpecialBattle:
 		
-		dc.w $13                
-						; 0013 SET STORY FLAG 2C : Battle 44 unlocked
-		dc.w $2C
-		dc.w 7                  
+		setStoryFlag $2C        
+						; Battle 44 unlocked
+		mapSysEvent $18011802   
 						; 0007 EXECUTE MAP SYSTEM EVENT 18011802
-		dc.l $18011802
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_LeaveSpecialBattle:
 		
-		dc.w 7                  
+		mapSysEvent $171E1802   
 						; 0007 EXECUTE MAP SYSTEM EVENT 171E1802
-		dc.l $171E1802
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 loc_59CB2:
 		
-		move.l  ((SPECIAL_BATTLE_TIME-$1000000)).w,d0
+		move.l  ($FFFFDF22).w,d0
 		divs.w  #$3C,d0 
 		move.w  d0,d1
 		ext.l   d1

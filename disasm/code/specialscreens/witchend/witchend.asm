@@ -6,8 +6,7 @@
 
 EndGame:
 		
-		enableSram              
-                bset    #7,(SAVE_FLAGS).l
+		bset    #7,(SAVE_FLAGS).l
                 disableSram
 		jsr     (DisableDisplayAndVInt).w
 		movea.l (p_WitchEndTiles).l,a0

@@ -2,202 +2,66 @@
 ; ASM FILE data\battles\entries\battle28\cs_beforebattle.asm :
 ; 0x4BE8C..0x4C07C : Cutscene before battle 28
 bbcs_28:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR A65 : "Wow, look at that?{W1}"
-		dc.w $A65
-		dc.w $37                
-						; 0037 LOAD MAP AND FADE IN 2F 0 4
-		dc.w $2F
-		dc.w 0
-		dc.w 4
-		dc.w $42                
-						; 0042 RELATED TO LOADING MAP ENTITIES 4C03C
-		dc.l word_4C03C
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 7 0 9 0
-		dc.b 7
-		dc.b 0
-		dc.b 9
-		dc.b 0
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1F 0 7 0
-		dc.b $1F
-		dc.b 0
-		dc.b 7
-		dc.b 0
-		dc.w $1C                
-						; 001C STOP ENTITY ANIM 81
-		dc.w $81
-		dc.w 5                  
-						; 0005 PLAY SOUND MUSIC_BATTLE_THEME_3
-		dc.w $21
-		dc.w $39                
-						; 0039 FADE IN FROM BLACK
-		dc.w $45                
-						; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
-		dc.w $30
-		dc.w $2D                
-						; 002D MOVE ENTITY 0 0 0 3
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.b 3
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 1F 0 0 3
-		dc.b $1F
-		dc.b 0
-		dc.b 0
-		dc.b 3
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 7 0 0 3
-		dc.b 7
-		dc.b 0
-		dc.b 0
-		dc.b 3
-		dc.w $8080
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 FF 0 3
-		dc.b $80
-		dc.b $FF
-		dc.b 0
-		dc.b 3
-		dc.w $8080
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F FF 45E44
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $2D                
-						; 002D MOVE ENTITY 1F FF 0 2
-		dc.b $1F
-		dc.b $FF
-		dc.b 0
-		dc.b 2
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 1F 0
-		dc.b $1F
-		dc.b 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "Wow, look at that?{W1}"
-		dc.w $1F
-		dc.w $32                
-						; 0032 SET CAMERA DEST 7 B
-		dc.w 7
-		dc.w $B
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 82
-		dc.w $82
-		dc.w 5                  
-						; 0005 PLAY SOUND SFX_MONSTER_SCREAM
-		dc.w $5E
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 83
-		dc.w $83
-		dc.w 5                  
-						; 0005 PLAY SOUND SFX_MONSTER_SCREAM
-		dc.w $5E
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $32                
-						; 0032 SET CAMERA DEST 0 6
-		dc.w 0
-		dc.w 6
-		dc.w $2D                
-						; 002D MOVE ENTITY 7 FF 3 1
-		dc.b 7
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "Those monsters are eating{N}the bridge.{W1}"
-		dc.w 7
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "Help!  Help me!{W1}"
-		dc.w $81
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 0 45E44
-		dc.b 0
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F 0 45E44
-		dc.b $1F
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 FF 45E44
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $2D                
-						; 002D MOVE ENTITY 0 FF 3 1
-		dc.b 0
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.b 0
-		dc.b 1
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
-						; WAIT 5
-		dc.b 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 0 461B6
-		dc.b 0
-		dc.b 0
-		dc.l eas_461B6          
-		dc.b $80                
-						; WAIT 5
-		dc.b 5
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 0 461E4
-		dc.b 7
-		dc.b 0
-		dc.l eas_461E4          
-		dc.b $80                
-						; WAIT 64
-		dc.b $64
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F FF 45E44
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 1F
-		dc.b $1F
-		dc.b $FF
+		textCursor $A65         
+						; Initial text line $A65 : "Wow, look at that?{W1}"
+		loadMapFadeIn $2F,$0,$4
+		loadMapEntities ce_4C03C
+						; Entity data to figure out and format
+		setActscript $0,$FF,eas_Init
+		setActscript $7,$FF,eas_Init
+		entityPosDir $7,$0,$9,$0
+		setActscript $1F,$FF,eas_Init
+		entityPosDir $1F,$0,$7,$0
+		stopEntity $81
+		playSound MUSIC_BATTLE_THEME_3
+		fadeInB
+		csc45 $30               
+						; (null)
+		moveEntity $0,$0,$0,$3
+		endMove $8080
+		moveEntity $1F,$0,$0,$3
+		endMove $8080
+		moveEntity $7,$0,$0,$3
+		endMove $8080
+		moveEntity $80,$FF,$0,$3
+		endMove $8080
+		csWait $28
+		setActscript $1F,$FF,eas_Jump
+		moveEntity $1F,$FF,$0,$2
+		moreMove $3,$1
+		endMove $8080
+		setEntityDir $1F,$0
+		nextSingleText $0,$1F   
+						; "Wow, look at that?{W1}"
+		setCamDest $7,$B
+		entityShiver $82
+		playSound SFX_MONSTER_SCREAM
+		csWait $1E
+		entityShiver $83
+		playSound SFX_MONSTER_SCREAM
+		csWait $28
+		setCamDest $0,$6
+		moveEntity $7,$FF,$3,$1
+		moreMove $0,$1
+		endMove $8080
+		nextSingleText $0,$7    
+						; "Those monsters are eating{N}the bridge.{W1}"
+		nextSingleText $0,$81   
+						; "Help!  Help me!{W1}"
+		setActscript $0,$0,eas_Jump
+		setActscript $1F,$0,eas_Jump
+		setActscript $7,$FF,eas_Jump
+		moveEntity $0,$FF,$3,$1
+		moreMove $0,$1
+		moreMove $3,$1
+		endMove $8080
+		csWait $5
+		setActscript $0,$0,eas_461B6
+		csWait $5
+		setActscript $7,$0,eas_461E4
+		csWait $64
+		setActscript $1F,$FF,eas_Jump
+		customActscript $1F,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -206,24 +70,12 @@ bbcs_28:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
-						; 002D MOVE ENTITY 1F 0 3 2
-		dc.b $1F
-		dc.b 0
-		dc.b 3
-		dc.b 2
-		dc.w $8080
-		dc.b $80                
-						; WAIT A
-		dc.b $A
-		dc.w $1C                
-						; 001C STOP ENTITY ANIM 0
-		dc.w 0
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 0
-		dc.b 0
-		dc.b $FF
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $1F,$0,$3,$2
+		endMove $8080
+		csWait $A
+		stopEntity $0
+		customActscript $0,$FF
 		dc.w $10                
 						;   0010 SET SPEED X=$40 Y=$40
 		dc.b $40
@@ -232,28 +84,13 @@ bbcs_28:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 2
-		dc.w 2
-		dc.w 5                  
-						; 0005 PLAY SOUND SFX_HIT_2
-		dc.w $54
-		dc.w $2D                
-						; 002D MOVE ENTITY 0 FF 3 1
-		dc.b 0
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
-						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.w $14                
-						; 0014 SET MANUAL ACTSCRIPT 0
-		dc.b 0
-		dc.b $FF
+						; 0014 END OF CUSTOM ACTSCRIPT
+		setQuakeAmount $2
+		playSound SFX_HIT_2
+		moveEntity $0,$FF,$3,$1
+		endMove $8080
+		setEntityDir $0,$1
+		customActscript $0,$FF
 		dc.w $14                
 						;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -266,85 +103,39 @@ bbcs_28:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $16                
-						; 0016 WAIT UNTIL IDLE ENTITY 1F
-		dc.w $1F
-		dc.w $23                
-						; 0023 SET ENTITY FACING 1F 0
-		dc.b $1F
-		dc.b 0
-		dc.w $33                
-						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 1F : "Look!{W2}"
-		dc.w $1F
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "She's stranded on the{N}bridge.{W1}"
-		dc.w $1F
-		dc.w $23                
-						; 0023 SET ENTITY FACING 7 0
-		dc.b 7
-		dc.b 0
-		dc.w $2A                
-						; 002A MAKE ENTITY SHIVER 0
-		dc.w 0
-		dc.w $32                
-						; 0032 SET CAMERA DEST 7 15
-		dc.w 7
-		dc.w $15
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "Get away from the bridge{N}before it falls into the{N}river!{W1}"
-		dc.w 7
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 81 : "I sprained my ankle!{N}Please help me!{W2}"
-		dc.w $81
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "I can't stand up!{W1}"
-		dc.w $81
-		dc.w $32                
-						; 0032 SET CAMERA DEST 0 6
-		dc.w 0
-		dc.w 6
-		dc.w $23                
-						; 0023 SET ENTITY FACING 1F 3
-		dc.b $1F
-		dc.b 3
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F FF 45E44
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $1B                
-						; 001B START ENTITY ANIM 0
-		dc.w 0
-		dc.w $27                
-						; 0027 MAKE ENTITY SHAKE HEAD 0
-		dc.w 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1F : "{LEADER}, defeat all the{N}monsters!  Hurry!{W1}"
-		dc.w $1F
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 0 45E44
-		dc.b 7
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $26                
-						; 0026 MAKE ENTITY NOD 0
-		dc.w 0
-		dc.w $FFFF              
+						; 0014 END OF CUSTOM ACTSCRIPT
+		waitIdle $1F
+		setEntityDir $1F,$0
+		setQuakeAmount $0
+		nextText $0,$1F         
+						; "Look!{W2}"
+		nextSingleText $0,$1F   
+						; "She's stranded on the{N}bridge.{W1}"
+		setEntityDir $7,$0
+		entityShiver $0
+		setCamDest $7,$15
+		nextSingleText $0,$7    
+						; "Get away from the bridge{N}before it falls into the{N}river!{W1}"
+		nextText $0,$81         
+						; "I sprained my ankle!{N}Please help me!{W2}"
+		nextSingleText $0,$81   
+						; "I can't stand up!{W1}"
+		setCamDest $0,$6
+		setEntityDir $1F,$3
+		setActscript $1F,$FF,eas_Jump
+		csWait $1E
+		setActscript $0,$FF,eas_Init
+		startEntity $0
+		entityShakeHead $0
+		nextSingleText $0,$1F   
+						; "{LEADER}, defeat all the{N}monsters!  Hurry!{W1}"
+		setActscript $7,$0,eas_Jump
+		entityNod $0
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-word_4C03C:
-		dc.w 1
+ce_4C03C:
+		dc.b   0
+		dc.b   1
 		dc.w 8
 		dc.w 0
 		dc.b 0

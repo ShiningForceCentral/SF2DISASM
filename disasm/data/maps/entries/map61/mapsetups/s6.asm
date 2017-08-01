@@ -11,119 +11,61 @@ ms_map61_InitFunction:
 	; End of function ms_map61_InitFunction
 
 cs_5C6CA:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR E3A : "It's my job!{W1}"
-		dc.w $E3A
-		dc.w $15                
+		textCursor $E3A         
+						; Initial text line $E3A : "It's my job!{W1}"
+		setActscript $7,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $1E,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1E FF 460CE
-		dc.b $1E
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $1F,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $29                
+		setEntityDest $0,$4,$9  
 						; 0029 SET ENTITY DEST 0 4 9
-		dc.w 0
-		dc.w 4
-		dc.w 9
-		dc.w $23                
+		setEntityDir $0,$1      
 						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.w $29                
+		setEntityDest $7,$6,$9  
 						; 0029 SET ENTITY DEST 7 6 9
-		dc.w 7
-		dc.w 6
-		dc.w 9
-		dc.w $23                
+		setEntityDir $7,$1      
 						; 0023 SET ENTITY FACING 7 1
-		dc.b 7
-		dc.b 1
-		dc.w $32                
+		setCamDest $0,$5        
 						; 0032 SET CAMERA DEST 0 5
-		dc.w 0
-		dc.w 5
-		dc.w $29                
+		setEntityDest $1E,$5,$7 
 						; 0029 SET ENTITY DEST 1E 5 7
-		dc.w $1E
-		dc.w 5
-		dc.w 7
-		dc.w $29                
+		setEntityDest $1F,$5,$9 
 						; 0029 SET ENTITY DEST 1F 5 9
-		dc.w $1F
-		dc.w 5
-		dc.w 9
-		dc.w $23                
+		setEntityDir $1F,$1     
 						; 0023 SET ENTITY FACING 1F 1
-		dc.b $1F
-		dc.b 1
-		dc.w $23                
+		setEntityDir $1E,$3     
 						; 0023 SET ENTITY FACING 1E 3
-		dc.b $1E
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1E : "It's my job!{W1}"
-		dc.w $1E
-		dc.w $23                
+		nextSingleText $0,$1E   
+						; "It's my job!{W1}"
+		setEntityDir $1E,$1     
 						; 0023 SET ENTITY FACING 1E 1
-		dc.b $1E
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1E : "Row...sham...bow!{W1}"
-		dc.w $1E
-		dc.w $18                
+		nextSingleText $0,$1E   
+						; "Row...sham...bow!{W1}"
+		entityFlashWhite $1E,$28
 						; 0018 FLASH ENTITY WHITE 1E 28
-		dc.w $1E
-		dc.w $28
-		dc.w 5                  
+		playSound SFX_BATTLEFIELD_DEATH
 						; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		dc.w $74
-		dc.w $33                
+		setQuakeAmount $2       
 						; 0033 SET QUAKE AMOUNT 2
-		dc.w 2
-		dc.w $34                
+		setBlocks $B00,$101,$506
 						; 0034 SET BLOCKS B00 101 506
-		dc.w $B00
-		dc.w $101
-		dc.w $506
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $33                
+		setQuakeAmount $0       
 						; 0033 SET QUAKE AMOUNT 0
-		dc.w 0
-		dc.w $23                
+		setEntityDir $1E,$3     
 						; 0023 SET ENTITY FACING 1E 3
-		dc.b $1E
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1E : "OK, you go first!{W1}"
-		dc.w $1E
-		dc.w $13                
-						; 0013 SET STORY FLAG F : Battle 15 unlocked
-		dc.w $F
-		dc.w $2C                
+		nextSingleText $0,$1E   
+						; "OK, you go first!{W1}"
+		setStoryFlag $F         
+						; Battle 15 unlocked
+		followEntity $7,$0,$2   
 						; 002C FOLLOW ENTITY 7 0 2
-		dc.w 7
-		dc.w 0
-		dc.w 2
-		dc.w $2C                
+		followEntity $1F,$7,$2  
 						; 002C FOLLOW ENTITY 1F 7 2
-		dc.w $1F
-		dc.w 7
-		dc.w 2
-		dc.w $2C                
+		followEntity $1E,$1F,$2 
 						; 002C FOLLOW ENTITY 1E 1F 2
-		dc.w $1E
-		dc.w $1F
-		dc.w 2
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

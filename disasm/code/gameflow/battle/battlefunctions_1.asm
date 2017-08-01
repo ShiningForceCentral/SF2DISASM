@@ -277,9 +277,6 @@ loc_23D44:
 		bsr.w   sub_23E1A
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #SOUND_COMMAND
-
-; END OF FUNCTION CHUNK FOR ExecuteBattleLoop
-
 		dc.w MUSIC_SAD_THEME_2  
 						; sad theme 2
 		trap    #TEXTBOX
@@ -309,7 +306,11 @@ loc_23D44:
 		moveq   #$11,d0
 		clr.w   d4
 return_23D96:
+		
 		rts
+
+; END OF FUNCTION CHUNK FOR ExecuteBattleLoop
+
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -731,7 +732,7 @@ loc_241C4:
 		movem.l a6,-(sp)
 		jsr     j_InitializeBattleScene
 		move.b  #$FF,((WINDOW_HIDING_FORBIDDEN-$1000000)).w
-		jsr     j_ExecuteBattlesceneScript
+		jsr     j_ExecuteBattleSceneScript
 		jsr     sub_1800C
 		jsr     j_ApplyPositionsAfterEnemyLeaderDies
 						; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
@@ -1517,17 +1518,11 @@ loc_24982:
 		tst.w   d2
 		bne.w   loc_249A8
 		trap    #TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w $1B6               
 						; "You have no item.{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		bra.w   loc_24746
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_249A8:
 		
 		clr.w   d1
@@ -1583,18 +1578,12 @@ loc_24A24:
 		jsr     j_IsItemUsableWeaponInBattle
 		bcs.w   loc_24A4A
 		trap    #TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w $1B7               
 						; "It has no effect.{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		clr.w   d1
 		bra.w   loc_24746
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24A4A:
 		
 		move.w  ((word_FFB630-$1000000)).w,d1
@@ -1604,18 +1593,12 @@ loc_24A4A:
 		tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 		bne.w   loc_24A72
 		trap    #TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w $1B7               
 						; "It has no effect.{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		clr.w   d1
 		bra.w   loc_249CE
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24A72:
 		
 		move.w  ((word_FFB630-$1000000)).w,d1
@@ -1637,13 +1620,7 @@ loc_24A72:
 		bsr.w   sub_2322C
 		moveq   #$FFFFFFFF,d1
 		bra.w   loc_24746
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		bra.w   loc_249CE
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24AC8:
 		
 		move.w  d0,((word_FFB632-$1000000)).w
@@ -1651,10 +1628,8 @@ loc_24AC8:
 		move.w  #ACTION_ITEM,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 		clr.w   d0
 		bra.w   loc_25188
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 loc_24ADC:
+		
 		movem.l d0-a6,-(sp)
 		move.w  ((MOVING_BATTLE_ENTITY_IDX-$1000000)).w,d0
 		move.w  ((word_FFB18C-$1000000)).w,d1
@@ -1664,13 +1639,12 @@ loc_24ADC:
 		bsr.w   CreateMoveableRangeForUnit
 		bra.s   loc_24B00
 loc_24AFC:
+		
 		bsr.w   ClearFadingBlockRange
 loc_24B00:
+		
 		movem.l (sp)+,d0-a6
 		rts
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24B06:
 		
 		cmpi.w  #2,d0
@@ -1682,18 +1656,12 @@ loc_24B06:
 		add.w   d2,d1
 		bne.w   loc_24B34
 		trap    #TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w $1BC               
 						; "You have nothing to equip.{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		clr.w   d1
 		bra.w   loc_249AA
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24B34:
 		
 		bsr.w   HideUnitCursor
@@ -1947,9 +1915,6 @@ loc_24D6C:
 		tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 		bne.w   loc_24DCC
 		trap    #TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w $1B3               
 						; "No opponent there.{W1}"
 		trap    #TEXTBOX
@@ -1957,9 +1922,6 @@ loc_24D6C:
 		clr.w   d1
 		bsr.w   ClearFadingBlockRange
 		bra.w   loc_249AA
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24DCC:
 		
 		bsr.w   HideUnitCursor
@@ -1982,9 +1944,6 @@ loc_24DF0:
 		btst    #6,8(a0)
 		beq.w   loc_24E26
 		trap    #SOUND_COMMAND
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w MUSIC_CURSED_ITEM
 		trap    #TEXTBOX
 		dc.w $1B9               
@@ -1994,9 +1953,6 @@ loc_24DF0:
 		dc.w $FFFF
 		clr.w   d1
 		bra.s   loc_24DCC
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24E26:
 		
 		clr.b   ((word_FFAF8E-$1000000)).w
@@ -2062,9 +2018,6 @@ loc_24EDE:
 		btst    #6,8(a0)
 		beq.w   loc_24F16
 		trap    #SOUND_COMMAND
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w MUSIC_CURSED_ITEM
 		trap    #TEXTBOX
 		dc.w $1B9               
@@ -2074,9 +2027,6 @@ loc_24EDE:
 		dc.w $FFFF
 		clr.w   d1
 		bra.w   loc_24E8E
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24F16:
 		
 		move.w  ((word_FFB630-$1000000)).w,d1
@@ -2140,9 +2090,6 @@ loc_24FC2:
 		btst    #6,8(a0)
 		beq.w   loc_24FFA
 		trap    #SOUND_COMMAND
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w MUSIC_CURSED_ITEM
 		trap    #TEXTBOX
 		dc.w $1B9               
@@ -2152,9 +2099,6 @@ loc_24FC2:
 		dc.w $FFFF
 		clr.w   d1
 		bra.w   loc_24F6E
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_24FFA:
 		
 		move.w  ((word_FFB634-$1000000)).w,d1
@@ -2163,25 +2107,16 @@ loc_24FFA:
 		beq.w   loc_25022
 		move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w $1BB               
 						; "Are you sure?"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		clr.w   d1
 		bra.w   loc_24F6E
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_25022:
 		
 		move.w  ((word_FFB634-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w $2C                
 						; "The {ITEM} will be{N}discarded.  Are you sure?"
 		jsr     j_YesNoChoiceBox
@@ -2199,15 +2134,13 @@ loc_25022:
 		move.w  ((word_FFB634-$1000000)).w,d0
 		jsr     j_AddItemToDeals
 loc_25066:
+		
 		trap    #TEXTBOX
 		dc.w $2A                
 						; "Discarded the {ITEM}.{W2}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		bra.w   loc_24746
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_25072:
 		
 		cmpi.w  #$FFFF,((byte_FFB180-$1000000)).w
@@ -2225,25 +2158,16 @@ loc_25088:
 		beq.s   loc_250B0
 		move.w  d3,((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w $1A2               
 						; "{NAME} is distributing{N}items from the open chest.{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		clr.w   d1
 		bra.w   loc_24746
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_250B0:
 		
 		jsr     (OpenChest).w
 		trap    #TEXTBOX
-
-; END OF FUNCTION CHUNK FOR sub_24662
-
 		dc.w $193               
 						; "{NAME} opened the chest.{W2}{CLEAR}"
 		move.w  ((byte_FFB180-$1000000)).w,d1
@@ -2265,6 +2189,7 @@ loc_250B0:
 		bsr.w   SpawnEnemySkipCamera
 		bra.w   loc_25188
 loc_250FC:
+		
 		move.w  ((byte_FFB180-$1000000)).w,d2
 		cmpi.w  #$80,d2 
 		blt.s   loc_25124
@@ -2279,6 +2204,7 @@ loc_250FC:
 		bsr.w   FadeOut_WaitForP1Input
 		bra.w   loc_2517C
 loc_25124:
+		
 		move.w  ((byte_FFB180-$1000000)).w,d1
 		move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
 		move.w  -2(a6),d0
@@ -2296,6 +2222,7 @@ loc_25124:
 		bsr.w   FadeOut_WaitForP1Input
 		bra.w   loc_2517C
 loc_2515A:
+		
 		trap    #TEXTBOX
 		dc.w $19D               
 						; "{NAME} found{N}{ITEM}.{W2}{CLEAR}"
@@ -2310,17 +2237,16 @@ loc_2515A:
 		clr.w   d1
 		bra.w   loc_24746
 loc_25178:
+		
 		trap    #TEXTBOX
 		dc.w $198               
 						; "But, it was empty.{W1}"
 loc_2517C:
+		
 		trap    #TEXTBOX
 		dc.w $FFFF
 		move.w  #3,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 		clr.w   d0
-
-; START OF FUNCTION CHUNK FOR sub_24662
-
 loc_25188:
 		
 		move.w  d0,-(sp)

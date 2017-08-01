@@ -2,9 +2,9 @@
 ; ASM FILE code\common\scripting\map\debugmapscripts.asm :
 ; 0x47102..0x4712A : Debug mapscript function
 DebugMapScripts:
-		dc.l dms_01             
-		dc.l bbcs_08            
-		dc.l abcs_battle08      
+		dc.l dms_01
+		dc.l bbcs_08
+		dc.l abcs_battle08
 
 ; =============== S U B R O U T I N E =======================================
 

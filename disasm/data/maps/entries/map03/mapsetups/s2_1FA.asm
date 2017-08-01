@@ -225,30 +225,17 @@ return_512B8:
 	; End of function sub_51256
 
 cs_512BA:
-		dc.w $23                
+		setEntityDir $6,$3      
 						; 0023 SET ENTITY FACING 6 3
-		dc.b 6
-		dc.b 3
-		dc.w $15                
+		setActscript $6,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 6 FF 45E44
-		dc.b 6
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $6,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 6 FF 45E44
-		dc.b 6
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $6,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 6 FF 45E44
-		dc.b 6
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w 8                  
+		join $6                 
 						; 0008 JOIN FORCE 6
-		dc.w 6
-		dc.w $56                
-						; 0056 SOMETHING WITH AN ENTITY 6
-		dc.w 6
-		dc.w $FFFF              
+		csc56 $6                
+						; 0056 UNKNOWN, SOMETHING WITH AN ENTITY
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

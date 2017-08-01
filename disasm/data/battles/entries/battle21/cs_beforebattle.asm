@@ -2,164 +2,63 @@
 ; ASM FILE data\battles\entries\battle21\cs_beforebattle.asm :
 ; 0x4B790..0x4B88C : Cutscene before battle 21
 bbcs_21:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR A10 : "(Sniff, sniff)...I smell{N}more invaders from the east.{W2}"
-		dc.w $A10
-		dc.w $37                
-						; 0037 LOAD MAP AND FADE IN 43 5 12
-		dc.w $43
-		dc.w 5
-		dc.w $12
-		dc.w $42                
-						; 0042 RELATED TO LOADING MAP ENTITIES 4B84C
-		dc.l word_4B84C
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 7 FF 460CE
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 7 1C 18 2
-		dc.b 7
-		dc.b $1C
-		dc.b $18
-		dc.b 2
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 1F FF 460CE
-		dc.b $1F
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1F 1C 16 2
-		dc.b $1F
-		dc.b $1C
-		dc.b $16
-		dc.b 2
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 1E 1C 17 2
-		dc.b $1E
-		dc.b $1C
-		dc.b $17
-		dc.b 2
-		dc.w $39                
-						; 0039 FADE IN FROM BLACK
-		dc.w $45                
-						; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
-		dc.w $30
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 80 : "(Sniff, sniff)...I smell{N}more invaders from the east.{W2}"
-		dc.w $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "This is the territory of{N}Mr. Creed.{W1}"
-		dc.w $80
-		dc.w $23                
-						; 0023 SET ENTITY FACING 80 0
-		dc.b $80
-		dc.b 0
-		dc.w $23                
-						; 0023 SET ENTITY FACING 81 0
-		dc.b $81
-		dc.b 0
-		dc.w $23                
-						; 0023 SET ENTITY FACING 82 0
-		dc.b $82
-		dc.b 0
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $32                
-						; 0032 SET CAMERA DEST 17 12
-		dc.w $17
-		dc.w $12
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Go away!{W1}"
-		dc.w $80
-		dc.w $2D                
-						; 002D MOVE ENTITY 7 FF 2 2
-		dc.b 7
-		dc.b $FF
-		dc.b 2
-		dc.b 2
-		dc.w $8080
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 7 : "But we have to see him.{W2}"
-		dc.w 7
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 7 : "Please let us pass!{W1}"
-		dc.w 7
-		dc.w $32                
-						; 0032 SET CAMERA DEST 5 12
-		dc.w 5
-		dc.w $12
-		dc.w $2D                
-						; 002D MOVE ENTITY 80 FF 0 1
-		dc.b $80
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "No!  Leave now!{W1}"
-		dc.w $80
-		dc.b $80                
-						; WAIT 32
-		dc.b $32
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 83 A 18 0
-		dc.b $83
-		dc.b $A
-		dc.b $18
-		dc.b 0
-		dc.b $80                
-						; WAIT 28
-		dc.b $28
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 84 A 14 0
-		dc.b $84
-		dc.b $A
-		dc.b $14
-		dc.b 0
-		dc.b $80                
-						; WAIT 1E
-		dc.b $1E
-		dc.w $19                
-						; 0019 SET ENTITY POS AND FACING 85 A 16 0
-		dc.b $85
-		dc.b $A
-		dc.b $16
-		dc.b 0
-		dc.b $80                
-						; WAIT 14
-		dc.b $14
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Never mind.  Get 'em boys!{W1}"
-		dc.w $80
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 83 0 45E44
-		dc.b $83
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 84 0 45E44
-		dc.b $84
-		dc.b 0
-		dc.l eas_Jump           
-		dc.w $15                
-						; 0015 SET ACTSCRIPT 85 FF 45E44
-		dc.b $85
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $FFFF              
+		textCursor $A10         
+						; Initial text line $A10 : "(Sniff, sniff)...I smell{N}more invaders from the east.{W2}"
+		loadMapFadeIn $43,$5,$12
+		loadMapEntities ce_4B84C
+						; Entity data to figure out and format
+		setActscript $0,$FF,eas_Init
+		setActscript $7,$FF,eas_Init
+		entityPosDir $7,$1C,$18,$2
+		setActscript $1F,$FF,eas_Init
+		entityPosDir $1F,$1C,$16,$2
+		entityPosDir $1E,$1C,$17,$2
+		fadeInB
+		csc45 $30               
+						; (null)
+		nextText $0,$80         
+						; "(Sniff, sniff)...I smell{N}more invaders from the east.{W2}"
+		nextSingleText $0,$80   
+						; "This is the territory of{N}Mr. Creed.{W1}"
+		setEntityDir $80,$0
+		setEntityDir $81,$0
+		setEntityDir $82,$0
+		csWait $1E
+		setCamDest $17,$12
+		nextSingleText $0,$80   
+						; "Go away!{W1}"
+		moveEntity $7,$FF,$2,$2
+		endMove $8080
+		nextText $0,$7          
+						; "But we have to see him.{W2}"
+		nextSingleText $0,$7    
+						; "Please let us pass!{W1}"
+		setCamDest $5,$12
+		moveEntity $80,$FF,$0,$1
+		endMove $8080
+		nextSingleText $0,$80   
+						; "No!  Leave now!{W1}"
+		csWait $32
+		entityPosDir $83,$A,$18,$0
+		csWait $28
+		entityPosDir $84,$A,$14,$0
+		csWait $1E
+		entityPosDir $85,$A,$16,$0
+		csWait $14
+		nextSingleText $0,$80   
+						; "Never mind.  Get 'em boys!{W1}"
+		setActscript $83,$0,eas_Jump
+		setActscript $84,$0,eas_Jump
+		setActscript $85,$FF,eas_Jump
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
-word_4B84C:
-		dc.w $1B
-		dc.w $17
-		dc.w 2
+ce_4B84C:
+		dc.b   0
+		dc.b $1B
+		dc.b   0
+		dc.b $17
+		dc.b   0
+		dc.b   2
 		dc.b $1C
 		dc.b $18
 		dc.b 2

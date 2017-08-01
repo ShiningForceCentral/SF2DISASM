@@ -65,8 +65,7 @@ loc_7EC0:
 						; "Configuration is done.{N}Go ahead!{W1}"
 return_7EC4:
 		
-		disableSram
-                rts
+		rts
 
 	; End of function CheatModeConfiguration
 

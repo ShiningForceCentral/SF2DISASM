@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map33\mapsetups\s3.asm :
 ; 0x5AA8A..0x5AAD8 : 
 ms_map33_ZoneEvents:
-		dc.b $F
+		dc.b  $F
 		dc.b $15
 		dc.w sub_5AA98-ms_map33_ZoneEvents
 		dc.b $C

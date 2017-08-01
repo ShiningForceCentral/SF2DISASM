@@ -205,12 +205,11 @@ loc_73E8:
 		add.w   d0,d0
 		move.w  rjt_WitchChoice(pc,d0.w),d0
 		jmp     rjt_WitchChoice(pc,d0.w)
+
+; END OF FUNCTION CHUNK FOR GameInit
+
 rjt_WitchChoice:
-		
 		dc.w WitchNew-rjt_WitchChoice
 		dc.w WitchLoad-rjt_WitchChoice
 		dc.w WitchDel-rjt_WitchChoice
 		dc.w WitchCopy-rjt_WitchChoice
-
-; END OF FUNCTION CHUNK FOR GameInit
-

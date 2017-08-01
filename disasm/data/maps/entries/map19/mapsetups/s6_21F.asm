@@ -61,137 +61,65 @@ return_62D04:
 	; End of function ms_map19_flag21F_InitFunction
 
 cs_62D06:
-		dc.w $1A                
+		entitySprite $B,$AA     
 						; 001A SET ENTITY SPRITE B AA
-		dc.w $B
-		dc.w $AA
-		dc.w $FFFF              
+		csc_end                 
 						; END OF CUTSCENE SCRIPT
 cs_62D0E:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR F7F : "King Granseal, {LEADER}{N}is here!{W1}"
-		dc.w $F7F
-		dc.w $24                
+		textCursor $F7F         
+						; Initial text line $F7F : "King Granseal, {LEADER}{N}is here!{W1}"
+		setCameraEntity $81     
 						; 0024 SET ENTITY FOLLOWED BY CAMERA 81
-		dc.w $81
-		dc.w $19                
+		entityPosDir $81,$1A,$1D,$1
 						; 0019 SET ENTITY POS AND FACING 81 1A 1D 1
-		dc.b $81
-		dc.b $1A
-		dc.b $1D
-		dc.b 1
-		dc.w $19                
+		entityPosDir $4,$1A,$1E,$1
 						; 0019 SET ENTITY POS AND FACING 4 1A 1E 1
-		dc.b 4
-		dc.b $1A
-		dc.b $1E
-		dc.b 1
-		dc.w $19                
+		entityPosDir $1,$1A,$1E,$1
 						; 0019 SET ENTITY POS AND FACING 1 1A 1E 1
-		dc.b 1
-		dc.b $1A
-		dc.b $1E
-		dc.b 1
-		dc.w $19                
+		entityPosDir $3,$1A,$1E,$1
 						; 0019 SET ENTITY POS AND FACING 3 1A 1E 1
-		dc.b 3
-		dc.b $1A
-		dc.b $1E
-		dc.b 1
-		dc.w $19                
+		entityPosDir $2,$1A,$1E,$1
 						; 0019 SET ENTITY POS AND FACING 2 1A 1E 1
-		dc.b 2
-		dc.b $1A
-		dc.b $1E
-		dc.b 1
-		dc.w $2C                
+		followEntity $0,$81,$2  
 						; 002C FOLLOW ENTITY 0 81 2
-		dc.w 0
-		dc.w $81
-		dc.w 2
-		dc.w $2C                
+		followEntity $4,$81,$5  
 						; 002C FOLLOW ENTITY 4 81 5
-		dc.w 4
-		dc.w $81
-		dc.w 5
-		dc.w $2C                
+		followEntity $1,$81,$6  
 						; 002C FOLLOW ENTITY 1 81 6
-		dc.w 1
-		dc.w $81
-		dc.w 6
-		dc.w $2C                
+		followEntity $3,$4,$2   
 						; 002C FOLLOW ENTITY 3 4 2
-		dc.w 3
-		dc.w 4
-		dc.w 2
-		dc.w $2C                
+		followEntity $2,$1,$2   
 						; 002C FOLLOW ENTITY 2 1 2
-		dc.w 2
-		dc.w 1
-		dc.w 2
-		dc.b $80                
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $39                
+		fadeInB                 
 						; 0039 FADE IN FROM BLACK
-		dc.w $2D                
+		moveEntity $81,$FF,$1,$4
 						; 002D MOVE ENTITY 81 FF 1 4
-		dc.b $81
-		dc.b $FF
-		dc.b 1
-		dc.b 4
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.b 2
-		dc.w $8080
-		dc.w $43                
-						; 0043 RELATED TO BLOCK COPY 1D 17
-		dc.w $1D
-		dc.w $17
-		dc.w $2D                
+		moreMove $0,$3
+		moreMove $1,$2
+		endMove $8080
+		csc43 $1D,$17           
+						; 0043 UNKNOWN, RELATED TO BLOCK COPY
+		moveEntity $81,$FF,$1,$E
 						; 002D MOVE ENTITY 81 FF 1 E
-		dc.b $81
-		dc.b $FF
-		dc.b 1
-		dc.b $E
-		dc.w $8080
-		dc.w $15                
+		endMove $8080
+		setActscript $0,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 0 FF 460CE
-		dc.b 0
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $1,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 1 FF 460CE
-		dc.b 1
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $3,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 3 FF 460CE
-		dc.b 3
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $2,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 2 FF 460CE
-		dc.b 2
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $15                
+		setActscript $4,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 4 FF 460CE
-		dc.b 4
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $32                
+		setCamDest $18,$5       
 						; 0032 SET CAMERA DEST 18 5
-		dc.w $18
-		dc.w 5
-		dc.b $80                
+		csWait $28              
 						; WAIT 28
-		dc.b $28
-		dc.w $14                
+		customActscript $81,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 81
-		dc.b $81
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$10 Y=$10
 		dc.b $10
@@ -200,580 +128,319 @@ cs_62D0E:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $81,$FF,$1,$1
 						; 002D MOVE ENTITY 81 FF 1 1
-		dc.b $81
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
+		endMove $8080
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "King Granseal, {LEADER}{N}is here!{W1}"
-		dc.w $81
-		dc.w $26                
+		nextSingleText $0,$81   
+						; "King Granseal, {LEADER}{N}is here!{W1}"
+		entityNod $80           
 						; 0026 MAKE ENTITY NOD 80
-		dc.w $80
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8080 : "Please explain what is{N}happening.{W1}"
-		dc.w $8080
-		dc.b $80                
+		nextSingleText $80,$80  
+						; "Please explain what is{N}happening.{W1}"
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $26                
+		entityNod $81           
 						; 0026 MAKE ENTITY NOD 81
-		dc.w $81
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "Yes, sir.{W1}"
-		dc.w $81
-		dc.w $2D                
+		nextSingleText $0,$81   
+						; "Yes, sir.{W1}"
+		moveEntity $81,$FF,$0,$1
 						; 002D MOVE ENTITY 81 FF 0 1
-		dc.b $81
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.b $B
-		dc.b 1
-		dc.w $8080
-		dc.b $80                
+		moreMove $B,$1
+		endMove $8080
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $26                
+		entityNod $81           
 						; 0026 MAKE ENTITY NOD 81
-		dc.w $81
-		dc.w $23                
+		setEntityDir $0,$1      
 						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.w $23                
+		setEntityDir $1,$1      
 						; 0023 SET ENTITY FACING 1 1
-		dc.b 1
-		dc.b 1
-		dc.w $23                
+		setEntityDir $3,$1      
 						; 0023 SET ENTITY FACING 3 1
-		dc.b 3
-		dc.b 1
-		dc.w $23                
+		setEntityDir $2,$1      
 						; 0023 SET ENTITY FACING 2 1
-		dc.b 2
-		dc.b 1
-		dc.w $23                
+		setEntityDir $4,$1      
 						; 0023 SET ENTITY FACING 4 1
-		dc.b 4
-		dc.b 1
-		dc.w $23                
+		setEntityDir $5,$1      
 						; 0023 SET ENTITY FACING 5 1
-		dc.b 5
-		dc.b 1
-		dc.w $23                
+		setEntityDir $7,$1      
 						; 0023 SET ENTITY FACING 7 1
-		dc.b 7
-		dc.b 1
-		dc.w $23                
+		setEntityDir $A,$1      
 						; 0023 SET ENTITY FACING A 1
-		dc.b $A
-		dc.b 1
-		dc.w $23                
+		setEntityDir $19,$1     
 						; 0023 SET ENTITY FACING 19 1
-		dc.b $19
-		dc.b 1
-		dc.w $23                
+		setEntityDir $8,$1      
 						; 0023 SET ENTITY FACING 8 1
-		dc.b 8
-		dc.b 1
-		dc.w $23                
+		setEntityDir $13,$1     
 						; 0023 SET ENTITY FACING 13 1
-		dc.b $13
-		dc.b 1
-		dc.w $23                
+		setEntityDir $B,$1      
 						; 0023 SET ENTITY FACING B 1
-		dc.b $B
-		dc.b 1
-		dc.w $23                
+		setEntityDir $1A,$1     
 						; 0023 SET ENTITY FACING 1A 1
-		dc.b $1A
-		dc.b 1
-		dc.w $23                
+		setEntityDir $1B,$1     
 						; 0023 SET ENTITY FACING 1B 1
-		dc.b $1B
-		dc.b 1
-		dc.b $80                
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 81 : "Listen up!{W2}"
-		dc.w $81
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 81 : "It took two years, but the{N}Princess finally recovered{N}from the poison.{W2}"
-		dc.w $81
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "But she's still sleeping.{N}We've decided to take{N}Mitula's advice.{W1}"
-		dc.w $81
-		dc.w $15                
+		nextText $0,$81         
+						; "Listen up!{W2}"
+		nextText $0,$81         
+						; "It took two years, but the{N}Princess finally recovered{N}from the poison.{W2}"
+		nextSingleText $0,$81   
+						; "But she's still sleeping.{N}We've decided to take{N}Mitula's advice.{W1}"
+		setActscript $7,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 7 FF 45E44
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $7,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 7 FF 45E44
-		dc.b 7
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Mitula...you mean, somebody{N}gets to kiss her?{W1}"
-		dc.w $8007
-		dc.b $80                
+		nextSingleText $80,$7   
+						; "Mitula...you mean, somebody{N}gets to kiss her?{W1}"
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $2A                
+		entityShiver $1         
 						; 002A MAKE ENTITY SHIVER 1
-		dc.w 1
-		dc.b $80                
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $23                
+		setEntityDir $81,$1     
 						; 0023 SET ENTITY FACING 81 1
-		dc.b $81
-		dc.b 1
-		dc.b $80                
+		csWait $28              
 						; WAIT 28
-		dc.b $28
-		dc.w $26                
+		entityNod $80           
 						; 0026 MAKE ENTITY NOD 80
-		dc.w $80
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 80 : "Yes.{N}We feel this is the right{N}time.{W1}"
-		dc.w $80
-		dc.b $80                
+		nextSingleText $0,$80   
+						; "Yes.{N}We feel this is the right{N}time.{W1}"
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
+		setEntityDir $81,$3     
 						; 0023 SET ENTITY FACING 81 3
-		dc.b $81
-		dc.b 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "And we need to decide which{N}one of you will kiss{N}Elis.{W1}"
-		dc.w $81
-		dc.w $23                
+		nextSingleText $0,$81   
+						; "And we need to decide which{N}one of you will kiss{N}Elis.{W1}"
+		setEntityDir $7,$2      
 						; 0023 SET ENTITY FACING 7 2
-		dc.b 7
-		dc.b 2
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "We don't have to decide.{N}It's {LEADER}.{N}{NAME;10}, don't you agree?{W1}"
-		dc.w $8007
-		dc.w $23                
+		nextSingleText $80,$7   
+						; "We don't have to decide.{N}It's {LEADER}.{N}{NAME;10}, don't you agree?{W1}"
+		setEntityDir $7,$3      
 						; 0023 SET ENTITY FACING 7 3
-		dc.b 7
-		dc.b 3
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $2A                
+		entityShiver $A         
 						; 002A MAKE ENTITY SHIVER A
-		dc.w $A
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 800A : "Ha, ha!  Yes, {NAME;7}!{W2}"
-		dc.w $800A
-		dc.b $80                
+		nextText $80,$A         
+						; "Ha, ha!  Yes, {NAME;7}!{W2}"
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w $23                
+		setEntityDir $A,$2      
 						; 0023 SET ENTITY FACING A 2
-		dc.b $A
-		dc.b 2
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 800A : "I always thought {LEADER}{N}was the best choice!{W1}"
-		dc.w $800A
-		dc.w $2D                
+		nextSingleText $80,$A   
+						; "I always thought {LEADER}{N}was the best choice!{W1}"
+		moveEntity $81,$FF,$0,$2
 						; 002D MOVE ENTITY 81 FF 0 2
-		dc.b $81
-		dc.b $FF
-		dc.b 0
-		dc.b 2
-		dc.b $B
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		moreMove $B,$1
+		endMove $8080
+		setEntityDir $7,$1      
 						; 0023 SET ENTITY FACING 7 1
-		dc.b 7
-		dc.b 1
-		dc.w $23                
+		setEntityDir $A,$1      
 						; 0023 SET ENTITY FACING A 1
-		dc.b $A
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "Are you sure?{N}Anybody disagree?{W1}"
-		dc.w $81
-		dc.w $23                
+		nextSingleText $0,$81   
+						; "Are you sure?{N}Anybody disagree?{W1}"
+		setEntityDir $7,$3      
 						; 0023 SET ENTITY FACING 7 3
-		dc.b 7
-		dc.b 3
-		dc.b $80                
+		csWait $3C              
 						; WAIT 3C
-		dc.b $3C
-		dc.w $2D                
+		moveEntity $81,$FF,$2,$2
 						; 002D MOVE ENTITY 81 FF 2 2
-		dc.b $81
-		dc.b $FF
-		dc.b 2
-		dc.b 2
-		dc.b $B
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		moreMove $B,$1
+		endMove $8080
+		setEntityDir $7,$1      
 						; 0023 SET ENTITY FACING 7 1
-		dc.b 7
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "Nobody?{W1}"
-		dc.w $81
-		dc.b $80                
+		nextSingleText $0,$81   
+						; "Nobody?{W1}"
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $2D                
+		moveEntity $81,$FF,$2,$2
 						; 002D MOVE ENTITY 81 FF 2 2
-		dc.b $81
-		dc.b $FF
-		dc.b 2
-		dc.b 2
-		dc.b $B
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		moreMove $B,$1
+		endMove $8080
+		setEntityDir $7,$3      
 						; 0023 SET ENTITY FACING 7 3
-		dc.b 7
-		dc.b 3
-		dc.w $23                
+		setEntityDir $4,$0      
 						; 0023 SET ENTITY FACING 4 0
-		dc.b 4
-		dc.b 0
-		dc.w $23                
+		setEntityDir $A,$1      
 						; 0023 SET ENTITY FACING A 1
-		dc.b $A
-		dc.b 1
-		dc.w $23                
+		setEntityDir $19,$3     
 						; 0023 SET ENTITY FACING 19 3
-		dc.b $19
-		dc.b 3
-		dc.w $23                
+		setEntityDir $8,$3      
 						; 0023 SET ENTITY FACING 8 3
-		dc.b 8
-		dc.b 3
-		dc.w $23                
+		setEntityDir $13,$3     
 						; 0023 SET ENTITY FACING 13 3
-		dc.b $13
-		dc.b 3
-		dc.w $23                
+		setEntityDir $B,$1      
 						; 0023 SET ENTITY FACING B 1
-		dc.b $B
-		dc.b 1
-		dc.w $23                
+		setEntityDir $0,$3      
 						; 0023 SET ENTITY FACING 0 3
-		dc.b 0
-		dc.b 3
-		dc.b $80                
+		csWait $28              
 						; WAIT 28
-		dc.b $28
-		dc.w $32                
+		setCamDest $18,$7       
 						; 0032 SET CAMERA DEST 18 7
-		dc.w $18
-		dc.w 7
-		dc.b $80                
+		csWait $5               
 						; WAIT 5
-		dc.b 5
-		dc.w $15                
+		setActscript $3,$0,eas_461B6
 						; 0015 SET ACTSCRIPT 3 0 461B6
-		dc.b 3
-		dc.b 0
-		dc.l eas_461B6          
-		dc.b $80                
+		csWait $64              
 						; WAIT 64
-		dc.b $64
-		dc.w $2D                
+		moveEntity $3,$FF,$3,$1 
 						; 002D MOVE ENTITY 3 FF 3 1
-		dc.b 3
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		endMove $8080
+		setEntityDir $3,$0      
 						; 0023 SET ENTITY FACING 3 0
-		dc.b 3
-		dc.b 0
-		dc.w $2A                
+		entityShiver $3         
 						; 002A MAKE ENTITY SHIVER 3
-		dc.w 3
-		dc.w $23                
+		setEntityDir $1,$3      
 						; 0023 SET ENTITY FACING 1 3
-		dc.b 1
-		dc.b 3
-		dc.w $23                
+		setEntityDir $2,$3      
 						; 0023 SET ENTITY FACING 2 3
-		dc.b 2
-		dc.b 3
-		dc.w $23                
+		setEntityDir $4,$3      
 						; 0023 SET ENTITY FACING 4 3
-		dc.b 4
-		dc.b 3
-		dc.w $23                
+		setEntityDir $5,$0      
 						; 0023 SET ENTITY FACING 5 0
-		dc.b 5
-		dc.b 0
-		dc.w $23                
+		setEntityDir $A,$2      
 						; 0023 SET ENTITY FACING A 2
-		dc.b $A
-		dc.b 2
-		dc.w $23                
+		setEntityDir $19,$0     
 						; 0023 SET ENTITY FACING 19 0
-		dc.b $19
-		dc.b 0
-		dc.w $23                
+		setEntityDir $8,$0      
 						; 0023 SET ENTITY FACING 8 0
-		dc.b 8
-		dc.b 0
-		dc.w $23                
+		setEntityDir $13,$2     
 						; 0023 SET ENTITY FACING 13 2
-		dc.b $13
-		dc.b 2
-		dc.w $23                
+		setEntityDir $B,$0      
 						; 0023 SET ENTITY FACING B 0
-		dc.b $B
-		dc.b 0
-		dc.w $23                
+		setEntityDir $1A,$0     
 						; 0023 SET ENTITY FACING 1A 0
-		dc.b $1A
-		dc.b 0
-		dc.w $23                
+		setEntityDir $1B,$2     
 						; 0023 SET ENTITY FACING 1B 2
-		dc.b $1B
-		dc.b 2
-		dc.w $23                
+		setEntityDir $0,$3      
 						; 0023 SET ENTITY FACING 0 3
-		dc.b 0
-		dc.b 3
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 3 : "I understand what my friends{N}are saying, but...I love{N}her.{W2}"
-		dc.w 3
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 3 : "May I kiss her?{N}Somebody, say yes!{W1}"
-		dc.w 3
-		dc.b $80                
+		nextText $0,$3          
+						; "I understand what my friends{N}are saying, but...I love{N}her.{W2}"
+		nextSingleText $0,$3    
+						; "May I kiss her?{N}Somebody, say yes!{W1}"
+		csWait $5               
 						; WAIT 5
-		dc.b 5
-		dc.w $15                
+		setActscript $3,$0,eas_461B6
 						; 0015 SET ACTSCRIPT 3 0 461B6
-		dc.b 3
-		dc.b 0
-		dc.l eas_461B6          
-		dc.w $2A                
+		entityShiver $1         
 						; 002A MAKE ENTITY SHIVER 1
-		dc.w 1
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $23                
+		setEntityDir $7,$3      
 						; 0023 SET ENTITY FACING 7 3
-		dc.b 7
-		dc.b 3
-		dc.w $23                
+		setEntityDir $A,$1      
 						; 0023 SET ENTITY FACING A 1
-		dc.b $A
-		dc.b 1
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $27                
+		entityShakeHead $A      
 						; 0027 MAKE ENTITY SHAKE HEAD A
-		dc.w $A
-		dc.b $80                
+		csWait $14              
 						; WAIT 14
-		dc.b $14
-		dc.w $2D                
+		moveEntity $7,$FF,$2,$1 
 						; 002D MOVE ENTITY 7 FF 2 1
-		dc.b 7
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.b 3
-		dc.b 2
-		dc.b $A
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		moreMove $3,$2
+		moreMove $A,$1
+		endMove $8080
+		setEntityDir $A,$2      
 						; 0023 SET ENTITY FACING A 2
-		dc.b $A
-		dc.b 2
-		dc.w $23                
+		setEntityDir $3,$0      
 						; 0023 SET ENTITY FACING 3 0
-		dc.b 3
-		dc.b 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8007 : "Sorry, but...I don't think{N}{NAME;3} is the right{N}choice.{W1}"
-		dc.w $8007
-		dc.w $2A                
+		nextSingleText $80,$7   
+						; "Sorry, but...I don't think{N}{NAME;3} is the right{N}choice.{W1}"
+		entityShiver $3         
 						; 002A MAKE ENTITY SHIVER 3
-		dc.w 3
-		dc.w $2D                
+		moveEntity $5,$FF,$0,$1 
 						; 002D MOVE ENTITY 5 FF 0 1
-		dc.b 5
-		dc.b $FF
-		dc.b 0
-		dc.b 1
-		dc.b 3
-		dc.b 1
-		dc.b 8
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		moreMove $3,$1
+		moreMove $8,$1
+		endMove $8080
+		setEntityDir $3,$2      
 						; 0023 SET ENTITY FACING 3 2
-		dc.b 3
-		dc.b 2
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 5 : "I understand {NAME;3}, but{N}she is a human.{W2}"
-		dc.w 5
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 5 : "A human is the best choice.{W1}"
-		dc.w 5
-		dc.w $2A                
+		nextText $0,$5          
+						; "I understand {NAME;3}, but{N}she is a human.{W2}"
+		nextSingleText $0,$5    
+						; "A human is the best choice.{W1}"
+		entityShiver $3         
 						; 002A MAKE ENTITY SHIVER 3
-		dc.w 3
-		dc.w $D                 
-						; 000D JUMP IF CLEAR FLAG 8 62FB0 : May joined
-		dc.w 8
-		dc.l word_62FB0         
-		dc.w $2D                
+		jumpIfFlagClear $8,cs_62FB0
+						; May joined
+		moveEntity $8,$FF,$3,$1 
 						; 002D MOVE ENTITY 8 FF 3 1
-		dc.b 8
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.b 8
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8 : "{LEADER} is a human!{N}They will make a cute couple!{W1}"
-		dc.w 8
-		dc.w $2A                
+		moreMove $8,$1
+		endMove $8080
+		nextSingleText $0,$8    
+						; "{LEADER} is a human!{N}They will make a cute couple!{W1}"
+		entityShiver $3         
 						; 002A MAKE ENTITY SHIVER 3
-		dc.w 3
-word_62FB0:
-		dc.w 4                  
-						; 0004 INIT TEXT CURSOR F93 : "{LEADER} is a good lad{N}with the manner of a{N}knight!{W2}"
-		dc.w $F93
-		dc.w $2D                
+cs_62FB0:
+		textCursor $F93         
+						; Initial text line $F93 : "{LEADER} is a good lad{N}with the manner of a{N}knight!{W2}"
+		moveEntity $7,$FF,$1,$1 
 						; 002D MOVE ENTITY 7 FF 1 1
-		dc.b 7
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.b $B
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		moreMove $B,$1
+		endMove $8080
+		moveEntity $13,$FF,$2,$1
 						; 002D MOVE ENTITY 13 FF 2 1
-		dc.b $13
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		endMove $8080
+		setEntityDir $3,$0      
 						; 0023 SET ENTITY FACING 3 0
-		dc.b 3
-		dc.b 0
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 8013 : "{LEADER} is a good lad{N}with the manner of a{N}knight!{W2}"
-		dc.w $8013
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8013 : "I think he's the best{N}choice.{W1}"
-		dc.w $8013
-		dc.w $2A                
+		nextText $80,$13        
+						; "{LEADER} is a good lad{N}with the manner of a{N}knight!{W2}"
+		nextSingleText $80,$13  
+						; "I think he's the best{N}choice.{W1}"
+		entityShiver $3         
 						; 002A MAKE ENTITY SHIVER 3
-		dc.w 3
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $2D                
+		moveEntity $81,$FF,$0,$2
 						; 002D MOVE ENTITY 81 FF 0 2
-		dc.b $81
-		dc.b $FF
-		dc.b 0
-		dc.b 2
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "{NAME;1}, what do you{N}think?{W1}"
-		dc.w $81
-		dc.w $2A                
+		moreMove $3,$1
+		endMove $8080
+		nextSingleText $0,$81   
+						; "{NAME;1}, what do you{N}think?{W1}"
+		entityShiver $1         
 						; 002A MAKE ENTITY SHIVER 1
-		dc.w 1
-		dc.w $23                
+		setEntityDir $1,$1      
 						; 0023 SET ENTITY FACING 1 1
-		dc.b 1
-		dc.b 1
-		dc.w $23                
+		setEntityDir $3,$1      
 						; 0023 SET ENTITY FACING 3 1
-		dc.b 3
-		dc.b 1
-		dc.w $23                
+		setEntityDir $2,$1      
 						; 0023 SET ENTITY FACING 2 1
-		dc.b 2
-		dc.b 1
-		dc.w $23                
+		setEntityDir $4,$1      
 						; 0023 SET ENTITY FACING 4 1
-		dc.b 4
-		dc.b 1
-		dc.w $23                
+		setEntityDir $7,$1      
 						; 0023 SET ENTITY FACING 7 1
-		dc.b 7
-		dc.b 1
-		dc.w $23                
+		setEntityDir $13,$1     
 						; 0023 SET ENTITY FACING 13 1
-		dc.b $13
-		dc.b 1
-		dc.w $23                
+		setEntityDir $0,$1      
 						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 8001 : "M...me?  Well...{W2}"
-		dc.w $8001
-		dc.w $2A                
+		nextText $80,$1         
+						; "M...me?  Well...{W2}"
+		entityShiver $1         
 						; 002A MAKE ENTITY SHIVER 1
-		dc.w 1
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 8001 : "I'm worried about her...{N}but...I...{W2}"
-		dc.w $8001
-		dc.w $23                
+		nextText $80,$1         
+						; "I'm worried about her...{N}but...I...{W2}"
+		setEntityDir $1,$2      
 						; 0023 SET ENTITY FACING 1 2
-		dc.b 1
-		dc.b 2
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $23                
+		setEntityDir $1,$1      
 						; 0023 SET ENTITY FACING 1 1
-		dc.b 1
-		dc.b 1
-		dc.b $80                
+		csWait $A               
 						; WAIT A
-		dc.b $A
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8001 : "Yes, a good choice....{N}{LEADER} will make her...{N}...happy....{W1}"
-		dc.w $8001
-		dc.w $14                
+		nextSingleText $80,$1   
+						; "Yes, a good choice....{N}{LEADER} will make her...{N}...happy....{W1}"
+		customActscript $1,$FF  
 						; 0014 SET MANUAL ACTSCRIPT 1
-		dc.b 1
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -782,11 +449,9 @@ word_62FB0:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $14                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		customActscript $2,$FF  
 						; 0014 SET MANUAL ACTSCRIPT 2
-		dc.b 2
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -795,304 +460,159 @@ word_62FB0:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $1,$0,$3,$1  
 						; 002D MOVE ENTITY 1 0 3 1
-		dc.b 1
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		endMove $8080
+		moveEntity $2,$FF,$2,$1 
 						; 002D MOVE ENTITY 2 FF 2 1
-		dc.b 2
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.w $8080
-		dc.w $15                
+		endMove $8080
+		setActscript $2,$0,eas_RotateRight
 						; 0015 SET ACTSCRIPT 2 0 45FBC
-		dc.b 2
-		dc.b 0
-		dc.l eas_RotateRight    
-		dc.w $23                
+		setEntityDir $0,$3      
 						; 0023 SET ENTITY FACING 0 3
-		dc.b 0
-		dc.b 3
-		dc.w $23                
+		setEntityDir $4,$3      
 						; 0023 SET ENTITY FACING 4 3
-		dc.b 4
-		dc.b 3
-		dc.w $23                
+		setEntityDir $3,$3      
 						; 0023 SET ENTITY FACING 3 3
-		dc.b 3
-		dc.b 3
-		dc.w $23                
+		setEntityDir $7,$3      
 						; 0023 SET ENTITY FACING 7 3
-		dc.b 7
-		dc.b 3
-		dc.w $23                
+		setEntityDir $13,$3     
 						; 0023 SET ENTITY FACING 13 3
-		dc.b $13
-		dc.b 3
-		dc.w $2D                
+		moveEntity $1,$FF,$3,$8 
 						; 002D MOVE ENTITY 1 FF 3 8
-		dc.b 1
-		dc.b $FF
-		dc.b 3
-		dc.b 8
-		dc.w $8080
-		dc.w $2E                
+		endMove $8080
+		hideEntity $1           
 						; 002E HIDE ENTITY 1
-		dc.w 1
-		dc.w $15                
+		setActscript $2,$FF,eas_Init
 						; 0015 SET ACTSCRIPT 2 FF 460CE
-		dc.b 2
-		dc.b $FF
-		dc.l eas_Init           
-		dc.w $1B                
+		startEntity $2          
 						; 001B START ENTITY ANIM 2
-		dc.w 2
-		dc.w $23                
+		setEntityDir $2,$3      
 						; 0023 SET ENTITY FACING 2 3
-		dc.b 2
-		dc.b 3
-		dc.w $27                
+		entityShakeHead $2      
 						; 0027 MAKE ENTITY SHAKE HEAD 2
-		dc.w 2
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w $32                
+		setCamDest $18,$9       
 						; 0032 SET CAMERA DEST 18 9
-		dc.w $18
-		dc.w 9
-		dc.w $2D                
+		moveEntity $2,$FF,$3,$2 
 						; 002D MOVE ENTITY 2 FF 3 2
-		dc.b 2
-		dc.b $FF
-		dc.b 3
-		dc.b 2
-		dc.w $8080
-		dc.b $80                
+		endMove $8080
+		csWait $32              
 						; WAIT 32
-		dc.b $32
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 2 : "Does she love {LEADER}?{N}I didn't know that.{W1}"
-		dc.w 2
-		dc.w $15                
+		nextSingleText $0,$2    
+						; "Does she love {LEADER}?{N}I didn't know that.{W1}"
+		setActscript $4,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 4 FF 45E44
-		dc.b 4
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $4,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 4 FF 45E44
-		dc.b 4
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $2D                
+		moveEntity $4,$FF,$3,$1 
 						; 002D MOVE ENTITY 4 FF 3 1
-		dc.b 4
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.b 0
-		dc.b 2
-		dc.b 3
-		dc.b 2
-		dc.b $A
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		moreMove $0,$2
+		moreMove $3,$2
+		moreMove $A,$1
+		endMove $8080
+		setEntityDir $2,$0      
 						; 0023 SET ENTITY FACING 2 0
-		dc.b 2
-		dc.b 0
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8004 : "Stop!{N}I will go and comfort her.{W1}"
-		dc.w $8004
-		dc.w $23                
+		nextSingleText $80,$4   
+						; "Stop!{N}I will go and comfort her.{W1}"
+		setEntityDir $2,$3      
 						; 0023 SET ENTITY FACING 2 3
-		dc.b 2
-		dc.b 3
-		dc.w $2D                
+		moveEntity $4,$0,$3,$2  
 						; 002D MOVE ENTITY 4 0 3 2
-		dc.b 4
-		dc.b 0
-		dc.b 3
-		dc.b 2
-		dc.w $8080
-		dc.b $80                
+		endMove $8080
+		csWait $8               
 						; WAIT 8
-		dc.b 8
-		dc.w $15                
+		setActscript $2,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 2 FF 45E44
-		dc.b 2
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $2,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT 2 FF 45E44
-		dc.b 2
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 2 : "{NAME;4}!{N}I'll go with you!{W1}"
-		dc.w 2
-		dc.w $23                
+		nextSingleText $0,$2    
+						; "{NAME;4}!{N}I'll go with you!{W1}"
+		setEntityDir $4,$1      
 						; 0023 SET ENTITY FACING 4 1
-		dc.b 4
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8004 : "Oh, c'mon.{N}She needs someone like me.{W1}"
-		dc.w $8004
-		dc.w $2D                
+		nextSingleText $80,$4   
+						; "Oh, c'mon.{N}She needs someone like me.{W1}"
+		moveEntity $4,$FF,$3,$5 
 						; 002D MOVE ENTITY 4 FF 3 5
-		dc.b 4
-		dc.b $FF
-		dc.b 3
-		dc.b 5
-		dc.w $8080
-		dc.w $2E                
+		endMove $8080
+		hideEntity $4           
 						; 002E HIDE ENTITY 4
-		dc.w 4
-		dc.b $80                
+		csWait $1E              
 						; WAIT 1E
-		dc.b $1E
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 2 : "What does he mean?{N}I don't understand!{W1}"
-		dc.w 2
-		dc.w $2D                
+		nextSingleText $0,$2    
+						; "What does he mean?{N}I don't understand!{W1}"
+		moveEntity $B,$FF,$0,$2 
 						; 002D MOVE ENTITY B FF 0 2
-		dc.b $B
-		dc.b $FF
-		dc.b 0
-		dc.b 2
-		dc.b 3
-		dc.b 1
-		dc.b 0
-		dc.b 2
-		dc.b $B
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 800B : "They remind me of when I{N}was young.{W1}"
-		dc.w $800B
-		dc.w $2D                
+		moreMove $3,$1
+		moreMove $0,$2
+		moreMove $B,$1
+		endMove $8080
+		nextSingleText $80,$B   
+						; "They remind me of when I{N}was young.{W1}"
+		moveEntity $1A,$FF,$0,$3
 						; 002D MOVE ENTITY 1A FF 0 3
-		dc.b $1A
-		dc.b $FF
-		dc.b 0
-		dc.b 3
-		dc.b 3
-		dc.b 1
-		dc.b 8
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 1A : "{NAME;11}, you were young{N}once?{W1}"
-		dc.w $1A
-		dc.w $2A                
+		moreMove $3,$1
+		moreMove $8,$1
+		endMove $8080
+		nextSingleText $0,$1A   
+						; "{NAME;11}, you were young{N}once?{W1}"
+		entityShiver $1A        
 						; 002A MAKE ENTITY SHIVER 1A
-		dc.w $1A
-		dc.w $23                
+		setEntityDir $B,$2      
 						; 0023 SET ENTITY FACING B 2
-		dc.b $B
-		dc.b 2
-		dc.w $15                
+		setActscript $B,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT B FF 45E44
-		dc.b $B
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w $15                
+		setActscript $B,$FF,eas_Jump
 						; 0015 SET ACTSCRIPT B FF 45E44
-		dc.b $B
-		dc.b $FF
-		dc.l eas_Jump           
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 800B : "Be quiet, you bucket of bolts!{W1}"
-		dc.w $800B
-		dc.w $32                
+		nextSingleText $80,$B   
+						; "Be quiet, you bucket of bolts!{W1}"
+		setCamDest $18,$5       
 						; 0032 SET CAMERA DEST 18 5
-		dc.w $18
-		dc.w 5
-		dc.w $2D                
+		moveEntity $A,$FF,$1,$1 
 						; 002D MOVE ENTITY A FF 1 1
-		dc.b $A
-		dc.b $FF
-		dc.b 1
-		dc.b 1
-		dc.b 2
-		dc.b 2
-		dc.b 9
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		moreMove $2,$2
+		moreMove $9,$1
+		endMove $8080
+		setEntityDir $3,$1      
 						; 0023 SET ENTITY FACING 3 1
-		dc.b 3
-		dc.b 1
-		dc.w $23                
+		setEntityDir $7,$1      
 						; 0023 SET ENTITY FACING 7 1
-		dc.b 7
-		dc.b 1
-		dc.w $23                
+		setEntityDir $2,$1      
 						; 0023 SET ENTITY FACING 2 1
-		dc.b 2
-		dc.b 1
-		dc.w $23                
+		setEntityDir $A,$1      
 						; 0023 SET ENTITY FACING A 1
-		dc.b $A
-		dc.b 1
-		dc.w $23                
+		setEntityDir $B,$1      
 						; 0023 SET ENTITY FACING B 1
-		dc.b $B
-		dc.b 1
-		dc.w $23                
+		setEntityDir $1A,$1     
 						; 0023 SET ENTITY FACING 1A 1
-		dc.b $1A
-		dc.b 1
-		dc.w $23                
+		setEntityDir $13,$1     
 						; 0023 SET ENTITY FACING 13 1
-		dc.b $13
-		dc.b 1
-		dc.w $23                
+		setEntityDir $0,$1      
 						; 0023 SET ENTITY FACING 0 1
-		dc.b 0
-		dc.b 1
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 800A : "You heard everyone.{N}We think {LEADER} is the{N}right choice.{W2}"
-		dc.w $800A
-		dc.w $23                
+		nextText $80,$A         
+						; "You heard everyone.{N}We think {LEADER} is the{N}right choice.{W2}"
+		setEntityDir $A,$3      
 						; 0023 SET ENTITY FACING A 3
-		dc.b $A
-		dc.b 3
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 800A : "{NAME;4} will take care{N}of {NAME;1}.{W2}"
-		dc.w $800A
-		dc.w $26                
+		nextText $80,$A         
+						; "{NAME;4} will take care{N}of {NAME;1}.{W2}"
+		entityNod $81           
 						; 0026 MAKE ENTITY NOD 81
-		dc.w $81
-		dc.w $23                
+		setEntityDir $A,$1      
 						; 0023 SET ENTITY FACING A 1
-		dc.b $A
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 800A : "Everything went as you{N}expected, huh?{W1}"
-		dc.w $800A
-		dc.w $2A                
+		nextSingleText $80,$A   
+						; "Everything went as you{N}expected, huh?{W1}"
+		entityShiver $81        
 						; 002A MAKE ENTITY SHIVER 81
-		dc.w $81
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 81 : "You knew that?{N}{NAME;10}, you're smart.{W2}"
-		dc.w $81
-		dc.w 2                  
-						; 0002 DISPLAY TEXT BOX 81 : "But I didn't know what{N}{NAME;1} or {NAME;3} would do.{W2}I didn't want to hurt their{N}feelings.{W1}"
-		dc.w $81
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "{LEADER}, I choose you.{W1}"
-		dc.w $81
-		dc.w $14                
+		nextText $0,$81         
+						; "You knew that?{N}{NAME;10}, you're smart.{W2}"
+		nextText $0,$81         
+						; "But I didn't know what{N}{NAME;1} or {NAME;3} would do.{W2}I didn't want to hurt their{N}feelings.{W1}"
+		nextSingleText $0,$81   
+						; "{LEADER}, I choose you.{W1}"
+		customActscript $80,$FF 
 						; 0014 SET MANUAL ACTSCRIPT 80
-		dc.b $80
-		dc.b $FF
 		dc.w $10                
 						;   0010 SET SPEED X=$10 Y=$10
 		dc.b $10
@@ -1101,57 +621,31 @@ word_62FB0:
 						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              
-						; 0014 END OF MANUAL ACTSCRIPT
-		dc.w $2D                
+						; 0014 END OF CUSTOM ACTSCRIPT
+		moveEntity $80,$FF,$3,$1
 						; 002D MOVE ENTITY 80 FF 3 1
-		dc.b $80
-		dc.b $FF
-		dc.b 3
-		dc.b 1
-		dc.b 0
-		dc.b 1
-		dc.b $B
-		dc.b 1
-		dc.w $8080
-		dc.w $23                
+		moreMove $0,$1
+		moreMove $B,$1
+		endMove $8080
+		setEntityDir $81,$1     
 						; 0023 SET ENTITY FACING 81 1
-		dc.b $81
-		dc.b 1
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8080 : "Now, {LEADER}.{N}Please go awaken her.{W1}"
-		dc.w $8080
-		dc.w $2D                
+		nextSingleText $80,$80  
+						; "Now, {LEADER}.{N}Please go awaken her.{W1}"
+		moveEntity $80,$FF,$2,$1
 						; 002D MOVE ENTITY 80 FF 2 1
-		dc.b $80
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.b 3
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 8080 : "The Minister is waiting{N}for you.{W1}"
-		dc.w $8080
-		dc.w $2D                
+		moreMove $3,$1
+		endMove $8080
+		nextSingleText $80,$80  
+						; "The Minister is waiting{N}for you.{W1}"
+		moveEntity $80,$FF,$1,$2
 						; 002D MOVE ENTITY 80 FF 1 2
-		dc.b $80
-		dc.b $FF
-		dc.b 1
-		dc.b 2
-		dc.b $B
-		dc.b 1
-		dc.w $8080
-		dc.w $2D                
+		moreMove $B,$1
+		endMove $8080
+		moveEntity $81,$FF,$2,$1
 						; 002D MOVE ENTITY 81 FF 2 1
-		dc.b $81
-		dc.b $FF
-		dc.b 2
-		dc.b 1
-		dc.b $B
-		dc.b 1
-		dc.w $8080
-		dc.w 0                  
-						; 0000 DISPLAY SINGLE TEXTBOX 81 : "Oh, {LEADER}!{N}I really respect you.{W2}"
-		dc.w $81
-		dc.w $FFFF              
+		moreMove $B,$1
+		endMove $8080
+		nextSingleText $0,$81   
+						; "Oh, {LEADER}!{N}I really respect you.{W2}"
+		csc_end                 
 						; END OF CUTSCENE SCRIPT

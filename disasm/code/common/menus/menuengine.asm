@@ -7105,12 +7105,6 @@ loc_145A8:
 		moveq   #$FFFFFFFF,d1
 		movem.l (sp)+,d0/d3-a1
 		rts
-
-	; End of function sub_1445A
-
-
-; START OF FUNCTION CHUNK FOR sub_1445A
-
 loc_145BC:
 		
 		move.w  d1,d2
@@ -7138,14 +7132,8 @@ loc_145EA:
 		ble.s   loc_14600
 		subq.w  #1,d3
 		trap    #SOUND_COMMAND
-
-; END OF FUNCTION CHUNK FOR sub_1445A
-
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_1463E
-
-; START OF FUNCTION CHUNK FOR sub_1445A
-
 loc_14600:
 		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -7154,14 +7142,8 @@ loc_14600:
 		bge.s   loc_14616
 		addq.w  #1,d3
 		trap    #SOUND_COMMAND
-
-; END OF FUNCTION CHUNK FOR sub_1445A
-
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_1463E
-
-; START OF FUNCTION CHUNK FOR sub_1445A
-
 loc_14616:
 		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -7178,15 +7160,10 @@ loc_14632:
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14644
 		bra.w   loc_14654
-
-; END OF FUNCTION CHUNK FOR sub_1445A
-
 loc_1463E:
+		
 		bsr.w   sub_1474C
 		moveq   #$13,d1
-
-; START OF FUNCTION CHUNK FOR sub_1445A
-
 loc_14644:
 		
 		bsr.w   sub_146AE
@@ -7204,16 +7181,10 @@ loc_14654:
 		tst.b   d3
 		bpl.s   loc_1466C
 		trap    #SOUND_COMMAND
-
-; END OF FUNCTION CHUNK FOR sub_1445A
-
 		dc.w SFX_VALIDATION
 		move.w  d4,d3
 		bsr.w   sub_1474C
 		bra.w   loc_144D8
-
-; START OF FUNCTION CHUNK FOR sub_1445A
-
 loc_1466C:
 		
 		move.w  d2,d1
@@ -7226,7 +7197,7 @@ loc_1466C:
 														;     In: A1 = end of selection rect section in RAM
 		rts
 
-; END OF FUNCTION CHUNK FOR sub_1445A
+	; End of function sub_1445A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9119,28 +9090,16 @@ loc_15314:
 		beq.w   loc_15328
 		clr.w   d1
 		trap    #SOUND_COMMAND
-
-; END OF FUNCTION CHUNK FOR YesNoPrompt
-
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_15378
-
-; START OF FUNCTION CHUNK FOR YesNoPrompt
-
 loc_15328:
 		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.w   loc_1533C
 		moveq   #$FFFFFFFF,d1
 		trap    #SOUND_COMMAND
-
-; END OF FUNCTION CHUNK FOR YesNoPrompt
-
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_15378
-
-; START OF FUNCTION CHUNK FOR YesNoPrompt
-
 loc_1533C:
 		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -9162,10 +9121,8 @@ loc_15364:
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_153D6
-
-; END OF FUNCTION CHUNK FOR YesNoPrompt
-
 loc_15378:
+		
 		move.w  d1,-(sp)
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -9183,6 +9140,7 @@ loc_15378:
 		move.w  #$8080,d1
 		jsr     (SetWindowDestination).w
 loc_153AC:
+		
 		move.w  ((word_FFB086-$1000000)).w,d0
 		beq.s   loc_153BE
 		subq.w  #1,d0
@@ -9190,10 +9148,8 @@ loc_153AC:
 		moveq   #4,d2
 		jsr     (MoveWindowWithSFX).w
 loc_153BE:
+		
 		moveq   #$13,d6
-
-; START OF FUNCTION CHUNK FOR YesNoPrompt
-
 loc_153C0:
 		
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
