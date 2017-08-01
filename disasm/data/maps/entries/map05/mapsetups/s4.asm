@@ -13,8 +13,7 @@ ms_map5_AreaDescriptions:
 
 	; End of function ms_map5_AreaDescriptions
 
-word_51C38:
-		dc.w $90F
+word_51C38:     dc.w $90F
 		dc.b 0
 		dc.b 0
 		dc.b 6

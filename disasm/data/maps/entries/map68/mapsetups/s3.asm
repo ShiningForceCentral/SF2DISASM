@@ -8,7 +8,6 @@ ms_map68_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FD70:
-		
 		move.w  #$13,d0
 		jsr     sub_47856
 		rts

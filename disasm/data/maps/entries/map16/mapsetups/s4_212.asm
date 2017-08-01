@@ -13,8 +13,7 @@ ms_map16_flag212_AreaDescriptions:
 
 	; End of function ms_map16_flag212_AreaDescriptions
 
-word_61164:
-		dc.w $1405
+word_61164:     dc.w $1405
 		dc.b 0
 		dc.b 0
 		dc.b 4

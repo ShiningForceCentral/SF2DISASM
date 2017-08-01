@@ -21,10 +21,8 @@ PlayEndCredits:
 		move.w  #$27C0,d1
 		moveq   #7,d7
 loc_1AC09C:
-		
 		moveq   #5,d6
 loc_1AC09E:
-		
 		move.w  d1,(a1)+
 		addq.w  #1,d1
 		dbf     d6,loc_1AC09E
@@ -57,14 +55,12 @@ loc_1AC09E:
 		subq.w  #1,d7
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 loc_1AC10E:
-		
 		movem.l d7-a0,-(sp)
 		clr.w   d0
 		move.b  (a0),d0
 		jsr     j_GetCharPortraitIdx
 		jsr     j_LoadPortrait
-		lea     (PALETTE_2).l,a0
-						; clear palette 2
+		lea     (PALETTE_2).l,a0; clear palette 2
 		clr.l   (a0)+
 		clr.l   (a0)+
 		clr.l   (a0)+
@@ -100,7 +96,6 @@ loc_1AC10E:
 		addq.l  #1,a0
 		dbf     d7,loc_1AC10E
 loc_1AC1A8:
-		
 		movea.l ((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w,a0
 		cmpi.b  #$FF,(a0)
 		bne.s   loc_1AC1A8
@@ -142,7 +137,6 @@ VInt_EndCredits:
 		subq.w  #1,(dword_FFD100+2).l
 		jsr     (StoreVdpCommands).w
 loc_1AC1F6:
-		
 		movea.l ((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w,a0
 		cmpi.b  #$FF,(a0)
 		beq.s   loc_1AC220
@@ -154,10 +148,8 @@ loc_1AC1F6:
 		bne.s   loc_1AC21A
 		bsr.w   sub_1AC22E
 loc_1AC21A:
-		
 		addq.w  #1,(dword_FFD500).l
 loc_1AC220:
-		
 		jsr     (StoreVdpCommands).w
 		jsr     (StoreVdpCommandsbis).w
 		jsr     (Set_FFDE94_bit3).w
@@ -169,7 +161,6 @@ loc_1AC220:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC22E:
-		
 		move.b  (a0)+,d1
 		lea     (byte_FFC000).l,a1
 		move.w  (dword_FFD500).l,d0
@@ -181,7 +172,6 @@ sub_1AC22E:
 		movem.l d7/a1,-(sp)
 		moveq   #$1F,d7
 loc_1AC250:
-		
 		clr.l   (a1)+
 		dbf     d7,loc_1AC250
 		movem.l (sp)+,d7/a1
@@ -190,7 +180,6 @@ loc_1AC250:
 		lsl.w   #1,d1
 		adda.w  d1,a1
 loc_1AC262:
-		
 		clr.w   d1
 		move.b  (a0)+,d1
 		beq.w   loc_1AC280
@@ -203,7 +192,6 @@ loc_1AC262:
 		addq.l  #2,a1
 		bra.s   loc_1AC262
 loc_1AC280:
-		
 		move.l  a0,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
 		lea     (byte_FFC000).l,a0
 		lea     ($C000).l,a1

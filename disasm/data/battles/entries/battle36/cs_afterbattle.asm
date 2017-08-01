@@ -1,23 +1,18 @@
 
 ; ASM FILE data\battles\entries\battle36\cs_afterbattle.asm :
 ; 0x4D9A4..0x4DA66 : Cutscene after battle 36
-abcs_battle36:
-		textCursor $B89         
-						; Initial text line $B89 : "Prism Flowers?{W2}"
+abcs_battle36:  textCursor $B89         ; Initial text line $B89 : "Prism Flowers?{W2}"
 		loadMapFadeIn $35,$6,$11
-		loadMapEntities ce_4DA46
-						; Entity data to figure out and format
+		loadMapEntities ce_4DA46; Entity data to figure out and format
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$A,$13,$3
 		setActscript $1F,$FF,eas_Init
 		entityPosDir $1F,$C,$13,$3
-		jumpIfFlagClear $4C,cs_4D9F0
-						; Zynk is a follower
+		jumpIfFlagClear $4C,cs_4D9F0; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
 		entityPosDir $1A,$3F,$3E,$3
-cs_4D9F0:
-		animEntityFadeInOut $80,$6
+cs_4D9F0:       animEntityFadeInOut $80,$6
 		fadeInB
 		animEntityFadeInOut $80,$7
 		setActscript $80,$FF,eas_Jump
@@ -25,21 +20,16 @@ cs_4D9F0:
 		setActscript $80,$0,eas_461B6
 		csWait $78
 		setEntityDir $80,$3
-		nextText $0,$80         
-						; "Prism Flowers?{W2}"
-		nextSingleText $0,$80   
-						; "My Prism Flowers!{W1}"
+		nextText $0,$80         ; "Prism Flowers?{W2}"
+		nextSingleText $0,$80   ; "My Prism Flowers!{W1}"
 		setEntityDir $80,$1
-		nextSingleText $0,$80   
-						; "{LEADER}, I shall return{N}with Red Baron!{N}You'll pay for this!{W1}"
+		nextSingleText $0,$80   ; "{LEADER}, I shall return{N}with Red Baron!{N}You'll pay for this!{W1}"
 		animEntityFadeInOut $80,$6
 		followEntity $81,$0,$2
 		followEntity $7,$81,$1
 		followEntity $1F,$81,$3
-		csc_end                 
-						; END OF CUTSCENE SCRIPT
-ce_4DA46:
-		dc.b   0
+		csc_end                 ; END OF CUTSCENE SCRIPT
+ce_4DA46:       dc.b   0
 		dc.b  $B
 		dc.b   0
 		dc.b $14

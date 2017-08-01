@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map14\mapsetups\pt.asm :
 ; 0x58E18..0x58E30 : 
-ms_map14:
-		dc.l ms_map14_Entities
+ms_map14:       dc.l ms_map14_Entities
 		dc.l ms_map14_EntityEvents
 		dc.l ms_map14_ZoneEvents
 		dc.l ms_map14_AreaDescriptions

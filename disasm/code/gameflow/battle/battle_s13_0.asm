@@ -41,7 +41,6 @@ j_RespawnEnemyIfOpen:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC010:
-		
 		jmp     sub_1B14D8(pc)
 
 	; End of function sub_1AC010
@@ -68,7 +67,6 @@ j_getAddrOfBattleCombatants:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC01C:
-		
 		jmp     sub_1B120A(pc)
 
 	; End of function sub_1AC01C
@@ -86,7 +84,6 @@ j_GetMonsterStartPos:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC024:
-		
 		jmp     sub_1AC38E(pc)
 
 	; End of function sub_1AC024
@@ -95,7 +92,6 @@ sub_1AC024:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC028:
-		
 		jmp     sub_1AC69A(pc)
 
 	; End of function sub_1AC028
@@ -113,7 +109,6 @@ j_getMoveListForEnemyTarget:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC030:
-		
 		jmp     sub_1AC4F0(pc)  
 
 	; End of function sub_1AC030
@@ -131,7 +126,6 @@ j_clearTerrainListObstructions:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC038:
-		
 		jmp     sub_1AC9FC(pc)
 
 	; End of function sub_1AC038
@@ -176,7 +170,6 @@ j_IsSpecialBattle:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC04C:
-		
 		jmp     sub_1B17BC(pc)
 
 	; End of function sub_1AC04C
@@ -194,7 +187,6 @@ j_ShouldBattleUpgrade:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC054:
-		
 		jmp     sub_1B16FE(pc)
 
 	; End of function sub_1AC054
@@ -212,12 +204,10 @@ j_CheckTriggerRegionFlag:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC05C:
-		
 		jmp     sub_1AC8A0(pc)
 
 	; End of function sub_1AC05C
 
-p_plt_endKiss:
-		dc.l plt_EndKiss
+p_plt_endKiss:  dc.l plt_EndKiss
 p_endKissPicture:
 		dc.l EndKissPicture

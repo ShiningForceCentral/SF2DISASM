@@ -16,7 +16,6 @@ ms_map37_Section5:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_68:
-		
 		rts
 
 	; End of function nullsub_68
@@ -25,7 +24,6 @@ nullsub_68:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5FA38:
-		
 		trap    #CHECK_FLAG
 		dc.w $3E7
 		bne.s   return_5FA86
@@ -34,8 +32,7 @@ sub_5FA38:
 		dc.w $344
 		bne.s   loc_5FA76
 		trap    #TEXTBOX
-		dc.w $D2D               
-						; "{LEADER} tries to use{N}the {ITEM}.{W2}{N}But, he doesn't know how.{W1}"
+		dc.w $D2D               ; "{LEADER} tries to use{N}the {ITEM}.{W2}{N}But, he doesn't know how.{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
@@ -45,23 +42,18 @@ sub_5FA38:
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
 		trap    #TEXTBOX
-		dc.w $D2E               
-						; "Well, {LEADER}.  Let's go{N}back to look for someone{N}who knows about this ship.{W1}"
+		dc.w $D2E               ; "Well, {LEADER}.  Let's go{N}back to look for someone{N}who knows about this ship.{W1}"
 		bra.s   loc_5FA84
 loc_5FA76:
-		
 		trap    #TEXTBOX
-		dc.w $D2F               
-						; "{LEADER} fit the {ITEM}{N}into the cockpit.{W1}"
+		dc.w $D2F               ; "{LEADER} fit the {ITEM}{N}into the cockpit.{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		lea     cs_5FB6A(pc), a0
 		trap    #6
 loc_5FA84:
-		
 		moveq   #$FFFFFFFF,d6
 return_5FA86:
-		
 		rts
 
 	; End of function sub_5FA38

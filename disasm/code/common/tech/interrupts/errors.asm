@@ -32,7 +32,6 @@ Int_ZeroDivide:
 		
 		move.l  #'ZERO',(ERRCODE_BYTE0).l
 loc_4CE:
-		
 		move.l  2(sp),(ERRCODE_BYTE4).l
 		bsr.w   SaveErrorCode
 		bra.w   Int_ExternalInterrupt
@@ -83,7 +82,6 @@ Int_ExternalInterrupt:
 ; =============== S U B R O U T I N E =======================================
 
 IntLvl7:
-		
 		nop
 		bra.s   IntLvl7
 

@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map10\mapsetups\pt.asm :
 ; 0x56B84..0x56B9C : 
-ms_map10:
-		dc.l ms_map10_Entities
+ms_map10:       dc.l ms_map10_Entities
 		dc.l ms_map10_EntityEvents
 		dc.l ms_map10_ZoneEvents
 		dc.l ms_map10_AreaDescriptions

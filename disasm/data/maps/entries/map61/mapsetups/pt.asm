@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map61\mapsetups\pt.asm :
 ; 0x5C650..0x5C668 : 
-ms_map61:
-		dc.l ms_map61_Entities
+ms_map61:       dc.l ms_map61_Entities
 		dc.l ms_map61_EntityEvents
 		dc.l ms_map61_ZoneEvents
 		dc.l ms_map61_AreaDescriptions

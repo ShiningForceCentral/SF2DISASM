@@ -5,7 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 sub_4F48A:
-		
 		movem.l d1-d5/a0,-(sp)
 		move.w  d0,d4
 		move.w  d1,d5
@@ -14,7 +13,6 @@ sub_4F48A:
 		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d3
 		subq.w  #1,d3
 loc_4F4A2:
-		
 		clr.w   d0
 		move.b  (a0)+,d0
 		clr.w   d1
@@ -27,8 +25,7 @@ loc_4F4A2:
 		beq.w   loc_4F53C
 		move.w  d4,(TEXT_NAME_INDEX_1).l
 		trap    #TEXTBOX
-		dc.w $D6                
-						; "Found the {ITEM}, but{N}can't carry it.{N}You must discard something.{W1}"
+		dc.w $D6                ; "Found the {ITEM}, but{N}can't carry it.{N}You must discard something.{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		movem.w d4,-(sp)
@@ -41,8 +38,7 @@ loc_4F4A2:
 		trap    #SOUND_COMMAND
 		dc.w MUSIC_ITEM
 		trap    #TEXTBOX
-		dc.w $D7                
-						; "{NAME} discarded{N}the {ITEM} and{N}picked up the {ITEM}."
+		dc.w $D7                ; "{NAME} discarded{N}the {ITEM} and{N}picked up the {ITEM}."
 		jsr     j_FadeOut_WaitForP2Input
 		jsr     (WaitForPlayerInput).w
 		trap    #TEXTBOX
@@ -50,7 +46,6 @@ loc_4F4A2:
 		moveq   #2,d0
 		bra.w   loc_4F53C
 loc_4F510:
-		
 		move.w  d4,d1
 		jsr     j_AddItem
 		move.w  d0,(TEXT_NAME_INDEX_1).l
@@ -58,15 +53,13 @@ loc_4F510:
 		trap    #SOUND_COMMAND
 		dc.w MUSIC_ITEM
 		trap    #TEXTBOX
-		dc.w $D5                
-						; "{NAME} received the{N}{ITEM}."
+		dc.w $D5                ; "{NAME} received the{N}{ITEM}."
 		jsr     j_FadeOut_WaitForP2Input
 		jsr     (WaitForPlayerInput).w
 		trap    #TEXTBOX
 		dc.w $FFFF
 		clr.w   d0
 loc_4F53C:
-		
 		movem.l (sp)+,d1-d5/a0
 		rts
 
@@ -76,7 +69,6 @@ loc_4F53C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4F542:
-		
 		movem.w d1-d2,-(sp)
 		move.w  d0,d1
 		jsr     j_sub_9146
@@ -88,7 +80,6 @@ sub_4F542:
 		beq.w   loc_4F56A
 		clr.w   d0
 loc_4F56A:
-		
 		movem.w (sp)+,d1-d2
 		rts
 
@@ -98,7 +89,6 @@ loc_4F56A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4F570:
-		
 		movem.l d7-a1,-(sp)
 		link    a6,#-$C
 		jsr     j_UpdateForce
@@ -108,18 +98,15 @@ sub_4F570:
 		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 		subq.w  #1,d7
 loc_4F596:
-		
 		move.b  (a0)+,(a1)+
 		dbf     d7,loc_4F596
 loc_4F59C:
-		
 		move.b  #1,(byte_FFB13C).l
 		jsr     sub_10044
 		cmpi.w  #$FFFF,d0
 		bne.w   loc_4F5B6
 		bra.w   loc_4F6CA
 loc_4F5B6:
-		
 		move.w  d0,-2(a6)
 		move.w  d1,-6(a6)
 		move.w  d2,-4(a6)
@@ -132,15 +119,12 @@ loc_4F5B6:
 		beq.s   loc_4F5F0
 		move.w  -4(a6),(TEXT_NAME_INDEX_1).l
 		trap    #TEXTBOX
-		dc.w $25                
-						; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
+		dc.w $25                ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
 		bra.w   loc_4F6CA
 loc_4F5F0:
-		
 		move.w  -4(a6),(TEXT_NAME_INDEX_1).l
 		trap    #TEXTBOX
-		dc.w $2C                
-						; "The {ITEM} will be{N}discarded.  Are you sure?"
+		dc.w $2C                ; "The {ITEM} will be{N}discarded.  Are you sure?"
 		jsr     j_YesNoChoiceBox
 		trap    #TEXTBOX
 		dc.w $FFFF
@@ -148,7 +132,6 @@ loc_4F5F0:
 		beq.w   loc_4F610
 		bra.s   loc_4F59C
 loc_4F610:
-		
 		move.w  -4(a6),d1
 		jsr     j_GetItemType
 		cmpi.w  #1,d2
@@ -164,13 +147,11 @@ loc_4F610:
 		bcc.w   loc_4F69C
 		move.w  -4(a6),(TEXT_NAME_INDEX_1).l
 		trap    #TEXTBOX
-		dc.w $1E                
-						; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
+		dc.w $1E                ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		bra.w   loc_4F6CA
 loc_4F65C:
-		
 		cmpi.w  #0,d2
 		beq.w   loc_4F69C
 		move.w  -2(a6),d0
@@ -184,11 +165,9 @@ loc_4F65C:
 		bcc.w   loc_4F69C
 		move.w  -4(a6),(TEXT_NAME_INDEX_1).l
 		trap    #TEXTBOX
-		dc.w $1E                
-						; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
+		dc.w $1E                ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
 		bra.w   loc_4F6CA
 loc_4F69C:
-		
 		move.w  -2(a6),d0
 		move.w  -6(a6),d1
 		jsr     j_RemoveItemBySlot
@@ -200,10 +179,8 @@ loc_4F69C:
 		move.w  -4(a6),d1
 		jsr     j_AddItemToDeals
 loc_4F6CA:
-		
 		bra.w   loc_4F59C
 loc_4F6CE:
-		
 		move.w  -2(a6),d0
 		move.w  -6(a6),d1
 		move.w  -4(a6),d2

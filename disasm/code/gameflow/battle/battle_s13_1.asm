@@ -5,7 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC29C:
-		
 		movea.l (p_BaseTiles).l,a0
 		lea     (FF6802_LOADING_SPACE).l,a1
 		jsr     (LoadCompressedData).w
@@ -13,10 +12,8 @@ sub_1AC29C:
 		lea     (FF8804_LOADING_SPACE).l,a1
 		moveq   #$3F,d7 
 loc_1AC2BA:
-		
 		moveq   #7,d6
 loc_1AC2BC:
-		
 		move.l  (a0)+,d0
 		andi.l  #$22222222,d0
 		eori.l  #$22222222,d0
@@ -28,13 +25,10 @@ loc_1AC2BC:
 		lea     (byte_FF8808).l,a1
 		moveq   #$3F,d7 
 loc_1AC2E0:
-		
 		moveq   #6,d6
 loc_1AC2E2:
-		
 		moveq   #3,d5
 loc_1AC2E4:
-		
 		clr.b   d0
 		move.b  -4(a1),d1
 		andi.b  #$10,d1
@@ -44,7 +38,6 @@ loc_1AC2E4:
 		beq.w   loc_1AC302
 		ori.b   #$10,d0
 loc_1AC302:
-		
 		move.b  -4(a1),d1
 		andi.b  #1,d1
 		beq.w   loc_1AC31E
@@ -53,7 +46,6 @@ loc_1AC302:
 		beq.w   loc_1AC31E
 		ori.b   #1,d0
 loc_1AC31E:
-		
 		move.b  d0,(a1)+
 		dbf     d5,loc_1AC2E4
 		addq.l  #4,a1
@@ -66,7 +58,6 @@ loc_1AC31E:
 		clr.l   (a1)+
 		move.w  #$3FE,d7
 loc_1AC344:
-		
 		move.l  (a0)+,d0
 		lsr.l   #4,d0
 		mulu.w  #2,d0
@@ -76,7 +67,6 @@ loc_1AC344:
 		lea     (BATTLE_ENTITY_MOVE_STRING).l,a1
 		move.w  #$3FE,d7
 loc_1AC362:
-		
 		move.l  (a0),d0
 		andi.l  #$11111111,d0
 		mulu.w  #$F,d0
@@ -85,8 +75,7 @@ loc_1AC362:
 		or.l    d0,(a0)+
 		dbf     d7,loc_1AC362
 		lea     (FF8804_LOADING_SPACE).l,a0
-		lea     ($2000).w,a1    
-						; ?
+		lea     ($2000).w,a1    ; ?
 		move.w  #$800,d0
 		moveq   #2,d1
 		jsr     (sub_10DC).w    
@@ -98,7 +87,6 @@ loc_1AC362:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC38E:
-		
 		movem.l d0/d5-a6,-(sp)
 		jsr     j_GetXPos
 		move.w  d1,d3
@@ -113,16 +101,12 @@ sub_1AC38E:
 		bra.w   loc_1AC434
 		bra.s   loc_1AC3C0
 loc_1AC3BE:
-		
 		move.b  d2,d0
 loc_1AC3C0:
-		
 		bra.s   loc_1AC3C4
 loc_1AC3C2:
-		
 		move.b  d1,d0
 loc_1AC3C4:
-		
 		btst    #6,d0
 		bne.s   loc_1AC3DC
 		jsr     j_GetCurrentHP
@@ -131,19 +115,16 @@ loc_1AC3C4:
 		move.w  #$FFFF,d5
 		bra.w   loc_1AC434
 loc_1AC3DC:
-		
 		jsr     GetEnemyAITargetPos
 		clr.w   d5
 		cmp.w   d3,d1
 		bge.s   loc_1AC3EC
 		bset    #0,d5
 loc_1AC3EC:
-		
 		cmp.w   d4,d2
 		blt.s   loc_1AC3F4
 		bset    #1,d5
 loc_1AC3F4:
-		
 		btst    #0,d5
 		bne.s   loc_1AC406
 		subi.w  #4,d3
@@ -151,16 +132,13 @@ loc_1AC3F4:
 		bpl.s   loc_1AC404
 		clr.w   d3
 loc_1AC404:
-		
 		bra.s   loc_1AC414
 loc_1AC406:
-		
 		addi.w  #4,d3
 		cmpi.w  #$2F,d3 
 		ble.s   loc_1AC414
 		move.w  #$2F,d3 
 loc_1AC414:
-		
 		btst    #1,d5
 		beq.s   loc_1AC426
 		subi.w  #4,d4
@@ -168,16 +146,13 @@ loc_1AC414:
 		bpl.s   loc_1AC424
 		clr.w   d4
 loc_1AC424:
-		
 		bra.s   loc_1AC434
 loc_1AC426:
-		
 		addi.w  #4,d4
 		cmpi.w  #$2F,d4 
 		ble.s   loc_1AC434
 		move.w  #$2F,d4 
 loc_1AC434:
-		
 		move.b  d5,d1
 		movem.l (sp)+,d0/d5-a6
 		rts
@@ -197,10 +172,8 @@ GetEnemyAITargetMoveList:
 		bra.w   loc_1AC4EA
 		bra.s   loc_1AC456
 loc_1AC454:
-		
 		move.b  d1,d0
 loc_1AC456:
-		
 		btst    #6,d0
 		bne.s   loc_1AC46A
 		jsr     j_GetCurrentHP
@@ -208,7 +181,6 @@ loc_1AC456:
 		bne.s   loc_1AC46A
 		bra.w   loc_1AC4EA
 loc_1AC46A:
-		
 		jsr     GetEnemyAITargetPos
 		clr.l   d5
 		clr.l   d6
@@ -224,17 +196,14 @@ loc_1AC46A:
 		lea     (TERRAIN_DATA).l,a0
 		lea     ((byte_FF4A00+$300)).l,a1
 loc_1AC49E:
-		
 		move.w  #$2F,d3 
 		move.w  #0,d1
 loc_1AC4A6:
-		
 		move.b  (a0,d1.w),d0
 		cmpi.b  #$FF,d0
 		bne.s   loc_1AC4B4
 		bra.w   loc_1AC4D2
 loc_1AC4B4:
-		
 		move.l  d3,-(sp)
 		move.w  d0,d3
 		move.b  (a1,d1.w),d0
@@ -245,10 +214,8 @@ loc_1AC4B4:
 		bset    #6,d0
 		move.b  d0,(a0,d1.w)
 loc_1AC4D0:
-		
 		move.l  (sp)+,d3
 loc_1AC4D2:
-		
 		addi.w  #1,d1
 		dbf     d3,loc_1AC4A6
 		adda.w  #$30,a0 
@@ -256,7 +223,6 @@ loc_1AC4D2:
 		addi.w  #1,d2
 		dbf     d4,loc_1AC49E
 loc_1AC4EA:
-		
 		movem.l (sp)+,d0-a6
 		rts
 
@@ -268,7 +234,6 @@ loc_1AC4EA:
 ; something with targetting grid or ???
 
 sub_1AC4F0:
-		
 		movem.l d0-a6,-(sp)
 		move.b  d0,d7
 		clr.w   d1
@@ -281,7 +246,6 @@ sub_1AC4F0:
 		bsr.w   sub_1AC5AA
 		bra.w   loc_1AC5A4
 loc_1AC516:
-		
 		move.w  d7,d0
 		jsr     j_GetEnemyAISetting3233
 		cmpi.b  #$FF,d1
@@ -289,10 +253,8 @@ loc_1AC516:
 		bra.w   loc_1AC5A4
 		bra.s   loc_1AC52C
 loc_1AC52A:
-		
 		move.b  d1,d0
 loc_1AC52C:
-		
 		btst    #6,d0
 		bne.s   loc_1AC540
 		jsr     j_GetCurrentHP
@@ -300,29 +262,24 @@ loc_1AC52C:
 		bne.s   loc_1AC540
 		bra.w   loc_1AC5A4
 loc_1AC540:
-		
 		jsr     GetEnemyAITargetPos
 		move.w  d1,d5
 		move.w  d2,d6
 		lea     (TERRAIN_DATA).l,a0
 		move.w  #$2F,d4 
 loc_1AC554:
-		
 		move.w  #$2F,d3 
 		move.w  #0,d1
 loc_1AC55C:
-		
 		move.b  (a0,d1.w),d0
 		cmpi.b  #$FF,d0
 		bne.s   loc_1AC56A
 		bra.w   loc_1AC576
 loc_1AC56A:
-		
 		bset    #7,d0
 		bset    #6,d0
 		move.b  d0,(a0,d1.w)
 loc_1AC576:
-		
 		addi.w  #1,d1
 		dbf     d3,loc_1AC55C
 		adda.w  #$30,a0 
@@ -337,7 +294,6 @@ loc_1AC576:
 		nop
 		bsr.w   sub_1AC7FE
 loc_1AC5A4:
-		
 		movem.l (sp)+,d0-a6
 		rts
 
@@ -347,7 +303,6 @@ loc_1AC5A4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC5AA:
-		
 		movem.l d0-a6,-(sp)
 		move.b  d0,d7
 		jsr     j_GetEnemyAISetting3233
@@ -356,10 +311,8 @@ sub_1AC5AA:
 		bra.w   loc_1AC64E
 		bra.s   loc_1AC5C4
 loc_1AC5C2:
-		
 		move.b  d1,d0
 loc_1AC5C4:
-		
 		btst    #6,d0
 		bne.s   loc_1AC5D8
 		jsr     j_GetCurrentHP
@@ -367,29 +320,24 @@ loc_1AC5C4:
 		bne.s   loc_1AC5D8
 		bra.w   loc_1AC64E
 loc_1AC5D8:
-		
 		bsr.w   GetEnemyAITargetPos
 		move.w  d1,d5
 		move.w  d2,d6
 		move.w  #$2F,d4 
 		lea     (TERRAIN_DATA).l,a0
 loc_1AC5EA:
-		
 		move.w  #$2F,d3 
 		move.w  #0,d1
 loc_1AC5F2:
-		
 		move.b  (a0,d1.w),d0
 		cmpi.b  #$FF,d0
 		bne.s   loc_1AC600
 		bra.w   loc_1AC60C
 loc_1AC600:
-		
 		bset    #7,d0
 		bset    #6,d0
 		move.b  d0,(a0,d1.w)
 loc_1AC60C:
-		
 		addi.w  #1,d1
 		dbf     d3,loc_1AC5F2
 		adda.w  #$30,a0 
@@ -410,7 +358,6 @@ loc_1AC60C:
 		nop
 		bsr.w   sub_1AC7FE
 loc_1AC64E:
-		
 		movem.l (sp)+,d0-a6
 		rts
 
@@ -427,22 +374,18 @@ ClearTerrainListObstructions:
 		move.w  #$2F,d4 
 		lea     (TERRAIN_DATA).l,a0
 loc_1AC662:
-		
 		move.w  #$2F,d3 
 		move.w  #0,d1
 loc_1AC66A:
-		
 		move.b  (a0,d1.w),d0
 		cmpi.b  #$FF,d0
 		bne.s   loc_1AC678
 		bra.w   loc_1AC684
 loc_1AC678:
-		
 		bclr    #7,d0
 		bclr    #6,d0
 		move.b  d0,(a0,d1.w)
 loc_1AC684:
-		
 		addi.w  #1,d1
 		dbf     d3,loc_1AC66A
 		adda.w  #$30,a0 
@@ -456,7 +399,6 @@ loc_1AC684:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC69A:
-		
 		movem.l d0-a6,-(sp)
 		clr.l   d7
 		move.b  d0,d7
@@ -473,7 +415,6 @@ sub_1AC69A:
 		move.b  #3,d1
 		bsr.w   sub_1AC728
 loc_1AC6C8:
-		
 		cmpi.b  #1,d5
 		bne.s   loc_1AC6E6
 		move.b  #0,d1
@@ -483,7 +424,6 @@ loc_1AC6C8:
 		move.b  #3,d1
 		bsr.w   sub_1AC728
 loc_1AC6E6:
-		
 		cmpi.b  #3,d5
 		bne.s   loc_1AC704
 		move.b  #0,d1
@@ -493,7 +433,6 @@ loc_1AC6E6:
 		move.b  #3,d1
 		bsr.w   sub_1AC728
 loc_1AC704:
-		
 		cmpi.b  #2,d5
 		bne.s   loc_1AC722
 		move.b  #0,d1
@@ -503,7 +442,6 @@ loc_1AC704:
 		move.b  #2,d1
 		bsr.w   sub_1AC728
 loc_1AC722:
-		
 		movem.l (sp)+,d0-a6
 		rts
 
@@ -513,7 +451,6 @@ loc_1AC722:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC728:
-		
 		movem.l d0-a6,-(sp)
 		link    a6,#-4
 		move.w  d3,d6
@@ -525,7 +462,6 @@ sub_1AC728:
 		move.b  d6,-3(a6)
 		move.b  #$2F,-4(a6) 
 loc_1AC74E:
-		
 		cmpi.b  #1,d1
 		bne.s   loc_1AC768
 		move.b  #0,-1(a6)
@@ -533,7 +469,6 @@ loc_1AC74E:
 		move.b  #0,-3(a6)
 		move.b  d6,-4(a6)
 loc_1AC768:
-		
 		cmpi.b  #2,d1
 		bne.s   loc_1AC782
 		move.b  d7,-1(a6)
@@ -541,7 +476,6 @@ loc_1AC768:
 		move.b  #0,-3(a6)
 		move.b  d6,-4(a6)
 loc_1AC782:
-		
 		cmpi.b  #3,d1
 		bne.s   loc_1AC79C
 		move.b  d7,-1(a6)
@@ -549,7 +483,6 @@ loc_1AC782:
 		move.b  d6,-3(a6)
 		move.b  #$2F,-4(a6) 
 loc_1AC79C:
-		
 		clr.w   d4
 		move.b  -2(a6),d4
 		sub.b   -1(a6),d4
@@ -558,14 +491,12 @@ loc_1AC79C:
 		move.b  -1(a6),d2
 		ext.w   d2
 loc_1AC7B4:
-		
 		move.b  -3(a6),d1
 		ext.w   d1
 		move.b  -4(a6),d3
 		sub.b   -3(a6),d3
 		ext.w   d3
 loc_1AC7C4:
-		
 		movea.l a0,a1
 		move.l  d2,-(sp)
 		mulu.w  #$30,d2 
@@ -578,7 +509,6 @@ loc_1AC7C4:
 		bset    #6,d0
 		move.b  d0,(a1,d1.w)
 loc_1AC7E6:
-		
 		addi.w  #1,d1
 		dbf     d3,loc_1AC7C4
 		addi.w  #1,d2
@@ -593,13 +523,11 @@ loc_1AC7E6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC7FE:
-		
 		movem.l d0-a1,-(sp)
 		clr.w   d7
 		move.b  (a0)+,d7
 		subq.w  #1,d7
 loc_1AC808:
-		
 		move.w  d6,d2
 		add.b   1(a0),d2
 		cmpi.w  #$30,d2 
@@ -615,7 +543,6 @@ loc_1AC808:
 		bclr    #6,d0
 		jsr     j_SetTerrain
 loc_1AC83C:
-		
 		addq.l  #2,a0
 		dbf     d7,loc_1AC808
 		movem.l (sp)+,d0-a1
@@ -623,12 +550,10 @@ loc_1AC83C:
 
 	; End of function sub_1AC7FE
 
-unk_1AC848:
-		dc.b   1
+unk_1AC848:     dc.b   1
 		dc.b   0
 		dc.b   0
-unk_1AC84B:
-		dc.b   4
+unk_1AC84B:     dc.b   4
 		dc.b   0
 		dc.b   1
 		dc.b   1
@@ -637,8 +562,7 @@ unk_1AC84B:
 		dc.b $FF
 		dc.b $FF
 		dc.b   0
-unk_1AC854:
-		dc.b   8
+unk_1AC854:     dc.b   8
 		dc.b   0
 		dc.b $FE 
 		dc.b $FF
@@ -655,8 +579,7 @@ unk_1AC854:
 		dc.b   0
 		dc.b   1
 		dc.b $FF
-unk_1AC865:
-		dc.b  $C
+unk_1AC865:     dc.b  $C
 		dc.b   0
 		dc.b $FD 
 		dc.b $FF
@@ -681,8 +604,7 @@ unk_1AC865:
 		dc.b $FF
 		dc.b   1
 		dc.b $FE 
-unk_1AC87E:
-		dc.b $10
+unk_1AC87E:     dc.b $10
 		dc.b   0
 		dc.b $FC 
 		dc.b $FF
@@ -720,7 +642,6 @@ unk_1AC87E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC8A0:
-		
 		movem.l d0-a6,-(sp)
 		move.w  d0,d7
 		lea     ((CURRENT_BATTLE-$1000000)).w,a0
@@ -733,19 +654,16 @@ sub_1AC8A0:
 		subi.w  #1,d1
 		clr.w   d3
 loc_1AC8BE:
-		
 		move.b  (a0,d3.w),d0
 		cmp.b   d0,d2
 		bne.s   loc_1AC8CA
 		bra.w   loc_1AC8D8
 loc_1AC8CA:
-		
 		addi.w  #1,d3
 		dbf     d1,loc_1AC8BE
 		clr.w   d3
 		bra.w   loc_1AC9AC
 loc_1AC8D8:
-		
 		lea     off_1AC9BC(pc), a0
 		nop
 		lsl.w   #2,d3
@@ -760,7 +678,6 @@ loc_1AC8D8:
 		moveq   #0,d3
 		bra.w   loc_1AC9AC
 loc_1AC8FE:
-		
 		clr.w   d0
 		move.b  d7,d0
 		jsr     j_GetYPos
@@ -771,37 +688,30 @@ loc_1AC8FE:
 		bne.s   loc_1AC91E
 		addi.w  #1,d1
 loc_1AC91E:
-		
 		cmpi.w  #1,d6
 		bne.s   loc_1AC928
 		subi.w  #1,d2
 loc_1AC928:
-		
 		cmpi.w  #2,d6
 		bne.s   loc_1AC932
 		subi.w  #1,d1
 loc_1AC932:
-		
 		cmpi.w  #3,d6
 		bne.s   loc_1AC93C
 		addi.w  #1,d2
 loc_1AC93C:
-		
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 		clr.w   d3
 loc_1AC942:
-		
 		jsr     j_SetMovableAtCoord
 		jsr     j_GetTargetAtCoordOffset
 		cmpi.b  #$FF,d0
 		bne.s   loc_1AC958
 		bra.w   loc_1AC960
 loc_1AC958:
-		
 		move.b  d0,(a0,d3.w)
 		addi.w  #1,d3
 loc_1AC960:
-		
 		tst.w   d6
 		bne.s   loc_1AC972
 		addi.w  #1,d1
@@ -809,7 +719,6 @@ loc_1AC960:
 		ble.s   loc_1AC972
 		bra.w   loc_1AC9AC
 loc_1AC972:
-		
 		cmpi.w  #1,d6
 		bne.s   loc_1AC984
 		subi.w  #1,d2
@@ -817,7 +726,6 @@ loc_1AC972:
 		bpl.s   loc_1AC984
 		bra.w   loc_1AC9AC
 loc_1AC984:
-		
 		cmpi.w  #2,d6
 		bne.s   loc_1AC996
 		subi.w  #1,d1
@@ -825,7 +733,6 @@ loc_1AC984:
 		bpl.s   loc_1AC996
 		bra.w   loc_1AC9AC
 loc_1AC996:
-		
 		cmpi.w  #3,d6
 		bne.s   loc_1AC9AA
 		addi.w  #1,d2
@@ -833,10 +740,8 @@ loc_1AC996:
 		ble.s   loc_1AC9AA
 		bra.w   loc_1AC9AC
 loc_1AC9AA:
-		
 		bra.s   loc_1AC942
 loc_1AC9AC:
-		
 		lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
 		move.w  d3,(a0)
 		movem.l (sp)+,d0-a6
@@ -844,17 +749,14 @@ loc_1AC9AC:
 
 	; End of function sub_1AC8A0
 
-unk_1AC9B8:
-		dc.b   3
+unk_1AC9B8:     dc.b   3
 		dc.b $24 
 		dc.b $2B 
 		dc.b   0
-off_1AC9BC:
-		dc.l unk_1AC9C8
+off_1AC9BC:     dc.l unk_1AC9C8
 		dc.l unk_1AC9E0
 		dc.l unk_1AC9F0
-unk_1AC9C8:
-		dc.b $FF
+unk_1AC9C8:     dc.b $FF
 		dc.b   3
 		dc.b   0
 		dc.b   0
@@ -878,8 +780,7 @@ unk_1AC9C8:
 		dc.b $FF
 		dc.b $FF
 		dc.b $FF
-unk_1AC9E0:
-		dc.b $FF
+unk_1AC9E0:     dc.b $FF
 		dc.b $FF
 		dc.b $FF
 		dc.b $FF
@@ -895,8 +796,7 @@ unk_1AC9E0:
 		dc.b $FF
 		dc.b $FF
 		dc.b $FF
-unk_1AC9F0:
-		dc.b $FF
+unk_1AC9F0:     dc.b $FF
 		dc.b $FF
 		dc.b $FF
 		dc.b $FF
@@ -912,14 +812,12 @@ unk_1AC9F0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1AC9FC:
-		
 		movem.l d0/d2-a6,-(sp)
 		cmpi.b  #$FF,d0
 		bne.s   loc_1ACA0C
 		clr.w   d6
 		bra.w   loc_1ACA6A
 loc_1ACA0C:
-		
 		move.w  d0,d7
 		move.b  #3,d1
 		bsr.w   GetAddrOfBattleDataSection
@@ -927,7 +825,6 @@ loc_1ACA0C:
 		ble.s   loc_1ACA1E
 		bra.w   loc_1ACA6A
 loc_1ACA1E:
-		
 		move.w  d7,d0
 		mulu.w  #$C,d0
 		adda.w  d0,a0
@@ -940,7 +837,6 @@ loc_1ACA1E:
 		bsr.w   sub_1ACA72
 		bra.s   loc_1ACA6A
 loc_1ACA40:
-		
 		move.w  2(a0),d2
 		move.w  4(a0),d3
 		move.w  8(a0),d4
@@ -949,13 +845,11 @@ loc_1ACA40:
 		beq.s   loc_1ACA5A
 		bra.w   loc_1ACA6A
 loc_1ACA5A:
-		
 		move.w  6(a0),d2
 		move.w  4(a0),d3
 		move.w  8(a0),d4
 		bsr.w   sub_1ACA72
 loc_1ACA6A:
-		
 		move.w  d6,d1
 		movem.l (sp)+,d0/d2-a6
 		rts
@@ -966,27 +860,22 @@ loc_1ACA6A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1ACA72:
-		
 		movem.l d0-d5/d7-a6,-(sp)
 		move.w  #$1D,d7
 		clr.w   d0
 loc_1ACA7C:
-		
 		jsr     j_GetCurrentHP
 		tst.w   d1
 		beq.s   loc_1ACA88
 		bpl.s   loc_1ACA8C
 loc_1ACA88:
-		
 		bra.w   loc_1ACABC
 loc_1ACA8C:
-		
 		jsr     j_GetXPos
 		tst.b   d1
 		bpl.s   loc_1ACA9A
 		bra.w   loc_1ACABC
 loc_1ACA9A:
-		
 		clr.w   d5
 		move.b  d1,d5
 		lsl.w   #8,d5
@@ -995,23 +884,19 @@ loc_1ACA9A:
 		bpl.s   loc_1ACAAE
 		bra.w   loc_1ACABC
 loc_1ACAAE:
-		
 		or.b    d1,d5
 		bsr.w   sub_1ACAD6
 		tst.w   d6
 		bne.s   loc_1ACABC
 		bra.w   loc_1ACACC
 loc_1ACABC:
-		
 		addi.w  #1,d0
 		dbf     d7,loc_1ACA7C
 		move.w  #0,d6
 		bra.w   loc_1ACAD0
 loc_1ACACC:
-		
 		move.w  #$FFFF,d6
 loc_1ACAD0:
-		
 		movem.l (sp)+,d0-d5/d7-a6
 		rts
 
@@ -1021,7 +906,6 @@ loc_1ACAD0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1ACAD6:
-		
 		movem.l d0-d5/d7-a6,-(sp)
 		link    a6,#-$A
 		move.w  d2,d0
@@ -1065,12 +949,10 @@ sub_1ACAD6:
 		bne.s   loc_1ACB58
 		bra.w   loc_1ACC10
 loc_1ACB58:
-		
 		btst    #0,d0
 		beq.s   loc_1ACB62
 		bra.w   loc_1ACB7C
 loc_1ACB62:
-		
 		move.b  d0,-9(a6)
 		move.b  -5(a6),d5
 		move.b  -6(a6),d6
@@ -1079,7 +961,6 @@ loc_1ACB62:
 		beq.s   loc_1ACB7C
 		bra.w   loc_1ACC1A
 loc_1ACB7C:
-		
 		move.b  -5(a6),d1
 		move.b  -6(a6),d2
 		move.b  -1(a6),d3
@@ -1091,12 +972,10 @@ loc_1ACB7C:
 		bne.s   loc_1ACBA2
 		bra.w   loc_1ACC10
 loc_1ACBA2:
-		
 		btst    #0,d0
 		beq.s   loc_1ACBAC
 		bra.w   loc_1ACBC6
 loc_1ACBAC:
-		
 		move.b  d0,-9(a6)
 		move.b  -3(a6),d5
 		move.b  -4(a6),d6
@@ -1105,7 +984,6 @@ loc_1ACBAC:
 		beq.s   loc_1ACBC6
 		bra.w   loc_1ACC1A
 loc_1ACBC6:
-		
 		move.b  -5(a6),d1
 		move.b  -6(a6),d2
 		move.b  -3(a6),d3
@@ -1117,12 +995,10 @@ loc_1ACBC6:
 		bne.s   loc_1ACBEC
 		bra.w   loc_1ACC10
 loc_1ACBEC:
-		
 		btst    #0,d0
 		beq.s   loc_1ACBF6
 		bra.w   loc_1ACC1A
 loc_1ACBF6:
-		
 		move.b  d0,-9(a6)
 		move.b  -1(a6),d5
 		move.b  -2(a6),d6
@@ -1131,13 +1007,11 @@ loc_1ACBF6:
 		beq.s   loc_1ACC10
 		bra.w   loc_1ACC1A
 loc_1ACC10:
-		
 		clr.w   d6
 		unlk    a6
 		movem.l (sp)+,d0-d5/d7-a6
 		rts
 loc_1ACC1A:
-		
 		move.b  #$FF,d6
 		unlk    a6
 		movem.l (sp)+,d0-d5/d7-a6
@@ -1149,7 +1023,6 @@ loc_1ACC1A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1ACC26:
-		
 		movem.l d1-a6,-(sp)
 		link    a6,#-6
 		move.b  d1,-1(a6)
@@ -1166,7 +1039,6 @@ sub_1ACC26:
 		bpl.s   loc_1ACC58
 		neg.w   d0
 loc_1ACC58:
-		
 		move.b  -1(a6),d2
 		move.b  -3(a6),d1
 		ext.w   d1
@@ -1175,12 +1047,10 @@ loc_1ACC58:
 		bpl.s   loc_1ACC6A
 		neg.w   d1
 loc_1ACC6A:
-		
 		cmp.w   d0,d1
 		bcc.s   loc_1ACC72
 		bra.w   loc_1ACD60
 loc_1ACC72:
-		
 		move.b  -4(a6),d0
 		move.b  -2(a6),d1
 		ext.w   d0
@@ -1203,7 +1073,6 @@ loc_1ACC72:
 		bne.s   loc_1ACCAA
 		bra.w   loc_1ACD60
 loc_1ACCAA:
-		
 		ext.l   d0
 		ext.l   d6
 		divs.w  d0,d6
@@ -1213,14 +1082,12 @@ loc_1ACCAA:
 		bpl.s   loc_1ACCBE
 		bra.w   loc_1ACE22
 loc_1ACCBE:
-		
 		move.b  -6(a6),d1
 		ext.w   d1
 		sub.w   d1,d0
 		beq.s   loc_1ACCCC
 		bra.w   loc_1ACD32
 loc_1ACCCC:
-		
 		move.b  -1(a6),d0
 		move.b  -3(a6),d1
 		ext.w   d0
@@ -1229,14 +1096,12 @@ loc_1ACCCC:
 		bcc.s   loc_1ACCE0
 		bra.w   loc_1ACD08
 loc_1ACCE0:
-		
 		move.b  -5(a6),d1
 		ext.w   d1
 		cmp.w   d1,d0
 		bcc.s   loc_1ACCEE
 		bra.w   loc_1ACD5A
 loc_1ACCEE:
-		
 		move.b  -5(a6),d0
 		move.b  -3(a6),d1
 		ext.w   d0
@@ -1245,11 +1110,9 @@ loc_1ACCEE:
 		bcc.s   loc_1ACD02
 		bra.w   loc_1ACD5A
 loc_1ACD02:
-		
 		eor.w   d0,d0
 		bra.w   loc_1ACD32
 loc_1ACD08:
-		
 		move.b  -3(a6),d0
 		move.b  -5(a6),d1
 		ext.w   d0
@@ -1258,7 +1121,6 @@ loc_1ACD08:
 		bcc.s   loc_1ACD1C
 		bra.w   loc_1ACD5A
 loc_1ACD1C:
-		
 		move.b  -5(a6),d0
 		move.b  -1(a6),d1
 		ext.w   d0
@@ -1267,36 +1129,28 @@ loc_1ACD1C:
 		bcc.s   loc_1ACD30
 		bra.w   loc_1ACD5A
 loc_1ACD30:
-		
 		eor.w   d0,d0
 loc_1ACD32:
-		
 		bne.s   loc_1ACD3C
 		bset    #0,d0
 		bra.w   loc_1ACD40
 loc_1ACD3C:
-		
 		bclr    #0,d0
 loc_1ACD40:
-		
 		bcc.s   loc_1ACD4A
 		bset    #1,d0
 		bra.w   loc_1ACD4E
 loc_1ACD4A:
-		
 		bclr    #1,d0
 loc_1ACD4E:
-		
 		andi.w  #3,d0
 		unlk    a6
 		movem.l (sp)+,d1-a6
 		rts
 loc_1ACD5A:
-		
 		move    #1,ccr
 		bra.s   loc_1ACD32
 loc_1ACD60:
-		
 		move.b  -3(a6),d0
 		move.b  -1(a6),d1
 		ext.w   d0
@@ -1319,7 +1173,6 @@ loc_1ACD60:
 		bne.s   loc_1ACD98
 		bra.w   loc_1ACE2A
 loc_1ACD98:
-		
 		ext.l   d0
 		ext.l   d6
 		divs.w  d0,d6
@@ -1329,14 +1182,12 @@ loc_1ACD98:
 		bpl.s   loc_1ACDAC
 		bra.w   loc_1ACE22
 loc_1ACDAC:
-		
 		move.b  -5(a6),d1
 		ext.w   d1
 		sub.w   d1,d0
 		beq.s   loc_1ACDBA
 		bra.w   loc_1ACD32
 loc_1ACDBA:
-		
 		move.b  -2(a6),d0
 		move.b  -4(a6),d1
 		ext.w   d0
@@ -1345,14 +1196,12 @@ loc_1ACDBA:
 		bcc.s   loc_1ACDCE
 		bra.w   loc_1ACDF4
 loc_1ACDCE:
-		
 		move.b  -6(a6),d1
 		ext.w   d1
 		cmp.w   d1,d0
 		bcc.s   loc_1ACDDA
 		bra.s   loc_1ACD5A
 loc_1ACDDA:
-		
 		move.b  -6(a6),d0
 		move.b  -4(a6),d1
 		ext.w   d0
@@ -1361,11 +1210,9 @@ loc_1ACDDA:
 		bcc.s   loc_1ACDEE
 		bra.w   loc_1ACD5A
 loc_1ACDEE:
-		
 		eor.w   d0,d0
 		bra.w   loc_1ACD32
 loc_1ACDF4:
-		
 		move.b  -4(a6),d0
 		move.b  -6(a6),d1
 		ext.w   d0
@@ -1374,7 +1221,6 @@ loc_1ACDF4:
 		bcc.s   loc_1ACE08
 		bra.w   loc_1ACD5A
 loc_1ACE08:
-		
 		move.b  -6(a6),d0
 		move.b  -2(a6),d1
 		ext.w   d0
@@ -1383,15 +1229,12 @@ loc_1ACE08:
 		bcc.s   loc_1ACE1C
 		bra.w   loc_1ACD5A
 loc_1ACE1C:
-		
 		eor.w   d0,d0
 		bra.w   loc_1ACD32
 loc_1ACE22:
-		
 		move    #1,ccr
 		bra.w   loc_1ACD32
 loc_1ACE2A:
-		
 		ori     #1,ccr
 		bra.w   loc_1ACD32
 
@@ -1427,12 +1270,10 @@ UpdateTriggeredRegionsAndAI:
 		bne.s   loc_1ACE60
 		bra.w   loc_1ACF2A
 loc_1ACE60:
-		
 		move.w  d1,d2
 		subi.w  #1,d2
 		clr.w   d0
 loc_1ACE68:
-		
 		lea     (byte_FFB20C).l,a0
 		move.w  (a0),d1
 		btst    d0,d1
@@ -1445,7 +1286,6 @@ loc_1ACE68:
 		addi.w  #$5A,d1 
 		jsr     j_SetFlag
 loc_1ACE8A:
-		
 		move.w  (a0),d1
 		bset    d0,d1
 		move.w  d1,(a0)
@@ -1459,7 +1299,6 @@ loc_1ACE8A:
 		bne.s   loc_1ACEB0
 		bra.w   loc_1ACF2A
 loc_1ACEB0:
-		
 		move.b  d0,d7
 		move.b  d2,d6
 		move.b  d1,d5
@@ -1467,7 +1306,6 @@ loc_1ACEB0:
 		bne.s   loc_1ACEC0
 		bra.w   loc_1ACEF0
 loc_1ACEC0:
-		
 		clr.w   d1
 		move.b  d5,d1
 		addi.w  #$5A,d1 
@@ -1475,7 +1313,6 @@ loc_1ACEC0:
 		bne.s   loc_1ACED4
 		bra.w   loc_1ACEF0
 loc_1ACED4:
-		
 		clr.w   d0
 		move.w  d7,d0
 		jsr     j_GetCharacterWord34
@@ -1484,12 +1321,10 @@ loc_1ACED4:
 		jsr     j_SetCharacterWord34
 		bra.w   loc_1ACF2A
 loc_1ACEF0:
-		
 		cmpi.b  #$F,d6
 		bne.s   loc_1ACEFA
 		bra.w   loc_1ACF2A
 loc_1ACEFA:
-		
 		clr.w   d1
 		move.b  d6,d1
 		addi.w  #$5A,d1 
@@ -1497,7 +1332,6 @@ loc_1ACEFA:
 		bne.s   loc_1ACF0E
 		bra.w   loc_1ACF2A
 loc_1ACF0E:
-		
 		clr.w   d0
 		move.w  d7,d0
 		jsr     j_GetCharacterWord34
@@ -1506,7 +1340,6 @@ loc_1ACF0E:
 		bset    #1,d1
 		jsr     j_SetCharacterWord34
 loc_1ACF2A:
-		
 		movem.l (sp)+,d0-a6
 		rts
 
@@ -1526,30 +1359,25 @@ GetListOfSpawningEnemies:
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 		clr.w   d5
 loc_1ACF44:
-		
 		jsr     j_GetCharacterWord34
 		andi.w  #$F00,d1
 		tst.w   d1
 		bne.s   loc_1ACF56      
 		bra.w   loc_1ACFEA
 loc_1ACF56:
-		
-		cmpi.w  #$200,d1        
-						; 0x200 - region-triggered spawn - check if triggered and if not spawned yet
+		cmpi.w  #$200,d1        ; 0x200 - region-triggered spawn - check if triggered and if not spawned yet
 		bne.w   loc_1ACF92      
 		bsr.w   UpdateEnemyActivationIfDead
 		tst.w   d0
 		beq.s   loc_1ACF6A
 		bra.w   loc_1ACFEA
 loc_1ACF6A:
-		
 		move.w  d4,d0
 		jsr     j_GetMaxHP
 		tst.w   d1
 		beq.s   loc_1ACF7A
 		bra.w   loc_1ACFEA
 loc_1ACF7A:
-		
 		move.w  d4,d0
 		jsr     j_GetCharacterWord34
 		bsr.w   UpdateEnemyStatsForRespawn
@@ -1557,16 +1385,13 @@ loc_1ACF7A:
 		move.b  d4,(a0,d5.w)
 		addi.w  #1,d5
 loc_1ACF92:
-		
-		cmpi.w  #$100,d1        
-						; 0x100 - respawn - check if dead
+		cmpi.w  #$100,d1        ; 0x100 - respawn - check if dead
 		bne.w   loc_1ACFC0      
 		jsr     j_GetCurrentHP
 		tst.w   d1
 		beq.s   loc_1ACFA8
 		bra.w   loc_1ACFEA
 loc_1ACFA8:
-		
 		move.w  d4,d0
 		jsr     j_GetCharacterWord34
 		bsr.w   UpdateEnemyStatsForRespawn
@@ -1574,16 +1399,13 @@ loc_1ACFA8:
 		move.b  d4,(a0,d5.w)
 		addi.w  #1,d5
 loc_1ACFC0:
-		
-		cmpi.w  #$300,d1        
-						; 0x300 - region-triggered respawn - check if dead and triggered
+		cmpi.w  #$300,d1        ; 0x300 - region-triggered respawn - check if dead and triggered
 		bne.s   loc_1ACFEA
 		bsr.w   UpdateEnemyActivationIfDead
 		tst.w   d0
 		beq.s   loc_1ACFD2
 		bra.w   loc_1ACFEA
 loc_1ACFD2:
-		
 		move.w  d4,d0
 		jsr     j_GetCharacterWord34
 		bsr.w   UpdateEnemyStatsForRespawn
@@ -1591,7 +1413,6 @@ loc_1ACFD2:
 		move.b  d4,(a0,d5.w)
 		addi.w  #1,d5
 loc_1ACFEA:
-		
 		addi.w  #1,d4
 		move.w  d4,d0
 		subq.w  #1,d7
@@ -1618,7 +1439,6 @@ UpdateEnemyActivationIfDead:
 		beq.s   loc_1AD014
 		bra.w   loc_1AD07E
 loc_1AD014:
-		
 		jsr     j_GetEnemyAISetting36
 		cmpi.b  #$F,d1
 		beq.s   loc_1AD044
@@ -1632,7 +1452,6 @@ loc_1AD014:
 		jsr     j_SetCharacterWord34
 		bra.w   loc_1AD088
 loc_1AD044:
-		
 		move.w  d4,d0
 		jsr     j_GetEnemyAISetting36
 		cmpi.b  #$F,d2
@@ -1649,12 +1468,10 @@ loc_1AD044:
 		jsr     j_SetCharacterWord34
 		bra.w   loc_1AD088
 loc_1AD07E:
-		
 		move.w  #$FFFF,d0
 		movem.l (sp)+,d1-a6
 		rts
 loc_1AD088:
-		
 		clr.w   d0
 		movem.l (sp)+,d1-a6
 		rts
@@ -1688,25 +1505,20 @@ RandomLessThanD6:
 		movem.l d0-d5/a0-a6,-(sp)
 		move.b  d6,d1
 loc_1AD0BA:
-		
 		bsr.s   GetRandomValueSigned
 		cmpi.b  #1,d1
 		beq.s   loc_1AD0C4
 		bpl.s   loc_1AD0C8
 loc_1AD0C4:
-		
 		bra.w   loc_1AD0D4
 loc_1AD0C8:
-		
 		cmp.b   d1,d7
 		bcs.s   loc_1AD0CE
 		bra.s   loc_1AD0BA
 loc_1AD0CE:
-		
 		movem.l (sp)+,d0-d5/a0-a6
 		rts
 loc_1AD0D4:
-		
 		clr.b   d7
 		movem.l (sp)+,d0-d5/a0-a6
 		rts

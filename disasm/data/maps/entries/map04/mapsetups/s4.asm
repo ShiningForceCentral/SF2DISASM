@@ -13,8 +13,7 @@ ms_map4_AreaDescriptions:
 
 	; End of function ms_map4_AreaDescriptions
 
-word_51712:
-		dc.w $2806
+word_51712:     dc.w $2806
 		dc.b 0
 		dc.b 0
 		dc.b 4

@@ -7,7 +7,6 @@
 ; witch suspend screen
 
 WitchSuspend:
-		
 		trap    #SOUND_COMMAND
 		dc.w MUSIC_SUSPEND
 		bsr.w   InitWitchSuspendVIntFunctions
@@ -15,8 +14,7 @@ WitchSuspend:
 		move.w  #6,((word_FFB07C-$1000000)).w
 		move.b  #$FF,((byte_FFB082-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $F0                
-						; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
+		dc.w $F0                ; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		clr.b   ((byte_FFB082-$1000000)).w
@@ -24,7 +22,6 @@ WitchSuspend:
 		jsr     j_SuspendGame
 		move.w  #$258,d0
 loc_7068:
-		
 		bsr.w   WaitForVInt     
 		btst    #7,((P1_INPUT-$1000000)).w
 		dbne    d0,loc_7068

@@ -32,27 +32,22 @@ csc33_setQuakeAmount:
 		move.w  #1,d2
 		bra.s   loc_46550
 loc_46538:
-		
 		btst    #$E,d3
 		beq.s   loc_46546
 		move.w  d0,d1
 		move.w  #$FFFF,d2
 		bra.s   loc_46550
 loc_46546:
-		
 		move.w  d0,(word_FFA80C).l
 		bra.w   return_46564
 loc_46550:
-		
 		move.w  #$28,d0 
 loc_46554:
-		
 		add.w   d2,d1
 		move.w  d1,(word_FFA80C).l
 		jsr     (Sleep).w       
 		dbf     d7,loc_46554
 return_46564:
-		
 		rts
 
 	; End of function csc33_setQuakeAmount
@@ -78,7 +73,6 @@ csc34_setBlocks:
 ; similar to setBlocks
 
 csc35_:
-		
 		move.w  (a6)+,d0
 		move.w  (a6)+,d1
 		move.w  (a6)+,d2
@@ -93,7 +87,6 @@ csc35_:
 ; related to loading a map
 
 csc36_:
-		
 		move.l  a6,-(sp)
 		jsr     (sub_3E06).l
 		movea.l (sp)+,a6
@@ -124,7 +117,6 @@ csc48_loadMap:
 		move.w  (a6),d1
 		jsr     (LoadMapTilesets).w
 loc_465C4:
-		
 		jsr     (WaitForVInt).w 
 		tst.b   ((FADING_SETTING-$1000000)).w
 		bne.s   loc_465C4
@@ -264,7 +256,6 @@ csc41_flashScreenWhite:
 		moveq   #1,d1
 		moveq   #FLASH_QUICKLY_2,d2
 loc_4667A:
-		
 		jsr     LaunchFading(pc)
 		nop
 		dbf     d7,loc_4667A
@@ -277,7 +268,6 @@ loc_4667A:
 ; =============== S U B R O U T I N E =======================================
 
 csc42_:
-		
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_DEACTIVATE
 		dc.l 0
@@ -300,7 +290,6 @@ csc42_:
 ; =============== S U B R O U T I N E =======================================
 
 csc43_:
-		
 		move.w  (a6)+,d0
 		move.w  (a6)+,d1
 		mulu.w  #$180,d0
@@ -314,7 +303,6 @@ csc43_:
 ; =============== S U B R O U T I N E =======================================
 
 csc44_:
-		
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_DEACTIVATE
 		dc.l 0
@@ -343,7 +331,6 @@ csc44_:
 ; related to camera adjust to lpayer
 
 csc45_:
-		
 		move.w  (a6)+,((word_FFB194-$1000000)).w
 		nop
 		rts
@@ -354,7 +341,6 @@ csc45_:
 ; =============== S U B R O U T I N E =======================================
 
 csc46_:
-		
 		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 		nop
 		trap    #VINT_FUNCTIONS
@@ -384,7 +370,6 @@ csc46_:
 ; =============== S U B R O U T I N E =======================================
 
 csc47_:
-		
 		move.w  (a6)+,d0
 		move.w  (a6)+,d1
 		mulu.w  #$180,d0
@@ -398,7 +383,6 @@ csc47_:
 ; =============== S U B R O U T I N E =======================================
 
 csc49_:
-		
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_DEACTIVATE
 		dc.l 0
@@ -449,7 +433,6 @@ csc4B_fadeOutToBlackHalf:
 ; =============== S U B R O U T I N E =======================================
 
 LaunchFading:
-		
 		move.b  d3,-(sp)
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,d3
 		clr.w   (unk_FFDFAA).l  
@@ -459,7 +442,6 @@ LaunchFading:
 		move.b  d2,((FADING_SETTING-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 loc_467C6:
-		
 		jsr     (WaitForVInt).w 
 		tst.b   ((FADING_SETTING-$1000000)).w
 		bne.s   loc_467C6
@@ -484,7 +466,6 @@ csc2D_moveEntity:
 		move.l  (dword_FFB1A4).l,d0
 		movea.l d0,a0
 loc_467FC:
-		
 		move.b  (a6)+,d1
 		bmi.w   loc_46928
 		move.b  (a6)+,d2
@@ -672,7 +653,6 @@ csc2D_B_faceDown:
 		move.w  #3,(a0)+
 		move.w  #$A,(a0)+
 loc_468F2:
-		
 		move.w  #0,(a0)+
 		move.w  d2,(a0)+
 		rts
@@ -683,7 +663,6 @@ loc_468F2:
 ; =============== S U B R O U T I N E =======================================
 
 csc2D_D_jump:
-		
 		lea     (eas_Jump).l,a1 
 		bra.w   loc_46914
 csc2D_E_jumpRight:
@@ -694,7 +673,6 @@ csc2D_F_jumpLeft:
 		
 		lea     (eas_JumpLeft).l,a1
 loc_46914:
-		
 		move.l  (a1)+,(a0)+
 		move.l  (a1)+,(a0)+
 		move.l  (a1)+,(a0)+
@@ -712,7 +690,6 @@ loc_46914:
 ; START OF FUNCTION CHUNK FOR csc2D_moveEntity
 
 loc_46928:
-		
 		move.w  #$34,(a0)+ 
 		move.l  #eas_Idle,(a0)+ 
 		addq.l  #1,a6
@@ -721,11 +698,9 @@ loc_46928:
 		tst.b   d4
 		beq.w   return_4694E
 loc_46944:
-		
 		cmpi.l  #eas_Idle,$14(a5)
 		bne.s   loc_46944
 return_4694E:
-		
 		rts
 
 ; END OF FUNCTION CHUNK FOR csc2D_moveEntity
@@ -745,11 +720,9 @@ csc14_setEntityActscriptManual:
 		tst.b   d0
 		beq.w   loc_46970
 loc_46966:
-		
 		cmpi.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a5)
 		bne.s   loc_46966
 loc_46970:
-		
 		cmpi.w  #$8080,(a6)+
 		bne.s   loc_46970
 		rts
@@ -771,11 +744,9 @@ csc15_setEntityActscript:
 		tst.b   d0
 		beq.w   return_46998
 loc_4698E:
-		
 		cmpi.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a5)
 		bne.s   loc_4698E
 return_46998:
-		
 		rts
 
 	; End of function csc15_setEntityActscript
@@ -790,7 +761,6 @@ csc16_waitUntilEntityIdle:
 		move.w  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
 loc_469A0:
-		
 		cmpi.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a5)
 		bne.s   loc_469A0
 		rts
@@ -810,7 +780,6 @@ csc17_setEntityPosAndFacingWithFlash:
 		move.w  #$FE80,d2
 		moveq   #$1E,d7
 loc_469BA:
-		
 		move.w  d2,(a5)
 		jsr     (WaitForVInt).w 
 		jsr     (WaitForVInt).w 
@@ -820,7 +789,6 @@ loc_469BA:
 		bhi.s   loc_469D0
 		moveq   #1,d0
 loc_469D0:
-		
 		add.w   d0,d0
 		jsr     (Sleep).w       
 		dbf     d7,loc_469BA
@@ -838,7 +806,6 @@ csc18_flashEntityWhite:
 		move.w  (a6)+,d7
 		lsr.w   #2,d7
 loc_469E8:
-		
 		ori.b   #4,ENTITYDEF_OFFSET_FLAGS_B(a5)
 		bsr.w   UpdateEntitySprite_0
 		jsr     (WaitForVInt).w 
@@ -864,8 +831,7 @@ csc19_setEntityPosAndFacing:
 		bsr.w   AdjustScriptPointerByCharAliveStatus
 		move.b  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
-		moveq   #0,d0           
-						; set new pos-dest, and facing
+		moveq   #0,d0           ; set new pos-dest, and facing
 		move.b  (a6)+,d0
 		mulu.w  #$180,d0
 		move.w  d0,(a5)
@@ -894,7 +860,6 @@ csc1A_setEntitySprite:
 		jsr     GetCharacterSpriteIdx
 		move.w  d4,d0
 loc_46A5E:
-		
 		move.b  d0,$13(a5)
 		jsr     (WaitForVInt).w 
 		bsr.w   UpdateEntitySprite_0
@@ -943,20 +908,17 @@ csc1D_showPortrait:
 		
 		move.w  (a6)+,d0
 		tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
-		bne.w   return_46AD0    
-						; do nothing if ther's already a portrait ?
+		bne.w   return_46AD0    ; do nothing if ther's already a portrait ?
 		moveq   #0,d3
 		btst    #$F,d0
 		beq.s   loc_46AAC
 		moveq   #$FFFFFFFF,d3
 loc_46AAC:
-		
 		moveq   #0,d4
 		btst    #$E,d0
 		beq.s   loc_46AB6
 		moveq   #$FFFFFFFF,d4
 loc_46AB6:
-		
 		jsr     (WaitForCameraToCatchUp).w
 		bsr.w   GetEntityPortraitAndSpeechSfx
 		cmpi.w  #$FFFF,d1
@@ -966,7 +928,6 @@ loc_46AB6:
 		move.w  d4,d2
 		jsr     j_InitPortraitWindow
 return_46AD0:
-		
 		rts
 
 	; End of function csc1D_showPortrait
@@ -1007,14 +968,12 @@ csc20_addForceMembersOnMapToList:
 		moveq   #$FFFFFF80,d0
 		moveq   #$1F,d7
 loc_46AFE:
-		
 		jsr     j_GetXPos
 		cmpi.w  #$FFFF,d1
 		beq.s   loc_46B0E
 		move.b  d0,(a1)+
 		addq.w  #1,d2
 loc_46B0E:
-		
 		addq.b  #1,d0
 		dbf     d7,loc_46AFE
 		move.w  d2,((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
@@ -1034,20 +993,16 @@ csc21_removeForceMemberFromList:
 		subq.w  #1,d7
 		bcs.w   return_46B40
 loc_46B2E:
-		
 		cmp.b   (a1),d0
 		bne.s   loc_46B3A
 		addq.l  #1,a1
 		subq.w  #1,((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
 		bra.s   loc_46B3C
 loc_46B3A:
-		
 		move.b  (a1)+,(a2)+
 loc_46B3C:
-		
 		dbf     d7,loc_46B2E
 return_46B40:
-		
 		rts
 
 	; End of function csc21_removeForceMemberFromList
@@ -1076,7 +1031,6 @@ csc22_animateEntityFadeInOrOut:
 		move.w  2(a1),d1
 		moveq   #$16,d7
 loc_46B74:
-		
 		bsr.w   sub_470CA
 		jsr     sub_45CA6
 		bsr.w   sub_4709E
@@ -1092,13 +1046,11 @@ loc_46B74:
 		jsr     sub_45E10
 		bsr.w   sub_4709E
 return_46BB0:
-		
 		rts
 
 	; End of function csc22_animateEntityFadeInOrOut
 
-byte_46BB2:
-		dc.b 0
+byte_46BB2:     dc.b 0
 		dc.b   1
 		dc.b   0
 		dc.b   0
@@ -1150,19 +1102,15 @@ byte_46BB2:
 ; START OF FUNCTION CHUNK FOR csc22_animateEntityFadeInOrOut
 
 loc_46BE2:
-		
 		tst.w   d1
 		beq.s   loc_46BEE
 		move.l  #$7FFF,d0
 		bra.s   loc_46BF0
 loc_46BEE:
-		
 		moveq   #1,d0
 loc_46BF0:
-		
 		moveq   #$F,d7
 loc_46BF2:
-		
 		bsr.w   sub_470CA
 		jsr     sub_45E10
 		bsr.w   sub_4709E
@@ -1174,11 +1122,9 @@ loc_46BF2:
 		lsr.l   #1,d0
 		bra.s   loc_46C1A
 loc_46C16:
-		
 		add.l   d0,d0
 		addq.w  #1,d0
 loc_46C1A:
-		
 		dbf     d7,loc_46BF2
 		rts
 
@@ -1216,11 +1162,9 @@ csc24_setCameraTargetEntity:
 		bpl.s   loc_46C4A
 		subi.b  #$60,d0 
 loc_46C4A:
-		
 		andi.w  #$FF,d0
 		move.b  (a5,d0.w),d0
 loc_46C52:
-		
 		move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
 		nop
 		rts
@@ -1257,7 +1201,6 @@ csc26_entityNodHead:
 		moveq   #$A,d0
 		jsr     (Sleep).w       
 loc_46C8A:
-		
 		bsr.w   sub_470CA
 		jsr     sub_45D70
 		bsr.w   sub_4709E
@@ -1283,7 +1226,6 @@ csc27_entityShakeHead:
 		lea     (FF6802_LOADING_SPACE).l,a0
 		moveq   #6,d7
 loc_46CC8:
-		
 		bsr.w   sub_470CA
 		jsr     sub_45D1C
 		bsr.w   sub_4709E
@@ -1321,22 +1263,18 @@ csc28_moveEntityNextToPlayer:
 		addi.w  #$180,d1
 		bra.s   loc_46D4C
 loc_46D30:
-		
 		cmpi.b  #1,d3
 		bne.s   loc_46D3C
 		subi.w  #$180,d2
 		bra.s   loc_46D4C
 loc_46D3C:
-		
 		cmpi.b  #2,d3
 		bne.s   loc_46D48
 		subi.w  #$180,d1
 		bra.s   loc_46D4C
 loc_46D48:
-		
 		addi.w  #$180,d2
 loc_46D4C:
-		
 		move.w  d1,ENTITYDEF_OFFSET_XDEST(a5)
 		move.w  #$30,d4 
 		sub.w   (a5),d1
@@ -1344,7 +1282,6 @@ loc_46D4C:
 		neg.w   d1
 		neg.w   d4
 loc_46D5C:
-		
 		move.w  d1,8(a5)
 		move.w  d4,4(a5)
 		move.w  d2,ENTITYDEF_OFFSET_YDEST(a5)
@@ -1354,7 +1291,6 @@ loc_46D5C:
 		neg.w   d2
 		neg.w   d5
 loc_46D76:
-		
 		move.w  d2,$A(a5)
 		move.w  d5,6(a5)
 		bsr.w   WaitForEntityToStopMoving
@@ -1390,7 +1326,6 @@ csc29_setEntityDest:
 		neg.w   d1
 		neg.w   d3
 loc_46DC4:
-		
 		move.w  d1,8(a5)
 		move.w  d3,4(a5)
 		move.w  #$20,d3 
@@ -1399,14 +1334,12 @@ loc_46DC4:
 		neg.w   d2
 		neg.w   d3
 loc_46DDA:
-		
 		move.w  d2,$A(a5)
 		move.w  d3,6(a5)
 		btst    #$F,d6
 		bne.s   return_46DEC
 		bsr.w   WaitForEntityToStopMoving
 return_46DEC:
-		
 		rts
 
 	; End of function csc29_setEntityDest
@@ -1424,7 +1357,6 @@ csc2A_entityShiver:
 		move.b  #$FF,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
 		moveq   #2,d7
 loc_46E0A:
-		
 		ori.b   #8,ENTITYDEF_OFFSET_FLAGS_B(a5)
 		bsr.w   UpdateEntitySprite_0
 		moveq   #5,d0
@@ -1444,7 +1376,6 @@ loc_46E0A:
 ; =============== S U B R O U T I N E =======================================
 
 csc2B_:
-		
 		move.w  (a6)+,d0
 		clr.w   d1
 		clr.w   d2
@@ -1487,8 +1418,7 @@ csc2C_followEntity:
 
 	; End of function csc2C_followEntity
 
-unk_46E8A:
-		dc.b $18
+unk_46E8A:      dc.b $18
 		dc.b   0
 		dc.b   0
 		dc.b $E8 
@@ -1506,7 +1436,6 @@ unk_46E8A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_46E98:
-		
 		move.b  (a0)+,d4
 csc2E_hideEntity:
 		
@@ -1521,7 +1450,6 @@ csc2E_hideEntity:
 ; =============== S U B R O U T I N E =======================================
 
 csc2F_:
-		
 		move.w  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
 		move.w  (a6)+,d0
@@ -1529,10 +1457,8 @@ csc2F_:
 		clr.b   $11(a5)
 		bra.s   return_46EBE
 loc_46EB8:
-		
 		move.b  #$10,$11(a5)
 return_46EBE:
-		
 		rts
 
 	; End of function csc2F_
@@ -1574,7 +1500,6 @@ csc50_setEntitySize:
 ; =============== S U B R O U T I N E =======================================
 
 csc51_:
-		
 		move.w  #$FFFF,((TEXT_NAME_INDEX_1-$1000000)).w
 		nop
 		move.w  (a6)+,d0
@@ -1588,7 +1513,6 @@ csc51_:
 		nop
 		subq.w  #2,d7
 loc_46F2C:
-		
 		move.b  (a0),d0
 		jsr     j_GetCurrentHP
 		tst.w   d1
@@ -1596,7 +1520,6 @@ loc_46F2C:
 		addq.l  #1,a0
 		dbf     d7,loc_46F2C
 loc_46F40:
-		
 		move.b  (a0),d0
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		nop
@@ -1604,7 +1527,6 @@ loc_46F40:
 		move.b  d6,d0
 		jsr     j_JoinBattleParty
 return_46F56:
-		
 		rts
 
 	; End of function csc51_
@@ -1615,7 +1537,6 @@ return_46F56:
 ; related to 2 entities
 
 csc52_:
-		
 		move.w  (a6)+,d7
 		move.w  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
@@ -1629,14 +1550,12 @@ csc52_:
 		bge.s   loc_46F7A
 		neg.w   d3
 loc_46F7A:
-		
 		move.w  d2,d4
 		sub.w   ENTITYDEF_OFFSET_YDEST(a5),d4
 		or.w    d4,d4
 		bge.s   loc_46F86
 		neg.w   d4
 loc_46F86:
-		
 		cmp.w   d3,d4
 		bcc.s   loc_46FA0
 		cmp.w   ENTITYDEF_OFFSET_XDEST(a5),d1
@@ -1644,22 +1563,17 @@ loc_46F86:
 		move.b  #0,ENTITYDEF_OFFSET_FACING(a5)
 		bra.s   loc_46F9E
 loc_46F98:
-		
 		move.b  #2,ENTITYDEF_OFFSET_FACING(a5)
 loc_46F9E:
-		
 		bra.s   loc_46FB4
 loc_46FA0:
-		
 		cmp.w   ENTITYDEF_OFFSET_YDEST(a5),d2
 		bcs.s   loc_46FAE
 		move.b  #3,ENTITYDEF_OFFSET_FACING(a5)
 		bra.s   loc_46FB4
 loc_46FAE:
-		
 		move.b  #1,ENTITYDEF_OFFSET_FACING(a5)
 loc_46FB4:
-		
 		bsr.w   UpdateEntitySprite_0
 		jsr     (WaitForVInt).w 
 		rts
@@ -1670,7 +1584,6 @@ loc_46FB4:
 ; =============== S U B R O U T I N E =======================================
 
 csc53_:
-		
 		move.w  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
 		lea     ((byte_FFAFB0-$1000000)).w,a0
@@ -1680,10 +1593,8 @@ csc53_:
 		clr.b   (a0,d0.w)
 		bra.s   return_46FDA
 loc_46FD4:
-		
 		move.b  #1,(a0,d0.w)
 return_46FDA:
-		
 		rts
 
 	; End of function csc53_
@@ -1692,7 +1603,6 @@ return_46FDA:
 ; =============== S U B R O U T I N E =======================================
 
 csc54_:
-		
 		move.w  (a6)+,d0
 		jsr     j_GetCharacterWord34
 		move.w  (a6)+,d2
@@ -1700,11 +1610,9 @@ csc54_:
 		andi.w  #$FFFB,d1
 		bra.s   loc_46FF8
 loc_46FEE:
-		
 		ori.w   #4,d1
 		jsr     j_JoinForce
 loc_46FF8:
-		
 		jsr     j_SetCharacterWord34
 		rts
 
@@ -1726,21 +1634,16 @@ csc55_resetCharacterBattleStats:
 ; xx character
 
 csc56_:
-		
 		move.w  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
 		moveq   #0,d1
 		lea     ((FOLLOWERS_LIST-$1000000)).w,a0
 loc_47014:
-		
 		cmpi.b  #$FF,(a0)
-		beq.w   loc_47020       
-						; gets last value before an FF
-		move.b  (a0)+,d1        
-						; get last follower ?
+		beq.w   loc_47020       ; gets last value before an FF
+		move.b  (a0)+,d1        ; get last follower ?
 		bra.s   loc_47014
 loc_47020:
-		
 		move.w  #$FFE8,d2
 		move.w  #0,d3
 		jsr     sub_44C2E
@@ -1780,7 +1683,6 @@ GetEntityAddressFromPlayableCharacterIdx:
 		bpl.s   loc_4705A
 		subi.b  #$60,d0 
 loc_4705A:
-		
 		move.b  (a5,d0.w),d0
 		move.l  d0,-(sp)
 		lsl.w   #5,d0
@@ -1815,15 +1717,13 @@ AdjustScriptPointerByCharAliveStatus:
 		btst    #7,d0
 		bne.s   return_4709C
 		cmpi.b  #$1E,d0
-		bge.s   return_4709C    
-						; it must be a force member
+		bge.s   return_4709C    ; it must be a force member
 		jsr     j_GetCurrentHP
 		tst.w   d1
 		bne.s   return_4709C
 		adda.w  d7,a6
 		movem.l (sp)+,d7
 return_4709C:
-		
 		rts
 
 	; End of function AdjustScriptPointerByCharAliveStatus
@@ -1832,7 +1732,6 @@ return_4709C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4709E:
-		
 		movem.l d0-d1/a0-a1,-(sp)
 		clr.w   d1
 		move.b  $12(a5),d1
@@ -1855,7 +1754,6 @@ sub_4709E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_470CA:
-		
 		movem.l d0-d1/d6/a1,-(sp)
 		movea.l a0,a1
 		clr.w   d6
@@ -1863,7 +1761,6 @@ sub_470CA:
 		bne.s   loc_470DA
 		moveq   #2,d6
 loc_470DA:
-		
 		clr.w   d1
 		move.b  $13(a5),d1
 		move.w  d1,d0

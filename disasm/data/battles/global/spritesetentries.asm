@@ -2,8 +2,7 @@
 ; ASM FILE data\battles\global\spritesetentries.asm :
 ; 0x1B30EE..0x1B6DB0 : Battle sprite sets
 pt_BattleSpriteSets:
-		dc.l BattleSpriteSet00  
-						; battle entity data
+		dc.l BattleSpriteSet00  ; battle entity data
 		dc.l BattleSpriteSet01
 		dc.l BattleSpriteSet02
 		dc.l BattleSpriteSet03

@@ -38,7 +38,6 @@ WaitForPartyEntitiesIdle:
 		beq.w   return_4524A
 		jsr     (WaitForVInt).w 
 loc_45224:
-		
 		cmpi.b  #$FF,(a0)+
 		bne.s   loc_45224
 		clr.w   d0
@@ -46,13 +45,11 @@ loc_45224:
 		movem.l d0/a0,-(sp)
 		bsr.w   GetEntityRAMAddress
 loc_45238:
-		
 		jsr     (WaitForVInt).w 
 		cmpi.l  #eas_Idle,$14(a0)
 		bne.s   loc_45238
 		movem.l (sp)+,d0/a0
 return_4524A:
-		
 		rts
 
 	; End of function WaitForPartyEntitiesIdle
@@ -91,7 +88,6 @@ ApplyActscriptToPartyEntities:
 		bsr.w   SetEntityActscript
 		bra.s   ApplyActscriptToPartyEntities
 return_45266:
-		
 		rts
 
 ; END OF FUNCTION CHUNK FOR ApplyActscriptToHeroAndFollowers

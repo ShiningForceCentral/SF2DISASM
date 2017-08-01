@@ -13,8 +13,7 @@ ms_map3_flag21F_AreaDescriptions:
 
 	; End of function ms_map3_flag21F_AreaDescriptions
 
-word_62856:
-		dc.w $916
+word_62856:     dc.w $916
 		dc.b 0
 		dc.b 0
 		dc.b 2

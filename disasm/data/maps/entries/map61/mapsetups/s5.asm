@@ -11,7 +11,6 @@ ms_map61_Section5:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_53:
-		
 		rts
 
 	; End of function nullsub_53

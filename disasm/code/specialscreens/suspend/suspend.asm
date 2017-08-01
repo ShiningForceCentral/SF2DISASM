@@ -5,7 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 SuspendGame:
-		
 		moveq   #$3C,d0 
 		jsr     (Sleep).w       
 		movea.l (p_SuspendStringTiles).l,a0

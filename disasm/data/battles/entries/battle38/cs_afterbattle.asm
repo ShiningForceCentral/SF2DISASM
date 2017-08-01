@@ -1,12 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle38\cs_afterbattle.asm :
 ; 0x4DE8C..0x4E3D2 : Cutscene after battle 38
-abcs_battle38:
-		textCursor $BC4         
-						; Initial text line $BC4 : "My traps...{W1}"
+abcs_battle38:  textCursor $BC4         ; Initial text line $BC4 : "My traps...{W1}"
 		loadMapFadeIn $42,$3,$16
-		loadMapEntities ce_4E372
-						; Entity data to figure out and format
+		loadMapEntities ce_4E372; Entity data to figure out and format
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$5,$19,$0
@@ -16,25 +13,18 @@ abcs_battle38:
 		entityPosDir $1E,$9,$18,$3
 		stopEntity $88
 		customActscript $88,$FF
-		dc.w $14                
-						;   0014 SET ANIM COUNTER $0
+		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
-		dc.w $1B                
-						;   001B SET FLIPPING $1
+		dc.w $1B                ;   001B SET FLIPPING $1
 		dc.w 1
-		dc.w $A                 
-						;   000A UPDATE SPRITE
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $A                 ;   000A UPDATE SPRITE
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
-		jumpIfFlagClear $4C,cs_4DF00
-						; Zynk is a follower
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		jumpIfFlagClear $4C,cs_4DF00; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
 		entityPosDir $1A,$3F,$3E,$3
-cs_4DF00:
-		setActscript $80,$FF,eas_46172
+cs_4DF00:       setActscript $80,$FF,eas_46172
 		setActscript $81,$FF,eas_46172
 		setActscript $82,$FF,eas_46172
 		setActscript $83,$FF,eas_46172
@@ -42,44 +32,32 @@ cs_4DF00:
 		setActscript $85,$FF,eas_46172
 		setActscript $86,$FF,eas_46172
 		setActscript $87,$FF,eas_46172
-		csc53 $0,$0             
-						; 0053 UNKNOWN
-		csc53 $88,$FFFF         
-						; 0053 UNKNOWN
+		csc53 $0,$0             ; 0053 UNKNOWN
+		csc53 $88,$FFFF         ; 0053 UNKNOWN
 		fadeInB
 		csWait $3C
 		entityShiver $88
-		nextSingleText $0,$88   
-						; "My traps...{W1}"
+		nextSingleText $0,$88   ; "My traps...{W1}"
 		csWait $3C
 		customActscript $88,$FF
-		dc.w $14                
-						;   0014 SET ANIM COUNTER $0
+		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
-		dc.w $1B                
-						;   001B SET FLIPPING $0
+		dc.w $1B                ;   001B SET FLIPPING $0
 		dc.w 0
-		dc.w $A                 
-						;   000A UPDATE SPRITE
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $A                 ;   000A UPDATE SPRITE
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		startEntity $88
 		setEntityDir $88,$1
-		nextSingleText $0,$88   
-						; "I'm...at the end of my rope.{N}I...must...escape.{W1}"
+		nextSingleText $0,$88   ; "I'm...at the end of my rope.{N}I...must...escape.{W1}"
 		customActscript $88,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$8 Y=$8
+		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
 		dc.b 8
 		dc.b 8
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $88,$FF,$0,$1
 		moreMove $1,$1
 		moreMove $2,$1
@@ -97,30 +75,22 @@ cs_4DF00:
 		stopEntity $88
 		entityPosDir $88,$8,$18,$2
 		customActscript $88,$FF
-		dc.w $14                
-						;   0014 SET ANIM COUNTER $0
+		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
-		dc.w $1B                
-						;   001B SET FLIPPING $1
+		dc.w $1B                ;   001B SET FLIPPING $1
 		dc.w 1
-		dc.w $A                 
-						;   000A UPDATE SPRITE
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $A                 ;   000A UPDATE SPRITE
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		setActscript $88,$FF,eas_46172
 		customActscript $88,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$28 Y=$28
+		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
 		dc.b $28
 		dc.b $28
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		setQuakeAmount $0
 		moveEntity $88,$FF,$3,$1
 		endMove $8080
@@ -135,19 +105,14 @@ cs_4DF00:
 		entityShiver $88
 		csWait $3C
 		customActscript $88,$FF
-		dc.w $14                
-						;   0014 SET ANIM COUNTER $0
+		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
-		dc.w $1B                
-						;   001B SET FLIPPING $0
+		dc.w $1B                ;   001B SET FLIPPING $0
 		dc.w 0
-		dc.w $A                 
-						;   000A UPDATE SPRITE
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $A                 ;   000A UPDATE SPRITE
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		setEntityDir $88,$3
 		csWait $28
 		entityShakeHead $88
@@ -155,25 +120,19 @@ cs_4DF00:
 		csWait $A
 		setActscript $88,$FF,eas_Jump
 		setActscript $88,$FF,eas_46172
-		nextSingleText $0,$88   
-						; "Nooooooo!{W1}"
+		nextSingleText $0,$88   ; "Nooooooo!{W1}"
 		moveEntity $88,$FF,$1,$2
 		endMove $8080
-		nextSingleText $0,$88   
-						; "Please...please let me go.{W1}"
+		nextSingleText $0,$88   ; "Please...please let me go.{W1}"
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
-		nextSingleText $C0,$1F  
-						; "We don't want to kill{N}you.{N}You've lost your powers.{W1}"
-		nextSingleText $0,$88   
-						; "I know...(sob, sob)....{W1}"
+		nextSingleText $C0,$1F  ; "We don't want to kill{N}you.{N}You've lost your powers.{W1}"
+		nextSingleText $0,$88   ; "I know...(sob, sob)....{W1}"
 		moveEntity $7,$FF,$0,$1
 		endMove $8080
-		nextSingleText $C0,$7   
-						; "You may go.{W1}"
+		nextSingleText $C0,$7   ; "You may go.{W1}"
 		setEntityDir $88,$2
-		nextSingleText $0,$88   
-						; "Thank you.{W1}"
+		nextSingleText $0,$88   ; "Thank you.{W1}"
 		setActscript $88,$FF,eas_Init
 		setEntityDir $88,$1
 		setCameraEntity $88
@@ -182,18 +141,14 @@ cs_4DF00:
 		endMove $8080
 		setEntityDir $0,$3
 		csWait $3C
-		csc45 $8                
-						; (null)
+		csc45 $8                ; (null)
 		customActscript $88,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$8 Y=$8
+		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
 		dc.b 8
 		dc.b 8
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $88,$FF,$1,$1
 		endMove $8080
 		setEntityDir $7,$1
@@ -205,8 +160,7 @@ cs_4DF00:
 		endMove $8080
 		csWait $28
 		setEntityDir $88,$3
-		nextSingleText $0,$88   
-						; "I won't forget this.{W1}"
+		nextSingleText $0,$88   ; "I won't forget this.{W1}"
 		moveEntity $88,$FF,$1,$3
 		endMove $8080
 		flashScreenWhite $1E
@@ -220,35 +174,26 @@ cs_4DF00:
 		csWait $28
 		setEntityDir $88,$3
 		tintMap
-		nextSingleText $C0,$89  
-						; "Where are you going, Geshp?{W1}"
+		nextSingleText $C0,$89  ; "Where are you going, Geshp?{W1}"
 		customActscript $88,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$30 Y=$30
+		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
 		dc.b $30
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		setActscript $88,$FF,eas_Jump
 		setActscript $88,$FF,eas_Jump
 		csWait $1E
 		setActscript $88,$FF,eas_46172
 		moveEntity $88,$FF,$1,$1
 		endMove $8080
-		nextSingleText $C0,$89  
-						; "Do you remember your vow?{W1}"
+		nextSingleText $C0,$89  ; "Do you remember your vow?{W1}"
 		entityShakeHead $88
-		nextText $C0,$89        
-						; "You failed to get the jewel{N}from {LEADER}.{W2}"
-		nextSingleText $C0,$89  
-						; "Now, you will pay with your{N}life.{W1}"
-		nextSingleText $0,$88   
-						; "No, please...NO!{W1}"
-		csc53 $88,$0            
-						; 0053 UNKNOWN
+		nextText $C0,$89        ; "You failed to get the jewel{N}from {LEADER}.{W2}"
+		nextSingleText $C0,$89  ; "Now, you will pay with your{N}life.{W1}"
+		nextSingleText $0,$88   ; "No, please...NO!{W1}"
+		csc53 $88,$0            ; 0053 UNKNOWN
 		entityPosDir $80,$8,$D,$0
 		csWait $A
 		entityPosDir $81,$A,$E,$2
@@ -272,85 +217,61 @@ cs_4DF00:
 		setEntityDir $88,$3
 		setQuakeAmount $3
 		customActscript $80,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$50 Y=$50
+		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
 		dc.b $50
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		customActscript $81,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$50 Y=$50
+		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
 		dc.b $50
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		customActscript $82,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$50 Y=$50
+		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
 		dc.b $50
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		customActscript $83,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$50 Y=$50
+		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
 		dc.b $50
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		customActscript $84,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$50 Y=$50
+		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
 		dc.b $50
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		customActscript $85,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$50 Y=$50
+		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
 		dc.b $50
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		customActscript $86,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$50 Y=$50
+		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
 		dc.b $50
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		customActscript $87,$FF
-		dc.w $10                
-						;   0010 SET SPEED X=$50 Y=$50
+		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
 		dc.b $50
-		dc.w $34                
-						;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
+		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-		dc.w $8080              
-						; 0014 END OF CUSTOM ACTSCRIPT
+		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		playSound SFX_BOLT_SPELL
 		moveEntity $80,$FF,$3,$3
 		endMove $8080
@@ -401,27 +322,21 @@ cs_4DF00:
 		entitySprite $88,$9F
 		setActscript $88,$FF,eas_Die
 		flickerOnce
-		csc45 $30               
-						; (null)
+		csc45 $30               ; (null)
 		setCamDest $3,$14
 		moveEntity $1F,$FF,$1,$3
 		endMove $8080
-		nextSingleText $0,$1F   
-						; "Zeon is such an unfeeling{N}devil...(shiver).{W1}"
+		nextSingleText $0,$1F   ; "Zeon is such an unfeeling{N}devil...(shiver).{W1}"
 		moveEntity $7,$FF,$0,$1
 		moreMove $1,$2
 		endMove $8080
-		nextSingleText $0,$7    
-						; "He will do the same to us{N}if we lose to him.{W1}"
-		nextSingleText $0,$1F   
-						; "We must not be defeated.{W1}"
+		nextSingleText $0,$7    ; "He will do the same to us{N}if we lose to him.{W1}"
+		nextSingleText $0,$1F   ; "We must not be defeated.{W1}"
 		followEntity $1E,$0,$2
 		followEntity $7,$1E,$1
 		followEntity $1F,$1E,$3
-		csc_end                 
-						; END OF CUTSCENE SCRIPT
-ce_4E372:
-		dc.b   0
+		csc_end                 ; END OF CUTSCENE SCRIPT
+ce_4E372:       dc.b   0
 		dc.b   8
 		dc.b   0
 		dc.b $17

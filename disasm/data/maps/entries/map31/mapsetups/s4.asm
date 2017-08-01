@@ -13,8 +13,7 @@ ms_map31_AreaDescriptions:
 
 	; End of function ms_map31_AreaDescriptions
 
-word_5D584:
-		dc.w $81A
+word_5D584:     dc.w $81A
 		dc.b 0
 		dc.b 0
 		dc.b 4
@@ -52,14 +51,12 @@ word_5D584:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D5B0:
-		
 		trap    #CHECK_FLAG
 		dc.w $340
 		beq.s   return_5D5BC
 		lea     cs_5D732(pc), a0
 		trap    #6
 return_5D5BC:
-		
 		rts
 
 	; End of function sub_5D5B0
@@ -68,7 +65,6 @@ return_5D5BC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D5BE:
-		
 		trap    #CHECK_FLAG
 		dc.w $342
 		beq.s   return_5D60C
@@ -76,11 +72,9 @@ sub_5D5BE:
 		dc.w $343
 		bne.s   return_5D60C
 		trap    #TEXTBOX
-		dc.w $7E1               
-						; "{LEADER} found the Arm of{N}Golem.{W2}"
+		dc.w $7E1               ; "{LEADER} found the Arm of{N}Golem.{W2}"
 		trap    #TEXTBOX
-		dc.w $7E2               
-						; "Pick it up?"
+		dc.w $7E2               ; "Pick it up?"
 		jsr     j_YesNoPrompt
 		tst.w   d0
 		bne.s   loc_5D608
@@ -90,29 +84,21 @@ sub_5D5BE:
 		btst    #0,d0
 		bne.s   loc_5D5FE
 		trap    #SET_FLAG
-		dc.w $343               
-						; set after picking up the Arm of Golem in Moun
+		dc.w $343               ; set after picking up the Arm of Golem in Moun
 		move.w  #$89,d0 
 		jsr     MoveEntityOutOfMap
 		bra.s   loc_5D606
 loc_5D5FE:
-		
 		trap    #TEXTBOX
-		dc.w $7E4               
-						; "But {LEADER}'s hands{N}are full.{W1}"
+		dc.w $7E4               ; "But {LEADER}'s hands{N}are full.{W1}"
 		trap    #TEXTBOX
-		dc.w $7E7               
-						; "{LEADER} looks at the{N}Arm of Golem.{W1}"
+		dc.w $7E7               ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 loc_5D606:
-		
 		bra.s   return_5D60C
 loc_5D608:
-		
 		trap    #TEXTBOX
-		dc.w $7E7               
-						; "{LEADER} looks at the{N}Arm of Golem.{W1}"
+		dc.w $7E7               ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 return_5D60C:
-		
 		rts
 
 	; End of function sub_5D5BE

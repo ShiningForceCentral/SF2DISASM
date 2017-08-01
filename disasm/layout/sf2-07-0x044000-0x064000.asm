@@ -4,14 +4,12 @@
 ; FREE SPACE : 2931 bytes.
 
 
-sub_44000:		
-		jmp     sub_440D4(pc)
+sub_44000:		jmp     sub_440D4(pc)
 j_InitMapEntities:		
 		jmp     InitMapEntities(pc)
 j_MoveEntitiesToBattlePositions:		
 		jmp     MoveEntitiesToBattlePositions(pc)
-sub_4400C:		
-		jmp     sub_45634(pc)
+sub_4400C:		jmp     sub_45634(pc)
 j_WaitForEntityToStopMoving:		
 		jmp     WaitForEntityToStopMoving(pc)
 j_SetControlledEntityActScript:		
@@ -19,22 +17,17 @@ j_SetControlledEntityActScript:
 j_MakeEntityIdle:		
 		jmp     MakeEntityIdle(pc)
 ; set entity D0's movescript to 0x460ce (default? don't move?)
-sub_4401C:		
-		jmp     sub_44C02(pc)   
+sub_4401C:		jmp     sub_44C02(pc)   
 j_SetEntityMovescriptToIdle:		
 		jmp     SetEntityMovescriptToIdle(pc)
-sub_44024:		
-		jmp     sub_44B94(pc)
+sub_44024:		jmp     sub_44B94(pc)
 j_SetUnitCursorActscript:		
 		jmp     SetUnitCursorActscript(pc)
-sub_4402C:		
-		jmp     sub_44BC0(pc)
-sub_44030:		
-		jmp     sub_44BD6(pc)
+sub_4402C:		jmp     sub_44BC0(pc)
+sub_44030:		jmp     sub_44BD6(pc)
 j_ExecuteDebugMapScript:		
 		jmp     ExecuteDebugMapScript(pc)
-j_nullsub_14:		
-		jmp     nullsub_14(pc)
+j_nullsub_14:		jmp     nullsub_14(pc)
 j_ExecuteMapScript:		
 		jmp     ExecuteMapScript(pc)
 j_ExecuteBattleCutscene_Intro:		
@@ -51,22 +44,14 @@ j_ExecuteBattleCutscene_Region:
 		jmp     ExecuteBattleCutscene_Region(pc)
 j_LaunchFading:		
 		jmp     LaunchFading(pc)
-sub_4405C:		
-		jmp     sub_45858(pc)
-sub_44060:		
-		jmp     sub_45858(pc)
-sub_44064:		
-		jmp     sub_45974(pc)
-sub_44068:		
-		jmp     sub_45BBE(pc)
-sub_4406C:		
-		jmp     sub_45C94(pc)
-sub_44070:		
-		jmp     sub_45C82(pc)
-sub_44074:		
-		jmp     sub_45B84(pc)
-sub_44078:		
-		jmp     sub_474EE(pc)
+sub_4405C:		jmp     sub_45858(pc)
+sub_44060:		jmp     sub_45858(pc)
+sub_44064:		jmp     sub_45974(pc)
+sub_44068:		jmp     sub_45BBE(pc)
+sub_4406C:		jmp     sub_45C94(pc)
+sub_44070:		jmp     sub_45C82(pc)
+sub_44074:		jmp     sub_45B84(pc)
+sub_44078:		jmp     sub_474EE(pc)
 j_ExecuteEntityEvent:		
 		jmp     ExecuteEntityEvent(pc)
 j_RunMapSetupZoneEvent:		
@@ -74,33 +59,26 @@ j_RunMapSetupZoneEvent:
 j_ExecuteEntityEvent_0:		
 		jmp     ExecuteEntityEvent(pc)
 ; triggers a map setup function according to up to 4 criterias in d1-d4
-sub_44088:		
-		jmp     sub_47586(pc)
+sub_44088:		jmp     sub_47586(pc)
 j_GetMapSetupEntities:		
 		jmp     GetMapSetupEntityList(pc)
-sub_44090:		
-		jmp     sub_453C6(pc)
-sub_44094:		
-		jmp     sub_45440(pc)
+sub_44090:		jmp     sub_453C6(pc)
+sub_44094:		jmp     sub_45440(pc)
 ; related to followers maybe
-sub_44098:		
-		jmp     sub_45268(pc)   
-sub_4409C:		
-		jmp     sub_45322(pc)
+sub_44098:		jmp     sub_45268(pc)   
+sub_4409C:		jmp     sub_45322(pc)
 j_ShrinkInBowieAndFollowers:		
 		jmp     ShrinkIntoCaravanBowieAndFollowers(pc)
 j_GrowOutBowieAndFollowoers:		
 		jmp     GrowOutBowieAndFollowoers(pc)
 j_RunMapSetupInitFunction:		
 		jmp     RunMapSetupInitFunction(pc)
-sub_440AC:		
-		jmp     sub_441AA(pc)
+sub_440AC:		jmp     sub_441AA(pc)
 j_GetCharacterSpriteIdx:		
 		jmp     GetCharacterSpriteIdx(pc)
 j_RunMapSetupFunction:		
 		jmp     RunMapSetupFunction(pc)
-sub_440B8:		
-		jmp     sub_444A2(pc)
+sub_440B8:		jmp     sub_444A2(pc)
 j_PlayIntroOrEndCutscene:		
 		jmp     PlayIntroOrEndCutscene(pc)
 j_ExecuteFlashScreenScript:		

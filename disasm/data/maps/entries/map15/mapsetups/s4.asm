@@ -13,8 +13,7 @@ ms_map15_AreaDescriptions:
 
 	; End of function ms_map15_AreaDescriptions
 
-word_5D030:
-		dc.w $1F03
+word_5D030:     dc.w $1F03
 		dc.b 0
 		dc.b 0
 		dc.b 9

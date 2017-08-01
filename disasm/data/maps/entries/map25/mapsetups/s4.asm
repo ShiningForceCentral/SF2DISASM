@@ -13,8 +13,7 @@ ms_map25_AreaDescriptions:
 
 	; End of function ms_map25_AreaDescriptions
 
-word_5D350:
-		dc.w $20A
+word_5D350:     dc.w $20A
 		dc.b 0
 		dc.b 0
 		dc.b 4

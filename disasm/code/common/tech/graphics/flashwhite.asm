@@ -12,7 +12,6 @@ ExecuteFlashScreenScript:
 
 	; End of function ExecuteFlashScreenScript
 
-cs_FlashScreen:
-		dc.w $41
+cs_FlashScreen: dc.w $41
 		dc.w $1E
 		dc.w $FFFF

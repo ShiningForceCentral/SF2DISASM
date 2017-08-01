@@ -5,7 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 j_GameIntro:
-		
 		bra.w   GameIntro
 
 	; End of function j_GameIntro
@@ -14,7 +13,6 @@ j_GameIntro:
 ; =============== S U B R O U T I N E =======================================
 
 sub_71C4:
-		
 		jsr     j_DisplaySegaLogo
 		bne.w   loc_71EC
 
@@ -24,7 +22,6 @@ sub_71C4:
 ; START OF FUNCTION CHUNK FOR GameInit
 
 GameIntro:
-		
 		move.l  sp,(SECONDS_COUNTER_0).l
 		move.l  #loc_71EC,((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
 		jsr     (EnableDisplayAndInterrupts).w
@@ -32,7 +29,6 @@ GameIntro:
 		jsr     j_PlayIntroOrEndCutscene
 		clr.l   ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
 loc_71EC:
-		
 		clr.w   ((word_FFA80C-$1000000)).w
 		move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
 		bsr.w   EnableInterrupts
@@ -58,12 +54,9 @@ loc_71EC:
 		move    #$2700,sr
 		movea.l (InitStack).w,sp
 		movea.l (p_Start).w,a0  
-		jmp     (a0)            
-						; reset
+		jmp     (a0)            ; reset
 loc_724E:
-		
-		bsr.w   DisableDisplayAndVInt
-						; title screen -> witch menu
+		bsr.w   DisableDisplayAndVInt; title screen -> witch menu
 		bsr.w   ClearVsramAndSprites
 		bsr.w   EnableDisplayAndInterrupts
 		move.b  #$FF,((WINDOW_HIDING_FORBIDDEN-$1000000)).w
@@ -83,7 +76,6 @@ loc_724E:
 		move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 		move.w  #6,((word_FFB07C-$1000000)).w
 loc_729C:
-		
 		move.b  #0,((byte_FFB082-$1000000)).w
 		jsr     j_ClearEntities
 		movea.l (p_SpeechBalloonTiles).l,a0
@@ -120,27 +112,22 @@ loc_729C:
 		trap    #SOUND_COMMAND
 		dc.w MUSIC_CORRUPTED_SAVE
 		trap    #TEXTBOX
-		dc.w $ED                
-						; "Ooops!  Record {#} has{N}vanished!{W2}"
+		dc.w $ED                ; "Ooops!  Record {#} has{N}vanished!{W2}"
 		jsr     j_FadeOut_WaitForP2Input
 loc_7332:
-		
 		tst.w   d1
 		bpl.s   loc_734C
 		move.l  #2,((TEXT_NUMBER-$1000000)).w
 		trap    #SOUND_COMMAND
 		dc.w MUSIC_CORRUPTED_SAVE
 		trap    #TEXTBOX
-		dc.w $ED                
-						; "Ooops!  Record {#} has{N}vanished!{W2}"
+		dc.w $ED                ; "Ooops!  Record {#} has{N}vanished!{W2}"
 		jsr     j_FadeOut_WaitForP2Input
 loc_734C:
-		
 		btst    #7,((P1_INPUT-$1000000)).w
 		bne.w   loc_73AA
 		trap    #TEXTBOX
-		dc.w $D8                
-						; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
+		dc.w $D8                ; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
 		bsr.w   WaitForVInt     
 		bsr.w   sub_7CF4
 		bsr.w   WaitForVInt     
@@ -148,38 +135,30 @@ loc_734C:
 		move.w  #6,((word_FFB07C-$1000000)).w
 		move.b  #$FF,((byte_FFB082-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $D9                
-						; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
+		dc.w $D9                ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
 loc_737C:
-		
 		btst    #7,((P1_INPUT-$1000000)).w
 		bne.w   loc_73C2
 		trap    #TEXTBOX
-		dc.w $DA                
-						; "Yes, yes...I used a spell{N}on you.{W2}"
+		dc.w $DA                ; "Yes, yes...I used a spell{N}on you.{W2}"
 		btst    #7,((P1_INPUT-$1000000)).w
 		bne.w   loc_73C2
 		trap    #TEXTBOX
-		dc.w $DB                
-						; "Ha, ha.  Where are you{N}going?  You can't escape{W2}"
+		dc.w $DB                ; "Ha, ha.  Where are you{N}going?  You can't escape{W2}"
 		btst    #7,((P1_INPUT-$1000000)).w
 		bne.w   loc_73C2
 		trap    #TEXTBOX
-		dc.w $DC                
-						; "from this mystery forest{N}unless you help me.{W2}"
+		dc.w $DC                ; "from this mystery forest{N}unless you help me.{W2}"
 		bra.w   loc_73C2
 loc_73AA:
-		
 		bsr.w   WaitForVInt     
 		bsr.w   sub_7CF4
 		bsr.w   WaitForVInt     
 		move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 		move.b  #$FF,((byte_FFB082-$1000000)).w
 loc_73C2:
-		
 		trap    #TEXTBOX
-		dc.w $DD                
-						; "{CLEAR}Whatcha gonna do?"
+		dc.w $DD                ; "{CLEAR}Whatcha gonna do?"
 		move.b  (SAVE_FLAGS).l,d3
 		andi.w  #3,d3
 		bne.s   loc_73D8
@@ -187,17 +166,14 @@ loc_73C2:
 		moveq   #1,d2
 		bra.s   loc_73E8
 loc_73D8:
-		
 		moveq   #1,d0
 		cmpi.w  #3,d3
 		bne.s   loc_73E4
 		moveq   #6,d2
 		bra.s   loc_73E8
 loc_73E4:
-		
 		move.w  #$F,d2
 loc_73E8:
-		
 		clr.w   d1
 		jsr     j_WitchMainMenu
 		tst.w   d0
@@ -208,8 +184,7 @@ loc_73E8:
 
 ; END OF FUNCTION CHUNK FOR GameInit
 
-rjt_WitchChoice:
-		dc.w WitchNew-rjt_WitchChoice
+rjt_WitchChoice:dc.w WitchNew-rjt_WitchChoice
 		dc.w WitchLoad-rjt_WitchChoice
 		dc.w WitchDel-rjt_WitchChoice
 		dc.w WitchCopy-rjt_WitchChoice

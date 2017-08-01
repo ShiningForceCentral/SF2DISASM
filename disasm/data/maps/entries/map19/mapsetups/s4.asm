@@ -13,8 +13,7 @@ ms_map19_AreaDescriptions:
 
 	; End of function ms_map19_AreaDescriptions
 
-word_530CE:
-		dc.w $1303
+word_530CE:     dc.w $1303
 		dc.b 0
 		dc.b 0
 		dc.b 4

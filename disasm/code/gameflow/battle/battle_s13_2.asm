@@ -5,7 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 sub_1B120A:
-		
 		moveq   #4,d1
 		jsr     j_AddItemToCaravan
 		moveq   #7,d1
@@ -21,8 +20,7 @@ sub_1B120A:
 		moveq   #0,d0
 		jsr     j_JoinForce
 		move.b  #0,((CURRENT_BATTLE-$1000000)).w
-		jsr     sub_1AC010      
-						; init some enemy list ?
+		jsr     sub_1AC010      ; init some enemy list ?
 		bsr.w   InitAllForceBattlePositions
 		bsr.w   InitAllEnemyBattlePositions
 		move.b  #$80,d0
@@ -32,7 +30,6 @@ sub_1B120A:
 		bsr.w   UpdateEnemyStatsForRespawn
 		bsr.w   GetEnemyAITargetPos
 loc_1B126E:
-		
 		bra.s   loc_1B126E
 		rts
 
@@ -48,7 +45,6 @@ InitAllForceBattlePositions:
 		moveq   #$1D,d7
 		move.w  #$FFFF,d1
 loc_1B127E:
-		
 		jsr     j_SetXPos
 		addq.b  #1,d0
 		dbf     d7,loc_1B127E
@@ -64,7 +60,6 @@ loc_1B127E:
 		bcs.w   loc_1B12EC
 		lea     4(a0),a0
 loc_1B12AE:
-		
 		move.b  (a1),d0
 		jsr     j_GetCurrentHP
 		tst.w   d1
@@ -76,18 +71,15 @@ loc_1B12AE:
 		jsr     j_SetYPos
 		lea     $C(a0),a0
 loc_1B12D4:
-		
 		addq.l  #1,a1
 		subq.w  #1,d6
 		bcs.w   loc_1B12EC
 		dbf     d7,loc_1B12AE
 loc_1B12E0:
-		
 		move.b  (a1)+,d0
 		jsr     j_LeaveBattleParty
 		dbf     d6,loc_1B12E0
 loc_1B12EC:
-		
 		movem.l (sp)+,d0-a6
 		rts
 
@@ -102,7 +94,6 @@ InitAllEnemyBattlePositions:
 		move.b  #$80,d0
 		moveq   #$1F,d7
 loc_1B12FC:
-		
 		bsr.w   InitEnemyBattlePosition
 		addq.b  #1,d0
 		dbf     d7,loc_1B12FC
@@ -130,7 +121,6 @@ InitEnemyBattlePosition:
 		beq.s   loc_1B132E
 		bra.w   loc_1B139A
 loc_1B132E:
-		
 		moveq   #2,d1
 		bsr.w   GetAddrOfBattleDataSection
 		move.w  d1,d2
@@ -149,7 +139,6 @@ loc_1B132E:
 		bsr.w   InitEnemyStats  
 		bra.w   loc_1B139A
 loc_1B1368:
-		
 		lsl.w   #8,d1
 		jsr     j_SetCharacterWord34
 		clr.w   d1
@@ -163,7 +152,6 @@ loc_1B1368:
 		move.b  9(a0),d2
 		jsr     j_SetDefeats
 loc_1B139A:
-		
 		movem.l (sp)+,d0-a6
 		rts
 
@@ -200,7 +188,6 @@ UpdateEnemyStatsForRespawn:
 		jsr     j_SetCharacterWord34
 		bra.w   loc_1B1404
 loc_1B13E8:
-		
 		clr.w   d1
 		jsr     j_SetMaxHP
 		jsr     j_SetCurrentHP
@@ -208,7 +195,6 @@ loc_1B13E8:
 		jsr     j_SetXPos
 		ori     #1,ccr
 loc_1B1404:
-		
 		movem.l (sp)+,d0-a6
 		rts
 
@@ -233,7 +219,6 @@ InitEnemyStats:
 		jsr     j_GetCharacterRAMAddress_0
 		moveq   #$D,d7
 loc_1B142C:
-		
 		move.l  (a1)+,(a0)+
 		dbf     d7,loc_1B142C
 		movea.l (sp)+,a0
@@ -282,12 +267,10 @@ loc_1B142C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1B14D8:
-		
 		movem.l d1/a0-a1,-(sp)
 		lea     ((byte_FFB6A2-$1000000)).w,a1
 		moveq   #7,d1
 loc_1B14E2:
-		
 		clr.l   (a1)+
 		dbf     d1,loc_1B14E2
 		moveq   #2,d1
@@ -295,7 +278,6 @@ loc_1B14E2:
 		subq.w  #1,d1
 		lea     ((byte_FFB6A2-$1000000)).w,a1
 loc_1B14F4:
-		
 		move.b  (a0),(a1)+
 		adda.w  #$C,a0
 		dbf     d1,loc_1B14F4
@@ -310,7 +292,6 @@ loc_1B14F4:
 ; handle custom item idx of monster list entry starting at A0 -> ???
 
 sub_1B1504:
-		
 		movem.l d0-a0,-(sp)
 		cmpi.w  #ITEMIDX_NOTHING,d1
 		beq.w   loc_1B154E
@@ -324,7 +305,6 @@ sub_1B1504:
 		move.w  d2,d4
 		clr.w   d5
 loc_1B152E:
-		
 		move.w  d5,d1
 		jsr     j_GetItemAndNumberOfItems
 		cmp.b   d1,d3
@@ -333,11 +313,9 @@ loc_1B152E:
 		jsr     j_EquipItem
 		bra.w   loc_1B154E
 loc_1B1546:
-		
 		addi.w  #1,d5
 		dbf     d4,loc_1B152E
 loc_1B154E:
-		
 		movem.l (sp)+,d0-a0
 		rts
 
@@ -356,7 +334,6 @@ GetEnemyOriginalPosOccupied:
 		moveq   #0,d0
 		moveq   #$1D,d7
 loc_1B155C:
-		
 		jsr     j_GetXPos
 		cmp.w   d1,d3
 		bne.s   loc_1B1576
@@ -365,13 +342,11 @@ loc_1B155C:
 		ori     #1,ccr
 		beq.w   loc_1B15A4
 loc_1B1576:
-		
 		addq.w  #1,d0
 		dbf     d7,loc_1B155C
 		move.w  #$80,d0 
 		moveq   #$1F,d7
 loc_1B1582:
-		
 		jsr     j_GetXPos
 		cmp.w   d1,d3
 		bne.s   loc_1B159C
@@ -380,12 +355,10 @@ loc_1B1582:
 		ori     #1,ccr
 		beq.w   loc_1B15A4
 loc_1B159C:
-		
 		addq.w  #1,d0
 		dbf     d7,loc_1B1582
 		tst.b   d0
 loc_1B15A4:
-		
 		movem.l (sp)+,d0-d2/d7
 		rts
 
@@ -404,7 +377,6 @@ SetEnemyBaseATK:
 		beq.s   loc_1B15BC
 		beq.w   loc_1B15F4
 loc_1B15BC:
-		
 		clr.l   d1
 		jsr     j_GetBaseATK
 		mulu.w  #5,d1
@@ -415,14 +387,12 @@ loc_1B15BC:
 		beq.s   loc_1B15E0
 		bra.w   loc_1B15F4
 loc_1B15E0:
-		
 		clr.l   d1
 		jsr     j_GetBaseATK
 		mulu.w  #5,d1
 		lsr.l   #2,d1
 		jsr     j_SetBaseATK
 loc_1B15F4:
-		
 		move.l  (sp)+,d1
 		rts
 
@@ -443,7 +413,6 @@ GetEnemyAITargetPos:
 		jsr     j_GetXPos
 		bra.s   loc_1B162A
 loc_1B1612:
-		
 		moveq   #4,d1
 		bsr.w   GetAddrOfBattleDataSection
 		andi.w  #$F,d0
@@ -454,7 +423,6 @@ loc_1B1612:
 		move.b  (a0),d1
 		move.b  1(a0),d2
 loc_1B162A:
-		
 		movem.l (sp)+,d0/a0
 		rts
 
@@ -505,7 +473,6 @@ GetAddrOfBattleDataSection:
 		mulu.w  #$C,d0
 		adda.l  d0,a0
 loc_1B1698:
-		
 		movem.l (sp)+,d0/d2/a1
 		rts
 
@@ -529,13 +496,11 @@ GetMonsterStartPos:
 		move.w  #$FFFF,d2
 		bra.w   loc_1B16F8
 loc_1B16BE:
-		
 		andi.w  #$FF,d0
 		mulu.w  #$C,d0
 		adda.w  d0,a0
 		bra.s   loc_1B16EC
 loc_1B16CA:
-		
 		move.w  #2,d1
 		bsr.w   GetAddrOfBattleDataSection
 		cmp.b   d0,d1
@@ -544,18 +509,15 @@ loc_1B16CA:
 		move.w  #$FFFF,d2
 		bra.w   loc_1B16F8
 loc_1B16E2:
-		
 		andi.w  #$7F,d0 
 		mulu.w  #$C,d0
 		adda.w  d0,a0
 loc_1B16EC:
-		
 		clr.w   d1
 		clr.w   d2
 		move.b  1(a0),d1
 		move.b  2(a0),d2
 loc_1B16F8:
-		
 		movem.l (sp)+,d0/d3-a6
 		rts
 
@@ -565,7 +527,6 @@ loc_1B16F8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1B16FE:
-		
 		movem.l d1-a6,-(sp)
 		move.w  d2,d7
 		move.w  d1,d6
@@ -579,7 +540,6 @@ sub_1B16FE:
 		move.w  #$FFFF,d0
 		bra.w   loc_1B177A
 loc_1B1724:
-		
 		move.b  1(a0),d1
 		move.b  2(a0),d2
 		cmp.b   d1,d6
@@ -601,13 +561,11 @@ loc_1B1724:
 		bsr.w   UpdateEnemyStatsForRespawn
 		bra.w   loc_1B177A
 loc_1B176A:
-		
 		addi.w  #1,d0
 		adda.w  #$C,a0
 		dbf     d5,loc_1B1724
 		move.w  #$FFFF,d0
 loc_1B177A:
-		
 		movem.l (sp)+,d1-a6
 		rts
 
@@ -621,43 +579,29 @@ loc_1B177A:
 DoesBattleUpgrade:
 		
 		movem.l d0/d2-a6,-(sp)
-		clr.w   d1              
-						; clear d1 for "false"
+		clr.w   d1              ; clear d1 for "false"
 		lea     ((CURRENT_BATTLE-$1000000)).w,a0
 						; point to battle index in RAM
 		clr.w   d7
-		move.b  (a0),d7         
-						; d7 contains battle index
+		move.b  (a0),d7         ; d7 contains battle index
 		clr.w   d6
-		lea     SpecialBattles(pc), a0
-						; point to length of table
+		lea     SpecialBattles(pc), a0; point to length of table
 		nop
-		move.b  (a0)+,d6        
-						; put length of table in d6
+		move.b  (a0)+,d6        ; put length of table in d6
 		tst.b   d6
-		bne.s   loc_1B17A0      
-						; if d6 not zero
-		bra.w   loc_1B17B6      
-						; else
+		bne.s   loc_1B17A0      ; if d6 not zero
+		bra.w   loc_1B17B6      ; else
 loc_1B17A0:
-		
-		subi.w  #1,d6           
-						; d6--
+		subi.w  #1,d6           ; d6--
 loc_1B17A4:
-		
-		move.b  (a0)+,d0        
-						; put next byte in d0
+		move.b  (a0)+,d0        ; put next byte in d0
 		cmp.b   d7,d0
-		bne.s   loc_1B17B2      
-						; while d0 not battle index
-		move.w  #$FFFF,d1       
-						; else, battle index is in the list, put FFFF ind d1, for "true"
+		bne.s   loc_1B17B2      ; while d0 not battle index
+		move.w  #$FFFF,d1       ; else, battle index is in the list, put FFFF ind d1, for "true"
 		bra.w   loc_1B17B6
 loc_1B17B2:
-		
 		dbf     d6,loc_1B17A4   
 loc_1B17B6:
-		
 		movem.l (sp)+,d0/d2-a6
 		rts
 
@@ -667,7 +611,6 @@ loc_1B17B6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1B17BC:
-		
 		movem.l d0-a6,-(sp)
 		lea     ((CURRENT_BATTLE-$1000000)).w,a0
 		move.b  (a0),d7
@@ -679,7 +622,6 @@ sub_1B17BC:
 		adda.w  #1,a1
 		clr.w   d3
 loc_1B17DA:
-		
 		move.b  (a1,d3.w),d1
 		cmp.b   d1,d7
 		bne.s   loc_1B17F0
@@ -687,11 +629,9 @@ loc_1B17DA:
 		jsr     j_SetFlag
 		bra.w   loc_1B17F8
 loc_1B17F0:
-		
 		addi.w  #1,d3
 		dbf     d2,loc_1B17DA
 loc_1B17F8:
-		
 		movem.l (sp)+,d0-a6
 		rts
 
@@ -715,7 +655,6 @@ ShouldBattleUpgrade:
 		adda.w  #1,a1
 		clr.w   d3
 loc_1B181C:
-		
 		clr.w   d1
 		move.b  (a1,d3.w),d1
 		cmp.b   d1,d7
@@ -726,17 +665,13 @@ loc_1B181C:
 		clr.w   d1
 		bra.s   loc_1B183A
 loc_1B1836:
-		
 		move.w  #1,d1
 loc_1B183A:
-		
 		bra.w   loc_1B1846
 loc_1B183E:
-		
 		addi.w  #1,d3
 		dbf     d2,loc_1B181C
 loc_1B1846:
-		
 		movem.l (sp)+,d0/d2-a6
 		rts
 
@@ -758,14 +693,12 @@ UpgradeUnitIdx:
 		move.w  d5,d1
 		bra.w   loc_1B1A22
 loc_1B1860:
-		
 		bsr.s   ShouldBattleUpgrade
 		tst.w   d1
 		bne.s   loc_1B186C
 		move.w  d5,d1
 		bra.w   loc_1B1A22
 loc_1B186C:
-		
 		clr.w   d4
 		clr.l   d1
 		move.b  d5,d1
@@ -781,81 +714,69 @@ loc_1B186C:
 		nop
 		bra.w   loc_1B193C
 loc_1B1896:
-		
 		cmpi.b  #2,d2
 		bne.s   loc_1B18A6
 		lea     unk_1B6DBC(pc), a0
 		nop
 		bra.w   loc_1B193C
 loc_1B18A6:
-		
 		cmpi.b  #3,d2
 		bne.s   loc_1B18B6
 		lea     unk_1B6DBC(pc), a0
 		nop
 		bra.w   loc_1B193C
 loc_1B18B6:
-		
 		cmpi.b  #4,d2
 		bne.s   loc_1B18C6
 		lea     unk_1B6DBC(pc), a0
 		nop
 		bra.w   loc_1B193C
 loc_1B18C6:
-		
 		cmpi.b  #5,d2
 		bne.s   loc_1B18D6
 		lea     unk_1B6DC6(pc), a0
 		nop
 		bra.w   loc_1B193C
 loc_1B18D6:
-		
 		cmpi.b  #6,d2
 		bne.s   loc_1B18E6
 		lea     unk_1B6DC6(pc), a0
 		nop
 		bra.w   loc_1B193C
 loc_1B18E6:
-		
 		cmpi.b  #8,d2
 		bne.s   loc_1B18F6
 		lea     unk_1B6DCA(pc), a0
 		nop
 		bra.w   loc_1B193C
 loc_1B18F6:
-		
 		cmpi.b  #9,d2
 		bne.s   loc_1B1906
 		lea     unk_1B6DCA(pc), a0
 		nop
 		bra.w   loc_1B193C
 loc_1B1906:
-		
 		cmpi.b  #$A,d2
 		bne.s   loc_1B1916
 		lea     unk_1B6DCA(pc), a0
 		nop
 		bra.w   loc_1B193C
 loc_1B1916:
-		
 		cmpi.b  #$B,d2
 		bne.s   loc_1B1926
 		lea     unk_1B6DD0(pc), a0
 		nop
 		bra.w   loc_1B193C
 loc_1B1926:
-		
 		cmpi.b  #$C,d2
 		bne.s   loc_1B1936
 		lea     unk_1B6DD5(pc), a0
 		nop
 		bra.w   loc_1B193C
 loc_1B1936:
-		
 		move.w  d5,d1
 		bra.w   loc_1B1A22
 loc_1B193C:
-		
 		clr.w   d3
 		move.b  d5,d3
 		clr.w   d2
@@ -867,7 +788,6 @@ loc_1B193C:
 		ble.s   loc_1B195C
 		addi.w  #$14,d2
 loc_1B195C:
-		
 		lea     ((CURRENT_BATTLE-$1000000)).w,a1
 		clr.w   d1
 		move.b  (a1),d1
@@ -879,11 +799,9 @@ loc_1B195C:
 		bra.s   loc_1B193C
 		bra.s   loc_1B197A
 loc_1B1974:
-		
 		move.w  d5,d1
 		bra.w   loc_1B1A22
 loc_1B197A:
-		
 		bpl.s   loc_1B198E
 		tst.w   d4
 		bne.s   loc_1B1988
@@ -891,11 +809,9 @@ loc_1B197A:
 		bra.s   loc_1B193C
 		bra.s   loc_1B198E
 loc_1B1988:
-		
 		move.w  d5,d1
 		bra.w   loc_1B1A22
 loc_1B198E:
-		
 		divu.w  #$A,d2
 		andi.l  #$FF,d2
 		tst.w   d2
@@ -903,7 +819,6 @@ loc_1B198E:
 		move.w  d5,d1
 		bra.w   loc_1B1A22
 loc_1B19A2:
-		
 		clr.w   d6
 		move.b  (a0),d6
 		cmpi.b  #5,d6
@@ -911,12 +826,10 @@ loc_1B19A2:
 		mulu.w  d6,d2
 		subq.w  #5,d2
 loc_1B19B0:
-		
 		add.w   d2,d3
 		move.w  d3,d2
 		addi.w  #1,d6
 loc_1B19B8:
-		
 		jsr     (UpdateRandomSeed).w
 		add.w   d7,d3
 		cmp.b   1(a0),d3
@@ -928,11 +841,9 @@ loc_1B19B8:
 		bra.s   loc_1B19B8
 		bra.s   loc_1B19D8
 loc_1B19D2:
-		
 		move.w  d5,d1
 		bra.w   loc_1B1A22
 loc_1B19D8:
-		
 		cmp.b   2(a0),d3
 		ble.s   loc_1B19F2
 		tst.w   d4
@@ -942,18 +853,15 @@ loc_1B19D8:
 		bra.s   loc_1B19B8
 		bra.s   loc_1B19F2
 loc_1B19EC:
-		
 		move.w  d5,d1
 		bra.w   loc_1B1A22
 loc_1B19F2:
-		
 		movea.l a0,a1
 		adda.w  #3,a1
 		clr.w   d1
 		move.b  (a1)+,d1
 		subi.w  #1,d1
 loc_1B1A00:
-		
 		move.b  (a1)+,d0
 		cmp.b   d0,d3
 		bne.s   loc_1B1A1A
@@ -964,16 +872,13 @@ loc_1B1A00:
 		bra.s   loc_1B19B8
 		bra.s   loc_1B1A1A
 loc_1B1A14:
-		
 		move.w  d5,d1
 		bra.w   loc_1B1A22
 loc_1B1A1A:
-		
 		dbf     d1,loc_1B1A00
 		clr.w   d1
 		move.b  d3,d1
 loc_1B1A22:
-		
 		movem.l (sp)+,d0/d2-a6
 		rts
 
@@ -983,7 +888,6 @@ loc_1B1A22:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1B1A28:
-		
 		movem.l d0/d2-a6,-(sp)
 		jsr     j_UpdateForce
 		lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
@@ -992,7 +896,6 @@ sub_1B1A28:
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 		clr.l   d6
 loc_1B1A42:
-		
 		clr.w   d0
 		move.b  (a0,d6.w),d0
 		cmpi.b  #$17,d0
@@ -1000,12 +903,10 @@ loc_1B1A42:
 		move.w  #1,d1
 		bra.w   loc_1B1A60
 loc_1B1A56:
-		
 		addi.w  #1,d6
 		dbf     d7,loc_1B1A42
 		clr.w   d1
 loc_1B1A60:
-		
 		movem.l (sp)+,d0/d2-a6
 		rts
 

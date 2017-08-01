@@ -4,7 +4,6 @@
 ; FREE SPACE : 1467 bytes.
 
 
-p_pt_Portraits:
-		dc.l pt_Portraits
+p_pt_Portraits: dc.l pt_Portraits
 		includeIfVanillaRom "data\graphics\portraits\entries.asm"		; Portraits
 		align $1D8000

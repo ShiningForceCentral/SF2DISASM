@@ -7,19 +7,15 @@
 ms_map10_InitFunction:
 		
 		trap    #CHECK_FLAG
-		dc.w $2CF               
-						; set after the initial Bedoe scene (where the guards confront you)
+		dc.w $2CF               ; set after the initial Bedoe scene (where the guards confront you)
 		bne.s   loc_57040
 		lea     cs_570B0(pc), a0
 		trap    #6
 		trap    #SET_FLAG
-		dc.w $2CF               
-						; set after the initial Bedoe scene (where the guards confront you)
+		dc.w $2CF               ; set after the initial Bedoe scene (where the guards confront you)
 loc_57040:
-		
 		trap    #CHECK_FLAG
-		dc.w $2D0               
-						; set after the King of Bedoe speaks to his soldiers and they disperse
+		dc.w $2D0               ; set after the King of Bedoe speaks to his soldiers and they disperse
 		beq.s   return_5708C
 		move.w  #$96,d0 
 		jsr     MoveEntityOutOfMap
@@ -36,7 +32,6 @@ loc_57040:
 		move.w  #$9C,d0 
 		jsr     MoveEntityOutOfMap
 return_5708C:
-		
 		rts
 
 	; End of function ms_map10_InitFunction

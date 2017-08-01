@@ -1,12 +1,9 @@
 
 ; ASM FILE data\battles\global\regionactivatedcutscenes.asm :
 ; 0x47EC8..0x47EEA : Region-activated cutscenes data
-		dc.b $20                
-						; battle id
-		dc.b   0                
-						; region id
-		dc.w $182               
-						; associated flag
+		dc.b $20                ; battle id
+		dc.b   0                ; region id
+		dc.w $182               ; associated flag
 		dc.l rbcs_battle32
 		dc.b $20
 		dc.b   1

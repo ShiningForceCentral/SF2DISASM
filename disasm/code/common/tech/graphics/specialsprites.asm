@@ -39,8 +39,7 @@ LoadSpecialSprite:
 
 	; End of function LoadSpecialSprite
 
-rjt_25C5A:
-		dc.w LoadBattleSpecialSprite-rjt_25C5A
+rjt_25C5A:      dc.w LoadBattleSpecialSprite-rjt_25C5A
 		dc.w LoadBattleSpecialSprite-rjt_25C5A
 		dc.w LoadExplorationSpecialSprite-rjt_25C5A
 		dc.w LoadBattleSpecialSprite-rjt_25C5A
@@ -81,7 +80,6 @@ LoadExplorationSpecialSprite:
 		jsr     (sub_10DC).w    
 		bra.w   *+4
 loc_25CB0:
-		
 		movem.l (sp)+,d0-a1
 		rts
 
@@ -91,7 +89,6 @@ loc_25CB0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_25CB6:
-		
 		movem.l d0-d2/a0-a1,-(sp)
 		conditionalPc lea,(SpecialSprites_EvilSpirit+$20),a0
 		tst.w   d0
@@ -101,10 +98,8 @@ sub_25CB6:
 		conditionalPc lea,SpecialSprites_EvilSpiritAlt,a0
 		bra.s   loc_25CD2
 loc_25CCE:
-		
 		conditionalPc lea,(SpecialSprites_Zeon+$20),a0
 loc_25CD2:
-		
 		lea     (FF6802_LOADING_SPACE).l,a1
 		move.l  a1,-(sp)
 		jsr     (LoadCompressedData).w
@@ -131,10 +126,8 @@ UpdateSpecialSprites:
 		move.w  #$8000,d5
 		bra.s   loc_25D0E
 loc_25D0C:
-		
 		clr.w   d5
 loc_25D0E:
-		
 		cmpi.b  #$F0,$13(a0)
 		bcs.w   loc_25DF0
 		move.b  #$FF,d6
@@ -146,8 +139,7 @@ loc_25D0E:
 
 	; End of function UpdateSpecialSprites
 
-rjt_25D2E:
-		dc.w UpdateBattleSpecialSprite-rjt_25D2E
+rjt_25D2E:      dc.w UpdateBattleSpecialSprite-rjt_25D2E
 		dc.w UpdateBattleSpecialSprite-rjt_25D2E
 		dc.w UpdateExplorationSpecialSprite-rjt_25D2E
 		dc.w UpdateBattleSpecialSprite-rjt_25D2E
@@ -168,15 +160,12 @@ UpdateBattleSpecialSprite:
 		lea     byte_2784C(pc), a2
 		bra.s   loc_25D5A
 loc_25D56:
-		
 		lea     byte_2786C(pc), a2
 loc_25D5A:
-		
 		btst    #4,$1D(a0)
 		beq.s   loc_25D64
 		addq.b  #2,d2
 loc_25D64:
-		
 		btst    #0,((byte_FFDEA0-$1000000)).w
 		beq.s   loc_25D7A
 		addq.b  #1,d2
@@ -184,14 +173,11 @@ loc_25D64:
 		ble.s   loc_25D76
 		clr.w   d2
 loc_25D76:
-		
 		move.b  d2,$1E(a0)
 loc_25D7A:
-		
 		movea.l a2,a0
 		moveq   #3,d7
 loc_25D7E:
-		
 		move.w  (a0)+,d2
 		add.w   d1,d2
 		move.w  d2,(a1)+
@@ -219,7 +205,6 @@ UpdateExplorationSpecialSprite:
 		sub.w   d6,d1
 		moveq   #8,d7
 loc_25DB0:
-		
 		move.w  (a0)+,d2
 		add.w   d1,d2
 		move.w  d2,(a1)+
@@ -235,10 +220,8 @@ loc_25DB0:
 		bne.s   loc_25DD6
 		move.w  #$180,d0
 loc_25DD6:
-		
 		moveq   #8,d7
 loc_25DD8:
-		
 		move.w  (a0)+,d2
 		add.w   d1,d2
 		move.w  d2,(a1)+
@@ -250,7 +233,6 @@ loc_25DD8:
 		dbf     d7,loc_25DD8
 		bra.w   *+4
 loc_25DF0:
-		
 		movem.l (sp)+,d0-d2/d7-a2
 		rts
 

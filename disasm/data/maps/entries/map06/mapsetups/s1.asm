@@ -79,8 +79,7 @@ ms_map6_Entities:
 		dc.b $1B
 		dc.b 0
 		dc.b $E2
-off_5486C:
-		dc.l eas_Init2          
+off_5486C:      dc.l eas_Init2          
 		dc.b $3F
 		dc.b $3F
 		dc.b 0

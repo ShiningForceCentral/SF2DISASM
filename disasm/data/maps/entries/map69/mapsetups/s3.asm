@@ -17,7 +17,6 @@ ms_map69_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FDB2:
-		
 		move.w  #(sub_4FDB2+1-ms_map69_ZoneEvents),d0
 		jsr     sub_47856
 		rts
@@ -28,17 +27,13 @@ sub_4FDB2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FDBE:
-		
 		trap    #CHECK_FLAG
-		dc.w $1FD               
-						; Battle 9 completed
+		dc.w $1FD               ; Battle 9 completed
 		bne.s   return_4FDD0
 		trap    #SET_FLAG
-		dc.w $199               
-						; Battle 9 unlocked
+		dc.w $199               ; Battle 9 unlocked
 		move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_4FDD0:
-		
 		rts
 
 	; End of function sub_4FDBE

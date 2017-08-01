@@ -13,8 +13,7 @@ ms_map33_AreaDescriptions:
 
 	; End of function ms_map33_AreaDescriptions
 
-word_5AAE8:
-		dc.w $E02
+word_5AAE8:     dc.w $E02
 		dc.b 0
 		dc.b 0
 		dc.b 4

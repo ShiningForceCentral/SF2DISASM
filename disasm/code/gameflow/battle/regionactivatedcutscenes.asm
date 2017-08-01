@@ -11,7 +11,6 @@ ExecuteBattleCutscene_Region:
 		movem.l d0-d1/a0,-(sp)
 		lea     loc_47EC0(pc), a0
 loc_47E8A:
-		
 		addq.w  #8,a0
 		cmpi.w  #$FFFF,(a0)
 		beq.w   loc_47EC2
@@ -28,10 +27,8 @@ loc_47E8A:
 		jsr     j_SetFlag
 		movea.l 4(a0),a0
 loc_47EC0:
-		
 		trap    #6
 loc_47EC2:
-		
 		movem.l (sp)+,d0-d1/a0
 		rts
 

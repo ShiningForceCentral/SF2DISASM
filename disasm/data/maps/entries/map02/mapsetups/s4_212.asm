@@ -13,8 +13,7 @@ ms_map2_flag212_AreaDescriptions:
 
 	; End of function ms_map2_flag212_AreaDescriptions
 
-word_5EA72:
-		dc.w $80D
+word_5EA72:     dc.w $80D
 		dc.b 0
 		dc.b 0
 		dc.b 2

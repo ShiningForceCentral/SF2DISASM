@@ -17,13 +17,10 @@ ms_map17_flag212_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_611F0:
-		
 		trap    #TEXTBOX
-		dc.w $DAF               
-						; "I think he was looking for{N}the Holy Sword.{W2}"
+		dc.w $DAF               ; "I think he was looking for{N}the Holy Sword.{W2}"
 		trap    #TEXTBOX
-		dc.w $DB0               
-						; "Please don't tell anybody{N}that I told you.{W1}"
+		dc.w $DB0               ; "Please don't tell anybody{N}that I told you.{W1}"
 		rts
 
 	; End of function sub_611F0
@@ -32,10 +29,8 @@ sub_611F0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_611FA:
-		
 		trap    #TEXTBOX
-		dc.w $DB2               
-						; "Why am I guarding the{N}kitchen?!{W1}"
+		dc.w $DB2               ; "Why am I guarding the{N}kitchen?!{W1}"
 		rts
 
 	; End of function sub_611FA
@@ -44,10 +39,8 @@ sub_611FA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_61200:
-		
 		trap    #TEXTBOX
-		dc.w $DB5               
-						; "I heard a rumor that a{N}handsome boy is leading{N}the devils now.{W1}"
+		dc.w $DB5               ; "I heard a rumor that a{N}handsome boy is leading{N}the devils now.{W1}"
 		rts
 
 	; End of function sub_61200
@@ -56,7 +49,6 @@ sub_61200:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_19:
-		
 		rts
 
 	; End of function nullsub_19

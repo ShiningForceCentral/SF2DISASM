@@ -13,8 +13,7 @@ ms_map7_AreaDescriptions:
 
 	; End of function ms_map7_AreaDescriptions
 
-word_557FE:
-		dc.w $403
+word_557FE:     dc.w $403
 		dc.b 0
 		dc.b 0
 		dc.b 4

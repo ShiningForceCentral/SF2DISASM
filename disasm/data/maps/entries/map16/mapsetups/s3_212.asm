@@ -8,7 +8,6 @@ ms_map16_flag212_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_78:
-		
 		rts
 
 	; End of function nullsub_78

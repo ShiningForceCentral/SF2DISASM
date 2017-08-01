@@ -8,7 +8,6 @@ ms_map12_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_76:
-		
 		rts
 
 	; End of function nullsub_76

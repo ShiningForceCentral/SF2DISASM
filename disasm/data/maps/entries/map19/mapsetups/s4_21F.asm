@@ -13,8 +13,7 @@ ms_map19_flag21F_AreaDescriptions:
 
 	; End of function ms_map19_flag21F_AreaDescriptions
 
-word_62C82:
-		dc.w $1303
+word_62C82:     dc.w $1303
 		dc.b 0
 		dc.b 0
 		dc.b 4

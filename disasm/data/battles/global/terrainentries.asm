@@ -47,89 +47,46 @@ pt_BattleTerrainData:
 		dc.l BattleTerrain42
 		dc.l BattleTerrain43
 		dc.l BattleTerrain44
-BattleTerrain00:
-		incbin "data/battles/entries/battle00/terrain.bin"
-BattleTerrain01:
-		incbin "data/battles/entries/battle01/terrain.bin"
-BattleTerrain02:
-		incbin "data/battles/entries/battle02/terrain.bin"
-BattleTerrain03:
-		incbin "data/battles/entries/battle03/terrain.bin"
-BattleTerrain05:
-		incbin "data/battles/entries/battle05/terrain.bin"
-BattleTerrain06:
-		incbin "data/battles/entries/battle06/terrain.bin"
-BattleTerrain07:
-		incbin "data/battles/entries/battle07/terrain.bin"
-BattleTerrain08:
-		incbin "data/battles/entries/battle08/terrain.bin"
-BattleTerrain09:
-		incbin "data/battles/entries/battle09/terrain.bin"
-BattleTerrain10:
-		incbin "data/battles/entries/battle10/terrain.bin"
-BattleTerrain11:
-		incbin "data/battles/entries/battle11/terrain.bin"
-BattleTerrain12:
-		incbin "data/battles/entries/battle12/terrain.bin"
-BattleTerrain13:
-		incbin "data/battles/entries/battle13/terrain.bin"
-BattleTerrain14:
-		incbin "data/battles/entries/battle14/terrain.bin"
-BattleTerrain15:
-		incbin "data/battles/entries/battle15/terrain.bin"
-BattleTerrain16:
-		incbin "data/battles/entries/battle16/terrain.bin"
-BattleTerrain17:
-		incbin "data/battles/entries/battle17/terrain.bin"
-BattleTerrain18:
-		incbin "data/battles/entries/battle18/terrain.bin"
-BattleTerrain19:
-		incbin "data/battles/entries/battle19/terrain.bin"
-BattleTerrain20:
-		incbin "data/battles/entries/battle20/terrain.bin"
-BattleTerrain21:
-		incbin "data/battles/entries/battle21/terrain.bin"
-BattleTerrain22:
-		incbin "data/battles/entries/battle22/terrain.bin"
-BattleTerrain23:
-		incbin "data/battles/entries/battle23/terrain.bin"
-BattleTerrain24:
-		incbin "data/battles/entries/battle24/terrain.bin"
-BattleTerrain25:
-		incbin "data/battles/entries/battle25/terrain.bin"
-BattleTerrain26:
-		incbin "data/battles/entries/battle26/terrain.bin"
-BattleTerrain27:
-		incbin "data/battles/entries/battle27/terrain.bin"
-BattleTerrain28:
-		incbin "data/battles/entries/battle28/terrain.bin"
-BattleTerrain29:
-		incbin "data/battles/entries/battle29/terrain.bin"
-BattleTerrain30:
-		incbin "data/battles/entries/battle30/terrain.bin"
-BattleTerrain31:
-		incbin "data/battles/entries/battle31/terrain.bin"
-BattleTerrain33:
-		incbin "data/battles/entries/battle33/terrain.bin"
-BattleTerrain34:
-		incbin "data/battles/entries/battle34/terrain.bin"
-BattleTerrain35:
-		incbin "data/battles/entries/battle35/terrain.bin"
-BattleTerrain36:
-		incbin "data/battles/entries/battle36/terrain.bin"
-BattleTerrain37:
-		incbin "data/battles/entries/battle37/terrain.bin"
-BattleTerrain38:
-		incbin "data/battles/entries/battle38/terrain.bin"
-BattleTerrain39:
-		incbin "data/battles/entries/battle39/terrain.bin"
-BattleTerrain40:
-		incbin "data/battles/entries/battle40/terrain.bin"
-BattleTerrain41:
-		incbin "data/battles/entries/battle41/terrain.bin"
-BattleTerrain42:
-		incbin "data/battles/entries/battle42/terrain.bin"
-BattleTerrain43:
-		incbin "data/battles/entries/battle43/terrain.bin"
-BattleTerrain44:
-		incbin "data/battles/entries/battle44/terrain.bin"
+BattleTerrain00:incbin "data/battles/entries/battle00/terrain.bin"
+BattleTerrain01:incbin "data/battles/entries/battle01/terrain.bin"
+BattleTerrain02:incbin "data/battles/entries/battle02/terrain.bin"
+BattleTerrain03:incbin "data/battles/entries/battle03/terrain.bin"
+BattleTerrain05:incbin "data/battles/entries/battle05/terrain.bin"
+BattleTerrain06:incbin "data/battles/entries/battle06/terrain.bin"
+BattleTerrain07:incbin "data/battles/entries/battle07/terrain.bin"
+BattleTerrain08:incbin "data/battles/entries/battle08/terrain.bin"
+BattleTerrain09:incbin "data/battles/entries/battle09/terrain.bin"
+BattleTerrain10:incbin "data/battles/entries/battle10/terrain.bin"
+BattleTerrain11:incbin "data/battles/entries/battle11/terrain.bin"
+BattleTerrain12:incbin "data/battles/entries/battle12/terrain.bin"
+BattleTerrain13:incbin "data/battles/entries/battle13/terrain.bin"
+BattleTerrain14:incbin "data/battles/entries/battle14/terrain.bin"
+BattleTerrain15:incbin "data/battles/entries/battle15/terrain.bin"
+BattleTerrain16:incbin "data/battles/entries/battle16/terrain.bin"
+BattleTerrain17:incbin "data/battles/entries/battle17/terrain.bin"
+BattleTerrain18:incbin "data/battles/entries/battle18/terrain.bin"
+BattleTerrain19:incbin "data/battles/entries/battle19/terrain.bin"
+BattleTerrain20:incbin "data/battles/entries/battle20/terrain.bin"
+BattleTerrain21:incbin "data/battles/entries/battle21/terrain.bin"
+BattleTerrain22:incbin "data/battles/entries/battle22/terrain.bin"
+BattleTerrain23:incbin "data/battles/entries/battle23/terrain.bin"
+BattleTerrain24:incbin "data/battles/entries/battle24/terrain.bin"
+BattleTerrain25:incbin "data/battles/entries/battle25/terrain.bin"
+BattleTerrain26:incbin "data/battles/entries/battle26/terrain.bin"
+BattleTerrain27:incbin "data/battles/entries/battle27/terrain.bin"
+BattleTerrain28:incbin "data/battles/entries/battle28/terrain.bin"
+BattleTerrain29:incbin "data/battles/entries/battle29/terrain.bin"
+BattleTerrain30:incbin "data/battles/entries/battle30/terrain.bin"
+BattleTerrain31:incbin "data/battles/entries/battle31/terrain.bin"
+BattleTerrain33:incbin "data/battles/entries/battle33/terrain.bin"
+BattleTerrain34:incbin "data/battles/entries/battle34/terrain.bin"
+BattleTerrain35:incbin "data/battles/entries/battle35/terrain.bin"
+BattleTerrain36:incbin "data/battles/entries/battle36/terrain.bin"
+BattleTerrain37:incbin "data/battles/entries/battle37/terrain.bin"
+BattleTerrain38:incbin "data/battles/entries/battle38/terrain.bin"
+BattleTerrain39:incbin "data/battles/entries/battle39/terrain.bin"
+BattleTerrain40:incbin "data/battles/entries/battle40/terrain.bin"
+BattleTerrain41:incbin "data/battles/entries/battle41/terrain.bin"
+BattleTerrain42:incbin "data/battles/entries/battle42/terrain.bin"
+BattleTerrain43:incbin "data/battles/entries/battle43/terrain.bin"
+BattleTerrain44:incbin "data/battles/entries/battle44/terrain.bin"

@@ -17,7 +17,6 @@ ms_map61_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C6A6:
-		
 		trap    #CHECK_FLAG
 		dc.w $2DA
 		bne.s   return_5C6BC
@@ -27,10 +26,8 @@ sub_5C6A6:
 		lea     cs_5C6CA(pc), a0
 		trap    #6
 		trap    #SET_FLAG
-		dc.w $2DA               
-						; set after the old man opens the door to the Woodel Panel shrine interior
+		dc.w $2DA               ; set after the old man opens the door to the Woodel Panel shrine interior
 return_5C6BC:
-		
 		rts
 
 	; End of function sub_5C6A6

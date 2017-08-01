@@ -5,12 +5,8 @@
 
 
 		include "code\common\menus\menuengine.asm"		; Menu engine
-ItemDefs:
-		incbin "data/stats/items/itemdefs.bin"
-SpellDefs:
-		incbin "data/stats/spells/spelldefs.bin"
-ItemNames:
-		incbin "data/stats/items/itemnames.bin"
-ClassNames:
-		incbin "data/stats/allies/classes/classnames.bin"
+ItemDefs:       incbin "data/stats/items/itemdefs.bin"
+SpellDefs:      incbin "data/stats/spells/spelldefs.bin"
+ItemNames:      incbin "data/stats/items/itemnames.bin"
+ClassNames:     incbin "data/stats/allies/classes/classnames.bin"
 		align $18000

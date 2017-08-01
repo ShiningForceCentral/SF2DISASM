@@ -4,12 +4,10 @@
 ; FREE SPACE : 953 bytes.
 
 
-p_pt_MapTiles:
-		dc.l pt_MapTilesets
+p_pt_MapTiles:  dc.l pt_MapTilesets
 p_pt_MapPalettes:
 		dc.l pt_MapPalettes
-p_pt_MapData:
-		dc.l pt_MapData
+p_pt_MapData:   dc.l pt_MapData
 		include "data\maps\global\maptilesets.asm"		; Map Tilesets
 		alignIfExpandedRom $C7000
 		include "data\maps\global\mappalettes.asm"		; Map palettes

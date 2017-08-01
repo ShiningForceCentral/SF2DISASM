@@ -11,7 +11,6 @@ ms_map42_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5FE0C:
-		
 		trap    #CHECK_FLAG
 		dc.w $3E7
 		beq.s   return_5FE22
@@ -21,10 +20,8 @@ sub_5FE0C:
 		lea     cs_5FE9A(pc), a0
 		trap    #6
 		trap    #SET_FLAG
-		dc.w $385               
-						; set after the you're pulled toward the Force Sword in the Jewel Cave
+		dc.w $385               ; set after the you're pulled toward the Force Sword in the Jewel Cave
 return_5FE22:
-		
 		rts
 
 	; End of function sub_5FE0C

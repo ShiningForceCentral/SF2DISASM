@@ -8,7 +8,6 @@ ms_map19_flag21F_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_83:
-		
 		rts
 
 	; End of function nullsub_83

@@ -1,8 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle43\cs_afterbattle.asm :
 ; 0x4F35E..0x4F47A : Cutscene after battle 43
-abcs_battle43:
-		setCamDest $8,$2
+abcs_battle43:  setCamDest $8,$2
 		playSound $FD
 		csWait $28
 		playSound SFX_BIG_DOOR_RUMBLE
@@ -64,13 +63,8 @@ abcs_battle43:
 		mapFadeInFromWhite
 		mapSysEvent $3B0C0B01
 		setQuakeAmount $0
-		clearF $43              
-						; Peter is a follower
-		clearF $46              
-						; Astral is a follower
-		clearF $47              
-						; Lemon is a follower
-		clearF $4C              
-						; Zynk is a follower
-		csc_end                 
-						; END OF CUTSCENE SCRIPT
+		clearF $43              ; Peter is a follower
+		clearF $46              ; Astral is a follower
+		clearF $47              ; Lemon is a follower
+		clearF $4C              ; Zynk is a follower
+		csc_end                 ; END OF CUTSCENE SCRIPT

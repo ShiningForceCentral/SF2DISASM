@@ -92,7 +92,6 @@ ms_map37_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F8E0:
-		
 		moveq   #1,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -102,7 +101,6 @@ sub_5F8E0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F8E8:
-		
 		moveq   #2,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -112,7 +110,6 @@ sub_5F8E8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F8F0:
-		
 		moveq   #3,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -122,7 +119,6 @@ sub_5F8F0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F8F8:
-		
 		moveq   #4,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -132,7 +128,6 @@ sub_5F8F8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F900:
-		
 		moveq   #5,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -142,7 +137,6 @@ sub_5F900:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F908:
-		
 		moveq   #6,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -152,7 +146,6 @@ sub_5F908:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F910:
-		
 		moveq   #7,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -162,7 +155,6 @@ sub_5F910:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F918:
-		
 		moveq   #8,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -172,7 +164,6 @@ sub_5F918:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F920:
-		
 		moveq   #9,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -182,7 +173,6 @@ sub_5F920:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F928:
-		
 		moveq   #$A,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -192,7 +182,6 @@ sub_5F928:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F930:
-		
 		moveq   #$B,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -202,7 +191,6 @@ sub_5F930:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F938:
-		
 		moveq   #$C,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -212,7 +200,6 @@ sub_5F938:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F940:
-		
 		moveq   #$D,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -222,7 +209,6 @@ sub_5F940:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F948:
-		
 		moveq   #$E,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -232,7 +218,6 @@ sub_5F948:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F950:
-		
 		moveq   #$F,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -242,7 +227,6 @@ sub_5F950:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F958:
-		
 		moveq   #$10,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -252,7 +236,6 @@ sub_5F958:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F960:
-		
 		moveq   #$11,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -262,7 +245,6 @@ sub_5F960:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F968:
-		
 		moveq   #$12,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -272,7 +254,6 @@ sub_5F968:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F970:
-		
 		moveq   #$13,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -282,7 +263,6 @@ sub_5F970:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F978:
-		
 		moveq   #$14,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -292,7 +272,6 @@ sub_5F978:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F980:
-		
 		moveq   #$15,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -302,7 +281,6 @@ sub_5F980:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F988:
-		
 		moveq   #$16,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -312,7 +290,6 @@ sub_5F988:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F990:
-		
 		moveq   #$17,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -322,7 +299,6 @@ sub_5F990:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F998:
-		
 		moveq   #$18,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -332,7 +308,6 @@ sub_5F998:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9A0:
-		
 		moveq   #$19,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -342,10 +317,8 @@ sub_5F9A0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9A8:
-		
 		trap    #TEXTBOX
-		dc.w $D30               
-						; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
+		dc.w $D30               ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
 		rts
 
 	; End of function sub_5F9A8
@@ -354,7 +327,6 @@ sub_5F9A8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9AE:
-		
 		moveq   #$1B,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -364,7 +336,6 @@ sub_5F9AE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9B6:
-		
 		moveq   #$1C,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -374,7 +345,6 @@ sub_5F9B6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9BE:
-		
 		moveq   #$1D,d0
 		jmp     DisplayHeadquartersQuote
 
@@ -384,10 +354,8 @@ sub_5F9BE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9C6:
-		
 		trap    #TEXTBOX
-		dc.w $B                 
-						; "{LEADER}, take it easy!{W1}"
+		dc.w $B                 ; "{LEADER}, take it easy!{W1}"
 		rts
 
 	; End of function sub_5F9C6
@@ -396,12 +364,9 @@ sub_5F9C6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9CC:
-		
 		trap    #TEXTBOX
-		dc.w $B                 
-						; "{LEADER}, take it easy!{W1}"
+		dc.w $B                 ; "{LEADER}, take it easy!{W1}"
 return_5F9D0:
-		
 		rts
 
 	; End of function sub_5F9CC

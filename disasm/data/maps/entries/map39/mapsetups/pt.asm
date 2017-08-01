@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map39\mapsetups\pt.asm :
 ; 0x5DF84..0x5DF9C : 
-ms_map39:
-		dc.l ms_map39_Entities
+ms_map39:       dc.l ms_map39_Entities
 		dc.l ms_map39_EntityEvents
 		dc.l ms_map39_ZoneEvents
 		dc.l ms_map39_AreaDescriptions

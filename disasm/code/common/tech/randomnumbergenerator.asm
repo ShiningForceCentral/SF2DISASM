@@ -31,25 +31,20 @@ WaitForRandomValueToMatch:
 		movem.l d0-d5/a0-a6,-(sp)
 		move.b  d6,d1
 loc_162E:
-		
 		bsr.w   GetRandomValueUnsigned
 		cmpi.b  #1,d1
 		beq.s   loc_163A
 		bpl.s   loc_163E
 loc_163A:
-		
 		bra.w   loc_164A
 loc_163E:
-		
 		cmp.b   d1,d7
 		bcs.s   loc_1644
 		bra.s   loc_162E
 loc_1644:
-		
 		movem.l (sp)+,d0-d5/a0-a6
 		rts
 loc_164A:
-		
 		clr.b   d7
 		movem.l (sp)+,d0-d5/a0-a6
 		rts
@@ -98,11 +93,9 @@ GetRandomOrDebugValue:
 		btst    #1,((P1_INPUT-$1000000)).w
 		bne.w   loc_16B8
 loc_16B2:
-		
 		bsr.w   UpdateRandomSeed
 		move.w  d7,d0
 loc_16B8:
-		
 		movem.l (sp)+,d6-d7
 		rts
 

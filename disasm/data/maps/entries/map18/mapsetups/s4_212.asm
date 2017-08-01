@@ -13,8 +13,7 @@ ms_map18_flag212_AreaDescriptions:
 
 	; End of function ms_map18_flag212_AreaDescriptions
 
-word_61288:
-		dc.w $C09
+word_61288:     dc.w $C09
 		dc.b 0
 		dc.b 0
 		dc.b 6

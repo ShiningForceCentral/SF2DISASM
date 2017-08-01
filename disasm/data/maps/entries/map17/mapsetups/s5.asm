@@ -11,7 +11,6 @@ ms_map17_Section5:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_170:
-		
 		rts
 
 	; End of function nullsub_170

@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map19\mapsetups\pt.asm :
 ; 0x52B4A..0x52B62 : 
-ms_map19:
-		dc.l ms_map19_Entities
+ms_map19:       dc.l ms_map19_Entities
 		dc.l ms_map19_EntityEvents
 		dc.l ms_map19_ZoneEvents
 		dc.l ms_map19_AreaDescriptions

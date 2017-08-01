@@ -13,8 +13,7 @@ ms_map13_AreaDescriptions:
 
 	; End of function ms_map13_AreaDescriptions
 
-word_582BC:
-		dc.w $1102
+word_582BC:     dc.w $1102
 		dc.b 0
 		dc.b 0
 		dc.b 4

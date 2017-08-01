@@ -16,55 +16,42 @@ LevelUpCutscene:
 		cmpi.b  #$FF,d1
 		bne.s   loc_22BEA
 		trap    #TEXTBOX
-		dc.w $94                
-						; "It has no use.{W2}"
+		dc.w $94                ; "It has no use.{W2}"
 		bra.w   loc_22C5A
 loc_22BEA:
-		
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $F4                
-						; "{NAME} became{N}level {#}!"
+		dc.w $F4                ; "{NAME} became{N}level {#}!"
 		move.b  (a5)+,d1
 		beq.s   loc_22BFE
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $10A               
-						; "{D1}HP increased by {#}!"
+		dc.w $10A               ; "{D1}HP increased by {#}!"
 loc_22BFE:
-		
 		move.b  (a5)+,d1
 		beq.s   loc_22C0A
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $10B               
-						; "{D1}MP increased by {#}!"
+		dc.w $10B               ; "{D1}MP increased by {#}!"
 loc_22C0A:
-		
 		move.b  (a5)+,d1
 		beq.s   loc_22C16
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $10C               
-						; "{D1}Attack increased by {#}!"
+		dc.w $10C               ; "{D1}Attack increased by {#}!"
 loc_22C16:
-		
 		move.b  (a5)+,d1
 		beq.s   loc_22C22
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $10D               
-						; "{D1}Defense increased by {#}!"
+		dc.w $10D               ; "{D1}Defense increased by {#}!"
 loc_22C22:
-		
 		move.b  (a5)+,d1
 		beq.s   loc_22C2E
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $10E               
-						; "{D1}Agility increased by {#}!"
+		dc.w $10E               ; "{D1}Agility increased by {#}!"
 loc_22C2E:
-		
 		move.b  (a5)+,d1
 		cmpi.b  #$FF,d1
 		beq.w   loc_22C5A
@@ -74,22 +61,17 @@ loc_22C2E:
 		bne.s   loc_22C4C
 		move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $10F               
-						; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
+		dc.w $10F               ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
 		bra.s   loc_22C5A
 loc_22C4C:
-		
 		addq.w  #1,d1
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		move.w  d2,((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $110               
-						; "{D1}{SPELL} increased to{N}level {#}!"
+		dc.w $110               ; "{D1}{SPELL} increased to{N}level {#}!"
 loc_22C5A:
-		
 		trap    #TEXTBOX
-		dc.w $DC3               
-						; "{W1}"
+		dc.w $DC3               ; "{W1}"
 		rts
 
 	; End of function LevelUpCutscene
@@ -100,7 +82,6 @@ loc_22C5A:
 ; get first entity's X, Y and facing
 
 sub_22C60:
-		
 		move.w  (ENTITY_DATA_STRUCT_X_AND_START).l,d1
 		move.w  (ENTITY_DATA_STRUCT_Y).l,d2
 		move.b  (ENTITY_DATA_STRUCT_FACING).l,d3
@@ -123,19 +104,15 @@ CreateMoveableRangeForUnit:
 		movem.l d6-a1,-(sp)
 		bsr.w   GetBattleMapProperties
 loc_22C8C:
-		
 		movem.l d6/a0-a1,-(sp)
 loc_22C90:
-		
 		tst.b   (a0)+
 		bpl.s   loc_22C9A
 		ori.w   #$C000,(a1)+
 		bra.s   loc_22C9E
 loc_22C9A:
-		
 		andi.w  #$3FFF,(a1)+
 loc_22C9E:
-		
 		dbf     d6,loc_22C90
 		movem.l (sp)+,d6/a0-a1
 		lea     $30(a0),a0
@@ -146,7 +123,6 @@ loc_22C9E:
 		lea     (PALLETE_2_BIS).l,a0
 		moveq   #7,d0
 loc_22CC2:
-		
 		move.l  -$20(a0),(a0)+
 		dbf     d0,loc_22CC2
 		movem.l (sp)+,d0/a0
@@ -189,10 +165,8 @@ ClearFadingBlockRange:
 		movem.l d6-a1,-(sp)
 		bsr.s   GetBattleMapProperties
 loc_22D26:
-		
 		movem.l d6/a1,-(sp)
 loc_22D2A:
-		
 		andi.w  #$3FFF,(a1)+
 		dbf     d6,loc_22D2A
 		movem.l (sp)+,d6/a1
@@ -204,17 +178,14 @@ loc_22D2A:
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  #1,((FADING_COUNTER-$1000000)).w
 loc_22D56:
-		
 		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
 		beq.s   loc_22D6A
 		bset    #0,((byte_FFA82D-$1000000)).w
 		move.b  #$FF,((byte_FFA8FF-$1000000)).w
 		bra.s   return_22D70
 loc_22D6A:
-		
 		bset    #1,((byte_FFA82D-$1000000)).w
 return_22D70:
-		
 		rts
 
 	; End of function ClearFadingBlockRange
@@ -259,7 +230,6 @@ ControlUnitCursor:
 		move.b  #$FF,((byte_FFDE9D-$1000000)).w
 		move.b  #$30,((BATTLE_CURRENT_ENTITY-$1000000)).w 
 loc_22DD2:
-		
 		jsr     (WaitForVInt).w 
 		move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
 		andi.w  #$70,d0 
@@ -312,7 +282,6 @@ ControlBattleUnit:
 		lea     ((byte_FFAFA0-$1000000)).w,a0
 		move.b  #1,(a0,d0.w)
 loc_22E68:
-		
 		bsr.w   UpdateControlledUnitPos
 		jsr     (WaitForVInt).w 
 		move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d4
@@ -397,12 +366,10 @@ GetEntityNumberOfCombatant:
 		
 		move.l  a0,-(sp)
 		lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
-		tst.b   d0              
-						; test if d0 represents an enemy index ?
+		tst.b   d0              ; test if d0 represents an enemy index ?
 		bpl.s   loc_22F3E
 		subi.b  #$60,d0 
 loc_22F3E:
-		
 		andi.w  #$FF,d0
 		move.b  (a0,d0.w),d0
 		movea.l (sp)+,a0
@@ -424,7 +391,6 @@ GetEntityEventIdx:
 		clr.w   d0
 		lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
 loc_22F58:
-		
 		cmp.b   (a0)+,d1
 		beq.w   loc_22F70
 		addq.w  #1,d0
@@ -432,18 +398,15 @@ loc_22F58:
 		bne.s   loc_22F6A
 		move.w  #$80,d0 
 loc_22F6A:
-		
 		dbf     d7,loc_22F58
 		clr.w   d0
 loc_22F70:
-		
 		movem.l (sp)+,d1/d7-a0
 		rts
 
 	; End of function GetEntityEventIdx
 
-word_22F76:
-		dc.w $180
+word_22F76:     dc.w $180
 		dc.w 0
 		dc.w 0
 		dc.w $FE80
@@ -483,7 +446,6 @@ MoveBattleEntityByMoveString:
 		move.b  #1,(a0,d0.w)
 		movea.l (sp)+,a0
 loc_22FE8:
-		
 		move.b  (a0)+,d0
 		cmpi.b  #$FF,d0
 		beq.w   loc_2308E
@@ -505,25 +467,21 @@ loc_22FE8:
 		bne.s   loc_23026
 		clr.w   d4
 loc_23026:
-		
 		sub.w   (a1),d0
 		bpl.s   loc_2302E
 		neg.w   d0
 		neg.w   d4
 loc_2302E:
-		
 		move.w  $E(a1),d1
 		cmp.w   2(a1),d1
 		bne.s   loc_2303A
 		clr.w   d5
 loc_2303A:
-		
 		sub.w   2(a1),d1
 		bpl.s   loc_23044
 		neg.w   d1
 		neg.w   d5
 loc_23044:
-		
 		move.w  d0,8(a1)
 		move.w  d1,$A(a1)
 		andi.b  #$F0,$1C(a1)
@@ -534,12 +492,10 @@ loc_23044:
 		move.w  d5,6(a1)
 		ori.b   #3,$1C(a1)
 loc_2306A:
-		
 		cmp.b   (a0),d0
 		beq.s   loc_23074
 		ori.b   #$C,$1C(a1)
 loc_23074:
-		
 		move.w  ((MOVE_SOUND-$1000000)).w,d0
 		trap    #SOUND_COMMAND
 		dc.w SOUND_COMMAND_GET_D0_PARAMETER
@@ -548,7 +504,6 @@ loc_23074:
 		jsr     j_WaitForEntityToStopMoving
 		bra.w   loc_22FE8
 loc_2308E:
-		
 		move.b  $11(a1),d0
 		lsr.b   #4,d0
 		move.b  d0,$11(a1)
@@ -580,26 +535,22 @@ loc_2308E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_230E2:
-		
 		movem.l d1-a0,-(sp)
 		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 		bne.s   loc_230F2
 		moveq   #$FFFFFFFF,d0
 		bra.w   loc_2321E
 loc_230F2:
-		
 		jsr     (WaitForVInt).w 
 		move.w  d0,d6
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 		clr.w   d1
 		bra.w   loc_23110
 loc_23102:
-		
 		jsr     (WaitForVInt).w 
 		jsr     (WaitForCameraToCatchUp).w
 		jsr     j_HideFighterMiniStatusWindow
 loc_23110:
-		
 		clr.w   d0
 		move.b  (a0,d1.w),d0
 		movem.l d1-a0,-(sp)
@@ -617,27 +568,22 @@ loc_23110:
 		moveq   #0,d4
 		bra.s   loc_23146
 loc_23142:
-		
 		moveq   #2,d4
 		neg.w   d2
 loc_23146:
-		
 		jsr     j_GetYPos
 		sub.w   d1,d3
 		blt.s   loc_23154
 		moveq   #3,d5
 		bra.s   loc_23158
 loc_23154:
-		
 		moveq   #1,d5
 		neg.w   d3
 loc_23158:
-		
 		cmp.w   d2,d3
 		blt.s   loc_2315E
 		move.w  d5,d4
 loc_2315E:
-		
 		bsr.w   GetEntityNumberOfCombatant
 		move.w  d4,d1
 		moveq   #$FFFFFFFF,d2
@@ -650,7 +596,6 @@ loc_2315E:
 		jsr     j_CreateFighterMiniStatusWindow
 		movem.l (sp)+,d1-a0
 loc_23186:
-		
 		jsr     (WaitForVInt).w 
 		cmpi.w  #1,d7
 		beq.s   loc_231E0
@@ -661,10 +606,8 @@ loc_23186:
 		move.w  d7,d1
 		subq.w  #1,d1
 loc_231A0:
-		
 		bra.w   loc_23102
 loc_231A4:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_231B8
 		subq.w  #1,d1
@@ -672,10 +615,8 @@ loc_231A4:
 		move.w  d7,d1
 		subq.w  #1,d1
 loc_231B4:
-		
 		bra.w   loc_23102
 loc_231B8:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_231CC
 		addq.w  #1,d1
@@ -683,10 +624,8 @@ loc_231B8:
 		blt.s   loc_231C8
 		clr.w   d1
 loc_231C8:
-		
 		bra.w   loc_23102
 loc_231CC:
-		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_231E0
 		addq.w  #1,d1
@@ -694,34 +633,28 @@ loc_231CC:
 		blt.s   loc_231DC
 		clr.w   d1
 loc_231DC:
-		
 		bra.w   loc_23102
 loc_231E0:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_231F6
 		jsr     j_HideFighterMiniStatusWindow
 		move.w  #$FFFF,d0
 		bra.w   loc_2321E
 loc_231F6:
-		
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_23208
 		clr.w   d0
 		move.b  (a0,d1.w),d0
 		bra.w   loc_2321E
 loc_23208:
-		
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_2321A
 		clr.w   d0
 		move.b  (a0,d1.w),d0
 		bra.w   loc_2321E
 loc_2321A:
-		
 		bra.w   loc_23186
 loc_2321E:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_VALIDATION
 		bsr.w   HideUnitCursor
@@ -734,7 +667,6 @@ loc_2321E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_2322C:
-		
 		movem.l d0-a0,-(sp)
 		jsr     j_GetXPos
 		move.w  d1,d2
@@ -753,7 +685,6 @@ sub_2322C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_23256:
-		
 		bsr.w   LoadUnitCursorTileData
 		clr.w   d4
 		clr.w   d5
@@ -831,7 +762,6 @@ SetUnitCursorDestinationToNextBattleEntity:
 		move.b  #$60,ENTITYDEF_OFFSET_XSPEED(a0) 
 		move.b  #$60,ENTITYDEF_OFFSET_YSPEED(a0) 
 loc_23328:
-		
 		bsr.w   sub_23414
 		move.w  8(a0),d0
 		move.w  $A(a0),d1
@@ -843,28 +773,23 @@ loc_23328:
 		bge.s   loc_2334A
 		move.w  #$50,d0 
 loc_2334A:
-		
 		cmpi.w  #$70,d0 
 		ble.s   loc_23354
 		move.w  #$70,d0 
 loc_23354:
-		
 		cmpi.w  #$50,d1 
 		bge.s   loc_2335E
 		move.w  #$50,d1 
 loc_2335E:
-		
 		cmpi.w  #$70,d1 
 		ble.s   loc_23368
 		move.w  #$70,d1 
 loc_23368:
-		
 		tst.b   ((SPECIAL_TURBO_CHEAT-$1000000)).w
 		beq.s   loc_23376
 		move.w  #$80,d0 
 		move.w  #$80,d1 
 loc_23376:
-		
 		tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
 		bne.s   loc_23388
 		move.w  d0,d7
@@ -872,7 +797,6 @@ loc_23376:
 		lsr.w   #8,d7
 		move.w  d7,((word_FFA820-$1000000)).w
 loc_23388:
-		
 		tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
 		bne.s   loc_2339A
 		move.w  d1,d7
@@ -880,7 +804,6 @@ loc_23388:
 		lsr.w   #8,d7
 		move.w  d7,((word_FFA822-$1000000)).w
 loc_2339A:
-		
 		tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 		bne.s   loc_233AC
 		move.w  d0,d7
@@ -888,7 +811,6 @@ loc_2339A:
 		lsr.w   #8,d7
 		move.w  d7,((word_FFA824-$1000000)).w
 loc_233AC:
-		
 		tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 		bne.s   loc_233BE
 		move.w  d1,d7
@@ -896,7 +818,6 @@ loc_233AC:
 		lsr.w   #8,d7
 		move.w  d7,((word_FFA826-$1000000)).w
 loc_233BE:
-		
 		move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
 		move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
 		move.w  d0,d2
@@ -909,24 +830,20 @@ loc_233BE:
 		bge.s   loc_233E4
 		move.w  ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
 loc_233E4:
-		
 		cmp.w   ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d2
 		ble.s   loc_233F2
 		move.w  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d0
 		subi.w  #$F00,d0
 loc_233F2:
-		
 		cmp.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d1
 		bge.s   loc_233FC
 		move.w  ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d1
 loc_233FC:
-		
 		cmp.w   ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d3
 		ble.s   loc_2340A
 		move.w  ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d1
 		subi.w  #$D80,d1
 loc_2340A:
-		
 		move.w  d0,d2
 		move.w  d1,d3
 		jsr     (SetCameraDest).w
@@ -938,7 +855,6 @@ loc_2340A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_23414:
-		
 		clr.w   d4
 		clr.w   d5
 		move.b  $1A(a0),d4
@@ -948,25 +864,21 @@ sub_23414:
 		bne.s   loc_2342A
 		clr.w   d4
 loc_2342A:
-		
 		sub.w   (a0),d0
 		bpl.s   loc_23432
 		neg.w   d0
 		neg.w   d4
 loc_23432:
-		
 		move.w  $E(a0),d1
 		cmp.w   2(a0),d1
 		bne.s   loc_2343E
 		clr.w   d5
 loc_2343E:
-		
 		sub.w   2(a0),d1
 		bpl.s   loc_23448
 		neg.w   d1
 		neg.w   d5
 loc_23448:
-		
 		move.w  d0,8(a0)
 		move.w  d1,$A(a0)
 		move.w  d4,4(a0)
@@ -1040,7 +952,6 @@ LoadUnitCursorTileData:
 ; =============== S U B R O U T I N E =======================================
 
 sub_234C8:
-		
 		movem.l d0-d2/a0-a1,-(sp)
 		move.b  ENTITYDEF_OFFSET_FACING(a1),d6
 		ext.w   d6
@@ -1048,7 +959,6 @@ sub_234C8:
 		bne.s   loc_234DA
 		addq.w  #2,d6
 loc_234DA:
-		
 		clr.w   d1
 		move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
 		cmpi.b  #$F0,d1
@@ -1082,14 +992,12 @@ loc_234DA:
 		jsr     (sub_119E).w    
 		jsr     (Set_FFDE94_bit3).w
 loc_23538:
-		
 		movem.l (sp)+,d0-d2/a0-a1
 		rts
 
 	; End of function sub_234C8
 
-byte_2353E:
-		dc.b 0
+byte_2353E:     dc.b 0
 		dc.b 1
 		dc.b 2
 		dc.b 3
@@ -1114,7 +1022,6 @@ WaitForUnitCursor:
 ; =============== S U B R O U T I N E =======================================
 
 sub_23554:
-		
 		movem.l d0-d2/d7-a1,-(sp)
 		lea     word_2358C(pc), a0
 		clr.w   d2
@@ -1125,7 +1032,6 @@ sub_23554:
 		lea     (byte_FFDCC0).l,a1
 		moveq   #7,d7
 loc_23572:
-		
 		move.w  (a0)+,d2
 		add.w   d1,d2
 		move.w  d2,(a1)+
@@ -1140,8 +1046,7 @@ loc_23572:
 
 	; End of function sub_23554
 
-word_2358C:
-		dc.w $74
+word_2358C:     dc.w $74
 		dc.w $F10
 		dc.w $4680
 		dc.w $7C
@@ -1241,14 +1146,12 @@ word_2358C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_2364C:
-		
 		move.l  #$10F10,(byte_FFDCC0).l
 		rts
 
 	; End of function sub_2364C
 
-UnitCursorTiles:
-		incbin "data/graphics/tech/unitcursortiles.bin"
+UnitCursorTiles:incbin "data/graphics/tech/unitcursortiles.bin"
 
 ; =============== S U B R O U T I N E =======================================
 

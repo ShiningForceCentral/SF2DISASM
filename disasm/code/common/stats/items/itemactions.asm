@@ -5,19 +5,16 @@
 ; =============== S U B R O U T I N E =======================================
 
 sub_229CA:
-		
 		moveq   #0,d2
 		lea     UsableOutsideBattleItems(pc), a0
 		nop
 loc_229D2:
-		
 		cmp.b   (a0)+,d1
 		beq.w   return_229E0
 		cmpi.b  #$FF,(a0)
 		bne.s   loc_229D2
 		moveq   #$FFFFFFFF,d2
 return_229E0:
-		
 		rts
 
 	; End of function sub_229CA
@@ -30,13 +27,11 @@ UsableOutsideBattleItems:
 ; check specific item index + code offset to run when used in field
 
 UseFieldItem:
-		
 		movem.l d0-d1/d6-d7,-(sp)
 		andi.w  #ITEM_MASK_IDX,d1
 		movem.l d1/a0,-(sp)
 		lea     rjt_FieldItemEffects(pc), a0
 loc_229FC:
-		
 		cmpi.w  #CODE_TERMINATOR_WORD,(a0)
 		beq.w   loc_22A1A
 		cmp.w   (a0)+,d1
@@ -45,11 +40,9 @@ loc_229FC:
 		jsr     rjt_FieldItemEffects(pc,d1.w)
 		bra.w   loc_22A1A
 loc_22A14:
-		
 		adda.w  #2,a0
 		bra.s   loc_229FC
 loc_22A1A:
-		
 		movem.l (sp)+,d1/a0
 		bra.w   loc_22A48
 rjt_FieldItemEffects:
@@ -74,7 +67,6 @@ rjt_FieldItemEffects:
 		dc.w LevelUpCutscene-rjt_FieldItemEffects
 		dc.w $FFFF
 loc_22A48:
-		
 		movem.l (sp)+,d0-d1/d6-d7
 		rts
 
@@ -90,16 +82,12 @@ FieldItem_CurePoison:
 		beq.s   loc_22A64
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $95                
-						; "{NAME} is no longer{N}poisoned.{W2}"
+		dc.w $95                ; "{NAME} is no longer{N}poisoned.{W2}"
 		bra.s   loc_22A68
 loc_22A64:
-		
 		trap    #TEXTBOX
-		dc.w $94                
-						; "It has no use.{W2}"
+		dc.w $94                ; "It has no use.{W2}"
 loc_22A68:
-		
 		jsr     j_SetStatus
 		rts
 
@@ -116,27 +104,21 @@ FieldItem_CurePoisonAndParalysis:
 		beq.s   loc_22A88
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $95                
-						; "{NAME} is no longer{N}poisoned.{W2}"
+		dc.w $95                ; "{NAME} is no longer{N}poisoned.{W2}"
 		moveq   #$FFFFFFFF,d2
 loc_22A88:
-		
 		bclr    #0,d1
 		beq.s   loc_22A98
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $9C                
-						; "{NAME} is no longer{N}paralyzed.{W2}"
+		dc.w $9C                ; "{NAME} is no longer{N}paralyzed.{W2}"
 		moveq   #$FFFFFFFF,d2
 loc_22A98:
-		
 		tst.w   d2
 		bne.s   loc_22AA0
 		trap    #TEXTBOX
-		dc.w $94                
-						; "It has no use.{W2}"
+		dc.w $94                ; "It has no use.{W2}"
 loc_22AA0:
-		
 		jsr     j_SetStatus
 		jsr     j_ApplyStatusAndItemsOnStats
 		rts
@@ -156,8 +138,7 @@ FieldItem_IncreaseATK:
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $96                
-						; "{NAME}'s attack{N}power is boosted by {#}.{W2}"
+		dc.w $96                ; "{NAME}'s attack{N}power is boosted by {#}.{W2}"
 		jsr     j_IncreaseBaseATK
 		move.w  d7,d1
 		jsr     j_IncreaseCurrentATK
@@ -178,8 +159,7 @@ FieldItem_IncreaseDEF:
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $97                
-						; "{NAME}'s defensive{N}power is boosted by {#}.{W2}"
+		dc.w $97                ; "{NAME}'s defensive{N}power is boosted by {#}.{W2}"
 		jsr     j_IncreaseBaseDEF
 		move.w  d7,d1
 		jsr     j_IncreaseCurrentDEF
@@ -200,8 +180,7 @@ FieldItem_IncreaseAGI:
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $98                
-						; "{NAME}'s agility{N}is boosted by {#}.{W2}"
+		dc.w $98                ; "{NAME}'s agility{N}is boosted by {#}.{W2}"
 		jsr     j_IncreaseAGI
 		move.w  d7,d1
 		jsr     j_IncreaseCurrentAGI
@@ -223,14 +202,12 @@ FieldItem_IncreaseMOV:
 		beq.w   loc_22B42
 		moveq   #2,d7
 loc_22B42:
-		
 		clr.l   d1
 		move.w  d7,d1
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $99                
-						; "{NAME}'s movement{N}range enlarged by {#}.{W2}"
+		dc.w $99                ; "{NAME}'s movement{N}range enlarged by {#}.{W2}"
 		jsr     j_IncreaseBaseMOV
 		move.w  d7,d1
 		jsr     j_IncreaseCurrentMOV
@@ -251,8 +228,7 @@ FieldItem_IncreaseHP:
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $9A                
-						; "{NAME}'s max. HP{N}are raised by {#}.{W2}"
+		dc.w $9A                ; "{NAME}'s max. HP{N}are raised by {#}.{W2}"
 		jsr     j_IncreaseMaxHP
 		move.w  d7,d1
 		jsr     j_IncreaseCurrentHP
@@ -276,19 +252,15 @@ FieldItem_IncreaseMP:
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $9B                
-						; "{NAME}'s max. MP{N}are raised by {#}.{W2}"
+		dc.w $9B                ; "{NAME}'s max. MP{N}are raised by {#}.{W2}"
 		jsr     j_IncreaseMP
 		move.w  d7,d1
 		jsr     j_IncreaseCurrentMP
 		bra.s   return_22BC0
 loc_22BBC:
-		
 		trap    #TEXTBOX
-		dc.w $94                
-						; "It has no use.{W2}"
+		dc.w $94                ; "It has no use.{W2}"
 return_22BC0:
-		
 		rts
 
 	; End of function FieldItem_IncreaseMP

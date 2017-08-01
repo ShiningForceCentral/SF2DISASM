@@ -1,8 +1,7 @@
 
 ; ASM FILE code\common\tech\graphics\specialspritesanims.asm :
 ; 0x2784C..0x2791C : Special Sprites Animations
-byte_2784C:
-		dc.b 0
+byte_2784C:     dc.b 0
 		dc.b $5C 
 		dc.b  $A
 		dc.b $3D 
@@ -34,8 +33,7 @@ byte_2784C:
 		dc.b $93 
 		dc.b   0
 		dc.b $8C 
-byte_2786C:
-		dc.b 0
+byte_2786C:     dc.b 0
 		dc.b $5C 
 		dc.b  $A
 		dc.b $3D 
@@ -67,8 +65,7 @@ byte_2786C:
 		dc.b $B7 
 		dc.b   0
 		dc.b $8C 
-byte_2788C:
-		dc.b 0
+byte_2788C:     dc.b 0
 		dc.b $60 
 		dc.b  $A
 		dc.b $38 

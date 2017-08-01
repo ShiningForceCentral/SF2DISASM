@@ -45,6 +45,5 @@
 		include "code\specialscreens\witch\witchfunctions.asm"		; Witch functions
 		include "code\gameflow\special\configurationmode.asm"		; Configuration mode function
 		include "code\gameflow\start\regioncheck.asm"		; Region check function
-nullsub_17:		
-		rts
+nullsub_17:		rts
 		align $8000

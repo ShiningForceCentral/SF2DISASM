@@ -13,8 +13,7 @@ ms_map23_AreaDescriptions:
 
 	; End of function ms_map23_AreaDescriptions
 
-word_59BE8:
-		dc.w $514
+word_59BE8:     dc.w $514
 		dc.b 0
 		dc.b 0
 		dc.b 4

@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map31\mapsetups\pt.asm :
 ; 0x5D40E..0x5D426 : 
-ms_map31:
-		dc.l ms_map31_Entities
+ms_map31:       dc.l ms_map31_Entities
 		dc.l ms_map31_EntityEvents
 		dc.l ms_map31_ZoneEvents
 		dc.l ms_map31_AreaDescriptions

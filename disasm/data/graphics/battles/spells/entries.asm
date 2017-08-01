@@ -25,49 +25,26 @@ pt_SpellGraphics:
 		dc.l SpellGraphics20
 		dc.l SpellGraphics21
 		dc.l SpellGraphics22
-SpellGraphics00:
-		incbin "data/graphics/battles/spells/spellgraphics00.bin"
-SpellGraphics01:
-		incbin "data/graphics/battles/spells/spellgraphics01.bin"
-SpellGraphics02:
-		incbin "data/graphics/battles/spells/spellgraphics02.bin"
-SpellGraphics03:
-		incbin "data/graphics/battles/spells/spellgraphics03.bin"
-SpellGraphics04:
-		incbin "data/graphics/battles/spells/spellgraphics04.bin"
-SpellGraphics05:
-		incbin "data/graphics/battles/spells/spellgraphics05.bin"
-SpellGraphics06:
-		incbin "data/graphics/battles/spells/spellgraphics06.bin"
-SpellGraphics07:
-		incbin "data/graphics/battles/spells/spellgraphics07.bin"
-SpellGraphics08:
-		incbin "data/graphics/battles/spells/spellgraphics08.bin"
-SpellGraphics09:
-		incbin "data/graphics/battles/spells/spellgraphics09.bin"
-SpellGraphics10:
-		incbin "data/graphics/battles/spells/spellgraphics10.bin"
-SpellGraphics11:
-		incbin "data/graphics/battles/spells/spellgraphics11.bin"
-SpellGraphics12:
-		incbin "data/graphics/battles/spells/spellgraphics12.bin"
-SpellGraphics13:
-		incbin "data/graphics/battles/spells/spellgraphics13.bin"
-SpellGraphics14:
-		incbin "data/graphics/battles/spells/spellgraphics14.bin"
-SpellGraphics15:
-		incbin "data/graphics/battles/spells/spellgraphics15.bin"
-SpellGraphics16:
-		incbin "data/graphics/battles/spells/spellgraphics16.bin"
-SpellGraphics17:
-		incbin "data/graphics/battles/spells/spellgraphics17.bin"
-SpellGraphics18:
-		incbin "data/graphics/battles/spells/spellgraphics18.bin"
-SpellGraphics19:
-		incbin "data/graphics/battles/spells/spellgraphics19.bin"
-SpellGraphics20:
-		incbin "data/graphics/battles/spells/spellgraphics20.bin"
-SpellGraphics21:
-		incbin "data/graphics/battles/spells/spellgraphics21.bin"
-SpellGraphics22:
-		incbin "data/graphics/battles/spells/spellgraphics22.bin"
+SpellGraphics00:incbin "data/graphics/battles/spells/spellgraphics00.bin"
+SpellGraphics01:incbin "data/graphics/battles/spells/spellgraphics01.bin"
+SpellGraphics02:incbin "data/graphics/battles/spells/spellgraphics02.bin"
+SpellGraphics03:incbin "data/graphics/battles/spells/spellgraphics03.bin"
+SpellGraphics04:incbin "data/graphics/battles/spells/spellgraphics04.bin"
+SpellGraphics05:incbin "data/graphics/battles/spells/spellgraphics05.bin"
+SpellGraphics06:incbin "data/graphics/battles/spells/spellgraphics06.bin"
+SpellGraphics07:incbin "data/graphics/battles/spells/spellgraphics07.bin"
+SpellGraphics08:incbin "data/graphics/battles/spells/spellgraphics08.bin"
+SpellGraphics09:incbin "data/graphics/battles/spells/spellgraphics09.bin"
+SpellGraphics10:incbin "data/graphics/battles/spells/spellgraphics10.bin"
+SpellGraphics11:incbin "data/graphics/battles/spells/spellgraphics11.bin"
+SpellGraphics12:incbin "data/graphics/battles/spells/spellgraphics12.bin"
+SpellGraphics13:incbin "data/graphics/battles/spells/spellgraphics13.bin"
+SpellGraphics14:incbin "data/graphics/battles/spells/spellgraphics14.bin"
+SpellGraphics15:incbin "data/graphics/battles/spells/spellgraphics15.bin"
+SpellGraphics16:incbin "data/graphics/battles/spells/spellgraphics16.bin"
+SpellGraphics17:incbin "data/graphics/battles/spells/spellgraphics17.bin"
+SpellGraphics18:incbin "data/graphics/battles/spells/spellgraphics18.bin"
+SpellGraphics19:incbin "data/graphics/battles/spells/spellgraphics19.bin"
+SpellGraphics20:incbin "data/graphics/battles/spells/spellgraphics20.bin"
+SpellGraphics21:incbin "data/graphics/battles/spells/spellgraphics21.bin"
+SpellGraphics22:incbin "data/graphics/battles/spells/spellgraphics22.bin"

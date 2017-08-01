@@ -4,8 +4,7 @@
 ; FREE SPACE : 626 bytes.
 
 
-j_ShopActions:		
-		jmp     ShopMenuActions(pc)
+j_ShopActions:		jmp     ShopMenuActions(pc)
 j_ChurchActions:		
 		jmp     ChurchMenuActions(pc)
 j_MainMenuActions:		
@@ -20,10 +19,8 @@ j_ExecuteExplorationLoop:
 		jmp     ExecuteExplorationLoop(pc)
 j_LoadUnitCursorTileData:		
 		jmp     LoadUnitCursorTileData(pc)
-sub_20020:		
-		jmp     sub_23554(pc)
-sub_20024:		
-		jmp     sub_2364C(pc)
+sub_20020:		jmp     sub_23554(pc)
+sub_20024:		jmp     sub_2364C(pc)
 j_ControlUnitCursor:		
 		jmp     ControlUnitCursor(pc)
 j_SetUnitCursorDestinationToNextBattleEntity:		
@@ -42,18 +39,14 @@ j_FadeOut_WaitForP2Input:
 		jmp     FadeOut_WaitForP1Input(pc)
 j_SetEntityPosition:		
 		jmp     SetEntityPosition(pc)
-sub_2004C:		
-		jmp     sub_23862(pc)
+sub_2004C:		jmp     sub_23862(pc)
 j_UpdateSpecialSprites:		
 		jmp     UpdateSpecialSprites(pc)
 j_LoadSpecialSprite:		
 		jmp     LoadSpecialSprite(pc)
-sub_20058:		
-		jmp     sub_25CB6(pc)
-j_EndGame:		
-		jmp     EndGame(pc)
-j_SuspendGame:		
-		jmp     SuspendGame(pc)
+sub_20058:		jmp     sub_25CB6(pc)
+j_EndGame:		jmp     EndGame(pc)
+j_SuspendGame:		jmp     SuspendGame(pc)
 		include "code\common\menus\shop\shopactions.asm"		; Shop functions
 		include "code\common\menus\church\churchactions.asm"		; Church functions
 		include "code\common\menus\main\mainactions.asm"		; Main menu functions

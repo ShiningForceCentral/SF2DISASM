@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map23\mapsetups\pt.asm :
 ; 0x59AC0..0x59AD8 : 
-ms_map23:
-		dc.l ms_map23_Entities
+ms_map23:       dc.l ms_map23_Entities
 		dc.l ms_map23_EntityEvents
 		dc.l ms_map23_ZoneEvents
 		dc.l ms_map23_AreaDescriptions

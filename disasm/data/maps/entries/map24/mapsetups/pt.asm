@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map24\mapsetups\pt.asm :
 ; 0x59C06..0x59C1E : 
-ms_map24:
-		dc.l ms_map24_Entities
+ms_map24:       dc.l ms_map24_Entities
 		dc.l ms_map24_EntityEvents
 		dc.l ms_map24_ZoneEvents
 		dc.l ms_map24_AreaDescriptions

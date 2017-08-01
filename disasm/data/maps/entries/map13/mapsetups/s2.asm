@@ -47,28 +47,20 @@ ms_map13_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_58056:
-		
 		trap    #CHECK_FLAG
-		dc.w $100               
-						; .0118=apparently reset on map load, usually used to skip some lines of entities
+		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 		bne.s   loc_58068
 		trap    #TEXTBOX
-		dc.w $58C               
-						; "How did you come to{N}Polca Village?{W2}"
+		dc.w $58C               ; "How did you come to{N}Polca Village?{W2}"
 		trap    #TEXTBOX
-		dc.w $58D               
-						; "Through the cave?{N}Nobody has come to this{N}village since...{W2}"
+		dc.w $58D               ; "Through the cave?{N}Nobody has come to this{N}village since...{W2}"
 		trap    #SET_FLAG
-		dc.w $100               
-						; .0118=apparently reset on map load, usually used to skip some lines of entities
+		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_58068:
-		
 		trap    #TEXTBOX
-		dc.w $58E               
-						; "Oh, you defeated that{N}hobgoblin?  Wow!{W2}"
+		dc.w $58E               ; "Oh, you defeated that{N}hobgoblin?  Wow!{W2}"
 		trap    #TEXTBOX
-		dc.w $58F               
-						; "Now we can use that tunnel{N}to travel between Polca and{N}the wilderness area!{W1}"
+		dc.w $58F               ; "Now we can use that tunnel{N}to travel between Polca and{N}the wilderness area!{W1}"
 		rts
 
 	; End of function sub_58056
@@ -77,10 +69,8 @@ loc_58068:
 ; =============== S U B R O U T I N E =======================================
 
 sub_58072:
-		
 		trap    #TEXTBOX
-		dc.w $590               
-						; "Breathe deeply....{W2}{N}Wonderful air, huh?{W1}"
+		dc.w $590               ; "Breathe deeply....{W2}{N}Wonderful air, huh?{W1}"
 		rts
 
 	; End of function sub_58072
@@ -89,24 +79,18 @@ sub_58072:
 ; =============== S U B R O U T I N E =======================================
 
 sub_58078:
-		
 		trap    #CHECK_FLAG
-		dc.w $2C7               
-						; set after you dislodge the turtle/fairy in Polca
+		dc.w $2C7               ; set after you dislodge the turtle/fairy in Polca
 		bne.s   loc_5808A
 		lea     cs_58512(pc), a0
 		trap    #6
 		trap    #SET_FLAG
-		dc.w $2C7               
-						; set after you dislodge the turtle/fairy in Polca
+		dc.w $2C7               ; set after you dislodge the turtle/fairy in Polca
 		bra.s   return_5808E
 loc_5808A:
-		
 		trap    #TEXTBOX
-		dc.w $591               
-						; "In ancient times, there{N}were magic tunnels.{W2}{N}People traveled easily{N}through the tunnels.{W1}"
+		dc.w $591               ; "In ancient times, there{N}were magic tunnels.{W2}{N}People traveled easily{N}through the tunnels.{W1}"
 return_5808E:
-		
 		rts
 
 	; End of function sub_58078
@@ -115,7 +99,6 @@ return_5808E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_58090:
-		
 		move.b  #4,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		rts
@@ -126,7 +109,6 @@ sub_58090:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5809E:
-		
 		move.b  #$13,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		rts
@@ -137,28 +119,20 @@ sub_5809E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_580AC:
-		
 		trap    #CHECK_FLAG
-		dc.w $2C6               
-						; set after Oddler wanders down from the mountain
+		dc.w $2C6               ; set after Oddler wanders down from the mountain
 		bne.s   loc_580B8
 		trap    #TEXTBOX
-		dc.w $592               
-						; "To the east is the sacred{N}area of Volcanon.{W1}"
+		dc.w $592               ; "To the east is the sacred{N}area of Volcanon.{W1}"
 		bra.s   return_580C4
 loc_580B8:
-		
 		trap    #TEXTBOX
-		dc.w $5B9               
-						; "He came down from the{N}mountain....{W2}"
+		dc.w $5B9               ; "He came down from the{N}mountain....{W2}"
 		trap    #TEXTBOX
-		dc.w $5BA               
-						; "He's not from Polca, or{N}Bedoe....{W2}"
+		dc.w $5BA               ; "He's not from Polca, or{N}Bedoe....{W2}"
 		trap    #TEXTBOX
-		dc.w $5BB               
-						; "Where did he come from?{W1}"
+		dc.w $5BB               ; "Where did he come from?{W1}"
 return_580C4:
-		
 		rts
 
 	; End of function sub_580AC
@@ -167,7 +141,6 @@ return_580C4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_580C6:
-		
 		jsr     j_ChurchActions
 		rts
 
@@ -177,10 +150,8 @@ sub_580C6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_580CE:
-		
 		trap    #TEXTBOX
-		dc.w $593               
-						; "Mt. Volcano is home to{N}beastmen.{W2}{N}We were a warlike tribe, but{N}we've almost forgotten how{N}to fight.{W1}"
+		dc.w $593               ; "Mt. Volcano is home to{N}beastmen.{W2}{N}We were a warlike tribe, but{N}we've almost forgotten how{N}to fight.{W1}"
 		rts
 
 	; End of function sub_580CE
@@ -189,10 +160,8 @@ sub_580CE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_580D4:
-		
 		trap    #TEXTBOX
-		dc.w $594               
-						; "Young men these days are{N}lucky!  I wish I was young{N}again!{W1}"
+		dc.w $594               ; "Young men these days are{N}lucky!  I wish I was young{N}again!{W1}"
 		rts
 
 	; End of function sub_580D4
@@ -201,10 +170,8 @@ sub_580D4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_580DA:
-		
 		trap    #CHECK_FLAG
-		dc.w $2C6               
-						; set after Oddler wanders down from the mountain
+		dc.w $2C6               ; set after Oddler wanders down from the mountain
 		bne.s   loc_580FC
 		trap    #CHECK_FLAG
 		dc.w $101
@@ -215,23 +182,16 @@ sub_580DA:
 		dc.w $101
 		bra.s   loc_580FA
 loc_580F2:
-		
 		trap    #TEXTBOX
-		dc.w $597               
-						; "Whoa!  Mt. Volcano erupted!{W2}"
+		dc.w $597               ; "Whoa!  Mt. Volcano erupted!{W2}"
 		trap    #TEXTBOX
-		dc.w $598               
-						; "It's an evil omen.{W1}"
+		dc.w $598               ; "It's an evil omen.{W1}"
 loc_580FA:
-		
 		bra.s   return_58100
 loc_580FC:
-		
 		trap    #TEXTBOX
-		dc.w $5B7               
-						; "Oh, this is serious!{N}I hope he survives the night.{W1}"
+		dc.w $5B7               ; "Oh, this is serious!{N}I hope he survives the night.{W1}"
 return_58100:
-		
 		rts
 
 	; End of function sub_580DA
@@ -240,10 +200,8 @@ return_58100:
 ; =============== S U B R O U T I N E =======================================
 
 sub_58102:
-		
 		trap    #TEXTBOX
-		dc.w $599               
-						; "Clank!  Clank!{N}All of our weapons are made{N}by me!{W2}{N}But, who uses them in this{N}peaceful country?{W1}"
+		dc.w $599               ; "Clank!  Clank!{N}All of our weapons are made{N}by me!{W2}{N}But, who uses them in this{N}peaceful country?{W1}"
 		rts
 
 	; End of function sub_58102
@@ -252,10 +210,8 @@ sub_58102:
 ; =============== S U B R O U T I N E =======================================
 
 sub_58108:
-		
 		trap    #TEXTBOX
-		dc.w $59A               
-						; "Hirsute?  'Cause I'm a{N}beastman.{W2}{N}I'm not hairy enough though.{N}I envy those hairy guys!{W1}"
+		dc.w $59A               ; "Hirsute?  'Cause I'm a{N}beastman.{W2}{N}I'm not hairy enough though.{N}I envy those hairy guys!{W1}"
 		rts
 
 	; End of function sub_58108
@@ -264,10 +220,8 @@ sub_58108:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5810E:
-		
 		trap    #TEXTBOX
-		dc.w $5B8               
-						; "Ah...stop...no!{N}I don't want...to see....{N}My...head...aches....{W1}"
+		dc.w $5B8               ; "Ah...stop...no!{N}I don't want...to see....{N}My...head...aches....{W1}"
 		rts
 
 	; End of function sub_5810E
@@ -276,39 +230,22 @@ sub_5810E:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_116:
-		
 		rts
 
 	; End of function nullsub_116
 
-cs_58116:
-		textCursor $595         
-						; Initial text line $595 : "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
-		nextSingleText $0,$89   
-						; "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
-		csWait $1E              
-						; WAIT 1E
-		setQuakeAmount $8002    
-						; 0033 SET QUAKE AMOUNT 8002
-		setQuakeAmount $4002    
-						; 0033 SET QUAKE AMOUNT 4002
-		nextSingleText $0,$89   
-						; "...like that!  And, it's getting{N}worse.{N}What's wrong you ask?{W1}"
-		csWait $3C              
-						; WAIT 3C
-		playSound SFX_BIG_DOOR_RUMBLE
-						; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		setQuakeAmount $5       
-						; 0033 SET QUAKE AMOUNT 5
-		flashScreenWhite $46    
-						; 0041 FLASH SCREEN WHITE 46
-		setQuakeAmount $0       
-						; 0033 SET QUAKE AMOUNT 0
-		entityShakeHead $89     
-						; 0027 MAKE ENTITY SHAKE HEAD 89
-		nextText $0,$89         
-						; "Whoa!  Mt. Volcano erupted!{W2}"
-		nextSingleText $0,$89   
-						; "It's an evil omen.{W1}"
-		csc_end                 
-						; END OF CUTSCENE SCRIPT
+cs_58116:       textCursor $595         ; Initial text line $595 : "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
+		nextSingleText $0,$89   ; "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
+		csWait $1E              ; WAIT 1E
+		setQuakeAmount $8002    ; 0033 SET QUAKE AMOUNT 8002
+		setQuakeAmount $4002    ; 0033 SET QUAKE AMOUNT 4002
+		nextSingleText $0,$89   ; "...like that!  And, it's getting{N}worse.{N}What's wrong you ask?{W1}"
+		csWait $3C              ; WAIT 3C
+		playSound SFX_BIG_DOOR_RUMBLE; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
+		setQuakeAmount $5       ; 0033 SET QUAKE AMOUNT 5
+		flashScreenWhite $46    ; 0041 FLASH SCREEN WHITE 46
+		setQuakeAmount $0       ; 0033 SET QUAKE AMOUNT 0
+		entityShakeHead $89     ; 0027 MAKE ENTITY SHAKE HEAD 89
+		nextText $0,$89         ; "Whoa!  Mt. Volcano erupted!{W2}"
+		nextSingleText $0,$89   ; "It's an evil omen.{W1}"
+		csc_end                 ; END OF CUTSCENE SCRIPT

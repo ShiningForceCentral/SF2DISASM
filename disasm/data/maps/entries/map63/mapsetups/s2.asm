@@ -11,7 +11,6 @@ ms_map63_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C992:
-		
 		trap    #CHECK_FLAG
 		dc.w $1D
 		bne.s   return_5C9E0
@@ -26,22 +25,18 @@ sub_5C992:
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
 		trap    #TEXTBOX
-		dc.w $1051              
-						; "Olooooo...Oloo....{N}Have you seen my arm?{W2}"
+		dc.w $1051              ; "Olooooo...Oloo....{N}Have you seen my arm?{W2}"
 		trap    #TEXTBOX
-		dc.w $1052              
-						; "I can't move...without my{N}arm...oloooo....{W1}"
+		dc.w $1052              ; "I can't move...without my{N}arm...oloooo....{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		bra.s   return_5C9E0
 loc_5C9D2:
-		
 		moveq   #$75,d0 
 		jsr     sub_4F542
 		lea     cs_5CBB4(pc), a0
 		trap    #6
 return_5C9E0:
-		
 		rts
 
 	; End of function sub_5C992

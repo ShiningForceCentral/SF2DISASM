@@ -14,7 +14,6 @@ ms_map5_flag212_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_73:
-		
 		rts
 
 	; End of function nullsub_73
@@ -23,7 +22,6 @@ nullsub_73:
 ; =============== S U B R O U T I N E =======================================
 
 sub_604D6:
-		
 		trap    #CHECK_FLAG
 		dc.w $3AC
 		beq.s   return_60500
@@ -39,16 +37,12 @@ sub_604D6:
 		trap    #6
 		bra.s   loc_604FC
 loc_604F6:
-		
 		lea     cs_60B10(pc), a0
 		trap    #6
 loc_604FC:
-		
 		trap    #SET_FLAG
-		dc.w $3AD               
-						; set after Chaz and the priest go downstars in Yeel
+		dc.w $3AD               ; set after Chaz and the priest go downstars in Yeel
 return_60500:
-		
 		rts
 
 	; End of function sub_604D6
@@ -57,7 +51,6 @@ return_60500:
 ; =============== S U B R O U T I N E =======================================
 
 sub_60502:
-		
 		trap    #CHECK_FLAG
 		dc.w $1C
 		bne.s   return_6051C
@@ -67,13 +60,10 @@ sub_60502:
 		lea     cs_60708(pc), a0
 		trap    #6
 		trap    #SET_FLAG
-		dc.w $47                
-						; Lemon is a follower
+		dc.w $47                ; Lemon is a follower
 		trap    #SET_FLAG
-		dc.w $3B1               
-						; set after recruiting Lemon in Yeel
+		dc.w $3B1               ; set after recruiting Lemon in Yeel
 return_6051C:
-		
 		rts
 
 	; End of function sub_60502
@@ -82,7 +72,6 @@ return_6051C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6051E:
-		
 		move.w  #$FDD,d3
 		lea     unk_6052E(pc), a0
 		nop
@@ -90,8 +79,7 @@ sub_6051E:
 
 	; End of function sub_6051E
 
-unk_6052E:
-		dc.b   9
+unk_6052E:      dc.b   9
 		dc.b  $F
 		dc.b   0
 		dc.b   0

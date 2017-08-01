@@ -14,7 +14,6 @@ j_ExecuteMenu:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10004:
-		
 		jmp     sub_10586(pc)
 
 	; End of function sub_10004
@@ -23,7 +22,6 @@ sub_10004:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10008:
-		
 		jmp     sub_10586(pc)
 
 	; End of function sub_10008
@@ -32,7 +30,6 @@ sub_10008:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1000C:
-		
 		jmp     sub_10586(pc)
 
 	; End of function sub_1000C
@@ -41,7 +38,6 @@ sub_1000C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10010:
-		
 		jmp     sub_10A4A(pc)
 
 	; End of function sub_10010
@@ -68,7 +64,6 @@ j_HideFighterMiniStatusWindow:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1001C:
-		
 		jmp     sub_1161A(pc)
 
 	; End of function sub_1001C
@@ -77,7 +72,6 @@ sub_1001C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10020:
-		
 		jmp     sub_11638(pc)
 
 	; End of function sub_10020
@@ -86,7 +80,6 @@ sub_10020:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10024:
-		
 		jmp     loc_116B8(pc)
 
 	; End of function sub_10024
@@ -95,7 +88,6 @@ sub_10024:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10028:
-		
 		jmp     loc_11694(pc)
 
 	; End of function sub_10028
@@ -104,7 +96,6 @@ sub_10028:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1002C:
-		
 		jmp     sub_11716(pc)
 
 	; End of function sub_1002C
@@ -122,7 +113,6 @@ j_MemberStatsScreen:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10034:
-		
 		jmp     sub_1288E(pc)
 
 	; End of function sub_10034
@@ -149,7 +139,6 @@ j_HidePortraitWindow:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10040:
-		
 		jmp     sub_12FE6(pc)
 
 	; End of function sub_10040
@@ -158,7 +147,6 @@ sub_10040:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10044:
-		
 		jmp     loc_13004(pc)
 
 	; End of function sub_10044
@@ -167,7 +155,6 @@ sub_10044:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10048:
-		
 		jmp     loc_13030(pc)
 
 	; End of function sub_10048
@@ -176,7 +163,6 @@ sub_10048:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1004C:
-		
 		jmp     sub_147FA(pc)
 
 	; End of function sub_1004C
@@ -185,7 +171,6 @@ sub_1004C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10050:
-		
 		jmp     sub_12F12(pc)
 
 	; End of function sub_10050
@@ -194,7 +179,6 @@ sub_10050:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10054:
-		
 		jmp     sub_12F5E(pc)
 
 	; End of function sub_10054
@@ -203,7 +187,6 @@ sub_10054:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10058:
-		
 		jmp     sub_12F9A(pc)
 
 	; End of function sub_10058
@@ -212,7 +195,6 @@ sub_10058:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1005C:
-		
 		jmp     sub_113C6(pc)
 
 	; End of function sub_1005C
@@ -221,7 +203,6 @@ sub_1005C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10060:
-		
 		jmp     sub_11404(pc)
 
 	; End of function sub_10060
@@ -230,7 +211,6 @@ sub_10060:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10064:
-		
 		jmp     sub_1141E(pc)
 
 	; End of function sub_10064
@@ -257,7 +237,6 @@ j_HideLandEffectWindow:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10070:
-		
 		jmp     sub_157E8(pc)
 
 	; End of function sub_10070
@@ -284,7 +263,6 @@ j_YesNoPrompt:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1007C:
-		
 		jmp     sub_15BB0(pc)
 
 	; End of function sub_1007C
@@ -293,19 +271,14 @@ sub_1007C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10080:
-		
 		jmp     sub_1586E(pc)   
 
 	; End of function sub_10080
 
-p_ItemNames:
-		dc.l ItemNames
-p_ClassNames:
-		dc.l ClassNames
-p_ItemDefs:
-		dc.l ItemDefs
-p_SpellData:
-		dc.l SpellDefs
+p_ItemNames:    dc.l ItemNames
+p_ClassNames:   dc.l ClassNames
+p_ItemDefs:     dc.l ItemDefs
+p_SpellData:    dc.l SpellDefs
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -337,7 +310,6 @@ j_SpecialBattle:
 ; =============== S U B R O U T I N E =======================================
 
 sub_100A0:
-		
 		jmp     sub_16552(pc)
 
 	; End of function sub_100A0
@@ -364,7 +336,6 @@ j_WitchMainMenu:
 ; =============== S U B R O U T I N E =======================================
 
 sub_100AC:
-		
 		jmp     sub_169AE(pc)
 
 	; End of function sub_100AC
@@ -373,7 +344,6 @@ sub_100AC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_100B0:
-		
 		jmp     sub_16A30(pc)
 
 	; End of function sub_100B0
@@ -384,7 +354,6 @@ sub_100B0:
 ; related to end kiss
 
 j_EndKiss:
-		
 		jmp     PlayEndKiss(pc)
 
 	; End of function j_EndKiss
@@ -393,7 +362,6 @@ j_EndKiss:
 ; =============== S U B R O U T I N E =======================================
 
 sub_100B8:
-		
 		jmp     sub_154F6(pc)
 
 	; End of function sub_100B8
@@ -424,7 +392,6 @@ p_WindowLayout_MemberStats:
 ; write from ascii but with FFFF value instead of 0, hmm ...
 
 sub_100C8:
-		
 		link    a6,#-2
 		move.w  #$FFFF,-2(a6)
 		bra.s   loc_100EA
@@ -457,12 +424,10 @@ WriteTilesFromASCII:
 		link    a6,#-2
 		clr.w   -2(a6)
 loc_100EA:
-		
 		movem.l d2/a2,-(sp)
 		movea.l a1,a2
 		subq.w  #1,d7
 loc_100F2:
-		
 		clr.w   d0
 		move.b  (a0)+,d0
 		beq.w   loc_10186
@@ -477,14 +442,11 @@ loc_100F2:
 		bpl.s   loc_10118
 		subi.w  #$40,d0 
 loc_10118:
-		
 		cmpi.b  #$60,d0 
 		blt.s   loc_10122       
 		addi.w  #$20,d0 
 loc_10122:
-		
-		tst.w   -2(a6)          
-						; test if we're using the orange font
+		tst.w   -2(a6)          ; test if we're using the orange font
 		beq.s   loc_10156
 		cmpi.b  #$30,d0 
 		bcc.s   loc_10140
@@ -496,7 +458,6 @@ loc_10122:
 		move.w  (sp)+,d1
 		bra.s   loc_10156
 loc_10140:
-		
 		tst.b   d0
 		bpl.s   loc_10152
 		subi.w  #$1A,d0
@@ -504,19 +465,15 @@ loc_10140:
 		bhi.s   loc_10150
 		subq.w  #1,d0
 loc_10150:
-		
 		bra.s   loc_10156
 loc_10152:
-		
 		addi.w  #$82,d0 
 loc_10156:
-		
 		move.w  d0,(a1)+
 		bra.s   loc_10182
 tbl_MainFontAlternateSymbols:
 		
-		dc.b $20                
-						; VDP tile idxes to substitute in for symbol ASCII values when using orange font
+		dc.b $20                ; VDP tile idxes to substitute in for symbol ASCII values when using orange font
 		dc.b $9B
 		dc.b $9C
 		dc.b $9D
@@ -533,26 +490,20 @@ tbl_MainFontAlternateSymbols:
 		dc.b $AE
 		dc.b $AF
 loc_1016A:
-		
 		lea     2(a2),a1
 		suba.w  d1,a1
 		movea.l a1,a2
 		bra.s   loc_10182
 loc_10174:
-		
-		eori.w  #$FFFF,-2(a6)   
-						; 0x5C: toggle to/from orange font
+		eori.w  #$FFFF,-2(a6)   ; 0x5C: toggle to/from orange font
 		bra.s   loc_10182
 loc_1017C:
-		
 		movea.l a2,a1
 		suba.w  d1,a1
 		movea.l a1,a2
 loc_10182:
-		
 		dbf     d7,loc_100F2
 loc_10186:
-		
 		movem.l (sp)+,d2/a2
 		unlk    a6
 		rts
@@ -565,14 +516,12 @@ loc_10186:
 ; draw box tiles into A1, dimensions in D0, including borders (xxyy)
 
 sub_1018E:
-		
 		movem.l d4-d5/a1,-(sp)
 		move.w  d0,d4
 		lsr.w   #8,d4
 		subq.l  #3,d4
 		move.w  #$C060,(a1)+
 loc_1019C:
-		
 		move.w  #$C061,(a1)+
 		dbf     d4,loc_1019C
 		move.w  #$C860,(a1)+
@@ -580,13 +529,11 @@ loc_1019C:
 		andi.w  #$FF,d5
 		subq.w  #3,d5
 loc_101B0:
-		
 		move.w  d0,d4
 		lsr.w   #8,d4
 		subq.w  #3,d4
 		move.w  #$C070,(a1)+
 loc_101BA:
-		
 		move.w  #$C020,(a1)+
 		dbf     d4,loc_101BA
 		move.w  #$C870,(a1)+
@@ -596,7 +543,6 @@ loc_101BA:
 		subq.w  #3,d4
 		move.w  #$D060,(a1)+
 loc_101D4:
-		
 		move.w  #$D061,(a1)+
 		dbf     d4,loc_101D4
 		move.w  #$D860,(a1)+
@@ -609,7 +555,6 @@ loc_101D4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_101E6:
-		
 		move.b  #8,(byte_FFDCBB).l
 		clr.b   (byte_FFDE7B).l
 		rts
@@ -627,7 +572,6 @@ sub_101E6:
 ;     D2 = menu idx to use (just affects icons and text)
 
 ExecuteMenu:
-		
 		addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 		link    a6,#-$C
 		move.w  d2,-4(a6)
@@ -640,10 +584,8 @@ ExecuteMenu:
 		move.w  #$C1D,d1
 		bra.s   loc_10220
 loc_1021C:
-		
 		move.w  #$2015,d1
 loc_10220:
-		
 		jsr     (CreateWindow).w
 		move.w  d0,-$C(a6)
 		bsr.w   LoadDiamenuWindowVDPTileData
@@ -659,7 +601,6 @@ loc_10220:
 		jsr     (LoadCompressedData).w
 		bra.s   loc_1026E
 loc_10250:
-		
 		lea     (FF8804_LOADING_SPACE).l,a1
 		rol.l   #8,d0
 		bsr.w   LoadMainMenuIcon
@@ -670,7 +611,6 @@ loc_10250:
 		rol.l   #8,d0
 		bsr.w   LoadMainMenuIcon
 loc_1026E:
-		
 		jsr     (WaitForVInt).w 
 		clr.w   d6
 		bsr.w   LoadVDPTileListForDiamenuIconTop
@@ -687,10 +627,8 @@ loc_1026E:
 		movea.l d0,a0
 		jsr     (a0)
 loc_102A2:
-		
 		moveq   #$1E,d6
 loc_102A4:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_102B6
 		moveq   #1,d1
@@ -698,7 +636,6 @@ loc_102A4:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_10328
 loc_102B6:
-		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_102C8
 		moveq   #2,d1
@@ -706,7 +643,6 @@ loc_102B6:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_10328
 loc_102C8:
-		
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_102DA
 		clr.w   d1
@@ -714,7 +650,6 @@ loc_102C8:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_10328
 loc_102DA:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_102EC
 		moveq   #3,d1
@@ -723,35 +658,28 @@ loc_102DA:
 		bra.w   loc_10328
 ; no dpad button was pressed
 loc_102EC:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10300
-		moveq   #$FFFFFFFF,d1   
-						; B pressed, so cancel menu
+		moveq   #$FFFFFFFF,d1   ; B pressed, so cancel menu
 		moveq   #$FFFFFFFF,d0
 		move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 		bra.w   loc_10382
 loc_10300:
-		
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10314
-		clr.w   d1              
-						; C pressed, so confirm menu
+		clr.w   d1              ; C pressed, so confirm menu
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_10382
 loc_10314:
-		
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10358
-		clr.w   d1              
-						; A pressed, so confirm menu
+		clr.w   d1              ; A pressed, so confirm menu
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_10382
 ; dpad button was pressed
 loc_10328:
-		
 		move.w  d1,-(sp)
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -768,17 +696,14 @@ loc_10328:
 		movea.l d0,a0
 		jsr     (a0)
 loc_10356:
-		
 		moveq   #$1D,d6
 loc_10358:
-		
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bsr.w   sub_103FE
 		subq.w  #1,d6
 		bne.s   loc_10366
 		moveq   #$1E,d6
 loc_10366:
-		
 		movem.l d6-d7,-(sp)
 		move.w  #$100,d6
 		jsr     (UpdateRandomSeed).w
@@ -787,7 +712,6 @@ loc_10366:
 		jsr     (WaitForVInt).w 
 		bra.w   loc_102A4
 loc_10382:
-		
 		movem.w d0-d1,-(sp)
 		move.w  -$C(a6),d0
 		tst.w   d1
@@ -795,10 +719,8 @@ loc_10382:
 		move.w  #$C1D,d1
 		bra.s   loc_10398
 loc_10394:
-		
 		move.w  #$2015,d1
 loc_10398:
-		
 		move.w  #4,d2
 		jsr     (MoveWindowWithSFX).w
 		jsr     (WaitForVint_andFFA900Clear).w
@@ -845,15 +767,13 @@ LoadDiamenuWindowVDPTileData:
 ; =============== S U B R O U T I N E =======================================
 
 sub_103FE:
-		
 		add.w   d0,d0
 		move.w  rjt_10408(pc,d0.w),d0
 		jmp     rjt_10408(pc,d0.w)
 
 	; End of function sub_103FE
 
-rjt_10408:
-		dc.w LoadVDPTileListForDiamenuIconTop-rjt_10408
+rjt_10408:      dc.w LoadVDPTileListForDiamenuIconTop-rjt_10408
 		dc.w LoadVDPTileListForDiamenuIconLeft-rjt_10408
 		dc.w LoadVDPTileListForDiamenuIconRight-rjt_10408
 		dc.w LoadVDPTileListForDiamenuIconBottom-rjt_10408
@@ -867,7 +787,6 @@ LoadVDPTileListForDiamenuIconTop:
 		blt.s   loc_10420
 		adda.w  #$120,a0
 loc_10420:
-		
 		lea     ($B800).l,a1
 		move.w  #$90,d0 
 		moveq   #2,d1
@@ -885,7 +804,6 @@ LoadVDPTileListForDiamenuIconLeft:
 		blt.s   loc_10440
 		adda.w  #$120,a0
 loc_10440:
-		
 		lea     (byte_FF9104).l,a1
 		bsr.w   sub_10484
 		lea     ($B920).l,a1
@@ -905,7 +823,6 @@ LoadVDPTileListForDiamenuIconRight:
 		blt.s   loc_1046A
 		adda.w  #$120,a0
 loc_1046A:
-		
 		lea     (byte_FF9284).l,a1
 		bsr.w   sub_104E6
 		lea     ($BAA0).l,a1
@@ -919,13 +836,11 @@ loc_1046A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10484:
-		
 		move.l  a1,-(sp)
 		moveq   #3,d7
 		move.l  a0,-(sp)
 		lea     MenuHBarTiles(pc), a0
 loc_1048E:
-		
 		move.l  $20(a0),$40(a1)
 		move.l  $10(a0),$20(a1)
 		move.l  (a0)+,(a1)+
@@ -933,7 +848,6 @@ loc_1048E:
 		movea.l (sp)+,a0
 		moveq   #8,d7
 loc_104A4:
-		
 		move.l  (a0)+,(a1)
 		move.l  (a0)+,4(a1)
 		move.l  (a0)+,8(a1)
@@ -947,7 +861,6 @@ loc_104A4:
 		moveq   #3,d7
 		lea     byte_11336(pc), a0
 loc_104D0:
-		
 		move.l  $20(a0),$40(a1)
 		move.l  $10(a0),$20(a1)
 		move.l  (a0)+,(a1)+
@@ -961,13 +874,11 @@ loc_104D0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_104E6:
-		
 		move.l  a1,-(sp)
 		moveq   #3,d7
 		move.l  a0,-(sp)
 		lea     byte_11366(pc), a0
 loc_104F0:
-		
 		move.l  $20(a0),$40(a1)
 		move.l  $10(a0),$20(a1)
 		move.l  (a0)+,(a1)+
@@ -975,7 +886,6 @@ loc_104F0:
 		movea.l (sp)+,a0
 		moveq   #8,d7
 loc_10506:
-		
 		move.l  (a0)+,(a1)
 		move.l  (a0)+,4(a1)
 		move.l  (a0)+,8(a1)
@@ -989,7 +899,6 @@ loc_10506:
 		moveq   #3,d7
 		lea     byte_11396(pc), a0
 loc_10532:
-		
 		move.l  $20(a0),$40(a1)
 		move.l  $10(a0),$20(a1)
 		move.l  (a0)+,(a1)+
@@ -1009,7 +918,6 @@ LoadVDPTileListForDiamenuIconBottom:
 		blt.s   loc_10558
 		adda.w  #$120,a0
 loc_10558:
-		
 		lea     ($BC20).l,a1
 		move.w  #$90,d0 
 		moveq   #2,d1
@@ -1029,7 +937,6 @@ LoadMainMenuIcon:
 		adda.w  d0,a0
 		move.w  #$8F,d0 
 loc_1057C:
-		
 		move.l  (a0)+,(a1)+
 		dbf     d0,loc_1057C
 		move.l  (sp)+,d0
@@ -1041,7 +948,6 @@ loc_1057C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10586:
-		
 		addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 		move.w  d6,-(sp)
 		link    a6,#-$C
@@ -1055,10 +961,8 @@ sub_10586:
 		move.w  #$C1D,d1
 		bra.s   loc_105B2
 loc_105AE:
-		
 		move.w  #$2015,d1
 loc_105B2:
-		
 		jsr     (CreateWindow).w
 		move.w  d0,-$C(a6)
 		bsr.w   sub_10748
@@ -1086,10 +990,8 @@ loc_105B2:
 		movea.l d0,a0
 		jsr     (a0)
 loc_10614:
-		
 		moveq   #$1E,d6
 loc_10616:
-		
 		btst    #2,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10630
 		moveq   #1,d1
@@ -1099,7 +1001,6 @@ loc_10616:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_106B4
 loc_10630:
-		
 		btst    #3,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1064A
 		moveq   #2,d1
@@ -1109,7 +1010,6 @@ loc_10630:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_106B4
 loc_1064A:
-		
 		btst    #0,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1065C
 		clr.w   d1
@@ -1117,7 +1017,6 @@ loc_1064A:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_106B4
 loc_1065C:
-		
 		btst    #1,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10676
 		moveq   #3,d1
@@ -1127,7 +1026,6 @@ loc_1065C:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_106B4
 loc_10676:
-		
 		btst    #4,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1068C
 		moveq   #$FFFFFFFF,d6
@@ -1135,7 +1033,6 @@ loc_10676:
 		move.b  #$FF,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 		bra.w   loc_10710
 loc_1068C:
-		
 		btst    #5,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_106A0
 		clr.w   d6
@@ -1143,7 +1040,6 @@ loc_1068C:
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_106FE
 loc_106A0:
-		
 		btst    #6,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_106E8
 		clr.w   d6
@@ -1151,7 +1047,6 @@ loc_106A0:
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_106FE
 loc_106B4:
-		
 		move.w  d1,-(sp)
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -1165,25 +1060,21 @@ loc_106B4:
 		movea.l d0,a0
 		jsr     (a0)
 loc_106D6:
-		
 		move.w  -$C(a6),d0
 		move.w  #$8080,d1
 		jsr     (SetWindowDestination).w
 		move.l  -8(a6),d0
 		moveq   #$1D,d6
 loc_106E8:
-		
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bsr.w   sub_107EA       
 		subq.w  #1,d6
 		bne.s   loc_106F6
 		moveq   #$1E,d6
 loc_106F6:
-		
 		jsr     (WaitForVInt).w 
 		bra.w   loc_10616
 loc_106FE:
-		
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		move.w  d0,d1
@@ -1191,7 +1082,6 @@ loc_106FE:
 		lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
 		move.w  (a0,d0.w),d0
 loc_10710:
-		
 		movem.w d0-d1,-(sp)
 		move.w  -$C(a6),d0
 		tst.w   d6
@@ -1199,10 +1089,8 @@ loc_10710:
 		move.w  #$C1D,d1
 		bra.s   loc_10726
 loc_10722:
-		
 		move.w  #$2015,d1
 loc_10726:
-		
 		move.w  #4,d2
 		jsr     (MoveWindowWithSFX).w
 		jsr     (WaitForVint_andFFA900Clear).w
@@ -1220,7 +1108,6 @@ loc_10726:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10748:
-		
 		lea     UnidentifiedLayout02(pc), a0
 		move.w  -$C(a6),d0
 		clr.w   d1
@@ -1245,7 +1132,6 @@ sub_10748:
 		bsr.w   WriteTilesFromASCII
 		bra.s   return_107D4
 loc_10798:
-		
 		move.w  d1,((word_FFB18C-$1000000)).w
 		move.w  d1,-(sp)
 		jsr     j_FindItemName
@@ -1265,15 +1151,12 @@ loc_10798:
 		moveq   #$A,d7
 		bsr.w   WriteTilesFromASCII
 return_107D4:
-		
 		rts
 
 	; End of function sub_10748
 
-aEquipped:
-		dc.b '\Equipped',0
-aNothing:
-		dc.b '\Nothing',0
+aEquipped:      dc.b '\Equipped',0
+aNothing:       dc.b '\Nothing',0
 		dc.b $FF
 
 ; =============== S U B R O U T I N E =======================================
@@ -1281,7 +1164,6 @@ aNothing:
 ; related to menu choice
 
 sub_107EA:
-		
 		andi.w  #3,d0
 		add.w   d0,d0
 		move.w  rjt_107F8(pc,d0.w),d0
@@ -1289,8 +1171,7 @@ sub_107EA:
 
 	; End of function sub_107EA
 
-rjt_107F8:
-		dc.w sub_10800-rjt_107F8
+rjt_107F8:      dc.w sub_10800-rjt_107F8
 		dc.w sub_10820-rjt_107F8
 		dc.w sub_1084A-rjt_107F8
 		dc.w sub_10920-rjt_107F8
@@ -1298,13 +1179,11 @@ rjt_107F8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10800:
-		
 		lea     (FF8804_LOADING_SPACE).l,a0
 		cmpi.w  #$F,d6
 		blt.s   loc_10810
 		adda.w  #$C0,a0 
 loc_10810:
-		
 		lea     ($B800).l,a1
 		move.w  #$60,d0 
 		moveq   #2,d1
@@ -1316,13 +1195,11 @@ loc_10810:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10820:
-		
 		lea     (byte_FF8984).l,a0
 		cmpi.w  #$F,d6
 		blt.s   loc_10830
 		adda.w  #$C0,a0 
 loc_10830:
-		
 		lea     (byte_FF8E04).l,a1
 		bsr.w   sub_10874
 		lea     ($B8C0).l,a1
@@ -1336,13 +1213,11 @@ loc_10830:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1084A:
-		
 		lea     (byte_FF8B04).l,a0
 		cmpi.w  #$F,d6
 		blt.s   loc_1085A
 		adda.w  #$C0,a0 
 loc_1085A:
-		
 		lea     (byte_FF8F04).l,a1
 		bsr.w   sub_108CA
 		lea     ($BA80).l,a1
@@ -1356,20 +1231,17 @@ loc_1085A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10874:
-		
 		move.l  a1,-(sp)
 		move.l  a0,-(sp)
 		lea     MenuHBarTiles(pc), a0
 		moveq   #3,d7
 loc_1087E:
-		
 		move.l  $20(a0),$20(a1)
 		move.l  (a0)+,(a1)+
 		dbf     d7,loc_1087E
 		movea.l (sp)+,a0
 		moveq   #5,d7
 loc_1088E:
-		
 		move.l  (a0)+,(a1)
 		move.l  (a0)+,4(a1)
 		move.l  (a0)+,8(a1)
@@ -1383,7 +1255,6 @@ loc_1088E:
 		lea     byte_11336(pc), a0
 		moveq   #3,d7
 loc_108BA:
-		
 		move.l  $20(a0),$20(a1)
 		move.l  (a0)+,(a1)+
 		dbf     d7,loc_108BA
@@ -1396,20 +1267,17 @@ loc_108BA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_108CA:
-		
 		move.l  a1,-(sp)
 		move.l  a0,-(sp)
 		lea     byte_11366(pc), a0
 		moveq   #3,d7
 loc_108D4:
-		
 		move.l  $20(a0),$20(a1)
 		move.l  (a0)+,(a1)+
 		dbf     d7,loc_108D4
 		movea.l (sp)+,a0
 		moveq   #5,d7
 loc_108E4:
-		
 		move.l  (a0)+,(a1)
 		move.l  (a0)+,4(a1)
 		move.l  (a0)+,8(a1)
@@ -1423,7 +1291,6 @@ loc_108E4:
 		lea     byte_11396(pc), a0
 		moveq   #3,d7
 loc_10910:
-		
 		move.l  $20(a0),$20(a1)
 		move.l  (a0)+,(a1)+
 		dbf     d7,loc_10910
@@ -1436,13 +1303,11 @@ loc_10910:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10920:
-		
 		lea     (byte_FF8C84).l,a0
 		cmpi.w  #$F,d6
 		blt.s   loc_10930
 		adda.w  #$C0,a0 
 loc_10930:
-		
 		lea     ($B9C0).l,a1
 		move.w  #$60,d0 
 		moveq   #2,d1
@@ -1466,10 +1331,8 @@ LoadIHighlightableSpellIcon:
 		move.w  #$7F,d0 
 		bra.s   loc_10954
 loc_10950:
-		
 		addi.w  #$82,d0 
 loc_10954:
-		
 		bra.w   LoadHighlightableIcon
 
 	; End of function LoadIHighlightableSpellIcon
@@ -1493,12 +1356,10 @@ LoadHighlightableIcon:
 		adda.w  #$C0,a1 
 		mulu.w  #$C0,d0 
 		movea.l (p_Icons).l,a0
-		adda.w  d0,a0           
-						; icon offset
+		adda.w  d0,a0           ; icon offset
 		move.w  #$2F,d1 
 		lea     IconHighlightTiles(pc), a2
 loc_1097A:
-		
 		move.l  (a0)+,d0
 		move.l  d0,-$C0(a1)
 		and.l   (a2)+,d0
@@ -1514,7 +1375,6 @@ IconHighlightTiles:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10A4A:
-		
 		addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 		link    a6,#-$C
 		move.w  d2,-4(a6)
@@ -1527,10 +1387,8 @@ sub_10A4A:
 		move.w  #$C1D,d1
 		bra.s   loc_10A74
 loc_10A70:
-		
 		move.w  #$2015,d1
 loc_10A74:
-		
 		jsr     (CreateWindow).w
 		move.w  d0,-$C(a6)
 		bsr.w   sub_10C22
@@ -1554,16 +1412,13 @@ loc_10A74:
 		jsr     (MoveWindowWithSFX).w
 		jsr     (WaitForVint_andFFA900Clear).w
 loc_10ACC:
-		
 		move.l  -8(a6),d0
 		beq.s   loc_10AD6
 		movea.l d0,a0
 		jsr     (a0)
 loc_10AD6:
-		
 		moveq   #$1E,d6
 loc_10AD8:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10AF2
 		moveq   #1,d1
@@ -1573,7 +1428,6 @@ loc_10AD8:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_10B76
 loc_10AF2:
-		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10B0C
 		moveq   #2,d1
@@ -1583,7 +1437,6 @@ loc_10AF2:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_10B76
 loc_10B0C:
-		
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10B1E
 		clr.w   d1
@@ -1591,7 +1444,6 @@ loc_10B0C:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_10B76
 loc_10B1E:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10B38
 		moveq   #3,d1
@@ -1601,7 +1453,6 @@ loc_10B1E:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_10B76
 loc_10B38:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10B4E
 		moveq   #$FFFFFFFF,d1
@@ -1609,7 +1460,6 @@ loc_10B38:
 		move.b  #$FF,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 		bra.w   loc_10BEC
 loc_10B4E:
-		
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10B62
 		clr.w   d1
@@ -1617,7 +1467,6 @@ loc_10B4E:
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_10BBC
 loc_10B62:
-		
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10BA6
 		clr.w   d1
@@ -1625,7 +1474,6 @@ loc_10B62:
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_10BBC
 loc_10B76:
-		
 		move.w  d1,-(sp)
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -1642,21 +1490,17 @@ loc_10B76:
 		movea.l d0,a0
 		jsr     (a0)
 loc_10BA4:
-		
 		moveq   #$1D,d6
 loc_10BA6:
-		
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bsr.w   sub_10CB0       
 		subq.w  #1,d6
 		bne.s   loc_10BB4
 		moveq   #$1E,d6
 loc_10BB4:
-		
 		jsr     (WaitForVInt).w 
 		bra.w   loc_10AD8
 loc_10BBC:
-		
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		add.w   d0,d0
@@ -1671,7 +1515,6 @@ loc_10BBC:
 		jsr     (SetWindowDestination).w
 		bra.w   loc_10ACC
 loc_10BEC:
-		
 		movem.w d0-d1,-(sp)
 		move.w  -$C(a6),d0
 		tst.w   d1
@@ -1679,10 +1522,8 @@ loc_10BEC:
 		move.w  #$C1D,d1
 		bra.s   loc_10C02
 loc_10BFE:
-		
 		move.w  #$2015,d1
 loc_10C02:
-		
 		move.w  #4,d2
 		jsr     (MoveWindowWithSFX).w
 		jsr     (WaitForVint_andFFA900Clear).w
@@ -1699,7 +1540,6 @@ loc_10C02:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10C22:
-		
 		lea     UnidentifiedLayout01(pc), a0
 		move.w  -$C(a6),d0
 		clr.w   d1
@@ -1752,7 +1592,6 @@ sub_10C22:
 ; related to menu choice
 
 sub_10CB0:
-		
 		andi.w  #3,d0
 		add.w   d0,d0
 		move.w  rjt_10CBE(pc,d0.w),d0
@@ -1760,8 +1599,7 @@ sub_10CB0:
 
 	; End of function sub_10CB0
 
-rjt_10CBE:
-		dc.w (sub_10800-rjt_10CBE) & $FFFF
+rjt_10CBE:      dc.w (sub_10800-rjt_10CBE) & $FFFF
 		dc.w (sub_10820-rjt_10CBE) & $FFFF
 		dc.w (sub_1084A-rjt_10CBE) & $FFFF
 		dc.w (sub_10920-rjt_10CBE) & $FFFF
@@ -1769,7 +1607,6 @@ rjt_10CBE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10CC6:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_VALIDATION
 		move.w  d0,-(sp)
@@ -1786,7 +1623,6 @@ sub_10CC6:
 		andi.w  #$3F,d0 
 		jsr     (WaitForVInt).w 
 loc_10CF4:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10D0A
 		subq.w  #1,d5
@@ -1794,10 +1630,8 @@ loc_10CF4:
 		bne.s   loc_10D06
 		move.w  d4,d5
 loc_10D06:
-		
 		bra.w   sub_10D56
 loc_10D0A:
-		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10D1E
 		addq.w  #1,d5
@@ -1805,10 +1639,8 @@ loc_10D0A:
 		ble.s   loc_10D1A
 		clr.w   d5
 loc_10D1A:
-		
 		bra.w   sub_10D56
 loc_10D1E:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10D32
 		moveq   #$FFFFFFFF,d0
@@ -1817,16 +1649,13 @@ loc_10D1E:
 		dc.w SFX_VALIDATION
 		rts
 loc_10D32:
-		
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10D3E
 		bra.w   loc_10D48
 loc_10D3E:
-		
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.w   loc_10DC0
 loc_10D48:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_VALIDATION
 		lsl.w   #6,d5
@@ -1840,7 +1669,6 @@ loc_10D48:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10D56:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_MENU_SELECTION
 		movem.w d0-d5,-(sp)
@@ -1871,27 +1699,23 @@ sub_10D56:
 		movea.l d0,a0
 		jsr     (a0)
 loc_10DAE:
-		
 		move.w  -$C(a6),d0
 		move.w  #$8080,d1
 		jsr     (SetWindowDestination).w
 		movem.w (sp)+,d0-d5
 		moveq   #$13,d6
 loc_10DC0:
-		
 		bsr.w   sub_10DE2
 		jsr     (WaitForVInt).w 
 		subq.w  #1,d6
 		bne.s   loc_10DCE
 		moveq   #$14,d6
 loc_10DCE:
-		
 		bra.w   loc_10CF4
 
 	; End of function sub_10D56
 
-dword_10DD2:
-		dc.l $13C0D09
+dword_10DD2:    dc.l $13C0D09
 		dc.l $C5E00124
 		dc.l $13C0D10
 		dc.l $CDE0013C
@@ -1899,7 +1723,6 @@ dword_10DD2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10DE2:
-		
 		lea     (byte_FFDCC0).l,a1
 		lea     dword_10DD2(pc), a0
 		move.l  (a0)+,(a1)+
@@ -1911,13 +1734,11 @@ sub_10DE2:
 		move.w  #1,-$10(a1)
 		move.w  #1,-8(a1)
 loc_10E06:
-		
 		tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 		beq.s   loc_10E18
 		move.w  #1,-$10(a1)
 		move.w  #1,-8(a1)
 loc_10E18:
-		
 		bra.w   sub_101E6
 
 	; End of function sub_10DE2
@@ -1946,8 +1767,7 @@ pt_SpellLevelBarTiles:
 		dc.l byte_11144
 		dc.l byte_1112C
 		dc.l byte_11108
-byte_110E4:
-		dc.b $C0
+byte_110E4:     dc.b $C0
 		dc.b $F0
 		dc.b $C0
 		dc.b $F1
@@ -1959,8 +1779,7 @@ byte_110E4:
 		dc.b $20
 		dc.b $C0
 		dc.b $20
-byte_110F0:
-		dc.b $C0
+byte_110F0:     dc.b $C0
 		dc.b $F0
 		dc.b $C0
 		dc.b $F2
@@ -1972,8 +1791,7 @@ byte_110F0:
 		dc.b $20
 		dc.b $C0
 		dc.b $20
-byte_110FC:
-		dc.b $C0
+byte_110FC:     dc.b $C0
 		dc.b $F0
 		dc.b $C0
 		dc.b $F2
@@ -1985,8 +1803,7 @@ byte_110FC:
 		dc.b $F1
 		dc.b $C0
 		dc.b $20
-byte_11108:
-		dc.b $C0
+byte_11108:     dc.b $C0
 		dc.b $F0
 		dc.b $C0
 		dc.b $F2
@@ -1998,8 +1815,7 @@ byte_11108:
 		dc.b $F2
 		dc.b $C8
 		dc.b $F0
-byte_11114:
-		dc.b $C0
+byte_11114:     dc.b $C0
 		dc.b $F0
 		dc.b $C0
 		dc.b $F5
@@ -2011,8 +1827,7 @@ byte_11114:
 		dc.b $20
 		dc.b $C0
 		dc.b $20
-byte_11120:
-		dc.b $C0
+byte_11120:     dc.b $C0
 		dc.b $F0
 		dc.b $C0
 		dc.b $F2
@@ -2024,8 +1839,7 @@ byte_11120:
 		dc.b $F7
 		dc.b $C0
 		dc.b $20
-byte_1112C:
-		dc.b $C0
+byte_1112C:     dc.b $C0
 		dc.b $F0
 		dc.b $C0
 		dc.b $F2
@@ -2037,8 +1851,7 @@ byte_1112C:
 		dc.b $F5
 		dc.b $C0
 		dc.b $F4
-byte_11138:
-		dc.b $C0
+byte_11138:     dc.b $C0
 		dc.b $F0
 		dc.b $C0
 		dc.b $F5
@@ -2050,8 +1863,7 @@ byte_11138:
 		dc.b $F7
 		dc.b $C0
 		dc.b $20
-byte_11144:
-		dc.b $C0
+byte_11144:     dc.b $C0
 		dc.b $F0
 		dc.b $C0
 		dc.b $F2
@@ -2063,8 +1875,7 @@ byte_11144:
 		dc.b $F6
 		dc.b $C0
 		dc.b $F4
-byte_11150:
-		dc.b $C0
+byte_11150:     dc.b $C0
 		dc.b $F0
 		dc.b $C0
 		dc.b $F5
@@ -2076,9 +1887,7 @@ byte_11150:
 		dc.b $F6
 		dc.b $C0
 		dc.b $F4
-pt_MenuTiles:
-		dc.b $85                
-						; starting with references to uncompressed main menu tiles
+pt_MenuTiles:   dc.b $85                ; starting with references to uncompressed main menu tiles
 		dc.b 1
 		dc.b 2
 		dc.b 4
@@ -2096,8 +1905,7 @@ pt_MenuTiles:
 		dc.l p_MenuTiles_Shop
 		dc.l p_MenuTiles_Caravan
 		dc.l p_MenuTiles_Depot
-pt_MenuOptions:
-		dc.l pt_FieldMenu_Names
+pt_MenuOptions: dc.l pt_FieldMenu_Names
 		dc.l pt_BattleMenu_Names
 		dc.l pt_BattleMenuOverItem_Names
 		dc.l pt_ItemMenu_Names
@@ -2111,124 +1919,87 @@ pt_FieldMenu_Names:
 		dc.l aMagic             
 		dc.l aItem              
 		dc.l aSearch            
-aMember:
-		dc.b 'MEMBER',0
-aMagic:
-		dc.b 'MAGIC',0
-aItem:
-		dc.b 'ITEM',0
-aSearch:
-		dc.b 'SEARCH',0
+aMember:        dc.b 'MEMBER',0
+aMagic:         dc.b 'MAGIC',0
+aItem:          dc.b 'ITEM',0
+aSearch:        dc.b 'SEARCH',0
 		dc.b $FF
 pt_BattleMenu_Names:
 		dc.l aAttack_0          
 		dc.l aMagic_0           
 		dc.l aItem_0            
 		dc.l aStay              
-aAttack_0:
-		dc.b 'ATTACK',0
-aMagic_0:
-		dc.b 'MAGIC',0
-aItem_0:
-		dc.b 'ITEM',0
-aStay:
-		dc.b 'STAY',0
+aAttack_0:      dc.b 'ATTACK',0
+aMagic_0:       dc.b 'MAGIC',0
+aItem_0:        dc.b 'ITEM',0
+aStay:          dc.b 'STAY',0
 		dc.b $FF
 pt_BattleMenuOverItem_Names:
 		dc.l aAttack_1          
 		dc.l aMagic_1           
 		dc.l aItem_1            
 		dc.l aSearch_0          
-aAttack_1:
-		dc.b 'ATTACK',0
-aMagic_1:
-		dc.b 'MAGIC',0
-aItem_1:
-		dc.b 'ITEM',0
-aSearch_0:
-		dc.b 'SEARCH',0
+aAttack_1:      dc.b 'ATTACK',0
+aMagic_1:       dc.b 'MAGIC',0
+aItem_1:        dc.b 'ITEM',0
+aSearch_0:      dc.b 'SEARCH',0
 		dc.b $FF
 pt_ItemMenu_Names:
 		dc.l aUse               
 		dc.l aGive              
 		dc.l aEquip             
 		dc.l aDrop              
-aUse:
-		dc.b 'USE',0
-aGive:
-		dc.b 'GIVE',0
-aEquip:
-		dc.b 'EQUIP',0
-aDrop:
-		dc.b 'DROP',0
+aUse:           dc.b 'USE',0
+aGive:          dc.b 'GIVE',0
+aEquip:         dc.b 'EQUIP',0
+aDrop:          dc.b 'DROP',0
 pt_BattlefieldMenu_Names:
 		dc.l aMember_0          
 		dc.l aMap               
 		dc.l aSpeed_0           
 		dc.l aQuit              
-aMember_0:
-		dc.b 'MEMBER',0
-aMap:
-		dc.b 'MAP',0
-aSpeed_0:
-		dc.b 'SPEED',0
-aQuit:
-		dc.b 'QUIT',0
+aMember_0:      dc.b 'MEMBER',0
+aMap:           dc.b 'MAP',0
+aSpeed_0:       dc.b 'SPEED',0
+aQuit:          dc.b 'QUIT',0
 pt_ChurchMenu_Names:
 		dc.l aRaise             
 		dc.l aCure              
 		dc.l aPromo_            
 		dc.l aSave              
-aRaise:
-		dc.b 'RAISE',0
-aCure:
-		dc.b 'CURE',0
-aPromo_:
-		dc.b 'PROMO.',0
-aSave:
-		dc.b 'SAVE',0
+aRaise:         dc.b 'RAISE',0
+aCure:          dc.b 'CURE',0
+aPromo_:        dc.b 'PROMO.',0
+aSave:          dc.b 'SAVE',0
 		dc.b $FF
 pt_ShopMenu_Names:
 		dc.l aBuy               
 		dc.l aSell              
 		dc.l aRepair            
 		dc.l aDeals             
-aBuy:
-		dc.b 'BUY',0
-aSell:
-		dc.b 'SELL',0
-aRepair:
-		dc.b 'REPAIR',0
-aDeals:
-		dc.b 'DEALS',0
+aBuy:           dc.b 'BUY',0
+aSell:          dc.b 'SELL',0
+aRepair:        dc.b 'REPAIR',0
+aDeals:         dc.b 'DEALS',0
 pt_CaravanMenu_Names:
 		dc.l aJoin              
 		dc.l aDepot             
 		dc.l aItem_2            
 		dc.l aPurge             
-aJoin:
-		dc.b 'JOIN',0
-aDepot:
-		dc.b 'DEPOT',0
-aItem_2:
-		dc.b 'ITEM',0
-aPurge:
-		dc.b 'PURGE',0
+aJoin:          dc.b 'JOIN',0
+aDepot:         dc.b 'DEPOT',0
+aItem_2:        dc.b 'ITEM',0
+aPurge:         dc.b 'PURGE',0
 pt_DepotMenu_Names:
 		dc.l aLook              
 		dc.l aDepos_            
 		dc.l aDerive            
 		dc.l aDrop_0            
-aLook:
-		dc.b 'LOOK',0
-aDepos_:
-		dc.b 'DEPOS.',0
-aDerive:
-		dc.b 'DERIVE',0
-aDrop_0:
-		dc.b 'DROP',0
-MenuHBarTiles:
-		dc.b 2
+aLook:          dc.b 'LOOK',0
+aDepos_:        dc.b 'DEPOS.',0
+aDerive:        dc.b 'DERIVE',0
+aDrop_0:        dc.b 'DROP',0
+MenuHBarTiles:  dc.b 2
 		dc.b $22
 		dc.b $22
 		dc.b $22
@@ -2276,8 +2047,7 @@ MenuHBarTiles:
 		dc.b $22
 		dc.b $22
 		dc.b $22
-byte_11336:
-		dc.b 2
+byte_11336:     dc.b 2
 		dc.b $22
 		dc.b $22
 		dc.b $22
@@ -2325,8 +2095,7 @@ byte_11336:
 		dc.b $22
 		dc.b $22
 		dc.b $22
-byte_11366:
-		dc.b $22
+byte_11366:     dc.b $22
 		dc.b $22
 		dc.b $22
 		dc.b $22
@@ -2374,8 +2143,7 @@ byte_11366:
 		dc.b $22
 		dc.b $22
 		dc.b $20
-byte_11396:
-		dc.b $22
+byte_11396:     dc.b $22
 		dc.b $22
 		dc.b $22
 		dc.b $22
@@ -2427,7 +2195,6 @@ byte_11396:
 ; =============== S U B R O U T I N E =======================================
 
 sub_113C6:
-		
 		movem.l d0-a2,-(sp)
 		move.w  #$A09,d0
 		move.w  #$F612,d1
@@ -2451,7 +2218,6 @@ sub_113C6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_11404:
-		
 		movem.l d0-a2,-(sp)
 		bsr.w   DrawBattleEquipWindowStats
 		move.w  ((byte_FFB18E-$1000000)).w,d0
@@ -2466,7 +2232,6 @@ sub_11404:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1141E:
-		
 		movem.l d0-a2,-(sp)
 		move.w  ((byte_FFB18E-$1000000)).w,d0
 		move.w  #$F612,d1
@@ -2540,7 +2305,6 @@ CreateFighterMiniStatusWindow:
 		addq.l  #2,a2
 		addi.w  #$15,d1
 loc_11594:
-		
 		jsr     (CreateWindow).w
 		move.w  d0,(a2)
 		clr.w   d1
@@ -2558,7 +2322,6 @@ loc_11594:
 		beq.s   loc_115C4
 		addi.w  #$15,d1
 loc_115C4:
-		
 		move.w  (a2),d0
 		move.w  #4,d2
 		jsr     (MoveWindowWithSFX).w
@@ -2581,14 +2344,12 @@ HideFighterMiniStatusWindow:
 		beq.s   loc_115F0
 		addq.l  #2,a2
 loc_115F0:
-		
 		move.w  (a2),d0
 		move.w  #$2001,d1
 		tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
 		beq.s   loc_11600
 		addi.w  #$15,d1
 loc_11600:
-		
 		moveq   #4,d2
 		jsr     (MoveWindowWithSFX).w
 		jsr     (WaitForVint_andFFA900Clear).w
@@ -2604,7 +2365,6 @@ loc_11600:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1161A:
-		
 		jsr     (InitWindowProperties).w
 		move.w  #$1605,d0
 		move.w  #$2001,d1
@@ -2620,7 +2380,6 @@ sub_1161A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_11638:
-		
 		cmpi.b  #$FF,d0
 		beq.w   return_11714
 		movem.l d0-a1,-(sp)
@@ -2640,10 +2399,8 @@ sub_11638:
 		lsl.w   #8,d1
 		bra.s   loc_11674
 loc_11670:
-		
 		move.w  #$100,d1
 loc_11674:
-		
 		ori.w   #1,d1
 		clr.w   d0
 		moveq   #1,d2
@@ -2654,7 +2411,6 @@ loc_11674:
 		movem.l (sp)+,d0-a1
 		rts
 loc_11694:
-		
 		cmpi.b  #$FF,d0
 		beq.w   return_11714
 		movem.l d0-a1,-(sp)
@@ -2666,7 +2422,6 @@ loc_11694:
 		movem.l (sp)+,d0-a1
 		rts
 loc_116B8:
-		
 		cmpi.b  #$FF,d0
 		beq.w   return_11714
 		movem.l d0-a1,-(sp)
@@ -2686,10 +2441,8 @@ loc_116B8:
 		lsl.w   #8,d1
 		bra.s   loc_116F6
 loc_116F2:
-		
 		move.w  #$100,d1
 loc_116F6:
-		
 		ori.w   #$14,d1
 		moveq   #1,d0
 		moveq   #1,d2
@@ -2699,7 +2452,6 @@ loc_116F6:
 		jsr     (WaitForVint_andFFA900Clear).w
 		movem.l (sp)+,d0-a1
 return_11714:
-		
 		rts
 
 	; End of function sub_11638
@@ -2708,7 +2460,6 @@ return_11714:
 ; =============== S U B R O U T I N E =======================================
 
 sub_11716:
-		
 		cmpi.b  #$FF,d0
 		beq.s   return_11714
 		movem.l d0-a1,-(sp)
@@ -2732,17 +2483,14 @@ DrawColoredStatBar:
 		beq.s   loc_11748
 		addi.w  #$A,d2
 loc_11748:
-		
 		ori.w   #VDPTILE_PALETTE3_MASK,d2
 		cmp.w   d0,d1
 		bge.s   loc_11752
 		move.w  d0,d1
 loc_11752:
-		
 		move.l  a0,-(sp)
 		moveq   #$6F,d7 
 loc_11756:
-		
 		clr.l   (a0)+
 		dbf     d7,loc_11756
 		movea.l (sp)+,a0
@@ -2762,29 +2510,24 @@ loc_11756:
 		moveq   #$63,d3 
 		bra.s   loc_1178C
 loc_11784:
-		
 		move.w  d1,d3
 		subq.w  #1,d3
 		bmi.w   loc_117A0
 loc_1178C:
-		
 		cmp.w   d0,d6
 		blt.s   loc_11796
 		subq.w  #1,d4
 		move.w  #$3E7,d0
 loc_11796:
-		
 		bsr.w   sub_11862       
 		addq.w  #1,d6
 		dbf     d3,loc_1178C
 loc_117A0:
-		
 		clr.w   d4
 		bsr.w   sub_11862       
 		moveq   #1,d4
 		moveq   #$F,d3
 loc_117AA:
-		
 		bsr.w   sub_11862       
 		dbf     d3,loc_117AA
 		movem.l d2/a0,-(sp)
@@ -2792,7 +2535,6 @@ loc_117AA:
 		move.l  8(a0),d6
 		move.w  d2,(a1)+
 loc_117BE:
-		
 		lea     $20(a0),a0
 		move.l  8(a0),d3
 		cmpi.l  #$FFFFFFFF,d3
@@ -2804,22 +2546,18 @@ loc_117BE:
 		movea.l a0,a1
 		lea     $20(a1),a1
 loc_117E0:
-		
 		move.l  (a1)+,(a0)+
 		dbf     d3,loc_117E0
 		movem.l (sp)+,a0-a1
 		lea     -$20(a0),a0
 		bra.s   loc_117F4
 loc_117F0:
-		
 		move.l  d3,d6
 		addq.w  #1,d2
 loc_117F4:
-		
 		move.w  d2,(a1)+
 		dbf     d7,loc_117BE
 loc_117FA:
-		
 		movem.l (sp)+,d2/a0
 		movem.l (sp)+,d0-a1
 		rts
@@ -2830,7 +2568,6 @@ loc_117FA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_11804:
-		
 		movem.l d0-d2/a0-a1,-(sp)
 		lea     (FF8804_LOADING_SPACE).l,a0
 		moveq   #1,d2
@@ -2847,12 +2584,10 @@ sub_11804:
 ; =============== S U B R O U T I N E =======================================
 
 sub_11826:
-		
 		tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
 		beq.s   loc_11830
 		addi.w  #$A,d2
 loc_11830:
-		
 		lsl.w   #5,d2
 		movea.w d2,a1
 		move.w  #$50,d0 
@@ -2861,8 +2596,7 @@ loc_11830:
 
 	; End of function sub_11826
 
-dword_1183E:
-		dc.l $F11111FF
+dword_1183E:    dc.l $F11111FF
 		dc.l $FFFFFFFF
 		dc.l $1AAAAA1F
 		dc.l $1BBBBB1F
@@ -2877,7 +2611,6 @@ dword_1183E:
 ; write one column of HP/MP bar pixels into A1
 
 sub_11862:
-		
 		movem.l d3-a0,-(sp)
 		moveq   #7,d3
 		move.w  d7,d6
@@ -2888,7 +2621,6 @@ sub_11862:
 		lsl.w   #2,d4
 		move.l  dword_1183E(pc,d4.w),d4
 loc_1187A:
-		
 		move.l  d4,d5
 		andi.l  #$F0000000,d5
 		lsr.l   d6,d5
@@ -2915,21 +2647,17 @@ AdjustStringLengthForSpecialChars:
 		subq.w  #1,d0
 		bmi.w   return_118BC
 loc_118A4:
-		
 		cmpi.b  #$9E,(a0)
 		bne.s   loc_118AC
 		subq.w  #1,d7
 loc_118AC:
-		
 		cmpi.b  #$9F,(a0)+
 		bne.s   loc_118B4
 		subq.w  #1,d7
 loc_118B4:
-		
 		dbf     d0,loc_118A4
 		movem.w (sp)+,d0/a0
 return_118BC:
-		
 		rts
 
 	; End of function AdjustStringLengthForSpecialChars
@@ -2938,13 +2666,11 @@ return_118BC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_118BE:
-		
 		link    a6,#-8
 		move.l  a1,-8(a6)
 		movem.l d7/a1,-(sp)
 		move.w  #$36,d7 
 loc_118CE:
-		
 		clr.l   (a1)+
 		dbf     d7,loc_118CE
 		movem.l (sp)+,d7/a1
@@ -2965,12 +2691,10 @@ loc_118CE:
 		ble.s   loc_1190E
 		move.w  d3,d6
 loc_1190E:
-		
 		cmpi.w  #$64,d6 
 		ble.s   loc_11916
 		moveq   #$64,d6 
 loc_11916:
-		
 		addq.w  #3,d6
 		lsr.w   #3,d6
 		addi.w  #$A,d6
@@ -2990,22 +2714,18 @@ loc_11916:
 		blt.s   loc_11956
 		addq.w  #1,d4
 loc_11956:
-		
 		bra.s   loc_11966
 loc_11958:
-		
 		jsr     j_GetCharName
 		bsr.w   AdjustStringLengthForSpecialChars
 		move.w  d7,d4
 		addq.w  #2,d4
 loc_11966:
-		
 		movem.w (sp)+,d0-d1/d7
 		cmp.w   d4,d6
 		bge.s   loc_11970
 		move.w  d4,d6
 loc_11970:
-		
 		move.w  d6,((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w
 		lea     wl_FighterMiniStatus(pc), a0
 		movea.l -8(a6),a1
@@ -3015,7 +2735,6 @@ loc_11970:
 		move.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,d7
 		subi.w  #9,d7
 loc_11990:
-		
 		lea     unk_11B0A(pc), a0
 		nop
 		bsr.w   CopyFighterMinistatusWindowTileColumn
@@ -3051,10 +2770,8 @@ loc_11990:
 		bge.s   loc_11A0A
 		subq.w  #1,d7
 loc_11A0A:
-		
 		bsr.w   WriteTilesFromNumber
 loc_11A0E:
-		
 		movem.w (sp)+,d0-d3
 		movem.w d0-d3,-(sp)
 		movem.w d2-d3,-(sp)
@@ -3074,7 +2791,6 @@ loc_11A0E:
 		moveq   #6,d2
 		bsr.w   DrawColoredStatBar
 loc_11A4C:
-		
 		movem.w (sp)+,d0-d3
 		ext.l   d0
 		movea.l -8(a6),a1
@@ -3126,14 +2842,12 @@ WriteStatValue:
 		bra.w   WriteTilesFromNumber
 		bra.s   UnknownValue    
 loc_11ABC:
-		
 		lea     UnknownValue(pc), a0
 		bra.w   WriteTilesFromASCII
 
 	; End of function WriteStatValue
 
-UnknownValue:
-		dc.b '??'
+UnknownValue:   dc.b '??'
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -3188,8 +2902,7 @@ wl_FighterMiniStatus:
 		dc.b $50 
 		dc.b $D0 
 		dc.b $61 
-unk_11B0A:
-		dc.b $C0 
+unk_11B0A:      dc.b $C0 
 		dc.b $61 
 		dc.b $C0 
 		dc.b $20
@@ -3199,8 +2912,7 @@ unk_11B0A:
 		dc.b $20
 		dc.b $D0 
 		dc.b $61 
-unk_11B14:
-		dc.b $C0 
+unk_11B14:      dc.b $C0 
 		dc.b $61 
 		dc.b $C0 
 		dc.b $20
@@ -3271,7 +2983,6 @@ InitPortraitWindow:
 		beq.s   loc_11B84
 		addi.w  #$1500,d1
 loc_11B84:
-		
 		jsr     (CreateWindow).w
 		addq.w  #1,d0
 		move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
@@ -3280,10 +2991,8 @@ loc_11B84:
 		lea     WindowBorderTiles(pc), a0
 		bra.s   loc_11B9E
 loc_11B9A:
-		
 		lea     PortraitWindowLayout(pc), a0
 loc_11B9E:
-		
 		move.w  #$A0,d7 
 		jsr     (CopyBytes).w   
 		move.w  (sp)+,d0
@@ -3296,7 +3005,6 @@ loc_11B9E:
 		beq.s   loc_11BC4
 		addi.w  #$1500,d1
 loc_11BC4:
-		
 		moveq   #4,d2
 		jsr     (MoveWindowWithSFX).w
 		jsr     (WaitForVint_andFFA900Clear).w
@@ -3306,7 +3014,6 @@ loc_11BC4:
 		move.b  #$FF,((byte_FFB082-$1000000)).w
 		movem.l (sp)+,d0-a1
 return_11BE0:
-		
 		rts
 
 	; End of function InitPortraitWindow
@@ -3329,7 +3036,6 @@ HidePortraitWindow:
 		beq.s   loc_11C08
 		addi.w  #$1500,d1
 loc_11C08:
-		
 		moveq   #4,d2
 		jsr     (MoveWindowWithSFX).w
 		jsr     (WaitForVint_andFFA900Clear).w
@@ -3360,25 +3066,21 @@ BuildMemberStatsScreen:
 		clr.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
 		move.w  #WINDOW_MEMBER_STATS_SIZE,d0
 		move.w  #WINDOW_MEMBER_STATS_DEST,d1
-		jsr     (CreateWindow).w
-						; stats window, on the right
+		jsr     (CreateWindow).w; stats window, on the right
 		move.w  d0,-4(a6)
 		move.w  #$80A,d0
 		move.w  #WINDOW_MEMBER_PORTRAIT_DEST,d1
-		jsr     (CreateWindow).w
-						; portrait, upper left
+		jsr     (CreateWindow).w; portrait, upper left
 		move.w  d0,-6(a6)
 		addq.w  #1,d0
 		move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
 		move.w  #WINDOW_MEMBER_KD_SIZE,d0
 		move.w  #WINDOW_MEMBER_KD_DEST,d1
-		jsr     (CreateWindow).w
-						; kills/defeat, middle left
+		jsr     (CreateWindow).w; kills/defeat, middle left
 		move.w  d0,-8(a6)
 		move.w  #WINDOW_MEMBER_GOLD_SIZE,d0
 		move.w  #WINDOW_MEMBER_GOLD_DEST,d1
-		jsr     (CreateWindow).w
-						; gold, bottom left
+		jsr     (CreateWindow).w; gold, bottom left
 		move.w  d0,-$A(a6)
 		move.w  -2(a6),d0
 		bsr.w   GetPortraitIdx  
@@ -3389,7 +3091,6 @@ BuildMemberStatsScreen:
 		bsr.w   GetCharPortraitIdx
 		bsr.w   LoadPortrait    
 loc_11CA6:
-		
 		move.w  -4(a6),d0
 		move.w  #WINDOW_MEMBER_STATS_POSITION,d1
 		moveq   #4,d2
@@ -3403,7 +3104,6 @@ loc_11CA6:
 		move.w  #WINDOW_MEMBER_PORTRAIT_POSITION,d1
 		jsr     (MoveWindowWithSFX).w
 loc_11CD2:
-		
 		move.w  -2(a6),d0
 		tst.b   d0
 		blt.s   loc_11CE6
@@ -3411,7 +3111,6 @@ loc_11CD2:
 		move.w  #WINDOW_MEMBER_GOLD_POSITION,d1
 		jsr     (MoveWindowWithSFX).w
 loc_11CE6:
-		
 		jsr     (WaitForVint_andFFA900Clear).w
 		move.w  #$A7C0,((word_FFB07E-$1000000)).w
 		move.w  #$14,((BLINK_COUNTER-$1000000)).w
@@ -3426,7 +3125,6 @@ loc_11CE6:
 		clr.w   d0
 		bra.s   loc_11D32
 loc_11D1A:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetCurrentHP
 		tst.w   d1
@@ -3434,10 +3132,8 @@ loc_11D1A:
 		clr.w   d0
 		bra.s   loc_11D32
 loc_11D2C:
-		
 		jsr     j_GetEntityIndex
 loc_11D32:
-		
 		move.l  a1,-(sp)
 		move.w  d0,d1
 		addi.w  #$10,d1
@@ -3456,11 +3152,9 @@ loc_11D32:
 		add.w   ((word_FFA816-$1000000)).w,d1
 		bra.s   loc_11D6C
 loc_11D64:
-		
 		add.w   ((word_FFA810-$1000000)).w,d0
 		add.w   ((word_FFA812-$1000000)).w,d1
 loc_11D6C:
-		
 		move.b  $11(a0),d7
 		move.w  d7,-(sp)
 		move.w  $C(a0),-(sp)
@@ -3484,7 +3178,6 @@ loc_11D6C:
 		jsr     (sub_6052).w    
 		bra.s   loc_11DDC
 loc_11DBC:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetCurrentHP
 		tst.w   d1
@@ -3496,7 +3189,6 @@ loc_11DBC:
 		move.w  #$AB,d3 
 		jsr     (sub_6052).w    
 loc_11DDC:
-		
 		move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
 		andi.b  #$70,d0 
 		beq.s   loc_11DDC
@@ -3529,7 +3221,6 @@ loc_11DDC:
 		move.w  #$F8F6,d1
 		jsr     (MoveWindowWithSFX).w
 loc_11E40:
-		
 		move.w  -2(a6),d0
 		tst.b   d0
 		blt.s   loc_11E54
@@ -3537,7 +3228,6 @@ loc_11E40:
 		move.w  #$F81C,d1
 		jsr     (MoveWindowWithSFX).w
 loc_11E54:
-		
 		clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
 		jsr     (WaitForVInt).w 
 		cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
@@ -3548,16 +3238,13 @@ loc_11E54:
 		jsr     j_GetCharacterSpriteIdx
 		bra.s   loc_11E82
 loc_11E74:
-		
 		cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
 		bne.s   loc_11E80
 		moveq   #$3E,d4 
 		bra.s   loc_11E82
 loc_11E80:
-		
 		moveq   #$3D,d4 
 loc_11E82:
-		
 		clr.w   d0
 		clr.w   d1
 		move.b  $10(a0),d1
@@ -3566,7 +3253,6 @@ loc_11E82:
 		jsr     (sub_6052).w    
 		bra.s   loc_11EBA
 loc_11E94:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetCurrentHP
 		tst.w   d1
@@ -3580,7 +3266,6 @@ loc_11E94:
 		move.w  d4,d3
 		jsr     (sub_6052).w    
 loc_11EBA:
-		
 		jsr     (WaitForVint_andFFA900Clear).w
 		move.w  -$A(a6),d0
 		jsr     (ClearWindowAndUpdateEndPtr).w
@@ -3611,7 +3296,6 @@ AddStatusEffectTileIndexesToVDPTileOrder:
 		movea.l -6(a6),a1
 		adda.w  #$78,a1 
 return_11EFC:
-		
 		rts
 
 	; End of function AddStatusEffectTileIndexesToVDPTileOrder
@@ -3635,8 +3319,7 @@ LoadTileDataForMemberScreen:
 		adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
 		move.w  -2(a6),d0
 		tst.b   d0
-		blt.s   loc_11F5A       
-						; character idx is negative (a monster), so do not display kills
+		blt.s   loc_11F5A       ; character idx is negative (a monster), so do not display kills
 		jsr     j_GetKills
 		move.w  d1,d0
 		ext.l   d0
@@ -3650,15 +3333,13 @@ LoadTileDataForMemberScreen:
 		moveq   #WINDOW_MEMBER_KD_TEXT_DEFEATS_LENGTH,d7
 		bsr.w   WriteTilesFromNumber
 loc_11F5A:
-		
 		tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
 		beq.s   loc_11FA6
 		move.w  -8(a6),d0
 		lea     AllyKillDefeatWindowLayout(pc), a0
 		move.w  #$101,d1
 		jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
-		move.w  -2(a6),d0       
-						; get character idx from stack
+		move.w  -2(a6),d0       ; get character idx from stack
 		lsr.w   #4,d0
 		andi.w  #$F,d0
 		cmpi.w  #$A,d0
@@ -3666,10 +3347,8 @@ loc_11F5A:
 		addi.w  #-$3FC9,d0
 		bra.s   loc_11F8A
 loc_11F86:
-		
 		addi.w  #-$3FD0,d0
 loc_11F8A:
-		
 		move.w  d0,(a1)+
 		move.w  -2(a6),d0
 		andi.w  #$F,d0
@@ -3678,13 +3357,10 @@ loc_11F8A:
 		addi.w  #-$3FC9,d0
 		bra.s   loc_11FA4
 loc_11FA0:
-		
 		addi.w  #-$3FD0,d0
 loc_11FA4:
-		
 		move.w  d0,(a1)+
 loc_11FA6:
-		
 		move.w  -$C(a6),d0
 		blt.s   return_11FEA
 		move.w  -6(a6),d0
@@ -3705,13 +3381,11 @@ loc_11FA6:
 		moveq   #6,d7
 		bsr.w   WriteTilesFromNumber
 return_11FEA:
-		
 		rts
 
 	; End of function LoadTileDataForMemberScreen
 
-byte_11FEC:
-		dc.b $4E
+byte_11FEC:     dc.b $4E
 		dc.b $2F
 		dc.b $41
 		dc.b 0
@@ -3737,7 +3411,6 @@ BuildMemberStatsWindow:
 		bsr.w   WriteTilesFromASCII
 		addq.w  #2,a1
 loc_1202E:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetCharName
 		moveq   #$FFFFFFD6,d1
@@ -3753,63 +3426,54 @@ loc_1202E:
 		move.l  #VDPTILE_STATUSEFFECT_CURSE,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_12066:
-		
 		move.w  d1,d2
 		andi.w  #2,d2
 		beq.s   loc_12078
 		move.l  #$C0E8C0E9,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_12078:
-		
 		move.w  d1,d2
 		andi.w  #$30,d2 
 		beq.s   loc_1208A
 		move.l  #$C0E2C0E3,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_1208A:
-		
 		move.w  d1,d2
 		andi.w  #$300,d2
 		beq.s   loc_1209C
 		move.l  #$C0E4C0E5,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_1209C:
-		
 		move.w  d1,d2
 		andi.w  #1,d2
 		beq.s   loc_120AE
 		move.l  #$C0EAC0EB,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_120AE:
-		
 		move.w  d1,d2
 		andi.w  #$C0,d2 
 		beq.s   loc_120C0
 		move.l  #$C0E6C0E7,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_120C0:
-		
 		move.w  d1,d2
 		andi.w  #$C000,d2
 		beq.s   loc_120D2
 		move.l  #$C0A1C0A2,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_120D2:
-		
 		move.w  d1,d2
 		andi.w  #$3000,d2
 		beq.s   loc_120E4
 		move.l  #$C0A3C0A4,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_120E4:
-		
 		move.w  d1,d2
 		andi.w  #$C00,d2
 		beq.s   loc_120F6
 		move.l  #$C0DDC0DF,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_120F6:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetCurrentHP
 		cmpi.w  #$64,d1 
@@ -3821,7 +3485,6 @@ loc_120F6:
 		ext.l   d0
 		bsr.w   WriteTilesFromNumber
 loc_12118:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetMaxHP
 		cmpi.w  #$64,d1 
@@ -3833,7 +3496,6 @@ loc_12118:
 		ext.l   d0
 		bsr.w   WriteTilesFromNumber
 loc_1213A:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetCurrentMP
 		cmpi.w  #$64,d1 
@@ -3845,7 +3507,6 @@ loc_1213A:
 		ext.l   d0
 		bsr.w   WriteTilesFromNumber
 loc_1215C:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetMaxMP
 		cmpi.w  #$64,d1 
@@ -3857,7 +3518,6 @@ loc_1215C:
 		ext.l   d0
 		bsr.w   WriteTilesFromNumber
 loc_1217E:
-		
 		move.w  -2(a6),d0
 		tst.b   d0
 		blt.s   loc_121BC
@@ -3878,7 +3538,6 @@ loc_1217E:
 		bsr.w   WriteTilesFromNumber
 		bra.s   loc_121E0
 loc_121BC:
-		
 		lea     byte_11FEC(pc), a0
 		movea.l -6(a6),a1
 		adda.w  #$8C,a1 
@@ -3890,7 +3549,6 @@ loc_121BC:
 		moveq   #3,d7
 		bsr.w   WriteTilesFromASCII
 loc_121E0:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetCurrentATK
 		cmpi.w  #$64,d1 
@@ -3902,7 +3560,6 @@ loc_121E0:
 		ext.l   d0
 		bsr.w   WriteTilesFromNumber
 loc_12202:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetCurrentDEF
 		cmpi.w  #$64,d1 
@@ -3914,7 +3571,6 @@ loc_12202:
 		ext.l   d0
 		bsr.w   WriteTilesFromNumber
 loc_12224:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetCurrentAGI
 		andi.w  #$7F,d1 
@@ -3927,7 +3583,6 @@ loc_12224:
 		ext.l   d0
 		bsr.w   WriteTilesFromNumber
 loc_1224A:
-		
 		move.w  -2(a6),d0
 		jsr     j_GetCurrentMOV
 		cmpi.w  #$64,d1 
@@ -3939,7 +3594,6 @@ loc_1224A:
 		ext.l   d0
 		bsr.w   WriteTilesFromNumber
 loc_1226C:
-		
 		move.w  #$C6D0,d7
 		move.w  -2(a6),d0
 		clr.w   d1
@@ -3949,7 +3603,6 @@ loc_1226C:
 		move.l  a1,-(sp)
 		moveq   #3,d6
 loc_12288:
-		
 		move.w  -2(a6),d0
 		move.w  #3,d1
 		sub.w   d6,d1
@@ -3986,10 +3639,8 @@ loc_12288:
 		movem.w (sp)+,d6-d7
 		adda.w  #$7E,a1 
 loc_1230A:
-		
 		dbf     d6,loc_12288
 loc_1230E:
-		
 		movea.l (sp)+,a0
 		cmpa.l  a0,a1
 		bne.w   loc_1232E
@@ -4002,7 +3653,6 @@ loc_1230E:
 		bsr.w   WriteTilesFromASCII
 		move.w  (sp)+,d7
 loc_1232E:
-		
 		move.w  -2(a6),d0
 		clr.w   d1
 		jsr     j_GetItemAndNumberOfItems
@@ -4012,7 +3662,6 @@ loc_1232E:
 		adda.w  #$236,a1
 		moveq   #3,d6
 loc_1234A:
-		
 		move.w  -2(a6),d0
 		move.w  #3,d1
 		sub.w   d6,d1
@@ -4040,24 +3689,18 @@ loc_1234A:
 		movem.l (sp)+,a0-a1
 		movem.w (sp)+,d6-d7
 loc_123AC:
-		
 		adda.w  #$7E,a1 
 		dbf     d6,loc_1234A
 		bra.w   loc_123F2
 aNothing_0:
-		
 		dc.b '\Nothing',0
 aEquipped_0:
-		
 		dc.b '\Equipped',0
 aNothing_1:
-		
 		dc.b '\Nothing',0
 aJewel:
-		
 		dc.b 'JEWEL',0
 loc_123DA:
-		
 		move.w  d7,-(sp)
 		lea     aNothing_1(pc), a0
 		movea.l -6(a6),a1
@@ -4067,12 +3710,10 @@ loc_123DA:
 		bsr.w   WriteTilesFromASCII
 		move.w  (sp)+,d7
 loc_123F2:
-		
 		move.w  -2(a6),d0
 		bne.s   loc_12446
 		trap    #CHECK_FLAG
-		dc.w $180               
-						; set after Bowie obtains the jewel of light/evil... whichever it is
+		dc.w $180               ; set after Bowie obtains the jewel of light/evil... whichever it is
 		beq.s   loc_12446
 		move.w  d7,-(sp)
 		lea     aJewel(pc), a0  
@@ -4087,8 +3728,7 @@ loc_123F2:
 		move.w  #$92,d1 
 		bsr.w   CopyMemberScreenIconsToVDPTileOrder
 		trap    #CHECK_FLAG
-		dc.w $181               
-						; set after Bowie obtains King Galam's jewel
+		dc.w $181               ; set after Bowie obtains King Galam's jewel
 		beq.s   loc_12446
 		movea.l -6(a6),a1
 		adda.w  #$3A2,a1
@@ -4097,11 +3737,9 @@ loc_123F2:
 		movea.l -6(a6),a1
 		move.w  #$C053,$37E(a1)
 loc_12446:
-		
 		lea     (byte_FF9004).l,a1
 		moveq   #3,d6
 loc_1244E:
-		
 		moveq   #3,d1
 		sub.w   d6,d1
 		move.w  -2(a6),d0
@@ -4131,13 +3769,10 @@ loc_1244E:
 		movea.l (sp)+,a0
 		adda.w  #$C0,a1 
 loc_124B8:
-		
 		dbf     d6,loc_1244E
 loc_124BC:
-		
 		moveq   #3,d6
 loc_124BE:
-		
 		moveq   #3,d1
 		sub.w   d6,d1
 		move.w  -2(a6),d0
@@ -4160,29 +3795,24 @@ loc_124BE:
 		lea     $6F00(a0),a0
 		move.w  #$BF,d2 
 loc_1250A:
-		
 		move.b  (a0)+,d3
 		beq.s   loc_1252C
 		andi.w  #$F0,d3 
 		beq.s   loc_12518
 		andi.b  #$F,(a1)
 loc_12518:
-		
 		move.b  -1(a0),d3
 		andi.w  #$F,d3
 		beq.s   loc_12526
 		andi.b  #$F0,(a1)
 loc_12526:
-		
 		move.b  -1(a0),d3
 		or.b    d3,(a1)
 loc_1252C:
-		
 		addq.l  #1,a1
 		dbf     d2,loc_1250A
 		movem.l (sp)+,d2-d3/a0-a1
 loc_12536:
-		
 		ori.b   #$F0,(a1)
 		ori.b   #$F,$23(a1)
 		ori.b   #$F0,$9C(a1)
@@ -4191,7 +3821,6 @@ loc_12536:
 		adda.w  #$C0,a1 
 		dbf     d6,loc_124BE
 loc_12556:
-		
 		move.w  #$92,d1 
 		movea.l (p_Icons).l,a0
 		move.w  d1,d2
@@ -4257,17 +3886,14 @@ CopyMemberScreenIconsToVDPTileOrder:
 ; =============== S U B R O U T I N E =======================================
 
 sub_12606:
-		
 		lea     (byte_FFE000).l,a0
 		move.w  #$97F,d0
 loc_12610:
-		
 		move.w  (a0)+,d1
 		andi.w  #$6000,d1
 		bne.s   loc_1261C
 		clr.w   -2(a0)
 loc_1261C:
-		
 		dbf     d0,loc_12610
 		lea     (byte_FFE000).l,a0
 		lea     ($E000).l,a1
@@ -4293,10 +3919,8 @@ GetPortraitIdx:
 		move.w  d1,d0
 		bra.s   return_1264C
 loc_12648:
-		
 		bsr.w   GetCharPortraitIdx
 return_1264C:
-		
 		rts
 
 	; End of function GetPortraitIdx
@@ -4314,7 +3938,6 @@ CharacterStatsWindowLayout:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1288E:
-		
 		link    a6,#-$20
 
 	; End of function sub_1288E
@@ -4323,7 +3946,6 @@ sub_1288E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_12892:
-		
 		move.l  ((byte_FFAEE2-$1000000)).w,-$20(a6)
 		move.l  #$70007000,((byte_FFAEE2-$1000000)).w
 		move.l  #$70007000,((byte_FFAEEE-$1000000)).w
@@ -4355,7 +3977,6 @@ sub_12892:
 		move.b  #5,((FADING_PALETTE_FLAGS-$1000000)).w
 		bsr.w   sub_129E8
 loc_1291E:
-		
 		jsr     (WaitForVInt).w 
 		tst.b   ((FADING_SETTING-$1000000)).w
 		bne.s   loc_1291E
@@ -4418,7 +4039,6 @@ loc_1291E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_129E8:
-		
 		move.w  ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
 		lsr.w   #7,d0
 		ext.l   d0
@@ -4438,7 +4058,6 @@ sub_129E8:
 		ble.s   loc_12A20
 		moveq   #$2F,d0 
 loc_12A20:
-		
 		move.w  d0,-$A(a6)
 		move.w  ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d1
 		sub.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d1
@@ -4449,7 +4068,6 @@ loc_12A20:
 		ble.s   loc_12A3C
 		moveq   #$2F,d1 
 loc_12A3C:
-		
 		move.w  d1,d2
 		addq.w  #1,d0
 		addq.w  #1,d2
@@ -4461,7 +4079,6 @@ loc_12A3C:
 		subq.w  #1,d1
 		andi.w  #$7FFC,d1
 loc_12A56:
-		
 		move.w  d1,-8(a6)
 		move.w  -$A(a6),d0
 		lsr.w   #1,d0
@@ -4482,10 +4099,8 @@ loc_12A56:
 		moveq   #2,d4
 		move.w  -8(a6),d6
 loc_12A96:
-		
 		move.w  -$A(a6),d7
 loc_12A9A:
-		
 		move.w  -8(a6),d3
 		sub.w   d6,d3
 		move.w  -$A(a6),d2
@@ -4542,7 +4157,6 @@ loc_12A9A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_12BA4:
-		
 		movem.w d2-d3,-(sp)
 		add.w   -$14(a6),d2
 		add.w   -$12(a6),d3
@@ -4558,7 +4172,6 @@ sub_12BA4:
 		bne.s   loc_12BD4
 		move.w  #$FF,d2
 loc_12BD4:
-		
 		lsl.w   #5,d2
 		move.w  d2,d3
 		andi.w  #$3FFF,d2
@@ -4575,7 +4188,6 @@ loc_12BD4:
 ; START OF FUNCTION CHUNK FOR sub_129E8
 
 loc_12BF4:
-		
 		lea     (FF6802_LOADING_SPACE).l,a0
 		lea     ($B800).l,a1
 		move.w  #$400,d0
@@ -4603,38 +4215,32 @@ loc_12BF4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_12C46:
-		
 		movea.l -6(a6),a0
 		move.w  #$A5C0,d5
 		move.w  -$A(a6),d7
 		lsr.w   #1,d7
 		move.w  #$E0F9,(a0)+
 loc_12C58:
-		
 		move.w  #$E0FA,(a0)+
 		dbf     d7,loc_12C58
 		move.w  #$E8F9,(a0)+
 		move.w  -8(a6),d6
 		lsr.w   #1,d6
 loc_12C6A:
-		
 		move.w  -$A(a6),d7
 		lsr.w   #1,d7
 		move.w  #$E0FB,(a0)+
 loc_12C74:
-		
 		move.w  d5,(a0)+
 		addq.w  #1,d5
 		cmpi.w  #$A600,d5
 		bne.s   loc_12C82
 		move.w  #$A640,d5
 loc_12C82:
-		
 		cmpi.w  #$A700,d5
 		bne.s   loc_12C8C
 		move.w  #$A780,d5
 loc_12C8C:
-		
 		dbf     d7,loc_12C74
 		move.w  #$E8FB,(a0)+
 		dbf     d6,loc_12C6A
@@ -4642,7 +4248,6 @@ loc_12C8C:
 		lsr.w   #1,d7
 		move.w  #$F0F9,(a0)+
 loc_12CA2:
-		
 		move.w  #$F0FA,(a0)+
 		dbf     d7,loc_12CA2
 		move.w  #$F8F9,(a0)+
@@ -4654,10 +4259,8 @@ loc_12CA2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_12CB0:
-		
 		moveq   #$14,d6
 loc_12CB2:
-		
 		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 		move.b  ((byte_FFDEA0-$1000000)).w,d0
 		andi.w  #1,d0
@@ -4680,7 +4283,6 @@ loc_12CB2:
 		beq.s   loc_12CF0
 		moveq   #1,d6
 loc_12CF0:
-		
 		move.l  a1,d0
 		cmpi.w  #$DE80,d0
 		beq.w   loc_12D82
@@ -4689,7 +4291,6 @@ loc_12CF0:
 		addq.l  #8,a1
 		bra.s   loc_12CF0
 loc_12D04:
-		
 		cmpi.w  #7,d6
 		blt.w   loc_12D6E
 		cmpa.w  #$AEE2,a0
@@ -4700,13 +4301,11 @@ loc_12D04:
 		move.w  -$1E(a6),d1
 		bra.w   loc_12D34
 loc_12D26:
-		
 		move.w  (a0),d0
 		cmpi.w  #$7000,d0
 		beq.w   loc_12D6E
 		move.w  2(a0),d1
 loc_12D34:
-		
 		ext.l   d0
 		ext.l   d1
 		divs.w  #$60,d0 
@@ -4720,36 +4319,30 @@ loc_12D34:
 		bhi.s   loc_12D5A
 		subq.w  #1,d4
 loc_12D5A:
-		
 		cmpi.b  #$F0,$13(a0)
 		bcs.s   loc_12D64
 		subq.w  #1,d4
 loc_12D64:
-		
 		move.w  d1,(a1)+
 		clr.b   (a1)+
 		tst.b   (a1)+
 		move.w  d4,(a1)+
 		move.w  d0,(a1)+
 loc_12D6E:
-		
 		lea     $20(a0),a0
 		move.l  a0,d0
 		cmpi.w  #$AF02,d0
 		bne.s   loc_12D7E
 		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 loc_12D7E:
-		
 		dbf     d7,loc_12CF0
 loc_12D82:
-		
 		movem.l d0-d2/d7-a0,-(sp)
 		lea     (SPRITE_Y).l,a0 
 		move.w  #$38,d0 
 		moveq   #$2F,d7 
 		move.w  #$10,d1
 loc_12D96:
-		
 		move.w  d1,d2
 		lsl.w   #3,d2
 		tst.b   2(a0,d2.w)
@@ -4758,13 +4351,11 @@ loc_12D96:
 		move.w  d1,d0
 		lsl.w   #3,d0
 loc_12DA8:
-		
 		addq.w  #1,d1
 		dbf     d7,loc_12D96
 		moveq   #$2F,d7 
 		move.w  #$10,d1
 loc_12DB4:
-		
 		move.w  d1,d2
 		lsl.w   #3,d2
 		tst.b   2(a0,d2.w)
@@ -4773,7 +4364,6 @@ loc_12DB4:
 		move.w  d1,d0
 		lsl.w   #3,d0
 loc_12DC6:
-		
 		addq.w  #1,d1
 		dbf     d7,loc_12DB4
 		clr.b   3(a0,d0.w)
@@ -4783,7 +4373,6 @@ loc_12DC6:
 		bne.s   loc_12DDE
 		moveq   #$14,d6
 loc_12DDE:
-		
 		move.b  ((P1_INPUT-$1000000)).w,d0
 		andi.b  #$70,d0 
 		beq.w   loc_12CB2
@@ -4795,7 +4384,6 @@ loc_12DDE:
 ; =============== S U B R O U T I N E =======================================
 
 PlayEndKiss:
-		
 		move.b  #$FF,(WINDOW_HIDING_FORBIDDEN).l
 		addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 		move.w  #$120E,d0
@@ -4806,17 +4394,14 @@ PlayEndKiss:
 		moveq   #$F,d7
 		move.w  #$E000,(a1)+
 loc_12E10:
-		
 		move.w  #$E000,(a1)+
 		dbf     d7,loc_12E10
 		move.w  #$E800,(a1)+
 		moveq   #$B,d6
 loc_12E1E:
-		
 		moveq   #$F,d7
 		move.w  #$E000,(a1)+
 loc_12E24:
-		
 		move.w  d5,(a1)+
 		addq.w  #1,d5
 		dbf     d7,loc_12E24
@@ -4825,7 +4410,6 @@ loc_12E24:
 		moveq   #$F,d7
 		move.w  #$F000,(a1)+
 loc_12E3A:
-		
 		move.w  #$F000,(a1)+
 		dbf     d7,loc_12E3A
 		move.w  #$F800,(a1)+
@@ -4853,7 +4437,6 @@ loc_12E3A:
 		move.w  #$5FF,d0
 		moveq   #0,d1
 loc_12EB4:
-		
 		move.l  d1,(a1)+
 		dbf     d0,loc_12EB4
 		lea     (FF6802_LOADING_SPACE).l,a0
@@ -4885,7 +4468,6 @@ loc_12EB4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_12F12:
-		
 		tst.w   ((word_FFB086-$1000000)).w
 		bne.w   return_12F5C
 		movem.l d0-a1,-(sp)
@@ -4906,7 +4488,6 @@ sub_12F12:
 		unlk    a6
 		movem.l (sp)+,d0-a1
 return_12F5C:
-		
 		rts
 
 	; End of function sub_12F12
@@ -4915,7 +4496,6 @@ return_12F5C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_12F5E:
-		
 		tst.w   ((word_FFB086-$1000000)).w
 		beq.s   return_12F5C
 		movem.l d0-a1,-(sp)
@@ -4940,7 +4520,6 @@ sub_12F5E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_12F9A:
-		
 		tst.w   ((word_FFB086-$1000000)).w
 		beq.s   return_12F5C
 		movem.l d0-a1,-(sp)
@@ -4956,7 +4535,6 @@ sub_12F9A:
 		moveq   #4,d2
 		jsr     (MoveWindowWithSFX).l
 loc_12FCA:
-		
 		jsr     (WaitForVint_andFFA900Clear).l
 		move.w  ((word_FFB086-$1000000)).w,d0
 		subq.w  #1,d0
@@ -4971,7 +4549,6 @@ loc_12FCA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_12FE6:
-		
 		clr.b   ((byte_FFB13C-$1000000)).w
 		move.w  #$7F,((word_FFB13A-$1000000)).w 
 		clr.b   ((word_FFAF8C-$1000000)).w
@@ -4979,10 +4556,8 @@ sub_12FE6:
 		bne.s   loc_13000
 		clr.b   ((word_FFB13D-$1000000)).w
 loc_13000:
-		
 		bra.w   loc_1304C
 loc_13004:
-		
 		move.b  #1,((word_FFAF8C-$1000000)).w
 		move.w  ((word_FFB13A-$1000000)).w,d1
 		jsr     j_GetItemType
@@ -4991,15 +4566,12 @@ loc_13004:
 		move.b  #2,((word_FFB13D-$1000000)).w
 		bra.s   loc_1302C
 loc_13020:
-		
 		cmpi.b  #2,((word_FFB13D-$1000000)).w
 		bne.s   loc_1302C
 		clr.b   ((word_FFB13D-$1000000)).w
 loc_1302C:
-		
 		bra.w   loc_1304C
 loc_13030:
-		
 		clr.b   ((byte_FFB13C-$1000000)).w
 		move.w  #ITEMIDX_NOTHING,((word_FFB13A-$1000000)).w
 		move.b  #2,((word_FFAF8C-$1000000)).w
@@ -5007,7 +4579,6 @@ loc_13030:
 		bne.s   loc_1304C
 		clr.b   ((word_FFB13D-$1000000)).w
 loc_1304C:
-		
 		addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 		move.w  ((word_FFB136-$1000000)).w,d0
 		add.w   ((word_FFB138-$1000000)).w,d0
@@ -5016,7 +4587,6 @@ loc_1304C:
 		clr.w   ((word_FFB136-$1000000)).w
 		clr.w   ((word_FFB138-$1000000)).w
 loc_13066:
-		
 		link    a6,#-$10
 		bsr.w   GetSelectedMember
 		move.w  d0,-2(a6)
@@ -5054,7 +4624,6 @@ loc_13066:
 		jsr     (WaitForVint_andFFA900Clear).l
 		moveq   #$14,d1
 loc_13100:
-		
 		move.w  d1,-(sp)
 		move.w  ((word_FFB13A-$1000000)).w,d1
 		jsr     j_GetItemType
@@ -5063,10 +4632,8 @@ loc_13100:
 		moveq   #2,d2
 		bra.s   loc_13116
 loc_13114:
-		
 		moveq   #1,d2
 loc_13116:
-		
 		move.w  (sp)+,d1
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_13138
@@ -5078,11 +4645,9 @@ loc_13116:
 		ble.s   loc_13130
 		clr.b   d0
 loc_13130:
-		
 		move.b  d0,((word_FFB13D-$1000000)).w
 		bsr.w   sub_13478
 loc_13138:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_13156
 		move.b  ((word_FFB13D-$1000000)).w,d0
@@ -5092,11 +4657,9 @@ loc_13138:
 		bge.s   loc_1314E
 		move.b  d2,d0
 loc_1314E:
-		
 		move.b  d0,((word_FFB13D-$1000000)).w
 		bsr.w   sub_13478
 loc_13156:
-		
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1319A
 		move.w  ((word_FFB138-$1000000)).w,d0
@@ -5110,7 +4673,6 @@ loc_13156:
 		bsr.w   sub_13478
 		bra.s   loc_1319A
 loc_1317A:
-		
 		move.w  ((word_FFB136-$1000000)).w,d0
 		subq.w  #1,d0
 		blt.s   loc_1319A
@@ -5122,7 +4684,6 @@ loc_1317A:
 		move.b  #1,((word_FFAF9E-$1000000)).w
 		bsr.w   sub_134A8
 loc_1319A:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_131F6
 		move.w  ((word_FFB138-$1000000)).w,d0
@@ -5140,10 +4701,8 @@ loc_1319A:
 		move.w  d0,((word_FFB138-$1000000)).w
 		bsr.w   sub_13478
 loc_131CC:
-		
 		bra.s   loc_131F6
 loc_131CE:
-		
 		move.w  ((word_FFB136-$1000000)).w,d0
 		addq.w  #1,d0
 		move.w  d0,d2
@@ -5158,7 +4717,6 @@ loc_131CE:
 		clr.b   ((word_FFAF9E-$1000000)).w
 		bsr.w   sub_134A8
 loc_131F6:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_13254
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -5166,12 +4724,10 @@ loc_131F6:
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_13220
 loc_13214:
-		
 		bsr.w   sub_133A0
 		jsr     (WaitForVInt).w 
 		bra.w   loc_13100
 loc_13220:
-		
 		move.w  ((word_FFB136-$1000000)).w,d0
 		add.w   ((word_FFB138-$1000000)).w,d0
 		lea     ((byte_FFB0AE-$1000000)).w,a0
@@ -5183,7 +4739,6 @@ loc_13220:
 		moveq   #$A,d1
 		bra.s   loc_13214
 loc_1323E:
-		
 		bsr.w   sub_13328
 		cmpi.w  #$FFFF,d1
 		bne.s   loc_13250
@@ -5191,13 +4746,10 @@ loc_1323E:
 		moveq   #$14,d1
 		bra.s   loc_13214
 loc_13250:
-		
 		bra.w   loc_13256
 loc_13254:
-		
 		moveq   #$FFFFFFFF,d0
 loc_13256:
-		
 		movem.w d0-d2,-(sp)
 		clr.w   d1
 		bsr.w   sub_133A0
@@ -5229,13 +4781,11 @@ loc_13256:
 ; =============== S U B R O U T I N E =======================================
 
 sub_132BC:
-		
 		tst.b   ((word_FFAF8C-$1000000)).w
 		bne.s   loc_132C6
 		clr.w   d1
 		rts
 loc_132C6:
-		
 		cmpi.b  #1,((word_FFAF8C-$1000000)).w
 		bne.w   loc_13314
 		btst    #0,((byte_FFB13C-$1000000)).w
@@ -5249,14 +4799,11 @@ loc_132C6:
 		moveq   #$FFFFFFFF,d1
 		bra.s   return_132F2
 loc_132F0:
-		
 		clr.w   d1
 return_132F2:
-		
 		rts
 		bra.s   return_13312
 loc_132F6:
-		
 		clr.w   d1
 		jsr     j_GetEquippableWeapons
 		move.w  d1,d2
@@ -5266,16 +4813,12 @@ loc_132F6:
 		moveq   #$FFFFFFFF,d1
 		bra.s   return_13310
 loc_1330E:
-		
 		clr.w   d1
 return_13310:
-		
 		rts
 return_13312:
-		
 		rts
 loc_13314:
-		
 		clr.w   d1
 		jsr     j_GetSpellAndNumberOfSpells
 		tst.w   d2
@@ -5283,10 +4826,8 @@ loc_13314:
 		moveq   #$FFFFFFFF,d1
 		bra.s   return_13326
 loc_13324:
-		
 		clr.w   d1
 return_13326:
-		
 		rts
 
 	; End of function sub_132BC
@@ -5295,7 +4836,6 @@ return_13326:
 ; =============== S U B R O U T I N E =======================================
 
 sub_13328:
-		
 		tst.b   ((word_FFAF8C-$1000000)).w
 		beq.w   return_13386
 		cmpi.b  #1,((word_FFAF8C-$1000000)).w
@@ -5309,7 +4849,6 @@ sub_13328:
 		bsr.w   sub_13F14
 		bra.w   return_13386
 loc_13358:
-		
 		cmpi.b  #2,((byte_FFB13C-$1000000)).w
 		bne.s   loc_1337C
 		clr.w   d1
@@ -5320,18 +4859,14 @@ loc_13358:
 		bsr.w   sub_133A0
 		bsr.w   sub_13F14
 loc_13378:
-		
 		bra.w   return_13386
 loc_1337C:
-		
 		moveq   #$A,d1
 		bsr.w   sub_133A0
 		bsr.w   sub_14108
 return_13386:
-		
 		rts
 loc_13388:
-		
 		moveq   #$A,d1
 		bsr.w   sub_133A0
 		bsr.w   sub_1445A
@@ -5356,12 +4891,10 @@ LoadCharPortrait:
 ; =============== S U B R O U T I N E =======================================
 
 sub_133A0:
-		
 		tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 		beq.s   loc_133A8
 		moveq   #1,d1
 loc_133A8:
-		
 		move.w  d0,-(sp)
 		lea     (byte_FFDCC0).l,a0
 		lea     unk_13452(pc), a1
@@ -5370,16 +4903,13 @@ loc_133A8:
 		move.w  #$100,d0
 		bra.s   loc_133C2
 loc_133C0:
-		
 		clr.w   d0
 loc_133C2:
-		
 		move.w  ((word_FFB138-$1000000)).w,d2
 		lsl.w   #4,d2
 		add.w   d2,d0
 		moveq   #1,d7
 loc_133CC:
-		
 		move.w  (a1)+,(a0)
 		add.w   d0,(a0)
 		move.w  (a1)+,d2
@@ -5397,7 +4927,6 @@ loc_133CC:
 		move.w  #$97,6(a0) 
 		move.w  #$104,(a0)
 loc_13404:
-		
 		move.w  #$B,2(a0)
 		move.w  #$D064,4(a0)
 		addq.l  #8,a0
@@ -5412,22 +4941,19 @@ loc_13404:
 		move.w  #$97,6(a0) 
 		move.w  #$14D,(a0)
 loc_13438:
-		
 		move.w  #$10,2(a0)
 		move.w  #$C064,4(a0)
 		subq.w  #1,d1
 		bne.s   loc_1344A
 		moveq   #$14,d1
 loc_1344A:
-		
 		move.w  (sp)+,d0
 		bsr.w   sub_101E6
 		rts
 
 	; End of function sub_133A0
 
-unk_13452:
-		dc.b   1
+unk_13452:      dc.b   1
 		dc.b   4
 		dc.b  $D
 		dc.b   9
@@ -5464,7 +4990,6 @@ GetSelectedMember:
 ; =============== S U B R O U T I N E =======================================
 
 sub_13478:
-		
 		bsr.w   sub_1354C
 		move.w  -4(a6),d0
 		move.w  #$8080,d1
@@ -5482,7 +5007,6 @@ sub_13478:
 ; =============== S U B R O U T I N E =======================================
 
 CopyWords:
-		
 		move.w  (a0)+,(a1)+
 		dbf     d7,CopyWords
 		rts
@@ -5493,7 +5017,6 @@ CopyWords:
 ; =============== S U B R O U T I N E =======================================
 
 sub_134A8:
-		
 		move.w  d0,-(sp)
 		move.w  -4(a6),d0
 		clr.w   d1
@@ -5511,7 +5034,6 @@ sub_134A8:
 		jsr     (CopyBytes).w   
 		bra.s   loc_13510
 loc_134E0:
-		
 		adda.w  #$E8,a0 
 		adda.w  #$AE,a1 
 		move.w  #$1D0,d7
@@ -5525,7 +5047,6 @@ loc_134E0:
 		move.w  #$36,d7 
 		jsr     (CopyBytes).w   
 loc_13510:
-		
 		move.w  -4(a6),d0
 		move.w  #$8080,d1
 		jsr     (SetWindowDestination).l
@@ -5548,7 +5069,6 @@ loc_13510:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1354C:
-		
 		move.w  ((word_FFB138-$1000000)).w,d0
 		add.w   ((word_FFB136-$1000000)).w,d0
 		lea     ((byte_FFB0AE-$1000000)).w,a0
@@ -5595,23 +5115,19 @@ WriteMemberListText:
 		lea     aNameClassLevExp(pc), a0
 		bra.s   loc_135E4
 loc_135D4:
-		
 		cmpi.b  #1,d0
 		bne.s   loc_135E0
 		lea     aNameHpMpAtDfAgMv(pc), a0
 		bra.s   loc_135E4
 loc_135E0:
-		
 		lea     aNameAttackDefense(pc), a0
 loc_135E4:
-		
 		bsr.w   WriteTilesFromASCII
 		movea.l -6(a6),a1
 		adda.w  #$B2,a1 
 		moveq   #4,d5
 		move.w  ((word_FFB136-$1000000)).w,d4
 loc_135F6:
-		
 		lea     ((byte_FFB0AE-$1000000)).w,a0
 		clr.w   d0
 		move.b  (a0,d4.w),d0
@@ -5622,7 +5138,6 @@ loc_135F6:
 		beq.s   loc_13616
 		move.w  #$C0B0,-2(a1)
 loc_13616:
-		
 		move.l  a1,-(sp)
 		move.w  -$10(a6),d0
 		jsr     j_GetCurrentHP
@@ -5635,10 +5150,8 @@ loc_13616:
 		bsr.w   sub_100C8       
 		bra.s   loc_1363C
 loc_13638:
-		
 		bsr.w   WriteTilesFromASCII
 loc_1363C:
-		
 		movea.l (sp)+,a1
 		lea     $10(a1),a1
 		tst.b   ((word_FFB13D-$1000000)).w
@@ -5665,7 +5178,6 @@ loc_1363C:
 		ext.l   d0
 		bsr.w   WriteTilesFromNumber
 loc_13690:
-		
 		cmpi.b  #1,((word_FFB13D-$1000000)).w
 		bne.w   loc_1371E
 		move.w  -$10(a6),d0
@@ -5711,7 +5223,6 @@ loc_13690:
 		bsr.w   WriteStatValue  
 		addq.l  #2,a1
 loc_1371E:
-		
 		cmpi.b  #2,((word_FFB13D-$1000000)).w
 		bne.w   loc_13798
 		move.w  -$10(a6),d0
@@ -5725,7 +5236,6 @@ loc_1371E:
 		bsr.w   WriteTilesFromASCII
 		bra.s   loc_13798
 loc_13748:
-		
 		jsr     j_GetWeaponNewATKandDEF
 		addq.l  #2,a1
 		move.w  -$10(a6),d0
@@ -5753,7 +5263,6 @@ loc_13748:
 		bsr.w   WriteStatValue  
 		addq.l  #2,a1
 loc_13798:
-		
 		movea.l (sp)+,a1
 		adda.w  #$74,a1 
 		addq.w  #1,d4
@@ -5768,7 +5277,6 @@ loc_13798:
 ; =============== S U B R O U T I N E =======================================
 
 sub_137AC:
-		
 		move.w  -8(a6),d0
 		clr.w   d1
 		jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
@@ -5780,7 +5288,6 @@ sub_137AC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_137BC:
-		
 		link    a6,#-6
 		move.w  d0,-2(a6)
 		move.l  a1,-6(a6)
@@ -5809,7 +5316,6 @@ sub_137BC:
 		bge.s   loc_1381E
 		subq.w  #1,d7
 loc_1381E:
-		
 		bsr.w   WriteTilesFromNumber
 		movea.l -6(a6),a1
 		adda.w  #$4E,a1 
@@ -5821,84 +5327,71 @@ loc_1381E:
 		move.l  #$C0ECC0ED,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_13846:
-		
 		move.w  d1,d2
 		andi.w  #2,d2
 		beq.s   loc_13858
 		move.l  #$C0E8C0E9,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_13858:
-		
 		move.w  d1,d2
 		andi.w  #$30,d2 
 		beq.s   loc_1386A
 		move.l  #$C0E2C0E3,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_1386A:
-		
 		move.w  d1,d2
 		andi.w  #$300,d2
 		beq.s   loc_1387C
 		move.l  #$C0E4C0E5,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_1387C:
-		
 		move.w  d1,d2
 		andi.w  #1,d2
 		beq.s   loc_1388E
 		move.l  #$C0EAC0EB,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_1388E:
-		
 		move.w  d1,d2
 		andi.w  #$C0,d2 
 		beq.s   loc_138A0
 		move.l  #$C0E6C0E7,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_138A0:
-		
 		move.w  d1,d2
 		andi.w  #$C000,d2
 		beq.s   loc_138B2
 		move.l  #$C0A1C0A2,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_138B2:
-		
 		move.w  d1,d2
 		andi.w  #$3000,d2
 		beq.s   loc_138C4
 		move.l  #$C0A3C0A4,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_138C4:
-		
 		move.w  d1,d2
 		andi.w  #$C00,d2
 		beq.s   loc_138D6
 		move.l  #$C0DDC0DF,d0
 		bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_138D6:
-		
 		move.b  ((word_FFAF8C-$1000000)).w,d0
 		bne.s   loc_138E2
 		bsr.w   WriteMemberMiniStatus
 		bra.s   loc_138FE
 loc_138E2:
-		
 		cmpi.b  #1,d0
 		bne.s   loc_138EE
 		bsr.w   WriteItemsMiniStatus
 		bra.s   loc_138FE
 loc_138EE:
-		
 		cmpi.b  #2,d0
 		bne.s   loc_138FA
 		bsr.w   WriteMagicMiniStatus
 		bra.s   loc_138FE
 loc_138FA:
-		
 		bsr.w   WriteEquipMiniStatus
 loc_138FE:
-		
 		unlk    a6
 		rts
 
@@ -5980,11 +5473,9 @@ WriteEquipMiniStatus:
 		jsr     j_FindItemName
 		bra.s   loc_139A6
 loc_139A0:
-		
 		lea     aNothing_2(pc), a0
 		moveq   #$A,d7
 loc_139A6:
-		
 		moveq   #$FFFFFFD6,d1
 		bsr.w   WriteTilesFromASCII
 		movea.l -6(a6),a1
@@ -6052,7 +5543,6 @@ WriteMemberMagicList:
 		beq.w   loc_13AD8
 		moveq   #3,d6
 loc_13A66:
-		
 		move.w  -2(a6),d0
 		moveq   #3,d1
 		sub.w   d6,d1
@@ -6087,7 +5577,6 @@ loc_13A66:
 		dbf     d6,loc_13A66
 		rts
 loc_13AD8:
-		
 		move.w  d7,-(sp)
 		lea     aNothing_0(pc), a0
 		moveq   #$FFFFFFD6,d1
@@ -6110,7 +5599,6 @@ WriteMemberItemsList:
 		beq.w   loc_13B48
 		moveq   #CHAR_ITEMSLOTS_COUNTER,d6
 loc_13AFE:
-		
 		move.w  -2(a6),d0
 		moveq   #3,d1
 		sub.w   d6,d1
@@ -6128,14 +5616,11 @@ loc_13AFE:
 		beq.w   loc_13B3E
 		move.w  #$C0B1,-2(a1)
 loc_13B3E:
-		
 		lea     $54(a1),a1
 		dbf     d6,loc_13AFE
 return_13B46:
-		
 		rts
 loc_13B48:
-		
 		move.w  d7,-(sp)
 		lea     aNothing_1(pc), a0
 		moveq   #$FFFFFFD6,d1
@@ -6150,7 +5635,6 @@ loc_13B48:
 ; =============== S U B R O U T I N E =======================================
 
 LoadItemIcon:
-		
 		andi.w  #ITEM_MASK_IDX,d1
 		movea.l (p_Icons).l,a0
 		bra.w   LoadIcon
@@ -6169,7 +5653,6 @@ LoadSpellIcon:
 		move.w  #$7F,d1 
 		bra.s   LoadIcon
 loc_13B7E:
-		
 		addi.w  #$82,d1 
 
 	; End of function LoadSpellIcon
@@ -6178,16 +5661,13 @@ loc_13B7E:
 ; START OF FUNCTION CHUNK FOR LoadItemIcon
 
 LoadIcon:
-		
 		move.w  d1,d2
 		add.w   d1,d1
 		add.w   d2,d1
 		lsl.w   #6,d1
-		adda.w  d1,a0           
-						; icon offset
+		adda.w  d1,a0           ; icon offset
 		moveq   #$2F,d7 
 loc_13B8E:
-		
 		move.l  (a0)+,(a1)+
 		dbf     d7,loc_13B8E
 		ori.w   #$F,-2(a1)
@@ -6241,14 +5721,12 @@ DrawMemberMagicIconsCross:
 		jsr     j_GetSpellAndNumberOfSpells
 		bsr.w   LoadSpellIcon
 loc_13C20:
-		
 		lea     (FF6802_LOADING_SPACE).l,a0
 		lea     ($BC00).l,a1
 		move.w  #$180,d0
 		moveq   #2,d1
 		jsr     (sub_119E).w    
 loc_13C36:
-		
 		movea.l -6(a6),a1
 		move.l  #$C5E0C5E1,$DC(a1)
 		move.l  #$C5E2C5E3,$106(a1)
@@ -6279,19 +5757,16 @@ CopyWindowTilesToRAM:
 		subq.l  #3,d6
 		move.w  #$C060,(a1)+
 loc_13CAE:
-		
 		move.w  #$C061,(a1)+
 		dbf     d6,loc_13CAE
 		move.w  #$C860,(a1)+
 		move.w  d1,d7
 		subq.w  #3,d7
 loc_13CBE:
-		
 		move.w  d0,d6
 		subq.w  #3,d6
 		move.w  #$C070,(a1)+
 loc_13CC6:
-		
 		move.w  #$C020,(a1)+
 		dbf     d6,loc_13CC6
 		move.w  #$C870,(a1)+
@@ -6300,7 +5775,6 @@ loc_13CC6:
 		subq.l  #3,d6
 		move.w  #$D060,(a1)+
 loc_13CDE:
-		
 		move.w  #$D061,(a1)+
 		dbf     d6,loc_13CDE
 		move.w  #$D860,(a1)+
@@ -6315,32 +5789,20 @@ aNameHpMpAtDfAgMv:
 		dc.b 'NAME    HP MP AT DF AG MV',0
 aNameAttackDefense:
 		dc.b 'NAME    ATTACK   DEFENSE',0
-aMagicItem:
-		dc.b 'MAGIC     ITEM'
-aItem_3:
-		dc.b '- ITEM -',0
-aMagic_2:
-		dc.b '- MAGIC -',0
-aLevel:
-		dc.b 'LEVEL',0
-aUnequippable:
-		dc.b '\unequippable',0
-aEquipment:
-		dc.b 'Equipment ',0
-aAtt:
-		dc.b 'ATT  ',0
-aDef:
-		dc.b 'DEF  ',0
-aMov:
-		dc.b 'MOV  ',0
-aAgi:
-		dc.b 'AGI  ',0
-aNothing_2:
-		dc.b '\Nothing',0
+aMagicItem:     dc.b 'MAGIC     ITEM'
+aItem_3:        dc.b '- ITEM -',0
+aMagic_2:       dc.b '- MAGIC -',0
+aLevel:         dc.b 'LEVEL',0
+aUnequippable:  dc.b '\unequippable',0
+aEquipment:     dc.b 'Equipment ',0
+aAtt:           dc.b 'ATT  ',0
+aDef:           dc.b 'DEF  ',0
+aMov:           dc.b 'MOV  ',0
+aAgi:           dc.b 'AGI  ',0
+aNothing_2:     dc.b '\Nothing',0
 TextHighlightTiles:
 		incbin "data/graphics/tech/texthighlighttiles.bin"
-unk_13EDE:
-		dc.b $C0 
+unk_13EDE:      dc.b $C0 
 		dc.b $20
 		dc.b $C0 
 		dc.b $20
@@ -6398,7 +5860,6 @@ unk_13EDE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_13F14:
-		
 		movem.l d0/d3-a1,-(sp)
 		trap    #SOUND_COMMAND
 		dc.w SFX_VALIDATION
@@ -6432,7 +5893,6 @@ sub_13F14:
 		jsr     (WaitForVInt).w 
 		moveq   #$1E,d6
 loc_13F88:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_13FA2
 		moveq   #1,d1
@@ -6442,7 +5902,6 @@ loc_13F88:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_1401E
 loc_13FA2:
-		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_13FBC
 		moveq   #2,d1
@@ -6452,7 +5911,6 @@ loc_13FA2:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_1401E
 loc_13FBC:
-		
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_13FCE
 		clr.w   d1
@@ -6460,7 +5918,6 @@ loc_13FBC:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_1401E
 loc_13FCE:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_13FE8
 		moveq   #3,d1
@@ -6470,27 +5927,23 @@ loc_13FCE:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_1401E
 loc_13FE8:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_13FFA
 		move.b  #$FF,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 		bra.w   loc_14052
 loc_13FFA:
-		
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1400C
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_14052
 loc_1400C:
-		
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14034
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_14052
 loc_1401E:
-		
 		move.w  d1,-(sp)
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -6500,7 +5953,6 @@ loc_1401E:
 		move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 		moveq   #$1D,d6
 loc_14034:
-		
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bsr.w   sub_14074       
@@ -6510,11 +5962,9 @@ loc_14034:
 		bne.s   loc_1404A
 		moveq   #$1E,d6
 loc_1404A:
-		
 		jsr     (WaitForVInt).w 
 		bra.w   loc_13F88
 loc_14052:
-		
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d1
 		ext.w   d1
 		bpl.s   loc_14062
@@ -6523,13 +5973,11 @@ loc_14052:
 		moveq   #$FFFFFFFF,d1
 		bra.s   loc_1406E
 loc_14062:
-		
 		move.w  d1,d2
 		add.w   d2,d2
 		lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
 		move.w  (a0,d2.w),d2
 loc_1406E:
-		
 		movem.l (sp)+,d0/d3-a1
 		rts
 
@@ -6541,17 +5989,14 @@ loc_1406E:
 ; related to menu choice
 
 sub_14074:
-		
 		moveq   #$7F,d7 
-		add.w   d0,d0           
-						; d0 is current diamond-menu choice
+		add.w   d0,d0           ; d0 is current diamond-menu choice
 		move.w  rjt_14080(pc,d0.w),d0
 		jmp     rjt_14080(pc,d0.w)
 
 	; End of function sub_14074
 
-rjt_14080:
-		dc.w DMAicon1-rjt_14080
+rjt_14080:      dc.w DMAicon1-rjt_14080
 		dc.w DMAicon2-rjt_14080
 		dc.w DMAicon3-rjt_14080
 		dc.w DMAicon4-rjt_14080
@@ -6559,13 +6004,11 @@ rjt_14080:
 ; =============== S U B R O U T I N E =======================================
 
 DMAicon1:
-		
 		lea     (FF8804_LOADING_SPACE).l,a0
 		cmpi.w  #$F,d6
 		blt.s   loc_14098
 		adda.w  #$C0,a0 
 loc_14098:
-		
 		lea     ($BC00).l,a1
 		move.w  #$60,d0 
 		moveq   #2,d1
@@ -6577,13 +6020,11 @@ loc_14098:
 ; =============== S U B R O U T I N E =======================================
 
 DMAicon2:
-		
 		lea     (byte_FF8984).l,a0
 		cmpi.w  #$F,d6
 		blt.s   loc_140B8
 		adda.w  #$C0,a0 
 loc_140B8:
-		
 		lea     ($BCC0).l,a1
 		move.w  #$60,d0 
 		moveq   #2,d1
@@ -6595,13 +6036,11 @@ loc_140B8:
 ; =============== S U B R O U T I N E =======================================
 
 DMAicon3:
-		
 		lea     (byte_FF8B04).l,a0
 		cmpi.w  #$F,d6
 		blt.s   loc_140D8
 		adda.w  #$C0,a0 
 loc_140D8:
-		
 		lea     ($BD80).l,a1
 		move.w  #$60,d0 
 		moveq   #2,d1
@@ -6613,13 +6052,11 @@ loc_140D8:
 ; =============== S U B R O U T I N E =======================================
 
 DMAicon4:
-		
 		lea     (byte_FF8C84).l,a0
 		cmpi.w  #$F,d6
 		blt.s   loc_140F8
 		adda.w  #$C0,a0 
 loc_140F8:
-		
 		lea     ($BE40).l,a1
 		move.w  #$60,d0 
 		moveq   #2,d1
@@ -6631,10 +6068,8 @@ loc_140F8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14108:
-		
 		movem.l d0/d3-a2,-(sp)
 loc_1410C:
-		
 		jsr     j_GetEquippableWeapons
 		tst.w   d1
 		beq.w   loc_14162
@@ -6654,7 +6089,6 @@ loc_1410C:
 		jsr     (WaitForVint_andFFA900Clear).w
 		bra.w   loc_141C8
 loc_1414A:
-		
 		lsl.w   #2,d1
 		move.w  (a2,d1.w),d2
 		move.w  2(a2,d1.w),d1
@@ -6663,7 +6097,6 @@ loc_1414A:
 		jsr     j_GetEquippedWeapon
 		bsr.w   sub_1477E       
 loc_14162:
-		
 		jsr     j_GetEquippableRings
 		tst.w   d1
 		beq.w   loc_141C8
@@ -6687,10 +6120,8 @@ loc_14162:
 		moveq   #$FFFFFFFF,d1
 		bra.w   loc_141C8
 loc_141AC:
-		
 		bra.w   loc_1410C
 loc_141B0:
-		
 		lsl.w   #2,d1
 		move.w  (a2,d1.w),d2
 		move.w  2(a2,d1.w),d1
@@ -6699,7 +6130,6 @@ loc_141B0:
 		jsr     j_GetEquippedRing
 		bsr.w   sub_1477E       
 loc_141C8:
-		
 		movem.l (sp)+,d0/d3-a2
 		rts
 
@@ -6709,7 +6139,6 @@ loc_141C8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_141CE:
-		
 		movem.l d0/d2-a2,-(sp)
 		tst.w   d1
 		bpl.s   loc_141EA
@@ -6719,18 +6148,14 @@ sub_141CE:
 		jsr     j_EquipItem
 		bra.s   loc_141E8
 loc_141E6:
-		
 		moveq   #3,d1
 loc_141E8:
-		
 		bra.s   loc_141FE
 loc_141EA:
-		
 		move.l  a0,-(sp)
 		moveq   #3,d7
 		moveq   #$FFFFFFFF,d1
 loc_141F0:
-		
 		addq.w  #1,d1
 		addq.l  #2,a0
 		move.w  (a0)+,d4
@@ -6738,7 +6163,6 @@ loc_141F0:
 		dbeq    d7,loc_141F0
 		movea.l (sp)+,a0
 loc_141FE:
-		
 		move.b  d1,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 		move.w  d1,-(sp)
 		moveq   #3,d7
@@ -6767,7 +6191,6 @@ loc_141FE:
 		jsr     (WaitForVint_andFFA900Clear).w
 		moveq   #$1E,d6
 loc_14264:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1427E
 		moveq   #1,d1
@@ -6777,7 +6200,6 @@ loc_14264:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_142FA
 loc_1427E:
-		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14298
 		moveq   #2,d1
@@ -6787,7 +6209,6 @@ loc_1427E:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_142FA
 loc_14298:
-		
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_142AA
 		clr.w   d1
@@ -6795,7 +6216,6 @@ loc_14298:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_142FA
 loc_142AA:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_142C4
 		moveq   #3,d1
@@ -6805,27 +6225,23 @@ loc_142AA:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_142FA
 loc_142C4:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_142D6
 		move.b  #$FF,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 		bra.w   loc_1438C
 loc_142D6:
-		
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_142E8
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_1438C
 loc_142E8:
-		
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14366
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_1438C
 loc_142FA:
-		
 		move.w  d1,-(sp)
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -6846,16 +6262,13 @@ loc_142FA:
 		jsr     j_UnequipWeapon
 		bra.s   loc_1433C
 loc_14336:
-		
 		jsr     j_UnequipRing
 loc_1433C:
-		
 		move.w  d6,d1
 		cmpi.w  #4,d1
 		bge.s   loc_1434A
 		jsr     j_EquipItem
 loc_1434A:
-		
 		move.w  -$A(a6),d1
 		jsr     j_SetStatus
 		bsr.w   sub_137AC
@@ -6864,7 +6277,6 @@ loc_1434A:
 		jsr     (SetWindowDestination).w
 		moveq   #$1D,d6
 loc_14366:
-		
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bsr.w   sub_14074       
@@ -6875,11 +6287,9 @@ loc_14366:
 		bne.s   loc_14384
 		moveq   #$1E,d6
 loc_14384:
-		
 		jsr     (WaitForVInt).w 
 		bra.w   loc_14264
 loc_1438C:
-		
 		move.w  -2(a6),d0
 		move.w  ((EQUIPPABLE_ITEMS-$1000000)).w,d1
 		jsr     j_GetItemType
@@ -6888,10 +6298,8 @@ loc_1438C:
 		jsr     j_UnequipWeapon
 		bra.s   loc_143AC
 loc_143A6:
-		
 		jsr     j_UnequipRing
 loc_143AC:
-		
 		move.w  (sp)+,d1
 		lsl.w   #2,d1
 		lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a0
@@ -6900,7 +6308,6 @@ loc_143AC:
 		bge.s   loc_143C4
 		jsr     j_EquipItem
 loc_143C4:
-		
 		move.w  -$A(a6),d1
 		jsr     j_SetStatus
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d1
@@ -6915,7 +6322,6 @@ loc_143C4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_143E0:
-		
 		movem.w d0-d7,-(sp)
 		move.w  -8(a6),d0
 		move.w  #$2001,d1
@@ -6942,7 +6348,6 @@ sub_143E0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14422:
-		
 		movem.w d0-d2/d7,-(sp)
 		move.w  -4(a6),d0
 		move.w  #$21C,d1
@@ -6958,7 +6363,6 @@ sub_14422:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1443E:
-		
 		movem.w d0-d2/d7,-(sp)
 		move.w  -4(a6),d0
 		move.w  #$20E,d1
@@ -6974,7 +6378,6 @@ sub_1443E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1445A:
-		
 		movem.l d0/d3-a1,-(sp)
 		trap    #SOUND_COMMAND
 		dc.w SFX_VALIDATION
@@ -7010,11 +6413,9 @@ sub_1445A:
 		bsr.w   LoadIHighlightableSpellIcon
 		bsr.w   CleanIconCorners
 loc_144D8:
-		
 		jsr     (WaitForVInt).w 
 		moveq   #$1E,d6
 loc_144DE:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_144F8
 		moveq   #1,d1
@@ -7024,7 +6425,6 @@ loc_144DE:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_14574
 loc_144F8:
-		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14512
 		moveq   #2,d1
@@ -7034,7 +6434,6 @@ loc_144F8:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_14574
 loc_14512:
-		
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14524
 		clr.w   d1
@@ -7042,7 +6441,6 @@ loc_14512:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_14574
 loc_14524:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1453E
 		moveq   #3,d1
@@ -7052,27 +6450,23 @@ loc_14524:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_14574
 loc_1453E:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14550
 		move.b  #$FF,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 		bra.w   loc_145A8
 loc_14550:
-		
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14562
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_145A8
 loc_14562:
-		
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1458A
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_145A8
 loc_14574:
-		
 		move.w  d1,-(sp)
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -7082,7 +6476,6 @@ loc_14574:
 		move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 		moveq   #$1D,d6
 loc_1458A:
-		
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bsr.w   sub_14074       
@@ -7092,11 +6485,9 @@ loc_1458A:
 		bne.s   loc_145A0
 		moveq   #$1E,d6
 loc_145A0:
-		
 		jsr     (WaitForVInt).w 
 		bra.w   loc_144DE
 loc_145A8:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_VALIDATION
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d1
@@ -7106,7 +6497,6 @@ loc_145A8:
 		movem.l (sp)+,d0/d3-a1
 		rts
 loc_145BC:
-		
 		move.w  d1,d2
 		add.w   d2,d2
 		lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
@@ -7125,7 +6515,6 @@ loc_145BC:
 		jsr     (WaitForVInt).w 
 		moveq   #$14,d1
 loc_145EA:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14600
 		tst.w   d3
@@ -7135,7 +6524,6 @@ loc_145EA:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_1463E
 loc_14600:
-		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14616
 		cmp.w   d4,d3
@@ -7145,37 +6533,30 @@ loc_14600:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_1463E
 loc_14616:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14626
 		move.b  #$FF,d3
 		bra.w   loc_14654
 loc_14626:
-		
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14632
 		bra.w   loc_14654
 loc_14632:
-		
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14644
 		bra.w   loc_14654
 loc_1463E:
-		
 		bsr.w   sub_1474C
 		moveq   #$13,d1
 loc_14644:
-		
 		bsr.w   sub_146AE
 		subq.w  #1,d1
 		bne.s   loc_1464E
 		moveq   #$14,d1
 loc_1464E:
-		
 		jsr     (WaitForVInt).w 
 		bra.s   loc_145EA
 loc_14654:
-		
 		moveq   #$13,d1
 		bsr.w   sub_146AE
 		tst.b   d3
@@ -7186,13 +6567,11 @@ loc_14654:
 		bsr.w   sub_1474C
 		bra.w   loc_144D8
 loc_1466C:
-		
 		move.w  d2,d1
 		andi.w  #$3F,d1 
 		lsl.w   #6,d3
 		or.w    d3,d1
-		movem.l (sp)+,d0/d3-a1  
-						;     fixSelectionRectCorners
+		movem.l (sp)+,d0/d3-a1  ;     fixSelectionRectCorners
 														;     Remove white pixels from corners of spell/item selection rect.
 														;     In: A1 = end of selection rect section in RAM
 		rts
@@ -7220,7 +6599,6 @@ CleanIconCorners:
 ; =============== S U B R O U T I N E =======================================
 
 sub_146AE:
-		
 		movem.w d0/d2,-(sp)
 		lea     (byte_FFDCC0).l,a0
 		lea     unk_14724(pc), a1
@@ -7231,10 +6609,8 @@ sub_146AE:
 		moveq   #1,d1
 		move.w  #$100,d0
 loc_146CE:
-		
 		moveq   #1,d7
 loc_146D0:
-		
 		move.w  (a1)+,(a0)
 		add.w   d0,(a0)
 		move.w  (a1)+,d2
@@ -7248,17 +6624,14 @@ loc_146D0:
 		move.w  #$100,d0
 		bra.s   loc_146F6
 loc_146F4:
-		
 		clr.w   d0
 loc_146F6:
-		
 		clr.w   d2
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d2
 		lsl.w   #4,d2
 		add.w   d2,d0
 		moveq   #2,d7
 loc_14702:
-		
 		move.w  (a1)+,(a0)
 		add.w   d0,(a0)
 		move.w  (a1)+,d2
@@ -7273,8 +6646,7 @@ loc_14702:
 
 	; End of function sub_146AE
 
-unk_14724:
-		dc.b   1
+unk_14724:      dc.b   1
 		dc.b   4
 		dc.b  $D
 		dc.b   9
@@ -7318,7 +6690,6 @@ unk_14724:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1474C:
-		
 		move.w  -8(a6),d0
 		clr.w   d1
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d1
@@ -7345,7 +6716,6 @@ sub_1474C:
 ; related to item unequip and cursed items
 
 sub_1477E:
-		
 		cmpi.w  #$FFFF,d1
 		beq.w   loc_147B8
 		move.w  d2,d1
@@ -7356,18 +6726,15 @@ sub_1477E:
 		beq.w   return_147E6
 		jsr     sub_14422(pc)
 		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM  
-						; cursed item effect
+		dc.w MUSIC_CURSED_ITEM  ; cursed item effect
 		trap    #TEXTBOX
-		dc.w $2B                
-						; "Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}"
+		dc.w $2B                ; "Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}"
 		bsr.w   WaitForMusicResumeAndPlayerInput_0
 		trap    #TEXTBOX
 		dc.w $FFFF
 		jsr     sub_1443E(pc)
 		bra.w   return_147E6
 loc_147B8:
-		
 		move.w  d4,d1
 		jsr     j_EquipItem
 		cmpi.w  #2,d2
@@ -7375,17 +6742,14 @@ loc_147B8:
 		move.w  d0,(TEXT_NAME_INDEX_1).l
 		jsr     sub_14422(pc)
 		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM  
-						; cursed item effect
+		dc.w MUSIC_CURSED_ITEM  ; cursed item effect
 		trap    #TEXTBOX
-		dc.w $22                
-						; "Gosh!  {NAME} is{N}cursed!{W2}"
+		dc.w $22                ; "Gosh!  {NAME} is{N}cursed!{W2}"
 		bsr.w   WaitForMusicResumeAndPlayerInput_0
 		trap    #TEXTBOX
 		dc.w $FFFF
 		jsr     sub_1443E(pc)
 return_147E6:
-		
 		rts
 
 	; End of function sub_1477E
@@ -7408,7 +6772,6 @@ WaitForMusicResumeAndPlayerInput_0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_147FA:
-		
 		move.w  ((word_FFB130-$1000000)).w,d0
 		mulu.w  #6,d0
 		add.w   ((word_FFB132-$1000000)).w,d0
@@ -7417,7 +6780,6 @@ sub_147FA:
 		clr.w   ((word_FFB130-$1000000)).w
 		clr.w   ((word_FFB132-$1000000)).w
 loc_14814:
-		
 		link    a6,#-$F0
 		move.w  #$1B06,d0
 		move.w  #$2F7,d1
@@ -7460,7 +6822,6 @@ loc_14814:
 		jsr     (WaitForVint_andFFA900Clear).l
 		bsr.w   sub_14EDE
 loc_148BC:
-		
 		move.w  ((word_FFB132-$1000000)).w,d0
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14906
@@ -7481,12 +6842,10 @@ loc_148BC:
 		bsr.w   sub_14E62
 		bra.w   loc_149E0
 loc_148FA:
-		
 		move.w  d0,((word_FFB132-$1000000)).w
 		bsr.w   sub_14EC0
 		bra.w   loc_149E0
 loc_14906:
-		
 		move.w  ((word_FFB132-$1000000)).w,d0
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1494A
@@ -7504,12 +6863,10 @@ loc_14906:
 		bsr.w   sub_14E62
 		bra.w   loc_149E0
 loc_1493E:
-		
 		move.w  d0,((word_FFB132-$1000000)).w
 		bsr.w   sub_14EC0
 		bra.w   loc_149E0
 loc_1494A:
-		
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1496A
 		tst.w   ((word_FFB130-$1000000)).w
@@ -7520,7 +6877,6 @@ loc_1494A:
 		move.b  #1,((word_FFAF9E-$1000000)).w
 		bsr.w   sub_14E62
 loc_1496A:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_149C2
 		move.w  ((word_FFB130-$1000000)).w,d2
@@ -7543,21 +6899,17 @@ loc_1496A:
 		ble.s   loc_149A8
 		moveq   #6,d1
 loc_149A8:
-		
 		move.w  d1,((word_FFB134-$1000000)).w
 loc_149AC:
-		
 		cmp.w   d1,d0
 		blt.w   loc_149B6
 		subq.w  #1,d0
 		bne.s   loc_149AC
 loc_149B6:
-		
 		move.w  d0,((word_FFB132-$1000000)).w
 		clr.b   ((word_FFAF9E-$1000000)).w
 		bsr.w   sub_14E62
 loc_149C2:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_149EC
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -7565,16 +6917,13 @@ loc_149C2:
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_149F2
 loc_149E0:
-		
 		bsr.w   sub_14A82
 		jsr     (WaitForVInt).w 
 		bra.w   loc_148BC
 loc_149EC:
-		
 		moveq   #$FFFFFFFF,d0
 		bra.w   loc_14A0A
 loc_149F2:
-		
 		move.w  ((word_FFB130-$1000000)).w,d1
 		mulu.w  #6,d1
 		add.w   ((word_FFB132-$1000000)).w,d1
@@ -7582,7 +6931,6 @@ loc_149F2:
 		move.b  (a0,d1.w),d0
 		andi.w  #$FF,d0
 loc_14A0A:
-		
 		movem.w d0-d1,-(sp)
 		clr.w   d1
 		bsr.s   sub_14A82
@@ -7593,7 +6941,6 @@ loc_14A0A:
 		moveq   #4,d2
 		jsr     (MoveWindowWithoutSFX).l
 loc_14A26:
-		
 		move.w  -2(a6),d0
 		move.w  #$2F7,d1
 		moveq   #4,d2
@@ -7623,7 +6970,6 @@ loc_14A26:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14A82:
-		
 		lea     (byte_FFDCC0).l,a0
 		cmpi.w  #7,d1
 		bge.s   loc_14A9A
@@ -7631,14 +6977,12 @@ sub_14A82:
 		move.w  #1,6(a0)
 		bra.s   loc_14AAC
 loc_14A9A:
-		
 		move.w  ((word_FFB132-$1000000)).w,d0
 		lsl.w   #5,d0
 		addi.w  #$9C,d0 
 		move.w  d0,6(a0)
 		move.w  #$91,(a0) 
 loc_14AAC:
-		
 		move.w  #$F09,2(a0)
 		move.w  #$C7F0,4(a0)
 		addq.l  #8,a0
@@ -7651,11 +6995,9 @@ loc_14AAC:
 		move.w  #$98,6(a0) 
 		move.w  #$90,(a0) 
 loc_14ADA:
-		
 		move.w  #$A,2(a0)
 		move.w  #$D064,4(a0)
 loc_14AE6:
-		
 		addq.l  #8,a0
 		move.w  #1,(a0)
 		move.w  #1,6(a0)
@@ -7669,16 +7011,13 @@ loc_14AE6:
 		move.w  #$158,6(a0)
 		move.w  #$A8,(a0) 
 loc_14B12:
-		
 		move.w  #$10,2(a0)
 		move.w  #$C064,4(a0)
 loc_14B1E:
-		
 		subq.w  #1,d1
 		bne.s   loc_14B24
 		moveq   #$14,d1
 loc_14B24:
-		
 		bra.w   sub_101E6
 
 	; End of function sub_14A82
@@ -7689,7 +7028,6 @@ loc_14B24:
 ; related to gold display
 
 sub_14B28:
-		
 		move.w  #$904,d0
 		movea.l -$12(a6),a1
 		bsr.w   sub_1018E       
@@ -7709,14 +7047,12 @@ sub_14B28:
 
 	; End of function sub_14B28
 
-aGold:
-		dc.b 'GOLD',0
+aGold:          dc.b 'GOLD',0
 		dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_14B68:
-		
 		move.w  #$A05,d0
 		movea.l -$C(a6),a1
 		bsr.w   sub_1018E       
@@ -7746,7 +7082,6 @@ sub_14B68:
 ; copy item icon tiles into RAM based on index list at RAM:b0ae
 
 sub_14BB0:
-		
 		movea.l -6(a6),a1
 		lea     unk_1505C(pc), a0
 		move.w  #$144,d7
@@ -7755,7 +7090,6 @@ sub_14BB0:
 		lea     (byte_FF6942).l,a0
 		move.w  #$63F,d7
 loc_14BCE:
-		
 		move.l  #$FFFFFFFF,(a0)+
 		dbf     d7,loc_14BCE
 		lea     ((byte_FFB0AE-$1000000)).w,a1
@@ -7771,7 +7105,6 @@ loc_14BCE:
 		ble.s   loc_14BF8
 		moveq   #6,d1
 loc_14BF8:
-		
 		move.w  d1,((word_FFB134-$1000000)).w
 		move.w  d1,d7
 		subq.w  #1,d7
@@ -7779,7 +7112,6 @@ loc_14BF8:
 		movea.l -6(a6),a2
 		adda.w  #$3C,a2 
 loc_14C0E:
-		
 		clr.w   d0
 		move.b  (a1)+,d0
 		move.w  d7,-(sp)
@@ -7811,14 +7143,12 @@ loc_14C0E:
 ; copy shop price tag pixels to A0 in RAM
 
 sub_14C56:
-		
 		movem.l a1-a2,-(sp)
 		andi.l  #$FFFF,d0
 		move.l  a0,-(sp)
 		lea     unk_14EFC(pc), a1
 		moveq   #$1F,d7
 loc_14C68:
-		
 		move.l  (a1)+,(a0)+
 		dbf     d7,loc_14C68
 		movea.l (sp)+,a0
@@ -7827,7 +7157,6 @@ loc_14C68:
 		lea     ((byte_FFDE85-$1000000)).w,a2
 		moveq   #4,d7
 loc_14C7E:
-		
 		clr.w   d0
 		move.b  (a2)+,d0
 		cmpi.w  #$20,d0 
@@ -7843,10 +7172,8 @@ loc_14C7E:
 		move.l  (a1)+,(a0)+
 		bra.s   loc_14CA6
 loc_14CA2:
-		
 		adda.w  #$14,a0
 loc_14CA6:
-		
 		dbf     d7,loc_14C7E
 		addq.w  #8,a0
 		movem.l (sp)+,a1-a2
@@ -7860,7 +7187,6 @@ loc_14CA6:
 ; copy item # D1 icon pixels to A0 in RAM
 
 sub_14CB2:
-		
 		move.l  a1,-(sp)
 		move.w  d0,-(sp)
 		movea.l (p_Icons).l,a1
@@ -7871,7 +7197,6 @@ sub_14CB2:
 		adda.w  d0,a1
 		moveq   #$2F,d7 
 loc_14CC8:
-		
 		move.l  (a1)+,(a0)+
 		dbf     d7,loc_14CC8
 		ori.w   #$F,-2(a0)
@@ -7890,7 +7215,6 @@ loc_14CC8:
 ; get current item idx in shop/caravan (from index list) -> D0
 
 sub_14CEC:
-		
 		move.w  ((word_FFB130-$1000000)).w,d0
 		move.w  d0,d1
 		add.w   d0,d0
@@ -7909,7 +7233,6 @@ sub_14CEC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14D0C:
-		
 		bsr.w   *+4
 		movea.l -6(a6),a0
 		movea.l a0,a1
@@ -7927,7 +7250,6 @@ sub_14D0C:
 		adda.w  #$D8,a1 
 		jsr     (CopyBytes).w   
 loc_14D4A:
-		
 		move.w  -2(a6),d0
 		move.w  #$8080,d1
 		jsr     (SetWindowDestination).l
@@ -7942,7 +7264,6 @@ loc_14D4A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14D6A:
-		
 		lea     unk_151A0(pc), a0
 		movea.l -6(a6),a1
 		adda.w  #$36,a1 
@@ -7971,7 +7292,6 @@ sub_14D6A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14DBE:
-		
 		bra.s   loc_14D4A
 
 	; End of function sub_14DBE
@@ -7980,7 +7300,6 @@ sub_14DBE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14DC0:
-		
 		bsr.w   *+4
 		movea.l -6(a6),a0
 		movea.l a0,a1
@@ -8006,7 +7325,6 @@ sub_14DC0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14E06:
-		
 		lea     unk_151A0(pc), a0
 		movea.l -6(a6),a1
 		adda.w  #$A2,a1 
@@ -8036,7 +7354,6 @@ sub_14E06:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14E5E:
-		
 		bra.w   loc_14D4A
 
 	; End of function sub_14E5E
@@ -8045,7 +7362,6 @@ sub_14E5E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14E62:
-		
 		movea.l -6(a6),a0
 		adda.w  #$36,a0 
 		lea     -$F0(a6),a1
@@ -8056,10 +7372,8 @@ sub_14E62:
 		bsr.w   sub_14D0C
 		bra.s   loc_14E86
 loc_14E82:
-		
 		bsr.w   sub_14DC0
 loc_14E86:
-		
 		bsr.w   sub_14BB0       
 		movea.l -6(a6),a0
 		adda.w  #$36,a0 
@@ -8071,10 +7385,8 @@ loc_14E86:
 		bsr.w   sub_14D6A
 		bra.s   loc_14EAE
 loc_14EAA:
-		
 		bsr.w   sub_14E06
 loc_14EAE:
-		
 		move.w  -2(a6),d0
 		move.w  #$201,d1
 		moveq   #4,d2
@@ -8087,7 +7399,6 @@ loc_14EAE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14EC0:
-		
 		move.w  -8(a6),d0
 		move.w  #$2000,d1
 		jsr     (SetWindowDestination).l
@@ -8102,7 +7413,6 @@ sub_14EC0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_14EDE:
-		
 		bsr.w   sub_14B68
 		move.w  -8(a6),d0
 		move.w  ((word_FFB132-$1000000)).w,d1
@@ -8115,9 +7425,7 @@ sub_14EDE:
 
 	; End of function sub_14EDE
 
-unk_14EFC:
-		dc.b $11                
-						; price window layout ?
+unk_14EFC:      dc.b $11                ; price window layout ?
 		dc.b $FF
 		dc.b $FF
 		dc.b $FF
@@ -8245,8 +7553,7 @@ unk_14EFC:
 		dc.b $EE 
 		dc.b $EE 
 		dc.b $EF 
-aUuUuIUuUU:
-		dc.b $BE
+aUuUuIUuUU:     dc.b $BE
 		dc.b $EE 
 		dc.b $EE 
 		dc.b $BE 
@@ -8470,8 +7777,7 @@ aUuUuIUuUU:
 		dc.b   0
 		dc.b   0
 		dc.b   0
-unk_1505C:
-		dc.b $C0 
+unk_1505C:      dc.b $C0 
 		dc.b $60 
 		dc.b $C0 
 		dc.b $61 
@@ -8795,8 +8101,7 @@ unk_1505C:
 		dc.b $61 
 		dc.b $D8 
 		dc.b $60 
-unk_151A0:
-		dc.b $C0 
+unk_151A0:      dc.b $C0 
 		dc.b $70 
 		dc.b $C0 
 		dc.b $20
@@ -8850,8 +8155,7 @@ unk_151A0:
 		dc.b $20
 		dc.b $C8 
 		dc.b $70 
-unk_151D6:
-		dc.b $4F 
+unk_151D6:      dc.b $4F 
 		dc.b $FF
 		dc.b $B0 
 		dc.b $FC 
@@ -9001,12 +8305,10 @@ unk_151D6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_15268:
-		
 		lea     (byte_FFCC86).l,a0
 		move.l  #$C020C020,-$50(a0)
 		moveq   #$C,d7
 loc_15278:
-		
 		move.l  #$C020C020,(a0)+
 		dbf     d7,loc_15278
 		rts
@@ -9017,7 +8319,6 @@ loc_15278:
 ; =============== S U B R O U T I N E =======================================
 
 YesNoPrompt:
-		
 		clr.w   d0
 		move.b  ((P1_INPUT-$1000000)).w,d0
 		bra.s   loc_1528E
@@ -9037,7 +8338,6 @@ YesNoChoiceBox:
 ; START OF FUNCTION CHUNK FOR YesNoPrompt
 
 loc_1528E:
-		
 		movem.l d1-a1,-(sp)
 		link    a6,#-6
 		move.w  d0,-(sp)
@@ -9065,7 +8365,6 @@ loc_1528E:
 		moveq   #4,d2
 		jsr     (MoveWindowWithSFX).w
 loc_152F0:
-		
 		move.w  ((word_FFB086-$1000000)).w,d0
 		beq.s   loc_15302
 		subq.w  #1,d0
@@ -9073,19 +8372,15 @@ loc_152F0:
 		moveq   #4,d2
 		jsr     (MoveWindowWithSFX).w
 loc_15302:
-		
 		jsr     (WaitForVint_andFFA900Clear).w
 		move.w  (sp)+,d0
 		beq.w   loc_15312
 loc_1530C:
-		
 		tst.b   ((P1_INPUT-$1000000)).w
 		bne.s   loc_1530C
 loc_15312:
-		
 		moveq   #$F,d6
 loc_15314:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.w   loc_15328
 		clr.w   d1
@@ -9093,7 +8388,6 @@ loc_15314:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_15378
 loc_15328:
-		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.w   loc_1533C
 		moveq   #$FFFFFFFF,d1
@@ -9101,28 +8395,24 @@ loc_15328:
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_15378
 loc_1533C:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.w   loc_15350
 		moveq   #$FFFFFFFF,d0
 		move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
 		bra.w   loc_153D6
 loc_15350:
-		
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.w   loc_15364
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_153D6
 loc_15364:
-		
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.w   loc_153C0
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_153D6
 loc_15378:
-		
 		move.w  d1,-(sp)
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -9140,7 +8430,6 @@ loc_15378:
 		move.w  #$8080,d1
 		jsr     (SetWindowDestination).w
 loc_153AC:
-		
 		move.w  ((word_FFB086-$1000000)).w,d0
 		beq.s   loc_153BE
 		subq.w  #1,d0
@@ -9148,21 +8437,17 @@ loc_153AC:
 		moveq   #4,d2
 		jsr     (MoveWindowWithSFX).w
 loc_153BE:
-		
 		moveq   #$13,d6
 loc_153C0:
-		
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bsr.w   sub_15422       
 		subq.w  #1,d6
 		bne.s   loc_153CE
 		moveq   #$14,d6
 loc_153CE:
-		
 		jsr     (WaitForVInt).w 
 		bra.w   loc_15314
 loc_153D6:
-		
 		move.w  -2(a6),d0
 		move.w  #$F011,d1
 		moveq   #4,d2
@@ -9174,7 +8459,6 @@ loc_153D6:
 		moveq   #4,d2
 		jsr     (MoveWindowWithSFX).w
 loc_153F6:
-		
 		move.w  ((word_FFB086-$1000000)).w,d0
 		beq.s   loc_15408
 		subq.w  #1,d0
@@ -9182,7 +8466,6 @@ loc_153F6:
 		moveq   #4,d2
 		jsr     (MoveWindowWithSFX).w
 loc_15408:
-		
 		jsr     (WaitForVint_andFFA900Clear).w
 		move.w  -2(a6),d0
 		jsr     (ClearWindowAndUpdateEndPtr).w
@@ -9200,7 +8483,6 @@ loc_15408:
 ; d0 = FFAFE7, related to DMA
 
 sub_15422:
-		
 		andi.w  #1,d0
 		bne.w   sub_1544A
 
@@ -9210,13 +8492,11 @@ sub_15422:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1542A:
-		
 		lea     (FF8804_LOADING_SPACE).l,a0
 		cmpi.w  #$A,d6
 		blt.s   loc_1543A
 		adda.w  #$120,a0
 loc_1543A:
-		
 		lea     ($B800).l,a1
 		move.w  #$90,d0 
 		moveq   #2,d1
@@ -9228,13 +8508,11 @@ loc_1543A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1544A:
-		
 		lea     (byte_FF8A44).l,a0
 		cmpi.w  #$A,d6
 		blt.s   loc_1545A
 		adda.w  #$120,a0
 loc_1545A:
-		
 		lea     ($B920).l,a1
 		move.w  #$90,d0 
 		moveq   #2,d1
@@ -9256,10 +8534,8 @@ CopyYesNoIconsToRAM:
 		lea     s_Yes(pc), a0   
 		bra.s   loc_1548A
 loc_15486:
-		
 		lea     s_No(pc), a0    
 loc_1548A:
-		
 		movea.l -6(a6),a1
 		adda.w  #$30,a1 
 		moveq   #$FFFFFFE4,d1
@@ -9269,38 +8545,32 @@ loc_1548A:
 
 	; End of function CopyYesNoIconsToRAM
 
-s_Yes:
-		dc.b 'Yes'
-s_No:
-		dc.b 'No'
+s_Yes:          dc.b 'Yes'
+s_No:           dc.b 'No'
 		dc.b $20
-asc_154A2:
-		dc.b '≈¿≈¡≈¬',0
+asc_154A2:      dc.b '≈¿≈¡≈¬',0
 		dc.b   0
 		dc.b   0
 		dc.b   0
 		dc.b '≈…≈ ≈À',0
 		dc.b   0
-aAAA:
-		dc.b '¿`¿a¿a¿a»`≈√≈ƒ≈≈',0
+aAAA:           dc.b '¿`¿a¿a¿a»`≈√≈ƒ≈≈',0
 		dc.b   0
 		dc.b   0
 		dc.b   0
 		dc.b '≈Ã≈Õ≈Œ',0
 		dc.b   0
-aPP:dc.b '¿p¿ ¿ ¿ »p≈∆≈«≈»',0
+aPP:            dc.b '¿p¿ ¿ ¿ »p≈∆≈«≈»',0
 		dc.b   0
 		dc.b   0
 		dc.b   0
 		dc.b '≈œ≈–≈—',0
 		dc.b   0
-aAAA_0:
-		dc.b '–`–a–a–aÿ`'
+aAAA_0:         dc.b '–`–a–a–aÿ`'
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_154F6:
-		
 		clr.b   ((byte_FFB082-$1000000)).w
 		jsr     (WaitForVInt).w 
 		move.w  d0,-(sp)
@@ -9309,10 +8579,8 @@ sub_154F6:
 		clr.w   d1
 		bra.s   loc_1550C
 loc_1550A:
-		
 		moveq   #1,d1
 loc_1550C:
-		
 		lea     ((BLINK_DATA-$1000000)).w,a2
 		move.w  ((BLINK_TILE_NUMBER-$1000000)).w,d7
 		bsr.w   UpdatePortrait  
@@ -9322,10 +8590,8 @@ loc_1550C:
 		clr.w   d1
 		bra.s   loc_15526
 loc_15524:
-		
 		moveq   #1,d1
 loc_15526:
-		
 		lea     ((MOUTH_DATA-$1000000)).w,a2
 		move.w  ((MOUTH_TILE_NUMBER-$1000000)).w,d7
 		bsr.w   UpdatePortrait  
@@ -9351,7 +8617,6 @@ VInt_HandlePortraitBlinking:
 		move.w  ((BLINK_TILE_NUMBER-$1000000)).w,d7
 		bsr.w   UpdatePortrait  
 loc_1555E:
-		
 		tst.w   (a0)
 		bne.s   loc_1557C
 		clr.w   d1
@@ -9363,7 +8628,6 @@ loc_1555E:
 		addi.w  #$1E,d7
 		move.w  d7,(a0)
 loc_1557C:
-		
 		lea     ((word_FFB07C-$1000000)).w,a0
 		tst.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 		bne.s   loc_1558E
@@ -9371,7 +8635,6 @@ loc_1557C:
 		ble.s   loc_155A8
 		bra.s   return_155C2
 loc_1558E:
-		
 		subq.w  #1,(a0)
 		cmpi.w  #5,(a0)
 		bne.s   loc_155A4
@@ -9380,11 +8643,9 @@ loc_1558E:
 		move.w  ((MOUTH_TILE_NUMBER-$1000000)).w,d7
 		bsr.w   UpdatePortrait  
 loc_155A4:
-		
 		tst.w   (a0)
 		bne.s   return_155C2
 loc_155A8:
-		
 		clr.w   d1
 		lea     ((MOUTH_DATA-$1000000)).w,a2
 		move.w  ((MOUTH_TILE_NUMBER-$1000000)).w,d7
@@ -9394,7 +8655,6 @@ loc_155A8:
 		addi.w  #$A,d7
 		move.w  d7,(a0)
 return_155C2:
-		
 		rts
 
 	; End of function VInt_HandlePortraitBlinking
@@ -9409,7 +8669,6 @@ UpdatePortrait:
 		bne.s   loc_155C8
 		rts
 loc_155C8:
-		
 		move.w  d1,-(sp)
 		move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
 		subq.w  #1,d0
@@ -9418,7 +8677,6 @@ loc_155C8:
 		move.w  (sp)+,d1
 		subq.w  #1,d7
 loc_155DC:
-		
 		move.w  d7,-(sp)
 		clr.w   d0
 		clr.w   d5
@@ -9435,7 +8693,6 @@ loc_155DC:
 		bne.s   loc_155FA
 		move.w  d6,d0
 loc_155FA:
-		
 		or.w    ((word_FFB07E-$1000000)).w,d0
 		tst.b   ((PORTRAIT_IS_FLIPPED-$1000000)).w
 		beq.s   loc_1560E
@@ -9443,7 +8700,6 @@ loc_155FA:
 		subq.l  #2,d6
 		ori.w   #$800,d0
 loc_1560E:
-		
 		add.w   d6,d6
 		move.w  d0,(a1,d6.w)
 		move.w  (sp)+,d7
@@ -9462,7 +8718,6 @@ loc_1560E:
 ;     In: D0 = portrait idx
 
 LoadPortrait:
-		
 		movem.l d0-a3,-(sp)
 		movea.l (p_pt_Portraits).l,a0
 		lsl.w   #2,d0
@@ -9473,28 +8728,23 @@ LoadPortrait:
 		subq.w  #1,d0
 		lea     ((BLINK_DATA-$1000000)).w,a1
 loc_15648:
-		
 		move.l  (a0)+,(a1)+
 		dbf     d0,loc_15648
 loc_1564E:
-		
 		move.w  (a0)+,d0
 		move.w  d0,((MOUTH_TILE_NUMBER-$1000000)).w
 		beq.s   loc_15662
 		subq.w  #1,d0
 		lea     ((MOUTH_DATA-$1000000)).w,a1
 loc_1565C:
-		
 		move.l  (a0)+,(a1)+
 		dbf     d0,loc_1565C
 loc_15662:
-		
 		lea     (PALETTE_2).l,a1
 		lea     (PALLETE_2_BIS).l,a2
 		lea     ((byte_FFDF4A-$1000000)).w,a3
 		moveq   #7,d7
 loc_15674:
-		
 		move.l  (a0),(a1)+
 		move.l  (a0),(a2)+
 		move.l  (a0)+,(a3)+
@@ -9518,7 +8768,6 @@ loc_15674:
 ; =============== S U B R O U T I N E =======================================
 
 sub_156A8:
-		
 		movem.w d0,-(sp)
 		bsr.s   sub_156CE
 		move.l  #$F80B010B,d1
@@ -9532,7 +8781,6 @@ sub_156A8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_156BC:
-		
 		move.w  d0,-(sp)
 		bsr.s   sub_156CE
 		move.l  #$10BF80B,d1
@@ -9546,7 +8794,6 @@ sub_156BC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_156CE:
-		
 		movem.l d7-a1,-(sp)
 		lea     MenuLayout_15706(pc), a0
 		lea     ((VDP_TILE_IDX_LIST-$1000000)).w,a1
@@ -9627,33 +8874,26 @@ GetCharPortraitIdx:
 		cmpi.b  #$1E,d0
 		bhi.w   loc_1576E
 		jsr     j_GetClass      
-		cmpi.b  #$C,d1          
-						; stupid CMP mechanism for alternate portraits, need to improve that one day
-		bne.s   loc_1574E       
-						; HARDCODED promotion classes which trigger new portraits
+		cmpi.b  #$C,d1          ; stupid CMP mechanism for alternate portraits, need to improve that one day
+		bne.s   loc_1574E       ; HARDCODED promotion classes which trigger new portraits
 		moveq   #$2F,d0 
 loc_1574E:
-		
 		cmpi.b  #$1A,d1
 		bne.s   loc_15756
 		moveq   #$30,d0 
 loc_15756:
-		
 		cmpi.b  #$18,d1
 		bne.s   loc_1575E
 		moveq   #$31,d0 
 loc_1575E:
-		
 		cmpi.b  #$1B,d1
 		bne.s   loc_15766
 		moveq   #$32,d0 
 loc_15766:
-		
 		cmpi.b  #$1C,d1
 		bne.s   loc_1576E
 		moveq   #$33,d0 
 loc_1576E:
-		
 		move.w  (sp)+,d1
 		rts
 
@@ -9679,7 +8919,6 @@ CreateLandEffectWindow:
 		blt.s   loc_157A6
 		move.w  #$101,d1
 loc_157A6:
-		
 		jsr     (MoveWindowWithSFX).w
 		jsr     (WaitForVint_andFFA900Clear).w
 		movem.l (sp)+,d0-a2
@@ -9707,7 +8946,6 @@ HideLandEffectWindow:
 		clr.w   ((LAND_EFFECT_WINDOW_IDX-$1000000)).w
 		movem.l (sp)+,d0-a2
 return_157E6:
-		
 		rts
 
 	; End of function HideLandEffectWindow
@@ -9716,7 +8954,6 @@ return_157E6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_157E8:
-		
 		tst.w   ((LAND_EFFECT_WINDOW_IDX-$1000000)).w
 		beq.w   return_15810
 		movem.l d0-a2,-(sp)
@@ -9728,10 +8965,8 @@ sub_157E8:
 		move.w  #$8080,d1
 		jsr     (SetWindowDestination).w
 loc_1580C:
-		
 		movem.l (sp)+,d0-a2
 return_15810:
-		
 		rts
 
 	; End of function sub_157E8
@@ -9769,15 +9004,13 @@ DrawLandEffectWindow:
 
 	; End of function DrawLandEffectWindow
 
-aLandEffect:
-		dc.b 'LAND',$B,'EFFECT',0
+aLandEffect:    dc.b 'LAND',$B,'EFFECT',0
 
 ; =============== S U B R O U T I N E =======================================
 
 ; related to battlefield options
 
 sub_1586E:
-		
 		addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 		movem.l d0-a1,-(sp)
 		link    a6,#-$10
@@ -9804,32 +9037,27 @@ sub_1586E:
 		bsr.w   sub_15A20
 		moveq   #$14,d6
 loc_158D6:
-		
 		bsr.w   sub_159A0
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_158E8
 		addq.w  #1,d3
 		bsr.w   sub_15A3E
 loc_158E8:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_158F6
 		subq.w  #1,d3
 		bsr.w   sub_15A3E
 loc_158F6:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_15906
 		eori.w  #1,d4
 		bsr.w   sub_15A20
 loc_15906:
-		
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_15916
 		eori.w  #1,d4
 		bsr.w   sub_15A20
 loc_15916:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_15940
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -9841,14 +9069,11 @@ loc_15916:
 		bne.s   loc_1593E
 		moveq   #$14,d6
 loc_1593E:
-		
 		bra.s   loc_158D6
 loc_15940:
-		
 		move.b  -$A(a6),((MESSAGE_SPEED-$1000000)).w
 		move.b  -8(a6),((DISPLAY_BATTLE_MESSAGES-$1000000)).w
 loc_1594C:
-		
 		move.w  -6(a6),d0
 		move.w  #$71E,d1
 		moveq   #4,d2
@@ -9880,11 +9105,9 @@ CopyBattlefieldOptionsMenuLayout:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1598C:
-		
 		lea     (byte_FFDCC0).l,a0
 		moveq   #3,d7
 loc_15994:
-		
 		move.w  #1,(a0)
 		addq.l  #8,a0
 		dbf     d7,loc_15994
@@ -9896,7 +9119,6 @@ loc_15994:
 ; =============== S U B R O U T I N E =======================================
 
 sub_159A0:
-		
 		tst.w   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 		bne.s   sub_1598C
 		movem.w d3-d4/d7,-(sp)
@@ -9911,7 +9133,6 @@ sub_159A0:
 		bge.s   loc_159CA
 		move.w  #$FF00,d3
 loc_159CA:
-		
 		move.w  (a1)+,(a0)+
 		move.l  (a1)+,(a0)+
 		move.w  (a1)+,(a0)
@@ -9925,10 +9146,8 @@ loc_159CA:
 		bge.s   loc_159E8
 		move.w  #$FF00,d3
 loc_159E8:
-		
 		moveq   #2,d7
 loc_159EA:
-		
 		move.w  (a1)+,(a0)+
 		move.l  (a1)+,(a0)+
 		move.w  (a1)+,(a0)
@@ -9940,8 +9159,7 @@ loc_159EA:
 
 	; End of function sub_159A0
 
-unk_15A00:
-		dc.b   1
+unk_15A00:      dc.b   1
 		dc.b $24 
 		dc.b   5
 		dc.b   9
@@ -9977,7 +9195,6 @@ unk_15A00:
 ; =============== S U B R O U T I N E =======================================
 
 sub_15A20:
-		
 		clr.w   d3
 		tst.w   d4
 		bne.s   loc_15A30
@@ -9985,11 +9202,9 @@ sub_15A20:
 		andi.w  #3,d3
 		bra.s   loc_15A38
 loc_15A30:
-		
 		move.b  ((DISPLAY_BATTLE_MESSAGES-$1000000)).w,d3
 		andi.w  #1,d3
 loc_15A38:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_MENU_SELECTION
 		rts
@@ -10000,18 +9215,15 @@ loc_15A38:
 ; =============== S U B R O U T I N E =======================================
 
 sub_15A3E:
-		
 		tst.w   d4
 		bne.s   loc_15A4C
 		andi.w  #3,d3
 		move.b  d3,((MESSAGE_SPEED-$1000000)).w
 		bra.s   loc_15A54
 loc_15A4C:
-		
 		andi.w  #1,d3
 		move.b  d3,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
 loc_15A54:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_MENU_SELECTION
 		rts
@@ -10024,7 +9236,6 @@ BattleConfigWindowLayout:
 ; =============== S U B R O U T I N E =======================================
 
 sub_15BB0:
-		
 		movem.l d0-a2,-(sp)
 		link    a6,#-$20
 		move.w  d0,-$14(a6)
@@ -10076,7 +9287,6 @@ sub_15BB0:
 		beq.s   loc_15C72
 		jsr     j_CopyCharNameToRAM
 loc_15C72:
-		
 		bsr.w   sub_15FD8
 		move.w  -$12(a6),d0
 		move.w  #$21C,d1
@@ -10106,7 +9316,6 @@ loc_15C72:
 ; =============== S U B R O U T I N E =======================================
 
 sub_15CC4:
-		
 		lea     (FF8804_LOADING_SPACE).l,a0
 		clr.l   (a0)+
 		clr.l   (a0)+
@@ -10116,7 +9325,6 @@ sub_15CC4:
 		clr.w   d0
 		moveq   #$14,d1
 loc_15CDC:
-		
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_15DE0
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -10132,12 +9340,10 @@ loc_15CDC:
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_15D2C
 loc_15D22:
-		
 		bsr.w   sub_15F24
 		jsr     (WaitForVInt).w 
 		bra.s   loc_15CDC
 loc_15D2C:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_VALIDATION
 		clr.w   d0
@@ -10147,7 +9353,6 @@ loc_15D2C:
 		cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 		beq.w   loc_15D9A
 loc_15D46:
-		
 		add.w   d0,d0
 		clr.w   d2
 		move.b  ((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w,d2
@@ -10159,13 +9364,11 @@ loc_15D46:
 		bpl.s   loc_15D64
 		subi.b  #$20,d0 
 loc_15D64:
-		
 		bsr.w   loc_15DC2
 		move.b  d0,-1(a0)
 		clr.b   (a0)
 		addq.w  #1,-$18(a6)
 loc_15D72:
-		
 		bsr.w   sub_16026
 		move.w  -$10(a6),d0
 		move.w  #$8080,d1
@@ -10176,16 +9379,13 @@ loc_15D72:
 		bne.s   loc_15D96
 		move.w  #$1704,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
 loc_15D96:
-		
 		bra.w   loc_15CDC
 loc_15D9A:
-		
 		cmpi.b  #$17,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
 		beq.w   loc_15F22
 		cmpi.b  #$13,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
 		bne.s   loc_15D46
 loc_15DAC:
-		
 		bsr.w   loc_15DC2
 		tst.w   -$18(a6)
 		beq.w   loc_15CDC
@@ -10193,26 +9393,21 @@ loc_15DAC:
 		bsr.w   loc_15DC2
 		bra.s   loc_15D72
 loc_15DC2:
-		
 		lea     (byte_FF8805).l,a0
 		clr.w   -$18(a6)
 loc_15DCC:
-		
 		move.b  (a0)+,d2
 		tst.b   d2
 		beq.s   return_15DD8
 		addq.w  #1,-$18(a6)
 		bra.s   loc_15DCC
 return_15DD8:
-		
 		rts
 loc_15DDA:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_VALIDATION
 		bra.s   loc_15DAC
 loc_15DE0:
-		
 		cmpi.w  #7,-$18(a6)
 		bne.w   loc_15DFE
 		cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
@@ -10220,41 +9415,33 @@ loc_15DE0:
 		cmpi.b  #$13,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
 		bne.w   loc_15D22
 loc_15DFE:
-		
 		move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d0
 		addq.b  #1,d0
 		cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 		bge.s   loc_15E16
-		cmpi.b  #$1A,d0         
-						; HARDCODED stuff ?
+		cmpi.b  #$1A,d0         ; HARDCODED stuff ?
 		bne.s   loc_15E14
 		moveq   #0,d0
 loc_15E14:
-		
 		bra.s   loc_15E2E
 loc_15E16:
-		
 		cmpi.b  #$12,d0
 		bne.s   loc_15E1E
 		moveq   #$13,d0
 loc_15E1E:
-		
 		cmpi.b  #$14,d0
 		bne.s   loc_15E26
 		moveq   #$17,d0
 loc_15E26:
-		
 		cmpi.b  #$18,d0
 		bne.s   loc_15E2E
 		moveq   #0,d0
 loc_15E2E:
-		
 		move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
 		trap    #SOUND_COMMAND
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_15D22
 loc_15E3A:
-		
 		cmpi.w  #7,-$18(a6)
 		bne.w   loc_15E58
 		cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
@@ -10262,7 +9449,6 @@ loc_15E3A:
 		cmpi.b  #$17,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
 		bne.w   loc_15D22
 loc_15E58:
-		
 		move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d0
 		subq.b  #1,d0
 		cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
@@ -10271,31 +9457,25 @@ loc_15E58:
 		bne.s   loc_15E6E
 		moveq   #$19,d0
 loc_15E6E:
-		
 		bra.s   loc_15E88
 loc_15E70:
-		
 		cmpi.b  #$16,d0
 		bne.s   loc_15E78
 		moveq   #$13,d0
 loc_15E78:
-		
 		cmpi.b  #$12,d0
 		bne.s   loc_15E80
 		moveq   #$11,d0
 loc_15E80:
-		
 		cmpi.b  #$FF,d0
 		bne.s   loc_15E88
 		moveq   #$17,d0
 loc_15E88:
-		
 		move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
 		trap    #SOUND_COMMAND
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_15D22
 loc_15E94:
-		
 		cmpi.w  #7,-$18(a6)
 		beq.w   loc_15D22
 		move.b  ((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w,d0
@@ -10304,14 +9484,12 @@ loc_15E94:
 		bne.s   loc_15EAC
 		moveq   #4,d0
 loc_15EAC:
-		
 		move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 		bsr.s   sub_15EE0
 		trap    #SOUND_COMMAND
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_15D22
 loc_15EBA:
-		
 		cmpi.w  #7,-$18(a6)
 		beq.w   loc_15D22
 		move.b  ((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w,d0
@@ -10320,7 +9498,6 @@ loc_15EBA:
 		bne.s   loc_15ED2
 		moveq   #0,d0
 loc_15ED2:
-		
 		move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 		trap    #SOUND_COMMAND
 		dc.w SFX_MENU_SELECTION
@@ -10333,44 +9510,35 @@ loc_15ED2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_15EE0:
-		
 		cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 		bne.s   return_15F20
 		move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d0
-		cmpi.b  #$12,d0         
-						; HARDCODED stuff ?
+		cmpi.b  #$12,d0         ; HARDCODED stuff ?
 		bne.s   loc_15EF4
 		moveq   #$13,d0
 loc_15EF4:
-		
 		cmpi.b  #$14,d0
 		bne.s   loc_15EFC
 		moveq   #$13,d0
 loc_15EFC:
-		
 		cmpi.b  #$15,d0
 		bne.s   loc_15F04
 		moveq   #$13,d0
 loc_15F04:
-		
 		cmpi.b  #$16,d0
 		bne.s   loc_15F0C
 		moveq   #$17,d0
 loc_15F0C:
-		
 		cmpi.b  #$18,d0
 		bne.s   loc_15F14
 		moveq   #$17,d0
 loc_15F14:
-		
 		cmpi.b  #$19,d0
 		bne.s   loc_15F1C
 		moveq   #$17,d0
 loc_15F1C:
-		
 		move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
 return_15F20:
-		
 		rts
 
 	; End of function sub_15EE0
@@ -10379,7 +9547,6 @@ return_15F20:
 ; START OF FUNCTION CHUNK FOR sub_15CC4
 
 loc_15F22:
-		
 		clr.w   d1
 
 ; END OF FUNCTION CHUNK FOR sub_15CC4
@@ -10388,12 +9555,10 @@ loc_15F22:
 ; =============== S U B R O U T I N E =======================================
 
 sub_15F24:
-		
 		tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 		beq.s   loc_15F2C
 		moveq   #1,d1
 loc_15F2C:
-		
 		lea     (byte_FFDCC0).l,a0
 		cmpi.w  #7,d1
 		bge.s   loc_15F50
@@ -10403,7 +9568,6 @@ loc_15F2C:
 		move.w  #1,$E(a0)
 		bra.s   loc_15F90
 loc_15F50:
-		
 		clr.w   d0
 		move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d0
 		lsl.w   #3,d0
@@ -10422,13 +9586,10 @@ loc_15F50:
 		move.w  d0,$E(a0)
 		bra.s   loc_15F8A
 loc_15F84:
-		
 		move.w  #1,$E(a0)
 loc_15F8A:
-		
 		move.w  #$C9,8(a0) 
 loc_15F90:
-		
 		move.b  #5,2(a0)
 		move.w  #$C5C8,4(a0)
 		cmpi.b  #$13,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
@@ -10438,14 +9599,12 @@ loc_15F90:
 		move.b  #$D,2(a0)
 		move.w  #$C5C0,4(a0)
 loc_15FB8:
-		
 		clr.b   $A(a0)
 		move.w  #$C5C3,$C(a0)
 		subq.w  #1,d1
 		bne.s   loc_15FC8
 		moveq   #$14,d1
 loc_15FC8:
-		
 		move.b  #9,3(a0)
 		move.b  #$10,$B(a0)
 		bra.w   sub_101E6
@@ -10456,7 +9615,6 @@ loc_15FC8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_15FD8:
-		
 		lea     AlphabetEndWindowLayout(pc), a0
 		movea.l -8(a6),a1
 		move.w  #$2A,d7 
@@ -10474,7 +9632,6 @@ sub_15FD8:
 		moveq   #$FFFFFFF2,d1
 		bsr.w   WriteTilesFromASCII
 loc_1601E:
-		
 		move.w  #$FFFF,-$1A(a6)
 		rts
 
@@ -10484,7 +9641,6 @@ loc_1601E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_16026:
-		
 		lea     AlphabetEndWindowLayout(pc), a0
 		movea.l -8(a6),a1
 		move.w  #$2A,d7 
@@ -10502,7 +9658,6 @@ sub_16026:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1604A:
-		
 		lea     NameEntryWindowLayout(pc), a0
 		movea.l -$C(a6),a1
 		move.w  #$366,d7
@@ -10525,8 +9680,7 @@ AlphabetWindowLayout:
 		incbin "data/graphics/tech/windowlayouts/alphabetwindowlayout.bin"
 AlphabetEndWindowLayout:
 		incbin "data/graphics/tech/windowlayouts/alphabetendwindowlayout.bin"
-unk_1623A:
-		dc.b $3D 
+unk_1623A:      dc.b $3D 
 		dc.b $FF
 		dc.b $80 
 		dc.b   0
@@ -10607,7 +9761,6 @@ unk_1623A:
 ; Out: D0 = chosen num
 
 NumberPrompt:
-		
 		movem.l d1-a1,-(sp)
 		link    a6,#$FFF0
 		move.w  d0,-WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6)
@@ -10625,7 +9778,6 @@ NumberPrompt:
 		jsr     (MoveWindowWithSFX).l
 		jsr     (WaitForVint_andFFA900Clear).l
 loc_162C6:
-		
 		bsr.w   sub_16376
 		move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6),d0
 		move.w  #$8080,d1
@@ -10635,25 +9787,21 @@ loc_162C6:
 		moveq   #1,d3
 		bsr.w   ModifyPromptNumber
 loc_162E6:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_162F4
 		moveq   #$FFFFFFFF,d3
 		bsr.w   ModifyPromptNumber
 loc_162F4:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_16302
 		moveq   #$A,d3
 		bsr.w   ModifyPromptNumber
 loc_16302:
-		
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_16310
 		moveq   #$FFFFFFF6,d3
 		bsr.w   ModifyPromptNumber
 loc_16310:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_16344
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -10665,13 +9813,10 @@ loc_16310:
 		jsr     (UpdateRandomSeed).w
 		movem.l (sp)+,d6-d7
 		jsr     (WaitForVInt).w 
-		bra.s   loc_162C6       
-						; bra.s loc_162C6
+		bra.s   loc_162C6       ; bra.s loc_162C6
 loc_16344:
-		
 		move.w  #$FFFF,-WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6)
 loc_1634A:
-		
 		move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6),d0
 		move.w  #$2001,d1
 		moveq   #4,d2
@@ -10690,7 +9835,6 @@ loc_1634A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_16376:
-		
 		movea.l -4(a6),a1
 		move.w  #$703,d0
 		bsr.w   CopyWindowTilesToRAM
@@ -10717,12 +9861,10 @@ ModifyPromptNumber:
 		blt.s   loc_163A8
 		move.w  -$C(a6),d0
 loc_163A8:
-		
 		cmp.w   -$A(a6),d0
 		bge.s   loc_163B2
 		move.w  -$A(a6),d0
 loc_163B2:
-		
 		move.w  d0,-8(a6)
 		trap    #SOUND_COMMAND
 		dc.w SFX_MENU_SELECTION
@@ -10750,7 +9892,6 @@ DebugFlagSetter:
 		jsr     (MoveWindowWithSFX).l
 		jsr     (WaitForVint_andFFA900Clear).l
 loc_163F6:
-		
 		bsr.w   sub_164AC
 		move.w  -6(a6),d0
 		move.w  #$8080,d1
@@ -10760,25 +9901,21 @@ loc_163F6:
 		moveq   #1,d3
 		bsr.w   sub_164E8
 loc_16416:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_16424
 		moveq   #$FFFFFFFF,d3
 		bsr.w   sub_164E8
 loc_16424:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_16432
 		moveq   #$A,d3
 		bsr.w   sub_164E8
 loc_16432:
-		
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_16440
 		moveq   #$FFFFFFF6,d3
 		bsr.w   sub_164E8
 loc_16440:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_16484
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -10786,25 +9923,21 @@ loc_16440:
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_16474
 loc_1645E:
-		
 		jsr     (WaitForVInt).w 
 		bra.s   loc_163F6
 loc_16464:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_VALIDATION
 		move.w  -8(a6),d1
 		jsr     j_SetFlag
 		bra.s   loc_1645E
 loc_16474:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_VALIDATION
 		move.w  -8(a6),d1
 		jsr     j_ClearFlag
 		bra.s   loc_1645E
 loc_16484:
-		
 		move.w  -6(a6),d0
 		move.w  #$2001,d1
 		moveq   #4,d2
@@ -10822,7 +9955,6 @@ loc_16484:
 ; =============== S U B R O U T I N E =======================================
 
 sub_164AC:
-		
 		movea.l -4(a6),a1
 		move.w  #$703,d0
 		bsr.w   CopyWindowTilesToRAM
@@ -10840,10 +9972,8 @@ sub_164AC:
 		move.w  #$C030,(a1)
 		bra.s   return_164E6
 loc_164E2:
-		
 		move.w  #$C031,(a1)
 return_164E6:
-		
 		rts
 
 	; End of function sub_164AC
@@ -10852,19 +9982,16 @@ return_164E6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_164E8:
-		
 		move.w  -8(a6),d0
 		add.w   d3,d0
 		cmpi.w  #0,d0
 		bge.s   loc_164F8
 		move.w  #0,d0
 loc_164F8:
-		
 		cmpi.w  #$3FF,d0
 		blt.s   loc_16502
 		move.w  #$3FF,d0
 loc_16502:
-		
 		move.w  d0,-8(a6)
 		trap    #SOUND_COMMAND
 		dc.w SFX_MENU_SELECTION
@@ -10880,10 +10007,8 @@ SpecialBattle:
 		movem.l d0-d1/a0-a1,-(sp)
 		tst.w   ((TIMER_WINDOW_INDEX-$1000000)).w
 		bne.s   loc_1654C
-		move.w  #$804,d0        
-						; width height
-		move.w  #$117,d1        
-						; X-Y screen pos
+		move.w  #$804,d0        ; width height
+		move.w  #$117,d1        ; X-Y screen pos
 		jsr     (CreateWindow).l
 		bsr.w   sub_165C0
 		move.w  #$8080,d1
@@ -10896,7 +10021,6 @@ SpecialBattle:
 		move.l  #$FFFFFFFF,((SPECIAL_BATTLE_TIME-$1000000)).w
 		addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_1654C:
-		
 		movem.l (sp)+,d0-d1/a0-a1
 		rts
 
@@ -10906,7 +10030,6 @@ loc_1654C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_16552:
-		
 		movem.l d0-d1/a0-a1,-(sp)
 		move.w  ((TIMER_WINDOW_INDEX-$1000000)).w,d0
 		beq.s   loc_16582
@@ -10921,7 +10044,6 @@ sub_16552:
 		dc.l VInt_16588
 		subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_16582:
-		
 		movem.l (sp)+,d0-d1/a0-a1
 		rts
 
@@ -10931,7 +10053,6 @@ loc_16582:
 ; =============== S U B R O U T I N E =======================================
 
 VInt_16588:
-		
 		movem.l d0-d1/a0-a1,-(sp)
 		move.w  ((TIMER_WINDOW_INDEX-$1000000)).w,d0
 		beq.s   loc_165BA
@@ -10948,7 +10069,6 @@ VInt_16588:
 		move.w  #$8080,d1
 		jsr     (SetWindowDestination).l
 loc_165BA:
-		
 		movem.l (sp)+,d0-d1/a0-a1
 		rts
 
@@ -10958,7 +10078,6 @@ loc_165BA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_165C0:
-		
 		move.w  d0,-(sp)
 		clr.w   d1
 		jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
@@ -10976,7 +10095,6 @@ sub_165C0:
 		bcs.s   loc_165FA
 		move.l  #$3E7,d0
 loc_165FA:
-		
 		moveq   #$FFFFFFF0,d1
 		moveq   #3,d7
 		bsr.w   WriteTilesFromNumber
@@ -11024,7 +10142,6 @@ WitchMainMenu:
 		jsr     (WaitForVInt).w 
 		movem.w (sp)+,d0
 loc_166C2:
-		
 		bsr.w   sub_1679E
 		movem.w d0,-(sp)
 		move.w  -6(a6),d0
@@ -11036,25 +10153,21 @@ loc_166C2:
 		moveq   #1,d3
 		bsr.w   sub_1678A
 loc_166EA:
-		
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_166F8
 		moveq   #$FFFFFFFF,d3
 		bsr.w   sub_1678A
 loc_166F8:
-		
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_16706
 		moveq   #1,d3
 		bsr.w   sub_1678A
 loc_16706:
-		
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_16714
 		moveq   #$FFFFFFFF,d3
 		bsr.w   sub_1678A
 loc_16714:
-		
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_16756
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -11070,16 +10183,12 @@ loc_16714:
 		bne.s   loc_16752
 		move.w  #$14,-8(a6)
 loc_16752:
-		
 		bra.w   loc_166C2
 loc_16756:
-		
 		move.w  #$FFFF,d0
 loc_1675A:
-		
 		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION     
-						; validation
+		dc.w SFX_VALIDATION     ; validation
 		movem.w d0,-(sp)
 		move.w  -6(a6),d0
 		move.w  #$2001,d1
@@ -11098,7 +10207,6 @@ loc_1675A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1678A:
-		
 		trap    #SOUND_COMMAND
 		dc.w SFX_MENU_SELECTION
 		add.w   d3,d0
@@ -11114,11 +10222,9 @@ sub_1678A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1679E:
-		
 		movea.l -4(a6),a0
 		move.w  #$A7,d7 
 loc_167A6:
-		
 		clr.l   (a0)+
 		dbf     d7,loc_167A6
 		move.w  -$C(a6),d6
@@ -11129,7 +10235,6 @@ loc_167A6:
 		move.w  #$188,d1
 		bsr.w   DrawWitchMenuBubble
 loc_167C6:
-		
 		btst    #1,d6
 		beq.s   loc_167DC
 		move.w  #1,d3
@@ -11137,7 +10242,6 @@ loc_167C6:
 		move.w  #4,d1
 		bsr.w   DrawWitchMenuBubble
 loc_167DC:
-		
 		btst    #2,d6
 		beq.s   loc_167F2
 		move.w  #2,d3
@@ -11145,7 +10249,6 @@ loc_167DC:
 		move.w  #$24,d1 
 		bsr.w   DrawWitchMenuBubble
 loc_167F2:
-		
 		btst    #3,d6
 		beq.s   return_16808
 		move.w  #3,d3
@@ -11153,7 +10256,6 @@ loc_167F2:
 		move.w  #$1B0,d1
 		bsr.w   DrawWitchMenuBubble
 return_16808:
-		
 		rts
 
 	; End of function sub_1679E
@@ -11172,26 +10274,21 @@ DrawWitchMenuBubble:
 		blt.s   loc_16826
 		addi.w  #$50,d2 
 loc_16826:
-		
 		cmpi.w  #$A,d7
 		blt.s   loc_16830
 		addi.w  #$50,d2 
 loc_16830:
-		
 		cmpi.w  #$F,d7
 		blt.s   loc_1683A
 		subi.w  #$50,d2 
 loc_1683A:
-		
 		adda.w  d2,a0
 		adda.w  d1,a1
 		movem.l a1,-(sp)
 		moveq   #4,d7
 loc_16844:
-		
 		moveq   #7,d5
 loc_16846:
-		
 		move.w  (a0)+,(a1)
 		addi.w  #-$5D00,(a1)+
 		dbf     d5,loc_16846
@@ -11202,7 +10299,6 @@ loc_16846:
 		blt.s   loc_16864
 		addq.l  #2,a1
 loc_16864:
-		
 		move.w  -$A(a6),d1
 		bne.w   loc_168A4
 		adda.w  #$72,a1 
@@ -11218,19 +10314,14 @@ pt_s_WitchMenu:
 		dc.l aDel_              
 		dc.l aCopy              
 aStart:
-		
 		dc.b 'START',0
 aCont_:
-		
 		dc.b 'CONT.',0
 aDel_:
-		
 		dc.b 'DEL.',0
 aCopy:
-		
 		dc.b 'COPY',0
 loc_168A4:
-		
 		subq.w  #1,d1
 		bne.w   sub_168D8
 		adda.w  #$72,a1 
@@ -11242,20 +10333,16 @@ loc_168A4:
 
 	; End of function DrawWitchMenuBubble
 
-pt_s_DataMenu:
-		dc.l aData1             
+pt_s_DataMenu:  dc.l aData1             
 		dc.l aData1             
 		dc.l aData2             
 		dc.l aData2             
-aData1:
-		dc.b 'DATA1',0
-aData2:
-		dc.b 'DATA2',0
+aData1:         dc.b 'DATA1',0
+aData2:         dc.b 'DATA2',0
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_168D8:
-		
 		subq.w  #1,d1
 		bne.w   sub_16942
 		movem.l d7-a1,-(sp)
@@ -11264,11 +10351,9 @@ sub_168D8:
 		blt.s   loc_168F4
 		lea     (SAVE2_CHARACTER_DATA).l,a0
 loc_168F4:
-		
 		lea     (FF8804_LOADING_SPACE).l,a1
 		moveq   #9,d7
 loc_168FC:
-		
 		move.b  (a0),(a1)+
 		addq.l  #2,a0
 		dbf     d7,loc_168FC
@@ -11289,7 +10374,6 @@ loc_168FC:
 		moveq   #4,d7
 		bsr.w   sub_1697C
 return_16940:
-		
 		rts
 
 	; End of function sub_168D8
@@ -11298,7 +10382,6 @@ return_16940:
 ; =============== S U B R O U T I N E =======================================
 
 sub_16942:
-		
 		adda.w  #$72,a1 
 		lsl.w   #2,d3
 		movea.l pt_s_DifficultyMenu(pc,d3.w),a0
@@ -11313,20 +10396,15 @@ pt_s_DifficultyMenu:
 		dc.l aHard              
 		dc.l aSuper             
 		dc.l aOuch              
-aNorm_:
-		dc.b 'NORM.',0
-aHard:
-		dc.b 'HARD',0
-aSuper:
-		dc.b 'SUPER',0
-aOuch:
-		dc.b 'OUCH!',0
+aNorm_:         dc.b 'NORM.',0
+aHard:          dc.b 'HARD',0
+aSuper:         dc.b 'SUPER',0
+aOuch:          dc.b 'OUCH!',0
 		dc.b $FF
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_1697C:
-		
 		movem.w d0,-(sp)
 		movem.l d7/a1,-(sp)
 		moveq   #$FFFFFFC8,d1
@@ -11334,7 +10412,6 @@ sub_1697C:
 		movem.l (sp)+,d7/a1
 		subq.w  #1,d7
 loc_16990:
-		
 		andi.w  #$9FFF,(a1,d1.w)
 		ori.w   #$2000,(a1,d1.w)
 		andi.w  #$9FFF,(a1)
@@ -11349,7 +10426,6 @@ loc_16990:
 ; =============== S U B R O U T I N E =======================================
 
 sub_169AE:
-		
 		movem.l d0-a1,-(sp)
 		tst.w   (word_FFB08C).l
 		bne.s   loc_16A2A
@@ -11378,10 +10454,8 @@ sub_169AE:
 		bsr.w   sub_100C8       
 		bra.s   loc_16A10
 loc_16A0C:
-		
 		bsr.w   WriteTilesFromASCII
 loc_16A10:
-		
 		move.w  (word_FFB08C).l,d0
 		subq.w  #1,d0
 		move.w  #$10B,d1
@@ -11389,7 +10463,6 @@ loc_16A10:
 		jsr     (MoveWindowWithSFX).l
 		jsr     (WaitForVint_andFFA900Clear).l
 loc_16A2A:
-		
 		movem.l (sp)+,d0-a1
 		rts
 
@@ -11399,7 +10472,6 @@ loc_16A2A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_16A30:
-		
 		movem.l d0-d1/a0-a1,-(sp)
 		move.w  (word_FFB08C).l,d0
 		beq.s   loc_16A5C
@@ -11411,7 +10483,6 @@ sub_16A30:
 		jsr     (ClearWindowAndUpdateEndPtr).l
 		clr.w   (word_FFB08C).l
 loc_16A5C:
-		
 		movem.l (sp)+,d0-d1/a0-a1
 		rts
 

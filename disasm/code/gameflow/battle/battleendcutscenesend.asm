@@ -5,7 +5,6 @@
 ; START OF FUNCTION CHUNK FOR ExecuteBattleCutscene_Defeated
 
 loc_47C48:
-		
 		clr.w   d0
 		move.b  ((CURRENT_BATTLE-$1000000)).w,d0
 		move.b  EnemyLeaderPresence(pc,d0.w),d0
@@ -15,7 +14,6 @@ loc_47C48:
 		moveq   #$1F,d7
 		lea     (DEAD_COMBATANTS_LIST).l,a0
 loc_47C62:
-		
 		jsr     j_GetCurrentHP
 		tst.w   d1
 		beq.s   loc_47C82
@@ -24,11 +22,9 @@ loc_47C62:
 		move.b  #$FF,1(a0,d1.w)
 		addq.w  #1,(DEAD_COMBATANTS_LIST_LENGTH).l
 loc_47C82:
-		
 		addq.w  #1,d0
 		dbf     d7,loc_47C62
 loc_47C88:
-		
 		movem.l (sp)+,d0-d1/d7-a0
 		rts
 

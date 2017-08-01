@@ -49,13 +49,11 @@ PlayIntroOrEndCutscene:
 		trap    #MAPSCRIPT
 		bra.s   return_47F7C
 loc_47F72:
-		
 		trap    #SOUND_COMMAND
 		dc.w MUSIC_PIANO_THEME
 		lea     EndCutscene(pc), a0
 		trap    #MAPSCRIPT
 return_47F7C:
-		
 		rts
 
 	; End of function PlayIntroOrEndCutscene

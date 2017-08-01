@@ -13,8 +13,7 @@ ms_map9_AreaDescriptions:
 
 	; End of function ms_map9_AreaDescriptions
 
-word_5688A:
-		dc.w $E0D
+word_5688A:     dc.w $E0D
 		dc.b 0
 		dc.b 0
 		dc.b 0

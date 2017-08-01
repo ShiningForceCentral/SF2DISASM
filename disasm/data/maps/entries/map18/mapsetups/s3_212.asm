@@ -11,20 +11,16 @@ ms_map18_flag212_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_61262:
-		
 		trap    #CHECK_FLAG
 		dc.w $4C
 		beq.s   return_61276
 		lea     cs_6143C(pc), a0
 		trap    #6
 		trap    #CLEAR_FLAG
-		dc.w $4C                
-						; Zynk is a follower
+		dc.w $4C                ; Zynk is a follower
 		trap    #SET_FLAG
-		dc.w $399               
-						; set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
+		dc.w $399               ; set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
 return_61276:
-		
 		rts
 
 	; End of function sub_61262

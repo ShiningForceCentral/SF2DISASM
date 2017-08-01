@@ -5,7 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 TitleScreen:
-		
 		jmp     *+4(pc)
 		jsr     (DisableDisplayAndVInt).w
 		jsr     (ClearVsramAndSprites).w
@@ -49,11 +48,9 @@ TitleScreen:
 		lea     (byte_FFDCA8).l,a1
 		moveq   #$A,d7
 loc_1000B8:
-		
 		moveq   #$1F,d6
 		moveq   #0,d2
 loc_1000BC:
-		
 		move.w  (a0),d1
 		beq.w   loc_100104
 		tst.w   d2
@@ -66,7 +63,6 @@ loc_1000BC:
 		addq.b  #4,-6(a1)
 		bra.w   loc_100104
 loc_1000DE:
-		
 		move.w  #$E,d0
 		sub.w   d7,d0
 		lsl.w   #3,d0
@@ -82,7 +78,6 @@ loc_1000DE:
 		move.w  d0,(a1)+
 		moveq   #$FFFFFFFF,d2
 loc_100104:
-		
 		addq.l  #2,a0
 		dbf     d6,loc_1000BC
 		dbf     d7,loc_1000B8
@@ -136,7 +131,6 @@ loc_100104:
 		lea     (PALETTE_1_BIS).l,a0
 		moveq   #$1F,d7
 loc_1001EC:
-		
 		move.l  #$EEE0EEE,(a0)+
 		dbf     d7,loc_1001EC
 		moveq   #$1E,d0
@@ -167,13 +161,11 @@ WaitForPlayer1InputStart:
 ; =============== S U B R O U T I N E =======================================
 
 sub_100218:
-		
 		btst    #0,((byte_FFDEA0-$1000000)).w
 		bne.s   loc_10022C
 		addq.w  #1,(dword_FFD500).l
 		subq.w  #1,(dword_FFD500+2).l
 loc_10022C:
-		
 		jsr     (StoreVdpCommandsbis).w
 		jsr     (SetFFDE94b3andWait).w
 		btst    #7,((P1_INPUT-$1000000)).w
@@ -199,7 +191,6 @@ TitleScreenEnd:
 		ble.s   loc_100260
 		lea     $480(a0),a0
 loc_100260:
-		
 		lea     (byte_FFC480).l,a1
 		moveq   #$40,d7 
 		jsr     (CopyBytes).w   
@@ -217,7 +208,6 @@ loc_100260:
 		bne.s   TitleScreenEnd
 		rts
 loc_10029E:
-		
 		move.l  (sp)+,d0
 		clr.w   d6
 		jsr     (ClearOtherVscrollStuff).w

@@ -11,7 +11,6 @@ ms_map19_Section5:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_21:
-		
 		rts
 
 	; End of function nullsub_21

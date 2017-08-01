@@ -11,7 +11,6 @@ ms_map14_flag1CA_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_58F44:
-		
 		jsr     (MapTileset050+$3D6-ms_map14_flag1CA_EntityEvents)
 		rts
 

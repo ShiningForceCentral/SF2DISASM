@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map03\mapsetups\pt_1FA.asm :
 ; 0x50B18..0x50B30 : 
-ms_map3_flag1FA:
-		dc.l ms_map3_flag1FA_Entities
+ms_map3_flag1FA:dc.l ms_map3_flag1FA_Entities
 		dc.l ms_map3_flag1FA_EntityEvents
 		dc.l ms_map3_flag1FA_ZoneEvents
 		dc.l ms_map3_AreaDescriptions

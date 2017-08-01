@@ -1,9 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle40\cs_regiontriggered_2.asm :
 ; 0x4E9B2..0x4EA94 : Region-activated cutscene 2 for battle 40
-rbcs_battle40_2:
-		csc45 $30               
-						; (null)
+rbcs_battle40_2:csc45 $30               ; (null)
 		setCamDest $D,$8
 		setBlocks $B0B,$101,$130A
 		csWait $5
@@ -46,7 +44,5 @@ rbcs_battle40_2:
 		setBlocks $B0B,$101,$110D
 		csWait $2
 		setBlocks $B0B,$101,$D0E
-		setF $184               
-						; set after the second set of tile changes in the Oddeye battle
-		csc_end                 
-						; END OF CUTSCENE SCRIPT
+		setF $184               ; set after the second set of tile changes in the Oddeye battle
+		csc_end                 ; END OF CUTSCENE SCRIPT

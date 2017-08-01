@@ -13,8 +13,7 @@ ms_map36_AreaDescriptions:
 
 	; End of function ms_map36_AreaDescriptions
 
-word_5D9D6:
-		dc.w $2303
+word_5D9D6:     dc.w $2303
 		dc.b 0
 		dc.b 0
 		dc.b 4

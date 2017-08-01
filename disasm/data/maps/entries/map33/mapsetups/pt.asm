@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map33\mapsetups\pt.asm :
 ; 0x5A646..0x5A65E : 
-ms_map33:
-		dc.l ms_map33_Entities
+ms_map33:       dc.l ms_map33_Entities
 		dc.l ms_map33_EntityEvents
 		dc.l ms_map33_ZoneEvents
 		dc.l ms_map33_AreaDescriptions

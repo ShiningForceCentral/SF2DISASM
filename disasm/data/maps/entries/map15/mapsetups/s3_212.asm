@@ -11,7 +11,6 @@ ms_map15_flag212_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_77:
-		
 		rts
 
 	; End of function nullsub_77
@@ -20,7 +19,6 @@ nullsub_77:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D008:
-		
 		trap    #CHECK_FLAG
 		dc.w $2D4
 		beq.s   return_5D01E
@@ -30,10 +28,8 @@ sub_5D008:
 		lea     cs_5D04E(pc), a0
 		trap    #6
 		trap    #SET_FLAG
-		dc.w $334               
-						; set after Skreech's join scene has played in Tristan
+		dc.w $334               ; set after Skreech's join scene has played in Tristan
 return_5D01E:
-		
 		rts
 
 	; End of function sub_5D008

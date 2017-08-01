@@ -47,7 +47,6 @@ j_j_ChurchActions_0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A11C:
-		
 		move.b  #$1C,((CURRENT_SHOP_INDEX-$1000000)).w
 		jmp     j_ShopActions
 
@@ -57,10 +56,8 @@ sub_5A11C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A128:
-		
 		trap    #TEXTBOX
-		dc.w $84D               
-						; "I think...I've met you{N}somewhere before.{W1}"
+		dc.w $84D               ; "I think...I've met you{N}somewhere before.{W1}"
 		rts
 
 	; End of function sub_5A128
@@ -69,13 +66,10 @@ sub_5A128:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A12E:
-		
 		trap    #TEXTBOX
-		dc.w $84E               
-						; "It's very dangerous outside.{N}We can't go to Galam.{W2}"
+		dc.w $84E               ; "It's very dangerous outside.{N}We can't go to Galam.{W2}"
 		trap    #TEXTBOX
-		dc.w $84F               
-						; "But, we have to leave here{N}very soon.{W1}"
+		dc.w $84F               ; "But, we have to leave here{N}very soon.{W1}"
 		rts
 
 	; End of function sub_5A12E
@@ -84,13 +78,10 @@ sub_5A12E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A138:
-		
 		trap    #TEXTBOX
-		dc.w $850               
-						; "The Dwarven Blacksmith is{N}very good.{W2}"
+		dc.w $850               ; "The Dwarven Blacksmith is{N}very good.{W2}"
 		trap    #TEXTBOX
-		dc.w $851               
-						; "You can place a custom order{N}with him.{W1}"
+		dc.w $851               ; "You can place a custom order{N}with him.{W1}"
 		rts
 
 	; End of function sub_5A138
@@ -99,13 +90,10 @@ sub_5A138:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A142:
-		
 		trap    #TEXTBOX
-		dc.w $852               
-						; "Mithril is very hard to find.{W2}"
+		dc.w $852               ; "Mithril is very hard to find.{W2}"
 		trap    #TEXTBOX
-		dc.w $853               
-						; "Go see the blacksmith if you{N}have any Mithril.{W1}"
+		dc.w $853               ; "Go see the blacksmith if you{N}have any Mithril.{W1}"
 		rts
 
 	; End of function sub_5A142
@@ -114,7 +102,6 @@ sub_5A142:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_136:
-		
 		rts
 
 	; End of function nullsub_136

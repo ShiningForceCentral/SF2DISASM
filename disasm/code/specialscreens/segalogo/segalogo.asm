@@ -32,7 +32,6 @@ DisplaySegaLogo:
 		lea     (PALETTE_1_BIS).l,a2
 		moveq   #7,d7
 loc_280AA:
-		
 		move.l  (a0),(a1)+
 		move.l  (a0)+,(a2)+
 		dbf     d7,loc_280AA
@@ -65,7 +64,6 @@ loc_280AA:
 		jsr     (Sleep).w       
 		move.w  #$28,d0 
 loc_2812E:
-		
 		lea     SegaLogoColors+4(pc,d0.w),a0
 						; lea     segaLogoColors(pc,d0.w),a0
 		movem.l d0,-(sp)
@@ -82,7 +80,6 @@ loc_2812E:
 		bpl.s   CheckStartButtonAtSegaLogo
 		move.w  #$3C,d0 
 loc_28164:
-		
 		jsr     (WaitForVInt).w 
 		btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
 		bne.w   loc_2818E
@@ -105,7 +102,6 @@ CheckStartButtonAtSegaLogo:
 		btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
 		beq.s   loc_2812E       
 loc_2818E:
-		
 		move.l  #$D80405,(dword_FFDCA0).l
 		move.l  #$62014A,(dword_FFDCA4).l
 		jsr     (FadeOutToBlack).w
@@ -114,24 +110,19 @@ loc_2818E:
 
 	; End of function CheckStartButtonAtSegaLogo
 
-SegaLogoColors:
-		incbin "data/graphics/tech/segalogocolors.bin"
-SegaLogoPalette:
-		incbin "data/graphics/tech/segalogopalette.bin"
-SegaLogo:
-		incbin "data/graphics/tech/segalogo.bin"
+SegaLogoColors: incbin "data/graphics/tech/segalogocolors.bin"
+SegaLogoPalette:incbin "data/graphics/tech/segalogopalette.bin"
+SegaLogo:       incbin "data/graphics/tech/segalogo.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_28B12:
-		
 		cmpi.b  #$FF,(a0)
 		beq.w   loc_28B64
 		moveq   #3,d7
 		lea     (byte_FFDC98).l,a1
 		lea     word_28BB0(pc), a2
 loc_28B26:
-		
 		clr.w   d0
 		move.b  (a0)+,d0
 		addi.w  #$F0,d0 
@@ -154,18 +145,15 @@ loc_28B26:
 		bne.s   loc_28B68
 		bra.s   sub_28B12
 loc_28B64:
-		
 		addq.w  #1,a0
 		rts
 loc_28B68:
-		
 		lea     byte_28F31(pc), a0
 		nop
 		moveq   #3,d7
 		lea     (byte_FFDC98).l,a1
 		lea     word_28BB0(pc), a2
 loc_28B7A:
-		
 		clr.w   d0
 		move.b  (a0)+,d0
 		addi.w  #$F0,d0 
@@ -188,13 +176,11 @@ loc_28B7A:
 
 	; End of function sub_28B12
 
-word_28BB0:
-		dc.w $F04
+word_28BB0:     dc.w $F04
 		dc.w $F03
 		dc.w $F02
 		dc.w $F01
-byte_28BB8:
-		dc.b $D0
+byte_28BB8:     dc.b $D0
 		dc.b  $D
 		dc.b   4
 		dc.b $D0 
@@ -1083,8 +1069,7 @@ byte_28BB8:
 		dc.b $43 
 		dc.b   4
 		dc.b   7
-byte_28F31:
-		dc.b 0
+byte_28F31:     dc.b 0
 		dc.b   4
 		dc.b   0
 		dc.b $15
@@ -1142,31 +1127,23 @@ CalculateRomChecksum:
 		
 		jsr     (WaitForVInt).w 
 		btst    #INPUT_A_START_BIT,((P2_INPUT-$1000000)).w
-		beq.s   return_28F96    
-						; execute only if P2 START pressed
+		beq.s   return_28F96    ; execute only if P2 START pressed
 		lea     (RomEndAddress).w,a0
 		move.l  (a0),d1
-		addq.l  #1,d1           
-						; 0x200000
+		addq.l  #1,d1           ; 0x200000
 		movea.l #$200,a0
-		sub.l   a0,d1           
-						; 0x1FFE00 ?
-		asr.l   #1,d1           
-						; 0xFFF80 ?
+		sub.l   a0,d1           ; 0x1FFE00 ?
+		asr.l   #1,d1           ; 0xFFF80 ?
 		move.w  d1,d2
-		subq.w  #1,d2           
-						; FFF7F ?
+		subq.w  #1,d2           ; FFF7F ?
 		swap    d1
 		moveq   #0,d0
 loc_28F88:
-		
-		add.w   (a0)+,d0        
-						; big ROM content sum stored in a RAM word
+		add.w   (a0)+,d0        ; big ROM content sum stored in a RAM word
 		dbf     d2,loc_28F88    
 		dbf     d1,loc_28F88    
 		move.w  d0,((ROM_CHECKSUM-$1000000)).w
 return_28F96:
-		
 		rts
 
 	; End of function CalculateRomChecksum
@@ -1184,13 +1161,11 @@ VInt_CheckConfigurationModeCheat:
 		dc.w MUSIC_ITEM
 		rts
 loc_28FAE:
-		
 		move.b  (a0),d0
 		cmp.b   ((P1_INPUT-$1000000)).w,d0
 		bne.s   return_28FBA
 		addq.l  #1,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
 return_28FBA:
-		
 		rts
 
 	; End of function VInt_CheckConfigurationModeCheat
@@ -1210,13 +1185,11 @@ VInt_CheckDebugModeCheat:
 		dc.w MUSIC_CURSED_ITEM
 		rts
 loc_28FE2:
-		
 		move.b  (a0),d0
 		cmp.b   ((P1_INPUT-$1000000)).w,d0
 		bne.s   return_28FEE
 		addq.l  #1,((dword_FFB1A0-$1000000)).w
 return_28FEE:
-		
 		rts
 
 	; End of function VInt_CheckDebugModeCheat

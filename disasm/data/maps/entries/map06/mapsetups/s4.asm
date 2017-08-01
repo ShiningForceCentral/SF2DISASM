@@ -13,8 +13,7 @@ ms_map6_AreaDescriptions:
 
 	; End of function ms_map6_AreaDescriptions
 
-word_54D9A:
-		dc.w $507
+word_54D9A:     dc.w $507
 		dc.b 0
 		dc.b 0
 		dc.b 4
@@ -72,7 +71,6 @@ word_54D9A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54DDE:
-		
 		trap    #CHECK_FLAG
 		dc.w $2BE
 		bne.s   loc_54DEE
@@ -80,14 +78,12 @@ sub_54DDE:
 		jsr     (DisplayText).w 
 		bra.s   return_54E02
 loc_54DEE:
-		
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  #$1A8,d0
 		jsr     (DisplayText).w 
 		move.w  #$1B2,d0
 		jsr     (DisplayText).w 
 return_54E02:
-		
 		rts
 
 	; End of function sub_54DDE
@@ -96,7 +92,6 @@ return_54E02:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54E04:
-		
 		move.w  #$FFE,d0
 		jsr     (DisplayText).w 
 		jsr     j_YesNoPrompt
@@ -116,7 +111,6 @@ sub_54E04:
 		jsr     (DisplayText).w 
 		bra.s   return_54E4A
 loc_54E38:
-		
 		moveq   #$32,d0 
 		jsr     (Sleep).w       
 		trap    #SOUND_COMMAND
@@ -124,7 +118,6 @@ loc_54E38:
 		move.w  #$1000,d0
 		jsr     (DisplayText).w 
 return_54E4A:
-		
 		rts
 
 	; End of function sub_54E04

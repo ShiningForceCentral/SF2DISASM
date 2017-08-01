@@ -3,19 +3,15 @@
 ; 0x2F6A..0x31CC : Display function
 BlackScreenLayout:
 		dcb.b $80,$22
-MaskSprites:
-		dc.l $800301
+MaskSprites:    dc.l $800301
 		dc.l $C77C0080
-dword_2FF2:
-		dc.l $A00302
+dword_2FF2:     dc.l $A00302
 		dc.l $C77C0080
 		dc.l $C00303
-dword_2FFE:
-		dc.l $C77C0080
+dword_2FFE:     dc.l $C77C0080
 		dc.l $E00304
 		dc.l $C77C0080
-dword_300A:
-		dc.l $1000305
+dword_300A:     dc.l $1000305
 		dc.l $C77C0080
 		dc.l $1200306
 		dc.l $C77C0080
@@ -27,31 +23,23 @@ dword_300A:
 ; or something like that ?
 
 InitDisplay:
-		
 		trap    #VINT_FUNCTIONS
-		dc.w VINTS_DEACTIVATE   
-						; clear all triggers
+		dc.w VINTS_DEACTIVATE   ; clear all triggers
 		dc.l 0
 		bsr.w   WaitForVInt     
 		bsr.w   DisableDisplayAndVInt
 		bsr.w   ClearSpriteTable
-		move.w  #$8C00,d0       
-						; H32 cell mode, no interlace
+		move.w  #$8C00,d0       ; H32 cell mode, no interlace
 		bsr.w   SetVdpReg       
-		move.w  #$9000,d0       
-						; scroll size : V32 cell, H32 cell
+		move.w  #$9000,d0       ; scroll size : V32 cell, H32 cell
 		bsr.w   SetVdpReg       
-		move.w  #$8230,d0       
-						; scroll A table VRAM address : C000
+		move.w  #$8230,d0       ; scroll A table VRAM address : C000
 		bsr.w   SetVdpReg       
-		move.w  #$8407,d0       
-						; scroll B table VRAM address : E000
+		move.w  #$8407,d0       ; scroll B table VRAM address : E000
 		bsr.w   SetVdpReg       
-		move.w  #$8B00,d0       
-						; disable external interrupt, full scrolls
+		move.w  #$8B00,d0       ; disable external interrupt, full scrolls
 		bsr.w   SetVdpReg       
-		move.w  #$8D3B,d0       
-						; H Scroll table VRAM address : EC00
+		move.w  #$8D3B,d0       ; H Scroll table VRAM address : EC00
 		bsr.w   SetVdpReg       
 		lea     BlackScreenLayout(pc), a0
 		lea     ($EF80).l,a1
@@ -60,7 +48,6 @@ InitDisplay:
 		bsr.w   sub_10DC        
 		lea     MaskSprites(pc), a0
 loc_307E:
-		
 		lea     (SPRITE_Y).l,a1 
 		moveq   #$38,d7 
 		bsr.w   CopyBytes       
@@ -72,14 +59,12 @@ loc_307E:
 
 	; End of function InitDisplay
 
-plt_BasePalette:
-		incbin "data/graphics/tech/basepalette.bin"
+plt_BasePalette:incbin "data/graphics/tech/basepalette.bin"
 						; Palette for UI/Sprites
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_30BE:
-		
 		lea     (byte_FFC000).l,a0
 		lea     ($C000).l,a1
 		move.w  #$400,d0
@@ -90,7 +75,6 @@ sub_30BE:
 		move.w  #$400,d0
 		moveq   #2,d1
 loc_30E6:
-		
 		bsr.w   sub_119E        
 		bra.w   SetFFDE94b3andWait
 
@@ -100,7 +84,6 @@ loc_30E6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_30EE:
-		
 		movem.l a0-a5,-(sp)
 		movem.w d0-d5/d7,-(sp)
 		neg.w   d2
@@ -123,7 +106,6 @@ sub_30EE:
 		lea     (FF0000_RAM_START).l,a4
 		lea     (FF2000_LOADING_SPACE).l,a5
 loc_312C:
-		
 		bsr.w   sub_364E
 		move.w  d2,(a1,d3.w)
 		addq.w  #2,d3
@@ -145,7 +127,6 @@ loc_312C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_3158:
-		
 		movem.l a0-a5,-(sp)
 		movem.w d0-d5/d7,-(sp)
 		neg.w   d2
@@ -168,7 +149,6 @@ sub_3158:
 		lea     (FF0000_RAM_START).l,a4
 		lea     (FF2000_LOADING_SPACE).l,a5
 loc_3196:
-		
 		bsr.w   sub_364E
 		move.w  d2,(a1,d3.w)
 		addi.w  #$40,d3 

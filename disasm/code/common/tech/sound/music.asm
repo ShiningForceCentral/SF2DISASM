@@ -15,11 +15,9 @@ PlayMusicAfterCurrentOne:
 		dc.w SOUND_COMMAND_GET_D0_PARAMETER
 						; get d0 value, if $FB : play previous music
 loc_16C6:
-		
 		moveq   #3,d0
 		bsr.w   Sleep           
-		tst.b   (WAIT_FOR_MUSIC_END).l
-						; wait for sound command sent
+		tst.b   (WAIT_FOR_MUSIC_END).l; wait for sound command sent
 		bne.s   loc_16C6
 		rts
 

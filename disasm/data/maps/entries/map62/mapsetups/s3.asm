@@ -20,7 +20,6 @@ ms_map62_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C834:
-		
 		trap    #CHECK_FLAG
 		dc.w $2D9
 		bne.s   return_5C84A
@@ -30,10 +29,8 @@ sub_5C834:
 		lea     cs_5C876(pc), a0
 		trap    #6
 		trap    #SET_FLAG
-		dc.w $100               
-						; .0118=apparently reset on map load, usually used to skip some lines of entities
+		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_5C84A:
-		
 		rts
 
 	; End of function sub_5C834
@@ -42,7 +39,6 @@ return_5C84A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C84C:
-		
 		trap    #CHECK_FLAG
 		dc.w $2D9
 		bne.s   return_5C868
@@ -57,7 +53,6 @@ sub_5C84C:
 		trap    #SET_FLAG
 		dc.w $101
 return_5C868:
-		
 		rts
 
 	; End of function sub_5C84C

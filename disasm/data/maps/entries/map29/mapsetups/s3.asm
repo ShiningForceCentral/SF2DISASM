@@ -8,7 +8,6 @@ ms_map29_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_92:
-		
 		rts
 
 	; End of function nullsub_92

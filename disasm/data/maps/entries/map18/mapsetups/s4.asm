@@ -13,8 +13,7 @@ ms_map18_AreaDescriptions:
 
 	; End of function ms_map18_AreaDescriptions
 
-word_52B36:
-		dc.w $C09
+word_52B36:     dc.w $C09
 		dc.b 0
 		dc.b 0
 		dc.b 6

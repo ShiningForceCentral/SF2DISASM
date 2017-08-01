@@ -13,8 +13,7 @@ ms_map16_AreaDescriptions:
 
 	; End of function ms_map16_AreaDescriptions
 
-word_51F3A:
-		dc.w $1405
+word_51F3A:     dc.w $1405
 		dc.b 0
 		dc.b 0
 		dc.b 4

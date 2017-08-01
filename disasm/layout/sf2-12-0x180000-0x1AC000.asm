@@ -29,10 +29,8 @@ BattlesceneTransitionTilesA:
 		incbin "data/graphics/tech/battlescenetransitiontilesa.bin"
 BattlesceneTransitionTilesB:
 		incbin "data/graphics/tech/battlescenetransitiontilesb.bin"
-BoltAnimData_A:
-		incbin "data/graphics/battles/spells/animations/boltanimdataa.bin"
-BoltAnimData_B:
-		incbin "data/graphics/battles/spells/animations/boltanimdatab.bin"
+BoltAnimData_A: incbin "data/graphics/battles/spells/animations/boltanimdataa.bin"
+BoltAnimData_B: incbin "data/graphics/battles/spells/animations/boltanimdatab.bin"
 		include "data\graphics\battles\battlesprites\allies\animations\entries.asm"		; Ally animations
 		include "data\graphics\battles\battlesprites\enemies\animations\entries.asm"		; Enemy animations
 		align $1AC000

@@ -17,7 +17,6 @@ ms_map20_flag21F_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_85:
-		
 		rts
 
 	; End of function nullsub_85
@@ -26,15 +25,13 @@ nullsub_85:
 ; =============== S U B R O U T I N E =======================================
 
 sub_632AC:
-		
 		trap    #SOUND_COMMAND
 		dc.w SOUND_COMMAND_FADE_OUT
 		lea     cs_632EA(pc), a0
 		trap    #6
 		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $FAE               
-						; "The Princess is asleep.{N}Will you kiss her?"
+		dc.w $FAE               ; "The Princess is asleep.{N}Will you kiss her?"
 		jsr     j_YesNoPrompt
 		tst.w   d0
 		bne.s   loc_632E0
@@ -45,7 +42,6 @@ sub_632AC:
 		jsr     PlayIntroOrEndCutscene
 		jmp     (WitchEnd).w
 loc_632E0:
-		
 		trap    #SOUND_COMMAND
 		dc.w SOUND_COMMAND_INIT_DRIVER
 		trap    #SOUND_COMMAND
@@ -54,20 +50,14 @@ loc_632E0:
 
 	; End of function sub_632AC
 
-cs_632EA:
-		setActscript $0,$FF,eas_Init
-						; 0015 SET ACTSCRIPT 0 FF 460CE
-		csWait $1               
-						; WAIT 1
-		entityShiver $0         
-						; 002A MAKE ENTITY SHIVER 0
-		csc_end                 
-						; END OF CUTSCENE SCRIPT
+cs_632EA:       setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
+		csWait $1               ; WAIT 1
+		entityShiver $0         ; 002A MAKE ENTITY SHIVER 0
+		csc_end                 ; END OF CUTSCENE SCRIPT
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_632FA:
-		
 		trap    #1
 		dc.w $3D6
 		beq.s   return_6332E
@@ -80,18 +70,14 @@ sub_632FA:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $FA9               
-						; "Oh, {LEADER}!{N}I really respect you.{W2}"
+		dc.w $FA9               ; "Oh, {LEADER}!{N}I really respect you.{W2}"
 		trap    #TEXTBOX
-		dc.w $FAA               
-						; "You shouldered quite a{N}burden for the kingdom.{W2}"
+		dc.w $FAA               ; "You shouldered quite a{N}burden for the kingdom.{W2}"
 		trap    #TEXTBOX
-		dc.w $FAB               
-						; "I'll be happy if you rule{N}this kingdom with Princess{N}Elis!{W1}"
+		dc.w $FAB               ; "I'll be happy if you rule{N}this kingdom with Princess{N}Elis!{W1}"
 		trap    #SET_FLAG
 		dc.w $3D7
 return_6332E:
-		
 		rts
 
 	; End of function sub_632FA
@@ -100,7 +86,6 @@ return_6332E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_63330:
-		
 		trap    #CHECK_FLAG
 		dc.w $3D8
 		bne.s   return_6335C
@@ -112,18 +97,13 @@ sub_63330:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $FAC               
-						; "{LEADER}, please kiss{N}her.{W1}"
+		dc.w $FAC               ; "{LEADER}, please kiss{N}her.{W1}"
 		trap    #SET_FLAG
 		dc.w $3D8
 return_6335C:
-		
 		rts
 
 	; End of function sub_63330
 
-cs_6335E:
-		setEntityDir $80,$3     
-						; 0023 SET ENTITY FACING 80 3
-		csc_end                 
-						; END OF CUTSCENE SCRIPT
+cs_6335E:       setEntityDir $80,$3     ; 0023 SET ENTITY FACING 80 3
+		csc_end                 ; END OF CUTSCENE SCRIPT

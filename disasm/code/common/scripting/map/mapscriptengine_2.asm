@@ -13,7 +13,6 @@ ExecuteMapScript:
 		movea.l a0,a6
 		clr.b   ((AVOID_CUTSCENE_DIALOGS-$1000000)).w
 loc_47140:
-		
 		btst    #INPUT_A_START_BIT,((P2_INPUT-$1000000)).w
 						; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
 		beq.s   loc_47156
@@ -21,22 +20,18 @@ loc_47140:
 		beq.s   loc_47156
 		move.b  #$FF,((AVOID_CUTSCENE_DIALOGS-$1000000)).w
 loc_47156:
-		
 		move.w  (a6)+,d0
 		cmpi.w  #$FFFF,d0
 		beq.w   loc_47234
 		tst.w   d0
 		bpl.s   loc_47174
 		tst.b   ((AVOID_CUTSCENE_DIALOGS-$1000000)).w
-		bne.s   loc_47172       
-						; if cmd > $8000 and dialogs activated, SLEEP CMD
+		bne.s   loc_47172       ; if cmd > $8000 and dialogs activated, SLEEP CMD
 		andi.w  #$FF,d0
 		jsr     (Sleep).w       
 loc_47172:
-		
 		bra.s   loc_47140       
 loc_47174:
-		
 		add.w   d0,d0
 		move.w  rjt_cutsceneScriptCommands(pc,d0.w),d0
 		jsr     rjt_cutsceneScriptCommands(pc,d0.w)
@@ -136,12 +131,10 @@ rjt_cutsceneScriptCommands:
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
 loc_47234:
-		
 		tst.w   ((TEXT_WINDOW_INDEX-$1000000)).w
 		beq.s   loc_4723E
 		jsr     (WaitForCameraToCatchUp).w
 loc_4723E:
-		
 		clr.w   ((word_FFB194-$1000000)).w
 		movem.l (sp)+,d0-a6
 		rts
@@ -174,10 +167,8 @@ csc00_displaySingleTextbox:
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		bra.s   loc_47270
 loc_4726A:
-		
 		move.w  #0,((CURRENT_SPEAK_SOUND-$1000000)).w
 loc_47270:
-		
 		adda.w  #2,a6
 		move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
 		jsr     (WaitForCameraToCatchUp).w
@@ -191,10 +182,8 @@ loc_47270:
 		jsr     (Sleep).w       
 		bra.s   return_4729C
 loc_47298:
-		
 		adda.w  #2,a6
 return_4729C:
-		
 		rts
 
 	; End of function csc00_displaySingleTextbox
@@ -214,10 +203,8 @@ csc01_displaySingleTextboxWithVars:
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		bra.s   loc_472BE
 loc_472B8:
-		
 		move.w  #0,((CURRENT_SPEAK_SOUND-$1000000)).w
 loc_472BE:
-		
 		adda.w  #2,a6
 		move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
@@ -251,10 +238,8 @@ csc02_displayTextbox:
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		bra.s   loc_47314
 loc_4730E:
-		
 		move.w  #0,((CURRENT_SPEAK_SOUND-$1000000)).w
 loc_47314:
-		
 		adda.w  #2,a6
 		move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
 		jsr     (WaitForCameraToCatchUp).w
@@ -262,10 +247,8 @@ loc_47314:
 		addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
 		bra.s   return_47330
 loc_4732C:
-		
 		adda.w  #2,a6
 return_47330:
-		
 		rts
 
 	; End of function csc02_displayTextbox
@@ -285,10 +268,8 @@ csc03_displayTextboxWithVars:
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		bra.s   loc_47352
 loc_4734C:
-		
 		move.w  #0,((CURRENT_SPEAK_SOUND-$1000000)).w
 loc_47352:
-		
 		adda.w  #2,a6
 		move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
@@ -364,39 +345,29 @@ csc08_joinForce:
 		bclr    #$F,d0
 		bne.s   loc_473B0
 		trap    #SOUND_COMMAND
-		dc.w MUSIC_JOIN         
-						; join music
+		dc.w MUSIC_JOIN         ; join music
 		bra.s   loc_473B4       
 loc_473B0:
-		
 		trap    #SOUND_COMMAND
-		dc.w MUSIC_SAD_JOIN     
-						; sad join music
+		dc.w MUSIC_SAD_JOIN     ; sad join music
 loc_473B4:
-		
-		cmpi.w  #$80,d0 
-						; HARDCODED use case
+		cmpi.w  #$80,d0 ; HARDCODED use case
 		bne.s   loc_473D4
-		move.w  #1,d0           
-						; make sarah and chester join at the same time
+		move.w  #1,d0           ; make sarah and chester join at the same time
 		jsr     j_JoinForce
 		move.w  #2,d0
 		jsr     j_JoinForce
 		trap    #TEXTBOX
-		dc.w $1BF               
-						; "{NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force."
+		dc.w $1BF               ; "{NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force."
 		bra.s   loc_473EC
 loc_473D4:
-		
 		jsr     j_JoinForce
 		jsr     j_GetClass      
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $1BE               
-						; "{NAME} the {CLASS} {N}has joined the force."
+		dc.w $1BE               ; "{NAME} the {CLASS} {N}has joined the force."
 loc_473EC:
-		
 		jsr     j_FadeOut_WaitForP2Input
 		trap    #TEXTBOX
 		dc.w $FFFF
@@ -437,7 +408,6 @@ csc0A_executeSubroutine:
 ; =============== S U B R O U T I N E =======================================
 
 csc0B_jump:
-		
 		movea.l (a6),a6
 		rts
 
@@ -456,10 +426,8 @@ csc0C_jumpIfFlagSet:
 		movea.l (a6),a6
 		bra.s   return_4742A
 loc_47428:
-		
 		addq.w  #4,a6
 return_4742A:
-		
 		rts
 
 	; End of function csc0C_jumpIfFlagSet
@@ -477,10 +445,8 @@ csc0D_jumpIfFlagClear:
 		movea.l (a6),a6
 		bra.s   return_4743E
 loc_4743C:
-		
 		addq.w  #4,a6
 return_4743E:
-		
 		rts
 
 	; End of function csc0D_jumpIfFlagClear
@@ -498,17 +464,14 @@ csc0E_jumpIfForceMemberInList:
 		subq.w  #1,d7
 		bcs.w   return_47462
 loc_47450:
-		
 		cmp.b   (a1)+,d0
 		beq.w   loc_47460
 		dbf     d7,loc_47450
 		addq.w  #4,a6
 		bra.w   return_47462
 loc_47460:
-		
 		movea.l (a6),a6
 return_47462:
-		
 		rts
 
 	; End of function csc0E_jumpIfForceMemberInList
@@ -527,10 +490,8 @@ csc0F_jumpIfCharacterAlive:
 		movea.l (a6),a6
 		bra.s   return_47478
 loc_47476:
-		
 		addq.w  #4,a6
 return_47478:
-		
 		rts
 
 	; End of function csc0F_jumpIfCharacterAlive
@@ -548,10 +509,8 @@ csc10_setOrClearFlag:
 		jsr     j_ClearFlag
 		bra.s   return_4748E
 loc_47488:
-		
 		jsr     j_SetFlag
 return_4748E:
-		
 		rts
 
 	; End of function csc10_setOrClearFlag
@@ -564,17 +523,14 @@ csc11_promptYesNoForStoryFlow:
 		move.l  a6,-(sp)
 		jsr     j_YesNoPrompt
 		movea.l (sp)+,a6
-		moveq   #$59,d1 
-						; flag index : last answer to story-related yes/no question
+		moveq   #$59,d1 ; flag index : last answer to story-related yes/no question
 		tst.w   d0
 		bne.s   loc_474A8
 		jsr     j_SetFlag
 		bra.s   loc_474AE
 loc_474A8:
-		
 		jsr     j_ClearFlag
 loc_474AE:
-		
 		moveq   #$A,d0
 		jsr     (Sleep).w       
 		rts
@@ -590,22 +546,16 @@ csc12_executeContextMenu:
 		move.l  a6,-(sp)
 		tst.w   d0
 		bne.s   loc_474C4
-		jsr     j_ChurchActions 
-						; xxxx = 0
+		jsr     j_ChurchActions ; xxxx = 0
 loc_474C4:
-		
 		cmpi.w  #1,d0
 		bne.s   loc_474D0
-		jsr     j_ShopActions   
-						; xxxx = 1
+		jsr     j_ShopActions   ; xxxx = 1
 loc_474D0:
-		
 		cmpi.w  #2,d0
 		bne.s   loc_474DC
-		jsr     j_BlacksmithActions
-						; xxxx = 2
+		jsr     j_BlacksmithActions; xxxx = 2
 loc_474DC:
-		
 		movea.l (sp)+,a6
 		rts
 
@@ -629,7 +579,6 @@ csc13_setStoryFlag:
 ; =============== S U B R O U T I N E =======================================
 
 sub_474EE:
-		
 		moveq   #0,d0
 		move.b  #$11,((CURRENT_MAP-$1000000)).w
 						; Mt Volcanon Shrine ?

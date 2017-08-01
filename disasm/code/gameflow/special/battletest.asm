@@ -98,10 +98,8 @@ DebugModeBattleTest:
 		move.l  #$1C1D1E1F,(a0)+
 		bsr.w   CheatModeConfiguration
 loc_77DE:
-		
 		trap    #TEXTBOX
-		dc.w $1C8               
-						; "Battle number?{D1}"
+		dc.w $1C8               ; "Battle number?{D1}"
 		clr.w   d0
 		clr.w   d1
 		move.w  #$31,d2 
@@ -122,7 +120,6 @@ loc_77DE:
 		addi.w  #$1C2,d1
 		jsr     j_SetFlag
 loc_7820:
-		
 		movem.w d0-d4,-(sp)
 		move.w  #$46,d0 
 		jsr     j_DebugFlagSetter
@@ -141,8 +138,7 @@ loc_7820:
 		jsr     j_ExecuteBattleLoop
 		jsr     j_ChurchActions
 		trap    #TEXTBOX
-		dc.w $1CC               
-						; "Shop number?{D1}"
+		dc.w $1CC               ; "Shop number?{D1}"
 		move.w  #0,d0
 		move.w  #0,d1
 		move.w  #$64,d2 
@@ -155,7 +151,6 @@ loc_7820:
 		jsr     j_CaravanActions
 		bra.w   loc_77DE
 loc_7894:
-		
 		bsr.w   sub_78BC
 		jsr     sub_10040
 		tst.b   d0
@@ -166,10 +161,8 @@ loc_7894:
 		movem.l (sp)+,d0-a6
 		bra.s   loc_78BA
 loc_78B6:
-		
 		bsr.w   LevelUpWholeForce
 loc_78BA:
-		
 		bra.s   loc_7894
 
 	; End of function DebugModeBattleTest
@@ -178,12 +171,10 @@ loc_78BA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_78BC:
-		
 		moveq   #$1D,d7
 		clr.w   d0
 		lea     (FF0000_RAM_START).l,a0
 loc_78C6:
-		
 		bsr.w   j_GetCurrentLevel
 		bsr.w   sub_7930
 		move.w  d1,(a0)
@@ -219,7 +210,6 @@ LevelUpWholeForce:
 		moveq   #$1D,d7
 		clr.w   d0
 loc_7924:
-		
 		bsr.w   j_LevelUp
 		addq.w  #1,d0
 		dbf     d7,loc_7924
@@ -231,7 +221,6 @@ loc_7924:
 ; =============== S U B R O U T I N E =======================================
 
 sub_7930:
-		
 		move.w  d1,d2
 		ext.l   d2
 		divs.w  #$64,d2 

@@ -13,8 +13,7 @@ ms_map38_AreaDescriptions:
 
 	; End of function ms_map38_AreaDescriptions
 
-word_5DD36:
-		dc.w $30E
+word_5DD36:     dc.w $30E
 		dc.b 0
 		dc.b 0
 		dc.b 4

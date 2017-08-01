@@ -16,7 +16,6 @@ ms_map63_Section5:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5CA32:
-		
 		trap    #CHECK_FLAG
 		dc.w $1D
 		bne.s   loc_5CA4C
@@ -27,10 +26,8 @@ sub_5CA32:
 		move.w  #$FFFF,d6
 		bra.s   return_5CA4E
 loc_5CA4C:
-		
 		clr.w   d6
 return_5CA4E:
-		
 		rts
 
 	; End of function sub_5CA32

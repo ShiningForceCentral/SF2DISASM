@@ -5,7 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 GameInit:
-		
 		move    #$2300,sr
 		bsr.w   LoadBaseTiles
 		bsr.w   CheckRegion
@@ -23,7 +22,6 @@ GameInit:
 		jsr     (EnableDisplayAndInterrupts).w
 		jmp     j_rts
 loc_7118:
-		
 		btst    #INPUT_A_UP_BIT,((P1_INPUT-$1000000)).w
 		bne.w   DebugModeBattleTest
 		btst    #INPUT_A_DOWN_BIT,((P1_INPUT-$1000000)).w
@@ -38,8 +36,7 @@ loc_7118:
 		move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
 		bsr.w   InitWindowProperties
 		trap    #SET_FLAG
-		dc.w $18F               
-						; set after first battle's cutscene OR first save? Checked at witch screens
+		dc.w $18F               ; set after first battle's cutscene OR first save? Checked at witch screens
 		moveq   #0,d0
 		moveq   #0,d1
 		moveq   #$38,d2 

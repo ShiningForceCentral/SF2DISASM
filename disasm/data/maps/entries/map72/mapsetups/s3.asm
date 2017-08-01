@@ -35,7 +35,6 @@ ms_map72_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FE8C:
-		
 		move.w  #$1A,d0
 		jsr     sub_47856
 		rts
@@ -46,22 +45,17 @@ sub_4FE8C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FE98:
-		
 		trap    #CHECK_FLAG
-		dc.w $2EE               
-						; set after Rohde clears the blockage at the North Cliff cave
+		dc.w $2EE               ; set after Rohde clears the blockage at the North Cliff cave
 		bne.s   return_4FF04
 		trap    #CHECK_FLAG
-		dc.w $325               
-						; set after coming back to New Granseal after Creed's Mansion,when Astral joins
+		dc.w $325               ; set after coming back to New Granseal after Creed's Mansion,when Astral joins
 		beq.s   return_4FF04
 		trap    #CHECK_FLAG
-		dc.w $100               
-						; .0118=apparently reset on map load, usually used to skip some lines of entities
+		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 		bne.s   return_4FF04
 		trap    #CLEAR_FLAG
-		dc.w $100               
-						; .0118=apparently reset on map load, usually used to skip some lines of entities
+		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 		moveq   #$72,d1 
 		jsr     j_sub_9146
 		cmpi.w  #$FFFF,d0
@@ -77,29 +71,22 @@ sub_4FE98:
 		lea     cs_4FFDA(pc), a0
 		trap    #MAPSCRIPT
 		trap    #SET_FLAG
-		dc.w $2EE               
-						; set after Rohde clears the blockage at the North Cliff cave
+		dc.w $2EE               ; set after Rohde clears the blockage at the North Cliff cave
 		bra.s   loc_4FEF2
 loc_4FEE6:
-		
 		move.w  #$74,((TEXT_NAME_INDEX_1-$1000000)).w 
 		lea     cs_5023E(pc), a0
 		trap    #MAPSCRIPT
 loc_4FEF2:
-		
 		bra.s   loc_4FF00
 loc_4FEF4:
-		
 		move.w  #$74,((TEXT_NAME_INDEX_1-$1000000)).w 
 		lea     cs_5023E(pc), a0
 		trap    #MAPSCRIPT
 loc_4FF00:
-		
 		trap    #SET_FLAG
-		dc.w $100               
-						; .0118=apparently reset on map load, usually used to skip some lines of entities
+		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 return_4FF04:
-		
 		rts
 
 	; End of function sub_4FE98
@@ -108,20 +95,16 @@ return_4FF04:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FF06:
-		
 		trap    #CHECK_FLAG
-		dc.w $20B               
-						; Battle 23 completed
+		dc.w $20B               ; Battle 23 completed
 		bne.s   loc_4FF18
 		move.w  #8,d0
 		jsr     sub_47856
 		bra.s   return_4FF22
 loc_4FF18:
-		
 		move.w  #$18,d0
 		jsr     sub_47856
 return_4FF22:
-		
 		rts
 
 	; End of function sub_4FF06

@@ -47,7 +47,6 @@ InitWitchSuspendVIntFunctions:
 ; =============== S U B R O U T I N E =======================================
 
 sub_7C5E:
-		
 		jsr     (DisableDisplayAndVInt).w
 		movea.l (p_WitchTiles).l,a0
 		lea     (FF6802_LOADING_SPACE).l,a1
@@ -85,13 +84,11 @@ sub_7C5E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_7CDC:
-		
 		movea.l (p_WitchLayout).l,a0
 		lea     (byte_FFE000).l,a1
 		move.w  #$800,d7
 		bsr.w   CopyBytes       
 loc_7CF0:
-		
 		bra.w   sub_7D0C
 
 	; End of function sub_7CDC
@@ -100,11 +97,9 @@ loc_7CF0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_7CF4:
-		
 		movea.l (p_WitchLayout).l,a0
 		lea     $700(a0),a0
 loc_7CFE:
-		
 		lea     (byte_FFE15C).l,a1
 		move.w  #$707,d1
 		bsr.w   sub_7D28
@@ -115,7 +110,6 @@ loc_7CFE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_7D0C:
-		
 		lea     (byte_FFE000).l,a0
 		lea     ($E000).l,a1
 		move.w  #$220,d0
@@ -130,7 +124,6 @@ sub_7D0C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_7D28:
-		
 		movem.l d0-a1,-(sp)
 		move.w  d1,d6
 		move.w  d1,d7
@@ -139,10 +132,8 @@ sub_7D28:
 		subq.w  #1,d6
 		subq.w  #1,d7
 loc_7D38:
-		
 		movem.l d6/a1,-(sp)
 loc_7D3C:
-		
 		move.w  (a0)+,(a1)+
 		dbf     d6,loc_7D3C
 		movem.l (sp)+,d6/a1
@@ -173,7 +164,6 @@ VInt_WitchBlink:
 		bsr.s   sub_7D28
 		addq.w  #1,-2(a6)
 loc_7D8A:
-		
 		tst.w   (a2)
 		bne.s   loc_7DB4
 		movea.l (p_WitchLayout).l,a0
@@ -187,7 +177,6 @@ loc_7D8A:
 		addi.w  #$1E,d7
 		move.w  d7,(a2)
 loc_7DB4:
-		
 		lea     ((word_FFB07C-$1000000)).w,a2
 		tst.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 		bne.s   loc_7DC6
@@ -195,7 +184,6 @@ loc_7DB4:
 		ble.s   loc_7DEE
 		bra.s   loc_7E16
 loc_7DC6:
-		
 		subq.w  #1,(a2)
 		cmpi.w  #5,(a2)
 		bne.s   loc_7DEA
@@ -206,11 +194,9 @@ loc_7DC6:
 		bsr.w   sub_7D28
 		addq.w  #1,-2(a6)
 loc_7DEA:
-		
 		tst.w   (a2)
 		bne.s   loc_7E16
 loc_7DEE:
-		
 		movea.l (p_WitchLayout).l,a0
 		lea     $77A(a0),a0
 		lea     (byte_FFE29E).l,a1
@@ -222,7 +208,6 @@ loc_7DEE:
 		addi.w  #$A,d7
 		move.w  d7,(a2)
 loc_7E16:
-		
 		tst.w   -2(a6)
 		beq.s   loc_7E36
 		lea     (byte_FFE000).l,a0
@@ -232,7 +217,6 @@ loc_7E16:
 		bsr.w   sub_119E        
 		bsr.w   Set_FFDE94_bit3 
 loc_7E36:
-		
 		unlk    a6
 		rts
 

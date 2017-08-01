@@ -13,8 +13,7 @@ ms_map1_AreaDescriptions:
 
 	; End of function ms_map1_AreaDescriptions
 
-word_5E736:
-		dc.w $B03
+word_5E736:     dc.w $B03
 		dc.b 0
 		dc.b 0
 		dc.b 9
@@ -30,17 +29,14 @@ word_5E736:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5E746:
-		
 		trap    #CHECK_FLAG
 		dc.w $349
 		bne.s   return_5E756
 		lea     cs_5E772(pc), a0
 		trap    #6
 		trap    #SET_FLAG
-		dc.w $349               
-						; set after the Taya join scene has played inside the Mitula Shrine
+		dc.w $349               ; set after the Taya join scene has played inside the Mitula Shrine
 return_5E756:
-		
 		rts
 
 	; End of function sub_5E746

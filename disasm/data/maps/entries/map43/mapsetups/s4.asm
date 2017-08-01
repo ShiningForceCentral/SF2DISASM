@@ -13,8 +13,7 @@ ms_map43_AreaDescriptions:
 
 	; End of function ms_map43_AreaDescriptions
 
-word_5406C:
-		dc.w $302
+word_5406C:     dc.w $302
 		dc.b 0
 		dc.b 0
 		dc.b 4

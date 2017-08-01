@@ -11,7 +11,6 @@ ms_map59_flag21F_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_106:
-		
 		rts
 
 	; End of function nullsub_106
@@ -20,14 +19,12 @@ nullsub_106:
 ; =============== S U B R O U T I N E =======================================
 
 sub_615C0:
-		
 		trap    #CHECK_FLAG
 		dc.w $21F
 		beq.s   return_615CC
 		lea     cs_62658(pc), a0
 		trap    #6
 return_615CC:
-		
 		rts
 
 	; End of function sub_615C0

@@ -13,24 +13,20 @@ EndKissPictureSequence:
 		lea     ($C800).l,a1
 		bsr.w   sub_2C642
 		move.w  #$168,d0
-		jsr     (Sleep).w       
-						; wait for 6 seconds
+		jsr     (Sleep).w       ; wait for 6 seconds
 		lea     (PALETTE_1_BIS).l,a0
 		moveq   #7,d7
 loc_2C5A6:
-		
 		clr.l   (a0)+
 		dbf     d7,loc_2C5A6
 		lea     (PALETTE_1_BIS).l,a0
 		clr.b   (byte_FFDFAB).l
 		jsr     (sub_19C8).w    
-		move.w  #$366,d0        
-						; wait for 14 seconds
+		move.w  #$366,d0        ; wait for 14 seconds
 		jsr     (Sleep).w       
 		lea     (PALETTE_1_BIS).l,a0
 		moveq   #$1F,d7
 loc_2C5CC:
-		
 		clr.l   (a0)+
 		dbf     d7,loc_2C5CC
 		lea     (PALETTE_1_BIS).l,a0
@@ -44,7 +40,6 @@ loc_2C5CC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_2C5E4:
-		
 		movem.l d0-a3,-(sp)
 		lea     (PALETTE_1).l,a0
 		lea     (PALETTE_1_BIS).l,a1
@@ -53,7 +48,6 @@ sub_2C5E4:
 		lea     (PALETTE_1_BIS).l,a0
 		moveq   #7,d7
 loc_2C604:
-		
 		move.l  (a0),d0
 		lsr.l   #1,d0
 		andi.l  #$EEE0EEE,d0
@@ -62,7 +56,6 @@ loc_2C604:
 		lea     (PALETTE3_BIS).l,a0
 		moveq   #$F,d7
 loc_2C61C:
-		
 		move.l  (a0),d0
 		lsr.l   #1,d0
 		andi.l  #$EEE0EEE,d0
@@ -80,24 +73,19 @@ loc_2C61C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_2C642:
-		
 		move.w  #$BFF,d7
 		lea     (FF0000_RAM_START).l,a2
 loc_2C64C:
-		
 		clr.l   (a2)+
 		dbf     d7,loc_2C64C
 		lea     (FF0000_RAM_START).l,a2
 		lea     byte_2C6FC(pc), a3
 		moveq   #$3F,d7 
 loc_2C65E:
-		
 		moveq   #0,d6
 loc_2C660:
-		
 		move.w  #$FF,d5
 loc_2C664:
-		
 		move.w  d7,d0
 		move.w  d5,d2
 		andi.w  #$3F,d2 
@@ -117,11 +105,9 @@ loc_2C664:
 		andi.b  #$F,(a2,d0.w)
 		bra.s   loc_2C6A4
 loc_2C69A:
-		
 		andi.b  #$F,d2
 		andi.b  #$F0,(a2,d0.w)
 loc_2C6A4:
-		
 		or.b    d2,(a2,d0.w)
 		dbf     d5,loc_2C664
 		dbf     d6,loc_2C660
@@ -144,14 +130,12 @@ loc_2C6A4:
 		bne.s   loc_2C6F6
 		bsr.w   sub_2C5E4
 loc_2C6F6:
-		
 		dbf     d7,loc_2C65E
 		rts
 
 	; End of function sub_2C642
 
-byte_2C6FC:
-		dc.b $13
+byte_2C6FC:     dc.b $13
 		dc.b   9
 		dc.b $1D
 		dc.b $33 

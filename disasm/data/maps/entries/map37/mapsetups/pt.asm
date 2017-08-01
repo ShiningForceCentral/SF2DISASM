@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map37\mapsetups\pt.asm :
 ; 0x5F630..0x5F660 : 
-ms_map37:
-		dc.l ms_map37_Entities
+ms_map37:       dc.l ms_map37_Entities
 		dc.l ms_map37_EntityEvents
 		dc.l ms_map37_ZoneEvents
 		dc.l ms_map37_AreaDescriptions

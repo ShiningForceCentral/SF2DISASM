@@ -5,7 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 CheckRegion:
-		
 		move.b  (HW_Info).l,d0  
 		andi.b  #$C0,d0
 		cmpi.b  #$80,d0
@@ -37,10 +36,8 @@ CheckRegion:
 		bsr.w   StoreVdpCommandster
 		bsr.w   SetFFDE94b3andWait
 loc_7F3E:
-		
 		bra.s   loc_7F3E
 return_7F40:
-		
 		rts
 
 	; End of function CheckRegion
@@ -56,18 +53,14 @@ LoadRegionCheckString:
 		move.w  d0,(a1)+
 		bra.s   LoadRegionCheckString
 return_7F4C:
-		
 		rts
 
 	; End of function LoadRegionCheckString
 
 aDevelopedForUseOnlyWith:
 		dc.b 'DEVELOPED FOR USE ONLY WITH',0
-aNtscGenesys:
-		dc.b '  NTSC GENESYS',0
+aNtscGenesys:   dc.b '  NTSC GENESYS',0
 		dc.b $26
 		dc.b 0
-aPalAndFrenchSe:
-		dc.b 'PAL AND FRENCH SECAM MEGA DRIVE',0
-aSystems_:
-		dc.b 'SYSTEMS.',0
+aPalAndFrenchSe:dc.b 'PAL AND FRENCH SECAM MEGA DRIVE',0
+aSystems_:      dc.b 'SYSTEMS.',0

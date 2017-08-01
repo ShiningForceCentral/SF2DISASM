@@ -29,22 +29,16 @@ ms_map20_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_537CC:
-		
 		trap    #CHECK_FLAG
-		dc.w $100               
-						; .0118=apparently reset on map load, usually used to skip some lines of entities
+		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 		bne.s   loc_537DA
 		trap    #TEXTBOX
-		dc.w $23A               
-						; "Legend regarding the{N}tower?  Mmmm, do I have{N}"
+		dc.w $23A               ; "Legend regarding the{N}tower?  Mmmm, do I have{N}"
 		trap    #SET_FLAG
-		dc.w $100               
-						; .0118=apparently reset on map load, usually used to skip some lines of entities
+		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
 loc_537DA:
-		
 		trap    #TEXTBOX
-		dc.w $23B               
-						; "to go to school again?{W1}"
+		dc.w $23B               ; "to go to school again?{W1}"
 		rts
 
 	; End of function sub_537CC
@@ -53,10 +47,8 @@ loc_537DA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_537E0:
-		
 		trap    #TEXTBOX
-		dc.w $23C               
-						; "Oh, father...are you{N}alright?{W1}"
+		dc.w $23C               ; "Oh, father...are you{N}alright?{W1}"
 		rts
 
 	; End of function sub_537E0
@@ -65,10 +57,8 @@ sub_537E0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_537E6:
-		
 		trap    #TEXTBOX
-		dc.w $23D               
-						; "Mmmmm....{N}Hmmmmmm....{W1}"
+		dc.w $23D               ; "Mmmmm....{N}Hmmmmmm....{W1}"
 		rts
 
 	; End of function sub_537E6
@@ -77,10 +67,8 @@ sub_537E6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_537EC:
-		
 		trap    #TEXTBOX
-		dc.w $237               
-						; "How fine the view is!{N}I can see the eastern{N}continent from here.{W1}"
+		dc.w $237               ; "How fine the view is!{N}I can see the eastern{N}continent from here.{W1}"
 		rts
 
 	; End of function sub_537EC
@@ -89,10 +77,8 @@ sub_537EC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_537F2:
-		
 		trap    #TEXTBOX
-		dc.w $236               
-						; "This east tower was built{N}in order to watch for{N}invaders.{W1}"
+		dc.w $236               ; "This east tower was built{N}in order to watch for{N}invaders.{W1}"
 		rts
 
 	; End of function sub_537F2
@@ -101,10 +87,8 @@ sub_537F2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_537F8:
-		
 		trap    #TEXTBOX
-		dc.w $233               
-						; "It has been very{N}warm lately.{W1}"
+		dc.w $233               ; "It has been very{N}warm lately.{W1}"
 		rts
 
 	; End of function sub_537F8
@@ -113,7 +97,6 @@ sub_537F8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_537FE:
-		
 		trap    #CHECK_FLAG
 		dc.w $101
 		bne.s   loc_53810
@@ -123,26 +106,16 @@ sub_537FE:
 		dc.w $101
 		bra.s   return_53814
 loc_53810:
-		
 		trap    #TEXTBOX
-		dc.w $235               
-						; "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
+		dc.w $235               ; "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
 return_53814:
-		
 		rts
 
 	; End of function sub_537FE
 
-cs_53816:
-		textCursor $234         
-						; Initial text line $234 : "(Scream!)...who are you?!{N}Get out of here!{W2}"
-		setActscript $87,$FF,eas_Jump
-						; 0015 SET ACTSCRIPT 87 FF 45E44
-		setEntityDir $87,$2     
-						; 0023 SET ENTITY FACING 87 2
-		nextText $0,$87         
-						; "(Scream!)...who are you?!{N}Get out of here!{W2}"
-		nextText $0,$87         
-						; "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
-		csc_end                 
-						; END OF CUTSCENE SCRIPT
+cs_53816:       textCursor $234         ; Initial text line $234 : "(Scream!)...who are you?!{N}Get out of here!{W2}"
+		setActscript $87,$FF,eas_Jump; 0015 SET ACTSCRIPT 87 FF 45E44
+		setEntityDir $87,$2     ; 0023 SET ENTITY FACING 87 2
+		nextText $0,$87         ; "(Scream!)...who are you?!{N}Get out of here!{W2}"
+		nextText $0,$87         ; "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
+		csc_end                 ; END OF CUTSCENE SCRIPT

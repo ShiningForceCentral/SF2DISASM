@@ -13,8 +13,7 @@ ms_map10_AreaDescriptions:
 
 	; End of function ms_map10_AreaDescriptions
 
-word_56FF0:
-		dc.w $2017
+word_56FF0:     dc.w $2017
 		dc.b 0
 		dc.b 0
 		dc.b 2

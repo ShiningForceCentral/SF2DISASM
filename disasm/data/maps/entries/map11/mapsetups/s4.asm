@@ -13,8 +13,7 @@ ms_map11_AreaDescriptions:
 
 	; End of function ms_map11_AreaDescriptions
 
-word_57A98:
-		dc.w $60C
+word_57A98:     dc.w $60C
 		dc.b 0
 		dc.b 0
 		dc.b 9

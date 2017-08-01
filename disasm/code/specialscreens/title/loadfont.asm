@@ -18,7 +18,6 @@ LoadTitleScreenFont:
 		move.w  #$6200,d0
 		move.w  #$3FF,d7
 loc_2C76E:
-		
 		move.w  #0,(a0)+
 		addq.w  #1,d0
 		dbf     d7,loc_2C76E

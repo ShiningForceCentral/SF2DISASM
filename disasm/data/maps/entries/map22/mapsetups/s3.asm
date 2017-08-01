@@ -11,7 +11,6 @@ ms_map22_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_87:
-		
 		rts
 
 	; End of function nullsub_87
@@ -20,7 +19,6 @@ nullsub_87:
 ; =============== S U B R O U T I N E =======================================
 
 sub_595E8:
-		
 		trap    #CHECK_FLAG
 		dc.w $309
 		beq.s   return_59600
@@ -31,7 +29,6 @@ sub_595E8:
 		lea     cs_5994E(pc), a0
 		trap    #6
 return_59600:
-		
 		rts
 
 	; End of function sub_595E8

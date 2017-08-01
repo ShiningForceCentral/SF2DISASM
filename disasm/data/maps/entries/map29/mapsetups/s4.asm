@@ -13,8 +13,7 @@ ms_map29_AreaDescriptions:
 
 	; End of function ms_map29_AreaDescriptions
 
-word_5A164:
-		dc.w $3609
+word_5A164:     dc.w $3609
 		dc.b 0
 		dc.b 0
 		dc.b 4

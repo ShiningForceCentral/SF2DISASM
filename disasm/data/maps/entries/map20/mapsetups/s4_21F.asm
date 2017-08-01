@@ -13,8 +13,7 @@ ms_map20_flag21F_AreaDescriptions:
 
 	; End of function ms_map20_flag21F_AreaDescriptions
 
-word_63374:
-		dc.w $1706
+word_63374:     dc.w $1706
 		dc.b 0
 		dc.b 0
 		dc.b 4

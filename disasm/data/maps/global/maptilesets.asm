@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\global\maptilesets.asm :
 ; 0x6400C..0x9494A : Map Tilesets
-pt_MapTilesets:
-		dc.l MapTileset000
+pt_MapTilesets: dc.l MapTileset000
 		dc.l MapTileset001
 		dc.l MapTileset002
 		dc.l MapTileset003
@@ -117,233 +116,118 @@ pt_MapTilesets:
 		dc.l MapTileset112
 		dc.l MapTileset113
 		dc.l MapTileset114
-MapTileset000:
-		incbin "data/graphics/maps/maptilesets/maptileset000.bin"
-MapTileset001:
-		incbin "data/graphics/maps/maptilesets/maptileset001.bin"
-MapTileset002:
-		incbin "data/graphics/maps/maptilesets/maptileset002.bin"
-MapTileset003:
-		incbin "data/graphics/maps/maptilesets/maptileset003.bin"
-MapTileset004:
-		incbin "data/graphics/maps/maptilesets/maptileset004.bin"
-MapTileset005:
-		incbin "data/graphics/maps/maptilesets/maptileset005.bin"
-MapTileset006:
-		incbin "data/graphics/maps/maptilesets/maptileset006.bin"
-MapTileset007:
-		incbin "data/graphics/maps/maptilesets/maptileset007.bin"
-MapTileset008:
-		incbin "data/graphics/maps/maptilesets/maptileset008.bin"
-MapTileset009:
-		incbin "data/graphics/maps/maptilesets/maptileset009.bin"
-MapTileset010:
-		incbin "data/graphics/maps/maptilesets/maptileset010.bin"
-MapTileset011:
-		incbin "data/graphics/maps/maptilesets/maptileset011.bin"
-MapTileset012:
-		incbin "data/graphics/maps/maptilesets/maptileset012.bin"
-MapTileset013:
-		incbin "data/graphics/maps/maptilesets/maptileset013.bin"
-MapTileset014:
-		incbin "data/graphics/maps/maptilesets/maptileset014.bin"
-MapTileset015:
-		incbin "data/graphics/maps/maptilesets/maptileset015.bin"
-MapTileset016:
-		incbin "data/graphics/maps/maptilesets/maptileset016.bin"
-MapTileset017:
-		incbin "data/graphics/maps/maptilesets/maptileset017.bin"
-MapTileset018:
-		incbin "data/graphics/maps/maptilesets/maptileset018.bin"
-MapTileset019:
-		incbin "data/graphics/maps/maptilesets/maptileset019.bin"
-MapTileset020:
-		incbin "data/graphics/maps/maptilesets/maptileset020.bin"
-MapTileset021:
-		incbin "data/graphics/maps/maptilesets/maptileset021.bin"
-MapTileset022:
-		incbin "data/graphics/maps/maptilesets/maptileset022.bin"
-MapTileset023:
-		incbin "data/graphics/maps/maptilesets/maptileset023.bin"
-MapTileset024:
-		incbin "data/graphics/maps/maptilesets/maptileset024.bin"
-MapTileset025:
-		incbin "data/graphics/maps/maptilesets/maptileset025.bin"
-MapTileset026:
-		incbin "data/graphics/maps/maptilesets/maptileset026.bin"
-MapTileset027:
-		incbin "data/graphics/maps/maptilesets/maptileset027.bin"
-MapTileset028:
-		incbin "data/graphics/maps/maptilesets/maptileset028.bin"
-MapTileset029:
-		incbin "data/graphics/maps/maptilesets/maptileset029.bin"
-MapTileset030:
-		incbin "data/graphics/maps/maptilesets/maptileset030.bin"
-MapTileset031:
-		incbin "data/graphics/maps/maptilesets/maptileset031.bin"
-MapTileset032:
-		incbin "data/graphics/maps/maptilesets/maptileset032.bin"
-MapTileset033:
-		incbin "data/graphics/maps/maptilesets/maptileset033.bin"
-MapTileset034:
-		incbin "data/graphics/maps/maptilesets/maptileset034.bin"
-MapTileset035:
-		incbin "data/graphics/maps/maptilesets/maptileset035.bin"
-MapTileset036:
-		incbin "data/graphics/maps/maptilesets/maptileset036.bin"
-MapTileset037:
-		incbin "data/graphics/maps/maptilesets/maptileset037.bin"
-MapTileset038:
-		incbin "data/graphics/maps/maptilesets/maptileset038.bin"
-MapTileset039:
-		incbin "data/graphics/maps/maptilesets/maptileset039.bin"
-MapTileset040:
-		incbin "data/graphics/maps/maptilesets/maptileset040.bin"
-MapTileset041:
-		incbin "data/graphics/maps/maptilesets/maptileset041.bin"
-MapTileset042:
-		incbin "data/graphics/maps/maptilesets/maptileset042.bin"
-MapTileset043:
-		incbin "data/graphics/maps/maptilesets/maptileset043.bin"
-MapTileset044:
-		incbin "data/graphics/maps/maptilesets/maptileset044.bin"
-MapTileset045:
-		incbin "data/graphics/maps/maptilesets/maptileset045.bin"
-MapTileset046:
-		incbin "data/graphics/maps/maptilesets/maptileset046.bin"
-MapTileset047:
-		incbin "data/graphics/maps/maptilesets/maptileset047.bin"
-MapTileset048:
-		incbin "data/graphics/maps/maptilesets/maptileset048.bin"
-MapTileset049:
-		incbin "data/graphics/maps/maptilesets/maptileset049.bin"
-MapTileset050:
-		incbin "data/graphics/maps/maptilesets/maptileset050.bin"
-MapTileset051:
-		incbin "data/graphics/maps/maptilesets/maptileset051.bin"
-MapTileset052:
-		incbin "data/graphics/maps/maptilesets/maptileset052.bin"
-MapTileset053:
-		incbin "data/graphics/maps/maptilesets/maptileset053.bin"
-MapTileset054:
-		incbin "data/graphics/maps/maptilesets/maptileset054.bin"
-MapTileset055:
-		incbin "data/graphics/maps/maptilesets/maptileset055.bin"
-MapTileset056:
-		incbin "data/graphics/maps/maptilesets/maptileset056.bin"
-MapTileset057:
-		incbin "data/graphics/maps/maptilesets/maptileset057.bin"
-MapTileset058:
-		incbin "data/graphics/maps/maptilesets/maptileset058.bin"
-MapTileset059:
-		incbin "data/graphics/maps/maptilesets/maptileset059.bin"
-MapTileset060:
-		incbin "data/graphics/maps/maptilesets/maptileset060.bin"
-MapTileset061:
-		incbin "data/graphics/maps/maptilesets/maptileset061.bin"
-MapTileset062:
-		incbin "data/graphics/maps/maptilesets/maptileset062.bin"
-MapTileset063:
-		incbin "data/graphics/maps/maptilesets/maptileset063.bin"
-MapTileset064:
-		incbin "data/graphics/maps/maptilesets/maptileset064.bin"
-MapTileset065:
-		incbin "data/graphics/maps/maptilesets/maptileset065.bin"
-MapTileset066:
-		incbin "data/graphics/maps/maptilesets/maptileset066.bin"
-MapTileset067:
-		incbin "data/graphics/maps/maptilesets/maptileset067.bin"
-MapTileset068:
-		incbin "data/graphics/maps/maptilesets/maptileset068.bin"
-MapTileset069:
-		incbin "data/graphics/maps/maptilesets/maptileset069.bin"
-MapTileset070:
-		incbin "data/graphics/maps/maptilesets/maptileset070.bin"
-MapTileset071:
-		incbin "data/graphics/maps/maptilesets/maptileset071.bin"
-MapTileset072:
-		incbin "data/graphics/maps/maptilesets/maptileset072.bin"
-MapTileset073:
-		incbin "data/graphics/maps/maptilesets/maptileset073.bin"
-MapTileset074:
-		incbin "data/graphics/maps/maptilesets/maptileset074.bin"
-MapTileset075:
-		incbin "data/graphics/maps/maptilesets/maptileset075.bin"
-MapTileset076:
-		incbin "data/graphics/maps/maptilesets/maptileset076.bin"
-MapTileset077:
-		incbin "data/graphics/maps/maptilesets/maptileset077.bin"
-MapTileset078:
-		incbin "data/graphics/maps/maptilesets/maptileset078.bin"
-MapTileset079:
-		incbin "data/graphics/maps/maptilesets/maptileset079.bin"
-MapTileset080:
-		incbin "data/graphics/maps/maptilesets/maptileset080.bin"
-MapTileset081:
-		incbin "data/graphics/maps/maptilesets/maptileset081.bin"
-MapTileset082:
-		incbin "data/graphics/maps/maptilesets/maptileset082.bin"
-MapTileset083:
-		incbin "data/graphics/maps/maptilesets/maptileset083.bin"
-MapTileset084:
-		incbin "data/graphics/maps/maptilesets/maptileset084.bin"
-MapTileset085:
-		incbin "data/graphics/maps/maptilesets/maptileset085.bin"
-MapTileset086:
-		incbin "data/graphics/maps/maptilesets/maptileset086.bin"
-MapTileset087:
-		incbin "data/graphics/maps/maptilesets/maptileset087.bin"
-MapTileset088:
-		incbin "data/graphics/maps/maptilesets/maptileset088.bin"
-MapTileset089:
-		incbin "data/graphics/maps/maptilesets/maptileset089.bin"
-MapTileset090:
-		incbin "data/graphics/maps/maptilesets/maptileset090.bin"
-MapTileset091:
-		incbin "data/graphics/maps/maptilesets/maptileset091.bin"
-MapTileset092:
-		incbin "data/graphics/maps/maptilesets/maptileset092.bin"
-MapTileset093:
-		incbin "data/graphics/maps/maptilesets/maptileset093.bin"
-MapTileset094:
-		incbin "data/graphics/maps/maptilesets/maptileset094.bin"
-MapTileset095:
-		incbin "data/graphics/maps/maptilesets/maptileset095.bin"
-MapTileset096:
-		incbin "data/graphics/maps/maptilesets/maptileset096.bin"
-MapTileset097:
-		incbin "data/graphics/maps/maptilesets/maptileset097.bin"
-MapTileset098:
-		incbin "data/graphics/maps/maptilesets/maptileset098.bin"
-MapTileset099:
-		incbin "data/graphics/maps/maptilesets/maptileset099.bin"
-MapTileset100:
-		incbin "data/graphics/maps/maptilesets/maptileset100.bin"
-MapTileset101:
-		incbin "data/graphics/maps/maptilesets/maptileset101.bin"
-MapTileset102:
-		incbin "data/graphics/maps/maptilesets/maptileset102.bin"
-MapTileset103:
-		incbin "data/graphics/maps/maptilesets/maptileset103.bin"
-MapTileset104:
-		incbin "data/graphics/maps/maptilesets/maptileset104.bin"
-MapTileset105:
-		incbin "data/graphics/maps/maptilesets/maptileset105.bin"
-MapTileset106:
-		incbin "data/graphics/maps/maptilesets/maptileset106.bin"
-MapTileset107:
-		incbin "data/graphics/maps/maptilesets/maptileset107.bin"
-MapTileset108:
-		incbin "data/graphics/maps/maptilesets/maptileset108.bin"
-MapTileset109:
-		incbin "data/graphics/maps/maptilesets/maptileset109.bin"
-MapTileset110:
-		incbin "data/graphics/maps/maptilesets/maptileset110.bin"
-MapTileset111:
-		incbin "data/graphics/maps/maptilesets/maptileset111.bin"
-MapTileset112:
-		incbin "data/graphics/maps/maptilesets/maptileset112.bin"
-MapTileset113:
-		incbin "data/graphics/maps/maptilesets/maptileset113.bin"
-MapTileset114:
-		incbin "data/graphics/maps/maptilesets/maptileset114.bin"
+MapTileset000:  incbin "data/graphics/maps/maptilesets/maptileset000.bin"
+MapTileset001:  incbin "data/graphics/maps/maptilesets/maptileset001.bin"
+MapTileset002:  incbin "data/graphics/maps/maptilesets/maptileset002.bin"
+MapTileset003:  incbin "data/graphics/maps/maptilesets/maptileset003.bin"
+MapTileset004:  incbin "data/graphics/maps/maptilesets/maptileset004.bin"
+MapTileset005:  incbin "data/graphics/maps/maptilesets/maptileset005.bin"
+MapTileset006:  incbin "data/graphics/maps/maptilesets/maptileset006.bin"
+MapTileset007:  incbin "data/graphics/maps/maptilesets/maptileset007.bin"
+MapTileset008:  incbin "data/graphics/maps/maptilesets/maptileset008.bin"
+MapTileset009:  incbin "data/graphics/maps/maptilesets/maptileset009.bin"
+MapTileset010:  incbin "data/graphics/maps/maptilesets/maptileset010.bin"
+MapTileset011:  incbin "data/graphics/maps/maptilesets/maptileset011.bin"
+MapTileset012:  incbin "data/graphics/maps/maptilesets/maptileset012.bin"
+MapTileset013:  incbin "data/graphics/maps/maptilesets/maptileset013.bin"
+MapTileset014:  incbin "data/graphics/maps/maptilesets/maptileset014.bin"
+MapTileset015:  incbin "data/graphics/maps/maptilesets/maptileset015.bin"
+MapTileset016:  incbin "data/graphics/maps/maptilesets/maptileset016.bin"
+MapTileset017:  incbin "data/graphics/maps/maptilesets/maptileset017.bin"
+MapTileset018:  incbin "data/graphics/maps/maptilesets/maptileset018.bin"
+MapTileset019:  incbin "data/graphics/maps/maptilesets/maptileset019.bin"
+MapTileset020:  incbin "data/graphics/maps/maptilesets/maptileset020.bin"
+MapTileset021:  incbin "data/graphics/maps/maptilesets/maptileset021.bin"
+MapTileset022:  incbin "data/graphics/maps/maptilesets/maptileset022.bin"
+MapTileset023:  incbin "data/graphics/maps/maptilesets/maptileset023.bin"
+MapTileset024:  incbin "data/graphics/maps/maptilesets/maptileset024.bin"
+MapTileset025:  incbin "data/graphics/maps/maptilesets/maptileset025.bin"
+MapTileset026:  incbin "data/graphics/maps/maptilesets/maptileset026.bin"
+MapTileset027:  incbin "data/graphics/maps/maptilesets/maptileset027.bin"
+MapTileset028:  incbin "data/graphics/maps/maptilesets/maptileset028.bin"
+MapTileset029:  incbin "data/graphics/maps/maptilesets/maptileset029.bin"
+MapTileset030:  incbin "data/graphics/maps/maptilesets/maptileset030.bin"
+MapTileset031:  incbin "data/graphics/maps/maptilesets/maptileset031.bin"
+MapTileset032:  incbin "data/graphics/maps/maptilesets/maptileset032.bin"
+MapTileset033:  incbin "data/graphics/maps/maptilesets/maptileset033.bin"
+MapTileset034:  incbin "data/graphics/maps/maptilesets/maptileset034.bin"
+MapTileset035:  incbin "data/graphics/maps/maptilesets/maptileset035.bin"
+MapTileset036:  incbin "data/graphics/maps/maptilesets/maptileset036.bin"
+MapTileset037:  incbin "data/graphics/maps/maptilesets/maptileset037.bin"
+MapTileset038:  incbin "data/graphics/maps/maptilesets/maptileset038.bin"
+MapTileset039:  incbin "data/graphics/maps/maptilesets/maptileset039.bin"
+MapTileset040:  incbin "data/graphics/maps/maptilesets/maptileset040.bin"
+MapTileset041:  incbin "data/graphics/maps/maptilesets/maptileset041.bin"
+MapTileset042:  incbin "data/graphics/maps/maptilesets/maptileset042.bin"
+MapTileset043:  incbin "data/graphics/maps/maptilesets/maptileset043.bin"
+MapTileset044:  incbin "data/graphics/maps/maptilesets/maptileset044.bin"
+MapTileset045:  incbin "data/graphics/maps/maptilesets/maptileset045.bin"
+MapTileset046:  incbin "data/graphics/maps/maptilesets/maptileset046.bin"
+MapTileset047:  incbin "data/graphics/maps/maptilesets/maptileset047.bin"
+MapTileset048:  incbin "data/graphics/maps/maptilesets/maptileset048.bin"
+MapTileset049:  incbin "data/graphics/maps/maptilesets/maptileset049.bin"
+MapTileset050:  incbin "data/graphics/maps/maptilesets/maptileset050.bin"
+MapTileset051:  incbin "data/graphics/maps/maptilesets/maptileset051.bin"
+MapTileset052:  incbin "data/graphics/maps/maptilesets/maptileset052.bin"
+MapTileset053:  incbin "data/graphics/maps/maptilesets/maptileset053.bin"
+MapTileset054:  incbin "data/graphics/maps/maptilesets/maptileset054.bin"
+MapTileset055:  incbin "data/graphics/maps/maptilesets/maptileset055.bin"
+MapTileset056:  incbin "data/graphics/maps/maptilesets/maptileset056.bin"
+MapTileset057:  incbin "data/graphics/maps/maptilesets/maptileset057.bin"
+MapTileset058:  incbin "data/graphics/maps/maptilesets/maptileset058.bin"
+MapTileset059:  incbin "data/graphics/maps/maptilesets/maptileset059.bin"
+MapTileset060:  incbin "data/graphics/maps/maptilesets/maptileset060.bin"
+MapTileset061:  incbin "data/graphics/maps/maptilesets/maptileset061.bin"
+MapTileset062:  incbin "data/graphics/maps/maptilesets/maptileset062.bin"
+MapTileset063:  incbin "data/graphics/maps/maptilesets/maptileset063.bin"
+MapTileset064:  incbin "data/graphics/maps/maptilesets/maptileset064.bin"
+MapTileset065:  incbin "data/graphics/maps/maptilesets/maptileset065.bin"
+MapTileset066:  incbin "data/graphics/maps/maptilesets/maptileset066.bin"
+MapTileset067:  incbin "data/graphics/maps/maptilesets/maptileset067.bin"
+MapTileset068:  incbin "data/graphics/maps/maptilesets/maptileset068.bin"
+MapTileset069:  incbin "data/graphics/maps/maptilesets/maptileset069.bin"
+MapTileset070:  incbin "data/graphics/maps/maptilesets/maptileset070.bin"
+MapTileset071:  incbin "data/graphics/maps/maptilesets/maptileset071.bin"
+MapTileset072:  incbin "data/graphics/maps/maptilesets/maptileset072.bin"
+MapTileset073:  incbin "data/graphics/maps/maptilesets/maptileset073.bin"
+MapTileset074:  incbin "data/graphics/maps/maptilesets/maptileset074.bin"
+MapTileset075:  incbin "data/graphics/maps/maptilesets/maptileset075.bin"
+MapTileset076:  incbin "data/graphics/maps/maptilesets/maptileset076.bin"
+MapTileset077:  incbin "data/graphics/maps/maptilesets/maptileset077.bin"
+MapTileset078:  incbin "data/graphics/maps/maptilesets/maptileset078.bin"
+MapTileset079:  incbin "data/graphics/maps/maptilesets/maptileset079.bin"
+MapTileset080:  incbin "data/graphics/maps/maptilesets/maptileset080.bin"
+MapTileset081:  incbin "data/graphics/maps/maptilesets/maptileset081.bin"
+MapTileset082:  incbin "data/graphics/maps/maptilesets/maptileset082.bin"
+MapTileset083:  incbin "data/graphics/maps/maptilesets/maptileset083.bin"
+MapTileset084:  incbin "data/graphics/maps/maptilesets/maptileset084.bin"
+MapTileset085:  incbin "data/graphics/maps/maptilesets/maptileset085.bin"
+MapTileset086:  incbin "data/graphics/maps/maptilesets/maptileset086.bin"
+MapTileset087:  incbin "data/graphics/maps/maptilesets/maptileset087.bin"
+MapTileset088:  incbin "data/graphics/maps/maptilesets/maptileset088.bin"
+MapTileset089:  incbin "data/graphics/maps/maptilesets/maptileset089.bin"
+MapTileset090:  incbin "data/graphics/maps/maptilesets/maptileset090.bin"
+MapTileset091:  incbin "data/graphics/maps/maptilesets/maptileset091.bin"
+MapTileset092:  incbin "data/graphics/maps/maptilesets/maptileset092.bin"
+MapTileset093:  incbin "data/graphics/maps/maptilesets/maptileset093.bin"
+MapTileset094:  incbin "data/graphics/maps/maptilesets/maptileset094.bin"
+MapTileset095:  incbin "data/graphics/maps/maptilesets/maptileset095.bin"
+MapTileset096:  incbin "data/graphics/maps/maptilesets/maptileset096.bin"
+MapTileset097:  incbin "data/graphics/maps/maptilesets/maptileset097.bin"
+MapTileset098:  incbin "data/graphics/maps/maptilesets/maptileset098.bin"
+MapTileset099:  incbin "data/graphics/maps/maptilesets/maptileset099.bin"
+MapTileset100:  incbin "data/graphics/maps/maptilesets/maptileset100.bin"
+MapTileset101:  incbin "data/graphics/maps/maptilesets/maptileset101.bin"
+MapTileset102:  incbin "data/graphics/maps/maptilesets/maptileset102.bin"
+MapTileset103:  incbin "data/graphics/maps/maptilesets/maptileset103.bin"
+MapTileset104:  incbin "data/graphics/maps/maptilesets/maptileset104.bin"
+MapTileset105:  incbin "data/graphics/maps/maptilesets/maptileset105.bin"
+MapTileset106:  incbin "data/graphics/maps/maptilesets/maptileset106.bin"
+MapTileset107:  incbin "data/graphics/maps/maptilesets/maptileset107.bin"
+MapTileset108:  incbin "data/graphics/maps/maptilesets/maptileset108.bin"
+MapTileset109:  incbin "data/graphics/maps/maptilesets/maptileset109.bin"
+MapTileset110:  incbin "data/graphics/maps/maptilesets/maptileset110.bin"
+MapTileset111:  incbin "data/graphics/maps/maptilesets/maptileset111.bin"
+MapTileset112:  incbin "data/graphics/maps/maptilesets/maptileset112.bin"
+MapTileset113:  incbin "data/graphics/maps/maptilesets/maptileset113.bin"
+MapTileset114:  incbin "data/graphics/maps/maptilesets/maptileset114.bin"

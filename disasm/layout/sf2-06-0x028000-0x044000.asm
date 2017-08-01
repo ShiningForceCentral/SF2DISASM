@@ -4,16 +4,13 @@
 ; FREE SPACE : 6681 bytes.
 
 
-p_pt_TextBanks:
-		dc.l pt_TextBanks
-j_InitDecoder:		
-		jmp     InitDecoder(pc) 
+p_pt_TextBanks: dc.l pt_TextBanks
+j_InitDecoder:		jmp     InitDecoder(pc) 
 j_HuffmanDecode:		
 		jmp     HuffmanDecode(pc)
 p_VariableWidthFont:
 		dc.l VariableWidthFont
-p_MainMenuTiles:
-		dc.l MenuTiles_Uncompressed
+p_MainMenuTiles:dc.l MenuTiles_Uncompressed
 p_MenuTiles_Item:
 		dc.l MenuTiles_Item
 p_MenuTiles_BattleField:
@@ -36,8 +33,7 @@ p_SpeechBalloonTiles:
 		dc.l SpeechBalloonTiles
 j_DisplaySegaLogo:		
 		jmp     DisplaySegaLogo(pc)
-p_GameStaff:
-		dc.l GameStaff
+p_GameStaff:    dc.l GameStaff
 j_EndKissPictureSequence:		
 		jmp     EndKissPictureSequence(pc)
 j_LoadTitleScreenFont:		
@@ -48,22 +44,17 @@ VariableWidthFont:
 MenuTiles_Uncompressed:
 		incbin "data/graphics/tech/menus/mainmenutiles.bin"
 						; uncompressed
-MenuTiles_Item:
-		incbin "data/graphics/tech/menus/menutilesitem.bin"
+MenuTiles_Item: incbin "data/graphics/tech/menus/menutilesitem.bin"
 MenuTiles_BattleField:
 		incbin "data/graphics/tech/menus/menutilesbattlefield.bin"
 MenuTiles_Church:
 		incbin "data/graphics/tech/menus/menutileschurch.bin"
-MenuTiles_Shop:
-		incbin "data/graphics/tech/menus/menutilesshop.bin"
+MenuTiles_Shop: incbin "data/graphics/tech/menus/menutilesshop.bin"
 MenuTiles_Caravan:
 		incbin "data/graphics/tech/menus/menutilescaravan.bin"
-MenuTiles_Depot:
-		incbin "data/graphics/tech/menus/menutilesdepot.bin"
-MenuTiles_YesNo:
-		incbin "data/graphics/tech/menus/menutilesyesno.bin"
-plt_WitchChoice:
-		incbin "data/graphics/specialscreens/witchscreen/witchchoicepalette.bin"
+MenuTiles_Depot:incbin "data/graphics/tech/menus/menutilesdepot.bin"
+MenuTiles_YesNo:incbin "data/graphics/tech/menus/menutilesyesno.bin"
+plt_WitchChoice:incbin "data/graphics/specialscreens/witchscreen/witchchoicepalette.bin"
 WitchBubbleAnimation:
 		incbin "data/graphics/specialscreens/witchscreen/witchbubbleanimation.bin"
 SpeechBalloonTiles:
@@ -73,8 +64,7 @@ SpeechBalloonTiles:
 UnusedCloudTiles:
 		incbin "data/graphics/tech/unusedcloudtiles.bin"
 						; no reference to that ? looks like compressed tiles but no idea of what they represent (32x8 tiles)
-StaticWidthFont:
-		incbin "data/graphics/tech/fonts/staticwidthfont.bin"
+StaticWidthFont:incbin "data/graphics/tech/fonts/staticwidthfont.bin"
 						; used for title screen
 TitleScreenPalettes:
 		incbin "data/graphics/specialscreens/titlescreen/titlescreenpalettes.bin"

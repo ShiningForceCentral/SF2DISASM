@@ -14,7 +14,6 @@ ms_map38_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_97:
-		
 		rts
 
 	; End of function nullsub_97
@@ -23,17 +22,14 @@ nullsub_97:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DCDE:
-		
 		trap    #CHECK_FLAG
 		dc.w $38F
 		bne.s   return_5DCEE
 		lea     cs_5DE2E(pc), a0
 		trap    #6
 		trap    #SET_FLAG
-		dc.w $38F               
-						; set after the Petro death scene in Roft
+		dc.w $38F               ; set after the Petro death scene in Roft
 return_5DCEE:
-		
 		rts
 
 	; End of function sub_5DCDE
@@ -42,7 +38,6 @@ return_5DCEE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DCF0:
-		
 		trap    #CHECK_FLAG
 		dc.w $38F
 		beq.s   return_5DD24
@@ -52,11 +47,9 @@ sub_5DCF0:
 		lea     cs_5DE76(pc), a0
 		trap    #6
 		trap    #CLEAR_FLAG
-		dc.w $4C                
-						; Zynk is a follower
+		dc.w $4C                ; Zynk is a follower
 		bra.s   return_5DD24
 loc_5DD08:
-		
 		trap    #CHECK_FLAG
 		dc.w $399
 		beq.s   return_5DD24
@@ -69,10 +62,8 @@ loc_5DD08:
 		lea     cs_5DE76(pc), a0
 		trap    #6
 		trap    #CLEAR_FLAG
-		dc.w $4C                
-						; Zynk is a follower
+		dc.w $4C                ; Zynk is a follower
 return_5DD24:
-		
 		rts
 
 	; End of function sub_5DCF0

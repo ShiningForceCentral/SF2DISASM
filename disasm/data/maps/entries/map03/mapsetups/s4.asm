@@ -13,8 +13,7 @@ ms_map3_AreaDescriptions:
 
 	; End of function ms_map3_AreaDescriptions
 
-word_512F0:
-		dc.w $916
+word_512F0:     dc.w $916
 		dc.b 0
 		dc.b 0
 		dc.b 2

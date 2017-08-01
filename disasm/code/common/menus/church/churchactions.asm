@@ -13,15 +13,12 @@ ChurchMenuActions:
 		blt.s   loc_20A18
 		jsr     j_InitPortraitWindow
 loc_20A18:
-		
 		trap    #TEXTBOX
-		dc.w $6E                
-						; "Welcome!{W2}{N}Your desire will be fulfilled!{W2}"
+		dc.w $6E                ; "Welcome!{W2}{N}Your desire will be fulfilled!{W2}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		jsr     j_HidePortraitWindow
 loc_20A26:
-		
 		moveq   #0,d0
 		moveq   #0,d1
 		moveq   #5,d2
@@ -31,16 +28,13 @@ loc_20A26:
 		beq.s   loc_20A40
 		bra.w   loc_20A64
 loc_20A40:
-		
 		moveq   #0,d1
 		move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
 		blt.s   loc_20A4E
 		jsr     j_InitPortraitWindow
 loc_20A4E:
-		
 		trap    #TEXTBOX
-		dc.w $71                
-						; "{CLEAR}Be careful.  The light{N}is always on your side.{W1}"
+		dc.w $71                ; "{CLEAR}Be careful.  The light{N}is always on your side.{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		jsr     j_HidePortraitWindow
@@ -48,16 +42,13 @@ loc_20A4E:
 		movem.l (sp)+,d0-a5
 		rts
 loc_20A64:
-		
 		cmpi.w  #0,d0
 		bne.w   loc_20B58
 		trap    #TEXTBOX
-		dc.w $76                
-						; "Let me investigate all{N}of you.{W2}"
+		dc.w $76                ; "Let me investigate all{N}of you.{W2}"
 		bsr.w   Church_GetCurrentForceMemberInfo
 		clr.w   -$E(a6)
 loc_20A78:
-		
 		clr.w   d0
 		move.b  (a0)+,d0
 		move.w  d0,-$C(a6)
@@ -67,8 +58,7 @@ loc_20A78:
 		addi.w  #1,-$E(a6)
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $81                
-						; "Gosh!  {NAME} is{N}exhausted!{W2}"
+		dc.w $81                ; "Gosh!  {NAME} is{N}exhausted!{W2}"
 		jsr     j_GetCurrentLevel
 		mulu.w  #$A,d1
 		move.l  d1,-8(a6)
@@ -79,33 +69,27 @@ loc_20A78:
 		beq.w   loc_20AC8
 		addi.l  #$C8,-8(a6) 
 loc_20AC8:
-		
 		move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $82                
-						; "But I can recall the soul.{W2}{N}It will cost {#} gold{N}coins.  OK?"
+		dc.w $82                ; "But I can recall the soul.{W2}{N}It will cost {#} gold{N}coins.  OK?"
 		jsr     sub_10050
 		jsr     j_YesNoChoiceBox
 		jsr     sub_10058
 		cmpi.w  #0,d0
 		beq.w   loc_20AF4
 		trap    #TEXTBOX
-		dc.w $7C                
-						; "You don't need my help?{W2}"
+		dc.w $7C                ; "You don't need my help?{W2}"
 		bra.w   loc_20B42
 loc_20AF4:
-		
 		jsr     j_GetGold
 		move.l  d1,-4(a6)
 		move.l  -8(a6),d0
 		cmp.l   d0,d1
 		bcc.s   loc_20B0C
 		trap    #TEXTBOX
-		dc.w $7D                
-						; "You can't afford it?!{N}What a pity....{W2}"
+		dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 		bra.s   loc_20B42
 loc_20B0C:
-		
 		moveq   #0,d1
 		move.l  -8(a6),d1
 		jsr     j_DecreaseGold
@@ -120,30 +104,24 @@ loc_20B0C:
 		bsr.w   sub_2124A
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $83                
-						; "{NAME} is revived!{W2}"
+		dc.w $83                ; "{NAME} is revived!{W2}"
 loc_20B42:
-		
 		dbf     d7,loc_20A78
 		cmpi.w  #0,-$E(a6)
 		bne.w   loc_21028
 		trap    #TEXTBOX
-		dc.w $80                
-						; "Nobody is dead.{W2}"
+		dc.w $80                ; "Nobody is dead.{W2}"
 		bra.w   loc_21028
 loc_20B58:
-		
 		cmpi.w  #1,d0
 		bne.w   loc_20D3A
 		trap    #TEXTBOX
-		dc.w $76                
-						; "Let me investigate all{N}of you.{W2}"
+		dc.w $76                ; "Let me investigate all{N}of you.{W2}"
 		bsr.w   Church_GetCurrentForceMemberInfo
 		clr.w   -$10(a6)
 		clr.w   -$12(a6)
 		clr.w   -$18(a6)
 loc_20B74:
-		
 		clr.w   d0
 		move.b  (a0)+,d0
 		movem.l a0,-(sp)
@@ -157,36 +135,30 @@ loc_20B74:
 		addi.w  #1,-$10(a6)
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $79                
-						; "Gosh!  {NAME} is{N}poisoned!{W2}"
+		dc.w $79                ; "Gosh!  {NAME} is{N}poisoned!{W2}"
 		move.l  #$A,-8(a6)
 		move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $7B                
-						; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
+		dc.w $7B                ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
 		jsr     sub_10050
 		jsr     j_YesNoChoiceBox
 		jsr     sub_10058
 		cmpi.w  #0,d0
 		beq.w   loc_20BDA
 		trap    #TEXTBOX
-		dc.w $7C                
-						; "You don't need my help?{W2}"
+		dc.w $7C                ; "You don't need my help?{W2}"
 		bra.w   loc_20C24
 loc_20BDA:
-		
 		jsr     j_GetGold
 		move.l  d1,-4(a6)
 		move.l  -8(a6),d0
 		cmp.l   d0,d1
 		bcc.s   loc_20BF4
 		trap    #TEXTBOX
-		dc.w $7D                
-						; "You can't afford it?!{N}What a pity....{W2}"
+		dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 		clr.w   d7
 		bra.s   loc_20C24
 loc_20BF4:
-		
 		moveq   #0,d1
 		move.l  -8(a6),d1
 		jsr     j_DecreaseGold
@@ -200,23 +172,18 @@ loc_20BF4:
 		nop
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $7E                
-						; "{NAME} is no longer{N}poisoned.{W2}"
+		dc.w $7E                ; "{NAME} is no longer{N}poisoned.{W2}"
 loc_20C24:
-		
 		movem.l (sp)+,a0
 		dbf     d7,loc_20B74
 		cmpi.w  #0,-$10(a6)
 		bne.w   loc_20C3A
 		trap    #TEXTBOX
-		dc.w $77                
-						; "Nobody is poisoned.{W2}"
+		dc.w $77                ; "Nobody is poisoned.{W2}"
 loc_20C3A:
-		
 		bsr.w   ChurchCure
 		bsr.w   Church_GetCurrentForceMemberInfo
 loc_20C42:
-		
 		clr.w   d0
 		move.b  (a0)+,d0
 		movem.l a0,-(sp)
@@ -229,8 +196,7 @@ loc_20C42:
 		addi.w  #1,-$12(a6)
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $7A                
-						; "Gosh!  {NAME} is{N}cursed!{W2}"
+		dc.w $7A                ; "Gosh!  {NAME} is{N}cursed!{W2}"
 		clr.w   d1
 		jsr     j_GetItemAndNumberOfItems
 		move.w  d2,-$14(a6)
@@ -238,7 +204,6 @@ loc_20C42:
 		subq.b  #1,d6
 		clr.l   d3
 loc_20C86:
-		
 		move.w  d6,d1
 		jsr     j_GetItemAndNumberOfItems
 		jsr     j_IsItemCursed
@@ -249,36 +214,30 @@ loc_20C86:
 		lsr.w   #2,d4
 		add.l   d4,d3
 loc_20CA8:
-		
 		dbf     d6,loc_20C86
 		move.l  d3,-8(a6)
 		move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $7B                
-						; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
+		dc.w $7B                ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
 		jsr     sub_10050
 		jsr     j_YesNoChoiceBox
 		jsr     sub_10058
 		cmpi.w  #0,d0
 		beq.w   loc_20CDC
 		trap    #TEXTBOX
-		dc.w $7C                
-						; "You don't need my help?{W2}"
+		dc.w $7C                ; "You don't need my help?{W2}"
 		bra.w   loc_20D20
 loc_20CDC:
-		
 		jsr     j_GetGold
 		move.l  d1,-4(a6)
 		move.l  -8(a6),d0
 		cmp.l   d0,d1
 		bcc.s   loc_20CF6
 		trap    #TEXTBOX
-		dc.w $7D                
-						; "You can't afford it?!{N}What a pity....{W2}"
+		dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 		clr.w   d7
 		bra.s   loc_20D20
 loc_20CF6:
-		
 		moveq   #0,d1
 		move.l  -8(a6),d1
 		jsr     j_DecreaseGold
@@ -290,37 +249,29 @@ loc_20CF6:
 		nop
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $7F                
-						; "{NAME} is no longer{N}cursed.{W2}"
+		dc.w $7F                ; "{NAME} is no longer{N}cursed.{W2}"
 loc_20D20:
-		
 		movem.l (sp)+,a0
 		dbf     d7,loc_20C42
 		cmpi.w  #0,-$12(a6)
 		bne.w   loc_21028
 		trap    #TEXTBOX
-		dc.w $78                
-						; "Nobody is cursed.{W2}"
+		dc.w $78                ; "Nobody is cursed.{W2}"
 		bra.w   loc_21028
 loc_20D3A:
-		
 		cmpi.w  #2,d0
 		bne.w   loc_20FCC
 		trap    #TEXTBOX
-		dc.w $76                
-						; "Let me investigate all{N}of you.{W2}"
+		dc.w $76                ; "Let me investigate all{N}of you.{W2}"
 		bsr.w   sub_21072
 		cmpi.w  #0,-$16(a6)
 		bne.w   loc_20D5C
 		trap    #TEXTBOX
-		dc.w $87                
-						; "{CLEAR}Well, nobody can be{N}promoted now.{W2}"
+		dc.w $87                ; "{CLEAR}Well, nobody can be{N}promoted now.{W2}"
 		bra.w   loc_21028
 loc_20D5C:
-		
 		trap    #TEXTBOX
-		dc.w $88                
-						; "{CLEAR}Who do you want to{N}promote?{W2}"
+		dc.w $88                ; "{CLEAR}Who do you want to{N}promote?{W2}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		move.b  #0,((byte_FFB13C-$1000000)).w
@@ -328,11 +279,9 @@ loc_20D5C:
 		cmpi.w  #$FFFF,d0
 		bne.w   loc_20D80
 		trap    #TEXTBOX
-		dc.w $89                
-						; "Oh, I'm wrong.{W2}"
+		dc.w $89                ; "Oh, I'm wrong.{W2}"
 		bra.w   loc_21028
 loc_20D80:
-		
 		move.w  d0,-$C(a6)
 		jsr     j_GetClass      
 		move.w  d1,-$1A(a6)
@@ -342,35 +291,28 @@ loc_20D80:
 		beq.w   loc_20DAE
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $8E                
-						; "Hmmm...{D1} {NAME} had{N}better remain the current{N}class.{W2}"
+		dc.w $8E                ; "Hmmm...{D1} {NAME} had{N}better remain the current{N}class.{W2}"
 		bra.w   loc_20FC8
 loc_20DAE:
-		
 		jsr     j_GetCurrentLevel
 		cmpi.w  #$14,d1
 		bcc.w   loc_20DCA
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $8A                
-						; "Hmmm...{NAME} needs{N}more experience!{W2}"
+		dc.w $8A                ; "Hmmm...{NAME} needs{N}more experience!{W2}"
 		bra.w   loc_20FC8
 loc_20DCA:
-		
 		clr.w   -$1C(a6)
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $8B                
-						; "{NAME} wants to be{N}promoted to the a fighting{N}class, right?"
+		dc.w $8B                ; "{NAME} wants to be{N}promoted to the a fighting{N}class, right?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		beq.w   loc_20DEE
 		trap    #TEXTBOX
-		dc.w $89                
-						; "Oh, I'm wrong.{W2}"
+		dc.w $89                ; "Oh, I'm wrong.{W2}"
 		bra.w   loc_20FC8
 loc_20DEE:
-		
 		move.w  -$1A(a6),d1
 		move.w  #2,d2
 		bsr.w   sub_210D0
@@ -383,14 +325,12 @@ loc_20DEE:
 		bsr.w   FindPromotionSection
 		addq.w  #1,a0
 loc_20E18:
-		
 		move.b  (a0)+,-$1E(a6)
 		dbf     d7,loc_20E18
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
 		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d6
 		subq.w  #1,d6
 loc_20E2A:
-		
 		move.b  (a0)+,d0
 		clr.w   d1
 		jsr     j_GetItemAndNumberOfItems
@@ -399,7 +339,6 @@ loc_20E2A:
 		move.w  d2,d7
 		subq.w  #1,d7
 loc_20E40:
-		
 		move.w  d7,d1
 		jsr     j_GetItemAndNumberOfItems
 		move.b  d1,d2
@@ -407,11 +346,9 @@ loc_20E40:
 		beq.w   loc_20E5E
 		dbf     d7,loc_20E40
 loc_20E56:
-		
 		dbf     d6,loc_20E2A
 		bra.w   loc_20EEA
 loc_20E5E:
-		
 		move.w  d0,-$12(a6)
 		move.w  d7,-$14(a6)
 		move.w  d1,-$1E(a6)
@@ -422,7 +359,6 @@ loc_20E5E:
 		subq.w  #1,d7
 		clr.w   d0
 loc_20E7C:
-		
 		move.b  (a0)+,d0
 		dbf     d7,loc_20E7C
 		move.w  d0,-$1C(a6)
@@ -430,37 +366,30 @@ loc_20E7C:
 		move.w  -$1E(a6),((TEXT_NAME_INDEX_3-$1000000)).w
 		move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $8F                
-						; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
+		dc.w $8F                ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
 		trap    #TEXTBOX
-		dc.w $93                
-						; "OK?"
+		dc.w $93                ; "OK?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		beq.w   loc_20EB6
 		trap    #TEXTBOX
-		dc.w $90                
-						; "Then"
+		dc.w $90                ; "Then"
 		bra.w   loc_20EEA
 loc_20EB6:
-		
 		cmpi.w  #CLASSIDX_SORC,-$1C(a6)
 		bne.w   loc_20ED8
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $91                
-						; "{NAME} loses all spells{N}that were learned.{N}OK?"
+		dc.w $91                ; "{NAME} loses all spells{N}that were learned.{N}OK?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		bne.w   loc_20FC8
 loc_20ED8:
-		
 		move.w  -$12(a6),d0
 		move.w  -$14(a6),d1
 		jsr     j_RemoveItemBySlot
 		bra.w   loc_20F30
 loc_20EEA:
-		
 		move.w  #0,d2
 		move.w  -$1A(a6),d1
 		bsr.w   sub_210D0
@@ -471,26 +400,22 @@ loc_20EEA:
 		addq.w  #1,a0
 		clr.w   d0
 loc_20F08:
-		
 		move.b  (a0)+,d0
 		dbf     d7,loc_20F08
 		move.w  d0,-$1C(a6)
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $92                
-						; "{NAME} can be promoted{N}to {CLASS}.{N}OK?"
+		dc.w $92                ; "{NAME} can be promoted{N}to {CLASS}.{N}OK?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		bne.w   loc_20FC8
 loc_20F30:
-		
 		move.w  -$1A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -$C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 		move.w  -$1C(a6),((TEXT_NAME_INDEX_3-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $8C                
-						; "Now, let me conduct the{N}rite.{D1}  The light blesses...{N}{D1}{CLASS} {NAME}...{W2}{N}with a class of {CLASS}!{W2}"
+		dc.w $8C                ; "Now, let me conduct the{N}rite.{D1}  The light blesses...{N}{D1}{CLASS} {NAME}...{W2}{N}with a class of {CLASS}!{W2}"
 		move.w  -$C(a6),d0
 		move.w  -$1C(a6),d1
 		jsr     j_SetClass
@@ -499,22 +424,18 @@ loc_20F30:
 		bne.s   loc_20F66
 		bsr.w   ReplaceSpellsWithSORCDefaults
 loc_20F66:
-		
 		cmpi.w  #CLASSIDX_MMNK,-$1C(a6)
 		beq.s   loc_20F7A       
 		cmpi.w  #CLASSIDX_NINJ,-$1C(a6)
 		beq.s   loc_20F7A       
 		bra.w   loc_20F90
 loc_20F7A:
-		
-		move.w  -$C(a6),d0      
-						; new class uses a different type of weapon, so unequip weapon
+		move.w  -$C(a6),d0      ; new class uses a different type of weapon, so unequip weapon
 		jsr     j_GetEquippedWeapon
 		cmpi.w  #$FFFF,d1
 		beq.s   loc_20F90
 		jsr     j_UnequipWeapon
 loc_20F90:
-		
 		trap    #SOUND_COMMAND
 		dc.w MUSIC_PROMOTION
 		jsr     WaitForMusicResumeAndPlayerInput(pc)
@@ -524,65 +445,52 @@ loc_20F90:
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $8D                
-						; "{NAME} was successfully{N}promoted to {CLASS}.{W2}"
+		dc.w $8D                ; "{NAME} was successfully{N}promoted to {CLASS}.{W2}"
 		move.w  -$C(a6),d0
 		move.b  #1,d1
 		jsr     j_SetLevel
 		clr.w   d1
 		jsr     j_SetCurrentEXP
 loc_20FC8:
-		
 		bra.w   loc_20D5C
 loc_20FCC:
-		
 		trap    #TEXTBOX
-		dc.w $72                
-						; "May I record your adventure{N}now?"
+		dc.w $72                ; "May I record your adventure{N}now?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		beq.w   loc_20FE6
 		trap    #TEXTBOX
-		dc.w $7C                
-						; "You don't need my help?{W2}"
+		dc.w $7C                ; "You don't need my help?{W2}"
 		bra.w   loc_21028
 loc_20FE6:
-		
 		move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP_INDEX-$1000000)).w
 		move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
 		trap    #SET_FLAG
-		dc.w $18F               
-						; set after first battle's cutscene OR first save? Checked at witch screens
+		dc.w $18F               ; set after first battle's cutscene OR first save? Checked at witch screens
                 enableSram
 		jsr     (SaveGame).w
                 disableSram
 		trap    #SOUND_COMMAND
-		dc.w MUSIC_SAVE         
-						; save jingle
+		dc.w MUSIC_SAVE         ; save jingle
 		jsr     WaitForMusicResumeAndPlayerInput(pc)
 		nop
 		trap    #TEXTBOX
-		dc.w $73                
-						; "{CLEAR}The light allows you to{N}resume your adventure!{W1}"
+		dc.w $73                ; "{CLEAR}The light allows you to{N}resume your adventure!{W1}"
 		trap    #TEXTBOX
-		dc.w $74                
-						; "{CLEAR}Will you continue your{N}adventure?"
+		dc.w $74                ; "{CLEAR}Will you continue your{N}adventure?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		beq.w   loc_20A40
 		trap    #TEXTBOX
-		dc.w $75                
-						; "{CLEAR}Then, take a rest before{N}you continue.{W1}"
+		dc.w $75                ; "{CLEAR}Then, take a rest before{N}you continue.{W1}"
 		jsr     (FadeOutToBlack).w
 		jmp     (WitchSuspend).w
 		bra.w   *+4
 loc_21028:
-		
 		trap    #TEXTBOX
 		dc.w $FFFF
 		trap    #TEXTBOX
-		dc.w $70                
-						; "{CLEAR}Do you have another desire?"
+		dc.w $70                ; "{CLEAR}Do you have another desire?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		bne.w   loc_20A40
@@ -592,13 +500,11 @@ loc_21028:
 
 	; End of function ChurchMenuActions
 
-Promotions:
-		incbin "data/stats/allies/promotions.bin"
+Promotions:     incbin "data/stats/allies/promotions.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_21072:
-		
 		movem.l d7-a1,-(sp)
 		jsr     j_UpdateForce
 		clr.w   -$16(a6)
@@ -608,7 +514,6 @@ sub_21072:
 		lea     ((byte_FFB0AE-$1000000)).w,a1
 		subq.b  #1,d7
 loc_21094:
-		
 		clr.w   d0
 		move.b  (a0),d0
 		jsr     j_GetClass      
@@ -621,7 +526,6 @@ loc_21094:
 		bcs.w   loc_210C4
 		addi.w  #1,-$16(a6)
 loc_210C4:
-		
 		move.b  (a0)+,(a1)+
 		dbf     d7,loc_21094
 		movem.l (sp)+,d7-a1
@@ -633,7 +537,6 @@ loc_210C4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_210D0:
-		
 		movem.l d7-a0,-(sp)
 		clr.w   -$22(a6)
 		clr.w   -$20(a6)
@@ -645,13 +548,11 @@ sub_210D0:
 		move.w  d7,-$20(a6)
 		subq.b  #1,d7
 loc_210F2:
-		
 		cmp.b   (a0)+,d1
 		beq.w   loc_21102
 		dbf     d7,loc_210F2
 		move.w  #1,-$24(a6)
 loc_21102:
-		
 		sub.w   d7,-$20(a6)
 		movem.l (sp)+,d7-a0
 		rts
@@ -673,12 +574,10 @@ FindPromotionSection:
 		bcs.w   loc_21126
 		clr.w   d0
 loc_2111E:
-		
 		move.b  (a0)+,d0
 		adda.w  d0,a0
 		dbf     d6,loc_2111E
 loc_21126:
-		
 		movem.l (sp)+,d0/d6
 		rts
 
@@ -696,7 +595,6 @@ ReplaceSpellsWithSORCDefaults:
 		lea     CHAR_OFFSET_SPELL_0(a0),a0
 		move.w  #CHAR_SPELLSLOTS_COUNTER,d7
 loc_2113E:
-		
 		move.b  #SPELLIDX_NOTHING,(a0)+
 		dbf     d7,loc_2113E
 		move.w  -$C(a6),d0
@@ -724,10 +622,8 @@ Church_GetCurrentForceMemberInfo:
 ; =============== S U B R O U T I N E =======================================
 
 ChurchCure:
-		
 		bsr.s   Church_GetCurrentForceMemberInfo
 loc_21170:
-		
 		clr.w   d0
 		move.b  (a0)+,d0
 		movem.l a0,-(sp)
@@ -741,36 +637,30 @@ loc_21170:
 		addi.w  #1,-$18(a6)
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $84                
-						; "Gosh!  {NAME} is{N}paralyzed.{W2}"
+		dc.w $84                ; "Gosh!  {NAME} is{N}paralyzed.{W2}"
 		move.l  #$14,-8(a6)
 		move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $7B                
-						; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
+		dc.w $7B                ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
 		jsr     sub_10050
 		jsr     j_YesNoChoiceBox
 		jsr     sub_10058
 		cmpi.w  #0,d0
 		beq.w   loc_211D6
 		trap    #TEXTBOX
-		dc.w $7C                
-						; "You don't need my help?{W2}"
+		dc.w $7C                ; "You don't need my help?{W2}"
 		bra.w   loc_21220
 loc_211D6:
-		
 		jsr     j_GetGold
 		move.l  d1,-4(a6)
 		move.l  -8(a6),d0
 		cmp.l   d0,d1
 		bcc.s   loc_211F0
 		trap    #TEXTBOX
-		dc.w $7D                
-						; "You can't afford it?!{N}What a pity....{W2}"
+		dc.w $7D                ; "You can't afford it?!{N}What a pity....{W2}"
 		clr.w   d7
 		bra.s   loc_21220
 loc_211F0:
-		
 		moveq   #0,d1
 		move.l  -8(a6),d1
 		jsr     j_DecreaseGold
@@ -784,19 +674,15 @@ loc_211F0:
 		nop
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		trap    #TEXTBOX
-		dc.w $85                
-						; "{NAME} is no longer{N}paralyzed.{W2}"
+		dc.w $85                ; "{NAME} is no longer{N}paralyzed.{W2}"
 loc_21220:
-		
 		movem.l (sp)+,a0
 		dbf     d7,loc_21170
 		cmpi.w  #0,-$18(a6)
 		bne.w   return_21236
 		trap    #TEXTBOX
-		dc.w $86                
-						; "Nobody is paralyzed.{W2}"
+		dc.w $86                ; "Nobody is paralyzed.{W2}"
 return_21236:
-		
 		rts
 
 	; End of function ChurchCure
@@ -819,7 +705,6 @@ WaitForMusicResumeAndPlayerInput:
 ; =============== S U B R O U T I N E =======================================
 
 sub_2124A:
-		
 		cmpi.b  #$1E,d0
 		bhi.s   return_2127C
 		movem.l d0-d4/a0,-(sp)
@@ -832,16 +717,13 @@ sub_2124A:
 		tst.b   d0
 		ble.s   loc_21278
 loc_2126C:
-		
 		clr.w   d1
 		move.b  ((ENTITY_DATA_STRUCT_FACING-$1000000)).w,d1
 		moveq   #$FFFFFFFF,d2
 		jsr     (sub_6052).w    
 loc_21278:
-		
 		movem.l (sp)+,d0-d4/a0
 return_2127C:
-		
 		rts
 
 	; End of function sub_2124A

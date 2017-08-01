@@ -13,8 +13,7 @@ ms_map45_AreaDescriptions:
 
 	; End of function ms_map45_AreaDescriptions
 
-word_60088:
-		dc.w $1521
+word_60088:     dc.w $1521
 		dc.b 0
 		dc.b 0
 		dc.b 5

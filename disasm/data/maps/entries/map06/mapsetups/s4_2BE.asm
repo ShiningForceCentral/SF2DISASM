@@ -13,8 +13,7 @@ ms_map6_flag2BE_AreaDescriptions:
 
 	; End of function ms_map6_flag2BE_AreaDescriptions
 
-word_54D4C:
-		dc.w $507
+word_54D4C:     dc.w $507
 		dc.b 0
 		dc.b 0
 		dc.b 4

@@ -1,12 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle01\cs_beforebattle.asm :
 ; 0x494BC..0x496DC : Cutscene before battle 1
-bbcs_01:
-		textCursor $8F4         
-						; Initial text line $8F4 : "There you are, {LEADER}.{N}Stay here.{W2}"
+bbcs_01:        textCursor $8F4         ; Initial text line $8F4 : "There you are, {LEADER}.{N}Stay here.{W2}"
 		loadMapFadeIn $39,$2,$A
-		loadMapEntities ce_49694
-						; Entity data to figure out and format
+		loadMapEntities ce_49694; Entity data to figure out and format
 		setActscript $0,$FF,eas_Init
 		entityPosDir $1,$8,$11,$1
 		entityPosDir $2,$7,$11,$1
@@ -15,29 +12,24 @@ bbcs_01:
 		setCamDest $2,$8
 		csWait $3C
 		setEntityDir $87,$3
-		nextText $0,$87         
-						; "There you are, {LEADER}.{N}Stay here.{W2}"
-		nextSingleText $0,$87   
-						; "I'll take a look inside the{N}tower.{W1}"
+		nextText $0,$87         ; "There you are, {LEADER}.{N}Stay here.{W2}"
+		nextSingleText $0,$87   ; "I'll take a look inside the{N}tower.{W1}"
 		setCameraEntity $87
 		moveEntity $87,$FF,$1,$1
 		endMove $8080
 		csWait $5
 		setActscript $87,$0,eas_461B6
 		csWait $3C
-		nextSingleText $0,$87   
-						; "Hmm, what a mysterious{N}tower.  I wonder who built{N}it?{W1}"
+		nextSingleText $0,$87   ; "Hmm, what a mysterious{N}tower.  I wonder who built{N}it?{W1}"
 		moveEntity $87,$FF,$1,$1
 		moreMove $C,$3C
 		moreMove $1,$1
 		endMove $8080
 		csWait $32
-		nextSingleText $0,$87   
-						; "I have a strange feeling{N}about this place.{W1}"
+		nextSingleText $0,$87   ; "I have a strange feeling{N}about this place.{W1}"
 		moveEntity $87,$FF,$1,$3
 		endMove $8080
-		nextSingleText $0,$87   
-						; "Oh, what's this?{N}I think I have seen this{N}symbol before....{W1}"
+		nextSingleText $0,$87   ; "Oh, what's this?{N}I think I have seen this{N}symbol before....{W1}"
 		csWait $28
 		mapFadeOutToWhite
 		csWait $1E
@@ -57,12 +49,10 @@ bbcs_01:
 		csWait $5
 		setActscript $2,$0,eas_461B6
 		csWait $3C
-		nextSingleText $0,$2    
-						; "What's happening?{W1}"
+		nextSingleText $0,$2    ; "What's happening?{W1}"
 		moveEntity $1,$FF,$1,$1
 		endMove $8080
-		nextSingleText $0,$1    
-						; "Look!  Something is{N}appearing.  What's that?{W1}"
+		nextSingleText $0,$1    ; "Look!  Something is{N}appearing.  What's that?{W1}"
 		setEntityDir $87,$1
 		setCamDest $2,$1
 		entityPosDir $80,$7,$4,$3
@@ -71,23 +61,19 @@ bbcs_01:
 		setActscript $87,$FF,eas_46172
 		moveEntity $87,$FF,$3,$1
 		endMove $8080
-		nextText $0,$87         
-						; "An evil Gizmo!  A devil{N}that possesses people!{W2}"
-		nextSingleText $0,$87   
-						; "Why are you here?{W1}"
+		nextText $0,$87         ; "An evil Gizmo!  A devil{N}that possesses people!{W2}"
+		nextSingleText $0,$87   ; "Why are you here?{W1}"
 		csWait $1E
 		moveEntity $80,$FF,$0,$1
 		endMove $8080
 		moveEntity $87,$FF,$0,$1
 		endMove $8080
-		nextSingleText $0,$87   
-						; "Where are you going?{N}What...wait!  You're here to{N}possess the King, aren't you?{W1}"
+		nextSingleText $0,$87   ; "Where are you going?{N}What...wait!  You're here to{N}possess the King, aren't you?{W1}"
 		moveEntity $80,$FF,$2,$1
 		endMove $8080
 		moveEntity $87,$FF,$2,$1
 		endMove $8080
-		nextSingleText $0,$87   
-						; "I won't let you pass.{N}You shall not harm the King!{W1}"
+		nextSingleText $0,$87   ; "I won't let you pass.{N}You shall not harm the King!{W1}"
 		entityShiver $80
 		csWait $1E
 		entityShiver $80
@@ -124,15 +110,11 @@ bbcs_01:
 		csWait $1E
 		entityShiver $80
 		csWait $3C
-		nextText $0,$87         
-						; "This doesn't look good.{W2}"
+		nextText $0,$87         ; "This doesn't look good.{W2}"
 		setEntityDir $87,$3
-		nextSingleText $0,$87   
-						; "We'll stop the evil Gizmo{N}here.  {LEADER}, defeat{N}these fiends!{W1}"
-		csc_end                 
-						; END OF CUTSCENE SCRIPT
-ce_49694:
-		dc.b   0
+		nextSingleText $0,$87   ; "We'll stop the evil Gizmo{N}here.  {LEADER}, defeat{N}these fiends!{W1}"
+		csc_end                 ; END OF CUTSCENE SCRIPT
+ce_49694:       dc.b   0
 		dc.b   7
 		dc.w $10
 		dc.w 1

@@ -5,7 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 sub_444A2:
-		
 		link    a6,#-$10
 		move.w  d0,-4(a6)
 		movem.l d0-d7,-(sp)
@@ -19,12 +18,10 @@ sub_444A2:
 		bne.s   loc_444CE
 		addq.w  #1,d6
 loc_444CE:
-		
 		cmpi.b  #6,d1
 		bne.s   loc_444D6
 		addq.w  #1,d6
 loc_444D6:
-		
 		swap    d6
 		move.w  (sp)+,d1
 		andi.w  #$3F,d1 
@@ -40,7 +37,6 @@ loc_444D6:
 		move.l  a0,-(sp)
 		move.w  #$8F,d7 
 loc_4450A:
-		
 		clr.l   (a0)+
 		dbf     d7,loc_4450A
 		movea.l (sp)+,a0
@@ -62,19 +58,16 @@ loc_4450A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_44536:
-		
 		movem.l d0-d5/d7-a0,-(sp)
 		move.w  d0,-(sp)
 		lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
 		clr.w   d0
 		moveq   #$3F,d7 
 loc_44544:
-		
 		cmp.b   (a0),d0
 		bge.s   loc_4454A
 		move.b  (a0),d0
 loc_4454A:
-		
 		addq.l  #1,a0
 		dbf     d7,loc_44544
 		addq.w  #1,d0
@@ -83,7 +76,6 @@ loc_4454A:
 		bpl.s   loc_4455C
 		subi.w  #$60,d7 
 loc_4455C:
-		
 		lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
 		move.b  d0,(a0,d7.w)
 		move.w  d0,d6
@@ -97,24 +89,20 @@ loc_4455C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_44570:
-		
 		movem.l d0-a0,-(sp)
 		move.w  d0,-(sp)
 		tst.b   d0
 		blt.s   loc_4457E
 		bsr.w   GetCharacterSpriteIdx
 loc_4457E:
-		
 		lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
 		clr.w   d0
 		moveq   #$3E,d7 
 loc_44586:
-		
 		cmp.b   (a0),d0
 		bge.s   loc_4458C
 		move.b  (a0),d0
 loc_4458C:
-		
 		addq.l  #1,a0
 		dbf     d7,loc_44586
 		addq.w  #1,d0
@@ -124,7 +112,6 @@ loc_4458C:
 		bpl.s   loc_445A0
 		subi.w  #$60,d7 
 loc_445A0:
-		
 		lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
 		adda.w  d7,a0
 		move.w  (sp)+,d7
@@ -187,14 +174,11 @@ DeclareNewEntity:
 		bsr.w   SetWalkingActscript
 		bra.s   loc_44634
 loc_44630:
-		
 		bsr.w   sub_44D0E
 loc_44634:
-		
 		movem.l (sp)+,d0-d4
 		movem.l (sp)+,d5
 loc_4463C:
-		
 		move.l  d5,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
 		clr.l   $18(a0)
 		move.w  #$E040,ENTITYDEF_OFFSET_FLAGS_A(a0)
@@ -217,7 +201,6 @@ ClearEntities:
 		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 		move.w  #$30,d7 
 loc_44666:
-		
 		move.l  #$70007000,(a0)+
 		clr.l   (a0)+
 		clr.l   (a0)+
@@ -230,7 +213,6 @@ loc_44666:
 		lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
 		moveq   #$F,d7
 loc_44688:
-		
 		clr.l   (a0)+
 		dbf     d7,loc_44688
 		move.l  #FF5600_LOADING_SPACE,(dword_FFB1A0).l
@@ -253,7 +235,6 @@ MoveEntitiesToBattlePositions:
 		clr.w   -4(a6)
 		clr.w   d0
 loc_446B8:
-		
 		move.w  d0,-(sp)
 		move.w  -4(a6),d0
 		jsr     j_GetYPos
@@ -275,12 +256,10 @@ loc_446B8:
 		bne.s   loc_446FA
 		addq.w  #1,d6
 loc_446FA:
-		
 		cmpi.b  #6,d1
 		bne.s   loc_44702
 		addq.w  #1,d6
 loc_44702:
-		
 		swap    d6
 		movem.w (sp)+,d0-d1
 		andi.w  #$3F,d1 
@@ -296,17 +275,14 @@ loc_44702:
 		addq.w  #1,d0
 		bra.w   loc_44736
 loc_44732:
-		
 		move.b  #$FF,(a1)+
 loc_44736:
-		
 		addq.w  #1,-4(a6)
 		dbf     d7,loc_446B8
 		lea     ((byte_FFB160-$1000000)).w,a1
 		moveq   #$1F,d7
 		move.w  #$80,-4(a6) 
 loc_4474A:
-		
 		move.w  d0,-(sp)
 		move.w  -4(a6),d0
 		jsr     j_GetCharacterWord34
@@ -334,12 +310,10 @@ loc_4474A:
 		bne.s   loc_447A2
 		addq.w  #1,d6
 loc_447A2:
-		
 		cmpi.b  #6,d1
 		bne.s   loc_447AA
 		addq.w  #1,d6
 loc_447AA:
-		
 		swap    d6
 		movem.w (sp)+,d0-d1
 		andi.w  #$3F,d1 
@@ -359,17 +333,14 @@ loc_447AA:
 		move.w  (sp)+,d0
 		bra.w   loc_447FA
 loc_447E8:
-		
 		move.w  d0,d6
 		move.b  d0,(a1)+
 		bsr.w   DeclareNewEntity
 		addq.w  #1,d0
 		bra.w   loc_447FA
 loc_447F6:
-		
 		move.b  #$FF,(a1)+
 loc_447FA:
-		
 		addq.w  #1,-4(a6)
 		dbf     d7,loc_4474A
 		clr.w   d1
@@ -382,21 +353,17 @@ loc_447FA:
 		clr.w   d1
 		move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 loc_44824:
-		
 		cmpi.w  #$FFFF,(a0)
 		beq.w   loc_448BC
 		cmp.w   (a0)+,d1
 		beq.s   loc_44838
 loc_44830:
-		
 		cmpi.w  #$FFFF,(a0)+
 		beq.s   loc_44824
 		bra.s   loc_44830
 loc_44838:
-		
 		move.w  #$9F,-4(a6) 
 loc_4483E:
-		
 		cmpi.w  #$FFFF,(a0)
 		beq.w   loc_448BC
 		move.w  d0,-(sp)
@@ -433,11 +400,9 @@ loc_4483E:
 		bra.w   loc_448B6
 		move.b  #$FF,(a1)+
 loc_448B6:
-		
 		subq.w  #1,-4(a6)
 		bra.s   loc_4483E
 loc_448BC:
-		
 		unlk    a6
 		movem.l (sp)+,d0-a1
 		rts

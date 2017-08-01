@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map40\mapsetups\pt.asm :
 ; 0x53F60..0x53F78 : 
-ms_map40:
-		dc.l ms_map40_Entities
+ms_map40:       dc.l ms_map40_Entities
 		dc.l ms_map40_EntityEvents
 		dc.l ms_map40_ZoneEvents
 		dc.l ms_map40_AreaDescriptions

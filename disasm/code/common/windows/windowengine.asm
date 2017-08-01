@@ -11,7 +11,6 @@ InitWindowProperties:
 		lea     (WINDOW_PROPERTIES).l,a0
 		moveq   #$1F,d7
 loc_47D2:
-		
 		clr.l   (a0)+
 		dbf     d7,loc_47D2
 		move.l  #VDP_TILE_IDX_LIST,((WINDOW_TILES_END-$1000000)).w
@@ -22,7 +21,6 @@ loc_47D2:
 		beq.s   loc_47F4
 		addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_47F4:
-		
 		clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
 		clr.w   ((TEXT_WINDOW_INDEX-$1000000)).w
 		clr.w   ((TIMER_WINDOW_INDEX-$1000000)).w
@@ -37,45 +35,34 @@ loc_47F4:
 ; returns a1 = window tiles end, d0 = window slot
 
 CreateWindow:
-		
 		move.l  a0,-(sp)
 		movem.w d6-d7,-(sp)
 		lea     (WINDOW_PROPERTIES).l,a0
 		clr.w   d6
 		moveq   #7,d7
 loc_4812:
-		
-		tst.w   (a0)            
-						; get free window slot
+		tst.w   (a0)            ; get free window slot
 		beq.s   loc_4826
 		addq.w  #1,d6
 		adda.w  #$10,a0
 		dbf     d7,loc_4812     
-		moveq   #$FFFFFFFF,d0   
-						; no window slot available
+		moveq   #$FFFFFFFF,d0   ; no window slot available
 		bra.w   loc_485E
 loc_4826:
-		
 		movea.l ((WINDOW_TILES_END-$1000000)).w,a1
 		cmpa.l  #VDP_TILE_IDX_LIST,a1
 		bne.s   loc_4836        
 		bsr.w   CopyFFC000toFFC800
 loc_4836:
-		
-		move.l  a1,(a0)+        
-						; window tiles end
-		move.w  d0,(a0)+        
-						; width height
-		move.w  d1,(a0)+        
-						; X Y pos 3 times
+		move.l  a1,(a0)+        ; window tiles end
+		move.w  d0,(a0)+        ; width height
+		move.w  d1,(a0)+        ; X Y pos 3 times
 		move.w  d1,(a0)+
 		move.w  d1,(a0)+
-		move.w  #$101,(a0)+     
-						; another X Y pos
+		move.w  #$101,(a0)+     ; another X Y pos
 		clr.w   (a0)+
 		move.w  d0,d7
-		lsr.w   #8,d7           
-						; get width
+		lsr.w   #8,d7           ; get width
 		andi.w  #$FF,d0
 		mulu.w  d7,d0
 		add.w   d0,d0
@@ -84,7 +71,6 @@ loc_4836:
 		move.w  d6,d0
 		movea.l -$10(a0),a1
 loc_485E:
-		
 		movem.w (sp)+,d6-d7
 		movea.l (sp)+,a0
 		rts
@@ -112,12 +98,10 @@ SetWindowDestination:
 		bne.s   loc_488A
 		move.w  d0,d1
 loc_488A:
-		
 		move.w  d1,8(a0)
 		move.w  d1,$A(a0)
 		move.w  #$100,$C(a0)
 loc_4898:
-		
 		movem.w (sp)+,d0-d1
 		movea.l (sp)+,a0
 		rts
@@ -128,14 +112,12 @@ loc_4898:
 ; =============== S U B R O U T I N E =======================================
 
 sub_48A0:
-		
 		movem.w d0-d1/d7,-(sp)
 		bsr.w   CopyFFC000toFFC800
 		clr.w   d0
 		move.w  #$8080,d1
 		moveq   #7,d7
 loc_48B0:
-		
 		bsr.s   SetWindowDestination
 		addq.w  #1,d0
 		dbf     d7,loc_48B0
@@ -148,7 +130,6 @@ loc_48B0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_48BE:
-		
 		move.l  a0,-(sp)
 		move.w  d0,-(sp)
 		bsr.w   GetWindowInfo   
@@ -199,7 +180,6 @@ MoveWindowWithoutSFX:
 		beq.s   loc_4900
 		moveq   #1,d2
 loc_4900:
-		
 		move.l  a0,-(sp)
 		movem.w d0-d1,-(sp)
 		bsr.w   GetWindowInfo   
@@ -207,7 +187,6 @@ loc_4900:
 		bne.s   loc_4914
 		move.w  6(a0),d1
 loc_4914:
-		
 		move.w  6(a0),8(a0)
 		move.w  d1,$A(a0)
 		move.b  d2,$C(a0)
@@ -232,7 +211,6 @@ ClearWindowAndUpdateEndPtr:
 		clr.w   d3
 		clr.w   d4
 loc_4946:
-		
 		move.l  (a0),d2
 		cmp.l   d1,d2
 		bls.s   loc_4956
@@ -240,7 +218,6 @@ loc_4946:
 		move.b  4(a0),d3
 		move.b  5(a0),d4
 loc_4956:
-		
 		lea     $10(a0),a0
 		dbf     d0,loc_4946
 		tst.l   d1
@@ -248,13 +225,11 @@ loc_4956:
 		move.l  #VDP_TILE_IDX_LIST,d1
 		bra.s   loc_4972
 loc_496A:
-		
 		mulu.w  d4,d3
 		add.w   d3,d3
 		ext.l   d3
 		add.l   d3,d1
 loc_4972:
-		
 		move.l  d1,((WINDOW_TILES_END-$1000000)).w
 		movem.l (sp)+,d0-d4/a0-a1
 		rts
@@ -282,12 +257,10 @@ VInt_UpdateWindows:
 		bne.s   loc_4994
 		rts
 loc_4994:
-		
 		clr.b   ((word_FFA900-$1000000)).w
 		moveq   #7,d7
 		lea     (WINDOW_PROPERTIES).l,a2
 loc_49A0:
-		
 		tst.l   (a2)
 		beq.w   loc_49C8
 		move.b  $C(a2),d0
@@ -301,13 +274,11 @@ loc_49A0:
 		move.w  6(a2),d1
 		bsr.w   sub_4B5C
 loc_49C8:
-		
 		lea     $10(a2),a2
 		dbf     d7,loc_49A0
 		moveq   #7,d7
 		lea     (WINDOW_PROPERTIES).l,a2
 loc_49D8:
-		
 		tst.l   (a2)
 		beq.w   loc_4A72
 		move.b  $C(a2),d0
@@ -346,7 +317,6 @@ loc_49D8:
 		bsr.w   sub_4AC8
 		bra.s   loc_4A72
 loc_4A40:
-		
 		tst.b   $E(a2)
 		beq.s   loc_4A5A
 		clr.b   $E(a2)
@@ -356,7 +326,6 @@ loc_4A40:
 		bsr.w   sub_4AC8
 		bra.s   loc_4A72
 loc_4A5A:
-		
 		tst.b   $F(a2)
 		beq.s   loc_4A72
 		clr.b   $F(a2)
@@ -365,7 +334,6 @@ loc_4A5A:
 		move.w  6(a2),d1
 		bsr.w   sub_4B5C
 loc_4A72:
-		
 		lea     $10(a2),a2
 		dbf     d7,loc_49D8
 		tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
@@ -375,16 +343,13 @@ loc_4A72:
 		bsr.w   CopyFFC000toFFC800
 		move.w  #$FFFF,((byte_FFA8FE-$1000000)).w
 loc_4A90:
-		
 		bra.s   loc_4AA2
 loc_4A92:
-		
 		tst.b   ((byte_FFA8FE-$1000000)).w
 		beq.s   loc_4AA2
 		bsr.w   sub_48A0
 		move.w  #$FF,((byte_FFA8FE-$1000000)).w
 loc_4AA2:
-		
 		tst.b   ((byte_FFA8FF-$1000000)).w
 		beq.s   return_4AC6
 		lea     (byte_FFC800).l,a0
@@ -395,7 +360,6 @@ loc_4AA2:
 		bsr.w   Set_FFDE94_bit3 
 		clr.b   ((byte_FFA8FF-$1000000)).w
 return_4AC6:
-		
 		rts
 
 	; End of function VInt_UpdateWindows
@@ -404,12 +368,10 @@ return_4AC6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4AC8:
-		
 		movem.l a0-a1,-(sp)
 		movem.w d0-d3/d6-d7,-(sp)
 		lea     (byte_FFC800).l,a1
 loc_4AD6:
-		
 		bsr.w   sub_4BEA
 		move.w  d0,d1
 		ext.w   d0
@@ -419,7 +381,6 @@ loc_4AD6:
 		subq.w  #1,d1
 		bmi.w   loc_4B52
 loc_4AEC:
-		
 		tst.w   d3
 		bpl.s   loc_4AFA
 		adda.w  d1,a0
@@ -427,12 +388,10 @@ loc_4AEC:
 		addq.w  #2,a0
 		bra.w   loc_4B38
 loc_4AFA:
-		
 		cmpi.w  #$1C,d3
 		bge.w   loc_4B46
 		movem.w d1-d2/d6,-(sp)
 loc_4B06:
-		
 		tst.w   d2
 		bmi.w   loc_4B1C
 		cmpi.w  #$20,d2 
@@ -441,7 +400,6 @@ loc_4B06:
 		beq.s   loc_4B1C
 		move.w  d5,(a1,d6.w)
 loc_4B1C:
-		
 		addq.w  #2,a0
 		addq.w  #1,d2
 		move.w  d6,d7
@@ -451,24 +409,19 @@ loc_4B1C:
 		beq.s   loc_4B30
 		subi.w  #$40,d6 
 loc_4B30:
-		
 		dbf     d1,loc_4B06
 loc_4B34:
-		
 		movem.w (sp)+,d1-d2/d6
 loc_4B38:
-		
 		addq.w  #1,d3
 		addi.w  #$40,d6 
 		bclr    #$B,d6
 		dbf     d0,loc_4AEC
 loc_4B46:
-		
 		tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 		bne.s   loc_4B52
 		move.b  #$FF,((byte_FFA8FF-$1000000)).w
 loc_4B52:
-		
 		movem.w (sp)+,d0-d3/d6-d7
 		movem.l (sp)+,a0-a1
 		rts
@@ -479,7 +432,6 @@ loc_4B52:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4B5C:
-		
 		movem.l a0-a1,-(sp)
 		movem.w d0-d1/d6-d7,-(sp)
 		lea     (byte_FFC000).l,a0
@@ -493,23 +445,19 @@ sub_4B5C:
 		subq.w  #1,d1
 		bmi.w   loc_4BE0
 loc_4B86:
-		
 		tst.w   d3
 		bmi.w   loc_4BC6
 		cmpi.w  #$1C,d3
 		bge.w   loc_4BD4
 		movem.w d1-d2/d6,-(sp)
 loc_4B98:
-		
 		tst.w   d2
 		bmi.w   loc_4BAC
 loc_4B9E:
-		
 		cmpi.w  #$20,d2 
 		bge.w   loc_4BAC
 		move.w  (a0,d6.w),(a1,d6.w)
 loc_4BAC:
-		
 		addq.w  #1,d2
 		move.w  d6,d7
 		addq.w  #2,d6
@@ -518,22 +466,18 @@ loc_4BAC:
 		beq.s   loc_4BBE
 		subi.w  #$40,d6 
 loc_4BBE:
-		
 		dbf     d1,loc_4B98
 		movem.w (sp)+,d1-d2/d6
 loc_4BC6:
-		
 		addq.w  #1,d3
 		addi.w  #$40,d6 
 		bclr    #$B,d6
 		dbf     d0,loc_4B86
 loc_4BD4:
-		
 		tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 		bne.s   loc_4BE0
 		move.b  #$FF,((byte_FFA8FF-$1000000)).w
 loc_4BE0:
-		
 		movem.w (sp)+,d0-d1/d6-d7
 		movem.l (sp)+,a0-a1
 		rts
@@ -544,7 +488,6 @@ loc_4BE0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4BEA:
-		
 		move.w  d1,d6
 		asr.w   #8,d1
 		move.w  d1,d2
@@ -573,7 +516,6 @@ sub_4BEA:
 		beq.s   return_4C36
 		addi.w  #$40,d6 
 return_4C36:
-		
 		rts
 
 	; End of function sub_4BEA

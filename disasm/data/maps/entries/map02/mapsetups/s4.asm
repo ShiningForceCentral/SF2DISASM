@@ -13,8 +13,7 @@ ms_map2_AreaDescriptions:
 
 	; End of function ms_map2_AreaDescriptions
 
-word_5EA36:
-		dc.w $80D
+word_5EA36:     dc.w $80D
 		dc.b 0
 		dc.b 0
 		dc.b 2

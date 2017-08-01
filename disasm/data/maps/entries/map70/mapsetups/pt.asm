@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map70\mapsetups\pt.asm :
 ; 0x4FDE4..0x4FDFC : 
-ms_map70:
-		dc.l ms_map70_Entities
+ms_map70:       dc.l ms_map70_Entities
 		dc.l ms_map70_EntityEvents
 		dc.l ms_map70_ZoneEvents
 		dc.l ms_map70_AreaDescriptions

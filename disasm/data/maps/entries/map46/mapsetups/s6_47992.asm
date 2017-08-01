@@ -5,14 +5,12 @@
 ; =============== S U B R O U T I N E =======================================
 
 sub_47992:
-		
 		movem.l d0-a2,-(sp)
 		moveq   #1,d0
 		moveq   #$1C,d7
 		lea     ((byte_FFA922-$1000000)).w,a0
 		lea     byte_47A38(pc), a2
 loc_479A2:
-		
 		move.w  d0,d1
 		jsr     j_CheckFlag
 		bne.s   loc_479D0
@@ -25,7 +23,6 @@ loc_479A2:
 		move.l  #eas_Idle,$14(a0)
 		bra.w   loc_47A28
 loc_479D0:
-		
 		move.w  d0,d1
 		addi.w  #$20,d1 
 		jsr     j_CheckFlag
@@ -51,7 +48,6 @@ loc_479D0:
 		jsr     (WaitForVInt).w 
 		movem.w (sp)+,d0-d4
 loc_47A28:
-		
 		addq.w  #1,d0
 		lea     $20(a0),a0
 		dbf     d7,loc_479A2
@@ -60,8 +56,7 @@ loc_47A28:
 
 	; End of function sub_47992
 
-byte_47A38:
-		dc.b $11
+byte_47A38:     dc.b $11
 		dc.b   7
 		dc.b $12
 		dc.b   7

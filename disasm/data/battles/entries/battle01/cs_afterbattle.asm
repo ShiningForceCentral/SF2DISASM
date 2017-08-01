@@ -1,21 +1,16 @@
 
 ; ASM FILE data\battles\entries\battle01\cs_afterbattle.asm :
 ; 0x496DC..0x4980E : Cutscene after battle 1
-abcs_battle01:
-		textCursor $901         
-						; Initial text line $901 : "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
-		resetForceBattleStats   
-						; 0055 RESET FORCE BATTLE STATS
+abcs_battle01:  textCursor $901         ; Initial text line $901 : "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
+		resetForceBattleStats   ; 0055 RESET FORCE BATTLE STATS
 		loadMapFadeIn $39,$2,$0
-		loadMapEntities ce_497F6
-						; Entity data to figure out and format
+		loadMapEntities ce_497F6; Entity data to figure out and format
 		setActscript $0,$FF,eas_Init
 		entityPosDir $1,$8,$7,$1
 		entityPosDir $2,$8,$8,$1
 		fadeInB
 		csWait $28
-		nextSingleText $0,$81   
-						; "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
+		nextSingleText $0,$81   ; "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
 		setEntityDir $81,$1
 		csWait $28
 		entityShiver $80
@@ -43,15 +38,13 @@ abcs_battle01:
 		csWait $1E
 		moveEntity $81,$FF,$1,$1
 		endMove $8080
-		nextSingleText $0,$81   
-						; "Oh, it disappeared?!{W1}"
+		nextSingleText $0,$81   ; "Oh, it disappeared?!{W1}"
 		csWait $5
 		setActscript $81,$0,eas_461B6
 		csWait $78
 		moveEntity $81,$FF,$3,$1
 		endMove $8080
-		nextSingleText $0,$81   
-						; "Oh, there it is!{W1}"
+		nextSingleText $0,$81   ; "Oh, there it is!{W1}"
 		setEntityDir $0,$3
 		setEntityDir $1,$3
 		setEntityDir $2,$3
@@ -64,11 +57,9 @@ abcs_battle01:
 		entitySprite $80,$72
 		mapFadeInFromWhite
 		csWait $1E
-		nextSingleText $0,$81   
-						; "It disappeared again.{W1}"
+		nextSingleText $0,$81   ; "It disappeared again.{W1}"
 		setCamDest $2,$A
-		nextSingleText $0,$81   
-						; "There it is!{W1}"
+		nextSingleText $0,$81   ; "There it is!{W1}"
 		moveEntity $80,$0,$3,$4
 		endMove $8080
 		animEntityFadeInOut $80,$6
@@ -76,16 +67,13 @@ abcs_battle01:
 		hideEntity $80
 		setCamDest $2,$2
 		setEntityDir $81,$0
-		nextSingleText $0,$81   
-						; "We must hurry to the King!{W1}"
+		nextSingleText $0,$81   ; "We must hurry to the King!{W1}"
 		moveEntity $81,$FF,$3,$6
 		endMove $8080
 		hideEntity $81
 		csWait $28
-		csc_end                 
-						; END OF CUTSCENE SCRIPT
-ce_497F6:
-		dc.w 8
+		csc_end                 ; END OF CUTSCENE SCRIPT
+ce_497F6:       dc.w 8
 		dc.w 6
 		dc.w 1
 		dc.b 7

@@ -7,76 +7,60 @@
 ; d0 : string index
 
 DisplayText:
-		
 		movem.l d0-a6,-(sp)
 		move.w  d0,-(sp)
 		bsr.w   sub_676E
 		move.w  (sp)+,d0
 		move.b  #1,((CURRENTLY_TYPEWRITING-$1000000)).w
 						; "Currently typewriting"
-		movem.w d0,-(sp)        
-						; save string #
+		movem.w d0,-(sp)        ; save string #
 		lsr.w   #6,d0
-		andi.b  #$FC,d0         
-						; string # -> bank pointer offset
-		movea.l (p_pt_TextBanks).l,a0
-						; load script bank pointer
+		andi.b  #$FC,d0         ; string # -> bank pointer offset
+		movea.l (p_pt_TextBanks).l,a0; load script bank pointer
 		movea.l (a0,d0.w),a0
-		movem.w (sp)+,d0        
-						; restore string #
-		andi.w  #$FF,d0         
-						; restrict to range 0-255
+		movem.w (sp)+,d0        ; restore string #
+		andi.w  #$FF,d0         ; restrict to range 0-255
 		moveq   #0,d7
 		bra.s   loc_6298        
 GoToNextString:
 		
-		move.b  (a0),d7         
-						; first string byte : string length
+		move.b  (a0),d7         ; first string byte : string length
 		adda.l  d7,a0
 		addq.l  #1,a0
 loc_6298:
-		
-		dbf     d0,GoToNextString
-						; loop until wanted string reached
+		dbf     d0,GoToNextString; loop until wanted string reached
 		clr.l   ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
 						; get ready
 		clr.b   ((byte_FFB6D8-$1000000)).w
 		move.b  (a0)+,((COMPRESSED_STRING_LENGTH-$1000000)).w
 						; keep length of current string
 loc_62A8:
-		
 		move.l  #TEXT_NAME_INDEX_1,((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w
 		move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
 loc_62B6:
-		
 		cmpi.b  #1,((COMPRESSED_STRING_LENGTH-$1000000)).w
 						; check length
 		beq.w   loc_62FE
-		jsr     j_InitDecoder   
-						; initialize decoder
+		jsr     j_InitDecoder   ; initialize decoder
 		move.l  a0,((COMPRESSED_STRING_POINTER-$1000000)).w
 						; keep string pointer
 loc_62CA:
-		
 		bsr.w   GetNextTextSymbol
 		cmpi.b  #$FE,d0
 		beq.s   loc_62FE
 		cmpi.b  #$EE,d0
-		bcc.w   ParseSpecialTextSymbol
-						; if symbol >= $EE
+		bcc.w   ParseSpecialTextSymbol; if symbol >= $EE
 		bset    #0,((byte_FFB6D8-$1000000)).w
 		bne.s   loc_62F2
 		cmpi.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 		beq.s   loc_62F2
 		move.b  #$FF,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 loc_62F2:
-		
 		bsr.s   sub_6308
 		bsr.w   SymbolsToGraphics
 		bsr.w   HandleDialogueTypewriting
 		bra.s   loc_62CA
 loc_62FE:
-		
 		clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 		movem.l (sp)+,d0-a6
 		rts
@@ -87,11 +71,9 @@ loc_62FE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6308:
-		
 		cmpi.b  #$CC,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 		bls.s   return_634C
 loc_6310:
-		
 		bsr.w   ClearNextLineOfDialoguePixels
 						; line end reached
 		move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
@@ -101,10 +83,8 @@ loc_6310:
 		cmpi.b  #$20,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w 
 		bra.s   loc_6338
 loc_6332:
-		
 		cmpi.b  #$30,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w 
 loc_6338:
-		
 		bcs.s   return_634C
 
 	; End of function sub_6308
@@ -113,13 +93,11 @@ loc_6338:
 ; =============== S U B R O U T I N E =======================================
 
 sub_633A:
-		
 		movem.l d0,-(sp)
 		bsr.w   sub_6AD2
 		movem.l (sp)+,d0
 		subi.b  #$10,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
 return_634C:
-		
 		rts
 
 	; End of function sub_633A
@@ -136,7 +114,6 @@ GetNextTextSymbol:
 		move.l  a0,((COMPRESSED_STRING_POINTER-$1000000)).w
 		rts
 loc_6366:
-		
 		movea.l ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w,a1
 		clr.w   d0
 		move.b  (a1)+,d0
@@ -148,7 +125,6 @@ loc_6366:
 		bne.s   return_6384
 		clr.l   ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
 return_6384:
-		
 		rts
 
 	; End of function GetNextTextSymbol
@@ -158,61 +134,43 @@ return_6384:
 
 ParseSpecialTextSymbol:
 		
-		cmpi.b  #$EE,d0         
-						; regular tile
+		cmpi.b  #$EE,d0         ; regular tile
 		beq.w   loc_640A
-		cmpi.b  #$F3,d0         
-						; leader
+		cmpi.b  #$F3,d0         ; leader
 		beq.w   leader
-		cmpi.b  #$F0,d0         
-						; delay 2
+		cmpi.b  #$F0,d0         ; delay 2
 		beq.w   loc_6414
-		cmpi.b  #$EF,d0         
-						; line
+		cmpi.b  #$EF,d0         ; line
 		beq.w   loc_6434
-		cmpi.b  #$F7,d0         
-						; wait 2
+		cmpi.b  #$F7,d0         ; wait 2
 		beq.w   loc_6466
-		cmpi.b  #$F2,d0         
-						; name
+		cmpi.b  #$F2,d0         ; name
 		beq.w   name
-		cmpi.b  #$F4,d0         
-						; item
+		cmpi.b  #$F4,d0         ; item
 		beq.w   item
-		cmpi.b  #$F1,d0         
-						; number
+		cmpi.b  #$F1,d0         ; number
 		beq.w   number
-		cmpi.b  #$F6,d0         
-						; class
+		cmpi.b  #$F6,d0         ; class
 		beq.w   class
-		cmpi.b  #$FA,d0         
-						; wait 1
+		cmpi.b  #$FA,d0         ; wait 1
 		beq.w   wait
-		cmpi.b  #$F8,d0         
-						; delay 1
+		cmpi.b  #$F8,d0         ; delay 1
 		beq.w   delay1
-		cmpi.b  #$F9,d0         
-						; delay 3
+		cmpi.b  #$F9,d0         ; delay 3
 		beq.w   delay3
-		cmpi.b  #$F5,d0         
-						; spell
+		cmpi.b  #$F5,d0         ; spell
 		beq.w   spell
-		cmpi.b  #$FB,d0         
-						; clear
+		cmpi.b  #$FB,d0         ; clear
 		beq.w   clear
-		cmpi.b  #$FD,d0         
-						; color #
+		cmpi.b  #$FD,d0         ; color #
 		beq.w   color
-		cmpi.b  #$FC,d0         
-						; name #
+		cmpi.b  #$FC,d0         ; name #
 		beq.w   player
 		bra.w   loc_62CA
 loc_640A:
-		
 		move.b  #1,((byte_FFB6D8-$1000000)).w
 		bra.w   loc_62CA
 loc_6414:
-		
 		move.w  #$77,d0 
 		move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
 		movem.w d2,-(sp)
@@ -222,7 +180,6 @@ loc_6414:
 		move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
 		bra.w   loc_62CA
 loc_6434:
-		
 		bsr.w   ClearNextLineOfDialoguePixels
 		move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 		addi.b  #$10,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
@@ -231,23 +188,18 @@ loc_6434:
 		cmpi.b  #$20,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w 
 		bra.s   loc_645C
 loc_6456:
-		
 		cmpi.b  #$30,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w 
 loc_645C:
-		
 		bcs.s   loc_6462
 		bsr.w   sub_633A
 loc_6462:
-		
 		bra.w   loc_62CA
 loc_6466:
-		
 		move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
 		move.w  d2,-(sp)
 		clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 		moveq   #$14,d2
 loc_6472:
-		
 		movem.l d6-d7,-(sp)
 		move.w  #$100,d6
 		bsr.w   UpdateRandomSeed
@@ -272,43 +224,34 @@ loc_6472:
 ; =============== S U B R O U T I N E =======================================
 
 sub_64A8:
-		
 		tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 		beq.s   loc_64B0
 		moveq   #1,d2
 loc_64B0:
-		
 		cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 		bne.s   loc_64C2
 loc_64BA:
-		
 		lea     (byte_FFDCB8).l,a0
 		bra.s   loc_64C8
 loc_64C2:
-		
 		lea     (byte_FFDD18).l,a0
 loc_64C8:
-		
 		cmpi.w  #7,d2
 		bge.s   loc_64DA
 		move.w  #1,(a0)
 		move.w  #1,6(a0)
 		bra.s   loc_64E4
 loc_64DA:
-		
 		move.w  #$168,6(a0)
 loc_64E0:
-		
 		move.w  #$148,(a0)
 loc_64E4:
-		
 		clr.b   2(a0)
 		move.w  #$C064,4(a0)
 		subq.w  #1,d2
 		bne.s   return_64F4
 		moveq   #$14,d2
 return_64F4:
-		
 		rts
 
 	; End of function sub_64A8
@@ -329,36 +272,30 @@ UpdateForceAndGetFirstForceMemberIndex:
 ; START OF FUNCTION CHUNK FOR ParseSpecialTextSymbol
 
 leader:
-		
 		bsr.s   UpdateForceAndGetFirstForceMemberIndex
 		jsr     j_GetCharName
 		moveq   #CHAR_NAMELENGTH,d7
 		bsr.w   CopyASCIIBytesForDialogueString
 		bra.w   loc_62CA
 player:
-		
 		bsr.w   GetNextTextSymbol
 loc_651C:
-		
 		jsr     j_GetCharName
 		moveq   #CHAR_NAMELENGTH,d7
 		bsr.w   CopyASCIIBytesForDialogueString
 		bra.w   loc_62CA
 name:
-		
 		bsr.w   sub_6648
 		move.w  d1,d0
 		jsr     j_GetCharName
 		bsr.w   CopyASCIIBytesForDialogueString
 		bra.w   loc_62CA
 item:
-		
 		bsr.w   sub_6648
 		jsr     j_FindItemName
 		bsr.w   CopyASCIIBytesForDialogueString
 		bra.w   loc_62CA
 number:
-		
 		move.l  ((TEXT_NUMBER-$1000000)).w,d0
 		jsr     (WriteAsciiNumber).w
 		lea     ((RAM_Dialog_StringToPrint-$1000000)).w,a1
@@ -366,33 +303,27 @@ number:
 		lea     ((byte_FFDE80-$1000000)).w,a0
 		moveq   #9,d1
 loc_6568:
-		
 		clr.w   d0
 		move.b  (a0)+,d0
 		cmpi.b  #$20,d0 
 		beq.s   loc_6574
 		move.b  d0,(a1)+
 loc_6574:
-		
 		dbf     d1,loc_6568
 		clr.b   (a1)
 		bra.w   loc_62CA
 class:
-		
 		bsr.w   sub_6648
 		jsr     j_GetClassName
 		bsr.w   CopyASCIIBytesForDialogueString
 loc_658C:
-		
 		bra.w   loc_62CA
 wait:
-		
 		move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
 		move.w  d2,-(sp)
 		clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 		moveq   #$14,d2
 loc_659C:
-		
 		movem.l d6-d7,-(sp)
 		move.w  #$100,d6
 		bsr.w   UpdateRandomSeed
@@ -400,7 +331,6 @@ loc_659C:
 		movem.l (sp)+,d6-d7
 		bsr.w   WaitForVInt     
 loc_65B4:
-		
 		move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
 		andi.b  #$7F,d1 
 		beq.s   loc_659C
@@ -408,15 +338,12 @@ loc_65B4:
 		move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
 		bra.w   loc_62CA
 delay1:
-		
 		move.w  #$15,d0
 loc_65CC:
-		
 		move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
 		movem.w d2,-(sp)
 		clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 loc_65D8:
-		
 		tst.b   ((byte_FFB198-$1000000)).w
 		bne.s   loc_65EC
 		move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
@@ -424,27 +351,21 @@ loc_65D8:
 		bne.s   loc_65F0
 		bsr.w   WaitForVInt     
 loc_65EC:
-		
 		dbf     d0,loc_65D8
 loc_65F0:
-		
 		movem.w (sp)+,d0
 		move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
 		bra.w   loc_62CA
 delay3:
-		
 		move.w  #$77,d0 
 		bra.s   loc_65CC
 spell:
-		
 		bsr.w   sub_6648
 loc_6606:
-		
 		jsr     j_FindSpellName
 		bsr.w   CopyASCIIBytesForDialogueString
 		bra.w   loc_62CA
 clear:
-		
 		bsr.w   sub_6872
 		move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
 		subq.w  #1,d0
@@ -458,11 +379,9 @@ clear:
 		bsr.w   WaitForVInt     
 		bra.w   loc_62CA
 color:
-		
 		bsr.w   GetNextTextSymbol
 		move.b  d0,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
 loc_6644:
-		
 		bra.w   loc_62CA
 
 ; END OF FUNCTION CHUNK FOR ParseSpecialTextSymbol
@@ -471,7 +390,6 @@ loc_6644:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6648:
-		
 		movea.l ((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w,a1
 		move.w  (a1)+,d1
 		move.l  a1,((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w
@@ -491,19 +409,16 @@ CopyASCIIBytesForDialogueString:
 		lea     ((RAM_Dialog_StringToPrint-$1000000)).w,a1
 		move.l  a1,((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
 loc_6660:
-		
 		move.b  (a2)+,(a1)+
 		beq.w   return_666C
 		dbf     d7,loc_6660
 		clr.b   (a1)
 return_666C:
-		
 		rts
 
 	; End of function CopyASCIIBytesForDialogueString
 
-unk_666E:
-		dc.b   1
+unk_666E:       dc.b   1
 		dc.b   1
 		dc.b   1
 		dc.b   1
@@ -763,7 +678,6 @@ unk_666E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_676E:
-		
 		tst.w   ((TEXT_WINDOW_INDEX-$1000000)).w
 		bne.w   return_67E4
 		addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
@@ -774,10 +688,8 @@ sub_676E:
 		move.w  #$1D08,d0
 		bra.s   loc_6798
 loc_6794:
-		
 		move.w  #$1D06,d0
 loc_6798:
-		
 		move.w  #$21D,d1
 		bsr.w   CreateWindow    
 		addq.w  #1,d0
@@ -794,17 +706,14 @@ loc_6798:
 		bsr.w   Sleep           
 		bra.s   return_67E4
 loc_67CE:
-		
 		move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
 		subq.w  #1,d0
 		move.w  #$215,d1
 		move.w  #1,d2
 		bsr.w   MoveWindowWithoutSFX
 loc_67E0:
-		
 		bsr.w   WaitForVInt     
 return_67E4:
-		
 		rts
 
 	; End of function sub_676E
@@ -813,17 +722,14 @@ return_67E4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_67E6:
-		
 		cmpi.w  #VDPTILE_IDX_SCREEN_BLACKBAR,(SPRITE_VDP_TILE_INDEX).l
 						; check if we are on the map or in battle (by checking for presence of black bar sprites)
 		bne.s   loc_67F6
 		move.w  #WINDOW_DIALOGUE_TILELINECOUNTER_EVENT,d6
 		bra.s   loc_67FA
 loc_67F6:
-		
 		move.w  #WINDOW_DIALOGUE_TILELINECOUNTER_BATTLE,d6
 loc_67FA:
-		
 		move.w  #VDPTILE_IDX_DIALOGUEWINDOW_TOPLEFTBORDER,d0
 		move.w  #VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER,d1
 		move.w  #VDPTILE_IDX_DIALOGUEWINDOW_TOPRIGHTBORDER,d2
@@ -837,7 +743,6 @@ loc_67FA:
 		add.w   d4,d1
 		moveq   #1,d3
 loc_6822:
-		
 		move.w  d1,-(sp)
 		bsr.w   CopyLineOfVDPTileOrderForDialogueWindowToRAM
 		move.w  (sp)+,d1
@@ -845,23 +750,18 @@ loc_6822:
 		cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 		bne.s   loc_6844
 loc_6838:
-		
 		cmpi.w  #$C700,d1
 		blt.s   loc_6842
 		subi.w  #$C0,d1 
 loc_6842:
-		
 		bra.s   loc_684E
 loc_6844:
-		
 		cmpi.w  #$C6C0,d1
 		blt.s   loc_684E
 		subi.w  #$80,d1 
 loc_684E:
-		
 		dbf     d6,loc_6822
 loc_6852:
-		
 		move.w  #$D060,d0
 		move.w  #$D061,d1
 		move.w  #$D860,d2
@@ -882,10 +782,8 @@ CopyLineOfVDPTileOrderForDialogueWindowToRAM:
 		
 		move.w  d0,(a1)+
 loc_6862:
-		
 		move.w  #WINDOW_DIALOGUE_WIDTHINTILES,d7
 loc_6866:
-		
 		move.w  d1,(a1)+
 		add.w   d3,d1
 		dbf     d7,loc_6866
@@ -898,18 +796,14 @@ loc_6866:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6872:
-		
 		clr.w   ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w
 loc_6876:
-		
 		move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 loc_687C:
-		
 		move.b  #0,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
 		lea     (FF6802_LOADING_SPACE).l,a0
 		move.w  #$5FF,d7
 loc_688C:
-		
 		move.l  #$FFFFFFFF,(a0)+
 		dbf     d7,loc_688C
 		clr.w   d0
@@ -926,11 +820,9 @@ HandleDialogueTypewriting:
 		beq.w   return_68FA
 		cmpi.b  #$7D,d0 
 loc_68A8:
-		
 		beq.w   return_68FA
 		move.w  d0,-(sp)
 loc_68AE:
-		
 		bsr.w   HandleBlinkingDialogueCursor
 		move.w  (sp)+,d1
 		clr.w   d0
@@ -940,10 +832,8 @@ loc_68AE:
 		subq.w  #1,d2
 		bset    d2,d0
 loc_68C2:
-		
 		cmpi.b  #1,d1
-		beq.s   loc_68DE        
-						; skip playing speech sound if character is a space
+		beq.s   loc_68DE        ; skip playing speech sound if character is a space
 		eori.b  #1,((SPEECH_SOUND_TOGGLE-$1000000)).w
 		beq.s   loc_68DC
 		move.w  d0,-(sp)
@@ -952,27 +842,21 @@ loc_68C2:
 		dc.w SOUND_COMMAND_GET_D0_PARAMETER
 		move.w  (sp)+,d0
 loc_68DC:
-		
 		bra.s   loc_68E2
 loc_68DE:
-		
 		clr.b   ((SPEECH_SOUND_TOGGLE-$1000000)).w
 loc_68E2:
-		
 		subq.w  #1,d0
 		blt.s   return_68FA
 loc_68E6:
-		
 		tst.b   ((byte_FFB198-$1000000)).w
 		bne.s   loc_68F2
 		tst.b   ((P1_INPUT-$1000000)).w
 		bne.s   return_68FA
 loc_68F2:
-		
 		bsr.w   WaitForVInt     
 		dbf     d0,loc_68E6
 return_68FA:
-		
 		rts
 
 	; End of function HandleDialogueTypewriting
@@ -981,14 +865,11 @@ return_68FA:
 ; START OF FUNCTION CHUNK FOR sub_6872
 
 loc_68FC:
-		
 		bsr.w   WaitForVInt     
 loc_6900:
-		
 		lea     (FF6802_LOADING_SPACE).l,a0
 		lea     ($C800).l,a1
 loc_690C:
-		
 		move.w  #$1B0,d0
 		move.w  #2,d1
 		bsr.w   sub_119E        
@@ -1003,7 +884,6 @@ loc_690C:
 		lea     ($D400).l,a1
 		bsr.w   sub_119E        
 loc_694C:
-		
 		cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 		bne.s   loc_6976
 		lea     (byte_FF7802).l,a0
@@ -1013,7 +893,6 @@ loc_694C:
 		lea     ($DC00).l,a1
 		bsr.w   sub_119E        
 loc_6976:
-		
 		bra.w   Set_FFDE94_bit3 
 
 ; END OF FUNCTION CHUNK FOR sub_6872
@@ -1032,15 +911,12 @@ HandleBlinkingDialogueCursor:
 		blt.s   loc_6998
 		subi.b  #$30,d0 
 loc_6998:
-		
 		bra.s   loc_69A4
 loc_699A:
-		
 		cmpi.b  #$20,d0 
 		blt.s   loc_69A4
 		subi.b  #$20,d0 
 loc_69A4:
-		
 		cmpi.b  #$10,d0
 		bge.w   loc_69D8
 		lea     (FF6802_LOADING_SPACE).l,a0
@@ -1053,10 +929,8 @@ loc_69A4:
 		bsr.w   sub_119E        
 		bra.w   SetFFDE94b3andWait
 loc_69D8:
-		
 		cmpi.b  #$20,d0 
 loc_69DC:
-		
 		bge.w   loc_6A0C
 		lea     (byte_FF7002).l,a0
 		lea     ($D000).l,a1
@@ -1068,7 +942,6 @@ loc_69DC:
 		bsr.w   sub_119E        
 		bra.w   SetFFDE94b3andWait
 loc_6A0C:
-		
 		lea     (byte_FF7802).l,a0
 		lea     ($D800).l,a1
 		move.w  #$1B0,d0
@@ -1087,20 +960,17 @@ loc_6A0C:
 ; related to text box
 
 HideTextBox:
-		
 		move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
 		subq.w  #1,d0
 		blt.s   return_6A7E
 		move.w  #$21D,d1
 loc_6A44:
-		
 		cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 		bne.s   loc_6A56
 		moveq   #8,d2
 		bsr.w   MoveWindowWithoutSFX
 		bra.s   loc_6A68
 loc_6A56:
-		
 		moveq   #1,d2
 		bsr.w   MoveWindowWithoutSFX
 		moveq   #1,d0
@@ -1108,7 +978,6 @@ loc_6A56:
 		moveq   #1,d2
 		bsr.w   MoveWindowWithoutSFX
 loc_6A68:
-		
 		bsr.w   WaitForVint_andFFA900Clear
 		move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
 		subq.w  #1,d0
@@ -1116,7 +985,6 @@ loc_6A68:
 		clr.w   ((TEXT_WINDOW_INDEX-$1000000)).w
 		subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 return_6A7E:
-		
 		rts
 
 	; End of function HideTextBox
@@ -1133,32 +1001,26 @@ ClearNextLineOfDialoguePixels:
 		bne.s   loc_6A90
 		clr.w   d0
 loc_6A90:
-		
 		lsl.w   #3,d0
 		add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
 loc_6A96:
-		
 		cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
 		bne.s   loc_6AAC
 		cmpi.b  #$30,d0 
 		blt.s   loc_6AAA
 		subi.b  #$30,d0 
 loc_6AAA:
-		
 		bra.s   loc_6AB6
 loc_6AAC:
-		
 		cmpi.b  #$20,d0 
 		blt.s   loc_6AB6
 		subi.b  #$20,d0 
 loc_6AB6:
-		
 		lsl.w   #7,d0
 		lea     (FF6802_LOADING_SPACE).l,a0
 		adda.w  d0,a0
 		move.w  #$1FF,d0
 loc_6AC4:
-		
 		move.l  #$FFFFFFFF,(a0)+
 		dbf     d0,loc_6AC4
 		move.w  (sp)+,d0
@@ -1170,7 +1032,6 @@ loc_6AC4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6AD2:
-		
 		bsr.w   sub_6AE0
 		bsr.w   sub_6AE0
 		bsr.w   WaitForVInt     
@@ -1182,7 +1043,6 @@ sub_6AD2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6AE0:
-		
 		move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d0
 		move.w  d0,-(sp)
 		addq.w  #1,d0
@@ -1191,14 +1051,11 @@ sub_6AE0:
 		cmpi.w  #6,d0
 		bra.s   loc_6AFC
 loc_6AF8:
-		
 		cmpi.w  #4,d0
 loc_6AFC:
-		
 		bne.s   loc_6B00
 		clr.w   d0
 loc_6B00:
-		
 		move.w  d0,((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w
 		move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
 		subq.w  #1,d0
@@ -1208,7 +1065,6 @@ loc_6B00:
 		bsr.w   sub_67E6
 		move.w  (sp)+,d0
 loc_6B18:
-		
 		move.w  #$8080,d1
 		bsr.w   SetWindowDestination
 		bsr.w   WaitForVInt     
@@ -1221,15 +1077,12 @@ loc_6B18:
 		blt.s   loc_6B40
 		subi.b  #$30,d0 
 loc_6B40:
-		
 		bra.s   loc_6B4C
 loc_6B42:
-		
 		cmpi.b  #$20,d0 
 		blt.s   loc_6B4C
 		subi.b  #$20,d0 
 loc_6B4C:
-		
 		lsl.w   #7,d0
 		lea     (FF6802_LOADING_SPACE).l,a0
 		lea     ($C800).l,a1
@@ -1264,10 +1117,8 @@ SymbolsToGraphics:
 		addq.w  #1,d4
 		bra.s   loc_6BA0
 loc_6B9E:
-		
 		bsr.s   DialogGraphicsToRAM
 loc_6BA0:
-		
 		movem.w (sp)+,d0-d2
 		rts
 
@@ -1287,11 +1138,9 @@ DialogGraphicsToRAM:
 		beq.s   loc_6BBC
 		addq.w  #1,d4
 loc_6BBC:
-		
 		bsr.s   sub_6BDE
 		move.w  d6,d7
 loc_6BC0:
-		
 		bsr.w   sub_6C3A
 		addq.l  #4,a2
 		addq.w  #1,d5
@@ -1300,7 +1149,6 @@ loc_6BC0:
 		clr.w   d5
 		adda.w  #$3E0,a2
 loc_6BD4:
-		
 		dbf     d7,loc_6BC0
 		add.b   d4,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 		rts
@@ -1311,7 +1159,6 @@ loc_6BD4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6BDE:
-		
 		move.b  d1,d2
 		lsl.b   #4,d2
 		move.b  ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
@@ -1324,15 +1171,12 @@ sub_6BDE:
 		blt.s   loc_6C02
 		subi.b  #$30,d0 
 loc_6C02:
-		
 		bra.s   loc_6C0E
 loc_6C04:
-		
 		cmpi.b  #$20,d0 
 		blt.s   loc_6C0E
 		subi.b  #$20,d0 
 loc_6C0E:
-		
 		andi.w  #$F8,d0 
 		lsl.w   #7,d0
 		move.b  ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d3
@@ -1355,11 +1199,9 @@ loc_6C0E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6C3A:
-		
 		move.w  (a0)+,d0
 		moveq   #$B,d6
 loc_6C3E:
-		
 		lsl.w   #1,d0
 		bcc.s   loc_6C80
 		move.b  ((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w,d3
@@ -1370,7 +1212,6 @@ loc_6C3E:
 		move.w  rjt_6C5A(pc,d3.w),d3
 		jmp     rjt_6C5A(pc,d3.w)
 rjt_6C5A:
-		
 		dc.w sub_6C86-rjt_6C5A
 		dc.w sub_6C8E-rjt_6C5A
 		dc.w sub_6C96-rjt_6C5A
@@ -1391,7 +1232,6 @@ rjt_6C5A:
 		dc.w sub_6D58-rjt_6C5A
 		dc.w sub_6D66-rjt_6C5A
 loc_6C80:
-		
 		dbf     d6,loc_6C3E
 		rts
 
@@ -1401,7 +1241,6 @@ loc_6C80:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6C86:
-		
 		andi.b  #$F,(a2)
 		or.b    d2,(a2)
 		bra.s   loc_6C80
@@ -1412,7 +1251,6 @@ sub_6C86:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6C8E:
-		
 		andi.b  #$F0,(a2)
 		or.b    d1,(a2)
 		bra.s   loc_6C80
@@ -1423,7 +1261,6 @@ sub_6C8E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6C96:
-		
 		andi.b  #$F,1(a2)
 		or.b    d2,1(a2)
 		bra.s   loc_6C80
@@ -1434,7 +1271,6 @@ sub_6C96:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6CA2:
-		
 		andi.b  #$F0,1(a2)
 		or.b    d1,1(a2)
 		bra.s   loc_6C80
@@ -1445,7 +1281,6 @@ sub_6CA2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6CAE:
-		
 		andi.b  #$F,2(a2)
 		or.b    d2,2(a2)
 		bra.s   loc_6C80
@@ -1456,7 +1291,6 @@ sub_6CAE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6CBA:
-		
 		andi.b  #$F0,2(a2)
 		or.b    d1,2(a2)
 		bra.s   loc_6C80
@@ -1467,7 +1301,6 @@ sub_6CBA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6CC6:
-		
 		andi.b  #$F,3(a2)
 		or.b    d2,3(a2)
 		bra.s   loc_6C80
@@ -1478,7 +1311,6 @@ sub_6CC6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6CD2:
-		
 		andi.b  #$F0,3(a2)
 		or.b    d1,3(a2)
 		bra.s   loc_6C80
@@ -1489,7 +1321,6 @@ sub_6CD2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6CDE:
-		
 		andi.b  #$F,$20(a2)
 		or.b    d2,$20(a2)
 		bra.s   loc_6C80
@@ -1500,7 +1331,6 @@ sub_6CDE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6CEA:
-		
 		andi.b  #$F0,$20(a2)
 		or.b    d1,$20(a2)
 		bra.s   loc_6C80
@@ -1511,7 +1341,6 @@ sub_6CEA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6CF6:
-		
 		andi.b  #$F,$21(a2)
 		or.b    d2,$21(a2)
 		bra.w   loc_6C80
@@ -1522,11 +1351,9 @@ sub_6CF6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6D04:
-		
 		andi.b  #$F0,$21(a2)
 		or.b    d1,$21(a2)
 loc_6D0E:
-		
 		bra.w   loc_6C80
 
 	; End of function sub_6D04
@@ -1535,7 +1362,6 @@ loc_6D0E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6D12:
-		
 		andi.b  #$F,$22(a2)
 		or.b    d2,$22(a2)
 		bra.w   loc_6C80
@@ -1546,7 +1372,6 @@ sub_6D12:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6D20:
-		
 		andi.b  #$F0,$22(a2)
 		or.b    d1,$22(a2)
 		bra.w   loc_6C80
@@ -1557,7 +1382,6 @@ sub_6D20:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6D2E:
-		
 		andi.b  #$F,$23(a2)
 		or.b    d2,$23(a2)
 		bra.w   loc_6C80
@@ -1568,7 +1392,6 @@ sub_6D2E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6D3C:
-		
 		andi.b  #$F0,$23(a2)
 		or.b    d1,$23(a2)
 		bra.w   loc_6C80
@@ -1579,7 +1402,6 @@ sub_6D3C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6D4A:
-		
 		andi.b  #$F,$40(a2)
 		or.b    d2,$40(a2)
 		bra.w   loc_6C80
@@ -1590,7 +1412,6 @@ sub_6D4A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6D58:
-		
 		andi.b  #$F0,$40(a2)
 		or.b    d1,$40(a2)
 		bra.w   loc_6C80
@@ -1601,15 +1422,13 @@ sub_6D58:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6D66:
-		
 		andi.b  #$F,$41(a2)
 		or.b    d2,$41(a2)
 		bra.w   loc_6C80
 
 	; End of function sub_6D66
 
-		dc.b   0                
-						; unused layout ?
+		dc.b   0                ; unused layout ?
 		dc.b $EE 
 		dc.b $EE 
 		dc.b $EE 

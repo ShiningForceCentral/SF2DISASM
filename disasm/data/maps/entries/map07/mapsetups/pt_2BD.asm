@@ -1,8 +1,7 @@
 
 ; ASM FILE data\maps\entries\map07\mapsetups\pt_2BD.asm :
 ; 0x55396..0x553AE : 
-ms_map7_flag2BD:
-		dc.l ms_map7_flag2BD_Entities
+ms_map7_flag2BD:dc.l ms_map7_flag2BD_Entities
 		dc.l ms_map7_flag2BD_EntityEvents
 		dc.l ms_map7_ZoneEvents
 		dc.l ms_map7_AreaDescriptions

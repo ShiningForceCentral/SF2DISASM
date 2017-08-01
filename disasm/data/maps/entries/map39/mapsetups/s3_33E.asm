@@ -8,7 +8,6 @@ ms_map39_flag33E_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_99:
-		
 		rts
 
 	; End of function nullsub_99

@@ -11,14 +11,12 @@ ms_map55_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5E250:
-		
 		trap    #CHECK_FLAG
 		dc.w $216
 		beq.s   return_5E25C
 		lea     byte_5E27C(pc), a0
 		trap    #6
 return_5E25C:
-		
 		rts
 
 	; End of function sub_5E250

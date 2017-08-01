@@ -11,7 +11,6 @@ ms_map3_flag21F_Section5:
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_181:
-		
 		rts
 
 	; End of function nullsub_181

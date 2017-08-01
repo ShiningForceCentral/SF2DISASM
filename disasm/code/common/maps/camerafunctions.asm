@@ -20,11 +20,9 @@ VInt_AdjustCameraToPlayer:
 		move.w  ((word_FFA816-$1000000)).w,d3
 		bra.s   loc_45F0
 loc_45E8:
-		
 		move.w  ((word_FFA810-$1000000)).w,d2
 		move.w  ((word_FFA812-$1000000)).w,d3
 loc_45F0:
-		
 		clr.w   d6
 		bsr.w   IsMapScrollingToFollowCameraTarget
 		bne.w   return_4706
@@ -38,7 +36,6 @@ loc_45F0:
 		addq.w  #1,d6
 		bra.w   loc_4638
 loc_4616:
-		
 		move.w  d2,d7
 		addi.w  #$900,d7
 		cmp.w   d7,d4
@@ -51,7 +48,6 @@ loc_4616:
 		addq.w  #1,d6
 		bra.w   *+4
 loc_4638:
-		
 		move.w  d3,d7
 		addi.w  #$600,d7
 		cmp.w   d7,d5
@@ -62,7 +58,6 @@ loc_4638:
 		addq.w  #1,d6
 		bra.w   loc_4676
 loc_4654:
-		
 		move.w  d3,d7
 		addi.w  #$900,d7
 		cmp.w   d7,d5
@@ -75,7 +70,6 @@ loc_4654:
 		addq.w  #1,d6
 		bra.w   *+4
 loc_4676:
-		
 		tst.w   d6
 		beq.s   loc_4688
 		move.w  d2,d0
@@ -84,35 +78,28 @@ loc_4676:
 		addq.w  #1,((word_FFA828-$1000000)).w
 		bra.s   loc_468C
 loc_4688:
-		
 		clr.w   ((word_FFA828-$1000000)).w
 loc_468C:
-		
 		move.w  ((word_FFA828-$1000000)).w,d7
 		cmpi.w  #6,d7
 		ble.s   loc_469C
 		move.w  #$20,d7 
 		bra.s   loc_46A0
 loc_469C:
-		
 		move.w  #$18,d7
 loc_46A0:
-		
 		cmpi.b  #$30,((BATTLE_CURRENT_ENTITY-$1000000)).w
 		bne.s   loc_46AA
 		moveq   #$40,d7 
 loc_46AA:
-		
 		cmpi.b  #5,((FADING_SETTING-$1000000)).w
 		bne.s   loc_46B4
 		moveq   #$20,d7 
 loc_46B4:
-		
 		tst.w   ((word_FFB194-$1000000)).w
 		beq.s   loc_46BE
 		move.w  ((word_FFB194-$1000000)).w,d7
 loc_46BE:
-		
 		tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
 		bne.s   loc_46D0
 		move.w  d7,d0
@@ -120,7 +107,6 @@ loc_46BE:
 		lsr.w   #8,d0
 		move.w  d0,((word_FFA820-$1000000)).w
 loc_46D0:
-		
 		tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
 		bne.s   loc_46E2
 		move.w  d7,d0
@@ -128,7 +114,6 @@ loc_46D0:
 		lsr.w   #8,d0
 		move.w  d0,((word_FFA822-$1000000)).w
 loc_46E2:
-		
 		tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
 		bne.s   loc_46F4
 		move.w  d7,d0
@@ -136,7 +121,6 @@ loc_46E2:
 		lsr.w   #8,d0
 		move.w  d0,((word_FFA824-$1000000)).w
 loc_46F4:
-		
 		tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
 		bne.s   return_4706
 		move.w  d7,d0
@@ -144,7 +128,6 @@ loc_46F4:
 		lsr.w   #8,d0
 		move.w  d0,((word_FFA826-$1000000)).w
 return_4706:
-		
 		rts
 
 	; End of function VInt_AdjustCameraToPlayer
@@ -158,13 +141,11 @@ WaitForCameraToCatchUp:
 		
 		move.w  d7,-(sp)
 loc_470A:
-		
 		bsr.w   IsMapScrollingToFollowCameraTarget
 		beq.s   loc_4716
 		bsr.w   WaitForVInt     
 		bra.s   loc_470A
 loc_4716:
-		
 		bsr.w   WaitForVInt     
 		bsr.w   IsMapScrollingToFollowCameraTarget
 		bne.s   loc_470A

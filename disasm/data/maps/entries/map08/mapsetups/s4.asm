@@ -13,8 +13,7 @@ ms_map8_AreaDescriptions:
 
 	; End of function ms_map8_AreaDescriptions
 
-word_561FC:
-		dc.w $50F
+word_561FC:     dc.w $50F
 		dc.b 0
 		dc.b 0
 		dc.b 2
@@ -71,23 +70,19 @@ word_561FC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_56246:
-		
 		trap    #CHECK_FLAG
-		dc.w $2C4               
-						; set after the scene in Ribble where the mayor confronts Bowie
+		dc.w $2C4               ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   loc_56256
 		move.w  #$546,d0
 		jsr     (DisplayText).w 
 		bra.s   return_5626A
 loc_56256:
-		
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  #$1A8,d0
 		jsr     (DisplayText).w 
 		move.w  #$1B2,d0
 		jsr     (DisplayText).w 
 return_5626A:
-		
 		rts
 
 	; End of function sub_56246
@@ -96,10 +91,8 @@ return_5626A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5626C:
-		
 		trap    #CHECK_FLAG
-		dc.w $2C4               
-						; set after the scene in Ribble where the mayor confronts Bowie
+		dc.w $2C4               ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   loc_56284
 		move.w  #$547,d0
 		jsr     (DisplayText).w 
@@ -107,14 +100,12 @@ sub_5626C:
 		jsr     (DisplayText).w 
 		bra.s   return_56298
 loc_56284:
-		
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  #$1A8,d0
 		jsr     (DisplayText).w 
 		move.w  #$1B2,d0
 		jsr     (DisplayText).w 
 return_56298:
-		
 		rts
 
 	; End of function sub_5626C
@@ -123,7 +114,6 @@ return_56298:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5629A:
-		
 		move.w  #$54D,d0
 		jsr     (DisplayText).w 
 		move.w  #$54E,d0
@@ -133,16 +123,13 @@ sub_5629A:
 		move.w  #$550,d0
 		jmp     (DisplayText).w 
 loc_562BA:
-		
 		trap    #CHECK_FLAG
-		dc.w $2DB               
-						; set after you open the tree in Ribble with the wooden plank
+		dc.w $2DB               ; set after you open the tree in Ribble with the wooden plank
 		bne.s   loc_562CA
 		move.w  #$54A,d0
 		jmp     (DisplayText).w 
 		dc.w $6014
 loc_562CA:
-		
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  #$1A8,d0
 		jsr     (DisplayText).w 

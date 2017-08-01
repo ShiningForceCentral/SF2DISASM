@@ -25,49 +25,26 @@ pt_WeaponSprites:
 		dc.l WeaponSprite20
 		dc.l WeaponSprite21
 		dc.l WeaponSprite22
-WeaponSprite00:
-		incbin "data/graphics/battles/weapons/weaponsprite00.bin"
-WeaponSprite01:
-		incbin "data/graphics/battles/weapons/weaponsprite01.bin"
-WeaponSprite02:
-		incbin "data/graphics/battles/weapons/weaponsprite02.bin"
-WeaponSprite03:
-		incbin "data/graphics/battles/weapons/weaponsprite03.bin"
-WeaponSprite04:
-		incbin "data/graphics/battles/weapons/weaponsprite04.bin"
-WeaponSprite05:
-		incbin "data/graphics/battles/weapons/weaponsprite05.bin"
-WeaponSprite06:
-		incbin "data/graphics/battles/weapons/weaponsprite06.bin"
-WeaponSprite07:
-		incbin "data/graphics/battles/weapons/weaponsprite07.bin"
-WeaponSprite08:
-		incbin "data/graphics/battles/weapons/weaponsprite08.bin"
-WeaponSprite09:
-		incbin "data/graphics/battles/weapons/weaponsprite09.bin"
-WeaponSprite10:
-		incbin "data/graphics/battles/weapons/weaponsprite10.bin"
-WeaponSprite11:
-		incbin "data/graphics/battles/weapons/weaponsprite11.bin"
-WeaponSprite12:
-		incbin "data/graphics/battles/weapons/weaponsprite12.bin"
-WeaponSprite13:
-		incbin "data/graphics/battles/weapons/weaponsprite13.bin"
-WeaponSprite14:
-		incbin "data/graphics/battles/weapons/weaponsprite14.bin"
-WeaponSprite15:
-		incbin "data/graphics/battles/weapons/weaponsprite15.bin"
-WeaponSprite16:
-		incbin "data/graphics/battles/weapons/weaponsprite16.bin"
-WeaponSprite17:
-		incbin "data/graphics/battles/weapons/weaponsprite17.bin"
-WeaponSprite18:
-		incbin "data/graphics/battles/weapons/weaponsprite18.bin"
-WeaponSprite19:
-		incbin "data/graphics/battles/weapons/weaponsprite19.bin"
-WeaponSprite20:
-		incbin "data/graphics/battles/weapons/weaponsprite20.bin"
-WeaponSprite21:
-		incbin "data/graphics/battles/weapons/weaponsprite21.bin"
-WeaponSprite22:
-		incbin "data/graphics/battles/weapons/weaponsprite22.bin"
+WeaponSprite00: incbin "data/graphics/battles/weapons/weaponsprite00.bin"
+WeaponSprite01: incbin "data/graphics/battles/weapons/weaponsprite01.bin"
+WeaponSprite02: incbin "data/graphics/battles/weapons/weaponsprite02.bin"
+WeaponSprite03: incbin "data/graphics/battles/weapons/weaponsprite03.bin"
+WeaponSprite04: incbin "data/graphics/battles/weapons/weaponsprite04.bin"
+WeaponSprite05: incbin "data/graphics/battles/weapons/weaponsprite05.bin"
+WeaponSprite06: incbin "data/graphics/battles/weapons/weaponsprite06.bin"
+WeaponSprite07: incbin "data/graphics/battles/weapons/weaponsprite07.bin"
+WeaponSprite08: incbin "data/graphics/battles/weapons/weaponsprite08.bin"
+WeaponSprite09: incbin "data/graphics/battles/weapons/weaponsprite09.bin"
+WeaponSprite10: incbin "data/graphics/battles/weapons/weaponsprite10.bin"
+WeaponSprite11: incbin "data/graphics/battles/weapons/weaponsprite11.bin"
+WeaponSprite12: incbin "data/graphics/battles/weapons/weaponsprite12.bin"
+WeaponSprite13: incbin "data/graphics/battles/weapons/weaponsprite13.bin"
+WeaponSprite14: incbin "data/graphics/battles/weapons/weaponsprite14.bin"
+WeaponSprite15: incbin "data/graphics/battles/weapons/weaponsprite15.bin"
+WeaponSprite16: incbin "data/graphics/battles/weapons/weaponsprite16.bin"
+WeaponSprite17: incbin "data/graphics/battles/weapons/weaponsprite17.bin"
+WeaponSprite18: incbin "data/graphics/battles/weapons/weaponsprite18.bin"
+WeaponSprite19: incbin "data/graphics/battles/weapons/weaponsprite19.bin"
+WeaponSprite20: incbin "data/graphics/battles/weapons/weaponsprite20.bin"
+WeaponSprite21: incbin "data/graphics/battles/weapons/weaponsprite21.bin"
+WeaponSprite22: incbin "data/graphics/battles/weapons/weaponsprite22.bin"

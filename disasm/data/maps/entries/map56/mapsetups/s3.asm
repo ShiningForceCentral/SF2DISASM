@@ -11,7 +11,6 @@ ms_map56_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_614DE:
-		
 		trap    #CHECK_FLAG
 		dc.w $388
 		bne.s   return_614FC
@@ -21,18 +20,13 @@ sub_614DE:
 		lea     cs_6150A(pc), a0
 		trap    #6
 		trap    #SET_FLAG
-		dc.w $387               
-						; set after the first time you talk to Creed on path up Ancient Tower
+		dc.w $387               ; set after the first time you talk to Creed on path up Ancient Tower
 loc_614F4:
-		
 		trap    #SET_FLAG
-		dc.w $1B9               
-						; Battle 41 unlocked
+		dc.w $1B9               ; Battle 41 unlocked
 		trap    #SET_FLAG
-		dc.w $388               
-						; will be set with the 0387, but only if the event isn't triggered by speaking
+		dc.w $388               ; will be set with the 0387, but only if the event isn't triggered by speaking
 return_614FC:
-		
 		rts
 
 	; End of function sub_614DE

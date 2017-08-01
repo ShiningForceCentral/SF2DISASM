@@ -13,8 +13,7 @@ ms_map20_AreaDescriptions:
 
 	; End of function ms_map20_AreaDescriptions
 
-word_5393C:
-		dc.w $1706
+word_5393C:     dc.w $1706
 		dc.b 0
 		dc.b 0
 		dc.b 4

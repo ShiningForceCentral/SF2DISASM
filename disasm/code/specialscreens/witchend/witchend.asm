@@ -5,8 +5,8 @@
 ; =============== S U B R O U T I N E =======================================
 
 EndGame:
-		
-		bset    #7,(SAVE_FLAGS).l
+		enableSram              
+                bset    #7,(SAVE_FLAGS).l
                 disableSram
 		jsr     (DisableDisplayAndVInt).w
 		movea.l (p_WitchEndTiles).l,a0
@@ -51,8 +51,7 @@ EndGame:
 		dc.l VInt_WitchEndBlink
 		move.w  #$46,((CURRENT_SPEAK_SOUND-$1000000)).w 
 		trap    #TEXTBOX
-		dc.w $EF                
-						; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
+		dc.w $EF                ; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		move.w  #$5A,d0 
@@ -147,12 +146,10 @@ EndGame:
 		jsr     (Sleep).w       
 		trap    #SOUND_COMMAND
 		dc.w SOUND_COMMAND_FADE_OUT
-		move.w  #$2A30,d0       
-						; wait for 3 minutes
+		move.w  #$2A30,d0       ; wait for 3 minutes
 		jsr     (Sleep).w       
 		trap    #TEXTBOX
-		dc.w $1D1               
-						; "And more...{W1}"
+		dc.w $1D1               ; "And more...{W1}"
 		trap    #TEXTBOX
 		dc.w $FFFF
 		move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
@@ -160,13 +157,11 @@ EndGame:
 		lea     (PALETTE_1_BIS).l,a0
 		moveq   #$1F,d7
 loc_27C2C:
-		
 		clr.l   (a0)+
 		dbf     d7,loc_27C2C
 		jsr     j_ClearEntities
 		trap    #SET_FLAG
-		dc.w $190               
-						; Battle 0 unlocked
+		dc.w $190               ; Battle 0 unlocked
 		move.w  #$3F,d0 
 		jsr     (GetNextBattleOnMap).w
 		move.w  d7,d1
@@ -178,8 +173,7 @@ loc_27C2C:
 		move    #$2700,sr
 		movea.l (InitStack).w,sp
 		movea.l (p_Start).w,a0  
-		jmp     (a0)            
-						; reset
+		jmp     (a0)            ; reset
 
 	; End of function EndGame
 
@@ -187,7 +181,6 @@ loc_27C2C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_27C64:
-		
 		move.w  d0,-(sp)
 		movea.l (p_JewelEndScreenLayout).l,a0
 		lea     $700(a0),a0
@@ -237,7 +230,6 @@ VInt_WitchEndBlink:
 		jsr     (sub_7D28).w
 		addq.w  #1,-2(a6)
 loc_27CDC:
-		
 		tst.w   (a2)
 		bne.s   loc_27D08
 		movea.l (p_WitchEndLayout).l,a0
@@ -251,7 +243,6 @@ loc_27CDC:
 		addi.w  #$1E,d7
 		move.w  d7,(a2)
 loc_27D08:
-		
 		lea     ((word_FFB07C-$1000000)).w,a2
 		tst.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 		bne.s   loc_27D1A
@@ -259,7 +250,6 @@ loc_27D08:
 		ble.s   loc_27D42
 		bra.s   loc_27D6A
 loc_27D1A:
-		
 		subq.w  #1,(a2)
 		cmpi.w  #5,(a2)
 		bne.s   loc_27D3E
@@ -270,11 +260,9 @@ loc_27D1A:
 		jsr     (sub_7D28).w
 		addq.w  #1,-2(a6)
 loc_27D3E:
-		
 		tst.w   (a2)
 		bne.s   loc_27D6A
 loc_27D42:
-		
 		movea.l (p_WitchEndLayout).l,a0
 		lea     $738(a0),a0
 		lea     (byte_FFE19C).l,a1
@@ -286,7 +274,6 @@ loc_27D42:
 		addi.w  #$A,d7
 		move.w  d7,(a2)
 loc_27D6A:
-		
 		tst.w   -2(a6)
 		beq.s   loc_27D8A
 		lea     (byte_FFE000).l,a0
@@ -296,5 +283,4 @@ loc_27D6A:
 		jsr     (sub_119E).w    
 		jsr     (Set_FFDE94_bit3).w
 loc_27D8A:
-		
 		unlk    a6

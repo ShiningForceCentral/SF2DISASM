@@ -16,7 +16,6 @@ MainBattleAndExplorationLoop:
 		
 		clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
 loc_75C8:
-		
 		bsr.w   AlterMapIndexIfChanged
 		bsr.w   GetNextBattleOnMap
 		cmpi.w  #$FFFF,d7
@@ -24,10 +23,8 @@ loc_75C8:
 		move.w  d7,d1
 		jsr     j_ExecuteBattleLoop
 loc_75E0:
-		
 		bsr.w   AlterMapIndexIfChanged
 loc_75E4:
-		
 		jsr     j_ExecuteExplorationLoop
 		bra.s   loc_75C8
 
