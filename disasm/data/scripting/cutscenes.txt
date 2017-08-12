@@ -1,0 +1,537 @@
+[spoiler]$0000 - [b]nextSingleText[/b] - Display next single text line
+Displays textbox with next line from current text cursor, and then hides textbox and optional portrait.
+2 params : 
+- byte : ?
+- byte : portrait index
+
+$0001 - [b]nextSingleTextVar[/b] - Display next single line with more parameters
+Same as above with more parameters to figure out.
+4 params :
+- byte : ?
+- byte : portrait index
+- byte : ?
+- byte : ?
+
+$0002 - [b]nextText[/b] - Display next text line
+Displays textbox with next line from current text cursor, and doesn't hide textbox and optional portrait in order to display more text lines.
+2 params : 
+- byte : ?
+- byte : portrait index
+
+$0003 - [b]nextTextVar[/b] - Display next line with more parameters
+Same as above with more parameters to figure out.
+5 params :
+- byte : ?
+- byte : portrait index
+- byte : ?
+- byte : ?
+- word : ?
+
+$0004 - [b]textCursor[/b] - Initialize text cursor
+Initializes cursor to point to next text line to read. Doesn't display textbox, only sets the cursor.
+1 param :
+- word : line index
+
+$0005 - [b]playSound[/b] - Play sound
+Sends parameter value to the sound driver to play either a music, an SFX or a sound command (stop, fade out ...)
+1 param :
+- word : sound index/command. Refer to disasm\sf2enums.asm for music/sfx constant values.
+
+$0007 - [b]mapSysEvent[/b] - Execute map system event
+No idea what it does :D ! Will have to check where and how it's used in the game to figure it out.
+1 param :
+- long : ?
+Actually, the long value may be several separate parameters like 2 words or 4 bytes, no idea at the moment.
+Earl's info : "00 07 nm xx yy ff = switch map, nm=new map, with x/y and facing on new (6 bytes)"
+
+$0008 - [b]join[/b] - Character joins Force
+Trigger the fact that given ally is now in Force.
+(display join text, play music, update roster)
+1 param :
+- word : character index. Should make good use of enumeration constants in the future. ("$3" would become "JAHA", for instance)
+Character IDs are from 00-1D (Bowie-Claude), although 80 is used for Sarah + Chester (who join simultaneously)
+
+$0009 - [b]hideText[/b] - Hide textbox and optional portait.
+Probably used in conjunction with "nextText" and "nextTextVar" commands.
+No params.
+
+$000A - [b]executeSubroutine[/b] - Execute a given piece of ASM code
+Powerful for ASM hackers, anything is possible with that command.
+1 param :
+- long : subroutine absolute offset, which in our case has to be represented by the subroutine's name, as the assembler will compute its actual address during build.
+
+$000B - [b]executeSubroutine[/b] - Execute a given piece of ASM code
+Powerful for ASM hackers, anything is possible with that command.
+1 param :
+- long : subroutine absolute offset, which in our case has to be represented by the subroutine's name, as the assembler will compute its actual address during build.
+
+$000B - [b]jump[/b] - Jump to another cutscene address
+Simple "go to" command.
+1 param :
+- long : next command absolute address, same as above, has to use a name to point to.
+
+$000C - [b]jumpIfFlagSet[/b] - Jump if flag is set
+Conditional command.
+2 params :
+- word : flag index. Should also benefit from a flag map/enumeration at some point. Until then please refer to existing flag knowledge from dedicated topics.
+- long : as above with jump, named target address
+
+$000D - [b]jumpIfFlagClear[/b] - Jump if flag clear
+Same as above
+
+$000E - [b]jumpIfDead[/b] - Jump if character dead
+2 params : 
+- word : character index
+- long : named target
+
+$000F - [b]jumpIfAlive[/b] - Jump if character alive
+Same as above
+
+$0010 - [b]setF[/b] - Set flag
+word : flag index
+
+$0010 - [b]clearF[/b] - Clear flag
+Same as above
+
+$0011 - [b]yesNo[/b] - Display "yes/no" choice
+Didn't look at it yet but I guess it relies on a "jumpIfFlagSet" just after.
+No params.
+
+$0012 - [b]contextualMenu[/b] -Execute contextual menu
+To clarify !
+1 param :
+- word : ? 
+Maybe the menu identifier ? (Church, shop, caravan ...) Need to check how it's used.
+Earl says "00 12 00 00 = calls priest menus" so value 0 must be priest menu, 1 probably shop and 2 for Caravan ?
+
+$0013 - [b]setStoryFlag[/b] - Set story-specific flag
+The flag map contains an array of "story flags" which are set for every story step to save. 
+These flags have their own command to help use them without having to do the math (they start from flag position $190).
+1 param :
+- word : story flag index (= absolute flag index - $190)
+
+$0014 - [b]customActscript[/b] - Apply custom actscript to entity
+Next commands are actually an entity actscript to apply to an entity (= a map sprite). 
+Should be used only for actscripts which won't be used anywhere else in the game. 
+Otherwise, use the "setAcscript" command by pointing to a externally declared actscript.
+2 params :
+- byte : entity on which to apply actscript ?
+- byte : (quick guess at first glance, to confirm) $FF if we have to wait for the end of execution of custom actscript, or 0 otherwise to continue cutscene immediately.
+
+$0015 - [b]setActscript[/b] - Apply actscript to entity
+Applies an existing actscript declared anywhere else in the game's code, and which can be re-used in any cutscene.
+3 params :
+- byte : entity index
+- byte : wait execution end or no (see above)
+- long : actscript named address.
+
+$0016 - [b]waitIdle[/b] - Wait for entity to stop before continuing cutscene execution
+1 param :
+- word : entity index
+
+$0017 - [b]entityPosDirFlash[/b] - Set entity position, direction, and make it flash
+Not sure what that "flash" thing does, will have to see how it's used.
+Earl : This is only used for Hawel, when he dies.
+4 params :
+- byte : entity index
+- byte : map X
+- byte : map Y
+- byte : direction
+
+$0018 - [b]entityFlashWhite[/b] - Make entity flash white
+To clarify
+2 params :
+- word : entity index ?
+- word : flash parameter ? Frequency maybe ?
+
+$0019 - [b]entityPosDir[/b] - Set entity position and direction
+Same as "entityPosDirFlash" with no flash.
+4 params :
+- byte : entity index
+- byte : map X
+- byte : map Y
+- byte : direction
+
+$001A - [b]entitySprite[/b] - Set entity sprite
+2 params :
+- word : entity index
+- word : sprite index, will have to check if it uses an absolute index or a "divided by 3" index, as this might consider that a sprite is actually 3 sprites (3 directions per sprite, left/right being mirrored)
+
+$001B - [b]startEntity[/b] - Start entity animation
+May be used after specific entity loading command ? To clarify ...
+1 param :
+- word : entity index
+
+$001C - [b]stopEntity[/b] - Stop entity animation
+Also to clarify
+1 param :
+- word : entity index
+
+$001D - [b]showPortrait[/b] - Show portrait
+Show portrait only with no textbox ? Maybe used when showing Bowie's painting ? 
+Earl : used in final room of ancient tower
+1 param :
+- word : portrait index
+
+$001E - [b]hidePortrait[/b] - Hide portrait
+Nuff said.
+
+$001F - [b]declareForceMemberDead[/b] - Declare Force member dead
+Well, no idea how this is used, to be checked.
+1 param :
+- word : character index I guess
+
+$0020 - [b]declareForceMembersDead[/b] - Declare whole force dead ? 
+No idea :D ...
+No params either.
+
+$0021 - [b]revive[/b] - Revive Force member
+1 param :
+- word : character index
+
+$0022 - [b]animEntityFadeInOut[/b] - Animate entity while fading in and out
+No idea, maybe a Mitula thing ... who does that ? :D
+2 params :
+- word : entity index
+- word : ? fade frequency ?
+Earl : This is what's used for Geshp's teleports, a Gizmo's possessions, and so on.
+00 22 00 aa 00 xx = sprite dis/reappear effect (6 bytes)
+   00 = slight vertical ripple (top to bottom) / 01 (bottom to top)
+   02 = vertical disappear (top to bottom) / 03 = (bottom to top)
+   04 = sink (downward into ground) / 05 = rise (upward from ground)
+   06 = every other line fade out / 07 = every other line fade in
+
+$0023 - [b]setEntityDir[/b] - Set entity direction
+2 params :
+- byte : entity index
+- byte : direction
+
+$0024 - [b]setCameraEntity[/b] - Set which entity is followed by camera
+Interesting one !
+1 param :
+- word : entity index
+
+$0025 - [b]cloneEntity[/b] - Clone entity
+2 params :
+- word : source entity index
+- word : target entity index
+
+$0026 - [b]entityNod[/b] - Make entity nod
+- word : entity index
+
+
+$0027 - [b]entityShakeHead[/b] - Make entity shake head
+- word : entity index
+
+$0028 - [b]moveEntityNextToPlayer[/b] - Make entity follow player/Camera entity ?
+To clarify
+2 params :
+- word : entity index ? 
+- word : target entity index ? or follower position ?
+
+$0029 - [b]setEntityDest[/b] - Set entity destination
+To clarify
+3 params :
+- word : entity index
+- word : dest X ? or direction ? 
+- word : dest Y ? or move length ?
+Earl :
+00 29 00 aa 00 xx 00 yy = actor moves to a given x/y position (8 bytes)
+Not sure if facing changes automatically with direction on this, 
+but it is very definitely the less common way to move sprites from point a to point b.
+
+$002A - [b]entityShiver[/b] - Make entity shiver
+- word : entity index
+
+$002B - [b]csc2B[/b] - UNKNOWN
+To figure out !
+4 params :
+- word : ?
+- byte : ?
+- byte : ?
+- byte : ?
+- byte : ?
+Earl :
+00 2B 00 aa xx yy ff ss = place actor on map at x/y with facing, and sprite (8 bytes)
+Usually all of the relevant actors will be on the map already, but if not this is used to put them there. 
+This differs from 19 in that 19 deals with actors already on-map. 
+This pulls apparently otherwise unused actors from the entity section of a mapsetup.
+
+$002C - [b]followEntity[/b] - Make an entity follow another one ?
+To clarify
+params :
+- word : following entity index ?
+- word : followed entity index ? 
+- word : follower position ?
+Earl : 
+00 2C 00 aa xx xx xx xx = actor following Bowie on current map (8 bytes)
+Actor will remain with Bowie through same-map transitions (that is, up stairs and whatnot), 
+but will be gone when you transition to a new map. 
+The final 4 bytes determine the character's placement in the train, 
+but I don't have a solid grasp of what values correspond to what placement.
+
+$002D - [bmoveEntity][/b] - Apply entity move sequence
+This command can be followed by one or several move coordinates, until the "endMove $8080" command.
+params :
+- word : 
+- 2 repeatable bytes : direction, and move length.
+Earl : 
+00 2D aa 00 ff dd = actor moving (variable # bytes, depending on amount of movement)
+Actors will move in a given direction (ff) a given distance (dd). 
+I use ff for direction because it works with the same values as facing; 
+00 = right, 01 = up, 02 = left, 03 = down. 
+Actors will not change their facing as they move, so you can have them strafe, back away, etc.
+
+$002E - [b]hideEntity[/b] - Hide entity
+Stop displaying it ?
+params :
+- word : entity index
+Earl :
+This is usually handled in events once an actor has wandered somewhere off camera. 
+Otherwise, they would still be present on the map after the event has concluded 
+(like in Granseal, when Astral speaks to the messenger and runs to the Castle).
+
+$002F - [b]csc2F[/b] - UNKNOWN
+To figure out !
+params :
+- word : ?
+- word : ?
+Earl :
+00 2F 00 aa xx xx = Skreech in Tristan (6 bytes)
+Not a clue. May relate to his being able to fly. 
+The last two bytes are set to 00 00 at the beginning of his scene, and FF FF afterwards. 
+This seems unnescessary, since movement with 2D ignores normal terrain boundaries.
+
+$0030 - [b]removeEntityShadow[/b] - Remove entity's sprite shadow ?
+Is the game able to process the sprite graphics to remove black shadow pixels at the bottom ? 
+... I'm curious to see where it's used ...
+Earl : Oddler uses this in Polca. He, Bowie, and Peter in Desktop
+params :
+- word : entity index
+
+$0031 - [b]moveEntityAboveAnother[/b] - Move entity above entity
+No idea :D where is this used and why ?
+params :
+- word : entity index to move ?
+- word : target entity index ? 
+
+$0032 - [b]setCamDest[/b] - Set camera destination
+params :
+- word : Destination X ?
+- word : Destination Y ?
+
+$0033 - [b]setQuakeAmount[/b] - Set quake amount ... what ?
+Is the screen shaking sometimes ? Maybe that's the shaking amplitude to apply ? Or the length ? 
+params :
+- word : ? well, the actual amount, but amount of what ? of quake, yes I know ... :|
+Earl :
+00 33 xx xx = screen shake, with variable for severity (4 bytes)
+Note that whatever you enter for the severity (usually it's not more than 00 05), 
+you will have to turn it off by later using this same command with severity set to 00 00.
+
+$0034 - [b]setBlocks[/b] - Change map blocks
+Must be used during the Oddeye battle I'm sure ! Where else ? 
+params :
+- word : ?
+- word : ?
+- word : ? 
+Earl :
+00 34 ox oy ww hh dx dy = block copy (8 bytes)
+      ox/y = origin x/y, ww=width, hh=height, dx/y=destination x/y
+This is used for things like the Granseal earthquake terrain damaging, 
+the opening of the tree in Ribble, and so on.
+
+$0035 - [b]csc35[/b] - UNKNOWN, SIMILAR TO SET BLOCKS
+To figure out !
+params :
+- word : ?
+- word : ?
+- word : ?
+Earl :
+00 35 xx xx xx xx xx xx = block copy to restore original setup?
+This is only used on the Parmecia/Grans Island path. 
+I assume that it is what makes the path disappear after you arrive at one side or the other.
+
+$0036 - [b]csc36[/b] - UNKNOWN, RELATED TO LOADING A MAP
+Maybe re-loading ?
+No params.
+Earl :
+Appears in same section as New Granseal '1 year later' text. 
+Might delay the fade-in until after that text, might be what allows that text box to come up despite the dark screen... I just don't know.
+
+$0037 - [b]loadMapFadeIn[/b] - Load map and fade in
+params :
+- word : Map index
+- word : Camera initial X
+- word : Camera initial Y
+
+$0039 - [b]fadeInB[/b] - Fade in from black
+No params
+
+$003A - [b]fadeOutB[/b] - Fade out to black
+No params
+
+$003B - [b]slowFadeInB[/b] - Slow fade in from black
+No params
+
+$003C - [b]slowFadeOutB[/b] - Slow fade out to black
+No params
+
+$003D - [b]tintMap[/b] - Make the map flash ?
+Maybe used during storm effect ?
+No params
+
+$003E - [b]flickerOnce[/b] - Flicker once ... well ... which difference with previous command ?
+To clarify
+No params
+
+$003F - [b]mapFadeOutToWhite[/b] - Make the map fade out to white
+Where is it used ? 
+No params
+
+$0040 - [b]mapFadeInFromWhite[/b] - Make the map fade in from white
+Same
+
+$0041 - [b]flashScreenWhite[/b] - Make the whole display flash white
+params :
+- word : duration
+
+$0042 - [b]loadMapEntities[/b] - Initialize entities
+Important one ! Need to figure out the data format. Should have a sprite index, X/Y/direction, initial actscript ...
+params :
+- long : entity data named address
+
+$0043 - [b]csc43[/b] - UNKNOWN, RELATED TO BLOCK COPY
+To figure out !
+Earl : close door at x/y? Only seen at Hawel's house
+params :
+- word : ?
+- word : ?
+
+$0044 - [b]csc44[/b] - UNKNOWN
+To figure out !
+Earl : Polca... pointer goes to 2nd entity setup
+params :
+- word : entity data named address
+
+$0045 - [b]csc45[/b] - UNKNOWN, RELATED TO CAMERA ADJUST TO PLAYER
+To figure out !
+params :
+- word : ? 
+Earl : 
+00 45 00 xx = ??? bedoe and cliffs before, taros shrine (always 4 bytes)
+This pops up a lot in pre/post battle data, but the last byte doesn't correspond to any map, character, item... 
+and while it's not always the same, it has no noticeable effect as far as I can tell.
+
+$0046 - [b]csc46[/b] - UNKNOWN
+To figure out !
+params :
+- word : ?
+- word : ?
+Earl : 
+00 46 00 aa 00 aa = Character check? (6 bytes)
+This might check that you have a required actor, or if a character is optional whether to display them? 
+Or it might place two actors in proximity to each other? 
+At Hawel's, it's got Bowie and Kazin... 
+For the first New Granseal Castle scene, it apparently has Kiwi and Chester. 
+I may be way off base on this.
+
+$0047 - [b]csc47[/b] - UNKNOWN
+To figure out !
+Earl : 00 47 00 xx 00 yy = open door at x/y? (6 bytes)
+params :
+- word : ?
+- word : ?
+
+$0048 - [b]mapLoad[/b] - Load a map
+Do not display the map yet (for textboxes to appear first like the "one year later" moment)
+params :
+- word : Map index
+- word : Camera initial X
+- word : Camera initial Y
+
+$0049 - [b]csc49[/b] - UNKNOWN
+To figure out !
+params :
+- word : ?
+- word : ?
+- word : ?
+Earl :
+00 49 00 09 00 0B xx xx = ??? (8 bytes)
+Used in nazca ship shootdown sequence, and final room of the ancient tower. 
+In both instances, it immediately follows a map transition (commands 37 and 48).
+
+$004A - [b]fadeInFromBlackHalf[/b] - Half fade in from black
+No params
+
+$004B - [b]fadeOutToBlackHalf[/b] - Half fade out to black
+Maybe used for night time ? To check in intro cutscenes
+No params
+
+$0050 - [b]setEntitySize[/b] - Set entity size ? 
+No idea how and why :D
+Earl : 00 50 00 aa 00 xx = actor shrinks to x amount, reset by updating actscript? (6 bytes)
+params :
+- word : entity index ?
+- word : target size ? But what is this size property ?
+
+$0051 - [b]csc51[/b] - UNKOWN
+To figure out !
+params :
+- word : ?
+Earl :
+00 51 00 aa = force actor into active party (4 bytes)
+Only works if the character has already joined. 
+Will remove the character with the highest ID from the active party to make room. 
+If the character you're trying to add isn't present, it will still remove the high ID character.
+
+$0052 - [b]csc52[/b] - UNKOWN
+To figure out !
+Earl : 00 52 00 aa 00 aa = actor 1 faces actor 2 (6 bytes)
+params :
+- word : ?
+- word : ?
+
+$0053 - [b]csc53[/b] - UNKOWN
+To figure out !
+params :
+- word : ?
+- word : ?
+Earl :
+00 53 00 aa xx xx = determines sprite priority (6 bytes)
+The xx's can be 00 or FF. 
+FF's take priority over 00's... in other words, when two sprites share the same space, 
+the one marked FF will be on top.
+
+$0054 - [b]csc54[/b] - UNKOWN
+To figure out !
+params :
+- word : ?
+- word : ?
+Earl : 
+00 54 00 aa xx xx = places actor in Force list (6 bytes)
+Again, the xx's can be 00 or FF. 
+Characters placed in the Force thusly will be AI controlled. 
+FF is used initially, and after joining properly the command is used again with 00's. 
+I believe that turns off the AI control, but I'm not sure.
+
+$0055 - [b]resetForceBattleStats[/b] - Reset Force members battle stats
+Where is this used ? Why is it needed during a cutscene ?
+No params
+
+$0056 - [b]csc56[/b] - UNKOWN
+To figure out !
+params :
+- word : ?
+Earl :
+00 56 00 aa xx xx = Another follower thing (6 bytes)
+Generally used on maps that don't have same-map transitions. 
+Otherwise similar to 2C. The last two bytes might be sprite priority like in 53. 
+I've seen both 00's and FF's.
+
+$80xx - [b]csWait [/b] - Wait for the time given in parameter.
+1 param : 
+- word : number of frames to wait. (60 frames per second)
+
+$FFFF - [b]csc_end[/b] - Cutscene end
+Stop parsing commands.[/spoiler]
