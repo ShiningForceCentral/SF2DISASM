@@ -1,15 +1,14 @@
------- Data
+Portrait Format :
 
-ROM:1c8000 (l)          Address of portrait address table.
-ROM:1c8004 (table)      Portrait address table.
+[Eye tile entry number][Eye tile entries][Mouth tile entry number][Mouth tile entries][palette][tiles]
 
------- Format
-
-Eye Animation Data
-    - number of entries in eye animation data list (word)
-    - 4 bytes per entry (x, y, new tile idx (word))
-Mouth Animation Data
-    - number of entries in mouth animation data list (word)
-    - 4 bytes per entry (x, y, new tile idx (word))
-Palette (32 bytes)
-Compressed Tile Data (ROM:1e48)
+- Eye/mouth tile entry number : numeric word value
+- Eye/mouth tile entries : 4 bytes per entry
+		- byte 0 : portrait tile X
+		- byte 1 : portrait tile Y
+		- byte 2 : alternative tile X
+		- byte 3 : alternative Y
+	Coordinates start from the upper left corner of portrait.
+	
+- palette : classic 32-byte palette
+- tiles : stack-compressed tiles
