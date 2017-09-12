@@ -1,18 +1,26 @@
 Battle Sprite Format :
 
 
-[Anim speed][?][palette offset][frame offsets][palette][frame]
+[Anim speed][?][palettes offset][frame offsets][palettes][frames]
 
+Anim speed : word value
+
+? : unknown word value
 0010 1111 0010 1001 1 palette, 5 frames
                0100 1p, 6f
-               
 0011 1111 0100 1011 3p, 6f
 
+palettes : classic 32-byte palette format, any number of palettes until first frame offset.
 
+frames : stack-compressed graphics.
+Frame 0 is the idle frame.
+Frame 1 is the idle animation frame, when there's one.
+There can be any number of optional frames. (some great potential to expriment with battlesprite animations here !)
 
 Tile layout : 
-12*12 tiles = 144 tiles per frame
-Each frame composed of 3*3 blocks
+- Allies : 12*12 tiles = 144 tiles per frame
+- Enemies : 16*12 tiles = 192 tiles per frame
+Each frame composed of 3*3 blocks or 4*3 blocks for enemies
 Each block composed of 4*4 tiles 
 
  1  5  9 13 49 53                  
@@ -23,12 +31,11 @@ Each block composed of 4*4 tiles
 18 22 26 30
 19 23 27 31
 20 24 28 32
-33 37 41 45                  . 141 
-34 38 42 46                  . 142 
-35 39 43 47                  . 143 
-36 40 44 48                140 144 
+33 37 41 45                  . 141          . 189
+34 38 42 46                  . 142          . 190
+35 39 43 47                  . 143          . 191
+36 40 44 48                140 144        188 192
 
 
-Frame 0 is the idle frame.
-Frame 1 is the idle animation frame, when there's one.
+
 

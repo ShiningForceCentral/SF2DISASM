@@ -1,9 +1,0 @@
------- Format
-
-Speed of animation
-???
-???
-Offset to start of palette
-Offsets to frames
-Palettes
-Frames
