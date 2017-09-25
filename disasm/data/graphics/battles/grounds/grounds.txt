@@ -1,0 +1,21 @@
+Ground format :
+
+Palettes and Graphics are split into separate entries.
+
+- Palette files contain 3 colors each : 6 bytes.
+Those 3 colors are applied to the battle scene base palette (for UI and grounds)
+Color 0 applied to palette index 3
+Color 1 applied to palette index 4
+Color 2 applied to palette index 8
+
+
+- Graphics files contain tile data only.
+
+Tile layout : 
+48 tiles in 4 blocks of 4*4 tiles.
+
+ 1  5  9 13   17 21 25 29   33 37 41 45  
+ 2  6 10 14   18 22 26 30   34 38 42 46
+ 3  7 11 15   19 23 27 31   35 39 43 47
+ 4  8 12 16   20 24 28 32   36 40 44 48
+
