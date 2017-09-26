@@ -1,0 +1,31 @@
+Weapon Sprite format :
+
+All palettes are stored into a single file.
+Graphics are stored in separate entries : one entry per weapon.
+
+- Palettes file contains 2-color entries.
+Those 2 colors are applied to the battle sprite palette at indexes 14 and 15.
+The weapon sprite also uses the battle sprite's basic colors :
+- 0 : transparency
+- 1 : white
+- 2 : black
+
+
+- Graphics files contain tile data only.
+256 tiles.
+Tile data contains 4 frames every time : one for each angle with which the weapon can be seen.
+Even when the weapon only has one angle (like spears and lances), empty frames exist for other angles.
+
+Tile layout : 
+4 frames of 64 tiles each.
+For each frame, 64 tiles in 4 blocks of 4*4 tiles.
+
+ 1  5  9 13   33 37 41 45  
+ 2  6 10 14   34 38 42 46
+ 3  7 11 15   35 39 43 47
+ 4  8 12 16   36 40 44 48
+
+17 21 25 29   49 53 57 61
+18 22 26 30   50 54 58 62
+19 23 27 31   51 55 59 63
+20 24 28 32   52 56 60 64
