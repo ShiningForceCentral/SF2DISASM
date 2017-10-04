@@ -240,3 +240,4 @@ disasm/data/flags/sf2 flags.txt
 disasm/data/flags/SF2_debug_list.doc
 !disasm/system/debug/
 *.gif
+*.jpg

@@ -1,27 +1,20 @@
------- Animation Entry Format
+------ Ally Battle Sprite Animation Format
 
 Byte 0      number of frames in attack anim
 Byte 1      frame # to start spell anim idx
 Byte 2      spell anim idx to play during attack, FF for none
 Byte 3      whether or not to terminate spell anim when battle sprite anim finishes
-
-Byte 4      weapon sprite frame, idle anim
-Byte 5      weapon sprite z-index, idle anim
-Byte 6      weapon sprite x offset, frame 1 of idle anim
-Byte 7      weapon sprite y offset, frame 1 of idle anim
-Byte 8
-Byte 9
-Byte 10
-Byte 11
-Byte 12
-Byte 13
-Byte 14     weapon sprite x offset, frame 2 of idle anim
-Byte 15     weapon sprite y offset, frame 2 of idle anim
+Byte 4      weapon sprite frame for idle animation frame 1
+Byte 5      weapon sprite z-index for idle animation frame 1
+Byte 6      weapon sprite x offset for idle animation frame 1
+Byte 7      weapon sprite y offset for idle animation frame 1
 
 Frame Entries
+First entry can be idle anim frame 2 if current battle sprite has one.
+(Some battlesprites seem to have an idle frame 2 even when it's identical to idle frame 1 !)
 
-    Byte 0      frame idx
-    Byte 1      number of ticks to display
+    Byte 0      battlesprite frame idx (if value $0F, then keep using battlesprite frame from previous animation frame)
+    Byte 1      number of display frames to display (60 frames per second)
     Byte 2      battle sprite x offset
     Byte 3      battle sprite y offset
     Byte 4      weapon sprite frame (0 = up, going clockwise, up to 3; 0x10 = flip horizontally, 0x20 = flip vertically)
@@ -29,4 +22,4 @@ Frame Entries
     Byte 6      weapon sprite x offset
     Byte 7      weapon sprite y offset
     
-(weapon sprites are displayed at same location as battle sprite)
+Note : Weapon sprites offsets are relative to current battlesprite position.
