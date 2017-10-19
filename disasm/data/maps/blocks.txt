@@ -1,0 +1,20 @@
+
+
+first 14 bits = number of commands
+
+commands :
+
+00 : copy last output tile
+01 : copy following tile from tileset in direction of HFlip.
+100 : copy mapped tile from right tile history map
+101 : copy mapped tile from bottom tile history map
+110 : same as 111 but with same flags as previous output tile (high priority, VFlip and HFlip)
+111 : output value and update right/bottom tile maps. 
+	First 3 bits = High priority, VFlip and HFlip flags
+	Next bit defines offset mode : 
+		0 = relative to previous output tile :
+			- 5 bits for value
+			- 1 bit for sign
+		1 = absolute (9 bits + 1 optional bit)
+			If value >= $180, then value = value * 2 - $180 + next bit 
+
