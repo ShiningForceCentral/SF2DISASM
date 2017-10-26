@@ -1,0 +1,55 @@
+
+
+
+- 64x64=4096 blocks
+
+Stop when 4096 have been output.
+
+Commands :
+- 00 : incremented block value starting from 3
+	Apply flags mask as described below.
+	
+- 01 : count "0" bits until next bit "1" = value length in bits, 
+	then value = value + 2^count
+	then last bit :
+		- 0 = copy section from upper block N times
+		- 1 = copy section from left block N times
+	No writes in stack maps.
+
+- 1 : 
+	customOvr true if 
+		- first command
+		- or after first line with no values in stack maps for left and upper blocks
+		- or next bit = "1" and after first line with no upper stack map value
+	customeOvr false if 
+		- first block line
+		- or after first line with available values in stack maps
+		
+	if !customOvr and next bit = 0 :
+		
+		
+		1 10 : from up stack
+		1 0 : from left stack
+		
+		11 custom value ?
+
+Flag mask application :
+Flag mask applied according to next bits :
+	- 00 : no flag set
+	- 01 : $C000
+	- 100 : $4000
+	- 101 : $8000
+	- 11 : next 6 bits = flag mask XXXX XX00 0000 0000
+
+
+2 block history maps : left and upper blocks.
+4-block history per block value
+
+
+0001 
+01 0001 100 1
+0001
+0001
+0001
+10 01 10 1010 1010 0001 0001
+
