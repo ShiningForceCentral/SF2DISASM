@@ -1,13 +1,11 @@
 
-
-
 - 64x64=4096 blocks
 
 Stop when 4096 have been output.
 
 Commands :
-- 00 : incremented block value starting from 3
-	Apply flags mask as described below.
+- 00 : incremented block value starting from value 2
+	Apply flags as described below.
 	
 - 01 : count "0" bits until next bit "1" = value length in bits, 
 	then value = value + 2^count
@@ -16,40 +14,47 @@ Commands :
 		- 1 = copy section from left block N times
 	No writes in stack maps.
 
-- 1 : 
-	customOvr true if 
-		- first command
-		- or after first line with no values in stack maps for left and upper blocks
-		- or next bit = "1" and after first line with no upper stack map value
-	customeOvr false if 
-		- first block line
-		- or after first line with available values in stack maps
-		
-	if !customOvr and next bit = 0 :
-		
-		
-		1 10 : from up stack
-		1 0 : from left stack
-		
-		11 custom value ?
+- 10 : Get block from left history map
 
-Flag mask application :
-Flag mask applied according to next bits :
-	- 00 : no flag set
-	- 01 : $C000
+- 110 
+or 10 with no left stack : Get block from upper history map
+
+- 111 
+or 11 with no left or upper stack 
+or 1 with no left and upper stack : Get custom block
+
+
+
+Flag application :
+Flags applied according to next bits :
+	- 00 : no flag set (walkable block)
+	- 01 : $8000
 	- 100 : $4000
-	- 101 : $8000
+	- 101 : $C000
 	- 11 : next 6 bits = flag mask XXXX XX00 0000 0000
 
+        0xc000 1100 00 obstr
+        0x4000 0100 00 stairs
+        
+        0x3000 0011 00 barrel
+        0x2c00 0010 11 vase
+        0x2800 0010 10 table
+        0x1c00 0001 11 search
+        0x1800 0001 10 chest
+        0x1400 0001 01 trigger
+        0x1000 0001 00 warp
+        
+        0x0c00 0000 11 hide
+        0x0800 0000 10 show
+        0x0400 0000 01 copy
+        
+        
+        \  0101 00 stairs warp
+         \ 0101 01 stairs trigger
+         / 1001 00 reverse stairs warp
+        /  1001 01 reverse stairs trigger
 
 2 block history maps : left and upper blocks.
 4-block history per block value
-
-
-0001 
-01 0001 100 1
-0001
-0001
-0001
-10 01 10 1010 1010 0001 0001
+4-block stacks are made of strictly different values, including flags.
 
