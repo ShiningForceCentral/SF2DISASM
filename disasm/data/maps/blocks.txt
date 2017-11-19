@@ -18,3 +18,17 @@ commands :
 		1 = absolute (9 bits + 1 optional bit)
 			If value >= $180, then value = value * 2 - $180 + next bit 
 
+
+Production algorithm :
+For each next tile
+	if next tile = previous tile 
+		then produce command 00
+	else if next tile = next tile from tileset with previous tile HFlip direction
+		then produce command 01
+	else if next tile = mapped right tile of previous tile
+		then produce command 100
+	else if next tile = mapped bottom tile of 3rd previous tile
+		then produce command 101
+	else if next tile's flags = previous tile's flags 
+		then produce command 110
+	else produce command 111

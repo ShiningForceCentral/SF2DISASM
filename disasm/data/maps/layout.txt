@@ -15,9 +15,12 @@ Commands :
 	No writes in stack maps.
 
 - 10 : Get block from left history map
+	count "0" bits to get index of block in history stack.
+	if counter reaches current stack length, then get last stack value.
 
 - 110 
 or 10 with no left stack : Get block from upper history map
+	same as left history.
 
 - 111 
 or 11 with no left or upper stack 
@@ -28,11 +31,13 @@ or 1 with no left and upper stack : Get custom block
 Flag application :
 Flags applied according to next bits :
 	- 00 : no flag set (walkable block)
-	- 01 : $8000
-	- 100 : $4000
-	- 101 : $C000
+	- 01 : $8000 (obstructed)
+	- 100 : $4000 (stairs)
+	- 101 : $C000 (reversed stairs)
 	- 11 : next 6 bits = flag mask XXXX XX00 0000 0000
 
+
+				BNC's Caravan flag masks :
         0xc000 1100 00 obstr
         0x4000 0100 00 stairs
         
@@ -41,20 +46,78 @@ Flags applied according to next bits :
         0x2800 0010 10 table
         0x1c00 0001 11 search
         0x1800 0001 10 chest
-        0x1400 0001 01 trigger
-        0x1000 0001 00 warp
+        0x1400 0001 01 trigger OK
+        0x1000 0001 00 warp OK
         
-        0x0c00 0000 11 hide
-        0x0800 0000 10 show
-        0x0400 0000 01 copy
+        0x0c00 0000 11 hide OK
+        0x0800 0000 10 show OK
+        0x0400 0000 01 copy OK
         
+        Observed values in SF2MapLayoutManager : 
+        X  1000 00 obstructed
+        
+        	 0001 00 warp
+        	 
+        	 0001 01 trigger
         
         \  0101 00 stairs warp
          \ 0101 01 stairs trigger
          / 1001 00 reverse stairs warp
         /  1001 01 reverse stairs trigger
+        
+        \  0400 00 stairs
+        /  1100 00 reverse stairs
+        
+        O  0000 10 show
+        
+        /  1000 10 reversed stairs copy
 
 2 block history maps : left and upper blocks.
-4-block history per block value
-4-block stacks are made of strictly different values, including flags.
+4-block history stacks per block value. Those 4-block stacks are made of strictly different values, including flags.
 
+
+
+
+Rewrite algorithm :
+
+- Rewrite blockset 
+Write blocks in order or appearance on the map layout
+Then write remaining blocks not used from original blockset ?
+
+- Rewrite layout
+Until last block is produced
+	check valid commands :
+	- Copy section from : 01 + length + type - 4-n bits
+	  if next block+flags == left block
+	  	then count until next block+flag != left block
+	  	produce command and keep number of copied blocks
+	  if next block+flags == upper block
+	  	then count until next block+flag != upper block
+	  	produce command and keep number of copied blocks
+	- Get block from left history map : 10 + index - 2-7 bits
+		if next block+flags is contained in left block's history stack
+			then produce command
+	- Get block from upper history stack : 10 or 110 + index - 2-8 bits
+		if next block+flags is contained in upper block's history stack
+			then produce command
+				if left block's stack is empty : 10
+					else : 110
+	- Get next block from blockset : 00 flags - 4-5 bits
+	  if next block == next block from blockset
+	  	then produce command					
+	- Custom block : 1 or 11 or 111 + value + flags - 5-n bits
+	  if no other command could be produced
+	  	then produce command
+	  		if left and upper blocks empty : 1
+	  			else if left or upper block empty : 11
+	  			 else : 111
+	  
+	select prioritized command
+	If section copy available with more than 1 block copy
+		then get section copy with most copied blocks
+	else get shortest available command
+	
+	output command
+	
+	if output command != section copy
+		then update history maps
