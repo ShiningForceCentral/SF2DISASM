@@ -31,9 +31,9 @@ or 1 with no left and upper stack : Get custom block
 Flag application :
 Flags applied according to next bits :
 	- 00 : no flag set (walkable block)
-	- 01 : $8000 (obstructed)
+	- 01 : $C000 (obstructed)
 	- 100 : $4000 (stairs)
-	- 101 : $C000 (reversed stairs)
+	- 101 : $8000 (reversed stairs)
 	- 11 : next 6 bits = flag mask XXXX XX00 0000 0000
 
 
@@ -82,7 +82,7 @@ Rewrite algorithm :
 
 - Rewrite blockset 
 Write blocks in order or appearance on the map layout
-Then write remaining blocks not used from original blockset ?
+Then write remaining unused blocks from original blockset
 
 - Rewrite layout
 Until last block is produced
