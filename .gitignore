@@ -241,3 +241,6 @@ disasm/data/flags/SF2_debug_list.doc
 !disasm/system/debug/
 *.gif
 *.jpg
+*.dat
+build/caravan.cfg
+*.gsx
