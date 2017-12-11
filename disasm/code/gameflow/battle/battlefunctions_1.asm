@@ -2110,7 +2110,7 @@ loc_252A6:
 		trap    #SET_FLAG
 		dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 		move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
-                enableSram
+		                enableSram
 		jsr     (SaveGame).l
                 disableSram
 		tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w

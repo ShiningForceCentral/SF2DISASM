@@ -656,8 +656,8 @@ loc_102DA:
 		trap    #SOUND_COMMAND
 		dc.w SFX_MENU_SELECTION
 		bra.w   loc_10328
-; no dpad button was pressed
 loc_102EC:
+		; no dpad button was pressed
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10300
 		moveq   #$FFFFFFFF,d1   ; B pressed, so cancel menu
@@ -678,8 +678,8 @@ loc_10314:
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
 		bra.w   loc_10382
-; dpad button was pressed
 loc_10328:
+		; dpad button was pressed
 		move.w  d1,-(sp)
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0

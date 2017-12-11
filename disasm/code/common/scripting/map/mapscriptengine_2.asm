@@ -11,21 +11,21 @@ ExecuteMapScript:
 		move.l  #byte_FF9004,(dword_FFB1A4).l
 		movem.l d0-a6,-(sp)
 		movea.l a0,a6
-		clr.b   ((AVOID_CUTSCENE_DIALOGS-$1000000)).w
+		clr.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
 loc_47140:
 		btst    #INPUT_A_START_BIT,((P2_INPUT-$1000000)).w
 						; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
 		beq.s   loc_47156
 		tst.b   (DEBUG_MODE_ACTIVATED).l
 		beq.s   loc_47156
-		move.b  #$FF,((AVOID_CUTSCENE_DIALOGS-$1000000)).w
+		move.b  #$FF,((SKIP_CUTSCENE_TEXT-$1000000)).w
 loc_47156:
 		move.w  (a6)+,d0
 		cmpi.w  #$FFFF,d0
 		beq.w   loc_47234
 		tst.w   d0
 		bpl.s   loc_47174
-		tst.b   ((AVOID_CUTSCENE_DIALOGS-$1000000)).w
+		tst.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
 		bne.s   loc_47172       ; if cmd > $8000 and dialogs activated, SLEEP CMD
 		andi.w  #$FF,d0
 		jsr     (Sleep).w       
@@ -155,7 +155,7 @@ csc_doNothing:
 
 csc00_displaySingleTextbox:
 		
-		tst.b   ((AVOID_CUTSCENE_DIALOGS-$1000000)).w
+		tst.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
 		bne.s   loc_47298
 		cmpi.w  #$FFFF,(a6)
 		beq.s   loc_4726A
@@ -226,7 +226,7 @@ loc_472BE:
 
 csc02_displayTextbox:
 		
-		tst.b   ((AVOID_CUTSCENE_DIALOGS-$1000000)).w
+		tst.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
 		bne.s   loc_4732C
 		cmpi.w  #$FFFF,(a6)
 		beq.s   loc_4730E

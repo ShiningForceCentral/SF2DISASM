@@ -10,20 +10,20 @@
 LoadMapLayoutData:
 		
 		movem.l d0-a6,-(sp)
-		lea     (byte_FF6000).l,a4
+		lea     (MAP_LAYOUT_HISTORY_MAP_SIZES).l,a4
 		moveq   #0,d3
 		move.w  #$7F,d0 
 loc_20F6:
+		move.l  d3,(a4)+        ; clear block history maps
 		move.l  d3,(a4)+
 		move.l  d3,(a4)+
 		move.l  d3,(a4)+
-		move.l  d3,(a4)+
-		dbf     d0,loc_20F6
+		dbf     d0,loc_20F6     
 		movea.l a1,a3
 		lea     $2000(a1),a6    ; set a6 as 0x2000 past beginning in RAM (to signify end)
 		clr.w   d3
 		moveq   #2,d7
-		lea     (byte_FF6000).l,a4
+		lea     (MAP_LAYOUT_HISTORY_MAP_SIZES).l,a4
 		moveq   #0,d3
 loc_2114:
 		cmpa.l  a6,a1           ; loop point; compare a1 to a6 to see if we're done
@@ -36,30 +36,31 @@ loc_211E:
 		move.w  (a0)+,d0
 loc_2126:
 		add.w   d0,d0
-		bcs.w   loc_21A6        ; passes on barrel = 0
-		dbf     d3,loc_2134
+		bcs.w   loc_21A6        
+		dbf     d3,loc_2134     
 		moveq   #$F,d3
 		move.w  (a0)+,d0
 loc_2134:
-		add.w   d0,d0
-		bcs.w   loc_214E        ; passes on barrel = 00
+		add.w   d0,d0           ; 0...
+		bcs.w   loc_214E        
 		bsr.w   ReadMapLayoutBarrelForBlockFlags
+						; 00 : Output next block from block set
 		addq.w  #1,d7
-		or.w    d7,d1           ; OR next block idx together with flags
-		bsr.w   sub_2310
-		bsr.w   sub_22F4
+		or.w    d7,d1
+		bsr.w   SaveBlockToLeftStackMap
+		bsr.w   SaveBlockToUpperStackMap
 		move.w  d1,(a1)+
 		bra.s   loc_2114        
 loc_214E:
-		moveq   #$FFFFFFFF,d4   ; barrel = 01
+		moveq   #$FFFFFFFF,d4   ; 01 : Copy section
 		clr.w   d1
 		moveq   #2,d5
 loc_2154:
-		dbf     d3,loc_215C
+		dbf     d3,loc_215C     
 		moveq   #$F,d3
 		move.w  (a0)+,d0
 loc_215C:
-		add.w   d0,d0
+		add.w   d0,d0           ; count "0" bits until next bit "1" = value length in bits
 		dbcs    d4,loc_2154
 		negx.w  d4
 		dbf     d4,loc_216A
@@ -67,11 +68,11 @@ loc_215C:
 loc_216A:
 		lsl.w   d4,d5
 loc_216C:
-		dbf     d3,loc_2174
+		dbf     d3,loc_2174     
 		moveq   #$F,d3
 		move.w  (a0)+,d0
 loc_2174:
-		add.w   d0,d0
+		add.w   d0,d0           ; value = value + 2^count
 		addx.w  d1,d1
 		dbf     d4,loc_216C
 		add.w   d5,d1
@@ -82,38 +83,39 @@ loc_2180:
 		move.w  (a0)+,d0
 loc_2188:
 		add.w   d0,d0
-		bcs.w   loc_219A
+		bcs.w   loc_219A        
 loc_218E:
-		move.w  -$80(a1),(a1)+
-		dbf     d1,loc_218E
+		move.w  -$80(a1),(a1)+  ; 0 = copy section from upper block N times
+		dbf     d1,loc_218E     
 		bra.w   loc_2114        
 loc_219A:
-		move.w  -2(a1),(a1)+
-		dbf     d1,loc_219A
-		bra.w   loc_2114        
+		move.w  -2(a1),(a1)+    ; 1 = copy section from left block N times
+		dbf     d1,loc_219A     
+		bra.w   loc_2114        ; END of 01 : Copy section
 loc_21A6:
-		lea     -2(a1),a2
+		lea     -2(a1),a2       ; 1... get left tile address
 		cmpa.l  a3,a2
 		bcc.s   loc_21B4
 		clr.w   d1
 		bra.w   loc_21BA
 loc_21B4:
 		move.w  (a2),d1
-		andi.w  #$3FF,d1
+		andi.w  #$3FF,d1        ; get left tile value
 loc_21BA:
 		move.w  d1,d4
-		move.b  (a4,d1.w),d1
+		move.b  (a4,d1.w),d1    ; left tile stack size
 		ext.w   d1
 		dbf     d1,loc_21C8
-		bra.s   loc_2208
+		bra.s   loc_2208        ; if no left block stack, then this is not a "10" command, go check for 11 or 1
 loc_21C8:
 		dbf     d3,loc_21D0
 		moveq   #$F,d3
 		move.w  (a0)+,d0
 loc_21D0:
 		add.w   d0,d0
-		bcs.w   loc_2208
-		lea     (word_FF6800).l,a5
+		bcs.w   loc_2208        
+		lea     (FF6800_MAP_LOADING_LEFT_HISTORY_MAP).l,a5
+						; 10 : get block from left history map
 		bra.w   loc_21F0
 loc_21E0:
 		dbf     d3,loc_21E8
@@ -121,19 +123,21 @@ loc_21E0:
 		move.w  (a0)+,d0
 loc_21E8:
 		add.w   d0,d0
-		bcs.w   loc_21F4
+		bcs.w   loc_21F4        ; get stack position :
+														; number of bits to parse = current stack size
+														; +1 per bit 0, stop at first bit 1
 		addq.w  #2,a5
 loc_21F0:
 		dbf     d1,loc_21E0
 loc_21F4:
 		lsl.w   #3,d4
 		move.w  (a5,d4.w),d1
-		bsr.w   sub_2310
-		bsr.w   sub_22F4
-		move.w  d1,(a1)+
+		bsr.w   SaveBlockToLeftStackMap
+		bsr.w   SaveBlockToUpperStackMap
+		move.w  d1,(a1)+        ; END of 10 : Get block from left history map
 		bra.w   loc_2114        
 loc_2208:
-		lea     -$80(a1),a2
+		lea     -$80(a1),a2     ; 11, or 1 with no stack for left block : check upper block history stack
 		cmpa.l  a3,a2
 		bcc.s   loc_2216
 		clr.w   d1
@@ -147,15 +151,16 @@ loc_221C:
 		move.b  (a4,d1.w),d1
 		ext.w   d1
 		dbf     d1,loc_222E
-		bra.s   loc_226E
+		bra.s   loc_226E        ; no upper stack
 loc_222E:
 		dbf     d3,loc_2236
 		moveq   #$F,d3
 		move.w  (a0)+,d0
 loc_2236:
 		add.w   d0,d0
-		bcs.w   loc_226E
-		lea     (dword_FF8800).l,a5
+		bcs.w   loc_226E        ; 111
+		lea     (FF8800_MAP_LOADING_UPPER_HISTORY_MAP).l,a5
+						; 110 : Get block from upper block history map
 		bra.w   loc_2256
 loc_2246:
 		dbf     d3,loc_224E
@@ -170,12 +175,12 @@ loc_2256:
 loc_225A:
 		lsl.w   #3,d4
 		move.w  (a5,d4.w),d1
-		bsr.w   sub_2310
-		bsr.w   sub_22F4
-		move.w  d1,(a1)+
+		bsr.w   SaveBlockToLeftStackMap
+		bsr.w   SaveBlockToUpperStackMap
+		move.w  d1,(a1)+        ; END of 11 : Get block from upper history map
 		bra.w   loc_2114        
 loc_226E:
-		move.w  d7,d1
+		move.w  d7,d1           ; 111 or 11 with no upper stack or 1 with no left and upper stacks
 		clr.w   d4
 loc_2272:
 		dbf     d3,loc_227A
@@ -183,13 +188,13 @@ loc_2272:
 		move.w  (a0)+,d0
 loc_227A:
 		add.w   d0,d0
-		addx.w  d4,d4
+		addx.w  d4,d4           ; number of bits to get = bit length of block set cursor
 		lsr.w   #1,d1
 		bne.s   loc_2272
 		bsr.w   ReadMapLayoutBarrelForBlockFlags
 		or.w    d4,d1
-		bsr.w   sub_2310
-		bsr.w   sub_22F4
+		bsr.w   SaveBlockToLeftStackMap
+		bsr.w   SaveBlockToUpperStackMap
 		move.w  d1,(a1)+
 		bra.w   loc_2114        
 
@@ -211,35 +216,35 @@ ReadMapLayoutBarrelForBlockFlags:
 		move.w  (a0)+,d0
 loc_229E:
 		add.w   d0,d0
-		bcs.w   loc_22B6        ; passes on barrel = 000
-		clr.w   d1
+		bcs.w   loc_22B6        
+		clr.w   d1              ; 0...
 		dbf     d3,loc_22AE
 		moveq   #$F,d3
 		move.w  (a0)+,d0
 loc_22AE:
 		add.w   d0,d0
-		roxr.w  #1,d1           ; barrel = 0001
+		roxr.w  #1,d1           ; 00=0x0000 ; 01=0xC000
 		asr.w   #1,d1
 		rts
 loc_22B6:
-		dbf     d3,loc_22BE     ; barrel = 001
+		dbf     d3,loc_22BE     ; 1...
 		moveq   #$F,d3
 		move.w  (a0)+,d0
 loc_22BE:
 		add.w   d0,d0
-		bcs.w   loc_22D8        ; passes on barrel = 0010
-		clr.w   d1
+		bcs.w   loc_22D8        
+		clr.w   d1              ; 10...
 		dbf     d3,loc_22CE
 		moveq   #$F,d3
 		move.w  (a0)+,d0
 loc_22CE:
 		add.w   d0,d0
-		addx.w  d1,d1
+		addx.w  d1,d1           ; 100=0x4000 ; 101=0x8000
 		addq.w  #1,d1
 		ror.w   #2,d1
 		rts
 loc_22D8:
-		move.l  d2,-(sp)        ; barrel = 0011
+		move.l  d2,-(sp)        ; 11 : get next 6 bits
 		moveq   #5,d2
 		clr.w   d1
 loc_22DE:
@@ -259,57 +264,59 @@ loc_22E6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22F4:
-		lea     -$80(a1),a2
+SaveBlockToUpperStackMap:
+		
+		lea     -$80(a1),a2     ; upper block value
 		cmpa.l  a3,a2
 		bcc.s   loc_2302
 		clr.w   d4
-		bra.w   loc_2308
+		bra.w   loc_2308        
 loc_2302:
 		move.w  (a2),d4
 		andi.w  #$3FF,d4
 loc_2308:
-		ori.w   #$400,d4
+		ori.w   #$400,d4        ; get upper block value + 0x0400 for upper blocks offset
 		bra.w   loc_2324
 
-	; End of function sub_22F4
+	; End of function SaveBlockToUpperStackMap
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2310:
+SaveBlockToLeftStackMap:
+		
 		lea     -2(a1),a2
-		cmpa.l  a3,a2           ; check that a block-to-the-left exists (not left-most block)
-		bcc.s   loc_231E        
-		clr.w   d4              ; left-most block, so set block idx to 0
+		cmpa.l  a3,a2
+		bcc.s   loc_231E
+		clr.w   d4
 		bra.w   loc_2324
 loc_231E:
-		move.w  (a2),d4         ; copy last block idx (to the left of current block) to d4
-		andi.w  #$3FF,d4
+		move.w  (a2),d4
+		andi.w  #$3FF,d4        ; get left block value
 loc_2324:
 		lea     (a4,d4.w),a5
 		move.b  (a5),d2
 		ext.w   d2
 		move.w  d2,d5
 		lsl.w   #3,d4
-		lea     (word_FF6800).l,a2
+		lea     (FF6800_MAP_LOADING_LEFT_HISTORY_MAP).l,a2
 		adda.w  d4,a2
 		dbf     d5,loc_2344
-		move.b  #1,(a5)
+		move.b  #1,(a5)         ; when first value of entry stack
 		move.w  d1,(a2)
 		rts
 loc_2344:
 		move.w  d1,d4
 loc_2346:
 		move.w  (a2),d6
-		move.w  d4,(a2)+
-		cmp.w   d6,d1
+		move.w  d4,(a2)+        ; push current value on top of stack
+		cmp.w   d6,d1           ; if existing stack value = saved value, do nothing else
 		beq.s   return_2370
 loc_234E:
 		dbf     d5,loc_235C
-		subq.w  #4,d2
-		bcc.s   return_235A
-		move.w  d6,(a2)
+		subq.w  #4,d2           ; if last stack value to process
+		bcc.s   return_235A     ; if stack already maxed to 4, do nothing else
+		move.w  d6,(a2)         ; else, push previous value and increment stack size
 		addq.b  #1,(a5)
 return_235A:
 		rts
@@ -317,25 +324,33 @@ loc_235C:
 		move.w  (a2),d4
 		move.w  d6,(a2)+
 		cmp.w   d4,d1
-		beq.s   return_2370
+		beq.s   return_2370     ; if existing stack value = saved value, do nothing else
 		dbf     d5,loc_2346
 		subq.w  #4,d2
 		bcc.s   return_2370
-		move.w  d4,(a2)
+		move.w  d4,(a2)         ; if stack maxed to 4, do nothing else
 		addq.b  #1,(a5)
 return_2370:
 		rts
 
-	; End of function sub_2310
+	; End of function SaveBlockToLeftStackMap
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2372:
+; decompress map blocks ?
+; a0 : input ROM block data
+; a1 : output RAM data
+
+LoadMapBlocks:
+		
 		movem.l d0-a6,-(sp)
-		lea     (word_FF6800).l,a2
+		lea     (FF6800_MAP_LOADING_LEFT_HISTORY_MAP).l,a2
 		clr.w   d4
-		move.w  #$100,d0
+		move.w  #$100,d0        ; First 3 blocks are : 
+														; - empty
+														; - closed chest
+														; - open chest
 		move.w  d0,(a1)+
 		move.w  d0,(a1)+
 		move.w  d0,(a1)+
@@ -345,24 +360,21 @@ sub_2372:
 		move.w  d0,(a1)+
 		move.w  d0,(a1)+
 		move.w  d0,(a1)+
-		move.w  #$32E,(a1)+
-		move.w  #$32F,(a1)+
-		move.w  #$B2E,(a1)+
-loc_23A0:
+		move.w  #$32E,(a1)+     ; Chest block data.
+		move.w  #$32F,(a1)+     ; This implies that chest tiles have to be in 5th map tileset in following positions.
+		move.w  #$B2E,(a1)+     ; VDP RAM base offset : 0x100
 		move.w  #$33E,(a1)+
 		move.w  #$33F,(a1)+
 		move.w  #$B3E,(a1)+
 		move.w  #$34E,(a1)+
 		move.w  #$34F,(a1)+
 		move.w  #$B4E,(a1)+
-loc_23B8:
 		move.w  #$32C,(a1)+
 		move.w  #$32D,(a1)+
 		move.w  #$B2C,(a1)+
 		move.w  #$33C,(a1)+
 		move.w  #$33D,(a1)+
 		move.w  #$B3C,(a1)+
-loc_23D0:
 		move.w  #$34E,(a1)+
 		move.w  #$34F,(a1)+
 		move.w  #$B4E,(a1)+
@@ -378,14 +390,14 @@ loc_23D0:
 		addi.w  #$10,d4
 		move.l  d0,d5
 		swap    d5
-		andi.w  #$3FFF,d5
-		bra.s   loc_240A
+		andi.w  #$3FFF,d5       ; first 14 bits = number of commands
+		bra.s   loc_240A        
 loc_2402:
 		move.w  #$3FFF,d5
 		ror.w   #2,d0
 		and.w   d0,d5
 loc_240A:
-		dbf     d5,loc_2414
+		dbf     d5,loc_2414     ; loop while commands remain
 		movem.l (sp)+,d0-a6
 		rts
 loc_2414:
@@ -394,7 +406,7 @@ loc_2414:
 		move.w  (a0)+,d0
 loc_241C:
 		add.w   d0,d0
-		bcs.w   loc_244C
+		bcs.w   loc_244C        
 		dbf     d4,loc_242A
 		moveq   #$F,d4
 		move.w  (a0)+,d0
@@ -402,63 +414,62 @@ loc_242A:
 		add.w   d0,d0
 loc_242C:
 		bcs.w   loc_2436
-		move.w  -2(a1),(a1)+
-		bra.s   loc_240A
+		move.w  -2(a1),(a1)+    ; 00 : repeat last output tile
+		bra.s   loc_240A        
 loc_2436:
 		move.w  -2(a1),d1
-		btst    #$B,d1
+		btst    #$B,d1          ; 01 : output last tile's previous or next tile in tileset, according to last tiles direction
 		bne.s   loc_2446
-		addq.w  #1,d1
+		addq.w  #1,d1           ; if HFlip clear, get next tile in tileset
 		move.w  d1,(a1)+
-		bra.s   loc_240A
+		bra.s   loc_240A        
 loc_2446:
 		subq.w  #1,d1
-		move.w  d1,(a1)+
-		bra.s   loc_240A
+		move.w  d1,(a1)+        ; if HFlip set, get previous tile in tileset
+		bra.s   loc_240A        
 loc_244C:
-		dbf     d4,loc_2454
+		dbf     d4,loc_2454     ; 1...
 		moveq   #$F,d4
 		move.w  (a0)+,d0
 loc_2454:
 		add.w   d0,d0
-		bcs.w   loc_249E
-		dbf     d4,loc_2462
+		bcs.w   loc_249E        
+		dbf     d4,loc_2462     
 		moveq   #$F,d4
 		move.w  (a0)+,d0
 loc_2462:
-		add.w   d0,d0
-		bcs.w   loc_2480
-		move.w  -2(a1),d1
+		add.w   d0,d0           ; 10...
+		bcs.w   loc_2480        
+		move.w  -2(a1),d1       ; 100 : get next right tile from map
 		move.w  d1,d2
 		andi.w  #$3FF,d1
 		andi.w  #$800,d2
 		add.w   d1,d1
 		or.w    d2,d1
 		move.w  (a2,d1.w),(a1)+
-		bra.s   loc_240A
+		bra.s   loc_240A        
 loc_2480:
-		move.w  -6(a1),d1
+		move.w  -6(a1),d1       ; 101 : get next bottom tile from map
 		move.w  d1,d2
 		andi.w  #$3FF,d1
 		andi.w  #$800,d2
 		ori.w   #$1000,d2
 		add.w   d1,d1
 		or.w    d2,d1
-loc_2496:
 		move.w  (a2,d1.w),(a1)+
-		bra.w   loc_240A
+		bra.w   loc_240A        
 loc_249E:
-		dbf     d4,loc_24A6
+		dbf     d4,loc_24A6     ; 11...
 		moveq   #$F,d4
 		move.w  (a0)+,d0
 loc_24A6:
 		add.w   d0,d0
-		bcs.w   loc_24B8
-		move.w  -2(a1),d7
-		andi.w  #$9800,d7
+		bcs.w   loc_24B8        
+		move.w  -2(a1),d7       ; 110
+		andi.w  #$9800,d7       ; keep same flags as previous output tile
 		bra.w   loc_24E0
 loc_24B8:
-		clr.w   d7
+		clr.w   d7              ; 111
 		dbf     d4,loc_24C2
 		moveq   #$F,d4
 		move.w  (a0)+,d0
@@ -471,11 +482,11 @@ loc_24C2:
 loc_24CE:
 		add.w   d0,d0
 		addx.w  d7,d7
-		dbf     d4,loc_24DA
+		dbf     d4,loc_24DA     
 		moveq   #$F,d4
 		move.w  (a0)+,d0
 loc_24DA:
-		add.w   d0,d0
+		add.w   d0,d0           ; next 3 bits are used to define d7 (high priority, VFlip and HFlip)
 		addx.w  d7,d7
 		ror.w   #5,d7
 loc_24E0:
@@ -484,8 +495,8 @@ loc_24E0:
 		move.w  (a0)+,d0
 loc_24E8:
 		add.w   d0,d0
-		bcc.w   loc_253C
-		subi.w  #9,d4
+		bcc.w   loc_253C        
+		subi.w  #9,d4           ; if 4th bit = 1, then d3 = next 9 bits
 		bcc.s   loc_2514
 		addi.w  #9,d4
 		rol.l   d4,d0
@@ -505,7 +516,7 @@ loc_2514:
 		and.w   d0,d3
 loc_251C:
 		cmpi.w  #$180,d3
-		bcs.s   loc_2532
+		bcs.s   loc_2532        
 		dbf     d4,loc_252A
 		moveq   #$F,d4
 		move.w  (a0)+,d0
@@ -514,11 +525,11 @@ loc_252A:
 		addx.w  d3,d3
 		subi.w  #$180,d3
 loc_2532:
-		addi.w  #$100,d3
+		addi.w  #$100,d3        ; d3 = tile offset in VDP RAM
 		or.w    d7,d3
-		bra.w   loc_257A
+		bra.w   loc_257A        
 loc_253C:
-		subq.w  #5,d4
+		subq.w  #5,d4           ; if 4th bit = 0, take next 5 bits only, instead of 9
 		bcc.s   loc_255C
 		addq.w  #5,d4
 		rol.l   d4,d0
@@ -549,13 +560,13 @@ loc_2570:
 		andi.w  #$7FF,d3
 		or.w    d7,d3
 loc_257A:
-		move.w  -2(a1),d1
+		move.w  -2(a1),d1       ; get previous tile
 		move.w  d1,d2
-		andi.w  #$3FF,d1
-		andi.w  #$800,d2
+		andi.w  #$3FF,d1        ; d1 = offset
+		andi.w  #$800,d2        ; d2 = HFlip
 		add.w   d1,d1
 		or.w    d2,d1
-		move.w  d3,(a2,d1.w)
+		move.w  d3,(a2,d1.w)    ; update map of next right tile value
 		move.w  -6(a1),d1
 		move.w  d1,d2
 		andi.w  #$3FF,d1
@@ -563,11 +574,11 @@ loc_257A:
 		ori.w   #$1000,d2
 		add.w   d1,d1
 		or.w    d2,d1
-		move.w  d3,(a2,d1.w)
-		move.w  d3,(a1)+
-		bra.w   loc_240A
+		move.w  d3,(a2,d1.w)    ; update map of next bottom tile value
+		move.w  d3,(a1)+        ; output tile value
+		bra.w   loc_240A        
 
-	; End of function sub_2372
+	; End of function LoadMapBlocks
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1065,7 +1076,7 @@ loc_2B20:
 loc_2B34:
 		tst.b   (a5)+
 		blt.s   loc_2B4C
-		lea     (FF0000_RAM_START).l,a0; something to do with tile pixel data
+		lea     (FF0000_RAM_START).l,a0
 		lea     ($4000).w,a1
 		move.w  #$800,d0
 		moveq   #2,d1
@@ -1083,7 +1094,7 @@ loc_2B60:
 		bsr.w   sub_10DC        
 loc_2B64:
 		tst.b   (a5)+
-		blt.s   loc_2B7C
+		blt.s   loc_2B7C        
 loc_2B68:
 		lea     (FF2000_LOADING_SPACE).l,a0
 		lea     ($6000).w,a1
@@ -1091,7 +1102,7 @@ loc_2B68:
 		moveq   #2,d1
 		bsr.w   sub_10DC        
 loc_2B7C:
-		bsr.w   sub_2D58
+		bsr.w   sub_2D58        ; load blocks and layout ?
 loc_2B80:
 		movea.l (a5)+,a4        ; move map properties address to A4
 loc_2B82:
@@ -1282,7 +1293,7 @@ loc_2CF6:
 sub_2D58:
 		movea.l (a5)+,a0
 		lea     (FF2000_LOADING_SPACE).l,a1
-		bsr.w   sub_2372
+		bsr.w   LoadMapBlocks   ; load blocks ?
 		movea.l (a5)+,a0
 		lea     (FF0000_RAM_START).l,a1
 		bsr.w   LoadMapLayoutData

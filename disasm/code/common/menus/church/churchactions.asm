@@ -467,7 +467,7 @@ loc_20FE6:
 		move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
 		trap    #SET_FLAG
 		dc.w $18F               ; set after first battle's cutscene OR first save? Checked at witch screens
-                enableSram
+		                enableSram
 		jsr     (SaveGame).w
                 disableSram
 		trap    #SOUND_COMMAND

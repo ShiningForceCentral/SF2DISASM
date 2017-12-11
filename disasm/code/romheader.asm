@@ -1,8 +1,8 @@
 
 ; ASM FILE code\romheader.asm :
 ; 0x0..0x200 : ROM Header
-; File Name   : D:\SEGADEV\IDB\SF2\sf2.bin
-InitStack:      dc.l InitStack          ; Initial Stack
+InitStack:      ; File Name   : D:\SEGADEV\IDB\SF2\sf2.bin
+		dc.l InitStack          ; Initial Stack
 p_Start:        dc.l Start              ; Start Address
 		dc.l Int_OtherError     ; Bus Error
 		dc.l Int_AdressError    ; Address Error

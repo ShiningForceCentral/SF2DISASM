@@ -98,7 +98,7 @@ loc_1808C:
 		moveq   #$3F,d0 
 		jsr     (InitSprites).w 
 		jsr     (sub_19B0).w
-		bsr.w   sub_19884       
+		bsr.w   InitializeBattleScenePalettes
 		lea     (byte_FFC000).l,a0
 		lea     (byte_FFE000).l,a1
 		move.w  #$1FF,d0
@@ -2611,7 +2611,8 @@ loc_19880:
 
 ; clears plt 1-2 and 1-2bis, sets plt 3bis
 
-sub_19884:
+InitializeBattleScenePalettes:
+		
 		lea     ((PALETTE_1_BIS-$1000000)).w,a0
 		lea     ((PALETTE_1-$1000000)).w,a1
 		moveq   #$1F,d0
@@ -2619,7 +2620,7 @@ loc_1988E:
 		clr.l   (a0)+
 		clr.l   (a1)+
 		dbf     d0,loc_1988E
-		lea     plt_198A8(pc), a0
+		lea     plt_BattleSceneBasePalette(pc), a0
 		lea     ((PALETTE3_BIS-$1000000)).w,a1
 		moveq   #7,d0
 loc_198A0:
@@ -2627,24 +2628,11 @@ loc_198A0:
 		dbf     d0,loc_198A0
 		rts
 
-	; End of function sub_19884
+	; End of function InitializeBattleScenePalettes
 
-plt_198A8:      dc.w 0                  ; used on plt 3bis at battlescene init
-		dc.w $EEE
-		dc.w 0
-		dc.w 0
-		dc.w 0
-		dc.w $4A0
-		dc.w $C64
-		dc.w $48E
-		dc.w 0
-		dc.w $EC8
-		dc.w $22C
-		dc.w $4CE
-		dc.w $48
-		dc.w $DB0
-		dc.w $E50
-		dc.w $820
+plt_BattleSceneBasePalette:
+		incbin "data/graphics/battles/plt_battlescenebasepalette.bin"
+						; Base palette for battlescene UI and ground
 
 ; =============== S U B R O U T I N E =======================================
 

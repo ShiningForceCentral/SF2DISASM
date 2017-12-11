@@ -33,8 +33,7 @@ Address 3   Areas
     Byte 1d     music to play
   Section ends with value $FFFF. 
     
-Address 4   Flag Events
-
+Address 4   Flag Events : block copies triggered by a defined flag
     Byte 00-01  flag
     Byte 02     top-left X coord of source
     Byte 03     top-left Y coord of source
@@ -42,8 +41,19 @@ Address 4   Flag Events
     Byte 05     height to copy
     Byte 06     top-left X coord of dest
     Byte 07     top-left Y coord of dest
+  Ends with $FFFF
 
-Address 5   Step Events
+Address 5   Step Events : block copies triggered by stepping on a defined block.
+    Byte 00  	Trigger X
+    Byte 01     Trigger Y
+    Byte 02     Source X
+    Byte 03     Source Y
+    Byte 04     Width
+    Byte 05     Height
+    Byte 06     Dest X
+    Byte 07     Dest Y
+  Ends with $FFFF
+  
 Address 6   Roof Events (x trig coord, y trig coord, x copy coord, y copy coord, width, height, x dest, y dest) - copy tiles to hide roof?
 Address 7   Warp Events
 Address 8   Chest Items (4 bytes each (x, y, flag, item idx), terminated with FFFF)
