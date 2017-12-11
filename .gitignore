@@ -244,3 +244,4 @@ disasm/data/flags/SF2_debug_list.doc
 *.dat
 build/caravan.cfg
 *.gsx
+*.tsx
