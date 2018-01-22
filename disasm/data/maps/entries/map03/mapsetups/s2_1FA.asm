@@ -197,10 +197,10 @@ return_512B8:
 
 	; End of function sub_51256
 
-cs_512BA:       setFacing $6,$3         ; 0023 SET ENTITY FACING 6 3
-		setActscript $6,$FF,eas_Jump; 0015 SET ACTSCRIPT 6 FF 45E44
-		setActscript $6,$FF,eas_Jump; 0015 SET ACTSCRIPT 6 FF 45E44
-		setActscript $6,$FF,eas_Jump; 0015 SET ACTSCRIPT 6 FF 45E44
-		join $6                 ; 0008 JOIN FORCE 6
-		addNewFollower $6       ; 0056 SOMETHING WITH AN ENTITY 6
+cs_512BA:       setFacing $6,$3
+		setActscript $6,$FF,eas_Jump
+		setActscript $6,$FF,eas_Jump
+		setActscript $6,$FF,eas_Jump
+		join $6
+		addNewFollower $6
 		csc_end

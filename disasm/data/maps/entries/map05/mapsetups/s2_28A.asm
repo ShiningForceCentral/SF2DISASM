@@ -82,7 +82,7 @@ sub_51AC2:
 
 	; End of function sub_51AC2
 
-cs_51B14:       followEntity $4,$0,$2   ; 002C FOLLOW ENTITY 4 0 2
+cs_51B14:       followEntity $4,$0,$2
 		csc_end
 
 ; =============== S U B R O U T I N E =======================================

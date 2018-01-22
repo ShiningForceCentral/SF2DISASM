@@ -22,70 +22,69 @@ return_51740:
 
 	; End of function ms_map4_InitFunction
 
-cs_51742:       entityPosDir $80,$0,$0,$0; 0019 SET ENTITY POS AND FACING 80 0 0 0
-		entityPosDir $81,$0,$0,$0; 0019 SET ENTITY POS AND FACING 81 0 0 0
+cs_51742:       entityPosDir $80,$0,$0,$0
+		entityPosDir $81,$0,$0,$0
 		csc_end
-cs_51750:       textCursor $2CB         ; 0004 INIT TEXT CURSOR 2CB : "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
-		entityPosDir $0,$1D,$4,$3; 0019 SET ENTITY POS AND FACING 0 1D 4 3
-		entityPosDir $1F,$1C,$3,$3; 0019 SET ENTITY POS AND FACING 1F 1C 3 3
-		entityPosDir $1E,$1D,$3,$3; 0019 SET ENTITY POS AND FACING 1E 1D 3 3
-		entityPosDir $9F,$1E,$3,$3; 0019 SET ENTITY POS AND FACING 9F 1E 3 3
-		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
-		fadeInB                 ; 0039 FADE IN FROM BLACK
+cs_51750:       textCursor $2CB
+		entityPosDir $0,$1D,$4,$3
+		entityPosDir $1F,$1C,$3,$3
+		entityPosDir $1E,$1D,$3,$3
+		entityPosDir $9F,$1E,$3,$3
+		setQuake $1
+		fadeInB
 		csWait $1E
-		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
+		setQuake $1
 		nextSingleText $0,$80   ; "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
-		moveEntity $1F,$FF,$3,$1; 002D MOVE ENTITY 1F FF 3 1
+		moveEntity $1F,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$1F   ; "You didn't escape?{N}Why are you here?{W1}"
 		nextSingleText $0,$80   ; "We've been waiting for you.{N}Chasms are appearing in the{N}ground.{W2}{N}Everybody is on the ship{N}to avoid falling into a{N}hole.{W1}"
-		setFacing $1F,$0        ; 0023 SET ENTITY FACING 1F 0
+		setFacing $1F,$0
 		nextSingleText $0,$1F   ; "Thank you.  {LEADER},{N}hurry to the harbor.{W1}"
 		nextSingleText $0,$80   ; "Wooooo!{N}Help! Heeeeelp....{W1}"
-		setFacing $1F,$3        ; 0023 SET ENTITY FACING 1F 3
-		customActscript $80,$FF ; 0014 SET MANUAL ACTSCRIPT 80
+		setFacing $1F,$3
+		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$4 Y=$4
 		dc.b 4
 		dc.b 4
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		customActscript $81,$FF ; 0014 SET MANUAL ACTSCRIPT 81
+		customActscript $81,$FF
 		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
 		dc.b 8
 		dc.b 8
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		moveEntity $80,$0,$3,$1 ; 002D MOVE ENTITY 80 0 3 1
+		moveEntity $80,$0,$3,$1
 		endMove $8080
-		moveEntity $81,$0,$0,$1 ; 002D MOVE ENTITY 81 0 0 1
+		moveEntity $81,$0,$0,$1
 		endMove $8080
-		playSound SFX_BIG_DOOR_RUMBLE; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
+		playSound SFX_BIG_DOOR_RUMBLE
+		setQuake $3
 		csWait $1E
-		setBlocks $33,$12,$B,$7,$18,$3; 0034 SET BLOCKS 3312 B07 1803
+		setBlocks $33,$12,$B,$7,$18,$3
 		csWait $A
-		setBlocks $33,$19,$B,$7,$18,$3; 0034 SET BLOCKS 3319 B07 1803
+		setBlocks $33,$19,$B,$7,$18,$3
 		csWait $A
-		setBlocks $33,$20,$B,$7,$18,$3; 0034 SET BLOCKS 3320 B07 1803
+		setBlocks $33,$20,$B,$7,$18,$3
 		csWait $A
-		setActscript $80,$0,eas_51840; 0015 SET ACTSCRIPT 80 0 51840
+		setActscript $80,$0,eas_51840
 		csWait $5
-		setActscript $81,$FF,eas_51840; 0015 SET ACTSCRIPT 81 FF 51840
-		playSound SFX_BIG_DOOR_RUMBLE; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		setBlocks $33,$0,$5,$4,$1B,$0; 0034 SET BLOCKS 3300 504 1B00
+		setActscript $81,$FF,eas_51840
+		playSound SFX_BIG_DOOR_RUMBLE
+		setBlocks $33,$0,$5,$4,$1B,$0
 		csWait $A
-		setBlocks $33,$4,$5,$4,$1B,$0; 0034 SET BLOCKS 3304 504 1B00
+		setBlocks $33,$4,$5,$4,$1B,$0
 		csWait $A
-		setBlocks $33,$8,$5,$4,$1B,$0; 0034 SET BLOCKS 3308 504 1B00
+		setBlocks $33,$8,$5,$4,$1B,$0
 		csWait $1E
-		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
+		setQuake $1
 		csWait $1E
-		setFacing $1F,$0        ; 0023 SET ENTITY FACING 1F 0
+		setFacing $1F,$0
 		nextSingleText $0,$1F   ; "That's too cruel....{N}{W2}{LEADER}, go to the{N}harbor from the east side.{N}It's safer.{W1}"
 		setActscript $1F,$0,eas_Follower1
-						; 0015 SET ACTSCRIPT 1F 0 44F2E
 		csc_end
 eas_51840:      dc.w $10                ; 0010 SET SPEED X=$0 Y=$0
 		dc.b 0

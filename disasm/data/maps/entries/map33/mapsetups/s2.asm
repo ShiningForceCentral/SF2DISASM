@@ -144,10 +144,10 @@ return_5A826:
 
 	; End of function sub_5A7F0
 
-cs_5A828:       setBlocks $11,$D,$1,$1,$9,$5; 0034 SET BLOCKS 110D 101 905
-		textCursor $76F         ; 0004 INIT TEXT CURSOR 76F : "{LEADER} decides to{N}take the fairy with him.{W1}"
+cs_5A828:       setBlocks $11,$D,$1,$1,$9,$5
+		textCursor $76F
 		nextSingleText $FF,$FF  ; "{LEADER} decides to{N}take the fairy with him.{W1}"
-		followEntity $82,$1F,$2 ; 002C FOLLOW ENTITY 82 1F 2
+		followEntity $82,$1F,$2
 		csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -251,103 +251,103 @@ return_5A8C8:
 
 	; End of function sub_5A8A8
 
-cs_5A8CA:       textCursor $773         ; 0004 INIT TEXT CURSOR 773 : "I'm {NAME;14}, a knight.{N}I was looking for a magic{N}sword.{W2}"
+cs_5A8CA:       textCursor $773
 		nextText $0,$E          ; "I'm {NAME;14}, a knight.{N}I was looking for a magic{N}sword.{W2}"
 		nextText $0,$E          ; "I would do anything for{N}Mr. Creed!  Please choose me.{W1}"
-		yesNo                   ; 0011 STORY YESNO PROMPT
+		yesNo
 		jumpIfFlagSet $59,cs_5A8E6; YES/NO prompt answer
 		nextSingleText $0,$E    ; "What a pity...then, I wish{N}happiness to all of you.{W1}"
 		csc_end
-cs_5A8E6:       join $E                 ; 0008 JOIN FORCE E
+cs_5A8E6:       join $E
 		setF $313               ; ???
-		setActscript $10,$0,eas_463AE; 0015 SET ACTSCRIPT 10 0 463AE
-		setActscript $11,$0,eas_463AE; 0015 SET ACTSCRIPT 11 0 463AE
-		setActscript $F,$FF,eas_463AE; 0015 SET ACTSCRIPT F FF 463AE
-		addNewFollower $E       ; 0056 SOMETHING WITH AN ENTITY E
+		setActscript $10,$0,eas_463AE
+		setActscript $11,$0,eas_463AE
+		setActscript $F,$FF,eas_463AE
+		addNewFollower $E
 		csc_end
-cs_5A90E:       textCursor $780         ; 0004 INIT TEXT CURSOR 780 : "I really want to find the{N}legendary magic sword....{W2}"
+cs_5A90E:       textCursor $780
 		nextText $0,$E          ; "I really want to find the{N}legendary magic sword....{W2}"
 		nextText $0,$E          ; "But I can't do that if I'm{N}stuck here.{W2}{N}May I join your force?{W1}"
-		yesNo                   ; 0011 STORY YESNO PROMPT
+		yesNo
 		jumpIfFlagSet $59,cs_5A92A; YES/NO prompt answer
 		nextSingleText $0,$E    ; "No?  Then I'll continue my{N}search for the legendary{N}magic sword alone.{W1}"
 		csc_end
-cs_5A92A:       join $E                 ; 0008 JOIN FORCE E
+cs_5A92A:       join $E
 		setF $313               ; ???
-		addNewFollower $E       ; 0056 SOMETHING WITH AN ENTITY E
+		addNewFollower $E
 		csc_end
-cs_5A93A:       textCursor $776         ; 0004 INIT TEXT CURSOR 776 : "Hee, hee...I'm not only a{N}dwarf, I'm {NAME;16}.{W2}"
+cs_5A93A:       textCursor $776
 		nextText $0,$10         ; "Hee, hee...I'm not only a{N}dwarf, I'm {NAME;16}.{W2}"
 		nextText $0,$10         ; "I'm known as the strongest{N}warrior of my people.{W1}"
-		yesNo                   ; 0011 STORY YESNO PROMPT
+		yesNo
 		jumpIfFlagSet $59,cs_5A956; YES/NO prompt answer
 		nextSingleText $0,$10   ; "Tut!  OK, I have a{N}comfortable life here.{W1}"
 		csc_end
-cs_5A956:       join $10                ; 0008 JOIN FORCE 10
+cs_5A956:       join $10
 		setF $313               ; ???
-		setActscript $E,$0,eas_463AE; 0015 SET ACTSCRIPT E 0 463AE
-		setActscript $11,$0,eas_463AE; 0015 SET ACTSCRIPT 11 0 463AE
-		setActscript $F,$FF,eas_463AE; 0015 SET ACTSCRIPT F FF 463AE
-		addNewFollower $10      ; 0056 SOMETHING WITH AN ENTITY 10
+		setActscript $E,$0,eas_463AE
+		setActscript $11,$0,eas_463AE
+		setActscript $F,$FF,eas_463AE
+		addNewFollower $10
 		csc_end
-cs_5A97E:       textCursor $783         ; 0004 INIT TEXT CURSOR 783 : "I was surprised to find I{N}had returned to my original{N}size!{W2}"
+cs_5A97E:       textCursor $783
 		nextText $0,$10         ; "I was surprised to find I{N}had returned to my original{N}size!{W2}"
 		nextText $0,$10         ; "What should I do now?{N}I can go anywhere...{N}maybe...with you?{W1}"
-		yesNo                   ; 0011 STORY YESNO PROMPT
+		yesNo
 		jumpIfFlagSet $59,cs_5A99A; YES/NO prompt answer
 		nextSingleText $0,$10   ; "Fine!  I'll stay in this{N}mansion then.{W1}"
 		csc_end
-cs_5A99A:       join $10                ; 0008 JOIN FORCE 10
+cs_5A99A:       join $10
 		setF $313               ; ???
-		addNewFollower $10      ; 0056 SOMETHING WITH AN ENTITY 10
+		addNewFollower $10
 		csc_end
-cs_5A9AA:       textCursor $779         ; 0004 INIT TEXT CURSOR 779 : "I'm {NAME;17}, a mage.{N}I studied magic in Ponpei.{W2}"
+cs_5A9AA:       textCursor $779
 		nextText $0,$11         ; "I'm {NAME;17}, a mage.{N}I studied magic in Ponpei.{W2}"
 		nextText $0,$11         ; "I'll miss my friends, but if{N}I can be of help, I'll go{N}with you!{W1}"
-		yesNo                   ; 0011 STORY YESNO PROMPT
+		yesNo
 		jumpIfFlagSet $59,cs_5A9C6; YES/NO prompt answer
 		nextSingleText $0,$11   ; "My magic could've been a{N}great help to you.{W1}"
 		csc_end
-cs_5A9C6:       join $11                ; 0008 JOIN FORCE 11
+cs_5A9C6:       join $11
 		setF $313               ; ???
-		setActscript $E,$0,eas_463AE; 0015 SET ACTSCRIPT E 0 463AE
-		setActscript $10,$0,eas_463AE; 0015 SET ACTSCRIPT 10 0 463AE
-		setActscript $F,$FF,eas_463AE; 0015 SET ACTSCRIPT F FF 463AE
-		addNewFollower $11      ; 0056 SOMETHING WITH AN ENTITY 11
+		setActscript $E,$0,eas_463AE
+		setActscript $10,$0,eas_463AE
+		setActscript $F,$FF,eas_463AE
+		addNewFollower $11
 		csc_end
-cs_5A9EE:       textCursor $786         ; 0004 INIT TEXT CURSOR 786 : "I'm not sure why, but I'm{N}free.{W2}"
+cs_5A9EE:       textCursor $786
 		nextText $0,$11         ; "I'm not sure why, but I'm{N}free.{W2}"
 		nextText $0,$11         ; "Can I join your force?{W1}"
-		yesNo                   ; 0011 STORY YESNO PROMPT
+		yesNo
 		jumpIfFlagSet $59,cs_5AA0A; YES/NO prompt answer
 		nextSingleText $0,$11   ; "You may regret refusing me.{W1}"
 		csc_end
-cs_5AA0A:       join $11                ; 0008 JOIN FORCE 11
+cs_5AA0A:       join $11
 		setF $313               ; ???
-		addNewFollower $11      ; 0056 SOMETHING WITH AN ENTITY 11
+		addNewFollower $11
 		csc_end
-cs_5AA1A:       textCursor $77C         ; 0004 INIT TEXT CURSOR 77C : "I'm {NAME;15}, a priest.{N}I think I'm rather young{N}for my profession....{W2}"
+cs_5AA1A:       textCursor $77C
 		nextText $0,$F          ; "I'm {NAME;15}, a priest.{N}I think I'm rather young{N}for my profession....{W2}"
 		nextText $0,$F          ; "I don't want to stay in this{N}awful place forever.{N}Choose me!{W1}"
-		yesNo                   ; 0011 STORY YESNO PROMPT
+		yesNo
 		jumpIfFlagSet $59,cs_5AA36; YES/NO prompt answer
 		nextSingleText $0,$F    ; "You...snot nose!{W1}"
 		csc_end
-cs_5AA36:       join $F                 ; 0008 JOIN FORCE F
+cs_5AA36:       join $F
 		setF $313               ; ???
-		setActscript $E,$0,eas_463AE; 0015 SET ACTSCRIPT E 0 463AE
-		setActscript $10,$0,eas_463AE; 0015 SET ACTSCRIPT 10 0 463AE
-		setActscript $11,$FF,eas_463AE; 0015 SET ACTSCRIPT 11 FF 463AE
-		addNewFollower $F       ; 0056 SOMETHING WITH AN ENTITY F
+		setActscript $E,$0,eas_463AE
+		setActscript $10,$0,eas_463AE
+		setActscript $11,$FF,eas_463AE
+		addNewFollower $F
 		csc_end
-cs_5AA5E:       textCursor $789         ; 0004 INIT TEXT CURSOR 789 : "I'm free!  Fresh air smells{N}so good!{W2}"
+cs_5AA5E:       textCursor $789
 		nextText $0,$F          ; "I'm free!  Fresh air smells{N}so good!{W2}"
 		nextText $0,$F          ; "Where should I go?{N}Hey, may I go with you?{W1}"
-		yesNo                   ; 0011 STORY YESNO PROMPT
+		yesNo
 		jumpIfFlagSet $59,cs_5AA7A; YES/NO prompt answer
 		nextSingleText $0,$F    ; "Why, how rude!{W1}"
 		csc_end
-cs_5AA7A:       join $F                 ; 0008 JOIN FORCE F
+cs_5AA7A:       join $F
 		setF $313               ; ???
-		addNewFollower $F       ; 0056 SOMETHING WITH AN ENTITY F
+		addNewFollower $F
 		csc_end

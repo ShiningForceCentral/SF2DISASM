@@ -60,8 +60,8 @@ nullsub_126:
 
 	; End of function sub_53EEE
 
-cs_53EF4:       moveEntity $80,$FF,$0,$1; 002D MOVE ENTITY 80 FF 0 1
+cs_53EF4:       moveEntity $80,$FF,$0,$1
 		endMove $8080
-		setFacing $87,$3        ; 0023 SET ENTITY FACING 87 3
+		setFacing $87,$3
 		setStoryFlag $1         ; Battle 1 unlocked
 		csc_end

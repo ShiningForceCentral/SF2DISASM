@@ -52,11 +52,11 @@ return_59C9C:
 cs_StartSpecialBattle:
 		
 		setStoryFlag $2C        ; Battle 44 unlocked
-		mapSysEvent $18,$1,$18,$2; 0007 EXECUTE MAP SYSTEM EVENT 18011802
+		mapSysEvent $18,$1,$18,$2
 		csc_end
 cs_LeaveSpecialBattle:
 		
-		mapSysEvent $17,$1E,$18,$2; 0007 EXECUTE MAP SYSTEM EVENT 171E1802
+		mapSysEvent $17,$1E,$18,$2
 		csc_end
 loc_59CB2:
 		move.l  ($FFFFDF22).w,d0

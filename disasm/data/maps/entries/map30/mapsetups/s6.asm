@@ -22,10 +22,10 @@ return_5A30A:
 
 	; End of function ms_map30_InitFunction
 
-cs_5A30C:       setBlocks $15,$6,$2,$2,$7,$5; 0034 SET BLOCKS 1506 202 705
-		setBlocks $15,$0,$4,$4,$6,$0; 0034 SET BLOCKS 1500 404 600
+cs_5A30C:       setBlocks $15,$6,$2,$2,$7,$5
+		setBlocks $15,$0,$4,$4,$6,$0
 		csc_end
-cs_5A31E:       customActscript $82,$FF ; 0014 SET MANUAL ACTSCRIPT 82
+cs_5A31E:       customActscript $82,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
 		dc.w $1B                ;   001B SET FLIPPING $3
@@ -34,197 +34,197 @@ cs_5A31E:       customActscript $82,$FF ; 0014 SET MANUAL ACTSCRIPT 82
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		stopEntity $82          ; 001C STOP ENTITY ANIM 82
+		stopEntity $82
 		csc_end
-cs_5A33A:       textCursor $6AF         ; 0004 INIT TEXT CURSOR 6AF : "Where is the sick dwarf?{W1}"
-		setCamDest $0,$7        ; 0032 SET CAMERA DEST 0 7
-		setActscript $9E,$FF,eas_Init2; 0015 SET ACTSCRIPT 9E FF 46102
-		followEntity $1F,$7,$2  ; 002C FOLLOW ENTITY 1F 7 2
-		customActscript $9E,$FF ; 0014 SET MANUAL ACTSCRIPT 9E
+cs_5A33A:       textCursor $6AF
+		setCamDest $0,$7
+		setActscript $9E,$FF,eas_Init2
+		followEntity $1F,$7,$2
+		customActscript $9E,$FF
 		dc.w $10                ;   0010 SET SPEED X=$0 Y=$0
 		dc.b 0
 		dc.b 0
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setEntityDest $9E,$8,$B ; 0029 SET ENTITY DEST 9E 8 B
+		setEntityDest $9E,$8,$B
 		nextSingleText $0,$9E   ; "Where is the sick dwarf?{W1}"
 		csWait $5
-		setActscript $9E,$0,eas_461B6; 0015 SET ACTSCRIPT 9E 0 461B6
+		setActscript $9E,$0,eas_461B6
 		csWait $32
-		setCamDest $5,$7        ; 0032 SET CAMERA DEST 5 7
-		moveEntity $80,$FF,$2,$1; 002D MOVE ENTITY 80 FF 2 1
+		setCamDest $5,$7
+		moveEntity $80,$FF,$2,$1
 		endMove $8080
-		setFacing $9E,$0        ; 0023 SET ENTITY FACING 9E 0
+		setFacing $9E,$0
 		nextSingleText $0,$80   ; "Oh, thank goodness.{N}I sure am glad to see you.{W1}"
-		setActscript $80,$FF,eas_Jump; 0015 SET ACTSCRIPT 80 FF 45E44
-		setActscript $80,$FF,eas_Jump; 0015 SET ACTSCRIPT 80 FF 45E44
-		moveEntity $80,$FF,$0,$3; 002D MOVE ENTITY 80 FF 0 3
+		setActscript $80,$FF,eas_Jump
+		setActscript $80,$FF,eas_Jump
+		moveEntity $80,$FF,$0,$3
 		endMove $8080
-		setFacing $80,$2        ; 0023 SET ENTITY FACING 80 2
+		setFacing $80,$2
 		nextSingleText $0,$80   ; "Here, please examine him.{W1}"
-		setCameraEntity $9E     ; 0024 SET ENTITY FOLLOWED BY CAMERA 9E
-		moveEntity $9E,$FF,$0,$4; 002D MOVE ENTITY 9E FF 0 4
+		setCameraEntity $9E
+		moveEntity $9E,$FF,$0,$4
 		moreMove $3,$1
 		moreMove $0,$2
 		endMove $8080
-		setCamDest $A,$7        ; 0032 SET CAMERA DEST A 7
-		setFacing $80,$0        ; 0023 SET ENTITY FACING 80 0
+		setCamDest $A,$7
+		setFacing $80,$0
 		csWait $3C
 		nextText $0,$9E         ; "Oh, I hope I'm not too late.{W2}"
 		nextSingleText $0,$9E   ; "Ok, let's see.{W1}"
 		csWait $32
-		entityShiver $9E        ; 002A MAKE ENTITY SHIVER 9E
+		entityShiver $9E
 		csWait $1E
-		entityShiver $9E        ; 002A MAKE ENTITY SHIVER 9E
+		entityShiver $9E
 		csWait $14
-		entityFlashWhite $9E,$78; 0018 FLASH ENTITY WHITE 9E 78
-		mapFadeOutToWhite       ; 003F FADE MAP OUT TO WHITE
-		entityFlashWhite $9E,$64; 0018 FLASH ENTITY WHITE 9E 64
-		mapFadeInFromWhite      ; 0040 FADE MAP IN FROM WHITE
+		entityFlashWhite $9E,$78
+		mapFadeOutToWhite
+		entityFlashWhite $9E,$64
+		mapFadeInFromWhite
 		csWait $32
 		csWait $5
-		setActscript $81,$0,eas_461B6; 0015 SET ACTSCRIPT 81 0 461B6
+		setActscript $81,$0,eas_461B6
 		csWait $64
-		moveEntity $81,$FF,$3,$1; 002D MOVE ENTITY 81 FF 3 1
+		moveEntity $81,$FF,$3,$1
 		endMove $8080
-		setFacing $81,$2        ; 0023 SET ENTITY FACING 81 2
+		setFacing $81,$2
 		nextSingleText $0,$81   ; "How is he?{W1}"
 		csWait $F
-		entityShakeHead $84     ; 0027 MAKE ENTITY SHAKE HEAD 84
+		entityShakeHead $84
 		nextSingleText $0,$84   ; "I don't know yet....{W1}"
 		csWait $3C
-		setActscript $82,$FF,eas_Init; 0015 SET ACTSCRIPT 82 FF 460CE
-		setActscript $82,$FF,eas_Jump; 0015 SET ACTSCRIPT 82 FF 45E44
-		startEntity $82         ; 001B START ENTITY ANIM 82
+		setActscript $82,$FF,eas_Init
+		setActscript $82,$FF,eas_Jump
+		startEntity $82
 		nextSingleText $0,$82   ; "Whoa!{W1}"
 		csWait $5
-		setActscript $82,$0,eas_461B6; 0015 SET ACTSCRIPT 82 0 461B6
+		setActscript $82,$0,eas_461B6
 		csWait $64
-		setFacing $82,$1        ; 0023 SET ENTITY FACING 82 1
+		setFacing $82,$1
 		nextSingleText $0,$82   ; "What?{W1}"
-		moveEntity $81,$FF,$1,$1; 002D MOVE ENTITY 81 FF 1 1
+		moveEntity $81,$FF,$1,$1
 		endMove $8080
-		setFacing $81,$2        ; 0023 SET ENTITY FACING 81 2
-		setFacing $82,$0        ; 0023 SET ENTITY FACING 82 0
+		setFacing $81,$2
+		setFacing $82,$0
 		nextSingleText $0,$81   ; "Hey, are you OK?{W1}"
 		nextSingleText $0,$82   ; "I'm OK.  I'm fine.{N}I feel great!{W1}"
 		csWait $14
-		moveEntity $80,$FF,$0,$1; 002D MOVE ENTITY 80 FF 0 1
+		moveEntity $80,$FF,$0,$1
 		endMove $8080
-		setFacing $80,$3        ; 0023 SET ENTITY FACING 80 3
-		setFacing $81,$2        ; 0023 SET ENTITY FACING 81 2
-		setFacing $82,$2        ; 0023 SET ENTITY FACING 82 2
-		setFacing $83,$2        ; 0023 SET ENTITY FACING 83 2
-		setFacing $84,$2        ; 0023 SET ENTITY FACING 84 2
-		setFacing $9E,$1        ; 0023 SET ENTITY FACING 9E 1
+		setFacing $80,$3
+		setFacing $81,$2
+		setFacing $82,$2
+		setFacing $83,$2
+		setFacing $84,$2
+		setFacing $9E,$1
 		nextSingleText $0,$80   ; "Oh, how can we thank you?{W1}"
-		entityNod $82           ; 0026 MAKE ENTITY NOD 82
+		entityNod $82
 		nextText $0,$9E         ; "I don't need anything.{W2}"
 		nextSingleText $0,$9E   ; "But, why don't you help{N}{LEADER}?{W1}"
 		csWait $F
-		entityPosDir $1F,$7,$B,$0; 0019 SET ENTITY POS AND FACING 1F 7 B 0
-		entityPosDir $7,$7,$A,$0; 0019 SET ENTITY POS AND FACING 7 7 A 0
-		entityPosDir $0,$8,$B,$0; 0019 SET ENTITY POS AND FACING 0 8 B 0
-		setCameraEntity $9E     ; 0024 SET ENTITY FOLLOWED BY CAMERA 9E
-		moveEntity $9E,$FF,$2,$2; 002D MOVE ENTITY 9E FF 2 2
+		entityPosDir $1F,$7,$B,$0
+		entityPosDir $7,$7,$A,$0
+		entityPosDir $0,$8,$B,$0
+		setCameraEntity $9E
+		moveEntity $9E,$FF,$2,$2
 		moreMove $1,$1
 		moreMove $2,$3
 		endMove $8080
 		nextSingleText $0,$9E   ; "{LEADER}, I'm  going now.{W2}{N}I hope your journey is safe{N}and uneventful.  Bye!{W1}"
-		setCameraEntity $FFFF   ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
-		moveEntity $9E,$FF,$1,$2; 002D MOVE ENTITY 9E FF 1 2
+		setCameraEntity $FFFF
+		moveEntity $9E,$FF,$1,$2
 		moreMove $2,$3
 		moreMove $3,$3
 		endMove $8080
-		setFacing $0,$3         ; 0023 SET ENTITY FACING 0 3
-		setFacing $7,$3         ; 0023 SET ENTITY FACING 7 3
-		setFacing $1F,$3        ; 0023 SET ENTITY FACING 1F 3
-		moveEntity $9E,$FF,$0,$1; 002D MOVE ENTITY 9E FF 0 1
+		setFacing $0,$3
+		setFacing $7,$3
+		setFacing $1F,$3
+		moveEntity $9E,$FF,$0,$1
 		moreMove $3,$5
 		endMove $8080
-		hideEntity $9E          ; 002E HIDE ENTITY 9E
-		setCamDest $4,$7        ; 0032 SET CAMERA DEST 4 7
-		moveEntity $0,$0,$0,$2  ; 002D MOVE ENTITY 0 0 0 2
+		hideEntity $9E
+		setCamDest $4,$7
+		moveEntity $0,$0,$0,$2
 		endMove $8080
-		moveEntity $80,$FF,$2,$3; 002D MOVE ENTITY 80 FF 2 3
+		moveEntity $80,$FF,$2,$3
 		endMove $8080
 		csc_end
-cs_5A4FE:       textCursor $6C2         ; 0004 INIT TEXT CURSOR 6C2 : "We use it to destroy large{N}rocks.{W1}"
-		setFacing $81,$2        ; 0023 SET ENTITY FACING 81 2
-		setFacing $82,$2        ; 0023 SET ENTITY FACING 82 2
-		setFacing $83,$2        ; 0023 SET ENTITY FACING 83 2
-		setFacing $84,$2        ; 0023 SET ENTITY FACING 84 2
-		setCamDest $6,$7        ; 0032 SET CAMERA DEST 6 7
+cs_5A4FE:       textCursor $6C2
+		setFacing $81,$2
+		setFacing $82,$2
+		setFacing $83,$2
+		setFacing $84,$2
+		setCamDest $6,$7
 		nextSingleText $0,$80   ; "We use it to destroy large{N}rocks.{W1}"
-		moveEntity $80,$FF,$0,$1; 002D MOVE ENTITY 80 FF 0 1
+		moveEntity $80,$FF,$0,$1
 		endMove $8080
 		nextSingleText $0,$80   ; "OK, guys!{N}Let's go back to Grans{N}Island!{W2}"
 		nextSingleText $0,$80   ; "Everybody dig!{W1}"
-		setActscript $81,$0,eas_Jump; 0015 SET ACTSCRIPT 81 0 45E44
-		setActscript $82,$0,eas_Jump; 0015 SET ACTSCRIPT 82 0 45E44
-		setActscript $83,$0,eas_Jump; 0015 SET ACTSCRIPT 83 0 45E44
-		setActscript $84,$FF,eas_Jump; 0015 SET ACTSCRIPT 84 FF 45E44
-		setActscript $81,$0,eas_Jump; 0015 SET ACTSCRIPT 81 0 45E44
-		setActscript $82,$0,eas_Jump; 0015 SET ACTSCRIPT 82 0 45E44
-		setActscript $83,$0,eas_Jump; 0015 SET ACTSCRIPT 83 0 45E44
-		setActscript $84,$FF,eas_Jump; 0015 SET ACTSCRIPT 84 FF 45E44
-		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
-		moveEntity $0,$FF,$2,$1 ; 002D MOVE ENTITY 0 FF 2 1
+		setActscript $81,$0,eas_Jump
+		setActscript $82,$0,eas_Jump
+		setActscript $83,$0,eas_Jump
+		setActscript $84,$FF,eas_Jump
+		setActscript $81,$0,eas_Jump
+		setActscript $82,$0,eas_Jump
+		setActscript $83,$0,eas_Jump
+		setActscript $84,$FF,eas_Jump
+		setActscript $0,$FF,eas_Init
+		moveEntity $0,$FF,$2,$1
 		endMove $8080
-		setEntityDest $7,$8,$A  ; 0029 SET ENTITY DEST 7 8 A
-		moveEntity $80,$0,$2,$2 ; 002D MOVE ENTITY 80 0 2 2
+		setEntityDest $7,$8,$A
+		moveEntity $80,$0,$2,$2
 		endMove $8080
-		moveEntity $81,$0,$2,$1 ; 002D MOVE ENTITY 81 0 2 1
+		moveEntity $81,$0,$2,$1
 		endMove $8080
-		moveEntity $82,$0,$2,$1 ; 002D MOVE ENTITY 82 0 2 1
+		moveEntity $82,$0,$2,$1
 		endMove $8080
-		moveEntity $83,$0,$2,$1 ; 002D MOVE ENTITY 83 0 2 1
+		moveEntity $83,$0,$2,$1
 		endMove $8080
-		moveEntity $84,$FF,$2,$2; 002D MOVE ENTITY 84 FF 2 2
+		moveEntity $84,$FF,$2,$2
 		endMove $8080
-		setFacing $0,$0         ; 0023 SET ENTITY FACING 0 0
-		setFacing $7,$0         ; 0023 SET ENTITY FACING 7 0
-		setFacing $1F,$0        ; 0023 SET ENTITY FACING 1F 0
-		moveEntity $80,$0,$1,$2 ; 002D MOVE ENTITY 80 0 1 2
+		setFacing $0,$0
+		setFacing $7,$0
+		setFacing $1F,$0
+		moveEntity $80,$0,$1,$2
 		moreMove $2,$1
 		moreMove $1,$3
 		endMove $8080
-		moveEntity $83,$0,$2,$3 ; 002D MOVE ENTITY 83 0 2 3
+		moveEntity $83,$0,$2,$3
 		moreMove $1,$2
 		moreMove $2,$1
 		moreMove $1,$3
 		endMove $8080
-		moveEntity $84,$0,$1,$2 ; 002D MOVE ENTITY 84 0 1 2
+		moveEntity $84,$0,$1,$2
 		moreMove $2,$3
 		moreMove $1,$2
 		moreMove $2,$1
 		moreMove $1,$3
 		endMove $8080
-		moveEntity $81,$0,$1,$1 ; 002D MOVE ENTITY 81 0 1 1
+		moveEntity $81,$0,$1,$1
 		moreMove $2,$5
 		moreMove $1,$2
 		moreMove $2,$1
 		moreMove $1,$3
 		endMove $8080
-		moveEntity $82,$FF,$C,$28; 002D MOVE ENTITY 82 FF C 28
+		moveEntity $82,$FF,$C,$28
 		moreMove $1,$1
 		moreMove $2,$4
 		moreMove $1,$1
 		endMove $8080
 		csWait $1E
-		moveEntity $82,$FF,$3,$1; 002D MOVE ENTITY 82 FF 3 1
+		moveEntity $82,$FF,$3,$1
 		endMove $8080
-		setFacing $82,$2        ; 0023 SET ENTITY FACING 82 2
-		entityNod $82           ; 0026 MAKE ENTITY NOD 82
-		moveEntity $82,$FF,$1,$2; 002D MOVE ENTITY 82 FF 1 2
+		setFacing $82,$2
+		entityNod $82
+		moveEntity $82,$FF,$1,$2
 		moreMove $2,$1
 		moreMove $1,$3
 		endMove $8080
-		entityPosDir $80,$7,$3,$1; 0019 SET ENTITY POS AND FACING 80 7 3 1
-		entityPosDir $81,$8,$3,$1; 0019 SET ENTITY POS AND FACING 81 8 3 1
-		entityPosDir $82,$7,$4,$1; 0019 SET ENTITY POS AND FACING 82 7 4 1
-		entityPosDir $83,$8,$4,$1; 0019 SET ENTITY POS AND FACING 83 8 4 1
-		entityPosDir $84,$7,$5,$1; 0019 SET ENTITY POS AND FACING 84 7 5 1
-		setBlocks $15,$6,$2,$2,$7,$5; 0034 SET BLOCKS 1506 202 705
+		entityPosDir $80,$7,$3,$1
+		entityPosDir $81,$8,$3,$1
+		entityPosDir $82,$7,$4,$1
+		entityPosDir $83,$8,$4,$1
+		entityPosDir $84,$7,$5,$1
+		setBlocks $15,$6,$2,$2,$7,$5
 		csc_end

@@ -190,26 +190,26 @@ return_56144:
 
 	; End of function sub_56138
 
-cs_56146:       setActscript $8,$FF,eas_Init; 0015 SET ACTSCRIPT 8 FF 460CE
-		setActscript $8,$FF,eas_461AA; 0015 SET ACTSCRIPT 8 FF 461AA
-		faceEntity $8,$0        ; 0052 RELATED TO TWO ENTITIES 8 0
-		textCursor $543         ; 0004 INIT TEXT CURSOR 543 : "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"
+cs_56146:       setActscript $8,$FF,eas_Init
+		setActscript $8,$FF,eas_461AA
+		faceEntity $8,$0
+		textCursor $543
 		nextSingleText $0,$8    ; "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"
-		join $8                 ; 0008 JOIN FORCE 8
+		join $8
 		nextSingleText $0,$8    ; "Now, let's go!{W1}"
-		addNewFollower $8       ; 0056 SOMETHING WITH AN ENTITY 8
+		addNewFollower $8
 		csc_end
-cs_56172:       textCursor $534         ; 0004 INIT TEXT CURSOR 534 : "To Mt. Volcano?{W1}"
+cs_56172:       textCursor $534
 		nextSingleText $0,$87   ; "To Mt. Volcano?{W1}"
-		setActscript $87,$0,eas_Jump; 0015 SET ACTSCRIPT 87 0 45E44
-		setActscript $86,$FF,eas_Jump; 0015 SET ACTSCRIPT 86 FF 45E44
-		setFacing $86,$0        ; 0023 SET ENTITY FACING 86 0
-		setFacing $87,$2        ; 0023 SET ENTITY FACING 87 2
+		setActscript $87,$0,eas_Jump
+		setActscript $86,$FF,eas_Jump
+		setFacing $86,$0
+		setFacing $87,$2
 		csWait $39
-		setFacing $86,$3        ; 0023 SET ENTITY FACING 86 3
+		setFacing $86,$3
 		nextText $0,$86         ; "Go east and then go north{N}along the river.  A cave is{N}there.{W2}"
 		nextSingleText $0,$86   ; "But, I don't recommend you{N}enter such a terrible place!{W1}"
-		setFacing $87,$3        ; 0023 SET ENTITY FACING 87 3
+		setFacing $87,$3
 		nextText $0,$87         ; "We call it the Cave of{N}Darkness.  You can't see{N}anything inside.{W2}"
 		nextSingleText $0,$87   ; "The cave is the only way to{N}get to Mt. Volcano.{W1}"
 		csc_end

@@ -234,18 +234,18 @@ nullsub_116:
 
 	; End of function nullsub_116
 
-cs_58116:       textCursor $595         ; 0004 INIT TEXT CURSOR 595 : "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
+cs_58116:       textCursor $595
 		nextSingleText $0,$89   ; "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
 		csWait $1E
-		setQuake $8002          ; 0033 SET QUAKE AMOUNT 8002
-		setQuake $4002          ; 0033 SET QUAKE AMOUNT 4002
+		setQuake $8002
+		setQuake $4002
 		nextSingleText $0,$89   ; "...like that!  And, it's getting{N}worse.{N}What's wrong you ask?{W1}"
 		csWait $3C
-		playSound SFX_BIG_DOOR_RUMBLE; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		setQuake $5             ; 0033 SET QUAKE AMOUNT 5
-		flashScreenWhite $46    ; 0041 FLASH SCREEN WHITE 46
-		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
-		entityShakeHead $89     ; 0027 MAKE ENTITY SHAKE HEAD 89
+		playSound SFX_BIG_DOOR_RUMBLE
+		setQuake $5
+		flashScreenWhite $46
+		setQuake $0
+		entityShakeHead $89
 		nextText $0,$89         ; "Whoa!  Mt. Volcano erupted!{W2}"
 		nextSingleText $0,$89   ; "It's an evil omen.{W1}"
 		csc_end

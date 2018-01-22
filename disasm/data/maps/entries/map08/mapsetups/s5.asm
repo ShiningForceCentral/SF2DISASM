@@ -39,35 +39,35 @@ return_56312:
 
 	; End of function sub_562F2
 
-cs_56314:       hideText                ; 0009 HIDE TEXTBOX AND PORTRAIT
-		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
-		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
-		setQuake $2             ; 0033 SET QUAKE AMOUNT 2
+cs_56314:       hideText
+		setActscript $0,$FF,eas_Init
+		setActscript $7,$FF,eas_Init
+		setQuake $2
 		csWait $3C
-		setActscript $0,$0,eas_Jump; 0015 SET ACTSCRIPT 0 0 45E44
-		setActscript $7,$FF,eas_Jump; 0015 SET ACTSCRIPT 7 FF 45E44
-		moveEntity $0,$0,$3,$2  ; 002D MOVE ENTITY 0 0 3 2
+		setActscript $0,$0,eas_Jump
+		setActscript $7,$FF,eas_Jump
+		moveEntity $0,$0,$3,$2
 		endMove $8080
-		moveEntity $7,$FF,$3,$2 ; 002D MOVE ENTITY 7 FF 3 2
+		moveEntity $7,$FF,$3,$2
 		endMove $8080
-		setFacing $0,$1         ; 0023 SET ENTITY FACING 0 1
-		setFacing $7,$1         ; 0023 SET ENTITY FACING 7 1
-		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		setBlocks $20,$11,$2,$2,$F,$13; 0034 SET BLOCKS 2011 202 F13
+		setFacing $0,$1
+		setFacing $7,$1
+		playSound SFX_BATTLEFIELD_DEATH
+		setBlocks $20,$11,$2,$2,$F,$13
 		csWait $1E
-		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
+		setQuake $0
 		csWait $1E
-		setQuake $2             ; 0033 SET QUAKE AMOUNT 2
-		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		setBlocks $22,$11,$2,$2,$F,$13; 0034 SET BLOCKS 2211 202 F13
+		setQuake $2
+		playSound SFX_BATTLEFIELD_DEATH
+		setBlocks $22,$11,$2,$2,$F,$13
 		csWait $1E
-		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
+		setQuake $0
 		csWait $1E
-		setQuake $2             ; 0033 SET QUAKE AMOUNT 2
-		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		setBlocks $20,$E,$2,$2,$F,$13; 0034 SET BLOCKS 200E 202 F13
+		setQuake $2
+		playSound SFX_BATTLEFIELD_DEATH
+		setBlocks $20,$E,$2,$2,$F,$13
 		csWait $1E
-		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
+		setQuake $0
 		csWait $1E
-		followEntity $7,$0,$2   ; 002C FOLLOW ENTITY 7 0 2
+		followEntity $7,$0,$2
 		csc_end

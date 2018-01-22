@@ -44,14 +44,14 @@ loc_50ABA:
 
 	; End of function sub_50A9A
 
-cs_50ABE:       playSound SFX_BIG_DOOR_RUMBLE; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
-		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
+cs_50ABE:       playSound SFX_BIG_DOOR_RUMBLE
+		setQuake $1
 		csWait $3C
-		playSound SFX_BOOST     ; 0005 PLAY SOUND SFX_BOOST
-		flashScreenWhite $14    ; 0041 FLASH SCREEN WHITE 14
-		setBlocks $1,$1,$1,$1,$2A,$2A; 0034 SET BLOCKS 101 101 2A2A
-		flashScreenWhite $14    ; 0041 FLASH SCREEN WHITE 14
+		playSound SFX_BOOST
+		flashScreenWhite $14
+		setBlocks $1,$1,$1,$1,$2A,$2A
+		flashScreenWhite $14
 		csWait $3C
-		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
+		setQuake $0
 		csWait $3C
 		csc_end

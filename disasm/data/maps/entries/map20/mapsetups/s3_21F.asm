@@ -50,9 +50,9 @@ loc_632E0:
 
 	; End of function sub_632AC
 
-cs_632EA:       setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
+cs_632EA:       setActscript $0,$FF,eas_Init
 		csWait $1
-		entityShiver $0         ; 002A MAKE ENTITY SHIVER 0
+		entityShiver $0
 		csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -105,5 +105,5 @@ return_6335C:
 
 	; End of function sub_63330
 
-cs_6335E:       setFacing $80,$3        ; 0023 SET ENTITY FACING 80 3
+cs_6335E:       setFacing $80,$3
 		csc_end

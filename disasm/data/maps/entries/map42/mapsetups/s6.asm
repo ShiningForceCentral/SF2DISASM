@@ -10,54 +10,53 @@ ms_map42_InitFunction:
 
 	; End of function ms_map42_InitFunction
 
-cs_5FE9A:       textCursor $D09         ; 0004 INIT TEXT CURSOR D09 : "The Jewel of Light begins{N}to glow.{W2}"
+cs_5FE9A:       textCursor $D09
 		nextText $FF,$FF        ; "The Jewel of Light begins{N}to glow.{W2}"
 		nextSingleText $FF,$FF  ; "The light seems to pull{N}{LEADER}.{D3}"
-		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
-		moveEntity $0,$FF,$3,$1 ; 002D MOVE ENTITY 0 FF 3 1
+		setActscript $0,$FF,eas_Init
+		moveEntity $0,$FF,$3,$1
 		moreMove $3,$1
 		moreMove $0,$1
 		moreMove $0,$1
 		moreMove $0,$1
 		moreMove $0,$1
 		endMove $8080
-		moveEntity $0,$FF,$0,$1 ; 002D MOVE ENTITY 0 FF 0 1
+		moveEntity $0,$FF,$0,$1
 		moreMove $0,$1
 		moreMove $0,$1
 		moreMove $1,$1
 		moreMove $1,$1
 		endMove $8080
-		moveEntity $0,$FF,$1,$1 ; 002D MOVE ENTITY 0 FF 1 1
+		moveEntity $0,$FF,$1,$1
 		moreMove $1,$1
 		endMove $8080
 		csWait $3C
 		nextSingleText $FF,$FF  ; "The jewel glows even{N}brighter.{W1}"
-		hideText                ; 0009 HIDE TEXTBOX AND PORTRAIT
+		hideText
 		csWait $28
-		flashScreenWhite $14    ; 0041 FLASH SCREEN WHITE 14
-		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		setQuake $2             ; 0033 SET QUAKE AMOUNT 2
-		setBlocks $21,$1,$1,$1,$1A,$12; 0034 SET BLOCKS 2101 101 1A12
+		flashScreenWhite $14
+		playSound SFX_BATTLEFIELD_DEATH
+		setQuake $2
+		setBlocks $21,$1,$1,$1,$1A,$12
 		csWait $14
-		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
+		setQuake $0
 		csWait $3C
 		nextSingleText $0,$1F   ; "Oh, an opening!{N}The light is leading us!{W1}"
 		csc_end
-cs_5FF06:       textCursor $D07         ; 0004 INIT TEXT CURSOR D07 : "Sounds like something opened{N}somewhere.{W1}"
-		hideText                ; 0009 HIDE TEXTBOX AND PORTRAIT
-		entityFlashWhite $0,$3C ; 0018 FLASH ENTITY WHITE 0 3C
-		setBlocks $21,$2,$1,$1,$27,$2; 0034 SET BLOCKS 2102 101 2702
-		newEntity $80,$27,$2,$3,$B4; 002B  80 27 2 3 B4
+cs_5FF06:       textCursor $D07
+		hideText
+		entityFlashWhite $0,$3C
+		setBlocks $21,$2,$1,$1,$27,$2
+		newEntity $80,$27,$2,$3,$B4
 		setActscript $80,$0,eas_AnimSpeedx2
-						; 0015 SET ACTSCRIPT 80 0 45FB2
-		executeSubroutine csub_5FF56; 000A EXECUTE SUBROUTINE 5FF56
-		hideEntity $80          ; 002E HIDE ENTITY 80
-		setQuake $2             ; 0033 SET QUAKE AMOUNT 2
-		setBlocks $0,$20,$7,$6,$0,$0; 0034 SET BLOCKS 20 706 0
+		executeSubroutine csub_5FF56
+		hideEntity $80
+		setQuake $2
+		setBlocks $0,$20,$7,$6,$0,$0
 		csWait $3C
-		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
+		playSound SFX_BATTLEFIELD_DEATH
 		csWait $14
-		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
+		setQuake $0
 		nextSingleText $FF,$FF  ; "Sounds like something opened{N}somewhere.{W1}"
 		nextSingleText $0,$1F   ; "You got it!  All we have to{N}do is find the door to the{N}tower!{W1}"
 		csc_end

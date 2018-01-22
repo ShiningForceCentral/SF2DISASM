@@ -113,9 +113,9 @@ return_53814:
 
 	; End of function sub_537FE
 
-cs_53816:       textCursor $234         ; 0004 INIT TEXT CURSOR 234 : "(Scream!)...who are you?!{N}Get out of here!{W2}"
-		setActscript $87,$FF,eas_Jump; 0015 SET ACTSCRIPT 87 FF 45E44
-		setFacing $87,$2        ; 0023 SET ENTITY FACING 87 2
+cs_53816:       textCursor $234
+		setActscript $87,$FF,eas_Jump
+		setFacing $87,$2
 		nextText $0,$87         ; "(Scream!)...who are you?!{N}Get out of here!{W2}"
 		nextText $0,$87         ; "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
 		csc_end

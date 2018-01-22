@@ -667,3 +667,11 @@ INSTANT_BLACK: equ $C
 NOTHING_2: equ $D
 HALF_IN_FROM_BLACK: equ $E
 OUT_TO_BLACK_2: equ $F
+
+; ---------------------------------------------------------------------------
+
+; enum Facing
+RIGHT: equ $0
+UP: equ $1
+LEFT: equ $2
+DOWN: equ $3

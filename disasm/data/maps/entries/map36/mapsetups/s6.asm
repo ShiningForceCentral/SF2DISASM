@@ -16,9 +16,9 @@ return_5DA26:
 
 	; End of function ms_map36_InitFunction
 
-cs_5DA28:       textCursor $CFB         ; 0004 INIT TEXT CURSOR CFB : "You defeated Zalbard and{N}saved Mitula.{W2}"
-		faceEntity $7,$83       ; 0052 RELATED TO TWO ENTITIES 7 83
-		faceEntity $1F,$83      ; 0052 RELATED TO TWO ENTITIES 1F 83
+cs_5DA28:       textCursor $CFB
+		faceEntity $7,$83
+		faceEntity $1F,$83
 		nextText $0,$16         ; "You defeated Zalbard and{N}saved Mitula.{W2}"
 		nextText $0,$16         ; "You are trustworthy{N}soldiers, so...would you{N}do me a favor?{W2}"
 		nextSingleText $0,$16   ; "Please go to Moun with me.{W1}"
@@ -30,41 +30,41 @@ cs_5DA28:       textCursor $CFB         ; 0004 INIT TEXT CURSOR CFB : "You defea
 		nextSingleText $0,$16   ; "Alright.{W1}"
 		nextSingleText $FF,$FF  ; "{LEADER} decides to take{N}{NAME;22} with him.{W1}"
 		nextSingleText $0,$16   ; "Thank you very much.{W1}"
-		followEntity $16,$1F,$2 ; 002C FOLLOW ENTITY 16 1F 2
+		followEntity $16,$1F,$2
 		setStoryFlag $1F        ; Battle 31 unlocked
 		setStoryFlag $21        ; Battle 33 unlocked
 		setStoryFlag $22        ; Battle 34 unlocked
 		csc_end
-cs_5DA7A:       setCameraEntity $83     ; 0024 SET ENTITY FOLLOWED BY CAMERA 83
-		setEntityDest $0,$4,$17 ; 0029 SET ENTITY DEST 0 4 17
-		setFacing $0,$1         ; 0023 SET ENTITY FACING 0 1
-		moveEntity $83,$FF,$0,$2; 002D MOVE ENTITY 83 FF 0 2
+cs_5DA7A:       setCameraEntity $83
+		setEntityDest $0,$4,$17
+		setFacing $0,$1
+		moveEntity $83,$FF,$0,$2
 		endMove $8080
-		moveEntity $83,$FF,$3,$1; 002D MOVE ENTITY 83 FF 3 1
+		moveEntity $83,$FF,$3,$1
 		endMove $8080
-		setFacing $0,$0         ; 0023 SET ENTITY FACING 0 0
+		setFacing $0,$0
 		csWait $3C
-		customActscript $83,$FF ; 0014 SET MANUAL ACTSCRIPT 83
+		customActscript $83,$FF
 		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
 		dc.b $10
 		dc.b $10
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		moveEntity $83,$FF,$0,$2; 002D MOVE ENTITY 83 FF 0 2
+		moveEntity $83,$FF,$0,$2
 		endMove $8080
-		entityShakeHead $83     ; 0027 MAKE ENTITY SHAKE HEAD 83
-		entityShiver $83        ; 002A MAKE ENTITY SHIVER 83
+		entityShakeHead $83
+		entityShiver $83
 		csWait $78
-		entityShiver $83        ; 002A MAKE ENTITY SHIVER 83
-		customActscript $83,$FF ; 0014 SET MANUAL ACTSCRIPT 83
+		entityShiver $83
+		customActscript $83,$FF
 		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
 		dc.b 8
 		dc.b 8
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		moveEntity $83,$FF,$0,$1; 002D MOVE ENTITY 83 FF 0 1
+		moveEntity $83,$FF,$0,$1
 		endMove $8080
-		entityShiver $83        ; 002A MAKE ENTITY SHIVER 83
+		entityShiver $83
 		csc_end
