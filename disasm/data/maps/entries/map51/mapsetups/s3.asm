@@ -55,9 +55,9 @@ return_5C310:
 cs_5C312:       textCursor $9FB
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
-		setPos $80,7,16,1
-		setPos $81,6,17,1
-		setPos $82,8,17,1
+		setPos $80,7,16,UP
+		setPos $81,6,17,UP
+		setPos $82,8,17,UP
 		nextText $0,$D          ; "Did you come to help me?{N}Oh, thank you!{W2}"
 		nextSingleText $0,$D    ; "I might have been eaten by{N}monsters if you hadn't come.{W1}"
 		nextSingleText $C0,$80  ; "My dinner is escaping!{W1}"
@@ -75,7 +75,7 @@ cs_5C312:       textCursor $9FB
 		moveEntity $80,$FF,$1,$2
 		endMove $8080
 		nextSingleText $C0,$80  ; "And this elf is my dinner{N}for tonight.  Got it?{W1}"
-		setFacing $80,3
+		setFacing $80,DOWN
 		nextSingleText $C0,$80  ; "Did you guys bring the{N}ketchup? No? Oh, well.{W1}"
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$FF,eas_Jump

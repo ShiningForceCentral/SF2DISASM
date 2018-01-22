@@ -17,22 +17,22 @@ IntroCutscene2: textCursor $106A
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
 		csWait 60
-		setFacing $81,0
+		setFacing $81,RIGHT
 		nextSingleText $0,$81   ; "Excuse me?{D2}"
 		nextSingleText $80,$80  ; "It's a stormy night.{D2}"
-		setFacing $81,1
+		setFacing $81,UP
 		csWait 30
 		playSound SFX_DEMON_BREATH
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
 		csWait 40
-		setFacing $81,0
+		setFacing $81,RIGHT
 		entityNod $81
 		csWait 20
 		nextSingleText $0,$81   ; "It's unusual for this time{N}of year.{D2}"
 		csWait 30
 		nextSingleText $0,$82   ; "Excuse me, your majesty.{D2}"
-		setFacing $81,3
+		setFacing $81,DOWN
 		moveEntity $82,$FF,$1,$3
 		endMove $8080
 		setCamDest 7,4
@@ -60,11 +60,11 @@ IntroCutscene2: textCursor $106A
 		csWait 40
 		entityShiver $80
 		nextSingleText $80,$80  ; "Hmmm....{D2}"
-		setFacing $81,1
+		setFacing $81,UP
 		nextSingleText $0,$81   ; "Excuse me, sire?{D2}"
 		nextSingleText $80,$80  ; "I have a bad feeling...{N}Oh, well.{D2}"
 		csWait 40
-		setFacing $81,2
+		setFacing $81,LEFT
 		csWait 40
 		customActscript $81,$FF
 		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
@@ -81,7 +81,7 @@ IntroCutscene2: textCursor $106A
 		nextSingleText $0,$81   ; "Oh, a gust of wind!{D2}"
 		csWait 20
 		entityShiver $80
-		setFacing $80,3
+		setFacing $80,DOWN
 		nextSingleText $80,$80  ; "Make sure all the doors and{N}windows are shut!{D2}"
 		playSound SFX_SPELL_CAST
 		csWait 30

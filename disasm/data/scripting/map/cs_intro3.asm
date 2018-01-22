@@ -19,7 +19,7 @@ IntroCutscene3: textCursor $1077
 		moveEntity $81,$FF,$1,$1
 		moreMove $A,$1
 		endMove $8080
-		setFacing $80,0
+		setFacing $80,RIGHT
 		nextSingleText $0,$81   ; "You wimp!{N}Let me do it!{D2}"
 		entityShiver $80
 		csWait 20
@@ -31,17 +31,17 @@ IntroCutscene3: textCursor $1077
 		moreMove $9,$1
 		endMove $8080
 		csWait 30
-		setFacing $81,3
+		setFacing $81,DOWN
 		nextSingleText $0,$81   ; "Yeah, right.{D2}"
 		csWait 20
-		setFacing $81,1
+		setFacing $81,UP
 		csWait 30
 		entityShiver $81
 		entityShiver $81
 		csWait 30
 		entityShiver $81
 		csWait 30
-		setFacing $81,3
+		setFacing $81,DOWN
 		entityShakeHead $81
 		nextSingleText $0,$81   ; "Blast!  It won't budge!{D2}"
 		moveEntity $5,$FF,$1,$1
@@ -49,7 +49,7 @@ IntroCutscene3: textCursor $1077
 		csWait 10
 		setActscript $5,$FF,eas_Jump
 		setActscript $5,$FF,eas_Jump
-		setFacing $81,3
+		setFacing $81,DOWN
 		nextSingleText $80,$5   ; "You idiots!{N}Let me do it.{D2}"
 		entityShiver $81
 		moveEntity $81,$FF,$0,$1
@@ -74,7 +74,7 @@ IntroCutscene3: textCursor $1077
 		endMove $8080
 		csWait 6
 		setActscript $5,$FF,eas_461AA
-		setFacing $5,3
+		setFacing $5,DOWN
 		entitySprite $5,$BB
 		csWait 20
 		entityShiver $5
@@ -108,18 +108,18 @@ IntroCutscene3: textCursor $1077
 		dc.b $80
 		setActscript $5,$FF,eas_46172
 		entitySprite $5,$5
-		setFacing $5,1
+		setFacing $5,UP
 		moveEntity $5,$FF,$3,$1
 		endMove $8080
-		setFacing $80,0
-		setFacing $81,2
+		setFacing $80,RIGHT
+		setFacing $81,LEFT
 		csWait 20
 		nextSingleText $80,$5   ; "Well, that didn't work.{D2}"
-		setFacing $5,2
+		setFacing $5,LEFT
 		csWait 30
-		setFacing $5,0
+		setFacing $5,RIGHT
 		csWait 30
-		setFacing $5,1
+		setFacing $5,UP
 		csWait 20
 		entityNod $5
 		csWait 20
@@ -127,13 +127,13 @@ IntroCutscene3: textCursor $1077
 		setActscript $5,$FF,eas_Init
 		moveEntity $5,$FF,$1,$1
 		endMove $8080
-		setFacing $80,1
-		setFacing $81,1
+		setFacing $80,UP
+		setFacing $81,UP
 		moveEntity $5,$0,$1,$1
 		endMove $8080
 		csWait 6
 		setActscript $5,$FF,eas_461AA
-		setFacing $5,3
+		setFacing $5,DOWN
 		entitySprite $5,$BB
 		nextSingleText $FF,$FF  ; "{NAME;5} the thief{N}grabbed the two jewels.{D2}"
 		csWait 20
@@ -153,7 +153,7 @@ IntroCutscene3: textCursor $1077
 		hideEntity $82
 		setBlocks 26,18,1,1,26,4
 		entitySprite $5,$5
-		setFacing $5,1
+		setFacing $5,UP
 		moveEntity $5,$0,$3,$1
 		endMove $8080
 		csWait 3
@@ -162,11 +162,11 @@ IntroCutscene3: textCursor $1077
 		endMove $8080
 		setQuake 3
 		setActscript $5,$FF,eas_Init
-		setFacing $80,3
-		setFacing $81,3
+		setFacing $80,DOWN
+		setFacing $81,DOWN
 		moveEntity $5,$FF,$1,$2
 		endMove $8080
-		setFacing $5,2
+		setFacing $5,LEFT
 		customActscript $5,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -199,10 +199,10 @@ IntroCutscene3: textCursor $1077
 		setActscript $80,$FF,eas_Jump
 		setActscript $80,$FF,eas_Jump
 		csWait 20
-		setFacing $80,3
+		setFacing $80,DOWN
 		nextSingleText $0,$81   ; "You did it!{N}You have the legendary{N}jewels!{D2}"
 		csWait 20
-		setFacing $5,1
+		setFacing $5,UP
 		entitySprite $5,$3B
 		setActscript $5,$FF,eas_Init
 		nextSingleText $80,$5   ; "I did?{D2}"
@@ -232,7 +232,7 @@ IntroCutscene3: textCursor $1077
 		setQuake 3
 		csWait 40
 		setQuake 0
-		setFacing $5,1
+		setFacing $5,UP
 		nextSingleText $0,$80   ; "What's happening?!{D2}"
 		entityShakeHead $80
 		entityShakeHead $81
@@ -280,9 +280,9 @@ IntroCutscene3: textCursor $1077
 		endMove $8080
 		playSound SFX_WARP
 		fadeOutToBlackHalf
-		setPos $5,2,8,3
-		setPos $80,2,8,3
-		setPos $81,2,8,3
+		setPos $5,2,8,DOWN
+		setPos $80,2,8,DOWN
+		setPos $81,2,8,DOWN
 		reloadMap 0,3
 		csWait 10
 		fadeInFromBlackHalf
@@ -317,8 +317,8 @@ IntroCutscene3: textCursor $1077
 		endMove $8080
 		moveEntity $80,$FF,$0,$2
 		endMove $8080
-		setFacing $5,2
-		setFacing $80,2
+		setFacing $5,LEFT
+		setFacing $80,LEFT
 		csWait 30
 		moveEntity $5,$0,$2,$2
 		endMove $8080
@@ -326,7 +326,7 @@ IntroCutscene3: textCursor $1077
 		endMove $8080
 		csWait 30
 		setActscript $81,$FF,eas_Init
-		setFacing $81,3
+		setFacing $81,DOWN
 		entityShakeHead $81
 		customActscript $81,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30

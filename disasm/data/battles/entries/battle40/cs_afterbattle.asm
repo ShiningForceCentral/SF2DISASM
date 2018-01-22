@@ -6,14 +6,14 @@ abcs_battle40:  textCursor $BF9
 		loadMapEntities ce_4ECD6
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,13,8,0
+		setPos $7,13,8,RIGHT
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,15,6,3
+		setPos $1F,15,6,DOWN
 		setActscript $1C,$FF,eas_Init
-		setPos $1C,17,8,2
+		setPos $1C,17,8,LEFT
 		jumpIfFlagClear $4C,cs_4EAEE; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		setPos $1A,63,62,3
+		setPos $1A,63,62,DOWN
 cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		setBlocks 0,52,10,7,13,10
 		customActscript $83,$FF
@@ -56,39 +56,39 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		endMove $8080
 		nextSingleText $0,$83   ; "If possible, I want to{N}relive my life...not as{N}a devil...next time....{W1}"
 		entityFlashWhite $83,$1E
-		setPos $80,15,8,3
+		setPos $80,15,8,DOWN
 		moveEntity $80,$0,$0,$2
 		endMove $8080
 		csWait 8
-		setPos $81,15,8,3
+		setPos $81,15,8,DOWN
 		moveEntity $81,$0,$7,$2
 		endMove $8080
 		csWait 8
-		setPos $82,15,8,3
+		setPos $82,15,8,DOWN
 		moveEntity $82,$0,$3,$2
 		endMove $8080
 		csWait 8
-		setPos $80,15,8,3
+		setPos $80,15,8,DOWN
 		moveEntity $80,$0,$7,$2
 		endMove $8080
 		csWait 8
-		setPos $81,15,8,3
+		setPos $81,15,8,DOWN
 		moveEntity $81,$0,$0,$2
 		endMove $8080
 		csWait 8
-		setPos $82,15,8,3
+		setPos $82,15,8,DOWN
 		moveEntity $82,$0,$7,$2
 		endMove $8080
 		csWait 8
-		setPos $80,15,8,3
+		setPos $80,15,8,DOWN
 		moveEntity $80,$0,$3,$2
 		endMove $8080
 		csWait 8
-		setPos $81,15,8,3
+		setPos $81,15,8,DOWN
 		moveEntity $81,$0,$7,$2
 		endMove $8080
 		csWait 8
-		setPos $82,15,8,3
+		setPos $82,15,8,DOWN
 		moveEntity $82,$0,$0,$2
 		endMove $8080
 		csWait 8
@@ -103,29 +103,29 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		csWait 120
 		playSound MUSIC_SAD_THEME_3
 		entityShiver $7
-		setFacing $7,1
+		setFacing $7,UP
 		nextSingleText $0,$7    ; "(Sob, sob)...how sad.{N}{LEADER}, Sir Astral...{W1}"
-		setFacing $1C,3
+		setFacing $1C,DOWN
 		nextSingleText $0,$1C   ; "Oddler had a pure spirit...{N}I'll miss him.{W1}"
-		setFacing $1F,1
+		setFacing $1F,UP
 		nextSingleText $0,$1F   ; "Don't cry for him now.{N}This is Zeon's doing.{W1}"
-		setFacing $1F,3
+		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "We shall go onward and{N}remember Oddler in our{N}hearts.{W1}"
 		moveEntity $1C,$FF,$2,$1
 		moreMove $3,$1
 		endMove $8080
-		setFacing $1C,2
+		setFacing $1C,LEFT
 		moveEntity $1F,$FF,$3,$2
 		endMove $8080
 		moveEntity $7,$FF,$3,$1
 		endMove $8080
-		setFacing $7,0
+		setFacing $7,RIGHT
 		csWait 40
-		setFacing $0,0
+		setFacing $0,RIGHT
 		csWait 40
-		setFacing $0,2
+		setFacing $0,LEFT
 		csWait 40
-		setFacing $0,1
+		setFacing $0,UP
 		csWait 30
 		entityNod $0
 		followEntity $7,$0,$2

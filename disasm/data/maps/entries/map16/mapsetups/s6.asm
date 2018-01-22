@@ -18,8 +18,8 @@ return_51F86:
 
 cs_51F88:       textCursor $3C2
 		nextSingleText $C0,$80  ; "Listen, everybody!{N}We're going to Granseal!{W1}"
-		setFacing $5,3
-		setFacing $0,3
+		setFacing $5,DOWN
+		setFacing $0,DOWN
 		setCamDest 12,11
 		nextSingleText $C0,$5   ; "We're too late!{W1}"
 		nextText $C0,$80        ; "As you may know, my{N}messenger was killed!{W2}"
@@ -27,9 +27,9 @@ cs_51F88:       textCursor $3C2
 		nextSingleText $C0,$80  ; "So we're invading them to{N}retaliate!{W1}"
 		nextSingleText $FF,$FF  ; "Murmur...murmur....{W1}"
 		csWait 20
-		setFacing $1C,0
+		setFacing $1C,RIGHT
 		csWait 20
-		setFacing $1C,2
+		setFacing $1C,LEFT
 		csWait 20
 		setEntityDest $1C,16,17
 		nextText $0,$1C         ; "Quiet!  Everybody listen{N}to me!{W1}"
@@ -40,55 +40,55 @@ cs_51F88:       textCursor $3C2
 		setActscript $1C,$0,eas_461B6
 		csWait 60
 		nextSingleText $0,$1C   ; "No?  Good!{W1}"
-		setFacing $1C,3
+		setFacing $1C,DOWN
 		csWait 20
-		setFacing $1C,1
+		setFacing $1C,UP
 		csWait 20
 		setEntityDest $1C,16,16
-		setFacing $1C,0
-		setFacing $80,2
+		setFacing $1C,RIGHT
+		setFacing $80,LEFT
 		csWait 20
-		setFacing $1C,3
+		setFacing $1C,DOWN
 		nextSingleText $C0,$80  ; "Well done, {NAME;28}.{W1}"
-		setFacing $80,3
+		setFacing $80,DOWN
 		nextSingleText $0,$1C   ; "King Galam, victory is{N}ours!{W1}"
 		nextSingleText $C0,$80  ; "Guards!{N}Open the gate!{N}Lower the bridge!{W1}"
 		csWait 30
 		playSound SFX_BIG_DOOR_RUMBLE
 		csWait 150
-		setFacing $80,2
+		setFacing $80,LEFT
 		nextSingleText $C0,$80  ; "{NAME;28}, prove your{N}allegiance.{W1}"
-		setFacing $1C,0
+		setFacing $1C,RIGHT
 		nextSingleText $0,$1C   ; "What do you mean?{W1}"
 		nextSingleText $C0,$80  ; "Show no mercy!{W1}"
 		nextSingleText $0,$1C   ; "My Lord...{W1}"
 		nextSingleText $C0,$80  ; "Now, go!{W1}"
-		setFacing $80,3
-		setFacing $1C,3
+		setFacing $80,DOWN
+		setFacing $1C,DOWN
 		csWait 20
 		setCamDest 12,18
 		setEntityDest $80,17,23
 		setEntityDest $1C,17,17
 		setEntityDest $1C,17,22
 		setEntityDest $1C,18,24
-		setFacing $80,1
-		setFacing $1C,1
-		setFacing $81,3
-		setFacing $82,3
-		setFacing $83,3
-		setFacing $84,3
-		setFacing $85,3
-		setFacing $86,3
-		setFacing $87,3
-		setFacing $88,3
-		setFacing $89,3
-		setFacing $8A,3
-		setFacing $8B,3
-		setFacing $8C,3
-		setFacing $8D,3
-		setFacing $8E,3
-		setFacing $8F,3
-		setFacing $90,3
+		setFacing $80,UP
+		setFacing $1C,UP
+		setFacing $81,DOWN
+		setFacing $82,DOWN
+		setFacing $83,DOWN
+		setFacing $84,DOWN
+		setFacing $85,DOWN
+		setFacing $86,DOWN
+		setFacing $87,DOWN
+		setFacing $88,DOWN
+		setFacing $89,DOWN
+		setFacing $8A,DOWN
+		setFacing $8B,DOWN
+		setFacing $8C,DOWN
+		setFacing $8D,DOWN
+		setFacing $8E,DOWN
+		setFacing $8F,DOWN
+		setFacing $90,DOWN
 		nextSingleText $0,$80   ; "Crush Granseal!{W1}"
 		moveEntity $1C,$0,$3,$7
 		endMove $8080
@@ -126,8 +126,8 @@ cs_51F88:       textCursor $3C2
 		endMove $8080
 		moveEntity $90,$0,$3,$7
 		endMove $8080
-		setFacing $5,3
-		setFacing $0,3
+		setFacing $5,DOWN
+		setFacing $0,DOWN
 		setCamDest 12,5
 		hideEntity $1C
 		hideEntity $80
@@ -148,15 +148,15 @@ cs_51F88:       textCursor $3C2
 		hideEntity $8F
 		hideEntity $90
 		nextText $C0,$5         ; "They've gone.{N}The war begins.{W1}"
-		setFacing $5,2
-		setFacing $0,0
+		setFacing $5,LEFT
+		setFacing $0,RIGHT
 		nextText $C0,$5         ; "So, what should we do?{N}Are you still going to{N}Granseal?{W1}"
 		nextText $C0,$5         ; "You're serious?{N}Do you think you can stop{N}the war?{W2}"
 		nextSingleText $0,$5    ; "I will leave you once I'm{N}outside the gate!{W1}"
 		csc_end
 cs_521BA:       textCursor $3DA
-		setPos $92,17,16,1
-		setPos $93,17,15,3
+		setPos $92,17,16,UP
+		setPos $93,17,15,DOWN
 		nextSingleText $0,$91   ; "You!{W1}"
 		setCamDest 0,17
 		nextSingleText $0,$91   ; "How did you get out?{W1}"
@@ -170,8 +170,8 @@ cs_521BA:       textCursor $3DA
 		nextSingleText $0,$93   ; "Oh, this?{N}The King gave it to me!{W1}"
 		nextSingleText $0,$92   ; "Because you captured that{N}rat?{W1}"
 		setCamDest 0,13
-		setFacing $0,0
-		setFacing $5,2
+		setFacing $0,RIGHT
+		setFacing $5,LEFT
 		nextText $0,$93         ; "Yes.  I presented them to{N}King Galam.{W2}"
 		nextSingleText $0,$93   ; "He was so kind to give me{N}one of the pair, the Jewel{N}of Light!{W1}"
 		moveEntity $0,$0,$0,$1
@@ -179,15 +179,15 @@ cs_521BA:       textCursor $3DA
 		moveEntity $5,$FF,$0,$1
 		endMove $8080
 		nextSingleText $0,$91   ; "Wait!{W1}"
-		setFacing $0,3
-		setFacing $5,3
+		setFacing $0,DOWN
+		setFacing $5,DOWN
 		setCamDest 0,18
 		nextSingleText $0,$91   ; "How did you escape?{W1}"
-		setFacing $0,0
-		setFacing $5,2
+		setFacing $0,RIGHT
+		setFacing $5,LEFT
 		csWait 20
-		setFacing $0,3
-		setFacing $5,3
+		setFacing $0,DOWN
+		setFacing $5,DOWN
 		setEntityDest $91,9,23
 		setActscript $91,$FF,eas_Jump
 		setActscript $91,$FF,eas_Jump

@@ -6,12 +6,12 @@ abcs_battle34:  textCursor $B5F
 		loadMapEntities ce_4D69E
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,9,11,1
+		setPos $7,9,11,UP
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,5,11,1
+		setPos $1F,5,11,UP
 		jumpIfFlagClear $4C,cs_4D502; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		setPos $1A,8,12,1
+		setPos $1A,8,12,UP
 cs_4D502:       stopEntity $80
 		customActscript $80,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
@@ -28,7 +28,7 @@ cs_4D502:       stopEntity $80
 		entityShiver $80
 		nextSingleText $0,$80   ; "{LEADER}, I lost?!{N}Take this.{W1}"
 		nextSingleText $FF,$FF  ; "Cameela reveals the Sky Orb.{W1}"
-		setPos $83,7,10,2
+		setPos $83,7,10,LEFT
 		nextText $0,$80         ; "This is the Sky Orb.  With{N}it, you can drive the Nazca{N}Ship.{W2}"
 		nextText $0,$80         ; "Listen.  You have to be very{N}careful from now on.{W2}"
 		nextSingleText $0,$80   ; "Geshp has Prism Flowers.{N}He will...{W1}"
@@ -37,7 +37,7 @@ cs_4D502:       stopEntity $80
 		flashScreenWhite $2
 		tintMap
 		setActscript $80,$FF,eas_Init
-		setFacing $80,2
+		setFacing $80,LEFT
 		entitySprite $80,$B4
 		startEntity $80
 		setActscript $80,$0,eas_AnimSpeedx2
@@ -57,10 +57,10 @@ cs_4D592:       setActscript $1F,$FF,eas_Jump
 		nextSingleText $C0,$81  ; "I have to go now and{N}prepare your welcoming{N}party!{W1}"
 		flickerOnce
 		csWait 60
-		setFacing $7,2
+		setFacing $7,LEFT
 		nextText $0,$7          ; "I really hate him!{W2}"
 		nextSingleText $0,$7    ; "Prism Flowers?{N}What are they?{W1}"
-		setFacing $1F,0
+		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "I have no idea, but it's{N}probably a trap.{W1}"
 		jumpIfFlagClear $4C,cs_4D620; Zynk is a follower
 		customActscript $1A,$FF
@@ -79,7 +79,7 @@ cs_4D592:       setActscript $1F,$FF,eas_Jump
 		nextSingleText $0,$1F   ; "Excuse me?{W1}"
 		nextSingleText $0,$1A   ; "Ancient countries had those{N}flowers along their borders.{W1}"
 		nextSingleText $0,$1F   ; "What kind of flowers are{N}they?{W1}"
-		setFacing $1A,1
+		setFacing $1A,UP
 		csWait 30
 		nextSingleText $0,$1A   ; "I cannot explain....{W1}"
 cs_4D620:       textCursor $B74
@@ -89,11 +89,11 @@ cs_4D620:       textCursor $B74
 		nextSingleText $0,$1F   ; "{LEADER}, grab the Sky{N}Orb.{N}Let's go.{W1}"
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
-		setFacing $7,2
+		setFacing $7,LEFT
 		jumpIfFlagClear $4C,cs_4D654; Zynk is a follower
 		moveEntity $1A,$FF,$0,$1
 		endMove $8080
-		setFacing $1A,2
+		setFacing $1A,LEFT
 cs_4D654:       entityNod $0
 		moveEntity $0,$FF,$1,$1
 		endMove $8080

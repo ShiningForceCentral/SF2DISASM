@@ -37,12 +37,12 @@ cs_5DA28:       textCursor $CFB
 		csc_end
 cs_5DA7A:       setCameraEntity $83
 		setEntityDest $0,4,23
-		setFacing $0,1
+		setFacing $0,UP
 		moveEntity $83,$FF,$0,$2
 		endMove $8080
 		moveEntity $83,$FF,$3,$1
 		endMove $8080
-		setFacing $0,0
+		setFacing $0,RIGHT
 		csWait 60
 		customActscript $83,$FF
 		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10

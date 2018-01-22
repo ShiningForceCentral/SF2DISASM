@@ -17,7 +17,7 @@ return_5CA5C:
 	; End of function ms_map63_InitFunction
 
 cs_5CA5E:       entitySprite $1D,$B0
-		setFacing $1D,3
+		setFacing $1D,DOWN
 		stopEntity $1D
 		csc_end
 cs_5CA6E:       setBlocks 16,54,1,1,13,43
@@ -96,13 +96,13 @@ cs_5CBB4:       textCursor $1053
 		csWait 20
 		setQuake 0
 		csWait 40
-		setFacing $1D,2
+		setFacing $1D,LEFT
 		csWait 20
-		setFacing $1D,1
+		setFacing $1D,UP
 		csWait 20
-		setFacing $1D,0
+		setFacing $1D,RIGHT
 		csWait 20
-		setFacing $1D,3
+		setFacing $1D,DOWN
 		setActscript $1D,$FF,eas_Jump
 		setQuake 2
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
@@ -120,7 +120,7 @@ cs_5CC26:       entityFlashWhite $0,$32
 		csWait 30
 		executeSubroutine FadeOutToWhite
 		mapLoad 64,0,0
-		loadEntitiesFromMapSetup 5,4,1
+		loadEntitiesFromMapSetup 5,4,UP
 		executeSubroutine csub_5CDDC
 		setActscript $0,$0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
@@ -150,7 +150,7 @@ cs_5CC26:       entityFlashWhite $0,$32
 		executeSubroutine sub_5CDF8
 		csWait 2
 		mapLoad 63,3,3
-		loadEntitiesFromMapSetup 8,7,1
+		loadEntitiesFromMapSetup 8,7,UP
 		setActscript $0,$0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
 		csWait 30
@@ -163,7 +163,7 @@ cs_5CCF6:       entityFlashWhite $0,$32
 		csWait 30
 		executeSubroutine FadeOutToWhite
 		mapLoad 64,0,0
-		loadEntitiesFromMapSetup 5,4,1
+		loadEntitiesFromMapSetup 5,4,UP
 		executeSubroutine sub_5CDE4
 		setActscript $0,$0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
@@ -193,7 +193,7 @@ cs_5CCF6:       entityFlashWhite $0,$32
 		executeSubroutine sub_5CDF8
 		csWait 2
 		mapLoad 63,5,17
-		loadEntitiesFromMapSetup 10,21,1
+		loadEntitiesFromMapSetup 10,21,UP
 		setActscript $0,$0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
 		csWait 30
@@ -202,7 +202,7 @@ cs_5CCF6:       entityFlashWhite $0,$32
 		startEntity $0
 		jumpIfFlagSet $1D,cs_5CDDA; Claude joined
 		entitySprite $1D,$B0
-		setFacing $1D,3
+		setFacing $1D,DOWN
 		stopEntity $1D
 cs_5CDDA:       csc_end
 

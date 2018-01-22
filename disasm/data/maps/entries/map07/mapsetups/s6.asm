@@ -37,7 +37,7 @@ cs_55832:       textCursor $50A
 		csWait 40
 		moveEntity $80,$FF,$2,$1
 		endMove $8080
-		setFacing $80,3
+		setFacing $80,DOWN
 		entityNod $80
 		nextText $0,$80         ; "(Cough)...our town is being{N}rebuilt, as you can see.{W2}"
 		nextText $0,$80         ; "But, we will be better off{N}if there are no accidents.{W2}"
@@ -45,7 +45,7 @@ cs_55832:       textCursor $50A
 		nextText $0,$80         ; "You are the soldiers of{N}Granseal!{W2}"
 		nextSingleText $0,$80   ; "Do your best to improve our{N}new home!{W1}"
 		csWait 30
-		setFacing $80,1
+		setFacing $80,UP
 		nextSingleText $0,$80   ; "King Granseal!{W1}"
 		csWait 60
 		nextSingleText $0,$80   ; "(Cough)...(cough)...{N}King Granseal!{W1}"
@@ -57,32 +57,32 @@ cs_55832:       textCursor $50A
 		stopEntity $81
 		nextText $0,$80         ; "N...nothing?{W2}"
 		nextSingleText $0,$80   ; "Mmmm...alright.{W1}"
-		setFacing $80,2
-		setFacing $8B,0
+		setFacing $80,LEFT
+		setFacing $8B,RIGHT
 		nextSingleText $0,$80   ; "Sir Astral, please speak in{N}place of our King.{W1}"
 		entityNod $8B
 		nextSingleText $0,$8B   ; "Ummmm...OK, I got it.{W1}"
 		csWait 20
 		moveEntity $80,$FF,$0,$1
 		endMove $8080
-		setFacing $80,2
+		setFacing $80,LEFT
 		csWait 25
 		moveEntity $8B,$FF,$0,$1
 		endMove $8080
-		setFacing $8B,3
-		setFacing $80,3
+		setFacing $8B,DOWN
+		setFacing $80,DOWN
 		csWait 40
 		nextText $0,$8B         ; "One year has passed since{N}we came here.{W2}"
 		nextText $0,$8B         ; "The castle, the town...{N}everything is coming along{N}nicely.{W2}"
 		nextText $0,$8B         ; "But we lack something.{N}What is it?  It's trading!{W2}"
 		entityNod $80
 		nextSingleText $0,$8B   ; "We need to make alliances{N}with other towns.{W1}"
-		setFacing $8B,0
-		setFacing $80,2
+		setFacing $8B,RIGHT
+		setFacing $80,LEFT
 		nextSingleText $0,$80   ; "Indeed, indeed.{N}Thank you, sir!{W1}"
 		csWait 20
-		setFacing $8B,3
-		setFacing $80,3
+		setFacing $8B,DOWN
+		setFacing $80,DOWN
 		nextSingleText $0,$80   ; "That's all for today.{N}You may go now.{W1}"
 		moveEntity $82,$0,$3,$1
 		moreMove $2,$5
@@ -115,9 +115,9 @@ cs_55832:       textCursor $50A
 		moveEntity $2,$FF,$1,$2
 		moreMove $0,$6
 		endMove $8080
-		setFacing $8B,3
-		setFacing $84,3
-		setFacing $87,3
+		setFacing $8B,DOWN
+		setFacing $84,DOWN
+		setFacing $87,DOWN
 		reloadEntities ms_map7_Entities
 		csc_end
 ce_559AE:       dc.w $B
@@ -218,7 +218,7 @@ cs_55A36:       textCursor $4AE
 		nextSingleText $0,$8B   ; "Oh, this is the happiest day{N}of my life!{W1}"
 		moveEntity $8B,$FF,$3,$1
 		endMove $8080
-		setFacing $8B,0
+		setFacing $8B,RIGHT
 		nextSingleText $0,$8B   ; "Please let me go with you{N}and meet Volcanon!{W1}"
 		nextText $C0,$7         ; "Ummm...OK.{W2}"
 		nextText $C0,$7         ; "To tell the truth, I hurt{N}my wing during this trip.{W2}"
@@ -229,8 +229,8 @@ cs_55A36:       textCursor $4AE
 		moveEntity $8B,$FF,$3,$1
 		moreMove $0,$1
 		endMove $8080
-		setFacing $8B,3
-		setFacing $7,3
+		setFacing $8B,DOWN
+		setFacing $7,DOWN
 		nextText $0,$8B         ; "{LEADER}!{W2}"
 		nextText $0,$8B         ; "Why didn't you tell me you{N}were here?  Did you listen{N}to our conversation?{W2}"
 		nextText $0,$8B         ; "You know, it's time for us to{N}set out!{W2}"
@@ -238,8 +238,8 @@ cs_55A36:       textCursor $4AE
 		nextSingleText $0,$80   ; "Sir Astral!{W1}"
 		moveEntity $80,$FF,$3,$2
 		endMove $8080
-		setFacing $80,2
-		setFacing $8B,0
+		setFacing $80,LEFT
+		setFacing $8B,RIGHT
 		nextSingleText $0,$80   ; "You said, you're going too?{N}No!{W1}"
 		setActscript $8B,$FF,eas_JumpLeft
 		csWait 40
@@ -256,13 +256,13 @@ cs_55A36:       textCursor $4AE
 		moveEntity $8B,$FF,$2,$1
 		moreMove $1,$1
 		endMove $8080
-		setFacing $7,1
+		setFacing $7,UP
 		nextText $0,$81         ; "{LEADER}, please take your{N}party and go with{N}{NAME;7}.{W2}"
 		nextSingleText $0,$81   ; "Astral, do you agree?{W1}"
-		setFacing $8B,3
+		setFacing $8B,DOWN
 		csWait 60
 		nextText $0,$8B         ; "Hmmmmm....{W2}"
-		setFacing $8B,1
+		setFacing $8B,UP
 		entityNod $8B
 		nextSingleText $0,$8B   ; "Y...yes.{W1}"
 		moveEntity $7,$FF,$1,$1
@@ -290,7 +290,7 @@ cs_55A36:       textCursor $4AE
 		moveEntity $80,$FF,$0,$2
 		moreMove $1,$1
 		endMove $8080
-		setFacing $80,1
+		setFacing $80,UP
 		csWait 60
 		moveEntity $80,$FF,$2,$3
 		moreMove $3,$2
@@ -300,7 +300,7 @@ cs_55A36:       textCursor $4AE
 		moveEntity $80,$FF,$1,$1
 		moreMove $0,$1
 		endMove $8080
-		setFacing $80,3
+		setFacing $80,DOWN
 		moveEntity $8B,$FF,$0,$1
 		moreMove $3,$1
 		endMove $8080
@@ -319,15 +319,15 @@ cs_55BEE:       textCursor $4E1
 		setEntityDest $8000,11,7
 		setEntityDest $7,10,8
 		setCamDest 6,2
-		setFacing $0,1
-		setFacing $7,1
+		setFacing $0,UP
+		setFacing $7,UP
 		nextSingleText $0,$8B   ; "Thanks to you, Granseal has{N}many allies to trade with.{W1}"
 		nextText $0,$80         ; "You've also made a lot of{N}new friends!{W2}"
 		nextSingleText $0,$80   ; "Great job!{W1}"
 		nextText $0,$8B         ; "I heard about everything{N}from Bedoe.{W2}"
 		nextText $0,$8B         ; "I never imagined Zeon could{N}be revived!{W1}"
 		nextSingleText $0,$8B   ; "I understand that Volcanon{N}is angry.{W1}"
-		setFacing $80,2
+		setFacing $80,LEFT
 		nextSingleText $0,$80   ; "So Princess Elis must be...{W1}"
 		nextSingleText $0,$7    ; "She's alive.{W1}"
 		customActscript $81,$FF
@@ -351,7 +351,7 @@ cs_55BEE:       textCursor $4E1
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setFacing $80,3
+		setFacing $80,DOWN
 		stopEntity $81
 		stopEntity $8B
 		stopEntity $80
@@ -407,7 +407,7 @@ cs_55BEE:       textCursor $4E1
 		moreMove $0,$1
 		moreMove $1,$2
 		endMove $8080
-		setFacing $81,3
+		setFacing $81,DOWN
 		executeSubroutine csub_55EF4
 		customActscript $7,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
@@ -421,7 +421,7 @@ cs_55BEE:       textCursor $4E1
 		entityNod $0
 		setActscript $7,$0,eas_Jump
 		entityNod $80
-		setFacing $7,0
+		setFacing $7,RIGHT
 		setActscript $0,$0,eas_Jump
 		entityNod $8B
 		moveEntity $7,$0,$1,$1
@@ -430,7 +430,7 @@ cs_55BEE:       textCursor $4E1
 		setActscript $7,$FF,eas_Jump
 		moveEntity $7,$FF,$0,$2
 		endMove $8080
-		setFacing $7,1
+		setFacing $7,UP
 		entityNod $80
 		setActscript $8B,$FF,eas_Jump
 		entityNod $0
@@ -439,19 +439,19 @@ cs_55BEE:       textCursor $4E1
 		moreMove $1,$1
 		endMove $8080
 		entityNod $7
-		setFacing $8B,0
-		setFacing $80,2
+		setFacing $8B,RIGHT
+		setFacing $80,LEFT
 		setActscript $81,$FF,eas_Jump
 		entityNod $81
 		moveEntity $0,$FF,$2,$1
 		moreMove $1,$1
 		endMove $8080
-		setFacing $8B,3
+		setFacing $8B,DOWN
 		entityNod $0
 		moveEntity $0,$FF,$3,$1
 		moreMove $0,$1
 		endMove $8080
-		setFacing $0,1
+		setFacing $0,UP
 		nextText $FF,$FF        ; "About the ancient ruins{N}and Creed....{W2}"
 		nextText $FF,$FF        ; "And Zeon's message through{N}Evil Spilit.{W2}"
 		nextSingleText $FF,$FF  ; "They explain everything.{W1}"
@@ -459,17 +459,17 @@ cs_55BEE:       textCursor $4E1
 		moreMove $2,$1
 		moreMove $3,$1
 		endMove $8080
-		setFacing $80,3
+		setFacing $80,DOWN
 		waitIdle $7
-		setFacing $7,1
+		setFacing $7,UP
 		executeSubroutine sub_55F82
 		csWait 10
 		nextSingleText $0,$80   ; "Amazing!{N}{LEADER}!  And {NAME;7}...{W1}"
-		setFacing $80,2
+		setFacing $80,LEFT
 		nextSingleText $0,$80   ; "you've experienced a great{N}deal.{W1}"
 		nextSingleText $0,$8B   ; "Hmmm...mmmm....{W1}"
 		nextSingleText $0,$80   ; "Sir Astral?{W1}"
-		setFacing $8B,0
+		setFacing $8B,RIGHT
 		nextSingleText $0,$8B   ; "What should we do now?{W1}"
 		nextSingleText $C0,$81  ; "Easy, we have to defeat{N}Zeon and save Elis!{W1}"
 		customActscript $80,$FF
@@ -481,34 +481,34 @@ cs_55BEE:       textCursor $4E1
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $80,$FF,$2,$1
 		endMove $8080
-		setFacing $80,1
+		setFacing $80,UP
 		nextSingleText $0,$80   ; "Impossible!{W1}"
 		csWait 50
-		setFacing $8B,1
+		setFacing $8B,UP
 		nextSingleText $0,$8B   ; "The King is right.{W1}"
 		setActscript $80,$FF,eas_Jump
-		setFacing $80,2
+		setFacing $80,LEFT
 		nextSingleText $0,$80   ; "What?{W1}"
 		nextText $C0,$81        ; "Astral, thank you.{W2}"
 		nextSingleText $C0,$81  ; "What do we have to do first?{W1}"
 		moveEntity $80,$FF,$0,$1
 		endMove $8080
-		setFacing $80,2
+		setFacing $80,LEFT
 		nextText $0,$8B         ; "We have to go to North{N}Parmecia.{W2}"
 		nextSingleText $0,$8B   ; "We'd better go and see the{N}storytellers in Tristan.{W1}"
 		entityShiver $80
 		nextSingleText $0,$80   ; "Sir!{W1}"
-		setFacing $8B,0
+		setFacing $8B,RIGHT
 		nextSingleText $FF,$FF  ; "Astral winks at the Minister{N}and smiles.{W1}"
-		setFacing $8B,1
+		setFacing $8B,UP
 		nextSingleText $0,$8B   ; "It's an important job. Will{N}you allow me to go with{N}{LEADER}?{W1}"
 		nextSingleText $C0,$81  ; "Sure, sure!  Just bring{N}Elis back to me!{W1}"
 		nextText $0,$80         ; "Be careful, Astral.{W2}"
 		nextSingleText $0,$80   ; "It's dangerous out there.{W1}"
-		setFacing $8B,0
+		setFacing $8B,RIGHT
 		entityNod $8B
 		nextSingleText $0,$8B   ; "I will!{W1}"
-		setFacing $8B,3
+		setFacing $8B,DOWN
 		nextText $0,$8B         ; "{LEADER}.{W2}"
 		nextSingleText $0,$8B   ; "I'm going with you as an{N}adviser.{W1}"
 		playSound MUSIC_JOIN

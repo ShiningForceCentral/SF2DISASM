@@ -33,18 +33,18 @@ cs_5E3C2:       textCursor $AAB
 		setActscript $1F,$0,eas_Jump
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$FF,eas_Jump
-		setFacing $7,3
+		setFacing $7,DOWN
 		nextSingleText $0,$7    ; "What?{W1}"
 		csWait 5
 		setActscript $7,$0,eas_461B6
 		csWait 120
-		setFacing $1F,1
+		setFacing $1F,UP
 		nextSingleText $0,$1F   ; "I heard a voice from the{N}other side of the door.{W1}"
-		setFacing $0,1
+		setFacing $0,UP
 		setEntityDest $801F,13,12
 		setEntityDest $7,16,12
-		setFacing $1F,1
-		setFacing $7,1
+		setFacing $1F,UP
+		setFacing $7,UP
 		setCamDest 8,9
 		nextSingleText $0,$80   ; "I'm Zalbard.  I'm one of{N}the greater devils.{W1}"
 		setActscript $1F,$FF,eas_46172
@@ -57,12 +57,12 @@ cs_5E3C2:       textCursor $AAB
 		moveEntity $7,$FF,$3,$2
 		endMove $8080
 		nextSingleText $0,$80   ; "Do come in.  Of course, you{N}can go back now and abandon{N}Mitula!{W1}"
-		setFacing $7,2
+		setFacing $7,LEFT
 		nextText $0,$7          ; "Sir Astral...{W2}"
 		nextSingleText $0,$7    ; "The greater devil that{N}attacked Bedoe was as{N}strong as Volcanon.{W1}"
 		nextText $0,$80         ; "Are you talking about{N}Sir Odd Eye?{W2}"
 		nextSingleText $0,$80   ; "Did he fight against{N}Volcanon at Bedoe?{W1}"
-		setFacing $7,1
+		setFacing $7,UP
 		nextSingleText $0,$1F   ; "Yes.  And he lost.{W1}"
 		nextText $0,$80         ; "I can't believe it!{N}Odd Eye is the strongest{N}devil among us.{W2}"
 		nextText $0,$80         ; "But, we haven't been able to{N}contact him lately.{W2}"
@@ -70,7 +70,7 @@ cs_5E3C2:       textCursor $AAB
 		nextSingleText $0,$80   ; "Now, enter the shrine.{N}Mitula is here.{W1}"
 		csWait 60
 		nextSingleText $0,$7    ; "What should we do?{N}A greater devil awaits us{N}inside.{W1}"
-		setFacing $7,2
+		setFacing $7,LEFT
 		setActscript $1F,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		customActscript $1F,$FF
@@ -90,10 +90,10 @@ cs_5E3C2:       textCursor $AAB
 		moveEntity $7,$FF,$3,$1
 		moreMove $2,$3
 		endMove $8080
-		setFacing $0,3
-		setFacing $7,1
+		setFacing $0,DOWN
+		setFacing $7,UP
 		setCamDest 9,12
-		setFacing $1F,3
+		setFacing $1F,DOWN
 		setActscript $1F,$FF,eas_46172
 		setActscript $7,$FF,eas_46172
 		customActscript $7,$FF
@@ -155,7 +155,7 @@ cs_5E3C2:       textCursor $AAB
 		setActscript $1F,$FF,eas_Init
 		moveEntity $1F,$FF,$0,$1
 		endMove $8080
-		setFacing $1F,1
+		setFacing $1F,UP
 		nextText $0,$1F         ; "Zalbard...at least he's not{N}as strong as Odd Eye.{W2}"
 		nextText $0,$1F         ; "But still, he's a greater{N}devil.{W2}"
 		nextSingleText $0,$1F   ; "We had better complete our{N}preparations before we go in.{W1}"

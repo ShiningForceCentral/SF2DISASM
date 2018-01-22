@@ -5,13 +5,13 @@ bbcs_39:        textCursor $BD5
 		loadMapFadeIn 66,3,5
 		loadMapEntities ce_4E4AC
 		setActscript $0,$FF,eas_Init
-		setPos $7,9,8,3
-		setPos $1F,7,8,3
-		setPos $1E,8,8,3
+		setPos $7,9,8,DOWN
+		setPos $1F,7,8,DOWN
+		setPos $1E,8,8,DOWN
 		jumpIfFlagClear $4C,cs_4E40C; Zynk is a follower
-		setPos $1A,8,7,3
+		setPos $1A,8,7,DOWN
 cs_4E40C:       jumpIfFlagClear $47,cs_4E41A; Lemon is a follower
-		setPos $1C,63,62,3
+		setPos $1C,63,62,DOWN
 cs_4E41A:       fadeInB
 		cameraSpeed $30
 		setCamDest 3,18
@@ -31,7 +31,7 @@ cs_4E41A:       fadeInB
 		nextSingleText $0,$83   ; "Look over there!{W1}"
 		moveEntity $84,$FF,$1,$1
 		endMove $8080
-		setFacing $80,1
+		setFacing $80,UP
 		setCamDest 3,5
 		csWait 60
 		setCamDest 3,18
@@ -45,7 +45,7 @@ cs_4E41A:       fadeInB
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $80,$FF,$3,$3
 		endMove $8080
-		setFacing $80,1
+		setFacing $80,UP
 		nextSingleText $0,$80   ; "Excellent!{N}Welcome to your graveyard!{W1}"
 		csc_end
 ce_4E4AC:       dc.w 8

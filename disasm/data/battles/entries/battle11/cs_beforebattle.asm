@@ -14,8 +14,8 @@ bbcs_11:        textCursor $9B3
 		moreMove $1,$1
 		endMove $8080
 		nextSingleText $0,$7    ; "You'll come to the foot of{N}Mt. Volcano through this{N}dark cave.{W2}"
-		setFacing $7,0
-		setFacing $0,2
+		setFacing $7,RIGHT
+		setFacing $0,LEFT
 		nextSingleText $0,$7    ; "But, I heard this cave is{N}home to a hobgoblin.{W1}"
 		csWait 20
 		nextSingleText $0,$80   ; "Yes, it is!{W1}"
@@ -27,7 +27,7 @@ bbcs_11:        textCursor $9B3
 		csWait 5
 		setActscript $7,$0,eas_461E4
 		csWait 120
-		setFacing $0,1
+		setFacing $0,UP
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$7    ; "Wh...Who said that?{W1}"

@@ -31,23 +31,23 @@ return_53994:
 	; End of function ms_map20_InitFunction
 
 cs_53996:       textCursor $880
-		setPos $0,23,39,3
-		setPos $1,23,38,3
-		setPos $2,23,37,3
+		setPos $0,23,39,DOWN
+		setPos $1,23,38,DOWN
+		setPos $2,23,37,DOWN
 		setActscript $0,$FF,eas_Init
 		setActscript $1,$FF,eas_Init
 		setActscript $2,$FF,eas_Init
 		fadeInB
 		csWait 20
-		setFacing $0,2
+		setFacing $0,LEFT
 		csWait 20
 		setCamDest 12,34
-		setFacing $0,3
+		setFacing $0,DOWN
 		nextSingleText $0,$80   ; "Mmmm....{N}Hmmm...mmmm....{W1}"
 		nextSingleText $0,$81   ; "Oh, father!{N}Please wake up.{W1}"
 		moveEntity $83,$FF,$0,$1
 		endMove $8080
-		setFacing $83,1
+		setFacing $83,UP
 		nextSingleText $0,$83   ; "Sir Astral?{W1}"
 		nextSingleText $80,$82  ; "Hmmm.  Nothing is wrong{N}with his body, but...{W1}"
 		setPriority $82,$0
@@ -55,14 +55,14 @@ cs_53996:       textCursor $880
 		setActscript $83,$FF,eas_BumpUp
 		setActscript $83,$FF,eas_BumpUp
 		nextSingleText $0,$83   ; "He is suffering badly from{N}something....{W1}"
-		setFacing $82,3
+		setFacing $82,DOWN
 		nextSingleText $80,$82  ; "Perhaps...it might be...{N}{D1}Well?{W1}"
 		csWait 30
-		setFacing $82,0
+		setFacing $82,RIGHT
 		setCamDest 17,34
-		setFacing $82,3
+		setFacing $82,DOWN
 		csWait 40
-		setFacing $82,0
+		setFacing $82,RIGHT
 		csWait 40
 		customActscript $82,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
@@ -89,43 +89,43 @@ cs_53996:       textCursor $880
 		nextSingleText $80,$2   ; "Sorry, sir!{W1}"
 		moveEntity $1,$FF,$2,$1
 		endMove $8080
-		setFacing $1,3
-		setFacing $0,2
+		setFacing $1,DOWN
+		setFacing $0,LEFT
 		nextSingleText $80,$1   ; "Well, we just followed you....{W1}"
 		moveEntity $82,$FF,$0,$1
 		endMove $8080
-		setFacing $82,1
+		setFacing $82,UP
 		nextSingleText $80,$82  ; "Don't lie to me.{N}You wanted to see the{N}castle, didn't you?{W1}"
 		moveEntity $83,$FF,$1,$1
 		endMove $8080
-		setFacing $83,0
+		setFacing $83,RIGHT
 		nextSingleText $0,$83   ; "Sir Astral, who are they?{W1}"
 		csWait 5
 		setActscript $82,$0,eas_461B6
 		nextSingleText $80,$82  ; "Oh...{D1}well...{D1}(mumble)...{D1}{N}They're my pupils....{W1}"
 		moveEntity $83,$FF,$0,$1
 		endMove $8080
-		setFacing $82,2
+		setFacing $82,LEFT
 		nextText $0,$83         ; "So they are.   They look{N}like good kids.{W1}"
 		nextSingleText $0,$83   ; "You must have a special{N}reason to have them here,{N}right?{W1}"
 		nextSingleText $80,$82  ; "Um...{D1}I didn't mean for...{W1}"
-		setFacing $82,1
+		setFacing $82,UP
 		csWait 40
-		setFacing $82,0
+		setFacing $82,RIGHT
 		csWait 30
 		nextSingleText $FF,$FF  ; "Astral glares at {LEADER}.{W1}"
 		moveEntity $82,$FF,$2,$1
 		endMove $8080
 		nextSingleText $80,$82  ; "(Cough){N}You said the door of the{N}Ancient Tower is open.{W2}{N}There must be a connection{N}between the open door and{N}the King's sickness.{W1}"
-		setFacing $82,3
+		setFacing $82,DOWN
 		csWait 60
-		setFacing $82,2
+		setFacing $82,LEFT
 		nextSingleText $80,$82  ; "I called them here to help{N}me investigate the tower.{W1}"
 		entityNod $83
 		moveEntity $82,$FF,$0,$1
 		endMove $8080
 		nextSingleText $80,$82  ; "Now, pupils.  Follow me.{W1}"
-		setFacing $82,1
+		setFacing $82,UP
 		nextSingleText $80,$82  ; "Don't give me any more{N}trouble!{W1}"
 		moveEntity $1,$0,$1,$1
 		endMove $8080
@@ -186,7 +186,7 @@ cs_53B66:       playSound $FD
 		setActscript $82,$FF,eas_46172
 		moveEntity $82,$FF,$0,$2
 		endMove $8080
-		setFacing $82,2
+		setFacing $82,LEFT
 		customActscript $82,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -200,16 +200,16 @@ cs_53B66:       playSound $FD
 cs_53C42:       setCamDest 19,48
 		textCursor $898
 		setActscript $82,$FF,eas_Init
-		setFacing $82,3
+		setFacing $82,DOWN
 		csWait 10
 		entityShakeHead $82
 		csWait 30
-		setFacing $82,1
+		setFacing $82,UP
 		nextText $80,$82        ; "Yeow!  My head!{N}No, I'm OK, {LEADER}.{W2}"
 		nextSingleText $80,$82  ; "I must use a powerful spell.{N}It may be dangerous.{N}Stay back!{W1}"
 		moveEntity $0,$FF,$1,$1
 		endMove $8080
-		setFacing $0,3
+		setFacing $0,DOWN
 		setActscript $80,$FF,eas_46172
 		customActscript $82,$FF
 		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
@@ -225,7 +225,7 @@ cs_53C42:       setCamDest 19,48
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setFacing $82,2
+		setFacing $82,LEFT
 		csWait 50
 		entityShiver $82
 		csWait 30
@@ -240,7 +240,7 @@ cs_53C42:       setCamDest 19,48
 		endMove $8080
 		entityFlashWhite $82,$78
 		playSound SFX_SPELL_CAST
-		setPos $88,24,53,2
+		setPos $88,24,53,LEFT
 		nextSingleText $80,$82  ; "Evil spirit inside the King,{N}begone, HAAA!{W1}"
 		customActscript $88,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
@@ -282,7 +282,7 @@ cs_53C42:       setCamDest 19,48
 		nextSingleText $80,$82  ; "King...Granseal?{W1}"
 		entityShiver $80
 		stopEntity $80
-		setPos $87,21,52,3
+		setPos $87,21,52,DOWN
 		animEntityFadeInOut $87,$5
 		nextSingleText $80,$82  ; "Did it work?{W1}"
 		entityShiver $87
@@ -304,7 +304,7 @@ cs_53C42:       setCamDest 19,48
 		csWait 5
 		setActscript $80,$0,eas_461B6
 		csWait 100
-		setFacing $80,0
+		setFacing $80,RIGHT
 		csWait 40
 		moveEntity $80,$FF,$0,$1
 		endMove $8080

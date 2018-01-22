@@ -5,15 +5,15 @@ bbcs_41:        textCursor $C0B
 		loadMapFadeIn 56,12,21
 		loadMapEntities ce_4ED76
 		setActscript $0,$FF,eas_Init
-		setPos $7,16,24,0
-		setPos $1F,15,24,0
-		setPos $1C,14,24,0
+		setPos $7,16,24,RIGHT
+		setPos $1F,15,24,RIGHT
+		setPos $1C,14,24,RIGHT
 		jumpIfFlagClear $4C,cs_4ED48; Zynk is a follower
-		setPos $1A,13,24,0
+		setPos $1A,13,24,RIGHT
 cs_4ED48:       playSound MUSIC_BATTLE_THEME_3
 		fadeInB
 		nextSingleText $0,$80   ; "Who are you?!{N}Oh, are you from Granseal?{W1}"
-		setFacing $0,1
+		setFacing $0,UP
 		setCamDest 12,4
 		nextSingleText $0,$80   ; "But, Odd Eye went to...{W2}"
 		moveEntity $80,$FF,$3,$2

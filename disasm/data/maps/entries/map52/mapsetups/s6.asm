@@ -54,7 +54,7 @@ byte_5C4EE:     textCursor $575
 		moveEntity $81,$FF,$1,$2
 		moreMove $0,$1
 		endMove $8080
-		setFacing $80,2
+		setFacing $80,LEFT
 		nextText $0,$81         ; "There are marks of a battle{N}here and there!{W2}"
 		nextSingleText $0,$81   ; "Against the birdmen of{N}Bedoe?{W1}"
 		entityNod $80
@@ -64,7 +64,7 @@ byte_5C4EE:     textCursor $575
 		setActscript $81,$0,eas_461E4
 		csWait 60
 		nextText $0,$80         ; "Nobody but Volcanon can do{N}that!{W2}"
-		setFacing $81,0
+		setFacing $81,RIGHT
 		nextSingleText $0,$80   ; "He has never before killed{N}birdmen, but...{W1}"
 		moveEntity $83,$FF,$3,$1
 		endMove $8080
@@ -81,10 +81,10 @@ byte_5C4EE:     textCursor $575
 		moreMove $2,$1
 		endMove $8080
 		nextSingleText $0,$83   ; "Who's that?{W1}"
-		setFacing $83,3
+		setFacing $83,DOWN
 		setCamDest 0,17
-		setFacing $0,1
-		setFacing $7,3
+		setFacing $0,UP
+		setFacing $7,DOWN
 		csWait 50
 		setCamDest 16,7
 		setActscript $83,$FF,eas_Init
@@ -97,13 +97,13 @@ byte_5C4EE:     textCursor $575
 		moreMove $3,$1
 		endMove $8080
 		nextText $0,$80         ; "Polcan people are cowards that{N}live in peace.{W2}"
-		setFacing $80,1
-		setFacing $83,1
+		setFacing $80,UP
+		setFacing $83,UP
 		nextSingleText $0,$80   ; "They shall never return{N}alive!{W1}"
 		setStoryFlag $C         ; Battle 12 unlocked
 		mapSysEvent $34,$0,$0,$0
 		csc_end
-byte_5C622:     setPos $7,22,8,0
+byte_5C622:     setPos $7,22,8,RIGHT
 		textCursor $9BD
 		fadeInB
 		nextText $0,$7          ; "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"

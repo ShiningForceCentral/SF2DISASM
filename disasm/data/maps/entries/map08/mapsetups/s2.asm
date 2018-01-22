@@ -203,13 +203,13 @@ cs_56172:       textCursor $534
 		nextSingleText $0,$87   ; "To Mt. Volcano?{W1}"
 		setActscript $87,$0,eas_Jump
 		setActscript $86,$FF,eas_Jump
-		setFacing $86,0
-		setFacing $87,2
+		setFacing $86,RIGHT
+		setFacing $87,LEFT
 		csWait 57
-		setFacing $86,3
+		setFacing $86,DOWN
 		nextText $0,$86         ; "Go east and then go north{N}along the river.  A cave is{N}there.{W2}"
 		nextSingleText $0,$86   ; "But, I don't recommend you{N}enter such a terrible place!{W1}"
-		setFacing $87,3
+		setFacing $87,DOWN
 		nextText $0,$87         ; "We call it the Cave of{N}Darkness.  You can't see{N}anything inside.{W2}"
 		nextSingleText $0,$87   ; "The cave is the only way to{N}get to Mt. Volcano.{W1}"
 		csc_end

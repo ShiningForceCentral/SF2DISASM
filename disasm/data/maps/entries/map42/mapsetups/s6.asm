@@ -47,7 +47,7 @@ cs_5FF06:       textCursor $D07
 		hideText
 		entityFlashWhite $0,$3C
 		setBlocks 33,2,1,1,39,2
-		newEntity $80,39,2,3,$B4
+		newEntity $80,39,2,DOWN,$B4
 		setActscript $80,$0,eas_AnimSpeedx2
 		executeSubroutine csub_5FF56
 		hideEntity $80

@@ -76,12 +76,12 @@ cs_59E04:       textCursor $6CB
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setPos $0,26,7,3
-		setPos $7,27,6,3
-		setPos $1F,25,6,3
-		setPos $82,26,6,1
-		setPos $83,25,5,1
-		setPos $84,27,5,1
+		setPos $0,26,7,DOWN
+		setPos $7,27,6,DOWN
+		setPos $1F,25,6,DOWN
+		setPos $82,26,6,UP
+		setPos $83,25,5,UP
+		setPos $84,27,5,UP
 		fadeInB
 		moveEntity $0,$0,$3,$7
 		endMove $8080

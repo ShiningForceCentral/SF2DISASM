@@ -21,7 +21,7 @@ cs_59FB8:       textCursor $6C5
 		csWait 120
 		nextSingleText $0,$1F   ; "(Sniff, sniff)...{N}It smells like a ditch!{W1}"
 		setEntityDest $7,27,20
-		setFacing $1F,0
+		setFacing $1F,RIGHT
 		entityShiver $7
 		nextSingleText $0,$7    ; "Is this the smell of the{N}devils that they were{N}talking about?{W1}"
 		setCamDest 36,17
@@ -34,9 +34,9 @@ cs_59FB8:       textCursor $6C5
 		setActscript $80,$FF,eas_Init
 		setActscript $81,$FF,eas_Init
 		setActscript $82,$FF,eas_Init
-		setFacing $80,2
-		setFacing $81,2
-		setFacing $82,2
+		setFacing $80,LEFT
+		setFacing $81,LEFT
+		setFacing $82,LEFT
 		setActscript $80,$0,eas_Jump
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$FF,eas_Jump

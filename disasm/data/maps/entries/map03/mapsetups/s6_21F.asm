@@ -14,10 +14,10 @@ cs_628C8:       textCursor $F4B
 		nextText $0,$87         ; "I envy you.{N}I'm an old woman now.{W2}"
 		nextSingleText $0,$87   ; "Nobody kisses me anymore.{W1}"
 		setEntityDest $0,25,28
-		setFacing $0,1
+		setFacing $0,UP
 		setEntityDest $88,25,27
-		setFacing $88,0
-		setFacing $87,2
+		setFacing $88,RIGHT
+		setFacing $87,LEFT
 		nextText $0,$88         ; "You're wrong!{W2}"
 		nextSingleText $0,$88   ; "I'll kiss you!{W1}"
 		csWait 10

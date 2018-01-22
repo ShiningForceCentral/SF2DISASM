@@ -12,9 +12,9 @@ rbcs_battle32:  textCursor $B21
 		nextSingleText $0,$80   ; "{NAME;23}, what?{W1}"
 		setCameraEntity $17
 		csWait 60
-		setFacing $17,1
+		setFacing $17,UP
 		nextSingleText $0,$17   ; "Didn't you hear me?{W1}"
-		setFacing $17,3
+		setFacing $17,DOWN
 		nextSingleText $0,$17   ; "Hey, Granseal guys!{N}I'm on your side from now{N}on! OK?{W1}"
 		joinForceAI $17,$FFFF   ; 0054 JOIN FORCE WITH AI
 		setF $182               ; set during battle 32, after Jaro switches sides

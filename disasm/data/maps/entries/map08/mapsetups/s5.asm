@@ -50,8 +50,8 @@ cs_56314:       hideText
 		endMove $8080
 		moveEntity $7,$FF,$3,$2
 		endMove $8080
-		setFacing $0,1
-		setFacing $7,1
+		setFacing $0,UP
+		setFacing $7,UP
 		playSound SFX_BATTLEFIELD_DEATH
 		setBlocks 32,17,2,2,15,19
 		csWait 30

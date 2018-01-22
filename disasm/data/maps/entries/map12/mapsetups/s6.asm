@@ -27,9 +27,9 @@ cs_57D22:       textCursor $C7D
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
-		setPos $0,12,31,1
-		setPos $7,13,31,1
-		setPos $1F,11,31,1
+		setPos $0,12,31,UP
+		setPos $7,13,31,UP
+		setPos $1F,11,31,UP
 		fadeInB
 		moveEntity $0,$0,$1,$5
 		endMove $8080
@@ -55,8 +55,8 @@ cs_57D22:       textCursor $C7D
 		csWait 80
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
-		setFacing $0,1
-		setFacing $1F,1
+		setFacing $0,UP
+		setFacing $1F,UP
 		nextSingleText $80,$7   ; "Who said that?{W1}"
 		setCamDest 7,5
 		nextSingleText $80,$7   ; "Wow, what a huge guy!{W1}"
@@ -65,9 +65,9 @@ cs_57D22:       textCursor $C7D
 		setCamDest 7,21
 		moveEntity $7,$FF,$3,$1
 		endMove $8080
-		setFacing $0,0
-		setFacing $1F,0
-		setFacing $7,2
+		setFacing $0,RIGHT
+		setFacing $1F,RIGHT
+		setFacing $7,LEFT
 		nextText $80,$7         ; "Attack us?!  {LEADER},{N}let's get out of here!{W2}"
 		nextSingleText $80,$7   ; "We don't want to fight him!{W1}"
 		csWait 20

@@ -6,22 +6,22 @@ bbcs_33:        textCursor $B32
 		loadMapEntities ce_4D048
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,27,38,2
+		setPos $7,27,38,LEFT
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,27,37,2
+		setPos $1F,27,37,LEFT
 		setActscript $16,$FF,eas_Init
-		setPos $16,27,36,2
+		setPos $16,27,36,LEFT
 		setBlocks 16,8,1,1,32,1
 		setBlocks 3,39,1,1,16,8
 		playSound MUSIC_BATTLE_THEME_3
 		fadeInB
 		csWait 30
-		setFacing $0,1
-		setFacing $7,1
-		setFacing $1F,1
+		setFacing $0,UP
+		setFacing $7,UP
+		setFacing $1F,UP
 		moveEntity $16,$FF,$1,$1
 		endMove $8080
-		setFacing $16,3
+		setFacing $16,DOWN
 		nextSingleText $0,$16   ; "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
 		moveEntity $16,$FF,$1,$1
 		endMove $8080
@@ -63,8 +63,8 @@ bbcs_33:        textCursor $B32
 		join $16
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
-		setFacing $1F,0
-		setFacing $0,2
+		setFacing $1F,RIGHT
+		setFacing $0,LEFT
 		nextSingleText $0,$1F   ; "{LEADER}, {NAME;22} will be{N}a great asset.{W1}"
 		joinBatParty $16
 		executeSubroutine sub_4D078

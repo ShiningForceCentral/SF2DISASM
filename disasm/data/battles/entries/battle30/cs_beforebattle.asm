@@ -6,9 +6,9 @@ bbcs_30:        textCursor $AC8
 		loadMapEntities ce_4C690
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,11,28,1
+		setPos $7,11,28,UP
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,11,27,1
+		setPos $1F,11,27,UP
 		playSound MUSIC_BATTLE_THEME_1
 		fadeInB
 		moveEntity $0,$0,$1,$2

@@ -6,7 +6,7 @@ abcs_battle13:  textCursor $9BF
 		loadMapFadeIn 13,11,8
 		loadMapEntities ce_4AD96
 		setActscript $0,$FF,eas_Init
-		setPos $7,15,13,0
+		setPos $7,15,13,RIGHT
 		customActscript $A,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -29,13 +29,13 @@ abcs_battle13:  textCursor $9BF
 		setActscript $A,$0,eas_461B6
 		csWait 60
 		nextText $C0,$A         ; "Where are the devils?{N}{LEADER}, did you defeat{N}them?{W2}"
-		setFacing $A,1
+		setFacing $A,UP
 		nextSingleText $C0,$A   ; "Nobody in Bedoe can fight{N}like that.  Thank you.{W1}"
-		setFacing $A,2
+		setFacing $A,LEFT
 		nextSingleText $0,$7    ; "He's a great fighter.{N}Volcanon doesn't know how{N}good he is!{W1}"
 		nextText $C0,$A         ; "He'll learn.{W2}"
 		nextSingleText $C0,$A   ; "Let's go see the mayor and{N}get a raft!{W1}"
-		setFacing $A,1
+		setFacing $A,UP
 		nextSingleText $FF,$FF  ; "{CLEAR}{LEADER} decides to take{N}{NAME;10} the BDMN with him.{W1}{CLEAR}"
 		setF $4B                ; Luke is a follower
 		mapSysEvent $D,$10,$C,$3

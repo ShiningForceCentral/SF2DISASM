@@ -19,7 +19,7 @@ cs_54570:       playSound MUSIC_BOSS_ATTACK
 cs_54578:       textCursor $3F5
 		nextSingleText $0,$1F   ; "OK.  Let's go!{W1}"
 		entityNod $8A
-		setFacing $8A,3
+		setFacing $8A,DOWN
 		nextSingleText $0,$8A   ; "Weigh anchor!{W1}"
 		setEntityDest $0,11,13
 		moveEntity $8B,$0,$0,$4
@@ -39,10 +39,10 @@ byte_545B6:     moreMove $3,$1
 		moreMove $0,$2
 		endMove $8080
 		csWait 30
-		setFacing $0,3
-		setFacing $1F,3
-		setFacing $1E,3
-		setFacing $9F,3
+		setFacing $0,DOWN
+		setFacing $1F,DOWN
+		setFacing $1E,DOWN
+		setFacing $9F,DOWN
 		setCamDest 10,11
 		setBlocks 15,22,3,1,12,22
 		csWait 4
@@ -61,18 +61,18 @@ byte_545B6:     moreMove $3,$1
 		setBlocks 15,15,3,1,12,15
 		csWait 15
 		setCamDest 13,12
-		setFacing $9F,0
+		setFacing $9F,RIGHT
 		nextSingleText $0,$9F   ; "Sir Astral, where are we{N}headed?{W1}"
-		setFacing $1F,2
+		setFacing $1F,LEFT
 		nextSingleText $C0,$1F  ; "This earthquake must{N}have caused damage all{N}over the island.{W1}"
-		setFacing $1F,3
+		setFacing $1F,DOWN
 		nextSingleText $C0,$1F  ; "Maybe...to the east...to...{N}Oh, yes!  To the mainland!{W1}"
 		setActscript $9F,$FF,eas_Jump
 		setActscript $9F,$FF,eas_Jump
 		nextSingleText $0,$9F   ; "To Parmecia?!{N}Hmmmm....{W1}"
-		setFacing $1E,0
+		setFacing $1E,RIGHT
 		nextSingleText $0,$1E   ; "What?  To the mainland?{N}No!{W2}{N}What about Elis?!  No,{N}we'll stay here on Grans!{W1}"
-		setFacing $1E,3
+		setFacing $1E,DOWN
 		moveEntity $1F,$0,$1,$1
 		moreMove $2,$2
 		endMove $8080

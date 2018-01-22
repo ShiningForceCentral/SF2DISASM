@@ -20,7 +20,7 @@ loc_51390:
 		trap    #6
 		bra.w   loc_513A8
 cs_513A0:
-		setPos $1,41,10,1
+		setPos $1,41,10,UP
 		csc_end
 loc_513A8:
 		trap    #1

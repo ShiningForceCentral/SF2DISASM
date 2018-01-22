@@ -6,9 +6,9 @@ abcs_battle30:  textCursor $ACD
 		loadMapEntities ce_4C96C
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,12,13,1
+		setPos $7,12,13,UP
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,11,13,1
+		setPos $1F,11,13,UP
 		stopEntity $80
 		setActscript $82,$FF,eas_46172
 		stopEntity $82
@@ -23,7 +23,7 @@ abcs_battle30:  textCursor $ACD
 		entityShiver $80
 		nextSingleText $0,$80   ; "I don't know...haven't{N}seen her.{W1}"
 		csWait 40
-		setFacing $80,1
+		setFacing $80,UP
 		customActscript $80,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -36,7 +36,7 @@ abcs_battle30:  textCursor $ACD
 		setQuake 2
 		csWait 20
 		setQuake 0
-		setPos $82,11,10,1
+		setPos $82,11,10,UP
 		customActscript $82,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -50,7 +50,7 @@ abcs_battle30:  textCursor $ACD
 		mapFadeOutToWhite
 		csWait 20
 		mapFadeInFromWhite
-		setFacing $80,3
+		setFacing $80,DOWN
 		entityShiver $80
 		nextSingleText $0,$80   ; "I can't endure the light....{N}Ohhh....{W1}"
 		customActscript $80,$FF
@@ -72,7 +72,7 @@ abcs_battle30:  textCursor $ACD
 		endMove $8080
 		nextSingleText $0,$7    ; "Hey, look over there!{W1}"
 		setCamDest 5,0
-		setPos $81,11,3,3
+		setPos $81,11,3,DOWN
 		entityFlashWhite $81,$3C
 		nextSingleText $0,$81   ; "Welcome!{W1}"
 		setCameraEntity $81
@@ -80,9 +80,9 @@ abcs_battle30:  textCursor $ACD
 		moreMove $2,$2
 		moreMove $3,$4
 		endMove $8080
-		setFacing $0,2
-		setFacing $1F,2
-		setFacing $7,2
+		setFacing $0,LEFT
+		setFacing $1F,LEFT
+		setFacing $7,LEFT
 		csWait 50
 		entityFlashWhite $81,$3C
 		customActscript $82,$FF
@@ -97,7 +97,7 @@ abcs_battle30:  textCursor $ACD
 		setEntityDest $82,11,2
 		animEntityFadeInOut $82,$4
 		setCamDest 5,8
-		setFacing $81,0
+		setFacing $81,RIGHT
 		nextText $C0,$81        ; "Thank you.{W2}"
 		nextSingleText $C0,$81  ; "I've finally returned to this{N}world.{W1}"
 		nextSingleText $0,$1F   ; "Goddess Mitula?{W1}"
@@ -129,7 +129,7 @@ abcs_battle30:  textCursor $ACD
 		setActscript $1F,$FF,eas_Jump
 		nextSingleText $0,$1F   ; "I see.{W1}"
 		csWait 60
-		setFacing $81,2
+		setFacing $81,LEFT
 		csWait 40
 		entityFlashWhite $81,$32
 		setActscript $0,$0,eas_Jump
@@ -158,18 +158,18 @@ abcs_battle30:  textCursor $ACD
 		moveEntity $7,$FF,$2,$1
 		endMove $8080
 		csWait 30
-		setFacing $7,3
+		setFacing $7,DOWN
 		csWait 30
-		setFacing $7,2
+		setFacing $7,LEFT
 		csWait 30
-		setFacing $7,3
+		setFacing $7,DOWN
 		csWait 30
 		nextSingleText $0,$7    ; "{LEADER}, Mitula{N}has vanished!{N}What should we do now?{W1}"
-		setFacing $1F,0
+		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "We have to go to Arc Valley{N}on Grans Island.{W2}"
-		setFacing $1F,3
+		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "{LEADER}, find the{N}storytellers first.{W1}"
-		setFacing $0,1
+		setFacing $0,UP
 		entityNod $0
 		followEntity $1F,$0,$2
 		followEntity $7,$1F,$2

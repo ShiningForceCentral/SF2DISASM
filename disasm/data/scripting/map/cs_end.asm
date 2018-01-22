@@ -47,14 +47,14 @@ EndCutscene:    mapLoad 20,19,33
 		entitySprite $B,$AA
 		fadeInB
 		csWait 60
-		setPos $0,25,35,0
+		setPos $0,25,35,RIGHT
 		moveEntity $0,$FF,$7,$1
 		moreMove $0,$1
 		endMove $8080
 		csWait 30
 		moveEntity $0,$FF,$3,$4
 		endMove $8080
-		setFacing $0,2
+		setFacing $0,LEFT
 		moveEntity $80,$FF,$0,$1
 		endMove $8080
 		moveEntity $81,$FF,$0,$1
@@ -66,9 +66,9 @@ EndCutscene:    mapLoad 20,19,33
 		csWait 40
 		moveEntity $0,$FF,$1,$4
 		endMove $8080
-		setFacing $0,2
+		setFacing $0,LEFT
 		csWait 80
-		setPos $83,25,35,0
+		setPos $83,25,35,RIGHT
 		moveEntity $83,$FF,$7,$1
 		endMove $8080
 		csWait 40
@@ -79,33 +79,33 @@ EndCutscene:    mapLoad 20,19,33
 		moveEntity $83,$FF,$0,$1
 		moreMove $3,$3
 		endMove $8080
-		setFacing $0,2
-		setFacing $83,2
+		setFacing $0,LEFT
+		setFacing $83,LEFT
 		setActscript $80,$0,eas_Jump
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$FF,eas_Jump
 		csWait 40
-		setFacing $82,3
+		setFacing $82,DOWN
 		csWait 30
-		setFacing $81,1
+		setFacing $81,UP
 		entityNod $82
 		csWait 60
-		setFacing $80,1
+		setFacing $80,UP
 		csWait 30
-		setFacing $81,3
+		setFacing $81,DOWN
 		entityNod $80
 		csWait 40
-		setFacing $81,0
+		setFacing $81,RIGHT
 		csWait 20
-		setFacing $80,0
+		setFacing $80,RIGHT
 		csWait 40
-		setFacing $0,1
+		setFacing $0,UP
 		csWait 20
-		setFacing $83,3
+		setFacing $83,DOWN
 		csWait 60
-		setFacing $0,2
+		setFacing $0,LEFT
 		csWait 10
-		setFacing $83,2
+		setFacing $83,LEFT
 		csWait 30
 		moveEntity $0,$0,$2,$4
 		endMove $8080
@@ -114,62 +114,62 @@ EndCutscene:    mapLoad 20,19,33
 		entityNod $81
 		entityNod $83
 		csWait 60
-		setFacing $82,1
+		setFacing $82,UP
 		csWait 30
 		setActscript $82,$FF,eas_Jump
 		csWait 30
 		moveEntity $82,$FF,$1,$1
 		endMove $8080
-		setFacing $82,3
-		setPos $B,23,37,3
+		setFacing $82,DOWN
+		setPos $B,23,37,DOWN
 		moveEntity $B,$0,$3,$1
 		moreMove $2,$2
 		moreMove $3,$2
 		endMove $8080
 		csWait 20
-		setPos $2,23,37,3
+		setPos $2,23,37,DOWN
 		moveEntity $2,$0,$3,$1
 		moreMove $2,$2
 		moreMove $3,$1
 		endMove $8080
 		csWait 20
-		setPos $A,23,37,3
+		setPos $A,23,37,DOWN
 		moveEntity $A,$0,$3,$1
 		moreMove $2,$2
 		endMove $8080
 		csWait 20
-		setPos $3,23,37,3
+		setPos $3,23,37,DOWN
 		moveEntity $3,$0,$3,$1
 		moreMove $2,$1
 		endMove $8080
 		csWait 20
-		setPos $7,23,37,3
+		setPos $7,23,37,DOWN
 		moveEntity $7,$0,$3,$1
 		endMove $8080
-		setFacing $B,0
+		setFacing $B,RIGHT
 		csWait 10
-		setFacing $2,0
+		setFacing $2,RIGHT
 		csWait 10
-		setFacing $A,3
+		setFacing $A,DOWN
 		csWait 10
-		setFacing $3,3
-		setFacing $0,1
-		setFacing $83,1
+		setFacing $3,DOWN
+		setFacing $0,UP
+		setFacing $83,UP
 		csWait 30
-		setFacing $0,2
-		setFacing $83,2
+		setFacing $0,LEFT
+		setFacing $83,LEFT
 		csWait 30
-		setFacing $0,1
-		setFacing $83,1
+		setFacing $0,UP
+		setFacing $83,UP
 		csWait 40
 		setActscript $B,$0,eas_Jump
 		setActscript $2,$0,eas_Jump
 		setActscript $A,$0,eas_Jump
 		setActscript $3,$0,eas_Jump
 		setActscript $7,$0,eas_Jump
-		setFacing $83,2
+		setFacing $83,LEFT
 		entityNod $80
-		setFacing $0,2
+		setFacing $0,LEFT
 		csWait 50
 		entityNod $0
 		setActscript $B,$0,eas_Jump

@@ -8,9 +8,9 @@ bbcs_18:        textCursor $9D8
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
 		setActscript $B,$FF,eas_Init
-		setPos $7,13,33,1
-		setPos $1F,12,33,1
-		setPos $B,11,33,1
+		setPos $7,13,33,UP
+		setPos $1F,12,33,UP
+		setPos $B,11,33,UP
 		stopEntity $81
 		playSound MUSIC_SHRINE
 		fadeInB
@@ -39,23 +39,23 @@ bbcs_18:        textCursor $9D8
 		moveEntity $B,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$B    ; "Don't you know?{W1}"
-		setFacing $0,1
-		setFacing $7,1
-		setFacing $1F,1
+		setFacing $0,UP
+		setFacing $7,UP
+		setFacing $1F,UP
 		csWait 30
 		setCameraEntity $80
 		nextSingleText $0,$B    ; "That's Taros.  The guardian of{N}this ancient shrine.{W1}"
 		nextSingleText $0,$80   ; "Again, stop right there, or{N}I'll attack you.{W1}"
 		setCamDest 7,22
-		setFacing $0,0
-		setFacing $7,2
-		setFacing $B,0
+		setFacing $0,RIGHT
+		setFacing $7,LEFT
+		setFacing $B,RIGHT
 		nextSingleText $C0,$7   ; "What should we do?{W1}"
-		setFacing $0,2
+		setFacing $0,LEFT
 		nextSingleText $0,$B    ; "The Caravan is there, behind{N}him.  We must have it!{W1}"
-		setFacing $0,1
-		setFacing $7,1
-		setFacing $B,1
+		setFacing $0,UP
+		setFacing $7,UP
+		setFacing $B,UP
 		nextSingleText $0,$80   ; "Time's up!  Now we battle.{W1}"
 		csc_end
 ce_4B2DA:       dc.w $C

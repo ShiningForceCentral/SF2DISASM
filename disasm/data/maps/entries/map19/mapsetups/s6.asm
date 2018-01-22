@@ -22,5 +22,5 @@ return_53102:
 
 	; End of function ms_map19_InitFunction
 
-cs_53104:       setPos $8C,63,63,2
+cs_53104:       setPos $8C,63,63,LEFT
 		csc_end

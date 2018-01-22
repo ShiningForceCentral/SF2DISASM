@@ -88,7 +88,7 @@ cs_5EB44:       textCursor $E73
 		nextSingleText $80,$81  ; "Yes, sir!{W1}"
 		animEntityFadeInOut $81,$6
 		nextSingleText $0,$82   ; "That Geshp!  He wants{N}everything.{W1}"
-		setPos $82,9,9,3
+		setPos $82,9,9,DOWN
 		animEntityFadeInOut $82,$7
 		moveEntity $82,$FF,$0,$4
 		moreMove $1,$1
@@ -152,14 +152,14 @@ cs_5EBFC:       loadMapFadeIn 53,8,14
 		endMove $8080
 		moveEntity $88,$0,$0,$3
 		endMove $8080
-		setFacing $80,2
+		setFacing $80,LEFT
 		csWait 30
-		setFacing $80,0
+		setFacing $80,RIGHT
 		csWait 30
 		entityShiver $80
 		nextSingleText $0,$80   ; "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
 		setCamDest 10,14
-		setPos $81,15,16,3
+		setPos $81,15,16,DOWN
 		animEntityFadeInOut $81,$7
 		nextSingleText $80,$81  ; "How are the Prism Flowers?{W1}"
 		nextSingleText $0,$80   ; "They're ready!{W1}"
@@ -169,7 +169,7 @@ cs_5EBFC:       loadMapFadeIn 53,8,14
 		moveEntity $81,$FF,$0,$2
 		moreMove $1,$2
 		endMove $8080
-		setFacing $81,0
+		setFacing $81,RIGHT
 		nextText $80,$81        ; "Now, c'mon Granseal losers!{W2}"
 		nextSingleText $80,$81  ; "The Prism Flowers are waiting{N}for you!  Hee, heee!{W1}"
 		entityNod $81
@@ -228,71 +228,71 @@ cs_5EDB8:       textCursor $E99
 		stopEntity $8F
 		stopEntity $90
 		fadeInB
-		setFacing $81,2
+		setFacing $81,LEFT
 		nextSingleText $80,$81  ; "NOW!{W1}"
 		moveEntity $81,$FF,$0,$1
 		endMove $8080
 		nextSingleText $80,$81  ; "Shoot them!  Shoot them!{W1}"
 		playSound SFX_BATTLEFIELD_DEATH
-		setPos $85,12,16,2
+		setPos $85,12,16,LEFT
 		csWait 30
-		setFacing $85,1
+		setFacing $85,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-		setPos $85,13,15,1
+		setPos $85,13,15,UP
 		moveEntity $85,$0,$4,$A
 		endMove $8080
 		flashScreenWhite $2
-		setPos $86,13,15,1
+		setPos $86,13,15,UP
 		moveEntity $86,$0,$4,$A
 		endMove $8080
 		csWait 20
 		playSound SFX_BATTLEFIELD_DEATH
-		setPos $87,13,17,2
+		setPos $87,13,17,LEFT
 		csWait 30
-		setFacing $87,1
+		setFacing $87,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-		setPos $87,14,16,1
+		setPos $87,14,16,UP
 		moveEntity $87,$0,$4,$A
 		endMove $8080
 		flashScreenWhite $2
-		setPos $88,14,16,1
+		setPos $88,14,16,UP
 		moveEntity $88,$0,$4,$A
 		endMove $8080
 		playSound SFX_BATTLEFIELD_DEATH
-		setPos $89,14,19,2
+		setPos $89,14,19,LEFT
 		csWait 30
-		setFacing $89,1
+		setFacing $89,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-		setPos $89,15,18,1
+		setPos $89,15,18,UP
 		moveEntity $89,$0,$4,$A
 		endMove $8080
 		flashScreenWhite $2
-		setPos $8A,15,18,1
+		setPos $8A,15,18,UP
 		moveEntity $8A,$0,$4,$A
 		endMove $8080
 		csWait 10
 		playSound SFX_BATTLEFIELD_DEATH
-		setPos $8B,15,20,2
+		setPos $8B,15,20,LEFT
 		csWait 30
-		setFacing $8B,1
+		setFacing $8B,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-		setPos $8B,16,19,1
+		setPos $8B,16,19,UP
 		moveEntity $8B,$0,$4,$A
 		endMove $8080
 		flashScreenWhite $2
-		setPos $8C,16,19,1
+		setPos $8C,16,19,UP
 		moveEntity $8C,$0,$4,$A
 		endMove $8080
 		playSound SFX_BATTLEFIELD_DEATH
-		setPos $8B,12,16,2
+		setPos $8B,12,16,LEFT
 		csWait 30
-		setFacing $8B,1
+		setFacing $8B,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-		setPos $8B,13,15,1
+		setPos $8B,13,15,UP
 		moveEntity $8B,$0,$4,$A
 		endMove $8080
 		flashScreenWhite $2
-		setPos $8C,13,15,1
+		setPos $8C,13,15,UP
 		moveEntity $8C,$FF,$4,$A
 		endMove $8080
 		csc_end
@@ -311,16 +311,16 @@ eas_5EF46:      dc.w $1E                ; 001E SET ANIM SPEED X2 $FFFF
 		dc.l eas_Idle           
 cs_5EF60:       textCursor $E9B
 		loadMapFadeIn 37,4,6
-		loadEntitiesFromMapSetup 9,11,3
+		loadEntitiesFromMapSetup 9,11,DOWN
 		executeSubroutine sub_47948
-		setPos $1A,8,10,0
+		setPos $1A,8,10,RIGHT
 		executeSubroutine sub_5F32E
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
 		setActscript $1A,$FF,eas_Init
-		setPos $80,9,12,1
-		setPos $7,10,12,1
-		setPos $1A,10,11,2
+		setPos $80,9,12,UP
+		setPos $7,10,12,UP
+		setPos $1A,10,11,LEFT
 		fadeInB
 		entityShiver $80
 		nextSingleText $0,$80   ; "I did see something!{W1}"
@@ -340,10 +340,10 @@ cs_5EF60:       textCursor $E9B
 		moreMove $E,$1
 		moreMove $F,$1
 		endMove $8080
-		setFacing $7,2
+		setFacing $7,LEFT
 		nextSingleText $80,$7   ; "Oooouu!!  What was that?!{N}Lightning?{W1}"
-		setFacing $0,0
-		setFacing $1A,3
+		setFacing $0,RIGHT
+		setFacing $1A,DOWN
 		nextText $80,$1A        ; "An attack from the ground.{W2}"
 		nextSingleText $80,$1A  ; "I can't control the ship!{W1}"
 		playSound SFX_BATTLEFIELD_DEATH
@@ -362,7 +362,7 @@ cs_5EF60:       textCursor $E9B
 		nextSingleText $80,$1A  ; "We might crash!{W1}"
 		moveEntity $80,$FF,$0,$1
 		endMove $8080
-		setFacing $80,1
+		setFacing $80,UP
 		entityShiver $80
 		nextText $0,$80         ; "Crash?!{W2}"
 		nextSingleText $80,$1A  ; "Geshp's trap!  Darn!{W1}"

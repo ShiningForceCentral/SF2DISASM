@@ -6,7 +6,7 @@ abcs_battle05:  textCursor $91C
 		moveEntity $5,$FF,$3,$1
 		moreMove $2,$2
 		endMove $8080
-		setFacing $5,3
+		setFacing $5,DOWN
 		nextText $0,$5          ; "This is the Jewel of Light{N}that I stole from the shrine.{W2}"
 		nextSingleText $0,$5    ; "The other jewel is missing.{N}I'll give you this one now.{W1}"
 		nextText $FF,$FF        ; "{LEADER} received the{N}Jewel of Light...{W2}{N}The jewel fused to{N}{LEADER}'s neck.{W1}"

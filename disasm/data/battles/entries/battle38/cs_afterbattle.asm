@@ -6,11 +6,11 @@ abcs_battle38:  textCursor $BC4
 		loadMapEntities ce_4E372
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,5,25,0
+		setPos $7,5,25,RIGHT
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,8,28,1
+		setPos $1F,8,28,UP
 		setActscript $1E,$FF,eas_Init
-		setPos $1E,9,24,3
+		setPos $1E,9,24,DOWN
 		stopEntity $88
 		customActscript $88,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
@@ -23,7 +23,7 @@ abcs_battle38:  textCursor $BC4
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		jumpIfFlagClear $4C,cs_4DF00; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		setPos $1A,63,62,3
+		setPos $1A,63,62,DOWN
 cs_4DF00:       setActscript $80,$FF,eas_46172
 		setActscript $81,$FF,eas_46172
 		setActscript $82,$FF,eas_46172
@@ -49,7 +49,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		startEntity $88
-		setFacing $88,1
+		setFacing $88,UP
 		nextSingleText $0,$88   ; "I'm...at the end of my rope.{N}I...must...escape.{W1}"
 		customActscript $88,$FF
 		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
@@ -73,7 +73,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		setActscript $88,$FF,eas_461AA
 		setQuake 1
 		stopEntity $88
-		setPos $88,8,24,2
+		setPos $88,8,24,LEFT
 		customActscript $88,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -94,13 +94,13 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		setQuake 0
 		moveEntity $88,$FF,$3,$1
 		endMove $8080
-		setFacing $88,3
+		setFacing $88,DOWN
 		moveEntity $88,$FF,$3,$1
 		endMove $8080
-		setFacing $88,0
+		setFacing $88,RIGHT
 		moveEntity $88,$FF,$3,$1
 		endMove $8080
-		setFacing $88,1
+		setFacing $88,UP
 		csWait 40
 		entityShiver $88
 		csWait 60
@@ -113,7 +113,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setFacing $88,3
+		setFacing $88,DOWN
 		csWait 40
 		entityShakeHead $88
 		startEntity $88
@@ -131,15 +131,15 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		moveEntity $7,$FF,$0,$1
 		endMove $8080
 		nextSingleText $C0,$7   ; "You may go.{W1}"
-		setFacing $88,2
+		setFacing $88,LEFT
 		nextSingleText $0,$88   ; "Thank you.{W1}"
 		setActscript $88,$FF,eas_Init
-		setFacing $88,1
+		setFacing $88,UP
 		setCameraEntity $88
 		csWait 60
 		moveEntity $0,$FF,$0,$1
 		endMove $8080
-		setFacing $0,3
+		setFacing $0,DOWN
 		csWait 60
 		cameraSpeed $8
 		customActscript $88,$FF
@@ -151,15 +151,15 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $88,$FF,$1,$1
 		endMove $8080
-		setFacing $7,1
-		setFacing $0,2
+		setFacing $7,UP
+		setFacing $0,LEFT
 		moveEntity $88,$FF,$1,$2
 		endMove $8080
-		setFacing $0,1
+		setFacing $0,UP
 		moveEntity $88,$FF,$1,$2
 		endMove $8080
 		csWait 40
-		setFacing $88,3
+		setFacing $88,DOWN
 		nextSingleText $0,$88   ; "I won't forget this.{W1}"
 		moveEntity $88,$FF,$1,$3
 		endMove $8080
@@ -172,7 +172,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		csWait 80
 		setQuake 0
 		csWait 40
-		setFacing $88,3
+		setFacing $88,DOWN
 		tintMap
 		nextSingleText $C0,$89  ; "Where are you going, Geshp?{W1}"
 		customActscript $88,$FF
@@ -194,27 +194,27 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		nextSingleText $C0,$89  ; "Now, you will pay with your{N}life.{W1}"
 		nextSingleText $0,$88   ; "No, please...NO!{W1}"
 		setPriority $88,$0
-		setPos $80,8,13,0
+		setPos $80,8,13,RIGHT
 		csWait 10
-		setPos $81,10,14,2
+		setPos $81,10,14,LEFT
 		csWait 5
 		setActscript $88,$0,eas_461B6
 		csWait 10
-		setPos $82,11,16,0
+		setPos $82,11,16,RIGHT
 		csWait 10
-		setPos $83,10,18,2
+		setPos $83,10,18,LEFT
 		csWait 10
-		setPos $84,8,19,0
+		setPos $84,8,19,RIGHT
 		csWait 10
-		setPos $85,6,18,2
+		setPos $85,6,18,LEFT
 		csWait 10
-		setPos $86,5,16,0
+		setPos $86,5,16,RIGHT
 		csWait 10
-		setPos $87,6,14,2
+		setPos $87,6,14,LEFT
 		csWait 40
 		flashScreenWhite $14
 		tintMap
-		setFacing $88,3
+		setFacing $88,DOWN
 		setQuake 3
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
@@ -275,7 +275,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		playSound SFX_BOLT_SPELL
 		moveEntity $80,$FF,$3,$3
 		endMove $8080
-		setFacing $88,2
+		setFacing $88,LEFT
 		entitySprite $88,$B4
 		setActscript $88,$0,eas_AnimSpeedx2
 		setActscript $80,$0,eas_JumpLeft

@@ -18,19 +18,19 @@ return_53174:
 
 cs_53176:       setCameraEntity $FFFF
 		textCursor $2D1
-		newEntity $90,29,9,1,$CF
-		newEntity $91,28,9,1,$CE
-		newEntity $92,28,10,1,$CA
-		newEntity $93,28,11,1,$CA
+		newEntity $90,29,9,UP,$CF
+		newEntity $91,28,9,UP,$CE
+		newEntity $92,28,10,UP,$CA
+		newEntity $93,28,11,UP,$CA
 		csWait 1
-		newEntity $94,30,9,1,$CE
-		newEntity $95,30,10,1,$CA
-		newEntity $96,30,11,1,$CA
+		newEntity $94,30,9,UP,$CE
+		newEntity $95,30,10,UP,$CA
+		newEntity $96,30,11,UP,$CA
 		csWait 1
-		setPos $0,26,9,0
-		setPos $1,26,10,0
-		setPos $2,26,11,0
-		setPos $8C,63,63,3
+		setPos $0,26,9,RIGHT
+		setPos $1,26,10,RIGHT
+		setPos $2,26,11,RIGHT
+		setPos $8C,63,63,DOWN
 		setActscript $0,$FF,eas_Init
 		setActscript $1,$FF,eas_Init
 		setActscript $2,$FF,eas_Init
@@ -45,7 +45,7 @@ cs_53176:       setCameraEntity $FFFF
 		nextSingleText $80,$8A  ; "That's right.  Kill him{N}before he possesses{N}somebody else.{W2}"
 		nextSingleText $80,$8A  ; "You may go.{W1}"
 		nextSingleText $0,$90   ; "Yes, sir.{W1}"
-		setFacing $90,3
+		setFacing $90,DOWN
 		nextSingleText $0,$90   ; "Let's go and defeat the{N}evil Gizmo.{W1}"
 		setActscript $91,$0,eas_Jump
 		setActscript $92,$0,eas_Jump
@@ -62,14 +62,14 @@ cs_53176:       setCameraEntity $FFFF
 		csWait 25
 		moveEntity $90,$FF,$3,$4
 		endMove $8080
-		setFacing $91,3
-		setFacing $92,3
-		setFacing $93,3
-		setFacing $94,3
-		setFacing $95,3
-		setFacing $96,3
+		setFacing $91,DOWN
+		setFacing $92,DOWN
+		setFacing $93,DOWN
+		setFacing $94,DOWN
+		setFacing $95,DOWN
+		setFacing $96,DOWN
 		csWait 20
-		setFacing $90,1
+		setFacing $90,UP
 		setCamDest 23,6
 		nextSingleText $0,$90   ; "Forward men!{W1}"
 		moveEntity $90,$0,$3,$6
@@ -100,7 +100,7 @@ cs_53176:       setCameraEntity $FFFF
 		csWait 70
 		nextText $80,$8A        ; "Sir Astral is still{N}sleeping...{N}Is he alright?{W2}"
 		nextSingleText $80,$8A  ; "The King is upstairs looking{N}in on Sir Astral.{N}I'm worried.{W1}"
-		setFacing $8A,2
+		setFacing $8A,LEFT
 		csWait 30
 		moveEntity $1,$FF,$0,$1
 		endMove $8080
@@ -122,20 +122,20 @@ cs_53176:       setCameraEntity $FFFF
 		nextSingleText $80,$8A  ; "Don't worry about him.{N}If he dies, it doesn't matter.{N}He's old anyway.{W1}"
 		csWait 40
 		nextSingleText $0,$8C   ; "Minister!{N}Is the Minister there?{W1}"
-		setFacing $8A,3
+		setFacing $8A,DOWN
 		csWait 30
-		setPos $8C,23,13,1
+		setPos $8C,23,13,UP
 		moveEntity $8C,$FF,$0,$3
 		moreMove $1,$1
 		moreMove $0,$3
 		moreMove $1,$2
 		endMove $8080
-		setFacing $8A,0
+		setFacing $8A,RIGHT
 		nextSingleText $80,$8A  ; "Here I am.{W1}"
 		csWait 5
 		setActscript $8C,$0,eas_461E4
 		csWait 120
-		setFacing $8C,2
+		setFacing $8C,LEFT
 		nextSingleText $0,$8C   ; "Did our soldiers leave{N}for the subjugation?{W1}"
 		entityNod $8A
 		nextSingleText $80,$8A  ; "Yes, just a few minutes{N}ago.{W1}"
@@ -150,11 +150,11 @@ cs_53176:       setCameraEntity $FFFF
 		moveEntity $8C,$FF,$C,$28
 		moreMove $1,$1
 		endMove $8080
-		setFacing $8C,3
+		setFacing $8C,DOWN
 		moveEntity $8A,$FF,$0,$1
 		moreMove $1,$1
 		endMove $8080
-		setFacing $8A,1
+		setFacing $8A,UP
 		csWait 20
 		nextText $0,$8C         ; "Oh, I'm too late.{W2}"
 		nextSingleText $0,$8C   ; "Astral came back to his{N}senses just now.{W1}"
@@ -175,7 +175,7 @@ cs_53176:       setCameraEntity $FFFF
 		nextSingleText $0,$8C   ; "Astral asked me to send{N}soldiers for him, but....{W1}"
 		nextSingleText $80,$8A  ; "Ah, I understand.{W1}"
 		nextSingleText $0,$8C   ; "What should we do now?{W1}"
-		setFacing $8A,3
+		setFacing $8A,DOWN
 		nextSingleText $80,$8A  ; "What should we do?{W1}"
 		stopEntity $8C
 		stopEntity $8A
@@ -187,11 +187,11 @@ cs_53176:       setCameraEntity $FFFF
 		startEntity $8A
 		nextSingleText $80,$8A  ; "Ah, yes!{W1}"
 		nextSingleText $0,$8C   ; "Minister, I have a good{N}idea.{W1}"
-		setFacing $8A,1
+		setFacing $8A,UP
 		nextSingleText $80,$8A  ; "As do I.{W1}"
 		moveEntity $8A,$FF,$3,$1
 		endMove $8080
-		setFacing $8A,2
+		setFacing $8A,LEFT
 		nextText $80,$8A        ; "You're the pupils of Astral.{N}I know of you, {LEADER}.{W2}"
 		moveEntity $0,$FF,$0,$1
 		endMove $8080
@@ -211,7 +211,7 @@ cs_53482:       yesNo
 		jump cs_53482
 cs_534AC:       moveEntity $8C,$FF,$3,$1
 		endMove $8080
-		setFacing $8C,2
+		setFacing $8C,LEFT
 		textCursor $2F6
 		nextSingleText $0,$8C   ; "Thank you.{N}Depart to fetch Hawel{N}immediately.{W1}"
 		followEntity $1,$0,$2
@@ -232,33 +232,33 @@ cs_534D2:       textCursor $2B6
 		nextText $80,$80        ; "{NAME;28}, calm down!{N}You already figured it out,{N}didn't you?{W2}"
 		nextText $80,$80        ; "We didn't attack Galam.{N}Your King lied!{N}We are allies.{W2}"
 		nextSingleText $80,$80  ; "Do you believe me?{N}We would never....{W1}"
-		setFacing $1C,0
+		setFacing $1C,RIGHT
 		csWait 20
-		setFacing $1C,1
+		setFacing $1C,UP
 		csWait 30
 		entityShakeHead $1C
 		nextSingleText $0,$1C   ; "Stop!  NO!{N}King Galam is my...{W1}"
 		nextText $80,$80        ; "You have to believe me.{W2}"
 		nextSingleText $80,$80  ; "Your King is possessed{N}by a devil.{N}He is not King Galam!{W1}"
-		setFacing $1C,0
+		setFacing $1C,RIGHT
 		nextSingleText $0,$1C   ; "No!....{W1}"
 		csWait 30
 		nextSingleText $FF,$FF  ; "Princess Elis screams{N}for help.{W1}"
-		setFacing $1C,1
+		setFacing $1C,UP
 		nextSingleText $0,$98   ; "No, no!{N}Father!  Astral!{N}Somebody please...!{W1}"
 		nextSingleText $80,$82  ; "Elis!{W1}"
-		setFacing $1C,0
+		setFacing $1C,RIGHT
 		csWait 20
-		setFacing $80,0
+		setFacing $80,RIGHT
 		nextText $80,$80        ; "He is taking her away!{W2}"
 		nextSingleText $80,$80  ; "We have no time.{W1}"
 		setEntityDest $80,21,10
 		nextSingleText $0,$1C   ; "Stop, sir!{N}I can't let you pass!{W1}"
 		nextSingleText $80,$80  ; "Then you come with me!{N}Yes, a good idea.{W1}"
 		csWait 30
-		setFacing $1C,3
+		setFacing $1C,DOWN
 		csWait 50
-		setFacing $1C,0
+		setFacing $1C,RIGHT
 		csWait 20
 		entityNod $1C
 		csWait 30

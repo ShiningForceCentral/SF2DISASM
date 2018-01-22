@@ -19,16 +19,16 @@ return_5C3D6:
 cs_5C3D8:       textCursor $9F6
 		setActscript $1F,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $0,11,22,1
-		setPos $1F,10,22,1
-		setPos $7,9,22,1
+		setPos $0,11,22,UP
+		setPos $1F,10,22,UP
+		setPos $7,9,22,UP
 		fadeInB
 		moveEntity $1F,$FF,$1,$2
 		endMove $8080
 		csWait 5
 		setActscript $1F,$0,eas_461B6
 		csWait 120
-		setFacing $1F,1
+		setFacing $1F,UP
 		nextSingleText $0,$1F   ; "It's coming from this{N}direction.{W1}"
 		moveEntity $7,$FF,$1,$2
 		endMove $8080

@@ -58,12 +58,12 @@ cs_59656:       textCursor $6D4
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setPos $0,4,8,3
-		setPos $7,3,7,3
-		setPos $1F,5,7,3
-		setPos $99,12,16,3
-		setPos $9A,11,15,3
-		setPos $9B,13,15,3
+		setPos $0,4,8,DOWN
+		setPos $7,3,7,DOWN
+		setPos $1F,5,7,DOWN
+		setPos $99,12,16,DOWN
+		setPos $9A,11,15,DOWN
+		setPos $9B,13,15,DOWN
 		removeShadow $0
 		removeShadow $7
 		removeShadow $1F
@@ -120,9 +120,9 @@ cs_59656:       textCursor $6D4
 		entityShakeHead $0
 		entityShakeHead $7
 		entityShakeHead $1F
-		setFacing $0,1
-		setFacing $7,0
-		setFacing $1F,2
+		setFacing $0,UP
+		setFacing $7,RIGHT
+		setFacing $1F,LEFT
 		csWait 20
 		nextText $C0,$1F        ; "What happened?{W2}"
 		nextText $C0,$1F        ; "A strange feeling swept over{N}me when I entered that door.{W2}"
@@ -148,9 +148,9 @@ cs_59656:       textCursor $6D4
 		csWait 5
 		setActscript $7,$0,eas_461B6
 		csWait 130
-		setFacing $7,1
-		setFacing $0,3
-		setFacing $1F,3
+		setFacing $7,UP
+		setFacing $0,DOWN
+		setFacing $1F,DOWN
 		nextSingleText $0,$7    ; "Let's see...now we're on a{N}desk...and it's very large,{N}like a village.{W1}"
 		nextSingleText $0,$80   ; "Exactly.{W1}"
 		moveEntity $0,$0,$2,$1
@@ -165,9 +165,9 @@ cs_59656:       textCursor $6D4
 		csWait 5
 		setActscript $1F,$0,eas_461B6
 		csWait 130
-		setFacing $7,3
-		setFacing $0,3
-		setFacing $1F,3
+		setFacing $7,DOWN
+		setFacing $0,DOWN
+		setFacing $1F,DOWN
 		setActscript $0,$FF,eas_Jump
 		setActscript $7,$0,eas_Jump
 		entityShiver $0
@@ -197,9 +197,9 @@ cs_59656:       textCursor $6D4
 		playSound SFX_DIALOG_BLEEP_6
 		csWait 20
 		playSound SFX_DIALOG_BLEEP_6
-		setFacing $0,0
-		setFacing $7,0
-		setFacing $1F,0
+		setFacing $0,RIGHT
+		setFacing $7,RIGHT
+		setFacing $1F,RIGHT
 		csWait 20
 		playSound SFX_DIALOG_BLEEP_8
 		csWait 20
@@ -213,13 +213,13 @@ cs_59656:       textCursor $6D4
 		csWait 50
 		moveEntity $7,$FF,$2,$2
 		endMove $8080
-		setFacing $0,3
-		setFacing $7,1
-		setFacing $1F,3
+		setFacing $0,DOWN
+		setFacing $7,UP
+		setFacing $1F,DOWN
 		nextText $0,$7          ; "{LEADER}, cheer up!{W2}"
 		nextSingleText $0,$7    ; "Let's look around this{N}Desktop Kingdom.{W1}"
-		setFacing $0,0
-		setFacing $1F,2
+		setFacing $0,RIGHT
+		setFacing $1F,LEFT
 		nextSingleText $0,$1F   ; "I agree!  We can meet Creed{N}later.{W1}"
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
@@ -238,9 +238,9 @@ cs_5994E:       textCursor $700
 cs_5996E:       textCursor $702
 		setCameraEntity $FFFF
 		reloadMap 10,0
-		setPos $0,25,12,1
-		setPos $7,24,13,1
-		setPos $1F,25,13,1
+		setPos $0,25,12,UP
+		setPos $7,24,13,UP
+		setPos $1F,25,13,UP
 		fadeInB
 		nextSingleText $0,$86   ; "Checkmate!{N}This is for you.{W1}"
 		setCamDest 20,7
@@ -249,7 +249,7 @@ cs_5996E:       textCursor $702
 		csc_end
 cs_599A4:       moveEntity $88,$FF,$1,$1
 		endMove $8080
-		setFacing $88,3
+		setFacing $88,DOWN
 		csc_end
 cs_599B2:       setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
@@ -271,9 +271,9 @@ cs_599B2:       setActscript $0,$FF,eas_Init
 		moreMove $B,$1
 		moreMove $3,$1
 		endMove $8080
-		setPos $89,36,25,1
-		setPos $8A,37,24,1
-		setPos $8B,35,24,1
+		setPos $89,36,25,UP
+		setPos $8A,37,24,UP
+		setPos $8B,35,24,UP
 		stopEntity $0
 		stopEntity $7
 		stopEntity $1F

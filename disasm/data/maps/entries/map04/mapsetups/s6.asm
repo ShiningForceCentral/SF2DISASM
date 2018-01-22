@@ -22,14 +22,14 @@ return_51740:
 
 	; End of function ms_map4_InitFunction
 
-cs_51742:       setPos $80,0,0,0
-		setPos $81,0,0,0
+cs_51742:       setPos $80,0,0,RIGHT
+		setPos $81,0,0,RIGHT
 		csc_end
 cs_51750:       textCursor $2CB
-		setPos $0,29,4,3
-		setPos $1F,28,3,3
-		setPos $1E,29,3,3
-		setPos $9F,30,3,3
+		setPos $0,29,4,DOWN
+		setPos $1F,28,3,DOWN
+		setPos $1E,29,3,DOWN
+		setPos $9F,30,3,DOWN
 		setQuake 1
 		fadeInB
 		csWait 30
@@ -39,10 +39,10 @@ cs_51750:       textCursor $2CB
 		endMove $8080
 		nextSingleText $0,$1F   ; "You didn't escape?{N}Why are you here?{W1}"
 		nextSingleText $0,$80   ; "We've been waiting for you.{N}Chasms are appearing in the{N}ground.{W2}{N}Everybody is on the ship{N}to avoid falling into a{N}hole.{W1}"
-		setFacing $1F,0
+		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "Thank you.  {LEADER},{N}hurry to the harbor.{W1}"
 		nextSingleText $0,$80   ; "Wooooo!{N}Help! Heeeeelp....{W1}"
-		setFacing $1F,3
+		setFacing $1F,DOWN
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$4 Y=$4
 		dc.b 4
@@ -82,7 +82,7 @@ cs_51750:       textCursor $2CB
 		csWait 30
 		setQuake 1
 		csWait 30
-		setFacing $1F,0
+		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "That's too cruel....{N}{W2}{LEADER}, go to the{N}harbor from the east side.{N}It's safer.{W1}"
 		setActscript $1F,$0,eas_Follower1
 		csc_end

@@ -25,9 +25,9 @@ return_5D63A:
 
 	; End of function ms_map31_flag33E_InitFunction
 
-cs_5D63C:       setPos $88,30,6,2
+cs_5D63C:       setPos $88,30,6,LEFT
 		csc_end
-cs_5D644:       setPos $89,8,3,2
+cs_5D644:       setPos $89,8,3,LEFT
 		animEntityFadeInOut $89,$5
 		csc_end
 cs_5D652:       textCursor $7E8
@@ -42,10 +42,10 @@ cs_5D65E:       textCursor $7EB
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
 		setEntityDest $0,28,3
-		setFacing $0,3
+		setFacing $0,DOWN
 		setEntityDest $7,27,4
 		setEntityDest $1F,27,5
-		setFacing $88,1
+		setFacing $88,UP
 		setActscript $88,$FF,eas_46172
 		moveEntity $88,$FF,$2,$1
 		endMove $8080
@@ -63,11 +63,11 @@ cs_5D65E:       textCursor $7EB
 		endMove $8080
 		csWait 60
 		setActscript $88,$FF,eas_Init2
-		setFacing $88,1
+		setFacing $88,UP
 		nextSingleText $0,$88   ; "Finished!{W1}"
 		moveEntity $88,$FF,$0,$1
 		endMove $8080
-		setFacing $88,2
+		setFacing $88,LEFT
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
 		csc_end

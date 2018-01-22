@@ -6,9 +6,9 @@ abcs_battle33:  textCursor $B3C
 		loadMapEntities ce_4D322
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,13,11,1
+		setPos $7,13,11,UP
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,12,9,3
+		setPos $1F,12,9,DOWN
 		setBlocks 3,39,1,1,16,8
 		stopEntity $80
 		setActscript $80,$FF,eas_46172
@@ -43,14 +43,14 @@ abcs_battle33:  textCursor $B3C
 		endMove $8080
 		csWait 3
 		setActscript $80,$FF,eas_461AA
-		setFacing $7,0
+		setFacing $7,RIGHT
 		setActscript $7,$FF,eas_Jump
 		csWait 40
 		moveEntity $7,$FF,$0,$3
 		endMove $8080
-		setFacing $7,1
-		setFacing $0,0
-		setFacing $1F,0
+		setFacing $7,UP
+		setFacing $0,RIGHT
+		setFacing $1F,RIGHT
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$18 Y=$18
 		dc.b $18
@@ -111,8 +111,8 @@ abcs_battle33:  textCursor $B3C
 		endMove $8080
 		moveEntity $0,$FF,$0,$4
 		endMove $8080
-		setFacing $1F,0
-		setFacing $0,1
+		setFacing $1F,RIGHT
+		setFacing $0,UP
 		nextSingleText $0,$1F   ; "Are you a survivor?{N}Are you from Moun?{N}What's your name?{W1}"
 		nextSingleText $0,$80   ; "I am {NAME;26}.{N}I am not from Moun.{W1}"
 		nextSingleText $0,$1F   ; "Then, where are you from?{W1}"
@@ -138,7 +138,7 @@ abcs_battle33:  textCursor $B3C
 		setActscript $80,$FF,eas_46172
 		moveEntity $80,$0,$3,$1
 		endMove $8080
-		setPos $1A,16,8,3
+		setPos $1A,16,8,DOWN
 		setActscript $1A,$FF,eas_Init
 		csWait 3
 		setActscript $80,$FF,eas_461AA
@@ -151,12 +151,12 @@ abcs_battle33:  textCursor $B3C
 		nextText $0,$1F         ; "That's good news.{W2}"
 		nextSingleText $0,$1F   ; "And where are they?{W1}"
 		nextSingleText $C0,$1A  ; "Down here.  Follow me.{W1}"
-		setPos $1A,63,63,3
+		setPos $1A,63,63,DOWN
 		setActscript $7,$FF,eas_Jump
 		csWait 30
 		moveEntity $7,$FF,$1,$2
 		endMove $8080
-		setFacing $1F,3
+		setFacing $1F,DOWN
 		nextText $0,$1F         ; "{LEADER}, hurry!{N}Follow {NAME;26}!{W2}"
 		nextSingleText $0,$1F   ; "{NAME;26} knows where{N}they're hiding.{W1}"
 		followEntity $1F,$0,$2

@@ -6,12 +6,12 @@ bbcs_34:        textCursor $B4F
 		loadMapEntities ce_4D48E
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,30,28,2
+		setPos $7,30,28,LEFT
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,30,30,2
+		setPos $1F,30,30,LEFT
 		jumpIfFlagClear $4C,cs_4D38E; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		setPos $1A,31,29,2
+		setPos $1A,31,29,LEFT
 cs_4D38E:       animEntityFadeInOut $81,$6
 		playSound MUSIC_BATTLE_THEME_1
 		fadeInB
@@ -35,7 +35,7 @@ cs_4D3C6:       moveEntity $1F,$FF,$2,$3
 		setCamDest 7,4
 		animEntityFadeInOut $81,$7
 		nextSingleText $C0,$81  ; "Stop!  You need my war plan!{W1}"
-		setFacing $80,1
+		setFacing $80,UP
 		nextSingleText $0,$80   ; "You again, Geshp?  Why don't{N}you leave me alone?{W1}"
 		nextText $C0,$81        ; "Zeon left me in charge.{W2}"
 		nextSingleText $C0,$81  ; "It doesn't matter if you are{N}killed or not.{W1}"
@@ -55,12 +55,12 @@ cs_4D3C6:       moveEntity $1F,$FF,$2,$3
 		csWait 10
 		animEntityFadeInOut $81,$6
 		waitIdle $80
-		setFacing $80,3
+		setFacing $80,DOWN
 		csWait 30
 		csWait 5
 		setActscript $80,$0,eas_461B6
 		csWait 120
-		setFacing $80,3
+		setFacing $80,DOWN
 		nextSingleText $0,$80   ; "Geshp, you coward!{N}I'll kill you first!{W1}"
 		tintMap
 		nextText $C0,$81        ; "I have no time to waste.{N}I must go.{W2}"
@@ -69,7 +69,7 @@ cs_4D3C6:       moveEntity $1F,$FF,$2,$3
 		setCamDest 7,3
 		csWait 60
 		setActscript $80,$FF,eas_Jump
-		setFacing $80,0
+		setFacing $80,RIGHT
 		nextText $0,$80         ; "{LEADER}, did you hear that?{N}He said you would win!{W2}"
 		nextSingleText $0,$80   ; "He must be a bad{N}fortuneteller.{W1}"
 		setCamDest 21,22

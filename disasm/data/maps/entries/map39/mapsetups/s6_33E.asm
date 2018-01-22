@@ -16,17 +16,17 @@ return_5E0EC:
 
 	; End of function ms_map39_flag33E_InitFunction
 
-cs_5E0EE:       newEntity $1A,4,12,1,$FF
+cs_5E0EE:       newEntity $1A,4,12,UP,$FF
 		csc_end
 cs_5E0F8:       textCursor $805
 		setCameraEntity $18
 		setEntityDest $0,19,7
 		moveEntity $7,$FF,$3,$1
 		endMove $8080
-		setPos $1F,19,8,0
-		setPos $7,18,8,0
-		setFacing $0,0
-		setFacing $18,2
+		setPos $1F,19,8,RIGHT
+		setPos $7,18,8,RIGHT
+		setFacing $0,RIGHT
+		setFacing $18,LEFT
 		nextSingleText $0,$18   ; "Well, you're not from{N}Pacalon, are you?{W1}"
 		nextSingleText $0,$1F   ; "We're from Granseal,{N}Mr. {NAME;24}.{W1}"
 		nextSingleText $0,$18   ; "Granseal...I've never heard{N}of it....{W1}"
@@ -46,47 +46,47 @@ cs_5E0F8:       textCursor $805
 		endMove $8080
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
-		setFacing $0,2
-		setFacing $7,1
-		setFacing $18,0
+		setFacing $0,LEFT
+		setFacing $7,UP
+		setFacing $18,RIGHT
 		csWait 10
 		nextSingleText $0,$18   ; "By the way, why did you{N}come to North Parmecia?{W1}"
 		nextSingleText $0,$7    ; "To defeat devils!{W1}"
-		setFacing $18,3
+		setFacing $18,DOWN
 		nextSingleText $0,$18   ; "Really?{W1}"
 		moveEntity $0,$FF,$0,$1
 		endMove $8080
-		setFacing $0,2
+		setFacing $0,LEFT
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
-		setFacing $1F,2
-		setFacing $18,0
+		setFacing $1F,LEFT
+		setFacing $18,RIGHT
 		nextText $0,$1F         ; "We don't want another{N}tragedy like Moun.{W2}"
 		nextSingleText $0,$1F   ; "We're going to Grans Island{N}to kill the King of the{N}Devils.{W1}"
-		setFacing $18,2
-		setFacing $18,0
+		setFacing $18,LEFT
+		setFacing $18,RIGHT
 		nextSingleText $0,$18   ; "Hmmm....{W2}"
-		setFacing $18,1
+		setFacing $18,UP
 		nextSingleText $0,$18   ; "I can't go back now!{W1}"
 		entityShiver $1F
 		nextSingleText $0,$1F   ; "But...your family...{W1}"
-		setFacing $18,0
+		setFacing $18,RIGHT
 		nextSingleText $0,$18   ; "I know.  I'll miss them.{W2}"
-		setFacing $18,2
+		setFacing $18,LEFT
 		nextSingleText $0,$18   ; "But, I believe they'll{N}understand.{W2}"
-		setFacing $18,0
+		setFacing $18,RIGHT
 		nextSingleText $0,$18   ; "Let me go with you!{W1}"
 		join $18
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
 		followEntity $18,$1F,$2
-		setPos $1A,4,12,1
+		setPos $1A,4,12,UP
 		csc_end
 cs_5E20A:       textCursor $819
 		nextSingleText $0,$1A   ; "I happened to overhear your{N}conversation with {NAME;24}.{W2}"
 		nextSingleText $0,$1A   ; "I want to go to Grans, too.{W1}"
 		nextSingleText $0,$80   ; "They decide to take the{N}ancient soldier {NAME;26}{N}with them.{W1}"
-		setFacing $1A,3
+		setFacing $1A,DOWN
 		entityShiver $1A
 		nextSingleText $0,$1A   ; "There is no time to waste!{W1}"
 		addNewFollower $1A

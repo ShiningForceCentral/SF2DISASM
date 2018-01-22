@@ -6,15 +6,15 @@ abcs_battle32:  textCursor $B25
 		loadMapEntities ce_4CEEC
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,11,25,1
+		setPos $7,11,25,UP
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,9,25,1
+		setPos $1F,9,25,UP
 		setActscript $16,$FF,eas_Init
-		setPos $16,11,26,1
+		setPos $16,11,26,UP
 		setActscript $1E,$FF,eas_Init
-		setPos $1E,10,26,1
+		setPos $1E,10,26,UP
 		setActscript $17,$FF,eas_Init
-		setPos $17,10,22,3
+		setPos $17,10,22,DOWN
 		fadeInB
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
@@ -26,11 +26,11 @@ abcs_battle32:  textCursor $B25
 		nextSingleText $C0,$17  ; "I can't stand their wicked{N}ways!{W1}"
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
-		setFacing $7,2
-		setFacing $17,0
+		setFacing $7,LEFT
+		setFacing $17,RIGHT
 		nextSingleText $0,$7    ; "You have the same opinion{N}of them as we do.{W1}"
 		nextSingleText $C0,$17  ; "Please let me join you!{N}I could be a great help to{N}you.{W2}"
-		setFacing $17,3
+		setFacing $17,DOWN
 		nextSingleText $C0,$17  ; "You need a professional{N}soldier like me.{W1}"
 		nextSingleText $0,$1F   ; "Oh, we welcome you.{W1}"
 		setActscript $7,$FF,eas_46172
@@ -39,9 +39,9 @@ abcs_battle32:  textCursor $B25
 		nextSingleText $0,$7    ; "But, he was on the other{N}side just an minute ago.{W1}"
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
-		setFacing $1F,0
+		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "I don't care, {NAME;7}.{N}He has seen the error of his{N}ways.{W1}"
-		setFacing $1F,3
+		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "{LEADER}, don't you want{N}{NAME;23} to join our{N}force?{W1}"
 		entityNod $0
 		join $17

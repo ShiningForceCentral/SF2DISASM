@@ -19,20 +19,20 @@ bbcs_07:        textCursor $935
 		moveEntity $82,$FF,$3,$1
 		endMove $8080
 		csWait 40
-		setFacing $80,1
+		setFacing $80,UP
 		csWait 20
 		setActscript $82,$FF,eas_Jump
 		csWait 30
 		setActscript $82,$FF,eas_46172
 		moveEntity $82,$FF,$1,$1
 		endMove $8080
-		setFacing $80,3
-		setFacing $81,3
+		setFacing $80,DOWN
+		setFacing $81,DOWN
 		nextSingleText $0,$81   ; "King Granseal and{N}{LEADER}!{W1}"
 		nextText $C0,$80        ; "Blast!{W2}"
 		nextSingleText $C0,$80  ; "Give up now, King Granseal!{N}Do you want her to die?!{W1}"
 		setCamDest 8,15
-		setFacing $81,1
+		setFacing $81,UP
 		nextText $0,$81         ; "No!  You give up!{N}We've got reinforcements!{W2}"
 		nextSingleText $0,$81   ; "Your great magic cannot{N}defeat all of our soldiers!{W1}"
 		nextSingleText $C0,$80  ; "I'll kill you before they{N}have a chance to attack!{W1}"
@@ -96,7 +96,7 @@ bbcs_07:        textCursor $935
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setFacing $80,1
+		setFacing $80,UP
 		nextSingleText $C0,$80  ; "I've beaten you!{N}You've lost!{W1}"
 		nextText $0,$81         ; "But, so have you!{N}Or had you not noticed?{W2}"
 		nextSingleText $0,$81   ; "You cannot move.{N}Princess Elis, run away!{W1}"
@@ -112,7 +112,7 @@ bbcs_07:        textCursor $935
 		moveEntity $82,$0,$3,$3
 		endMove $8080
 		csWait 10
-		setPos $85,12,18,1
+		setPos $85,12,18,UP
 		animEntityFadeInOut $85,$5
 		waitIdle $82
 		nextSingleText $0,$85   ; "Stop, my dear!{W1}"
@@ -127,10 +127,10 @@ bbcs_07:        textCursor $935
 		entityShiver $80
 		stopEntity $80
 		nextSingleText $C0,$80  ; "I've no time to play with{N}these kids.{N}Devils!  I summon thee!{W1}"
-		setPos $86,14,18,3
+		setPos $86,14,18,DOWN
 		csWait 40
-		setPos $87,15,18,3
-		setFacing $85,3
+		setPos $87,15,18,DOWN
+		setFacing $85,DOWN
 		nextSingleText $0,$86   ; "Yeeeeee!{W1}"
 		nextText $C0,$80        ; "Forget about Astral.{N}"
 		nextText $C0,$80        ; "I'll kill him!{W2}"

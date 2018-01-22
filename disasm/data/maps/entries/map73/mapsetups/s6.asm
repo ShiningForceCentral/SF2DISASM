@@ -168,27 +168,27 @@ cs_50426:       textCursor $8B5
 		setActscript $8B,$0,eas_461B6
 		csWait 5
 		setActscript $8C,$0,eas_461B6
-		setFacing $80,2
+		setFacing $80,LEFT
 		csWait 60
-		setFacing $80,0
+		setFacing $80,RIGHT
 		csWait 60
-		setFacing $80,2
+		setFacing $80,LEFT
 		csWait 30
 		nextSingleText $0,$80   ; "Everybody, listen up!{W1}"
 		csWait 20
-		setFacing $81,0
-		setFacing $82,0
-		setFacing $83,0
-		setFacing $84,0
-		setFacing $85,0
-		setFacing $86,1
-		setFacing $87,1
-		setFacing $88,2
-		setFacing $89,2
-		setFacing $8A,2
+		setFacing $81,RIGHT
+		setFacing $82,RIGHT
+		setFacing $83,RIGHT
+		setFacing $84,RIGHT
+		setFacing $85,RIGHT
+		setFacing $86,UP
+		setFacing $87,UP
+		setFacing $88,LEFT
+		setFacing $89,LEFT
+		setFacing $8A,LEFT
 		csWait 20
-		setFacing $8B,3
-		setFacing $8C,3
+		setFacing $8B,DOWN
+		setFacing $8C,DOWN
 		nextText $0,$80         ; "Let's build a new Granseal{N}here!{W2}"
 		nextText $0,$80         ; "The ship will be a good{N}source of timber!{W2}"
 		nextSingleText $0,$80   ; "Break the ship apart and{N}bring the timber onto the{N}land!{W1}"
@@ -221,13 +221,13 @@ cs_50624:       fadeInB
 		nextText $0,$3          ; "We're going to break the{N}ship up into pieces and build{N}our new town....{W2}"
 		nextText $0,$3          ; "That means, we can't go back{N}to Grans Island!{W2}"
 		nextSingleText $0,$3    ; "Hey, listen to me!{W1}"
-		setFacing $1,1
+		setFacing $1,UP
 		nextText $C0,$1         ; "Be quiet!  We know that.{W2}"
 		nextSingleText $0,$1    ; "Help me remove this plank!{W1}"
 		nextSingleText $0,$3    ; "OK, I'm coming.{W1}"
 		moveEntity $3,$FF,$3,$2
 		endMove $8080
-		setFacing $3,3
+		setFacing $3,DOWN
 		entitySprite $3,$3B
 		csWait 60
 		nextText $0,$3          ; "Ugh...ugghhh...{N}It's stuck!{W2}"
@@ -254,7 +254,7 @@ cs_50624:       fadeInB
 		nextSingleText $0,$5    ; "Oh, what a klutz!{W1}"
 		moveEntity $5,$FF,$0,$2
 		endMove $8080
-		setFacing $5,1
+		setFacing $5,UP
 		csWait 60
 		nextSingleText $C0,$1   ; "That's OK.  {NAME;3} needed{N}a bath anyway.{W1}"
 		csWait 20
@@ -476,11 +476,11 @@ cs_50806:       textCursor $8F0
 		endMove $8080
 		moveEntity $80,$FF,$2,$5
 		endMove $8080
-		setPosFlash $82,0,0,2
+		setPosFlash $82,0,0,LEFT
 		nextSingleText $0,$80   ; "Look at that, {LEADER}!{N}They've finished breaking{N}up the ship.{W1}"
-		setFacing $0,3
-		setFacing $80,3
-		setFacing $81,3
+		setFacing $0,DOWN
+		setFacing $80,DOWN
+		setFacing $81,DOWN
 		setCamDest 25,47
 		setBlocks 53,0,11,10,24,48
 		csWait 15
@@ -503,11 +503,11 @@ cs_50806:       textCursor $8F0
 		setActscript $81,$FF,eas_Init
 		setActscript $0,$FF,eas_Init
 		setEntityDest $80,29,52
-		setPos $80,0,0,3
+		setPos $80,0,0,DOWN
 		setEntityDest $81,29,52
-		setPos $81,0,0,3
+		setPos $81,0,0,DOWN
 		setEntityDest $0,29,52
-		setPos $0,0,0,3
+		setPos $0,0,0,DOWN
 		csWait 60
 		nextSingleText $FF,$FF  ; "They worked hard to build{N}their new town.{W1}"
 		playSound $FD

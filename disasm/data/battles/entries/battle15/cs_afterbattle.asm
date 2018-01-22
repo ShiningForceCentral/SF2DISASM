@@ -8,23 +8,23 @@ abcs_battle15:  textCursor $9CA
 		setActscript $7,$FF,eas_Init
 		setActscript $1E,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
-		setPos $1E,14,19,1
+		setPos $1E,14,19,UP
 		fadeInB
 		cameraSpeed $30
 		moveEntity $1E,$FF,$1,$5
 		endMove $8080
 		nextSingleText $0,$1E   ; "It was lucky for me that I{N}met you.  Thank you.{W1}"
-		setFacing $1E,0
+		setFacing $1E,RIGHT
 		nextSingleText $0,$1E   ; "Follow me to the Ancient{N}Tunnel.{W1}"
 		moveEntity $1E,$FF,$0,$2
 		moreMove $1,$2
 		moreMove $0,$6
 		endMove $8080
 		fadeOutB
-		setPos $0,27,10,1
-		setPos $7,28,10,1
-		setPos $1F,26,10,1
-		setPos $1E,27,7,1
+		setPos $0,27,10,UP
+		setPos $7,28,10,UP
+		setPos $1F,26,10,UP
+		setPos $1E,27,7,UP
 		setCamDest 21,5
 		fadeInB
 		nextText $0,$1E         ; "Why is this door closed?{N}That's strange...{W2}"
@@ -58,15 +58,15 @@ abcs_battle15:  textCursor $9CA
 		endMove $8080
 		moveEntity $1F,$FF,$3,$1
 		endMove $8080
-		setFacing $0,1
-		setFacing $7,1
-		setFacing $1F,1
+		setFacing $0,UP
+		setFacing $7,UP
+		setFacing $1F,UP
 		waitIdle $1E
 		moveEntity $1E,$FF,$2,$3
 		endMove $8080
-		setFacing $0,2
-		setFacing $7,2
-		setFacing $1F,2
+		setFacing $0,LEFT
+		setFacing $7,LEFT
+		setFacing $1F,LEFT
 		moveEntity $1E,$FF,$2,$5
 		endMove $8080
 		hideEntity $1E

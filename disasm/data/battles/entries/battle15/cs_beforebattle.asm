@@ -6,11 +6,11 @@ bbcs_15:        textCursor $9C7
 		loadMapEntities ce_4AE42
 		setActscript $0,$FF,eas_Init
 		setActscript $1E,$FF,eas_Init
-		setPos $1E,14,19,1
+		setPos $1E,14,19,UP
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,15,20,1
+		setPos $1F,15,20,UP
 		setActscript $7,$FF,eas_Init
-		setPos $7,13,20,1
+		setPos $7,13,20,UP
 		fadeInB
 		cameraSpeed $30
 		nextSingleText $0,$1E   ; "This is the Ancient Hall{N}that leads to the Ancient{N}Tunnel...{W1}"
@@ -26,7 +26,7 @@ bbcs_15:        textCursor $9C7
 		csWait 30
 		setCamDest 9,15
 		nextSingleText $0,$1E   ; "There are more monsters here!{W2}"
-		setFacing $1E,3
+		setFacing $1E,DOWN
 		nextSingleText $0,$1E   ; "{LEADER}, take 'em out!{W1}"
 		csc_end
 ce_4AE42:       dc.w $E

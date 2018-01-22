@@ -5,13 +5,13 @@ bbcs_01:        textCursor $8F4
 		loadMapFadeIn 57,2,10
 		loadMapEntities ce_49694
 		setActscript $0,$FF,eas_Init
-		setPos $1,8,17,1
-		setPos $2,7,17,1
+		setPos $1,8,17,UP
+		setPos $2,7,17,UP
 		setActscript $1,$FF,eas_Init
 		fadeInB
 		setCamDest 2,8
 		csWait 60
-		setFacing $87,3
+		setFacing $87,DOWN
 		nextText $0,$87         ; "There you are, {LEADER}.{N}Stay here.{W2}"
 		nextSingleText $0,$87   ; "I'll take a look inside the{N}tower.{W1}"
 		setCameraEntity $87
@@ -53,9 +53,9 @@ bbcs_01:        textCursor $8F4
 		moveEntity $1,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$1    ; "Look!  Something is{N}appearing.  What's that?{W1}"
-		setFacing $87,1
+		setFacing $87,UP
 		setCamDest 2,1
-		setPos $80,7,4,3
+		setPos $80,7,4,DOWN
 		animEntityFadeInOut $80,$7
 		setActscript $80,$FF,eas_46172
 		setActscript $87,$FF,eas_46172
@@ -77,12 +77,12 @@ bbcs_01:        textCursor $8F4
 		entityShiver $80
 		csWait 30
 		entityShiver $80
-		setPos $81,7,4,3
-		setPos $82,7,4,3
-		setPos $83,7,4,3
-		setPos $84,7,4,3
-		setPos $85,7,4,3
-		setPos $86,7,4,3
+		setPos $81,7,4,DOWN
+		setPos $82,7,4,DOWN
+		setPos $83,7,4,DOWN
+		setPos $84,7,4,DOWN
+		setPos $85,7,4,DOWN
+		setPos $86,7,4,DOWN
 		setActscript $81,$FF,eas_46172
 		setActscript $82,$FF,eas_46172
 		setActscript $83,$FF,eas_46172
@@ -111,7 +111,7 @@ bbcs_01:        textCursor $8F4
 		entityShiver $80
 		csWait 60
 		nextText $0,$87         ; "This doesn't look good.{W2}"
-		setFacing $87,3
+		setFacing $87,DOWN
 		nextSingleText $0,$87   ; "We'll stop the evil Gizmo{N}here.  {LEADER}, defeat{N}these fiends!{W1}"
 		csc_end
 ce_49694:       dc.w 7

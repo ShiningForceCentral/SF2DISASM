@@ -25,7 +25,7 @@ loc_5AB98:
 		trap    #6
 		bra.w   loc_5ABB0
 cs_5ABA8:
-		setPos $80,14,14,1
+		setPos $80,14,14,UP
 		csc_end
 loc_5ABB0:
 		bra.s   loc_5ABEE
@@ -43,7 +43,7 @@ loc_5ABBC:
 		trap    #6
 		bra.w   loc_5ABD4
 cs_5ABCC:
-		setPos $80,17,10,3
+		setPos $80,17,10,DOWN
 		csc_end
 loc_5ABD4:
 		bra.s   loc_5ABEE
@@ -55,7 +55,7 @@ loc_5ABD6:
 		trap    #6
 		bra.w   loc_5ABEE
 cs_5ABE6:
-		setPos $80,17,12,3
+		setPos $80,17,12,DOWN
 		csc_end
 loc_5ABEE:
 		trap    #1
@@ -68,7 +68,7 @@ loc_5ABEE:
 		trap    #6
 		bra.w   loc_5AC0C
 cs_5AC04:
-		setPos $E,15,14,3
+		setPos $E,15,14,DOWN
 		csc_end
 loc_5AC0C:
 		trap    #1
@@ -78,7 +78,7 @@ loc_5AC0C:
 		trap    #6
 		bra.w   loc_5AC24
 cs_5AC1C:
-		setPos $10,16,15,3
+		setPos $10,16,15,DOWN
 		csc_end
 loc_5AC24:
 		trap    #1
@@ -88,7 +88,7 @@ loc_5AC24:
 		trap    #6
 		bra.w   loc_5AC3C
 cs_5AC34:
-		setPos $11,18,15,3
+		setPos $11,18,15,DOWN
 		csc_end
 loc_5AC3C:
 		trap    #1
@@ -98,7 +98,7 @@ loc_5AC3C:
 		trap    #6
 		bra.w   return_5AC54
 cs_5AC4C:
-		setPos $F,19,14,3
+		setPos $F,19,14,DOWN
 
 	; End of function ms_map33_InitFunction
 

@@ -62,6 +62,6 @@ nullsub_126:
 
 cs_53EF4:       moveEntity $80,$FF,$0,$1
 		endMove $8080
-		setFacing $87,3
+		setFacing $87,DOWN
 		setStoryFlag $1         ; Battle 1 unlocked
 		csc_end

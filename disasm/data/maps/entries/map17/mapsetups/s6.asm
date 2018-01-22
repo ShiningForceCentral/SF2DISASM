@@ -36,12 +36,12 @@ cs_5247C:       setBlocks 48,7,1,1,48,8
 cs_5249E:       playSound $FD
 		resetForceBattleStats
 		resetMap
-		loadEntitiesFromMapSetup 0,0,0
+		loadEntitiesFromMapSetup 0,0,RIGHT
 		csWait 60
 		fadeInB
 		textCursor $370
 		reloadMap 52,1
-		setPos $0,59,4,1
+		setPos $0,59,4,UP
 		nextSingleText $0,$1    ; "Impossible!{N}Galam and Granseal are{N}allies!{W1}"
 		nextSingleText $C0,$84  ; "But it's true.  I'm a scholar.{N}I'm here because I tried{N}to stop him.{W1}"
 		nextText $C0,$85        ; "I'm a leader of the Galam{N}Army.  I disagreed with{N}the war and now I'm here.{W2}"
@@ -62,17 +62,17 @@ cs_5249E:       playSound $FD
 		entityShakeHead $0
 		entityNod $0
 		nextSingleText $0,$0    ; "(Yawn){W1}"
-		setFacing $0,2
+		setFacing $0,LEFT
 		csWait 40
-		setFacing $2,0
+		setFacing $2,RIGHT
 		textCursor $37C
 		nextText $0,$2          ; "{LEADER}!{N}You finally woke up!{W2}"
 		nextSingleText $0,$2    ; "We're talking about{N}Ground Seal.{N}Please, join in.{W1}"
-		setFacing $2,2
+		setFacing $2,LEFT
 		csc_end
 cs_52530:       textCursor $385
 		setCamDest 48,0
-		setFacing $0,3
+		setFacing $0,DOWN
 		nextSingleText $C0,$84  ; "What's wrong with the seal?{W1}"
 		moveEntity $2,$FF,$2,$1
 		endMove $8080
@@ -84,26 +84,26 @@ cs_52530:       textCursor $385
 		moveEntity $85,$FF,$2,$1
 		endMove $8080
 		nextSingleText $0,$85   ; "Oh, you woke up!{N}Are you OK?{W1}"
-		setFacing $0,2
-		setFacing $2,2
-		setFacing $3,2
-		setFacing $1,2
-		setFacing $4,2
-		setFacing $84,2
-		setFacing $85,2
+		setFacing $0,LEFT
+		setFacing $2,LEFT
+		setFacing $3,LEFT
+		setFacing $1,LEFT
+		setFacing $4,LEFT
+		setFacing $84,LEFT
+		setFacing $85,LEFT
 		moveEntity $5,$FF,$0,$1
 		endMove $8080
 		csWait 5
 		setActscript $5,$0,eas_461B6
 		csWait 30
 		nextSingleText $0,$5    ; "Where...?{N}...I...why am I...?{W1}"
-		setFacing $5,3
+		setFacing $5,DOWN
 		nextText $C0,$84        ; "This is a jail in the{N}basement of Galam Castle.{W2}"
 		nextSingleText $C0,$84  ; "Say, you mustn't move yet!{W1}"
 		entityShakeHead $5
 		csWait 30
 		nextSingleText $0,$5    ; "Yes, I remember!{N}I was caught by Galam{N}soldiers.{W1}"
-		setFacing $85,1
+		setFacing $85,UP
 		nextSingleText $0,$85   ; "They took my jewels and{N}brought me here!{W1}"
 		entityShiver $5
 		nextSingleText $0,$5    ; "They...they killed my{N}friends!{W1}"
@@ -120,7 +120,7 @@ cs_52530:       textCursor $385
 		moreMove $C,$28
 		moreMove $3,$1
 		endMove $8080
-		setFacing $5,1
+		setFacing $5,UP
 		customActscript $5,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -131,7 +131,7 @@ cs_52530:       textCursor $385
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		stopEntity $5
-		setFacing $85,2
+		setFacing $85,LEFT
 		csWait 50
 		nextSingleText $0,$5    ; "Ouch!{N}I can hardly move.{W1}"
 		moveEntity $85,$FF,$2,$1
@@ -141,12 +141,12 @@ cs_52530:       textCursor $385
 		moveEntity $85,$FF,$0,$2
 		endMove $8080
 		setCamDest 47,0
-		setFacing $1,0
-		setFacing $85,0
-		setFacing $0,3
-		setFacing $3,3
-		setFacing $4,3
-		setFacing $84,3
+		setFacing $1,RIGHT
+		setFacing $85,RIGHT
+		setFacing $0,DOWN
+		setFacing $3,DOWN
+		setFacing $4,DOWN
+		setFacing $84,DOWN
 		nextText $C0,$84        ; "What were we talking{N}about?{W2}"
 		nextSingleText $C0,$84  ; "Oh, yes.  Why is King Galam{N}interested in Ground Seal?{W1}"
 		nextSingleText $0,$1    ; "Is it related to the opened{N}door?{W1}"
@@ -175,7 +175,7 @@ cs_52530:       textCursor $385
 		nextSingleText $0,$5    ; "Uhh...nope!{W1}"
 		entityShiver $5
 		nextText $0,$4          ; "We can't stay here!{W2}"
-		setFacing $1,0
+		setFacing $1,RIGHT
 		nextSingleText $0,$4    ; "We must escape!{W1}"
 		moveEntity $85,$FF,$0,$1
 		endMove $8080
@@ -192,13 +192,13 @@ cs_52530:       textCursor $385
 		setCameraEntity $5
 		moveEntity $85,$FF,$2,$1
 		endMove $8080
-		setFacing $1,3
+		setFacing $1,DOWN
 		nextSingleText $0,$85   ; "Oh, yes!  You're a thief and{N}you can open locked doors.{W1}"
 		nextSingleText $0,$5    ; "Yes, of course!{N}I'm the great thief, {NAME;5}!{W1}"
 		moveEntity $5,$FF,$2,$1
 		moreMove $3,$1
 		endMove $8080
-		setFacing $5,3
+		setFacing $5,DOWN
 		nextSingleText $FF,$FF  ; "{NAME;5} sticks a short wire{N}into the keyhole.{W1}"
 		playSound SFX_SECRET_PATH_ROCK
 		setBlocks 48,7,1,1,48,8
@@ -207,7 +207,7 @@ cs_52530:       textCursor $385
 		moveEntity $5,$FF,$3,$2
 		moreMove $0,$9
 		endMove $8080
-		setFacing $5,1
+		setFacing $5,UP
 		nextSingleText $FF,$FF  ; "{NAME;5} sticks a short wire{N}into the keyhole.{W1}"
 		playSound SFX_SECRET_PATH_ROCK
 		setBlocks 57,7,1,1,57,8
@@ -217,9 +217,9 @@ cs_52530:       textCursor $385
 		nextSingleText $C0,$5   ; "OK, it's done.{N}Hurry to your country and{N}save them!{W1}"
 		moveEntity $2,$FF,$0,$1
 		endMove $8080
-		setFacing $2,3
+		setFacing $2,DOWN
 		nextText $0,$2          ; "Thank you!{W2}"
-		setFacing $2,2
+		setFacing $2,LEFT
 		nextSingleText $0,$2    ; "{LEADER}, let's get back{N}to Granseal!{W1}"
 		csWait 30
 		setActscript $0,$0,eas_Jump
@@ -235,7 +235,7 @@ cs_52530:       textCursor $385
 		setActscript $5,$0,eas_461B6
 		nextSingleText $C0,$5   ; "Ah, that's because...{N}well...{W1}"
 		csWait 20
-		setFacing $5,1
+		setFacing $5,UP
 		setActscript $5,$FF,eas_46172
 		customActscript $5,$FF
 		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
@@ -251,7 +251,7 @@ cs_52530:       textCursor $385
 		moreMove $3,$4
 		moreMove $0,$4
 		endMove $8080
-		setFacing $5,2
+		setFacing $5,LEFT
 		nextSingleText $0,$1    ; "Is it...?{N}Are you the thief who broke{N}the seal?{W1}"
 		entityShiver $5
 		nextSingleText $C0,$5   ; "I...ah...{W1}"
@@ -292,7 +292,7 @@ cs_52530:       textCursor $385
 		moveEntity $5,$FF,$0,$1
 		endMove $8080
 		stopEntity $5
-		setFacing $5,1
+		setFacing $5,UP
 		entitySprite $5,$3B
 		csWait 40
 		nextText $0,$1          ; "I know the thief {NAME;5}{N}always steals for poor{N}people, but you made a{W2}"
@@ -303,7 +303,7 @@ cs_52530:       textCursor $385
 		moreMove $1,$2
 		moreMove $2,$4
 		endMove $8080
-		setFacing $1,1
+		setFacing $1,UP
 		nextSingleText $0,$1    ; "That's enough!{N}{LEADER}, let's go!{W1}"
 		followEntity $3,$0,$2
 		followEntity $4,$3,$2
@@ -335,14 +335,14 @@ cs_528D4:       textCursor $3B3
 		moveEntity $5,$FF,$0,$1
 		moreMove $1,$1
 		endMove $8080
-		setFacing $5,3
+		setFacing $5,DOWN
 		nextSingleText $0,$5    ; "Now, go out through this{N}short cut!{W1}"
 		csc_end
 cs_52938:       textCursor $3B8
 		moveEntity $5,$FF,$3,$1
 		endMove $8080
-		setFacing $5,2
-		setFacing $0,0
+		setFacing $5,LEFT
+		setFacing $0,RIGHT
 		nextText $0,$5          ; "You're right.  I did it.{W2}"
 		nextText $0,$5          ; "But, I didn't know all this{N}would happen.{W2}"
 		nextSingleText $0,$5    ; "Please take me with you.{W1}"
@@ -364,8 +364,8 @@ cs_52938:       textCursor $3B8
 		hideEntity $2
 		hideEntity $3
 		hideEntity $4
-		setPos $0,29,12,3
-		setPos $5,29,11,3
+		setPos $0,29,12,DOWN
+		setPos $5,29,11,DOWN
 		stopEntity $0
 		stopEntity $5
 		fadeInB
@@ -387,8 +387,8 @@ cs_52938:       textCursor $3B8
 		setActscript $5,$0,eas_RotateRight
 		setEntityDest $8000,29,18
 		setEntityDest $5,29,17
-		setFacing $0,3
-		setFacing $5,3
+		setFacing $0,DOWN
+		setFacing $5,DOWN
 		startEntity $0
 		startEntity $5
 		setActscript $0,$FF,eas_Init
@@ -396,18 +396,18 @@ cs_52938:       textCursor $3B8
 		followEntity $5,$0,$2
 		csc_end
 cs_52A3C:       setActscript $0,$FF,eas_Init
-		setFacing $83,2
+		setFacing $83,LEFT
 		textCursor $3BE
 		nextText $0,$83         ; "Hey, it's noisy next door.{W2}"
 		nextSingleText $0,$83   ; "It sounds like...{N}Mr. {NAME;28} and the King{N}are arguing.{W1}"
 		csWait 20
-		setFacing $83,0
+		setFacing $83,RIGHT
 		nextText $0,$83         ; "Who are you?{W2}"
 		nextSingleText $0,$83   ; "Now, I have to get back{N}to work.{W1}"
 		csWait 20
 		moveEntity $0,$FF,$0,$1
 		endMove $8080
-		setFacing $0,2
+		setFacing $0,LEFT
 		csWait 20
 		moveEntity $83,$FF,$0,$1
 		moreMove $1,$1

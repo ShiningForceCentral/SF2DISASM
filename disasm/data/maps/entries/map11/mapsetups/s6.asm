@@ -17,12 +17,12 @@ cs_57AAA:       textCursor $C4F
 		endMove $8080
 		setCameraEntity $7
 		setEntityDest $7,39,11
-		setFacing $7,1
+		setFacing $7,UP
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
 		moveEntity $0,$FF,$0,$1
 		endMove $8080
-		setFacing $0,1
+		setFacing $0,UP
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$7    ; "God Volcanon!{N}I'm back!{W1}"
@@ -41,19 +41,19 @@ cs_57AAA:       textCursor $C4F
 		setCamDest 34,5
 		csWait 30
 		nextSingleText $0,$7    ; "I've brought a friend.{W1}"
-		setFacing $7,3
+		setFacing $7,DOWN
 		moveEntity $0,$FF,$0,$1
 		endMove $8080
-		setFacing $0,1
+		setFacing $0,UP
 		moveEntity $7,$FF,$3,$2
 		endMove $8080
-		setFacing $7,0
+		setFacing $7,RIGHT
 		moveEntity $7,$FF,$2,$1
 		endMove $8080
-		setFacing $7,1
+		setFacing $7,UP
 		moveEntity $0,$FF,$2,$1
 		endMove $8080
-		setFacing $0,1
+		setFacing $0,UP
 		nextSingleText $0,$7    ; "This is {LEADER}.{N}He's from Granseal.{W1}"
 		setCamDest 34,2
 		playSound SFX_BIG_DOOR_RUMBLE
@@ -70,7 +70,7 @@ cs_57AAA:       textCursor $C4F
 		csWait 5
 		setActscript $7,$0,eas_461B6
 		csWait 120
-		setFacing $7,1
+		setFacing $7,UP
 		nextSingleText $0,$7    ; "Volcanon?{W1}"
 		setCamDest 34,2
 		nextSingleText $0,$80   ; "They awakened Zeon, the{N}legendary devil!{W2}"
@@ -85,7 +85,7 @@ cs_57AAA:       textCursor $C4F
 		endMove $8080
 		moveEntity $7,$FF,$0,$1
 		endMove $8080
-		setFacing $0,1
+		setFacing $0,UP
 		moveEntity $7,$FF,$1,$3
 		endMove $8080
 		nextSingleText $0,$7    ; "Volcanon, please calm down!{W2}"

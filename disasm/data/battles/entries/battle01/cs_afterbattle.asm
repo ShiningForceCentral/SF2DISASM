@@ -6,12 +6,12 @@ abcs_battle01:  textCursor $901
 		loadMapFadeIn 57,2,0
 		loadMapEntities ce_497F6
 		setActscript $0,$FF,eas_Init
-		setPos $1,8,7,1
-		setPos $2,8,8,1
+		setPos $1,8,7,UP
+		setPos $2,8,8,UP
 		fadeInB
 		csWait 40
 		nextSingleText $0,$81   ; "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
-		setFacing $81,1
+		setFacing $81,UP
 		csWait 40
 		entityShiver $80
 		csWait 30
@@ -32,7 +32,7 @@ abcs_battle01:  textCursor $901
 		mapFadeOutToWhite
 		animEntityFadeInOut $80,$6
 		entitySprite $80,$3C
-		setPos $80,7,10,3
+		setPos $80,7,10,DOWN
 		entitySprite $80,$72
 		mapFadeInFromWhite
 		csWait 30
@@ -45,15 +45,15 @@ abcs_battle01:  textCursor $901
 		moveEntity $81,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$81   ; "Oh, there it is!{W1}"
-		setFacing $0,3
-		setFacing $1,3
-		setFacing $2,3
+		setFacing $0,DOWN
+		setFacing $1,DOWN
+		setFacing $2,DOWN
 		setCamDest 2,3
 		csWait 70
 		mapFadeOutToWhite
 		animEntityFadeInOut $80,$6
 		entitySprite $80,$3C
-		setPos $80,7,16,3
+		setPos $80,7,16,DOWN
 		entitySprite $80,$72
 		mapFadeInFromWhite
 		csWait 30
@@ -66,7 +66,7 @@ abcs_battle01:  textCursor $901
 		csWait 20
 		hideEntity $80
 		setCamDest 2,2
-		setFacing $81,0
+		setFacing $81,RIGHT
 		nextSingleText $0,$81   ; "We must hurry to the King!{W1}"
 		moveEntity $81,$FF,$3,$6
 		endMove $8080

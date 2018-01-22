@@ -5,7 +5,7 @@ bbcs_04:        textCursor $907
 		loadMapFadeIn 66,1,5
 		loadMapEntities ce_4989E
 		setActscript $0,$FF,eas_Init
-		setPos $4,6,9,3
+		setPos $4,6,9,DOWN
 		fadeInB
 		setActscript $4,$FF,eas_Jump
 		nextSingleText $0,$4    ; "Who are they?{W1}"
@@ -16,10 +16,10 @@ bbcs_04:        textCursor $907
 		nextSingleText $C0,$1C  ; "Ummm....{W1}"
 		nextText $0,$4          ; "Answer me!{W1}"
 		nextSingleText $0,$4    ; "{LEADER}, we must{N}defeat them so we can learn{N}the truth!{W1}"
-		setFacing $1C,3
+		setFacing $1C,DOWN
 		csWait 30
-		setFacing $1C,0
-		setFacing $80,2
+		setFacing $1C,RIGHT
+		setFacing $80,LEFT
 		csWait 20
 		nextSingleText $C0,$1C  ; "Capture them alive!{W1}"
 		entityNod $80

@@ -36,15 +36,15 @@ return_5DD8C:
 
 	; End of function ms_map38_InitFunction
 
-cs_5DD8E:       newEntity $1A,11,8,3,$FF
-		setFacing $1A,3
+cs_5DD8E:       newEntity $1A,11,8,DOWN,$FF
+		setFacing $1A,DOWN
 		csc_end
-cs_5DD9C:       setPos $80,14,26,3
+cs_5DD9C:       setPos $80,14,26,DOWN
 		textCursor $854
 		csWait 1
-		setPos $0,14,28,1
-		setPos $7,13,29,1
-		setPos $1F,14,29,1
+		setPos $0,14,28,UP
+		setPos $7,13,29,UP
+		setPos $1F,14,29,UP
 		jumpIfFlagSet $4C,cs_5DE22; Zynk is a follower
 cs_5DDC2:       playSound MUSIC_TOWN
 		fadeInB
@@ -57,11 +57,11 @@ cs_5DDC2:       playSound MUSIC_TOWN
 		endMove $8080
 		moveEntity $80,$FF,$2,$2
 		endMove $8080
-		setFacing $0,2
-		setFacing $7,2
-		setFacing $1F,2
+		setFacing $0,LEFT
+		setFacing $7,LEFT
+		setFacing $1F,LEFT
 		nextSingleText $0,$7    ; "No, wait!  We're not Galam{N}soldiers!{W1}"
-		setFacing $80,0
+		setFacing $80,RIGHT
 		nextSingleText $0,$80   ; "No...?{W1}"
 		moveEntity $80,$FF,$3,$2
 		endMove $8080
@@ -70,7 +70,7 @@ cs_5DDC2:       playSound MUSIC_TOWN
 		nextSingleText $0,$80   ; "Oops.  My mistake.{W2}"
 		nextSingleText $0,$80   ; "Oh, it's obvious.  I can see{N}it in your eyes.{W1}"
 		csc_end
-cs_5DE22:       setPos $1A,15,29,1
+cs_5DE22:       setPos $1A,15,29,UP
 		jump cs_5DDC2
 cs_5DE2E:       textCursor $86A
 		stopEntity $8E
@@ -101,9 +101,9 @@ cs_5DE76:       textCursor $879
 		setEntityDest $1F,14,8
 		setActscript $1A,$FF,eas_Init
 		setEntityDest $1A,11,8
-		setFacing $0,2
-		setFacing $7,2
-		setFacing $1F,2
+		setFacing $0,LEFT
+		setFacing $7,LEFT
+		setFacing $1F,LEFT
 		moveEntity $1A,$FF,$2,$2
 		endMove $8080
 		moveEntity $7,$FF,$2,$2
@@ -132,7 +132,7 @@ cs_5DE76:       textCursor $879
 		endMove $8080
 		csWait 30
 		entityNod $1A
-		setFacing $1A,0
+		setFacing $1A,RIGHT
 		nextSingleText $0,$1A   ; "{LEADER}, Sir Astral!{N}I am angry!{W2}"
 		nextSingleText $0,$1A   ; "I cannot forgive the{N}devils!{W2}"
 		nextSingleText $0,$1A   ; "I have overridden my{N}restrictions on fighting.{W2}"

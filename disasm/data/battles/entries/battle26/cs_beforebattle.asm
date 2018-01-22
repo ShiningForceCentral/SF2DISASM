@@ -6,10 +6,10 @@ bbcs_26:        textCursor $A24
 		loadMapEntities ce_4BC5A
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,6,26,0
+		setPos $7,6,26,RIGHT
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,6,24,0
-		setPos $1E,6,25,0
+		setPos $1F,6,24,RIGHT
+		setPos $1E,6,25,RIGHT
 		fadeInB
 		cameraSpeed $30
 		nextSingleText $0,$80   ; "Answer me!{N}Where are you going?{W1}"
@@ -22,11 +22,11 @@ bbcs_26:        textCursor $A24
 		moveEntity $85,$FF,$1,$2
 		moreMove $0,$1
 		endMove $8080
-		setFacing $85,1
+		setFacing $85,UP
 		nextSingleText $C0,$85  ; "Shut up!  Mr. {NAME;19} is{N}the bravest soldier in the{N}world!{W1}"
 		nextSingleText $C0,$13  ; "I can defend myself.{W1}"
 		nextSingleText $0,$80   ; "Come on, you half-breed!{W1}"
-		setFacing $80,1
+		setFacing $80,UP
 		nextSingleText $0,$80   ; "Are you afraid of me?{N}I'll turn my back to you.{N}Now, run away you cowards!{W1}"
 		setActscript $85,$FF,eas_Jump
 		nextSingleText $C0,$85  ; "You've gone too far!{W1}"
@@ -45,8 +45,8 @@ bbcs_26:        textCursor $A24
 		csWait 5
 		setActscript $85,$0,eas_461B6
 		csWait 120
-		setFacing $83,2
-		setFacing $85,3
+		setFacing $83,LEFT
+		setFacing $85,DOWN
 		csWait 20
 		customActscript $83,$FF
 		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
@@ -72,12 +72,12 @@ bbcs_26:        textCursor $A24
 		nextSingleText $C0,$85  ; "Aaaauuuuu!{W1}"
 		setActscript $85,$FF,eas_Die
 		setCamDest 13,13
-		setPos $80,18,19,1
+		setPos $80,18,19,UP
 		animEntityFadeInOut $80,$7
 		nextSingleText $0,$80   ; "Pacalon soldiers have no{N}honor.  They attack while{N}my back is turned!{W1}"
 		setActscript $86,$FF,eas_Jump
-		setFacing $13,3
-		setFacing $86,3
+		setFacing $13,DOWN
+		setFacing $86,DOWN
 		csWait 30
 		moveEntity $86,$FF,$2,$1
 		moreMove $3,$1
@@ -88,7 +88,7 @@ bbcs_26:        textCursor $A24
 		nextSingleText $0,$80   ; "In that case, you can try{N}and take me.{W1}"
 		nextSingleText $C0,$86  ; "I can no longer put up with{N}these insults!{W1}"
 		nextSingleText $C0,$13  ; "No, no!{W1}"
-		setPos $81,13,18,0
+		setPos $81,13,18,RIGHT
 		customActscript $81,$FF
 		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
@@ -121,7 +121,7 @@ bbcs_26:        textCursor $A24
 		setActscript $86,$FF,eas_JumpRight
 		nextSingleText $C0,$86  ; "Grruuu....{W1}"
 		setActscript $86,$FF,eas_Die
-		setFacing $81,3
+		setFacing $81,DOWN
 		moveEntity $80,$FF,$1,$2
 		endMove $8080
 		nextSingleText $0,$80   ; "You look so sad,{N}{NAME;19}....{W1}"
@@ -136,7 +136,7 @@ bbcs_26:        textCursor $A24
 		animEntityFadeInOut $84,$4
 		entityFlashWhite $80,$1E
 		setCamDest 13,11
-		setPos $84,18,12,3
+		setPos $84,18,12,DOWN
 		animEntityFadeInOut $84,$5
 		nextSingleText $C0,$13  ; "What did you do?{W1}"
 		moveEntity $84,$FF,$3,$1
@@ -194,9 +194,9 @@ bbcs_26:        textCursor $A24
 		moveEntity $80,$FF,$0,$2
 		endMove $8080
 		nextSingleText $0,$80   ; "I'd better leave...{W2}"
-		setFacing $80,1
+		setFacing $80,UP
 		nextSingleText $0,$80   ; "Devil soldiers!  Stop that{N}force from Granseal!{W1}"
-		setFacing $80,3
+		setFacing $80,DOWN
 		setActscript $81,$0,eas_Jump
 		animEntityFadeInOut $80,$6
 		csc_end

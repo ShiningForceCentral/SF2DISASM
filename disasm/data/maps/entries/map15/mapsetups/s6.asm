@@ -11,18 +11,18 @@ ms_map15_InitFunction:
 	; End of function ms_map15_InitFunction
 
 cs_5D04E:       textCursor $7D6
-		setFacing $0,0
+		setFacing $0,RIGHT
 		setEntityDest $7,24,17
-		setFacing $7,0
-		setPos $14,31,33,1
+		setFacing $7,RIGHT
+		setPos $14,31,33,UP
 		csWait 1
 		setCamDest 26,22
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
-		setPos $7,24,17,0
-		setPos $1F,24,16,0
-		setPos $0,24,18,0
+		setPos $7,24,17,RIGHT
+		setPos $1F,24,16,RIGHT
+		setPos $0,24,18,RIGHT
 		fly $14,$FFFF
 		moveEntity $14,$0,$1,$8
 		endMove $8080
@@ -54,12 +54,12 @@ cs_5D04E:       textCursor $7D6
 		setCamDest 20,12
 		csWait 60
 		setEntityDest $14,26,18
-		setFacing $14,2
+		setFacing $14,LEFT
 		nextSingleText $80,$14  ; "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
 		moveEntity $7,$FF,$0,$2
 		endMove $8080
-		setFacing $7,3
-		setFacing $14,1
+		setFacing $7,DOWN
+		setFacing $14,UP
 		nextSingleText $0,$7    ; "Yes, he's {LEADER},{N}but who are you?{W1}"
 		nextSingleText $80,$14  ; "I'm {NAME;20} of Bedoe.{W1}"
 		entityShiver $7
@@ -83,7 +83,7 @@ cs_5D04E:       textCursor $7D6
 		moreMove $3,$1
 		moreMove $8,$28
 		endMove $8080
-		setFacing $14,2
+		setFacing $14,LEFT
 		nextSingleText $0,$7    ; "You grew up quickly, huh?{W1}"
 		nextSingleText $80,$14  ; "Yeah, I learned how to fight.{W1}"
 		join $14

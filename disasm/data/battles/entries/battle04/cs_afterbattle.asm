@@ -5,10 +5,10 @@ abcs_battle04:  textCursor $90F
 		loadMapFadeIn 66,9,16
 		loadMapEntities ce_49A6A
 		setActscript $0,$FF,eas_Init
-		setPos $1,14,21,3
-		setPos $2,12,21,3
-		setPos $3,13,22,3
-		setPos $4,11,22,3
+		setPos $1,14,21,DOWN
+		setPos $2,12,21,DOWN
+		setPos $3,13,22,DOWN
+		setPos $4,11,22,DOWN
 		fadeInB
 		entityNod $0
 		nextSingleText $0,$1C   ; "Your battle strategy was{N}wonderful!  I praise you.{W1}"
@@ -21,15 +21,15 @@ abcs_battle04:  textCursor $90F
 		setActscript $1,$0,eas_Jump
 		setActscript $2,$FF,eas_Jump
 		csWait 80
-		setPos $1C,18,22,1
+		setPos $1C,18,22,UP
 		moveEntity $1C,$FF,$1,$2
 		endMove $8080
-		setFacing $1C,2
-		setFacing $0,0
-		setFacing $1,0
-		setFacing $2,0
-		setFacing $3,0
-		setFacing $4,0
+		setFacing $1C,LEFT
+		setFacing $0,RIGHT
+		setFacing $1,RIGHT
+		setFacing $2,RIGHT
+		setFacing $3,RIGHT
+		setFacing $4,RIGHT
 		nextSingleText $0,$1C   ; "But, I can't let you escape.{W1}"
 		customActscript $1C,$FF
 		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
@@ -57,13 +57,13 @@ abcs_battle04:  textCursor $90F
 		moreMove $0,$1
 		endMove $8080
 		setActscript $0,$0,eas_RotateRight
-		setFacing $1,1
-		setFacing $2,1
-		setFacing $3,1
-		setFacing $4,1
+		setFacing $1,UP
+		setFacing $2,UP
+		setFacing $3,UP
+		setFacing $4,UP
 		csWait 60
 		setActscript $0,$FF,eas_Init
-		setFacing $0,3
+		setFacing $0,DOWN
 		customActscript $0,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -90,8 +90,8 @@ abcs_battle04:  textCursor $90F
 		moveEntity $80,$FF,$2,$5
 		moreMove $3,$1
 		endMove $8080
-		setFacing $82,2
-		setFacing $1C,3
+		setFacing $82,LEFT
+		setFacing $1C,DOWN
 		nextSingleText $0,$1C   ; "Don't worry.  He has only{N}fainted.  Take them to Galam!{W1}"
 		moveEntity $1C,$FF,$0,$1
 		moreMove $3,$1

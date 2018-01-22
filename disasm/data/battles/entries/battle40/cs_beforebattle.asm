@@ -6,16 +6,16 @@ bbcs_40:        textCursor $BDC
 		loadMapEntities ce_4E878
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,15,40,1
+		setPos $7,15,40,UP
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,16,40,1
+		setPos $1F,16,40,UP
 		setActscript $1C,$FF,eas_Init
-		setPos $1C,15,41,1
+		setPos $1C,15,41,UP
 		setActscript $80,$FF,eas_Init
-		setPos $80,16,41,1
+		setPos $80,16,41,UP
 		jumpIfFlagClear $4C,cs_4E544; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		setPos $1A,63,62,3
+		setPos $1A,63,62,DOWN
 cs_4E544:       setBlocks 11,6,11,29,44,0
 		setBlocks 32,0,11,29,11,6
 		playSound MUSIC_STOP
@@ -62,9 +62,9 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		nextSingleText $0,$7    ; "What do YOU want?{W1}"
 		nextSingleText $C0,$81  ; "Don't talk to me like that.{N}I'm very sad.{W1}"
 		nextSingleText $0,$7    ; "Sad?{N}You've got to be joking!{W1}"
-		setFacing $81,2
+		setFacing $81,LEFT
 		nextSingleText $C0,$81  ; "Well, yes I am.{N}I'm really quite evil.{W1}"
-		setFacing $81,3
+		setFacing $81,DOWN
 		nextSingleText $C0,$81  ; "Don't you think so, Red{N}Baron?{W1}"
 		nextSingleText $0,$1C   ; "Uhh...(shiver).{W1}"
 		moveEntity $81,$FF,$3,$1
@@ -89,24 +89,24 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		flickerOnce
 		setActscript $82,$0,eas_AnimSpeedx2
 		setActscript $82,$FF,eas_46172
-		setPos $82,16,8,1
+		setPos $82,16,8,UP
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
 		setBlocks 6,15,1,1,16,6
-		setPos $82,63,63,1
+		setPos $82,63,63,UP
 		csWait 30
-		setPos $82,15,8,1
+		setPos $82,15,8,UP
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
 		setBlocks 6,15,1,1,15,6
-		setPos $82,63,63,1
+		setPos $82,63,63,UP
 		csWait 20
-		setPos $82,17,9,1
+		setPos $82,17,9,UP
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
 		setBlocks 6,15,1,1,17,7
 		csWait 10
-		setPos $82,16,9,1
+		setPos $82,16,9,UP
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
 		setBlocks 6,15,1,1,16,7
@@ -181,18 +181,18 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		setBlocks 44,0,11,29,11,6
 		nextSingleText $C0,$81  ; "I'm very sorry, {LEADER},{N}but I must kill you!{W1}"
 		setCamDest 11,31
-		setFacing $7,0
-		setFacing $0,2
+		setFacing $7,RIGHT
+		setFacing $0,LEFT
 		nextSingleText $0,$7    ; "{LEADER}, are we really{N}going to fight Oddler?{W1}"
 		moveEntity $1F,$FF,$2,$1
 		endMove $8080
-		setFacing $1F,1
-		setFacing $1C,0
+		setFacing $1F,UP
+		setFacing $1C,RIGHT
 		nextSingleText $0,$1F   ; "That's enough out of you!{W1}"
 		moveEntity $1F,$FF,$0,$1
 		endMove $8080
-		setFacing $1F,1
-		setFacing $0,3
+		setFacing $1F,UP
+		setFacing $0,DOWN
 		nextSingleText $0,$1F   ; "{LEADER}, let's do it!{W1}"
 		setActscript $7,$0,eas_Jump
 		entityNod $0

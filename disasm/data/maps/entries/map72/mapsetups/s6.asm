@@ -27,12 +27,12 @@ return_4FF40:
 		nextSingleText $0,$0    ; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
 		csc_end
 cs_4FF5A:       textCursor $614
-		newEntity $A,43,47,3,$FF
+		newEntity $A,43,47,DOWN,$FF
 		csWait 1
-		setPos $0,45,47,2
-		setPos $7,44,47,3
-		setPos $A,43,47,3
-		setPos $1F,45,48,2
+		setPos $0,45,47,LEFT
+		setPos $7,44,47,DOWN
+		setPos $A,43,47,DOWN
+		setPos $1F,45,48,LEFT
 		playSound MUSIC_MAIN_THEME
 		fadeInB
 		csWait 40
@@ -40,15 +40,15 @@ cs_4FF5A:       textCursor $614
 		setActscript $A,$FF,eas_Jump
 		setActscript $A,$FF,eas_Jump
 		csWait 30
-		setFacing $7,2
-		setFacing $A,0
+		setFacing $7,LEFT
+		setFacing $A,RIGHT
 		nextSingleText $C0,$7   ; "It sounds like {NAME;10} is{N}going with us.{W1}"
 		nextText $0,$A          ; "I am.  I want to fight with{N}{LEADER}.{W2}"
 		nextSingleText $0,$A    ; "This might be exciting!{W1}"
 		join $A
-		setFacing $7,0
+		setFacing $7,RIGHT
 		nextSingleText $C0,$7   ; "I didn't know you were such{N}an adventurer!{W1}"
-		setFacing $7,2
+		setFacing $7,LEFT
 		nextSingleText $0,$A    ; "Alright!{N}Wow!  Let's go!{W1}"
 		csWait 30
 		moveEntity $A,$FF,$3,$1
@@ -57,9 +57,9 @@ cs_4FF5A:       textCursor $614
 		setStoryFlag $10        ; Battle 16 unlocked
 		csc_end
 cs_4FFDA:       textCursor $D0D
-		newEntity $B,63,63,1,$B
-		newEntity $80,63,63,2,$B5
-		newEntity $81,63,63,2,$B2
+		newEntity $B,63,63,UP,$B
+		newEntity $80,63,63,LEFT,$B5
+		newEntity $81,63,63,LEFT,$B2
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
 		setActscript $1E,$FF,eas_Init
@@ -73,39 +73,39 @@ cs_4FFDA:       textCursor $D0D
 		setEntityDest $8007,25,37
 		setEntityDest $0,26,37
 		csWait 60
-		setPos $80,27,36,2
-		setFacing $0,1
-		setFacing $7,1
-		setFacing $1F,1
+		setPos $80,27,36,LEFT
+		setFacing $0,UP
+		setFacing $7,UP
+		setFacing $1F,UP
 		csWait 50
-		setFacing $1F,3
+		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "{NAME;11}, {NAME;11}!{W1}"
 		nextSingleText $0,$B    ; "Yes?{W1}"
-		setPos $B,27,39,0
+		setPos $B,27,39,RIGHT
 		setActscript $B,$FF,eas_4536C
 		csWait 3
-		setFacing $B,1
+		setFacing $B,UP
 		nextText $0,$1F         ; "You know about devices like{N}this, right?{W2}"
 		nextSingleText $0,$1F   ; "{LEADER} has a cannon and{N}some dynamite here.  Can you{N}remove those rocks?{W1}"
 		nextSingleText $0,$B    ; "Ah...OK, let me try.{W1}"
 		moveEntity $B,$FF,$1,$1
 		moreMove $2,$2
 		endMove $8080
-		setFacing $0,3
-		setFacing $7,3
-		setFacing $B,1
+		setFacing $0,DOWN
+		setFacing $7,DOWN
+		setFacing $B,UP
 		entityNod $0
 		nextSingleText $FF,$FF  ; "{NAME;11} gets the dynamite{N}from {LEADER}.{W1}"
 		moveEntity $B,$FF,$0,$1
 		moreMove $1,$1
 		endMove $8080
-		setFacing $0,1
-		setFacing $7,1
-		setFacing $1F,1
+		setFacing $0,UP
+		setFacing $7,UP
+		setFacing $1F,UP
 		nextSingleText $0,$B    ; "Stand back.  Ready?{W1}"
 		setCamDest 21,32
 		setActscript $80,$FF,eas_BumpDown
-		setPos $81,27,35,2
+		setPos $81,27,35,LEFT
 		customActscript $81,$FF
 		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
@@ -131,26 +131,26 @@ cs_4FFDA:       textCursor $D0D
 		csWait 40
 		setActscript $B,$FF,eas_Jump
 		nextSingleText $0,$B    ; "Wow!  This cannon is great!{W1}"
-		setFacing $7,0
-		setFacing $0,0
-		setFacing $1F,2
+		setFacing $7,RIGHT
+		setFacing $0,RIGHT
+		setFacing $1F,LEFT
 		setActscript $7,$0,eas_JumpLeft
 		setActscript $0,$0,eas_JumpLeft
 		setActscript $1F,$FF,eas_JumpRight
-		setPos $B,26,36,0
+		setPos $B,26,36,RIGHT
 		csWait 25
-		setPos $B,27,37,1
+		setPos $B,27,37,UP
 		csWait 25
-		setPos $B,28,36,2
+		setPos $B,28,36,LEFT
 		csWait 25
-		setPos $B,27,37,1
+		setPos $B,27,37,UP
 		csWait 25
-		setPos $B,26,36,0
+		setPos $B,26,36,RIGHT
 		csWait 25
-		setPos $B,27,37,1
+		setPos $B,27,37,UP
 		csWait 25
 		nextSingleText $0,$B    ; "I can attend the battles{N}with this weapon.{W1}"
-		setFacing $B,2
+		setFacing $B,LEFT
 		nextText $0,$B          ; "{LEADER}, do you need{N}this any more?{W2}"
 		nextText $0,$B          ; "May I use it?  Huh?{W2}"
 		nextSingleText $0,$B    ; "Wow, now I can fight along{N}side you!{W1}"
@@ -177,10 +177,10 @@ cs_4FFDA:       textCursor $D0D
 		moreMove $2,$2
 		endMove $8080
 		nextSingleText $0,$1F   ; "{NAME;11} is hooked.{N}Ha, ha!{W1}"
-		setFacing $1F,3
+		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "OK, {LEADER}.  Let's go{N}to North Parmecia!{W1}"
-		setFacing $0,3
-		setFacing $7,3
+		setFacing $0,DOWN
+		setFacing $7,DOWN
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$FF,eas_Jump
 		followEntity $1E,$0,$2
@@ -200,16 +200,16 @@ cs_5023E:       textCursor $D1D
 		waitIdle $1E
 		waitIdle $1F
 		waitIdle $7
-		setFacing $0,1
-		setFacing $7,1
-		setFacing $1F,1
+		setFacing $0,UP
+		setFacing $7,UP
+		setFacing $1F,UP
 		csWait 50
-		setFacing $0,0
+		setFacing $0,RIGHT
 		csWait 30
-		setFacing $1F,2
+		setFacing $1F,LEFT
 		entityNod $0
 		entityShiver $1F
-		setFacing $7,0
+		setFacing $7,RIGHT
 		csWait 20
 		nextSingleText $0,$1F   ; "What?!  You forgot to bring{N}the {ITEM} with you?{N}{LEADER}, are you serious?{W2}"
 		stopEntity $0

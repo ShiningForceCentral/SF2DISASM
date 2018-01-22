@@ -16,31 +16,31 @@ bbcs_08:        textCursor $99D
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		jumpIfFlagSet $6,cs_4A994; Kiwi joined
-		setPos $6,63,63,3
+		setPos $6,63,63,DOWN
 cs_4A994:       playSound MUSIC_MAIN_THEME
 		fadeInB
 		nextSingleText $0,$80   ; "The game will be suspended.{N}OK?"
 		moveEntity $80,$FF,$0,$2
 		endMove $8080
-		setFacing $80,1
+		setFacing $80,UP
 		moveEntity $80,$FF,$1,$1
 		endMove $8080
 		setCameraEntity $81
 		nextSingleText $0,$80   ; "....{W1}"
 		playSound MUSIC_ENEMY_ATTACK
 		setCamDest 7,32
-		setPos $83,12,35,3
+		setPos $83,12,35,DOWN
 		csWait 20
-		setPos $84,11,35,3
+		setPos $84,11,35,DOWN
 		csWait 20
-		setPos $85,13,35,3
+		setPos $85,13,35,DOWN
 		csWait 30
-		setPos $82,12,37,3
+		setPos $82,12,37,DOWN
 		nextSingleText $C0,$82  ; "{LEADER}, are you ready{N}for battle?{D3}"
 		nextSingleText $C0,$82  ; "Do you need more preparations?"
 		nextText $C0,$82        ; "Did you change your mind?{W2}"
 		nextSingleText $C0,$82  ; "Be careful.{D1}{N}Haste makes waste.{D1}"
-		setFacing $82,1
+		setFacing $82,UP
 		nextSingleText $C0,$82  ; "{LEADER}, you had better{N}take a rest now.{D3}"
 		setActscript $83,$0,eas_Jump
 		setActscript $84,$0,eas_Jump

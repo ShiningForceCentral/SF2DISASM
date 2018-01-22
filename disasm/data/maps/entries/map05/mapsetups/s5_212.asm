@@ -16,5 +16,5 @@ nullsub_180:
 	; End of function nullsub_180
 
 cs_6060E:       setActscript $1C,$FF,eas_45F9C
-		setPos $1C,19,33,3
+		setPos $1C,19,33,DOWN
 		csc_end

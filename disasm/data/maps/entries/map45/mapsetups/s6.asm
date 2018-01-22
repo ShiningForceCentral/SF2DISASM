@@ -23,7 +23,7 @@ return_600B0:
 cs_600B2:       setActscript $19,$FF,eas_45F9C
 		entitySprite $19,$D9
 		setActscript $19,$FF,eas_Init3
-		setFacing $19,1
+		setFacing $19,UP
 		csc_end
 cs_600CE:       textCursor $823
 		setActscript $1F,$FF,eas_Init
@@ -32,10 +32,10 @@ cs_600CE:       textCursor $823
 		nextSingleText $0,$19   ; "Who's there!{W1}"
 		setCamDest 1,1
 		nextSingleText $0,$19   ; "This is a sacred place!{W1}"
-		setPos $1A,8,12,2
-		setPos $1F,6,11,1
-		setPos $0,6,13,1
-		setPos $7,6,14,1
+		setPos $1A,8,12,LEFT
+		setPos $1F,6,11,UP
+		setPos $0,6,13,UP
+		setPos $7,6,14,UP
 		setCamDest 1,9
 		nextSingleText $80,$1F  ; "Oops!{W1}"
 		moveEntity $1F,$FF,$3,$1
@@ -83,7 +83,7 @@ cs_600CE:       textCursor $823
 		waitIdle $0
 		nextText $0,$19         ; "Wait!{W1}"
 		nextSingleText $0,$19   ; "Is that you...Sir Astral?{W1}"
-		setFacing $1F,1
+		setFacing $1F,UP
 		nextSingleText $80,$1F  ; "What?{W1}"
 		setActscript $1F,$FF,eas_Init
 		moveEntity $1F,$FF,$1,$4
@@ -101,11 +101,11 @@ cs_600CE:       textCursor $823
 		endMove $8080
 		setCamDest 1,5
 		nextSingleText $0,$19   ; "Oh...you don't remember me?{W1}"
-		setFacing $1F,3
+		setFacing $1F,DOWN
 		nextSingleText $80,$1F  ; "Well...ah...sorry.{W1}"
 		nextSingleText $0,$19   ; "I'm {NAME;25}.  I was a pupil{N}of yours in Galam.  I was{N}preparing to become a priest.{W1}"
 		entityShiver $1F
-		setFacing $1F,1
+		setFacing $1F,UP
 		nextSingleText $80,$1F  ; "{NAME;25}!  I can't believe it!{W1}"
 		nextText $0,$19         ; "How is that scar on your{N}chest.{W2}"
 		nextSingleText $0,$19   ; "Remember?  You snuck up{N}behind me and tapped my{N}shoulder....{W1}"
@@ -120,8 +120,8 @@ cs_600CE:       textCursor $823
 		nextSingleText $80,$1F  ; "That OK. How have...{W1}"
 		moveEntity $7,$FF,$0,$1
 		endMove $8080
-		setFacing $7,1
-		setFacing $0,3
+		setFacing $7,UP
+		setFacing $0,DOWN
 		nextSingleText $0,$7    ; "Hey, aren't you going to{N}introduce us?{W1}"
 		moveEntity $1F,$FF,$3,$1
 		endMove $8080
@@ -130,9 +130,9 @@ cs_600CE:       textCursor $823
 		csWait 40
 		setQuake 0
 		csWait 20
-		setFacing $1F,1
-		setFacing $7,1
-		setFacing $0,1
+		setFacing $1F,UP
+		setFacing $7,UP
+		setFacing $0,UP
 		nextText $80,$1F        ; "All in good time.{W2}"
 		nextSingleText $80,$1F  ; "By the way, what are you{N}doing here?{W1}"
 		entityShiver $19
@@ -150,14 +150,14 @@ cs_600CE:       textCursor $823
 		nextSingleText $0,$19   ; "Hmmm....{W1}"
 		csWait 60
 		nextSingleText $0,$19   ; "Ok!  I'll do it!{W1}"
-		setPos $86,6,8,1
+		setPos $86,6,8,UP
 		setCameraEntity $19
 		nextSingleText $0,$19   ; "Close your eyes!{W1}"
 		setActscript $19,$FF,eas_46172
-		setFacing $19,2
+		setFacing $19,LEFT
 		moveEntity $19,$FF,$1,$2
 		endMove $8080
-		setFacing $19,3
+		setFacing $19,DOWN
 		startEntity $19
 		setActscript $19,$0,eas_Transparent
 		moveEntity $19,$FF,$3,$4
@@ -187,7 +187,7 @@ cs_600CE:       textCursor $823
 		nextSingleText $80,$1F  ; "We could always use another{N}well-trained fighter!{W1}"
 		join $19
 		nextSingleText $0,$7    ; "We've got a strong ally!{W1}"
-		setFacing $19,2
+		setFacing $19,LEFT
 		nextSingleText $0,$19   ; "Many Galam soldiers are in{N}the west.{N}We must be careful.{W1}"
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2

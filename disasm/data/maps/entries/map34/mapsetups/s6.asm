@@ -15,54 +15,54 @@ cs_5B6C0:       textCursor $C87
 		nextText $80,$80        ; "Yeeenn...queeen...{N}tillooora...synooora...{N}hear my voice....{W2}"
 		nextSingleText $80,$80  ; "Evil Spirit, come.{W1}"
 		entityFlashWhite $80,$64
-		setPos $82,7,6,3
+		setPos $82,7,6,DOWN
 		csWait 7
-		setPos $82,60,60,3
+		setPos $82,60,60,DOWN
 		csWait 80
-		setPos $82,7,6,3
+		setPos $82,7,6,DOWN
 		csWait 7
-		setPos $82,60,60,3
+		setPos $82,60,60,DOWN
 		csWait 60
-		setPos $82,7,6,3
+		setPos $82,7,6,DOWN
 		csWait 7
-		setPos $82,60,60,3
+		setPos $82,60,60,DOWN
 		csWait 40
 		moveEntity $81,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$81   ; "Hey, Evil Spirit is{N}appearing!{W1}"
 		setCamDest 2,2
-		setPos $82,7,6,3
+		setPos $82,7,6,DOWN
 		csWait 7
-		setPos $82,60,60,3
+		setPos $82,60,60,DOWN
 		csWait 60
-		setPos $82,7,6,3
+		setPos $82,7,6,DOWN
 		csWait 7
-		setPos $82,60,60,3
+		setPos $82,60,60,DOWN
 		csWait 50
-		setPos $82,7,6,3
+		setPos $82,7,6,DOWN
 		csWait 7
-		setPos $82,60,60,3
+		setPos $82,60,60,DOWN
 		csWait 40
-		setPos $82,7,6,3
+		setPos $82,7,6,DOWN
 		csWait 7
-		setPos $82,60,60,3
+		setPos $82,60,60,DOWN
 		csWait 30
-		setPos $82,7,6,3
+		setPos $82,7,6,DOWN
 		csWait 7
-		setPos $82,60,60,3
+		setPos $82,60,60,DOWN
 		csWait 20
-		setPos $82,7,6,3
+		setPos $82,7,6,DOWN
 		csWait 7
-		setPos $82,60,60,3
+		setPos $82,60,60,DOWN
 		csWait 10
-		setPos $82,7,6,3
+		setPos $82,7,6,DOWN
 		setActscript $82,$0,eas_Transparent
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
-		setPos $0,7,12,1
-		setPos $7,6,12,1
-		setPos $1F,8,12,1
+		setPos $0,7,12,UP
+		setPos $7,6,12,UP
+		setPos $1F,8,12,UP
 		setCamDest 2,4
 		moveEntity $80,$FF,$1,$1
 		endMove $8080
@@ -92,14 +92,14 @@ cs_5B6C0:       textCursor $C87
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$7    ; "What is he doing now?{W1}"
-		setFacing $81,3
+		setFacing $81,DOWN
 		nextText $0,$81         ; "He's channeling his mind{N}into the nature of all{N}things.{W2}"
-		setFacing $81,1
+		setFacing $81,UP
 		mapFadeInFromWhite
 		csWait 40
-		setFacing $81,3
+		setFacing $81,DOWN
 		nextSingleText $0,$81   ; "Shhhh!  Be silent.{N}He's got something.{W1}"
-		setFacing $81,1
+		setFacing $81,UP
 		setActscript $80,$FF,eas_Jump
 		setActscript $80,$FF,eas_Jump
 		nextSingleText $80,$80  ; "What did you find?{W1}"
@@ -108,19 +108,19 @@ cs_5B6C0:       textCursor $C87
 		nextSingleText $80,$80  ; "Please try again!{W1}"
 		nextSingleText $0,$82   ; "If I touch something of his,{N}maybe I could contact his{N}mind better....{W1}"
 		setCamDest 2,5
-		setFacing $7,0
-		setFacing $0,2
-		setFacing $1F,2
+		setFacing $7,RIGHT
+		setFacing $0,LEFT
+		setFacing $1F,LEFT
 		nextSingleText $0,$7    ; "{LEADER}, you have the{N}Jewel of Evil, right?{W1}"
-		setFacing $80,3
-		setFacing $81,3
+		setFacing $80,DOWN
+		setFacing $81,DOWN
 		setActscript $80,$FF,eas_Jump
 		setActscript $80,$FF,eas_Jump
 		nextText $80,$80        ; "Is this true, {LEADER}?{W2}"
 		nextSingleText $80,$80  ; "That's one of the magic{N}jewels used to seal{N}Zeon.  Give it to me.{W1}"
-		setFacing $0,1
-		setFacing $7,1
-		setFacing $1F,1
+		setFacing $0,UP
+		setFacing $7,UP
+		setFacing $1F,UP
 		nextSingleText $0,$7    ; "But, we can't remove it.{W1}"
 		nextSingleText $80,$80  ; "I can.{W1}"
 		moveEntity $80,$FF,$3,$1
@@ -157,7 +157,7 @@ cs_5B6C0:       textCursor $C87
 		endMove $8080
 		moveEntity $0,$FF,$1,$2
 		endMove $8080
-		setFacing $81,1
+		setFacing $81,UP
 		nextSingleText $FF,$FF  ; "{LEADER} displays the{N}jewels to Evil Spirit.{W1}"
 		entityFlashWhite $0,$28
 		nextText $0,$82         ; "Yeah, I feel it...I feel it...!{N}I think I can do it now.{N}Let me try again.{W1}"
@@ -364,18 +364,18 @@ cs_5B6C0:       textCursor $C87
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setPos $8D,8,6,0
-		setPos $8E,7,5,0
-		setPos $8F,6,6,0
-		setPos $90,7,7,0
+		setPos $8D,8,6,RIGHT
+		setPos $8E,7,5,RIGHT
+		setPos $8F,6,6,RIGHT
+		setPos $90,7,7,RIGHT
 		setActscript $8D,$0,eas_464BE
 		setActscript $8E,$0,eas_464C6
 		setActscript $8F,$0,eas_464CE
 		setActscript $90,$0,eas_464D6
-		setPos $91,8,6,2
-		setPos $92,7,7,2
-		setPos $93,6,6,2
-		setPos $94,7,5,2
+		setPos $91,8,6,LEFT
+		setPos $92,7,7,LEFT
+		setPos $93,6,6,LEFT
+		setPos $94,7,5,LEFT
 		moveEntity $91,$0,$0,$1
 		endMove $8080
 		csWait 2
@@ -397,14 +397,14 @@ cs_5B6C0:       textCursor $C87
 		setActscript $93,$0,eas_464F2
 		setActscript $94,$0,eas_464FA
 		playSound SFX_BATTLEFIELD_DEATH
-		setPos $85,7,6,0
-		setPos $86,7,6,0
-		setPos $87,7,6,0
-		setPos $88,7,6,0
-		setPos $89,7,6,0
-		setPos $8A,7,6,0
-		setPos $8B,7,6,0
-		setPos $8C,7,6,0
+		setPos $85,7,6,RIGHT
+		setPos $86,7,6,RIGHT
+		setPos $87,7,6,RIGHT
+		setPos $88,7,6,RIGHT
+		setPos $89,7,6,RIGHT
+		setPos $8A,7,6,RIGHT
+		setPos $8B,7,6,RIGHT
+		setPos $8C,7,6,RIGHT
 		moveEntity $85,$0,$0,$4
 		endMove $8080
 		moveEntity $86,$0,$1,$4
@@ -422,14 +422,14 @@ cs_5B6C0:       textCursor $C87
 		moveEntity $8C,$FF,$7,$4
 		endMove $8080
 		playSound SFX_BATTLEFIELD_DEATH
-		setPos $85,7,6,0
-		setPos $86,7,6,0
-		setPos $87,7,6,0
-		setPos $88,7,6,0
-		setPos $89,7,6,0
-		setPos $8A,7,6,0
-		setPos $8B,7,6,0
-		setPos $8C,7,6,0
+		setPos $85,7,6,RIGHT
+		setPos $86,7,6,RIGHT
+		setPos $87,7,6,RIGHT
+		setPos $88,7,6,RIGHT
+		setPos $89,7,6,RIGHT
+		setPos $8A,7,6,RIGHT
+		setPos $8B,7,6,RIGHT
+		setPos $8C,7,6,RIGHT
 		moveEntity $85,$0,$0,$4
 		endMove $8080
 		moveEntity $86,$0,$1,$4
@@ -447,14 +447,14 @@ cs_5B6C0:       textCursor $C87
 		moveEntity $8C,$FF,$7,$4
 		endMove $8080
 		playSound SFX_BATTLEFIELD_DEATH
-		setPos $85,7,6,0
-		setPos $86,7,6,0
-		setPos $87,7,6,0
-		setPos $88,7,6,0
-		setPos $89,7,6,0
-		setPos $8A,7,6,0
-		setPos $8B,7,6,0
-		setPos $8C,7,6,0
+		setPos $85,7,6,RIGHT
+		setPos $86,7,6,RIGHT
+		setPos $87,7,6,RIGHT
+		setPos $88,7,6,RIGHT
+		setPos $89,7,6,RIGHT
+		setPos $8A,7,6,RIGHT
+		setPos $8B,7,6,RIGHT
+		setPos $8C,7,6,RIGHT
 		moveEntity $85,$0,$0,$4
 		endMove $8080
 		moveEntity $86,$0,$1,$4
@@ -474,14 +474,14 @@ cs_5B6C0:       textCursor $C87
 		hideEntity $82
 		playSound SFX_BATTLEFIELD_DEATH
 		playSound SFX_BIG_DOOR_RUMBLE
-		setPos $85,7,6,0
-		setPos $86,7,6,0
-		setPos $87,7,6,0
-		setPos $88,7,6,0
-		setPos $89,7,6,0
-		setPos $8A,7,6,0
-		setPos $8B,7,6,0
-		setPos $8C,7,6,0
+		setPos $85,7,6,RIGHT
+		setPos $86,7,6,RIGHT
+		setPos $87,7,6,RIGHT
+		setPos $88,7,6,RIGHT
+		setPos $89,7,6,RIGHT
+		setPos $8A,7,6,RIGHT
+		setPos $8B,7,6,RIGHT
+		setPos $8C,7,6,RIGHT
 		moveEntity $85,$0,$0,$4
 		endMove $8080
 		moveEntity $86,$0,$1,$4
@@ -499,14 +499,14 @@ cs_5B6C0:       textCursor $C87
 		moveEntity $8C,$FF,$7,$4
 		endMove $8080
 		playSound SFX_BATTLEFIELD_DEATH
-		setPos $85,7,6,0
-		setPos $86,7,6,0
-		setPos $87,7,6,0
-		setPos $88,7,6,0
-		setPos $89,7,6,0
-		setPos $8A,7,6,0
-		setPos $8B,7,6,0
-		setPos $8C,7,6,0
+		setPos $85,7,6,RIGHT
+		setPos $86,7,6,RIGHT
+		setPos $87,7,6,RIGHT
+		setPos $88,7,6,RIGHT
+		setPos $89,7,6,RIGHT
+		setPos $8A,7,6,RIGHT
+		setPos $8B,7,6,RIGHT
+		setPos $8C,7,6,RIGHT
 		moveEntity $85,$0,$0,$4
 		endMove $8080
 		moveEntity $86,$0,$1,$4
@@ -543,17 +543,17 @@ cs_5B6C0:       textCursor $C87
 		setQuake 16389
 		executeSubroutine sub_55F82
 		csWait 60
-		setFacing $0,3
-		setFacing $81,3
-		setFacing $80,3
+		setFacing $0,DOWN
+		setFacing $81,DOWN
+		setFacing $80,DOWN
 		nextText $80,$80        ; "No!  Evil Spirit exploded!{W2}"
 		nextText $80,$80        ; "That's Zeon's power.{W2}"
 		nextSingleText $80,$80  ; "If he revives fully, his{N}power will be unimaginably{N}strong!{W1}"
-		setFacing $81,0
-		setFacing $80,2
+		setFacing $81,RIGHT
+		setFacing $80,LEFT
 		nextSingleText $0,$81   ; "Creed, how reliable was he,{N}I mean, Evil Spirit?{W1}"
 		nextText $80,$80        ; "Very.{W2}"
-		setFacing $80,3
+		setFacing $80,DOWN
 		nextText $80,$80        ; "Why does Zeon want the jewel?{W2}"
 		nextSingleText $80,$80  ; "No more questions...{N}...without Evil Spirit....{W1}"
 		csWait 30
@@ -565,8 +565,8 @@ cs_5B6C0:       textCursor $C87
 		moveEntity $81,$FF,$2,$1
 		moreMove $3,$1
 		endMove $8080
-		setFacing $7,3
-		setFacing $1F,3
+		setFacing $7,DOWN
+		setFacing $1F,DOWN
 		nextText $0,$81         ; "Creed?  Creed!{W2}"
 		setActscript $81,$FF,eas_Jump
 		setActscript $81,$FF,eas_Jump

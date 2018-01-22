@@ -105,5 +105,5 @@ return_6335C:
 
 	; End of function sub_63330
 
-cs_6335E:       setFacing $80,3
+cs_6335E:       setFacing $80,DOWN
 		csc_end

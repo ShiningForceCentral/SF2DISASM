@@ -6,10 +6,10 @@ abcs_battle21:  textCursor $A17
 		loadMapEntities ce_4B948
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,11,23,2
+		setPos $7,11,23,LEFT
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,11,21,2
-		setPos $1E,11,22,2
+		setPos $1F,11,21,LEFT
+		setPos $1E,11,22,LEFT
 		fadeInB
 		customActscript $1F,$FF
 		dc.w $10                ;   0010 SET SPEED X=$1C Y=$1C
@@ -26,7 +26,7 @@ abcs_battle21:  textCursor $A17
 		moreMove $2,$1
 		endMove $8080
 		csWait 40
-		setFacing $1F,0
+		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "Hurry!  Let's go into{N}Creed's mansion.{W1}"
 		nextSingleText $C0,$7   ; "Oddler, can you see?{W1}"
 		nextSingleText $0,$1F   ; "No, why?{W1}"
@@ -35,9 +35,9 @@ abcs_battle21:  textCursor $A17
 		nextSingleText $C0,$7   ; "Oh, I see.{W1}"
 		moveEntity $7,$FF,$2,$1
 		endMove $8080
-		setFacing $7,1
+		setFacing $7,UP
 		nextSingleText $C0,$7   ; "{LEADER}, let's go see{N}Mr. Creed!{W1}"
-		setFacing $0,3
+		setFacing $0,DOWN
 		entityNod $0
 		followEntity $1E,$0,$2
 		followEntity $7,$1E,$1

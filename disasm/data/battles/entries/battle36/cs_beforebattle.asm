@@ -6,12 +6,12 @@ bbcs_36:        textCursor $B82
 		loadMapEntities ce_4D964
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,18,0,3
+		setPos $7,18,0,DOWN
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,20,0,3
+		setPos $1F,20,0,DOWN
 		jumpIfFlagClear $4C,cs_4D8D6; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		setPos $1A,63,62,3
+		setPos $1A,63,62,DOWN
 cs_4D8D6:       playSound MUSIC_BATTLE_THEME_1
 		fadeInB
 		cameraSpeed $30
@@ -34,15 +34,15 @@ cs_4D8D6:       playSound MUSIC_BATTLE_THEME_1
 		setActscript $85,$0,eas_AnimSpeedx2
 		csWait 40
 		setCamDest 14,2
-		setFacing $7,0
+		setFacing $7,RIGHT
 		nextSingleText $0,$7    ; "Sir Astral, why is he smiling?{W1}"
-		setFacing $1F,2
+		setFacing $1F,LEFT
 		nextSingleText $0,$1F   ; "He believes this is the place{N}where we will die....{W1}"
-		setFacing $1F,3
-		setFacing $0,1
+		setFacing $1F,DOWN
+		setFacing $0,UP
 		nextSingleText $0,$1F   ; "{LEADER}, be careful!{W1}"
 		entityNod $0
-		setFacing $0,3
+		setFacing $0,DOWN
 		csc_end
 ce_4D964:       dc.w $13
 		dc.w 1

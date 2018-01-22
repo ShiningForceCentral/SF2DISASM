@@ -13,7 +13,7 @@ ms_map20_flag21F_InitFunction:
 		trap    #6
 		bra.w   loc_633BA
 cs_633B2:
-		setPos $80,27,50,2
+		setPos $80,27,50,LEFT
 		csc_end
 loc_633BA:
 		trap    #0
@@ -25,7 +25,7 @@ loc_633BA:
 
 cs_EndKiss:     hideText
 		setCameraEntity $FFFF
-		setFacing $0,0
+		setFacing $0,RIGHT
 		customActscript $0,$FF
 		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
 		dc.b 8

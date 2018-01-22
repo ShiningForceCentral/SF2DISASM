@@ -554,6 +554,6 @@ return_54CC4:
 
 	; End of function sub_54C10
 
-cs_54CC6:       setFacing $1F,1
+cs_54CC6:       setFacing $1F,UP
 		entityNod $1F
 		csc_end

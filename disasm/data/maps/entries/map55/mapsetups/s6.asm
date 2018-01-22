@@ -91,11 +91,11 @@ cs_5E346:       textCursor $D2B
 		moreMove $2,$1
 		endMove $8080
 		csWait 30
-		setFacing $7,0
-		setFacing $1A,0
-		setFacing $1F,0
-		setFacing $0,0
+		setFacing $7,RIGHT
+		setFacing $1A,RIGHT
+		setFacing $1F,RIGHT
+		setFacing $0,RIGHT
 		nextText $0,$1F         ; "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
-		setFacing $1F,2
+		setFacing $1F,LEFT
 		nextSingleText $0,$1F   ; "Anyway, we have to go to{N}Arc Valley.{N}{LEADER}, let's go.{W1}"
 		csc_end

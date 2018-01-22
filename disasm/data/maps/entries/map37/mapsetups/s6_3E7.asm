@@ -21,22 +21,22 @@ return_5FABA:
 
 cs_5FABC:       textCursor $D1F
 		reloadMap 6,6
-		setPos $0,8,12,1
-		setPos $7,13,12,1
-		setPos $1A,10,10,3
-		setPos $80,10,11,1
+		setPos $0,8,12,UP
+		setPos $7,13,12,UP
+		setPos $1A,10,10,DOWN
+		setPos $80,10,11,UP
 		stopEntity $80
 		playSound MUSIC_STOP
 		fadeInB
 		nextText $80,$7         ; "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
 		nextSingleText $80,$7   ; "Where's Sir Astral?{W1}"
-		setFacing $7,0
+		setFacing $7,RIGHT
 		csWait 20
-		setFacing $7,2
+		setFacing $7,LEFT
 		csWait 20
-		setFacing $7,0
+		setFacing $7,RIGHT
 		csWait 20
-		setFacing $7,2
+		setFacing $7,LEFT
 		csWait 20
 		entityShiver $7
 		nextSingleText $80,$7   ; "Oh, there he is!{W1}"
@@ -45,12 +45,12 @@ cs_5FABC:       textCursor $D1F
 		moreMove $9,$1
 		endMove $8080
 		nextSingleText $80,$7   ; "Sir Astral!  Are you OK?{W1}"
-		setFacing $7,2
+		setFacing $7,LEFT
 		nextSingleText $80,$7   ; "{LEADER}, come on!{W1}"
 		csc_end
 cs_5FB30:       textCursor $D25
 		setActscript $80,$FF,eas_Init
-		setFacing $80,3
+		setFacing $80,DOWN
 		entityShakeHead $80
 		nextText $0,$80         ; "Phew!  We've made it to{N}Grans Island!{W1}"
 		nextText $0,$80         ; "{LEADER}, Geshp's probably{N}coming for us!{W2}"
@@ -73,18 +73,18 @@ cs_5FB6A:       textCursor $D31
 		setActscript $7,$FF,eas_Jump
 		setActscript $7,$FF,eas_Jump
 		nextSingleText $80,$7   ; "Wow, the ship is vibrating!{W1}"
-		setFacing $80,1
+		setFacing $80,UP
 		nextSingleText $0,$80   ; "What's going on?{W1}"
 		setEntityDest $1A,11,11
 		setEntityDest $1A,14,11
 		setEntityDest $1A,15,10
 		setEntityDest $1A,16,10
-		setFacing $1A,3
+		setFacing $1A,DOWN
 		nextSingleText $0,$1A   ; "Don't worry. {W1}"
 		setActscript $7,$FF,eas_Jump
 		nextSingleText $80,$7   ; "But...but...{N}Woooooow!{W1}"
 		setCamDest 4,6
-		setFacing $0,1
+		setFacing $0,UP
 		playSound $FE
 		playSound SFX_BIG_DOOR_RUMBLE
 		setQuake 3
@@ -103,10 +103,10 @@ cs_5FB6A:       textCursor $D31
 		moreMove $6,$1
 		moreMove $2,$5
 		endMove $8080
-		setFacing $80,1
-		setFacing $7,1
+		setFacing $80,UP
+		setFacing $7,UP
 		nextSingleText $0,$7    ; "It's floating!  This big{N}ship is floating!{W1}"
-		setFacing $1A,2
+		setFacing $1A,LEFT
 		setCamDest 11,6
 		nextSingleText $80,$1A  ; "We're going higher and{N}higher....{W1}"
 		csWait 40
@@ -123,25 +123,25 @@ cs_5FB6A:       textCursor $D31
 		csWait 60
 		fadeOutB
 		mapLoad 37,4,6
-		loadEntitiesFromMapSetup 9,11,0
+		loadEntitiesFromMapSetup 9,11,RIGHT
 		csWait 1
 		setActscript $7,$FF,eas_Init
 		setActscript $80,$FF,eas_Init
 		setActscript $1A,$FF,eas_Init
-		setPos $80,9,12,1
-		setPos $7,10,12,1
-		setPos $1A,10,11,2
+		setPos $80,9,12,UP
+		setPos $7,10,12,UP
+		setPos $1A,10,11,LEFT
 		fadeInB
 		nextSingleText $80,$1A  ; "OK, now we'll head to{N}Grans Island.{W1}"
 		setQuake 1
 		csWait 10
 		setQuake 0
 		executeSubroutine sub_5FD4C
-		setFacing $80,2
+		setFacing $80,LEFT
 		nextSingleText $0,$80   ; "Oh, we're flying!{W1}"
 		nextSingleText $0,$7    ; "The Ancients were greater{N}than we thought!{W1}"
-		setFacing $80,1
-		setFacing $1A,3
+		setFacing $80,UP
+		setFacing $1A,DOWN
 		nextSingleText $80,$1A  ; "Oh, thank you very much.{W1}"
 		csWait 60
 		fadeOutB

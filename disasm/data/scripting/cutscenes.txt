@@ -154,7 +154,7 @@ Same as "setPosFlash" with no flash.
 $001A - entitySprite - Set entity sprite
 2 params :
 - word : entity index
-- word : sprite index, will have to check if it uses an absolute index or a "divided by 3" index, as this might consider that a sprite is actually 3 sprites (3 directions per sprite, left/right being mirrored)
+- word : sprite index
 
 $001B - startEntity - Start entity animation
 May be used after specific entity loading command ? To clarify ...

@@ -6,14 +6,14 @@ bbcs_42:        textCursor $C10
 		loadMapEntities ce_4EEDC
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,12,36,1
+		setPos $7,12,36,UP
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,14,36,1
+		setPos $1F,14,36,UP
 		setActscript $1C,$FF,eas_Init
-		setPos $1C,13,36,1
+		setPos $1C,13,36,UP
 		jumpIfFlagClear $4C,cs_4EDE8; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		setPos $1A,63,62,3
+		setPos $1A,63,62,DOWN
 cs_4EDE8:       stopEntity $81
 		customActscript $81,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
@@ -52,7 +52,7 @@ cs_4EDE8:       stopEntity $81
 		endMove $8080
 		moveEntity $1C,$FF,$1,$1
 		endMove $8080
-		setFacing $0,1
+		setFacing $0,UP
 		moveEntity $1C,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$1C   ; "Oh, Princess Elis is here!{W1}"
@@ -62,9 +62,9 @@ cs_4EDE8:       stopEntity $81
 		nextText $C0,$80        ; "He has not revived fully yet.{W2}"
 		nextSingleText $C0,$80  ; "So I came to welcome you for{N}him.{W1}"
 		nextSingleText $0,$7    ; "She isn't moving!{N}Is she dead?{W1}"
-		setFacing $80,1
+		setFacing $80,UP
 		csWait 40
-		setFacing $80,3
+		setFacing $80,DOWN
 		nextSingleText $C0,$80  ; "We haven't killed her yet.{N}She will be the first{N}sacrifice for King Zeon.{W1}"
 		nextText $0,$1F         ; "What?!{W2}"
 		nextSingleText $0,$1F   ; "Zeon said, you'd return her{N}in exchange for the jewel!{W1}"

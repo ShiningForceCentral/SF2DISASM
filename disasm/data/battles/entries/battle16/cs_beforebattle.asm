@@ -18,8 +18,8 @@ bbcs_16:        textCursor $9D1
 		cloneEntity $83,$8A
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
-		setPos $7,15,15,2
-		setPos $1F,13,14,3
+		setPos $7,15,15,LEFT
+		setPos $1F,13,14,DOWN
 		fadeInB
 		csWait 30
 		csWait 5
@@ -32,22 +32,22 @@ bbcs_16:        textCursor $9D1
 		moveEntity $7,$FF,$0,$1
 		endMove $8080
 		csWait 20
-		setFacing $0,3
-		setFacing $7,3
-		setFacing $1F,3
+		setFacing $0,DOWN
+		setFacing $7,DOWN
+		setFacing $1F,DOWN
 		nextSingleText $C0,$7   ; "Huh?  The raft stopped!{W1}"
-		setFacing $0,2
-		setFacing $7,2
-		setFacing $1F,0
+		setFacing $0,LEFT
+		setFacing $7,LEFT
+		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "Did the water stop flowing?{N}What's happening?{W1}"
 		csWait 30
-		setFacing $7,1
+		setFacing $7,UP
 		csWait 30
 		setActscript $7,$FF,eas_Jump
 		setActscript $7,$FF,eas_Jump
 		nextSingleText $C0,$7   ; "Wow!{D1}  What's that?{W1}"
-		setFacing $0,1
-		setFacing $1F,1
+		setFacing $0,UP
+		setFacing $1F,UP
 		csWait 20
 		moveEntity $7,$FF,$1,$2
 		endMove $8080
@@ -65,22 +65,22 @@ bbcs_16:        textCursor $9D1
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setPos $80,14,5,3
+		setPos $80,14,5,DOWN
 		moveEntity $80,$FF,$1,$2
 		endMove $8080
 		setBlocks 0,0,3,3,13,4
-		setPos $81,12,4,3
-		setPos $82,16,4,3
+		setPos $81,12,4,DOWN
+		setPos $82,16,4,DOWN
 		playSound SFX_BIG_DOOR_RUMBLE
 		animEntityFadeInOut $81,$5
-		setPos $83,13,2,3
-		setPos $84,15,2,3
-		setPos $85,17,3,3
-		setPos $86,11,4,3
-		setPos $87,12,5,3
-		setPos $88,13,5,3
-		setPos $89,16,5,3
-		setPos $8A,14,6,3
+		setPos $83,13,2,DOWN
+		setPos $84,15,2,DOWN
+		setPos $85,17,3,DOWN
+		setPos $86,11,4,DOWN
+		setPos $87,12,5,DOWN
+		setPos $88,13,5,DOWN
+		setPos $89,16,5,DOWN
+		setPos $8A,14,6,DOWN
 		animEntityFadeInOut $83,$5
 		setQuake 16386
 		nextSingleText $C0,$7   ; "M...{D1}monster!{N}It appeared from the river!{W1}"

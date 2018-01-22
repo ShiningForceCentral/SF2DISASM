@@ -6,17 +6,17 @@ bbcs_21:        textCursor $A10
 		loadMapEntities ce_4B84C
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,28,24,2
+		setPos $7,28,24,LEFT
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,28,22,2
-		setPos $1E,28,23,2
+		setPos $1F,28,22,LEFT
+		setPos $1E,28,23,LEFT
 		fadeInB
 		cameraSpeed $30
 		nextText $0,$80         ; "(Sniff, sniff)...I smell{N}more invaders from the east.{W2}"
 		nextSingleText $0,$80   ; "This is the territory of{N}Mr. Creed.{W1}"
-		setFacing $80,0
-		setFacing $81,0
-		setFacing $82,0
+		setFacing $80,RIGHT
+		setFacing $81,RIGHT
+		setFacing $82,RIGHT
 		csWait 30
 		setCamDest 23,18
 		nextSingleText $0,$80   ; "Go away!{W1}"
@@ -29,11 +29,11 @@ bbcs_21:        textCursor $A10
 		endMove $8080
 		nextSingleText $0,$80   ; "No!  Leave now!{W1}"
 		csWait 50
-		setPos $83,10,24,0
+		setPos $83,10,24,RIGHT
 		csWait 40
-		setPos $84,10,20,0
+		setPos $84,10,20,RIGHT
 		csWait 30
-		setPos $85,10,22,0
+		setPos $85,10,22,RIGHT
 		csWait 20
 		nextSingleText $0,$80   ; "Never mind.  Get 'em boys!{W1}"
 		setActscript $83,$0,eas_Jump

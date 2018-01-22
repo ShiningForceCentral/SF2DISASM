@@ -6,13 +6,13 @@ bbcs_32:        textCursor $B1D
 		loadMapEntities ce_4CCC0
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,16,45,1
+		setPos $7,16,45,UP
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,14,45,1
+		setPos $1F,14,45,UP
 		setActscript $16,$FF,eas_Init
-		setPos $16,15,46,1
+		setPos $16,15,46,UP
 		setActscript $1E,$FF,eas_Init
-		setPos $1E,15,45,1
+		setPos $1E,15,45,UP
 		fadeInB
 		cameraSpeed $30
 		moveEntity $0,$0,$1,$3
@@ -29,13 +29,13 @@ bbcs_32:        textCursor $B1D
 		setCamDest 10,18
 		nextText $0,$80         ; "He ordered me to take out{N}some of your people.{W2}"
 		nextSingleText $0,$80   ; "But, it's not enough.{N}This is the end of your{N}resistance.{W1}"
-		setFacing $80,2
+		setFacing $80,LEFT
 		csWait 30
-		setFacing $80,0
+		setFacing $80,RIGHT
 		csWait 30
-		setFacing $80,1
+		setFacing $80,UP
 		csWait 30
-		setFacing $80,3
+		setFacing $80,DOWN
 		nextSingleText $0,$80   ; "Kill them, kill them all!{W1}"
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$0,eas_Jump

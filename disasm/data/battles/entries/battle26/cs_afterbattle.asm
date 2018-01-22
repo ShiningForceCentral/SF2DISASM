@@ -15,25 +15,25 @@ abcs_battle26:  textCursor $A4D
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		setActscript $7,$FF,eas_Init
-		setPos $7,17,14,0
+		setPos $7,17,14,RIGHT
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,18,16,1
-		setPos $1E,19,17,1
+		setPos $1F,18,16,UP
+		setPos $1E,19,17,UP
 		setPriority $13,$0
 		setPriority $80,$FFFF
 		fadeInB
 		moveEntity $7,$FF,$3,$2
 		endMove $8080
-		setFacing $7,0
+		setFacing $7,RIGHT
 		nextSingleText $0,$7    ; "Is he alright?{W1}"
 		nextSingleText $0,$1F   ; "We have to save him before{N}he is possessed by an evil...{W1}"
 		entityFlashWhite $1F,$3C
 		flashScreenWhite $1E
 		setCamDest 13,9
 		animEntityFadeInOut $80,$4
-		setPos $80,18,13,3
+		setPos $80,18,13,DOWN
 		animEntityFadeInOut $80,$5
-		setFacing $7,1
+		setFacing $7,UP
 		moveEntity $80,$FF,$1,$3
 		endMove $8080
 		customActscript $80,$FF
@@ -56,7 +56,7 @@ abcs_battle26:  textCursor $A4D
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setFacing $13,3
+		setFacing $13,DOWN
 		entityShakeHead $13
 		nextSingleText $C0,$13  ; "What happened?{W2}"
 		moveEntity $13,$FF,$1,$1
@@ -73,27 +73,27 @@ abcs_battle26:  textCursor $A4D
 		nextSingleText $C0,$13  ; "So, I was heading south to{N}find some allies.{W1}"
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
-		setFacing $7,0
+		setFacing $7,RIGHT
 		nextSingleText $0,$7    ; "You don't have to go any{N}further.{W1}"
-		setFacing $13,2
+		setFacing $13,LEFT
 		nextSingleText $C0,$13  ; "Then, you're from South{N}Parmecia?{W1}"
 		nextSingleText $0,$1F   ; "Yes, Granseal.{W1}"
-		setFacing $13,3
+		setFacing $13,DOWN
 		nextSingleText $C0,$13  ; "Oh, how lucky!  Please{N}come with me to Pacalon!{W1}"
 		entityNod $13
 		nextSingleText $0,$7    ; "But, we have to go to{N}Tristan.{W1}"
-		setFacing $13,2
+		setFacing $13,LEFT
 		nextText $C0,$13        ; "Oh, please...I can't return{N}to Pacalon without allies.{W2}"
 		nextText $C0,$13        ; "Maybe, when you're done...{W2}"
 		nextSingleText $C0,$13  ; "OK, I'll go with you.{W1}"
 		join $13
 		nextSingleText $0,$1F   ; "But, you're injured{N}Mr. {NAME;19}.{W1}"
-		setFacing $13,3
+		setFacing $13,DOWN
 		nextSingleText $C0,$13  ; "No problem.  I don't know{N}why, but I'm much better.{W1}"
 		setActscript $13,$0,eas_RotateRight
 		csWait 40
 		setActscript $13,$FF,eas_Jump
-		setFacing $13,3
+		setFacing $13,DOWN
 		setActscript $13,$FF,eas_Jump
 		setActscript $13,$FF,eas_Init
 		startEntity $13

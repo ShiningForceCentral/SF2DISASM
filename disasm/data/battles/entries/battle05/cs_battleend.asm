@@ -3,8 +3,8 @@
 ; 0x49AB2..0x49B48 : Enemy defeated cutscene for battle 5
 edcs_battle5:   textCursor $913
 		stopEntity $80
-		setFacing $0,1
-		setFacing $5,1
+		setFacing $0,UP
+		setFacing $5,UP
 		setActscript $5,$FF,eas_Init
 		setCamDest 12,0
 		csWait 30
@@ -17,16 +17,16 @@ edcs_battle5:   textCursor $913
 		moveEntity $5,$FF,$0,$1
 		moreMove $1,$2
 		endMove $8080
-		setFacing $5,2
+		setFacing $5,LEFT
 		csWait 30
 		nextSingleText $FF,$FF  ; "{NAME;5} searched the tool{N}bag of the Galam Knight.{W1}"
 		csWait 40
-		setFacing $5,3
+		setFacing $5,DOWN
 		setActscript $5,$FF,eas_Jump
 		setActscript $5,$0,eas_Jump
 		nextSingleText $0,$5    ; "Yes!  I found one!{W1}"
 		nextSingleText $FF,$FF  ; "{NAME;5} has the Jewel{N}of Light.{W1}"
-		setFacing $5,2
+		setFacing $5,LEFT
 		csWait 20
 		setActscript $5,$FF,eas_BumpLeft
 		entityShiver $80

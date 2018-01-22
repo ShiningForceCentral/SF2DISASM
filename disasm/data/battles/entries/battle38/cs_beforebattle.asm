@@ -6,14 +6,14 @@ bbcs_38:        textCursor $BBB
 		loadMapEntities ce_4DE74
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,13,8,3
+		setPos $7,13,8,DOWN
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,15,8,3
+		setPos $1F,15,8,DOWN
 		setActscript $1E,$FF,eas_Init
-		setPos $1E,14,8,3
+		setPos $1E,14,8,DOWN
 		jumpIfFlagClear $4C,cs_4DDFE; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		setPos $1A,63,63,3
+		setPos $1A,63,63,DOWN
 cs_4DDFE:       playSound MUSIC_BATTLE_THEME_1
 		fadeInB
 		cameraSpeed $30

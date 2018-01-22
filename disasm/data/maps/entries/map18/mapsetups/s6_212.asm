@@ -24,10 +24,10 @@ loc_612A8:
 
 cs_612BE:       textCursor $E61
 		mapLoad 59,8,4
-		setPos $0,63,63,3
-		setPos $7,63,63,3
-		setPos $1F,63,63,3
-		setPos $1A,63,63,3
+		setPos $0,63,63,DOWN
+		setPos $7,63,63,DOWN
+		setPos $1F,63,63,DOWN
+		setPos $1A,63,63,DOWN
 		fadeInFromBlackHalf
 		nextSingleText $80,$82  ; "{LEADER} defeated Red{N}Baron too?  Is that what{N}you said, Geshp?{W1}"
 		entityNod $80
@@ -60,19 +60,19 @@ cs_612BE:       textCursor $E61
 		nextSingleText $0,$80   ; "Ah...yes, sir.  I'll kill{N}{LEADER} this time.{N}I stake my life on it.{W1}"
 		nextSingleText $80,$82  ; "Bring the Jewel of Evil back{N}to me!{W1}"
 		nextSingleText $0,$80   ; "Yes, sir!{W1}"
-		setFacing $80,3
+		setFacing $80,DOWN
 		csWait 40
 		setActscript $80,$0,eas_RotateRightHighSpeed
 		csWait 40
 		animEntityFadeInOut $80,$6
-		setPos $80,63,63,3
+		setPos $80,63,63,DOWN
 		csWait 150
 		setPriority $83,$FFFF
 		setPriority $81,$0
 		setActscript $83,$0,eas_Transparent
-		setPos $83,13,12,3
+		setPos $83,13,12,DOWN
 		csWait 50
-		setPos $81,13,12,1
+		setPos $81,13,12,UP
 		animEntityFadeInOut $81,$7
 		csWait 50
 		hideEntity $83
@@ -109,7 +109,7 @@ cs_612BE:       textCursor $E61
 		csWait 30
 		nextText $0,$81         ; "He's probably much stronger{N}now.{N}Hmmm, sounds interesting.{W2}"
 		setActscript $81,$FF,eas_Init
-		setFacing $81,1
+		setFacing $81,UP
 		nextSingleText $0,$81   ; "I'll do it.  If this comes{N}to pass, it will be his final{N}battle.{W1}"
 		csWait 30
 		executeSubroutine csub_61426
@@ -132,16 +132,16 @@ loc_61434:
 cs_6143C:       textCursor $36F
 		setActscript $1A,$FF,eas_Init
 		moveEntityNextToPlayer $1A,$0
-		setFacing $0,0
+		setFacing $0,RIGHT
 		csWait 20
 		nextSingleText $0,$1A   ; "Sorry, {LEADER}.{N}I'm going back to Roft.{N}I'm worried about Petro.{W1}"
 		csWait 30
 		moveEntity $1A,$FF,$1,$4
 		endMove $8080
-		setFacing $0,1
-		setFacing $7,1
-		setFacing $1F,1
-		setFacing $1A,3
+		setFacing $0,UP
+		setFacing $7,UP
+		setFacing $1F,UP
+		setFacing $1A,DOWN
 		csWait 30
 		entityNod $1A
 		csWait 20

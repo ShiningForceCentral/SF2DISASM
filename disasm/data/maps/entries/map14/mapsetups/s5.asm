@@ -45,13 +45,13 @@ cs_58FA4:       textCursor $8D6
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		nextSingleText $0,$80   ; "Somebody, take that plank{N}from him!{W1}"
-		setFacing $80,0
+		setFacing $80,RIGHT
 		csWait 30
-		setFacing $80,2
+		setFacing $80,LEFT
 		csWait 30
-		setFacing $80,0
+		setFacing $80,RIGHT
 		csWait 30
-		setFacing $82,2
+		setFacing $82,LEFT
 		nextSingleText $0,$82   ; "I got it!{W1}"
 		moveEntity $82,$FF,$2,$2
 		endMove $8080
@@ -61,10 +61,10 @@ cs_58FA4:       textCursor $8D6
 		endMove $8080
 		moveEntity $82,$FF,$2,$1
 		endMove $8080
-		setFacing $80,0
-		setFacing $82,1
+		setFacing $80,RIGHT
+		setFacing $82,UP
 		nextSingleText $0,$82   ; "Thank you, boy!{W1}"
-		setFacing $82,3
+		setFacing $82,DOWN
 		csWait 30
 		moveEntity $84,$0,$3,$1
 		endMove $8080
@@ -105,7 +105,7 @@ cs_58FA4:       textCursor $8D6
 		moveEntity $83,$FF,$1,$6
 		endMove $8080
 		setActscript $83,$FF,eas_Init
-		setFacing $80,3
+		setFacing $80,DOWN
 		entityNod $83
 		entityNod $83
 		stopEntity $83
@@ -117,11 +117,11 @@ cs_58FA4:       textCursor $8D6
 		nextText $0,$83         ; "One of my friends has not{N}returned from North Cliff.{W2}"
 		nextSingleText $0,$83   ; "He may be in trouble.{W1}"
 		nextSingleText $0,$80   ; "This isn't good.{W1}"
-		setFacing $80,2
+		setFacing $80,LEFT
 		csWait 30
-		setFacing $80,0
+		setFacing $80,RIGHT
 		csWait 30
-		setFacing $80,1
+		setFacing $80,UP
 		csWait 30
 		nextText $0,$80         ; "{LEADER}, did you{N}hear that?{W2}"
 cs_59122:       textCursor $8E3
@@ -136,7 +136,7 @@ cs_59142:       textCursor $8E6
 		nextSingleText $0,$80   ; "Hey, he's going with you!{W1}"
 		moveEntity $80,$FF,$2,$1
 		endMove $8080
-		setFacing $80,0
+		setFacing $80,RIGHT
 		textCursor $8E8
 		moveEntity $83,$FF,$1,$2
 		endMove $8080
@@ -149,17 +149,17 @@ cs_59142:       textCursor $8E6
 		endMove $8080
 		moveEntity $3,$FF,$1,$5
 		endMove $8080
-		setFacing $0,2
-		setFacing $3,0
+		setFacing $0,LEFT
+		setFacing $3,RIGHT
 		setCamDest 8,10
 		nextSingleText $0,$3    ; "{LEADER}, wait.  Wait!{W1}"
 		csWait 30
 		nextSingleText $0,$1    ; "Hey, you're all wet.{W1}"
-		setPos $4,13,10,3
-		setPos $2,13,9,3
-		setPos $5,13,8,3
-		setPos $1,13,7,3
-		setPos $6,13,6,3
+		setPos $4,13,10,DOWN
+		setPos $2,13,9,DOWN
+		setPos $5,13,8,DOWN
+		setPos $1,13,7,DOWN
+		setPos $6,13,6,DOWN
 		moveEntity $4,$0,$3,$4
 		moreMove $0,$1
 		moreMove $3,$1
@@ -174,14 +174,14 @@ cs_59142:       textCursor $8E6
 		endMove $8080
 		moveEntity $6,$FF,$3,$7
 		endMove $8080
-		setFacing $5,3
-		setFacing $1,3
-		setFacing $6,3
-		setFacing $2,3
-		setFacing $4,2
-		setFacing $0,1
-		setFacing $83,1
-		setFacing $80,3
+		setFacing $5,DOWN
+		setFacing $1,DOWN
+		setFacing $6,DOWN
+		setFacing $2,DOWN
+		setFacing $4,LEFT
+		setFacing $0,UP
+		setFacing $83,UP
+		setFacing $80,DOWN
 		nextSingleText $0,$1    ; "Are you leaving?{N}Say it isn't so!{W1}"
 		nextSingleText $0,$4    ; "I think it's too dangerous{N}out there alone.{W1}"
 		nextText $0,$83         ; "And...{W2}"

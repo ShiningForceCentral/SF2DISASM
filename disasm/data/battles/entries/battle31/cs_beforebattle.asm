@@ -6,11 +6,11 @@ bbcs_31:        textCursor $AFB
 		loadMapEntities ce_4CB92
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setPos $7,20,3,3
+		setPos $7,20,3,DOWN
 		setActscript $1F,$FF,eas_Init
-		setPos $1F,22,3,3
+		setPos $1F,22,3,DOWN
 		setActscript $16,$FF,eas_Init
-		setPos $16,21,3,3
+		setPos $16,21,3,DOWN
 		animEntityFadeInOut $80,$6
 		animEntityFadeInOut $81,$6
 		setActscript $82,$0,eas_AnimSpeedx2
@@ -37,12 +37,12 @@ bbcs_31:        textCursor $AFB
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
 		setCamDest 16,0
-		setFacing $1F,2
+		setFacing $1F,LEFT
 		nextSingleText $0,$1F   ; "{NAME;22}, run!{W1}"
 		moveEntity $16,$FF,$1,$1
 		endMove $8080
 		flashScreenWhite $2
-		setPos $82,21,1,2
+		setPos $82,21,1,LEFT
 		csWait 30
 		setActscript $16,$FF,eas_Jump
 		setActscript $16,$FF,eas_46172
@@ -50,7 +50,7 @@ bbcs_31:        textCursor $AFB
 		endMove $8080
 		nextSingleText $C0,$80  ; "Ha, ha.  He can't.{W1}"
 		setCamDest 16,6
-		setFacing $80,3
+		setFacing $80,DOWN
 		nextSingleText $C0,$80  ; "Cameela!  Cameeeeeela!{W1}"
 		nextSingleText $0,$7    ; "Cameela?!  We met her in{N}Pangoat Valley.{W1}"
 		animEntityFadeInOut $81,$7
@@ -88,15 +88,15 @@ bbcs_31:        textCursor $AFB
 		csWait 40
 		entityShiver $80
 		csWait 40
-		setFacing $80,1
+		setFacing $80,UP
 		nextText $C0,$80        ; "I don't need your help,{N}Cameela!{W2}"
 		nextSingleText $C0,$80  ; "Come on, devils!{N}Kill {LEADER} now!{W1}"
 		setCamDest 16,13
 		csWait 40
-		setPos $83,19,18,1
-		setPos $84,21,19,1
-		setPos $85,22,18,1
-		setPos $86,23,15,1
+		setPos $83,19,18,UP
+		setPos $84,21,19,UP
+		setPos $85,22,18,UP
+		setPos $86,23,15,UP
 		setActscript $83,$0,eas_Jump
 		setActscript $84,$0,eas_Jump
 		setActscript $85,$0,eas_Jump
