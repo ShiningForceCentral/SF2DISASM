@@ -42,32 +42,32 @@ return_56312:
 cs_56314:       hideText
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setQuake $2
-		csWait $3C
+		setQuake 2
+		csWait 60
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$FF,eas_Jump
 		moveEntity $0,$0,$3,$2
 		endMove $8080
 		moveEntity $7,$FF,$3,$2
 		endMove $8080
-		setFacing $0,$1
-		setFacing $7,$1
+		setFacing $0,1
+		setFacing $7,1
 		playSound SFX_BATTLEFIELD_DEATH
-		setBlocks $20,$11,$2,$2,$F,$13
-		csWait $1E
-		setQuake $0
-		csWait $1E
-		setQuake $2
+		setBlocks 32,17,2,2,15,19
+		csWait 30
+		setQuake 0
+		csWait 30
+		setQuake 2
 		playSound SFX_BATTLEFIELD_DEATH
-		setBlocks $22,$11,$2,$2,$F,$13
-		csWait $1E
-		setQuake $0
-		csWait $1E
-		setQuake $2
+		setBlocks 34,17,2,2,15,19
+		csWait 30
+		setQuake 0
+		csWait 30
+		setQuake 2
 		playSound SFX_BATTLEFIELD_DEATH
-		setBlocks $20,$E,$2,$2,$F,$13
-		csWait $1E
-		setQuake $0
-		csWait $1E
+		setBlocks 32,14,2,2,15,19
+		csWait 30
+		setQuake 0
+		csWait 30
 		followEntity $7,$0,$2
 		csc_end

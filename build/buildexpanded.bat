@@ -28,4 +28,3 @@ echo End of assembly, produced %buildname%
 echo -------------------------------------------------------------
 
 
-pause

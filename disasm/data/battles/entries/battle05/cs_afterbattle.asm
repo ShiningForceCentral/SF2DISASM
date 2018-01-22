@@ -6,16 +6,16 @@ abcs_battle05:  textCursor $91C
 		moveEntity $5,$FF,$3,$1
 		moreMove $2,$2
 		endMove $8080
-		setFacing $5,$3
+		setFacing $5,3
 		nextText $0,$5          ; "This is the Jewel of Light{N}that I stole from the shrine.{W2}"
 		nextSingleText $0,$5    ; "The other jewel is missing.{N}I'll give you this one now.{W1}"
 		nextText $FF,$FF        ; "{LEADER} received the{N}Jewel of Light...{W2}{N}The jewel fused to{N}{LEADER}'s neck.{W1}"
-		csWait $A
+		csWait 10
 		setActscript $5,$FF,eas_Jump
 		setActscript $5,$FF,eas_Jump
 		nextText $0,$5          ; "{LEADER}, did you use{N}magic?{W2}"
 		setF $180               ; set after Bowie obtains the jewel of light/evil... whichever it is
-		csWait $1E
+		csWait 30
 		nextText $0,$5          ; "Ummm...I can't remove it!{N}Is it cursed?{W2}"
 		setActscript $5,$FF,eas_46172
 		nextText $0,$5          ; "We'll go to the church{N}later to see if it's cursed.{N}At least we have it now.{W1}"

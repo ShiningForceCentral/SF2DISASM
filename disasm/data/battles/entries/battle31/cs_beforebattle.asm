@@ -2,15 +2,15 @@
 ; ASM FILE data\battles\entries\battle31\cs_beforebattle.asm :
 ; 0x4C994..0x4CBE2 : Cutscene before battle 31
 bbcs_31:        textCursor $AFB
-		loadMapFadeIn $2,$10,$2
+		loadMapFadeIn 2,16,2
 		loadMapEntities ce_4CB92
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$14,$3,$3
+		setPos $7,20,3,3
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$16,$3,$3
+		setPos $1F,22,3,3
 		setActscript $16,$FF,eas_Init
-		entityPosDir $16,$15,$3,$3
+		setPos $16,21,3,3
 		animEntityFadeInOut $80,$6
 		animEntityFadeInOut $81,$6
 		setActscript $82,$0,eas_AnimSpeedx2
@@ -18,11 +18,11 @@ bbcs_31:        textCursor $AFB
 		fadeInB
 		cameraSpeed $30
 		nextSingleText $C0,$80  ; "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
-		setCamDest $10,$5
+		setCamDest 16,5
 		animEntityFadeInOut $80,$7
 		nextSingleText $0,$7    ; "Geshp!{W1}"
 		nextSingleText $C0,$80  ; "So, you remember me. {W1}"
-		setCamDest $10,$2
+		setCamDest 16,2
 		moveEntity $1F,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$1F   ; "What do you want?{W1}"
@@ -36,21 +36,21 @@ bbcs_31:        textCursor $AFB
 		nextSingleText $0,$1F   ; "It's a trap!{W2}"
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
-		setCamDest $10,$0
-		setFacing $1F,$2
+		setCamDest 16,0
+		setFacing $1F,2
 		nextSingleText $0,$1F   ; "{NAME;22}, run!{W1}"
 		moveEntity $16,$FF,$1,$1
 		endMove $8080
 		flashScreenWhite $2
-		entityPosDir $82,$15,$1,$2
-		csWait $1E
+		setPos $82,21,1,2
+		csWait 30
 		setActscript $16,$FF,eas_Jump
 		setActscript $16,$FF,eas_46172
 		moveEntity $16,$FF,$3,$1
 		endMove $8080
 		nextSingleText $C0,$80  ; "Ha, ha.  He can't.{W1}"
-		setCamDest $10,$6
-		setFacing $80,$3
+		setCamDest 16,6
+		setFacing $80,3
 		nextSingleText $C0,$80  ; "Cameela!  Cameeeeeela!{W1}"
 		nextSingleText $0,$7    ; "Cameela?!  We met her in{N}Pangoat Valley.{W1}"
 		animEntityFadeInOut $81,$7
@@ -63,7 +63,7 @@ bbcs_31:        textCursor $AFB
 		nextSingleText $C0,$80  ; "That I am.  Now, get the key!{W1}"
 		nextSingleText $0,$81   ; "Me?!  Why?{W1}"
 		stopEntity $80
-		csWait $28
+		csWait 40
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -85,24 +85,24 @@ bbcs_31:        textCursor $AFB
 		nextText $C0,$80        ; "That witch!{W2}"
 		nextSingleText $C0,$80  ; "Cameela!  Cameela!!{W1}"
 		nextSingleText $0,$7    ; "They're divided....{W1}"
-		csWait $28
+		csWait 40
 		entityShiver $80
-		csWait $28
-		setFacing $80,$1
+		csWait 40
+		setFacing $80,1
 		nextText $C0,$80        ; "I don't need your help,{N}Cameela!{W2}"
 		nextSingleText $C0,$80  ; "Come on, devils!{N}Kill {LEADER} now!{W1}"
-		setCamDest $10,$D
-		csWait $28
-		entityPosDir $83,$13,$12,$1
-		entityPosDir $84,$15,$13,$1
-		entityPosDir $85,$16,$12,$1
-		entityPosDir $86,$17,$F,$1
+		setCamDest 16,13
+		csWait 40
+		setPos $83,19,18,1
+		setPos $84,21,19,1
+		setPos $85,22,18,1
+		setPos $86,23,15,1
 		setActscript $83,$0,eas_Jump
 		setActscript $84,$0,eas_Jump
 		setActscript $85,$0,eas_Jump
 		setActscript $86,$FF,eas_Jump
-		csWait $1E
-		setCamDest $10,$6
+		csWait 30
+		setCamDest 16,6
 		nextSingleText $C0,$80  ; "Bye, {LEADER}.{W1}"
 		nextSingleText $0,$7    ; "You're not staying?{W1}"
 		nextText $C0,$80        ; "I'm good at using my brains,{N}not my strength.{W2}"

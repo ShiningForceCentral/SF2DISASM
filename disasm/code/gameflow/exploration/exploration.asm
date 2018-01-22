@@ -808,7 +808,8 @@ loc_3DE2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3E06:
+ResetCurrentMap:
+		
 		lea     (FF0000_RAM_START).l,a2
 		move.w  #$7FF,d7
 loc_3E10:
@@ -824,7 +825,7 @@ loc_3E10:
 		moveq   #$FFFFFFFF,d1   ; reload current map ?
 		bra.w   LoadMap         
 
-	; End of function sub_3E06
+	; End of function ResetCurrentMap
 
 
 ; =============== S U B R O U T I N E =======================================

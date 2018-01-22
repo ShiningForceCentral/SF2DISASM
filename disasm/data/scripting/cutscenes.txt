@@ -128,7 +128,7 @@ $0016 - waitIdle - Wait for entity to stop before continuing cutscene execution
 1 param :
 - word : entity index
 
-$0017 - entityPosDirFlash - Set entity position, direction, and make it flash
+$0017 - setPosFlash - Set entity position, direction, and make it flash
 Not sure what that "flash" thing does, will have to see how it's used.
 Earl : This is only used for Hawel, when he dies.
 4 params :
@@ -143,8 +143,8 @@ To clarify
 - word : entity index ?
 - word : flash parameter ? Frequency maybe ?
 
-$0019 - entityPosDir - Set entity position and direction
-Same as "entityPosDirFlash" with no flash.
+$0019 - setPos - Set entity position and direction
+Same as "setPosFlash" with no flash.
 4 params :
 - byte : entity index
 - byte : map X
@@ -219,7 +219,6 @@ $0025 - cloneEntity - Clone entity
 $0026 - entityNod - Make entity nod
 - word : entity index
 
-
 $0027 - entityShakeHead - Make entity shake head
 - word : entity index
 
@@ -264,17 +263,12 @@ but will be gone when you transition to a new map.
 The final 4 bytes determine the character's placement in the train, 
 but I don't have a solid grasp of what values correspond to what placement.
 
-$002D - moveEntity] - Apply entity move sequence
+$002D - moveEntity - Apply entity move sequence
 This command can be followed by one or several move coordinates, until the "endMove $8080" command.
 params :
-- word : 
-- 2 repeatable bytes : direction, and move length.
-Earl : 
-00 2D aa 00 ff dd = actor moving (variable # bytes, depending on amount of movement)
-Actors will move in a given direction (ff) a given distance (dd). 
-I use ff for direction because it works with the same values as facing; 
-00 = right, 01 = up, 02 = left, 03 = down. 
-Actors will not change their facing as they move, so you can have them strafe, back away, etc.
+- byte : entity index
+- byte : if !=0, wait until entity idle
+- 2 repeatable bytes : action, and move length.
 
 $002E - hideEntity - Hide entity
 Stop displaying it ?
@@ -285,15 +279,14 @@ This is usually handled in events once an actor has wandered somewhere off camer
 Otherwise, they would still be present on the map after the event has concluded 
 (like in Granseal, when Astral speaks to the messenger and runs to the Castle).
 
-$002F - csc2F - UNKNOWN
-To figure out !
-Sets entity property $11 to $FFFF for specific behaviour when skreech joins.
-Maybe to allow Skreech to fly around with no collision with the map's obstructed blocks ?
+$002F - fly - GIVE ABILITY TO FLY
+Only used for Skreech joins cutscene.
+Sets entity property $11 to $FFFF.
 params :
 - word : Entity index
 - word : Value $FFFF then 0
 
-$0030 - removeEntityShadow - Remove entity's shadow
+$0030 - removeShadow - Remove entity's shadow
 Graphic FX on sprite to remove black pixels from the bottom of entity sprite.
 params :
 - word : entity index
@@ -338,12 +331,9 @@ Earl :
 This is only used on the Parmecia/Grans Island path. 
 I assume that it is what makes the path disappear after you arrive at one side or the other.
 
-$0036 - csc36 - UNKNOWN, RELATED TO LOADING A MAP
-Maybe re-loading ?
+$0036 - resetMap
+Simple reloading without moving the camera,.
 No params.
-Earl :
-Appears in same section as New Granseal '1 year later' text. 
-Might delay the fade-in until after that text, might be what allows that text box to come up despite the dark screen... I just don't know.
 
 $0037 - loadMapFadeIn - Load map and fade in
 params :
@@ -352,66 +342,58 @@ params :
 - word : Camera initial Y
 
 $0039 - fadeInB - Fade in from black
-No params
 
 $003A - fadeOutB - Fade out to black
-No params
 
 $003B - slowFadeInB - Slow fade in from black
-No params
 
 $003C - slowFadeOutB - Slow fade out to black
-No params
 
-$003D - tintMap - Make the map flash ?
-Maybe used during storm effect ?
-No params
+$003D - tintMap
+Make the map flash. Used for storm and cutscenes with Cameela/Geshp/Oddeye.
 
-$003E - flickerOnce - Flicker once ... well ... which difference with previous command ?
-To clarify
-No params
+$003E - flickerOnce
+Mostly used in conjunction with tintMap command for Cameela/Geshp/Oddeye cutscenes.
 
-$003F - mapFadeOutToWhite - Make the map fade out to white
-Where is it used ? 
-No params
+$003F - mapFadeOutToWhite
 
-$0040 - mapFadeInFromWhite - Make the map fade in from white
-Same
+$0040 - mapFadeInFromWhite
 
 $0041 - flashScreenWhite - Make the whole display flash white
 params :
 - word : duration
 
 $0042 - loadMapEntities - Initialize entities
-Important one ! Need to figure out the data format. Should have a sprite index, X/Y/direction, initial actscript ...
-First 3-byte entry for main entity (hero) :
-- X
-- Y
-- Facing
-Next entries : 
-- X
-- Y
-- Facing
-- Sprite
-- Actscript
-Data ends with $FFFF.
 params :
-- long : entity data named address
+  - long : entity data named address
+Entity data format : 
+  First 3-byte entry for main entity (hero) :
+    - X
+    - Y
+    - Facing
+  Next entries : 
+    - X
+    - Y
+    - Facing
+    - Sprite
+    - Actscript
+  Data ends with $FFFF.
 
 $0043 - roofEvent - EXECUTE MAP ROOF EVENT
 params :
 - word : Event X
 - word : Event Y
 
-$0044 - reloadEntities - 
+$0044 - reloadEntities
 params :
-- word : entity data named address
+- word : entity data named address (data format : see command $42)
 
 $0045 - cameraSpeed - SET CAMERA SPEED
 params :
 - word : speed value (default=$20)
 
-$0046 - reloadMap - RELOAD MAP
+$0046 - reloadMap
+Reload map and set camera.
 params :
 - word : Camera init X
 - word : Camera init Y

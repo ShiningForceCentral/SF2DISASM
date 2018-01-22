@@ -3,75 +3,75 @@
 ; 0x496DC..0x4980E : Cutscene after battle 1
 abcs_battle01:  textCursor $901
 		resetForceBattleStats
-		loadMapFadeIn $39,$2,$0
+		loadMapFadeIn 57,2,0
 		loadMapEntities ce_497F6
 		setActscript $0,$FF,eas_Init
-		entityPosDir $1,$8,$7,$1
-		entityPosDir $2,$8,$8,$1
+		setPos $1,8,7,1
+		setPos $2,8,8,1
 		fadeInB
-		csWait $28
+		csWait 40
 		nextSingleText $0,$81   ; "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
-		setFacing $81,$1
-		csWait $28
+		setFacing $81,1
+		csWait 40
 		entityShiver $80
-		csWait $1E
+		csWait 30
 		entityShiver $80
-		csWait $1E
+		csWait 30
 		mapFadeOutToWhite
-		csWait $1E
+		csWait 30
 		mapFadeInFromWhite
-		csWait $5
+		csWait 5
 		setActscript $81,$0,eas_461B6
-		csWait $5
+		csWait 5
 		setActscript $0,$0,eas_461B6
-		csWait $1E
+		csWait 30
 		mapFadeOutToWhite
-		csWait $1E
+		csWait 30
 		mapFadeInFromWhite
-		csWait $1E
+		csWait 30
 		mapFadeOutToWhite
 		animEntityFadeInOut $80,$6
 		entitySprite $80,$3C
-		entityPosDir $80,$7,$A,$3
+		setPos $80,7,10,3
 		entitySprite $80,$72
 		mapFadeInFromWhite
-		csWait $1E
+		csWait 30
 		moveEntity $81,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$81   ; "Oh, it disappeared?!{W1}"
-		csWait $5
+		csWait 5
 		setActscript $81,$0,eas_461B6
-		csWait $78
+		csWait 120
 		moveEntity $81,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$81   ; "Oh, there it is!{W1}"
-		setFacing $0,$3
-		setFacing $1,$3
-		setFacing $2,$3
-		setCamDest $2,$3
-		csWait $46
+		setFacing $0,3
+		setFacing $1,3
+		setFacing $2,3
+		setCamDest 2,3
+		csWait 70
 		mapFadeOutToWhite
 		animEntityFadeInOut $80,$6
 		entitySprite $80,$3C
-		entityPosDir $80,$7,$10,$3
+		setPos $80,7,16,3
 		entitySprite $80,$72
 		mapFadeInFromWhite
-		csWait $1E
+		csWait 30
 		nextSingleText $0,$81   ; "It disappeared again.{W1}"
-		setCamDest $2,$A
+		setCamDest 2,10
 		nextSingleText $0,$81   ; "There it is!{W1}"
 		moveEntity $80,$0,$3,$4
 		endMove $8080
 		animEntityFadeInOut $80,$6
-		csWait $14
+		csWait 20
 		hideEntity $80
-		setCamDest $2,$2
-		setFacing $81,$0
+		setCamDest 2,2
+		setFacing $81,0
 		nextSingleText $0,$81   ; "We must hurry to the King!{W1}"
 		moveEntity $81,$FF,$3,$6
 		endMove $8080
 		hideEntity $81
-		csWait $28
+		csWait 40
 		csc_end
 ce_497F6:       dc.w 8
 		dc.w 6

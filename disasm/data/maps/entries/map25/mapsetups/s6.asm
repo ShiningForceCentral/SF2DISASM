@@ -16,8 +16,8 @@ return_5D3A8:
 
 	; End of function ms_map25_InitFunction
 
-cs_5D3AA:       entityPosDir $85,$19,$12,$0
-		entityPosDir $87,$19,$11,$0
+cs_5D3AA:       setPos $85,25,18,0
+		setPos $87,25,17,0
 		csc_end
 cs_5D3B8:       customActscript $85,$FF
 		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
@@ -26,8 +26,8 @@ cs_5D3B8:       customActscript $85,$FF
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setEntityDest $0,$C,$2
-		setFacing $0,$3
+		setEntityDest $0,12,2
+		setFacing $0,3
 		moveEntity $85,$FF,$0,$5
 		endMove $8080
 		moveEntity $85,$FF,$3,$1
@@ -39,6 +39,6 @@ cs_5D3B8:       customActscript $85,$FF
 		moveEntity $85,$FF,$0,$2
 		endMove $8080
 		entityShakeHead $0
-		entityPosDir $85,$19,$12,$0
-		entityPosDir $87,$19,$11,$0
+		setPos $85,25,18,0
+		setPos $87,25,17,0
 		csc_end

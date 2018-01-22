@@ -3,7 +3,7 @@
 ; 0x4ABFE..0x4ACC8 : Cutscene before battle 11
 bbcs_11:        textCursor $9B3
 		setCameraEntity $0
-		loadMapFadeIn $30,$8,$13
+		loadMapFadeIn 48,8,19
 		loadMapEntities ce_4ACA0
 		setActscript $0,$FF,eas_Init
 		setCameraEntity $0
@@ -14,20 +14,20 @@ bbcs_11:        textCursor $9B3
 		moreMove $1,$1
 		endMove $8080
 		nextSingleText $0,$7    ; "You'll come to the foot of{N}Mt. Volcano through this{N}dark cave.{W2}"
-		setFacing $7,$0
-		setFacing $0,$2
+		setFacing $7,0
+		setFacing $0,2
 		nextSingleText $0,$7    ; "But, I heard this cave is{N}home to a hobgoblin.{W1}"
-		csWait $14
+		csWait 20
 		nextSingleText $0,$80   ; "Yes, it is!{W1}"
 		playSound MUSIC_ENEMY_ATTACK
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
-		csWait $5
+		csWait 5
 		setActscript $0,$0,eas_461B6
-		csWait $5
+		csWait 5
 		setActscript $7,$0,eas_461E4
-		csWait $78
-		setFacing $0,$1
+		csWait 120
+		setFacing $0,1
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$7    ; "Wh...Who said that?{W1}"

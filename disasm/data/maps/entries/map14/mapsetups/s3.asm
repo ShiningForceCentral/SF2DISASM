@@ -27,7 +27,7 @@ cs_58E5C:       textCursor $8D5
 		hideText
 		moveEntity $0,$FF,$3,$1
 		endMove $8080
-		csWait $28
+		csWait 40
 		setActscript $83,$FF,eas_46172
 		setActscript $84,$FF,eas_46172
 		setActscript $85,$FF,eas_46172

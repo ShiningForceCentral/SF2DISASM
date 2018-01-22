@@ -2,20 +2,20 @@
 ; ASM FILE data\battles\entries\battle40\cs_afterbattle.asm :
 ; 0x4EA94..0x4ED0E : Cutscene after battle 40
 abcs_battle40:  textCursor $BF9
-		loadMapFadeIn $36,$A,$4
+		loadMapFadeIn 54,10,4
 		loadMapEntities ce_4ECD6
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$D,$8,$0
+		setPos $7,13,8,0
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$F,$6,$3
+		setPos $1F,15,6,3
 		setActscript $1C,$FF,eas_Init
-		entityPosDir $1C,$11,$8,$2
+		setPos $1C,17,8,2
 		jumpIfFlagClear $4C,cs_4EAEE; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		entityPosDir $1A,$3F,$3E,$3
-cs_4EAEE:       setBlocks $B,$6,$B,$1D,$2C,$0
-		setBlocks $0,$34,$A,$7,$D,$A
+		setPos $1A,63,62,3
+cs_4EAEE:       setBlocks 11,6,11,29,44,0
+		setBlocks 0,52,10,7,13,10
 		customActscript $83,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -34,7 +34,7 @@ cs_4EAEE:       setBlocks $B,$6,$B,$1D,$2C,$0
 		setActscript $82,$0,eas_AnimSpeedx2
 		playSound MUSIC_SAD_THEME_1
 		fadeInB
-		csWait $3C
+		csWait 60
 		nextText $0,$83         ; "{LEADER}, you won?{N}You've become so strong.{W2}"
 		nextSingleText $0,$83   ; "I knew you would....{W1}"
 		nextSingleText $C0,$0   ; "Oh, really?{W1}"
@@ -56,77 +56,77 @@ cs_4EAEE:       setBlocks $B,$6,$B,$1D,$2C,$0
 		endMove $8080
 		nextSingleText $0,$83   ; "If possible, I want to{N}relive my life...not as{N}a devil...next time....{W1}"
 		entityFlashWhite $83,$1E
-		entityPosDir $80,$F,$8,$3
+		setPos $80,15,8,3
 		moveEntity $80,$0,$0,$2
 		endMove $8080
-		csWait $8
-		entityPosDir $81,$F,$8,$3
+		csWait 8
+		setPos $81,15,8,3
 		moveEntity $81,$0,$7,$2
 		endMove $8080
-		csWait $8
-		entityPosDir $82,$F,$8,$3
+		csWait 8
+		setPos $82,15,8,3
 		moveEntity $82,$0,$3,$2
 		endMove $8080
-		csWait $8
-		entityPosDir $80,$F,$8,$3
+		csWait 8
+		setPos $80,15,8,3
 		moveEntity $80,$0,$7,$2
 		endMove $8080
-		csWait $8
-		entityPosDir $81,$F,$8,$3
+		csWait 8
+		setPos $81,15,8,3
 		moveEntity $81,$0,$0,$2
 		endMove $8080
-		csWait $8
-		entityPosDir $82,$F,$8,$3
+		csWait 8
+		setPos $82,15,8,3
 		moveEntity $82,$0,$7,$2
 		endMove $8080
-		csWait $8
-		entityPosDir $80,$F,$8,$3
+		csWait 8
+		setPos $80,15,8,3
 		moveEntity $80,$0,$3,$2
 		endMove $8080
-		csWait $8
-		entityPosDir $81,$F,$8,$3
+		csWait 8
+		setPos $81,15,8,3
 		moveEntity $81,$0,$7,$2
 		endMove $8080
-		csWait $8
-		entityPosDir $82,$F,$8,$3
+		csWait 8
+		setPos $82,15,8,3
 		moveEntity $82,$0,$0,$2
 		endMove $8080
-		csWait $8
+		csWait 8
 		hideEntity $80
-		csWait $8
+		csWait 8
 		hideEntity $81
-		csWait $8
+		csWait 8
 		hideEntity $82
 		entityFlashWhite $83,$78
 		hideEntity $83
 		playSound $FD
-		csWait $78
+		csWait 120
 		playSound MUSIC_SAD_THEME_3
 		entityShiver $7
-		setFacing $7,$1
+		setFacing $7,1
 		nextSingleText $0,$7    ; "(Sob, sob)...how sad.{N}{LEADER}, Sir Astral...{W1}"
-		setFacing $1C,$3
+		setFacing $1C,3
 		nextSingleText $0,$1C   ; "Oddler had a pure spirit...{N}I'll miss him.{W1}"
-		setFacing $1F,$1
+		setFacing $1F,1
 		nextSingleText $0,$1F   ; "Don't cry for him now.{N}This is Zeon's doing.{W1}"
-		setFacing $1F,$3
+		setFacing $1F,3
 		nextSingleText $0,$1F   ; "We shall go onward and{N}remember Oddler in our{N}hearts.{W1}"
 		moveEntity $1C,$FF,$2,$1
 		moreMove $3,$1
 		endMove $8080
-		setFacing $1C,$2
+		setFacing $1C,2
 		moveEntity $1F,$FF,$3,$2
 		endMove $8080
 		moveEntity $7,$FF,$3,$1
 		endMove $8080
-		setFacing $7,$0
-		csWait $28
-		setFacing $0,$0
-		csWait $28
-		setFacing $0,$2
-		csWait $28
-		setFacing $0,$1
-		csWait $1E
+		setFacing $7,0
+		csWait 40
+		setFacing $0,0
+		csWait 40
+		setFacing $0,2
+		csWait 40
+		setFacing $0,1
+		csWait 30
 		entityNod $0
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2

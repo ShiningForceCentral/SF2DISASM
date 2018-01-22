@@ -2,38 +2,38 @@
 ; ASM FILE data\scripting\map\cs_intro4.asm :
 ; 0x48A78..0x48FE2 : Intro cutscene 4
 IntroCutscene4: textCursor $1089
-		mapLoad $41,$7,$3
+		mapLoad 65,7,3
 		loadMapEntities ce_48FAA
 		setActscript $0,$FF,eas_Init
 		fadeInFromBlackHalf
-		csWait $28
+		csWait 40
 		moveEntity $81,$0,$3,$2
 		endMove $8080
 		playSound SFX_INTRO_LIGHTNING
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
-		csWait $3C
+		csWait 60
 		textCursor $1089
 		nextSingleText $0,$81   ; "Somebody bring a light to{N}the King's chamber!{D2}"
-		csWait $14
+		csWait 20
 		playSound SFX_DEMON_BREATH
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
-		csWait $1E
-		setFacing $81,$1
+		csWait 30
+		setFacing $81,1
 		nextText $80,$80        ; "Oh...the wind blew out{N}all the candles!{D2}"
 		nextSingleText $80,$80  ; "It's so dark.{N}I can't see a thing.{D2}"
-		csWait $1E
+		csWait 30
 		executeSubroutine ApplyStormEffect
-		setQuake $3
+		setQuake 3
 		flashScreenWhite $A
 		mapFadeOutToWhite
-		csWait $14
+		csWait 20
 		playSound SFX_INTRO_LIGHTNING
-		csWait $14
+		csWait 20
 		mapFadeInFromWhite
 		tintMap
-		setQuake $0
+		setQuake 0
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -45,12 +45,12 @@ IntroCutscene4: textCursor $1089
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
 		nextSingleText $80,$80  ; "What was that?{D2}"
-		csWait $5
+		csWait 5
 		setActscript $81,$0,eas_461B6
-		csWait $50
+		csWait 80
 		moveEntity $81,$FF,$1,$2
 		endMove $8080
-		csWait $28
+		csWait 40
 		setActscript $81,$FF,eas_46172
 		customActscript $81,$FF
 		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
@@ -74,7 +74,7 @@ IntroCutscene4: textCursor $1089
 		moveEntity $80,$FF,$1,$1
 		endMove $8080
 		nextSingleText $80,$80  ; "No, not lightning...{D2}"
-		csWait $14
+		csWait 20
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
 		dc.b $A
@@ -89,12 +89,12 @@ IntroCutscene4: textCursor $1089
 		playSound SFX_DEMON_BREATH
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
-		csWait $1E
+		csWait 30
 		nextSingleText $0,$82   ; "Minister!{D2}"
-		setFacing $81,$2
-		setFacing $80,$2
-		setCamDest $0,$5
-		entityPosDir $82,$3,$9,$3
+		setFacing $81,2
+		setFacing $80,2
+		setCamDest 0,5
+		setPos $82,3,9,3
 		setCameraEntity $82
 		customActscript $82,$FF
 		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
@@ -110,14 +110,14 @@ IntroCutscene4: textCursor $1089
 		moreMove $0,$3
 		moreMove $1,$2
 		endMove $8080
-		setFacing $80,$3
-		setFacing $81,$3
-		csWait $14
+		setFacing $80,3
+		setFacing $81,3
+		csWait 20
 		entityNod $82
 		entityNod $82
-		csWait $14
+		csWait 20
 		setActscript $81,$FF,eas_Init
-		setCamDest $7,$5
+		setCamDest 7,5
 		moveEntity $81,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$81   ; "What is it?{D2}"
@@ -147,13 +147,13 @@ IntroCutscene4: textCursor $1089
 		moreMove $9,$1
 		endMove $8080
 		nextSingleText $0,$82   ; "I'm sure it was closed{N}before the lightning, but...{D2}"
-		csWait $28
-		setFacing $81,$0
-		setFacing $80,$2
-		csWait $28
-		setFacing $81,$3
-		setFacing $80,$3
-		csWait $28
+		csWait 40
+		setFacing $81,0
+		setFacing $80,2
+		csWait 40
+		setFacing $81,3
+		setFacing $80,3
+		csWait 40
 		nextSingleText $0,$81   ; "Strange.{D2}"
 		entityNod $81
 		nextSingleText $0,$81   ; "Sire, I'm going to go and{N}see what happened!{D2}"
@@ -161,9 +161,9 @@ IntroCutscene4: textCursor $1089
 		moveEntity $81,$FF,$3,$1
 		moreMove $0,$1
 		endMove $8080
-		setFacing $80,$2
+		setFacing $80,2
 		nextSingleText $0,$81   ; "We must know the truth.{D2}"
-		csWait $14
+		csWait 20
 		entityNod $80
 		nextSingleText $80,$80  ; "Be careful.{D2}"
 		moveEntity $81,$FF,$2,$1
@@ -187,15 +187,15 @@ IntroCutscene4: textCursor $1089
 		hideEntity $82
 		hideEntity $81
 		setCameraEntity $FFFF
-		csWait $1E
-		setCamDest $7,$5
+		csWait 30
+		setCamDest 7,5
 		setCameraEntity $80
 		playSound SFX_DEMON_BREATH
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
-		csWait $1E
-		setFacing $80,$3
-		csWait $1E
+		csWait 30
+		setFacing $80,3
+		csWait 30
 		nextSingleText $80,$80  ; "Strange, strange indeed!{D2}"
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
@@ -206,33 +206,33 @@ IntroCutscene4: textCursor $1089
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $80,$FF,$1,$2
 		endMove $8080
-		csWait $14
+		csWait 20
 		nextSingleText $80,$80  ; "Lightning at the Ancient{N}Tower.{D2}"
-		setFacing $80,$3
-		csWait $1E
-		setFacing $80,$2
-		csWait $1E
-		setFacing $80,$0
-		csWait $1E
-		setFacing $80,$3
-		csWait $1E
+		setFacing $80,3
+		csWait 30
+		setFacing $80,2
+		csWait 30
+		setFacing $80,0
+		csWait 30
+		setFacing $80,3
+		csWait 30
 		nextSingleText $80,$80  ; "Huh?{N}Did I hear something?{D2}"
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
 		nextSingleText $80,$80  ; "A sealed door that is open.{N}An unusual storm.{N}Everything is so strange.{D2}"
-		csWait $5
+		csWait 5
 		setActscript $80,$0,eas_461B6
-		csWait $3C
+		csWait 60
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
 		nextSingleText $80,$80  ; "What?  I feel as if someone{N}is watching me.{N}It must be my nerves.{D2}"
-		setFacing $80,$1
+		setFacing $80,1
 		playSound SFX_INTRO_LIGHTNING
-		entityPosDir $84,$9,$B,$1
+		setPos $84,9,11,1
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
-		entityPosDir $84,$3F,$3F,$1
-		csWait $3C
+		setPos $84,63,63,1
+		csWait 60
 		nextSingleText $80,$80  ; "I guess it was nothing.{N}I have to get a hold of{N}myself.{D2}"
 		entityShakeHead $80
 		customActscript $80,$FF
@@ -246,37 +246,37 @@ IntroCutscene4: textCursor $1089
 		moveEntity $80,$FF,$1,$1
 		endMove $8080
 		playSound SFX_INTRO_LIGHTNING
-		entityPosDir $84,$9,$B,$1
+		setPos $84,9,11,1
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
-		entityPosDir $84,$3F,$3F,$1
-		csWait $3C
-		setFacing $80,$3
-		csWait $1E
+		setPos $84,63,63,1
+		csWait 60
+		setFacing $80,3
+		csWait 30
 		nextSingleText $80,$80  ; "What was that?{N}Who's there?!{D2}"
 		setActscript $80,$FF,eas_46172
 		moveEntity $80,$FF,$1,$1
 		endMove $8080
 		playSound SFX_INTRO_LIGHTNING
-		entityPosDir $84,$9,$B,$1
+		setPos $84,9,11,1
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
-		entityPosDir $84,$3F,$3F,$1
-		csWait $3C
+		setPos $84,63,63,1
+		csWait 60
 		nextSingleText $80,$80  ; "It's not my imagination!{N}Somebody's in this room!{D2}"
-		csWait $5
+		csWait 5
 		setActscript $80,$0,eas_461B6
-		csWait $50
+		csWait 80
 		playSound SFX_INTRO_LIGHTNING
-		entityPosDir $84,$9,$B,$1
+		setPos $84,9,11,1
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
-		entityPosDir $84,$3F,$3F,$1
-		csWait $3C
-		setFacing $80,$1
-		entityPosDir $83,$9,$2,$3
-		setCamDest $7,$1
-		csWait $1E
+		setPos $84,63,63,1
+		csWait 60
+		setFacing $80,1
+		setPos $83,9,2,3
+		setCamDest 7,1
+		csWait 30
 		setActscript $80,$FF,eas_Init
 		setActscript $80,$FF,eas_Jump
 		setActscript $80,$FF,eas_Jump
@@ -306,19 +306,19 @@ IntroCutscene4: textCursor $1089
 		startEntity $83
 		setCameraEntity $80
 		entityShiver $83
-		csWait $1E
+		csWait 30
 		entityShiver $83
 		entityShiver $83
-		csWait $14
+		csWait 20
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
-		csWait $5
+		csWait 5
 		setActscript $80,$0,eas_461E4
-		csWait $1E
+		csWait 30
 		nextSingleText $80,$80  ; "Somebody...HELP!{D2}"
-		setFacing $80,$1
+		setFacing $80,1
 		entityShiver $83
-		csWait $1E
+		csWait 30
 		entityShiver $83
 		customActscript $85,$FF
 		dc.w $10                ;   0010 SET SPEED X=$14 Y=$14
@@ -328,7 +328,7 @@ IntroCutscene4: textCursor $1089
 		dc.l eas_Idle           
 		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		entityPosDir $85,$C,$5,$3
+		setPos $85,12,5,3
 		moveEntity $85,$0,$3,$4
 		endMove $8080
 		entityFlashWhite $85,$50
@@ -337,13 +337,13 @@ IntroCutscene4: textCursor $1089
 		entityFlashWhite $85,$28
 		nextSingleText $80,$80  ; "Aughhhh!!!{D2}"
 		hideEntity $85
-		csWait $1E
+		csWait 30
 		setActscript $80,$0,eas_RotateRight
-		csWait $32
+		csWait 50
 		moveEntity $80,$FF,$B,$1
 		moreMove $3,$1
 		endMove $8080
-		setFacing $80,$1
+		setFacing $80,1
 		customActscript $80,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -355,14 +355,14 @@ IntroCutscene4: textCursor $1089
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		nextSingleText $80,$80  ; "(Sigh)....{D2}"
 		entityShiver $83
-		csWait $1E
+		csWait 30
 		playSound SFX_INTRO_LIGHTNING
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
-		csWait $28
+		csWait 40
 		entityShiver $83
-		csWait $28
+		csWait 40
 		fadeOutToBlackHalf
 		csc_end
 ce_48FAA:       dc.w $3F

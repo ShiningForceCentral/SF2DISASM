@@ -94,7 +94,7 @@ rjt_cutsceneScriptCommands:
 		dc.w (csc33_setQuakeAmount-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc34_setBlocks-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc35_-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc36_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc36_resetMap-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc37_loadMapAndFadeIn-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
 		dc.w (csc39_fadeInFromBlack-rjt_cutsceneScriptCommands) & $FFFF

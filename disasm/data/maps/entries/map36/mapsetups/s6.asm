@@ -36,14 +36,14 @@ cs_5DA28:       textCursor $CFB
 		setStoryFlag $22        ; Battle 34 unlocked
 		csc_end
 cs_5DA7A:       setCameraEntity $83
-		setEntityDest $0,$4,$17
-		setFacing $0,$1
+		setEntityDest $0,4,23
+		setFacing $0,1
 		moveEntity $83,$FF,$0,$2
 		endMove $8080
 		moveEntity $83,$FF,$3,$1
 		endMove $8080
-		setFacing $0,$0
-		csWait $3C
+		setFacing $0,0
+		csWait 60
 		customActscript $83,$FF
 		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
 		dc.b $10
@@ -55,7 +55,7 @@ cs_5DA7A:       setCameraEntity $83
 		endMove $8080
 		entityShakeHead $83
 		entityShiver $83
-		csWait $78
+		csWait 120
 		entityShiver $83
 		customActscript $83,$FF
 		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8

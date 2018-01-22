@@ -2,22 +2,22 @@
 ; ASM FILE data\battles\entries\battle40\cs_beforebattle.asm :
 ; 0x4E4DC..0x4E8A8 : Cutscene before battle 40
 bbcs_40:        textCursor $BDC
-		loadMapFadeIn $36,$B,$22
+		loadMapFadeIn 54,11,34
 		loadMapEntities ce_4E878
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$F,$28,$1
+		setPos $7,15,40,1
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$10,$28,$1
+		setPos $1F,16,40,1
 		setActscript $1C,$FF,eas_Init
-		entityPosDir $1C,$F,$29,$1
+		setPos $1C,15,41,1
 		setActscript $80,$FF,eas_Init
-		entityPosDir $80,$10,$29,$1
+		setPos $80,16,41,1
 		jumpIfFlagClear $4C,cs_4E544; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		entityPosDir $1A,$3F,$3E,$3
-cs_4E544:       setBlocks $B,$6,$B,$1D,$2C,$0
-		setBlocks $20,$0,$B,$1D,$B,$6
+		setPos $1A,63,62,3
+cs_4E544:       setBlocks 11,6,11,29,44,0
+		setBlocks 32,0,11,29,11,6
 		playSound MUSIC_STOP
 		fadeInB
 		cameraSpeed $30
@@ -48,8 +48,8 @@ cs_4E544:       setBlocks $B,$6,$B,$1D,$2C,$0
 		moreMove $0,$1
 		moreMove $1,$1
 		endMove $8080
-		csWait $1E
-		setCamDest $B,$2
+		csWait 30
+		setCamDest 11,2
 		playSound MUSIC_BATTLE_THEME_3
 		nextSingleText $0,$7    ; "Is that...?{W1}"
 		nextSingleText $C0,$81  ; "Did you forget about me,{N}{LEADER} and {NAME;7}!{W1}"
@@ -62,9 +62,9 @@ cs_4E544:       setBlocks $B,$6,$B,$1D,$2C,$0
 		nextSingleText $0,$7    ; "What do YOU want?{W1}"
 		nextSingleText $C0,$81  ; "Don't talk to me like that.{N}I'm very sad.{W1}"
 		nextSingleText $0,$7    ; "Sad?{N}You've got to be joking!{W1}"
-		setFacing $81,$2
+		setFacing $81,2
 		nextSingleText $C0,$81  ; "Well, yes I am.{N}I'm really quite evil.{W1}"
-		setFacing $81,$3
+		setFacing $81,3
 		nextSingleText $C0,$81  ; "Don't you think so, Red{N}Baron?{W1}"
 		nextSingleText $0,$1C   ; "Uhh...(shiver).{W1}"
 		moveEntity $81,$FF,$3,$1
@@ -81,118 +81,118 @@ cs_4E544:       setBlocks $B,$6,$B,$1D,$2C,$0
 		nextSingleText $C0,$81  ; "Times up!  We need space{N}to battle.{W1}"
 		entityFlashWhite $81,$1E
 		tintMap
-		csWait $14
+		csWait 20
 		flickerOnce
-		csWait $A
+		csWait 10
 		tintMap
-		csWait $14
+		csWait 20
 		flickerOnce
 		setActscript $82,$0,eas_AnimSpeedx2
 		setActscript $82,$FF,eas_46172
-		entityPosDir $82,$10,$8,$1
+		setPos $82,16,8,1
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
-		setBlocks $6,$F,$1,$1,$10,$6
-		entityPosDir $82,$3F,$3F,$1
-		csWait $1E
-		entityPosDir $82,$F,$8,$1
+		setBlocks 6,15,1,1,16,6
+		setPos $82,63,63,1
+		csWait 30
+		setPos $82,15,8,1
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
-		setBlocks $6,$F,$1,$1,$F,$6
-		entityPosDir $82,$3F,$3F,$1
-		csWait $14
-		entityPosDir $82,$11,$9,$1
+		setBlocks 6,15,1,1,15,6
+		setPos $82,63,63,1
+		csWait 20
+		setPos $82,17,9,1
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
-		setBlocks $6,$F,$1,$1,$11,$7
-		csWait $A
-		entityPosDir $82,$10,$9,$1
+		setBlocks 6,15,1,1,17,7
+		csWait 10
+		setPos $82,16,9,1
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
-		setBlocks $6,$F,$1,$1,$10,$7
+		setBlocks 6,15,1,1,16,7
 		hideEntity $82
-		csWait $5
-		setBlocks $6,$F,$1,$1,$F,$7
-		csWait $5
-		setBlocks $6,$F,$1,$1,$E,$7
-		csWait $5
-		setBlocks $6,$F,$1,$1,$12,$8
-		csWait $4
-		setBlocks $6,$F,$1,$1,$11,$8
-		csWait $4
-		setBlocks $6,$F,$1,$1,$10,$8
-		csWait $4
-		setBlocks $6,$F,$1,$1,$F,$8
-		csWait $4
-		setBlocks $6,$F,$1,$1,$E,$8
-		csWait $4
-		setBlocks $6,$F,$1,$1,$D,$8
-		csWait $4
-		setBlocks $6,$F,$1,$1,$13,$9
-		csWait $3
-		setBlocks $6,$F,$1,$1,$12,$9
-		csWait $3
-		setBlocks $6,$F,$1,$1,$11,$9
-		csWait $3
-		setBlocks $6,$F,$1,$1,$10,$9
-		csWait $3
-		setBlocks $6,$F,$1,$1,$F,$9
-		csWait $3
-		setBlocks $6,$F,$1,$1,$E,$9
-		csWait $3
-		setBlocks $6,$F,$1,$1,$D,$9
-		csWait $3
-		setBlocks $6,$F,$1,$1,$C,$9
-		csWait $3
-		setBlocks $6,$F,$1,$1,$13,$A
-		csWait $2
-		setBlocks $6,$F,$1,$1,$12,$A
-		csWait $2
-		setBlocks $6,$F,$1,$1,$11,$A
-		csWait $2
-		setBlocks $6,$F,$1,$1,$10,$A
-		csWait $2
-		setBlocks $6,$F,$1,$1,$F,$A
-		csWait $2
-		setBlocks $6,$F,$1,$1,$E,$A
-		csWait $2
-		setBlocks $6,$F,$1,$1,$D,$A
-		csWait $2
-		setBlocks $6,$F,$1,$1,$C,$A
-		csWait $2
-		setBlocks $6,$F,$1,$1,$15,$B
-		csWait $1
-		setBlocks $6,$F,$1,$1,$13,$B
-		csWait $1
-		setBlocks $6,$F,$1,$1,$12,$B
-		csWait $1
-		setBlocks $6,$F,$1,$1,$11,$B
-		csWait $1
-		setBlocks $6,$F,$1,$1,$10,$B
-		csWait $1
-		setBlocks $6,$F,$1,$1,$F,$B
-		csWait $1
-		setBlocks $6,$F,$1,$1,$E,$B
-		csWait $1
-		setBlocks $6,$F,$1,$1,$D,$B
-		csWait $1
-		setBlocks $6,$F,$1,$1,$C,$B
-		csWait $1
-		setBlocks $2C,$0,$B,$1D,$B,$6
+		csWait 5
+		setBlocks 6,15,1,1,15,7
+		csWait 5
+		setBlocks 6,15,1,1,14,7
+		csWait 5
+		setBlocks 6,15,1,1,18,8
+		csWait 4
+		setBlocks 6,15,1,1,17,8
+		csWait 4
+		setBlocks 6,15,1,1,16,8
+		csWait 4
+		setBlocks 6,15,1,1,15,8
+		csWait 4
+		setBlocks 6,15,1,1,14,8
+		csWait 4
+		setBlocks 6,15,1,1,13,8
+		csWait 4
+		setBlocks 6,15,1,1,19,9
+		csWait 3
+		setBlocks 6,15,1,1,18,9
+		csWait 3
+		setBlocks 6,15,1,1,17,9
+		csWait 3
+		setBlocks 6,15,1,1,16,9
+		csWait 3
+		setBlocks 6,15,1,1,15,9
+		csWait 3
+		setBlocks 6,15,1,1,14,9
+		csWait 3
+		setBlocks 6,15,1,1,13,9
+		csWait 3
+		setBlocks 6,15,1,1,12,9
+		csWait 3
+		setBlocks 6,15,1,1,19,10
+		csWait 2
+		setBlocks 6,15,1,1,18,10
+		csWait 2
+		setBlocks 6,15,1,1,17,10
+		csWait 2
+		setBlocks 6,15,1,1,16,10
+		csWait 2
+		setBlocks 6,15,1,1,15,10
+		csWait 2
+		setBlocks 6,15,1,1,14,10
+		csWait 2
+		setBlocks 6,15,1,1,13,10
+		csWait 2
+		setBlocks 6,15,1,1,12,10
+		csWait 2
+		setBlocks 6,15,1,1,21,11
+		csWait 1
+		setBlocks 6,15,1,1,19,11
+		csWait 1
+		setBlocks 6,15,1,1,18,11
+		csWait 1
+		setBlocks 6,15,1,1,17,11
+		csWait 1
+		setBlocks 6,15,1,1,16,11
+		csWait 1
+		setBlocks 6,15,1,1,15,11
+		csWait 1
+		setBlocks 6,15,1,1,14,11
+		csWait 1
+		setBlocks 6,15,1,1,13,11
+		csWait 1
+		setBlocks 6,15,1,1,12,11
+		csWait 1
+		setBlocks 44,0,11,29,11,6
 		nextSingleText $C0,$81  ; "I'm very sorry, {LEADER},{N}but I must kill you!{W1}"
-		setCamDest $B,$1F
-		setFacing $7,$0
-		setFacing $0,$2
+		setCamDest 11,31
+		setFacing $7,0
+		setFacing $0,2
 		nextSingleText $0,$7    ; "{LEADER}, are we really{N}going to fight Oddler?{W1}"
 		moveEntity $1F,$FF,$2,$1
 		endMove $8080
-		setFacing $1F,$1
-		setFacing $1C,$0
+		setFacing $1F,1
+		setFacing $1C,0
 		nextSingleText $0,$1F   ; "That's enough out of you!{W1}"
 		moveEntity $1F,$FF,$0,$1
 		endMove $8080
-		setFacing $1F,$1
-		setFacing $0,$3
+		setFacing $1F,1
+		setFacing $0,3
 		nextSingleText $0,$1F   ; "{LEADER}, let's do it!{W1}"
 		setActscript $7,$0,eas_Jump
 		entityNod $0

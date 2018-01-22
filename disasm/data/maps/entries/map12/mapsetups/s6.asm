@@ -27,9 +27,9 @@ cs_57D22:       textCursor $C7D
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $0,$C,$1F,$1
-		entityPosDir $7,$D,$1F,$1
-		entityPosDir $1F,$B,$1F,$1
+		setPos $0,12,31,1
+		setPos $7,13,31,1
+		setPos $1F,11,31,1
 		fadeInB
 		moveEntity $0,$0,$1,$5
 		endMove $8080
@@ -38,39 +38,39 @@ cs_57D22:       textCursor $C7D
 		moveEntity $1F,$FF,$1,$5
 		endMove $8080
 		nextSingleText $0,$80   ; "Stop!{W1}"
-		csWait $A
+		csWait 10
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$0,eas_Jump
 		setActscript $1F,$FF,eas_Jump
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$0,eas_Jump
 		setActscript $1F,$FF,eas_Jump
-		csWait $1E
-		csWait $5
+		csWait 30
+		csWait 5
 		setActscript $0,$0,eas_461B6
-		csWait $5
+		csWait 5
 		setActscript $7,$0,eas_461E4
-		csWait $5
+		csWait 5
 		setActscript $1F,$0,eas_461B6
-		csWait $50
+		csWait 80
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
-		setFacing $0,$1
-		setFacing $1F,$1
+		setFacing $0,1
+		setFacing $1F,1
 		nextSingleText $80,$7   ; "Who said that?{W1}"
-		setCamDest $7,$5
+		setCamDest 7,5
 		nextSingleText $80,$7   ; "Wow, what a huge guy!{W1}"
-		csWait $1E
+		csWait 30
 		nextSingleText $0,$80   ; "Leave here!{N}I'll attack you if you don't!{W1}"
-		setCamDest $7,$15
+		setCamDest 7,21
 		moveEntity $7,$FF,$3,$1
 		endMove $8080
-		setFacing $0,$0
-		setFacing $1F,$0
-		setFacing $7,$2
+		setFacing $0,0
+		setFacing $1F,0
+		setFacing $7,2
 		nextText $80,$7         ; "Attack us?!  {LEADER},{N}let's get out of here!{W2}"
 		nextSingleText $80,$7   ; "We don't want to fight him!{W1}"
-		csWait $14
+		csWait 20
 		entityNod $0
 		nextSingleText $80,$7   ; "OK, hurry!{W1}"
 		moveEntity $0,$0,$3,$5

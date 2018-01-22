@@ -2,18 +2,18 @@
 ; ASM FILE data\battles\entries\battle35\cs_beforebattle.asm :
 ; 0x4D6CE..0x4D88A : Cutscene before battle 35
 bbcs_35:        textCursor $B76
-		loadMapFadeIn $4C,$25,$5
+		loadMapFadeIn 76,37,5
 		loadMapEntities ce_4D832
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$2C,$A,$2
+		setPos $7,44,10,2
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$2C,$8,$2
+		setPos $1F,44,8,2
 		setActscript $1E,$FF,eas_Init
-		entityPosDir $1E,$2C,$9,$2
+		setPos $1E,44,9,2
 		jumpIfFlagClear $4C,cs_4D728; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		entityPosDir $1A,$3F,$3E,$3
+		setPos $1A,63,62,3
 cs_4D728:       fadeInB
 		cameraSpeed $30
 		nextSingleText $0,$80   ; "You're still alive?{W1}"
@@ -21,35 +21,35 @@ cs_4D728:       fadeInB
 		setActscript $7,$0,eas_Jump
 		setActscript $1F,$FF,eas_Jump
 		nextSingleText $C0,$1F  ; "Geshp!{W1}"
-		setCamDest $16,$B
-		setFacing $80,$0
+		setCamDest 22,11
+		setFacing $80,0
 		nextSingleText $0,$80   ; "Unbelievable!{N}You really are persistent.{W1}"
 		nextText $C0,$7         ; "We'll never stop!{W2}"
 		nextSingleText $C0,$7   ; "We will not die until we{N}destroy all of you.{W1}"
 		nextText $C0,$1F        ; "{LEADER}, kill him!{W2}"
 		nextSingleText $C0,$1F  ; "We have to kill him now!{W1}"
-		csWait $28
+		csWait 40
 		nextSingleText $0,$80   ; "I'm very sorry, but I have{N}to go.{W1}"
 		animEntityFadeInOut $80,$6
-		setCamDest $16,$14
-		entityPosDir $80,$1C,$18,$3
+		setCamDest 22,20
+		setPos $80,28,24,3
 		animEntityFadeInOut $80,$7
-		csWait $28
-		setFacing $81,$3
-		setFacing $82,$3
-		setFacing $83,$2
-		setFacing $85,$0
-		setFacing $86,$0
-		setFacing $87,$0
-		setFacing $88,$0
-		csWait $14
-		setFacing $80,$2
-		csWait $1E
-		setFacing $80,$1
-		csWait $1E
-		setFacing $80,$0
-		csWait $1E
-		setFacing $80,$3
+		csWait 40
+		setFacing $81,3
+		setFacing $82,3
+		setFacing $83,2
+		setFacing $85,0
+		setFacing $86,0
+		setFacing $87,0
+		setFacing $88,0
+		csWait 20
+		setFacing $80,2
+		csWait 30
+		setFacing $80,1
+		csWait 30
+		setFacing $80,0
+		csWait 30
+		setFacing $80,3
 		nextSingleText $0,$80   ; "Don't let them advance!{W1}"
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$0,eas_Jump
@@ -60,8 +60,8 @@ cs_4D728:       fadeInB
 		setActscript $87,$0,eas_Jump
 		setActscript $88,$0,eas_Jump
 		animEntityFadeInOut $80,$6
-		csWait $32
-		setCamDest $25,$5
+		csWait 50
+		setCamDest 37,5
 		moveEntity $7,$FF,$3,$1
 		moreMove $2,$1
 		endMove $8080

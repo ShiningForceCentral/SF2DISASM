@@ -11,55 +11,55 @@ ms_map15_InitFunction:
 	; End of function ms_map15_InitFunction
 
 cs_5D04E:       textCursor $7D6
-		setFacing $0,$0
-		setEntityDest $7,$18,$11
-		setFacing $7,$0
-		entityPosDir $14,$1F,$21,$1
-		csWait $1
-		setCamDest $1A,$16
+		setFacing $0,0
+		setEntityDest $7,24,17
+		setFacing $7,0
+		setPos $14,31,33,1
+		csWait 1
+		setCamDest 26,22
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $7,$18,$11,$0
-		entityPosDir $1F,$18,$10,$0
-		entityPosDir $0,$18,$12,$0
-		csc2F $14,$FFFF
+		setPos $7,24,17,0
+		setPos $1F,24,16,0
+		setPos $0,24,18,0
+		fly $14,$FFFF
 		moveEntity $14,$0,$1,$8
 		endMove $8080
-		csWait $3C
-		setCamDest $1A,$14
+		csWait 60
+		setCamDest 26,20
 		moveEntity $14,$0,$2,$3
 		endMove $8080
-		setCamDest $14,$14
+		setCamDest 20,20
 		moveEntity $14,$0,$1,$A
 		endMove $8080
-		setCamDest $14,$A
+		setCamDest 20,10
 		moveEntity $14,$0,$0,$4
 		endMove $8080
-		setCamDest $1B,$A
+		setCamDest 27,10
 		moveEntity $14,$0,$3,$5
 		endMove $8080
-		setCamDest $1B,$F
+		setCamDest 27,15
 		moveEntity $14,$0,$2,$13
 		endMove $8080
-		setCamDest $9,$F
+		setCamDest 9,15
 		moveEntity $14,$0,$1,$A
 		endMove $8080
-		setCamDest $9,$5
+		setCamDest 9,5
 		moveEntity $14,$0,$0,$D
 		endMove $8080
-		setCamDest $14,$5
+		setCamDest 20,5
 		moveEntity $14,$0,$3,$7
 		endMove $8080
-		setCamDest $14,$C
-		csWait $3C
-		setEntityDest $14,$1A,$12
-		setFacing $14,$2
+		setCamDest 20,12
+		csWait 60
+		setEntityDest $14,26,18
+		setFacing $14,2
 		nextSingleText $80,$14  ; "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
 		moveEntity $7,$FF,$0,$2
 		endMove $8080
-		setFacing $7,$3
-		setFacing $14,$1
+		setFacing $7,3
+		setFacing $14,1
 		nextSingleText $0,$7    ; "Yes, he's {LEADER},{N}but who are you?{W1}"
 		nextSingleText $80,$14  ; "I'm {NAME;20} of Bedoe.{W1}"
 		entityShiver $7
@@ -83,12 +83,12 @@ cs_5D04E:       textCursor $7D6
 		moreMove $3,$1
 		moreMove $8,$28
 		endMove $8080
-		setFacing $14,$2
+		setFacing $14,2
 		nextSingleText $0,$7    ; "You grew up quickly, huh?{W1}"
 		nextSingleText $80,$14  ; "Yeah, I learned how to fight.{W1}"
 		join $14
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
 		followEntity $14,$0,$5
-		csc2F $14,$0
+		fly $14,$0
 		csc_end

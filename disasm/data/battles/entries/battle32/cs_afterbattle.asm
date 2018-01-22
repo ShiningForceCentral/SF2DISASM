@@ -2,19 +2,19 @@
 ; ASM FILE data\battles\entries\battle32\cs_afterbattle.asm :
 ; 0x4CDB4..0x4CF0C : Cutscene after battle 32
 abcs_battle32:  textCursor $B25
-		loadMapFadeIn $4A,$5,$14
+		loadMapFadeIn 74,5,20
 		loadMapEntities ce_4CEEC
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$B,$19,$1
+		setPos $7,11,25,1
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$9,$19,$1
+		setPos $1F,9,25,1
 		setActscript $16,$FF,eas_Init
-		entityPosDir $16,$B,$1A,$1
+		setPos $16,11,26,1
 		setActscript $1E,$FF,eas_Init
-		entityPosDir $1E,$A,$1A,$1
+		setPos $1E,10,26,1
 		setActscript $17,$FF,eas_Init
-		entityPosDir $17,$A,$16,$3
+		setPos $17,10,22,3
 		fadeInB
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
@@ -26,11 +26,11 @@ abcs_battle32:  textCursor $B25
 		nextSingleText $C0,$17  ; "I can't stand their wicked{N}ways!{W1}"
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
-		setFacing $7,$2
-		setFacing $17,$0
+		setFacing $7,2
+		setFacing $17,0
 		nextSingleText $0,$7    ; "You have the same opinion{N}of them as we do.{W1}"
 		nextSingleText $C0,$17  ; "Please let me join you!{N}I could be a great help to{N}you.{W2}"
-		setFacing $17,$3
+		setFacing $17,3
 		nextSingleText $C0,$17  ; "You need a professional{N}soldier like me.{W1}"
 		nextSingleText $0,$1F   ; "Oh, we welcome you.{W1}"
 		setActscript $7,$FF,eas_46172
@@ -39,13 +39,13 @@ abcs_battle32:  textCursor $B25
 		nextSingleText $0,$7    ; "But, he was on the other{N}side just an minute ago.{W1}"
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
-		setFacing $1F,$0
+		setFacing $1F,0
 		nextSingleText $0,$1F   ; "I don't care, {NAME;7}.{N}He has seen the error of his{N}ways.{W1}"
-		setFacing $1F,$3
+		setFacing $1F,3
 		nextSingleText $0,$1F   ; "{LEADER}, don't you want{N}{NAME;23} to join our{N}force?{W1}"
 		entityNod $0
 		join $17
-		csc54 $17,$0            ; 0054 UNKNOWN
+		joinForceAI $17,$0      ; 0054 JOIN FORCE WITH AI
 		moveEntity $17,$FF,$3,$1
 		endMove $8080
 		nextSingleText $C0,$17  ; "Oh, thank you!{W2}"

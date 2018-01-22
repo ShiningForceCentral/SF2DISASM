@@ -242,7 +242,7 @@ csc17:	macro
 	dc.b \4
 	endm
 	
-entityPosDirFlash:	macro ;alias
+setPosFlash:	macro ;alias
 	csc17 \1,\2,\3,\4
 	endm
 	
@@ -264,7 +264,7 @@ csc19:	macro
 	dc.b \4
 	endm
 
-entityPosDir:	macro ;alias
+setPos:	macro ;alias
 	csc19 \1,\2,\3,\4
 	endm
 	
@@ -485,13 +485,17 @@ csc2F:	macro
 	dc.w \1
 	dc.w \2
 	endm
+		
+fly:	macro ;alias
+	csc2F \1,\2
+	endm
 	
 csc30:	macro
 	dc.w $30
 	dc.w \1
 	endm
 		
-removeEntityShadow:	macro ;alias
+removeShadow:	macro ;alias
 	csc30 \1
 	endm
 	
@@ -555,6 +559,10 @@ setBlocksVar:	macro ;alias
 csc36:	macro
 	dc.w $36
 	endm
+	
+resetMap:	macro ;alias
+	csc36
+	endm	
 	
 csc37:	macro
 	dc.w $37
@@ -779,6 +787,10 @@ csc54:	macro
 	dc.w \1
 	dc.w \2
 	endm
+	
+joinForceAI:	macro ;alias
+	csc54 \1,\2
+	endm	
 	
 csc55:	macro
 	dc.w $55

@@ -236,15 +236,15 @@ nullsub_116:
 
 cs_58116:       textCursor $595
 		nextSingleText $0,$89   ; "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
-		csWait $1E
-		setQuake $8002
-		setQuake $4002
+		csWait 30
+		setQuake 32770
+		setQuake 16386
 		nextSingleText $0,$89   ; "...like that!  And, it's getting{N}worse.{N}What's wrong you ask?{W1}"
-		csWait $3C
+		csWait 60
 		playSound SFX_BIG_DOOR_RUMBLE
-		setQuake $5
+		setQuake 5
 		flashScreenWhite $46
-		setQuake $0
+		setQuake 0
 		entityShakeHead $89
 		nextText $0,$89         ; "Whoa!  Mt. Volcano erupted!{W2}"
 		nextSingleText $0,$89   ; "It's an evil omen.{W1}"

@@ -2,13 +2,13 @@
 ; ASM FILE data\battles\entries\battle30\cs_beforebattle.asm :
 ; 0x4C5E6..0x4C6A8 : Cutscene before battle 30
 bbcs_30:        textCursor $AC8
-		loadMapFadeIn $1,$7,$15
+		loadMapFadeIn 1,7,21
 		loadMapEntities ce_4C690
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$B,$1C,$1
+		setPos $7,11,28,1
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$B,$1B,$1
+		setPos $1F,11,27,1
 		playSound MUSIC_BATTLE_THEME_1
 		fadeInB
 		moveEntity $0,$0,$1,$2
@@ -24,7 +24,7 @@ bbcs_30:        textCursor $AC8
 		endMove $8080
 		entityNod $1F
 		nextSingleText $C0,$1F  ; "Ohhh....{N}He's ugly, isn't he?{W1}"
-		setCamDest $7,$0
+		setCamDest 7,0
 		moveEntity $80,$FF,$2,$2
 		endMove $8080
 		setCameraEntity $80

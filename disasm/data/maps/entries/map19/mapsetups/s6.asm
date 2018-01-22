@@ -22,5 +22,5 @@ return_53102:
 
 	; End of function ms_map19_InitFunction
 
-cs_53104:       entityPosDir $8C,$3F,$3F,$2
+cs_53104:       setPos $8C,63,63,2
 		csc_end

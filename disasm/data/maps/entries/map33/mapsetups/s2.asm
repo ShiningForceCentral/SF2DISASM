@@ -144,7 +144,7 @@ return_5A826:
 
 	; End of function sub_5A7F0
 
-cs_5A828:       setBlocks $11,$D,$1,$1,$9,$5
+cs_5A828:       setBlocks 17,13,1,1,9,5
 		textCursor $76F
 		nextSingleText $FF,$FF  ; "{LEADER} decides to{N}take the fairy with him.{W1}"
 		followEntity $82,$1F,$2

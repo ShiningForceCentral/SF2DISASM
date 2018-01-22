@@ -2,37 +2,37 @@
 ; ASM FILE data\battles\entries\battle33\cs_beforebattle.asm :
 ; 0x4CF0C..0x4D09A : Cutscene before battle 33
 bbcs_33:        textCursor $B32
-		loadMapFadeIn $1F,$16,$1D
+		loadMapFadeIn 31,22,29
 		loadMapEntities ce_4D048
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$1B,$26,$2
+		setPos $7,27,38,2
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$1B,$25,$2
+		setPos $1F,27,37,2
 		setActscript $16,$FF,eas_Init
-		entityPosDir $16,$1B,$24,$2
-		setBlocks $10,$8,$1,$1,$20,$1
-		setBlocks $3,$27,$1,$1,$10,$8
+		setPos $16,27,36,2
+		setBlocks 16,8,1,1,32,1
+		setBlocks 3,39,1,1,16,8
 		playSound MUSIC_BATTLE_THEME_3
 		fadeInB
-		csWait $1E
-		setFacing $0,$1
-		setFacing $7,$1
-		setFacing $1F,$1
+		csWait 30
+		setFacing $0,1
+		setFacing $7,1
+		setFacing $1F,1
 		moveEntity $16,$FF,$1,$1
 		endMove $8080
-		setFacing $16,$3
+		setFacing $16,3
 		nextSingleText $0,$16   ; "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
 		moveEntity $16,$FF,$1,$1
 		endMove $8080
 		nextSingleText $FF,$FF  ; "Vicar {NAME;22} uses{N}the gate key.{W1}"
-		csWait $1E
-		setQuake $2
-		setBlocks $1,$27,$2,$2,$1A,$20
-		csWait $14
-		setQuake $0
+		csWait 30
+		setQuake 2
+		setBlocks 1,39,2,2,26,32
+		csWait 20
+		setQuake 0
 		setCameraEntity $0
-		csWait $32
+		csWait 50
 		moveEntity $0,$FF,$1,$1
 		endMove $8080
 		moveEntity $16,$0,$1,$6
@@ -47,24 +47,24 @@ bbcs_33:        textCursor $B32
 		endMove $8080
 		moveEntity $7,$FF,$1,$8
 		endMove $8080
-		csWait $1E
+		csWait 30
 		cameraSpeed $30
-		setCamDest $5,$8
+		setCamDest 5,8
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
 		nextText $0,$80         ; "Welcome, losers!{W2}"
 		nextSingleText $0,$80   ; "Will you follow the example{N}of the people of Moun and die{N}without resistance?{W1}"
 		nextText $0,$16         ; "No!  I'm too late.{N}I killed a lot of people.{W2}"
 		nextSingleText $0,$16   ; "I can never forgive myself!{W1}"
-		setCamDest $15,$19
+		setCamDest 21,25
 		moveEntity $16,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$16   ; "{LEADER}, please let me{N}fight with you.  They must{N}die!{W1}"
 		join $16
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
-		setFacing $1F,$0
-		setFacing $0,$2
+		setFacing $1F,0
+		setFacing $0,2
 		nextSingleText $0,$1F   ; "{LEADER}, {NAME;22} will be{N}a great asset.{W1}"
 		joinBatParty $16
 		executeSubroutine sub_4D078

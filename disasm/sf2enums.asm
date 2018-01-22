@@ -670,7 +670,7 @@ OUT_TO_BLACK_2: equ $F
 
 ; ---------------------------------------------------------------------------
 
-; enum Facing
+; enum Direction
 RIGHT: equ $0
 UP: equ $1
 LEFT: equ $2

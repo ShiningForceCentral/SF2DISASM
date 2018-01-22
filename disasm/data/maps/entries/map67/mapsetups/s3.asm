@@ -72,67 +72,67 @@ cs_4FB64:       textCursor $9EF
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Jump
 		nextSingleText $0,$1F   ; "Wait!{W1}"
-		setEntityDest $1F,$3C,$1B
-		csWait $5
+		setEntityDest $1F,60,27
+		csWait 5
 		setActscript $1F,$0,eas_461B6
-		csWait $78
-		setCamDest $35,$18
-		setEntityDest $7,$3B,$1B
-		setFacing $7,$0
+		csWait 120
+		setCamDest 53,24
+		setEntityDest $7,59,27
+		setFacing $7,0
 		nextSingleText $C0,$7   ; "What's wrong, Oddler?{W1}"
-		setEntityDest $0,$3C,$1A
-		setFacing $0,$3
-		setFacing $1F,$1
+		setEntityDest $0,60,26
+		setFacing $0,3
+		setFacing $1F,1
 		nextSingleText $0,$1F   ; "{LEADER}...{NAME;7}...can{N}you hear that?{W1}"
 		nextSingleText $C0,$7   ; "Hear what?{W1}"
-		csWait $5
+		csWait 5
 		setActscript $7,$0,eas_461B6
-		csWait $78
-		setFacing $7,$3
+		csWait 120
+		setFacing $7,3
 		nextSingleText $C0,$7   ; "I don't hear anything.{W1}"
 		moveEntity $1F,$FF,$3,$1
 		endMove $8080
-		csWait $5
+		csWait 5
 		setActscript $1F,$0,eas_461B6
-		csWait $78
+		csWait 120
 		nextText $0,$1F         ; "Somebody is crying for help...{W2}"
 		nextSingleText $0,$1F   ; "from...over here.{W1}"
-		setEntityDest $1F,$39,$19
-		entityPosDir $1F,$3F,$3F,$3
-		csWait $28
-		setEntityDest $7,$39,$19
-		entityPosDir $7,$3F,$3F,$3
-		setEntityDest $0,$39,$19
-		entityPosDir $0,$3F,$3F,$3
+		setEntityDest $1F,57,25
+		setPos $1F,63,63,3
+		csWait 40
+		setEntityDest $7,57,25
+		setPos $7,63,63,3
+		setEntityDest $0,57,25
+		setPos $0,63,63,3
 		mapSysEvent $33,$B,$16,$1
 		csc_end
 cs_4FC32:       textCursor $A21
-		newEntity $D,$39,$19,$1,$FF
+		newEntity $D,57,25,1,$FF
 		setActscript $D,$FF,eas_Init
 		moveEntity $D,$FF,$1,$1
 		endMove $8080
-		setFacing $0,$1
-		setFacing $7,$1
-		setFacing $1F,$1
+		setFacing $0,1
+		setFacing $7,1
+		setFacing $1F,1
 		nextSingleText $0,$D    ; "Fairy said, move this rock{N}in this manner, and...{W1}"
-		csWait $1E
+		csWait 30
 		playSound SFX_SECRET_PATH_ROCK
-		csWait $1E
-		setFacing $D,$3
+		csWait 30
+		setFacing $D,3
 		setActscript $D,$FF,eas_Jump
 		setActscript $D,$FF,eas_Jump
 		nextSingleText $0,$D    ; "Got it!  Thanks, fairy!{W1}"
-		setQuake $1
+		setQuake 1
 		playSound SFX_BIG_DOOR_RUMBLE
-		csWait $14
-		setFacing $D,$1
-		csWait $14
+		csWait 20
+		setFacing $D,1
+		csWait 20
 		playSound SFX_DESOUL_HOVERING
-		setBlocks $0,$0,$3,$2,$38,$16
-		csWait $1E
-		setQuake $0
-		csWait $1E
-		setFacing $D,$3
+		setBlocks 0,0,3,2,56,22
+		csWait 30
+		setQuake 0
+		csWait 30
+		setFacing $D,3
 		nextSingleText $0,$D    ; "{LEADER}, come on.{W1}"
 		moveEntity $D,$FF,$1,$1
 		endMove $8080

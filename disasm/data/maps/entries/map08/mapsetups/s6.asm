@@ -30,7 +30,7 @@ cs_563B2:       textCursor $50B
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $81,$FF,$2,$2
 		endMove $8080
-		setFacing $81,$3
+		setFacing $81,3
 		nextSingleText $0,$81   ; "You're a spy from the new{N}town, aren't you?{W1}"
 		moveEntity $81,$FF,$1,$2
 		endMove $8080
@@ -43,15 +43,15 @@ cs_563B2:       textCursor $50B
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setFacing $81,$1
+		setFacing $81,1
 		moveEntity $81,$FF,$1,$8
 		endMove $8080
-		entityPosDir $81,$F,$7,$3
+		setPos $81,15,7,3
 		csc_end
 cs_56422:       textCursor $50E
 		setActscript $7,$FF,eas_Init
-		setEntityDest $7,$E,$A
-		setFacing $7,$1
+		setEntityDest $7,14,10
+		setFacing $7,1
 		setActscript $0,$FF,eas_46172
 		setActscript $7,$FF,eas_46172
 		customActscript $81,$FF
@@ -61,21 +61,13 @@ cs_56422:       textCursor $50E
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		csWait $1E
+		csWait 30
 		moveEntity $0,$0,$3,$1
 		endMove $8080
 		setActscript $80,$FF,eas_BumpDown
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
-		csWait $1E
-		moveEntity $0,$0,$3,$1
-		endMove $8080
-		moveEntity $7,$0,$3,$1
-		endMove $8080
-		setActscript $80,$FF,eas_BumpDown
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
-		csWait $1E
+		csWait 30
 		moveEntity $0,$0,$3,$1
 		endMove $8080
 		moveEntity $7,$0,$3,$1
@@ -83,7 +75,7 @@ cs_56422:       textCursor $50E
 		setActscript $80,$FF,eas_BumpDown
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
-		csWait $1E
+		csWait 30
 		moveEntity $0,$0,$3,$1
 		endMove $8080
 		moveEntity $7,$0,$3,$1
@@ -91,7 +83,15 @@ cs_56422:       textCursor $50E
 		setActscript $80,$FF,eas_BumpDown
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
-		csWait $1E
+		csWait 30
+		moveEntity $0,$0,$3,$1
+		endMove $8080
+		moveEntity $7,$0,$3,$1
+		endMove $8080
+		setActscript $80,$FF,eas_BumpDown
+		moveEntity $80,$FF,$3,$1
+		endMove $8080
+		csWait 30
 		moveEntity $0,$0,$3,$1
 		endMove $8080
 		moveEntity $7,$0,$3,$1
@@ -123,16 +123,16 @@ cs_56422:       textCursor $50E
 		endMove $8080
 		setActscript $7,$FF,eas_Jump
 		nextSingleText $0,$7    ; "You talk too much!{W1}"
-		setFacing $0,$3
+		setFacing $0,3
 		nextText $0,$7          ; "Hey, {LEADER}!{N}Why don't you say something?{W2}"
 		nextSingleText $0,$7    ; "I can't stand this!{W1}"
 		moveEntity $7,$FF,$2,$1
 		moreMove $1,$1
 		endMove $8080
-		setFacing $0,$1
+		setFacing $0,1
 		nextSingleText $0,$7    ; "Hey, you!  I think I{N}understand how you feel,{N}but listen to me!{W1}"
-		setFacing $80,$3
-		setFacing $81,$3
+		setFacing $80,3
+		setFacing $81,3
 		nextSingleText $0,$80   ; "Why?{W1}"
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
@@ -155,14 +155,14 @@ cs_56422:       textCursor $50E
 		fadeOutB
 		loadMapEntities ce_55FBE
 		setActscript $0,$FF,eas_Init
-		setBlocks $20,$2,$1,$1,$19,$C
-		setBlocks $20,$2,$1,$1,$16,$18
-		setBlocks $20,$2,$1,$1,$7,$19
-		setBlocks $20,$3,$2,$1,$6,$F
+		setBlocks 32,2,1,1,25,12
+		setBlocks 32,2,1,1,22,24
+		setBlocks 32,2,1,1,7,25
+		setBlocks 32,3,2,1,6,15
 		setF $2C5               ; set after the mayor in Ribble scene... this flag unlocks the doors
 		executeSubroutine sub_56632
 		followEntity $7,$0,$2
-		csWait $32
+		csWait 50
 		fadeInB
 		csc_end
 

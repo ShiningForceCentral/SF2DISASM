@@ -2,13 +2,13 @@
 ; ASM FILE data\battles\entries\battle28\cs_beforebattle.asm :
 ; 0x4BE8C..0x4C07C : Cutscene before battle 28
 bbcs_28:        textCursor $A65
-		loadMapFadeIn $2F,$0,$4
+		loadMapFadeIn 47,0,4
 		loadMapEntities ce_4C03C
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$0,$9,$0
+		setPos $7,0,9,0
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$0,$7,$0
+		setPos $1F,0,7,0
 		stopEntity $81
 		playSound MUSIC_BATTLE_THEME_3
 		fadeInB
@@ -21,21 +21,21 @@ bbcs_28:        textCursor $A65
 		endMove $8080
 		moveEntity $80,$FF,$0,$3
 		endMove $8080
-		csWait $28
+		csWait 40
 		setActscript $1F,$FF,eas_Jump
 		moveEntity $1F,$FF,$0,$2
 		moreMove $3,$1
 		endMove $8080
-		setFacing $1F,$0
+		setFacing $1F,0
 		nextSingleText $0,$1F   ; "Wow, look at that?{W1}"
-		setCamDest $7,$B
+		setCamDest 7,11
 		entityShiver $82
 		playSound SFX_MONSTER_SCREAM
-		csWait $1E
+		csWait 30
 		entityShiver $83
 		playSound SFX_MONSTER_SCREAM
-		csWait $28
-		setCamDest $0,$6
+		csWait 40
+		setCamDest 0,6
 		moveEntity $7,$FF,$3,$1
 		moreMove $0,$1
 		endMove $8080
@@ -48,11 +48,11 @@ bbcs_28:        textCursor $A65
 		moreMove $0,$1
 		moreMove $3,$1
 		endMove $8080
-		csWait $5
+		csWait 5
 		setActscript $0,$0,eas_461B6
-		csWait $5
+		csWait 5
 		setActscript $7,$0,eas_461E4
-		csWait $64
+		csWait 100
 		setActscript $1F,$FF,eas_Jump
 		customActscript $1F,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
@@ -63,7 +63,7 @@ bbcs_28:        textCursor $A65
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $1F,$0,$3,$2
 		endMove $8080
-		csWait $A
+		csWait 10
 		stopEntity $0
 		customActscript $0,$FF
 		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
@@ -72,11 +72,11 @@ bbcs_28:        textCursor $A65
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setQuake $2
+		setQuake 2
 		playSound SFX_HIT_2
 		moveEntity $0,$FF,$3,$1
 		endMove $8080
-		setFacing $0,$1
+		setFacing $0,1
 		customActscript $0,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -87,20 +87,20 @@ bbcs_28:        textCursor $A65
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		waitIdle $1F
-		setFacing $1F,$0
-		setQuake $0
+		setFacing $1F,0
+		setQuake 0
 		nextText $0,$1F         ; "Look!{W2}"
 		nextSingleText $0,$1F   ; "She's stranded on the{N}bridge.{W1}"
-		setFacing $7,$0
+		setFacing $7,0
 		entityShiver $0
-		setCamDest $7,$15
+		setCamDest 7,21
 		nextSingleText $0,$7    ; "Get away from the bridge{N}before it falls into the{N}river!{W1}"
 		nextText $0,$81         ; "I sprained my ankle!{N}Please help me!{W2}"
 		nextSingleText $0,$81   ; "I can't stand up!{W1}"
-		setCamDest $0,$6
-		setFacing $1F,$3
+		setCamDest 0,6
+		setFacing $1F,3
 		setActscript $1F,$FF,eas_Jump
-		csWait $1E
+		csWait 30
 		setActscript $0,$FF,eas_Init
 		startEntity $0
 		entityShakeHead $0

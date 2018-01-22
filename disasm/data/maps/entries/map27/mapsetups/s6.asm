@@ -14,29 +14,29 @@ cs_59FB8:       textCursor $6C5
 		setActscript $1F,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		cameraSpeed $30
-		setCamDest $16,$F
-		setEntityDest $1F,$1A,$14
-		csWait $5
+		setCamDest 22,15
+		setEntityDest $1F,26,20
+		csWait 5
 		setActscript $1F,$0,eas_461B6
-		csWait $78
+		csWait 120
 		nextSingleText $0,$1F   ; "(Sniff, sniff)...{N}It smells like a ditch!{W1}"
-		setEntityDest $7,$1B,$14
-		setFacing $1F,$0
+		setEntityDest $7,27,20
+		setFacing $1F,0
 		entityShiver $7
 		nextSingleText $0,$7    ; "Is this the smell of the{N}devils that they were{N}talking about?{W1}"
-		setCamDest $24,$11
-		setEntityDest $81,$29,$15
+		setCamDest 36,17
+		setEntityDest $81,41,21
 		nextSingleText $C0,$81  ; "Hee, hee!{W1}"
 		setActscript $80,$0,eas_RotateRightHighSpeed
 		setActscript $81,$0,eas_RotateRightHighSpeed
 		setActscript $82,$0,eas_RotateRightHighSpeed
-		csWait $28
+		csWait 40
 		setActscript $80,$FF,eas_Init
 		setActscript $81,$FF,eas_Init
 		setActscript $82,$FF,eas_Init
-		setFacing $80,$2
-		setFacing $81,$2
-		setFacing $82,$2
+		setFacing $80,2
+		setFacing $81,2
+		setFacing $82,2
 		setActscript $80,$0,eas_Jump
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$FF,eas_Jump

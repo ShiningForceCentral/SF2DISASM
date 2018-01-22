@@ -60,12 +60,12 @@ loc_5EB3C:
 
 cs_5EB44:       textCursor $E73
 		setCameraEntity $FFFF
-		reloadMap $8,$2
+		reloadMap 8,2
 		loadMapEntities ce_5F19E
 		setActscript $0,$FF,eas_Init
-		csWait $3C
+		csWait 60
 		playSound MUSIC_WITCH
-		csWait $1E
+		csWait 30
 		setActscript $80,$0,eas_Transparent
 		fadeInFromBlackHalf
 		nextSingleText $0,$80   ; "{LEADER} is almost here{N}already?{W1}"
@@ -88,7 +88,7 @@ cs_5EB44:       textCursor $E73
 		nextSingleText $80,$81  ; "Yes, sir!{W1}"
 		animEntityFadeInOut $81,$6
 		nextSingleText $0,$82   ; "That Geshp!  He wants{N}everything.{W1}"
-		entityPosDir $82,$9,$9,$3
+		setPos $82,9,9,3
 		animEntityFadeInOut $82,$7
 		moveEntity $82,$FF,$0,$4
 		moreMove $1,$1
@@ -102,7 +102,7 @@ cs_5EB44:       textCursor $E73
 		nextSingleText $0,$82   ; "We must never underestimate{N}him.{W1}"
 		nextSingleText $0,$80   ; "Anyway, it will be a{N}fantastic show!  Ha, ha!{W1}"
 		csc_end
-cs_5EBFC:       loadMapFadeIn $35,$8,$E
+cs_5EBFC:       loadMapFadeIn 53,8,14
 		textCursor $E8B
 		loadMapEntities ce_5F1DE
 		setActscript $0,$FF,eas_Init
@@ -152,14 +152,14 @@ cs_5EBFC:       loadMapFadeIn $35,$8,$E
 		endMove $8080
 		moveEntity $88,$0,$0,$3
 		endMove $8080
-		setFacing $80,$2
-		csWait $1E
-		setFacing $80,$0
-		csWait $1E
+		setFacing $80,2
+		csWait 30
+		setFacing $80,0
+		csWait 30
 		entityShiver $80
 		nextSingleText $0,$80   ; "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
-		setCamDest $A,$E
-		entityPosDir $81,$F,$10,$3
+		setCamDest 10,14
+		setPos $81,15,16,3
 		animEntityFadeInOut $81,$7
 		nextSingleText $80,$81  ; "How are the Prism Flowers?{W1}"
 		nextSingleText $0,$80   ; "They're ready!{W1}"
@@ -169,25 +169,25 @@ cs_5EBFC:       loadMapFadeIn $35,$8,$E
 		moveEntity $81,$FF,$0,$2
 		moreMove $1,$2
 		endMove $8080
-		setFacing $81,$0
+		setFacing $81,0
 		nextText $80,$81        ; "Now, c'mon Granseal losers!{W2}"
 		nextSingleText $80,$81  ; "The Prism Flowers are waiting{N}for you!  Hee, heee!{W1}"
 		entityNod $81
 		entityNod $81
 		csc_end
 cs_5ED06:       textCursor $E91
-		loadMapFadeIn $49,$0,$0
+		loadMapFadeIn 73,0,0
 		loadMapEntities ce_5F1BE
 		setActscript $0,$FF,eas_Init
 		executeSubroutine sub_5F31E
 		playSound MUSIC_MITULA_SHRINE
-		setBlocks $0,$A,$16,$A,$2A,$A
+		setBlocks 0,10,22,10,42,10
 		fadeInB
 		executeSubroutine sub_5FD92
 		nextSingleText $80,$1A  ; "There's Grans Island!{W1}"
 		nextSingleText $80,$7   ; "Alright!{W1}"
 		nextSingleText $0,$1F   ; "We've finally come home.{W1}"
-		loadMapFadeIn $35,$A,$D
+		loadMapFadeIn 53,10,13
 		loadMapEntities ce_5F23E
 		setActscript $0,$FF,eas_Init
 		playSound MUSIC_BATTLE_THEME_1
@@ -197,12 +197,12 @@ cs_5ED06:       textCursor $E91
 		stopEntity $84
 		fadeInB
 		nextSingleText $80,$81  ; "I see the Nazca Ship!{N}Everybody, get ready!{W1}"
-		loadMapFadeIn $49,$0,$0
+		loadMapFadeIn 73,0,0
 		loadMapEntities ce_5F1BE
 		setActscript $0,$FF,eas_Init
 		executeSubroutine sub_5F31E
 		playSound MUSIC_MITULA_SHRINE
-		setBlocks $0,$A,$16,$A,$2A,$A
+		setBlocks 0,10,22,10,42,10
 		fadeInB
 		executeSubroutine sub_5FD92
 		nextSingleText $0,$1F   ; "What's that?  I saw a flash{N}of light over there.{W1}"
@@ -211,7 +211,7 @@ cs_5ED06:       textCursor $E91
 		nextSingleText $0,$1F   ; "Someday, {NAME;7}....{W1}"
 		csc_end
 cs_5EDB8:       textCursor $E99
-		loadMapFadeIn $35,$A,$D
+		loadMapFadeIn 53,10,13
 		loadMapEntities ce_5F28E
 		setActscript $0,$FF,eas_Init
 		playSound MUSIC_ENEMY_ATTACK
@@ -228,71 +228,71 @@ cs_5EDB8:       textCursor $E99
 		stopEntity $8F
 		stopEntity $90
 		fadeInB
-		setFacing $81,$2
+		setFacing $81,2
 		nextSingleText $80,$81  ; "NOW!{W1}"
 		moveEntity $81,$FF,$0,$1
 		endMove $8080
 		nextSingleText $80,$81  ; "Shoot them!  Shoot them!{W1}"
 		playSound SFX_BATTLEFIELD_DEATH
-		entityPosDir $85,$C,$10,$2
-		csWait $1E
-		setFacing $85,$1
+		setPos $85,12,16,2
+		csWait 30
+		setFacing $85,1
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-		entityPosDir $85,$D,$F,$1
+		setPos $85,13,15,1
 		moveEntity $85,$0,$4,$A
 		endMove $8080
 		flashScreenWhite $2
-		entityPosDir $86,$D,$F,$1
+		setPos $86,13,15,1
 		moveEntity $86,$0,$4,$A
 		endMove $8080
-		csWait $14
+		csWait 20
 		playSound SFX_BATTLEFIELD_DEATH
-		entityPosDir $87,$D,$11,$2
-		csWait $1E
-		setFacing $87,$1
+		setPos $87,13,17,2
+		csWait 30
+		setFacing $87,1
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-		entityPosDir $87,$E,$10,$1
+		setPos $87,14,16,1
 		moveEntity $87,$0,$4,$A
 		endMove $8080
 		flashScreenWhite $2
-		entityPosDir $88,$E,$10,$1
+		setPos $88,14,16,1
 		moveEntity $88,$0,$4,$A
 		endMove $8080
 		playSound SFX_BATTLEFIELD_DEATH
-		entityPosDir $89,$E,$13,$2
-		csWait $1E
-		setFacing $89,$1
+		setPos $89,14,19,2
+		csWait 30
+		setFacing $89,1
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-		entityPosDir $89,$F,$12,$1
+		setPos $89,15,18,1
 		moveEntity $89,$0,$4,$A
 		endMove $8080
 		flashScreenWhite $2
-		entityPosDir $8A,$F,$12,$1
+		setPos $8A,15,18,1
 		moveEntity $8A,$0,$4,$A
 		endMove $8080
-		csWait $A
+		csWait 10
 		playSound SFX_BATTLEFIELD_DEATH
-		entityPosDir $8B,$F,$14,$2
-		csWait $1E
-		setFacing $8B,$1
+		setPos $8B,15,20,2
+		csWait 30
+		setFacing $8B,1
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-		entityPosDir $8B,$10,$13,$1
+		setPos $8B,16,19,1
 		moveEntity $8B,$0,$4,$A
 		endMove $8080
 		flashScreenWhite $2
-		entityPosDir $8C,$10,$13,$1
+		setPos $8C,16,19,1
 		moveEntity $8C,$0,$4,$A
 		endMove $8080
 		playSound SFX_BATTLEFIELD_DEATH
-		entityPosDir $8B,$C,$10,$2
-		csWait $1E
-		setFacing $8B,$1
+		setPos $8B,12,16,2
+		csWait 30
+		setFacing $8B,1
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-		entityPosDir $8B,$D,$F,$1
+		setPos $8B,13,15,1
 		moveEntity $8B,$0,$4,$A
 		endMove $8080
 		flashScreenWhite $2
-		entityPosDir $8C,$D,$F,$1
+		setPos $8C,13,15,1
 		moveEntity $8C,$FF,$4,$A
 		endMove $8080
 		csc_end
@@ -310,17 +310,17 @@ eas_5EF46:      dc.w $1E                ; 001E SET ANIM SPEED X2 $FFFF
 		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 cs_5EF60:       textCursor $E9B
-		loadMapFadeIn $25,$4,$6
-		loadEntitiesFromMapSetup $9,$B,$3
+		loadMapFadeIn 37,4,6
+		loadEntitiesFromMapSetup 9,11,3
 		executeSubroutine sub_47948
-		entityPosDir $1A,$8,$A,$0
+		setPos $1A,8,10,0
 		executeSubroutine sub_5F32E
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
 		setActscript $1A,$FF,eas_Init
-		entityPosDir $80,$9,$C,$1
-		entityPosDir $7,$A,$C,$1
-		entityPosDir $1A,$A,$B,$2
+		setPos $80,9,12,1
+		setPos $7,10,12,1
+		setPos $1A,10,11,2
 		fadeInB
 		entityShiver $80
 		nextSingleText $0,$80   ; "I did see something!{W1}"
@@ -329,53 +329,53 @@ cs_5EF60:       textCursor $E9B
 		nextSingleText $80,$1A  ; "Sir Astral!  {LEADER}!{N}Something is coming straight{N}towards us!{W1}"
 		nextSingleText $0,$80   ; "What is it?{W1}"
 		playSound SFX_BATTLEFIELD_DEATH
-		setQuake $3
+		setQuake 3
 		flashScreenWhite $14
-		setQuake $1
-		csWait $A
-		setQuake $0
+		setQuake 1
+		csWait 10
+		setQuake 0
 		moveEntity $7,$FF,$0,$1
 		moreMove $E,$1
 		moreMove $F,$1
 		moreMove $E,$1
 		moreMove $F,$1
 		endMove $8080
-		setFacing $7,$2
+		setFacing $7,2
 		nextSingleText $80,$7   ; "Oooouu!!  What was that?!{N}Lightning?{W1}"
-		setFacing $0,$0
-		setFacing $1A,$3
+		setFacing $0,0
+		setFacing $1A,3
 		nextText $80,$1A        ; "An attack from the ground.{W2}"
 		nextSingleText $80,$1A  ; "I can't control the ship!{W1}"
 		playSound SFX_BATTLEFIELD_DEATH
-		setQuake $3
+		setQuake 3
 		flashScreenWhite $14
-		setQuake $1
-		csWait $A
-		setQuake $0
-		csWait $A
+		setQuake 1
+		csWait 10
+		setQuake 0
+		csWait 10
 		playSound SFX_BATTLEFIELD_DEATH
-		setQuake $3
+		setQuake 3
 		flashScreenWhite $14
-		setQuake $1
-		csWait $A
+		setQuake 1
+		csWait 10
 		nextText $80,$1A        ; "We've sustained damage to{N}the engine!{W2}"
 		nextSingleText $80,$1A  ; "We might crash!{W1}"
 		moveEntity $80,$FF,$0,$1
 		endMove $8080
-		setFacing $80,$1
+		setFacing $80,1
 		entityShiver $80
 		nextText $0,$80         ; "Crash?!{W2}"
 		nextSingleText $80,$1A  ; "Geshp's trap!  Darn!{W1}"
 		playSound SFX_BATTLEFIELD_DEATH
-		setQuake $3
+		setQuake 3
 		flashScreenWhite $14
-		setQuake $1
-		csWait $A
+		setQuake 1
+		csWait 10
 		playSound SFX_BATTLEFIELD_DEATH
-		setQuake $3
+		setQuake 3
 		flashScreenWhite $14
-		setQuake $1
-		csWait $A
+		setQuake 1
+		csWait 10
 		setActscript $7,$FF,eas_Jump
 		setActscript $7,$FF,eas_Jump
 		nextText $80,$7         ; "I don't want to crash!{W2}"
@@ -383,21 +383,21 @@ cs_5EF60:       textCursor $E9B
 		nextSingleText $0,$80   ; "{NAME;26}, can you land on{N}that cape before the ship{N}crashes?{W1}"
 		nextSingleText $80,$1A  ; "I'm not sure,{W2}"
 		playSound SFX_BATTLEFIELD_DEATH
-		setQuake $3
+		setQuake 3
 		flashScreenWhite $14
-		setQuake $1
-		csWait $A
+		setQuake 1
+		csWait 10
 		nextSingleText $80,$1A  ; "but I'll try.{W1}"
 		playSound SFX_BATTLEFIELD_DEATH
-		setQuake $3
+		setQuake 3
 		flashScreenWhite $14
-		setQuake $1
-		csWait $A
-		setQuake $3
+		setQuake 1
+		csWait 10
+		setQuake 3
 		executeSubroutine sub_5F338
 		fadeOutB
-		setQuake $0
-		mapLoad $4B,$14,$E
+		setQuake 0
+		mapLoad 75,20,14
 		loadMapEntities ce_5F1CE
 		setActscript $0,$FF,eas_Init
 		setCameraEntity $80
@@ -414,18 +414,18 @@ cs_5EF60:       textCursor $E9B
 		executeSubroutine csub_5F326
 		fadeInB
 		executeSubroutine sub_5FD92
-		csWait $96
+		csWait 150
 		playSound $FD
 		executeSubroutine sub_5F16C
-		setQuake $1
+		setQuake 1
 		playSound SFX_INTRO_LIGHTNING
 		flashScreenWhite $3C
 		waitIdle $80
-		setBlocks $38,$3B,$4,$5,$C,$11
-		csWait $78
-		setQuake $0
+		setBlocks 56,59,4,5,12,17
+		csWait 120
+		setQuake 0
 		executeSubroutine csub_5F14C
-		csWait $78
+		csWait 120
 		mapSysEvent $25,$8,$C,$3
 		csc_end
 

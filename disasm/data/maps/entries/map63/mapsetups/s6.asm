@@ -17,73 +17,73 @@ return_5CA5C:
 	; End of function ms_map63_InitFunction
 
 cs_5CA5E:       entitySprite $1D,$B0
-		setFacing $1D,$3
+		setFacing $1D,3
 		stopEntity $1D
 		csc_end
-cs_5CA6E:       setBlocks $10,$36,$1,$1,$D,$2B
+cs_5CA6E:       setBlocks 16,54,1,1,13,43
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $14
-		setBlocks $10,$36,$1,$1,$D,$2C
+		csWait 20
+		setBlocks 16,54,1,1,13,44
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $12
-		setBlocks $10,$36,$1,$1,$D,$2D
+		csWait 18
+		setBlocks 16,54,1,1,13,45
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $10
-		setBlocks $10,$36,$1,$1,$D,$2E
+		csWait 16
+		setBlocks 16,54,1,1,13,46
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $E
-		setBlocks $10,$36,$1,$1,$D,$2F
+		csWait 14
+		setBlocks 16,54,1,1,13,47
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $C
-		setBlocks $10,$36,$1,$1,$D,$30
+		csWait 12
+		setBlocks 16,54,1,1,13,48
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $A
-		setBlocks $10,$36,$1,$1,$E,$30
+		csWait 10
+		setBlocks 16,54,1,1,14,48
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $8
-		setBlocks $10,$36,$1,$1,$F,$30
+		csWait 8
+		setBlocks 16,54,1,1,15,48
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $6
-		setBlocks $10,$36,$1,$1,$F,$31
+		csWait 6
+		setBlocks 16,54,1,1,15,49
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $5
-		setBlocks $10,$36,$1,$1,$F,$32
+		csWait 5
+		setBlocks 16,54,1,1,15,50
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $4
-		setBlocks $10,$36,$1,$1,$F,$33
+		csWait 4
+		setBlocks 16,54,1,1,15,51
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $3
-		setBlocks $10,$36,$1,$1,$F,$34
+		csWait 3
+		setBlocks 16,54,1,1,15,52
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $2
-		setBlocks $10,$36,$1,$1,$F,$35
+		csWait 2
+		setBlocks 16,54,1,1,15,53
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $1
-		setBlocks $10,$36,$1,$1,$F,$36
+		csWait 1
+		setBlocks 16,54,1,1,15,54
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $1
+		csWait 1
 		csc_end
-cs_5CB34:       setBlocksVar $10,$35,$1,$1,$F,$36
-		setBlocks $C,$2B,$1,$1,$D,$2B
-		csWait $1E
-		setBlocksVar $10,$35,$1,$1,$F,$35
-		setBlocks $10,$35,$1,$1,$D,$2C
-		csWait $19
-		setBlocksVar $10,$35,$1,$1,$F,$34
-		setBlocks $10,$35,$1,$1,$D,$2D
-		csWait $14
-		setBlocksVar $10,$35,$1,$1,$F,$33
-		setBlocks $10,$35,$1,$1,$D,$2E
-		csWait $F
-		setBlocksVar $10,$35,$1,$1,$F,$32
-		setBlocks $10,$35,$1,$1,$D,$2F
-		csWait $A
-		setBlocksVar $10,$35,$1,$1,$F,$31
-		setBlocks $10,$35,$1,$1,$D,$30
-		csWait $5
-		setBlocksVar $10,$35,$1,$1,$F,$30
-		setBlocks $10,$35,$1,$1,$E,$30
-		csWait $1
+cs_5CB34:       setBlocksVar 16,53,1,1,15,54
+		setBlocks 12,43,1,1,13,43
+		csWait 30
+		setBlocksVar 16,53,1,1,15,53
+		setBlocks 16,53,1,1,13,44
+		csWait 25
+		setBlocksVar 16,53,1,1,15,52
+		setBlocks 16,53,1,1,13,45
+		csWait 20
+		setBlocksVar 16,53,1,1,15,51
+		setBlocks 16,53,1,1,13,46
+		csWait 15
+		setBlocksVar 16,53,1,1,15,50
+		setBlocks 16,53,1,1,13,47
+		csWait 10
+		setBlocksVar 16,53,1,1,15,49
+		setBlocks 16,53,1,1,13,48
+		csWait 5
+		setBlocksVar 16,53,1,1,15,48
+		setBlocks 16,53,1,1,14,48
+		csWait 1
 		csc_end
 cs_5CBB4:       textCursor $1053
 		nextSingleText $FF,$FF  ; "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
@@ -91,24 +91,24 @@ cs_5CBB4:       textCursor $1053
 		startEntity $1D
 		nextSingleText $0,$1D   ; "O...ooo...wow!{W1}"
 		setActscript $1D,$FF,eas_Jump
-		setQuake $2
+		setQuake 2
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $14
-		setQuake $0
-		csWait $28
-		setFacing $1D,$2
-		csWait $14
-		setFacing $1D,$1
-		csWait $14
-		setFacing $1D,$0
-		csWait $14
-		setFacing $1D,$3
+		csWait 20
+		setQuake 0
+		csWait 40
+		setFacing $1D,2
+		csWait 20
+		setFacing $1D,1
+		csWait 20
+		setFacing $1D,0
+		csWait 20
+		setFacing $1D,3
 		setActscript $1D,$FF,eas_Jump
-		setQuake $2
+		setQuake 2
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
-		csWait $14
-		setQuake $0
-		csWait $1E
+		csWait 20
+		setQuake 0
+		csWait 30
 		nextText $0,$1D         ; "That feels good....{N}My power is back!{W1}"
 		nextText $0,$1D         ; "Thank you.{N}I can move again!{N}How can I express...{W1}"
 		nextSingleText $0,$1D   ; "Oh, yes!  I'll join you!{N}I'll protect you!{W1}"
@@ -117,92 +117,92 @@ cs_5CBB4:       textCursor $1053
 		csc_end
 cs_5CC26:       entityFlashWhite $0,$32
 		setActscript $0,$0,eas_RotateRightHighSpeed
-		csWait $1E
+		csWait 30
 		executeSubroutine FadeOutToWhite
-		mapLoad $40,$0,$0
-		loadEntitiesFromMapSetup $5,$4,$1
+		mapLoad 64,0,0
+		loadEntitiesFromMapSetup 5,4,1
 		executeSubroutine csub_5CDDC
 		setActscript $0,$0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
-		csWait $1E
+		csWait 30
 		executeSubroutine sub_5CDEC
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDEC
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDEC
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDEC
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDEC
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDEC
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDEC
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDEC
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDEC
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDEC
-		csWait $1E
+		csWait 30
 		executeSubroutine FadeOutToWhite
-		csWait $28
+		csWait 40
 		executeSubroutine sub_5CDF8
-		csWait $2
-		mapLoad $3F,$3,$3
-		loadEntitiesFromMapSetup $8,$7,$1
+		csWait 2
+		mapLoad 63,3,3
+		loadEntitiesFromMapSetup 8,7,1
 		setActscript $0,$0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
-		csWait $1E
+		csWait 30
 		entityFlashWhite $0,$32
 		setActscript $0,$FF,eas_Init
 		startEntity $0
 		csc_end
 cs_5CCF6:       entityFlashWhite $0,$32
 		setActscript $0,$0,eas_RotateRightHighSpeed
-		csWait $1E
+		csWait 30
 		executeSubroutine FadeOutToWhite
-		mapLoad $40,$0,$0
-		loadEntitiesFromMapSetup $5,$4,$1
+		mapLoad 64,0,0
+		loadEntitiesFromMapSetup 5,4,1
 		executeSubroutine sub_5CDE4
 		setActscript $0,$0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
-		csWait $1E
+		csWait 30
 		executeSubroutine sub_5CDF2
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDF2
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDF2
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDF2
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDF2
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDF2
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDF2
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDF2
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDF2
-		csWait $14
+		csWait 20
 		executeSubroutine sub_5CDF2
-		csWait $1E
+		csWait 30
 		executeSubroutine FadeOutToWhite
-		csWait $28
+		csWait 40
 		executeSubroutine sub_5CDF8
-		csWait $2
-		mapLoad $3F,$5,$11
-		loadEntitiesFromMapSetup $A,$15,$1
+		csWait 2
+		mapLoad 63,5,17
+		loadEntitiesFromMapSetup 10,21,1
 		setActscript $0,$0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
-		csWait $1E
+		csWait 30
 		entityFlashWhite $0,$32
 		setActscript $0,$FF,eas_Init
 		startEntity $0
 		jumpIfFlagSet $1D,cs_5CDDA; Claude joined
 		entitySprite $1D,$B0
-		setFacing $1D,$3
+		setFacing $1D,3
 		stopEntity $1D
 cs_5CDDA:       csc_end
 

@@ -23,9 +23,9 @@ return_540BE:
 cs_540C0:       textCursor $32B
 		setActscript $0,$FF,eas_Init
 		setActscript $4,$FF,eas_Init
-		entityPosDir $80,$7,$4,$3
-		entityPosDir $0,$6,$B,$1
-		entityPosDir $4,$5,$B,$1
+		setPos $80,7,4,3
+		setPos $0,6,11,1
+		setPos $4,5,11,1
 		customActscript $80,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -36,33 +36,33 @@ cs_540C0:       textCursor $32B
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		stopEntity $80
-		reloadMap $0,$4
+		reloadMap 0,4
 		fadeInB
-		csWait $32
-		setFacing $0,$2
-		setFacing $4,$0
-		csWait $1E
+		csWait 50
+		setFacing $0,2
+		setFacing $4,0
+		csWait 30
 		nextSingleText $0,$4    ; "This is Hawel's house.{W1}"
 		moveEntity $4,$FF,$2,$1
 		moreMove $1,$1
 		moreMove $C,$14
 		endMove $8080
 		nextSingleText $0,$4    ; "Sir Hawel!{N}Granseal friends are here!{W1}"
-		csWait $46
-		setFacing $4,$0
-		csWait $28
+		csWait 70
+		setFacing $4,0
+		csWait 40
 		nextSingleText $0,$4    ; "Strange...{N}There's no answer.{W2}{N}Has he gone somewhere?{N}Well, why don't you wait{N}for him inside?{W1}"
 		entityNod $0
 		moveEntity $0,$FF,$2,$2
 		endMove $8080
-		roofEvent $4,$9
-		stepEvent $4,$9
-		stepEvent $B,$9
+		roofEvent 4,9
+		stepEvent 4,9
+		stepEvent 11,9
 		moveEntity $4,$0,$1,$3
 		endMove $8080
 		moveEntity $0,$FF,$1,$3
 		endMove $8080
-		csWait $1E
+		csWait 30
 		customActscript $4,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -72,24 +72,24 @@ cs_540C0:       textCursor $32B
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $4,$FF,$0,$1
 		endMove $8080
-		setFacing $4,$1
+		setFacing $4,1
 		playSound $FE
 		nextSingleText $0,$4    ; "Wh...who are you?{N}Oh, Sir Hawel!{W1}"
 		playSound MUSIC_ENEMY_ATTACK
-		setCamDest $2,$0
-		setFacing $81,$3
-		setFacing $82,$3
+		setCamDest 2,0
+		setFacing $81,3
+		setFacing $82,3
 		nextSingleText $0,$81   ; "Oops!  You came back early!{W1}"
 		moveEntity $4,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$4    ; "You!  What did you{N}do to Sir Hawel?!{W1}"
-		csWait $1E
-		setFacing $81,$0
-		setFacing $82,$2
-		csWait $1E
-		setFacing $81,$3
-		setFacing $82,$3
-		csWait $1E
+		csWait 30
+		setFacing $81,0
+		setFacing $82,2
+		csWait 30
+		setFacing $81,3
+		setFacing $82,3
+		csWait 30
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$FF,eas_Jump
 		setActscript $81,$0,eas_Jump
@@ -136,7 +136,7 @@ cs_540C0:       textCursor $32B
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		hideEntity $81
 		hideEntity $82
-		csWait $3C
+		csWait 60
 		setActscript $4,$FF,eas_Init
 		moveEntity $4,$FF,$0,$1
 		endMove $8080
@@ -144,7 +144,7 @@ cs_540C0:       textCursor $32B
 		nextSingleText $0,$80   ; "Ohhh...{NAME;4}....{W1}"
 		moveEntity $4,$FF,$2,$1
 		endMove $8080
-		setFacing $4,$1
+		setFacing $4,1
 		nextSingleText $0,$4    ; "Sir...you're alive!{W1}"
 		playSound MUSIC_SAD_THEME_1
 		nextSingleText $0,$80   ; "...It's no use running after{N}them....{W1}"
@@ -158,11 +158,11 @@ cs_540C0:       textCursor $32B
 		moveEntity $0,$FF,$0,$2
 		moreMove $1,$3
 		endMove $8080
-		setFacing $0,$0
-		setFacing $4,$2
+		setFacing $0,0
+		setFacing $4,2
 		nextSingleText $0,$0    ; "(Whisper)....{W1}"
 		nextSingleText $0,$80   ; "Who...is...it?{N}What...did he...say?{W1}"
-		setFacing $4,$1
+		setFacing $4,1
 		nextSingleText $0,$4    ; "He's {LEADER} from{N}Granseal.  He said that{N}Ground Seal has opened.{W1}{N}And a serious disaster{N}took place!{W1}{N}He came to see you for{N}more information.{W1}"
 		entityShiver $80
 		stopEntity $80
@@ -177,18 +177,18 @@ cs_540C0:       textCursor $32B
 		playSound $FD
 		entityShiver $80
 		stopEntity $80
-		entityPosDirFlash $80,$3F,$3F,$3
+		setPosFlash $80,63,63,3
 		moveEntity $4,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$4    ; "Sir!  Sir Hawel!{N}Don't leave me alone!{N}Oh, no...!{W1}"
 		stopEntity $4
-		csWait $3C
+		csWait 60
 		moveEntity $0,$FF,$0,$1
 		endMove $8080
-		setFacing $0,$1
-		csWait $1E
+		setFacing $0,1
+		csWait 30
 		startEntity $4
-		setFacing $4,$3
+		setFacing $4,3
 		nextText $0,$4          ; "Sir Hawel passed away.{W2}{N}I'm going to seal the tower.{N}It's Sir Hawel's last wish.{W2}"
 		nextSingleText $0,$4    ; "{LEADER}, please!{N}His wish is related to{N}your mission, right?{W2}{N}Can you go with me and{N}seal the tower?{W1}"
 		join $8004

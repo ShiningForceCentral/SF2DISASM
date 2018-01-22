@@ -45,13 +45,13 @@ loc_50ABA:
 	; End of function sub_50A9A
 
 cs_50ABE:       playSound SFX_BIG_DOOR_RUMBLE
-		setQuake $1
-		csWait $3C
+		setQuake 1
+		csWait 60
 		playSound SFX_BOOST
 		flashScreenWhite $14
-		setBlocks $1,$1,$1,$1,$2A,$2A
+		setBlocks 1,1,1,1,42,42
 		flashScreenWhite $14
-		csWait $3C
-		setQuake $0
-		csWait $3C
+		csWait 60
+		setQuake 0
+		csWait 60
 		csc_end

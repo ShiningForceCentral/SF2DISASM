@@ -30,33 +30,33 @@ cs_5FE9A:       textCursor $D09
 		moveEntity $0,$FF,$1,$1
 		moreMove $1,$1
 		endMove $8080
-		csWait $3C
+		csWait 60
 		nextSingleText $FF,$FF  ; "The jewel glows even{N}brighter.{W1}"
 		hideText
-		csWait $28
+		csWait 40
 		flashScreenWhite $14
 		playSound SFX_BATTLEFIELD_DEATH
-		setQuake $2
-		setBlocks $21,$1,$1,$1,$1A,$12
-		csWait $14
-		setQuake $0
-		csWait $3C
+		setQuake 2
+		setBlocks 33,1,1,1,26,18
+		csWait 20
+		setQuake 0
+		csWait 60
 		nextSingleText $0,$1F   ; "Oh, an opening!{N}The light is leading us!{W1}"
 		csc_end
 cs_5FF06:       textCursor $D07
 		hideText
 		entityFlashWhite $0,$3C
-		setBlocks $21,$2,$1,$1,$27,$2
-		newEntity $80,$27,$2,$3,$B4
+		setBlocks 33,2,1,1,39,2
+		newEntity $80,39,2,3,$B4
 		setActscript $80,$0,eas_AnimSpeedx2
 		executeSubroutine csub_5FF56
 		hideEntity $80
-		setQuake $2
-		setBlocks $0,$20,$7,$6,$0,$0
-		csWait $3C
+		setQuake 2
+		setBlocks 0,32,7,6,0,0
+		csWait 60
 		playSound SFX_BATTLEFIELD_DEATH
-		csWait $14
-		setQuake $0
+		csWait 20
+		setQuake 0
 		nextSingleText $FF,$FF  ; "Sounds like something opened{N}somewhere.{W1}"
 		nextSingleText $0,$1F   ; "You got it!  All we have to{N}do is find the door to the{N}tower!{W1}"
 		csc_end

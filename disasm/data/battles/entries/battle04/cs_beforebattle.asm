@@ -2,25 +2,25 @@
 ; ASM FILE data\battles\entries\battle04\cs_beforebattle.asm :
 ; 0x4981E..0x498EE : Cutscene before battle 4
 bbcs_04:        textCursor $907
-		loadMapFadeIn $42,$1,$5
+		loadMapFadeIn 66,1,5
 		loadMapEntities ce_4989E
 		setActscript $0,$FF,eas_Init
-		entityPosDir $4,$6,$9,$3
+		setPos $4,6,9,3
 		fadeInB
 		setActscript $4,$FF,eas_Jump
 		nextSingleText $0,$4    ; "Who are they?{W1}"
-		setCamDest $7,$D
+		setCamDest 7,13
 		nextSingleText $0,$4    ; "Galam soldiers!{W1}"
 		nextSingleText $C0,$1C  ; "Greetings, Granseal scum!{W1}"
 		nextSingleText $0,$4    ; "Why did you kill Sir{N}Hawel?  How could you be{N}so mean?{W1}"
 		nextSingleText $C0,$1C  ; "Ummm....{W1}"
 		nextText $0,$4          ; "Answer me!{W1}"
 		nextSingleText $0,$4    ; "{LEADER}, we must{N}defeat them so we can learn{N}the truth!{W1}"
-		setFacing $1C,$3
-		csWait $1E
-		setFacing $1C,$0
-		setFacing $80,$2
-		csWait $14
+		setFacing $1C,3
+		csWait 30
+		setFacing $1C,0
+		setFacing $80,2
+		csWait 20
 		nextSingleText $C0,$1C  ; "Capture them alive!{W1}"
 		entityNod $80
 		moveEntity $1C,$FF,$3,$1

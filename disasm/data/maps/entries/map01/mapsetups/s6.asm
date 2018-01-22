@@ -17,32 +17,32 @@ return_5E770:
 	; End of function ms_map1_InitFunction
 
 cs_5E772:       textCursor $E41
-		csWait $1E
-		setFacing $0,$1
-		setEntityDest $0,$2C,$1B
+		csWait 30
+		setFacing $0,1
+		setEntityDest $0,44,27
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
 		flashScreenWhite $1E
-		csWait $1E
+		csWait 30
 		flashScreenWhite $1E
-		entityPosDir $88,$3F,$3E,$3
-		entityPosDir $15,$2C,$1A,$3
+		setPos $88,63,62,3
+		setPos $15,44,26,3
 		stopEntity $15
-		csWait $1E
+		csWait 30
 		flashScreenWhite $1E
-		csWait $1E
-		setEntityDest $7,$2B,$1B
-		setEntityDest $1F,$2D,$1B
-		setFacing $7,$1
-		setFacing $1F,$1
+		csWait 30
+		setEntityDest $7,43,27
+		setEntityDest $1F,45,27
+		setFacing $7,1
+		setFacing $1F,1
 		nextSingleText $80,$15  ; "I feel...a power returning{N}me to human.{W2}"
 		nextSingleText $80,$15  ; "Hey!  The evil is gone!{N}Did you chase them away?{W1}"
 		startEntity $15
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
-		setFacing $7,$0
+		setFacing $7,0
 		nextSingleText $0,$7    ; "{LEADER}, who is she?{W1}"
-		setFacing $15,$2
+		setFacing $15,2
 		nextSingleText $80,$15  ; "Did you say {LEADER}?{N}Oh, you're from Granseal!{W1}"
 		nextSingleText $0,$7    ; "Yes, we are, but who are{N}you?{W1}"
 		entityShiver $15
@@ -51,14 +51,14 @@ cs_5E772:       textCursor $E41
 		endMove $8080
 		moveEntity $1F,$FF,$2,$1
 		endMove $8080
-		setFacing $1F,$1
+		setFacing $1F,1
 		moveEntity $0,$FF,$0,$1
 		endMove $8080
 		moveEntity $0,$FF,$1,$1
 		endMove $8080
-		setFacing $0,$1
+		setFacing $0,1
 		nextSingleText $0,$1F   ; "How do you know {LEADER}?{W1}"
-		setFacing $15,$3
+		setFacing $15,3
 		nextSingleText $80,$15  ; "Oh, I'm sorry.{W2}"
 		nextSingleText $80,$15  ; "I'm {NAME;21}, a sorceress.{N}Goddess Mitula told me about{N}you.{W1}"
 		nextSingleText $0,$1F   ; "She did?{W1}"

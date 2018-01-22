@@ -1,7 +1,7 @@
 
 ; ASM FILE data\scripting\map\cs_end.asm :
 ; 0x49058..0x494BC : End cutscene
-EndCutscene:    mapLoad $14,$13,$21
+EndCutscene:    mapLoad 20,19,33
 		loadMapEntities ce_492CC
 		setActscript $0,$FF,eas_Init
 		customActscript $0,$FF
@@ -46,131 +46,131 @@ EndCutscene:    mapLoad $14,$13,$21
 		dc.b $80
 		entitySprite $B,$AA
 		fadeInB
-		csWait $3C
-		entityPosDir $0,$19,$23,$0
+		csWait 60
+		setPos $0,25,35,0
 		moveEntity $0,$FF,$7,$1
 		moreMove $0,$1
 		endMove $8080
-		csWait $1E
+		csWait 30
 		moveEntity $0,$FF,$3,$4
 		endMove $8080
-		setFacing $0,$2
+		setFacing $0,2
 		moveEntity $80,$FF,$0,$1
 		endMove $8080
 		moveEntity $81,$FF,$0,$1
 		endMove $8080
-		csWait $3C
+		csWait 60
 		entityNod $80
 		entityNod $81
 		entityNod $0
-		csWait $28
+		csWait 40
 		moveEntity $0,$FF,$1,$4
 		endMove $8080
-		setFacing $0,$2
-		csWait $50
-		entityPosDir $83,$19,$23,$0
+		setFacing $0,2
+		csWait 80
+		setPos $83,25,35,0
 		moveEntity $83,$FF,$7,$1
 		endMove $8080
-		csWait $28
+		csWait 40
 		entityNod $0
-		csWait $3C
+		csWait 60
 		moveEntity $0,$0,$3,$4
 		endMove $8080
 		moveEntity $83,$FF,$0,$1
 		moreMove $3,$3
 		endMove $8080
-		setFacing $0,$2
-		setFacing $83,$2
+		setFacing $0,2
+		setFacing $83,2
 		setActscript $80,$0,eas_Jump
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$FF,eas_Jump
-		csWait $28
-		setFacing $82,$3
-		csWait $1E
-		setFacing $81,$1
+		csWait 40
+		setFacing $82,3
+		csWait 30
+		setFacing $81,1
 		entityNod $82
-		csWait $3C
-		setFacing $80,$1
-		csWait $1E
-		setFacing $81,$3
+		csWait 60
+		setFacing $80,1
+		csWait 30
+		setFacing $81,3
 		entityNod $80
-		csWait $28
-		setFacing $81,$0
-		csWait $14
-		setFacing $80,$0
-		csWait $28
-		setFacing $0,$1
-		csWait $14
-		setFacing $83,$3
-		csWait $3C
-		setFacing $0,$2
-		csWait $A
-		setFacing $83,$2
-		csWait $1E
+		csWait 40
+		setFacing $81,0
+		csWait 20
+		setFacing $80,0
+		csWait 40
+		setFacing $0,1
+		csWait 20
+		setFacing $83,3
+		csWait 60
+		setFacing $0,2
+		csWait 10
+		setFacing $83,2
+		csWait 30
 		moveEntity $0,$0,$2,$4
 		endMove $8080
 		moveEntity $83,$FF,$2,$4
 		endMove $8080
 		entityNod $81
 		entityNod $83
-		csWait $3C
-		setFacing $82,$1
-		csWait $1E
+		csWait 60
+		setFacing $82,1
+		csWait 30
 		setActscript $82,$FF,eas_Jump
-		csWait $1E
+		csWait 30
 		moveEntity $82,$FF,$1,$1
 		endMove $8080
-		setFacing $82,$3
-		entityPosDir $B,$17,$25,$3
+		setFacing $82,3
+		setPos $B,23,37,3
 		moveEntity $B,$0,$3,$1
 		moreMove $2,$2
 		moreMove $3,$2
 		endMove $8080
-		csWait $14
-		entityPosDir $2,$17,$25,$3
+		csWait 20
+		setPos $2,23,37,3
 		moveEntity $2,$0,$3,$1
 		moreMove $2,$2
 		moreMove $3,$1
 		endMove $8080
-		csWait $14
-		entityPosDir $A,$17,$25,$3
+		csWait 20
+		setPos $A,23,37,3
 		moveEntity $A,$0,$3,$1
 		moreMove $2,$2
 		endMove $8080
-		csWait $14
-		entityPosDir $3,$17,$25,$3
+		csWait 20
+		setPos $3,23,37,3
 		moveEntity $3,$0,$3,$1
 		moreMove $2,$1
 		endMove $8080
-		csWait $14
-		entityPosDir $7,$17,$25,$3
+		csWait 20
+		setPos $7,23,37,3
 		moveEntity $7,$0,$3,$1
 		endMove $8080
-		setFacing $B,$0
-		csWait $A
-		setFacing $2,$0
-		csWait $A
-		setFacing $A,$3
-		csWait $A
-		setFacing $3,$3
-		setFacing $0,$1
-		setFacing $83,$1
-		csWait $1E
-		setFacing $0,$2
-		setFacing $83,$2
-		csWait $1E
-		setFacing $0,$1
-		setFacing $83,$1
-		csWait $28
+		setFacing $B,0
+		csWait 10
+		setFacing $2,0
+		csWait 10
+		setFacing $A,3
+		csWait 10
+		setFacing $3,3
+		setFacing $0,1
+		setFacing $83,1
+		csWait 30
+		setFacing $0,2
+		setFacing $83,2
+		csWait 30
+		setFacing $0,1
+		setFacing $83,1
+		csWait 40
 		setActscript $B,$0,eas_Jump
 		setActscript $2,$0,eas_Jump
 		setActscript $A,$0,eas_Jump
 		setActscript $3,$0,eas_Jump
 		setActscript $7,$0,eas_Jump
-		setFacing $83,$2
+		setFacing $83,2
 		entityNod $80
-		setFacing $0,$2
-		csWait $32
+		setFacing $0,2
+		csWait 50
 		entityNod $0
 		setActscript $B,$0,eas_Jump
 		setActscript $2,$0,eas_Jump
@@ -243,9 +243,9 @@ cs_4934A:       entityFlashWhite $0,$B4
 		textCursor $142
 		setActscript $1,$1,eas_ControlledCharacter
 		showPortrait $0
-		setQuake $8002
-		setQuake $4002
-		loadMapFadeIn $0,$D,$D
+		setQuake 32770
+		setQuake 16386
+		loadMapFadeIn 0,13,13
 		flashScreenWhite $3C
 		csc_end
 		dc.b   0
@@ -256,7 +256,7 @@ cs_4934A:       entityFlashWhite $0,$B4
 		setActscript $1,$1,eas_493A2
 		waitIdle $1
 		showPortrait $0
-		csWait $3C
+		csWait 60
 		startEntity $4
 		hidePortrait
 		csc_end

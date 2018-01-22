@@ -73,7 +73,7 @@ eas_5E2C4:      dc.w $1A                ; 001A SET 1C BIT 5 $0
 		dc.w 1
 		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-byte_5E320:     mapLoad $4B,$8,$E
+byte_5E320:     mapLoad 75,8,14
 		loadMapEntities ce_5E33E
 		setActscript $0,$FF,eas_Init
 		playSound MUSIC_MAIN_THEME
@@ -90,12 +90,12 @@ cs_5E346:       textCursor $D2B
 		moveEntity $0,$FF,$2,$1
 		moreMove $2,$1
 		endMove $8080
-		csWait $1E
-		setFacing $7,$0
-		setFacing $1A,$0
-		setFacing $1F,$0
-		setFacing $0,$0
+		csWait 30
+		setFacing $7,0
+		setFacing $1A,0
+		setFacing $1F,0
+		setFacing $0,0
 		nextText $0,$1F         ; "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
-		setFacing $1F,$2
+		setFacing $1F,2
 		nextSingleText $0,$1F   ; "Anyway, we have to go to{N}Arc Valley.{N}{LEADER}, let's go.{W1}"
 		csc_end

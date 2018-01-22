@@ -31,5 +31,5 @@ cs_53F2A:       customActscript $80,$FF
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		entityPosDir $80,$6,$10,$3
+		setPos $80,6,16,3
 		csc_end

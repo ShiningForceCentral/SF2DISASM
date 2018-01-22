@@ -27,7 +27,7 @@ return_59E02:
 
 cs_59E04:       textCursor $6CB
 		setCameraEntity $FFFF
-		reloadMap $15,$8
+		reloadMap 21,8
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
@@ -76,12 +76,12 @@ cs_59E04:       textCursor $6CB
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		entityPosDir $0,$1A,$7,$3
-		entityPosDir $7,$1B,$6,$3
-		entityPosDir $1F,$19,$6,$3
-		entityPosDir $82,$1A,$6,$1
-		entityPosDir $83,$19,$5,$1
-		entityPosDir $84,$1B,$5,$1
+		setPos $0,26,7,3
+		setPos $7,27,6,3
+		setPos $1F,25,6,3
+		setPos $82,26,6,1
+		setPos $83,25,5,1
+		setPos $84,27,5,1
 		fadeInB
 		moveEntity $0,$0,$3,$7
 		endMove $8080
@@ -95,23 +95,23 @@ cs_59E04:       textCursor $6CB
 		endMove $8080
 		moveEntity $84,$FF,$3,$7
 		endMove $8080
-		csWait $14
+		csWait 20
 		startEntity $0
 		startEntity $7
 		startEntity $1F
-		csWait $28
+		csWait 40
 		hideEntity $82
 		hideEntity $83
 		hideEntity $84
-		csWait $1E
+		csWait 30
 		nextSingleText $FF,$FF  ; "The Cotton Balloon popped.{W1}"
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
 		csc_end
 cs_59F20:       textCursor $6CC
-		setCamDest $0,$14
+		setCamDest 0,20
 		nextSingleText $0,$81   ; "Ungh!{W2}"
-		csWait $32
+		csWait 50
 		nextSingleText $0,$81   ; "It's too heavy. I can't{N}lift it.  I give up!{W1}"
 		moveEntity $81,$FF,$1,$8
 		endMove $8080

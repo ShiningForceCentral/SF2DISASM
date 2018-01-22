@@ -2,13 +2,13 @@
 ; ASM FILE data\battles\entries\battle30\cs_afterbattle.asm :
 ; 0x4C6A8..0x4C994 : Cutscene after battle 30
 abcs_battle30:  textCursor $ACD
-		loadMapFadeIn $1,$5,$8
+		loadMapFadeIn 1,5,8
 		loadMapEntities ce_4C96C
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$C,$D,$1
+		setPos $7,12,13,1
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$B,$D,$1
+		setPos $1F,11,13,1
 		stopEntity $80
 		setActscript $82,$FF,eas_46172
 		stopEntity $82
@@ -22,8 +22,8 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $0,$1F   ; "Where is Mitula?{W1}"
 		entityShiver $80
 		nextSingleText $0,$80   ; "I don't know...haven't{N}seen her.{W1}"
-		csWait $28
-		setFacing $80,$1
+		csWait 40
+		setFacing $80,1
 		customActscript $80,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -33,10 +33,10 @@ abcs_battle30:  textCursor $ACD
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setQuake $2
-		csWait $14
-		setQuake $0
-		entityPosDir $82,$B,$A,$1
+		setQuake 2
+		csWait 20
+		setQuake 0
+		setPos $82,11,10,1
 		customActscript $82,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -44,13 +44,13 @@ abcs_battle30:  textCursor $ACD
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setEntityDest $82,$9,$B
+		setEntityDest $82,9,11
 		nextSingleText $0,$80   ; "Oops!  The Ground Orb....{W1}"
 		entityFlashWhite $82,$3C
 		mapFadeOutToWhite
-		csWait $14
+		csWait 20
 		mapFadeInFromWhite
-		setFacing $80,$3
+		setFacing $80,3
 		entityShiver $80
 		nextSingleText $0,$80   ; "I can't endure the light....{N}Ohhh....{W1}"
 		customActscript $80,$FF
@@ -63,7 +63,7 @@ abcs_battle30:  textCursor $ACD
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		setActscript $80,$FF,eas_Die
-		csWait $3C
+		csWait 60
 		nextText $0,$1F         ; "Thanks to the Ground Orb, we{N}finally defeated Zalbard.{W2}"
 		nextSingleText $0,$1F   ; "The orb released holy power{N}in it's light.{W1}"
 		entityFlashWhite $82,$3C
@@ -71,8 +71,8 @@ abcs_battle30:  textCursor $ACD
 		moveEntity $7,$FF,$1,$2
 		endMove $8080
 		nextSingleText $0,$7    ; "Hey, look over there!{W1}"
-		setCamDest $5,$0
-		entityPosDir $81,$B,$3,$3
+		setCamDest 5,0
+		setPos $81,11,3,3
 		entityFlashWhite $81,$3C
 		nextSingleText $0,$81   ; "Welcome!{W1}"
 		setCameraEntity $81
@@ -80,10 +80,10 @@ abcs_battle30:  textCursor $ACD
 		moreMove $2,$2
 		moreMove $3,$4
 		endMove $8080
-		setFacing $0,$2
-		setFacing $1F,$2
-		setFacing $7,$2
-		csWait $32
+		setFacing $0,2
+		setFacing $1F,2
+		setFacing $7,2
+		csWait 50
 		entityFlashWhite $81,$3C
 		customActscript $82,$FF
 		dc.w $10                ;   0010 SET SPEED X=$38 Y=$38
@@ -94,10 +94,10 @@ abcs_battle30:  textCursor $ACD
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		cameraSpeed $38
 		setCameraEntity $82
-		setEntityDest $82,$B,$2
+		setEntityDest $82,11,2
 		animEntityFadeInOut $82,$4
-		setCamDest $5,$8
-		setFacing $81,$0
+		setCamDest 5,8
+		setFacing $81,0
 		nextText $C0,$81        ; "Thank you.{W2}"
 		nextSingleText $C0,$81  ; "I've finally returned to this{N}world.{W1}"
 		nextSingleText $0,$1F   ; "Goddess Mitula?{W1}"
@@ -128,9 +128,9 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $C0,$81  ; "Granseal is named for the{N}symbol in the tower.{N}It seals the ground.{W1}"
 		setActscript $1F,$FF,eas_Jump
 		nextSingleText $0,$1F   ; "I see.{W1}"
-		csWait $3C
-		setFacing $81,$2
-		csWait $28
+		csWait 60
+		setFacing $81,2
+		csWait 40
 		entityFlashWhite $81,$32
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$0,eas_Jump
@@ -147,29 +147,29 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $0,$1F   ; "Where is it?{N}How can we find it?{W1}"
 		nextSingleText $C0,$81  ; "It's on Grans.{N}Your jewel will lead you to...{W1}"
 		animEntityFadeInOut $81,$6
-		csWait $32
+		csWait 50
 		moveEntity $1F,$FF,$2,$2
 		moreMove $1,$1
 		endMove $8080
-		csWait $5
+		csWait 5
 		setActscript $1F,$0,eas_461E4
-		csWait $78
+		csWait 120
 		nextSingleText $0,$1F   ; "Mitula, Mitula!!{W1}"
 		moveEntity $7,$FF,$2,$1
 		endMove $8080
-		csWait $1E
-		setFacing $7,$3
-		csWait $1E
-		setFacing $7,$2
-		csWait $1E
-		setFacing $7,$3
-		csWait $1E
+		csWait 30
+		setFacing $7,3
+		csWait 30
+		setFacing $7,2
+		csWait 30
+		setFacing $7,3
+		csWait 30
 		nextSingleText $0,$7    ; "{LEADER}, Mitula{N}has vanished!{N}What should we do now?{W1}"
-		setFacing $1F,$0
+		setFacing $1F,0
 		nextSingleText $0,$1F   ; "We have to go to Arc Valley{N}on Grans Island.{W2}"
-		setFacing $1F,$3
+		setFacing $1F,3
 		nextSingleText $0,$1F   ; "{LEADER}, find the{N}storytellers first.{W1}"
-		setFacing $0,$1
+		setFacing $0,1
 		entityNod $0
 		followEntity $1F,$0,$2
 		followEntity $7,$1F,$2

@@ -17,5 +17,5 @@ return_5FA9A:
 
 	; End of function ms_map37_InitFunction
 
-cs_5FA9C:       entityPosDir $1A,$8,$A,$0
+cs_5FA9C:       setPos $1A,8,10,0
 		csc_end

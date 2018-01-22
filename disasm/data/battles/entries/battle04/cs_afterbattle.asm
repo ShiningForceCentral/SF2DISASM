@@ -2,34 +2,34 @@
 ; ASM FILE data\battles\entries\battle04\cs_afterbattle.asm :
 ; 0x498EE..0x49AB2 : Cutscene after battle 4
 abcs_battle04:  textCursor $90F
-		loadMapFadeIn $42,$9,$10
+		loadMapFadeIn 66,9,16
 		loadMapEntities ce_49A6A
 		setActscript $0,$FF,eas_Init
-		entityPosDir $1,$E,$15,$3
-		entityPosDir $2,$C,$15,$3
-		entityPosDir $3,$D,$16,$3
-		entityPosDir $4,$B,$16,$3
+		setPos $1,14,21,3
+		setPos $2,12,21,3
+		setPos $3,13,22,3
+		setPos $4,11,22,3
 		fadeInB
 		entityNod $0
 		nextSingleText $0,$1C   ; "Your battle strategy was{N}wonderful!  I praise you.{W1}"
-		csWait $5
+		csWait 5
 		setActscript $3,$0,eas_461B6
-		csWait $5
+		csWait 5
 		setActscript $4,$0,eas_461B6
 		setActscript $1,$0,eas_Jump
 		setActscript $2,$FF,eas_Jump
 		setActscript $1,$0,eas_Jump
 		setActscript $2,$FF,eas_Jump
-		csWait $50
-		entityPosDir $1C,$12,$16,$1
+		csWait 80
+		setPos $1C,18,22,1
 		moveEntity $1C,$FF,$1,$2
 		endMove $8080
-		setFacing $1C,$2
-		setFacing $0,$0
-		setFacing $1,$0
-		setFacing $2,$0
-		setFacing $3,$0
-		setFacing $4,$0
+		setFacing $1C,2
+		setFacing $0,0
+		setFacing $1,0
+		setFacing $2,0
+		setFacing $3,0
+		setFacing $4,0
 		nextSingleText $0,$1C   ; "But, I can't let you escape.{W1}"
 		customActscript $1C,$FF
 		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
@@ -48,22 +48,22 @@ abcs_battle04:  textCursor $90F
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setQuake $2
+		setQuake 2
 		playSound SFX_BATTLEFIELD_DEATH
 		moveEntity $0,$FF,$2,$1
 		endMove $8080
-		setQuake $0
+		setQuake 0
 		moveEntity $0,$FF,$1,$1
 		moreMove $0,$1
 		endMove $8080
 		setActscript $0,$0,eas_RotateRight
-		setFacing $1,$1
-		setFacing $2,$1
-		setFacing $3,$1
-		setFacing $4,$1
-		csWait $3C
+		setFacing $1,1
+		setFacing $2,1
+		setFacing $3,1
+		setFacing $4,1
+		csWait 60
 		setActscript $0,$FF,eas_Init
-		setFacing $0,$3
+		setFacing $0,3
 		customActscript $0,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -90,8 +90,8 @@ abcs_battle04:  textCursor $90F
 		moveEntity $80,$FF,$2,$5
 		moreMove $3,$1
 		endMove $8080
-		setFacing $82,$2
-		setFacing $1C,$3
+		setFacing $82,2
+		setFacing $1C,3
 		nextSingleText $0,$1C   ; "Don't worry.  He has only{N}fainted.  Take them to Galam!{W1}"
 		moveEntity $1C,$FF,$0,$1
 		moreMove $3,$1

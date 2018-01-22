@@ -16,10 +16,10 @@ nullsub_178:
 	; End of function nullsub_178
 
 cs_58FA4:       textCursor $8D6
-		reloadMap $8,$7
+		reloadMap 8,7
 		loadMapEntities ce_59270
 		setActscript $0,$FF,eas_Init
-		csWait $1
+		csWait 1
 		setPriority $0,$0
 		setPriority $82,$0
 		setPriority $85,$FFFF
@@ -45,13 +45,13 @@ cs_58FA4:       textCursor $8D6
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		nextSingleText $0,$80   ; "Somebody, take that plank{N}from him!{W1}"
-		setFacing $80,$0
-		csWait $1E
-		setFacing $80,$2
-		csWait $1E
-		setFacing $80,$0
-		csWait $1E
-		setFacing $82,$2
+		setFacing $80,0
+		csWait 30
+		setFacing $80,2
+		csWait 30
+		setFacing $80,0
+		csWait 30
+		setFacing $82,2
 		nextSingleText $0,$82   ; "I got it!{W1}"
 		moveEntity $82,$FF,$2,$2
 		endMove $8080
@@ -61,11 +61,11 @@ cs_58FA4:       textCursor $8D6
 		endMove $8080
 		moveEntity $82,$FF,$2,$1
 		endMove $8080
-		setFacing $80,$0
-		setFacing $82,$1
+		setFacing $80,0
+		setFacing $82,1
 		nextSingleText $0,$82   ; "Thank you, boy!{W1}"
-		setFacing $82,$3
-		csWait $1E
+		setFacing $82,3
+		csWait 30
 		moveEntity $84,$0,$3,$1
 		endMove $8080
 		moveEntity $85,$0,$3,$1
@@ -73,7 +73,7 @@ cs_58FA4:       textCursor $8D6
 		moveEntity $86,$FF,$3,$1
 		endMove $8080
 		nextSingleText $FF,$FF  ; "{LEADER} hands over{N}the plank.{W1}"
-		csWait $1E
+		csWait 30
 		nextSingleText $0,$82   ; "We need a lot of planks{N}for our new town!{W1}"
 		moveEntity $82,$0,$3,$7
 		endMove $8080
@@ -93,7 +93,7 @@ cs_58FA4:       textCursor $8D6
 		endMove $8080
 		nextText $0,$80         ; "We can't go back to {N}Granseal without a ship...{W2}"
 		nextSingleText $0,$80   ; "There's no Granseal on{N}Grans Island now...{N}I know that, but...{W1}"
-		csWait $3C
+		csWait 60
 		nextSingleText $0,$83   ; "Somebody, help!{W1}"
 		customActscript $83,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
@@ -105,24 +105,24 @@ cs_58FA4:       textCursor $8D6
 		moveEntity $83,$FF,$1,$6
 		endMove $8080
 		setActscript $83,$FF,eas_Init
-		setFacing $80,$3
+		setFacing $80,3
 		entityNod $83
 		entityNod $83
 		stopEntity $83
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$80   ; "What's wrong?{W1}"
-		csWait $1E
+		csWait 30
 		startEntity $83
 		nextText $0,$83         ; "One of my friends has not{N}returned from North Cliff.{W2}"
 		nextSingleText $0,$83   ; "He may be in trouble.{W1}"
 		nextSingleText $0,$80   ; "This isn't good.{W1}"
-		setFacing $80,$2
-		csWait $1E
-		setFacing $80,$0
-		csWait $1E
-		setFacing $80,$1
-		csWait $1E
+		setFacing $80,2
+		csWait 30
+		setFacing $80,0
+		csWait 30
+		setFacing $80,1
+		csWait 30
 		nextText $0,$80         ; "{LEADER}, did you{N}hear that?{W2}"
 cs_59122:       textCursor $8E3
 		nextText $0,$80         ; "Would you go to North{N}Cliff and check on his{N}friend?{D1}"
@@ -136,30 +136,30 @@ cs_59142:       textCursor $8E6
 		nextSingleText $0,$80   ; "Hey, he's going with you!{W1}"
 		moveEntity $80,$FF,$2,$1
 		endMove $8080
-		setFacing $80,$0
+		setFacing $80,0
 		textCursor $8E8
 		moveEntity $83,$FF,$1,$2
 		endMove $8080
 		nextText $0,$83         ; "{LEADER}, thank you!{W2}"
 		nextSingleText $0,$83   ; "I'll show you to North Cliff.{N}Follow me.{W1}"
-		csWait $1E
+		csWait 30
 		moveEntity $83,$0,$3,$4
 		endMove $8080
 		moveEntity $0,$0,$3,$4
 		endMove $8080
 		moveEntity $3,$FF,$1,$5
 		endMove $8080
-		setFacing $0,$2
-		setFacing $3,$0
-		setCamDest $8,$A
+		setFacing $0,2
+		setFacing $3,0
+		setCamDest 8,10
 		nextSingleText $0,$3    ; "{LEADER}, wait.  Wait!{W1}"
-		csWait $1E
+		csWait 30
 		nextSingleText $0,$1    ; "Hey, you're all wet.{W1}"
-		entityPosDir $4,$D,$A,$3
-		entityPosDir $2,$D,$9,$3
-		entityPosDir $5,$D,$8,$3
-		entityPosDir $1,$D,$7,$3
-		entityPosDir $6,$D,$6,$3
+		setPos $4,13,10,3
+		setPos $2,13,9,3
+		setPos $5,13,8,3
+		setPos $1,13,7,3
+		setPos $6,13,6,3
 		moveEntity $4,$0,$3,$4
 		moreMove $0,$1
 		moreMove $3,$1
@@ -174,19 +174,19 @@ cs_59142:       textCursor $8E6
 		endMove $8080
 		moveEntity $6,$FF,$3,$7
 		endMove $8080
-		setFacing $5,$3
-		setFacing $1,$3
-		setFacing $6,$3
-		setFacing $2,$3
-		setFacing $4,$2
-		setFacing $0,$1
-		setFacing $83,$1
-		setFacing $80,$3
+		setFacing $5,3
+		setFacing $1,3
+		setFacing $6,3
+		setFacing $2,3
+		setFacing $4,2
+		setFacing $0,1
+		setFacing $83,1
+		setFacing $80,3
 		nextSingleText $0,$1    ; "Are you leaving?{N}Say it isn't so!{W1}"
 		nextSingleText $0,$4    ; "I think it's too dangerous{N}out there alone.{W1}"
 		nextText $0,$83         ; "And...{W2}"
 		nextSingleText $0,$83   ; "It would be safer if we came{N}along.  Let's go.{W1}"
-		csWait $3C
+		csWait 60
 		setCameraEntity $FFFF
 		moveEntity $83,$0,$3,$7
 		endMove $8080

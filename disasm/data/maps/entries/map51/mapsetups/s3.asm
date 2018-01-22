@@ -55,19 +55,19 @@ return_5C310:
 cs_5C312:       textCursor $9FB
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $80,$7,$10,$1
-		entityPosDir $81,$6,$11,$1
-		entityPosDir $82,$8,$11,$1
+		setPos $80,7,16,1
+		setPos $81,6,17,1
+		setPos $82,8,17,1
 		nextText $0,$D          ; "Did you come to help me?{N}Oh, thank you!{W2}"
 		nextSingleText $0,$D    ; "I might have been eaten by{N}monsters if you hadn't come.{W1}"
 		nextSingleText $C0,$80  ; "My dinner is escaping!{W1}"
 		setActscript $1F,$0,eas_Jump
 		setActscript $7,$FF,eas_Jump
-		csWait $5
+		csWait 5
 		setActscript $7,$0,eas_461B6
-		csWait $78
+		csWait 120
 		nextSingleText $0,$7    ; "Who said that?{W1}"
-		setCamDest $3,$C
+		setCamDest 3,12
 		nextText $C0,$80        ; "That pond catches my food.{N}Hey elf boy, good trap, huh?{W2}"
 		nextSingleText $C0,$80  ; "Those who get stuck in the{N}pond are mine.  It's my{N}rule.{W1}"
 		nextSingleText $0,$D    ; "Then, all the missing people{N}were eaten by you?{W1}"
@@ -75,7 +75,7 @@ cs_5C312:       textCursor $9FB
 		moveEntity $80,$FF,$1,$2
 		endMove $8080
 		nextSingleText $C0,$80  ; "And this elf is my dinner{N}for tonight.  Got it?{W1}"
-		setFacing $80,$3
+		setFacing $80,3
 		nextSingleText $C0,$80  ; "Did you guys bring the{N}ketchup? No? Oh, well.{W1}"
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$FF,eas_Jump

@@ -86,13 +86,14 @@ csc35_:
 
 ; related to loading a map
 
-csc36_:
+csc36_resetMap:
+		
 		move.l  a6,-(sp)
-		jsr     (sub_3E06).l
+		jsr     (ResetCurrentMap).l
 		movea.l (sp)+,a6
 		rts
 
-	; End of function csc36_
+	; End of function csc36_resetMap
 
 
 ; =============== S U B R O U T I N E =======================================

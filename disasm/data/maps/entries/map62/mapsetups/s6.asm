@@ -13,10 +13,10 @@ ms_map62_InitFunction:
 cs_5C876:       textCursor $E1D
 		setActscript $80,$FF,eas_Jump
 		nextSingleText $0,$80   ; "Who is it?  Petro?{W1}"
-		setFacing $80,$3
+		setFacing $80,3
 		nextSingleText $0,$80   ; "Well, who are you?{W1}"
 		nextSingleText $0,$81   ; "Petro?  Is he back?{W1}"
-		setCamDest $1,$5
+		setCamDest 1,5
 		nextSingleText $0,$81   ; "Petro!  The Sky Orb is OUR{N}treasure!  Give it back!{W2}"
 		moveEntity $81,$FF,$3,$3
 		endMove $8080
@@ -32,15 +32,15 @@ cs_5C876:       textCursor $E1D
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $81,$FF,$3,$1
 		endMove $8080
-		setCamDest $1,$A
+		setCamDest 1,10
 		nextSingleText $0,$81   ; "Oh, you're not Petro.{N}Who...are you?{W1}"
 		csc_end
 cs_5C8D4:       textCursor $E23
 		nextText $0,$81         ; "Ancient stone?  Yes, my{N}family had it for a long{N}time.{W2}"
-		setFacing $81,$0
+		setFacing $81,0
 		nextSingleText $0,$81   ; "But, it was stolen.{W1}"
 		nextSingleText $0,$81   ; "His brother, my grandson,{N}took the stone, the Sky Orb,{N}when he left.{W2}"
-		setFacing $81,$3
+		setFacing $81,3
 		nextText $0,$81         ; "I think he went to Grans{N}Island to operate an ancient{N}vehicle.{W2}"
 		nextSingleText $0,$81   ; "I've lost my purpose to live.{W1}"
 		moveEntity $81,$FF,$1,$6

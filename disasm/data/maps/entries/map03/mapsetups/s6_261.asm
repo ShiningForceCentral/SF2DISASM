@@ -40,15 +40,15 @@ cs_513E2:       textCursor $216
 		jump cs_51650
 cs_51406:       textCursor $217
 		nextSingleText $0,$1    ; "Great!{N}Let's go right now!{N}Hurry!{W1}"
-		setFacing $2,$2
+		setFacing $2,2
 		nextSingleText $0,$2    ; "What?  {LEADER}, are you{N}going?  I'm going too!{W1}"
 		setF $258               ; set after agreeing to try getting into the castle
 		setF $42                ; Sarah + Chester are followers
 		join $80
 		followEntity $1,$0,$2
 		followEntity $2,$1,$2
-		entityPosDir $8A,$1B,$3,$3
-		entityPosDir $8B,$1F,$3,$3
+		setPos $8A,27,3,3
+		setPos $8B,31,3,3
 		csc_end
 cs_51444:       moveEntityNextToPlayer $8C,$2
 		csc_end
@@ -67,30 +67,30 @@ cs_5145C:       setActscript $80,$FF,eas_Init
 		nextSingleText $0,$80   ; "Hurry to school!{N}Sir Astral and {NAME;1} must{N}be waiting.{W1}"
 		setActscript $80,$FF,eas_Init
 		csc_end
-cs_5148C:       entityPosDir $1,$29,$A,$1
-		entityPosDir $80,$6,$4,$1
+cs_5148C:       setPos $1,41,10,1
+		setPos $80,6,4,1
 		csc_end
 cs_5149A:       textCursor $205
-		csWait $14
-		setFacing $0,$1
-		csWait $3C
-		entityPosDir $8E,$2E,$7,$2
+		csWait 20
+		setFacing $0,1
+		csWait 60
+		setPos $8E,46,7,2
 		moveEntity $8E,$FF,$2,$1
 		moreMove $3,$1
 		moreMove $2,$3
 		endMove $8080
-		setFacing $8E,$3
+		setFacing $8E,3
 		nextText $0,$8E         ; "Is everybody here?{N}OK, let's start.{W2}"
 		nextText $0,$8E         ; "Where is {NAME;3}?{N}Overslept again?  Oh, well.{N}I can't wait for him.{W2}"
 		nextSingleText $0,$8E   ; "Where did I leave off{N}yesterday?{W1}"
 		moveEntity $8E,$FF,$1,$1
 		endMove $8080
-		csWait $78
+		csWait 120
 		nextSingleText $0,$8F   ; "Sir Astral!{W1}"
-		setFacing $0,$3
-		setFacing $1,$3
-		setFacing $2,$3
-		setFacing $8E,$3
+		setFacing $0,3
+		setFacing $1,3
+		setFacing $2,3
+		setFacing $8E,3
 		customActscript $8F,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -98,14 +98,14 @@ cs_5149A:       textCursor $205
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		entityPosDir $8F,$29,$11,$1
+		setPos $8F,41,17,1
 		moveEntity $8F,$FF,$1,$6
 		moreMove $0,$1
 		moreMove $1,$2
 		endMove $8080
-		setFacing $0,$1
-		setFacing $1,$1
-		setFacing $2,$1
+		setFacing $0,1
+		setFacing $1,1
+		setFacing $2,1
 		moveEntity $8F,$FF,$1,$1
 		endMove $8080
 		entityNod $8F
@@ -114,15 +114,15 @@ cs_5149A:       textCursor $205
 		nextSingleText $0,$8E   ; "What has happened?{N}Why are you so...?{W1}"
 		nextSingleText $0,$8F   ; "The King.  He has fallen{N}down and is in great pain!{W1}"
 		nextSingleText $0,$8E   ; "What?!  The King?{N}OK, I'm coming!{W1}"
-		csWait $F
+		csWait 15
 		setActscript $8F,$FF,eas_Init
 		moveEntity $8F,$0,$3,$3
 		endMove $8080
 		moveEntity $8E,$FF,$3,$3
 		endMove $8080
-		setFacing $0,$3
-		setFacing $1,$3
-		setFacing $2,$3
+		setFacing $0,3
+		setFacing $1,3
+		setFacing $2,3
 		moveEntity $8F,$0,$3,$1
 		moreMove $2,$1
 		moreMove $3,$2
@@ -132,9 +132,9 @@ cs_5149A:       textCursor $205
 		moreMove $C,$14
 		moreMove $0,$1
 		endMove $8080
-		setFacing $8F,$1
-		setFacing $8E,$1
-		setCamDest $26,$7
+		setFacing $8F,1
+		setFacing $8E,1
+		setCamDest 38,7
 		nextSingleText $0,$8E   ; "Sorry, kids.  I have to go{N}to the castle.{N}Stay here.{W1}"
 		moveEntity $8E,$FF,$2,$1
 		endMove $8080
@@ -144,23 +144,23 @@ cs_5149A:       textCursor $205
 		endMove $8080
 		hideEntity $8E
 		hideEntity $8F
-		setCamDest $26,$6
-		setFacing $0,$0
-		setFacing $2,$2
+		setCamDest 38,6
+		setFacing $0,0
+		setFacing $2,2
 		nextText $0,$2          ; "{LEADER}, did you hear that?{N}The King is sick!{W2}"
 		nextSingleText $0,$2    ; "But, I think it must be{N}something else!{N}He was acting so strange!{W1}"
 		moveEntity $1,$FF,$3,$1
 		moreMove $0,$3
 		endMove $8080
-		setFacing $1,$1
-		setFacing $0,$3
-		setFacing $2,$3
+		setFacing $1,1
+		setFacing $0,3
+		setFacing $2,3
 		nextSingleText $C0,$1   ; "Hey, {NAME;2}!{N}Let's go to the castle.{W1}"
 		nextSingleText $0,$2    ; "We can't, {NAME;1}!{N}We're just kids.{N}They won't let us in.{W1}"
 		nextSingleText $C0,$1   ; "Never mind that.{N}I have a plan!{W1}"
 		moveEntity $1,$FF,$2,$1
 		endMove $8080
-		setFacing $1,$1
+		setFacing $1,1
 		nextText $C0,$1         ; "{LEADER}, maybe we can{N}meet the Princess!{N}Are you going with us?{W1}"
 		yesNo
 		jumpIfFlagSet $59,cs_51614; YES/NO prompt answer
@@ -169,30 +169,30 @@ cs_5149A:       textCursor $205
 		moveEntity $1,$FF,$2,$2
 		moreMove $1,$1
 		endMove $8080
-		setFacing $2,$1
+		setFacing $2,1
 		jump cs_51650
 cs_51614:       textCursor $217
 		nextSingleText $0,$1    ; "Great!{N}Let's go right now!{N}Hurry!{W1}"
-		setFacing $2,$2
+		setFacing $2,2
 		nextSingleText $0,$2    ; "What?  {LEADER}, are you{N}going?  I'm going too!{W1}"
 		setF $258               ; set after agreeing to try getting into the castle
 		setF $42                ; Sarah + Chester are followers
 		join $80
 		followEntity $1,$0,$2
 		followEntity $2,$1,$2
-		entityPosDir $8A,$1B,$3,$3
-		entityPosDir $8B,$1F,$3,$3
+		setPos $8A,27,3,3
+		setPos $8B,31,3,3
 cs_51650:       csc_end
 cs_51652:       textCursor $219
 		moveEntity $8A,$0,$0,$1
 		endMove $8080
 		moveEntity $8B,$FF,$2,$1
 		endMove $8080
-		setFacing $8A,$3
-		setFacing $8B,$3
+		setFacing $8A,3
+		setFacing $8B,3
 		nextSingleText $0,$8A   ; "Halt!{N}Where do you think you're{N}going?{W1}"
-		setFacing $1,$1
-		setFacing $2,$1
+		setFacing $1,1
+		setFacing $2,1
 		nextSingleText $C0,$1   ; "Well, let's see....{N}Ummm...yes, Sir Astral{N}called us!{W1}"
 		nextSingleText $0,$8A   ; "Why?{W1}"
 		nextSingleText $C0,$1   ; "We're his pupils.{N}He left a package behind,{N}and....{W1}"
@@ -202,8 +202,8 @@ cs_51652:       textCursor $219
 		endMove $8080
 		moveEntity $8B,$FF,$0,$1
 		endMove $8080
-		setFacing $8A,$3
-		setFacing $8B,$3
+		setFacing $8A,3
+		setFacing $8B,3
 		csc_end
 cs_516A8:       textCursor $296
 		nextSingleText $0,$3    ; "Here you are!{N}I've been waiting.{W1}"

@@ -2,17 +2,17 @@
 ; ASM FILE data\battles\entries\battle32\cs_beforebattle.asm :
 ; 0x4CBE2..0x4CD10 : Cutscene before battle 32
 bbcs_32:        textCursor $B1D
-		loadMapFadeIn $4A,$A,$26
+		loadMapFadeIn 74,10,38
 		loadMapEntities ce_4CCC0
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$10,$2D,$1
+		setPos $7,16,45,1
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$E,$2D,$1
+		setPos $1F,14,45,1
 		setActscript $16,$FF,eas_Init
-		entityPosDir $16,$F,$2E,$1
+		setPos $16,15,46,1
 		setActscript $1E,$FF,eas_Init
-		entityPosDir $1E,$F,$2D,$1
+		setPos $1E,15,45,1
 		fadeInB
 		cameraSpeed $30
 		moveEntity $0,$0,$1,$3
@@ -26,16 +26,16 @@ bbcs_32:        textCursor $B1D
 		moveEntity $16,$FF,$1,$3
 		endMove $8080
 		nextSingleText $0,$80   ; "I heard about you from{N}Geshp.{W1}"
-		setCamDest $A,$12
+		setCamDest 10,18
 		nextText $0,$80         ; "He ordered me to take out{N}some of your people.{W2}"
 		nextSingleText $0,$80   ; "But, it's not enough.{N}This is the end of your{N}resistance.{W1}"
-		setFacing $80,$2
-		csWait $1E
-		setFacing $80,$0
-		csWait $1E
-		setFacing $80,$1
-		csWait $1E
-		setFacing $80,$3
+		setFacing $80,2
+		csWait 30
+		setFacing $80,0
+		csWait 30
+		setFacing $80,1
+		csWait 30
+		setFacing $80,3
 		nextSingleText $0,$80   ; "Kill them, kill them all!{W1}"
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$0,eas_Jump

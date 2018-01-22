@@ -2,15 +2,15 @@
 ; ASM FILE data\battles\entries\battle38\cs_afterbattle.asm :
 ; 0x4DE8C..0x4E3D2 : Cutscene after battle 38
 abcs_battle38:  textCursor $BC4
-		loadMapFadeIn $42,$3,$16
+		loadMapFadeIn 66,3,22
 		loadMapEntities ce_4E372
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$5,$19,$0
+		setPos $7,5,25,0
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$8,$1C,$1
+		setPos $1F,8,28,1
 		setActscript $1E,$FF,eas_Init
-		entityPosDir $1E,$9,$18,$3
+		setPos $1E,9,24,3
 		stopEntity $88
 		customActscript $88,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
@@ -23,7 +23,7 @@ abcs_battle38:  textCursor $BC4
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		jumpIfFlagClear $4C,cs_4DF00; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
-		entityPosDir $1A,$3F,$3E,$3
+		setPos $1A,63,62,3
 cs_4DF00:       setActscript $80,$FF,eas_46172
 		setActscript $81,$FF,eas_46172
 		setActscript $82,$FF,eas_46172
@@ -35,10 +35,10 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		setPriority $0,$0
 		setPriority $88,$FFFF
 		fadeInB
-		csWait $3C
+		csWait 60
 		entityShiver $88
 		nextSingleText $0,$88   ; "My traps...{W1}"
-		csWait $3C
+		csWait 60
 		customActscript $88,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -49,7 +49,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		startEntity $88
-		setFacing $88,$1
+		setFacing $88,1
 		nextSingleText $0,$88   ; "I'm...at the end of my rope.{N}I...must...escape.{W1}"
 		customActscript $88,$FF
 		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
@@ -69,11 +69,11 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		endMove $8080
 		moveEntity $88,$0,$1,$1
 		endMove $8080
-		csWait $C
+		csWait 12
 		setActscript $88,$FF,eas_461AA
-		setQuake $1
+		setQuake 1
 		stopEntity $88
-		entityPosDir $88,$8,$18,$2
+		setPos $88,8,24,2
 		customActscript $88,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -91,19 +91,19 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setQuake $0
+		setQuake 0
 		moveEntity $88,$FF,$3,$1
 		endMove $8080
-		setFacing $88,$3
+		setFacing $88,3
 		moveEntity $88,$FF,$3,$1
 		endMove $8080
-		setFacing $88,$0
+		setFacing $88,0
 		moveEntity $88,$FF,$3,$1
 		endMove $8080
-		setFacing $88,$1
-		csWait $28
+		setFacing $88,1
+		csWait 40
 		entityShiver $88
-		csWait $3C
+		csWait 60
 		customActscript $88,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -113,11 +113,11 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setFacing $88,$3
-		csWait $28
+		setFacing $88,3
+		csWait 40
 		entityShakeHead $88
 		startEntity $88
-		csWait $A
+		csWait 10
 		setActscript $88,$FF,eas_Jump
 		setActscript $88,$FF,eas_46172
 		nextSingleText $0,$88   ; "Nooooooo!{W1}"
@@ -131,16 +131,16 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		moveEntity $7,$FF,$0,$1
 		endMove $8080
 		nextSingleText $C0,$7   ; "You may go.{W1}"
-		setFacing $88,$2
+		setFacing $88,2
 		nextSingleText $0,$88   ; "Thank you.{W1}"
 		setActscript $88,$FF,eas_Init
-		setFacing $88,$1
+		setFacing $88,1
 		setCameraEntity $88
-		csWait $3C
+		csWait 60
 		moveEntity $0,$FF,$0,$1
 		endMove $8080
-		setFacing $0,$3
-		csWait $3C
+		setFacing $0,3
+		csWait 60
 		cameraSpeed $8
 		customActscript $88,$FF
 		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
@@ -151,28 +151,28 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $88,$FF,$1,$1
 		endMove $8080
-		setFacing $7,$1
-		setFacing $0,$2
+		setFacing $7,1
+		setFacing $0,2
 		moveEntity $88,$FF,$1,$2
 		endMove $8080
-		setFacing $0,$1
+		setFacing $0,1
 		moveEntity $88,$FF,$1,$2
 		endMove $8080
-		csWait $28
-		setFacing $88,$3
+		csWait 40
+		setFacing $88,3
 		nextSingleText $0,$88   ; "I won't forget this.{W1}"
 		moveEntity $88,$FF,$1,$3
 		endMove $8080
 		flashScreenWhite $1E
 		playSound SFX_BATTLEFIELD_DEATH
-		setQuake $3
-		csWait $32
-		csWait $5
+		setQuake 3
+		csWait 50
+		csWait 5
 		setActscript $88,$0,eas_461B6
-		csWait $50
-		setQuake $0
-		csWait $28
-		setFacing $88,$3
+		csWait 80
+		setQuake 0
+		csWait 40
+		setFacing $88,3
 		tintMap
 		nextSingleText $C0,$89  ; "Where are you going, Geshp?{W1}"
 		customActscript $88,$FF
@@ -184,7 +184,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		setActscript $88,$FF,eas_Jump
 		setActscript $88,$FF,eas_Jump
-		csWait $1E
+		csWait 30
 		setActscript $88,$FF,eas_46172
 		moveEntity $88,$FF,$1,$1
 		endMove $8080
@@ -194,28 +194,28 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		nextSingleText $C0,$89  ; "Now, you will pay with your{N}life.{W1}"
 		nextSingleText $0,$88   ; "No, please...NO!{W1}"
 		setPriority $88,$0
-		entityPosDir $80,$8,$D,$0
-		csWait $A
-		entityPosDir $81,$A,$E,$2
-		csWait $5
+		setPos $80,8,13,0
+		csWait 10
+		setPos $81,10,14,2
+		csWait 5
 		setActscript $88,$0,eas_461B6
-		csWait $A
-		entityPosDir $82,$B,$10,$0
-		csWait $A
-		entityPosDir $83,$A,$12,$2
-		csWait $A
-		entityPosDir $84,$8,$13,$0
-		csWait $A
-		entityPosDir $85,$6,$12,$2
-		csWait $A
-		entityPosDir $86,$5,$10,$0
-		csWait $A
-		entityPosDir $87,$6,$E,$2
-		csWait $28
+		csWait 10
+		setPos $82,11,16,0
+		csWait 10
+		setPos $83,10,18,2
+		csWait 10
+		setPos $84,8,19,0
+		csWait 10
+		setPos $85,6,18,2
+		csWait 10
+		setPos $86,5,16,0
+		csWait 10
+		setPos $87,6,14,2
+		csWait 40
 		flashScreenWhite $14
 		tintMap
-		setFacing $88,$3
-		setQuake $3
+		setFacing $88,3
+		setQuake 3
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
@@ -275,7 +275,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		playSound SFX_BOLT_SPELL
 		moveEntity $80,$FF,$3,$3
 		endMove $8080
-		setFacing $88,$2
+		setFacing $88,2
 		entitySprite $88,$B4
 		setActscript $88,$0,eas_AnimSpeedx2
 		setActscript $80,$0,eas_JumpLeft
@@ -314,16 +314,16 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		endMove $8080
 		setActscript $87,$0,eas_JumpRight
 		hideEntity $86
-		csWait $8
+		csWait 8
 		hideEntity $87
-		setQuake $0
+		setQuake 0
 		setCameraEntity $FFFF
-		csWait $28
+		csWait 40
 		entitySprite $88,$9F
 		setActscript $88,$FF,eas_Die
 		flickerOnce
 		cameraSpeed $30
-		setCamDest $3,$14
+		setCamDest 3,20
 		moveEntity $1F,$FF,$1,$3
 		endMove $8080
 		nextSingleText $0,$1F   ; "Zeon is such an unfeeling{N}devil...(shiver).{W1}"

@@ -197,7 +197,7 @@ return_512B8:
 
 	; End of function sub_51256
 
-cs_512BA:       setFacing $6,$3
+cs_512BA:       setFacing $6,3
 		setActscript $6,$FF,eas_Jump
 		setActscript $6,$FF,eas_Jump
 		setActscript $6,$FF,eas_Jump

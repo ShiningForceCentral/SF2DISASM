@@ -22,27 +22,27 @@ return_51740:
 
 	; End of function ms_map4_InitFunction
 
-cs_51742:       entityPosDir $80,$0,$0,$0
-		entityPosDir $81,$0,$0,$0
+cs_51742:       setPos $80,0,0,0
+		setPos $81,0,0,0
 		csc_end
 cs_51750:       textCursor $2CB
-		entityPosDir $0,$1D,$4,$3
-		entityPosDir $1F,$1C,$3,$3
-		entityPosDir $1E,$1D,$3,$3
-		entityPosDir $9F,$1E,$3,$3
-		setQuake $1
+		setPos $0,29,4,3
+		setPos $1F,28,3,3
+		setPos $1E,29,3,3
+		setPos $9F,30,3,3
+		setQuake 1
 		fadeInB
-		csWait $1E
-		setQuake $1
+		csWait 30
+		setQuake 1
 		nextSingleText $0,$80   ; "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
 		moveEntity $1F,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$1F   ; "You didn't escape?{N}Why are you here?{W1}"
 		nextSingleText $0,$80   ; "We've been waiting for you.{N}Chasms are appearing in the{N}ground.{W2}{N}Everybody is on the ship{N}to avoid falling into a{N}hole.{W1}"
-		setFacing $1F,$0
+		setFacing $1F,0
 		nextSingleText $0,$1F   ; "Thank you.  {LEADER},{N}hurry to the harbor.{W1}"
 		nextSingleText $0,$80   ; "Wooooo!{N}Help! Heeeeelp....{W1}"
-		setFacing $1F,$3
+		setFacing $1F,3
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$4 Y=$4
 		dc.b 4
@@ -62,27 +62,27 @@ cs_51750:       textCursor $2CB
 		moveEntity $81,$0,$0,$1
 		endMove $8080
 		playSound SFX_BIG_DOOR_RUMBLE
-		setQuake $3
-		csWait $1E
-		setBlocks $33,$12,$B,$7,$18,$3
-		csWait $A
-		setBlocks $33,$19,$B,$7,$18,$3
-		csWait $A
-		setBlocks $33,$20,$B,$7,$18,$3
-		csWait $A
+		setQuake 3
+		csWait 30
+		setBlocks 51,18,11,7,24,3
+		csWait 10
+		setBlocks 51,25,11,7,24,3
+		csWait 10
+		setBlocks 51,32,11,7,24,3
+		csWait 10
 		setActscript $80,$0,eas_51840
-		csWait $5
+		csWait 5
 		setActscript $81,$FF,eas_51840
 		playSound SFX_BIG_DOOR_RUMBLE
-		setBlocks $33,$0,$5,$4,$1B,$0
-		csWait $A
-		setBlocks $33,$4,$5,$4,$1B,$0
-		csWait $A
-		setBlocks $33,$8,$5,$4,$1B,$0
-		csWait $1E
-		setQuake $1
-		csWait $1E
-		setFacing $1F,$0
+		setBlocks 51,0,5,4,27,0
+		csWait 10
+		setBlocks 51,4,5,4,27,0
+		csWait 10
+		setBlocks 51,8,5,4,27,0
+		csWait 30
+		setQuake 1
+		csWait 30
+		setFacing $1F,0
 		nextSingleText $0,$1F   ; "That's too cruel....{N}{W2}{LEADER}, go to the{N}harbor from the east side.{N}It's safer.{W1}"
 		setActscript $1F,$0,eas_Follower1
 		csc_end

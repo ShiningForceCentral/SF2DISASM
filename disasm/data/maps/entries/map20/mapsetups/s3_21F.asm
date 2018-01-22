@@ -51,7 +51,7 @@ loc_632E0:
 	; End of function sub_632AC
 
 cs_632EA:       setActscript $0,$FF,eas_Init
-		csWait $1
+		csWait 1
 		entityShiver $0
 		csc_end
 
@@ -105,5 +105,5 @@ return_6335C:
 
 	; End of function sub_63330
 
-cs_6335E:       setFacing $80,$3
+cs_6335E:       setFacing $80,3
 		csc_end

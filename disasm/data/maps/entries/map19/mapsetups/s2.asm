@@ -265,6 +265,6 @@ cs_52F40:       textCursor $242
 		moveEntity $8C,$FF,$1,$1
 		moreMove $2,$8
 		endMove $8080
-		entityPosDir $8C,$3F,$3F,$2
+		setPos $8C,63,63,2
 		setF $260               ; set after agreeing to go to the tower with Astral
 		csc_end

@@ -13,25 +13,25 @@ ms_map3_flag21F_InitFunction:
 cs_628C8:       textCursor $F4B
 		nextText $0,$87         ; "I envy you.{N}I'm an old woman now.{W2}"
 		nextSingleText $0,$87   ; "Nobody kisses me anymore.{W1}"
-		setEntityDest $0,$19,$1C
-		setFacing $0,$1
-		setEntityDest $88,$19,$1B
-		setFacing $88,$0
-		setFacing $87,$2
+		setEntityDest $0,25,28
+		setFacing $0,1
+		setEntityDest $88,25,27
+		setFacing $88,0
+		setFacing $87,2
 		nextText $0,$88         ; "You're wrong!{W2}"
 		nextSingleText $0,$88   ; "I'll kiss you!{W1}"
-		csWait $A
+		csWait 10
 		setActscript $87,$FF,eas_Jump
 		setActscript $87,$FF,eas_Jump
 		csc_end
 cs_6290C:       hideText
 		moveEntity $8A,$FF,$3,$1
 		endMove $8080
-		setEntityDest $0,$2A,$A
-		setEntityDest $4,$2A,$A
-		setEntityDest $1,$2A,$A
-		setEntityDest $3,$2A,$A
-		setEntityDest $2,$2A,$A
+		setEntityDest $0,42,10
+		setEntityDest $4,42,10
+		setEntityDest $1,42,10
+		setEntityDest $3,42,10
+		setEntityDest $2,42,10
 		followEntity $0,$8A,$2
 		followEntity $4,$8A,$5
 		followEntity $1,$8A,$6

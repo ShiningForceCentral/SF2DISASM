@@ -2,21 +2,21 @@
 ; ASM FILE data\battles\entries\battle28\cs_afterbattle.asm :
 ; 0x4C07C..0x4C3DC : Cutscene after battle 28
 abcs_battle28:  textCursor $A6E
-		loadMapFadeIn $2F,$7,$19
+		loadMapFadeIn 47,7,25
 		loadMapEntities ce_4C3B4
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $7,$D,$1C,$3
+		setPos $7,13,28,3
 		setActscript $1F,$FF,eas_Init
-		entityPosDir $1F,$B,$1C,$3
+		setPos $1F,11,28,3
 		stopEntity $80
 		stopEntity $82
 		setPriority $1F,$0
 		setPriority $7,$0
 		setPriority $80,$FFFF
 		fadeInB
-		csWait $39
-		setFacing $7,$2
+		csWait 57
+		setFacing $7,2
 		nextSingleText $0,$7    ; "Phew!  That was close!{W1}"
 		nextText $0,$80         ; "Thank you very much.{W2}"
 		nextSingleText $0,$80   ; "Excuse me, will you help{N}me up?{W1}"
@@ -25,21 +25,21 @@ abcs_battle28:  textCursor $A6E
 		moveEntity $1F,$0,$3,$1
 		moreMove $0,$1
 		endMove $8080
-		csWait $F
+		csWait 15
 		setActscript $0,$FF,eas_JumpRight
 		waitIdle $1F
-		setFacing $1F,$3
+		setFacing $1F,3
 		nextSingleText $0,$1F   ; "NO!  I'll do it!{W1}"
 		moveEntity $1F,$FF,$3,$1
 		endMove $8080
-		setFacing $1F,$1
+		setFacing $1F,1
 		nextText $0,$1F         ; "We'll take you with us.{W2}"
 		nextSingleText $0,$1F   ; "Tristan is the nearest town.{N}I think you had better rest{N}there.{W1}"
 		nextSingleText $0,$80   ; "Thank you, sir.{W1}"
 		entitySprite $80,$C5
 		moveEntity $80,$0,$1,$2
 		endMove $8080
-		csWait $E
+		csWait 14
 		setActscript $80,$FF,eas_461AA
 		moveEntity $7,$FF,$2,$1
 		moreMove $3,$1
@@ -51,7 +51,7 @@ abcs_battle28:  textCursor $A6E
 		moveEntity $81,$FF,$0,$1
 		moreMove $3,$2
 		endMove $8080
-		setCamDest $A,$19
+		setCamDest 10,25
 		moveEntity $0,$0,$0,$2
 		moreMove $3,$1
 		moreMove $0,$2
@@ -64,28 +64,28 @@ abcs_battle28:  textCursor $A6E
 		moreMove $3,$1
 		endMove $8080
 		nextSingleText $0,$1F   ; "{LEADER}...{NAME;7}...{W1}"
-		setFacing $0,$2
-		setFacing $7,$2
+		setFacing $0,2
+		setFacing $7,2
 		nextSingleText $0,$7    ; "What?  Don't you want to{N}go to Tristan?{W1}"
-		csWait $3C
+		csWait 60
 		nextSingleText $0,$1F   ; "Oh, I do, but...{W1}"
 		nextSingleText $0,$80   ; "We shouldn't go to Tristan{N}right now.{W1}"
 		setActscript $7,$FF,eas_Jump
 		nextSingleText $0,$7    ; "Why not?{W1}"
 		nextSingleText $0,$80   ; "Because of me!{W1}"
-		setCamDest $8,$19
+		setCamDest 8,25
 		entityFlashWhite $80,$28
 		flashScreenWhite $14
-		entityPosDir $80,$B,$1E,$0
+		setPos $80,11,30,0
 		entitySprite $80,$AF
-		setFacing $80,$1
-		csWait $8
-		setFacing $80,$2
-		csWait $8
-		setFacing $80,$3
-		csWait $8
+		setFacing $80,1
+		csWait 8
+		setFacing $80,2
+		csWait 8
+		setFacing $80,3
+		csWait 8
 		entitySprite $80,$9C
-		setFacing $80,$0
+		setFacing $80,0
 		startEntity $80
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$FF,eas_Jump
@@ -99,7 +99,7 @@ abcs_battle28:  textCursor $A6E
 		nextSingleText $C0,$80  ; "I'm one of the leaders of{N}the Devil Army.{N}My name is Cameela!{W1}"
 		nextSingleText $0,$1F   ; "What do you want?{W1}"
 		nextSingleText $C0,$80  ; "{LEADER}, I came here{N}to get your Jewel of Evil!{W1}"
-		setFacing $1F,$2
+		setFacing $1F,2
 		nextText $0,$1F         ; "Zeon told US to bring it to{N}the Ancient Tower.{N}He didn't mention you.{W2}"
 		nextSingleText $0,$1F   ; "And since we've never heard{N}of you, you're not getting{N}the jewel!{W1}"
 		nextSingleText $C0,$80  ; "No!  His orders were...{W1}"
@@ -118,7 +118,7 @@ abcs_battle28:  textCursor $A6E
 		setActscript $80,$FF,eas_46172
 		moveEntity $80,$FF,$2,$1
 		endMove $8080
-		entityPosDir $82,$C,$1E,$2
+		setPos $82,12,30,2
 		customActscript $82,$FF
 		dc.w $10                ;   0010 SET SPEED X=$38 Y=$38
 		dc.b $38
@@ -137,12 +137,12 @@ abcs_battle28:  textCursor $A6E
 		moveEntity $82,$0,$2,$8
 		endMove $8080
 		playSound SFX_JUMP
-		csWait $A
+		csWait 10
 		moveEntity $80,$FF,$1,$1
 		endMove $8080
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
-		csWait $1E
+		csWait 30
 		hideEntity $82
 		nextSingleText $0,$1F   ; "Well done.  You dodged my{N}fireball.{W1}"
 		nextText $C0,$80        ; "What a surprising old wizard!{W2}"
@@ -158,33 +158,33 @@ abcs_battle28:  textCursor $A6E
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		setCameraEntity $80
-		csWait $28
+		csWait 40
 		moveEntity $80,$FF,$1,$A
 		endMove $8080
-		csWait $28
+		csWait 40
 		setCameraEntity $FFFF
-		setCamDest $8,$1A
-		setFacing $0,$1
-		setFacing $7,$1
+		setCamDest 8,26
+		setFacing $0,1
+		setFacing $7,1
 		moveEntity $1F,$FF,$1,$2
 		endMove $8080
 		nextSingleText $0,$1F   ; "Wait!{W1}"
-		setFacing $80,$2
-		setCamDest $7,$10
+		setFacing $80,2
+		setCamDest 7,16
 		moveEntity $80,$FF,$2,$1
 		endMove $8080
-		setFacing $80,$3
+		setFacing $80,3
 		nextSingleText $0,$80   ; "Be careful of Geshp and{N}Zalbard!{W1}"
 		setActscript $80,$FF,eas_JumpLeft
 		setActscript $80,$FF,eas_463AE
-		setCamDest $8,$1A
-		setFacing $1F,$3
+		setCamDest 8,26
+		setFacing $1F,3
 		nextSingleText $0,$1F   ; "Ah, she's gone....{N}OK, {LEADER}.{N}Let's go to Tristan.{W1}"
 		moveEntity $1F,$FF,$0,$1
 		moreMove $3,$2
 		endMove $8080
-		setFacing $1F,$0
-		setFacing $7,$2
+		setFacing $1F,0
+		setFacing $7,2
 		nextSingleText $0,$7    ; "Would you please explain{N}what just happened?{W1}"
 		nextText $0,$1F         ; "You don't know?{W2}"
 		nextText $0,$1F         ; "Everything here was set up{N}by Cameela.{W2}"

@@ -19,22 +19,22 @@ return_5C3D6:
 cs_5C3D8:       textCursor $9F6
 		setActscript $1F,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		entityPosDir $0,$B,$16,$1
-		entityPosDir $1F,$A,$16,$1
-		entityPosDir $7,$9,$16,$1
+		setPos $0,11,22,1
+		setPos $1F,10,22,1
+		setPos $7,9,22,1
 		fadeInB
 		moveEntity $1F,$FF,$1,$2
 		endMove $8080
-		csWait $5
+		csWait 5
 		setActscript $1F,$0,eas_461B6
-		csWait $78
-		setFacing $1F,$1
+		csWait 120
+		setFacing $1F,1
 		nextSingleText $0,$1F   ; "It's coming from this{N}direction.{W1}"
 		moveEntity $7,$FF,$1,$2
 		endMove $8080
 		nextSingleText $0,$7    ; "Look!  Over there!{W1}"
-		setCamDest $2,$2
-		csWait $32
+		setCamDest 2,2
+		csWait 50
 		nextSingleText $C0,$D   ; "Help me!{W1}"
 		nextText $0,$7          ; "An...elven boy?{N}He's stuck in the pond.{W2}"
 		nextSingleText $0,$7    ; "He must be very tired.{N}Let's pull him out.{W1}"

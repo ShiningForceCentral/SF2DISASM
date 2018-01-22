@@ -2,12 +2,12 @@
 ; ASM FILE data\battles\entries\battle07\cs_afterbattle.asm :
 ; 0x49F7E..0x4A952 : Cutscene after battle 7
 abcs_battle07:  textCursor $951
-		loadMapFadeIn $3A,$8,$10
+		loadMapFadeIn 58,8,16
 		loadMapEntities ce_4A912
 		setActscript $0,$FF,eas_Init
-		setBlocks $7,$17,$1,$2,$D,$16
-		setBlocks $7,$17,$1,$2,$D,$18
-		setBlocks $7,$17,$1,$2,$D,$1D
+		setBlocks 7,23,1,2,13,22
+		setBlocks 7,23,1,2,13,24
+		setBlocks 7,23,1,2,13,29
 		stopEntity $82
 		stopEntity $83
 		customActscript $82,$FF
@@ -34,14 +34,14 @@ abcs_battle07:  textCursor $951
 		setActscript $81,$0,eas_AnimSpeedx2
 		fadeInB
 		cameraSpeed $28
-		csWait $32
+		csWait 50
 		moveEntity $85,$0,$1,$6
 		endMove $8080
 		moveEntity $86,$FF,$1,$6
 		endMove $8080
 		nextSingleText $0,$86   ; "King Galam!  You've lost{N}your followers!{W1}"
 		nextSingleText $0,$85   ; "Princess Elis, come here.{N}Come here.{W1}"
-		setCamDest $8,$D
+		setCamDest 8,13
 		nextSingleText $0,$84   ; "Father...{W1}"
 		moveEntity $84,$FF,$3,$1
 		endMove $8080
@@ -66,7 +66,7 @@ abcs_battle07:  textCursor $951
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $82,$FF,$2,$1
 		endMove $8080
-		setFacing $82,$1
+		setFacing $82,1
 		waitIdle $84
 		setActscript $84,$FF,eas_Jump
 		nextSingleText $0,$84   ; "(Shriek!){W1}"
@@ -75,7 +75,7 @@ abcs_battle07:  textCursor $951
 		moveEntity $84,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$85   ; "Elis!{W1}"
-		setCamDest $8,$F
+		setCamDest 8,15
 		moveEntity $85,$0,$1,$1
 		endMove $8080
 		moveEntity $86,$FF,$1,$1
@@ -83,11 +83,11 @@ abcs_battle07:  textCursor $951
 		nextSingleText $C0,$82  ; "Freeze!  Ha, ha!{W1}"
 		setActscript $85,$0,eas_Jump
 		setActscript $86,$FF,eas_Jump
-		setCamDest $8,$E
+		setCamDest 8,14
 		moveEntity $82,$FF,$0,$1
 		moreMove $1,$2
 		endMove $8080
-		setFacing $82,$3
+		setFacing $82,3
 		nextText $C0,$82        ; "What a good hostage she is!{W2}"
 		nextSingleText $C0,$82  ; "Stay there!  Or she'll die!{W1}"
 		moveEntity $85,$FF,$1,$1
@@ -97,10 +97,10 @@ abcs_battle07:  textCursor $951
 		endMove $8080
 		nextSingleText $0,$86   ; "Princess Elis...I'll save{N}you!{W1}"
 		nextSingleText $FF,$FF  ; "King Galam murmurs a{N}magic spell.{W1}"
-		setFacing $84,$0
-		csWait $28
+		setFacing $84,0
+		csWait 40
 		setActscript $84,$FF,eas_Jump
-		setFacing $84,$3
+		setFacing $84,3
 		nextSingleText $0,$84   ; "Watch out!{W1}"
 		nextSingleText $0,$85   ; "What?!{W1}"
 		customActscript $80,$FF
@@ -117,8 +117,8 @@ abcs_battle07:  textCursor $951
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		entityPosDir $80,$D,$10,$0
-		entityPosDir $81,$D,$10,$0
+		setPos $80,13,16,0
+		setPos $81,13,16,0
 		playSound SFX_DEMON_BREATH
 		moveEntity $80,$0,$6,$1
 		endMove $8080
@@ -128,7 +128,7 @@ abcs_battle07:  textCursor $951
 		endMove $8080
 		moveEntity $81,$0,$3,$8
 		endMove $8080
-		csWait $A
+		csWait 10
 		setActscript $85,$FF,eas_46172
 		setActscript $86,$FF,eas_46172
 		customActscript $85,$FF
@@ -177,9 +177,9 @@ abcs_battle07:  textCursor $951
 		entityShakeHead $85
 		nextSingleText $0,$85   ; "Don't worry...I'm fine.{W1}"
 		nextSingleText $C0,$82  ; "That was just a warning!{N}Do you want me to attack{N}again?{W1}"
-		entityPosDir $80,$3F,$3F,$3
-		entityPosDir $81,$3F,$3F,$3
-		setCamDest $8,$11
+		setPos $80,63,63,3
+		setPos $81,63,63,3
+		setCamDest 8,17
 		customActscript $83,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -194,51 +194,51 @@ abcs_battle07:  textCursor $951
 		nextText $0,$83         ; "King Granseal...{W2}"
 		nextSingleText $0,$83   ; "Galam, please tell me...{N}What's in this tower?{N}In Ground Seal?{W1}"
 		nextSingleText $C0,$82  ; "You really want to know?{N}Ha, ha!  OK, I'll tell you.{W1}"
-		setCamDest $8,$D
-		setFacing $82,$1
+		setCamDest 8,13
+		setFacing $82,1
 		nextSingleText $FF,$FF  ; "King Galam displays the{N}Jewel of Evil.{W1}"
 		nextSingleText $C0,$82  ; "I'll open the door to the{N}Evil World!{N}Observe!{W1}"
 		entityFlashWhite $82,$32
-		csWait $3C
+		csWait 60
 		mapFadeOutToWhite
-		csWait $14
+		csWait 20
 		mapFadeInFromWhite
-		csWait $28
+		csWait 40
 		mapFadeOutToWhite
-		csWait $1E
+		csWait 30
 		mapFadeInFromWhite
 		playSound SFX_BIG_DOOR_RUMBLE
-		setQuake $2
-		csWait $3C
-		setQuake $0
-		csWait $3C
-		setQuake $3
+		setQuake 2
+		csWait 60
+		setQuake 0
+		csWait 60
+		setQuake 3
 		nextSingleText $0,$85   ; "An earthquake!{W1}"
-		setCamDest $8,$3
-		csWait $3C
-		setBlocks $0,$27,$3,$3,$C,$4
-		csWait $32
-		setBlocks $0,$2B,$3,$3,$C,$4
-		csWait $32
-		setBlocks $0,$2F,$3,$3,$C,$4
-		csWait $3C
-		setQuake $0
-		setCamDest $8,$D
-		setFacing $82,$3
+		setCamDest 8,3
+		csWait 60
+		setBlocks 0,39,3,3,12,4
+		csWait 50
+		setBlocks 0,43,3,3,12,4
+		csWait 50
+		setBlocks 0,47,3,3,12,4
+		csWait 60
+		setQuake 0
+		setCamDest 8,13
+		setFacing $82,3
 		nextSingleText $C0,$82  ; "Now do you understand?  I{N}plan on opening the sealed{N}door!{W1}"
 		nextSingleText $0,$83   ; "Why?  What's inside?{W1}"
 		nextSingleText $C0,$82  ; "You'll find out soon enough.{W1}"
-		setFacing $82,$1
+		setFacing $82,1
 		entityFlashWhite $82,$28
 		nextSingleText $0,$85   ; "What's he doing now??{W1}"
 		nextSingleText $C0,$82  ; "Here they come!{N}Ha, ha, ha!{W1}"
 		nextSingleText $0,$83   ; "What?{W1}"
-		setCamDest $8,$3
+		setCamDest 8,3
 		entitySprite $80,$B4
-		entityPosDir $80,$C,$5,$1
+		setPos $80,12,5,1
 		animEntityFadeInOut $80,$7
 		entitySprite $81,$B4
-		entityPosDir $81,$D,$5,$1
+		setPos $81,13,5,1
 		animEntityFadeInOut $81,$7
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$20 Y=$20
@@ -259,15 +259,15 @@ abcs_battle07:  textCursor $951
 		endMove $8080
 		moveEntity $81,$FF,$3,$5
 		endMove $8080
-		setCamDest $8,$8
+		setCamDest 8,8
 		nextSingleText $0,$86   ; "Princess Elis is swallowed{N}by a light tube.{W1}"
 		moveEntity $80,$0,$3,$5
 		endMove $8080
-		setFacing $84,$1
+		setFacing $84,1
 		setActscript $84,$0,eas_Jump
 		moveEntity $81,$FF,$3,$5
 		endMove $8080
-		setCamDest $8,$D
+		setCamDest 8,13
 		nextSingleText $C0,$82  ; "Farewell for now!{N}Going up!{W1}"
 		customActscript $82,$FF
 		dc.w $10                ;   0010 SET SPEED X=$2 Y=$2
@@ -306,18 +306,18 @@ abcs_battle07:  textCursor $951
 		moveEntity $84,$0,$1,$2
 		endMove $8080
 		nextSingleText $0,$83   ; "He's using the light tube{N}to go through the doorway!{W1}"
-		setCamDest $8,$11
+		setCamDest 8,17
 		nextSingleText $0,$83   ; "Save her.  Save her now!{W1}"
-		csWait $5
+		csWait 5
 		setActscript $83,$0,eas_461B6
-		csWait $78
-		setFacing $83,$3
+		csWait 120
+		setFacing $83,3
 		nextSingleText $0,$83   ; "{LEADER}, you're good{N}at performing acrobatics!{W1}"
 		moveEntity $83,$FF,$3,$1
 		endMove $8080
-		setFacing $83,$0
+		setFacing $83,0
 		nextSingleText $0,$83   ; "Minister, help me!{W1}"
-		setFacing $86,$2
+		setFacing $86,2
 		nextSingleText $0,$86   ; "Y...yes...but how?{W1}"
 		nextSingleText $0,$83   ; "Throw {LEADER} towards{N}the light tubes!{W1}"
 		setActscript $0,$FF,eas_Jump
@@ -330,12 +330,12 @@ abcs_battle07:  textCursor $951
 		moveEntity $86,$FF,$3,$1
 		endMove $8080
 		waitIdle $83
-		setFacing $85,$0
-		setFacing $83,$0
-		setFacing $86,$2
-		csWait $1E
+		setFacing $85,0
+		setFacing $83,0
+		setFacing $86,2
+		csWait 30
 		stopEntity $0
-		setFacing $0,$3
+		setFacing $0,3
 		customActscript $0,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -405,7 +405,7 @@ abcs_battle07:  textCursor $951
 		endMove $8080
 		moveEntity $0,$FF,$1,$5
 		endMove $8080
-		setFacing $85,$1
+		setFacing $85,1
 		moveEntity $0,$FF,$1,$3
 		endMove $8080
 		nextSingleText $0,$83   ; "Oops, we lost our grip!{N}But...{W1}"
@@ -426,7 +426,7 @@ abcs_battle07:  textCursor $951
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setQuake $4
+		setQuake 4
 		customActscript $0,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -436,12 +436,12 @@ abcs_battle07:  textCursor $951
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setFacing $0,$1
+		setFacing $0,1
 		entitySprite $0,$B1
 		moveEntity $0,$0,$1,$8
 		endMove $8080
-		csWait $14
-		setQuake $0
+		csWait 20
+		setQuake 0
 		nextSingleText $FF,$FF  ; "{LEADER} grasped the{N}Jewel of Evil.{W1}"
 		setCameraEntity $FFFF
 		nextText $C0,$82        ; "What are you doing?{W2}"
@@ -479,7 +479,7 @@ abcs_battle07:  textCursor $951
 		entityFlashWhite $0,$14
 		playSound SFX_VALIDATION
 		mapFadeOutToWhite
-		csWait $A
+		csWait 10
 		mapFadeInFromWhite
 		setCameraEntity $FFFF
 		nextSingleText $C0,$82  ; "Whoa!  The light...the{N}light!{W1}"
@@ -506,10 +506,10 @@ abcs_battle07:  textCursor $951
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setEntityDest $0,$D,$A
+		setEntityDest $0,13,10
 		nextSingleText $C0,$82  ; "He stole my jewel!{W1}"
-		setFacing $83,$1
-		setFacing $86,$1
+		setFacing $83,1
+		setFacing $86,1
 		moveEntity $0,$FF,$3,$5
 		endMove $8080
 		cameraSpeed $40
@@ -521,20 +521,20 @@ abcs_battle07:  textCursor $951
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		playSound SFX_DOOR_OPEN
-		setQuake $3
-		setFacing $0,$3
+		setQuake 3
+		setFacing $0,3
 		moveEntity $0,$FF,$3,$1
 		endMove $8080
-		setFacing $0,$2
+		setFacing $0,2
 		moveEntity $0,$FF,$3,$1
 		endMove $8080
-		setFacing $0,$1
+		setFacing $0,1
 		moveEntity $0,$FF,$3,$1
 		endMove $8080
-		setFacing $0,$0
+		setFacing $0,0
 		moveEntity $0,$FF,$3,$1
 		endMove $8080
-		setFacing $0,$3
+		setFacing $0,3
 		moveEntity $0,$FF,$3,$1
 		endMove $8080
 		entitySprite $0,$B1
@@ -547,20 +547,20 @@ abcs_battle07:  textCursor $951
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		csWait $14
-		setQuake $0
-		csWait $28
+		csWait 20
+		setQuake 0
+		csWait 40
 		entityShiver $0
 		stopEntity $0
-		csWait $1E
+		csWait 30
 		setCameraEntity $FFFF
 		cameraSpeed $28
 		nextSingleText $FF,$FF  ; "The two jewels merge{N}together.{W1}"
 		setF $181               ; set after Bowie obtains King Galam's jewel
-		setCamDest $8,$3
+		setCamDest 8,3
 		waitIdle $82
-		setFacing $82,$3
-		setFacing $84,$3
+		setFacing $82,3
+		setFacing $84,3
 		animEntityFadeInOut $81,$6
 		nextSingleText $C0,$82  ; "I have to go back and get{N}my jewel....{N}Noooooooo!{W1}"
 		setActscript $82,$0,eas_463AE
@@ -591,10 +591,10 @@ abcs_battle07:  textCursor $951
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		playSound $FD
-		csWait $3C
-		setCamDest $8,$11
+		csWait 60
+		setCamDest 8,17
 		playSound MUSIC_SAD_THEME_1
-		csWait $3C
+		csWait 60
 		nextSingleText $0,$85   ; "She's gone....{N}Elis!{W1}"
 		nextSingleText $0,$83   ; "We couldn't help the{N}Princess.{W1}"
 		entitySprite $0,$0
@@ -607,33 +607,33 @@ abcs_battle07:  textCursor $951
 		entityNod $83
 		entityNod $0
 		nextSingleText $0,$83   ; "Indeed, perhaps...these{N}jewels are the key to{N}solving this....{W1}"
-		setQuake $2
-		csWait $5
+		setQuake 2
+		csWait 5
 		setActscript $86,$0,eas_461B6
 		playSound $FD
-		csWait $78
-		setQuake $0
-		csWait $3C
-		setQuake $1
+		csWait 120
+		setQuake 0
+		csWait 60
+		setQuake 1
 		playSound MUSIC_BOSS_ATTACK
 		nextSingleText $0,$83   ; "What?! Another earthquake?{W1}"
 		nextSingleText $0,$86   ; "Wow!  It's getting worse!{W1}"
 		moveEntity $86,$FF,$3,$1
 		endMove $8080
-		setFacing $86,$2
+		setFacing $86,2
 		nextSingleText $C0,$85  ; "Whoa!{W1}"
 		nextSingleText $0,$86   ; "Sssiirrr Astral!{N}What should we do?!{W1}"
 		nextSingleText $0,$83   ; "I'm not sure.{W1}"
 		moveEntity $86,$FF,$2,$2
 		endMove $8080
-		setFacing $86,$1
+		setFacing $86,1
 		nextSingleText $0,$86   ; "Sir Astral!{W1}"
-		setFacing $83,$3
+		setFacing $83,3
 		nextText $0,$83         ; "Let's get out of here!{W2}"
 		nextSingleText $0,$83   ; "We'll come back later with{N}soldiers to rescue her.{W1}"
-		setFacing $83,$2
+		setFacing $83,2
 		nextSingleText $C0,$85  ; "But, Sir Astral...{W1}"
-		setFacing $83,$3
+		setFacing $83,3
 		nextSingleText $0,$83   ; "He won't budge.{N}We'll have to carry him.{W1}"
 		nextSingleText $FF,$FF  ; "The Minister nods.{W1}"
 		entityNod $83
@@ -643,9 +643,9 @@ abcs_battle07:  textCursor $951
 		moreMove $2,$1
 		endMove $8080
 		setActscript $85,$FF,eas_46172
-		setFacing $83,$3
+		setFacing $83,3
 		stopEntity $85
-		csWait $32
+		csWait 50
 		moveEntity $83,$0,$0,$2
 		endMove $8080
 		moveEntity $86,$0,$0,$2
@@ -658,8 +658,8 @@ abcs_battle07:  textCursor $951
 		moveEntity $86,$FF,$2,$1
 		moreMove $1,$1
 		endMove $8080
-		setFacing $86,$3
-		csWait $32
+		setFacing $86,3
+		csWait 50
 		setCameraEntity $85
 		cameraSpeed $20
 		moveEntity $83,$0,$3,$D
@@ -668,12 +668,12 @@ abcs_battle07:  textCursor $951
 		endMove $8080
 		moveEntity $85,$FF,$3,$D
 		endMove $8080
-		csWait $28
+		csWait 40
 		setActscript $83,$FF,eas_Jump
-		setFacing $83,$1
+		setFacing $83,1
 		nextText $0,$83         ; "{LEADER}, you'll be{N}buried in the tower!{W2}"
 		nextSingleText $0,$83   ; "Come on!{W1}"
-		csWait $32
+		csWait 50
 		mapSysEvent $3A,$D,$23,$3
 		followEntity $83,$0,$2
 		followEntity $85,$83,$2

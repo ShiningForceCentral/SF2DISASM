@@ -2,19 +2,19 @@
 ; ASM FILE data\battles\entries\battle39\cs_beforebattle.asm :
 ; 0x4E3D2..0x4E4DC : Cutscene before battle 39
 bbcs_39:        textCursor $BD5
-		loadMapFadeIn $42,$3,$5
+		loadMapFadeIn 66,3,5
 		loadMapEntities ce_4E4AC
 		setActscript $0,$FF,eas_Init
-		entityPosDir $7,$9,$8,$3
-		entityPosDir $1F,$7,$8,$3
-		entityPosDir $1E,$8,$8,$3
+		setPos $7,9,8,3
+		setPos $1F,7,8,3
+		setPos $1E,8,8,3
 		jumpIfFlagClear $4C,cs_4E40C; Zynk is a follower
-		entityPosDir $1A,$8,$7,$3
+		setPos $1A,8,7,3
 cs_4E40C:       jumpIfFlagClear $47,cs_4E41A; Lemon is a follower
-		entityPosDir $1C,$3F,$3E,$3
+		setPos $1C,63,62,3
 cs_4E41A:       fadeInB
 		cameraSpeed $30
-		setCamDest $3,$12
+		setCamDest 3,18
 		nextText $0,$80         ; "I just heard that Geshp{N}lost.{W2}"
 		nextSingleText $0,$80   ; "All greater devils have been{N}defeated except for Odd Eye.{W1}"
 		moveEntity $80,$FF,$3,$1
@@ -25,16 +25,16 @@ cs_4E41A:       fadeInB
 		setActscript $82,$0,eas_Jump
 		setActscript $83,$0,eas_Jump
 		setActscript $84,$FF,eas_Jump
-		csWait $32
+		csWait 50
 		moveEntity $83,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$83   ; "Look over there!{W1}"
 		moveEntity $84,$FF,$1,$1
 		endMove $8080
-		setFacing $80,$1
-		setCamDest $3,$5
-		csWait $3C
-		setCamDest $3,$12
+		setFacing $80,1
+		setCamDest 3,5
+		csWait 60
+		setCamDest 3,18
 		nextSingleText $0,$83   ; "They're coming!{W1}"
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$18 Y=$18
@@ -45,7 +45,7 @@ cs_4E41A:       fadeInB
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $80,$FF,$3,$3
 		endMove $8080
-		setFacing $80,$1
+		setFacing $80,1
 		nextSingleText $0,$80   ; "Excellent!{N}Welcome to your graveyard!{W1}"
 		csc_end
 ce_4E4AC:       dc.w 8

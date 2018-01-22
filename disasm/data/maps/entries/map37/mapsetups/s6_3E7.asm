@@ -20,24 +20,24 @@ return_5FABA:
 	; End of function ms_map37_flag3E7_InitFunction
 
 cs_5FABC:       textCursor $D1F
-		reloadMap $6,$6
-		entityPosDir $0,$8,$C,$1
-		entityPosDir $7,$D,$C,$1
-		entityPosDir $1A,$A,$A,$3
-		entityPosDir $80,$A,$B,$1
+		reloadMap 6,6
+		setPos $0,8,12,1
+		setPos $7,13,12,1
+		setPos $1A,10,10,3
+		setPos $80,10,11,1
 		stopEntity $80
 		playSound MUSIC_STOP
 		fadeInB
 		nextText $80,$7         ; "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
 		nextSingleText $80,$7   ; "Where's Sir Astral?{W1}"
-		setFacing $7,$0
-		csWait $14
-		setFacing $7,$2
-		csWait $14
-		setFacing $7,$0
-		csWait $14
-		setFacing $7,$2
-		csWait $14
+		setFacing $7,0
+		csWait 20
+		setFacing $7,2
+		csWait 20
+		setFacing $7,0
+		csWait 20
+		setFacing $7,2
+		csWait 20
 		entityShiver $7
 		nextSingleText $80,$7   ; "Oh, there he is!{W1}"
 		setActscript $7,$FF,eas_Init
@@ -45,12 +45,12 @@ cs_5FABC:       textCursor $D1F
 		moreMove $9,$1
 		endMove $8080
 		nextSingleText $80,$7   ; "Sir Astral!  Are you OK?{W1}"
-		setFacing $7,$2
+		setFacing $7,2
 		nextSingleText $80,$7   ; "{LEADER}, come on!{W1}"
 		csc_end
 cs_5FB30:       textCursor $D25
 		setActscript $80,$FF,eas_Init
-		setFacing $80,$3
+		setFacing $80,3
 		entityShakeHead $80
 		nextText $0,$80         ; "Phew!  We've made it to{N}Grans Island!{W1}"
 		nextText $0,$80         ; "{LEADER}, Geshp's probably{N}coming for us!{W2}"
@@ -65,34 +65,34 @@ cs_5FB30:       textCursor $D25
 		csc_end
 cs_5FB6A:       textCursor $D31
 		playSound SFX_BIG_DOOR_RUMBLE
-		setQuake $1
+		setQuake 1
 		setActscript $7,$FF,eas_Init
 		setActscript $80,$FF,eas_Init
 		setActscript $1A,$FF,eas_Init
-		setCamDest $B,$6
+		setCamDest 11,6
 		setActscript $7,$FF,eas_Jump
 		setActscript $7,$FF,eas_Jump
 		nextSingleText $80,$7   ; "Wow, the ship is vibrating!{W1}"
-		setFacing $80,$1
+		setFacing $80,1
 		nextSingleText $0,$80   ; "What's going on?{W1}"
-		setEntityDest $1A,$B,$B
-		setEntityDest $1A,$E,$B
-		setEntityDest $1A,$F,$A
-		setEntityDest $1A,$10,$A
-		setFacing $1A,$3
+		setEntityDest $1A,11,11
+		setEntityDest $1A,14,11
+		setEntityDest $1A,15,10
+		setEntityDest $1A,16,10
+		setFacing $1A,3
 		nextSingleText $0,$1A   ; "Don't worry. {W1}"
 		setActscript $7,$FF,eas_Jump
 		nextSingleText $80,$7   ; "But...but...{N}Woooooow!{W1}"
-		setCamDest $4,$6
-		setFacing $0,$1
+		setCamDest 4,6
+		setFacing $0,1
 		playSound $FE
 		playSound SFX_BIG_DOOR_RUMBLE
-		setQuake $3
-		csWait $14
-		setQuake $1
+		setQuake 3
+		csWait 20
+		setQuake 1
 		playSound MUSIC_MITULA_SHRINE
 		executeSubroutine csub_5FD3A
-		setQuake $0
+		setQuake 0
 		moveEntity $80,$0,$1,$1
 		moreMove $2,$1
 		moreMove $6,$1
@@ -103,52 +103,52 @@ cs_5FB6A:       textCursor $D31
 		moreMove $6,$1
 		moreMove $2,$5
 		endMove $8080
-		setFacing $80,$1
-		setFacing $7,$1
+		setFacing $80,1
+		setFacing $7,1
 		nextSingleText $0,$7    ; "It's floating!  This big{N}ship is floating!{W1}"
-		setFacing $1A,$2
-		setCamDest $B,$6
+		setFacing $1A,2
+		setCamDest 11,6
 		nextSingleText $80,$1A  ; "We're going higher and{N}higher....{W1}"
-		csWait $28
+		csWait 40
 		fadeOutB
 		setCameraEntity $FFFF
-		mapLoad $4B,$28,$C
+		mapLoad 75,40,12
 		loadMapEntities ce_5FDD4
 		setActscript $0,$FF,eas_Init
-		setBlocks $3C,$3B,$4,$5,$2C,$F
+		setBlocks 60,59,4,5,44,15
 		fadeInB
 		executeSubroutine sub_5FD7C
-		csWait $3C
+		csWait 60
 		nextSingleText $0,$1F   ; "I've never experienced{N}anything like this in my{N}seventy years of life!{W1}"
-		csWait $3C
+		csWait 60
 		fadeOutB
-		mapLoad $25,$4,$6
-		loadEntitiesFromMapSetup $9,$B,$0
-		csWait $1
+		mapLoad 37,4,6
+		loadEntitiesFromMapSetup 9,11,0
+		csWait 1
 		setActscript $7,$FF,eas_Init
 		setActscript $80,$FF,eas_Init
 		setActscript $1A,$FF,eas_Init
-		entityPosDir $80,$9,$C,$1
-		entityPosDir $7,$A,$C,$1
-		entityPosDir $1A,$A,$B,$2
+		setPos $80,9,12,1
+		setPos $7,10,12,1
+		setPos $1A,10,11,2
 		fadeInB
 		nextSingleText $80,$1A  ; "OK, now we'll head to{N}Grans Island.{W1}"
-		setQuake $1
-		csWait $A
-		setQuake $0
+		setQuake 1
+		csWait 10
+		setQuake 0
 		executeSubroutine sub_5FD4C
-		setFacing $80,$2
+		setFacing $80,2
 		nextSingleText $0,$80   ; "Oh, we're flying!{W1}"
 		nextSingleText $0,$7    ; "The Ancients were greater{N}than we thought!{W1}"
-		setFacing $80,$1
-		setFacing $1A,$3
+		setFacing $80,1
+		setFacing $1A,3
 		nextSingleText $80,$1A  ; "Oh, thank you very much.{W1}"
-		csWait $3C
+		csWait 60
 		fadeOutB
-		mapLoad $4B,$28,$C
+		mapLoad 75,40,12
 		loadMapEntities ce_5FDD4
 		setActscript $0,$FF,eas_Init
-		setBlocks $3C,$3B,$4,$5,$2C,$F
+		setBlocks 60,59,4,5,44,15
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
 		dc.b $10
@@ -160,9 +160,9 @@ cs_5FB6A:       textCursor $D31
 		endMove $8080
 		executeSubroutine sub_5FD5E
 		fadeInB
-		csWait $F
+		csWait 15
 		executeSubroutine sub_5FD66
-		csWait $78
+		csWait 120
 		mapSysEvent $3B,$3F,$3F,$0
 		csc_end
 
