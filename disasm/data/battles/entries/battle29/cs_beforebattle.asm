@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle29\cs_beforebattle.asm :
 ; 0x4C3DC..0x4C5E6 : Cutscene before battle 29
-bbcs_29:        textCursor $A9E         ; Initial text line $A9E : "You can't enter Mitula{N}Shrine now.{W1}"
+bbcs_29:        textCursor $A9E
 		loadMapFadeIn $0,$A,$1C
-		loadMapEntities ce_4C5AE; Entity data to figure out and format
+		loadMapEntities ce_4C5AE
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$10,$22,$1
@@ -11,7 +11,7 @@ bbcs_29:        textCursor $A9E         ; Initial text line $A9E : "You can't en
 		entityPosDir $1F,$E,$22,$1
 		playSound MUSIC_MITULA_SHRINE
 		fadeInB
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		moveEntity $0,$0,$1,$1
 		endMove $8080
 		moveEntity $7,$0,$1,$1
@@ -19,20 +19,20 @@ bbcs_29:        textCursor $A9E         ; Initial text line $A9E : "You can't en
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$80   ; "You can't enter Mitula{N}Shrine now.{W1}"
-		setEntityDir $7,$2
+		setFacing $7,$2
 		nextSingleText $0,$7    ; "Sir Astral, what do we do{N}now?{W1}"
 		nextSingleText $0,$1F   ; "Hmmm....{W1}"
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
-		setEntityDir $1F,$0
+		setFacing $1F,$0
 		nextSingleText $0,$1F   ; "{LEADER}, what do you{N}think?{W1}"
-		setEntityDir $0,$2
+		setFacing $0,$2
 		nextSingleText $0,$0    ; "I'm not sure.{W1}"
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
-		setEntityDir $7,$2
+		setFacing $7,$2
 		nextSingleText $0,$7    ; "{LEADER}, it's obvious!{W1}"
-		setEntityDir $0,$0
+		setFacing $0,$0
 		entityNod $1F
 		nextText $0,$1F         ; "I agree.  We have to see the{N}storytellers and listen to{N}the legends.{W2}"
 		nextSingleText $0,$1F   ; "Make a break for it!{W1}"
@@ -78,7 +78,7 @@ bbcs_29:        textCursor $A9E         ; Initial text line $A9E : "You can't en
 		moreMove $2,$1
 		endMove $8080
 		waitIdle $80
-		setEntityDir $80,$3
+		setFacing $80,$3
 		waitIdle $7
 		nextText $0,$80         ; "Wait, wait.  You must not{N}enter the holy shrine.{W2}"
 		nextSingleText $0,$80   ; "So be it!  Let the truth be{N}known!{W1}"
@@ -102,11 +102,11 @@ bbcs_29:        textCursor $A9E         ; Initial text line $A9E : "You can't en
 		playSound MUSIC_BATTLE_THEME_1
 		stopEntity $80
 		entitySprite $80,$AF
-		setEntityDir $80,$1
+		setFacing $80,$1
 		csWait $8
-		setEntityDir $80,$2
+		setFacing $80,$2
 		csWait $8
-		setEntityDir $80,$3
+		setFacing $80,$3
 		csWait $8
 		entitySprite $80,$55
 		startEntity $80
@@ -121,9 +121,8 @@ bbcs_29:        textCursor $A9E         ; Initial text line $A9E : "You can't en
 		nextSingleText $0,$80   ; "Go away!  The devils already{N}occupy this shrine!{W1}"
 		nextText $0,$1F         ; "Devils again!{W2}"
 		nextSingleText $0,$1F   ; "{LEADER}, attack!{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4C5AE:       dc.b   0
-		dc.b  $F
+		csc_end
+ce_4C5AE:       dc.w $F
 		dc.w $21
 		dc.w 1
 		dc.b $10

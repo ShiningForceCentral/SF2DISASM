@@ -1,10 +1,10 @@
 
 ; ASM FILE data\scripting\map\cs_intro1.asm :
 ; 0x47F7E..0x48380 : Intro cutscene 1
-IntroCutscene1: textCursor $105A        ; Initial text line $105A : "Stay here, OK?{D2}"
+IntroCutscene1: textCursor $105A
 		mapLoad $2A,$2,$5
 		csWait $1
-		loadMapEntities ce_48340; Entity data to figure out and format
+		loadMapEntities ce_48340
 		setActscript $0,$FF,eas_Init
 		setActscript $83,$FF,eas_Init3
 		setActscript $84,$FF,eas_Init3
@@ -22,19 +22,19 @@ IntroCutscene1: textCursor $105A        ; Initial text line $105A : "Stay here, 
 		moveEntity $81,$FF,$1,$6
 		endMove $8080
 		playSound SFX_INTRO_LIGHTNING
-		setQuakeAmount $1
+		setQuake $1
 		entityPosDir $83,$7,$C,$2
 		entityPosDir $84,$7,$D,$1
 		entityPosDir $85,$7,$E,$1
 		csWait $5
-		setQuakeAmount $0
+		setQuake $0
 		entityPosDir $83,$3F,$3F,$2
 		entityPosDir $84,$3F,$3F,$1
 		entityPosDir $85,$3F,$3F,$1
 		csWait $A
-		setEntityDir $5,$3
-		setEntityDir $80,$3
-		setEntityDir $81,$3
+		setFacing $5,$3
+		setFacing $80,$3
+		setFacing $81,$3
 		entityPosDir $83,$7,$C,$2
 		entityPosDir $84,$7,$D,$1
 		entityPosDir $85,$7,$E,$1
@@ -68,13 +68,13 @@ IntroCutscene1: textCursor $105A        ; Initial text line $105A : "Stay here, 
 		setActscript $80,$FF,eas_BumpUp
 		setActscript $81,$FF,eas_BumpUp
 		csWait $1E
-		setEntityDir $5,$3
+		setFacing $5,$3
 		nextSingleText $80,$5   ; "Stay here, OK?{D2}"
 		entityNod $80
 		moveEntity $5,$FF,$0,$5
 		endMove $8080
-		setEntityDir $80,$0
-		setEntityDir $81,$0
+		setFacing $80,$0
+		setFacing $81,$0
 		moveEntity $5,$FF,$3,$3
 		endMove $8080
 		csWait $1E
@@ -84,16 +84,16 @@ IntroCutscene1: textCursor $105A        ; Initial text line $105A : "Stay here, 
 		moveEntity $5,$FF,$1,$3
 		moreMove $2,$5
 		endMove $8080
-		setEntityDir $80,$1
-		setEntityDir $81,$1
-		setEntityDir $5,$3
+		setFacing $80,$1
+		setFacing $81,$1
+		setFacing $5,$3
 		csWait $14
 		entityShakeHead $5
 		csWait $14
 		moveEntity $5,$FF,$2,$5
 		endMove $8080
-		setEntityDir $80,$2
-		setEntityDir $81,$2
+		setFacing $80,$2
+		setFacing $81,$2
 		moveEntity $5,$FF,$3,$3
 		endMove $8080
 		csWait $28
@@ -117,7 +117,7 @@ IntroCutscene1: textCursor $105A        ; Initial text line $105A : "Stay here, 
 		moreMove $2,$4
 		moreMove $B,$1
 		endMove $8080
-		setEntityDir $5,$1
+		setFacing $5,$1
 		csWait $14
 		moveEntity $5,$0,$3,$3
 		endMove $8080
@@ -132,7 +132,7 @@ IntroCutscene1: textCursor $105A        ; Initial text line $105A : "Stay here, 
 		entityPosDir $5,$13,$3,$3
 		entityPosDir $80,$13,$3,$3
 		entityPosDir $81,$13,$3,$3
-		csc46 $F,$0             ; 0046 UNKNOWN
+		reloadMap $F,$0
 		csWait $A
 		fadeInFromBlackHalf
 		setCameraEntity $5
@@ -185,12 +185,12 @@ IntroCutscene1: textCursor $105A        ; Initial text line $105A : "Stay here, 
 		entityShiver $5
 		nextSingleText $80,$5   ; "I wonder if they're here?{D2}"
 		nextSingleText $FF,$FF  ; "{NAME;5} the thief opened{N}the chest.{D2}"
-		setBlocks $703,$101,$130A
+		setBlocks $7,$3,$1,$1,$13,$A
 		nextSingleText $FF,$FF  ; "He found Power Water.{D2}"
 		entityShakeHead $5
 		nextSingleText $80,$5   ; "No, I don't want this!{D2}"
 		nextSingleText $FF,$FF  ; "{NAME;5} discarded the{N}Power Water.{D2}"
-		setBlocks $403,$101,$130A
+		setBlocks $4,$3,$1,$1,$13,$A
 		csWait $1E
 		setActscript $5,$FF,eas_Init
 		setActscript $80,$FF,eas_Init
@@ -201,7 +201,7 @@ IntroCutscene1: textCursor $105A        ; Initial text line $105A : "Stay here, 
 		endMove $8080
 		nextSingleText $0,$81   ; "Where on Earth are those{N}jewels?{D2}"
 		csWait $A
-		setEntityDir $5,$2
+		setFacing $5,$2
 		nextSingleText $80,$5   ; "I'm not sure.{D2}"
 		csWait $14
 		setCameraEntity $5
@@ -224,13 +224,13 @@ IntroCutscene1: textCursor $105A        ; Initial text line $105A : "Stay here, 
 		moreMove $1,$1
 		endMove $8080
 		nextSingleText $80,$5   ; "Something is shining over{N}there...!{D2}"
-		setEntityDir $80,$1
-		setEntityDir $81,$1
+		setFacing $80,$1
+		setFacing $81,$1
 		setCamDest $15,$1
 		nextSingleText $80,$5   ; "Oh, they must be the jewels{N}of light and evil!{D2}"
 		csWait $14
 		fadeOutToBlackHalf
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 ce_48340:       dc.w $3F
 		dc.w $3F
 		dc.w 1

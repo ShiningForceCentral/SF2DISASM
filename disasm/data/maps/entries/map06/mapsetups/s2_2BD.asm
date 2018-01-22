@@ -554,6 +554,6 @@ return_54CC4:
 
 	; End of function sub_54C10
 
-cs_54CC6:       setEntityDir $1F,$1     ; 0023 SET ENTITY FACING 1F 1
+cs_54CC6:       setFacing $1F,$1        ; 0023 SET ENTITY FACING 1F 1
 		entityNod $1F           ; 0026 MAKE ENTITY NOD 1F
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

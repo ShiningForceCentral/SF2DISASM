@@ -178,7 +178,7 @@ loc_22D2A:
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  #1,((FADING_COUNTER-$1000000)).w
 loc_22D56:
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		beq.s   loc_22D6A
 		bset    #0,((byte_FFA82D-$1000000)).w
 		move.b  #$FF,((byte_FFA8FF-$1000000)).w

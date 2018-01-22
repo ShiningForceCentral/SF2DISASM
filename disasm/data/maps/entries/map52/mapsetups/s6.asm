@@ -28,8 +28,8 @@ return_5C4EC:
 
 	; End of function sub_5C4DC
 
-byte_5C4EE:     textCursor $575         ; Initial text line $575 : "Who are they?{W1}"
-		csc45 $30               ; (null)
+byte_5C4EE:     textCursor $575         ; 0004 INIT TEXT CURSOR 575 : "Who are they?{W1}"
+		cameraSpeed $30         ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 30
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
 		setEntityDest $0,$5,$17 ; 0029 SET ENTITY DEST 0 5 17
@@ -38,37 +38,37 @@ byte_5C4EE:     textCursor $575         ; Initial text line $575 : "Who are they
 		endMove $8080
 		nextSingleText $0,$7    ; "Who are they?{W1}"
 		setCamDest $10,$4       ; 0032 SET CAMERA DEST 10 4
-		csWait $5               ; WAIT 5
+		csWait $5
 		setActscript $81,$0,eas_461B6; 0015 SET ACTSCRIPT 81 0 461B6
-		csWait $5               ; WAIT 5
+		csWait $5
 		setActscript $82,$0,eas_461B6; 0015 SET ACTSCRIPT 82 0 461B6
 		nextSingleText $0,$7    ; "They're looking for something.{W1}"
-		csWait $5               ; WAIT 5
+		csWait $5
 		setActscript $81,$0,eas_461B6; 0015 SET ACTSCRIPT 81 0 461B6
-		csWait $5               ; WAIT 5
+		csWait $5
 		setActscript $82,$0,eas_461B6; 0015 SET ACTSCRIPT 82 0 461B6
 		moveEntity $83,$FF,$1,$6; 002D MOVE ENTITY 83 FF 1 6
 		endMove $8080
-		csWait $28              ; WAIT 28
+		csWait $28
 		nextSingleText $0,$83   ; "He's not here...not under{N}the cliff....{W1}"
 		moveEntity $81,$FF,$1,$2; 002D MOVE ENTITY 81 FF 1 2
 		moreMove $0,$1
 		endMove $8080
-		setEntityDir $80,$2     ; 0023 SET ENTITY FACING 80 2
+		setFacing $80,$2        ; 0023 SET ENTITY FACING 80 2
 		nextText $0,$81         ; "There are marks of a battle{N}here and there!{W2}"
 		nextSingleText $0,$81   ; "Against the birdmen of{N}Bedoe?{W1}"
 		entityNod $80           ; 0026 MAKE ENTITY NOD 80
 		nextText $0,$80         ; "Could be...{W2}"
 		nextSingleText $0,$80   ; "see those volcanic rocks?{W1}"
-		csWait $5               ; WAIT 5
+		csWait $5
 		setActscript $81,$0,eas_461E4; 0015 SET ACTSCRIPT 81 0 461E4
-		csWait $3C              ; WAIT 3C
+		csWait $3C
 		nextText $0,$80         ; "Nobody but Volcanon can do{N}that!{W2}"
-		setEntityDir $81,$0     ; 0023 SET ENTITY FACING 81 0
+		setFacing $81,$0        ; 0023 SET ENTITY FACING 81 0
 		nextSingleText $0,$80   ; "He has never before killed{N}birdmen, but...{W1}"
 		moveEntity $83,$FF,$3,$1; 002D MOVE ENTITY 83 FF 3 1
 		endMove $8080
-		csWait $28              ; WAIT 28
+		csWait $28
 		customActscript $83,$FF ; 0014 SET MANUAL ACTSCRIPT 83
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -81,11 +81,11 @@ byte_5C4EE:     textCursor $575         ; Initial text line $575 : "Who are they
 		moreMove $2,$1
 		endMove $8080
 		nextSingleText $0,$83   ; "Who's that?{W1}"
-		setEntityDir $83,$3     ; 0023 SET ENTITY FACING 83 3
+		setFacing $83,$3        ; 0023 SET ENTITY FACING 83 3
 		setCamDest $0,$11       ; 0032 SET CAMERA DEST 0 11
-		setEntityDir $0,$1      ; 0023 SET ENTITY FACING 0 1
-		setEntityDir $7,$3      ; 0023 SET ENTITY FACING 7 3
-		csWait $32              ; WAIT 32
+		setFacing $0,$1         ; 0023 SET ENTITY FACING 0 1
+		setFacing $7,$3         ; 0023 SET ENTITY FACING 7 3
+		csWait $32
 		setCamDest $10,$7       ; 0032 SET CAMERA DEST 10 7
 		setActscript $83,$FF,eas_Init; 0015 SET ACTSCRIPT 83 FF 460CE
 		setActscript $83,$FF,eas_46172; 0015 SET ACTSCRIPT 83 FF 46172
@@ -97,15 +97,15 @@ byte_5C4EE:     textCursor $575         ; Initial text line $575 : "Who are they
 		moreMove $3,$1
 		endMove $8080
 		nextText $0,$80         ; "Polcan people are cowards that{N}live in peace.{W2}"
-		setEntityDir $80,$1     ; 0023 SET ENTITY FACING 80 1
-		setEntityDir $83,$1     ; 0023 SET ENTITY FACING 83 1
+		setFacing $80,$1        ; 0023 SET ENTITY FACING 80 1
+		setFacing $83,$1        ; 0023 SET ENTITY FACING 83 1
 		nextSingleText $0,$80   ; "They shall never return{N}alive!{W1}"
 		setStoryFlag $C         ; Battle 12 unlocked
-		mapSysEvent $34000000   ; 0007 EXECUTE MAP SYSTEM EVENT 34000000
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		mapSysEvent $34,$0,$0,$0; 0007 EXECUTE MAP SYSTEM EVENT 34000000
+		csc_end
 byte_5C622:     entityPosDir $7,$16,$8,$0; 0019 SET ENTITY POS AND FACING 7 16 8 0
-		textCursor $9BD         ; Initial text line $9BD : "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"
+		textCursor $9BD         ; 0004 INIT TEXT CURSOR 9BD : "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"
 		fadeInB                 ; 0039 FADE IN FROM BLACK
 		nextText $0,$7          ; "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"
 		nextSingleText $0,$7    ; "Why do the devils want you?{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

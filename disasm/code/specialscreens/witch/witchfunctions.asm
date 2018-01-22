@@ -22,7 +22,7 @@ InitWitchSuspendVIntFunctions:
 		bsr.w   DisableDisplayAndVInt
 		clr.b   ((byte_FFB198-$1000000)).w
 		move.w  #$48,((CURRENT_SPEAK_SOUND-$1000000)).w 
-		bsr.w   sub_7C5E
+		bsr.w   sub_7C5E        
 		bsr.w   EnableDisplayAndInterrupts
 		movea.l (p_WitchLayout).l,a0
 		lea     $700(a0),a0
@@ -45,6 +45,8 @@ InitWitchSuspendVIntFunctions:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Display witch screen ?
 
 sub_7C5E:
 		jsr     (DisableDisplayAndVInt).w

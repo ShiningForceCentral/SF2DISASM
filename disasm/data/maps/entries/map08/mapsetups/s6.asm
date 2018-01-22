@@ -16,7 +16,7 @@ return_563B0:
 
 	; End of function ms_map8_InitFunction
 
-cs_563B2:       textCursor $50B         ; Initial text line $50B : "Hmmm?{W1}"
+cs_563B2:       textCursor $50B         ; 0004 INIT TEXT CURSOR 50B : "Hmmm?{W1}"
 		setActscript $81,$FF,eas_46172; 0015 SET ACTSCRIPT 81 FF 46172
 		moveEntity $81,$FF,$0,$4; 002D MOVE ENTITY 81 FF 0 4
 		endMove $8080
@@ -30,7 +30,7 @@ cs_563B2:       textCursor $50B         ; Initial text line $50B : "Hmmm?{W1}"
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $81,$FF,$2,$2; 002D MOVE ENTITY 81 FF 2 2
 		endMove $8080
-		setEntityDir $81,$3     ; 0023 SET ENTITY FACING 81 3
+		setFacing $81,$3        ; 0023 SET ENTITY FACING 81 3
 		nextSingleText $0,$81   ; "You're a spy from the new{N}town, aren't you?{W1}"
 		moveEntity $81,$FF,$1,$2; 002D MOVE ENTITY 81 FF 1 2
 		endMove $8080
@@ -43,15 +43,15 @@ cs_563B2:       textCursor $50B         ; Initial text line $50B : "Hmmm?{W1}"
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setEntityDir $81,$1     ; 0023 SET ENTITY FACING 81 1
+		setFacing $81,$1        ; 0023 SET ENTITY FACING 81 1
 		moveEntity $81,$FF,$1,$8; 002D MOVE ENTITY 81 FF 1 8
 		endMove $8080
 		entityPosDir $81,$F,$7,$3; 0019 SET ENTITY POS AND FACING 81 F 7 3
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_56422:       textCursor $50E         ; Initial text line $50E : "Who are you?{N}What are you?{W1}"
+		csc_end
+cs_56422:       textCursor $50E         ; 0004 INIT TEXT CURSOR 50E : "Who are you?{N}What are you?{W1}"
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
 		setEntityDest $7,$E,$A  ; 0029 SET ENTITY DEST 7 E A
-		setEntityDir $7,$1      ; 0023 SET ENTITY FACING 7 1
+		setFacing $7,$1         ; 0023 SET ENTITY FACING 7 1
 		setActscript $0,$FF,eas_46172; 0015 SET ACTSCRIPT 0 FF 46172
 		setActscript $7,$FF,eas_46172; 0015 SET ACTSCRIPT 7 FF 46172
 		customActscript $81,$FF ; 0014 SET MANUAL ACTSCRIPT 81
@@ -61,23 +61,14 @@ cs_56422:       textCursor $50E         ; Initial text line $50E : "Who are you?
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		moveEntity $0,$0,$3,$1  ; 002D MOVE ENTITY 0 0 3 1
 		endMove $8080
 		setActscript $80,$FF,eas_BumpDown
 						; 0015 SET ACTSCRIPT 80 FF 45F34
 		moveEntity $80,$FF,$3,$1; 002D MOVE ENTITY 80 FF 3 1
 		endMove $8080
-		csWait $1E              ; WAIT 1E
-		moveEntity $0,$0,$3,$1  ; 002D MOVE ENTITY 0 0 3 1
-		endMove $8080
-		moveEntity $7,$0,$3,$1  ; 002D MOVE ENTITY 7 0 3 1
-		endMove $8080
-		setActscript $80,$FF,eas_BumpDown
-						; 0015 SET ACTSCRIPT 80 FF 45F34
-		moveEntity $80,$FF,$3,$1; 002D MOVE ENTITY 80 FF 3 1
-		endMove $8080
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		moveEntity $0,$0,$3,$1  ; 002D MOVE ENTITY 0 0 3 1
 		endMove $8080
 		moveEntity $7,$0,$3,$1  ; 002D MOVE ENTITY 7 0 3 1
@@ -86,7 +77,7 @@ cs_56422:       textCursor $50E         ; Initial text line $50E : "Who are you?
 						; 0015 SET ACTSCRIPT 80 FF 45F34
 		moveEntity $80,$FF,$3,$1; 002D MOVE ENTITY 80 FF 3 1
 		endMove $8080
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		moveEntity $0,$0,$3,$1  ; 002D MOVE ENTITY 0 0 3 1
 		endMove $8080
 		moveEntity $7,$0,$3,$1  ; 002D MOVE ENTITY 7 0 3 1
@@ -95,7 +86,16 @@ cs_56422:       textCursor $50E         ; Initial text line $50E : "Who are you?
 						; 0015 SET ACTSCRIPT 80 FF 45F34
 		moveEntity $80,$FF,$3,$1; 002D MOVE ENTITY 80 FF 3 1
 		endMove $8080
-		csWait $1E              ; WAIT 1E
+		csWait $1E
+		moveEntity $0,$0,$3,$1  ; 002D MOVE ENTITY 0 0 3 1
+		endMove $8080
+		moveEntity $7,$0,$3,$1  ; 002D MOVE ENTITY 7 0 3 1
+		endMove $8080
+		setActscript $80,$FF,eas_BumpDown
+						; 0015 SET ACTSCRIPT 80 FF 45F34
+		moveEntity $80,$FF,$3,$1; 002D MOVE ENTITY 80 FF 3 1
+		endMove $8080
+		csWait $1E
 		moveEntity $0,$0,$3,$1  ; 002D MOVE ENTITY 0 0 3 1
 		endMove $8080
 		moveEntity $7,$0,$3,$1  ; 002D MOVE ENTITY 7 0 3 1
@@ -128,16 +128,16 @@ cs_56422:       textCursor $50E         ; Initial text line $50E : "Who are you?
 		endMove $8080
 		setActscript $7,$FF,eas_Jump; 0015 SET ACTSCRIPT 7 FF 45E44
 		nextSingleText $0,$7    ; "You talk too much!{W1}"
-		setEntityDir $0,$3      ; 0023 SET ENTITY FACING 0 3
+		setFacing $0,$3         ; 0023 SET ENTITY FACING 0 3
 		nextText $0,$7          ; "Hey, {LEADER}!{N}Why don't you say something?{W2}"
 		nextSingleText $0,$7    ; "I can't stand this!{W1}"
 		moveEntity $7,$FF,$2,$1 ; 002D MOVE ENTITY 7 FF 2 1
 		moreMove $1,$1
 		endMove $8080
-		setEntityDir $0,$1      ; 0023 SET ENTITY FACING 0 1
+		setFacing $0,$1         ; 0023 SET ENTITY FACING 0 1
 		nextSingleText $0,$7    ; "Hey, you!  I think I{N}understand how you feel,{N}but listen to me!{W1}"
-		setEntityDir $80,$3     ; 0023 SET ENTITY FACING 80 3
-		setEntityDir $81,$3     ; 0023 SET ENTITY FACING 81 3
+		setFacing $80,$3        ; 0023 SET ENTITY FACING 80 3
+		setFacing $81,$3        ; 0023 SET ENTITY FACING 81 3
 		nextSingleText $0,$80   ; "Why?{W1}"
 		moveEntity $7,$FF,$1,$1 ; 002D MOVE ENTITY 7 FF 1 1
 		endMove $8080
@@ -158,18 +158,18 @@ cs_56422:       textCursor $50E         ; Initial text line $50E : "Who are you?
 		nextText $0,$81         ; "Of course, we of Ribble{N}will become allies of{N}Granseal.{W2}"
 		nextSingleText $0,$81   ; "I promise that we will{N}welcome you when you visit{N}us again!{W1}"
 		fadeOutB                ; 003A FADE OUT TO BLACK
-		loadMapEntities ce_55FBE; Entity data to figure out and format
+		loadMapEntities ce_55FBE; 0042 RELATED TO LOADING MAP ENTITIES 55FBE
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
-		setBlocks $2002,$101,$190C; 0034 SET BLOCKS 2002 101 190C
-		setBlocks $2002,$101,$1618; 0034 SET BLOCKS 2002 101 1618
-		setBlocks $2002,$101,$719; 0034 SET BLOCKS 2002 101 719
-		setBlocks $2003,$201,$60F; 0034 SET BLOCKS 2003 201 60F
+		setBlocks $20,$2,$1,$1,$19,$C; 0034 SET BLOCKS 2002 101 190C
+		setBlocks $20,$2,$1,$1,$16,$18; 0034 SET BLOCKS 2002 101 1618
+		setBlocks $20,$2,$1,$1,$7,$19; 0034 SET BLOCKS 2002 101 719
+		setBlocks $20,$3,$2,$1,$6,$F; 0034 SET BLOCKS 2003 201 60F
 		setF $2C5               ; set after the mayor in Ribble scene... this flag unlocks the doors
 		executeSubroutine sub_56632; 000A EXECUTE SUBROUTINE 56632
 		followEntity $7,$0,$2   ; 002C FOLLOW ENTITY 7 0 2
-		csWait $32              ; WAIT 32
+		csWait $32
 		fadeInB                 ; 0039 FADE IN FROM BLACK
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 
 ; =============== S U B R O U T I N E =======================================
 

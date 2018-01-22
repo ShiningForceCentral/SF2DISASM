@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle35\cs_beforebattle.asm :
 ; 0x4D6CE..0x4D88A : Cutscene before battle 35
-bbcs_35:        textCursor $B76         ; Initial text line $B76 : "You're still alive?{W1}"
+bbcs_35:        textCursor $B76
 		loadMapFadeIn $4C,$25,$5
-		loadMapEntities ce_4D832; Entity data to figure out and format
+		loadMapEntities ce_4D832
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$2C,$A,$2
@@ -15,14 +15,14 @@ bbcs_35:        textCursor $B76         ; Initial text line $B76 : "You're still
 		setActscript $1A,$FF,eas_Init
 		entityPosDir $1A,$3F,$3E,$3
 cs_4D728:       fadeInB
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		nextSingleText $0,$80   ; "You're still alive?{W1}"
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$0,eas_Jump
 		setActscript $1F,$FF,eas_Jump
 		nextSingleText $C0,$1F  ; "Geshp!{W1}"
 		setCamDest $16,$B
-		setEntityDir $80,$0
+		setFacing $80,$0
 		nextSingleText $0,$80   ; "Unbelievable!{N}You really are persistent.{W1}"
 		nextText $C0,$7         ; "We'll never stop!{W2}"
 		nextSingleText $C0,$7   ; "We will not die until we{N}destroy all of you.{W1}"
@@ -35,21 +35,21 @@ cs_4D728:       fadeInB
 		entityPosDir $80,$1C,$18,$3
 		animEntityFadeInOut $80,$7
 		csWait $28
-		setEntityDir $81,$3
-		setEntityDir $82,$3
-		setEntityDir $83,$2
-		setEntityDir $85,$0
-		setEntityDir $86,$0
-		setEntityDir $87,$0
-		setEntityDir $88,$0
+		setFacing $81,$3
+		setFacing $82,$3
+		setFacing $83,$2
+		setFacing $85,$0
+		setFacing $86,$0
+		setFacing $87,$0
+		setFacing $88,$0
 		csWait $14
-		setEntityDir $80,$2
+		setFacing $80,$2
 		csWait $1E
-		setEntityDir $80,$1
+		setFacing $80,$1
 		csWait $1E
-		setEntityDir $80,$0
+		setFacing $80,$0
 		csWait $1E
-		setEntityDir $80,$3
+		setFacing $80,$3
 		nextSingleText $0,$80   ; "Don't let them advance!{W1}"
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$0,eas_Jump
@@ -70,9 +70,8 @@ cs_4D728:       fadeInB
 		endMove $8080
 		nextText $0,$1F         ; "Geshp sure is a tricky{N}devil.{W2}"
 		nextSingleText $0,$1F   ; "After him, now!{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4D832:       dc.b   0
-		dc.b $2B 
+		csc_end
+ce_4D832:       dc.w $2B
 		dc.w 9
 		dc.w 2
 		dc.b $2C

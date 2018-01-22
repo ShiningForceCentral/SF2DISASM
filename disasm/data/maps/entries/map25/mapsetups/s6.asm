@@ -18,7 +18,7 @@ return_5D3A8:
 
 cs_5D3AA:       entityPosDir $85,$19,$12,$0; 0019 SET ENTITY POS AND FACING 85 19 12 0
 		entityPosDir $87,$19,$11,$0; 0019 SET ENTITY POS AND FACING 87 19 11 0
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 cs_5D3B8:       customActscript $85,$FF ; 0014 SET MANUAL ACTSCRIPT 85
 		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
 		dc.b $40
@@ -27,7 +27,7 @@ cs_5D3B8:       customActscript $85,$FF ; 0014 SET MANUAL ACTSCRIPT 85
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		setEntityDest $0,$C,$2  ; 0029 SET ENTITY DEST 0 C 2
-		setEntityDir $0,$3      ; 0023 SET ENTITY FACING 0 3
+		setFacing $0,$3         ; 0023 SET ENTITY FACING 0 3
 		moveEntity $85,$FF,$0,$5; 002D MOVE ENTITY 85 FF 0 5
 		endMove $8080
 		moveEntity $85,$FF,$3,$1; 002D MOVE ENTITY 85 FF 3 1
@@ -41,4 +41,4 @@ cs_5D3B8:       customActscript $85,$FF ; 0014 SET MANUAL ACTSCRIPT 85
 		entityShakeHead $0      ; 0027 MAKE ENTITY SHAKE HEAD 0
 		entityPosDir $85,$19,$12,$0; 0019 SET ENTITY POS AND FACING 85 19 12 0
 		entityPosDir $87,$19,$11,$0; 0019 SET ENTITY POS AND FACING 87 19 11 0
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

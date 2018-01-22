@@ -71,9 +71,9 @@ rjt_cutsceneScriptCommands:
 		dc.w (csc1C_stopEntityAnim-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc1D_showPortrait-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc1E_hidePortrait-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc1F_declareForceMemberDead-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc20_addForceMembersOnMapToList-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc21_removeForceMemberFromList-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc1F_addDefeatedAlly-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc20_updateDefeatedAllies-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc21_reviveAlly-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc22_animateEntityFadeInOrOut-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc23_setEntityFacing-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc24_setCameraTargetEntity-rjt_cutsceneScriptCommands) & $FFFF
@@ -83,7 +83,7 @@ rjt_cutsceneScriptCommands:
 		dc.w (csc28_moveEntityNextToPlayer-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc29_setEntityDest-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc2A_entityShiver-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc2B_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc2B_initializeNewEntity-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc2C_followEntity-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc2D_moveEntity-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc2E_hideEntity-rjt_cutsceneScriptCommands) & $FFFF
@@ -106,14 +106,14 @@ rjt_cutsceneScriptCommands:
 		dc.w (csc3F_fadeMapOutToWhite-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc40_fadeMapInFromWhite-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc41_flashScreenWhite-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc42_-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc43_-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc44_-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc45_-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc46_-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc47_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc42_loadMapEntities-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc43_RoofEvent-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc44_reloadEntities-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc45_cameraSpeed-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc46_reloadMap-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc47_StepEvent-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc48_loadMap-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc49_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc49_loadEntitiesFromMapSetup-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc4A_fadeInFromBlackHalf-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc4B_fadeOutToBlackHalf-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
@@ -121,12 +121,12 @@ rjt_cutsceneScriptCommands:
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
 		dc.w (csc50_setEntitySize-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc51_-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc52_-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc53_-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc54_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc51_joinBattleParty-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc52_faceEntity-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc53_setPriority-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc54_joinForceAI-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc55_resetCharacterBattleStats-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc56_-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc56_addFollower-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
 		dc.w csc_doNothing-rjt_cutsceneScriptCommands
@@ -135,7 +135,7 @@ loc_47234:
 		beq.s   loc_4723E
 		jsr     (WaitForCameraToCatchUp).w
 loc_4723E:
-		clr.w   ((word_FFB194-$1000000)).w
+		clr.w   ((CAMERA_SPEED-$1000000)).w
 		movem.l (sp)+,d0-a6
 		rts
 

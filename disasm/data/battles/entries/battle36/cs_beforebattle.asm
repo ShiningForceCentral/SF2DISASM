@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle36\cs_beforebattle.asm :
 ; 0x4D88A..0x4D9A4 : Cutscene before battle 36
-bbcs_36:        textCursor $B82         ; Initial text line $B82 : "You're early!{N}{W2}"
+bbcs_36:        textCursor $B82
 		loadMapFadeIn $35,$F,$0
-		loadMapEntities ce_4D964; Entity data to figure out and format
+		loadMapEntities ce_4D964
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$12,$0,$3
@@ -14,7 +14,7 @@ bbcs_36:        textCursor $B82         ; Initial text line $B82 : "You're early
 		entityPosDir $1A,$3F,$3E,$3
 cs_4D8D6:       playSound MUSIC_BATTLE_THEME_1
 		fadeInB
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		moveEntity $0,$0,$3,$4
 		endMove $8080
 		moveEntity $7,$0,$3,$4
@@ -34,18 +34,17 @@ cs_4D8D6:       playSound MUSIC_BATTLE_THEME_1
 		setActscript $85,$0,eas_AnimSpeedx2
 		csWait $28
 		setCamDest $E,$2
-		setEntityDir $7,$0
+		setFacing $7,$0
 		nextSingleText $0,$7    ; "Sir Astral, why is he smiling?{W1}"
-		setEntityDir $1F,$2
+		setFacing $1F,$2
 		nextSingleText $0,$1F   ; "He believes this is the place{N}where we will die....{W1}"
-		setEntityDir $1F,$3
-		setEntityDir $0,$1
+		setFacing $1F,$3
+		setFacing $0,$1
 		nextSingleText $0,$1F   ; "{LEADER}, be careful!{W1}"
 		entityNod $0
-		setEntityDir $0,$3
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4D964:       dc.b   0
-		dc.b $13
+		setFacing $0,$3
+		csc_end
+ce_4D964:       dc.w $13
 		dc.w 1
 		dc.w 3
 		dc.b $12

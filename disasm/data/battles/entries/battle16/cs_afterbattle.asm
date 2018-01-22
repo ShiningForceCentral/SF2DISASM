@@ -2,8 +2,8 @@
 ; ASM FILE data\battles\entries\battle16\cs_afterbattle.asm :
 ; 0x4B1BC..0x4B1D8 : Cutscene after battle 16
 abcs_battle16:  executeSubroutine csub_4B1D0
-		mapSysEvent $451D3302
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		mapSysEvent $45,$1D,$33,$2
+		csc_end
 
 ; =============== S U B R O U T I N E =======================================
 

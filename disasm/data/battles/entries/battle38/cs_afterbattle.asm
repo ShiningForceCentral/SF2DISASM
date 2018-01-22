@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle38\cs_afterbattle.asm :
 ; 0x4DE8C..0x4E3D2 : Cutscene after battle 38
-abcs_battle38:  textCursor $BC4         ; Initial text line $BC4 : "My traps...{W1}"
+abcs_battle38:  textCursor $BC4
 		loadMapFadeIn $42,$3,$16
-		loadMapEntities ce_4E372; Entity data to figure out and format
+		loadMapEntities ce_4E372
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$5,$19,$0
@@ -32,8 +32,8 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		setActscript $85,$FF,eas_46172
 		setActscript $86,$FF,eas_46172
 		setActscript $87,$FF,eas_46172
-		csc53 $0,$0             ; 0053 UNKNOWN
-		csc53 $88,$FFFF         ; 0053 UNKNOWN
+		setPriority $0,$0
+		setPriority $88,$FFFF
 		fadeInB
 		csWait $3C
 		entityShiver $88
@@ -49,7 +49,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		startEntity $88
-		setEntityDir $88,$1
+		setFacing $88,$1
 		nextSingleText $0,$88   ; "I'm...at the end of my rope.{N}I...must...escape.{W1}"
 		customActscript $88,$FF
 		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
@@ -71,7 +71,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		endMove $8080
 		csWait $C
 		setActscript $88,$FF,eas_461AA
-		setQuakeAmount $1
+		setQuake $1
 		stopEntity $88
 		entityPosDir $88,$8,$18,$2
 		customActscript $88,$FF
@@ -91,16 +91,16 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setQuakeAmount $0
+		setQuake $0
 		moveEntity $88,$FF,$3,$1
 		endMove $8080
-		setEntityDir $88,$3
+		setFacing $88,$3
 		moveEntity $88,$FF,$3,$1
 		endMove $8080
-		setEntityDir $88,$0
+		setFacing $88,$0
 		moveEntity $88,$FF,$3,$1
 		endMove $8080
-		setEntityDir $88,$1
+		setFacing $88,$1
 		csWait $28
 		entityShiver $88
 		csWait $3C
@@ -113,7 +113,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setEntityDir $88,$3
+		setFacing $88,$3
 		csWait $28
 		entityShakeHead $88
 		startEntity $88
@@ -131,17 +131,17 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		moveEntity $7,$FF,$0,$1
 		endMove $8080
 		nextSingleText $C0,$7   ; "You may go.{W1}"
-		setEntityDir $88,$2
+		setFacing $88,$2
 		nextSingleText $0,$88   ; "Thank you.{W1}"
 		setActscript $88,$FF,eas_Init
-		setEntityDir $88,$1
+		setFacing $88,$1
 		setCameraEntity $88
 		csWait $3C
 		moveEntity $0,$FF,$0,$1
 		endMove $8080
-		setEntityDir $0,$3
+		setFacing $0,$3
 		csWait $3C
-		csc45 $8                ; (null)
+		cameraSpeed $8
 		customActscript $88,$FF
 		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
 		dc.b 8
@@ -151,28 +151,28 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $88,$FF,$1,$1
 		endMove $8080
-		setEntityDir $7,$1
-		setEntityDir $0,$2
+		setFacing $7,$1
+		setFacing $0,$2
 		moveEntity $88,$FF,$1,$2
 		endMove $8080
-		setEntityDir $0,$1
+		setFacing $0,$1
 		moveEntity $88,$FF,$1,$2
 		endMove $8080
 		csWait $28
-		setEntityDir $88,$3
+		setFacing $88,$3
 		nextSingleText $0,$88   ; "I won't forget this.{W1}"
 		moveEntity $88,$FF,$1,$3
 		endMove $8080
 		flashScreenWhite $1E
 		playSound SFX_BATTLEFIELD_DEATH
-		setQuakeAmount $3
+		setQuake $3
 		csWait $32
 		csWait $5
 		setActscript $88,$0,eas_461B6
 		csWait $50
-		setQuakeAmount $0
+		setQuake $0
 		csWait $28
-		setEntityDir $88,$3
+		setFacing $88,$3
 		tintMap
 		nextSingleText $C0,$89  ; "Where are you going, Geshp?{W1}"
 		customActscript $88,$FF
@@ -193,7 +193,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		nextText $C0,$89        ; "You failed to get the jewel{N}from {LEADER}.{W2}"
 		nextSingleText $C0,$89  ; "Now, you will pay with your{N}life.{W1}"
 		nextSingleText $0,$88   ; "No, please...NO!{W1}"
-		csc53 $88,$0            ; 0053 UNKNOWN
+		setPriority $88,$0
 		entityPosDir $80,$8,$D,$0
 		csWait $A
 		entityPosDir $81,$A,$E,$2
@@ -214,8 +214,8 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		csWait $28
 		flashScreenWhite $14
 		tintMap
-		setEntityDir $88,$3
-		setQuakeAmount $3
+		setFacing $88,$3
+		setQuake $3
 		customActscript $80,$FF
 		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
 		dc.b $50
@@ -275,7 +275,7 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		playSound SFX_BOLT_SPELL
 		moveEntity $80,$FF,$3,$3
 		endMove $8080
-		setEntityDir $88,$2
+		setFacing $88,$2
 		entitySprite $88,$B4
 		setActscript $88,$0,eas_AnimSpeedx2
 		setActscript $80,$0,eas_JumpLeft
@@ -316,13 +316,13 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		hideEntity $86
 		csWait $8
 		hideEntity $87
-		setQuakeAmount $0
+		setQuake $0
 		setCameraEntity $FFFF
 		csWait $28
 		entitySprite $88,$9F
 		setActscript $88,$FF,eas_Die
 		flickerOnce
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		setCamDest $3,$14
 		moveEntity $1F,$FF,$1,$3
 		endMove $8080
@@ -335,13 +335,10 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		followEntity $1E,$0,$2
 		followEntity $7,$1E,$1
 		followEntity $1F,$1E,$3
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4E372:       dc.b   0
-		dc.b   8
-		dc.b   0
-		dc.b $17
-		dc.b   0
-		dc.b   3
+		csc_end
+ce_4E372:       dc.w 8
+		dc.w $17
+		dc.w 3
 		dc.b 5
 		dc.b $19
 		dc.b 0

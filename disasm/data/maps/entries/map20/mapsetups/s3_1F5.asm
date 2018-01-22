@@ -3,7 +3,7 @@
 ; 0x53766..0x537AC : 
 ms_map20_flag1F5_ZoneEvents:
 		dc.b $1B
-byte_53767:     dc.b $34
+		dc.b $34
 		dc.w sub_5376E-ms_map20_flag1F5_ZoneEvents
 		dc.w $FD00
 		dc.w nullsub_84-ms_map20_flag1F5_ZoneEvents
@@ -11,7 +11,7 @@ byte_53767:     dc.b $34
 ; =============== S U B R O U T I N E =======================================
 
 sub_5376E:
-		moveq   #(byte_53767-ms_map20_flag1F5_ZoneEvents),d0
+		moveq   #1,d0
 		jsr     j_GetMaxHP
 		jsr     j_SetCurrentHP
 		jsr     j_GetMaxMP

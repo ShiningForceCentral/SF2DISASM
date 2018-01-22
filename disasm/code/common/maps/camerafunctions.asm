@@ -14,7 +14,7 @@ VInt_AdjustCameraToPlayer:
 		adda.w  d0,a0
 		move.w  (a0)+,d4
 		move.w  (a0)+,d5
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_45E8
 		move.w  ((word_FFA814-$1000000)).w,d2
 		move.w  ((word_FFA816-$1000000)).w,d3
@@ -94,11 +94,11 @@ loc_46A0:
 loc_46AA:
 		cmpi.b  #5,((FADING_SETTING-$1000000)).w
 		bne.s   loc_46B4
-		moveq   #$20,d7 
+		moveq   #$20,d7 ; base camera speed
 loc_46B4:
-		tst.w   ((word_FFB194-$1000000)).w
+		tst.w   ((CAMERA_SPEED-$1000000)).w
 		beq.s   loc_46BE
-		move.w  ((word_FFB194-$1000000)).w,d7
+		move.w  ((CAMERA_SPEED-$1000000)).w,d7
 loc_46BE:
 		tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
 		bne.s   loc_46D0

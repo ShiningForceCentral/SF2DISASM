@@ -15,7 +15,7 @@ loc_4C74:
 		sub.b   ((byte_FFAF6B-$1000000)).w,d6
 		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
 		lea     (byte_FFDD00).l,a1
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_4CB2
 		move.w  ((word_FFA806-$1000000)).w,d2
 		sub.w   (dword_FFD100+2).l,d2
@@ -639,7 +639,7 @@ loc_5256:
 loc_5278:
 		cmpi.w  #$400,d3
 		bne.s   loc_528A
-		bsr.w   sub_3E40        
+		bsr.w   OpenDoor        
 		move.w  (a4,d2.w),d3
 		andi.w  #$3C00,d3
 loc_528A:
@@ -1139,7 +1139,7 @@ loc_575C:
 		andi.w  #$3C00,d3
 		cmpi.w  #$400,d3
 		bne.s   loc_5782
-		bsr.w   sub_3E40        
+		bsr.w   OpenDoor        
 loc_577A:
 		move.w  (a4,d2.w),d3
 		andi.w  #$3C00,d3
@@ -1283,7 +1283,7 @@ loc_58DE:
 		andi.w  #$3C00,d3
 		cmpi.w  #$400,d3
 		bne.s   loc_5904
-		bsr.w   sub_3E40        
+		bsr.w   OpenDoor        
 		move.w  (a4,d2.w),d3
 		andi.w  #$3C00,d3
 loc_5904:
@@ -2545,7 +2545,7 @@ GetMapPixelCoordRAMOffset:
 		bne.s   loc_622E        
 		tst.b   $11(a0)
 		beq.s   loc_622E        
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_621E
 		move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d2
 		move.w  ((MAP_AREA_LAYER2_STARTY-$1000000)).w,d3

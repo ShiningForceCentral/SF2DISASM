@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle28\cs_beforebattle.asm :
 ; 0x4BE8C..0x4C07C : Cutscene before battle 28
-bbcs_28:        textCursor $A65         ; Initial text line $A65 : "Wow, look at that?{W1}"
+bbcs_28:        textCursor $A65
 		loadMapFadeIn $2F,$0,$4
-		loadMapEntities ce_4C03C; Entity data to figure out and format
+		loadMapEntities ce_4C03C
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$0,$9,$0
@@ -12,7 +12,7 @@ bbcs_28:        textCursor $A65         ; Initial text line $A65 : "Wow, look at
 		stopEntity $81
 		playSound MUSIC_BATTLE_THEME_3
 		fadeInB
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		moveEntity $0,$0,$0,$3
 		endMove $8080
 		moveEntity $1F,$0,$0,$3
@@ -26,7 +26,7 @@ bbcs_28:        textCursor $A65         ; Initial text line $A65 : "Wow, look at
 		moveEntity $1F,$FF,$0,$2
 		moreMove $3,$1
 		endMove $8080
-		setEntityDir $1F,$0
+		setFacing $1F,$0
 		nextSingleText $0,$1F   ; "Wow, look at that?{W1}"
 		setCamDest $7,$B
 		entityShiver $82
@@ -72,11 +72,11 @@ bbcs_28:        textCursor $A65         ; Initial text line $A65 : "Wow, look at
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setQuakeAmount $2
+		setQuake $2
 		playSound SFX_HIT_2
 		moveEntity $0,$FF,$3,$1
 		endMove $8080
-		setEntityDir $0,$1
+		setFacing $0,$1
 		customActscript $0,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -87,18 +87,18 @@ bbcs_28:        textCursor $A65         ; Initial text line $A65 : "Wow, look at
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		waitIdle $1F
-		setEntityDir $1F,$0
-		setQuakeAmount $0
+		setFacing $1F,$0
+		setQuake $0
 		nextText $0,$1F         ; "Look!{W2}"
 		nextSingleText $0,$1F   ; "She's stranded on the{N}bridge.{W1}"
-		setEntityDir $7,$0
+		setFacing $7,$0
 		entityShiver $0
 		setCamDest $7,$15
 		nextSingleText $0,$7    ; "Get away from the bridge{N}before it falls into the{N}river!{W1}"
 		nextText $0,$81         ; "I sprained my ankle!{N}Please help me!{W2}"
 		nextSingleText $0,$81   ; "I can't stand up!{W1}"
 		setCamDest $0,$6
-		setEntityDir $1F,$3
+		setFacing $1F,$3
 		setActscript $1F,$FF,eas_Jump
 		csWait $1E
 		setActscript $0,$FF,eas_Init
@@ -107,9 +107,8 @@ bbcs_28:        textCursor $A65         ; Initial text line $A65 : "Wow, look at
 		nextSingleText $0,$1F   ; "{LEADER}, defeat all the{N}monsters!  Hurry!{W1}"
 		setActscript $7,$0,eas_Jump
 		entityNod $0
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4C03C:       dc.b   0
-		dc.b   1
+		csc_end
+ce_4C03C:       dc.w 1
 		dc.w 8
 		dc.w 0
 		dc.b 0

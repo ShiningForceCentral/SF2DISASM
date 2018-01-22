@@ -247,24 +247,24 @@ return_52F0A:
 
 	; End of function sub_52EF2
 
-cs_52F0C:       textCursor $23F         ; Initial text line $23F : "I didn't want to involve{N}you, my children...but{N}this might be a good{W2}{N}opportunity for you to{N}learn how to properly{N}serve your King.{W2}{N}Are you ready, {LEADER}?{W1}"
+cs_52F0C:       textCursor $23F         ; 0004 INIT TEXT CURSOR 23F : "I didn't want to involve{N}you, my children...but{N}this might be a good{W2}{N}opportunity for you to{N}learn how to properly{N}serve your King.{W2}{N}Are you ready, {LEADER}?{W1}"
 		nextText $0,$8C         ; "I didn't want to involve{N}you, my children...but{N}this might be a good{W2}{N}opportunity for you to{N}learn how to properly{N}serve your King.{W2}{N}Are you ready, {LEADER}?{W1}"
 		yesNo                   ; 0011 STORY YESNO PROMPT
 		jumpIfFlagSet $59,cs_52F40; YES/NO prompt answer
 		nextSingleText $0,$8C   ; "Then, I'll wait for you here.{W2}{N}We have to hurry.{N}Come back when you're{N}ready.{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_52F24:       textCursor $241         ; Initial text line $241 : "Are you ready, {LEADER}?{W1}"
+		csc_end
+cs_52F24:       textCursor $241         ; 0004 INIT TEXT CURSOR 241 : "Are you ready, {LEADER}?{W1}"
 		nextText $0,$8C         ; "Are you ready, {LEADER}?{W1}"
 		yesNo                   ; 0011 STORY YESNO PROMPT
 		jumpIfFlagSet $59,cs_52F40; YES/NO prompt answer
-		textCursor $240         ; Initial text line $240 : "Then, I'll wait for you here.{W2}{N}We have to hurry.{N}Come back when you're{N}ready.{W1}"
+		textCursor $240         ; 0004 INIT TEXT CURSOR 240 : "Then, I'll wait for you here.{W2}{N}We have to hurry.{N}Come back when you're{N}ready.{W1}"
 		nextSingleText $0,$8C   ; "Then, I'll wait for you here.{W2}{N}We have to hurry.{N}Come back when you're{N}ready.{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_52F40:       textCursor $242         ; Initial text line $242 : "Good!{N}Let's go to the tower.{N}Follow me.{W1}"
+		csc_end
+cs_52F40:       textCursor $242         ; 0004 INIT TEXT CURSOR 242 : "Good!{N}Let's go to the tower.{N}Follow me.{W1}"
 		nextSingleText $0,$8C   ; "Good!{N}Let's go to the tower.{N}Follow me.{W1}"
 		moveEntity $8C,$FF,$1,$1; 002D MOVE ENTITY 8C FF 1 1
 		moreMove $2,$8
 		endMove $8080
 		entityPosDir $8C,$3F,$3F,$2; 0019 SET ENTITY POS AND FACING 8C 3F 3F 2
 		setF $260               ; set after agreeing to go to the tower with Astral
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

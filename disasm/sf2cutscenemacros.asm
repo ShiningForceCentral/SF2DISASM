@@ -79,11 +79,14 @@ csc06:	macro
 	
 csc07:	macro
 	dc.w $07
-	dc.l \1
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
 	endm
 	
 mapSysEvent:	macro ;alias
-	csc07 \1
+	csc07 \1,\2,\3,\4
 	endm
 	
 csc08:	macro
@@ -315,7 +318,7 @@ csc1F:	macro
 	dc.w \1
 	endm
 	
-declareForceMemberDead:	macro ;alias
+allyDefeated:	macro ;alias
 	csc1F \1
 	endm	
 	
@@ -323,7 +326,7 @@ csc20:	macro
 	dc.w $20
 	endm
 	
-declareForceMembersDead:	macro ;alias
+updateDefeatedAllies:	macro ;alias
 	csc20
 	endm	
 	
@@ -332,7 +335,7 @@ csc21:	macro
 	dc.w \1
 	endm
 	
-revive:	macro ;alias
+reviveAlly:	macro ;alias
 	csc21 \1
 	endm	
 	
@@ -352,7 +355,7 @@ csc23:	macro
 	dc.b \2
 	endm
 		
-setEntityDir:	macro ;alias
+setFacing:	macro ;alias
 	csc23 \1,\2
 	endm	
 	
@@ -430,6 +433,10 @@ csc2B:	macro
 	dc.b \3
 	dc.b \4
 	dc.b \5
+	endm	
+	
+newEntity:	macro ;alias
+	csc2B \1,\2,\3,\4,\5
 	endm	
 	
 csc2C:	macro
@@ -513,27 +520,37 @@ csc33:	macro
 	dc.w \1
 	endm
 		
-setQuakeAmount:	macro ;alias
+setQuake:	macro ;alias
 	csc33 \1
 	endm
 	
 csc34:	macro
 	dc.w $34
-	dc.w \1
-	dc.w \2
-	dc.w \3
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.b \5
+	dc.b \6
 	endm
 	
 setBlocks:	macro ;alias
-	csc34 \1,\2,\3
+	csc34 \1,\2,\3,\4,\5,\6
 	endm	
 	
 csc35:	macro
 	dc.w $35
-	dc.w \1
-	dc.w \2
-	dc.w \3
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.b \5
+	dc.b \6
 	endm
+	
+setBlocksVar:	macro ;alias
+	csc35 \1,\2,\3,\4,\5,\6
+	endm	
 	
 csc36:	macro
 	dc.w $36
@@ -638,14 +655,26 @@ csc43:	macro
 	dc.w \2
 	endm
 	
+roofEvent:	macro ;alias
+	csc43 \1,\2
+	endm
+	
 csc44:	macro
 	dc.w $44
 	dc.l \1
 	endm
 	
+reloadEntities:	macro ;alias
+	csc44 \1
+	endm
+	
 csc45:	macro
 	dc.w $45
 	dc.w \1
+	endm
+	
+cameraSpeed:	macro ;alias
+	csc45 \1
 	endm
 	
 csc46:	macro
@@ -654,10 +683,18 @@ csc46:	macro
 	dc.w \2
 	endm
 	
+reloadMap:	macro ;alias
+	csc46 \1,\2
+	endm	
+	
 csc47:	macro
 	dc.w $47
 	dc.w \1
 	dc.w \2
+	endm
+	
+stepEvent:	macro ;alias
+	csc47 \1,\2
 	endm
 	
 csc48:	macro
@@ -677,6 +714,10 @@ csc49:	macro
 	dc.w \2
 	dc.w \3
 	endm
+	
+loadEntitiesFromMapSetup:	macro ;alias
+	csc49 \1,\2,\3
+	endm	
 	
 csc4A:	macro
 	dc.w $4A
@@ -700,7 +741,7 @@ csc50:	macro
 	dc.w \2
 	endm
 	
-setEntitySize:	macro ;alias
+setSize:	macro ;alias
 	csc50 \1,\2
 	endm	
 	
@@ -709,17 +750,29 @@ csc51:	macro
 	dc.w \1
 	endm
 	
+joinBatParty:	macro ;alias
+	csc51 \1
+	endm	
+	
 csc52:	macro
 	dc.w $52
 	dc.w \1
 	dc.w \2
 	endm
 	
+faceEntity:	macro ;alias
+	csc52 \1,\2
+	endm	
+	
 csc53:	macro
 	dc.w $53
 	dc.w \1
 	dc.w \2
 	endm
+	
+setPriority:	macro ;alias
+	csc53 \1,\2
+	endm	
 	
 csc54:	macro
 	dc.w $54
@@ -738,6 +791,10 @@ resetForceBattleStats:	macro ;alias
 csc56:	macro
 	dc.w $56
 	dc.w \1
+	endm
+	
+addNewFollower:	macro ;alias
+	csc56 \1
 	endm
 	
 cscNop:	macro

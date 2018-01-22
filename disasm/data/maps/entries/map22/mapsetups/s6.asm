@@ -29,8 +29,8 @@ return_59654:
 
 	; End of function ms_map22_InitFunction
 
-cs_59656:       textCursor $6D4         ; Initial text line $6D4 : "What happened?{W2}"
-		csc46 $0,$13            ; 0046 UNKNOWN
+cs_59656:       textCursor $6D4         ; 0004 INIT TEXT CURSOR 6D4 : "What happened?{W2}"
+		reloadMap $0,$13        ; 0046  0 13
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
 		setActscript $1F,$FF,eas_Init; 0015 SET ACTSCRIPT 1F FF 460CE
@@ -110,7 +110,7 @@ cs_59656:       textCursor $6D4         ; Initial text line $6D4 : "What happene
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		csWait $64              ; WAIT 64
+		csWait $64
 		startEntity $0          ; 001B START ENTITY ANIM 0
 		startEntity $7          ; 001B START ENTITY ANIM 7
 		startEntity $1F         ; 001B START ENTITY ANIM 1F
@@ -120,10 +120,10 @@ cs_59656:       textCursor $6D4         ; Initial text line $6D4 : "What happene
 		entityShakeHead $0      ; 0027 MAKE ENTITY SHAKE HEAD 0
 		entityShakeHead $7      ; 0027 MAKE ENTITY SHAKE HEAD 7
 		entityShakeHead $1F     ; 0027 MAKE ENTITY SHAKE HEAD 1F
-		setEntityDir $0,$1      ; 0023 SET ENTITY FACING 0 1
-		setEntityDir $7,$0      ; 0023 SET ENTITY FACING 7 0
-		setEntityDir $1F,$2     ; 0023 SET ENTITY FACING 1F 2
-		csWait $14              ; WAIT 14
+		setFacing $0,$1         ; 0023 SET ENTITY FACING 0 1
+		setFacing $7,$0         ; 0023 SET ENTITY FACING 7 0
+		setFacing $1F,$2        ; 0023 SET ENTITY FACING 1F 2
+		csWait $14
 		nextText $C0,$1F        ; "What happened?{W2}"
 		nextText $C0,$1F        ; "A strange feeling swept over{N}me when I entered that door.{W2}"
 		nextSingleText $C0,$1F  ; "Then, it felt like...I was{N}lifted upward!{W1}"
@@ -139,35 +139,35 @@ cs_59656:       textCursor $6D4         ; Initial text line $6D4 : "What happene
 		moveEntity $1F,$FF,$2,$1; 002D MOVE ENTITY 1F FF 2 1
 		endMove $8080
 		nextSingleText $C0,$1F  ; "Small?  How small?{W1}"
-		csWait $5               ; WAIT 5
+		csWait $5
 		setActscript $7,$0,eas_461B6; 0015 SET ACTSCRIPT 7 0 461B6
-		csWait $64              ; WAIT 64
+		csWait $64
 		moveEntity $7,$FF,$3,$2 ; 002D MOVE ENTITY 7 FF 3 2
 		moreMove $0,$1
 		endMove $8080
-		csWait $5               ; WAIT 5
+		csWait $5
 		setActscript $7,$0,eas_461B6; 0015 SET ACTSCRIPT 7 0 461B6
-		csWait $82              ; WAIT 82
-		setEntityDir $7,$1      ; 0023 SET ENTITY FACING 7 1
-		setEntityDir $0,$3      ; 0023 SET ENTITY FACING 0 3
-		setEntityDir $1F,$3     ; 0023 SET ENTITY FACING 1F 3
+		csWait $82
+		setFacing $7,$1         ; 0023 SET ENTITY FACING 7 1
+		setFacing $0,$3         ; 0023 SET ENTITY FACING 0 3
+		setFacing $1F,$3        ; 0023 SET ENTITY FACING 1F 3
 		nextSingleText $0,$7    ; "Let's see...now we're on a{N}desk...and it's very large,{N}like a village.{W1}"
 		nextSingleText $0,$80   ; "Exactly.{W1}"
 		moveEntity $0,$0,$2,$1  ; 002D MOVE ENTITY 0 0 2 1
 		endMove $8080
 		moveEntity $7,$FF,$0,$1 ; 002D MOVE ENTITY 7 FF 0 1
 		endMove $8080
-		csWait $5               ; WAIT 5
+		csWait $5
 		setActscript $0,$0,eas_461B6; 0015 SET ACTSCRIPT 0 0 461B6
-		csWait $A               ; WAIT A
-		csWait $5               ; WAIT 5
+		csWait $A
+		csWait $5
 		setActscript $7,$0,eas_461B6; 0015 SET ACTSCRIPT 7 0 461B6
-		csWait $5               ; WAIT 5
+		csWait $5
 		setActscript $1F,$0,eas_461B6; 0015 SET ACTSCRIPT 1F 0 461B6
-		csWait $82              ; WAIT 82
-		setEntityDir $7,$3      ; 0023 SET ENTITY FACING 7 3
-		setEntityDir $0,$3      ; 0023 SET ENTITY FACING 0 3
-		setEntityDir $1F,$3     ; 0023 SET ENTITY FACING 1F 3
+		csWait $82
+		setFacing $7,$3         ; 0023 SET ENTITY FACING 7 3
+		setFacing $0,$3         ; 0023 SET ENTITY FACING 0 3
+		setFacing $1F,$3        ; 0023 SET ENTITY FACING 1F 3
 		setActscript $0,$FF,eas_Jump; 0015 SET ACTSCRIPT 0 FF 45E44
 		setActscript $7,$0,eas_Jump; 0015 SET ACTSCRIPT 7 0 45E44
 		entityShiver $0         ; 002A MAKE ENTITY SHIVER 0
@@ -183,61 +183,61 @@ cs_59656:       textCursor $6D4         ; Initial text line $6D4 : "What happene
 		nextText $0,$7          ; "Goliath!{W2}"
 		setActscript $7,$FF,eas_Jump; 0015 SET ACTSCRIPT 7 FF 45E44
 		setActscript $7,$FF,eas_Jump; 0015 SET ACTSCRIPT 7 FF 45E44
-		csWait $A               ; WAIT A
+		csWait $A
 		nextSingleText $0,$7    ; "Hey, what did you do to us?{W1}"
 		nextText $0,$80         ; "I told you not to go in{N}there.  You didn't listen{N}to my warning.{W2}"
 		nextSingleText $0,$80   ; "You guys look so cute!{N}Ha, ha!{N}Bye, little kiddies!{W1}"
-		csWait $14              ; WAIT 14
+		csWait $14
 		playSound SFX_DIALOG_BLEEP_6; 0005 PLAY SOUND SFX_DIALOG_BLEEP_6
-		csWait $14              ; WAIT 14
+		csWait $14
 		playSound SFX_DIALOG_BLEEP_6; 0005 PLAY SOUND SFX_DIALOG_BLEEP_6
-		csWait $14              ; WAIT 14
+		csWait $14
 		playSound SFX_DIALOG_BLEEP_6; 0005 PLAY SOUND SFX_DIALOG_BLEEP_6
-		csWait $14              ; WAIT 14
+		csWait $14
 		playSound SFX_DIALOG_BLEEP_6; 0005 PLAY SOUND SFX_DIALOG_BLEEP_6
-		csWait $14              ; WAIT 14
+		csWait $14
 		playSound SFX_DIALOG_BLEEP_6; 0005 PLAY SOUND SFX_DIALOG_BLEEP_6
-		setEntityDir $0,$0      ; 0023 SET ENTITY FACING 0 0
-		setEntityDir $7,$0      ; 0023 SET ENTITY FACING 7 0
-		setEntityDir $1F,$0     ; 0023 SET ENTITY FACING 1F 0
-		csWait $14              ; WAIT 14
+		setFacing $0,$0         ; 0023 SET ENTITY FACING 0 0
+		setFacing $7,$0         ; 0023 SET ENTITY FACING 7 0
+		setFacing $1F,$0        ; 0023 SET ENTITY FACING 1F 0
+		csWait $14
 		playSound SFX_DIALOG_BLEEP_8; 0005 PLAY SOUND SFX_DIALOG_BLEEP_8
-		csWait $14              ; WAIT 14
+		csWait $14
 		playSound SFX_DIALOG_BLEEP_8; 0005 PLAY SOUND SFX_DIALOG_BLEEP_8
-		csWait $14              ; WAIT 14
+		csWait $14
 		playSound SFX_DIALOG_BLEEP_8; 0005 PLAY SOUND SFX_DIALOG_BLEEP_8
-		csWait $14              ; WAIT 14
+		csWait $14
 		playSound SFX_DIALOG_BLEEP_8; 0005 PLAY SOUND SFX_DIALOG_BLEEP_8
-		csWait $14              ; WAIT 14
+		csWait $14
 		playSound SFX_DIALOG_BLEEP_8; 0005 PLAY SOUND SFX_DIALOG_BLEEP_8
-		csWait $32              ; WAIT 32
+		csWait $32
 		moveEntity $7,$FF,$2,$2 ; 002D MOVE ENTITY 7 FF 2 2
 		endMove $8080
-		setEntityDir $0,$3      ; 0023 SET ENTITY FACING 0 3
-		setEntityDir $7,$1      ; 0023 SET ENTITY FACING 7 1
-		setEntityDir $1F,$3     ; 0023 SET ENTITY FACING 1F 3
+		setFacing $0,$3         ; 0023 SET ENTITY FACING 0 3
+		setFacing $7,$1         ; 0023 SET ENTITY FACING 7 1
+		setFacing $1F,$3        ; 0023 SET ENTITY FACING 1F 3
 		nextText $0,$7          ; "{LEADER}, cheer up!{W2}"
 		nextSingleText $0,$7    ; "Let's look around this{N}Desktop Kingdom.{W1}"
-		setEntityDir $0,$0      ; 0023 SET ENTITY FACING 0 0
-		setEntityDir $1F,$2     ; 0023 SET ENTITY FACING 1F 2
+		setFacing $0,$0         ; 0023 SET ENTITY FACING 0 0
+		setFacing $1F,$2        ; 0023 SET ENTITY FACING 1F 2
 		nextSingleText $0,$1F   ; "I agree!  We can meet Creed{N}later.{W1}"
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
 		setActscript $1F,$FF,eas_Init; 0015 SET ACTSCRIPT 1F FF 460CE
 		followEntity $7,$0,$2   ; 002C FOLLOW ENTITY 7 0 2
 		followEntity $1F,$7,$2  ; 002C FOLLOW ENTITY 1F 7 2
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_5994E:       textCursor $700         ; Initial text line $700 : "Are you ready?{W2}"
-		csWait $32              ; WAIT 32
+		csc_end
+cs_5994E:       textCursor $700         ; 0004 INIT TEXT CURSOR 700 : "Are you ready?{W2}"
+		csWait $32
 		setCamDest $A,$0        ; 0032 SET CAMERA DEST A 0
 		nextText $0,$86         ; "Are you ready?{W2}"
 		nextSingleText $0,$86   ; "Now, start the battle!{N}Do your best!{W1}"
 		setStoryFlag $16        ; Battle 22 unlocked
-		mapSysEvent $16000000   ; 0007 EXECUTE MAP SYSTEM EVENT 16000000
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_5996E:       textCursor $702         ; Initial text line $702 : "Checkmate!{N}This is for you.{W1}"
+		mapSysEvent $16,$0,$0,$0; 0007 EXECUTE MAP SYSTEM EVENT 16000000
+		csc_end
+cs_5996E:       textCursor $702         ; 0004 INIT TEXT CURSOR 702 : "Checkmate!{N}This is for you.{W1}"
 		setCameraEntity $FFFF   ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
-		csc46 $A,$0             ; 0046 UNKNOWN
+		reloadMap $A,$0         ; 0046  A 0
 		entityPosDir $0,$19,$C,$1; 0019 SET ENTITY POS AND FACING 0 19 C 1
 		entityPosDir $7,$18,$D,$1; 0019 SET ENTITY POS AND FACING 7 18 D 1
 		entityPosDir $1F,$19,$D,$1; 0019 SET ENTITY POS AND FACING 1F 19 D 1
@@ -246,11 +246,11 @@ cs_5996E:       textCursor $702         ; Initial text line $702 : "Checkmate!{N
 		setCamDest $14,$7       ; 0032 SET CAMERA DEST 14 7
 		nextText $0,$86         ; "A Cotton Balloon is inside.{W2}"
 		nextSingleText $0,$86   ; "With it you can leave{N}Desktop Kingdom safely.{N}Good luck!{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 cs_599A4:       moveEntity $88,$FF,$1,$1; 002D MOVE ENTITY 88 FF 1 1
 		endMove $8080
-		setEntityDir $88,$3     ; 0023 SET ENTITY FACING 88 3
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		setFacing $88,$3        ; 0023 SET ENTITY FACING 88 3
+		csc_end
 cs_599B2:       setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
 		setActscript $1F,$FF,eas_Init; 0015 SET ACTSCRIPT 1F FF 460CE
@@ -331,5 +331,5 @@ cs_599B2:       setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		endMove $8080
 		moveEntity $8B,$FF,$3,$6; 002D MOVE ENTITY 8B FF 3 6
 		endMove $8080
-		mapSysEvent $1A1A0803   ; 0007 EXECUTE MAP SYSTEM EVENT 1A1A0803
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		mapSysEvent $1A,$1A,$8,$3; 0007 EXECUTE MAP SYSTEM EVENT 1A1A0803
+		csc_end

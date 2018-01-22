@@ -137,7 +137,7 @@ sub_3758:
 		clr.w   ((word_FFA80E-$1000000)).w
 		cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 		beq.s   loc_3770
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		beq.s   loc_3770
 loc_376A:
 		move.w  #$2000,((word_FFA80E-$1000000)).w
@@ -174,7 +174,7 @@ sub_37B2:
 		clr.w   ((word_FFA80E-$1000000)).w
 		cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 		beq.s   loc_37CA
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		beq.s   loc_37CA
 		move.w  #$2000,((word_FFA80E-$1000000)).w
 loc_37CA:
@@ -214,7 +214,7 @@ sub_380C:
 loc_3810:
 		cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 		beq.s   loc_3824
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_3824
 		move.w  #$2000,((word_FFA80E-$1000000)).w
 loc_3824:
@@ -250,7 +250,7 @@ sub_3866:
 		clr.w   ((word_FFA80E-$1000000)).w
 		cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 		beq.s   loc_387E
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_387E
 		move.w  #$2000,((word_FFA80E-$1000000)).w
 loc_387E:
@@ -287,7 +287,7 @@ sub_38C0:
 		clr.w   d2
 		move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d2
 		bpl.s   loc_38E6
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_38DC
 loc_38D2:
 		move.w  ((word_FFA810-$1000000)).w,d0
@@ -304,7 +304,7 @@ loc_38E6:
 		adda.w  d2,a0
 		move.w  (a0)+,d2
 		move.w  (a0)+,d3
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_390A
 		sub.w   ((word_FFA814-$1000000)).w,d2
 		sub.w   ((word_FFA816-$1000000)).w,d3
@@ -348,7 +348,7 @@ loc_3944:
 		clr.w   ((word_FFA80E-$1000000)).w
 		cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 		beq.s   loc_3968
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		beq.s   loc_3968
 loc_3962:
 		move.w  #$2000,((word_FFA80E-$1000000)).w
@@ -484,7 +484,7 @@ loc_3AC8:
 		clr.w   ((word_FFA80E-$1000000)).w
 		cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
 		beq.s   loc_3AE0
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_3AE0
 		move.w  #$2000,((word_FFA80E-$1000000)).w
 loc_3AE0:
@@ -719,7 +719,7 @@ loc_3D40:
 sub_3D46:
 		move.l  ((word_FFA808-$1000000)).w,(dword_FFD500).l
 		move.l  ((word_FFA804-$1000000)).w,(dword_FFD100).l
-		move.w  ((word_FFA80C-$1000000)).w,d6
+		move.w  ((QUAKE_AMPLITUDE-$1000000)).w,d6
 		beq.s   loc_3D7E
 		addq.w  #1,d6
 		bsr.w   GetRandomValue
@@ -752,8 +752,8 @@ GetRandomValue:
 ; =============== S U B R O U T I N E =======================================
 
 sub_3D96:
-		bsr.w   sub_3DB0
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		bsr.w   CopyMapBlocks
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		beq.s   loc_3DA8
 		bset    #0,((byte_FFA82D-$1000000)).w
 		bra.s   return_3DAE
@@ -767,7 +767,8 @@ return_3DAE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3DB0:
+CopyMapBlocks:
+		
 		movem.l d0-d7/a2,-(sp)
 		clr.w   d7
 		move.b  d1,d7
@@ -802,7 +803,7 @@ loc_3DE2:
 		movem.l (sp)+,d0-d7/a2
 		rts
 
-	; End of function sub_3DB0
+	; End of function CopyMapBlocks
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -830,7 +831,7 @@ loc_3E10:
 
 ; uses door open SFX
 
-sub_3E40:
+OpenDoor:
 		cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 		bne.w   return_3F22
 		movem.w d0-d7,-(sp)
@@ -848,7 +849,7 @@ sub_3E40:
 		movea.l (p_pt_MapData).l,a2
 		lsl.w   #2,d7
 		movea.l (a2,d7.w),a2
-		movea.l $16(a2),a2
+		movea.l $16(a2),a2      ; get map step events
 loc_3E80:
 		tst.b   (a2)
 		bmi.w   loc_3F1E
@@ -904,7 +905,7 @@ loc_3EF0:
 loc_3F06:
 		trap    #SOUND_COMMAND
 		dc.w SFX_DOOR_OPEN      ; door open
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		beq.s   loc_3F18
 		bset    #0,((byte_FFA82D-$1000000)).w
 		bra.s   loc_3F1E
@@ -919,7 +920,7 @@ loc_3F24:
 		addq.w  #1,d2
 		bra.w   loc_3E80
 
-	; End of function sub_3E40
+	; End of function OpenDoor
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1149,7 +1150,7 @@ loc_416E:
 		jsr     j_SetFlag
 		move.w  #MAP_BLOCKIDX_OPENCHEST,(a2,d0.w)
 						; set block idx to open chest
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		beq.s   loc_4188
 		bset    #0,((byte_FFA82D-$1000000)).w
 		bra.s   loc_418E
@@ -1171,7 +1172,7 @@ CloseChest:
 		blt.s   loc_41C0
 		jsr     j_ClearFlag
 		move.w  #MAP_BLOCKIDX_CLOSEDCHEST,(a2,d0.w)
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		beq.s   loc_41BA
 		bset    #0,((byte_FFA82D-$1000000)).w
 		bra.s   loc_41C0
@@ -1361,7 +1362,7 @@ loc_4340:
 sub_4344:
 		movem.l a0-a1,-(sp)
 		movem.w d7,-(sp)
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_4358
 		clr.w   ((word_FFA80E-$1000000)).w
 		bra.s   loc_435E
@@ -1395,7 +1396,7 @@ loc_439A:
 sub_43A4:
 		movem.l a0-a1,-(sp)
 		movem.w d7,-(sp)
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		beq.s   loc_43B8
 		clr.w   ((word_FFA80E-$1000000)).w
 		bra.s   loc_43BE

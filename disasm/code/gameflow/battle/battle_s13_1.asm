@@ -4,7 +4,12 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AC29C:
+; Load base tiles and ...  generate font from basetile font !
+; Stretches characters from 1 tile to 2 tiles vertically.
+; Also creates a shadow effect using palette index 2.
+
+LoadEndCreditsFont:
+		
 		movea.l (p_BaseTiles).l,a0
 		lea     (FF6802_LOADING_SPACE).l,a1
 		jsr     (LoadCompressedData).w
@@ -81,7 +86,7 @@ loc_1AC362:
 		jsr     (sub_10DC).w    
 		rts
 
-	; End of function sub_1AC29C
+	; End of function LoadEndCreditsFont
 
 
 ; =============== S U B R O U T I N E =======================================

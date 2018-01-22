@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle38\cs_beforebattle.asm :
 ; 0x4DDA4..0x4DE8C : Cutscene before battle 38
-bbcs_38:        textCursor $BBB         ; Initial text line $BBB : "Stop!{W1}"
+bbcs_38:        textCursor $BBB
 		loadMapFadeIn $42,$9,$6
-		loadMapEntities ce_4DE74; Entity data to figure out and format
+		loadMapEntities ce_4DE74
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$D,$8,$3
@@ -16,7 +16,7 @@ bbcs_38:        textCursor $BBB         ; Initial text line $BBB : "Stop!{W1}"
 		entityPosDir $1A,$3F,$3F,$3
 cs_4DDFE:       playSound MUSIC_BATTLE_THEME_1
 		fadeInB
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		moveEntity $0,$0,$3,$2
 		endMove $8080
 		moveEntity $7,$0,$3,$2
@@ -37,15 +37,14 @@ cs_4DDFE:       playSound MUSIC_BATTLE_THEME_1
 		nextText $0,$80         ; "You're right, Astral!{W2}"
 		nextText $0,$80         ; "Zeon doesn't trust me,{N}thanks to you!{W2}"
 		nextSingleText $0,$80   ; "This is my last chance.{N}I can't see him again 'til I{N}bring him your head.{W1}"
-		setQuakeAmount $4
+		setQuake $4
 		playSound SFX_BOLT_SPELL
 		flashScreenWhite $1E
 		playSound SFX_BATTLEFIELD_DEATH
 		flashScreenWhite $32
-		setQuakeAmount $0
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4DE74:       dc.b   0
-		dc.b  $E
+		setQuake $0
+		csc_end
+ce_4DE74:       dc.w $E
 		dc.w 9
 		dc.w 3
 		dc.b $D

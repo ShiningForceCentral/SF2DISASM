@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle08\cs_afterbattle.asm :
 ; 0x4AA74..0x4ABFE : Cutscene after battle 8
-abcs_battle08:  textCursor $9A4         ; Initial text line $9A4 : "Oh, my...hey!{N}Are you OK?!{W1}"
+abcs_battle08:  textCursor $9A4
 		loadMapFadeIn $48,$8,$20
-		loadMapEntities ce_4ABBE; Entity data to figure out and format
+		loadMapEntities ce_4ABBE
 		setActscript $0,$FF,eas_Init
 		stopEntity $81
 		customActscript $81,$FF
@@ -19,29 +19,29 @@ abcs_battle08:  textCursor $9A4         ; Initial text line $9A4 : "Oh, my...hey
 		entityPosDir $6,$3F,$3F,$3
 cs_4AAB6:       fadeInB
 		nextSingleText $0,$80   ; "The game will be suspended.{N}OK?"
-		setEntityDir $80,$2
+		setFacing $80,$2
 		moveEntity $80,$FF,$2,$1
 		endMove $8080
-		setEntityDir $80,$1
+		setFacing $80,$1
 		moveEntity $80,$FF,$1,$1
 		endMove $8080
-		setEntityDir $80,$0
+		setFacing $80,$0
 		nextSingleText $0,$80   ; "....{W1}"
 		setActscript $81,$FF,eas_Init
 		entitySprite $81,$3B
-		setEntityDir $81,$2
+		setFacing $81,$2
 		nextSingleText $C0,$81  ; "{LEADER}, are you ready{N}for battle?{D3}"
 		entitySprite $81,$CA
-		setEntityDir $81,$3
+		setFacing $81,$3
 		nextSingleText $C0,$81  ; "Do you need more preparations?"
 		setActscript $81,$FF,eas_Init
 		csWait $5
 		setActscript $81,$0,eas_461B6
 		csWait $78
-		setEntityDir $81,$2
+		setFacing $81,$2
 		startEntity $81
 		nextSingleText $C0,$81  ; "Did you change your mind?{W2}"
-		setEntityDir $81,$3
+		setFacing $81,$3
 		nextSingleText $C0,$81  ; "Be careful.{D1}{N}Haste makes waste.{D1}"
 		setActscript $80,$0,eas_BumpRight
 		customActscript $81,$FF
@@ -55,18 +55,18 @@ cs_4AAB6:       fadeInB
 		csWait $8
 		moveEntity $81,$FF,$0,$1
 		endMove $8080
-		setEntityDir $81,$3
+		setFacing $81,$3
 		entityShakeHead $81
 		nextText $0,$80         ; "{LEADER}, you had better{N}take a rest now.{D3}"
 		nextSingleText $0,$80   ; "{LEADER}, to retreat is{N}sometimes a good strategy.{D3}"
-		setEntityDir $81,$2
+		setFacing $81,$2
 		nextText $C0,$81        ; "{LEADER}, are you ready?{D3}"
 		nextText $C0,$81        ; "{LEADER}, you are going to{N}battle again."
 		nextText $C0,$81        ; "{LEADER}, take it easy!{W1}"
 		nextSingleText $C0,$81  ; "{LEADER}, take it easy!{W1}"
-		setEntityDir $81,$0
+		setFacing $81,$0
 		csWait $14
-		setEntityDir $6,$0
+		setFacing $6,$0
 		setCamDest $16,$20
 		csWait $1E
 		setCamDest $8,$20
@@ -75,16 +75,14 @@ cs_4AAB6:       fadeInB
 		setActscript $80,$FF,eas_Jump
 		nextText $0,$80         ; "{LEADER}, are you ready?{D3}"
 		nextSingleText $0,$80   ; "Do you need more preparations?"
-		setEntityDir $80,$3
+		setFacing $80,$3
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$80   ; "You changed your mind?{W2}"
-		mapSysEvent $493E3102
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4ABBE:       dc.b   0
-		dc.b  $E
-		dc.b   0
-		dc.b $25 
+		mapSysEvent $49,$3E,$31,$2
+		csc_end
+ce_4ABBE:       dc.w $E
+		dc.w $25
 		dc.w 1
 		dc.b $E
 		dc.b $23

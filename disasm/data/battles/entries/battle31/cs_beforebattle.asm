@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle31\cs_beforebattle.asm :
 ; 0x4C994..0x4CBE2 : Cutscene before battle 31
-bbcs_31:        textCursor $AFB         ; Initial text line $AFB : "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
+bbcs_31:        textCursor $AFB
 		loadMapFadeIn $2,$10,$2
-		loadMapEntities ce_4CB92; Entity data to figure out and format
+		loadMapEntities ce_4CB92
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$14,$3,$3
@@ -16,7 +16,7 @@ bbcs_31:        textCursor $AFB         ; Initial text line $AFB : "Finally, you
 		setActscript $82,$0,eas_AnimSpeedx2
 		playSound MUSIC_BATTLE_THEME_1
 		fadeInB
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		nextSingleText $C0,$80  ; "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
 		setCamDest $10,$5
 		animEntityFadeInOut $80,$7
@@ -37,7 +37,7 @@ bbcs_31:        textCursor $AFB         ; Initial text line $AFB : "Finally, you
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
 		setCamDest $10,$0
-		setEntityDir $1F,$2
+		setFacing $1F,$2
 		nextSingleText $0,$1F   ; "{NAME;22}, run!{W1}"
 		moveEntity $16,$FF,$1,$1
 		endMove $8080
@@ -50,7 +50,7 @@ bbcs_31:        textCursor $AFB         ; Initial text line $AFB : "Finally, you
 		endMove $8080
 		nextSingleText $C0,$80  ; "Ha, ha.  He can't.{W1}"
 		setCamDest $10,$6
-		setEntityDir $80,$3
+		setFacing $80,$3
 		nextSingleText $C0,$80  ; "Cameela!  Cameeeeeela!{W1}"
 		nextSingleText $0,$7    ; "Cameela?!  We met her in{N}Pangoat Valley.{W1}"
 		animEntityFadeInOut $81,$7
@@ -88,7 +88,7 @@ bbcs_31:        textCursor $AFB         ; Initial text line $AFB : "Finally, you
 		csWait $28
 		entityShiver $80
 		csWait $28
-		setEntityDir $80,$1
+		setFacing $80,$1
 		nextText $C0,$80        ; "I don't need your help,{N}Cameela!{W2}"
 		nextSingleText $C0,$80  ; "Come on, devils!{N}Kill {LEADER} now!{W1}"
 		setCamDest $10,$D
@@ -108,11 +108,9 @@ bbcs_31:        textCursor $AFB         ; Initial text line $AFB : "Finally, you
 		nextText $C0,$80        ; "I'm good at using my brains,{N}not my strength.{W2}"
 		nextSingleText $C0,$80  ; "I'll return by the time{N}you're defeated.{W1}"
 		animEntityFadeInOut $80,$6
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4CB92:       dc.b   0
-		dc.b $15
-		dc.b   0
-		dc.b   4
+		csc_end
+ce_4CB92:       dc.w $15
+		dc.w 4
 		dc.w 3
 		dc.b $14
 		dc.b 3

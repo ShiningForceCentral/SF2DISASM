@@ -24,7 +24,7 @@ loc_218:
 		move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
 		clr.b   ((FADING_SETTING-$1000000)).w
 		lea     vdp_init_params(pc), a0
-		moveq   #$12,d1         ; loop 18 times
+		moveq   #$12,d1
 loc_22E:
 		move.w  (a0)+,d0
 		bsr.w   SetVdpReg       

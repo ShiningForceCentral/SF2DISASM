@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle26\cs_beforebattle.asm :
 ; 0x4B958..0x4BCAA : Cutscene before battle 26
-bbcs_26:        textCursor $A24         ; Initial text line $A24 : "Answer me!{N}Where are you going?{W1}"
+bbcs_26:        textCursor $A24
 		loadMapFadeIn $48,$2,$14
-		loadMapEntities ce_4BC5A; Entity data to figure out and format
+		loadMapEntities ce_4BC5A
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$6,$1A,$0
@@ -11,7 +11,7 @@ bbcs_26:        textCursor $A24         ; Initial text line $A24 : "Answer me!{N
 		entityPosDir $1F,$6,$18,$0
 		entityPosDir $1E,$6,$19,$0
 		fadeInB
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		nextSingleText $0,$80   ; "Answer me!{N}Where are you going?{W1}"
 		setCamDest $D,$9
 		nextSingleText $C0,$13  ; "Ah...I...{W1}"
@@ -22,11 +22,11 @@ bbcs_26:        textCursor $A24         ; Initial text line $A24 : "Answer me!{N
 		moveEntity $85,$FF,$1,$2
 		moreMove $0,$1
 		endMove $8080
-		setEntityDir $85,$1
+		setFacing $85,$1
 		nextSingleText $C0,$85  ; "Shut up!  Mr. {NAME;19} is{N}the bravest soldier in the{N}world!{W1}"
 		nextSingleText $C0,$13  ; "I can defend myself.{W1}"
 		nextSingleText $0,$80   ; "Come on, you half-breed!{W1}"
-		setEntityDir $80,$1
+		setFacing $80,$1
 		nextSingleText $0,$80   ; "Are you afraid of me?{N}I'll turn my back to you.{N}Now, run away you cowards!{W1}"
 		setActscript $85,$FF,eas_Jump
 		nextSingleText $C0,$85  ; "You've gone too far!{W1}"
@@ -45,8 +45,8 @@ bbcs_26:        textCursor $A24         ; Initial text line $A24 : "Answer me!{N
 		csWait $5
 		setActscript $85,$0,eas_461B6
 		csWait $78
-		setEntityDir $83,$2
-		setEntityDir $85,$3
+		setFacing $83,$2
+		setFacing $85,$3
 		csWait $14
 		customActscript $83,$FF
 		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
@@ -65,9 +65,9 @@ bbcs_26:        textCursor $A24         ; Initial text line $A24 : "Answer me!{N
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setQuakeAmount $2
+		setQuake $2
 		setActscript $85,$FF,eas_JumpLeft
-		setQuakeAmount $0
+		setQuake $0
 		setActscript $85,$FF,eas_JumpLeft
 		nextSingleText $C0,$85  ; "Aaaauuuuu!{W1}"
 		setActscript $85,$FF,eas_Die
@@ -76,8 +76,8 @@ bbcs_26:        textCursor $A24         ; Initial text line $A24 : "Answer me!{N
 		animEntityFadeInOut $80,$7
 		nextSingleText $0,$80   ; "Pacalon soldiers have no{N}honor.  They attack while{N}my back is turned!{W1}"
 		setActscript $86,$FF,eas_Jump
-		setEntityDir $13,$3
-		setEntityDir $86,$3
+		setFacing $13,$3
+		setFacing $86,$3
 		csWait $1E
 		moveEntity $86,$FF,$2,$1
 		moreMove $3,$1
@@ -115,13 +115,13 @@ bbcs_26:        textCursor $A24         ; Initial text line $A24 : "Answer me!{N
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setQuakeAmount $3
+		setQuake $3
 		setActscript $86,$FF,eas_JumpRight
-		setQuakeAmount $0
+		setQuake $0
 		setActscript $86,$FF,eas_JumpRight
 		nextSingleText $C0,$86  ; "Grruuu....{W1}"
 		setActscript $86,$FF,eas_Die
-		setEntityDir $81,$3
+		setFacing $81,$3
 		moveEntity $80,$FF,$1,$2
 		endMove $8080
 		nextSingleText $0,$80   ; "You look so sad,{N}{NAME;19}....{W1}"
@@ -194,16 +194,14 @@ bbcs_26:        textCursor $A24         ; Initial text line $A24 : "Answer me!{N
 		moveEntity $80,$FF,$0,$2
 		endMove $8080
 		nextSingleText $0,$80   ; "I'd better leave...{W2}"
-		setEntityDir $80,$1
+		setFacing $80,$1
 		nextSingleText $0,$80   ; "Devil soldiers!  Stop that{N}force from Granseal!{W1}"
-		setEntityDir $80,$3
+		setFacing $80,$3
 		setActscript $81,$0,eas_Jump
 		animEntityFadeInOut $80,$6
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4BC5A:       dc.b   0
-		dc.b   7
-		dc.b   0
-		dc.b $19
+		csc_end
+ce_4BC5A:       dc.w 7
+		dc.w $19
 		dc.w 0
 		dc.b 6
 		dc.b $1A

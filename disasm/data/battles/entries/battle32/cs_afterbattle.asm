@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle32\cs_afterbattle.asm :
 ; 0x4CDB4..0x4CF0C : Cutscene after battle 32
-abcs_battle32:  textCursor $B25         ; Initial text line $B25 : "I can't believe it!{N}You might have been killed{N}by the devils.{W1}"
+abcs_battle32:  textCursor $B25
 		loadMapFadeIn $4A,$5,$14
-		loadMapEntities ce_4CEEC; Entity data to figure out and format
+		loadMapEntities ce_4CEEC
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$B,$19,$1
@@ -26,11 +26,11 @@ abcs_battle32:  textCursor $B25         ; Initial text line $B25 : "I can't beli
 		nextSingleText $C0,$17  ; "I can't stand their wicked{N}ways!{W1}"
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
-		setEntityDir $7,$2
-		setEntityDir $17,$0
+		setFacing $7,$2
+		setFacing $17,$0
 		nextSingleText $0,$7    ; "You have the same opinion{N}of them as we do.{W1}"
 		nextSingleText $C0,$17  ; "Please let me join you!{N}I could be a great help to{N}you.{W2}"
-		setEntityDir $17,$3
+		setFacing $17,$3
 		nextSingleText $C0,$17  ; "You need a professional{N}soldier like me.{W1}"
 		nextSingleText $0,$1F   ; "Oh, we welcome you.{W1}"
 		setActscript $7,$FF,eas_46172
@@ -39,9 +39,9 @@ abcs_battle32:  textCursor $B25         ; Initial text line $B25 : "I can't beli
 		nextSingleText $0,$7    ; "But, he was on the other{N}side just an minute ago.{W1}"
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
-		setEntityDir $1F,$0
+		setFacing $1F,$0
 		nextSingleText $0,$1F   ; "I don't care, {NAME;7}.{N}He has seen the error of his{N}ways.{W1}"
-		setEntityDir $1F,$3
+		setFacing $1F,$3
 		nextSingleText $0,$1F   ; "{LEADER}, don't you want{N}{NAME;23} to join our{N}force?{W1}"
 		entityNod $0
 		join $17
@@ -58,15 +58,16 @@ abcs_battle32:  textCursor $B25         ; Initial text line $B25 : "I can't beli
 		followEntity $1F,$1E,$3
 		followEntity $16,$1E,$2
 		followEntity $17,$16,$2
-		csc_end                 ; END OF CUTSCENE SCRIPT
-csub_4CEE4:     dc.b $70 
-		dc.b $17
-		dc.b $4E 
-		dc.b $F9 
-		dc.b   0
-		dc.b   0
-		dc.b $82 
-		dc.b $84 
+		csc_end
+
+; =============== S U B R O U T I N E =======================================
+
+csub_4CEE4:
+		moveq   #$17,d0
+		jmp     j_LeaveBattleParty
+
+	; End of function csub_4CEE4
+
 ce_4CEEC:       dc.w $A
 		dc.w $19
 		dc.w 1

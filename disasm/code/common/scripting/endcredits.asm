@@ -16,7 +16,7 @@ PlayEndCredits:
 		jsr     (InitDisplay).w 
 		bsr.w   ClearPalette2
 		jsr     (DisableDisplayAndVInt).w
-		bsr.w   sub_1AC29C
+		bsr.w   LoadEndCreditsFont
 		lea     (byte_FFE000).l,a1
 		move.w  #$27C0,d1
 		moveq   #7,d7

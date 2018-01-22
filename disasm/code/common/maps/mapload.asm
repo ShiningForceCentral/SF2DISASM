@@ -1307,7 +1307,7 @@ loc_2D74:
 		move.w  2(a0),d0
 		move.w  4(a0),d1
 		move.w  6(a0),d2
-		bsr.w   sub_3DB0
+		bsr.w   CopyMapBlocks
 loc_2D98:
 		addq.l  #8,a0
 		bra.s   loc_2D74
@@ -1337,7 +1337,7 @@ loc_2DDC:
 		move.w  ((byte_FFF706-$1000000)).w,d0
 		move.w  ((byte_FFF708-$1000000)).w,d1
 		clr.w   d2
-		bsr.w   sub_3DB0
+		bsr.w   CopyMapBlocks
 return_2DEA:
 		rts
 
@@ -1388,7 +1388,7 @@ loc_2E4C:
 loc_2E60:
 		move.w  (a4)+,((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w
 		move.l  (a4)+,((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
-		move.b  (a4)+,((MAP_AREA_PROP_1C-$1000000)).w
+		move.b  (a4)+,((MAP_AREA_LAYER_TYPE-$1000000)).w
 loc_2E6C:
 		move.b  (a4)+,((MAP_AREA_MUSIC_INDEX-$1000000)).w
 		movea.l (a5),a4

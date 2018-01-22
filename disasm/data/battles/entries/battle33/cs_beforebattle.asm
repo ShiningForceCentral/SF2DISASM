@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle33\cs_beforebattle.asm :
 ; 0x4CF0C..0x4D09A : Cutscene before battle 33
-bbcs_33:        textCursor $B32         ; Initial text line $B32 : "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
+bbcs_33:        textCursor $B32
 		loadMapFadeIn $1F,$16,$1D
-		loadMapEntities ce_4D048; Entity data to figure out and format
+		loadMapEntities ce_4D048
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$1B,$26,$2
@@ -11,26 +11,26 @@ bbcs_33:        textCursor $B32         ; Initial text line $B32 : "I'm opening 
 		entityPosDir $1F,$1B,$25,$2
 		setActscript $16,$FF,eas_Init
 		entityPosDir $16,$1B,$24,$2
-		setBlocks $1008,$101,$2001
-		setBlocks $327,$101,$1008
+		setBlocks $10,$8,$1,$1,$20,$1
+		setBlocks $3,$27,$1,$1,$10,$8
 		playSound MUSIC_BATTLE_THEME_3
 		fadeInB
 		csWait $1E
-		setEntityDir $0,$1
-		setEntityDir $7,$1
-		setEntityDir $1F,$1
+		setFacing $0,$1
+		setFacing $7,$1
+		setFacing $1F,$1
 		moveEntity $16,$FF,$1,$1
 		endMove $8080
-		setEntityDir $16,$3
+		setFacing $16,$3
 		nextSingleText $0,$16   ; "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
 		moveEntity $16,$FF,$1,$1
 		endMove $8080
 		nextSingleText $FF,$FF  ; "Vicar {NAME;22} uses{N}the gate key.{W1}"
 		csWait $1E
-		setQuakeAmount $2
-		setBlocks $127,$202,$1A20
+		setQuake $2
+		setBlocks $1,$27,$2,$2,$1A,$20
 		csWait $14
-		setQuakeAmount $0
+		setQuake $0
 		setCameraEntity $0
 		csWait $32
 		moveEntity $0,$FF,$1,$1
@@ -48,7 +48,7 @@ bbcs_33:        textCursor $B32         ; Initial text line $B32 : "I'm opening 
 		moveEntity $7,$FF,$1,$8
 		endMove $8080
 		csWait $1E
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		setCamDest $5,$8
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
@@ -63,20 +63,18 @@ bbcs_33:        textCursor $B32         ; Initial text line $B32 : "I'm opening 
 		join $16
 		moveEntity $1F,$FF,$1,$1
 		endMove $8080
-		setEntityDir $1F,$0
-		setEntityDir $0,$2
+		setFacing $1F,$0
+		setFacing $0,$2
 		nextSingleText $0,$1F   ; "{LEADER}, {NAME;22} will be{N}a great asset.{W1}"
-		csc51 $16               ; 0051 UNKNOWN
+		joinBatParty $16
 		executeSubroutine sub_4D078
-		textCursor $B3B         ; Initial text line $B3B : "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
+		textCursor $B3B
 		nextSingleText $0,$1F   ; "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
 		setF $33F               ; set after Frayja forces his way into the party just before the battle in Moun
 		clearF $52              ; Frayja is a follower
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4D048:       dc.b   0
-		dc.b $1A
-		dc.b   0
-		dc.b $25 
+		csc_end
+ce_4D048:       dc.w $1A
+		dc.w $25
 		dc.w 2
 		dc.b $1B
 		dc.b $26

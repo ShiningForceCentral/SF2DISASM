@@ -178,7 +178,7 @@ sub_51256:
 		tst.w   d0
 		bne.s   return_512B8
 		move.w  #6,d0
-		jsr     sub_1007C
+		jsr     j_NameCharacter
 		trap    #TEXTBOX
 		dc.w $2A4               ; "{LEADER} named him{N}{NAME;6} and beckoned.{W1}"
 		trap    #TEXTBOX
@@ -197,10 +197,10 @@ return_512B8:
 
 	; End of function sub_51256
 
-cs_512BA:       setEntityDir $6,$3      ; 0023 SET ENTITY FACING 6 3
+cs_512BA:       setFacing $6,$3         ; 0023 SET ENTITY FACING 6 3
 		setActscript $6,$FF,eas_Jump; 0015 SET ACTSCRIPT 6 FF 45E44
 		setActscript $6,$FF,eas_Jump; 0015 SET ACTSCRIPT 6 FF 45E44
 		setActscript $6,$FF,eas_Jump; 0015 SET ACTSCRIPT 6 FF 45E44
 		join $6                 ; 0008 JOIN FORCE 6
-		csc56 $6                ; 0056 UNKNOWN, SOMETHING WITH AN ENTITY
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		addNewFollower $6       ; 0056 SOMETHING WITH AN ENTITY 6
+		csc_end

@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle30\cs_afterbattle.asm :
 ; 0x4C6A8..0x4C994 : Cutscene after battle 30
-abcs_battle30:  textCursor $ACD         ; Initial text line $ACD : "Grrr...impossible!{N}Why...do I have to die?{W1}"
+abcs_battle30:  textCursor $ACD
 		loadMapFadeIn $1,$5,$8
-		loadMapEntities ce_4C96C; Entity data to figure out and format
+		loadMapEntities ce_4C96C
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$C,$D,$1
@@ -12,8 +12,8 @@ abcs_battle30:  textCursor $ACD         ; Initial text line $ACD : "Grrr...impos
 		stopEntity $80
 		setActscript $82,$FF,eas_46172
 		stopEntity $82
-		csc53 $7,$0             ; 0053 UNKNOWN
-		csc53 $1F,$FFFF         ; 0053 UNKNOWN
+		setPriority $7,$0
+		setPriority $1F,$FFFF
 		fadeInB
 		entityShiver $80
 		nextSingleText $0,$80   ; "Grrr...impossible!{N}Why...do I have to die?{W1}"
@@ -23,7 +23,7 @@ abcs_battle30:  textCursor $ACD         ; Initial text line $ACD : "Grrr...impos
 		entityShiver $80
 		nextSingleText $0,$80   ; "I don't know...haven't{N}seen her.{W1}"
 		csWait $28
-		setEntityDir $80,$1
+		setFacing $80,$1
 		customActscript $80,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -33,9 +33,9 @@ abcs_battle30:  textCursor $ACD         ; Initial text line $ACD : "Grrr...impos
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setQuakeAmount $2
+		setQuake $2
 		csWait $14
-		setQuakeAmount $0
+		setQuake $0
 		entityPosDir $82,$B,$A,$1
 		customActscript $82,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
@@ -50,7 +50,7 @@ abcs_battle30:  textCursor $ACD         ; Initial text line $ACD : "Grrr...impos
 		mapFadeOutToWhite
 		csWait $14
 		mapFadeInFromWhite
-		setEntityDir $80,$3
+		setFacing $80,$3
 		entityShiver $80
 		nextSingleText $0,$80   ; "I can't endure the light....{N}Ohhh....{W1}"
 		customActscript $80,$FF
@@ -80,9 +80,9 @@ abcs_battle30:  textCursor $ACD         ; Initial text line $ACD : "Grrr...impos
 		moreMove $2,$2
 		moreMove $3,$4
 		endMove $8080
-		setEntityDir $0,$2
-		setEntityDir $1F,$2
-		setEntityDir $7,$2
+		setFacing $0,$2
+		setFacing $1F,$2
+		setFacing $7,$2
 		csWait $32
 		entityFlashWhite $81,$3C
 		customActscript $82,$FF
@@ -92,12 +92,12 @@ abcs_battle30:  textCursor $ACD         ; Initial text line $ACD : "Grrr...impos
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		csc45 $38               ; (null)
+		cameraSpeed $38
 		setCameraEntity $82
 		setEntityDest $82,$B,$2
 		animEntityFadeInOut $82,$4
 		setCamDest $5,$8
-		setEntityDir $81,$0
+		setFacing $81,$0
 		nextText $C0,$81        ; "Thank you.{W2}"
 		nextSingleText $C0,$81  ; "I've finally returned to this{N}world.{W1}"
 		nextSingleText $0,$1F   ; "Goddess Mitula?{W1}"
@@ -129,7 +129,7 @@ abcs_battle30:  textCursor $ACD         ; Initial text line $ACD : "Grrr...impos
 		setActscript $1F,$FF,eas_Jump
 		nextSingleText $0,$1F   ; "I see.{W1}"
 		csWait $3C
-		setEntityDir $81,$2
+		setFacing $81,$2
 		csWait $28
 		entityFlashWhite $81,$32
 		setActscript $0,$0,eas_Jump
@@ -158,28 +158,25 @@ abcs_battle30:  textCursor $ACD         ; Initial text line $ACD : "Grrr...impos
 		moveEntity $7,$FF,$2,$1
 		endMove $8080
 		csWait $1E
-		setEntityDir $7,$3
+		setFacing $7,$3
 		csWait $1E
-		setEntityDir $7,$2
+		setFacing $7,$2
 		csWait $1E
-		setEntityDir $7,$3
+		setFacing $7,$3
 		csWait $1E
 		nextSingleText $0,$7    ; "{LEADER}, Mitula{N}has vanished!{N}What should we do now?{W1}"
-		setEntityDir $1F,$0
+		setFacing $1F,$0
 		nextSingleText $0,$1F   ; "We have to go to Arc Valley{N}on Grans Island.{W2}"
-		setEntityDir $1F,$3
+		setFacing $1F,$3
 		nextSingleText $0,$1F   ; "{LEADER}, find the{N}storytellers first.{W1}"
-		setEntityDir $0,$1
+		setFacing $0,$1
 		entityNod $0
 		followEntity $1F,$0,$2
 		followEntity $7,$1F,$2
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4C96C:       dc.b   0
-		dc.b  $A
-		dc.b   0
-		dc.b  $D
-		dc.b   0
-		dc.b   1
+		csc_end
+ce_4C96C:       dc.w $A
+		dc.w $D
+		dc.w 1
 		dc.b $C
 		dc.b $D
 		dc.b 1

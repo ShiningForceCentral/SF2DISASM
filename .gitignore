@@ -248,3 +248,9 @@ build/caravan.cfg
 *.tmx
 *.msi
 *.json
+build/Lunar IPS.exe
+build/mega-usb.exe
+*.ips
+*.avi
+disasm/code/gameflow/start/textintro.asm
+disasm/code/common/tech/sound/sounddriver-cubewiz.asm

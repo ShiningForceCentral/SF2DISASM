@@ -26,7 +26,7 @@ loc_5AB98:
 		bra.w   loc_5ABB0
 cs_5ABA8:
 		entityPosDir $80,$E,$E,$1; 0019 SET ENTITY POS AND FACING 80 E E 1
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 loc_5ABB0:
 		bra.s   loc_5ABEE
 loc_5ABB2:
@@ -44,7 +44,7 @@ loc_5ABBC:
 		bra.w   loc_5ABD4
 cs_5ABCC:
 		entityPosDir $80,$11,$A,$3; 0019 SET ENTITY POS AND FACING 80 11 A 3
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 loc_5ABD4:
 		bra.s   loc_5ABEE
 loc_5ABD6:
@@ -56,7 +56,7 @@ loc_5ABD6:
 		bra.w   loc_5ABEE
 cs_5ABE6:
 		entityPosDir $80,$11,$C,$3; 0019 SET ENTITY POS AND FACING 80 11 C 3
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 loc_5ABEE:
 		trap    #1
 		btst    d1,(a0)
@@ -69,7 +69,7 @@ loc_5ABEE:
 		bra.w   loc_5AC0C
 cs_5AC04:
 		entityPosDir $E,$F,$E,$3; 0019 SET ENTITY POS AND FACING E F E 3
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 loc_5AC0C:
 		trap    #1
 		dc.w $10
@@ -79,7 +79,7 @@ loc_5AC0C:
 		bra.w   loc_5AC24
 cs_5AC1C:
 		entityPosDir $10,$10,$F,$3; 0019 SET ENTITY POS AND FACING 10 10 F 3
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 loc_5AC24:
 		trap    #1
 		dc.w $11
@@ -89,7 +89,7 @@ loc_5AC24:
 		bra.w   loc_5AC3C
 cs_5AC34:
 		entityPosDir $11,$12,$F,$3; 0019 SET ENTITY POS AND FACING 11 12 F 3
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 loc_5AC3C:
 		trap    #1
 		dc.w $F
@@ -102,7 +102,7 @@ cs_5AC4C:
 
 	; End of function ms_map33_InitFunction
 
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 
 ; START OF FUNCTION CHUNK FOR ms_map33_InitFunction
 

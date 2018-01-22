@@ -26,25 +26,25 @@ return_5E3C0:
 
 	; End of function sub_5E3B0
 
-cs_5E3C2:       textCursor $AAB         ; Initial text line $AAB : "Welcome, Granseal force!{W1}"
+cs_5E3C2:       textCursor $AAB         ; 0004 INIT TEXT CURSOR AAB : "Welcome, Granseal force!{W1}"
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
 		setActscript $1F,$FF,eas_Init; 0015 SET ACTSCRIPT 1F FF 460CE
 		nextSingleText $0,$80   ; "Welcome, Granseal force!{W1}"
 		setActscript $1F,$0,eas_Jump; 0015 SET ACTSCRIPT 1F 0 45E44
 		setActscript $0,$0,eas_Jump; 0015 SET ACTSCRIPT 0 0 45E44
 		setActscript $7,$FF,eas_Jump; 0015 SET ACTSCRIPT 7 FF 45E44
-		setEntityDir $7,$3      ; 0023 SET ENTITY FACING 7 3
+		setFacing $7,$3         ; 0023 SET ENTITY FACING 7 3
 		nextSingleText $0,$7    ; "What?{W1}"
-		csWait $5               ; WAIT 5
+		csWait $5
 		setActscript $7,$0,eas_461B6; 0015 SET ACTSCRIPT 7 0 461B6
-		csWait $78              ; WAIT 78
-		setEntityDir $1F,$1     ; 0023 SET ENTITY FACING 1F 1
+		csWait $78
+		setFacing $1F,$1        ; 0023 SET ENTITY FACING 1F 1
 		nextSingleText $0,$1F   ; "I heard a voice from the{N}other side of the door.{W1}"
-		setEntityDir $0,$1      ; 0023 SET ENTITY FACING 0 1
+		setFacing $0,$1         ; 0023 SET ENTITY FACING 0 1
 		setEntityDest $801F,$D,$C; 0029 SET ENTITY DEST 801F D C
 		setEntityDest $7,$10,$C ; 0029 SET ENTITY DEST 7 10 C
-		setEntityDir $1F,$1     ; 0023 SET ENTITY FACING 1F 1
-		setEntityDir $7,$1      ; 0023 SET ENTITY FACING 7 1
+		setFacing $1F,$1        ; 0023 SET ENTITY FACING 1F 1
+		setFacing $7,$1         ; 0023 SET ENTITY FACING 7 1
 		setCamDest $8,$9        ; 0032 SET CAMERA DEST 8 9
 		nextSingleText $0,$80   ; "I'm Zalbard.  I'm one of{N}the greater devils.{W1}"
 		setActscript $1F,$FF,eas_46172; 0015 SET ACTSCRIPT 1F FF 46172
@@ -57,20 +57,20 @@ cs_5E3C2:       textCursor $AAB         ; Initial text line $AAB : "Welcome, Gra
 		moveEntity $7,$FF,$3,$2 ; 002D MOVE ENTITY 7 FF 3 2
 		endMove $8080
 		nextSingleText $0,$80   ; "Do come in.  Of course, you{N}can go back now and abandon{N}Mitula!{W1}"
-		setEntityDir $7,$2      ; 0023 SET ENTITY FACING 7 2
+		setFacing $7,$2         ; 0023 SET ENTITY FACING 7 2
 		nextText $0,$7          ; "Sir Astral...{W2}"
 		nextSingleText $0,$7    ; "The greater devil that{N}attacked Bedoe was as{N}strong as Volcanon.{W1}"
 		nextText $0,$80         ; "Are you talking about{N}Sir Odd Eye?{W2}"
 		nextSingleText $0,$80   ; "Did he fight against{N}Volcanon at Bedoe?{W1}"
-		setEntityDir $7,$1      ; 0023 SET ENTITY FACING 7 1
+		setFacing $7,$1         ; 0023 SET ENTITY FACING 7 1
 		nextSingleText $0,$1F   ; "Yes.  And he lost.{W1}"
 		nextText $0,$80         ; "I can't believe it!{N}Odd Eye is the strongest{N}devil among us.{W2}"
 		nextText $0,$80         ; "But, we haven't been able to{N}contact him lately.{W2}"
 		nextText $0,$80         ; "This is good news for me.{N}If I get the Jewel of Evil, I{N}can take his place.{W2}"
 		nextSingleText $0,$80   ; "Now, enter the shrine.{N}Mitula is here.{W1}"
-		csWait $3C              ; WAIT 3C
+		csWait $3C
 		nextSingleText $0,$7    ; "What should we do?{N}A greater devil awaits us{N}inside.{W1}"
-		setEntityDir $7,$2      ; 0023 SET ENTITY FACING 7 2
+		setFacing $7,$2         ; 0023 SET ENTITY FACING 7 2
 		setActscript $1F,$FF,eas_Init; 0015 SET ACTSCRIPT 1F FF 460CE
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
 		customActscript $1F,$FF ; 0014 SET MANUAL ACTSCRIPT 1F
@@ -90,10 +90,10 @@ cs_5E3C2:       textCursor $AAB         ; Initial text line $AAB : "Welcome, Gra
 		moveEntity $7,$FF,$3,$1 ; 002D MOVE ENTITY 7 FF 3 1
 		moreMove $2,$3
 		endMove $8080
-		setEntityDir $0,$3      ; 0023 SET ENTITY FACING 0 3
-		setEntityDir $7,$1      ; 0023 SET ENTITY FACING 7 1
+		setFacing $0,$3         ; 0023 SET ENTITY FACING 0 3
+		setFacing $7,$1         ; 0023 SET ENTITY FACING 7 1
 		setCamDest $9,$C        ; 0032 SET CAMERA DEST 9 C
-		setEntityDir $1F,$3     ; 0023 SET ENTITY FACING 1F 3
+		setFacing $1F,$3        ; 0023 SET ENTITY FACING 1F 3
 		setActscript $1F,$FF,eas_46172; 0015 SET ACTSCRIPT 1F FF 46172
 		setActscript $7,$FF,eas_46172; 0015 SET ACTSCRIPT 7 FF 46172
 		customActscript $7,$FF  ; 0014 SET MANUAL ACTSCRIPT 7
@@ -105,7 +105,7 @@ cs_5E3C2:       textCursor $AAB         ; Initial text line $AAB : "Welcome, Gra
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $1F,$0,$3,$2 ; 002D MOVE ENTITY 1F 0 3 2
 		endMove $8080
-		csWait $10              ; WAIT 10
+		csWait $10
 		moveEntity $7,$0,$3,$2  ; 002D MOVE ENTITY 7 0 3 2
 		endMove $8080
 		waitIdle $1F            ; 0016 WAIT UNTIL IDLE ENTITY 1F
@@ -155,7 +155,7 @@ cs_5E3C2:       textCursor $AAB         ; Initial text line $AAB : "Welcome, Gra
 		setActscript $1F,$FF,eas_Init; 0015 SET ACTSCRIPT 1F FF 460CE
 		moveEntity $1F,$FF,$0,$1; 002D MOVE ENTITY 1F FF 0 1
 		endMove $8080
-		setEntityDir $1F,$1     ; 0023 SET ENTITY FACING 1F 1
+		setFacing $1F,$1        ; 0023 SET ENTITY FACING 1F 1
 		nextText $0,$1F         ; "Zalbard...at least he's not{N}as strong as Odd Eye.{W2}"
 		nextText $0,$1F         ; "But still, he's a greater{N}devil.{W2}"
 		nextSingleText $0,$1F   ; "We had better complete our{N}preparations before we go in.{W1}"
@@ -165,6 +165,6 @@ cs_5E3C2:       textCursor $AAB         ; Initial text line $AAB : "Welcome, Gra
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
 		followEntity $1F,$0,$2  ; 002C FOLLOW ENTITY 1F 0 2
 		followEntity $7,$1F,$2  ; 002C FOLLOW ENTITY 7 1F 2
-		setBlocks $26,$203,$E0A ; 0034 SET BLOCKS 26 203 E0A
+		setBlocks $0,$26,$2,$3,$E,$A; 0034 SET BLOCKS 26 203 E0A
 		setF $348               ; set after the door to the Mitula Shrine is opened
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

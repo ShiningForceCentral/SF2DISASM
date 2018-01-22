@@ -10,51 +10,51 @@ ms_map34_InitFunction:
 
 	; End of function ms_map34_InitFunction
 
-cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...queeen...{N}tillooora...synooora...{N}hear my voice....{W2}"
+cs_5B6C0:       textCursor $C87         ; 0004 INIT TEXT CURSOR C87 : "Yeeenn...queeen...{N}tillooora...synooora...{N}hear my voice....{W2}"
 		setCamDest $2,$4        ; 0032 SET CAMERA DEST 2 4
 		nextText $80,$80        ; "Yeeenn...queeen...{N}tillooora...synooora...{N}hear my voice....{W2}"
 		nextSingleText $80,$80  ; "Evil Spirit, come.{W1}"
 		entityFlashWhite $80,$64; 0018 FLASH ENTITY WHITE 80 64
 		entityPosDir $82,$7,$6,$3; 0019 SET ENTITY POS AND FACING 82 7 6 3
-		csWait $7               ; WAIT 7
+		csWait $7
 		entityPosDir $82,$3C,$3C,$3; 0019 SET ENTITY POS AND FACING 82 3C 3C 3
-		csWait $50              ; WAIT 50
+		csWait $50
 		entityPosDir $82,$7,$6,$3; 0019 SET ENTITY POS AND FACING 82 7 6 3
-		csWait $7               ; WAIT 7
+		csWait $7
 		entityPosDir $82,$3C,$3C,$3; 0019 SET ENTITY POS AND FACING 82 3C 3C 3
-		csWait $3C              ; WAIT 3C
+		csWait $3C
 		entityPosDir $82,$7,$6,$3; 0019 SET ENTITY POS AND FACING 82 7 6 3
-		csWait $7               ; WAIT 7
+		csWait $7
 		entityPosDir $82,$3C,$3C,$3; 0019 SET ENTITY POS AND FACING 82 3C 3C 3
-		csWait $28              ; WAIT 28
+		csWait $28
 		moveEntity $81,$FF,$1,$1; 002D MOVE ENTITY 81 FF 1 1
 		endMove $8080
 		nextSingleText $0,$81   ; "Hey, Evil Spirit is{N}appearing!{W1}"
 		setCamDest $2,$2        ; 0032 SET CAMERA DEST 2 2
 		entityPosDir $82,$7,$6,$3; 0019 SET ENTITY POS AND FACING 82 7 6 3
-		csWait $7               ; WAIT 7
+		csWait $7
 		entityPosDir $82,$3C,$3C,$3; 0019 SET ENTITY POS AND FACING 82 3C 3C 3
-		csWait $3C              ; WAIT 3C
+		csWait $3C
 		entityPosDir $82,$7,$6,$3; 0019 SET ENTITY POS AND FACING 82 7 6 3
-		csWait $7               ; WAIT 7
+		csWait $7
 		entityPosDir $82,$3C,$3C,$3; 0019 SET ENTITY POS AND FACING 82 3C 3C 3
-		csWait $32              ; WAIT 32
+		csWait $32
 		entityPosDir $82,$7,$6,$3; 0019 SET ENTITY POS AND FACING 82 7 6 3
-		csWait $7               ; WAIT 7
+		csWait $7
 		entityPosDir $82,$3C,$3C,$3; 0019 SET ENTITY POS AND FACING 82 3C 3C 3
-		csWait $28              ; WAIT 28
+		csWait $28
 		entityPosDir $82,$7,$6,$3; 0019 SET ENTITY POS AND FACING 82 7 6 3
-		csWait $7               ; WAIT 7
+		csWait $7
 		entityPosDir $82,$3C,$3C,$3; 0019 SET ENTITY POS AND FACING 82 3C 3C 3
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		entityPosDir $82,$7,$6,$3; 0019 SET ENTITY POS AND FACING 82 7 6 3
-		csWait $7               ; WAIT 7
+		csWait $7
 		entityPosDir $82,$3C,$3C,$3; 0019 SET ENTITY POS AND FACING 82 3C 3C 3
-		csWait $14              ; WAIT 14
+		csWait $14
 		entityPosDir $82,$7,$6,$3; 0019 SET ENTITY POS AND FACING 82 7 6 3
-		csWait $7               ; WAIT 7
+		csWait $7
 		entityPosDir $82,$3C,$3C,$3; 0019 SET ENTITY POS AND FACING 82 3C 3C 3
-		csWait $A               ; WAIT A
+		csWait $A
 		entityPosDir $82,$7,$6,$3; 0019 SET ENTITY POS AND FACING 82 7 6 3
 		setActscript $82,$0,eas_Transparent
 						; 0015 SET ACTSCRIPT 82 0 45FA8
@@ -77,14 +77,14 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		nextText $80,$80        ; "What is he doing now?{N}What is he going to do?{W2}"
 		nextSingleText $80,$80  ; "I need to know anything{N}about him.  Anything!{W1}"
 		nextText $0,$82         ; "I've got something.{W1}"
-		csWait $28              ; WAIT 28
+		csWait $28
 		flashScreenWhite $4     ; 0041 FLASH SCREEN WHITE 4
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		flashScreenWhite $4     ; 0041 FLASH SCREEN WHITE 4
-		csWait $14              ; WAIT 14
+		csWait $14
 		flashScreenWhite $4     ; 0041 FLASH SCREEN WHITE 4
 		mapFadeOutToWhite       ; 003F FADE MAP OUT TO WHITE
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		nextSingleText $0,$82   ; "Hmmmm....{N}Hmmmm...mmmm....{W1}"
 		moveEntity $0,$0,$1,$1  ; 002D MOVE ENTITY 0 0 1 1
 		endMove $8080
@@ -93,14 +93,14 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		moveEntity $1F,$FF,$1,$1; 002D MOVE ENTITY 1F FF 1 1
 		endMove $8080
 		nextSingleText $0,$7    ; "What is he doing now?{W1}"
-		setEntityDir $81,$3     ; 0023 SET ENTITY FACING 81 3
+		setFacing $81,$3        ; 0023 SET ENTITY FACING 81 3
 		nextText $0,$81         ; "He's channeling his mind{N}into the nature of all{N}things.{W2}"
-		setEntityDir $81,$1     ; 0023 SET ENTITY FACING 81 1
+		setFacing $81,$1        ; 0023 SET ENTITY FACING 81 1
 		mapFadeInFromWhite      ; 0040 FADE MAP IN FROM WHITE
-		csWait $28              ; WAIT 28
-		setEntityDir $81,$3     ; 0023 SET ENTITY FACING 81 3
+		csWait $28
+		setFacing $81,$3        ; 0023 SET ENTITY FACING 81 3
 		nextSingleText $0,$81   ; "Shhhh!  Be silent.{N}He's got something.{W1}"
-		setEntityDir $81,$1     ; 0023 SET ENTITY FACING 81 1
+		setFacing $81,$1        ; 0023 SET ENTITY FACING 81 1
 		setActscript $80,$FF,eas_Jump; 0015 SET ACTSCRIPT 80 FF 45E44
 		setActscript $80,$FF,eas_Jump; 0015 SET ACTSCRIPT 80 FF 45E44
 		nextSingleText $80,$80  ; "What did you find?{W1}"
@@ -109,19 +109,19 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		nextSingleText $80,$80  ; "Please try again!{W1}"
 		nextSingleText $0,$82   ; "If I touch something of his,{N}maybe I could contact his{N}mind better....{W1}"
 		setCamDest $2,$5        ; 0032 SET CAMERA DEST 2 5
-		setEntityDir $7,$0      ; 0023 SET ENTITY FACING 7 0
-		setEntityDir $0,$2      ; 0023 SET ENTITY FACING 0 2
-		setEntityDir $1F,$2     ; 0023 SET ENTITY FACING 1F 2
+		setFacing $7,$0         ; 0023 SET ENTITY FACING 7 0
+		setFacing $0,$2         ; 0023 SET ENTITY FACING 0 2
+		setFacing $1F,$2        ; 0023 SET ENTITY FACING 1F 2
 		nextSingleText $0,$7    ; "{LEADER}, you have the{N}Jewel of Evil, right?{W1}"
-		setEntityDir $80,$3     ; 0023 SET ENTITY FACING 80 3
-		setEntityDir $81,$3     ; 0023 SET ENTITY FACING 81 3
+		setFacing $80,$3        ; 0023 SET ENTITY FACING 80 3
+		setFacing $81,$3        ; 0023 SET ENTITY FACING 81 3
 		setActscript $80,$FF,eas_Jump; 0015 SET ACTSCRIPT 80 FF 45E44
 		setActscript $80,$FF,eas_Jump; 0015 SET ACTSCRIPT 80 FF 45E44
 		nextText $80,$80        ; "Is this true, {LEADER}?{W2}"
 		nextSingleText $80,$80  ; "That's one of the magic{N}jewels used to seal{N}Zeon.  Give it to me.{W1}"
-		setEntityDir $0,$1      ; 0023 SET ENTITY FACING 0 1
-		setEntityDir $7,$1      ; 0023 SET ENTITY FACING 7 1
-		setEntityDir $1F,$1     ; 0023 SET ENTITY FACING 1F 1
+		setFacing $0,$1         ; 0023 SET ENTITY FACING 0 1
+		setFacing $7,$1         ; 0023 SET ENTITY FACING 7 1
+		setFacing $1F,$1        ; 0023 SET ENTITY FACING 1F 1
 		nextSingleText $0,$7    ; "But, we can't remove it.{W1}"
 		nextSingleText $80,$80  ; "I can.{W1}"
 		moveEntity $80,$FF,$3,$1; 002D MOVE ENTITY 80 FF 3 1
@@ -130,15 +130,15 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		setActscript $80,$FF,eas_46172; 0015 SET ACTSCRIPT 80 FF 46172
 		moveEntity $80,$0,$3,$1 ; 002D MOVE ENTITY 80 0 3 1
 		endMove $8080
-		csWait $2               ; WAIT 2
+		csWait $2
 		setActscript $80,$FF,eas_461AA; 0015 SET ACTSCRIPT 80 FF 461AA
 		stopEntity $80          ; 001C STOP ENTITY ANIM 80
-		csWait $14              ; WAIT 14
+		csWait $14
 		entityFlashWhite $0,$28 ; 0018 FLASH ENTITY WHITE 0 28
 		startEntity $80         ; 001B START ENTITY ANIM 80
 		moveEntity $80,$0,$1,$1 ; 002D MOVE ENTITY 80 0 1 1
 		endMove $8080
-		csWait $2               ; WAIT 2
+		csWait $2
 		setActscript $80,$FF,eas_461AA; 0015 SET ACTSCRIPT 80 FF 461AA
 		entityShakeHead $80     ; 0027 MAKE ENTITY SHAKE HEAD 80
 		nextText $80,$80        ; "Whhoooa!{W2}"
@@ -150,7 +150,7 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		nextText $80,$80        ; "I can't remove them.{N}The chain is made of Mithril.{W2}"
 		nextSingleText $80,$80  ; "Show them to him.{N}They might help him.{W1}"
 		entityNod $0            ; 0026 MAKE ENTITY NOD 0
-		csWait $14              ; WAIT 14
+		csWait $14
 		setCamDest $2,$4        ; 0032 SET CAMERA DEST 2 4
 		setActscript $80,$FF,eas_Init; 0015 SET ACTSCRIPT 80 FF 460CE
 		moveEntity $80,$0,$0,$1 ; 002D MOVE ENTITY 80 0 0 1
@@ -158,25 +158,25 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		endMove $8080
 		moveEntity $0,$FF,$1,$2 ; 002D MOVE ENTITY 0 FF 1 2
 		endMove $8080
-		setEntityDir $81,$1     ; 0023 SET ENTITY FACING 81 1
+		setFacing $81,$1        ; 0023 SET ENTITY FACING 81 1
 		nextSingleText $FF,$FF  ; "{LEADER} displays the{N}jewels to Evil Spirit.{W1}"
 		entityFlashWhite $0,$28 ; 0018 FLASH ENTITY WHITE 0 28
 		nextText $0,$82         ; "Yeah, I feel it...I feel it...!{N}I think I can do it now.{N}Let me try again.{W1}"
 		executeSubroutine csub_55EF4; 000A EXECUTE SUBROUTINE 55EF4
-		csWait $14              ; WAIT 14
+		csWait $14
 		executeSubroutine sub_55F82; 000A EXECUTE SUBROUTINE 55F82
-		csWait $28              ; WAIT 28
+		csWait $28
 		executeSubroutine csub_55EF4; 000A EXECUTE SUBROUTINE 55EF4
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		executeSubroutine sub_55F82; 000A EXECUTE SUBROUTINE 55F82
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		executeSubroutine csub_55EF4; 000A EXECUTE SUBROUTINE 55EF4
-		csWait $28              ; WAIT 28
+		csWait $28
 		executeSubroutine sub_55F82; 000A EXECUTE SUBROUTINE 55F82
-		csWait $14              ; WAIT 14
+		csWait $14
 		executeSubroutine csub_55EF4; 000A EXECUTE SUBROUTINE 55EF4
 		nextSingleText $0,$82   ; "Hmmmm....{N}Hmmmm...mmmm....{W1}"
-		csWait $64              ; WAIT 64
+		csWait $64
 		nextSingleText $0,$82   ; "Arc Valley was opened and{N}Zeon was revived.{W1}"
 		nextSingleText $80,$80  ; "Go on.{W1}"
 		nextSingleText $0,$82   ; "Zeon's devils are coming to{N}Parmecia from the sky.{W1}"
@@ -195,17 +195,17 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		nextSingleText $80,$80  ; "Is he that powerful?{W1}"
 		nextSingleText $0,$82   ; "He is.{N}His power...{W1}"
 		executeSubroutine sub_5BFDA; 000A EXECUTE SUBROUTINE 5BFDA
-		csWait $A               ; WAIT A
+		csWait $A
 		executeSubroutine csub_5BFD0; 000A EXECUTE SUBROUTINE 5BFD0
 		nextSingleText $80,$80  ; "His power what?{W1}"
 		executeSubroutine sub_5BFDA; 000A EXECUTE SUBROUTINE 5BFDA
-		csWait $A               ; WAIT A
+		csWait $A
 		executeSubroutine csub_5BFD0; 000A EXECUTE SUBROUTINE 5BFD0
 		nextSingleText $0,$82   ; "Hi...s...pow...er...{W1}"
 		executeSubroutine sub_5BFDA; 000A EXECUTE SUBROUTINE 5BFDA
-		csWait $A               ; WAIT A
+		csWait $A
 		executeSubroutine csub_5BFD0; 000A EXECUTE SUBROUTINE 5BFD0
-		csWait $A               ; WAIT A
+		csWait $A
 		executeSubroutine sub_5BFDA; 000A EXECUTE SUBROUTINE 5BFDA
 		flashScreenWhite $28    ; 0041 FLASH SCREEN WHITE 28
 		executeSubroutine sub_5BFE4; 000A EXECUTE SUBROUTINE 5BFE4
@@ -233,25 +233,25 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		nextSingleText $0,$7    ; "Why should we?!{W1}"
 		nextText $0,$83         ; "I'll return Elis to you in{N}exchange for the jewel.{W2}"
 		nextSingleText $0,$83   ; "Come to Arc Valley...{N}Ggggooo...!{W1}"
-		csWait $28              ; WAIT 28
+		csWait $28
 		flashScreenWhite $4     ; 0041 FLASH SCREEN WHITE 4
 		executeSubroutine sub_5BFDA; 000A EXECUTE SUBROUTINE 5BFDA
-		csWait $8               ; WAIT 8
+		csWait $8
 		executeSubroutine sub_5BFE4; 000A EXECUTE SUBROUTINE 5BFE4
-		csWait $3C              ; WAIT 3C
+		csWait $3C
 		flashScreenWhite $4     ; 0041 FLASH SCREEN WHITE 4
 		executeSubroutine sub_5BFDA; 000A EXECUTE SUBROUTINE 5BFDA
-		csWait $8               ; WAIT 8
+		csWait $8
 		executeSubroutine sub_5BFE4; 000A EXECUTE SUBROUTINE 5BFE4
-		csWait $28              ; WAIT 28
+		csWait $28
 		flashScreenWhite $4     ; 0041 FLASH SCREEN WHITE 4
 		executeSubroutine sub_5BFDA; 000A EXECUTE SUBROUTINE 5BFDA
-		csWait $8               ; WAIT 8
+		csWait $8
 		executeSubroutine sub_5BFE4; 000A EXECUTE SUBROUTINE 5BFE4
-		csWait $14              ; WAIT 14
+		csWait $14
 		flashScreenWhite $4     ; 0041 FLASH SCREEN WHITE 4
 		executeSubroutine sub_5BFDA; 000A EXECUTE SUBROUTINE 5BFDA
-		setQuakeAmount $5       ; 0033 SET QUAKE AMOUNT 5
+		setQuake $5             ; 0033 SET QUAKE AMOUNT 5
 		playSound SFX_BIG_DOOR_RUMBLE; 0005 PLAY SOUND SFX_BIG_DOOR_RUMBLE
 		customActscript $85,$FF ; 0014 SET MANUAL ACTSCRIPT 85
 		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
@@ -379,19 +379,19 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		entityPosDir $94,$7,$5,$2; 0019 SET ENTITY POS AND FACING 94 7 5 2
 		moveEntity $91,$0,$0,$1 ; 002D MOVE ENTITY 91 0 0 1
 		endMove $8080
-		csWait $2               ; WAIT 2
+		csWait $2
 		setActscript $91,$FF,eas_461AA; 0015 SET ACTSCRIPT 91 FF 461AA
 		moveEntity $92,$0,$3,$1 ; 002D MOVE ENTITY 92 0 3 1
 		endMove $8080
-		csWait $2               ; WAIT 2
+		csWait $2
 		setActscript $92,$FF,eas_461AA; 0015 SET ACTSCRIPT 92 FF 461AA
 		moveEntity $93,$0,$2,$1 ; 002D MOVE ENTITY 93 0 2 1
 		endMove $8080
-		csWait $2               ; WAIT 2
+		csWait $2
 		setActscript $93,$FF,eas_461AA; 0015 SET ACTSCRIPT 93 FF 461AA
 		moveEntity $94,$0,$1,$1 ; 002D MOVE ENTITY 94 0 1 1
 		endMove $8080
-		csWait $2               ; WAIT 2
+		csWait $2
 		setActscript $94,$FF,eas_461AA; 0015 SET ACTSCRIPT 94 FF 461AA
 		setActscript $91,$0,eas_464E2; 0015 SET ACTSCRIPT 91 0 464E2
 		setActscript $92,$0,eas_464EA; 0015 SET ACTSCRIPT 92 0 464EA
@@ -532,7 +532,7 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		hideEntity $8A          ; 002E HIDE ENTITY 8A
 		hideEntity $8B          ; 002E HIDE ENTITY 8B
 		hideEntity $8C          ; 002E HIDE ENTITY 8C
-		csWait $28              ; WAIT 28
+		csWait $28
 		hideEntity $8D          ; 002E HIDE ENTITY 8D
 		hideEntity $8E          ; 002E HIDE ENTITY 8E
 		hideEntity $8F          ; 002E HIDE ENTITY 8F
@@ -541,23 +541,23 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		hideEntity $92          ; 002E HIDE ENTITY 92
 		hideEntity $93          ; 002E HIDE ENTITY 93
 		hideEntity $94          ; 002E HIDE ENTITY 94
-		setQuakeAmount $4005    ; 0033 SET QUAKE AMOUNT 4005
+		setQuake $4005          ; 0033 SET QUAKE AMOUNT 4005
 		executeSubroutine sub_55F82; 000A EXECUTE SUBROUTINE 55F82
-		csWait $3C              ; WAIT 3C
-		setEntityDir $0,$3      ; 0023 SET ENTITY FACING 0 3
-		setEntityDir $81,$3     ; 0023 SET ENTITY FACING 81 3
-		setEntityDir $80,$3     ; 0023 SET ENTITY FACING 80 3
+		csWait $3C
+		setFacing $0,$3         ; 0023 SET ENTITY FACING 0 3
+		setFacing $81,$3        ; 0023 SET ENTITY FACING 81 3
+		setFacing $80,$3        ; 0023 SET ENTITY FACING 80 3
 		nextText $80,$80        ; "No!  Evil Spirit exploded!{W2}"
 		nextText $80,$80        ; "That's Zeon's power.{W2}"
 		nextSingleText $80,$80  ; "If he revives fully, his{N}power will be unimaginably{N}strong!{W1}"
-		setEntityDir $81,$0     ; 0023 SET ENTITY FACING 81 0
-		setEntityDir $80,$2     ; 0023 SET ENTITY FACING 80 2
+		setFacing $81,$0        ; 0023 SET ENTITY FACING 81 0
+		setFacing $80,$2        ; 0023 SET ENTITY FACING 80 2
 		nextSingleText $0,$81   ; "Creed, how reliable was he,{N}I mean, Evil Spirit?{W1}"
 		nextText $80,$80        ; "Very.{W2}"
-		setEntityDir $80,$3     ; 0023 SET ENTITY FACING 80 3
+		setFacing $80,$3        ; 0023 SET ENTITY FACING 80 3
 		nextText $80,$80        ; "Why does Zeon want the jewel?{W2}"
 		nextSingleText $80,$80  ; "No more questions...{N}...without Evil Spirit....{W1}"
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		moveEntity $80,$FF,$3,$1; 002D MOVE ENTITY 80 FF 3 1
 		moreMove $2,$1
 		moreMove $3,$5
@@ -566,8 +566,8 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		moveEntity $81,$FF,$2,$1; 002D MOVE ENTITY 81 FF 2 1
 		moreMove $3,$1
 		endMove $8080
-		setEntityDir $7,$3      ; 0023 SET ENTITY FACING 7 3
-		setEntityDir $1F,$3     ; 0023 SET ENTITY FACING 1F 3
+		setFacing $7,$3         ; 0023 SET ENTITY FACING 7 3
+		setFacing $1F,$3        ; 0023 SET ENTITY FACING 1F 3
 		nextText $0,$81         ; "Creed?  Creed!{W2}"
 		setActscript $81,$FF,eas_Jump; 0015 SET ACTSCRIPT 81 FF 45E44
 		setActscript $81,$FF,eas_Jump; 0015 SET ACTSCRIPT 81 FF 45E44
@@ -577,7 +577,7 @@ cs_5B6C0:       textCursor $C87         ; Initial text line $C87 : "Yeeenn...que
 		hideEntity $81          ; 002E HIDE ENTITY 81
 		followEntity $7,$0,$2   ; 002C FOLLOW ENTITY 7 0 2
 		followEntity $1F,$7,$2  ; 002C FOLLOW ENTITY 1F 7 2
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 
 ; =============== S U B R O U T I N E =======================================
 

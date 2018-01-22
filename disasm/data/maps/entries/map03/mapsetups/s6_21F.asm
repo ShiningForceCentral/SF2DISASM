@@ -10,20 +10,20 @@ ms_map3_flag21F_InitFunction:
 
 	; End of function ms_map3_flag21F_InitFunction
 
-cs_628C8:       textCursor $F4B         ; Initial text line $F4B : "I envy you.{N}I'm an old woman now.{W2}"
+cs_628C8:       textCursor $F4B         ; 0004 INIT TEXT CURSOR F4B : "I envy you.{N}I'm an old woman now.{W2}"
 		nextText $0,$87         ; "I envy you.{N}I'm an old woman now.{W2}"
 		nextSingleText $0,$87   ; "Nobody kisses me anymore.{W1}"
 		setEntityDest $0,$19,$1C; 0029 SET ENTITY DEST 0 19 1C
-		setEntityDir $0,$1      ; 0023 SET ENTITY FACING 0 1
+		setFacing $0,$1         ; 0023 SET ENTITY FACING 0 1
 		setEntityDest $88,$19,$1B; 0029 SET ENTITY DEST 88 19 1B
-		setEntityDir $88,$0     ; 0023 SET ENTITY FACING 88 0
-		setEntityDir $87,$2     ; 0023 SET ENTITY FACING 87 2
+		setFacing $88,$0        ; 0023 SET ENTITY FACING 88 0
+		setFacing $87,$2        ; 0023 SET ENTITY FACING 87 2
 		nextText $0,$88         ; "You're wrong!{W2}"
 		nextSingleText $0,$88   ; "I'll kiss you!{W1}"
-		csWait $A               ; WAIT A
+		csWait $A
 		setActscript $87,$FF,eas_Jump; 0015 SET ACTSCRIPT 87 FF 45E44
 		setActscript $87,$FF,eas_Jump; 0015 SET ACTSCRIPT 87 FF 45E44
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 cs_6290C:       hideText                ; 0009 HIDE TEXTBOX AND PORTRAIT
 		moveEntity $8A,$FF,$3,$1; 002D MOVE ENTITY 8A FF 3 1
 		endMove $8080
@@ -53,5 +53,5 @@ cs_6290C:       hideText                ; 0009 HIDE TEXTBOX AND PORTRAIT
 		moreMove $C,$A
 		moreMove $1,$6
 		endMove $8080
-		mapSysEvent $131A1E01   ; 0007 EXECUTE MAP SYSTEM EVENT 131A1E01
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		mapSysEvent $13,$1A,$1E,$1; 0007 EXECUTE MAP SYSTEM EVENT 131A1E01
+		csc_end

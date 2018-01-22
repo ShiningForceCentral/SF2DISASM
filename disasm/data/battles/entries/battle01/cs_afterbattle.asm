@@ -1,17 +1,17 @@
 
 ; ASM FILE data\battles\entries\battle01\cs_afterbattle.asm :
 ; 0x496DC..0x4980E : Cutscene after battle 1
-abcs_battle01:  textCursor $901         ; Initial text line $901 : "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
-		resetForceBattleStats   ; 0055 RESET FORCE BATTLE STATS
+abcs_battle01:  textCursor $901
+		resetForceBattleStats
 		loadMapFadeIn $39,$2,$0
-		loadMapEntities ce_497F6; Entity data to figure out and format
+		loadMapEntities ce_497F6
 		setActscript $0,$FF,eas_Init
 		entityPosDir $1,$8,$7,$1
 		entityPosDir $2,$8,$8,$1
 		fadeInB
 		csWait $28
 		nextSingleText $0,$81   ; "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
-		setEntityDir $81,$1
+		setFacing $81,$1
 		csWait $28
 		entityShiver $80
 		csWait $1E
@@ -45,9 +45,9 @@ abcs_battle01:  textCursor $901         ; Initial text line $901 : "Well done, {
 		moveEntity $81,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$81   ; "Oh, there it is!{W1}"
-		setEntityDir $0,$3
-		setEntityDir $1,$3
-		setEntityDir $2,$3
+		setFacing $0,$3
+		setFacing $1,$3
+		setFacing $2,$3
 		setCamDest $2,$3
 		csWait $46
 		mapFadeOutToWhite
@@ -66,13 +66,13 @@ abcs_battle01:  textCursor $901         ; Initial text line $901 : "Well done, {
 		csWait $14
 		hideEntity $80
 		setCamDest $2,$2
-		setEntityDir $81,$0
+		setFacing $81,$0
 		nextSingleText $0,$81   ; "We must hurry to the King!{W1}"
 		moveEntity $81,$FF,$3,$6
 		endMove $8080
 		hideEntity $81
 		csWait $28
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 ce_497F6:       dc.w 8
 		dc.w 6
 		dc.w 1

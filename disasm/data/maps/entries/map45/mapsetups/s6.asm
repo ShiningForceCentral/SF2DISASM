@@ -23,9 +23,9 @@ return_600B0:
 cs_600B2:       setActscript $19,$FF,eas_45F9C; 0015 SET ACTSCRIPT 19 FF 45F9C
 		entitySprite $19,$D9    ; 001A SET ENTITY SPRITE 19 D9
 		setActscript $19,$FF,eas_Init3; 0015 SET ACTSCRIPT 19 FF 46136
-		setEntityDir $19,$1     ; 0023 SET ENTITY FACING 19 1
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_600CE:       textCursor $823         ; Initial text line $823 : "Who's there!{W1}"
+		setFacing $19,$1        ; 0023 SET ENTITY FACING 19 1
+		csc_end
+cs_600CE:       textCursor $823         ; 0004 INIT TEXT CURSOR 823 : "Who's there!{W1}"
 		setActscript $1F,$FF,eas_Init; 0015 SET ACTSCRIPT 1F FF 460CE
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
 		setActscript $1A,$FF,eas_Init; 0015 SET ACTSCRIPT 1A FF 460CE
@@ -72,18 +72,18 @@ cs_600CE:       textCursor $823         ; Initial text line $823 : "Who's there!
 		moveEntity $7,$0,$C,$28 ; 002D MOVE ENTITY 7 0 C 28
 		moreMove $3,$3
 		endMove $8080
-		csWait $32              ; WAIT 32
+		csWait $32
 		entityShakeHead $0      ; 0027 MAKE ENTITY SHAKE HEAD 0
 		entityShakeHead $0      ; 0027 MAKE ENTITY SHAKE HEAD 0
-		csWait $A               ; WAIT A
+		csWait $A
 		entityShakeHead $0      ; 0027 MAKE ENTITY SHAKE HEAD 0
 		entityShakeHead $0      ; 0027 MAKE ENTITY SHAKE HEAD 0
-		csWait $A               ; WAIT A
+		csWait $A
 		entityShakeHead $0      ; 0027 MAKE ENTITY SHAKE HEAD 0
 		waitIdle $0             ; 0016 WAIT UNTIL IDLE ENTITY 0
 		nextText $0,$19         ; "Wait!{W1}"
 		nextSingleText $0,$19   ; "Is that you...Sir Astral?{W1}"
-		setEntityDir $1F,$1     ; 0023 SET ENTITY FACING 1F 1
+		setFacing $1F,$1        ; 0023 SET ENTITY FACING 1F 1
 		nextSingleText $80,$1F  ; "What?{W1}"
 		setActscript $1F,$FF,eas_Init; 0015 SET ACTSCRIPT 1F FF 460CE
 		moveEntity $1F,$FF,$1,$4; 002D MOVE ENTITY 1F FF 1 4
@@ -101,11 +101,11 @@ cs_600CE:       textCursor $823         ; Initial text line $823 : "Who's there!
 		endMove $8080
 		setCamDest $1,$5        ; 0032 SET CAMERA DEST 1 5
 		nextSingleText $0,$19   ; "Oh...you don't remember me?{W1}"
-		setEntityDir $1F,$3     ; 0023 SET ENTITY FACING 1F 3
+		setFacing $1F,$3        ; 0023 SET ENTITY FACING 1F 3
 		nextSingleText $80,$1F  ; "Well...ah...sorry.{W1}"
 		nextSingleText $0,$19   ; "I'm {NAME;25}.  I was a pupil{N}of yours in Galam.  I was{N}preparing to become a priest.{W1}"
 		entityShiver $1F        ; 002A MAKE ENTITY SHIVER 1F
-		setEntityDir $1F,$1     ; 0023 SET ENTITY FACING 1F 1
+		setFacing $1F,$1        ; 0023 SET ENTITY FACING 1F 1
 		nextSingleText $80,$1F  ; "{NAME;25}!  I can't believe it!{W1}"
 		nextText $0,$19         ; "How is that scar on your{N}chest.{W2}"
 		nextSingleText $0,$19   ; "Remember?  You snuck up{N}behind me and tapped my{N}shoulder....{W1}"
@@ -120,19 +120,19 @@ cs_600CE:       textCursor $823         ; Initial text line $823 : "Who's there!
 		nextSingleText $80,$1F  ; "That OK. How have...{W1}"
 		moveEntity $7,$FF,$0,$1 ; 002D MOVE ENTITY 7 FF 0 1
 		endMove $8080
-		setEntityDir $7,$1      ; 0023 SET ENTITY FACING 7 1
-		setEntityDir $0,$3      ; 0023 SET ENTITY FACING 0 3
+		setFacing $7,$1         ; 0023 SET ENTITY FACING 7 1
+		setFacing $0,$3         ; 0023 SET ENTITY FACING 0 3
 		nextSingleText $0,$7    ; "Hey, aren't you going to{N}introduce us?{W1}"
 		moveEntity $1F,$FF,$3,$1; 002D MOVE ENTITY 1F FF 3 1
 		endMove $8080
 		nextSingleText $80,$1F  ; "Of course.{W1}"
-		setQuakeAmount $3       ; 0033 SET QUAKE AMOUNT 3
-		csWait $28              ; WAIT 28
-		setQuakeAmount $0       ; 0033 SET QUAKE AMOUNT 0
-		csWait $14              ; WAIT 14
-		setEntityDir $1F,$1     ; 0023 SET ENTITY FACING 1F 1
-		setEntityDir $7,$1      ; 0023 SET ENTITY FACING 7 1
-		setEntityDir $0,$1      ; 0023 SET ENTITY FACING 0 1
+		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
+		csWait $28
+		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
+		csWait $14
+		setFacing $1F,$1        ; 0023 SET ENTITY FACING 1F 1
+		setFacing $7,$1         ; 0023 SET ENTITY FACING 7 1
+		setFacing $0,$1         ; 0023 SET ENTITY FACING 0 1
 		nextText $80,$1F        ; "All in good time.{W2}"
 		nextSingleText $80,$1F  ; "By the way, what are you{N}doing here?{W1}"
 		entityShiver $19        ; 002A MAKE ENTITY SHIVER 19
@@ -148,16 +148,16 @@ cs_600CE:       textCursor $823         ; Initial text line $823 : "Who's there!
 		nextSingleText $0,$19   ; "Is Red Baron his follower?{W1}"
 		nextSingleText $80,$1F  ; "Could be.{W1}"
 		nextSingleText $0,$19   ; "Hmmm....{W1}"
-		csWait $3C              ; WAIT 3C
+		csWait $3C
 		nextSingleText $0,$19   ; "Ok!  I'll do it!{W1}"
 		entityPosDir $86,$6,$8,$1; 0019 SET ENTITY POS AND FACING 86 6 8 1
 		setCameraEntity $19     ; 0024 SET ENTITY FOLLOWED BY CAMERA 19
 		nextSingleText $0,$19   ; "Close your eyes!{W1}"
 		setActscript $19,$FF,eas_46172; 0015 SET ACTSCRIPT 19 FF 46172
-		setEntityDir $19,$2     ; 0023 SET ENTITY FACING 19 2
+		setFacing $19,$2        ; 0023 SET ENTITY FACING 19 2
 		moveEntity $19,$FF,$1,$2; 002D MOVE ENTITY 19 FF 1 2
 		endMove $8080
-		setEntityDir $19,$3     ; 0023 SET ENTITY FACING 19 3
+		setFacing $19,$3        ; 0023 SET ENTITY FACING 19 3
 		startEntity $19         ; 001B START ENTITY ANIM 19
 		setActscript $19,$0,eas_Transparent
 						; 0015 SET ACTSCRIPT 19 0 45FA8
@@ -175,7 +175,7 @@ cs_600CE:       textCursor $823         ; Initial text line $823 : "Who's there!
 		setActscript $7,$0,eas_Jump; 0015 SET ACTSCRIPT 7 0 45E44
 		setActscript $1F,$FF,eas_Jump; 0015 SET ACTSCRIPT 1F FF 45E44
 		startEntity $19         ; 001B START ENTITY ANIM 19
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		setActscript $19,$FF,eas_Init; 0015 SET ACTSCRIPT 19 FF 460CE
 		setCamDest $1,$5        ; 0032 SET CAMERA DEST 1 5
 		nextSingleText $0,$19   ; "Sir Astral, please let me go{N}with you.{W1}"
@@ -188,10 +188,10 @@ cs_600CE:       textCursor $823         ; Initial text line $823 : "Who's there!
 		nextSingleText $80,$1F  ; "We could always use another{N}well-trained fighter!{W1}"
 		join $19                ; 0008 JOIN FORCE 19
 		nextSingleText $0,$7    ; "We've got a strong ally!{W1}"
-		setEntityDir $19,$2     ; 0023 SET ENTITY FACING 19 2
+		setFacing $19,$2        ; 0023 SET ENTITY FACING 19 2
 		nextSingleText $0,$19   ; "Many Galam soldiers are in{N}the west.{N}We must be careful.{W1}"
 		followEntity $7,$0,$2   ; 002C FOLLOW ENTITY 7 0 2
 		followEntity $1F,$7,$2  ; 002C FOLLOW ENTITY 1F 7 2
 		followEntity $1A,$1F,$2 ; 002C FOLLOW ENTITY 1A 1F 2
 		followEntity $19,$0,$5  ; 002C FOLLOW ENTITY 19 0 5
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

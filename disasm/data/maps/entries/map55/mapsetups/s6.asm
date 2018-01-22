@@ -26,12 +26,10 @@ byte_5E27C:     setActscript $0,$FF,eas_5E2C4; 0015 SET ACTSCRIPT 0 FF 5E2C4
 		jumpIfFlagClear $4C,cs_5E2BC; Zynk is a follower
 		setActscript $1A,$FF,eas_Init; 0015 SET ACTSCRIPT 1A FF 460CE
 		setActscript $1A,$FF,eas_5E2C4; 0015 SET ACTSCRIPT 1A FF 5E2C4
-cs_5E2BC:       mapSysEvent $251D0802   ; 0007 EXECUTE MAP SYSTEM EVENT 251D0802
-		csc_end                 ; END OF CUTSCENE SCRIPT
-eas_5E2C4:      dc.b   0                ; 001A SET 1C BIT 5 $0
-		dc.b $1A
-		dc.b   0
-		dc.b   0
+cs_5E2BC:       mapSysEvent $25,$1D,$8,$2; 0007 EXECUTE MAP SYSTEM EVENT 251D0802
+		csc_end
+eas_5E2C4:      dc.w $1A                ; 001A SET 1C BIT 5 $0
+		dc.w 0
 		dc.w 5                  ; 0005 MOVE TO ABSOLUTE DEST X=$7 Y=$7
 		dc.w 7
 		dc.w 7
@@ -76,28 +74,28 @@ eas_5E2C4:      dc.b   0                ; 001A SET 1C BIT 5 $0
 		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 byte_5E320:     mapLoad $4B,$8,$E       ; 0048 LOAD MAP 4B 8 E
-		loadMapEntities ce_5E33E; Entity data to figure out and format
+		loadMapEntities ce_5E33E; 0042 RELATED TO LOADING MAP ENTITIES 5E33E
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		playSound MUSIC_MAIN_THEME; 0005 PLAY SOUND MUSIC_MAIN_THEME
 		fadeInB                 ; 0039 FADE IN FROM BLACK
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 ce_5E33E:       dc.b 0
 		dc.b $C
 		dc.w $13
 		dc.b 0
 		dc.b 3
 		dc.w $FFFF
-cs_5E346:       textCursor $D2B         ; Initial text line $D2B : "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
+cs_5E346:       textCursor $D2B         ; 0004 INIT TEXT CURSOR D2B : "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		moveEntity $0,$FF,$2,$1 ; 002D MOVE ENTITY 0 FF 2 1
 		moreMove $2,$1
 		endMove $8080
-		csWait $1E              ; WAIT 1E
-		setEntityDir $7,$0      ; 0023 SET ENTITY FACING 7 0
-		setEntityDir $1A,$0     ; 0023 SET ENTITY FACING 1A 0
-		setEntityDir $1F,$0     ; 0023 SET ENTITY FACING 1F 0
-		setEntityDir $0,$0      ; 0023 SET ENTITY FACING 0 0
+		csWait $1E
+		setFacing $7,$0         ; 0023 SET ENTITY FACING 7 0
+		setFacing $1A,$0        ; 0023 SET ENTITY FACING 1A 0
+		setFacing $1F,$0        ; 0023 SET ENTITY FACING 1F 0
+		setFacing $0,$0         ; 0023 SET ENTITY FACING 0 0
 		nextText $0,$1F         ; "What a terrible waste.{N}We've lost an ancient{N}treasure.{W2}"
-		setEntityDir $1F,$2     ; 0023 SET ENTITY FACING 1F 2
+		setFacing $1F,$2        ; 0023 SET ENTITY FACING 1F 2
 		nextSingleText $0,$1F   ; "Anyway, we have to go to{N}Arc Valley.{N}{LEADER}, let's go.{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

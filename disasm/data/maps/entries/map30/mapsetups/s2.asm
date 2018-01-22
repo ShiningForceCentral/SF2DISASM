@@ -65,7 +65,7 @@ sub_5A240:
 	; End of function sub_5A240
 
 cs_5A256:       entityShiver $82        ; 002A MAKE ENTITY SHIVER 82
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 
 ; =============== S U B R O U T I N E =======================================
 

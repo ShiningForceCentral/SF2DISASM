@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle32\cs_regiontriggered_1.asm :
 ; 0x4CD10..0x4CDB4 : Region-activated cutscene for battle 32
-rbcs_battle32:  textCursor $B21         ; Initial text line $B21 : "I'm tired of this.  I can no{N}longer fight for devils.{W1}"
+rbcs_battle32:  textCursor $B21
 		executeSubroutine csub_4CD56
-		csc45 $38               ; (null)
+		cameraSpeed $38
 		setCameraEntity $17
 		csWait $3C
 		nextSingleText $0,$17   ; "I'm tired of this.  I can no{N}longer fight for devils.{W1}"
@@ -12,13 +12,13 @@ rbcs_battle32:  textCursor $B21         ; Initial text line $B21 : "I'm tired of
 		nextSingleText $0,$80   ; "{NAME;23}, what?{W1}"
 		setCameraEntity $17
 		csWait $3C
-		setEntityDir $17,$1
+		setFacing $17,$1
 		nextSingleText $0,$17   ; "Didn't you hear me?{W1}"
-		setEntityDir $17,$3
+		setFacing $17,$3
 		nextSingleText $0,$17   ; "Hey, Granseal guys!{N}I'm on your side from now{N}on! OK?{W1}"
 		csc54 $17,$FFFF         ; 0054 UNKNOWN
 		setF $182               ; set during battle 32, after Jaro switches sides
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 
 ; =============== S U B R O U T I N E =======================================
 

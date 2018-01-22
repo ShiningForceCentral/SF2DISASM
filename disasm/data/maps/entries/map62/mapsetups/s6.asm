@@ -10,10 +10,10 @@ ms_map62_InitFunction:
 
 	; End of function ms_map62_InitFunction
 
-cs_5C876:       textCursor $E1D         ; Initial text line $E1D : "Who is it?  Petro?{W1}"
+cs_5C876:       textCursor $E1D         ; 0004 INIT TEXT CURSOR E1D : "Who is it?  Petro?{W1}"
 		setActscript $80,$FF,eas_Jump; 0015 SET ACTSCRIPT 80 FF 45E44
 		nextSingleText $0,$80   ; "Who is it?  Petro?{W1}"
-		setEntityDir $80,$3     ; 0023 SET ENTITY FACING 80 3
+		setFacing $80,$3        ; 0023 SET ENTITY FACING 80 3
 		nextSingleText $0,$80   ; "Well, who are you?{W1}"
 		nextSingleText $0,$81   ; "Petro?  Is he back?{W1}"
 		setCamDest $1,$5        ; 0032 SET CAMERA DEST 1 5
@@ -34,25 +34,25 @@ cs_5C876:       textCursor $E1D         ; Initial text line $E1D : "Who is it?  
 		endMove $8080
 		setCamDest $1,$A        ; 0032 SET CAMERA DEST 1 A
 		nextSingleText $0,$81   ; "Oh, you're not Petro.{N}Who...are you?{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_5C8D4:       textCursor $E23         ; Initial text line $E23 : "Ancient stone?  Yes, my{N}family had it for a long{N}time.{W2}"
+		csc_end
+cs_5C8D4:       textCursor $E23         ; 0004 INIT TEXT CURSOR E23 : "Ancient stone?  Yes, my{N}family had it for a long{N}time.{W2}"
 		nextText $0,$81         ; "Ancient stone?  Yes, my{N}family had it for a long{N}time.{W2}"
-		setEntityDir $81,$0     ; 0023 SET ENTITY FACING 81 0
+		setFacing $81,$0        ; 0023 SET ENTITY FACING 81 0
 		nextSingleText $0,$81   ; "But, it was stolen.{W1}"
 		nextSingleText $0,$81   ; "His brother, my grandson,{N}took the stone, the Sky Orb,{N}when he left.{W2}"
-		setEntityDir $81,$3     ; 0023 SET ENTITY FACING 81 3
+		setFacing $81,$3        ; 0023 SET ENTITY FACING 81 3
 		nextText $0,$81         ; "I think he went to Grans{N}Island to operate an ancient{N}vehicle.{W2}"
 		nextSingleText $0,$81   ; "I've lost my purpose to live.{W1}"
 		moveEntity $81,$FF,$1,$6; 002D MOVE ENTITY 81 FF 1 6
 		endMove $8080
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_5C8FE:       textCursor $E2B         ; Initial text line $E2B : "You need my help?{W1}"
+		csc_end
+cs_5C8FE:       textCursor $E2B         ; 0004 INIT TEXT CURSOR E2B : "You need my help?{W1}"
 		nextSingleText $0,$81   ; "You need my help?{W1}"
 		nextSingleText $0,$81   ; "Come in.  Talk to me.{W1}"
 		moveEntity $0,$FF,$1,$1 ; 002D MOVE ENTITY 0 FF 1 1
 		endMove $8080
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_5C914:       textCursor $E2D         ; Initial text line $E2D : "I came here looking for{N}ancient treasure, and found{N}the Sky Orb.{W2}"
+		csc_end
+cs_5C914:       textCursor $E2D         ; 0004 INIT TEXT CURSOR E2D : "I came here looking for{N}ancient treasure, and found{N}the Sky Orb.{W2}"
 		nextText $0,$81         ; "I came here looking for{N}ancient treasure, and found{N}the Sky Orb.{W2}"
 		nextText $0,$81         ; "Also, I discovered how to{N}use the ancient tunnels.{W2}"
 		nextSingleText $0,$81   ; "But, most of them are{N}useless, except for the{N}one to Grans.{W1}"
@@ -65,4 +65,4 @@ cs_5C914:       textCursor $E2D         ; Initial text line $E2D : "I came here 
 		nextSingleText $0,$81   ; "All I want is the Sky Orb.{N}Just help me get that, and{N}then you can leave.{W1}"
 		followEntity $81,$1F,$2 ; 002C FOLLOW ENTITY 81 1F 2
 		setF $4D                ; Old man is a follower
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

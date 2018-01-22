@@ -1,14 +1,14 @@
 
 ; ASM FILE data\battles\entries\battle07\cs_beforebattle.asm :
 ; 0x49CE2..0x49F7E : Cutscene before battle 7
-bbcs_07:        textCursor $935         ; Initial text line $935 : "Astral, you're so persistent!{W1}"
+bbcs_07:        textCursor $935
 		clearF $53              ; King + Minister are followers
 		loadMapFadeIn $3A,$8,$1D
-		loadMapEntities ce_49F36; Entity data to figure out and format
+		loadMapEntities ce_49F36
 		setActscript $0,$FF,eas_Init
 		animEntityFadeInOut $85,$4
 		fadeInB
-		csc45 $28               ; (null)
+		cameraSpeed $28
 		nextSingleText $C0,$80  ; "Astral, you're so persistent!{W1}"
 		setCamDest $8,$F
 		nextSingleText $0,$81   ; "King Galam, what do you{N}intend to do?{W1}"
@@ -19,20 +19,20 @@ bbcs_07:        textCursor $935         ; Initial text line $935 : "Astral, you'
 		moveEntity $82,$FF,$3,$1
 		endMove $8080
 		csWait $28
-		setEntityDir $80,$1
+		setFacing $80,$1
 		csWait $14
 		setActscript $82,$FF,eas_Jump
 		csWait $1E
 		setActscript $82,$FF,eas_46172
 		moveEntity $82,$FF,$1,$1
 		endMove $8080
-		setEntityDir $80,$3
-		setEntityDir $81,$3
+		setFacing $80,$3
+		setFacing $81,$3
 		nextSingleText $0,$81   ; "King Granseal and{N}{LEADER}!{W1}"
 		nextText $C0,$80        ; "Blast!{W2}"
 		nextSingleText $C0,$80  ; "Give up now, King Granseal!{N}Do you want her to die?!{W1}"
 		setCamDest $8,$F
-		setEntityDir $81,$1
+		setFacing $81,$1
 		nextText $0,$81         ; "No!  You give up!{N}We've got reinforcements!{W2}"
 		nextSingleText $0,$81   ; "Your great magic cannot{N}defeat all of our soldiers!{W1}"
 		nextSingleText $C0,$80  ; "I'll kill you before they{N}have a chance to attack!{W1}"
@@ -42,29 +42,29 @@ bbcs_07:        textCursor $935         ; Initial text line $935 : "Astral, you'
 		moveEntity $81,$FF,$1,$1
 		endMove $8080
 		setActscript $80,$FF,eas_BumpDown
-		setQuakeAmount $2
+		setQuake $2
 		playSound SFX_LIGHTNING_1
 		setActscript $81,$FF,eas_BumpUp
-		setQuakeAmount $0
+		setQuake $0
 		csWait $32
 		setActscript $80,$0,eas_BumpDown
-		setQuakeAmount $3
+		setQuake $3
 		playSound SFX_LIGHTNING_2
 		setActscript $81,$FF,eas_BumpUp
-		setQuakeAmount $0
+		setQuake $0
 		setActscript $81,$0,eas_Jump
 		entityNod $80
 		setActscript $81,$FF,eas_BumpDown
-		setQuakeAmount $2
+		setQuake $2
 		playSound SFX_DOOR_OPEN
 		setActscript $80,$FF,eas_BumpUp
-		setQuakeAmount $0
+		setQuake $0
 		csWait $28
 		setActscript $80,$0,eas_BumpDown
-		setQuakeAmount $3
+		setQuake $3
 		playSound SFX_HIT_2
 		setActscript $81,$FF,eas_BumpUp
-		setQuakeAmount $0
+		setQuake $0
 		setActscript $80,$0,eas_Jump
 		entityNod $81
 		setActscript $80,$FF,eas_46172
@@ -96,7 +96,7 @@ bbcs_07:        textCursor $935         ; Initial text line $935 : "Astral, you'
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		setEntityDir $80,$1
+		setFacing $80,$1
 		nextSingleText $C0,$80  ; "I've beaten you!{N}You've lost!{W1}"
 		nextText $0,$81         ; "But, so have you!{N}Or had you not noticed?{W2}"
 		nextSingleText $0,$81   ; "You cannot move.{N}Princess Elis, run away!{W1}"
@@ -130,7 +130,7 @@ bbcs_07:        textCursor $935         ; Initial text line $935 : "Astral, you'
 		entityPosDir $86,$E,$12,$3
 		csWait $28
 		entityPosDir $87,$F,$12,$3
-		setEntityDir $85,$3
+		setFacing $85,$3
 		nextSingleText $0,$86   ; "Yeeeeee!{W1}"
 		nextText $C0,$80        ; "Forget about Astral.{N}"
 		nextText $C0,$80        ; "I'll kill him!{W2}"
@@ -138,13 +138,10 @@ bbcs_07:        textCursor $935         ; Initial text line $935 : "Astral, you'
 		setActscript $85,$0,eas_Jump
 		setActscript $86,$0,eas_Jump
 		setActscript $87,$FF,eas_Jump
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_49F36:       dc.b   0
-		dc.b  $D
-		dc.b   0
-		dc.b $23 
-		dc.b   0
-		dc.b   1
+		csc_end
+ce_49F36:       dc.w $D
+		dc.w $23
+		dc.w 1
 		dc.b $D
 		dc.b $11
 		dc.b 3

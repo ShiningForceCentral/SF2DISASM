@@ -17,4 +17,4 @@ nullsub_180:
 
 cs_6060E:       setActscript $1C,$FF,eas_45F9C; 0015 SET ACTSCRIPT 1C FF 45F9C
 		entityPosDir $1C,$13,$21,$3; 0019 SET ENTITY POS AND FACING 1C 13 21 3
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

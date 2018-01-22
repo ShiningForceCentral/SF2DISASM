@@ -262,10 +262,11 @@ j_YesNoPrompt:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1007C:
-		jmp     sub_15BB0(pc)
+j_NameCharacter:
+		
+		jmp     NameCharacter(pc)
 
-	; End of function sub_1007C
+	; End of function j_NameCharacter
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3146,7 +3147,7 @@ loc_11D32:
 		adda.w  d0,a0
 		move.w  #$240,d0
 		move.w  #$740,d1
-		tst.b   ((MAP_AREA_PROP_1C-$1000000)).w
+		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_11D64
 		add.w   ((word_FFA814-$1000000)).w,d0
 		add.w   ((word_FFA816-$1000000)).w,d1
@@ -9235,7 +9236,8 @@ BattleConfigWindowLayout:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_15BB0:
+NameCharacter:
+		
 		movem.l d0-a2,-(sp)
 		link    a6,#-$20
 		move.w  d0,-$14(a6)
@@ -9310,7 +9312,7 @@ loc_15C72:
 		movem.l (sp)+,d0-a2
 		rts
 
-	; End of function sub_15BB0
+	; End of function NameCharacter
 
 
 ; =============== S U B R O U T I N E =======================================

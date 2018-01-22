@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle21\cs_beforebattle.asm :
 ; 0x4B790..0x4B88C : Cutscene before battle 21
-bbcs_21:        textCursor $A10         ; Initial text line $A10 : "(Sniff, sniff)...I smell{N}more invaders from the east.{W2}"
+bbcs_21:        textCursor $A10
 		loadMapFadeIn $43,$5,$12
-		loadMapEntities ce_4B84C; Entity data to figure out and format
+		loadMapEntities ce_4B84C
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$1C,$18,$2
@@ -11,12 +11,12 @@ bbcs_21:        textCursor $A10         ; Initial text line $A10 : "(Sniff, snif
 		entityPosDir $1F,$1C,$16,$2
 		entityPosDir $1E,$1C,$17,$2
 		fadeInB
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		nextText $0,$80         ; "(Sniff, sniff)...I smell{N}more invaders from the east.{W2}"
 		nextSingleText $0,$80   ; "This is the territory of{N}Mr. Creed.{W1}"
-		setEntityDir $80,$0
-		setEntityDir $81,$0
-		setEntityDir $82,$0
+		setFacing $80,$0
+		setFacing $81,$0
+		setFacing $82,$0
 		csWait $1E
 		setCamDest $17,$12
 		nextSingleText $0,$80   ; "Go away!{W1}"
@@ -39,13 +39,10 @@ bbcs_21:        textCursor $A10         ; Initial text line $A10 : "(Sniff, snif
 		setActscript $83,$0,eas_Jump
 		setActscript $84,$0,eas_Jump
 		setActscript $85,$FF,eas_Jump
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4B84C:       dc.b   0
-		dc.b $1B
-		dc.b   0
-		dc.b $17
-		dc.b   0
-		dc.b   2
+		csc_end
+ce_4B84C:       dc.w $1B
+		dc.w $17
+		dc.w 2
 		dc.b $1C
 		dc.b $18
 		dc.b 2

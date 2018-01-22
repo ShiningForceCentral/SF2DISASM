@@ -43,8 +43,8 @@ return_5EB24:
 	; End of function ms_map59_InitFunction
 
 cs_5EB26:       executeSubroutine csub_5EB34; 000A EXECUTE SUBROUTINE 5EB34
-		mapSysEvent $3B0D2201   ; 0007 EXECUTE MAP SYSTEM EVENT 3B0D2201
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		mapSysEvent $3B,$D,$22,$1; 0007 EXECUTE MAP SYSTEM EVENT 3B0D2201
+		csc_end
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -58,14 +58,14 @@ loc_5EB3C:
 
 	; End of function csub_5EB34
 
-cs_5EB44:       textCursor $E73         ; Initial text line $E73 : "{LEADER} is almost here{N}already?{W1}"
+cs_5EB44:       textCursor $E73         ; 0004 INIT TEXT CURSOR E73 : "{LEADER} is almost here{N}already?{W1}"
 		setCameraEntity $FFFF   ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
-		csc46 $8,$2             ; 0046 UNKNOWN
-		loadMapEntities ce_5F19E; Entity data to figure out and format
+		reloadMap $8,$2         ; 0046  8 2
+		loadMapEntities ce_5F19E; 0042 RELATED TO LOADING MAP ENTITIES 5F19E
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
-		csWait $3C              ; WAIT 3C
+		csWait $3C
 		playSound MUSIC_WITCH   ; 0005 PLAY SOUND MUSIC_WITCH
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		setActscript $80,$0,eas_Transparent
 						; 0015 SET ACTSCRIPT 80 0 45FA8
 		fadeInFromBlackHalf     ; 004A FADE IN FROM BLACK HALF
@@ -102,10 +102,10 @@ cs_5EB44:       textCursor $E73         ; Initial text line $E73 : "{LEADER} is 
 		nextText $0,$82         ; "I was just thinking of{N}{LEADER}'s hidden powers.{W2}"
 		nextSingleText $0,$82   ; "We must never underestimate{N}him.{W1}"
 		nextSingleText $0,$80   ; "Anyway, it will be a{N}fantastic show!  Ha, ha!{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 cs_5EBFC:       loadMapFadeIn $35,$8,$E ; 0037 LOAD MAP AND FADE IN 35 8 E
-		textCursor $E8B         ; Initial text line $E8B : "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
-		loadMapEntities ce_5F1DE; Entity data to figure out and format
+		textCursor $E8B         ; 0004 INIT TEXT CURSOR E8B : "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
+		loadMapEntities ce_5F1DE; 0042 RELATED TO LOADING MAP ENTITIES 5F1DE
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		stopEntity $82          ; 001C STOP ENTITY ANIM 82
 		stopEntity $83          ; 001C STOP ENTITY ANIM 83
@@ -153,10 +153,10 @@ cs_5EBFC:       loadMapFadeIn $35,$8,$E ; 0037 LOAD MAP AND FADE IN 35 8 E
 		endMove $8080
 		moveEntity $88,$0,$0,$3 ; 002D MOVE ENTITY 88 0 0 3
 		endMove $8080
-		setEntityDir $80,$2     ; 0023 SET ENTITY FACING 80 2
-		csWait $1E              ; WAIT 1E
-		setEntityDir $80,$0     ; 0023 SET ENTITY FACING 80 0
-		csWait $1E              ; WAIT 1E
+		setFacing $80,$2        ; 0023 SET ENTITY FACING 80 2
+		csWait $1E
+		setFacing $80,$0        ; 0023 SET ENTITY FACING 80 0
+		csWait $1E
 		entityShiver $80        ; 002A MAKE ENTITY SHIVER 80
 		nextSingleText $0,$80   ; "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
 		setCamDest $A,$E        ; 0032 SET CAMERA DEST A E
@@ -170,26 +170,26 @@ cs_5EBFC:       loadMapFadeIn $35,$8,$E ; 0037 LOAD MAP AND FADE IN 35 8 E
 		moveEntity $81,$FF,$0,$2; 002D MOVE ENTITY 81 FF 0 2
 		moreMove $1,$2
 		endMove $8080
-		setEntityDir $81,$0     ; 0023 SET ENTITY FACING 81 0
+		setFacing $81,$0        ; 0023 SET ENTITY FACING 81 0
 		nextText $80,$81        ; "Now, c'mon Granseal losers!{W2}"
 		nextSingleText $80,$81  ; "The Prism Flowers are waiting{N}for you!  Hee, heee!{W1}"
 		entityNod $81           ; 0026 MAKE ENTITY NOD 81
 		entityNod $81           ; 0026 MAKE ENTITY NOD 81
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_5ED06:       textCursor $E91         ; Initial text line $E91 : "There's Grans Island!{W1}"
+		csc_end
+cs_5ED06:       textCursor $E91         ; 0004 INIT TEXT CURSOR E91 : "There's Grans Island!{W1}"
 		loadMapFadeIn $49,$0,$0 ; 0037 LOAD MAP AND FADE IN 49 0 0
-		loadMapEntities ce_5F1BE; Entity data to figure out and format
+		loadMapEntities ce_5F1BE; 0042 RELATED TO LOADING MAP ENTITIES 5F1BE
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		executeSubroutine sub_5F31E; 000A EXECUTE SUBROUTINE 5F31E
 		playSound MUSIC_MITULA_SHRINE; 0005 PLAY SOUND MUSIC_MITULA_SHRINE
-		setBlocks $A,$160A,$2A0A; 0034 SET BLOCKS A 160A 2A0A
+		setBlocks $0,$A,$16,$A,$2A,$A; 0034 SET BLOCKS A 160A 2A0A
 		fadeInB                 ; 0039 FADE IN FROM BLACK
 		executeSubroutine sub_5FD92; 000A EXECUTE SUBROUTINE 5FD92
 		nextSingleText $80,$1A  ; "There's Grans Island!{W1}"
 		nextSingleText $80,$7   ; "Alright!{W1}"
 		nextSingleText $0,$1F   ; "We've finally come home.{W1}"
 		loadMapFadeIn $35,$A,$D ; 0037 LOAD MAP AND FADE IN 35 A D
-		loadMapEntities ce_5F23E; Entity data to figure out and format
+		loadMapEntities ce_5F23E; 0042 RELATED TO LOADING MAP ENTITIES 5F23E
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		playSound MUSIC_BATTLE_THEME_1; 0005 PLAY SOUND MUSIC_BATTLE_THEME_1
 		stopEntity $80          ; 001C STOP ENTITY ANIM 80
@@ -199,21 +199,21 @@ cs_5ED06:       textCursor $E91         ; Initial text line $E91 : "There's Gran
 		fadeInB                 ; 0039 FADE IN FROM BLACK
 		nextSingleText $80,$81  ; "I see the Nazca Ship!{N}Everybody, get ready!{W1}"
 		loadMapFadeIn $49,$0,$0 ; 0037 LOAD MAP AND FADE IN 49 0 0
-		loadMapEntities ce_5F1BE; Entity data to figure out and format
+		loadMapEntities ce_5F1BE; 0042 RELATED TO LOADING MAP ENTITIES 5F1BE
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		executeSubroutine sub_5F31E; 000A EXECUTE SUBROUTINE 5F31E
 		playSound MUSIC_MITULA_SHRINE; 0005 PLAY SOUND MUSIC_MITULA_SHRINE
-		setBlocks $A,$160A,$2A0A; 0034 SET BLOCKS A 160A 2A0A
+		setBlocks $0,$A,$16,$A,$2A,$A; 0034 SET BLOCKS A 160A 2A0A
 		fadeInB                 ; 0039 FADE IN FROM BLACK
 		executeSubroutine sub_5FD92; 000A EXECUTE SUBROUTINE 5FD92
 		nextSingleText $0,$1F   ; "What's that?  I saw a flash{N}of light over there.{W1}"
 		nextSingleText $80,$7   ; "I didn't see it.  You must be{N}seeing things because you're{N}so old!  Ha, ha!{W1}"
 		nextText $0,$1F         ; "(Grumble)....{W2}"
 		nextSingleText $0,$1F   ; "Someday, {NAME;7}....{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_5EDB8:       textCursor $E99         ; Initial text line $E99 : "NOW!{W1}"
+		csc_end
+cs_5EDB8:       textCursor $E99         ; 0004 INIT TEXT CURSOR E99 : "NOW!{W1}"
 		loadMapFadeIn $35,$A,$D ; 0037 LOAD MAP AND FADE IN 35 A D
-		loadMapEntities ce_5F28E; Entity data to figure out and format
+		loadMapEntities ce_5F28E; 0042 RELATED TO LOADING MAP ENTITIES 5F28E
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		playSound MUSIC_ENEMY_ATTACK; 0005 PLAY SOUND MUSIC_ENEMY_ATTACK
 		setActscript $85,$0,eas_5EF46; 0015 SET ACTSCRIPT 85 0 5EF46
@@ -229,15 +229,15 @@ cs_5EDB8:       textCursor $E99         ; Initial text line $E99 : "NOW!{W1}"
 		stopEntity $8F          ; 001C STOP ENTITY ANIM 8F
 		stopEntity $90          ; 001C STOP ENTITY ANIM 90
 		fadeInB                 ; 0039 FADE IN FROM BLACK
-		setEntityDir $81,$2     ; 0023 SET ENTITY FACING 81 2
+		setFacing $81,$2        ; 0023 SET ENTITY FACING 81 2
 		nextSingleText $80,$81  ; "NOW!{W1}"
 		moveEntity $81,$FF,$0,$1; 002D MOVE ENTITY 81 FF 0 1
 		endMove $8080
 		nextSingleText $80,$81  ; "Shoot them!  Shoot them!{W1}"
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
 		entityPosDir $85,$C,$10,$2; 0019 SET ENTITY POS AND FACING 85 C 10 2
-		csWait $1E              ; WAIT 1E
-		setEntityDir $85,$1     ; 0023 SET ENTITY FACING 85 1
+		csWait $1E
+		setFacing $85,$1        ; 0023 SET ENTITY FACING 85 1
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 						; 0005 PLAY SOUND SFX_PRISM_LASER_CUTSCENE_FIRING
 		entityPosDir $85,$D,$F,$1; 0019 SET ENTITY POS AND FACING 85 D F 1
@@ -247,11 +247,11 @@ cs_5EDB8:       textCursor $E99         ; Initial text line $E99 : "NOW!{W1}"
 		entityPosDir $86,$D,$F,$1; 0019 SET ENTITY POS AND FACING 86 D F 1
 		moveEntity $86,$0,$4,$A ; 002D MOVE ENTITY 86 0 4 A
 		endMove $8080
-		csWait $14              ; WAIT 14
+		csWait $14
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
 		entityPosDir $87,$D,$11,$2; 0019 SET ENTITY POS AND FACING 87 D 11 2
-		csWait $1E              ; WAIT 1E
-		setEntityDir $87,$1     ; 0023 SET ENTITY FACING 87 1
+		csWait $1E
+		setFacing $87,$1        ; 0023 SET ENTITY FACING 87 1
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 						; 0005 PLAY SOUND SFX_PRISM_LASER_CUTSCENE_FIRING
 		entityPosDir $87,$E,$10,$1; 0019 SET ENTITY POS AND FACING 87 E 10 1
@@ -263,8 +263,8 @@ cs_5EDB8:       textCursor $E99         ; Initial text line $E99 : "NOW!{W1}"
 		endMove $8080
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
 		entityPosDir $89,$E,$13,$2; 0019 SET ENTITY POS AND FACING 89 E 13 2
-		csWait $1E              ; WAIT 1E
-		setEntityDir $89,$1     ; 0023 SET ENTITY FACING 89 1
+		csWait $1E
+		setFacing $89,$1        ; 0023 SET ENTITY FACING 89 1
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 						; 0005 PLAY SOUND SFX_PRISM_LASER_CUTSCENE_FIRING
 		entityPosDir $89,$F,$12,$1; 0019 SET ENTITY POS AND FACING 89 F 12 1
@@ -274,11 +274,11 @@ cs_5EDB8:       textCursor $E99         ; Initial text line $E99 : "NOW!{W1}"
 		entityPosDir $8A,$F,$12,$1; 0019 SET ENTITY POS AND FACING 8A F 12 1
 		moveEntity $8A,$0,$4,$A ; 002D MOVE ENTITY 8A 0 4 A
 		endMove $8080
-		csWait $A               ; WAIT A
+		csWait $A
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
 		entityPosDir $8B,$F,$14,$2; 0019 SET ENTITY POS AND FACING 8B F 14 2
-		csWait $1E              ; WAIT 1E
-		setEntityDir $8B,$1     ; 0023 SET ENTITY FACING 8B 1
+		csWait $1E
+		setFacing $8B,$1        ; 0023 SET ENTITY FACING 8B 1
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 						; 0005 PLAY SOUND SFX_PRISM_LASER_CUTSCENE_FIRING
 		entityPosDir $8B,$10,$13,$1; 0019 SET ENTITY POS AND FACING 8B 10 13 1
@@ -290,8 +290,8 @@ cs_5EDB8:       textCursor $E99         ; Initial text line $E99 : "NOW!{W1}"
 		endMove $8080
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
 		entityPosDir $8B,$C,$10,$2; 0019 SET ENTITY POS AND FACING 8B C 10 2
-		csWait $1E              ; WAIT 1E
-		setEntityDir $8B,$1     ; 0023 SET ENTITY FACING 8B 1
+		csWait $1E
+		setFacing $8B,$1        ; 0023 SET ENTITY FACING 8B 1
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 						; 0005 PLAY SOUND SFX_PRISM_LASER_CUTSCENE_FIRING
 		entityPosDir $8B,$D,$F,$1; 0019 SET ENTITY POS AND FACING 8B D F 1
@@ -301,13 +301,10 @@ cs_5EDB8:       textCursor $E99         ; Initial text line $E99 : "NOW!{W1}"
 		entityPosDir $8C,$D,$F,$1; 0019 SET ENTITY POS AND FACING 8C D F 1
 		moveEntity $8C,$FF,$4,$A; 002D MOVE ENTITY 8C FF 4 A
 		endMove $8080
-		csc_end                 ; END OF CUTSCENE SCRIPT
-eas_5EF46:      dc.b   0                ; 001E SET ANIM SPEED X2 $FFFF
-		dc.b $1E
-		dc.b $FF
-		dc.b $FF
-		dc.b   0                ; 001C SET TRANSPARENCY $FFFF
-		dc.b $1C
+		csc_end
+eas_5EF46:      dc.w $1E                ; 001E SET ANIM SPEED X2 $FFFF
+		dc.w $FFFF
+		dc.w $1C                ; 001C SET TRANSPARENCY $FFFF
 		dc.w $FFFF
 		dc.w $1A                ; 001A SET 1C BIT 5 $0
 		dc.w 0
@@ -318,9 +315,10 @@ eas_5EF46:      dc.b   0                ; 001E SET ANIM SPEED X2 $FFFF
 		dc.b $40
 		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
-cs_5EF60:       textCursor $E9B         ; Initial text line $E9B : "I did see something!{W1}"
+cs_5EF60:       textCursor $E9B         ; 0004 INIT TEXT CURSOR E9B : "I did see something!{W1}"
 		loadMapFadeIn $25,$4,$6 ; 0037 LOAD MAP AND FADE IN 25 4 6
-		csc49 $9,$B,$3          ; 0049 UNKNOWN
+		loadEntitiesFromMapSetup $9,$B,$3
+						; 0049  9 B 3
 		executeSubroutine sub_47948; 000A EXECUTE SUBROUTINE 47948
 		entityPosDir $1A,$8,$A,$0; 0019 SET ENTITY POS AND FACING 1A 8 A 0
 		executeSubroutine sub_5F32E; 000A EXECUTE SUBROUTINE 5F32E
@@ -338,53 +336,53 @@ cs_5EF60:       textCursor $E9B         ; Initial text line $E9B : "I did see so
 		nextSingleText $80,$1A  ; "Sir Astral!  {LEADER}!{N}Something is coming straight{N}towards us!{W1}"
 		nextSingleText $0,$80   ; "What is it?{W1}"
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		setQuakeAmount $3       ; 0033 SET QUAKE AMOUNT 3
+		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
 		flashScreenWhite $14    ; 0041 FLASH SCREEN WHITE 14
-		setQuakeAmount $1       ; 0033 SET QUAKE AMOUNT 1
-		csWait $A               ; WAIT A
-		setQuakeAmount $0       ; 0033 SET QUAKE AMOUNT 0
+		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
+		csWait $A
+		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
 		moveEntity $7,$FF,$0,$1 ; 002D MOVE ENTITY 7 FF 0 1
 		moreMove $E,$1
 		moreMove $F,$1
 		moreMove $E,$1
 		moreMove $F,$1
 		endMove $8080
-		setEntityDir $7,$2      ; 0023 SET ENTITY FACING 7 2
+		setFacing $7,$2         ; 0023 SET ENTITY FACING 7 2
 		nextSingleText $80,$7   ; "Oooouu!!  What was that?!{N}Lightning?{W1}"
-		setEntityDir $0,$0      ; 0023 SET ENTITY FACING 0 0
-		setEntityDir $1A,$3     ; 0023 SET ENTITY FACING 1A 3
+		setFacing $0,$0         ; 0023 SET ENTITY FACING 0 0
+		setFacing $1A,$3        ; 0023 SET ENTITY FACING 1A 3
 		nextText $80,$1A        ; "An attack from the ground.{W2}"
 		nextSingleText $80,$1A  ; "I can't control the ship!{W1}"
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		setQuakeAmount $3       ; 0033 SET QUAKE AMOUNT 3
+		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
 		flashScreenWhite $14    ; 0041 FLASH SCREEN WHITE 14
-		setQuakeAmount $1       ; 0033 SET QUAKE AMOUNT 1
-		csWait $A               ; WAIT A
-		setQuakeAmount $0       ; 0033 SET QUAKE AMOUNT 0
-		csWait $A               ; WAIT A
+		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
+		csWait $A
+		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
+		csWait $A
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		setQuakeAmount $3       ; 0033 SET QUAKE AMOUNT 3
+		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
 		flashScreenWhite $14    ; 0041 FLASH SCREEN WHITE 14
-		setQuakeAmount $1       ; 0033 SET QUAKE AMOUNT 1
-		csWait $A               ; WAIT A
+		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
+		csWait $A
 		nextText $80,$1A        ; "We've sustained damage to{N}the engine!{W2}"
 		nextSingleText $80,$1A  ; "We might crash!{W1}"
 		moveEntity $80,$FF,$0,$1; 002D MOVE ENTITY 80 FF 0 1
 		endMove $8080
-		setEntityDir $80,$1     ; 0023 SET ENTITY FACING 80 1
+		setFacing $80,$1        ; 0023 SET ENTITY FACING 80 1
 		entityShiver $80        ; 002A MAKE ENTITY SHIVER 80
 		nextText $0,$80         ; "Crash?!{W2}"
 		nextSingleText $80,$1A  ; "Geshp's trap!  Darn!{W1}"
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		setQuakeAmount $3       ; 0033 SET QUAKE AMOUNT 3
+		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
 		flashScreenWhite $14    ; 0041 FLASH SCREEN WHITE 14
-		setQuakeAmount $1       ; 0033 SET QUAKE AMOUNT 1
-		csWait $A               ; WAIT A
+		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
+		csWait $A
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		setQuakeAmount $3       ; 0033 SET QUAKE AMOUNT 3
+		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
 		flashScreenWhite $14    ; 0041 FLASH SCREEN WHITE 14
-		setQuakeAmount $1       ; 0033 SET QUAKE AMOUNT 1
-		csWait $A               ; WAIT A
+		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
+		csWait $A
 		setActscript $7,$FF,eas_Jump; 0015 SET ACTSCRIPT 7 FF 45E44
 		setActscript $7,$FF,eas_Jump; 0015 SET ACTSCRIPT 7 FF 45E44
 		nextText $80,$7         ; "I don't want to crash!{W2}"
@@ -392,22 +390,22 @@ cs_5EF60:       textCursor $E9B         ; Initial text line $E9B : "I did see so
 		nextSingleText $0,$80   ; "{NAME;26}, can you land on{N}that cape before the ship{N}crashes?{W1}"
 		nextSingleText $80,$1A  ; "I'm not sure,{W2}"
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		setQuakeAmount $3       ; 0033 SET QUAKE AMOUNT 3
+		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
 		flashScreenWhite $14    ; 0041 FLASH SCREEN WHITE 14
-		setQuakeAmount $1       ; 0033 SET QUAKE AMOUNT 1
-		csWait $A               ; WAIT A
+		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
+		csWait $A
 		nextSingleText $80,$1A  ; "but I'll try.{W1}"
 		playSound SFX_BATTLEFIELD_DEATH; 0005 PLAY SOUND SFX_BATTLEFIELD_DEATH
-		setQuakeAmount $3       ; 0033 SET QUAKE AMOUNT 3
+		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
 		flashScreenWhite $14    ; 0041 FLASH SCREEN WHITE 14
-		setQuakeAmount $1       ; 0033 SET QUAKE AMOUNT 1
-		csWait $A               ; WAIT A
-		setQuakeAmount $3       ; 0033 SET QUAKE AMOUNT 3
+		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
+		csWait $A
+		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
 		executeSubroutine sub_5F338; 000A EXECUTE SUBROUTINE 5F338
 		fadeOutB                ; 003A FADE OUT TO BLACK
-		setQuakeAmount $0       ; 0033 SET QUAKE AMOUNT 0
+		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
 		mapLoad $4B,$14,$E      ; 0048 LOAD MAP 4B 14 E
-		loadMapEntities ce_5F1CE; Entity data to figure out and format
+		loadMapEntities ce_5F1CE; 0042 RELATED TO LOADING MAP ENTITIES 5F1CE
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		setCameraEntity $80     ; 0024 SET ENTITY FOLLOWED BY CAMERA 80
 		customActscript $80,$FF ; 0014 SET MANUAL ACTSCRIPT 80
@@ -417,26 +415,26 @@ cs_5EF60:       textCursor $E9B         ; Initial text line $E9B : "I did see so
 		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
-		csc45 $10               ; (null)
+		cameraSpeed $10         ; 0045 RELATED TO CAMERA ADJUST TO PLAYER 10
 		moveEntity $80,$0,$2,$C ; 002D MOVE ENTITY 80 0 2 C
 		endMove $8080
 		executeSubroutine csub_5F326; 000A EXECUTE SUBROUTINE 5F326
 		fadeInB                 ; 0039 FADE IN FROM BLACK
 		executeSubroutine sub_5FD92; 000A EXECUTE SUBROUTINE 5FD92
-		csWait $96              ; WAIT 96
+		csWait $96
 		playSound $FD           ; 0005 PLAY SOUND 
 		executeSubroutine sub_5F16C; 000A EXECUTE SUBROUTINE 5F16C
-		setQuakeAmount $1       ; 0033 SET QUAKE AMOUNT 1
+		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
 		playSound SFX_INTRO_LIGHTNING; 0005 PLAY SOUND SFX_INTRO_LIGHTNING
 		flashScreenWhite $3C    ; 0041 FLASH SCREEN WHITE 3C
 		waitIdle $80            ; 0016 WAIT UNTIL IDLE ENTITY 80
-		setBlocks $383B,$405,$C11; 0034 SET BLOCKS 383B 405 C11
-		csWait $78              ; WAIT 78
-		setQuakeAmount $0       ; 0033 SET QUAKE AMOUNT 0
+		setBlocks $38,$3B,$4,$5,$C,$11; 0034 SET BLOCKS 383B 405 C11
+		csWait $78
+		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
 		executeSubroutine csub_5F14C; 000A EXECUTE SUBROUTINE 5F14C
-		csWait $78              ; WAIT 78
-		mapSysEvent $25080C03   ; 0007 EXECUTE MAP SYSTEM EVENT 25080C03
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csWait $78
+		mapSysEvent $25,$8,$C,$3; 0007 EXECUTE MAP SYSTEM EVENT 25080C03
+		csc_end
 
 ; =============== S U B R O U T I N E =======================================
 

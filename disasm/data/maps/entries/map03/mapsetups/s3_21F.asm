@@ -32,4 +32,4 @@ sub_6282A:
 	; End of function sub_6282A
 
 cs_6283E:       moveEntityNextToPlayer $89,$2; 0028 MOVE ENTITY NEXT TO PLAYER 89 2
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

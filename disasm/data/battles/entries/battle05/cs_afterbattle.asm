@@ -1,12 +1,12 @@
 
 ; ASM FILE data\battles\entries\battle05\cs_afterbattle.asm :
 ; 0x49B48..0x49BCA : Cutscene after battle 5
-abcs_battle05:  textCursor $91C         ; Initial text line $91C : "This is the Jewel of Light{N}that I stole from the shrine.{W2}"
+abcs_battle05:  textCursor $91C
 		setActscript $5,$FF,eas_Init
 		moveEntity $5,$FF,$3,$1
 		moreMove $2,$2
 		endMove $8080
-		setEntityDir $5,$3
+		setFacing $5,$3
 		nextText $0,$5          ; "This is the Jewel of Light{N}that I stole from the shrine.{W2}"
 		nextSingleText $0,$5    ; "The other jewel is missing.{N}I'll give you this one now.{W1}"
 		nextText $FF,$FF        ; "{LEADER} received the{N}Jewel of Light...{W2}{N}The jewel fused to{N}{LEADER}'s neck.{W1}"
@@ -27,5 +27,5 @@ abcs_battle05:  textCursor $91C         ; Initial text line $91C : "This is the 
 		clearF $49              ; Slade is a follower
 		setStoryFlag $6         ; Battle 6 unlocked
 		followEntity $5,$0,$2
-		mapSysEvent $10101203
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		mapSysEvent $10,$10,$12,$3
+		csc_end

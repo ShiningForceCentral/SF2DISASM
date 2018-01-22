@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle30\cs_beforebattle.asm :
 ; 0x4C5E6..0x4C6A8 : Cutscene before battle 30
-bbcs_30:        textCursor $AC8         ; Initial text line $AC8 : "What a pleasure!{N}Nice to meet you.{W1}"
+bbcs_30:        textCursor $AC8
 		loadMapFadeIn $1,$7,$15
-		loadMapEntities ce_4C690; Entity data to figure out and format
+		loadMapEntities ce_4C690
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$B,$1C,$1
@@ -37,9 +37,8 @@ bbcs_30:        textCursor $AC8         ; Initial text line $AC8 : "What a pleas
 		nextSingleText $0,$80   ; "Are you ready to die?{W1}"
 		playSound SFX_INTRO_LIGHTNING
 		flashScreenWhite $28
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4C690:       dc.b   0
-		dc.b  $B
+		csc_end
+ce_4C690:       dc.w $B
 		dc.w $1A
 		dc.w 1
 		dc.b $B

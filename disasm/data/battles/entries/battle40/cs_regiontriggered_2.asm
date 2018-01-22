@@ -1,48 +1,48 @@
 
 ; ASM FILE data\battles\entries\battle40\cs_regiontriggered_2.asm :
 ; 0x4E9B2..0x4EA94 : Region-activated cutscene 2 for battle 40
-rbcs_battle40_2:csc45 $30               ; (null)
+rbcs_battle40_2:cameraSpeed $30
 		setCamDest $D,$8
-		setBlocks $B0B,$101,$130A
+		setBlocks $B,$B,$1,$1,$13,$A
 		csWait $5
-		setBlocks $B0B,$101,$130B
+		setBlocks $B,$B,$1,$1,$13,$B
 		csWait $5
-		setBlocks $B0B,$101,$140C
+		setBlocks $B,$B,$1,$1,$14,$C
 		csWait $5
-		setBlocks $B0B,$101,$150B
+		setBlocks $B,$B,$1,$1,$15,$B
 		csWait $5
-		setBlocks $B0B,$101,$150C
+		setBlocks $B,$B,$1,$1,$15,$C
 		csWait $5
-		setBlocks $B0B,$101,$160C
+		setBlocks $B,$B,$1,$1,$16,$C
 		csWait $4
-		setBlocks $B0B,$101,$130C
+		setBlocks $B,$B,$1,$1,$13,$C
 		csWait $4
-		setBlocks $B0B,$101,$120B
+		setBlocks $B,$B,$1,$1,$12,$B
 		csWait $4
-		setBlocks $B0B,$101,$140D
+		setBlocks $B,$B,$1,$1,$14,$D
 		csWait $4
-		setBlocks $B0B,$101,$130D
+		setBlocks $B,$B,$1,$1,$13,$D
 		csWait $4
-		setBlocks $B0B,$101,$120A
+		setBlocks $B,$B,$1,$1,$12,$A
 		csWait $3
-		setBlocks $B0B,$101,$120C
+		setBlocks $B,$B,$1,$1,$12,$C
 		csWait $3
-		setBlocks $B0B,$101,$120D
+		setBlocks $B,$B,$1,$1,$12,$D
 		csWait $3
-		setBlocks $B0B,$101,$110C
+		setBlocks $B,$B,$1,$1,$11,$C
 		csWait $3
-		setBlocks $B0B,$101,$130E
+		setBlocks $B,$B,$1,$1,$13,$E
 		csWait $3
-		setBlocks $B0B,$101,$140E
+		setBlocks $B,$B,$1,$1,$14,$E
 		csWait $2
-		setBlocks $B0B,$101,$150E
+		setBlocks $B,$B,$1,$1,$15,$E
 		csWait $2
-		setBlocks $B0B,$101,$110A
+		setBlocks $B,$B,$1,$1,$11,$A
 		csWait $2
-		setBlocks $B0B,$101,$100C
+		setBlocks $B,$B,$1,$1,$10,$C
 		csWait $2
-		setBlocks $B0B,$101,$110D
+		setBlocks $B,$B,$1,$1,$11,$D
 		csWait $2
-		setBlocks $B0B,$101,$D0E
+		setBlocks $B,$B,$1,$1,$D,$E
 		setF $184               ; set after the second set of tile changes in the Oddeye battle
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

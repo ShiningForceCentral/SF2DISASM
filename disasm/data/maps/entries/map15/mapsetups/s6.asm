@@ -10,12 +10,12 @@ ms_map15_InitFunction:
 
 	; End of function ms_map15_InitFunction
 
-cs_5D04E:       textCursor $7D6         ; Initial text line $7D6 : "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
-		setEntityDir $0,$0      ; 0023 SET ENTITY FACING 0 0
+cs_5D04E:       textCursor $7D6         ; 0004 INIT TEXT CURSOR 7D6 : "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
+		setFacing $0,$0         ; 0023 SET ENTITY FACING 0 0
 		setEntityDest $7,$18,$11; 0029 SET ENTITY DEST 7 18 11
-		setEntityDir $7,$0      ; 0023 SET ENTITY FACING 7 0
+		setFacing $7,$0         ; 0023 SET ENTITY FACING 7 0
 		entityPosDir $14,$1F,$21,$1; 0019 SET ENTITY POS AND FACING 14 1F 21 1
-		csWait $1               ; WAIT 1
+		csWait $1
 		setCamDest $1A,$16      ; 0032 SET CAMERA DEST 1A 16
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
@@ -26,7 +26,7 @@ cs_5D04E:       textCursor $7D6         ; Initial text line $7D6 : "Excuse me, a
 		csc2F $14,$FFFF         ; 002F  14 FFFF
 		moveEntity $14,$0,$1,$8 ; 002D MOVE ENTITY 14 0 1 8
 		endMove $8080
-		csWait $3C              ; WAIT 3C
+		csWait $3C
 		setCamDest $1A,$14      ; 0032 SET CAMERA DEST 1A 14
 		moveEntity $14,$0,$2,$3 ; 002D MOVE ENTITY 14 0 2 3
 		endMove $8080
@@ -52,14 +52,14 @@ cs_5D04E:       textCursor $7D6         ; Initial text line $7D6 : "Excuse me, a
 		moveEntity $14,$0,$3,$7 ; 002D MOVE ENTITY 14 0 3 7
 		endMove $8080
 		setCamDest $14,$C       ; 0032 SET CAMERA DEST 14 C
-		csWait $3C              ; WAIT 3C
+		csWait $3C
 		setEntityDest $14,$1A,$12; 0029 SET ENTITY DEST 14 1A 12
-		setEntityDir $14,$2     ; 0023 SET ENTITY FACING 14 2
+		setFacing $14,$2        ; 0023 SET ENTITY FACING 14 2
 		nextSingleText $80,$14  ; "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
 		moveEntity $7,$FF,$0,$2 ; 002D MOVE ENTITY 7 FF 0 2
 		endMove $8080
-		setEntityDir $7,$3      ; 0023 SET ENTITY FACING 7 3
-		setEntityDir $14,$1     ; 0023 SET ENTITY FACING 14 1
+		setFacing $7,$3         ; 0023 SET ENTITY FACING 7 3
+		setFacing $14,$1        ; 0023 SET ENTITY FACING 14 1
 		nextSingleText $0,$7    ; "Yes, he's {LEADER},{N}but who are you?{W1}"
 		nextSingleText $80,$14  ; "I'm {NAME;20} of Bedoe.{W1}"
 		entityShiver $7         ; 002A MAKE ENTITY SHIVER 7
@@ -83,7 +83,7 @@ cs_5D04E:       textCursor $7D6         ; Initial text line $7D6 : "Excuse me, a
 		moreMove $3,$1
 		moreMove $8,$28
 		endMove $8080
-		setEntityDir $14,$2     ; 0023 SET ENTITY FACING 14 2
+		setFacing $14,$2        ; 0023 SET ENTITY FACING 14 2
 		nextSingleText $0,$7    ; "You grew up quickly, huh?{W1}"
 		nextSingleText $80,$14  ; "Yeah, I learned how to fight.{W1}"
 		join $14                ; 0008 JOIN FORCE 14
@@ -91,4 +91,4 @@ cs_5D04E:       textCursor $7D6         ; Initial text line $7D6 : "Excuse me, a
 		followEntity $1F,$7,$2  ; 002C FOLLOW ENTITY 1F 7 2
 		followEntity $14,$0,$5  ; 002C FOLLOW ENTITY 14 0 5
 		csc2F $14,$0            ; 002F  14 0
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

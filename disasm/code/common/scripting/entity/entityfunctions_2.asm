@@ -246,7 +246,7 @@ SetEntityMovescriptToIdle:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_44C2E:
+AddFollower:
 		movem.l a0-a1,-(sp)
 		move.w  d0,-(sp)
 		bsr.w   GetEntityRAMAddress
@@ -272,7 +272,7 @@ loc_44C7E:
 		movem.l (sp)+,a0-a1
 		rts
 
-	; End of function sub_44C2E
+	; End of function AddFollower
 
 
 ; =============== S U B R O U T I N E =======================================

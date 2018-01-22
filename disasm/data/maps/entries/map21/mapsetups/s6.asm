@@ -32,4 +32,4 @@ cs_53F2A:       customActscript $80,$FF ; 0014 SET MANUAL ACTSCRIPT 80
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		entityPosDir $80,$6,$10,$3; 0019 SET ENTITY POS AND FACING 80 6 10 3
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

@@ -38,13 +38,13 @@ loc_46538:
 		move.w  #$FFFF,d2
 		bra.s   loc_46550
 loc_46546:
-		move.w  d0,(word_FFA80C).l
+		move.w  d0,(QUAKE_AMPLITUDE).l
 		bra.w   return_46564
 loc_46550:
 		move.w  #$28,d0 
 loc_46554:
 		add.w   d2,d1
-		move.w  d1,(word_FFA80C).l
+		move.w  d1,(QUAKE_AMPLITUDE).l
 		jsr     (Sleep).w       
 		dbf     d7,loc_46554
 return_46564:
@@ -60,7 +60,7 @@ csc34_setBlocks:
 		move.w  (a6)+,d0
 		move.w  (a6)+,d1
 		move.w  (a6)+,d2
-		jsr     (sub_3DB0).w
+		jsr     (CopyMapBlocks).w
 		bset    #0,(byte_FFA82D).l
 		bset    #1,(byte_FFA82D).l
 		rts
@@ -76,7 +76,7 @@ csc35_:
 		move.w  (a6)+,d0
 		move.w  (a6)+,d1
 		move.w  (a6)+,d2
-		jsr     (sub_3DB0).w
+		jsr     (CopyMapBlocks).w
 		rts
 
 	; End of function csc35_
@@ -267,7 +267,8 @@ loc_4667A:
 
 ; =============== S U B R O U T I N E =======================================
 
-csc42_:
+csc42_loadMapEntities:
+		
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_DEACTIVATE
 		dc.l 0
@@ -284,12 +285,13 @@ csc42_:
 		dc.l 0
 		rts
 
-	; End of function csc42_
+	; End of function csc42_loadMapEntities
 
 
 ; =============== S U B R O U T I N E =======================================
 
-csc43_:
+csc43_RoofEvent:
+		
 		move.w  (a6)+,d0
 		move.w  (a6)+,d1
 		mulu.w  #$180,d0
@@ -297,12 +299,13 @@ csc43_:
 		jsr     (PerformMapBlockCopyScript).w
 		rts
 
-	; End of function csc43_
+	; End of function csc43_RoofEvent
 
 
 ; =============== S U B R O U T I N E =======================================
 
-csc44_:
+csc44_reloadEntities:
+		
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_DEACTIVATE
 		dc.l 0
@@ -323,24 +326,24 @@ csc44_:
 		dc.l 0
 		rts
 
-	; End of function csc44_
+	; End of function csc44_reloadEntities
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to camera adjust to lpayer
-
-csc45_:
-		move.w  (a6)+,((word_FFB194-$1000000)).w
+csc45_cameraSpeed:
+		
+		move.w  (a6)+,((CAMERA_SPEED-$1000000)).w
 		nop
 		rts
 
-	; End of function csc45_
+	; End of function csc45_cameraSpeed
 
 
 ; =============== S U B R O U T I N E =======================================
 
-csc46_:
+csc46_reloadMap:
+		
 		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
 		nop
 		trap    #VINT_FUNCTIONS
@@ -364,25 +367,27 @@ csc46_:
 		jsr     (WaitForVInt).w 
 		rts
 
-	; End of function csc46_
+	; End of function csc46_reloadMap
 
 
 ; =============== S U B R O U T I N E =======================================
 
-csc47_:
+csc47_StepEvent:
+		
 		move.w  (a6)+,d0
 		move.w  (a6)+,d1
 		mulu.w  #$180,d0
 		mulu.w  #$180,d1
-		jsr     (sub_3E40).w    
+		jsr     (OpenDoor).w    
 		rts
 
-	; End of function csc47_
+	; End of function csc47_StepEvent
 
 
 ; =============== S U B R O U T I N E =======================================
 
-csc49_:
+csc49_loadEntitiesFromMapSetup:
+		
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_DEACTIVATE
 		dc.l 0
@@ -399,7 +404,7 @@ csc49_:
 		dc.l 0
 		rts
 
-	; End of function csc49_
+	; End of function csc49_loadEntitiesFromMapSetup
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -946,7 +951,7 @@ csc1E_hidePortrait:
 
 ; =============== S U B R O U T I N E =======================================
 
-csc1F_declareForceMemberDead:
+csc1F_addDefeatedAlly:
 		
 		lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a1
 		adda.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,a1
@@ -955,12 +960,14 @@ csc1F_declareForceMemberDead:
 		addq.w  #1,((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
 		rts
 
-	; End of function csc1F_declareForceMemberDead
+	; End of function csc1F_addDefeatedAlly
 
 
 ; =============== S U B R O U T I N E =======================================
 
-csc20_addForceMembersOnMapToList:
+; if X Pos == -1, then dead
+
+csc20_updateDefeatedAllies:
 		
 		lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a1
 		move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d2
@@ -979,12 +986,12 @@ loc_46B0E:
 		move.w  d2,((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
 		rts
 
-	; End of function csc20_addForceMembersOnMapToList
+	; End of function csc20_updateDefeatedAllies
 
 
 ; =============== S U B R O U T I N E =======================================
 
-csc21_removeForceMemberFromList:
+csc21_reviveAlly:
 		
 		move.w  (a6)+,d0
 		lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a1
@@ -1005,7 +1012,7 @@ loc_46B3C:
 return_46B40:
 		rts
 
-	; End of function csc21_removeForceMemberFromList
+	; End of function csc21_reviveAlly
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1375,7 +1382,8 @@ loc_46E0A:
 
 ; =============== S U B R O U T I N E =======================================
 
-csc2B_:
+csc2B_initializeNewEntity:
+		
 		move.w  (a6)+,d0
 		clr.w   d1
 		clr.w   d2
@@ -1386,10 +1394,10 @@ csc2B_:
 		move.b  (a6)+,d3
 		move.b  (a6)+,d4
 		move.l  #eas_Init,d5    
-		jsr     sub_44570
+		jsr     InitializeNewEntity
 		rts
 
-	; End of function csc2B_
+	; End of function csc2B_initializeNewEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1413,7 +1421,7 @@ csc2C_followEntity:
 		move.b  (a0)+,d3
 		ext.w   d2
 		ext.w   d3
-		jsr     sub_44C2E
+		jsr     AddFollower
 		rts
 
 	; End of function csc2C_followEntity
@@ -1448,6 +1456,8 @@ csc2E_hideEntity:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; specific entity behaviour for skreech join cutscene
 
 csc2F_:
 		move.w  (a6)+,d0
@@ -1499,7 +1509,8 @@ csc50_setEntitySize:
 
 ; =============== S U B R O U T I N E =======================================
 
-csc51_:
+csc51_joinBattleParty:
+		
 		move.w  #$FFFF,((TEXT_NAME_INDEX_1-$1000000)).w
 		nop
 		move.w  (a6)+,d0
@@ -1529,14 +1540,13 @@ loc_46F40:
 return_46F56:
 		rts
 
-	; End of function csc51_
+	; End of function csc51_joinBattleParty
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to 2 entities
-
-csc52_:
+csc52_faceEntity:
+		
 		move.w  (a6)+,d7
 		move.w  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
@@ -1578,12 +1588,13 @@ loc_46FB4:
 		jsr     (WaitForVInt).w 
 		rts
 
-	; End of function csc52_
+	; End of function csc52_faceEntity
 
 
 ; =============== S U B R O U T I N E =======================================
 
-csc53_:
+csc53_setPriority:
+		
 		move.w  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
 		lea     ((byte_FFAFB0-$1000000)).w,a0
@@ -1597,12 +1608,13 @@ loc_46FD4:
 return_46FDA:
 		rts
 
-	; End of function csc53_
+	; End of function csc53_setPriority
 
 
 ; =============== S U B R O U T I N E =======================================
 
-csc54_:
+csc54_joinForceAI:
+		
 		move.w  (a6)+,d0
 		jsr     j_GetCharacterWord34
 		move.w  (a6)+,d2
@@ -1616,7 +1628,7 @@ loc_46FF8:
 		jsr     j_SetCharacterWord34
 		rts
 
-	; End of function csc54_
+	; End of function csc54_joinForceAI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1631,9 +1643,8 @@ csc55_resetCharacterBattleStats:
 
 ; =============== S U B R O U T I N E =======================================
 
-; xx character
-
-csc56_:
+csc56_addFollower:
+		
 		move.w  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
 		moveq   #0,d1
@@ -1646,10 +1657,10 @@ loc_47014:
 loc_47020:
 		move.w  #$FFE8,d2
 		move.w  #0,d3
-		jsr     sub_44C2E
+		jsr     AddFollower
 		rts
 
-	; End of function csc56_
+	; End of function csc56_addFollower
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1663,7 +1674,7 @@ csc31_moveEntityAboveEntity:
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
 		moveq   #$FFFFFFE8,d2
 		moveq   #0,d3
-		jsr     sub_44C2E
+		jsr     AddFollower
 		rts
 
 	; End of function csc31_moveEntityAboveEntity

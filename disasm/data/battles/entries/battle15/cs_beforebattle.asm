@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle15\cs_beforebattle.asm :
 ; 0x4ADA6..0x4AE72 : Cutscene before battle 15
-bbcs_15:        textCursor $9C7         ; Initial text line $9C7 : "This is the Ancient Hall{N}that leads to the Ancient{N}Tunnel...{W1}"
+bbcs_15:        textCursor $9C7
 		loadMapFadeIn $32,$9,$F
-		loadMapEntities ce_4AE42; Entity data to figure out and format
+		loadMapEntities ce_4AE42
 		setActscript $0,$FF,eas_Init
 		setActscript $1E,$FF,eas_Init
 		entityPosDir $1E,$E,$13,$1
@@ -12,7 +12,7 @@ bbcs_15:        textCursor $9C7         ; Initial text line $9C7 : "This is the 
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$D,$14,$1
 		fadeInB
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		nextSingleText $0,$1E   ; "This is the Ancient Hall{N}that leads to the Ancient{N}Tunnel...{W1}"
 		moveEntity $1E,$FF,$1,$1
 		endMove $8080
@@ -26,11 +26,10 @@ bbcs_15:        textCursor $9C7         ; Initial text line $9C7 : "This is the 
 		csWait $1E
 		setCamDest $9,$F
 		nextSingleText $0,$1E   ; "There are more monsters here!{W2}"
-		setEntityDir $1E,$3
+		setFacing $1E,$3
 		nextSingleText $0,$1E   ; "{LEADER}, take 'em out!{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4AE42:       dc.b   0
-		dc.b  $E
+		csc_end
+ce_4AE42:       dc.w $E
 		dc.w $14
 		dc.w 1
 		dc.b $E

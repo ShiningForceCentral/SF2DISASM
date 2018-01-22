@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle42\cs_beforebattle.asm :
 ; 0x4ED8E..0x4EF04 : Cutscene before battle 42
-bbcs_42:        textCursor $C10         ; Initial text line $C10 : "I can't see!  Is anybody{N}there?{W1}"
+bbcs_42:        textCursor $C10
 		loadMapFadeIn $3B,$8,$1D
-		loadMapEntities ce_4EEDC; Entity data to figure out and format
+		loadMapEntities ce_4EEDC
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$C,$24,$1
@@ -26,7 +26,7 @@ cs_4EDE8:       stopEntity $81
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		playSound MUSIC_WITCH
 		fadeInFromBlackHalf
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		csWait $3C
 		moveEntity $7,$FF,$1,$2
 		endMove $8080
@@ -52,7 +52,7 @@ cs_4EDE8:       stopEntity $81
 		endMove $8080
 		moveEntity $1C,$FF,$1,$1
 		endMove $8080
-		setEntityDir $0,$1
+		setFacing $0,$1
 		moveEntity $1C,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$1C   ; "Oh, Princess Elis is here!{W1}"
@@ -62,23 +62,22 @@ cs_4EDE8:       stopEntity $81
 		nextText $C0,$80        ; "He has not revived fully yet.{W2}"
 		nextSingleText $C0,$80  ; "So I came to welcome you for{N}him.{W1}"
 		nextSingleText $0,$7    ; "She isn't moving!{N}Is she dead?{W1}"
-		setEntityDir $80,$1
+		setFacing $80,$1
 		csWait $28
-		setEntityDir $80,$3
+		setFacing $80,$3
 		nextSingleText $C0,$80  ; "We haven't killed her yet.{N}She will be the first{N}sacrifice for King Zeon.{W1}"
 		nextText $0,$1F         ; "What?!{W2}"
 		nextSingleText $0,$1F   ; "Zeon said, you'd return her{N}in exchange for the jewel!{W1}"
 		nextText $C0,$80        ; "Ha, ha, ha!  He lied.{W2}"
 		nextText $C0,$80        ; "You killed our greater{N}devils.{N}I can't allow this to go on.{W2}"
 		nextSingleText $C0,$80  ; "You shall never see Zeon!{N}I'll kill you before that!{W1}"
-		setQuakeAmount $3
+		setQuake $3
 		playSound SFX_INTRO_LIGHTNING
 		flashScreenWhite $1E
 		csWait $14
-		setQuakeAmount $0
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4EEDC:       dc.b   0
-		dc.b  $D
+		setQuake $0
+		csc_end
+ce_4EEDC:       dc.w $D
 		dc.w $23
 		dc.w 1
 		dc.b $C

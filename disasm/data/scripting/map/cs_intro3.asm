@@ -1,13 +1,13 @@
 
 ; ASM FILE data\scripting\map\cs_intro3.asm :
 ; 0x48540..0x48A78 : Intro cutscene 3
-IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
+IntroCutscene3: textCursor $1077
 		mapLoad $2A,$15,$1
-		loadMapEntities ce_48A50; Entity data to figure out and format
+		loadMapEntities ce_48A50
 		setActscript $0,$FF,eas_Init
-		csc36                   ; 0036 UNKNOWN, RELATED TO LOADING A MAP
+		csc36
 		fadeInB
-		csc46 $15,$1            ; 0046 UNKNOWN
+		reloadMap $15,$1
 		nextSingleText $80,$5   ; "Well?{D2}"
 		loadMapFadeIn $2A,$15,$1
 		setActscript $82,$0,eas_Transparent
@@ -19,7 +19,7 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		moveEntity $81,$FF,$1,$1
 		moreMove $A,$1
 		endMove $8080
-		setEntityDir $80,$0
+		setFacing $80,$0
 		nextSingleText $0,$81   ; "You wimp!{N}Let me do it!{D2}"
 		entityShiver $80
 		csWait $14
@@ -31,17 +31,17 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		moreMove $9,$1
 		endMove $8080
 		csWait $1E
-		setEntityDir $81,$3
+		setFacing $81,$3
 		nextSingleText $0,$81   ; "Yeah, right.{D2}"
 		csWait $14
-		setEntityDir $81,$1
+		setFacing $81,$1
 		csWait $1E
 		entityShiver $81
 		entityShiver $81
 		csWait $1E
 		entityShiver $81
 		csWait $1E
-		setEntityDir $81,$3
+		setFacing $81,$3
 		entityShakeHead $81
 		nextSingleText $0,$81   ; "Blast!  It won't budge!{D2}"
 		moveEntity $5,$FF,$1,$1
@@ -49,7 +49,7 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		csWait $A
 		setActscript $5,$FF,eas_Jump
 		setActscript $5,$FF,eas_Jump
-		setEntityDir $81,$3
+		setFacing $81,$3
 		nextSingleText $80,$5   ; "You idiots!{N}Let me do it.{D2}"
 		entityShiver $81
 		moveEntity $81,$FF,$0,$1
@@ -74,7 +74,7 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		endMove $8080
 		csWait $6
 		setActscript $5,$FF,eas_461AA
-		setEntityDir $5,$3
+		setFacing $5,$3
 		entitySprite $5,$BB
 		csWait $14
 		entityShiver $5
@@ -108,18 +108,18 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		dc.b $80
 		setActscript $5,$FF,eas_46172
 		entitySprite $5,$5
-		setEntityDir $5,$1
+		setFacing $5,$1
 		moveEntity $5,$FF,$3,$1
 		endMove $8080
-		setEntityDir $80,$0
-		setEntityDir $81,$2
+		setFacing $80,$0
+		setFacing $81,$2
 		csWait $14
 		nextSingleText $80,$5   ; "Well, that didn't work.{D2}"
-		setEntityDir $5,$2
+		setFacing $5,$2
 		csWait $1E
-		setEntityDir $5,$0
+		setFacing $5,$0
 		csWait $1E
-		setEntityDir $5,$1
+		setFacing $5,$1
 		csWait $14
 		entityNod $5
 		csWait $14
@@ -127,13 +127,13 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		setActscript $5,$FF,eas_Init
 		moveEntity $5,$FF,$1,$1
 		endMove $8080
-		setEntityDir $80,$1
-		setEntityDir $81,$1
+		setFacing $80,$1
+		setFacing $81,$1
 		moveEntity $5,$0,$1,$1
 		endMove $8080
 		csWait $6
 		setActscript $5,$FF,eas_461AA
-		setEntityDir $5,$3
+		setFacing $5,$3
 		entitySprite $5,$BB
 		nextSingleText $FF,$FF  ; "{NAME;5} the thief{N}grabbed the two jewels.{D2}"
 		csWait $14
@@ -151,22 +151,22 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		dc.b $80
 		setActscript $5,$FF,eas_46172
 		hideEntity $82
-		setBlocks $1A12,$101,$1A04
+		setBlocks $1A,$12,$1,$1,$1A,$4
 		entitySprite $5,$5
-		setEntityDir $5,$1
+		setFacing $5,$1
 		moveEntity $5,$0,$3,$1
 		endMove $8080
 		csWait $3
 		setActscript $5,$FF,eas_461AA
 		moveEntity $5,$FF,$3,$5
 		endMove $8080
-		setQuakeAmount $3
+		setQuake $3
 		setActscript $5,$FF,eas_Init
-		setEntityDir $80,$3
-		setEntityDir $81,$3
+		setFacing $80,$3
+		setFacing $81,$3
 		moveEntity $5,$FF,$1,$2
 		endMove $8080
-		setEntityDir $5,$2
+		setFacing $5,$2
 		customActscript $5,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -177,7 +177,7 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		dc.l eas_Idle           
 		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
 		dc.b $80
-		setQuakeAmount $0
+		setQuake $0
 		setActscript $80,$0,eas_Jump
 		setActscript $81,$FF,eas_Jump
 		setActscript $80,$0,eas_Jump
@@ -199,10 +199,10 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		setActscript $80,$FF,eas_Jump
 		setActscript $80,$FF,eas_Jump
 		csWait $14
-		setEntityDir $80,$3
+		setFacing $80,$3
 		nextSingleText $0,$81   ; "You did it!{N}You have the legendary{N}jewels!{D2}"
 		csWait $14
-		setEntityDir $5,$1
+		setFacing $5,$1
 		entitySprite $5,$3B
 		setActscript $5,$FF,eas_Init
 		nextSingleText $80,$5   ; "I did?{D2}"
@@ -215,13 +215,13 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		csWait $28
 		setActscript $5,$FF,eas_Jump
 		setActscript $5,$0,eas_Jump
-		setQuakeAmount $1
+		setQuake $1
 		csWait $28
-		setQuakeAmount $0
+		setQuake $0
 		csWait $3C
-		setQuakeAmount $2
+		setQuake $2
 		csWait $28
-		setQuakeAmount $0
+		setQuake $0
 		csWait $5
 		setActscript $5,$0,eas_461B6
 		csWait $5
@@ -229,19 +229,19 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		csWait $5
 		setActscript $81,$0,eas_461E4
 		csWait $3C
-		setQuakeAmount $3
+		setQuake $3
 		csWait $28
-		setQuakeAmount $0
-		setEntityDir $5,$1
+		setQuake $0
+		setFacing $5,$1
 		nextSingleText $0,$80   ; "What's happening?!{D2}"
 		entityShakeHead $80
 		entityShakeHead $81
 		csWait $28
-		setQuakeAmount $4
+		setQuake $4
 		csWait $3C
-		setQuakeAmount $0
+		setQuake $0
 		nextSingleText $80,$5   ; "We must escape from the{N}shrine!  Follow me!{D2}"
-		setQuakeAmount $5
+		setQuake $5
 		customActscript $5,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -283,7 +283,7 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		entityPosDir $5,$2,$8,$3
 		entityPosDir $80,$2,$8,$3
 		entityPosDir $81,$2,$8,$3
-		csc46 $0,$3             ; 0046 UNKNOWN
+		reloadMap $0,$3
 		csWait $A
 		fadeInFromBlackHalf
 		setCameraEntity $5
@@ -317,8 +317,8 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		endMove $8080
 		moveEntity $80,$FF,$0,$2
 		endMove $8080
-		setEntityDir $5,$2
-		setEntityDir $80,$2
+		setFacing $5,$2
+		setFacing $80,$2
 		csWait $1E
 		moveEntity $5,$0,$2,$2
 		endMove $8080
@@ -326,7 +326,7 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		endMove $8080
 		csWait $1E
 		setActscript $81,$FF,eas_Init
-		setEntityDir $81,$3
+		setFacing $81,$3
 		entityShakeHead $81
 		customActscript $81,$FF
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
@@ -345,9 +345,9 @@ IntroCutscene3: textCursor $1077        ; Initial text line $1077 : "Well?{D2}"
 		moveEntity $81,$FF,$0,$4
 		moreMove $3,$8
 		endMove $8080
-		setQuakeAmount $0
+		setQuake $0
 		fadeOutToBlackHalf
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 ce_48A50:       dc.w $3F
 		dc.w $3F
 		dc.w 1

@@ -52,7 +52,7 @@ return_5C310:
 
 	; End of function sub_5C304
 
-cs_5C312:       textCursor $9FB         ; Initial text line $9FB : "Did you come to help me?{N}Oh, thank you!{W2}"
+cs_5C312:       textCursor $9FB         ; 0004 INIT TEXT CURSOR 9FB : "Did you come to help me?{N}Oh, thank you!{W2}"
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
 		setActscript $1F,$FF,eas_Init; 0015 SET ACTSCRIPT 1F FF 460CE
 		entityPosDir $80,$7,$10,$1; 0019 SET ENTITY POS AND FACING 80 7 10 1
@@ -63,9 +63,9 @@ cs_5C312:       textCursor $9FB         ; Initial text line $9FB : "Did you come
 		nextSingleText $C0,$80  ; "My dinner is escaping!{W1}"
 		setActscript $1F,$0,eas_Jump; 0015 SET ACTSCRIPT 1F 0 45E44
 		setActscript $7,$FF,eas_Jump; 0015 SET ACTSCRIPT 7 FF 45E44
-		csWait $5               ; WAIT 5
+		csWait $5
 		setActscript $7,$0,eas_461B6; 0015 SET ACTSCRIPT 7 0 461B6
-		csWait $78              ; WAIT 78
+		csWait $78
 		nextSingleText $0,$7    ; "Who said that?{W1}"
 		setCamDest $3,$C        ; 0032 SET CAMERA DEST 3 C
 		nextText $C0,$80        ; "That pond catches my food.{N}Hey elf boy, good trap, huh?{W2}"
@@ -75,16 +75,16 @@ cs_5C312:       textCursor $9FB         ; Initial text line $9FB : "Did you come
 		moveEntity $80,$FF,$1,$2; 002D MOVE ENTITY 80 FF 1 2
 		endMove $8080
 		nextSingleText $C0,$80  ; "And this elf is my dinner{N}for tonight.  Got it?{W1}"
-		setEntityDir $80,$3     ; 0023 SET ENTITY FACING 80 3
+		setFacing $80,$3        ; 0023 SET ENTITY FACING 80 3
 		nextSingleText $C0,$80  ; "Did you guys bring the{N}ketchup? No? Oh, well.{W1}"
 		setActscript $81,$0,eas_Jump; 0015 SET ACTSCRIPT 81 0 45E44
 		setActscript $82,$FF,eas_Jump; 0015 SET ACTSCRIPT 82 FF 45E44
 		setStoryFlag $14        ; Battle 20 unlocked
-		mapSysEvent $33000000   ; 0007 EXECUTE MAP SYSTEM EVENT 33000000
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_5C3AA:       textCursor $A05         ; Initial text line $A05 : "{LEADER}, we have to{N}save him!{W1}"
+		mapSysEvent $33,$0,$0,$0; 0007 EXECUTE MAP SYSTEM EVENT 33000000
+		csc_end
+cs_5C3AA:       textCursor $A05         ; 0004 INIT TEXT CURSOR A05 : "{LEADER}, we have to{N}save him!{W1}"
 		nextSingleText $0,$7    ; "{LEADER}, we have to{N}save him!{W1}"
 		entityNod $0            ; 0026 MAKE ENTITY NOD 0
 		moveEntity $0,$FF,$1,$1 ; 002D MOVE ENTITY 0 FF 1 1
 		endMove $8080
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

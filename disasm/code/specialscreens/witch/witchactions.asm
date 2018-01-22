@@ -29,7 +29,7 @@ loc_7428:
 		trap    #TEXTBOX
 		dc.w $FFFF
 		clr.w   d0
-		jsr     sub_1007C
+		jsr     j_NameCharacter
 		btst    #7,(SAVE_FLAGS).l
 		beq.w   loc_7476
 		btst    #7,((P1_INPUT-$1000000)).w
@@ -37,7 +37,7 @@ loc_7428:
 		moveq   #1,d0
 		moveq   #$1B,d7
 loc_7464:
-		jsr     sub_1007C
+		jsr     j_NameCharacter
 loc_746A:
 		addq.w  #1,d0
 		cmpi.w  #6,d0

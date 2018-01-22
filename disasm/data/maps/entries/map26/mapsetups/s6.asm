@@ -25,9 +25,9 @@ return_59E02:
 
 	; End of function ms_map26_InitFunction
 
-cs_59E04:       textCursor $6CB         ; Initial text line $6CB : "The Cotton Balloon popped.{W1}"
+cs_59E04:       textCursor $6CB         ; 0004 INIT TEXT CURSOR 6CB : "The Cotton Balloon popped.{W1}"
 		setCameraEntity $FFFF   ; 0024 SET ENTITY FOLLOWED BY CAMERA FFFF
-		csc46 $15,$8            ; 0046 UNKNOWN
+		reloadMap $15,$8        ; 0046  15 8
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		setActscript $7,$FF,eas_Init; 0015 SET ACTSCRIPT 7 FF 460CE
 		setActscript $1F,$FF,eas_Init; 0015 SET ACTSCRIPT 1F FF 460CE
@@ -95,25 +95,25 @@ cs_59E04:       textCursor $6CB         ; Initial text line $6CB : "The Cotton B
 		endMove $8080
 		moveEntity $84,$FF,$3,$7; 002D MOVE ENTITY 84 FF 3 7
 		endMove $8080
-		csWait $14              ; WAIT 14
+		csWait $14
 		startEntity $0          ; 001B START ENTITY ANIM 0
 		startEntity $7          ; 001B START ENTITY ANIM 7
 		startEntity $1F         ; 001B START ENTITY ANIM 1F
-		csWait $28              ; WAIT 28
+		csWait $28
 		hideEntity $82          ; 002E HIDE ENTITY 82
 		hideEntity $83          ; 002E HIDE ENTITY 83
 		hideEntity $84          ; 002E HIDE ENTITY 84
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		nextSingleText $FF,$FF  ; "The Cotton Balloon popped.{W1}"
 		followEntity $7,$0,$2   ; 002C FOLLOW ENTITY 7 0 2
 		followEntity $1F,$7,$2  ; 002C FOLLOW ENTITY 1F 7 2
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_59F20:       textCursor $6CC         ; Initial text line $6CC : "Ungh!{W2}"
+		csc_end
+cs_59F20:       textCursor $6CC         ; 0004 INIT TEXT CURSOR 6CC : "Ungh!{W2}"
 		setCamDest $0,$14       ; 0032 SET CAMERA DEST 0 14
 		nextSingleText $0,$81   ; "Ungh!{W2}"
-		csWait $32              ; WAIT 32
+		csWait $32
 		nextSingleText $0,$81   ; "It's too heavy. I can't{N}lift it.  I give up!{W1}"
 		moveEntity $81,$FF,$1,$8; 002D MOVE ENTITY 81 FF 1 8
 		endMove $8080
 		hideEntity $81          ; 002E HIDE ENTITY 81
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

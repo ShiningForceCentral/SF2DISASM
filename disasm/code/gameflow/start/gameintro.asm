@@ -29,7 +29,7 @@ GameIntro:
 		jsr     j_PlayIntroOrEndCutscene
 		clr.l   ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
 loc_71EC:
-		clr.w   ((word_FFA80C-$1000000)).w
+		clr.w   ((QUAKE_AMPLITUDE-$1000000)).w
 		move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
 		bsr.w   EnableInterrupts
 		lea     (PALETTE_1).l,a0
@@ -72,7 +72,7 @@ loc_724E:
 		bsr.w   DisableDisplayAndVInt
 		clr.b   ((byte_FFB198-$1000000)).w
 		move.w  #$48,((CURRENT_SPEAK_SOUND-$1000000)).w 
-		bsr.w   sub_7C5E
+		bsr.w   sub_7C5E        
 		move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 		move.w  #6,((word_FFB07C-$1000000)).w
 loc_729C:

@@ -20,7 +20,7 @@ return_540BE:
 
 	; End of function ms_map43_InitFunction
 
-cs_540C0:       textCursor $32B         ; Initial text line $32B : "This is Hawel's house.{W1}"
+cs_540C0:       textCursor $32B         ; 0004 INIT TEXT CURSOR 32B : "This is Hawel's house.{W1}"
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		setActscript $4,$FF,eas_Init; 0015 SET ACTSCRIPT 4 FF 460CE
 		entityPosDir $80,$7,$4,$3; 0019 SET ENTITY POS AND FACING 80 7 4 3
@@ -36,33 +36,33 @@ cs_540C0:       textCursor $32B         ; Initial text line $32B : "This is Hawe
 		dc.l eas_Idle           
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		stopEntity $80          ; 001C STOP ENTITY ANIM 80
-		csc46 $0,$4             ; 0046 UNKNOWN
+		reloadMap $0,$4         ; 0046  0 4
 		fadeInB                 ; 0039 FADE IN FROM BLACK
-		csWait $32              ; WAIT 32
-		setEntityDir $0,$2      ; 0023 SET ENTITY FACING 0 2
-		setEntityDir $4,$0      ; 0023 SET ENTITY FACING 4 0
-		csWait $1E              ; WAIT 1E
+		csWait $32
+		setFacing $0,$2         ; 0023 SET ENTITY FACING 0 2
+		setFacing $4,$0         ; 0023 SET ENTITY FACING 4 0
+		csWait $1E
 		nextSingleText $0,$4    ; "This is Hawel's house.{W1}"
 		moveEntity $4,$FF,$2,$1 ; 002D MOVE ENTITY 4 FF 2 1
 		moreMove $1,$1
 		moreMove $C,$14
 		endMove $8080
 		nextSingleText $0,$4    ; "Sir Hawel!{N}Granseal friends are here!{W1}"
-		csWait $46              ; WAIT 46
-		setEntityDir $4,$0      ; 0023 SET ENTITY FACING 4 0
-		csWait $28              ; WAIT 28
+		csWait $46
+		setFacing $4,$0         ; 0023 SET ENTITY FACING 4 0
+		csWait $28
 		nextSingleText $0,$4    ; "Strange...{N}There's no answer.{W2}{N}Has he gone somewhere?{N}Well, why don't you wait{N}for him inside?{W1}"
 		entityNod $0            ; 0026 MAKE ENTITY NOD 0
 		moveEntity $0,$FF,$2,$2 ; 002D MOVE ENTITY 0 FF 2 2
 		endMove $8080
-		csc43 $4,$9             ; 0043 UNKNOWN, RELATED TO BLOCK COPY
-		csc47 $4,$9             ; 0047 UNKNOWN
-		csc47 $B,$9             ; 0047 UNKNOWN
+		roofEvent $4,$9         ; 0043 RELATED TO BLOCK COPY 4 9
+		stepEvent $4,$9         ; 0047  4 9
+		stepEvent $B,$9         ; 0047  B 9
 		moveEntity $4,$0,$1,$3  ; 002D MOVE ENTITY 4 0 1 3
 		endMove $8080
 		moveEntity $0,$FF,$1,$3 ; 002D MOVE ENTITY 0 FF 1 3
 		endMove $8080
-		csWait $1E              ; WAIT 1E
+		csWait $1E
 		customActscript $4,$FF  ; 0014 SET MANUAL ACTSCRIPT 4
 		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
 		dc.b $30
@@ -72,24 +72,24 @@ cs_540C0:       textCursor $32B         ; Initial text line $32B : "This is Hawe
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		moveEntity $4,$FF,$0,$1 ; 002D MOVE ENTITY 4 FF 0 1
 		endMove $8080
-		setEntityDir $4,$1      ; 0023 SET ENTITY FACING 4 1
+		setFacing $4,$1         ; 0023 SET ENTITY FACING 4 1
 		playSound $FE           ; 0005 PLAY SOUND 
 		nextSingleText $0,$4    ; "Wh...who are you?{N}Oh, Sir Hawel!{W1}"
 		playSound MUSIC_ENEMY_ATTACK; 0005 PLAY SOUND MUSIC_ENEMY_ATTACK
 		setCamDest $2,$0        ; 0032 SET CAMERA DEST 2 0
-		setEntityDir $81,$3     ; 0023 SET ENTITY FACING 81 3
-		setEntityDir $82,$3     ; 0023 SET ENTITY FACING 82 3
+		setFacing $81,$3        ; 0023 SET ENTITY FACING 81 3
+		setFacing $82,$3        ; 0023 SET ENTITY FACING 82 3
 		nextSingleText $0,$81   ; "Oops!  You came back early!{W1}"
 		moveEntity $4,$FF,$1,$1 ; 002D MOVE ENTITY 4 FF 1 1
 		endMove $8080
 		nextSingleText $0,$4    ; "You!  What did you{N}do to Sir Hawel?!{W1}"
-		csWait $1E              ; WAIT 1E
-		setEntityDir $81,$0     ; 0023 SET ENTITY FACING 81 0
-		setEntityDir $82,$2     ; 0023 SET ENTITY FACING 82 2
-		csWait $1E              ; WAIT 1E
-		setEntityDir $81,$3     ; 0023 SET ENTITY FACING 81 3
-		setEntityDir $82,$3     ; 0023 SET ENTITY FACING 82 3
-		csWait $1E              ; WAIT 1E
+		csWait $1E
+		setFacing $81,$0        ; 0023 SET ENTITY FACING 81 0
+		setFacing $82,$2        ; 0023 SET ENTITY FACING 82 2
+		csWait $1E
+		setFacing $81,$3        ; 0023 SET ENTITY FACING 81 3
+		setFacing $82,$3        ; 0023 SET ENTITY FACING 82 3
+		csWait $1E
 		setActscript $81,$0,eas_Jump; 0015 SET ACTSCRIPT 81 0 45E44
 		setActscript $82,$FF,eas_Jump; 0015 SET ACTSCRIPT 82 FF 45E44
 		setActscript $81,$0,eas_Jump; 0015 SET ACTSCRIPT 81 0 45E44
@@ -136,7 +136,7 @@ cs_540C0:       textCursor $32B         ; Initial text line $32B : "This is Hawe
 		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
 		hideEntity $81          ; 002E HIDE ENTITY 81
 		hideEntity $82          ; 002E HIDE ENTITY 82
-		csWait $3C              ; WAIT 3C
+		csWait $3C
 		setActscript $4,$FF,eas_Init; 0015 SET ACTSCRIPT 4 FF 460CE
 		moveEntity $4,$FF,$0,$1 ; 002D MOVE ENTITY 4 FF 0 1
 		endMove $8080
@@ -144,7 +144,7 @@ cs_540C0:       textCursor $32B         ; Initial text line $32B : "This is Hawe
 		nextSingleText $0,$80   ; "Ohhh...{NAME;4}....{W1}"
 		moveEntity $4,$FF,$2,$1 ; 002D MOVE ENTITY 4 FF 2 1
 		endMove $8080
-		setEntityDir $4,$1      ; 0023 SET ENTITY FACING 4 1
+		setFacing $4,$1         ; 0023 SET ENTITY FACING 4 1
 		nextSingleText $0,$4    ; "Sir...you're alive!{W1}"
 		playSound MUSIC_SAD_THEME_1; 0005 PLAY SOUND MUSIC_SAD_THEME_1
 		nextSingleText $0,$80   ; "...It's no use running after{N}them....{W1}"
@@ -158,11 +158,11 @@ cs_540C0:       textCursor $32B         ; Initial text line $32B : "This is Hawe
 		moveEntity $0,$FF,$0,$2 ; 002D MOVE ENTITY 0 FF 0 2
 		moreMove $1,$3
 		endMove $8080
-		setEntityDir $0,$0      ; 0023 SET ENTITY FACING 0 0
-		setEntityDir $4,$2      ; 0023 SET ENTITY FACING 4 2
+		setFacing $0,$0         ; 0023 SET ENTITY FACING 0 0
+		setFacing $4,$2         ; 0023 SET ENTITY FACING 4 2
 		nextSingleText $0,$0    ; "(Whisper)....{W1}"
 		nextSingleText $0,$80   ; "Who...is...it?{N}What...did he...say?{W1}"
-		setEntityDir $4,$1      ; 0023 SET ENTITY FACING 4 1
+		setFacing $4,$1         ; 0023 SET ENTITY FACING 4 1
 		nextSingleText $0,$4    ; "He's {LEADER} from{N}Granseal.  He said that{N}Ground Seal has opened.{W1}{N}And a serious disaster{N}took place!{W1}{N}He came to see you for{N}more information.{W1}"
 		entityShiver $80        ; 002A MAKE ENTITY SHIVER 80
 		stopEntity $80          ; 001C STOP ENTITY ANIM 80
@@ -182,13 +182,13 @@ cs_540C0:       textCursor $32B         ; Initial text line $32B : "This is Hawe
 		endMove $8080
 		nextSingleText $0,$4    ; "Sir!  Sir Hawel!{N}Don't leave me alone!{N}Oh, no...!{W1}"
 		stopEntity $4           ; 001C STOP ENTITY ANIM 4
-		csWait $3C              ; WAIT 3C
+		csWait $3C
 		moveEntity $0,$FF,$0,$1 ; 002D MOVE ENTITY 0 FF 0 1
 		endMove $8080
-		setEntityDir $0,$1      ; 0023 SET ENTITY FACING 0 1
-		csWait $1E              ; WAIT 1E
+		setFacing $0,$1         ; 0023 SET ENTITY FACING 0 1
+		csWait $1E
 		startEntity $4          ; 001B START ENTITY ANIM 4
-		setEntityDir $4,$3      ; 0023 SET ENTITY FACING 4 3
+		setFacing $4,$3         ; 0023 SET ENTITY FACING 4 3
 		nextText $0,$4          ; "Sir Hawel passed away.{W2}{N}I'm going to seal the tower.{N}It's Sir Hawel's last wish.{W2}"
 		nextSingleText $0,$4    ; "{LEADER}, please!{N}His wish is related to{N}your mission, right?{W2}{N}Can you go with me and{N}seal the tower?{W1}"
 		join $8004              ; 0008 JOIN FORCE 8004
@@ -196,4 +196,4 @@ cs_540C0:       textCursor $32B         ; Initial text line $32B : "This is Hawe
 		followEntity $4,$0,$2   ; 002C FOLLOW ENTITY 4 0 2
 		clearF $48              ; Kazin is a follower
 		setStoryFlag $4         ; Battle 4 unlocked
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

@@ -18,4 +18,4 @@ return_5FA9A:
 	; End of function ms_map37_InitFunction
 
 cs_5FA9C:       entityPosDir $1A,$8,$A,$0; 0019 SET ENTITY POS AND FACING 1A 8 A 0
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end

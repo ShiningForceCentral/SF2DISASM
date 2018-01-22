@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle01\cs_beforebattle.asm :
 ; 0x494BC..0x496DC : Cutscene before battle 1
-bbcs_01:        textCursor $8F4         ; Initial text line $8F4 : "There you are, {LEADER}.{N}Stay here.{W2}"
+bbcs_01:        textCursor $8F4
 		loadMapFadeIn $39,$2,$A
-		loadMapEntities ce_49694; Entity data to figure out and format
+		loadMapEntities ce_49694
 		setActscript $0,$FF,eas_Init
 		entityPosDir $1,$8,$11,$1
 		entityPosDir $2,$7,$11,$1
@@ -11,7 +11,7 @@ bbcs_01:        textCursor $8F4         ; Initial text line $8F4 : "There you ar
 		fadeInB
 		setCamDest $2,$8
 		csWait $3C
-		setEntityDir $87,$3
+		setFacing $87,$3
 		nextText $0,$87         ; "There you are, {LEADER}.{N}Stay here.{W2}"
 		nextSingleText $0,$87   ; "I'll take a look inside the{N}tower.{W1}"
 		setCameraEntity $87
@@ -53,7 +53,7 @@ bbcs_01:        textCursor $8F4         ; Initial text line $8F4 : "There you ar
 		moveEntity $1,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$1    ; "Look!  Something is{N}appearing.  What's that?{W1}"
-		setEntityDir $87,$1
+		setFacing $87,$1
 		setCamDest $2,$1
 		entityPosDir $80,$7,$4,$3
 		animEntityFadeInOut $80,$7
@@ -111,11 +111,10 @@ bbcs_01:        textCursor $8F4         ; Initial text line $8F4 : "There you ar
 		entityShiver $80
 		csWait $3C
 		nextText $0,$87         ; "This doesn't look good.{W2}"
-		setEntityDir $87,$3
+		setFacing $87,$3
 		nextSingleText $0,$87   ; "We'll stop the evil Gizmo{N}here.  {LEADER}, defeat{N}these fiends!{W1}"
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_49694:       dc.b   0
-		dc.b   7
+		csc_end
+ce_49694:       dc.w 7
 		dc.w $10
 		dc.w 1
 		dc.b $3F

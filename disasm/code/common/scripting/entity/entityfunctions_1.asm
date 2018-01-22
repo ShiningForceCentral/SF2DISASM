@@ -88,7 +88,8 @@ loc_4455C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_44570:
+InitializeNewEntity:
+		
 		movem.l d0-a0,-(sp)
 		move.w  d0,-(sp)
 		tst.b   d0
@@ -128,7 +129,7 @@ loc_445A0:
 		movem.l (sp)+,d0-a0
 		rts
 
-	; End of function sub_44570
+	; End of function InitializeNewEntity
 
 
 ; =============== S U B R O U T I N E =======================================

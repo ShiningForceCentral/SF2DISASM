@@ -2,7 +2,7 @@
 ; ASM FILE data\scripting\map\cs_end.asm :
 ; 0x49058..0x494BC : End cutscene
 EndCutscene:    mapLoad $14,$13,$21
-		loadMapEntities ce_492CC; Entity data to figure out and format
+		loadMapEntities ce_492CC
 		setActscript $0,$FF,eas_Init
 		customActscript $0,$FF
 		dc.w $10                ;   0010 SET SPEED X=$14 Y=$14
@@ -54,7 +54,7 @@ EndCutscene:    mapLoad $14,$13,$21
 		csWait $1E
 		moveEntity $0,$FF,$3,$4
 		endMove $8080
-		setEntityDir $0,$2
+		setFacing $0,$2
 		moveEntity $80,$FF,$0,$1
 		endMove $8080
 		moveEntity $81,$FF,$0,$1
@@ -66,7 +66,7 @@ EndCutscene:    mapLoad $14,$13,$21
 		csWait $28
 		moveEntity $0,$FF,$1,$4
 		endMove $8080
-		setEntityDir $0,$2
+		setFacing $0,$2
 		csWait $50
 		entityPosDir $83,$19,$23,$0
 		moveEntity $83,$FF,$7,$1
@@ -79,33 +79,33 @@ EndCutscene:    mapLoad $14,$13,$21
 		moveEntity $83,$FF,$0,$1
 		moreMove $3,$3
 		endMove $8080
-		setEntityDir $0,$2
-		setEntityDir $83,$2
+		setFacing $0,$2
+		setFacing $83,$2
 		setActscript $80,$0,eas_Jump
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$FF,eas_Jump
 		csWait $28
-		setEntityDir $82,$3
+		setFacing $82,$3
 		csWait $1E
-		setEntityDir $81,$1
+		setFacing $81,$1
 		entityNod $82
 		csWait $3C
-		setEntityDir $80,$1
+		setFacing $80,$1
 		csWait $1E
-		setEntityDir $81,$3
+		setFacing $81,$3
 		entityNod $80
 		csWait $28
-		setEntityDir $81,$0
+		setFacing $81,$0
 		csWait $14
-		setEntityDir $80,$0
+		setFacing $80,$0
 		csWait $28
-		setEntityDir $0,$1
+		setFacing $0,$1
 		csWait $14
-		setEntityDir $83,$3
+		setFacing $83,$3
 		csWait $3C
-		setEntityDir $0,$2
+		setFacing $0,$2
 		csWait $A
-		setEntityDir $83,$2
+		setFacing $83,$2
 		csWait $1E
 		moveEntity $0,$0,$2,$4
 		endMove $8080
@@ -114,13 +114,13 @@ EndCutscene:    mapLoad $14,$13,$21
 		entityNod $81
 		entityNod $83
 		csWait $3C
-		setEntityDir $82,$1
+		setFacing $82,$1
 		csWait $1E
 		setActscript $82,$FF,eas_Jump
 		csWait $1E
 		moveEntity $82,$FF,$1,$1
 		endMove $8080
-		setEntityDir $82,$3
+		setFacing $82,$3
 		entityPosDir $B,$17,$25,$3
 		moveEntity $B,$0,$3,$1
 		moreMove $2,$2
@@ -146,30 +146,30 @@ EndCutscene:    mapLoad $14,$13,$21
 		entityPosDir $7,$17,$25,$3
 		moveEntity $7,$0,$3,$1
 		endMove $8080
-		setEntityDir $B,$0
+		setFacing $B,$0
 		csWait $A
-		setEntityDir $2,$0
+		setFacing $2,$0
 		csWait $A
-		setEntityDir $A,$3
+		setFacing $A,$3
 		csWait $A
-		setEntityDir $3,$3
-		setEntityDir $0,$1
-		setEntityDir $83,$1
+		setFacing $3,$3
+		setFacing $0,$1
+		setFacing $83,$1
 		csWait $1E
-		setEntityDir $0,$2
-		setEntityDir $83,$2
+		setFacing $0,$2
+		setFacing $83,$2
 		csWait $1E
-		setEntityDir $0,$1
-		setEntityDir $83,$1
+		setFacing $0,$1
+		setFacing $83,$1
 		csWait $28
 		setActscript $B,$0,eas_Jump
 		setActscript $2,$0,eas_Jump
 		setActscript $A,$0,eas_Jump
 		setActscript $3,$0,eas_Jump
 		setActscript $7,$0,eas_Jump
-		setEntityDir $83,$2
+		setFacing $83,$2
 		entityNod $80
-		setEntityDir $0,$2
+		setFacing $0,$2
 		csWait $32
 		entityNod $0
 		setActscript $B,$0,eas_Jump
@@ -178,7 +178,7 @@ EndCutscene:    mapLoad $14,$13,$21
 		setActscript $3,$0,eas_Jump
 		setActscript $7,$0,eas_Jump
 		fadeOutB
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 ce_492CC:       dc.w $3F
 		dc.w $3F
 		dc.w 3
@@ -228,26 +228,26 @@ ce_492CC:       dc.w $3F
 		dc.b $CC
 		dc.l eas_Init           
 		dc.w $FFFF
-dms_01:         csc52 $86,$0            ; 0052 UNKNOWN, RELATED TO TWO ENTITIES
-		csc56 $5                ; 0056 UNKNOWN, SOMETHING WITH AN ENTITY
-		csc56 $3                ; 0056 UNKNOWN, SOMETHING WITH AN ENTITY
-		csc56 $1A               ; 0056 UNKNOWN, SOMETHING WITH AN ENTITY
+dms_01:         faceEntity $86,$0
+		addNewFollower $5
+		addNewFollower $3
+		addNewFollower $1A
 		followEntity $7,$0,$2
 		moveEntityAboveAnother $0,$0
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 		setCameraEntity $0
 		setActscript $0,$0,eas_ControlledCharacter
 cs_4934A:       entityFlashWhite $0,$B4
 		jump cs_4934A
-		csc_end                 ; END OF CUTSCENE SCRIPT
-		textCursor $142         ; Initial text line $142 : "{NAME} did nothing."
+		csc_end
+		textCursor $142
 		setActscript $1,$1,eas_ControlledCharacter
 		showPortrait $0
-		setQuakeAmount $8002
-		setQuakeAmount $4002
+		setQuake $8002
+		setQuake $4002
 		loadMapFadeIn $0,$D,$D
 		flashScreenWhite $3C
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 		dc.b   0
 		dc.b $41 
 		dc.w $3C
@@ -259,7 +259,7 @@ cs_4934A:       entityFlashWhite $0,$B4
 		csWait $3C
 		startEntity $4
 		hidePortrait
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 eas_493A2:      dc.w $18                ; 0018 SET 1C BIT 7 $FFFF
 		dc.w $FFFF
 		dc.w $19                ; 0019 SET 1C BIT 6 $FFFF

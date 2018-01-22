@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle40\cs_afterbattle.asm :
 ; 0x4EA94..0x4ED0E : Cutscene after battle 40
-abcs_battle40:  textCursor $BF9         ; Initial text line $BF9 : "{LEADER}, you won?{N}You've become so strong.{W2}"
+abcs_battle40:  textCursor $BF9
 		loadMapFadeIn $36,$A,$4
-		loadMapEntities ce_4ECD6; Entity data to figure out and format
+		loadMapEntities ce_4ECD6
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$D,$8,$0
@@ -14,8 +14,8 @@ abcs_battle40:  textCursor $BF9         ; Initial text line $BF9 : "{LEADER}, yo
 		jumpIfFlagClear $4C,cs_4EAEE; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
 		entityPosDir $1A,$3F,$3E,$3
-cs_4EAEE:       setBlocks $B06,$B1D,$2C00
-		setBlocks $34,$A07,$D0A
+cs_4EAEE:       setBlocks $B,$6,$B,$1D,$2C,$0
+		setBlocks $0,$34,$A,$7,$D,$A
 		customActscript $83,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
 		dc.w 0
@@ -103,41 +103,38 @@ cs_4EAEE:       setBlocks $B06,$B1D,$2C00
 		csWait $78
 		playSound MUSIC_SAD_THEME_3
 		entityShiver $7
-		setEntityDir $7,$1
+		setFacing $7,$1
 		nextSingleText $0,$7    ; "(Sob, sob)...how sad.{N}{LEADER}, Sir Astral...{W1}"
-		setEntityDir $1C,$3
+		setFacing $1C,$3
 		nextSingleText $0,$1C   ; "Oddler had a pure spirit...{N}I'll miss him.{W1}"
-		setEntityDir $1F,$1
+		setFacing $1F,$1
 		nextSingleText $0,$1F   ; "Don't cry for him now.{N}This is Zeon's doing.{W1}"
-		setEntityDir $1F,$3
+		setFacing $1F,$3
 		nextSingleText $0,$1F   ; "We shall go onward and{N}remember Oddler in our{N}hearts.{W1}"
 		moveEntity $1C,$FF,$2,$1
 		moreMove $3,$1
 		endMove $8080
-		setEntityDir $1C,$2
+		setFacing $1C,$2
 		moveEntity $1F,$FF,$3,$2
 		endMove $8080
 		moveEntity $7,$FF,$3,$1
 		endMove $8080
-		setEntityDir $7,$0
+		setFacing $7,$0
 		csWait $28
-		setEntityDir $0,$0
+		setFacing $0,$0
 		csWait $28
-		setEntityDir $0,$2
+		setFacing $0,$2
 		csWait $28
-		setEntityDir $0,$1
+		setFacing $0,$1
 		csWait $1E
 		entityNod $0
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
 		followEntity $1C,$1F,$2
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4ECD6:       dc.b   0
-		dc.b  $F
-		dc.b   0
-		dc.b  $A
-		dc.b   0
-		dc.b   1
+		csc_end
+ce_4ECD6:       dc.w $F
+		dc.w $A
+		dc.w 1
 		dc.b $D
 		dc.b 8
 		dc.b 0

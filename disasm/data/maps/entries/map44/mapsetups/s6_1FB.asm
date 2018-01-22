@@ -15,11 +15,11 @@ return_5456E:
 
 cs_54570:       playSound MUSIC_BOSS_ATTACK; 0005 PLAY SOUND MUSIC_BOSS_ATTACK
 		fadeInB                 ; 0039 FADE IN FROM BLACK
-		csc_end                 ; END OF CUTSCENE SCRIPT
-cs_54578:       textCursor $3F5         ; Initial text line $3F5 : "OK.  Let's go!{W1}"
+		csc_end
+cs_54578:       textCursor $3F5         ; 0004 INIT TEXT CURSOR 3F5 : "OK.  Let's go!{W1}"
 		nextSingleText $0,$1F   ; "OK.  Let's go!{W1}"
 		entityNod $8A           ; 0026 MAKE ENTITY NOD 8A
-		setEntityDir $8A,$3     ; 0023 SET ENTITY FACING 8A 3
+		setFacing $8A,$3        ; 0023 SET ENTITY FACING 8A 3
 		nextSingleText $0,$8A   ; "Weigh anchor!{W1}"
 		setEntityDest $0,$B,$D  ; 0029 SET ENTITY DEST 0 B D
 		moveEntity $8B,$0,$0,$4 ; 002D MOVE ENTITY 8B 0 0 4
@@ -38,41 +38,41 @@ byte_545B6:     moreMove $3,$1
 		moreMove $0,$1
 		moreMove $0,$2
 		endMove $8080
-		csWait $1E              ; WAIT 1E
-		setEntityDir $0,$3      ; 0023 SET ENTITY FACING 0 3
-		setEntityDir $1F,$3     ; 0023 SET ENTITY FACING 1F 3
-		setEntityDir $1E,$3     ; 0023 SET ENTITY FACING 1E 3
-		setEntityDir $9F,$3     ; 0023 SET ENTITY FACING 9F 3
+		csWait $1E
+		setFacing $0,$3         ; 0023 SET ENTITY FACING 0 3
+		setFacing $1F,$3        ; 0023 SET ENTITY FACING 1F 3
+		setFacing $1E,$3        ; 0023 SET ENTITY FACING 1E 3
+		setFacing $9F,$3        ; 0023 SET ENTITY FACING 9F 3
 		setCamDest $A,$B        ; 0032 SET CAMERA DEST A B
-		setBlocks $F16,$301,$C16; 0034 SET BLOCKS F16 301 C16
-		csWait $4               ; WAIT 4
-		setBlocks $F15,$301,$C15; 0034 SET BLOCKS F15 301 C15
-		csWait $4               ; WAIT 4
-		setBlocks $F14,$301,$C14; 0034 SET BLOCKS F14 301 C14
-		csWait $4               ; WAIT 4
-		setBlocks $F13,$301,$C13; 0034 SET BLOCKS F13 301 C13
-		csWait $4               ; WAIT 4
-		setBlocks $F12,$301,$C12; 0034 SET BLOCKS F12 301 C12
-		csWait $4               ; WAIT 4
-		setBlocks $F11,$301,$C11; 0034 SET BLOCKS F11 301 C11
-		csWait $4               ; WAIT 4
-		setBlocks $F10,$301,$C10; 0034 SET BLOCKS F10 301 C10
-		csWait $4               ; WAIT 4
-		setBlocks $F0F,$301,$C0F; 0034 SET BLOCKS F0F 301 C0F
-		csWait $F               ; WAIT F
+		setBlocks $F,$16,$3,$1,$C,$16; 0034 SET BLOCKS F16 301 C16
+		csWait $4
+		setBlocks $F,$15,$3,$1,$C,$15; 0034 SET BLOCKS F15 301 C15
+		csWait $4
+		setBlocks $F,$14,$3,$1,$C,$14; 0034 SET BLOCKS F14 301 C14
+		csWait $4
+		setBlocks $F,$13,$3,$1,$C,$13; 0034 SET BLOCKS F13 301 C13
+		csWait $4
+		setBlocks $F,$12,$3,$1,$C,$12; 0034 SET BLOCKS F12 301 C12
+		csWait $4
+		setBlocks $F,$11,$3,$1,$C,$11; 0034 SET BLOCKS F11 301 C11
+		csWait $4
+		setBlocks $F,$10,$3,$1,$C,$10; 0034 SET BLOCKS F10 301 C10
+		csWait $4
+		setBlocks $F,$F,$3,$1,$C,$F; 0034 SET BLOCKS F0F 301 C0F
+		csWait $F
 		setCamDest $D,$C        ; 0032 SET CAMERA DEST D C
-		setEntityDir $9F,$0     ; 0023 SET ENTITY FACING 9F 0
+		setFacing $9F,$0        ; 0023 SET ENTITY FACING 9F 0
 		nextSingleText $0,$9F   ; "Sir Astral, where are we{N}headed?{W1}"
-		setEntityDir $1F,$2     ; 0023 SET ENTITY FACING 1F 2
+		setFacing $1F,$2        ; 0023 SET ENTITY FACING 1F 2
 		nextSingleText $C0,$1F  ; "This earthquake must{N}have caused damage all{N}over the island.{W1}"
-		setEntityDir $1F,$3     ; 0023 SET ENTITY FACING 1F 3
+		setFacing $1F,$3        ; 0023 SET ENTITY FACING 1F 3
 		nextSingleText $C0,$1F  ; "Maybe...to the east...to...{N}Oh, yes!  To the mainland!{W1}"
 		setActscript $9F,$FF,eas_Jump; 0015 SET ACTSCRIPT 9F FF 45E44
 		setActscript $9F,$FF,eas_Jump; 0015 SET ACTSCRIPT 9F FF 45E44
 		nextSingleText $0,$9F   ; "To Parmecia?!{N}Hmmmm....{W1}"
-		setEntityDir $1E,$0     ; 0023 SET ENTITY FACING 1E 0
+		setFacing $1E,$0        ; 0023 SET ENTITY FACING 1E 0
 		nextSingleText $0,$1E   ; "What?  To the mainland?{N}No!{W2}{N}What about Elis?!  No,{N}we'll stay here on Grans!{W1}"
-		setEntityDir $1E,$3     ; 0023 SET ENTITY FACING 1E 3
+		setFacing $1E,$3        ; 0023 SET ENTITY FACING 1E 3
 		moveEntity $1F,$0,$1,$1 ; 002D MOVE ENTITY 1F 0 1 1
 		moreMove $2,$2
 		endMove $8080
@@ -81,9 +81,9 @@ byte_545B6:     moreMove $3,$1
 		clearF $4A              ; Astral + King are followers
 		setCamDest $B,$D        ; 0032 SET CAMERA DEST B D
 		executeSubroutine csub_54714; 000A EXECUTE SUBROUTINE 54714
-		csWait $78              ; WAIT 78
+		csWait $78
 		loadMapFadeIn $42,$1C,$1A; 0037 LOAD MAP AND FADE IN 42 1C 1A
-		loadMapEntities ce_54736; Entity data to figure out and format
+		loadMapEntities ce_54736; 0042 RELATED TO LOADING MAP ENTITIES 54736
 		setActscript $0,$FF,eas_Init; 0015 SET ACTSCRIPT 0 FF 460CE
 		entitySprite $0,$D3     ; 001A SET ENTITY SPRITE 0 D3
 		fadeInB                 ; 0039 FADE IN FROM BLACK
@@ -102,25 +102,25 @@ byte_545B6:     moreMove $3,$1
 		moreMove $1,$2
 		moreMove $0,$3
 		endMove $8080
-		csWait $3C              ; WAIT 3C
-		setQuakeAmount $3       ; 0033 SET QUAKE AMOUNT 3
-		csWait $3C              ; WAIT 3C
-		setQuakeAmount $5       ; 0033 SET QUAKE AMOUNT 5
-		csWait $1E              ; WAIT 1E
+		csWait $3C
+		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
+		csWait $3C
+		setQuake $5             ; 0033 SET QUAKE AMOUNT 5
+		csWait $1E
 		playSound SFX_INTRO_LIGHTNING; 0005 PLAY SOUND SFX_INTRO_LIGHTNING
 		flashScreenWhite $1E    ; 0041 FLASH SCREEN WHITE 1E
-		setBlocks $31,$A0F,$1C17; 0034 SET BLOCKS 31 A0F 1C17
+		setBlocks $0,$31,$A,$F,$1C,$17; 0034 SET BLOCKS 31 A0F 1C17
 		flashScreenWhite $1E    ; 0041 FLASH SCREEN WHITE 1E
-		csWait $3C              ; WAIT 3C
-		setQuakeAmount $3       ; 0033 SET QUAKE AMOUNT 3
-		csWait $3C              ; WAIT 3C
-		setQuakeAmount $1       ; 0033 SET QUAKE AMOUNT 1
-		csWait $5A              ; WAIT 5A
-		setQuakeAmount $0       ; 0033 SET QUAKE AMOUNT 0
-		csWait $78              ; WAIT 78
-		mapSysEvent $491A0D00   ; 0007 EXECUTE MAP SYSTEM EVENT 491A0D00
+		csWait $3C
+		setQuake $3             ; 0033 SET QUAKE AMOUNT 3
+		csWait $3C
+		setQuake $1             ; 0033 SET QUAKE AMOUNT 1
+		csWait $5A
+		setQuake $0             ; 0033 SET QUAKE AMOUNT 0
+		csWait $78
+		mapSysEvent $49,$1A,$D,$0; 0007 EXECUTE MAP SYSTEM EVENT 491A0D00
 		clearF $280             ; set after the end of battle 7's long sequence, cleared at docks?
-		csc_end                 ; END OF CUTSCENE SCRIPT
+		csc_end
 
 ; =============== S U B R O U T I N E =======================================
 

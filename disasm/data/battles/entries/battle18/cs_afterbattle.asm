@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle18\cs_afterbattle.asm :
 ; 0x4B2F2..0x4B6CE : Cutscene after battle 18
-abcs_battle18:  textCursor $9E0         ; Initial text line $9E0 : "{LEADER}, you're much{N}stronger than I thought.{W1}"
+abcs_battle18:  textCursor $9E0
 		loadMapFadeIn $C,$7,$5
-		loadMapEntities ce_4B6BE; Entity data to figure out and format
+		loadMapEntities ce_4B6BE
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		setActscript $1F,$FF,eas_Init
@@ -15,20 +15,20 @@ abcs_battle18:  textCursor $9E0         ; Initial text line $9E0 : "{LEADER}, yo
 		fadeInB
 		csWait $3C
 		nextSingleText $0,$B    ; "{LEADER}, you're much{N}stronger than I thought.{W1}"
-		setEntityDir $0,$2
-		setEntityDir $7,$2
-		setEntityDir $1F,$2
+		setFacing $0,$2
+		setFacing $7,$2
+		setFacing $1F,$2
 		csWait $1E
 		setCameraEntity $B
 		csWait $78
 		moveEntity $B,$FF,$0,$6
 		endMove $8080
-		setEntityDir $0,$1
-		setEntityDir $7,$1
-		setEntityDir $1F,$1
+		setFacing $0,$1
+		setFacing $7,$1
+		setFacing $1F,$1
 		moveEntity $B,$FF,$1,$4
 		endMove $8080
-		setEntityDir $B,$0
+		setFacing $B,$0
 		setCameraEntity $FFFF
 		setCamDest $7,$1
 		csWait $1E
@@ -57,21 +57,21 @@ abcs_battle18:  textCursor $9E0         ; Initial text line $9E0 : "{LEADER}, yo
 		csWait $3C
 		startEntity $80
 		csWait $78
-		setEntityDir $80,$2
+		setFacing $80,$2
 		csWait $A
-		setEntityDir $80,$1
+		setFacing $80,$1
 		csWait $A
-		setEntityDir $80,$0
+		setFacing $80,$0
 		csWait $A
-		setEntityDir $80,$3
+		setFacing $80,$3
 		csWait $A
-		setEntityDir $80,$2
+		setFacing $80,$2
 		csWait $A
-		setEntityDir $80,$1
+		setFacing $80,$1
 		csWait $A
-		setEntityDir $80,$0
+		setFacing $80,$0
 		csWait $A
-		setEntityDir $80,$3
+		setFacing $80,$3
 		setActscript $80,$0,eas_Jump
 		csWait $A
 		entityPosDir $B,$3F,$3F,$3
@@ -96,57 +96,57 @@ abcs_battle18:  textCursor $9E0         ; Initial text line $9E0 : "{LEADER}, yo
 		setActscript $0,$FF,eas_46172
 		moveEntity $0,$0,$2,$1
 		endMove $8080
-		setEntityDir $0,$0
-		setEntityDir $7,$2
-		setEntityDir $1F,$2
+		setFacing $0,$0
+		setFacing $7,$2
+		setFacing $1F,$2
 		csWait $3C
 		setCamDest $7,$4
 		setActscript $0,$FF,eas_Init
-		setEntityDir $0,$3
-		setEntityDir $7,$3
-		setEntityDir $1F,$3
+		setFacing $0,$3
+		setFacing $7,$3
+		setFacing $1F,$3
 		nextSingleText $0,$7    ; "Oh, he's gone!{W1}"
 		csWait $3C
-		setEntityDir $0,$0
-		setEntityDir $7,$2
-		setEntityDir $1F,$2
+		setFacing $0,$0
+		setFacing $7,$2
+		setFacing $1F,$2
 		nextSingleText $0,$7    ; "I hope he comes back.{N}Did {NAME;11} lie to us?{W1}"
 		csWait $1E
-		setEntityDir $0,$3
-		setEntityDir $7,$3
-		setEntityDir $1F,$3
+		setFacing $0,$3
+		setFacing $7,$3
+		setFacing $1F,$3
 		csWait $96
 		setActscript $80,$FF,eas_46172
 		moveEntity $80,$0,$1,$9
 		endMove $8080
 		playSound SFX_FALLING
 		csWait $14
-		setEntityDir $80,$2
-		setEntityDir $1F,$2
+		setFacing $80,$2
+		setFacing $1F,$2
 		csWait $14
-		setEntityDir $0,$1
-		setEntityDir $7,$1
+		setFacing $0,$1
+		setFacing $7,$1
 		csWait $A
-		setEntityDir $0,$2
-		setEntityDir $7,$0
+		setFacing $0,$2
+		setFacing $7,$0
 		csWait $A
-		setEntityDir $0,$3
-		setEntityDir $7,$3
+		setFacing $0,$3
+		setFacing $7,$3
 		csWait $A
-		setEntityDir $0,$0
-		setEntityDir $7,$2
+		setFacing $0,$0
+		setFacing $7,$2
 		csWait $A
-		setEntityDir $0,$1
-		setEntityDir $7,$1
+		setFacing $0,$1
+		setFacing $7,$1
 		csWait $A
-		setEntityDir $0,$2
-		setEntityDir $7,$0
+		setFacing $0,$2
+		setFacing $7,$0
 		csWait $A
-		setEntityDir $0,$3
-		setEntityDir $7,$3
+		setFacing $0,$3
+		setFacing $7,$3
 		csWait $A
-		setEntityDir $0,$0
-		setEntityDir $7,$2
+		setFacing $0,$0
+		setFacing $7,$2
 		csWait $A
 		customActscript $0,$FF
 		dc.w $14                ;   0014 SET ANIM COUNTER $0
@@ -169,7 +169,7 @@ abcs_battle18:  textCursor $9E0         ; Initial text line $9E0 : "{LEADER}, yo
 		stopEntity $0
 		stopEntity $7
 		csWait $1E
-		setEntityDir $80,$3
+		setFacing $80,$3
 		csWait $3C
 		stopEntity $80
 		setActscript $1F,$FF,eas_BumpLeft
@@ -180,9 +180,9 @@ abcs_battle18:  textCursor $9E0         ; Initial text line $9E0 : "{LEADER}, yo
 		csWait $3
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		setEntityDir $0,$1
-		setEntityDir $7,$1
-		setEntityDir $1F,$1
+		setFacing $0,$1
+		setFacing $7,$1
+		setFacing $1F,$1
 		startEntity $0
 		startEntity $7
 		moveEntity $B,$FF,$3,$3
@@ -190,15 +190,15 @@ abcs_battle18:  textCursor $9E0         ; Initial text line $9E0 : "{LEADER}, yo
 		nextSingleText $0,$B    ; "I never lie!{W1}"
 		moveEntity $B,$FF,$2,$2
 		endMove $8080
-		setEntityDir $B,$3
+		setFacing $B,$3
 		nextSingleText $0,$B    ; "The Ancients were...how{N}should I say this...great!{W1}"
 		moveEntity $B,$FF,$0,$1
 		endMove $8080
-		setEntityDir $B,$1
+		setFacing $B,$1
 		nextSingleText $0,$B    ; "No wonder the Caravan is so{N}small.  It carries miniaturized{N}people and items.{W2}"
 		moveEntity $B,$FF,$1,$2
 		endMove $8080
-		setEntityDir $B,$3
+		setFacing $B,$3
 		nextSingleText $0,$B    ; "I can drive this excellent{N}vehicle.  May I go with you{N}as a driver?{W1}"
 		csWait $1E
 		nextSingleText $FF,$FF  ; "{NAME;11} the historian{N}tags along with the force.{W1}"
@@ -207,30 +207,30 @@ abcs_battle18:  textCursor $9E0         ; Initial text line $9E0 : "{LEADER}, yo
 		nextSingleText $0,$7    ; "You're kidding, right?{W1}"
 		moveEntity $7,$FF,$3,$1
 		endMove $8080
-		setEntityDir $7,$2
-		setEntityDir $0,$0
-		setEntityDir $1F,$2
+		setFacing $7,$2
+		setFacing $0,$0
+		setFacing $1F,$2
 		nextSingleText $0,$7    ; "Well, at least we can bring{N}a lot of soldiers with us.{W1}"
 		moveEntity $B,$FF,$3,$1
 		endMove $8080
-		setEntityDir $0,$1
-		setEntityDir $7,$1
-		setEntityDir $1F,$1
+		setFacing $0,$1
+		setFacing $7,$1
+		setFacing $1F,$1
 		nextSingleText $0,$B    ; "But soldiers in the Caravan{N}cannot enter battle 'cause{N}they've been miniaturized.{W1}"
 		nextSingleText $0,$7    ; "We'll just have to see.{W1}"
-		setEntityDir $0,$0
-		setEntityDir $7,$2
-		setEntityDir $1F,$2
+		setFacing $0,$0
+		setFacing $7,$2
+		setFacing $1F,$2
 		nextSingleText $0,$7    ; "Humph.  I don't like this guy.{W1}"
 		moveEntity $B,$FF,$1,$1
 		endMove $8080
-		setEntityDir $B,$3
+		setFacing $B,$3
 		csWait $14
 		setActscript $B,$FF,eas_Jump
 		setActscript $B,$FF,eas_Jump
-		setEntityDir $0,$1
-		setEntityDir $7,$1
-		setEntityDir $1F,$1
+		setFacing $0,$1
+		setFacing $7,$1
+		setFacing $1F,$1
 		nextSingleText $0,$B    ; "I wonder what adventures{N}we'll find with this Caravan!{W1}"
 		csWait $1E
 		moveEntity $B,$0,$1,$1
@@ -246,21 +246,19 @@ abcs_battle18:  textCursor $9E0         ; Initial text line $9E0 : "{LEADER}, yo
 		moveEntity $80,$0,$3,$9
 		endMove $8080
 		csWait $1E
-		setEntityDir $0,$0
-		setEntityDir $7,$2
-		setEntityDir $1F,$2
+		setFacing $0,$0
+		setFacing $7,$2
+		setFacing $1F,$2
 		csWait $A
-		setEntityDir $0,$3
-		setEntityDir $7,$3
-		setEntityDir $1F,$3
+		setFacing $0,$3
+		setFacing $7,$3
+		setFacing $1F,$3
 		csWait $B4
 		setF $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 		clearF $54              ; Rohde is a follower
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4B6BE:       dc.b   0
-		dc.b  $C
-		dc.b   0
-		dc.b   9
+		csc_end
+ce_4B6BE:       dc.w $C
+		dc.w 9
 		dc.w 1
 		dc.b $C
 		dc.b 5

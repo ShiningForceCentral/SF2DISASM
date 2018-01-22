@@ -221,6 +221,8 @@ j_GetEnemyAISetting36:
 
 ; =============== S U B R O U T I N E =======================================
 
+; related to AI control on 0x0004 ?
+
 j_GetCharacterWord34:
 		
 		jmp     GetCharacterWord34(pc)

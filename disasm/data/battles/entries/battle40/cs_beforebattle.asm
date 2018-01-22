@@ -1,9 +1,9 @@
 
 ; ASM FILE data\battles\entries\battle40\cs_beforebattle.asm :
 ; 0x4E4DC..0x4E8A8 : Cutscene before battle 40
-bbcs_40:        textCursor $BDC         ; Initial text line $BDC : "{LEADER}, you're finally{N}here.{W1}"
+bbcs_40:        textCursor $BDC
 		loadMapFadeIn $36,$B,$22
-		loadMapEntities ce_4E878; Entity data to figure out and format
+		loadMapEntities ce_4E878
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		entityPosDir $7,$F,$28,$1
@@ -16,11 +16,11 @@ bbcs_40:        textCursor $BDC         ; Initial text line $BDC : "{LEADER}, yo
 		jumpIfFlagClear $4C,cs_4E544; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
 		entityPosDir $1A,$3F,$3E,$3
-cs_4E544:       setBlocks $B06,$B1D,$2C00
-		setBlocks $2000,$B1D,$B06
+cs_4E544:       setBlocks $B,$6,$B,$1D,$2C,$0
+		setBlocks $20,$0,$B,$1D,$B,$6
 		playSound MUSIC_STOP
 		fadeInB
-		csc45 $30               ; (null)
+		cameraSpeed $30
 		moveEntity $0,$0,$1,$3
 		endMove $8080
 		moveEntity $7,$0,$1,$3
@@ -62,9 +62,9 @@ cs_4E544:       setBlocks $B06,$B1D,$2C00
 		nextSingleText $0,$7    ; "What do YOU want?{W1}"
 		nextSingleText $C0,$81  ; "Don't talk to me like that.{N}I'm very sad.{W1}"
 		nextSingleText $0,$7    ; "Sad?{N}You've got to be joking!{W1}"
-		setEntityDir $81,$2
+		setFacing $81,$2
 		nextSingleText $C0,$81  ; "Well, yes I am.{N}I'm really quite evil.{W1}"
-		setEntityDir $81,$3
+		setFacing $81,$3
 		nextSingleText $C0,$81  ; "Don't you think so, Red{N}Baron?{W1}"
 		nextSingleText $0,$1C   ; "Uhh...(shiver).{W1}"
 		moveEntity $81,$FF,$3,$1
@@ -92,113 +92,112 @@ cs_4E544:       setBlocks $B06,$B1D,$2C00
 		entityPosDir $82,$10,$8,$1
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
-		setBlocks $60F,$101,$1006
+		setBlocks $6,$F,$1,$1,$10,$6
 		entityPosDir $82,$3F,$3F,$1
 		csWait $1E
 		entityPosDir $82,$F,$8,$1
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
-		setBlocks $60F,$101,$F06
+		setBlocks $6,$F,$1,$1,$F,$6
 		entityPosDir $82,$3F,$3F,$1
 		csWait $14
 		entityPosDir $82,$11,$9,$1
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
-		setBlocks $60F,$101,$1107
+		setBlocks $6,$F,$1,$1,$11,$7
 		csWait $A
 		entityPosDir $82,$10,$9,$1
 		moveEntity $82,$FF,$1,$2
 		endMove $8080
-		setBlocks $60F,$101,$1007
+		setBlocks $6,$F,$1,$1,$10,$7
 		hideEntity $82
 		csWait $5
-		setBlocks $60F,$101,$F07
+		setBlocks $6,$F,$1,$1,$F,$7
 		csWait $5
-		setBlocks $60F,$101,$E07
+		setBlocks $6,$F,$1,$1,$E,$7
 		csWait $5
-		setBlocks $60F,$101,$1208
+		setBlocks $6,$F,$1,$1,$12,$8
 		csWait $4
-		setBlocks $60F,$101,$1108
+		setBlocks $6,$F,$1,$1,$11,$8
 		csWait $4
-		setBlocks $60F,$101,$1008
+		setBlocks $6,$F,$1,$1,$10,$8
 		csWait $4
-		setBlocks $60F,$101,$F08
+		setBlocks $6,$F,$1,$1,$F,$8
 		csWait $4
-		setBlocks $60F,$101,$E08
+		setBlocks $6,$F,$1,$1,$E,$8
 		csWait $4
-		setBlocks $60F,$101,$D08
+		setBlocks $6,$F,$1,$1,$D,$8
 		csWait $4
-		setBlocks $60F,$101,$1309
+		setBlocks $6,$F,$1,$1,$13,$9
 		csWait $3
-		setBlocks $60F,$101,$1209
+		setBlocks $6,$F,$1,$1,$12,$9
 		csWait $3
-		setBlocks $60F,$101,$1109
+		setBlocks $6,$F,$1,$1,$11,$9
 		csWait $3
-		setBlocks $60F,$101,$1009
+		setBlocks $6,$F,$1,$1,$10,$9
 		csWait $3
-		setBlocks $60F,$101,$F09
+		setBlocks $6,$F,$1,$1,$F,$9
 		csWait $3
-		setBlocks $60F,$101,$E09
+		setBlocks $6,$F,$1,$1,$E,$9
 		csWait $3
-		setBlocks $60F,$101,$D09
+		setBlocks $6,$F,$1,$1,$D,$9
 		csWait $3
-		setBlocks $60F,$101,$C09
+		setBlocks $6,$F,$1,$1,$C,$9
 		csWait $3
-		setBlocks $60F,$101,$130A
+		setBlocks $6,$F,$1,$1,$13,$A
 		csWait $2
-		setBlocks $60F,$101,$120A
+		setBlocks $6,$F,$1,$1,$12,$A
 		csWait $2
-		setBlocks $60F,$101,$110A
+		setBlocks $6,$F,$1,$1,$11,$A
 		csWait $2
-		setBlocks $60F,$101,$100A
+		setBlocks $6,$F,$1,$1,$10,$A
 		csWait $2
-		setBlocks $60F,$101,$F0A
+		setBlocks $6,$F,$1,$1,$F,$A
 		csWait $2
-		setBlocks $60F,$101,$E0A
+		setBlocks $6,$F,$1,$1,$E,$A
 		csWait $2
-		setBlocks $60F,$101,$D0A
+		setBlocks $6,$F,$1,$1,$D,$A
 		csWait $2
-		setBlocks $60F,$101,$C0A
+		setBlocks $6,$F,$1,$1,$C,$A
 		csWait $2
-		setBlocks $60F,$101,$150B
+		setBlocks $6,$F,$1,$1,$15,$B
 		csWait $1
-		setBlocks $60F,$101,$130B
+		setBlocks $6,$F,$1,$1,$13,$B
 		csWait $1
-		setBlocks $60F,$101,$120B
+		setBlocks $6,$F,$1,$1,$12,$B
 		csWait $1
-		setBlocks $60F,$101,$110B
+		setBlocks $6,$F,$1,$1,$11,$B
 		csWait $1
-		setBlocks $60F,$101,$100B
+		setBlocks $6,$F,$1,$1,$10,$B
 		csWait $1
-		setBlocks $60F,$101,$F0B
+		setBlocks $6,$F,$1,$1,$F,$B
 		csWait $1
-		setBlocks $60F,$101,$E0B
+		setBlocks $6,$F,$1,$1,$E,$B
 		csWait $1
-		setBlocks $60F,$101,$D0B
+		setBlocks $6,$F,$1,$1,$D,$B
 		csWait $1
-		setBlocks $60F,$101,$C0B
+		setBlocks $6,$F,$1,$1,$C,$B
 		csWait $1
-		setBlocks $2C00,$B1D,$B06
+		setBlocks $2C,$0,$B,$1D,$B,$6
 		nextSingleText $C0,$81  ; "I'm very sorry, {LEADER},{N}but I must kill you!{W1}"
 		setCamDest $B,$1F
-		setEntityDir $7,$0
-		setEntityDir $0,$2
+		setFacing $7,$0
+		setFacing $0,$2
 		nextSingleText $0,$7    ; "{LEADER}, are we really{N}going to fight Oddler?{W1}"
 		moveEntity $1F,$FF,$2,$1
 		endMove $8080
-		setEntityDir $1F,$1
-		setEntityDir $1C,$0
+		setFacing $1F,$1
+		setFacing $1C,$0
 		nextSingleText $0,$1F   ; "That's enough out of you!{W1}"
 		moveEntity $1F,$FF,$0,$1
 		endMove $8080
-		setEntityDir $1F,$1
-		setEntityDir $0,$3
+		setFacing $1F,$1
+		setFacing $0,$3
 		nextSingleText $0,$1F   ; "{LEADER}, let's do it!{W1}"
 		setActscript $7,$0,eas_Jump
 		entityNod $0
-		csc_end                 ; END OF CUTSCENE SCRIPT
-ce_4E878:       dc.b   0
-		dc.b $10
+		csc_end
+ce_4E878:       dc.w $10
 		dc.w $27
 		dc.w 1
 		dc.b $F
