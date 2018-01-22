@@ -315,8 +315,7 @@ params :
 - Byte : Destination X
 - Byte : Destination Y
 
-$0035 - csc35 - UNKNOWN, SIMILAR TO SET BLOCKS
-To figure out !
+$0035 - setBlocksVar
 Only used in Parcia/Grand Path
 Only difference with command 34/setBlocks is that it doesn't set RAM offset 0xFFA82D bits 0 and 1.
 params :
