@@ -6,7 +6,7 @@ ms_map17_flag1F9_Entities:
 		dc.b 8
 		dc.b 3
 		dc.b $CE
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $B
 		dc.b 6
 		dc.b 3
@@ -19,22 +19,22 @@ ms_map17_flag1F9_Entities:
 		dc.b 3
 		dc.b 3
 		dc.b $C6
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $11
 		dc.b 5
 		dc.b 2
 		dc.b $D0
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $38
 		dc.b 5
 		dc.b 3
 		dc.b $C6
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $33
 		dc.b 6
 		dc.b 0
 		dc.b $CF
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $16
 		dc.b 4
 		dc.b 3

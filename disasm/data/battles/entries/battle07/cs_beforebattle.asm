@@ -79,23 +79,17 @@ bbcs_07:        textCursor $935
 		stopEntity $80
 		stopEntity $81
 		customActscript $80,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $81,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setFacing $80,UP
 		nextSingleText $C0,$80  ; "I've beaten you!{N}You've lost!{W1}"
 		nextText $0,$81         ; "But, so have you!{N}Or had you not noticed?{W2}"
@@ -103,12 +97,9 @@ bbcs_07:        textCursor $935
 		setCamDest 8,13
 		nextSingleText $0,$82   ; "I'll try.{W1}"
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $82,$0,$3,$3
 		endMove $8080
 		csWait 10
@@ -139,47 +130,13 @@ bbcs_07:        textCursor $935
 		setActscript $86,$0,eas_Jump
 		setActscript $87,$FF,eas_Jump
 		csc_end
-ce_49F36:       dc.w $D
-		dc.w $23
-		dc.w 1
-		dc.b $D
-		dc.b $11
-		dc.b 3
-		dc.b $A4
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $15
-		dc.b 1
-		dc.b $D1
-		dc.l eas_Init           
-		dc.b $C
-		dc.b $E
-		dc.b 3
-		dc.b $CC
-		dc.l eas_Init           
-		dc.b $C
-		dc.b $23
-		dc.b 1
-		dc.b $CB
-		dc.l eas_Init           
-		dc.b $E
-		dc.b $23
-		dc.b 1
-		dc.b $CD
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $83
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $78
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $43
-		dc.l eas_Init           
+ce_49F36:       mainEntity 13,35,UP
+		entity 13,17,DOWN,164,eas_Init
+		entity 13,21,UP,209,eas_Init
+		entity 12,14,DOWN,204,eas_Init
+		entity 12,35,UP,203,eas_Init
+		entity 14,35,UP,205,eas_Init
+		entity 63,63,UP,131,eas_Init
+		entity 63,63,DOWN,120,eas_Init
+		entity 63,63,DOWN,67,eas_Init
 		dc.w $FFFF

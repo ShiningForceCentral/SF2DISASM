@@ -27,14 +27,11 @@ cs_540C0:       textCursor $32B
 		setPos $0,6,11,UP
 		setPos $4,5,11,UP
 		customActscript $80,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		stopEntity $80
 		reloadMap 0,4
 		fadeInB
@@ -64,12 +61,9 @@ cs_540C0:       textCursor $32B
 		endMove $8080
 		csWait 30
 		customActscript $4,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $4,$FF,$0,$1
 		endMove $8080
 		setFacing $4,UP
@@ -95,19 +89,13 @@ cs_540C0:       textCursor $32B
 		setActscript $81,$0,eas_Jump
 		setActscript $82,$FF,eas_Jump
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $4,$FF,eas_Init
 		moveEntity $82,$0,$3,$2
 		moreMove $0,$4
@@ -126,14 +114,11 @@ cs_540C0:       textCursor $32B
 		endMove $8080
 		playSound SFX_BLO
 		customActscript $4,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		hideEntity $81
 		hideEntity $82
 		csWait 60

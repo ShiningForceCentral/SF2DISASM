@@ -122,12 +122,9 @@ cs_50426:       textCursor $8B5
 		csWait 48
 		executeSubroutine sub_5039E
 		customActscript $84,$FF
-		dc.w $10                ;   0010 SET SPEED X=$1 Y=$1
-		dc.b 1
-		dc.b 1
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 257         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $84,$0,$0,$1
 		endMove $8080
 		nextSingleText $0,$5    ; "Whoa!{W1}"
@@ -234,12 +231,9 @@ cs_50624:       fadeInB
 		nextSingleText $0,$3    ; "Heave!  Heave!{N}Come oooooooooon!{W1}"
 		setActscript $3,$FF,eas_46172
 		customActscript $3,$FF
-		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
-		dc.b $40
-		dc.b $40
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 16448       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setBlocks 63,63,1,1,51,7
 		playSound SFX_FALLING
 		moveEntity $3,$FF,$1,$4
@@ -263,187 +257,45 @@ cs_50624:       fadeInB
 		setPriority $0,$0
 		setPriority $84,$FFFF
 		csc_end
-ce_506DE:       dc.w $3F
-		dc.w $3F
-		dc.w 1
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $D1
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b 1
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $CD
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b 3
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b 6
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $CB
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $C1
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b 5
-		dc.l eas_Init           
-		dc.b 5
-		dc.b 5
-		dc.b 0
-		dc.b $D3
-		dc.l eas_Init           
+ce_506DE:       mainEntity 63,63,UP
+		entity 63,63,DOWN,209,eas_Init
+		entity 63,63,DOWN,1,eas_Init
+		entity 63,63,DOWN,205,eas_Init
+		entity 63,63,DOWN,3,eas_Init
+		entity 63,63,DOWN,6,eas_Init
+		entity 63,63,DOWN,203,eas_Init
+		entity 63,63,DOWN,193,eas_Init
+		entity 63,63,DOWN,5,eas_Init
+		entity 5,5,RIGHT,211,eas_Init
 		dc.w $FFFF
-ce_5072E:       dc.w 0
-		dc.w 0
-		dc.w 1
-		dc.b $17
-		dc.b $1E
-		dc.b 3
-		dc.b $CD
-		dc.l eas_Init           
-		dc.b $13
-		dc.b $1D
-		dc.b 1
-		dc.b $C6
-		dc.l eas_Init           
-		dc.b $15
-		dc.b $1D
-		dc.b 2
-		dc.b $C4
-		dc.l eas_Init           
-		dc.b $14
-		dc.b $1E
-		dc.b 3
-		dc.b $C7
-		dc.l eas_Init           
-		dc.b $14
-		dc.b $1F
-		dc.b 1
-		dc.b $C7
-		dc.l eas_Init           
-		dc.b $13
-		dc.b $20
-		dc.b 3
-		dc.b $C5
-		dc.l eas_Init           
-		dc.b $17
-		dc.b $22
-		dc.b 3
-		dc.b $C8
-		dc.l eas_Init           
-		dc.b $18
-		dc.b $22
-		dc.b 3
-		dc.b $C9
-		dc.l eas_Init           
-		dc.b $1B
-		dc.b $1D
-		dc.b 3
-		dc.b $C2
-		dc.l eas_Init           
-		dc.b $1B
-		dc.b $1E
-		dc.b 2
-		dc.b $C1
-		dc.l eas_Init           
-		dc.b $1A
-		dc.b $1F
-		dc.b 1
-		dc.b $C2
-		dc.l eas_Init           
-		dc.b $18
-		dc.b $1A
-		dc.b 1
-		dc.b $C5
-		dc.l eas_Init           
-		dc.b $17
-		dc.b $1B
-		dc.b 1
-		dc.b $C4
-		dc.l eas_Init           
+ce_5072E:       mainEntity 0,0,UP
+		entity 23,30,DOWN,205,eas_Init
+		entity 19,29,UP,198,eas_Init
+		entity 21,29,LEFT,196,eas_Init
+		entity 20,30,DOWN,199,eas_Init
+		entity 20,31,UP,199,eas_Init
+		entity 19,32,DOWN,197,eas_Init
+		entity 23,34,DOWN,200,eas_Init
+		entity 24,34,DOWN,201,eas_Init
+		entity 27,29,DOWN,194,eas_Init
+		entity 27,30,LEFT,193,eas_Init
+		entity 26,31,UP,194,eas_Init
+		entity 24,26,UP,197,eas_Init
+		entity 23,27,UP,196,eas_Init
 		dc.w $FFFF
-ce_5079E:       dc.w $28
-		dc.w 8
-		dc.w 2
-		dc.b $33
-		dc.b 8
-		dc.b 3
-		dc.b 1
-		dc.l eas_Init           
-		dc.b $29
-		dc.b $A
-		dc.b 3
-		dc.b 2
-		dc.l eas_Init           
-		dc.b $33
-		dc.b 4
-		dc.b 3
-		dc.b 3
-		dc.l eas_Init           
-		dc.b $27
-		dc.b 8
-		dc.b 0
-		dc.b 4
-		dc.l eas_Init           
-		dc.b $31
-		dc.b 4
-		dc.b 1
-		dc.b 5
-		dc.l eas_Init           
-		dc.b $26
-		dc.b 5
-		dc.b 3
-		dc.b 6
-		dc.l eas_Init           
-		dc.b $29
-		dc.b 4
-		dc.b 3
-		dc.b $CA
-		dc.l eas_Init           
-		dc.b $35
-		dc.b $A
-		dc.b 3
-		dc.b $CA
-		dc.l eas_Init           
-		dc.b $2F
-		dc.b 5
-		dc.b 3
-		dc.b $C4
-		dc.l eas_Init           
-		dc.b $2C
-		dc.b 6
-		dc.b 0
-		dc.b $B3
-		dc.l eas_Init           
-		dc.b $2D
-		dc.b 6
-		dc.b 3
-		dc.b $B3
-		dc.l eas_Init           
-		dc.b $2E
-		dc.b 6
-		dc.b 2
-		dc.b $B3
-		dc.l eas_Init           
+ce_5079E:       mainEntity 40,8,LEFT
+		entity 51,8,DOWN,1,eas_Init
+		entity 41,10,DOWN,2,eas_Init
+		entity 51,4,DOWN,3,eas_Init
+		entity 39,8,RIGHT,4,eas_Init
+		entity 49,4,UP,5,eas_Init
+		entity 38,5,DOWN,6,eas_Init
+		entity 41,4,DOWN,202,eas_Init
+		entity 53,10,DOWN,202,eas_Init
+		entity 47,5,DOWN,196,eas_Init
+		entity 44,6,RIGHT,179,eas_Init
+		entity 45,6,DOWN,179,eas_Init
+		entity 46,6,LEFT,179,eas_Init
 		dc.w $FFFF
 cs_50806:       textCursor $8F0
 		loadMapEntities ce_5094A
@@ -514,22 +366,8 @@ cs_50806:       textCursor $8F0
 		resetForceBattleStats
 		mapSysEvent $7,$B,$A,$1
 		csc_end
-ce_5094A:       dc.w $3D
-		dc.w $30
-		dc.w 2
-		dc.b $3E
-		dc.b $30
-		dc.b 2
-		dc.b $CA
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $30
-		dc.b 2
-		dc.b $CA
-		dc.l eas_Init           
-		dc.b $1C
-		dc.b $31
-		dc.b 0
-		dc.b $D3
-		dc.l eas_Init           
+ce_5094A:       mainEntity 61,48,LEFT
+		entity 62,48,LEFT,202,eas_Init
+		entity 63,48,LEFT,202,eas_Init
+		entity 28,49,RIGHT,211,eas_Init
 		dc.w $FFFF

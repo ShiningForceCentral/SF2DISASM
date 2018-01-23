@@ -180,13 +180,9 @@ cs_607DE:       textCursor $D3C
 		nextSingleText $0,$1C   ; "The guilt is too much to{N}handle.  I must die!{W1}"
 		setActscript $1C,$FF,eas_46172
 		customActscript $1C,$FF
-		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
-		dc.b $40
-		dc.b $40
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 16448       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		entityNod $1C
 		csWait 30
 		moveEntity $1C,$FF,$1,$5
@@ -194,15 +190,11 @@ cs_607DE:       textCursor $D3C
 		endMove $8080
 		setFacing $1C,DOWN
 		customActscript $1C,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $2
-		dc.w 2
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $2           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $1C,$FF,eas_46172
 		playSound SFX_FALLING
 		moveEntity $1C,$FF,$3,$6
@@ -449,13 +441,9 @@ cs_60CA4:       textCursor $D76
 		setFacing $1B,LEFT
 		csWait 60
 		customActscript $1B,$FF
-		dc.w $10                ;   0010 SET SPEED X=$14 Y=$14
-		dc.b $14
-		dc.b $14
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 5140        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1B,$FF,$2,$2
 		moreMove $A,$14
 		moreMove $8,$14
@@ -475,13 +463,9 @@ cs_60CA4:       textCursor $D76
 		entityNod $1B
 		nextSingleText $0,$1B   ; "Was it this one?{W1}"
 		customActscript $1B,$FF
-		dc.w $10                ;   0010 SET SPEED X=$20 Y=$20
-		dc.b $20
-		dc.b $20
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 8224        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1B,$FF,$2,$2
 		moreMove $1,$2
 		endMove $8080
@@ -493,13 +477,9 @@ cs_60CA4:       textCursor $D76
 		csWait 30
 		nextSingleText $0,$1B   ; "No, that's not it.{W1}"
 		customActscript $1B,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1B,$FF,$3,$2
 		moreMove $C,$50
 		endMove $8080
@@ -508,13 +488,9 @@ cs_60CA4:       textCursor $D76
 		setActscript $1B,$FF,eas_Jump
 		nextSingleText $0,$1B   ; "How about this one?{W1}"
 		customActscript $1B,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1B,$FF,$1,$2
 		endMove $8080
 		csWait 30
@@ -527,13 +503,9 @@ cs_60CA4:       textCursor $D76
 		setActscript $1B,$FF,eas_Jump
 		nextSingleText $0,$1B   ; "Yeah, I got it!{W1}"
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
-		dc.b $40
-		dc.b $40
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 16448       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1F,$FF,$1,$1
 		moreMove $2,$2
 		endMove $8080
@@ -551,13 +523,9 @@ cs_60CA4:       textCursor $D76
 		setActscript $1F,$FF,eas_JumpRight
 		csWait 10
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1F,$FF,$2,$2
 		endMove $8080
 		nextText $80,$1F        ; "Who could've taken it?{W2}"

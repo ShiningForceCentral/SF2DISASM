@@ -150,12 +150,9 @@ cs_5FB6A:       textCursor $D31
 		setActscript $0,$FF,eas_Init
 		setBlocks 60,59,4,5,44,15
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$0,$2,$1E
 		endMove $8080
 		executeSubroutine sub_5FD5E
@@ -263,12 +260,6 @@ plt_5FDB4:      dc.w 0
 		dc.w $ECC
 		dc.w 0
 		dc.w $EEE
-ce_5FDD4:       dc.w 0
-		dc.w 0
-		dc.w 3
-		dc.b $2D
-		dc.b $11
-		dc.b 0
-		dc.b $FD
-		dc.l eas_Init           
+ce_5FDD4:       mainEntity 0,0,DOWN
+		entity 45,17,RIGHT,253,eas_Init
 		dc.w $FFFF

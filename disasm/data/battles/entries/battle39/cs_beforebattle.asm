@@ -37,43 +37,18 @@ cs_4E41A:       fadeInB
 		setCamDest 3,18
 		nextSingleText $0,$83   ; "They're coming!{W1}"
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$18 Y=$18
-		dc.b $18
-		dc.b $18
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 6168        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$3,$3
 		endMove $8080
 		setFacing $80,UP
 		nextSingleText $0,$80   ; "Excellent!{N}Welcome to your graveyard!{W1}"
 		csc_end
-ce_4E4AC:       dc.w 8
-		dc.w 9
-		dc.w 3
-		dc.b 8
-		dc.b $14
-		dc.b 3
-		dc.b $61
-		dc.l eas_Init           
-		dc.b 7
-		dc.b $17
-		dc.b 1
-		dc.b $8A
-		dc.l eas_Init           
-		dc.b 9
-		dc.b $17
-		dc.b 1
-		dc.b $94
-		dc.l eas_Init           
-		dc.b 6
-		dc.b $17
-		dc.b 1
-		dc.b $81
-		dc.l eas_Init           
-		dc.b $A
-		dc.b $17
-		dc.b 1
-		dc.b $5F
-		dc.l eas_Init           
+ce_4E4AC:       mainEntity 8,9,DOWN
+		entity 8,20,DOWN,97,eas_Init
+		entity 7,23,UP,138,eas_Init
+		entity 9,23,UP,148,eas_Init
+		entity 6,23,UP,129,eas_Init
+		entity 10,23,UP,95,eas_Init
 		dc.w $FFFF

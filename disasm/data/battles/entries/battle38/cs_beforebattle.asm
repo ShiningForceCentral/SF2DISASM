@@ -44,17 +44,7 @@ cs_4DDFE:       playSound MUSIC_BATTLE_THEME_1
 		flashScreenWhite $32
 		setQuake 0
 		csc_end
-ce_4DE74:       dc.w $E
-		dc.w 9
-		dc.w 3
-		dc.b $D
-		dc.b 8
-		dc.b 3
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $17
-		dc.b 1
-		dc.b $9F
-		dc.l eas_Init           
+ce_4DE74:       mainEntity 14,9,DOWN
+		entity 13,8,DOWN,7,eas_Init
+		entity 13,23,UP,159,eas_Init
 		dc.w $FFFF

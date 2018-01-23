@@ -41,12 +41,9 @@ cs_568F6:       textCursor $55C
 		setFacing $7,RIGHT
 		nextSingleText $0,$7    ; "{LEADER} came from{N}Grans Island.{W1}"
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $82,$FF,$2,$1
 		endMove $8080
 		nextSingleText $C0,$82  ; "Then we could be related.{W1}"
@@ -93,19 +90,13 @@ cs_569BC:       textCursor $566
 		setFacing $B,UP
 		nextSingleText $C0,$B   ; "That sword must be really{N}old.  Oh, my!{N}It's the Achilles Sword!{W2}"
 		customActscript $B,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $0,$FF,eas_46172
 		moveEntity $B,$0,$1,$1
 		endMove $8080
@@ -126,12 +117,9 @@ cs_569BC:       textCursor $566
 		yesNo
 		jumpIfFlagSet $59,cs_56A82; YES/NO prompt answer
 		customActscript $B,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $B,$FF,eas_46172
 		moveEntity $B,$FF,$3,$1
 		endMove $8080

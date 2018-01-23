@@ -6,12 +6,12 @@ ms_map26_Entities:
 		dc.b $16
 		dc.b 0
 		dc.b $10
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $1D
 		dc.b $16
 		dc.b 2
 		dc.b $11
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $32
 		dc.b $C
 		dc.b 3
@@ -24,30 +24,30 @@ ms_map26_Entities:
 		dc.b $18
 		dc.b 3
 		dc.b $C4
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $3F
 		dc.b $3F
 		dc.b 1
 		dc.b $AD
-		dc.l eas_Init3          
+		dc.l eas_Init3
 		dc.b $3F
 		dc.b $3F
 		dc.b 1
 		dc.b $AD
-		dc.l eas_Init3          
+		dc.l eas_Init3
 		dc.b $3F
 		dc.b $3F
 		dc.b 1
 		dc.b $AD
-		dc.l eas_Init3          
+		dc.l eas_Init3
 		dc.b 4
 		dc.b $23
 		dc.b 3
 		dc.b $C0
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $B
 		dc.b $23
 		dc.b 3
 		dc.b $3E
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.w $FFFF

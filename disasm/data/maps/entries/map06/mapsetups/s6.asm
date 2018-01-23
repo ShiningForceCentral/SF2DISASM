@@ -73,33 +73,21 @@ cs_54E86:       textCursor $42A
 		csc_end
 cs_54F26:       textCursor $432
 		customActscript $7,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $88,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $89,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $8C,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $7,$FF,eas_46172
 		setCameraEntity $88
 		setFacing $88,LEFT
@@ -118,12 +106,9 @@ cs_54F26:       textCursor $432
 		nextSingleText $0,$89   ; "Ha, ha!  You missed.{N}Let me try.{W1}"
 		setActscript $7,$FF,eas_Init
 		customActscript $7,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $89,$0,$2,$1
 		endMove $8080
 		csWait 8
@@ -292,12 +277,9 @@ cs_54F26:       textCursor $432
 cs_55242:       textCursor $463
 		newEntity $8E,11,0,DOWN,$CE
 		customActscript $8E,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $8E,$FF,$3,$7
 		endMove $8080
 		setFacing $0,UP

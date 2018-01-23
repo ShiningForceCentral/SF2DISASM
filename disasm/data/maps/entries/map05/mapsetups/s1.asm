@@ -6,7 +6,7 @@ ms_map5_Entities:
 		dc.b 6
 		dc.b 3
 		dc.b 4
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $16
 		dc.b $24
 		dc.b 3
@@ -27,17 +27,17 @@ ms_map5_Entities:
 		dc.b $10
 		dc.b 0
 		dc.b $C6
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $16
 		dc.b $10
 		dc.b 2
 		dc.b $C3
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $13
 		dc.b $C
 		dc.b 3
 		dc.b $C2
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $15
 		dc.b $15
 		dc.b 3
@@ -58,22 +58,22 @@ ms_map5_Entities:
 		dc.b $13
 		dc.b 3
 		dc.b $C8
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b 9
 		dc.b $10
 		dc.b 3
 		dc.b $C6
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $F
 		dc.b $14
 		dc.b 2
 		dc.b $C3
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $E
 		dc.b $11
 		dc.b 3
 		dc.b $C4
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b 7
 		dc.b $14
 		dc.b 3
@@ -86,12 +86,12 @@ ms_map5_Entities:
 		dc.b 6
 		dc.b 3
 		dc.b $C5
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $B
 		dc.b 4
 		dc.b 3
 		dc.b $C0
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $B
 		dc.b 7
 		dc.b 3

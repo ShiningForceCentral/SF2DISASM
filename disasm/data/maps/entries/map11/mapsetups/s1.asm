@@ -22,12 +22,12 @@ ms_map11_Entities:
 		dc.b $E
 		dc.b 3
 		dc.b $E4
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $29
 		dc.b $E
 		dc.b 3
 		dc.b $E4
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.w $FFFF
 		dc.b   2
 		dc.b   2

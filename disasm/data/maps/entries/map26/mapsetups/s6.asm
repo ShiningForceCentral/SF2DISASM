@@ -35,47 +35,29 @@ cs_59E04:       textCursor $6CB
 		stopEntity $7
 		stopEntity $1F
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $7,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $83,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $84,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setPos $0,26,7,DOWN
 		setPos $7,27,6,DOWN
 		setPos $1F,25,6,DOWN

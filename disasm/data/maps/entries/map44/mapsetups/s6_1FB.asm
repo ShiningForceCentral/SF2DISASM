@@ -88,12 +88,9 @@ byte_545B6:     moreMove $3,$1
 		entitySprite $0,$D3
 		fadeInB
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$14 Y=$14
-		dc.b $14
-		dc.b $14
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 5140        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $0,$0,$0,$1
 		moreMove $1,$2
 		moreMove $0,$1
@@ -141,7 +138,5 @@ loc_54726:
 
 	; End of function csub_54714
 
-ce_54736:       dc.w $22
-		dc.w $21
-		dc.w 0
+ce_54736:       mainEntity 34,33,RIGHT
 		dc.w $FFFF

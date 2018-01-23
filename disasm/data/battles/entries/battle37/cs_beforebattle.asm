@@ -53,22 +53,8 @@ cs_4DAB8:       fadeInB
 		nextSingleText $C0,$1F  ; "We have to advance.{N}{LEADER}, are you ready?{W1}"
 		entityNod $0
 		csc_end
-ce_4DB74:       dc.w $37
-		dc.w $24
-		dc.w 2
-		dc.b $38
-		dc.b $25
-		dc.b 2
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $9F
-		dc.l eas_Init           
-		dc.b $23
-		dc.b $3C
-		dc.b 1
-		dc.b $9E
-		dc.l eas_Init           
+ce_4DB74:       mainEntity 55,36,LEFT
+		entity 56,37,LEFT,7,eas_Init
+		entity 63,63,UP,159,eas_Init
+		entity 35,60,UP,158,eas_Init
 		dc.w $FFFF

@@ -73,34 +73,12 @@ bbcs_33:        textCursor $B32
 		setF $33F               ; set after Frayja forces his way into the party just before the battle in Moun
 		clearF $52              ; Frayja is a follower
 		csc_end
-ce_4D048:       dc.w $1A
-		dc.w $25
-		dc.w 2
-		dc.b $1B
-		dc.b $26
-		dc.b 2
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $1B
-		dc.b $24
-		dc.b 2
-		dc.b $16
-		dc.l eas_Init           
-		dc.b $A
-		dc.b $A
-		dc.b 3
-		dc.b $93
-		dc.l eas_Init           
-		dc.b 9
-		dc.b $A
-		dc.b 3
-		dc.b $57
-		dc.l eas_Init           
-		dc.b $B
-		dc.b $A
-		dc.b 3
-		dc.b $57
-		dc.l eas_Init           
+ce_4D048:       mainEntity 26,37,LEFT
+		entity 27,38,LEFT,7,eas_Init
+		entity 27,36,LEFT,22,eas_Init
+		entity 10,10,DOWN,147,eas_Init
+		entity 9,10,DOWN,87,eas_Init
+		entity 11,10,DOWN,87,eas_Init
 		dc.w $FFFF
 
 ; =============== S U B R O U T I N E =======================================

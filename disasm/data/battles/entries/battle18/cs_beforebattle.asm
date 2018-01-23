@@ -58,17 +58,7 @@ bbcs_18:        textCursor $9D8
 		setFacing $B,UP
 		nextSingleText $0,$80   ; "Time's up!  Now we battle.{W1}"
 		csc_end
-ce_4B2DA:       dc.w $C
-		dc.w $20
-		dc.w 1
-		dc.b $C
-		dc.b 8
-		dc.b 3
-		dc.b $FF
-		dc.l eas_Init           
-		dc.b $C
-		dc.b 5
-		dc.b 3
-		dc.b $3E
-		dc.l eas_Init           
+ce_4B2DA:       mainEntity 12,32,UP
+		entity 12,8,DOWN,255,eas_Init
+		entity 12,5,DOWN,62,eas_Init
 		dc.w $FFFF

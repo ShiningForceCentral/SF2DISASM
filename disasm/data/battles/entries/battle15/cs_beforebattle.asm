@@ -29,32 +29,10 @@ bbcs_15:        textCursor $9C7
 		setFacing $1E,DOWN
 		nextSingleText $0,$1E   ; "{LEADER}, take 'em out!{W1}"
 		csc_end
-ce_4AE42:       dc.w $E
-		dc.w $14
-		dc.w 1
-		dc.b $E
-		dc.b 7
-		dc.b 3
-		dc.b $49
-		dc.l eas_Init           
-		dc.b $F
-		dc.b 6
-		dc.b 3
-		dc.b $6B
-		dc.l eas_Init           
-		dc.b $D
-		dc.b 6
-		dc.b 3
-		dc.b $85
-		dc.l eas_Init           
-		dc.b $10
-		dc.b 7
-		dc.b 3
-		dc.b $8E
-		dc.l eas_Init           
-		dc.b $C
-		dc.b 7
-		dc.b 3
-		dc.b $7C
-		dc.l eas_Init           
+ce_4AE42:       mainEntity 14,20,UP
+		entity 14,7,DOWN,73,eas_Init
+		entity 15,6,DOWN,107,eas_Init
+		entity 13,6,DOWN,133,eas_Init
+		entity 16,7,DOWN,142,eas_Init
+		entity 12,7,DOWN,124,eas_Init
 		dc.w $FFFF

@@ -84,12 +84,9 @@ cs_62D0E:       textCursor $F7F
 		setCamDest 24,5
 		csWait 40
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$1,$1
 		endMove $8080
 		csWait 30
@@ -257,19 +254,13 @@ cs_62FB0:       textCursor $F93
 		csWait 10
 		nextSingleText $80,$1   ; "Yes, a good choice....{N}{LEADER} will make her...{N}...happy....{W1}"
 		customActscript $1,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $2,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1,$0,$3,$1
 		endMove $8080
 		moveEntity $2,$FF,$2,$1
@@ -356,12 +347,9 @@ cs_62FB0:       textCursor $F93
 		nextText $0,$81         ; "But I didn't know what{N}{NAME;1} or {NAME;3} would do.{W2}I didn't want to hurt their{N}feelings.{W1}"
 		nextSingleText $0,$81   ; "{LEADER}, I choose you.{W1}"
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$3,$1
 		moreMove $0,$1
 		moreMove $B,$1

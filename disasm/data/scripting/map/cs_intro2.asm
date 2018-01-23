@@ -67,13 +67,9 @@ IntroCutscene2: textCursor $106A
 		setFacing $81,LEFT
 		csWait 40
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$2,$2
 		moreMove $B,$1
 		endMove $8080
@@ -109,32 +105,10 @@ IntroCutscene2: textCursor $106A
 		fadeOutToBlackHalf
 		csWait 30
 		csc_end
-ce_48510:       dc.w $3F
-		dc.w $3F
-		dc.w 1
-		dc.b $C
-		dc.b 6
-		dc.b 3
-		dc.b $CB
-		dc.l eas_Init           
-		dc.b $A
-		dc.b 7
-		dc.b 3
-		dc.b $CD
-		dc.l eas_Init           
-		dc.b $C
-		dc.b $D
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init           
-		dc.b 9
-		dc.b 6
-		dc.b 2
-		dc.b $BB
-		dc.l eas_Init           
-		dc.b $F
-		dc.b 6
-		dc.b 2
-		dc.b $BB
-		dc.l eas_Init           
+ce_48510:       mainEntity 63,63,UP
+		entity 12,6,DOWN,203,eas_Init
+		entity 10,7,DOWN,205,eas_Init
+		entity 12,13,UP,206,eas_Init
+		entity 9,6,LEFT,187,eas_Init
+		entity 15,6,LEFT,187,eas_Init
 		dc.w $FFFF

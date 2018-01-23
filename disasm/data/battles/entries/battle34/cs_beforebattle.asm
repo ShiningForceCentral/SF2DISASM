@@ -44,12 +44,9 @@ cs_4D3C6:       moveEntity $1F,$FF,$2,$3
 		nextText $0,$80         ; "Then kill me, if you've{N}got the guts to do it!{W2}"
 		nextSingleText $0,$80   ; "I know.  You want me to be{N}die!{W1}"
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$0,$1,$4
 		endMove $8080
 		csWait 10
@@ -76,27 +73,9 @@ cs_4D3C6:       moveEntity $1F,$FF,$2,$3
 		nextText $0,$1F         ; "We can get a ship and return{N}to Grans if we defeat her.{W2}"
 		nextSingleText $0,$1F   ; "{LEADER}, get her!{W1}"
 		csc_end
-ce_4D48E:       dc.w $1D
-		dc.w $1D
-		dc.w 2
-		dc.b $1E
-		dc.b $1C
-		dc.b 2
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $B
-		dc.b $A
-		dc.b 3
-		dc.b $9C
-		dc.l eas_Init           
-		dc.b $B
-		dc.b 6
-		dc.b 3
-		dc.b $9F
-		dc.l eas_Init           
-		dc.b $1E
-		dc.b $1D
-		dc.b 2
-		dc.b $3E
-		dc.l eas_Init           
+ce_4D48E:       mainEntity 29,29,LEFT
+		entity 30,28,LEFT,7,eas_Init
+		entity 11,10,DOWN,156,eas_Init
+		entity 11,6,DOWN,159,eas_Init
+		entity 30,29,LEFT,62,eas_Init
 		dc.w $FFFF

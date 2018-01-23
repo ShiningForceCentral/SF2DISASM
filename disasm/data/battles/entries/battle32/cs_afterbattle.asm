@@ -68,22 +68,8 @@ csub_4CEE4:
 
 	; End of function csub_4CEE4
 
-ce_4CEEC:       dc.w $A
-		dc.w $19
-		dc.w 1
-		dc.b $B
-		dc.b $19
-		dc.b 1
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $B
-		dc.b $1A
-		dc.b 1
-		dc.b $16
-		dc.l eas_Init           
-		dc.b $A
-		dc.b $16
-		dc.b 3
-		dc.b $17
-		dc.l eas_Init           
+ce_4CEEC:       mainEntity 10,25,UP
+		entity 11,25,UP,7,eas_Init
+		entity 11,26,UP,22,eas_Init
+		entity 10,22,DOWN,23,eas_Init
 		dc.w $FFFF

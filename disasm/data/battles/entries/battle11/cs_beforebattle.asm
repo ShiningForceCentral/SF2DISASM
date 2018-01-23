@@ -40,27 +40,9 @@ bbcs_11:        textCursor $9B3
 		nextSingleText $0,$80   ; "Enjoy your visit because{N}you're not leaving!{W1}"
 		playSound $FD
 		csc_end
-ce_4ACA0:       dc.w $F
-		dc.w $18
-		dc.w 1
-		dc.b $F
-		dc.b $19
-		dc.b 1
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $F
-		dc.b 3
-		dc.b 3
-		dc.b $47
-		dc.l eas_Init           
-		dc.b $10
-		dc.b 4
-		dc.b 3
-		dc.b $69
-		dc.l eas_Init           
-		dc.b $E
-		dc.b 4
-		dc.b 3
-		dc.b $84
-		dc.l eas_Init           
+ce_4ACA0:       mainEntity 15,24,UP
+		entity 15,25,UP,7,eas_Init
+		entity 15,3,DOWN,71,eas_Init
+		entity 16,4,DOWN,105,eas_Init
+		entity 14,4,DOWN,132,eas_Init
 		dc.w $FFFF

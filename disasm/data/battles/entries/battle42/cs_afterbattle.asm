@@ -16,25 +16,19 @@ abcs_battle42:  textCursor $C22
 		setPos $1A,63,62,DOWN
 cs_4EF5E:       stopEntity $80
 		customActscript $80,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $80,$FF,eas_46172
 		stopEntity $81
 		customActscript $81,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setPriority $1F,$0
 		setPriority $1C,$0
 		setPriority $80,$FFFF
@@ -96,12 +90,9 @@ cs_4EF5E:       stopEntity $80
 		startEntity $81
 		nextSingleText $C0,$81  ; "Oh, it's you.{W1}"
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$18 Y=$18
-		dc.b $18
-		dc.b $18
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 6168        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$3,$1
 		endMove $8080
 		csWait 50
@@ -197,12 +188,9 @@ cs_4EF5E:       stopEntity $80
 		csWait 90
 		setCameraEntity $80
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		csWait 110
 		playSound MUSIC_ZEON_ATTACK
 		entitySprite $80,$B2
@@ -220,14 +208,11 @@ cs_4EF5E:       stopEntity $80
 		setFacing $81,DOWN
 		stopEntity $81
 		customActscript $81,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setQuake 3
 		playSound SFX_INTRO_LIGHTNING
 		flashScreenWhite $1E
@@ -271,32 +256,10 @@ cs_4EF5E:       stopEntity $80
 		entityNod $0
 		setStoryFlag $2B        ; Battle 43 unlocked
 		csc_end
-ce_4F328:       dc.w $D
-		dc.w $11
-		dc.w 1
-		dc.b $F
-		dc.b $F
-		dc.b 2
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $C
-		dc.b $13
-		dc.b 0
-		dc.b $1C
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $13
-		dc.b 3
-		dc.b $A4
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $F
-		dc.b 3
-		dc.b $CC
-		dc.l eas_Init           
-		dc.b $3E
-		dc.b $3E
-		dc.b 3
-		dc.b $FB
-		dc.l eas_Init           
+ce_4F328:       mainEntity 13,17,UP
+		entity 15,15,LEFT,7,eas_Init
+		entity 12,19,RIGHT,28,eas_Init
+		entity 13,19,DOWN,164,eas_Init
+		entity 13,15,DOWN,204,eas_Init
+		entity 62,62,DOWN,251,eas_Init
 		dc.w $FFFF

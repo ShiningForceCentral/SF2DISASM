@@ -38,12 +38,6 @@ abcs_battle20:  textCursor $A06
 		followEntity $1F,$7,$2
 		followEntity $D,$1F,$2
 		csc_end
-ce_4B780:       dc.w 6
-		dc.w $A
-		dc.w 1
-		dc.b 6
-		dc.b 8
-		dc.b 3
-		dc.b $D
-		dc.l eas_Init           
+ce_4B780:       mainEntity 6,10,UP
+		entity 6,8,DOWN,13,eas_Init
 		dc.w $FFFF

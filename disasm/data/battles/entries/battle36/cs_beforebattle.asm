@@ -44,42 +44,12 @@ cs_4D8D6:       playSound MUSIC_BATTLE_THEME_1
 		entityNod $0
 		setFacing $0,DOWN
 		csc_end
-ce_4D964:       dc.w $13
-		dc.w 1
-		dc.w 3
-		dc.b $12
-		dc.b 0
-		dc.b 3
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $10
-		dc.b $10
-		dc.b 1
-		dc.b $9F
-		dc.l eas_Init           
-		dc.b $13
-		dc.b 0
-		dc.b 3
-		dc.b $3E
-		dc.l eas_Init           
-		dc.b $C
-		dc.b $10
-		dc.b 0
-		dc.b $9D
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $11
-		dc.b 1
-		dc.b $9D
-		dc.l eas_Init           
-		dc.b $E
-		dc.b $13
-		dc.b 2
-		dc.b $9D
-		dc.l eas_Init           
-		dc.b $F
-		dc.b $14
-		dc.b 1
-		dc.b $9D
-		dc.l eas_Init           
+ce_4D964:       mainEntity 19,1,DOWN
+		entity 18,0,DOWN,7,eas_Init
+		entity 16,16,UP,159,eas_Init
+		entity 19,0,DOWN,62,eas_Init
+		entity 12,16,RIGHT,157,eas_Init
+		entity 13,17,UP,157,eas_Init
+		entity 14,19,LEFT,157,eas_Init
+		entity 15,20,UP,157,eas_Init
 		dc.w $FFFF

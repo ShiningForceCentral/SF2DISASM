@@ -114,47 +114,13 @@ bbcs_01:        textCursor $8F4
 		setFacing $87,DOWN
 		nextSingleText $0,$87   ; "We'll stop the evil Gizmo{N}here.  {LEADER}, defeat{N}these fiends!{W1}"
 		csc_end
-ce_49694:       dc.w 7
-		dc.w $10
-		dc.w 1
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $72
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $67
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $67
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $67
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $67
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $67
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $67
-		dc.l eas_Init           
-		dc.b 7
-		dc.b $B
-		dc.b 1
-		dc.b $D1
-		dc.l eas_Init           
+ce_49694:       mainEntity 7,16,UP
+		entity 63,63,DOWN,114,eas_Init
+		entity 63,63,DOWN,103,eas_Init
+		entity 63,63,DOWN,103,eas_Init
+		entity 63,63,DOWN,103,eas_Init
+		entity 63,63,DOWN,103,eas_Init
+		entity 63,63,DOWN,103,eas_Init
+		entity 63,63,DOWN,103,eas_Init
+		entity 7,11,UP,209,eas_Init
 		dc.w $FFFF

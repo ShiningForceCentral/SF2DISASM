@@ -29,22 +29,8 @@ cs_4D9F0:       animEntityFadeInOut $80,$6
 		followEntity $7,$81,$1
 		followEntity $1F,$81,$3
 		csc_end
-ce_4DA46:       dc.w $B
-		dc.w $14
-		dc.w 3
-		dc.b $A
-		dc.b $13
-		dc.b 3
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $B
-		dc.b $17
-		dc.b 3
-		dc.b $9F
-		dc.l eas_Init           
-		dc.b $B
-		dc.b $13
-		dc.b 3
-		dc.b $3E
-		dc.l eas_Init           
+ce_4DA46:       mainEntity 11,20,DOWN
+		entity 10,19,DOWN,7,eas_Init
+		entity 11,23,DOWN,159,eas_Init
+		entity 11,19,DOWN,62,eas_Init
 		dc.w $FFFF

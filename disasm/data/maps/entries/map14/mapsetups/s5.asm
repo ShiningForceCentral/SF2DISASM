@@ -25,25 +25,16 @@ cs_58FA4:       textCursor $8D6
 		setPriority $85,$FFFF
 		fadeInB
 		customActscript $81,$0
-		dc.w 0                  ;   0000 WAIT value $4B0
-		dc.w $4B0
-		dc.w 4                  ;   0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$0
-		dc.w 1
-		dc.w 0
-		dc.w 1                  ;   0001 WAIT UNTIL DESTINATION
-		dc.w 4                  ;   0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$1
-		dc.w 0
-		dc.w 1
-		dc.w 1                  ;   0001 WAIT UNTIL DESTINATION
-		dc.w 0                  ;   0000 WAIT value $258
-		dc.w $258
-		dc.w 4                  ;   0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$FFF9
-		dc.w 0
-		dc.w $FFF9
-		dc.w 1                  ;   0001 WAIT UNTIL DESTINATION
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_wait 1200            ;   
+		ac_moveRel 1,0          ;   
+		ac_waitDest             ;   
+		ac_moveRel 0,1          ;   
+		ac_waitDest             ;   
+		ac_wait 600             ;   
+		ac_moveRel 0,65529      ;   
+		ac_waitDest             ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		nextSingleText $0,$80   ; "Somebody, take that plank{N}from him!{W1}"
 		setFacing $80,RIGHT
 		csWait 30
@@ -96,12 +87,9 @@ cs_58FA4:       textCursor $8D6
 		csWait 60
 		nextSingleText $0,$83   ; "Somebody, help!{W1}"
 		customActscript $83,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $83,$FF,$1,$6
 		endMove $8080
 		setActscript $83,$FF,eas_Init
@@ -207,72 +195,18 @@ cs_59142:       textCursor $8E6
 		setStoryFlag $8         ; Battle 8 unlocked
 		mapSysEvent $48,$1,$1,$3
 		csc_end
-ce_59270:       dc.w $D
-		dc.w $B
-		dc.w 3
-		dc.b $C
-		dc.b $14
-		dc.b 1
-		dc.b 3
-		dc.l eas_Init           
-		dc.b $E
-		dc.b $14
-		dc.b 1
-		dc.b 5
-		dc.l eas_Init           
-		dc.b $E
-		dc.b $15
-		dc.b 1
-		dc.b 1
-		dc.l eas_Init           
-		dc.b $E
-		dc.b $16
-		dc.b 1
-		dc.b 6
-		dc.l eas_Init           
-		dc.b $E
-		dc.b $17
-		dc.b 1
-		dc.b 2
-		dc.l eas_Init           
-		dc.b $E
-		dc.b $18
-		dc.b 1
-		dc.b 4
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $D
-		dc.b 1
-		dc.b $C1
-		dc.l eas_Init           
-		dc.b 9
-		dc.b $D
-		dc.b 2
-		dc.b $C4
-		dc.l eas_Init           
-		dc.b $10
-		dc.b $D
-		dc.b 0
-		dc.b $C2
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $14
-		dc.b 1
-		dc.b $CA
-		dc.l eas_Init           
-		dc.b $C
-		dc.b $B
-		dc.b 0
-		dc.b $B3
-		dc.l eas_Init3          
-		dc.b $D
-		dc.b $B
-		dc.b 3
-		dc.b $B3
-		dc.l eas_Init3          
-		dc.b $E
-		dc.b $B
-		dc.b 2
-		dc.b $B3
-		dc.l eas_Init3          
+ce_59270:       mainEntity 13,11,DOWN
+		entity 12,20,UP,3,eas_Init
+		entity 14,20,UP,5,eas_Init
+		entity 14,21,UP,1,eas_Init
+		entity 14,22,UP,6,eas_Init
+		entity 14,23,UP,2,eas_Init
+		entity 14,24,UP,4,eas_Init
+		entity 13,13,UP,193,eas_Init
+		entity 9,13,LEFT,196,eas_Init
+		entity 16,13,RIGHT,194,eas_Init
+		entity 13,20,UP,202,eas_Init
+		entity 12,11,RIGHT,179,eas_Init3
+		entity 13,11,DOWN,179,eas_Init3
+		entity 14,11,LEFT,179,eas_Init3
 		dc.w $FFFF

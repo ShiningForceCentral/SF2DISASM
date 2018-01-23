@@ -92,12 +92,9 @@ cs_5149A:       textCursor $205
 		setFacing $2,DOWN
 		setFacing $8E,DOWN
 		customActscript $8F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setPos $8F,41,17,UP
 		moveEntity $8F,$FF,$1,$6
 		moreMove $0,$1

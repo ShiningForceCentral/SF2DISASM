@@ -26,14 +26,11 @@ cs_5A30C:       setBlocks 21,6,2,2,7,5
 		setBlocks 21,0,4,4,6,0
 		csc_end
 cs_5A31E:       customActscript $82,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $3
-		dc.w 3
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $3           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		stopEntity $82
 		csc_end
 cs_5A33A:       textCursor $6AF
@@ -41,12 +38,9 @@ cs_5A33A:       textCursor $6AF
 		setActscript $9E,$FF,eas_Init2
 		followEntity $1F,$7,$2
 		customActscript $9E,$FF
-		dc.w $10                ;   0010 SET SPEED X=$0 Y=$0
-		dc.b 0
-		dc.b 0
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 0           ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setEntityDest $9E,8,11
 		nextSingleText $0,$9E   ; "Where is the sick dwarf?{W1}"
 		csWait 5

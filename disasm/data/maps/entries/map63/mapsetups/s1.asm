@@ -6,4 +6,4 @@ ms_map63_Entities:
 		dc.b $19
 		dc.b 3
 		dc.b $1D
-		dc.l eas_Init           
+		dc.l eas_Init

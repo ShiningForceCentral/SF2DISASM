@@ -22,12 +22,9 @@ cs_563B2:       textCursor $50B
 		endMove $8080
 		nextSingleText $0,$81   ; "Hmmm?{W1}"
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$2,$2
 		endMove $8080
 		setFacing $81,DOWN
@@ -37,12 +34,9 @@ cs_563B2:       textCursor $50B
 		nextSingleText $0,$81   ; "You're back again!{N}Mayor!  Mayor!{W1}"
 		setActscript $81,$FF,eas_Init
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setFacing $81,UP
 		moveEntity $81,$FF,$1,$8
 		endMove $8080
@@ -55,12 +49,9 @@ cs_56422:       textCursor $50E
 		setActscript $0,$FF,eas_46172
 		setActscript $7,$FF,eas_46172
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		csWait 30
 		moveEntity $0,$0,$3,$1
 		endMove $8080

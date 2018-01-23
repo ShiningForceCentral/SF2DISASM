@@ -55,37 +55,28 @@ bbcs_28:        textCursor $A65
 		csWait 100
 		setActscript $1F,$FF,eas_Jump
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1F,$0,$3,$2
 		endMove $8080
 		csWait 10
 		stopEntity $0
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
-		dc.b $40
-		dc.b $40
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 16448       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setQuake 2
 		playSound SFX_HIT_2
 		moveEntity $0,$FF,$3,$1
 		endMove $8080
 		setFacing $0,UP
 		customActscript $0,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $2
-		dc.w 2
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $2           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		waitIdle $1F
 		setFacing $1F,RIGHT
 		setQuake 0
@@ -108,42 +99,12 @@ bbcs_28:        textCursor $A65
 		setActscript $7,$0,eas_Jump
 		entityNod $0
 		csc_end
-ce_4C03C:       dc.w 1
-		dc.w 8
-		dc.w 0
-		dc.b 0
-		dc.b 9
-		dc.b 0
-		dc.b 7
-		dc.l eas_Init           
-		dc.b 0
-		dc.b 8
-		dc.b 0
-		dc.b $3E
-		dc.l eas_Init           
-		dc.b $C
-		dc.b $18
-		dc.b 1
-		dc.b $B0
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $D
-		dc.b 2
-		dc.b $54
-		dc.l eas_Init           
-		dc.b $C
-		dc.b $11
-		dc.b 1
-		dc.b $54
-		dc.l eas_Init           
-		dc.b $B
-		dc.b $16
-		dc.b 3
-		dc.b $54
-		dc.l eas_Init           
-		dc.b $B
-		dc.b $19
-		dc.b 0
-		dc.b $54
-		dc.l eas_Init           
+ce_4C03C:       mainEntity 1,8,RIGHT
+		entity 0,9,RIGHT,7,eas_Init
+		entity 0,8,RIGHT,62,eas_Init
+		entity 12,24,UP,176,eas_Init
+		entity 13,13,LEFT,84,eas_Init
+		entity 12,17,UP,84,eas_Init
+		entity 11,22,DOWN,84,eas_Init
+		entity 11,25,RIGHT,84,eas_Init
 		dc.w $FFFF

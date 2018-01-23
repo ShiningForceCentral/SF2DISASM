@@ -5,16 +5,16 @@ OverworldFollowers:
 		incbin "data/overworldfollowers.bin"
 Followers:      incbin "data/followers.bin"
 pt_eas_Followers:
-		dc.l eas_Follower1      
-		dc.l eas_Follower2      
-		dc.l eas_Follower3      
-		dc.l eas_Follower4      
-		dc.l eas_Follower4      
+		dc.l eas_Follower1
+		dc.l eas_Follower2
+		dc.l eas_Follower3
+		dc.l eas_Follower4
+		dc.l eas_Follower4
 pt_eas_WorldmapFollowers:
 		dc.l eas_Follower1      ; when on worldmap
 		dc.l eas_OverworldFollower2
 		dc.l eas_OverworldFollower3
-		dc.l eas_Follower2      
+		dc.l eas_Follower2
 		dc.l eas_OverworldFollower5
 
 ; =============== S U B R O U T I N E =======================================

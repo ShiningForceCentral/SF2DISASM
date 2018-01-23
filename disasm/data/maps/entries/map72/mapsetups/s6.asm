@@ -107,12 +107,9 @@ cs_4FFDA:       textCursor $D0D
 		setActscript $80,$FF,eas_BumpDown
 		setPos $81,27,35,LEFT
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
-		dc.b $50
-		dc.b $50
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 20560       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$1,$2
 		endMove $8080
 		setQuake 3

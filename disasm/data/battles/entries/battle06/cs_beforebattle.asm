@@ -52,27 +52,9 @@ bbcs_06:        textCursor $926
 		nextSingleText $C0,$5   ; "Oops!  That didn't work!{W1}"
 		setStoryFlag $7         ; Battle 7 unlocked
 		csc_end
-ce_49CBA:       dc.w $1E
-		dc.w 9
-		dc.w 3
-		dc.b $1D
-		dc.b 8
-		dc.b 3
-		dc.b 5
-		dc.l eas_Init           
-		dc.b $20
-		dc.b $14
-		dc.b 1
-		dc.b $42
-		dc.l eas_Init           
-		dc.b $24
-		dc.b $D
-		dc.b 2
-		dc.b $42
-		dc.l eas_Init           
-		dc.b $25
-		dc.b $E
-		dc.b 1
-		dc.b $78
-		dc.l eas_Init           
+ce_49CBA:       mainEntity 30,9,DOWN
+		entity 29,8,DOWN,5,eas_Init
+		entity 32,20,UP,66,eas_Init
+		entity 36,13,LEFT,66,eas_Init
+		entity 37,14,UP,120,eas_Init
 		dc.w $FFFF

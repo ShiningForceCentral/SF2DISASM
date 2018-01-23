@@ -14,14 +14,11 @@ abcs_battle34:  textCursor $B5F
 		setPos $1A,8,12,UP
 cs_4D502:       stopEntity $80
 		customActscript $80,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		stopEntity $83
 		setActscript $83,$FF,eas_46172
 		fadeInB
@@ -64,12 +61,9 @@ cs_4D592:       setActscript $1F,$FF,eas_Jump
 		nextSingleText $0,$1F   ; "I have no idea, but it's{N}probably a trap.{W1}"
 		jumpIfFlagClear $4C,cs_4D620; Zynk is a follower
 		customActscript $1A,$FF
-		dc.w $10                ;   0010 SET SPEED X=$18 Y=$18
-		dc.b $18
-		dc.b $18
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 6168        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1A,$FF,$1,$1
 		moreMove $2,$1
 		endMove $8080
@@ -115,32 +109,10 @@ csub_4D694:
 
 	; End of function csub_4D694
 
-ce_4D69E:       dc.w 7
-		dc.w $C
-		dc.w 1
-		dc.b 9
-		dc.b $B
-		dc.b 1
-		dc.b 7
-		dc.l eas_Init           
-		dc.b 7
-		dc.b 9
-		dc.b 3
-		dc.b $9C
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $9F
-		dc.l eas_Init           
-		dc.b 6
-		dc.b $C
-		dc.b 1
-		dc.b $3E
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 2
-		dc.b $AC
-		dc.l eas_Init           
+ce_4D69E:       mainEntity 7,12,UP
+		entity 9,11,UP,7,eas_Init
+		entity 7,9,DOWN,156,eas_Init
+		entity 63,63,DOWN,159,eas_Init
+		entity 6,12,UP,62,eas_Init
+		entity 63,63,LEFT,172,eas_Init
 		dc.w $FFFF

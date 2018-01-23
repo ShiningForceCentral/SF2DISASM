@@ -5,45 +5,25 @@ EndCutscene:    mapLoad 20,19,33
 		loadMapEntities ce_492CC
 		setActscript $0,$FF,eas_Init
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$14 Y=$14
-		dc.b $14
-		dc.b $14
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 5140        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$14 Y=$14
-		dc.b $14
-		dc.b $14
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 5140        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$14 Y=$14
-		dc.b $14
-		dc.b $14
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 5140        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$14 Y=$14
-		dc.b $14
-		dc.b $14
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 5140        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $83,$FF
-		dc.w $10                ;   0010 SET SPEED X=$14 Y=$14
-		dc.b $14
-		dc.b $14
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 5140        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		entitySprite $B,$AA
 		fadeInB
 		csWait 60
@@ -179,54 +159,16 @@ EndCutscene:    mapLoad 20,19,33
 		setActscript $7,$0,eas_Jump
 		fadeOutB
 		csc_end
-ce_492CC:       dc.w $3F
-		dc.w $3F
-		dc.w 3
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $B
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b 2
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $A
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b 3
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $15
-		dc.b $28
-		dc.b 0
-		dc.b $D1
-		dc.l eas_Init           
-		dc.b $15
-		dc.b $27
-		dc.b 0
-		dc.b $CB
-		dc.l eas_Init           
-		dc.b $16
-		dc.b $26
-		dc.b 0
-		dc.b $CD
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $CC
-		dc.l eas_Init           
+ce_492CC:       mainEntity 63,63,DOWN
+		entity 63,63,DOWN,11,eas_Init
+		entity 63,63,DOWN,2,eas_Init
+		entity 63,63,DOWN,10,eas_Init
+		entity 63,63,DOWN,3,eas_Init
+		entity 63,63,DOWN,7,eas_Init
+		entity 21,40,RIGHT,209,eas_Init
+		entity 21,39,RIGHT,203,eas_Init
+		entity 22,38,RIGHT,205,eas_Init
+		entity 63,63,DOWN,204,eas_Init
 		dc.w $FFFF
 dms_01:         faceEntity $86,$0
 		addNewFollower $5
@@ -260,27 +202,18 @@ cs_4934A:       entityFlashWhite $0,$B4
 		startEntity $4
 		hidePortrait
 		csc_end
-eas_493A2:      dc.w $18                ; 0018 SET 1C BIT 7 $FFFF
-		dc.w $FFFF
-		dc.w $19                ; 0019 SET 1C BIT 6 $FFFF
-		dc.w $FFFF
-		dc.w $1A                ; 001A SET 1C BIT 5 $FFFF
-		dc.w $FFFF
-		dc.w $10                ; 0010 SET SPEED X=$20 Y=$20
-		dc.b $20
-		dc.b $20
-		dc.w $11                ; 0011  $0
-		dc.w 0
-		dc.w $12                ; 0012  $FEFF
-		dc.w $FEFF
-		dc.w $13                ; 0013  $FEFF
-		dc.w $FEFF
-		dc.w $40                ; 0040 
-		dc.w 2                  ; 0002 BIG ONE RELATED TO CAMERA
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-		dc.w $40                ; 0040 
-		dc.w 0                  ; 0000 WAIT value $1
-		dc.w 1
+eas_493A2:      ac_set1Cb7 $FFFF
+		ac_set1Cb6 $FFFF
+		ac_set1Cb5 $FFFF
+		ac_setSpeed 8224
+		ac_11 $0
+		ac_12 $FEFF
+		ac_13 $FEFF
+		ac_40
+		ac_02
+		ac_waitDest
+		ac_40
+		ac_wait 1
 word_493CA:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $BA74
 		dc.w (eas_ControlledCharacter-word_493CA) & $FFFF
 		dc.w 4                  ; 0004 SET TEXT INDEX 142

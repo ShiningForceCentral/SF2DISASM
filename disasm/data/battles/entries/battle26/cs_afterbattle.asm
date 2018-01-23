@@ -6,14 +6,11 @@ abcs_battle26:  textCursor $A4D
 		loadMapEntities ce_4BE4A
 		setActscript $0,$FF,eas_Init
 		customActscript $13,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $7,$FF,eas_Init
 		setPos $7,17,14,RIGHT
 		setActscript $1F,$FF,eas_Init
@@ -37,25 +34,19 @@ abcs_battle26:  textCursor $A4D
 		moveEntity $80,$FF,$1,$3
 		endMove $8080
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
-		dc.b $40
-		dc.b $40
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 16448       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $80,$0,eas_4509E
 		csWait 200
 		setActscript $80,$FF,eas_Die
 		setCamDest 13,11
 		customActscript $13,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $0
-		dc.w 0
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $0           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setFacing $13,DOWN
 		entityShakeHead $13
 		nextSingleText $C0,$13  ; "What happened?{W2}"
@@ -100,22 +91,8 @@ abcs_battle26:  textCursor $A4D
 		nextSingleText $C0,$13  ; "Let's go to Pacalon.{W1}"
 		addNewFollower $13
 		csc_end
-ce_4BE4A:       dc.w $13
-		dc.w $10
-		dc.w 1
-		dc.b $11
-		dc.b $E
-		dc.b 3
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $12
-		dc.b $E
-		dc.b 3
-		dc.b $13
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $6A
-		dc.l eas_Init           
+ce_4BE4A:       mainEntity 19,16,UP
+		entity 17,14,DOWN,7,eas_Init
+		entity 18,14,DOWN,19,eas_Init
+		entity 63,63,UP,106,eas_Init
 		dc.w $FFFF

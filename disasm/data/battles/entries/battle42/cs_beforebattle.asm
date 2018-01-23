@@ -16,14 +16,11 @@ bbcs_42:        textCursor $C10
 		setPos $1A,63,62,DOWN
 cs_4EDE8:       stopEntity $81
 		customActscript $81,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		playSound MUSIC_WITCH
 		fadeInFromBlackHalf
 		cameraSpeed $30
@@ -77,27 +74,9 @@ cs_4EDE8:       stopEntity $81
 		csWait 20
 		setQuake 0
 		csc_end
-ce_4EEDC:       dc.w $D
-		dc.w $23
-		dc.w 1
-		dc.b $C
-		dc.b $24
-		dc.b 1
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $24
-		dc.b 1
-		dc.b $1C
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $12
-		dc.b 3
-		dc.b $A4
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $F
-		dc.b 3
-		dc.b $CC
-		dc.l eas_Init           
+ce_4EEDC:       mainEntity 13,35,UP
+		entity 12,36,UP,7,eas_Init
+		entity 13,36,UP,28,eas_Init
+		entity 13,18,DOWN,164,eas_Init
+		entity 13,15,DOWN,204,eas_Init
 		dc.w $FFFF

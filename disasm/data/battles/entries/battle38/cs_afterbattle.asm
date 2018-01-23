@@ -13,14 +13,11 @@ abcs_battle38:  textCursor $BC4
 		setPos $1E,9,24,DOWN
 		stopEntity $88
 		customActscript $88,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		jumpIfFlagClear $4C,cs_4DF00; Zynk is a follower
 		setActscript $1A,$FF,eas_Init
 		setPos $1A,63,62,DOWN
@@ -40,24 +37,18 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		nextSingleText $0,$88   ; "My traps...{W1}"
 		csWait 60
 		customActscript $88,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $0
-		dc.w 0
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $0           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		startEntity $88
 		setFacing $88,UP
 		nextSingleText $0,$88   ; "I'm...at the end of my rope.{N}I...must...escape.{W1}"
 		customActscript $88,$FF
-		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
-		dc.b 8
-		dc.b 8
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2056        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $88,$FF,$0,$1
 		moreMove $1,$1
 		moreMove $2,$1
@@ -75,22 +66,16 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		stopEntity $88
 		setPos $88,8,24,LEFT
 		customActscript $88,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $88,$FF,eas_46172
 		customActscript $88,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setQuake 0
 		moveEntity $88,$FF,$3,$1
 		endMove $8080
@@ -105,14 +90,11 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		entityShiver $88
 		csWait 60
 		customActscript $88,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $0
-		dc.w 0
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $0           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setFacing $88,DOWN
 		csWait 40
 		entityShakeHead $88
@@ -143,12 +125,9 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		csWait 60
 		cameraSpeed $8
 		customActscript $88,$FF
-		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
-		dc.b 8
-		dc.b 8
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2056        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $88,$FF,$1,$1
 		endMove $8080
 		setFacing $7,UP
@@ -176,12 +155,9 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		tintMap
 		nextSingleText $C0,$89  ; "Where are you going, Geshp?{W1}"
 		customActscript $88,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $88,$FF,eas_Jump
 		setActscript $88,$FF,eas_Jump
 		csWait 30
@@ -217,61 +193,37 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		setFacing $88,DOWN
 		setQuake 3
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
-		dc.b $50
-		dc.b $50
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 20560       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
-		dc.b $50
-		dc.b $50
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 20560       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
-		dc.b $50
-		dc.b $50
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 20560       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $83,$FF
-		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
-		dc.b $50
-		dc.b $50
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 20560       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $84,$FF
-		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
-		dc.b $50
-		dc.b $50
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 20560       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $85,$FF
-		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
-		dc.b $50
-		dc.b $50
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 20560       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $86,$FF
-		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
-		dc.b $50
-		dc.b $50
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 20560       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $87,$FF
-		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
-		dc.b $50
-		dc.b $50
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 20560       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		playSound SFX_BOLT_SPELL
 		moveEntity $80,$FF,$3,$3
 		endMove $8080
@@ -336,62 +288,16 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		followEntity $7,$1E,$1
 		followEntity $1F,$1E,$3
 		csc_end
-ce_4E372:       dc.w 8
-		dc.w $17
-		dc.w 3
-		dc.b 5
-		dc.b $19
-		dc.b 0
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 0
-		dc.b $B2
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 2
-		dc.b $B2
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 0
-		dc.b $B2
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 2
-		dc.b $B2
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 0
-		dc.b $B2
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 2
-		dc.b $B2
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 0
-		dc.b $B2
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 2
-		dc.b $B2
-		dc.l eas_Init           
-		dc.b 6
-		dc.b $1B
-		dc.b 3
-		dc.b $9F
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $A2
-		dc.l eas_Init           
+ce_4E372:       mainEntity 8,23,DOWN
+		entity 5,25,RIGHT,7,eas_Init
+		entity 63,63,RIGHT,178,eas_Init
+		entity 63,63,LEFT,178,eas_Init
+		entity 63,63,RIGHT,178,eas_Init
+		entity 63,63,LEFT,178,eas_Init
+		entity 63,63,RIGHT,178,eas_Init
+		entity 63,63,LEFT,178,eas_Init
+		entity 63,63,RIGHT,178,eas_Init
+		entity 63,63,LEFT,178,eas_Init
+		entity 6,27,DOWN,159,eas_Init
+		entity 63,63,DOWN,162,eas_Init
 		dc.w $FFFF

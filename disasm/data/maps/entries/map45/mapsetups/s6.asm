@@ -44,26 +44,17 @@ cs_600CE:       textCursor $823
 		setActscript $0,$FF,eas_46172
 		setActscript $7,$FF,eas_46172
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$4 Y=$4
-		dc.b 4
-		dc.b 4
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 1028        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$4 Y=$4
-		dc.b 4
-		dc.b 4
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 1028        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $7,$FF
-		dc.w $10                ;   0010 SET SPEED X=$4 Y=$4
-		dc.b 4
-		dc.b 4
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 1028        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1F,$0,$3,$3
 		endMove $8080
 		moveEntity $0,$0,$C,$14

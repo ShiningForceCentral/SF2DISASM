@@ -45,12 +45,9 @@ cs_5DA7A:       setCameraEntity $83
 		setFacing $0,RIGHT
 		csWait 60
 		customActscript $83,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $83,$FF,$0,$2
 		endMove $8080
 		entityShakeHead $83
@@ -58,12 +55,9 @@ cs_5DA7A:       setCameraEntity $83
 		csWait 120
 		entityShiver $83
 		customActscript $83,$FF
-		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
-		dc.b 8
-		dc.b 8
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2056        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $83,$FF,$0,$1
 		endMove $8080
 		entityShiver $83

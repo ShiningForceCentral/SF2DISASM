@@ -8,14 +8,11 @@ abcs_battle13:  textCursor $9BF
 		setActscript $0,$FF,eas_Init
 		setPos $7,15,13,RIGHT
 		customActscript $A,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		playSound MUSIC_TOWN
 		fadeInB
 		csWait 50
@@ -40,12 +37,6 @@ abcs_battle13:  textCursor $9BF
 		setF $4B                ; Luke is a follower
 		mapSysEvent $D,$10,$C,$3
 		csc_end
-ce_4AD96:       dc.w $10
-		dc.w $C
-		dc.w 3
-		dc.b $10
-		dc.b $D
-		dc.b 3
-		dc.b $A
-		dc.l eas_Init           
+ce_4AD96:       mainEntity 16,12,DOWN
+		entity 16,13,DOWN,10,eas_Init
 		dc.w $FFFF

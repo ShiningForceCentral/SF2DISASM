@@ -28,62 +28,39 @@ byte_5E27C:     setActscript $0,$FF,eas_5E2C4
 		setActscript $1A,$FF,eas_5E2C4
 cs_5E2BC:       mapSysEvent $25,$1D,$8,$2
 		csc_end
-eas_5E2C4:      dc.w $1A                ; 001A SET 1C BIT 5 $0
-		dc.w 0
-		dc.w 5                  ; 0005 MOVE TO ABSOLUTE DEST X=$7 Y=$7
-		dc.w 7
-		dc.w 7
-		dc.w 0                  ; 0000 WAIT value $6
-		dc.w 6
-		dc.w $1F                ; 001F SET 1D BIT 3 $FFFF
-		dc.w $FFFF
-		dc.w $B                 ; 000B SET SPRITE SIZE $16
-		dc.w $16
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $14
-		dc.w $14
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $12
-		dc.w $12
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $10
-		dc.w $10
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $E
-		dc.w $E
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $C
-		dc.w $C
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-		dc.w $17                ; 0017 SET ENTITY SPRITE $3C
-		dc.w $3C
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1
-		dc.w 1
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
+eas_5E2C4:      ac_set1Cb5 $0
+		ac_moveAbs 7,7
+		ac_wait 6
+		ac_set1Db3 $FFFF
+		ac_setSize 22
+		ac_updateSprite
+		ac_wait 1
+		ac_setSize 20
+		ac_updateSprite
+		ac_wait 1
+		ac_setSize 18
+		ac_updateSprite
+		ac_wait 1
+		ac_setSize 16
+		ac_updateSprite
+		ac_wait 1
+		ac_setSize 14
+		ac_updateSprite
+		ac_wait 1
+		ac_setSize 12
+		ac_updateSprite
+		ac_waitDest
+		ac_setSprite 60
+		ac_updateSprite
+		ac_wait 1
+		ac_jump eas_Idle
 byte_5E320:     mapLoad 75,8,14
 		loadMapEntities ce_5E33E
 		setActscript $0,$FF,eas_Init
 		playSound MUSIC_MAIN_THEME
 		fadeInB
 		csc_end
-ce_5E33E:       dc.b 0
-		dc.b $C
-		dc.w $13
-		dc.b 0
-		dc.b 3
+ce_5E33E:       mainEntity 12,19,DOWN
 		dc.w $FFFF
 cs_5E346:       textCursor $D2B
 		setActscript $0,$FF,eas_Init

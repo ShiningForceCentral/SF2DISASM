@@ -31,12 +31,9 @@ bbcs_26:        textCursor $A24
 		setActscript $85,$FF,eas_Jump
 		nextSingleText $C0,$85  ; "You've gone too far!{W1}"
 		customActscript $85,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $85,$0,$1,$3
 		endMove $8080
 		csWait 5
@@ -49,22 +46,16 @@ bbcs_26:        textCursor $A24
 		setFacing $85,DOWN
 		csWait 20
 		customActscript $83,$FF
-		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
-		dc.b $40
-		dc.b $40
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 16448       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $83,$0,$2,$1
 		endMove $8080
 		csWait 3
 		customActscript $85,$FF
-		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
-		dc.b $40
-		dc.b $40
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 16448       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setQuake 2
 		setActscript $85,$FF,eas_JumpLeft
 		setQuake 0
@@ -90,31 +81,22 @@ bbcs_26:        textCursor $A24
 		nextSingleText $C0,$13  ; "No, no!{W1}"
 		setPos $81,13,18,RIGHT
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$50 Y=$50
-		dc.b $50
-		dc.b $50
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 20560       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $86,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $86,$0,$3,$2
 		endMove $8080
 		moveEntity $81,$0,$0,$4
 		endMove $8080
 		csWait 20
 		customActscript $86,$FF
-		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
-		dc.b $40
-		dc.b $40
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 16448       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setQuake 3
 		setActscript $86,$FF,eas_JumpRight
 		setQuake 0
@@ -149,22 +131,16 @@ bbcs_26:        textCursor $A24
 		nextSingleText $0,$80   ; "Ha, ha!  Welcome our new{N}leader!{W1}"
 		stopEntity $13
 		customActscript $13,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		nextSingleText $C0,$1F  ; "Stop!!!{W1}"
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$20 Y=$20
-		dc.b $20
-		dc.b $20
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 8224        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $81,$0,eas_Jump
 		setActscript $80,$FF,eas_Jump
 		setCamDest 13,15
@@ -185,12 +161,9 @@ bbcs_26:        textCursor $A24
 		nextSingleText $0,$80   ; "But, that's on the other....{W1}"
 		setActscript $80,$FF,eas_46172
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$0,$2
 		endMove $8080
 		nextSingleText $0,$80   ; "I'd better leave...{W2}"
@@ -200,52 +173,14 @@ bbcs_26:        textCursor $A24
 		setActscript $81,$0,eas_Jump
 		animEntityFadeInOut $80,$6
 		csc_end
-ce_4BC5A:       dc.w 7
-		dc.w $19
-		dc.w 0
-		dc.b 6
-		dc.b $1A
-		dc.b 0
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $12
-		dc.b $E
-		dc.b 1
-		dc.b $13
-		dc.l eas_Init           
-		dc.b $12
-		dc.b $B
-		dc.b 3
-		dc.b $9F
-		dc.l eas_Init           
-		dc.b $11
-		dc.b $B
-		dc.b 3
-		dc.b $6D
-		dc.l eas_Init           
-		dc.b $13
-		dc.b $B
-		dc.b 3
-		dc.b $91
-		dc.l eas_Init           
-		dc.b $14
-		dc.b $A
-		dc.b 3
-		dc.b $53
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $6A
-		dc.l eas_Init           
-		dc.b $11
-		dc.b $F
-		dc.b 1
-		dc.b $E9
-		dc.l eas_Init           
-		dc.b $13
-		dc.b $F
-		dc.b 1
-		dc.b $E9
-		dc.l eas_Init           
+ce_4BC5A:       mainEntity 7,25,RIGHT
+		entity 6,26,RIGHT,7,eas_Init
+		entity 18,14,UP,19,eas_Init
+		entity 18,11,DOWN,159,eas_Init
+		entity 17,11,DOWN,109,eas_Init
+		entity 19,11,DOWN,145,eas_Init
+		entity 20,10,DOWN,83,eas_Init
+		entity 63,63,DOWN,106,eas_Init
+		entity 17,15,UP,233,eas_Init
+		entity 19,15,UP,233,eas_Init
 		dc.w $FFFF

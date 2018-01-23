@@ -110,12 +110,9 @@ cs_53176:       setCameraEntity $FFFF
 		nextSingleText $0,$2    ; "We...we are...{W1}"
 		csWait 20
 		customActscript $8A,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $8A,$FF,$2,$1
 		endMove $8080
 		nextText $80,$8A        ; "He just fainted because{N}he was exhausted by the{N}two battles.{W2}"
@@ -159,12 +156,9 @@ cs_53176:       setCameraEntity $FFFF
 		nextText $0,$8C         ; "Oh, I'm too late.{W2}"
 		nextSingleText $0,$8C   ; "Astral came back to his{N}senses just now.{W1}"
 		customActscript $8A,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $8A,$FF,$1,$1
 		endMove $8080
 		nextSingleText $80,$8A  ; "That's great!{N}Did you talk to him?{W1}"

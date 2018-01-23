@@ -73,17 +73,7 @@ abcs_battle01:  textCursor $901
 		hideEntity $81
 		csWait 40
 		csc_end
-ce_497F6:       dc.w 8
-		dc.w 6
-		dc.w 1
-		dc.b 7
-		dc.b 4
-		dc.b 3
-		dc.b $72
-		dc.l eas_Init           
-		dc.b 7
-		dc.b 6
-		dc.b 0
-		dc.b $D1
-		dc.l eas_Init           
+ce_497F6:       mainEntity 8,6,UP
+		entity 7,4,DOWN,114,eas_Init
+		entity 7,6,RIGHT,209,eas_Init
 		dc.w $FFFF

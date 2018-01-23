@@ -120,89 +120,23 @@ cs_55832:       textCursor $50A
 		setFacing $87,DOWN
 		reloadEntities ms_map7_Entities
 		csc_end
-ce_559AE:       dc.w $B
-		dc.w 7
-		dc.w 1
-		dc.b $C
-		dc.b 5
-		dc.b 3
-		dc.b $CD
-		dc.l eas_Init           
-		dc.b $B
-		dc.b 4
-		dc.b 3
-		dc.b $CB
-		dc.l eas_Init           
-		dc.b $A
-		dc.b 7
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init           
-		dc.b $A
-		dc.b 8
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init           
-		dc.b $A
-		dc.b 9
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init           
-		dc.b $A
-		dc.b $A
-		dc.b 1
-		dc.b $CF
-		dc.l eas_Init           
-		dc.b $C
-		dc.b 8
-		dc.b 1
-		dc.b $CF
-		dc.l eas_Init           
-		dc.b $C
-		dc.b 9
-		dc.b 1
-		dc.b $CF
-		dc.l eas_Init           
-		dc.b $C
-		dc.b $A
-		dc.b 1
-		dc.b $CF
-		dc.l eas_Init           
-		dc.b 8
-		dc.b 7
-		dc.b 0
-		dc.b $D0
-		dc.l eas_Init           
-		dc.b $E
-		dc.b 7
-		dc.b 2
-		dc.b $D0
-		dc.l eas_Init           
-		dc.b $A
-		dc.b 5
-		dc.b 3
-		dc.b $D1
-		dc.l eas_Init           
-		dc.b $C
-		dc.b 7
-		dc.b 1
-		dc.b 3
-		dc.l eas_Init           
-		dc.b $B
-		dc.b 8
-		dc.b 1
-		dc.b 1
-		dc.l eas_Init           
-		dc.b $B
-		dc.b 9
-		dc.b 1
-		dc.b 4
-		dc.l eas_Init           
-		dc.b $B
-		dc.b $A
-		dc.b 1
-		dc.b 2
-		dc.l eas_Init           
+ce_559AE:       mainEntity 11,7,UP
+		entity 12,5,DOWN,205,eas_Init
+		entity 11,4,DOWN,203,eas_Init
+		entity 10,7,UP,206,eas_Init
+		entity 10,8,UP,206,eas_Init
+		entity 10,9,UP,206,eas_Init
+		entity 10,10,UP,207,eas_Init
+		entity 12,8,UP,207,eas_Init
+		entity 12,9,UP,207,eas_Init
+		entity 12,10,UP,207,eas_Init
+		entity 8,7,RIGHT,208,eas_Init
+		entity 14,7,LEFT,208,eas_Init
+		entity 10,5,DOWN,209,eas_Init
+		entity 12,7,UP,3,eas_Init
+		entity 11,8,UP,1,eas_Init
+		entity 11,9,UP,4,eas_Init
+		entity 11,10,UP,2,eas_Init
 		dc.w $FFFF
 cs_55A36:       textCursor $4AE
 		setCamDest 6,2
@@ -331,26 +265,17 @@ cs_55BEE:       textCursor $4E1
 		nextSingleText $0,$80   ; "So Princess Elis must be...{W1}"
 		nextSingleText $0,$7    ; "She's alive.{W1}"
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $8B,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setFacing $80,DOWN
 		stopEntity $81
 		stopEntity $8B
@@ -367,12 +292,9 @@ cs_55BEE:       textCursor $4E1
 		startEntity $8B
 		startEntity $80
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$38 Y=$38
-		dc.b $38
-		dc.b $38
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 14392       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$3,$2
 		moreMove $2,$1
 		moreMove $3,$1
@@ -383,26 +305,17 @@ cs_55BEE:       textCursor $4E1
 		nextSingleText $0,$8B   ; "Is it true?{N}Is it true?!{W1}"
 		nextSingleText $0,$7    ; "Yes, it is.{W1}"
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$20 Y=$20
-		dc.b $20
-		dc.b $20
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 8224        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $8B,$FF
-		dc.w $10                ;   0010 SET SPEED X=$20 Y=$20
-		dc.b $20
-		dc.b $20
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 8224        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$20 Y=$20
-		dc.b $20
-		dc.b $20
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 8224        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$1,$1
 		moreMove $0,$1
 		moreMove $1,$2
@@ -410,12 +323,9 @@ cs_55BEE:       textCursor $4E1
 		setFacing $81,DOWN
 		executeSubroutine csub_55EF4
 		customActscript $7,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $7,$FF,$1,$1
 		endMove $8080
 		entityNod $0
@@ -473,12 +383,9 @@ cs_55BEE:       textCursor $4E1
 		nextSingleText $0,$8B   ; "What should we do now?{W1}"
 		nextSingleText $C0,$81  ; "Easy, we have to defeat{N}Zeon and save Elis!{W1}"
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$2,$1
 		endMove $8080
 		setFacing $80,UP

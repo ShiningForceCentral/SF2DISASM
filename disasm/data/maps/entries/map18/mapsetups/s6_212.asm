@@ -48,12 +48,9 @@ cs_612BE:       textCursor $E61
 		nextSingleText $80,$82  ; "This is your last chance.{N}Kill {LEADER} this time,{N}or I'll kill you!{W1}"
 		setActscript $80,$FF,eas_46172
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
-		dc.b 8
-		dc.b 8
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2056        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
 		entityShiver $80
@@ -78,12 +75,9 @@ cs_612BE:       textCursor $E61
 		hideEntity $83
 		csWait 40
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$1,$2
 		endMove $8080
 		entityNod $81
@@ -97,12 +91,9 @@ cs_612BE:       textCursor $E61
 		entityShiver $81
 		nextText $0,$81         ; "You want me to kill{N}{LEADER}?{W2}"
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
-		dc.b 8
-		dc.b 8
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2056        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		csWait 20
 		moveEntity $81,$FF,$3,$1
 		endMove $8080

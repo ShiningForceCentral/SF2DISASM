@@ -70,13 +70,9 @@ byte_5C4EE:     textCursor $575
 		endMove $8080
 		csWait 40
 		customActscript $83,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $83,$FF,$3,$2
 		moreMove $2,$1
 		endMove $8080

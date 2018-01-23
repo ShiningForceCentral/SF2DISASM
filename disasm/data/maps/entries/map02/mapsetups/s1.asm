@@ -14,22 +14,22 @@ ms_map2_Entities:
 		dc.b $1A
 		dc.b 3
 		dc.b $E9
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b 8
 		dc.b $15
 		dc.b 0
 		dc.b $EA
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $17
 		dc.b 4
 		dc.b 1
 		dc.b $E9
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $10
 		dc.b $17
 		dc.b 3
 		dc.b $EA
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $22
 		dc.b 7
 		dc.b 3
@@ -50,15 +50,15 @@ ms_map2_Entities:
 		dc.b 8
 		dc.b 3
 		dc.b $C1
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $F
 		dc.b 5
 		dc.b 3
 		dc.b $C1
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $29
 		dc.b 8
 		dc.b 3
 		dc.b $C0
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.w $FFFF

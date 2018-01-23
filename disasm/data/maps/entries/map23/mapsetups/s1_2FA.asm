@@ -22,10 +22,10 @@ ms_map23_flag2FA_Entities:
 		dc.b $B
 		dc.b 1
 		dc.b $C6
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $3D
 		dc.b 3
 		dc.b 3
 		dc.b $C0
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.w $FFFF

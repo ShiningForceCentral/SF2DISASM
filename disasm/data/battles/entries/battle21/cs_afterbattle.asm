@@ -12,12 +12,9 @@ abcs_battle21:  textCursor $A17
 		setPos $1E,11,22,LEFT
 		fadeInB
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$1C Y=$1C
-		dc.b $1C
-		dc.b $1C
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 7196        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		csWait 5
 		setActscript $1F,$0,eas_461B6
 		csWait 120
@@ -44,12 +41,6 @@ abcs_battle21:  textCursor $A17
 		followEntity $1F,$1E,$3
 		mapSysEvent $43,$1A,$17,$3
 		csc_end
-ce_4B948:       dc.w $A
-		dc.w $16
-		dc.w 2
-		dc.b $B
-		dc.b $17
-		dc.b 2
-		dc.b 7
-		dc.l eas_Init           
+ce_4B948:       mainEntity 10,22,LEFT
+		entity 11,23,LEFT,7,eas_Init
 		dc.w $FFFF

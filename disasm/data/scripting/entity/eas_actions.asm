@@ -1,848 +1,457 @@
 
 ; ASM FILE data\scripting\entity\eas_actions.asm :
 ; 0x45E44..0x46506 : Entity scripts for cutscene actions
-eas_Jump:       dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$FFFF
-		dc.w 0
-		dc.w $FFFF
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$1
-		dc.w 0
-		dc.w 1
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$0
-		dc.w 0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $FFFF
-		dc.w $FFFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_JumpLeft:   dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$FFFF
-		dc.w $FFFF
-		dc.w $FFFF
-		dc.w 0                  ; 0000 WAIT value $6
-		dc.w 6
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$1
-		dc.w $FFFF
-		dc.w 1
-		dc.w 0                  ; 0000 WAIT value $6
-		dc.w 6
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$0
-		dc.w 0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $FFFF
-		dc.w $FFFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_JumpRight:  dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$FFFF
-		dc.w 1
-		dc.w $FFFF
-		dc.w 0                  ; 0000 WAIT value $6
-		dc.w 6
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$1
-		dc.w 1
-		dc.w 1
-		dc.w 0                  ; 0000 WAIT value $6
-		dc.w 6
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$0
-		dc.w 0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $FFFF
-		dc.w $FFFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_BumpRight:  dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$0
-		dc.w 1
-		dc.w 0
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$0
-		dc.w $FFFF
-		dc.w 0
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$0
-		dc.w 0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $FFFF
-		dc.w $FFFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_BumpLeft:   dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$0
-		dc.w $FFFF
-		dc.w 0
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$0
-		dc.w 1
-		dc.w 0
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$0
-		dc.w 0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $FFFF
-		dc.w $FFFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_BumpUp:     dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$FFFF
-		dc.w 0
-		dc.w $FFFF
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$1
-		dc.w 0
-		dc.w 1
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$0
-		dc.w 0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $FFFF
-		dc.w $FFFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_BumpDown:   dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$1
-		dc.w 0
-		dc.w 1
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$FFFF
-		dc.w 0
-		dc.w $FFFF
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$0
-		dc.w 0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $FFFF
-		dc.w $FFFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $14                ; 0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ; 001B SET FLIPPING $0
-		dc.w 0
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
+eas_Jump:       ac_autoFacing $0
+		ac_moveRel 0,65535
+		ac_wait 5
+		ac_moveRel 0,1
+		ac_wait 5
+		ac_moveRel 0,0
+		ac_autoFacing $FFFF
+		ac_jump eas_Idle
+eas_JumpLeft:   ac_autoFacing $0
+		ac_moveRel 65535,65535
+		ac_wait 6
+		ac_moveRel 65535,1
+		ac_wait 6
+		ac_moveRel 0,0
+		ac_autoFacing $FFFF
+		ac_jump eas_Idle
+eas_JumpRight:  ac_autoFacing $0
+		ac_moveRel 1,65535
+		ac_wait 6
+		ac_moveRel 1,1
+		ac_wait 6
+		ac_moveRel 0,0
+		ac_autoFacing $FFFF
+		ac_jump eas_Idle
+eas_BumpRight:  ac_autoFacing $0
+		ac_moveRel 1,0
+		ac_wait 5
+		ac_moveRel 65535,0
+		ac_wait 5
+		ac_moveRel 0,0
+		ac_autoFacing $FFFF
+		ac_jump eas_Idle
+eas_BumpLeft:   ac_autoFacing $0
+		ac_moveRel 65535,0
+		ac_wait 5
+		ac_moveRel 1,0
+		ac_wait 5
+		ac_moveRel 0,0
+		ac_autoFacing $FFFF
+		ac_jump eas_Idle
+eas_BumpUp:     ac_autoFacing $0
+		ac_moveRel 0,65535
+		ac_wait 5
+		ac_moveRel 0,1
+		ac_wait 5
+		ac_moveRel 0,0
+		ac_autoFacing $FFFF
+		ac_jump eas_Idle
+eas_BumpDown:   ac_autoFacing $0
+		ac_moveRel 0,1
+		ac_wait 5
+		ac_moveRel 0,65535
+		ac_wait 5
+		ac_moveRel 0,0
+		ac_autoFacing $FFFF
+		ac_jump eas_Idle
+		ac_setAnimCounter $0
+		ac_setFlip $0
+		ac_updateSprite
+		ac_jump eas_Idle
 eas_LyingLeftBis:
-		dc.w $14                ; 0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ; 001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_45F7C:      dc.w $14                ; 0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ; 001B SET FLIPPING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
+		ac_setAnimCounter $0
+		ac_setFlip $1
+		ac_updateSprite
+		ac_jump eas_Idle
+eas_45F7C:      ac_setAnimCounter $0
+		ac_setFlip $2
+		ac_updateSprite
+		ac_jump eas_Idle
 eas_LyingRightBis:
-		dc.w $14                ; 0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ; 001B SET FLIPPING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_45F9C:      dc.w $20                ; 0020 SET ENTITY IN WATER $FFFF
-		dc.w $FFFF
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_Transparent:dc.w $1C                ; 001C SET TRANSPARENCY $FFFF
-		dc.w $FFFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_AnimSpeedx2:dc.w $1E                ; 001E SET ANIM SPEED X2 $FFFF
-		dc.w $FFFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_RotateRight:dc.w $14                ; 0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
+		ac_setAnimCounter $0
+		ac_setFlip $3
+		ac_updateSprite
+		ac_jump eas_Idle
+eas_45F9C:      ac_inWater $FFFF
+		ac_updateSprite
+		ac_jump eas_Idle
+eas_Transparent:ac_setTransparency $FFFF
+		ac_jump eas_Idle
+eas_AnimSpeedx2:ac_setAnimSpeedX2 $FFFF
+		ac_jump eas_Idle
+eas_RotateRight:ac_setAnimCounter $0
+		ac_autoFacing $0
+		ac_setFacing LEFT
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing UP
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing RIGHT
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing DOWN
+		ac_updateSprite
+		ac_wait 5
 word_45FEC:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFD0
 		dc.w (eas_RotateRight-word_45FEC) & $FFFF
 eas_RotateRightHighSpeed:
-		dc.w $14                ; 0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1
-		dc.w 1
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1
-		dc.w 1
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1
-		dc.w 1
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1
-		dc.w 1
+		ac_setAnimCounter $0
+		ac_autoFacing $0
+		ac_setFacing LEFT
+		ac_updateSprite
+		ac_wait 1
+		ac_setFacing UP
+		ac_updateSprite
+		ac_wait 1
+		ac_setFacing RIGHT
+		ac_updateSprite
+		ac_wait 1
+		ac_setFacing DOWN
+		ac_updateSprite
+		ac_wait 1
 word_46020:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFD0
 		dc.w (eas_RotateRightHighSpeed-word_46020) & $FFFF
-eas_Die:        dc.w $14                ; 0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3
-		dc.w 3
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3
-		dc.w 3
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3
-		dc.w 3
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3
-		dc.w 3
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3
-		dc.w 3
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3
-		dc.w 3
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3
-		dc.w 3
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3
-		dc.w 3
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3
-		dc.w 3
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3
-		dc.w 3
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3
-		dc.w 3
-		dc.w $23                ; 0023 SEND SOUND COMMAND SFX_BATTLEFIELD_DEATH
-		dc.w $74
-		dc.w $17                ; 0017 SET ENTITY SPRITE $3F
-		dc.w $3F
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $8
-		dc.w 8
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $8
-		dc.w 8
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $8
-		dc.w 8
-		dc.w $C                 ; 000C SET POSITION X=$3F Y=$3F
-		dc.w $3F
-		dc.w $3F
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_Init:       dc.w $11                ; 0011  $0
-		dc.w 0
-		dc.w $10                ; 0010 SET SPEED X=$20 Y=$20
-		dc.b $20
-		dc.b $20
-		dc.w $12                ; 0012  $0
-		dc.w 0
-		dc.w $13                ; 0013  $0
-		dc.w 0
-		dc.w $18                ; 0018 SET 1C BIT 7 $FFFF
-		dc.w $FFFF
-		dc.w $1A                ; 001A SET 1C BIT 5 $0
-		dc.w 0
-		dc.w $19                ; 0019 SET 1C BIT 6 $0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $FFFF
-		dc.w $FFFF
-		dc.w $1B                ; 001B SET FLIPPING $0
-		dc.w 0
-		dc.w $20                ; 0020 SET ENTITY IN WATER $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $18
-		dc.w $18
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_Init2:      dc.w $10                ; 0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $11                ; 0011  $101
-		dc.w $101
-		dc.w $12                ; 0012  $FEFF
-		dc.w $FEFF
-		dc.w $13                ; 0013  $FEFF
-		dc.w $FEFF
-		dc.w $18                ; 0018 SET 1C BIT 7 $FFFF
-		dc.w $FFFF
-		dc.w $1A                ; 001A SET 1C BIT 5 $0
-		dc.w 0
-		dc.w $19                ; 0019 SET 1C BIT 6 $0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $FFFF
-		dc.w $FFFF
-		dc.w $1B                ; 001B SET FLIPPING $0
-		dc.w 0
-		dc.w $20                ; 0020 SET ENTITY IN WATER $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $18
-		dc.w $18
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_Init3:      dc.w $11                ; 0011  $0
-		dc.w 0
-		dc.w $10                ; 0010 SET SPEED X=$20 Y=$20
-		dc.b $20
-		dc.b $20
-		dc.w $12                ; 0012  $0
-		dc.w 0
-		dc.w $13                ; 0013  $0
-		dc.w 0
-		dc.w $18                ; 0018 SET 1C BIT 7 $FFFF
-		dc.w $FFFF
-		dc.w $1A                ; 001A SET 1C BIT 5 $0
-		dc.w 0
-		dc.w $19                ; 0019 SET 1C BIT 6 $0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $FFFF
-		dc.w $FFFF
-		dc.w $1B                ; 001B SET FLIPPING $0
-		dc.w 0
-		dc.w $20                ; 0020 SET ENTITY IN WATER $0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w $14                ; 0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $18
-		dc.w $18
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_46172:      dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $11                ; 0011  $101
-		dc.w $101
-		dc.w $12                ; 0012  $FEFF
-		dc.w $FEFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_4618A:      dc.w $11                ; 0011  $101
-		dc.w $101
-		dc.w $13                ; 0013  $FEFF
-		dc.w $FEFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_46198:      dc.w $11                ; 0011  $101
-		dc.w $101
-		dc.w $12                ; 0012  $FEFF
-		dc.w $FEFF
-		dc.w $13                ; 0013  $FEFF
-		dc.w $FEFF
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_461AA:      dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$0
-		dc.w 0
-		dc.w 0
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_461B6:      dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_461E4:      dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_46212:      dc.w $10                ; 0010 SET SPEED X=$0 Y=$0
-		dc.b 0
-		dc.b 0
-		dc.w $11                ; 0011  $101
-		dc.w $101
-		dc.w $12                ; 0012  $FEFF
-		dc.w $FEFF
-		dc.w $13                ; 0013  $FEFF
-		dc.w $FEFF
-		dc.w $18                ; 0018 SET 1C BIT 7 $FFFF
-		dc.w $FFFF
-		dc.w $1A                ; 001A SET 1C BIT 5 $0
-		dc.w 0
-		dc.w $19                ; 0019 SET 1C BIT 6 $0
-		dc.w 0
-word_4622E:     dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3C
-		dc.w $3C
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $3C
-		dc.w $3C
+eas_Die:        ac_setAnimCounter $0
+		ac_setFacing LEFT
+		ac_updateSprite
+		ac_wait 3
+		ac_setFacing UP
+		ac_updateSprite
+		ac_wait 3
+		ac_setFacing RIGHT
+		ac_updateSprite
+		ac_wait 3
+		ac_setFacing DOWN
+		ac_updateSprite
+		ac_setFacing LEFT
+		ac_updateSprite
+		ac_wait 3
+		ac_setFacing UP
+		ac_updateSprite
+		ac_wait 3
+		ac_setFacing RIGHT
+		ac_updateSprite
+		ac_wait 3
+		ac_setFacing DOWN
+		ac_updateSprite
+		ac_wait 3
+		ac_setFacing LEFT
+		ac_updateSprite
+		ac_wait 3
+		ac_setFacing UP
+		ac_updateSprite
+		ac_wait 3
+		ac_setFacing RIGHT
+		ac_updateSprite
+		ac_wait 3
+		ac_setFacing DOWN
+		ac_updateSprite
+		ac_wait 3
+		ac_soundCommand $74
+		ac_setSprite 63
+		ac_setFacing UP
+		ac_updateSprite
+		ac_wait 8
+		ac_setFacing LEFT
+		ac_updateSprite
+		ac_wait 8
+		ac_setFacing DOWN
+		ac_updateSprite
+		ac_wait 8
+		ac_setPos 63,63
+		ac_jump eas_Idle
+eas_Init:       ac_11 $0
+		ac_setSpeed 8224
+		ac_12 $0
+		ac_13 $0
+		ac_set1Cb7 $FFFF
+		ac_set1Cb5 $0
+		ac_set1Cb6 $0
+		ac_autoFacing $FFFF
+		ac_setFlip $0
+		ac_inWater $0
+		ac_setSize 24
+		ac_updateSprite
+		ac_jump eas_Idle
+eas_Init2:      ac_setSpeed 4112
+		ac_11 $101
+		ac_12 $FEFF
+		ac_13 $FEFF
+		ac_set1Cb7 $FFFF
+		ac_set1Cb5 $0
+		ac_set1Cb6 $0
+		ac_autoFacing $FFFF
+		ac_setFlip $0
+		ac_inWater $0
+		ac_setSize 24
+		ac_updateSprite
+		ac_jump eas_Idle
+eas_Init3:      ac_11 $0
+		ac_setSpeed 8224
+		ac_12 $0
+		ac_13 $0
+		ac_set1Cb7 $FFFF
+		ac_set1Cb5 $0
+		ac_set1Cb6 $0
+		ac_autoFacing $FFFF
+		ac_setFlip $0
+		ac_inWater $0
+		ac_autoFacing $0
+		ac_setAnimCounter $0
+		ac_setSize 24
+		ac_updateSprite
+		ac_jump eas_Idle
+eas_46172:      ac_autoFacing $0
+		ac_jump eas_Idle
+		ac_11 $101
+		ac_12 $FEFF
+		ac_jump eas_Idle
+eas_4618A:      ac_11 $101
+		ac_13 $FEFF
+		ac_jump eas_Idle
+eas_46198:      ac_11 $101
+		ac_12 $FEFF
+		ac_13 $FEFF
+		ac_jump eas_Idle
+eas_461AA:      ac_moveRel 0,0
+		ac_jump eas_Idle
+eas_461B6:      ac_setFacing RIGHT
+		ac_updateSprite
+		ac_wait 30
+		ac_setFacing LEFT
+		ac_updateSprite
+		ac_wait 30
+		ac_setFacing RIGHT
+		ac_updateSprite
+		ac_wait 30
+		ac_setFacing LEFT
+		ac_updateSprite
+		ac_wait 30
+		ac_jump eas_Idle
+eas_461E4:      ac_setFacing UP
+		ac_updateSprite
+		ac_wait 30
+		ac_setFacing DOWN
+		ac_updateSprite
+		ac_wait 30
+		ac_setFacing UP
+		ac_updateSprite
+		ac_wait 30
+		ac_setFacing DOWN
+		ac_updateSprite
+		ac_wait 30
+		ac_jump eas_Idle
+eas_46212:      ac_setSpeed 0
+		ac_11 $101
+		ac_12 $FEFF
+		ac_13 $FEFF
+		ac_set1Cb7 $FFFF
+		ac_set1Cb5 $0
+		ac_set1Cb6 $0
+byte_4622E:     ac_setFacing RIGHT
+		ac_updateSprite
+		ac_wait 60
+		ac_setFacing LEFT
+		ac_updateSprite
+		ac_wait 60
 word_46242:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFEC
-		dc.w (word_4622E-word_46242) & $FFFF
-eas_46246:      dc.w $10                ; 0010 SET SPEED X=$0 Y=$0
-		dc.b 0
-		dc.b 0
-		dc.w $11                ; 0011  $101
-		dc.w $101
-		dc.w $12                ; 0012  $FEFF
-		dc.w $FEFF
-		dc.w $13                ; 0013  $FEFF
-		dc.w $FEFF
-		dc.w $18                ; 0018 SET 1C BIT 7 $FFFF
-		dc.w $FFFF
-		dc.w $1A                ; 001A SET 1C BIT 5 $FFFF
-		dc.w $FFFF
-		dc.w $19                ; 0019 SET 1C BIT 6 $0
-		dc.w 0
+		dc.w (byte_4622E-word_46242) & $FFFF
+eas_46246:      ac_setSpeed 0
+		ac_11 $101
+		ac_12 $FEFF
+		ac_13 $FEFF
+		ac_set1Cb7 $FFFF
+		ac_set1Cb5 $FFFF
+		ac_set1Cb6 $0
 word_46262:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $4C
-		dc.w word_462AE-word_46262
-eas_46266:      dc.w $10                ; 0010 SET SPEED X=$0 Y=$0
-		dc.b 0
-		dc.b 0
-		dc.w $11                ; 0011  $101
-		dc.w $101
-		dc.w $12                ; 0012  $FEFF
-		dc.w $FEFF
-		dc.w $13                ; 0013  $FEFF
-		dc.w $FEFF
-		dc.w $18                ; 0018 SET 1C BIT 7 $FFFF
-		dc.w $FFFF
-		dc.w $1A                ; 001A SET 1C BIT 5 $FFFF
-		dc.w $FFFF
-		dc.w $19                ; 0019 SET 1C BIT 6 $0
-		dc.w 0
-word_46282:     dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$0
-		dc.w 1
-		dc.w 0
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$0
-		dc.w $FFFF
-		dc.w 0
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-		dc.w 0                  ; 0000 WAIT value $3C
-		dc.w $3C
-word_462AE:     dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$0
-		dc.w $FFFF
-		dc.w 0
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $1E
-		dc.w $1E
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$0
-		dc.w 1
-		dc.w 0
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-		dc.w 0                  ; 0000 WAIT value $3C
-		dc.w $3C
+		dc.w byte_462AE-word_46262
+eas_46266:      ac_setSpeed 0
+		ac_11 $101
+		ac_12 $FEFF
+		ac_13 $FEFF
+		ac_set1Cb7 $FFFF
+		ac_set1Cb5 $FFFF
+		ac_set1Cb6 $0
+byte_46282:     ac_moveRel 1,0
+		ac_waitDest
+		ac_wait 30
+		ac_setFacing DOWN
+		ac_updateSprite
+		ac_wait 30
+		ac_setFacing LEFT
+		ac_updateSprite
+		ac_wait 30
+		ac_moveRel 65535,0
+		ac_waitDest
+		ac_wait 60
+byte_462AE:     ac_moveRel 65535,0
+		ac_waitDest
+		ac_wait 30
+		ac_setFacing DOWN
+		ac_updateSprite
+		ac_wait 30
+		ac_setFacing RIGHT
+		ac_updateSprite
+		ac_wait 30
+		ac_moveRel 1,0
+		ac_waitDest
+		ac_wait 60
 word_462DA:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFA8
-		dc.w (word_46282-word_462DA) & $FFFF
-		dc.w $23                ; 0023 SEND SOUND COMMAND SFX_JUMP
-		dc.w $57
-		dc.w $17                ; 0017 SET ENTITY SPRITE $3F
-		dc.w $3F
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $8
-		dc.w 8
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $8
-		dc.w 8
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $8
-		dc.w 8
-		dc.w $17                ; 0017 SET ENTITY SPRITE $3C
-		dc.w $3C
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_46310:      dc.w $1F                ; 001F SET 1D BIT 3 $FFFF
-		dc.w $FFFF
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $B                 ; 000B SET SPRITE SIZE $6
-		dc.w 6
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $B                 ; 000B SET SPRITE SIZE $8
-		dc.w 8
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $A
-		dc.w $A
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $C
-		dc.w $C
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $B                 ; 000B SET SPRITE SIZE $E
-		dc.w $E
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $B                 ; 000B SET SPRITE SIZE $10
-		dc.w $10
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $12
-		dc.w $12
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $14
-		dc.w $14
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $B                 ; 000B SET SPRITE SIZE $16
-		dc.w $16
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $B                 ; 000B SET SPRITE SIZE $18
-		dc.w $18
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $1F                ; 001F SET 1D BIT 3 $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $12
-		dc.w $12
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x460CE
-		dc.l eas_Init           
-eas_463AE:      dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $1F                ; 001F SET 1D BIT 3 $FFFF
-		dc.w $FFFF
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $B                 ; 000B SET SPRITE SIZE $16
-		dc.w $16
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $14
-		dc.w $14
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $12
-		dc.w $12
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $B                 ; 000B SET SPRITE SIZE $10
-		dc.w $10
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $B                 ; 000B SET SPRITE SIZE $E
-		dc.w $E
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $C
-		dc.w $C
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $A
-		dc.w $A
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $B                 ; 000B SET SPRITE SIZE $8
-		dc.w 8
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $B                 ; 000B SET SPRITE SIZE $6
-		dc.w 6
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $C                 ; 000C SET POSITION X=$3F Y=$3F
-		dc.w $3F
-		dc.w $3F
-		dc.w $1F                ; 001F SET 1D BIT 3 $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $12
-		dc.w $12
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $1F                ; 001F SET 1D BIT 3 $FFFF
-		dc.w $FFFF
-		dc.w $B                 ; 000B SET SPRITE SIZE $16
-		dc.w $16
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $B                 ; 000B SET SPRITE SIZE $14
-		dc.w $14
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $B                 ; 000B SET SPRITE SIZE $12
-		dc.w $12
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $B                 ; 000B SET SPRITE SIZE $10
-		dc.w $10
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $B                 ; 000B SET SPRITE SIZE $E
-		dc.w $E
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $B                 ; 000B SET SPRITE SIZE $C
-		dc.w $C
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $B                 ; 000B SET SPRITE SIZE $A
-		dc.w $A
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $B                 ; 000B SET SPRITE SIZE $8
-		dc.w 8
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $B                 ; 000B SET SPRITE SIZE $6
-		dc.w 6
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $5
-		dc.w 5
-		dc.w $C                 ; 000C SET POSITION X=$3F Y=$3F
-		dc.w $3F
-		dc.w $3F
-		dc.w $1F                ; 001F SET 1D BIT 3 $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $12
-		dc.w $12
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-eas_464BE:      dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$FFFF
-		dc.w $FFFF
-		dc.w $FFFF
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-eas_464C6:      dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$1
-		dc.w $FFFF
-		dc.w 1
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-eas_464CE:      dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$1
-		dc.w 1
-		dc.w 1
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-eas_464D6:      dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$FFFF
-		dc.w 1
-		dc.w $FFFF
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
+		dc.w (byte_46282-word_462DA) & $FFFF
+		ac_soundCommand $57
+		ac_setSprite 63
+		ac_setFacing UP
+		ac_updateSprite
+		ac_wait 8
+		ac_setFacing LEFT
+		ac_updateSprite
+		ac_wait 8
+		ac_setFacing DOWN
+		ac_updateSprite
+		ac_wait 8
+		ac_setSprite 60
+		ac_updateSprite
+		ac_jump eas_Idle
+eas_46310:      ac_set1Db3 $FFFF
+		ac_setFacing LEFT
+		ac_setSize 6
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing DOWN
+		ac_setSize 8
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing RIGHT
+		ac_setSize 10
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing UP
+		ac_setSize 12
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing LEFT
+		ac_setSize 14
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing DOWN
+		ac_setSize 16
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing RIGHT
+		ac_setSize 18
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing UP
+		ac_setSize 20
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing LEFT
+		ac_setSize 22
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing DOWN
+		ac_setSize 24
+		ac_updateSprite
+		ac_wait 5
+		ac_set1Db3 $0
+		ac_setSize 18
+		ac_jump eas_Init
+eas_463AE:      ac_wait 5
+		ac_set1Db3 $FFFF
+		ac_setFacing DOWN
+		ac_setSize 22
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing RIGHT
+		ac_setSize 20
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing UP
+		ac_setSize 18
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing LEFT
+		ac_setSize 16
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing DOWN
+		ac_setSize 14
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing RIGHT
+		ac_setSize 12
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing UP
+		ac_setSize 10
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing LEFT
+		ac_setSize 8
+		ac_updateSprite
+		ac_wait 5
+		ac_setFacing DOWN
+		ac_setSize 6
+		ac_updateSprite
+		ac_wait 5
+		ac_setPos 63,63
+		ac_set1Db3 $0
+		ac_setSize 18
+		ac_jump eas_Idle
+		ac_wait 5
+		ac_set1Db3 $FFFF
+		ac_setSize 22
+		ac_updateSprite
+		ac_wait 5
+		ac_setSize 20
+		ac_updateSprite
+		ac_wait 5
+		ac_setSize 18
+		ac_updateSprite
+		ac_wait 5
+		ac_setSize 16
+		ac_updateSprite
+		ac_wait 5
+		ac_setSize 14
+		ac_updateSprite
+		ac_wait 5
+		ac_setSize 12
+		ac_updateSprite
+		ac_wait 5
+		ac_setSize 10
+		ac_updateSprite
+		ac_wait 5
+		ac_setSize 8
+		ac_updateSprite
+		ac_wait 5
+		ac_setSize 6
+		ac_updateSprite
+		ac_wait 5
+		ac_setPos 63,63
+		ac_set1Db3 $0
+		ac_setSize 18
+		ac_jump eas_Idle
+eas_464BE:      ac_moveRel 65535,65535
+		ac_waitDest
+eas_464C6:      ac_moveRel 65535,1
+		ac_waitDest
+eas_464CE:      ac_moveRel 1,1
+		ac_waitDest
+eas_464D6:      ac_moveRel 1,65535
+		ac_waitDest
 word_464DE:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFE0
 		dc.w (eas_464BE-word_464DE) & $FFFF
-eas_464E2:      dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$1
-		dc.w $FFFF
-		dc.w 1
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-eas_464EA:      dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$FFFF Y=Y+$FFFF
-		dc.w $FFFF
-		dc.w $FFFF
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-eas_464F2:      dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$FFFF
-		dc.w 1
-		dc.w $FFFF
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-eas_464FA:      dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$1 Y=Y+$1
-		dc.w 1
-		dc.w 1
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
+eas_464E2:      ac_moveRel 65535,1
+		ac_waitDest
+eas_464EA:      ac_moveRel 65535,65535
+		ac_waitDest
+eas_464F2:      ac_moveRel 1,65535
+		ac_waitDest
+eas_464FA:      ac_moveRel 1,1
+		ac_waitDest
 word_46502:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFE0
 		dc.w (eas_464E2-word_46502) & $FFFF

@@ -27,12 +27,9 @@ cs_EndKiss:     hideText
 		setCameraEntity $FFFF
 		setFacing $0,RIGHT
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
-		dc.b 8
-		dc.b 8
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2056        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		csWait 30
 		playSound MUSIC_ENDING
 		moveEntity $0,$0,$4,$1
@@ -47,12 +44,9 @@ cs_EndKiss:     hideText
 		stopEntity $0
 		csWait 50
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$4 Y=$4
-		dc.b 4
-		dc.b 4
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 1028        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $0,$0,$0,$1
 		endMove $8080
 		csWait 16

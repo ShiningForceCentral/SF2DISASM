@@ -815,3 +815,240 @@ cscNop:	macro
 csc_end:	macro
 	dc.w $FFFF
 	endm
+
+
+; entity data structure
+
+mainEntity:	macro
+	dc.w \1
+	dc.w \2
+	dc.w \3
+	endm
+
+entity:		macro
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.l \5
+	endm
+	
+entityRandomWalk:	macro
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.b $FF
+	dc.b \5
+	dc.b \6
+	dc.b \7
+	endm	
+	
+	
+; entity actscript commands	
+	
+ac_end:	macro
+	dc.w $8080
+	endm
+
+ac_wait:	macro
+	dc.w 0
+	dc.w \1
+	endm
+ 
+ac_waitDest:	macro
+	dc.w 1
+	endm
+
+ac_02:	macro
+	dc.w 2
+	endm
+
+ac_03:	macro
+	dc.w 3
+	dc.w \1
+	dc.w \2
+	dc.w \3
+	endm
+
+ac_moveRel:	macro
+	dc.w 4
+	dc.w \1
+	dc.w \2
+	endm
+
+ac_moveAbs:	macro
+	dc.w 5
+	dc.w \1
+	dc.w \2
+	endm
+
+ac_06:	macro
+	dc.w 6
+	dc.w \1
+	dc.w \2
+	dc.w \3
+	endm
+
+ac_controlRaft:	macro
+	dc.w 7
+	endm
+
+ac_controlCaravan:	macro
+	dc.w 8
+	endm
+
+ac_09:	macro
+	dc.w 9
+	dc.w \1
+	dc.w \2
+	endm
+
+ac_updateSprite:	macro
+	dc.w $A
+	endm
+
+ac_setSize:	macro
+	dc.w $B
+	dc.w \1
+	endm
+
+ac_setPos:	macro
+	dc.w $C
+	dc.w \1
+	dc.w \2
+	endm
+
+ac_clonePos:	macro
+	dc.w $D
+	dc.w \1
+	endm
+
+ac_0E:	macro
+	dc.w $E
+	dc.w \1
+	dc.w \2
+	dc.w \3
+	endm
+
+ac_waitDestEntity:	macro
+	dc.w $F
+	dc.w \1
+	endm
+
+ac_setSpeed:	macro
+	dc.w $10
+	dc.w \1
+	endm
+
+ac_11:	macro
+	dc.w $11
+	dc.w \1
+	endm
+
+ac_12:	macro
+	dc.w $12
+	dc.w \1
+	endm
+
+ac_13:	macro
+	dc.w $13
+	dc.w \1
+	endm
+
+ac_setAnimCounter:	macro
+	dc.w $14
+	dc.w \1
+	endm
+
+ac_autoFacing:	macro
+	dc.w $15
+	dc.w \1
+	endm
+
+ac_setId:	macro
+	dc.w $16
+	dc.w \1
+	endm
+
+ac_setSprite:	macro
+	dc.w $17
+	dc.w \1
+	endm
+
+ac_set1Cb7:	macro
+	dc.w $18
+	dc.w \1
+	endm
+
+ac_set1Cb6:	macro
+	dc.w $19
+	dc.w \1
+	endm
+
+ac_set1Cb5:	macro
+	dc.w $1A
+	dc.w \1
+	endm
+
+ac_setFlip:	macro
+	dc.w $1B
+	dc.w \1
+	endm
+
+ac_setTransparency:	macro
+	dc.w $1C
+	dc.w \1
+	endm
+
+ac_setGhost:	macro
+	dc.w $1D
+	dc.w \1
+	endm
+
+ac_setAnimSpeedX2:	macro
+	dc.w $1E
+	dc.w \1
+	endm
+
+ac_set1Db3:	macro
+	dc.w $1F
+	dc.w \1
+	endm
+
+ac_inWater:	macro
+	dc.w $20
+	dc.w \1
+	endm
+
+ac_set1Cb4:	macro
+	dc.w $21
+	dc.w \1
+	endm
+
+ac_setFacing:	macro
+	dc.w $22
+	dc.w \1
+	endm
+
+ac_soundCommand:	macro
+	dc.w $23
+	dc.w \1
+	endm
+
+ac_jump:	macro
+	dc.w $34
+	dc.l \1
+	endm
+
+ac_40:	macro
+	dc.w $40
+	endm
+
+ac_pass:	macro
+	dc.w $41
+	dc.w \1
+	endm
+
+	
+	

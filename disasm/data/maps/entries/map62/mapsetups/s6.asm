@@ -24,12 +24,9 @@ cs_5C876:       textCursor $E1D
 		moveEntity $81,$FF,$3,$2
 		endMove $8080
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$3,$1
 		endMove $8080
 		setCamDest 1,10

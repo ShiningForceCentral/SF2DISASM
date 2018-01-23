@@ -88,7 +88,7 @@ loc_44180:
 		clr.w   d0
 		clr.l   d6
 		bsr.w   GetCharacterSpriteIdx
-		move.l  #eas_Idle,d5    
+		move.l  #eas_Idle,d5
 		bsr.w   DeclareNewEntity
 		move.w  #$10,((SPRITE_SIZE-$1000000)).w
 		move.b  #$FF,(a3)

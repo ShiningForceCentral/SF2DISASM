@@ -59,12 +59,9 @@ bbcs_16:        textCursor $9D1
 		csWait 30
 		setActscript $80,$FF,eas_46172
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setPos $80,14,5,DOWN
 		moveEntity $80,$FF,$1,$2
 		endMove $8080
@@ -88,62 +85,16 @@ bbcs_16:        textCursor $9D1
 		nextSingleText $0,$1F   ; "Watch out!{W1}"
 		csWait 60
 		csc_end
-ce_4B15C:       dc.w $F
-		dc.w $E
-		dc.w 0
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $FE
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $7B
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $7B
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $4A
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $4A
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $4A
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $4A
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $4A
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $4A
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $4A
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $4A
-		dc.l eas_Init           
+ce_4B15C:       mainEntity 15,14,RIGHT
+		entity 63,63,DOWN,254,eas_Init
+		entity 63,63,DOWN,123,eas_Init
+		entity 63,63,DOWN,123,eas_Init
+		entity 63,63,DOWN,74,eas_Init
+		entity 63,63,DOWN,74,eas_Init
+		entity 63,63,DOWN,74,eas_Init
+		entity 63,63,DOWN,74,eas_Init
+		entity 63,63,DOWN,74,eas_Init
+		entity 63,63,DOWN,74,eas_Init
+		entity 63,63,DOWN,74,eas_Init
+		entity 63,63,DOWN,74,eas_Init
 		dc.w $FFFF

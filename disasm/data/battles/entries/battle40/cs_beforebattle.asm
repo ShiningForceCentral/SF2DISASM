@@ -197,32 +197,10 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		setActscript $7,$0,eas_Jump
 		entityNod $0
 		csc_end
-ce_4E878:       dc.w $10
-		dc.w $27
-		dc.w 1
-		dc.b $F
-		dc.b $28
-		dc.b 1
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $F
-		dc.b $29
-		dc.b 1
-		dc.b $1C
-		dc.l eas_Init           
-		dc.b $10
-		dc.b $29
-		dc.b 1
-		dc.b $3E
-		dc.l eas_Init           
-		dc.b $10
-		dc.b 4
-		dc.b 3
-		dc.b $A0
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $B2
-		dc.l eas_Init           
+ce_4E878:       mainEntity 16,39,UP
+		entity 15,40,UP,7,eas_Init
+		entity 15,41,UP,28,eas_Init
+		entity 16,41,UP,62,eas_Init
+		entity 16,4,DOWN,160,eas_Init
+		entity 63,63,UP,178,eas_Init
 		dc.w $FFFF

@@ -40,12 +40,9 @@ abcs_battle15:  textCursor $9CA
 		csWait 90
 		nextSingleText $0,$1E   ; "Petro, my grandson, locked{N}the door.{W1}"
 		customActscript $1E,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1E,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$1E   ; "Sorry, guys!  We can't go to{N}Grans Island this way.{W1}"
@@ -76,7 +73,5 @@ abcs_battle15:  textCursor $9CA
 		followEntity $1F,$7,$2
 		mapSysEvent $32,$1B,$B,$1
 		csc_end
-ce_4AFB6:       dc.w $E
-		dc.w 5
-		dc.w 3
+ce_4AFB6:       mainEntity 14,5,DOWN
 		dc.w $FFFF

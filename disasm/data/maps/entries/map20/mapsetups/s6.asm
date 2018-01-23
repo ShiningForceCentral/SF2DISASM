@@ -65,12 +65,9 @@ cs_53996:       textCursor $880
 		setFacing $82,RIGHT
 		csWait 40
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $82,$FF,$0,$2
 		endMove $8080
 		setActscript $82,$FF,eas_Init
@@ -142,19 +139,13 @@ cs_53B66:       playSound $FD
 		setActscript $82,$FF,eas_46172
 		setActscript $80,$FF,eas_46172
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setCamDest 17,48
 		playSound MUSIC_ENEMY_ATTACK
 		moveEntity $80,$0,$1,$2
@@ -188,14 +179,11 @@ cs_53B66:       playSound $FD
 		endMove $8080
 		setFacing $82,LEFT
 		customActscript $82,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $3
-		dc.w 3
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $3           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		csWait 120
 cs_53C42:       setCamDest 19,48
 		textCursor $898
@@ -212,19 +200,13 @@ cs_53C42:       setCamDest 19,48
 		setFacing $0,DOWN
 		setActscript $80,$FF,eas_46172
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setFacing $82,LEFT
 		csWait 50
 		entityShiver $82
@@ -243,12 +225,9 @@ cs_53C42:       setCamDest 19,48
 		setPos $88,24,53,LEFT
 		nextSingleText $80,$82  ; "Evil spirit inside the King,{N}begone, HAAA!{W1}"
 		customActscript $88,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $88,$FF,$2,$2
 		endMove $8080
 		hideEntity $88
@@ -257,23 +236,17 @@ cs_53C42:       setCamDest 19,48
 		csWait 60
 		setQuake 0
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$2,$1
 		endMove $8080
 		customActscript $80,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $3
-		dc.w 3
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $3           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		csWait 50
 		entityShiver $82
 		csWait 20
@@ -288,12 +261,9 @@ cs_53C42:       setCamDest 19,48
 		entityShiver $87
 		setActscript $87,$FF,eas_46172
 		customActscript $87,$FF
-		dc.w $10                ;   0010 SET SPEED X=$0 Y=$0
-		dc.b 0
-		dc.b 0
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 0           ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $87,$FF,$1,$5
 		endMove $8080
 		hideEntity $87
@@ -315,14 +285,11 @@ cs_53C42:       setCamDest 19,48
 		nextSingleText $0,$80   ; "What are you talking about?{N}I don't understand.{W1}"
 		csWait 50
 		customActscript $82,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		nextSingleText $80,$82  ; "(Sigh){W1}"
 		nextSingleText $0,$80   ; "Astral!{W1}"
 		playSound $FD

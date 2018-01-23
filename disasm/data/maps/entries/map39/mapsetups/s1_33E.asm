@@ -6,7 +6,7 @@ ms_map39_flag33E_Entities:
 		dc.b 6
 		dc.b 0
 		dc.b $C4
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b 9
 		dc.b 7
 		dc.b 3
@@ -27,12 +27,12 @@ ms_map39_flag33E_Entities:
 		dc.b 6
 		dc.b 0
 		dc.b $C8
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $D
 		dc.b 6
 		dc.b 2
 		dc.b $C9
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $F
 		dc.b 8
 		dc.b 3
@@ -45,5 +45,5 @@ ms_map39_flag33E_Entities:
 		dc.b 8
 		dc.b 2
 		dc.b $C5
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.w $FFFF

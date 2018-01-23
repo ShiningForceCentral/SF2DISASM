@@ -20,12 +20,9 @@ cs_5D3AA:       setPos $85,25,18,RIGHT
 		setPos $87,25,17,RIGHT
 		csc_end
 cs_5D3B8:       customActscript $85,$FF
-		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
-		dc.b $40
-		dc.b $40
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 16448       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setEntityDest $0,12,2
 		setFacing $0,DOWN
 		moveEntity $85,$FF,$0,$5

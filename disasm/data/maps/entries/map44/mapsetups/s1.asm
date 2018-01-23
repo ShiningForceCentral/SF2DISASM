@@ -6,7 +6,7 @@ ms_map44_Entities:
 		dc.b $14
 		dc.b 1
 		dc.b $C3
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $E
 		dc.b $17
 		dc.b 1

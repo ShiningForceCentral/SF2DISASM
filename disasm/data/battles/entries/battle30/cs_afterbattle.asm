@@ -25,25 +25,19 @@ abcs_battle30:  textCursor $ACD
 		csWait 40
 		setFacing $80,UP
 		customActscript $80,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setQuake 2
 		csWait 20
 		setQuake 0
 		setPos $82,11,10,UP
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setEntityDest $82,9,11
 		nextSingleText $0,$80   ; "Oops!  The Ground Orb....{W1}"
 		entityFlashWhite $82,$3C
@@ -54,14 +48,11 @@ abcs_battle30:  textCursor $ACD
 		entityShiver $80
 		nextSingleText $0,$80   ; "I can't endure the light....{N}Ohhh....{W1}"
 		customActscript $80,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $0
-		dc.w 0
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $0           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $80,$FF,eas_Die
 		csWait 60
 		nextText $0,$1F         ; "Thanks to the Ground Orb, we{N}finally defeated Zalbard.{W2}"
@@ -86,12 +77,9 @@ abcs_battle30:  textCursor $ACD
 		csWait 50
 		entityFlashWhite $81,$3C
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$38 Y=$38
-		dc.b $38
-		dc.b $38
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 14392       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		cameraSpeed $38
 		setCameraEntity $82
 		setEntityDest $82,11,2
@@ -174,27 +162,9 @@ abcs_battle30:  textCursor $ACD
 		followEntity $1F,$0,$2
 		followEntity $7,$1F,$2
 		csc_end
-ce_4C96C:       dc.w $A
-		dc.w $D
-		dc.w 1
-		dc.b $C
-		dc.b $D
-		dc.b 1
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $B
-		dc.b $A
-		dc.b 3
-		dc.b $9B
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $D7
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $AC
-		dc.l eas_Init           
+ce_4C96C:       mainEntity 10,13,UP
+		entity 12,13,UP,7,eas_Init
+		entity 11,10,DOWN,155,eas_Init
+		entity 63,63,DOWN,215,eas_Init
+		entity 63,63,UP,172,eas_Init
 		dc.w $FFFF

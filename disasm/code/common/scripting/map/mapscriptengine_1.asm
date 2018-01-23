@@ -72,14 +72,15 @@ csc34_setBlocks:
 
 ; similar to setBlocks
 
-csc35_:
+csc35_setBlocksVar:
+		
 		move.w  (a6)+,d0
 		move.w  (a6)+,d1
 		move.w  (a6)+,d2
 		jsr     (CopyMapBlocks).w
 		rts
 
-	; End of function csc35_
+	; End of function csc35_setBlocksVar
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -669,7 +670,7 @@ loc_468F2:
 ; =============== S U B R O U T I N E =======================================
 
 csc2D_D_jump:
-		lea     (eas_Jump).l,a1 
+		lea     (eas_Jump).l,a1
 		bra.w   loc_46914
 csc2D_E_jumpRight:
 		
@@ -697,7 +698,7 @@ loc_46914:
 
 loc_46928:
 		move.w  #$34,(a0)+ 
-		move.l  #eas_Idle,(a0)+ 
+		move.l  #eas_Idle,(a0)+
 		addq.l  #1,a6
 		move.l  a0,(dword_FFB1A4).l
 		move.l  d0,$14(a5)
@@ -1394,7 +1395,7 @@ csc2B_initializeNewEntity:
 		move.b  (a6)+,d2
 		move.b  (a6)+,d3
 		move.b  (a6)+,d4
-		move.l  #eas_Init,d5    
+		move.l  #eas_Init,d5
 		jsr     InitializeNewEntity
 		rts
 
@@ -1460,7 +1461,7 @@ csc2E_hideEntity:
 
 ; specific entity behaviour for skreech join cutscene
 
-csc2F_:
+csc2F_fly:
 		move.w  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
 		move.w  (a6)+,d0
@@ -1472,7 +1473,7 @@ loc_46EB8:
 return_46EBE:
 		rts
 
-	; End of function csc2F_
+	; End of function csc2F_fly
 
 
 ; =============== S U B R O U T I N E =======================================

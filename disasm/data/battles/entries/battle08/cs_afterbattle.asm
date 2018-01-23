@@ -7,14 +7,11 @@ abcs_battle08:  textCursor $9A4
 		setActscript $0,$FF,eas_Init
 		stopEntity $81
 		customActscript $81,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		jumpIfFlagSet $6,cs_4AAB6; Kiwi joined
 		setPos $6,63,63,DOWN
 cs_4AAB6:       fadeInB
@@ -45,12 +42,9 @@ cs_4AAB6:       fadeInB
 		nextSingleText $C0,$81  ; "Be careful.{D1}{N}Haste makes waste.{D1}"
 		setActscript $80,$0,eas_BumpRight
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$20 Y=$20
-		dc.b $20
-		dc.b $20
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 8224        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $81,$FF,eas_4618A
 		csWait 8
 		moveEntity $81,$FF,$0,$1
@@ -81,42 +75,12 @@ cs_4AAB6:       fadeInB
 		nextSingleText $0,$80   ; "You changed your mind?{W2}"
 		mapSysEvent $49,$3E,$31,$2
 		csc_end
-ce_4ABBE:       dc.w $E
-		dc.w $25
-		dc.w 1
-		dc.b $E
-		dc.b $23
-		dc.b 1
-		dc.b $CA
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $24
-		dc.b 1
-		dc.b 1
-		dc.l eas_Init           
-		dc.b $C
-		dc.b $23
-		dc.b 1
-		dc.b 3
-		dc.l eas_Init           
-		dc.b $F
-		dc.b $24
-		dc.b 1
-		dc.b 4
-		dc.l eas_Init           
-		dc.b $10
-		dc.b $23
-		dc.b 1
-		dc.b 2
-		dc.l eas_Init           
-		dc.b $10
-		dc.b $22
-		dc.b 2
-		dc.b 6
-		dc.l eas_Init           
-		dc.b $E
-		dc.b $22
-		dc.b 3
-		dc.b $CA
-		dc.l eas_Init           
+ce_4ABBE:       mainEntity 14,37,UP
+		entity 14,35,UP,202,eas_Init
+		entity 13,36,UP,1,eas_Init
+		entity 12,35,UP,3,eas_Init
+		entity 15,36,UP,4,eas_Init
+		entity 16,35,UP,2,eas_Init
+		entity 16,34,LEFT,6,eas_Init
+		entity 14,34,DOWN,202,eas_Init
 		dc.w $FFFF

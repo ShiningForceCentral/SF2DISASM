@@ -105,26 +105,17 @@ cs_5AC58:       textCursor $70C
 		setActscript $7,$0,eas_Jump
 		setActscript $1F,$FF,eas_Jump
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $7,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $7,$0,$0,$5
 		moreMove $1,$3
 		endMove $8080
@@ -150,26 +141,17 @@ cs_5AC58:       textCursor $70C
 		setActscript $7,$FF,eas_46172
 		setActscript $1F,$FF,eas_46172
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $7,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $0,$0,$3,$1
 		endMove $8080
 		moveEntity $7,$0,$3,$1
@@ -203,12 +185,9 @@ cs_5AF36:       textCursor $72A
 		setActscript $80,$FF,eas_Init
 		setActscript $80,$FF,eas_Jump
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$3,$2
 		moreMove $2,$2
 		endMove $8080
@@ -284,12 +263,9 @@ cs_5B016:       textCursor $730
 		entityShakeHead $80
 		nextSingleText $0,$80   ; "No, I...I added to your{N}collection today.{W1}"
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$3,$1
 		endMove $8080
 		nextSingleText $80,$81  ; "You did what?!{W1}"
@@ -309,12 +285,9 @@ cs_5B016:       textCursor $730
 		setFacing $81,UP
 		csWait 30
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$1,$1
 		endMove $8080
 		csWait 20
@@ -323,12 +296,9 @@ cs_5B016:       textCursor $730
 		entityNod $80
 		nextSingleText $0,$80   ; "Right away, sir!{W1}"
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$3,$5
 		endMove $8080
 		setFacing $81,UP
@@ -363,12 +333,9 @@ cs_5B016:       textCursor $730
 		nextSingleText $0,$7    ; "Make us bigger.  My neck{N}hurts from looking up at you!{W1}"
 		nextSingleText $80,$81  ; "Oh, sorry. {W1}"
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $81,$FF,eas_46172
 		moveEntity $81,$FF,$1,$1
 		endMove $8080
@@ -443,12 +410,9 @@ cs_5B016:       textCursor $730
 		entityNod $0
 		nextSingleText $FF,$FF  ; "{LEADER} nods again.{W1}"
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$1,$1
 		endMove $8080
 		nextSingleText $80,$81  ; "So, Zeon will appear again....{N}He will destroy everything.{W1}"
@@ -497,12 +461,9 @@ cs_5B016:       textCursor $730
 		entityShiver $80
 		setActscript $80,$FF,eas_46172
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$0,$3,$1
 		endMove $8080
 		nextSingleText $0,$80   ; "Zeon?  Oh, gosh!{W1}"

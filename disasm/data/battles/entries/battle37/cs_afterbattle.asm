@@ -16,14 +16,11 @@ abcs_battle37:  textCursor $B9C
 		setPos $1A,63,62,DOWN
 cs_4DBEE:       stopEntity $1C
 		customActscript $1C,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setPriority $1F,$0
 		setPriority $1C,$FFFF
 		fadeInB
@@ -112,17 +109,7 @@ cs_4DBEE:       stopEntity $1C
 		setFacing $0,LEFT
 		nextSingleText $0,$1F   ; "I think we'll meet him again.{N}{LEADER}, let's go.{W1}"
 		csc_end
-ce_4DD8C:       dc.w $24
-		dc.w $39
-		dc.w 3
-		dc.b $21
-		dc.b $3B
-		dc.b 0
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $23
-		dc.b $3B
-		dc.b 3
-		dc.b $1C
-		dc.l eas_Init           
+ce_4DD8C:       mainEntity 36,57,DOWN
+		entity 33,59,RIGHT,7,eas_Init
+		entity 35,59,DOWN,28,eas_Init
 		dc.w $FFFF

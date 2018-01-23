@@ -120,20 +120,14 @@ abcs_battle28:  textCursor $A6E
 		endMove $8080
 		setPos $82,12,30,LEFT
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$38 Y=$38
-		dc.b $38
-		dc.b $38
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 14392       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $82,$FF,eas_46172
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $82,$0,$2,$8
 		endMove $8080
 		playSound SFX_JUMP
@@ -151,12 +145,9 @@ abcs_battle28:  textCursor $A6E
 		setActscript $80,$FF,eas_Init
 		cameraSpeed $30
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setCameraEntity $80
 		csWait 40
 		moveEntity $80,$FF,$1,$A
@@ -199,27 +190,9 @@ abcs_battle28:  textCursor $A6E
 		followEntity $7,$81,$3
 		mapSysEvent $FF,$10,$1E,$0
 		csc_end
-ce_4C3B4:       dc.w $C
-		dc.w $1C
-		dc.w 3
-		dc.b $C
-		dc.b $1F
-		dc.b 1
-		dc.b $B0
-		dc.l eas_Init           
-		dc.b $D
-		dc.b $1C
-		dc.b 3
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $C
-		dc.b $1B
-		dc.b 3
-		dc.b $3E
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 2
-		dc.b $B2
-		dc.l eas_Init           
+ce_4C3B4:       mainEntity 12,28,DOWN
+		entity 12,31,UP,176,eas_Init
+		entity 13,28,DOWN,7,eas_Init
+		entity 12,27,DOWN,62,eas_Init
+		entity 63,63,LEFT,178,eas_Init
 		dc.w $FFFF

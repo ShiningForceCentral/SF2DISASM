@@ -52,24 +52,18 @@ abcs_battle33:  textCursor $B3C
 		setFacing $0,RIGHT
 		setFacing $1F,RIGHT
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$18 Y=$18
-		dc.b $18
-		dc.b $18
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 6168        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$0,$1,$1
 		endMove $8080
 		csWait 8
 		setActscript $80,$FF,eas_461AA
 		csWait 50
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$0,$3,$1
 		endMove $8080
 		csWait 4
@@ -84,22 +78,16 @@ abcs_battle33:  textCursor $B3C
 		setActscript $7,$FF,eas_Jump
 		setActscript $7,$FF,eas_46172
 		customActscript $7,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $7,$FF,$3,$2
 		endMove $8080
 		setCamDest 10,6
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$18 Y=$18
-		dc.b $18
-		dc.b $18
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 6168        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$0,$1,$1
 		endMove $8080
 		csWait 8
@@ -121,20 +109,14 @@ abcs_battle33:  textCursor $B3C
 		nextText $0,$80         ; "I cannot explain.{W2}"
 		nextSingleText $0,$80   ; "I am what I am.{N}That is all that I am.{W1}"
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $80,$FF,eas_JumpRight
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$38 Y=$38
-		dc.b $38
-		dc.b $38
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 14392       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $80,$FF,eas_46172
 		moveEntity $80,$0,$3,$1
 		endMove $8080
@@ -163,22 +145,8 @@ abcs_battle33:  textCursor $B3C
 		followEntity $7,$1F,$2
 		setF $341               ; set after the scene after you win the battle in Moun plays out
 		csc_end
-ce_4D322:       dc.w $B
-		dc.w $B
-		dc.w 1
-		dc.b $D
-		dc.b $B
-		dc.b 1
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $10
-		dc.b 8
-		dc.b 1
-		dc.b $B3
-		dc.l eas_Init           
-		dc.b $10
-		dc.b 8
-		dc.b 3
-		dc.b $1A
-		dc.l eas_Init           
+ce_4D322:       mainEntity 11,11,UP
+		entity 13,11,UP,7,eas_Init
+		entity 16,8,UP,179,eas_Init
+		entity 16,8,DOWN,26,eas_Init
 		dc.w $FFFF

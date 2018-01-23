@@ -7,14 +7,11 @@ bbcs_08:        textCursor $99D
 		setActscript $0,$FF,eas_Init
 		stopEntity $81
 		customActscript $81,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		jumpIfFlagSet $6,cs_4A994; Kiwi joined
 		setPos $6,63,63,DOWN
 cs_4A994:       playSound MUSIC_MAIN_THEME
@@ -46,62 +43,16 @@ cs_4A994:       playSound MUSIC_MAIN_THEME
 		setActscript $84,$0,eas_Jump
 		setActscript $85,$FF,eas_Jump
 		csc_end
-ce_4AA14:       dc.w 4
-		dc.w $32
-		dc.w 0
-		dc.b 5
-		dc.b $32
-		dc.b 0
-		dc.b $CA
-		dc.l eas_Init           
-		dc.b 4
-		dc.b $31
-		dc.b 0
-		dc.b 1
-		dc.l eas_Init           
-		dc.b 4
-		dc.b $33
-		dc.b 0
-		dc.b 3
-		dc.l eas_Init           
-		dc.b 3
-		dc.b $32
-		dc.b 0
-		dc.b 4
-		dc.l eas_Init           
-		dc.b 2
-		dc.b $32
-		dc.b 0
-		dc.b 2
-		dc.l eas_Init           
-		dc.b 1
-		dc.b $32
-		dc.b 0
-		dc.b 6
-		dc.l eas_Init           
-		dc.b $E
-		dc.b $22
-		dc.b 3
-		dc.b $CA
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $84
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $44
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $45
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $79
-		dc.l eas_Init           
+ce_4AA14:       mainEntity 4,50,RIGHT
+		entity 5,50,RIGHT,202,eas_Init
+		entity 4,49,RIGHT,1,eas_Init
+		entity 4,51,RIGHT,3,eas_Init
+		entity 3,50,RIGHT,4,eas_Init
+		entity 2,50,RIGHT,2,eas_Init
+		entity 1,50,RIGHT,6,eas_Init
+		entity 14,34,DOWN,202,eas_Init
+		entity 63,63,DOWN,132,eas_Init
+		entity 63,63,DOWN,68,eas_Init
+		entity 63,63,DOWN,69,eas_Init
+		entity 63,63,DOWN,121,eas_Init
 		dc.w $FFFF

@@ -29,7 +29,7 @@ loc_444D6:
 		andi.w  #$3F,d2 
 		muls.w  #$180,d2
 		moveq   #3,d3
-		move.l  #eas_Idle,d5    
+		move.l  #eas_Idle,d5
 		bsr.w   GetCombatantSpriteIdx
 		bsr.w   sub_44536
 		movem.l a0-a1,-(sp)

@@ -38,17 +38,7 @@ bbcs_30:        textCursor $AC8
 		playSound SFX_INTRO_LIGHTNING
 		flashScreenWhite $28
 		csc_end
-ce_4C690:       dc.w $B
-		dc.w $1A
-		dc.w 1
-		dc.b $B
-		dc.b $1C
-		dc.b 1
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $D
-		dc.b 4
-		dc.b 3
-		dc.b $9B
-		dc.l eas_Init           
+ce_4C690:       mainEntity 11,26,UP
+		entity 11,28,UP,7,eas_Init
+		entity 13,4,DOWN,155,eas_Init
 		dc.w $FFFF

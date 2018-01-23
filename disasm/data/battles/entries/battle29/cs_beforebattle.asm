@@ -38,26 +38,17 @@ bbcs_29:        textCursor $A9E
 		nextSingleText $0,$1F   ; "Make a break for it!{W1}"
 		setCamDest 10,26
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $7,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1F,$0,$1,$3
 		endMove $8080
 		moveEntity $0,$0,$2,$1
@@ -68,12 +59,9 @@ bbcs_29:        textCursor $A9E
 		endMove $8080
 		csWait 10
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
-		dc.b $40
-		dc.b $40
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 16448       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$0,$1,$2
 		moreMove $2,$1
 		endMove $8080
@@ -122,37 +110,11 @@ bbcs_29:        textCursor $A9E
 		nextText $0,$1F         ; "Devils again!{W2}"
 		nextSingleText $0,$1F   ; "{LEADER}, attack!{W1}"
 		csc_end
-ce_4C5AE:       dc.w $F
-		dc.w $21
-		dc.w 1
-		dc.b $10
-		dc.b $22
-		dc.b 1
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $F
-		dc.b $1E
-		dc.b 3
-		dc.b $C0
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $8D
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $56
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $88
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $54
-		dc.l eas_Init           
+ce_4C5AE:       mainEntity 15,33,UP
+		entity 16,34,UP,7,eas_Init
+		entity 15,30,DOWN,192,eas_Init
+		entity 63,63,DOWN,141,eas_Init
+		entity 63,63,DOWN,86,eas_Init
+		entity 63,63,DOWN,136,eas_Init
+		entity 63,63,DOWN,84,eas_Init
 		dc.w $FFFF

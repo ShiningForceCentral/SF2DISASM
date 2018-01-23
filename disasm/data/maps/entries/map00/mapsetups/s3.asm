@@ -74,12 +74,9 @@ cs_5E3C2:       textCursor $AAB
 		setActscript $1F,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
-		dc.b 8
-		dc.b 8
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2056        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1F,$FF,$2,$2
 		endMove $8080
 		nextSingleText $0,$1F   ; "Odd Eye...Odd Eye...{N}Odd...Eye....{W1}"
@@ -97,12 +94,9 @@ cs_5E3C2:       textCursor $AAB
 		setActscript $1F,$FF,eas_46172
 		setActscript $7,$FF,eas_46172
 		customActscript $7,$FF
-		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
-		dc.b 8
-		dc.b 8
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2056        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1F,$0,$3,$2
 		endMove $8080
 		csWait 16
@@ -120,12 +114,9 @@ cs_5E3C2:       textCursor $AAB
 		setActscript $7,$FF,eas_461AA
 		nextSingleText $0,$7    ; "Sir Astral!!!{W1}"
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $1F,$FF,eas_Jump
 		setActscript $1F,$FF,eas_46172
 		moveEntity $1F,$FF,$1,$4
@@ -133,12 +124,9 @@ cs_5E3C2:       textCursor $AAB
 		nextSingleText $0,$1F   ; "Whhhhhhat?{N}{NAME;7}, don't scare me!{W1}"
 		entityShiver $1F
 		customActscript $7,$FF
-		dc.w $10                ;   0010 SET SPEED X=$20 Y=$20
-		dc.b $20
-		dc.b $20
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 8224        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setCamDest 9,11
 		moveEntity $7,$FF,$1,$3
 		endMove $8080
@@ -146,12 +134,9 @@ cs_5E3C2:       textCursor $AAB
 		nextSingleText $0,$7    ; "Should we go into the shrine{N}now?{W1}"
 		nextSingleText $0,$1F   ; "Oh, sorry.{W1}"
 		customActscript $1F,$FF
-		dc.w $10                ;   0010 SET SPEED X=$20 Y=$20
-		dc.b $20
-		dc.b $20
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 8224        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $1F,$FF,eas_Init
 		moveEntity $1F,$FF,$0,$1
 		endMove $8080

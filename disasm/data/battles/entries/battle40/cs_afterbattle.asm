@@ -17,14 +17,11 @@ abcs_battle40:  textCursor $BF9
 cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		setBlocks 0,52,10,7,13,10
 		customActscript $83,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		stopEntity $83
 		setActscript $80,$FF,eas_46172
 		setActscript $81,$FF,eas_46172
@@ -132,37 +129,11 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		followEntity $1F,$7,$2
 		followEntity $1C,$1F,$2
 		csc_end
-ce_4ECD6:       dc.w $F
-		dc.w $A
-		dc.w 1
-		dc.b $D
-		dc.b 8
-		dc.b 0
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $11
-		dc.b 8
-		dc.b 2
-		dc.b $1C
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $AD
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $AD
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $AD
-		dc.l eas_Init           
-		dc.b $F
-		dc.b 8
-		dc.b 3
-		dc.b $A0
-		dc.l eas_Init           
+ce_4ECD6:       mainEntity 15,10,UP
+		entity 13,8,RIGHT,7,eas_Init
+		entity 17,8,LEFT,28,eas_Init
+		entity 63,63,DOWN,173,eas_Init
+		entity 63,63,DOWN,173,eas_Init
+		entity 63,63,DOWN,173,eas_Init
+		entity 15,8,DOWN,160,eas_Init
 		dc.w $FFFF

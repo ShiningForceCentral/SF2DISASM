@@ -35,13 +35,9 @@ IntroCutscene4: textCursor $1089
 		tintMap
 		setQuake 0
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
 		nextSingleText $80,$80  ; "What was that?{D2}"
@@ -53,13 +49,9 @@ IntroCutscene4: textCursor $1089
 		csWait 40
 		setActscript $81,$FF,eas_46172
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
-		dc.b 8
-		dc.b 8
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 2056        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$3,$1
 		endMove $8080
 		nextSingleText $0,$81   ; "Sire, the Ancient Tower...{D2}"
@@ -76,13 +68,9 @@ IntroCutscene4: textCursor $1089
 		nextSingleText $80,$80  ; "No, not lightning...{D2}"
 		csWait 20
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
 		nextSingleText $80,$80  ; "To my knowledge, that tower{N}is impervious to any type{N}of disaster.{D2}"
@@ -97,13 +85,9 @@ IntroCutscene4: textCursor $1089
 		setPos $82,3,9,DOWN
 		setCameraEntity $82
 		customActscript $82,$FF
-		dc.w $10                ;   0010 SET SPEED X=$28 Y=$28
-		dc.b $28
-		dc.b $28
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 10280       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $82,$FF,$3,$1
 		moreMove $0,$1
 		moreMove $7,$3
@@ -133,13 +117,9 @@ IntroCutscene4: textCursor $1089
 		nextSingleText $0,$82   ; "It's open!{D2}"
 		setActscript $81,$FF,eas_46172
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $81,$FF,$1,$1
 		endMove $8080
 		nextSingleText $0,$81   ; "That's impossible!{N}It can't be opened!{D2}"
@@ -198,12 +178,9 @@ IntroCutscene4: textCursor $1089
 		csWait 30
 		nextSingleText $80,$80  ; "Strange, strange indeed!{D2}"
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$1,$2
 		endMove $8080
 		csWait 20
@@ -236,13 +213,9 @@ IntroCutscene4: textCursor $1089
 		nextSingleText $80,$80  ; "I guess it was nothing.{N}I have to get a hold of{N}myself.{D2}"
 		entityShakeHead $80
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$FF,$1,$1
 		endMove $8080
 		playSound SFX_INTRO_LIGHTNING
@@ -282,12 +255,9 @@ IntroCutscene4: textCursor $1089
 		setActscript $80,$FF,eas_Jump
 		nextSingleText $80,$80  ; "Hey!{D2}"
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $80,$FF,eas_46172
 		moveEntity $80,$FF,$3,$1
 		endMove $8080
@@ -321,13 +291,9 @@ IntroCutscene4: textCursor $1089
 		csWait 30
 		entityShiver $83
 		customActscript $85,$FF
-		dc.w $10                ;   0010 SET SPEED X=$14 Y=$14
-		dc.b $14
-		dc.b $14
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.b $80                ; 0014 END OF CUSTOM ACTSCRIPT
-		dc.b $80
+		ac_setSpeed 5140        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setPos $85,12,5,DOWN
 		moveEntity $85,$0,$3,$4
 		endMove $8080
@@ -345,14 +311,11 @@ IntroCutscene4: textCursor $1089
 		endMove $8080
 		setFacing $80,UP
 		customActscript $80,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $2
-		dc.w 2
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $2           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		nextSingleText $80,$80  ; "(Sigh)....{D2}"
 		entityShiver $83
 		csWait 30
@@ -365,37 +328,11 @@ IntroCutscene4: textCursor $1089
 		csWait 40
 		fadeOutToBlackHalf
 		csc_end
-ce_48FAA:       dc.w $3F
-		dc.w $3F
-		dc.w 1
-		dc.b $C
-		dc.b 6
-		dc.b 3
-		dc.b $CB
-		dc.l eas_Init           
-		dc.b $A
-		dc.b 7
-		dc.b 3
-		dc.b $CD
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 0
-		dc.b $CE
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $9F
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $BB
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $B7
-		dc.l eas_Init           
+ce_48FAA:       mainEntity 63,63,UP
+		entity 12,6,DOWN,203,eas_Init
+		entity 10,7,DOWN,205,eas_Init
+		entity 63,63,RIGHT,206,eas_Init
+		entity 63,63,DOWN,159,eas_Init
+		entity 63,63,UP,187,eas_Init
+		entity 63,63,DOWN,183,eas_Init
 		dc.w $FFFF

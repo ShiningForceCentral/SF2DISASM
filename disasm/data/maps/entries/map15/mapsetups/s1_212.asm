@@ -6,7 +6,7 @@ ms_map15_flag212_Entities:
 		dc.b $3F
 		dc.b 1
 		dc.b $14
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $1B
 		dc.b $1C
 		dc.b 3
@@ -27,12 +27,12 @@ ms_map15_flag212_Entities:
 		dc.b $C
 		dc.b 2
 		dc.b $DE
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $14
 		dc.b $E
 		dc.b 3
 		dc.b $E2
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $16
 		dc.b $13
 		dc.b 3
@@ -45,7 +45,7 @@ ms_map15_flag212_Entities:
 		dc.b $19
 		dc.b 3
 		dc.b $E0
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $F
 		dc.b 6
 		dc.b 3
@@ -66,10 +66,10 @@ ms_map15_flag212_Entities:
 		dc.b $F
 		dc.b 3
 		dc.b $C0
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b 2
 		dc.b $17
 		dc.b 3
 		dc.b $C1
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.w $FFFF

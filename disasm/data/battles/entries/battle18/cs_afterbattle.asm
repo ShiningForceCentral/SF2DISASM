@@ -76,23 +76,17 @@ abcs_battle18:  textCursor $9E0
 		csWait 10
 		setPos $B,63,63,DOWN
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		playSound SFX_FALLING
 		moveEntity $80,$0,$3,$9
 		endMove $8080
 		csWait 20
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$40 Y=$40
-		dc.b $40
-		dc.b $40
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 16448       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $0,$FF,eas_46172
 		moveEntity $0,$0,$2,$1
 		endMove $8080
@@ -149,23 +143,17 @@ abcs_battle18:  textCursor $9E0
 		setFacing $7,LEFT
 		csWait 10
 		customActscript $0,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $7,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $1
-		dc.w 1
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $1           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		stopEntity $0
 		stopEntity $7
 		csWait 30
@@ -257,12 +245,6 @@ abcs_battle18:  textCursor $9E0
 		setF $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 		clearF $54              ; Rohde is a follower
 		csc_end
-ce_4B6BE:       dc.w $C
-		dc.w 9
-		dc.w 1
-		dc.b $C
-		dc.b 5
-		dc.b 3
-		dc.b $3E
-		dc.l eas_Init           
+ce_4B6BE:       mainEntity 12,9,UP
+		entity 12,5,DOWN,62,eas_Init
 		dc.w $FFFF

@@ -108,12 +108,9 @@ cs_52530:       textCursor $385
 		entityShiver $5
 		nextSingleText $0,$5    ; "They...they killed my{N}friends!{W1}"
 		customActscript $5,$FF
-		dc.w $10                ;   0010 SET SPEED X=$E Y=$E
-		dc.b $E
-		dc.b $E
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 3598        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $5,$FF,$3,$1
 		moreMove $C,$28
 		moreMove $2,$1
@@ -122,14 +119,11 @@ cs_52530:       textCursor $385
 		endMove $8080
 		setFacing $5,UP
 		customActscript $5,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $2
-		dc.w 2
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $2           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		stopEntity $5
 		setFacing $85,LEFT
 		csWait 50
@@ -152,14 +146,11 @@ cs_52530:       textCursor $385
 		nextSingleText $0,$1    ; "Is it related to the opened{N}door?{W1}"
 		nextSingleText $0,$5    ; "Hey!{W1}"
 		customActscript $5,$FF
-		dc.w $14                ;   0014 SET ANIM COUNTER $0
-		dc.w 0
-		dc.w $1B                ;   001B SET FLIPPING $0
-		dc.w 0
-		dc.w $A                 ;   000A UPDATE SPRITE
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setAnimCounter $0    ;   
+		ac_setFlip $0           ;   
+		ac_updateSprite         ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		entitySprite $5,$3B
 		csWait 20
 		nextSingleText $0,$4    ; "Does he want the jewels?{W1}"
@@ -238,12 +229,9 @@ cs_52530:       textCursor $385
 		setFacing $5,UP
 		setActscript $5,$FF,eas_46172
 		customActscript $5,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $5,$0,$3,$2
 		moreMove $2,$1
 		endMove $8080
@@ -264,31 +252,22 @@ cs_52530:       textCursor $385
 		endMove $8080
 		nextSingleText $0,$1    ; "A big problem was created{N}because you stole the{N}jewels!{W1}"
 		customActscript $1,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $1,$FF,$0,$1
 		endMove $8080
 		setActscript $1,$0,eas_BumpRight
 		customActscript $5,$FF
-		dc.w $10                ;   0010 SET SPEED X=$E Y=$E
-		dc.b $E
-		dc.b $E
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 3598        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $5,$FF,$0,$1
 		endMove $8080
 		customActscript $5,$FF
-		dc.w $10                ;   0010 SET SPEED X=$A Y=$A
-		dc.b $A
-		dc.b $A
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2570        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $5,$FF,$0,$1
 		endMove $8080
 		stopEntity $5
@@ -370,19 +349,13 @@ cs_52938:       textCursor $3B8
 		stopEntity $5
 		fadeInB
 		customActscript $0,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $5,$FF
-		dc.w $10                ;   0010 SET SPEED X=$10 Y=$10
-		dc.b $10
-		dc.b $10
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 4112        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $0,$0,eas_RotateRight
 		setActscript $5,$0,eas_RotateRight
 		setEntityDest $8000,29,18

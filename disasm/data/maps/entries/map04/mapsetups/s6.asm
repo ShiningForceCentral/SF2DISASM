@@ -44,19 +44,13 @@ cs_51750:       textCursor $2CB
 		nextSingleText $0,$80   ; "Wooooo!{N}Help! Heeeeelp....{W1}"
 		setFacing $1F,DOWN
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$4 Y=$4
-		dc.b 4
-		dc.b 4
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 1028        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$8 Y=$8
-		dc.b 8
-		dc.b 8
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 2056        ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $80,$0,$3,$1
 		endMove $8080
 		moveEntity $81,$0,$0,$1
@@ -86,108 +80,60 @@ cs_51750:       textCursor $2CB
 		nextSingleText $0,$1F   ; "That's too cruel....{N}{W2}{LEADER}, go to the{N}harbor from the east side.{N}It's safer.{W1}"
 		setActscript $1F,$0,eas_Follower1
 		csc_end
-eas_51840:      dc.w $10                ; 0010 SET SPEED X=$0 Y=$0
-		dc.b 0
-		dc.b 0
-		dc.w $11                ; 0011  $101
-		dc.w $101
-		dc.w $12                ; 0012  $FEFF
-		dc.w $FEFF
-		dc.w $13                ; 0013  $FEFF
-		dc.w $FEFF
-		dc.w $18                ; 0018 SET 1C BIT 7 $FFFF
-		dc.w $FFFF
-		dc.w $19                ; 0019 SET 1C BIT 6 $0
-		dc.w 0
-		dc.w $1A                ; 001A SET 1C BIT 5 $0
-		dc.w 0
-		dc.w $15                ; 0015 SET ABILITY TO CHANGE FACING $0
-		dc.w 0
-		dc.w 4                  ; 0004 MOVE TO RELATIVE DEST X=X+$0 Y=Y+$2
-		dc.w 0
-		dc.w 2
-		dc.w $1F                ; 001F SET 1D BIT 3 $FFFF
-		dc.w $FFFF
-		dc.w $23                ; 0023 SEND SOUND COMMAND SFX_FALLING
-		dc.w $58
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $16
-		dc.w $16
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $4
-		dc.w 4
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $14
-		dc.w $14
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $4
-		dc.w 4
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $B                 ; 000B SET SPRITE SIZE $12
-		dc.w $12
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $4
-		dc.w 4
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $B                 ; 000B SET SPRITE SIZE $10
-		dc.w $10
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $4
-		dc.w 4
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $E
-		dc.w $E
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $4
-		dc.w 4
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $C
-		dc.w $C
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $4
-		dc.w 4
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $B                 ; 000B SET SPRITE SIZE $A
-		dc.w $A
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $4
-		dc.w 4
-		dc.w $22                ; 0022 SET FACING $3
-		dc.w 3
-		dc.w $B                 ; 000B SET SPRITE SIZE $8
-		dc.w 8
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $4
-		dc.w 4
-		dc.w $22                ; 0022 SET FACING $0
-		dc.w 0
-		dc.w $B                 ; 000B SET SPRITE SIZE $6
-		dc.w 6
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $4
-		dc.w 4
-		dc.w $22                ; 0022 SET FACING $1
-		dc.w 1
-		dc.w $B                 ; 000B SET SPRITE SIZE $4
-		dc.w 4
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 0                  ; 0000 WAIT value $4
-		dc.w 4
-		dc.w $22                ; 0022 SET FACING $2
-		dc.w 2
-		dc.w $B                 ; 000B SET SPRITE SIZE $2
-		dc.w 2
-		dc.w $A                 ; 000A UPDATE SPRITE
-		dc.w 1                  ; 0001 WAIT UNTIL DESTINATION
-		dc.w $C                 ; 000C SET POSITION X=$0 Y=$0
-		dc.w 0
-		dc.w 0
-		dc.w $34                ; 0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
+eas_51840:      ac_setSpeed 0
+		ac_11 $101
+		ac_12 $FEFF
+		ac_13 $FEFF
+		ac_set1Cb7 $FFFF
+		ac_set1Cb6 $0
+		ac_set1Cb5 $0
+		ac_autoFacing $0
+		ac_moveRel 0,2
+		ac_set1Db3 $FFFF
+		ac_soundCommand $58
+		ac_setFacing RIGHT
+		ac_setSize 22
+		ac_updateSprite
+		ac_wait 4
+		ac_setFacing UP
+		ac_setSize 20
+		ac_updateSprite
+		ac_wait 4
+		ac_setFacing LEFT
+		ac_setSize 18
+		ac_updateSprite
+		ac_wait 4
+		ac_setFacing DOWN
+		ac_setSize 16
+		ac_updateSprite
+		ac_wait 4
+		ac_setFacing RIGHT
+		ac_setSize 14
+		ac_updateSprite
+		ac_wait 4
+		ac_setFacing UP
+		ac_setSize 12
+		ac_updateSprite
+		ac_wait 4
+		ac_setFacing LEFT
+		ac_setSize 10
+		ac_updateSprite
+		ac_wait 4
+		ac_setFacing DOWN
+		ac_setSize 8
+		ac_updateSprite
+		ac_wait 4
+		ac_setFacing RIGHT
+		ac_setSize 6
+		ac_updateSprite
+		ac_wait 4
+		ac_setFacing UP
+		ac_setSize 4
+		ac_updateSprite
+		ac_wait 4
+		ac_setFacing LEFT
+		ac_setSize 2
+		ac_updateSprite
+		ac_waitDest
+		ac_setPos 0,0
+		ac_jump eas_Idle

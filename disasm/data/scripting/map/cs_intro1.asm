@@ -155,26 +155,17 @@ IntroCutscene1: textCursor $105A
 		setActscript $5,$FF,eas_Jump
 		nextSingleText $80,$5   ; "A treasure chest!{D2}"
 		customActscript $5,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		customActscript $81,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		moveEntity $5,$0,$3,$2
 		endMove $8080
 		moveEntity $80,$0,$3,$2
@@ -231,43 +222,12 @@ IntroCutscene1: textCursor $105A
 		csWait 20
 		fadeOutToBlackHalf
 		csc_end
-ce_48340:       dc.w $3F
-		dc.w $3F
-		dc.w 1
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b 5
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $CA
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $CA
-		dc.l eas_Init           
-		dc.b $1A
-		dc.b 4
-		dc.b 3
-		dc.b $AD
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 2
-		dc.b $B7
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $B7
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $B7
-		dc.l eas_Init           
-		dc.b $FF
-		dc.b $FF
+ce_48340:       mainEntity 63,63,UP
+		entity 63,63,DOWN,5,eas_Init
+		entity 63,63,UP,202,eas_Init
+		entity 63,63,UP,202,eas_Init
+		entity 26,4,DOWN,173,eas_Init
+		entity 63,63,LEFT,183,eas_Init
+		entity 63,63,UP,183,eas_Init
+		entity 63,63,UP,183,eas_Init
+		dc.w $FFFF

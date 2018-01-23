@@ -65,12 +65,9 @@ bbcs_31:        textCursor $AFB
 		stopEntity $80
 		csWait 40
 		customActscript $80,$FF
-		dc.w $10                ;   0010 SET SPEED X=$30 Y=$30
-		dc.b $30
-		dc.b $30
-		dc.w $34                ;   0034 JUMP TO ABSOLUTE ADDR. 0x451FC
-		dc.l eas_Idle           
-		dc.w $8080              ; 0014 END OF CUSTOM ACTSCRIPT
+		ac_setSpeed 12336       ;   
+		ac_jump eas_Idle        ;   
+		ac_end
 		setActscript $80,$FF,eas_Jump
 		setActscript $80,$FF,eas_Jump
 		setActscript $80,$FF,eas_46172
@@ -109,52 +106,14 @@ bbcs_31:        textCursor $AFB
 		nextSingleText $C0,$80  ; "I'll return by the time{N}you're defeated.{W1}"
 		animEntityFadeInOut $80,$6
 		csc_end
-ce_4CB92:       dc.w $15
-		dc.w 4
-		dc.w 3
-		dc.b $14
-		dc.b 3
-		dc.b 3
-		dc.b 7
-		dc.l eas_Init           
-		dc.b $15
-		dc.b 3
-		dc.b 3
-		dc.b $16
-		dc.l eas_Init           
-		dc.b $15
-		dc.b 8
-		dc.b 1
-		dc.b $9F
-		dc.l eas_Init           
-		dc.b $15
-		dc.b $B
-		dc.b 1
-		dc.b $9C
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 2
-		dc.b $AB
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $8D
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $91
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $56
-		dc.l eas_Init           
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $6F
-		dc.l eas_Init           
+ce_4CB92:       mainEntity 21,4,DOWN
+		entity 20,3,DOWN,7,eas_Init
+		entity 21,3,DOWN,22,eas_Init
+		entity 21,8,UP,159,eas_Init
+		entity 21,11,UP,156,eas_Init
+		entity 63,63,LEFT,171,eas_Init
+		entity 63,63,UP,141,eas_Init
+		entity 63,63,UP,145,eas_Init
+		entity 63,63,UP,86,eas_Init
+		entity 63,63,UP,111,eas_Init
 		dc.w $FFFF

@@ -6,12 +6,12 @@ ms_map18_Entities:
 		dc.b $B
 		dc.b 2
 		dc.b $C1
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b $D
 		dc.b $A
 		dc.b 3
 		dc.b $C2
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.b 7
 		dc.b $B
 		dc.b 2
@@ -24,5 +24,5 @@ ms_map18_Entities:
 		dc.b $39
 		dc.b 0
 		dc.b $CE
-		dc.l eas_Init           
+		dc.l eas_Init
 		dc.w $FFFF
