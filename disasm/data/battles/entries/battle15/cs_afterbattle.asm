@@ -11,15 +11,17 @@ abcs_battle15:  textCursor $9CA
 		setPos $1E,14,19,UP
 		fadeInB
 		cameraSpeed $30
-		moveEntity $1E,$FF,$1,$5
-		endMove $8080
+		entityActions $1E,$FF
+		 moveUp 5
+		endActions
 		nextSingleText $0,$1E   ; "It was lucky for me that I{N}met you.  Thank you.{W1}"
 		setFacing $1E,RIGHT
 		nextSingleText $0,$1E   ; "Follow me to the Ancient{N}Tunnel.{W1}"
-		moveEntity $1E,$FF,$0,$2
-		moreMove $1,$2
-		moreMove $0,$6
-		endMove $8080
+		entityActions $1E,$FF
+		 moveRight 2
+		 moveUp 2
+		 moveRight 6
+		endActions
 		fadeOutB
 		setPos $0,27,10,UP
 		setPos $7,28,10,UP
@@ -43,29 +45,36 @@ abcs_battle15:  textCursor $9CA
 		ac_setSpeed 4112        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $1E,$FF,$3,$1
-		endMove $8080
+		entityActions $1E,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$1E   ; "Sorry, guys!  We can't go to{N}Grans Island this way.{W1}"
-		moveEntity $1E,$0,$3,$2
-		endMove $8080
+		entityActions $1E,$0
+		 moveDown 2
+		endActions
 		csWait 15
-		moveEntity $0,$0,$3,$1
-		endMove $8080
-		moveEntity $7,$0,$3,$1
-		endMove $8080
-		moveEntity $1F,$FF,$3,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 1
+		endActions
+		entityActions $7,$0
+		 moveDown 1
+		endActions
+		entityActions $1F,$FF
+		 moveDown 1
+		endActions
 		setFacing $0,UP
 		setFacing $7,UP
 		setFacing $1F,UP
 		waitIdle $1E
-		moveEntity $1E,$FF,$2,$3
-		endMove $8080
+		entityActions $1E,$FF
+		 moveLeft 3
+		endActions
 		setFacing $0,LEFT
 		setFacing $7,LEFT
 		setFacing $1F,LEFT
-		moveEntity $1E,$FF,$2,$5
-		endMove $8080
+		entityActions $1E,$FF
+		 moveLeft 5
+		endActions
 		hideEntity $1E
 		clearF $4D              ; Old man is a follower
 		setF $2DC               ; set after the old man fails to open the way to Grans in the Wooden Panel shrine

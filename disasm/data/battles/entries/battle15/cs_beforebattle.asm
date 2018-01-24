@@ -14,8 +14,9 @@ bbcs_15:        textCursor $9C7
 		fadeInB
 		cameraSpeed $30
 		nextSingleText $0,$1E   ; "This is the Ancient Hall{N}that leads to the Ancient{N}Tunnel...{W1}"
-		moveEntity $1E,$FF,$1,$1
-		endMove $8080
+		entityActions $1E,$FF
+		 moveUp 1
+		endActions
 		setCamDest 9,4
 		csWait 30
 		setActscript $80,$0,eas_Jump

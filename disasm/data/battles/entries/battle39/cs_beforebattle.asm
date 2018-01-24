@@ -17,8 +17,9 @@ cs_4E41A:       fadeInB
 		setCamDest 3,18
 		nextText $0,$80         ; "I just heard that Geshp{N}lost.{W2}"
 		nextSingleText $0,$80   ; "All greater devils have been{N}defeated except for Odd Eye.{W1}"
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextText $0,$80         ; "This is a good chance for us{N}to become greater devils!{W2}"
 		nextSingleText $0,$80   ; "I'm sure Zeon will promote{N}us if we can get the jewel.{W1}"
 		setActscript $81,$0,eas_Jump
@@ -26,11 +27,13 @@ cs_4E41A:       fadeInB
 		setActscript $83,$0,eas_Jump
 		setActscript $84,$FF,eas_Jump
 		csWait 50
-		moveEntity $83,$FF,$1,$1
-		endMove $8080
+		entityActions $83,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$83   ; "Look over there!{W1}"
-		moveEntity $84,$FF,$1,$1
-		endMove $8080
+		entityActions $84,$FF
+		 moveUp 1
+		endActions
 		setFacing $80,UP
 		setCamDest 3,5
 		csWait 60
@@ -40,8 +43,9 @@ cs_4E41A:       fadeInB
 		ac_setSpeed 6168        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$FF,$3,$3
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 3
+		endActions
 		setFacing $80,UP
 		nextSingleText $0,$80   ; "Excellent!{N}Welcome to your graveyard!{W1}"
 		csc_end

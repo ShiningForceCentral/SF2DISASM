@@ -25,8 +25,9 @@ cs_628C8:       textCursor $F4B
 		setActscript $87,$FF,eas_Jump
 		csc_end
 cs_6290C:       hideText
-		moveEntity $8A,$FF,$3,$1
-		endMove $8080
+		entityActions $8A,$FF
+		 moveDown 1
+		endActions
 		setEntityDest $0,42,10
 		setEntityDest $4,42,10
 		setEntityDest $1,42,10
@@ -37,21 +38,24 @@ cs_6290C:       hideText
 		followEntity $1,$8A,$6
 		followEntity $3,$4,$2
 		followEntity $2,$1,$2
-		moveEntity $8A,$FF,$3,$1
-		moreMove $2,$1
-		moreMove $3,$1
-		moreMove $3,$1
-		moreMove $3,$1
-		endMove $8080
-		moveEntity $8A,$FF,$3,$3
-		moreMove $2,$6
-		moreMove $C,$A
-		endMove $8080
-		moveEntity $8A,$FF,$1,$8
-		moreMove $2,$6
-		moreMove $1,$2
-		moreMove $C,$A
-		moreMove $1,$6
-		endMove $8080
+		entityActions $8A,$FF
+		 moveDown 1
+		 moveLeft 1
+		 moveDown 1
+		 moveDown 1
+		 moveDown 1
+		endActions
+		entityActions $8A,$FF
+		 moveDown 3
+		 moveLeft 6
+		 actionC 10
+		endActions
+		entityActions $8A,$FF
+		 moveUp 8
+		 moveLeft 6
+		 moveUp 2
+		 actionC 10
+		 moveUp 6
+		endActions
 		mapSysEvent $13,$1A,$1E,$1
 		csc_end

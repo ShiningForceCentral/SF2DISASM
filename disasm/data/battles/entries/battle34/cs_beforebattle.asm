@@ -16,17 +16,22 @@ cs_4D38E:       animEntityFadeInOut $81,$6
 		playSound MUSIC_BATTLE_THEME_1
 		fadeInB
 		cameraSpeed $30
-		moveEntity $0,$0,$2,$3
-		endMove $8080
-		moveEntity $7,$0,$2,$3
-		endMove $8080
-		moveEntity $82,$0,$2,$3
-		endMove $8080
+		entityActions $0,$0
+		 moveLeft 3
+		endActions
+		entityActions $7,$0
+		 moveLeft 3
+		endActions
+		entityActions $82,$0
+		 moveLeft 3
+		endActions
 		jumpIfFlagClear $4C,cs_4D3C6; Zynk is a follower
-		moveEntity $1A,$0,$2,$3
-		endMove $8080
-cs_4D3C6:       moveEntity $1F,$FF,$2,$3
-		endMove $8080
+		entityActions $1A,$0
+		 moveLeft 3
+		endActions
+cs_4D3C6:       entityActions $1F,$FF
+		 moveLeft 3
+		endActions
 		nextSingleText $0,$80   ; "Hello, Granseal soldiers.{W1}"
 		setActscript $7,$FF,eas_Jump
 		setCamDest 7,5
@@ -39,16 +44,18 @@ cs_4D3C6:       moveEntity $1F,$FF,$2,$3
 		nextSingleText $0,$80   ; "You again, Geshp?  Why don't{N}you leave me alone?{W1}"
 		nextText $C0,$81        ; "Zeon left me in charge.{W2}"
 		nextSingleText $C0,$81  ; "It doesn't matter if you are{N}killed or not.{W1}"
-		moveEntity $80,$FF,$1,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 1
+		endActions
 		nextText $0,$80         ; "Then kill me, if you've{N}got the guts to do it!{W2}"
 		nextSingleText $0,$80   ; "I know.  You want me to be{N}die!{W1}"
 		customActscript $80,$FF
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$0,$1,$4
-		endMove $8080
+		entityActions $80,$0
+		 moveUp 4
+		endActions
 		csWait 10
 		animEntityFadeInOut $81,$6
 		waitIdle $80

@@ -59,18 +59,24 @@ cs_59656:       textCursor $6D4
 		removeShadow $7
 		removeShadow $1F
 		fadeInB
-		moveEntity $0,$0,$3,$10
-		endMove $8080
-		moveEntity $7,$0,$3,$10
-		endMove $8080
-		moveEntity $1F,$0,$3,$10
-		endMove $8080
-		moveEntity $99,$0,$6,$8
-		endMove $8080
-		moveEntity $9A,$0,$6,$8
-		endMove $8080
-		moveEntity $9B,$FF,$6,$8
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 16
+		endActions
+		entityActions $7,$0
+		 moveDown 16
+		endActions
+		entityActions $1F,$0
+		 moveDown 16
+		endActions
+		entityActions $99,$0
+		 moveDownLeft 8
+		endActions
+		entityActions $9A,$0
+		 moveDownLeft 8
+		endActions
+		entityActions $9B,$FF
+		 moveDownLeft 8
+		endActions
 		hideEntity $99
 		hideEntity $9A
 		hideEntity $9B
@@ -115,15 +121,17 @@ cs_59656:       textCursor $6D4
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $1F,$FF,$2,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveLeft 1
+		endActions
 		nextSingleText $C0,$1F  ; "Small?  How small?{W1}"
 		csWait 5
 		setActscript $7,$0,eas_461B6
 		csWait 100
-		moveEntity $7,$FF,$3,$2
-		moreMove $0,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 2
+		 moveRight 1
+		endActions
 		csWait 5
 		setActscript $7,$0,eas_461B6
 		csWait 130
@@ -132,10 +140,12 @@ cs_59656:       textCursor $6D4
 		setFacing $1F,DOWN
 		nextSingleText $0,$7    ; "Let's see...now we're on a{N}desk...and it's very large,{N}like a village.{W1}"
 		nextSingleText $0,$80   ; "Exactly.{W1}"
-		moveEntity $0,$0,$2,$1
-		endMove $8080
-		moveEntity $7,$FF,$0,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveLeft 1
+		endActions
+		entityActions $7,$FF
+		 moveRight 1
+		endActions
 		csWait 5
 		setActscript $0,$0,eas_461B6
 		csWait 10
@@ -153,10 +163,12 @@ cs_59656:       textCursor $6D4
 		entityShiver $7
 		setActscript $0,$FF,eas_46172
 		setActscript $7,$FF,eas_46172
-		moveEntity $0,$0,$1,$1
-		endMove $8080
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 1
+		endActions
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
 		nextText $0,$7          ; "Goliath!{W2}"
@@ -190,8 +202,9 @@ cs_59656:       textCursor $6D4
 		csWait 20
 		playSound SFX_DIALOG_BLEEP_8
 		csWait 50
-		moveEntity $7,$FF,$2,$2
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 2
+		endActions
 		setFacing $0,DOWN
 		setFacing $7,UP
 		setFacing $1F,DOWN
@@ -226,8 +239,9 @@ cs_5996E:       textCursor $702
 		nextText $0,$86         ; "A Cotton Balloon is inside.{W2}"
 		nextSingleText $0,$86   ; "With it you can leave{N}Desktop Kingdom safely.{N}Good luck!{W1}"
 		csc_end
-cs_599A4:       moveEntity $88,$FF,$1,$1
-		endMove $8080
+cs_599A4:       entityActions $88,$FF
+		 moveUp 1
+		endActions
 		setFacing $88,DOWN
 		csc_end
 cs_599B2:       setActscript $0,$FF,eas_Init
@@ -236,20 +250,23 @@ cs_599B2:       setActscript $0,$FF,eas_Init
 		setEntityDest $0,35,24
 		setEntityDest $7,34,24
 		setEntityDest $1F,33,24
-		moveEntity $0,$0,$E,$1
-		moreMove $B,$1
-		moreMove $3,$2
-		endMove $8080
-		moveEntity $7,$0,$0,$1
-		moreMove $E,$1
-		moreMove $7,$1
-		moreMove $B,$1
-		endMove $8080
-		moveEntity $1F,$FF,$0,$1
-		moreMove $E,$1
-		moreMove $B,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $0,$0
+		 jumpRight 1
+		 faceDown 1
+		 moveDown 2
+		endActions
+		entityActions $7,$0
+		 moveRight 1
+		 jumpRight 1
+		 moveDownRight 1
+		 faceDown 1
+		endActions
+		entityActions $1F,$FF
+		 moveRight 1
+		 jumpRight 1
+		 faceDown 1
+		 moveDown 1
+		endActions
 		setPos $89,36,25,UP
 		setPos $8A,37,24,UP
 		setPos $8B,35,24,UP
@@ -280,17 +297,23 @@ cs_599B2:       setActscript $0,$FF,eas_Init
 		ac_setSpeed 2570        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $0,$0,$3,$6
-		endMove $8080
-		moveEntity $7,$0,$3,$6
-		endMove $8080
-		moveEntity $1F,$0,$3,$6
-		endMove $8080
-		moveEntity $89,$0,$3,$6
-		endMove $8080
-		moveEntity $8A,$0,$3,$6
-		endMove $8080
-		moveEntity $8B,$FF,$3,$6
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 6
+		endActions
+		entityActions $7,$0
+		 moveDown 6
+		endActions
+		entityActions $1F,$0
+		 moveDown 6
+		endActions
+		entityActions $89,$0
+		 moveDown 6
+		endActions
+		entityActions $8A,$0
+		 moveDown 6
+		endActions
+		entityActions $8B,$FF
+		 moveDown 6
+		endActions
 		mapSysEvent $1A,$1A,$8,$3
 		csc_end

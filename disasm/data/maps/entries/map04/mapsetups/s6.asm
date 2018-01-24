@@ -35,8 +35,9 @@ cs_51750:       textCursor $2CB
 		csWait 30
 		setQuake 1
 		nextSingleText $0,$80   ; "Your Majesty!  Sir Astral!{N}Are you alright?{W1}"
-		moveEntity $1F,$FF,$3,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$1F   ; "You didn't escape?{N}Why are you here?{W1}"
 		nextSingleText $0,$80   ; "We've been waiting for you.{N}Chasms are appearing in the{N}ground.{W2}{N}Everybody is on the ship{N}to avoid falling into a{N}hole.{W1}"
 		setFacing $1F,RIGHT
@@ -51,10 +52,12 @@ cs_51750:       textCursor $2CB
 		ac_setSpeed 2056        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$0,$3,$1
-		endMove $8080
-		moveEntity $81,$0,$0,$1
-		endMove $8080
+		entityActions $80,$0
+		 moveDown 1
+		endActions
+		entityActions $81,$0
+		 moveRight 1
+		endActions
 		playSound SFX_BIG_DOOR_RUMBLE
 		setQuake 3
 		csWait 30

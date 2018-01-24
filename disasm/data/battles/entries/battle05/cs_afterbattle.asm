@@ -3,9 +3,10 @@
 ; 0x49B48..0x49BCA : Cutscene after battle 5
 abcs_battle05:  textCursor $91C
 		setActscript $5,$FF,eas_Init
-		moveEntity $5,$FF,$3,$1
-		moreMove $2,$2
-		endMove $8080
+		entityActions $5,$FF
+		 moveDown 1
+		 moveLeft 2
+		endActions
 		setFacing $5,DOWN
 		nextText $0,$5          ; "This is the Jewel of Light{N}that I stole from the shrine.{W2}"
 		nextSingleText $0,$5    ; "The other jewel is missing.{N}I'll give you this one now.{W1}"

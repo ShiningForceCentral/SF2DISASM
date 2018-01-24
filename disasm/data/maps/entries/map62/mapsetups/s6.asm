@@ -18,17 +18,20 @@ cs_5C876:       textCursor $E1D
 		nextSingleText $0,$81   ; "Petro?  Is he back?{W1}"
 		setCamDest 1,5
 		nextSingleText $0,$81   ; "Petro!  The Sky Orb is OUR{N}treasure!  Give it back!{W2}"
-		moveEntity $81,$FF,$3,$3
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 3
+		endActions
 		nextSingleText $0,$81   ; "Say something!{N}Petro!{W1}"
-		moveEntity $81,$FF,$3,$2
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 2
+		endActions
 		customActscript $81,$FF
 		ac_setSpeed 4112        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $81,$FF,$3,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 1
+		endActions
 		setCamDest 1,10
 		nextSingleText $0,$81   ; "Oh, you're not Petro.{N}Who...are you?{W1}"
 		csc_end
@@ -40,14 +43,16 @@ cs_5C8D4:       textCursor $E23
 		setFacing $81,DOWN
 		nextText $0,$81         ; "I think he went to Grans{N}Island to operate an ancient{N}vehicle.{W2}"
 		nextSingleText $0,$81   ; "I've lost my purpose to live.{W1}"
-		moveEntity $81,$FF,$1,$6
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 6
+		endActions
 		csc_end
 cs_5C8FE:       textCursor $E2B
 		nextSingleText $0,$81   ; "You need my help?{W1}"
 		nextSingleText $0,$81   ; "Come in.  Talk to me.{W1}"
-		moveEntity $0,$FF,$1,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveUp 1
+		endActions
 		csc_end
 cs_5C914:       textCursor $E2D
 		nextText $0,$81         ; "I came here looking for{N}ancient treasure, and found{N}the Sky Orb.{W2}"

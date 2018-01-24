@@ -20,13 +20,15 @@ bbcs_21:        textCursor $A10
 		csWait 30
 		setCamDest 23,18
 		nextSingleText $0,$80   ; "Go away!{W1}"
-		moveEntity $7,$FF,$2,$2
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 2
+		endActions
 		nextText $0,$7          ; "But we have to see him.{W2}"
 		nextSingleText $0,$7    ; "Please let us pass!{W1}"
 		setCamDest 5,18
-		moveEntity $80,$FF,$0,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $0,$80   ; "No!  Leave now!{W1}"
 		csWait 50
 		setPos $83,10,24,RIGHT

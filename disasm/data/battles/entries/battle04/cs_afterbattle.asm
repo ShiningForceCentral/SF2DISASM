@@ -22,8 +22,9 @@ abcs_battle04:  textCursor $90F
 		setActscript $2,$FF,eas_Jump
 		csWait 80
 		setPos $1C,18,22,UP
-		moveEntity $1C,$FF,$1,$2
-		endMove $8080
+		entityActions $1C,$FF
+		 moveUp 2
+		endActions
 		setFacing $1C,LEFT
 		setFacing $0,RIGHT
 		setFacing $1,RIGHT
@@ -35,8 +36,9 @@ abcs_battle04:  textCursor $90F
 		ac_setSpeed 16448       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $1C,$FF,$2,$4
-		endMove $8080
+		entityActions $1C,$FF
+		 moveLeft 4
+		endActions
 		setActscript $0,$FF,eas_46172
 		customActscript $0,$FF
 		ac_setSpeed 12336       ;   
@@ -44,12 +46,14 @@ abcs_battle04:  textCursor $90F
 		ac_end
 		setQuake 2
 		playSound SFX_BATTLEFIELD_DEATH
-		moveEntity $0,$FF,$2,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveLeft 1
+		endActions
 		setQuake 0
-		moveEntity $0,$FF,$1,$1
-		moreMove $0,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveUp 1
+		 moveRight 1
+		endActions
 		setActscript $0,$0,eas_RotateRight
 		setFacing $1,UP
 		setFacing $2,UP
@@ -68,23 +72,28 @@ abcs_battle04:  textCursor $90F
 		ac_setSpeed 8224        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $1C,$FF,$0,$1
-		endMove $8080
+		entityActions $1C,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $0,$1C   ; "That lad is their leader.{N}Take him!{W1}"
-		moveEntity $82,$0,$1,$1
-		endMove $8080
-		moveEntity $81,$0,$2,$3
-		endMove $8080
-		moveEntity $80,$FF,$2,$5
-		moreMove $3,$1
-		endMove $8080
+		entityActions $82,$0
+		 moveUp 1
+		endActions
+		entityActions $81,$0
+		 moveLeft 3
+		endActions
+		entityActions $80,$FF
+		 moveLeft 5
+		 moveDown 1
+		endActions
 		setFacing $82,LEFT
 		setFacing $1C,DOWN
 		nextSingleText $0,$1C   ; "Don't worry.  He has only{N}fainted.  Take them to Galam!{W1}"
-		moveEntity $1C,$FF,$0,$1
-		moreMove $3,$1
-		moreMove $0,$2
-		endMove $8080
+		entityActions $1C,$FF
+		 moveRight 1
+		 moveDown 1
+		 moveRight 2
+		endActions
 		mapSysEvent $11,$0,$0,$0
 		csc_end
 ce_49A6A:       mainEntity 13,20,DOWN

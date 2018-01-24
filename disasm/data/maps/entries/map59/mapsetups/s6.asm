@@ -90,9 +90,10 @@ cs_5EB44:       textCursor $E73
 		nextSingleText $0,$82   ; "That Geshp!  He wants{N}everything.{W1}"
 		setPos $82,9,9,DOWN
 		animEntityFadeInOut $82,$7
-		moveEntity $82,$FF,$0,$4
-		moreMove $1,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveRight 4
+		 moveUp 1
+		endActions
 		nextSingleText $0,$80   ; "You noticed that too?{W1}"
 		entityNod $82
 		nextText $0,$82         ; "Yes, King Zeon.{W2}"
@@ -132,14 +133,18 @@ cs_5EBFC:       loadMapFadeIn 53,8,14
 		ac_setSpeed 1028        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $82,$0,$0,$3
-		endMove $8080
-		moveEntity $86,$0,$0,$3
-		endMove $8080
-		moveEntity $87,$0,$0,$3
-		endMove $8080
-		moveEntity $88,$0,$0,$3
-		endMove $8080
+		entityActions $82,$0
+		 moveRight 3
+		endActions
+		entityActions $86,$0
+		 moveRight 3
+		endActions
+		entityActions $87,$0
+		 moveRight 3
+		endActions
+		entityActions $88,$0
+		 moveRight 3
+		endActions
 		setFacing $80,LEFT
 		csWait 30
 		setFacing $80,RIGHT
@@ -154,9 +159,10 @@ cs_5EBFC:       loadMapFadeIn 53,8,14
 		nextSingleText $80,$81  ; "Excellent!{W1}"
 		entityNod $81
 		setCameraEntity $81
-		moveEntity $81,$FF,$0,$2
-		moreMove $1,$2
-		endMove $8080
+		entityActions $81,$FF
+		 moveRight 2
+		 moveUp 2
+		endActions
 		setFacing $81,RIGHT
 		nextText $80,$81        ; "Now, c'mon Granseal losers!{W2}"
 		nextSingleText $80,$81  ; "The Prism Flowers are waiting{N}for you!  Hee, heee!{W1}"
@@ -218,8 +224,9 @@ cs_5EDB8:       textCursor $E99
 		fadeInB
 		setFacing $81,LEFT
 		nextSingleText $80,$81  ; "NOW!{W1}"
-		moveEntity $81,$FF,$0,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $80,$81  ; "Shoot them!  Shoot them!{W1}"
 		playSound SFX_BATTLEFIELD_DEATH
 		setPos $85,12,16,LEFT
@@ -227,12 +234,14 @@ cs_5EDB8:       textCursor $E99
 		setFacing $85,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setPos $85,13,15,UP
-		moveEntity $85,$0,$4,$A
-		endMove $8080
+		entityActions $85,$0
+		 moveUpRight 10
+		endActions
 		flashScreenWhite $2
 		setPos $86,13,15,UP
-		moveEntity $86,$0,$4,$A
-		endMove $8080
+		entityActions $86,$0
+		 moveUpRight 10
+		endActions
 		csWait 20
 		playSound SFX_BATTLEFIELD_DEATH
 		setPos $87,13,17,LEFT
@@ -240,24 +249,28 @@ cs_5EDB8:       textCursor $E99
 		setFacing $87,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setPos $87,14,16,UP
-		moveEntity $87,$0,$4,$A
-		endMove $8080
+		entityActions $87,$0
+		 moveUpRight 10
+		endActions
 		flashScreenWhite $2
 		setPos $88,14,16,UP
-		moveEntity $88,$0,$4,$A
-		endMove $8080
+		entityActions $88,$0
+		 moveUpRight 10
+		endActions
 		playSound SFX_BATTLEFIELD_DEATH
 		setPos $89,14,19,LEFT
 		csWait 30
 		setFacing $89,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setPos $89,15,18,UP
-		moveEntity $89,$0,$4,$A
-		endMove $8080
+		entityActions $89,$0
+		 moveUpRight 10
+		endActions
 		flashScreenWhite $2
 		setPos $8A,15,18,UP
-		moveEntity $8A,$0,$4,$A
-		endMove $8080
+		entityActions $8A,$0
+		 moveUpRight 10
+		endActions
 		csWait 10
 		playSound SFX_BATTLEFIELD_DEATH
 		setPos $8B,15,20,LEFT
@@ -265,24 +278,28 @@ cs_5EDB8:       textCursor $E99
 		setFacing $8B,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setPos $8B,16,19,UP
-		moveEntity $8B,$0,$4,$A
-		endMove $8080
+		entityActions $8B,$0
+		 moveUpRight 10
+		endActions
 		flashScreenWhite $2
 		setPos $8C,16,19,UP
-		moveEntity $8C,$0,$4,$A
-		endMove $8080
+		entityActions $8C,$0
+		 moveUpRight 10
+		endActions
 		playSound SFX_BATTLEFIELD_DEATH
 		setPos $8B,12,16,LEFT
 		csWait 30
 		setFacing $8B,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setPos $8B,13,15,UP
-		moveEntity $8B,$0,$4,$A
-		endMove $8080
+		entityActions $8B,$0
+		 moveUpRight 10
+		endActions
 		flashScreenWhite $2
 		setPos $8C,13,15,UP
-		moveEntity $8C,$FF,$4,$A
-		endMove $8080
+		entityActions $8C,$FF
+		 moveUpRight 10
+		endActions
 		csc_end
 eas_5EF46:      ac_setAnimSpeedX2 $FFFF
 		ac_setTransparency $FFFF
@@ -315,12 +332,13 @@ cs_5EF60:       textCursor $E9B
 		setQuake 1
 		csWait 10
 		setQuake 0
-		moveEntity $7,$FF,$0,$1
-		moreMove $E,$1
-		moreMove $F,$1
-		moreMove $E,$1
-		moreMove $F,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 1
+		 jumpRight 1
+		 jumpLeft 1
+		 jumpRight 1
+		 jumpLeft 1
+		endActions
 		setFacing $7,LEFT
 		nextSingleText $80,$7   ; "Oooouu!!  What was that?!{N}Lightning?{W1}"
 		setFacing $0,RIGHT
@@ -341,8 +359,9 @@ cs_5EF60:       textCursor $E9B
 		csWait 10
 		nextText $80,$1A        ; "We've sustained damage to{N}the engine!{W2}"
 		nextSingleText $80,$1A  ; "We might crash!{W1}"
-		moveEntity $80,$FF,$0,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveRight 1
+		endActions
 		setFacing $80,UP
 		entityShiver $80
 		nextText $0,$80         ; "Crash?!{W2}"
@@ -387,8 +406,9 @@ cs_5EF60:       textCursor $E9B
 		ac_jump eas_Idle        ;   
 		ac_end
 		cameraSpeed $10
-		moveEntity $80,$0,$2,$C
-		endMove $8080
+		entityActions $80,$0
+		 moveLeft 12
+		endActions
 		executeSubroutine csub_5F326
 		fadeInB
 		executeSubroutine sub_5FD92

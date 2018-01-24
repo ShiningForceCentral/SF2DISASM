@@ -16,8 +16,9 @@ cs_4ED48:       playSound MUSIC_BATTLE_THEME_3
 		setFacing $0,UP
 		setCamDest 12,4
 		nextSingleText $0,$80   ; "But, Odd Eye went to...{W2}"
-		moveEntity $80,$FF,$3,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 2
+		endActions
 		nextText $0,$80         ; "Impossible!{N}He was defeated?{W2}"
 		nextText $0,$80         ; "Inconceivable!  But...{N}OK, I'll stop you here.{W2}"
 		nextSingleText $0,$80   ; "You shall die now!{W1}"

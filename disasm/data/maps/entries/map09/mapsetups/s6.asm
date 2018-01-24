@@ -31,9 +31,10 @@ return_568F4:
 cs_568F6:       textCursor $55C
 		setFacing $0,RIGHT
 		csWait 20
-		moveEntity $82,$FF,$2,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveLeft 1
+		 moveUp 1
+		endActions
 		setFacing $82,LEFT
 		nextSingleText $C0,$82  ; "Where are you from?{W1}"
 		csWait 20
@@ -44,8 +45,9 @@ cs_568F6:       textCursor $55C
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $82,$FF,$2,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveLeft 1
+		endActions
 		nextSingleText $C0,$82  ; "Then we could be related.{W1}"
 		csWait 20
 		setFacing $7,UP
@@ -57,12 +59,14 @@ cs_568F6:       textCursor $55C
 		csWait 30
 		setFacing $82,LEFT
 		csWait 40
-		moveEntity $82,$0,$0,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $82,$0
+		 moveRight 1
+		 moveDown 1
+		endActions
 		csWait 20
-		moveEntity $0,$FF,$0,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveRight 1
+		endActions
 		csWait 10
 		setFacing $0,DOWN
 		setFacing $7,RIGHT
@@ -76,8 +80,9 @@ cs_568F6:       textCursor $55C
 		nextText $C0,$82        ; "He wasn't found in Parmecia,{N}so maybe he went to Grans.{N}I'm not really sure.{W2}"
 		nextSingleText $C0,$82  ; "I think I'll take a nap{N}now.  Bye.{W1}"
 		csWait 30
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		setFacing $7,RIGHT
 		setFacing $0,LEFT
 		followEntity $7,$0,$2
@@ -98,11 +103,13 @@ cs_569BC:       textCursor $566
 		ac_jump eas_Idle        ;   
 		ac_end
 		setActscript $0,$FF,eas_46172
-		moveEntity $B,$0,$1,$1
-		endMove $8080
+		entityActions $B,$0
+		 moveUp 1
+		endActions
 		csWait 3
-		moveEntity $0,$FF,$1,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveUp 1
+		endActions
 		nextText $C0,$B         ; "You're an adventurer, right?{N}Don't you need a vehicle?{N}Huh?{W2}"
 		nextSingleText $C0,$B   ; "You can get the Ancient{N}Caravan with that sword!{W1}"
 		setEntityDest $7,15,58
@@ -121,8 +128,9 @@ cs_569BC:       textCursor $566
 		ac_jump eas_Idle        ;   
 		ac_end
 		setActscript $B,$FF,eas_46172
-		moveEntity $B,$FF,$3,$1
-		endMove $8080
+		entityActions $B,$FF
+		 moveDown 1
+		endActions
 cs_56A70:       textCursor $56F
 		nextSingleText $C0,$B   ; "You don't know what you'll{N}be missing!{W1}"
 		setFacing $B,DOWN

@@ -19,9 +19,10 @@ bbcs_26:        textCursor $A24
 		nextSingleText $C0,$13  ; "I...uh...{W1}"
 		nextText $0,$80         ; "Paladins of Pacalon are{N}cowards!  {NAME;19}, don't{N}you have any pride?{W2}"
 		nextSingleText $0,$80   ; "Wimp!{W1}"
-		moveEntity $85,$FF,$1,$2
-		moreMove $0,$1
-		endMove $8080
+		entityActions $85,$FF
+		 moveUp 2
+		 moveRight 1
+		endActions
 		setFacing $85,UP
 		nextSingleText $C0,$85  ; "Shut up!  Mr. {NAME;19} is{N}the bravest soldier in the{N}world!{W1}"
 		nextSingleText $C0,$13  ; "I can defend myself.{W1}"
@@ -34,8 +35,9 @@ bbcs_26:        textCursor $A24
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $85,$0,$1,$3
-		endMove $8080
+		entityActions $85,$0
+		 moveUp 3
+		endActions
 		csWait 5
 		animEntityFadeInOut $80,$6
 		waitIdle $85
@@ -49,8 +51,9 @@ bbcs_26:        textCursor $A24
 		ac_setSpeed 16448       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $83,$0,$2,$1
-		endMove $8080
+		entityActions $83,$0
+		 moveLeft 1
+		endActions
 		csWait 3
 		customActscript $85,$FF
 		ac_setSpeed 16448       ;   
@@ -70,9 +73,10 @@ bbcs_26:        textCursor $A24
 		setFacing $13,DOWN
 		setFacing $86,DOWN
 		csWait 30
-		moveEntity $86,$FF,$2,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $86,$FF
+		 moveLeft 1
+		 moveDown 1
+		endActions
 		nextText $C0,$86        ; "What?!{W2}"
 		nextSingleText $C0,$86  ; "If Mr. {NAME;19} was not{N}ill, you'd be history!{W1}"
 		nextText $0,$80         ; "Oh, is {NAME;19} ill?{W1}"
@@ -88,10 +92,12 @@ bbcs_26:        textCursor $A24
 		ac_setSpeed 10280       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $86,$0,$3,$2
-		endMove $8080
-		moveEntity $81,$0,$0,$4
-		endMove $8080
+		entityActions $86,$0
+		 moveDown 2
+		endActions
+		entityActions $81,$0
+		 moveRight 4
+		endActions
 		csWait 20
 		customActscript $86,$FF
 		ac_setSpeed 16448       ;   
@@ -104,8 +110,9 @@ bbcs_26:        textCursor $A24
 		nextSingleText $C0,$86  ; "Grruuu....{W1}"
 		setActscript $86,$FF,eas_Die
 		setFacing $81,DOWN
-		moveEntity $80,$FF,$1,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 2
+		endActions
 		nextSingleText $0,$80   ; "You look so sad,{N}{NAME;19}....{W1}"
 		nextSingleText $C0,$13  ; "You're not just a normal{N}devil soldier.{W1}"
 		nextText $0,$80         ; "You're right, {NAME;19}.{N}I see why you're the leader{N}of the Pacalon Army.{W2}"
@@ -121,8 +128,9 @@ bbcs_26:        textCursor $A24
 		setPos $84,18,12,DOWN
 		animEntityFadeInOut $84,$5
 		nextSingleText $C0,$13  ; "What did you do?{W1}"
-		moveEntity $84,$FF,$3,$1
-		endMove $8080
+		entityActions $84,$FF
+		 moveDown 1
+		endActions
 		animEntityFadeInOut $84,$4
 		nextSingleText $C0,$13  ; "I...can't...!{N}My body won't...{W1}"
 		entityShiver $13
@@ -144,13 +152,15 @@ bbcs_26:        textCursor $A24
 		setActscript $81,$0,eas_Jump
 		setActscript $80,$FF,eas_Jump
 		setCamDest 13,15
-		moveEntity $80,$FF,$3,$3
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 3
+		endActions
 		csWait 5
 		setActscript $80,$0,eas_461B6
 		csWait 120
-		moveEntity $80,$FF,$2,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 1
+		endActions
 		nextSingleText $0,$80   ; "Who said that?{W1}"
 		setCamDest 2,20
 		csWait 60
@@ -164,8 +174,9 @@ bbcs_26:        textCursor $A24
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$FF,$0,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveRight 2
+		endActions
 		nextSingleText $0,$80   ; "I'd better leave...{W2}"
 		setFacing $80,UP
 		nextSingleText $0,$80   ; "Devil soldiers!  Stop that{N}force from Granseal!{W1}"

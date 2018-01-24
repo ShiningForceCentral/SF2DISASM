@@ -16,20 +16,23 @@ IntroCutscene3: textCursor $1077
 		entityShiver $80
 		entityShiver $80
 		nextSingleText $0,$80   ; "Ugh!  Ugghhh!{N}Phew...I can't...{D2}"
-		moveEntity $81,$FF,$1,$1
-		moreMove $A,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 1
+		 faceLeft 1
+		endActions
 		setFacing $80,RIGHT
 		nextSingleText $0,$81   ; "You wimp!{N}Let me do it!{D2}"
 		entityShiver $80
 		csWait 20
-		moveEntity $81,$0,$2,$1
-		moreMove $B,$1
-		endMove $8080
-		moveEntity $80,$FF,$2,$1
-		moreMove $3,$1
-		moreMove $9,$1
-		endMove $8080
+		entityActions $81,$0
+		 moveLeft 1
+		 faceDown 1
+		endActions
+		entityActions $80,$FF
+		 moveLeft 1
+		 moveDown 1
+		 faceUp 1
+		endActions
 		csWait 30
 		setFacing $81,DOWN
 		nextSingleText $0,$81   ; "Yeah, right.{D2}"
@@ -44,30 +47,34 @@ IntroCutscene3: textCursor $1077
 		setFacing $81,DOWN
 		entityShakeHead $81
 		nextSingleText $0,$81   ; "Blast!  It won't budge!{D2}"
-		moveEntity $5,$FF,$1,$1
-		endMove $8080
+		entityActions $5,$FF
+		 moveUp 1
+		endActions
 		csWait 10
 		setActscript $5,$FF,eas_Jump
 		setActscript $5,$FF,eas_Jump
 		setFacing $81,DOWN
 		nextSingleText $80,$5   ; "You idiots!{N}Let me do it.{D2}"
 		entityShiver $81
-		moveEntity $81,$FF,$0,$1
-		moreMove $3,$1
-		moreMove $9,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveRight 1
+		 moveDown 1
+		 faceUp 1
+		endActions
 		csWait 20
 		customActscript $5,$FF
 		ac_setSpeed 4112        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $5,$FF,$1,$1
-		endMove $8080
+		entityActions $5,$FF
+		 moveUp 1
+		endActions
 		csWait 20
 		entityNod $5
 		csWait 10
-		moveEntity $5,$0,$1,$1
-		endMove $8080
+		entityActions $5,$0
+		 moveUp 1
+		endActions
 		csWait 6
 		setActscript $5,$FF,eas_461AA
 		setFacing $5,DOWN
@@ -90,8 +97,9 @@ IntroCutscene3: textCursor $1077
 		setActscript $81,$FF,eas_Jump
 		entityShiver $5
 		csWait 30
-		moveEntity $5,$0,$3,$1
-		endMove $8080
+		entityActions $5,$0
+		 moveDown 1
+		endActions
 		csWait 6
 		setActscript $5,$FF,eas_461AA
 		customActscript $5,$FF
@@ -101,8 +109,9 @@ IntroCutscene3: textCursor $1077
 		setActscript $5,$FF,eas_46172
 		entitySprite $5,$5
 		setFacing $5,UP
-		moveEntity $5,$FF,$3,$1
-		endMove $8080
+		entityActions $5,$FF
+		 moveDown 1
+		endActions
 		setFacing $80,RIGHT
 		setFacing $81,LEFT
 		csWait 20
@@ -117,12 +126,14 @@ IntroCutscene3: textCursor $1077
 		csWait 20
 		nextSingleText $80,$5   ; "This time, I'll pull both of{N}the jewels at the same time!{D2}"
 		setActscript $5,$FF,eas_Init
-		moveEntity $5,$FF,$1,$1
-		endMove $8080
+		entityActions $5,$FF
+		 moveUp 1
+		endActions
 		setFacing $80,UP
 		setFacing $81,UP
-		moveEntity $5,$0,$1,$1
-		endMove $8080
+		entityActions $5,$0
+		 moveUp 1
+		endActions
 		csWait 6
 		setActscript $5,$FF,eas_461AA
 		setFacing $5,DOWN
@@ -142,18 +153,21 @@ IntroCutscene3: textCursor $1077
 		setBlocks 26,18,1,1,26,4
 		entitySprite $5,$5
 		setFacing $5,UP
-		moveEntity $5,$0,$3,$1
-		endMove $8080
+		entityActions $5,$0
+		 moveDown 1
+		endActions
 		csWait 3
 		setActscript $5,$FF,eas_461AA
-		moveEntity $5,$FF,$3,$5
-		endMove $8080
+		entityActions $5,$FF
+		 moveDown 5
+		endActions
 		setQuake 3
 		setActscript $5,$FF,eas_Init
 		setFacing $80,DOWN
 		setFacing $81,DOWN
-		moveEntity $5,$FF,$1,$2
-		endMove $8080
+		entityActions $5,$FF
+		 moveUp 2
+		endActions
 		setFacing $5,LEFT
 		customActscript $5,$FF
 		ac_setAnimCounter $0    ;   
@@ -167,19 +181,22 @@ IntroCutscene3: textCursor $1077
 		setActscript $80,$0,eas_Jump
 		setActscript $81,$FF,eas_Jump
 		csWait 20
-		moveEntity $80,$0,$3,$2
-		moreMove $8,$1
-		endMove $8080
-		moveEntity $81,$FF,$3,$2
-		moreMove $A,$1
-		endMove $8080
+		entityActions $80,$0
+		 moveDown 2
+		 faceRight 1
+		endActions
+		entityActions $81,$FF
+		 moveDown 2
+		 faceLeft 1
+		endActions
 		nextSingleText $0,$80   ; "Are you OK?{D2}"
 		csWait 40
 		nextSingleText $80,$5   ; "Yeah.  I feel just great.{D2}"
-		moveEntity $80,$FF,$1,$1
-		moreMove $0,$1
-		moreMove $9,$28
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 1
+		 moveRight 1
+		 faceUp 40
+		endActions
 		setActscript $80,$FF,eas_Jump
 		setActscript $80,$FF,eas_Jump
 		csWait 20
@@ -238,19 +255,22 @@ IntroCutscene3: textCursor $1077
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $5,$0,$3,$1
-		moreMove $2,$7
-		moreMove $1,$6
-		endMove $8080
-		moveEntity $80,$0,$3,$2
-		moreMove $2,$7
-		moreMove $1,$5
-		endMove $8080
-		moveEntity $81,$FF,$B,$A
-		moreMove $3,$1
-		moreMove $2,$8
-		moreMove $1,$4
-		endMove $8080
+		entityActions $5,$0
+		 moveDown 1
+		 moveLeft 7
+		 moveUp 6
+		endActions
+		entityActions $80,$0
+		 moveDown 2
+		 moveLeft 7
+		 moveUp 5
+		endActions
+		entityActions $81,$FF
+		 faceDown 10
+		 moveDown 1
+		 moveLeft 8
+		 moveUp 4
+		endActions
 		playSound SFX_WARP
 		fadeOutToBlackHalf
 		setPos $5,2,8,DOWN
@@ -260,39 +280,50 @@ IntroCutscene3: textCursor $1077
 		csWait 10
 		fadeInFromBlackHalf
 		setCameraEntity $5
-		moveEntity $5,$FF,$1,$1
-		endMove $8080
-		moveEntity $5,$0,$1,$1
-		endMove $8080
-		moveEntity $80,$FF,$1,$1
-		endMove $8080
-		moveEntity $5,$0,$1,$1
-		moreMove $0,$3
-		endMove $8080
-		moveEntity $80,$0,$1,$2
-		moreMove $0,$2
-		endMove $8080
-		moveEntity $81,$FF,$1,$3
-		endMove $8080
-		moveEntity $81,$FF,$0,$1
-		endMove $8080
+		entityActions $5,$FF
+		 moveUp 1
+		endActions
+		entityActions $5,$0
+		 moveUp 1
+		endActions
+		entityActions $80,$FF
+		 moveUp 1
+		endActions
+		entityActions $5,$0
+		 moveUp 1
+		 moveRight 3
+		endActions
+		entityActions $80,$0
+		 moveUp 2
+		 moveRight 2
+		endActions
+		entityActions $81,$FF
+		 moveUp 3
+		endActions
+		entityActions $81,$FF
+		 moveRight 1
+		endActions
 		customActscript $81,$FF
 		ac_setAnimCounter $0    ;   
 		ac_setFlip $1           ;   
 		ac_updateSprite         ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $5,$0,$0,$2
-		endMove $8080
-		moveEntity $80,$FF,$0,$2
-		endMove $8080
+		entityActions $5,$0
+		 moveRight 2
+		endActions
+		entityActions $80,$FF
+		 moveRight 2
+		endActions
 		setFacing $5,LEFT
 		setFacing $80,LEFT
 		csWait 30
-		moveEntity $5,$0,$2,$2
-		endMove $8080
-		moveEntity $80,$FF,$2,$2
-		endMove $8080
+		entityActions $5,$0
+		 moveLeft 2
+		endActions
+		entityActions $80,$FF
+		 moveLeft 2
+		endActions
 		csWait 30
 		setActscript $81,$FF,eas_Init
 		setFacing $81,DOWN
@@ -301,15 +332,18 @@ IntroCutscene3: textCursor $1077
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $5,$0,$0,$2
-		moreMove $3,$A
-		endMove $8080
-		moveEntity $80,$0,$0,$3
-		moreMove $3,$9
-		endMove $8080
-		moveEntity $81,$FF,$0,$4
-		moreMove $3,$8
-		endMove $8080
+		entityActions $5,$0
+		 moveRight 2
+		 moveDown 10
+		endActions
+		entityActions $80,$0
+		 moveRight 3
+		 moveDown 9
+		endActions
+		entityActions $81,$FF
+		 moveRight 4
+		 moveDown 8
+		endActions
 		setQuake 0
 		fadeOutToBlackHalf
 		csc_end

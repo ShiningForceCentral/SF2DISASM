@@ -22,8 +22,9 @@ bbcs_06:        textCursor $926
 		entityShakeHead $82
 		setFacing $81,LEFT
 		nextSingleText $0,$81   ; "And you want to bring it to{N}him?  Hmmmm.  I don't know....{W1}"
-		moveEntity $80,$FF,$1,$5
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 5
+		endActions
 		setFacing $80,RIGHT
 		nextSingleText $0,$80   ; "What's going on here?{W1}"
 		setFacing $82,LEFT
@@ -37,14 +38,16 @@ bbcs_06:        textCursor $926
 		nextSingleText $0,$80   ; "I'll get the package from{N}them.{W1}"
 		nextSingleText $C0,$5   ; "I think we're in trouble!{W1}"
 		setCameraEntity $80
-		moveEntity $80,$FF,$2,$2
-		moreMove $1,$4
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 2
+		 moveUp 4
+		endActions
 		nextSingleText $0,$80   ; "Hand it over.{N}I'll deliver it to...?{N}You!!!{W1}"
 		setCameraEntity $FFFF
 		setActscript $80,$FF,eas_46172
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$80   ; "How did you escape from{N}jail?!{W1}"
 		setActscript $80,$FF,eas_Init
 		setFacing $80,DOWN

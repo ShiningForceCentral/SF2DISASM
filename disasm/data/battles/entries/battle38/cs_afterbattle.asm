@@ -49,17 +49,19 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		ac_setSpeed 2056        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $88,$FF,$0,$1
-		moreMove $1,$1
-		moreMove $2,$1
-		moreMove $1,$2
-		moreMove $0,$1
-		moreMove $3,$1
-		moreMove $0,$1
-		moreMove $1,$1
-		endMove $8080
-		moveEntity $88,$0,$1,$1
-		endMove $8080
+		entityActions $88,$FF
+		 moveRight 1
+		 moveUp 1
+		 moveLeft 1
+		 moveUp 2
+		 moveRight 1
+		 moveDown 1
+		 moveRight 1
+		 moveUp 1
+		endActions
+		entityActions $88,$0
+		 moveUp 1
+		endActions
 		csWait 12
 		setActscript $88,$FF,eas_461AA
 		setQuake 1
@@ -77,14 +79,17 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		ac_jump eas_Idle        ;   
 		ac_end
 		setQuake 0
-		moveEntity $88,$FF,$3,$1
-		endMove $8080
+		entityActions $88,$FF
+		 moveDown 1
+		endActions
 		setFacing $88,DOWN
-		moveEntity $88,$FF,$3,$1
-		endMove $8080
+		entityActions $88,$FF
+		 moveDown 1
+		endActions
 		setFacing $88,RIGHT
-		moveEntity $88,$FF,$3,$1
-		endMove $8080
+		entityActions $88,$FF
+		 moveDown 1
+		endActions
 		setFacing $88,UP
 		csWait 40
 		entityShiver $88
@@ -103,15 +108,18 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		setActscript $88,$FF,eas_Jump
 		setActscript $88,$FF,eas_46172
 		nextSingleText $0,$88   ; "Nooooooo!{W1}"
-		moveEntity $88,$FF,$1,$2
-		endMove $8080
+		entityActions $88,$FF
+		 moveUp 2
+		endActions
 		nextSingleText $0,$88   ; "Please...please let me go.{W1}"
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $C0,$1F  ; "We don't want to kill{N}you.{N}You've lost your powers.{W1}"
 		nextSingleText $0,$88   ; "I know...(sob, sob)....{W1}"
-		moveEntity $7,$FF,$0,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $C0,$7   ; "You may go.{W1}"
 		setFacing $88,LEFT
 		nextSingleText $0,$88   ; "Thank you.{W1}"
@@ -119,8 +127,9 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		setFacing $88,UP
 		setCameraEntity $88
 		csWait 60
-		moveEntity $0,$FF,$0,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveRight 1
+		endActions
 		setFacing $0,DOWN
 		csWait 60
 		cameraSpeed $8
@@ -128,20 +137,24 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		ac_setSpeed 2056        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $88,$FF,$1,$1
-		endMove $8080
+		entityActions $88,$FF
+		 moveUp 1
+		endActions
 		setFacing $7,UP
 		setFacing $0,LEFT
-		moveEntity $88,$FF,$1,$2
-		endMove $8080
+		entityActions $88,$FF
+		 moveUp 2
+		endActions
 		setFacing $0,UP
-		moveEntity $88,$FF,$1,$2
-		endMove $8080
+		entityActions $88,$FF
+		 moveUp 2
+		endActions
 		csWait 40
 		setFacing $88,DOWN
 		nextSingleText $0,$88   ; "I won't forget this.{W1}"
-		moveEntity $88,$FF,$1,$3
-		endMove $8080
+		entityActions $88,$FF
+		 moveUp 3
+		endActions
 		flashScreenWhite $1E
 		playSound SFX_BATTLEFIELD_DEATH
 		setQuake 3
@@ -162,8 +175,9 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		setActscript $88,$FF,eas_Jump
 		csWait 30
 		setActscript $88,$FF,eas_46172
-		moveEntity $88,$FF,$1,$1
-		endMove $8080
+		entityActions $88,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $C0,$89  ; "Do you remember your vow?{W1}"
 		entityShakeHead $88
 		nextText $C0,$89        ; "You failed to get the jewel{N}from {LEADER}.{W2}"
@@ -225,45 +239,53 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		ac_jump eas_Idle        ;   
 		ac_end
 		playSound SFX_BOLT_SPELL
-		moveEntity $80,$FF,$3,$3
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 3
+		endActions
 		setFacing $88,LEFT
 		entitySprite $88,$B4
 		setActscript $88,$0,eas_AnimSpeedx2
 		setActscript $80,$0,eas_JumpLeft
 		playSound SFX_BOLT_SPELL
-		moveEntity $81,$FF,$6,$2
-		endMove $8080
+		entityActions $81,$FF
+		 moveDownLeft 2
+		endActions
 		setActscript $81,$0,eas_JumpRight
 		hideEntity $80
 		playSound SFX_BOLT_SPELL
-		moveEntity $82,$FF,$2,$3
-		endMove $8080
+		entityActions $82,$FF
+		 moveLeft 3
+		endActions
 		setActscript $82,$0,eas_JumpLeft
 		hideEntity $81
 		playSound SFX_BOLT_SPELL
-		moveEntity $83,$FF,$5,$2
-		endMove $8080
+		entityActions $83,$FF
+		 moveUpLeft 2
+		endActions
 		setActscript $83,$0,eas_JumpRight
 		hideEntity $82
 		playSound SFX_BOLT_SPELL
-		moveEntity $84,$FF,$1,$3
-		endMove $8080
+		entityActions $84,$FF
+		 moveUp 3
+		endActions
 		setActscript $84,$0,eas_JumpLeft
 		hideEntity $83
 		playSound SFX_BOLT_SPELL
-		moveEntity $85,$FF,$4,$2
-		endMove $8080
+		entityActions $85,$FF
+		 moveUpRight 2
+		endActions
 		setActscript $85,$0,eas_JumpRight
 		hideEntity $84
 		playSound SFX_BOLT_SPELL
-		moveEntity $86,$FF,$0,$3
-		endMove $8080
+		entityActions $86,$FF
+		 moveRight 3
+		endActions
 		setActscript $86,$0,eas_JumpLeft
 		hideEntity $85
 		playSound SFX_BOLT_SPELL
-		moveEntity $87,$FF,$7,$2
-		endMove $8080
+		entityActions $87,$FF
+		 moveDownRight 2
+		endActions
 		setActscript $87,$0,eas_JumpRight
 		hideEntity $86
 		csWait 8
@@ -276,12 +298,14 @@ cs_4DF00:       setActscript $80,$FF,eas_46172
 		flickerOnce
 		cameraSpeed $30
 		setCamDest 3,20
-		moveEntity $1F,$FF,$1,$3
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 3
+		endActions
 		nextSingleText $0,$1F   ; "Zeon is such an unfeeling{N}devil...(shiver).{W1}"
-		moveEntity $7,$FF,$0,$1
-		moreMove $1,$2
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 1
+		 moveUp 2
+		endActions
 		nextSingleText $0,$7    ; "He will do the same to us{N}if we lose to him.{W1}"
 		nextSingleText $0,$1F   ; "We must not be defeated.{W1}"
 		followEntity $1E,$0,$2

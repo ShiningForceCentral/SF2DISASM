@@ -62,12 +62,14 @@ cs_4D728:       fadeInB
 		animEntityFadeInOut $80,$6
 		csWait 50
 		setCamDest 37,5
-		moveEntity $7,$FF,$3,$1
-		moreMove $2,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 1
+		 moveLeft 1
+		endActions
 		nextSingleText $0,$7    ; "He escaped again!{W1}"
-		moveEntity $1F,$FF,$2,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveLeft 1
+		endActions
 		nextText $0,$1F         ; "Geshp sure is a tricky{N}devil.{W2}"
 		nextSingleText $0,$1F   ; "After him, now!{W1}"
 		csc_end

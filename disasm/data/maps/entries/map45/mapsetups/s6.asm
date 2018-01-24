@@ -38,8 +38,9 @@ cs_600CE:       textCursor $823
 		setPos $7,6,14,UP
 		setCamDest 1,9
 		nextSingleText $80,$1F  ; "Oops!{W1}"
-		moveEntity $1F,$FF,$3,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $80,$1F  ; "She's too beautiful for you!{N}Back, back!{W1}"
 		setActscript $0,$FF,eas_46172
 		setActscript $7,$FF,eas_46172
@@ -55,14 +56,17 @@ cs_600CE:       textCursor $823
 		ac_setSpeed 1028        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $1F,$0,$3,$3
-		endMove $8080
-		moveEntity $0,$0,$C,$14
-		moreMove $3,$3
-		endMove $8080
-		moveEntity $7,$0,$C,$28
-		moreMove $3,$3
-		endMove $8080
+		entityActions $1F,$0
+		 moveDown 3
+		endActions
+		entityActions $0,$0
+		 actionC 20
+		 moveDown 3
+		endActions
+		entityActions $7,$0
+		 actionC 40
+		 moveDown 3
+		endActions
 		csWait 50
 		entityShakeHead $0
 		entityShakeHead $0
@@ -77,19 +81,22 @@ cs_600CE:       textCursor $823
 		setFacing $1F,UP
 		nextSingleText $80,$1F  ; "What?{W1}"
 		setActscript $1F,$FF,eas_Init
-		moveEntity $1F,$FF,$1,$4
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 4
+		endActions
 		nextSingleText $80,$1F  ; "Who are you?{N}You know me?{W1}"
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		moveEntity $0,$0,$1,$4
-		moreMove $0,$1
-		moreMove $1,$1
-		endMove $8080
-		moveEntity $7,$0,$1,$4
-		moreMove $2,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 4
+		 moveRight 1
+		 moveUp 1
+		endActions
+		entityActions $7,$0
+		 moveUp 4
+		 moveLeft 1
+		 moveUp 1
+		endActions
 		setCamDest 1,5
 		nextSingleText $0,$19   ; "Oh...you don't remember me?{W1}"
 		setFacing $1F,DOWN
@@ -100,8 +107,9 @@ cs_600CE:       textCursor $823
 		nextSingleText $80,$1F  ; "{NAME;25}!  I can't believe it!{W1}"
 		nextText $0,$19         ; "How is that scar on your{N}chest.{W2}"
 		nextSingleText $0,$19   ; "Remember?  You snuck up{N}behind me and tapped my{N}shoulder....{W1}"
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		nextText $80,$1F        ; "And you kicked me in the{N}chest...and it left a scar.{N}How could I forget.{W2}"
 		nextSingleText $80,$1F  ; "Nobody but {NAME;25}{N}knew about that scar....{N}It still aches sometimes.{W1}"
 		setActscript $1F,$FF,eas_Jump
@@ -109,13 +117,15 @@ cs_600CE:       textCursor $823
 		nextSingleText $0,$19   ; "I am sorry I kicked you.{W1}"
 		entityShiver $1F
 		nextSingleText $80,$1F  ; "That OK. How have...{W1}"
-		moveEntity $7,$FF,$0,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 1
+		endActions
 		setFacing $7,UP
 		setFacing $0,DOWN
 		nextSingleText $0,$7    ; "Hey, aren't you going to{N}introduce us?{W1}"
-		moveEntity $1F,$FF,$3,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $80,$1F  ; "Of course.{W1}"
 		setQuake 3
 		csWait 40
@@ -146,18 +156,21 @@ cs_600CE:       textCursor $823
 		nextSingleText $0,$19   ; "Close your eyes!{W1}"
 		setActscript $19,$FF,eas_46172
 		setFacing $19,LEFT
-		moveEntity $19,$FF,$1,$2
-		endMove $8080
+		entityActions $19,$FF
+		 moveUp 2
+		endActions
 		setFacing $19,DOWN
 		startEntity $19
 		setActscript $19,$0,eas_Transparent
-		moveEntity $19,$FF,$3,$4
-		endMove $8080
+		entityActions $19,$FF
+		 moveDown 4
+		endActions
 		hideEntity $86
 		setActscript $19,$FF,eas_Init
 		entitySprite $19,$19
-		moveEntity $19,$FF,$3,$2
-		endMove $8080
+		entityActions $19,$FF
+		 moveDown 2
+		endActions
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$0,eas_Jump
 		setActscript $1F,$FF,eas_Jump

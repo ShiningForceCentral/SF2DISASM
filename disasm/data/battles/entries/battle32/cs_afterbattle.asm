@@ -16,16 +16,19 @@ abcs_battle32:  textCursor $B25
 		setActscript $17,$FF,eas_Init
 		setPos $17,10,22,DOWN
 		fadeInB
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$7    ; "I can't believe it!{N}You might have been killed{N}by the devils.{W1}"
 		nextSingleText $0,$1F   ; "Indeed!  Why did you{N}change your mind?{W1}"
-		moveEntity $17,$FF,$3,$1
-		endMove $8080
+		entityActions $17,$FF
+		 moveDown 1
+		endActions
 		nextText $C0,$17        ; "I'm {NAME;23}, from Galam.{N}I was waiting for the chance{N}to escape from them.{W2}"
 		nextSingleText $C0,$17  ; "I can't stand their wicked{N}ways!{W1}"
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		setFacing $7,LEFT
 		setFacing $17,RIGHT
 		nextSingleText $0,$7    ; "You have the same opinion{N}of them as we do.{W1}"
@@ -34,11 +37,13 @@ abcs_battle32:  textCursor $B25
 		nextSingleText $C0,$17  ; "You need a professional{N}soldier like me.{W1}"
 		nextSingleText $0,$1F   ; "Oh, we welcome you.{W1}"
 		setActscript $7,$FF,eas_46172
-		moveEntity $7,$FF,$0,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $0,$7    ; "But, he was on the other{N}side just an minute ago.{W1}"
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "I don't care, {NAME;7}.{N}He has seen the error of his{N}ways.{W1}"
 		setFacing $1F,DOWN
@@ -46,8 +51,9 @@ abcs_battle32:  textCursor $B25
 		entityNod $0
 		join $17
 		joinForceAI $17,$0      ; 0054 JOIN FORCE WITH AI
-		moveEntity $17,$FF,$3,$1
-		endMove $8080
+		entityActions $17,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $C0,$17  ; "Oh, thank you!{W2}"
 		setActscript $17,$FF,eas_Jump
 		setActscript $17,$FF,eas_Jump

@@ -45,8 +45,9 @@ cs_53996:       textCursor $880
 		setFacing $0,DOWN
 		nextSingleText $0,$80   ; "Mmmm....{N}Hmmm...mmmm....{W1}"
 		nextSingleText $0,$81   ; "Oh, father!{N}Please wake up.{W1}"
-		moveEntity $83,$FF,$0,$1
-		endMove $8080
+		entityActions $83,$FF
+		 moveRight 1
+		endActions
 		setFacing $83,UP
 		nextSingleText $0,$83   ; "Sir Astral?{W1}"
 		nextSingleText $80,$82  ; "Hmmm.  Nothing is wrong{N}with his body, but...{W1}"
@@ -68,8 +69,9 @@ cs_53996:       textCursor $880
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $82,$FF,$0,$2
-		endMove $8080
+		entityActions $82,$FF
+		 moveRight 2
+		endActions
 		setActscript $82,$FF,eas_Init
 		nextSingleText $0,$82   ; "What are you doing here?!{W1}"
 		setCamDest 17,34
@@ -80,28 +82,33 @@ cs_53996:       textCursor $880
 		setActscript $1,$0,eas_Jump
 		setActscript $2,$FF,eas_Jump
 		nextSingleText $80,$2   ; "Oops!{W1}"
-		moveEntity $2,$FF,$2,$2
-		moreMove $3,$1
-		endMove $8080
+		entityActions $2,$FF
+		 moveLeft 2
+		 moveDown 1
+		endActions
 		nextSingleText $80,$2   ; "Sorry, sir!{W1}"
-		moveEntity $1,$FF,$2,$1
-		endMove $8080
+		entityActions $1,$FF
+		 moveLeft 1
+		endActions
 		setFacing $1,DOWN
 		setFacing $0,LEFT
 		nextSingleText $80,$1   ; "Well, we just followed you....{W1}"
-		moveEntity $82,$FF,$0,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveRight 1
+		endActions
 		setFacing $82,UP
 		nextSingleText $80,$82  ; "Don't lie to me.{N}You wanted to see the{N}castle, didn't you?{W1}"
-		moveEntity $83,$FF,$1,$1
-		endMove $8080
+		entityActions $83,$FF
+		 moveUp 1
+		endActions
 		setFacing $83,RIGHT
 		nextSingleText $0,$83   ; "Sir Astral, who are they?{W1}"
 		csWait 5
 		setActscript $82,$0,eas_461B6
 		nextSingleText $80,$82  ; "Oh...{D1}well...{D1}(mumble)...{D1}{N}They're my pupils....{W1}"
-		moveEntity $83,$FF,$0,$1
-		endMove $8080
+		entityActions $83,$FF
+		 moveRight 1
+		endActions
 		setFacing $82,LEFT
 		nextText $0,$83         ; "So they are.   They look{N}like good kids.{W1}"
 		nextSingleText $0,$83   ; "You must have a special{N}reason to have them here,{N}right?{W1}"
@@ -111,25 +118,29 @@ cs_53996:       textCursor $880
 		setFacing $82,RIGHT
 		csWait 30
 		nextSingleText $FF,$FF  ; "Astral glares at {LEADER}.{W1}"
-		moveEntity $82,$FF,$2,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveLeft 1
+		endActions
 		nextSingleText $80,$82  ; "(Cough){N}You said the door of the{N}Ancient Tower is open.{W2}{N}There must be a connection{N}between the open door and{N}the King's sickness.{W1}"
 		setFacing $82,DOWN
 		csWait 60
 		setFacing $82,LEFT
 		nextSingleText $80,$82  ; "I called them here to help{N}me investigate the tower.{W1}"
 		entityNod $83
-		moveEntity $82,$FF,$0,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $80,$82  ; "Now, pupils.  Follow me.{W1}"
 		setFacing $82,UP
 		nextSingleText $80,$82  ; "Don't give me any more{N}trouble!{W1}"
-		moveEntity $1,$0,$1,$1
-		endMove $8080
-		moveEntity $82,$FF,$1,$1
-		moreMove $0,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $1,$0
+		 moveUp 1
+		endActions
+		entityActions $82,$FF
+		 moveUp 1
+		 moveRight 1
+		 moveUp 1
+		endActions
 		followEntity $1,$0,$2
 		followEntity $2,$1,$2
 cs_53B60:       hideEntity $82
@@ -148,35 +159,42 @@ cs_53B66:       playSound $FD
 		ac_end
 		setCamDest 17,48
 		playSound MUSIC_ENEMY_ATTACK
-		moveEntity $80,$0,$1,$2
-		endMove $8080
+		entityActions $80,$0
+		 moveUp 2
+		endActions
 		csWait 10
-		moveEntity $82,$FF,$1,$2
-		endMove $8080
+		entityActions $82,$FF
+		 moveUp 2
+		endActions
 		csWait 40
-		moveEntity $80,$0,$3,$2
-		endMove $8080
+		entityActions $80,$0
+		 moveDown 2
+		endActions
 		csWait 10
-		moveEntity $82,$FF,$3,$2
-		endMove $8080
+		entityActions $82,$FF
+		 moveDown 2
+		endActions
 		csWait 30
 		nextSingleText $80,$82  ; "King Granseal!{N}Calm down!{W1}"
 		nextSingleText $0,$80   ; "Guooooorrrr!{W1}"
-		moveEntity $80,$0,$0,$2
-		endMove $8080
+		entityActions $80,$0
+		 moveRight 2
+		endActions
 		setActscript $82,$FF,eas_Init
 		csWait 1
 		setActscript $82,$FF,eas_JumpRight
 		setActscript $82,$FF,eas_JumpRight
 		nextSingleText $80,$82  ; "He's possessed!  He needs{N}an exorcism right now!{W1}"
 		setCameraEntity $82
-		moveEntity $80,$FF,$0,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveRight 1
+		endActions
 		playSound SFX_DESOUL_HOVERING
 		setActscript $80,$0,eas_BumpRight
 		setActscript $82,$FF,eas_46172
-		moveEntity $82,$FF,$0,$2
-		endMove $8080
+		entityActions $82,$FF
+		 moveRight 2
+		endActions
 		setFacing $82,LEFT
 		customActscript $82,$FF
 		ac_setAnimCounter $0    ;   
@@ -195,8 +213,9 @@ cs_53C42:       setCamDest 19,48
 		setFacing $82,UP
 		nextText $80,$82        ; "Yeow!  My head!{N}No, I'm OK, {LEADER}.{W2}"
 		nextSingleText $80,$82  ; "I must use a powerful spell.{N}It may be dangerous.{N}Stay back!{W1}"
-		moveEntity $0,$FF,$1,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveUp 1
+		endActions
 		setFacing $0,DOWN
 		setActscript $80,$FF,eas_46172
 		customActscript $82,$FF
@@ -215,11 +234,13 @@ cs_53C42:       setCamDest 19,48
 		csWait 20
 		playSound SFX_SPELL_CAST
 		entityFlashWhite $82,$78
-		moveEntity $82,$0,$2,$2
-		endMove $8080
-		moveEntity $80,$0,$C,$14
-		moreMove $2,$2
-		endMove $8080
+		entityActions $82,$0
+		 moveLeft 2
+		endActions
+		entityActions $80,$0
+		 actionC 20
+		 moveLeft 2
+		endActions
 		entityFlashWhite $82,$78
 		playSound SFX_SPELL_CAST
 		setPos $88,24,53,LEFT
@@ -228,8 +249,9 @@ cs_53C42:       setCamDest 19,48
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $88,$FF,$2,$2
-		endMove $8080
+		entityActions $88,$FF
+		 moveLeft 2
+		endActions
 		hideEntity $88
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setQuake 2
@@ -239,8 +261,9 @@ cs_53C42:       setCamDest 19,48
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$FF,$2,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 1
+		endActions
 		customActscript $80,$FF
 		ac_setAnimCounter $0    ;   
 		ac_setFlip $3           ;   
@@ -250,8 +273,9 @@ cs_53C42:       setCamDest 19,48
 		csWait 50
 		entityShiver $82
 		csWait 20
-		moveEntity $82,$FF,$2,$2
-		endMove $8080
+		entityActions $82,$FF
+		 moveLeft 2
+		endActions
 		nextSingleText $80,$82  ; "King...Granseal?{W1}"
 		entityShiver $80
 		stopEntity $80
@@ -264,8 +288,9 @@ cs_53C42:       setCamDest 19,48
 		ac_setSpeed 0           ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $87,$FF,$1,$5
-		endMove $8080
+		entityActions $87,$FF
+		 moveUp 5
+		endActions
 		hideEntity $87
 		csWait 60
 		nextSingleText $0,$80   ; "Ooh....{W1}"
@@ -276,8 +301,9 @@ cs_53C42:       setCamDest 19,48
 		csWait 100
 		setFacing $80,RIGHT
 		csWait 40
-		moveEntity $80,$FF,$0,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $0,$80   ; "Astral, wha...what{N}happened?{W1}"
 		entityShiver $82
 		nextText $80,$82        ; "Are you alright?{W2}"

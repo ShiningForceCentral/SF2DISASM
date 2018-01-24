@@ -40,70 +40,83 @@ cs_570B0:       textCursor $650
 		ac_end
 		fadeInB
 		csWait 30
-		moveEntity $96,$FF,$0,$1
-		moreMove $B,$1
-		endMove $8080
+		entityActions $96,$FF
+		 moveRight 1
+		 faceDown 1
+		endActions
 		nextSingleText $0,$96   ; "Who are you?{W1}"
-		moveEntity $97,$FF,$2,$1
-		moreMove $B,$1
-		endMove $8080
+		entityActions $97,$FF
+		 moveLeft 1
+		 faceDown 1
+		endActions
 		nextSingleText $0,$97   ; "Bedoe is only for birdmen!{W1}"
-		moveEntity $7,$FF,$0,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 1
+		 moveUp 1
+		endActions
 		nextSingleText $0,$7    ; "Don't be so uppity!{W1}"
 		setActscript $96,$0,eas_Jump
 		setActscript $97,$FF,eas_Jump
 		setActscript $96,$0,eas_Jump
 		setActscript $97,$FF,eas_Jump
 		csWait 30
-		moveEntity $96,$FF,$3,$1
-		endMove $8080
+		entityActions $96,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$96   ; "Oh, you're...{W1}"
-		moveEntity $97,$FF,$3,$1
-		endMove $8080
+		entityActions $97,$FF
+		 moveDown 1
+		endActions
 		nextText $0,$97         ; "Sir {NAME;7}!{N}Sorry, Sir {NAME;7}!{W2}"
 		nextSingleText $0,$97   ; "Welcome back!{N}Volcanon is waiting!{W1}"
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		csWait 30
 		csWait 5
 		setActscript $7,$0,eas_461B6
 		csWait 120
-		moveEntity $7,$FF,$0,$2
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 2
+		endActions
 		nextSingleText $0,$7    ; "That's strange...{W2}"
-		moveEntity $7,$FF,$2,$4
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 4
+		endActions
 		nextSingleText $0,$7    ; "I just realized...{N}Why are you flying guard?{W2}"
-		moveEntity $7,$FF,$0,$2
-		moreMove $9,$A
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 2
+		 faceUp 10
+		endActions
 		nextSingleText $0,$7    ; "Did something happen?{W1}"
 		nextSingleText $0,$97   ; "Well, the devils invaded{N}recently.{W1}"
 		customActscript $7,$FF
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$7    ; "Devils?{W1}"
-		moveEntity $96,$FF,$3,$1
-		moreMove $8,$1
-		endMove $8080
+		entityActions $96,$FF
+		 moveDown 1
+		 faceRight 1
+		endActions
 		setFacing $7,LEFT
 		nextText $0,$96         ; "Yes, the Devil Army.{W2}"
 		nextText $0,$96         ; "Strong greater devils broke{N}Volcanon's sacred barrier.{W2}"
 		nextSingleText $0,$96   ; "But don't worry, Volcanon{N}defeated all the devils.{W1}"
 		setActscript $7,$FF,eas_Init
-		moveEntity $7,$FF,$3,$2
-		moreMove $A,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 2
+		 faceLeft 1
+		endActions
 		setFacing $0,RIGHT
 		nextSingleText $0,$7    ; "The devils we fought must{N}have been part of that army!{W1}"
 		setFacing $96,DOWN
-		moveEntity $97,$FF,$3,$1
-		endMove $8080
+		entityActions $97,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$96   ; "You met some other devils?{W1}"
 		setFacing $96,RIGHT
 		setFacing $97,LEFT
@@ -121,10 +134,12 @@ cs_570B0:       textCursor $650
 		ac_end
 		setActscript $96,$FF,eas_46172
 		setActscript $97,$FF,eas_46172
-		moveEntity $96,$0,$1,$1
-		endMove $8080
-		moveEntity $97,$FF,$1,$1
-		endMove $8080
+		entityActions $96,$0
+		 moveUp 1
+		endActions
+		entityActions $97,$FF
+		 moveUp 1
+		endActions
 		customActscript $96,$FF
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
@@ -133,12 +148,14 @@ cs_570B0:       textCursor $650
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $96,$0,$2,$1
-		moreMove $3,$5
-		endMove $8080
-		moveEntity $97,$0,$0,$1
-		moreMove $3,$5
-		endMove $8080
+		entityActions $96,$0
+		 moveLeft 1
+		 moveDown 5
+		endActions
+		entityActions $97,$0
+		 moveRight 1
+		 moveDown 5
+		endActions
 		csWait 30
 		setFacing $0,DOWN
 		setFacing $7,DOWN
@@ -158,19 +175,23 @@ cs_570B0:       textCursor $650
 		ac_setSpeed 2056        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $96,$0,$3,$1
-		endMove $8080
-		moveEntity $97,$FF,$3,$1
-		endMove $8080
+		entityActions $96,$0
+		 moveDown 1
+		endActions
+		entityActions $97,$FF
+		 moveDown 1
+		endActions
 		setActscript $96,$FF,eas_Init
 		setActscript $97,$FF,eas_Init
-		moveEntity $96,$FF,$0,$1
-		moreMove $9,$1
-		endMove $8080
+		entityActions $96,$FF
+		 moveRight 1
+		 faceUp 1
+		endActions
 		nextSingleText $0,$96   ; "That's great!  But...{W2}"
-		moveEntity $97,$FF,$2,$1
-		moreMove $9,$1
-		endMove $8080
+		entityActions $97,$FF
+		 moveLeft 1
+		 faceUp 1
+		endActions
 		nextSingleText $0,$97   ; "We'll go and make sure...{W1}"
 		setFacing $96,RIGHT
 		setFacing $97,LEFT
@@ -192,10 +213,12 @@ cs_570B0:       textCursor $650
 		ac_end
 		setActscript $96,$FF,eas_46172
 		setActscript $97,$FF,eas_46172
-		moveEntity $96,$0,$1,$1
-		endMove $8080
-		moveEntity $97,$FF,$1,$1
-		endMove $8080
+		entityActions $96,$0
+		 moveUp 1
+		endActions
+		entityActions $97,$FF
+		 moveUp 1
+		endActions
 		csWait 50
 		customActscript $96,$FF
 		ac_setSpeed 12336       ;   
@@ -205,10 +228,12 @@ cs_570B0:       textCursor $650
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $96,$0,$3,$5
-		endMove $8080
-		moveEntity $97,$FF,$3,$5
-		endMove $8080
+		entityActions $96,$0
+		 moveDown 5
+		endActions
+		entityActions $97,$FF
+		 moveDown 5
+		endActions
 		csWait 40
 		setFacing $7,LEFT
 		setFacing $0,RIGHT
@@ -223,9 +248,10 @@ cs_573EC:       textCursor $669
 		nextText $0,$94         ; "Yes, the greater devil was{N}very strong.{W1}"
 		nextSingleText $0,$94   ; "But, God Volcanon swept{N}away all the devils.{W1}"
 		nextSingleText $0,$93   ; "What about the greater{N}devil?{W1}"
-		moveEntity $94,$FF,$2,$1
-		moreMove $9,$1
-		endMove $8080
+		entityActions $94,$FF
+		 moveLeft 1
+		 faceUp 1
+		endActions
 		nextSingleText $0,$94   ; "He fled.{W1}"
 		nextText $0,$93         ; "Can't you track him?{W2}"
 		nextSingleText $0,$93   ; "We must capture him before{N}he regains his strength.{W1}"
@@ -237,29 +263,36 @@ cs_573EC:       textCursor $669
 		setFacing $94,DOWN
 		nextSingleText $0,$93   ; "Watch carefully!{W1}"
 		csWait 40
-		moveEntity $96,$0,$3,$1
-		moreMove $2,$3
-		moreMove $3,$3
-		endMove $8080
-		moveEntity $98,$0,$3,$1
-		moreMove $0,$5
-		endMove $8080
-		moveEntity $99,$0,$0,$2
-		moreMove $3,$3
-		endMove $8080
-		moveEntity $9A,$0,$0,$1
-		moreMove $3,$3
-		endMove $8080
-		moveEntity $9B,$0,$0,$2
-		moreMove $3,$3
-		endMove $8080
-		moveEntity $9C,$0,$0,$2
-		moreMove $3,$3
-		endMove $8080
-		moveEntity $97,$FF,$3,$1
-		moreMove $2,$4
-		moreMove $3,$3
-		endMove $8080
+		entityActions $96,$0
+		 moveDown 1
+		 moveLeft 3
+		 moveDown 3
+		endActions
+		entityActions $98,$0
+		 moveDown 1
+		 moveRight 5
+		endActions
+		entityActions $99,$0
+		 moveRight 2
+		 moveDown 3
+		endActions
+		entityActions $9A,$0
+		 moveRight 1
+		 moveDown 3
+		endActions
+		entityActions $9B,$0
+		 moveRight 2
+		 moveDown 3
+		endActions
+		entityActions $9C,$0
+		 moveRight 2
+		 moveDown 3
+		endActions
+		entityActions $97,$FF
+		 moveDown 1
+		 moveLeft 4
+		 moveDown 3
+		endActions
 		hideEntity $96
 		hideEntity $97
 		hideEntity $98
@@ -267,23 +300,26 @@ cs_573EC:       textCursor $669
 		hideEntity $9A
 		hideEntity $9B
 		hideEntity $9C
-		moveEntity $94,$FF,$0,$1
-		moreMove $B,$1
-		endMove $8080
+		entityActions $94,$FF
+		 moveRight 1
+		 faceDown 1
+		endActions
 		csc_end
 cs_574A6:       textCursor $673
 		setCamDest 34,47
-		moveEntity $A,$FF,$3,$1
-		moreMove $A,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveDown 1
+		 faceLeft 1
+		endActions
 		setActscript $A,$FF,eas_Jump
 		setActscript $A,$FF,eas_Jump
 		nextSingleText $80,$A   ; "{NAME;7}, {NAME;7}!{W1}"
 		setPos $7,33,52,RIGHT
 		setPos $0,33,53,RIGHT
 		setCamDest 31,47
-		moveEntity $7,$FF,$0,$3
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 3
+		endActions
 		nextText $0,$7          ; "{NAME;10}, how have you been?{W2}"
 		setFacing $7,UP
 		nextSingleText $0,$7    ; "King Bedoe, you look well.{W1}"
@@ -291,11 +327,13 @@ cs_574A6:       textCursor $673
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $93,$FF,$3,$1
-		endMove $8080
+		entityActions $93,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $80,$93  ; "{NAME;7}, my friend, how{N}was your journey?{W1}"
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		csWait 30
 		entityNod $7
 		csWait 20
@@ -303,22 +341,26 @@ cs_574A6:       textCursor $673
 		csWait 30
 		setFacing $7,UP
 		nextSingleText $0,$7    ; "Let me introduce my friend.{W1}"
-		moveEntity $7,$FF,$3,$2
-		moreMove $2,$2
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 2
+		 moveLeft 2
+		endActions
 		csWait 40
 		entityNod $0
-		moveEntity $7,$0,$0,$3
-		moreMove $9,$1
-		endMove $8080
-		moveEntity $0,$FF,$0,$3
-		moreMove $9,$1
-		endMove $8080
+		entityActions $7,$0
+		 moveRight 3
+		 faceUp 1
+		endActions
+		entityActions $0,$FF
+		 moveRight 3
+		 faceUp 1
+		endActions
 		entityNod $0
 		nextSingleText $0,$7    ; "This is {LEADER}.{N}He's from Grans and...{W1}"
-		moveEntity $A,$FF,$3,$1
-		moreMove $A,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveDown 1
+		 faceLeft 1
+		endActions
 		setFacing $7,RIGHT
 		setFacing $0,RIGHT
 		nextSingleText $80,$A   ; "I know.  He is a pupil of{N}Astral of Granseal.{W1}"
@@ -329,8 +371,9 @@ cs_574A6:       textCursor $673
 		nextSingleText $0,$7    ; "What?!  Did you go to{N}Granseal?{W1}"
 		entityNod $A
 		nextSingleText $80,$A   ; "As Volcanon's messenger.{W1}"
-		moveEntity $93,$FF,$3,$1
-		endMove $8080
+		entityActions $93,$FF
+		 moveDown 1
+		endActions
 		setFacing $A,UP
 		setFacing $7,UP
 		setFacing $0,UP
@@ -340,40 +383,46 @@ cs_574A6:       textCursor $673
 		ac_setSpeed 4112        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $93,$FF,$1,$2
-		moreMove $B,$1
-		endMove $8080
+		entityActions $93,$FF
+		 moveUp 2
+		 faceDown 1
+		endActions
 		nextSingleText $80,$93  ; "Zeon might destroy the{N}world...{W1}"
-		moveEntity $7,$FF,$1,$1
-		moreMove $2,$1
-		moreMove $9,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		 moveLeft 1
+		 faceUp 1
+		endActions
 		nextSingleText $0,$7    ; "Sorry to interrupt, but is{N}he that strong?{W1}"
 		nextSingleText $80,$93  ; "Zeon is King of the Devils.{W1}"
-		moveEntity $94,$FF,$3,$1
-		endMove $8080
+		entityActions $94,$FF
+		 moveDown 1
+		endActions
 		nextText $0,$94         ; "{NAME;7}, you had better{N}go see Volcanon.{W2}"
 		nextSingleText $0,$94   ; "It may calm him down to see{N}{NAME;7}.{W1}"
 		nextSingleText $0,$7    ; "Oh, is he angry?{N}Maybe later...{W1}"
-		moveEntity $A,$FF,$1,$1
-		moreMove $2,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveUp 1
+		 moveLeft 1
+		endActions
 		setFacing $7,RIGHT
 		nextSingleText $80,$A   ; "Never mind later.{N}He has been waiting for you.{W1}"
 		nextText $0,$7          ; "Oh, yeah?  OK, I'm going.{W2}"
 		setFacing $7,DOWN
 		nextSingleText $0,$7    ; "{LEADER}, follow me.{W1}"
 		setActscript $93,$FF,eas_Init
-		moveEntity $93,$FF,$3,$1
-		endMove $8080
+		entityActions $93,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $80,$93  ; "{NAME;7}, are you taking{N}{LEADER} with you?{W1}"
 		setFacing $7,UP
 		setFacing $A,UP
 		nextSingleText $0,$7    ; "Of course.  Why not?{W1}"
 		nextSingleText $80,$93  ; "He thinks the people of{N}Granseal are...{W1}"
-		moveEntity $94,$FF,$2,$1
-		moreMove $9,$1
-		endMove $8080
+		entityActions $94,$FF
+		 moveLeft 1
+		 faceUp 1
+		endActions
 		nextText $0,$94         ; "King Bedoe, I think{N}{LEADER} has to see{N}Volcanon.{W2}"
 		nextSingleText $0,$94   ; "He should talk to him.{W1}"
 		entityNod $93
@@ -391,29 +440,33 @@ cs_5766C:       textCursor $690
 		setFacing $99,RIGHT
 		csWait 40
 		entityNod $99
-		moveEntity $99,$FF,$E,$1
-		endMove $8080
+		entityActions $99,$FF
+		 jumpRight 1
+		endActions
 		entitySprite $99,$B6
 		setActscript $99,$FF,eas_46172
 		customActscript $99,$FF
 		ac_setSpeed 1028        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $99,$FF,$1,$1
-		endMove $8080
+		entityActions $99,$FF
+		 moveUp 1
+		endActions
 		customActscript $99,$FF
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
 		playSound SFX_FALLING
-		moveEntity $99,$FF,$3,$6
-		endMove $8080
+		entityActions $99,$FF
+		 moveDown 6
+		endActions
 		entitySprite $99,$E6
 		nextSingleText $0,$99   ; "Hmmm...strange...{W1}"
 		setActscript $99,$FF,eas_Init
-		moveEntity $99,$FF,$2,$2
-		moreMove $9,$1
-		endMove $8080
+		entityActions $99,$FF
+		 moveLeft 2
+		 faceUp 1
+		endActions
 		setFacing $0,DOWN
 		setFacing $7,DOWN
 		nextText $0,$99         ; "That didn't work.  Hee, hee.{W2}"
@@ -422,35 +475,40 @@ cs_5766C:       textCursor $690
 		csWait 40
 		entityNod $99
 		cameraSpeed $40
-		moveEntity $99,$FF,$0,$1
-		moreMove $E,$1
-		endMove $8080
+		entityActions $99,$FF
+		 moveRight 1
+		 jumpRight 1
+		endActions
 		entitySprite $99,$B6
 		setActscript $99,$FF,eas_46172
-		moveEntity $99,$FF,$3,$1
-		endMove $8080
+		entityActions $99,$FF
+		 moveDown 1
+		endActions
 		customActscript $99,$FF
 		ac_setSpeed 1028        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $99,$FF,$1,$1
-		endMove $8080
+		entityActions $99,$FF
+		 moveUp 1
+		endActions
 		customActscript $99,$FF
 		ac_setSpeed 16448       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
 		playSound SFX_FALLING
-		moveEntity $99,$FF,$3,$8
-		endMove $8080
+		entityActions $99,$FF
+		 moveDown 8
+		endActions
 		setActscript $99,$0,eas_464E2
 		startEntity $99
 		csWait 12
 		cameraSpeed $20
 		setActscript $99,$FF,eas_Init2
-		moveEntity $99,$FF,$1,$2
-		moreMove $0,$1
-		moreMove $1,$B
-		endMove $8080
+		entityActions $99,$FF
+		 moveUp 2
+		 moveRight 1
+		 moveUp 11
+		endActions
 		setFacing $99,LEFT
 		entitySprite $99,$E6
 		setFacing $0,RIGHT
@@ -464,34 +522,39 @@ cs_5779C:       textCursor $696
 		setActscript $7,$FF,eas_Init
 		setPos $0,5,22,DOWN
 		setPos $7,11,22,UP
-		moveEntity $7,$0,$C,$3C
-		moreMove $2,$4
-		endMove $8080
+		entityActions $7,$0
+		 actionC 60
+		 moveLeft 4
+		endActions
 		setFacing $0,UP
 		setActscript $99,$FF,eas_46198
 		setActscript $99,$FF,eas_46172
 		playSound SFX_JUMP
-		moveEntity $99,$FF,$1,$2
-		moreMove $9,$5
-		moreMove $3,$2
-		endMove $8080
+		entityActions $99,$FF
+		 moveUp 2
+		 faceUp 5
+		 moveDown 2
+		endActions
 		nextSingleText $0,$99   ; "Ha, ha, ha!{W1}"
 		csWait 40
 		playSound SFX_JUMP
-		moveEntity $99,$FF,$1,$2
-		moreMove $9,$5
-		moreMove $3,$2
-		endMove $8080
+		entityActions $99,$FF
+		 moveUp 2
+		 faceUp 5
+		 moveDown 2
+		endActions
 		nextSingleText $0,$99   ; "Ha, ha, ha!{W1}"
 		csWait 40
 		playSound SFX_JUMP
-		moveEntity $99,$FF,$1,$2
-		moreMove $9,$5
-		moreMove $3,$1
-		endMove $8080
+		entityActions $99,$FF
+		 moveUp 2
+		 faceUp 5
+		 moveDown 1
+		endActions
 		setActscript $99,$FF,eas_Init
-		moveEntity $99,$FF,$F,$1
-		endMove $8080
+		entityActions $99,$FF
+		 jumpLeft 1
+		endActions
 		setFacing $99,UP
 		setFacing $98,LEFT
 		setCameraEntity $99
@@ -505,8 +568,9 @@ cs_5779C:       textCursor $696
 		ac_jump eas_Idle        ;   
 		ac_end
 		playSound SFX_FALLING
-		moveEntity $99,$0,$3,$D
-		endMove $8080
+		entityActions $99,$0
+		 moveDown 13
+		endActions
 		setFacing $7,LEFT
 		setPriority $0,$0
 		setPriority $99,$FFFF
@@ -515,9 +579,10 @@ cs_5779C:       textCursor $696
 		ac_setSpeed 16448       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $98,$0,$2,$1
-		moreMove $3,$B
-		endMove $8080
+		entityActions $98,$0
+		 moveLeft 1
+		 moveDown 11
+		endActions
 		waitIdle $99
 		setQuake 3
 		setFacing $0,UP
@@ -548,15 +613,18 @@ cs_5779C:       textCursor $696
 		csWait 30
 		setActscript $98,$FF,eas_Init
 		setActscript $99,$FF,eas_Init
-		moveEntity $98,$0,$0,$8
-		endMove $8080
-		moveEntity $99,$FF,$1,$1
-		moreMove $0,$8
-		endMove $8080
+		entityActions $98,$0
+		 moveRight 8
+		endActions
+		entityActions $99,$FF
+		 moveUp 1
+		 moveRight 8
+		endActions
 		hideEntity $98
 		setPos $99,16,6,LEFT
-		moveEntity $7,$FF,$2,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 1
+		endActions
 		csWait 30
 		setActscript $7,$FF,eas_BumpLeft
 		setActscript $0,$FF,eas_Init
@@ -573,14 +641,16 @@ cs_5797A:       textCursor $647
 		nextSingleText $0,$93   ; "Maybe Polca has a raft for{N}you.{W1}"
 		setFacing $93,RIGHT
 		nextSingleText $0,$93   ; "Tell the mayor to prepare a{N}raft.{W1}"
-		moveEntity $A,$FF,$1,$2
-		moreMove $A,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveUp 2
+		 faceLeft 1
+		endActions
 		nextSingleText $0,$A    ; "Yes, sir!{W1}"
-		moveEntity $A,$FF,$3,$3
-		moreMove $0,$1
-		moreMove $3,$4
-		endMove $8080
+		entityActions $A,$FF
+		 moveDown 3
+		 moveRight 1
+		 moveDown 4
+		endActions
 		hideEntity $A
 		faceEntity $93,$7
 		nextText $0,$93         ; "{NAME;7}, please{N}help {LEADER}.{W2}"

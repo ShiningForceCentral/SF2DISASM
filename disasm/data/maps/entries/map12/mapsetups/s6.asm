@@ -31,12 +31,15 @@ cs_57D22:       textCursor $C7D
 		setPos $7,13,31,UP
 		setPos $1F,11,31,UP
 		fadeInB
-		moveEntity $0,$0,$1,$5
-		endMove $8080
-		moveEntity $7,$0,$1,$5
-		endMove $8080
-		moveEntity $1F,$FF,$1,$5
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 5
+		endActions
+		entityActions $7,$0
+		 moveUp 5
+		endActions
+		entityActions $1F,$FF
+		 moveUp 5
+		endActions
 		nextSingleText $0,$80   ; "Stop!{W1}"
 		csWait 10
 		setActscript $0,$0,eas_Jump
@@ -53,8 +56,9 @@ cs_57D22:       textCursor $C7D
 		csWait 5
 		setActscript $1F,$0,eas_461B6
 		csWait 80
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		setFacing $0,UP
 		setFacing $1F,UP
 		nextSingleText $80,$7   ; "Who said that?{W1}"
@@ -63,8 +67,9 @@ cs_57D22:       textCursor $C7D
 		csWait 30
 		nextSingleText $0,$80   ; "Leave here!{N}I'll attack you if you don't!{W1}"
 		setCamDest 7,21
-		moveEntity $7,$FF,$3,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 1
+		endActions
 		setFacing $0,RIGHT
 		setFacing $1F,RIGHT
 		setFacing $7,LEFT
@@ -73,11 +78,14 @@ cs_57D22:       textCursor $C7D
 		csWait 20
 		entityNod $0
 		nextSingleText $80,$7   ; "OK, hurry!{W1}"
-		moveEntity $0,$0,$3,$5
-		endMove $8080
-		moveEntity $7,$0,$3,$5
-		endMove $8080
-		moveEntity $1F,$FF,$3,$5
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 5
+		endActions
+		entityActions $7,$0
+		 moveDown 5
+		endActions
+		entityActions $1F,$FF
+		 moveDown 5
+		endActions
 		mapSysEvent $44,$37,$2C,$3
 		csc_end

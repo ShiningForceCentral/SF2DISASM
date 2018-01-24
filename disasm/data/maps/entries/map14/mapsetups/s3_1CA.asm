@@ -26,9 +26,11 @@ cs_58F5C:       moveEntityNextToPlayer $81,$3
 		nextSingleText $0,$81   ; "I want to leave soon.{N}Finish your preparations.{W1}"
 		csc_end
 cs_58F7E:       nextSingleText $0,$81   ; "The game will be suspended.{N}OK?"
-		moveEntity $81,$0,$3,$4
-		endMove $8080
-		moveEntity $0,$FF,$3,$4
-		endMove $8080
+		entityActions $81,$0
+		 moveDown 4
+		endActions
+		entityActions $0,$FF
+		 moveDown 4
+		endActions
 		mapSysEvent $48,$1,$1,$3
 		csc_end

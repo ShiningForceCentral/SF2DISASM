@@ -34,8 +34,9 @@ byte_5C4EE:     textCursor $575
 		setActscript $7,$FF,eas_Init
 		setEntityDest $0,5,23
 		setEntityDest $7,4,22
-		moveEntity $7,$FF,$0,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $0,$7    ; "Who are they?{W1}"
 		setCamDest 16,4
 		csWait 5
@@ -47,13 +48,15 @@ byte_5C4EE:     textCursor $575
 		setActscript $81,$0,eas_461B6
 		csWait 5
 		setActscript $82,$0,eas_461B6
-		moveEntity $83,$FF,$1,$6
-		endMove $8080
+		entityActions $83,$FF
+		 moveUp 6
+		endActions
 		csWait 40
 		nextSingleText $0,$83   ; "He's not here...not under{N}the cliff....{W1}"
-		moveEntity $81,$FF,$1,$2
-		moreMove $0,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 2
+		 moveRight 1
+		endActions
 		setFacing $80,LEFT
 		nextText $0,$81         ; "There are marks of a battle{N}here and there!{W2}"
 		nextSingleText $0,$81   ; "Against the birdmen of{N}Bedoe?{W1}"
@@ -66,16 +69,18 @@ byte_5C4EE:     textCursor $575
 		nextText $0,$80         ; "Nobody but Volcanon can do{N}that!{W2}"
 		setFacing $81,RIGHT
 		nextSingleText $0,$80   ; "He has never before killed{N}birdmen, but...{W1}"
-		moveEntity $83,$FF,$3,$1
-		endMove $8080
+		entityActions $83,$FF
+		 moveDown 1
+		endActions
 		csWait 40
 		customActscript $83,$FF
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $83,$FF,$3,$2
-		moreMove $2,$1
-		endMove $8080
+		entityActions $83,$FF
+		 moveDown 2
+		 moveLeft 1
+		endActions
 		nextSingleText $0,$83   ; "Who's that?{W1}"
 		setFacing $83,DOWN
 		setCamDest 0,17
@@ -85,13 +90,15 @@ byte_5C4EE:     textCursor $575
 		setCamDest 16,7
 		setActscript $83,$FF,eas_Init
 		setActscript $83,$FF,eas_46172
-		moveEntity $83,$FF,$1,$1
-		endMove $8080
+		entityActions $83,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$83   ; "Stupid Polca kids!{W1}"
-		moveEntity $80,$FF,$3,$2
-		moreMove $2,$2
-		moreMove $3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 2
+		 moveLeft 2
+		 moveDown 1
+		endActions
 		nextText $0,$80         ; "Polcan people are cowards that{N}live in peace.{W2}"
 		setFacing $80,UP
 		setFacing $83,UP

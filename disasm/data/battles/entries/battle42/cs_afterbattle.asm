@@ -55,10 +55,12 @@ cs_4EF5E:       stopEntity $80
 		nextSingleText $C0,$81  ; "Zzzzz....{W1}"
 		nextSingleText $0,$1F   ; "...she's waking up!{W1}"
 		nextSingleText $C0,$81  ; "Zzzzz...(yawn)...{W1}"
-		moveEntity $1F,$0,$0,$1
-		endMove $8080
-		moveEntity $1C,$FF,$1,$1
-		endMove $8080
+		entityActions $1F,$0
+		 moveRight 1
+		endActions
+		entityActions $1C,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$1F   ; "Princess, princess!{W1}"
 		csWait 50
 		setActscript $81,$FF,eas_Init
@@ -79,9 +81,10 @@ cs_4EF5E:       stopEntity $80
 		setFacing $81,UP
 		setActscript $7,$FF,eas_Jump
 		nextSingleText $0,$7    ; "I'm {NAME;7}.  And this is{N}our leader.{W1}"
-		moveEntity $7,$FF,$3,$2
-		moreMove $2,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 2
+		 moveLeft 1
+		endActions
 		setFacing $81,DOWN
 		setFacing $7,UP
 		nextSingleText $0,$7    ; "{LEADER}, say something.{W1}"
@@ -93,8 +96,9 @@ cs_4EF5E:       stopEntity $80
 		ac_setSpeed 6168        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $81,$FF,$3,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 1
+		endActions
 		csWait 50
 		nextSingleText $0,$0    ; "Ah...{W1}"
 		csWait 50
@@ -116,19 +120,23 @@ cs_4EF5E:       stopEntity $80
 		csWait 120
 		setFacing $1C,DOWN
 		setQuake 2
-		moveEntity $0,$0,$2,$2
-		endMove $8080
-		moveEntity $81,$FF,$3,$1
-		moreMove $2,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveLeft 2
+		endActions
+		entityActions $81,$FF
+		 moveDown 1
+		 moveLeft 1
+		endActions
 		csWait 5
 		setActscript $0,$0,eas_461E4
-		moveEntity $7,$FF,$0,$2
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 2
+		endActions
 		csWait 5
 		setActscript $7,$0,eas_461B6
-		moveEntity $1F,$FF,$0,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveRight 1
+		endActions
 		csWait 5
 		setActscript $1F,$0,eas_461B6
 		csWait 120
@@ -136,18 +144,22 @@ cs_4EF5E:       stopEntity $80
 		nextSingleText $0,$1C   ; "Something is coming up{N}through the earth...{W1}"
 		setFacing $1F,UP
 		nextSingleText $0,$1F   ; "I almost forgot...about...{N}the other devil....{W1}"
-		moveEntity $0,$0,$1,$2
-		moreMove $0,$1
-		endMove $8080
-		moveEntity $1C,$0,$1,$1
-		moreMove $0,$1
-		moreMove $1,$1
-		endMove $8080
-		moveEntity $7,$0,$1,$2
-		moreMove $2,$2
-		endMove $8080
-		moveEntity $81,$0,$1,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 2
+		 moveRight 1
+		endActions
+		entityActions $1C,$0
+		 moveUp 1
+		 moveRight 1
+		 moveUp 1
+		endActions
+		entityActions $7,$0
+		 moveUp 2
+		 moveLeft 2
+		endActions
+		entityActions $81,$0
+		 moveUp 1
+		endActions
 		waitIdle $7
 		setFacing $0,RIGHT
 		setFacing $1F,LEFT
@@ -196,8 +208,9 @@ cs_4EF5E:       stopEntity $80
 		entitySprite $80,$B2
 		setFacing $80,DOWN
 		startEntity $80
-		moveEntity $80,$FF,$1,$D
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 13
+		endActions
 		animEntityFadeInOut $80,$6
 		setCameraEntity $FFFF
 		csWait 50
@@ -233,8 +246,9 @@ cs_4EF5E:       stopEntity $80
 		nextSingleText $0,$1F   ; "What?  Oh, my.{W1}"
 		setFacing $0,DOWN
 		setActscript $0,$FF,eas_Jump
-		moveEntity $1C,$FF,$3,$1
-		endMove $8080
+		entityActions $1C,$FF
+		 moveDown 1
+		endActions
 		setFacing $1C,RIGHT
 		csWait 30
 		setFacing $1C,DOWN

@@ -19,12 +19,14 @@ bbcs_33:        textCursor $B32
 		setFacing $0,UP
 		setFacing $7,UP
 		setFacing $1F,UP
-		moveEntity $16,$FF,$1,$1
-		endMove $8080
+		entityActions $16,$FF
+		 moveUp 1
+		endActions
 		setFacing $16,DOWN
 		nextSingleText $0,$16   ; "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
-		moveEntity $16,$FF,$1,$1
-		endMove $8080
+		entityActions $16,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $FF,$FF  ; "Vicar {NAME;22} uses{N}the gate key.{W1}"
 		csWait 30
 		setQuake 2
@@ -33,36 +35,44 @@ bbcs_33:        textCursor $B32
 		setQuake 0
 		setCameraEntity $0
 		csWait 50
-		moveEntity $0,$FF,$1,$1
-		endMove $8080
-		moveEntity $16,$0,$1,$6
-		moreMove $2,$1
-		moreMove $1,$1
-		endMove $8080
-		moveEntity $0,$0,$1,$7
-		endMove $8080
-		moveEntity $1F,$0,$1,$6
-		moreMove $2,$2
-		moreMove $1,$1
-		endMove $8080
-		moveEntity $7,$FF,$1,$8
-		endMove $8080
+		entityActions $0,$FF
+		 moveUp 1
+		endActions
+		entityActions $16,$0
+		 moveUp 6
+		 moveLeft 1
+		 moveUp 1
+		endActions
+		entityActions $0,$0
+		 moveUp 7
+		endActions
+		entityActions $1F,$0
+		 moveUp 6
+		 moveLeft 2
+		 moveUp 1
+		endActions
+		entityActions $7,$FF
+		 moveUp 8
+		endActions
 		csWait 30
 		cameraSpeed $30
 		setCamDest 5,8
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextText $0,$80         ; "Welcome, losers!{W2}"
 		nextSingleText $0,$80   ; "Will you follow the example{N}of the people of Moun and die{N}without resistance?{W1}"
 		nextText $0,$16         ; "No!  I'm too late.{N}I killed a lot of people.{W2}"
 		nextSingleText $0,$16   ; "I can never forgive myself!{W1}"
 		setCamDest 21,25
-		moveEntity $16,$FF,$3,$1
-		endMove $8080
+		entityActions $16,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$16   ; "{LEADER}, please let me{N}fight with you.  They must{N}die!{W1}"
 		join $16
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		setFacing $1F,RIGHT
 		setFacing $0,LEFT
 		nextSingleText $0,$1F   ; "{LEADER}, {NAME;22} will be{N}a great asset.{W1}"

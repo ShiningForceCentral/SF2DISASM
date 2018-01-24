@@ -29,8 +29,9 @@ bbcs_16:        textCursor $9D1
 		csWait 5
 		setActscript $1F,$0,eas_461B6
 		csWait 120
-		moveEntity $7,$FF,$0,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 1
+		endActions
 		csWait 20
 		setFacing $0,DOWN
 		setFacing $7,DOWN
@@ -49,8 +50,9 @@ bbcs_16:        textCursor $9D1
 		setFacing $0,UP
 		setFacing $1F,UP
 		csWait 20
-		moveEntity $7,$FF,$1,$2
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 2
+		endActions
 		nextSingleText $C0,$7   ; "{LEADER}, look there!{W1}"
 		setCamDest 9,0
 		playSound SFX_BIG_DOOR_RUMBLE
@@ -63,8 +65,9 @@ bbcs_16:        textCursor $9D1
 		ac_jump eas_Idle        ;   
 		ac_end
 		setPos $80,14,5,DOWN
-		moveEntity $80,$FF,$1,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 2
+		endActions
 		setBlocks 0,0,3,3,13,4
 		setPos $81,12,4,DOWN
 		setPos $82,16,4,DOWN

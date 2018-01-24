@@ -10,9 +10,10 @@ bbcs_11:        textCursor $9B3
 		executeSubroutine sub_458E
 		fadeInB
 		playSound $FD
-		moveEntity $7,$FF,$2,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 1
+		 moveUp 1
+		endActions
 		nextSingleText $0,$7    ; "You'll come to the foot of{N}Mt. Volcano through this{N}dark cave.{W2}"
 		setFacing $7,RIGHT
 		setFacing $0,LEFT
@@ -20,23 +21,26 @@ bbcs_11:        textCursor $9B3
 		csWait 20
 		nextSingleText $0,$80   ; "Yes, it is!{W1}"
 		playSound MUSIC_ENEMY_ATTACK
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		csWait 5
 		setActscript $0,$0,eas_461B6
 		csWait 5
 		setActscript $7,$0,eas_461E4
 		csWait 120
 		setFacing $0,UP
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$7    ; "Wh...Who said that?{W1}"
 		nextSingleText $0,$80   ; "Me!  The hobgoblin!{W1}"
 		cameraSpeed $20
 		setCameraEntity $80
 		nextSingleText $0,$80   ; "Welcome to my home.{W2}"
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$80   ; "Enjoy your visit because{N}you're not leaving!{W1}"
 		playSound $FD
 		csc_end

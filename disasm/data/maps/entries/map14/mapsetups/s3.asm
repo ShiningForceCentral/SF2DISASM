@@ -25,19 +25,24 @@ cs_58E5C:       textCursor $8D5
 		yesNo
 		jumpIfFlagClear $59,cs_58EB8; YES/NO prompt answer
 		hideText
-		moveEntity $0,$FF,$3,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveDown 1
+		endActions
 		csWait 40
 		setActscript $83,$FF,eas_46172
 		setActscript $84,$FF,eas_46172
 		setActscript $85,$FF,eas_46172
-		moveEntity $0,$0,$3,$3
-		endMove $8080
-		moveEntity $83,$0,$3,$3
-		endMove $8080
-		moveEntity $84,$0,$3,$3
-		endMove $8080
-		moveEntity $85,$FF,$3,$3
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 3
+		endActions
+		entityActions $83,$0
+		 moveDown 3
+		endActions
+		entityActions $84,$0
+		 moveDown 3
+		endActions
+		entityActions $85,$FF
+		 moveDown 3
+		endActions
 		mapSysEvent $E,$D,$B,$3
 cs_58EB8:       csc_end

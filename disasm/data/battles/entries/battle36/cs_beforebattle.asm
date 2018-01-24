@@ -15,14 +15,18 @@ bbcs_36:        textCursor $B82
 cs_4D8D6:       playSound MUSIC_BATTLE_THEME_1
 		fadeInB
 		cameraSpeed $30
-		moveEntity $0,$0,$3,$4
-		endMove $8080
-		moveEntity $7,$0,$3,$4
-		endMove $8080
-		moveEntity $1F,$0,$3,$4
-		endMove $8080
-		moveEntity $81,$FF,$3,$4
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 4
+		endActions
+		entityActions $7,$0
+		 moveDown 4
+		endActions
+		entityActions $1F,$0
+		 moveDown 4
+		endActions
+		entityActions $81,$FF
+		 moveDown 4
+		endActions
 		nextSingleText $0,$80   ; "You're early!{N}{W2}"
 		setCamDest 10,14
 		nextText $0,$80         ; "Darn you, Granseal swine!{W2}"

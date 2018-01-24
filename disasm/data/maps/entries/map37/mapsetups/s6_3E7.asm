@@ -41,9 +41,10 @@ cs_5FABC:       textCursor $D1F
 		entityShiver $7
 		nextSingleText $80,$7   ; "Oh, there he is!{W1}"
 		setActscript $7,$FF,eas_Init
-		moveEntity $7,$FF,$2,$3
-		moreMove $9,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 3
+		 faceUp 1
+		endActions
 		nextSingleText $80,$7   ; "Sir Astral!  Are you OK?{W1}"
 		setFacing $7,LEFT
 		nextSingleText $80,$7   ; "{LEADER}, come on!{W1}"
@@ -57,10 +58,11 @@ cs_5FB30:       textCursor $D25
 		nextText $0,$80         ; "Evacuate the ship!{W1}"
 		nextText $0,$80         ; "What are you doing?{N}Get off the ship!{W2}"
 		nextSingleText $0,$80   ; "I'll go first.{W1}"
-		moveEntity $80,$FF,$0,$4
-		moreMove $4,$1
-		moreMove $0,$3
-		endMove $8080
+		entityActions $80,$FF
+		 moveRight 4
+		 moveUpRight 1
+		 moveRight 3
+		endActions
 		hideEntity $80
 		csc_end
 cs_5FB6A:       textCursor $D31
@@ -93,16 +95,18 @@ cs_5FB6A:       textCursor $D31
 		playSound MUSIC_MITULA_SHRINE
 		executeSubroutine csub_5FD3A
 		setQuake 0
-		moveEntity $80,$0,$1,$1
-		moreMove $2,$1
-		moreMove $6,$1
-		moreMove $2,$6
-		endMove $8080
-		moveEntity $7,$FF,$1,$1
-		moreMove $2,$2
-		moreMove $6,$1
-		moreMove $2,$5
-		endMove $8080
+		entityActions $80,$0
+		 moveUp 1
+		 moveLeft 1
+		 moveDownLeft 1
+		 moveLeft 6
+		endActions
+		entityActions $7,$FF
+		 moveUp 1
+		 moveLeft 2
+		 moveDownLeft 1
+		 moveLeft 5
+		endActions
 		setFacing $80,UP
 		setFacing $7,UP
 		nextSingleText $0,$7    ; "It's floating!  This big{N}ship is floating!{W1}"
@@ -153,8 +157,9 @@ cs_5FB6A:       textCursor $D31
 		ac_setSpeed 4112        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$0,$2,$1E
-		endMove $8080
+		entityActions $80,$0
+		 moveLeft 30
+		endActions
 		executeSubroutine sub_5FD5E
 		fadeInB
 		csWait 15

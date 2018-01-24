@@ -16,16 +16,18 @@ bbcs_07:        textCursor $935
 		nextSingleText $0,$83   ; "Astral, save her!{W1}"
 		setCamDest 8,13
 		nextSingleText $0,$82   ; "Father!{W1}"
-		moveEntity $82,$FF,$3,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveDown 1
+		endActions
 		csWait 40
 		setFacing $80,UP
 		csWait 20
 		setActscript $82,$FF,eas_Jump
 		csWait 30
 		setActscript $82,$FF,eas_46172
-		moveEntity $82,$FF,$1,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveUp 1
+		endActions
 		setFacing $80,DOWN
 		setFacing $81,DOWN
 		nextSingleText $0,$81   ; "King Granseal and{N}{LEADER}!{W1}"
@@ -36,11 +38,13 @@ bbcs_07:        textCursor $935
 		nextText $0,$81         ; "No!  You give up!{N}We've got reinforcements!{W2}"
 		nextSingleText $0,$81   ; "Your great magic cannot{N}defeat all of our soldiers!{W1}"
 		nextSingleText $C0,$80  ; "I'll kill you before they{N}have a chance to attack!{W1}"
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$81   ; "Just try it!{W1}"
-		moveEntity $81,$FF,$1,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 1
+		endActions
 		setActscript $80,$FF,eas_BumpDown
 		setQuake 2
 		playSound SFX_LIGHTNING_1
@@ -70,10 +74,12 @@ bbcs_07:        textCursor $935
 		setActscript $80,$FF,eas_46172
 		setActscript $81,$FF,eas_46172
 		csWait 30
-		moveEntity $80,$0,$1,$1
-		endMove $8080
-		moveEntity $81,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$0
+		 moveUp 1
+		endActions
+		entityActions $81,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $C0,$80  ; "Astral...{W1}"
 		nextSingleText $0,$81   ; "Gguuu....{W1}"
 		stopEntity $80
@@ -100,8 +106,9 @@ bbcs_07:        textCursor $935
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $82,$0,$3,$3
-		endMove $8080
+		entityActions $82,$0
+		 moveDown 3
+		endActions
 		csWait 10
 		setPos $85,12,18,UP
 		animEntityFadeInOut $85,$5
@@ -109,8 +116,9 @@ bbcs_07:        textCursor $935
 		nextSingleText $0,$85   ; "Stop, my dear!{W1}"
 		setActscript $82,$FF,eas_Jump
 		nextSingleText $0,$82   ; "Oh!{W1}"
-		moveEntity $82,$FF,$1,$2
-		endMove $8080
+		entityActions $82,$FF
+		 moveUp 2
+		endActions
 		setCamDest 8,15
 		nextSingleText $C0,$80  ; "Hee, hee, hee...{N}I won't lose her now.{W1}"
 		nextText $0,$81         ; "What should I do?{N}{LEADER}, can you hear{N}me?{W1}"

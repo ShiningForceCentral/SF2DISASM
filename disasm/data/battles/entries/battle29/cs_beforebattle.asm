@@ -12,24 +12,29 @@ bbcs_29:        textCursor $A9E
 		playSound MUSIC_MITULA_SHRINE
 		fadeInB
 		cameraSpeed $30
-		moveEntity $0,$0,$1,$1
-		endMove $8080
-		moveEntity $7,$0,$1,$1
-		endMove $8080
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 1
+		endActions
+		entityActions $7,$0
+		 moveUp 1
+		endActions
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$80   ; "You can't enter Mitula{N}Shrine now.{W1}"
 		setFacing $7,LEFT
 		nextSingleText $0,$7    ; "Sir Astral, what do we do{N}now?{W1}"
 		nextSingleText $0,$1F   ; "Hmmm....{W1}"
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "{LEADER}, what do you{N}think?{W1}"
 		setFacing $0,LEFT
 		nextSingleText $0,$0    ; "I'm not sure.{W1}"
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		setFacing $7,LEFT
 		nextSingleText $0,$7    ; "{LEADER}, it's obvious!{W1}"
 		setFacing $0,RIGHT
@@ -49,22 +54,26 @@ bbcs_29:        textCursor $A9E
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $1F,$0,$1,$3
-		endMove $8080
-		moveEntity $0,$0,$2,$1
-		moreMove $1,$2
-		endMove $8080
-		moveEntity $7,$0,$2,$2
-		moreMove $1,$1
-		endMove $8080
+		entityActions $1F,$0
+		 moveUp 3
+		endActions
+		entityActions $0,$0
+		 moveLeft 1
+		 moveUp 2
+		endActions
+		entityActions $7,$0
+		 moveLeft 2
+		 moveUp 1
+		endActions
 		csWait 10
 		customActscript $80,$FF
 		ac_setSpeed 16448       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$0,$1,$2
-		moreMove $2,$1
-		endMove $8080
+		entityActions $80,$0
+		 moveUp 2
+		 moveLeft 1
+		endActions
 		waitIdle $80
 		setFacing $80,DOWN
 		waitIdle $7

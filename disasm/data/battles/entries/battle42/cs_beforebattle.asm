@@ -25,33 +25,40 @@ cs_4EDE8:       stopEntity $81
 		fadeInFromBlackHalf
 		cameraSpeed $30
 		csWait 60
-		moveEntity $7,$FF,$1,$2
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 2
+		endActions
 		nextSingleText $0,$7    ; "I can't see!  Is anybody{N}there?{W1}"
 		nextSingleText $C0,$80  ; "Welcome...{W1}"
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$0,eas_Jump
 		setActscript $1F,$0,eas_Jump
 		setActscript $1C,$FF,eas_Jump
-		moveEntity $1F,$FF,$1,$3
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 3
+		endActions
 		nextSingleText $0,$1F   ; "King Galam?{W1}"
 		nextSingleText $C0,$80  ; "Is it too dark?{N}Let there be light!{W1}"
 		fadeInB
 		nextSingleText $C0,$80  ; "Is that better?{W1}"
-		moveEntity $0,$0,$1,$2
-		endMove $8080
-		moveEntity $1C,$FF,$1,$2
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 2
+		endActions
+		entityActions $1C,$FF
+		 moveUp 2
+		endActions
 		entityShiver $1F
 		nextSingleText $0,$1F   ; "King Galam!{W1}"
-		moveEntity $0,$0,$2,$1
-		endMove $8080
-		moveEntity $1C,$FF,$1,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveLeft 1
+		endActions
+		entityActions $1C,$FF
+		 moveUp 1
+		endActions
 		setFacing $0,UP
-		moveEntity $1C,$FF,$1,$1
-		endMove $8080
+		entityActions $1C,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$1C   ; "Oh, Princess Elis is here!{W1}"
 		setCamDest 8,13
 		nextSingleText $C0,$80  ; "Nice to see you again,{N}Astral.  I see {NAME;28} is{N}with you.{W1}"

@@ -17,20 +17,25 @@ bbcs_38:        textCursor $BBB
 cs_4DDFE:       playSound MUSIC_BATTLE_THEME_1
 		fadeInB
 		cameraSpeed $30
-		moveEntity $0,$0,$3,$2
-		endMove $8080
-		moveEntity $7,$0,$3,$2
-		endMove $8080
-		moveEntity $1E,$0,$3,$2
-		endMove $8080
-		moveEntity $1F,$FF,$3,$2
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 2
+		endActions
+		entityActions $7,$0
+		 moveDown 2
+		endActions
+		entityActions $1E,$0
+		 moveDown 2
+		endActions
+		entityActions $1F,$FF
+		 moveDown 2
+		endActions
 		nextSingleText $0,$80   ; "Stop!{W1}"
 		setCamDest 9,19
 		nextText $0,$80         ; "Finally, you've arrived.{W2}"
 		nextSingleText $0,$80   ; "It was a mistake to{N}underestimate you.{W2}"
-		moveEntity $80,$FF,$1,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 2
+		endActions
 		nextSingleText $0,$80   ; "But, the game is not over.{N}At the risk of my life,{N}you'll proceed no further!{W1}"
 		nextText $C0,$1F        ; "Geshp is serious.{N}He finally considers us{N}worthy opponents.{W2}"
 		nextSingleText $C0,$1F  ; "{LEADER}, be careful.{N}We mustn't underrate his{N}power.{W1}"

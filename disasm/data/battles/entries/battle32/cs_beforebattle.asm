@@ -15,16 +15,21 @@ bbcs_32:        textCursor $B1D
 		setPos $1E,15,45,UP
 		fadeInB
 		cameraSpeed $30
-		moveEntity $0,$0,$1,$3
-		endMove $8080
-		moveEntity $7,$0,$1,$3
-		endMove $8080
-		moveEntity $1F,$0,$1,$3
-		endMove $8080
-		moveEntity $1E,$0,$1,$3
-		endMove $8080
-		moveEntity $16,$FF,$1,$3
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 3
+		endActions
+		entityActions $7,$0
+		 moveUp 3
+		endActions
+		entityActions $1F,$0
+		 moveUp 3
+		endActions
+		entityActions $1E,$0
+		 moveUp 3
+		endActions
+		entityActions $16,$FF
+		 moveUp 3
+		endActions
 		nextSingleText $0,$80   ; "I heard about you from{N}Geshp.{W1}"
 		setCamDest 10,18
 		nextText $0,$80         ; "He ordered me to take out{N}some of your people.{W2}"

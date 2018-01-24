@@ -21,13 +21,15 @@ abcs_battle18:  textCursor $9E0
 		csWait 30
 		setCameraEntity $B
 		csWait 120
-		moveEntity $B,$FF,$0,$6
-		endMove $8080
+		entityActions $B,$FF
+		 moveRight 6
+		endActions
 		setFacing $0,UP
 		setFacing $7,UP
 		setFacing $1F,UP
-		moveEntity $B,$FF,$1,$4
-		endMove $8080
+		entityActions $B,$FF
+		 moveUp 4
+		endActions
 		setFacing $B,RIGHT
 		setCameraEntity $FFFF
 		setCamDest 7,1
@@ -45,8 +47,9 @@ abcs_battle18:  textCursor $9E0
 		setPos $B,13,5,LEFT
 		csWait 20
 		nextSingleText $0,$B    ; "It's so small.  I'll just{N}try to...get inside....{W1}"
-		moveEntity $B,$0,$2,$1
-		endMove $8080
+		entityActions $B,$0
+		 moveLeft 1
+		endActions
 		csWait 3
 		setActscript $B,$0,eas_452BA
 		csWait 3
@@ -80,16 +83,18 @@ abcs_battle18:  textCursor $9E0
 		ac_jump eas_Idle        ;   
 		ac_end
 		playSound SFX_FALLING
-		moveEntity $80,$0,$3,$9
-		endMove $8080
+		entityActions $80,$0
+		 moveDown 9
+		endActions
 		csWait 20
 		customActscript $0,$FF
 		ac_setSpeed 16448       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
 		setActscript $0,$FF,eas_46172
-		moveEntity $0,$0,$2,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveLeft 1
+		endActions
 		setFacing $0,RIGHT
 		setFacing $7,LEFT
 		setFacing $1F,LEFT
@@ -111,8 +116,9 @@ abcs_battle18:  textCursor $9E0
 		setFacing $1F,DOWN
 		csWait 150
 		setActscript $80,$FF,eas_46172
-		moveEntity $80,$0,$1,$9
-		endMove $8080
+		entityActions $80,$0
+		 moveUp 9
+		endActions
 		playSound SFX_FALLING
 		csWait 20
 		setFacing $80,LEFT
@@ -173,34 +179,41 @@ abcs_battle18:  textCursor $9E0
 		setFacing $1F,UP
 		startEntity $0
 		startEntity $7
-		moveEntity $B,$FF,$3,$3
-		endMove $8080
+		entityActions $B,$FF
+		 moveDown 3
+		endActions
 		nextSingleText $0,$B    ; "I never lie!{W1}"
-		moveEntity $B,$FF,$2,$2
-		endMove $8080
+		entityActions $B,$FF
+		 moveLeft 2
+		endActions
 		setFacing $B,DOWN
 		nextSingleText $0,$B    ; "The Ancients were...how{N}should I say this...great!{W1}"
-		moveEntity $B,$FF,$0,$1
-		endMove $8080
+		entityActions $B,$FF
+		 moveRight 1
+		endActions
 		setFacing $B,UP
 		nextSingleText $0,$B    ; "No wonder the Caravan is so{N}small.  It carries miniaturized{N}people and items.{W2}"
-		moveEntity $B,$FF,$1,$2
-		endMove $8080
+		entityActions $B,$FF
+		 moveUp 2
+		endActions
 		setFacing $B,DOWN
 		nextSingleText $0,$B    ; "I can drive this excellent{N}vehicle.  May I go with you{N}as a driver?{W1}"
 		csWait 30
 		nextSingleText $FF,$FF  ; "{NAME;11} the historian{N}tags along with the force.{W1}"
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$7    ; "You're kidding, right?{W1}"
-		moveEntity $7,$FF,$3,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 1
+		endActions
 		setFacing $7,LEFT
 		setFacing $0,RIGHT
 		setFacing $1F,LEFT
 		nextSingleText $0,$7    ; "Well, at least we can bring{N}a lot of soldiers with us.{W1}"
-		moveEntity $B,$FF,$3,$1
-		endMove $8080
+		entityActions $B,$FF
+		 moveDown 1
+		endActions
 		setFacing $0,UP
 		setFacing $7,UP
 		setFacing $1F,UP
@@ -210,8 +223,9 @@ abcs_battle18:  textCursor $9E0
 		setFacing $7,LEFT
 		setFacing $1F,LEFT
 		nextSingleText $0,$7    ; "Humph.  I don't like this guy.{W1}"
-		moveEntity $B,$FF,$1,$1
-		endMove $8080
+		entityActions $B,$FF
+		 moveUp 1
+		endActions
 		setFacing $B,DOWN
 		csWait 20
 		setActscript $B,$FF,eas_Jump
@@ -221,8 +235,9 @@ abcs_battle18:  textCursor $9E0
 		setFacing $1F,UP
 		nextSingleText $0,$B    ; "I wonder what adventures{N}we'll find with this Caravan!{W1}"
 		csWait 30
-		moveEntity $B,$0,$1,$1
-		endMove $8080
+		entityActions $B,$0
+		 moveUp 1
+		endActions
 		csWait 3
 		setActscript $B,$0,eas_452BA
 		csWait 3
@@ -231,8 +246,9 @@ abcs_battle18:  textCursor $9E0
 		setPos $B,63,63,DOWN
 		csWait 60
 		setActscript $80,$FF,eas_Init
-		moveEntity $80,$0,$3,$9
-		endMove $8080
+		entityActions $80,$0
+		 moveDown 9
+		endActions
 		csWait 30
 		setFacing $0,RIGHT
 		setFacing $7,LEFT

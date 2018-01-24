@@ -15,20 +15,23 @@ bbcs_01:        textCursor $8F4
 		nextText $0,$87         ; "There you are, {LEADER}.{N}Stay here.{W2}"
 		nextSingleText $0,$87   ; "I'll take a look inside the{N}tower.{W1}"
 		setCameraEntity $87
-		moveEntity $87,$FF,$1,$1
-		endMove $8080
+		entityActions $87,$FF
+		 moveUp 1
+		endActions
 		csWait 5
 		setActscript $87,$0,eas_461B6
 		csWait 60
 		nextSingleText $0,$87   ; "Hmm, what a mysterious{N}tower.  I wonder who built{N}it?{W1}"
-		moveEntity $87,$FF,$1,$1
-		moreMove $C,$3C
-		moreMove $1,$1
-		endMove $8080
+		entityActions $87,$FF
+		 moveUp 1
+		 actionC 60
+		 moveUp 1
+		endActions
 		csWait 50
 		nextSingleText $0,$87   ; "I have a strange feeling{N}about this place.{W1}"
-		moveEntity $87,$FF,$1,$3
-		endMove $8080
+		entityActions $87,$FF
+		 moveUp 3
+		endActions
 		nextSingleText $0,$87   ; "Oh, what's this?{N}I think I have seen this{N}symbol before....{W1}"
 		csWait 40
 		mapFadeOutToWhite
@@ -50,8 +53,9 @@ bbcs_01:        textCursor $8F4
 		setActscript $2,$0,eas_461B6
 		csWait 60
 		nextSingleText $0,$2    ; "What's happening?{W1}"
-		moveEntity $1,$FF,$1,$1
-		endMove $8080
+		entityActions $1,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$1    ; "Look!  Something is{N}appearing.  What's that?{W1}"
 		setFacing $87,UP
 		setCamDest 2,1
@@ -59,20 +63,25 @@ bbcs_01:        textCursor $8F4
 		animEntityFadeInOut $80,$7
 		setActscript $80,$FF,eas_46172
 		setActscript $87,$FF,eas_46172
-		moveEntity $87,$FF,$3,$1
-		endMove $8080
+		entityActions $87,$FF
+		 moveDown 1
+		endActions
 		nextText $0,$87         ; "An evil Gizmo!  A devil{N}that possesses people!{W2}"
 		nextSingleText $0,$87   ; "Why are you here?{W1}"
 		csWait 30
-		moveEntity $80,$FF,$0,$1
-		endMove $8080
-		moveEntity $87,$FF,$0,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveRight 1
+		endActions
+		entityActions $87,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $0,$87   ; "Where are you going?{N}What...wait!  You're here to{N}possess the King, aren't you?{W1}"
-		moveEntity $80,$FF,$2,$1
-		endMove $8080
-		moveEntity $87,$FF,$2,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 1
+		endActions
+		entityActions $87,$FF
+		 moveLeft 1
+		endActions
 		nextSingleText $0,$87   ; "I won't let you pass.{N}You shall not harm the King!{W1}"
 		entityShiver $80
 		csWait 30
@@ -89,21 +98,27 @@ bbcs_01:        textCursor $8F4
 		setActscript $84,$FF,eas_46172
 		setActscript $85,$FF,eas_46172
 		setActscript $86,$FF,eas_46172
-		moveEntity $81,$0,$1,$1
-		endMove $8080
-		moveEntity $82,$0,$2,$1
-		endMove $8080
-		moveEntity $83,$0,$3,$1
-		moreMove $2,$1
-		endMove $8080
-		moveEntity $84,$0,$0,$2
-		moreMove $1,$1
-		endMove $8080
-		moveEntity $85,$0,$0,$3
-		endMove $8080
-		moveEntity $86,$0,$0,$3
-		moreMove $3,$1
-		endMove $8080
+		entityActions $81,$0
+		 moveUp 1
+		endActions
+		entityActions $82,$0
+		 moveLeft 1
+		endActions
+		entityActions $83,$0
+		 moveDown 1
+		 moveLeft 1
+		endActions
+		entityActions $84,$0
+		 moveRight 2
+		 moveUp 1
+		endActions
+		entityActions $85,$0
+		 moveRight 3
+		endActions
+		entityActions $86,$0
+		 moveRight 3
+		 moveDown 1
+		endActions
 		entityShiver $80
 		csWait 30
 		entityShiver $80

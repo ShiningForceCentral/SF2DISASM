@@ -36,14 +36,16 @@ abcs_battle01:  textCursor $901
 		entitySprite $80,$72
 		mapFadeInFromWhite
 		csWait 30
-		moveEntity $81,$FF,$1,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$81   ; "Oh, it disappeared?!{W1}"
 		csWait 5
 		setActscript $81,$0,eas_461B6
 		csWait 120
-		moveEntity $81,$FF,$3,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$81   ; "Oh, there it is!{W1}"
 		setFacing $0,DOWN
 		setFacing $1,DOWN
@@ -60,16 +62,18 @@ abcs_battle01:  textCursor $901
 		nextSingleText $0,$81   ; "It disappeared again.{W1}"
 		setCamDest 2,10
 		nextSingleText $0,$81   ; "There it is!{W1}"
-		moveEntity $80,$0,$3,$4
-		endMove $8080
+		entityActions $80,$0
+		 moveDown 4
+		endActions
 		animEntityFadeInOut $80,$6
 		csWait 20
 		hideEntity $80
 		setCamDest 2,2
 		setFacing $81,RIGHT
 		nextSingleText $0,$81   ; "We must hurry to the King!{W1}"
-		moveEntity $81,$FF,$3,$6
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 6
+		endActions
 		hideEntity $81
 		csWait 40
 		csc_end

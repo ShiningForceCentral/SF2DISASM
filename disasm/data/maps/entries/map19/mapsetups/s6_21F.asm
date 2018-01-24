@@ -69,13 +69,15 @@ cs_62D0E:       textCursor $F7F
 		followEntity $2,$1,$2
 		csWait 10
 		fadeInB
-		moveEntity $81,$FF,$1,$4
-		moreMove $0,$3
-		moreMove $1,$2
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 4
+		 moveRight 3
+		 moveUp 2
+		endActions
 		roofEvent 29,23
-		moveEntity $81,$FF,$1,$E
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 14
+		endActions
 		setActscript $0,$FF,eas_Init
 		setActscript $1,$FF,eas_Init
 		setActscript $3,$FF,eas_Init
@@ -87,8 +89,9 @@ cs_62D0E:       textCursor $F7F
 		ac_setSpeed 4112        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $81,$FF,$1,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 1
+		endActions
 		csWait 30
 		nextSingleText $0,$81   ; "King Granseal, {LEADER}{N}is here!{W1}"
 		entityNod $80
@@ -96,9 +99,10 @@ cs_62D0E:       textCursor $F7F
 		csWait 10
 		entityNod $81
 		nextSingleText $0,$81   ; "Yes, sir.{W1}"
-		moveEntity $81,$FF,$0,$1
-		moreMove $B,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveRight 1
+		 faceDown 1
+		endActions
 		csWait 30
 		entityNod $81
 		setFacing $0,UP
@@ -143,23 +147,26 @@ cs_62D0E:       textCursor $F7F
 		csWait 10
 		setFacing $A,LEFT
 		nextSingleText $80,$A   ; "I always thought {LEADER}{N}was the best choice!{W1}"
-		moveEntity $81,$FF,$0,$2
-		moreMove $B,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveRight 2
+		 faceDown 1
+		endActions
 		setFacing $7,UP
 		setFacing $A,UP
 		nextSingleText $0,$81   ; "Are you sure?{N}Anybody disagree?{W1}"
 		setFacing $7,DOWN
 		csWait 60
-		moveEntity $81,$FF,$2,$2
-		moreMove $B,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveLeft 2
+		 faceDown 1
+		endActions
 		setFacing $7,UP
 		nextSingleText $0,$81   ; "Nobody?{W1}"
 		csWait 30
-		moveEntity $81,$FF,$2,$2
-		moreMove $B,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveLeft 2
+		 faceDown 1
+		endActions
 		setFacing $7,DOWN
 		setFacing $4,RIGHT
 		setFacing $A,UP
@@ -173,8 +180,9 @@ cs_62D0E:       textCursor $F7F
 		csWait 5
 		setActscript $3,$0,eas_461B6
 		csWait 100
-		moveEntity $3,$FF,$3,$1
-		endMove $8080
+		entityActions $3,$FF
+		 moveDown 1
+		endActions
 		setFacing $3,RIGHT
 		entityShiver $3
 		setFacing $1,DOWN
@@ -200,42 +208,48 @@ cs_62D0E:       textCursor $F7F
 		csWait 20
 		entityShakeHead $A
 		csWait 20
-		moveEntity $7,$FF,$2,$1
-		moreMove $3,$2
-		moreMove $A,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 1
+		 moveDown 2
+		 faceLeft 1
+		endActions
 		setFacing $A,LEFT
 		setFacing $3,RIGHT
 		nextSingleText $80,$7   ; "Sorry, but...I don't think{N}{NAME;3} is the right{N}choice.{W1}"
 		entityShiver $3
-		moveEntity $5,$FF,$0,$1
-		moreMove $3,$1
-		moreMove $8,$1
-		endMove $8080
+		entityActions $5,$FF
+		 moveRight 1
+		 moveDown 1
+		 faceRight 1
+		endActions
 		setFacing $3,LEFT
 		nextText $0,$5          ; "I understand {NAME;3}, but{N}she is a human.{W2}"
 		nextSingleText $0,$5    ; "A human is the best choice.{W1}"
 		entityShiver $3
 		jumpIfFlagClear $8,cs_62FB0; May joined
-		moveEntity $8,$FF,$3,$1
-		moreMove $8,$1
-		endMove $8080
+		entityActions $8,$FF
+		 moveDown 1
+		 faceRight 1
+		endActions
 		nextSingleText $0,$8    ; "{LEADER} is a human!{N}They will make a cute couple!{W1}"
 		entityShiver $3
 cs_62FB0:       textCursor $F93
-		moveEntity $7,$FF,$1,$1
-		moreMove $B,$1
-		endMove $8080
-		moveEntity $13,$FF,$2,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		 faceDown 1
+		endActions
+		entityActions $13,$FF
+		 moveLeft 1
+		endActions
 		setFacing $3,RIGHT
 		nextText $80,$13        ; "{LEADER} is a good lad{N}with the manner of a{N}knight!{W2}"
 		nextSingleText $80,$13  ; "I think he's the best{N}choice.{W1}"
 		entityShiver $3
 		csWait 30
-		moveEntity $81,$FF,$0,$2
-		moreMove $3,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveRight 2
+		 moveDown 1
+		endActions
 		nextSingleText $0,$81   ; "{NAME;1}, what do you{N}think?{W1}"
 		entityShiver $1
 		setFacing $1,UP
@@ -261,18 +275,21 @@ cs_62FB0:       textCursor $F93
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $1,$0,$3,$1
-		endMove $8080
-		moveEntity $2,$FF,$2,$1
-		endMove $8080
+		entityActions $1,$0
+		 moveDown 1
+		endActions
+		entityActions $2,$FF
+		 moveLeft 1
+		endActions
 		setActscript $2,$0,eas_RotateRight
 		setFacing $0,DOWN
 		setFacing $4,DOWN
 		setFacing $3,DOWN
 		setFacing $7,DOWN
 		setFacing $13,DOWN
-		moveEntity $1,$FF,$3,$8
-		endMove $8080
+		entityActions $1,$FF
+		 moveDown 8
+		endActions
 		hideEntity $1
 		setActscript $2,$FF,eas_Init
 		startEntity $2
@@ -280,43 +297,49 @@ cs_62FB0:       textCursor $F93
 		entityShakeHead $2
 		csWait 30
 		setCamDest 24,9
-		moveEntity $2,$FF,$3,$2
-		endMove $8080
+		entityActions $2,$FF
+		 moveDown 2
+		endActions
 		csWait 50
 		nextSingleText $0,$2    ; "Does she love {LEADER}?{N}I didn't know that.{W1}"
 		setActscript $4,$FF,eas_Jump
 		setActscript $4,$FF,eas_Jump
-		moveEntity $4,$FF,$3,$1
-		moreMove $0,$2
-		moreMove $3,$2
-		moreMove $A,$1
-		endMove $8080
+		entityActions $4,$FF
+		 moveDown 1
+		 moveRight 2
+		 moveDown 2
+		 faceLeft 1
+		endActions
 		setFacing $2,RIGHT
 		nextSingleText $80,$4   ; "Stop!{N}I will go and comfort her.{W1}"
 		setFacing $2,DOWN
-		moveEntity $4,$0,$3,$2
-		endMove $8080
+		entityActions $4,$0
+		 moveDown 2
+		endActions
 		csWait 8
 		setActscript $2,$FF,eas_Jump
 		setActscript $2,$FF,eas_Jump
 		nextSingleText $0,$2    ; "{NAME;4}!{N}I'll go with you!{W1}"
 		setFacing $4,UP
 		nextSingleText $80,$4   ; "Oh, c'mon.{N}She needs someone like me.{W1}"
-		moveEntity $4,$FF,$3,$5
-		endMove $8080
+		entityActions $4,$FF
+		 moveDown 5
+		endActions
 		hideEntity $4
 		csWait 30
 		nextSingleText $0,$2    ; "What does he mean?{N}I don't understand!{W1}"
-		moveEntity $B,$FF,$0,$2
-		moreMove $3,$1
-		moreMove $0,$2
-		moreMove $B,$1
-		endMove $8080
+		entityActions $B,$FF
+		 moveRight 2
+		 moveDown 1
+		 moveRight 2
+		 faceDown 1
+		endActions
 		nextSingleText $80,$B   ; "They remind me of when I{N}was young.{W1}"
-		moveEntity $1A,$FF,$0,$3
-		moreMove $3,$1
-		moreMove $8,$1
-		endMove $8080
+		entityActions $1A,$FF
+		 moveRight 3
+		 moveDown 1
+		 faceRight 1
+		endActions
 		nextSingleText $0,$1A   ; "{NAME;11}, you were young{N}once?{W1}"
 		entityShiver $1A
 		setFacing $B,LEFT
@@ -324,10 +347,11 @@ cs_62FB0:       textCursor $F93
 		setActscript $B,$FF,eas_Jump
 		nextSingleText $80,$B   ; "Be quiet, you bucket of bolts!{W1}"
 		setCamDest 24,5
-		moveEntity $A,$FF,$1,$1
-		moreMove $2,$2
-		moreMove $9,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveUp 1
+		 moveLeft 2
+		 faceUp 1
+		endActions
 		setFacing $3,UP
 		setFacing $7,UP
 		setFacing $2,UP
@@ -350,21 +374,25 @@ cs_62FB0:       textCursor $F93
 		ac_setSpeed 4112        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$FF,$3,$1
-		moreMove $0,$1
-		moreMove $B,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		 moveRight 1
+		 faceDown 1
+		endActions
 		setFacing $81,UP
 		nextSingleText $80,$80  ; "Now, {LEADER}.{N}Please go awaken her.{W1}"
-		moveEntity $80,$FF,$2,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 1
+		 moveDown 1
+		endActions
 		nextSingleText $80,$80  ; "The Minister is waiting{N}for you.{W1}"
-		moveEntity $80,$FF,$1,$2
-		moreMove $B,$1
-		endMove $8080
-		moveEntity $81,$FF,$2,$1
-		moreMove $B,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 2
+		 faceDown 1
+		endActions
+		entityActions $81,$FF
+		 moveLeft 1
+		 faceDown 1
+		endActions
 		nextSingleText $0,$81   ; "Oh, {LEADER}!{N}I really respect you.{W2}"
 		csc_end

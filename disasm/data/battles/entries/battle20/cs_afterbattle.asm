@@ -26,8 +26,9 @@ abcs_battle20:  textCursor $A06
 		setFacing $7,RIGHT
 		setFacing $0,LEFT
 		nextSingleText $C0,$7   ; "{LEADER}, looks like{N}we've found another friend.{W1}"
-		moveEntity $D,$FF,$3,$1
-		endMove $8080
+		entityActions $D,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$D    ; "Oh, thank you!{W1}"
 		setFacing $0,UP
 		entityNod $0

@@ -18,10 +18,11 @@ abcs_battle21:  textCursor $A17
 		csWait 5
 		setActscript $1F,$0,eas_461B6
 		csWait 120
-		moveEntity $1F,$FF,$2,$3
-		moreMove $3,$1
-		moreMove $2,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveLeft 3
+		 moveDown 1
+		 moveLeft 1
+		endActions
 		csWait 40
 		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "Hurry!  Let's go into{N}Creed's mansion.{W1}"
@@ -30,8 +31,9 @@ abcs_battle21:  textCursor $A17
 		nextSingleText $C0,$7   ; "You're moving around as{N}if you can see.{W1}"
 		nextSingleText $0,$1F   ; "Am I?  Maybe my other{N}senses have sharpened{N}since I lost my sight.{W1}"
 		nextSingleText $C0,$7   ; "Oh, I see.{W1}"
-		moveEntity $7,$FF,$2,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 1
+		endActions
 		setFacing $7,UP
 		nextSingleText $C0,$7   ; "{LEADER}, let's go see{N}Mr. Creed!{W1}"
 		setFacing $0,DOWN

@@ -51,8 +51,9 @@ cs_4FF5A:       textCursor $614
 		setFacing $7,LEFT
 		nextSingleText $0,$A    ; "Alright!{N}Wow!  Let's go!{W1}"
 		csWait 30
-		moveEntity $A,$FF,$3,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveDown 1
+		endActions
 		hideEntity $A
 		setStoryFlag $10        ; Battle 16 unlocked
 		csc_end
@@ -88,17 +89,19 @@ cs_4FFDA:       textCursor $D0D
 		nextText $0,$1F         ; "You know about devices like{N}this, right?{W2}"
 		nextSingleText $0,$1F   ; "{LEADER} has a cannon and{N}some dynamite here.  Can you{N}remove those rocks?{W1}"
 		nextSingleText $0,$B    ; "Ah...OK, let me try.{W1}"
-		moveEntity $B,$FF,$1,$1
-		moreMove $2,$2
-		endMove $8080
+		entityActions $B,$FF
+		 moveUp 1
+		 moveLeft 2
+		endActions
 		setFacing $0,DOWN
 		setFacing $7,DOWN
 		setFacing $B,UP
 		entityNod $0
 		nextSingleText $FF,$FF  ; "{NAME;11} gets the dynamite{N}from {LEADER}.{W1}"
-		moveEntity $B,$FF,$0,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $B,$FF
+		 moveRight 1
+		 moveUp 1
+		endActions
 		setFacing $0,UP
 		setFacing $7,UP
 		setFacing $1F,UP
@@ -110,8 +113,9 @@ cs_4FFDA:       textCursor $D0D
 		ac_setSpeed 20560       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $81,$FF,$1,$2
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 2
+		endActions
 		setQuake 3
 		entitySprite $81,$AB
 		startEntity $81
@@ -122,8 +126,9 @@ cs_4FFDA:       textCursor $D0D
 		hideEntity $81
 		setQuake 0
 		csWait 60
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$1F   ; "Perfect!  We can now go to{N}North Parmecia.{W1}"
 		csWait 40
 		setActscript $B,$FF,eas_Jump
@@ -154,25 +159,30 @@ cs_4FFDA:       textCursor $D0D
 		join $B
 		nextSingleText $0,$B    ; "Please call me when you{N}need my help.{W1}"
 		setActscript $80,$FF,eas_46172
-		moveEntity $80,$0,$3,$2
-		endMove $8080
-		moveEntity $B,$FF,$3,$1
-		endMove $8080
-		moveEntity $B,$0,$3,$1
-		endMove $8080
+		entityActions $80,$0
+		 moveDown 2
+		endActions
+		entityActions $B,$FF
+		 moveDown 1
+		endActions
+		entityActions $B,$0
+		 moveDown 1
+		endActions
 		csWait 3
 		setActscript $B,$0,eas_452BA
 		csWait 3
-		moveEntity $80,$0,$3,$1
-		endMove $8080
+		entityActions $80,$0
+		 moveDown 1
+		endActions
 		csWait 3
 		setActscript $80,$0,eas_452BA
 		csWait 3
 		hideEntity $B
 		hideEntity $80
-		moveEntity $1F,$FF,$3,$1
-		moreMove $2,$2
-		endMove $8080
+		entityActions $1F,$FF
+		 moveDown 1
+		 moveLeft 2
+		endActions
 		nextSingleText $0,$1F   ; "{NAME;11} is hooked.{N}Ha, ha!{W1}"
 		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "OK, {LEADER}.  Let's go{N}to North Parmecia!{W1}"
@@ -215,8 +225,9 @@ cs_5023E:       textCursor $D1D
 		setSize $0,$14
 		csWait 10
 		setSize $0,$12
-		moveEntity $1F,$FF,$2,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveLeft 1
+		endActions
 		setActscript $1F,$FF,eas_Jump
 		setActscript $1F,$FF,eas_Jump
 		nextSingleText $0,$1F   ; "You fool!  Go back and{N}bring it here!{W1}"

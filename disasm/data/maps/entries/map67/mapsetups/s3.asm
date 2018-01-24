@@ -90,8 +90,9 @@ cs_4FB64:       textCursor $9EF
 		csWait 120
 		setFacing $7,DOWN
 		nextSingleText $C0,$7   ; "I don't hear anything.{W1}"
-		moveEntity $1F,$FF,$3,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveDown 1
+		endActions
 		csWait 5
 		setActscript $1F,$0,eas_461B6
 		csWait 120
@@ -109,8 +110,9 @@ cs_4FB64:       textCursor $9EF
 cs_4FC32:       textCursor $A21
 		newEntity $D,57,25,UP,$FF
 		setActscript $D,$FF,eas_Init
-		moveEntity $D,$FF,$1,$1
-		endMove $8080
+		entityActions $D,$FF
+		 moveUp 1
+		endActions
 		setFacing $0,UP
 		setFacing $7,UP
 		setFacing $1F,UP
@@ -134,12 +136,15 @@ cs_4FC32:       textCursor $A21
 		csWait 30
 		setFacing $D,DOWN
 		nextSingleText $0,$D    ; "{LEADER}, come on.{W1}"
-		moveEntity $D,$FF,$1,$1
-		endMove $8080
+		entityActions $D,$FF
+		 moveUp 1
+		endActions
 		hideEntity $D
-		moveEntity $0,$FF,$1,$1
-		endMove $8080
-		moveEntity $0,$0,$1,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveUp 1
+		endActions
+		entityActions $0,$0
+		 moveUp 1
+		endActions
 		mapSysEvent $20,$1D,$3,$2
 		csc_end

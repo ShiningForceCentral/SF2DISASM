@@ -39,10 +39,11 @@ cs_54E86:       textCursor $42A
 		nextText $0,$8B         ; "People are surrounding the{N}bird.  Should we talk to it?{W2}"
 		nextText $0,$8B         ; "It would be a good{N}opportunity.{W2}"
 		nextSingleText $0,$8B   ; "I'll go see the bird!{N}You tell the King about it!{W1}"
-		moveEntity $8B,$FF,$3,$3
-		moreMove $0,$4
-		moreMove $3,$8
-		endMove $8080
+		entityActions $8B,$FF
+		 moveDown 3
+		 moveRight 4
+		 moveDown 8
+		endActions
 		csWait 20
 		setActscript $8B,$FF,eas_Jump
 		csWait 20
@@ -54,21 +55,24 @@ cs_54E86:       textCursor $42A
 		csWait 5
 		setActscript $8B,$0,eas_461B6
 		csWait 60
-		moveEntity $8B,$FF,$2,$1
-		moreMove $3,$2
-		endMove $8080
+		entityActions $8B,$FF
+		 moveLeft 1
+		 moveDown 2
+		endActions
 		setFacing $8B,RIGHT
 		setPos $0,10,9,DOWN
 		setCameraEntity $8A
-		moveEntity $8A,$FF,$1,$1
-		endMove $8080
+		entityActions $8A,$FF
+		 moveUp 1
+		endActions
 		nextText $0,$8A         ; "Oh, {LEADER}.{N}Good timing.{W2}"
 		nextText $0,$8A         ; "There's a strange animal in{N}town.{W2}"
 		nextSingleText $0,$8A   ; "It's very exciting!{W1}"
 		setCameraEntity $0
-		moveEntity $8A,$FF,$0,$1
-		moreMove $1,$7
-		endMove $8080
+		entityActions $8A,$FF
+		 moveRight 1
+		 moveUp 7
+		endActions
 		hideEntity $8A
 		csc_end
 cs_54F26:       textCursor $432
@@ -94,11 +98,13 @@ cs_54F26:       textCursor $432
 		nextSingleText $0,$88   ; "Oooo...it's big!{N}I want to touch him!{W1}"
 		setFacing $88,RIGHT
 		csWait 30
-		moveEntity $88,$0,$0,$1
-		endMove $8080
+		entityActions $88,$0
+		 moveRight 1
+		endActions
 		csWait 8
-		moveEntity $7,$FF,$0,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 1
+		endActions
 		csWait 30
 		setFacing $88,DOWN
 		nextSingleText $0,$88   ; "Ooops!{W1}"
@@ -109,22 +115,26 @@ cs_54F26:       textCursor $432
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $89,$0,$2,$1
-		endMove $8080
+		entityActions $89,$0
+		 moveLeft 1
+		endActions
 		csWait 8
-		moveEntity $7,$FF,$3,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 1
+		endActions
 		setFacing $89,DOWN
 		nextText $0,$89         ; "Wow, he's fast!{W2}"
 		nextSingleText $0,$89   ; "Hey, he's over there!{W1}"
 		setCameraEntity $8C
 		nextSingleText $0,$8C   ; "OK, my turn!{W1}"
-		moveEntity $8C,$0,$1,$1
-		endMove $8080
+		entityActions $8C,$0
+		 moveUp 1
+		endActions
 		csWait 8
-		moveEntity $7,$FF,$2,$1
-		moreMove $6,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 1
+		 moveDownLeft 1
+		endActions
 		setFacing $88,RIGHT
 		setFacing $89,LEFT
 		nextSingleText $0,$8C   ; "Gosh, he's quick!{W1}"
@@ -144,9 +154,10 @@ cs_54F26:       textCursor $432
 		nextSingleText $0,$8C   ; "Amazing!  He speaks!{W1}"
 		nextText $0,$7          ; "Of course I do.{W2}"
 		nextSingleText $0,$7    ; "Is this how you greet{N}strangers?{W1}"
-		moveEntity $89,$FF,$3,$1
-		moreMove $2,$1
-		endMove $8080
+		entityActions $89,$FF
+		 moveDown 1
+		 moveLeft 1
+		endActions
 		nextSingleText $0,$88   ; "Shut up, bird!{W1}"
 		csWait 5
 		setActscript $7,$0,eas_461B6
@@ -161,12 +172,15 @@ cs_54F26:       textCursor $432
 		setFacing $89,LEFT
 		setFacing $8C,LEFT
 		nextSingleText $FF,$FF  ; "Those boys are about to{N}hit the bird.{W1}"
-		moveEntity $88,$0,$3,$1
-		endMove $8080
-		moveEntity $89,$0,$2,$1
-		endMove $8080
-		moveEntity $8C,$0,$2,$1
-		endMove $8080
+		entityActions $88,$0
+		 moveDown 1
+		endActions
+		entityActions $89,$0
+		 moveLeft 1
+		endActions
+		entityActions $8C,$0
+		 moveLeft 1
+		endActions
 		csWait 5
 		setActscript $7,$FF,eas_Init
 		setActscript $7,$FF,eas_JumpLeft
@@ -193,33 +207,41 @@ cs_54F26:       textCursor $432
 		setPos $92,16,16,DOWN
 		setCameraEntity $90
 		csWait 60
-		moveEntity $90,$0,$3,$3
-		endMove $8080
-		moveEntity $91,$0,$3,$3
-		endMove $8080
-		moveEntity $92,$FF,$3,$3
-		moreMove $0,$1
-		endMove $8080
+		entityActions $90,$0
+		 moveDown 3
+		endActions
+		entityActions $91,$0
+		 moveDown 3
+		endActions
+		entityActions $92,$FF
+		 moveDown 3
+		 moveRight 1
+		endActions
 		setFacing $92,DOWN
 		nextSingleText $0,$90   ; "What do you think you're{N}doing?{W1}"
-		moveEntity $88,$0,$1,$2
-		moreMove $0,$2
-		endMove $8080
-		moveEntity $89,$0,$1,$2
-		moreMove $0,$2
-		endMove $8080
-		moveEntity $8C,$FF,$1,$2
-		moreMove $0,$2
-		endMove $8080
+		entityActions $88,$0
+		 moveUp 2
+		 moveRight 2
+		endActions
+		entityActions $89,$0
+		 moveUp 2
+		 moveRight 2
+		endActions
+		entityActions $8C,$FF
+		 moveUp 2
+		 moveRight 2
+		endActions
 		setFacing $88,UP
 		setFacing $89,UP
 		setFacing $8C,UP
 		setCamDest 12,21
-		moveEntity $90,$FF,$3,$2
-		endMove $8080
-		moveEntity $82,$FF,$3,$1
-		moreMove $0,$1
-		endMove $8080
+		entityActions $90,$FF
+		 moveDown 2
+		endActions
+		entityActions $82,$FF
+		 moveDown 1
+		 moveRight 1
+		endActions
 		setFacing $88,LEFT
 		setFacing $89,LEFT
 		setFacing $8C,LEFT
@@ -233,8 +255,9 @@ cs_54F26:       textCursor $432
 		setFacing $87,RIGHT
 		setFacing $8B,RIGHT
 		setFacing $8D,RIGHT
-		moveEntity $90,$FF,$3,$4
-		endMove $8080
+		entityActions $90,$FF
+		 moveDown 4
+		endActions
 		nextText $0,$90         ; "I'm sorry.  I must apologize{N}for their actions.{W2}"
 		nextText $0,$90         ; "Welcome to Granseal.{N}I am the Minister.{W2}"
 		nextSingleText $0,$90   ; "We just settled here.{N}We're strangers here.{W1}"
@@ -244,34 +267,41 @@ cs_54F26:       textCursor $432
 		nextSingleText $0,$90   ; "Let me introduce you to{N}King Granseal.{N}Follow me, please.{W1}"
 		csWait 40
 		setCameraEntity $7
-		moveEntity $90,$0,$1,$8
-		endMove $8080
-		moveEntity $7,$FF,$1,$8
-		endMove $8080
+		entityActions $90,$0
+		 moveUp 8
+		endActions
+		entityActions $7,$FF
+		 moveUp 8
+		endActions
 		setFacing $91,RIGHT
 		setFacing $92,LEFT
 		csWait 30
 		setCameraEntity $FFFF
-		moveEntity $90,$0,$2,$1
-		moreMove $1,$5
-		endMove $8080
-		moveEntity $7,$0,$2,$1
-		moreMove $1,$5
-		endMove $8080
-		moveEntity $91,$0,$2,$1
-		moreMove $1,$5
-		endMove $8080
-		moveEntity $92,$FF,$2,$1
-		moreMove $1,$2
-		moreMove $2,$1
-		moreMove $1,$3
-		endMove $8080
+		entityActions $90,$0
+		 moveLeft 1
+		 moveUp 5
+		endActions
+		entityActions $7,$0
+		 moveLeft 1
+		 moveUp 5
+		endActions
+		entityActions $91,$0
+		 moveLeft 1
+		 moveUp 5
+		endActions
+		entityActions $92,$FF
+		 moveLeft 1
+		 moveUp 2
+		 moveLeft 1
+		 moveUp 3
+		endActions
 		hideEntity $90
 		hideEntity $91
 		hideEntity $92
 		hideEntity $7
-		moveEntity $82,$FF,$2,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveLeft 1
+		endActions
 		setFacing $82,DOWN
 		csc_end
 cs_55242:       textCursor $463
@@ -280,15 +310,17 @@ cs_55242:       textCursor $463
 		ac_setSpeed 10280       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $8E,$FF,$3,$7
-		endMove $8080
+		entityActions $8E,$FF
+		 moveDown 7
+		endActions
 		setFacing $0,UP
 		setFacing $7,UP
 		nextText $0,$8E         ; "Welcome back, {LEADER}!{N}I heard your journey was{N}hard.{W2}"
 		nextText $0,$8E         ; "Sir Astral was right.{N}He said, you were coming{N}back soon.{W2}"
 		nextSingleText $0,$8E   ; "I'll go to the castle and tell{N}everyone!{W1}"
-		moveEntity $8E,$FF,$1,$7
-		endMove $8080
+		entityActions $8E,$FF
+		 moveUp 7
+		endActions
 		hideEntity $8E
 		csc_end
 cs_55288:       textCursor $466
@@ -307,10 +339,11 @@ cs_55288:       textCursor $466
 		setFacing $0,UP
 		setFacing $1F,UP
 		setFacing $7,UP
-		moveEntity $12,$FF,$3,$2
-		moreMove $0,$3
-		moreMove $3,$1
-		endMove $8080
+		entityActions $12,$FF
+		 moveDown 2
+		 moveRight 3
+		 moveDown 1
+		endActions
 		setCamDest 14,22
 		setFacing $1F,LEFT
 		nextSingleText $C0,$1F  ; "Who are you?{W1}"
@@ -322,13 +355,15 @@ cs_55288:       textCursor $466
 		nextSingleText $0,$12   ; "Please take me with you.{N}Please!{W1}"
 		setFacing $7,DOWN
 		csWait 50
-		moveEntity $7,$FF,$0,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 1
+		 moveDown 1
+		endActions
 		setFacing $7,UP
 		nextSingleText $C0,$1F  ; "This is not a sightseeing{N}trip, if you know what I{N}mean?{W1}"
-		moveEntity $12,$FF,$3,$1
-		endMove $8080
+		entityActions $12,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$12   ; "Yes, I know.{N}I still want to go!{W1}"
 		setFacing $0,RIGHT
 		setFacing $1F,LEFT

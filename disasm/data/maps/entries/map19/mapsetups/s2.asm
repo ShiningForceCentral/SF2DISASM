@@ -262,9 +262,10 @@ cs_52F24:       textCursor $241
 		csc_end
 cs_52F40:       textCursor $242
 		nextSingleText $0,$8C   ; "Good!{N}Let's go to the tower.{N}Follow me.{W1}"
-		moveEntity $8C,$FF,$1,$1
-		moreMove $2,$8
-		endMove $8080
+		entityActions $8C,$FF
+		 moveUp 1
+		 moveLeft 8
+		endActions
 		setPos $8C,63,63,LEFT
 		setF $260               ; set after agreeing to go to the tower with Astral
 		csc_end

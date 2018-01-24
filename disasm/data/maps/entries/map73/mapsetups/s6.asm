@@ -125,8 +125,9 @@ cs_50426:       textCursor $8B5
 		ac_setSpeed 257         ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $84,$0,$0,$1
-		endMove $8080
+		entityActions $84,$0
+		 moveRight 1
+		endActions
 		nextSingleText $0,$5    ; "Whoa!{W1}"
 		nextSingleText $0,$1    ; "The ship has crashed into{N}the shore!  Oh, no!{W1}"
 		nextSingleText $0,$83   ; "Ouch!  Ouch!{N}That's what I call good{N}seamanship!{W1}"
@@ -213,8 +214,9 @@ cs_50426:       textCursor $8B5
 		jumpIfFlagSet $6,cs_50624; Kiwi joined
 		hideEntity $6
 cs_50624:       fadeInB
-		moveEntity $3,$FF,$3,$1
-		endMove $8080
+		entityActions $3,$FF
+		 moveDown 1
+		endActions
 		nextText $0,$3          ; "We're going to break the{N}ship up into pieces and build{N}our new town....{W2}"
 		nextText $0,$3          ; "That means, we can't go back{N}to Grans Island!{W2}"
 		nextSingleText $0,$3    ; "Hey, listen to me!{W1}"
@@ -222,8 +224,9 @@ cs_50624:       fadeInB
 		nextText $C0,$1         ; "Be quiet!  We know that.{W2}"
 		nextSingleText $0,$1    ; "Help me remove this plank!{W1}"
 		nextSingleText $0,$3    ; "OK, I'm coming.{W1}"
-		moveEntity $3,$FF,$3,$2
-		endMove $8080
+		entityActions $3,$FF
+		 moveDown 2
+		endActions
 		setFacing $3,DOWN
 		entitySprite $3,$3B
 		csWait 60
@@ -236,8 +239,9 @@ cs_50624:       fadeInB
 		ac_end
 		setBlocks 63,63,1,1,51,7
 		playSound SFX_FALLING
-		moveEntity $3,$FF,$1,$4
-		endMove $8080
+		entityActions $3,$FF
+		 moveUp 4
+		endActions
 		setQuake 5
 		playSound SFX_DOOR_OPEN
 		csWait 10
@@ -246,8 +250,9 @@ cs_50624:       fadeInB
 		setQuake 0
 		csWait 30
 		nextSingleText $0,$5    ; "Oh, what a klutz!{W1}"
-		moveEntity $5,$FF,$0,$2
-		endMove $8080
+		entityActions $5,$FF
+		 moveRight 2
+		endActions
 		setFacing $5,UP
 		csWait 60
 		nextSingleText $C0,$1   ; "That's OK.  {NAME;3} needed{N}a bath anyway.{W1}"
@@ -308,26 +313,30 @@ cs_50806:       textCursor $8F0
 		setBlocks 42,0,11,10,24,48
 		setCameraEntity $80
 		fadeInB
-		moveEntity $80,$FF,$2,$4
-		moreMove $1,$1
-		moreMove $2,$2
-		moreMove $1,$2
-		endMove $8080
-		moveEntity $80,$FF,$2,$1
-		moreMove $1,$1
-		moreMove $1,$1
-		moreMove $2,$8
-		moreMove $3,$2
-		endMove $8080
-		moveEntity $80,$FF,$2,$8
-		moreMove $3,$2
-		moreMove $2,$3
-		moreMove $3,$1
-		moreMove $2,$2
-		moreMove $3,$2
-		endMove $8080
-		moveEntity $80,$FF,$2,$5
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 4
+		 moveUp 1
+		 moveLeft 2
+		 moveUp 2
+		endActions
+		entityActions $80,$FF
+		 moveLeft 1
+		 moveUp 1
+		 moveUp 1
+		 moveLeft 8
+		 moveDown 2
+		endActions
+		entityActions $80,$FF
+		 moveLeft 8
+		 moveDown 2
+		 moveLeft 3
+		 moveDown 1
+		 moveLeft 2
+		 moveDown 2
+		endActions
+		entityActions $80,$FF
+		 moveLeft 5
+		endActions
 		setPosFlash $82,0,0,LEFT
 		nextSingleText $0,$80   ; "Look at that, {LEADER}!{N}They've finished breaking{N}up the ship.{W1}"
 		setFacing $0,DOWN

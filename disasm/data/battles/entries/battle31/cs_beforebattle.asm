@@ -23,8 +23,9 @@ bbcs_31:        textCursor $AFB
 		nextSingleText $0,$7    ; "Geshp!{W1}"
 		nextSingleText $C0,$80  ; "So, you remember me. {W1}"
 		setCamDest 16,2
-		moveEntity $1F,$FF,$3,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$1F   ; "What do you want?{W1}"
 		nextText $C0,$80        ; "I have plans for you.{W2}"
 		nextSingleText $C0,$80  ; "I'm very happy that you came{N}out of the castle.{W1}"
@@ -34,20 +35,23 @@ bbcs_31:        textCursor $AFB
 		nextSingleText $C0,$80  ; "My faithful soldiers can't{N}enter Parmecia.{N}Now, you will open it!{W1}"
 		setActscript $1F,$FF,eas_Jump
 		nextSingleText $0,$1F   ; "It's a trap!{W2}"
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		setCamDest 16,0
 		setFacing $1F,LEFT
 		nextSingleText $0,$1F   ; "{NAME;22}, run!{W1}"
-		moveEntity $16,$FF,$1,$1
-		endMove $8080
+		entityActions $16,$FF
+		 moveUp 1
+		endActions
 		flashScreenWhite $2
 		setPos $82,21,1,LEFT
 		csWait 30
 		setActscript $16,$FF,eas_Jump
 		setActscript $16,$FF,eas_46172
-		moveEntity $16,$FF,$3,$1
-		endMove $8080
+		entityActions $16,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $C0,$80  ; "Ha, ha.  He can't.{W1}"
 		setCamDest 16,6
 		setFacing $80,DOWN
@@ -58,8 +62,9 @@ bbcs_31:        textCursor $AFB
 		nextText $C0,$80        ; "Ah, Cameela.  You're here.{W2}"
 		nextSingleText $C0,$80  ; "Get the key for me!{W1}"
 		nextSingleText $0,$81   ; "Geshp, you're as devious as{N}usual.{W1}"
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $C0,$80  ; "That I am.  Now, get the key!{W1}"
 		nextSingleText $0,$81   ; "Me?!  Why?{W1}"
 		stopEntity $80
@@ -71,8 +76,9 @@ bbcs_31:        textCursor $AFB
 		setActscript $80,$FF,eas_Jump
 		setActscript $80,$FF,eas_Jump
 		setActscript $80,$FF,eas_46172
-		moveEntity $80,$FF,$1,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 1
+		endActions
 		startEntity $80
 		nextSingleText $C0,$80  ; "Cameela!{W1}"
 		nextText $0,$81         ; "I hate you!{N}I won't help you.{W2}"

@@ -38,8 +38,9 @@ cs_5E772:       textCursor $E41
 		nextSingleText $80,$15  ; "I feel...a power returning{N}me to human.{W2}"
 		nextSingleText $80,$15  ; "Hey!  The evil is gone!{N}Did you chase them away?{W1}"
 		startEntity $15
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		setFacing $7,RIGHT
 		nextSingleText $0,$7    ; "{LEADER}, who is she?{W1}"
 		setFacing $15,LEFT
@@ -47,15 +48,19 @@ cs_5E772:       textCursor $E41
 		nextSingleText $0,$7    ; "Yes, we are, but who are{N}you?{W1}"
 		entityShiver $15
 		nextSingleText $80,$15  ; "Do you know how long I've{N}been here as a stone statue?{W1}"
-		moveEntity $0,$FF,$3,$1
-		endMove $8080
-		moveEntity $1F,$FF,$2,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveDown 1
+		endActions
+		entityActions $1F,$FF
+		 moveLeft 1
+		endActions
 		setFacing $1F,UP
-		moveEntity $0,$FF,$0,$1
-		endMove $8080
-		moveEntity $0,$FF,$1,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveRight 1
+		endActions
+		entityActions $0,$FF
+		 moveUp 1
+		endActions
 		setFacing $0,UP
 		nextSingleText $0,$1F   ; "How do you know {LEADER}?{W1}"
 		setFacing $15,DOWN

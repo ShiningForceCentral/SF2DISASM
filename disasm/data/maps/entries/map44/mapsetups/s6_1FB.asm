@@ -22,22 +22,25 @@ cs_54578:       textCursor $3F5
 		setFacing $8A,DOWN
 		nextSingleText $0,$8A   ; "Weigh anchor!{W1}"
 		setEntityDest $0,11,13
-		moveEntity $8B,$0,$0,$4
-		moreMove $1,$9
-		moreMove $A,$2
-		moreMove $B,$1
-		endMove $8080
-		moveEntity $8C,$0,$8,$1E
-		moreMove $1,$9
-		moreMove $8,$2
-		moreMove $B,$1
-		endMove $8080
-		moveEntity $0,$FF,$0,$4
-byte_545B6:     moreMove $3,$1
-		moreMove $0,$1
-		moreMove $0,$1
-		moreMove $0,$2
-		endMove $8080
+		entityActions $8B,$0
+		 moveRight 4
+		 moveUp 9
+		 faceLeft 2
+		 faceDown 1
+		endActions
+		entityActions $8C,$0
+		 faceRight 30
+		 moveUp 9
+		 faceRight 2
+		 faceDown 1
+		endActions
+		entityActions $0,$FF
+		 moveRight 4
+byte_545B6:      moveDown 1
+		 moveRight 1
+		 moveRight 1
+		 moveRight 2
+		endActions
 		csWait 30
 		setFacing $0,DOWN
 		setFacing $1F,DOWN
@@ -73,9 +76,10 @@ byte_545B6:     moreMove $3,$1
 		setFacing $1E,RIGHT
 		nextSingleText $0,$1E   ; "What?  To the mainland?{N}No!{W2}{N}What about Elis?!  No,{N}we'll stay here on Grans!{W1}"
 		setFacing $1E,DOWN
-		moveEntity $1F,$0,$1,$1
-		moreMove $2,$2
-		endMove $8080
+		entityActions $1F,$0
+		 moveUp 1
+		 moveLeft 2
+		endActions
 		setCamDest 11,12
 		nextSingleText $C0,$1F  ; "It's too dangerous to stay{N}here.{N}Weigh anchor right now!{W1}"
 		clearF $4A              ; Astral + King are followers
@@ -91,14 +95,15 @@ byte_545B6:     moreMove $3,$1
 		ac_setSpeed 5140        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $0,$0,$0,$1
-		moreMove $1,$2
-		moreMove $0,$1
-		moreMove $1,$1
-		moreMove $0,$1
-		moreMove $1,$2
-		moreMove $0,$3
-		endMove $8080
+		entityActions $0,$0
+		 moveRight 1
+		 moveUp 2
+		 moveRight 1
+		 moveUp 1
+		 moveRight 1
+		 moveUp 2
+		 moveRight 3
+		endActions
 		csWait 60
 		setQuake 3
 		csWait 60

@@ -72,8 +72,9 @@ cs_5C312:       textCursor $9FB
 		nextSingleText $C0,$80  ; "Those who get stuck in the{N}pond are mine.  It's my{N}rule.{W1}"
 		nextSingleText $0,$D    ; "Then, all the missing people{N}were eaten by you?{W1}"
 		nextSingleText $C0,$80  ; "They were in my pond.{W1}"
-		moveEntity $80,$FF,$1,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 2
+		endActions
 		nextSingleText $C0,$80  ; "And this elf is my dinner{N}for tonight.  Got it?{W1}"
 		setFacing $80,DOWN
 		nextSingleText $C0,$80  ; "Did you guys bring the{N}ketchup? No? Oh, well.{W1}"
@@ -85,6 +86,7 @@ cs_5C312:       textCursor $9FB
 cs_5C3AA:       textCursor $A05
 		nextSingleText $0,$7    ; "{LEADER}, we have to{N}save him!{W1}"
 		entityNod $0
-		moveEntity $0,$FF,$1,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveUp 1
+		endActions
 		csc_end

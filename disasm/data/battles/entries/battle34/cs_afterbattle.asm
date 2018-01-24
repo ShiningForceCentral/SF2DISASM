@@ -64,12 +64,14 @@ cs_4D592:       setActscript $1F,$FF,eas_Jump
 		ac_setSpeed 6168        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $1A,$FF,$1,$1
-		moreMove $2,$1
-		endMove $8080
+		entityActions $1A,$FF
+		 moveUp 1
+		 moveLeft 1
+		endActions
 		nextSingleText $0,$1A   ; "Ancient flower.{W1}"
-		moveEntity $1F,$FF,$0,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $0,$1F   ; "Excuse me?{W1}"
 		nextSingleText $0,$1A   ; "Ancient countries had those{N}flowers along their borders.{W1}"
 		nextSingleText $0,$1F   ; "What kind of flowers are{N}they?{W1}"
@@ -77,20 +79,24 @@ cs_4D592:       setActscript $1F,$FF,eas_Jump
 		csWait 30
 		nextSingleText $0,$1A   ; "I cannot explain....{W1}"
 cs_4D620:       textCursor $B74
-		moveEntity $7,$FF,$2,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 1
+		endActions
 		nextSingleText $0,$7    ; "We will see them when we{N}arrive at Grans.{W1}"
 		nextSingleText $0,$1F   ; "{LEADER}, grab the Sky{N}Orb.{N}Let's go.{W1}"
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		setFacing $7,LEFT
 		jumpIfFlagClear $4C,cs_4D654; Zynk is a follower
-		moveEntity $1A,$FF,$0,$1
-		endMove $8080
+		entityActions $1A,$FF
+		 moveRight 1
+		endActions
 		setFacing $1A,LEFT
 cs_4D654:       entityNod $0
-		moveEntity $0,$FF,$1,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveUp 1
+		endActions
 		hideEntity $83
 		executeSubroutine csub_4D694
 		followEntity $82,$0,$2

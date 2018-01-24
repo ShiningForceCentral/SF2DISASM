@@ -17,11 +17,13 @@ bbcs_08:        textCursor $99D
 cs_4A994:       playSound MUSIC_MAIN_THEME
 		fadeInB
 		nextSingleText $0,$80   ; "The game will be suspended.{N}OK?"
-		moveEntity $80,$FF,$0,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveRight 2
+		endActions
 		setFacing $80,UP
-		moveEntity $80,$FF,$1,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 1
+		endActions
 		setCameraEntity $81
 		nextSingleText $0,$80   ; "....{W1}"
 		playSound MUSIC_ENEMY_ATTACK

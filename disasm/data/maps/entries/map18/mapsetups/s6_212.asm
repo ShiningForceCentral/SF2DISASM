@@ -51,8 +51,9 @@ cs_612BE:       textCursor $E61
 		ac_setSpeed 2056        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		entityShiver $80
 		nextSingleText $0,$80   ; "Ah...yes, sir.  I'll kill{N}{LEADER} this time.{N}I stake my life on it.{W1}"
 		nextSingleText $80,$82  ; "Bring the Jewel of Evil back{N}to me!{W1}"
@@ -78,13 +79,15 @@ cs_612BE:       textCursor $E61
 		ac_setSpeed 4112        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $81,$FF,$1,$2
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 2
+		endActions
 		entityNod $81
 		csWait 50
 		nextSingleText $80,$82  ; "You were right, Odd Eye.{W1}"
-		moveEntity $81,$FF,$1,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$81   ; "Of course.{W1}"
 		nextText $80,$82        ; "I can't trust Geshp anymore.{W2}"
 		nextSingleText $80,$82  ; "If he fails, you must battle{N}{LEADER}.{W1}"
@@ -95,8 +98,9 @@ cs_612BE:       textCursor $E61
 		ac_jump eas_Idle        ;   
 		ac_end
 		csWait 20
-		moveEntity $81,$FF,$3,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 1
+		endActions
 		csWait 30
 		nextText $0,$81         ; "He's probably much stronger{N}now.{N}Hmmm, sounds interesting.{W2}"
 		setActscript $81,$FF,eas_Init
@@ -127,8 +131,9 @@ cs_6143C:       textCursor $36F
 		csWait 20
 		nextSingleText $0,$1A   ; "Sorry, {LEADER}.{N}I'm going back to Roft.{N}I'm worried about Petro.{W1}"
 		csWait 30
-		moveEntity $1A,$FF,$1,$4
-		endMove $8080
+		entityActions $1A,$FF
+		 moveUp 4
+		endActions
 		setFacing $0,UP
 		setFacing $7,UP
 		setFacing $1F,UP
@@ -136,7 +141,8 @@ cs_6143C:       textCursor $36F
 		csWait 30
 		entityNod $1A
 		csWait 20
-		moveEntity $1A,$FF,$1,$4
-		endMove $8080
+		entityActions $1A,$FF
+		 moveUp 4
+		endActions
 		hideEntity $1A
 		csc_end

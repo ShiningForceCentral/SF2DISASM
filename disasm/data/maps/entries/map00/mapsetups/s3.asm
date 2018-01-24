@@ -50,12 +50,15 @@ cs_5E3C2:       textCursor $AAB
 		setActscript $1F,$FF,eas_46172
 		setActscript $0,$FF,eas_46172
 		setActscript $7,$FF,eas_46172
-		moveEntity $1F,$0,$3,$2
-		endMove $8080
-		moveEntity $0,$0,$3,$1
-		endMove $8080
-		moveEntity $7,$FF,$3,$2
-		endMove $8080
+		entityActions $1F,$0
+		 moveDown 2
+		endActions
+		entityActions $0,$0
+		 moveDown 1
+		endActions
+		entityActions $7,$FF
+		 moveDown 2
+		endActions
 		nextSingleText $0,$80   ; "Do come in.  Of course, you{N}can go back now and abandon{N}Mitula!{W1}"
 		setFacing $7,LEFT
 		nextText $0,$7          ; "Sir Astral...{W2}"
@@ -77,16 +80,19 @@ cs_5E3C2:       textCursor $AAB
 		ac_setSpeed 2056        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $1F,$FF,$2,$2
-		endMove $8080
+		entityActions $1F,$FF
+		 moveLeft 2
+		endActions
 		nextSingleText $0,$1F   ; "Odd Eye...Odd Eye...{N}Odd...Eye....{W1}"
 		nextSingleText $0,$7    ; "Sir Astral?{W1}"
-		moveEntity $1F,$FF,$0,$2
-		endMove $8080
+		entityActions $1F,$FF
+		 moveRight 2
+		endActions
 		nextSingleText $0,$1F   ; "I think I've heard that{N}name before....{W1}"
-		moveEntity $7,$FF,$3,$1
-		moreMove $2,$3
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 1
+		 moveLeft 3
+		endActions
 		setFacing $0,DOWN
 		setFacing $7,UP
 		setCamDest 9,12
@@ -97,19 +103,23 @@ cs_5E3C2:       textCursor $AAB
 		ac_setSpeed 2056        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $1F,$0,$3,$2
-		endMove $8080
+		entityActions $1F,$0
+		 moveDown 2
+		endActions
 		csWait 16
-		moveEntity $7,$0,$3,$2
-		endMove $8080
+		entityActions $7,$0
+		 moveDown 2
+		endActions
 		waitIdle $1F
 		setActscript $7,$FF,eas_461AA
 		nextSingleText $0,$7    ; "Sir Astral?{W1}"
 		nextSingleText $0,$1F   ; "Hmmmm....{W1}"
-		moveEntity $1F,$0,$3,$2
-		endMove $8080
-		moveEntity $7,$0,$3,$2
-		endMove $8080
+		entityActions $1F,$0
+		 moveDown 2
+		endActions
+		entityActions $7,$0
+		 moveDown 2
+		endActions
 		waitIdle $1F
 		setActscript $7,$FF,eas_461AA
 		nextSingleText $0,$7    ; "Sir Astral!!!{W1}"
@@ -119,8 +129,9 @@ cs_5E3C2:       textCursor $AAB
 		ac_end
 		setActscript $1F,$FF,eas_Jump
 		setActscript $1F,$FF,eas_46172
-		moveEntity $1F,$FF,$1,$4
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 4
+		endActions
 		nextSingleText $0,$1F   ; "Whhhhhhat?{N}{NAME;7}, don't scare me!{W1}"
 		entityShiver $1F
 		customActscript $7,$FF
@@ -128,8 +139,9 @@ cs_5E3C2:       textCursor $AAB
 		ac_jump eas_Idle        ;   
 		ac_end
 		setCamDest 9,11
-		moveEntity $7,$FF,$1,$3
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 3
+		endActions
 		nextText $0,$7          ; "What's wrong with you?{W2}"
 		nextSingleText $0,$7    ; "Should we go into the shrine{N}now?{W1}"
 		nextSingleText $0,$1F   ; "Oh, sorry.{W1}"
@@ -138,8 +150,9 @@ cs_5E3C2:       textCursor $AAB
 		ac_jump eas_Idle        ;   
 		ac_end
 		setActscript $1F,$FF,eas_Init
-		moveEntity $1F,$FF,$0,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveRight 1
+		endActions
 		setFacing $1F,UP
 		nextText $0,$1F         ; "Zalbard...at least he's not{N}as strong as Odd Eye.{W2}"
 		nextText $0,$1F         ; "But still, he's a greater{N}devil.{W2}"

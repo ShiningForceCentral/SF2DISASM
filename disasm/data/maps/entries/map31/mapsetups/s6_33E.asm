@@ -47,26 +47,33 @@ cs_5D65E:       textCursor $7EB
 		setEntityDest $1F,27,5
 		setFacing $88,UP
 		setActscript $88,$FF,eas_46172
-		moveEntity $88,$FF,$2,$1
-		endMove $8080
-		moveEntity $88,$FF,$0,$1
-		endMove $8080
+		entityActions $88,$FF
+		 moveLeft 1
+		endActions
+		entityActions $88,$FF
+		 moveRight 1
+		endActions
 		csWait 60
-		moveEntity $88,$FF,$2,$1
-		endMove $8080
+		entityActions $88,$FF
+		 moveLeft 1
+		endActions
 		csWait 30
-		moveEntity $88,$FF,$0,$1
-		endMove $8080
-		moveEntity $88,$FF,$2,$1
-		endMove $8080
-		moveEntity $88,$FF,$0,$1
-		endMove $8080
+		entityActions $88,$FF
+		 moveRight 1
+		endActions
+		entityActions $88,$FF
+		 moveLeft 1
+		endActions
+		entityActions $88,$FF
+		 moveRight 1
+		endActions
 		csWait 60
 		setActscript $88,$FF,eas_Init2
 		setFacing $88,UP
 		nextSingleText $0,$88   ; "Finished!{W1}"
-		moveEntity $88,$FF,$0,$1
-		endMove $8080
+		entityActions $88,$FF
+		 moveRight 1
+		endActions
 		setFacing $88,LEFT
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2

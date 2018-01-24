@@ -21,33 +21,43 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		playSound MUSIC_STOP
 		fadeInB
 		cameraSpeed $30
-		moveEntity $0,$0,$1,$3
-		endMove $8080
-		moveEntity $7,$0,$1,$3
-		endMove $8080
-		moveEntity $1F,$0,$1,$3
-		endMove $8080
-		moveEntity $80,$0,$1,$3
-		endMove $8080
-		moveEntity $1C,$FF,$1,$3
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 3
+		endActions
+		entityActions $7,$0
+		 moveUp 3
+		endActions
+		entityActions $1F,$0
+		 moveUp 3
+		endActions
+		entityActions $80,$0
+		 moveUp 3
+		endActions
+		entityActions $1C,$FF
+		 moveUp 3
+		endActions
 		nextSingleText $C0,$81  ; "{LEADER}, you're finally{N}here.{W1}"
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$FF,eas_Jump
-		moveEntity $0,$0,$1,$1
-		endMove $8080
-		moveEntity $7,$0,$1,$2
-		endMove $8080
-		moveEntity $1F,$0,$1,$1
-		endMove $8080
-		moveEntity $1C,$0,$1,$1
-		moreMove $2,$1
-		moreMove $1,$1
-		endMove $8080
-		moveEntity $80,$FF,$1,$1
-		moreMove $0,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 1
+		endActions
+		entityActions $7,$0
+		 moveUp 2
+		endActions
+		entityActions $1F,$0
+		 moveUp 1
+		endActions
+		entityActions $1C,$0
+		 moveUp 1
+		 moveLeft 1
+		 moveUp 1
+		endActions
+		entityActions $80,$FF
+		 moveUp 1
+		 moveRight 1
+		 moveUp 1
+		endActions
 		csWait 30
 		setCamDest 11,2
 		playSound MUSIC_BATTLE_THEME_3
@@ -67,8 +77,9 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		setFacing $81,DOWN
 		nextSingleText $C0,$81  ; "Don't you think so, Red{N}Baron?{W1}"
 		nextSingleText $0,$1C   ; "Uhh...(shiver).{W1}"
-		moveEntity $81,$FF,$3,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 1
+		endActions
 		nextText $C0,$81        ; "Anyway, I came here to{N}deliver an ultimatum.{W2}"
 		nextText $C0,$81        ; "Think long and well before{N}answering me.{W2}"
 		nextSingleText $C0,$81  ; "Leave the jewel, your{N}weapons, and your items{N}here...or DIE!{W1}"
@@ -90,25 +101,29 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		setActscript $82,$0,eas_AnimSpeedx2
 		setActscript $82,$FF,eas_46172
 		setPos $82,16,8,UP
-		moveEntity $82,$FF,$1,$2
-		endMove $8080
+		entityActions $82,$FF
+		 moveUp 2
+		endActions
 		setBlocks 6,15,1,1,16,6
 		setPos $82,63,63,UP
 		csWait 30
 		setPos $82,15,8,UP
-		moveEntity $82,$FF,$1,$2
-		endMove $8080
+		entityActions $82,$FF
+		 moveUp 2
+		endActions
 		setBlocks 6,15,1,1,15,6
 		setPos $82,63,63,UP
 		csWait 20
 		setPos $82,17,9,UP
-		moveEntity $82,$FF,$1,$2
-		endMove $8080
+		entityActions $82,$FF
+		 moveUp 2
+		endActions
 		setBlocks 6,15,1,1,17,7
 		csWait 10
 		setPos $82,16,9,UP
-		moveEntity $82,$FF,$1,$2
-		endMove $8080
+		entityActions $82,$FF
+		 moveUp 2
+		endActions
 		setBlocks 6,15,1,1,16,7
 		hideEntity $82
 		csWait 5
@@ -184,13 +199,15 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		setFacing $7,RIGHT
 		setFacing $0,LEFT
 		nextSingleText $0,$7    ; "{LEADER}, are we really{N}going to fight Oddler?{W1}"
-		moveEntity $1F,$FF,$2,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveLeft 1
+		endActions
 		setFacing $1F,UP
 		setFacing $1C,RIGHT
 		nextSingleText $0,$1F   ; "That's enough out of you!{W1}"
-		moveEntity $1F,$FF,$0,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveRight 1
+		endActions
 		setFacing $1F,UP
 		setFacing $0,DOWN
 		nextSingleText $0,$1F   ; "{LEADER}, let's do it!{W1}"

@@ -25,16 +25,21 @@ cs_5D3B8:       customActscript $85,$FF
 		ac_end
 		setEntityDest $0,12,2
 		setFacing $0,DOWN
-		moveEntity $85,$FF,$0,$5
-		endMove $8080
-		moveEntity $85,$FF,$3,$1
-		endMove $8080
-		moveEntity $85,$FF,$0,$2
-		endMove $8080
-		moveEntity $85,$FF,$1,$1
-		endMove $8080
-		moveEntity $85,$FF,$0,$2
-		endMove $8080
+		entityActions $85,$FF
+		 moveRight 5
+		endActions
+		entityActions $85,$FF
+		 moveDown 1
+		endActions
+		entityActions $85,$FF
+		 moveRight 2
+		endActions
+		entityActions $85,$FF
+		 moveUp 1
+		endActions
+		entityActions $85,$FF
+		 moveRight 2
+		endActions
 		entityShakeHead $0
 		setPos $85,25,18,RIGHT
 		setPos $87,25,17,RIGHT

@@ -32,13 +32,15 @@ cs_EndKiss:     hideText
 		ac_end
 		csWait 30
 		playSound MUSIC_ENDING
-		moveEntity $0,$0,$4,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveUpRight 1
+		endActions
 		csWait 10
 		setActscript $0,$FF,eas_461AA
 		csWait 80
-		moveEntity $0,$0,$0,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveRight 1
+		endActions
 		csWait 10
 		setActscript $0,$FF,eas_461AA
 		stopEntity $0
@@ -47,8 +49,9 @@ cs_EndKiss:     hideText
 		ac_setSpeed 1028        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $0,$0,$0,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveRight 1
+		endActions
 		csWait 16
 		setActscript $0,$FF,eas_461AA
 		csWait 120

@@ -90,42 +90,60 @@ cs_51F88:       textCursor $3C2
 		setFacing $8F,DOWN
 		setFacing $90,DOWN
 		nextSingleText $0,$80   ; "Crush Granseal!{W1}"
-		moveEntity $1C,$0,$3,$7
-		endMove $8080
-		moveEntity $80,$0,$3,$7
-		endMove $8080
-		moveEntity $81,$0,$3,$7
-		endMove $8080
-		moveEntity $82,$0,$3,$7
-		endMove $8080
-		moveEntity $83,$0,$3,$7
-		endMove $8080
-		moveEntity $84,$0,$3,$7
-		endMove $8080
-		moveEntity $85,$0,$3,$7
-		endMove $8080
-		moveEntity $86,$0,$3,$7
-		endMove $8080
-		moveEntity $87,$0,$3,$7
-		endMove $8080
-		moveEntity $88,$0,$3,$7
-		endMove $8080
-		moveEntity $89,$0,$3,$7
-		endMove $8080
-		moveEntity $8A,$0,$3,$7
-		endMove $8080
-		moveEntity $8B,$0,$3,$7
-		endMove $8080
-		moveEntity $8C,$0,$3,$7
-		endMove $8080
-		moveEntity $8D,$0,$3,$7
-		endMove $8080
-		moveEntity $8E,$0,$3,$7
-		endMove $8080
-		moveEntity $8F,$0,$3,$7
-		endMove $8080
-		moveEntity $90,$0,$3,$7
-		endMove $8080
+		entityActions $1C,$0
+		 moveDown 7
+		endActions
+		entityActions $80,$0
+		 moveDown 7
+		endActions
+		entityActions $81,$0
+		 moveDown 7
+		endActions
+		entityActions $82,$0
+		 moveDown 7
+		endActions
+		entityActions $83,$0
+		 moveDown 7
+		endActions
+		entityActions $84,$0
+		 moveDown 7
+		endActions
+		entityActions $85,$0
+		 moveDown 7
+		endActions
+		entityActions $86,$0
+		 moveDown 7
+		endActions
+		entityActions $87,$0
+		 moveDown 7
+		endActions
+		entityActions $88,$0
+		 moveDown 7
+		endActions
+		entityActions $89,$0
+		 moveDown 7
+		endActions
+		entityActions $8A,$0
+		 moveDown 7
+		endActions
+		entityActions $8B,$0
+		 moveDown 7
+		endActions
+		entityActions $8C,$0
+		 moveDown 7
+		endActions
+		entityActions $8D,$0
+		 moveDown 7
+		endActions
+		entityActions $8E,$0
+		 moveDown 7
+		endActions
+		entityActions $8F,$0
+		 moveDown 7
+		endActions
+		entityActions $90,$0
+		 moveDown 7
+		endActions
 		setFacing $5,DOWN
 		setFacing $0,DOWN
 		setCamDest 12,5
@@ -174,10 +192,12 @@ cs_521BA:       textCursor $3DA
 		setFacing $5,LEFT
 		nextText $0,$93         ; "Yes.  I presented them to{N}King Galam.{W2}"
 		nextSingleText $0,$93   ; "He was so kind to give me{N}one of the pair, the Jewel{N}of Light!{W1}"
-		moveEntity $0,$0,$0,$1
-		endMove $8080
-		moveEntity $5,$FF,$0,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveRight 1
+		endActions
+		entityActions $5,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $0,$91   ; "Wait!{W1}"
 		setFacing $0,DOWN
 		setFacing $5,DOWN

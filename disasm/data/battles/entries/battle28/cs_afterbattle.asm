@@ -20,49 +20,59 @@ abcs_battle28:  textCursor $A6E
 		nextSingleText $0,$7    ; "Phew!  That was close!{W1}"
 		nextText $0,$80         ; "Thank you very much.{W2}"
 		nextSingleText $0,$80   ; "Excuse me, will you help{N}me up?{W1}"
-		moveEntity $0,$FF,$3,$1
-		endMove $8080
-		moveEntity $1F,$0,$3,$1
-		moreMove $0,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveDown 1
+		endActions
+		entityActions $1F,$0
+		 moveDown 1
+		 moveRight 1
+		endActions
 		csWait 15
 		setActscript $0,$FF,eas_JumpRight
 		waitIdle $1F
 		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "NO!  I'll do it!{W1}"
-		moveEntity $1F,$FF,$3,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveDown 1
+		endActions
 		setFacing $1F,UP
 		nextText $0,$1F         ; "We'll take you with us.{W2}"
 		nextSingleText $0,$1F   ; "Tristan is the nearest town.{N}I think you had better rest{N}there.{W1}"
 		nextSingleText $0,$80   ; "Thank you, sir.{W1}"
 		entitySprite $80,$C5
-		moveEntity $80,$0,$1,$2
-		endMove $8080
+		entityActions $80,$0
+		 moveUp 2
+		endActions
 		csWait 14
 		setActscript $80,$FF,eas_461AA
-		moveEntity $7,$FF,$2,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 1
+		 moveDown 1
+		endActions
 		nextText $0,$7          ; "You sure are being nice.{N}Hmmm....{W2}"
 		nextSingleText $0,$7    ; "Anyway, Tristan is just over{N}there.  Let's go.{W1}"
-		moveEntity $0,$0,$0,$1
-		endMove $8080
-		moveEntity $81,$FF,$0,$1
-		moreMove $3,$2
-		endMove $8080
+		entityActions $0,$0
+		 moveRight 1
+		endActions
+		entityActions $81,$FF
+		 moveRight 1
+		 moveDown 2
+		endActions
 		setCamDest 10,25
-		moveEntity $0,$0,$0,$2
-		moreMove $3,$1
-		moreMove $0,$2
-		endMove $8080
-		moveEntity $81,$0,$0,$3
-		moreMove $3,$1
-		moreMove $0,$1
-		endMove $8080
-		moveEntity $7,$FF,$0,$4
-		moreMove $3,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveRight 2
+		 moveDown 1
+		 moveRight 2
+		endActions
+		entityActions $81,$0
+		 moveRight 3
+		 moveDown 1
+		 moveRight 1
+		endActions
+		entityActions $7,$FF
+		 moveRight 4
+		 moveDown 1
+		endActions
 		nextSingleText $0,$1F   ; "{LEADER}...{NAME;7}...{W1}"
 		setFacing $0,LEFT
 		setFacing $7,LEFT
@@ -89,11 +99,13 @@ abcs_battle28:  textCursor $A6E
 		startEntity $80
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$FF,eas_Jump
-		moveEntity $7,$0,$2,$1
-		endMove $8080
-		moveEntity $0,$FF,$3,$1
-		moreMove $2,$3
-		endMove $8080
+		entityActions $7,$0
+		 moveLeft 1
+		endActions
+		entityActions $0,$FF
+		 moveDown 1
+		 moveLeft 3
+		endActions
 		nextText $0,$7          ; "Wh...who are you?!{W2}"
 		nextSingleText $0,$7    ; "Are you a devil?{W1}"
 		nextSingleText $C0,$80  ; "I'm one of the leaders of{N}the Devil Army.{N}My name is Cameela!{W1}"
@@ -116,8 +128,9 @@ abcs_battle28:  textCursor $A6E
 		setActscript $80,$FF,eas_Jump
 		nextSingleText $C0,$80  ; "Ooops!{W1}"
 		setActscript $80,$FF,eas_46172
-		moveEntity $80,$FF,$2,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 1
+		endActions
 		setPos $82,12,30,LEFT
 		customActscript $82,$FF
 		ac_setSpeed 14392       ;   
@@ -128,14 +141,17 @@ abcs_battle28:  textCursor $A6E
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $82,$0,$2,$8
-		endMove $8080
+		entityActions $82,$0
+		 moveLeft 8
+		endActions
 		playSound SFX_JUMP
 		csWait 10
-		moveEntity $80,$FF,$1,$1
-		endMove $8080
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 1
+		endActions
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		csWait 30
 		hideEntity $82
 		nextSingleText $0,$1F   ; "Well done.  You dodged my{N}fireball.{W1}"
@@ -150,20 +166,23 @@ abcs_battle28:  textCursor $A6E
 		ac_end
 		setCameraEntity $80
 		csWait 40
-		moveEntity $80,$FF,$1,$A
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 10
+		endActions
 		csWait 40
 		setCameraEntity $FFFF
 		setCamDest 8,26
 		setFacing $0,UP
 		setFacing $7,UP
-		moveEntity $1F,$FF,$1,$2
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 2
+		endActions
 		nextSingleText $0,$1F   ; "Wait!{W1}"
 		setFacing $80,LEFT
 		setCamDest 7,16
-		moveEntity $80,$FF,$2,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 1
+		endActions
 		setFacing $80,DOWN
 		nextSingleText $0,$80   ; "Be careful of Geshp and{N}Zalbard!{W1}"
 		setActscript $80,$FF,eas_JumpLeft
@@ -171,9 +190,10 @@ abcs_battle28:  textCursor $A6E
 		setCamDest 8,26
 		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "Ah, she's gone....{N}OK, {LEADER}.{N}Let's go to Tristan.{W1}"
-		moveEntity $1F,$FF,$0,$1
-		moreMove $3,$2
-		endMove $8080
+		entityActions $1F,$FF
+		 moveRight 1
+		 moveDown 2
+		endActions
 		setFacing $1F,RIGHT
 		setFacing $7,LEFT
 		nextSingleText $0,$7    ; "Would you please explain{N}what just happened?{W1}"

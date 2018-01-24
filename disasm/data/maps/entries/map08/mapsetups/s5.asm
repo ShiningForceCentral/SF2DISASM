@@ -46,10 +46,12 @@ cs_56314:       hideText
 		csWait 60
 		setActscript $0,$0,eas_Jump
 		setActscript $7,$FF,eas_Jump
-		moveEntity $0,$0,$3,$2
-		endMove $8080
-		moveEntity $7,$FF,$3,$2
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 2
+		endActions
+		entityActions $7,$FF
+		 moveDown 2
+		endActions
 		setFacing $0,UP
 		setFacing $7,UP
 		playSound SFX_BATTLEFIELD_DEATH

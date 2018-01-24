@@ -33,26 +33,29 @@ IntroCutscene2: textCursor $106A
 		csWait 30
 		nextSingleText $0,$82   ; "Excuse me, your majesty.{D2}"
 		setFacing $81,DOWN
-		moveEntity $82,$FF,$1,$3
-		endMove $8080
+		entityActions $82,$FF
+		 moveUp 3
+		endActions
 		setCamDest 7,4
 		nextSingleText $0,$81   ; "Is it time to go to the{N}Ancient Tower?{D2}"
 		entityNod $82
 		nextSingleText $0,$82   ; "Yes, sire.{D2}"
-		moveEntity $81,$FF,$3,$1
-		moreMove $0,$2
-		moreMove $B,$A
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 1
+		 moveRight 2
+		 faceDown 10
+		endActions
 		nextSingleText $0,$81   ; "It's stormy outside.{N}Be careful.{D2}"
 		entityNod $82
 		csWait 30
 		setCameraEntity $82
-		moveEntity $82,$FF,$3,$3
-		moreMove $2,$5
-		moreMove $5,$3
-		moreMove $2,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveDown 3
+		 moveLeft 5
+		 moveUpLeft 3
+		 moveLeft 1
+		 moveUp 1
+		endActions
 		hideEntity $82
 		setCameraEntity $FFFF
 		csWait 30
@@ -70,9 +73,10 @@ IntroCutscene2: textCursor $106A
 		ac_setSpeed 2570        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $81,$FF,$2,$2
-		moreMove $B,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveLeft 2
+		 faceDown 1
+		endActions
 		playSound SFX_SPELL_CAST
 		nextSingleText $0,$81   ; "Oh, a gust of wind!{D2}"
 		csWait 20

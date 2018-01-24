@@ -28,37 +28,45 @@ EndCutscene:    mapLoad 20,19,33
 		fadeInB
 		csWait 60
 		setPos $0,25,35,RIGHT
-		moveEntity $0,$FF,$7,$1
-		moreMove $0,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveDownRight 1
+		 moveRight 1
+		endActions
 		csWait 30
-		moveEntity $0,$FF,$3,$4
-		endMove $8080
+		entityActions $0,$FF
+		 moveDown 4
+		endActions
 		setFacing $0,LEFT
-		moveEntity $80,$FF,$0,$1
-		endMove $8080
-		moveEntity $81,$FF,$0,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveRight 1
+		endActions
+		entityActions $81,$FF
+		 moveRight 1
+		endActions
 		csWait 60
 		entityNod $80
 		entityNod $81
 		entityNod $0
 		csWait 40
-		moveEntity $0,$FF,$1,$4
-		endMove $8080
+		entityActions $0,$FF
+		 moveUp 4
+		endActions
 		setFacing $0,LEFT
 		csWait 80
 		setPos $83,25,35,RIGHT
-		moveEntity $83,$FF,$7,$1
-		endMove $8080
+		entityActions $83,$FF
+		 moveDownRight 1
+		endActions
 		csWait 40
 		entityNod $0
 		csWait 60
-		moveEntity $0,$0,$3,$4
-		endMove $8080
-		moveEntity $83,$FF,$0,$1
-		moreMove $3,$3
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 4
+		endActions
+		entityActions $83,$FF
+		 moveRight 1
+		 moveDown 3
+		endActions
 		setFacing $0,LEFT
 		setFacing $83,LEFT
 		setActscript $80,$0,eas_Jump
@@ -87,10 +95,12 @@ EndCutscene:    mapLoad 20,19,33
 		csWait 10
 		setFacing $83,LEFT
 		csWait 30
-		moveEntity $0,$0,$2,$4
-		endMove $8080
-		moveEntity $83,$FF,$2,$4
-		endMove $8080
+		entityActions $0,$0
+		 moveLeft 4
+		endActions
+		entityActions $83,$FF
+		 moveLeft 4
+		endActions
 		entityNod $81
 		entityNod $83
 		csWait 60
@@ -98,34 +108,40 @@ EndCutscene:    mapLoad 20,19,33
 		csWait 30
 		setActscript $82,$FF,eas_Jump
 		csWait 30
-		moveEntity $82,$FF,$1,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveUp 1
+		endActions
 		setFacing $82,DOWN
 		setPos $B,23,37,DOWN
-		moveEntity $B,$0,$3,$1
-		moreMove $2,$2
-		moreMove $3,$2
-		endMove $8080
+		entityActions $B,$0
+		 moveDown 1
+		 moveLeft 2
+		 moveDown 2
+		endActions
 		csWait 20
 		setPos $2,23,37,DOWN
-		moveEntity $2,$0,$3,$1
-		moreMove $2,$2
-		moreMove $3,$1
-		endMove $8080
+		entityActions $2,$0
+		 moveDown 1
+		 moveLeft 2
+		 moveDown 1
+		endActions
 		csWait 20
 		setPos $A,23,37,DOWN
-		moveEntity $A,$0,$3,$1
-		moreMove $2,$2
-		endMove $8080
+		entityActions $A,$0
+		 moveDown 1
+		 moveLeft 2
+		endActions
 		csWait 20
 		setPos $3,23,37,DOWN
-		moveEntity $3,$0,$3,$1
-		moreMove $2,$1
-		endMove $8080
+		entityActions $3,$0
+		 moveDown 1
+		 moveLeft 1
+		endActions
 		csWait 20
 		setPos $7,23,37,DOWN
-		moveEntity $7,$0,$3,$1
-		endMove $8080
+		entityActions $7,$0
+		 moveDown 1
+		endActions
 		setFacing $B,RIGHT
 		csWait 10
 		setFacing $2,RIGHT

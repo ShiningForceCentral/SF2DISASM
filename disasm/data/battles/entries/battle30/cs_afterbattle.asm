@@ -17,8 +17,9 @@ abcs_battle30:  textCursor $ACD
 		fadeInB
 		entityShiver $80
 		nextSingleText $0,$80   ; "Grrr...impossible!{N}Why...do I have to die?{W1}"
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$1F   ; "Where is Mitula?{W1}"
 		entityShiver $80
 		nextSingleText $0,$80   ; "I don't know...haven't{N}seen her.{W1}"
@@ -59,18 +60,20 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $0,$1F   ; "The orb released holy power{N}in it's light.{W1}"
 		entityFlashWhite $82,$3C
 		setActscript $7,$FF,eas_Jump
-		moveEntity $7,$FF,$1,$2
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 2
+		endActions
 		nextSingleText $0,$7    ; "Hey, look over there!{W1}"
 		setCamDest 5,0
 		setPos $81,11,3,DOWN
 		entityFlashWhite $81,$3C
 		nextSingleText $0,$81   ; "Welcome!{W1}"
 		setCameraEntity $81
-		moveEntity $81,$FF,$3,$4
-		moreMove $2,$2
-		moreMove $3,$4
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 4
+		 moveLeft 2
+		 moveDown 4
+		endActions
 		setFacing $0,LEFT
 		setFacing $1F,LEFT
 		setFacing $7,LEFT
@@ -102,8 +105,9 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $0,$1F   ; "Death?!  Not ours I hope.{W1}"
 		nextText $C0,$81        ; "Zeon is an unimaginably{N}strong devil.{W2}"
 		nextSingleText $C0,$81  ; "If he attains full power,{N}I, even Volcanon, would not{N}be able to stop him.{W1}"
-		moveEntity $7,$FF,$2,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 1
+		endActions
 		nextSingleText $0,$7    ; "So, we have to defeat him{N}before he revives completely.{W1}"
 		nextSingleText $C0,$81  ; "His power is sealed in the{N}Jewel of Evil.{W1}"
 		setActscript $1F,$FF,eas_Jump
@@ -136,15 +140,17 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $C0,$81  ; "It's on Grans.{N}Your jewel will lead you to...{W1}"
 		animEntityFadeInOut $81,$6
 		csWait 50
-		moveEntity $1F,$FF,$2,$2
-		moreMove $1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveLeft 2
+		 moveUp 1
+		endActions
 		csWait 5
 		setActscript $1F,$0,eas_461E4
 		csWait 120
 		nextSingleText $0,$1F   ; "Mitula, Mitula!!{W1}"
-		moveEntity $7,$FF,$2,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 1
+		endActions
 		csWait 30
 		setFacing $7,DOWN
 		csWait 30

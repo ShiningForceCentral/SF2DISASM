@@ -11,29 +11,36 @@ bbcs_30:        textCursor $AC8
 		setPos $1F,11,27,UP
 		playSound MUSIC_BATTLE_THEME_1
 		fadeInB
-		moveEntity $0,$0,$1,$2
-		endMove $8080
-		moveEntity $1F,$0,$1,$2
-		endMove $8080
-		moveEntity $7,$FF,$1,$2
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 2
+		endActions
+		entityActions $1F,$0
+		 moveUp 2
+		endActions
+		entityActions $7,$FF
+		 moveUp 2
+		endActions
 		nextSingleText $0,$80   ; "What a pleasure!{N}Nice to meet you.{W1}"
 		setActscript $7,$FF,eas_Jump
-		moveEntity $1F,$FF,$0,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveRight 1
+		 moveUp 1
+		endActions
 		entityNod $1F
 		nextSingleText $C0,$1F  ; "Ohhh....{N}He's ugly, isn't he?{W1}"
 		setCamDest 7,0
-		moveEntity $80,$FF,$2,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 2
+		endActions
 		setCameraEntity $80
-		moveEntity $80,$FF,$3,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 2
+		endActions
 		nextText $0,$80         ; "What?!{N}You dare insult me?!{W2}"
 		nextSingleText $0,$80   ; "I've never...{N}For that you will die!{W1}"
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$80   ; "Are you ready to die?{W1}"
 		playSound SFX_INTRO_LIGHTNING
 		flashScreenWhite $28

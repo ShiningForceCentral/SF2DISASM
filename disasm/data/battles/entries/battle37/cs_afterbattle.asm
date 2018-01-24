@@ -24,15 +24,17 @@ cs_4DBEE:       stopEntity $1C
 		setPriority $1F,$0
 		setPriority $1C,$FFFF
 		fadeInB
-		moveEntity $7,$FF,$0,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 1
+		endActions
 		csWait 50
 		setFacing $7,UP
 		nextSingleText $0,$7    ; "Sir Astral, he's...crying!{W1}"
 		nextSingleText $0,$1F   ; "Why would he be crying?{W1}"
-		moveEntity $1F,$FF,$0,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveRight 1
+		 moveDown 1
+		endActions
 		csWait 30
 		setFacing $7,RIGHT
 		nextSingleText $0,$1F   ; "I think I've seen his style{N}of fighting before.{N}Let's see his face.{W1}"
@@ -43,8 +45,9 @@ cs_4DBEE:       stopEntity $1C
 		setActscript $7,$0,eas_Jump
 		setActscript $1F,$FF,eas_Jump
 		nextSingleText $0,$1F   ; "It's {NAME;28}!{W1}"
-		moveEntity $0,$FF,$3,$2
-		endMove $8080
+		entityActions $0,$FF
+		 moveDown 2
+		endActions
 		setFacing $0,LEFT
 		entityShiver $7
 		nextSingleText $0,$7    ; "Let me see him.{W1}"
@@ -75,16 +78,18 @@ cs_4DBEE:       stopEntity $1C
 		nextSingleText $0,$1F   ; "You recovered your senses{N}when we defeated the devils.{W1}"
 		setFacing $1C,DOWN
 		nextSingleText $C0,$1C  ; "I can't believe it!{N}I'm {NAME;28}, I'm...{W1}"
-		moveEntity $1C,$FF,$3,$2
-		endMove $8080
+		entityActions $1C,$FF
+		 moveDown 2
+		endActions
 		entityShiver $1C
 		setFacing $7,DOWN
 		setFacing $0,DOWN
 		nextSingleText $C0,$1C  ; "What can I do?{N}How can I atone for my sins?{W1}"
 		setFacing $1C,DOWN
 		nextSingleText $C0,$1C  ; "Sir Astral, tell me.{W1}"
-		moveEntity $1F,$FF,$3,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveDown 1
+		endActions
 		nextText $0,$1F         ; "You're not at fault.{W1}"
 		nextSingleText $0,$1F   ; "It's not your fault.{N}The devils are to blame.{W1}"
 		nextSingleText $C0,$1C  ; "But...{W1}"
@@ -98,8 +103,9 @@ cs_4DBEE:       stopEntity $1C
 		nextSingleText $C0,$1C  ; "I have to die!{W1}"
 		setFacing $1C,DOWN
 		csWait 30
-		moveEntity $1C,$FF,$3,$3
-		endMove $8080
+		entityActions $1C,$FF
+		 moveDown 3
+		endActions
 		nextSingleText $0,$1F   ; "Oh, poor {NAME;28}.{W1}"
 		setFacing $7,RIGHT
 		nextText $0,$7          ; "Sir Astral, {NAME;28} has{N}fled. {W2}"

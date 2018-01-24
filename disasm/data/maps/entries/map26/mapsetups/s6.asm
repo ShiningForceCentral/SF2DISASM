@@ -65,18 +65,24 @@ cs_59E04:       textCursor $6CB
 		setPos $83,25,5,UP
 		setPos $84,27,5,UP
 		fadeInB
-		moveEntity $0,$0,$3,$7
-		endMove $8080
-		moveEntity $7,$0,$3,$7
-		endMove $8080
-		moveEntity $1F,$0,$3,$7
-		endMove $8080
-		moveEntity $82,$0,$3,$7
-		endMove $8080
-		moveEntity $83,$0,$3,$7
-		endMove $8080
-		moveEntity $84,$FF,$3,$7
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 7
+		endActions
+		entityActions $7,$0
+		 moveDown 7
+		endActions
+		entityActions $1F,$0
+		 moveDown 7
+		endActions
+		entityActions $82,$0
+		 moveDown 7
+		endActions
+		entityActions $83,$0
+		 moveDown 7
+		endActions
+		entityActions $84,$FF
+		 moveDown 7
+		endActions
 		csWait 20
 		startEntity $0
 		startEntity $7
@@ -95,7 +101,8 @@ cs_59F20:       textCursor $6CC
 		nextSingleText $0,$81   ; "Ungh!{W2}"
 		csWait 50
 		nextSingleText $0,$81   ; "It's too heavy. I can't{N}lift it.  I give up!{W1}"
-		moveEntity $81,$FF,$1,$8
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 8
+		endActions
 		hideEntity $81
 		csc_end

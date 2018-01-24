@@ -51,22 +51,27 @@ cs_5DDC2:       playSound MUSIC_TOWN
 		setCameraEntity $80
 		setActscript $80,$FF,eas_Jump
 		nextSingleText $0,$80   ; "Galam soldiers!  Run!{W1}"
-		moveEntity $80,$FF,$2,$2
-		endMove $8080
-		moveEntity $80,$FF,$1,$1
-		endMove $8080
-		moveEntity $80,$FF,$2,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 2
+		endActions
+		entityActions $80,$FF
+		 moveUp 1
+		endActions
+		entityActions $80,$FF
+		 moveLeft 2
+		endActions
 		setFacing $0,LEFT
 		setFacing $7,LEFT
 		setFacing $1F,LEFT
 		nextSingleText $0,$7    ; "No, wait!  We're not Galam{N}soldiers!{W1}"
 		setFacing $80,RIGHT
 		nextSingleText $0,$80   ; "No...?{W1}"
-		moveEntity $80,$FF,$3,$2
-		endMove $8080
-		moveEntity $80,$FF,$0,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 2
+		endActions
+		entityActions $80,$FF
+		 moveRight 2
+		endActions
 		nextSingleText $0,$80   ; "Oops.  My mistake.{W2}"
 		nextSingleText $0,$80   ; "Oh, it's obvious.  I can see{N}it in your eyes.{W1}"
 		csc_end
@@ -104,32 +109,43 @@ cs_5DE76:       textCursor $879
 		setFacing $0,LEFT
 		setFacing $7,LEFT
 		setFacing $1F,LEFT
-		moveEntity $1A,$FF,$2,$2
-		endMove $8080
-		moveEntity $7,$FF,$2,$2
-		endMove $8080
-		moveEntity $1F,$FF,$2,$1
-		endMove $8080
-		moveEntity $1A,$FF,$3,$1
-		endMove $8080
-		moveEntity $1A,$FF,$0,$1
-		endMove $8080
-		moveEntity $1A,$FF,$1,$1
-		endMove $8080
-		moveEntity $1A,$FF,$2,$2
-		endMove $8080
+		entityActions $1A,$FF
+		 moveLeft 2
+		endActions
+		entityActions $7,$FF
+		 moveLeft 2
+		endActions
+		entityActions $1F,$FF
+		 moveLeft 1
+		endActions
+		entityActions $1A,$FF
+		 moveDown 1
+		endActions
+		entityActions $1A,$FF
+		 moveRight 1
+		endActions
+		entityActions $1A,$FF
+		 moveUp 1
+		endActions
+		entityActions $1A,$FF
+		 moveLeft 2
+		endActions
 		setActscript $1A,$FF,eas_Jump
 		setActscript $1A,$0,eas_Jump
 		nextSingleText $0,$7    ; "What's wrong with {NAME;26}?{W1}"
 		nextSingleText $0,$1F   ; "I have no idea, but he's{N}obviously disturbed!{W1}"
-		moveEntity $1A,$FF,$1,$1
-		endMove $8080
-		moveEntity $1A,$FF,$0,$1
-		endMove $8080
-		moveEntity $1A,$FF,$3,$1
-		endMove $8080
-		moveEntity $1A,$FF,$2,$2
-		endMove $8080
+		entityActions $1A,$FF
+		 moveUp 1
+		endActions
+		entityActions $1A,$FF
+		 moveRight 1
+		endActions
+		entityActions $1A,$FF
+		 moveDown 1
+		endActions
+		entityActions $1A,$FF
+		 moveLeft 2
+		endActions
 		csWait 30
 		entityNod $1A
 		setFacing $1A,RIGHT

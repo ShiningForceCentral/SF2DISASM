@@ -27,8 +27,9 @@ cs_5B6C0:       textCursor $C87
 		csWait 7
 		setPos $82,60,60,DOWN
 		csWait 40
-		moveEntity $81,$FF,$1,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$81   ; "Hey, Evil Spirit is{N}appearing!{W1}"
 		setCamDest 2,2
 		setPos $82,7,6,DOWN
@@ -64,8 +65,9 @@ cs_5B6C0:       textCursor $C87
 		setPos $7,6,12,UP
 		setPos $1F,8,12,UP
 		setCamDest 2,4
-		moveEntity $80,$FF,$1,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $80,$80  ; "Ahhh....{W1}"
 		nextSingleText $0,$82   ; "Creed, what do you want?{W1}"
 		nextSingleText $80,$80  ; "Zeon.{W1}"
@@ -85,12 +87,15 @@ cs_5B6C0:       textCursor $C87
 		mapFadeOutToWhite
 		csWait 30
 		nextSingleText $0,$82   ; "Hmmmm....{N}Hmmmm...mmmm....{W1}"
-		moveEntity $0,$0,$1,$1
-		endMove $8080
-		moveEntity $7,$0,$1,$1
-		endMove $8080
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 1
+		endActions
+		entityActions $7,$0
+		 moveUp 1
+		endActions
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$7    ; "What is he doing now?{W1}"
 		setFacing $81,DOWN
 		nextText $0,$81         ; "He's channeling his mind{N}into the nature of all{N}things.{W2}"
@@ -123,20 +128,23 @@ cs_5B6C0:       textCursor $C87
 		setFacing $1F,UP
 		nextSingleText $0,$7    ; "But, we can't remove it.{W1}"
 		nextSingleText $80,$80  ; "I can.{W1}"
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $80,$80  ; "Let me see it.{W1}"
 		setActscript $80,$FF,eas_46172
-		moveEntity $80,$0,$3,$1
-		endMove $8080
+		entityActions $80,$0
+		 moveDown 1
+		endActions
 		csWait 2
 		setActscript $80,$FF,eas_461AA
 		stopEntity $80
 		csWait 20
 		entityFlashWhite $0,$28
 		startEntity $80
-		moveEntity $80,$0,$1,$1
-		endMove $8080
+		entityActions $80,$0
+		 moveUp 1
+		endActions
 		csWait 2
 		setActscript $80,$FF,eas_461AA
 		entityShakeHead $80
@@ -152,11 +160,13 @@ cs_5B6C0:       textCursor $C87
 		csWait 20
 		setCamDest 2,4
 		setActscript $80,$FF,eas_Init
-		moveEntity $80,$0,$0,$1
-		moreMove $1,$1
-		endMove $8080
-		moveEntity $0,$FF,$1,$2
-		endMove $8080
+		entityActions $80,$0
+		 moveRight 1
+		 moveUp 1
+		endActions
+		entityActions $0,$FF
+		 moveUp 2
+		endActions
 		setFacing $81,UP
 		nextSingleText $FF,$FF  ; "{LEADER} displays the{N}jewels to Evil Spirit.{W1}"
 		entityFlashWhite $0,$28
@@ -227,8 +237,9 @@ cs_5B6C0:       textCursor $C87
 		nextSingleText $80,$80  ; "Impossible!{W1}"
 		nextText $0,$83         ; "You're {LEADER}.{N}I see you....{W2}"
 		nextSingleText $0,$83   ; "Listen, {LEADER}.{N}Bring that jewel to Arc{N}Valley.{W1}"
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$7    ; "Why should we?!{W1}"
 		nextText $0,$83         ; "I'll return Elis to you in{N}exchange for the jewel.{W2}"
 		nextSingleText $0,$83   ; "Come to Arc Valley...{N}Ggggooo...!{W1}"
@@ -328,20 +339,24 @@ cs_5B6C0:       textCursor $C87
 		setPos $92,7,7,LEFT
 		setPos $93,6,6,LEFT
 		setPos $94,7,5,LEFT
-		moveEntity $91,$0,$0,$1
-		endMove $8080
+		entityActions $91,$0
+		 moveRight 1
+		endActions
 		csWait 2
 		setActscript $91,$FF,eas_461AA
-		moveEntity $92,$0,$3,$1
-		endMove $8080
+		entityActions $92,$0
+		 moveDown 1
+		endActions
 		csWait 2
 		setActscript $92,$FF,eas_461AA
-		moveEntity $93,$0,$2,$1
-		endMove $8080
+		entityActions $93,$0
+		 moveLeft 1
+		endActions
 		csWait 2
 		setActscript $93,$FF,eas_461AA
-		moveEntity $94,$0,$1,$1
-		endMove $8080
+		entityActions $94,$0
+		 moveUp 1
+		endActions
 		csWait 2
 		setActscript $94,$FF,eas_461AA
 		setActscript $91,$0,eas_464E2
@@ -357,22 +372,30 @@ cs_5B6C0:       textCursor $C87
 		setPos $8A,7,6,RIGHT
 		setPos $8B,7,6,RIGHT
 		setPos $8C,7,6,RIGHT
-		moveEntity $85,$0,$0,$4
-		endMove $8080
-		moveEntity $86,$0,$1,$4
-		endMove $8080
-		moveEntity $87,$0,$2,$4
-		endMove $8080
-		moveEntity $88,$0,$3,$4
-		endMove $8080
-		moveEntity $89,$0,$4,$4
-		endMove $8080
-		moveEntity $8A,$0,$5,$4
-		endMove $8080
-		moveEntity $8B,$0,$6,$4
-		endMove $8080
-		moveEntity $8C,$FF,$7,$4
-		endMove $8080
+		entityActions $85,$0
+		 moveRight 4
+		endActions
+		entityActions $86,$0
+		 moveUp 4
+		endActions
+		entityActions $87,$0
+		 moveLeft 4
+		endActions
+		entityActions $88,$0
+		 moveDown 4
+		endActions
+		entityActions $89,$0
+		 moveUpRight 4
+		endActions
+		entityActions $8A,$0
+		 moveUpLeft 4
+		endActions
+		entityActions $8B,$0
+		 moveDownLeft 4
+		endActions
+		entityActions $8C,$FF
+		 moveDownRight 4
+		endActions
 		playSound SFX_BATTLEFIELD_DEATH
 		setPos $85,7,6,RIGHT
 		setPos $86,7,6,RIGHT
@@ -382,22 +405,30 @@ cs_5B6C0:       textCursor $C87
 		setPos $8A,7,6,RIGHT
 		setPos $8B,7,6,RIGHT
 		setPos $8C,7,6,RIGHT
-		moveEntity $85,$0,$0,$4
-		endMove $8080
-		moveEntity $86,$0,$1,$4
-		endMove $8080
-		moveEntity $87,$0,$2,$4
-		endMove $8080
-		moveEntity $88,$0,$3,$4
-		endMove $8080
-		moveEntity $89,$0,$4,$4
-		endMove $8080
-		moveEntity $8A,$0,$5,$4
-		endMove $8080
-		moveEntity $8B,$0,$6,$4
-		endMove $8080
-		moveEntity $8C,$FF,$7,$4
-		endMove $8080
+		entityActions $85,$0
+		 moveRight 4
+		endActions
+		entityActions $86,$0
+		 moveUp 4
+		endActions
+		entityActions $87,$0
+		 moveLeft 4
+		endActions
+		entityActions $88,$0
+		 moveDown 4
+		endActions
+		entityActions $89,$0
+		 moveUpRight 4
+		endActions
+		entityActions $8A,$0
+		 moveUpLeft 4
+		endActions
+		entityActions $8B,$0
+		 moveDownLeft 4
+		endActions
+		entityActions $8C,$FF
+		 moveDownRight 4
+		endActions
 		playSound SFX_BATTLEFIELD_DEATH
 		setPos $85,7,6,RIGHT
 		setPos $86,7,6,RIGHT
@@ -407,22 +438,30 @@ cs_5B6C0:       textCursor $C87
 		setPos $8A,7,6,RIGHT
 		setPos $8B,7,6,RIGHT
 		setPos $8C,7,6,RIGHT
-		moveEntity $85,$0,$0,$4
-		endMove $8080
-		moveEntity $86,$0,$1,$4
-		endMove $8080
-		moveEntity $87,$0,$2,$4
-		endMove $8080
-		moveEntity $88,$0,$3,$4
-		endMove $8080
-		moveEntity $89,$0,$4,$4
-		endMove $8080
-		moveEntity $8A,$0,$5,$4
-		endMove $8080
-		moveEntity $8B,$0,$6,$4
-		endMove $8080
-		moveEntity $8C,$FF,$7,$4
-		endMove $8080
+		entityActions $85,$0
+		 moveRight 4
+		endActions
+		entityActions $86,$0
+		 moveUp 4
+		endActions
+		entityActions $87,$0
+		 moveLeft 4
+		endActions
+		entityActions $88,$0
+		 moveDown 4
+		endActions
+		entityActions $89,$0
+		 moveUpRight 4
+		endActions
+		entityActions $8A,$0
+		 moveUpLeft 4
+		endActions
+		entityActions $8B,$0
+		 moveDownLeft 4
+		endActions
+		entityActions $8C,$FF
+		 moveDownRight 4
+		endActions
 		hideEntity $82
 		playSound SFX_BATTLEFIELD_DEATH
 		playSound SFX_BIG_DOOR_RUMBLE
@@ -434,22 +473,30 @@ cs_5B6C0:       textCursor $C87
 		setPos $8A,7,6,RIGHT
 		setPos $8B,7,6,RIGHT
 		setPos $8C,7,6,RIGHT
-		moveEntity $85,$0,$0,$4
-		endMove $8080
-		moveEntity $86,$0,$1,$4
-		endMove $8080
-		moveEntity $87,$0,$2,$4
-		endMove $8080
-		moveEntity $88,$0,$3,$4
-		endMove $8080
-		moveEntity $89,$0,$4,$4
-		endMove $8080
-		moveEntity $8A,$0,$5,$4
-		endMove $8080
-		moveEntity $8B,$0,$6,$4
-		endMove $8080
-		moveEntity $8C,$FF,$7,$4
-		endMove $8080
+		entityActions $85,$0
+		 moveRight 4
+		endActions
+		entityActions $86,$0
+		 moveUp 4
+		endActions
+		entityActions $87,$0
+		 moveLeft 4
+		endActions
+		entityActions $88,$0
+		 moveDown 4
+		endActions
+		entityActions $89,$0
+		 moveUpRight 4
+		endActions
+		entityActions $8A,$0
+		 moveUpLeft 4
+		endActions
+		entityActions $8B,$0
+		 moveDownLeft 4
+		endActions
+		entityActions $8C,$FF
+		 moveDownRight 4
+		endActions
 		playSound SFX_BATTLEFIELD_DEATH
 		setPos $85,7,6,RIGHT
 		setPos $86,7,6,RIGHT
@@ -459,22 +506,30 @@ cs_5B6C0:       textCursor $C87
 		setPos $8A,7,6,RIGHT
 		setPos $8B,7,6,RIGHT
 		setPos $8C,7,6,RIGHT
-		moveEntity $85,$0,$0,$4
-		endMove $8080
-		moveEntity $86,$0,$1,$4
-		endMove $8080
-		moveEntity $87,$0,$2,$4
-		endMove $8080
-		moveEntity $88,$0,$3,$4
-		endMove $8080
-		moveEntity $89,$0,$4,$4
-		endMove $8080
-		moveEntity $8A,$0,$5,$4
-		endMove $8080
-		moveEntity $8B,$0,$6,$4
-		endMove $8080
-		moveEntity $8C,$FF,$7,$4
-		endMove $8080
+		entityActions $85,$0
+		 moveRight 4
+		endActions
+		entityActions $86,$0
+		 moveUp 4
+		endActions
+		entityActions $87,$0
+		 moveLeft 4
+		endActions
+		entityActions $88,$0
+		 moveDown 4
+		endActions
+		entityActions $89,$0
+		 moveUpRight 4
+		endActions
+		entityActions $8A,$0
+		 moveUpLeft 4
+		endActions
+		entityActions $8B,$0
+		 moveDownLeft 4
+		endActions
+		entityActions $8C,$FF
+		 moveDownRight 4
+		endActions
 		hideEntity $85
 		hideEntity $86
 		hideEntity $87
@@ -509,22 +564,25 @@ cs_5B6C0:       textCursor $C87
 		nextText $80,$80        ; "Why does Zeon want the jewel?{W2}"
 		nextSingleText $80,$80  ; "No more questions...{N}...without Evil Spirit....{W1}"
 		csWait 30
-		moveEntity $80,$FF,$3,$1
-		moreMove $2,$1
-		moreMove $3,$5
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		 moveLeft 1
+		 moveDown 5
+		endActions
 		hideEntity $80
-		moveEntity $81,$FF,$2,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveLeft 1
+		 moveDown 1
+		endActions
 		setFacing $7,DOWN
 		setFacing $1F,DOWN
 		nextText $0,$81         ; "Creed?  Creed!{W2}"
 		setActscript $81,$FF,eas_Jump
 		setActscript $81,$FF,eas_Jump
 		nextSingleText $0,$81   ; "Hey, don't leave me here!{N}Wait for me!{W1}"
-		moveEntity $81,$FF,$3,$5
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 5
+		endActions
 		hideEntity $81
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2

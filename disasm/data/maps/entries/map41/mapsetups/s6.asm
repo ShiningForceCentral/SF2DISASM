@@ -72,8 +72,9 @@ cs_5F594:       newEntity $1C,6,15,UP,$FF
 		setFacing $1F,DOWN
 		setCamDest 1,6
 		nextSingleText $0,$1C   ; "{LEADER}, wait!{W1}"
-		moveEntity $1C,$FF,$1,$4
-		endMove $8080
+		entityActions $1C,$FF
+		 moveUp 4
+		endActions
 		nextSingleText $0,$1C   ; "May I join your force?{W1}"
 		csWait 30
 		setFacing $1F,UP

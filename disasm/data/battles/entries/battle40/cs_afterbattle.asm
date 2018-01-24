@@ -47,47 +47,58 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		nextSingleText $C0,$7   ; "Oddler, please don't die!{W1}"
 		nextText $0,$83         ; "Thank you, {NAME;7}.{N}I learned a lot from you.{W2}"
 		nextSingleText $0,$83   ; "Oh, the pain!{N}Let me say good-bye.{W1}"
-		moveEntity $0,$0,$1,$1
-		endMove $8080
-		moveEntity $7,$FF,$0,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 1
+		endActions
+		entityActions $7,$FF
+		 moveRight 1
+		endActions
 		nextSingleText $0,$83   ; "If possible, I want to{N}relive my life...not as{N}a devil...next time....{W1}"
 		entityFlashWhite $83,$1E
 		setPos $80,15,8,DOWN
-		moveEntity $80,$0,$0,$2
-		endMove $8080
+		entityActions $80,$0
+		 moveRight 2
+		endActions
 		csWait 8
 		setPos $81,15,8,DOWN
-		moveEntity $81,$0,$7,$2
-		endMove $8080
+		entityActions $81,$0
+		 moveDownRight 2
+		endActions
 		csWait 8
 		setPos $82,15,8,DOWN
-		moveEntity $82,$0,$3,$2
-		endMove $8080
+		entityActions $82,$0
+		 moveDown 2
+		endActions
 		csWait 8
 		setPos $80,15,8,DOWN
-		moveEntity $80,$0,$7,$2
-		endMove $8080
+		entityActions $80,$0
+		 moveDownRight 2
+		endActions
 		csWait 8
 		setPos $81,15,8,DOWN
-		moveEntity $81,$0,$0,$2
-		endMove $8080
+		entityActions $81,$0
+		 moveRight 2
+		endActions
 		csWait 8
 		setPos $82,15,8,DOWN
-		moveEntity $82,$0,$7,$2
-		endMove $8080
+		entityActions $82,$0
+		 moveDownRight 2
+		endActions
 		csWait 8
 		setPos $80,15,8,DOWN
-		moveEntity $80,$0,$3,$2
-		endMove $8080
+		entityActions $80,$0
+		 moveDown 2
+		endActions
 		csWait 8
 		setPos $81,15,8,DOWN
-		moveEntity $81,$0,$7,$2
-		endMove $8080
+		entityActions $81,$0
+		 moveDownRight 2
+		endActions
 		csWait 8
 		setPos $82,15,8,DOWN
-		moveEntity $82,$0,$0,$2
-		endMove $8080
+		entityActions $82,$0
+		 moveRight 2
+		endActions
 		csWait 8
 		hideEntity $80
 		csWait 8
@@ -108,14 +119,17 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		nextSingleText $0,$1F   ; "Don't cry for him now.{N}This is Zeon's doing.{W1}"
 		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "We shall go onward and{N}remember Oddler in our{N}hearts.{W1}"
-		moveEntity $1C,$FF,$2,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $1C,$FF
+		 moveLeft 1
+		 moveDown 1
+		endActions
 		setFacing $1C,LEFT
-		moveEntity $1F,$FF,$3,$2
-		endMove $8080
-		moveEntity $7,$FF,$3,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveDown 2
+		endActions
+		entityActions $7,$FF
+		 moveDown 1
+		endActions
 		setFacing $7,RIGHT
 		csWait 40
 		setFacing $0,RIGHT

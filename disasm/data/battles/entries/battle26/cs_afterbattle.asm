@@ -19,8 +19,9 @@ abcs_battle26:  textCursor $A4D
 		setPriority $13,$0
 		setPriority $80,$FFFF
 		fadeInB
-		moveEntity $7,$FF,$3,$2
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 2
+		endActions
 		setFacing $7,RIGHT
 		nextSingleText $0,$7    ; "Is he alright?{W1}"
 		nextSingleText $0,$1F   ; "We have to save him before{N}he is possessed by an evil...{W1}"
@@ -31,8 +32,9 @@ abcs_battle26:  textCursor $A4D
 		setPos $80,18,13,DOWN
 		animEntityFadeInOut $80,$5
 		setFacing $7,UP
-		moveEntity $80,$FF,$1,$3
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 3
+		endActions
 		customActscript $80,$FF
 		ac_setSpeed 16448       ;   
 		ac_jump eas_Idle        ;   
@@ -50,20 +52,23 @@ abcs_battle26:  textCursor $A4D
 		setFacing $13,DOWN
 		entityShakeHead $13
 		nextSingleText $C0,$13  ; "What happened?{W2}"
-		moveEntity $13,$FF,$1,$1
-		endMove $8080
+		entityActions $13,$FF
+		 moveUp 1
+		endActions
 		setActscript $13,$FF,eas_Jump
 		nextSingleText $C0,$13  ; "Ah...I was almost possessed{N}by that devil.{W1}"
-		moveEntity $13,$FF,$3,$2
-		endMove $8080
+		entityActions $13,$FF
+		 moveDown 2
+		endActions
 		nextSingleText $C0,$13  ; "Thank you.{N}How can I repay you for{N}your kindness?{W1}"
 		nextText $0,$1F         ; "Are you OK now?  Good.{W2}"
 		nextSingleText $0,$1F   ; "May I ask you, where were{N}you going in such a wounded{N}state?{W1}"
 		nextText $C0,$13        ; "Pacalon, my country.  We{N}are fighting against the{N}devils.{W2}"
 		nextText $C0,$13        ; "But, no country in North{N}Parmecia has enough power{N}to resist them.{W2}"
 		nextSingleText $C0,$13  ; "So, I was heading south to{N}find some allies.{W1}"
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		setFacing $7,RIGHT
 		nextSingleText $0,$7    ; "You don't have to go any{N}further.{W1}"
 		setFacing $13,LEFT

@@ -18,19 +18,22 @@ return_563B0:
 
 cs_563B2:       textCursor $50B
 		setActscript $81,$FF,eas_46172
-		moveEntity $81,$FF,$0,$4
-		endMove $8080
+		entityActions $81,$FF
+		 moveRight 4
+		endActions
 		nextSingleText $0,$81   ; "Hmmm?{W1}"
 		customActscript $81,$FF
 		ac_setSpeed 10280       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $81,$FF,$2,$2
-		endMove $8080
+		entityActions $81,$FF
+		 moveLeft 2
+		endActions
 		setFacing $81,DOWN
 		nextSingleText $0,$81   ; "You're a spy from the new{N}town, aren't you?{W1}"
-		moveEntity $81,$FF,$1,$2
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 2
+		endActions
 		nextSingleText $0,$81   ; "You're back again!{N}Mayor!  Mayor!{W1}"
 		setActscript $81,$FF,eas_Init
 		customActscript $81,$FF
@@ -38,8 +41,9 @@ cs_563B2:       textCursor $50B
 		ac_jump eas_Idle        ;   
 		ac_end
 		setFacing $81,UP
-		moveEntity $81,$FF,$1,$8
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 8
+		endActions
 		setPos $81,15,7,DOWN
 		csc_end
 cs_56422:       textCursor $50E
@@ -53,49 +57,64 @@ cs_56422:       textCursor $50E
 		ac_jump eas_Idle        ;   
 		ac_end
 		csWait 30
-		moveEntity $0,$0,$3,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 1
+		endActions
 		setActscript $80,$FF,eas_BumpDown
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		csWait 30
-		moveEntity $0,$0,$3,$1
-		endMove $8080
-		moveEntity $7,$0,$3,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 1
+		endActions
+		entityActions $7,$0
+		 moveDown 1
+		endActions
 		setActscript $80,$FF,eas_BumpDown
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		csWait 30
-		moveEntity $0,$0,$3,$1
-		endMove $8080
-		moveEntity $7,$0,$3,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 1
+		endActions
+		entityActions $7,$0
+		 moveDown 1
+		endActions
 		setActscript $80,$FF,eas_BumpDown
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		csWait 30
-		moveEntity $0,$0,$3,$1
-		endMove $8080
-		moveEntity $7,$0,$3,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 1
+		endActions
+		entityActions $7,$0
+		 moveDown 1
+		endActions
 		setActscript $80,$FF,eas_BumpDown
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		csWait 30
-		moveEntity $0,$0,$3,$1
-		endMove $8080
-		moveEntity $7,$0,$3,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 1
+		endActions
+		entityActions $7,$0
+		 moveDown 1
+		endActions
 		setActscript $80,$FF,eas_BumpDown
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$80   ; "Who are you?{N}What are you?{W1}"
-		moveEntity $81,$FF,$2,$1
-		moreMove $3,$4
-		moreMove $0,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveLeft 1
+		 moveDown 4
+		 moveRight 1
+		 moveDown 1
+		endActions
 		nextText $0,$81         ; "A group of soldiers were{N}just here.{W2}"
 		nextSingleText $0,$81   ; "Soldiers must be waiting{N}beyond the gate.{N}Be careful!{W1}"
 		nextText $0,$80         ; "You're so persistent.{N}What do you want?!{W2}"
@@ -108,25 +127,29 @@ cs_56422:       textCursor $50E
 		setActscript $81,$FF,eas_Init
 		setActscript $0,$FF,eas_Init
 		setActscript $7,$FF,eas_Init
-		moveEntity $80,$0,$1,$1
-		endMove $8080
-		moveEntity $81,$FF,$1,$1
-		endMove $8080
+		entityActions $80,$0
+		 moveUp 1
+		endActions
+		entityActions $81,$FF
+		 moveUp 1
+		endActions
 		setActscript $7,$FF,eas_Jump
 		nextSingleText $0,$7    ; "You talk too much!{W1}"
 		setFacing $0,DOWN
 		nextText $0,$7          ; "Hey, {LEADER}!{N}Why don't you say something?{W2}"
 		nextSingleText $0,$7    ; "I can't stand this!{W1}"
-		moveEntity $7,$FF,$2,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 1
+		 moveUp 1
+		endActions
 		setFacing $0,UP
 		nextSingleText $0,$7    ; "Hey, you!  I think I{N}understand how you feel,{N}but listen to me!{W1}"
 		setFacing $80,DOWN
 		setFacing $81,DOWN
 		nextSingleText $0,$80   ; "Why?{W1}"
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		nextText $0,$7          ; "I'm not from Granseal.{N}I just visited there....{W2}"
 		nextText $0,$7          ; "You think they came to{N}Parmecia to conquer it?{N}Well, you're wrong.{W2}"
 		nextText $0,$7          ; "They were forced to leave{N}their island due to a{N}disaster.{W2}"

@@ -64,9 +64,10 @@ ce_5E33E:       mainEntity 12,19,DOWN
 		dc.w $FFFF
 cs_5E346:       textCursor $D2B
 		setActscript $0,$FF,eas_Init
-		moveEntity $0,$FF,$2,$1
-		moreMove $2,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveLeft 1
+		 moveLeft 1
+		endActions
 		csWait 30
 		setFacing $7,RIGHT
 		setFacing $1A,RIGHT

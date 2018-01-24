@@ -15,14 +15,18 @@ bbcs_18:        textCursor $9D8
 		playSound MUSIC_SHRINE
 		fadeInB
 		cameraSpeed $40
-		moveEntity $0,$0,$1,$6
-		endMove $8080
-		moveEntity $7,$0,$1,$6
-		endMove $8080
-		moveEntity $B,$0,$1,$6
-		endMove $8080
-		moveEntity $1F,$FF,$1,$6
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 6
+		endActions
+		entityActions $7,$0
+		 moveUp 6
+		endActions
+		entityActions $B,$0
+		 moveUp 6
+		endActions
+		entityActions $1F,$FF
+		 moveUp 6
+		endActions
 		nextSingleText $0,$80   ; "Stop!{W1}"
 		csWait 5
 		setActscript $0,$0,eas_461B6
@@ -33,11 +37,13 @@ bbcs_18:        textCursor $9D8
 		csWait 5
 		setActscript $1F,$0,eas_461B6
 		csWait 30
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $C0,$7   ; "Who IS that big guy?{W1}"
-		moveEntity $B,$FF,$1,$1
-		endMove $8080
+		entityActions $B,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$B    ; "Don't you know?{W1}"
 		setFacing $0,UP
 		setFacing $7,UP

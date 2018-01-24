@@ -14,9 +14,10 @@ edcs_battle5:   textCursor $913
 		setActscript $5,$FF,eas_Jump
 		nextText $0,$5          ; "Hee, hee!  You expect a thief{N}to stay in jail?{W2}"
 		nextSingleText $0,$5    ; "Give me the jewels.{W1}"
-		moveEntity $5,$FF,$0,$1
-		moreMove $1,$2
-		endMove $8080
+		entityActions $5,$FF
+		 moveRight 1
+		 moveUp 2
+		endActions
 		setFacing $5,LEFT
 		csWait 30
 		nextSingleText $FF,$FF  ; "{NAME;5} searched the tool{N}bag of the Galam Knight.{W1}"

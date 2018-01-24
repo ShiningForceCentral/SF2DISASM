@@ -57,23 +57,26 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
 		ac_setSpeed 2056        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $8C,$FF,$2,$2
-		endMove $8080
+		entityActions $8C,$FF
+		 moveLeft 2
+		endActions
 		customActscript $8C,$FF
 		ac_setSpeed 1028        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
 		setFacing $0,RIGHT
 		setFacing $7,RIGHT
-		moveEntity $8C,$FF,$2,$1
-		endMove $8080
+		entityActions $8C,$FF
+		 moveLeft 1
+		endActions
 		setActscript $8C,$FF,eas_46172
 		customActscript $8C,$FF
 		ac_setSpeed 8224        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $8C,$0,$3,$1
-		endMove $8080
+		entityActions $8C,$0
+		 moveDown 1
+		endActions
 		csWait 2
 		setActscript $8C,$FF,eas_461AA
 		customActscript $8C,$FF
@@ -85,16 +88,18 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
 		setFacing $85,RIGHT
 		csWait 60
 		nextSingleText $0,$85   ; "Oh!{W1}"
-		moveEntity $85,$FF,$0,$3
-		endMove $8080
+		entityActions $85,$FF
+		 moveRight 3
+		endActions
 		setFacing $85,DOWN
 		nextSingleText $FF,$FF  ; "The beastman checks the boy.{W1}"
 		nextSingleText $0,$85   ; "Good heavens!{N}He's badly injured!{W1}"
 		csWait 30
 		setFacing $85,RIGHT
 		csWait 50
-		moveEntity $85,$FF,$2,$2
-		endMove $8080
+		entityActions $85,$FF
+		 moveLeft 2
+		endActions
 		setActscript $85,$FF,eas_Jump
 		setActscript $85,$0,eas_Jump
 		nextSingleText $0,$85   ; "Mayor, mayor!{W1}"
@@ -103,47 +108,56 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
 		setPos $0,25,9,UP
 		setPos $7,25,9,UP
 		setCameraEntity $89
-		moveEntity $89,$FF,$0,$5
-		moreMove $1,$1
-		endMove $8080
+		entityActions $89,$FF
+		 moveRight 5
+		 moveUp 1
+		endActions
 		setFacing $89,RIGHT
 		nextSingleText $0,$89   ; "What's all this noise?{W1}"
 		nextSingleText $0,$85   ; "Mayor, a boy from the mountain{N}is seriously injured!{W1}"
 		nextSingleText $0,$89   ; "What?!{W1}"
-		moveEntity $89,$FF,$3,$1
-		moreMove $0,$3
-		endMove $8080
+		entityActions $89,$FF
+		 moveDown 1
+		 moveRight 3
+		endActions
 		setFacing $85,RIGHT
 		nextText $0,$89         ; "Ohhh...his eyes are{N}seriously damaged!{W2}"
 		nextSingleText $0,$89   ; "He must have been caught{N}in the eruption....{W1}"
-		moveEntity $85,$FF,$0,$3
-		moreMove $3,$1
-		endMove $8080
+		entityActions $85,$FF
+		 moveRight 3
+		 moveDown 1
+		endActions
 		setFacing $85,LEFT
 		nextSingleText $0,$85   ; "He needs prompt treatment!{W1}"
 		nextSingleText $0,$89   ; "Yes!  Bring him into my house!{W1}"
 		entityNod $85
-		moveEntity $89,$0,$0,$1
-		endMove $8080
-		moveEntity $85,$0,$2,$1
-		endMove $8080
+		entityActions $89,$0
+		 moveRight 1
+		endActions
+		entityActions $85,$0
+		 moveLeft 1
+		endActions
 		csWait 3
 		setActscript $85,$FF,eas_461AA
 		setActscript $89,$FF,eas_461AA
 		setFacing $89,LEFT
 		csWait 30
-		moveEntity $8C,$0,$1,$1
-		endMove $8080
+		entityActions $8C,$0
+		 moveUp 1
+		endActions
 		csWait 2
 		setActscript $8C,$FF,eas_461AA
 		csWait 30
 		setCameraEntity $FFFF
-		moveEntity $89,$0,$2,$9
-		endMove $8080
-		moveEntity $8C,$0,$2,$9
-		endMove $8080
-		moveEntity $85,$FF,$2,$9
-		endMove $8080
+		entityActions $89,$0
+		 moveLeft 9
+		endActions
+		entityActions $8C,$0
+		 moveLeft 9
+		endActions
+		entityActions $85,$FF
+		 moveLeft 9
+		endActions
 		setActscript $8C,$FF,eas_Init
 		setFacing $89,LEFT
 		setFacing $85,UP
@@ -174,15 +188,17 @@ cs_58512:       customActscript $82,$FF
 		csWait 20
 		nextSingleText $0,$82   ; "Good, good!{N}Push!{W1}"
 		setActscript $0,$FF,eas_46172
-		moveEntity $0,$FF,$3,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveDown 1
+		endActions
 		csWait 30
 		customActscript $0,$FF
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $0,$FF,$1,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveUp 1
+		endActions
 		setQuake 2
 		csWait 30
 		setQuake 0
@@ -198,8 +214,9 @@ cs_58512:       customActscript $82,$FF
 		nextSingleText $0,$82   ; "(Giggle)...sorry, I had to{N}test you.{W2}{N}I'm happy to meet you.{N}He must like you.{W2}{N}Oh no, I can't tell you who{N}HE is.{N}See you later!{W1}"
 		setActscript $82,$FF,eas_Init2
 		setActscript $82,$FF,eas_46172
-		moveEntity $82,$FF,$1,$A
-		endMove $8080
+		entityActions $82,$FF
+		 moveUp 10
+		endActions
 		setActscript $0,$FF,eas_Init
 		followEntity $7,$0,$2
 		csc_end
@@ -228,20 +245,27 @@ cs_585FE:       playSound $FD
 		setCamDest 14,10
 		playSound MUSIC_ENEMY_ATTACK
 		nextSingleText $0,$A    ; "Be quiet!{W1}"
-		moveEntity $A,$FF,$0,$1
-		endMove $8080
-		moveEntity $81,$0,$2,$3
-		endMove $8080
-		moveEntity $82,$FF,$2,$3
-		endMove $8080
-		moveEntity $81,$0,$0,$3
-		endMove $8080
-		moveEntity $82,$0,$0,$3
-		endMove $8080
-		moveEntity $83,$0,$2,$2
-		endMove $8080
-		moveEntity $84,$FF,$2,$2
-		endMove $8080
+		entityActions $A,$FF
+		 moveRight 1
+		endActions
+		entityActions $81,$0
+		 moveLeft 3
+		endActions
+		entityActions $82,$FF
+		 moveLeft 3
+		endActions
+		entityActions $81,$0
+		 moveRight 3
+		endActions
+		entityActions $82,$0
+		 moveRight 3
+		endActions
+		entityActions $83,$0
+		 moveLeft 2
+		endActions
+		entityActions $84,$FF
+		 moveLeft 2
+		endActions
 		setActscript $83,$0,eas_Die
 		setActscript $84,$FF,eas_Die
 		setFacing $81,LEFT
@@ -250,8 +274,9 @@ cs_585FE:       playSound $FD
 		csWait 40
 		nextSingleText $0,$A    ; "My comrades!{W1}"
 		csWait 20
-		moveEntity $80,$FF,$2,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 1
+		endActions
 		setFacing $A,RIGHT
 		nextSingleText $0,$80   ; "You're our captive.  Don't{N}force me to kill you.{W1}"
 		csWait 5
@@ -261,10 +286,12 @@ cs_585FE:       playSound $FD
 		nextText $0,$80         ; "No more funny business, you{N}can't resist us!{W2}"
 		setFacing $80,LEFT
 		nextSingleText $0,$80   ; "Now, give me that injured{N}boy!{W1}"
-		moveEntity $81,$0,$2,$1
-		endMove $8080
-		moveEntity $82,$FF,$2,$1
-		endMove $8080
+		entityActions $81,$0
+		 moveLeft 1
+		endActions
+		entityActions $82,$FF
+		 moveLeft 1
+		endActions
 		csWait 20
 		nextSingleText $0,$9    ; "Don't listen to him!{W2}"
 		csWait 5
@@ -280,13 +307,15 @@ cs_585FE:       playSound $FD
 		setCameraEntity $9
 		setPos $0,20,9,DOWN
 		setPos $7,19,8,DOWN
-		moveEntity $9,$FF,$3,$3
-		moreMove $0,$6
-		endMove $8080
+		entityActions $9,$FF
+		 moveDown 3
+		 moveRight 6
+		endActions
 		setActscript $9,$FF,eas_BumpRight
 		csWait 20
-		moveEntity $9,$FF,$0,$1
-		endMove $8080
+		entityActions $9,$FF
+		 moveRight 1
+		endActions
 		setFacing $9,UP
 		setCamDest 14,8
 		nextSingleText $0,$9    ; "You!{W1}"
@@ -295,43 +324,51 @@ cs_585FE:       playSound $FD
 		setFacing $82,UP
 		csWait 40
 		setFacing $9,RIGHT
-		moveEntity $A,$FF,$1,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$A    ; "Oh, {LEADER}, {NAME;7}!{W1}"
-		moveEntity $7,$FF,$3,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $C0,$7   ; "{NAME;10}!  Why are you here?{W1}"
 		nextText $0,$A          ; "I came here to get a raft{N}for you.{W2}"
 		nextSingleText $0,$A    ; "The people of Polca are{N}being controlled by these{N}devils.  They deceived me!{W1}"
-		moveEntity $9,$FF,$0,$1
-		endMove $8080
+		entityActions $9,$FF
+		 moveRight 1
+		endActions
 		setFacing $9,DOWN
 		nextSingleText $0,$9    ; "Prince {NAME;10}, I'm sorry.{W1}"
 		setCameraEntity $9
-		moveEntity $9,$FF,$1,$1
-		endMove $8080
+		entityActions $9,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$9    ; "Polcans will not fight.{N}Please let me join you!{W1}"
 		join $9
 		setCameraEntity $A
 		nextSingleText $0,$A    ; "Great!{W1}"
 		setFacing $9,DOWN
 		entityNod $9
-		moveEntity $A,$FF,$1,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$A    ; "Don't forget me!{W1}"
-		moveEntity $81,$FF,$1,$1
-		moreMove $2,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 1
+		 moveLeft 1
+		endActions
 		setActscript $A,$FF,eas_46172
 		customActscript $A,$FF
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $A,$0,$2,$3
-		endMove $8080
-		moveEntity $81,$FF,$0,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $A,$0
+		 moveLeft 3
+		endActions
+		entityActions $81,$FF
+		 moveRight 1
+		 moveDown 1
+		endActions
 		customActscript $A,$FF
 		ac_setAnimCounter $0    ;   
 		ac_setFlip $1           ;   
@@ -340,9 +377,10 @@ cs_585FE:       playSound $FD
 		ac_end
 		setFacing $81,LEFT
 		csWait 40
-		moveEntity $80,$FF,$2,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveLeft 1
+		 moveUp 1
+		endActions
 		nextText $0,$80         ; "You still dare to resist us?!{W2}"
 		nextSingleText $0,$80   ; "For that you shall die!!{W1}"
 		setStoryFlag $D         ; Battle 13 unlocked
@@ -368,15 +406,18 @@ cs_58856:       textCursor $5CF
 		nextSingleText $C0,$7   ; "What's he talking about?{W1}"
 		setFacing $A,DOWN
 		nextSingleText $0,$A    ; "I don't know...{N}What a loon!{W1}"
-		moveEntity $A,$FF,$2,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveLeft 1
+		endActions
 		setFacing $A,UP
 		nextSingleText $0,$A    ; "C'mon, mayor.  We're alive!{W1}"
 		nextSingleText $0,$89   ; "What?!{W1}"
-		moveEntity $0,$0,$3,$1
-		endMove $8080
-		moveEntity $89,$FF,$3,$1
-		endMove $8080
+		entityActions $0,$0
+		 moveDown 1
+		endActions
+		entityActions $89,$FF
+		 moveDown 1
+		endActions
 		setFacing $0,UP
 		setFacing $89,RIGHT
 		setFacing $A,LEFT
@@ -393,15 +434,17 @@ cs_58856:       textCursor $5CF
 		ac_jump eas_Idle        ;   
 		ac_end
 		setActscript $89,$FF,eas_46172
-		moveEntity $89,$FF,$1,$1
-		endMove $8080
+		entityActions $89,$FF
+		 moveUp 1
+		endActions
 		entityNod $89
 		nextText $0,$89         ; "I really regret all of this.{W2}"
 		nextText $0,$89         ; "Suddenly, the devils{N}appeared.{W2}"
 		nextText $0,$89         ; "We had no power to resist{N}them.{W2}"
 		nextSingleText $0,$89   ; "They promised they would do{N}nothing if we gave Oddler{N}to them.{W1}"
-		moveEntity $A,$FF,$2,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveLeft 1
+		endActions
 		setFacing $A,UP
 		nextSingleText $0,$A    ; "And you sent ME in Oddler's{N}place?!{W1}"
 		entityShakeHead $89
@@ -420,19 +463,23 @@ cs_58856:       textCursor $5CF
 		setActscript $A,$FF,eas_46172
 		setActscript $7,$FF,eas_46172
 		setFacing $A,LEFT
-		moveEntity $A,$0,$0,$2
-		moreMove $1,$1
-		endMove $8080
-		moveEntity $89,$FF,$3,$1
-		moreMove $0,$2
-		endMove $8080
+		entityActions $A,$0
+		 moveRight 2
+		 moveUp 1
+		endActions
+		entityActions $89,$FF
+		 moveDown 1
+		 moveRight 2
+		endActions
 		setFacing $A,DOWN
 		setFacing $89,DOWN
 		csWait 20
-		moveEntity $7,$0,$2,$1
-		endMove $8080
-		moveEntity $89,$FF,$3,$3
-		endMove $8080
+		entityActions $7,$0
+		 moveLeft 1
+		endActions
+		entityActions $89,$FF
+		 moveDown 3
+		endActions
 		setFacing $89,RIGHT
 		setCamDest 11,2
 		setActscript $89,$FF,eas_Jump
@@ -443,15 +490,17 @@ cs_58856:       textCursor $5CF
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $85,$FF,$2,$5
-		endMove $8080
+		entityActions $85,$FF
+		 moveLeft 5
+		endActions
 		nextSingleText $0,$85   ; "Yes.{W1}"
 		nextSingleText $0,$89   ; "Prepare a raft for{N}Prince {NAME;10}.{W1}"
 		setActscript $85,$FF,eas_Init
 		setActscript $85,$FF,eas_JumpRight
 		csWait 30
-		moveEntity $85,$FF,$2,$1
-		endMove $8080
+		entityActions $85,$FF
+		 moveLeft 1
+		endActions
 		nextSingleText $0,$85   ; "But, it's the last one we{N}have...{W1}"
 		setActscript $89,$FF,eas_Jump
 		setActscript $89,$0,eas_Jump
@@ -463,32 +512,37 @@ cs_58856:       textCursor $5CF
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $85,$FF,$0,$5
-		endMove $8080
+		entityActions $85,$FF
+		 moveRight 5
+		endActions
 		hideEntity $85
 		setCamDest 11,0
-		moveEntity $89,$FF,$1,$3
-		endMove $8080
+		entityActions $89,$FF
+		 moveUp 3
+		endActions
 		csWait 20
 		nextText $0,$89         ; "A raft will be waiting for{N}you on the river.{W2}"
 		nextSingleText $0,$89   ; "Why don't you take a look{N}at it right now?{W1}"
-		moveEntity $89,$FF,$2,$2
-		moreMove $1,$1
-		endMove $8080
+		entityActions $89,$FF
+		 moveLeft 2
+		 moveUp 1
+		endActions
 		setFacing $89,DOWN
 		csWait 30
 		setActscript $7,$FF,eas_Init
 		setActscript $A,$FF,eas_Init
-		moveEntity $A,$FF,$3,$1
-		moreMove $2,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveDown 1
+		 moveLeft 1
+		endActions
 		setFacing $A,DOWN
 		nextSingleText $C0,$7   ; "He wants to get rid of us.{W1}"
 		setFacing $7,UP
 		nextText $0,$A          ; "You're right.{W1}"
 		nextSingleText $0,$A    ; "Anyway, now we have a raft!{W1}"
-		moveEntity $A,$FF,$2,$1
-		endMove $8080
+		entityActions $A,$FF
+		 moveLeft 1
+		endActions
 		setFacing $A,DOWN
 		nextSingleText $0,$A    ; "Let's go!{W1}"
 		followEntity $7,$0,$2
@@ -536,17 +590,21 @@ cs_58B7A:       textCursor $5F8
 		ac_setSpeed 2570        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $89,$0,$0,$3
-		moreMove $A,$1
-		endMove $8080
-		moveEntity $8C,$FF,$0,$3
-		endMove $8080
+		entityActions $89,$0
+		 moveRight 3
+		 faceLeft 1
+		endActions
+		entityActions $8C,$FF
+		 moveRight 3
+		endActions
 		csWait 20
-		moveEntity $89,$0,$0,$3
-		moreMove $A,$1
-		endMove $8080
-		moveEntity $8C,$FF,$0,$3
-		endMove $8080
+		entityActions $89,$0
+		 moveRight 3
+		 faceLeft 1
+		endActions
+		entityActions $8C,$FF
+		 moveRight 3
+		endActions
 		setFacing $89,DOWN
 		setFacing $8C,DOWN
 		setFacing $0,UP
@@ -563,8 +621,9 @@ cs_58BEA:       textCursor $605
 		nextSingleText $0,$8C   ; "Wait, wait!{W1}"
 		setPos $8C,14,21,DOWN
 		setCamDest 10,18
-		moveEntity $8C,$FF,$3,$3
-		endMove $8080
+		entityActions $8C,$FF
+		 moveDown 3
+		endActions
 		nextSingleText $0,$8C   ; "Please, let me go with you!{W1}"
 		setActscript $7,$FF,eas_Init
 		setActscript $A,$FF,eas_Init
@@ -585,8 +644,9 @@ cs_58BEA:       textCursor $605
 		ac_jump eas_Idle        ;   
 		ac_end
 		setFacing $89,DOWN
-		moveEntity $8C,$FF,$3,$3
-		endMove $8080
+		entityActions $8C,$FF
+		 moveDown 3
+		endActions
 		setFacing $8C,UP
 		customActscript $8C,$FF
 		ac_setAnimCounter $0    ;   
@@ -596,12 +656,15 @@ cs_58BEA:       textCursor $605
 		ac_end
 		removeShadow $8C
 		csWait 30
-		moveEntity $0,$0,$1,$2
-		endMove $8080
-		moveEntity $7,$0,$1,$2
-		endMove $8080
-		moveEntity $A,$FF,$1,$2
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 2
+		endActions
+		entityActions $7,$0
+		 moveUp 2
+		endActions
+		entityActions $A,$FF
+		 moveUp 2
+		endActions
 		nextText $80,$7         ; "Watch out!{W2}"
 		nextSingleText $80,$7   ; "Be careful.{W1}"
 		setActscript $8C,$FF,eas_Init
@@ -615,8 +678,9 @@ cs_58BEA:       textCursor $605
 		setFacing $8C,DOWN
 		nextText $0,$8C         ; "As long as I'm here the{N}devils will return.{W2}"
 		nextSingleText $0,$8C   ; "Maybe {LEADER} is strong{N}enough to resist them?{W1}"
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		setFacing $7,LEFT
 		setFacing $8C,RIGHT
 		nextSingleText $80,$7   ; "But, you may be injured!{W1}"
@@ -626,14 +690,16 @@ cs_58BEA:       textCursor $605
 		nextText $0,$A          ; "Well, I think he should come{N}with us.{W2}"
 		nextText $0,$A          ; "If we left him here, he{N}could be killed.{W2}"
 		nextSingleText $0,$A    ; "It's too dangerous, isn't it,{N}{LEADER}?{W1}"
-		moveEntity $7,$FF,$3,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 1
+		endActions
 		setFacing $7,LEFT
 		setFacing $0,RIGHT
 		nextText $80,$7         ; "He needs a guardian.{W2}"
 		nextSingleText $80,$7   ; "I'll take care of him.{W1}"
-		moveEntity $7,$FF,$1,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveUp 1
+		endActions
 		setFacing $7,LEFT
 		setFacing $8C,RIGHT
 		setFacing $0,UP
@@ -653,8 +719,9 @@ cs_58D4C:       textCursor $5FC
 		ac_jump eas_Idle        ;   
 		ac_end
 		setFacing $89,DOWN
-		moveEntity $8C,$FF,$3,$2
-		endMove $8080
+		entityActions $8C,$FF
+		 moveDown 2
+		endActions
 		setFacing $8C,UP
 		customActscript $8C,$FF
 		ac_setAnimCounter $0    ;   
@@ -664,12 +731,15 @@ cs_58D4C:       textCursor $5FC
 		ac_end
 		removeShadow $8C
 		csWait 30
-		moveEntity $0,$0,$1,$2
-		endMove $8080
-		moveEntity $7,$0,$1,$2
-		endMove $8080
-		moveEntity $A,$FF,$1,$2
-		endMove $8080
+		entityActions $0,$0
+		 moveUp 2
+		endActions
+		entityActions $7,$0
+		 moveUp 2
+		endActions
+		entityActions $A,$FF
+		 moveUp 2
+		endActions
 		csWait 40
 		nextText $80,$7         ; "Watch out!{W2}"
 		nextSingleText $80,$7   ; "Be careful.{W1}"

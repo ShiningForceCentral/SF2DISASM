@@ -24,40 +24,50 @@ cs_5D04E:       textCursor $7D6
 		setPos $1F,24,16,RIGHT
 		setPos $0,24,18,RIGHT
 		fly $14,$FFFF
-		moveEntity $14,$0,$1,$8
-		endMove $8080
+		entityActions $14,$0
+		 moveUp 8
+		endActions
 		csWait 60
 		setCamDest 26,20
-		moveEntity $14,$0,$2,$3
-		endMove $8080
+		entityActions $14,$0
+		 moveLeft 3
+		endActions
 		setCamDest 20,20
-		moveEntity $14,$0,$1,$A
-		endMove $8080
+		entityActions $14,$0
+		 moveUp 10
+		endActions
 		setCamDest 20,10
-		moveEntity $14,$0,$0,$4
-		endMove $8080
+		entityActions $14,$0
+		 moveRight 4
+		endActions
 		setCamDest 27,10
-		moveEntity $14,$0,$3,$5
-		endMove $8080
+		entityActions $14,$0
+		 moveDown 5
+		endActions
 		setCamDest 27,15
-		moveEntity $14,$0,$2,$13
-		endMove $8080
+		entityActions $14,$0
+		 moveLeft 19
+		endActions
 		setCamDest 9,15
-		moveEntity $14,$0,$1,$A
-		endMove $8080
+		entityActions $14,$0
+		 moveUp 10
+		endActions
 		setCamDest 9,5
-		moveEntity $14,$0,$0,$D
-		endMove $8080
+		entityActions $14,$0
+		 moveRight 13
+		endActions
 		setCamDest 20,5
-		moveEntity $14,$0,$3,$7
-		endMove $8080
+		entityActions $14,$0
+		 moveDown 7
+		endActions
 		setCamDest 20,12
 		csWait 60
 		setEntityDest $14,26,18
 		setFacing $14,LEFT
 		nextSingleText $80,$14  ; "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
-		moveEntity $7,$FF,$0,$2
-		endMove $8080
+		entityActions $7,$FF
+		 moveRight 2
+		endActions
 		setFacing $7,DOWN
 		setFacing $14,UP
 		nextSingleText $0,$7    ; "Yes, he's {LEADER},{N}but who are you?{W1}"
@@ -71,18 +81,21 @@ cs_5D04E:       textCursor $7D6
 		nextSingleText $0,$7    ; "Oh, yes!  I remember!{W1}"
 		nextText $80,$14        ; "You remember me?{W2}"
 		nextSingleText $80,$14  ; "Let me thank you.{N}May I go with you?{W1}"
-		moveEntity $7,$FF,$2,$1
-		moreMove $3,$1
-		moreMove $8,$28
-		endMove $8080
-		moveEntity $7,$FF,$1,$1
-		moreMove $0,$1
-		moreMove $B,$28
-		endMove $8080
-		moveEntity $7,$FF,$2,$1
-		moreMove $3,$1
-		moreMove $8,$28
-		endMove $8080
+		entityActions $7,$FF
+		 moveLeft 1
+		 moveDown 1
+		 faceRight 40
+		endActions
+		entityActions $7,$FF
+		 moveUp 1
+		 moveRight 1
+		 faceDown 40
+		endActions
+		entityActions $7,$FF
+		 moveLeft 1
+		 moveDown 1
+		 faceRight 40
+		endActions
 		setFacing $14,LEFT
 		nextSingleText $0,$7    ; "You grew up quickly, huh?{W1}"
 		nextSingleText $80,$14  ; "Yeah, I learned how to fight.{W1}"

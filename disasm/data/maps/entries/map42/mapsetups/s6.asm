@@ -14,22 +14,25 @@ cs_5FE9A:       textCursor $D09
 		nextText $FF,$FF        ; "The Jewel of Light begins{N}to glow.{W2}"
 		nextSingleText $FF,$FF  ; "The light seems to pull{N}{LEADER}.{D3}"
 		setActscript $0,$FF,eas_Init
-		moveEntity $0,$FF,$3,$1
-		moreMove $3,$1
-		moreMove $0,$1
-		moreMove $0,$1
-		moreMove $0,$1
-		moreMove $0,$1
-		endMove $8080
-		moveEntity $0,$FF,$0,$1
-		moreMove $0,$1
-		moreMove $0,$1
-		moreMove $1,$1
-		moreMove $1,$1
-		endMove $8080
-		moveEntity $0,$FF,$1,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveDown 1
+		 moveDown 1
+		 moveRight 1
+		 moveRight 1
+		 moveRight 1
+		 moveRight 1
+		endActions
+		entityActions $0,$FF
+		 moveRight 1
+		 moveRight 1
+		 moveRight 1
+		 moveUp 1
+		 moveUp 1
+		endActions
+		entityActions $0,$FF
+		 moveUp 1
+		 moveUp 1
+		endActions
 		csWait 60
 		nextSingleText $FF,$FF  ; "The jewel glows even{N}brighter.{W1}"
 		hideText

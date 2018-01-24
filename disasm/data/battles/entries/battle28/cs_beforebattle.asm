@@ -13,19 +13,24 @@ bbcs_28:        textCursor $A65
 		playSound MUSIC_BATTLE_THEME_3
 		fadeInB
 		cameraSpeed $30
-		moveEntity $0,$0,$0,$3
-		endMove $8080
-		moveEntity $1F,$0,$0,$3
-		endMove $8080
-		moveEntity $7,$0,$0,$3
-		endMove $8080
-		moveEntity $80,$FF,$0,$3
-		endMove $8080
+		entityActions $0,$0
+		 moveRight 3
+		endActions
+		entityActions $1F,$0
+		 moveRight 3
+		endActions
+		entityActions $7,$0
+		 moveRight 3
+		endActions
+		entityActions $80,$FF
+		 moveRight 3
+		endActions
 		csWait 40
 		setActscript $1F,$FF,eas_Jump
-		moveEntity $1F,$FF,$0,$2
-		moreMove $3,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveRight 2
+		 moveDown 1
+		endActions
 		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "Wow, look at that?{W1}"
 		setCamDest 7,11
@@ -36,18 +41,20 @@ bbcs_28:        textCursor $A65
 		playSound SFX_MONSTER_SCREAM
 		csWait 40
 		setCamDest 0,6
-		moveEntity $7,$FF,$3,$1
-		moreMove $0,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 1
+		 moveRight 1
+		endActions
 		nextSingleText $0,$7    ; "Those monsters are eating{N}the bridge.{W1}"
 		nextSingleText $0,$81   ; "Help!  Help me!{W1}"
 		setActscript $0,$0,eas_Jump
 		setActscript $1F,$0,eas_Jump
 		setActscript $7,$FF,eas_Jump
-		moveEntity $0,$FF,$3,$1
-		moreMove $0,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveDown 1
+		 moveRight 1
+		 moveDown 1
+		endActions
 		csWait 5
 		setActscript $0,$0,eas_461B6
 		csWait 5
@@ -58,8 +65,9 @@ bbcs_28:        textCursor $A65
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $1F,$0,$3,$2
-		endMove $8080
+		entityActions $1F,$0
+		 moveDown 2
+		endActions
 		csWait 10
 		stopEntity $0
 		customActscript $0,$FF
@@ -68,8 +76,9 @@ bbcs_28:        textCursor $A65
 		ac_end
 		setQuake 2
 		playSound SFX_HIT_2
-		moveEntity $0,$FF,$3,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveDown 1
+		endActions
 		setFacing $0,UP
 		customActscript $0,$FF
 		ac_setAnimCounter $0    ;   

@@ -263,12 +263,12 @@ but will be gone when you transition to a new map.
 The final 4 bytes determine the character's placement in the train, 
 but I don't have a solid grasp of what values correspond to what placement.
 
-$002D - moveEntity - Apply entity move sequence
-This command can be followed by one or several move coordinates, until the "endMove $8080" command.
+$002D - entityActions - Apply entity action sequence
+This command can be followed by one or several action commands, until the "endMove" command ($8080).
 params :
 - byte : entity index
 - byte : if !=0, wait until entity idle
-- 2 repeatable bytes : action, and move length.
+- 2 repeatable bytes : action type, and action parameter.
 
 $002E - hideEntity - Hide entity
 Stop displaying it ?

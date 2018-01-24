@@ -38,18 +38,21 @@ cs_5DA28:       textCursor $CFB
 cs_5DA7A:       setCameraEntity $83
 		setEntityDest $0,4,23
 		setFacing $0,UP
-		moveEntity $83,$FF,$0,$2
-		endMove $8080
-		moveEntity $83,$FF,$3,$1
-		endMove $8080
+		entityActions $83,$FF
+		 moveRight 2
+		endActions
+		entityActions $83,$FF
+		 moveDown 1
+		endActions
 		setFacing $0,RIGHT
 		csWait 60
 		customActscript $83,$FF
 		ac_setSpeed 4112        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $83,$FF,$0,$2
-		endMove $8080
+		entityActions $83,$FF
+		 moveRight 2
+		endActions
 		entityShakeHead $83
 		entityShiver $83
 		csWait 120
@@ -58,7 +61,8 @@ cs_5DA7A:       setCameraEntity $83
 		ac_setSpeed 2056        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $83,$FF,$0,$1
-		endMove $8080
+		entityActions $83,$FF
+		 moveRight 1
+		endActions
 		entityShiver $83
 		csc_end

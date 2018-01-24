@@ -7,8 +7,9 @@ IntroCutscene4: textCursor $1089
 		setActscript $0,$FF,eas_Init
 		fadeInFromBlackHalf
 		csWait 40
-		moveEntity $81,$0,$3,$2
-		endMove $8080
+		entityActions $81,$0
+		 moveDown 2
+		endActions
 		playSound SFX_INTRO_LIGHTNING
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
@@ -38,41 +39,47 @@ IntroCutscene4: textCursor $1089
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $80,$80  ; "What was that?{D2}"
 		csWait 5
 		setActscript $81,$0,eas_461B6
 		csWait 80
-		moveEntity $81,$FF,$1,$2
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 2
+		endActions
 		csWait 40
 		setActscript $81,$FF,eas_46172
 		customActscript $81,$FF
 		ac_setSpeed 2056        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $81,$FF,$3,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$81   ; "Sire, the Ancient Tower...{D2}"
-		moveEntity $80,$FF,$3,$1
-		moreMove $A,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		 faceLeft 1
+		endActions
 		nextSingleText $80,$80  ; "What's wrong?{D2}"
 		setActscript $81,$FF,eas_Init
 		setActscript $81,$FF,eas_Jump
 		setActscript $81,$FF,eas_Jump
 		nextSingleText $0,$81   ; "It's collapsing!{N}Maybe it was struck by{N}lightning?{D2}"
-		moveEntity $80,$FF,$1,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $80,$80  ; "No, not lightning...{D2}"
 		csWait 20
 		customActscript $80,$FF
 		ac_setSpeed 2570        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $80,$80  ; "To my knowledge, that tower{N}is impervious to any type{N}of disaster.{D2}"
 		playSound SFX_DEMON_BREATH
 		executeSubroutine ApplyStormEffect
@@ -88,12 +95,13 @@ IntroCutscene4: textCursor $1089
 		ac_setSpeed 10280       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $82,$FF,$3,$1
-		moreMove $0,$1
-		moreMove $7,$3
-		moreMove $0,$3
-		moreMove $1,$2
-		endMove $8080
+		entityActions $82,$FF
+		 moveDown 1
+		 moveRight 1
+		 moveDownRight 3
+		 moveRight 3
+		 moveUp 2
+		endActions
 		setFacing $80,DOWN
 		setFacing $81,DOWN
 		csWait 20
@@ -102,30 +110,35 @@ IntroCutscene4: textCursor $1089
 		csWait 20
 		setActscript $81,$FF,eas_Init
 		setCamDest 7,5
-		moveEntity $81,$FF,$3,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $0,$81   ; "What is it?{D2}"
 		nextSingleText $0,$82   ; "The...sealed door...{N}Ancient Tower...{D2}"
 		setActscript $80,$FF,eas_Init
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $80,$80  ; "Go on.{D2}"
 		setActscript $82,$FF,eas_Init
-		moveEntity $82,$FF,$0,$2
-		moreMove $9,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveRight 2
+		 faceUp 1
+		endActions
 		nextSingleText $0,$82   ; "It's open!{D2}"
 		setActscript $81,$FF,eas_46172
 		customActscript $81,$FF
 		ac_setSpeed 2570        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $81,$FF,$1,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$81   ; "That's impossible!{N}It can't be opened!{D2}"
-		moveEntity $82,$FF,$2,$2
-		moreMove $9,$1
-		endMove $8080
+		entityActions $82,$FF
+		 moveLeft 2
+		 faceUp 1
+		endActions
 		nextSingleText $0,$82   ; "I'm sure it was closed{N}before the lightning, but...{D2}"
 		csWait 40
 		setFacing $81,RIGHT
@@ -138,32 +151,36 @@ IntroCutscene4: textCursor $1089
 		entityNod $81
 		nextSingleText $0,$81   ; "Sire, I'm going to go and{N}see what happened!{D2}"
 		setActscript $81,$FF,eas_Init
-		moveEntity $81,$FF,$3,$1
-		moreMove $0,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveDown 1
+		 moveRight 1
+		endActions
 		setFacing $80,LEFT
 		nextSingleText $0,$81   ; "We must know the truth.{D2}"
 		csWait 20
 		entityNod $80
 		nextSingleText $80,$80  ; "Be careful.{D2}"
-		moveEntity $81,$FF,$2,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $81,$FF
+		 moveLeft 1
+		 moveDown 1
+		endActions
 		nextSingleText $0,$81   ; "Take me to the sealed door.{D2}"
 		entityNod $82
 		setCameraEntity $82
-		moveEntity $82,$0,$3,$2
-		moreMove $2,$3
-		moreMove $5,$3
-		moreMove $2,$1
-		moreMove $1,$1
-		endMove $8080
-		moveEntity $81,$FF,$3,$3
-		moreMove $2,$3
-		moreMove $5,$3
-		moreMove $2,$1
-		moreMove $1,$1
-		endMove $8080
+		entityActions $82,$0
+		 moveDown 2
+		 moveLeft 3
+		 moveUpLeft 3
+		 moveLeft 1
+		 moveUp 1
+		endActions
+		entityActions $81,$FF
+		 moveDown 3
+		 moveLeft 3
+		 moveUpLeft 3
+		 moveLeft 1
+		 moveUp 1
+		endActions
 		hideEntity $82
 		hideEntity $81
 		setCameraEntity $FFFF
@@ -181,8 +198,9 @@ IntroCutscene4: textCursor $1089
 		ac_setSpeed 2570        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$FF,$1,$2
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 2
+		endActions
 		csWait 20
 		nextSingleText $80,$80  ; "Lightning at the Ancient{N}Tower.{D2}"
 		setFacing $80,DOWN
@@ -194,14 +212,16 @@ IntroCutscene4: textCursor $1089
 		setFacing $80,DOWN
 		csWait 30
 		nextSingleText $80,$80  ; "Huh?{N}Did I hear something?{D2}"
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $80,$80  ; "A sealed door that is open.{N}An unusual storm.{N}Everything is so strange.{D2}"
 		csWait 5
 		setActscript $80,$0,eas_461B6
 		csWait 60
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $80,$80  ; "What?  I feel as if someone{N}is watching me.{N}It must be my nerves.{D2}"
 		setFacing $80,UP
 		playSound SFX_INTRO_LIGHTNING
@@ -216,8 +236,9 @@ IntroCutscene4: textCursor $1089
 		ac_setSpeed 2570        ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $80,$FF,$1,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 1
+		endActions
 		playSound SFX_INTRO_LIGHTNING
 		setPos $84,9,11,UP
 		executeSubroutine ApplyStormEffect
@@ -228,8 +249,9 @@ IntroCutscene4: textCursor $1089
 		csWait 30
 		nextSingleText $80,$80  ; "What was that?{N}Who's there?!{D2}"
 		setActscript $80,$FF,eas_46172
-		moveEntity $80,$FF,$1,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveUp 1
+		endActions
 		playSound SFX_INTRO_LIGHTNING
 		setPos $84,9,11,UP
 		executeSubroutine ApplyStormEffect
@@ -259,20 +281,23 @@ IntroCutscene4: textCursor $1089
 		ac_jump eas_Idle        ;   
 		ac_end
 		setActscript $80,$FF,eas_46172
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		nextSingleText $80,$80  ; "Stay away from me!{D2}"
 		setActscript $83,$FF,eas_Init2
 		setActscript $83,$FF,eas_46172
 		stopEntity $83
-		moveEntity $83,$FF,$0,$1
-		moreMove $3,$1
-		moreMove $0,$1
-		moreMove $3,$1
-		endMove $8080
-		moveEntity $83,$FF,$0,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $83,$FF
+		 moveRight 1
+		 moveDown 1
+		 moveRight 1
+		 moveDown 1
+		endActions
+		entityActions $83,$FF
+		 moveRight 1
+		 moveDown 1
+		endActions
 		startEntity $83
 		setCameraEntity $80
 		entityShiver $83
@@ -280,8 +305,9 @@ IntroCutscene4: textCursor $1089
 		entityShiver $83
 		entityShiver $83
 		csWait 20
-		moveEntity $80,$FF,$3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 moveDown 1
+		endActions
 		csWait 5
 		setActscript $80,$0,eas_461E4
 		csWait 30
@@ -295,8 +321,9 @@ IntroCutscene4: textCursor $1089
 		ac_jump eas_Idle        ;   
 		ac_end
 		setPos $85,12,5,DOWN
-		moveEntity $85,$0,$3,$4
-		endMove $8080
+		entityActions $85,$0
+		 moveDown 4
+		endActions
 		entityFlashWhite $85,$50
 		waitIdle $85
 		setActscript $80,$0,eas_RotateRightHighSpeed
@@ -306,9 +333,10 @@ IntroCutscene4: textCursor $1089
 		csWait 30
 		setActscript $80,$0,eas_RotateRight
 		csWait 50
-		moveEntity $80,$FF,$B,$1
-		moreMove $3,$1
-		endMove $8080
+		entityActions $80,$FF
+		 faceDown 1
+		 moveDown 1
+		endActions
 		setFacing $80,UP
 		customActscript $80,$FF
 		ac_setAnimCounter $0    ;   

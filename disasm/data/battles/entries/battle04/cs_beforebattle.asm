@@ -23,15 +23,17 @@ bbcs_04:        textCursor $907
 		csWait 20
 		nextSingleText $C0,$1C  ; "Capture them alive!{W1}"
 		entityNod $80
-		moveEntity $1C,$FF,$3,$1
-		moreMove $0,$2
-		moreMove $3,$2
-		moreMove $0,$1
-		moreMove $3,$1
-		endMove $8080
-		moveEntity $1C,$FF,$0,$2
-		moreMove $3,$1
-		endMove $8080
+		entityActions $1C,$FF
+		 moveDown 1
+		 moveRight 2
+		 moveDown 2
+		 moveRight 1
+		 moveDown 1
+		endActions
+		entityActions $1C,$FF
+		 moveRight 2
+		 moveDown 1
+		endActions
 		csc_end
 ce_4989E:       mainEntity 5,9,DOWN
 		entity 6,9,DOWN,4,eas_Init

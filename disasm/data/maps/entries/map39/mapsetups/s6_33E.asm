@@ -21,8 +21,9 @@ cs_5E0EE:       newEntity $1A,4,12,UP,$FF
 cs_5E0F8:       textCursor $805
 		setCameraEntity $18
 		setEntityDest $0,19,7
-		moveEntity $7,$FF,$3,$1
-		endMove $8080
+		entityActions $7,$FF
+		 moveDown 1
+		endActions
 		setPos $1F,19,8,RIGHT
 		setPos $7,18,8,RIGHT
 		setFacing $0,RIGHT
@@ -36,16 +37,21 @@ cs_5E0F8:       textCursor $805
 		nextSingleText $0,$18   ; "The blocked tunnel is open{N}now?{W1}"
 		nextSingleText $0,$1F   ; "Yes.  Now you can go back{N}home.{W1}"
 		nextSingleText $0,$18   ; "I've been waiting for this{N}day!{W1}"
-		moveEntity $1F,$FF,$3,$1
-		endMove $8080
-		moveEntity $0,$FF,$3,$1
-		endMove $8080
-		moveEntity $18,$FF,$2,$4
-		endMove $8080
-		moveEntity $0,$FF,$1,$1
-		endMove $8080
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveDown 1
+		endActions
+		entityActions $0,$FF
+		 moveDown 1
+		endActions
+		entityActions $18,$FF
+		 moveLeft 4
+		endActions
+		entityActions $0,$FF
+		 moveUp 1
+		endActions
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		setFacing $0,LEFT
 		setFacing $7,UP
 		setFacing $18,RIGHT
@@ -54,11 +60,13 @@ cs_5E0F8:       textCursor $805
 		nextSingleText $0,$7    ; "To defeat devils!{W1}"
 		setFacing $18,DOWN
 		nextSingleText $0,$18   ; "Really?{W1}"
-		moveEntity $0,$FF,$0,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveRight 1
+		endActions
 		setFacing $0,LEFT
-		moveEntity $1F,$FF,$1,$1
-		endMove $8080
+		entityActions $1F,$FF
+		 moveUp 1
+		endActions
 		setFacing $1F,LEFT
 		setFacing $18,RIGHT
 		nextText $0,$1F         ; "We don't want another{N}tragedy like Moun.{W2}"

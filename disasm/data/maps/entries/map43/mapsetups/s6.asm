@@ -40,32 +40,37 @@ cs_540C0:       textCursor $32B
 		setFacing $4,RIGHT
 		csWait 30
 		nextSingleText $0,$4    ; "This is Hawel's house.{W1}"
-		moveEntity $4,$FF,$2,$1
-		moreMove $1,$1
-		moreMove $C,$14
-		endMove $8080
+		entityActions $4,$FF
+		 moveLeft 1
+		 moveUp 1
+		 actionC 20
+		endActions
 		nextSingleText $0,$4    ; "Sir Hawel!{N}Granseal friends are here!{W1}"
 		csWait 70
 		setFacing $4,RIGHT
 		csWait 40
 		nextSingleText $0,$4    ; "Strange...{N}There's no answer.{W2}{N}Has he gone somewhere?{N}Well, why don't you wait{N}for him inside?{W1}"
 		entityNod $0
-		moveEntity $0,$FF,$2,$2
-		endMove $8080
+		entityActions $0,$FF
+		 moveLeft 2
+		endActions
 		roofEvent 4,9
 		stepEvent 4,9
 		stepEvent 11,9
-		moveEntity $4,$0,$1,$3
-		endMove $8080
-		moveEntity $0,$FF,$1,$3
-		endMove $8080
+		entityActions $4,$0
+		 moveUp 3
+		endActions
+		entityActions $0,$FF
+		 moveUp 3
+		endActions
 		csWait 30
 		customActscript $4,$FF
 		ac_setSpeed 12336       ;   
 		ac_jump eas_Idle        ;   
 		ac_end
-		moveEntity $4,$FF,$0,$1
-		endMove $8080
+		entityActions $4,$FF
+		 moveRight 1
+		endActions
 		setFacing $4,UP
 		playSound $FE
 		nextSingleText $0,$4    ; "Wh...who are you?{N}Oh, Sir Hawel!{W1}"
@@ -74,8 +79,9 @@ cs_540C0:       textCursor $32B
 		setFacing $81,DOWN
 		setFacing $82,DOWN
 		nextSingleText $0,$81   ; "Oops!  You came back early!{W1}"
-		moveEntity $4,$FF,$1,$1
-		endMove $8080
+		entityActions $4,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$4    ; "You!  What did you{N}do to Sir Hawel?!{W1}"
 		csWait 30
 		setFacing $81,RIGHT
@@ -97,21 +103,24 @@ cs_540C0:       textCursor $32B
 		ac_jump eas_Idle        ;   
 		ac_end
 		setActscript $4,$FF,eas_Init
-		moveEntity $82,$0,$3,$2
-		moreMove $0,$4
-		moreMove $3,$5
-		endMove $8080
-		moveEntity $81,$0,$0,$1
-		moreMove $3,$2
-		moreMove $0,$4
-		moreMove $3,$5
-		endMove $8080
-		moveEntity $4,$FF,$C,$14
-		moreMove $8,$14
-		moreMove $D,$0
-		moreMove $3,$1
-		moreMove $0,$3
-		endMove $8080
+		entityActions $82,$0
+		 moveDown 2
+		 moveRight 4
+		 moveDown 5
+		endActions
+		entityActions $81,$0
+		 moveRight 1
+		 moveDown 2
+		 moveRight 4
+		 moveDown 5
+		endActions
+		entityActions $4,$FF
+		 actionC 20
+		 faceRight 20
+		 jumpUp 0
+		 moveDown 1
+		 moveRight 3
+		endActions
 		playSound SFX_BLO
 		customActscript $4,$FF
 		ac_setAnimCounter $0    ;   
@@ -123,26 +132,30 @@ cs_540C0:       textCursor $32B
 		hideEntity $82
 		csWait 60
 		setActscript $4,$FF,eas_Init
-		moveEntity $4,$FF,$0,$1
-		endMove $8080
+		entityActions $4,$FF
+		 moveRight 1
+		endActions
 		playSound $FD
 		nextSingleText $0,$80   ; "Ohhh...{NAME;4}....{W1}"
-		moveEntity $4,$FF,$2,$1
-		endMove $8080
+		entityActions $4,$FF
+		 moveLeft 1
+		endActions
 		setFacing $4,UP
 		nextSingleText $0,$4    ; "Sir...you're alive!{W1}"
 		playSound MUSIC_SAD_THEME_1
 		nextSingleText $0,$80   ; "...It's no use running after{N}them....{W1}"
-		moveEntity $4,$FF,$2,$1
-		moreMove $1,$2
-		endMove $8080
+		entityActions $4,$FF
+		 moveLeft 1
+		 moveUp 2
+		endActions
 		nextSingleText $0,$4    ; "Are you OK, sir?{N}Why did they do such a{N}cruel thing?{W1}"
 		nextSingleText $0,$80   ; "They were Galam soldiers.{N}They demanded my notes on{N}Ground Seal.{W2}{N}They suddenly snatched at{N}them, and...(cough)...{W1}"
 		entityShiver $80
 		stopEntity $80
-		moveEntity $0,$FF,$0,$2
-		moreMove $1,$3
-		endMove $8080
+		entityActions $0,$FF
+		 moveRight 2
+		 moveUp 3
+		endActions
 		setFacing $0,RIGHT
 		setFacing $4,LEFT
 		nextSingleText $0,$0    ; "(Whisper)....{W1}"
@@ -163,13 +176,15 @@ cs_540C0:       textCursor $32B
 		entityShiver $80
 		stopEntity $80
 		setPosFlash $80,63,63,DOWN
-		moveEntity $4,$FF,$1,$1
-		endMove $8080
+		entityActions $4,$FF
+		 moveUp 1
+		endActions
 		nextSingleText $0,$4    ; "Sir!  Sir Hawel!{N}Don't leave me alone!{N}Oh, no...!{W1}"
 		stopEntity $4
 		csWait 60
-		moveEntity $0,$FF,$0,$1
-		endMove $8080
+		entityActions $0,$FF
+		 moveRight 1
+		endActions
 		setFacing $0,UP
 		csWait 30
 		startEntity $4
