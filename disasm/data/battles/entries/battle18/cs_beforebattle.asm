@@ -4,10 +4,10 @@
 bbcs_18:        textCursor $9D8
 		loadMapFadeIn 12,7,22
 		loadMapEntities ce_4B2DA
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
-		setActscript $B,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
+		setActscriptWait $B,eas_Init
 		setPos $7,13,33,UP
 		setPos $1F,12,33,UP
 		setPos $B,11,33,UP
@@ -15,33 +15,33 @@ bbcs_18:        textCursor $9D8
 		playSound MUSIC_SHRINE
 		fadeInB
 		cameraSpeed $40
-		entityActions $0,$0
+		entityActions $0
 		 moveUp 6
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveUp 6
 		endActions
-		entityActions $B,$0
+		entityActions $B
 		 moveUp 6
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 6
 		endActions
 		nextSingleText $0,$80   ; "Stop!{W1}"
 		csWait 5
-		setActscript $0,$0,eas_461B6
+		setActscript $0,eas_461B6
 		csWait 5
-		setActscript $7,$0,eas_461B6
+		setActscript $7,eas_461B6
 		csWait 5
-		setActscript $B,$0,eas_461E4
+		setActscript $B,eas_461E4
 		csWait 5
-		setActscript $1F,$0,eas_461B6
+		setActscript $1F,eas_461B6
 		csWait 30
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		nextSingleText $C0,$7   ; "Who IS that big guy?{W1}"
-		entityActions $B,$FF
+		entityActionsWait $B
 		 moveUp 1
 		endActions
 		nextSingleText $0,$B    ; "Don't you know?{W1}"

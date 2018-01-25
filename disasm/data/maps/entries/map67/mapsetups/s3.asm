@@ -67,14 +67,14 @@ sub_4FB58:
 	; End of function sub_4FB58
 
 cs_4FB64:       textCursor $9EF
-		setActscript $1F,$FF,eas_Init
-		setActscript $1E,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Jump
+		setActscriptWait $1F,eas_Init
+		setActscriptWait $1E,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Jump
 		nextSingleText $0,$1F   ; "Wait!{W1}"
 		setEntityDest $1F,60,27
 		csWait 5
-		setActscript $1F,$0,eas_461B6
+		setActscript $1F,eas_461B6
 		csWait 120
 		setCamDest 53,24
 		setEntityDest $7,59,27
@@ -86,15 +86,15 @@ cs_4FB64:       textCursor $9EF
 		nextSingleText $0,$1F   ; "{LEADER}...{NAME;7}...can{N}you hear that?{W1}"
 		nextSingleText $C0,$7   ; "Hear what?{W1}"
 		csWait 5
-		setActscript $7,$0,eas_461B6
+		setActscript $7,eas_461B6
 		csWait 120
 		setFacing $7,DOWN
 		nextSingleText $C0,$7   ; "I don't hear anything.{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveDown 1
 		endActions
 		csWait 5
-		setActscript $1F,$0,eas_461B6
+		setActscript $1F,eas_461B6
 		csWait 120
 		nextText $0,$1F         ; "Somebody is crying for help...{W2}"
 		nextSingleText $0,$1F   ; "from...over here.{W1}"
@@ -109,8 +109,8 @@ cs_4FB64:       textCursor $9EF
 		csc_end
 cs_4FC32:       textCursor $A21
 		newEntity $D,57,25,UP,$FF
-		setActscript $D,$FF,eas_Init
-		entityActions $D,$FF
+		setActscriptWait $D,eas_Init
+		entityActionsWait $D
 		 moveUp 1
 		endActions
 		setFacing $0,UP
@@ -121,8 +121,8 @@ cs_4FC32:       textCursor $A21
 		playSound SFX_SECRET_PATH_ROCK
 		csWait 30
 		setFacing $D,DOWN
-		setActscript $D,$FF,eas_Jump
-		setActscript $D,$FF,eas_Jump
+		setActscriptWait $D,eas_Jump
+		setActscriptWait $D,eas_Jump
 		nextSingleText $0,$D    ; "Got it!  Thanks, fairy!{W1}"
 		setQuake 1
 		playSound SFX_BIG_DOOR_RUMBLE
@@ -136,14 +136,14 @@ cs_4FC32:       textCursor $A21
 		csWait 30
 		setFacing $D,DOWN
 		nextSingleText $0,$D    ; "{LEADER}, come on.{W1}"
-		entityActions $D,$FF
+		entityActionsWait $D
 		 moveUp 1
 		endActions
 		hideEntity $D
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 1
 		endActions
-		entityActions $0,$0
+		entityActions $0
 		 moveUp 1
 		endActions
 		mapSysEvent $20,$1D,$3,$2

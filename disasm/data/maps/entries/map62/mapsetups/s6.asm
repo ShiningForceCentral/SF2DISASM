@@ -11,25 +11,25 @@ ms_map62_InitFunction:
 	; End of function ms_map62_InitFunction
 
 cs_5C876:       textCursor $E1D
-		setActscript $80,$FF,eas_Jump
+		setActscriptWait $80,eas_Jump
 		nextSingleText $0,$80   ; "Who is it?  Petro?{W1}"
 		setFacing $80,DOWN
 		nextSingleText $0,$80   ; "Well, who are you?{W1}"
 		nextSingleText $0,$81   ; "Petro?  Is he back?{W1}"
 		setCamDest 1,5
 		nextSingleText $0,$81   ; "Petro!  The Sky Orb is OUR{N}treasure!  Give it back!{W2}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveDown 3
 		endActions
 		nextSingleText $0,$81   ; "Say something!{N}Petro!{W1}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveDown 2
 		endActions
-		customActscript $81,$FF
-		ac_setSpeed 4112        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setSpeed 16,16      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveDown 1
 		endActions
 		setCamDest 1,10
@@ -43,14 +43,14 @@ cs_5C8D4:       textCursor $E23
 		setFacing $81,DOWN
 		nextText $0,$81         ; "I think he went to Grans{N}Island to operate an ancient{N}vehicle.{W2}"
 		nextSingleText $0,$81   ; "I've lost my purpose to live.{W1}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveUp 6
 		endActions
 		csc_end
 cs_5C8FE:       textCursor $E2B
 		nextSingleText $0,$81   ; "You need my help?{W1}"
 		nextSingleText $0,$81   ; "Come in.  Talk to me.{W1}"
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 1
 		endActions
 		csc_end

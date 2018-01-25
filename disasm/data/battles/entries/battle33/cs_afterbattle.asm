@@ -4,113 +4,113 @@
 abcs_battle33:  textCursor $B3C
 		loadMapFadeIn 31,8,6
 		loadMapEntities ce_4D322
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,13,11,UP
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,12,9,DOWN
 		setBlocks 3,39,1,1,16,8
 		stopEntity $80
-		setActscript $80,$FF,eas_46172
-		entityActions $80,$0
+		setActscriptWait $80,eas_46172
+		entityActions $80
 		 moveDown 1
 		endActions
 		csWait 4
-		setActscript $80,$FF,eas_461AA
-		entityActions $1A,$0
+		setActscriptWait $80,eas_461AA
+		entityActions $1A
 		 moveDown 1
 		endActions
 		csWait 2
-		setActscript $1A,$FF,eas_461AA
-		setActscript $1A,$FF,eas_45F9C
+		setActscriptWait $1A,eas_461AA
+		setActscriptWait $1A,eas_45F9C
 		fadeInB
 		nextSingleText $0,$1F   ; "There may be some survivors{N}somewhere.{W1}"
 		csWait 5
-		setActscript $0,$0,eas_461B6
+		setActscript $0,eas_461B6
 		csWait 5
-		setActscript $1F,$0,eas_461E4
+		setActscript $1F,eas_461E4
 		csWait 5
-		setActscript $7,$0,eas_461B6
+		setActscript $7,eas_461B6
 		csWait 120
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 1
 		endActions
 		csWait 3
-		entityActions $80,$0
+		entityActions $80
 		 moveDown 1
 		endActions
 		csWait 3
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 1
 		endActions
 		csWait 3
-		entityActions $80,$0
+		entityActions $80
 		 moveDown 1
 		endActions
 		csWait 3
-		setActscript $80,$FF,eas_461AA
+		setActscriptWait $80,eas_461AA
 		setFacing $7,RIGHT
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
 		csWait 40
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveRight 3
 		endActions
 		setFacing $7,UP
 		setFacing $0,RIGHT
 		setFacing $1F,RIGHT
-		customActscript $80,$FF
-		ac_setSpeed 6168        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 24,24      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 1
 		endActions
 		csWait 8
-		setActscript $80,$FF,eas_461AA
+		setActscriptWait $80,eas_461AA
 		csWait 50
-		customActscript $80,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $80,$0
+		entityActions $80
 		 moveDown 1
 		endActions
 		csWait 4
 		setQuake 2
-		setActscript $80,$FF,eas_461AA
+		setActscriptWait $80,eas_461AA
 		csWait 10
 		setQuake 0
 		csWait 40
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 2
 		endActions
 		nextSingleText $0,$80   ; "Do not touch my rock!{W1}"
-		setActscript $7,$FF,eas_Jump
-		setActscript $7,$FF,eas_46172
-		customActscript $7,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $7,eas_Jump
+		setActscriptWait $7,eas_46172
+		customActscriptWait $7
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 2
 		endActions
 		setCamDest 10,6
-		customActscript $80,$FF
-		ac_setSpeed 6168        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 24,24      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 1
 		endActions
 		csWait 8
-		setActscript $80,$FF,eas_461AA
+		setActscriptWait $80,eas_461AA
 		nextText $0,$80         ; "Did you defeat all those{N}devils?{W2}"
 		nextSingleText $0,$80   ; "I was wondering why it became{N}quiet so suddenly.{W1}"
-		entityActions $1F,$0
+		entityActions $1F
 		 moveRight 3
 		 moveUp 1
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveRight 4
 		endActions
 		setFacing $1F,RIGHT
@@ -122,23 +122,23 @@ abcs_battle33:  textCursor $B3C
 		nextSingleText $0,$1F   ; "What do you mean?{W1}"
 		nextText $0,$80         ; "I cannot explain.{W2}"
 		nextSingleText $0,$80   ; "I am what I am.{N}That is all that I am.{W1}"
-		customActscript $80,$FF
-		ac_setSpeed 10280       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 40,40      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $80,$FF,eas_JumpRight
-		customActscript $80,$FF
-		ac_setSpeed 14392       ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $80,eas_JumpRight
+		customActscriptWait $80
+		 ac_setSpeed 56,56      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $80,$FF,eas_46172
-		entityActions $80,$0
+		setActscriptWait $80,eas_46172
+		entityActions $80
 		 moveDown 1
 		endActions
 		setPos $1A,16,8,DOWN
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $1A,eas_Init
 		csWait 3
-		setActscript $80,$FF,eas_461AA
+		setActscriptWait $80,eas_461AA
 		setQuake 2
 		csWait 20
 		setQuake 0
@@ -149,9 +149,9 @@ abcs_battle33:  textCursor $B3C
 		nextSingleText $0,$1F   ; "And where are they?{W1}"
 		nextSingleText $C0,$1A  ; "Down here.  Follow me.{W1}"
 		setPos $1A,63,63,DOWN
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
 		csWait 30
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 2
 		endActions
 		setFacing $1F,DOWN

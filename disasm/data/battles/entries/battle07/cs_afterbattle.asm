@@ -4,161 +4,161 @@
 abcs_battle07:  textCursor $951
 		loadMapFadeIn 58,8,16
 		loadMapEntities ce_4A912
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setBlocks 7,23,1,2,13,22
 		setBlocks 7,23,1,2,13,24
 		setBlocks 7,23,1,2,13,29
 		stopEntity $82
 		stopEntity $83
-		customActscript $82,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $82
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $83,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $83
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $80,$FF,eas_46172
-		setActscript $81,$FF,eas_46172
-		setActscript $80,$0,eas_AnimSpeedx2
-		setActscript $81,$0,eas_AnimSpeedx2
+		setActscriptWait $80,eas_46172
+		setActscriptWait $81,eas_46172
+		setActscript $80,eas_AnimSpeedx2
+		setActscript $81,eas_AnimSpeedx2
 		fadeInB
 		cameraSpeed $28
 		csWait 50
-		entityActions $85,$0
+		entityActions $85
 		 moveUp 6
 		endActions
-		entityActions $86,$FF
+		entityActionsWait $86
 		 moveUp 6
 		endActions
 		nextSingleText $0,$86   ; "King Galam!  You've lost{N}your followers!{W1}"
 		nextSingleText $0,$85   ; "Princess Elis, come here.{N}Come here.{W1}"
 		setCamDest 8,13
 		nextSingleText $0,$84   ; "Father...{W1}"
-		entityActions $84,$FF
+		entityActionsWait $84
 		 moveDown 1
 		endActions
-		customActscript $82,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $0           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $82
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $0          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		startEntity $82
-		entityActions $84,$0
+		entityActions $84
 		 moveDown 1
 		endActions
-		customActscript $82,$FF
-		ac_setSpeed 14392       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $82
+		 ac_setSpeed 56,56      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveLeft 1
 		endActions
 		setFacing $82,UP
 		waitIdle $84
-		setActscript $84,$FF,eas_Jump
+		setActscriptWait $84,eas_Jump
 		nextSingleText $0,$84   ; "(Shriek!){W1}"
 		nextSingleText $C0,$82  ; "No, Princess.{W1}"
-		setActscript $84,$FF,eas_46172
-		entityActions $84,$FF
+		setActscriptWait $84,eas_46172
+		entityActionsWait $84
 		 moveUp 1
 		endActions
 		nextSingleText $0,$85   ; "Elis!{W1}"
 		setCamDest 8,15
-		entityActions $85,$0
+		entityActions $85
 		 moveUp 1
 		endActions
-		entityActions $86,$FF
+		entityActionsWait $86
 		 moveUp 1
 		endActions
 		nextSingleText $C0,$82  ; "Freeze!  Ha, ha!{W1}"
-		setActscript $85,$0,eas_Jump
-		setActscript $86,$FF,eas_Jump
+		setActscript $85,eas_Jump
+		setActscriptWait $86,eas_Jump
 		setCamDest 8,14
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveRight 1
 		 moveUp 2
 		endActions
 		setFacing $82,DOWN
 		nextText $C0,$82        ; "What a good hostage she is!{W2}"
 		nextSingleText $C0,$82  ; "Stay there!  Or she'll die!{W1}"
-		entityActions $85,$FF
+		entityActionsWait $85
 		 moveUp 1
 		endActions
 		nextSingleText $0,$85   ; "Stop this, King Galam!{N}Leave her alone!  Please!{W1}"
-		entityActions $86,$FF
+		entityActionsWait $86
 		 moveUp 1
 		endActions
 		nextSingleText $0,$86   ; "Princess Elis...I'll save{N}you!{W1}"
 		nextSingleText $FF,$FF  ; "King Galam murmurs a{N}magic spell.{W1}"
 		setFacing $84,RIGHT
 		csWait 40
-		setActscript $84,$FF,eas_Jump
+		setActscriptWait $84,eas_Jump
 		setFacing $84,DOWN
 		nextSingleText $0,$84   ; "Watch out!{W1}"
 		nextSingleText $0,$85   ; "What?!{W1}"
-		customActscript $80,$FF
-		ac_setSpeed 20560       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 80,80      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $81,$FF
-		ac_setSpeed 20560       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setSpeed 80,80      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setPos $80,13,16,RIGHT
 		setPos $81,13,16,RIGHT
 		playSound SFX_DEMON_BREATH
-		entityActions $80,$0
+		entityActions $80
 		 moveDownLeft 1
 		endActions
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveDownRight 1
 		endActions
-		entityActions $80,$0
+		entityActions $80
 		 moveDown 8
 		endActions
-		entityActions $81,$0
+		entityActions $81
 		 moveDown 8
 		endActions
 		csWait 10
-		setActscript $85,$FF,eas_46172
-		setActscript $86,$FF,eas_46172
-		customActscript $85,$FF
-		ac_setSpeed 14392       ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $85,eas_46172
+		setActscriptWait $86,eas_46172
+		customActscriptWait $85
+		 ac_setSpeed 56,56      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $86,$FF
-		ac_setSpeed 14392       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $86
+		 ac_setSpeed 56,56      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $85,$0
+		entityActions $85
 		 moveDown 3
 		endActions
-		entityActions $86,$FF
+		entityActionsWait $86
 		 moveDown 3
 		endActions
 		stopEntity $85
 		stopEntity $86
-		customActscript $85,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $85
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $86,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $86
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		nextSingleText $0,$84   ; "Father!{W1}"
-		setActscript $85,$FF,eas_Init
-		setActscript $86,$FF,eas_Init
+		setActscriptWait $85,eas_Init
+		setActscriptWait $86,eas_Init
 		startEntity $85
 		startEntity $86
 		entityShakeHead $85
@@ -167,11 +167,11 @@ abcs_battle07:  textCursor $951
 		setPos $80,63,63,DOWN
 		setPos $81,63,63,DOWN
 		setCamDest 8,17
-		customActscript $83,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $0           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $83
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $0          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		startEntity $83
 		entityShakeHead $83
@@ -224,70 +224,70 @@ abcs_battle07:  textCursor $951
 		entitySprite $81,$B4
 		setPos $81,13,5,UP
 		animEntityFadeInOut $81,$7
-		customActscript $80,$FF
-		ac_setSpeed 8224        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 32,32      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $81,$FF
-		ac_setSpeed 8224        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setSpeed 32,32      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		nextSingleText $0,$0    ; "I have a bad feeling about{N}this!{W1}"
-		entityActions $80,$0
+		entityActions $80
 		 moveDown 5
 		endActions
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveDown 5
 		endActions
 		setCamDest 8,8
 		nextSingleText $0,$86   ; "Princess Elis is swallowed{N}by a light tube.{W1}"
-		entityActions $80,$0
+		entityActions $80
 		 moveDown 5
 		endActions
 		setFacing $84,UP
-		setActscript $84,$0,eas_Jump
-		entityActions $81,$FF
+		setActscript $84,eas_Jump
+		entityActionsWait $81
 		 moveDown 5
 		endActions
 		setCamDest 8,13
 		nextSingleText $C0,$82  ; "Farewell for now!{N}Going up!{W1}"
-		customActscript $82,$FF
-		ac_setSpeed 514         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $82
+		 ac_setSpeed 2,2        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $84,$FF
-		ac_setSpeed 514         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $84
+		 ac_setSpeed 2,2        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $80,$FF
-		ac_setSpeed 514         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 2,2        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $81,$FF
-		ac_setSpeed 514         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setSpeed 2,2        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 2
 		endActions
-		entityActions $81,$0
+		entityActions $81
 		 moveUp 2
 		endActions
-		entityActions $82,$0
+		entityActions $82
 		 moveUp 2
 		endActions
-		entityActions $84,$0
+		entityActions $84
 		 moveUp 2
 		endActions
 		nextSingleText $0,$83   ; "He's using the light tube{N}to go through the doorway!{W1}"
 		setCamDest 8,17
 		nextSingleText $0,$83   ; "Save her.  Save her now!{W1}"
 		csWait 5
-		setActscript $83,$0,eas_461B6
+		setActscript $83,eas_461B6
 		csWait 120
 		setFacing $83,DOWN
 		nextSingleText $0,$83   ; "{LEADER}, you're good{N}at performing acrobatics!{W1}"
-		entityActions $83,$FF
+		entityActionsWait $83
 		 moveDown 1
 		endActions
 		setFacing $83,RIGHT
@@ -295,16 +295,16 @@ abcs_battle07:  textCursor $951
 		setFacing $86,LEFT
 		nextSingleText $0,$86   ; "Y...yes...but how?{W1}"
 		nextSingleText $0,$83   ; "Throw {LEADER} towards{N}the light tubes!{W1}"
-		setActscript $0,$FF,eas_Jump
+		setActscriptWait $0,eas_Jump
 		setCameraEntity $0
-		entityActions $85,$FF
+		entityActionsWait $85
 		 moveLeft 1
 		endActions
-		entityActions $83,$FF
+		entityActionsWait $83
 		 moveLeft 1
 		 moveDown 1
 		endActions
-		entityActions $86,$FF
+		entityActionsWait $86
 		 moveDown 1
 		endActions
 		waitIdle $83
@@ -314,94 +314,94 @@ abcs_battle07:  textCursor $951
 		csWait 30
 		stopEntity $0
 		setFacing $0,DOWN
-		customActscript $0,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		nextSingleText $0,$83   ; "{LEADER}, save her!{W1}"
-		customActscript $0,$FF
-		ac_setSpeed 10280       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 40,40      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $83,$FF
-		ac_setSpeed 10280       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $83
+		 ac_setSpeed 40,40      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $86,$FF
-		ac_setSpeed 10280       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $86
+		 ac_setSpeed 40,40      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $0,$FF,eas_46172
-		setActscript $83,$FF,eas_46172
-		setActscript $86,$FF,eas_46172
-		entityActions $83,$0
+		setActscriptWait $0,eas_46172
+		setActscriptWait $83,eas_46172
+		setActscriptWait $86,eas_46172
+		entityActions $83
 		 moveDown 3
 		endActions
-		entityActions $86,$0
+		entityActions $86
 		 moveDown 3
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 3
 		endActions
 		nextSingleText $C0,$82  ; "Too late.  You're too late.{W1}"
 		cameraSpeed $38
-		customActscript $0,$FF
-		ac_setSpeed 14392       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 56,56      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $83,$FF
-		ac_setSpeed 14392       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $83
+		 ac_setSpeed 56,56      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $86,$FF
-		ac_setSpeed 14392       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $86
+		 ac_setSpeed 56,56      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $83,$0
+		entityActions $83
 		 moveUp 5
 		endActions
-		entityActions $86,$0
+		entityActions $86
 		 moveUp 5
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 5
 		endActions
 		setFacing $85,UP
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 3
 		endActions
 		nextSingleText $0,$83   ; "Oops, we lost our grip!{N}But...{W1}"
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 8
 		endActions
-		entityActions $81,$0
+		entityActions $81
 		 moveUp 8
 		endActions
-		entityActions $82,$0
+		entityActions $82
 		 moveUp 8
 		endActions
-		entityActions $84,$0
+		entityActions $84
 		 moveUp 8
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 5
 		endActions
-		customActscript $0,$FF
-		ac_setSpeed 514         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 2,2        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setQuake 4
-		customActscript $0,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $0           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $0          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setFacing $0,UP
 		entitySprite $0,$B1
-		entityActions $0,$0
+		entityActions $0
 		 moveUp 8
 		endActions
 		csWait 20
@@ -452,58 +452,58 @@ abcs_battle07:  textCursor $951
 		nextSingleText $FF,$FF  ; "The Jewel of Evil fused{N}to {LEADER}'s neck.{W1}"
 		setCameraEntity $0
 		cameraSpeed $38
-		customActscript $0,$FF
-		ac_setSpeed 14392       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 56,56      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $0,$FF,eas_46172
+		setActscriptWait $0,eas_46172
 		entitySprite $0,$0
-		customActscript $0,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setEntityDest $0,13,10
 		nextSingleText $C0,$82  ; "He stole my jewel!{W1}"
 		setFacing $83,UP
 		setFacing $86,UP
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 5
 		endActions
 		cameraSpeed $40
-		customActscript $0,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		playSound SFX_DOOR_OPEN
 		setQuake 3
 		setFacing $0,DOWN
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 1
 		endActions
 		setFacing $0,LEFT
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 1
 		endActions
 		setFacing $0,UP
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 1
 		endActions
 		setFacing $0,RIGHT
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 1
 		endActions
 		setFacing $0,DOWN
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 1
 		endActions
 		entitySprite $0,$B1
-		customActscript $0,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $0           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $0          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		csWait 20
 		setQuake 0
@@ -521,23 +521,23 @@ abcs_battle07:  textCursor $951
 		setFacing $84,DOWN
 		animEntityFadeInOut $81,$6
 		nextSingleText $C0,$82  ; "I have to go back and get{N}my jewel....{N}Noooooooo!{W1}"
-		setActscript $82,$0,eas_463AE
+		setActscript $82,eas_463AE
 		animEntityFadeInOut $80,$6
 		nextSingleText $0,$84   ; "Father...{N}{LEADER}...help meeeeee!{W1}"
-		setActscript $84,$FF,eas_463AE
-		setActscript $83,$FF,eas_Init
-		customActscript $83,$FF
-		ac_setSpeed 8224        ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $84,eas_463AE
+		setActscriptWait $83,eas_Init
+		customActscriptWait $83
+		 ac_setSpeed 32,32      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $86,$FF,eas_Init
-		customActscript $86,$FF
-		ac_setSpeed 8224        ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $86,eas_Init
+		customActscriptWait $86
+		 ac_setSpeed 32,32      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $85,$FF
-		ac_setSpeed 8224        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $85
+		 ac_setSpeed 32,32      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		playSound $FD
 		csWait 60
@@ -547,7 +547,7 @@ abcs_battle07:  textCursor $951
 		nextSingleText $0,$85   ; "She's gone....{N}Elis!{W1}"
 		nextSingleText $0,$83   ; "We couldn't help the{N}Princess.{W1}"
 		entitySprite $0,$0
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		startEntity $0
 		entityShakeHead $0
 		nextSingleText $C0,$0   ; "(Sigh)....{W1}"
@@ -558,7 +558,7 @@ abcs_battle07:  textCursor $951
 		nextSingleText $0,$83   ; "Indeed, perhaps...these{N}jewels are the key to{N}solving this....{W1}"
 		setQuake 2
 		csWait 5
-		setActscript $86,$0,eas_461B6
+		setActscript $86,eas_461B6
 		playSound $FD
 		csWait 120
 		setQuake 0
@@ -567,14 +567,14 @@ abcs_battle07:  textCursor $951
 		playSound MUSIC_BOSS_ATTACK
 		nextSingleText $0,$83   ; "What?! Another earthquake?{W1}"
 		nextSingleText $0,$86   ; "Wow!  It's getting worse!{W1}"
-		entityActions $86,$FF
+		entityActionsWait $86
 		 moveDown 1
 		endActions
 		setFacing $86,LEFT
 		nextSingleText $C0,$85  ; "Whoa!{W1}"
 		nextSingleText $0,$86   ; "Sssiirrr Astral!{N}What should we do?!{W1}"
 		nextSingleText $0,$83   ; "I'm not sure.{W1}"
-		entityActions $86,$FF
+		entityActionsWait $86
 		 moveLeft 2
 		endActions
 		setFacing $86,UP
@@ -588,31 +588,31 @@ abcs_battle07:  textCursor $951
 		nextSingleText $0,$83   ; "He won't budge.{N}We'll have to carry him.{W1}"
 		nextSingleText $FF,$FF  ; "The Minister nods.{W1}"
 		entityNod $83
-		entityActions $83,$0
+		entityActions $83
 		 moveLeft 1
 		endActions
-		entityActions $86,$FF
+		entityActionsWait $86
 		 moveDown 1
 		 moveLeft 1
 		endActions
-		setActscript $85,$FF,eas_46172
+		setActscriptWait $85,eas_46172
 		setFacing $83,DOWN
 		stopEntity $85
 		csWait 50
-		entityActions $83,$0
+		entityActions $83
 		 moveRight 2
 		endActions
-		entityActions $86,$0
+		entityActions $86
 		 moveRight 2
 		endActions
-		entityActions $85,$FF
+		entityActionsWait $85
 		 moveRight 2
 		endActions
-		entityActions $83,$0
+		entityActions $83
 		 moveRight 1
 		 moveDown 1
 		endActions
-		entityActions $86,$FF
+		entityActionsWait $86
 		 moveLeft 1
 		 moveUp 1
 		endActions
@@ -620,17 +620,17 @@ abcs_battle07:  textCursor $951
 		csWait 50
 		setCameraEntity $85
 		cameraSpeed $20
-		entityActions $83,$0
+		entityActions $83
 		 moveDown 13
 		endActions
-		entityActions $86,$0
+		entityActions $86
 		 moveDown 13
 		endActions
-		entityActions $85,$FF
+		entityActionsWait $85
 		 moveDown 13
 		endActions
 		csWait 40
-		setActscript $83,$FF,eas_Jump
+		setActscriptWait $83,eas_Jump
 		setFacing $83,UP
 		nextText $0,$83         ; "{LEADER}, you'll be{N}buried in the tower!{W2}"
 		nextSingleText $0,$83   ; "Come on!{W1}"

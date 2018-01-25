@@ -4,22 +4,22 @@
 abcs_battle26:  textCursor $A4D
 		loadMapFadeIn 72,13,11
 		loadMapEntities ce_4BE4A
-		setActscript $0,$FF,eas_Init
-		customActscript $13,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $0,eas_Init
+		customActscriptWait $13
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,17,14,RIGHT
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,18,16,UP
 		setPos $1E,19,17,UP
 		setPriority $13,$0
 		setPriority $80,$FFFF
 		fadeInB
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 2
 		endActions
 		setFacing $7,RIGHT
@@ -32,32 +32,32 @@ abcs_battle26:  textCursor $A4D
 		setPos $80,18,13,DOWN
 		animEntityFadeInOut $80,$5
 		setFacing $7,UP
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 3
 		endActions
-		customActscript $80,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $80,$0,eas_4509E
+		setActscript $80,eas_4509E
 		csWait 200
-		setActscript $80,$FF,eas_Die
+		setActscriptWait $80,eas_Die
 		setCamDest 13,11
-		customActscript $13,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $0           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $13
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $0          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setFacing $13,DOWN
 		entityShakeHead $13
 		nextSingleText $C0,$13  ; "What happened?{W2}"
-		entityActions $13,$FF
+		entityActionsWait $13
 		 moveUp 1
 		endActions
-		setActscript $13,$FF,eas_Jump
+		setActscriptWait $13,eas_Jump
 		nextSingleText $C0,$13  ; "Ah...I was almost possessed{N}by that devil.{W1}"
-		entityActions $13,$FF
+		entityActionsWait $13
 		 moveDown 2
 		endActions
 		nextSingleText $C0,$13  ; "Thank you.{N}How can I repay you for{N}your kindness?{W1}"
@@ -66,7 +66,7 @@ abcs_battle26:  textCursor $A4D
 		nextText $C0,$13        ; "Pacalon, my country.  We{N}are fighting against the{N}devils.{W2}"
 		nextText $C0,$13        ; "But, no country in North{N}Parmecia has enough power{N}to resist them.{W2}"
 		nextSingleText $C0,$13  ; "So, I was heading south to{N}find some allies.{W1}"
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		setFacing $7,RIGHT
@@ -86,12 +86,12 @@ abcs_battle26:  textCursor $A4D
 		nextSingleText $0,$1F   ; "But, you're injured{N}Mr. {NAME;19}.{W1}"
 		setFacing $13,DOWN
 		nextSingleText $C0,$13  ; "No problem.  I don't know{N}why, but I'm much better.{W1}"
-		setActscript $13,$0,eas_RotateRight
+		setActscript $13,eas_RotateRight
 		csWait 40
-		setActscript $13,$FF,eas_Jump
+		setActscriptWait $13,eas_Jump
 		setFacing $13,DOWN
-		setActscript $13,$FF,eas_Jump
-		setActscript $13,$FF,eas_Init
+		setActscriptWait $13,eas_Jump
+		setActscriptWait $13,eas_Init
 		startEntity $13
 		nextSingleText $C0,$13  ; "Let's go to Pacalon.{W1}"
 		addNewFollower $13

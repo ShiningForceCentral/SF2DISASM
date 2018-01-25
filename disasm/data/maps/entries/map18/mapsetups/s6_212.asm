@@ -41,17 +41,17 @@ cs_612BE:       textCursor $E61
 		playSound SFX_BIG_DOOR_RUMBLE
 		setQuake 3
 		csWait 30
-		setActscript $80,$FF,eas_Init
+		setActscriptWait $80,eas_Init
 		csWait 30
 		setQuake 0
 		nextText $80,$82        ; "No more excuses!{W2}"
 		nextSingleText $80,$82  ; "This is your last chance.{N}Kill {LEADER} this time,{N}or I'll kill you!{W1}"
-		setActscript $80,$FF,eas_46172
-		customActscript $80,$FF
-		ac_setSpeed 2056        ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $80,eas_46172
+		customActscriptWait $80
+		 ac_setSpeed 8,8        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		entityShiver $80
@@ -60,14 +60,14 @@ cs_612BE:       textCursor $E61
 		nextSingleText $0,$80   ; "Yes, sir!{W1}"
 		setFacing $80,DOWN
 		csWait 40
-		setActscript $80,$0,eas_RotateRightHighSpeed
+		setActscript $80,eas_RotateRightHighSpeed
 		csWait 40
 		animEntityFadeInOut $80,$6
 		setPos $80,63,63,DOWN
 		csWait 150
 		setPriority $83,$FFFF
 		setPriority $81,$0
-		setActscript $83,$0,eas_Transparent
+		setActscript $83,eas_Transparent
 		setPos $83,13,12,DOWN
 		csWait 50
 		setPos $81,13,12,UP
@@ -75,17 +75,17 @@ cs_612BE:       textCursor $E61
 		csWait 50
 		hideEntity $83
 		csWait 40
-		customActscript $81,$FF
-		ac_setSpeed 4112        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setSpeed 16,16      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveUp 2
 		endActions
 		entityNod $81
 		csWait 50
 		nextSingleText $80,$82  ; "You were right, Odd Eye.{W1}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveUp 1
 		endActions
 		nextSingleText $0,$81   ; "Of course.{W1}"
@@ -93,17 +93,17 @@ cs_612BE:       textCursor $E61
 		nextSingleText $80,$82  ; "If he fails, you must battle{N}{LEADER}.{W1}"
 		entityShiver $81
 		nextText $0,$81         ; "You want me to kill{N}{LEADER}?{W2}"
-		customActscript $81,$FF
-		ac_setSpeed 2056        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setSpeed 8,8        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		csWait 20
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveDown 1
 		endActions
 		csWait 30
 		nextText $0,$81         ; "He's probably much stronger{N}now.{N}Hmmm, sounds interesting.{W2}"
-		setActscript $81,$FF,eas_Init
+		setActscriptWait $81,eas_Init
 		setFacing $81,UP
 		nextSingleText $0,$81   ; "I'll do it.  If this comes{N}to pass, it will be his final{N}battle.{W1}"
 		csWait 30
@@ -125,13 +125,13 @@ loc_61434:
 	; End of function csub_61426
 
 cs_6143C:       textCursor $36F
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $1A,eas_Init
 		moveEntityNextToPlayer $1A,$0
 		setFacing $0,RIGHT
 		csWait 20
 		nextSingleText $0,$1A   ; "Sorry, {LEADER}.{N}I'm going back to Roft.{N}I'm worried about Petro.{W1}"
 		csWait 30
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveUp 4
 		endActions
 		setFacing $0,UP
@@ -141,7 +141,7 @@ cs_6143C:       textCursor $36F
 		csWait 30
 		entityNod $1A
 		csWait 20
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveUp 4
 		endActions
 		hideEntity $1A

@@ -21,11 +21,11 @@ cs_628C8:       textCursor $F4B
 		nextText $0,$88         ; "You're wrong!{W2}"
 		nextSingleText $0,$88   ; "I'll kiss you!{W1}"
 		csWait 10
-		setActscript $87,$FF,eas_Jump
-		setActscript $87,$FF,eas_Jump
+		setActscriptWait $87,eas_Jump
+		setActscriptWait $87,eas_Jump
 		csc_end
 cs_6290C:       hideText
-		entityActions $8A,$FF
+		entityActionsWait $8A
 		 moveDown 1
 		endActions
 		setEntityDest $0,42,10
@@ -38,19 +38,19 @@ cs_6290C:       hideText
 		followEntity $1,$8A,$6
 		followEntity $3,$4,$2
 		followEntity $2,$1,$2
-		entityActions $8A,$FF
+		entityActionsWait $8A
 		 moveDown 1
 		 moveLeft 1
 		 moveDown 1
 		 moveDown 1
 		 moveDown 1
 		endActions
-		entityActions $8A,$FF
+		entityActionsWait $8A
 		 moveDown 3
 		 moveLeft 6
 		 actionC 10
 		endActions
-		entityActions $8A,$FF
+		entityActionsWait $8A
 		 moveUp 8
 		 moveLeft 6
 		 moveUp 2

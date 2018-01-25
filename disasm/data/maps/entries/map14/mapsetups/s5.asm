@@ -18,22 +18,22 @@ nullsub_178:
 cs_58FA4:       textCursor $8D6
 		reloadMap 8,7
 		loadMapEntities ce_59270
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		csWait 1
 		setPriority $0,$0
 		setPriority $82,$0
 		setPriority $85,$FFFF
 		fadeInB
-		customActscript $81,$0
-		ac_wait 1200            ;   
-		ac_moveRel 1,0          ;   
-		ac_waitDest             ;   
-		ac_moveRel 0,1          ;   
-		ac_waitDest             ;   
-		ac_wait 600             ;   
-		ac_moveRel 0,65529      ;   
-		ac_waitDest             ;   
-		ac_jump eas_Idle        ;   
+		customActscript $81
+		 ac_wait 1200           ;   
+		 ac_moveRel 1,0         ;   
+		 ac_waitDest            ;   
+		 ac_moveRel 0,1         ;   
+		 ac_waitDest            ;   
+		 ac_wait 600            ;   
+		 ac_moveRel 0,65529     ;   
+		 ac_waitDest            ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		nextSingleText $0,$80   ; "Somebody, take that plank{N}from him!{W1}"
 		setFacing $80,RIGHT
@@ -44,16 +44,16 @@ cs_58FA4:       textCursor $8D6
 		csWait 30
 		setFacing $82,LEFT
 		nextSingleText $0,$82   ; "I got it!{W1}"
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveLeft 2
 		endActions
-		entityActions $80,$0
+		entityActions $80
 		 moveLeft 2
 		endActions
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveUp 1
 		endActions
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveLeft 1
 		endActions
 		setFacing $80,RIGHT
@@ -61,57 +61,57 @@ cs_58FA4:       textCursor $8D6
 		nextSingleText $0,$82   ; "Thank you, boy!{W1}"
 		setFacing $82,DOWN
 		csWait 30
-		entityActions $84,$0
+		entityActions $84
 		 moveDown 1
 		endActions
-		entityActions $85,$0
+		entityActions $85
 		 moveDown 1
 		endActions
-		entityActions $86,$FF
+		entityActionsWait $86
 		 moveDown 1
 		endActions
 		nextSingleText $FF,$FF  ; "{LEADER} hands over{N}the plank.{W1}"
 		csWait 30
 		nextSingleText $0,$82   ; "We need a lot of planks{N}for our new town!{W1}"
-		entityActions $82,$0
+		entityActions $82
 		 moveDown 7
 		endActions
-		entityActions $84,$0
+		entityActions $84
 		 moveDown 7
 		endActions
-		entityActions $85,$0
+		entityActions $85
 		 moveDown 7
 		endActions
-		entityActions $86,$FF
+		entityActionsWait $86
 		 moveDown 7
 		endActions
 		hideEntity $82
 		hideEntity $84
 		hideEntity $85
 		hideEntity $86
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveRight 2
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		endActions
 		nextText $0,$80         ; "We can't go back to {N}Granseal without a ship...{W2}"
 		nextSingleText $0,$80   ; "There's no Granseal on{N}Grans Island now...{N}I know that, but...{W1}"
 		csWait 60
 		nextSingleText $0,$83   ; "Somebody, help!{W1}"
-		customActscript $83,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $83
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $83,$FF
+		entityActionsWait $83
 		 moveUp 6
 		endActions
-		setActscript $83,$FF,eas_Init
+		setActscriptWait $83,eas_Init
 		setFacing $80,DOWN
 		entityNod $83
 		entityNod $83
 		stopEntity $83
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		nextSingleText $0,$80   ; "What's wrong?{W1}"
@@ -137,24 +137,24 @@ cs_59122:       textCursor $8E3
 cs_59142:       textCursor $8E6
 		nextText $0,$80         ; "Oh, you're so brave!{W2}"
 		nextSingleText $0,$80   ; "Hey, he's going with you!{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 1
 		endActions
 		setFacing $80,RIGHT
 		textCursor $8E8
-		entityActions $83,$FF
+		entityActionsWait $83
 		 moveUp 2
 		endActions
 		nextText $0,$83         ; "{LEADER}, thank you!{W2}"
 		nextSingleText $0,$83   ; "I'll show you to North Cliff.{N}Follow me.{W1}"
 		csWait 30
-		entityActions $83,$0
+		entityActions $83
 		 moveDown 4
 		endActions
-		entityActions $0,$0
+		entityActions $0
 		 moveDown 4
 		endActions
-		entityActions $3,$FF
+		entityActionsWait $3
 		 moveUp 5
 		endActions
 		setFacing $0,LEFT
@@ -168,23 +168,23 @@ cs_59142:       textCursor $8E6
 		setPos $5,13,8,DOWN
 		setPos $1,13,7,DOWN
 		setPos $6,13,6,DOWN
-		entityActions $4,$0
+		entityActions $4
 		 moveDown 4
 		 moveRight 1
 		 moveDown 1
 		endActions
-		entityActions $2,$0
+		entityActions $2
 		 moveDown 5
 		 moveRight 1
 		endActions
-		entityActions $5,$0
+		entityActions $5
 		 moveDown 6
 		 moveLeft 1
 		endActions
-		entityActions $1,$0
+		entityActions $1
 		 moveDown 7
 		endActions
-		entityActions $6,$FF
+		entityActionsWait $6
 		 moveDown 7
 		endActions
 		setFacing $5,DOWN
@@ -201,28 +201,28 @@ cs_59142:       textCursor $8E6
 		nextSingleText $0,$83   ; "It would be safer if we came{N}along.  Let's go.{W1}"
 		csWait 60
 		setCameraEntity $FFFF
-		entityActions $83,$0
+		entityActions $83
 		 moveDown 7
 		endActions
-		entityActions $0,$0
+		entityActions $0
 		 moveDown 7
 		endActions
-		entityActions $1,$0
+		entityActions $1
 		 moveDown 7
 		endActions
-		entityActions $2,$0
+		entityActions $2
 		 moveDown 7
 		endActions
-		entityActions $3,$0
+		entityActions $3
 		 moveDown 7
 		endActions
-		entityActions $4,$0
+		entityActions $4
 		 moveDown 7
 		endActions
-		entityActions $5,$0
+		entityActions $5
 		 moveDown 7
 		endActions
-		entityActions $6,$FF
+		entityActionsWait $6
 		 moveDown 7
 		endActions
 		setStoryFlag $8         ; Battle 8 unlocked

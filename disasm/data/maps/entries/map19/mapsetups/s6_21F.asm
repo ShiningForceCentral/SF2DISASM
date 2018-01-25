@@ -69,27 +69,27 @@ cs_62D0E:       textCursor $F7F
 		followEntity $2,$1,$2
 		csWait 10
 		fadeInB
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveUp 4
 		 moveRight 3
 		 moveUp 2
 		endActions
 		roofEvent 29,23
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveUp 14
 		endActions
-		setActscript $0,$FF,eas_Init
-		setActscript $1,$FF,eas_Init
-		setActscript $3,$FF,eas_Init
-		setActscript $2,$FF,eas_Init
-		setActscript $4,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $1,eas_Init
+		setActscriptWait $3,eas_Init
+		setActscriptWait $2,eas_Init
+		setActscriptWait $4,eas_Init
 		setCamDest 24,5
 		csWait 40
-		customActscript $81,$FF
-		ac_setSpeed 4112        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setSpeed 16,16      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveUp 1
 		endActions
 		csWait 30
@@ -99,7 +99,7 @@ cs_62D0E:       textCursor $F7F
 		csWait 10
 		entityNod $81
 		nextSingleText $0,$81   ; "Yes, sir.{W1}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveRight 1
 		 faceDown 1
 		endActions
@@ -123,8 +123,8 @@ cs_62D0E:       textCursor $F7F
 		nextText $0,$81         ; "Listen up!{W2}"
 		nextText $0,$81         ; "It took two years, but the{N}Princess finally recovered{N}from the poison.{W2}"
 		nextSingleText $0,$81   ; "But she's still sleeping.{N}We've decided to take{N}Mitula's advice.{W1}"
-		setActscript $7,$FF,eas_Jump
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
+		setActscriptWait $7,eas_Jump
 		nextSingleText $80,$7   ; "Mitula...you mean, somebody{N}gets to kiss her?{W1}"
 		csWait 10
 		entityShiver $1
@@ -147,7 +147,7 @@ cs_62D0E:       textCursor $F7F
 		csWait 10
 		setFacing $A,LEFT
 		nextSingleText $80,$A   ; "I always thought {LEADER}{N}was the best choice!{W1}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveRight 2
 		 faceDown 1
 		endActions
@@ -156,14 +156,14 @@ cs_62D0E:       textCursor $F7F
 		nextSingleText $0,$81   ; "Are you sure?{N}Anybody disagree?{W1}"
 		setFacing $7,DOWN
 		csWait 60
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveLeft 2
 		 faceDown 1
 		endActions
 		setFacing $7,UP
 		nextSingleText $0,$81   ; "Nobody?{W1}"
 		csWait 30
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveLeft 2
 		 faceDown 1
 		endActions
@@ -178,9 +178,9 @@ cs_62D0E:       textCursor $F7F
 		csWait 40
 		setCamDest 24,7
 		csWait 5
-		setActscript $3,$0,eas_461B6
+		setActscript $3,eas_461B6
 		csWait 100
-		entityActions $3,$FF
+		entityActionsWait $3
 		 moveDown 1
 		endActions
 		setFacing $3,RIGHT
@@ -200,7 +200,7 @@ cs_62D0E:       textCursor $F7F
 		nextText $0,$3          ; "I understand what my friends{N}are saying, but...I love{N}her.{W2}"
 		nextSingleText $0,$3    ; "May I kiss her?{N}Somebody, say yes!{W1}"
 		csWait 5
-		setActscript $3,$0,eas_461B6
+		setActscript $3,eas_461B6
 		entityShiver $1
 		csWait 20
 		setFacing $7,DOWN
@@ -208,7 +208,7 @@ cs_62D0E:       textCursor $F7F
 		csWait 20
 		entityShakeHead $A
 		csWait 20
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 1
 		 moveDown 2
 		 faceLeft 1
@@ -217,7 +217,7 @@ cs_62D0E:       textCursor $F7F
 		setFacing $3,RIGHT
 		nextSingleText $80,$7   ; "Sorry, but...I don't think{N}{NAME;3} is the right{N}choice.{W1}"
 		entityShiver $3
-		entityActions $5,$FF
+		entityActionsWait $5
 		 moveRight 1
 		 moveDown 1
 		 faceRight 1
@@ -227,18 +227,18 @@ cs_62D0E:       textCursor $F7F
 		nextSingleText $0,$5    ; "A human is the best choice.{W1}"
 		entityShiver $3
 		jumpIfFlagClear $8,cs_62FB0; May joined
-		entityActions $8,$FF
+		entityActionsWait $8
 		 moveDown 1
 		 faceRight 1
 		endActions
 		nextSingleText $0,$8    ; "{LEADER} is a human!{N}They will make a cute couple!{W1}"
 		entityShiver $3
 cs_62FB0:       textCursor $F93
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		 faceDown 1
 		endActions
-		entityActions $13,$FF
+		entityActionsWait $13
 		 moveLeft 1
 		endActions
 		setFacing $3,RIGHT
@@ -246,7 +246,7 @@ cs_62FB0:       textCursor $F93
 		nextSingleText $80,$13  ; "I think he's the best{N}choice.{W1}"
 		entityShiver $3
 		csWait 30
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveRight 2
 		 moveDown 1
 		endActions
@@ -267,44 +267,44 @@ cs_62FB0:       textCursor $F93
 		setFacing $1,UP
 		csWait 10
 		nextSingleText $80,$1   ; "Yes, a good choice....{N}{LEADER} will make her...{N}...happy....{W1}"
-		customActscript $1,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $2,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $2
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1,$0
+		entityActions $1
 		 moveDown 1
 		endActions
-		entityActions $2,$FF
+		entityActionsWait $2
 		 moveLeft 1
 		endActions
-		setActscript $2,$0,eas_RotateRight
+		setActscript $2,eas_RotateRight
 		setFacing $0,DOWN
 		setFacing $4,DOWN
 		setFacing $3,DOWN
 		setFacing $7,DOWN
 		setFacing $13,DOWN
-		entityActions $1,$FF
+		entityActionsWait $1
 		 moveDown 8
 		endActions
 		hideEntity $1
-		setActscript $2,$FF,eas_Init
+		setActscriptWait $2,eas_Init
 		startEntity $2
 		setFacing $2,DOWN
 		entityShakeHead $2
 		csWait 30
 		setCamDest 24,9
-		entityActions $2,$FF
+		entityActionsWait $2
 		 moveDown 2
 		endActions
 		csWait 50
 		nextSingleText $0,$2    ; "Does she love {LEADER}?{N}I didn't know that.{W1}"
-		setActscript $4,$FF,eas_Jump
-		setActscript $4,$FF,eas_Jump
-		entityActions $4,$FF
+		setActscriptWait $4,eas_Jump
+		setActscriptWait $4,eas_Jump
+		entityActionsWait $4
 		 moveDown 1
 		 moveRight 2
 		 moveDown 2
@@ -313,29 +313,29 @@ cs_62FB0:       textCursor $F93
 		setFacing $2,RIGHT
 		nextSingleText $80,$4   ; "Stop!{N}I will go and comfort her.{W1}"
 		setFacing $2,DOWN
-		entityActions $4,$0
+		entityActions $4
 		 moveDown 2
 		endActions
 		csWait 8
-		setActscript $2,$FF,eas_Jump
-		setActscript $2,$FF,eas_Jump
+		setActscriptWait $2,eas_Jump
+		setActscriptWait $2,eas_Jump
 		nextSingleText $0,$2    ; "{NAME;4}!{N}I'll go with you!{W1}"
 		setFacing $4,UP
 		nextSingleText $80,$4   ; "Oh, c'mon.{N}She needs someone like me.{W1}"
-		entityActions $4,$FF
+		entityActionsWait $4
 		 moveDown 5
 		endActions
 		hideEntity $4
 		csWait 30
 		nextSingleText $0,$2    ; "What does he mean?{N}I don't understand!{W1}"
-		entityActions $B,$FF
+		entityActionsWait $B
 		 moveRight 2
 		 moveDown 1
 		 moveRight 2
 		 faceDown 1
 		endActions
 		nextSingleText $80,$B   ; "They remind me of when I{N}was young.{W1}"
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveRight 3
 		 moveDown 1
 		 faceRight 1
@@ -343,11 +343,11 @@ cs_62FB0:       textCursor $F93
 		nextSingleText $0,$1A   ; "{NAME;11}, you were young{N}once?{W1}"
 		entityShiver $1A
 		setFacing $B,LEFT
-		setActscript $B,$FF,eas_Jump
-		setActscript $B,$FF,eas_Jump
+		setActscriptWait $B,eas_Jump
+		setActscriptWait $B,eas_Jump
 		nextSingleText $80,$B   ; "Be quiet, you bucket of bolts!{W1}"
 		setCamDest 24,5
-		entityActions $A,$FF
+		entityActionsWait $A
 		 moveUp 1
 		 moveLeft 2
 		 faceUp 1
@@ -370,27 +370,27 @@ cs_62FB0:       textCursor $F93
 		nextText $0,$81         ; "You knew that?{N}{NAME;10}, you're smart.{W2}"
 		nextText $0,$81         ; "But I didn't know what{N}{NAME;1} or {NAME;3} would do.{W2}I didn't want to hurt their{N}feelings.{W1}"
 		nextSingleText $0,$81   ; "{LEADER}, I choose you.{W1}"
-		customActscript $80,$FF
-		ac_setSpeed 4112        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 16,16      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		 moveRight 1
 		 faceDown 1
 		endActions
 		setFacing $81,UP
 		nextSingleText $80,$80  ; "Now, {LEADER}.{N}Please go awaken her.{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 1
 		 moveDown 1
 		endActions
 		nextSingleText $80,$80  ; "The Minister is waiting{N}for you.{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 2
 		 faceDown 1
 		endActions
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveLeft 1
 		 faceDown 1
 		endActions

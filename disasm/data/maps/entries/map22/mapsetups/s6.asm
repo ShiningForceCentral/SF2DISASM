@@ -31,23 +31,23 @@ return_59654:
 
 cs_59656:       textCursor $6D4
 		reloadMap 0,19
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		stopEntity $0
 		stopEntity $7
 		stopEntity $1F
-		customActscript $0,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $7,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $7
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $1F,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1F
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setPos $0,4,8,DOWN
 		setPos $7,3,7,DOWN
@@ -59,52 +59,52 @@ cs_59656:       textCursor $6D4
 		removeShadow $7
 		removeShadow $1F
 		fadeInB
-		entityActions $0,$0
+		entityActions $0
 		 moveDown 16
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveDown 16
 		endActions
-		entityActions $1F,$0
+		entityActions $1F
 		 moveDown 16
 		endActions
-		entityActions $99,$0
+		entityActions $99
 		 moveDownLeft 8
 		endActions
-		entityActions $9A,$0
+		entityActions $9A
 		 moveDownLeft 8
 		endActions
-		entityActions $9B,$FF
+		entityActionsWait $9B
 		 moveDownLeft 8
 		endActions
 		hideEntity $99
 		hideEntity $9A
 		hideEntity $9B
-		customActscript $0,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $7,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $3           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $7
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $3          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $1F,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $3           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1F
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $3          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		csWait 100
 		startEntity $0
 		startEntity $7
 		startEntity $1F
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		entityShakeHead $0
 		entityShakeHead $7
 		entityShakeHead $1F
@@ -117,63 +117,63 @@ cs_59656:       textCursor $6D4
 		nextSingleText $C0,$1F  ; "Then, it felt like...I was{N}lifted upward!{W1}"
 		nextText $0,$7          ; "It's very difficult to explain{N}what's happened to us....{W2}"
 		nextSingleText $0,$7    ; "Anyway, we're very small now.{W1}"
-		customActscript $1F,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1F
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveLeft 1
 		endActions
 		nextSingleText $C0,$1F  ; "Small?  How small?{W1}"
 		csWait 5
-		setActscript $7,$0,eas_461B6
+		setActscript $7,eas_461B6
 		csWait 100
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 2
 		 moveRight 1
 		endActions
 		csWait 5
-		setActscript $7,$0,eas_461B6
+		setActscript $7,eas_461B6
 		csWait 130
 		setFacing $7,UP
 		setFacing $0,DOWN
 		setFacing $1F,DOWN
 		nextSingleText $0,$7    ; "Let's see...now we're on a{N}desk...and it's very large,{N}like a village.{W1}"
 		nextSingleText $0,$80   ; "Exactly.{W1}"
-		entityActions $0,$0
+		entityActions $0
 		 moveLeft 1
 		endActions
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveRight 1
 		endActions
 		csWait 5
-		setActscript $0,$0,eas_461B6
+		setActscript $0,eas_461B6
 		csWait 10
 		csWait 5
-		setActscript $7,$0,eas_461B6
+		setActscript $7,eas_461B6
 		csWait 5
-		setActscript $1F,$0,eas_461B6
+		setActscript $1F,eas_461B6
 		csWait 130
 		setFacing $7,DOWN
 		setFacing $0,DOWN
 		setFacing $1F,DOWN
-		setActscript $0,$FF,eas_Jump
-		setActscript $7,$0,eas_Jump
+		setActscriptWait $0,eas_Jump
+		setActscript $7,eas_Jump
 		entityShiver $0
 		entityShiver $7
-		setActscript $0,$FF,eas_46172
-		setActscript $7,$FF,eas_46172
-		entityActions $0,$0
+		setActscriptWait $0,eas_46172
+		setActscriptWait $7,eas_46172
+		entityActions $0
 		 moveUp 1
 		endActions
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		nextText $0,$7          ; "Goliath!{W2}"
-		setActscript $7,$FF,eas_Jump
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
+		setActscriptWait $7,eas_Jump
 		csWait 10
 		nextSingleText $0,$7    ; "Hey, what did you do to us?{W1}"
 		nextText $0,$80         ; "I told you not to go in{N}there.  You didn't listen{N}to my warning.{W2}"
@@ -202,7 +202,7 @@ cs_59656:       textCursor $6D4
 		csWait 20
 		playSound SFX_DIALOG_BLEEP_8
 		csWait 50
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 2
 		endActions
 		setFacing $0,DOWN
@@ -213,9 +213,9 @@ cs_59656:       textCursor $6D4
 		setFacing $0,RIGHT
 		setFacing $1F,LEFT
 		nextSingleText $0,$1F   ; "I agree!  We can meet Creed{N}later.{W1}"
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
 		csc_end
@@ -239,29 +239,29 @@ cs_5996E:       textCursor $702
 		nextText $0,$86         ; "A Cotton Balloon is inside.{W2}"
 		nextSingleText $0,$86   ; "With it you can leave{N}Desktop Kingdom safely.{N}Good luck!{W1}"
 		csc_end
-cs_599A4:       entityActions $88,$FF
+cs_599A4:       entityActionsWait $88
 		 moveUp 1
 		endActions
 		setFacing $88,DOWN
 		csc_end
-cs_599B2:       setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+cs_599B2:       setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		setEntityDest $0,35,24
 		setEntityDest $7,34,24
 		setEntityDest $1F,33,24
-		entityActions $0,$0
+		entityActions $0
 		 jumpRight 1
 		 faceDown 1
 		 moveDown 2
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveRight 1
 		 jumpRight 1
 		 moveDownRight 1
 		 faceDown 1
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveRight 1
 		 jumpRight 1
 		 faceDown 1
@@ -273,46 +273,46 @@ cs_599B2:       setActscript $0,$FF,eas_Init
 		stopEntity $0
 		stopEntity $7
 		stopEntity $1F
-		customActscript $0,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $7,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $7
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $1F,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1F
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $89,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $89
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $8A,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8A
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $8B,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8B
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $0,$0
+		entityActions $0
 		 moveDown 6
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveDown 6
 		endActions
-		entityActions $1F,$0
+		entityActions $1F
 		 moveDown 6
 		endActions
-		entityActions $89,$0
+		entityActions $89
 		 moveDown 6
 		endActions
-		entityActions $8A,$0
+		entityActions $8A
 		 moveDown 6
 		endActions
-		entityActions $8B,$FF
+		entityActionsWait $8B
 		 moveDown 6
 		endActions
 		mapSysEvent $1A,$1A,$8,$3

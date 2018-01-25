@@ -4,30 +4,30 @@
 bbcs_32:        textCursor $B1D
 		loadMapFadeIn 74,10,38
 		loadMapEntities ce_4CCC0
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,16,45,UP
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,14,45,UP
-		setActscript $16,$FF,eas_Init
+		setActscriptWait $16,eas_Init
 		setPos $16,15,46,UP
-		setActscript $1E,$FF,eas_Init
+		setActscriptWait $1E,eas_Init
 		setPos $1E,15,45,UP
 		fadeInB
 		cameraSpeed $30
-		entityActions $0,$0
+		entityActions $0
 		 moveUp 3
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveUp 3
 		endActions
-		entityActions $1F,$0
+		entityActions $1F
 		 moveUp 3
 		endActions
-		entityActions $1E,$0
+		entityActions $1E
 		 moveUp 3
 		endActions
-		entityActions $16,$FF
+		entityActionsWait $16
 		 moveUp 3
 		endActions
 		nextSingleText $0,$80   ; "I heard about you from{N}Geshp.{W1}"
@@ -42,12 +42,12 @@ bbcs_32:        textCursor $B1D
 		csWait 30
 		setFacing $80,DOWN
 		nextSingleText $0,$80   ; "Kill them, kill them all!{W1}"
-		setActscript $81,$0,eas_Jump
-		setActscript $82,$0,eas_Jump
-		setActscript $83,$0,eas_Jump
-		setActscript $84,$0,eas_Jump
-		setActscript $85,$0,eas_Jump
-		setActscript $86,$FF,eas_Jump
+		setActscript $81,eas_Jump
+		setActscript $82,eas_Jump
+		setActscript $83,eas_Jump
+		setActscript $84,eas_Jump
+		setActscript $85,eas_Jump
+		setActscriptWait $86,eas_Jump
 		csc_end
 ce_4CCC0:       mainEntity 15,44,UP
 		entity 16,45,UP,7,eas_Init

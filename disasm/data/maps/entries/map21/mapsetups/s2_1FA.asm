@@ -60,7 +60,7 @@ nullsub_126:
 
 	; End of function sub_53EEE
 
-cs_53EF4:       entityActions $80,$FF
+cs_53EF4:       entityActionsWait $80
 		 moveRight 1
 		endActions
 		setFacing $87,DOWN

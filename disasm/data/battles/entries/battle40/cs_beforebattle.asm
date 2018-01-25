@@ -4,56 +4,56 @@
 bbcs_40:        textCursor $BDC
 		loadMapFadeIn 54,11,34
 		loadMapEntities ce_4E878
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,15,40,UP
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,16,40,UP
-		setActscript $1C,$FF,eas_Init
+		setActscriptWait $1C,eas_Init
 		setPos $1C,15,41,UP
-		setActscript $80,$FF,eas_Init
+		setActscriptWait $80,eas_Init
 		setPos $80,16,41,UP
 		jumpIfFlagClear $4C,cs_4E544; Zynk is a follower
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $1A,eas_Init
 		setPos $1A,63,62,DOWN
 cs_4E544:       setBlocks 11,6,11,29,44,0
 		setBlocks 32,0,11,29,11,6
 		playSound MUSIC_STOP
 		fadeInB
 		cameraSpeed $30
-		entityActions $0,$0
+		entityActions $0
 		 moveUp 3
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveUp 3
 		endActions
-		entityActions $1F,$0
+		entityActions $1F
 		 moveUp 3
 		endActions
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 3
 		endActions
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveUp 3
 		endActions
 		nextSingleText $C0,$81  ; "{LEADER}, you're finally{N}here.{W1}"
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$FF,eas_Jump
-		entityActions $0,$0
+		setActscript $0,eas_Jump
+		setActscriptWait $7,eas_Jump
+		entityActions $0
 		 moveUp 1
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveUp 2
 		endActions
-		entityActions $1F,$0
+		entityActions $1F
 		 moveUp 1
 		endActions
-		entityActions $1C,$0
+		entityActions $1C
 		 moveUp 1
 		 moveLeft 1
 		 moveUp 1
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		 moveRight 1
 		 moveUp 1
@@ -77,7 +77,7 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		setFacing $81,DOWN
 		nextSingleText $C0,$81  ; "Don't you think so, Red{N}Baron?{W1}"
 		nextSingleText $0,$1C   ; "Uhh...(shiver).{W1}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveDown 1
 		endActions
 		nextText $C0,$81        ; "Anyway, I came here to{N}deliver an ultimatum.{W2}"
@@ -98,30 +98,30 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		tintMap
 		csWait 20
 		flickerOnce
-		setActscript $82,$0,eas_AnimSpeedx2
-		setActscript $82,$FF,eas_46172
+		setActscript $82,eas_AnimSpeedx2
+		setActscriptWait $82,eas_46172
 		setPos $82,16,8,UP
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveUp 2
 		endActions
 		setBlocks 6,15,1,1,16,6
 		setPos $82,63,63,UP
 		csWait 30
 		setPos $82,15,8,UP
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveUp 2
 		endActions
 		setBlocks 6,15,1,1,15,6
 		setPos $82,63,63,UP
 		csWait 20
 		setPos $82,17,9,UP
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveUp 2
 		endActions
 		setBlocks 6,15,1,1,17,7
 		csWait 10
 		setPos $82,16,9,UP
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveUp 2
 		endActions
 		setBlocks 6,15,1,1,16,7
@@ -199,19 +199,19 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		setFacing $7,RIGHT
 		setFacing $0,LEFT
 		nextSingleText $0,$7    ; "{LEADER}, are we really{N}going to fight Oddler?{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveLeft 1
 		endActions
 		setFacing $1F,UP
 		setFacing $1C,RIGHT
 		nextSingleText $0,$1F   ; "That's enough out of you!{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveRight 1
 		endActions
 		setFacing $1F,UP
 		setFacing $0,DOWN
 		nextSingleText $0,$1F   ; "{LEADER}, let's do it!{W1}"
-		setActscript $7,$0,eas_Jump
+		setActscript $7,eas_Jump
 		entityNod $0
 		csc_end
 ce_4E878:       mainEntity 16,39,UP

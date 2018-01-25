@@ -4,7 +4,7 @@
 abcs_battle04:  textCursor $90F
 		loadMapFadeIn 66,9,16
 		loadMapEntities ce_49A6A
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setPos $1,14,21,DOWN
 		setPos $2,12,21,DOWN
 		setPos $3,13,22,DOWN
@@ -13,16 +13,16 @@ abcs_battle04:  textCursor $90F
 		entityNod $0
 		nextSingleText $0,$1C   ; "Your battle strategy was{N}wonderful!  I praise you.{W1}"
 		csWait 5
-		setActscript $3,$0,eas_461B6
+		setActscript $3,eas_461B6
 		csWait 5
-		setActscript $4,$0,eas_461B6
-		setActscript $1,$0,eas_Jump
-		setActscript $2,$FF,eas_Jump
-		setActscript $1,$0,eas_Jump
-		setActscript $2,$FF,eas_Jump
+		setActscript $4,eas_461B6
+		setActscript $1,eas_Jump
+		setActscriptWait $2,eas_Jump
+		setActscript $1,eas_Jump
+		setActscriptWait $2,eas_Jump
 		csWait 80
 		setPos $1C,18,22,UP
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveUp 2
 		endActions
 		setFacing $1C,LEFT
@@ -32,64 +32,64 @@ abcs_battle04:  textCursor $90F
 		setFacing $3,RIGHT
 		setFacing $4,RIGHT
 		nextSingleText $0,$1C   ; "But, I can't let you escape.{W1}"
-		customActscript $1C,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1C
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveLeft 4
 		endActions
-		setActscript $0,$FF,eas_46172
-		customActscript $0,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $0,eas_46172
+		customActscriptWait $0
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setQuake 2
 		playSound SFX_BATTLEFIELD_DEATH
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveLeft 1
 		endActions
 		setQuake 0
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 1
 		 moveRight 1
 		endActions
-		setActscript $0,$0,eas_RotateRight
+		setActscript $0,eas_RotateRight
 		setFacing $1,UP
 		setFacing $2,UP
 		setFacing $3,UP
 		setFacing $4,UP
 		csWait 60
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setFacing $0,DOWN
-		customActscript $0,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $1C,$FF
-		ac_setSpeed 8224        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1C
+		 ac_setSpeed 32,32      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveRight 1
 		endActions
 		nextSingleText $0,$1C   ; "That lad is their leader.{N}Take him!{W1}"
-		entityActions $82,$0
+		entityActions $82
 		 moveUp 1
 		endActions
-		entityActions $81,$0
+		entityActions $81
 		 moveLeft 3
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 5
 		 moveDown 1
 		endActions
 		setFacing $82,LEFT
 		setFacing $1C,DOWN
 		nextSingleText $0,$1C   ; "Don't worry.  He has only{N}fainted.  Take them to Galam!{W1}"
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveRight 1
 		 moveDown 1
 		 moveRight 2

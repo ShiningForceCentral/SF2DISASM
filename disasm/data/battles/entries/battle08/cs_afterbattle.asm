@@ -4,52 +4,52 @@
 abcs_battle08:  textCursor $9A4
 		loadMapFadeIn 72,8,32
 		loadMapEntities ce_4ABBE
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		stopEntity $81
-		customActscript $81,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		jumpIfFlagSet $6,cs_4AAB6; Kiwi joined
 		setPos $6,63,63,DOWN
 cs_4AAB6:       fadeInB
 		nextSingleText $0,$80   ; "The game will be suspended.{N}OK?"
 		setFacing $80,LEFT
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 1
 		endActions
 		setFacing $80,UP
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		endActions
 		setFacing $80,RIGHT
 		nextSingleText $0,$80   ; "....{W1}"
-		setActscript $81,$FF,eas_Init
+		setActscriptWait $81,eas_Init
 		entitySprite $81,$3B
 		setFacing $81,LEFT
 		nextSingleText $C0,$81  ; "{LEADER}, are you ready{N}for battle?{D3}"
 		entitySprite $81,$CA
 		setFacing $81,DOWN
 		nextSingleText $C0,$81  ; "Do you need more preparations?"
-		setActscript $81,$FF,eas_Init
+		setActscriptWait $81,eas_Init
 		csWait 5
-		setActscript $81,$0,eas_461B6
+		setActscript $81,eas_461B6
 		csWait 120
 		setFacing $81,LEFT
 		startEntity $81
 		nextSingleText $C0,$81  ; "Did you change your mind?{W2}"
 		setFacing $81,DOWN
 		nextSingleText $C0,$81  ; "Be careful.{D1}{N}Haste makes waste.{D1}"
-		setActscript $80,$0,eas_BumpRight
-		customActscript $81,$FF
-		ac_setSpeed 8224        ;   
-		ac_jump eas_Idle        ;   
+		setActscript $80,eas_BumpRight
+		customActscriptWait $81
+		 ac_setSpeed 32,32      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $81,$FF,eas_4618A
+		setActscriptWait $81,eas_4618A
 		csWait 8
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveRight 1
 		endActions
 		setFacing $81,DOWN
@@ -67,14 +67,14 @@ cs_4AAB6:       fadeInB
 		setCamDest 22,32
 		csWait 30
 		setCamDest 8,32
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveRight 1
 		endActions
-		setActscript $80,$FF,eas_Jump
+		setActscriptWait $80,eas_Jump
 		nextText $0,$80         ; "{LEADER}, are you ready?{D3}"
 		nextSingleText $0,$80   ; "Do you need more preparations?"
 		setFacing $80,DOWN
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		nextSingleText $0,$80   ; "You changed your mind?{W2}"

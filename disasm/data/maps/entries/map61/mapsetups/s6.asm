@@ -11,9 +11,9 @@ ms_map61_InitFunction:
 	; End of function ms_map61_InitFunction
 
 cs_5C6CA:       textCursor $E3A
-		setActscript $7,$FF,eas_Init
-		setActscript $1E,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1E,eas_Init
+		setActscriptWait $1F,eas_Init
 		setEntityDest $0,4,9
 		setFacing $0,UP
 		setEntityDest $7,6,9

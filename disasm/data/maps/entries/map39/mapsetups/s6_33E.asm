@@ -21,7 +21,7 @@ cs_5E0EE:       newEntity $1A,4,12,UP,$FF
 cs_5E0F8:       textCursor $805
 		setCameraEntity $18
 		setEntityDest $0,19,7
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 1
 		endActions
 		setPos $1F,19,8,RIGHT
@@ -37,19 +37,19 @@ cs_5E0F8:       textCursor $805
 		nextSingleText $0,$18   ; "The blocked tunnel is open{N}now?{W1}"
 		nextSingleText $0,$1F   ; "Yes.  Now you can go back{N}home.{W1}"
 		nextSingleText $0,$18   ; "I've been waiting for this{N}day!{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveDown 1
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 1
 		endActions
-		entityActions $18,$FF
+		entityActionsWait $18
 		 moveLeft 4
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 1
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 1
 		endActions
 		setFacing $0,LEFT
@@ -60,11 +60,11 @@ cs_5E0F8:       textCursor $805
 		nextSingleText $0,$7    ; "To defeat devils!{W1}"
 		setFacing $18,DOWN
 		nextSingleText $0,$18   ; "Really?{W1}"
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveRight 1
 		endActions
 		setFacing $0,LEFT
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 1
 		endActions
 		setFacing $1F,LEFT

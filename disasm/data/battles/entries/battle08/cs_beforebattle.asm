@@ -4,24 +4,24 @@
 bbcs_08:        textCursor $99D
 		loadMapFadeIn 72,1,46
 		loadMapEntities ce_4AA14
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		stopEntity $81
-		customActscript $81,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		jumpIfFlagSet $6,cs_4A994; Kiwi joined
 		setPos $6,63,63,DOWN
 cs_4A994:       playSound MUSIC_MAIN_THEME
 		fadeInB
 		nextSingleText $0,$80   ; "The game will be suspended.{N}OK?"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveRight 2
 		endActions
 		setFacing $80,UP
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		endActions
 		setCameraEntity $81
@@ -41,9 +41,9 @@ cs_4A994:       playSound MUSIC_MAIN_THEME
 		nextSingleText $C0,$82  ; "Be careful.{D1}{N}Haste makes waste.{D1}"
 		setFacing $82,UP
 		nextSingleText $C0,$82  ; "{LEADER}, you had better{N}take a rest now.{D3}"
-		setActscript $83,$0,eas_Jump
-		setActscript $84,$0,eas_Jump
-		setActscript $85,$FF,eas_Jump
+		setActscript $83,eas_Jump
+		setActscript $84,eas_Jump
+		setActscriptWait $85,eas_Jump
 		csc_end
 ce_4AA14:       mainEntity 4,50,RIGHT
 		entity 5,50,RIGHT,202,eas_Init

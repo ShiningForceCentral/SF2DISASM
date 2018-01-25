@@ -260,9 +260,9 @@ cs_5A8CA:       textCursor $773
 		csc_end
 cs_5A8E6:       join $E
 		setF $313               ; ???
-		setActscript $10,$0,eas_463AE
-		setActscript $11,$0,eas_463AE
-		setActscript $F,$FF,eas_463AE
+		setActscript $10,eas_463AE
+		setActscript $11,eas_463AE
+		setActscriptWait $F,eas_463AE
 		addNewFollower $E
 		csc_end
 cs_5A90E:       textCursor $780
@@ -285,9 +285,9 @@ cs_5A93A:       textCursor $776
 		csc_end
 cs_5A956:       join $10
 		setF $313               ; ???
-		setActscript $E,$0,eas_463AE
-		setActscript $11,$0,eas_463AE
-		setActscript $F,$FF,eas_463AE
+		setActscript $E,eas_463AE
+		setActscript $11,eas_463AE
+		setActscriptWait $F,eas_463AE
 		addNewFollower $10
 		csc_end
 cs_5A97E:       textCursor $783
@@ -310,9 +310,9 @@ cs_5A9AA:       textCursor $779
 		csc_end
 cs_5A9C6:       join $11
 		setF $313               ; ???
-		setActscript $E,$0,eas_463AE
-		setActscript $10,$0,eas_463AE
-		setActscript $F,$FF,eas_463AE
+		setActscript $E,eas_463AE
+		setActscript $10,eas_463AE
+		setActscriptWait $F,eas_463AE
 		addNewFollower $11
 		csc_end
 cs_5A9EE:       textCursor $786
@@ -335,9 +335,9 @@ cs_5AA1A:       textCursor $77C
 		csc_end
 cs_5AA36:       join $F
 		setF $313               ; ???
-		setActscript $E,$0,eas_463AE
-		setActscript $10,$0,eas_463AE
-		setActscript $11,$FF,eas_463AE
+		setActscript $E,eas_463AE
+		setActscript $10,eas_463AE
+		setActscriptWait $11,eas_463AE
 		addNewFollower $F
 		csc_end
 cs_5AA5E:       textCursor $789

@@ -37,7 +37,7 @@ cs_51F88:       textCursor $3C2
 		nextText $0,$1C         ; "But, King Galam must{N}have a good reason!{W2}"
 		nextText $0,$1C         ; "I believe the King!{N}How about you?{N}Anyone disagree?{W1}"
 		csWait 5
-		setActscript $1C,$0,eas_461B6
+		setActscript $1C,eas_461B6
 		csWait 60
 		nextSingleText $0,$1C   ; "No?  Good!{W1}"
 		setFacing $1C,DOWN
@@ -90,58 +90,58 @@ cs_51F88:       textCursor $3C2
 		setFacing $8F,DOWN
 		setFacing $90,DOWN
 		nextSingleText $0,$80   ; "Crush Granseal!{W1}"
-		entityActions $1C,$0
+		entityActions $1C
 		 moveDown 7
 		endActions
-		entityActions $80,$0
+		entityActions $80
 		 moveDown 7
 		endActions
-		entityActions $81,$0
+		entityActions $81
 		 moveDown 7
 		endActions
-		entityActions $82,$0
+		entityActions $82
 		 moveDown 7
 		endActions
-		entityActions $83,$0
+		entityActions $83
 		 moveDown 7
 		endActions
-		entityActions $84,$0
+		entityActions $84
 		 moveDown 7
 		endActions
-		entityActions $85,$0
+		entityActions $85
 		 moveDown 7
 		endActions
-		entityActions $86,$0
+		entityActions $86
 		 moveDown 7
 		endActions
-		entityActions $87,$0
+		entityActions $87
 		 moveDown 7
 		endActions
-		entityActions $88,$0
+		entityActions $88
 		 moveDown 7
 		endActions
-		entityActions $89,$0
+		entityActions $89
 		 moveDown 7
 		endActions
-		entityActions $8A,$0
+		entityActions $8A
 		 moveDown 7
 		endActions
-		entityActions $8B,$0
+		entityActions $8B
 		 moveDown 7
 		endActions
-		entityActions $8C,$0
+		entityActions $8C
 		 moveDown 7
 		endActions
-		entityActions $8D,$0
+		entityActions $8D
 		 moveDown 7
 		endActions
-		entityActions $8E,$0
+		entityActions $8E
 		 moveDown 7
 		endActions
-		entityActions $8F,$0
+		entityActions $8F
 		 moveDown 7
 		endActions
-		entityActions $90,$0
+		entityActions $90
 		 moveDown 7
 		endActions
 		setFacing $5,DOWN
@@ -178,8 +178,8 @@ cs_521BA:       textCursor $3DA
 		nextSingleText $0,$91   ; "You!{W1}"
 		setCamDest 0,17
 		nextSingleText $0,$91   ; "How did you get out?{W1}"
-		setActscript $5,$FF,eas_Init
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $5,eas_Init
+		setActscriptWait $0,eas_Init
 		setEntityDest $0,3,19
 		setEntityDest $5,4,19
 		nextSingleText $0,$5    ; "I...{W1}"
@@ -192,10 +192,10 @@ cs_521BA:       textCursor $3DA
 		setFacing $5,LEFT
 		nextText $0,$93         ; "Yes.  I presented them to{N}King Galam.{W2}"
 		nextSingleText $0,$93   ; "He was so kind to give me{N}one of the pair, the Jewel{N}of Light!{W1}"
-		entityActions $0,$0
+		entityActions $0
 		 moveRight 1
 		endActions
-		entityActions $5,$FF
+		entityActionsWait $5
 		 moveRight 1
 		endActions
 		nextSingleText $0,$91   ; "Wait!{W1}"
@@ -209,8 +209,8 @@ cs_521BA:       textCursor $3DA
 		setFacing $0,DOWN
 		setFacing $5,DOWN
 		setEntityDest $91,9,23
-		setActscript $91,$FF,eas_Jump
-		setActscript $91,$FF,eas_Jump
+		setActscriptWait $91,eas_Jump
+		setActscriptWait $91,eas_Jump
 		nextSingleText $0,$91   ; "Intruders!  Intruders!{N}Arrest them!{W1}"
 		setStoryFlag $5         ; Battle 5 unlocked
 cs_5227C:       mapSysEvent $10,$0,$0,$0

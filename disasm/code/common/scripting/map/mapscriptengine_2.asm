@@ -85,7 +85,7 @@ rjt_cutsceneScriptCommands:
 		dc.w (csc2A_entityShiver-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc2B_initializeNewEntity-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc2C_followEntity-rjt_cutsceneScriptCommands) & $FFFF
-		dc.w (csc2D_moveEntity-rjt_cutsceneScriptCommands) & $FFFF
+		dc.w (csc2D_entityActionSequence-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc2E_hideEntity-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc2F_fly-rjt_cutsceneScriptCommands) & $FFFF
 		dc.w (csc30_removeEntityShadow-rjt_cutsceneScriptCommands) & $FFFF

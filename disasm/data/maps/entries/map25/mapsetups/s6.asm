@@ -19,25 +19,25 @@ return_5D3A8:
 cs_5D3AA:       setPos $85,25,18,RIGHT
 		setPos $87,25,17,RIGHT
 		csc_end
-cs_5D3B8:       customActscript $85,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+cs_5D3B8:       customActscriptWait $85
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setEntityDest $0,12,2
 		setFacing $0,DOWN
-		entityActions $85,$FF
+		entityActionsWait $85
 		 moveRight 5
 		endActions
-		entityActions $85,$FF
+		entityActionsWait $85
 		 moveDown 1
 		endActions
-		entityActions $85,$FF
+		entityActionsWait $85
 		 moveRight 2
 		endActions
-		entityActions $85,$FF
+		entityActionsWait $85
 		 moveUp 1
 		endActions
-		entityActions $85,$FF
+		entityActionsWait $85
 		 moveRight 2
 		endActions
 		entityShakeHead $0

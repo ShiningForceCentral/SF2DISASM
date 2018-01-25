@@ -116,6 +116,10 @@ Otherwise, use the "setAcscript" command by pointing to a externally declared ac
 2 params :
 - byte : entity on which to apply actscript ?
 - byte : (quick guess at first glance, to confirm) $FF if we have to wait for the end of execution of custom actscript, or 0 otherwise to continue cutscene immediately.
+Easier macros created : 
+- customActscript which doesn't wait for the end of actscript
+- and customActscriptWait, which does.
+Only 1 param, naturally.
 
 $0015 - setActscript - Apply actscript to entity
 Applies an existing actscript declared anywhere else in the game's code, and which can be re-used in any cutscene.
@@ -123,6 +127,10 @@ Applies an existing actscript declared anywhere else in the game's code, and whi
 - byte : entity index
 - byte : wait execution end or no (see above)
 - long : actscript named address.
+Easier macros created : 
+- setActscript which doesn't wait for the end of actscript
+- and setActscriptWait, which does.
+Only 2 params, naturally.
 
 $0016 - waitIdle - Wait for entity to stop before continuing cutscene execution
 1 param :
@@ -207,7 +215,7 @@ $0023 - setFacing - Set entity facing
 - byte : facing
 
 $0024 - setCameraEntity - Set which entity is followed by camera
-Interesting one !
+Value $FFFF to stop following entity.
 1 param :
 - word : entity index
 
@@ -269,6 +277,10 @@ params :
 - byte : entity index
 - byte : if !=0, wait until entity idle
 - 2 repeatable bytes : action type, and action parameter.
+Easier macros created : 
+- entityActions which doesn't wait for the end of actscript
+- and entityActionsWait, which does.
+Only 1 param, naturally.
 
 $002E - hideEntity - Hide entity
 Stop displaying it ?

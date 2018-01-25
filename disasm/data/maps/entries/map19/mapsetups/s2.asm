@@ -262,7 +262,7 @@ cs_52F24:       textCursor $241
 		csc_end
 cs_52F40:       textCursor $242
 		nextSingleText $0,$8C   ; "Good!{N}Let's go to the tower.{N}Follow me.{W1}"
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 moveUp 1
 		 moveLeft 8
 		endActions

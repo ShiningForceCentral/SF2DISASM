@@ -26,7 +26,7 @@ sub_513D4:
 
 	; End of function sub_513D4
 
-cs_513D6:       entityActions $1,$FF
+cs_513D6:       entityActionsWait $1
 		 moveLeft 1
 		 moveUp 1
 		endActions
@@ -57,8 +57,8 @@ cs_5144C:       moveEntityNextToPlayer $8A,$1
 		csc_end
 cs_51454:       moveEntityNextToPlayer $8B,$1
 		csc_end
-cs_5145C:       setActscript $80,$FF,eas_Init
-		entityActions $80,$FF
+cs_5145C:       setActscriptWait $80,eas_Init
+		entityActionsWait $80
 		 moveUp 2
 		 faceLeft 20
 		endActions
@@ -67,7 +67,7 @@ cs_5145C:       setActscript $80,$FF,eas_Init
 		nextText $0,$80         ; "Did the storm wake you up?{W2}"
 		textCursor $1E3
 		nextSingleText $0,$80   ; "Hurry to school!{N}Sir Astral and {NAME;1} must{N}be waiting.{W1}"
-		setActscript $80,$FF,eas_Init
+		setActscriptWait $80,eas_Init
 		csc_end
 cs_5148C:       setPos $1,41,10,UP
 		setPos $80,6,4,UP
@@ -77,7 +77,7 @@ cs_5149A:       textCursor $205
 		setFacing $0,UP
 		csWait 60
 		setPos $8E,46,7,LEFT
-		entityActions $8E,$FF
+		entityActionsWait $8E
 		 moveLeft 1
 		 moveDown 1
 		 moveLeft 3
@@ -86,7 +86,7 @@ cs_5149A:       textCursor $205
 		nextText $0,$8E         ; "Is everybody here?{N}OK, let's start.{W2}"
 		nextText $0,$8E         ; "Where is {NAME;3}?{N}Overslept again?  Oh, well.{N}I can't wait for him.{W2}"
 		nextSingleText $0,$8E   ; "Where did I leave off{N}yesterday?{W1}"
-		entityActions $8E,$FF
+		entityActionsWait $8E
 		 moveUp 1
 		endActions
 		csWait 120
@@ -95,12 +95,12 @@ cs_5149A:       textCursor $205
 		setFacing $1,DOWN
 		setFacing $2,DOWN
 		setFacing $8E,DOWN
-		customActscript $8F,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8F
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setPos $8F,41,17,UP
-		entityActions $8F,$FF
+		entityActionsWait $8F
 		 moveUp 6
 		 moveRight 1
 		 moveUp 2
@@ -108,7 +108,7 @@ cs_5149A:       textCursor $205
 		setFacing $0,UP
 		setFacing $1,UP
 		setFacing $2,UP
-		entityActions $8F,$FF
+		entityActionsWait $8F
 		 moveUp 1
 		endActions
 		entityNod $8F
@@ -118,22 +118,22 @@ cs_5149A:       textCursor $205
 		nextSingleText $0,$8F   ; "The King.  He has fallen{N}down and is in great pain!{W1}"
 		nextSingleText $0,$8E   ; "What?!  The King?{N}OK, I'm coming!{W1}"
 		csWait 15
-		setActscript $8F,$FF,eas_Init
-		entityActions $8F,$0
+		setActscriptWait $8F,eas_Init
+		entityActions $8F
 		 moveDown 3
 		endActions
-		entityActions $8E,$FF
+		entityActionsWait $8E
 		 moveDown 3
 		endActions
 		setFacing $0,DOWN
 		setFacing $1,DOWN
 		setFacing $2,DOWN
-		entityActions $8F,$0
+		entityActions $8F
 		 moveDown 1
 		 moveLeft 1
 		 moveDown 2
 		endActions
-		entityActions $8E,$FF
+		entityActionsWait $8E
 		 moveDown 2
 		 moveLeft 1
 		 actionC 20
@@ -143,13 +143,13 @@ cs_5149A:       textCursor $205
 		setFacing $8E,UP
 		setCamDest 38,7
 		nextSingleText $0,$8E   ; "Sorry, kids.  I have to go{N}to the castle.{N}Stay here.{W1}"
-		entityActions $8E,$FF
+		entityActionsWait $8E
 		 moveLeft 1
 		endActions
-		entityActions $8F,$0
+		entityActions $8F
 		 moveDown 3
 		endActions
-		entityActions $8E,$FF
+		entityActionsWait $8E
 		 moveDown 5
 		endActions
 		hideEntity $8E
@@ -159,7 +159,7 @@ cs_5149A:       textCursor $205
 		setFacing $2,LEFT
 		nextText $0,$2          ; "{LEADER}, did you hear that?{N}The King is sick!{W2}"
 		nextSingleText $0,$2    ; "But, I think it must be{N}something else!{N}He was acting so strange!{W1}"
-		entityActions $1,$FF
+		entityActionsWait $1
 		 moveDown 1
 		 moveRight 3
 		endActions
@@ -169,7 +169,7 @@ cs_5149A:       textCursor $205
 		nextSingleText $C0,$1   ; "Hey, {NAME;2}!{N}Let's go to the castle.{W1}"
 		nextSingleText $0,$2    ; "We can't, {NAME;1}!{N}We're just kids.{N}They won't let us in.{W1}"
 		nextSingleText $C0,$1   ; "Never mind that.{N}I have a plan!{W1}"
-		entityActions $1,$FF
+		entityActionsWait $1
 		 moveLeft 1
 		endActions
 		setFacing $1,UP
@@ -178,7 +178,7 @@ cs_5149A:       textCursor $205
 		jumpIfFlagSet $59,cs_51614; YES/NO prompt answer
 		nextText $0,$1          ; "No?  Really?{N}Then I'm not going either!{W2}"
 		nextSingleText $0,$1    ; "But, if you change your{N}mind, let me know right{N}away!{W1}"
-		entityActions $1,$FF
+		entityActionsWait $1
 		 moveLeft 2
 		 moveUp 1
 		endActions
@@ -197,10 +197,10 @@ cs_51614:       textCursor $217
 		setPos $8B,31,3,DOWN
 cs_51650:       csc_end
 cs_51652:       textCursor $219
-		entityActions $8A,$0
+		entityActions $8A
 		 moveRight 1
 		endActions
-		entityActions $8B,$FF
+		entityActionsWait $8B
 		 moveLeft 1
 		endActions
 		setFacing $8A,DOWN
@@ -213,10 +213,10 @@ cs_51652:       textCursor $219
 		nextSingleText $C0,$1   ; "We're his pupils.{N}He left a package behind,{N}and....{W1}"
 		nextSingleText $0,$8A   ; "You want to deliver it to{N}him?{N}Well...OK, go ahead.{W1}"
 		nextSingleText $0,$8B   ; "(Cough!){N}Be good in the castle, OK?{W1}"
-		entityActions $8A,$0
+		entityActions $8A
 		 moveLeft 1
 		endActions
-		entityActions $8B,$FF
+		entityActionsWait $8B
 		 moveRight 1
 		endActions
 		setFacing $8A,DOWN

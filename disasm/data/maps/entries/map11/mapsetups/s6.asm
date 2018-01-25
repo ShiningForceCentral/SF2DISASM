@@ -11,22 +11,22 @@ ms_map11_InitFunction:
 	; End of function ms_map11_InitFunction
 
 cs_57AAA:       textCursor $C4F
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $7,eas_Init
 		setEntityDest $0,39,11
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveLeft 1
 		endActions
 		setCameraEntity $7
 		setEntityDest $7,39,11
 		setFacing $7,UP
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveRight 1
 		endActions
 		setFacing $0,UP
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		nextSingleText $0,$7    ; "God Volcanon!{N}I'm back!{W1}"
@@ -46,19 +46,19 @@ cs_57AAA:       textCursor $C4F
 		csWait 30
 		nextSingleText $0,$7    ; "I've brought a friend.{W1}"
 		setFacing $7,DOWN
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveRight 1
 		endActions
 		setFacing $0,UP
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 2
 		endActions
 		setFacing $7,RIGHT
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 1
 		endActions
 		setFacing $7,UP
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveLeft 1
 		endActions
 		setFacing $0,UP
@@ -76,7 +76,7 @@ cs_57AAA:       textCursor $C4F
 		setQuake 0
 		setCamDest 34,6
 		csWait 5
-		setActscript $7,$0,eas_461B6
+		setActscript $7,eas_461B6
 		csWait 120
 		setFacing $7,UP
 		nextSingleText $0,$7    ; "Volcanon?{W1}"
@@ -89,14 +89,14 @@ cs_57AAA:       textCursor $C4F
 		csWait 90
 		setQuake 0
 		setCamDest 34,5
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveRight 1
 		endActions
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveRight 1
 		endActions
 		setFacing $0,UP
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 3
 		endActions
 		nextSingleText $0,$7    ; "Volcanon, please calm down!{W2}"
@@ -111,11 +111,11 @@ cs_57AAA:       textCursor $C4F
 		setQuake 4
 		csWait 90
 		setQuake 0
-		setActscript $7,$FF,eas_46172
-		entityActions $7,$FF
+		setActscriptWait $7,eas_46172
+		entityActionsWait $7
 		 moveDown 1
 		endActions
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $7,eas_Init
 		nextSingleText $0,$7    ; "But...{W2}"
 		nextSingleText $0,$7    ; "Even the greater devils{N}are as strong as you!{W1}"
 		nextSingleText $0,$80   ; "If all the humans are{N}annihilated, that's OK.{N}It's their destiny.{W2}"
@@ -125,29 +125,29 @@ cs_57AAA:       textCursor $C4F
 		setQuake 0
 		nextSingleText $0,$80   ; "I want them to show me{N}courage.{W2}"
 		nextSingleText $0,$80   ; "They must reseal the devil{N}again.{W1}"
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		nextSingleText $0,$7    ; "Then, please give some{N}advice to {LEADER}.{W1}"
 		nextSingleText $0,$80   ; "{LEADER}, believe in the{N}power of the jewel.{W2}"
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveLeft 1
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 2
 		endActions
 		nextSingleText $0,$80   ; "It belongs to both the{N}light and the darkness.{W2}"
 		nextSingleText $0,$80   ; "It shows its true power{N}when the light and the{N}darkness are as one.{W2}"
 		nextSingleText $0,$80   ; "You may go now.  I don't{N}want to see anybody until{N}Zeon is defeated.{W1}"
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		nextSingleText $0,$7    ; "Volcanon!{W1}"
 		csWait 30
-		setActscript $7,$FF,eas_Jump
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
+		setActscriptWait $7,eas_Jump
 		csWait 30
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 1
 		endActions
 		nextSingleText $0,$7    ; "{LEADER}, we'll defeat{N}that devil by ourselves!{W1}"

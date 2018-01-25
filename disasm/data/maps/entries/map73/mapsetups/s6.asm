@@ -82,7 +82,7 @@ cs_503A6:       textCursor $8BF
 		reloadMap 0,0
 		setCameraEntity $FFFF
 		loadMapEntities ce_506DE
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setBlocks 0,10,22,10,42,10
 		playSound MUSIC_TOWN
 		fadeInB
@@ -121,11 +121,11 @@ cs_50426:       textCursor $8B5
 		executeSubroutine sub_5038E
 		csWait 48
 		executeSubroutine sub_5039E
-		customActscript $84,$FF
-		ac_setSpeed 257         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $84
+		 ac_setSpeed 1,1        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $84,$0
+		entityActions $84
 		 moveRight 1
 		endActions
 		nextSingleText $0,$5    ; "Whoa!{W1}"
@@ -140,32 +140,32 @@ cs_50426:       textCursor $8B5
 		nextSingleText $FF,$FF  ; "The people of Granseal have{N}arrived at their new home.{W1}"
 		loadMapFadeIn 14,18,25
 		loadMapEntities ce_5072E
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		fadeInB
 		csWait 5
-		setActscript $81,$0,eas_461B6
+		setActscript $81,eas_461B6
 		csWait 5
-		setActscript $82,$0,eas_461B6
+		setActscript $82,eas_461B6
 		csWait 5
-		setActscript $83,$0,eas_461B6
+		setActscript $83,eas_461B6
 		csWait 5
-		setActscript $84,$0,eas_461B6
+		setActscript $84,eas_461B6
 		csWait 5
-		setActscript $85,$0,eas_461B6
+		setActscript $85,eas_461B6
 		csWait 5
-		setActscript $86,$0,eas_461B6
+		setActscript $86,eas_461B6
 		csWait 5
-		setActscript $87,$0,eas_461B6
+		setActscript $87,eas_461B6
 		csWait 5
-		setActscript $88,$0,eas_461B6
+		setActscript $88,eas_461B6
 		csWait 5
-		setActscript $89,$0,eas_461B6
+		setActscript $89,eas_461B6
 		csWait 5
-		setActscript $8A,$0,eas_461B6
+		setActscript $8A,eas_461B6
 		csWait 5
-		setActscript $8B,$0,eas_461B6
+		setActscript $8B,eas_461B6
 		csWait 5
-		setActscript $8C,$0,eas_461B6
+		setActscript $8C,eas_461B6
 		setFacing $80,LEFT
 		csWait 60
 		setFacing $80,RIGHT
@@ -190,22 +190,22 @@ cs_50426:       textCursor $8B5
 		nextText $0,$80         ; "Let's build a new Granseal{N}here!{W2}"
 		nextText $0,$80         ; "The ship will be a good{N}source of timber!{W2}"
 		nextSingleText $0,$80   ; "Break the ship apart and{N}bring the timber onto the{N}land!{W1}"
-		setActscript $81,$0,eas_Walking
-		setActscript $82,$0,eas_Walking
-		setActscript $83,$0,eas_Walking
-		setActscript $84,$0,eas_Walking
-		setActscript $85,$0,eas_Walking
-		setActscript $86,$0,eas_Walking
-		setActscript $87,$0,eas_Walking
-		setActscript $88,$0,eas_Walking
-		setActscript $89,$0,eas_Walking
-		setActscript $8A,$0,eas_Walking
-		setActscript $8B,$0,eas_Walking
-		setActscript $8C,$0,eas_Walking
+		setActscript $81,eas_Walking
+		setActscript $82,eas_Walking
+		setActscript $83,eas_Walking
+		setActscript $84,eas_Walking
+		setActscript $85,eas_Walking
+		setActscript $86,eas_Walking
+		setActscript $87,eas_Walking
+		setActscript $88,eas_Walking
+		setActscript $89,eas_Walking
+		setActscript $8A,eas_Walking
+		setActscript $8B,eas_Walking
+		setActscript $8C,eas_Walking
 		csWait 80
 		loadMapFadeIn 14,45,2
 		loadMapEntities ce_5079E
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setBlocks 51,7,1,1,63,63
 		setBlocks 51,6,1,1,51,7
 		stopEntity $83
@@ -214,7 +214,7 @@ cs_50426:       textCursor $8B5
 		jumpIfFlagSet $6,cs_50624; Kiwi joined
 		hideEntity $6
 cs_50624:       fadeInB
-		entityActions $3,$FF
+		entityActionsWait $3
 		 moveDown 1
 		endActions
 		nextText $0,$3          ; "We're going to break the{N}ship up into pieces and build{N}our new town....{W2}"
@@ -224,7 +224,7 @@ cs_50624:       fadeInB
 		nextText $C0,$1         ; "Be quiet!  We know that.{W2}"
 		nextSingleText $0,$1    ; "Help me remove this plank!{W1}"
 		nextSingleText $0,$3    ; "OK, I'm coming.{W1}"
-		entityActions $3,$FF
+		entityActionsWait $3
 		 moveDown 2
 		endActions
 		setFacing $3,DOWN
@@ -232,14 +232,14 @@ cs_50624:       fadeInB
 		csWait 60
 		nextText $0,$3          ; "Ugh...ugghhh...{N}It's stuck!{W2}"
 		nextSingleText $0,$3    ; "Heave!  Heave!{N}Come oooooooooon!{W1}"
-		setActscript $3,$FF,eas_46172
-		customActscript $3,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $3,eas_46172
+		customActscriptWait $3
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setBlocks 63,63,1,1,51,7
 		playSound SFX_FALLING
-		entityActions $3,$FF
+		entityActionsWait $3
 		 moveUp 4
 		endActions
 		setQuake 5
@@ -250,7 +250,7 @@ cs_50624:       fadeInB
 		setQuake 0
 		csWait 30
 		nextSingleText $0,$5    ; "Oh, what a klutz!{W1}"
-		entityActions $5,$FF
+		entityActionsWait $5
 		 moveRight 2
 		endActions
 		setFacing $5,UP
@@ -304,29 +304,29 @@ ce_5079E:       mainEntity 40,8,LEFT
 		dc.w $FFFF
 cs_50806:       textCursor $8F0
 		loadMapEntities ce_5094A
-		setActscript $0,$FF,eas_Init
-		setActscript $80,$FF,eas_Init
-		setActscript $80,$FF,eas_Init
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $80,eas_Init
+		setActscriptWait $80,eas_Init
+		setActscriptWait $0,eas_Init
 		followEntity $81,$0,$2
 		followEntity $0,$80,$2
 		setBlocks 42,0,11,10,24,48
 		setCameraEntity $80
 		fadeInB
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 4
 		 moveUp 1
 		 moveLeft 2
 		 moveUp 2
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 1
 		 moveUp 1
 		 moveUp 1
 		 moveLeft 8
 		 moveDown 2
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 8
 		 moveDown 2
 		 moveLeft 3
@@ -334,7 +334,7 @@ cs_50806:       textCursor $8F0
 		 moveLeft 2
 		 moveDown 2
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 5
 		endActions
 		setPosFlash $82,0,0,LEFT
@@ -360,9 +360,9 @@ cs_50806:       textCursor $8F0
 		nextText $0,$80         ; "Wow, there's our new town!{W2}"
 		nextSingleText $0,$80   ; "But, our Granseal was much{N}more beautiful.{N}Cheer up!{W1}"
 		setCameraEntity $FFFF
-		setActscript $80,$FF,eas_Init
-		setActscript $81,$FF,eas_Init
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $80,eas_Init
+		setActscriptWait $81,eas_Init
+		setActscriptWait $0,eas_Init
 		setEntityDest $80,29,52
 		setPos $80,0,0,DOWN
 		setEntityDest $81,29,52

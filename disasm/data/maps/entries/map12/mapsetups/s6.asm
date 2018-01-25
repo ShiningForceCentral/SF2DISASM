@@ -24,39 +24,39 @@ return_57D20:
 
 cs_57D22:       textCursor $C7D
 		cameraSpeed $30
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $0,12,31,UP
 		setPos $7,13,31,UP
 		setPos $1F,11,31,UP
 		fadeInB
-		entityActions $0,$0
+		entityActions $0
 		 moveUp 5
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveUp 5
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 5
 		endActions
 		nextSingleText $0,$80   ; "Stop!{W1}"
 		csWait 10
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$0,eas_Jump
-		setActscript $1F,$FF,eas_Jump
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$0,eas_Jump
-		setActscript $1F,$FF,eas_Jump
+		setActscript $0,eas_Jump
+		setActscript $7,eas_Jump
+		setActscriptWait $1F,eas_Jump
+		setActscript $0,eas_Jump
+		setActscript $7,eas_Jump
+		setActscriptWait $1F,eas_Jump
 		csWait 30
 		csWait 5
-		setActscript $0,$0,eas_461B6
+		setActscript $0,eas_461B6
 		csWait 5
-		setActscript $7,$0,eas_461E4
+		setActscript $7,eas_461E4
 		csWait 5
-		setActscript $1F,$0,eas_461B6
+		setActscript $1F,eas_461B6
 		csWait 80
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		setFacing $0,UP
@@ -67,7 +67,7 @@ cs_57D22:       textCursor $C7D
 		csWait 30
 		nextSingleText $0,$80   ; "Leave here!{N}I'll attack you if you don't!{W1}"
 		setCamDest 7,21
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 1
 		endActions
 		setFacing $0,RIGHT
@@ -78,13 +78,13 @@ cs_57D22:       textCursor $C7D
 		csWait 20
 		entityNod $0
 		nextSingleText $80,$7   ; "OK, hurry!{W1}"
-		entityActions $0,$0
+		entityActions $0
 		 moveDown 5
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveDown 5
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveDown 5
 		endActions
 		mapSysEvent $44,$37,$2C,$3

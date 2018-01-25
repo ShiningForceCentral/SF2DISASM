@@ -13,8 +13,8 @@ ms_map42_InitFunction:
 cs_5FE9A:       textCursor $D09
 		nextText $FF,$FF        ; "The Jewel of Light begins{N}to glow.{W2}"
 		nextSingleText $FF,$FF  ; "The light seems to pull{N}{LEADER}.{D3}"
-		setActscript $0,$FF,eas_Init
-		entityActions $0,$FF
+		setActscriptWait $0,eas_Init
+		entityActionsWait $0
 		 moveDown 1
 		 moveDown 1
 		 moveRight 1
@@ -22,14 +22,14 @@ cs_5FE9A:       textCursor $D09
 		 moveRight 1
 		 moveRight 1
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveRight 1
 		 moveRight 1
 		 moveRight 1
 		 moveUp 1
 		 moveUp 1
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 1
 		 moveUp 1
 		endActions
@@ -51,7 +51,7 @@ cs_5FF06:       textCursor $D07
 		entityFlashWhite $0,$3C
 		setBlocks 33,2,1,1,39,2
 		newEntity $80,39,2,DOWN,$B4
-		setActscript $80,$0,eas_AnimSpeedx2
+		setActscript $80,eas_AnimSpeedx2
 		executeSubroutine csub_5FF56
 		hideEntity $80
 		setQuake 2

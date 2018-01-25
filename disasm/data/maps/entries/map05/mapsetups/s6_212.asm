@@ -107,16 +107,16 @@ cs_606EA:       setPos $0,11,10,UP
 		csc_end
 cs_60708:       textCursor $DB9
 		setPos $1C,21,33,DOWN
-		setActscript $1C,$FF,eas_Init
+		setActscriptWait $1C,eas_Init
 		nextSingleText $80,$1C  ; "Sir Astral!  {LEADER}!{W1}"
 		setCamDest 16,28
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $0,21,39,UP
 		setPos $7,22,39,UP
 		setPos $1F,20,39,UP
 		nextSingleText $80,$1C  ; "{LEADER}, wait!{W1}"
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveDown 2
 		endActions
 		setCamDest 16,33
@@ -135,21 +135,21 @@ cs_60708:       textCursor $DB9
 		entityNod $0
 		entityNod $7
 		csWait 20
-		entityActions $0,$0
+		entityActions $0
 		 moveUp 3
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveUp 4
 		 faceLeft 1
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 4
 		 faceRight 1
 		endActions
 		nextSingleText $0,$1F   ; "{NAME;28}, please come{N}with us.  You'll be a great{N}help.{W1}"
 		join $1C
-		setActscript $1C,$FF,eas_Jump
-		setActscript $1C,$FF,eas_Jump
+		setActscriptWait $1C,eas_Jump
+		setActscriptWait $1C,eas_Jump
 		nextSingleText $80,$1C  ; "Oh, thank you!  I know I can{N}take the King of the Devils!{W1}"
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
@@ -157,8 +157,8 @@ cs_60708:       textCursor $DB9
 		csc_end
 cs_607DE:       textCursor $D3C
 		setPos $82,63,63,DOWN
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $0,21,39,UP
 		setPos $7,22,40,UP
 		setPos $1F,20,40,UP
@@ -166,13 +166,13 @@ cs_607DE:       textCursor $D3C
 		fadeInB
 		nextSingleText $0,$1C   ; "I'm guilty!{W1}"
 		csWait 5
-		setActscript $0,$0,eas_461B6
+		setActscript $0,eas_461B6
 		csWait 5
-		setActscript $7,$0,eas_461E4
+		setActscript $7,eas_461E4
 		csWait 5
-		setActscript $1F,$0,eas_461B6
+		setActscript $1F,eas_461B6
 		csWait 80
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 2
 		endActions
 		setFacing $0,UP
@@ -183,27 +183,27 @@ cs_607DE:       textCursor $D3C
 		setFacing $1C,DOWN
 		entityShiver $1C
 		nextSingleText $0,$1C   ; "The guilt is too much to{N}handle.  I must die!{W1}"
-		setActscript $1C,$FF,eas_46172
-		customActscript $1C,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $1C,eas_46172
+		customActscriptWait $1C
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		entityNod $1C
 		csWait 30
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveUp 5
 		 moveRight 3
 		endActions
 		setFacing $1C,DOWN
-		customActscript $1C,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $2           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1C
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $2          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $1C,$FF,eas_46172
+		setActscriptWait $1C,eas_46172
 		playSound SFX_FALLING
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveDown 6
 		endActions
 		setPos $1C,63,63,DOWN
@@ -212,15 +212,15 @@ cs_607DE:       textCursor $D3C
 		csWait 60
 		setQuake 0
 		setCamDest 16,34
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 1
 		 moveUp 1
 		endActions
-		setActscript $7,$FF,eas_Jump
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
+		setActscriptWait $7,eas_Jump
 		setFacing $7,DOWN
 		nextSingleText $0,$7    ; "Gee!{N}{NAME;28} killed himself!{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 2
 		endActions
 		setFacing $0,LEFT
@@ -233,30 +233,30 @@ cs_607DE:       textCursor $D3C
 		entityNod $7
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
-		setActscript $1C,$FF,eas_Init
+		setActscriptWait $1C,eas_Init
 		startEntity $1C
 		csc_end
 cs_6093A:       textCursor $D44
 		setPriority $1B,$0
 		setPriority $80,$FFFF
 		setCamDest 6,2
-		setActscript $1C,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1C,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		setFacing $1C,UP
 		setEntityDest $0,11,7
 		setEntityDest $7,11,7
 		setEntityDest $1F,11,7
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveRight 1
 		 faceUp 1
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveLeft 1
 		 faceUp 1
 		endActions
-		setActscript $80,$FF,eas_Jump
-		setActscript $80,$FF,eas_Jump
+		setActscriptWait $80,eas_Jump
+		setActscriptWait $80,eas_Jump
 		nextText $80,$80        ; "Ah, devils finally found the{N}hidden door.{W1}"
 		nextSingleText $80,$80  ; "I must give the people time{N}to escape!{W1}"
 		nextSingleText $FF,$FF  ; "The priest pulls out a holy{N}symbol.{W1}"
@@ -265,10 +265,10 @@ cs_6093A:       textCursor $D44
 		playSound SFX_LANDSTALKER_ITEM
 		setPos $83,11,4,DOWN
 		csWait 60
-		entityActions $83,$0
+		entityActions $83
 		 moveDown 1
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		entityShiver $80
@@ -283,7 +283,7 @@ cs_6093A:       textCursor $D44
 		setFacing $0,UP
 		nextText $80,$80        ; "What tough devils!{W2}"
 		nextSingleText $80,$80  ; "My symbol doesn't drive{N}them away!{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 1
 		endActions
 		nextSingleText $0,$1F   ; "Excuse me, we're not devils.{W1}"
@@ -296,8 +296,8 @@ cs_6093A:       textCursor $D44
 		csWait 30
 		nextSingleText $0,$1B   ; "Brother?{W1}"
 		setFacing $80,UP
-		setActscript $80,$FF,eas_Jump
-		setActscript $80,$FF,eas_Jump
+		setActscriptWait $80,eas_Jump
+		setActscriptWait $80,eas_Jump
 		nextText $80,$80        ; "{NAME;27}, they found the{N}hidden door!{W2}"
 		nextSingleText $80,$80  ; "I tried to drive them away{N}with this holy symbol, but{N}I failed.{W1}"
 		setPriority $80,$0
@@ -307,7 +307,7 @@ cs_6093A:       textCursor $D44
 		nextSingleText $80,$80  ; "Nobody but devils ever come{N}to such a dangerous place!{N}They must be devils!{W1}"
 		csWait 20
 		nextSingleText $0,$1B   ; "Have you asked them?{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveRight 1
 		 faceUp 1
 		 jumpUp 1
@@ -318,29 +318,29 @@ cs_6093A:       textCursor $D44
 		setFacing $80,DOWN
 		entityShiver $1B
 		nextSingleText $0,$1B   ; "Granseal?{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 1
 		 faceRight 1
 		endActions
 		csWait 20
 		nextSingleText $0,$1B   ; "Really?{W1}"
-		entityActions $1B,$FF
+		entityActionsWait $1B
 		 moveDown 1
 		endActions
 		nextSingleText $0,$1B   ; "Alright!{W1}"
 		csWait 40
 		nextSingleText $0,$1B   ; "This is great news!{W1}"
-		setActscript $1B,$FF,eas_Jump
-		setActscript $1B,$FF,eas_Jump
+		setActscriptWait $1B,eas_Jump
+		setActscriptWait $1B,eas_Jump
 		nextSingleText $0,$1B   ; "Are you Sir Astral?{W1}"
 		entityNod $1F
 		nextSingleText $80,$1F  ; "Yes, but...I'm sorry, have{N}we met?{W1}"
 		nextText $0,$1B         ; "I'm {NAME;27}, a son of{N}Hawel.{W2}"
 		nextSingleText $0,$1B   ; "Do you remember me?{W1}"
-		setActscript $1F,$FF,eas_Jump
-		setActscript $1F,$FF,eas_Jump
+		setActscriptWait $1F,eas_Jump
+		setActscriptWait $1F,eas_Jump
 		nextSingleText $80,$1F  ; "Hawel's son?{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveRight 1
 		 moveUp 1
 		 faceLeft 1
@@ -357,10 +357,10 @@ cs_60B10:       textCursor $D62
 		entityNod $1B
 		nextText $0,$1B         ; "I'll try.{W2}"
 		nextSingleText $0,$1B   ; "What would you like to know?{W1}"
-		setActscript $1F,$FF,eas_Jump
-		setActscript $1F,$FF,eas_Jump
+		setActscriptWait $1F,eas_Jump
+		setActscriptWait $1F,eas_Jump
 		nextSingleText $80,$1F  ; "Oh, this will be a great{N}help!{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		 moveRight 1
 		 faceUp 1
@@ -368,7 +368,7 @@ cs_60B10:       textCursor $D62
 		setFacing $1B,DOWN
 		setFacing $1F,DOWN
 		nextSingleText $0,$80   ; "You can use the room below.{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveDown 1
 		 faceLeft 1
 		endActions
@@ -377,14 +377,14 @@ cs_60B10:       textCursor $D62
 		setFacing $1F,DOWN
 		nextSingleText $80,$1F  ; "I really appreciate this.{W1}"
 		csWait 20
-		entityActions $1B,$0
+		entityActions $1B
 		 moveUp 1
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		endActions
 		setPos $1B,63,63,DOWN
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		endActions
 		setPos $80,63,63,DOWN
@@ -398,7 +398,7 @@ cs_60BA6:       textCursor $D6A
 		nextText $0,$1B         ; "The tower?{W2}"
 		nextSingleText $0,$1B   ; "Then, all these disasters{N}were caused by Zeon?{W1}"
 		csWait 30
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		 moveRight 1
 		 faceUp 1
@@ -407,10 +407,10 @@ cs_60BA6:       textCursor $D6A
 		setFacing $1B,DOWN
 		nextSingleText $0,$80   ; "Let me help you.{W1}"
 		csWait 5
-		setActscript $80,$0,eas_461E4
+		setActscript $80,eas_461E4
 		csWait 120
 		nextSingleText $0,$80   ; "I would like to give you{N}a hand.{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveDown 1
 		 faceLeft 1
 		endActions
@@ -419,14 +419,14 @@ cs_60BA6:       textCursor $D6A
 		setFacing $1F,DOWN
 		nextSingleText $80,$1F  ; "I appreciate your kindness.{W1}"
 		csWait 20
-		entityActions $1B,$0
+		entityActions $1B
 		 moveUp 1
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		endActions
 		setPos $1B,63,63,DOWN
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		endActions
 		setPos $80,63,63,DOWN
@@ -435,10 +435,10 @@ cs_60BA6:       textCursor $D6A
 		followEntity $1C,$1F,$2
 		csc_end
 cs_60C42:       textCursor $D72
-		setActscript $1C,$FF,eas_Init
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1C,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $0,28,54,LEFT
 		setPos $7,28,55,LEFT
 		setPos $1F,27,53,LEFT
@@ -468,11 +468,11 @@ cs_60CA4:       textCursor $D76
 		nextSingleText $0,$1B   ; "Please, give me a moment.{W1}"
 		setFacing $1B,LEFT
 		csWait 60
-		customActscript $1B,$FF
-		ac_setSpeed 5140        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1B
+		 ac_setSpeed 20,20      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1B,$FF
+		entityActionsWait $1B
 		 moveLeft 2
 		 faceLeft 20
 		 faceRight 20
@@ -481,7 +481,7 @@ cs_60CA4:       textCursor $D76
 		endActions
 		setFacing $1B,LEFT
 		csWait 20
-		entityActions $1B,$FF
+		entityActionsWait $1B
 		 moveLeft 2
 		 faceLeft 20
 		 faceRight 20
@@ -492,11 +492,11 @@ cs_60CA4:       textCursor $D76
 		csWait 40
 		entityNod $1B
 		nextSingleText $0,$1B   ; "Was it this one?{W1}"
-		customActscript $1B,$FF
-		ac_setSpeed 8224        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1B
+		 ac_setSpeed 32,32      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1B,$FF
+		entityActionsWait $1B
 		 moveLeft 2
 		 moveUp 2
 		endActions
@@ -507,23 +507,23 @@ cs_60CA4:       textCursor $D76
 		entityShiver $1B
 		csWait 30
 		nextSingleText $0,$1B   ; "No, that's not it.{W1}"
-		customActscript $1B,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1B
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1B,$FF
+		entityActionsWait $1B
 		 moveDown 2
 		 actionC 80
 		endActions
-		setActscript $1B,$FF,eas_Init
-		setActscript $1B,$FF,eas_Jump
-		setActscript $1B,$FF,eas_Jump
+		setActscriptWait $1B,eas_Init
+		setActscriptWait $1B,eas_Jump
+		setActscriptWait $1B,eas_Jump
 		nextSingleText $0,$1B   ; "How about this one?{W1}"
-		customActscript $1B,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1B
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1B,$FF
+		entityActionsWait $1B
 		 moveUp 2
 		endActions
 		csWait 30
@@ -532,14 +532,14 @@ cs_60CA4:       textCursor $D76
 		csWait 40
 		entityShiver $1B
 		csWait 40
-		setActscript $1B,$FF,eas_Jump
-		setActscript $1B,$FF,eas_Jump
+		setActscriptWait $1B,eas_Jump
+		setActscriptWait $1B,eas_Jump
 		nextSingleText $0,$1B   ; "Yeah, I got it!{W1}"
-		customActscript $1F,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1F
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 1
 		 moveLeft 2
 		endActions
@@ -548,27 +548,27 @@ cs_60CA4:       textCursor $D76
 		entityNod $1B
 		nextSingleText $0,$1B   ; "Yes!  But...{W1}"
 		nextSingleText $80,$1F  ; "But what?{W1}"
-		setActscript $1B,$FF,eas_Init
-		entityActions $1B,$FF
+		setActscriptWait $1B,eas_Init
+		entityActionsWait $1B
 		 moveDown 1
 		 faceRight 1
 		endActions
 		nextSingleText $0,$1B   ; "The most important part is{N}missing.  It's been stolen.{W1}"
-		setActscript $1F,$FF,eas_Init
-		setActscript $1F,$FF,eas_JumpRight
+		setActscriptWait $1F,eas_Init
+		setActscriptWait $1F,eas_JumpRight
 		csWait 10
-		customActscript $1F,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1F
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveLeft 2
 		endActions
 		nextText $80,$1F        ; "Who could've taken it?{W2}"
 		setFacing $1F,DOWN
 		nextSingleText $80,$1F  ; "Oh, we've lost the key.{W1}"
 		csWait 40
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 4
 		 moveUp 1
 		endActions
@@ -578,8 +578,8 @@ cs_60CA4:       textCursor $D76
 		nextText $80,$1F        ; "Hmmm....{W2}"
 		entityNod $1F
 		nextSingleText $80,$1F  ; "Yes, {NAME;7} is right.{N}{LEADER} is our leader!{W1}"
-		setActscript $1F,$FF,eas_Init
-		entityActions $1F,$FF
+		setActscriptWait $1F,eas_Init
+		entityActionsWait $1F
 		 moveRight 4
 		 faceDown 1
 		endActions
@@ -587,7 +587,7 @@ cs_60CA4:       textCursor $D76
 		nextText $80,$1F        ; "{LEADER}, we have to{N}find the Holy Sword and{N}the door to the tower.{W2}"
 		nextSingleText $80,$1F  ; "The legends only hint of{N}you, but we believe in you.{W1}"
 		entityNod $0
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		setFacing $1F,UP
@@ -595,7 +595,7 @@ cs_60CA4:       textCursor $D76
 		nextSingleText $0,$80   ; "Believe in the power of{N}your jewel!{W1}"
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		 faceDown 1
 		endActions
@@ -604,7 +604,7 @@ cs_60EB2:       textCursor $D8C
 		entityNod $1F
 		nextSingleText $80,$1F  ; "Yes, that's the truth.{W1}"
 		csWait 40
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveRight 1
 		endActions
 		setFacing $1F,DOWN
@@ -613,7 +613,7 @@ cs_60EB2:       textCursor $D8C
 		setFacing $1C,UP
 		nextSingleText $80,$1F  ; "Now, {LEADER}.{W1}"
 		entityNod $0
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		setFacing $1F,UP
@@ -622,7 +622,7 @@ cs_60EB2:       textCursor $D8C
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
 		followEntity $1C,$1F,$2
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		 faceDown 1
 		endActions

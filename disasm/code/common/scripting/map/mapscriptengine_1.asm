@@ -463,7 +463,7 @@ loc_467C6:
 
 ; =============== S U B R O U T I N E =======================================
 
-csc2D_moveEntity:
+csc2D_entityActionSequence:
 		
 		move.b  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
@@ -485,7 +485,7 @@ loc_467FC:
 		jsr     rjt_EntityMoveCommands(pc,d1.w)
 		bra.s   loc_467FC
 
-	; End of function csc2D_moveEntity
+	; End of function csc2D_entityActionSequence
 
 rjt_EntityMoveCommands:
 		dc.w csc2D_0_moveRight-rjt_EntityMoveCommands
@@ -694,7 +694,7 @@ loc_46914:
 	; End of function csc2D_D_jump
 
 
-; START OF FUNCTION CHUNK FOR csc2D_moveEntity
+; START OF FUNCTION CHUNK FOR csc2D_entityActionSequence
 
 loc_46928:
 		move.w  #$34,(a0)+ 
@@ -710,7 +710,7 @@ loc_46944:
 return_4694E:
 		rts
 
-; END OF FUNCTION CHUNK FOR csc2D_moveEntity
+; END OF FUNCTION CHUNK FOR csc2D_entityActionSequence
 
 
 ; =============== S U B R O U T I N E =======================================

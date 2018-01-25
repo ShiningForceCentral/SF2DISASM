@@ -5,12 +5,12 @@ bbcs_11:        textCursor $9B3
 		setCameraEntity $0
 		loadMapFadeIn 48,8,19
 		loadMapEntities ce_4ACA0
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setCameraEntity $0
 		executeSubroutine sub_458E
 		fadeInB
 		playSound $FD
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 1
 		 moveUp 1
 		endActions
@@ -21,16 +21,16 @@ bbcs_11:        textCursor $9B3
 		csWait 20
 		nextSingleText $0,$80   ; "Yes, it is!{W1}"
 		playSound MUSIC_ENEMY_ATTACK
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		csWait 5
-		setActscript $0,$0,eas_461B6
+		setActscript $0,eas_461B6
 		csWait 5
-		setActscript $7,$0,eas_461E4
+		setActscript $7,eas_461E4
 		csWait 120
 		setFacing $0,UP
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		nextSingleText $0,$7    ; "Wh...Who said that?{W1}"
@@ -38,7 +38,7 @@ bbcs_11:        textCursor $9B3
 		cameraSpeed $20
 		setCameraEntity $80
 		nextSingleText $0,$80   ; "Welcome to my home.{W2}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		nextSingleText $0,$80   ; "Enjoy your visit because{N}you're not leaving!{W1}"

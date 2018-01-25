@@ -28,35 +28,35 @@ return_59E02:
 cs_59E04:       textCursor $6CB
 		setCameraEntity $FFFF
 		reloadMap 21,8
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		stopEntity $0
 		stopEntity $7
 		stopEntity $1F
-		customActscript $0,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $7,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $7
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $1F,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1F
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $82,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $82
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $83,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $83
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $84,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $84
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setPos $0,26,7,DOWN
 		setPos $7,27,6,DOWN
@@ -65,22 +65,22 @@ cs_59E04:       textCursor $6CB
 		setPos $83,25,5,UP
 		setPos $84,27,5,UP
 		fadeInB
-		entityActions $0,$0
+		entityActions $0
 		 moveDown 7
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveDown 7
 		endActions
-		entityActions $1F,$0
+		entityActions $1F
 		 moveDown 7
 		endActions
-		entityActions $82,$0
+		entityActions $82
 		 moveDown 7
 		endActions
-		entityActions $83,$0
+		entityActions $83
 		 moveDown 7
 		endActions
-		entityActions $84,$FF
+		entityActionsWait $84
 		 moveDown 7
 		endActions
 		csWait 20
@@ -101,7 +101,7 @@ cs_59F20:       textCursor $6CC
 		nextSingleText $0,$81   ; "Ungh!{W2}"
 		csWait 50
 		nextSingleText $0,$81   ; "It's too heavy. I can't{N}lift it.  I give up!{W1}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveUp 8
 		endActions
 		hideEntity $81

@@ -37,41 +37,41 @@ word_45284:     dc.w $15                ; mapscript
 		dc.b $FF
 		dc.l eas_45308
 		dc.w $FFFF
-eas_452A4:      ac_0E $0,$0,$1
-		ac_waitDest
+eas_452A4:       ac_0E $0,$0,$1
+		 ac_waitDest
 word_452AE:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FF4E
 		dc.w (eas_Idle-word_452AE) & $FFFF
-eas_452B2:      ac_0E $1,$0,$0
-eas_452BA:      ac_wait 6
-		ac_set1Db3 $FFFF
-		ac_soundCommand $59
-		ac_setSize 22
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 20
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 18
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 16
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 14
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 12
-		ac_updateSprite
-		ac_waitDest
-		ac_clonePos $1
+eas_452B2:       ac_0E $1,$0,$0
+eas_452BA:       ac_wait 6
+		 ac_set1Db3 $FFFF
+		 ac_soundCommand $59
+		 ac_setSize 22
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 20
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 18
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 16
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 14
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 12
+		 ac_updateSprite
+		 ac_waitDest
+		 ac_clonePos $1
 word_45304:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FEF8
 		dc.w (eas_Idle-word_45304) & $FFFF
-eas_45308:      ac_setSprite 62
-		ac_set1Db3 $0
-		ac_updateSprite
+eas_45308:       ac_setSprite 62
+		 ac_set1Db3 $0
+		 ac_updateSprite
 word_45312:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FEEA
 		dc.w (eas_Idle-word_45312) & $FFFF
-byte_45316:     ac_0E $0,$0,$0
+byte_45316:      ac_0E $0,$0,$0
 word_4531E:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FF9C
 		dc.w (eas_452BA-word_4531E) & $FFFF
 
@@ -102,35 +102,35 @@ word_45348:     dc.w $15
 		dc.b $FF
 		dc.l eas_4536C
 		dc.w $FFFF
-eas_45360:      ac_clonePos $0
+eas_45360:       ac_clonePos $0
 word_45364:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FE98
 		dc.w (eas_Idle-word_45364) & $FFFF
-byte_45368:     ac_clonePos $1
-eas_4536C:      ac_09 $0,$1
-		ac_set1Db3 $FFFF
-		ac_soundCommand $59
-		ac_setSize 12
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 14
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 16
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 18
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 20
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 22
-		ac_updateSprite
-		ac_wait 1
-		ac_set1Db3 $0
-		ac_setSize 16
-		ac_updateSprite
-		ac_waitDest
+byte_45368:      ac_clonePos $1
+eas_4536C:       ac_09 $0,$1
+		 ac_set1Db3 $FFFF
+		 ac_soundCommand $59
+		 ac_setSize 12
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 14
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 16
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 18
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 20
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 22
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_set1Db3 $0
+		 ac_setSize 16
+		 ac_updateSprite
+		 ac_waitDest
 word_453C2:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FE3A
 		dc.w (eas_Idle-word_453C2) & $FFFF
 
@@ -175,19 +175,19 @@ sub_4540A:
 
 	; End of function sub_4540A
 
-eas_4540C:      ac_0E $1F,$0,$0
-byte_45414:     ac_wait 6
-		ac_soundCommand $59
-		ac_waitDest
-		ac_clonePos $1F
+eas_4540C:       ac_0E $1F,$0,$0
+byte_45414:      ac_wait 6
+		 ac_soundCommand $59
+		 ac_waitDest
+		 ac_clonePos $1F
 word_45422:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FDDA
 		dc.w (eas_Idle-word_45422) & $FFFF
-eas_45426:      ac_setSprite 61
-		ac_set1Db3 $0
-		ac_updateSprite
+eas_45426:       ac_setSprite 61
+		 ac_set1Db3 $0
+		 ac_updateSprite
 word_45430:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FDCC
 		dc.w (eas_Idle-word_45430) & $FFFF
-byte_45434:     ac_0E $0,$0,$0
+byte_45434:      ac_0E $0,$0,$0
 word_4543C:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFD8
 		dc.w (byte_45414-word_4543C) & $FFFF
 
@@ -221,10 +221,10 @@ word_45470:     dc.w $15
 		dc.b $FF
 		dc.l eas_4548C
 		dc.w $FFFF
-byte_45488:     ac_clonePos $1F
-eas_4548C:      ac_09 $0,$1
-		ac_soundCommand $59
-		ac_waitDest
+byte_45488:      ac_clonePos $1F
+eas_4548C:       ac_09 $0,$1
+		 ac_soundCommand $59
+		 ac_waitDest
 word_45498:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FD64
 		dc.w (eas_Idle-word_45498) & $FFFF
 word_4549C:     dc.w $180
@@ -315,29 +315,29 @@ ms_BowieShrinkIn:
 		dc.b $40
 		dc.b 3
 		dc.w $FFFF
-eas_ShrinkIn:   ac_0E $1,$0,$0
-		ac_wait 6
-		ac_set1Db3 $FFFF
-		ac_soundCommand $59
-		ac_setSize 22
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 20
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 18
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 16
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 14
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 12
-		ac_updateSprite
-		ac_waitDest
-		ac_clonePos $0
+eas_ShrinkIn:    ac_0E $1,$0,$0
+		 ac_wait 6
+		 ac_set1Db3 $FFFF
+		 ac_soundCommand $59
+		 ac_setSize 22
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 20
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 18
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 16
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 14
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 12
+		 ac_updateSprite
+		 ac_waitDest
+		 ac_clonePos $0
 word_455A8:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FC54
 		dc.w (eas_Idle-word_455A8) & $FFFF
 
@@ -363,30 +363,30 @@ ms_BowieGrowOut:dc.w $15
 		dc.b $FF
 		dc.l eas_GrowOut
 		dc.w $FFFF
-eas_GrowOut:    ac_clonePos $1
-		ac_set1Db3 $FFFF
-		ac_soundCommand $59
-		ac_setSize 12
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 14
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 16
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 18
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 20
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 22
-		ac_updateSprite
-		ac_wait 1
-		ac_set1Db3 $0
-		ac_setSize 16
-		ac_updateSprite
-		ac_waitDest
+eas_GrowOut:     ac_clonePos $1
+		 ac_set1Db3 $FFFF
+		 ac_soundCommand $59
+		 ac_setSize 12
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 14
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 16
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 18
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 20
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 22
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_set1Db3 $0
+		 ac_setSize 16
+		 ac_updateSprite
+		 ac_waitDest
 word_45630:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FBCC
 		dc.w (eas_Idle-word_45630) & $FFFF

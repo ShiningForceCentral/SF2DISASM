@@ -22,11 +22,11 @@ return_53F28:
 
 	; End of function ms_map21_InitFunction
 
-cs_53F2A:       customActscript $80,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+cs_53F2A:       customActscriptWait $80
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setPos $80,6,16,DOWN
 		csc_end

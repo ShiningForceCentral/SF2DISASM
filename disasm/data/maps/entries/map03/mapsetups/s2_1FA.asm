@@ -198,9 +198,9 @@ return_512B8:
 	; End of function sub_51256
 
 cs_512BA:       setFacing $6,DOWN
-		setActscript $6,$FF,eas_Jump
-		setActscript $6,$FF,eas_Jump
-		setActscript $6,$FF,eas_Jump
+		setActscriptWait $6,eas_Jump
+		setActscriptWait $6,eas_Jump
+		setActscriptWait $6,eas_Jump
 		join $6
 		addNewFollower $6
 		csc_end

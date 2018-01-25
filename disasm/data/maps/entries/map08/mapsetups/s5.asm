@@ -40,16 +40,16 @@ return_56312:
 	; End of function sub_562F2
 
 cs_56314:       hideText
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setQuake 2
 		csWait 60
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$FF,eas_Jump
-		entityActions $0,$0
+		setActscript $0,eas_Jump
+		setActscriptWait $7,eas_Jump
+		entityActions $0
 		 moveDown 2
 		endActions
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 2
 		endActions
 		setFacing $0,UP

@@ -4,31 +4,31 @@
 abcs_battle40:  textCursor $BF9
 		loadMapFadeIn 54,10,4
 		loadMapEntities ce_4ECD6
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,13,8,RIGHT
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,15,6,DOWN
-		setActscript $1C,$FF,eas_Init
+		setActscriptWait $1C,eas_Init
 		setPos $1C,17,8,LEFT
 		jumpIfFlagClear $4C,cs_4EAEE; Zynk is a follower
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $1A,eas_Init
 		setPos $1A,63,62,DOWN
 cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		setBlocks 0,52,10,7,13,10
-		customActscript $83,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $83
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		stopEntity $83
-		setActscript $80,$FF,eas_46172
-		setActscript $81,$FF,eas_46172
-		setActscript $82,$FF,eas_46172
-		setActscript $80,$0,eas_AnimSpeedx2
-		setActscript $81,$0,eas_AnimSpeedx2
-		setActscript $82,$0,eas_AnimSpeedx2
+		setActscriptWait $80,eas_46172
+		setActscriptWait $81,eas_46172
+		setActscriptWait $82,eas_46172
+		setActscript $80,eas_AnimSpeedx2
+		setActscript $81,eas_AnimSpeedx2
+		setActscript $82,eas_AnimSpeedx2
 		playSound MUSIC_SAD_THEME_1
 		fadeInB
 		csWait 60
@@ -37,7 +37,7 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		nextSingleText $C0,$0   ; "Oh, really?{W1}"
 		nextText $0,$83         ; "Your friends are very good.{N}I knew that when I was{N}traveling with you.{W2}"
 		nextSingleText $0,$83   ; "Yes, it was interesting...{N}I miss that time....{W1}"
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
 		nextSingleText $C0,$7   ; "Odd Eye...no, Oddler!{N}Did you...?{W1}"
 		nextSingleText $0,$83   ; "No, {NAME;7}.  I did my{N}best.  You were just better{N}than me.{W1}"
 		nextSingleText $C0,$0   ; "We had to be.{W1}"
@@ -47,56 +47,56 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		nextSingleText $C0,$7   ; "Oddler, please don't die!{W1}"
 		nextText $0,$83         ; "Thank you, {NAME;7}.{N}I learned a lot from you.{W2}"
 		nextSingleText $0,$83   ; "Oh, the pain!{N}Let me say good-bye.{W1}"
-		entityActions $0,$0
+		entityActions $0
 		 moveUp 1
 		endActions
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveRight 1
 		endActions
 		nextSingleText $0,$83   ; "If possible, I want to{N}relive my life...not as{N}a devil...next time....{W1}"
 		entityFlashWhite $83,$1E
 		setPos $80,15,8,DOWN
-		entityActions $80,$0
+		entityActions $80
 		 moveRight 2
 		endActions
 		csWait 8
 		setPos $81,15,8,DOWN
-		entityActions $81,$0
+		entityActions $81
 		 moveDownRight 2
 		endActions
 		csWait 8
 		setPos $82,15,8,DOWN
-		entityActions $82,$0
+		entityActions $82
 		 moveDown 2
 		endActions
 		csWait 8
 		setPos $80,15,8,DOWN
-		entityActions $80,$0
+		entityActions $80
 		 moveDownRight 2
 		endActions
 		csWait 8
 		setPos $81,15,8,DOWN
-		entityActions $81,$0
+		entityActions $81
 		 moveRight 2
 		endActions
 		csWait 8
 		setPos $82,15,8,DOWN
-		entityActions $82,$0
+		entityActions $82
 		 moveDownRight 2
 		endActions
 		csWait 8
 		setPos $80,15,8,DOWN
-		entityActions $80,$0
+		entityActions $80
 		 moveDown 2
 		endActions
 		csWait 8
 		setPos $81,15,8,DOWN
-		entityActions $81,$0
+		entityActions $81
 		 moveDownRight 2
 		endActions
 		csWait 8
 		setPos $82,15,8,DOWN
-		entityActions $82,$0
+		entityActions $82
 		 moveRight 2
 		endActions
 		csWait 8
@@ -119,15 +119,15 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		nextSingleText $0,$1F   ; "Don't cry for him now.{N}This is Zeon's doing.{W1}"
 		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "We shall go onward and{N}remember Oddler in our{N}hearts.{W1}"
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveLeft 1
 		 moveDown 1
 		endActions
 		setFacing $1C,LEFT
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveDown 2
 		endActions
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 1
 		endActions
 		setFacing $7,RIGHT

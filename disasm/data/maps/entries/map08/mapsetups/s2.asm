@@ -190,8 +190,8 @@ return_56144:
 
 	; End of function sub_56138
 
-cs_56146:       setActscript $8,$FF,eas_Init
-		setActscript $8,$FF,eas_461AA
+cs_56146:       setActscriptWait $8,eas_Init
+		setActscriptWait $8,eas_461AA
 		faceEntity $8,$0
 		textCursor $543
 		nextSingleText $0,$8    ; "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"
@@ -201,8 +201,8 @@ cs_56146:       setActscript $8,$FF,eas_Init
 		csc_end
 cs_56172:       textCursor $534
 		nextSingleText $0,$87   ; "To Mt. Volcano?{W1}"
-		setActscript $87,$0,eas_Jump
-		setActscript $86,$FF,eas_Jump
+		setActscript $87,eas_Jump
+		setActscriptWait $86,eas_Jump
 		setFacing $86,RIGHT
 		setFacing $87,LEFT
 		csWait 57

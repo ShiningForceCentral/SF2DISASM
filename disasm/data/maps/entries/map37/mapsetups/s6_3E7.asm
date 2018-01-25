@@ -40,8 +40,8 @@ cs_5FABC:       textCursor $D1F
 		csWait 20
 		entityShiver $7
 		nextSingleText $80,$7   ; "Oh, there he is!{W1}"
-		setActscript $7,$FF,eas_Init
-		entityActions $7,$FF
+		setActscriptWait $7,eas_Init
+		entityActionsWait $7
 		 moveLeft 3
 		 faceUp 1
 		endActions
@@ -50,7 +50,7 @@ cs_5FABC:       textCursor $D1F
 		nextSingleText $80,$7   ; "{LEADER}, come on!{W1}"
 		csc_end
 cs_5FB30:       textCursor $D25
-		setActscript $80,$FF,eas_Init
+		setActscriptWait $80,eas_Init
 		setFacing $80,DOWN
 		entityShakeHead $80
 		nextText $0,$80         ; "Phew!  We've made it to{N}Grans Island!{W1}"
@@ -58,7 +58,7 @@ cs_5FB30:       textCursor $D25
 		nextText $0,$80         ; "Evacuate the ship!{W1}"
 		nextText $0,$80         ; "What are you doing?{N}Get off the ship!{W2}"
 		nextSingleText $0,$80   ; "I'll go first.{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveRight 4
 		 moveUpRight 1
 		 moveRight 3
@@ -68,12 +68,12 @@ cs_5FB30:       textCursor $D25
 cs_5FB6A:       textCursor $D31
 		playSound SFX_BIG_DOOR_RUMBLE
 		setQuake 1
-		setActscript $7,$FF,eas_Init
-		setActscript $80,$FF,eas_Init
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $80,eas_Init
+		setActscriptWait $1A,eas_Init
 		setCamDest 11,6
-		setActscript $7,$FF,eas_Jump
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
+		setActscriptWait $7,eas_Jump
 		nextSingleText $80,$7   ; "Wow, the ship is vibrating!{W1}"
 		setFacing $80,UP
 		nextSingleText $0,$80   ; "What's going on?{W1}"
@@ -83,7 +83,7 @@ cs_5FB6A:       textCursor $D31
 		setEntityDest $1A,16,10
 		setFacing $1A,DOWN
 		nextSingleText $0,$1A   ; "Don't worry. {W1}"
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
 		nextSingleText $80,$7   ; "But...but...{N}Woooooow!{W1}"
 		setCamDest 4,6
 		setFacing $0,UP
@@ -95,13 +95,13 @@ cs_5FB6A:       textCursor $D31
 		playSound MUSIC_MITULA_SHRINE
 		executeSubroutine csub_5FD3A
 		setQuake 0
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 1
 		 moveLeft 1
 		 moveDownLeft 1
 		 moveLeft 6
 		endActions
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		 moveLeft 2
 		 moveDownLeft 1
@@ -118,7 +118,7 @@ cs_5FB6A:       textCursor $D31
 		setCameraEntity $FFFF
 		mapLoad 75,40,12
 		loadMapEntities ce_5FDD4
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setBlocks 60,59,4,5,44,15
 		fadeInB
 		executeSubroutine sub_5FD7C
@@ -129,9 +129,9 @@ cs_5FB6A:       textCursor $D31
 		mapLoad 37,4,6
 		loadEntitiesFromMapSetup 9,11,RIGHT
 		csWait 1
-		setActscript $7,$FF,eas_Init
-		setActscript $80,$FF,eas_Init
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $80,eas_Init
+		setActscriptWait $1A,eas_Init
 		setPos $80,9,12,UP
 		setPos $7,10,12,UP
 		setPos $1A,10,11,LEFT
@@ -151,13 +151,13 @@ cs_5FB6A:       textCursor $D31
 		fadeOutB
 		mapLoad 75,40,12
 		loadMapEntities ce_5FDD4
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setBlocks 60,59,4,5,44,15
-		customActscript $80,$FF
-		ac_setSpeed 4112        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 16,16      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $80,$0
+		entityActions $80
 		 moveLeft 30
 		endActions
 		executeSubroutine sub_5FD5E

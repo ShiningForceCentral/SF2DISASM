@@ -4,29 +4,29 @@
 abcs_battle32:  textCursor $B25
 		loadMapFadeIn 74,5,20
 		loadMapEntities ce_4CEEC
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,11,25,UP
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,9,25,UP
-		setActscript $16,$FF,eas_Init
+		setActscriptWait $16,eas_Init
 		setPos $16,11,26,UP
-		setActscript $1E,$FF,eas_Init
+		setActscriptWait $1E,eas_Init
 		setPos $1E,10,26,UP
-		setActscript $17,$FF,eas_Init
+		setActscriptWait $17,eas_Init
 		setPos $17,10,22,DOWN
 		fadeInB
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		nextSingleText $0,$7    ; "I can't believe it!{N}You might have been killed{N}by the devils.{W1}"
 		nextSingleText $0,$1F   ; "Indeed!  Why did you{N}change your mind?{W1}"
-		entityActions $17,$FF
+		entityActionsWait $17
 		 moveDown 1
 		endActions
 		nextText $C0,$17        ; "I'm {NAME;23}, from Galam.{N}I was waiting for the chance{N}to escape from them.{W2}"
 		nextSingleText $C0,$17  ; "I can't stand their wicked{N}ways!{W1}"
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		setFacing $7,LEFT
@@ -36,12 +36,12 @@ abcs_battle32:  textCursor $B25
 		setFacing $17,DOWN
 		nextSingleText $C0,$17  ; "You need a professional{N}soldier like me.{W1}"
 		nextSingleText $0,$1F   ; "Oh, we welcome you.{W1}"
-		setActscript $7,$FF,eas_46172
-		entityActions $7,$FF
+		setActscriptWait $7,eas_46172
+		entityActionsWait $7
 		 moveRight 1
 		endActions
 		nextSingleText $0,$7    ; "But, he was on the other{N}side just an minute ago.{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 1
 		endActions
 		setFacing $1F,RIGHT
@@ -51,12 +51,12 @@ abcs_battle32:  textCursor $B25
 		entityNod $0
 		join $17
 		joinForceAI $17,$0      ; 0054 JOIN FORCE WITH AI
-		entityActions $17,$FF
+		entityActionsWait $17
 		 moveDown 1
 		endActions
 		nextSingleText $C0,$17  ; "Oh, thank you!{W2}"
-		setActscript $17,$FF,eas_Jump
-		setActscript $17,$FF,eas_Jump
+		setActscriptWait $17,eas_Jump
+		setActscriptWait $17,eas_Jump
 		nextSingleText $C0,$17  ; "I'll try to do my best!{W1}"
 		executeSubroutine csub_4CEE4
 		followEntity $1E,$0,$2

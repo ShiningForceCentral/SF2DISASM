@@ -4,10 +4,10 @@
 bbcs_21:        textCursor $A10
 		loadMapFadeIn 67,5,18
 		loadMapEntities ce_4B84C
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,28,24,LEFT
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,28,22,LEFT
 		setPos $1E,28,23,LEFT
 		fadeInB
@@ -20,13 +20,13 @@ bbcs_21:        textCursor $A10
 		csWait 30
 		setCamDest 23,18
 		nextSingleText $0,$80   ; "Go away!{W1}"
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 2
 		endActions
 		nextText $0,$7          ; "But we have to see him.{W2}"
 		nextSingleText $0,$7    ; "Please let us pass!{W1}"
 		setCamDest 5,18
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveRight 1
 		endActions
 		nextSingleText $0,$80   ; "No!  Leave now!{W1}"
@@ -38,9 +38,9 @@ bbcs_21:        textCursor $A10
 		setPos $85,10,22,RIGHT
 		csWait 20
 		nextSingleText $0,$80   ; "Never mind.  Get 'em boys!{W1}"
-		setActscript $83,$0,eas_Jump
-		setActscript $84,$0,eas_Jump
-		setActscript $85,$FF,eas_Jump
+		setActscript $83,eas_Jump
+		setActscript $84,eas_Jump
+		setActscriptWait $85,eas_Jump
 		csc_end
 ce_4B84C:       mainEntity 27,23,LEFT
 		entity 28,24,LEFT,7,eas_Init

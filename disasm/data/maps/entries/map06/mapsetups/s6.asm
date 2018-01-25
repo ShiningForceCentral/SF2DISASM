@@ -39,70 +39,70 @@ cs_54E86:       textCursor $42A
 		nextText $0,$8B         ; "People are surrounding the{N}bird.  Should we talk to it?{W2}"
 		nextText $0,$8B         ; "It would be a good{N}opportunity.{W2}"
 		nextSingleText $0,$8B   ; "I'll go see the bird!{N}You tell the King about it!{W1}"
-		entityActions $8B,$FF
+		entityActionsWait $8B
 		 moveDown 3
 		 moveRight 4
 		 moveDown 8
 		endActions
 		csWait 20
-		setActscript $8B,$FF,eas_Jump
+		setActscriptWait $8B,eas_Jump
 		csWait 20
 		setFacing $8B,RIGHT
 		csWait 20
-		setActscript $8B,$FF,eas_Jump
+		setActscriptWait $8B,eas_Jump
 		setFacing $8B,DOWN
 		csWait 30
 		csWait 5
-		setActscript $8B,$0,eas_461B6
+		setActscript $8B,eas_461B6
 		csWait 60
-		entityActions $8B,$FF
+		entityActionsWait $8B
 		 moveLeft 1
 		 moveDown 2
 		endActions
 		setFacing $8B,RIGHT
 		setPos $0,10,9,DOWN
 		setCameraEntity $8A
-		entityActions $8A,$FF
+		entityActionsWait $8A
 		 moveUp 1
 		endActions
 		nextText $0,$8A         ; "Oh, {LEADER}.{N}Good timing.{W2}"
 		nextText $0,$8A         ; "There's a strange animal in{N}town.{W2}"
 		nextSingleText $0,$8A   ; "It's very exciting!{W1}"
 		setCameraEntity $0
-		entityActions $8A,$FF
+		entityActionsWait $8A
 		 moveRight 1
 		 moveUp 7
 		endActions
 		hideEntity $8A
 		csc_end
 cs_54F26:       textCursor $432
-		customActscript $7,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $7
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $88,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $88
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $89,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $89
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $8C,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8C
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $7,$FF,eas_46172
+		setActscriptWait $7,eas_46172
 		setCameraEntity $88
 		setFacing $88,LEFT
 		nextSingleText $0,$88   ; "Oooo...it's big!{N}I want to touch him!{W1}"
 		setFacing $88,RIGHT
 		csWait 30
-		entityActions $88,$0
+		entityActions $88
 		 moveRight 1
 		endActions
 		csWait 8
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveRight 1
 		endActions
 		csWait 30
@@ -110,16 +110,16 @@ cs_54F26:       textCursor $432
 		nextSingleText $0,$88   ; "Ooops!{W1}"
 		setCameraEntity $89
 		nextSingleText $0,$89   ; "Ha, ha!  You missed.{N}Let me try.{W1}"
-		setActscript $7,$FF,eas_Init
-		customActscript $7,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $7,eas_Init
+		customActscriptWait $7
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $89,$0
+		entityActions $89
 		 moveLeft 1
 		endActions
 		csWait 8
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 1
 		endActions
 		setFacing $89,DOWN
@@ -127,11 +127,11 @@ cs_54F26:       textCursor $432
 		nextSingleText $0,$89   ; "Hey, he's over there!{W1}"
 		setCameraEntity $8C
 		nextSingleText $0,$8C   ; "OK, my turn!{W1}"
-		entityActions $8C,$0
+		entityActions $8C
 		 moveUp 1
 		endActions
 		csWait 8
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 1
 		 moveDownLeft 1
 		endActions
@@ -144,9 +144,9 @@ cs_54F26:       textCursor $432
 		setFacing $7,RIGHT
 		csWait 30
 		nextSingleText $0,$7    ; "Stop!  Stop this!{W1}"
-		setActscript $88,$0,eas_Jump
-		setActscript $89,$0,eas_Jump
-		setActscript $8C,$FF,eas_Jump
+		setActscript $88,eas_Jump
+		setActscript $89,eas_Jump
+		setActscriptWait $8C,eas_Jump
 		setFacing $88,DOWN
 		setFacing $89,LEFT
 		setFacing $8C,LEFT
@@ -154,13 +154,13 @@ cs_54F26:       textCursor $432
 		nextSingleText $0,$8C   ; "Amazing!  He speaks!{W1}"
 		nextText $0,$7          ; "Of course I do.{W2}"
 		nextSingleText $0,$7    ; "Is this how you greet{N}strangers?{W1}"
-		entityActions $89,$FF
+		entityActionsWait $89
 		 moveDown 1
 		 moveLeft 1
 		endActions
 		nextSingleText $0,$88   ; "Shut up, bird!{W1}"
 		csWait 5
-		setActscript $7,$0,eas_461B6
+		setActscript $7,eas_461B6
 		nextText $0,$7          ; "How barbaric!{W2}"
 		nextSingleText $0,$7    ; "I didn't know humans were{N}so impolite.{W1}"
 		setFacing $88,RIGHT
@@ -172,18 +172,18 @@ cs_54F26:       textCursor $432
 		setFacing $89,LEFT
 		setFacing $8C,LEFT
 		nextSingleText $FF,$FF  ; "Those boys are about to{N}hit the bird.{W1}"
-		entityActions $88,$0
+		entityActions $88
 		 moveDown 1
 		endActions
-		entityActions $89,$0
+		entityActions $89
 		 moveLeft 1
 		endActions
-		entityActions $8C,$0
+		entityActions $8C
 		 moveLeft 1
 		endActions
 		csWait 5
-		setActscript $7,$FF,eas_Init
-		setActscript $7,$FF,eas_JumpLeft
+		setActscriptWait $7,eas_Init
+		setActscriptWait $7,eas_JumpLeft
 		nextSingleText $0,$90   ; "Stop!{W1}"
 		setQuake 3
 		csWait 40
@@ -207,27 +207,27 @@ cs_54F26:       textCursor $432
 		setPos $92,16,16,DOWN
 		setCameraEntity $90
 		csWait 60
-		entityActions $90,$0
+		entityActions $90
 		 moveDown 3
 		endActions
-		entityActions $91,$0
+		entityActions $91
 		 moveDown 3
 		endActions
-		entityActions $92,$FF
+		entityActionsWait $92
 		 moveDown 3
 		 moveRight 1
 		endActions
 		setFacing $92,DOWN
 		nextSingleText $0,$90   ; "What do you think you're{N}doing?{W1}"
-		entityActions $88,$0
+		entityActions $88
 		 moveUp 2
 		 moveRight 2
 		endActions
-		entityActions $89,$0
+		entityActions $89
 		 moveUp 2
 		 moveRight 2
 		endActions
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 moveUp 2
 		 moveRight 2
 		endActions
@@ -235,10 +235,10 @@ cs_54F26:       textCursor $432
 		setFacing $89,UP
 		setFacing $8C,UP
 		setCamDest 12,21
-		entityActions $90,$FF
+		entityActionsWait $90
 		 moveDown 2
 		endActions
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveDown 1
 		 moveRight 1
 		endActions
@@ -255,7 +255,7 @@ cs_54F26:       textCursor $432
 		setFacing $87,RIGHT
 		setFacing $8B,RIGHT
 		setFacing $8D,RIGHT
-		entityActions $90,$FF
+		entityActionsWait $90
 		 moveDown 4
 		endActions
 		nextText $0,$90         ; "I'm sorry.  I must apologize{N}for their actions.{W2}"
@@ -267,29 +267,29 @@ cs_54F26:       textCursor $432
 		nextSingleText $0,$90   ; "Let me introduce you to{N}King Granseal.{N}Follow me, please.{W1}"
 		csWait 40
 		setCameraEntity $7
-		entityActions $90,$0
+		entityActions $90
 		 moveUp 8
 		endActions
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 8
 		endActions
 		setFacing $91,RIGHT
 		setFacing $92,LEFT
 		csWait 30
 		setCameraEntity $FFFF
-		entityActions $90,$0
+		entityActions $90
 		 moveLeft 1
 		 moveUp 5
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveLeft 1
 		 moveUp 5
 		endActions
-		entityActions $91,$0
+		entityActions $91
 		 moveLeft 1
 		 moveUp 5
 		endActions
-		entityActions $92,$FF
+		entityActionsWait $92
 		 moveLeft 1
 		 moveUp 2
 		 moveLeft 1
@@ -299,18 +299,18 @@ cs_54F26:       textCursor $432
 		hideEntity $91
 		hideEntity $92
 		hideEntity $7
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveLeft 1
 		endActions
 		setFacing $82,DOWN
 		csc_end
 cs_55242:       textCursor $463
 		newEntity $8E,11,0,DOWN,$CE
-		customActscript $8E,$FF
-		ac_setSpeed 10280       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8E
+		 ac_setSpeed 40,40      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $8E,$FF
+		entityActionsWait $8E
 		 moveDown 7
 		endActions
 		setFacing $0,UP
@@ -318,19 +318,19 @@ cs_55242:       textCursor $463
 		nextText $0,$8E         ; "Welcome back, {LEADER}!{N}I heard your journey was{N}hard.{W2}"
 		nextText $0,$8E         ; "Sir Astral was right.{N}He said, you were coming{N}back soon.{W2}"
 		nextSingleText $0,$8E   ; "I'll go to the castle and tell{N}everyone!{W1}"
-		entityActions $8E,$FF
+		entityActionsWait $8E
 		 moveUp 7
 		endActions
 		hideEntity $8E
 		csc_end
 cs_55288:       textCursor $466
 		newEntity $12,16,22,DOWN,$12
-		setActscript $1F,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
+		setActscriptWait $7,eas_Init
 		nextSingleText $0,$12   ; "I finally found you.{N}You're {LEADER}, right?{W1}"
-		setActscript $0,$0,eas_Jump
-		setActscript $1F,$0,eas_Jump
-		setActscript $7,$FF,eas_Jump
+		setActscript $0,eas_Jump
+		setActscript $1F,eas_Jump
+		setActscriptWait $7,eas_Jump
 		setFacing $8B,UP
 		setCamDest 14,17
 		setEntityDest $0,19,28
@@ -339,7 +339,7 @@ cs_55288:       textCursor $466
 		setFacing $0,UP
 		setFacing $1F,UP
 		setFacing $7,UP
-		entityActions $12,$FF
+		entityActionsWait $12
 		 moveDown 2
 		 moveRight 3
 		 moveDown 1
@@ -355,13 +355,13 @@ cs_55288:       textCursor $466
 		nextSingleText $0,$12   ; "Please take me with you.{N}Please!{W1}"
 		setFacing $7,DOWN
 		csWait 50
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveRight 1
 		 moveDown 1
 		endActions
 		setFacing $7,UP
 		nextSingleText $C0,$1F  ; "This is not a sightseeing{N}trip, if you know what I{N}mean?{W1}"
-		entityActions $12,$FF
+		entityActionsWait $12
 		 moveDown 1
 		endActions
 		nextSingleText $0,$12   ; "Yes, I know.{N}I still want to go!{W1}"

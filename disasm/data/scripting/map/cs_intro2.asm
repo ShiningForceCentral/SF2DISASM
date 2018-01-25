@@ -4,7 +4,7 @@
 IntroCutscene2: textCursor $106A
 		mapLoad 65,7,2
 		loadMapEntities ce_48510
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		cloneEntity $84,$83
 		resetMap
 		fadeInB
@@ -33,14 +33,14 @@ IntroCutscene2: textCursor $106A
 		csWait 30
 		nextSingleText $0,$82   ; "Excuse me, your majesty.{D2}"
 		setFacing $81,DOWN
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveUp 3
 		endActions
 		setCamDest 7,4
 		nextSingleText $0,$81   ; "Is it time to go to the{N}Ancient Tower?{D2}"
 		entityNod $82
 		nextSingleText $0,$82   ; "Yes, sire.{D2}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveDown 1
 		 moveRight 2
 		 faceDown 10
@@ -49,7 +49,7 @@ IntroCutscene2: textCursor $106A
 		entityNod $82
 		csWait 30
 		setCameraEntity $82
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveDown 3
 		 moveLeft 5
 		 moveUpLeft 3
@@ -69,11 +69,11 @@ IntroCutscene2: textCursor $106A
 		csWait 40
 		setFacing $81,LEFT
 		csWait 40
-		customActscript $81,$FF
-		ac_setSpeed 2570        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setSpeed 10,10      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveLeft 2
 		 faceDown 1
 		endActions
@@ -88,10 +88,10 @@ IntroCutscene2: textCursor $106A
 		animEntityFadeInOut $83,$6
 		tintMap
 		csWait 5
-		setActscript $81,$0,eas_461B6
+		setActscript $81,eas_461B6
 		csWait 30
 		csWait 5
-		setActscript $80,$0,eas_461B6
+		setActscript $80,eas_461B6
 		playSound SFX_DEMON_BREATH
 		csWait 30
 		executeSubroutine ApplyStormEffect
@@ -101,10 +101,10 @@ IntroCutscene2: textCursor $106A
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
 		csWait 5
-		setActscript $81,$0,eas_461B6
+		setActscript $81,eas_461B6
 		csWait 30
 		csWait 5
-		setActscript $80,$0,eas_461B6
+		setActscript $80,eas_461B6
 		csWait 70
 		fadeOutToBlackHalf
 		csWait 30

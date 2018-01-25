@@ -49,15 +49,15 @@ cs_5DD9C:       setPos $80,14,26,DOWN
 cs_5DDC2:       playSound MUSIC_TOWN
 		fadeInB
 		setCameraEntity $80
-		setActscript $80,$FF,eas_Jump
+		setActscriptWait $80,eas_Jump
 		nextSingleText $0,$80   ; "Galam soldiers!  Run!{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 2
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 2
 		endActions
 		setFacing $0,LEFT
@@ -66,10 +66,10 @@ cs_5DDC2:       playSound MUSIC_TOWN
 		nextSingleText $0,$7    ; "No, wait!  We're not Galam{N}soldiers!{W1}"
 		setFacing $80,RIGHT
 		nextSingleText $0,$80   ; "No...?{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 2
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveRight 2
 		endActions
 		nextSingleText $0,$80   ; "Oops.  My mistake.{W2}"
@@ -96,54 +96,54 @@ cs_5DE2E:       textCursor $86A
 		playSound $FB
 		csc_end
 cs_5DE76:       textCursor $879
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		setCameraEntity $1A
 		setEntityDest $0,12,9
 		setEntityDest $7,12,8
 		setEntityDest $7,13,8
 		setEntityDest $1F,12,8
 		setEntityDest $1F,14,8
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $1A,eas_Init
 		setEntityDest $1A,11,8
 		setFacing $0,LEFT
 		setFacing $7,LEFT
 		setFacing $1F,LEFT
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveLeft 2
 		endActions
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 2
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveLeft 1
 		endActions
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveDown 1
 		endActions
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveRight 1
 		endActions
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveUp 1
 		endActions
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveLeft 2
 		endActions
-		setActscript $1A,$FF,eas_Jump
-		setActscript $1A,$0,eas_Jump
+		setActscriptWait $1A,eas_Jump
+		setActscript $1A,eas_Jump
 		nextSingleText $0,$7    ; "What's wrong with {NAME;26}?{W1}"
 		nextSingleText $0,$1F   ; "I have no idea, but he's{N}obviously disturbed!{W1}"
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveUp 1
 		endActions
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveRight 1
 		endActions
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveDown 1
 		endActions
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveLeft 2
 		endActions
 		csWait 30

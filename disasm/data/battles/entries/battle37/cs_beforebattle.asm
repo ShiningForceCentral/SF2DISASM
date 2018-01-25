@@ -4,19 +4,19 @@
 bbcs_37:        textCursor $B8C
 		loadMapFadeIn 77,50,33
 		loadMapEntities ce_4DB74
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,56,37,LEFT
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,56,35,LEFT
 		setPos $1E,56,36,LEFT
 		jumpIfFlagClear $4C,cs_4DAB8; Zynk is a follower
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $1A,eas_Init
 		setPos $1A,63,62,DOWN
 cs_4DAB8:       fadeInB
 		nextSingleText $0,$80   ; "Now you shall pay for killing{N}my precious Prism Flowers.{W1}"
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$FF,eas_Jump
+		setActscript $0,eas_Jump
+		setActscriptWait $7,eas_Jump
 		setFacing $0,DOWN
 		setFacing $7,DOWN
 		setFacing $1F,DOWN
@@ -33,8 +33,8 @@ cs_4DAB8:       fadeInB
 		setFacing $80,DOWN
 		nextSingleText $0,$80   ; "Red Baron, say hello!{W1}"
 		setCamDest 30,54
-		setActscript $81,$FF,eas_Jump
-		setActscript $81,$FF,eas_Jump
+		setActscriptWait $81,eas_Jump
+		setActscriptWait $81,eas_Jump
 		nextSingleText $0,$81   ; "Grruuooouu!{W1}"
 		nextText $0,$80         ; "He's waiting for you just{N}outside the Galam gate.{W2}"
 		nextText $0,$80         ; "You have to defeat him if you{N}want to advance.{W2}"

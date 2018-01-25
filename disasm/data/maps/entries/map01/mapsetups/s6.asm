@@ -20,8 +20,8 @@ cs_5E772:       textCursor $E41
 		csWait 30
 		setFacing $0,UP
 		setEntityDest $0,44,27
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		flashScreenWhite $1E
 		csWait 30
 		flashScreenWhite $1E
@@ -38,7 +38,7 @@ cs_5E772:       textCursor $E41
 		nextSingleText $80,$15  ; "I feel...a power returning{N}me to human.{W2}"
 		nextSingleText $80,$15  ; "Hey!  The evil is gone!{N}Did you chase them away?{W1}"
 		startEntity $15
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		setFacing $7,RIGHT
@@ -48,17 +48,17 @@ cs_5E772:       textCursor $E41
 		nextSingleText $0,$7    ; "Yes, we are, but who are{N}you?{W1}"
 		entityShiver $15
 		nextSingleText $80,$15  ; "Do you know how long I've{N}been here as a stone statue?{W1}"
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 1
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveLeft 1
 		endActions
 		setFacing $1F,UP
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveRight 1
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 1
 		endActions
 		setFacing $0,UP

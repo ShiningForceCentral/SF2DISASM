@@ -4,20 +4,20 @@
 abcs_battle30:  textCursor $ACD
 		loadMapFadeIn 1,5,8
 		loadMapEntities ce_4C96C
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,12,13,UP
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,11,13,UP
 		stopEntity $80
-		setActscript $82,$FF,eas_46172
+		setActscriptWait $82,eas_46172
 		stopEntity $82
 		setPriority $7,$0
 		setPriority $1F,$FFFF
 		fadeInB
 		entityShiver $80
 		nextSingleText $0,$80   ; "Grrr...impossible!{N}Why...do I have to die?{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 1
 		endActions
 		nextSingleText $0,$1F   ; "Where is Mitula?{W1}"
@@ -25,19 +25,19 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $0,$80   ; "I don't know...haven't{N}seen her.{W1}"
 		csWait 40
 		setFacing $80,UP
-		customActscript $80,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setQuake 2
 		csWait 20
 		setQuake 0
 		setPos $82,11,10,UP
-		customActscript $82,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $82
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setEntityDest $82,9,11
 		nextSingleText $0,$80   ; "Oops!  The Ground Orb....{W1}"
@@ -48,19 +48,19 @@ abcs_battle30:  textCursor $ACD
 		setFacing $80,DOWN
 		entityShiver $80
 		nextSingleText $0,$80   ; "I can't endure the light....{N}Ohhh....{W1}"
-		customActscript $80,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $0           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $0          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $80,$FF,eas_Die
+		setActscriptWait $80,eas_Die
 		csWait 60
 		nextText $0,$1F         ; "Thanks to the Ground Orb, we{N}finally defeated Zalbard.{W2}"
 		nextSingleText $0,$1F   ; "The orb released holy power{N}in it's light.{W1}"
 		entityFlashWhite $82,$3C
-		setActscript $7,$FF,eas_Jump
-		entityActions $7,$FF
+		setActscriptWait $7,eas_Jump
+		entityActionsWait $7
 		 moveUp 2
 		endActions
 		nextSingleText $0,$7    ; "Hey, look over there!{W1}"
@@ -69,7 +69,7 @@ abcs_battle30:  textCursor $ACD
 		entityFlashWhite $81,$3C
 		nextSingleText $0,$81   ; "Welcome!{W1}"
 		setCameraEntity $81
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveDown 4
 		 moveLeft 2
 		 moveDown 4
@@ -79,9 +79,9 @@ abcs_battle30:  textCursor $ACD
 		setFacing $7,LEFT
 		csWait 50
 		entityFlashWhite $81,$3C
-		customActscript $82,$FF
-		ac_setSpeed 14392       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $82
+		 ac_setSpeed 56,56      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		cameraSpeed $38
 		setCameraEntity $82
@@ -93,11 +93,11 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $C0,$81  ; "I've finally returned to this{N}world.{W1}"
 		nextSingleText $0,$1F   ; "Goddess Mitula?{W1}"
 		nextSingleText $C0,$81  ; "Oh, nice to meet you,{N}Sir Astral.{W1}"
-		setActscript $1F,$FF,eas_Jump
+		setActscriptWait $1F,eas_Jump
 		nextText $0,$1F         ; "Oh, you know my name?{N}Gee....{W2}"
 		nextSingleText $0,$1F   ; "Please tell us, what should{N}we do now?{W1}"
 		nextSingleText $C0,$81  ; "I don't know.{W1}"
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
 		nextText $0,$7          ; "What?!{W2}"
 		nextSingleText $0,$7    ; "But, why?  You're a goddess.{N}You know our future, right?{W1}"
 		nextSingleText $C0,$81  ; "I'm not Volcanon.  I never{N}tell people the future, even{N}if it could prevent death.{W1}"
@@ -105,12 +105,12 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $0,$1F   ; "Death?!  Not ours I hope.{W1}"
 		nextText $C0,$81        ; "Zeon is an unimaginably{N}strong devil.{W2}"
 		nextSingleText $C0,$81  ; "If he attains full power,{N}I, even Volcanon, would not{N}be able to stop him.{W1}"
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 1
 		endActions
 		nextSingleText $0,$7    ; "So, we have to defeat him{N}before he revives completely.{W1}"
 		nextSingleText $C0,$81  ; "His power is sealed in the{N}Jewel of Evil.{W1}"
-		setActscript $1F,$FF,eas_Jump
+		setActscriptWait $1F,eas_Jump
 		nextSingleText $0,$1F   ; "So, that's why he wants the{N}jewel!{W1}"
 		nextSingleText $0,$7    ; "Then, why don't we keep the{N}jewel forever.{W1}"
 		nextText $C0,$81        ; "Arc Valley is the place where{N}evil power gathers.{W2}"
@@ -118,15 +118,15 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $0,$1F   ; "Did you say, Arc Valley?{W1}"
 		nextText $C0,$81        ; "You call it Ancient Tower{N}or Granseal.{W2}"
 		nextSingleText $C0,$81  ; "Granseal is named for the{N}symbol in the tower.{N}It seals the ground.{W1}"
-		setActscript $1F,$FF,eas_Jump
+		setActscriptWait $1F,eas_Jump
 		nextSingleText $0,$1F   ; "I see.{W1}"
 		csWait 60
 		setFacing $81,LEFT
 		csWait 40
 		entityFlashWhite $81,$32
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$0,eas_Jump
-		setActscript $1F,$FF,eas_Jump
+		setActscript $0,eas_Jump
+		setActscript $7,eas_Jump
+		setActscriptWait $1F,eas_Jump
 		nextSingleText $0,$1F   ; "Goddess Mitula, where are{N}you going?{W1}"
 		nextSingleText $C0,$81  ; "Down to the surface.{N}To save the people.{W1}"
 		nextSingleText $0,$1F   ; "Are you going to abandon us,{N}as Volcanon did?{W1}"
@@ -140,15 +140,15 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $C0,$81  ; "It's on Grans.{N}Your jewel will lead you to...{W1}"
 		animEntityFadeInOut $81,$6
 		csWait 50
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveLeft 2
 		 moveUp 1
 		endActions
 		csWait 5
-		setActscript $1F,$0,eas_461E4
+		setActscript $1F,eas_461E4
 		csWait 120
 		nextSingleText $0,$1F   ; "Mitula, Mitula!!{W1}"
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 1
 		endActions
 		csWait 30

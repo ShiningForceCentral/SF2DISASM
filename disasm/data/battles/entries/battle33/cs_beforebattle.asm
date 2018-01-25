@@ -4,12 +4,12 @@
 bbcs_33:        textCursor $B32
 		loadMapFadeIn 31,22,29
 		loadMapEntities ce_4D048
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,27,38,LEFT
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,27,37,LEFT
-		setActscript $16,$FF,eas_Init
+		setActscriptWait $16,eas_Init
 		setPos $16,27,36,LEFT
 		setBlocks 16,8,1,1,32,1
 		setBlocks 3,39,1,1,16,8
@@ -19,12 +19,12 @@ bbcs_33:        textCursor $B32
 		setFacing $0,UP
 		setFacing $7,UP
 		setFacing $1F,UP
-		entityActions $16,$FF
+		entityActionsWait $16
 		 moveUp 1
 		endActions
 		setFacing $16,DOWN
 		nextSingleText $0,$16   ; "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
-		entityActions $16,$FF
+		entityActionsWait $16
 		 moveUp 1
 		endActions
 		nextSingleText $FF,$FF  ; "Vicar {NAME;22} uses{N}the gate key.{W1}"
@@ -35,29 +35,29 @@ bbcs_33:        textCursor $B32
 		setQuake 0
 		setCameraEntity $0
 		csWait 50
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 1
 		endActions
-		entityActions $16,$0
+		entityActions $16
 		 moveUp 6
 		 moveLeft 1
 		 moveUp 1
 		endActions
-		entityActions $0,$0
+		entityActions $0
 		 moveUp 7
 		endActions
-		entityActions $1F,$0
+		entityActions $1F
 		 moveUp 6
 		 moveLeft 2
 		 moveUp 1
 		endActions
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 8
 		endActions
 		csWait 30
 		cameraSpeed $30
 		setCamDest 5,8
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		nextText $0,$80         ; "Welcome, losers!{W2}"
@@ -65,12 +65,12 @@ bbcs_33:        textCursor $B32
 		nextText $0,$16         ; "No!  I'm too late.{N}I killed a lot of people.{W2}"
 		nextSingleText $0,$16   ; "I can never forgive myself!{W1}"
 		setCamDest 21,25
-		entityActions $16,$FF
+		entityActionsWait $16
 		 moveDown 1
 		endActions
 		nextSingleText $0,$16   ; "{LEADER}, please let me{N}fight with you.  They must{N}die!{W1}"
 		join $16
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 1
 		endActions
 		setFacing $1F,RIGHT

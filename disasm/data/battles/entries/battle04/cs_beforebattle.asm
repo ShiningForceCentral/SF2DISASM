@@ -4,10 +4,10 @@
 bbcs_04:        textCursor $907
 		loadMapFadeIn 66,1,5
 		loadMapEntities ce_4989E
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setPos $4,6,9,DOWN
 		fadeInB
-		setActscript $4,$FF,eas_Jump
+		setActscriptWait $4,eas_Jump
 		nextSingleText $0,$4    ; "Who are they?{W1}"
 		setCamDest 7,13
 		nextSingleText $0,$4    ; "Galam soldiers!{W1}"
@@ -23,14 +23,14 @@ bbcs_04:        textCursor $907
 		csWait 20
 		nextSingleText $C0,$1C  ; "Capture them alive!{W1}"
 		entityNod $80
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveDown 1
 		 moveRight 2
 		 moveDown 2
 		 moveRight 1
 		 moveDown 1
 		endActions
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveRight 2
 		 moveDown 1
 		endActions

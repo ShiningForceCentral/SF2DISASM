@@ -5,7 +5,7 @@ bbcs_16:        textCursor $9D1
 		loadMapFadeIn 49,9,10
 		executeSubroutine csub_4B1CA
 		loadMapEntities ce_4B15C
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setBlocks 13,4,3,3,0,0
 		setBlocks 31,4,3,3,13,4
 		cloneEntity $81,$82
@@ -16,20 +16,20 @@ bbcs_16:        textCursor $9D1
 		cloneEntity $83,$88
 		cloneEntity $83,$89
 		cloneEntity $83,$8A
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $7,15,15,LEFT
 		setPos $1F,13,14,DOWN
 		fadeInB
 		csWait 30
 		csWait 5
-		setActscript $0,$0,eas_461B6
+		setActscript $0,eas_461B6
 		csWait 5
-		setActscript $7,$0,eas_461B6
+		setActscript $7,eas_461B6
 		csWait 5
-		setActscript $1F,$0,eas_461B6
+		setActscript $1F,eas_461B6
 		csWait 120
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveRight 1
 		endActions
 		csWait 20
@@ -44,13 +44,13 @@ bbcs_16:        textCursor $9D1
 		csWait 30
 		setFacing $7,UP
 		csWait 30
-		setActscript $7,$FF,eas_Jump
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
+		setActscriptWait $7,eas_Jump
 		nextSingleText $C0,$7   ; "Wow!{D1}  What's that?{W1}"
 		setFacing $0,UP
 		setFacing $1F,UP
 		csWait 20
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 2
 		endActions
 		nextSingleText $C0,$7   ; "{LEADER}, look there!{W1}"
@@ -59,13 +59,13 @@ bbcs_16:        textCursor $9D1
 		setQuake 32770
 		playSound SFX_BIG_DOOR_RUMBLE
 		csWait 30
-		setActscript $80,$FF,eas_46172
-		customActscript $80,$FF
-		ac_setSpeed 4112        ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $80,eas_46172
+		customActscriptWait $80
+		 ac_setSpeed 16,16      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setPos $80,14,5,DOWN
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 2
 		endActions
 		setBlocks 0,0,3,3,13,4

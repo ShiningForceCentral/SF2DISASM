@@ -25,23 +25,23 @@ cs_58E5C:       textCursor $8D5
 		yesNo
 		jumpIfFlagClear $59,cs_58EB8; YES/NO prompt answer
 		hideText
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 1
 		endActions
 		csWait 40
-		setActscript $83,$FF,eas_46172
-		setActscript $84,$FF,eas_46172
-		setActscript $85,$FF,eas_46172
-		entityActions $0,$0
+		setActscriptWait $83,eas_46172
+		setActscriptWait $84,eas_46172
+		setActscriptWait $85,eas_46172
+		entityActions $0
 		 moveDown 3
 		endActions
-		entityActions $83,$0
+		entityActions $83
 		 moveDown 3
 		endActions
-		entityActions $84,$0
+		entityActions $84
 		 moveDown 3
 		endActions
-		entityActions $85,$FF
+		entityActionsWait $85
 		 moveDown 3
 		endActions
 		mapSysEvent $E,$D,$B,$3

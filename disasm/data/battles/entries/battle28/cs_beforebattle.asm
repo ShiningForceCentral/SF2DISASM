@@ -4,30 +4,30 @@
 bbcs_28:        textCursor $A65
 		loadMapFadeIn 47,0,4
 		loadMapEntities ce_4C03C
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,0,9,RIGHT
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,0,7,RIGHT
 		stopEntity $81
 		playSound MUSIC_BATTLE_THEME_3
 		fadeInB
 		cameraSpeed $30
-		entityActions $0,$0
+		entityActions $0
 		 moveRight 3
 		endActions
-		entityActions $1F,$0
+		entityActions $1F
 		 moveRight 3
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveRight 3
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveRight 3
 		endActions
 		csWait 40
-		setActscript $1F,$FF,eas_Jump
-		entityActions $1F,$FF
+		setActscriptWait $1F,eas_Jump
+		entityActionsWait $1F
 		 moveRight 2
 		 moveDown 1
 		endActions
@@ -41,50 +41,50 @@ bbcs_28:        textCursor $A65
 		playSound SFX_MONSTER_SCREAM
 		csWait 40
 		setCamDest 0,6
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 1
 		 moveRight 1
 		endActions
 		nextSingleText $0,$7    ; "Those monsters are eating{N}the bridge.{W1}"
 		nextSingleText $0,$81   ; "Help!  Help me!{W1}"
-		setActscript $0,$0,eas_Jump
-		setActscript $1F,$0,eas_Jump
-		setActscript $7,$FF,eas_Jump
-		entityActions $0,$FF
+		setActscript $0,eas_Jump
+		setActscript $1F,eas_Jump
+		setActscriptWait $7,eas_Jump
+		entityActionsWait $0
 		 moveDown 1
 		 moveRight 1
 		 moveDown 1
 		endActions
 		csWait 5
-		setActscript $0,$0,eas_461B6
+		setActscript $0,eas_461B6
 		csWait 5
-		setActscript $7,$0,eas_461E4
+		setActscript $7,eas_461E4
 		csWait 100
-		setActscript $1F,$FF,eas_Jump
-		customActscript $1F,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $1F,eas_Jump
+		customActscriptWait $1F
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1F,$0
+		entityActions $1F
 		 moveDown 2
 		endActions
 		csWait 10
 		stopEntity $0
-		customActscript $0,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setQuake 2
 		playSound SFX_HIT_2
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 1
 		endActions
 		setFacing $0,UP
-		customActscript $0,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $2           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $2          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		waitIdle $1F
 		setFacing $1F,RIGHT
@@ -99,13 +99,13 @@ bbcs_28:        textCursor $A65
 		nextSingleText $0,$81   ; "I can't stand up!{W1}"
 		setCamDest 0,6
 		setFacing $1F,DOWN
-		setActscript $1F,$FF,eas_Jump
+		setActscriptWait $1F,eas_Jump
 		csWait 30
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		startEntity $0
 		entityShakeHead $0
 		nextSingleText $0,$1F   ; "{LEADER}, defeat all the{N}monsters!  Hurry!{W1}"
-		setActscript $7,$0,eas_Jump
+		setActscript $7,eas_Jump
 		entityNod $0
 		csc_end
 ce_4C03C:       mainEntity 1,8,RIGHT

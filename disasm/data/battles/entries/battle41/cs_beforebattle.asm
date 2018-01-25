@@ -4,7 +4,7 @@
 bbcs_41:        textCursor $C0B
 		loadMapFadeIn 56,12,21
 		loadMapEntities ce_4ED76
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setPos $7,16,24,RIGHT
 		setPos $1F,15,24,RIGHT
 		setPos $1C,14,24,RIGHT
@@ -16,7 +16,7 @@ cs_4ED48:       playSound MUSIC_BATTLE_THEME_3
 		setFacing $0,UP
 		setCamDest 12,4
 		nextSingleText $0,$80   ; "But, Odd Eye went to...{W2}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 2
 		endActions
 		nextText $0,$80         ; "Impossible!{N}He was defeated?{W2}"

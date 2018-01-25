@@ -18,53 +18,53 @@ return_5E27A:
 
 	; End of function ms_map55_InitFunction
 
-byte_5E27C:     setActscript $0,$FF,eas_5E2C4
-		setActscript $7,$FF,eas_Init
-		setActscript $7,$FF,eas_5E2C4
-		setActscript $1F,$FF,eas_Init
-		setActscript $1F,$FF,eas_5E2C4
+byte_5E27C:     setActscriptWait $0,eas_5E2C4
+		setActscriptWait $7,eas_Init
+		setActscriptWait $7,eas_5E2C4
+		setActscriptWait $1F,eas_Init
+		setActscriptWait $1F,eas_5E2C4
 		jumpIfFlagClear $4C,cs_5E2BC; Zynk is a follower
-		setActscript $1A,$FF,eas_Init
-		setActscript $1A,$FF,eas_5E2C4
+		setActscriptWait $1A,eas_Init
+		setActscriptWait $1A,eas_5E2C4
 cs_5E2BC:       mapSysEvent $25,$1D,$8,$2
 		csc_end
-eas_5E2C4:      ac_set1Cb5 $0
-		ac_moveAbs 7,7
-		ac_wait 6
-		ac_set1Db3 $FFFF
-		ac_setSize 22
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 20
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 18
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 16
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 14
-		ac_updateSprite
-		ac_wait 1
-		ac_setSize 12
-		ac_updateSprite
-		ac_waitDest
-		ac_setSprite 60
-		ac_updateSprite
-		ac_wait 1
-		ac_jump eas_Idle
+eas_5E2C4:       ac_set1Cb5 $0
+		 ac_moveAbs 7,7
+		 ac_wait 6
+		 ac_set1Db3 $FFFF
+		 ac_setSize 22
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 20
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 18
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 16
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 14
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_setSize 12
+		 ac_updateSprite
+		 ac_waitDest
+		 ac_setSprite 60
+		 ac_updateSprite
+		 ac_wait 1
+		 ac_jump eas_Idle
 byte_5E320:     mapLoad 75,8,14
 		loadMapEntities ce_5E33E
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		playSound MUSIC_MAIN_THEME
 		fadeInB
 		csc_end
 ce_5E33E:       mainEntity 12,19,DOWN
 		dc.w $FFFF
 cs_5E346:       textCursor $D2B
-		setActscript $0,$FF,eas_Init
-		entityActions $0,$FF
+		setActscriptWait $0,eas_Init
+		entityActionsWait $0
 		 moveLeft 1
 		 moveLeft 1
 		endActions

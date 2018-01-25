@@ -4,26 +4,26 @@
 bbcs_15:        textCursor $9C7
 		loadMapFadeIn 50,9,15
 		loadMapEntities ce_4AE42
-		setActscript $0,$FF,eas_Init
-		setActscript $1E,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $1E,eas_Init
 		setPos $1E,14,19,UP
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,15,20,UP
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,13,20,UP
 		fadeInB
 		cameraSpeed $30
 		nextSingleText $0,$1E   ; "This is the Ancient Hall{N}that leads to the Ancient{N}Tunnel...{W1}"
-		entityActions $1E,$FF
+		entityActionsWait $1E
 		 moveUp 1
 		endActions
 		setCamDest 9,4
 		csWait 30
-		setActscript $80,$0,eas_Jump
-		setActscript $81,$0,eas_Jump
-		setActscript $82,$0,eas_Jump
-		setActscript $83,$0,eas_Jump
-		setActscript $84,$FF,eas_Jump
+		setActscript $80,eas_Jump
+		setActscript $81,eas_Jump
+		setActscript $82,eas_Jump
+		setActscript $83,eas_Jump
+		setActscriptWait $84,eas_Jump
 		csWait 30
 		setCamDest 9,15
 		nextSingleText $0,$1E   ; "There are more monsters here!{W2}"

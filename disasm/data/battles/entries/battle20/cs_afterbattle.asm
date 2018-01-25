@@ -4,9 +4,9 @@
 abcs_battle20:  textCursor $A06
 		loadMapFadeIn 51,2,6
 		loadMapEntities ce_4B780
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $7,5,10,UP
 		setPos $1F,7,10,UP
 		fadeInB
@@ -16,7 +16,7 @@ abcs_battle20:  textCursor $A06
 		nextSingleText $C0,$7   ; "He heard your cry for help{N}and brought us here.{W1}"
 		setFacing $7,RIGHT
 		csWait 5
-		setActscript $1F,$0,eas_461B6
+		setActscript $1F,eas_461B6
 		csWait 120
 		setFacing $1F,UP
 		nextSingleText $C0,$1F  ; "Oh well, it was nothing.{W1}"
@@ -26,7 +26,7 @@ abcs_battle20:  textCursor $A06
 		setFacing $7,RIGHT
 		setFacing $0,LEFT
 		nextSingleText $C0,$7   ; "{LEADER}, looks like{N}we've found another friend.{W1}"
-		entityActions $D,$FF
+		entityActionsWait $D
 		 moveDown 1
 		endActions
 		nextSingleText $0,$D    ; "Oh, thank you!{W1}"

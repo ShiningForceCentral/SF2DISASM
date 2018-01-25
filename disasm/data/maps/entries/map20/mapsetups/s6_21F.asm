@@ -26,34 +26,34 @@ loc_633BA:
 cs_EndKiss:     hideText
 		setCameraEntity $FFFF
 		setFacing $0,RIGHT
-		customActscript $0,$FF
-		ac_setSpeed 2056        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 8,8        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		csWait 30
 		playSound MUSIC_ENDING
-		entityActions $0,$0
+		entityActions $0
 		 moveUpRight 1
 		endActions
 		csWait 10
-		setActscript $0,$FF,eas_461AA
+		setActscriptWait $0,eas_461AA
 		csWait 80
-		entityActions $0,$0
+		entityActions $0
 		 moveRight 1
 		endActions
 		csWait 10
-		setActscript $0,$FF,eas_461AA
+		setActscriptWait $0,eas_461AA
 		stopEntity $0
 		csWait 50
-		customActscript $0,$FF
-		ac_setSpeed 1028        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 4,4        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $0,$0
+		entityActions $0
 		 moveRight 1
 		endActions
 		csWait 16
-		setActscript $0,$FF,eas_461AA
+		setActscriptWait $0,eas_461AA
 		csWait 120
 		executeSubroutine j_EndKiss
 		csc_end

@@ -62,11 +62,11 @@ cs_5EB44:       textCursor $E73
 		setCameraEntity $FFFF
 		reloadMap 8,2
 		loadMapEntities ce_5F19E
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		csWait 60
 		playSound MUSIC_WITCH
 		csWait 30
-		setActscript $80,$0,eas_Transparent
+		setActscript $80,eas_Transparent
 		fadeInFromBlackHalf
 		nextSingleText $0,$80   ; "{LEADER} is almost here{N}already?{W1}"
 		nextSingleText $80,$81  ; "Yes, sir.  With an ancient{N}aircraft.  He'll be passing{N}over the cape soon.{W1}"
@@ -90,7 +90,7 @@ cs_5EB44:       textCursor $E73
 		nextSingleText $0,$82   ; "That Geshp!  He wants{N}everything.{W1}"
 		setPos $82,9,9,DOWN
 		animEntityFadeInOut $82,$7
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveRight 4
 		 moveUp 1
 		endActions
@@ -106,43 +106,43 @@ cs_5EB44:       textCursor $E73
 cs_5EBFC:       loadMapFadeIn 53,8,14
 		textCursor $E8B
 		loadMapEntities ce_5F1DE
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		stopEntity $82
 		stopEntity $83
 		stopEntity $84
 		stopEntity $85
 		playSound MUSIC_BATTLE_THEME_1
 		fadeInB
-		setActscript $82,$FF,eas_Init
-		setActscript $86,$FF,eas_Init
-		setActscript $87,$FF,eas_Init
-		setActscript $88,$FF,eas_Init
-		customActscript $82,$FF
-		ac_setSpeed 1028        ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $82,eas_Init
+		setActscriptWait $86,eas_Init
+		setActscriptWait $87,eas_Init
+		setActscriptWait $88,eas_Init
+		customActscriptWait $82
+		 ac_setSpeed 4,4        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $86,$FF
-		ac_setSpeed 1028        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $86
+		 ac_setSpeed 4,4        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $87,$FF
-		ac_setSpeed 1028        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $87
+		 ac_setSpeed 4,4        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $88,$FF
-		ac_setSpeed 1028        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $88
+		 ac_setSpeed 4,4        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $82,$0
+		entityActions $82
 		 moveRight 3
 		endActions
-		entityActions $86,$0
+		entityActions $86
 		 moveRight 3
 		endActions
-		entityActions $87,$0
+		entityActions $87
 		 moveRight 3
 		endActions
-		entityActions $88,$0
+		entityActions $88
 		 moveRight 3
 		endActions
 		setFacing $80,LEFT
@@ -159,7 +159,7 @@ cs_5EBFC:       loadMapFadeIn 53,8,14
 		nextSingleText $80,$81  ; "Excellent!{W1}"
 		entityNod $81
 		setCameraEntity $81
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveRight 2
 		 moveUp 2
 		endActions
@@ -172,7 +172,7 @@ cs_5EBFC:       loadMapFadeIn 53,8,14
 cs_5ED06:       textCursor $E91
 		loadMapFadeIn 73,0,0
 		loadMapEntities ce_5F1BE
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		executeSubroutine sub_5F31E
 		playSound MUSIC_MITULA_SHRINE
 		setBlocks 0,10,22,10,42,10
@@ -183,7 +183,7 @@ cs_5ED06:       textCursor $E91
 		nextSingleText $0,$1F   ; "We've finally come home.{W1}"
 		loadMapFadeIn 53,10,13
 		loadMapEntities ce_5F23E
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		playSound MUSIC_BATTLE_THEME_1
 		stopEntity $80
 		stopEntity $82
@@ -193,7 +193,7 @@ cs_5ED06:       textCursor $E91
 		nextSingleText $80,$81  ; "I see the Nazca Ship!{N}Everybody, get ready!{W1}"
 		loadMapFadeIn 73,0,0
 		loadMapEntities ce_5F1BE
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		executeSubroutine sub_5F31E
 		playSound MUSIC_MITULA_SHRINE
 		setBlocks 0,10,22,10,42,10
@@ -207,16 +207,16 @@ cs_5ED06:       textCursor $E91
 cs_5EDB8:       textCursor $E99
 		loadMapFadeIn 53,10,13
 		loadMapEntities ce_5F28E
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		playSound MUSIC_ENEMY_ATTACK
-		setActscript $85,$0,eas_5EF46
-		setActscript $86,$0,eas_5EF46
-		setActscript $87,$0,eas_5EF46
-		setActscript $88,$0,eas_5EF46
-		setActscript $89,$0,eas_5EF46
-		setActscript $8A,$0,eas_5EF46
-		setActscript $8B,$0,eas_5EF46
-		setActscript $8C,$0,eas_5EF46
+		setActscript $85,eas_5EF46
+		setActscript $86,eas_5EF46
+		setActscript $87,eas_5EF46
+		setActscript $88,eas_5EF46
+		setActscript $89,eas_5EF46
+		setActscript $8A,eas_5EF46
+		setActscript $8B,eas_5EF46
+		setActscript $8C,eas_5EF46
 		stopEntity $8D
 		stopEntity $8E
 		stopEntity $8F
@@ -224,7 +224,7 @@ cs_5EDB8:       textCursor $E99
 		fadeInB
 		setFacing $81,LEFT
 		nextSingleText $80,$81  ; "NOW!{W1}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveRight 1
 		endActions
 		nextSingleText $80,$81  ; "Shoot them!  Shoot them!{W1}"
@@ -234,12 +234,12 @@ cs_5EDB8:       textCursor $E99
 		setFacing $85,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setPos $85,13,15,UP
-		entityActions $85,$0
+		entityActions $85
 		 moveUpRight 10
 		endActions
 		flashScreenWhite $2
 		setPos $86,13,15,UP
-		entityActions $86,$0
+		entityActions $86
 		 moveUpRight 10
 		endActions
 		csWait 20
@@ -249,12 +249,12 @@ cs_5EDB8:       textCursor $E99
 		setFacing $87,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setPos $87,14,16,UP
-		entityActions $87,$0
+		entityActions $87
 		 moveUpRight 10
 		endActions
 		flashScreenWhite $2
 		setPos $88,14,16,UP
-		entityActions $88,$0
+		entityActions $88
 		 moveUpRight 10
 		endActions
 		playSound SFX_BATTLEFIELD_DEATH
@@ -263,12 +263,12 @@ cs_5EDB8:       textCursor $E99
 		setFacing $89,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setPos $89,15,18,UP
-		entityActions $89,$0
+		entityActions $89
 		 moveUpRight 10
 		endActions
 		flashScreenWhite $2
 		setPos $8A,15,18,UP
-		entityActions $8A,$0
+		entityActions $8A
 		 moveUpRight 10
 		endActions
 		csWait 10
@@ -278,12 +278,12 @@ cs_5EDB8:       textCursor $E99
 		setFacing $8B,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setPos $8B,16,19,UP
-		entityActions $8B,$0
+		entityActions $8B
 		 moveUpRight 10
 		endActions
 		flashScreenWhite $2
 		setPos $8C,16,19,UP
-		entityActions $8C,$0
+		entityActions $8C
 		 moveUpRight 10
 		endActions
 		playSound SFX_BATTLEFIELD_DEATH
@@ -292,30 +292,30 @@ cs_5EDB8:       textCursor $E99
 		setFacing $8B,UP
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setPos $8B,13,15,UP
-		entityActions $8B,$0
+		entityActions $8B
 		 moveUpRight 10
 		endActions
 		flashScreenWhite $2
 		setPos $8C,13,15,UP
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 moveUpRight 10
 		endActions
 		csc_end
-eas_5EF46:      ac_setAnimSpeedX2 $FFFF
-		ac_setTransparency $FFFF
-		ac_set1Cb5 $0
-		ac_autoFacing $0
-		ac_setSpeed 16448
-		ac_jump eas_Idle
+eas_5EF46:       ac_setAnimSpeedX2 $FFFF
+		 ac_setTransparency $FFFF
+		 ac_set1Cb5 $0
+		 ac_autoFacing $0
+		 ac_setSpeed 64,64
+		 ac_jump eas_Idle
 cs_5EF60:       textCursor $E9B
 		loadMapFadeIn 37,4,6
 		loadEntitiesFromMapSetup 9,11,DOWN
 		executeSubroutine sub_47948
 		setPos $1A,8,10,RIGHT
 		executeSubroutine sub_5F32E
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
+		setActscriptWait $1A,eas_Init
 		setPos $80,9,12,UP
 		setPos $7,10,12,UP
 		setPos $1A,10,11,LEFT
@@ -332,7 +332,7 @@ cs_5EF60:       textCursor $E9B
 		setQuake 1
 		csWait 10
 		setQuake 0
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveRight 1
 		 jumpRight 1
 		 jumpLeft 1
@@ -359,7 +359,7 @@ cs_5EF60:       textCursor $E9B
 		csWait 10
 		nextText $80,$1A        ; "We've sustained damage to{N}the engine!{W2}"
 		nextSingleText $80,$1A  ; "We might crash!{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveRight 1
 		endActions
 		setFacing $80,UP
@@ -376,8 +376,8 @@ cs_5EF60:       textCursor $E9B
 		flashScreenWhite $14
 		setQuake 1
 		csWait 10
-		setActscript $7,$FF,eas_Jump
-		setActscript $7,$FF,eas_Jump
+		setActscriptWait $7,eas_Jump
+		setActscriptWait $7,eas_Jump
 		nextText $80,$7         ; "I don't want to crash!{W2}"
 		nextSingleText $80,$7   ; "Sir Astral, please help us!{W1}"
 		nextSingleText $0,$80   ; "{NAME;26}, can you land on{N}that cape before the ship{N}crashes?{W1}"
@@ -399,14 +399,14 @@ cs_5EF60:       textCursor $E9B
 		setQuake 0
 		mapLoad 75,20,14
 		loadMapEntities ce_5F1CE
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setCameraEntity $80
-		customActscript $80,$FF
-		ac_setSpeed 4112        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 16,16      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		cameraSpeed $10
-		entityActions $80,$0
+		entityActions $80
 		 moveLeft 12
 		endActions
 		executeSubroutine csub_5F326

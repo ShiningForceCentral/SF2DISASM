@@ -31,14 +31,14 @@ cs_53176:       setCameraEntity $FFFF
 		setPos $1,26,10,RIGHT
 		setPos $2,26,11,RIGHT
 		setPos $8C,63,63,DOWN
-		setActscript $0,$FF,eas_Init
-		setActscript $1,$FF,eas_Init
-		setActscript $2,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $1,eas_Init
+		setActscriptWait $2,eas_Init
 		fadeInB
 		setCamDest 24,5
 		csWait 40
 		nextSingleText $80,$8A  ; "That's all the info I can{N}give you about the mission.{W1}"
-		entityActions $90,$FF
+		entityActionsWait $90
 		 moveUp 1
 		endActions
 		nextSingleText $80,$8A  ; "So, all we have to do is{N}find the evil Gizmo and{N}kill him.{W1}"
@@ -48,20 +48,20 @@ cs_53176:       setCameraEntity $FFFF
 		nextSingleText $0,$90   ; "Yes, sir.{W1}"
 		setFacing $90,DOWN
 		nextSingleText $0,$90   ; "Let's go and defeat the{N}evil Gizmo.{W1}"
-		setActscript $91,$0,eas_Jump
-		setActscript $92,$0,eas_Jump
-		setActscript $93,$0,eas_Jump
-		setActscript $94,$0,eas_Jump
-		setActscript $95,$0,eas_Jump
-		setActscript $96,$FF,eas_Jump
-		setActscript $91,$0,eas_Jump
-		setActscript $92,$0,eas_Jump
-		setActscript $93,$0,eas_Jump
-		setActscript $94,$0,eas_Jump
-		setActscript $95,$0,eas_Jump
-		setActscript $96,$FF,eas_Jump
+		setActscript $91,eas_Jump
+		setActscript $92,eas_Jump
+		setActscript $93,eas_Jump
+		setActscript $94,eas_Jump
+		setActscript $95,eas_Jump
+		setActscriptWait $96,eas_Jump
+		setActscript $91,eas_Jump
+		setActscript $92,eas_Jump
+		setActscript $93,eas_Jump
+		setActscript $94,eas_Jump
+		setActscript $95,eas_Jump
+		setActscriptWait $96,eas_Jump
 		csWait 25
-		entityActions $90,$FF
+		entityActionsWait $90
 		 moveDown 4
 		endActions
 		setFacing $91,DOWN
@@ -74,25 +74,25 @@ cs_53176:       setCameraEntity $FFFF
 		setFacing $90,UP
 		setCamDest 23,6
 		nextSingleText $0,$90   ; "Forward men!{W1}"
-		entityActions $90,$0
+		entityActions $90
 		 moveDown 6
 		endActions
-		entityActions $91,$0
+		entityActions $91
 		 moveDown 6
 		endActions
-		entityActions $92,$0
+		entityActions $92
 		 moveDown 6
 		endActions
-		entityActions $93,$0
+		entityActions $93
 		 moveDown 6
 		endActions
-		entityActions $94,$0
+		entityActions $94
 		 moveDown 6
 		endActions
-		entityActions $95,$0
+		entityActions $95
 		 moveDown 6
 		endActions
-		entityActions $96,$FF
+		entityActionsWait $96
 		 moveDown 6
 		endActions
 		hideEntity $90
@@ -104,7 +104,7 @@ cs_53176:       setCameraEntity $FFFF
 		hideEntity $96
 		csWait 40
 		setCamDest 24,6
-		entityActions $8A,$FF
+		entityActionsWait $8A
 		 moveDown 3
 		endActions
 		csWait 70
@@ -112,20 +112,20 @@ cs_53176:       setCameraEntity $FFFF
 		nextSingleText $80,$8A  ; "The King is upstairs looking{N}in on Sir Astral.{N}I'm worried.{W1}"
 		setFacing $8A,LEFT
 		csWait 30
-		entityActions $1,$FF
+		entityActionsWait $1
 		 moveRight 1
 		endActions
 		nextSingleText $0,$1    ; "Is he going to be OK?{W1}"
-		entityActions $2,$FF
+		entityActionsWait $2
 		 moveRight 1
 		endActions
 		nextSingleText $0,$2    ; "We...we are...{W1}"
 		csWait 20
-		customActscript $8A,$FF
-		ac_setSpeed 4112        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8A
+		 ac_setSpeed 16,16      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $8A,$FF
+		entityActionsWait $8A
 		 moveLeft 1
 		endActions
 		nextText $80,$8A        ; "He just fainted because{N}he was exhausted by the{N}two battles.{W2}"
@@ -135,7 +135,7 @@ cs_53176:       setCameraEntity $FFFF
 		setFacing $8A,DOWN
 		csWait 30
 		setPos $8C,23,13,UP
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 moveRight 3
 		 moveUp 1
 		 moveRight 3
@@ -144,7 +144,7 @@ cs_53176:       setCameraEntity $FFFF
 		setFacing $8A,RIGHT
 		nextSingleText $80,$8A  ; "Here I am.{W1}"
 		csWait 5
-		setActscript $8C,$0,eas_461E4
+		setActscript $8C,eas_461E4
 		csWait 120
 		setFacing $8C,LEFT
 		nextSingleText $0,$8C   ; "Did our soldiers leave{N}for the subjugation?{W1}"
@@ -152,19 +152,19 @@ cs_53176:       setCameraEntity $FFFF
 		nextSingleText $80,$8A  ; "Yes, just a few minutes{N}ago.{W1}"
 		csWait 30
 		setCamDest 23,5
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 moveUp 1
 		 actionC 40
 		 moveUp 1
 		 actionC 40
 		 moveUp 1
 		endActions
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 actionC 40
 		 moveUp 1
 		endActions
 		setFacing $8C,DOWN
-		entityActions $8A,$FF
+		entityActionsWait $8A
 		 moveRight 1
 		 moveUp 1
 		endActions
@@ -172,11 +172,11 @@ cs_53176:       setCameraEntity $FFFF
 		csWait 20
 		nextText $0,$8C         ; "Oh, I'm too late.{W2}"
 		nextSingleText $0,$8C   ; "Astral came back to his{N}senses just now.{W1}"
-		customActscript $8A,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8A
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $8A,$FF
+		entityActionsWait $8A
 		 moveUp 1
 		endActions
 		nextSingleText $80,$8A  ; "That's great!{N}Did you talk to him?{W1}"
@@ -192,26 +192,26 @@ cs_53176:       setCameraEntity $FFFF
 		stopEntity $8C
 		stopEntity $8A
 		csWait 80
-		setActscript $8C,$FF,eas_Jump
+		setActscriptWait $8C,eas_Jump
 		startEntity $8C
 		nextSingleText $0,$8C   ; "Oh, yes!{W1}"
-		setActscript $8A,$FF,eas_Jump
+		setActscriptWait $8A,eas_Jump
 		startEntity $8A
 		nextSingleText $80,$8A  ; "Ah, yes!{W1}"
 		nextSingleText $0,$8C   ; "Minister, I have a good{N}idea.{W1}"
 		setFacing $8A,UP
 		nextSingleText $80,$8A  ; "As do I.{W1}"
-		entityActions $8A,$FF
+		entityActionsWait $8A
 		 moveDown 1
 		endActions
 		setFacing $8A,LEFT
 		nextText $80,$8A        ; "You're the pupils of Astral.{N}I know of you, {LEADER}.{W2}"
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveRight 1
 		endActions
 		csWait 20
 		nextSingleText $80,$8A  ; "I heard that you did a very{N}good job in the Ancient{N}Tower.{W1}"
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 moveDown 1
 		endActions
 		nextText $0,$8C         ; "Why don't you go to Yeel{N}and bring Hawel back here?{W2}"
@@ -220,11 +220,11 @@ cs_53482:       yesNo
 		jumpIfFlagSet $59,cs_534AC; YES/NO prompt answer
 		hideText
 		textCursor $2F5
-		setActscript $8A,$FF,eas_Jump
-		setActscript $8A,$FF,eas_Jump
+		setActscriptWait $8A,eas_Jump
+		setActscriptWait $8A,eas_Jump
 		nextText $80,$8A        ; "You refuse the King's{N}wish?!{N}Answer again!{W1}"
 		jump cs_53482
-cs_534AC:       entityActions $8C,$FF
+cs_534AC:       entityActionsWait $8C
 		 moveDown 1
 		endActions
 		setFacing $8C,LEFT
@@ -238,13 +238,13 @@ cs_534D2:       textCursor $2B6
 		setCamDest 17,6
 		nextText $80,$80        ; "Where is King Galam?{N}He went into the tower,{N}Ground Seal, right?{W2}"
 		nextSingleText $80,$80  ; "Then, I must go there!{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 1
 		endActions
 		setEntityDest $80,23,12
 		setEntityDest $1C,20,10
 		nextSingleText $0,$1C   ; "Please don't move, or I'll{N}have to kill you!  Please!{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUpLeft 1
 		endActions
 		nextText $80,$80        ; "{NAME;28}, calm down!{N}You already figured it out,{N}didn't you?{W2}"
@@ -280,35 +280,35 @@ cs_534D2:       textCursor $2B6
 		csWait 20
 		entityNod $1C
 		csWait 30
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveLeft 1
 		endActions
 		csWait 20
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 1
 		endActions
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveUp 3
 		 moveLeft 3
 		endActions
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 1
 		endActions
-		setActscript $80,$FF,eas_Jump
-		setActscript $80,$FF,eas_Jump
+		setActscriptWait $80,eas_Jump
+		setActscriptWait $80,eas_Jump
 		nextSingleText $80,$80  ; "You kids, follow me!{W1}"
 		entityNod $84
 		entityNod $85
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 3
 		 moveLeft 3
 		endActions
-		entityActions $85,$0
+		entityActions $85
 		 moveRight 1
 		 moveUp 3
 		 moveLeft 3
 		endActions
-		entityActions $84,$FF
+		entityActionsWait $84
 		 moveUp 1
 		 moveRight 1
 		 moveUp 3

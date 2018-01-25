@@ -4,20 +4,20 @@
 abcs_battle36:  textCursor $B89
 		loadMapFadeIn 53,6,17
 		loadMapEntities ce_4DA46
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,10,19,DOWN
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,12,19,DOWN
 		jumpIfFlagClear $4C,cs_4D9F0; Zynk is a follower
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $1A,eas_Init
 		setPos $1A,63,62,DOWN
 cs_4D9F0:       animEntityFadeInOut $80,$6
 		fadeInB
 		animEntityFadeInOut $80,$7
-		setActscript $80,$FF,eas_Jump
+		setActscriptWait $80,eas_Jump
 		csWait 5
-		setActscript $80,$0,eas_461B6
+		setActscript $80,eas_461B6
 		csWait 120
 		setFacing $80,DOWN
 		nextText $0,$80         ; "Prism Flowers?{W2}"

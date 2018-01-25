@@ -4,16 +4,16 @@
 bbcs_31:        textCursor $AFB
 		loadMapFadeIn 2,16,2
 		loadMapEntities ce_4CB92
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,20,3,DOWN
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,22,3,DOWN
-		setActscript $16,$FF,eas_Init
+		setActscriptWait $16,eas_Init
 		setPos $16,21,3,DOWN
 		animEntityFadeInOut $80,$6
 		animEntityFadeInOut $81,$6
-		setActscript $82,$0,eas_AnimSpeedx2
+		setActscript $82,eas_AnimSpeedx2
 		playSound MUSIC_BATTLE_THEME_1
 		fadeInB
 		cameraSpeed $30
@@ -23,7 +23,7 @@ bbcs_31:        textCursor $AFB
 		nextSingleText $0,$7    ; "Geshp!{W1}"
 		nextSingleText $C0,$80  ; "So, you remember me. {W1}"
 		setCamDest 16,2
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveDown 1
 		endActions
 		nextSingleText $0,$1F   ; "What do you want?{W1}"
@@ -33,23 +33,23 @@ bbcs_31:        textCursor $AFB
 		nextText $C0,$80        ; "I have been waiting for{N}{NAME;22}.{W2}"
 		nextText $C0,$80        ; "Vicar {NAME;22}, you locked{N}the gate of Moun, remember?{W2}"
 		nextSingleText $C0,$80  ; "My faithful soldiers can't{N}enter Parmecia.{N}Now, you will open it!{W1}"
-		setActscript $1F,$FF,eas_Jump
+		setActscriptWait $1F,eas_Jump
 		nextSingleText $0,$1F   ; "It's a trap!{W2}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 1
 		endActions
 		setCamDest 16,0
 		setFacing $1F,LEFT
 		nextSingleText $0,$1F   ; "{NAME;22}, run!{W1}"
-		entityActions $16,$FF
+		entityActionsWait $16
 		 moveUp 1
 		endActions
 		flashScreenWhite $2
 		setPos $82,21,1,LEFT
 		csWait 30
-		setActscript $16,$FF,eas_Jump
-		setActscript $16,$FF,eas_46172
-		entityActions $16,$FF
+		setActscriptWait $16,eas_Jump
+		setActscriptWait $16,eas_46172
+		entityActionsWait $16
 		 moveDown 1
 		endActions
 		nextSingleText $C0,$80  ; "Ha, ha.  He can't.{W1}"
@@ -62,21 +62,21 @@ bbcs_31:        textCursor $AFB
 		nextText $C0,$80        ; "Ah, Cameela.  You're here.{W2}"
 		nextSingleText $C0,$80  ; "Get the key for me!{W1}"
 		nextSingleText $0,$81   ; "Geshp, you're as devious as{N}usual.{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		nextSingleText $C0,$80  ; "That I am.  Now, get the key!{W1}"
 		nextSingleText $0,$81   ; "Me?!  Why?{W1}"
 		stopEntity $80
 		csWait 40
-		customActscript $80,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		setActscript $80,$FF,eas_Jump
-		setActscript $80,$FF,eas_Jump
-		setActscript $80,$FF,eas_46172
-		entityActions $80,$FF
+		setActscriptWait $80,eas_Jump
+		setActscriptWait $80,eas_Jump
+		setActscriptWait $80,eas_46172
+		entityActionsWait $80
 		 moveUp 1
 		endActions
 		startEntity $80
@@ -100,10 +100,10 @@ bbcs_31:        textCursor $AFB
 		setPos $84,21,19,UP
 		setPos $85,22,18,UP
 		setPos $86,23,15,UP
-		setActscript $83,$0,eas_Jump
-		setActscript $84,$0,eas_Jump
-		setActscript $85,$0,eas_Jump
-		setActscript $86,$FF,eas_Jump
+		setActscript $83,eas_Jump
+		setActscript $84,eas_Jump
+		setActscript $85,eas_Jump
+		setActscriptWait $86,eas_Jump
 		csWait 30
 		setCamDest 16,6
 		nextSingleText $C0,$80  ; "Bye, {LEADER}.{W1}"

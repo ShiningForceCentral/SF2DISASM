@@ -4,7 +4,7 @@
 bbcs_39:        textCursor $BD5
 		loadMapFadeIn 66,3,5
 		loadMapEntities ce_4E4AC
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		setPos $7,9,8,DOWN
 		setPos $1F,7,8,DOWN
 		setPos $1E,8,8,DOWN
@@ -17,21 +17,21 @@ cs_4E41A:       fadeInB
 		setCamDest 3,18
 		nextText $0,$80         ; "I just heard that Geshp{N}lost.{W2}"
 		nextSingleText $0,$80   ; "All greater devils have been{N}defeated except for Odd Eye.{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		nextText $0,$80         ; "This is a good chance for us{N}to become greater devils!{W2}"
 		nextSingleText $0,$80   ; "I'm sure Zeon will promote{N}us if we can get the jewel.{W1}"
-		setActscript $81,$0,eas_Jump
-		setActscript $82,$0,eas_Jump
-		setActscript $83,$0,eas_Jump
-		setActscript $84,$FF,eas_Jump
+		setActscript $81,eas_Jump
+		setActscript $82,eas_Jump
+		setActscript $83,eas_Jump
+		setActscriptWait $84,eas_Jump
 		csWait 50
-		entityActions $83,$FF
+		entityActionsWait $83
 		 moveUp 1
 		endActions
 		nextSingleText $0,$83   ; "Look over there!{W1}"
-		entityActions $84,$FF
+		entityActionsWait $84
 		 moveUp 1
 		endActions
 		setFacing $80,UP
@@ -39,11 +39,11 @@ cs_4E41A:       fadeInB
 		csWait 60
 		setCamDest 3,18
 		nextSingleText $0,$83   ; "They're coming!{W1}"
-		customActscript $80,$FF
-		ac_setSpeed 6168        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 24,24      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 3
 		endActions
 		setFacing $80,UP

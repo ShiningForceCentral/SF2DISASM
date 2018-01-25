@@ -4,36 +4,36 @@
 bbcs_38:        textCursor $BBB
 		loadMapFadeIn 66,9,6
 		loadMapEntities ce_4DE74
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,13,8,DOWN
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,15,8,DOWN
-		setActscript $1E,$FF,eas_Init
+		setActscriptWait $1E,eas_Init
 		setPos $1E,14,8,DOWN
 		jumpIfFlagClear $4C,cs_4DDFE; Zynk is a follower
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $1A,eas_Init
 		setPos $1A,63,63,DOWN
 cs_4DDFE:       playSound MUSIC_BATTLE_THEME_1
 		fadeInB
 		cameraSpeed $30
-		entityActions $0,$0
+		entityActions $0
 		 moveDown 2
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveDown 2
 		endActions
-		entityActions $1E,$0
+		entityActions $1E
 		 moveDown 2
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveDown 2
 		endActions
 		nextSingleText $0,$80   ; "Stop!{W1}"
 		setCamDest 9,19
 		nextText $0,$80         ; "Finally, you've arrived.{W2}"
 		nextSingleText $0,$80   ; "It was a mistake to{N}underestimate you.{W2}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 2
 		endActions
 		nextSingleText $0,$80   ; "But, the game is not over.{N}At the risk of my life,{N}you'll proceed no further!{W1}"

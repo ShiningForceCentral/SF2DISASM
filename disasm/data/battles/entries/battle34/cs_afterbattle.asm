@@ -4,23 +4,23 @@
 abcs_battle34:  textCursor $B5F
 		loadMapFadeIn 55,2,7
 		loadMapEntities ce_4D69E
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,9,11,UP
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,5,11,UP
 		jumpIfFlagClear $4C,cs_4D502; Zynk is a follower
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $1A,eas_Init
 		setPos $1A,8,12,UP
 cs_4D502:       stopEntity $80
-		customActscript $80,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		stopEntity $83
-		setActscript $83,$FF,eas_46172
+		setActscriptWait $83,eas_46172
 		fadeInB
 		entityShiver $80
 		nextSingleText $0,$80   ; "{LEADER}, I lost?!{N}Take this.{W1}"
@@ -33,21 +33,21 @@ cs_4D502:       stopEntity $80
 		nextSingleText $C0,$81  ; "Your life is over,{N}Cameela!{W1}"
 		flashScreenWhite $2
 		tintMap
-		setActscript $80,$FF,eas_Init
+		setActscriptWait $80,eas_Init
 		setFacing $80,LEFT
 		entitySprite $80,$B4
 		startEntity $80
-		setActscript $80,$0,eas_AnimSpeedx2
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$0,eas_Jump
+		setActscript $80,eas_AnimSpeedx2
+		setActscript $0,eas_Jump
+		setActscript $7,eas_Jump
 		jumpIfFlagClear $4C,cs_4D592; Zynk is a follower
-		setActscript $1A,$0,eas_Jump
-cs_4D592:       setActscript $1F,$FF,eas_Jump
+		setActscript $1A,eas_Jump
+cs_4D592:       setActscriptWait $1F,eas_Jump
 		nextSingleText $0,$80   ; "Geshp!{W1}"
 		nextSingleText $C0,$81  ; "Ha, ha, ha!  You acted just{N}as I planned!{W1}"
 		nextSingleText $0,$80   ; "Ouuuuu...Ges...{W1}"
 		entitySprite $80,$9C
-		setActscript $80,$FF,eas_Die
+		setActscriptWait $80,eas_Die
 		nextSingleText $0,$1F   ; "How horrible!{W1}"
 		nextText $C0,$81        ; "It's the law.  Traitors{N}die by fire.{W2}"
 		nextText $C0,$81        ; "Congratulations!{N}You have a ship now!{N}Come to Grans!{W2}"
@@ -60,16 +60,16 @@ cs_4D592:       setActscript $1F,$FF,eas_Jump
 		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "I have no idea, but it's{N}probably a trap.{W1}"
 		jumpIfFlagClear $4C,cs_4D620; Zynk is a follower
-		customActscript $1A,$FF
-		ac_setSpeed 6168        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1A
+		 ac_setSpeed 24,24      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveUp 1
 		 moveLeft 1
 		endActions
 		nextSingleText $0,$1A   ; "Ancient flower.{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveRight 1
 		endActions
 		nextSingleText $0,$1F   ; "Excuse me?{W1}"
@@ -79,22 +79,22 @@ cs_4D592:       setActscript $1F,$FF,eas_Jump
 		csWait 30
 		nextSingleText $0,$1A   ; "I cannot explain....{W1}"
 cs_4D620:       textCursor $B74
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveLeft 1
 		endActions
 		nextSingleText $0,$7    ; "We will see them when we{N}arrive at Grans.{W1}"
 		nextSingleText $0,$1F   ; "{LEADER}, grab the Sky{N}Orb.{N}Let's go.{W1}"
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		setFacing $7,LEFT
 		jumpIfFlagClear $4C,cs_4D654; Zynk is a follower
-		entityActions $1A,$FF
+		entityActionsWait $1A
 		 moveRight 1
 		endActions
 		setFacing $1A,LEFT
 cs_4D654:       entityNod $0
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 1
 		endActions
 		hideEntity $83

@@ -3,44 +3,44 @@
 ; 0x49058..0x494BC : End cutscene
 EndCutscene:    mapLoad 20,19,33
 		loadMapEntities ce_492CC
-		setActscript $0,$FF,eas_Init
-		customActscript $0,$FF
-		ac_setSpeed 5140        ;   
-		ac_jump eas_Idle        ;   
+		setActscriptWait $0,eas_Init
+		customActscriptWait $0
+		 ac_setSpeed 20,20      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $80,$FF
-		ac_setSpeed 5140        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 20,20      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $81,$FF
-		ac_setSpeed 5140        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setSpeed 20,20      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $82,$FF
-		ac_setSpeed 5140        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $82
+		 ac_setSpeed 20,20      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $83,$FF
-		ac_setSpeed 5140        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $83
+		 ac_setSpeed 20,20      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		entitySprite $B,$AA
 		fadeInB
 		csWait 60
 		setPos $0,25,35,RIGHT
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDownRight 1
 		 moveRight 1
 		endActions
 		csWait 30
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDown 4
 		endActions
 		setFacing $0,LEFT
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveRight 1
 		endActions
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveRight 1
 		endActions
 		csWait 60
@@ -48,30 +48,30 @@ EndCutscene:    mapLoad 20,19,33
 		entityNod $81
 		entityNod $0
 		csWait 40
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 4
 		endActions
 		setFacing $0,LEFT
 		csWait 80
 		setPos $83,25,35,RIGHT
-		entityActions $83,$FF
+		entityActionsWait $83
 		 moveDownRight 1
 		endActions
 		csWait 40
 		entityNod $0
 		csWait 60
-		entityActions $0,$0
+		entityActions $0
 		 moveDown 4
 		endActions
-		entityActions $83,$FF
+		entityActionsWait $83
 		 moveRight 1
 		 moveDown 3
 		endActions
 		setFacing $0,LEFT
 		setFacing $83,LEFT
-		setActscript $80,$0,eas_Jump
-		setActscript $81,$0,eas_Jump
-		setActscript $82,$FF,eas_Jump
+		setActscript $80,eas_Jump
+		setActscript $81,eas_Jump
+		setActscriptWait $82,eas_Jump
 		csWait 40
 		setFacing $82,DOWN
 		csWait 30
@@ -95,10 +95,10 @@ EndCutscene:    mapLoad 20,19,33
 		csWait 10
 		setFacing $83,LEFT
 		csWait 30
-		entityActions $0,$0
+		entityActions $0
 		 moveLeft 4
 		endActions
-		entityActions $83,$FF
+		entityActionsWait $83
 		 moveLeft 4
 		endActions
 		entityNod $81
@@ -106,40 +106,40 @@ EndCutscene:    mapLoad 20,19,33
 		csWait 60
 		setFacing $82,UP
 		csWait 30
-		setActscript $82,$FF,eas_Jump
+		setActscriptWait $82,eas_Jump
 		csWait 30
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveUp 1
 		endActions
 		setFacing $82,DOWN
 		setPos $B,23,37,DOWN
-		entityActions $B,$0
+		entityActions $B
 		 moveDown 1
 		 moveLeft 2
 		 moveDown 2
 		endActions
 		csWait 20
 		setPos $2,23,37,DOWN
-		entityActions $2,$0
+		entityActions $2
 		 moveDown 1
 		 moveLeft 2
 		 moveDown 1
 		endActions
 		csWait 20
 		setPos $A,23,37,DOWN
-		entityActions $A,$0
+		entityActions $A
 		 moveDown 1
 		 moveLeft 2
 		endActions
 		csWait 20
 		setPos $3,23,37,DOWN
-		entityActions $3,$0
+		entityActions $3
 		 moveDown 1
 		 moveLeft 1
 		endActions
 		csWait 20
 		setPos $7,23,37,DOWN
-		entityActions $7,$0
+		entityActions $7
 		 moveDown 1
 		endActions
 		setFacing $B,RIGHT
@@ -158,21 +158,21 @@ EndCutscene:    mapLoad 20,19,33
 		setFacing $0,UP
 		setFacing $83,UP
 		csWait 40
-		setActscript $B,$0,eas_Jump
-		setActscript $2,$0,eas_Jump
-		setActscript $A,$0,eas_Jump
-		setActscript $3,$0,eas_Jump
-		setActscript $7,$0,eas_Jump
+		setActscript $B,eas_Jump
+		setActscript $2,eas_Jump
+		setActscript $A,eas_Jump
+		setActscript $3,eas_Jump
+		setActscript $7,eas_Jump
 		setFacing $83,LEFT
 		entityNod $80
 		setFacing $0,LEFT
 		csWait 50
 		entityNod $0
-		setActscript $B,$0,eas_Jump
-		setActscript $2,$0,eas_Jump
-		setActscript $A,$0,eas_Jump
-		setActscript $3,$0,eas_Jump
-		setActscript $7,$0,eas_Jump
+		setActscript $B,eas_Jump
+		setActscript $2,eas_Jump
+		setActscript $A,eas_Jump
+		setActscript $3,eas_Jump
+		setActscript $7,eas_Jump
 		fadeOutB
 		csc_end
 ce_492CC:       mainEntity 63,63,DOWN
@@ -194,12 +194,12 @@ dms_01:         faceEntity $86,$0
 		moveEntityAboveAnother $0,$0
 		csc_end
 		setCameraEntity $0
-		setActscript $0,$0,eas_ControlledCharacter
+		setActscript $0,eas_ControlledCharacter
 cs_4934A:       entityFlashWhite $0,$B4
 		jump cs_4934A
 		csc_end
 		textCursor $142
-		setActscript $1,$1,eas_ControlledCharacter
+		csc15 $1,$1,eas_ControlledCharacter
 		showPortrait $0
 		setQuake 32770
 		setQuake 16386
@@ -211,25 +211,25 @@ cs_4934A:       entityFlashWhite $0,$B4
 		dc.w $3C
 		dc.w $FFFF
 		stopEntity $4
-		setActscript $1,$1,eas_493A2
+		csc15 $1,$1,eas_493A2
 		waitIdle $1
 		showPortrait $0
 		csWait 60
 		startEntity $4
 		hidePortrait
 		csc_end
-eas_493A2:      ac_set1Cb7 $FFFF
-		ac_set1Cb6 $FFFF
-		ac_set1Cb5 $FFFF
-		ac_setSpeed 8224
-		ac_11 $0
-		ac_12 $FEFF
-		ac_13 $FEFF
-		ac_40
-		ac_02
-		ac_waitDest
-		ac_40
-		ac_wait 1
+eas_493A2:       ac_set1Cb7 $FFFF
+		 ac_set1Cb6 $FFFF
+		 ac_set1Cb5 $FFFF
+		 ac_setSpeed 32,32
+		 ac_11 $0
+		 ac_12 $FEFF
+		 ac_13 $FEFF
+		 ac_40
+		 ac_02
+		 ac_waitDest
+		 ac_40
+		 ac_wait 1
 word_493CA:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $BA74
 		dc.w (eas_ControlledCharacter-word_493CA) & $FFFF
 		dc.w 4                  ; 0004 SET TEXT INDEX 142

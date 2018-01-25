@@ -4,22 +4,22 @@
 bbcs_35:        textCursor $B76
 		loadMapFadeIn 76,37,5
 		loadMapEntities ce_4D832
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,44,10,LEFT
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,44,8,LEFT
-		setActscript $1E,$FF,eas_Init
+		setActscriptWait $1E,eas_Init
 		setPos $1E,44,9,LEFT
 		jumpIfFlagClear $4C,cs_4D728; Zynk is a follower
-		setActscript $1A,$FF,eas_Init
+		setActscriptWait $1A,eas_Init
 		setPos $1A,63,62,DOWN
 cs_4D728:       fadeInB
 		cameraSpeed $30
 		nextSingleText $0,$80   ; "You're still alive?{W1}"
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$0,eas_Jump
-		setActscript $1F,$FF,eas_Jump
+		setActscript $0,eas_Jump
+		setActscript $7,eas_Jump
+		setActscriptWait $1F,eas_Jump
 		nextSingleText $C0,$1F  ; "Geshp!{W1}"
 		setCamDest 22,11
 		setFacing $80,RIGHT
@@ -51,23 +51,23 @@ cs_4D728:       fadeInB
 		csWait 30
 		setFacing $80,DOWN
 		nextSingleText $0,$80   ; "Don't let them advance!{W1}"
-		setActscript $81,$0,eas_Jump
-		setActscript $82,$0,eas_Jump
-		setActscript $83,$0,eas_Jump
-		setActscript $84,$0,eas_Jump
-		setActscript $85,$0,eas_Jump
-		setActscript $86,$0,eas_Jump
-		setActscript $87,$0,eas_Jump
-		setActscript $88,$0,eas_Jump
+		setActscript $81,eas_Jump
+		setActscript $82,eas_Jump
+		setActscript $83,eas_Jump
+		setActscript $84,eas_Jump
+		setActscript $85,eas_Jump
+		setActscript $86,eas_Jump
+		setActscript $87,eas_Jump
+		setActscript $88,eas_Jump
 		animEntityFadeInOut $80,$6
 		csWait 50
 		setCamDest 37,5
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveDown 1
 		 moveLeft 1
 		endActions
 		nextSingleText $0,$7    ; "He escaped again!{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveLeft 1
 		endActions
 		nextText $0,$1F         ; "Geshp sure is a tricky{N}devil.{W2}"

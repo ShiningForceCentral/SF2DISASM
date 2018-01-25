@@ -22,19 +22,19 @@ cs_54578:       textCursor $3F5
 		setFacing $8A,DOWN
 		nextSingleText $0,$8A   ; "Weigh anchor!{W1}"
 		setEntityDest $0,11,13
-		entityActions $8B,$0
+		entityActions $8B
 		 moveRight 4
 		 moveUp 9
 		 faceLeft 2
 		 faceDown 1
 		endActions
-		entityActions $8C,$0
+		entityActions $8C
 		 faceRight 30
 		 moveUp 9
 		 faceRight 2
 		 faceDown 1
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveRight 4
 byte_545B6:      moveDown 1
 		 moveRight 1
@@ -70,13 +70,13 @@ byte_545B6:      moveDown 1
 		nextSingleText $C0,$1F  ; "This earthquake must{N}have caused damage all{N}over the island.{W1}"
 		setFacing $1F,DOWN
 		nextSingleText $C0,$1F  ; "Maybe...to the east...to...{N}Oh, yes!  To the mainland!{W1}"
-		setActscript $9F,$FF,eas_Jump
-		setActscript $9F,$FF,eas_Jump
+		setActscriptWait $9F,eas_Jump
+		setActscriptWait $9F,eas_Jump
 		nextSingleText $0,$9F   ; "To Parmecia?!{N}Hmmmm....{W1}"
 		setFacing $1E,RIGHT
 		nextSingleText $0,$1E   ; "What?  To the mainland?{N}No!{W2}{N}What about Elis?!  No,{N}we'll stay here on Grans!{W1}"
 		setFacing $1E,DOWN
-		entityActions $1F,$0
+		entityActions $1F
 		 moveUp 1
 		 moveLeft 2
 		endActions
@@ -88,14 +88,14 @@ byte_545B6:      moveDown 1
 		csWait 120
 		loadMapFadeIn 66,28,26
 		loadMapEntities ce_54736
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		entitySprite $0,$D3
 		fadeInB
-		customActscript $0,$FF
-		ac_setSpeed 5140        ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 20,20      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $0,$0
+		entityActions $0
 		 moveRight 1
 		 moveUp 2
 		 moveRight 1

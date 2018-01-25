@@ -39,39 +39,39 @@ cs_5D65E:       textCursor $7EB
 		hideText
 		nextSingleText $0,$88   ; "Excellent!{W1}"
 		nextSingleText $0,$88   ; "Then, would you stand over{N}there, in front of the{N}flowers?{W1}"
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		setEntityDest $0,28,3
 		setFacing $0,DOWN
 		setEntityDest $7,27,4
 		setEntityDest $1F,27,5
 		setFacing $88,UP
-		setActscript $88,$FF,eas_46172
-		entityActions $88,$FF
+		setActscriptWait $88,eas_46172
+		entityActionsWait $88
 		 moveLeft 1
 		endActions
-		entityActions $88,$FF
+		entityActionsWait $88
 		 moveRight 1
 		endActions
 		csWait 60
-		entityActions $88,$FF
+		entityActionsWait $88
 		 moveLeft 1
 		endActions
 		csWait 30
-		entityActions $88,$FF
+		entityActionsWait $88
 		 moveRight 1
 		endActions
-		entityActions $88,$FF
+		entityActionsWait $88
 		 moveLeft 1
 		endActions
-		entityActions $88,$FF
+		entityActionsWait $88
 		 moveRight 1
 		endActions
 		csWait 60
-		setActscript $88,$FF,eas_Init2
+		setActscriptWait $88,eas_Init2
 		setFacing $88,UP
 		nextSingleText $0,$88   ; "Finished!{W1}"
-		entityActions $88,$FF
+		entityActionsWait $88
 		 moveRight 1
 		endActions
 		setFacing $88,LEFT

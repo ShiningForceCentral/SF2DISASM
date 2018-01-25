@@ -90,7 +90,7 @@ cs_5CBB4:       textCursor $1053
 		entitySprite $1D,$1D
 		startEntity $1D
 		nextSingleText $0,$1D   ; "O...ooo...wow!{W1}"
-		setActscript $1D,$FF,eas_Jump
+		setActscriptWait $1D,eas_Jump
 		setQuake 2
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
 		csWait 20
@@ -103,7 +103,7 @@ cs_5CBB4:       textCursor $1053
 		setFacing $1D,RIGHT
 		csWait 20
 		setFacing $1D,DOWN
-		setActscript $1D,$FF,eas_Jump
+		setActscriptWait $1D,eas_Jump
 		setQuake 2
 		playSound SFX_DOOR_OPEN_HIGH_PITCH
 		csWait 20
@@ -116,13 +116,13 @@ cs_5CBB4:       textCursor $1053
 		addNewFollower $1D
 		csc_end
 cs_5CC26:       entityFlashWhite $0,$32
-		setActscript $0,$0,eas_RotateRightHighSpeed
+		setActscript $0,eas_RotateRightHighSpeed
 		csWait 30
 		executeSubroutine FadeOutToWhite
 		mapLoad 64,0,0
 		loadEntitiesFromMapSetup 5,4,UP
 		executeSubroutine csub_5CDDC
-		setActscript $0,$0,eas_RotateRightHighSpeed
+		setActscript $0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
 		csWait 30
 		executeSubroutine sub_5CDEC
@@ -151,21 +151,21 @@ cs_5CC26:       entityFlashWhite $0,$32
 		csWait 2
 		mapLoad 63,3,3
 		loadEntitiesFromMapSetup 8,7,UP
-		setActscript $0,$0,eas_RotateRightHighSpeed
+		setActscript $0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
 		csWait 30
 		entityFlashWhite $0,$32
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		startEntity $0
 		csc_end
 cs_5CCF6:       entityFlashWhite $0,$32
-		setActscript $0,$0,eas_RotateRightHighSpeed
+		setActscript $0,eas_RotateRightHighSpeed
 		csWait 30
 		executeSubroutine FadeOutToWhite
 		mapLoad 64,0,0
 		loadEntitiesFromMapSetup 5,4,UP
 		executeSubroutine sub_5CDE4
-		setActscript $0,$0,eas_RotateRightHighSpeed
+		setActscript $0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
 		csWait 30
 		executeSubroutine sub_5CDF2
@@ -194,11 +194,11 @@ cs_5CCF6:       entityFlashWhite $0,$32
 		csWait 2
 		mapLoad 63,5,17
 		loadEntitiesFromMapSetup 10,21,UP
-		setActscript $0,$0,eas_RotateRightHighSpeed
+		setActscript $0,eas_RotateRightHighSpeed
 		executeSubroutine FadeInFromWhite
 		csWait 30
 		entityFlashWhite $0,$32
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		startEntity $0
 		jumpIfFlagSet $1D,cs_5CDDA; Claude joined
 		entitySprite $1D,$B0

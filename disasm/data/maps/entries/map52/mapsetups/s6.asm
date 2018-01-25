@@ -30,30 +30,30 @@ return_5C4EC:
 
 byte_5C4EE:     textCursor $575
 		cameraSpeed $30
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setEntityDest $0,5,23
 		setEntityDest $7,4,22
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveRight 1
 		endActions
 		nextSingleText $0,$7    ; "Who are they?{W1}"
 		setCamDest 16,4
 		csWait 5
-		setActscript $81,$0,eas_461B6
+		setActscript $81,eas_461B6
 		csWait 5
-		setActscript $82,$0,eas_461B6
+		setActscript $82,eas_461B6
 		nextSingleText $0,$7    ; "They're looking for something.{W1}"
 		csWait 5
-		setActscript $81,$0,eas_461B6
+		setActscript $81,eas_461B6
 		csWait 5
-		setActscript $82,$0,eas_461B6
-		entityActions $83,$FF
+		setActscript $82,eas_461B6
+		entityActionsWait $83
 		 moveUp 6
 		endActions
 		csWait 40
 		nextSingleText $0,$83   ; "He's not here...not under{N}the cliff....{W1}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveUp 2
 		 moveRight 1
 		endActions
@@ -64,20 +64,20 @@ byte_5C4EE:     textCursor $575
 		nextText $0,$80         ; "Could be...{W2}"
 		nextSingleText $0,$80   ; "see those volcanic rocks?{W1}"
 		csWait 5
-		setActscript $81,$0,eas_461E4
+		setActscript $81,eas_461E4
 		csWait 60
 		nextText $0,$80         ; "Nobody but Volcanon can do{N}that!{W2}"
 		setFacing $81,RIGHT
 		nextSingleText $0,$80   ; "He has never before killed{N}birdmen, but...{W1}"
-		entityActions $83,$FF
+		entityActionsWait $83
 		 moveDown 1
 		endActions
 		csWait 40
-		customActscript $83,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $83
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $83,$FF
+		entityActionsWait $83
 		 moveDown 2
 		 moveLeft 1
 		endActions
@@ -88,13 +88,13 @@ byte_5C4EE:     textCursor $575
 		setFacing $7,DOWN
 		csWait 50
 		setCamDest 16,7
-		setActscript $83,$FF,eas_Init
-		setActscript $83,$FF,eas_46172
-		entityActions $83,$FF
+		setActscriptWait $83,eas_Init
+		setActscriptWait $83,eas_46172
+		entityActionsWait $83
 		 moveUp 1
 		endActions
 		nextSingleText $0,$83   ; "Stupid Polca kids!{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 2
 		 moveLeft 2
 		 moveDown 1

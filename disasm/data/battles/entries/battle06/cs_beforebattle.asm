@@ -4,16 +4,16 @@
 bbcs_06:        textCursor $926
 		loadMapFadeIn 66,25,5
 		loadMapEntities ce_49CBA
-		setActscript $0,$FF,eas_Init
-		setActscript $5,$FF,eas_Init
-		setActscript $80,$FF,eas_Init
-		setActscript $81,$FF,eas_Init
-		setActscript $82,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $5,eas_Init
+		setActscriptWait $80,eas_Init
+		setActscriptWait $81,eas_Init
+		setActscriptWait $82,eas_Init
 		playSound MUSIC_MAIN_THEME
 		fadeInB
 		nextSingleText $0,$81   ; "Halt!{W1}"
-		setActscript $5,$0,eas_Jump
-		setActscript $0,$FF,eas_Jump
+		setActscript $5,eas_Jump
+		setActscriptWait $0,eas_Jump
 		setCamDest 31,9
 		nextSingleText $0,$81   ; "How did you get past the{N}Galam guards?{W1}"
 		nextSingleText $0,$82   ; "No one is allowed to leave{N}'til we conquer Granseal!{W1}"
@@ -22,7 +22,7 @@ bbcs_06:        textCursor $926
 		entityShakeHead $82
 		setFacing $81,LEFT
 		nextSingleText $0,$81   ; "And you want to bring it to{N}him?  Hmmmm.  I don't know....{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 5
 		endActions
 		setFacing $80,RIGHT
@@ -38,18 +38,18 @@ bbcs_06:        textCursor $926
 		nextSingleText $0,$80   ; "I'll get the package from{N}them.{W1}"
 		nextSingleText $C0,$5   ; "I think we're in trouble!{W1}"
 		setCameraEntity $80
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveLeft 2
 		 moveUp 4
 		endActions
 		nextSingleText $0,$80   ; "Hand it over.{N}I'll deliver it to...?{N}You!!!{W1}"
 		setCameraEntity $FFFF
-		setActscript $80,$FF,eas_46172
-		entityActions $80,$FF
+		setActscriptWait $80,eas_46172
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		nextSingleText $0,$80   ; "How did you escape from{N}jail?!{W1}"
-		setActscript $80,$FF,eas_Init
+		setActscriptWait $80,eas_Init
 		setFacing $80,DOWN
 		nextSingleText $0,$80   ; "Hey, these are the Granseal{N}spies!{W1}"
 		nextSingleText $C0,$5   ; "Oops!  That didn't work!{W1}"

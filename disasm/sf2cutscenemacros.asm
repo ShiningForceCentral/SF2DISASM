@@ -211,7 +211,11 @@ csc14:	macro
 	endm
 	
 customActscript:	macro ;alias
-	csc14 \1,\2
+	csc14 \1,0
+	endm	
+	
+customActscriptWait:	macro ;alias
+	csc14 \1,$FF
 	endm	
 	
 csc15:	macro
@@ -222,7 +226,11 @@ csc15:	macro
 	endm
 	
 setActscript:	macro ;alias
-	csc15 \1,\2,\3
+	csc15 \1,0,\2
+	endm	
+	
+setActscriptWait:	macro ;alias
+	csc15 \1,$FF,\2
 	endm	
 	
 csc16:	macro
@@ -457,7 +465,11 @@ csc2D:	macro
 	endm
 		
 entityActions:	macro ;alias
-	csc2D \1,\2
+	csc2D \1,0
+	endm
+		
+entityActionsWait:	macro ;alias
+	csc2D \1,$FF
 	endm
 	
 moveRight:	macro
@@ -1011,7 +1023,8 @@ ac_waitDestEntity:	macro
 
 ac_setSpeed:	macro
 	dc.w $10
-	dc.w \1
+	dc.b \1
+	dc.b \2
 	endm
 
 ac_11:	macro

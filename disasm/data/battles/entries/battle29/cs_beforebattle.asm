@@ -4,35 +4,35 @@
 bbcs_29:        textCursor $A9E
 		loadMapFadeIn 0,10,28
 		loadMapEntities ce_4C5AE
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
 		setPos $7,16,34,UP
-		setActscript $1F,$FF,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $1F,14,34,UP
 		playSound MUSIC_MITULA_SHRINE
 		fadeInB
 		cameraSpeed $30
-		entityActions $0,$0
+		entityActions $0
 		 moveUp 1
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveUp 1
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 1
 		endActions
 		nextSingleText $0,$80   ; "You can't enter Mitula{N}Shrine now.{W1}"
 		setFacing $7,LEFT
 		nextSingleText $0,$7    ; "Sir Astral, what do we do{N}now?{W1}"
 		nextSingleText $0,$1F   ; "Hmmm....{W1}"
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 1
 		endActions
 		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "{LEADER}, what do you{N}think?{W1}"
 		setFacing $0,LEFT
 		nextSingleText $0,$0    ; "I'm not sure.{W1}"
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		setFacing $7,LEFT
@@ -42,35 +42,35 @@ bbcs_29:        textCursor $A9E
 		nextText $0,$1F         ; "I agree.  We have to see the{N}storytellers and listen to{N}the legends.{W2}"
 		nextSingleText $0,$1F   ; "Make a break for it!{W1}"
 		setCamDest 10,26
-		customActscript $0,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $0
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $1F,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $1F
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $7,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $7
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $1F,$0
+		entityActions $1F
 		 moveUp 3
 		endActions
-		entityActions $0,$0
+		entityActions $0
 		 moveLeft 1
 		 moveUp 2
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveLeft 2
 		 moveUp 1
 		endActions
 		csWait 10
-		customActscript $80,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 2
 		 moveLeft 1
 		endActions

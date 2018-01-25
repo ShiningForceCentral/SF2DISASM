@@ -50,7 +50,7 @@ loc_632E0:
 
 	; End of function sub_632AC
 
-cs_632EA:       setActscript $0,$FF,eas_Init
+cs_632EA:       setActscriptWait $0,eas_Init
 		csWait 1
 		entityShiver $0
 		csc_end

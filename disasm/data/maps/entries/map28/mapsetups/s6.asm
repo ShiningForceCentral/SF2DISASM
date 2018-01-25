@@ -10,21 +10,21 @@ ms_map28_InitFunction:
 
 	; End of function ms_map28_InitFunction
 
-cs_5F3A2:       setActscript $0,$FF,eas_Init
-		setActscript $0,$FF,eas_Jump
+cs_5F3A2:       setActscriptWait $0,eas_Init
+		setActscriptWait $0,eas_Jump
 		csWait 2
 		playSound SFX_FALLING
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDownRight 1
 		endActions
 		csWait 2
 		csc_end
-cs_5F3C4:       setActscript $0,$FF,eas_Init
+cs_5F3C4:       setActscriptWait $0,eas_Init
 		csWait 2
-		setActscript $0,$FF,eas_Jump
+		setActscriptWait $0,eas_Jump
 		csWait 2
 		playSound SFX_FALLING
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveDownLeft 1
 		endActions
 		csWait 2

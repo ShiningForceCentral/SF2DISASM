@@ -27,7 +27,7 @@ cs_5B6C0:       textCursor $C87
 		csWait 7
 		setPos $82,60,60,DOWN
 		csWait 40
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveUp 1
 		endActions
 		nextSingleText $0,$81   ; "Hey, Evil Spirit is{N}appearing!{W1}"
@@ -57,15 +57,15 @@ cs_5B6C0:       textCursor $C87
 		setPos $82,60,60,DOWN
 		csWait 10
 		setPos $82,7,6,DOWN
-		setActscript $82,$0,eas_Transparent
-		setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+		setActscript $82,eas_Transparent
+		setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		setPos $0,7,12,UP
 		setPos $7,6,12,UP
 		setPos $1F,8,12,UP
 		setCamDest 2,4
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveUp 1
 		endActions
 		nextSingleText $80,$80  ; "Ahhh....{W1}"
@@ -87,13 +87,13 @@ cs_5B6C0:       textCursor $C87
 		mapFadeOutToWhite
 		csWait 30
 		nextSingleText $0,$82   ; "Hmmmm....{N}Hmmmm...mmmm....{W1}"
-		entityActions $0,$0
+		entityActions $0
 		 moveUp 1
 		endActions
-		entityActions $7,$0
+		entityActions $7
 		 moveUp 1
 		endActions
-		entityActions $1F,$FF
+		entityActionsWait $1F
 		 moveUp 1
 		endActions
 		nextSingleText $0,$7    ; "What is he doing now?{W1}"
@@ -105,8 +105,8 @@ cs_5B6C0:       textCursor $C87
 		setFacing $81,DOWN
 		nextSingleText $0,$81   ; "Shhhh!  Be silent.{N}He's got something.{W1}"
 		setFacing $81,UP
-		setActscript $80,$FF,eas_Jump
-		setActscript $80,$FF,eas_Jump
+		setActscriptWait $80,eas_Jump
+		setActscriptWait $80,eas_Jump
 		nextSingleText $80,$80  ; "What did you find?{W1}"
 		nextSingleText $0,$82   ; "The barrier around Grans{N}Island is too strong.{N}I can't see anything.{W1}"
 		entityShiver $80
@@ -119,8 +119,8 @@ cs_5B6C0:       textCursor $C87
 		nextSingleText $0,$7    ; "{LEADER}, you have the{N}Jewel of Evil, right?{W1}"
 		setFacing $80,DOWN
 		setFacing $81,DOWN
-		setActscript $80,$FF,eas_Jump
-		setActscript $80,$FF,eas_Jump
+		setActscriptWait $80,eas_Jump
+		setActscriptWait $80,eas_Jump
 		nextText $80,$80        ; "Is this true, {LEADER}?{W2}"
 		nextSingleText $80,$80  ; "That's one of the magic{N}jewels used to seal{N}Zeon.  Give it to me.{W1}"
 		setFacing $0,UP
@@ -128,25 +128,25 @@ cs_5B6C0:       textCursor $C87
 		setFacing $1F,UP
 		nextSingleText $0,$7    ; "But, we can't remove it.{W1}"
 		nextSingleText $80,$80  ; "I can.{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		nextSingleText $80,$80  ; "Let me see it.{W1}"
-		setActscript $80,$FF,eas_46172
-		entityActions $80,$0
+		setActscriptWait $80,eas_46172
+		entityActions $80
 		 moveDown 1
 		endActions
 		csWait 2
-		setActscript $80,$FF,eas_461AA
+		setActscriptWait $80,eas_461AA
 		stopEntity $80
 		csWait 20
 		entityFlashWhite $0,$28
 		startEntity $80
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 1
 		endActions
 		csWait 2
-		setActscript $80,$FF,eas_461AA
+		setActscriptWait $80,eas_461AA
 		entityShakeHead $80
 		nextText $80,$80        ; "Whhoooa!{W2}"
 		nextSingleText $80,$80  ; "What's that light?{N}There are two!{W1}"
@@ -159,12 +159,12 @@ cs_5B6C0:       textCursor $C87
 		entityNod $0
 		csWait 20
 		setCamDest 2,4
-		setActscript $80,$FF,eas_Init
-		entityActions $80,$0
+		setActscriptWait $80,eas_Init
+		entityActions $80
 		 moveRight 1
 		 moveUp 1
 		endActions
-		entityActions $0,$FF
+		entityActionsWait $0
 		 moveUp 2
 		endActions
 		setFacing $81,UP
@@ -194,8 +194,8 @@ cs_5B6C0:       textCursor $C87
 		nextSingleText $0,$82   ; "North Parmecia.{W1}"
 		nextSingleText $80,$80  ; "Something has happened to{N}Mitula....{W1}"
 		nextSingleText $0,$82   ; "I can't see Zeon.{W1}"
-		setActscript $80,$FF,eas_Jump
-		setActscript $80,$FF,eas_Jump
+		setActscriptWait $80,eas_Jump
+		setActscriptWait $80,eas_Jump
 		nextSingleText $80,$80  ; "What do you mean?{W1}"
 		nextText $0,$82         ; "He's still in Arc Valley.{W2}"
 		nextSingleText $0,$82   ; "He has revived, but he has{N}not recovered his full{N}strength yet.{W1}"
@@ -218,16 +218,16 @@ cs_5B6C0:       textCursor $C87
 		executeSubroutine sub_5BFDA
 		flashScreenWhite $28
 		executeSubroutine sub_5BFE4
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$0,eas_Jump
-		setActscript $1F,$0,eas_Jump
-		setActscript $80,$0,eas_Jump
-		setActscript $81,$FF,eas_Jump
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$0,eas_Jump
-		setActscript $1F,$0,eas_Jump
-		setActscript $80,$0,eas_Jump
-		setActscript $81,$FF,eas_Jump
+		setActscript $0,eas_Jump
+		setActscript $7,eas_Jump
+		setActscript $1F,eas_Jump
+		setActscript $80,eas_Jump
+		setActscriptWait $81,eas_Jump
+		setActscript $0,eas_Jump
+		setActscript $7,eas_Jump
+		setActscript $1F,eas_Jump
+		setActscript $80,eas_Jump
+		setActscriptWait $81,eas_Jump
 		nextSingleText $0,$83   ; "I'm Zeon!  I'm the King of{N}the Devils!{W1}"
 		nextSingleText $80,$80  ; "What's this?!{W1}"
 		nextText $0,$83         ; "Who's contacting me?{N}Do you want to die?{W1}"
@@ -237,7 +237,7 @@ cs_5B6C0:       textCursor $C87
 		nextSingleText $80,$80  ; "Impossible!{W1}"
 		nextText $0,$83         ; "You're {LEADER}.{N}I see you....{W2}"
 		nextSingleText $0,$83   ; "Listen, {LEADER}.{N}Bring that jewel to Arc{N}Valley.{W1}"
-		entityActions $7,$FF
+		entityActionsWait $7
 		 moveUp 1
 		endActions
 		nextSingleText $0,$7    ; "Why should we?!{W1}"
@@ -263,106 +263,106 @@ cs_5B6C0:       textCursor $C87
 		executeSubroutine sub_5BFDA
 		setQuake 5
 		playSound SFX_BIG_DOOR_RUMBLE
-		customActscript $85,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $85
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $86,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $86
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $87,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $87
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $88,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $88
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $89,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $89
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $8A,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8A
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $8B,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8B
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $8C,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8C
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $8D,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8D
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $8E,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8E
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $8F,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $8F
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $90,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $90
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $91,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $91
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $92,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $92
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $93,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $93
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $94,$FF
-		ac_setSpeed 16448       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $94
+		 ac_setSpeed 64,64      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setPos $8D,8,6,RIGHT
 		setPos $8E,7,5,RIGHT
 		setPos $8F,6,6,RIGHT
 		setPos $90,7,7,RIGHT
-		setActscript $8D,$0,eas_464BE
-		setActscript $8E,$0,eas_464C6
-		setActscript $8F,$0,eas_464CE
-		setActscript $90,$0,eas_464D6
+		setActscript $8D,eas_464BE
+		setActscript $8E,eas_464C6
+		setActscript $8F,eas_464CE
+		setActscript $90,eas_464D6
 		setPos $91,8,6,LEFT
 		setPos $92,7,7,LEFT
 		setPos $93,6,6,LEFT
 		setPos $94,7,5,LEFT
-		entityActions $91,$0
+		entityActions $91
 		 moveRight 1
 		endActions
 		csWait 2
-		setActscript $91,$FF,eas_461AA
-		entityActions $92,$0
+		setActscriptWait $91,eas_461AA
+		entityActions $92
 		 moveDown 1
 		endActions
 		csWait 2
-		setActscript $92,$FF,eas_461AA
-		entityActions $93,$0
+		setActscriptWait $92,eas_461AA
+		entityActions $93
 		 moveLeft 1
 		endActions
 		csWait 2
-		setActscript $93,$FF,eas_461AA
-		entityActions $94,$0
+		setActscriptWait $93,eas_461AA
+		entityActions $94
 		 moveUp 1
 		endActions
 		csWait 2
-		setActscript $94,$FF,eas_461AA
-		setActscript $91,$0,eas_464E2
-		setActscript $92,$0,eas_464EA
-		setActscript $93,$0,eas_464F2
-		setActscript $94,$0,eas_464FA
+		setActscriptWait $94,eas_461AA
+		setActscript $91,eas_464E2
+		setActscript $92,eas_464EA
+		setActscript $93,eas_464F2
+		setActscript $94,eas_464FA
 		playSound SFX_BATTLEFIELD_DEATH
 		setPos $85,7,6,RIGHT
 		setPos $86,7,6,RIGHT
@@ -372,28 +372,28 @@ cs_5B6C0:       textCursor $C87
 		setPos $8A,7,6,RIGHT
 		setPos $8B,7,6,RIGHT
 		setPos $8C,7,6,RIGHT
-		entityActions $85,$0
+		entityActions $85
 		 moveRight 4
 		endActions
-		entityActions $86,$0
+		entityActions $86
 		 moveUp 4
 		endActions
-		entityActions $87,$0
+		entityActions $87
 		 moveLeft 4
 		endActions
-		entityActions $88,$0
+		entityActions $88
 		 moveDown 4
 		endActions
-		entityActions $89,$0
+		entityActions $89
 		 moveUpRight 4
 		endActions
-		entityActions $8A,$0
+		entityActions $8A
 		 moveUpLeft 4
 		endActions
-		entityActions $8B,$0
+		entityActions $8B
 		 moveDownLeft 4
 		endActions
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 moveDownRight 4
 		endActions
 		playSound SFX_BATTLEFIELD_DEATH
@@ -405,28 +405,28 @@ cs_5B6C0:       textCursor $C87
 		setPos $8A,7,6,RIGHT
 		setPos $8B,7,6,RIGHT
 		setPos $8C,7,6,RIGHT
-		entityActions $85,$0
+		entityActions $85
 		 moveRight 4
 		endActions
-		entityActions $86,$0
+		entityActions $86
 		 moveUp 4
 		endActions
-		entityActions $87,$0
+		entityActions $87
 		 moveLeft 4
 		endActions
-		entityActions $88,$0
+		entityActions $88
 		 moveDown 4
 		endActions
-		entityActions $89,$0
+		entityActions $89
 		 moveUpRight 4
 		endActions
-		entityActions $8A,$0
+		entityActions $8A
 		 moveUpLeft 4
 		endActions
-		entityActions $8B,$0
+		entityActions $8B
 		 moveDownLeft 4
 		endActions
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 moveDownRight 4
 		endActions
 		playSound SFX_BATTLEFIELD_DEATH
@@ -438,28 +438,28 @@ cs_5B6C0:       textCursor $C87
 		setPos $8A,7,6,RIGHT
 		setPos $8B,7,6,RIGHT
 		setPos $8C,7,6,RIGHT
-		entityActions $85,$0
+		entityActions $85
 		 moveRight 4
 		endActions
-		entityActions $86,$0
+		entityActions $86
 		 moveUp 4
 		endActions
-		entityActions $87,$0
+		entityActions $87
 		 moveLeft 4
 		endActions
-		entityActions $88,$0
+		entityActions $88
 		 moveDown 4
 		endActions
-		entityActions $89,$0
+		entityActions $89
 		 moveUpRight 4
 		endActions
-		entityActions $8A,$0
+		entityActions $8A
 		 moveUpLeft 4
 		endActions
-		entityActions $8B,$0
+		entityActions $8B
 		 moveDownLeft 4
 		endActions
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 moveDownRight 4
 		endActions
 		hideEntity $82
@@ -473,28 +473,28 @@ cs_5B6C0:       textCursor $C87
 		setPos $8A,7,6,RIGHT
 		setPos $8B,7,6,RIGHT
 		setPos $8C,7,6,RIGHT
-		entityActions $85,$0
+		entityActions $85
 		 moveRight 4
 		endActions
-		entityActions $86,$0
+		entityActions $86
 		 moveUp 4
 		endActions
-		entityActions $87,$0
+		entityActions $87
 		 moveLeft 4
 		endActions
-		entityActions $88,$0
+		entityActions $88
 		 moveDown 4
 		endActions
-		entityActions $89,$0
+		entityActions $89
 		 moveUpRight 4
 		endActions
-		entityActions $8A,$0
+		entityActions $8A
 		 moveUpLeft 4
 		endActions
-		entityActions $8B,$0
+		entityActions $8B
 		 moveDownLeft 4
 		endActions
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 moveDownRight 4
 		endActions
 		playSound SFX_BATTLEFIELD_DEATH
@@ -506,28 +506,28 @@ cs_5B6C0:       textCursor $C87
 		setPos $8A,7,6,RIGHT
 		setPos $8B,7,6,RIGHT
 		setPos $8C,7,6,RIGHT
-		entityActions $85,$0
+		entityActions $85
 		 moveRight 4
 		endActions
-		entityActions $86,$0
+		entityActions $86
 		 moveUp 4
 		endActions
-		entityActions $87,$0
+		entityActions $87
 		 moveLeft 4
 		endActions
-		entityActions $88,$0
+		entityActions $88
 		 moveDown 4
 		endActions
-		entityActions $89,$0
+		entityActions $89
 		 moveUpRight 4
 		endActions
-		entityActions $8A,$0
+		entityActions $8A
 		 moveUpLeft 4
 		endActions
-		entityActions $8B,$0
+		entityActions $8B
 		 moveDownLeft 4
 		endActions
-		entityActions $8C,$FF
+		entityActionsWait $8C
 		 moveDownRight 4
 		endActions
 		hideEntity $85
@@ -564,23 +564,23 @@ cs_5B6C0:       textCursor $C87
 		nextText $80,$80        ; "Why does Zeon want the jewel?{W2}"
 		nextSingleText $80,$80  ; "No more questions...{N}...without Evil Spirit....{W1}"
 		csWait 30
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		 moveLeft 1
 		 moveDown 5
 		endActions
 		hideEntity $80
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveLeft 1
 		 moveDown 1
 		endActions
 		setFacing $7,DOWN
 		setFacing $1F,DOWN
 		nextText $0,$81         ; "Creed?  Creed!{W2}"
-		setActscript $81,$FF,eas_Jump
-		setActscript $81,$FF,eas_Jump
+		setActscriptWait $81,eas_Jump
+		setActscriptWait $81,eas_Jump
 		nextSingleText $0,$81   ; "Hey, don't leave me here!{N}Wait for me!{W1}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveDown 5
 		endActions
 		hideEntity $81

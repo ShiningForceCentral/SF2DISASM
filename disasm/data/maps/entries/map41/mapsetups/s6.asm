@@ -18,20 +18,20 @@ return_5F4AC:
 
 cs_5F4AE:       setBlocks 13,0,3,5,5,4
 		csc_end
-cs_5F4B8:       setActscript $0,$FF,eas_Init
-		setActscript $7,$FF,eas_Init
-		setActscript $1F,$FF,eas_Init
+cs_5F4B8:       setActscriptWait $0,eas_Init
+		setActscriptWait $7,eas_Init
+		setActscriptWait $1F,eas_Init
 		csWait 40
 		playSound SFX_BIG_DOOR_RUMBLE
 		setQuake 3
 		csWait 40
 		playSound SFX_BIG_DOOR_RUMBLE
 		csWait 5
-		setActscript $0,$0,eas_461B6
+		setActscript $0,eas_461B6
 		csWait 5
-		setActscript $7,$0,eas_461B6
+		setActscript $7,eas_461B6
 		csWait 5
-		setActscript $1F,$0,eas_461B6
+		setActscript $1F,eas_461B6
 		playSound SFX_BIG_DOOR_RUMBLE
 		csWait 40
 		playSound SFX_BIG_DOOR_RUMBLE
@@ -53,12 +53,12 @@ cs_5F4B8:       setActscript $0,$FF,eas_Init
 		playSound SFX_BIG_DOOR_RUMBLE
 		setQuake 16387
 		csWait 40
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$0,eas_Jump
-		setActscript $1F,$FF,eas_Jump
-		setActscript $0,$0,eas_Jump
-		setActscript $7,$0,eas_Jump
-		setActscript $1F,$FF,eas_Jump
+		setActscript $0,eas_Jump
+		setActscript $7,eas_Jump
+		setActscriptWait $1F,eas_Jump
+		setActscript $0,eas_Jump
+		setActscript $7,eas_Jump
+		setActscriptWait $1F,eas_Jump
 		csWait 50
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
@@ -72,7 +72,7 @@ cs_5F594:       newEntity $1C,6,15,UP,$FF
 		setFacing $1F,DOWN
 		setCamDest 1,6
 		nextSingleText $0,$1C   ; "{LEADER}, wait!{W1}"
-		entityActions $1C,$FF
+		entityActionsWait $1C
 		 moveUp 4
 		endActions
 		nextSingleText $0,$1C   ; "May I join your force?{W1}"
@@ -94,8 +94,8 @@ cs_5F594:       newEntity $1C,6,15,UP,$FF
 		entityNod $1F
 		nextSingleText $0,$1F   ; "{NAME;28}, please come{N}with us.  You'll be a great{N}help.{W1}"
 		join $1C
-		setActscript $1C,$FF,eas_Jump
-		setActscript $1C,$FF,eas_Jump
+		setActscriptWait $1C,eas_Jump
+		setActscriptWait $1C,eas_Jump
 		nextSingleText $0,$1C   ; "Oh, thank you!  I know I can{N}take the King of the Devils!{W1}"
 		setFacing $1F,UP
 		followEntity $1C,$1F,$2

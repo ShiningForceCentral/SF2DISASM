@@ -5,7 +5,7 @@ bbcs_07:        textCursor $935
 		clearF $53              ; King + Minister are followers
 		loadMapFadeIn 58,8,29
 		loadMapEntities ce_49F36
-		setActscript $0,$FF,eas_Init
+		setActscriptWait $0,eas_Init
 		animEntityFadeInOut $85,$4
 		fadeInB
 		cameraSpeed $28
@@ -16,16 +16,16 @@ bbcs_07:        textCursor $935
 		nextSingleText $0,$83   ; "Astral, save her!{W1}"
 		setCamDest 8,13
 		nextSingleText $0,$82   ; "Father!{W1}"
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveDown 1
 		endActions
 		csWait 40
 		setFacing $80,UP
 		csWait 20
-		setActscript $82,$FF,eas_Jump
+		setActscriptWait $82,eas_Jump
 		csWait 30
-		setActscript $82,$FF,eas_46172
-		entityActions $82,$FF
+		setActscriptWait $82,eas_46172
+		entityActionsWait $82
 		 moveUp 1
 		endActions
 		setFacing $80,DOWN
@@ -38,63 +38,63 @@ bbcs_07:        textCursor $935
 		nextText $0,$81         ; "No!  You give up!{N}We've got reinforcements!{W2}"
 		nextSingleText $0,$81   ; "Your great magic cannot{N}defeat all of our soldiers!{W1}"
 		nextSingleText $C0,$80  ; "I'll kill you before they{N}have a chance to attack!{W1}"
-		entityActions $80,$FF
+		entityActionsWait $80
 		 moveDown 1
 		endActions
 		nextSingleText $0,$81   ; "Just try it!{W1}"
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveUp 1
 		endActions
-		setActscript $80,$FF,eas_BumpDown
+		setActscriptWait $80,eas_BumpDown
 		setQuake 2
 		playSound SFX_LIGHTNING_1
-		setActscript $81,$FF,eas_BumpUp
+		setActscriptWait $81,eas_BumpUp
 		setQuake 0
 		csWait 50
-		setActscript $80,$0,eas_BumpDown
+		setActscript $80,eas_BumpDown
 		setQuake 3
 		playSound SFX_LIGHTNING_2
-		setActscript $81,$FF,eas_BumpUp
+		setActscriptWait $81,eas_BumpUp
 		setQuake 0
-		setActscript $81,$0,eas_Jump
+		setActscript $81,eas_Jump
 		entityNod $80
-		setActscript $81,$FF,eas_BumpDown
+		setActscriptWait $81,eas_BumpDown
 		setQuake 2
 		playSound SFX_DOOR_OPEN
-		setActscript $80,$FF,eas_BumpUp
+		setActscriptWait $80,eas_BumpUp
 		setQuake 0
 		csWait 40
-		setActscript $80,$0,eas_BumpDown
+		setActscript $80,eas_BumpDown
 		setQuake 3
 		playSound SFX_HIT_2
-		setActscript $81,$FF,eas_BumpUp
+		setActscriptWait $81,eas_BumpUp
 		setQuake 0
-		setActscript $80,$0,eas_Jump
+		setActscript $80,eas_Jump
 		entityNod $81
-		setActscript $80,$FF,eas_46172
-		setActscript $81,$FF,eas_46172
+		setActscriptWait $80,eas_46172
+		setActscriptWait $81,eas_46172
 		csWait 30
-		entityActions $80,$0
+		entityActions $80
 		 moveUp 1
 		endActions
-		entityActions $81,$FF
+		entityActionsWait $81
 		 moveDown 1
 		endActions
 		nextSingleText $C0,$80  ; "Astral...{W1}"
 		nextSingleText $0,$81   ; "Gguuu....{W1}"
 		stopEntity $80
 		stopEntity $81
-		customActscript $80,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $80
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		customActscript $81,$FF
-		ac_setAnimCounter $0    ;   
-		ac_setFlip $1           ;   
-		ac_updateSprite         ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $81
+		 ac_setAnimCounter $0   ;   
+		 ac_setFlip $1          ;   
+		 ac_updateSprite        ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
 		setFacing $80,UP
 		nextSingleText $C0,$80  ; "I've beaten you!{N}You've lost!{W1}"
@@ -102,11 +102,11 @@ bbcs_07:        textCursor $935
 		nextSingleText $0,$81   ; "You cannot move.{N}Princess Elis, run away!{W1}"
 		setCamDest 8,13
 		nextSingleText $0,$82   ; "I'll try.{W1}"
-		customActscript $82,$FF
-		ac_setSpeed 12336       ;   
-		ac_jump eas_Idle        ;   
+		customActscriptWait $82
+		 ac_setSpeed 48,48      ;   
+		 ac_jump eas_Idle       ;   
 		ac_end
-		entityActions $82,$0
+		entityActions $82
 		 moveDown 3
 		endActions
 		csWait 10
@@ -114,9 +114,9 @@ bbcs_07:        textCursor $935
 		animEntityFadeInOut $85,$5
 		waitIdle $82
 		nextSingleText $0,$85   ; "Stop, my dear!{W1}"
-		setActscript $82,$FF,eas_Jump
+		setActscriptWait $82,eas_Jump
 		nextSingleText $0,$82   ; "Oh!{W1}"
-		entityActions $82,$FF
+		entityActionsWait $82
 		 moveUp 2
 		endActions
 		setCamDest 8,15
@@ -134,9 +134,9 @@ bbcs_07:        textCursor $935
 		nextText $C0,$80        ; "Forget about Astral.{N}"
 		nextText $C0,$80        ; "I'll kill him!{W2}"
 		nextSingleText $C0,$80  ; "Eat them all up before{N}they reach her!{W1}"
-		setActscript $85,$0,eas_Jump
-		setActscript $86,$0,eas_Jump
-		setActscript $87,$FF,eas_Jump
+		setActscript $85,eas_Jump
+		setActscript $86,eas_Jump
+		setActscriptWait $87,eas_Jump
 		csc_end
 ce_49F36:       mainEntity 13,35,UP
 		entity 13,17,DOWN,164,eas_Init
