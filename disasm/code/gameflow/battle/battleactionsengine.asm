@@ -553,10 +553,10 @@ loc_A194:
 		cmpi.w  #5,(a3)
 		bne.w   loc_A1CA
 		move.w  d0,d2           ; random MUDDLE lines
-		move.w  #$142,d1        ; {NAME} did nothing.
+		move.w  #$142,d1        ; HARDCODED Muddle line start index
 		moveq   #$10,d0
 		jsr     (GetRandomOrDebugValue).w
-		cmpi.w  #9,d0
+		cmpi.w  #9,d0           ; HARDCODED number of available Muddle lines
 		bls.s   loc_A1B0
 		clr.w   d0
 loc_A1B0:
@@ -1564,12 +1564,12 @@ WriteSkirmishScript_DodgeAttack:
 		jsr     j_GetStatus
 		andi.w  #1,d1
 		bne.w   return_ABBC
-		moveq   #2,d2
+		moveq   #2,d2           ; 50% chance to miss when muddled ?
 		move.b  (a4),d0
 		jsr     GetStatus
 		andi.w  #COM_STATUS_MASK_MUDDLE,d1
 		bne.w   loc_AB74
-		moveq   #$20,d2 
+		moveq   #$20,d2 ; 1/32 chance to miss otherwise ?
 		move.b  (a5),d0
 		jsr     GetUpperMoveType
 		cmpi.w  #5,d1
@@ -2188,7 +2188,7 @@ rjt_ItemUsedEffects:
 		dc.w sub_B30E-rjt_ItemUsedEffects
 		dc.w sub_B3A8-rjt_ItemUsedEffects
 		dc.w sub_B41A-rjt_ItemUsedEffects
-		dc.w sub_B488-rjt_ItemUsedEffects
+		dc.w spell07_Muddle-rjt_ItemUsedEffects
 		dc.w sub_B516-rjt_ItemUsedEffects
 		dc.w sub_B57E-rjt_ItemUsedEffects
 		dc.w NoItemEffect-rjt_ItemUsedEffects
@@ -2351,7 +2351,7 @@ loc_B264:
 		bra.s   loc_B26C
 loc_B266:
 		moveq   #8,d2
-		bsr.w   sub_BA98
+		bsr.w   ApplyRandomEffectiveness
 loc_B26C:
 		move.b  (a5),d0
 		jsr     SetStatus
@@ -2372,7 +2372,7 @@ sub_B27C:
 		andi.w  #$3000,d3
 		beq.s   loc_B29C
 		moveq   #8,d2
-		bsr.w   sub_BA98
+		bsr.w   ApplyRandomEffectiveness
 loc_B29C:
 		btst    #7,d0
 		bne.s   loc_B2B6
@@ -2420,7 +2420,7 @@ sub_B30E:
 		beq.s   loc_B314
 		addq.w  #5,d2
 loc_B314:
-		bsr.w   sub_BA98
+		bsr.w   ApplyRandomEffectiveness
 		jsr     GetStatus
 		move.w  d1,d3
 		ori.w   #$C00,d1
@@ -2428,7 +2428,7 @@ loc_B314:
 		andi.w  #$C00,d3
 		beq.s   loc_B336
 		moveq   #8,d2
-		bsr.w   sub_BA98
+		bsr.w   ApplyRandomEffectiveness
 loc_B336:
 		btst    #7,d0
 		bne.s   loc_B350
@@ -2488,7 +2488,7 @@ sub_B3A8:
 		andi.w  #$C000,d3
 		beq.s   loc_B3C8
 		moveq   #8,d2
-		bsr.w   sub_BA98
+		bsr.w   ApplyRandomEffectiveness
 loc_B3C8:
 		btst    #7,d0
 		bne.s   loc_B3E2
@@ -2536,7 +2536,7 @@ loc_B42E:
 		addq.w  #5,d3
 loc_B430:
 		move.w  d3,d2
-		bsr.w   sub_BA98
+		bsr.w   ApplyRandomEffectiveness
 		jsr     GetStatus
 		ori.w   #$300,d1
 		btst    #7,d0
@@ -2568,27 +2568,30 @@ loc_B46C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B488:
+; muddle
+
+spell07_Muddle:
+		
 		move.b  (a5),d0
 		tst.w   ((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
-		beq.w   loc_B4AE
-		addq.w  #5,d2
-		bsr.w   sub_BA98
+		beq.w   loc_B4AE        
+		addq.w  #5,d2           ; muddle 2, 25% chance
+		bsr.w   ApplyRandomEffectiveness
 		jsr     GetStatus
-		ori.w   #8,d1
-		ori.w   #$30,d1 
+		ori.w   #COM_STATUS_MASK_MUDDLE2,d1
+		ori.w   #COM_STATUS_MASK_MUDDLE,d1
 		move.w  #$151,d2
 		bra.w   loc_B4D0
 loc_B4AE:
-		moveq   #8,d2
+		moveq   #8,d2           ; muddle 1
 		jsr     GetStatus
-		andi.w  #8,d1
-		bne.s   loc_B4BE
-		moveq   #5,d2
+		andi.w  #COM_STATUS_MASK_MUDDLE2,d1
+		bne.s   loc_B4BE        ; if target already affected by Muddle 2, then no chance for Muddle 1 to work.
+		moveq   #5,d2           ; 25% chance
 loc_B4BE:
-		bsr.w   sub_BA98
+		bsr.w   ApplyRandomEffectiveness
 		jsr     GetStatus
-		ori.w   #$30,d1 
+		ori.w   #COM_STATUS_MASK_MUDDLE,d1
 		move.w  #$151,d2
 loc_B4D0:
 		btst    #7,d0
@@ -2615,14 +2618,14 @@ loc_B4FC:
 		move.w  #0,(a6)+
 		rts
 
-	; End of function sub_B488
+	; End of function spell07_Muddle
 
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_B516:
 		addq.w  #5,d2
-		bsr.w   sub_BA98
+		bsr.w   ApplyRandomEffectiveness
 		jsr     GetStatus
 		btst    #7,d0
 		bne.s   loc_B53C
@@ -2663,7 +2666,7 @@ loc_B562:
 
 sub_B57E:
 		addq.w  #5,d2
-		bsr.w   sub_BA98
+		bsr.w   ApplyRandomEffectiveness
 		jsr     GetStatus
 		ori.w   #$C0,d1 
 		btst    #7,d0
@@ -2977,7 +2980,7 @@ loc_B888:
 		tst.w   d1
 		bne.s   loc_B898
 		moveq   #8,d2
-		bsr.w   sub_BA98
+		bsr.w   ApplyRandomEffectiveness
 loc_B898:
 		move.b  (a5),d0
 		jsr     GetStatus
@@ -3025,7 +3028,7 @@ sub_B8F8:
 		cmpi.b  #$FF,(a1)
 		bne.s   loc_B918
 		moveq   #8,d2
-		bsr.w   sub_BA98
+		bsr.w   ApplyRandomEffectiveness
 loc_B918:
 		move.b  (a5),d0
 		jsr     GetStatus
@@ -3184,7 +3187,8 @@ NoItemEffect:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BA98:
+ApplyRandomEffectiveness:
+		
 		move.l  d0,-(sp)
 		tst.b   -$17(a2)
 		beq.s   loc_BAA2
@@ -3209,7 +3213,7 @@ loc_BAD2:
 		move.l  (sp)+,d0
 		rts
 
-	; End of function sub_BA98
+	; End of function ApplyRandomEffectiveness
 
 
 ; =============== S U B R O U T I N E =======================================

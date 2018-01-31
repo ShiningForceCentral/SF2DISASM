@@ -41,8 +41,8 @@ cs_5E3C2:       textCursor $AAB
 		setFacing $1F,UP
 		nextSingleText $0,$1F   ; "I heard a voice from the{N}other side of the door.{W1}"
 		setFacing $0,UP
-		setEntityDest $801F,13,12
-		setEntityDest $7,16,12
+		setDest $801F,13,12
+		setDest $7,16,12
 		setFacing $1F,UP
 		setFacing $7,UP
 		setCamDest 8,9
@@ -133,7 +133,7 @@ cs_5E3C2:       textCursor $AAB
 		 moveUp 4
 		endActions
 		nextSingleText $0,$1F   ; "Whhhhhhat?{N}{NAME;7}, don't scare me!{W1}"
-		entityShiver $1F
+		shiver $1F
 		customActscriptWait $7
 		 ac_setSpeed 32,32      ;   
 		 ac_jump eas_Idle       ;   
@@ -158,7 +158,7 @@ cs_5E3C2:       textCursor $AAB
 		nextText $0,$1F         ; "But still, he's a greater{N}devil.{W2}"
 		nextSingleText $0,$1F   ; "We had better complete our{N}preparations before we go in.{W1}"
 		nextSingleText $0,$0    ; "OK.{W1}"
-		entityNod $7
+		nod $7
 		setActscriptWait $0,eas_Init
 		setActscriptWait $7,eas_Init
 		followEntity $1F,$0,$2

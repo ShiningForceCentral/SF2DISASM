@@ -73,7 +73,7 @@ cs_54E86:       textCursor $42A
 		 moveRight 1
 		 moveUp 7
 		endActions
-		hideEntity $8A
+		hide $8A
 		csc_end
 cs_54F26:       textCursor $432
 		customActscriptWait $7
@@ -295,10 +295,10 @@ cs_54F26:       textCursor $432
 		 moveLeft 1
 		 moveUp 3
 		endActions
-		hideEntity $90
-		hideEntity $91
-		hideEntity $92
-		hideEntity $7
+		hide $90
+		hide $91
+		hide $92
+		hide $7
 		entityActionsWait $82
 		 moveLeft 1
 		endActions
@@ -321,7 +321,7 @@ cs_55242:       textCursor $463
 		entityActionsWait $8E
 		 moveUp 7
 		endActions
-		hideEntity $8E
+		hide $8E
 		csc_end
 cs_55288:       textCursor $466
 		newEntity $12,16,22,DOWN,$12
@@ -333,9 +333,9 @@ cs_55288:       textCursor $466
 		setActscriptWait $7,eas_Jump
 		setFacing $8B,UP
 		setCamDest 14,17
-		setEntityDest $0,19,28
-		setEntityDest $1F,20,28
-		setEntityDest $7,20,27
+		setDest $0,19,28
+		setDest $1F,20,28
+		setDest $7,20,27
 		setFacing $0,UP
 		setFacing $1F,UP
 		setFacing $7,UP
@@ -350,7 +350,7 @@ cs_55288:       textCursor $466
 		setFacing $1F,UP
 		nextSingleText $0,$12   ; "My love, I mean{N}{NAME;13} is with you.{N}Am I right?{W1}"
 		nextSingleText $C0,$7   ; "Yes, he joined us willingly.{W1}"
-		entityShakeHead $12
+		headshake $12
 		nextText $0,$12         ; "No, no.  I don't want to stop{N}him, but...{N}I want to be with him!{W2}"
 		nextSingleText $0,$12   ; "Please take me with you.{N}Please!{W1}"
 		setFacing $7,DOWN
@@ -368,7 +368,7 @@ cs_55288:       textCursor $466
 		setFacing $0,RIGHT
 		setFacing $1F,LEFT
 		nextSingleText $C0,$1F  ; "OK, you look tough enough,{N}anyway.{W1}"
-		entityNod $0
+		nod $0
 		setFacing $0,UP
 		setFacing $1F,UP
 		nextSingleText $0,$12   ; "Oh, really?{N}Thank you very much!{W1}"

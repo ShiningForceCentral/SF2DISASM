@@ -16,7 +16,7 @@ abcs_battle43:  setCamDest 8,2
 		flashScreenWhite $14
 		playSound SFX_BLAST_SPELL
 		flashScreenWhite $14
-		hideEntity $80
+		hide $80
 		playSound SFX_BIG_DOOR_RUMBLE
 		playSound SFX_BLAST_SPELL
 		flashScreenWhite $14
@@ -61,7 +61,7 @@ abcs_battle43:  setCamDest 8,2
 		mapFadeOutToWhite
 		csWait 40
 		mapFadeInFromWhite
-		mapSysEvent $3B,$C,$B,$1
+		warp $3B,$C,$B,$1
 		setQuake 0
 		clearF $43              ; Peter is a follower
 		clearF $46              ; Astral is a follower

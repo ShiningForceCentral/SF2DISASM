@@ -140,7 +140,7 @@ DeclareNewEntity:
 		
 		move.l  a0,-(sp)
 		move.w  d0,-(sp)
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		lsl.w   #5,d0
 		adda.w  d0,a0
 		move.w  (sp)+,d0
@@ -199,7 +199,7 @@ loc_4463C:
 ClearEntities:
 		
 		movem.l d7-a0,-(sp)
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		move.w  #$30,d7 
 loc_44666:
 		move.l  #$70007000,(a0)+

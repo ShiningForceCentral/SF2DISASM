@@ -81,11 +81,11 @@ cs_5C312:       textCursor $9FB
 		setActscript $81,eas_Jump
 		setActscriptWait $82,eas_Jump
 		setStoryFlag $14        ; Battle 20 unlocked
-		mapSysEvent $33,$0,$0,$0
+		warp $33,$0,$0,$0
 		csc_end
 cs_5C3AA:       textCursor $A05
 		nextSingleText $0,$7    ; "{LEADER}, we have to{N}save him!{W1}"
-		entityNod $0
+		nod $0
 		entityActionsWait $0
 		 moveUp 1
 		endActions

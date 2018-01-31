@@ -22,7 +22,7 @@ cs_4D502:       stopEntity $80
 		stopEntity $83
 		setActscriptWait $83,eas_46172
 		fadeInB
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "{LEADER}, I lost?!{N}Take this.{W1}"
 		nextSingleText $FF,$FF  ; "Cameela reveals the Sky Orb.{W1}"
 		setPos $83,7,10,LEFT
@@ -35,7 +35,7 @@ cs_4D502:       stopEntity $80
 		tintMap
 		setActscriptWait $80,eas_Init
 		setFacing $80,LEFT
-		entitySprite $80,$B4
+		setSprite $80,$B4
 		startEntity $80
 		setActscript $80,eas_AnimSpeedx2
 		setActscript $0,eas_Jump
@@ -46,7 +46,7 @@ cs_4D592:       setActscriptWait $1F,eas_Jump
 		nextSingleText $0,$80   ; "Geshp!{W1}"
 		nextSingleText $C0,$81  ; "Ha, ha, ha!  You acted just{N}as I planned!{W1}"
 		nextSingleText $0,$80   ; "Ouuuuu...Ges...{W1}"
-		entitySprite $80,$9C
+		setSprite $80,$9C
 		setActscriptWait $80,eas_Die
 		nextSingleText $0,$1F   ; "How horrible!{W1}"
 		nextText $C0,$81        ; "It's the law.  Traitors{N}die by fire.{W2}"
@@ -93,11 +93,11 @@ cs_4D620:       textCursor $B74
 		 moveRight 1
 		endActions
 		setFacing $1A,LEFT
-cs_4D654:       entityNod $0
+cs_4D654:       nod $0
 		entityActionsWait $0
 		 moveUp 1
 		endActions
-		hideEntity $83
+		hide $83
 		executeSubroutine csub_4D694
 		followEntity $82,$0,$2
 		followEntity $7,$82,$1

@@ -75,12 +75,12 @@ abcs_battle15:  textCursor $9CA
 		entityActionsWait $1E
 		 moveLeft 5
 		endActions
-		hideEntity $1E
+		hide $1E
 		clearF $4D              ; Old man is a follower
 		setF $2DC               ; set after the old man fails to open the way to Grans in the Wooden Panel shrine
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
-		mapSysEvent $32,$1B,$B,$1
+		warp $32,$1B,$B,$1
 		csc_end
 ce_4AFB6:       mainEntity 14,5,DOWN
 		dc.w $FFFF

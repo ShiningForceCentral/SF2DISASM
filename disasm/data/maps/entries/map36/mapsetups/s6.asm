@@ -36,7 +36,7 @@ cs_5DA28:       textCursor $CFB
 		setStoryFlag $22        ; Battle 34 unlocked
 		csc_end
 cs_5DA7A:       setCameraEntity $83
-		setEntityDest $0,4,23
+		setDest $0,4,23
 		setFacing $0,UP
 		entityActionsWait $83
 		 moveRight 2
@@ -53,10 +53,10 @@ cs_5DA7A:       setCameraEntity $83
 		entityActionsWait $83
 		 moveRight 2
 		endActions
-		entityShakeHead $83
-		entityShiver $83
+		headshake $83
+		shiver $83
 		csWait 120
-		entityShiver $83
+		shiver $83
 		customActscriptWait $83
 		 ac_setSpeed 8,8        ;   
 		 ac_jump eas_Idle       ;   
@@ -64,5 +64,5 @@ cs_5DA7A:       setCameraEntity $83
 		entityActionsWait $83
 		 moveRight 1
 		endActions
-		entityShiver $83
+		shiver $83
 		csc_end

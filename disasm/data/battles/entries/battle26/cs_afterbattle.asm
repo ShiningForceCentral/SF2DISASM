@@ -28,9 +28,9 @@ abcs_battle26:  textCursor $A4D
 		entityFlashWhite $1F,$3C
 		flashScreenWhite $1E
 		setCamDest 13,9
-		animEntityFadeInOut $80,$4
+		animEntityFX $80,4
 		setPos $80,18,13,DOWN
-		animEntityFadeInOut $80,$5
+		animEntityFX $80,5
 		setFacing $7,UP
 		entityActionsWait $80
 		 moveUp 3
@@ -50,7 +50,7 @@ abcs_battle26:  textCursor $A4D
 		 ac_jump eas_Idle       ;   
 		ac_end
 		setFacing $13,DOWN
-		entityShakeHead $13
+		headshake $13
 		nextSingleText $C0,$13  ; "What happened?{W2}"
 		entityActionsWait $13
 		 moveUp 1
@@ -76,7 +76,7 @@ abcs_battle26:  textCursor $A4D
 		nextSingleText $0,$1F   ; "Yes, Granseal.{W1}"
 		setFacing $13,DOWN
 		nextSingleText $C0,$13  ; "Oh, how lucky!  Please{N}come with me to Pacalon!{W1}"
-		entityNod $13
+		nod $13
 		nextSingleText $0,$7    ; "But, we have to go to{N}Tristan.{W1}"
 		setFacing $13,LEFT
 		nextText $C0,$13        ; "Oh, please...I can't return{N}to Pacalon without allies.{W2}"

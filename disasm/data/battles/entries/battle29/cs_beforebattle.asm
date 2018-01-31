@@ -38,7 +38,7 @@ bbcs_29:        textCursor $A9E
 		setFacing $7,LEFT
 		nextSingleText $0,$7    ; "{LEADER}, it's obvious!{W1}"
 		setFacing $0,RIGHT
-		entityNod $1F
+		nod $1F
 		nextText $0,$1F         ; "I agree.  We have to see the{N}storytellers and listen to{N}the legends.{W2}"
 		nextSingleText $0,$1F   ; "Make a break for it!{W1}"
 		setCamDest 10,26
@@ -80,32 +80,32 @@ bbcs_29:        textCursor $A9E
 		nextText $0,$80         ; "Wait, wait.  You must not{N}enter the holy shrine.{W2}"
 		nextSingleText $0,$80   ; "So be it!  Let the truth be{N}known!{W1}"
 		playSound $FD
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		setCamDest 12,19
 		setPos $80,16,23,DOWN
-		animEntityFadeInOut $80,$7
+		animEntityFX $80,7
 		csWait 40
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		setCamDest 8,15
 		setPos $80,12,18,DOWN
-		animEntityFadeInOut $80,$7
+		animEntityFX $80,7
 		csWait 40
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		setCamDest 9,9
 		setPos $80,14,13,DOWN
-		animEntityFadeInOut $80,$7
+		animEntityFX $80,7
 		csWait 40
 		entityFlashWhite $80,$1E
 		playSound MUSIC_BATTLE_THEME_1
 		stopEntity $80
-		entitySprite $80,$AF
+		setSprite $80,$AF
 		setFacing $80,UP
 		csWait 8
 		setFacing $80,LEFT
 		csWait 8
 		setFacing $80,DOWN
 		csWait 8
-		entitySprite $80,$55
+		setSprite $80,$55
 		startEntity $80
 		setPos $81,14,12,DOWN
 		csWait 30

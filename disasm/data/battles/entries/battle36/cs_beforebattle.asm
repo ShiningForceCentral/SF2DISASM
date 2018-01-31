@@ -45,7 +45,7 @@ cs_4D8D6:       playSound MUSIC_BATTLE_THEME_1
 		setFacing $1F,DOWN
 		setFacing $0,UP
 		nextSingleText $0,$1F   ; "{LEADER}, be careful!{W1}"
-		entityNod $0
+		nod $0
 		setFacing $0,DOWN
 		csc_end
 ce_4D964:       mainEntity 19,1,DOWN

@@ -658,7 +658,7 @@ loc_2632:
 ; related to 4 choices apparently
 
 sub_2670:
-		move.b  ((byte_FFA84C-$1000000)).w,d0
+		move.b  ((MAP_EVENT_PARAM_1-$1000000)).w,d0
 		andi.w  #3,d0
 		add.w   d0,d0
 		move.w  rjt_2682(pc,d0.w),d0
@@ -1134,13 +1134,13 @@ loc_2BC0:
 		cmpi.w  #$FFFF,d4
 		bne.s   loc_2BE6
 		move.l  a0,-(sp)
-		move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d4
+		move.b  ((CAMERA_ENTITY-$1000000)).w,d4
 		bpl.s   loc_2BD0
 		clr.w   d4
 loc_2BD0:
 		andi.w  #$3F,d4 
 		lsl.w   #5,d4
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		move.w  2(a0,d4.w),d5
 		move.w  (a0,d4.w),d4
 		movea.l (sp)+,a0

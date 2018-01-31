@@ -12,7 +12,7 @@ bbcs_34:        textCursor $B4F
 		jumpIfFlagClear $4C,cs_4D38E; Zynk is a follower
 		setActscriptWait $1A,eas_Init
 		setPos $1A,31,29,LEFT
-cs_4D38E:       animEntityFadeInOut $81,$6
+cs_4D38E:       animEntityFX $81,6
 		playSound MUSIC_BATTLE_THEME_1
 		fadeInB
 		cameraSpeed $30
@@ -38,7 +38,7 @@ cs_4D3C6:       entityActionsWait $1F
 		nextText $0,$80         ; "Remember?  I promised that I{N}would see you again.{W2}"
 		nextSingleText $0,$80   ; "Come on.  Let's party!{W1}"
 		setCamDest 7,4
-		animEntityFadeInOut $81,$7
+		animEntityFX $81,7
 		nextSingleText $C0,$81  ; "Stop!  You need my war plan!{W1}"
 		setFacing $80,UP
 		nextSingleText $0,$80   ; "You again, Geshp?  Why don't{N}you leave me alone?{W1}"
@@ -57,7 +57,7 @@ cs_4D3C6:       entityActionsWait $1F
 		 moveUp 4
 		endActions
 		csWait 10
-		animEntityFadeInOut $81,$6
+		animEntityFX $81,6
 		waitIdle $80
 		setFacing $80,DOWN
 		csWait 30

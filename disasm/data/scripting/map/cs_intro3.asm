@@ -13,8 +13,8 @@ IntroCutscene3: textCursor $1077
 		setActscript $82,eas_Transparent
 		fadeInFromBlackHalf
 		setCameraEntity $5
-		entityShiver $80
-		entityShiver $80
+		shiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "Ugh!  Ugghhh!{N}Phew...I can't...{D2}"
 		entityActionsWait $81
 		 moveUp 1
@@ -22,7 +22,7 @@ IntroCutscene3: textCursor $1077
 		endActions
 		setFacing $80,RIGHT
 		nextSingleText $0,$81   ; "You wimp!{N}Let me do it!{D2}"
-		entityShiver $80
+		shiver $80
 		csWait 20
 		entityActions $81
 		 moveLeft 1
@@ -39,13 +39,13 @@ IntroCutscene3: textCursor $1077
 		csWait 20
 		setFacing $81,UP
 		csWait 30
-		entityShiver $81
-		entityShiver $81
+		shiver $81
+		shiver $81
 		csWait 30
-		entityShiver $81
+		shiver $81
 		csWait 30
 		setFacing $81,DOWN
-		entityShakeHead $81
+		headshake $81
 		nextSingleText $0,$81   ; "Blast!  It won't budge!{D2}"
 		entityActionsWait $5
 		 moveUp 1
@@ -55,7 +55,7 @@ IntroCutscene3: textCursor $1077
 		setActscriptWait $5,eas_Jump
 		setFacing $81,DOWN
 		nextSingleText $80,$5   ; "You idiots!{N}Let me do it.{D2}"
-		entityShiver $81
+		shiver $81
 		entityActionsWait $81
 		 moveRight 1
 		 moveDown 1
@@ -70,7 +70,7 @@ IntroCutscene3: textCursor $1077
 		 moveUp 1
 		endActions
 		csWait 20
-		entityNod $5
+		nod $5
 		csWait 10
 		entityActions $5
 		 moveUp 1
@@ -78,24 +78,24 @@ IntroCutscene3: textCursor $1077
 		csWait 6
 		setActscriptWait $5,eas_461AA
 		setFacing $5,DOWN
-		entitySprite $5,$BB
+		setSprite $5,$BB
 		csWait 20
-		entityShiver $5
+		shiver $5
 		setActscript $80,eas_Jump
 		setActscriptWait $81,eas_Jump
 		setActscript $80,eas_Jump
 		setActscriptWait $81,eas_Jump
-		entityShiver $5
+		shiver $5
 		setActscript $80,eas_Jump
 		setActscriptWait $81,eas_Jump
 		setActscript $80,eas_Jump
 		setActscriptWait $81,eas_Jump
-		entityShiver $5
+		shiver $5
 		setActscript $80,eas_Jump
 		setActscriptWait $81,eas_Jump
 		setActscript $80,eas_Jump
 		setActscriptWait $81,eas_Jump
-		entityShiver $5
+		shiver $5
 		csWait 30
 		entityActions $5
 		 moveDown 1
@@ -107,7 +107,7 @@ IntroCutscene3: textCursor $1077
 		 ac_jump eas_Idle       ;   
 		ac_end
 		setActscriptWait $5,eas_46172
-		entitySprite $5,$5
+		setSprite $5,$5
 		setFacing $5,UP
 		entityActionsWait $5
 		 moveDown 1
@@ -122,7 +122,7 @@ IntroCutscene3: textCursor $1077
 		csWait 30
 		setFacing $5,UP
 		csWait 20
-		entityNod $5
+		nod $5
 		csWait 20
 		nextSingleText $80,$5   ; "This time, I'll pull both of{N}the jewels at the same time!{D2}"
 		setActscriptWait $5,eas_Init
@@ -137,21 +137,21 @@ IntroCutscene3: textCursor $1077
 		csWait 6
 		setActscriptWait $5,eas_461AA
 		setFacing $5,DOWN
-		entitySprite $5,$BB
+		setSprite $5,$BB
 		nextSingleText $FF,$FF  ; "{NAME;5} the thief{N}grabbed the two jewels.{D2}"
 		csWait 20
 		nextSingleText $80,$5   ; "One...two...{D2}"
-		entityShiver $5
+		shiver $5
 		nextSingleText $80,$5   ; "THREE!{D2}"
-		entityShiver $5
+		shiver $5
 		customActscriptWait $5
 		 ac_setSpeed 64,64      ;   
 		 ac_jump eas_Idle       ;   
 		ac_end
 		setActscriptWait $5,eas_46172
-		hideEntity $82
+		hide $82
 		setBlocks 26,18,1,1,26,4
-		entitySprite $5,$5
+		setSprite $5,$5
 		setFacing $5,UP
 		entityActions $5
 		 moveDown 1
@@ -204,12 +204,12 @@ IntroCutscene3: textCursor $1077
 		nextSingleText $0,$81   ; "You did it!{N}You have the legendary{N}jewels!{D2}"
 		csWait 20
 		setFacing $5,UP
-		entitySprite $5,$3B
+		setSprite $5,$3B
 		setActscriptWait $5,eas_Init
 		nextSingleText $80,$5   ; "I did?{D2}"
 		csWait 30
-		entitySprite $5,$5
-		entityShakeHead $5
+		setSprite $5,$5
+		headshake $5
 		nextSingleText $80,$5   ; "Oh, I got them!{N}I have the legendary{N}jewels!  Bravo!{D2}"
 		setActscriptWait $5,eas_Jump
 		setActscriptWait $5,eas_Jump
@@ -235,8 +235,8 @@ IntroCutscene3: textCursor $1077
 		setQuake 0
 		setFacing $5,UP
 		nextSingleText $0,$80   ; "What's happening?!{D2}"
-		entityShakeHead $80
-		entityShakeHead $81
+		headshake $80
+		headshake $81
 		csWait 40
 		setQuake 4
 		csWait 60
@@ -327,7 +327,7 @@ IntroCutscene3: textCursor $1077
 		csWait 30
 		setActscriptWait $81,eas_Init
 		setFacing $81,DOWN
-		entityShakeHead $81
+		headshake $81
 		customActscriptWait $81
 		 ac_setSpeed 48,48      ;   
 		 ac_jump eas_Idle       ;   

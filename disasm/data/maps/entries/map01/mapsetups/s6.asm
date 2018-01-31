@@ -19,7 +19,7 @@ return_5E770:
 cs_5E772:       textCursor $E41
 		csWait 30
 		setFacing $0,UP
-		setEntityDest $0,44,27
+		setDest $0,44,27
 		setActscriptWait $7,eas_Init
 		setActscriptWait $1F,eas_Init
 		flashScreenWhite $1E
@@ -31,8 +31,8 @@ cs_5E772:       textCursor $E41
 		csWait 30
 		flashScreenWhite $1E
 		csWait 30
-		setEntityDest $7,43,27
-		setEntityDest $1F,45,27
+		setDest $7,43,27
+		setDest $1F,45,27
 		setFacing $7,UP
 		setFacing $1F,UP
 		nextSingleText $80,$15  ; "I feel...a power returning{N}me to human.{W2}"
@@ -46,7 +46,7 @@ cs_5E772:       textCursor $E41
 		setFacing $15,LEFT
 		nextSingleText $80,$15  ; "Did you say {LEADER}?{N}Oh, you're from Granseal!{W1}"
 		nextSingleText $0,$7    ; "Yes, we are, but who are{N}you?{W1}"
-		entityShiver $15
+		shiver $15
 		nextSingleText $80,$15  ; "Do you know how long I've{N}been here as a stone statue?{W1}"
 		entityActionsWait $0
 		 moveDown 1

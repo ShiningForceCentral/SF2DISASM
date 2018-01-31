@@ -34,10 +34,10 @@ bbcs_28:        textCursor $A65
 		setFacing $1F,RIGHT
 		nextSingleText $0,$1F   ; "Wow, look at that?{W1}"
 		setCamDest 7,11
-		entityShiver $82
+		shiver $82
 		playSound SFX_MONSTER_SCREAM
 		csWait 30
-		entityShiver $83
+		shiver $83
 		playSound SFX_MONSTER_SCREAM
 		csWait 40
 		setCamDest 0,6
@@ -92,7 +92,7 @@ bbcs_28:        textCursor $A65
 		nextText $0,$1F         ; "Look!{W2}"
 		nextSingleText $0,$1F   ; "She's stranded on the{N}bridge.{W1}"
 		setFacing $7,RIGHT
-		entityShiver $0
+		shiver $0
 		setCamDest 7,21
 		nextSingleText $0,$7    ; "Get away from the bridge{N}before it falls into the{N}river!{W1}"
 		nextText $0,$81         ; "I sprained my ankle!{N}Please help me!{W2}"
@@ -103,10 +103,10 @@ bbcs_28:        textCursor $A65
 		csWait 30
 		setActscriptWait $0,eas_Init
 		startEntity $0
-		entityShakeHead $0
+		headshake $0
 		nextSingleText $0,$1F   ; "{LEADER}, defeat all the{N}monsters!  Hurry!{W1}"
 		setActscript $7,eas_Jump
-		entityNod $0
+		nod $0
 		csc_end
 ce_4C03C:       mainEntity 1,8,RIGHT
 		entity 0,9,RIGHT,7,eas_Init

@@ -19,7 +19,7 @@ ExecuteBattleLoop:
 		trap    #CLEAR_FLAG
 		dc.w $58                ; checks if a game has been saved for copying purposes? (or if saved from battle?)
 		jsr     j_ClearEnemyMoveInfo
-		clr.b   ((BATTLE_CURRENT_ENTITY-$1000000)).w
+		clr.b   ((CAMERA_ENTITY-$1000000)).w
 		bsr.w   LoadBattle      
 		bra.w   loc_23B40       
 		bra.w   loc_23B0A       
@@ -211,22 +211,23 @@ return_23CB8:
 loc_23CBA:
 		bsr.w   HealAliveCharsAndImmortals
 		cmpi.b  #BATTLEIDX_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w
+						; HARDCODED Battle check for fairy woods
 		bne.s   loc_23CCC
-		jsr     sub_100A0
+		jsr     j_DisplayTimerWindow
 loc_23CCC:
-		move.b  ((CURRENT_MAP-$1000000)).w,((byte_FFA84D-$1000000)).w
+		move.b  ((CURRENT_MAP-$1000000)).w,((MAP_EVENT_PARAM_2-$1000000)).w
 		jsr     (UpdateForceAndGetFirstForceMemberIndex).w
 		jsr     j_GetXPos
 		add.b   ((byte_FFF706-$1000000)).w,d1
-		move.b  d1,((byte_FFA84E-$1000000)).w
+		move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
 		jsr     j_GetYPos
 		add.b   ((byte_FFF707-$1000000)).w,d1
-		move.b  d1,((byte_FFA84F-$1000000)).w
+		move.b  d1,((MAP_EVENT_PARAM_4-$1000000)).w
 		bsr.w   GetEntityNumberOfCombatant
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
-		move.b  $10(a0,d0.w),((byte_FFA850-$1000000)).w
-		move.b  #0,((byte_FFA84C-$1000000)).w
+		lea     ((ENTITY_DATA-$1000000)).w,a0
+		move.b  $10(a0,d0.w),((MAP_EVENT_PARAM_5-$1000000)).w
+		move.b  #0,((MAP_EVENT_PARAM_1-$1000000)).w
 		jsr     j_ExecuteAfterBattleCutscene
 		clr.w   d1
 		move.b  ((CURRENT_BATTLE-$1000000)).w,d1
@@ -238,10 +239,10 @@ loc_23CCC:
 		clr.w   d1
 		clr.w   d2
 		clr.w   d3
-		move.b  ((byte_FFA84D-$1000000)).w,d0
-		move.b  ((byte_FFA84E-$1000000)).w,d1
-		move.b  ((byte_FFA84F-$1000000)).w,d2
-		move.b  ((byte_FFA850-$1000000)).w,d3
+		move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0
+		move.b  ((MAP_EVENT_PARAM_3-$1000000)).w,d1
+		move.b  ((MAP_EVENT_PARAM_4-$1000000)).w,d2
+		move.b  ((MAP_EVENT_PARAM_5-$1000000)).w,d3
 		moveq   #1,d4
 		rts
 loc_23D44:
@@ -279,13 +280,13 @@ return_23D96:
 
 ; =============== S U B R O U T I N E =======================================
 
-; spell launch
+; battlefield spell/item use
 
 sub_23D98:
 		move.w  -2(a6),d0
 		move.w  ((word_FFB634-$1000000)).w,d1
 		jsr     j_RemoveItemBySlot
-		bsr.w   sub_23E38
+		bsr.w   HideBattlefieldWindows
 		move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  ((word_FFB630-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
 		andi.w  #ITEM_MASK_IDX,((TEXT_NAME_INDEX_2-$1000000)).w
@@ -297,7 +298,7 @@ loc_23DC4:
 		move.w  ((word_FFB630-$1000000)).w,d1
 		jsr     j_GetSpellCost
 		jsr     j_DecreaseCurrentMP
-		bsr.w   sub_23E38
+		bsr.w   HideBattlefieldWindows
 		move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  ((word_FFB630-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
 		andi.w  #SPELL_MASK_IDX,((TEXT_NAME_INDEX_2-$1000000)).w
@@ -338,14 +339,15 @@ return_23E36:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_23E38:
+HideBattlefieldWindows:
+		
 		jsr     j_HideLandEffectWindow
 		jsr     j_HideFighterMiniStatusWindow
 		clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
 		jsr     j_HideFighterMiniStatusWindow
 		rts
 
-	; End of function sub_23E38
+	; End of function HideBattlefieldWindows
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -431,7 +433,7 @@ loc_23EDA:
 		clr.b   ((word_FFAF8E-$1000000)).w
 		move.w  -2(a6),d0
 		bsr.w   GetEntityNumberOfCombatant
-		move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  d0,((CAMERA_ENTITY-$1000000)).w
 		move.w  -2(a6),d0
 		bsr.w   SetUnitCursorDestinationToNextCombatant
 		move.w  -2(a6),d0
@@ -536,14 +538,14 @@ loc_2406A:
 loc_24090:
 		move.w  -2(a6),d0
 		jsr     j_GetClass      
-		cmpi.w  #$1C,d1
-		bne.s   loc_240E6
+		cmpi.w  #$1C,d1         ; HARDCODED class test : MNST (Monster, for Kiwi)
+		bne.s   loc_240E6       
 		tst.w   ((BATTLESCENE_ACTION_TYPE-$1000000)).w
-		bne.s   loc_240E6
+		bne.s   loc_240E6       
 		moveq   #4,d6
-		jsr     (UpdateRandomSeed).w
+		jsr     (UpdateRandomSeed).w; Kiwi's special attack ?
 		tst.w   d7
-		bne.s   loc_240E6
+		bne.s   loc_240E6       
 		move.w  ((word_FFB630-$1000000)).w,((word_FFB632-$1000000)).w
 		move.w  #1,((BATTLESCENE_ACTION_TYPE-$1000000)).w
 		jsr     j_GetCurrentLevel
@@ -564,9 +566,10 @@ loc_240DC:
 		ori.w   #$29,d0 
 		move.w  d0,((word_FFB630-$1000000)).w
 loc_240E6:
-		cmpi.b  #$2C,((CURRENT_BATTLE-$1000000)).w 
+		cmpi.b  #BATTLEIDX_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w
+						; HARDCODED Battle check : Fairy wood secret battle
 		bne.s   loc_240F4
-		jsr     sub_100A0
+		jsr     j_DisplayTimerWindow
 loc_240F4:
 		jsr     (WaitForVInt).w 
 		jsr     (WaitForVInt).w 
@@ -585,7 +588,7 @@ loc_24122:
 loc_24128:
 		bra.w   loc_241A4
 loc_2412C:
-		move.b  #5,((SKIRMISH_MUSIC_INDEX-$1000000)).w
+		move.b  #MUSIC_ENEMY_ATTACK,((SKIRMISH_MUSIC_INDEX-$1000000)).w
 						; enemy
 		jsr     j_GetEnemyID
 		cmpi.b  #$57,d1 
@@ -653,7 +656,7 @@ loc_241C4:
 		nop
 		jsr     (WaitForVInt).w 
 		clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		movem.l (sp)+,a6
 		bra.s   loc_2423E
 loc_2420E:
@@ -907,7 +910,7 @@ loc_24492:
 		clr.b   ((word_FFAF8E-$1000000)).w
 		move.w  -2(a6),d0
 		bsr.w   GetEntityNumberOfCombatant
-		move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  d0,((CAMERA_ENTITY-$1000000)).w
 		move.w  -2(a6),d0
 		bsr.w   SetUnitCursorDestinationToNextCombatant
 		bsr.w   WaitForUnitCursor
@@ -1082,7 +1085,7 @@ loc_2466C:
 		move.w  -2(a6),d0
 		bsr.w   ClearEntityBlinkingFlag
 		bsr.w   GetEntityNumberOfCombatant
-		move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  d0,((CAMERA_ENTITY-$1000000)).w
 		move.w  -2(a6),d0
 		bsr.w   UpdateMoveSound
 		bsr.w   ControlBattleUnit
@@ -2432,7 +2435,7 @@ LoadBattle:
 		clr.w   d1
 		move.b  ((CURRENT_MAP-$1000000)).w,d1
 		bsr.w   sub_258EA
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		jsr     (LoadMapTilesets).w
 		bsr.w   WaitForFadeToFinish
 		trap    #VINT_FUNCTIONS
@@ -2441,13 +2444,13 @@ LoadBattle:
 		jsr     j_MoveEntitiesToBattlePositions
 		move.w  (sp)+,d0
 		bsr.w   GetEntityNumberOfCombatant
-		move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  d0,((CAMERA_ENTITY-$1000000)).w
 		bpl.s   loc_25646
 		clr.w   d0
 loc_25646:
 		andi.w  #$3F,d0 
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		adda.w  d0,a0
 		move.w  (a0)+,d0
 		ext.l   d0
@@ -2501,7 +2504,7 @@ GetEntityPositionAfterApplyingFacing:
 		jsr     j_GetYPos
 		bsr.w   GetEntityCombatantNumber
 		lsl.w   #ENTITYDEF_SIZE_BITS,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		clr.w   d3
 		move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),d3
 		move.w  d2,d0

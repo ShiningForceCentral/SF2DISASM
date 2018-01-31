@@ -6,7 +6,7 @@
 
 ms_map20_InitFunction:
 		
-		cmpi.l  #$22803780,((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w
+		cmpi.l  #$22803780,((ENTITY_DATA-$1000000)).w
 		bne.s   loc_53988
 		trap    #CHECK_FLAG
 		dc.w $25D               ; set after the scene in the King's bedroom
@@ -126,7 +126,7 @@ cs_53996:       textCursor $880
 		csWait 60
 		setFacing $82,LEFT
 		nextSingleText $80,$82  ; "I called them here to help{N}me investigate the tower.{W1}"
-		entityNod $83
+		nod $83
 		entityActionsWait $82
 		 moveRight 1
 		endActions
@@ -143,7 +143,7 @@ cs_53996:       textCursor $880
 		endActions
 		followEntity $1,$0,$2
 		followEntity $2,$1,$2
-cs_53B60:       hideEntity $82
+cs_53B60:       hide $82
 		csc_end
 cs_53B66:       playSound $FD
 		textCursor $895
@@ -208,7 +208,7 @@ cs_53C42:       setCamDest 19,48
 		setActscriptWait $82,eas_Init
 		setFacing $82,DOWN
 		csWait 10
-		entityShakeHead $82
+		headshake $82
 		csWait 30
 		setFacing $82,UP
 		nextText $80,$82        ; "Yeow!  My head!{N}No, I'm OK, {LEADER}.{W2}"
@@ -228,9 +228,9 @@ cs_53C42:       setCamDest 19,48
 		ac_end
 		setFacing $82,LEFT
 		csWait 50
-		entityShiver $82
+		shiver $82
 		csWait 30
-		entityShiver $82
+		shiver $82
 		csWait 20
 		playSound SFX_SPELL_CAST
 		entityFlashWhite $82,$78
@@ -252,7 +252,7 @@ cs_53C42:       setCamDest 19,48
 		entityActionsWait $88
 		 moveLeft 2
 		endActions
-		hideEntity $88
+		hide $88
 		playSound SFX_PRISM_LASER_CUTSCENE_FIRING
 		setQuake 2
 		csWait 60
@@ -271,18 +271,18 @@ cs_53C42:       setCamDest 19,48
 		 ac_jump eas_Idle       ;   
 		ac_end
 		csWait 50
-		entityShiver $82
+		shiver $82
 		csWait 20
 		entityActionsWait $82
 		 moveLeft 2
 		endActions
 		nextSingleText $80,$82  ; "King...Granseal?{W1}"
-		entityShiver $80
+		shiver $80
 		stopEntity $80
 		setPos $87,21,52,DOWN
-		animEntityFadeInOut $87,$5
+		animEntityFX $87,5
 		nextSingleText $80,$82  ; "Did it work?{W1}"
-		entityShiver $87
+		shiver $87
 		setActscriptWait $87,eas_46172
 		customActscriptWait $87
 		 ac_setSpeed 0,0        ;   
@@ -291,7 +291,7 @@ cs_53C42:       setCamDest 19,48
 		entityActionsWait $87
 		 moveUp 5
 		endActions
-		hideEntity $87
+		hide $87
 		csWait 60
 		nextSingleText $0,$80   ; "Ooh....{W1}"
 		startEntity $80
@@ -305,7 +305,7 @@ cs_53C42:       setCamDest 19,48
 		 moveRight 1
 		endActions
 		nextSingleText $0,$80   ; "Astral, wha...what{N}happened?{W1}"
-		entityShiver $82
+		shiver $82
 		nextText $80,$82        ; "Are you alright?{W2}"
 		nextSingleText $80,$82  ; "Let me use your soldiers.{N}We must kill it before it{N}finds another victim.{W1}"
 		nextSingleText $0,$80   ; "What are you talking about?{N}I don't understand.{W1}"
@@ -327,6 +327,6 @@ cs_53C42:       setCamDest 19,48
 		csWait 1
 		nextSingleText $FF,$FF  ; "Astral is exhausted.{N}He won't wake up!{W2}{N}The Minister summons the{N}soldiers to the hall to kill{N}the evil spirit.{W1}"
 		setF $261               ; set after the scene where Astral exorcises the Gizmo
-		mapSysEvent $13,$1D,$8,$1
+		warp $13,$1D,$8,$1
 		playSound MUSIC_CASTLE
 		csc_end

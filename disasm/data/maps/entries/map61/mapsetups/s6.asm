@@ -14,13 +14,13 @@ cs_5C6CA:       textCursor $E3A
 		setActscriptWait $7,eas_Init
 		setActscriptWait $1E,eas_Init
 		setActscriptWait $1F,eas_Init
-		setEntityDest $0,4,9
+		setDest $0,4,9
 		setFacing $0,UP
-		setEntityDest $7,6,9
+		setDest $7,6,9
 		setFacing $7,UP
 		setCamDest 0,5
-		setEntityDest $1E,5,7
-		setEntityDest $1F,5,9
+		setDest $1E,5,7
+		setDest $1F,5,9
 		setFacing $1F,UP
 		setFacing $1E,DOWN
 		nextSingleText $0,$1E   ; "It's my job!{W1}"

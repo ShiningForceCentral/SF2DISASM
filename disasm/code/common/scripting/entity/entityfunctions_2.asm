@@ -277,7 +277,7 @@ loc_44C7E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_44C84:
+HideEntity:
 		movem.l a0-a1,-(sp)
 		move.w  d0,-(sp)
 		bsr.w   GetEntityRAMAddress
@@ -307,7 +307,7 @@ loc_44CCA:
 		movem.l (sp)+,a0-a1
 		rts
 
-	; End of function sub_44C84
+	; End of function HideEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -423,7 +423,7 @@ loc_44DD0:
 GetEntityRAMAddress:
 		
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 						; start of entity information
 		adda.w  d0,a0
 		rts

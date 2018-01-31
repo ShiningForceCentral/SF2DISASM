@@ -39,7 +39,7 @@ bbcs_26:        textCursor $A24
 		 moveUp 3
 		endActions
 		csWait 5
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		waitIdle $85
 		csWait 5
 		setActscript $85,eas_461B6
@@ -67,7 +67,7 @@ bbcs_26:        textCursor $A24
 		setActscriptWait $85,eas_Die
 		setCamDest 13,13
 		setPos $80,18,19,UP
-		animEntityFadeInOut $80,$7
+		animEntityFX $80,7
 		nextSingleText $0,$80   ; "Pacalon soldiers have no{N}honor.  They attack while{N}my back is turned!{W1}"
 		setActscriptWait $86,eas_Jump
 		setFacing $13,DOWN
@@ -122,18 +122,18 @@ bbcs_26:        textCursor $A24
 		nextText $C0,$13        ; "Now, tell me the reason why{N}"
 		nextSingleText $C0,$13  ; "you're keeping me alive.{W1}"
 		nextSingleText $0,$80   ; "Ha, ha!  You're smart!{W1}"
-		animEntityFadeInOut $84,$4
+		animEntityFX $84,4
 		entityFlashWhite $80,$1E
 		setCamDest 13,11
 		setPos $84,18,12,DOWN
-		animEntityFadeInOut $84,$5
+		animEntityFX $84,5
 		nextSingleText $C0,$13  ; "What did you do?{W1}"
 		entityActionsWait $84
 		 moveDown 1
 		endActions
-		animEntityFadeInOut $84,$4
+		animEntityFX $84,4
 		nextSingleText $C0,$13  ; "I...can't...!{N}My body won't...{W1}"
-		entityShiver $13
+		shiver $13
 		stopEntity $13
 		nextText $0,$80         ; "I came here to borrow your{N}body.{W2}"
 		nextSingleText $0,$80   ; "Ha, ha!  Welcome our new{N}leader!{W1}"
@@ -182,7 +182,7 @@ bbcs_26:        textCursor $A24
 		nextSingleText $0,$80   ; "Devil soldiers!  Stop that{N}force from Granseal!{W1}"
 		setFacing $80,DOWN
 		setActscript $81,eas_Jump
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		csc_end
 ce_4BC5A:       mainEntity 7,25,RIGHT
 		entity 6,26,RIGHT,7,eas_Init

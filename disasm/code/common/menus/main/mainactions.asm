@@ -75,7 +75,7 @@ loc_21348:
 loc_21354:
 		clr.w   d0
 		move.b  ((CURRENT_MAP-$1000000)).w,d0
-		cmpi.w  #$42,d0 
+		cmpi.w  #$42,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
 		blt.s   loc_21348
 		cmpi.w  #$4E,d0 
 		bgt.s   loc_21348
@@ -187,7 +187,7 @@ loc_214A4:
 		bne.w   loc_2150E
 		clr.w   d0
 		move.b  ((CURRENT_MAP-$1000000)).w,d0
-		cmpi.w  #$42,d0 
+		cmpi.w  #$42,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
 		blt.w   loc_2150E
 		cmpi.w  #$4E,d0 
 		bgt.w   loc_2150E

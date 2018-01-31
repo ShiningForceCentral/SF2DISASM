@@ -27,10 +27,10 @@ cs_4AAB6:       fadeInB
 		setFacing $80,RIGHT
 		nextSingleText $0,$80   ; "....{W1}"
 		setActscriptWait $81,eas_Init
-		entitySprite $81,$3B
+		setSprite $81,$3B
 		setFacing $81,LEFT
 		nextSingleText $C0,$81  ; "{LEADER}, are you ready{N}for battle?{D3}"
-		entitySprite $81,$CA
+		setSprite $81,$CA
 		setFacing $81,DOWN
 		nextSingleText $C0,$81  ; "Do you need more preparations?"
 		setActscriptWait $81,eas_Init
@@ -53,7 +53,7 @@ cs_4AAB6:       fadeInB
 		 moveRight 1
 		endActions
 		setFacing $81,DOWN
-		entityShakeHead $81
+		headshake $81
 		nextText $0,$80         ; "{LEADER}, you had better{N}take a rest now.{D3}"
 		nextSingleText $0,$80   ; "{LEADER}, to retreat is{N}sometimes a good strategy.{D3}"
 		setFacing $81,LEFT
@@ -78,7 +78,7 @@ cs_4AAB6:       fadeInB
 		 moveDown 1
 		endActions
 		nextSingleText $0,$80   ; "You changed your mind?{W2}"
-		mapSysEvent $49,$3E,$31,$2
+		warp $49,$3E,$31,$2
 		csc_end
 ce_4ABBE:       mainEntity 14,37,UP
 		entity 14,35,UP,202,eas_Init

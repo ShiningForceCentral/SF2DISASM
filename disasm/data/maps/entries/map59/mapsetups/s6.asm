@@ -43,7 +43,7 @@ return_5EB24:
 	; End of function ms_map59_InitFunction
 
 cs_5EB26:       executeSubroutine csub_5EB34
-		mapSysEvent $3B,$D,$22,$1
+		warp $3B,$D,$22,$1
 		csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -81,21 +81,21 @@ cs_5EB44:       textCursor $E73
 		nextSingleText $80,$81  ; "borrow Odd Eye?{W1}"
 		nextText $0,$80         ; "He's still damaged from his{N}battle against Volcanon.{W2}"
 		nextSingleText $0,$80   ; "Take Red Baron instead.{W1}"
-		entityShiver $81
-		entityShiver $81
+		shiver $81
+		shiver $81
 		nextSingleText $80,$81  ; "Thank you, sir.{W1}"
 		nextSingleText $0,$80   ; "They'll be passing over the{N}cape soon.  Go!{W1}"
 		nextSingleText $80,$81  ; "Yes, sir!{W1}"
-		animEntityFadeInOut $81,$6
+		animEntityFX $81,6
 		nextSingleText $0,$82   ; "That Geshp!  He wants{N}everything.{W1}"
 		setPos $82,9,9,DOWN
-		animEntityFadeInOut $82,$7
+		animEntityFX $82,7
 		entityActionsWait $82
 		 moveRight 4
 		 moveUp 1
 		endActions
 		nextSingleText $0,$80   ; "You noticed that too?{W1}"
-		entityNod $82
+		nod $82
 		nextText $0,$82         ; "Yes, King Zeon.{W2}"
 		nextSingleText $0,$82   ; "I'm afraid Geshp can't stop{N}{LEADER}'s advance.{W1}"
 		nextSingleText $0,$80   ; "You really think so?{W1}"
@@ -149,15 +149,15 @@ cs_5EBFC:       loadMapFadeIn 53,8,14
 		csWait 30
 		setFacing $80,RIGHT
 		csWait 30
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
 		setCamDest 10,14
 		setPos $81,15,16,DOWN
-		animEntityFadeInOut $81,$7
+		animEntityFX $81,7
 		nextSingleText $80,$81  ; "How are the Prism Flowers?{W1}"
 		nextSingleText $0,$80   ; "They're ready!{W1}"
 		nextSingleText $80,$81  ; "Excellent!{W1}"
-		entityNod $81
+		nod $81
 		setCameraEntity $81
 		entityActionsWait $81
 		 moveRight 2
@@ -166,8 +166,8 @@ cs_5EBFC:       loadMapFadeIn 53,8,14
 		setFacing $81,RIGHT
 		nextText $80,$81        ; "Now, c'mon Granseal losers!{W2}"
 		nextSingleText $80,$81  ; "The Prism Flowers are waiting{N}for you!  Hee, heee!{W1}"
-		entityNod $81
-		entityNod $81
+		nod $81
+		nod $81
 		csc_end
 cs_5ED06:       textCursor $E91
 		loadMapFadeIn 73,0,0
@@ -320,7 +320,7 @@ cs_5EF60:       textCursor $E9B
 		setPos $7,10,12,UP
 		setPos $1A,10,11,LEFT
 		fadeInB
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "I did see something!{W1}"
 		nextSingleText $80,$7   ; "Well, I didn't.{W1}"
 		nextSingleText $0,$80   ; "This could be bad.{W1}"
@@ -363,7 +363,7 @@ cs_5EF60:       textCursor $E9B
 		 moveRight 1
 		endActions
 		setFacing $80,UP
-		entityShiver $80
+		shiver $80
 		nextText $0,$80         ; "Crash?!{W2}"
 		nextSingleText $80,$1A  ; "Geshp's trap!  Darn!{W1}"
 		playSound SFX_BATTLEFIELD_DEATH
@@ -424,7 +424,7 @@ cs_5EF60:       textCursor $E9B
 		setQuake 0
 		executeSubroutine csub_5F14C
 		csWait 120
-		mapSysEvent $25,$8,$C,$3
+		warp $25,$8,$C,$3
 		csc_end
 
 ; =============== S U B R O U T I N E =======================================

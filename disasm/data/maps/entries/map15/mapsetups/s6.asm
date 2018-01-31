@@ -12,7 +12,7 @@ ms_map15_InitFunction:
 
 cs_5D04E:       textCursor $7D6
 		setFacing $0,RIGHT
-		setEntityDest $7,24,17
+		setDest $7,24,17
 		setFacing $7,RIGHT
 		setPos $14,31,33,UP
 		csWait 1
@@ -62,7 +62,7 @@ cs_5D04E:       textCursor $7D6
 		endActions
 		setCamDest 20,12
 		csWait 60
-		setEntityDest $14,26,18
+		setDest $14,26,18
 		setFacing $14,LEFT
 		nextSingleText $80,$14  ; "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
 		entityActionsWait $7
@@ -72,7 +72,7 @@ cs_5D04E:       textCursor $7D6
 		setFacing $14,UP
 		nextSingleText $0,$7    ; "Yes, he's {LEADER},{N}but who are you?{W1}"
 		nextSingleText $80,$14  ; "I'm {NAME;20} of Bedoe.{W1}"
-		entityShiver $7
+		shiver $7
 		nextSingleText $0,$7    ; "Bedoe?{W1}"
 		nextSingleText $80,$14  ; "{LEADER} saved my life{N}there.{W1}"
 		setActscriptWait $7,eas_Jump

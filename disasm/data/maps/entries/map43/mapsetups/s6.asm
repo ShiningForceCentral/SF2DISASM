@@ -50,7 +50,7 @@ cs_540C0:       textCursor $32B
 		setFacing $4,RIGHT
 		csWait 40
 		nextSingleText $0,$4    ; "Strange...{N}There's no answer.{W2}{N}Has he gone somewhere?{N}Well, why don't you wait{N}for him inside?{W1}"
-		entityNod $0
+		nod $0
 		entityActionsWait $0
 		 moveLeft 2
 		endActions
@@ -128,8 +128,8 @@ cs_540C0:       textCursor $32B
 		 ac_updateSprite        ;   
 		 ac_jump eas_Idle       ;   
 		ac_end
-		hideEntity $81
-		hideEntity $82
+		hide $81
+		hide $82
 		csWait 60
 		setActscriptWait $4,eas_Init
 		entityActionsWait $4
@@ -150,7 +150,7 @@ cs_540C0:       textCursor $32B
 		endActions
 		nextSingleText $0,$4    ; "Are you OK, sir?{N}Why did they do such a{N}cruel thing?{W1}"
 		nextSingleText $0,$80   ; "They were Galam soldiers.{N}They demanded my notes on{N}Ground Seal.{W2}{N}They suddenly snatched at{N}them, and...(cough)...{W1}"
-		entityShiver $80
+		shiver $80
 		stopEntity $80
 		entityActionsWait $0
 		 moveRight 2
@@ -162,18 +162,18 @@ cs_540C0:       textCursor $32B
 		nextSingleText $0,$80   ; "Who...is...it?{N}What...did he...say?{W1}"
 		setFacing $4,UP
 		nextSingleText $0,$4    ; "He's {LEADER} from{N}Granseal.  He said that{N}Ground Seal has opened.{W1}{N}And a serious disaster{N}took place!{W1}{N}He came to see you for{N}more information.{W1}"
-		entityShiver $80
+		shiver $80
 		stopEntity $80
 		nextSingleText $0,$80   ; "What?!  The door opened?{N}Who broke the ancient{N}seal?! {W1}"
 		nextSingleText $0,$4    ; "Calm down, sir.{N}Why are you so excited?{W1}"
 		nextSingleText $0,$80   ; "(Cough, cough)...{NAME;4},{N}listen to me carefully.{N}Grans Island is lost!{W2}{N}That tower is the sacred{N}seal that confines a terrible{N}devil.{W2}{N}Two jewels...(cough)...{N}were...installed to...{W1}"
-		entityShiver $80
+		shiver $80
 		stopEntity $80
 		nextSingleText $0,$4    ; "Stop talking, or you'll die.{W1}"
 		nextText $0,$80         ; "I'm almost dead anyway...{N}(cough)...(cough)....{W2}"
 		nextSingleText $0,$80   ; "{NAME;4}, look for the jewels...{N}to seal...ancient...{W1}"
 		playSound $FD
-		entityShiver $80
+		shiver $80
 		stopEntity $80
 		setPosFlash $80,63,63,DOWN
 		entityActionsWait $4

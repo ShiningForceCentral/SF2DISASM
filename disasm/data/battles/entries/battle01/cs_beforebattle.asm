@@ -60,7 +60,7 @@ bbcs_01:        textCursor $8F4
 		setFacing $87,UP
 		setCamDest 2,1
 		setPos $80,7,4,DOWN
-		animEntityFadeInOut $80,$7
+		animEntityFX $80,7
 		setActscriptWait $80,eas_46172
 		setActscriptWait $87,eas_46172
 		entityActionsWait $87
@@ -83,9 +83,9 @@ bbcs_01:        textCursor $8F4
 		 moveLeft 1
 		endActions
 		nextSingleText $0,$87   ; "I won't let you pass.{N}You shall not harm the King!{W1}"
-		entityShiver $80
+		shiver $80
 		csWait 30
-		entityShiver $80
+		shiver $80
 		setPos $81,7,4,DOWN
 		setPos $82,7,4,DOWN
 		setPos $83,7,4,DOWN
@@ -119,11 +119,11 @@ bbcs_01:        textCursor $8F4
 		 moveRight 3
 		 moveDown 1
 		endActions
-		entityShiver $80
+		shiver $80
 		csWait 30
-		entityShiver $80
+		shiver $80
 		csWait 30
-		entityShiver $80
+		shiver $80
 		csWait 60
 		nextText $0,$87         ; "This doesn't look good.{W2}"
 		setFacing $87,DOWN

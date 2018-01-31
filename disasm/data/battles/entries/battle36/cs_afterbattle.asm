@@ -12,9 +12,9 @@ abcs_battle36:  textCursor $B89
 		jumpIfFlagClear $4C,cs_4D9F0; Zynk is a follower
 		setActscriptWait $1A,eas_Init
 		setPos $1A,63,62,DOWN
-cs_4D9F0:       animEntityFadeInOut $80,$6
+cs_4D9F0:       animEntityFX $80,6
 		fadeInB
-		animEntityFadeInOut $80,$7
+		animEntityFX $80,7
 		setActscriptWait $80,eas_Jump
 		csWait 5
 		setActscript $80,eas_461B6
@@ -24,7 +24,7 @@ cs_4D9F0:       animEntityFadeInOut $80,$6
 		nextSingleText $0,$80   ; "My Prism Flowers!{W1}"
 		setFacing $80,UP
 		nextSingleText $0,$80   ; "{LEADER}, I shall return{N}with Red Baron!{N}You'll pay for this!{W1}"
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		followEntity $81,$0,$2
 		followEntity $7,$81,$1
 		followEntity $1F,$81,$3

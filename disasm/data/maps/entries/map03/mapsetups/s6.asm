@@ -33,5 +33,5 @@ return_513B8:
 
 	; End of function ms_map3_InitFunction
 
-cs_513BA:       hideEntity $8E
+cs_513BA:       hide $8E
 		csc_end

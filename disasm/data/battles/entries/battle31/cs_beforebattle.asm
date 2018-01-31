@@ -11,15 +11,15 @@ bbcs_31:        textCursor $AFB
 		setPos $1F,22,3,DOWN
 		setActscriptWait $16,eas_Init
 		setPos $16,21,3,DOWN
-		animEntityFadeInOut $80,$6
-		animEntityFadeInOut $81,$6
+		animEntityFX $80,6
+		animEntityFX $81,6
 		setActscript $82,eas_AnimSpeedx2
 		playSound MUSIC_BATTLE_THEME_1
 		fadeInB
 		cameraSpeed $30
 		nextSingleText $C0,$80  ; "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
 		setCamDest 16,5
-		animEntityFadeInOut $80,$7
+		animEntityFX $80,7
 		nextSingleText $0,$7    ; "Geshp!{W1}"
 		nextSingleText $C0,$80  ; "So, you remember me. {W1}"
 		setCamDest 16,2
@@ -57,7 +57,7 @@ bbcs_31:        textCursor $AFB
 		setFacing $80,DOWN
 		nextSingleText $C0,$80  ; "Cameela!  Cameeeeeela!{W1}"
 		nextSingleText $0,$7    ; "Cameela?!  We met her in{N}Pangoat Valley.{W1}"
-		animEntityFadeInOut $81,$7
+		animEntityFX $81,7
 		nextSingleText $0,$81   ; "What?{W1}"
 		nextText $C0,$80        ; "Ah, Cameela.  You're here.{W2}"
 		nextSingleText $C0,$80  ; "Get the key for me!{W1}"
@@ -84,12 +84,12 @@ bbcs_31:        textCursor $AFB
 		nextText $0,$81         ; "I hate you!{N}I won't help you.{W2}"
 		nextText $0,$81         ; "You want the key?{N}You get it!{N}You can use my army.{W2}"
 		nextSingleText $0,$81   ; "See you later.{W1}"
-		animEntityFadeInOut $81,$6
+		animEntityFX $81,6
 		nextText $C0,$80        ; "That witch!{W2}"
 		nextSingleText $C0,$80  ; "Cameela!  Cameela!!{W1}"
 		nextSingleText $0,$7    ; "They're divided....{W1}"
 		csWait 40
-		entityShiver $80
+		shiver $80
 		csWait 40
 		setFacing $80,UP
 		nextText $C0,$80        ; "I don't need your help,{N}Cameela!{W2}"
@@ -110,7 +110,7 @@ bbcs_31:        textCursor $AFB
 		nextSingleText $0,$7    ; "You're not staying?{W1}"
 		nextText $C0,$80        ; "I'm good at using my brains,{N}not my strength.{W2}"
 		nextSingleText $C0,$80  ; "I'll return by the time{N}you're defeated.{W1}"
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		csc_end
 ce_4CB92:       mainEntity 21,4,DOWN
 		entity 20,3,DOWN,7,eas_Init

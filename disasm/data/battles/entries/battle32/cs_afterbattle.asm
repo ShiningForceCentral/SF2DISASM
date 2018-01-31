@@ -48,7 +48,7 @@ abcs_battle32:  textCursor $B25
 		nextSingleText $0,$1F   ; "I don't care, {NAME;7}.{N}He has seen the error of his{N}ways.{W1}"
 		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "{LEADER}, don't you want{N}{NAME;23} to join our{N}force?{W1}"
-		entityNod $0
+		nod $0
 		join $17
 		joinForceAI $17,$0      ; 0054 JOIN FORCE WITH AI
 		entityActionsWait $17

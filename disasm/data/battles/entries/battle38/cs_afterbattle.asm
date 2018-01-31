@@ -33,7 +33,7 @@ cs_4DF00:       setActscriptWait $80,eas_46172
 		setPriority $88,$FFFF
 		fadeInB
 		csWait 60
-		entityShiver $88
+		shiver $88
 		nextSingleText $0,$88   ; "My traps...{W1}"
 		csWait 60
 		customActscriptWait $88
@@ -92,7 +92,7 @@ cs_4DF00:       setActscriptWait $80,eas_46172
 		endActions
 		setFacing $88,UP
 		csWait 40
-		entityShiver $88
+		shiver $88
 		csWait 60
 		customActscriptWait $88
 		 ac_setAnimCounter $0   ;   
@@ -102,7 +102,7 @@ cs_4DF00:       setActscriptWait $80,eas_46172
 		ac_end
 		setFacing $88,DOWN
 		csWait 40
-		entityShakeHead $88
+		headshake $88
 		startEntity $88
 		csWait 10
 		setActscriptWait $88,eas_Jump
@@ -179,7 +179,7 @@ cs_4DF00:       setActscriptWait $80,eas_46172
 		 moveUp 1
 		endActions
 		nextSingleText $C0,$89  ; "Do you remember your vow?{W1}"
-		entityShakeHead $88
+		headshake $88
 		nextText $C0,$89        ; "You failed to get the jewel{N}from {LEADER}.{W2}"
 		nextSingleText $C0,$89  ; "Now, you will pay with your{N}life.{W1}"
 		nextSingleText $0,$88   ; "No, please...NO!{W1}"
@@ -243,7 +243,7 @@ cs_4DF00:       setActscriptWait $80,eas_46172
 		 moveDown 3
 		endActions
 		setFacing $88,LEFT
-		entitySprite $88,$B4
+		setSprite $88,$B4
 		setActscript $88,eas_AnimSpeedx2
 		setActscript $80,eas_JumpLeft
 		playSound SFX_BOLT_SPELL
@@ -251,49 +251,49 @@ cs_4DF00:       setActscriptWait $80,eas_46172
 		 moveDownLeft 2
 		endActions
 		setActscript $81,eas_JumpRight
-		hideEntity $80
+		hide $80
 		playSound SFX_BOLT_SPELL
 		entityActionsWait $82
 		 moveLeft 3
 		endActions
 		setActscript $82,eas_JumpLeft
-		hideEntity $81
+		hide $81
 		playSound SFX_BOLT_SPELL
 		entityActionsWait $83
 		 moveUpLeft 2
 		endActions
 		setActscript $83,eas_JumpRight
-		hideEntity $82
+		hide $82
 		playSound SFX_BOLT_SPELL
 		entityActionsWait $84
 		 moveUp 3
 		endActions
 		setActscript $84,eas_JumpLeft
-		hideEntity $83
+		hide $83
 		playSound SFX_BOLT_SPELL
 		entityActionsWait $85
 		 moveUpRight 2
 		endActions
 		setActscript $85,eas_JumpRight
-		hideEntity $84
+		hide $84
 		playSound SFX_BOLT_SPELL
 		entityActionsWait $86
 		 moveRight 3
 		endActions
 		setActscript $86,eas_JumpLeft
-		hideEntity $85
+		hide $85
 		playSound SFX_BOLT_SPELL
 		entityActionsWait $87
 		 moveDownRight 2
 		endActions
 		setActscript $87,eas_JumpRight
-		hideEntity $86
+		hide $86
 		csWait 8
-		hideEntity $87
+		hide $87
 		setQuake 0
 		setCameraEntity $FFFF
 		csWait 40
-		entitySprite $88,$9F
+		setSprite $88,$9F
 		setActscriptWait $88,eas_Die
 		flickerOnce
 		cameraSpeed $30

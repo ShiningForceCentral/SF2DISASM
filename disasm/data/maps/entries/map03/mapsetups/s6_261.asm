@@ -16,7 +16,7 @@ return_513CC:
 
 	; End of function ms_map3_flag261_InitFunction
 
-cs_513CE:       hideEntity $3
+cs_513CE:       hide $3
 		csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -51,11 +51,11 @@ cs_51406:       textCursor $217
 		setPos $8A,27,3,DOWN
 		setPos $8B,31,3,DOWN
 		csc_end
-cs_51444:       moveEntityNextToPlayer $8C,$2
+cs_51444:       moveNextToPlayer $8C,LEFT
 		csc_end
-cs_5144C:       moveEntityNextToPlayer $8A,$1
+cs_5144C:       moveNextToPlayer $8A,UP
 		csc_end
-cs_51454:       moveEntityNextToPlayer $8B,$1
+cs_51454:       moveNextToPlayer $8B,UP
 		csc_end
 cs_5145C:       setActscriptWait $80,eas_Init
 		entityActionsWait $80
@@ -111,8 +111,8 @@ cs_5149A:       textCursor $205
 		entityActionsWait $8F
 		 moveUp 1
 		endActions
-		entityNod $8F
-		entityNod $8F
+		nod $8F
+		nod $8F
 		nextSingleText $0,$8F   ; "The Minister would like you{N}to come to the castle!{W1}"
 		nextSingleText $0,$8E   ; "What has happened?{N}Why are you so...?{W1}"
 		nextSingleText $0,$8F   ; "The King.  He has fallen{N}down and is in great pain!{W1}"
@@ -152,8 +152,8 @@ cs_5149A:       textCursor $205
 		entityActionsWait $8E
 		 moveDown 5
 		endActions
-		hideEntity $8E
-		hideEntity $8F
+		hide $8E
+		hide $8F
 		setCamDest 38,6
 		setFacing $0,RIGHT
 		setFacing $2,LEFT
@@ -224,7 +224,7 @@ cs_51652:       textCursor $219
 		csc_end
 cs_516A8:       textCursor $296
 		nextSingleText $0,$3    ; "Here you are!{N}I've been waiting.{W1}"
-		moveEntityNextToPlayer $3,$2
+		moveNextToPlayer $3,LEFT
 		nextSingleText $0,$3    ; "A soldier said you went{N}into the castle.{N}Is that true?{W2}{N}Oooww!  I missed it!{N}I would've woken up early{N}if I knew that...!{W1}{N}So I came to meet you{N}here, {LEADER}.{N}You're going to Yeel, right?{W2}{N}Under the King's orders!{N}Cool!  Of course, I'm{N}going too!{W1}"
 		join $3
 		nextSingleText $0,$3    ; "Let's go!{W1}"

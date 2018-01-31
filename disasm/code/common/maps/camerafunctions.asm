@@ -7,10 +7,10 @@
 VInt_AdjustCameraToPlayer:
 		
 		clr.w   d0
-		move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d0
+		move.b  ((CAMERA_ENTITY-$1000000)).w,d0
 		bmi.w   loc_468C
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		adda.w  d0,a0
 		move.w  (a0)+,d4
 		move.w  (a0)+,d5
@@ -88,7 +88,7 @@ loc_468C:
 loc_469C:
 		move.w  #$18,d7
 loc_46A0:
-		cmpi.b  #$30,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		cmpi.b  #$30,((CAMERA_ENTITY-$1000000)).w
 		bne.s   loc_46AA
 		moveq   #$40,d7 
 loc_46AA:

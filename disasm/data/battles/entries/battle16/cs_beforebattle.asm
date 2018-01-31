@@ -72,7 +72,7 @@ bbcs_16:        textCursor $9D1
 		setPos $81,12,4,DOWN
 		setPos $82,16,4,DOWN
 		playSound SFX_BIG_DOOR_RUMBLE
-		animEntityFadeInOut $81,$5
+		animEntityFX $81,5
 		setPos $83,13,2,DOWN
 		setPos $84,15,2,DOWN
 		setPos $85,17,3,DOWN
@@ -81,7 +81,7 @@ bbcs_16:        textCursor $9D1
 		setPos $88,13,5,DOWN
 		setPos $89,16,5,DOWN
 		setPos $8A,14,6,DOWN
-		animEntityFadeInOut $83,$5
+		animEntityFX $83,5
 		setQuake 16386
 		nextSingleText $C0,$7   ; "M...{D1}monster!{N}It appeared from the river!{W1}"
 		nextText $0,$1F         ; "It must be the monster they{N}mentioned in Polca.{W2}"

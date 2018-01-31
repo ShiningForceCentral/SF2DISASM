@@ -22,7 +22,7 @@ bbcs_04:        textCursor $907
 		setFacing $80,LEFT
 		csWait 20
 		nextSingleText $C0,$1C  ; "Capture them alive!{W1}"
-		entityNod $80
+		nod $80
 		entityActionsWait $1C
 		 moveDown 1
 		 moveRight 2

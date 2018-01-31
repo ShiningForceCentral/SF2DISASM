@@ -82,9 +82,9 @@ loc_22C5A:
 ; get first entity's X, Y and facing
 
 sub_22C60:
-		move.w  (ENTITY_DATA_STRUCT_X_AND_START).l,d1
-		move.w  (ENTITY_DATA_STRUCT_Y).l,d2
-		move.b  (ENTITY_DATA_STRUCT_FACING).l,d3
+		move.w  (ENTITY_DATA).l,d1
+		move.w  (ENTITY_Y).l,d2
+		move.b  (ENTITY_FACING).l,d3
 		ext.l   d1
 		divu.w  #$180,d1
 		ext.l   d2
@@ -200,7 +200,7 @@ HideUnitCursor:
 		move.w  #$6F00,d0
 		move.w  d0,(a0)
 		move.w  d0,ENTITYDEF_OFFSET_XDEST(a0)
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		movem.l (sp)+,d0/a0
 		rts
 
@@ -221,14 +221,14 @@ ControlUnitCursor:
 		moveq   #$30,d0 
 		jsr     sub_44024
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		adda.w  d0,a0
 		move.w  d2,(a0)
 		move.w  d3,2(a0)
 		move.w  d2,$C(a0)
 		move.w  d3,$E(a0)
 		move.b  #$FF,((byte_FFDE9D-$1000000)).w
-		move.b  #$30,((BATTLE_CURRENT_ENTITY-$1000000)).w 
+		move.b  #$30,((CAMERA_ENTITY-$1000000)).w 
 loc_22DD2:
 		jsr     (WaitForVInt).w 
 		move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
@@ -247,7 +247,7 @@ loc_22DD2:
 		move.w  #$6F00,(a0)
 		move.w  #$6F00,$C(a0)
 		clr.b   ((byte_FFDE9D-$1000000)).w
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		rts
 
 	; End of function ControlUnitCursor
@@ -263,7 +263,7 @@ ControlBattleUnit:
 		
 		movem.l d0-d1/a0-a1,-(sp)
 		link    a6,#-2
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a1
+		lea     ((ENTITY_DATA-$1000000)).w,a1
 		bsr.w   GetEntityCombatantNumber
 		move.w  d0,-2(a6)
 		lsl.w   #ENTITYDEF_SIZE_BITS,d0
@@ -294,7 +294,7 @@ loc_22E68:
 		move.w  (sp)+,d0
 		move.b  d0,$12(a1)
 		bsr.w   sub_234C8
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		move.w  ENTITYDEF_OFFSET_XDEST(a1),d2
 		ext.l   d2
 		divs.w  #$180,d2
@@ -305,7 +305,7 @@ loc_22E68:
 		move.b  d3,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 		move.w  -2(a6),d0
 		jsr     j_SetEntityMovescriptToIdle
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		unlk    a6
 		movem.l (sp)+,d0-d1/a0-a1
 		rts
@@ -424,10 +424,10 @@ MoveBattleEntityByMoveString:
 		move.b  -1(a0),d1
 		movem.l d1/a0,-(sp)
 		move.b  #$FF,-1(a0)
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a1
+		lea     ((ENTITY_DATA-$1000000)).w,a1
 		bsr.s   GetEntityCombatantNumber
 		move.w  d0,-2(a6)
-		move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  d0,((CAMERA_ENTITY-$1000000)).w
 		lsl.w   #5,d0
 		adda.w  d0,a1
 		move.b  $12(a1),d0
@@ -510,7 +510,7 @@ loc_2308E:
 		move.w  (sp)+,d0
 		move.b  d0,$12(a1)
 		bsr.w   sub_234C8
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		move.w  (a1),d2
 		ext.l   d2
 		divs.w  #$180,d2
@@ -673,7 +673,7 @@ sub_2322C:
 		jsr     j_GetYPos
 		move.w  d1,d3
 		bsr.w   GetEntityNumberOfCombatant
-		move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  d0,((CAMERA_ENTITY-$1000000)).w
 		jsr     (WaitForVInt).w 
 		bsr.w   sub_23256
 		movem.l (sp)+,d0-a0
@@ -699,7 +699,7 @@ sub_23256:
 		moveq   #$30,d0 
 		jsr     sub_4402C
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		adda.w  d0,a0
 		move.w  d4,(a0)
 		move.w  d5,2(a0)
@@ -707,7 +707,7 @@ sub_23256:
 		move.w  d3,$E(a0)
 		bsr.w   sub_23414
 		bsr.w   WaitForUnitCursor
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		rts
 
 	; End of function sub_23256
@@ -749,7 +749,7 @@ SetUnitCursorDestinationToNextBattleEntity:
 		jsr     j_SetUnitCursorActscript
 		jsr     (WaitForVInt).w 
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		adda.w  d0,a0
 		move.w  d4,(a0)
 		move.w  d5,ENTITYDEF_OFFSET_Y(a0)
@@ -895,7 +895,7 @@ SetEntityBlinkingFlag:
 		movem.l d0/a0,-(sp)
 		bsr.w   GetEntityNumberOfCombatant
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		bset    #7,$1D(a0,d0.w)
 		movem.l (sp)+,d0/a0
 		rts
@@ -910,7 +910,7 @@ ClearEntityBlinkingFlag:
 		movem.l d0/a0,-(sp)
 		bsr.w   GetEntityNumberOfCombatant
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		bclr    #7,$1D(a0,d0.w)
 		movem.l (sp)+,d0/a0
 		rts
@@ -1176,7 +1176,7 @@ FadeOut_WaitForP1Input:
 SetEntityPosition:
 		
 		movem.l d0/a0,-(sp)
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		lsl.w   #5,d0
 		adda.w  d0,a0
 		move.w  d1,(a0)

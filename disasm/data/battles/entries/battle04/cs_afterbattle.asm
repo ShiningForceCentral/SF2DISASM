@@ -10,7 +10,7 @@ abcs_battle04:  textCursor $90F
 		setPos $3,13,22,DOWN
 		setPos $4,11,22,DOWN
 		fadeInB
-		entityNod $0
+		nod $0
 		nextSingleText $0,$1C   ; "Your battle strategy was{N}wonderful!  I praise you.{W1}"
 		csWait 5
 		setActscript $3,eas_461B6
@@ -94,7 +94,7 @@ abcs_battle04:  textCursor $90F
 		 moveDown 1
 		 moveRight 2
 		endActions
-		mapSysEvent $11,$0,$0,$0
+		warp $11,$0,$0,$0
 		csc_end
 ce_49A6A:       mainEntity 13,20,DOWN
 		entity 14,21,DOWN,1,eas_Init

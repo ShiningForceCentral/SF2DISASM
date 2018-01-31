@@ -26,7 +26,7 @@ byte_5E27C:     setActscriptWait $0,eas_5E2C4
 		jumpIfFlagClear $4C,cs_5E2BC; Zynk is a follower
 		setActscriptWait $1A,eas_Init
 		setActscriptWait $1A,eas_5E2C4
-cs_5E2BC:       mapSysEvent $25,$1D,$8,$2
+cs_5E2BC:       warp $25,$1D,$8,$2
 		csc_end
 eas_5E2C4:       ac_set1Cb5 $0
 		 ac_moveAbs 7,7

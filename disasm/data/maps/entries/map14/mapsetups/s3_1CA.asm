@@ -17,7 +17,7 @@ sub_58F54:
 
 	; End of function sub_58F54
 
-cs_58F5C:       moveEntityNextToPlayer $81,$3
+cs_58F5C:       moveNextToPlayer $81,DOWN
 		textCursor $C84
 		nextText $0,$81         ; "Are you ready?{W1}"
 		yesNo
@@ -32,5 +32,5 @@ cs_58F7E:       nextSingleText $0,$81   ; "The game will be suspended.{N}OK?"
 		entityActionsWait $0
 		 moveDown 4
 		endActions
-		mapSysEvent $48,$1,$1,$3
+		warp $48,$1,$1,$3
 		csc_end

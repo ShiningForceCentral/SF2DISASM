@@ -42,7 +42,7 @@ cs_53176:       setCameraEntity $FFFF
 		 moveUp 1
 		endActions
 		nextSingleText $80,$8A  ; "So, all we have to do is{N}find the evil Gizmo and{N}kill him.{W1}"
-		entityNod $8A
+		nod $8A
 		nextSingleText $80,$8A  ; "That's right.  Kill him{N}before he possesses{N}somebody else.{W2}"
 		nextSingleText $80,$8A  ; "You may go.{W1}"
 		nextSingleText $0,$90   ; "Yes, sir.{W1}"
@@ -95,13 +95,13 @@ cs_53176:       setCameraEntity $FFFF
 		entityActionsWait $96
 		 moveDown 6
 		endActions
-		hideEntity $90
-		hideEntity $91
-		hideEntity $92
-		hideEntity $93
-		hideEntity $94
-		hideEntity $95
-		hideEntity $96
+		hide $90
+		hide $91
+		hide $92
+		hide $93
+		hide $94
+		hide $95
+		hide $96
 		csWait 40
 		setCamDest 24,6
 		entityActionsWait $8A
@@ -148,7 +148,7 @@ cs_53176:       setCameraEntity $FFFF
 		csWait 120
 		setFacing $8C,LEFT
 		nextSingleText $0,$8C   ; "Did our soldiers leave{N}for the subjugation?{W1}"
-		entityNod $8A
+		nod $8A
 		nextSingleText $80,$8A  ; "Yes, just a few minutes{N}ago.{W1}"
 		csWait 30
 		setCamDest 23,5
@@ -241,8 +241,8 @@ cs_534D2:       textCursor $2B6
 		entityActionsWait $80
 		 moveLeft 1
 		endActions
-		setEntityDest $80,23,12
-		setEntityDest $1C,20,10
+		setDest $80,23,12
+		setDest $1C,20,10
 		nextSingleText $0,$1C   ; "Please don't move, or I'll{N}have to kill you!  Please!{W1}"
 		entityActionsWait $80
 		 moveUpLeft 1
@@ -254,7 +254,7 @@ cs_534D2:       textCursor $2B6
 		csWait 20
 		setFacing $1C,UP
 		csWait 30
-		entityShakeHead $1C
+		headshake $1C
 		nextSingleText $0,$1C   ; "Stop!  NO!{N}King Galam is my...{W1}"
 		nextText $80,$80        ; "You have to believe me.{W2}"
 		nextSingleText $80,$80  ; "Your King is possessed{N}by a devil.{N}He is not King Galam!{W1}"
@@ -270,7 +270,7 @@ cs_534D2:       textCursor $2B6
 		setFacing $80,RIGHT
 		nextText $80,$80        ; "He is taking her away!{W2}"
 		nextSingleText $80,$80  ; "We have no time.{W1}"
-		setEntityDest $80,21,10
+		setDest $80,21,10
 		nextSingleText $0,$1C   ; "Stop, sir!{N}I can't let you pass!{W1}"
 		nextSingleText $80,$80  ; "Then you come with me!{N}Yes, a good idea.{W1}"
 		csWait 30
@@ -278,7 +278,7 @@ cs_534D2:       textCursor $2B6
 		csWait 50
 		setFacing $1C,RIGHT
 		csWait 20
-		entityNod $1C
+		nod $1C
 		csWait 30
 		entityActionsWait $1C
 		 moveLeft 1
@@ -297,8 +297,8 @@ cs_534D2:       textCursor $2B6
 		setActscriptWait $80,eas_Jump
 		setActscriptWait $80,eas_Jump
 		nextSingleText $80,$80  ; "You kids, follow me!{W1}"
-		entityNod $84
-		entityNod $85
+		nod $84
+		nod $85
 		entityActions $80
 		 moveUp 3
 		 moveLeft 3
@@ -314,10 +314,10 @@ cs_534D2:       textCursor $2B6
 		 moveUp 3
 		 moveLeft 3
 		endActions
-		hideEntity $80
-		hideEntity $1C
-		hideEntity $84
-		hideEntity $85
+		hide $80
+		hide $1C
+		hide $84
+		hide $85
 		csc_end
 cs_535FA:       textCursor $2B2
 		nextText $0,$81         ; "Oh, it's you, {LEADER}!{W2}"

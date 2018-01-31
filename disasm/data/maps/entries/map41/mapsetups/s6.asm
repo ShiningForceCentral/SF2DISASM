@@ -66,7 +66,7 @@ cs_5F4B8:       setActscriptWait $0,eas_Init
 cs_5F594:       newEntity $1C,6,15,UP,$FF
 		textCursor $DB9
 		nextSingleText $0,$1C   ; "Sir Astral!  {LEADER}!{W1}"
-		setEntityDest $1F,6,10
+		setDest $1F,6,10
 		setFacing $0,DOWN
 		setFacing $7,DOWN
 		setFacing $1F,DOWN
@@ -87,11 +87,11 @@ cs_5F594:       newEntity $1C,6,15,UP,$FF
 		csWait 40
 		setFacing $1F,UP
 		nextSingleText $80,$1F  ; "He's a hero in Galam.{N}I think he should join us.{W1}"
-		entityNod $7
-		entityNod $0
+		nod $7
+		nod $0
 		setFacing $1F,DOWN
 		csWait 20
-		entityNod $1F
+		nod $1F
 		nextSingleText $0,$1F   ; "{NAME;28}, please come{N}with us.  You'll be a great{N}help.{W1}"
 		join $1C
 		setActscriptWait $1C,eas_Jump

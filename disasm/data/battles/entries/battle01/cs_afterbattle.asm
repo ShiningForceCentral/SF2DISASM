@@ -13,9 +13,9 @@ abcs_battle01:  textCursor $901
 		nextSingleText $0,$81   ; "Well done, {LEADER}!{N}What should I do with this{N}devil?{W1}"
 		setFacing $81,UP
 		csWait 40
-		entityShiver $80
+		shiver $80
 		csWait 30
-		entityShiver $80
+		shiver $80
 		csWait 30
 		mapFadeOutToWhite
 		csWait 30
@@ -30,10 +30,10 @@ abcs_battle01:  textCursor $901
 		mapFadeInFromWhite
 		csWait 30
 		mapFadeOutToWhite
-		animEntityFadeInOut $80,$6
-		entitySprite $80,$3C
+		animEntityFX $80,6
+		setSprite $80,$3C
 		setPos $80,7,10,DOWN
-		entitySprite $80,$72
+		setSprite $80,$72
 		mapFadeInFromWhite
 		csWait 30
 		entityActionsWait $81
@@ -53,10 +53,10 @@ abcs_battle01:  textCursor $901
 		setCamDest 2,3
 		csWait 70
 		mapFadeOutToWhite
-		animEntityFadeInOut $80,$6
-		entitySprite $80,$3C
+		animEntityFX $80,6
+		setSprite $80,$3C
 		setPos $80,7,16,DOWN
-		entitySprite $80,$72
+		setSprite $80,$72
 		mapFadeInFromWhite
 		csWait 30
 		nextSingleText $0,$81   ; "It disappeared again.{W1}"
@@ -65,16 +65,16 @@ abcs_battle01:  textCursor $901
 		entityActions $80
 		 moveDown 4
 		endActions
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		csWait 20
-		hideEntity $80
+		hide $80
 		setCamDest 2,2
 		setFacing $81,RIGHT
 		nextSingleText $0,$81   ; "We must hurry to the King!{W1}"
 		entityActionsWait $81
 		 moveDown 6
 		endActions
-		hideEntity $81
+		hide $81
 		csWait 40
 		csc_end
 ce_497F6:       mainEntity 8,6,UP

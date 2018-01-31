@@ -30,11 +30,11 @@ cs_612BE:       textCursor $E61
 		setPos $1A,63,63,DOWN
 		fadeInFromBlackHalf
 		nextSingleText $80,$82  ; "{LEADER} defeated Red{N}Baron too?  Is that what{N}you said, Geshp?{W1}"
-		entityNod $80
+		nod $80
 		nextSingleText $0,$80   ; "Yes, sir...I'm sorry.{W1}"
 		nextText $80,$82        ; "Once again, my minions have{N}failed me.{W2}"
 		nextSingleText $80,$82  ; "Are my soldiers that weak?{W1}"
-		entityShiver $80
+		shiver $80
 		setSize $80,$15
 		nextText $0,$80         ; "Yes...oh, no!  I mean, they{N}were strong enough.{W2}"
 		nextSingleText $0,$80   ; "But {LEADER} and his force{N}were smarter.{W1}"
@@ -54,7 +54,7 @@ cs_612BE:       textCursor $E61
 		entityActionsWait $80
 		 moveDown 1
 		endActions
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "Ah...yes, sir.  I'll kill{N}{LEADER} this time.{N}I stake my life on it.{W1}"
 		nextSingleText $80,$82  ; "Bring the Jewel of Evil back{N}to me!{W1}"
 		nextSingleText $0,$80   ; "Yes, sir!{W1}"
@@ -62,7 +62,7 @@ cs_612BE:       textCursor $E61
 		csWait 40
 		setActscript $80,eas_RotateRightHighSpeed
 		csWait 40
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		setPos $80,63,63,DOWN
 		csWait 150
 		setPriority $83,$FFFF
@@ -71,9 +71,9 @@ cs_612BE:       textCursor $E61
 		setPos $83,13,12,DOWN
 		csWait 50
 		setPos $81,13,12,UP
-		animEntityFadeInOut $81,$7
+		animEntityFX $81,7
 		csWait 50
-		hideEntity $83
+		hide $83
 		csWait 40
 		customActscriptWait $81
 		 ac_setSpeed 16,16      ;   
@@ -82,7 +82,7 @@ cs_612BE:       textCursor $E61
 		entityActionsWait $81
 		 moveUp 2
 		endActions
-		entityNod $81
+		nod $81
 		csWait 50
 		nextSingleText $80,$82  ; "You were right, Odd Eye.{W1}"
 		entityActionsWait $81
@@ -91,7 +91,7 @@ cs_612BE:       textCursor $E61
 		nextSingleText $0,$81   ; "Of course.{W1}"
 		nextText $80,$82        ; "I can't trust Geshp anymore.{W2}"
 		nextSingleText $80,$82  ; "If he fails, you must battle{N}{LEADER}.{W1}"
-		entityShiver $81
+		shiver $81
 		nextText $0,$81         ; "You want me to kill{N}{LEADER}?{W2}"
 		customActscriptWait $81
 		 ac_setSpeed 8,8        ;   
@@ -108,7 +108,7 @@ cs_612BE:       textCursor $E61
 		nextSingleText $0,$81   ; "I'll do it.  If this comes{N}to pass, it will be his final{N}battle.{W1}"
 		csWait 30
 		executeSubroutine csub_61426
-		mapSysEvent $12,$9,$A,$3
+		warp $12,$9,$A,$3
 		csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -126,7 +126,7 @@ loc_61434:
 
 cs_6143C:       textCursor $36F
 		setActscriptWait $1A,eas_Init
-		moveEntityNextToPlayer $1A,$0
+		moveNextToPlayer $1A,RIGHT
 		setFacing $0,RIGHT
 		csWait 20
 		nextSingleText $0,$1A   ; "Sorry, {LEADER}.{N}I'm going back to Roft.{N}I'm worried about Petro.{W1}"
@@ -139,10 +139,10 @@ cs_6143C:       textCursor $36F
 		setFacing $1F,UP
 		setFacing $1A,DOWN
 		csWait 30
-		entityNod $1A
+		nod $1A
 		csWait 20
 		entityActionsWait $1A
 		 moveUp 4
 		endActions
-		hideEntity $1A
+		hide $1A
 		csc_end

@@ -76,7 +76,7 @@ cs_57D22:       textCursor $C7D
 		nextText $80,$7         ; "Attack us?!  {LEADER},{N}let's get out of here!{W2}"
 		nextSingleText $80,$7   ; "We don't want to fight him!{W1}"
 		csWait 20
-		entityNod $0
+		nod $0
 		nextSingleText $80,$7   ; "OK, hurry!{W1}"
 		entityActions $0
 		 moveDown 5
@@ -87,5 +87,5 @@ cs_57D22:       textCursor $C7D
 		entityActionsWait $1F
 		 moveDown 5
 		endActions
-		mapSysEvent $44,$37,$2C,$3
+		warp $44,$37,$2C,$3
 		csc_end

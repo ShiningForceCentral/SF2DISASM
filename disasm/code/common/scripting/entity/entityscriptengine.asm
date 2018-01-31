@@ -13,7 +13,7 @@ loc_4C74:
 		subq.b  #1,((byte_FFAF69-$1000000)).w
 		move.b  ((byte_FFAF69-$1000000)).w,d6
 		sub.b   ((byte_FFAF6B-$1000000)).w,d6
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		lea     (byte_FFDD00).l,a1
 		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_4CB2
@@ -223,7 +223,7 @@ sub_4E86:
 		movem.l a0-a1,-(sp)
 		move.w  d0,-(sp)
 		lea     ((byte_FFAF47-$1000000)).w,a1
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		moveq   #$1F,d7
 loc_4E96:
 		clr.w   d0
@@ -272,7 +272,7 @@ sub_4ED8:
 VInt_UpdateEntities:
 		
 		clr.b   ((NUM_SPRITES_TO_LOAD-$1000000)).w
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		moveq   #$30,d7 ; do that for each entity
 loc_4EF4:
 		move.w  (a0),d0
@@ -570,7 +570,7 @@ loc_51A8:
 		btst    #5,$1C(a0)
 		beq.w   loc_5220
 		moveq   #$1F,d6
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a2
+		lea     ((ENTITY_DATA-$1000000)).w,a2
 loc_51C0:
 		btst    #7,ENTITYDEF_OFFSET_FLAGS_A(a2)
 		beq.w   loc_5218
@@ -654,13 +654,13 @@ loc_5294:
 		add.w   d4,d3
 		ext.l   d3
 		divs.w  #$180,d3
-		move.w  d3,((byte_FFA84C-$1000000)).w
+		move.w  d3,((MAP_EVENT_PARAM_1-$1000000)).w
 		move.w  $E(a0),d3
 		add.w   d5,d3
 		ext.l   d3
 loc_52B8:
 		divs.w  #$180,d3
-		move.w  d3,((byte_FFA84E-$1000000)).w
+		move.w  d3,((MAP_EVENT_PARAM_3-$1000000)).w
 loc_52C0:
 		cmpi.w  #$C000,(a4,d2.w)
 		movem.w (sp)+,d2-d3
@@ -705,7 +705,7 @@ esc03_:
 		move.w  (a0),d0
 		move.w  ENTITYDEF_OFFSET_Y(a0),d1
 		move.l  a0,-(sp)
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		move.w  2(a1),d2
 		lsl.w   #5,d2
 		adda.w  d2,a0
@@ -1007,7 +1007,7 @@ CheckIfSameDestForOtherEntity:
 		btst    #5,$1C(a0)      ; end if not obstructed by people
 		beq.w   loc_5660
 		moveq   #$30,d6 
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a2
+		lea     ((ENTITY_DATA-$1000000)).w,a2
 loc_5624:
 		cmpi.w  #$7000,(a2)     ; test each entity
 		beq.w   loc_5658
@@ -1108,7 +1108,7 @@ loc_5708:
 		btst    #5,$1C(a0)
 		beq.w   loc_575C
 		moveq   #$1F,d6
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a2
+		lea     ((ENTITY_DATA-$1000000)).w,a2
 loc_5720:
 		btst    #7,ENTITYDEF_OFFSET_FLAGS_A(a2)
 		beq.w   loc_5754
@@ -1252,7 +1252,7 @@ loc_588A:
 		btst    #5,$1C(a0)
 		beq.w   loc_58DE
 		moveq   #$1F,d6
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a2
+		lea     ((ENTITY_DATA-$1000000)).w,a2
 loc_58A2:
 		btst    #7,$1C(a2)
 		beq.w   loc_58D6
@@ -1383,7 +1383,7 @@ esc0E_:
 		move.w  6(a1),d3
 		move.w  2(a1),d0
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a1
+		lea     ((ENTITY_DATA-$1000000)).w,a1
 		adda.w  d0,a1
 		move.b  ENTITYDEF_OFFSET_FACING(a1),d0
 						; other entity facing
@@ -1466,7 +1466,7 @@ esc0D_clonePosition:
 		move.l  a1,-(sp)
 		move.w  2(a1),d0
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a1
+		lea     ((ENTITY_DATA-$1000000)).w,a1
 		adda.w  d0,a1
 		move.l  (a1),(a0)
 		move.l  ENTITYDEF_OFFSET_XDEST(a1),ENTITYDEF_OFFSET_XDEST(a0)
@@ -1487,7 +1487,7 @@ esc0F_waitUntilOtherEntityReachesDest:
 		
 		move.l  a0,-(sp)
 		move.w  2(a1),d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		lsl.w   #5,d0
 		adda.w  d0,a0
 		move.w  (a0),d0         ; pos
@@ -2321,7 +2321,7 @@ return_6022:
 LoadMapEntitySprites:
 		
 		bsr.w   DisableDisplayAndVInt
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		moveq   #$2F,d7 
 loc_602E:
 		cmpi.w  #$7000,(a0)
@@ -2353,7 +2353,7 @@ FacingValuesbis:dc.b 0
 sub_6052:
 		movem.l d0-a2,-(sp)
 		lsl.w   #ENTITYDEF_SIZE_BITS,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		adda.w  d0,a0
 		cmpi.b  #$FF,d2
 		beq.s   loc_6072

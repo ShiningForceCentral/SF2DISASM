@@ -31,7 +31,7 @@ abcs_battle20:  textCursor $A06
 		endActions
 		nextSingleText $0,$D    ; "Oh, thank you!{W1}"
 		setFacing $0,UP
-		entityNod $0
+		nod $0
 		join $D
 		setFacing $7,UP
 		nextSingleText $C0,$7   ; "Now, let's go see Mr. Creed!{W1}"

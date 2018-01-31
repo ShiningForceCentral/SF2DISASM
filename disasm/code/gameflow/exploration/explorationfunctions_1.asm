@@ -14,7 +14,7 @@ loc_257D0:
 		jsr     HealAliveCharsAndImmortals
 		jsr     sub_258EA(pc)
 		nop
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		move.w  d0,-(sp)
 		cmpi.b  #$FF,d0         ; map idx is FF, not provided
 		beq.s   loc_25828
@@ -43,7 +43,7 @@ loc_25836:
 		jsr     (sub_4EC6).w
 		move.w  (sp)+,d1
 		move.w  #$FFFF,d0
-		move.b  #0,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #0,((CAMERA_ENTITY-$1000000)).w
 		jsr     (LoadMap).w     
 		bsr.w   SetBattleVIntFunctions
 		jsr     j_RunMapSetupInitFunction
@@ -58,12 +58,13 @@ loc_2586A:
 		bsr.w   WaitForEvent
 		tst.w   d0
 		beq.s   loc_2587E
-		bsr.w   sub_2594A       
+		bsr.w   ProcessMapEvent ; map event
 		bra.s   loc_2586A       
 loc_2587E:
 		tst.w   d1
 		beq.s   loc_25888
 		bsr.w   SetExplorationVIntFunctions
+						; A or C button pushed
 		bra.s   loc_2586A       
 loc_25888:
 		bra.s   loc_2586A       
@@ -85,7 +86,7 @@ loc_25896:
 
 sub_258A8:
 		movem.l d0-d3/a0,-(sp)
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		tst.b   d1
 		blt.s   loc_258BE
 		mulu.w  #$180,d1
@@ -146,7 +147,7 @@ return_2591A:
 WaitForEvent:
 		move.w  ((MAP_EVENT_TYPE-$1000000)).w,d0
 		bne.s   loc_25930       
-		move.b  #0,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #0,((CAMERA_ENTITY-$1000000)).w
 		clr.w   d0
 		jsr     j_SetControlledEntityActScript
 loc_25930:
@@ -157,7 +158,7 @@ loc_25930:
 		rts
 loc_2593C:
 		move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
-		andi.w  #$60,d1 
+		andi.w  #$60,d1 ; Check A/C buttons
 		beq.s   loc_25948
 		rts
 loc_25948:
@@ -170,31 +171,33 @@ loc_25948:
 
 ; deal with "system" event (RAM:a84a)
 
-sub_2594A:
+ProcessMapEvent:
+		
 		clr.w   ((MAP_EVENT_TYPE-$1000000)).w
 		subq.w  #1,d0
-		beq.w   loc_25978
+		beq.w   loc_25978       
 		subq.w  #1,d0
-		beq.w   loc_25A4C
+		beq.w   ProcessMapEventType2
 		subq.w  #1,d0
-		beq.w   loc_25A54
+		beq.w   ProcessMapEventType3
 		subq.w  #1,d0
-		beq.w   loc_25A5C
+		beq.w   ProcessMapEventType4
 		subq.w  #1,d0
-		beq.w   loc_25A64
+		beq.w   ProcessMapEventType5
 		subq.w  #1,d0
 		beq.w   loc_25A7C
 		trap    #SOUND_COMMAND
-		dc.w SFX_BATTLEFIELD_DEATH; big door slam ?
+		dc.w SFX_BATTLEFIELD_DEATH
 		rts
 loc_25978:
-		tst.b   ((byte_FFA84C-$1000000)).w
+		tst.b   ((MAP_EVENT_PARAM_1-$1000000)).w
+						; Event type 1
 		bne.w   loc_259CC
-		movem.w d0,-(sp)
-		move.w  ((word_FFB1A8-$1000000)).w,d0
+		movem.w d0,-(sp)        ; cutscene commands $07 go here
+		move.w  ((WARP_SFX-$1000000)).w,d0
 		trap    #SOUND_COMMAND
 		dc.w SOUND_COMMAND_GET_D0_PARAMETER
-		clr.w   ((word_FFB1A8-$1000000)).w
+		clr.w   ((WARP_SFX-$1000000)).w
 		movem.w (sp)+,d0
 		clr.w   d0
 		jsr     j_MakeEntityIdle
@@ -204,25 +207,26 @@ loc_25978:
 		clr.w   d2
 		clr.w   d3
 		clr.w   d4
-		move.b  ((byte_FFA84D-$1000000)).w,d0
-		bsr.w   sub_25A2A
-		move.b  ((byte_FFA84E-$1000000)).w,d5
+		move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0
+		bsr.w   UpdatePlayerPosFromMapEvent
+		move.b  ((MAP_EVENT_PARAM_3-$1000000)).w,d5
 		blt.s   loc_259BA
 		move.b  d5,d1
 loc_259BA:
-		move.b  ((byte_FFA84F-$1000000)).w,d5
+		move.b  ((MAP_EVENT_PARAM_4-$1000000)).w,d5
 		blt.s   loc_259C2
 		move.b  d5,d2
 loc_259C2:
-		move.b  ((byte_FFA850-$1000000)).w,d3
-		move.b  ((byte_FFA84C-$1000000)).w,d4
+		move.b  ((MAP_EVENT_PARAM_5-$1000000)).w,d3
+		move.b  ((MAP_EVENT_PARAM_1-$1000000)).w,d4
+						; 0
 		rts
 loc_259CC:
 		clr.w   d0
 		jsr     j_MakeEntityIdle
-		move.b  ((byte_FFA84D-$1000000)).w,d0
+		move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0
 		cmpi.b  #$47,d0 
-		bne.s   loc_259E8       ; HARDCODED check if map is pacalon, switch if water not restored
+		bne.s   loc_259E8       ; HARDCODED check if map is overworld pacalon, switch if water not restored
 		trap    #CHECK_FLAG
 		dc.w $212               ; Battle 30 completed
 		beq.s   loc_259E8
@@ -231,58 +235,97 @@ loc_259E8:
 		move.b  d0,((CURRENT_MAP-$1000000)).w
 		moveq   #$FFFFFFFF,d0
 		jsr     (sub_25B0).w
-		move.b  ((byte_FFA84E-$1000000)).w,d0
+		move.b  ((MAP_EVENT_PARAM_3-$1000000)).w,d0
 		blt.s   loc_25A04
 		mulu.w  #$180,d0
-		move.w  d0,((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w
-		move.w  d0,((ENTITY_DATA_STRUCT_X_DEST-$1000000)).w
+		move.w  d0,((ENTITY_DATA-$1000000)).w
+		move.w  d0,((ENTITY_X_DEST-$1000000)).w
 loc_25A04:
 		clr.w   d0
-		move.b  ((byte_FFA84F-$1000000)).w,d0
+		move.b  ((MAP_EVENT_PARAM_4-$1000000)).w,d0
 		blt.s   loc_25A18
 		mulu.w  #$180,d0
-		move.w  d0,((ENTITY_DATA_STRUCT_Y-$1000000)).w
-		move.w  d0,((ENTITY_DATA_STRUCT_Y_DEST-$1000000)).w
+		move.w  d0,((ENTITY_Y-$1000000)).w
+		move.w  d0,((ENTITY_Y_DEST-$1000000)).w
 loc_25A18:
 		clr.w   d1
 		clr.w   d2
 		clr.w   d3
-		bsr.w   sub_25A2A
+		bsr.w   UpdatePlayerPosFromMapEvent
 		jsr     sub_440AC
 		rts
 
-	; End of function sub_2594A
+	; End of function ProcessMapEvent
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25A2A:
+UpdatePlayerPosFromMapEvent:
+		
 		move.l  a0,-(sp)
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
-		move.w  (a0),d1
+		lea     ((ENTITY_DATA-$1000000)).w,a0
+		move.w  (a0),d1         ; X
 		ext.l   d1
 		divs.w  #$180,d1
-		move.w  2(a0),d2
+		move.w  ENTITYDEF_OFFSET_Y(a0),d2
+						; Y
 		ext.l   d2
 		divs.w  #$180,d2
 		clr.w   d3
-		move.b  $10(a0),d3
+		move.b  ENTITYDEF_OFFSET_FACING(a0),d3
+						; Facing
 		movea.l (sp)+,a0
 		rts
-loc_25A4C:
-		jsr     sub_44098       
-		rts
-loc_25A54:
-		jsr     sub_44090
-		rts
-loc_25A5C:
-		jsr     sub_4409C
-		rts
-loc_25A64:
-		jsr     sub_44094
+
+	; End of function UpdatePlayerPosFromMapEvent
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Event type 2
+
+ProcessMapEventType2:
+		
+		jsr     j_MapEventType2 
 		rts
 
-	; End of function sub_25A2A
+	; End of function ProcessMapEventType2
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Event type 3
+
+ProcessMapEventType3:
+		
+		jsr     j_MapEventType3
+		rts
+
+	; End of function ProcessMapEventType3
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Event type 4
+
+ProcessMapEventType4:
+		
+		jsr     j_MapEventType4
+		rts
+
+	; End of function ProcessMapEventType4
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Event type 5
+
+ProcessMapEventType5:
+		
+		jsr     j_MapEventType5
+		rts
+
+	; End of function ProcessMapEventType5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -303,15 +346,15 @@ sub_25A74:
 	; End of function sub_25A74
 
 
-; START OF FUNCTION CHUNK FOR sub_2594A
+; START OF FUNCTION CHUNK FOR ProcessMapEvent
 
 loc_25A7C:
-		clr.w   d0
+		clr.w   d0              ; Event type 6
 		jsr     sub_4401C       
-		move.w  ((byte_FFA84C-$1000000)).w,d1
-		move.w  ((byte_FFA84E-$1000000)).w,d2
+		move.w  ((MAP_EVENT_PARAM_1-$1000000)).w,d1
+		move.w  ((MAP_EVENT_PARAM_3-$1000000)).w,d2
 		jsr     j_RunMapSetupZoneEvent
 		rts
 
-; END OF FUNCTION CHUNK FOR sub_2594A
+; END OF FUNCTION CHUNK FOR ProcessMapEvent
 

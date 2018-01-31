@@ -24,7 +24,7 @@ EndCutscene:    mapLoad 20,19,33
 		 ac_setSpeed 20,20      ;   
 		 ac_jump eas_Idle       ;   
 		ac_end
-		entitySprite $B,$AA
+		setSprite $B,$AA
 		fadeInB
 		csWait 60
 		setPos $0,25,35,RIGHT
@@ -44,9 +44,9 @@ EndCutscene:    mapLoad 20,19,33
 		 moveRight 1
 		endActions
 		csWait 60
-		entityNod $80
-		entityNod $81
-		entityNod $0
+		nod $80
+		nod $81
+		nod $0
 		csWait 40
 		entityActionsWait $0
 		 moveUp 4
@@ -58,7 +58,7 @@ EndCutscene:    mapLoad 20,19,33
 		 moveDownRight 1
 		endActions
 		csWait 40
-		entityNod $0
+		nod $0
 		csWait 60
 		entityActions $0
 		 moveDown 4
@@ -76,12 +76,12 @@ EndCutscene:    mapLoad 20,19,33
 		setFacing $82,DOWN
 		csWait 30
 		setFacing $81,UP
-		entityNod $82
+		nod $82
 		csWait 60
 		setFacing $80,UP
 		csWait 30
 		setFacing $81,DOWN
-		entityNod $80
+		nod $80
 		csWait 40
 		setFacing $81,RIGHT
 		csWait 20
@@ -101,8 +101,8 @@ EndCutscene:    mapLoad 20,19,33
 		entityActionsWait $83
 		 moveLeft 4
 		endActions
-		entityNod $81
-		entityNod $83
+		nod $81
+		nod $83
 		csWait 60
 		setFacing $82,UP
 		csWait 30
@@ -164,10 +164,10 @@ EndCutscene:    mapLoad 20,19,33
 		setActscript $3,eas_Jump
 		setActscript $7,eas_Jump
 		setFacing $83,LEFT
-		entityNod $80
+		nod $80
 		setFacing $0,LEFT
 		csWait 50
-		entityNod $0
+		nod $0
 		setActscript $B,eas_Jump
 		setActscript $2,eas_Jump
 		setActscript $A,eas_Jump
@@ -206,10 +206,8 @@ cs_4934A:       entityFlashWhite $0,$B4
 		loadMapFadeIn 0,13,13
 		flashScreenWhite $3C
 		csc_end
-		dc.b   0
-		dc.b $41 
-		dc.w $3C
-		dc.w $FFFF
+		flashScreenWhite $3C
+		csc_end
 		stopEntity $4
 		csc15 $1,$1,eas_493A2
 		waitIdle $1

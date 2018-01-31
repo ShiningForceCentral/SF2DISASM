@@ -72,15 +72,15 @@ cs_4FB64:       textCursor $9EF
 		setActscriptWait $7,eas_Init
 		setActscriptWait $1F,eas_Jump
 		nextSingleText $0,$1F   ; "Wait!{W1}"
-		setEntityDest $1F,60,27
+		setDest $1F,60,27
 		csWait 5
 		setActscript $1F,eas_461B6
 		csWait 120
 		setCamDest 53,24
-		setEntityDest $7,59,27
+		setDest $7,59,27
 		setFacing $7,RIGHT
 		nextSingleText $C0,$7   ; "What's wrong, Oddler?{W1}"
-		setEntityDest $0,60,26
+		setDest $0,60,26
 		setFacing $0,DOWN
 		setFacing $1F,UP
 		nextSingleText $0,$1F   ; "{LEADER}...{NAME;7}...can{N}you hear that?{W1}"
@@ -98,14 +98,14 @@ cs_4FB64:       textCursor $9EF
 		csWait 120
 		nextText $0,$1F         ; "Somebody is crying for help...{W2}"
 		nextSingleText $0,$1F   ; "from...over here.{W1}"
-		setEntityDest $1F,57,25
+		setDest $1F,57,25
 		setPos $1F,63,63,DOWN
 		csWait 40
-		setEntityDest $7,57,25
+		setDest $7,57,25
 		setPos $7,63,63,DOWN
-		setEntityDest $0,57,25
+		setDest $0,57,25
 		setPos $0,63,63,DOWN
-		mapSysEvent $33,$B,$16,$1
+		warp $33,$B,$16,$1
 		csc_end
 cs_4FC32:       textCursor $A21
 		newEntity $D,57,25,UP,$FF
@@ -139,12 +139,12 @@ cs_4FC32:       textCursor $A21
 		entityActionsWait $D
 		 moveUp 1
 		endActions
-		hideEntity $D
+		hide $D
 		entityActionsWait $0
 		 moveUp 1
 		endActions
 		entityActions $0
 		 moveUp 1
 		endActions
-		mapSysEvent $20,$1D,$3,$2
+		warp $20,$1D,$3,$2
 		csc_end

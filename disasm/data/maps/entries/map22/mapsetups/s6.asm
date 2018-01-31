@@ -77,9 +77,9 @@ cs_59656:       textCursor $6D4
 		entityActionsWait $9B
 		 moveDownLeft 8
 		endActions
-		hideEntity $99
-		hideEntity $9A
-		hideEntity $9B
+		hide $99
+		hide $9A
+		hide $9B
 		customActscriptWait $0
 		 ac_setAnimCounter $0   ;   
 		 ac_setFlip $1          ;   
@@ -105,9 +105,9 @@ cs_59656:       textCursor $6D4
 		setActscriptWait $0,eas_Init
 		setActscriptWait $7,eas_Init
 		setActscriptWait $1F,eas_Init
-		entityShakeHead $0
-		entityShakeHead $7
-		entityShakeHead $1F
+		headshake $0
+		headshake $7
+		headshake $1F
 		setFacing $0,UP
 		setFacing $7,RIGHT
 		setFacing $1F,LEFT
@@ -159,8 +159,8 @@ cs_59656:       textCursor $6D4
 		setFacing $1F,DOWN
 		setActscriptWait $0,eas_Jump
 		setActscript $7,eas_Jump
-		entityShiver $0
-		entityShiver $7
+		shiver $0
+		shiver $7
 		setActscriptWait $0,eas_46172
 		setActscriptWait $7,eas_46172
 		entityActions $0
@@ -225,7 +225,7 @@ cs_5994E:       textCursor $700
 		nextText $0,$86         ; "Are you ready?{W2}"
 		nextSingleText $0,$86   ; "Now, start the battle!{N}Do your best!{W1}"
 		setStoryFlag $16        ; Battle 22 unlocked
-		mapSysEvent $16,$0,$0,$0
+		warp $16,$0,$0,$0
 		csc_end
 cs_5996E:       textCursor $702
 		setCameraEntity $FFFF
@@ -247,9 +247,9 @@ cs_599A4:       entityActionsWait $88
 cs_599B2:       setActscriptWait $0,eas_Init
 		setActscriptWait $7,eas_Init
 		setActscriptWait $1F,eas_Init
-		setEntityDest $0,35,24
-		setEntityDest $7,34,24
-		setEntityDest $1F,33,24
+		setDest $0,35,24
+		setDest $7,34,24
+		setDest $1F,33,24
 		entityActions $0
 		 jumpRight 1
 		 faceDown 1
@@ -315,5 +315,5 @@ cs_599B2:       setActscriptWait $0,eas_Init
 		entityActionsWait $8B
 		 moveDown 6
 		endActions
-		mapSysEvent $1A,$1A,$8,$3
+		warp $1A,$1A,$8,$3
 		csc_end

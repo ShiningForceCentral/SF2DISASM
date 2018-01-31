@@ -110,7 +110,7 @@ sub_441AA:
 		mulu.w  #$180,d1
 		mulu.w  #$180,d2
 		lea     ((FOLLOWERS_LIST-$1000000)).w,a0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a1
+		lea     ((ENTITY_DATA-$1000000)).w,a1
 loc_441D2:
 		clr.w   d0
 		move.b  (a0)+,d0

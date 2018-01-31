@@ -6,7 +6,7 @@
 
 csc32_setCameraDestInTiles:
 		
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		nop
 		move.w  (a6)+,d2
 		move.w  (a6)+,d3
@@ -114,7 +114,7 @@ csc37_loadMapAndFadeIn:
 
 csc48_loadMap:
 		
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		nop
 		move.w  (a6),d1
 		jsr     (LoadMapTilesets).w
@@ -346,7 +346,7 @@ csc45_cameraSpeed:
 
 csc46_reloadMap:
 		
-		move.b  #$FF,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
 		nop
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_DEACTIVATE
@@ -814,14 +814,16 @@ csc18_flashEntityWhite:
 		lsr.w   #2,d7
 loc_469E8:
 		ori.b   #4,ENTITYDEF_OFFSET_FLAGS_B(a5)
+						; set bit 2
 		bsr.w   UpdateEntitySprite_0
 		jsr     (WaitForVInt).w 
 		jsr     (WaitForVInt).w 
 		andi.b  #$FB,ENTITYDEF_OFFSET_FLAGS_B(a5)
+						; clear bit 2
 		bsr.w   UpdateEntitySprite_0
 		jsr     (WaitForVInt).w 
 		jsr     (WaitForVInt).w 
-		dbf     d7,loc_469E8
+		dbf     d7,loc_469E8    
 		rts
 
 	; End of function csc18_flashEntityWhite
@@ -877,7 +879,7 @@ loc_46A5E:
 
 ; =============== S U B R O U T I N E =======================================
 
-; if character xxxx dead, then do it to entity yyyy ?!
+; if character dead, then get new character index from next word ? This doesn't make sense.
 
 csc1B_startEntityAnim:
 		
@@ -1111,7 +1113,7 @@ byte_46BB2:     dc.b 0
 ; START OF FUNCTION CHUNK FOR csc22_animateEntityFadeInOrOut
 
 loc_46BE2:
-		tst.w   d1
+		tst.w   d1              ; manage param 6/7
 		beq.s   loc_46BEE
 		move.l  #$7FFF,d0
 		bra.s   loc_46BF0
@@ -1174,7 +1176,7 @@ loc_46C4A:
 		andi.w  #$FF,d0
 		move.b  (a5,d0.w),d0
 loc_46C52:
-		move.b  d0,((BATTLE_CURRENT_ENTITY-$1000000)).w
+		move.b  d0,((CAMERA_ENTITY-$1000000)).w
 		nop
 		rts
 
@@ -1418,7 +1420,7 @@ csc2C_followEntity:
 		move.w  d3,d0
 		move.w  (a6)+,d2
 		add.w   d2,d2
-		lea     unk_46E8A(pc,d2.w),a0
+		lea     FollowerPositions(pc,d2.w),a0
 		move.b  (a0)+,d2
 		move.b  (a0)+,d3
 		ext.w   d2
@@ -1428,33 +1430,35 @@ csc2C_followEntity:
 
 	; End of function csc2C_followEntity
 
-unk_46E8A:      dc.b $18
-		dc.b   0
-		dc.b   0
-		dc.b $E8 
-		dc.b $E8 
-		dc.b   0
-		dc.b   0
+FollowerPositions:
+		dc.b $18
+		dc.b 0
+		dc.b 0
+		dc.b $E8
+		dc.b $E8
+		dc.b 0
+		dc.b 0
 		dc.b $18
 		dc.b $18
-		dc.b $E8 
-		dc.b $E8 
-		dc.b $E8 
-		dc.b $E8 
+		dc.b $E8
+		dc.b $E8
+		dc.b $E8
+		dc.b $E8
+		dc.b $18
+		dc.b $18
 		dc.b $18
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_46E98:
-		move.b  (a0)+,d4
 csc2E_hideEntity:
 		
 		move.w  (a6)+,d0
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
-		jsr     sub_44C84
+		jsr     HideEntity
+return_46EA6:
 		rts
 
-	; End of function sub_46E98
+	; End of function csc2E_hideEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1699,7 +1703,7 @@ loc_4705A:
 		move.b  (a5,d0.w),d0
 		move.l  d0,-(sp)
 		lsl.w   #5,d0
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a5
+		lea     ((ENTITY_DATA-$1000000)).w,a5
 		adda.w  d0,a5
 		move.l  (sp)+,d0
 		rts
@@ -1729,7 +1733,7 @@ AdjustScriptPointerByCharAliveStatus:
 		
 		btst    #7,d0
 		bne.s   return_4709C
-		cmpi.b  #$1E,d0
+		cmpi.b  #$1E,d0         ; HARDCODED force member index limit
 		bge.s   return_4709C    ; it must be a force member
 		jsr     j_GetCurrentHP
 		tst.w   d1

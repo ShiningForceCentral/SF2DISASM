@@ -130,7 +130,7 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
 		setFacing $85,LEFT
 		nextSingleText $0,$85   ; "He needs prompt treatment!{W1}"
 		nextSingleText $0,$89   ; "Yes!  Bring him into my house!{W1}"
-		entityNod $85
+		nod $85
 		entityActions $89
 		 moveRight 1
 		endActions
@@ -175,14 +175,14 @@ cs_58512:       customActscriptWait $82
 		nextSingleText $0,$82   ; "Help!  Help!{N}I can't...get up!{W2}{N}You, please turn me over!{W1}"
 		setActscriptWait $0,eas_Init
 		setActscriptWait $7,eas_Init
-		setEntityDest $7,2,12
+		setDest $7,2,12
 		setFacing $7,LEFT
 		csWait 30
 		setActscriptWait $0,eas_BumpUp
 		csWait 40
 		nextSingleText $0,$82   ; "Are you a wimp?{N}Push harder!{W1}"
 		csWait 10
-		entityNod $0
+		nod $0
 		setActscriptWait $0,eas_BumpUp
 		setActscriptWait $0,eas_BumpUp
 		csWait 20
@@ -202,13 +202,13 @@ cs_58512:       customActscriptWait $82
 		setQuake 2
 		csWait 30
 		setQuake 0
-		animEntityFadeInOut $82,$6
+		animEntityFX $82,6
 		customActscript $82
 		 ac_setFlip $0          ;   
 		 ac_setSprite 219       ;   
 		 ac_jump eas_Idle       ;   
 		ac_end
-		animEntityFadeInOut $82,$7
+		animEntityFX $82,7
 		csWait 40
 		setFacing $82,DOWN
 		nextSingleText $0,$82   ; "(Giggle)...sorry, I had to{N}test you.{W2}{N}I'm happy to meet you.{N}He must like you.{W2}{N}Oh no, I can't tell you who{N}HE is.{N}See you later!{W1}"
@@ -348,7 +348,7 @@ cs_585FE:       playSound $FD
 		setCameraEntity $A
 		nextSingleText $0,$A    ; "Great!{W1}"
 		setFacing $9,DOWN
-		entityNod $9
+		nod $9
 		entityActionsWait $A
 		 moveUp 1
 		endActions
@@ -384,7 +384,7 @@ cs_585FE:       playSound $FD
 		nextText $0,$80         ; "You still dare to resist us?!{W2}"
 		nextSingleText $0,$80   ; "For that you shall die!!{W1}"
 		setStoryFlag $D         ; Battle 13 unlocked
-		mapSysEvent $D,$0,$0,$0
+		warp $D,$0,$0,$0
 		csc_end
 cs_58856:       textCursor $5CF
 		setActscriptWait $7,eas_Init
@@ -397,11 +397,11 @@ cs_58856:       textCursor $5CF
 		setActscriptWait $89,eas_Jump
 		setActscript $89,eas_Jump
 		nextSingleText $0,$89   ; "Heeeeee!{W1}"
-		entityShiver $89
+		shiver $89
 		nextSingleText $0,$89   ; "I'm sorry!  I'm sorry!{N}Don't possess me!{W1}"
-		entityShiver $89
-		setEntityDest $A,17,4
-		setEntityDest $7,17,5
+		shiver $89
+		setDest $A,17,4
+		setDest $7,17,5
 		setFacing $7,UP
 		nextSingleText $C0,$7   ; "What's he talking about?{W1}"
 		setFacing $A,DOWN
@@ -437,7 +437,7 @@ cs_58856:       textCursor $5CF
 		entityActionsWait $89
 		 moveUp 1
 		endActions
-		entityNod $89
+		nod $89
 		nextText $0,$89         ; "I really regret all of this.{W2}"
 		nextText $0,$89         ; "Suddenly, the devils{N}appeared.{W2}"
 		nextText $0,$89         ; "We had no power to resist{N}them.{W2}"
@@ -447,7 +447,7 @@ cs_58856:       textCursor $5CF
 		endActions
 		setFacing $A,UP
 		nextSingleText $0,$A    ; "And you sent ME in Oddler's{N}place?!{W1}"
-		entityShakeHead $89
+		headshake $89
 		nextSingleText $0,$89   ; "I'm sorry, please don't{N}tell King Bedoe!{W1}"
 		csWait 20
 		setFacing $A,DOWN
@@ -506,7 +506,7 @@ cs_58856:       textCursor $5CF
 		setActscript $89,eas_Jump
 		nextText $0,$89         ; "I don't care!{W2}"
 		nextSingleText $0,$89   ; "You can make another if{N}necessary, can't you?!{W1}"
-		entityNod $85
+		nod $85
 		nextSingleText $0,$85   ; "Y...yes, sir!{W1}"
 		customActscriptWait $85
 		 ac_setSpeed 48,48      ;   
@@ -515,7 +515,7 @@ cs_58856:       textCursor $5CF
 		entityActionsWait $85
 		 moveRight 5
 		endActions
-		hideEntity $85
+		hide $85
 		setCamDest 11,0
 		entityActionsWait $89
 		 moveUp 3
@@ -669,8 +669,8 @@ cs_58BEA:       textCursor $605
 		nextSingleText $80,$7   ; "Be careful.{W1}"
 		setActscriptWait $8C,eas_Init
 		setFacing $8C,DOWN
-		entityShakeHead $8C
-		entityNod $8C
+		headshake $8C
+		nod $8C
 		nextSingleText $0,$8C   ; "Yes, I will....{W1}"
 		csWait 50
 		setFacing $8C,UP
@@ -705,14 +705,14 @@ cs_58BEA:       textCursor $605
 		setFacing $0,UP
 		nextSingleText $80,$7   ; "OK.  Let's go.{W1}"
 		textCursor $5FC
-		entityNod $8C
+		nod $8C
 		nextSingleText $0,$8C   ; "Thank you very much.{W1}"
 		setFacing $8C,DOWN
 		jump cs_58DD2
 cs_58D4C:       textCursor $5FC
 		hideText
 		csWait 20
-		entityNod $8C
+		nod $8C
 		nextSingleText $0,$8C   ; "Thank you very much.{W1}"
 		customActscriptWait $8C
 		 ac_setSpeed 10,10      ;   
@@ -745,8 +745,8 @@ cs_58D4C:       textCursor $5FC
 		nextSingleText $80,$7   ; "Be careful.{W1}"
 		setActscriptWait $8C,eas_Init
 		setFacing $8C,DOWN
-		entityShakeHead $8C
-		entityNod $8C
+		headshake $8C
+		nod $8C
 		nextSingleText $0,$8C   ; "Yes, I will....{W1}"
 cs_58DD2:       textCursor $600
 		nextText $0,$8C         ; "I'm Oddler.{N}I was nearly dead when I{N}came here.{W2}"

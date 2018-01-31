@@ -81,16 +81,16 @@ cs_5DE2E:       textCursor $86A
 		stopEntity $8E
 		playSound $FD
 		setCamDest 8,0
-		entityShiver $89
+		shiver $89
 		playSound MUSIC_SAD_THEME_3
 		nextSingleText $0,$89   ; "Sir Petro, don't leave me{N}alone!{W1}"
 		nextSingleText $0,$8E   ; "Paseran...I'm sorry.{W1}"
-		entityShiver $89
+		shiver $89
 		nextSingleText $0,$89   ; "You promised to fly me in{N}the sky!{W1}"
 		nextText $0,$8E         ; "I know...with the Nazca{N}Ship...I promised...{W2}"
 		nextText $0,$8E         ; "I'd fly home...to see my{N}family....{W2}"
 		nextSingleText $0,$8E   ; "To show them how wonderful{N}the ancients were....{W1}"
-		entityShiver $89
+		shiver $89
 		playSound $FD
 		nextSingleText $0,$89   ; "Petro!  No!{W1}"
 		playSound $FB
@@ -99,13 +99,13 @@ cs_5DE76:       textCursor $879
 		setActscriptWait $7,eas_Init
 		setActscriptWait $1F,eas_Init
 		setCameraEntity $1A
-		setEntityDest $0,12,9
-		setEntityDest $7,12,8
-		setEntityDest $7,13,8
-		setEntityDest $1F,12,8
-		setEntityDest $1F,14,8
+		setDest $0,12,9
+		setDest $7,12,8
+		setDest $7,13,8
+		setDest $1F,12,8
+		setDest $1F,14,8
 		setActscriptWait $1A,eas_Init
-		setEntityDest $1A,11,8
+		setDest $1A,11,8
 		setFacing $0,LEFT
 		setFacing $7,LEFT
 		setFacing $1F,LEFT
@@ -147,7 +147,7 @@ cs_5DE76:       textCursor $879
 		 moveLeft 2
 		endActions
 		csWait 30
-		entityNod $1A
+		nod $1A
 		setFacing $1A,RIGHT
 		nextSingleText $0,$1A   ; "{LEADER}, Sir Astral!{N}I am angry!{W2}"
 		nextSingleText $0,$1A   ; "I cannot forgive the{N}devils!{W2}"

@@ -125,7 +125,7 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		 moveUp 2
 		endActions
 		setBlocks 6,15,1,1,16,7
-		hideEntity $82
+		hide $82
 		csWait 5
 		setBlocks 6,15,1,1,15,7
 		csWait 5
@@ -212,7 +212,7 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
 		setFacing $0,DOWN
 		nextSingleText $0,$1F   ; "{LEADER}, let's do it!{W1}"
 		setActscript $7,eas_Jump
-		entityNod $0
+		nod $0
 		csc_end
 ce_4E878:       mainEntity 16,39,UP
 		entity 15,40,UP,7,eas_Init

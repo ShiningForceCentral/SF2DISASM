@@ -21,7 +21,7 @@ return_600B0:
 	; End of function ms_map45_InitFunction
 
 cs_600B2:       setActscriptWait $19,eas_45F9C
-		entitySprite $19,$D9
+		setSprite $19,$D9
 		setActscriptWait $19,eas_Init3
 		setFacing $19,UP
 		csc_end
@@ -68,13 +68,13 @@ cs_600CE:       textCursor $823
 		 moveDown 3
 		endActions
 		csWait 50
-		entityShakeHead $0
-		entityShakeHead $0
+		headshake $0
+		headshake $0
 		csWait 10
-		entityShakeHead $0
-		entityShakeHead $0
+		headshake $0
+		headshake $0
 		csWait 10
-		entityShakeHead $0
+		headshake $0
 		waitIdle $0
 		nextText $0,$19         ; "Wait!{W1}"
 		nextSingleText $0,$19   ; "Is that you...Sir Astral?{W1}"
@@ -102,7 +102,7 @@ cs_600CE:       textCursor $823
 		setFacing $1F,DOWN
 		nextSingleText $80,$1F  ; "Well...ah...sorry.{W1}"
 		nextSingleText $0,$19   ; "I'm {NAME;25}.  I was a pupil{N}of yours in Galam.  I was{N}preparing to become a priest.{W1}"
-		entityShiver $1F
+		shiver $1F
 		setFacing $1F,UP
 		nextSingleText $80,$1F  ; "{NAME;25}!  I can't believe it!{W1}"
 		nextText $0,$19         ; "How is that scar on your{N}chest.{W2}"
@@ -115,7 +115,7 @@ cs_600CE:       textCursor $823
 		setActscriptWait $1F,eas_Jump
 		setActscriptWait $1F,eas_Jump
 		nextSingleText $0,$19   ; "I am sorry I kicked you.{W1}"
-		entityShiver $1F
+		shiver $1F
 		nextSingleText $80,$1F  ; "That OK. How have...{W1}"
 		entityActionsWait $7
 		 moveRight 1
@@ -136,16 +136,16 @@ cs_600CE:       textCursor $823
 		setFacing $0,UP
 		nextText $80,$1F        ; "All in good time.{W2}"
 		nextSingleText $80,$1F  ; "By the way, what are you{N}doing here?{W1}"
-		entityShiver $19
+		shiver $19
 		nextSingleText $0,$19   ; "I came to kill Red Baron.{N}He killed my fiance.{W1}"
 		nextSingleText $80,$1F  ; "Oh....{N}I'm sorry...{W1}"
 		nextSingleText $0,$19   ; "And why did you come back{N}to Grans?{W1}"
 		nextSingleText $80,$1F  ; "To reseal Zeon.{W1}"
 		nextSingleText $0,$19   ; "The King of the Devils?{W1}"
-		entityNod $1F
+		nod $1F
 		nextText $80,$1F        ; "Listen, {NAME;25}.{N}All the killings lately were{N}caused by him.{W2}"
 		nextSingleText $80,$1F  ; "He'll destroy the entire{N}world.  He must be stopped!{W1}"
-		entityShiver $19
+		shiver $19
 		nextSingleText $0,$19   ; "Is Red Baron his follower?{W1}"
 		nextSingleText $80,$1F  ; "Could be.{W1}"
 		nextSingleText $0,$19   ; "Hmmm....{W1}"
@@ -165,9 +165,9 @@ cs_600CE:       textCursor $823
 		entityActionsWait $19
 		 moveDown 4
 		endActions
-		hideEntity $86
+		hide $86
 		setActscriptWait $19,eas_Init
-		entitySprite $19,$19
+		setSprite $19,$19
 		entityActionsWait $19
 		 moveDown 2
 		endActions

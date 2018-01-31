@@ -43,7 +43,7 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		nextSingleText $C0,$0   ; "We had to be.{W1}"
 		nextText $0,$83         ; "I wouldn't have had to{N}fight if I never had gotten{N}my memory back.{W2}"
 		nextSingleText $0,$83   ; "It's funny, fighting was{N}everything to me.{W1}"
-		entityShiver $7
+		shiver $7
 		nextSingleText $C0,$7   ; "Oddler, please don't die!{W1}"
 		nextText $0,$83         ; "Thank you, {NAME;7}.{N}I learned a lot from you.{W2}"
 		nextSingleText $0,$83   ; "Oh, the pain!{N}Let me say good-bye.{W1}"
@@ -100,17 +100,17 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		 moveRight 2
 		endActions
 		csWait 8
-		hideEntity $80
+		hide $80
 		csWait 8
-		hideEntity $81
+		hide $81
 		csWait 8
-		hideEntity $82
+		hide $82
 		entityFlashWhite $83,$78
-		hideEntity $83
+		hide $83
 		playSound $FD
 		csWait 120
 		playSound MUSIC_SAD_THEME_3
-		entityShiver $7
+		shiver $7
 		setFacing $7,UP
 		nextSingleText $0,$7    ; "(Sob, sob)...how sad.{N}{LEADER}, Sir Astral...{W1}"
 		setFacing $1C,DOWN
@@ -138,7 +138,7 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
 		csWait 40
 		setFacing $0,UP
 		csWait 30
-		entityNod $0
+		nod $0
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
 		followEntity $1C,$1F,$2

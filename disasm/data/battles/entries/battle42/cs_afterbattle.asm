@@ -35,17 +35,17 @@ cs_4EF5E:       stopEntity $80
 		fadeInB
 		cameraSpeed $30
 		csWait 60
-		entityShiver $80
+		shiver $80
 		nextSingleText $C0,$80  ; "Auuugh...{W1}"
 		setFacing $0,DOWN
 		setFacing $7,DOWN
 		setFacing $1F,DOWN
-		entityShiver $80
+		shiver $80
 		nextText $C0,$80        ; "I've never lost to anybody{N}but the gods.{W2}"
 		nextSingleText $C0,$80  ; "I don't understand!{W1}"
 		setFacing $80,UP
 		nextSingleText $0,$1C   ; "Oh, King Galam...poor{N}King Galam....{W1}"
-		entityShiver $81
+		shiver $81
 		setFacing $7,LEFT
 		setActscriptWait $7,eas_Jump
 		nextSingleText $0,$7    ; "Princess Elis!{W1}"
@@ -65,7 +65,7 @@ cs_4EF5E:       stopEntity $80
 		csWait 50
 		setActscriptWait $81,eas_Init
 		setFacing $81,DOWN
-		entitySprite $81,$D8
+		setSprite $81,$D8
 		nextSingleText $C0,$81  ; "Wha...What?{W1}"
 		setActscriptWait $1F,eas_Jump
 		nextSingleText $0,$1F   ; "It's me!  Astral!{W1}"
@@ -88,7 +88,7 @@ cs_4EF5E:       stopEntity $80
 		setFacing $81,DOWN
 		setFacing $7,UP
 		nextSingleText $0,$7    ; "{LEADER}, say something.{W1}"
-		entitySprite $81,$CC
+		setSprite $81,$CC
 		setFacing $81,DOWN
 		startEntity $81
 		nextSingleText $C0,$81  ; "Oh, it's you.{W1}"
@@ -164,7 +164,7 @@ cs_4EF5E:       stopEntity $80
 		setFacing $0,RIGHT
 		setFacing $1F,LEFT
 		nextSingleText $0,$0    ; "You mean...Zeon?{W1}"
-		entityNod $1F
+		nod $1F
 		setFacing $0,UP
 		setFacing $7,UP
 		setFacing $1F,UP
@@ -205,13 +205,13 @@ cs_4EF5E:       stopEntity $80
 		ac_end
 		csWait 110
 		playSound MUSIC_ZEON_ATTACK
-		entitySprite $80,$B2
+		setSprite $80,$B2
 		setFacing $80,DOWN
 		startEntity $80
 		entityActionsWait $80
 		 moveUp 13
 		endActions
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		setCameraEntity $FFFF
 		csWait 50
 		nextSingleText $C0,$82  ; "Gggggrrr...you destroyed my{N}minions!{W1}"
@@ -267,7 +267,7 @@ cs_4EF5E:       stopEntity $80
 		nextSingleText $0,$1F   ; "Let's go!{W1}"
 		setFacing $0,UP
 		setFacing $7,UP
-		entityNod $0
+		nod $0
 		setStoryFlag $2B        ; Battle 43 unlocked
 		csc_end
 ce_4F328:       mainEntity 13,17,UP

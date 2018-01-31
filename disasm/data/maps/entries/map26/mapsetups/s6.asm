@@ -88,9 +88,9 @@ cs_59E04:       textCursor $6CB
 		startEntity $7
 		startEntity $1F
 		csWait 40
-		hideEntity $82
-		hideEntity $83
-		hideEntity $84
+		hide $82
+		hide $83
+		hide $84
 		csWait 30
 		nextSingleText $FF,$FF  ; "The Cotton Balloon popped.{W1}"
 		followEntity $7,$0,$2
@@ -104,5 +104,5 @@ cs_59F20:       textCursor $6CC
 		entityActionsWait $81
 		 moveUp 8
 		endActions
-		hideEntity $81
+		hide $81
 		csc_end

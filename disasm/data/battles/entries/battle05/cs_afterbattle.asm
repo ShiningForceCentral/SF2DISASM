@@ -28,5 +28,5 @@ abcs_battle05:  textCursor $91C
 		clearF $49              ; Slade is a follower
 		setStoryFlag $6         ; Battle 6 unlocked
 		followEntity $5,$0,$2
-		mapSysEvent $10,$10,$12,$3
+		warp $10,$10,$12,$3
 		csc_end

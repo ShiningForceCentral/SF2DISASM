@@ -15,17 +15,17 @@ cs_59FB8:       textCursor $6C5
 		setActscriptWait $7,eas_Init
 		cameraSpeed $30
 		setCamDest 22,15
-		setEntityDest $1F,26,20
+		setDest $1F,26,20
 		csWait 5
 		setActscript $1F,eas_461B6
 		csWait 120
 		nextSingleText $0,$1F   ; "(Sniff, sniff)...{N}It smells like a ditch!{W1}"
-		setEntityDest $7,27,20
+		setDest $7,27,20
 		setFacing $1F,RIGHT
-		entityShiver $7
+		shiver $7
 		nextSingleText $0,$7    ; "Is this the smell of the{N}devils that they were{N}talking about?{W1}"
 		setCamDest 36,17
-		setEntityDest $81,41,21
+		setDest $81,41,21
 		nextSingleText $C0,$81  ; "Hee, hee!{W1}"
 		setActscript $80,eas_RotateRightHighSpeed
 		setActscript $81,eas_RotateRightHighSpeed
@@ -49,5 +49,5 @@ cs_59FB8:       textCursor $6C5
 		setActscript $80,eas_Jump
 		setActscriptWait $82,eas_Jump
 		setStoryFlag $17        ; Battle 23 unlocked
-		mapSysEvent $1B,$0,$0,$0
+		warp $1B,$0,$0,$0
 		csc_end

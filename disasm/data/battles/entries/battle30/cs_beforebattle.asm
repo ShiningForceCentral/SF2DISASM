@@ -26,7 +26,7 @@ bbcs_30:        textCursor $AC8
 		 moveRight 1
 		 moveUp 1
 		endActions
-		entityNod $1F
+		nod $1F
 		nextSingleText $C0,$1F  ; "Ohhh....{N}He's ugly, isn't he?{W1}"
 		setCamDest 7,0
 		entityActionsWait $80

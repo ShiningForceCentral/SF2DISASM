@@ -59,7 +59,7 @@ return_6326E:
 
 sub_63270:
 		moveq   #1,d0
-		jsr     sub_100B8
+		jsr     j_ClosePortraitEyes
 		trap    #TEXTBOX
 		dc.w $FAF               ; "Zzzzz....{W1}"
 		rts

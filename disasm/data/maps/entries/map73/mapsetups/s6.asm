@@ -212,7 +212,7 @@ cs_50426:       textCursor $8B5
 		stopEntity $84
 		stopEntity $85
 		jumpIfFlagSet $6,cs_50624; Kiwi joined
-		hideEntity $6
+		hide $6
 cs_50624:       fadeInB
 		entityActionsWait $3
 		 moveDown 1
@@ -228,7 +228,7 @@ cs_50624:       fadeInB
 		 moveDown 2
 		endActions
 		setFacing $3,DOWN
-		entitySprite $3,$3B
+		setSprite $3,$3B
 		csWait 60
 		nextText $0,$3          ; "Ugh...ugghhh...{N}It's stuck!{W2}"
 		nextSingleText $0,$3    ; "Heave!  Heave!{N}Come oooooooooon!{W1}"
@@ -245,7 +245,7 @@ cs_50624:       fadeInB
 		setQuake 5
 		playSound SFX_DOOR_OPEN
 		csWait 10
-		hideEntity $3
+		hide $3
 		setBlocks 56,0,1,2,51,3
 		setQuake 0
 		csWait 30
@@ -363,17 +363,17 @@ cs_50806:       textCursor $8F0
 		setActscriptWait $80,eas_Init
 		setActscriptWait $81,eas_Init
 		setActscriptWait $0,eas_Init
-		setEntityDest $80,29,52
+		setDest $80,29,52
 		setPos $80,0,0,DOWN
-		setEntityDest $81,29,52
+		setDest $81,29,52
 		setPos $81,0,0,DOWN
-		setEntityDest $0,29,52
+		setDest $0,29,52
 		setPos $0,0,0,DOWN
 		csWait 60
 		nextSingleText $FF,$FF  ; "They worked hard to build{N}their new town.{W1}"
 		playSound $FD
 		resetForceBattleStats
-		mapSysEvent $7,$B,$A,$1
+		warp $7,$B,$A,$1
 		csc_end
 ce_5094A:       mainEntity 61,48,LEFT
 		entity 62,48,LEFT,202,eas_Init

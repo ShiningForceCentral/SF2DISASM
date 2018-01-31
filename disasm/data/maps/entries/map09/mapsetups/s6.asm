@@ -38,7 +38,7 @@ cs_568F6:       textCursor $55C
 		setFacing $82,LEFT
 		nextSingleText $C0,$82  ; "Where are you from?{W1}"
 		csWait 20
-		setEntityDest $7,4,58
+		setDest $7,4,58
 		setFacing $7,RIGHT
 		nextSingleText $0,$7    ; "{LEADER} came from{N}Grans Island.{W1}"
 		customActscriptWait $82
@@ -88,7 +88,7 @@ cs_568F6:       textCursor $55C
 		followEntity $7,$0,$2
 		csc_end
 cs_569BC:       textCursor $566
-		setEntityDest $7,15,57
+		setDest $7,15,57
 		setFacing $7,DOWN
 		setFacing $0,DOWN
 		nextText $C0,$B         ; "(Sniff)...(sniff)...I smell{N}something old....{W1}"
@@ -112,7 +112,7 @@ cs_569BC:       textCursor $566
 		endActions
 		nextText $C0,$B         ; "You're an adventurer, right?{N}Don't you need a vehicle?{N}Huh?{W2}"
 		nextSingleText $C0,$B   ; "You can get the Ancient{N}Caravan with that sword!{W1}"
-		setEntityDest $7,15,58
+		setDest $7,15,58
 		setFacing $7,RIGHT
 		nextSingleText $0,$7    ; "You wouldn't listen to us{N}just a short time ago!{W1}"
 		setFacing $B,LEFT

@@ -21,7 +21,7 @@ loc_60636:
 		trap    #CHECK_FLAG
 		dc.w $3AE
 		bne.s   loc_6067C
-		cmpi.l  #$6005580,((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w
+		cmpi.l  #$6005580,((ENTITY_DATA-$1000000)).w
 		bne.s   loc_6067C
 		trap    #CHECK_FLAG
 		dc.w $1C                ; if character 1C joined the Force : Lemon ?
@@ -132,8 +132,8 @@ cs_60708:       textCursor $DB9
 		setFacing $0,LEFT
 		setFacing $7,LEFT
 		nextSingleText $0,$1F   ; "He's a hero in Galam.{N}I think he should join us.{W1}"
-		entityNod $0
-		entityNod $7
+		nod $0
+		nod $7
 		csWait 20
 		entityActions $0
 		 moveUp 3
@@ -181,14 +181,14 @@ cs_607DE:       textCursor $D3C
 		setCamDest 13,28
 		nextText $0,$1C         ; "I've killed a lot of people{N}for the devils!{W2}"
 		setFacing $1C,DOWN
-		entityShiver $1C
+		shiver $1C
 		nextSingleText $0,$1C   ; "The guilt is too much to{N}handle.  I must die!{W1}"
 		setActscriptWait $1C,eas_46172
 		customActscriptWait $1C
 		 ac_setSpeed 64,64      ;   
 		 ac_jump eas_Idle       ;   
 		ac_end
-		entityNod $1C
+		nod $1C
 		csWait 30
 		entityActionsWait $1C
 		 moveUp 5
@@ -229,8 +229,8 @@ cs_607DE:       textCursor $D3C
 		setFacing $1F,RIGHT
 		nextText $0,$1F         ; "{NAME;28} is an immortal{N}vampire.{W2}"
 		nextSingleText $0,$1F   ; "But, I'm sure the impact{N}didn't feel too good.{W1}"
-		entityNod $0
-		entityNod $7
+		nod $0
+		nod $7
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
 		setActscriptWait $1C,eas_Init
@@ -244,9 +244,9 @@ cs_6093A:       textCursor $D44
 		setActscriptWait $7,eas_Init
 		setActscriptWait $1F,eas_Init
 		setFacing $1C,UP
-		setEntityDest $0,11,7
-		setEntityDest $7,11,7
-		setEntityDest $1F,11,7
+		setDest $0,11,7
+		setDest $7,11,7
+		setDest $1F,11,7
 		entityActionsWait $7
 		 moveRight 1
 		 faceUp 1
@@ -271,14 +271,14 @@ cs_6093A:       textCursor $D44
 		entityActionsWait $80
 		 moveDown 1
 		endActions
-		entityShiver $80
+		shiver $80
 		setFacing $0,LEFT
 		setFacing $7,LEFT
 		nextSingleText $80,$7   ; "What's he doing?{W1}"
 		nextSingleText $0,$1F   ; "He's mistaking us for devils.{W1}"
-		hideEntity $83
+		hide $83
 		csWait 20
-		entityShiver $80
+		shiver $80
 		setFacing $7,UP
 		setFacing $0,UP
 		nextText $80,$80        ; "What tough devils!{W2}"
@@ -287,7 +287,7 @@ cs_6093A:       textCursor $D44
 		 moveUp 1
 		endActions
 		nextSingleText $0,$1F   ; "Excuse me, we're not devils.{W1}"
-		entityShiver $80
+		shiver $80
 		nextSingleText $80,$80  ; "I don't believe you!{W1}"
 		nextSingleText $80,$7   ; "But we really...{W1}"
 		setPriority $1B,$0
@@ -301,9 +301,9 @@ cs_6093A:       textCursor $D44
 		nextText $80,$80        ; "{NAME;27}, they found the{N}hidden door!{W2}"
 		nextSingleText $80,$80  ; "I tried to drive them away{N}with this holy symbol, but{N}I failed.{W1}"
 		setPriority $80,$0
-		entityNod $1B
+		nod $1B
 		nextSingleText $0,$1B   ; "Then, they're not devils.{W1}"
-		entityShiver $80
+		shiver $80
 		nextSingleText $80,$80  ; "Nobody but devils ever come{N}to such a dangerous place!{N}They must be devils!{W1}"
 		csWait 20
 		nextSingleText $0,$1B   ; "Have you asked them?{W1}"
@@ -316,7 +316,7 @@ cs_6093A:       textCursor $D44
 		nextText $80,$1F        ; "How can we explain this?{W2}"
 		nextSingleText $80,$1F  ; "We are from Granseal.{N}We came here to defeat the{N}devils.{W1}"
 		setFacing $80,DOWN
-		entityShiver $1B
+		shiver $1B
 		nextSingleText $0,$1B   ; "Granseal?{W1}"
 		entityActionsWait $80
 		 moveLeft 1
@@ -333,7 +333,7 @@ cs_6093A:       textCursor $D44
 		setActscriptWait $1B,eas_Jump
 		setActscriptWait $1B,eas_Jump
 		nextSingleText $0,$1B   ; "Are you Sir Astral?{W1}"
-		entityNod $1F
+		nod $1F
 		nextSingleText $80,$1F  ; "Yes, but...I'm sorry, have{N}we met?{W1}"
 		nextText $0,$1B         ; "I'm {NAME;27}, a son of{N}Hawel.{W2}"
 		nextSingleText $0,$1B   ; "Do you remember me?{W1}"
@@ -346,7 +346,7 @@ cs_6093A:       textCursor $D44
 		 faceLeft 1
 		endActions
 		setFacing $1B,RIGHT
-		entityShiver $1F
+		shiver $1F
 		nextText $80,$1F        ; "Oh, {NAME;27}!{W2}"
 		nextText $80,$1F        ; "Yes, of course.{N}Nice to see you again.{W2}"
 		nextSingleText $80,$1F  ; "What are you doing here?{W1}"
@@ -354,7 +354,7 @@ cs_6093A:       textCursor $D44
 cs_60B10:       textCursor $D62
 		nextSingleText $0,$1B   ; "I came back to Yeel to{N}continue my father's work.{W1}"
 		nextSingleText $80,$1F  ; "{NAME;27}, maybe you can{N}answer some questions?{W1}"
-		entityNod $1B
+		nod $1B
 		nextText $0,$1B         ; "I'll try.{W2}"
 		nextSingleText $0,$1B   ; "What would you like to know?{W1}"
 		setActscriptWait $1F,eas_Jump
@@ -393,7 +393,7 @@ cs_60B10:       textCursor $D62
 		csc_end
 cs_60BA6:       textCursor $D6A
 		nextSingleText $0,$1B   ; "I heard you're going to{N}defeat the devils....{W1}"
-		entityNod $1F
+		nod $1F
 		nextSingleText $0,$1F   ; "Yep.  {LEADER} just{N}solved the secret.  We{N}can now enter the tower.{W1}"
 		nextText $0,$1B         ; "The tower?{W2}"
 		nextSingleText $0,$1B   ; "Then, all these disasters{N}were caused by Zeon?{W1}"
@@ -454,15 +454,15 @@ cs_60C42:       textCursor $D72
 		nextSingleText $0,$1B   ; "And all these disasters were{N}caused by him?{W1}"
 		csc_end
 cs_60CA4:       textCursor $D76
-		entityNod $1F
+		nod $1F
 		nextSingleText $80,$1F  ; "That's right.  We have to{N}find out where the Holy{N}Sword is.{W1}"
 		csWait 20
 		nextText $0,$1B         ; "I think I've seen it in a{N}book....{W2}"
-		entityShiver $1B
+		shiver $1B
 		nextSingleText $0,$1B   ; "Yes, I did...but...{N}I don't remember....{W1}"
 		setFacing $1B,LEFT
 		csWait 40
-		entityShiver $1F
+		shiver $1F
 		nextSingleText $80,$1F  ; "It's important...{W1}"
 		setFacing $1B,RIGHT
 		nextSingleText $0,$1B   ; "Please, give me a moment.{W1}"
@@ -490,7 +490,7 @@ cs_60CA4:       textCursor $D76
 		endActions
 		setFacing $1B,DOWN
 		csWait 40
-		entityNod $1B
+		nod $1B
 		nextSingleText $0,$1B   ; "Was it this one?{W1}"
 		customActscriptWait $1B
 		 ac_setSpeed 32,32      ;   
@@ -501,10 +501,10 @@ cs_60CA4:       textCursor $D76
 		 moveUp 2
 		endActions
 		csWait 30
-		entityShiver $1B
-		entityShiver $1B
+		shiver $1B
+		shiver $1B
 		csWait 30
-		entityShiver $1B
+		shiver $1B
 		csWait 30
 		nextSingleText $0,$1B   ; "No, that's not it.{W1}"
 		customActscriptWait $1B
@@ -527,10 +527,10 @@ cs_60CA4:       textCursor $D76
 		 moveUp 2
 		endActions
 		csWait 30
-		entityShiver $1B
-		entityShiver $1B
+		shiver $1B
+		shiver $1B
 		csWait 40
-		entityShiver $1B
+		shiver $1B
 		csWait 40
 		setActscriptWait $1B,eas_Jump
 		setActscriptWait $1B,eas_Jump
@@ -545,7 +545,7 @@ cs_60CA4:       textCursor $D76
 		endActions
 		nextSingleText $80,$1F  ; "Is that the right one?{W1}"
 		setFacing $1B,RIGHT
-		entityNod $1B
+		nod $1B
 		nextSingleText $0,$1B   ; "Yes!  But...{W1}"
 		nextSingleText $80,$1F  ; "But what?{W1}"
 		setActscriptWait $1B,eas_Init
@@ -576,7 +576,7 @@ cs_60CA4:       textCursor $D76
 		nextText $80,$7         ; "Not necessarily, Sir Astral.{W2}"
 		nextSingleText $80,$7   ; "Believe in {LEADER}.{N}He was chosen by the gods.{W1}"
 		nextText $80,$1F        ; "Hmmm....{W2}"
-		entityNod $1F
+		nod $1F
 		nextSingleText $80,$1F  ; "Yes, {NAME;7} is right.{N}{LEADER} is our leader!{W1}"
 		setActscriptWait $1F,eas_Init
 		entityActionsWait $1F
@@ -586,7 +586,7 @@ cs_60CA4:       textCursor $D76
 		setFacing $0,UP
 		nextText $80,$1F        ; "{LEADER}, we have to{N}find the Holy Sword and{N}the door to the tower.{W2}"
 		nextSingleText $80,$1F  ; "The legends only hint of{N}you, but we believe in you.{W1}"
-		entityNod $0
+		nod $0
 		entityActionsWait $80
 		 moveDown 1
 		endActions
@@ -601,7 +601,7 @@ cs_60CA4:       textCursor $D76
 		endActions
 		csc_end
 cs_60EB2:       textCursor $D8C
-		entityNod $1F
+		nod $1F
 		nextSingleText $80,$1F  ; "Yes, that's the truth.{W1}"
 		csWait 40
 		entityActionsWait $1F
@@ -612,7 +612,7 @@ cs_60EB2:       textCursor $D8C
 		setFacing $7,UP
 		setFacing $1C,UP
 		nextSingleText $80,$1F  ; "Now, {LEADER}.{W1}"
-		entityNod $0
+		nod $0
 		entityActionsWait $80
 		 moveDown 1
 		endActions
@@ -635,12 +635,12 @@ cs_60F18:       textCursor $D8F
 		nextSingleText $0,$1B   ; "Also, as a historian, I{N}want to see the King of{N}the Devils.{W1}"
 		faceEntity $7,$1B
 		nextSingleText $80,$7   ; "{NAME;27} will just follow{N}us if you don't let him{N}join us.{W1}"
-		entityNod $1B
+		nod $1B
 		nextSingleText $0,$1B   ; "{NAME;7} is right.{W1}"
 		nextSingleText $80,$1F  ; "(Sigh)...OK.{W1}"
 		join $1B
 		nextSingleText $0,$1B   ; "I'm so excited!{W1}"
-		entityShiver $1B
+		shiver $1B
 		csWait 30
 		nextSingleText $80,$7   ; "This is not a sight-seeing{N}tour, OK?!{N}Let's go {LEADER}!{W1}"
 		followEntity $1B,$0,$5

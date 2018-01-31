@@ -161,7 +161,7 @@ abcs_battle07:  textCursor $951
 		setActscriptWait $86,eas_Init
 		startEntity $85
 		startEntity $86
-		entityShakeHead $85
+		headshake $85
 		nextSingleText $0,$85   ; "Don't worry...I'm fine.{W1}"
 		nextSingleText $C0,$82  ; "That was just a warning!{N}Do you want me to attack{N}again?{W1}"
 		setPos $80,63,63,DOWN
@@ -174,7 +174,7 @@ abcs_battle07:  textCursor $951
 		 ac_jump eas_Idle       ;   
 		ac_end
 		startEntity $83
-		entityShakeHead $83
+		headshake $83
 		nextText $0,$83         ; "King Granseal...{W2}"
 		nextSingleText $0,$83   ; "Galam, please tell me...{N}What's in this tower?{N}In Ground Seal?{W1}"
 		nextSingleText $C0,$82  ; "You really want to know?{N}Ha, ha!  OK, I'll tell you.{W1}"
@@ -218,12 +218,12 @@ abcs_battle07:  textCursor $951
 		nextSingleText $C0,$82  ; "Here they come!{N}Ha, ha, ha!{W1}"
 		nextSingleText $0,$83   ; "What?{W1}"
 		setCamDest 8,3
-		entitySprite $80,$B4
+		setSprite $80,$B4
 		setPos $80,12,5,UP
-		animEntityFadeInOut $80,$7
-		entitySprite $81,$B4
+		animEntityFX $80,7
+		setSprite $81,$B4
 		setPos $81,13,5,UP
-		animEntityFadeInOut $81,$7
+		animEntityFX $81,7
 		customActscriptWait $80
 		 ac_setSpeed 32,32      ;   
 		 ac_jump eas_Idle       ;   
@@ -400,7 +400,7 @@ abcs_battle07:  textCursor $951
 		 ac_jump eas_Idle       ;   
 		ac_end
 		setFacing $0,UP
-		entitySprite $0,$B1
+		setSprite $0,$B1
 		entityActions $0
 		 moveUp 8
 		endActions
@@ -413,7 +413,7 @@ abcs_battle07:  textCursor $951
 		setCameraEntity $FFFF
 		nextSingleText $C0,$82  ; "Don't touch my jewel!{N}Don't touch it!{W1}"
 		setCameraEntity $0
-		entityShiver $0
+		shiver $0
 		stopEntity $0
 		setCameraEntity $FFFF
 		nextText $C0,$82        ; "I said, don't touch it!{W2}"
@@ -421,7 +421,7 @@ abcs_battle07:  textCursor $951
 		setCameraEntity $FFFF
 		nextSingleText $C0,$82  ; "I'll shake you off!{W1}"
 		setCameraEntity $0
-		entityShiver $0
+		shiver $0
 		stopEntity $0
 		setCameraEntity $FFFF
 		nextSingleText $C0,$82  ; "You're still there?{W1}"
@@ -432,7 +432,7 @@ abcs_battle07:  textCursor $951
 		setCameraEntity $FFFF
 		nextSingleText $C0,$82  ; "I've almost got you now!{W1}"
 		setCameraEntity $0
-		entityShiver $0
+		shiver $0
 		stopEntity $0
 		setCameraEntity $FFFF
 		nextSingleText $0,$84   ; "No, you'll fall if you{N}open your hands now!{W1}"
@@ -457,14 +457,14 @@ abcs_battle07:  textCursor $951
 		 ac_jump eas_Idle       ;   
 		ac_end
 		setActscriptWait $0,eas_46172
-		entitySprite $0,$0
+		setSprite $0,$0
 		customActscriptWait $0
 		 ac_setAnimCounter $0   ;   
 		 ac_setFlip $1          ;   
 		 ac_updateSprite        ;   
 		 ac_jump eas_Idle       ;   
 		ac_end
-		setEntityDest $0,13,10
+		setDest $0,13,10
 		nextSingleText $C0,$82  ; "He stole my jewel!{W1}"
 		setFacing $83,UP
 		setFacing $86,UP
@@ -498,7 +498,7 @@ abcs_battle07:  textCursor $951
 		entityActionsWait $0
 		 moveDown 1
 		endActions
-		entitySprite $0,$B1
+		setSprite $0,$B1
 		customActscriptWait $0
 		 ac_setAnimCounter $0   ;   
 		 ac_setFlip $0          ;   
@@ -508,7 +508,7 @@ abcs_battle07:  textCursor $951
 		csWait 20
 		setQuake 0
 		csWait 40
-		entityShiver $0
+		shiver $0
 		stopEntity $0
 		csWait 30
 		setCameraEntity $FFFF
@@ -519,10 +519,10 @@ abcs_battle07:  textCursor $951
 		waitIdle $82
 		setFacing $82,DOWN
 		setFacing $84,DOWN
-		animEntityFadeInOut $81,$6
+		animEntityFX $81,6
 		nextSingleText $C0,$82  ; "I have to go back and get{N}my jewel....{N}Noooooooo!{W1}"
 		setActscript $82,eas_463AE
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		nextSingleText $0,$84   ; "Father...{N}{LEADER}...help meeeeee!{W1}"
 		setActscriptWait $84,eas_463AE
 		setActscriptWait $83,eas_Init
@@ -546,15 +546,15 @@ abcs_battle07:  textCursor $951
 		csWait 60
 		nextSingleText $0,$85   ; "She's gone....{N}Elis!{W1}"
 		nextSingleText $0,$83   ; "We couldn't help the{N}Princess.{W1}"
-		entitySprite $0,$0
+		setSprite $0,$0
 		setActscriptWait $0,eas_Init
 		startEntity $0
-		entityShakeHead $0
+		headshake $0
 		nextSingleText $C0,$0   ; "(Sigh)....{W1}"
 		nextSingleText $0,$83   ; "{LEADER}, why do you{N}have two jewels?{W1}"
 		nextSingleText $FF,$FF  ; "{LEADER} explains{N}what happened.{W1}"
-		entityNod $83
-		entityNod $0
+		nod $83
+		nod $0
 		nextSingleText $0,$83   ; "Indeed, perhaps...these{N}jewels are the key to{N}solving this....{W1}"
 		setQuake 2
 		csWait 5
@@ -587,7 +587,7 @@ abcs_battle07:  textCursor $951
 		setFacing $83,DOWN
 		nextSingleText $0,$83   ; "He won't budge.{N}We'll have to carry him.{W1}"
 		nextSingleText $FF,$FF  ; "The Minister nods.{W1}"
-		entityNod $83
+		nod $83
 		entityActions $83
 		 moveLeft 1
 		endActions
@@ -635,7 +635,7 @@ abcs_battle07:  textCursor $951
 		nextText $0,$83         ; "{LEADER}, you'll be{N}buried in the tower!{W2}"
 		nextSingleText $0,$83   ; "Come on!{W1}"
 		csWait 50
-		mapSysEvent $3A,$D,$23,$3
+		warp $3A,$D,$23,$3
 		followEntity $83,$0,$2
 		followEntity $85,$83,$2
 		followEntity $86,$85,$2

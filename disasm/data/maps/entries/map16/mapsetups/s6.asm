@@ -31,7 +31,7 @@ cs_51F88:       textCursor $3C2
 		csWait 20
 		setFacing $1C,LEFT
 		csWait 20
-		setEntityDest $1C,16,17
+		setDest $1C,16,17
 		nextText $0,$1C         ; "Quiet!  Everybody listen{N}to me!{W1}"
 		nextText $0,$1C         ; "I also don't understand{N}this march!{W2}"
 		nextText $0,$1C         ; "But, King Galam must{N}have a good reason!{W2}"
@@ -44,7 +44,7 @@ cs_51F88:       textCursor $3C2
 		csWait 20
 		setFacing $1C,UP
 		csWait 20
-		setEntityDest $1C,16,16
+		setDest $1C,16,16
 		setFacing $1C,RIGHT
 		setFacing $80,LEFT
 		csWait 20
@@ -67,10 +67,10 @@ cs_51F88:       textCursor $3C2
 		setFacing $1C,DOWN
 		csWait 20
 		setCamDest 12,18
-		setEntityDest $80,17,23
-		setEntityDest $1C,17,17
-		setEntityDest $1C,17,22
-		setEntityDest $1C,18,24
+		setDest $80,17,23
+		setDest $1C,17,17
+		setDest $1C,17,22
+		setDest $1C,18,24
 		setFacing $80,UP
 		setFacing $1C,UP
 		setFacing $81,DOWN
@@ -147,24 +147,24 @@ cs_51F88:       textCursor $3C2
 		setFacing $5,DOWN
 		setFacing $0,DOWN
 		setCamDest 12,5
-		hideEntity $1C
-		hideEntity $80
-		hideEntity $81
-		hideEntity $82
-		hideEntity $83
-		hideEntity $84
-		hideEntity $85
-		hideEntity $86
-		hideEntity $87
-		hideEntity $88
-		hideEntity $89
-		hideEntity $8A
-		hideEntity $8B
-		hideEntity $8C
-		hideEntity $8D
-		hideEntity $8E
-		hideEntity $8F
-		hideEntity $90
+		hide $1C
+		hide $80
+		hide $81
+		hide $82
+		hide $83
+		hide $84
+		hide $85
+		hide $86
+		hide $87
+		hide $88
+		hide $89
+		hide $8A
+		hide $8B
+		hide $8C
+		hide $8D
+		hide $8E
+		hide $8F
+		hide $90
 		nextText $C0,$5         ; "They've gone.{N}The war begins.{W1}"
 		setFacing $5,LEFT
 		setFacing $0,RIGHT
@@ -180,8 +180,8 @@ cs_521BA:       textCursor $3DA
 		nextSingleText $0,$91   ; "How did you get out?{W1}"
 		setActscriptWait $5,eas_Init
 		setActscriptWait $0,eas_Init
-		setEntityDest $0,3,19
-		setEntityDest $5,4,19
+		setDest $0,3,19
+		setDest $5,4,19
 		nextSingleText $0,$5    ; "I...{W1}"
 		nextSingleText $0,$92   ; "Wow, great jewel!{W1}"
 		setCamDest 12,10
@@ -208,10 +208,10 @@ cs_521BA:       textCursor $3DA
 		csWait 20
 		setFacing $0,DOWN
 		setFacing $5,DOWN
-		setEntityDest $91,9,23
+		setDest $91,9,23
 		setActscriptWait $91,eas_Jump
 		setActscriptWait $91,eas_Jump
 		nextSingleText $0,$91   ; "Intruders!  Intruders!{N}Arrest them!{W1}"
 		setStoryFlag $5         ; Battle 5 unlocked
-cs_5227C:       mapSysEvent $10,$0,$0,$0
+cs_5227C:       warp $10,$0,$0,$0
 		csc_end

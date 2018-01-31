@@ -303,24 +303,25 @@ j_DebugFlagSetter:
 
 j_SpecialBattle:
 		
-		jmp     SpecialBattle(pc)
+		jmp     DisplayTimerWindow(pc)
 
 	; End of function j_SpecialBattle
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_100A0:
-		jmp     sub_16552(pc)
+j_DisplayTimerWindow:
+		
+		jmp     RemoveTimerWindow(pc)
 
-	; End of function sub_100A0
+	; End of function j_DisplayTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 j_VintFunc_16588:
 		
-		jmp     VInt_16588(pc)
+		jmp     VInt_UpdateTimerWindow(pc)
 
 	; End of function j_VintFunc_16588
 
@@ -362,10 +363,11 @@ j_EndKiss:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_100B8:
-		jmp     sub_154F6(pc)
+j_ClosePortraitEyes:
+		
+		jmp     ClosePortraitEyes(pc)
 
-	; End of function sub_100B8
+	; End of function j_ClosePortraitEyes
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3120,7 +3122,7 @@ loc_11CE6:
 		dc.w VINTS_ADD
 		dc.l VInt_HandlePortraitBlinking
 		move.b  #$FF,((byte_FFB082-$1000000)).w
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 		bne.s   loc_11D1A
 		clr.w   d0
@@ -4262,7 +4264,7 @@ loc_12CA2:
 sub_12CB0:
 		moveq   #$14,d6
 loc_12CB2:
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		move.b  ((byte_FFDEA0-$1000000)).w,d0
 		andi.w  #1,d0
 		lsl.w   #4,d0
@@ -4334,7 +4336,7 @@ loc_12D6E:
 		move.l  a0,d0
 		cmpi.w  #$AF02,d0
 		bne.s   loc_12D7E
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 loc_12D7E:
 		dbf     d7,loc_12CF0
 loc_12D82:
@@ -8571,7 +8573,10 @@ aAAA_0:         dc.b '–`–a–a–aÿ`'
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_154F6:
+; Close princess Ellis' eyes when unconscious.
+
+ClosePortraitEyes:
+		
 		clr.b   ((byte_FFB082-$1000000)).w
 		jsr     (WaitForVInt).w 
 		move.w  d0,-(sp)
@@ -8598,7 +8603,7 @@ loc_15526:
 		bsr.w   UpdatePortrait  
 		rts
 
-	; End of function sub_154F6
+	; End of function ClosePortraitEyes
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10004,7 +10009,7 @@ loc_16502:
 
 ; =============== S U B R O U T I N E =======================================
 
-SpecialBattle:
+DisplayTimerWindow:
 		
 		movem.l d0-d1/a0-a1,-(sp)
 		tst.w   ((TIMER_WINDOW_INDEX-$1000000)).w
@@ -10019,19 +10024,20 @@ SpecialBattle:
 		move.w  d0,((TIMER_WINDOW_INDEX-$1000000)).w
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_ADD
-		dc.l VInt_16588
+		dc.l VInt_UpdateTimerWindow
 		move.l  #$FFFFFFFF,((SPECIAL_BATTLE_TIME-$1000000)).w
 		addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_1654C:
 		movem.l (sp)+,d0-d1/a0-a1
 		rts
 
-	; End of function SpecialBattle
+	; End of function DisplayTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_16552:
+RemoveTimerWindow:
+		
 		movem.l d0-d1/a0-a1,-(sp)
 		move.w  ((TIMER_WINDOW_INDEX-$1000000)).w,d0
 		beq.s   loc_16582
@@ -10043,18 +10049,19 @@ sub_16552:
 		clr.w   ((TIMER_WINDOW_INDEX-$1000000)).w
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_REMOVE
-		dc.l VInt_16588
+		dc.l VInt_UpdateTimerWindow
 		subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_16582:
 		movem.l (sp)+,d0-d1/a0-a1
 		rts
 
-	; End of function sub_16552
+	; End of function RemoveTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-VInt_16588:
+VInt_UpdateTimerWindow:
+		
 		movem.l d0-d1/a0-a1,-(sp)
 		move.w  ((TIMER_WINDOW_INDEX-$1000000)).w,d0
 		beq.s   loc_165BA
@@ -10074,7 +10081,7 @@ loc_165BA:
 		movem.l (sp)+,d0-d1/a0-a1
 		rts
 
-	; End of function VInt_16588
+	; End of function VInt_UpdateTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================

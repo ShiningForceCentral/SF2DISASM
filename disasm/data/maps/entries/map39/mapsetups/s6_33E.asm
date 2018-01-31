@@ -20,7 +20,7 @@ cs_5E0EE:       newEntity $1A,4,12,UP,$FF
 		csc_end
 cs_5E0F8:       textCursor $805
 		setCameraEntity $18
-		setEntityDest $0,19,7
+		setDest $0,19,7
 		entityActionsWait $7
 		 moveDown 1
 		endActions
@@ -76,7 +76,7 @@ cs_5E0F8:       textCursor $805
 		nextSingleText $0,$18   ; "Hmmm....{W2}"
 		setFacing $18,UP
 		nextSingleText $0,$18   ; "I can't go back now!{W1}"
-		entityShiver $1F
+		shiver $1F
 		nextSingleText $0,$1F   ; "But...your family...{W1}"
 		setFacing $18,RIGHT
 		nextSingleText $0,$18   ; "I know.  I'll miss them.{W2}"
@@ -95,7 +95,7 @@ cs_5E20A:       textCursor $819
 		nextSingleText $0,$1A   ; "I want to go to Grans, too.{W1}"
 		nextSingleText $0,$80   ; "They decide to take the{N}ancient soldier {NAME;26}{N}with them.{W1}"
 		setFacing $1A,DOWN
-		entityShiver $1A
+		shiver $1A
 		nextSingleText $0,$1A   ; "There is no time to waste!{W1}"
 		addNewFollower $1A
 		csc_end

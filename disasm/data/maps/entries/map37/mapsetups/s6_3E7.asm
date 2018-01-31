@@ -38,7 +38,7 @@ cs_5FABC:       textCursor $D1F
 		csWait 20
 		setFacing $7,LEFT
 		csWait 20
-		entityShiver $7
+		shiver $7
 		nextSingleText $80,$7   ; "Oh, there he is!{W1}"
 		setActscriptWait $7,eas_Init
 		entityActionsWait $7
@@ -52,7 +52,7 @@ cs_5FABC:       textCursor $D1F
 cs_5FB30:       textCursor $D25
 		setActscriptWait $80,eas_Init
 		setFacing $80,DOWN
-		entityShakeHead $80
+		headshake $80
 		nextText $0,$80         ; "Phew!  We've made it to{N}Grans Island!{W1}"
 		nextText $0,$80         ; "{LEADER}, Geshp's probably{N}coming for us!{W2}"
 		nextText $0,$80         ; "Evacuate the ship!{W1}"
@@ -63,7 +63,7 @@ cs_5FB30:       textCursor $D25
 		 moveUpRight 1
 		 moveRight 3
 		endActions
-		hideEntity $80
+		hide $80
 		csc_end
 cs_5FB6A:       textCursor $D31
 		playSound SFX_BIG_DOOR_RUMBLE
@@ -77,10 +77,10 @@ cs_5FB6A:       textCursor $D31
 		nextSingleText $80,$7   ; "Wow, the ship is vibrating!{W1}"
 		setFacing $80,UP
 		nextSingleText $0,$80   ; "What's going on?{W1}"
-		setEntityDest $1A,11,11
-		setEntityDest $1A,14,11
-		setEntityDest $1A,15,10
-		setEntityDest $1A,16,10
+		setDest $1A,11,11
+		setDest $1A,14,11
+		setDest $1A,15,10
+		setDest $1A,16,10
 		setFacing $1A,DOWN
 		nextSingleText $0,$1A   ; "Don't worry. {W1}"
 		setActscriptWait $7,eas_Jump
@@ -165,7 +165,7 @@ cs_5FB6A:       textCursor $D31
 		csWait 15
 		executeSubroutine sub_5FD66
 		csWait 120
-		mapSysEvent $3B,$3F,$3F,$0
+		warp $3B,$3F,$3F,$0
 		csc_end
 
 ; =============== S U B R O U T I N E =======================================

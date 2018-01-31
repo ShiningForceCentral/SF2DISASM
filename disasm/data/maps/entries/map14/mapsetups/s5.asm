@@ -85,10 +85,10 @@ cs_58FA4:       textCursor $8D6
 		entityActionsWait $86
 		 moveDown 7
 		endActions
-		hideEntity $82
-		hideEntity $84
-		hideEntity $85
-		hideEntity $86
+		hide $82
+		hide $84
+		hide $85
+		hide $86
 		entityActionsWait $80
 		 moveRight 2
 		endActions
@@ -108,8 +108,8 @@ cs_58FA4:       textCursor $8D6
 		endActions
 		setActscriptWait $83,eas_Init
 		setFacing $80,DOWN
-		entityNod $83
-		entityNod $83
+		nod $83
+		nod $83
 		stopEntity $83
 		entityActionsWait $80
 		 moveDown 1
@@ -226,7 +226,7 @@ cs_59142:       textCursor $8E6
 		 moveDown 7
 		endActions
 		setStoryFlag $8         ; Battle 8 unlocked
-		mapSysEvent $48,$1,$1,$3
+		warp $48,$1,$1,$3
 		csc_end
 ce_59270:       mainEntity 13,11,DOWN
 		entity 12,20,UP,3,eas_Init

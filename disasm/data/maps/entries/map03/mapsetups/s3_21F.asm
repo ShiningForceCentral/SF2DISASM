@@ -31,5 +31,5 @@ sub_6282A:
 
 	; End of function sub_6282A
 
-cs_6283E:       moveEntityNextToPlayer $89,$2
+cs_6283E:       moveNextToPlayer $89,LEFT
 		csc_end

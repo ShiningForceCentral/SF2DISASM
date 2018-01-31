@@ -58,9 +58,9 @@ cs_5249E:       playSound $FD
 		playSound MUSIC_CASTLE
 		fadeInB
 		csWait 30
-		setEntityDest $0,59,5
-		entityShakeHead $0
-		entityNod $0
+		setDest $0,59,5
+		headshake $0
+		nod $0
 		nextSingleText $0,$0    ; "(Yawn){W1}"
 		setFacing $0,LEFT
 		csWait 40
@@ -103,12 +103,12 @@ cs_52530:       textCursor $385
 		setFacing $5,DOWN
 		nextText $C0,$84        ; "This is a jail in the{N}basement of Galam Castle.{W2}"
 		nextSingleText $C0,$84  ; "Say, you mustn't move yet!{W1}"
-		entityShakeHead $5
+		headshake $5
 		csWait 30
 		nextSingleText $0,$5    ; "Yes, I remember!{N}I was caught by Galam{N}soldiers.{W1}"
 		setFacing $85,UP
 		nextSingleText $0,$85   ; "They took my jewels and{N}brought me here!{W1}"
-		entityShiver $5
+		shiver $5
 		nextSingleText $0,$5    ; "They...they killed my{N}friends!{W1}"
 		customActscriptWait $5
 		 ac_setSpeed 14,14      ;   
@@ -157,21 +157,21 @@ cs_52530:       textCursor $385
 		 ac_updateSprite        ;   
 		 ac_jump eas_Idle       ;   
 		ac_end
-		entitySprite $5,$3B
+		setSprite $5,$3B
 		csWait 20
 		nextSingleText $0,$4    ; "Does he want the jewels?{W1}"
 		nextSingleText $0,$5    ; "What?{W1}"
-		entityShiver $5
+		shiver $5
 		csWait 20
 		nextSingleText $0,$3    ; "The man that broke the seal{N}is to blame for everything!{W1}"
 		nextSingleText $0,$5    ; "Oh, no!{W1}"
-		entityShiver $5
+		shiver $5
 		entityActionsWait $85
 		 moveLeft 1
 		endActions
 		nextSingleText $0,$85   ; "Are you OK?{N}You know something?{W1}"
 		nextSingleText $0,$5    ; "Uhh...nope!{W1}"
-		entityShiver $5
+		shiver $5
 		nextText $0,$4          ; "We can't stay here!{W2}"
 		setFacing $1,RIGHT
 		nextSingleText $0,$4    ; "We must escape!{W1}"
@@ -183,7 +183,7 @@ cs_52530:       textCursor $385
 		setCamDest 43,0
 		setActscriptWait $5,eas_Init
 		startEntity $5
-		entitySprite $5,$5
+		setSprite $5,$5
 		setActscriptWait $5,eas_Jump
 		entityActionsWait $5
 		 moveRight 1
@@ -235,7 +235,7 @@ cs_52530:       textCursor $385
 		setActscriptWait $4,eas_Jump
 		csWait 30
 		nextSingleText $0,$1    ; "Why are you being so nice{N}to us?  You don't know us.{W1}"
-		entityShiver $5
+		shiver $5
 		csWait 5
 		setActscript $5,eas_461B6
 		nextSingleText $C0,$5   ; "Ah, that's because...{N}well...{W1}"
@@ -257,7 +257,7 @@ cs_52530:       textCursor $385
 		endActions
 		setFacing $5,LEFT
 		nextSingleText $0,$1    ; "Is it...?{N}Are you the thief who broke{N}the seal?{W1}"
-		entityShiver $5
+		shiver $5
 		nextSingleText $C0,$5   ; "I...ah...{W1}"
 		entityActionsWait $1
 		 moveRight 3
@@ -293,7 +293,7 @@ cs_52530:       textCursor $385
 		endActions
 		stopEntity $5
 		setFacing $5,UP
-		entitySprite $5,$3B
+		setSprite $5,$3B
 		csWait 40
 		nextText $0,$1          ; "I know the thief {NAME;5}{N}always steals for poor{N}people, but you made a{W2}"
 		nextText $0,$1          ; "serious mistake this time!!{W2}"
@@ -321,7 +321,7 @@ cs_528D4:       textCursor $3B3
 		csWait 30
 		setActscriptWait $5,eas_Init
 		startEntity $5
-		entitySprite $5,$5
+		setSprite $5,$5
 		entityActionsWait $5
 		 moveLeft 2
 		endActions
@@ -367,10 +367,10 @@ cs_52938:       textCursor $3B8
 		setActscriptWait $3,eas_Init
 		setActscriptWait $4,eas_Init
 		setActscriptWait $5,eas_Init
-		hideEntity $1
-		hideEntity $2
-		hideEntity $3
-		hideEntity $4
+		hide $1
+		hide $2
+		hide $3
+		hide $4
 		setPos $0,29,12,DOWN
 		setPos $5,29,11,DOWN
 		stopEntity $0
@@ -386,8 +386,8 @@ cs_52938:       textCursor $3B8
 		ac_end
 		setActscript $0,eas_RotateRight
 		setActscript $5,eas_RotateRight
-		setEntityDest $8000,29,18
-		setEntityDest $5,29,17
+		setDest $8000,29,18
+		setDest $5,29,17
 		setFacing $0,DOWN
 		setFacing $5,DOWN
 		startEntity $0

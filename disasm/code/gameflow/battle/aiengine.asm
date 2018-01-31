@@ -921,7 +921,7 @@ loc_E7B6:
 		beq.s   loc_E7DE
 		movem.l (sp)+,d0-d3
 		lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
-		move.w  #5,(a0)
+		move.w  #5,(a0)         ; Muddle ?
 		lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
 		move.b  #$FF,(a0)
 		bra.w   loc_E984

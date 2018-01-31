@@ -12,12 +12,12 @@ ms_map11_InitFunction:
 
 cs_57AAA:       textCursor $C4F
 		setActscriptWait $7,eas_Init
-		setEntityDest $0,39,11
+		setDest $0,39,11
 		entityActionsWait $0
 		 moveLeft 1
 		endActions
 		setCameraEntity $7
-		setEntityDest $7,39,11
+		setDest $7,39,11
 		setFacing $7,UP
 		entityActionsWait $7
 		 moveUp 1
@@ -36,12 +36,12 @@ cs_57AAA:       textCursor $C4F
 		nextSingleText $0,$7    ; "Yes, I am!  This trip{N}was very interesting.{W1}"
 		nextSingleText $0,$80   ; "That's good.{W2}"
 		nextSingleText $0,$80   ; "What made it interesting?{W1}"
-		entityNod $7
+		nod $7
 		csWait 30
 		nextSingleText $0,$7    ; "I met a lot people that live{N}on the ground.{W2}"
 		nextSingleText $0,$7    ; "They help each other.{N}I made some friends.{W1}"
 		nextSingleText $0,$80   ; "Wonderful.  It must've been{N}a good experience for you.{W1}"
-		entityNod $7
+		nod $7
 		setCamDest 34,5
 		csWait 30
 		nextSingleText $0,$7    ; "I've brought a friend.{W1}"

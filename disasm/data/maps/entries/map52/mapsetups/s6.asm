@@ -32,8 +32,8 @@ byte_5C4EE:     textCursor $575
 		cameraSpeed $30
 		setActscriptWait $0,eas_Init
 		setActscriptWait $7,eas_Init
-		setEntityDest $0,5,23
-		setEntityDest $7,4,22
+		setDest $0,5,23
+		setDest $7,4,22
 		entityActionsWait $7
 		 moveRight 1
 		endActions
@@ -60,7 +60,7 @@ byte_5C4EE:     textCursor $575
 		setFacing $80,LEFT
 		nextText $0,$81         ; "There are marks of a battle{N}here and there!{W2}"
 		nextSingleText $0,$81   ; "Against the birdmen of{N}Bedoe?{W1}"
-		entityNod $80
+		nod $80
 		nextText $0,$80         ; "Could be...{W2}"
 		nextSingleText $0,$80   ; "see those volcanic rocks?{W1}"
 		csWait 5
@@ -104,7 +104,7 @@ byte_5C4EE:     textCursor $575
 		setFacing $83,UP
 		nextSingleText $0,$80   ; "They shall never return{N}alive!{W1}"
 		setStoryFlag $C         ; Battle 12 unlocked
-		mapSysEvent $34,$0,$0,$0
+		warp $34,$0,$0,$0
 		csc_end
 byte_5C622:     setPos $7,22,8,RIGHT
 		textCursor $9BD

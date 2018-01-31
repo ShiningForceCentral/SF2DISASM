@@ -54,7 +54,7 @@ cs_4FF5A:       textCursor $614
 		entityActionsWait $A
 		 moveDown 1
 		endActions
-		hideEntity $A
+		hide $A
 		setStoryFlag $10        ; Battle 16 unlocked
 		csc_end
 cs_4FFDA:       textCursor $D0D
@@ -69,10 +69,10 @@ cs_4FFDA:       textCursor $D0D
 		setActscriptWait $80,eas_46172
 		setActscriptWait $81,eas_46172
 		setCamDest 21,33
-		setEntityDest $801E,27,39
-		setEntityDest $801F,28,37
-		setEntityDest $8007,25,37
-		setEntityDest $0,26,37
+		setDest $801E,27,39
+		setDest $801F,28,37
+		setDest $8007,25,37
+		setDest $0,26,37
 		csWait 60
 		setPos $80,27,36,LEFT
 		setFacing $0,UP
@@ -96,7 +96,7 @@ cs_4FFDA:       textCursor $D0D
 		setFacing $0,DOWN
 		setFacing $7,DOWN
 		setFacing $B,UP
-		entityNod $0
+		nod $0
 		nextSingleText $FF,$FF  ; "{NAME;11} gets the dynamite{N}from {LEADER}.{W1}"
 		entityActionsWait $B
 		 moveRight 1
@@ -117,13 +117,13 @@ cs_4FFDA:       textCursor $D0D
 		 moveUp 2
 		endActions
 		setQuake 3
-		entitySprite $81,$AB
+		setSprite $81,$AB
 		startEntity $81
 		setActscript $81,eas_AnimSpeedx2
 		playSound SFX_BATTLEFIELD_DEATH
 		csWait 40
 		setBlocks 0,0,1,2,27,33
-		hideEntity $81
+		hide $81
 		setQuake 0
 		csWait 60
 		entityActionsWait $1F
@@ -177,8 +177,8 @@ cs_4FFDA:       textCursor $D0D
 		csWait 3
 		setActscript $80,eas_452BA
 		csWait 3
-		hideEntity $B
-		hideEntity $80
+		hide $B
+		hide $80
 		entityActionsWait $1F
 		 moveDown 1
 		 moveLeft 2
@@ -200,10 +200,10 @@ cs_5023E:       textCursor $D1D
 		setActscriptWait $1F,eas_Init
 		setActscriptWait $1E,eas_Init
 		setCamDest 21,33
-		setEntityDest $801E,27,39
-		setEntityDest $801F,28,37
-		setEntityDest $8007,25,37
-		setEntityDest $0,26,37
+		setDest $801E,27,39
+		setDest $801F,28,37
+		setDest $8007,25,37
+		setDest $0,26,37
 		waitIdle $1E
 		waitIdle $1F
 		waitIdle $7
@@ -214,8 +214,8 @@ cs_5023E:       textCursor $D1D
 		setFacing $0,RIGHT
 		csWait 30
 		setFacing $1F,LEFT
-		entityNod $0
-		entityShiver $1F
+		nod $0
+		shiver $1F
 		setFacing $7,RIGHT
 		csWait 20
 		nextSingleText $0,$1F   ; "What?!  You forgot to bring{N}the {ITEM} with you?{N}{LEADER}, are you serious?{W2}"

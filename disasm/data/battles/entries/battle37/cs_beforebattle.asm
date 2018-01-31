@@ -23,9 +23,9 @@ cs_4DAB8:       fadeInB
 		cameraSpeed $30
 		nextSingleText $C0,$1F  ; "Geshp again.{W1}"
 		setCamDest 40,44
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		setPos $80,45,47,UP
-		animEntityFadeInOut $80,$7
+		animEntityFX $80,7
 		nextSingleText $0,$80   ; "Hee, hee, hee.{W1}"
 		nextSingleText $C0,$7   ; "Do you have another cunning{N}trap for us?{W1}"
 		nextText $0,$80         ; "Would I do that?{W2}"
@@ -44,14 +44,14 @@ cs_4DAB8:       fadeInB
 		setFacing $80,UP
 		nextText $0,$80         ; "Now, it's your turn.{W2}"
 		nextSingleText $0,$80   ; "This will be your undoing.{W1}"
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		setCamDest 50,33
 		setFacing $7,UP
 		nextSingleText $C0,$7   ; "Galam is just over there,{N}but...{W1}"
 		setFacing $1F,DOWN
 		setFacing $0,RIGHT
 		nextSingleText $C0,$1F  ; "We have to advance.{N}{LEADER}, are you ready?{W1}"
-		entityNod $0
+		nod $0
 		csc_end
 ce_4DB74:       mainEntity 55,36,LEFT
 		entity 56,37,LEFT,7,eas_Init

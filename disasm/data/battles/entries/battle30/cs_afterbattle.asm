@@ -15,13 +15,13 @@ abcs_battle30:  textCursor $ACD
 		setPriority $7,$0
 		setPriority $1F,$FFFF
 		fadeInB
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "Grrr...impossible!{N}Why...do I have to die?{W1}"
 		entityActionsWait $1F
 		 moveUp 1
 		endActions
 		nextSingleText $0,$1F   ; "Where is Mitula?{W1}"
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "I don't know...haven't{N}seen her.{W1}"
 		csWait 40
 		setFacing $80,UP
@@ -39,14 +39,14 @@ abcs_battle30:  textCursor $ACD
 		 ac_setSpeed 48,48      ;   
 		 ac_jump eas_Idle       ;   
 		ac_end
-		setEntityDest $82,9,11
+		setDest $82,9,11
 		nextSingleText $0,$80   ; "Oops!  The Ground Orb....{W1}"
 		entityFlashWhite $82,$3C
 		mapFadeOutToWhite
 		csWait 20
 		mapFadeInFromWhite
 		setFacing $80,DOWN
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "I can't endure the light....{N}Ohhh....{W1}"
 		customActscriptWait $80
 		 ac_setAnimCounter $0   ;   
@@ -85,8 +85,8 @@ abcs_battle30:  textCursor $ACD
 		ac_end
 		cameraSpeed $38
 		setCameraEntity $82
-		setEntityDest $82,11,2
-		animEntityFadeInOut $82,$4
+		setDest $82,11,2
+		animEntityFX $82,4
 		setCamDest 5,8
 		setFacing $81,RIGHT
 		nextText $C0,$81        ; "Thank you.{W2}"
@@ -101,7 +101,7 @@ abcs_battle30:  textCursor $ACD
 		nextText $0,$7          ; "What?!{W2}"
 		nextSingleText $0,$7    ; "But, why?  You're a goddess.{N}You know our future, right?{W1}"
 		nextSingleText $C0,$81  ; "I'm not Volcanon.  I never{N}tell people the future, even{N}if it could prevent death.{W1}"
-		entityShiver $1F
+		shiver $1F
 		nextSingleText $0,$1F   ; "Death?!  Not ours I hope.{W1}"
 		nextText $C0,$81        ; "Zeon is an unimaginably{N}strong devil.{W2}"
 		nextSingleText $C0,$81  ; "If he attains full power,{N}I, even Volcanon, would not{N}be able to stop him.{W1}"
@@ -138,7 +138,7 @@ abcs_battle30:  textCursor $ACD
 		nextSingleText $C0,$81  ; "We need your help to reseal{N}Zeon.{N}Find the holy sword.{W1}"
 		nextSingleText $0,$1F   ; "Where is it?{N}How can we find it?{W1}"
 		nextSingleText $C0,$81  ; "It's on Grans.{N}Your jewel will lead you to...{W1}"
-		animEntityFadeInOut $81,$6
+		animEntityFX $81,6
 		csWait 50
 		entityActionsWait $1F
 		 moveLeft 2
@@ -164,7 +164,7 @@ abcs_battle30:  textCursor $ACD
 		setFacing $1F,DOWN
 		nextSingleText $0,$1F   ; "{LEADER}, find the{N}storytellers first.{W1}"
 		setFacing $0,UP
-		entityNod $0
+		nod $0
 		followEntity $1F,$0,$2
 		followEntity $7,$1F,$2
 		csc_end

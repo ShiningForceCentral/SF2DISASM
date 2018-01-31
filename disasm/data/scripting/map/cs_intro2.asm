@@ -27,7 +27,7 @@ IntroCutscene2: textCursor $106A
 		executeSubroutine ApplyStormEffect
 		csWait 40
 		setFacing $81,RIGHT
-		entityNod $81
+		nod $81
 		csWait 20
 		nextSingleText $0,$81   ; "It's unusual for this time{N}of year.{D2}"
 		csWait 30
@@ -38,7 +38,7 @@ IntroCutscene2: textCursor $106A
 		endActions
 		setCamDest 7,4
 		nextSingleText $0,$81   ; "Is it time to go to the{N}Ancient Tower?{D2}"
-		entityNod $82
+		nod $82
 		nextSingleText $0,$82   ; "Yes, sire.{D2}"
 		entityActionsWait $81
 		 moveDown 1
@@ -46,7 +46,7 @@ IntroCutscene2: textCursor $106A
 		 faceDown 10
 		endActions
 		nextSingleText $0,$81   ; "It's stormy outside.{N}Be careful.{D2}"
-		entityNod $82
+		nod $82
 		csWait 30
 		setCameraEntity $82
 		entityActionsWait $82
@@ -56,12 +56,12 @@ IntroCutscene2: textCursor $106A
 		 moveLeft 1
 		 moveUp 1
 		endActions
-		hideEntity $82
+		hide $82
 		setCameraEntity $FFFF
 		csWait 30
 		setCamDest 7,2
 		csWait 40
-		entityShiver $80
+		shiver $80
 		nextSingleText $80,$80  ; "Hmmm....{D2}"
 		setFacing $81,UP
 		nextSingleText $0,$81   ; "Excuse me, sire?{D2}"
@@ -80,12 +80,12 @@ IntroCutscene2: textCursor $106A
 		playSound SFX_SPELL_CAST
 		nextSingleText $0,$81   ; "Oh, a gust of wind!{D2}"
 		csWait 20
-		entityShiver $80
+		shiver $80
 		setFacing $80,DOWN
 		nextSingleText $80,$80  ; "Make sure all the doors and{N}windows are shut!{D2}"
 		playSound SFX_SPELL_CAST
 		csWait 30
-		animEntityFadeInOut $83,$6
+		animEntityFX $83,6
 		tintMap
 		csWait 5
 		setActscript $81,eas_461B6

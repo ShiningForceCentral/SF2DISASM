@@ -18,10 +18,10 @@ cs_54570:       playSound MUSIC_BOSS_ATTACK
 		csc_end
 cs_54578:       textCursor $3F5
 		nextSingleText $0,$1F   ; "OK.  Let's go!{W1}"
-		entityNod $8A
+		nod $8A
 		setFacing $8A,DOWN
 		nextSingleText $0,$8A   ; "Weigh anchor!{W1}"
-		setEntityDest $0,11,13
+		setDest $0,11,13
 		entityActions $8B
 		 moveRight 4
 		 moveUp 9
@@ -89,7 +89,7 @@ byte_545B6:      moveDown 1
 		loadMapFadeIn 66,28,26
 		loadMapEntities ce_54736
 		setActscriptWait $0,eas_Init
-		entitySprite $0,$D3
+		setSprite $0,$D3
 		fadeInB
 		customActscriptWait $0
 		 ac_setSpeed 20,20      ;   
@@ -120,7 +120,7 @@ byte_545B6:      moveDown 1
 		csWait 90
 		setQuake 0
 		csWait 120
-		mapSysEvent $49,$1A,$D,$0
+		warp $49,$1A,$D,$0
 		clearF $280             ; set after the end of battle 7's long sequence, cleared at docks?
 		csc_end
 

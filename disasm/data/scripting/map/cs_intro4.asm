@@ -105,8 +105,8 @@ IntroCutscene4: textCursor $1089
 		setFacing $80,DOWN
 		setFacing $81,DOWN
 		csWait 20
-		entityNod $82
-		entityNod $82
+		nod $82
+		nod $82
 		csWait 20
 		setActscriptWait $81,eas_Init
 		setCamDest 7,5
@@ -148,7 +148,7 @@ IntroCutscene4: textCursor $1089
 		setFacing $80,DOWN
 		csWait 40
 		nextSingleText $0,$81   ; "Strange.{D2}"
-		entityNod $81
+		nod $81
 		nextSingleText $0,$81   ; "Sire, I'm going to go and{N}see what happened!{D2}"
 		setActscriptWait $81,eas_Init
 		entityActionsWait $81
@@ -158,14 +158,14 @@ IntroCutscene4: textCursor $1089
 		setFacing $80,LEFT
 		nextSingleText $0,$81   ; "We must know the truth.{D2}"
 		csWait 20
-		entityNod $80
+		nod $80
 		nextSingleText $80,$80  ; "Be careful.{D2}"
 		entityActionsWait $81
 		 moveLeft 1
 		 moveDown 1
 		endActions
 		nextSingleText $0,$81   ; "Take me to the sealed door.{D2}"
-		entityNod $82
+		nod $82
 		setCameraEntity $82
 		entityActions $82
 		 moveDown 2
@@ -181,8 +181,8 @@ IntroCutscene4: textCursor $1089
 		 moveLeft 1
 		 moveUp 1
 		endActions
-		hideEntity $82
-		hideEntity $81
+		hide $82
+		hide $81
 		setCameraEntity $FFFF
 		csWait 30
 		setCamDest 7,5
@@ -231,7 +231,7 @@ IntroCutscene4: textCursor $1089
 		setPos $84,63,63,UP
 		csWait 60
 		nextSingleText $80,$80  ; "I guess it was nothing.{N}I have to get a hold of{N}myself.{D2}"
-		entityShakeHead $80
+		headshake $80
 		customActscriptWait $80
 		 ac_setSpeed 10,10      ;   
 		 ac_jump eas_Idle       ;   
@@ -300,10 +300,10 @@ IntroCutscene4: textCursor $1089
 		endActions
 		startEntity $83
 		setCameraEntity $80
-		entityShiver $83
+		shiver $83
 		csWait 30
-		entityShiver $83
-		entityShiver $83
+		shiver $83
+		shiver $83
 		csWait 20
 		entityActionsWait $80
 		 moveDown 1
@@ -313,9 +313,9 @@ IntroCutscene4: textCursor $1089
 		csWait 30
 		nextSingleText $80,$80  ; "Somebody...HELP!{D2}"
 		setFacing $80,UP
-		entityShiver $83
+		shiver $83
 		csWait 30
-		entityShiver $83
+		shiver $83
 		customActscriptWait $85
 		 ac_setSpeed 20,20      ;   
 		 ac_jump eas_Idle       ;   
@@ -329,7 +329,7 @@ IntroCutscene4: textCursor $1089
 		setActscript $80,eas_RotateRightHighSpeed
 		entityFlashWhite $85,$28
 		nextSingleText $80,$80  ; "Aughhhh!!!{D2}"
-		hideEntity $85
+		hide $85
 		csWait 30
 		setActscript $80,eas_RotateRight
 		csWait 50
@@ -345,14 +345,14 @@ IntroCutscene4: textCursor $1089
 		 ac_jump eas_Idle       ;   
 		ac_end
 		nextSingleText $80,$80  ; "(Sigh)....{D2}"
-		entityShiver $83
+		shiver $83
 		csWait 30
 		playSound SFX_INTRO_LIGHTNING
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
 		executeSubroutine ApplyStormEffect
 		csWait 40
-		entityShiver $83
+		shiver $83
 		csWait 40
 		fadeOutToBlackHalf
 		csc_end

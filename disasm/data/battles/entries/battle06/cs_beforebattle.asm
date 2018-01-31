@@ -19,7 +19,7 @@ bbcs_06:        textCursor $926
 		nextSingleText $0,$82   ; "No one is allowed to leave{N}'til we conquer Granseal!{W1}"
 		nextSingleText $C0,$5   ; "I know...ah...but...{N}King Galam...left this{N}behind.{W1}"
 		setFacing $81,DOWN
-		entityShakeHead $82
+		headshake $82
 		setFacing $81,LEFT
 		nextSingleText $0,$81   ; "And you want to bring it to{N}him?  Hmmmm.  I don't know....{W1}"
 		entityActionsWait $80

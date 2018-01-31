@@ -48,7 +48,7 @@ cs_563B2:       textCursor $50B
 		csc_end
 cs_56422:       textCursor $50E
 		setActscriptWait $7,eas_Init
-		setEntityDest $7,14,10
+		setDest $7,14,10
 		setFacing $7,UP
 		setActscriptWait $0,eas_46172
 		setActscriptWait $7,eas_46172

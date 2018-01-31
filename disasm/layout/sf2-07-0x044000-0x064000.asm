@@ -62,11 +62,15 @@ j_ExecuteEntityEvent_0:
 sub_44088:		jmp     sub_47586(pc)
 j_GetMapSetupEntities:		
 		jmp     GetMapSetupEntityList(pc)
-sub_44090:		jmp     sub_453C6(pc)
-sub_44094:		jmp     sub_45440(pc)
+j_MapEventType3:		
+		jmp     MapEventType3(pc)
+j_MapEventType5:		
+		jmp     MapEventType5(pc)
 ; related to followers maybe
-sub_44098:		jmp     sub_45268(pc)   
-sub_4409C:		jmp     sub_45322(pc)
+j_MapEventType2:		
+		jmp     MapEventType2(pc)
+j_MapEventType4:		
+		jmp     MapEventType4(pc)
 j_ShrinkInBowieAndFollowers:		
 		jmp     ShrinkIntoCaravanBowieAndFollowers(pc)
 j_GrowOutBowieAndFollowoers:		

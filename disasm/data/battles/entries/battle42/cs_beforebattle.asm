@@ -47,7 +47,7 @@ cs_4EDE8:       stopEntity $81
 		entityActionsWait $1C
 		 moveUp 2
 		endActions
-		entityShiver $1F
+		shiver $1F
 		nextSingleText $0,$1F   ; "King Galam!{W1}"
 		entityActions $0
 		 moveLeft 1

@@ -52,7 +52,7 @@ loc_632E0:
 
 cs_632EA:       setActscriptWait $0,eas_Init
 		csWait 1
-		entityShiver $0
+		shiver $0
 		csc_end
 
 ; =============== S U B R O U T I N E =======================================

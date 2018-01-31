@@ -53,7 +53,7 @@ cs_5FF06:       textCursor $D07
 		newEntity $80,39,2,DOWN,$B4
 		setActscript $80,eas_AnimSpeedx2
 		executeSubroutine csub_5FF56
-		hideEntity $80
+		hide $80
 		setQuake 2
 		setBlocks 0,32,7,6,0,0
 		csWait 60

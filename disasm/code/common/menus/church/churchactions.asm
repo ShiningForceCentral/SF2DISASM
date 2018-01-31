@@ -718,7 +718,7 @@ sub_2124A:
 		ble.s   loc_21278
 loc_2126C:
 		clr.w   d1
-		move.b  ((ENTITY_DATA_STRUCT_FACING-$1000000)).w,d1
+		move.b  ((ENTITY_FACING-$1000000)).w,d1
 		moveq   #$FFFFFFFF,d2
 		jsr     (sub_6052).w    
 loc_21278:

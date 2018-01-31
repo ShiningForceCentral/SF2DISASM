@@ -76,7 +76,7 @@ IntroCutscene1: textCursor $105A
 		csWait 30
 		setFacing $5,DOWN
 		nextSingleText $80,$5   ; "Stay here, OK?{D2}"
-		entityNod $80
+		nod $80
 		entityActionsWait $5
 		 moveRight 5
 		endActions
@@ -86,7 +86,7 @@ IntroCutscene1: textCursor $105A
 		 moveDown 3
 		endActions
 		csWait 30
-		entityShiver $5
+		shiver $5
 		csWait 30
 		nextSingleText $80,$5   ; "Oops, a dead end!{D2}"
 		entityActionsWait $5
@@ -97,7 +97,7 @@ IntroCutscene1: textCursor $105A
 		setFacing $81,UP
 		setFacing $5,DOWN
 		csWait 20
-		entityShakeHead $5
+		headshake $5
 		csWait 20
 		entityActionsWait $5
 		 moveLeft 5
@@ -108,7 +108,7 @@ IntroCutscene1: textCursor $105A
 		 moveDown 3
 		endActions
 		csWait 40
-		entityShiver $5
+		shiver $5
 		csWait 40
 		nextSingleText $80,$5   ; "Hey!  I found some hidden{N}stairs!{D2}"
 		entityActionsWait $5
@@ -199,12 +199,12 @@ IntroCutscene1: textCursor $105A
 		 moveDown 2
 		endActions
 		setCamDest 15,5
-		entityShiver $5
+		shiver $5
 		nextSingleText $80,$5   ; "I wonder if they're here?{D2}"
 		nextSingleText $FF,$FF  ; "{NAME;5} the thief opened{N}the chest.{D2}"
 		setBlocks 7,3,1,1,19,10
 		nextSingleText $FF,$FF  ; "He found Power Water.{D2}"
-		entityShakeHead $5
+		headshake $5
 		nextSingleText $80,$5   ; "No, I don't want this!{D2}"
 		nextSingleText $FF,$FF  ; "{NAME;5} discarded the{N}Power Water.{D2}"
 		setBlocks 4,3,1,1,19,10

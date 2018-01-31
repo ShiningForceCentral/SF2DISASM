@@ -85,7 +85,7 @@ csc07:	macro
 	dc.b \4
 	endm
 	
-mapSysEvent:	macro ;alias
+warp:	macro ;alias
 	csc07 \1,\2,\3,\4
 	endm
 	
@@ -150,7 +150,7 @@ csc0E:	macro
 	dc.l \2
 	endm
 	
-jumpIfDead:	macro ;alias
+jumpIfDefeated:	macro ;alias
 	csc0E \1,\2
 	endm	
 	
@@ -191,7 +191,7 @@ csc12:	macro
 	dc.w \1
 	endm
 	
-contextualMenu:	macro ;alias
+menu:	macro ;alias
 	csc12 \1
 	endm
 	
@@ -282,7 +282,7 @@ csc1A:	macro
 	dc.w \2
 	endm
 
-entitySprite:	macro ;alias
+setSprite:	macro ;alias
 	csc1A \1,\2
 	endm
 	
@@ -353,7 +353,7 @@ csc22:	macro
 	dc.w \2
 	endm
 		
-animEntityFadeInOut:	macro ;alias
+animEntityFX:	macro ;alias
 	csc22 \1,\2
 	endm	
 	
@@ -391,7 +391,7 @@ csc26:	macro
 	dc.w \1
 	endm
 	
-entityNod:	macro ;alias
+nod:	macro ;alias
 	csc26 \1
 	endm	
 	
@@ -400,7 +400,7 @@ csc27:	macro
 	dc.w \1
 	endm
 	
-entityShakeHead:	macro ;alias
+headshake:	macro ;alias
 	csc27 \1
 	endm
 		
@@ -410,7 +410,7 @@ csc28:	macro
 	dc.w \2
 	endm
 		
-moveEntityNextToPlayer:	macro ;alias
+moveNextToPlayer:	macro ;alias
 	csc28 \1,\2
 	endm	
 	
@@ -421,7 +421,7 @@ csc29:	macro
 	dc.w \3
 	endm
 		
-setEntityDest:	macro ;alias
+setDest:	macro ;alias
 	csc29 \1,\2,\3
 	endm	
 	
@@ -430,7 +430,7 @@ csc2A:	macro
 	dc.w \1
 	endm
 		
-entityShiver:	macro ;alias
+shiver:	macro ;alias
 	csc2A \1
 	endm	
 	
@@ -561,7 +561,7 @@ csc2E:	macro
 	dc.w \1
 	endm
 		
-hideEntity:	macro ;alias
+hide:	macro ;alias
 	csc2E \1
 	endm
 	

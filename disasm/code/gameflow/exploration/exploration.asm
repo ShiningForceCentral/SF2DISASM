@@ -285,7 +285,7 @@ return_38BE:
 sub_38C0:
 		movem.l d2-d3/a0,-(sp)
 		clr.w   d2
-		move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d2
+		move.b  ((CAMERA_ENTITY-$1000000)).w,d2
 		bpl.s   loc_38E6
 		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_38DC
@@ -300,7 +300,7 @@ loc_38E4:
 		bra.s   loc_392A
 loc_38E6:
 		lsl.w   #5,d2
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		adda.w  d2,a0
 		move.w  (a0)+,d2
 		move.w  (a0)+,d3
@@ -931,13 +931,13 @@ loc_3F24:
 ToggleRoofOnMapLoad:
 		
 		movem.l d0-a1,-(sp)
-		move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d4
+		move.b  ((CAMERA_ENTITY-$1000000)).w,d4
 		bpl.s   loc_3F38
 		clr.w   d4
 loc_3F38:
 		andi.w  #$3F,d4 
 		lsl.w   #5,d4
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		move.w  2(a0,d4.w),d5
 		move.w  (a0,d4.w),d4
 		clr.w   d1
@@ -1345,9 +1345,9 @@ loc_4314:
 		bne.w   loc_4340
 loc_4322:
 		move.w  #1,((MAP_EVENT_TYPE-$1000000)).w
-		move.l  2(a2),((byte_FFA84C-$1000000)).w
-		move.w  6(a2),((byte_FFA850-$1000000)).w
-		move.w  #$59,((word_FFB1A8-$1000000)).w 
+		move.l  2(a2),((MAP_EVENT_PARAM_1-$1000000)).w
+		move.w  6(a2),((MAP_EVENT_PARAM_5-$1000000)).w
+		move.w  #SFX_WARP,((WARP_SFX-$1000000)).w
 loc_433A:
 		movem.l (sp)+,d0-d1/d7
 		rts

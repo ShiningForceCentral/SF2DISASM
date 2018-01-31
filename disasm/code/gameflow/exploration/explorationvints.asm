@@ -35,7 +35,7 @@ loc_25B22:
 		jsr     j_DebugModeSelectAction
 		rts
 loc_25B40:
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		cmpi.b  #$3E,$33(a0) 
 		bne.s   loc_25BAA
 		move.w  $C(a0),d0

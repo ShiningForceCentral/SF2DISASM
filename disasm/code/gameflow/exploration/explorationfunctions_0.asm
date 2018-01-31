@@ -10,14 +10,14 @@
 
 GetActivatedEntity:
 		
-		move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d0
+		move.b  ((CAMERA_ENTITY-$1000000)).w,d0
 		ext.w   d0
 		bpl.s   loc_237A4
 		rts
 loc_237A4:
 		; get X/Y/facing/size of player entity
 		movem.l d3-a0,-(sp)
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		lsl.w   #5,d0
 		adda.w  d0,a0
 		move.w  (a0,d0.w),d1    ; get X
@@ -48,7 +48,7 @@ loc_237C8:
 		clr.w   d0
 		moveq   #$2F,d7 
 loc_237FE:
-		cmp.b   ((BATTLE_CURRENT_ENTITY-$1000000)).w,d0
+		cmp.b   ((CAMERA_ENTITY-$1000000)).w,d0
 		beq.w   loc_2382A       ; skip this entity because it's the player!
 		bsr.w   CheckIfEntityIsFollower
 		bne.w   loc_2382A       ; skip this entity because it's a follower!
@@ -108,14 +108,14 @@ loc_2385C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_23862:
-		move.b  ((BATTLE_CURRENT_ENTITY-$1000000)).w,d0
+		move.b  ((CAMERA_ENTITY-$1000000)).w,d0
 		ext.w   d0
 		bpl.s   loc_2386C
 		rts
 loc_2386C:
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-		lea     ((ENTITY_DATA_STRUCT_X_AND_START-$1000000)).w,a0
+		lea     ((ENTITY_DATA-$1000000)).w,a0
 		lsl.w   #5,d0
 		adda.w  d0,a0
 		move.w  (a0,d0.w),d2

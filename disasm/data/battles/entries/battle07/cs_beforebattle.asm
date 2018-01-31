@@ -6,7 +6,7 @@ bbcs_07:        textCursor $935
 		loadMapFadeIn 58,8,29
 		loadMapEntities ce_49F36
 		setActscriptWait $0,eas_Init
-		animEntityFadeInOut $85,$4
+		animEntityFX $85,4
 		fadeInB
 		cameraSpeed $28
 		nextSingleText $C0,$80  ; "Astral, you're so persistent!{W1}"
@@ -57,7 +57,7 @@ bbcs_07:        textCursor $935
 		setActscriptWait $81,eas_BumpUp
 		setQuake 0
 		setActscript $81,eas_Jump
-		entityNod $80
+		nod $80
 		setActscriptWait $81,eas_BumpDown
 		setQuake 2
 		playSound SFX_DOOR_OPEN
@@ -70,7 +70,7 @@ bbcs_07:        textCursor $935
 		setActscriptWait $81,eas_BumpUp
 		setQuake 0
 		setActscript $80,eas_Jump
-		entityNod $81
+		nod $81
 		setActscriptWait $80,eas_46172
 		setActscriptWait $81,eas_46172
 		csWait 30
@@ -111,7 +111,7 @@ bbcs_07:        textCursor $935
 		endActions
 		csWait 10
 		setPos $85,12,18,UP
-		animEntityFadeInOut $85,$5
+		animEntityFX $85,5
 		waitIdle $82
 		nextSingleText $0,$85   ; "Stop, my dear!{W1}"
 		setActscriptWait $82,eas_Jump
@@ -123,7 +123,7 @@ bbcs_07:        textCursor $935
 		nextSingleText $C0,$80  ; "Hee, hee, hee...{N}I won't lose her now.{W1}"
 		nextText $0,$81         ; "What should I do?{N}{LEADER}, can you hear{N}me?{W1}"
 		nextSingleText $0,$81   ; "Save her.{W1}"
-		entityShiver $80
+		shiver $80
 		stopEntity $80
 		nextSingleText $C0,$80  ; "I've no time to play with{N}these kids.{N}Devils!  I summon thee!{W1}"
 		setPos $86,14,18,DOWN

@@ -120,8 +120,8 @@ cs_570B0:       textCursor $650
 		nextSingleText $0,$96   ; "You met some other devils?{W1}"
 		setFacing $96,RIGHT
 		setFacing $97,LEFT
-		entityNod $96
-		entityNod $97
+		nod $96
+		nod $97
 		setFacing $96,DOWN
 		setFacing $97,DOWN
 		customActscriptWait $96
@@ -165,7 +165,7 @@ cs_570B0:       textCursor $650
 		setFacing $96,RIGHT
 		setFacing $97,LEFT
 		nextSingleText $0,$7    ; "We already defeated them.{W1}"
-		entityNod $0
+		nod $0
 		setCamDest 6,22
 		customActscriptWait $96
 		 ac_setSpeed 8,8        ;   
@@ -196,7 +196,7 @@ cs_570B0:       textCursor $650
 		setFacing $96,RIGHT
 		setFacing $97,LEFT
 		nextSingleText $0,$96   ; "Just in case.{W1}"
-		entityNod $97
+		nod $97
 		setFacing $96,UP
 		setFacing $97,UP
 		nextText $0,$97         ; "We're going to Polca Village{N}to patrol.{W2}"
@@ -256,7 +256,7 @@ cs_573EC:       textCursor $669
 		nextText $0,$93         ; "Can't you track him?{W2}"
 		nextSingleText $0,$93   ; "We must capture him before{N}he regains his strength.{W1}"
 		nextSingleText $0,$94   ; "Did they come from Grans{N}Island?{W1}"
-		entityNod $93
+		nod $93
 		nextText $0,$93         ; "I think so.{W2}"
 		nextText $0,$93         ; "Maybe he died.{N}But beware of another attack.{W2}"
 		csWait 10
@@ -293,13 +293,13 @@ cs_573EC:       textCursor $669
 		 moveLeft 4
 		 moveDown 3
 		endActions
-		hideEntity $96
-		hideEntity $97
-		hideEntity $98
-		hideEntity $99
-		hideEntity $9A
-		hideEntity $9B
-		hideEntity $9C
+		hide $96
+		hide $97
+		hide $98
+		hide $99
+		hide $9A
+		hide $9B
+		hide $9C
 		entityActionsWait $94
 		 moveRight 1
 		 faceDown 1
@@ -335,7 +335,7 @@ cs_574A6:       textCursor $673
 		 moveUp 1
 		endActions
 		csWait 30
-		entityNod $7
+		nod $7
 		csWait 20
 		setFacing $7,LEFT
 		csWait 30
@@ -346,7 +346,7 @@ cs_574A6:       textCursor $673
 		 moveLeft 2
 		endActions
 		csWait 40
-		entityNod $0
+		nod $0
 		entityActions $7
 		 moveRight 3
 		 faceUp 1
@@ -355,7 +355,7 @@ cs_574A6:       textCursor $673
 		 moveRight 3
 		 faceUp 1
 		endActions
-		entityNod $0
+		nod $0
 		nextSingleText $0,$7    ; "This is {LEADER}.{N}He's from Grans and...{W1}"
 		entityActionsWait $A
 		 moveDown 1
@@ -369,7 +369,7 @@ cs_574A6:       textCursor $673
 		nextSingleText $0,$7    ; "How do you know that?{W1}"
 		nextSingleText $80,$A   ; "Sir Astral told me.{W1}"
 		nextSingleText $0,$7    ; "What?!  Did you go to{N}Granseal?{W1}"
-		entityNod $A
+		nod $A
 		nextSingleText $80,$A   ; "As Volcanon's messenger.{W1}"
 		entityActionsWait $93
 		 moveDown 1
@@ -425,7 +425,7 @@ cs_574A6:       textCursor $673
 		endActions
 		nextText $0,$94         ; "King Bedoe, I think{N}{LEADER} has to see{N}Volcanon.{W2}"
 		nextSingleText $0,$94   ; "He should talk to him.{W1}"
-		entityNod $93
+		nod $93
 		nextSingleText $80,$93  ; "Hmmm...you're right.{N}{NAME;7}, go ahead.{W1}"
 		setFacing $94,DOWN
 		setFacing $A,DOWN
@@ -439,11 +439,11 @@ cs_5766C:       textCursor $690
 		nextSingleText $0,$99   ; "Watch!  I can fly!{W1}"
 		setFacing $99,RIGHT
 		csWait 40
-		entityNod $99
+		nod $99
 		entityActionsWait $99
 		 jumpRight 1
 		endActions
-		entitySprite $99,$B6
+		setSprite $99,$B6
 		setActscriptWait $99,eas_46172
 		customActscriptWait $99
 		 ac_setSpeed 4,4        ;   
@@ -460,7 +460,7 @@ cs_5766C:       textCursor $690
 		entityActionsWait $99
 		 moveDown 6
 		endActions
-		entitySprite $99,$E6
+		setSprite $99,$E6
 		nextSingleText $0,$99   ; "Hmmm...strange...{W1}"
 		setActscriptWait $99,eas_Init
 		entityActionsWait $99
@@ -473,13 +473,13 @@ cs_5766C:       textCursor $690
 		nextSingleText $0,$99   ; "Stay there.{N}I know I can fly!{W1}"
 		setFacing $99,RIGHT
 		csWait 40
-		entityNod $99
+		nod $99
 		cameraSpeed $40
 		entityActionsWait $99
 		 moveRight 1
 		 jumpRight 1
 		endActions
-		entitySprite $99,$B6
+		setSprite $99,$B6
 		setActscriptWait $99,eas_46172
 		entityActionsWait $99
 		 moveDown 1
@@ -510,7 +510,7 @@ cs_5766C:       textCursor $690
 		 moveUp 11
 		endActions
 		setFacing $99,LEFT
-		entitySprite $99,$E6
+		setSprite $99,$E6
 		setFacing $0,RIGHT
 		setFacing $7,RIGHT
 		nextSingleText $0,$99   ; "See.  I told you!{N}I can fly...sort of.{W1}"
@@ -609,7 +609,7 @@ cs_5779C:       textCursor $696
 		setActscriptWait $98,eas_Jump
 		setActscriptWait $98,eas_Jump
 		nextSingleText $0,$98   ; "Thank you!  Thank you!{N}{NAME;20} is OK.{W1}"
-		entityNod $98
+		nod $98
 		csWait 30
 		setActscriptWait $98,eas_Init
 		setActscriptWait $99,eas_Init
@@ -620,7 +620,7 @@ cs_5779C:       textCursor $696
 		 moveUp 1
 		 moveRight 8
 		endActions
-		hideEntity $98
+		hide $98
 		setPos $99,16,6,LEFT
 		entityActionsWait $7
 		 moveLeft 1
@@ -629,7 +629,7 @@ cs_5779C:       textCursor $696
 		setActscriptWait $7,eas_BumpLeft
 		setActscriptWait $0,eas_Init
 		setFacing $0,DOWN
-		entityShakeHead $0
+		headshake $0
 		setPriority $0,$FFFF
 		followEntity $7,$0,$2
 		csc_end
@@ -651,7 +651,7 @@ cs_5797A:       textCursor $647
 		 moveRight 1
 		 moveDown 4
 		endActions
-		hideEntity $A
+		hide $A
 		faceEntity $93,$7
 		nextText $0,$93         ; "{NAME;7}, please{N}help {LEADER}.{W2}"
 		nextSingleText $0,$93   ; "{LEADER}, good luck!{W1}"

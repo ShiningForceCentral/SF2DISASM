@@ -53,7 +53,7 @@ return_62D04:
 
 	; End of function ms_map19_flag21F_InitFunction
 
-cs_62D06:       entitySprite $B,$AA
+cs_62D06:       setSprite $B,$AA
 		csc_end
 cs_62D0E:       textCursor $F7F
 		setCameraEntity $81
@@ -94,17 +94,17 @@ cs_62D0E:       textCursor $F7F
 		endActions
 		csWait 30
 		nextSingleText $0,$81   ; "King Granseal, {LEADER}{N}is here!{W1}"
-		entityNod $80
+		nod $80
 		nextSingleText $80,$80  ; "Please explain what is{N}happening.{W1}"
 		csWait 10
-		entityNod $81
+		nod $81
 		nextSingleText $0,$81   ; "Yes, sir.{W1}"
 		entityActionsWait $81
 		 moveRight 1
 		 faceDown 1
 		endActions
 		csWait 30
-		entityNod $81
+		nod $81
 		setFacing $0,UP
 		setFacing $1,UP
 		setFacing $3,UP
@@ -127,11 +127,11 @@ cs_62D0E:       textCursor $F7F
 		setActscriptWait $7,eas_Jump
 		nextSingleText $80,$7   ; "Mitula...you mean, somebody{N}gets to kiss her?{W1}"
 		csWait 10
-		entityShiver $1
+		shiver $1
 		csWait 10
 		setFacing $81,UP
 		csWait 40
-		entityNod $80
+		nod $80
 		csWait 30
 		nextSingleText $0,$80   ; "Yes.{N}We feel this is the right{N}time.{W1}"
 		csWait 30
@@ -141,7 +141,7 @@ cs_62D0E:       textCursor $F7F
 		nextSingleText $80,$7   ; "We don't have to decide.{N}It's {LEADER}.{N}{NAME;10}, don't you agree?{W1}"
 		setFacing $7,DOWN
 		csWait 20
-		entityShiver $A
+		shiver $A
 		csWait 20
 		nextText $80,$A         ; "Ha, ha!  Yes, {NAME;7}!{W2}"
 		csWait 10
@@ -184,7 +184,7 @@ cs_62D0E:       textCursor $F7F
 		 moveDown 1
 		endActions
 		setFacing $3,RIGHT
-		entityShiver $3
+		shiver $3
 		setFacing $1,DOWN
 		setFacing $2,DOWN
 		setFacing $4,DOWN
@@ -201,12 +201,12 @@ cs_62D0E:       textCursor $F7F
 		nextSingleText $0,$3    ; "May I kiss her?{N}Somebody, say yes!{W1}"
 		csWait 5
 		setActscript $3,eas_461B6
-		entityShiver $1
+		shiver $1
 		csWait 20
 		setFacing $7,DOWN
 		setFacing $A,UP
 		csWait 20
-		entityShakeHead $A
+		headshake $A
 		csWait 20
 		entityActionsWait $7
 		 moveLeft 1
@@ -216,7 +216,7 @@ cs_62D0E:       textCursor $F7F
 		setFacing $A,LEFT
 		setFacing $3,RIGHT
 		nextSingleText $80,$7   ; "Sorry, but...I don't think{N}{NAME;3} is the right{N}choice.{W1}"
-		entityShiver $3
+		shiver $3
 		entityActionsWait $5
 		 moveRight 1
 		 moveDown 1
@@ -225,14 +225,14 @@ cs_62D0E:       textCursor $F7F
 		setFacing $3,LEFT
 		nextText $0,$5          ; "I understand {NAME;3}, but{N}she is a human.{W2}"
 		nextSingleText $0,$5    ; "A human is the best choice.{W1}"
-		entityShiver $3
+		shiver $3
 		jumpIfFlagClear $8,cs_62FB0; May joined
 		entityActionsWait $8
 		 moveDown 1
 		 faceRight 1
 		endActions
 		nextSingleText $0,$8    ; "{LEADER} is a human!{N}They will make a cute couple!{W1}"
-		entityShiver $3
+		shiver $3
 cs_62FB0:       textCursor $F93
 		entityActionsWait $7
 		 moveUp 1
@@ -244,14 +244,14 @@ cs_62FB0:       textCursor $F93
 		setFacing $3,RIGHT
 		nextText $80,$13        ; "{LEADER} is a good lad{N}with the manner of a{N}knight!{W2}"
 		nextSingleText $80,$13  ; "I think he's the best{N}choice.{W1}"
-		entityShiver $3
+		shiver $3
 		csWait 30
 		entityActionsWait $81
 		 moveRight 2
 		 moveDown 1
 		endActions
 		nextSingleText $0,$81   ; "{NAME;1}, what do you{N}think?{W1}"
-		entityShiver $1
+		shiver $1
 		setFacing $1,UP
 		setFacing $3,UP
 		setFacing $2,UP
@@ -260,7 +260,7 @@ cs_62FB0:       textCursor $F93
 		setFacing $13,UP
 		setFacing $0,UP
 		nextText $80,$1         ; "M...me?  Well...{W2}"
-		entityShiver $1
+		shiver $1
 		nextText $80,$1         ; "I'm worried about her...{N}but...I...{W2}"
 		setFacing $1,LEFT
 		csWait 30
@@ -290,11 +290,11 @@ cs_62FB0:       textCursor $F93
 		entityActionsWait $1
 		 moveDown 8
 		endActions
-		hideEntity $1
+		hide $1
 		setActscriptWait $2,eas_Init
 		startEntity $2
 		setFacing $2,DOWN
-		entityShakeHead $2
+		headshake $2
 		csWait 30
 		setCamDest 24,9
 		entityActionsWait $2
@@ -325,7 +325,7 @@ cs_62FB0:       textCursor $F93
 		entityActionsWait $4
 		 moveDown 5
 		endActions
-		hideEntity $4
+		hide $4
 		csWait 30
 		nextSingleText $0,$2    ; "What does he mean?{N}I don't understand!{W1}"
 		entityActionsWait $B
@@ -341,7 +341,7 @@ cs_62FB0:       textCursor $F93
 		 faceRight 1
 		endActions
 		nextSingleText $0,$1A   ; "{NAME;11}, you were young{N}once?{W1}"
-		entityShiver $1A
+		shiver $1A
 		setFacing $B,LEFT
 		setActscriptWait $B,eas_Jump
 		setActscriptWait $B,eas_Jump
@@ -363,10 +363,10 @@ cs_62FB0:       textCursor $F93
 		nextText $80,$A         ; "You heard everyone.{N}We think {LEADER} is the{N}right choice.{W2}"
 		setFacing $A,DOWN
 		nextText $80,$A         ; "{NAME;4} will take care{N}of {NAME;1}.{W2}"
-		entityNod $81
+		nod $81
 		setFacing $A,UP
 		nextSingleText $80,$A   ; "Everything went as you{N}expected, huh?{W1}"
-		entityShiver $81
+		shiver $81
 		nextText $0,$81         ; "You knew that?{N}{NAME;10}, you're smart.{W2}"
 		nextText $0,$81         ; "But I didn't know what{N}{NAME;1} or {NAME;3} would do.{W2}I didn't want to hurt their{N}feelings.{W1}"
 		nextSingleText $0,$81   ; "{LEADER}, I choose you.{W1}"

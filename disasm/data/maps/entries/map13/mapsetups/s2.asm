@@ -245,7 +245,7 @@ cs_58116:       textCursor $595
 		setQuake 5
 		flashScreenWhite $46
 		setQuake 0
-		entityShakeHead $89
+		headshake $89
 		nextText $0,$89         ; "Whoa!  Mt. Volcano erupted!{W2}"
 		nextSingleText $0,$89   ; "It's an evil omen.{W1}"
 		csc_end

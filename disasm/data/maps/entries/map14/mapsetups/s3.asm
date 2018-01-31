@@ -44,5 +44,5 @@ cs_58E5C:       textCursor $8D5
 		entityActionsWait $85
 		 moveDown 3
 		endActions
-		mapSysEvent $E,$D,$B,$3
+		warp $E,$D,$B,$3
 cs_58EB8:       csc_end

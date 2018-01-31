@@ -41,7 +41,7 @@ cs_5A33A:       textCursor $6AF
 		 ac_setSpeed 0,0        ;   
 		 ac_jump eas_Idle       ;   
 		ac_end
-		setEntityDest $9E,8,11
+		setDest $9E,8,11
 		nextSingleText $0,$9E   ; "Where is the sick dwarf?{W1}"
 		csWait 5
 		setActscript $9E,eas_461B6
@@ -71,9 +71,9 @@ cs_5A33A:       textCursor $6AF
 		nextText $0,$9E         ; "Oh, I hope I'm not too late.{W2}"
 		nextSingleText $0,$9E   ; "Ok, let's see.{W1}"
 		csWait 50
-		entityShiver $9E
+		shiver $9E
 		csWait 30
-		entityShiver $9E
+		shiver $9E
 		csWait 20
 		entityFlashWhite $9E,$78
 		mapFadeOutToWhite
@@ -89,7 +89,7 @@ cs_5A33A:       textCursor $6AF
 		setFacing $81,LEFT
 		nextSingleText $0,$81   ; "How is he?{W1}"
 		csWait 15
-		entityShakeHead $84
+		headshake $84
 		nextSingleText $0,$84   ; "I don't know yet....{W1}"
 		csWait 60
 		setActscriptWait $82,eas_Init
@@ -119,7 +119,7 @@ cs_5A33A:       textCursor $6AF
 		setFacing $84,LEFT
 		setFacing $9E,UP
 		nextSingleText $0,$80   ; "Oh, how can we thank you?{W1}"
-		entityNod $82
+		nod $82
 		nextText $0,$9E         ; "I don't need anything.{W2}"
 		nextSingleText $0,$9E   ; "But, why don't you help{N}{LEADER}?{W1}"
 		csWait 15
@@ -146,7 +146,7 @@ cs_5A33A:       textCursor $6AF
 		 moveRight 1
 		 moveDown 5
 		endActions
-		hideEntity $9E
+		hide $9E
 		setCamDest 4,7
 		entityActions $0
 		 moveRight 2
@@ -179,7 +179,7 @@ cs_5A4FE:       textCursor $6C2
 		entityActionsWait $0
 		 moveLeft 1
 		endActions
-		setEntityDest $7,8,10
+		setDest $7,8,10
 		entityActions $80
 		 moveLeft 2
 		endActions
@@ -234,7 +234,7 @@ cs_5A4FE:       textCursor $6C2
 		 moveDown 1
 		endActions
 		setFacing $82,LEFT
-		entityNod $82
+		nod $82
 		entityActionsWait $82
 		 moveUp 2
 		 moveLeft 1

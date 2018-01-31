@@ -28,7 +28,7 @@ return_5D63A:
 cs_5D63C:       setPos $88,30,6,LEFT
 		csc_end
 cs_5D644:       setPos $89,8,3,LEFT
-		animEntityFadeInOut $89,$5
+		animEntityFX $89,5
 		csc_end
 cs_5D652:       textCursor $7E8
 		nextSingleText $0,$88   ; "Oh, you're cute!{N}(Cough)...well...{W1}"
@@ -41,10 +41,10 @@ cs_5D65E:       textCursor $7EB
 		nextSingleText $0,$88   ; "Then, would you stand over{N}there, in front of the{N}flowers?{W1}"
 		setActscriptWait $7,eas_Init
 		setActscriptWait $1F,eas_Init
-		setEntityDest $0,28,3
+		setDest $0,28,3
 		setFacing $0,DOWN
-		setEntityDest $7,27,4
-		setEntityDest $1F,27,5
+		setDest $7,27,4
+		setDest $1F,27,5
 		setFacing $88,UP
 		setActscriptWait $88,eas_46172
 		entityActionsWait $88

@@ -13,7 +13,7 @@ sub_5F370:
 		dc.l VInt_UpdateEntities
 		clr.w   d0
 		jsr     WaitForEntityToStopMoving
-		tst.b   ((ENTITY_DATA_STRUCT_FACING-$1000000)).w
+		tst.b   ((ENTITY_FACING-$1000000)).w
 		bne.s   loc_5F38E
 		lea     cs_5F3A2(pc), a0
 		trap    #MAPSCRIPT

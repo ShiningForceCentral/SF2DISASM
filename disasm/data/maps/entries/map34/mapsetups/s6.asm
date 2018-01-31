@@ -72,7 +72,7 @@ cs_5B6C0:       textCursor $C87
 		nextSingleText $0,$82   ; "Creed, what do you want?{W1}"
 		nextSingleText $80,$80  ; "Zeon.{W1}"
 		nextSingleText $0,$82   ; "Zeon?!  The King of the{N}Devils?{W1}"
-		entityNod $80
+		nod $80
 		nextText $80,$80        ; "Yes.{W2}"
 		nextText $80,$80        ; "He was unsealed.{W1}"
 		nextText $80,$80        ; "What is he doing now?{N}What is he going to do?{W2}"
@@ -109,7 +109,7 @@ cs_5B6C0:       textCursor $C87
 		setActscriptWait $80,eas_Jump
 		nextSingleText $80,$80  ; "What did you find?{W1}"
 		nextSingleText $0,$82   ; "The barrier around Grans{N}Island is too strong.{N}I can't see anything.{W1}"
-		entityShiver $80
+		shiver $80
 		nextSingleText $80,$80  ; "Please try again!{W1}"
 		nextSingleText $0,$82   ; "If I touch something of his,{N}maybe I could contact his{N}mind better....{W1}"
 		setCamDest 2,5
@@ -147,16 +147,16 @@ cs_5B6C0:       textCursor $C87
 		endActions
 		csWait 2
 		setActscriptWait $80,eas_461AA
-		entityShakeHead $80
+		headshake $80
 		nextText $80,$80        ; "Whhoooa!{W2}"
 		nextSingleText $80,$80  ; "What's that light?{N}There are two!{W1}"
 		nextSingleText $0,$7    ; "The other one is...{N}...ahhh...they called it,{N}the Jewel of Light.{W1}"
-		entityShiver $80
+		shiver $80
 		nextText $80,$80        ; "What?!{W2}"
 		nextText $80,$80        ; "{LEADER}, do you have both{N}of the legendary jewels?{W2}"
 		nextText $80,$80        ; "I can't remove them.{N}The chain is made of Mithril.{W2}"
 		nextSingleText $80,$80  ; "Show them to him.{N}They might help him.{W1}"
-		entityNod $0
+		nod $0
 		csWait 20
 		setCamDest 2,4
 		setActscriptWait $80,eas_Init
@@ -232,7 +232,7 @@ cs_5B6C0:       textCursor $C87
 		nextSingleText $80,$80  ; "What's this?!{W1}"
 		nextText $0,$83         ; "Who's contacting me?{N}Do you want to die?{W1}"
 		nextSingleText $0,$83   ; "Ggggooo...I see a jewel.{N}The Jewel of Evil!{W1}"
-		entityShiver $80
+		shiver $80
 		nextText $80,$80        ; "He's seeing us through the{N}eyes of Evil Spirit!{W2}"
 		nextSingleText $80,$80  ; "Impossible!{W1}"
 		nextText $0,$83         ; "You're {LEADER}.{N}I see you....{W2}"
@@ -462,7 +462,7 @@ cs_5B6C0:       textCursor $C87
 		entityActionsWait $8C
 		 moveDownRight 4
 		endActions
-		hideEntity $82
+		hide $82
 		playSound SFX_BATTLEFIELD_DEATH
 		playSound SFX_BIG_DOOR_RUMBLE
 		setPos $85,7,6,RIGHT
@@ -530,23 +530,23 @@ cs_5B6C0:       textCursor $C87
 		entityActionsWait $8C
 		 moveDownRight 4
 		endActions
-		hideEntity $85
-		hideEntity $86
-		hideEntity $87
-		hideEntity $88
-		hideEntity $89
-		hideEntity $8A
-		hideEntity $8B
-		hideEntity $8C
+		hide $85
+		hide $86
+		hide $87
+		hide $88
+		hide $89
+		hide $8A
+		hide $8B
+		hide $8C
 		csWait 40
-		hideEntity $8D
-		hideEntity $8E
-		hideEntity $8F
-		hideEntity $90
-		hideEntity $91
-		hideEntity $92
-		hideEntity $93
-		hideEntity $94
+		hide $8D
+		hide $8E
+		hide $8F
+		hide $90
+		hide $91
+		hide $92
+		hide $93
+		hide $94
 		setQuake 16389
 		executeSubroutine sub_55F82
 		csWait 60
@@ -569,7 +569,7 @@ cs_5B6C0:       textCursor $C87
 		 moveLeft 1
 		 moveDown 5
 		endActions
-		hideEntity $80
+		hide $80
 		entityActionsWait $81
 		 moveLeft 1
 		 moveDown 1
@@ -583,7 +583,7 @@ cs_5B6C0:       textCursor $C87
 		entityActionsWait $81
 		 moveDown 5
 		endActions
-		hideEntity $81
+		hide $81
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
 		csc_end

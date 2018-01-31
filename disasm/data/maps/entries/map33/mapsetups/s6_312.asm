@@ -54,7 +54,7 @@ cs_5AC58:       textCursor $70C
 		setFacing $0,UP
 		setFacing $1F,UP
 		nextSingleText $0,$7    ; "Excuse me.{W1}"
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "Yeow!{W1}"
 		stopEntity $80
 		csWait 30
@@ -74,7 +74,7 @@ cs_5AC58:       textCursor $70C
 		entityActionsWait $7
 		 moveDown 1
 		endActions
-		entityShakeHead $0
+		headshake $0
 		entityActionsWait $7
 		 moveUp 1
 		endActions
@@ -99,14 +99,14 @@ cs_5AC58:       textCursor $70C
 		nextSingleText $0,$7    ; "But, it is a good idea.{W1}"
 		setFacing $80,UP
 		csWait 10
-		entityShiver $80
+		shiver $80
 		entityActionsWait $7
 		 moveLeft 1
 		endActions
 		setFacing $0,UP
 		setFacing $7,UP
 		setFacing $1F,UP
-		entityShiver $80
+		shiver $80
 		csWait 10
 		nextSingleText $0,$80   ; "Hmmmph....{W1}"
 		csWait 20
@@ -140,15 +140,15 @@ cs_5AC58:       textCursor $70C
 		 moveUp 3
 		endActions
 		csWait 10
-		animEntityFadeInOut $80,$2
+		animEntityFX $80,2
 		setPos $80,17,12,DOWN
-		animEntityFadeInOut $80,$3
+		animEntityFX $80,3
 		waitIdle $0
 		setActscript $7,eas_BumpUp
 		setActscript $1F,eas_BumpUp
 		setActscriptWait $0,eas_BumpUp
 		nextSingleText $0,$7    ; "How did he do that?{W1}"
-		entityShiver $80
+		shiver $80
 		nextText $0,$80         ; "You impolite kids!{N}You can't go in!{W2}"
 		nextSingleText $0,$80   ; "Mr. Creed is too busy!{N}Go away!{W1}"
 		setActscriptWait $0,eas_46172
@@ -188,7 +188,7 @@ cs_5AC58:       textCursor $70C
 		setFacing $0,RIGHT
 		setFacing $1F,LEFT
 		nextSingleText $0,$1F   ; "{LEADER}, let's do it!{N}I don't want to fail now!{W1}"
-		entityNod $0
+		nod $0
 		setFacing $7,UP
 		nextText $0,$7          ; "OK, OK.  We give up.{W2}"
 		nextSingleText $0,$7    ; "We'll see Mr. Creed later.{N}Let's get out of here.{W1}"
@@ -251,7 +251,7 @@ cs_5AF36:       textCursor $72A
 		endActions
 		setActscriptWait $80,eas_Jump
 		csWait 20
-		mapSysEvent $16,$0,$0,$3
+		warp $16,$0,$0,$3
 		csc_end
 cs_5B016:       textCursor $730
 		reloadMap 12,2
@@ -280,10 +280,10 @@ cs_5B016:       textCursor $730
 		nextSingleText $0,$80   ; "Yes, Mr. Creed?{W1}"
 		nextSingleText $80,$81  ; "My collection is rather noisy{N}today.{W1}"
 		csWait 10
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "Oh, yes...ah...{W1}"
 		nextSingleText $80,$81  ; "What?{W1}"
-		entityShakeHead $80
+		headshake $80
 		nextSingleText $0,$80   ; "No, I...I added to your{N}collection today.{W1}"
 		customActscriptWait $81
 		 ac_setSpeed 48,48      ;   
@@ -294,17 +294,17 @@ cs_5B016:       textCursor $730
 		endActions
 		nextSingleText $80,$81  ; "You did what?!{W1}"
 		setQuake 3
-		entityShiver $80
+		shiver $80
 		setQuake 0
-		entityShiver $80
+		shiver $80
 		nextText $0,$80         ; "I'm sorry!{W2}"
 		nextSingleText $0,$80   ; "I tried to stop them, but they{N}jumped through the magic door.{W1}"
 		nextText $80,$81        ; "You didn't lock the door, did{N}you?{W2}"
 		nextSingleText $80,$81  ; "I told you to always lock{N}that door!{W1}"
 		setQuake 3
-		entityShiver $80
+		shiver $80
 		setQuake 0
-		entityShiver $80
+		shiver $80
 		csWait 20
 		setFacing $81,UP
 		csWait 30
@@ -318,7 +318,7 @@ cs_5B016:       textCursor $730
 		csWait 20
 		setFacing $81,DOWN
 		nextSingleText $80,$81  ; "Anyway, I want to see them.{W1}"
-		entityNod $80
+		nod $80
 		nextSingleText $0,$80   ; "Right away, sir!{W1}"
 		customActscriptWait $80
 		 ac_setSpeed 48,48      ;   
@@ -369,9 +369,9 @@ cs_5B016:       textCursor $730
 		 moveUp 1
 		endActions
 		csWait 40
-		entityShiver $81
+		shiver $81
 		csWait 30
-		entityShiver $81
+		shiver $81
 		csWait 20
 		nextSingleText $80,$81  ; "Abra kadabra!  1-2-3!{W1}"
 		flashScreenWhite $4
@@ -399,11 +399,11 @@ cs_5B016:       textCursor $730
 		csWait 120
 		setFacing $7,RIGHT
 		nextSingleText $0,$7    ; "Wow, we're back to normal!{N}I can't believe we were so{N}small!{W1}"
-		entityNod $0
-		entityNod $0
+		nod $0
+		nod $0
 		setFacing $0,RIGHT
-		entityNod $1F
-		entityNod $1F
+		nod $1F
+		nod $1F
 		nextSingleText $80,$81  ; "Now, why did you want to see{N}me?{W1}"
 		setFacing $0,UP
 		setFacing $7,UP
@@ -420,7 +420,7 @@ cs_5B016:       textCursor $730
 		 moveDown 1
 		endActions
 		nextSingleText $0,$82   ; "Did something happen to{N}Zeon?  Has he revived?{W1}"
-		entityNod $0
+		nod $0
 		nextSingleText $FF,$FF  ; "{LEADER} nods.{W1}"
 		csWait 5
 		setActscript $82,eas_461B6
@@ -441,7 +441,7 @@ cs_5B016:       textCursor $730
 		endActions
 		setFacing $81,DOWN
 		nextSingleText $80,$81  ; "Is what you say true?{W1}"
-		entityNod $0
+		nod $0
 		nextSingleText $FF,$FF  ; "{LEADER} nods again.{W1}"
 		customActscriptWait $81
 		 ac_setSpeed 16,16      ;   
@@ -470,10 +470,10 @@ cs_5B016:       textCursor $730
 		endActions
 		nextSingleText $0,$80   ; "How...?{W1}"
 		setFacing $81,RIGHT
-		entityShiver $81
+		shiver $81
 		nextSingleText $0,$81   ; "It doesn't matter how!{N}Now, go away!{W1}"
 		setQuake 4
-		entityShiver $80
+		shiver $80
 		setQuake 0
 		setActscriptWait $80,eas_Jump
 		setActscriptWait $80,eas_Jump
@@ -497,7 +497,7 @@ cs_5B016:       textCursor $730
 		nextText $0,$81         ; "Volcanon and Mitula are{N}invulnerable to everything, {N}except Zeon!{W2}"
 		nextSingleText $0,$81   ; "Indeed...Zeon is extremely{N}powerful!{W1}"
 		setFacing $80,UP
-		entityShiver $80
+		shiver $80
 		setActscriptWait $80,eas_46172
 		customActscriptWait $80
 		 ac_setSpeed 16,16      ;   
@@ -525,7 +525,7 @@ cs_5B016:       textCursor $730
 		 moveUp 2
 		 moveLeft 4
 		endActions
-		hideEntity $81
+		hide $81
 		setActscriptWait $82,eas_Init2
 		entityActionsWait $82
 		 moveLeft 1
@@ -538,7 +538,7 @@ cs_5B016:       textCursor $730
 		 moveUp 2
 		 moveLeft 4
 		endActions
-		hideEntity $82
+		hide $82
 		followEntity $7,$0,$2
 		followEntity $1F,$7,$2
 		csc_end
@@ -547,7 +547,7 @@ cs_5B466:       textCursor $78C
 		csWait 20
 		setFacing $7,UP
 		setFacing $0,UP
-		entityShiver $1F
+		shiver $1F
 		csWait 20
 		nextSingleText $0,$7    ; "Oddler?{W1}"
 		nextSingleText $0,$81   ; "I understand you.{W1}"
@@ -562,10 +562,10 @@ cs_5B466:       textCursor $78C
 		setPos $7,15,22,UP
 		setPos $1F,16,22,UP
 		setPos $82,16,23,UP
-		hideEntity $E
-		hideEntity $10
-		hideEntity $11
-		hideEntity $F
+		hide $E
+		hide $10
+		hide $11
+		hide $F
 		setCameraEntity $81
 		entityActionsWait $81
 		 moveDown 2
@@ -599,7 +599,7 @@ cs_5B466:       textCursor $78C
 		setFacing $1F,LEFT
 		setFacing $81,RIGHT
 		csWait 60
-		entityNod $81
+		nod $81
 		csWait 30
 		entityActionsWait $81
 		 moveLeft 1
@@ -611,7 +611,7 @@ cs_5B466:       textCursor $78C
 		endActions
 		nextText $80,$1F        ; "It was great travelling with{N}you {LEADER}.{W2}"
 		nextSingleText $80,$1F  ; "Thank you.  Please be{N}careful.{W1}"
-		entityNod $1F
+		nod $1F
 		csWait 30
 		entityActionsWait $1F
 		 moveUp 1
@@ -624,7 +624,7 @@ cs_5B466:       textCursor $78C
 		entityActionsWait $1F
 		 moveUp 3
 		endActions
-		hideEntity $1F
+		hide $1F
 		entityActionsWait $81
 		 moveRight 1
 		 faceDown 1

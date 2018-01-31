@@ -39,7 +39,7 @@ abcs_battle28:  textCursor $A6E
 		nextText $0,$1F         ; "We'll take you with us.{W2}"
 		nextSingleText $0,$1F   ; "Tristan is the nearest town.{N}I think you had better rest{N}there.{W1}"
 		nextSingleText $0,$80   ; "Thank you, sir.{W1}"
-		entitySprite $80,$C5
+		setSprite $80,$C5
 		entityActions $80
 		 moveUp 2
 		endActions
@@ -87,14 +87,14 @@ abcs_battle28:  textCursor $A6E
 		entityFlashWhite $80,$28
 		flashScreenWhite $14
 		setPos $80,11,30,RIGHT
-		entitySprite $80,$AF
+		setSprite $80,$AF
 		setFacing $80,UP
 		csWait 8
 		setFacing $80,LEFT
 		csWait 8
 		setFacing $80,DOWN
 		csWait 8
-		entitySprite $80,$9C
+		setSprite $80,$9C
 		setFacing $80,RIGHT
 		startEntity $80
 		setActscript $0,eas_Jump
@@ -153,7 +153,7 @@ abcs_battle28:  textCursor $A6E
 		 moveDown 1
 		endActions
 		csWait 30
-		hideEntity $82
+		hide $82
 		nextSingleText $0,$1F   ; "Well done.  You dodged my{N}fireball.{W1}"
 		nextText $C0,$80        ; "What a surprising old wizard!{W2}"
 		nextText $C0,$80        ; "I didn't think I could obtain{N}the jewel that easily.{N}Ha, ha!{W2}"
@@ -208,7 +208,7 @@ abcs_battle28:  textCursor $A6E
 		followEntity $81,$0,$2
 		followEntity $1F,$81,$1
 		followEntity $7,$81,$3
-		mapSysEvent $FF,$10,$1E,$0
+		warp $FF,$10,$1E,$0
 		csc_end
 ce_4C3B4:       mainEntity 12,28,DOWN
 		entity 12,31,UP,176,eas_Init

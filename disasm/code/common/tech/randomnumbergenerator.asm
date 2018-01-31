@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; randomize a few bits in D7 based on RAM:dea4
+; d6 determines the random number max value
+; (number of seed upper bits)
 
 UpdateRandomSeed:
 		
@@ -72,7 +73,9 @@ GetRandomValueUnsigned:
 
 ; =============== S U B R O U T I N E =======================================
 
-; another random function taking debug mode into account
+; input D0=value range
+; output D0=random value
+; debug mode allows values 0-3 depending on player direction
 
 GetRandomOrDebugValue:
 		
@@ -80,17 +83,17 @@ GetRandomOrDebugValue:
 		move.w  d0,d6
 		tst.b   (DEBUG_MODE_ACTIVATED).l
 		beq.s   loc_16B2
-		moveq   #INPUT_A_UP_BIT,d0
-		btst    #3,((P1_INPUT-$1000000)).w
+		moveq   #0,d0
+		btst    #INPUT_A_RIGHT_BIT,((P1_INPUT-$1000000)).w
 		bne.w   loc_16B8
-		moveq   #INPUT_A_DOWN_BIT,d0
-		btst    #0,((P1_INPUT-$1000000)).w
+		moveq   #1,d0
+		btst    #INPUT_A_UP_BIT,((P1_INPUT-$1000000)).w
 		bne.w   loc_16B8
-		moveq   #INPUT_A_LEFT_BIT,d0
-		btst    #2,((P1_INPUT-$1000000)).w
+		moveq   #2,d0
+		btst    #INPUT_A_LEFT_BIT,((P1_INPUT-$1000000)).w
 		bne.w   loc_16B8
-		moveq   #INPUT_A_RIGHT_BIT,d0
-		btst    #1,((P1_INPUT-$1000000)).w
+		moveq   #3,d0
+		btst    #INPUT_A_DOWN_BIT,((P1_INPUT-$1000000)).w
 		bne.w   loc_16B8
 loc_16B2:
 		bsr.w   UpdateRandomSeed

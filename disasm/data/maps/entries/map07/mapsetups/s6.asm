@@ -39,7 +39,7 @@ cs_55832:       textCursor $50A
 		 moveLeft 1
 		endActions
 		setFacing $80,DOWN
-		entityNod $80
+		nod $80
 		nextText $0,$80         ; "(Cough)...our town is being{N}rebuilt, as you can see.{W2}"
 		nextText $0,$80         ; "But, we will be better off{N}if there are no accidents.{W2}"
 		nextText $0,$80         ; "You're too young to spend{N}your time guarding our new{N}home.{W2}"
@@ -61,7 +61,7 @@ cs_55832:       textCursor $50A
 		setFacing $80,LEFT
 		setFacing $8B,RIGHT
 		nextSingleText $0,$80   ; "Sir Astral, please speak in{N}place of our King.{W1}"
-		entityNod $8B
+		nod $8B
 		nextSingleText $0,$8B   ; "Ummmm...OK, I got it.{W1}"
 		csWait 20
 		entityActionsWait $80
@@ -78,7 +78,7 @@ cs_55832:       textCursor $50A
 		nextText $0,$8B         ; "One year has passed since{N}we came here.{W2}"
 		nextText $0,$8B         ; "The castle, the town...{N}everything is coming along{N}nicely.{W2}"
 		nextText $0,$8B         ; "But we lack something.{N}What is it?  It's trading!{W2}"
-		entityNod $80
+		nod $80
 		nextSingleText $0,$8B   ; "We need to make alliances{N}with other towns.{W1}"
 		setFacing $8B,RIGHT
 		setFacing $80,LEFT
@@ -176,7 +176,7 @@ cs_55A36:       textCursor $4AE
 		nextText $C0,$7         ; "To tell the truth, I hurt{N}my wing during this trip.{W2}"
 		nextText $C0,$7         ; "I stopped by here to ask{N}for help.{W2}"
 		nextSingleText $C0,$7   ; "But, I don't want to trouble{N}you....{W1}"
-		entityNod $8B
+		nod $8B
 		nextSingleText $0,$8B   ; "Don't worry.  These lads{N}love trouble.{W1}"
 		entityActionsWait $8B
 		 moveDown 1
@@ -204,7 +204,7 @@ cs_55A36:       textCursor $4AE
 		csWait 30
 		nextText $0,$80         ; "We came here just a year{N}ago.{W2}"
 		nextSingleText $0,$80   ; "We're still learning about{N}this country.  You're needed{N}here.{W1}"
-		entityNod $81
+		nod $81
 		nextSingleText $0,$81   ; "He's right.  You must stay.{W1}"
 		entityActions $80
 		 moveUp 1
@@ -220,13 +220,13 @@ cs_55A36:       textCursor $4AE
 		csWait 60
 		nextText $0,$8B         ; "Hmmmmm....{W2}"
 		setFacing $8B,UP
-		entityNod $8B
+		nod $8B
 		nextSingleText $0,$8B   ; "Y...yes.{W1}"
 		entityActionsWait $7
 		 moveUp 1
 		endActions
 		nextSingleText $C0,$7   ; "Then, they're my companions!{W1}"
-		entityNod $81
+		nod $81
 		entityActionsWait $7
 		 moveDown 2
 		endActions
@@ -245,7 +245,7 @@ cs_55A36:       textCursor $4AE
 		followEntity $4,$0,$6
 		csWait 60
 		nextSingleText $0,$81   ; "Minister, bring the gift!{W1}"
-		entityNod $80
+		nod $80
 		nextSingleText $0,$80   ; "Yes, sir.{W1}"
 		entityActionsWait $80
 		 moveRight 2
@@ -270,19 +270,19 @@ cs_55A36:       textCursor $4AE
 		endActions
 		nextSingleText $0,$8B   ; "Good luck, {LEADER}.{W2}"
 		nextSingleText $0,$8B   ; "Find as many friends as you{N}can on your journey with{N}{NAME;7}.{W1}"
-		entityNod $0
+		nod $0
 		csWait 60
 		setCameraEntity $0
 		entityActionsWait $0
 		 moveDown 18
 		endActions
-		mapSysEvent $6,$B,$1,$3
+		warp $6,$B,$1,$3
 		csc_end
 cs_55BEE:       textCursor $4E1
 		setActscriptWait $7,eas_Init
 		nextSingleText $0,$80   ; "Welcome back, {LEADER}.{W1}"
-		setEntityDest $8000,11,7
-		setEntityDest $7,10,8
+		setDest $8000,11,7
+		setDest $7,10,8
 		setCamDest 6,2
 		setFacing $0,UP
 		setFacing $7,UP
@@ -362,40 +362,40 @@ cs_55BEE:       textCursor $4E1
 		entityActionsWait $7
 		 moveUp 1
 		endActions
-		entityNod $0
+		nod $0
 		setActscript $7,eas_Jump
-		entityNod $80
+		nod $80
 		setFacing $7,RIGHT
 		setActscript $0,eas_Jump
-		entityNod $8B
+		nod $8B
 		entityActions $7
 		 moveUp 1
 		endActions
-		entityShakeHead $0
+		headshake $0
 		setActscriptWait $7,eas_Jump
 		entityActionsWait $7
 		 moveRight 2
 		endActions
 		setFacing $7,UP
-		entityNod $80
+		nod $80
 		setActscriptWait $8B,eas_Jump
-		entityNod $0
+		nod $0
 		nextSingleText $FF,$FF  ; "{LEADER} and {NAME;7}{N}explain in detail.{W1}"
 		entityActionsWait $7
 		 moveLeft 1
 		 moveUp 1
 		endActions
-		entityNod $7
+		nod $7
 		setFacing $8B,RIGHT
 		setFacing $80,LEFT
 		setActscriptWait $81,eas_Jump
-		entityNod $81
+		nod $81
 		entityActionsWait $0
 		 moveLeft 1
 		 moveUp 1
 		endActions
 		setFacing $8B,DOWN
-		entityNod $0
+		nod $0
 		entityActionsWait $0
 		 moveDown 1
 		 moveRight 1
@@ -445,7 +445,7 @@ cs_55BEE:       textCursor $4E1
 		setFacing $80,LEFT
 		nextText $0,$8B         ; "We have to go to North{N}Parmecia.{W2}"
 		nextSingleText $0,$8B   ; "We'd better go and see the{N}storytellers in Tristan.{W1}"
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "Sir!{W1}"
 		setFacing $8B,RIGHT
 		nextSingleText $FF,$FF  ; "Astral winks at the Minister{N}and smiles.{W1}"
@@ -455,7 +455,7 @@ cs_55BEE:       textCursor $4E1
 		nextText $0,$80         ; "Be careful, Astral.{W2}"
 		nextSingleText $0,$80   ; "It's dangerous out there.{W1}"
 		setFacing $8B,RIGHT
-		entityNod $8B
+		nod $8B
 		nextSingleText $0,$8B   ; "I will!{W1}"
 		setFacing $8B,DOWN
 		nextText $0,$8B         ; "{LEADER}.{W2}"
@@ -465,7 +465,7 @@ cs_55BEE:       textCursor $4E1
 		executeSubroutine j_FadeOut_WaitForP2Input
 		hideText
 		nextSingleText $0,$8B   ; "We have to remove the rocks{N}blocking the passageway{N}leading to North Parmecia.{W2}{N}Maybe we can use an{N}explosive!{W1}"
-		entityNod $0
+		nod $0
 		followEntity $7,$0,$2
 		addNewFollower $8B
 		setF $46                ; Astral is a follower

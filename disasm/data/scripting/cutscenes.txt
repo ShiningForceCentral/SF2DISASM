@@ -1,14 +1,14 @@
 $0000 - nextSingleText - Display next single text line
 Displays textbox with next line from current text cursor, and then hides textbox and optional portrait.
 2 params : 
-- byte : portrait display/hide (0=no portrait, bit 7=right, bit 6=Horizontal Flip, $FF=hide currently displayed portrait)
+- byte : portrait options : 0=default left display, bit 7($80)=right display, bit 6($40)=Horizontal Flip, $FF=hide currently displayed portrait
 - byte : portrait index
 
-$0001 - nextSingleTextVar - Display next single line with more parameters
+$0001 - nextSingleTextVar - Display next single line with name parameters
 Same as above with name index parameters. 
-Not used in the whole game.
+Not used anywhere in the whole game.
 4 params :
-- byte : portrait display/hide (0=no portrait, bit 7=right, bit 6=Horizontal Flip, $FF=hide currently displayed portrait)
+- byte : portrait options (see command 0)
 - byte : portrait index
 - word : name index 1
 - word : name index 2
@@ -16,14 +16,14 @@ Not used in the whole game.
 $0002 - nextText - Display next text line
 Displays textbox with next line from current text cursor, and doesn't hide textbox and optional portrait in order to display more text lines.
 2 params : 
-- byte : portrait display/hide (0=no portrait, bit 7=right, bit 6=Horizontal Flip, $FF=hide currently displayed portrait)
+- byte : portrait options (see command 0)
 - byte : portrait index
 
-$0003 - nextTextVar - Display next line with more parameters
+$0003 - nextTextVar - Display next line with name parameters
 Same as above with name index parameters. 
-Not used in the whole game.
+Not used anywhere in the whole game.
 5 params :
-- byte : portrait display/hide (0=no portrait, bit 7=right, bit 6=Horizontal Flip, $FF=hide currently displayed portrait)
+- byte : portrait options (see command 0)
 - byte : portrait index
 - word : name index 1
 - word : name index 2
@@ -38,25 +38,23 @@ Sends parameter value to the sound driver to play either a music, an SFX or a so
 1 param :
 - word : sound index/command. Refer to disasm\sf2enums.asm for music/sfx constant values.
 
-$0007 - mapSysEvent - Execute map system event
-No idea what it does :D ! Will have to check where and how it's used in the game to figure it out.
+$0007 - warp - Execute warp map event
+Warps player to given destination.
 4 params :
-- byte : ?
-- byte : ?
-- byte : ?
-- byte : ?
-Actually, the long value may be several separate parameters like 2 words or 4 bytes, no idea at the moment.
-Earl's info : "00 07 nm xx yy ff = switch map, nm=new map, with x/y and facing on new (6 bytes)"
+- byte : Dest map
+- byte : Dest X
+- byte : Dest Y
+- byte : Dest Facing
 
 $0008 - join - Character joins Force
-Trigger the fact that given ally is now in Force.
-(display join text, play music, update roster)
+Trigger the event by displaying join text, playing music, updating Force member list.
 1 param :
-- word : character index. Should make good use of enumeration constants in the future. ("$3" would become "JAHA", for instance)
-Character IDs are from 00-1D (Bowie-Claude), although 80 is used for Sarah + Chester (who join simultaneously)
+- word : character index
+Character IDs are from 00-1D (Bowie-Claude).
+Harcoded special case : value $80 is used for Sarah + Chester who join simultaneously.
 
 $0009 - hideText - Hide textbox and optional portait.
-Probably used in conjunction with "nextText" and "nextTextVar" commands.
+Used in conjunction with "nextText" and "nextTextVar" commands, or after a textbox was left open by ASM code (TRAP #5 calls).
 No params.
 
 $000A - executeSubroutine - Execute a given piece of ASM code
@@ -72,13 +70,13 @@ Simple "go to" command.
 $000C - jumpIfFlagSet - Jump if flag is set
 Conditional command.
 2 params :
-- word : flag index. Should also benefit from a flag map/enumeration at some point. Until then please refer to existing flag knowledge from dedicated topics.
+- word : flag index.
 - long : as above with jump, named target address
 
 $000D - jumpIfFlagClear - Jump if flag clear
 Same as above
 
-$000E - jumpIfDead - Jump if character dead
+$000E - jumpIfDefeated - Jump if character defeated
 2 params : 
 - word : character index
 - long : named target
@@ -93,15 +91,12 @@ $0010 - clearF - Clear flag
 Same as above
 
 $0011 - yesNo - Display "yes/no" choice
-Didn't look at it yet but I guess it relies on a "jumpIfFlagSet" just after.
+Sets flag $59 value for following conditionnal jump.
 No params.
 
-$0012 - contextualMenu -Execute contextual menu
-To clarify !
+$0012 - menu - Execute contextual menu
 1 param :
-- word : ? 
-Maybe the menu identifier ? (Church, shop, caravan ...) Need to check how it's used.
-Earl says "00 12 00 00 = calls priest menus" so value 0 must be priest menu, 1 probably shop and 2 for Caravan ?
+- word : 0 = church, 1 = shop, 2 = blacksmith
 
 $0013 - setStoryFlag - Set story-specific flag
 The flag map contains an array of "story flags" which are set for every story step to save. 
@@ -114,8 +109,8 @@ Next commands are actually an entity actscript to apply to an entity (= a map sp
 Should be used only for actscripts which won't be used anywhere else in the game. 
 Otherwise, use the "setAcscript" command by pointing to a externally declared actscript.
 2 params :
-- byte : entity on which to apply actscript ?
-- byte : (quick guess at first glance, to confirm) $FF if we have to wait for the end of execution of custom actscript, or 0 otherwise to continue cutscene immediately.
+- byte : entity index
+- byte : $FF if we have to wait for the end of execution of custom actscript, or 0 otherwise to continue cutscene immediately.
 Easier macros created : 
 - customActscript which doesn't wait for the end of actscript
 - and customActscriptWait, which does.
@@ -137,8 +132,7 @@ $0016 - waitIdle - Wait for entity to stop before continuing cutscene execution
 - word : entity index
 
 $0017 - setPosFlash - Set entity position, direction, and make it flash
-Not sure what that "flash" thing does, will have to see how it's used.
-Earl : This is only used for Hawel, when he dies.
+Disappearance effect used when Hawel dies, and when the boat is dismantled.
 4 params :
 - byte : entity index
 - byte : map X
@@ -146,39 +140,37 @@ Earl : This is only used for Hawel, when he dies.
 - byte : direction
 
 $0018 - entityFlashWhite - Make entity flash white
-To clarify
 2 params :
-- word : entity index ?
-- word : flash parameter ? Frequency maybe ?
+- word : entity index
+- word : duration in frames
 
 $0019 - setPos - Set entity position and direction
-Same as "setPosFlash" with no flash.
 4 params :
 - byte : entity index
 - byte : map X
 - byte : map Y
 - byte : direction
 
-$001A - entitySprite - Set entity sprite
+$001A - setSprite - Set entity sprite
 2 params :
 - word : entity index
 - word : sprite index
 
 $001B - startEntity - Start entity animation
-May be used after specific entity loading command ? To clarify ...
 1 param :
 - word : entity index
 
 $001C - stopEntity - Stop entity animation
-Also to clarify
 1 param :
 - word : entity index
 
 $001D - showPortrait - Show portrait
-Show portrait only with no textbox ? Maybe used when showing Bowie's painting ? 
-Earl : used in final room of ancient tower
-1 param :
-- word : portrait index
+Show portrait only with no textbox.
+Entity portrait is determined from the entity dialog definition table (sprite -> portrait, text sound)
+Used in final scene with Princess Ellis being unconscious.
+2 params :
+- byte : portrait options : 0=default left display, bit 7($80)=right display, bit 6($40)=Horizontal Flip
+- byte : entity index
 
 $001E - hidePortrait - Hide portrait
 Nuff said.
@@ -197,17 +189,10 @@ $0021 - reviveAlly - Revive Force member
 - word : ally index
 Doesn't seem to be used.
 
-$0022 - animEntityFadeInOut - Animate entity while fading in and out
-No idea, maybe a Mitula thing ... who does that ? :D
+$0022 - animEntityFX - Animate entity with specific effect
 2 params :
 - word : entity index
-- word : ? fade frequency ?
-Earl : This is what's used for Geshp's teleports, a Gizmo's possessions, and so on.
-00 22 00 aa 00 xx = sprite dis/reappear effect (6 bytes)
-   00 = slight vertical ripple (top to bottom) / 01 (bottom to top)
-   02 = vertical disappear (top to bottom) / 03 = (bottom to top)
-   04 = sink (downward into ground) / 05 = rise (upward from ground)
-   06 = every other line fade out / 07 = every other line fade in
+- word : 0/1 = scan down/up, 2/3 = wipe out/in, 4/5 = slide out/in, 6/7 = mosaic out/in
 
 $0023 - setFacing - Set entity facing
 2 params :
@@ -224,30 +209,24 @@ $0025 - cloneEntity - Clone entity
 - word : source entity index
 - word : target entity index
 
-$0026 - entityNod - Make entity nod
+$0026 - nod - Make entity nod
 - word : entity index
 
-$0027 - entityShakeHead - Make entity shake head
+$0027 - headshake - Make entity shake head
 - word : entity index
 
-$0028 - moveEntityNextToPlayer - Make entity follow player/Camera entity ?
-To clarify
+$0028 - moveNextToPlayer - Make entity move next to player's entity
 2 params :
-- word : entity index ? 
-- word : target entity index ? or follower position ?
+- word : entity index
+- word : player side
 
-$0029 - setEntityDest - Set entity destination
-To clarify
+$0029 - setDest - Set entity destination
 3 params :
 - word : entity index
-- word : dest X ? or direction ? 
-- word : dest Y ? or move length ?
-Earl :
-00 29 00 aa 00 xx 00 yy = actor moves to a given x/y position (8 bytes)
-Not sure if facing changes automatically with direction on this, 
-but it is very definitely the less common way to move sprites from point a to point b.
+- word : dest X
+- word : dest Y
 
-$002A - entityShiver - Make entity shiver
+$002A - shiver - Make entity shiver
 - word : entity index
 
 $002B - newEntity
@@ -258,18 +237,11 @@ $002B - newEntity
 - byte : Facing
 - byte : Sprite
 
-$002C - followEntity - Make an entity follow another one ?
-To clarify
+$002C - followEntity - Make an entity follow another one
 params :
-- word : following entity index ?
-- word : followed entity index ? 
-- word : follower position ?
-Earl : 
-00 2C 00 aa xx xx xx xx = actor following Bowie on current map (8 bytes)
-Actor will remain with Bowie through same-map transitions (that is, up stairs and whatnot), 
-but will be gone when you transition to a new map. 
-The final 4 bytes determine the character's placement in the train, 
-but I don't have a solid grasp of what values correspond to what placement.
+- word : following entity index
+- word : followed entity index
+- word : following position
 
 $002D - entityActions - Apply entity action sequence
 This command can be followed by one or several action commands, until the "endMove" command ($8080).
@@ -282,16 +254,12 @@ Easier macros created :
 - and entityActionsWait, which does.
 Only 1 param, naturally.
 
-$002E - hideEntity - Hide entity
-Stop displaying it ?
+$002E - hide - Hide entity
+Stop displaying entity, usually when it has left the display area after the end of a cutscene.
 params :
 - word : entity index
-Earl :
-This is usually handled in events once an actor has wandered somewhere off camera. 
-Otherwise, they would still be present on the map after the event has concluded 
-(like in Granseal, when Astral speaks to the messenger and runs to the Castle).
 
-$002F - fly - GIVE ABILITY TO FLY
+$002F - fly - Give ability to fly
 Only used for Skreech joins cutscene.
 Sets entity property $11 to $FFFF.
 params :
@@ -328,7 +296,7 @@ params :
 - Byte : Destination Y
 
 $0035 - setBlocksVar
-Only used in Parcia/Grand Path
+Only used in Parmecia/Granseal Path
 Only difference with command 34/setBlocks is that it doesn't set RAM offset 0xFFA82D bits 0 and 1.
 params :
 - Byte : Source X
@@ -337,13 +305,9 @@ params :
 - Byte : Source Height
 - Byte : Destination X
 - Byte : Destination Y
-Earl :
-00 35 xx xx xx xx xx xx = block copy to restore original setup?
-This is only used on the Parmecia/Grans Island path. 
-I assume that it is what makes the path disappear after you arrive at one side or the other.
 
 $0036 - resetMap
-Simple reloading without moving the camera,.
+Simple reloading without moving the camera.
 No params.
 
 $0037 - loadMapFadeIn - Load map and fade in

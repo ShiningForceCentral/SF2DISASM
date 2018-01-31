@@ -49,9 +49,9 @@ cs_4DBEE:       stopEntity $1C
 		 moveDown 2
 		endActions
 		setFacing $0,LEFT
-		entityShiver $7
+		shiver $7
 		nextSingleText $0,$7    ; "Let me see him.{W1}"
-		entityShiver $1C
+		shiver $1C
 		stopEntity $1C
 		entityFlashWhite $1C,$39
 		setActscript $7,eas_Jump
@@ -81,7 +81,7 @@ cs_4DBEE:       stopEntity $1C
 		entityActionsWait $1C
 		 moveDown 2
 		endActions
-		entityShiver $1C
+		shiver $1C
 		setFacing $7,DOWN
 		setFacing $0,DOWN
 		nextSingleText $C0,$1C  ; "What can I do?{N}How can I atone for my sins?{W1}"
@@ -93,9 +93,9 @@ cs_4DBEE:       stopEntity $1C
 		nextText $0,$1F         ; "You're not at fault.{W1}"
 		nextSingleText $0,$1F   ; "It's not your fault.{N}The devils are to blame.{W1}"
 		nextSingleText $C0,$1C  ; "But...{W1}"
-		entityShiver $1C
+		shiver $1C
 		csWait 50
-		entityShiver $1C
+		shiver $1C
 		setFacing $1C,UP
 		nextSingleText $C0,$1C  ; "I have to die for my sins.{N}It will be my atonement.{W2}"
 		setActscript $7,eas_Jump

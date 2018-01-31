@@ -20,7 +20,7 @@ abcs_battle13:  textCursor $9BF
 		csWait 50
 		setActscriptWait $A,eas_Init
 		setActscriptWait $A,eas_Jump
-		entityShakeHead $A
+		headshake $A
 		nextSingleText $C0,$A   ; "Squawk!  They knocked me{N}senseless.{W1}"
 		csWait 5
 		setActscript $A,eas_461B6
@@ -35,7 +35,7 @@ abcs_battle13:  textCursor $9BF
 		setFacing $A,UP
 		nextSingleText $FF,$FF  ; "{CLEAR}{LEADER} decides to take{N}{NAME;10} the BDMN with him.{W1}{CLEAR}"
 		setF $4B                ; Luke is a follower
-		mapSysEvent $D,$10,$C,$3
+		warp $D,$10,$C,$3
 		csc_end
 ce_4AD96:       mainEntity 16,12,DOWN
 		entity 16,13,DOWN,10,eas_Init

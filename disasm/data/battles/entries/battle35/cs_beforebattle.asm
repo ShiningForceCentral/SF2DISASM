@@ -30,10 +30,10 @@ cs_4D728:       fadeInB
 		nextSingleText $C0,$1F  ; "We have to kill him now!{W1}"
 		csWait 40
 		nextSingleText $0,$80   ; "I'm very sorry, but I have{N}to go.{W1}"
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		setCamDest 22,20
 		setPos $80,28,24,DOWN
-		animEntityFadeInOut $80,$7
+		animEntityFX $80,7
 		csWait 40
 		setFacing $81,DOWN
 		setFacing $82,DOWN
@@ -59,7 +59,7 @@ cs_4D728:       fadeInB
 		setActscript $86,eas_Jump
 		setActscript $87,eas_Jump
 		setActscript $88,eas_Jump
-		animEntityFadeInOut $80,$6
+		animEntityFX $80,6
 		csWait 50
 		setCamDest 37,5
 		entityActionsWait $7

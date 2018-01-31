@@ -8,7 +8,7 @@ edcs_battle5:   textCursor $913
 		setActscriptWait $5,eas_Init
 		setCamDest 12,0
 		csWait 30
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$80   ; "You, rat!  I threw you into{N}jail after I took your{N}jewels....{W1}"
 		setActscriptWait $5,eas_Jump
 		setActscriptWait $5,eas_Jump
@@ -30,9 +30,9 @@ edcs_battle5:   textCursor $913
 		setFacing $5,LEFT
 		csWait 20
 		setActscriptWait $5,eas_BumpLeft
-		entityShiver $80
+		shiver $80
 		nextSingleText $0,$5    ; "Where is the other jewel?{W1}"
-		entityShiver $80
+		shiver $80
 		nextText $0,$80         ; "K...King Galam...took it into{N}battle.{W2}"
 		nextSingleText $0,$80   ; "Take the jewel.  You won't{N}have it long.  We'll get it{N}back!{W1}"
 		csc_end

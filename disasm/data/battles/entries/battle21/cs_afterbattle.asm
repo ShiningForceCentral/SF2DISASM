@@ -37,11 +37,11 @@ abcs_battle21:  textCursor $A17
 		setFacing $7,UP
 		nextSingleText $C0,$7   ; "{LEADER}, let's go see{N}Mr. Creed!{W1}"
 		setFacing $0,DOWN
-		entityNod $0
+		nod $0
 		followEntity $1E,$0,$2
 		followEntity $7,$1E,$1
 		followEntity $1F,$1E,$3
-		mapSysEvent $43,$1A,$17,$3
+		warp $43,$1A,$17,$3
 		csc_end
 ce_4B948:       mainEntity 10,22,LEFT
 		entity 11,23,LEFT,7,eas_Init
