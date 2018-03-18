@@ -258,3 +258,7 @@ build/buildcubewiz.bat
 build/buildexpandedcubewiz.bat
 build/archives/buildexpandedcubewiz.bat
 build/archives/buildcubewiz.bat
+*.gmv
+*.xcf
+*.pal
+*.act
