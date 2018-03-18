@@ -1,0 +1,8 @@
+
+
+Step block copies
+
+- 8 bytes per entry
+- Ends with $FFFF value
+
+[triggerX][triggerY][sourceX][sourceY][width][height][destX][destY]

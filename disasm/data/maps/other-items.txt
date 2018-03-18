@@ -1,0 +1,8 @@
+
+
+Other items 
+
+- 4 bytes per entry
+- Ends with $FFFF value
+
+[x][y][flag][item]

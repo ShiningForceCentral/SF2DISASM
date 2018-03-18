@@ -1,4 +1,65 @@
 
+
+Map Data Structure :
+- Tilesets
+- Blockset
+- Layout
+- Areas
+- Flag block copies
+- Step block copies
+- Layer 2 block copies
+- Warps
+- Chest items
+- Other items
+- Animations
+
+
+
+******* Map Tilesets Declaration *********
+
+6 byte values :
+[Map Palette][Map Tileset 0][Map Tileset 1][Map Tileset 2][Map Tileset 3][Map Tileset 4]
+
+
+
+*************** Blocks *******************
+
+first 14 bits = number of commands
+
+commands :
+
+00 : copy last output tile
+01 : copy following tile from tileset in direction of HFlip.
+100 : copy mapped tile from right tile history map
+101 : copy mapped tile from bottom tile history map
+110 : same as 111 but with same flags as previous output tile (high priority, VFlip and HFlip)
+111 : output value and update right/bottom tile maps. 
+	First 3 bits = High priority, VFlip and HFlip flags
+	Next bit defines offset mode : 
+		0 = relative to previous output tile :
+			- 5 bits for value
+			- 1 bit for sign
+		1 = absolute (9 bits + 1 optional bit)
+			If value >= $180, then value = value * 2 - $180 + next bit 
+
+Production algorithm :
+For each next tile
+	if next tile = previous tile 
+		then produce command 00
+	else if next tile = next tile from tileset with previous tile HFlip direction
+		then produce command 01
+	else if next tile = mapped right tile of previous tile
+		then produce command 100
+	else if next tile = mapped bottom tile of 3rd previous tile
+		then produce command 101
+	else if next tile's flags = previous tile's flags 
+		then produce command 110
+	else produce command 111
+	
+	
+********** Map Layout *******************
+
+
 - 64x64=4096 blocks
 
 Stop when 4096 have been output.
@@ -119,3 +180,6 @@ Until last block is produced
 	
 	if output command != section copy
 		then update history maps
+		
+		
+	

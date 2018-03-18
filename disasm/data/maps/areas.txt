@@ -1,0 +1,12 @@
+
+Areas 
+
+- 30-byte entries.
+- End : $FFFF value.
+
+[layer1StartX][layer1StartY][layer1EndX][layer1EndY]
+[foregroundLayer2StartX][foregroundLayer2StartY][backgroundLayer2StartX][backgroundLayer2StartY]
+[layer1ParallaxX][layer1ParallaxY][layer2ParallaxX][layer2ParallaxY]
+[layer1AutoscrollX][layer1AutoscrollY][layer2AutoscrollX][layer2AutoscrollY]
+[layerType][defaultMusic]
+
