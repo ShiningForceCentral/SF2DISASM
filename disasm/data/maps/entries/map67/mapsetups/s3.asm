@@ -18,7 +18,7 @@ ms_map67_ZoneEvents:
 		dc.b $19
 		dc.w sub_4FB24-ms_map67_ZoneEvents
 		dc.w $FD00
-		dc.w sub_4FB58-ms_map67_ZoneEvents
+		dc.w CheckRandomBattle21-ms_map67_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -59,12 +59,13 @@ return_4FB56:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FB58:
+CheckRandomBattle21:
+		
 		move.w  #$15,d0
-		jsr     sub_47856
+		jsr     CheckRandomBattle
 		rts
 
-	; End of function sub_4FB58
+	; End of function CheckRandomBattle21
 
 cs_4FB64:       textCursor $9EF
 		setActscriptWait $1F,eas_Init

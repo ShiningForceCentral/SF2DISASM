@@ -154,13 +154,13 @@ cs_53176:       setCameraEntity $FFFF
 		setCamDest 23,5
 		entityActionsWait $8C
 		 moveUp 1
-		 actionC 40
+		 eaWait 40
 		 moveUp 1
-		 actionC 40
+		 eaWait 40
 		 moveUp 1
 		endActions
 		entityActionsWait $8C
-		 actionC 40
+		 eaWait 40
 		 moveUp 1
 		endActions
 		setFacing $8C,DOWN

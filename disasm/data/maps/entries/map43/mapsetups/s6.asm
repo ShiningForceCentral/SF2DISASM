@@ -43,7 +43,7 @@ cs_540C0:       textCursor $32B
 		entityActionsWait $4
 		 moveLeft 1
 		 moveUp 1
-		 actionC 20
+		 eaWait 20
 		endActions
 		nextSingleText $0,$4    ; "Sir Hawel!{N}Granseal friends are here!{W1}"
 		csWait 70
@@ -115,7 +115,7 @@ cs_540C0:       textCursor $32B
 		 moveDown 5
 		endActions
 		entityActionsWait $4
-		 actionC 20
+		 eaWait 20
 		 faceRight 20
 		 jumpUp 0
 		 moveDown 1

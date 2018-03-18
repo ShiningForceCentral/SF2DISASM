@@ -24,7 +24,7 @@ bbcs_01:        textCursor $8F4
 		nextSingleText $0,$87   ; "Hmm, what a mysterious{N}tower.  I wonder who built{N}it?{W1}"
 		entityActionsWait $87
 		 moveUp 1
-		 actionC 60
+		 eaWait 60
 		 moveUp 1
 		endActions
 		csWait 50

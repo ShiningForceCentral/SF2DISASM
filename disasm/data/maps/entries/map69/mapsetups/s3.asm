@@ -4,24 +4,25 @@
 ms_map69_ZoneEvents:
 		dc.b $17
 		dc.b $FF
-		dc.w sub_4FDB2-ms_map69_ZoneEvents
+		dc.w CheckRandomBattle17-ms_map69_ZoneEvents
 		dc.b $18
 		dc.b $FF
-		dc.w sub_4FDB2-ms_map69_ZoneEvents
+		dc.w CheckRandomBattle17-ms_map69_ZoneEvents
 		dc.b $19
 		dc.b $FF
-		dc.w sub_4FDB2-ms_map69_ZoneEvents
+		dc.w CheckRandomBattle17-ms_map69_ZoneEvents
 		dc.w $FD00
 		dc.w sub_4FDBE-ms_map69_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FDB2:
-		move.w  #(sub_4FDB2+1-ms_map69_ZoneEvents),d0
-		jsr     sub_47856
+CheckRandomBattle17:
+		
+		move.w  #$11,d0
+		jsr     CheckRandomBattle
 		rts
 
-	; End of function sub_4FDB2
+	; End of function CheckRandomBattle17
 
 
 ; =============== S U B R O U T I N E =======================================

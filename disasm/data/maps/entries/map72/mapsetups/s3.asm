@@ -4,13 +4,13 @@
 ms_map72_ZoneEvents:
 		dc.b $20
 		dc.b $FF
-		dc.w sub_4FE8C-ms_map72_ZoneEvents
+		dc.w CheckRandomBattle26-ms_map72_ZoneEvents
 		dc.b $21
 		dc.b $FF
-		dc.w sub_4FE8C-ms_map72_ZoneEvents
+		dc.w CheckRandomBattle26-ms_map72_ZoneEvents
 		dc.b $22
 		dc.b $FF
-		dc.w sub_4FE8C-ms_map72_ZoneEvents
+		dc.w CheckRandomBattle26-ms_map72_ZoneEvents
 		dc.b $19
 		dc.b $25
 		dc.w sub_4FE98-ms_map72_ZoneEvents
@@ -30,16 +30,17 @@ ms_map72_ZoneEvents:
 		dc.b $25
 		dc.w sub_4FE98-ms_map72_ZoneEvents
 		dc.w $FD00
-		dc.w sub_4FF06-ms_map72_ZoneEvents
+		dc.w CheckRandomBattle24-ms_map72_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FE8C:
+CheckRandomBattle26:
+		
 		move.w  #$1A,d0
-		jsr     sub_47856
+		jsr     CheckRandomBattle
 		rts
 
-	; End of function sub_4FE8C
+	; End of function CheckRandomBattle26
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -94,18 +95,19 @@ return_4FF04:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FF06:
+CheckRandomBattle24:
+		
 		trap    #CHECK_FLAG
 		dc.w $20B               ; Battle 23 completed
 		bne.s   loc_4FF18
 		move.w  #8,d0
-		jsr     sub_47856
+		jsr     CheckRandomBattle
 		bra.s   return_4FF22
 loc_4FF18:
 		move.w  #$18,d0
-		jsr     sub_47856
+		jsr     CheckRandomBattle
 return_4FF22:
 		rts
 
-	; End of function sub_4FF06
+	; End of function CheckRandomBattle24
 

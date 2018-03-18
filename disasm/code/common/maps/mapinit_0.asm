@@ -50,13 +50,13 @@ GetNextBattleOnMap:
 		move.w  d1,d4
 		move.w  d2,d5
 		move.w  d0,-(sp)
-		cmpi.b  #$FF,d0         ; check if map idx was supplied and pull from CURRENT_MAP if so
+		cmpi.b  #$FF,d0
 		bne.s   loc_79B2
 		clr.w   d0
 		move.b  ((CURRENT_MAP-$1000000)).w,d0
 loc_79B2:
 		conditionalPc lea,BattleMapCoords,a0
-		moveq   #$2C,d6 ; set number of maps to iterate
+		moveq   #44,d6          ; HARDCODED number of battles
 		clr.w   d7
 loc_79BA:
 		cmp.b   (a0),d0
@@ -72,14 +72,14 @@ loc_79BA:
 loc_79DE:
 		cmpi.b  #$FF,6(a0)
 		beq.w   loc_79F0
-		cmp.b   6(a0),d5
+		cmp.b   6(a0),d5        ; if player is not on specified coords (bytes 5/6), then don't return battle index.
 		bne.w   loc_7A24
 loc_79F0:
-		move.b  1(a0),((byte_FFF706-$1000000)).w
-		move.b  2(a0),((byte_FFF707-$1000000)).w
-		move.b  3(a0),((byte_FFF708-$1000000)).w
-		move.b  4(a0),((byte_FFF709-$1000000)).w
-		addi.w  #$64,d1 
+		move.b  1(a0),((CAMERA_LOCK_START_X-$1000000)).w
+		move.b  2(a0),((CAMERA_LOCK_START_Y-$1000000)).w
+		move.b  3(a0),((CAMERA_LOCK_END_X-$1000000)).w
+		move.b  4(a0),((CAMERA_LOCK_END_Y-$1000000)).w
+		addi.w  #$64,d1 ; "Battle completed" flags
 		jsr     j_CheckFlag
 		beq.s   loc_7A1E
 		subi.w  #$64,d1 

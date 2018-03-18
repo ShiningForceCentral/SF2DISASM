@@ -523,7 +523,7 @@ cs_5779C:       textCursor $696
 		setPos $0,5,22,DOWN
 		setPos $7,11,22,UP
 		entityActions $7
-		 actionC 60
+		 eaWait 60
 		 moveLeft 4
 		endActions
 		setFacing $0,UP

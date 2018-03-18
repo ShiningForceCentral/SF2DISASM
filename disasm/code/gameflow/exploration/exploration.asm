@@ -1141,7 +1141,7 @@ loc_4150:
 
 OpenChest:
 		movem.l d0-d1/a2,-(sp)
-		bsr.w   sub_4232        
+		bsr.w   GetChestItem
 		tst.w   d0
 		blt.s   loc_418E
 		jsr     j_CheckFlag
@@ -1168,7 +1168,7 @@ loc_418E:
 
 CloseChest:
 		movem.l d0-d1/a2,-(sp)
-		bsr.w   sub_4232        
+		bsr.w   GetChestItem
 		tst.w   d0
 		blt.s   loc_41C0
 		jsr     j_ClearFlag
@@ -1188,10 +1188,10 @@ loc_41C0:
 
 ; =============== S U B R O U T I N E =======================================
 
-CheckIfChestOpened:
+CheckChestItem:
 		
 		movem.l d0-d1/a2,-(sp)
-		bsr.w   sub_4232        
+		bsr.w   GetChestItem
 		tst.w   d0
 		blt.s   loc_41F0
 		jsr     j_CheckFlag
@@ -1207,15 +1207,15 @@ loc_41F0:
 		movem.l (sp)+,d0-d1/a2
 		rts
 
-	; End of function CheckIfChestOpened
+	; End of function CheckChestItem
 
 
 ; =============== S U B R O U T I N E =======================================
 
-OpenVaseOrBarrel:
+CheckNonChestItem:
 		
 		movem.l d0-d1/a2,-(sp)
-		bsr.w   loc_424C
+		bsr.w   GetNonChestItem
 		tst.w   d0
 		blt.s   loc_4214
 		jsr     j_CheckFlag
@@ -1227,15 +1227,15 @@ loc_4214:
 		movem.l (sp)+,d0-d1/a2
 		rts
 
-	; End of function OpenVaseOrBarrel
+	; End of function CheckNonChestItem
 
 
 ; =============== S U B R O U T I N E =======================================
 
-CloseVaseOrBarrel:
+RefillNonChestItem:
 		
 		movem.l d0-d1/a2,-(sp)
-		bsr.w   loc_424C
+		bsr.w   GetNonChestItem
 		tst.w   d0
 		blt.s   loc_422C
 		jsr     j_ClearFlag
@@ -1243,16 +1243,12 @@ loc_422C:
 		movem.l (sp)+,d0-d1/a2
 		rts
 
-	; End of function CloseVaseOrBarrel
+	; End of function RefillNonChestItem
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; something with chests/vases/etc
-; 
-; Out: D2 = item idx
-
-sub_4232:
+GetChestItem:
 		clr.w   d2
 		move.b  ((CURRENT_MAP-$1000000)).w,d2
 						; current map I guess
@@ -1260,15 +1256,36 @@ sub_4232:
 		lsl.w   #2,d2
 		movea.l (a2,d2.w),a2    ; a2 points to current map data
 		movea.l $22(a2),a2      ; get address of current map's chest item data
-		bra.w   loc_4262
-loc_424C:
+		bra.w   GetItem         
+
+	; End of function GetChestItem
+
+
+; =============== S U B R O U T I N E =======================================
+
+GetNonChestItem:
+		
 		clr.w   d2
 		move.b  ((CURRENT_MAP-$1000000)).w,d2
 		movea.l (p_pt_MapData).l,a2
 		lsl.w   #2,d2
 		movea.l (a2,d2.w),a2
 		movea.l $26(a2),a2      ; get address of current map's non-chest item data
-loc_4262:
+
+	; End of function GetNonChestItem
+
+
+; =============== S U B R O U T I N E =======================================
+
+; IN : 
+; - d0\d1 : candidate coordinates
+; OUT :
+; - d0 : layout block offset
+; - d1 : item flag
+; - d2 : item index
+; - a2 : map layout offset
+
+GetItem:
 		movem.w d4-d5,-(sp)
 		move.w  d0,d4           ; save d0 and d1
 		move.w  d1,d5
@@ -1286,7 +1303,7 @@ loc_4290:
 		tst.b   (a2)
 		bmi.w   loc_42C6        ; if negative, then value > map max coord, so value = FF : end of data
 		cmp.b   (a2),d0
-		bne.w   loc_42D8        
+		bne.w   loc_42D8        ; test coords
 		cmp.b   1(a2),d1
 		bne.w   loc_42D8        
 		move.w  d4,d0           ; get back original coords
@@ -1295,11 +1312,11 @@ loc_4290:
 		lsl.w   #6,d1
 		andi.w  #$3F,d0 
 		add.w   d1,d0
-		add.w   d0,d0           ; ... ?
+		add.w   d0,d0           ; get map layout block offset ?
 		clr.w   d1
-		move.b  2(a2),d1
+		move.b  2(a2),d1        ; item flag
 		clr.w   d2
-		move.b  3(a2),d2
+		move.b  3(a2),d2        ; item index
 		bra.w   loc_42CC
 loc_42C6:
 		moveq   #$FFFFFFFF,d0
@@ -1313,7 +1330,7 @@ loc_42D8:
 		addq.l  #4,a2           ; go to next item
 		bra.s   loc_4290
 
-	; End of function sub_4232
+	; End of function GetItem
 
 
 ; =============== S U B R O U T I N E =======================================

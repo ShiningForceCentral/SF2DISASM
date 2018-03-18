@@ -48,13 +48,13 @@ cs_6290C:       hideText
 		entityActionsWait $8A
 		 moveDown 3
 		 moveLeft 6
-		 actionC 10
+		 eaWait 10
 		endActions
 		entityActionsWait $8A
 		 moveUp 8
 		 moveLeft 6
 		 moveUp 2
-		 actionC 10
+		 eaWait 10
 		 moveUp 6
 		endActions
 		warp $13,$1A,$1E,$1

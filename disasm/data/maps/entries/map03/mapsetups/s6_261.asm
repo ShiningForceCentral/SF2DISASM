@@ -136,7 +136,7 @@ cs_5149A:       textCursor $205
 		entityActionsWait $8E
 		 moveDown 2
 		 moveLeft 1
-		 actionC 20
+		 eaWait 20
 		 moveRight 1
 		endActions
 		setFacing $8F,UP

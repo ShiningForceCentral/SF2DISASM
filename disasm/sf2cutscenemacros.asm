@@ -532,7 +532,7 @@ faceDown:	macro
 	dc.b \1
 	endm
 	
-actionC:	macro
+eaWait:	macro
 	dc.b $0C
 	dc.b \1
 	endm

@@ -224,7 +224,7 @@ cs_5A4FE:       textCursor $6C2
 		 moveUp 3
 		endActions
 		entityActionsWait $82
-		 actionC 40
+		 eaWait 40
 		 moveUp 1
 		 moveLeft 4
 		 moveUp 1

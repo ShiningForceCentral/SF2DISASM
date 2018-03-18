@@ -43,7 +43,7 @@ loc_47DF2:
 		andi.b  #$7F,d0 
 		addq.w  #1,d0
 		dbf     d7,loc_47DF2
-		move.w  #$9E,d0 ; which character can have a $9E index ?
+		move.w  #$9E,d0 
 		jsr     j_SetXPos
 		addq.w  #1,d0
 		jsr     j_SetXPos

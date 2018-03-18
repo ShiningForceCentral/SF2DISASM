@@ -423,7 +423,8 @@ sub_47832:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47856:
+CheckRandomBattle:
+		
 		movem.l d1/d6-d7,-(sp)
 		move.w  #$1F4,d1        ; Battle completed flags
 		add.w   d0,d1
@@ -452,7 +453,7 @@ loc_47888:
 loc_47896:
 		tst.w   d1
 		beq.s   loc_478C0
-		move.w  #$190,d1
+		move.w  #$190,d1        ; Battle unlocked base flag index
 		add.w   d0,d1
 		jsr     j_SetFlag
 		move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
@@ -465,5 +466,5 @@ loc_478C0:
 		movem.l (sp)+,d1/d6-d7
 		rts
 
-	; End of function sub_47856
+	; End of function CheckRandomBattle
 

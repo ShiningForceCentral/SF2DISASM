@@ -12,7 +12,7 @@ ms_map66_ZoneEvents:
 		dc.b $1C
 		dc.w sub_4FABA-ms_map66_ZoneEvents
 		dc.w $FD00
-		dc.w sub_4FAD4-ms_map66_ZoneEvents
+		dc.w CheckRandomBattle3-ms_map66_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -52,10 +52,11 @@ return_4FAD2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FAD4:
+CheckRandomBattle3:
+		
 		move.w  #3,d0           ; flag $1F7 : Battle 3 completed
-		jsr     sub_47856
+		jsr     CheckRandomBattle
 		rts
 
-	; End of function sub_4FAD4
+	; End of function CheckRandomBattle3
 

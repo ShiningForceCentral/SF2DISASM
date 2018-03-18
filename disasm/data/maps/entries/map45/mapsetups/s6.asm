@@ -60,11 +60,11 @@ cs_600CE:       textCursor $823
 		 moveDown 3
 		endActions
 		entityActions $0
-		 actionC 20
+		 eaWait 20
 		 moveDown 3
 		endActions
 		entityActions $7
-		 actionC 40
+		 eaWait 40
 		 moveDown 3
 		endActions
 		csWait 50

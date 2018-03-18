@@ -262,3 +262,5 @@ build/archives/buildcubewiz.bat
 *.xcf
 *.pal
 *.act
+*.zip
+*.pxf

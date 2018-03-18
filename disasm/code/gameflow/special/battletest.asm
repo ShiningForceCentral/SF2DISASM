@@ -131,10 +131,10 @@ loc_7820:
 		nop
 		adda.w  d0,a0
 		move.b  (a0)+,d0
-		move.b  (a0)+,((byte_FFF706-$1000000)).w
-		move.b  (a0)+,((byte_FFF707-$1000000)).w
-		move.b  (a0)+,((byte_FFF708-$1000000)).w
-		move.b  (a0)+,((byte_FFF709-$1000000)).w
+		move.b  (a0)+,((CAMERA_LOCK_START_X-$1000000)).w
+		move.b  (a0)+,((CAMERA_LOCK_START_Y-$1000000)).w
+		move.b  (a0)+,((CAMERA_LOCK_END_X-$1000000)).w
+		move.b  (a0)+,((CAMERA_LOCK_END_Y-$1000000)).w
 		jsr     j_ExecuteBattleLoop
 		jsr     j_ChurchActions
 		trap    #TEXTBOX

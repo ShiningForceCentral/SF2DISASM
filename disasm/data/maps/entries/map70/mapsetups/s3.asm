@@ -4,27 +4,28 @@
 ms_map70_ZoneEvents:
 		dc.b $10
 		dc.b $FF
-		dc.w sub_4FE12-ms_map70_ZoneEvents
+		dc.w CheckRandomBattle15-ms_map70_ZoneEvents
 		dc.b $11
 		dc.b $FF
-		dc.w sub_4FE12-ms_map70_ZoneEvents
+		dc.w CheckRandomBattle15-ms_map70_ZoneEvents
 		dc.b $12
 		dc.b $FF
-		dc.w sub_4FE12-ms_map70_ZoneEvents
+		dc.w CheckRandomBattle15-ms_map70_ZoneEvents
 		dc.b $13
 		dc.b $FF
-off_4FE0C:      dc.w sub_4FE12-ms_map70_ZoneEvents
+		dc.w CheckRandomBattle15-ms_map70_ZoneEvents
 		dc.w $FD00
 		dc.w sub_4FE1E-ms_map70_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FE12:
-		move.w  #(off_4FE0C-ms_map70_ZoneEvents),d0
-		jsr     sub_47856
+CheckRandomBattle15:
+		
+		move.w  #$E,d0
+		jsr     CheckRandomBattle
 		rts
 
-	; End of function sub_4FE12
+	; End of function CheckRandomBattle15
 
 
 ; =============== S U B R O U T I N E =======================================

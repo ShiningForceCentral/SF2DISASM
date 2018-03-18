@@ -477,7 +477,7 @@ cs_60CA4:       textCursor $D76
 		 faceLeft 20
 		 faceRight 20
 		 moveRight 2
-		 actionC 20
+		 eaWait 20
 		endActions
 		setFacing $1B,LEFT
 		csWait 20
@@ -486,7 +486,7 @@ cs_60CA4:       textCursor $D76
 		 faceLeft 20
 		 faceRight 20
 		 moveRight 2
-		 actionC 20
+		 eaWait 20
 		endActions
 		setFacing $1B,DOWN
 		csWait 40
@@ -513,7 +513,7 @@ cs_60CA4:       textCursor $D76
 		ac_end
 		entityActionsWait $1B
 		 moveDown 2
-		 actionC 80
+		 eaWait 80
 		endActions
 		setActscriptWait $1B,eas_Init
 		setActscriptWait $1B,eas_Jump

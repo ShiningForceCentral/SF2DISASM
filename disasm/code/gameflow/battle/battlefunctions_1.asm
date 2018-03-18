@@ -218,10 +218,10 @@ loc_23CCC:
 		move.b  ((CURRENT_MAP-$1000000)).w,((MAP_EVENT_PARAM_2-$1000000)).w
 		jsr     (UpdateForceAndGetFirstForceMemberIndex).w
 		jsr     j_GetXPos
-		add.b   ((byte_FFF706-$1000000)).w,d1
+		add.b   ((CAMERA_LOCK_START_X-$1000000)).w,d1
 		move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
 		jsr     j_GetYPos
-		add.b   ((byte_FFF707-$1000000)).w,d1
+		add.b   ((CAMERA_LOCK_START_Y-$1000000)).w,d1
 		move.b  d1,((MAP_EVENT_PARAM_4-$1000000)).w
 		bsr.w   GetEntityNumberOfCombatant
 		lsl.w   #5,d0
@@ -1149,14 +1149,14 @@ loc_24746:
 		jsr     (WaitForVInt).w 
 		move.w  -2(a6),d0
 		bsr.w   GetEntityPositionAfterApplyingFacing
-		jsr     (CheckIfChestOpened).w
+		jsr     (CheckChestItem).w
 		move.w  d2,((byte_FFB180-$1000000)).w
 		cmpi.w  #$FFFF,d2
-		bne.s   loc_2476C       ; if d2 != FFFF, then there is an item ?
-		moveq   #1,d2
+		bne.s   loc_2476C       ; if d2 != FFFF, then there is an item
+		moveq   #1,d2           ; Battle menu with STAY option
 		bra.s   loc_2476E
 loc_2476C:
-		moveq   #2,d2
+		moveq   #2,d2           ; Battle menu with SEARCH option
 loc_2476E:
 		move.w  -2(a6),d0
 		jsr     j_sub_C404

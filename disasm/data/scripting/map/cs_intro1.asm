@@ -231,7 +231,7 @@ IntroCutscene1: textCursor $105A
 		 moveRight 4
 		endActions
 		entityActionsWait $81
-		 actionC 20
+		 eaWait 20
 		 moveRight 4
 		endActions
 		csWait 5

@@ -116,9 +116,9 @@ cs_52530:       textCursor $385
 		ac_end
 		entityActionsWait $5
 		 moveDown 1
-		 actionC 40
+		 eaWait 40
 		 moveLeft 1
-		 actionC 40
+		 eaWait 40
 		 moveDown 1
 		endActions
 		setFacing $5,UP

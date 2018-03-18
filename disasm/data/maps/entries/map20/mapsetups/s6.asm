@@ -238,7 +238,7 @@ cs_53C42:       setCamDest 19,48
 		 moveLeft 2
 		endActions
 		entityActions $80
-		 actionC 20
+		 eaWait 20
 		 moveLeft 2
 		endActions
 		entityFlashWhite $82,$78

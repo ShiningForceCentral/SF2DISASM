@@ -157,7 +157,7 @@ loc_2386C:
 loc_238E8:
 		cmpi.w  #$2C00,d3
 		bne.s   loc_2390C
-		jsr     (OpenVaseOrBarrel).w
+		jsr     (CheckNonChestItem).w
 		trap    #TEXTBOX
 		dc.w $194               ; "{NAME} investigated{N}the vase.{W2}{CLEAR}"
 		move.w  d2,d0
@@ -170,7 +170,7 @@ loc_238E8:
 loc_2390C:
 		cmpi.w  #$3000,d3
 		bne.s   loc_23930
-		jsr     (OpenVaseOrBarrel).w
+		jsr     (CheckNonChestItem).w
 		trap    #TEXTBOX
 		dc.w $195               ; "{NAME} looked in{N}the barrel.{W2}{CLEAR}"
 		move.w  d2,d0
@@ -183,7 +183,7 @@ loc_2390C:
 loc_23930:
 		cmpi.w  #$3400,d3
 		bne.s   loc_23954
-		jsr     (OpenVaseOrBarrel).w
+		jsr     (CheckNonChestItem).w
 		trap    #TEXTBOX
 		dc.w $1AB               ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
 		move.w  d2,d0
@@ -196,7 +196,7 @@ loc_23930:
 loc_23954:
 		cmpi.w  #$1C00,d3
 		bne.s   loc_23978
-		jsr     (OpenVaseOrBarrel).w
+		jsr     (CheckNonChestItem).w
 		trap    #TEXTBOX
 		dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
 		move.w  d2,d0
@@ -312,7 +312,7 @@ loc_23A66:
 		move.w  d4,d0
 		move.w  d5,d1
 		jsr     (CloseChest).w
-		jsr     (CloseVaseOrBarrel).w
+		jsr     (RefillNonChestItem).w
 		bra.w   loc_23994
 
 ; END OF FUNCTION CHUNK FOR sub_23862
