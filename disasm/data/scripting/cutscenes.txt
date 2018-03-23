@@ -2,14 +2,14 @@ $0000 - nextSingleText - Display next single text line
 Displays textbox with next line from current text cursor, and then hides textbox and optional portrait.
 2 params : 
 - byte : portrait options : 0=default left display, bit 7($80)=right display, bit 6($40)=Horizontal Flip, $FF=hide currently displayed portrait
-- byte : portrait index
+- byte : entity index
 
 $0001 - nextSingleTextVar - Display next single line with name parameters
 Same as above with name index parameters. 
 Not used anywhere in the whole game.
 4 params :
 - byte : portrait options (see command 0)
-- byte : portrait index
+- byte : entity index
 - word : name index 1
 - word : name index 2
 
@@ -17,14 +17,14 @@ $0002 - nextText - Display next text line
 Displays textbox with next line from current text cursor, and doesn't hide textbox and optional portrait in order to display more text lines.
 2 params : 
 - byte : portrait options (see command 0)
-- byte : portrait index
+- byte : entity index
 
 $0003 - nextTextVar - Display next line with name parameters
 Same as above with name index parameters. 
 Not used anywhere in the whole game.
 5 params :
 - byte : portrait options (see command 0)
-- byte : portrait index
+- byte : entity index
 - word : name index 1
 - word : name index 2
 
