@@ -1,0 +1,42 @@
+
+
+Followers
+
+- 4 bytes per entry
+- Ends with $FFFF value
+
+The overworld followers table is just the same table with the Caravan as the first entry.
+
+Entry format :
+[Flag][Portrait ID][Map Sprite ID][00/$01]
+
+- Flag : 
+The flag value to check for this follower to be used. 
+Several entries can use the same flag.
+0042=Sarah + Chester are followers
+0043=Peter is a follower
+0044=Oddler is a follower
+0045=Fairy is a follower
+0046=Astral is a follower
+0047=Lemon is a follower
+0048=Kazin is a follower
+0049=Slade is a follower
+004A=Astral + King are followers
+004B=Luke is a follower
+004C=Zynk is a follower
+004D=Old man is a follower
+0052=Frayja is a follower
+0053=King + Minister are followers
+0054=Rohde is a follower
+
+- Portrait ID : 
+If ID is inside the Force Member index range (00-$1E), 
+then apply Force Member index to get current portrait and mapsprite
+
+- Map Sprite ID : 
+If ID is outside of the Force Member index range (00-$1E), 
+then apply Portrait ID and Map Sprite ID.
+
+- 00/$01 : To figure out
+ - Caravan uses value 00
+ - All other followers use value 01
