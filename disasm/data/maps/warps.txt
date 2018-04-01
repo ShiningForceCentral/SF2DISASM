@@ -1,8 +1,0 @@
-
-
-Warps
-
-- 8 bytes per entry
-- Ends with $FFFF value
-
-[triggerX][triggerY][$00][destMap][destX][destY][facing][$00]

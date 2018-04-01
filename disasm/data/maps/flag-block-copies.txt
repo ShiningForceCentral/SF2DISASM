@@ -1,9 +1,0 @@
-
-
-Flag block copies
-
-- 8 bytes per entry
-- Ends with $FFFF value
-
-
-[flag][sourceX][sourceY][width][height][destX][destY]

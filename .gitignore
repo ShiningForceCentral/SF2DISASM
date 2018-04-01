@@ -264,3 +264,4 @@ build/archives/buildcubewiz.bat
 *.act
 *.zip
 *.pxf
+disasm/data/scripting/map/cs_introendroutine - Copy.asm

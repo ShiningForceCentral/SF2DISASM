@@ -1,185 +1,291 @@
 
 
-Map Data Structure :
-- Tilesets
-- Blockset
-- Layout
-- Areas
-- Flag block copies
-- Step block copies
-- Layer 2 block copies
-- Warps
-- Chest items
-- Other items
-- Animations
+MAP DEFINITIONS :
+
+
+- MAIN STRUCTURE
+
+	Byte 0      palette index
+	Byte 1      tileset 1 index
+	Byte 2      tileset 2 index
+	Byte 3      tileset 3 index
+	Byte 4      tileset 4 index
+	Byte 5      tileset 5 index
+	Byte 6...   10 pointers : 
+	             1. Blockset
+	             2. Layout
+	             3. Areas
+	             4. Flag block copies
+	             5. Step block copies
+	             6. Layer 2 block copies
+	             7. Warps
+	             8. Chest items
+	             9. Other items
+	             10. Animations
 
 
 
-******* Map Tilesets Declaration *********
+- DETAILED SUB-SECTIONS :
+
+
+******* 0. Map Tilesets Declaration *********
 
 6 byte values :
 [Map Palette][Map Tileset 0][Map Tileset 1][Map Tileset 2][Map Tileset 3][Map Tileset 4]
 
 
+*************** 1. Blockset *****************
 
-*************** Blocks *******************
+- First 14 bits = number of commands
+- Commands :
+	00 : copy last output tile
+	01 : copy following tile from tileset in direction of HFlip.
+	100 : copy mapped tile from right tile history map
+	101 : copy mapped tile from bottom tile history map
+	110 : same as 111 but with same flags as previous output tile (high priority, VFlip and HFlip)
+	111 : output value and update right/bottom tile maps. 
+		First 3 bits = High priority, VFlip and HFlip flags
+		Next bit defines offset mode : 
+			0 = relative to previous output tile :
+				- 5 bits for value
+				- 1 bit for sign
+			1 = absolute (9 bits + 1 optional bit)
+				If value >= $180, then value = value * 2 - $180 + next bit 
 
-first 14 bits = number of commands
+- Production algorithm :
+	For each next tile
+		if next tile = previous tile 
+			then produce command 00
+		else if next tile = next tile from tileset with previous tile HFlip direction
+			then produce command 01
+		else if next tile = mapped right tile of previous tile
+			then produce command 100
+		else if next tile = mapped bottom tile of 3rd previous tile
+			then produce command 101
+		else if next tile's flags = previous tile's flags 
+			then produce command 110
+		else produce command 111
 
-commands :
 
-00 : copy last output tile
-01 : copy following tile from tileset in direction of HFlip.
-100 : copy mapped tile from right tile history map
-101 : copy mapped tile from bottom tile history map
-110 : same as 111 but with same flags as previous output tile (high priority, VFlip and HFlip)
-111 : output value and update right/bottom tile maps. 
-	First 3 bits = High priority, VFlip and HFlip flags
-	Next bit defines offset mode : 
-		0 = relative to previous output tile :
-			- 5 bits for value
-			- 1 bit for sign
-		1 = absolute (9 bits + 1 optional bit)
-			If value >= $180, then value = value * 2 - $180 + next bit 
-
-Production algorithm :
-For each next tile
-	if next tile = previous tile 
-		then produce command 00
-	else if next tile = next tile from tileset with previous tile HFlip direction
-		then produce command 01
-	else if next tile = mapped right tile of previous tile
-		then produce command 100
-	else if next tile = mapped bottom tile of 3rd previous tile
-		then produce command 101
-	else if next tile's flags = previous tile's flags 
-		then produce command 110
-	else produce command 111
-	
-	
-********** Map Layout *******************
+********** 2. Map Layout *******************
 
 
 - 64x64=4096 blocks
-
 Stop when 4096 have been output.
 
-Commands :
-- 00 : incremented block value starting from value 2
-	Apply flags as described below.
+- 2 block history maps : left and upper blocks.
+- 4-block history stacks per block value. Those 4-block stacks are made of strictly different values, including flags.
+
+- Commands :
+	- 00 : incremented block value starting from value 2
+		Apply flags as described below.
+		
+	- 01 : count "0" bits until next bit "1" = value length in bits, 
+		then value = value + 2^count
+		then last bit :
+			- 0 = copy section from upper block N times
+			- 1 = copy section from left block N times
+		No writes in stack maps.
 	
-- 01 : count "0" bits until next bit "1" = value length in bits, 
-	then value = value + 2^count
-	then last bit :
-		- 0 = copy section from upper block N times
-		- 1 = copy section from left block N times
-	No writes in stack maps.
+	- 10 : Get block from left history map
+		count "0" bits to get index of block in history stack.
+		if counter reaches current stack length, then get last stack value.
+	
+	- 110 
+	or 10 with no left stack : Get block from upper history map
+		same as left history.
+	
+	- 111 
+	or 11 with no left or upper stack 
+	or 1 with no left and upper stack : Get custom block
 
-- 10 : Get block from left history map
-	count "0" bits to get index of block in history stack.
-	if counter reaches current stack length, then get last stack value.
-
-- 110 
-or 10 with no left stack : Get block from upper history map
-	same as left history.
-
-- 111 
-or 11 with no left or upper stack 
-or 1 with no left and upper stack : Get custom block
-
-
-
-Flag application :
-Flags applied according to next bits :
-	- 00 : no flag set (walkable block)
-	- 01 : $C000 (obstructed)
-	- 100 : $4000 (stairs)
-	- 101 : $8000 (reversed stairs)
-	- 11 : next 6 bits = flag mask XXXX XX00 0000 0000
-
-
-				BNC's Caravan flag masks :
-        0xc000 1100 00 obstr
-        0x4000 0100 00 stairs
-        
-        0x3000 0011 00 barrel
-        0x2c00 0010 11 vase
-        0x2800 0010 10 table
-        0x1c00 0001 11 search
-        0x1800 0001 10 chest
-        0x1400 0001 01 trigger OK
-        0x1000 0001 00 warp OK
-        
-        0x0c00 0000 11 hide OK
-        0x0800 0000 10 show OK
-        0x0400 0000 01 copy OK
-        
-        Observed values in SF2MapLayoutManager : 
-        X  1000 00 obstructed
-        
-        	 0001 00 warp
-        	 
-        	 0001 01 trigger
-        
-        \  0101 00 stairs warp
-         \ 0101 01 stairs trigger
-         / 1001 00 reverse stairs warp
-        /  1001 01 reverse stairs trigger
-        
-        \  0400 00 stairs
-        /  1100 00 reverse stairs
-        
-        O  0000 10 show
-        
-        /  1000 10 reversed stairs copy
-
-2 block history maps : left and upper blocks.
-4-block history stacks per block value. Those 4-block stacks are made of strictly different values, including flags.
-
+- Flag application :
+	Flags applied according to next bits :
+		- 00 : no flag set (walkable block)
+		- 01 : $C000 (obstructed)
+		- 100 : $4000 (stairs)
+		- 101 : $8000 (reversed stairs)
+		- 11 : next 6 bits = flag mask XXXX XX00 0000 0000
+	
+	
+                BNC's Caravan flag masks :
+	        0xc000 1100 00 obstr
+	        0x4000 0100 00 stairs
+	        
+	        0x3000 0011 00 barrel
+	        0x2c00 0010 11 vase
+	        0x2800 0010 10 table
+	        0x1c00 0001 11 search
+	        0x1800 0001 10 chest
+	        0x1400 0001 01 trigger
+	        0x1000 0001 00 warp
+	        
+	        0x0c00 0000 11 hide
+	        0x0800 0000 10 show
+	        0x0400 0000 01 copy
 
 Rewrite algorithm :
 
-- Rewrite blockset 
-Write blocks in order or appearance on the map layout
-Then write remaining unused blocks from original blockset
+	- Rewrite blockset 
+	Write blocks in order or appearance on the map layout
+	Then write remaining unused blocks from original blockset
 
-- Rewrite layout
-Until last block is produced
-	check valid commands :
-	- Copy section from : 01 + length + type - 4-n bits
-	  if next block+flags == left block
-	  	then count until next block+flag != left block
-	  	produce command and keep number of copied blocks
-	  if next block+flags == upper block
-	  	then count until next block+flag != upper block
-	  	produce command and keep number of copied blocks
-	- Get block from left history map : 10 + index - 2-7 bits
-		if next block+flags is contained in left block's history stack
-			then produce command
-	- Get block from upper history stack : 10 or 110 + index - 2-8 bits
-		if next block+flags is contained in upper block's history stack
-			then produce command
-				if left block's stack is empty : 10
-					else : 110
-	- Get next block from blockset : 00 flags - 4-5 bits
-	  if next block == next block from blockset
-	  	then produce command					
-	- Custom block : 1 or 11 or 111 + value + flags - 5-n bits
-	  if no other command could be produced
-	  	then produce command
-	  		if left and upper blocks empty : 1
-	  			else if left or upper block empty : 11
-	  			 else : 111
-	  
-	select prioritized command
-	If section copy available with more than 1 block copy
-		then get section copy with most copied blocks
-	else get shortest available command
-	
-	output command
-	
-	if output command != section copy
-		then update history maps
+	- Rewrite layout
+	Until last block is produced
+		check valid commands :
+		- Copy section from : 01 + length + type - 4-n bits
+		  if next block+flags == left block
+		  	then count until next block+flag != left block
+		  	produce command and keep number of copied blocks
+		  if next block+flags == upper block
+		  	then count until next block+flag != upper block
+		  	produce command and keep number of copied blocks
+		- Get block from left history map : 10 + index - 2-7 bits
+			if next block+flags is contained in left block's history stack
+				then produce command
+		- Get block from upper history stack : 10 or 110 + index - 2-8 bits
+			if next block+flags is contained in upper block's history stack
+				then produce command
+					if left block's stack is empty : 10
+						else : 110
+		- Get next block from blockset : 00 flags - 4-5 bits
+		  if next block == next block from blockset
+		  	then produce command					
+		- Custom block : 1 or 11 or 111 + value + flags - 5-n bits
+		  if no other command could be produced
+		  	then produce command
+		  		if left and upper blocks empty : 1
+		  			else if left or upper block empty : 11
+		  			 else : 111
+		  
+		select prioritized command
+		If section copy available with more than 1 block copy
+			then get section copy with most copied blocks
+		else get shortest available command
 		
+		output command
 		
-	
+		if output command != section copy
+			then update history maps
+
+
+*************** 3. Areas *******************
+
+- 30-byte entries.
+- Repeat following section for each area :
+    Byte 00-01  Layer 1 start X
+    Byte 02-03  Layer 1 start Y
+    Byte 04-05  Layer 1 end X
+    Byte 06-07  Layer 1 end Y
+    Byte 08-09  Foreground Layer 2 start X - No layer 2 coordinates set = no layer 2.
+    Byte 0a-0b  Foreground Layer 2 start Y
+    Byte 0c-0d  Background Layer 2 start X 
+    Byte 0e-0f  Background Layer 2 start Y
+    Byte 10-11  Layer 1 X Parallax
+    Byte 12-13  Layer 1 Y Parallax
+    Byte 14-15  Layer 2 X Parallax - Default = 256. Mitula's Shrine sky = 16. Far landscape backgrounds (Ancient Tower, Tristan Bridge) = 128. 
+    Byte 16-17  Layer 2 Y Parallax
+    Byte 18     Layer 1 X Autoscroll - Default = 0. Mitula's Shrine = 1.
+    Byte 19     Layer 1 Y Autoscroll
+    Byte 1a     Layer 2 X Autoscroll
+    Byte 1b     Layer 2 Y Autoscroll
+    Byte 1c     Layer Type - $00 = Foreground Layer, else $FF = Background Layer. Overworld maps have value $FE, but no Layer 2 ...
+                Note : disassembled code seems to only care about this byte being set or not, so values $FE and $FF may have the same effect !
+    Byte 1d     Default music
+- Section ends with value $FFFF.
+
+
+********* 4. Flag Block Copies *************
+
+- 8 bytes per entry
+- Block copies triggered by a defined flag
+    Byte 00-01  flag
+    Byte 02     top-left X coord of source
+    Byte 03     top-left Y coord of source
+    Byte 04     width to copy
+    Byte 05     height to copy
+    Byte 06     top-left X coord of dest
+    Byte 07     top-left Y coord of dest
+- Ends with $FFFF
+
+
+********* 5. Step Block Copies *************
+
+- 8 bytes per entry
+- Block copies triggered by stepping on a defined block.
+    Byte 00  	Trigger X
+    Byte 01     Trigger Y
+    Byte 02     Source X
+    Byte 03     Source Y
+    Byte 04     Width
+    Byte 05     Height
+    Byte 06     Dest X
+    Byte 07     Dest Y
+- Ends with $FFFF
+  
+  
+********* 6. Layer 2 Block Copies *************
+
+- 8 bytes per entry
+- Layer 2 block copies (mostly roofs) triggered by stepping on a defined block.
+    Byte 00  	Trigger X
+    Byte 01     Trigger Y
+    Byte 02     Source X
+    Byte 03     Source Y
+    Byte 04     Width
+    Byte 05     Height
+    Byte 06     Dest X
+    Byte 07     Dest Y
+- Ends with $FFFF
+
+  
+**************** 7. Warps *********************
+
+Warps
+
+- 8 bytes per entry
+- Layer 2 block copies (mostly roofs) triggered by stepping on a defined block.
+    Byte 00  	Trigger X
+    Byte 01     Trigger Y
+    Byte 02     Unused, always 00
+    Byte 03     Destination Map
+    Byte 04     Destination X
+    Byte 05     Destination Y
+    Byte 06     Facing
+    Byte 07     Unused, always 00
+- Ends with $FFFF
+
+
+**************** 8. Chest Items **************
+
+- 4 bytes per entry
+- Items contained in chests, needing the chest open animation.
+    Byte 00  	X
+    Byte 01     Y
+    Byte 02     Item Flag
+    Byte 03     Item Id
+- Ends with $FFFF
+
+
+**************** 9. Non-Chest Items **********
+
+- 4 bytes per entry
+- Items not contained in chests, with no open animation.
+    Byte 00  	X
+    Byte 01     Y
+    Byte 02     Item Flag
+    Byte 03     Item Id
+- Ends with $FFFF
+
+
+**************** 10. Animations **************
+
+- 4-byte header :
+	- Bytes 00-01 : Tileset Index
+	- Bytes 02-03 : Tile length
+- 8 bytes per entry
+    Bytes 00-01 : Start
+    Bytes 02-03 : Length
+    Bytes 04-05 : Destination
+    Bytes 06-07 : Delay
+- Ends with $FFFF value

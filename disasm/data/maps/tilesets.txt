@@ -1,6 +1,0 @@
-
-Map Tilesets Declaration
-
-6 byte values :
-
-[Map Palette][Map Tileset 0][Map Tileset 1][Map Tileset 2][Map Tileset 3][Map Tileset 4]
