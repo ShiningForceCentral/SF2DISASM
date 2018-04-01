@@ -1,0 +1,7 @@
+
+Flag-switched maps
+
+- 6 bytes per entry
+- Ends with $FFFF value
+
+[Original Map ID][Flag][New Map ID]

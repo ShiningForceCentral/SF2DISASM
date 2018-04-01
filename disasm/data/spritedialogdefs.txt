@@ -1,0 +1,9 @@
+
+
+
+Sprite Dialog Properties
+
+- 4 bytes per entry
+- Ends with $FFFF value
+
+[Sprite ID][Portrait ID][Voice SFX ID][$00]
