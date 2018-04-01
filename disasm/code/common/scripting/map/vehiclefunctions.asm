@@ -87,7 +87,7 @@ MapEventType4:
 		lea     byte_45368(pc), a1
 		bsr.w   ApplyActscriptToFollowers
 		bsr.w   WaitForFollowersStopped
-		jsr     sub_443B2       
+		jsr     InitializeFollowerActscripts
 		move.b  #0,((PLAYER_TYPE-$1000000)).w
 		rts
 
@@ -207,7 +207,7 @@ MapEventType5:
 		lea     byte_45488(pc), a1
 		bsr.w   ApplyActscriptToHeroAndFollowers
 		bsr.w   WaitForHeroAndFollowersStopped
-		jsr     sub_443B2       
+		jsr     InitializeFollowerActscripts
 		move.b  #0,((PLAYER_TYPE-$1000000)).w
 		rts
 
@@ -356,7 +356,7 @@ GrowOutBowieAndFollowoers:
 		lea     eas_GrowOut(pc), a1
 		bsr.w   ApplyActscriptToFollowers
 		bsr.w   WaitForFollowersStopped
-		jsr     sub_443B2       
+		jsr     InitializeFollowerActscripts
 		move.b  #0,((PLAYER_TYPE-$1000000)).w
 		rts
 

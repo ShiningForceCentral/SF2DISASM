@@ -1,5 +1,5 @@
 
-; ASM FILE data\maps\global\mapsetups.asm :
+; ASM FILE data\maps\mapsetups.asm :
 ; 0x4F6E2..0x4FA70 : Map setups table
 MapSetups:      dc.w 3                  ; list of map event addresses and flags to check
 		dc.l ms_map3

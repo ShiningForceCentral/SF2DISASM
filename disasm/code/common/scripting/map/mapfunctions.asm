@@ -34,7 +34,7 @@ loc_440E2:
 		lea     ((FOLLOWERS_LIST-$1000000)).w,a3
 		movem.w d1-d3,-(sp)
 		moveq   #1,d0
-		bsr.w   sub_44298
+		bsr.w   InitializeFollowerEntities
 loc_44104:
 		move.b  (a0)+,d1
 		cmpi.b  #$FF,d1
@@ -70,7 +70,7 @@ loc_4415A:
 		movem.w d0-d1,-(sp)
 		clr.w   d0
 		move.b  d4,d0
-		bsr.w   GetCharacterSpriteIdx
+		bsr.w   GetForceMemberSpriteIdx
 		movem.w (sp)+,d0-d1
 		bra.s   loc_44172
 loc_44170:
@@ -87,12 +87,12 @@ loc_44180:
 		movem.w (sp)+,d1-d3
 		clr.w   d0
 		clr.l   d6
-		bsr.w   GetCharacterSpriteIdx
+		bsr.w   GetForceMemberSpriteIdx
 		move.l  #eas_Idle,d5
 		bsr.w   DeclareNewEntity
 		move.w  #$10,((SPRITE_SIZE-$1000000)).w
 		move.b  #$FF,(a3)
-		bsr.w   loc_44404
+		bsr.w   sub_44404
 		movem.l (sp)+,d0-a5
 		rts
 
@@ -189,10 +189,11 @@ OverworldMaps:  incbin "data/maps/global/overworldmaps.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_44298:
+InitializeFollowerEntities:
+		
 		cmpi.b  #$2E,((CURRENT_MAP-$1000000)).w 
 						; new granseal headquarters
-		beq.w   return_44336
+		beq.w   return_44336    ; HARDCODED maps with no followers
 		cmpi.b  #$25,((CURRENT_MAP-$1000000)).w 
 						; nazca ship headquarters
 		beq.w   return_44336
@@ -220,13 +221,13 @@ loc_442D2:
 		move.w  d0,-(sp)
 		clr.w   d0
 		move.b  1(a4),d0
-		cmpi.b  #$1E,d0
+		cmpi.b  #$1E,d0         ; HARDCODED max force member index
 		bcc.s   loc_44302
-		bsr.w   GetCharacterSpriteIdx
+		bsr.w   GetForceMemberSpriteIdx
 		bra.s   loc_44308
 loc_44302:
 		clr.w   d4
-		move.b  2(a4),d4
+		move.b  2(a4),d4        ; optional mapsprite index for non-force members
 loc_44308:
 		move.w  (sp)+,d0
 		clr.l   d6
@@ -250,5 +251,5 @@ loc_44332:
 return_44336:
 		rts
 
-	; End of function sub_44298
+	; End of function InitializeFollowerEntities
 

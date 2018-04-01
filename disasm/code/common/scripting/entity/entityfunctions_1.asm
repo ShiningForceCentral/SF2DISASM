@@ -94,7 +94,7 @@ InitializeNewEntity:
 		move.w  d0,-(sp)
 		tst.b   d0
 		blt.s   loc_4457E
-		bsr.w   GetCharacterSpriteIdx
+		bsr.w   GetForceMemberSpriteIdx
 loc_4457E:
 		lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
 		clr.w   d0

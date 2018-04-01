@@ -709,7 +709,7 @@ sub_2124A:
 		bhi.s   return_2127C
 		movem.l d0-d4/a0,-(sp)
 		move.w  d0,d1
-		jsr     j_GetCharacterSpriteIdx
+		jsr     j_GetForceMemberSpriteIdx
 		move.w  d4,d3
 		tst.b   d1
 		beq.w   loc_2126C

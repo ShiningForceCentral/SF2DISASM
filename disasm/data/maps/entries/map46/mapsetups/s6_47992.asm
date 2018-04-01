@@ -8,7 +8,7 @@ sub_47992:
 		movem.l d0-a2,-(sp)
 		moveq   #1,d0
 		moveq   #$1C,d7
-		lea     ((byte_FFA922-$1000000)).w,a0
+		lea     ((OTHER_ENTITIES-$1000000)).w,a0
 		lea     byte_47A38(pc), a2
 loc_479A2:
 		move.w  d0,d1
@@ -40,7 +40,7 @@ loc_479D0:
 		move.b  #3,$10(a0)
 		move.l  #eas_Idle,$14(a0)
 		movem.w d0-d4,-(sp)
-		jsr     j_GetCharacterSpriteIdx
+		jsr     j_GetForceMemberSpriteIdx
 		move.w  #3,d1
 		moveq   #$FFFFFFFF,d2
 		move.w  d4,d3

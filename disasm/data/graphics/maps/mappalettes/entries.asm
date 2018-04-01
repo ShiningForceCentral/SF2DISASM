@@ -1,5 +1,5 @@
 
-; ASM FILE data\maps\global\mappalettes.asm :
+; ASM FILE data\graphics\maps\mappalettes\entries.asm :
 ; 0x9494A..0x94B8A : Map palettes
 pt_MapPalettes: dc.l MapPalette00
 		dc.l MapPalette01

@@ -1,5 +1,5 @@
 
-; ASM FILE data\maps\global\maptilesets.asm :
+; ASM FILE data\graphics\maps\maptilesets\entries.asm :
 ; 0x6400C..0x9494A : Map Tilesets
 pt_MapTilesets: dc.l MapTileset000
 		dc.l MapTileset001

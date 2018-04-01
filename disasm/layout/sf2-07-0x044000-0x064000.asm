@@ -78,8 +78,8 @@ j_GrowOutBowieAndFollowoers:
 j_RunMapSetupInitFunction:		
 		jmp     RunMapSetupInitFunction(pc)
 sub_440AC:		jmp     sub_441AA(pc)
-j_GetCharacterSpriteIdx:		
-		jmp     GetCharacterSpriteIdx(pc)
+j_GetForceMemberSpriteIdx:		
+		jmp     GetForceMemberSpriteIdx(pc)
 j_RunMapSetupFunction:		
 		jmp     RunMapSetupFunction(pc)
 sub_440B8:		jmp     sub_444A2(pc)
@@ -138,7 +138,7 @@ j_ClearEntities:
 		include "data\scripting\map\cs_end.asm"		; End cutscene
 		include data\battles\entries\battlecutscenesstorage.asm
 		include "code\common\stats\items\itemfunctions_s7_0.asm"		; Unidentified item functions
-		include "data\maps\global\mapsetups.asm"		; Map setups table
-		;includeIfVanillaRom data\maps\global\mapsetupsstorage.asm
-		include data\maps\global\mapsetupsstorage.asm
+		include "data\maps\mapsetups.asm"		; Map setups table
+		;includeIfVanillaRom data\maps\mapsetupsstorage.asm
+		include data\maps\mapsetupsstorage.asm
 		align $64000

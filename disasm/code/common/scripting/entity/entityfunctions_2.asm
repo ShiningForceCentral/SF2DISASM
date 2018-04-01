@@ -4,14 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = char idx
-; Out: D4 = sprite idx
-; 
-; HARDCODED values
-
-GetCharacterSpriteIdx:
+GetForceMemberSpriteIdx:
 		
-		cmpi.w  #$1E,d0
+		cmpi.w  #$1E,d0         ; HARDCODED Force member max index
 		blt.s   loc_449D2
 		move.w  d0,d4
 		bra.w   return_44A5C
@@ -67,7 +62,7 @@ loc_44A5A:
 return_44A5C:
 		rts
 
-	; End of function GetCharacterSpriteIdx
+	; End of function GetForceMemberSpriteIdx
 
 AllySprites:    incbin "data/stats/allies/allyspriteids.bin"
 						; sprite IDs for each force character in battle
@@ -83,7 +78,7 @@ GetCombatantSpriteIdx:
 		move.w  -4(a6),d0
 		tst.b   d0
 		blt.s   loc_44A8E
-		bsr.w   GetCharacterSpriteIdx
+		bsr.w   GetForceMemberSpriteIdx
 		bra.s   loc_44A9E
 loc_44A8E:
 		move.w  d1,-(sp)

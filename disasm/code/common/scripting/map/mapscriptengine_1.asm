@@ -866,7 +866,7 @@ csc1A_setEntitySprite:
 		move.w  (a6)+,d0
 		cmpi.w  #$1E,d0
 		bcc.s   loc_46A5E
-		jsr     GetCharacterSpriteIdx
+		jsr     GetForceMemberSpriteIdx
 		move.w  d4,d0
 loc_46A5E:
 		move.b  d0,$13(a5)

@@ -19,9 +19,8 @@ pt_eas_WorldmapFollowers:
 
 ; =============== S U B R O U T I N E =======================================
 
-; initialize followers ?
-
-sub_443B2:
+InitializeFollowerActscripts:
+		
 		movem.l a6,-(sp)
 		lea     Followers(pc), a4
 		lea     pt_eas_Followers(pc), a6
@@ -33,7 +32,7 @@ sub_443B2:
 		lea     OverworldFollowers(pc), a4
 		lea     pt_eas_WorldmapFollowers(pc), a6
 loc_443D2:
-		lea     ((byte_FFA922-$1000000)).w,a0
+		lea     ((OTHER_ENTITIES-$1000000)).w,a0
 loc_443D6:
 		cmpi.w  #$FFFF,(a4)
 		beq.w   loc_443FE
@@ -51,10 +50,16 @@ loc_443FA:
 loc_443FE:
 		movem.l (sp)+,a6
 		rts
-loc_44404:
+
+	; End of function InitializeFollowerActscripts
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_44404:
 		cmpi.b  #2,((PLAYER_TYPE-$1000000)).w
 		bne.s   loc_44420
-		move.b  #$3D,((byte_FFA915-$1000000)).w 
+		move.b  #$3D,((ENTITY_MAPSPRITE-$1000000)).w 
 		bsr.w   sub_4446C
 		move.w  #$40,d1 
 		move.w  d1,d2
@@ -85,7 +90,7 @@ loc_4443C:
 return_4446A:
 		rts
 
-	; End of function sub_443B2
+	; End of function sub_44404
 
 
 ; =============== S U B R O U T I N E =======================================

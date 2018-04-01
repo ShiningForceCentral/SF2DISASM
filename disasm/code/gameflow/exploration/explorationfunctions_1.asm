@@ -101,7 +101,7 @@ loc_258BE:
 loc_258CE:
 		move.b  d3,$10(a0)
 		clr.w   d0
-		jsr     j_GetCharacterSpriteIdx
+		jsr     j_GetForceMemberSpriteIdx
 		move.w  d3,d1
 		moveq   #$FFFFFFFF,d2
 		move.w  d4,d3

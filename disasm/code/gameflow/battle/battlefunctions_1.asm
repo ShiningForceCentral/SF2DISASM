@@ -965,7 +965,7 @@ HandleKilledCombatants:
 loc_24526:
 		lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0
 						; loop point for sprite death spin animation
-		lea     ((word_FFA920-$1000000)).w,a1
+		lea     ((ENTITY_ANIMCOUNTER-$1000000)).w,a1
 		move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d7
 		subq.w  #1,d7
 loc_24534:

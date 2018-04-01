@@ -265,3 +265,6 @@ build/archives/buildcubewiz.bat
 *.zip
 *.pxf
 disasm/data/scripting/map/cs_introendroutine - Copy.asm
+disasm/data/scripting/text/sffc-script-v01.txt
+disasm/data/scripting/text/gamescript-fcremake.txt
+disasm/data/scripting/map/testintro.asm

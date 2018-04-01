@@ -8,7 +8,7 @@ sub_47948:
 		movem.l d0-a2,-(sp)
 		moveq   #1,d0
 		moveq   #$1C,d7
-		lea     ((byte_FFA922-$1000000)).w,a0
+		lea     ((OTHER_ENTITIES-$1000000)).w,a0
 		lea     byte_47A38(pc), a2
 loc_47958:
 		move.w  d0,d1

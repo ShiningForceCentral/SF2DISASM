@@ -3173,7 +3173,7 @@ loc_11D6C:
 		bne.s   loc_11DBC
 		clr.b   ((NUM_SPRITES_TO_LOAD-$1000000)).w
 		move.w  -2(a6),d0
-		jsr     j_GetCharacterSpriteIdx
+		jsr     j_GetForceMemberSpriteIdx
 		clr.w   d0
 		moveq   #3,d1
 		moveq   #$FFFFFFFF,d2
@@ -3238,7 +3238,7 @@ loc_11E54:
 		clr.w   d0
 		tst.b   ((PLAYER_TYPE-$1000000)).w
 		bne.s   loc_11E74
-		jsr     j_GetCharacterSpriteIdx
+		jsr     j_GetForceMemberSpriteIdx
 		bra.s   loc_11E82
 loc_11E74:
 		cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
@@ -3261,7 +3261,7 @@ loc_11E94:
 		tst.w   d1
 		bne.s   loc_11EBA
 		clr.w   d0
-		jsr     j_GetCharacterSpriteIdx
+		jsr     j_GetForceMemberSpriteIdx
 		clr.w   d0
 		clr.w   d1
 		move.b  $10(a0),d1
