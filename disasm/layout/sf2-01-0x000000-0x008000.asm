@@ -34,6 +34,7 @@
 		include "code\specialscreens\suspend\witchsuspend.asm"		; Witch suspend function
 		include "code\specialscreens\witchend\witchendinit.asm"		; Witch end function
 		include "code\gameflow\start\gameinit.asm"		; Game init
+		include "data\maps\global\debugmodemaps.asm"		; Debug mode maps
 		include "code\gameflow\start\gameintro.asm"		; Game intro
 		include "code\specialscreens\witch\witchactions.asm"		; Witch actions
 		include "code\gameflow\mainloop.asm"		; Main loop
@@ -41,6 +42,8 @@
 		include "code\gameflow\start\basetiles.asm"		; Base tiles loading
 		include "code\gameflow\special\battletest.asm"		; Battle test functions
 		include "code\common\maps\mapinit_0.asm"		; Map init functions
+		include "data\maps\global\flagswitchedmaps.asm"		; Flag-switched maps
+		include "code\common\maps\getbattle.asm"		; GetNextBattleOnMap function
 		includeIfVanillaRom "code\common\maps\mapcoords.asm"		; Map coords data
 		include "code\specialscreens\witch\witchfunctions.asm"		; Witch functions
 		include "code\gameflow\special\configurationmode.asm"		; Configuration mode function

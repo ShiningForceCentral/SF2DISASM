@@ -1515,11 +1515,9 @@
 #split	0xB1E,0xB96,data/graphics/tech/fadingdata.bin
 #split	0x309E,0x30BE,data/graphics/tech/basepalette.bin
 #split	0x31CE,0x364E,data/maps/global/mapoffsethashtable.bin
-#split	0x7186,0x71C0,data/maps/global/debugmodeavailablemaps.bin
-#split	0x7988,0x799C,data/maps/global/flagswitchedmaps.bin
 #split	0x7A36,0x7B71,data/battles/global/battlemapcoords.bin
-#split	0x7B71,0x7BCA,data/maps/global/savepointmapcoords.bin
-#split	0x7BCA,0x7BDE,data/maps/global/raftresetmapcoords.bin
+#split	0x7B71,0x7BCA,data/battles/global/savepointmapcoords.bin
+#split	0x7BCA,0x7BDE,data/battles/global/raftresetmapcoords.bin
 #split	0x853A,0x855A,data/stats/allies/classes/classtypes.bin
 #split	0xACCA,0xACEA,data/stats/allies/classes/criticalhitsettings.bin
 #split	0xBCF0,0xBD24,data/stats/items/itembreakmessages.bin
@@ -1565,7 +1563,6 @@
 #split	0x228A2,0x228A8,data/stats/items/specialcaravandescriptions.bin
 #split	0x229E2,0x229EC,data/stats/items/usableoutsidebattleitems.bin
 #split	0x23658,0x23758,data/graphics/tech/unitcursortiles.bin
-#split	0x239AE,0x239C8,data/maps/global/chestgoldamounts.bin
 #split	0x25DF6,0x261A6,data/graphics/specialsprites/taros.bin
 #split	0x261A6,0x26552,data/graphics/specialsprites/kraken.bin
 #split	0x26552,0x268F2,data/graphics/specialsprites/nazcaship.bin
@@ -1595,7 +1592,6 @@
 #split	0x2E196,0x2E394,data/scripting/text/huffmantreeoffsets.bin
 #split	0x2E394,0x2EB34,data/scripting/text/huffmantrees.bin
 #split	0x4201E,0x425ED,data/scripting/gamestaff.bin
-#split	0x4428A,0x44298,data/maps/global/overworldmaps.bin
 #split	0x44338,0x4433C,data/overworldfollowers.bin
 #split	0x4433C,0x4438A,data/followers.bin
 #split	0x44A5E,0x44A7C,data/stats/allies/allyspriteids.bin

@@ -55,8 +55,10 @@ j_SuspendGame:		jmp     SuspendGame(pc)
 		include "code\common\stats\items\itemactions.asm"		; Item functions
 		include "code\gameflow\battle\battlefunctions_0.asm"		; Battle functions
 		include "code\gameflow\exploration\explorationfunctions_0.asm"		; Exploration functions
-		include "code\gameflow\battle\battlefunctions_1.asm"		; Battle functions
+		include "data\stats\items\chestgoldamounts.asm"		; Chest gold amounts
 		include "code\gameflow\exploration\explorationfunctions_1.asm"		; Exploration functions
+		include "code\gameflow\battle\battlefunctions_1.asm"		; Battle functions
+		include "code\gameflow\exploration\explorationfunctions_2.asm"		; Exploration functions
 		include "code\gameflow\battle\battlevints.asm"		; Battle VInt functions
 		include "code\gameflow\exploration\explorationvints.asm"		; Exploration VInt functions
 		include "code\common\tech\graphics\specialsprites.asm"		; Special Sprites functions

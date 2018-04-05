@@ -92,6 +92,7 @@ j_GetEntityPortaitAndSpeechSound:
 j_ClearEntities:		
 		jmp     ClearEntities(pc)
 		include "code\common\scripting\map\mapfunctions.asm"		; Map functions
+		include "data\maps\global\overworldmaps.asm"		; Overworld maps
 		include "code\common\scripting\map\followersfunctions.asm"		; Followers functions
 		include "code\common\scripting\entity\entityfunctions_1.asm"		; Entity functions
 		include "data\battles\global\battleneutralentities.asm"		; Battle entities which are not force members or enemies

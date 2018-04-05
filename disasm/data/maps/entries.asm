@@ -86,7 +86,7 @@ Map00:          incbin "data/maps/entries/map00/00-tilesets.bin"
 		dc.l Map00s2_Areas
 		dc.l Map00s3_FlagEvents
 		dc.l Map00s4_StepEvents
-		dc.l Map00s5_RootEvents
+		dc.l Map00s5_RoofEvents
 		dc.l Map00s6_WarpEvents
 		dc.l Map00s7_ChestItems
 		dc.l Map00s8_OtherItems
@@ -96,7 +96,7 @@ Map00s3_FlagEvents:
 		incbin "data/maps/entries/map00/3-flag-events.bin"
 Map00s4_StepEvents:
 		incbin "data/maps/entries/map00/4-step-events.bin"
-Map00s5_RootEvents:
+Map00s5_RoofEvents:
 		incbin "data/maps/entries/map00/5-roof-events.bin"
 Map00s6_WarpEvents:
 		incbin "data/maps/entries/map00/6-warp-events.bin"
@@ -114,7 +114,7 @@ Map01:          incbin "data/maps/entries/map01/00-tilesets.bin"
 		dc.l Map01s2_Areas
 		dc.l Map01s3_FlagEvents
 		dc.l Map01s4_StepEvents
-		dc.l Map01s5_RootEvents
+		dc.l Map01s5_RoofEvents
 		dc.l Map01s6_WarpEvents
 		dc.l Map01s7_ChestItems
 		dc.l Map01s8_OtherItems
@@ -124,7 +124,7 @@ Map01s3_FlagEvents:
 		incbin "data/maps/entries/map01/3-flag-events.bin"
 Map01s4_StepEvents:
 		incbin "data/maps/entries/map01/4-step-events.bin"
-Map01s5_RootEvents:
+Map01s5_RoofEvents:
 		incbin "data/maps/entries/map01/5-roof-events.bin"
 Map01s6_WarpEvents:
 		incbin "data/maps/entries/map01/6-warp-events.bin"
@@ -142,7 +142,7 @@ Map02:          incbin "data/maps/entries/map02/00-tilesets.bin"
 		dc.l Map02s2_Areas
 		dc.l Map02s3_FlagEvents
 		dc.l Map02s4_StepEvents
-		dc.l Map02s5_RootEvents
+		dc.l Map02s5_RoofEvents
 		dc.l Map02s6_WarpEvents
 		dc.l Map02s7_ChestItems
 		dc.l Map02s8_OtherItems
@@ -152,7 +152,7 @@ Map02s3_FlagEvents:
 		incbin "data/maps/entries/map02/3-flag-events.bin"
 Map02s4_StepEvents:
 		incbin "data/maps/entries/map02/4-step-events.bin"
-Map02s5_RootEvents:
+Map02s5_RoofEvents:
 		incbin "data/maps/entries/map02/5-roof-events.bin"
 Map02s6_WarpEvents:
 		incbin "data/maps/entries/map02/6-warp-events.bin"
@@ -168,7 +168,7 @@ Map03:          incbin "data/maps/entries/map03/00-tilesets.bin"
 		dc.l Map03s2_Areas
 		dc.l Map03s3_FlagEvents
 		dc.l Map03s4_StepEvents
-		dc.l Map03s5_RootEvents
+		dc.l Map03s5_RoofEvents
 		dc.l Map03s6_WarpEvents
 		dc.l Map03s7_ChestItems
 		dc.l Map03s8_OtherItems
@@ -178,7 +178,7 @@ Map03s3_FlagEvents:
 		incbin "data/maps/entries/map03/3-flag-events.bin"
 Map03s4_StepEvents:
 		incbin "data/maps/entries/map03/4-step-events.bin"
-Map03s5_RootEvents:
+Map03s5_RoofEvents:
 		incbin "data/maps/entries/map03/5-roof-events.bin"
 Map03s6_WarpEvents:
 		incbin "data/maps/entries/map03/6-warp-events.bin"
@@ -196,7 +196,7 @@ Map04:          incbin "data/maps/entries/map04/00-tilesets.bin"
 		dc.l Map04s2_Areas
 		dc.l Map04s3_FlagEvents
 		dc.l Map04s4_StepEvents
-		dc.l Map04s5_RootEvents
+		dc.l Map04s5_RoofEvents
 		dc.l Map04s6_WarpEvents
 		dc.l Map04s7_ChestItems
 		dc.l Map04s8_OtherItems
@@ -206,7 +206,7 @@ Map04s3_FlagEvents:
 		incbin "data/maps/entries/map04/3-flag-events.bin"
 Map04s4_StepEvents:
 		incbin "data/maps/entries/map04/4-step-events.bin"
-Map04s5_RootEvents:
+Map04s5_RoofEvents:
 		incbin "data/maps/entries/map04/5-roof-events.bin"
 Map04s6_WarpEvents:
 		incbin "data/maps/entries/map04/6-warp-events.bin"
@@ -222,7 +222,7 @@ Map05:          incbin "data/maps/entries/map05/00-tilesets.bin"
 		dc.l Map05s2_Areas
 		dc.l Map05s3_FlagEvents
 		dc.l Map05s4_StepEvents
-		dc.l Map05s5_RootEvents
+		dc.l Map05s5_RoofEvents
 		dc.l Map05s6_WarpEvents
 		dc.l Map05s7_ChestItems
 		dc.l Map05s8_OtherItems
@@ -232,7 +232,7 @@ Map05s3_FlagEvents:
 		incbin "data/maps/entries/map05/3-flag-events.bin"
 Map05s4_StepEvents:
 		incbin "data/maps/entries/map05/4-step-events.bin"
-Map05s5_RootEvents:
+Map05s5_RoofEvents:
 		incbin "data/maps/entries/map05/5-roof-events.bin"
 Map05s6_WarpEvents:
 		incbin "data/maps/entries/map05/6-warp-events.bin"
@@ -248,7 +248,7 @@ Map06:          incbin "data/maps/entries/map06/00-tilesets.bin"
 		dc.l Map06s2_Areas
 		dc.l Map06s3_FlagEvents
 		dc.l Map06s4_StepEvents
-		dc.l Map06s5_RootEvents
+		dc.l Map06s5_RoofEvents
 		dc.l Map06s6_WarpEvents
 		dc.l Map06s7_ChestItems
 		dc.l Map06s8_OtherItems
@@ -258,7 +258,7 @@ Map06s3_FlagEvents:
 		incbin "data/maps/entries/map06/3-flag-events.bin"
 Map06s4_StepEvents:
 		incbin "data/maps/entries/map06/4-step-events.bin"
-Map06s5_RootEvents:
+Map06s5_RoofEvents:
 		incbin "data/maps/entries/map06/5-roof-events.bin"
 Map06s6_WarpEvents:
 		incbin "data/maps/entries/map06/6-warp-events.bin"
@@ -276,7 +276,7 @@ Map07:          incbin "data/maps/entries/map07/00-tilesets.bin"
 		dc.l Map07s2_Areas
 		dc.l Map07s3_FlagEvents
 		dc.l Map07s4_StepEvents
-		dc.l Map07s5_RootEvents
+		dc.l Map07s5_RoofEvents
 		dc.l Map07s6_WarpEvents
 		dc.l Map07s7_ChestItems
 		dc.l Map07s8_OtherItems
@@ -286,7 +286,7 @@ Map07s3_FlagEvents:
 		incbin "data/maps/entries/map07/3-flag-events.bin"
 Map07s4_StepEvents:
 		incbin "data/maps/entries/map07/4-step-events.bin"
-Map07s5_RootEvents:
+Map07s5_RoofEvents:
 		incbin "data/maps/entries/map07/5-roof-events.bin"
 Map07s6_WarpEvents:
 		incbin "data/maps/entries/map07/6-warp-events.bin"
@@ -302,7 +302,7 @@ Map08:          incbin "data/maps/entries/map08/00-tilesets.bin"
 		dc.l Map08s2_Areas
 		dc.l Map08s3_FlagEvents
 		dc.l Map08s4_StepEvents
-		dc.l Map08s5_RootEvents
+		dc.l Map08s5_RoofEvents
 		dc.l Map08s6_WarpEvents
 		dc.l Map08s7_ChestItems
 		dc.l Map08s8_OtherItems
@@ -312,7 +312,7 @@ Map08s3_FlagEvents:
 		incbin "data/maps/entries/map08/3-flag-events.bin"
 Map08s4_StepEvents:
 		incbin "data/maps/entries/map08/4-step-events.bin"
-Map08s5_RootEvents:
+Map08s5_RoofEvents:
 		incbin "data/maps/entries/map08/5-roof-events.bin"
 Map08s6_WarpEvents:
 		incbin "data/maps/entries/map08/6-warp-events.bin"
@@ -328,7 +328,7 @@ Map09:          incbin "data/maps/entries/map09/00-tilesets.bin"
 		dc.l Map09s2_Areas
 		dc.l Map09s3_FlagEvents
 		dc.l Map09s4_StepEvents
-		dc.l Map09s5_RootEvents
+		dc.l Map09s5_RoofEvents
 		dc.l Map09s6_WarpEvents
 		dc.l Map09s7_ChestItems
 		dc.l Map09s8_OtherItems
@@ -338,7 +338,7 @@ Map09s3_FlagEvents:
 		incbin "data/maps/entries/map09/3-flag-events.bin"
 Map09s4_StepEvents:
 		incbin "data/maps/entries/map09/4-step-events.bin"
-Map09s5_RootEvents:
+Map09s5_RoofEvents:
 		incbin "data/maps/entries/map09/5-roof-events.bin"
 Map09s6_WarpEvents:
 		incbin "data/maps/entries/map09/6-warp-events.bin"
@@ -354,7 +354,7 @@ Map10:          incbin "data/maps/entries/map10/00-tilesets.bin"
 		dc.l Map10s2_Areas
 		dc.l Map10s3_FlagEvents
 		dc.l Map10s4_StepEvents
-		dc.l Map10s5_RootEvents
+		dc.l Map10s5_RoofEvents
 		dc.l Map10s6_WarpEvents
 		dc.l Map10s7_ChestItems
 		dc.l Map10s8_OtherItems
@@ -364,7 +364,7 @@ Map10s3_FlagEvents:
 		incbin "data/maps/entries/map10/3-flag-events.bin"
 Map10s4_StepEvents:
 		incbin "data/maps/entries/map10/4-step-events.bin"
-Map10s5_RootEvents:
+Map10s5_RoofEvents:
 		incbin "data/maps/entries/map10/5-roof-events.bin"
 Map10s6_WarpEvents:
 		incbin "data/maps/entries/map10/6-warp-events.bin"
@@ -380,7 +380,7 @@ Map11:          incbin "data/maps/entries/map11/00-tilesets.bin"
 		dc.l Map11s2_Areas
 		dc.l Map11s3_FlagEvents
 		dc.l Map11s4_StepEvents
-		dc.l Map11s5_RootEvents
+		dc.l Map11s5_RoofEvents
 		dc.l Map11s6_WarpEvents
 		dc.l Map11s7_ChestItems
 		dc.l Map11s8_OtherItems
@@ -390,7 +390,7 @@ Map11s3_FlagEvents:
 		incbin "data/maps/entries/map11/3-flag-events.bin"
 Map11s4_StepEvents:
 		incbin "data/maps/entries/map11/4-step-events.bin"
-Map11s5_RootEvents:
+Map11s5_RoofEvents:
 		incbin "data/maps/entries/map11/5-roof-events.bin"
 Map11s6_WarpEvents:
 		incbin "data/maps/entries/map11/6-warp-events.bin"
@@ -406,7 +406,7 @@ Map12:          incbin "data/maps/entries/map12/00-tilesets.bin"
 		dc.l Map12s2_Areas
 		dc.l Map12s3_FlagEvents
 		dc.l Map12s4_StepEvents
-		dc.l Map12s5_RootEvents
+		dc.l Map12s5_RoofEvents
 		dc.l Map12s6_WarpEvents
 		dc.l Map12s7_ChestItems
 		dc.l Map12s8_OtherItems
@@ -416,7 +416,7 @@ Map12s3_FlagEvents:
 		incbin "data/maps/entries/map12/3-flag-events.bin"
 Map12s4_StepEvents:
 		incbin "data/maps/entries/map12/4-step-events.bin"
-Map12s5_RootEvents:
+Map12s5_RoofEvents:
 		incbin "data/maps/entries/map12/5-roof-events.bin"
 Map12s6_WarpEvents:
 		incbin "data/maps/entries/map12/6-warp-events.bin"
@@ -432,7 +432,7 @@ Map13:          incbin "data/maps/entries/map13/00-tilesets.bin"
 		dc.l Map13s2_Areas
 		dc.l Map13s3_FlagEvents
 		dc.l Map13s4_StepEvents
-		dc.l Map13s5_RootEvents
+		dc.l Map13s5_RoofEvents
 		dc.l Map13s6_WarpEvents
 		dc.l Map13s7_ChestItems
 		dc.l Map13s8_OtherItems
@@ -442,7 +442,7 @@ Map13s3_FlagEvents:
 		incbin "data/maps/entries/map13/3-flag-events.bin"
 Map13s4_StepEvents:
 		incbin "data/maps/entries/map13/4-step-events.bin"
-Map13s5_RootEvents:
+Map13s5_RoofEvents:
 		incbin "data/maps/entries/map13/5-roof-events.bin"
 Map13s6_WarpEvents:
 		incbin "data/maps/entries/map13/6-warp-events.bin"
@@ -458,7 +458,7 @@ Map14:          incbin "data/maps/entries/map14/00-tilesets.bin"
 		dc.l Map14s2_Areas
 		dc.l Map14s3_FlagEvents
 		dc.l Map14s4_StepEvents
-		dc.l Map14s5_RootEvents
+		dc.l Map14s5_RoofEvents
 		dc.l Map14s6_WarpEvents
 		dc.l Map14s7_ChestItems
 		dc.l Map14s8_OtherItems
@@ -468,7 +468,7 @@ Map14s3_FlagEvents:
 		incbin "data/maps/entries/map14/3-flag-events.bin"
 Map14s4_StepEvents:
 		incbin "data/maps/entries/map14/4-step-events.bin"
-Map14s5_RootEvents:
+Map14s5_RoofEvents:
 		incbin "data/maps/entries/map14/5-roof-events.bin"
 Map14s6_WarpEvents:
 		incbin "data/maps/entries/map14/6-warp-events.bin"
@@ -486,7 +486,7 @@ Map15:          incbin "data/maps/entries/map15/00-tilesets.bin"
 		dc.l Map15s2_Areas
 		dc.l Map15s3_FlagEvents
 		dc.l Map15s4_StepEvents
-		dc.l Map15s5_RootEvents
+		dc.l Map15s5_RoofEvents
 		dc.l Map15s6_WarpEvents
 		dc.l Map15s7_ChestItems
 		dc.l Map15s8_OtherItems
@@ -496,7 +496,7 @@ Map15s3_FlagEvents:
 		incbin "data/maps/entries/map15/3-flag-events.bin"
 Map15s4_StepEvents:
 		incbin "data/maps/entries/map15/4-step-events.bin"
-Map15s5_RootEvents:
+Map15s5_RoofEvents:
 		incbin "data/maps/entries/map15/5-roof-events.bin"
 Map15s6_WarpEvents:
 		incbin "data/maps/entries/map15/6-warp-events.bin"
@@ -514,7 +514,7 @@ Map16:          incbin "data/maps/entries/map16/00-tilesets.bin"
 		dc.l Map16s2_Areas
 		dc.l Map16s3_FlagEvents
 		dc.l Map16s4_StepEvents
-		dc.l Map16s5_RootEvents
+		dc.l Map16s5_RoofEvents
 		dc.l Map16s6_WarpEvents
 		dc.l Map16s7_ChestItems
 		dc.l Map16s8_OtherItems
@@ -524,7 +524,7 @@ Map16s3_FlagEvents:
 		incbin "data/maps/entries/map16/3-flag-events.bin"
 Map16s4_StepEvents:
 		incbin "data/maps/entries/map16/4-step-events.bin"
-Map16s5_RootEvents:
+Map16s5_RoofEvents:
 		incbin "data/maps/entries/map16/5-roof-events.bin"
 Map16s6_WarpEvents:
 		incbin "data/maps/entries/map16/6-warp-events.bin"
@@ -542,7 +542,7 @@ Map17:          incbin "data/maps/entries/map17/00-tilesets.bin"
 		dc.l Map17s2_Areas
 		dc.l Map17s3_FlagEvents
 		dc.l Map17s4_StepEvents
-		dc.l Map17s5_RootEvents
+		dc.l Map17s5_RoofEvents
 		dc.l Map17s6_WarpEvents
 		dc.l Map17s7_ChestItems
 		dc.l Map17s8_OtherItems
@@ -552,7 +552,7 @@ Map17s3_FlagEvents:
 		incbin "data/maps/entries/map17/3-flag-events.bin"
 Map17s4_StepEvents:
 		incbin "data/maps/entries/map17/4-step-events.bin"
-Map17s5_RootEvents:
+Map17s5_RoofEvents:
 		incbin "data/maps/entries/map17/5-roof-events.bin"
 Map17s6_WarpEvents:
 		incbin "data/maps/entries/map17/6-warp-events.bin"
@@ -568,7 +568,7 @@ Map18:          incbin "data/maps/entries/map18/00-tilesets.bin"
 		dc.l Map18s2_Areas
 		dc.l Map18s3_FlagEvents
 		dc.l Map18s4_StepEvents
-		dc.l Map18s5_RootEvents
+		dc.l Map18s5_RoofEvents
 		dc.l Map18s6_WarpEvents
 		dc.l Map18s7_ChestItems
 		dc.l Map18s8_OtherItems
@@ -578,7 +578,7 @@ Map18s3_FlagEvents:
 		incbin "data/maps/entries/map18/3-flag-events.bin"
 Map18s4_StepEvents:
 		incbin "data/maps/entries/map18/4-step-events.bin"
-Map18s5_RootEvents:
+Map18s5_RoofEvents:
 		incbin "data/maps/entries/map18/5-roof-events.bin"
 Map18s6_WarpEvents:
 		incbin "data/maps/entries/map18/6-warp-events.bin"
@@ -594,7 +594,7 @@ Map19:          incbin "data/maps/entries/map19/00-tilesets.bin"
 		dc.l Map19s2_Areas
 		dc.l Map19s3_FlagEvents
 		dc.l Map19s4_StepEvents
-		dc.l Map19s5_RootEvents
+		dc.l Map19s5_RoofEvents
 		dc.l Map19s6_WarpEvents
 		dc.l Map19s7_ChestItems
 		dc.l Map19s8_OtherItems
@@ -604,7 +604,7 @@ Map19s3_FlagEvents:
 		incbin "data/maps/entries/map19/3-flag-events.bin"
 Map19s4_StepEvents:
 		incbin "data/maps/entries/map19/4-step-events.bin"
-Map19s5_RootEvents:
+Map19s5_RoofEvents:
 		incbin "data/maps/entries/map19/5-roof-events.bin"
 Map19s6_WarpEvents:
 		incbin "data/maps/entries/map19/6-warp-events.bin"
@@ -620,7 +620,7 @@ Map20:          incbin "data/maps/entries/map20/00-tilesets.bin"
 		dc.l Map20s2_Areas
 		dc.l Map20s3_FlagEvents
 		dc.l Map20s4_StepEvents
-		dc.l Map20s5_RootEvents
+		dc.l Map20s5_RoofEvents
 		dc.l Map20s6_WarpEvents
 		dc.l Map20s7_ChestItems
 		dc.l Map20s8_OtherItems
@@ -630,7 +630,7 @@ Map20s3_FlagEvents:
 		incbin "data/maps/entries/map20/3-flag-events.bin"
 Map20s4_StepEvents:
 		incbin "data/maps/entries/map20/4-step-events.bin"
-Map20s5_RootEvents:
+Map20s5_RoofEvents:
 		incbin "data/maps/entries/map20/5-roof-events.bin"
 Map20s6_WarpEvents:
 		incbin "data/maps/entries/map20/6-warp-events.bin"
@@ -646,7 +646,7 @@ Map21:          incbin "data/maps/entries/map21/00-tilesets.bin"
 		dc.l Map21s2_Areas
 		dc.l Map21s3_FlagEvents
 		dc.l Map21s4_StepEvents
-		dc.l Map21s5_RootEvents
+		dc.l Map21s5_RoofEvents
 		dc.l Map21s6_WarpEvents
 		dc.l Map21s7_ChestItems
 		dc.l Map21s8_OtherItems
@@ -656,7 +656,7 @@ Map21s3_FlagEvents:
 		incbin "data/maps/entries/map21/3-flag-events.bin"
 Map21s4_StepEvents:
 		incbin "data/maps/entries/map21/4-step-events.bin"
-Map21s5_RootEvents:
+Map21s5_RoofEvents:
 		incbin "data/maps/entries/map21/5-roof-events.bin"
 Map21s6_WarpEvents:
 		incbin "data/maps/entries/map21/6-warp-events.bin"
@@ -672,7 +672,7 @@ Map22:          incbin "data/maps/entries/map22/00-tilesets.bin"
 		dc.l Map22s2_Areas
 		dc.l Map22s3_FlagEvents
 		dc.l Map22s4_StepEvents
-		dc.l Map22s5_RootEvents
+		dc.l Map22s5_RoofEvents
 		dc.l Map22s6_WarpEvents
 		dc.l Map22s7_ChestItems
 		dc.l Map22s8_OtherItems
@@ -682,7 +682,7 @@ Map22s3_FlagEvents:
 		incbin "data/maps/entries/map22/3-flag-events.bin"
 Map22s4_StepEvents:
 		incbin "data/maps/entries/map22/4-step-events.bin"
-Map22s5_RootEvents:
+Map22s5_RoofEvents:
 		incbin "data/maps/entries/map22/5-roof-events.bin"
 Map22s6_WarpEvents:
 		incbin "data/maps/entries/map22/6-warp-events.bin"
@@ -698,7 +698,7 @@ Map23:          incbin "data/maps/entries/map23/00-tilesets.bin"
 		dc.l Map23s2_Areas
 		dc.l Map23s3_FlagEvents
 		dc.l Map23s4_StepEvents
-		dc.l Map23s5_RootEvents
+		dc.l Map23s5_RoofEvents
 		dc.l Map23s6_WarpEvents
 		dc.l Map23s7_ChestItems
 		dc.l Map23s8_OtherItems
@@ -708,7 +708,7 @@ Map23s3_FlagEvents:
 		incbin "data/maps/entries/map23/3-flag-events.bin"
 Map23s4_StepEvents:
 		incbin "data/maps/entries/map23/4-step-events.bin"
-Map23s5_RootEvents:
+Map23s5_RoofEvents:
 		incbin "data/maps/entries/map23/5-roof-events.bin"
 Map23s6_WarpEvents:
 		incbin "data/maps/entries/map23/6-warp-events.bin"
@@ -724,7 +724,7 @@ Map24:          incbin "data/maps/entries/map24/00-tilesets.bin"
 		dc.l Map24s2_Areas
 		dc.l Map24s3_FlagEvents
 		dc.l Map24s4_StepEvents
-		dc.l Map24s5_RootEvents
+		dc.l Map24s5_RoofEvents
 		dc.l Map24s6_WarpEvents
 		dc.l Map24s7_ChestItems
 		dc.l Map24s8_OtherItems
@@ -734,7 +734,7 @@ Map24s3_FlagEvents:
 		incbin "data/maps/entries/map24/3-flag-events.bin"
 Map24s4_StepEvents:
 		incbin "data/maps/entries/map24/4-step-events.bin"
-Map24s5_RootEvents:
+Map24s5_RoofEvents:
 		incbin "data/maps/entries/map24/5-roof-events.bin"
 Map24s6_WarpEvents:
 		incbin "data/maps/entries/map24/6-warp-events.bin"
@@ -748,7 +748,7 @@ Map25:          incbin "data/maps/entries/map25/00-tilesets.bin"
 		dc.l Map25s2_Areas
 		dc.l Map25s3_FlagEvents
 		dc.l Map25s4_StepEvents
-		dc.l Map25s5_RootEvents
+		dc.l Map25s5_RoofEvents
 		dc.l Map25s6_WarpEvents
 		dc.l Map25s7_ChestItems
 		dc.l Map25s8_OtherItems
@@ -758,7 +758,7 @@ Map25s3_FlagEvents:
 		incbin "data/maps/entries/map25/3-flag-events.bin"
 Map25s4_StepEvents:
 		incbin "data/maps/entries/map25/4-step-events.bin"
-Map25s5_RootEvents:
+Map25s5_RoofEvents:
 		incbin "data/maps/entries/map25/5-roof-events.bin"
 Map25s6_WarpEvents:
 		incbin "data/maps/entries/map25/6-warp-events.bin"
@@ -774,7 +774,7 @@ Map26:          incbin "data/maps/entries/map26/00-tilesets.bin"
 		dc.l Map26s2_Areas
 		dc.l Map26s3_FlagEvents
 		dc.l Map26s4_StepEvents
-		dc.l Map26s5_RootEvents
+		dc.l Map26s5_RoofEvents
 		dc.l Map26s6_WarpEvents
 		dc.l Map26s7_ChestItems
 		dc.l Map26s8_OtherItems
@@ -784,7 +784,7 @@ Map26s3_FlagEvents:
 		incbin "data/maps/entries/map26/3-flag-events.bin"
 Map26s4_StepEvents:
 		incbin "data/maps/entries/map26/4-step-events.bin"
-Map26s5_RootEvents:
+Map26s5_RoofEvents:
 		incbin "data/maps/entries/map26/5-roof-events.bin"
 Map26s6_WarpEvents:
 		incbin "data/maps/entries/map26/6-warp-events.bin"
@@ -800,7 +800,7 @@ Map27:          incbin "data/maps/entries/map27/00-tilesets.bin"
 		dc.l Map27s2_Areas
 		dc.l Map27s3_FlagEvents
 		dc.l Map27s4_StepEvents
-		dc.l Map27s5_RootEvents
+		dc.l Map27s5_RoofEvents
 		dc.l Map27s6_WarpEvents
 		dc.l Map27s7_ChestItems
 		dc.l Map27s8_OtherItems
@@ -810,7 +810,7 @@ Map27s3_FlagEvents:
 		incbin "data/maps/entries/map27/3-flag-events.bin"
 Map27s4_StepEvents:
 		incbin "data/maps/entries/map27/4-step-events.bin"
-Map27s5_RootEvents:
+Map27s5_RoofEvents:
 		incbin "data/maps/entries/map27/5-roof-events.bin"
 Map27s6_WarpEvents:
 		incbin "data/maps/entries/map27/6-warp-events.bin"
@@ -826,7 +826,7 @@ Map28:          incbin "data/maps/entries/map28/00-tilesets.bin"
 		dc.l Map28s2_Areas
 		dc.l Map28s3_FlagEvents
 		dc.l Map28s4_StepEvents
-		dc.l Map28s5_RootEvents
+		dc.l Map28s5_RoofEvents
 		dc.l Map28s6_WarpEvents
 		dc.l Map28s7_ChestItems
 		dc.l Map28s8_OtherItems
@@ -836,7 +836,7 @@ Map28s3_FlagEvents:
 		incbin "data/maps/entries/map28/3-flag-events.bin"
 Map28s4_StepEvents:
 		incbin "data/maps/entries/map28/4-step-events.bin"
-Map28s5_RootEvents:
+Map28s5_RoofEvents:
 		incbin "data/maps/entries/map28/5-roof-events.bin"
 Map28s6_WarpEvents:
 		incbin "data/maps/entries/map28/6-warp-events.bin"
@@ -854,7 +854,7 @@ Map29:          incbin "data/maps/entries/map29/00-tilesets.bin"
 		dc.l Map29s2_Areas
 		dc.l Map29s3_FlagEvents
 		dc.l Map29s4_StepEvents
-		dc.l Map29s5_RootEvents
+		dc.l Map29s5_RoofEvents
 		dc.l Map29s6_WarpEvents
 		dc.l Map29s7_ChestItems
 		dc.l Map29s8_OtherItems
@@ -864,7 +864,7 @@ Map29s3_FlagEvents:
 		incbin "data/maps/entries/map29/3-flag-events.bin"
 Map29s4_StepEvents:
 		incbin "data/maps/entries/map29/4-step-events.bin"
-Map29s5_RootEvents:
+Map29s5_RoofEvents:
 		incbin "data/maps/entries/map29/5-roof-events.bin"
 Map29s6_WarpEvents:
 		incbin "data/maps/entries/map29/6-warp-events.bin"
@@ -882,7 +882,7 @@ Map30:          incbin "data/maps/entries/map30/00-tilesets.bin"
 		dc.l Map30s2_Areas
 		dc.l Map30s3_FlagEvents
 		dc.l Map30s4_StepEvents
-		dc.l Map30s5_RootEvents
+		dc.l Map30s5_RoofEvents
 		dc.l Map30s6_WarpEvents
 		dc.l Map30s7_ChestItems
 		dc.l Map30s8_OtherItems
@@ -892,7 +892,7 @@ Map30s3_FlagEvents:
 		incbin "data/maps/entries/map30/3-flag-events.bin"
 Map30s4_StepEvents:
 		incbin "data/maps/entries/map30/4-step-events.bin"
-Map30s5_RootEvents:
+Map30s5_RoofEvents:
 		incbin "data/maps/entries/map30/5-roof-events.bin"
 Map30s6_WarpEvents:
 		incbin "data/maps/entries/map30/6-warp-events.bin"
@@ -908,7 +908,7 @@ Map31:          incbin "data/maps/entries/map31/00-tilesets.bin"
 		dc.l Map31s2_Areas
 		dc.l Map31s3_FlagEvents
 		dc.l Map31s4_StepEvents
-		dc.l Map31s5_RootEvents
+		dc.l Map31s5_RoofEvents
 		dc.l Map31s6_WarpEvents
 		dc.l Map31s7_ChestItems
 		dc.l Map31s8_OtherItems
@@ -918,7 +918,7 @@ Map31s3_FlagEvents:
 		incbin "data/maps/entries/map31/3-flag-events.bin"
 Map31s4_StepEvents:
 		incbin "data/maps/entries/map31/4-step-events.bin"
-Map31s5_RootEvents:
+Map31s5_RoofEvents:
 		incbin "data/maps/entries/map31/5-roof-events.bin"
 Map31s6_WarpEvents:
 		incbin "data/maps/entries/map31/6-warp-events.bin"
@@ -934,7 +934,7 @@ Map32:          incbin "data/maps/entries/map32/00-tilesets.bin"
 		dc.l Map32s2_Areas
 		dc.l Map32s3_FlagEvents
 		dc.l Map32s4_StepEvents
-		dc.l Map32s5_RootEvents
+		dc.l Map32s5_RoofEvents
 		dc.l Map32s6_WarpEvents
 		dc.l Map32s7_ChestItems
 		dc.l Map32s8_OtherItems
@@ -944,7 +944,7 @@ Map32s3_FlagEvents:
 		incbin "data/maps/entries/map32/3-flag-events.bin"
 Map32s4_StepEvents:
 		incbin "data/maps/entries/map32/4-step-events.bin"
-Map32s5_RootEvents:
+Map32s5_RoofEvents:
 		incbin "data/maps/entries/map32/5-roof-events.bin"
 Map32s6_WarpEvents:
 		incbin "data/maps/entries/map32/6-warp-events.bin"
@@ -960,7 +960,7 @@ Map33:          incbin "data/maps/entries/map33/00-tilesets.bin"
 		dc.l Map33s2_Areas
 		dc.l Map33s3_FlagEvents
 		dc.l Map33s4_StepEvents
-		dc.l Map33s5_RootEvents
+		dc.l Map33s5_RoofEvents
 		dc.l Map33s6_WarpEvents
 		dc.l Map33s7_ChestItems
 		dc.l Map33s8_OtherItems
@@ -970,7 +970,7 @@ Map33s3_FlagEvents:
 		incbin "data/maps/entries/map33/3-flag-events.bin"
 Map33s4_StepEvents:
 		incbin "data/maps/entries/map33/4-step-events.bin"
-Map33s5_RootEvents:
+Map33s5_RoofEvents:
 		incbin "data/maps/entries/map33/5-roof-events.bin"
 Map33s6_WarpEvents:
 		incbin "data/maps/entries/map33/6-warp-events.bin"
@@ -988,7 +988,7 @@ Map34:          incbin "data/maps/entries/map34/00-tilesets.bin"
 		dc.l Map34s2_Areas
 		dc.l Map34s3_FlagEvents
 		dc.l Map34s4_StepEvents
-		dc.l Map34s5_RootEvents
+		dc.l Map34s5_RoofEvents
 		dc.l Map34s6_WarpEvents
 		dc.l Map34s7_ChestItems
 		dc.l Map34s8_OtherItems
@@ -998,7 +998,7 @@ Map34s3_FlagEvents:
 		incbin "data/maps/entries/map34/3-flag-events.bin"
 Map34s4_StepEvents:
 		incbin "data/maps/entries/map34/4-step-events.bin"
-Map34s5_RootEvents:
+Map34s5_RoofEvents:
 		incbin "data/maps/entries/map34/5-roof-events.bin"
 Map34s6_WarpEvents:
 		incbin "data/maps/entries/map34/6-warp-events.bin"
@@ -1016,7 +1016,7 @@ Map35:          incbin "data/maps/entries/map35/00-tilesets.bin"
 		dc.l Map35s2_Areas
 		dc.l Map35s3_FlagEvents
 		dc.l Map35s4_StepEvents
-		dc.l Map35s5_RootEvents
+		dc.l Map35s5_RoofEvents
 		dc.l Map35s6_WarpEvents
 		dc.l Map35s7_ChestItems
 		dc.l Map35s8_OtherItems
@@ -1026,7 +1026,7 @@ Map35s3_FlagEvents:
 		incbin "data/maps/entries/map35/3-flag-events.bin"
 Map35s4_StepEvents:
 		incbin "data/maps/entries/map35/4-step-events.bin"
-Map35s5_RootEvents:
+Map35s5_RoofEvents:
 		incbin "data/maps/entries/map35/5-roof-events.bin"
 Map35s6_WarpEvents:
 		incbin "data/maps/entries/map35/6-warp-events.bin"
@@ -1042,7 +1042,7 @@ Map36:          incbin "data/maps/entries/map36/00-tilesets.bin"
 		dc.l Map36s2_Areas
 		dc.l Map36s3_FlagEvents
 		dc.l Map36s4_StepEvents
-		dc.l Map36s5_RootEvents
+		dc.l Map36s5_RoofEvents
 		dc.l Map36s6_WarpEvents
 		dc.l Map36s7_ChestItems
 		dc.l Map36s8_OtherItems
@@ -1052,7 +1052,7 @@ Map36s3_FlagEvents:
 		incbin "data/maps/entries/map36/3-flag-events.bin"
 Map36s4_StepEvents:
 		incbin "data/maps/entries/map36/4-step-events.bin"
-Map36s5_RootEvents:
+Map36s5_RoofEvents:
 		incbin "data/maps/entries/map36/5-roof-events.bin"
 Map36s6_WarpEvents:
 		incbin "data/maps/entries/map36/6-warp-events.bin"
@@ -1068,7 +1068,7 @@ Map37:          incbin "data/maps/entries/map37/00-tilesets.bin"
 		dc.l Map37s2_Areas
 		dc.l Map37s3_FlagEvents
 		dc.l Map37s4_StepEvents
-		dc.l Map37s5_RootEvents
+		dc.l Map37s5_RoofEvents
 		dc.l Map37s6_WarpEvents
 		dc.l Map37s7_ChestItems
 		dc.l Map37s8_OtherItems
@@ -1078,7 +1078,7 @@ Map37s3_FlagEvents:
 		incbin "data/maps/entries/map37/3-flag-events.bin"
 Map37s4_StepEvents:
 		incbin "data/maps/entries/map37/4-step-events.bin"
-Map37s5_RootEvents:
+Map37s5_RoofEvents:
 		incbin "data/maps/entries/map37/5-roof-events.bin"
 Map37s6_WarpEvents:
 		incbin "data/maps/entries/map37/6-warp-events.bin"
@@ -1094,7 +1094,7 @@ Map38:          incbin "data/maps/entries/map38/00-tilesets.bin"
 		dc.l Map38s2_Areas
 		dc.l Map38s3_FlagEvents
 		dc.l Map38s4_StepEvents
-		dc.l Map38s5_RootEvents
+		dc.l Map38s5_RoofEvents
 		dc.l Map38s6_WarpEvents
 		dc.l Map38s7_ChestItems
 		dc.l Map38s8_OtherItems
@@ -1104,7 +1104,7 @@ Map38s3_FlagEvents:
 		incbin "data/maps/entries/map38/3-flag-events.bin"
 Map38s4_StepEvents:
 		incbin "data/maps/entries/map38/4-step-events.bin"
-Map38s5_RootEvents:
+Map38s5_RoofEvents:
 		incbin "data/maps/entries/map38/5-roof-events.bin"
 Map38s6_WarpEvents:
 		incbin "data/maps/entries/map38/6-warp-events.bin"
@@ -1120,7 +1120,7 @@ Map39:          incbin "data/maps/entries/map39/00-tilesets.bin"
 		dc.l Map39s2_Areas
 		dc.l Map39s3_FlagEvents
 		dc.l Map39s4_StepEvents
-		dc.l Map39s5_RootEvents
+		dc.l Map39s5_RoofEvents
 		dc.l Map39s6_WarpEvents
 		dc.l Map39s7_ChestItems
 		dc.l Map39s8_OtherItems
@@ -1130,7 +1130,7 @@ Map39s3_FlagEvents:
 		incbin "data/maps/entries/map39/3-flag-events.bin"
 Map39s4_StepEvents:
 		incbin "data/maps/entries/map39/4-step-events.bin"
-Map39s5_RootEvents:
+Map39s5_RoofEvents:
 		incbin "data/maps/entries/map39/5-roof-events.bin"
 Map39s6_WarpEvents:
 		incbin "data/maps/entries/map39/6-warp-events.bin"
@@ -1146,7 +1146,7 @@ Map40:          incbin "data/maps/entries/map40/00-tilesets.bin"
 		dc.l Map40s2_Areas
 		dc.l Map40s3_FlagEvents
 		dc.l Map40s4_StepEvents
-		dc.l Map40s5_RootEvents
+		dc.l Map40s5_RoofEvents
 		dc.l Map40s6_WarpEvents
 		dc.l Map40s7_ChestItems
 		dc.l Map40s8_OtherItems
@@ -1156,7 +1156,7 @@ Map40s3_FlagEvents:
 		incbin "data/maps/entries/map40/3-flag-events.bin"
 Map40s4_StepEvents:
 		incbin "data/maps/entries/map40/4-step-events.bin"
-Map40s5_RootEvents:
+Map40s5_RoofEvents:
 		incbin "data/maps/entries/map40/5-roof-events.bin"
 Map40s6_WarpEvents:
 		incbin "data/maps/entries/map40/6-warp-events.bin"
@@ -1172,7 +1172,7 @@ Map41:          incbin "data/maps/entries/map41/00-tilesets.bin"
 		dc.l Map41s2_Areas
 		dc.l Map41s3_FlagEvents
 		dc.l Map41s4_StepEvents
-		dc.l Map41s5_RootEvents
+		dc.l Map41s5_RoofEvents
 		dc.l Map41s6_WarpEvents
 		dc.l Map41s7_ChestItems
 		dc.l Map41s8_OtherItems
@@ -1182,7 +1182,7 @@ Map41s3_FlagEvents:
 		incbin "data/maps/entries/map41/3-flag-events.bin"
 Map41s4_StepEvents:
 		incbin "data/maps/entries/map41/4-step-events.bin"
-Map41s5_RootEvents:
+Map41s5_RoofEvents:
 		incbin "data/maps/entries/map41/5-roof-events.bin"
 Map41s6_WarpEvents:
 		incbin "data/maps/entries/map41/6-warp-events.bin"
@@ -1200,7 +1200,7 @@ Map42:          incbin "data/maps/entries/map42/00-tilesets.bin"
 		dc.l Map42s2_Areas
 		dc.l Map42s3_FlagEvents
 		dc.l Map42s4_StepEvents
-		dc.l Map42s5_RootEvents
+		dc.l Map42s5_RoofEvents
 		dc.l Map42s6_WarpEvents
 		dc.l Map42s7_ChestItems
 		dc.l Map42s8_OtherItems
@@ -1210,7 +1210,7 @@ Map42s3_FlagEvents:
 		incbin "data/maps/entries/map42/3-flag-events.bin"
 Map42s4_StepEvents:
 		incbin "data/maps/entries/map42/4-step-events.bin"
-Map42s5_RootEvents:
+Map42s5_RoofEvents:
 		incbin "data/maps/entries/map42/5-roof-events.bin"
 Map42s6_WarpEvents:
 		incbin "data/maps/entries/map42/6-warp-events.bin"
@@ -1226,7 +1226,7 @@ Map43:          incbin "data/maps/entries/map43/00-tilesets.bin"
 		dc.l Map43s2_Areas
 		dc.l Map43s3_FlagEvents
 		dc.l Map43s4_StepEvents
-		dc.l Map43s5_RootEvents
+		dc.l Map43s5_RoofEvents
 		dc.l Map43s6_WarpEvents
 		dc.l Map43s7_ChestItems
 		dc.l Map43s8_OtherItems
@@ -1236,7 +1236,7 @@ Map43s3_FlagEvents:
 		incbin "data/maps/entries/map43/3-flag-events.bin"
 Map43s4_StepEvents:
 		incbin "data/maps/entries/map43/4-step-events.bin"
-Map43s5_RootEvents:
+Map43s5_RoofEvents:
 		incbin "data/maps/entries/map43/5-roof-events.bin"
 Map43s6_WarpEvents:
 		incbin "data/maps/entries/map43/6-warp-events.bin"
@@ -1252,7 +1252,7 @@ Map44:          incbin "data/maps/entries/map44/00-tilesets.bin"
 		dc.l Map44s2_Areas
 		dc.l Map44s3_FlagEvents
 		dc.l Map44s4_StepEvents
-		dc.l Map44s5_RootEvents
+		dc.l Map44s5_RoofEvents
 		dc.l Map44s6_WarpEvents
 		dc.l Map44s7_ChestItems
 		dc.l Map44s8_OtherItems
@@ -1262,7 +1262,7 @@ Map44s3_FlagEvents:
 		incbin "data/maps/entries/map44/3-flag-events.bin"
 Map44s4_StepEvents:
 		incbin "data/maps/entries/map44/4-step-events.bin"
-Map44s5_RootEvents:
+Map44s5_RoofEvents:
 		incbin "data/maps/entries/map44/5-roof-events.bin"
 Map44s6_WarpEvents:
 		incbin "data/maps/entries/map44/6-warp-events.bin"
@@ -1280,7 +1280,7 @@ Map45:          incbin "data/maps/entries/map45/00-tilesets.bin"
 		dc.l Map45s2_Areas
 		dc.l Map45s3_FlagEvents
 		dc.l Map45s4_StepEvents
-		dc.l Map45s5_RootEvents
+		dc.l Map45s5_RoofEvents
 		dc.l Map45s6_WarpEvents
 		dc.l Map45s7_ChestItems
 		dc.l Map45s8_OtherItems
@@ -1290,7 +1290,7 @@ Map45s3_FlagEvents:
 		incbin "data/maps/entries/map45/3-flag-events.bin"
 Map45s4_StepEvents:
 		incbin "data/maps/entries/map45/4-step-events.bin"
-Map45s5_RootEvents:
+Map45s5_RoofEvents:
 		incbin "data/maps/entries/map45/5-roof-events.bin"
 Map45s6_WarpEvents:
 		incbin "data/maps/entries/map45/6-warp-events.bin"
@@ -1308,7 +1308,7 @@ Map46:          incbin "data/maps/entries/map46/00-tilesets.bin"
 		dc.l Map46s2_Areas
 		dc.l Map46s3_FlagEvents
 		dc.l Map46s4_StepEvents
-		dc.l Map46s5_RootEvents
+		dc.l Map46s5_RoofEvents
 		dc.l Map46s6_WarpEvents
 		dc.l Map46s7_ChestItems
 		dc.l Map46s8_OtherItems
@@ -1318,7 +1318,7 @@ Map46s3_FlagEvents:
 		incbin "data/maps/entries/map46/3-flag-events.bin"
 Map46s4_StepEvents:
 		incbin "data/maps/entries/map46/4-step-events.bin"
-Map46s5_RootEvents:
+Map46s5_RoofEvents:
 		incbin "data/maps/entries/map46/5-roof-events.bin"
 Map46s6_WarpEvents:
 		incbin "data/maps/entries/map46/6-warp-events.bin"
@@ -1332,7 +1332,7 @@ Map47:          incbin "data/maps/entries/map47/00-tilesets.bin"
 		dc.l Map47s2_Areas
 		dc.l Map47s3_FlagEvents
 		dc.l Map47s4_StepEvents
-		dc.l Map47s5_RootEvents
+		dc.l Map47s5_RoofEvents
 		dc.l Map47s6_WarpEvents
 		dc.l Map47s7_ChestItems
 		dc.l Map47s7_ChestItems
@@ -1342,7 +1342,7 @@ Map47s3_FlagEvents:
 		incbin "data/maps/entries/map47/3-flag-events.bin"
 Map47s4_StepEvents:
 		incbin "data/maps/entries/map47/4-step-events.bin"
-Map47s5_RootEvents:
+Map47s5_RoofEvents:
 		incbin "data/maps/entries/map47/5-roof-events.bin"
 Map47s6_WarpEvents:
 		incbin "data/maps/entries/map47/6-warp-events.bin"
@@ -1358,7 +1358,7 @@ Map48:          incbin "data/maps/entries/map48/00-tilesets.bin"
 		dc.l Map48s2_Areas
 		dc.l Map48s3_FlagEvents
 		dc.l Map48s4_StepEvents
-		dc.l Map48s5_RootEvents
+		dc.l Map48s5_RoofEvents
 		dc.l Map48s6_WarpEvents
 		dc.l Map48s7_ChestItems
 		dc.l Map48s8_OtherItems
@@ -1368,7 +1368,7 @@ Map48s3_FlagEvents:
 		incbin "data/maps/entries/map48/3-flag-events.bin"
 Map48s4_StepEvents:
 		incbin "data/maps/entries/map48/4-step-events.bin"
-Map48s5_RootEvents:
+Map48s5_RoofEvents:
 		incbin "data/maps/entries/map48/5-roof-events.bin"
 Map48s6_WarpEvents:
 		incbin "data/maps/entries/map48/6-warp-events.bin"
@@ -1386,7 +1386,7 @@ Map49:          incbin "data/maps/entries/map49/00-tilesets.bin"
 		dc.l Map49s2_Areas
 		dc.l Map49s3_FlagEvents
 		dc.l Map49s4_StepEvents
-		dc.l Map49s5_RootEvents
+		dc.l Map49s5_RoofEvents
 		dc.l Map49s6_WarpEvents
 		dc.l Map49s7_ChestItems
 		dc.l Map49s8_OtherItems
@@ -1396,7 +1396,7 @@ Map49s3_FlagEvents:
 		incbin "data/maps/entries/map49/3-flag-events.bin"
 Map49s4_StepEvents:
 		incbin "data/maps/entries/map49/4-step-events.bin"
-Map49s5_RootEvents:
+Map49s5_RoofEvents:
 		incbin "data/maps/entries/map49/5-roof-events.bin"
 Map49s6_WarpEvents:
 		incbin "data/maps/entries/map49/6-warp-events.bin"
@@ -1414,7 +1414,7 @@ Map50:          incbin "data/maps/entries/map50/00-tilesets.bin"
 		dc.l Map50s2_Areas
 		dc.l Map50s3_FlagEvents
 		dc.l Map50s4_StepEvents
-		dc.l Map50s5_RootEvents
+		dc.l Map50s5_RoofEvents
 		dc.l Map50s6_WarpEvents
 		dc.l Map50s7_ChestItems
 		dc.l Map50s8_OtherItems
@@ -1424,7 +1424,7 @@ Map50s3_FlagEvents:
 		incbin "data/maps/entries/map50/3-flag-events.bin"
 Map50s4_StepEvents:
 		incbin "data/maps/entries/map50/4-step-events.bin"
-Map50s5_RootEvents:
+Map50s5_RoofEvents:
 		incbin "data/maps/entries/map50/5-roof-events.bin"
 Map50s6_WarpEvents:
 		incbin "data/maps/entries/map50/6-warp-events.bin"
@@ -1442,7 +1442,7 @@ Map51:          incbin "data/maps/entries/map51/00-tilesets.bin"
 		dc.l Map51s2_Areas
 		dc.l Map51s3_FlagEvents
 		dc.l Map51s4_StepEvents
-		dc.l Map51s5_RootEvents
+		dc.l Map51s5_RoofEvents
 		dc.l Map51s6_WarpEvents
 		dc.l Map51s7_ChestItems
 		dc.l Map51s8_OtherItems
@@ -1452,7 +1452,7 @@ Map51s3_FlagEvents:
 		incbin "data/maps/entries/map51/3-flag-events.bin"
 Map51s4_StepEvents:
 		incbin "data/maps/entries/map51/4-step-events.bin"
-Map51s5_RootEvents:
+Map51s5_RoofEvents:
 		incbin "data/maps/entries/map51/5-roof-events.bin"
 Map51s6_WarpEvents:
 		incbin "data/maps/entries/map51/6-warp-events.bin"
@@ -1468,7 +1468,7 @@ Map52:          incbin "data/maps/entries/map52/00-tilesets.bin"
 		dc.l Map52s2_Areas
 		dc.l Map52s3_FlagEvents
 		dc.l Map52s4_StepEvents
-		dc.l Map52s5_RootEvents
+		dc.l Map52s5_RoofEvents
 		dc.l Map52s6_WarpEvents
 		dc.l Map52s7_ChestItems
 		dc.l Map52s8_OtherItems
@@ -1478,7 +1478,7 @@ Map52s3_FlagEvents:
 		incbin "data/maps/entries/map52/3-flag-events.bin"
 Map52s4_StepEvents:
 		incbin "data/maps/entries/map52/4-step-events.bin"
-Map52s5_RootEvents:
+Map52s5_RoofEvents:
 		incbin "data/maps/entries/map52/5-roof-events.bin"
 Map52s6_WarpEvents:
 		incbin "data/maps/entries/map52/6-warp-events.bin"
@@ -1494,7 +1494,7 @@ Map53:          incbin "data/maps/entries/map53/00-tilesets.bin"
 		dc.l Map53s2_Areas
 		dc.l Map53s3_FlagEvents
 		dc.l Map53s4_StepEvents
-		dc.l Map53s5_RootEvents
+		dc.l Map53s5_RoofEvents
 		dc.l Map53s6_WarpEvents
 		dc.l Map53s7_ChestItems
 		dc.l Map53s8_OtherItems
@@ -1504,7 +1504,7 @@ Map53s3_FlagEvents:
 		incbin "data/maps/entries/map53/3-flag-events.bin"
 Map53s4_StepEvents:
 		incbin "data/maps/entries/map53/4-step-events.bin"
-Map53s5_RootEvents:
+Map53s5_RoofEvents:
 		incbin "data/maps/entries/map53/5-roof-events.bin"
 Map53s6_WarpEvents:
 		incbin "data/maps/entries/map53/6-warp-events.bin"
@@ -1520,7 +1520,7 @@ Map54:          incbin "data/maps/entries/map54/00-tilesets.bin"
 		dc.l Map54s2_Areas
 		dc.l Map54s3_FlagEvents
 		dc.l Map54s4_StepEvents
-		dc.l Map54s5_RootEvents
+		dc.l Map54s5_RoofEvents
 		dc.l Map54s6_WarpEvents
 		dc.l Map54s7_ChestItems
 		dc.l Map54s8_OtherItems
@@ -1530,7 +1530,7 @@ Map54s3_FlagEvents:
 		incbin "data/maps/entries/map54/3-flag-events.bin"
 Map54s4_StepEvents:
 		incbin "data/maps/entries/map54/4-step-events.bin"
-Map54s5_RootEvents:
+Map54s5_RoofEvents:
 		incbin "data/maps/entries/map54/5-roof-events.bin"
 Map54s6_WarpEvents:
 		incbin "data/maps/entries/map54/6-warp-events.bin"
@@ -1548,7 +1548,7 @@ Map55:          incbin "data/maps/entries/map55/00-tilesets.bin"
 		dc.l Map55s2_Areas
 		dc.l Map55s3_FlagEvents
 		dc.l Map55s4_StepEvents
-		dc.l Map55s5_RootEvents
+		dc.l Map55s5_RoofEvents
 		dc.l Map55s6_WarpEvents
 		dc.l Map55s7_ChestItems
 		dc.l Map55s8_OtherItems
@@ -1558,7 +1558,7 @@ Map55s3_FlagEvents:
 		incbin "data/maps/entries/map55/3-flag-events.bin"
 Map55s4_StepEvents:
 		incbin "data/maps/entries/map55/4-step-events.bin"
-Map55s5_RootEvents:
+Map55s5_RoofEvents:
 		incbin "data/maps/entries/map55/5-roof-events.bin"
 Map55s6_WarpEvents:
 		incbin "data/maps/entries/map55/6-warp-events.bin"
@@ -1574,7 +1574,7 @@ Map56:          incbin "data/maps/entries/map56/00-tilesets.bin"
 		dc.l Map56s2_Areas
 		dc.l Map56s3_FlagEvents
 		dc.l Map56s4_StepEvents
-		dc.l Map56s5_RootEvents
+		dc.l Map56s5_RoofEvents
 		dc.l Map56s6_WarpEvents
 		dc.l Map56s7_ChestItems
 		dc.l Map56s8_OtherItems
@@ -1584,7 +1584,7 @@ Map56s3_FlagEvents:
 		incbin "data/maps/entries/map56/3-flag-events.bin"
 Map56s4_StepEvents:
 		incbin "data/maps/entries/map56/4-step-events.bin"
-Map56s5_RootEvents:
+Map56s5_RoofEvents:
 		incbin "data/maps/entries/map56/5-roof-events.bin"
 Map56s6_WarpEvents:
 		incbin "data/maps/entries/map56/6-warp-events.bin"
@@ -1600,7 +1600,7 @@ Map57:          incbin "data/maps/entries/map57/00-tilesets.bin"
 		dc.l Map57s2_Areas
 		dc.l Map57s3_FlagEvents
 		dc.l Map57s4_StepEvents
-		dc.l Map57s5_RootEvents
+		dc.l Map57s5_RoofEvents
 		dc.l Map57s6_WarpEvents
 		dc.l Map57s7_ChestItems
 		dc.l Map57s8_OtherItems
@@ -1610,7 +1610,7 @@ Map57s3_FlagEvents:
 		incbin "data/maps/entries/map57/3-flag-events.bin"
 Map57s4_StepEvents:
 		incbin "data/maps/entries/map57/4-step-events.bin"
-Map57s5_RootEvents:
+Map57s5_RoofEvents:
 		incbin "data/maps/entries/map57/5-roof-events.bin"
 Map57s6_WarpEvents:
 		incbin "data/maps/entries/map57/6-warp-events.bin"
@@ -1626,7 +1626,7 @@ Map58:          incbin "data/maps/entries/map58/00-tilesets.bin"
 		dc.l Map58s2_Areas
 		dc.l Map58s3_FlagEvents
 		dc.l Map58s4_StepEvents
-		dc.l Map58s5_RootEvents
+		dc.l Map58s5_RoofEvents
 		dc.l Map58s6_WarpEvents
 		dc.l Map58s7_ChestItems
 		dc.l Map58s7_ChestItems
@@ -1636,7 +1636,7 @@ Map58s3_FlagEvents:
 		incbin "data/maps/entries/map58/3-flag-events.bin"
 Map58s4_StepEvents:
 		incbin "data/maps/entries/map58/4-step-events.bin"
-Map58s5_RootEvents:
+Map58s5_RoofEvents:
 		incbin "data/maps/entries/map58/5-roof-events.bin"
 Map58s6_WarpEvents:
 		incbin "data/maps/entries/map58/6-warp-events.bin"
@@ -1650,7 +1650,7 @@ Map59:          incbin "data/maps/entries/map59/00-tilesets.bin"
 		dc.l Map59s2_Areas
 		dc.l Map59s3_FlagEvents
 		dc.l Map59s4_StepEvents
-		dc.l Map59s5_RootEvents
+		dc.l Map59s5_RoofEvents
 		dc.l Map59s6_WarpEvents
 		dc.l Map59s7_ChestItems
 		dc.l Map59s8_OtherItems
@@ -1660,7 +1660,7 @@ Map59s3_FlagEvents:
 		incbin "data/maps/entries/map59/3-flag-events.bin"
 Map59s4_StepEvents:
 		incbin "data/maps/entries/map59/4-step-events.bin"
-Map59s5_RootEvents:
+Map59s5_RoofEvents:
 		incbin "data/maps/entries/map59/5-roof-events.bin"
 Map59s6_WarpEvents:
 		incbin "data/maps/entries/map59/6-warp-events.bin"
@@ -1676,7 +1676,7 @@ Map60:          incbin "data/maps/entries/map60/00-tilesets.bin"
 		dc.l Map60s2_Areas
 		dc.l Map60s3_FlagEvents
 		dc.l Map60s4_StepEvents
-		dc.l Map60s5_RootEvents
+		dc.l Map60s5_RoofEvents
 		dc.l Map60s6_WarpEvents
 		dc.l Map60s7_ChestItems
 		dc.l Map60s8_OtherItems
@@ -1686,7 +1686,7 @@ Map60s3_FlagEvents:
 		incbin "data/maps/entries/map60/3-flag-events.bin"
 Map60s4_StepEvents:
 		incbin "data/maps/entries/map60/4-step-events.bin"
-Map60s5_RootEvents:
+Map60s5_RoofEvents:
 		incbin "data/maps/entries/map60/5-roof-events.bin"
 Map60s6_WarpEvents:
 		incbin "data/maps/entries/map60/6-warp-events.bin"
@@ -1702,7 +1702,7 @@ Map61:          incbin "data/maps/entries/map61/00-tilesets.bin"
 		dc.l Map61s2_Areas
 		dc.l Map61s3_FlagEvents
 		dc.l Map61s4_StepEvents
-		dc.l Map61s5_RootEvents
+		dc.l Map61s5_RoofEvents
 		dc.l Map61s6_WarpEvents
 		dc.l Map61s7_ChestItems
 		dc.l Map61s8_OtherItems
@@ -1712,7 +1712,7 @@ Map61s3_FlagEvents:
 		incbin "data/maps/entries/map61/3-flag-events.bin"
 Map61s4_StepEvents:
 		incbin "data/maps/entries/map61/4-step-events.bin"
-Map61s5_RootEvents:
+Map61s5_RoofEvents:
 		incbin "data/maps/entries/map61/5-roof-events.bin"
 Map61s6_WarpEvents:
 		incbin "data/maps/entries/map61/6-warp-events.bin"
@@ -1728,7 +1728,7 @@ Map62:          incbin "data/maps/entries/map62/00-tilesets.bin"
 		dc.l Map62s2_Areas
 		dc.l Map62s3_FlagEvents
 		dc.l Map62s4_StepEvents
-		dc.l Map62s5_RootEvents
+		dc.l Map62s5_RoofEvents
 		dc.l Map62s6_WarpEvents
 		dc.l Map62s7_ChestItems
 		dc.l Map62s8_OtherItems
@@ -1738,7 +1738,7 @@ Map62s3_FlagEvents:
 		incbin "data/maps/entries/map62/3-flag-events.bin"
 Map62s4_StepEvents:
 		incbin "data/maps/entries/map62/4-step-events.bin"
-Map62s5_RootEvents:
+Map62s5_RoofEvents:
 		incbin "data/maps/entries/map62/5-roof-events.bin"
 Map62s6_WarpEvents:
 		incbin "data/maps/entries/map62/6-warp-events.bin"
@@ -1754,7 +1754,7 @@ Map63:          incbin "data/maps/entries/map63/00-tilesets.bin"
 		dc.l Map63s2_Areas
 		dc.l Map63s3_FlagEvents
 		dc.l Map63s4_StepEvents
-		dc.l Map63s5_RootEvents
+		dc.l Map63s5_RoofEvents
 		dc.l Map63s6_WarpEvents
 		dc.l Map63s7_ChestItems
 		dc.l Map63s8_OtherItems
@@ -1764,7 +1764,7 @@ Map63s3_FlagEvents:
 		incbin "data/maps/entries/map63/3-flag-events.bin"
 Map63s4_StepEvents:
 		incbin "data/maps/entries/map63/4-step-events.bin"
-Map63s5_RootEvents:
+Map63s5_RoofEvents:
 		incbin "data/maps/entries/map63/5-roof-events.bin"
 Map63s6_WarpEvents:
 		incbin "data/maps/entries/map63/6-warp-events.bin"
@@ -1780,7 +1780,7 @@ Map64:          incbin "data/maps/entries/map64/00-tilesets.bin"
 		dc.l Map64s2_Areas
 		dc.l Map64s3_FlagEvents
 		dc.l Map64s4_StepEvents
-		dc.l Map64s5_RootEvents
+		dc.l Map64s5_RoofEvents
 		dc.l Map64s6_WarpEvents
 		dc.l Map64s7_ChestItems
 		dc.l Map64s8_OtherItems
@@ -1790,7 +1790,7 @@ Map64s3_FlagEvents:
 		incbin "data/maps/entries/map64/3-flag-events.bin"
 Map64s4_StepEvents:
 		incbin "data/maps/entries/map64/4-step-events.bin"
-Map64s5_RootEvents:
+Map64s5_RoofEvents:
 		incbin "data/maps/entries/map64/5-roof-events.bin"
 Map64s6_WarpEvents:
 		incbin "data/maps/entries/map64/6-warp-events.bin"
@@ -1806,7 +1806,7 @@ Map65:          incbin "data/maps/entries/map65/00-tilesets.bin"
 		dc.l Map65s2_Areas
 		dc.l Map65s3_FlagEvents
 		dc.l Map65s4_StepEvents
-		dc.l Map65s5_RootEvents
+		dc.l Map65s5_RoofEvents
 		dc.l Map65s6_WarpEvents
 		dc.l Map65s7_ChestItems
 		dc.l Map65s8_OtherItems
@@ -1816,7 +1816,7 @@ Map65s3_FlagEvents:
 		incbin "data/maps/entries/map65/3-flag-events.bin"
 Map65s4_StepEvents:
 		incbin "data/maps/entries/map65/4-step-events.bin"
-Map65s5_RootEvents:
+Map65s5_RoofEvents:
 		incbin "data/maps/entries/map65/5-roof-events.bin"
 Map65s6_WarpEvents:
 		incbin "data/maps/entries/map65/6-warp-events.bin"
@@ -1832,7 +1832,7 @@ Map66:          incbin "data/maps/entries/map66/00-tilesets.bin"
 		dc.l Map66s2_Areas
 		dc.l Map66s3_FlagEvents
 		dc.l Map66s4_StepEvents
-		dc.l Map66s5_RootEvents
+		dc.l Map66s5_RoofEvents
 		dc.l Map66s6_WarpEvents
 		dc.l Map66s7_ChestItems
 		dc.l Map66s8_OtherItems
@@ -1842,7 +1842,7 @@ Map66s3_FlagEvents:
 		incbin "data/maps/entries/map66/3-flag-events.bin"
 Map66s4_StepEvents:
 		incbin "data/maps/entries/map66/4-step-events.bin"
-Map66s5_RootEvents:
+Map66s5_RoofEvents:
 		incbin "data/maps/entries/map66/5-roof-events.bin"
 Map66s6_WarpEvents:
 		incbin "data/maps/entries/map66/6-warp-events.bin"
@@ -1860,7 +1860,7 @@ Map67:          incbin "data/maps/entries/map67/00-tilesets.bin"
 		dc.l Map67s2_Areas
 		dc.l Map67s3_FlagEvents
 		dc.l Map67s4_StepEvents
-		dc.l Map67s5_RootEvents
+		dc.l Map67s5_RoofEvents
 		dc.l Map67s6_WarpEvents
 		dc.l Map67s7_ChestItems
 		dc.l Map67s8_OtherItems
@@ -1870,7 +1870,7 @@ Map67s3_FlagEvents:
 		incbin "data/maps/entries/map67/3-flag-events.bin"
 Map67s4_StepEvents:
 		incbin "data/maps/entries/map67/4-step-events.bin"
-Map67s5_RootEvents:
+Map67s5_RoofEvents:
 		incbin "data/maps/entries/map67/5-roof-events.bin"
 Map67s6_WarpEvents:
 		incbin "data/maps/entries/map67/6-warp-events.bin"
@@ -1888,7 +1888,7 @@ Map68:          incbin "data/maps/entries/map68/00-tilesets.bin"
 		dc.l Map68s2_Areas
 		dc.l Map68s3_FlagEvents
 		dc.l Map68s4_StepEvents
-		dc.l Map68s5_RootEvents
+		dc.l Map68s5_RoofEvents
 		dc.l Map68s6_WarpEvents
 		dc.l Map68s7_ChestItems
 		dc.l Map68s8_OtherItems
@@ -1898,7 +1898,7 @@ Map68s3_FlagEvents:
 		incbin "data/maps/entries/map68/3-flag-events.bin"
 Map68s4_StepEvents:
 		incbin "data/maps/entries/map68/4-step-events.bin"
-Map68s5_RootEvents:
+Map68s5_RoofEvents:
 		incbin "data/maps/entries/map68/5-roof-events.bin"
 Map68s6_WarpEvents:
 		incbin "data/maps/entries/map68/6-warp-events.bin"
@@ -1916,7 +1916,7 @@ Map69:          incbin "data/maps/entries/map69/00-tilesets.bin"
 		dc.l Map69s2_Areas
 		dc.l Map69s3_FlagEvents
 		dc.l Map69s4_StepEvents
-		dc.l Map69s5_RootEvents
+		dc.l Map69s5_RoofEvents
 		dc.l Map69s6_WarpEvents
 		dc.l Map69s7_ChestItems
 		dc.l Map69s8_OtherItems
@@ -1926,7 +1926,7 @@ Map69s3_FlagEvents:
 		incbin "data/maps/entries/map69/3-flag-events.bin"
 Map69s4_StepEvents:
 		incbin "data/maps/entries/map69/4-step-events.bin"
-Map69s5_RootEvents:
+Map69s5_RoofEvents:
 		incbin "data/maps/entries/map69/5-roof-events.bin"
 Map69s6_WarpEvents:
 		incbin "data/maps/entries/map69/6-warp-events.bin"
@@ -1944,7 +1944,7 @@ Map70:          incbin "data/maps/entries/map70/00-tilesets.bin"
 		dc.l Map70s2_Areas
 		dc.l Map70s3_FlagEvents
 		dc.l Map70s4_StepEvents
-		dc.l Map70s5_RootEvents
+		dc.l Map70s5_RoofEvents
 		dc.l Map70s6_WarpEvents
 		dc.l Map70s7_ChestItems
 		dc.l Map70s8_OtherItems
@@ -1954,7 +1954,7 @@ Map70s3_FlagEvents:
 		incbin "data/maps/entries/map70/3-flag-events.bin"
 Map70s4_StepEvents:
 		incbin "data/maps/entries/map70/4-step-events.bin"
-Map70s5_RootEvents:
+Map70s5_RoofEvents:
 		incbin "data/maps/entries/map70/5-roof-events.bin"
 Map70s6_WarpEvents:
 		incbin "data/maps/entries/map70/6-warp-events.bin"
@@ -1972,7 +1972,7 @@ Map71:          incbin "data/maps/entries/map71/00-tilesets.bin"
 		dc.l Map71s2_Areas
 		dc.l Map71s3_FlagEvents
 		dc.l Map71s4_StepEvents
-		dc.l Map71s5_RootEvents
+		dc.l Map71s5_RoofEvents
 		dc.l Map71s6_WarpEvents
 		dc.l Map71s7_ChestItems
 		dc.l Map71s8_OtherItems
@@ -1982,7 +1982,7 @@ Map71s3_FlagEvents:
 		incbin "data/maps/entries/map71/3-flag-events.bin"
 Map71s4_StepEvents:
 		incbin "data/maps/entries/map71/4-step-events.bin"
-Map71s5_RootEvents:
+Map71s5_RoofEvents:
 		incbin "data/maps/entries/map71/5-roof-events.bin"
 Map71s6_WarpEvents:
 		incbin "data/maps/entries/map71/6-warp-events.bin"
@@ -2000,7 +2000,7 @@ Map72:          incbin "data/maps/entries/map72/00-tilesets.bin"
 		dc.l Map72s2_Areas
 		dc.l Map72s3_FlagEvents
 		dc.l Map72s4_StepEvents
-		dc.l Map72s5_RootEvents
+		dc.l Map72s5_RoofEvents
 		dc.l Map72s6_WarpEvents
 		dc.l Map72s7_ChestItems
 		dc.l Map72s8_OtherItems
@@ -2010,7 +2010,7 @@ Map72s3_FlagEvents:
 		incbin "data/maps/entries/map72/3-flag-events.bin"
 Map72s4_StepEvents:
 		incbin "data/maps/entries/map72/4-step-events.bin"
-Map72s5_RootEvents:
+Map72s5_RoofEvents:
 		incbin "data/maps/entries/map72/5-roof-events.bin"
 Map72s6_WarpEvents:
 		incbin "data/maps/entries/map72/6-warp-events.bin"
@@ -2028,7 +2028,7 @@ Map73:          incbin "data/maps/entries/map73/00-tilesets.bin"
 		dc.l Map73s2_Areas
 		dc.l Map73s3_FlagEvents
 		dc.l Map73s4_StepEvents
-		dc.l Map73s5_RootEvents
+		dc.l Map73s5_RoofEvents
 		dc.l Map73s6_WarpEvents
 		dc.l Map73s7_ChestItems
 		dc.l Map73s8_OtherItems
@@ -2038,7 +2038,7 @@ Map73s3_FlagEvents:
 		incbin "data/maps/entries/map73/3-flag-events.bin"
 Map73s4_StepEvents:
 		incbin "data/maps/entries/map73/4-step-events.bin"
-Map73s5_RootEvents:
+Map73s5_RoofEvents:
 		incbin "data/maps/entries/map73/5-roof-events.bin"
 Map73s6_WarpEvents:
 		incbin "data/maps/entries/map73/6-warp-events.bin"
@@ -2056,7 +2056,7 @@ Map74:          incbin "data/maps/entries/map74/00-tilesets.bin"
 		dc.l Map74s2_Areas
 		dc.l Map74s3_FlagEvents
 		dc.l Map74s4_StepEvents
-		dc.l Map74s5_RootEvents
+		dc.l Map74s5_RoofEvents
 		dc.l Map74s6_WarpEvents
 		dc.l Map74s7_ChestItems
 		dc.l Map74s8_OtherItems
@@ -2066,7 +2066,7 @@ Map74s3_FlagEvents:
 		incbin "data/maps/entries/map74/3-flag-events.bin"
 Map74s4_StepEvents:
 		incbin "data/maps/entries/map74/4-step-events.bin"
-Map74s5_RootEvents:
+Map74s5_RoofEvents:
 		incbin "data/maps/entries/map74/5-roof-events.bin"
 Map74s6_WarpEvents:
 		incbin "data/maps/entries/map74/6-warp-events.bin"
@@ -2084,7 +2084,7 @@ Map75:          incbin "data/maps/entries/map75/00-tilesets.bin"
 		dc.l Map75s2_Areas
 		dc.l Map75s3_FlagEvents
 		dc.l Map75s4_StepEvents
-		dc.l Map75s5_RootEvents
+		dc.l Map75s5_RoofEvents
 		dc.l Map75s6_WarpEvents
 		dc.l Map75s7_ChestItems
 		dc.l Map75s8_OtherItems
@@ -2094,7 +2094,7 @@ Map75s3_FlagEvents:
 		incbin "data/maps/entries/map75/3-flag-events.bin"
 Map75s4_StepEvents:
 		incbin "data/maps/entries/map75/4-step-events.bin"
-Map75s5_RootEvents:
+Map75s5_RoofEvents:
 		incbin "data/maps/entries/map75/5-roof-events.bin"
 Map75s6_WarpEvents:
 		incbin "data/maps/entries/map75/6-warp-events.bin"
@@ -2112,7 +2112,7 @@ Map76:          incbin "data/maps/entries/map76/00-tilesets.bin"
 		dc.l Map76s2_Areas
 		dc.l Map76s3_FlagEvents
 		dc.l Map76s4_StepEvents
-		dc.l Map76s5_RootEvents
+		dc.l Map76s5_RoofEvents
 		dc.l Map76s6_WarpEvents
 		dc.l Map76s7_ChestItems
 		dc.l Map76s8_OtherItems
@@ -2122,7 +2122,7 @@ Map76s3_FlagEvents:
 		incbin "data/maps/entries/map76/3-flag-events.bin"
 Map76s4_StepEvents:
 		incbin "data/maps/entries/map76/4-step-events.bin"
-Map76s5_RootEvents:
+Map76s5_RoofEvents:
 		incbin "data/maps/entries/map76/5-roof-events.bin"
 Map76s6_WarpEvents:
 		incbin "data/maps/entries/map76/6-warp-events.bin"
@@ -2140,7 +2140,7 @@ Map77:          incbin "data/maps/entries/map77/00-tilesets.bin"
 		dc.l Map77s2_Areas
 		dc.l Map77s3_FlagEvents
 		dc.l Map77s4_StepEvents
-		dc.l Map77s5_RootEvents
+		dc.l Map77s5_RoofEvents
 		dc.l Map77s6_WarpEvents
 		dc.l Map77s7_ChestItems
 		dc.l Map77s8_OtherItems
@@ -2150,7 +2150,7 @@ Map77s3_FlagEvents:
 		incbin "data/maps/entries/map77/3-flag-events.bin"
 Map77s4_StepEvents:
 		incbin "data/maps/entries/map77/4-step-events.bin"
-Map77s5_RootEvents:
+Map77s5_RoofEvents:
 		incbin "data/maps/entries/map77/5-roof-events.bin"
 Map77s6_WarpEvents:
 		incbin "data/maps/entries/map77/6-warp-events.bin"
@@ -2168,7 +2168,7 @@ Map78:          incbin "data/maps/entries/map78/00-tilesets.bin"
 		dc.l Map78s2_Areas
 		dc.l Map78s3_FlagEvents
 		dc.l Map78s4_StepEvents
-		dc.l Map78s5_RootEvents
+		dc.l Map78s5_RoofEvents
 		dc.l Map78s6_WarpEvents
 		dc.l Map78s7_ChestItems
 		dc.l Map78s8_OtherItems
@@ -2178,7 +2178,7 @@ Map78s3_FlagEvents:
 		incbin "data/maps/entries/map78/3-flag-events.bin"
 Map78s4_StepEvents:
 		incbin "data/maps/entries/map78/4-step-events.bin"
-Map78s5_RootEvents:
+Map78s5_RoofEvents:
 		incbin "data/maps/entries/map78/5-roof-events.bin"
 Map78s6_WarpEvents:
 		incbin "data/maps/entries/map78/6-warp-events.bin"

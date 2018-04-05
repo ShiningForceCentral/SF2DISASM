@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\start\gameinit.asm :
-; 0x70D2..0x71C0 : Game init
+; 0x70D2..0x7186 : Game init
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -54,5 +54,3 @@ loc_7118:
 
 	; End of function GameInit
 
-DebugModeAvailableMaps:
-		incbin "data/maps/global/debugmodeavailablemaps.bin"

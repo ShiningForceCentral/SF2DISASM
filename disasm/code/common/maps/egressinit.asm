@@ -27,7 +27,7 @@ loc_75FC:
 		moveq   #1,d3
 		conditionalPc lea,SavepointMapCoords,a0
 loc_7608:
-		cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
+		cmpi.b  #$FF,(a0)
 		beq.w   loc_7620
 		cmp.b   (a0),d0
 		beq.s   loc_7618
@@ -46,7 +46,7 @@ loc_7620:
 						; separate raft egress locations?
 loc_762A:
 		addq.l  #4,a0
-		cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
+		cmpi.b  #$FF,(a0)
 		beq.w   loc_7638
 		cmp.b   (a0),d0
 		bne.s   loc_762A
