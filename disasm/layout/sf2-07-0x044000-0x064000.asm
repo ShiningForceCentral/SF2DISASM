@@ -93,7 +93,9 @@ j_ClearEntities:
 		jmp     ClearEntities(pc)
 		include "code\common\scripting\map\mapfunctions.asm"		; Map functions
 		include "data\maps\global\overworldmaps.asm"		; Overworld maps
-		include "code\common\scripting\map\followersfunctions.asm"		; Followers functions
+		include "code\common\scripting\map\followersfunctions_1.asm"		; Follower functions, part 1
+		include "data\scripting\entity\followers.asm"		; Follower declarations
+		include "code\common\scripting\map\followersfunctions_2.asm"		; Follower functions, part 2
 		include "code\common\scripting\entity\entityfunctions_1.asm"		; Entity functions
 		include "data\battles\global\battleneutralentities.asm"		; Battle entities which are not force members or enemies
 		include "data\scripting\entity\eas_battleneutralentities.asm"		; Entity actscripts for battle entities which are not force members or enemies

@@ -45,7 +45,7 @@ InitDisplay:
 		lea     ($EF80).l,a1
 		move.w  #$40,d0 
 		moveq   #2,d1
-		bsr.w   sub_10DC        
+		bsr.w   DmaFromRamToVram
 		lea     MaskSprites(pc), a0
 loc_307E:
 		lea     (SPRITE_Y).l,a1 

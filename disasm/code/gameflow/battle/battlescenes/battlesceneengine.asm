@@ -110,28 +110,28 @@ loc_180CC:
 		lea     ($C000).l,a1
 		move.w  #$400,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		lea     (byte_FFC000).l,a0
 		lea     ($E000).l,a1
 		move.w  #$400,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		bsr.w   sub_198C8
 		lea     (byte_FFC000).l,a0
 		lea     ($C000).l,a1
 		move.w  #$400,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		lea     (FF2000_LOADING_SPACE).l,a0
 		lea     ($7400).w,a1
 		move.w  #$C00,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		lea     (FF3800_LOADING_SPACE).l,a0
 		lea     ($8C00).l,a1
 		move.w  #$C00,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		lea     ((byte_FFB542-$1000000)).w,a0
 		lea     ((PALETTE_4_BIS-$1000000)).w,a1
 		moveq   #7,d0
@@ -218,7 +218,7 @@ loc_1822A:
 		lea     ($D800).l,a1
 		move.w  #$400,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		move.w  ((CHARACTER_WEAPON_PALETTE-$1000000)).w,d0
 		bsr.w   LoadWeaponPalette
 loc_1828C:
@@ -3063,7 +3063,7 @@ LoadInvocationSprite:
 		move.w  (a0)+,d0
 		lea     -2(a0,d0.w),a1
 		addq.w  #2,a1
-		lea     ((word_FFD002-$1000000)).w,a2
+		lea     ((PALETTE_1_01-$1000000)).w,a2
 		lea     ((word_FFD082-$1000000)).w,a3
 		moveq   #$E,d0
 loc_19C14:
@@ -3342,7 +3342,7 @@ loc_19EA8:
 FadeInFromBlackIntoBattlescene:
 		
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -3356,7 +3356,7 @@ FadeInFromBlackIntoBattlescene:
 FadeOutToBlackForBattlescene:
 		
 		move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -3922,12 +3922,12 @@ ExecSpellAnimationFlash:
 		moveq   #3,d7
 loc_1A2AA:
 		move.w  d6,((PALETTE_1-$1000000)).w
-		move.w  d6,((byte_FFD044-$1000000)).w
+		move.w  d6,((PALETTE_3_0F-$1000000)).w
 		jsr     (StoreVdpCommandster).w
 		moveq   #4,d0
 		jsr     (Sleep).w       
 		clr.w   ((PALETTE_1-$1000000)).w
-		clr.w   ((byte_FFD044-$1000000)).w
+		clr.w   ((PALETTE_3_0F-$1000000)).w
 		jsr     (StoreVdpCommandster).w
 		moveq   #3,d0
 		jsr     (Sleep).w       
@@ -4091,7 +4091,7 @@ loc_1A418:
 		beq.s   return_1A474
 		bsr.w   bsc0D_endAnimation
 		move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -6497,7 +6497,7 @@ nullsub_22:
 
 sub_1B82A:
 		clr.w   ((PALETTE_1-$1000000)).w
-		clr.w   ((byte_FFD044-$1000000)).w
+		clr.w   ((PALETTE_3_0F-$1000000)).w
 		jsr     (StoreVdpCommandster).w
 		jsr     (Set_FFDE94_bit3).w
 		bsr.w   sub_1A00A
@@ -6572,7 +6572,7 @@ loc_1B8DC:
 		add.w   d7,d0
 		move.b  d0,((byte_FFB569-$1000000)).w
 		move.w  d1,((PALETTE_1-$1000000)).w
-		move.w  d1,((byte_FFD044-$1000000)).w
+		move.w  d1,((PALETTE_3_0F-$1000000)).w
 		jsr     (StoreVdpCommandster).w
 		jsr     (Set_FFDE94_bit3).w
 loc_1B8F8:
@@ -10291,7 +10291,7 @@ loc_1DB2E:
 		bne.s   loc_1DB62
 		bsr.w   sub_1DC36
 		move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -10304,7 +10304,7 @@ loc_1DB62:
 		bne.s   loc_1DB8E
 		bsr.w   sub_1DC48
 		move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -11249,7 +11249,7 @@ loc_1E33C:
 		trap    #SOUND_COMMAND
 		dc.w SFX_PRISM_LASER_FIRING; prism laser firing
 		move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -11262,7 +11262,7 @@ loc_1E36C:
 		addq.w  #1,2(a5)
 		move.w  #$1E,4(a5)
 		move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -12534,7 +12534,7 @@ sub_1EF36:
 		lea     ($E000).l,a1
 		move.w  #$400,d0
 		moveq   #2,d1
-		jmp     (sub_10DC).w    
+		jmp     (DmaFromRamToVram).w
 
 	; End of function sub_1EF36
 
@@ -12850,7 +12850,7 @@ loc_1F1DA:
 sub_1F1F0:
 		movem.l d0/a0,-(sp)
 		move.w  d6,((word_FFB3EE-$1000000)).w
-		lea     ((dword_FFD500-$1000000)).w,a0
+		lea     ((word_FFD500-$1000000)).w,a0
 		moveq   #$13,d0
 loc_1F1FE:
 		move.w  d6,(a0)
@@ -12878,7 +12878,7 @@ sub_1F214:
 loc_1F232:
 		addi.w  #$10,d6
 loc_1F236:
-		lea     ((dword_FFD100+2-$1000000)).w,a0
+		lea     ((byte_FFD102-$1000000)).w,a0
 		move.w  #$FF,d0
 loc_1F23E:
 		move.w  d6,(a0)
@@ -12901,7 +12901,7 @@ sub_1F254:
 		bne.s   loc_1F266
 		subq.w  #8,d6
 loc_1F266:
-		lea     ((dword_FFD500+2-$1000000)).w,a0
+		lea     ((byte_FFD502-$1000000)).w,a0
 		moveq   #$13,d0
 loc_1F26C:
 		move.w  d6,(a0)
@@ -12926,8 +12926,8 @@ sub_1F282:
 		beq.s   return_1F2F4
 		tst.w   ((word_FFB3C4-$1000000)).w
 		beq.s   return_1F2F4
-		lea     ((dword_FFD100-$1000000)).w,a3
-		lea     ((dword_FFD500-$1000000)).w,a4
+		lea     ((word_FFD100-$1000000)).w,a3
+		lea     ((word_FFD500-$1000000)).w,a4
 		lea     ((dword_FFB3C0-$1000000)).w,a5
 		bra.s   loc_1F2D0
 loc_1F2AE:
@@ -12937,8 +12937,8 @@ loc_1F2AE:
 		beq.s   return_1F2F4
 		tst.w   ((word_FFB3CA-$1000000)).w
 		beq.s   return_1F2F4
-		lea     ((dword_FFD100+2-$1000000)).w,a3
-		lea     ((dword_FFD500+2-$1000000)).w,a4
+		lea     ((byte_FFD102-$1000000)).w,a3
+		lea     ((byte_FFD502-$1000000)).w,a4
 		lea     ((dword_FFB3C6-$1000000)).w,a5
 loc_1F2D0:
 		addq.w  #1,4(a5)

@@ -22,7 +22,7 @@ SuspendGame:
 		moveq   #$20,d7 
 		jsr     (CopyBytes).w   
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w

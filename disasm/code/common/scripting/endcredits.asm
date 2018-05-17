@@ -33,7 +33,7 @@ loc_1AC09E:
 		lea     ($E000).l,a1
 		move.w  #$400,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_CLEAR
 		jsr     (EnableDisplayAndInterrupts).w
@@ -73,21 +73,21 @@ loc_1AC10E:
 		move.w  #$40,d6 
 		jsr     (UpdateRandomSeed).w
 		addi.w  #$80,d7 
-		move.w  d7,(dword_FFD100+2).l
+		move.w  d7,(byte_FFD102).l
 		move.w  #$60,d6 
 		jsr     (UpdateRandomSeed).w
 		addi.w  #$20,d7 
 		neg.w   d7
-		move.w  d7,(dword_FFD500+2).l
+		move.w  d7,(byte_FFD502).l
 		move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.w  #$B4,d0 
 		jsr     (Sleep).w       
 		move.b  #2,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		moveq   #$2C,d0 
@@ -134,7 +134,7 @@ VInt_EndCredits:
 		
 		btst    #0,((byte_FFDEA0-$1000000)).w
 		bne.s   loc_1AC1F6
-		subq.w  #1,(dword_FFD100+2).l
+		subq.w  #1,(byte_FFD102).l
 		jsr     (StoreVdpCommands).w
 loc_1AC1F6:
 		movea.l ((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w,a0
@@ -143,12 +143,12 @@ loc_1AC1F6:
 		move.b  ((byte_FFDEA0-$1000000)).w,d0
 		andi.b  #1,d0
 		bne.s   loc_1AC220
-		move.w  (dword_FFD500).l,d0
+		move.w  (word_FFD500).l,d0
 		andi.w  #$F,d0
 		bne.s   loc_1AC21A
 		bsr.w   sub_1AC22E
 loc_1AC21A:
-		addq.w  #1,(dword_FFD500).l
+		addq.w  #1,(word_FFD500).l
 loc_1AC220:
 		jsr     (StoreVdpCommands).w
 		jsr     (StoreVdpCommandsbis).w
@@ -163,7 +163,7 @@ loc_1AC220:
 sub_1AC22E:
 		move.b  (a0)+,d1
 		lea     (byte_FFC000).l,a1
-		move.w  (dword_FFD500).l,d0
+		move.w  (word_FFD500).l,d0
 		lsr.w   #3,d0
 		addi.w  #$1C,d0
 		andi.w  #$1F,d0

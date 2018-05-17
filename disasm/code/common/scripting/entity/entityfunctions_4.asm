@@ -25,7 +25,7 @@ GetEntityPortraitAndSpeechSfx:
 		clr.w   d2
 		bsr.w   GetEntityAddressFromPlayableCharacterIdx
 		move.b  $13(a5),d0      ; sprite number
-		lea     SpriteToPortraitnBlip(pc), a0
+		lea     SpriteDialogProperties(pc), a0
 loc_45650:
 		cmp.b   (a0),d0         ; get sprite's owner (it implies that each force member has a unique sprite !!)
 		bne.s   loc_45662
@@ -45,7 +45,7 @@ loc_45674:
 
 	; End of function GetEntityPortraitAndSpeechSfx
 
-SpriteToPortraitnBlip:
+SpriteDialogProperties:
 		incbin "data/spritedialogdefs.bin"
 						; bowie
 

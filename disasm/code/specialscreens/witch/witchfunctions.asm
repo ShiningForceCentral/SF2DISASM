@@ -22,7 +22,7 @@ InitWitchSuspendVIntFunctions:
 		bsr.w   DisableDisplayAndVInt
 		clr.b   ((byte_FFB198-$1000000)).w
 		move.w  #$48,((CURRENT_SPEAK_SOUND-$1000000)).w 
-		bsr.w   sub_7C5E        
+		bsr.w   DisplayWitchScreen
 		bsr.w   EnableDisplayAndInterrupts
 		movea.l (p_WitchLayout).l,a0
 		lea     $700(a0),a0
@@ -46,9 +46,8 @@ InitWitchSuspendVIntFunctions:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Display witch screen ?
-
-sub_7C5E:
+DisplayWitchScreen:
+		
 		jsr     (DisableDisplayAndVInt).w
 		movea.l (p_WitchTiles).l,a0
 		lea     (FF6802_LOADING_SPACE).l,a1
@@ -58,7 +57,7 @@ sub_7C5E:
 		lea     ($2000).w,a1
 		move.w  #$2000,d0
 		moveq   #2,d1
-		bsr.w   sub_10DC        
+		bsr.w   DmaFromRamToVram
 		movea.l (p_WitchLayout).l,a0
 		lea     (byte_FFE000).l,a1
 		move.w  #$800,d7
@@ -67,7 +66,7 @@ sub_7C5E:
 		lea     ($E000).l,a1
 		move.w  #$400,d0
 		moveq   #2,d1
-		bsr.w   sub_10DC        
+		bsr.w   DmaFromRamToVram
 		movea.l (p_plt_Witch).l,a0
 		lea     (PALETTE_1_BIS).l,a1
 		moveq   #$20,d7 
@@ -80,7 +79,7 @@ sub_7C5E:
 		move.w  #6,((word_FFB07C-$1000000)).w
 		rts
 
-	; End of function sub_7C5E
+	; End of function DisplayWitchScreen
 
 
 ; =============== S U B R O U T I N E =======================================

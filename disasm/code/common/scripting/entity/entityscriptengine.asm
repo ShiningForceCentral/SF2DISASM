@@ -18,20 +18,20 @@ loc_4C74:
 		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_4CB2
 		move.w  ((word_FFA806-$1000000)).w,d2
-		sub.w   (dword_FFD100+2).l,d2
+		sub.w   (byte_FFD102).l,d2
 		asl.w   #4,d2
 		add.w   ((word_FFA814-$1000000)).w,d2
-		move.w  (dword_FFD500+2).l,d3
+		move.w  (byte_FFD502).l,d3
 		sub.w   ((word_FFA80A-$1000000)).w,d3
 		asl.w   #4,d3
 		add.w   ((word_FFA816-$1000000)).w,d3
 		bra.s   loc_4CD2
 loc_4CB2:
 		move.w  ((word_FFA804-$1000000)).w,d2
-		sub.w   (dword_FFD100).l,d2
+		sub.w   (word_FFD100).l,d2
 		asl.w   #4,d2
 		add.w   ((word_FFA810-$1000000)).w,d2
-		move.w  (dword_FFD500).l,d3
+		move.w  (word_FFD500).l,d3
 		sub.w   ((word_FFA808-$1000000)).w,d3
 		asl.w   #4,d3
 		add.w   ((word_FFA812-$1000000)).w,d3
@@ -2524,7 +2524,7 @@ loc_61BA:
 		adda.w  d1,a1
 		move.w  #$120,d0
 		moveq   #2,d1
-		bsr.w   sub_10DC        
+		bsr.w   DmaFromRamToVram
 loc_61F6:
 		movem.l (sp)+,a0-a1
 		rts

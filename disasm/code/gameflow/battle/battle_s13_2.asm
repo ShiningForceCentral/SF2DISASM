@@ -53,7 +53,7 @@ loc_1B127E:
 		move.w  ((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w,d6
 		subq.w  #1,d6
 		moveq   #0,d1
-		bsr.w   GetAddrOfBattleDataSection
+		bsr.w   GetBattleSpriteSet
 		clr.w   d7
 		move.b  (a0),d7
 		subq.w  #1,d7
@@ -122,7 +122,7 @@ InitEnemyBattlePosition:
 		bra.w   loc_1B139A
 loc_1B132E:
 		moveq   #2,d1
-		bsr.w   GetAddrOfBattleDataSection
+		bsr.w   GetBattleSpriteSet
 		move.w  d1,d2
 		bset    #7,d2
 		clr.w   d1
@@ -169,7 +169,7 @@ UpdateEnemyStatsForRespawn:
 		movem.l d0-a6,-(sp)
 		move.w  d1,d2
 		moveq   #2,d1
-		bsr.w   GetAddrOfBattleDataSection
+		bsr.w   GetBattleSpriteSet
 		bset    #7,d1
 		cmp.b   d1,d0
 		bcc.w   loc_1B13E8
@@ -274,7 +274,7 @@ loc_1B14E2:
 		clr.l   (a1)+
 		dbf     d1,loc_1B14E2
 		moveq   #2,d1
-		bsr.w   GetAddrOfBattleDataSection
+		bsr.w   GetBattleSpriteSet
 		subq.w  #1,d1
 		lea     ((byte_FFB6A2-$1000000)).w,a1
 loc_1B14F4:
@@ -414,7 +414,7 @@ GetEnemyAITargetPos:
 		bra.s   loc_1B162A
 loc_1B1612:
 		moveq   #4,d1
-		bsr.w   GetAddrOfBattleDataSection
+		bsr.w   GetBattleSpriteSet
 		andi.w  #$F,d0
 		add.w   d0,d0
 		adda.w  d0,a0
@@ -435,7 +435,7 @@ loc_1B162A:
 ;       
 ;                     if D1 = 2, size of monster list -> D1
 
-GetAddrOfBattleDataSection:
+GetBattleSpriteSet:
 		
 		movem.l d0/d2/a1,-(sp)
 		move.b  d1,d2
@@ -476,7 +476,7 @@ loc_1B1698:
 		movem.l (sp)+,d0/d2/a1
 		rts
 
-	; End of function GetAddrOfBattleDataSection
+	; End of function GetBattleSpriteSet
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -489,7 +489,7 @@ GetMonsterStartPos:
 		btst    #7,d0
 		bne.s   loc_1B16CA
 		move.w  #1,d1
-		bsr.s   GetAddrOfBattleDataSection
+		bsr.s   GetBattleSpriteSet
 		cmp.b   d0,d1
 		bge.s   loc_1B16BE
 		move.w  #$FFFF,d1
@@ -502,7 +502,7 @@ loc_1B16BE:
 		bra.s   loc_1B16EC
 loc_1B16CA:
 		move.w  #2,d1
-		bsr.w   GetAddrOfBattleDataSection
+		bsr.w   GetBattleSpriteSet
 		cmp.b   d0,d1
 		bge.s   loc_1B16E2
 		move.w  #$FFFF,d1
@@ -531,7 +531,7 @@ sub_1B16FE:
 		move.w  d2,d7
 		move.w  d1,d6
 		move.w  #2,d1
-		bsr.w   GetAddrOfBattleDataSection
+		bsr.w   GetBattleSpriteSet
 		move.w  d1,d5
 		subi.w  #1,d5
 		move.w  #$80,d0 

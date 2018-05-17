@@ -1592,8 +1592,6 @@
 #split	0x2E196,0x2E394,data/scripting/text/huffmantreeoffsets.bin
 #split	0x2E394,0x2EB34,data/scripting/text/huffmantrees.bin
 #split	0x4201E,0x425ED,data/scripting/gamestaff.bin
-#split	0x44338,0x4433C,data/overworldfollowers.bin
-#split	0x4433C,0x4438A,data/followers.bin
 #split	0x44A5E,0x44A7C,data/stats/allies/allyspriteids.bin
 #split	0x44AA4,0x44B4A,data/stats/enemies/enemyspriteids.bin
 #split	0x4567A,0x45858,data/spritedialogdefs.bin

@@ -25,7 +25,7 @@ TitleScreen:
 		lea     ($2000).w,a1
 		move.w  #$1000,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		conditionalPc lea,TitleScreenLayoutA,a0
 		lea     (byte_FFC000).l,a1
 		move.w  #$700,d7
@@ -43,7 +43,7 @@ TitleScreen:
 		lea     ($C000).l,a1
 		move.w  #$380,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		conditionalPc lea,TitleScreenLayoutB,a0
 		lea     (byte_FFDCA8).l,a1
 		moveq   #$A,d7
@@ -99,7 +99,7 @@ loc_100104:
 		jsr     (ClearHscrollStuff).w
 		jsr     (Set_FFDE94_bit3).w
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -108,7 +108,7 @@ loc_100104:
 		moveq   #$20,d0 
 		bsr.w   sub_100218
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -117,7 +117,7 @@ loc_100104:
 		moveq   #$32,d0 
 		bsr.w   WaitForPlayer1InputStart
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #4,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -163,8 +163,8 @@ WaitForPlayer1InputStart:
 sub_100218:
 		btst    #0,((byte_FFDEA0-$1000000)).w
 		bne.s   loc_10022C
-		addq.w  #1,(dword_FFD500).l
-		subq.w  #1,(dword_FFD500+2).l
+		addq.w  #1,(word_FFD500).l
+		subq.w  #1,(byte_FFD502).l
 loc_10022C:
 		jsr     (StoreVdpCommandsbis).w
 		jsr     (SetFFDE94b3andWait).w

@@ -59,7 +59,7 @@ j_getEnemyAITargetPos:
 
 j_getAddrOfBattleCombatants:
 		
-		jmp     GetAddrOfBattleDataSection(pc)
+		jmp     GetBattleSpriteSet(pc)
 
 	; End of function j_getAddrOfBattleCombatants
 

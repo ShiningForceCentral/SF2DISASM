@@ -98,7 +98,7 @@ StartParams:
 		dc.b 0                  ; vdp reg 21 : DMA source address low
 		dc.b 0                  ; vdp reg 22 : DMA source address mid
 		dc.b $80                ; vdp reg 23 : DMA source address high, VRAM fill
-		dc.l $40000080          ; wtf
+		dc.l $40000080          ; ?
 		dc.b $AF                ; Z80 start code ... what's the use O_o ?
 		dc.b 1
 		dc.b $D9

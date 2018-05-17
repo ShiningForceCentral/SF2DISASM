@@ -1063,7 +1063,7 @@ loc_2B08:
 loc_2B12:
 		move.w  #$800,d0
 		moveq   #2,d1
-		bsr.w   sub_10DC        
+		bsr.w   DmaFromRamToVram
 loc_2B1C:
 		tst.b   (a5)+
 		blt.s   loc_2B34
@@ -1072,7 +1072,7 @@ loc_2B20:
 		lea     ($3000).w,a1
 		move.w  #$800,d0
 		moveq   #2,d1
-		bsr.w   sub_10DC        
+		bsr.w   DmaFromRamToVram
 loc_2B34:
 		tst.b   (a5)+
 		blt.s   loc_2B4C
@@ -1081,7 +1081,7 @@ loc_2B34:
 		move.w  #$800,d0
 		moveq   #2,d1
 loc_2B48:
-		bsr.w   sub_10DC        
+		bsr.w   DmaFromRamToVram
 loc_2B4C:
 		tst.b   (a5)+
 		blt.s   loc_2B64
@@ -1091,7 +1091,7 @@ loc_2B56:
 		move.w  #$800,d0
 		moveq   #2,d1
 loc_2B60:
-		bsr.w   sub_10DC        
+		bsr.w   DmaFromRamToVram
 loc_2B64:
 		tst.b   (a5)+
 		blt.s   loc_2B7C        
@@ -1100,7 +1100,7 @@ loc_2B68:
 		lea     ($6000).w,a1
 		move.w  #$800,d0
 		moveq   #2,d1
-		bsr.w   sub_10DC        
+		bsr.w   DmaFromRamToVram
 loc_2B7C:
 		bsr.w   sub_2D58        ; load blocks and layout ?
 loc_2B80:

@@ -72,7 +72,7 @@ loc_724E:
 		bsr.w   DisableDisplayAndVInt
 		clr.b   ((byte_FFB198-$1000000)).w
 		move.w  #$48,((CURRENT_SPEAK_SOUND-$1000000)).w 
-		bsr.w   sub_7C5E        
+		bsr.w   DisplayWitchScreen
 		move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 		move.w  #6,((word_FFB07C-$1000000)).w
 loc_729C:

@@ -48,7 +48,7 @@ loc_25836:
 		bsr.w   SetBattleVIntFunctions
 		jsr     j_RunMapSetupInitFunction
 		move.l  (dword_FFD084).l,d0
-		cmp.l   (dword_FFD004).l,d0
+		cmp.l   (PALETTE_1_0F).l,d0
 		beq.s   loc_2586A       
 		jsr     (LoadBattleMusic).w
 		jsr     (FadeInFromBlack).w
@@ -116,7 +116,7 @@ loc_258CE:
 
 sub_258EA:
 		move.b  #2,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w

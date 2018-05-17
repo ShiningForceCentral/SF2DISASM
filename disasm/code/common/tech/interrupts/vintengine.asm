@@ -902,7 +902,7 @@ FadeOutToWhite:
 
 ExecuteFading:
 		
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -1239,13 +1239,13 @@ sub_F90:
 loc_F94:
 		lea     ($E000).l,a6
 		lsl.w   #1,d5
-		move.w  (dword_FFD100+2).l,d7
+		move.w  (byte_FFD102).l,d7
 		addq.w  #4,d7
 		lsr.w   #2,d7
 		sub.w   d7,d5
 		andi.w  #$7E,d5 
 		lsl.w   #7,d6
-		move.w  (dword_FFD500+2).l,d7
+		move.w  (byte_FFD502).l,d7
 		subq.w  #8,d7
 		lsl.w   #4,d7
 		add.w   d7,d6
@@ -1258,12 +1258,12 @@ loc_F94:
 		adda.l  #$C000,a6
 		lsl.w   #1,d5
 loc_FD4:
-		move.w  (dword_FFD100).l,d7
+		move.w  (word_FFD100).l,d7
 		lsr.w   #2,d7
 		sub.w   d7,d5
 		andi.w  #$7E,d5 
 		lsl.w   #7,d6
-		move.w  (dword_FFD500).l,d7
+		move.w  (word_FFD500).l,d7
 		lsl.w   #4,d7
 		add.w   d7,d6
 loc_FEE:
@@ -1360,9 +1360,13 @@ loc_10C2:
 
 ; =============== S U B R O U T I N E =======================================
 
-; DMA stuff
+; DMA
+; a0 : RAM Source
+; a1 : VRAM Destination
+; d0 : length
 
-sub_10DC:
+DmaFromRamToVram:
+		
 		move    sr,-(sp)
 		move    #$2700,sr
 loc_10E2:
@@ -1432,7 +1436,7 @@ loc_1188:
 		move    (sp)+,sr
 		rts
 
-	; End of function sub_10DC
+	; End of function DmaFromRamToVram
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1558,7 +1562,7 @@ loc_1294:
 ClearHscrollStuff:
 		
 		movem.l d7/a6,-(sp)
-		lea     (dword_FFD100).l,a6
+		lea     (word_FFD100).l,a6
 loc_12B4:
 		move.w  #$FF,d7
 loc_12B8:
@@ -1576,7 +1580,7 @@ loc_12B8:
 ClearOtherHscrollStuff:
 		
 		movem.l d7/a6,-(sp)
-		lea     ((dword_FFD100+2)).l,a6
+		lea     (byte_FFD102).l,a6
 		bra.s   loc_12B4
 
 	; End of function ClearOtherHscrollStuff
@@ -1616,7 +1620,7 @@ loc_12FC:
 ClearVscrollStuff:
 		
 		movem.l d7/a6,-(sp)
-		lea     (dword_FFD500).l,a6
+		lea     (word_FFD500).l,a6
 loc_132C:
 		move.w  #$13,d7
 loc_1330:
@@ -1634,7 +1638,7 @@ loc_1330:
 ClearOtherVscrollStuff:
 		
 		movem.l d7/a6,-(sp)
-		lea     ((dword_FFD500+2)).l,a6
+		lea     (byte_FFD502).l,a6
 		bra.s   loc_132C
 
 	; End of function ClearOtherVscrollStuff
@@ -1645,7 +1649,7 @@ ClearOtherVscrollStuff:
 sub_134A:
 		movem.w d1,-(sp)
 		bsr.s   PrepareSomethingForDMA
-		bsr.w   sub_10DC        
+		bsr.w   DmaFromRamToVram
 		movem.w (sp)+,d1
 		rts
 
@@ -1686,7 +1690,7 @@ DmaTilesViaFF8804:
 		
 		movem.w d1,-(sp)
 		bsr.s   LoadTilesAtFF8804
-		bsr.w   sub_10DC        
+		bsr.w   DmaFromRamToVram
 		movem.w (sp)+,d1
 		rts
 

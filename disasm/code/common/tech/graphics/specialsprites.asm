@@ -60,7 +60,7 @@ LoadBattleSpecialSprite:
 		lea     ($AF00).l,a1
 		move.w  #$480,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		bra.w   loc_25CB0
 
 	; End of function LoadBattleSpecialSprite
@@ -77,7 +77,7 @@ LoadExplorationSpecialSprite:
 		lea     ($A3C0).l,a1
 		move.w  #$A20,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		bra.w   *+4
 loc_25CB0:
 		movem.l (sp)+,d0-a1

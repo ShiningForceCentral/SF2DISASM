@@ -717,17 +717,17 @@ loc_3D40:
 ; =============== S U B R O U T I N E =======================================
 
 sub_3D46:
-		move.l  ((word_FFA808-$1000000)).w,(dword_FFD500).l
-		move.l  ((word_FFA804-$1000000)).w,(dword_FFD100).l
+		move.l  ((word_FFA808-$1000000)).w,(word_FFD500).l
+		move.l  ((word_FFA804-$1000000)).w,(word_FFD100).l
 		move.w  ((QUAKE_AMPLITUDE-$1000000)).w,d6
 		beq.s   loc_3D7E
 		addq.w  #1,d6
 		bsr.w   GetRandomValue
-		add.w   d0,(dword_FFD100).l
-		add.w   d0,(dword_FFD100+2).l
+		add.w   d0,(word_FFD100).l
+		add.w   d0,(byte_FFD102).l
 		bsr.w   GetRandomValue
-		add.w   d0,(dword_FFD500).l
-		add.w   d0,(dword_FFD500+2).l
+		add.w   d0,(word_FFD500).l
+		add.w   d0,(byte_FFD502).l
 loc_3D7E:
 		bsr.w   StoreVdpCommands
 		bsr.w   StoreVdpCommandsbis

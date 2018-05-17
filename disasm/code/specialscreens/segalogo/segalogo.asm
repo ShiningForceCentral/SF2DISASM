@@ -47,7 +47,7 @@ loc_280AA:
 		dc.w VINTS_ADD
 		dc.l VInt_CheckDebugModeCheat
 		move.b  #1,((FADING_SETTING-$1000000)).w
-		clr.w   ((unk_FFDFAA-$1000000)).w
+		clr.w   ((byte_FFDFAA-$1000000)).w
 		clr.b   ((FADING_POINTER-$1000000)).w
 		move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 		move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
@@ -68,7 +68,7 @@ loc_2812E:
 						; lea     segaLogoColors(pc,d0.w),a0
 		movem.l d0,-(sp)
 		lea     (dword_FFD084).l,a1
-		lea     (dword_FFD004).l,a2
+		lea     (PALETTE_1_0F).l,a2
 		moveq   #$A,d0
 		bsr.w   LoadSegaLogoPalette
 		jsr     (DuplicatePalettes).w

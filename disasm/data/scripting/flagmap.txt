@@ -1,0 +1,893 @@
+0000=Bowie joined
+0001=Sarah joined
+0002=Chester joined
+0003=Jaha joined
+0004=Kazin joined
+0005=Slade joined
+0006=Kiwi joined
+0007=Peter joined
+0008=May joined
+0009=Gerhalt joined
+000A=Luke joined
+000B=Rohde joined
+000C=Rick joined
+000D=Elric joined
+000E=Eric joined
+000F=Karna joined
+0010=Ranfolf joined
+0011=Tyrin joined
+0012=Janet joined
+0013=Higins joined
+0014=Skreech joined
+0015=Taya joined
+0016=Frayja joined
+0017=Jaro joined
+0018=Gyan joined
+0019=Shiela joined
+001A=Zynk joined
+001B=Chaz joined
+001C=Lemon joined
+001D=Claude joined
+001E=Character 31 joined
+001F=Character 32 joined
+
+0020=Bowie in active party
+0021=Sarah  in active party
+0022=Chester  in active party
+0023=Jaha  in active party
+0024=Kazin  in active party
+0025=Slade  in active party
+0026=Kiwi  in active party
+0027=Peter  in active party
+0028=May  in active party
+0029=Gerhalt  in active party
+002A=Luke  in active party
+002B=Rohde  in active party
+002C=Rick  in active party
+002D=Elric  in active party
+002E=Eric  in active party
+002F=Karna  in active party
+0030=Ranfolf  in active party
+0031=Tyrin  in active party
+0032=Janet  in active party
+0033=Higins  in active party
+0034=Skreech  in active party
+0035=Taya  in active party
+0036=Frayja  in active party
+0037=Jaro  in active party
+0038=Gyan  in active party
+0039=Shiela  in active party
+003A=Zynk  in active party
+003B=Chaz  in active party
+003C=Lemon  in active party
+003D=Claude  in active party
+003E=Character 31  in active party
+003F=Character 32  in active party
+
+
+0040=Raft is unlocked (0x05264)
+0041=Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
+
+0042=Sarah + Chester are followers
+0043=Peter is a follower
+0044=Oddler is a follower
+0045=Fairy is a follower
+0046=Astral is a follower
+0047=Lemon is a follower
+0048=Kazin is a follower
+0049=Slade is a follower
+004A=Astral + King are followers
+004B=Luke is a follower
+004C=Zynk is a follower
+004D=Old man is a follower
+
+004E=Difficulty
+004F=Difficulty
+
+0050=set @ loc_257D0, also set during exploration loop at 0x25824
+
+0052=Frayja is a follower
+0053=King + Minister are followers
+0054=Rohde is a follower
+
+0058=checks if a game has been saved for copying purposes? (or if saved from battle?)
+0059=YES/NO prompt answer
+005A=Battle region flag 0
+005B=Battle region flag 1
+005C=Battle region flag 2
+005D=Battle region flag 3
+005E=Battle region flag 4
+005F=Battle region flag 5
+0060=Battle region flag 6
+0061=Battle region flag 7
+0062=Battle region flag 8
+0063=Battle region flag 9
+0064=Battle region flag 10
+0065=Battle region flag 11
+0066=Battle region flag 12
+0067=Battle region flag 13
+0068=Battle region flag 14
+0069=Battle region flag 15
+
+0070=Currently attacking Taros with Achille Sword
+
+0080=Medical Herb (vase in Granseal school basement)
+0081=Medical Herb (chest in Granseal castle 1st floor)
+0082=Angel Wing (chest in Granseal castle 1st floor)
+0083=Antidote (chest in Granseal castle 1st floor)
+0084=Mithril (outside Ancient Tower)
+0085=Power Water (chest in Jewel of Light cave)
+0086=Healing Seed (vase in Yeel)
+0087=Antidote (chest, Hawel's)
+0088=Healing Drop (chest, Hawel's)
+0089=Fairy Powder (chest in treasure room, Galam)
+008A=Healing Water (chest in treasure room, Galam)
+008B=Quick Chicken (upper deck hole, Broken Ship... upper deck barrel, Before Breaking)
+008C=Medical Herb (lower deck, Broken Ship... apparently off-map, in barrel Before Breaking)
+008D=Healing Seed (barrel in unfinished house, New Granseal)
+008E=Cheerful Bread (barrel in NG Castle)
+008F=Warrior Pride (crest in headquarters, NG Castle)
+0090=Bright Honey (vase in Ribble)
+0091=Mithril (sandbox, Ribble)
+0092=Silver Tank (chest, Hobgoblin cave)
+0093=Achilles Sword (chest, Achilles Sword Shrine)
+0094=Protect Milk (barrel at blacksmith, Polca)
+0095=Agility Ring (vase, Bedoe)
+0096=Steel Sword (chest, Desert Shrine)
+0097=Power Water (chest, wooden panel shrine)
+0098=Wooden Panel (chest, wooden panel shrine)
+0099=Running Pimento (barrel in bar, Hassan)
+009A=Mithril (barrel on docks, Hassan)
+009B=Healing Water (chest, Taros Shrine)
+009C=Dry Stone (campfire, Dwarven Mine)
+009D=Fairy Powder (vase in inn, Fairy Woods)
+009E=Secret Book (upstairs bookshelf, Fairy Woods)
+009F=Healing Drop (right side of pond, Harpy Pond)
+00A0=Angel Wing (chest in cave to Creed's Mansion)
+00A1=Brave Apple (chest in cave to Creed's Mansion)
+00A2=Medical Herb (chest in cave to Creed's Mansion)
+00A3=Mithril (chest in cave to Creed's Mansion)
+00A4=Healing Rain (chest outside moat, Creed's Mansion)
+00A5=Antidote (garden, Creed's Mansion)
+00A6=Medical Herb (garden, Creed's Mansion)
+00A7=Running Ring (floor by Desktop Kingdom, Creed's Mansion)
+00A8=Fairy Tear (chest, North Cliff Cave)
+00A9=Mithril (mountain, Tristan/Moun Overworld)
+00AA=Bright Honey (vase, Ketto)
+00AB=Healing Water (barrel, Ketto)
+00AC=Cheerful Bread (vase in Pacalon)
+00AD=Medical Herb (vase in Pacalon)
+00AE=Fairy Powder (barrel, Pacalon Castle)
+00AF=Pegasus Wing (wall, Pacalon Castle)
+00B0=Mithril (treasure room, Pacalon Castle)
+00B1=Protect Milk (caves outside Mitula Shrine)
+00B2=Healing Seed (caves outside Mitula Shrine)
+00B3=Shining Ball (chest outside Mitula Shrine)
+00B4=Critical Sword (chest inside Mitula Shrine)
+00B5=Power Water (chest inside Mitula Shrine)
+00B6=Healing Seed (chest inside Mitula Shrine)
+00B7=Running Pimento (vase, Moun underground)
+00B8=Angel Wing (barrel, Moun underground)
+00B9=Nazca Cannon (chest, Nazca Ship)
+00BA=Vigor Ball (tree, Dojo)
+00BB=Brave Apple (vase, Dojo)
+00BC=Mithril (mountains, Desert Overworld)
+00BD=Mithril (chest on outskirts, Dojo)
+00BE=Blizzard (chest outdoors, Roft)
+00BF=Healing Drop (chest in interior, Roft)
+00C0=Valkyrie (chest, Prism Flower battlefield)
+00C1=White Ring (chest outdoors, Dwarven Village)
+00C2=Healing Water (chest outdoors, Dwarven Village)
+00C3=Demon Rod (chest underground, Dwarven Village)
+00C4=Quick Chicken (chest, Yeel underground)
+00C5=Evil Knuckles (chest, Yeel underground)
+00C6=Evil Axe (chest, Jewel of Light cave)
+00C7=Evil Lance (behind the head, Devil's Head)
+00C8=Evil Shot (past the portcullis, Galam)
+00C9=Mithril (chest on outskirts of Hassan)
+00CA=Mithril (chest on outskirts, Fairy Woods)
+00CB=Healing Seed (caves outside Mitula Shrine)
+00CC=Mithril (chest inside Mitula Shrine)
+00CD=Chirrup Sandals (table, Galam interiors)
+00CE=Mithril (wall in tunnel, Galam interiors)
+00CF=Medical Herb (chest in shops, Galam)
+00D0=Medical Herb (chest in shops, Galam)
+00D1=Antidote (chest in southwest house, New Granseal)
+00D2=Angel Wing (chest in item shop, New Granseal)
+00D3=Healing Drop (chest in weapons shop, New Granseal)
+00D4=Cotton Balloon (chest on chessboard, Desktop Kingdom)
+00D5=Mithril (jutting mountain near JoL cave, Grans Island Overworld)
+00D6=Mithril (mountain, Devil's Tail Overworld)
+00D7=Light of Hope (Fairy Woods battle)
+00D8=Life Ring Light of Hope (Fairy Woods battle)
+00D9=Mithril (hole in ground, Granseal(earthquake))
+00DA
+00DB
+00DC=Nothing (chest behind shopkeeper's counter, Granseal)
+00DD=Vigor Ball (chest on outskirts, Fairy Woods)
+
+00FF=all these slots are unused
+
+0100=Temporary map setup flag 00
+0101=Temporary map setup flag 01
+0102=Temporary map setup flag 02
+0103=Temporary map setup flag 03
+0104=Temporary map setup flag 04
+0105=Temporary map setup flag 05
+0106=Temporary map setup flag 06
+0107=Temporary map setup flag 07
+0108=Temporary map setup flag 08
+0109=Temporary map setup flag 09
+010A=Temporary map setup flag 0A
+010B=Temporary map setup flag 0B
+010C=Temporary map setup flag 0C
+010D=Temporary map setup flag 0D
+010E=Temporary map setup flag 0E
+010F=Temporary map setup flag 0F
+0110=Temporary map setup flag 10
+0111=Temporary map setup flag 11
+0112=Temporary map setup flag 12
+0113=Temporary map setup flag 13
+0114=Temporary map setup flag 14
+0115=Temporary map setup flag 15
+0116=Temporary map setup flag 16
+0117=Temporary map setup flag 17
+0118=Temporary map setup flag 18
+0119=Temporary map setup flag 19
+011A=Temporary map setup flag 1A
+011B=Temporary map setup flag 1B
+011C=Temporary map setup flag 1C
+011D=Temporary map setup flag 1D
+011E=Temporary map setup flag 1E
+011F=Temporary map setup flag 1F
+0120=Temporary map setup flag 20
+0121=Temporary map setup flag 21
+0122=Temporary map setup flag 22
+0123=Temporary map setup flag 23
+0124=Temporary map setup flag 24
+0125=Temporary map setup flag 25
+0126=Temporary map setup flag 26
+0127=Temporary map setup flag 27
+0128=Temporary map setup flag 28
+0129=Temporary map setup flag 29
+012A=Temporary map setup flag 2A
+012B=Temporary map setup flag 2B
+012C=Temporary map setup flag 2C
+012D=Temporary map setup flag 2D
+012E=Temporary map setup flag 2E
+012F=Temporary map setup flag 2F
+0130=Temporary map setup flag 30
+0131=Temporary map setup flag 31
+0132=Temporary map setup flag 32
+0133=Temporary map setup flag 33
+0134=Temporary map setup flag 34
+0135=Temporary map setup flag 35
+0136=Temporary map setup flag 36
+0137=Temporary map setup flag 37
+0138=Temporary map setup flag 38
+0139=Temporary map setup flag 39
+013A=Temporary map setup flag 3A
+013B=Temporary map setup flag 3B
+013C=Temporary map setup flag 3C
+013D=Temporary map setup flag 3D
+013E=Temporary map setup flag 3E
+013F=Temporary map setup flag 3F
+0140=Temporary map setup flag 40
+0141=Temporary map setup flag 41
+0142=Temporary map setup flag 42
+0143=Temporary map setup flag 43
+0144=Temporary map setup flag 44
+0145=Temporary map setup flag 45
+0146=Temporary map setup flag 46
+0147=Temporary map setup flag 47
+0148=Temporary map setup flag 48
+0149=Temporary map setup flag 49
+014A=Temporary map setup flag 4A
+014B=Temporary map setup flag 4B
+014C=Temporary map setup flag 4C
+014D=Temporary map setup flag 4D
+014E=Temporary map setup flag 4E
+014F=Temporary map setup flag 4F
+0150=Temporary map setup flag 50
+0151=Temporary map setup flag 51
+0152=Temporary map setup flag 52
+0153=Temporary map setup flag 53
+0154=Temporary map setup flag 54
+0155=Temporary map setup flag 55
+0156=Temporary map setup flag 56
+0157=Temporary map setup flag 57
+0158=Temporary map setup flag 58
+0159=Temporary map setup flag 59
+015A=Temporary map setup flag 5A
+015B=Temporary map setup flag 5B
+015C=Temporary map setup flag 5C
+015D=Temporary map setup flag 5D
+015E=Temporary map setup flag 5E
+015F=Temporary map setup flag 5F
+0160=Temporary map setup flag 50
+0161=Temporary map setup flag 61
+0162=Temporary map setup flag 62
+0163=Temporary map setup flag 63
+0164=Temporary map setup flag 64
+0165=Temporary map setup flag 65
+0166=Temporary map setup flag 66
+0167=Temporary map setup flag 67
+0168=Temporary map setup flag 68
+0169=Temporary map setup flag 69
+016A=Temporary map setup flag 6A
+016B=Temporary map setup flag 6B
+016C=Temporary map setup flag 6C
+016D=Temporary map setup flag 6D
+016E=Temporary map setup flag 6E
+016F=Temporary map setup flag 6F
+0170=Temporary map setup flag 70
+0171=Temporary map setup flag 71
+0172=Temporary map setup flag 72
+0173=Temporary map setup flag 73
+0174=Temporary map setup flag 74
+0175=Temporary map setup flag 75
+0176=Temporary map setup flag 76
+0177=Temporary map setup flag 77
+0178=Temporary map setup flag 78
+0179=Temporary map setup flag 79
+017A=Temporary map setup flag 7A
+017B=Temporary map setup flag 7B
+017C=Temporary map setup flag 7C
+017D=Temporary map setup flag 7D
+017E=Temporary map setup flag 7E
+017F=Temporary map setup flag 7F
+
+0180=set after Bowie obtains the jewel of light/evil... whichever it is
+0181=set after Bowie obtains King Galam's jewel
+0182=set during battle 32, after Jaro switches sides
+0183=set after the first set of tile changes in the Oddeye battle
+0184=set after the second set of tile changes in the Oddeye battle
+
+018F=set after first battle's cutscene OR first save? Checked at witch screens
+
+0190=Battle 0 unlocked
+0191=Battle 1 unlocked
+0192=Battle 2 unlocked
+0193=Battle 3 unlocked
+0194=Battle 4 unlocked
+0195=Battle 5 unlocked
+0196=Battle 6 unlocked
+0197=Battle 7 unlocked
+0198=Battle 8 unlocked
+0199=Battle 9 unlocked
+019A=Battle 10 unlocked
+019B=Battle 11 unlocked
+019C=Battle 12 unlocked
+019D=Battle 13 unlocked
+019E=Battle 14 unlocked
+019F=Battle 15 unlocked
+01A0=Battle 16 unlocked
+01A1=Battle 17 unlocked
+01A2=Battle 18 unlocked
+01A3=Battle 19 unlocked
+01A4=Battle 20 unlocked
+01A5=Battle 21 unlocked
+01A6=Battle 22 unlocked
+01A7=Battle 23 unlocked
+01A8=Battle 24 unlocked
+01A9=Battle 25 unlocked
+01AA=Battle 26 unlocked
+01AB=Battle 27 unlocked
+01AC=Battle 28 unlocked
+01AD=Battle 29 unlocked
+01AE=Battle 30 unlocked
+01AF=Battle 31 unlocked
+01B0=Battle 32 unlocked
+01B1=Battle 33 unlocked
+01B2=Battle 34 unlocked
+01B3=Battle 35 unlocked
+01B4=Battle 36 unlocked
+01B5=Battle 37 unlocked
+01B6=Battle 38 unlocked
+01B7=Battle 39 unlocked
+01B8=Battle 40 unlocked
+01B9=Battle 41 unlocked
+01BA=Battle 42 unlocked
+01BB=Battle 43 unlocked
+01BC=Battle 44 unlocked
+
+01D6=set after you approach the pond to rescue Elric at the Harpy Pond
+
+01F4=Battle 0 completed
+01F5=Battle 1 completed
+01F6=Battle 2 completed
+01F7=Battle 3 completed
+01F8=Battle 4 completed
+01F9=Battle 5 completed
+01FA=Battle 6 completed
+01FB=Battle 7 completed
+01FC=Battle 8 completed
+01FD=Battle 9 completed
+01FE=Battle 10 completed
+01FF=Battle 11 completed
+0200=Battle 12 completed
+0201=Battle 13 completed
+0202=Battle 14 completed
+0203=Battle 15 completed
+0204=Battle 16 completed
+0205=Battle 17 completed
+0206=Battle 18 completed
+0207=Battle 19 completed
+0208=Battle 20 completed
+0209=Battle 21 completed
+020A=Battle 22 completed
+020B=Battle 23 completed
+020C=Battle 24 completed
+020D=Battle 25 completed
+020E=Battle 26 completed
+020F=Battle 27 completed
+0210=Battle 28 completed
+0211=Battle 29 completed
+0212=Battle 30 completed
+0213=Battle 31 completed
+0214=Battle 32 completed
+0215=Battle 33 completed
+0216=Battle 34 completed
+0217=Battle 35 completed
+0218=Battle 36 completed
+0219=Battle 37 completed
+021A=Battle 38 completed
+021B=Battle 39 completed
+021C=Battle 40 completed
+021D=Battle 41 completed
+021E=Battle 42 completed
+021F=Battle 43 completed
+0220=Battle 44 completed
+
+0257=These are all 00, presumably unused
+
+0258=set after agreeing to try getting into the castle
+0259=set after Bowie is intercepted by his mother going downstairs
+025A=set after Astral's second basement line
+025B=set after the messenger scene
+025C=set after the guards have listened to Sarah and allowed you into the castle
+025D=set after the scene in the King's bedroom
+025E
+025F=set after talking to Astral about going to the tower
+
+0260=set after agreeing to go to the tower with Astral
+0261=set after the scene where Astral exorcises the Gizmo
+0262=set after you agree to go to see Hawel
+0263=set after prison wake-up sequence IF 0297 is *not* also set
+0264=set after event at Hawel's house
+0265=
+0266=
+0267=
+
+0268=
+0269=
+026A=
+026B=
+026C=set after Astral talks Lemon into heading to the Ancient Tower
+026D=set after stepping in front of the Minister
+026E=set after Astral delivers an "oh crap, earthquake" line in the castle
+026F=set after Astral delivers his "should be safe" line in castle
+
+0270=set after the soldiers are swallowed up by the earthquake
+0271=
+0272=
+0273=
+0274=
+0275=
+0276=
+0277=
+
+0278=
+0279=
+027A=
+027B=
+027C=
+027D=
+027E=
+027F=
+
+0280=set after the end of battle 7's long sequence, cleared at docks?
+0281=
+0282=
+0283=
+0284=
+0285=
+0286=
+0287=
+
+0288=
+0289=
+028A=set after event at Hawel's house
+028B=
+028C=
+028D=
+028E=
+028F=
+
+0290=
+0291=
+0292=
+0293=
+0294=set after initial wake-up in prison sequence
+0295=set after prison scene, ending in Slade unlocking/Sarah accusing
+0296=set after you try to go upstairs, and Slade opens the secret tunnel
+0297=set after Galam and Lemon leave with their army
+
+0298=set after the Galam guards catch you sneaking around, but before battle
+0299=
+029A=
+029B=
+029C=
+029D=
+029E=
+029F=
+
+02A0=
+02A1=
+02A2=
+02A3=
+02A4=
+02A5=
+02A6=
+02A7=
+
+02A8=
+02A9=
+02AA=
+02AB=
+02AC=
+02AD=
+02AE=
+02AF=
+
+02B0=
+02B1=
+02B2=
+02B3=
+02B4=
+02B5=
+02B6=
+02B7=
+
+02B8=
+02B9=
+02BA=
+02BB=
+02BC=set after ship arrives in Parmecia and you regain control of Bowie
+02BD=set after the scene with Peter and the kids in New Granseal
+02BE=set after the scene with Peter at the Castle (ends with you leaving the Castle)
+02BF=set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
+
+02C0=
+02C1=set after you automatically walk into New Granseal after it is built
+02C2=set after the scene with the sailor and soldier in New Granseal (Peter intro)
+02C3=set after the "one year has passed" text, after New Granseal is built
+02C4=set after the scene in Ribble where the mayor confronts Bowie
+02C5=set after the mayor in Ribble scene... this flag unlocks the doors
+02C6=set after Oddler wanders down from the mountain
+02C7=set after you dislodge the turtle/fairy in Polca
+    =also set after you speak to Volcanon
+
+02C8=set after Peter delivers his lines after the cliffs before Bedoe battle
+02C9=set after the scene at the cliffs before Bedoe, where the devils are searching
+02CA=set after winning the cliff battle outside Bedoe, before Peter delivers lines
+02CB=set after returning to Polca from Bedoe and seeing the devils vs. birds scene
+02CC=set after your raft-giving conversation with the mayor in Polca
+02CD=set after the mayor first tries to have you take Oddler with you (Peter declines)
+02CE=set after Oddler runs after you as you leave Polca, and tags along
+02CF=set after the initial Bedoe scene (where the guards confront you)
+
+02D0=set after the King of Bedoe speaks to his soldiers and they disperse
+02D1=set after you approach the King of Bedoe, starts with Luke speaking to Peter
+02D2=set after speaking with Volcanon
+02D3=set after the hatchling in Bedoe shows you he can almost fly
+02D4=set after the scene where Skreech falls in Bedoe
+02D5=set after telling Rohde that you're going to get the Caravan
+02D6=set after talking to the priest in upstairs Hassan
+02D7=set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
+
+02D8=???
+02D9=???
+02DA=set after the old man opens the door to the Woodel Panel shrine interior
+02DB=set after you open the tree in Ribble with the wooden plank
+02DC=set after the old man fails to open the way to Grans in the Wooden Panel shrine
+02DD=
+02DE=
+02DF=
+
+02E0=
+02E1=
+02E2=
+02E3=
+02E4=
+02E5=
+02E6=
+02E7=
+
+02E8=
+02E9=
+02EA=
+02EB=
+02EC=
+02ED=
+02EE=set after Rohde clears the blockage at the North Cliff cave
+02EF=set after Elric opens the passage to Devil's Tail
+
+02F0
+02F1
+02F2
+02F3
+02F4
+02F5
+02F6
+02F7=set after talking to one of the dwarves in the mine near the Fairy Woods
+
+02F8=set after the fairy cures the sick dwarf in the mine
+02F9=set after the dwarf gives Bowie the cannon
+02FA=set after the fairy tags along at Creed's
+02FB
+02FC
+02FD
+02FE
+02FF
+
+0300
+0301
+0302
+0303
+0304
+0305
+0306=set after the first scene with Goliath at Creed's Mansion
+0307
+
+0308=set after the scene where Goliath places you on the Desktop
+0309=set after the Desktop King tells you to fight on the chessboard
+030A=set after the scene that plays after you win the chess battle
+030B=set after the Cotton Balloon pops and you land in Floor World
+030C=set after the man tries to lift the giant ring in Floor World
+030D=set after the scene where you're surprised by Willard inside the wall
+030E
+030F=set after the scene where Creed restores the Force and heads down the basement
+
+0310=set after the event in the basement of Creed's Mansion
+0311=set after the fairy tags along at Creed's
+0312=set after Oddler elects to stay behind at Creed's Mansion
+0313=???
+0314
+0315
+0316
+0317
+
+0318
+0319
+031A
+031B
+031C
+031D
+031E=set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
+031F=set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
+
+0320=set after the merchant in Ketto runs to his store
+0321=set after Zalbard taunts you in the scene outside the Mitula Shrine
+0322=set after the event in the basement of Creed's Mansion
+0323=set after returning to New Granseal, when the soldier greets you
+0324=set after the dwarf gives you dynamite
+0325=set after coming back to New Granseal after Creed's Mansion,when Astral joins
+0326=set after the scene with Janet, when you go to leave New Granseal
+0327
+
+0328
+0329
+032A=set after speaking to a centaur at Pacalon castle (the one who moves and shivers)
+032B=set after Frayja asks to go to Moun with you
+032C
+032D
+032E
+032F
+
+0330
+0331
+0332
+0333
+0334=set after Skreech's join scene has played in Tristan
+0335
+0336
+0337
+
+0338
+0339
+033A
+033B
+033C
+033D
+033E=set after the Gyan join scene in the Moun underground
+033F=set after Frayja forces his way into the party just before the battle in Moun
+
+0340=set after talking to the painter in Moun for the first time
+0341=set after the scene after you win the battle in Moun plays out
+0342=set after making the Arm of Golem appear in Moun
+0343=set after picking up the Arm of Golem in Moun
+0344=set after the scene where Zynk stops you as you leave the Moun underground
+0345
+0346
+0347
+
+0348=set after the door to the Mitula Shrine is opened
+0349=set after the Taya join scene has played inside the Mitula Shrine
+034A
+034B
+034C
+034D
+034E
+034F
+
+0350
+0351
+0352
+0353
+0354
+0355
+0356
+0357
+
+0358
+0359
+035A
+035B
+035C
+035D
+035E
+035F
+
+0360
+0361
+0362
+0363
+0364
+0365
+0366
+0367
+
+0368
+0369
+036A
+036B
+036C
+036D
+036E
+036F
+
+0370
+0371
+0372
+0373
+0374
+0375
+0376
+0377
+
+0378
+0379
+037A
+037B
+037C
+037D
+037E
+037F
+
+0380
+0381
+0382
+0383
+0384=set after using the Dry Stone to open the way to the Dwarven Village
+0385=set after the you're pulled toward the Force Sword in the Jewel Cave
+0386=set after you pull the Force Sword out
+0387=set after the first time you talk to Creed on path up Ancient Tower
+
+0388=will be set with the 0387, but only if the event isn't triggered by speaking
+0389
+038A
+038B
+038C
+038D
+038E=set after the initial scene on entering Roft (where the guy thinks you're Galam)
+038F=set after the Petro death scene in Roft
+
+0390
+0391
+0392
+0393
+0394
+0395
+0396
+0397
+
+0398=set after the scene with Zeon plays as you leave the Galam Drawbridge area
+0399=set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
+039A
+039B
+039C
+039D
+039E
+039F
+
+03A0
+03A1
+03A2=set after opening Devil's Head with the Force Sword
+03A3
+03A4
+03A5
+03A6
+03A7
+
+03A8
+03A9
+03AA
+03AB
+03AC=set after playing the piano in Yeel (during the late game)
+03AD=set after Chaz and the priest go downstars in Yeel
+03AE=set after the scene in underground Yeel where Chaz paces and consults books
+03AF
+
+03B0=set after Lemon jumps off the cliff in Yeel
+03B1=set after recruiting Lemon in Yeel
+03B2
+03B3
+03B4
+03B5
+03B6
+03B7
+
+03B8
+03B9
+03BA
+03BB
+03BC
+03BD
+03BE
+03BF
+
+03C0
+03C1
+03C2
+03C3
+03C4
+03C5
+03C6
+03C7
+
+03C8
+03C9
+03CA
+03CB
+03CC
+03CD
+03CE
+03CF
+
+03D0
+03D1
+03D2
+03D3
+03D4
+03D5
+03D6
+03D7
+
+03D8
+03D9
+03DA
+03DB
+03DC
+03DD
+03DE
+03DF
+
+03E0
+03E1
+03E2
+03E3
+03E4
+03E5
+03E6
+03E7=set after the Nazca ship shootdown scenes

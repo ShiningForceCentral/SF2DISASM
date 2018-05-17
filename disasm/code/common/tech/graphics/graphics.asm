@@ -353,7 +353,7 @@ sub_19C8:
 		lea     ((byte_FFDF2A-$1000000)).w,a1
 		move.w  #$80,d7 
 		jsr     CopyBytes(pc)   
-		move.b  #$20,((unk_FFDFAA-$1000000)).w 
+		move.b  #$20,((byte_FFDFAA-$1000000)).w 
 		movem.l (sp)+,d7-a1
 		rts
 
@@ -366,7 +366,7 @@ sub_19C8:
 
 sub_19F8:
 		clr.w   d6
-		move.b  ((unk_FFDFAA-$1000000)).w,d6
+		move.b  ((byte_FFDFAA-$1000000)).w,d6
 		bne.s   loc_1A02
 		rts
 loc_1A02:
@@ -375,7 +375,7 @@ loc_1A02:
 		lea     ((byte_FFDF2A-$1000000)).w,a2
 		moveq   #$3F,d7 
 		subq.w  #1,d6
-		move.b  d6,((unk_FFDFAA-$1000000)).w
+		move.b  d6,((byte_FFDFAA-$1000000)).w
 		lsr.w   #2,d6
 loc_1A1C:
 		clr.w   d0
@@ -414,7 +414,7 @@ loc_1A1C:
 		move.w  (sp)+,d7
 		dbf     d7,loc_1A1C
 		jsr     StoreVdpCommandster(pc)
-		tst.b   ((unk_FFDFAA-$1000000)).w
+		tst.b   ((byte_FFDFAA-$1000000)).w
 		bne.s   return_1A7E
 		lea     ((byte_FFDF2A-$1000000)).w,a0
 		tst.b   ((byte_FFDFAB-$1000000)).w

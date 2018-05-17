@@ -83,7 +83,7 @@ loc_1AC362:
 		lea     ($2000).w,a1    ; ?
 		move.w  #$800,d0
 		moveq   #2,d1
-		jsr     (sub_10DC).w    
+		jsr     (DmaFromRamToVram).w
 		rts
 
 	; End of function LoadEndCreditsFont
@@ -825,7 +825,7 @@ sub_1AC9FC:
 loc_1ACA0C:
 		move.w  d0,d7
 		move.b  #3,d1
-		bsr.w   GetAddrOfBattleDataSection
+		bsr.w   GetBattleSpriteSet
 		cmp.b   d1,d7
 		ble.s   loc_1ACA1E
 		bra.w   loc_1ACA6A
@@ -1270,7 +1270,7 @@ UpdateTriggeredRegionsAndAI:
 		movem.l d0-a6,-(sp)
 		move.w  d0,d7
 		move.w  #3,d1
-		bsr.w   GetAddrOfBattleDataSection
+		bsr.w   GetBattleSpriteSet
 		tst.w   d1
 		bne.s   loc_1ACE60
 		bra.w   loc_1ACF2A
