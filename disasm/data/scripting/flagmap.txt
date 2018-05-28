@@ -391,6 +391,53 @@
 01BB=Battle 43 unlocked
 01BC=Battle 44 unlocked
 
+01C2=Battle 0 start cutscene played 
+01C3=Battle 1 start cutscene played  
+01C4=Battle 2 start cutscene played  
+01C5=Battle 3 start cutscene played  
+01C6=Battle 4 start cutscene played  
+01C7=Battle 5 start cutscene played  
+01C8=Battle 6 start cutscene played  
+01C9=Battle 7 start cutscene played  
+01CA=Battle 8 start cutscene played  
+01CB=Battle 9 start cutscene played  
+01CC=Battle 10 start cutscene played 
+01CD=Battle 11 start cutscene played 
+01CE=Battle 12 start cutscene played 
+01CF=Battle 13 start cutscene played 
+01D0=Battle 14 start cutscene played 
+01D1=Battle 15 start cutscene played 
+01D2=Battle 16 start cutscene played 
+01D3=Battle 17 start cutscene played 
+01D4=Battle 18 start cutscene played 
+01D5=Battle 19 start cutscene played 
+01D6=Battle 20 start cutscene played 
+01D7=Battle 21 start cutscene played 
+01D8=Battle 22 start cutscene played 
+01D9=Battle 23 start cutscene played 
+01DA=Battle 24 start cutscene played 
+01DB=Battle 25 start cutscene played 
+01DC=Battle 26 start cutscene played 
+01DD=Battle 27 start cutscene played 
+01DE=Battle 28 start cutscene played 
+01DF=Battle 29 start cutscene played 
+01E0=Battle 30 start cutscene played 
+01E1=Battle 31 start cutscene played 
+01E2=Battle 32 start cutscene played 
+01E3=Battle 33 start cutscene played 
+01E4=Battle 34 start cutscene played 
+01E5=Battle 35 start cutscene played 
+01E6=Battle 36 start cutscene played 
+01E7=Battle 37 start cutscene played 
+01E8=Battle 38 start cutscene played 
+01E9=Battle 39 start cutscene played 
+01EA=Battle 40 start cutscene played 
+01EB=Battle 41 start cutscene played 
+01EC=Battle 42 start cutscene played 
+01EB=Battle 43 start cutscene played 
+01EC=Battle 44 start cutscene played 
+
+
 01D6=set after you approach the pond to rescue Elric at the Harpy Pond
 
 01F4=Battle 0 completed

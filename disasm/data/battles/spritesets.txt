@@ -1,0 +1,58 @@
+
+
+- Byte 00 : number of ally entries.
+- Byte 01 : number of enemy entries.
+- Byte 02 : number of AI-regions.
+- Byte 03 : number of AI-points.
+
+- Ally entries : 12 bytes
+  - 00 : Force member index
+  - 01 : X
+  - 02 : Y
+  - 03 : Unused
+  - 04 : Unused
+  - 05 : Unused
+  - 06 : Unused
+  - 07 : Unused
+  - 08 : Unused
+  - 09 : Unused
+  - 10 : Unused
+  - 11 : Unused
+  
+- Enemy entries : 12 bytes
+  - 00 : Enemy index
+  - 01 : X
+  - 02 : Y
+  - 03 : AI index
+  - 04-05 : Item index
+  - 06 : Move order 1
+         $FF : No order
+         $0X : Follow Force Member X
+         $4X : Move towards point X
+         $8X : Follow enemy X
+  - 07 : Trigger region index. $0F = no region trigger.
+  - 08 : ? always FF ? Used with byte 06 while calling "SetKills", AI-related.
+  - 09 : ? always 0F ? Used with byte 07 while calling "SetDefeats", AI-related.
+  - 10 : ? 60-70 for battle 1 gizmos, 00 in other cases ? Used with next byte for "CharacterWord34", AI-related.
+  - 11 : Spawn params
+         $01 : Continuous respawn (fairy woods special battle)
+         $02 : Region-triggered spawn
+  
+- AI-region entries : 12 bytes
+  - 00 : 04=Type 1, 03=Type 2
+  - 01 : 00
+  - 02 : X1
+  - 03 : Y1 (upper-left corner)
+  - 04 : X2
+  - 05 : Y2 (bottom-left corner)
+  - 06 : X3
+  - 07 : Y3 (bottom-right corner)
+  - 08 : X4
+  - 09 : Y4 (upper-right corner)
+  - 10 : 00
+  - 11 : 00
+  
+- AI-point entries : 2 bytes
+  - 00 : X
+  - 01 : Y
+  
