@@ -1,12 +1,13 @@
 
 
+
 - Byte 00 : number of ally entries.
 - Byte 01 : number of enemy entries.
 - Byte 02 : number of AI-regions.
 - Byte 03 : number of AI-points.
 
 - Ally entries : 12 bytes
-  - 00 : Force member index
+  - 00 : Force battle-party index from 0 to $B.
   - 01 : X
   - 02 : Y
   - 03 : Unused
@@ -23,7 +24,7 @@
   - 00 : Enemy index
   - 01 : X
   - 02 : Y
-  - 03 : AI index
+  - 03 : AI type index
   - 04-05 : Item index
   - 06 : Move order 1
          $FF : No order
@@ -40,7 +41,7 @@
   
 - AI-region entries : 12 bytes
   - 00 : 04=Type 1, 03=Type 2
-  - 01 : 00
+  - 01 : Unused
   - 02 : X1
   - 03 : Y1 (upper-left corner)
   - 04 : X2
@@ -49,8 +50,8 @@
   - 07 : Y3 (bottom-right corner)
   - 08 : X4
   - 09 : Y4 (upper-right corner)
-  - 10 : 00
-  - 11 : 00
+  - 10 : Unused
+  - 11 : Unused
   
 - AI-point entries : 2 bytes
   - 00 : X

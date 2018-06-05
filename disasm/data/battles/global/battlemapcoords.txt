@@ -1,0 +1,11 @@
+
+One entry per battle.
+7 bytes per entry.
+
+- Byte 00 : Map Index
+- Byte 01 : Area start X
+- Byte 02 : Area start Y
+- Byte 03 : Area Width
+- Byte 04 : Area Height
+- Byte 05 : Trigger X
+- Byte 06 : Trigger Y
