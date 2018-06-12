@@ -1,0 +1,48 @@
+
+Move Type Terrain Costs :
+Battle terrain cost values for each move type.
+
+- One entry per movetype.
+- 16 bytes per entry
+	Byte 0 = Low Sky
+	Byte 1 = Plains
+	Byte 2 = Road 
+	Byte 3 = Grass
+	Byte 4 = Forest
+	Byte 5 = Hill 
+	Byte 6 = Desert
+	Byte 7 = High Sky
+	Byte 8 = Water
+	Remaining bytes are unused.
+- 13 entries : 
+	1 : Free
+	2 : Foot
+	3 : Horse
+	4 : Fast
+	5 : Tires
+	6 : Fly
+	7 : Float
+	8 : Water
+	9 : Foot2
+	10 : Horse2
+	11 : Fast2
+	12 : Foot3
+	13 : Foot4
+- Values : 
+	- $FF = move type cannot reach this terrain type
+	- First 4 bits = Land Effect index (multiplied by 15 : 0=0%, 1=15%, 2=30% etc.)
+	- Last 4 bits = Move cost.
+
+00000000h: 02 02 02 02 02 02 02 02 02 FF FF FF FF FF FF FF ; .........ÿÿÿÿÿÿÿ
+00000010h: FF 12 02 23 24 23 23 FF FF FF FF FF FF FF FF FF ; ÿ..#$##ÿÿÿÿÿÿÿÿÿ
+00000020h: FF 12 02 23 25 25 25 FF FF FF FF FF FF FF FF FF ; ÿ..#%%%ÿÿÿÿÿÿÿÿÿ
+00000030h: FF 12 02 22 22 22 24 FF FF FF FF FF FF FF FF FF ; ÿ.."""$ÿÿÿÿÿÿÿÿÿ
+00000040h: FF 12 02 22 23 23 23 FF FF FF FF FF FF FF FF FF ; ÿ.."###ÿÿÿÿÿÿÿÿÿ
+00000050h: 02 02 02 02 02 02 02 02 02 FF FF FF FF FF FF FF ; .........ÿÿÿÿÿÿÿ
+00000060h: 02 12 02 22 22 22 02 FF 02 FF FF FF FF FF FF FF ; ...""".ÿ.ÿÿÿÿÿÿÿ
+00000070h: FF FF FF FF FF FF FF FF 22 FF FF FF FF FF FF FF ; ÿÿÿÿÿÿÿÿ"ÿÿÿÿÿÿÿ
+00000080h: FF 12 02 23 24 23 23 FF FF FF FF FF FF FF FF FF ; ÿ..#$##ÿÿÿÿÿÿÿÿÿ
+00000090h: FF 12 02 23 25 25 25 FF FF FF FF FF FF FF FF FF ; ÿ..#%%%ÿÿÿÿÿÿÿÿÿ
+000000a0h: FF 12 02 22 22 22 24 FF FF FF FF FF FF FF FF FF ; ÿ.."""$ÿÿÿÿÿÿÿÿÿ
+000000b0h: FF 12 02 23 24 23 23 FF FF FF FF FF FF FF FF FF ; ÿ..#$##ÿÿÿÿÿÿÿÿÿ
+000000c0h: FF 12 02 23 24 23 23 FF FF FF FF FF FF FF FF FF ; ÿ..#$##ÿÿÿÿÿÿÿÿÿ

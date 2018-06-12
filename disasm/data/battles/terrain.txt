@@ -1,0 +1,18 @@
+
+
+Battle terrain entries are compressed with the Stack compression algorithm (same as most graphics).
+
+Decompressed data outputs 2304 bytes : 48*48 (battle max dimensions)
+
+-1 = obstructed
+0 = Low Sky
+1 = Plains
+2 = Road
+3 = Grass
+4 = Forest
+5 = Hill
+6 = Desert
+7 = High Sky
+8 = Water
+
+
