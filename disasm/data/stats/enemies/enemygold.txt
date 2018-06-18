@@ -1,0 +1,7 @@
+
+Enemy gold table : 
+
+- Same index as enemy data index.
+- One word value per entry : gold amount.
+
+Note : lots of unused entries in the end apparently.

@@ -1,0 +1,16 @@
+
+Enemy items drop table : 
+
+- 4 bytes per entry
+	Byte 0 : Battle index
+	Byte 1 : Enemy entity index (from battle declaration)
+	Byte 2 : Item index (enemy has to have this item in its inventory)
+		Hardcoded values with 1/32 chance : 
+			$44 : Counter Sword
+			$66 : Iron Ball
+			$6E : Taros Sword
+	Byte 3 : Drop flag (limited to 4 bytes = 32 entries, with 30 already used)
+	
+- Section ends with word value $FFFF
+
+(see subroutine WriteSkirmishScript_EnemyDropItem for hardcoded values and flag limitations)

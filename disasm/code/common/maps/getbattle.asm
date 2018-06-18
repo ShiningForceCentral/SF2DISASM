@@ -41,10 +41,10 @@ loc_79DE:
 		cmp.b   6(a0),d5        ; if player is not on specified coords (bytes 5/6), then don't return battle index.
 		bne.w   loc_7A24
 loc_79F0:
-		move.b  1(a0),((CAMERA_LOCK_START_X-$1000000)).w
-		move.b  2(a0),((CAMERA_LOCK_START_Y-$1000000)).w
-		move.b  3(a0),((CAMERA_LOCK_END_X-$1000000)).w
-		move.b  4(a0),((CAMERA_LOCK_END_Y-$1000000)).w
+		move.b  1(a0),((BATTLE_AREA_X-$1000000)).w
+		move.b  2(a0),((BATTLE_AREA_Y-$1000000)).w
+		move.b  3(a0),((BATTLE_AREA_WIDTH-$1000000)).w
+		move.b  4(a0),((BATTLE_AREA_HEIGHT-$1000000)).w
 		addi.w  #$64,d1 ; "Battle completed" flags
 		jsr     j_CheckFlag
 		beq.s   loc_7A1E

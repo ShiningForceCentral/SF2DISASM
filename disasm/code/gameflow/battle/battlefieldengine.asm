@@ -148,7 +148,7 @@ GetCurrentTerrainType:
 
 GetTerrain:
 		movem.l d1-a6,-(sp)
-		lea     (TERRAIN_DATA).l,a0
+		lea     (BATTLE_TERRAIN).l,a0
 		bsr.w   ConvertCoordToOffset
 		move.b  (a0),d0
 		movem.l (sp)+,d1-a6
@@ -162,7 +162,7 @@ GetTerrain:
 SetTerrain:
 		movem.l d1-a6,-(sp)
 loc_C17A:
-		lea     (TERRAIN_DATA).l,a0
+		lea     (BATTLE_TERRAIN).l,a0
 		bsr.w   ConvertCoordToOffset
 		move.b  d0,(a0)
 		movem.l (sp)+,d1-a6
@@ -328,7 +328,7 @@ GetMoveInfo:
 loc_C2D0:
 		lea     ((byte_FF4000+$400)).l,a2
 		lea     ((byte_FF4A00+$300)).l,a3
-		lea     (TERRAIN_DATA).l,a4
+		lea     (BATTLE_TERRAIN).l,a4
 		lea     ((MOVE_COST_LIST-$1000000)).w,a5
 		jsr     GetXPos
 		move.w  d1,d3
@@ -1076,7 +1076,7 @@ loc_C898:
 		jsr     GetXPos
 		cmpi.w  #MAP_SIZE_MAXWIDTH,d1
 		bcc.w   loc_C8F4
-		lea     (TERRAIN_DATA).l,a0
+		lea     (BATTLE_TERRAIN).l,a0
 		bsr.w   ConvertCoordToOffset
 		move.b  (a0),d4
 		cmpi.b  #$FF,d4

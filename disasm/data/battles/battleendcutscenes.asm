@@ -1,5 +1,5 @@
 
-; ASM FILE data\battles\global\battleendcutscenes.asm :
+; ASM FILE data\battles\battleendcutscenes.asm :
 ; 0x47BE8..0x47C48 : Enemy defeated cutscenes
 rpt_EnemyDefeatedCutscenes:
 		dc.w (ms_Empty-rpt_EnemyDefeatedCutscenes) & $FFFF

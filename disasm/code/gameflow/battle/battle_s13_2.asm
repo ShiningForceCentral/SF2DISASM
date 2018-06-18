@@ -20,7 +20,7 @@ sub_1B120A:
 		moveq   #0,d0
 		jsr     j_JoinForce
 		move.b  #0,((CURRENT_BATTLE-$1000000)).w
-		jsr     sub_1AC010      ; init some enemy list ?
+		jsr     j_InitEnemyList
 		bsr.w   InitAllForceBattlePositions
 		bsr.w   InitAllEnemyBattlePositions
 		move.b  #$80,d0
@@ -53,7 +53,7 @@ loc_1B127E:
 		move.w  ((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w,d6
 		subq.w  #1,d6
 		moveq   #0,d1
-		bsr.w   GetBattleSpriteSet
+		bsr.w   GetBattleSpriteSetSubsection
 		clr.w   d7
 		move.b  (a0),d7
 		subq.w  #1,d7
@@ -122,7 +122,7 @@ InitEnemyBattlePosition:
 		bra.w   loc_1B139A
 loc_1B132E:
 		moveq   #2,d1
-		bsr.w   GetBattleSpriteSet
+		bsr.w   GetBattleSpriteSetSubsection
 		move.w  d1,d2
 		bset    #7,d2
 		clr.w   d1
@@ -169,7 +169,7 @@ UpdateEnemyStatsForRespawn:
 		movem.l d0-a6,-(sp)
 		move.w  d1,d2
 		moveq   #2,d1
-		bsr.w   GetBattleSpriteSet
+		bsr.w   GetBattleSpriteSetSubsection
 		bset    #7,d1
 		cmp.b   d1,d0
 		bcc.w   loc_1B13E8
@@ -266,17 +266,18 @@ loc_1B142C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B14D8:
+InitEnemyList:
+		
 		movem.l d1/a0-a1,-(sp)
-		lea     ((byte_FFB6A2-$1000000)).w,a1
+		lea     ((ENEMY_LIST-$1000000)).w,a1
 		moveq   #7,d1
 loc_1B14E2:
 		clr.l   (a1)+
 		dbf     d1,loc_1B14E2
 		moveq   #2,d1
-		bsr.w   GetBattleSpriteSet
+		bsr.w   GetBattleSpriteSetSubsection
 		subq.w  #1,d1
-		lea     ((byte_FFB6A2-$1000000)).w,a1
+		lea     ((ENEMY_LIST-$1000000)).w,a1
 loc_1B14F4:
 		move.b  (a0),(a1)+
 		adda.w  #$C,a0
@@ -284,7 +285,7 @@ loc_1B14F4:
 		movem.l (sp)+,d1/a0-a1
 		rts
 
-	; End of function sub_1B14D8
+	; End of function InitEnemyList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -414,7 +415,7 @@ GetEnemyAITargetPos:
 		bra.s   loc_1B162A
 loc_1B1612:
 		moveq   #4,d1
-		bsr.w   GetBattleSpriteSet
+		bsr.w   GetBattleSpriteSetSubsection
 		andi.w  #$F,d0
 		add.w   d0,d0
 		adda.w  d0,a0
@@ -431,11 +432,10 @@ loc_1B162A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; get address of subsection D1 (list sizes, force defs, enemy defs, region defs, point defs) of current battle -> A0
-;       
-;                     if D1 = 2, size of monster list -> D1
+; Get current battle subsection d1 -> A0
+; Subsection size -> d1
 
-GetBattleSpriteSet:
+GetBattleSpriteSetSubsection:
 		
 		movem.l d0/d2/a1,-(sp)
 		move.b  d1,d2
@@ -447,49 +447,49 @@ GetBattleSpriteSet:
 		nop
 		movea.l (a0,d0.w),a0
 		tst.b   d2
-		beq.w   loc_1B1698
+		beq.w   loc_1B1698      ; 0 = Section sizes
 		movea.l a0,a1
 		move.b  (a1),d1
 		lea     4(a0),a0
 		subq.b  #1,d2
-		beq.w   loc_1B1698
+		beq.w   loc_1B1698      ; 1 = Allies
 		clr.l   d0
 		move.b  1(a1),d1
 		move.b  (a1),d0
 		mulu.w  #$C,d0
 		adda.l  d0,a0
 		subq.b  #1,d2
-		beq.w   loc_1B1698
+		beq.w   loc_1B1698      ; 2 = Enemies
 		clr.l   d0
 		move.b  2(a1),d1
 		move.b  1(a1),d0
 		mulu.w  #$C,d0
 		adda.l  d0,a0
 		subq.b  #1,d2
-		beq.w   loc_1B1698
+		beq.w   loc_1B1698      ; 3 = AI-regions
 		clr.l   d0
 		move.b  3(a1),d1
 		move.b  2(a1),d0
 		mulu.w  #$C,d0
-		adda.l  d0,a0
+		adda.l  d0,a0           ; 4 = AI-points
 loc_1B1698:
 		movem.l (sp)+,d0/d2/a1
 		rts
 
-	; End of function GetBattleSpriteSet
+	; End of function GetBattleSpriteSetSubsection
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; starting X and Y of monster (D0 - 0x80) -> D1, D2
+; Starting X and Y of entity d0 -> d1, d2
 
-GetMonsterStartPos:
+GetCombatantStartPos:
 		
 		movem.l d0/d3-a6,-(sp)
 		btst    #7,d0
 		bne.s   loc_1B16CA
 		move.w  #1,d1
-		bsr.s   GetBattleSpriteSet
+		bsr.s   GetBattleSpriteSetSubsection
 		cmp.b   d0,d1
 		bge.s   loc_1B16BE
 		move.w  #$FFFF,d1
@@ -502,7 +502,7 @@ loc_1B16BE:
 		bra.s   loc_1B16EC
 loc_1B16CA:
 		move.w  #2,d1
-		bsr.w   GetBattleSpriteSet
+		bsr.w   GetBattleSpriteSetSubsection
 		cmp.b   d0,d1
 		bge.s   loc_1B16E2
 		move.w  #$FFFF,d1
@@ -521,7 +521,7 @@ loc_1B16F8:
 		movem.l (sp)+,d0/d3-a6
 		rts
 
-	; End of function GetMonsterStartPos
+	; End of function GetCombatantStartPos
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -531,7 +531,7 @@ sub_1B16FE:
 		move.w  d2,d7
 		move.w  d1,d6
 		move.w  #2,d1
-		bsr.w   GetBattleSpriteSet
+		bsr.w   GetBattleSpriteSetSubsection
 		move.w  d1,d5
 		subi.w  #1,d5
 		move.w  #$80,d0 

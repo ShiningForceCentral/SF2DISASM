@@ -40,10 +40,11 @@ j_RespawnEnemyIfOpen:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AC010:
-		jmp     sub_1B14D8(pc)
+j_InitEnemyList:
+		
+		jmp     InitEnemyList(pc)
 
-	; End of function sub_1AC010
+	; End of function j_InitEnemyList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -57,11 +58,11 @@ j_getEnemyAITargetPos:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_getAddrOfBattleCombatants:
+j_GetBattleSpriteSetSubsection:
 		
-		jmp     GetBattleSpriteSet(pc)
+		jmp     GetBattleSpriteSetSubsection(pc)
 
-	; End of function j_getAddrOfBattleCombatants
+	; End of function j_GetBattleSpriteSetSubsection
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -74,11 +75,11 @@ sub_1AC01C:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetMonsterStartPos:
+j_GetCombatantStartPos:
 		
-		jmp     GetMonsterStartPos(pc)
+		jmp     GetCombatantStartPos(pc)
 
-	; End of function j_GetMonsterStartPos
+	; End of function j_GetCombatantStartPos
 
 
 ; =============== S U B R O U T I N E =======================================

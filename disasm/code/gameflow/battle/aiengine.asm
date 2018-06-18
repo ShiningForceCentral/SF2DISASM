@@ -174,7 +174,7 @@ loc_E0AA:
 sub_E0B6:
 		movem.l d0/d2-a6,-(sp)
 		move.w  #1,d1
-		jsr     j_getAddrOfBattleCombatants
+		jsr     j_GetBattleSpriteSetSubsection
 		move.w  d1,d2
 		subi.w  #2,d2
 		clr.w   d0
@@ -2022,7 +2022,7 @@ loc_F3D0:
 		move.w  #$80,d0 
 		lea     ((byte_FF4000+$400)).l,a2
 		lea     ((byte_FF4A00+$300)).l,a3
-		lea     (TERRAIN_DATA).l,a4
+		lea     (BATTLE_TERRAIN).l,a4
 		lea     KrakenMoveCosts(pc), a5
 		nop
 		bra.w   loc_F43A
@@ -2040,7 +2040,7 @@ loc_F404:
 		lea     ((byte_FF4000+$400)).l,a2
 loc_F42A:
 		lea     ((byte_FF4A00+$300)).l,a3
-		lea     (TERRAIN_DATA).l,a4
+		lea     (BATTLE_TERRAIN).l,a4
 		lea     ((MOVE_COST_LIST-$1000000)).w,a5
 loc_F43A:
 		bsr.w   MakeRangeLists
@@ -2165,7 +2165,7 @@ loc_F5AA:
 		bne.s   loc_F5C4
 		clr.w   d0
 		move.b  -3(a6),d0
-		jsr     j_GetMonsterStartPos
+		jsr     j_GetCombatantStartPos
 		move.b  d1,-1(a6)
 		move.b  d2,-2(a6)
 		bra.s   loc_F5DE
@@ -2368,7 +2368,7 @@ sub_F7A0:
 		move.w  #$80,d0 
 		lea     ((byte_FF4000+$400)).l,a2
 		lea     ((byte_FF4A00+$300)).l,a3
-		lea     (TERRAIN_DATA).l,a4
+		lea     (BATTLE_TERRAIN).l,a4
 		lea     ((MOVE_COST_LIST-$1000000)).w,a5
 		bsr.w   MakeRangeLists
 		move.w  #$FFFF,d3

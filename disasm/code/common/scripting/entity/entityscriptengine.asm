@@ -174,7 +174,7 @@ sub_4E1E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4E24:
-		lea     (SPRITE_Y).l,a1 
+		lea     (SPRITE_TABLE).l,a1
 		moveq   #7,d7
 		move.w  #$40,d6 
 loc_4E30:

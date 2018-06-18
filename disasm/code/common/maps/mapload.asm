@@ -1334,8 +1334,8 @@ loc_2DD4:
 		cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 		beq.s   return_2DEA
 loc_2DDC:
-		move.w  ((CAMERA_LOCK_START_X-$1000000)).w,d0
-		move.w  ((CAMERA_LOCK_END_X-$1000000)).w,d1
+		move.w  ((BATTLE_AREA_X-$1000000)).w,d0
+		move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d1
 		clr.w   d2
 		bsr.w   CopyMapBlocks
 return_2DEA:
@@ -1355,7 +1355,7 @@ LoadMapArea:
 		move.w  d3,((MAP_AREA_LAYER1_ENDY-$1000000)).w
 		bra.s   loc_2E2C
 loc_2E06:
-		move.w  ((CAMERA_LOCK_END_X-$1000000)).w,d0
+		move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d0
 		clr.w   d1
 		move.b  d0,d1
 		subq.w  #1,d1

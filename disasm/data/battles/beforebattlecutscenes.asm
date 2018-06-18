@@ -1,5 +1,5 @@
 
-; ASM FILE data\battles\global\beforebattlecutscenes.asm :
+; ASM FILE data\battles\beforebattlecutscenes.asm :
 ; 0x47A88..0x47AE8 : Before battle cutscenes
 rpt_BeforeBattleCutscenes:
 		

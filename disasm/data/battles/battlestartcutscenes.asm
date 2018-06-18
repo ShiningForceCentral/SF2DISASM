@@ -1,5 +1,5 @@
 
-; ASM FILE data\battles\global\battlestartcutscenes.asm :
+; ASM FILE data\battles\battlestartcutscenes.asm :
 ; 0x47B2C..0x47B8C : Battle start cutscenes
 rpt_BattleStartCutscenes:
 		

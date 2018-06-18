@@ -8,9 +8,10 @@
 ; 
 ; set default values in sprite table
 
-InitSprites:
+InitSpriteTable:
+		
 		movem.l d0-d1/a0,-(sp)
-		lea     (SPRITE_Y).l,a0 
+		lea     (SPRITE_TABLE).l,a0
 		move.w  #1,d1
 loc_177E:
 		move.w  #1,(a0)+
@@ -24,7 +25,7 @@ loc_177E:
 		movem.l (sp)+,d0-d1/a0
 		rts
 
-	; End of function InitSprites
+	; End of function InitSpriteTable
 
 
 ; =============== S U B R O U T I N E =======================================

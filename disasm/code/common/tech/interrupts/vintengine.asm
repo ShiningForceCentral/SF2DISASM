@@ -1032,7 +1032,7 @@ loc_DF6:
 ClearSpriteTable:
 		
 		movem.l d0-d1/a0,-(sp)
-		lea     (SPRITE_Y).l,a0 
+		lea     (SPRITE_TABLE).l,a0
 		moveq   #$3F,d1 
 		moveq   #1,d0
 loc_E22:

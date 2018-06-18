@@ -96,7 +96,7 @@ loc_1808C:
 		jsr     (SetVdpReg).w   
 		jsr     (ClearSpriteTable).w
 		moveq   #$3F,d0 
-		jsr     (InitSprites).w 
+		jsr     (InitSpriteTable).w
 		jsr     (sub_19B0).w
 		bsr.w   InitializeBattleScenePalettes
 		lea     (byte_FFC000).l,a0
@@ -2674,7 +2674,7 @@ loc_19912:
 		rts
 loc_1991C:
 		moveq   #$10,d0
-		jsr     (InitSprites).w 
+		jsr     (InitSpriteTable).w
 		jmp     (sub_1942).w    
 
 ; END OF FUNCTION CHUNK FOR bsc07_switchAllies
@@ -3436,7 +3436,7 @@ sub_19F5E:
 		move.b  7(a0),d1
 		lsr.b   #4,d1
 		move.b  d1,(a1,d0.w)
-		lea     ((SPRITE_Y-$1000000)).w,a1
+		lea     ((SPRITE_TABLE-$1000000)).w,a1
 		move.w  d0,d1
 		lsl.w   #3,d1
 		adda.w  d1,a1
@@ -3470,7 +3470,7 @@ sub_19FAA:
 		lea     (byte_FFAFA0).l,a2
 		adda.w  d0,a2
 		lsl.w   #3,d0
-		lea     ((SPRITE_Y-$1000000)).w,a1
+		lea     ((SPRITE_TABLE-$1000000)).w,a1
 		adda.w  d0,a1
 loc_19FC8:
 		move.w  2(a0),d0
@@ -6507,7 +6507,7 @@ sub_1B82A:
 		cmpi.b  #$14,((byte_FFB587-$1000000)).w
 		bhi.s   loc_1B858
 		moveq   #$10,d0
-		jsr     (InitSprites).w 
+		jsr     (InitSpriteTable).w
 loc_1B858:
 		clr.w   ((byte_FFB404-$1000000)).w
 		clr.b   ((byte_FFB586-$1000000)).w

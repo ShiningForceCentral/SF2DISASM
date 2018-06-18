@@ -1954,7 +1954,7 @@ GetCharacterWord34:
 GetEnemyID:
 		btst    #CHAR_BIT_ENEMY,d0
 		bne.s   loc_84EA
-		move.w  #CODE_NOTHING_WORD,d1
+		move.w  #$FFFF,d1
 		rts
 		bra.s   GetKills
 loc_84EA:
@@ -3261,6 +3261,7 @@ loc_8C9C:
 
 ; In: D0 = char idx
 ;     D1 = item entry
+; OUT : D2 = set if not slot available
 
 AddItem:
 		movem.l d0/a0,-(sp)

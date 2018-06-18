@@ -7,5 +7,5 @@
 		includeIfVanillaRom "data\graphics\mapsprites\entries.asm"		; Map sprites
 		includeIfExpandedRom "data\graphics\battles\spells\entries.asm"		; Spell Graphics
 		alignIfExpandedRom $E0000
-		includeIfExpandedRom "data\battles\global\terrainentries.asm"		; Battle terrain data
+		includeIfExpandedRom "data\battles\terrainentries.asm"		; Battle terrain data
 		align $100000

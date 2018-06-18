@@ -116,16 +116,16 @@ j_ClearEntities:
 		include "data\maps\entries\map46\mapsetups\s6_47992.asm"		; Map 46 init function
 		include "code\common\scripting\map\ms_empty.asm"		; Empty mapscript
 		include "code\gameflow\battle\beforebattlecutscenesstart.asm"		; Before battle cutscenes function start
-		include "data\battles\global\beforebattlecutscenes.asm"		; Before battle cutscenes
+		include "data\battles\beforebattlecutscenes.asm"		; Before battle cutscenes
 		include "code\gameflow\battle\beforebattlecutscenesend.asm"		; Before battle cutscenes function end
 		include "code\gameflow\battle\battlestartcutscenesstart.asm"		; Battle start cutscenes function start
-		include "data\battles\global\battlestartcutscenes.asm"		; Battle start cutscenes
+		include "data\battles\battlestartcutscenes.asm"		; Battle start cutscenes
 		include "code\gameflow\battle\battlestartcutscenesend.asm"		; Battle start cutscenes function end
 		include "code\gameflow\battle\battleendcutscenesstart.asm"		; Battle end cutscenes function start
-		include "data\battles\global\battleendcutscenes.asm"		; Enemy defeated cutscenes
+		include "data\battles\battleendcutscenes.asm"		; Enemy defeated cutscenes
 		include "code\gameflow\battle\battleendcutscenesend.asm"		; Battle end cutscenes function end
 		include "code\gameflow\battle\afterbattlecutscenesstart.asm"		; After battle cutscenes function start
-		include "data\battles\global\afterbattlecutscenes.asm"		; After battle cutscenes
+		include "data\battles\afterbattlecutscenes.asm"		; After battle cutscenes
 		include "code\gameflow\battle\afterbattlecutscenesend.asm"		; After battle cutscenes function end
 		include "data\battles\global\afterbattlejoins.asm"		; After battle joins (unused)
 		include "code\gameflow\battle\afterenemyleaderdeathpositions.asm"		; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.

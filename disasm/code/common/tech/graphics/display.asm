@@ -48,7 +48,7 @@ InitDisplay:
 		bsr.w   DmaFromRamToVram
 		lea     MaskSprites(pc), a0
 loc_307E:
-		lea     (SPRITE_Y).l,a1 
+		lea     (SPRITE_TABLE).l,a1
 		moveq   #$38,d7 
 		bsr.w   CopyBytes       
 		lea     plt_BasePalette(pc), a0

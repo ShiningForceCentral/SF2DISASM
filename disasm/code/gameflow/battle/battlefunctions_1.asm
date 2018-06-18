@@ -35,10 +35,10 @@ loc_23AB2:
 		move.b  d1,((CURRENT_BATTLE-$1000000)).w
 		moveq   #$5A,d1 
 loc_23ADA:
-		jsr     j_ClearFlag
+		jsr     j_ClearFlag     ; clear battle region flags
 		addq.w  #1,d1
 		cmpi.w  #$69,d1 
-		ble.s   loc_23ADA
+		ble.s   loc_23ADA       
 		bsr.w   HealAliveCharsAndImmortals
 		jsr     j_InitAllForceBattlePositions
 		jsr     j_InitAllEnemyBattlePositions
@@ -218,10 +218,10 @@ loc_23CCC:
 		move.b  ((CURRENT_MAP-$1000000)).w,((MAP_EVENT_PARAM_2-$1000000)).w
 		jsr     (UpdateForceAndGetFirstForceMemberIndex).w
 		jsr     j_GetXPos
-		add.b   ((CAMERA_LOCK_START_X-$1000000)).w,d1
+		add.b   ((BATTLE_AREA_X-$1000000)).w,d1
 		move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
 		jsr     j_GetYPos
-		add.b   ((CAMERA_LOCK_START_Y-$1000000)).w,d1
+		add.b   ((BATTLE_AREA_Y-$1000000)).w,d1
 		move.b  d1,((MAP_EVENT_PARAM_4-$1000000)).w
 		bsr.w   GetEntityNumberOfCombatant
 		lsl.w   #5,d0
@@ -1101,7 +1101,7 @@ loc_2466C:
 		moveq   #$1E,d0
 		lea     ((byte_FF4000+$400)).l,a2
 		lea     ((byte_FF4A00+$300)).l,a3
-		lea     (TERRAIN_DATA).l,a4
+		lea     (BATTLE_TERRAIN).l,a4
 		jsr     j_MakeRangeLists
 		clr.w   d0
 		jsr     UpdateTargetListForCombatant(pc)
@@ -2461,7 +2461,7 @@ loc_25646:
 		divs.w  #$180,d0
 		move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 		moveq   #$3F,d0 
-		jsr     (InitSprites).w 
+		jsr     (InitSpriteTable).w
 		move.w  #$FFFF,d0
 		jsr     (LoadMap).w     
 		jsr     (WaitForVInt).w 

@@ -1,0 +1,6 @@
+
+Enemy Data :
+
+
+- 103 entries
+- 56 bytes per entry :

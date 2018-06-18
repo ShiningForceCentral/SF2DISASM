@@ -35,8 +35,8 @@ loc_9BE4:
 		move.b  d0,((BATTLESCENE_ATTACKER-$1000000)).w
 		move.b  d0,((word_FFB64F-$1000000)).w
 		moveq   #0,d1
-		move.w  d1,((RAM_BattleScene_EXPGain-$1000000)).w
-		move.w  d1,((RAM_BattleScene_GoldGain-$1000000)).w
+		move.w  d1,((BATTLESCENE_EXP-$1000000)).w
+		move.w  d1,((BATTLESCENE_GOLD-$1000000)).w
 		move.w  d1,((RAM_BattleScene_AttackNumber-$1000000)).w
 		move.b  d1,-BCSTACK_OFFSET_DOUBLE(a2)
 		move.b  d1,-BCSTACK_OFFSET_COUNTER(a2)
@@ -1182,7 +1182,7 @@ loc_A7F2:
 WriteSkirmishScript_EXPandGold:
 		
 		movem.l d0-d1/a0,-(sp)
-		move.w  ((RAM_BattleScene_EXPGain-$1000000)).w,d1
+		move.w  ((BATTLESCENE_EXP-$1000000)).w,d1
 		tst.b   -7(a2)
 		bne.w   loc_A81E
 		move.b  ((CURRENT_BATTLE-$1000000)).w,d0
@@ -1213,7 +1213,7 @@ loc_A840:
 		move.w  #$F,(a6)+
 		move.w  d1,(a6)+
 loc_A846:
-		move.w  ((RAM_BattleScene_GoldGain-$1000000)).w,d1
+		move.w  ((BATTLESCENE_GOLD-$1000000)).w,d1
 		tst.w   d1
 		beq.s   loc_A86A
 		move.w  #$10,(a6)+
@@ -1323,7 +1323,7 @@ loc_A926:
 		lea     EnemyGold(pc), a0
 		adda.w  d1,a0
 		move.w  (a0),d0
-		add.w   d0,((RAM_BattleScene_GoldGain-$1000000)).w
+		add.w   d0,((BATTLESCENE_GOLD-$1000000)).w
 loc_A93A:
 		movem.l (sp)+,d0-d3/a0
 		rts
@@ -1335,10 +1335,10 @@ loc_A93A:
 
 GiveEXPandCap:
 		
-		add.w   d5,((RAM_BattleScene_EXPGain-$1000000)).w
-		cmpi.w  #$31,((RAM_BattleScene_EXPGain-$1000000)).w 
+		add.w   d5,((BATTLESCENE_EXP-$1000000)).w
+		cmpi.w  #$31,((BATTLESCENE_EXP-$1000000)).w 
 		ble.s   return_A952
-		move.w  #$31,((RAM_BattleScene_EXPGain-$1000000)).w 
+		move.w  #$31,((BATTLESCENE_EXP-$1000000)).w 
 return_A952:
 		rts
 
@@ -1349,10 +1349,10 @@ return_A952:
 
 GiveEXPandHealingCap:
 		
-		add.w   d5,((RAM_BattleScene_EXPGain-$1000000)).w
-		cmpi.w  #$19,((RAM_BattleScene_EXPGain-$1000000)).w
+		add.w   d5,((BATTLESCENE_EXP-$1000000)).w
+		cmpi.w  #$19,((BATTLESCENE_EXP-$1000000)).w
 		ble.s   return_A966
-		move.w  #$19,((RAM_BattleScene_EXPGain-$1000000)).w
+		move.w  #$19,((BATTLESCENE_EXP-$1000000)).w
 return_A966:
 		rts
 
@@ -3546,7 +3546,7 @@ loc_BD78:
 		move.w  d1,d3
 		andi.w  #ITEM_MASK_IDX,d3
 		move.w  d2,d4
-		cmpi.w  #ITEMIDX_TAROS_SWORD,d3
+		cmpi.w  #ITEMIDX_TAROS_SWORD,d3; HARDCODED special items with 1/32 drop chances
 		beq.w   loc_BD9C
 		cmpi.w  #ITEMIDX_IRON_BALL,d3
 		beq.w   loc_BD9C
@@ -3616,7 +3616,7 @@ loc_BE4C:
 	; End of function WriteSkirmishScript_EnemyDropItem
 
 EnemyItemDrops: incbin "data/battles/global/enemyitemdrops.bin"
-EnemyGold:      incbin "data/battles/global/enemygold.bin"
+EnemyGold:      incbin "data/stats/enemies/enemygold.bin"
 
 ; =============== S U B R O U T I N E =======================================
 

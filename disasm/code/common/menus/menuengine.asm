@@ -4341,7 +4341,7 @@ loc_12D7E:
 		dbf     d7,loc_12CF0
 loc_12D82:
 		movem.l d0-d2/d7-a0,-(sp)
-		lea     (SPRITE_Y).l,a0 
+		lea     (SPRITE_TABLE).l,a0
 		move.w  #$38,d0 
 		moveq   #$2F,d7 
 		move.w  #$10,d1

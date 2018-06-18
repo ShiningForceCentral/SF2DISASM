@@ -1522,7 +1522,7 @@
 #split	0xACCA,0xACEA,data/stats/allies/classes/criticalhitsettings.bin
 #split	0xBCF0,0xBD24,data/stats/items/itembreakmessages.bin
 #split	0xBE52,0xBECC,data/battles/global/enemyitemdrops.bin
-#split	0xBECC,0xC024,data/battles/global/enemygold.bin
+#split	0xBECC,0xC024,data/stats/enemies/enemygold.bin
 #split	0xC24E,0xC27A,data/stats/spells/spellelements.bin
 #split	0xD824,0xD8F4,data/battles/global/movetypeterraincosts.bin
 #split	0xF9C4,0xFAD6,data/stats/spells/spellnames.bin
@@ -1609,7 +1609,7 @@
 #split	0x1AA5FA,0x1AA8CA,data/graphics/tech/battlescenetransitiontilesb.bin
 #split	0x1AA8CA,0x1AAA82,data/graphics/battles/spells/animations/boltanimdataa.bin
 #split	0x1AAA82,0x1AAC3A,data/graphics/battles/spells/animations/boltanimdatab.bin
-#split	0x1B1A66,0x1B30EE,data/battles/global/enemydata.bin
+#split	0x1B1A66,0x1B30EE,data/stats/enemies/enemydata.bin
 #split	0x1B6DB0,0x1B6DBC,data/battles/global/specialbattles.bin
 #split	0x1B6DDA,0x1B6DFA,data/graphics/specialscreens/endingkiss/endingkisspalette.bin
 #split	0x1B6DFA,0x1B7C9A,data/graphics/specialscreens/endingkiss/endingkisstiles.bin

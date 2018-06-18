@@ -198,7 +198,7 @@ loc_1AC46A:
 		jsr     j_MakeRangeLists
 		move.w  #$2F,d4 
 		move.w  #0,d2
-		lea     (TERRAIN_DATA).l,a0
+		lea     (BATTLE_TERRAIN).l,a0
 		lea     ((byte_FF4A00+$300)).l,a1
 loc_1AC49E:
 		move.w  #$2F,d3 
@@ -270,7 +270,7 @@ loc_1AC540:
 		jsr     GetEnemyAITargetPos
 		move.w  d1,d5
 		move.w  d2,d6
-		lea     (TERRAIN_DATA).l,a0
+		lea     (BATTLE_TERRAIN).l,a0
 		move.w  #$2F,d4 
 loc_1AC554:
 		move.w  #$2F,d3 
@@ -329,7 +329,7 @@ loc_1AC5D8:
 		move.w  d1,d5
 		move.w  d2,d6
 		move.w  #$2F,d4 
-		lea     (TERRAIN_DATA).l,a0
+		lea     (BATTLE_TERRAIN).l,a0
 loc_1AC5EA:
 		move.w  #$2F,d3 
 		move.w  #0,d1
@@ -377,7 +377,7 @@ ClearTerrainListObstructions:
 		
 		movem.l d0-a6,-(sp)
 		move.w  #$2F,d4 
-		lea     (TERRAIN_DATA).l,a0
+		lea     (BATTLE_TERRAIN).l,a0
 loc_1AC662:
 		move.w  #$2F,d3 
 		move.w  #0,d1
@@ -492,7 +492,7 @@ loc_1AC79C:
 		move.b  -2(a6),d4
 		sub.b   -1(a6),d4
 		ext.w   d4
-		lea     (TERRAIN_DATA).l,a0
+		lea     (BATTLE_TERRAIN).l,a0
 		move.b  -1(a6),d2
 		ext.w   d2
 loc_1AC7B4:
@@ -754,14 +754,14 @@ loc_1AC9AC:
 
 	; End of function sub_1AC8A0
 
-unk_1AC9B8:     dc.b   3
+unk_1AC9B8:     dc.b   3                ; AI-related data, 3 entries, for battles 36, 43 and 0
 		dc.b $24 
 		dc.b $2B 
 		dc.b   0
-off_1AC9BC:     dc.l unk_1AC9C8
-		dc.l unk_1AC9E0
-		dc.l unk_1AC9F0
-unk_1AC9C8:     dc.b $FF
+off_1AC9BC:     dc.l unk_1AC9C8         
+		dc.l unk_1AC9E0         
+		dc.l unk_1AC9F0         
+unk_1AC9C8:     dc.b $FF                ; Prism Flowers battle
 		dc.b   3
 		dc.b   0
 		dc.b   0
@@ -785,7 +785,7 @@ unk_1AC9C8:     dc.b $FF
 		dc.b $FF
 		dc.b $FF
 		dc.b $FF
-unk_1AC9E0:     dc.b $FF
+unk_1AC9E0:     dc.b $FF                ; Zeon Battle
 		dc.b $FF
 		dc.b $FF
 		dc.b $FF
@@ -801,7 +801,7 @@ unk_1AC9E0:     dc.b $FF
 		dc.b $FF
 		dc.b $FF
 		dc.b $FF
-unk_1AC9F0:     dc.b $FF
+unk_1AC9F0:     dc.b $FF                ; Secret Bonus Battle
 		dc.b $FF
 		dc.b $FF
 		dc.b $FF
@@ -825,7 +825,7 @@ sub_1AC9FC:
 loc_1ACA0C:
 		move.w  d0,d7
 		move.b  #3,d1
-		bsr.w   GetBattleSpriteSet
+		bsr.w   GetBattleSpriteSetSubsection
 		cmp.b   d1,d7
 		ble.s   loc_1ACA1E
 		bra.w   loc_1ACA6A
@@ -1270,7 +1270,7 @@ UpdateTriggeredRegionsAndAI:
 		movem.l d0-a6,-(sp)
 		move.w  d0,d7
 		move.w  #3,d1
-		bsr.w   GetBattleSpriteSet
+		bsr.w   GetBattleSpriteSetSubsection
 		tst.w   d1
 		bne.s   loc_1ACE60
 		bra.w   loc_1ACF2A
@@ -1545,7 +1545,7 @@ LoadBattleTerrainData:
 		move.b  (a1),d1
 		lsl.l   #2,d1
 		movea.l (a0,d1.w),a0
-		lea     (TERRAIN_DATA).l,a1
+		lea     (BATTLE_TERRAIN).l,a1
 		jsr     (LoadCompressedData).w
 		movem.l (sp)+,d0-d6/a0-a5
 		rts
