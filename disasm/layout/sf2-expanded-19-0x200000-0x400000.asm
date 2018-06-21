@@ -1,7 +1,7 @@
 
 ; GAME SECTION 19 : ROM EXPANSION.
 
-		include "data\battles\global\spritesetentries.asm"
+		include "data\battles\spritesetentries.asm"
 		align $210000
 		include "code\specialscreens\title\graphics.asm"		; Title Screen Graphics
 		include "code\specialscreens\suspend\graphics.asm"		; Suspend String Graphics
@@ -19,6 +19,6 @@
 		align $320000
 		include "data\graphics\battles\backgrounds\entries.asm"		; Backgrounds
 		align $380000
-		include "data\maps\entries\mapentries.asm"		; Map entries table
+		include "data\maps\entries.asm"		; Map entries table
 		align $400000
 						
