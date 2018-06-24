@@ -2,6 +2,7 @@
 Flag-switched maps
 
 - 6 bytes per entry
+	Bytes 00-01 : Original Map Id
+	Bytes 02-03 : Flag
+	Bytes 04-05 : New Map Id
 - Ends with $FFFF value
-
-[Original Map ID][Flag][New Map ID]
