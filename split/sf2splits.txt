@@ -1553,7 +1553,6 @@
 #split	0x1F806,0x1F914,data/stats/allies/allybattlesprites.bin
 #split	0x1F914,0x1F9E2,data/stats/enemies/enemybattlesprites.bin
 #split	0x1F9E2,0x1FA8A,data/stats/items/weaponsprites.bin
-#split	0x1FA8A,0x1FAB8,data/battles/global/custombackgrounds.bin
 #split	0x1FAD6,0x1FADD,data/stats/allies/allyidlesprites.bin
 #split	0x1FADD,0x1FAEA,data/stats/enemies/enemyidlesprites.bin
 #split	0x20878,0x20A02,data/stats/items/shopitems.bin

@@ -7,7 +7,7 @@
 		include "code\gameflow\battle\battle_s13_0.asm"		; Jump interface for section functions
 		include "code\common\scripting\endcredits.asm"		; Ending credits functions
 		include "code\gameflow\battle\battle_s13_1.asm"		; Battle init, terrain, AI stuff to split more properly
-		includeIfVanillaRom "data\battles\global\terrainentries.asm"		; Battle terrain data
+		includeIfVanillaRom "data\battles\terrainentries.asm"		; Battle terrain data
 		include "code\gameflow\battle\battle_s13_2.asm"		; Battle init, terrain, AI stuff to split more properly
 EnemyData:      incbin "data/stats/enemies/enemydata.bin"
 		includeIfVanillaRom "data\battles\spritesetentries.asm"		; Battle sprite sets

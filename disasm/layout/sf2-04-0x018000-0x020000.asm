@@ -4,6 +4,8 @@
 ; FREE SPACE : 532 bytes.
 
 
-		include "code\gameflow\battle\battlescenes\battlesceneengine.asm"		; Battlescene engine
+		include "code\gameflow\battle\battlescenes\battlesceneengine_0.asm"		; Battlescene engine
+		include "data\battles\global\custombackgrounds.asm"		; Battle custom backgrounds table
+		include "code\gameflow\battle\battlescenes\battlesceneengine_1.asm"		; Battlescene engine
 		dc.b $FF
 		align $20000
