@@ -273,3 +273,4 @@ disasm/data/scripting/map/testintro.asm
 *.idb
 *.nam
 *.til
+*.tfi
