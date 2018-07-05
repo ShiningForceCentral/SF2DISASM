@@ -27,3 +27,59 @@ bytes 21-24 : Register $80, Secondary Amplitude and Release Rate
 bytes 25-28 : Register $90, SSG-EG
 
 - last byte : Register $B0, Feedback and Algorithm 
+
+
+
+Found after parsing music and instrument data :
+80 instruments are stored, but only 50 of them are actually used in SF2.
+Used values : 
+0	0
+1	1
+2	2
+3	3
+4	4
+5	5
+6	6
+7	7
+8	8
+9	9
+10	A
+12	C
+13	D
+14	E
+15	F
+16	10
+17	11
+19	13
+20	14
+21	15
+22	16
+24	18
+25	19
+26	1A
+27	1B
+32	20
+33	21
+35	23
+36	24
+38	26
+39	27
+40	28
+44	2C
+45	2D
+47	2F
+48	30
+49	31
+50	32
+52	34
+53	35
+54	36
+55	37
+56	38
+57	39
+58	3A
+59	3B
+60	3C
+61	3D
+62	3E
+63	3F
