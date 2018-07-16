@@ -116,12 +116,21 @@ noteL	macro arg0,arg1
 	db arg1
 	endm	
 	
+psgNoteL	macro arg0,arg1
+	db arg0+080h-9
+	db arg1
+	endm	
+	
 sample	macro arg0
 	db arg0
 	endm	
 	
 note	macro arg0
 	db arg0
+	endm
+		
+psgNote	macro arg0
+	db arg0-9
 	endm	
 	
 psgInst	macro arg0

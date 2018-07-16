@@ -16,453 +16,453 @@ Music_9:        db 0
 		dw Music_9_Channel_9
 		dw Music_9_Channel_9
 Music_9_Channel_0:
-		ymStereo 0C0h
-		release 01h
-		vibrato 02Ch
-		length 216
-		silence
-		length 108
-		ymInst 40
-		ymVol 0Ch
-		noteL 31,54
-		note 29
-		noteL 28,216
+		  ymStereo 0C0h
+		  release 01h
+		  vibrato 02Ch
+		  length 216
+		        silence
+		  length 108
+		  ymInst 40
+		  ymVol 0Ch
+		        noteL G3,54
+		        note  F3
+		        noteL E3,216
 		mainLoopStart
-		noteL 34,54
-		note 32
-		noteL 25,108
-		ymInst 22
-		ymVol 0Ch
-		noteL 35,54
-		noteL 43,81
-		noteL 35,27
-		noteL 46,81
-		noteL 35,27
-		note 43
-		note 35
-		noteL 46,216
-		ymInst 27
-		ymVol 0Ah
-		noteL 43,36
-		note 36
-		ymSustain
-		noteL 42,204
-		ymVol 08h
-		noteL 42,12
-		ymVol 06h
-		note 42
-		ymVol 04h
-		note 42
-		ymVol 02h
-		release 01h
-		note 42
-		ymInst 40
-		ymVol 0Ch
-		noteL 31,54
-		note 29
-		noteL 28,108
+		        noteL As3,54
+		        note  Gs3
+		        noteL Cs3,108
+		  ymInst 22
+		  ymVol 0Ch
+		        noteL B3,54
+		        noteL G4,81
+		        noteL B3,27
+		        noteL As4,81
+		        noteL B3,27
+		        note  G4
+		        note  B3
+		        noteL As4,216
+		  ymInst 27
+		  ymVol 0Ah
+		        noteL G4,36
+		        note  C4
+		  ymSustain
+		        noteL Fs4,204
+		  ymVol 08h
+		        noteL Fs4,12
+		  ymVol 06h
+		        note  Fs4
+		  ymVol 04h
+		        note  Fs4
+		  ymVol 02h
+		  release 01h
+		        note  Fs4
+		  ymInst 40
+		  ymVol 0Ch
+		        noteL G3,54
+		        note  F3
+		        noteL E3,108
 		mainLoopEnd
 Music_9_Channel_1:
-		ymStereo 0C0h
-		release 01h
-		vibrato 02Ch
-		length 216
-		silence
-		ymInst 11
-		ymVol 0Dh
-		ymSustain
-		note 13
-		vibrato 020h
-		release 01h
-		note 17
+		  ymStereo 0C0h
+		  release 01h
+		  vibrato 02Ch
+		  length 216
+		        silence
+		  ymInst 11
+		  ymVol 0Dh
+		  ymSustain
+		        note  Cs2
+		  vibrato 020h
+		  release 01h
+		        note  F2
 		mainLoopStart
-		ymSustain
-		vibrato 02Ch
-		noteL 11,108
-		release 01h
-		vibrato 020h
-		note 14
+		  ymSustain
+		  vibrato 02Ch
+		        noteL B1,108
+		  release 01h
+		  vibrato 020h
+		        note  D2
 		countedLoopStart 1
-		ymSustain
-		vibrato 02Ch
-		noteL 17,108
-		release 01h
-		vibrato 020h
-		note 16
+		  ymSustain
+		  vibrato 02Ch
+		        noteL F2,108
+		  release 01h
+		  vibrato 020h
+		        note  E2
 		countedLoopEnd
-		ymSustain
-		noteL 5,216
-		vibrato 020h
-		release 01h
-		note 5
-		vibrato 02Ch
-		ymSustain
-		noteL 13,108
-		vibrato 020h
-		release 01h
-		note 17
+		  ymSustain
+		        noteL F1,216
+		  vibrato 020h
+		  release 01h
+		        note  F1
+		  vibrato 02Ch
+		  ymSustain
+		        noteL Cs2,108
+		  vibrato 020h
+		  release 01h
+		        note  F2
 		mainLoopEnd
 Music_9_Channel_2:
-		ymStereo 080h
-		shifting 010h
-		ymVol 00h
-		release 01h
-		vibrato 02Ch
-		length 222
-		silence
-		length 108
-		ymInst 40
-		ymVol 0Bh
-		noteL 31,54
-		note 29
-		noteL 28,216
+		  ymStereo 080h
+		  shifting 010h
+		  ymVol 00h
+		  release 01h
+		  vibrato 02Ch
+		  length 222
+		        silence
+		  length 108
+		  ymInst 40
+		  ymVol 0Bh
+		        noteL G3,54
+		        note  F3
+		        noteL E3,216
 		mainLoopStart
-		noteL 34,54
-		note 32
-		noteL 25,108
-		ymInst 22
-		ymVol 0Bh
-		noteL 35,54
-		noteL 43,81
-		noteL 35,27
-		noteL 46,81
-		noteL 35,27
-		note 43
-		note 35
-		noteL 46,216
-		ymInst 27
-		ymVol 09h
-		noteL 43,36
-		note 36
-		ymSustain
-		noteL 42,204
-		ymVol 07h
-		noteL 42,12
-		ymVol 05h
-		note 42
-		ymVol 03h
-		note 42
-		ymVol 01h
-		release 01h
-		note 42
-		ymInst 40
-		ymVol 0Bh
-		noteL 31,54
-		note 29
-		noteL 28,108
+		        noteL As3,54
+		        note  Gs3
+		        noteL Cs3,108
+		  ymInst 22
+		  ymVol 0Bh
+		        noteL B3,54
+		        noteL G4,81
+		        noteL B3,27
+		        noteL As4,81
+		        noteL B3,27
+		        note  G4
+		        note  B3
+		        noteL As4,216
+		  ymInst 27
+		  ymVol 09h
+		        noteL G4,36
+		        note  C4
+		  ymSustain
+		        noteL Fs4,204
+		  ymVol 07h
+		        noteL Fs4,12
+		  ymVol 05h
+		        note  Fs4
+		  ymVol 03h
+		        note  Fs4
+		  ymVol 01h
+		  release 01h
+		        note  Fs4
+		  ymInst 40
+		  ymVol 0Bh
+		        noteL G3,54
+		        note  F3
+		        noteL E3,108
 		mainLoopEnd
 Music_9_Channel_3:
-		shifting 020h
-		ymStereo 040h
-		release 01h
-		vibrato 02Ch
-		length 222
-		silence
-		ymInst 11
-		ymVol 0Ch
-		ymSustain
-		noteL 13,216
-		vibrato 020h
-		release 01h
-		note 17
+		  shifting 020h
+		  ymStereo 040h
+		  release 01h
+		  vibrato 02Ch
+		  length 222
+		        silence
+		  ymInst 11
+		  ymVol 0Ch
+		  ymSustain
+		        noteL Cs2,216
+		  vibrato 020h
+		  release 01h
+		        note  F2
 		mainLoopStart
-		ymSustain
-		vibrato 02Ch
-		noteL 11,108
-		release 01h
-		vibrato 020h
-		note 14
+		  ymSustain
+		  vibrato 02Ch
+		        noteL B1,108
+		  release 01h
+		  vibrato 020h
+		        note  D2
 		countedLoopStart 1
-		ymSustain
-		vibrato 02Ch
-		noteL 17,108
-		release 01h
-		vibrato 020h
-		note 16
+		  ymSustain
+		  vibrato 02Ch
+		        noteL F2,108
+		  release 01h
+		  vibrato 020h
+		        note  E2
 		countedLoopEnd
-		ymSustain
-		noteL 5,216
-		vibrato 020h
-		release 01h
-		note 5
-		vibrato 02Ch
-		ymSustain
-		noteL 13,108
-		vibrato 020h
-		release 01h
-		note 17
+		  ymSustain
+		        noteL F1,216
+		  vibrato 020h
+		  release 01h
+		        note  F1
+		  vibrato 02Ch
+		  ymSustain
+		        noteL Cs2,108
+		  vibrato 020h
+		  release 01h
+		        note  F2
 		mainLoopEnd
 Music_9_Channel_4:
-		ymStereo 040h
-		vibrato 02Ch
-		release 00h
-		length 108
-		silence
-		silence
-		length 54
-		ymInst 62
-		ymVol 00h
-		noteL 12,6
-		ymVol 01h
-		note 12
-		ymVol 02h
-		note 12
-		ymVol 03h
-		note 12
-		ymVol 04h
-		note 12
-		ymVol 06h
-		note 12
-		ymVol 08h
-		note 12
-		ymVol 0Ah
-		note 12
-		ymVol 0Ch
-		note 12
-		ymVol 0Dh
-		noteL 12,108
-		length 216
-		silence
+		  ymStereo 040h
+		  vibrato 02Ch
+		  release 00h
+		  length 108
+		        silence
+		        silence
+		  length 54
+		  ymInst 62
+		  ymVol 00h
+		        noteL C2,6
+		  ymVol 01h
+		        note  C2
+		  ymVol 02h
+		        note  C2
+		  ymVol 03h
+		        note  C2
+		  ymVol 04h
+		        note  C2
+		  ymVol 06h
+		        note  C2
+		  ymVol 08h
+		        note  C2
+		  ymVol 0Ah
+		        note  C2
+		  ymVol 0Ch
+		        note  C2
+		  ymVol 0Dh
+		        noteL C2,108
+		  length 216
+		        silence
 		mainLoopStart
 		repeatStart
-		length 54
-		ymInst 62
-		ymVol 00h
-		noteL 12,6
-		ymVol 01h
-		note 12
-		ymVol 02h
-		note 12
-		ymVol 03h
-		note 12
-		ymVol 04h
-		note 12
-		ymVol 06h
-		note 12
-		ymVol 08h
-		note 12
-		ymVol 0Ah
-		note 12
-		ymVol 0Ch
-		note 12
-		ymVol 0Dh
-		noteL 12,108
-		silence
+		  length 54
+		  ymInst 62
+		  ymVol 00h
+		        noteL C2,6
+		  ymVol 01h
+		        note  C2
+		  ymVol 02h
+		        note  C2
+		  ymVol 03h
+		        note  C2
+		  ymVol 04h
+		        note  C2
+		  ymVol 06h
+		        note  C2
+		  ymVol 08h
+		        note  C2
+		  ymVol 0Ah
+		        note  C2
+		  ymVol 0Ch
+		        note  C2
+		  ymVol 0Dh
+		        noteL C2,108
+		        silence
 		repeatSection1Start
-		length 216
+		  length 216
 		repeatEnd
 		repeatSection2Start
 		repeatEnd
 		repeatSection3Start
-		length 108
+		  length 108
 		mainLoopEnd
 Music_9_Channel_5:
-		shifting 020h
-		ymStereo 080h
-		vibrato 02Ch
-		release 00h
-		length 111
-		length 108
-		silence
-		length 54
-		ymInst 62
-		ymVol 00h
-		noteL 12,6
-		ymVol 01h
-		note 12
-		ymVol 02h
-		note 12
-		ymVol 03h
-		note 12
-		ymVol 04h
-		note 12
-		ymVol 06h
-		note 12
-		ymVol 08h
-		note 12
-		ymVol 0Ah
-		note 12
-		ymVol 0Ch
-		note 12
-		ymVol 0Dh
-		noteL 12,108
-		length 216
-		silence
+		  shifting 020h
+		  ymStereo 080h
+		  vibrato 02Ch
+		  release 00h
+		  length 111
+		  length 108
+		        silence
+		  length 54
+		  ymInst 62
+		  ymVol 00h
+		        noteL C2,6
+		  ymVol 01h
+		        note  C2
+		  ymVol 02h
+		        note  C2
+		  ymVol 03h
+		        note  C2
+		  ymVol 04h
+		        note  C2
+		  ymVol 06h
+		        note  C2
+		  ymVol 08h
+		        note  C2
+		  ymVol 0Ah
+		        note  C2
+		  ymVol 0Ch
+		        note  C2
+		  ymVol 0Dh
+		        noteL C2,108
+		  length 216
+		        silence
 		mainLoopStart
 		repeatStart
-		length 54
-		ymInst 62
-		ymVol 00h
-		noteL 12,6
-		ymVol 01h
-		note 12
-		ymVol 02h
-		note 12
-		ymVol 03h
-		note 12
-		ymVol 04h
-		note 12
-		ymVol 06h
-		note 12
-		ymVol 08h
-		note 12
-		ymVol 0Ah
-		note 12
-		ymVol 0Ch
-		note 12
-		ymVol 0Dh
-		noteL 12,108
-		silence
+		  length 54
+		  ymInst 62
+		  ymVol 00h
+		        noteL C2,6
+		  ymVol 01h
+		        note  C2
+		  ymVol 02h
+		        note  C2
+		  ymVol 03h
+		        note  C2
+		  ymVol 04h
+		        note  C2
+		  ymVol 06h
+		        note  C2
+		  ymVol 08h
+		        note  C2
+		  ymVol 0Ah
+		        note  C2
+		  ymVol 0Ch
+		        note  C2
+		  ymVol 0Dh
+		        noteL C2,108
+		        silence
 		repeatSection1Start
-		length 216
+		  length 216
 		repeatEnd
 		repeatSection2Start
 		repeatEnd
 		repeatSection3Start
-		length 108
+		  length 108
 		mainLoopEnd
 Music_9_Channel_6:
-		release 01h
-		vibrato 04Ch
-		psgInst 165
-		noteL 58,12
-		note 59
-		note 63
-		note 53
-		noteL 56,6
-		note 50
-		noteL 58,12
-		psgInst 166
-		note 59
-		note 63
-		psgInst 167
-		note 53
-		note 58
-		psgInst 168
-		note 59
-		note 63
-		psgInst 169
-		note 53
-		noteL 56,6
-		note 50
-		psgInst 170
-		noteL 58,12
-		note 59
-		psgInst 171
-		note 63
-		note 53
-		note 58
-		note 59
-		note 63
-		note 53
-		noteL 56,6
-		note 50
-		noteL 58,12
-		note 59
-		note 63
-		note 53
-		note 58
-		note 59
-		note 63
-		note 53
-		noteL 56,6
-		note 50
-		noteL 58,12
-		note 59
-		note 63
-		note 53
+		  release 01h
+		  vibrato 04Ch
+		  psgInst 165
+		        psgNoteL G6,12
+		        psgNote  Gs6
+		        psgNote  C7
+		        psgNote  D6
+		        psgNoteL F6,6
+		        psgNote  B5
+		        psgNoteL G6,12
+		  psgInst 166
+		        psgNote  Gs6
+		        psgNote  C7
+		  psgInst 167
+		        psgNote  D6
+		        psgNote  G6
+		  psgInst 168
+		        psgNote  Gs6
+		        psgNote  C7
+		  psgInst 169
+		        psgNote  D6
+		        psgNoteL F6,6
+		        psgNote  B5
+		  psgInst 170
+		        psgNoteL G6,12
+		        psgNote  Gs6
+		  psgInst 171
+		        psgNote  C7
+		        psgNote  D6
+		        psgNote  G6
+		        psgNote  Gs6
+		        psgNote  C7
+		        psgNote  D6
+		        psgNoteL F6,6
+		        psgNote  B5
+		        psgNoteL G6,12
+		        psgNote  Gs6
+		        psgNote  C7
+		        psgNote  D6
+		        psgNote  G6
+		        psgNote  Gs6
+		        psgNote  C7
+		        psgNote  D6
+		        psgNoteL F6,6
+		        psgNote  B5
+		        psgNoteL G6,12
+		        psgNote  Gs6
+		        psgNote  C7
+		        psgNote  D6
 		mainLoopStart
-		noteL 58,6
-		note 50
-		note 59
-		note 52
-		note 63
-		note 55
-		note 53
-		note 49
-		note 56
-		note 50
-		note 58
-		note 52
-		note 59
-		note 53
-		note 63
-		note 58
-		note 53
-		note 57
+		        psgNoteL G6,6
+		        psgNote  B5
+		        psgNote  Gs6
+		        psgNote  Cs6
+		        psgNote  C7
+		        psgNote  E6
+		        psgNote  D6
+		        psgNote  As5
+		        psgNote  F6
+		        psgNote  B5
+		        psgNote  G6
+		        psgNote  Cs6
+		        psgNote  Gs6
+		        psgNote  D6
+		        psgNote  C7
+		        psgNote  G6
+		        psgNote  D6
+		        psgNote  Fs6
 		mainLoopEnd
 Music_9_Channel_7:
-		shifting 010h
-		release 01h
-		vibrato 04Ch
-		psgInst 0
-		length 8
-		psgInst 163
-		noteL 58,12
-		note 59
-		note 63
-		note 53
-		noteL 56,6
-		note 50
-		noteL 58,12
-		psgInst 164
-		note 59
-		note 63
-		psgInst 165
-		note 53
-		note 58
-		psgInst 166
-		note 59
-		note 63
-		psgInst 167
-		note 53
-		noteL 56,6
-		note 50
-		psgInst 168
-		noteL 58,12
-		note 59
-		psgInst 169
-		note 63
-		note 53
-		note 58
-		note 59
-		note 63
-		note 53
-		noteL 56,6
-		note 50
-		noteL 58,12
-		note 59
-		note 63
-		note 53
-		note 58
-		note 59
-		note 63
-		note 53
-		noteL 56,6
-		note 50
-		noteL 58,12
-		note 59
-		note 63
-		note 53
+		  shifting 010h
+		  release 01h
+		  vibrato 04Ch
+		  psgInst 0
+		  length 8
+		  psgInst 163
+		        psgNoteL G6,12
+		        psgNote  Gs6
+		        psgNote  C7
+		        psgNote  D6
+		        psgNoteL F6,6
+		        psgNote  B5
+		        psgNoteL G6,12
+		  psgInst 164
+		        psgNote  Gs6
+		        psgNote  C7
+		  psgInst 165
+		        psgNote  D6
+		        psgNote  G6
+		  psgInst 166
+		        psgNote  Gs6
+		        psgNote  C7
+		  psgInst 167
+		        psgNote  D6
+		        psgNoteL F6,6
+		        psgNote  B5
+		  psgInst 168
+		        psgNoteL G6,12
+		        psgNote  Gs6
+		  psgInst 169
+		        psgNote  C7
+		        psgNote  D6
+		        psgNote  G6
+		        psgNote  Gs6
+		        psgNote  C7
+		        psgNote  D6
+		        psgNoteL F6,6
+		        psgNote  B5
+		        psgNoteL G6,12
+		        psgNote  Gs6
+		        psgNote  C7
+		        psgNote  D6
+		        psgNote  G6
+		        psgNote  Gs6
+		        psgNote  C7
+		        psgNote  D6
+		        psgNoteL F6,6
+		        psgNote  B5
+		        psgNoteL G6,12
+		        psgNote  Gs6
+		        psgNote  C7
+		        psgNote  D6
 		mainLoopStart
-		noteL 58,6
-		note 50
-		note 59
-		note 52
-		note 63
-		note 55
-		note 53
-		note 49
-		note 56
-		note 50
-		note 58
-		note 52
-		note 59
-		note 53
-		note 63
-		note 58
-		note 53
-		note 57
+		        psgNoteL G6,6
+		        psgNote  B5
+		        psgNote  Gs6
+		        psgNote  Cs6
+		        psgNote  C7
+		        psgNote  E6
+		        psgNote  D6
+		        psgNote  As5
+		        psgNote  F6
+		        psgNote  B5
+		        psgNote  G6
+		        psgNote  Cs6
+		        psgNote  Gs6
+		        psgNote  D6
+		        psgNote  C7
+		        psgNote  G6
+		        psgNote  D6
+		        psgNote  Fs6
 		mainLoopEnd
 Music_9_Channel_9:
 		channel_end

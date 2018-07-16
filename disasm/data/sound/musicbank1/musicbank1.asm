@@ -3,6 +3,7 @@
    listing off
    phase	0
    include "..\musicmacros.asm"
+   include "..\musicenums.asm"
    org 08000h
 
 		; File Name   : D:\SEGADEV\GITHUB\SF2DISASM\disasm\data\sound\musicbank1\musicbank1.bin

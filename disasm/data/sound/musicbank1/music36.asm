@@ -16,2537 +16,2537 @@ Music_36:       db 0
 		dw Music_4_Channel_9
 		dw Music_4_Channel_9
 Music_4_Channel_0:
-		ymStereo 0C0h
-		ymInst 21
-		ymVol 0Ch
-		release 01h
-		vibrato 02Ch
-		noteL 8,0
-		ymSlide 017h
-		noteL 20,48
-		ymStopSlide
+		  ymStereo 0C0h
+		  ymInst 21
+		  ymVol 0Ch
+		  release 01h
+		  vibrato 02Ch
+		        noteL Gs1,0
+		  ymSlide 017h
+		        noteL Gs2,48
+		  ymStopSlide
 		mainLoopStart
-		noteL 25,24
-		note 24
-		note 20
-		note 16
+		        noteL Cs3,24
+		        note  C3
+		        note  Gs2
+		        note  E2
 		repeatStart
-		noteL 13,84
-		ymSustain
-		noteL 32,4
-		note 34
-		release 01h
-		note 36
-		noteL 37,6
-		ymVol 09h
-		note 37
-		ymVol 0Ch
-		note 37
-		note 37
-		noteL 32,12
-		noteL 28,6
-		note 27
-		note 28
-		note 25
-		note 20
-		note 19
-		note 20
-		note 16
-		note 13
-		note 12
-		noteL 11,84
-		ymSustain
-		noteL 32,4
-		note 33
-		release 01h
-		note 34
-		noteL 35,6
-		ymVol 09h
-		note 35
-		ymVol 0Ch
-		note 35
-		note 35
-		noteL 33,12
-		noteL 29,6
-		note 27
-		note 29
-		note 27
-		note 23
-		note 21
-		note 23
-		note 21
-		note 17
-		note 13
-		noteL 15,36
-		ymSustain
-		noteL 22,4
-		note 24
-		release 01h
-		note 26
-		noteL 27,24
-		noteL 22,6
-		note 18
-		ymVol 09h
-		note 18
-		ymVol 06h
-		note 18
-		ymVol 0Ch
-		noteL 9,36
-		ymSustain
-		noteL 29,4
-		note 30
-		release 01h
-		note 31
-		noteL 33,24
-		noteL 27,6
-		note 23
-		ymVol 09h
-		note 23
-		ymVol 06h
-		note 23
+		        noteL Cs2,84
+		  ymSustain
+		        noteL Gs3,4
+		        note  As3
+		  release 01h
+		        note  C4
+		        noteL Cs4,6
+		  ymVol 09h
+		        note  Cs4
+		  ymVol 0Ch
+		        note  Cs4
+		        note  Cs4
+		        noteL Gs3,12
+		        noteL E3,6
+		        note  Ds3
+		        note  E3
+		        note  Cs3
+		        note  Gs2
+		        note  G2
+		        note  Gs2
+		        note  E2
+		        note  Cs2
+		        note  C2
+		        noteL B1,84
+		  ymSustain
+		        noteL Gs3,4
+		        note  A3
+		  release 01h
+		        note  As3
+		        noteL B3,6
+		  ymVol 09h
+		        note  B3
+		  ymVol 0Ch
+		        note  B3
+		        note  B3
+		        noteL A3,12
+		        noteL F3,6
+		        note  Ds3
+		        note  F3
+		        note  Ds3
+		        note  B2
+		        note  A2
+		        note  B2
+		        note  A2
+		        note  F2
+		        note  Cs2
+		        noteL Ds2,36
+		  ymSustain
+		        noteL As2,4
+		        note  C3
+		  release 01h
+		        note  D3
+		        noteL Ds3,24
+		        noteL As2,6
+		        note  Fs2
+		  ymVol 09h
+		        note  Fs2
+		  ymVol 06h
+		        note  Fs2
+		  ymVol 0Ch
+		        noteL A1,36
+		  ymSustain
+		        noteL F3,4
+		        note  Fs3
+		  release 01h
+		        note  G3
+		        noteL A3,24
+		        noteL Ds3,6
+		        note  B2
+		  ymVol 09h
+		        note  B2
+		  ymVol 06h
+		        note  B2
 		countedLoopStart 1
-		ymVol 0Ch
-		release 03h
-		noteL 14,12
-		noteL 26,6
-		note 26
-		note 26
-		ymVol 07h
-		note 26
-		ymVol 0Ch
-		note 26
-		note 26
-		noteL 7,12
-		noteL 19,6
-		note 19
-		note 19
-		ymVol 07h
-		note 19
-		ymVol 0Ch
-		note 19
-		note 19
+		  ymVol 0Ch
+		  release 03h
+		        noteL D2,12
+		        noteL D3,6
+		        note  D3
+		        note  D3
+		  ymVol 07h
+		        note  D3
+		  ymVol 0Ch
+		        note  D3
+		        note  D3
+		        noteL G1,12
+		        noteL G2,6
+		        note  G2
+		        note  G2
+		  ymVol 07h
+		        note  G2
+		  ymVol 0Ch
+		        note  G2
+		        note  G2
 		countedLoopEnd
-		release 01h
+		  release 01h
 		repeatSection1Start
 		repeatEnd
 		repeatSection2Start
-		release 01h
-		noteL 14,12
-		length 210
-		silence
-		ymInst 12
-		ymVol 0Dh
-		noteL 11,0
-		ymSlide 05h
-		noteL 13,192
-		ymStopSlide
-		ymInst 21
-		ymVol 0Ch
-		ymSustain
-		noteL 25,3
-		note 24
-		note 23
-		note 22
-		note 21
-		note 20
-		note 19
-		note 18
-		release 01h
-		note 17
-		length 189
-		ymInst 12
-		ymVol 0Dh
-		noteL 9,0
-		ymSlide 05h
-		noteL 11,168
-		ymStopSlide
-		ymInst 21
-		ymVol 0Ch
-		ymSustain
-		noteL 23,3
-		note 22
-		note 21
-		note 20
-		note 19
-		note 18
-		note 17
-		note 16
-		release 01h
-		note 15
-		length 165
-		ymInst 12
-		ymVol 0Dh
-		noteL 13,0
-		ymSlide 05h
-		noteL 15,96
-		ymStopSlide
-		ymInst 21
-		ymVol 0Ch
-		ymSustain
-		noteL 27,3
-		note 26
-		note 25
-		note 24
-		note 23
-		note 22
-		note 21
-		note 20
-		release 01h
-		note 19
-		length 69
-		ymInst 12
-		ymVol 0Dh
-		noteL 7,0
-		ymSlide 05h
-		noteL 9,96
-		ymStopSlide
-		ymInst 21
-		ymVol 0Ch
-		ymSustain
-		noteL 21,3
-		note 20
-		note 19
-		note 18
-		note 17
-		note 16
-		note 15
-		note 14
-		release 01h
-		note 13
-		length 69
-		ymInst 12
-		ymVol 0Dh
-		noteL 12,0
-		ymSlide 05h
-		noteL 14,96
-		ymStopSlide
-		noteL 17,0
-		ymSlide 05h
-		noteL 19,96
-		ymStopSlide
-		ymInst 21
-		ymVol 0Ch
-		release 09h
+		  release 01h
+		        noteL D2,12
+		  length 210
+		        silence
+		  ymInst 12
+		  ymVol 0Dh
+		        noteL B1,0
+		  ymSlide 05h
+		        noteL Cs2,192
+		  ymStopSlide
+		  ymInst 21
+		  ymVol 0Ch
+		  ymSustain
+		        noteL Cs3,3
+		        note  C3
+		        note  B2
+		        note  As2
+		        note  A2
+		        note  Gs2
+		        note  G2
+		        note  Fs2
+		  release 01h
+		        note  F2
+		  length 189
+		  ymInst 12
+		  ymVol 0Dh
+		        noteL A1,0
+		  ymSlide 05h
+		        noteL B1,168
+		  ymStopSlide
+		  ymInst 21
+		  ymVol 0Ch
+		  ymSustain
+		        noteL B2,3
+		        note  As2
+		        note  A2
+		        note  Gs2
+		        note  G2
+		        note  Fs2
+		        note  F2
+		        note  E2
+		  release 01h
+		        note  Ds2
+		  length 165
+		  ymInst 12
+		  ymVol 0Dh
+		        noteL Cs2,0
+		  ymSlide 05h
+		        noteL Ds2,96
+		  ymStopSlide
+		  ymInst 21
+		  ymVol 0Ch
+		  ymSustain
+		        noteL Ds3,3
+		        note  D3
+		        note  Cs3
+		        note  C3
+		        note  B2
+		        note  As2
+		        note  A2
+		        note  Gs2
+		  release 01h
+		        note  G2
+		  length 69
+		  ymInst 12
+		  ymVol 0Dh
+		        noteL G1,0
+		  ymSlide 05h
+		        noteL A1,96
+		  ymStopSlide
+		  ymInst 21
+		  ymVol 0Ch
+		  ymSustain
+		        noteL A2,3
+		        note  Gs2
+		        note  G2
+		        note  Fs2
+		        note  F2
+		        note  E2
+		        note  Ds2
+		        note  D2
+		  release 01h
+		        note  Cs2
+		  length 69
+		  ymInst 12
+		  ymVol 0Dh
+		        noteL C2,0
+		  ymSlide 05h
+		        noteL D2,96
+		  ymStopSlide
+		        noteL F2,0
+		  ymSlide 05h
+		        noteL G2,96
+		  ymStopSlide
+		  ymInst 21
+		  ymVol 0Ch
+		  release 09h
 		countedLoopStart 6
-		noteL 32,12
-		note 31
-		note 27
-		note 24
-		note 23
-		note 24
-		note 27
-		note 30
+		        noteL Gs3,12
+		        note  G3
+		        note  Ds3
+		        note  C3
+		        note  B2
+		        note  C3
+		        note  Ds3
+		        note  Fs3
 		countedLoopEnd
-		noteL 32,12
-		note 31
-		note 27
-		note 30
-		note 32
-		note 27
-		release 01h
-		noteL 20,24
+		        noteL Gs3,12
+		        note  G3
+		        note  Ds3
+		        note  Fs3
+		        note  Gs3
+		        note  Ds3
+		  release 01h
+		        noteL Gs2,24
 		mainLoopEnd
 Music_4_Channel_1:
-		ymStereo 0C0h
-		ymInst 26
-		ymVol 0Ch
-		release 01h
-		vibrato 02Ch
-		noteL 55,6
-		note 47
-		note 50
-		note 55
-		note 56
-		note 48
-		note 54
-		note 56
+		  ymStereo 0C0h
+		  ymInst 26
+		  ymVol 0Ch
+		  release 01h
+		  vibrato 02Ch
+		        noteL G5,6
+		        note  B4
+		        note  D5
+		        note  G5
+		        note  Gs5
+		        note  C5
+		        note  Fs5
+		        note  Gs5
 		mainLoopStart
-		release 00h
-		noteL 61,4
-		note 63
-		note 61
-		note 63
-		note 61
-		note 63
-		release 01h
-		noteL 61,24
-		noteL 51,6
-		note 43
-		note 44
-		note 52
-		note 48
-		note 49
-		note 56
-		ymVol 0Ah
-		note 56
+		  release 00h
+		        noteL Cs6,4
+		        note  Ds6
+		        note  Cs6
+		        note  Ds6
+		        note  Cs6
+		        note  Ds6
+		  release 01h
+		        noteL Cs6,24
+		        noteL Ds5,6
+		        note  G4
+		        note  Gs4
+		        note  E5
+		        note  C5
+		        note  Cs5
+		        note  Gs5
+		  ymVol 0Ah
+		        note  Gs5
 		countedLoopStart 1
-		ymInst 13
-		ymVol 0Ch
-		noteL 48,30
-		ymVol 0Ah
-		noteL 48,6
-		ymVol 0Ch
-		note 48
-		note 48
-		noteL 48,18
-		note 44
-		noteL 52,108
-		ymVol 0Ah
-		noteL 52,6
-		ymVol 08h
-		note 52
-		length 12
-		ymVol 0Ch
-		noteL 49,24
-		noteL 50,18
-		note 55
-		noteL 51,96
-		ymVol 0Ah
-		noteL 51,6
-		ymVol 08h
-		note 51
-		ymVol 0Ch
-		noteL 50,30
-		ymVol 0Ah
-		noteL 50,6
-		ymVol 0Ch
-		note 50
-		note 50
-		noteL 50,18
-		noteL 46,6
-		ymVol 0Ah
-		note 46
-		ymVol 08h
-		note 46
-		ymVol 0Ch
-		noteL 54,48
-		noteL 53,6
-		note 52
-		noteL 51,12
-		noteL 47,6
-		ymVol 0Ah
-		note 47
-		ymVol 08h
-		note 47
-		silence
-		ymVol 0Ch
-		noteL 49,204
+		  ymInst 13
+		  ymVol 0Ch
+		        noteL C5,30
+		  ymVol 0Ah
+		        noteL C5,6
+		  ymVol 0Ch
+		        note  C5
+		        note  C5
+		        noteL C5,18
+		        note  Gs4
+		        noteL E5,108
+		  ymVol 0Ah
+		        noteL E5,6
+		  ymVol 08h
+		        note  E5
+		  length 12
+		  ymVol 0Ch
+		        noteL Cs5,24
+		        noteL D5,18
+		        note  G5
+		        noteL Ds5,96
+		  ymVol 0Ah
+		        noteL Ds5,6
+		  ymVol 08h
+		        note  Ds5
+		  ymVol 0Ch
+		        noteL D5,30
+		  ymVol 0Ah
+		        noteL D5,6
+		  ymVol 0Ch
+		        note  D5
+		        note  D5
+		        noteL D5,18
+		        noteL As4,6
+		  ymVol 0Ah
+		        note  As4
+		  ymVol 08h
+		        note  As4
+		  ymVol 0Ch
+		        noteL Fs5,48
+		        noteL F5,6
+		        note  E5
+		        noteL Ds5,12
+		        noteL B4,6
+		  ymVol 0Ah
+		        note  B4
+		  ymVol 08h
+		        note  B4
+		        silence
+		  ymVol 0Ch
+		        noteL Cs5,204
 		countedLoopEnd
-		ymInst 26
-		ymVol 0Ch
-		noteL 68,6
-		note 67
-		note 66
-		note 62
-		note 61
-		note 58
-		note 57
-		note 54
-		note 51
-		note 50
-		note 49
-		note 45
-		note 44
-		note 41
-		note 40
-		note 37
-		release 00h
+		  ymInst 26
+		  ymVol 0Ch
+		        noteL Gs6,6
+		        note  G6
+		        note  Fs6
+		        note  D6
+		        note  Cs6
+		        note  As5
+		        note  A5
+		        note  Fs5
+		        note  Ds5
+		        note  D5
+		        note  Cs5
+		        note  A4
+		        note  Gs4
+		        note  F4
+		        note  E4
+		        note  Cs4
+		  release 00h
 		countedLoopStart 11
-		noteL 34,4
-		note 35
+		        noteL As3,4
+		        note  B3
 		countedLoopEnd
-		ymSustain
-		release 01h
-		noteL 34,16
-		ymVol 08h
-		note 34
-		release 01h
-		ymVol 06h
-		note 34
-		length 192
-		ymInst 1
-		ymVol 0Ch
-		note 48
+		  ymSustain
+		  release 01h
+		        noteL As3,16
+		  ymVol 08h
+		        note  As3
+		  release 01h
+		  ymVol 06h
+		        note  As3
+		  length 192
+		  ymInst 1
+		  ymVol 0Ch
+		        note  C5
 		repeatStart
-		ymSustain
-		noteL 48,3
-		note 47
-		note 46
-		note 45
-		note 44
-		note 43
-		note 42
-		note 41
-		noteL 40,6
+		  ymSustain
+		        noteL C5,3
+		        note  B4
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        noteL E4,6
 		repeatSection1Start
-		ymVol 0Ah
-		noteL 40,6
-		ymVol 07h
-		release 01h
-		note 40
-		ymVol 0Ah
+		  ymVol 0Ah
+		        noteL E4,6
+		  ymVol 07h
+		  release 01h
+		        note  E4
+		  ymVol 0Ah
 		repeatEnd
 		repeatSection2Start
-		ymVol 07h
-		noteL 40,6
-		release 01h
-		ymVol 05h
-		note 40
-		ymVol 08h
+		  ymVol 07h
+		        noteL E4,6
+		  release 01h
+		  ymVol 05h
+		        note  E4
+		  ymVol 08h
 		repeatEnd
 		repeatSection3Start
-		ymVol 06h
-		noteL 40,6
-		release 01h
-		ymVol 04h
-		note 40
-		ymVol 07h
+		  ymVol 06h
+		        noteL E4,6
+		  release 01h
+		  ymVol 04h
+		        note  E4
+		  ymVol 07h
 		repeatStart
-		ymSustain
-		noteL 48,3
-		note 47
-		note 46
-		note 45
-		note 44
-		note 43
-		note 42
-		note 41
-		noteL 40,6
+		  ymSustain
+		        noteL C5,3
+		        note  B4
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        noteL E4,6
 		repeatSection1Start
-		ymVol 05h
-		noteL 40,6
-		ymVol 03h
-		release 01h
-		note 40
-		ymVol 06h
+		  ymVol 05h
+		        noteL E4,6
+		  ymVol 03h
+		  release 01h
+		        note  E4
+		  ymVol 06h
 		repeatEnd
 		repeatSection2Start
-		ymVol 04h
-		noteL 40,6
-		release 01h
-		ymVol 02h
-		note 40
-		silence
-		ymVol 0Ch
-		noteL 51,168
+		  ymVol 04h
+		        noteL E4,6
+		  release 01h
+		  ymVol 02h
+		        note  E4
+		        silence
+		  ymVol 0Ch
+		        noteL Ds5,168
 		repeatStart
-		ymSustain
-		noteL 51,3
-		note 50
-		note 49
-		note 48
-		note 47
-		note 46
-		note 45
-		note 44
-		noteL 43,6
+		  ymSustain
+		        noteL Ds5,3
+		        note  D5
+		        note  Cs5
+		        note  C5
+		        note  B4
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        noteL G4,6
 		repeatSection1Start
-		ymVol 0Ah
-		noteL 43,6
-		ymVol 07h
-		release 01h
-		note 43
-		ymVol 0Ah
+		  ymVol 0Ah
+		        noteL G4,6
+		  ymVol 07h
+		  release 01h
+		        note  G4
+		  ymVol 0Ah
 		repeatEnd
 		repeatSection2Start
-		ymVol 07h
-		noteL 43,6
-		ymVol 05h
-		release 01h
-		note 43
-		ymVol 08h
+		  ymVol 07h
+		        noteL G4,6
+		  ymVol 05h
+		  release 01h
+		        note  G4
+		  ymVol 08h
 		repeatEnd
 		repeatSection3Start
-		ymVol 06h
-		noteL 43,6
-		ymVol 04h
-		release 01h
-		note 43
-		ymVol 07h
+		  ymVol 06h
+		        noteL G4,6
+		  ymVol 04h
+		  release 01h
+		        note  G4
+		  ymVol 07h
 		repeatStart
-		ymSustain
-		noteL 51,3
-		note 50
-		note 49
-		note 48
-		note 47
-		note 46
-		note 45
+		  ymSustain
+		        noteL Ds5,3
+		        note  D5
+		        note  Cs5
+		        note  C5
+		        note  B4
+		        note  As4
+		        note  A4
 		repeatSection1Start
-		noteL 44,3
-		ymVol 05h
-		noteL 43,6
-		ymVol 03h
-		note 43
-		release 01h
-		note 43
-		ymVol 06h
+		        noteL Gs4,3
+		  ymVol 05h
+		        noteL G4,6
+		  ymVol 03h
+		        note  G4
+		  release 01h
+		        note  G4
+		  ymVol 06h
 		repeatEnd
 		repeatSection2Start
-		release 01h
-		noteL 44,3
-		ymVol 0Ch
-		noteL 50,96
+		  release 01h
+		        noteL Gs4,3
+		  ymVol 0Ch
+		        noteL D5,96
 		repeatStart
-		ymSustain
-		noteL 50,3
-		note 49
-		note 48
-		note 47
-		note 46
-		note 45
-		note 44
-		note 43
-		noteL 42,6
+		  ymSustain
+		        noteL D5,3
+		        note  Cs5
+		        note  C5
+		        note  B4
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        note  G4
+		        noteL Fs4,6
 		repeatSection1Start
-		ymVol 0Ah
-		noteL 42,6
-		ymVol 07h
-		release 01h
-		note 42
-		ymVol 0Ah
+		  ymVol 0Ah
+		        noteL Fs4,6
+		  ymVol 07h
+		  release 01h
+		        note  Fs4
+		  ymVol 0Ah
 		repeatEnd
 		repeatSection2Start
-		ymVol 07h
-		noteL 42,6
-		release 01h
-		ymVol 05h
-		note 42
-		ymVol 08h
-		ymSustain
-		noteL 50,3
-		note 49
-		note 48
-		release 01h
-		note 47
-		ymVol 0Ch
-		noteL 54,96
+		  ymVol 07h
+		        noteL Fs4,6
+		  release 01h
+		  ymVol 05h
+		        note  Fs4
+		  ymVol 08h
+		  ymSustain
+		        noteL D5,3
+		        note  Cs5
+		        note  C5
+		  release 01h
+		        note  B4
+		  ymVol 0Ch
+		        noteL Fs5,96
 		repeatStart
-		ymSustain
-		noteL 54,3
-		note 53
-		note 52
-		note 51
-		note 50
-		note 49
-		note 48
-		note 47
-		noteL 46,6
+		  ymSustain
+		        noteL Fs5,3
+		        note  F5
+		        note  E5
+		        note  Ds5
+		        note  D5
+		        note  Cs5
+		        note  C5
+		        note  B4
+		        noteL As4,6
 		repeatSection1Start
-		ymVol 0Ah
-		noteL 46,6
-		ymVol 07h
-		release 01h
-		note 46
-		ymVol 0Ah
+		  ymVol 0Ah
+		        noteL As4,6
+		  ymVol 07h
+		  release 01h
+		        note  As4
+		  ymVol 0Ah
 		repeatEnd
 		repeatSection2Start
-		ymVol 07h
-		noteL 46,6
-		ymVol 05h
-		release 01h
-		note 46
-		ymVol 08h
-		ymSustain
-		noteL 54,3
-		note 53
-		note 52
-		release 01h
-		note 51
-		ymVol 0Ch
-		noteL 49,56
-		ymVol 09h
-		noteL 49,8
-		ymVol 0Ch
-		note 49
-		ymVol 09h
-		note 49
-		ymVol 0Ch
-		note 49
-		ymVol 09h
-		note 49
-		ymVol 0Ch
-		noteL 49,96
+		  ymVol 07h
+		        noteL As4,6
+		  ymVol 05h
+		  release 01h
+		        note  As4
+		  ymVol 08h
+		  ymSustain
+		        noteL Fs5,3
+		        note  F5
+		        note  E5
+		  release 01h
+		        note  Ds5
+		  ymVol 0Ch
+		        noteL Cs5,56
+		  ymVol 09h
+		        noteL Cs5,8
+		  ymVol 0Ch
+		        note  Cs5
+		  ymVol 09h
+		        note  Cs5
+		  ymVol 0Ch
+		        note  Cs5
+		  ymVol 09h
+		        note  Cs5
+		  ymVol 0Ch
+		        noteL Cs5,96
 		repeatStart
-		ymSustain
-		noteL 49,3
-		note 48
-		note 47
-		note 46
-		note 45
-		note 44
-		note 43
-		note 42
-		noteL 41,6
+		  ymSustain
+		        noteL Cs5,3
+		        note  C5
+		        note  B4
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        noteL F4,6
 		repeatSection1Start
-		ymVol 0Ah
-		noteL 41,6
-		ymVol 07h
-		release 01h
-		note 41
-		ymVol 0Ah
+		  ymVol 0Ah
+		        noteL F4,6
+		  ymVol 07h
+		  release 01h
+		        note  F4
+		  ymVol 0Ah
 		repeatEnd
 		repeatSection2Start
-		ymVol 07h
-		noteL 41,6
-		release 01h
-		ymVol 05h
-		note 41
-		ymVol 08h
+		  ymVol 07h
+		        noteL F4,6
+		  release 01h
+		  ymVol 05h
+		        note  F4
+		  ymVol 08h
 		repeatEnd
 		repeatSection3Start
-		ymVol 06h
-		noteL 41,6
-		release 01h
-		ymVol 04h
-		note 41
-		ymVol 07h
+		  ymVol 06h
+		        noteL F4,6
+		  release 01h
+		  ymVol 04h
+		        note  F4
+		  ymVol 07h
 		repeatStart
-		ymSustain
-		noteL 49,3
-		note 48
-		note 47
-		note 46
-		note 45
-		note 44
-		note 43
+		  ymSustain
+		        noteL Cs5,3
+		        note  C5
+		        note  B4
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        note  G4
 		repeatSection1Start
-		noteL 42,3
-		noteL 41,6
-		ymVol 05h
-		note 41
-		ymVol 03h
-		release 01h
-		note 41
-		ymVol 06h
+		        noteL Fs4,3
+		        noteL F4,6
+		  ymVol 05h
+		        note  F4
+		  ymVol 03h
+		  release 01h
+		        note  F4
+		  ymVol 06h
 		repeatEnd
 		repeatSection2Start
-		release 01h
-		noteL 42,3
-		ymInst 44
-		ymVol 0Ch
-		noteL 54,4
-		note 57
-		noteL 56,76
-		noteL 62,16
-		noteL 58,4
-		note 56
-		note 53
-		note 47
-		note 50
-		note 54
-		note 55
-		noteL 52,88
-		noteL 55,6
-		noteL 56,66
+		  release 01h
+		        noteL Fs4,3
+		  ymInst 44
+		  ymVol 0Ch
+		        noteL Fs5,4
+		        note  A5
+		        noteL Gs5,76
+		        noteL D6,16
+		        noteL As5,4
+		        note  Gs5
+		        note  F5
+		        note  B4
+		        note  D5
+		        note  Fs5
+		        note  G5
+		        noteL E5,88
+		        noteL G5,6
+		        noteL Gs5,66
 		repeatStart
-		ymInst 26
-		ymVol 0Ch
-		noteL 43,6
-		note 35
-		note 38
-		note 43
-		note 44
-		note 36
-		note 42
-		note 44
-		ymVol 0Ah
-		note 44
-		release 03h
-		ymInst 13
-		ymVol 0Bh
+		  ymInst 26
+		  ymVol 0Ch
+		        noteL G4,6
+		        note  B3
+		        note  D4
+		        note  G4
+		        note  Gs4
+		        note  C4
+		        note  Fs4
+		        note  Gs4
+		  ymVol 0Ah
+		        note  Gs4
+		  release 03h
+		  ymInst 13
+		  ymVol 0Bh
 		repeatSection1Start
-		noteL 51,12
-		noteL 51,6
-		noteL 51,12
-		noteL 51,6
-		note 51
-		release 01h
+		        noteL Ds5,12
+		        noteL Ds5,6
+		        noteL Ds5,12
+		        noteL Ds5,6
+		        note  Ds5
+		  release 01h
 		repeatEnd
 		repeatSection2Start
-		noteL 54,12
-		noteL 54,6
-		noteL 54,12
-		noteL 54,6
-		note 54
-		release 01h
-		ymInst 26
-		ymVol 0Ch
-		note 55
-		note 47
-		note 50
-		note 55
-		note 56
-		note 48
-		note 54
-		note 56
-		note 59
-		note 50
-		note 55
-		note 59
-		note 60
-		note 54
-		note 56
-		note 60
+		        noteL Fs5,12
+		        noteL Fs5,6
+		        noteL Fs5,12
+		        noteL Fs5,6
+		        note  Fs5
+		  release 01h
+		  ymInst 26
+		  ymVol 0Ch
+		        note  G5
+		        note  B4
+		        note  D5
+		        note  G5
+		        note  Gs5
+		        note  C5
+		        note  Fs5
+		        note  Gs5
+		        note  B5
+		        note  D5
+		        note  G5
+		        note  B5
+		        note  C6
+		        note  Fs5
+		        note  Gs5
+		        note  C6
 		mainLoopEnd
 Music_4_Channel_2:
-		ymStereo 0C0h
-		ymInst 26
-		ymVol 0Bh
-		release 01h
-		vibrato 02Ch
-		noteL 43,24
-		note 44
+		  ymStereo 0C0h
+		  ymInst 26
+		  ymVol 0Bh
+		  release 01h
+		  vibrato 02Ch
+		        noteL G4,24
+		        note  Gs4
 		mainLoopStart
-		ymInst 27
-		ymVol 09h
-		release 07h
-		noteL 40,16
-		note 40
-		note 40
-		release 01h
-		noteL 40,48
+		  ymInst 27
+		  ymVol 09h
+		  release 07h
+		        noteL E4,16
+		        note  E4
+		        note  E4
+		  release 01h
+		        noteL E4,48
 		countedLoopStart 1
-		ymInst 20
-		ymVol 0Ah
-		noteL 37,102
-		ymVol 07h
-		noteL 37,6
-		ymVol 05h
-		note 37
-		ymVol 0Ah
-		noteL 37,18
-		noteL 32,12
-		noteL 40,18
-		noteL 34,30
-		noteL 35,108
-		ymVol 07h
-		noteL 35,6
-		ymVol 0Ah
-		noteL 35,18
-		noteL 29,12
-		noteL 30,18
-		note 33
-		noteL 34,12
-		noteL 39,96
-		noteL 35,48
-		note 31
-		ymVol 07h
-		noteL 31,6
-		ymVol 05h
-		note 31
-		length 12
-		ymInst 27
-		ymVol 0Ah
-		noteL 32,24
-		noteL 41,48
-		release 06h
-		noteL 42,16
-		note 42
-		note 42
-		release 01h
-		noteL 41,48
+		  ymInst 20
+		  ymVol 0Ah
+		        noteL Cs4,102
+		  ymVol 07h
+		        noteL Cs4,6
+		  ymVol 05h
+		        note  Cs4
+		  ymVol 0Ah
+		        noteL Cs4,18
+		        noteL Gs3,12
+		        noteL E4,18
+		        noteL As3,30
+		        noteL B3,108
+		  ymVol 07h
+		        noteL B3,6
+		  ymVol 0Ah
+		        noteL B3,18
+		        noteL F3,12
+		        noteL Fs3,18
+		        note  A3
+		        noteL As3,12
+		        noteL Ds4,96
+		        noteL B3,48
+		        note  G3
+		  ymVol 07h
+		        noteL G3,6
+		  ymVol 05h
+		        note  G3
+		  length 12
+		  ymInst 27
+		  ymVol 0Ah
+		        noteL Gs3,24
+		        noteL F4,48
+		  release 06h
+		        noteL Fs4,16
+		        note  Fs4
+		        note  Fs4
+		  release 01h
+		        noteL F4,48
 		countedLoopEnd
-		ymInst 26
-		ymVol 0Bh
-		noteL 61,12
-		ymVol 09h
-		noteL 61,6
-		ymVol 07h
-		note 61
-		length 204
-		silence
-		ymInst 1
-		ymVol 0Ah
-		ymSustain
+		  ymInst 26
+		  ymVol 0Bh
+		        noteL Cs6,12
+		  ymVol 09h
+		        noteL Cs6,6
+		  ymVol 07h
+		        note  Cs6
+		  length 204
+		        silence
+		  ymInst 1
+		  ymVol 0Ah
+		  ymSustain
 		countedLoopStart 31
-		noteL 44,3
-		ymSlide 020h
-		note 45
+		        noteL Gs4,3
+		  ymSlide 020h
+		        note  A4
 		countedLoopEnd
-		ymStopSlide
+		  ymStopSlide
 		repeatStart
-		ymSustain
-		noteL 44,3
-		note 43
-		note 42
-		note 41
-		note 40
-		note 39
-		note 38
-		note 37
-		noteL 36,6
+		  ymSustain
+		        noteL Gs4,3
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        note  E4
+		        note  Ds4
+		        note  D4
+		        note  Cs4
+		        noteL C4,6
 		repeatSection1Start
-		ymVol 08h
-		noteL 36,6
-		ymVol 05h
-		release 01h
-		note 36
-		ymVol 08h
+		  ymVol 08h
+		        noteL C4,6
+		  ymVol 05h
+		  release 01h
+		        note  C4
+		  ymVol 08h
 		repeatEnd
 		repeatSection2Start
-		ymVol 05h
-		noteL 36,6
-		release 01h
-		ymVol 03h
-		note 36
-		ymVol 06h
+		  ymVol 05h
+		        noteL C4,6
+		  release 01h
+		  ymVol 03h
+		        note  C4
+		  ymVol 06h
 		repeatEnd
 		repeatSection3Start
-		ymVol 04h
-		noteL 36,6
-		release 01h
-		ymVol 02h
-		note 36
-		ymVol 05h
+		  ymVol 04h
+		        noteL C4,6
+		  release 01h
+		  ymVol 02h
+		        note  C4
+		  ymVol 05h
 		repeatStart
-		ymSustain
-		noteL 44,3
-		note 43
-		note 42
-		note 41
-		note 40
-		note 39
-		note 38
-		note 37
-		noteL 36,6
+		  ymSustain
+		        noteL Gs4,3
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        note  E4
+		        note  Ds4
+		        note  D4
+		        note  Cs4
+		        noteL C4,6
 		repeatSection1Start
-		ymVol 03h
-		noteL 36,6
-		ymVol 01h
-		release 01h
-		note 36
-		ymVol 04h
+		  ymVol 03h
+		        noteL C4,6
+		  ymVol 01h
+		  release 01h
+		        note  C4
+		  ymVol 04h
 		repeatEnd
 		repeatSection2Start
-		ymVol 02h
-		noteL 36,6
-		release 01h
-		ymVol 00h
-		note 36
-		silence
-		ymVol 0Ah
-		ymSustain
+		  ymVol 02h
+		        noteL C4,6
+		  release 01h
+		  ymVol 00h
+		        note  C4
+		        silence
+		  ymVol 0Ah
+		  ymSustain
 		countedLoopStart 27
-		noteL 45,3
-		ymSlide 020h
-		note 46
+		        noteL A4,3
+		  ymSlide 020h
+		        note  As4
 		countedLoopEnd
-		ymStopSlide
+		  ymStopSlide
 		repeatStart
-		ymSustain
-		noteL 45,3
-		note 44
-		note 43
-		note 42
-		note 41
-		note 40
-		note 39
-		note 38
-		noteL 37,6
+		  ymSustain
+		        noteL A4,3
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        note  E4
+		        note  Ds4
+		        note  D4
+		        noteL Cs4,6
 		repeatSection1Start
-		ymVol 08h
-		noteL 37,6
-		ymVol 05h
-		release 01h
-		note 37
-		ymVol 08h
+		  ymVol 08h
+		        noteL Cs4,6
+		  ymVol 05h
+		  release 01h
+		        note  Cs4
+		  ymVol 08h
 		repeatEnd
 		repeatSection2Start
-		ymVol 05h
-		noteL 37,6
-		ymVol 03h
-		release 01h
-		note 37
-		ymVol 06h
+		  ymVol 05h
+		        noteL Cs4,6
+		  ymVol 03h
+		  release 01h
+		        note  Cs4
+		  ymVol 06h
 		repeatEnd
 		repeatSection3Start
-		ymVol 04h
-		noteL 37,6
-		ymVol 02h
-		release 01h
-		note 37
-		ymVol 05h
+		  ymVol 04h
+		        noteL Cs4,6
+		  ymVol 02h
+		  release 01h
+		        note  Cs4
+		  ymVol 05h
 		repeatStart
-		ymSustain
-		noteL 45,3
-		note 44
-		note 43
-		note 42
-		note 41
-		note 40
-		note 39
+		  ymSustain
+		        noteL A4,3
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        note  E4
+		        note  Ds4
 		repeatSection1Start
-		noteL 38,3
-		ymVol 03h
-		noteL 37,6
-		ymVol 01h
-		note 37
-		release 01h
-		note 37
-		ymVol 04h
+		        noteL D4,3
+		  ymVol 03h
+		        noteL Cs4,6
+		  ymVol 01h
+		        note  Cs4
+		  release 01h
+		        note  Cs4
+		  ymVol 04h
 		repeatEnd
 		repeatSection2Start
-		release 01h
-		noteL 38,3
-		ymVol 0Ah
-		ymSustain
+		  release 01h
+		        noteL D4,3
+		  ymVol 0Ah
+		  ymSustain
 		countedLoopStart 15
-		noteL 46,3
-		ymSlide 020h
-		note 47
+		        noteL As4,3
+		  ymSlide 020h
+		        note  B4
 		countedLoopEnd
-		ymStopSlide
+		  ymStopSlide
 		repeatStart
-		ymSustain
-		noteL 46,3
-		note 45
-		note 44
-		note 43
-		note 42
-		note 41
-		note 40
-		note 39
-		noteL 38,6
+		  ymSustain
+		        noteL As4,3
+		        note  A4
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        note  E4
+		        note  Ds4
+		        noteL D4,6
 		repeatSection1Start
-		ymVol 08h
-		noteL 38,6
-		ymVol 05h
-		release 01h
-		note 38
-		ymVol 08h
+		  ymVol 08h
+		        noteL D4,6
+		  ymVol 05h
+		  release 01h
+		        note  D4
+		  ymVol 08h
 		repeatEnd
 		repeatSection2Start
-		ymVol 05h
-		noteL 38,6
-		release 01h
-		ymVol 03h
-		note 38
-		ymVol 06h
-		ymSustain
-		noteL 46,3
-		note 45
-		note 44
-		release 01h
-		note 43
-		ymVol 0Ah
-		ymSustain
+		  ymVol 05h
+		        noteL D4,6
+		  release 01h
+		  ymVol 03h
+		        note  D4
+		  ymVol 06h
+		  ymSustain
+		        noteL As4,3
+		        note  A4
+		        note  Gs4
+		  release 01h
+		        note  G4
+		  ymVol 0Ah
+		  ymSustain
 		countedLoopStart 15
-		noteL 47,3
-		ymSlide 020h
-		note 49
+		        noteL B4,3
+		  ymSlide 020h
+		        note  Cs5
 		countedLoopEnd
-		ymStopSlide
+		  ymStopSlide
 		repeatStart
-		ymSustain
-		noteL 47,3
-		note 46
-		note 45
-		note 44
-		note 43
-		note 42
-		note 41
-		note 40
-		noteL 39,6
+		  ymSustain
+		        noteL B4,3
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        note  E4
+		        noteL Ds4,6
 		repeatSection1Start
-		ymVol 08h
-		noteL 39,6
-		ymVol 05h
-		release 01h
-		note 39
-		ymVol 08h
+		  ymVol 08h
+		        noteL Ds4,6
+		  ymVol 05h
+		  release 01h
+		        note  Ds4
+		  ymVol 08h
 		repeatEnd
 		repeatSection2Start
-		ymVol 05h
-		noteL 39,6
-		ymVol 03h
-		release 01h
-		note 39
-		ymVol 06h
-		ymSustain
-		noteL 47,3
-		note 46
-		note 45
-		release 01h
-		note 44
-		ymVol 0Ah
-		ymSustain
+		  ymVol 05h
+		        noteL Ds4,6
+		  ymVol 03h
+		  release 01h
+		        note  Ds4
+		  ymVol 06h
+		  ymSustain
+		        noteL B4,3
+		        note  As4
+		        note  A4
+		  release 01h
+		        note  Gs4
+		  ymVol 0Ah
+		  ymSustain
 		countedLoopStart 15
-		noteL 42,3
-		ymSlide 020h
-		note 44
+		        noteL Fs4,3
+		  ymSlide 020h
+		        note  Gs4
 		countedLoopEnd
 		countedLoopStart 15
-		noteL 45,3
-		note 43
+		        noteL A4,3
+		        note  G4
 		countedLoopEnd
-		ymStopSlide
+		  ymStopSlide
 		repeatStart
-		ymSustain
-		noteL 45,3
-		note 44
-		note 43
-		note 42
-		note 41
-		note 40
-		note 39
-		note 38
-		noteL 37,6
+		  ymSustain
+		        noteL A4,3
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        note  E4
+		        note  Ds4
+		        note  D4
+		        noteL Cs4,6
 		repeatSection1Start
-		ymVol 08h
-		noteL 37,6
-		ymVol 05h
-		release 01h
-		note 37
-		ymVol 08h
+		  ymVol 08h
+		        noteL Cs4,6
+		  ymVol 05h
+		  release 01h
+		        note  Cs4
+		  ymVol 08h
 		repeatEnd
 		repeatSection2Start
-		ymVol 05h
-		noteL 37,6
-		release 01h
-		ymVol 03h
-		note 37
-		ymVol 06h
+		  ymVol 05h
+		        noteL Cs4,6
+		  release 01h
+		  ymVol 03h
+		        note  Cs4
+		  ymVol 06h
 		repeatEnd
 		repeatSection3Start
-		ymVol 04h
-		noteL 37,6
-		release 01h
-		ymVol 02h
-		note 37
-		ymVol 05h
+		  ymVol 04h
+		        noteL Cs4,6
+		  release 01h
+		  ymVol 02h
+		        note  Cs4
+		  ymVol 05h
 		repeatStart
-		ymSustain
-		noteL 45,3
-		note 44
-		note 43
-		note 42
-		note 41
-		note 40
-		note 39
+		  ymSustain
+		        noteL A4,3
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        note  E4
+		        note  Ds4
 		repeatSection1Start
-		noteL 38,3
-		noteL 37,6
-		ymVol 03h
-		note 37
-		ymVol 01h
-		release 01h
-		note 37
-		ymVol 04h
+		        noteL D4,3
+		        noteL Cs4,6
+		  ymVol 03h
+		        note  Cs4
+		  ymVol 01h
+		  release 01h
+		        note  Cs4
+		  ymVol 04h
 		repeatEnd
 		repeatSection2Start
-		release 01h
-		noteL 38,3
-		length 48
-		ymInst 7
-		ymVol 0Ah
-		noteL 50,6
-		noteL 51,106
-		noteL 50,16
-		note 45
-		noteL 41,96
-		ymInst 44
-		ymVol 0Ch
-		noteL 50,4
-		note 51
-		noteL 49,20
-		noteL 56,4
-		note 59
-		noteL 55,18
-		release 03h
-		ymInst 13
-		ymVol 0Ah
-		noteL 49,12
-		noteL 49,6
-		noteL 49,12
-		noteL 49,6
-		note 49
-		release 01h
-		ymInst 9
-		ymVol 0Bh
-		noteL 37,4
-		note 41
-		note 46
-		note 53
-		note 50
-		ymVol 09h
-		note 50
-		ymVol 0Bh
-		noteL 57,18
-		noteL 52,4
-		note 51
-		note 46
-		release 03h
-		ymInst 13
-		ymVol 0Ah
-		noteL 51,12
-		noteL 51,6
-		noteL 51,12
-		noteL 51,6
-		note 51
-		release 01h
-		ymInst 7
-		ymVol 0Ah
-		note 44
-		note 40
-		note 38
-		note 42
-		noteL 49,4
-		noteL 48,20
-		ymInst 26
-		ymVol 0Bh
-		noteL 50,24
-		note 51
+		  release 01h
+		        noteL D4,3
+		  length 48
+		  ymInst 7
+		  ymVol 0Ah
+		        noteL D5,6
+		        noteL Ds5,106
+		        noteL D5,16
+		        note  A4
+		        noteL F4,96
+		  ymInst 44
+		  ymVol 0Ch
+		        noteL D5,4
+		        note  Ds5
+		        noteL Cs5,20
+		        noteL Gs5,4
+		        note  B5
+		        noteL G5,18
+		  release 03h
+		  ymInst 13
+		  ymVol 0Ah
+		        noteL Cs5,12
+		        noteL Cs5,6
+		        noteL Cs5,12
+		        noteL Cs5,6
+		        note  Cs5
+		  release 01h
+		  ymInst 9
+		  ymVol 0Bh
+		        noteL Cs4,4
+		        note  F4
+		        note  As4
+		        note  F5
+		        note  D5
+		  ymVol 09h
+		        note  D5
+		  ymVol 0Bh
+		        noteL A5,18
+		        noteL E5,4
+		        note  Ds5
+		        note  As4
+		  release 03h
+		  ymInst 13
+		  ymVol 0Ah
+		        noteL Ds5,12
+		        noteL Ds5,6
+		        noteL Ds5,12
+		        noteL Ds5,6
+		        note  Ds5
+		  release 01h
+		  ymInst 7
+		  ymVol 0Ah
+		        note  Gs4
+		        note  E4
+		        note  D4
+		        note  Fs4
+		        noteL Cs5,4
+		        noteL C5,20
+		  ymInst 26
+		  ymVol 0Bh
+		        noteL D5,24
+		        note  Ds5
 		mainLoopEnd
 Music_4_Channel_3:
-		ymStereo 0C0h
-		ymInst 26
-		ymVol 0Bh
-		release 01h
-		vibrato 02Ch
-		noteL 35,24
-		note 36
+		  ymStereo 0C0h
+		  ymInst 26
+		  ymVol 0Bh
+		  release 01h
+		  vibrato 02Ch
+		        noteL B3,24
+		        note  C4
 		mainLoopStart
-		ymInst 27
-		ymVol 09h
-		release 07h
-		noteL 32,16
-		note 32
-		note 32
-		release 01h
-		noteL 32,48
+		  ymInst 27
+		  ymVol 09h
+		  release 07h
+		        noteL Gs3,16
+		        note  Gs3
+		        note  Gs3
+		  release 01h
+		        noteL Gs3,48
 		countedLoopStart 1
-		length 6
-		ymStereo 080h
-		shifting 020h
-		ymInst 20
-		ymVol 09h
-		noteL 37,108
-		ymVol 06h
-		noteL 37,6
-		ymVol 04h
-		note 37
-		ymVol 09h
-		noteL 37,18
-		noteL 32,12
-		noteL 40,18
-		noteL 34,30
-		noteL 35,108
-		ymVol 06h
-		noteL 35,6
-		ymVol 09h
-		noteL 35,18
-		noteL 29,12
-		noteL 30,18
-		note 33
-		noteL 34,12
-		noteL 39,96
-		noteL 35,48
-		note 31
-		ymVol 06h
-		noteL 31,6
-		ymVol 04h
-		note 31
-		ymStereo 0C0h
-		shifting 00h
-		ymInst 27
-		ymVol 0Ah
-		noteL 30,24
-		noteL 33,48
-		release 06h
-		noteL 32,16
-		note 32
-		note 32
-		release 01h
-		noteL 33,48
+		  length 6
+		  ymStereo 080h
+		  shifting 020h
+		  ymInst 20
+		  ymVol 09h
+		        noteL Cs4,108
+		  ymVol 06h
+		        noteL Cs4,6
+		  ymVol 04h
+		        note  Cs4
+		  ymVol 09h
+		        noteL Cs4,18
+		        noteL Gs3,12
+		        noteL E4,18
+		        noteL As3,30
+		        noteL B3,108
+		  ymVol 06h
+		        noteL B3,6
+		  ymVol 09h
+		        noteL B3,18
+		        noteL F3,12
+		        noteL Fs3,18
+		        note  A3
+		        noteL As3,12
+		        noteL Ds4,96
+		        noteL B3,48
+		        note  G3
+		  ymVol 06h
+		        noteL G3,6
+		  ymVol 04h
+		        note  G3
+		  ymStereo 0C0h
+		  shifting 00h
+		  ymInst 27
+		  ymVol 0Ah
+		        noteL Fs3,24
+		        noteL A3,48
+		  release 06h
+		        noteL Gs3,16
+		        note  Gs3
+		        note  Gs3
+		  release 01h
+		        noteL A3,48
 		countedLoopEnd
-		ymInst 26
-		ymVol 0Bh
-		noteL 52,12
-		shifting 020h
-		ymStereo 040h
-		ymInst 26
-		ymVol 0Ah
-		noteL 68,6
-		note 67
-		note 66
-		note 62
-		note 61
-		note 58
-		note 57
-		note 54
-		note 51
-		note 50
-		note 49
-		note 45
-		note 44
-		note 41
-		note 40
-		note 37
-		release 00h
+		  ymInst 26
+		  ymVol 0Bh
+		        noteL E5,12
+		  shifting 020h
+		  ymStereo 040h
+		  ymInst 26
+		  ymVol 0Ah
+		        noteL Gs6,6
+		        note  G6
+		        note  Fs6
+		        note  D6
+		        note  Cs6
+		        note  As5
+		        note  A5
+		        note  Fs5
+		        note  Ds5
+		        note  D5
+		        note  Cs5
+		        note  A4
+		        note  Gs4
+		        note  F4
+		        note  E4
+		        note  Cs4
+		  release 00h
 		countedLoopStart 11
-		noteL 34,4
-		note 35
+		        noteL As3,4
+		        note  B3
 		countedLoopEnd
-		ymSustain
-		release 01h
-		noteL 34,16
-		ymVol 06h
-		note 34
-		release 01h
-		ymVol 04h
-		note 34
-		length 180
-		ymStereo 0C0h
-		shifting 00h
-		ymInst 1
-		ymVol 0Ah
-		ymSustain
+		  ymSustain
+		  release 01h
+		        noteL As3,16
+		  ymVol 06h
+		        note  As3
+		  release 01h
+		  ymVol 04h
+		        note  As3
+		  length 180
+		  ymStereo 0C0h
+		  shifting 00h
+		  ymInst 1
+		  ymVol 0Ah
+		  ymSustain
 		countedLoopStart 31
-		noteL 40,3
-		ymSlide 020h
-		note 39
+		        noteL E4,3
+		  ymSlide 020h
+		        note  Ds4
 		countedLoopEnd
-		ymStopSlide
+		  ymStopSlide
 		repeatStart
-		ymSustain
-		noteL 40,3
-		note 39
-		note 38
-		note 37
-		note 36
-		note 35
-		note 34
-		note 33
-		noteL 32,6
+		  ymSustain
+		        noteL E4,3
+		        note  Ds4
+		        note  D4
+		        note  Cs4
+		        note  C4
+		        note  B3
+		        note  As3
+		        note  A3
+		        noteL Gs3,6
 		repeatSection1Start
-		ymVol 08h
-		noteL 32,6
-		ymVol 05h
-		release 01h
-		note 32
-		ymVol 08h
+		  ymVol 08h
+		        noteL Gs3,6
+		  ymVol 05h
+		  release 01h
+		        note  Gs3
+		  ymVol 08h
 		repeatEnd
 		repeatSection2Start
-		ymVol 05h
-		noteL 32,6
-		release 01h
-		ymVol 03h
-		note 32
-		ymVol 06h
+		  ymVol 05h
+		        noteL Gs3,6
+		  release 01h
+		  ymVol 03h
+		        note  Gs3
+		  ymVol 06h
 		repeatEnd
 		repeatSection3Start
-		ymVol 04h
-		noteL 32,6
-		release 01h
-		ymVol 02h
-		note 32
-		ymVol 05h
+		  ymVol 04h
+		        noteL Gs3,6
+		  release 01h
+		  ymVol 02h
+		        note  Gs3
+		  ymVol 05h
 		repeatStart
-		ymSustain
-		noteL 40,3
-		note 39
-		note 38
-		note 37
-		note 36
-		note 35
-		note 34
-		note 33
-		noteL 32,6
+		  ymSustain
+		        noteL E4,3
+		        note  Ds4
+		        note  D4
+		        note  Cs4
+		        note  C4
+		        note  B3
+		        note  As3
+		        note  A3
+		        noteL Gs3,6
 		repeatSection1Start
-		ymVol 03h
-		noteL 32,6
-		ymVol 01h
-		release 01h
-		note 32
-		ymVol 04h
+		  ymVol 03h
+		        noteL Gs3,6
+		  ymVol 01h
+		  release 01h
+		        note  Gs3
+		  ymVol 04h
 		repeatEnd
 		repeatSection2Start
-		ymVol 02h
-		noteL 32,6
-		release 01h
-		ymVol 00h
-		note 32
-		silence
-		ymVol 0Ah
-		ymSustain
+		  ymVol 02h
+		        noteL Gs3,6
+		  release 01h
+		  ymVol 00h
+		        note  Gs3
+		        silence
+		  ymVol 0Ah
+		  ymSustain
 		countedLoopStart 27
-		noteL 41,3
-		ymSlide 020h
-		note 42
+		        noteL F4,3
+		  ymSlide 020h
+		        note  Fs4
 		countedLoopEnd
-		ymStopSlide
+		  ymStopSlide
 		repeatStart
-		ymSustain
-		noteL 41,3
-		note 40
-		note 39
-		note 38
-		note 37
-		note 36
-		note 35
-		note 34
-		noteL 33,6
+		  ymSustain
+		        noteL F4,3
+		        note  E4
+		        note  Ds4
+		        note  D4
+		        note  Cs4
+		        note  C4
+		        note  B3
+		        note  As3
+		        noteL A3,6
 		repeatSection1Start
-		ymVol 08h
-		noteL 33,6
-		ymVol 05h
-		release 01h
-		note 33
-		ymVol 08h
+		  ymVol 08h
+		        noteL A3,6
+		  ymVol 05h
+		  release 01h
+		        note  A3
+		  ymVol 08h
 		repeatEnd
 		repeatSection2Start
-		ymVol 05h
-		noteL 33,6
-		ymVol 03h
-		release 01h
-		note 33
-		ymVol 06h
+		  ymVol 05h
+		        noteL A3,6
+		  ymVol 03h
+		  release 01h
+		        note  A3
+		  ymVol 06h
 		repeatEnd
 		repeatSection3Start
-		ymVol 04h
-		noteL 33,6
-		ymVol 02h
-		release 01h
-		note 33
-		ymVol 05h
+		  ymVol 04h
+		        noteL A3,6
+		  ymVol 02h
+		  release 01h
+		        note  A3
+		  ymVol 05h
 		repeatStart
-		ymSustain
-		noteL 41,3
-		note 40
-		note 39
-		note 38
-		note 37
-		note 36
-		note 35
+		  ymSustain
+		        noteL F4,3
+		        note  E4
+		        note  Ds4
+		        note  D4
+		        note  Cs4
+		        note  C4
+		        note  B3
 		repeatSection1Start
-		noteL 34,3
-		ymVol 03h
-		noteL 33,6
-		ymVol 01h
-		note 33
-		release 01h
-		note 33
-		ymVol 04h
+		        noteL As3,3
+		  ymVol 03h
+		        noteL A3,6
+		  ymVol 01h
+		        note  A3
+		  release 01h
+		        note  A3
+		  ymVol 04h
 		repeatEnd
 		repeatSection2Start
-		release 01h
-		noteL 34,3
-		ymVol 0Ah
-		ymSustain
+		  release 01h
+		        noteL As3,3
+		  ymVol 0Ah
+		  ymSustain
 		countedLoopStart 15
-		noteL 43,3
-		ymSlide 020h
-		note 42
+		        noteL G4,3
+		  ymSlide 020h
+		        note  Fs4
 		countedLoopEnd
-		ymStopSlide
+		  ymStopSlide
 		repeatStart
-		ymSustain
-		noteL 43,3
-		note 42
-		note 41
-		note 40
-		note 39
-		note 38
-		note 37
-		note 36
-		noteL 35,6
+		  ymSustain
+		        noteL G4,3
+		        note  Fs4
+		        note  F4
+		        note  E4
+		        note  Ds4
+		        note  D4
+		        note  Cs4
+		        note  C4
+		        noteL B3,6
 		repeatSection1Start
-		ymVol 08h
-		noteL 35,6
-		ymVol 05h
-		release 01h
-		note 35
-		ymVol 08h
+		  ymVol 08h
+		        noteL B3,6
+		  ymVol 05h
+		  release 01h
+		        note  B3
+		  ymVol 08h
 		repeatEnd
 		repeatSection2Start
-		ymVol 05h
-		noteL 35,6
-		release 01h
-		ymVol 03h
-		note 35
-		ymVol 06h
-		ymSustain
-		noteL 43,3
-		note 42
-		note 41
-		release 01h
-		note 40
-		ymVol 0Ah
-		ymSustain
+		  ymVol 05h
+		        noteL B3,6
+		  release 01h
+		  ymVol 03h
+		        note  B3
+		  ymVol 06h
+		  ymSustain
+		        noteL G4,3
+		        note  Fs4
+		        note  F4
+		  release 01h
+		        note  E4
+		  ymVol 0Ah
+		  ymSustain
 		countedLoopStart 15
-		noteL 43,3
-		ymSlide 020h
-		note 45
+		        noteL G4,3
+		  ymSlide 020h
+		        note  A4
 		countedLoopEnd
-		ymStopSlide
+		  ymStopSlide
 		repeatStart
-		ymSustain
-		noteL 43,3
-		note 42
-		note 41
-		note 40
-		note 39
-		note 38
-		note 37
-		note 36
-		noteL 35,6
+		  ymSustain
+		        noteL G4,3
+		        note  Fs4
+		        note  F4
+		        note  E4
+		        note  Ds4
+		        note  D4
+		        note  Cs4
+		        note  C4
+		        noteL B3,6
 		repeatSection1Start
-		ymVol 08h
-		noteL 35,6
-		ymVol 05h
-		release 01h
-		note 35
-		ymVol 08h
+		  ymVol 08h
+		        noteL B3,6
+		  ymVol 05h
+		  release 01h
+		        note  B3
+		  ymVol 08h
 		repeatEnd
 		repeatSection2Start
-		ymVol 05h
-		noteL 35,6
-		ymVol 03h
-		release 01h
-		note 35
-		ymVol 06h
-		ymSustain
-		noteL 43,3
-		note 42
-		note 41
-		release 01h
-		note 40
-		ymVol 0Ah
-		ymSustain
+		  ymVol 05h
+		        noteL B3,6
+		  ymVol 03h
+		  release 01h
+		        note  B3
+		  ymVol 06h
+		  ymSustain
+		        noteL G4,3
+		        note  Fs4
+		        note  F4
+		  release 01h
+		        note  E4
+		  ymVol 0Ah
+		  ymSustain
 		countedLoopStart 15
-		noteL 38,3
-		ymSlide 020h
-		note 37
+		        noteL D4,3
+		  ymSlide 020h
+		        note  Cs4
 		countedLoopEnd
 		countedLoopStart 15
-		noteL 39,3
-		note 41
+		        noteL Ds4,3
+		        note  F4
 		countedLoopEnd
-		ymStopSlide
+		  ymStopSlide
 		repeatStart
-		ymSustain
-		noteL 39,3
-		note 38
-		note 37
-		note 36
-		note 35
-		note 34
-		note 33
-		note 32
-		noteL 31,6
+		  ymSustain
+		        noteL Ds4,3
+		        note  D4
+		        note  Cs4
+		        note  C4
+		        note  B3
+		        note  As3
+		        note  A3
+		        note  Gs3
+		        noteL G3,6
 		repeatSection1Start
-		ymVol 08h
-		noteL 31,6
-		ymVol 05h
-		release 01h
-		note 31
-		ymVol 08h
+		  ymVol 08h
+		        noteL G3,6
+		  ymVol 05h
+		  release 01h
+		        note  G3
+		  ymVol 08h
 		repeatEnd
 		repeatSection2Start
-		ymVol 05h
-		noteL 31,6
-		release 01h
-		ymVol 03h
-		note 31
-		ymVol 06h
+		  ymVol 05h
+		        noteL G3,6
+		  release 01h
+		  ymVol 03h
+		        note  G3
+		  ymVol 06h
 		repeatEnd
 		repeatSection3Start
-		ymVol 04h
-		noteL 31,6
-		release 01h
-		ymVol 02h
-		note 31
-		ymVol 05h
+		  ymVol 04h
+		        noteL G3,6
+		  release 01h
+		  ymVol 02h
+		        note  G3
+		  ymVol 05h
 		repeatStart
-		ymSustain
-		noteL 39,3
-		note 38
-		note 37
-		note 36
-		note 35
-		note 34
-		note 33
+		  ymSustain
+		        noteL Ds4,3
+		        note  D4
+		        note  Cs4
+		        note  C4
+		        note  B3
+		        note  As3
+		        note  A3
 		repeatSection1Start
-		noteL 32,3
-		noteL 31,6
-		ymVol 03h
-		note 31
-		ymVol 01h
-		release 01h
-		note 31
-		ymVol 04h
+		        noteL Gs3,3
+		        noteL G3,6
+		  ymVol 03h
+		        note  G3
+		  ymVol 01h
+		  release 01h
+		        note  G3
+		  ymVol 04h
 		repeatEnd
 		repeatSection2Start
-		release 01h
-		noteL 32,3
-		length 54
-		ymStereo 080h
-		shifting 020h
-		ymInst 7
-		ymVol 09h
-		noteL 50,6
-		noteL 51,84
-		ymStereo 0C0h
-		shifting 00h
-		ymInst 9
-		ymVol 0Bh
-		noteL 33,4
-		note 37
-		note 43
-		note 46
-		note 51
-		note 54
-		noteL 60,16
-		noteL 55,4
-		note 52
-		note 49
-		note 45
-		note 41
-		note 39
-		ymVol 09h
-		note 39
-		ymVol 07h
-		note 39
-		ymVol 0Bh
-		noteL 46,16
-		noteL 48,4
-		note 46
-		note 48
-		note 46
-		note 48
-		note 51
-		note 50
-		note 45
-		noteL 46,6
-		note 48
-		noteL 47,12
-		ymVol 09h
-		noteL 47,6
-		ymStereo 080h
-		shifting 020h
-		ymInst 44
-		ymVol 0Bh
-		noteL 50,4
-		note 51
-		noteL 49,20
-		noteL 56,4
-		note 59
-		noteL 55,12
-		release 03h
-		shifting 00h
-		ymStereo 0C0h
-		ymInst 13
-		ymVol 0Ah
-		note 40
-		noteL 40,6
-		noteL 40,12
-		noteL 40,6
-		note 40
-		silence
-		release 01h
-		ymStereo 080h
-		shifting 020h
-		ymInst 9
-		ymVol 0Ah
-		noteL 37,4
-		note 41
-		note 46
-		note 53
-		note 50
-		ymVol 08h
-		note 50
-		ymVol 0Ah
-		noteL 57,18
-		noteL 52,6
-		release 03h
-		shifting 00h
-		ymStereo 0C0h
-		ymInst 13
-		ymVol 0Ah
-		noteL 43,12
-		noteL 43,6
-		noteL 43,12
-		noteL 43,6
-		note 43
-		release 01h
-		ymInst 26
-		ymVol 0Bh
-		noteL 43,24
-		note 44
-		note 47
-		note 48
+		  release 01h
+		        noteL Gs3,3
+		  length 54
+		  ymStereo 080h
+		  shifting 020h
+		  ymInst 7
+		  ymVol 09h
+		        noteL D5,6
+		        noteL Ds5,84
+		  ymStereo 0C0h
+		  shifting 00h
+		  ymInst 9
+		  ymVol 0Bh
+		        noteL A3,4
+		        note  Cs4
+		        note  G4
+		        note  As4
+		        note  Ds5
+		        note  Fs5
+		        noteL C6,16
+		        noteL G5,4
+		        note  E5
+		        note  Cs5
+		        note  A4
+		        note  F4
+		        note  Ds4
+		  ymVol 09h
+		        note  Ds4
+		  ymVol 07h
+		        note  Ds4
+		  ymVol 0Bh
+		        noteL As4,16
+		        noteL C5,4
+		        note  As4
+		        note  C5
+		        note  As4
+		        note  C5
+		        note  Ds5
+		        note  D5
+		        note  A4
+		        noteL As4,6
+		        note  C5
+		        noteL B4,12
+		  ymVol 09h
+		        noteL B4,6
+		  ymStereo 080h
+		  shifting 020h
+		  ymInst 44
+		  ymVol 0Bh
+		        noteL D5,4
+		        note  Ds5
+		        noteL Cs5,20
+		        noteL Gs5,4
+		        note  B5
+		        noteL G5,12
+		  release 03h
+		  shifting 00h
+		  ymStereo 0C0h
+		  ymInst 13
+		  ymVol 0Ah
+		        note  E4
+		        noteL E4,6
+		        noteL E4,12
+		        noteL E4,6
+		        note  E4
+		        silence
+		  release 01h
+		  ymStereo 080h
+		  shifting 020h
+		  ymInst 9
+		  ymVol 0Ah
+		        noteL Cs4,4
+		        note  F4
+		        note  As4
+		        note  F5
+		        note  D5
+		  ymVol 08h
+		        note  D5
+		  ymVol 0Ah
+		        noteL A5,18
+		        noteL E5,6
+		  release 03h
+		  shifting 00h
+		  ymStereo 0C0h
+		  ymInst 13
+		  ymVol 0Ah
+		        noteL G4,12
+		        noteL G4,6
+		        noteL G4,12
+		        noteL G4,6
+		        note  G4
+		  release 01h
+		  ymInst 26
+		  ymVol 0Bh
+		        noteL G4,24
+		        note  Gs4
+		        note  B4
+		        note  C5
 		mainLoopEnd
 Music_4_Channel_4:
-		length 6
-		shifting 020h
-		ymStereo 080h
-		ymInst 26
-		ymVol 0Bh
-		release 01h
-		vibrato 02Ch
-		note 55
-		note 47
-		note 50
-		note 55
-		note 56
-		note 48
-		note 54
-		note 56
+		  length 6
+		  shifting 020h
+		  ymStereo 080h
+		  ymInst 26
+		  ymVol 0Bh
+		  release 01h
+		  vibrato 02Ch
+		        note  G5
+		        note  B4
+		        note  D5
+		        note  G5
+		        note  Gs5
+		        note  C5
+		        note  Fs5
+		        note  Gs5
 		mainLoopStart
-		release 00h
-		noteL 61,4
-		note 63
-		note 61
-		note 63
-		note 61
-		note 63
-		release 01h
-		noteL 61,24
-		noteL 51,6
-		note 43
-		note 44
-		note 52
-		note 48
-		note 49
-		note 56
-		ymVol 09h
-		note 56
+		  release 00h
+		        noteL Cs6,4
+		        note  Ds6
+		        note  Cs6
+		        note  Ds6
+		        note  Cs6
+		        note  Ds6
+		  release 01h
+		        noteL Cs6,24
+		        noteL Ds5,6
+		        note  G4
+		        note  Gs4
+		        note  E5
+		        note  C5
+		        note  Cs5
+		        note  Gs5
+		  ymVol 09h
+		        note  Gs5
 		countedLoopStart 1
-		ymStereo 040h
-		ymInst 13
-		ymVol 0Bh
-		noteL 48,30
-		ymVol 09h
-		noteL 48,6
-		ymVol 0Bh
-		note 48
-		note 48
-		noteL 48,18
-		note 44
-		noteL 52,108
-		ymVol 09h
-		noteL 52,6
-		ymVol 07h
-		note 52
-		length 12
-		ymVol 0Bh
-		noteL 49,24
-		noteL 50,18
-		note 55
-		noteL 51,96
-		ymVol 09h
-		noteL 51,6
-		ymVol 07h
-		note 51
-		ymVol 0Bh
-		noteL 50,30
-		ymVol 09h
-		noteL 50,6
-		ymVol 0Bh
-		note 50
-		note 50
-		noteL 50,18
-		noteL 46,6
-		ymVol 09h
-		note 46
-		ymVol 07h
-		note 46
-		ymVol 0Bh
-		noteL 54,48
-		noteL 53,6
-		note 52
-		noteL 51,12
-		noteL 47,6
-		ymVol 09h
-		note 47
-		ymVol 07h
-		note 47
-		silence
-		ymVol 0Bh
-		noteL 49,36
-		ymStereo 080h
-		ymInst 27
-		ymVol 09h
-		noteL 32,24
-		noteL 41,48
-		release 06h
-		noteL 42,16
-		note 42
-		note 42
-		release 01h
-		noteL 41,48
+		  ymStereo 040h
+		  ymInst 13
+		  ymVol 0Bh
+		        noteL C5,30
+		  ymVol 09h
+		        noteL C5,6
+		  ymVol 0Bh
+		        note  C5
+		        note  C5
+		        noteL C5,18
+		        note  Gs4
+		        noteL E5,108
+		  ymVol 09h
+		        noteL E5,6
+		  ymVol 07h
+		        note  E5
+		  length 12
+		  ymVol 0Bh
+		        noteL Cs5,24
+		        noteL D5,18
+		        note  G5
+		        noteL Ds5,96
+		  ymVol 09h
+		        noteL Ds5,6
+		  ymVol 07h
+		        note  Ds5
+		  ymVol 0Bh
+		        noteL D5,30
+		  ymVol 09h
+		        noteL D5,6
+		  ymVol 0Bh
+		        note  D5
+		        note  D5
+		        noteL D5,18
+		        noteL As4,6
+		  ymVol 09h
+		        note  As4
+		  ymVol 07h
+		        note  As4
+		  ymVol 0Bh
+		        noteL Fs5,48
+		        noteL F5,6
+		        note  E5
+		        noteL Ds5,12
+		        noteL B4,6
+		  ymVol 09h
+		        note  B4
+		  ymVol 07h
+		        note  B4
+		        silence
+		  ymVol 0Bh
+		        noteL Cs5,36
+		  ymStereo 080h
+		  ymInst 27
+		  ymVol 09h
+		        noteL Gs3,24
+		        noteL F4,48
+		  release 06h
+		        noteL Fs4,16
+		        note  Fs4
+		        note  Fs4
+		  release 01h
+		        noteL F4,48
 		countedLoopEnd
-		shifting 010h
-		ymInst 26
-		ymVol 0Bh
-		noteL 68,6
-		note 67
-		note 66
-		note 62
-		note 61
-		note 58
-		note 57
-		note 54
-		note 51
-		note 50
-		note 49
-		note 45
-		note 44
-		note 41
-		note 40
-		note 37
-		release 00h
+		  shifting 010h
+		  ymInst 26
+		  ymVol 0Bh
+		        noteL Gs6,6
+		        note  G6
+		        note  Fs6
+		        note  D6
+		        note  Cs6
+		        note  As5
+		        note  A5
+		        note  Fs5
+		        note  Ds5
+		        note  D5
+		        note  Cs5
+		        note  A4
+		        note  Gs4
+		        note  F4
+		        note  E4
+		        note  Cs4
+		  release 00h
 		countedLoopStart 11
-		noteL 34,4
-		note 35
+		        noteL As3,4
+		        note  B3
 		countedLoopEnd
-		ymSustain
-		release 01h
-		noteL 34,16
-		ymVol 07h
-		note 34
-		release 01h
-		ymVol 05h
-		note 34
-		length 204
-		ymStereo 040h
-		shifting 020h
-		ymInst 1
-		ymVol 0Bh
-		noteL 48,192
+		  ymSustain
+		  release 01h
+		        noteL As3,16
+		  ymVol 07h
+		        note  As3
+		  release 01h
+		  ymVol 05h
+		        note  As3
+		  length 204
+		  ymStereo 040h
+		  shifting 020h
+		  ymInst 1
+		  ymVol 0Bh
+		        noteL C5,192
 		repeatStart
-		ymSustain
-		noteL 48,3
-		note 47
-		note 46
-		note 45
-		note 44
-		note 43
-		note 42
-		note 41
-		noteL 40,6
+		  ymSustain
+		        noteL C5,3
+		        note  B4
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        noteL E4,6
 		repeatSection1Start
-		ymVol 09h
-		noteL 40,6
-		ymVol 06h
-		release 01h
-		note 40
-		ymVol 09h
+		  ymVol 09h
+		        noteL E4,6
+		  ymVol 06h
+		  release 01h
+		        note  E4
+		  ymVol 09h
 		repeatEnd
 		repeatSection2Start
-		ymVol 06h
-		noteL 40,6
-		release 01h
-		ymVol 04h
-		note 40
-		ymVol 07h
+		  ymVol 06h
+		        noteL E4,6
+		  release 01h
+		  ymVol 04h
+		        note  E4
+		  ymVol 07h
 		repeatEnd
 		repeatSection3Start
-		ymVol 05h
-		noteL 40,6
-		release 01h
-		ymVol 03h
-		note 40
-		ymVol 06h
+		  ymVol 05h
+		        noteL E4,6
+		  release 01h
+		  ymVol 03h
+		        note  E4
+		  ymVol 06h
 		repeatStart
-		ymSustain
-		noteL 48,3
-		note 47
-		note 46
-		note 45
-		note 44
-		note 43
-		note 42
-		note 41
-		noteL 40,6
+		  ymSustain
+		        noteL C5,3
+		        note  B4
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        note  F4
+		        noteL E4,6
 		repeatSection1Start
-		ymVol 04h
-		noteL 40,6
-		ymVol 02h
-		release 01h
-		note 40
-		ymVol 05h
+		  ymVol 04h
+		        noteL E4,6
+		  ymVol 02h
+		  release 01h
+		        note  E4
+		  ymVol 05h
 		repeatEnd
 		repeatSection2Start
-		ymVol 03h
-		noteL 40,6
-		release 01h
-		ymVol 01h
-		note 40
-		silence
-		ymVol 0Bh
-		noteL 51,168
+		  ymVol 03h
+		        noteL E4,6
+		  release 01h
+		  ymVol 01h
+		        note  E4
+		        silence
+		  ymVol 0Bh
+		        noteL Ds5,168
 		repeatStart
-		ymSustain
-		noteL 51,3
-		note 50
-		note 49
-		note 48
-		note 47
-		note 46
-		note 45
-		note 44
-		noteL 43,6
+		  ymSustain
+		        noteL Ds5,3
+		        note  D5
+		        note  Cs5
+		        note  C5
+		        note  B4
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        noteL G4,6
 		repeatSection1Start
-		ymVol 09h
-		noteL 43,6
-		ymVol 06h
-		release 01h
-		note 43
-		ymVol 09h
+		  ymVol 09h
+		        noteL G4,6
+		  ymVol 06h
+		  release 01h
+		        note  G4
+		  ymVol 09h
 		repeatEnd
 		repeatSection2Start
-		ymVol 06h
-		noteL 43,6
-		ymVol 04h
-		release 01h
-		note 43
-		ymVol 07h
+		  ymVol 06h
+		        noteL G4,6
+		  ymVol 04h
+		  release 01h
+		        note  G4
+		  ymVol 07h
 		repeatEnd
 		repeatSection3Start
-		ymVol 05h
-		noteL 43,6
-		ymVol 03h
-		release 01h
-		note 43
-		ymVol 06h
+		  ymVol 05h
+		        noteL G4,6
+		  ymVol 03h
+		  release 01h
+		        note  G4
+		  ymVol 06h
 		repeatStart
-		ymSustain
-		noteL 51,3
-		note 50
-		note 49
-		note 48
-		note 47
-		note 46
-		note 45
+		  ymSustain
+		        noteL Ds5,3
+		        note  D5
+		        note  Cs5
+		        note  C5
+		        note  B4
+		        note  As4
+		        note  A4
 		repeatSection1Start
-		noteL 44,3
-		ymVol 04h
-		noteL 43,6
-		ymVol 02h
-		note 43
-		release 01h
-		note 43
-		ymVol 05h
+		        noteL Gs4,3
+		  ymVol 04h
+		        noteL G4,6
+		  ymVol 02h
+		        note  G4
+		  release 01h
+		        note  G4
+		  ymVol 05h
 		repeatEnd
 		repeatSection2Start
-		release 01h
-		noteL 44,3
-		ymVol 0Bh
-		noteL 50,96
+		  release 01h
+		        noteL Gs4,3
+		  ymVol 0Bh
+		        noteL D5,96
 		repeatStart
-		ymSustain
-		noteL 50,3
-		note 49
-		note 48
-		note 47
-		note 46
-		note 45
-		note 44
-		note 43
-		noteL 42,6
+		  ymSustain
+		        noteL D5,3
+		        note  Cs5
+		        note  C5
+		        note  B4
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        note  G4
+		        noteL Fs4,6
 		repeatSection1Start
-		ymVol 09h
-		noteL 42,6
-		ymVol 06h
-		release 01h
-		note 42
-		ymVol 09h
+		  ymVol 09h
+		        noteL Fs4,6
+		  ymVol 06h
+		  release 01h
+		        note  Fs4
+		  ymVol 09h
 		repeatEnd
 		repeatSection2Start
-		ymVol 06h
-		noteL 42,6
-		release 01h
-		ymVol 04h
-		note 42
-		ymVol 07h
-		ymSustain
-		noteL 50,3
-		note 49
-		note 48
-		release 01h
-		note 47
-		ymVol 0Bh
-		noteL 54,96
+		  ymVol 06h
+		        noteL Fs4,6
+		  release 01h
+		  ymVol 04h
+		        note  Fs4
+		  ymVol 07h
+		  ymSustain
+		        noteL D5,3
+		        note  Cs5
+		        note  C5
+		  release 01h
+		        note  B4
+		  ymVol 0Bh
+		        noteL Fs5,96
 		repeatStart
-		ymSustain
-		noteL 54,3
-		note 53
-		note 52
-		note 51
-		note 50
-		note 49
-		note 48
-		note 47
-		noteL 46,6
+		  ymSustain
+		        noteL Fs5,3
+		        note  F5
+		        note  E5
+		        note  Ds5
+		        note  D5
+		        note  Cs5
+		        note  C5
+		        note  B4
+		        noteL As4,6
 		repeatSection1Start
-		ymVol 09h
-		noteL 46,6
-		ymVol 06h
-		release 01h
-		note 46
-		ymVol 09h
+		  ymVol 09h
+		        noteL As4,6
+		  ymVol 06h
+		  release 01h
+		        note  As4
+		  ymVol 09h
 		repeatEnd
 		repeatSection2Start
-		ymVol 06h
-		noteL 46,6
-		ymVol 04h
-		release 01h
-		note 46
-		ymVol 07h
-		ymSustain
-		noteL 54,3
-		note 53
-		note 52
-		release 01h
-		note 51
-		ymVol 0Bh
-		noteL 49,56
-		ymVol 08h
-		noteL 49,8
-		ymVol 0Bh
-		note 49
-		ymVol 08h
-		note 49
-		ymVol 0Bh
-		note 49
-		ymVol 08h
-		note 49
-		ymVol 0Bh
-		noteL 49,96
+		  ymVol 06h
+		        noteL As4,6
+		  ymVol 04h
+		  release 01h
+		        note  As4
+		  ymVol 07h
+		  ymSustain
+		        noteL Fs5,3
+		        note  F5
+		        note  E5
+		  release 01h
+		        note  Ds5
+		  ymVol 0Bh
+		        noteL Cs5,56
+		  ymVol 08h
+		        noteL Cs5,8
+		  ymVol 0Bh
+		        note  Cs5
+		  ymVol 08h
+		        note  Cs5
+		  ymVol 0Bh
+		        note  Cs5
+		  ymVol 08h
+		        note  Cs5
+		  ymVol 0Bh
+		        noteL Cs5,96
 		repeatStart
-		ymSustain
-		noteL 49,3
-		note 48
-		note 47
-		note 46
-		note 45
-		note 44
-		note 43
-		note 42
-		noteL 41,6
+		  ymSustain
+		        noteL Cs5,3
+		        note  C5
+		        note  B4
+		        note  As4
+		        note  A4
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        noteL F4,6
 		repeatSection1Start
-		ymVol 09h
-		noteL 41,6
-		ymVol 06h
-		release 01h
-		note 41
-		ymVol 09h
+		  ymVol 09h
+		        noteL F4,6
+		  ymVol 06h
+		  release 01h
+		        note  F4
+		  ymVol 09h
 		repeatEnd
 		repeatSection2Start
-		ymVol 06h
-		noteL 41,6
-		release 01h
-		ymVol 04h
-		note 41
-		ymVol 07h
+		  ymVol 06h
+		        noteL F4,6
+		  release 01h
+		  ymVol 04h
+		        note  F4
+		  ymVol 07h
 		repeatEnd
 		repeatSection3Start
-		ymVol 05h
-		noteL 41,6
-		release 01h
-		ymVol 03h
-		note 41
-		ymVol 06h
+		  ymVol 05h
+		        noteL F4,6
+		  release 01h
+		  ymVol 03h
+		        note  F4
+		  ymVol 06h
 		repeatStart
-		ymSustain
-		noteL 49,3
-		note 48
-		note 47
+		  ymSustain
+		        noteL Cs5,3
+		        note  C5
+		        note  B4
 		repeatSection1Start
-		noteL 46,3
-		note 45
-		note 44
-		note 43
-		note 42
-		noteL 41,6
-		ymVol 04h
-		note 41
-		ymVol 02h
-		release 01h
-		note 41
-		ymVol 05h
+		        noteL As4,3
+		        note  A4
+		        note  Gs4
+		        note  G4
+		        note  Fs4
+		        noteL F4,6
+		  ymVol 04h
+		        note  F4
+		  ymVol 02h
+		  release 01h
+		        note  F4
+		  ymVol 05h
 		repeatEnd
 		repeatSection2Start
-		release 01h
-		noteL 46,3
-		ymInst 44
-		ymVol 0Bh
-		noteL 54,4
-		note 57
-		noteL 56,76
-		noteL 62,16
-		noteL 58,4
-		note 56
-		note 53
-		note 47
-		note 50
-		note 54
-		note 55
-		noteL 52,88
-		noteL 55,6
-		noteL 56,66
+		  release 01h
+		        noteL As4,3
+		  ymInst 44
+		  ymVol 0Bh
+		        noteL Fs5,4
+		        note  A5
+		        noteL Gs5,76
+		        noteL D6,16
+		        noteL As5,4
+		        note  Gs5
+		        note  F5
+		        note  B4
+		        note  D5
+		        note  Fs5
+		        note  G5
+		        noteL E5,88
+		        noteL G5,6
+		        noteL Gs5,66
 		repeatStart
-		ymStereo 080h
-		ymInst 26
-		ymVol 0Bh
-		noteL 43,6
-		note 35
-		note 38
-		note 43
-		note 44
-		note 36
-		note 42
-		note 44
-		ymVol 09h
-		note 44
-		release 03h
-		ymInst 13
-		ymVol 0Ah
+		  ymStereo 080h
+		  ymInst 26
+		  ymVol 0Bh
+		        noteL G4,6
+		        note  B3
+		        note  D4
+		        note  G4
+		        note  Gs4
+		        note  C4
+		        note  Fs4
+		        note  Gs4
+		  ymVol 09h
+		        note  Gs4
+		  release 03h
+		  ymInst 13
+		  ymVol 0Ah
 		repeatSection1Start
-		noteL 51,12
-		noteL 51,6
-		noteL 51,12
-		noteL 51,6
-		note 51
-		release 01h
+		        noteL Ds5,12
+		        noteL Ds5,6
+		        noteL Ds5,12
+		        noteL Ds5,6
+		        note  Ds5
+		  release 01h
 		repeatEnd
 		repeatSection2Start
-		noteL 54,12
-		noteL 54,6
-		noteL 54,12
-		noteL 54,6
-		note 54
-		release 01h
-		ymInst 26
-		ymVol 0Bh
-		note 55
-		note 47
-		note 50
-		note 55
-		note 56
-		note 48
-		note 54
-		note 56
-		note 59
-		note 50
-		note 55
-		note 59
-		note 60
-		note 54
-		note 56
-		note 60
+		        noteL Fs5,12
+		        noteL Fs5,6
+		        noteL Fs5,12
+		        noteL Fs5,6
+		        note  Fs5
+		  release 01h
+		  ymInst 26
+		  ymVol 0Bh
+		        note  G5
+		        note  B4
+		        note  D5
+		        note  G5
+		        note  Gs5
+		        note  C5
+		        note  Fs5
+		        note  Gs5
+		        note  B5
+		        note  D5
+		        note  G5
+		        note  B5
+		        note  C6
+		        note  Fs5
+		        note  Gs5
+		        note  C6
 		mainLoopEnd
 Music_4_Channel_5:
-		ymStereo 0C0h
+		  ymStereo 0C0h
 		mainLoopStart
-		sampleL 4,4
-		sample 4
-		sample 4
-		sample 4
-		sample 3
-		sample 3
-		sample 3
-		sample 3
-		sample 2
-		sample 2
-		sample 2
-		sample 2
-		sampleL 5,36
-		sampleL 2,4
-		sample 3
-		sample 3
-		sampleL 2,18
-		sample 2
-		sampleL 2,12
+		        sampleL 4,4
+		        sample  4
+		        sample  4
+		        sample  4
+		        sample  3
+		        sample  3
+		        sample  3
+		        sample  3
+		        sample  2
+		        sample  2
+		        sample  2
+		        sample  2
+		        sampleL 5,36
+		        sampleL 2,4
+		        sample  3
+		        sample  3
+		        sampleL 2,18
+		        sample  2
+		        sampleL 2,12
 		repeatStart
 		countedLoopStart 1
-		sampleL 0,72
-		sampleL 4,4
-		sample 4
-		sample 4
-		sample 3
-		sample 3
-		sample 3
-		sampleL 2,12
-		sampleL 3,6
-		sample 3
-		sampleL 2,12
-		sampleL 3,6
-		sample 3
-		sample 2
-		sample 4
-		sample 3
-		sample 2
-		sample 4
-		sample 2
-		sample 4
-		sample 2
+		        sampleL 0,72
+		        sampleL 4,4
+		        sample  4
+		        sample  4
+		        sample  3
+		        sample  3
+		        sample  3
+		        sampleL 2,12
+		        sampleL 3,6
+		        sample  3
+		        sampleL 2,12
+		        sampleL 3,6
+		        sample  3
+		        sample  2
+		        sample  4
+		        sample  3
+		        sample  2
+		        sample  4
+		        sample  2
+		        sample  4
+		        sample  2
 		countedLoopEnd
 		countedLoopStart 1
-		sampleL 5,12
-		sampleL 2,24
-		sampleL 3,4
-		sample 3
-		sample 3
-		sampleL 5,12
-		sampleL 3,4
-		sample 4
-		sample 4
-		sampleL 3,6
-		sampleL 2,12
-		sampleL 3,6
+		        sampleL 5,12
+		        sampleL 2,24
+		        sampleL 3,4
+		        sample  3
+		        sample  3
+		        sampleL 5,12
+		        sampleL 3,4
+		        sample  4
+		        sample  4
+		        sampleL 3,6
+		        sampleL 2,12
+		        sampleL 3,6
 		countedLoopEnd
 		countedLoopStart 1
-		sampleL 3,12
-		sampleL 3,6
-		sample 3
-		sampleL 5,12
-		sampleL 3,6
-		sample 3
-		sample 2
-		sample 4
-		sample 3
-		sample 3
-		sample 2
-		sampleL 2,12
-		sampleL 3,6
+		        sampleL 3,12
+		        sampleL 3,6
+		        sample  3
+		        sampleL 5,12
+		        sampleL 3,6
+		        sample  3
+		        sample  2
+		        sample  4
+		        sample  3
+		        sample  3
+		        sample  2
+		        sampleL 2,12
+		        sampleL 3,6
 		countedLoopEnd
 		repeatSection1Start
 		repeatEnd
 		repeatSection2Start
-		sampleL 0,216
-		silence
-		sampleL 5,4
-		sample 2
-		sample 2
-		sample 3
-		sample 3
+		        sampleL 0,216
+		        silence
+		        sampleL 5,4
+		        sample  2
+		        sample  2
+		        sample  3
+		        sample  3
 		countedLoopStart 31
-		sampleL 4,4
+		        sampleL 4,4
 		countedLoopEnd
 		countedLoopStart 6
-		sampleL 4,4
+		        sampleL 4,4
 		countedLoopEnd
-		sampleL 3,4
-		sample 3
-		sample 2
-		sample 2
-		sampleL 5,216
-		sampleL 5,4
-		sample 2
-		sample 2
-		sample 3
-		sample 3
+		        sampleL 3,4
+		        sample  3
+		        sample  2
+		        sample  2
+		        sampleL 5,216
+		        sampleL 5,4
+		        sample  2
+		        sample  2
+		        sample  3
+		        sample  3
 		countedLoopStart 31
-		sampleL 4,4
+		        sampleL 4,4
 		countedLoopEnd
-		sampleL 4,4
-		sample 3
-		sample 3
-		sample 2
-		sample 2
-		sampleL 5,192
+		        sampleL 4,4
+		        sample  3
+		        sample  3
+		        sample  2
+		        sample  2
+		        sampleL 5,192
 		repeatStart
-		sampleL 5,4
-		sample 2
-		sample 2
-		sample 3
-		sample 3
+		        sampleL 5,4
+		        sample  2
+		        sample  2
+		        sample  3
+		        sample  3
 		countedLoopStart 14
-		sampleL 4,4
+		        sampleL 4,4
 		countedLoopEnd
-		sampleL 3,4
-		sample 3
-		sample 2
-		sample 2
-		sampleL 5,96
+		        sampleL 3,4
+		        sample  3
+		        sample  2
+		        sample  2
+		        sampleL 5,96
 		repeatSection1Start
 		repeatEnd
 		repeatSection2Start
-		sampleL 5,4
-		sample 2
-		sample 2
-		sample 3
-		sample 3
+		        sampleL 5,4
+		        sample  2
+		        sample  2
+		        sample  3
+		        sample  3
 		countedLoopStart 6
-		sampleL 4,4
+		        sampleL 4,4
 		countedLoopEnd
-		sampleL 3,16
-		sample 2
-		sample 2
-		sampleL 5,4
-		sample 2
-		sample 2
-		sample 3
-		sample 3
+		        sampleL 3,16
+		        sample  2
+		        sample  2
+		        sampleL 5,4
+		        sample  2
+		        sample  2
+		        sample  3
+		        sample  3
 		countedLoopStart 14
-		sampleL 4,4
+		        sampleL 4,4
 		countedLoopEnd
-		sampleL 3,4
-		sample 3
-		sample 2
-		sample 2
-		sampleL 5,108
-		sampleL 4,6
-		sample 4
+		        sampleL 3,4
+		        sample  3
+		        sample  2
+		        sample  2
+		        sampleL 5,108
+		        sampleL 4,6
+		        sample  4
 		countedLoopStart 13
-		sampleL 3,12
-		sampleL 4,6
-		sample 4
+		        sampleL 3,12
+		        sampleL 4,6
+		        sample  4
 		countedLoopEnd
-		sampleL 3,6
-		sample 4
-		sample 3
-		sample 3
+		        sampleL 3,6
+		        sample  4
+		        sample  3
+		        sample  3
 		countedLoopStart 9
-		sampleL 3,12
-		sampleL 4,6
-		sample 4
+		        sampleL 3,12
+		        sampleL 4,6
+		        sample  4
 		countedLoopEnd
 		mainLoopEnd
 Music_4_Channel_6:
-		vibrato 04Ch
+		  vibrato 04Ch
 		mainLoopStart
-		release 00h
-		psgInst 12
-		noteL 35,6
-		note 38
-		note 35
-		note 38
-		note 36
-		note 39
-		note 36
-		note 39
+		  release 00h
+		  psgInst 12
+		        psgNoteL Gs4,6
+		        psgNote  B4
+		        psgNote  Gs4
+		        psgNote  B4
+		        psgNote  A4
+		        psgNote  C5
+		        psgNote  A4
+		        psgNote  C5
 		countedLoopStart 3
-		noteL 43,3
-		note 44
+		        psgNoteL E5,3
+		        psgNote  F5
 		countedLoopEnd
-		noteL 43,6
-		note 40
-		note 37
-		note 34
+		        psgNoteL E5,6
+		        psgNote  Cs5
+		        psgNote  As4
+		        psgNote  G4
 		countedLoopStart 7
-		noteL 31,3
-		note 32
+		        psgNoteL E4,3
+		        psgNote  F4
 		countedLoopEnd
-		release 01h
+		  release 01h
 		repeatStart
-		psgInst 26
+		  psgInst 26
 		countedLoopStart 8
-		noteL 28,6
-		note 32
+		        psgNoteL Cs4,6
+		        psgNote  F4
 		countedLoopEnd
-		psgInst 12
-		noteL 35,6
-		note 36
-		note 40
-		note 44
-		note 47
-		note 48
-		note 55
-		note 56
-		note 55
-		note 56
-		note 52
-		note 48
-		note 44
-		note 40
-		psgInst 26
+		  psgInst 12
+		        psgNoteL Gs4,6
+		        psgNote  A4
+		        psgNote  Cs5
+		        psgNote  F5
+		        psgNote  Gs5
+		        psgNote  A5
+		        psgNote  E6
+		        psgNote  F6
+		        psgNote  E6
+		        psgNote  F6
+		        psgNote  Cs6
+		        psgNote  A5
+		        psgNote  F5
+		        psgNote  Cs5
+		  psgInst 26
 		countedLoopStart 8
-		noteL 29,6
-		note 33
+		        psgNoteL D4,6
+		        psgNote  Fs4
 		countedLoopEnd
-		psgInst 12
-		noteL 35,6
-		note 39
-		note 41
-		note 45
-		note 47
-		note 51
-		note 53
-		note 57
-		note 53
-		note 57
-		note 54
-		note 58
-		note 54
-		note 58
-		psgInst 26
+		  psgInst 12
+		        psgNoteL Gs4,6
+		        psgNote  C5
+		        psgNote  D5
+		        psgNote  Fs5
+		        psgNote  Gs5
+		        psgNote  C6
+		        psgNote  D6
+		        psgNote  Fs6
+		        psgNote  D6
+		        psgNote  Fs6
+		        psgNote  Ds6
+		        psgNote  G6
+		        psgNote  Ds6
+		        psgNote  G6
+		  psgInst 26
 		countedLoopStart 4
-		noteL 31,6
-		note 34
+		        psgNoteL E4,6
+		        psgNote  G4
 		countedLoopEnd
-		noteL 38,6
-		note 42
-		note 38
-		note 34
-		note 31
-		note 30
+		        psgNoteL B4,6
+		        psgNote  Ds5
+		        psgNote  B4
+		        psgNote  G4
+		        psgNote  E4
+		        psgNote  Ds4
 		countedLoopStart 4
-		noteL 31,6
-		note 35
+		        psgNoteL E4,6
+		        psgNote  Gs4
 		countedLoopEnd
-		noteL 37,6
-		note 42
-		note 43
-		note 47
-		note 49
-		note 54
-		psgInst 12
+		        psgNoteL As4,6
+		        psgNote  Ds5
+		        psgNote  E5
+		        psgNote  Gs5
+		        psgNote  As5
+		        psgNote  Ds6
+		  psgInst 12
 		countedLoopStart 1
-		noteL 56,6
-		note 54
-		note 56
-		note 50
-		note 56
-		note 54
-		note 56
-		note 50
-		note 57
-		note 53
-		note 57
-		note 51
-		note 57
-		note 53
-		note 57
-		note 51
+		        psgNoteL F6,6
+		        psgNote  Ds6
+		        psgNote  F6
+		        psgNote  B5
+		        psgNote  F6
+		        psgNote  Ds6
+		        psgNote  F6
+		        psgNote  B5
+		        psgNote  Fs6
+		        psgNote  D6
+		        psgNote  Fs6
+		        psgNote  C6
+		        psgNote  Fs6
+		        psgNote  D6
+		        psgNote  Fs6
+		        psgNote  C6
 		countedLoopEnd
 		repeatSection1Start
 		repeatEnd
 		repeatSection2Start
-		psgInst 0
-		length 144
-		psgInst 42
-		noteL 32,6
-		note 33
-		note 37
-		note 40
-		note 41
-		note 44
-		note 47
-		note 52
+		  psgInst 0
+		  length 144
+		  psgInst 42
+		        psgNoteL F4,6
+		        psgNote  Fs4
+		        psgNote  As4
+		        psgNote  Cs5
+		        psgNote  D5
+		        psgNote  F5
+		        psgNote  Gs5
+		        psgNote  Cs6
 		countedLoopStart 16
-		noteL 55,6
-		note 51
-		note 47
-		note 54
-		note 50
-		note 46
-		note 53
-		note 49
-		note 45
-		note 50
-		note 46
-		note 42
-		note 58
-		note 53
-		note 47
+		        psgNoteL E6,6
+		        psgNote  C6
+		        psgNote  Gs5
+		        psgNote  Ds6
+		        psgNote  B5
+		        psgNote  G5
+		        psgNote  D6
+		        psgNote  As5
+		        psgNote  Fs5
+		        psgNote  B5
+		        psgNote  G5
+		        psgNote  Ds5
+		        psgNote  G6
+		        psgNote  D6
+		        psgNote  Gs5
 		countedLoopEnd
-		noteL 55,6
-		note 51
-		note 47
-		note 54
-		note 50
-		note 46
-		note 53
-		note 49
-		note 45
+		        psgNoteL E6,6
+		        psgNote  C6
+		        psgNote  Gs5
+		        psgNote  Ds6
+		        psgNote  B5
+		        psgNote  G5
+		        psgNote  D6
+		        psgNote  As5
+		        psgNote  Fs5
 		countedLoopStart 4
-		noteL 50,6
-		note 46
-		note 42
-		note 52
-		note 51
-		note 47
-		note 43
-		note 53
-		note 52
-		note 48
-		note 44
-		note 54
-		note 53
-		note 49
-		note 45
-		note 55
+		        psgNoteL B5,6
+		        psgNote  G5
+		        psgNote  Ds5
+		        psgNote  Cs6
+		        psgNote  C6
+		        psgNote  Gs5
+		        psgNote  E5
+		        psgNote  D6
+		        psgNote  Cs6
+		        psgNote  A5
+		        psgNote  F5
+		        psgNote  Ds6
+		        psgNote  D6
+		        psgNote  As5
+		        psgNote  Fs5
+		        psgNote  E6
 		countedLoopEnd
 		countedLoopStart 4
-		noteL 47,6
-		note 38
-		note 43
-		note 47
-		note 48
-		note 44
-		note 42
-		note 36
+		        psgNoteL Gs5,6
+		        psgNote  B4
+		        psgNote  E5
+		        psgNote  Gs5
+		        psgNote  A5
+		        psgNote  F5
+		        psgNote  Ds5
+		        psgNote  A4
 		countedLoopEnd
 		mainLoopEnd
 Music_4_Channel_7:
-		shifting 020h
-		vibrato 04Ch
+		  shifting 020h
+		  vibrato 04Ch
 		mainLoopStart
-		psgInst 0
-		length 6
-		release 00h
-		psgInst 10
-		note 35
-		note 38
-		note 35
-		note 38
-		note 36
-		note 39
-		note 36
-		note 39
+		  psgInst 0
+		  length 6
+		  release 00h
+		  psgInst 10
+		        psgNote  Gs4
+		        psgNote  B4
+		        psgNote  Gs4
+		        psgNote  B4
+		        psgNote  A4
+		        psgNote  C5
+		        psgNote  A4
+		        psgNote  C5
 		countedLoopStart 3
-		noteL 43,3
-		note 44
+		        psgNoteL E5,3
+		        psgNote  F5
 		countedLoopEnd
-		noteL 43,6
-		note 40
-		note 37
-		note 34
+		        psgNoteL E5,6
+		        psgNote  Cs5
+		        psgNote  As4
+		        psgNote  G4
 		countedLoopStart 7
-		noteL 31,3
-		note 32
+		        psgNoteL E4,3
+		        psgNote  F4
 		countedLoopEnd
-		release 01h
+		  release 01h
 		repeatStart
-		psgInst 24
+		  psgInst 24
 		countedLoopStart 8
-		noteL 28,6
-		note 32
+		        psgNoteL Cs4,6
+		        psgNote  F4
 		countedLoopEnd
-		psgInst 10
-		noteL 35,6
-		note 36
-		note 40
-		note 44
-		note 47
-		note 48
-		note 55
-		note 56
-		note 55
-		note 56
-		note 52
-		note 48
-		note 44
-		note 40
-		psgInst 24
+		  psgInst 10
+		        psgNoteL Gs4,6
+		        psgNote  A4
+		        psgNote  Cs5
+		        psgNote  F5
+		        psgNote  Gs5
+		        psgNote  A5
+		        psgNote  E6
+		        psgNote  F6
+		        psgNote  E6
+		        psgNote  F6
+		        psgNote  Cs6
+		        psgNote  A5
+		        psgNote  F5
+		        psgNote  Cs5
+		  psgInst 24
 		countedLoopStart 8
-		noteL 29,6
-		note 33
+		        psgNoteL D4,6
+		        psgNote  Fs4
 		countedLoopEnd
-		psgInst 10
-		noteL 35,6
-		note 39
-		note 41
-		note 45
-		note 47
-		note 51
-		note 53
-		note 57
-		note 53
-		note 57
-		note 54
-		note 58
-		note 54
-		note 58
-		psgInst 24
+		  psgInst 10
+		        psgNoteL Gs4,6
+		        psgNote  C5
+		        psgNote  D5
+		        psgNote  Fs5
+		        psgNote  Gs5
+		        psgNote  C6
+		        psgNote  D6
+		        psgNote  Fs6
+		        psgNote  D6
+		        psgNote  Fs6
+		        psgNote  Ds6
+		        psgNote  G6
+		        psgNote  Ds6
+		        psgNote  G6
+		  psgInst 24
 		countedLoopStart 4
-		noteL 31,6
-		note 34
+		        psgNoteL E4,6
+		        psgNote  G4
 		countedLoopEnd
-		noteL 38,6
-		note 42
-		note 38
-		note 34
-		note 31
-		note 30
+		        psgNoteL B4,6
+		        psgNote  Ds5
+		        psgNote  B4
+		        psgNote  G4
+		        psgNote  E4
+		        psgNote  Ds4
 		countedLoopStart 4
-		noteL 31,6
-		note 35
+		        psgNoteL E4,6
+		        psgNote  Gs4
 		countedLoopEnd
-		noteL 37,6
-		note 42
-		note 43
-		note 47
-		note 49
-		note 54
-		psgInst 10
+		        psgNoteL As4,6
+		        psgNote  Ds5
+		        psgNote  E5
+		        psgNote  Gs5
+		        psgNote  As5
+		        psgNote  Ds6
+		  psgInst 10
 		countedLoopStart 1
-		noteL 56,6
-		note 54
-		note 56
-		note 50
-		note 56
-		note 54
-		note 56
-		note 50
-		note 57
-		note 53
-		note 57
-		note 51
-		note 57
-		note 53
-		note 57
-		note 51
+		        psgNoteL F6,6
+		        psgNote  Ds6
+		        psgNote  F6
+		        psgNote  B5
+		        psgNote  F6
+		        psgNote  Ds6
+		        psgNote  F6
+		        psgNote  B5
+		        psgNote  Fs6
+		        psgNote  D6
+		        psgNote  Fs6
+		        psgNote  C6
+		        psgNote  Fs6
+		        psgNote  D6
+		        psgNote  Fs6
+		        psgNote  C6
 		countedLoopEnd
 		repeatSection1Start
 		repeatEnd
 		repeatSection2Start
-		psgInst 0
-		length 138
-		shifting 00h
-		psgInst 42
-		noteL 22,6
-		note 26
-		note 29
-		note 32
-		note 34
-		note 38
-		note 41
-		note 44
+		  psgInst 0
+		  length 138
+		  shifting 00h
+		  psgInst 42
+		        psgNoteL G3,6
+		        psgNote  B3
+		        psgNote  D4
+		        psgNote  F4
+		        psgNote  G4
+		        psgNote  B4
+		        psgNote  D5
+		        psgNote  F5
 		countedLoopStart 23
-		noteL 44,6
-		note 43
-		note 52
-		note 57
-		note 41
-		note 44
-		note 43
-		note 48
-		note 56
-		note 59
-		note 61
+		        psgNoteL F5,6
+		        psgNote  E5
+		        psgNote  Cs6
+		        psgNote  Fs6
+		        psgNote  D5
+		        psgNote  F5
+		        psgNote  E5
+		        psgNote  A5
+		        psgNote  F6
+		        psgNote  Gs6
+		        psgNote  As6
 		countedLoopEnd
 		countedLoopStart 4
-		noteL 44,6
-		note 47
-		note 52
-		note 53
-		note 45
-		note 48
-		note 53
-		note 54
-		note 46
-		note 49
-		note 54
-		note 55
-		note 47
-		note 50
-		note 55
-		note 56
+		        psgNoteL F5,6
+		        psgNote  Gs5
+		        psgNote  Cs6
+		        psgNote  D6
+		        psgNote  Fs5
+		        psgNote  A5
+		        psgNote  D6
+		        psgNote  Ds6
+		        psgNote  G5
+		        psgNote  As5
+		        psgNote  Ds6
+		        psgNote  E6
+		        psgNote  Gs5
+		        psgNote  B5
+		        psgNote  E6
+		        psgNote  F6
 		countedLoopEnd
 		countedLoopStart 4
-		noteL 31,6
-		note 35
-		note 26
-		note 31
-		note 32
-		note 36
-		note 27
-		note 30
+		        psgNoteL E4,6
+		        psgNote  Gs4
+		        psgNote  B3
+		        psgNote  E4
+		        psgNote  F4
+		        psgNote  A4
+		        psgNote  C4
+		        psgNote  Ds4
 		countedLoopEnd
 		mainLoopEnd
 Music_4_Channel_9:
