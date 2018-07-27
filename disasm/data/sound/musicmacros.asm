@@ -1,38 +1,31 @@
 
-
-channel_end	macro
-	db 0FFh
-	db 0
-	db 0
-	endm
 	
-	
-ymInst	macro arg0
+inst	macro arg0
 	db 0FEh
 	db arg0
 	endm
 	
-ymVol	macro arg0
+vol	macro arg0
 	db 0FDh
 	db arg0
 	endm
 	
-release	macro arg0
+setRelease	macro arg0
 	db 0FCh
 	db arg0
 	endm
 	
-ymSustain	macro 
+sustain	macro 
 	db 0FCh
 	db 080h
 	endm
 	
-ymSlide	macro arg0
+setSlide	macro arg0
 	db 0FCh
 	db arg0+080h
 	endm
 	
-ymStopSlide	macro 
+noSlide	macro 
 	db 0FCh
 	db 0FFh
 	endm
@@ -42,7 +35,7 @@ vibrato	macro arg0
 	db arg0
 	endm	
 	
-ymStereo	macro arg0
+stereo	macro arg0
 	db 0FAh
 	db arg0
 	endm	
@@ -51,6 +44,53 @@ shifting	macro arg0
 	db 0F9h
 	db arg0
 	endm		
+	
+waitL	macro arg0
+	db 0F0h
+	db arg0
+	endm	
+	
+wait	macro
+	db 070h
+	endm	
+	
+noteL	macro arg0,arg1
+	db arg0+080h-24
+	db arg1
+	endm	
+	
+note	macro arg0
+	db arg0-24
+	endm	
+	
+sampleL	macro arg0,arg1
+	db arg0+080h
+	db arg1
+	endm
+	
+sample	macro arg0
+	db arg0
+	endm		
+	
+psgNoteL	macro arg0,arg1
+	db arg0+080h
+	db arg1
+	endm
+		
+psgNote	macro arg0
+	db arg0
+	endm	
+	
+psgInst	macro arg0
+	db 0FDh
+	db arg0
+	endm
+	
+	
+ymTimer	macro arg0
+	db 0FAh
+	db arg0
+	endm
 	
 mainLoopStart	macro
 	db 0F8h
@@ -95,51 +135,10 @@ countedLoopEnd	macro
 countedLoopStart macro arg0
 	db 0F8h
 	db arg0+0C0h
-	endm	
-	
-length	macro arg0
-	db 0F0h
-	db arg0
-	endm	
-	
-silence	macro
-	db 070h
-	endm	
-	
-sampleL	macro arg0,arg1
-	db arg0+080h
-	db arg1
-	endm	
-	
-noteL	macro arg0,arg1
-	db arg0+080h
-	db arg1
-	endm	
-	
-psgNoteL	macro arg0,arg1
-	db arg0+080h-9
-	db arg1
-	endm	
-	
-sample	macro arg0
-	db arg0
-	endm	
-	
-note	macro arg0
-	db arg0
 	endm
-		
-psgNote	macro arg0
-	db arg0-9
-	endm	
-	
-psgInst	macro arg0
-	db 0FDh
-	db arg0
-	endm
-	
-	
-ymTimer	macro arg0
-	db 0FAh
-	db arg0
-	endm		
+
+channel_end	macro
+	db 0FFh
+	db 0
+	db 0
+	endm			

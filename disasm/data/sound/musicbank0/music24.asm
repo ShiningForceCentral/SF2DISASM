@@ -16,157 +16,157 @@ Music_24:       db 0
 		dw Music_24_Channel_9
 		dw Music_24_Channel_9
 Music_24_Channel_0:
-		  ymStereo 0C0h
-		  ymInst 25
-		  ymVol 0Eh
-		  release 01h
+		  stereo 0C0h
+		  inst 25
+		  vol 0Eh
+		  setRelease 01h
 		  vibrato 02Ch
-		        noteL A1,74
-		        noteL G1,42
-		        noteL F1,123
-		  length 24
+		        noteL A2,74
+		        noteL G2,42
+		        noteL F2,123
+		        waitL 24
 		channel_end
 Music_24_Channel_1:
-		  ymStereo 0C0h
-		  ymInst 26
-		  ymVol 0Ch
-		  release 01h
+		  stereo 0C0h
+		  inst 26
+		  vol 0Ch
+		  setRelease 01h
 		  vibrato 02Ch
-		        noteL G4,9
-		        note  Fs4
-		        note  G4
-		        note  B4
-		        noteL D5,18
-		        noteL E5,20
-		        noteL Fs5,32
-		        noteL G5,10
-		        noteL A5,123
-		  length 24
+		        noteL G5,9
+		        note  Fs5
+		        note  G5
+		        note  B5
+		        noteL D6,18
+		        noteL E6,20
+		        noteL Fs6,32
+		        noteL G6,10
+		        noteL A6,123
+		        waitL 24
 		channel_end
 Music_24_Channel_2:
-		  ymStereo 0C0h
-		  ymInst 26
-		  ymVol 0Bh
-		  release 01h
+		  stereo 0C0h
+		  inst 26
+		  vol 0Bh
+		  setRelease 01h
 		  vibrato 02Ch
-		        noteL B3,74
-		        noteL Cs5,42
-		        noteL C5,123
-		  length 24
+		        noteL B4,74
+		        noteL Cs6,42
+		        noteL C6,123
+		        waitL 24
 		channel_end
 Music_24_Channel_3:
-		  ymStereo 0C0h
-		  ymInst 26
-		  ymVol 0Bh
-		  release 01h
+		  stereo 0C0h
+		  inst 26
+		  vol 0Bh
+		  setRelease 01h
 		  vibrato 02Ch
-		        noteL G3,74
-		        noteL E4,42
-		        noteL E4,123
-		  length 24
+		        noteL G4,74
+		        noteL E5,42
+		        noteL E5,123
+		        waitL 24
 		channel_end
 Music_24_Channel_4:
-		  ymStereo 080h
+		  stereo 080h
 		  shifting 020h
-		  ymInst 26
-		  release 01h
+		  inst 26
+		  setRelease 01h
 		  vibrato 02Ch
-		  length 18
-		  ymVol 0Ah
-		        noteL G4,9
-		        note  Fs4
-		        note  G4
-		        note  B4
-		        noteL D5,18
-		        noteL E5,20
-		        noteL Fs5,32
-		        noteL G5,10
-		        noteL A5,105
-		  length 24
+		        waitL 18
+		  vol 0Ah
+		        noteL G5,9
+		        note  Fs5
+		        note  G5
+		        note  B5
+		        noteL D6,18
+		        noteL E6,20
+		        noteL Fs6,32
+		        noteL G6,10
+		        noteL A6,105
+		        waitL 24
 		channel_end
 Music_24_Channel_5:
-		  ymStereo 040h
+		  stereo 040h
 		  shifting 010h
-		  ymInst 26
-		  release 01h
+		  inst 26
+		  setRelease 01h
 		  vibrato 02Ch
-		  length 9
-		  ymVol 0Bh
-		        note  G4
-		        note  Fs4
-		        note  G4
-		        note  B4
-		        noteL D5,18
-		        noteL E5,20
-		        noteL Fs5,32
-		        noteL G5,10
-		        noteL A5,114
-		  length 24
+		        waitL 9
+		  vol 0Bh
+		        note  G5
+		        note  Fs5
+		        note  G5
+		        note  B5
+		        noteL D6,18
+		        noteL E6,20
+		        noteL Fs6,32
+		        noteL G6,10
+		        noteL A6,114
+		        waitL 24
 		channel_end
 Music_24_Channel_6:
-		  psgInst 0
-		  release 01h
+		  psgInst 00h
+		  setRelease 01h
 		  vibrato 04Ch
-		  length 71
-		  psgInst 125
-		        psgNoteL As5,5
-		        psgNote  B5
-		        psgNote  Cs6
-		        psgNote  Ds6
-		        psgNote  E6
-		        psgNoteL Fs6,4
-		        psgNote  Gs6
-		        psgNote  As6
-		        psgNote  B6
-		        psgNote  Cs7
-		        psgNoteL D7,9
-		        psgNoteL E7,6
-		        psgNoteL D7,5
-		        psgNote  E7
+		        waitL    71
+		  psgInst 07Dh
+		        psgNoteL Cs4,5
+		        psgNote  D4
+		        psgNote  E4
+		        psgNote  Fs4
+		        psgNote  G4
+		        psgNoteL A4,4
+		        psgNote  B4
+		        psgNote  Cs5
+		        psgNote  D5
+		        psgNote  E5
+		        psgNoteL F5,9
+		        psgNoteL G5,6
+		        psgNoteL F5,5
+		        psgNote  G5
 		countedLoopStart 7
-		        psgNoteL D7,4
-		        psgNote  E7
+		        psgNoteL F5,4
+		        psgNote  G5
 		countedLoopEnd
-		        psgNoteL D7,34
-		  length 6
-		  psgInst 10
-		        silence
-		  psgInst 6
-		        silence
-		  psgInst 0
-		        silence
+		        psgNoteL F5,34
+		        waitL    6
+		  psgInst 0Ah
+		        wait
+		  psgInst 06h
+		        wait
+		  psgInst 00h
+		        wait
 		channel_end
 Music_24_Channel_7:
 		  shifting 010h
-		  psgInst 0
-		  release 01h
+		  psgInst 00h
+		  setRelease 01h
 		  vibrato 04Ch
-		  length 75
-		  psgInst 123
-		        psgNoteL As5,5
-		        psgNote  B5
-		        psgNote  Cs6
-		        psgNote  Ds6
-		        psgNote  E6
-		        psgNoteL Fs6,4
-		        psgNote  Gs6
-		        psgNote  As6
-		        psgNote  B6
-		        psgNote  Cs7
-		        psgNoteL D7,9
-		        psgNoteL E7,6
-		        psgNoteL D7,5
-		        psgNote  E7
+		        waitL    75
+		  psgInst 07Bh
+		        psgNoteL Cs4,5
+		        psgNote  D4
+		        psgNote  E4
+		        psgNote  Fs4
+		        psgNote  G4
+		        psgNoteL A4,4
+		        psgNote  B4
+		        psgNote  Cs5
+		        psgNote  D5
+		        psgNote  E5
+		        psgNoteL F5,9
+		        psgNoteL G5,6
+		        psgNoteL F5,5
+		        psgNote  G5
 		countedLoopStart 7
-		        psgNoteL D7,4
-		        psgNote  E7
+		        psgNoteL F5,4
+		        psgNote  G5
 		countedLoopEnd
-		        psgNoteL D7,36
-		  length 6
-		  psgInst 6
-		        silence
-		  psgInst 0
-		        silence
+		        psgNoteL F5,36
+		        waitL    6
+		  psgInst 06h
+		        wait
+		  psgInst 00h
+		        wait
 		channel_end
 Music_24_Channel_9:
 		channel_end

@@ -1,0 +1,36 @@
+PSG Instruments are stored directly in Z80 RAM, along with the sound driver, so here are the offsets from the Z80 point of view :
+
+0x12B2..0x12D2		Pointer table of PSG Instruments
+0x12D2..0x135F		PSG Instruments
+
+
+PSG Instruments only affect the output level. 
+
+They are composed of two parts : 
+- The attack part : it is used at the beginning of a new note
+- The release part : it is used when the note is released
+
+For each part, the data is a series of 0x bytes ended by an 8x byte.
+At each "sound frame", the next byte is parsed, and the output level of the channel is the result of (instrument total level - F + x)
+When the 8x byte is reached, it keeps using that same x value until the note is released or until a new note is played.
+
+EXAMPLE : 
+
+Lets say that Instrument A has been loaded with total level C.
+
+Here is the data of Instrument A :
+
+RAM:133E                 db  0Bh                attack frame 0 level : C - F + B = 8
+RAM:133F                 db  0Dh		attack frame 1 level : A
+RAM:1340                 db  0Fh		attack frame 2 level : C
+RAM:1341                 db  0Eh		B
+RAM:1342                 db  0Dh		A
+RAM:1343                 db  8Ch ; î		9, and stay at 9 until note is released (equivalent to sustain level)
+RAM:1344                 db  0Ah		release frame 0 level : 7
+RAM:1345                 db  0Ah		7
+RAM:1346                 db    9		6
+RAM:1347                 db    9		6
+RAM:1348                 db  88h ; ê		5, and stay at 5 until a new note is played
+
+You'll notice that with this instrument, if the total level is not low enough, releasing the note will not stop it, but just make it lower.
+

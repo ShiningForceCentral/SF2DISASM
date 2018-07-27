@@ -33,9 +33,9 @@ FF xx 00	Only for YM Channels 1,2,3 : set new operation xx (play music/sfx xx, f
 
 FF 00 00	no more data to parse, mute channel
 
-FE xx		Use Instrument xx
+FE xx		Set Next Instrument xx
 
-FD 0x		Set Output Level x
+FD 0x		Set Output Level x and reload instrument
 
 FC xx		Set Key Release or Pitch Slides :
 		- if xx < 80, release notes key at (note length - xx)

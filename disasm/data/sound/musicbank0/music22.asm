@@ -16,111 +16,111 @@ Music_22:       db 0
 		dw Music_22_Channel_9
 		dw Music_22_Channel_9
 Music_22_Channel_0:
-		  ymStereo 0C0h
-		  ymInst 36
-		  ymVol 0Ch
-		  release 01h
+		  stereo 0C0h
+		  inst 36
+		  vol 0Ch
+		  setRelease 01h
 		  vibrato 02Ch
-		        noteL D3,48
-		        note  G3
-		  ymVol 0Dh
-		        noteL As2,52
-		        noteL A2,161
-		  length 24
+		        noteL D4,48
+		        note  G4
+		  vol 0Dh
+		        noteL As3,52
+		        noteL A3,161
+		        waitL 24
 		channel_end
 Music_22_Channel_1:
-		  ymStereo 0C0h
-		  ymInst 9
-		  ymVol 0Ch
-		  release 01h
+		  stereo 0C0h
+		  inst 9
+		  vol 0Ch
+		  setRelease 01h
 		  vibrato 02Fh
-		        noteL F4,48
-		        note  A4
-		        noteL C5,52
-		        noteL E5,161
-		  length 24
+		        noteL F5,48
+		        note  A5
+		        noteL C6,52
+		        noteL E6,161
+		        waitL 24
 		channel_end
 Music_22_Channel_2:
-		  ymStereo 0C0h
-		  ymInst 26
-		  release 01h
+		  stereo 0C0h
+		  inst 26
+		  setRelease 01h
 		  vibrato 02Ch
-		  length 12
-		  ymVol 0Ch
-		        note  F3
-		        note  A3
-		        noteL C4,24
-		        noteL B3,12
-		        note  D4
-		        noteL F4,24
-		        noteL F3,12
-		        noteL Gs3,14
-		        noteL D4,28
-		        noteL E3,13
-		        noteL A3,15
-		        noteL D4,17
-		        noteL Cs4,102
-		  length 24
+		        waitL 12
+		  vol 0Ch
+		        note  F4
+		        note  A4
+		        noteL C5,24
+		        noteL B4,12
+		        note  D5
+		        noteL F5,24
+		        noteL F4,12
+		        noteL Gs4,14
+		        noteL D5,28
+		        noteL E4,13
+		        noteL A4,15
+		        noteL D5,17
+		        noteL Cs5,102
+		        waitL 24
 		channel_end
 Music_22_Channel_3:
 		  shifting 010h
-		  ymStereo 080h
-		  ymInst 26
-		  release 01h
+		  stereo 080h
+		  inst 26
+		  setRelease 01h
 		  vibrato 02Ch
-		  length 18
-		  ymVol 0Bh
-		        noteL F3,12
-		        note  A3
-		        noteL C4,24
-		        noteL B3,12
-		        note  D4
-		        noteL F4,24
-		        noteL F3,12
-		        noteL Gs3,14
-		        noteL D4,28
-		        noteL E3,13
-		        noteL A3,15
-		        noteL D4,17
-		        noteL Cs4,102
-		  length 18
+		        waitL 18
+		  vol 0Bh
+		        noteL F4,12
+		        note  A4
+		        noteL C5,24
+		        noteL B4,12
+		        note  D5
+		        noteL F5,24
+		        noteL F4,12
+		        noteL Gs4,14
+		        noteL D5,28
+		        noteL E4,13
+		        noteL A4,15
+		        noteL D5,17
+		        noteL Cs5,102
+		        waitL 18
 		channel_end
 Music_22_Channel_4:
 		  shifting 020h
-		  ymStereo 040h
-		  ymInst 26
-		  release 01h
+		  stereo 040h
+		  inst 26
+		  setRelease 01h
 		  vibrato 02Ch
-		  length 24
-		  ymVol 0Ah
-		        noteL F3,12
-		        note  A3
-		        noteL C4,24
-		        noteL B3,12
-		        note  D4
-		        noteL F4,24
-		        noteL F3,12
-		        noteL Gs3,14
-		        noteL D4,28
-		        noteL E3,13
-		        noteL A3,15
-		        noteL D4,17
-		        noteL Cs4,102
-		  length 12
+		        waitL 24
+		  vol 0Ah
+		        noteL F4,12
+		        note  A4
+		        noteL C5,24
+		        noteL B4,12
+		        note  D5
+		        noteL F5,24
+		        noteL F4,12
+		        noteL Gs4,14
+		        noteL D5,28
+		        noteL E4,13
+		        noteL A4,15
+		        noteL D5,17
+		        noteL Cs5,102
+		        waitL 12
 		channel_end
 Music_22_Channel_5:
-		  length 6
+		        waitL 6
 		  shifting 020h
-		  ymStereo 040h
-		  ymInst 9
-		  ymVol 0Bh
-		  release 01h
+		  stereo 040h
+		  inst 9
+		  vol 0Bh
+		  setRelease 01h
 		  vibrato 02Fh
-		        noteL F4,48
-		        note  A4
-		        noteL C5,52
-		        noteL E5,161
-		  length 18
+		        noteL F5,48
+		        note  A5
+		        noteL C6,52
+		        noteL E6,161
+		        waitL 18
 		channel_end
 Music_22_Channel_6:
 		channel_end

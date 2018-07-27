@@ -274,3 +274,14 @@ disasm/data/scripting/map/testintro.asm
 *.nam
 *.til
 *.tfi
+disasm/data/sound/musicbank1/LostForest.txt
+disasm/data/sound/musicbank1/LostForest02.asm
+disasm/data/sound/musicbank1/propellerplanesf2.asm
+disasm/data/sound/musicbank1/propellerplanesf2.txt
+disasm/data/sound/musicbank1/propellerplanesf202.asm
+disasm/data/sound/musicbank1/propellerplanesf203.asm
+disasm/data/sound/musicbank1/propellerplanesf204.asm
+disasm/data/sound/musicbank1/propellerplanesf2new.asm
+disasm/data/sound/musicbank1/trinitronsunset.txt
+disasm/data/sound/musicbank0/musicenums.asm
+disasm/data/sound/musicbank1/musicenums.asm

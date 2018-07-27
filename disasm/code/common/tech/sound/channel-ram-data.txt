@@ -1,0 +1,73 @@
+YM Channel RAM Data :
+
+(in DAC mode, samples are played instead of notes.
+The sample length actually represents its play length,
+and not the samples actual length which can be longer)
+
+bytes 00-01 :	pointer to next data to parse in ROM
+
+byte 02 :	time counter for note/sample length
+
+byte 03 :	set to $01 when channel has nothing to do
+
+byte 04 :	output level, from $00 to $0F
+
+byte 05 : 	current algorithm
+
+byte 06 : 	key release value. Release key when time counter 02 reaches this value.
+
+byte 07 :	note/sample length
+
+byte 08 :	set to $80 when there is no key release, even between different notes
+
+byte 09 :	note length before vibrato
+
+byte 0A :	time counter before vibrato
+
+bytes 0B-0C :	vibrato data start pointer
+
+byte 0D :	vibrato data relative pointer
+
+bytes 0E-0F :	current YM frequency
+
+byte 10 :	YM Instrument	
+
+bytes 11-12 :	YM frequency to reach when sliding
+
+bytes 13-14 :	loop A start pointer
+
+bytes 15-16 :	loop B start pointer
+
+bytes 17-18 :	loop C start pointer
+
+bytes 19 :	loop C counter
+
+byte 1A :	Set when Loop B section 1 passed.
+
+byte 1B :	Set when Loop B section 2 passed.
+
+byte 1C :	note shift value
+
+byte 1D :	frequency shift value
+
+byte 1E :	Stereo Output setup 
+
+byte 1F :	slide speed
+
+
+
+
+
+PSG Tone/Noise Channel RAM Data :
+
+(I just noted the bytes that are used in a different way than above)
+
+byte 04 :	PSG Instrument total level
+
+byte 05 :	actual level to apply = base level - $F + instrument data
+
+bytes 10-11 :	PSG Instrument pointer
+
+byte 12 :	PSG Instrument relative pointer
+
+byte 1E :	set if key has just been released

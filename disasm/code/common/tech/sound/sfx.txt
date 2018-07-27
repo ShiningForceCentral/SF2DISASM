@@ -1,0 +1,125 @@
+SFX are stored directly in Z80 RAM along with the code and other data.
+
+
+
+
+In the Shining Force II version of the driver, here are the Z80 offsets : 
+
+0x15BD..0x162C		SFX Pointer Table
+0x162D..0x1F28		SFX Data
+0x1F29..0x1F7F		Padding $FF (they continue after this offset but at Z80 initialization Shining Force II only copies the Z80 driver data until this point)
+
+
+
+
+SFX DATA LAYOUT : 
+
+There are TWO TYPES of SFX, depending on their first byte : 
+
+
+- if byte 0 = $01 -> SFX type 1 : 
+It is followed by 10 pointers, each one pointing to the data to parse 
+for each available channel, like the 10 pointers of a music. 
+This means that an SFX can actually use any of the 10 channels available ! 
+But since some channels may already be used by music, SFX have to use the other channels.
+If an SFX takes a channel that is currently used by music, then music is not played anymore
+on this channel, SFX is played, and at the end of SFX, the music doesn't come back on the channel !
+So in order to use SFX Type 1 and Music at the same time, you absolutely have to know first which 
+channels will be dedicated to music, and which ones will be dedicated to SFX Type 1.
+In Shining Force II (and in other Cube/Iwadare games, I guess), Music uses the 8 first channels,
+while SFX Type 1 use the 2 last channels (PSG Tone 3 and PSG Noise). So SFX Type 1 pointers 0-7 
+usually (if not always) point to the same three $FF0000 bytes, meaning there is nothing to parse for the 8
+first channels.
+The data being parsed uses exactly the same format as music.
+
+EXAMPLE :
+
+RAM:164D                 db    1                ; sound 2 is an SFX Type 1
+RAM:164E                 db  72h ; r		; As expected, the first 8 pointers point to 0x1672, which is just $FF0000 to say there is nothing to parse
+RAM:164F                 db  16h
+RAM:1650                 db  72h ; r
+RAM:1651                 db  16h
+RAM:1652                 db  72h ; r
+RAM:1653                 db  16h
+RAM:1654                 db  72h ; r
+RAM:1655                 db  16h
+RAM:1656                 db  72h ; r
+RAM:1657                 db  16h
+RAM:1658                 db  72h ; r
+RAM:1659                 db  16h
+RAM:165A                 db  72h ; r
+RAM:165B                 db  16h
+RAM:165C                 db  72h ; r
+RAM:165D                 db  16h
+RAM:165E                 db  62h ; b
+RAM:165F                 db  16h		; channel 9 (PSG Tone 3) points to actual data to parse
+RAM:1660                 db  72h ; r
+RAM:1661                 db  16h		; channel 10 (PSG Noise) is not used !
+RAM:1662                 db 0FDh ; ²		; start of PSG Tone 3 data, which is parsed with the same format as music
+RAM:1663                 db  2Ch ; ,
+RAM:1664                 db 0FCh ; ³
+RAM:1665                 db    0
+RAM:1666                 db 0FBh ; ¹
+RAM:1667                 db    0
+RAM:1668                 db 0BBh ; +
+RAM:1669                 db    2
+RAM:166A                 db 0C0h ; +
+RAM:166B                 db    6
+RAM:166C                 db 0FDh ; ²
+RAM:166D                 db  28h ; (
+RAM:166E                 db 0BBh ; +
+RAM:166F                 db    2
+RAM:1670                 db 0C0h ; +
+RAM:1671                 db    6
+RAM:1672                 db 0FFh		; "Nothing to parse" command, which is pointed by the 9 unused channels, but is also used to end PSG Tone 3 data
+RAM:1673                 db    0
+RAM:1674                 db    0
+
+
+
+
+
+- if byte 0 = $02 -> SFX type 2 :
+It is followed by only 3 pointers, respectively pointing to data to parse for 
+YM Channels 4, 5 and 6. YM Channel 6 will always be used in DAC mode.
+"But hey ! YM 4,5,6 Channels can already be used by music !", you might say.
+Well, yes, but with SFX Type 2, those channels are just temporarily borrowed, 
+and music goes back on them when the SFX is finished. Isn't it wonderful ? :D
+SFX Type 2 actually use extra RAM areas not to overwrite current music data.
+Music is still parsed on YM4,5,6 while SFX Type 2 is played, but only SFX Type 2 
+will actually transmit data to YM for these channels. Then when SFX Type 2
+is finished, Music transmits data to YM again.
+Like SFX Type 1, SFX Type 2 use the same data format as music.
+
+EXAMPLE : 
+
+RAM:162D                 db    2                ; sound 1 data : SFX Type 2
+RAM:162E                 dw 164Ah		
+RAM:1630                 dw 1634h		; only YM Channel 5 is used, so only YM Channel 5 is borrowed.
+RAM:1632                 dw 164Ah
+RAM:1634                 db 0FEh ; ¦		; Start of YM Channel 5 data to parse
+RAM:1635                 db  40h ; @
+RAM:1636                 db 0FDh ; ²
+RAM:1637                 db  0Eh
+RAM:1638                 db 0FBh ; ¹
+RAM:1639                 db    0
+RAM:163A                 db 0FCh ; ³
+RAM:163B                 db    0
+RAM:163C                 db  9Dh ; Ø
+RAM:163D                 db    1
+RAM:163E                 db 0FCh ; ³
+RAM:163F                 db  80h ; Ç
+RAM:1640                 db 0FBh ; ¹
+RAM:1641                 db  10h
+RAM:1642                 db  2Ah ; *
+RAM:1643                 db  39h ; 9
+RAM:1644                 db 0FCh ; ³
+RAM:1645                 db    1
+RAM:1646                 db 0FBh ; ¹
+RAM:1647                 db 0F0h ; ­
+RAM:1648                 db 0D3h ; Ë
+RAM:1649                 db  0Ch
+RAM:164A                 db 0FFh		; end of data to parse
+RAM:164B                 db    0
+RAM:164C                 db    0
+
