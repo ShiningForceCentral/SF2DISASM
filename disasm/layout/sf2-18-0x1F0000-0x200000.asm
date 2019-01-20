@@ -4,6 +4,6 @@
 ; FREE SPACE : 1038 bytes.
 
 
-		incbin "data/sound/musicbank1.bin"
-		incbin "data/sound/musicbank0.bin"
+		incbin "data/sound/musicbank1build.bin"
+		incbin "data/sound/musicbank0build.bin"
 						; music data relative pointer table

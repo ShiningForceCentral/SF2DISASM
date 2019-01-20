@@ -2543,7 +2543,7 @@ GetMapPixelCoordRAMOffset:
 		movem.w d0-d1,-(sp)
 		cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 		bne.s   loc_622E        
-		tst.b   $11(a0)
+		tst.b   $11(a0)         ; entity property
 		beq.s   loc_622E        
 		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		bne.s   loc_621E
@@ -2560,7 +2560,7 @@ loc_6226:
 		add.w   d3,d1
 loc_622E:
 		lea     MapOffsetHashTable(pc), a3
-						; jump here if not in battle
+						; jump here if in battle
 		lea     (FF0000_RAM_START).l,a4
 		move.w  d0,d2
 		move.w  d1,d3

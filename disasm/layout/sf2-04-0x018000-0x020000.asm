@@ -7,5 +7,7 @@
 		include "code\gameflow\battle\battlescenes\battlesceneengine_0.asm"		; Battlescene engine
 		include "data\battles\global\custombackgrounds.asm"		; Battle custom backgrounds table
 		include "code\gameflow\battle\battlescenes\battlesceneengine_1.asm"		; Battlescene engine
-		dc.b $FF
+		include "data\graphics\battles\battlesprites\allyidlebattlesprites.asm"		; Ally Idle Battle Sprites
+		include "data\graphics\battles\battlesprites\enemyidlebattlesprites.asm"		; Enemy Idle Battle Sprites
+		include "code\gameflow\battle\battlescenes\battlesceneengine_2.asm"		; Battlescene engine
 		align $20000

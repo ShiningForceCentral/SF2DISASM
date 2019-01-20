@@ -1,2 +1,0 @@
-List of enemy battle sprite indexes which do not animate when idle.
-End with $FF.
