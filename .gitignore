@@ -285,3 +285,10 @@ disasm/data/sound/musicbank1/propellerplanesf2new.asm
 disasm/data/sound/musicbank1/trinitronsunset.txt
 disasm/data/sound/musicbank0/musicenums.asm
 disasm/data/sound/musicbank1/musicenums.asm
+disasm/data/sound/landstalkermusicbank0/*.*
+disasm/data/sound/landstalkermusicbank1/*.*
+*.mod
+*.wav
+*.mt
+disasm/code/common/tech/sound/sounddriversf1.asm
+build/soundtest-ccs.txt
