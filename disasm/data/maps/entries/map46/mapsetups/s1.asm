@@ -2,172 +2,34 @@
 ; ASM FILE data\maps\entries\map46\mapsetups\s1.asm :
 ; 0x5C006..0x5C0F8 : 
 ms_map46_Entities:
-		dc.b $B
-		dc.b $12
-		dc.b 3
-		dc.b 1
-		dc.l eas_Init
-		dc.b $D
-		dc.b 8
-		dc.b 3
-		dc.b 2
-		dc.l eas_Init
-		dc.b 4
-		dc.b 3
-		dc.b 3
-		dc.b 3
-		dc.l eas_Init
-		dc.b $D
-		dc.b $B
-		dc.b 1
-		dc.b 4
-		dc.l eas_Init
-		dc.b 2
-		dc.b $A
-		dc.b 2
-		dc.b 5
-		dc.l eas_Init
-		dc.b 2
-		dc.b 4
-		dc.b 3
-		dc.b 6
-		dc.l eas_Init
-		dc.b 7
-		dc.b $C
-		dc.b 3
-		dc.b 7
-		dc.b $FF
-		dc.b 7
-		dc.b $C
-		dc.b 1
-		dc.b $C
-		dc.b 8
-		dc.b 3
-		dc.b 8
-		dc.l eas_Init
-		dc.b $A
-		dc.b 9
-		dc.b 0
-		dc.b 9
-		dc.l eas_Init
-		dc.b $A
-		dc.b $A
-		dc.b 0
-		dc.b $A
-		dc.l eas_Init
-		dc.b $B
-		dc.b 6
-		dc.b 3
-		dc.b $B
-		dc.b $FF
-		dc.b $B
-		dc.b 6
-		dc.b 1
-		dc.b $C
-		dc.b $B
-		dc.b 1
-		dc.b $C
-		dc.l eas_Init
-		dc.b 4
-		dc.b $B
-		dc.b 3
-		dc.b $D
-		dc.l eas_Init
-		dc.b $C
-		dc.b $D
-		dc.b 0
-		dc.b $E
-		dc.b $FF
-		dc.b $C
-		dc.b $D
-		dc.b 1
-		dc.b 9
-		dc.b $13
-		dc.b 0
-		dc.b $F
-		dc.l eas_Init
-		dc.b $E
-		dc.b $15
-		dc.b 1
-		dc.b $10
-		dc.b $FF
-		dc.b $E
-		dc.b $15
-		dc.b 1
-		dc.b $B
-		dc.b 8
-		dc.b 3
-		dc.b $11
-		dc.l eas_Init
-		dc.b 4
-		dc.b $C
-		dc.b 1
-		dc.b $12
-		dc.l eas_Init
-		dc.b 9
-		dc.b 3
-		dc.b 3
-		dc.b $13
-		dc.l eas_Init
-		dc.b 4
-		dc.b $11
-		dc.b 3
-		dc.b $14
-		dc.b $FF
-		dc.b 4
-		dc.b $11
-		dc.b 1
-		dc.b $B
-		dc.b $15
-		dc.b 1
-		dc.b $15
-		dc.l eas_Init
-		dc.b 6
-		dc.b 5
-		dc.b 3
-		dc.b $16
-		dc.b $FF
-		dc.b 6
-		dc.b 5
-		dc.b 1
-		dc.b $B
-		dc.b $B
-		dc.b 1
-		dc.b $17
-		dc.l eas_Init
-		dc.b $E
-		dc.b $A
-		dc.b 0
-		dc.b $18
-		dc.l eas_Init
-		dc.b $C
-		dc.b $13
-		dc.b 2
-		dc.b $19
-		dc.l eas_Init
-		dc.b 3
-		dc.b $D
-		dc.b 1
-		dc.b $1A
-		dc.l eas_Init
-		dc.b $E
-		dc.b 9
-		dc.b 2
-		dc.b $1B
-		dc.l eas_Init
-		dc.b $B
-		dc.b 3
-		dc.b 3
-		dc.b $1C
-		dc.l eas_Init
-		dc.b $E
-		dc.b 3
-		dc.b 3
-		dc.b $1D
-		dc.l eas_Init
-		dc.b $A
-		dc.b $12
-		dc.b 3
-		dc.b $D1
-		dc.l eas_Init
-		dc.w $FFFF
+		msFixedEntity 11, 18, DOWN, 1, eas_Init
+		msFixedEntity 13, 8, DOWN, 2, eas_Init
+		msFixedEntity 4, 3, DOWN, 3, eas_Init
+		msFixedEntity 13, 11, UP, 4, eas_Init
+		msFixedEntity 2, 10, LEFT, 5, eas_Init
+		msFixedEntity 2, 4, DOWN, 6, eas_Init
+		msWalkingEntity 7, 12, DOWN, 7, 7, 12, 1
+		msFixedEntity 12, 8, DOWN, 8, eas_Init
+		msFixedEntity 10, 9, RIGHT, 9, eas_Init
+		msFixedEntity 10, 10, RIGHT, 10, eas_Init
+		msWalkingEntity 11, 6, DOWN, 11, 11, 6, 1
+		msFixedEntity 12, 11, UP, 12, eas_Init
+		msFixedEntity 4, 11, DOWN, 13, eas_Init
+		msWalkingEntity 12, 13, RIGHT, 14, 12, 13, 1
+		msFixedEntity 9, 19, RIGHT, 15, eas_Init
+		msWalkingEntity 14, 21, UP, 16, 14, 21, 1
+		msFixedEntity 11, 8, DOWN, 17, eas_Init
+		msFixedEntity 4, 12, UP, 18, eas_Init
+		msFixedEntity 9, 3, DOWN, 19, eas_Init
+		msWalkingEntity 4, 17, DOWN, 20, 4, 17, 1
+		msFixedEntity 11, 21, UP, 21, eas_Init
+		msWalkingEntity 6, 5, DOWN, 22, 6, 5, 1
+		msFixedEntity 11, 11, UP, 23, eas_Init
+		msFixedEntity 14, 10, RIGHT, 24, eas_Init
+		msFixedEntity 12, 19, LEFT, 25, eas_Init
+		msFixedEntity 3, 13, UP, 26, eas_Init
+		msFixedEntity 14, 9, LEFT, 27, eas_Init
+		msFixedEntity 11, 3, DOWN, 28, eas_Init
+		msFixedEntity 14, 3, DOWN, 29, eas_Init
+		msFixedEntity 10, 18, DOWN, 209, eas_Init
+		msEntitiesEnd

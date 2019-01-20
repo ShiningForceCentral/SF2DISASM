@@ -2,32 +2,9 @@
 ; ASM FILE data\maps\entries\map44\mapsetups\s1_261.asm :
 ; 0x543BA..0x543E4 : 
 ms_map44_flag261_Entities:
-		dc.b $A
-		dc.b $17
-		dc.b 1
-		dc.b $CA
-		dc.b $FF
-		dc.b $A
-		dc.b $17
-		dc.b 2
-		dc.b $13
-		dc.b $14
-		dc.b 0
-		dc.b $CA
-		dc.l eas_Init
-		dc.b $F
-		dc.b $18
-		dc.b 2
-		dc.b $CA
-		dc.l eas_Init
-		dc.b $E
-		dc.b $18
-		dc.b 0
-		dc.b $D2
-		dc.l eas_Init
-		dc.b $D
-		dc.b $E
-		dc.b 0
-		dc.b $CA
-		dc.l eas_Init
-		dc.w $FFFF
+		msWalkingEntity 10, 23, UP, 202, 10, 23, 2
+		msFixedEntity 19, 20, RIGHT, 202, eas_Init
+		msFixedEntity 15, 24, LEFT, 202, eas_Init
+		msFixedEntity 14, 24, RIGHT, 210, eas_Init
+		msFixedEntity 13, 14, RIGHT, 202, eas_Init
+		msEntitiesEnd

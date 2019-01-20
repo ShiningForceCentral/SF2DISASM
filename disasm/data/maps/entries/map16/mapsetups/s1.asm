@@ -2,114 +2,26 @@
 ; ASM FILE data\maps\entries\map16\mapsetups\s1.asm :
 ; 0x51D30..0x51DE2 : 
 ms_map16_Entities:
-		dc.b $10
-		dc.b $F
-		dc.b 3
-		dc.b $1C
-		dc.l eas_Init
-		dc.b $11
-		dc.b $10
-		dc.b 3
-		dc.b $D6
-		dc.l eas_Init
-		dc.b $F
-		dc.b $12
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $10
-		dc.b $12
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $12
-		dc.b $12
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $13
-		dc.b $12
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $F
-		dc.b $13
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $10
-		dc.b $13
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $12
-		dc.b $13
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $13
-		dc.b $13
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $F
-		dc.b $14
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $10
-		dc.b $14
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $12
-		dc.b $14
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $13
-		dc.b $14
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $F
-		dc.b $15
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $10
-		dc.b $15
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $12
-		dc.b $15
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $13
-		dc.b $15
-		dc.b 1
-		dc.b $CE
-		dc.l eas_Init
-		dc.b 3
-		dc.b $17
-		dc.b 1
-		dc.b $42
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $78
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $43
-		dc.l eas_Init
-		dc.b $1B
-		dc.b 5
-		dc.b 3
-		dc.b $C0
-		dc.l eas_Init
-		dc.w $FFFF
+		msFixedEntity 16, 15, DOWN, 28, eas_Init
+		msFixedEntity 17, 16, DOWN, 214, eas_Init
+		msFixedEntity 15, 18, UP, 206, eas_Init
+		msFixedEntity 16, 18, UP, 206, eas_Init
+		msFixedEntity 18, 18, UP, 206, eas_Init
+		msFixedEntity 19, 18, UP, 206, eas_Init
+		msFixedEntity 15, 19, UP, 206, eas_Init
+		msFixedEntity 16, 19, UP, 206, eas_Init
+		msFixedEntity 18, 19, UP, 206, eas_Init
+		msFixedEntity 19, 19, UP, 206, eas_Init
+		msFixedEntity 15, 20, UP, 206, eas_Init
+		msFixedEntity 16, 20, UP, 206, eas_Init
+		msFixedEntity 18, 20, UP, 206, eas_Init
+		msFixedEntity 19, 20, UP, 206, eas_Init
+		msFixedEntity 15, 21, UP, 206, eas_Init
+		msFixedEntity 16, 21, UP, 206, eas_Init
+		msFixedEntity 18, 21, UP, 206, eas_Init
+		msFixedEntity 19, 21, UP, 206, eas_Init
+		msFixedEntity 3, 23, UP, 66, eas_Init
+		msFixedEntity 63, 63, DOWN, 120, eas_Init
+		msFixedEntity 63, 63, DOWN, 67, eas_Init
+		msFixedEntity 27, 5, DOWN, 192, eas_Init
+		msEntitiesEnd

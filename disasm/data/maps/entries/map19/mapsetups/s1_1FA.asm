@@ -2,139 +2,31 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\s1_1FA.asm :
 ; 0x52CB0..0x52D8A : 
 ms_map19_flag1FA_Entities:
-		dc.b $13
-		dc.b $A
-		dc.b 0
-		dc.b $1C
-		dc.l eas_Init
-		dc.b $19
-		dc.b $D
-		dc.b 2
-		dc.b $D1
-		dc.l eas_Init
-		dc.b $1A
-		dc.b $C
-		dc.b 2
-		dc.b $CD
-		dc.l eas_Init
-		dc.b $1A
-		dc.b $D
-		dc.b 2
-		dc.b $CB
-		dc.l eas_Init
-		dc.b $13
-		dc.b $B
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingLeftBis
-		dc.b $12
-		dc.b $B
-		dc.b 0
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $12
-		dc.b $A
-		dc.b 0
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $19
-		dc.b $A
-		dc.b 3
-		dc.b $C6
-		dc.l eas_Init
-		dc.b $1B
-		dc.b $B
-		dc.b 2
-		dc.b $D0
-		dc.l eas_Init
-		dc.b $1C
-		dc.b $C
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingRightBis
-		dc.b $1C
-		dc.b $D
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingLeftBis
-		dc.b $1C
-		dc.b $10
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingRightBis
-		dc.b $1B
-		dc.b $12
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingLeftBis
-		dc.b $1E
-		dc.b $13
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingRightBis
-		dc.b $1F
-		dc.b $13
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingLeftBis
-		dc.b $1C
-		dc.b $14
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingRightBis
-		dc.b $1D
-		dc.b $15
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingLeftBis
-		dc.b $1B
-		dc.b $19
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingRightBis
-		dc.b $1D
-		dc.b $19
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingLeftBis
-		dc.b $1D
-		dc.b $1A
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingRightBis
-		dc.b $F
-		dc.b $13
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingLeftBis
-		dc.b $E
-		dc.b $14
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingRightBis
-		dc.b $F
-		dc.b $14
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingLeftBis
-		dc.b $E
-		dc.b $15
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingRightBis
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $C3
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $CC
-		dc.l eas_Init
-		dc.b $1C
-		dc.b $E
-		dc.b 3
-		dc.b $CE
-		dc.l eas_LyingLeftBis
-		dc.w $FFFF
+		msFixedEntity 19, 10, RIGHT, 28, eas_Init
+		msFixedEntity 25, 13, LEFT, 209, eas_Init
+		msFixedEntity 26, 12, LEFT, 205, eas_Init
+		msFixedEntity 26, 13, LEFT, 203, eas_Init
+		msFixedEntity 19, 11, DOWN, 206, eas_LyingLeftBis
+		msFixedEntity 18, 11, RIGHT, 206, eas_Init
+		msFixedEntity 18, 10, RIGHT, 206, eas_Init
+		msFixedEntity 25, 10, DOWN, 198, eas_Init
+		msFixedEntity 27, 11, LEFT, 208, eas_Init
+		msFixedEntity 28, 12, DOWN, 206, eas_LyingRightBis
+		msFixedEntity 28, 13, DOWN, 206, eas_LyingLeftBis
+		msFixedEntity 28, 16, DOWN, 206, eas_LyingRightBis
+		msFixedEntity 27, 18, DOWN, 206, eas_LyingLeftBis
+		msFixedEntity 30, 19, DOWN, 206, eas_LyingRightBis
+		msFixedEntity 31, 19, DOWN, 206, eas_LyingLeftBis
+		msFixedEntity 28, 20, DOWN, 206, eas_LyingRightBis
+		msFixedEntity 29, 21, DOWN, 206, eas_LyingLeftBis
+		msFixedEntity 27, 25, DOWN, 206, eas_LyingRightBis
+		msFixedEntity 29, 25, DOWN, 206, eas_LyingLeftBis
+		msFixedEntity 29, 26, DOWN, 206, eas_LyingRightBis
+		msFixedEntity 15, 19, DOWN, 206, eas_LyingLeftBis
+		msFixedEntity 14, 20, DOWN, 206, eas_LyingRightBis
+		msFixedEntity 15, 20, DOWN, 206, eas_LyingLeftBis
+		msFixedEntity 14, 21, DOWN, 206, eas_LyingRightBis
+		msFixedEntity 63, 63, DOWN, 195, eas_Init
+		msFixedEntity 63, 63, DOWN, 204, eas_Init
+		msFixedEntity 28, 14, DOWN, 206, eas_LyingLeftBis
+		msEntitiesEnd

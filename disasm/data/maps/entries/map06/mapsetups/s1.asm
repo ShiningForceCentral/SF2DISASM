@@ -2,107 +2,24 @@
 ; ASM FILE data\maps\entries\map06\mapsetups\s1.asm :
 ; 0x547F8..0x5489A : 
 ms_map6_Entities:
-		dc.b $12
-		dc.b $19
-		dc.b 1
-		dc.b 7
-		dc.l eas_46212
-		dc.b $14
-		dc.b $17
-		dc.b 3
-		dc.b $C1
-		dc.l eas_Init2
-		dc.b $12
-		dc.b 8
-		dc.b 3
-		dc.b $C9
-		dc.b $FF
-		dc.b $12
-		dc.b 8
-		dc.b 1
-		dc.b $10
-		dc.b $17
-		dc.b 3
-		dc.b $C3
-		dc.l eas_Init2
-		dc.b $F
-		dc.b $19
-		dc.b 0
-		dc.b $C3
-		dc.l eas_Init2
-		dc.b $F
-		dc.b $18
-		dc.b 0
-		dc.b $C0
-		dc.l eas_Init2
-		dc.b $12
-		dc.b $17
-		dc.b 3
-		dc.b $C1
-		dc.l eas_Init2
-		dc.b $11
-		dc.b $17
-		dc.b 3
-		dc.b $C6
-		dc.l eas_Init2
-		dc.b $E
-		dc.b $1A
-		dc.b 0
-		dc.b $CA
-		dc.l eas_Init2
-		dc.b $10
-		dc.b $19
-		dc.b 0
-		dc.b $C8
-		dc.l eas_Init2
-		dc.b $15
-		dc.b $19
-		dc.b 2
-		dc.b $C8
-		dc.l eas_Init2
-		dc.b $A
-		dc.b $C
-		dc.b 0
-		dc.b $CA
-		dc.l eas_Init
-		dc.b $B
-		dc.b $C
-		dc.b 2
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $13
-		dc.b $1C
-		dc.b 1
-		dc.b $C8
-		dc.l eas_Init2
-		dc.b $E
-		dc.b $1B
-		dc.b 0
-		dc.b $E2
-off_5486C:      dc.l eas_Init2
-		dc.b $3F
-		dc.b $3F
-		dc.b 0
-		dc.b $C6
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 0
-		dc.b $C6
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $CD
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $CA
-		dc.l eas_Init
-		dc.w $FFFF
+		msFixedEntity 18, 25, UP, 7, eas_46212
+		msFixedEntity 20, 23, DOWN, 193, eas_Init2
+		msWalkingEntity 18, 8, DOWN, 201, 18, 8, 1
+		msFixedEntity 16, 23, DOWN, 195, eas_Init2
+		msFixedEntity 15, 25, RIGHT, 195, eas_Init2
+		msFixedEntity 15, 24, RIGHT, 192, eas_Init2
+		msFixedEntity 18, 23, DOWN, 193, eas_Init2
+		msFixedEntity 17, 23, DOWN, 198, eas_Init2
+		msFixedEntity 14, 26, RIGHT, 202, eas_Init2
+		msFixedEntity 16, 25, RIGHT, 200, eas_Init2
+		msFixedEntity 21, 25, LEFT, 200, eas_Init2
+		msFixedEntity 10, 12, RIGHT, 202, eas_Init
+		msFixedEntity 11, 12, LEFT, 206, eas_Init
+		msFixedEntity 19, 28, UP, 200, eas_Init2
+byte_54868:     msFixedEntity 14, 27, RIGHT, 226, eas_Init2
+		msFixedEntity 63, 63, RIGHT, 198, eas_Init
+		msFixedEntity 63, 63, RIGHT, 198, eas_Init
+		msFixedEntity 63, 63, DOWN, 205, eas_Init
+		msFixedEntity 63, 63, DOWN, 206, eas_Init
+		msFixedEntity 63, 63, DOWN, 202, eas_Init
+		msEntitiesEnd

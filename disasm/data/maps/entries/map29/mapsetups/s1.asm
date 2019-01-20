@@ -2,45 +2,11 @@
 ; ASM FILE data\maps\entries\map29\mapsetups\s1.asm :
 ; 0x5A0B6..0x5A0F0 : 
 ms_map29_Entities:
-		dc.b $27
-		dc.b 5
-		dc.b 0
-		dc.b $E2
-		dc.l eas_Init
-		dc.b $37
-		dc.b 9
-		dc.b 3
-		dc.b $C0
-		dc.l eas_Init
-		dc.b $3B
-		dc.b $A
-		dc.b 2
-		dc.b $E2
-		dc.l eas_Init
-		dc.b $2E
-		dc.b 5
-		dc.b 0
-		dc.b $E2
-		dc.l eas_Init
-		dc.b $3B
-		dc.b $10
-		dc.b 3
-		dc.b $E2
-		dc.b $FF
-		dc.b $3B
-		dc.b $10
-		dc.b 1
-		dc.b $25
-		dc.b $C
-		dc.b 3
-		dc.b $E2
-		dc.b $FF
-		dc.b $25
-		dc.b $C
-		dc.b 1
-		dc.b $25
-		dc.b 7
-		dc.b 1
-		dc.b $D0
-		dc.l eas_Init
-		dc.w $FFFF
+		msFixedEntity 39, 5, RIGHT, 226, eas_Init
+		msFixedEntity 55, 9, DOWN, 192, eas_Init
+		msFixedEntity 59, 10, LEFT, 226, eas_Init
+		msFixedEntity 46, 5, RIGHT, 226, eas_Init
+		msWalkingEntity 59, 16, DOWN, 226, 59, 16, 1
+		msWalkingEntity 37, 12, DOWN, 226, 37, 12, 1
+		msFixedEntity 37, 7, UP, 208, eas_Init
+		msEntitiesEnd

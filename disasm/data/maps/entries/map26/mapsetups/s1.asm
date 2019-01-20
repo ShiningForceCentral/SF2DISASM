@@ -2,52 +2,13 @@
 ; ASM FILE data\maps\entries\map26\mapsetups\s1.asm :
 ; 0x59D20..0x59D6A : 
 ms_map26_Entities:
-		dc.b $1B
-		dc.b $16
-		dc.b 0
-		dc.b $10
-		dc.l eas_Init
-		dc.b $1D
-		dc.b $16
-		dc.b 2
-		dc.b $11
-		dc.l eas_Init
-		dc.b $32
-		dc.b $C
-		dc.b 3
-		dc.b $C6
-		dc.b $FF
-		dc.b $32
-		dc.b $C
-		dc.b 3
-		dc.b 5
-		dc.b $18
-		dc.b 3
-		dc.b $C4
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $AD
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $AD
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $AD
-		dc.l eas_Init3
-		dc.b 4
-		dc.b $23
-		dc.b 3
-		dc.b $C0
-		dc.l eas_Init
-		dc.b $B
-		dc.b $23
-		dc.b 3
-		dc.b $3E
-		dc.l eas_Init
-		dc.w $FFFF
+		msFixedEntity 27, 22, RIGHT, 16, eas_Init
+		msFixedEntity 29, 22, LEFT, 17, eas_Init
+		msWalkingEntity 50, 12, DOWN, 198, 50, 12, 3
+		msFixedEntity 5, 24, DOWN, 196, eas_Init
+		msFixedEntity 63, 63, UP, 173, eas_Init3
+		msFixedEntity 63, 63, UP, 173, eas_Init3
+		msFixedEntity 63, 63, UP, 173, eas_Init3
+		msFixedEntity 4, 35, DOWN, 192, eas_Init
+		msFixedEntity 11, 35, DOWN, 62, eas_Init
+		msEntitiesEnd

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map03\mapsetups\pt.asm :
 ; 0x50AE8..0x50B00 : 
-ms_map3:        dc.l ms_map3_Entities   
+ms_map3:        dc.l ms_map3_Entities
 		dc.l ms_map3_EntityEvents
 		dc.l ms_map3_ZoneEvents
 		dc.l ms_map3_AreaDescriptions

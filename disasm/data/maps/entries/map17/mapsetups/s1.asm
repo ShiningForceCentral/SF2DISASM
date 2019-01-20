@@ -2,28 +2,8 @@
 ; ASM FILE data\maps\entries\map17\mapsetups\s1.asm :
 ; 0x522B4..0x522DC : 
 ms_map17_Entities:
-		dc.b $39
-		dc.b 6
-		dc.b 2
-		dc.b 2
-		dc.l eas_Init
-		dc.b $36
-		dc.b 5
-		dc.b 3
-		dc.b 3
-		dc.l eas_Init
-		dc.b $33
-		dc.b 5
-		dc.b 0
-		dc.b 1
-		dc.l eas_Init
-		dc.b $37
-		dc.b 5
-		dc.b 3
-		dc.b 4
-		dc.l eas_Init
-		dc.b $30
-		dc.b 4
-		dc.b 3
-		dc.b 5
-		dc.l eas_Init3
+		msFixedEntity 57, 6, LEFT, 2, eas_Init
+		msFixedEntity 54, 5, DOWN, 3, eas_Init
+		msFixedEntity 51, 5, RIGHT, 1, eas_Init
+		msFixedEntity 55, 5, DOWN, 4, eas_Init
+		msFixedEntity 48, 4, DOWN, 5, eas_Init3

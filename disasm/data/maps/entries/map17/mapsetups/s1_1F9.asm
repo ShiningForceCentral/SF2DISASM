@@ -2,51 +2,16 @@
 ; ASM FILE data\maps\entries\map17\mapsetups\s1_1F9.asm :
 ; 0x522DC..0x5231C : 
 ms_map17_flag1F9_Entities:
-		dc.b 5
-		dc.b 8
-		dc.b 3
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $B
-		dc.b 6
-		dc.b 3
-		dc.b $CE
-		dc.b $FF
-		dc.b $B
-		dc.b 6
-		dc.b 1
-		dc.b $D
-		dc.b 3
-		dc.b 3
-		dc.b $C6
-		dc.l eas_Init
-		dc.b $11
-		dc.b 5
-		dc.b 2
-		dc.b $D0
-		dc.l eas_Init
-		dc.b $38
-		dc.b 5
-		dc.b 3
-		dc.b $C6
-		dc.l eas_Init
-		dc.b $33
-		dc.b 6
-		dc.b 0
-		dc.b $CF
-		dc.l eas_Init
-		dc.b $16
-		dc.b 4
-		dc.b 3
-		dc.b $D0
-		dc.b $FE
-		dc.b 5
-		dc.b $23
-		dc.b $16
-		dc.w $FFFF
-		dc.b   3
-		dc.b   3
-		dc.b   1
-		dc.b   1
-		dc.b $FF
-		dc.b $FF
+		msFixedEntity 5, 8, DOWN, 206, eas_Init
+		msWalkingEntity 11, 6, DOWN, 206, 11, 6, 1
+		msFixedEntity 13, 3, DOWN, 198, eas_Init
+		msFixedEntity 17, 5, LEFT, 208, eas_Init
+		msFixedEntity 56, 5, DOWN, 198, eas_Init
+		msFixedEntity 51, 6, RIGHT, 207, eas_Init
+		msSequencedEntity 22, 4, DOWN, 208, ems_52316
+		msEntitiesEnd
+ems_52316:      dc.b DOWN
+		dc.b DOWN
+		dc.b UP
+		dc.b UP
+		emsEnd

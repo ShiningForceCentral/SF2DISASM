@@ -2,159 +2,35 @@
 ; ASM FILE data\maps\entries\map37\mapsetups\s1_3E7.asm :
 ; 0x5F772..0x5F86C : 
 ms_map37_flag3E7_Entities:
-		dc.b $F
-		dc.b 5
-		dc.b 3
-		dc.b 1
-		dc.l eas_Init
-		dc.b $10
-		dc.b 6
-		dc.b 3
-		dc.b 2
-		dc.l eas_Init
-		dc.b $12
-		dc.b 6
-		dc.b 3
-		dc.b 3
-		dc.l eas_Init
-		dc.b $11
-		dc.b 8
-		dc.b 3
-		dc.b 4
-		dc.l eas_Init
-		dc.b $13
-		dc.b 7
-		dc.b 3
-		dc.b 5
-		dc.l eas_Init
-		dc.b $14
-		dc.b 6
-		dc.b 3
-		dc.b 6
-		dc.l eas_Init
-		dc.b $C
-		dc.b $C
-		dc.b 1
-		dc.b 7
-		dc.l eas_Init
-		dc.b $15
-		dc.b 6
-		dc.b 3
-		dc.b 8
-		dc.l eas_Init
-		dc.b $17
-		dc.b 6
-		dc.b 3
-		dc.b 9
-		dc.l eas_Init
-		dc.b $13
-		dc.b 9
-		dc.b 3
-		dc.b $A
-		dc.l eas_Init
-		dc.b $15
-		dc.b $C
-		dc.b 1
-		dc.b $B
-		dc.l eas_Init
-		dc.b $15
-		dc.b 8
-		dc.b 3
-		dc.b $C
-		dc.l eas_Init
-		dc.b $16
-		dc.b 8
-		dc.b 3
-		dc.b $D
-		dc.l eas_Init
-		dc.b $17
-		dc.b 9
-		dc.b 3
-		dc.b $E
-		dc.l eas_Init
-		dc.b $19
-		dc.b 9
-		dc.b 3
-		dc.b $F
-		dc.l eas_Init
-		dc.b $12
-		dc.b $B
-		dc.b 1
-		dc.b $10
-		dc.l eas_Init
-		dc.b $13
-		dc.b $C
-		dc.b 1
-		dc.b $11
-		dc.l eas_Init
-		dc.b $10
-		dc.b $D
-		dc.b 1
-		dc.b $12
-		dc.l eas_Init
-		dc.b $11
-		dc.b $E
-		dc.b 1
-		dc.b $13
-		dc.l eas_Init
-		dc.b $12
-		dc.b $10
-		dc.b 1
-		dc.b $14
-		dc.l eas_Init
-		dc.b $14
-		dc.b $E
-		dc.b 1
-		dc.b $15
-		dc.l eas_Init
-		dc.b $15
-		dc.b $E
-		dc.b 1
-		dc.b $16
-		dc.l eas_Init
-		dc.b $15
-		dc.b $10
-		dc.b 1
-		dc.b $17
-		dc.l eas_Init
-		dc.b $17
-		dc.b $E
-		dc.b 1
-		dc.b $18
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $E
-		dc.b 1
-		dc.b $19
-		dc.l eas_Init
-		dc.b $A
-		dc.b $A
-		dc.b 3
-		dc.b $1A
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $A
-		dc.b 3
-		dc.b $1B
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $A
-		dc.b 3
-		dc.b $1C
-		dc.l eas_Init
-		dc.b $17
-		dc.b $C
-		dc.b 1
-		dc.b $1D
-		dc.l eas_Init
-		dc.b $10
-		dc.b $C
-		dc.b 1
-		dc.b $D1
-		dc.l eas_Init
-		dc.b $19
-		dc.b $B
-		dc.b 1
-		dc.b $3E
-		dc.l eas_Init
-		dc.w $FFFF
+		msFixedEntity 15, 5, DOWN, 1, eas_Init
+		msFixedEntity 16, 6, DOWN, 2, eas_Init
+		msFixedEntity 18, 6, DOWN, 3, eas_Init
+		msFixedEntity 17, 8, DOWN, 4, eas_Init
+		msFixedEntity 19, 7, DOWN, 5, eas_Init
+		msFixedEntity 20, 6, DOWN, 6, eas_Init
+		msFixedEntity 12, 12, UP, 7, eas_Init
+		msFixedEntity 21, 6, DOWN, 8, eas_Init
+		msFixedEntity 23, 6, DOWN, 9, eas_Init
+		msFixedEntity 19, 9, DOWN, 10, eas_Init
+		msFixedEntity 21, 12, UP, 11, eas_Init
+		msFixedEntity 21, 8, DOWN, 12, eas_Init
+		msFixedEntity 22, 8, DOWN, 13, eas_Init
+		msFixedEntity 23, 9, DOWN, 14, eas_Init
+		msFixedEntity 25, 9, DOWN, 15, eas_Init
+		msFixedEntity 18, 11, UP, 16, eas_Init
+		msFixedEntity 19, 12, UP, 17, eas_Init
+		msFixedEntity 16, 13, UP, 18, eas_Init
+		msFixedEntity 17, 14, UP, 19, eas_Init
+		msFixedEntity 18, 16, UP, 20, eas_Init
+		msFixedEntity 20, 14, UP, 21, eas_Init
+		msFixedEntity 21, 14, UP, 22, eas_Init
+		msFixedEntity 21, 16, UP, 23, eas_Init
+		msFixedEntity 23, 14, UP, 24, eas_Init
+		msFixedEntity 63, 14, UP, 25, eas_Init
+		msFixedEntity 10, 10, DOWN, 26, eas_Init
+		msFixedEntity 63, 10, DOWN, 27, eas_Init
+		msFixedEntity 63, 10, DOWN, 28, eas_Init
+		msFixedEntity 23, 12, UP, 29, eas_Init
+		msFixedEntity 16, 12, UP, 209, eas_Init
+		msFixedEntity 25, 11, UP, 62, eas_Init
+		msEntitiesEnd

@@ -2,207 +2,61 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\s1_261.asm :
 ; 0x50BCA..0x50CCA : 
 ms_map3_flag261_Entities:
-		dc.b 6
-		dc.b 9
-		dc.b 0
-		dc.b $C3
-		dc.l eas_Init
-		dc.b $C
-		dc.b 9
-		dc.b 0
-		dc.b $C6
-		dc.b $FF
-		dc.b $C
-		dc.b 9
-		dc.b 1
-		dc.b $E
-		dc.b 9
-		dc.b 1
-		dc.b $C7
-		dc.l eas_Init
-		dc.b 7
-		dc.b $12
-		dc.b 3
-		dc.b $C1
-		dc.l eas_Init
-		dc.b 9
-		dc.b $17
-		dc.b 3
-		dc.b $C1
-		dc.l eas_Init
-		dc.b 1
-		dc.b $17
-		dc.b 3
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $10
-		dc.b $16
-		dc.b 3
-		dc.b $C5
-		dc.b $FF
-		dc.b $10
-		dc.b $16
-		dc.b 2
-		dc.b $D
-		dc.b $13
-		dc.b 3
-		dc.b $C7
-		dc.l eas_Init
-		dc.b $1B
-		dc.b $D
-		dc.b 2
-		dc.b $C7
-		dc.l eas_Init
-		dc.b $19
-		dc.b $D
-		dc.b 0
-		dc.b $C3
-		dc.l eas_Init
-		dc.b $1B
-		dc.b 3
-		dc.b 3
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $1F
-		dc.b 3
-		dc.b 3
-		dc.b $CE
-		dc.l eas_Init
-		dc.b $17
-		dc.b $15
-		dc.b 3
-		dc.b $CA
-		dc.l eas_Init
-		dc.b $1D
-		dc.b $18
-		dc.b 1
-		dc.b $C8
-		dc.l eas_Init
-		dc.b $20
-		dc.b $1B
-		dc.b 3
-		dc.b $EB
-		dc.b $FF
-		dc.b $20
-		dc.b $1B
-		dc.b 1
-		dc.b $27
-		dc.b $1A
-		dc.b 3
-		dc.b $CA
-		dc.b $FF
-		dc.b $27
-		dc.b $1A
-		dc.b 1
-		dc.b $25
-		dc.b $15
-		dc.b 3
-		dc.b $C3
-		dc.l eas_Init
-		dc.b $2F
-		dc.b $18
-		dc.b 3
-		dc.b $C4
-		dc.b $FF
-		dc.b $2F
-		dc.b $18
-		dc.b 2
-		dc.b $19
-		dc.b $16
-		dc.b 3
-		dc.b $DC
-		dc.b $FF
-		dc.b $19
-		dc.b $16
-		dc.b 1
-		dc.b $1A
-		dc.b $16
-		dc.b 3
-		dc.b $DE
-		dc.b $FF
-		dc.b $1A
-		dc.b $16
-		dc.b 1
-		dc.b $1B
-		dc.b $16
-		dc.b 3
-		dc.b 6
-		dc.b $FF
-		dc.b $1B
-		dc.b $16
-		dc.b 1
-		dc.b $20
-		dc.b $B
-		dc.b 3
-		dc.b $C0
-		dc.l eas_Init
-		dc.b $1D
-		dc.b 7
-		dc.b 3
-		dc.b $C4
-		dc.b $FF
-		dc.b $1D
-		dc.b 7
-		dc.b 1
-		dc.b $12
-		dc.b $E
-		dc.b 3
-		dc.b $C8
-		dc.b $FF
-		dc.b $12
-		dc.b $E
-		dc.b 1
-		dc.b $12
-		dc.b 9
-		dc.b 3
-		dc.b $C3
-		dc.l eas_Init
-		dc.b $14
-		dc.b $10
-		dc.b 3
-		dc.b $E2
-		dc.b $FE
-		dc.b 5
-		dc.b $C
-		dc.b $AC
-		dc.b 8
-		dc.b $12
-		dc.b 3
-		dc.b $C1
-		dc.l eas_Init
-		dc.b 1
-		dc.b $1D
-		dc.b 1
-		dc.b 3
-		dc.l eas_Init
-		dc.w $FFFF
-		dc.b   3
-		dc.b   3
-		dc.b   0
-		dc.b   0
-		dc.b   0
-		dc.b   0
-		dc.b   0
-		dc.b   0
-		dc.b   0
-		dc.b   0
-		dc.b   0
-		dc.b   0
-		dc.b   1
-		dc.b   1
-		dc.b   2
-		dc.b   1
-		dc.b   2
-		dc.b   2
-		dc.b   2
-		dc.b   1
-		dc.b   2
-		dc.b   2
-		dc.b   2
-		dc.b   2
-		dc.b   2
-		dc.b   3
-		dc.b   2
-		dc.b   3
-		dc.b $FF
-		dc.b $FF
+		msFixedEntity 6, 9, RIGHT, 195, eas_Init
+		msWalkingEntity 12, 9, RIGHT, 198, 12, 9, 1
+		msFixedEntity 14, 9, UP, 199, eas_Init
+		msFixedEntity 7, 18, DOWN, 193, eas_Init
+		msFixedEntity 9, 23, DOWN, 193, eas_Init
+		msFixedEntity 1, 23, DOWN, 206, eas_Init
+		msWalkingEntity 16, 22, DOWN, 197, 16, 22, 2
+		msFixedEntity 13, 19, DOWN, 199, eas_Init
+		msFixedEntity 27, 13, LEFT, 199, eas_Init
+		msFixedEntity 25, 13, RIGHT, 195, eas_Init
+		msFixedEntity 27, 3, DOWN, 206, eas_Init
+		msFixedEntity 31, 3, DOWN, 206, eas_Init
+		msFixedEntity 23, 21, DOWN, 202, eas_Init
+		msFixedEntity 29, 24, UP, 200, eas_Init
+		msWalkingEntity 32, 27, DOWN, 235, 32, 27, 1
+		msWalkingEntity 39, 26, DOWN, 202, 39, 26, 1
+		msFixedEntity 37, 21, DOWN, 195, eas_Init
+		msWalkingEntity 47, 24, DOWN, 196, 47, 24, 2
+		msWalkingEntity 25, 22, DOWN, 220, 25, 22, 1
+		msWalkingEntity 26, 22, DOWN, 222, 26, 22, 1
+		msWalkingEntity 27, 22, DOWN, 6, 27, 22, 1
+		msFixedEntity 32, 11, DOWN, 192, eas_Init
+		msWalkingEntity 29, 7, DOWN, 196, 29, 7, 1
+		msWalkingEntity 18, 14, DOWN, 200, 18, 14, 1
+		msFixedEntity 18, 9, DOWN, 195, eas_Init
+		msSequencedEntity 20, 16, DOWN, 226, ems_50CAC
+		msFixedEntity 8, 18, DOWN, 193, eas_Init
+		msFixedEntity 1, 29, UP, 3, eas_Init
+		msEntitiesEnd
+ems_50CAC:      dc.b DOWN
+		dc.b DOWN
+		dc.b RIGHT
+		dc.b RIGHT
+		dc.b RIGHT
+		dc.b RIGHT
+		dc.b RIGHT
+		dc.b RIGHT
+		dc.b RIGHT
+		dc.b RIGHT
+		dc.b RIGHT
+		dc.b RIGHT
+		dc.b UP
+		dc.b UP
+		dc.b LEFT
+		dc.b UP
+		dc.b LEFT
+		dc.b LEFT
+		dc.b LEFT
+		dc.b UP
+		dc.b LEFT
+		dc.b LEFT
+		dc.b LEFT
+		dc.b LEFT
+		dc.b LEFT
+		dc.b DOWN
+		dc.b LEFT
+		dc.b DOWN
+		emsEnd

@@ -2,38 +2,15 @@
 ; ASM FILE data\maps\entries\map11\mapsetups\s1.asm :
 ; 0x579E2..0x57A0C : 
 ms_map11_Entities:
-		dc.b 8
-		dc.b $13
-		dc.b 3
-		dc.b $EC
-		dc.b $FE
-		dc.b 5
-		dc.b $7A
-		dc.b 4
-		dc.b 6
-		dc.b $1C
-		dc.b 3
-		dc.b $EC
-		dc.b $FF
-		dc.b 6
-		dc.b $1C
-		dc.b 2
-		dc.b $25
-		dc.b $E
-		dc.b 3
-		dc.b $E4
-		dc.l eas_Init
-		dc.b $29
-		dc.b $E
-		dc.b 3
-		dc.b $E4
-		dc.l eas_Init
-		dc.w $FFFF
-		dc.b   2
-		dc.b   2
-		dc.b   0
-		dc.b   0
-		dc.b   0
-		dc.b   2
-		dc.b $FF
-		dc.b $FF
+		msSequencedEntity 8, 19, DOWN, 236, ems_57A04
+		msWalkingEntity 6, 28, DOWN, 236, 6, 28, 2
+		msFixedEntity 37, 14, DOWN, 228, eas_Init
+		msFixedEntity 41, 14, DOWN, 228, eas_Init
+		msEntitiesEnd
+ems_57A04:      dc.b LEFT
+		dc.b LEFT
+		dc.b RIGHT
+		dc.b RIGHT
+		dc.b RIGHT
+		dc.b LEFT
+		emsEnd

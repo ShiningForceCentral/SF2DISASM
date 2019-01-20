@@ -2,86 +2,18 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s1_2C6.asm :
 ; 0x57F08..0x57F7A : 
 ms_map13_flag2C6_Entities:
-		dc.b $17
-		dc.b $D
-		dc.b 3
-		dc.b 9
-		dc.l eas_Init
-		dc.b $D
-		dc.b $1B
-		dc.b 3
-		dc.b $E9
-		dc.b $FF
-		dc.b $D
-		dc.b $1B
-		dc.b 2
-		dc.b 6
-		dc.b $15
-		dc.b 3
-		dc.b $EA
-		dc.b $FF
-		dc.b 6
-		dc.b $15
-		dc.b 2
-		dc.b 1
-		dc.b $B
-		dc.b 3
-		dc.b $DD
-		dc.l eas_Init2
-		dc.b 4
-		dc.b 7
-		dc.b 0
-		dc.b $C1
-		dc.l eas_Init
-		dc.b 8
-		dc.b 7
-		dc.b 2
-		dc.b $C1
-		dc.l eas_Init
-		dc.b $10
-		dc.b 4
-		dc.b 0
-		dc.b $DC
-		dc.l eas_Init
-		dc.b $12
-		dc.b $17
-		dc.b 3
-		dc.b $C0
-		dc.l eas_Init
-		dc.b $B
-		dc.b $D
-		dc.b 0
-		dc.b $DC
-		dc.b $FF
-		dc.b $B
-		dc.b $D
-		dc.b 2
-		dc.b $1A
-		dc.b $11
-		dc.b 2
-		dc.b $DC
-		dc.b $FF
-		dc.b $1A
-		dc.b $11
-		dc.b 2
-		dc.b $F
-		dc.b 3
-		dc.b 3
-		dc.b $C2
-		dc.l eas_Init
-		dc.b $26
-		dc.b 6
-		dc.b 1
-		dc.b $E2
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 3
-		dc.b $4C
-		dc.l eas_Init
-		dc.b $E
-		dc.b 3
-		dc.b 3
-		dc.b $D5
-		dc.l eas_Init
-		dc.w $FFFF
+		msFixedEntity 23, 13, DOWN, 9, eas_Init
+		msWalkingEntity 13, 27, DOWN, 233, 13, 27, 2
+		msWalkingEntity 6, 21, DOWN, 234, 6, 21, 2
+		msFixedEntity 1, 11, DOWN, 221, eas_Init2
+		msFixedEntity 4, 7, RIGHT, 193, eas_Init
+		msFixedEntity 8, 7, LEFT, 193, eas_Init
+		msFixedEntity 16, 4, RIGHT, 220, eas_Init
+		msFixedEntity 18, 23, DOWN, 192, eas_Init
+		msWalkingEntity 11, 13, RIGHT, 220, 11, 13, 2
+		msWalkingEntity 26, 17, LEFT, 220, 26, 17, 2
+		msFixedEntity 15, 3, DOWN, 194, eas_Init
+		msFixedEntity 38, 6, UP, 226, eas_Init
+		msFixedEntity 63, 63, DOWN, 76, eas_Init
+		msFixedEntity 14, 3, DOWN, 213, eas_Init
+		msEntitiesEnd

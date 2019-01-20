@@ -2,55 +2,16 @@
 ; ASM FILE data\maps\entries\map45\mapsetups\s1.asm :
 ; 0x5FF7A..0x60024 : 
 ms_map45_Entities:
-		dc.b 6
-		dc.b 6
-		dc.b 3
-		dc.b $19
-		dc.l eas_Init
-		dc.b $C
-		dc.b $1E
-		dc.b 3
-		dc.b $B9
-		dc.b $FF
-		dc.b $C
-		dc.b $1E
-		dc.b 1
-		dc.b $C
-		dc.b $1B
-		dc.b 0
-		dc.b $B9
-		dc.l eas_Init
-		dc.b $D
-		dc.b $1B
-		dc.b 2
-		dc.b $B9
-		dc.l eas_Init
-		dc.b $C
-		dc.b $18
-		dc.b 3
-		dc.b $92
-		dc.l eas_Init
-		dc.b $F
-		dc.b $1C
-		dc.b 1
-		dc.b $B8
-		dc.l eas_5FFC4
-		dc.b 9
-		dc.b $1A
-		dc.b 1
-		dc.b $B8
-		dc.l eas_5FFC8
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $B5
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $B4
-		dc.l eas_Init
-		dc.w $FFFF
+		msFixedEntity 6, 6, DOWN, 25, eas_Init
+		msWalkingEntity 12, 30, DOWN, 185, 12, 30, 1
+		msFixedEntity 12, 27, RIGHT, 185, eas_Init
+		msFixedEntity 13, 27, LEFT, 185, eas_Init
+		msFixedEntity 12, 24, DOWN, 146, eas_Init
+		msFixedEntity 15, 28, UP, 184, eas_5FFC4
+		msFixedEntity 9, 26, UP, 184, eas_5FFC8
+		msFixedEntity 63, 63, UP, 181, eas_Init
+		msFixedEntity 63, 63, UP, 180, eas_Init
+		msEntitiesEnd
 eas_5FFC4:       ac_wait 16
 eas_5FFC8:       ac_11 $0
 		 ac_setSpeed 20,20

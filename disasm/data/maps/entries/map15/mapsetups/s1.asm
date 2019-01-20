@@ -2,82 +2,16 @@
 ; ASM FILE data\maps\entries\map15\mapsetups\s1.asm :
 ; 0x5CE2E..0x5CE90 : 
 ms_map15_Entities:
-		dc.b $1B
-		dc.b $1B
-		dc.b 3
-		dc.b $DA
-		dc.b $FF
-		dc.b $1B
-		dc.b $1B
-		dc.b 1
-		dc.b $F
-		dc.b $1B
-		dc.b 3
-		dc.b $DC
-		dc.b $FF
-		dc.b $F
-		dc.b $1B
-		dc.b 1
-		dc.b $1D
-		dc.b $D
-		dc.b 2
-		dc.b $DE
-		dc.l eas_Init
-		dc.b $14
-		dc.b $E
-		dc.b 3
-		dc.b $E2
-		dc.l eas_Init
-		dc.b $1A
-		dc.b $F
-		dc.b 3
-		dc.b $DD
-		dc.b $FF
-		dc.b $1A
-		dc.b $F
-		dc.b 2
-		dc.b $C
-		dc.b $1A
-		dc.b 1
-		dc.b $E0
-		dc.l eas_Init
-		dc.b 6
-		dc.b $10
-		dc.b 3
-		dc.b $DF
-		dc.b $FF
-		dc.b 6
-		dc.b $10
-		dc.b 2
-		dc.b $1C
-		dc.b 6
-		dc.b 3
-		dc.b $E1
-		dc.b $FF
-		dc.b $1C
-		dc.b 6
-		dc.b 2
-		dc.b $1F
-		dc.b $D
-		dc.b 1
-		dc.b $DB
-		dc.b $FF
-		dc.b $1F
-		dc.b $D
-		dc.b 1
-		dc.b 3
-		dc.b $17
-		dc.b 3
-		dc.b $C1
-		dc.l eas_Init
-		dc.b $C
-		dc.b $F
-		dc.b 3
-		dc.b $C0
-		dc.l eas_Init
-		dc.b 2
-		dc.b $17
-		dc.b 3
-		dc.b $C1
-		dc.l eas_Init
-		dc.w $FFFF
+		msWalkingEntity 27, 27, DOWN, 218, 27, 27, 1
+		msWalkingEntity 15, 27, DOWN, 220, 15, 27, 1
+		msFixedEntity 29, 13, LEFT, 222, eas_Init
+		msFixedEntity 20, 14, DOWN, 226, eas_Init
+		msWalkingEntity 26, 15, DOWN, 221, 26, 15, 2
+		msFixedEntity 12, 26, UP, 224, eas_Init
+		msWalkingEntity 6, 16, DOWN, 223, 6, 16, 2
+		msWalkingEntity 28, 6, DOWN, 225, 28, 6, 2
+		msWalkingEntity 31, 13, UP, 219, 31, 13, 1
+		msFixedEntity 3, 23, DOWN, 193, eas_Init
+		msFixedEntity 12, 15, DOWN, 192, eas_Init
+		msFixedEntity 2, 23, DOWN, 193, eas_Init
+		msEntitiesEnd

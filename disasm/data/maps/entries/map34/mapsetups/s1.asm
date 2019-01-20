@@ -2,108 +2,24 @@
 ; ASM FILE data\maps\entries\map34\mapsetups\s1.asm :
 ; 0x5B5E6..0x5B68E : 
 ms_map34_Entities:
-		dc.b 7
-		dc.b $A
-		dc.b 1
-		dc.b $D4
-		dc.l eas_Init
-		dc.b 6
-		dc.b $A
-		dc.b 1
-		dc.b $DB
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $FC
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $DE
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $C8
-		dc.l eas_Init
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
-		dc.b $3F
-		dc.b $3F
-		dc.b 1
-		dc.b $3F
-		dc.l eas_Init3
+		msFixedEntity 7, 10, UP, 212, eas_Init
+		msFixedEntity 6, 10, UP, 219, eas_Init
+		msFixedEntity 63, 63, UP, 252, eas_Init
+		msFixedEntity 63, 63, UP, 222, eas_Init
+		msFixedEntity 63, 63, UP, 200, eas_Init
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3
+		msFixedEntity 63, 63, UP, 63, eas_Init3

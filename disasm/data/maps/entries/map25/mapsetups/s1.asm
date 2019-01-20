@@ -2,56 +2,12 @@
 ; ASM FILE data\maps\entries\map25\mapsetups\s1.asm :
 ; 0x5D1E2..0x5D224 : 
 ms_map25_Entities:
-		dc.b $11
-		dc.b $1A
-		dc.b 3
-		dc.b $C4
-		dc.b $FF
-		dc.b $11
-		dc.b $1A
-		dc.b 1
-		dc.b $18
-		dc.b $19
-		dc.b 3
-		dc.b $C6
-		dc.l eas_Init
-		dc.b $14
-		dc.b $D
-		dc.b 3
-		dc.b $C2
-		dc.b $FF
-		dc.b $14
-		dc.b $D
-		dc.b 1
-		dc.b 8
-		dc.b $15
-		dc.b 3
-		dc.b $C4
-		dc.b $FF
-		dc.b 8
-		dc.b $15
-		dc.b 1
-		dc.b 4
-		dc.b $C
-		dc.b 3
-		dc.b $C2
-		dc.b $FF
-		dc.b 4
-		dc.b $C
-		dc.b 1
-		dc.b $B
-		dc.b 3
-		dc.b 0
-		dc.b $C1
-		dc.l eas_Init
-		dc.b $C
-		dc.b $A
-		dc.b 3
-		dc.b $C0
-		dc.l eas_Init
-		dc.b $1B
-		dc.b $11
-		dc.b 0
-		dc.b $C3
-		dc.l eas_Init
-		dc.w $FFFF
+		msWalkingEntity 17, 26, DOWN, 196, 17, 26, 1
+		msFixedEntity 24, 25, DOWN, 198, eas_Init
+		msWalkingEntity 20, 13, DOWN, 194, 20, 13, 1
+		msWalkingEntity 8, 21, DOWN, 196, 8, 21, 1
+		msWalkingEntity 4, 12, DOWN, 194, 4, 12, 1
+		msFixedEntity 11, 3, RIGHT, 193, eas_Init
+		msFixedEntity 12, 10, DOWN, 192, eas_Init
+		msFixedEntity 27, 17, RIGHT, 195, eas_Init
+		msEntitiesEnd

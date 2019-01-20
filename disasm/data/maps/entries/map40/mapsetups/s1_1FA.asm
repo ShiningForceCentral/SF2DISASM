@@ -2,18 +2,6 @@
 ; ASM FILE data\maps\entries\map40\mapsetups\s1_1FA.asm :
 ; 0x53F78..0x53F90 : 
 ms_map40_flag1FA_Entities:
-		dc.b $E
-		dc.b $F
-		dc.b 3
-		dc.b $1C
-		dc.l eas_LyingLeftBis
-		dc.b $E
-		dc.b $13
-		dc.b 3
-		dc.b $CE
-		dc.l eas_45F7C
-		dc.b $C
-		dc.b $15
-		dc.b 2
-		dc.b $CE
-		dc.l eas_LyingLeftBis
+		msFixedEntity 14, 15, DOWN, 28, eas_LyingLeftBis
+		msFixedEntity 14, 19, DOWN, 206, eas_45F7C
+		msFixedEntity 12, 21, LEFT, 206, eas_LyingLeftBis

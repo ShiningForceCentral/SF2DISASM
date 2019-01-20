@@ -2,109 +2,22 @@
 ; ASM FILE data\maps\entries\map16\mapsetups\s1_212.asm :
 ; 0x60FC6..0x61058 : 
 ms_map16_flag212_Entities:
-		dc.b $2E
-		dc.b $B
-		dc.b 1
-		dc.b $C4
-		dc.l eas_Init
-		dc.b $2E
-		dc.b $11
-		dc.b 1
-		dc.b $C4
-		dc.l eas_Init
-		dc.b $24
-		dc.b $1C
-		dc.b 3
-		dc.b $C5
-		dc.b $FF
-		dc.b $24
-		dc.b $1C
-		dc.b 1
-		dc.b $17
-		dc.b $1B
-		dc.b 1
-		dc.b $C5
-		dc.l eas_Init
-		dc.b $22
-		dc.b $C
-		dc.b 2
-		dc.b $C5
-		dc.l eas_Init
-		dc.b $1B
-		dc.b $13
-		dc.b 3
-		dc.b $C3
-		dc.l eas_Init
-		dc.b $20
-		dc.b $13
-		dc.b 3
-		dc.b $C6
-		dc.l eas_Init
-		dc.b $2D
-		dc.b $F
-		dc.b 3
-		dc.b $C2
-		dc.b $FF
-		dc.b $2D
-		dc.b $F
-		dc.b 1
-		dc.b $F
-		dc.b $1C
-		dc.b 3
-		dc.b $CA
-		dc.l eas_Init
-		dc.b $23
-		dc.b $18
-		dc.b 3
-		dc.b $C1
-		dc.l eas_Init
-		dc.b $1B
-		dc.b 5
-		dc.b 3
-		dc.b $C0
-		dc.l eas_Init
-		dc.b $12
-		dc.b $13
-		dc.b 3
-		dc.b $CE
-		dc.b $FF
-		dc.b $12
-		dc.b $13
-		dc.b 1
-		dc.b 3
-		dc.b $D
-		dc.b 3
-		dc.b $CE
-		dc.b $FF
-		dc.b 3
-		dc.b $D
-		dc.b 1
-		dc.b 7
-		dc.b $14
-		dc.b 3
-		dc.b $CF
-		dc.b $FF
-		dc.b 7
-		dc.b $14
-		dc.b 1
-		dc.b $17
-		dc.b $18
-		dc.b 3
-		dc.b $AC
-		dc.l eas_Init3
-		dc.b $27
-		dc.b $18
-		dc.b 3
-		dc.b $C1
-		dc.l eas_Init
-		dc.b $11
-		dc.b $A
-		dc.b 3
-		dc.b $CF
-		dc.l eas_Init
-		dc.b $1D
-		dc.b $17
-		dc.b 3
-		dc.b $3E
-		dc.l eas_Init
-		dc.w $FFFF
+		msFixedEntity 46, 11, UP, 196, eas_Init
+		msFixedEntity 46, 17, UP, 196, eas_Init
+		msWalkingEntity 36, 28, DOWN, 197, 36, 28, 1
+		msFixedEntity 23, 27, UP, 197, eas_Init
+		msFixedEntity 34, 12, LEFT, 197, eas_Init
+		msFixedEntity 27, 19, DOWN, 195, eas_Init
+		msFixedEntity 32, 19, DOWN, 198, eas_Init
+		msWalkingEntity 45, 15, DOWN, 194, 45, 15, 1
+		msFixedEntity 15, 28, DOWN, 202, eas_Init
+		msFixedEntity 35, 24, DOWN, 193, eas_Init
+		msFixedEntity 27, 5, DOWN, 192, eas_Init
+		msWalkingEntity 18, 19, DOWN, 206, 18, 19, 1
+		msWalkingEntity 3, 13, DOWN, 206, 3, 13, 1
+		msWalkingEntity 7, 20, DOWN, 207, 7, 20, 1
+		msFixedEntity 23, 24, DOWN, 172, eas_Init3
+		msFixedEntity 39, 24, DOWN, 193, eas_Init
+		msFixedEntity 17, 10, DOWN, 207, eas_Init
+		msFixedEntity 29, 23, DOWN, 62, eas_Init
+		msEntitiesEnd
