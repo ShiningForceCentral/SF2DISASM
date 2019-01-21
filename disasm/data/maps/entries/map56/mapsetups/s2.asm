@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map56\mapsetups\s2.asm :
 ; 0x614AA..0x614D6 : 
 ms_map56_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_614B2-ms_map56_EntityEvents
-		dc.w $FD00
-		dc.w return_614D4-ms_map56_EntityEvents
+		msEntityEvent 128, UP, sub_614B2-ms_map56_EntityEvents
+		msDefaultEntityEvent 0, entevdft_614D4-ms_map56_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -26,7 +23,8 @@ loc_614C2:
 		trap    #TEXTBOX
 		dc.w $FFFF
 		jmp     j_ChurchActions
-return_614D4:
+entevdft_614D4:
+		
 		rts
 
 	; End of function sub_614B2

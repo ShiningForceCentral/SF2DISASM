@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\mapsetups.asm :
 ; 0x4F6E2..0x4FA70 : Map setups table
-MapSetups:      msMap 3, ms_map3        ; list of map event addresses and flags to check
+MapSetups:      msMap 3, ms_map3
 		msFlag 609, ms_map3_flag261; set after the scene where Astral exorcises the Gizmo
 		msFlag 506, ms_map3_flag1FA; Battle 6 completed
 		msFlag 543, ms_map3_flag21F; Battle 43 completed

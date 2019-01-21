@@ -2,56 +2,23 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\s2.asm :
 ; 0x50F10..0x5105C : 
 ms_map3_EntityEvents:
-		dc.b 1
-		dc.b 3
-		dc.w sub_50F54-ms_map3_EntityEvents
-		dc.b 2
-		dc.b 0
-		dc.w sub_50F98-ms_map3_EntityEvents
-		dc.b $80
-		dc.b 1
-		dc.w sub_50FBA-ms_map3_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_50FCC-ms_map3_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_50FD6-ms_map3_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_50FE4-ms_map3_EntityEvents
-		dc.b $84
-		dc.b 0
-		dc.w sub_50FEA-ms_map3_EntityEvents
-		dc.b $85
-		dc.b 1
-		dc.w sub_50FF0-ms_map3_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_50FFE-ms_map3_EntityEvents
-		dc.b $89
-		dc.b 1
-		dc.w sub_51004-ms_map3_EntityEvents
-		dc.b $8A
-		dc.b 1
-		dc.w sub_5100E-ms_map3_EntityEvents
-		dc.b $8B
-		dc.b 1
-		dc.w sub_51020-ms_map3_EntityEvents
-		dc.b $8C
-		dc.b 1
-		dc.w sub_51032-ms_map3_EntityEvents
-		dc.b $8D
-		dc.b 1
-		dc.w sub_5103C-ms_map3_EntityEvents
-		dc.b $90
-		dc.b 1
-		dc.w sub_50FFE-ms_map3_EntityEvents
-		dc.b $8E
-		dc.b 3
-		dc.w sub_51044-ms_map3_EntityEvents
-		dc.w $FD00
-		dc.w return_5105A-ms_map3_EntityEvents
+		msEntityEvent 1, DOWN, sub_50F54-ms_map3_EntityEvents
+		msEntityEvent 2, RIGHT, sub_50F98-ms_map3_EntityEvents
+		msEntityEvent 128, UP, sub_50FBA-ms_map3_EntityEvents
+		msEntityEvent 129, DOWN, sub_50FCC-ms_map3_EntityEvents
+		msEntityEvent 130, UP, sub_50FD6-ms_map3_EntityEvents
+		msEntityEvent 131, UP, sub_50FE4-ms_map3_EntityEvents
+		msEntityEvent 132, RIGHT, sub_50FEA-ms_map3_EntityEvents
+		msEntityEvent 133, UP, sub_50FF0-ms_map3_EntityEvents
+		msEntityEvent 134, UP, sub_50FFE-ms_map3_EntityEvents
+		msEntityEvent 137, UP, sub_51004-ms_map3_EntityEvents
+		msEntityEvent 138, UP, sub_5100E-ms_map3_EntityEvents
+		msEntityEvent 139, UP, sub_51020-ms_map3_EntityEvents
+		msEntityEvent 140, UP, sub_51032-ms_map3_EntityEvents
+		msEntityEvent 141, UP, sub_5103C-ms_map3_EntityEvents
+		msEntityEvent 144, UP, sub_50FFE-ms_map3_EntityEvents
+		msEntityEvent 142, DOWN, sub_51044-ms_map3_EntityEvents
+		msDefaultEntityEvent 0, entevdft_5105A-ms_map3_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -298,7 +265,8 @@ loc_51052:
 		dc.w $1F5               ; "Is it time to start school?{N}OK, I'm coming up soon.{W1}"
 		trap    #SET_FLAG
 		dc.w $25A               ; set after Astral's second basement line
-return_5105A:
+entevdft_5105A:
+		
 		rts
 
 	; End of function sub_51044

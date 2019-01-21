@@ -2,20 +2,11 @@
 ; ASM FILE data\maps\entries\map45\mapsetups\s2.asm :
 ; 0x60024..0x60060 : 
 ms_map45_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_60038-ms_map45_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_60042-ms_map45_EntityEvents
-		dc.b $82
-		dc.b 3
-		dc.w sub_60048-ms_map45_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_6004E-ms_map45_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_147-ms_map45_EntityEvents
+		msEntityEvent 128, UP, sub_60038-ms_map45_EntityEvents
+		msEntityEvent 129, DOWN, sub_60042-ms_map45_EntityEvents
+		msEntityEvent 130, DOWN, sub_60048-ms_map45_EntityEvents
+		msEntityEvent 131, UP, sub_6004E-ms_map45_EntityEvents
+		msDefaultEntityEvent 0, nullsub_147-ms_map45_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

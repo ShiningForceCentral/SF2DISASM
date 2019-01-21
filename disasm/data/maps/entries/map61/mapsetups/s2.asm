@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map61\mapsetups\s2.asm :
 ; 0x5C672..0x5C696 : 
 ms_map61_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w sub_5C67A-ms_map61_EntityEvents
-		dc.w $FD00
-		dc.w return_5C694-ms_map61_EntityEvents
+		msEntityEvent 128, DOWN, sub_5C67A-ms_map61_EntityEvents
+		msDefaultEntityEvent 0, entevdft_5C694-ms_map61_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -25,7 +22,8 @@ loc_5C684:
 		dc.w $E40               ; "Or, maybe it's to the east.{W1}"
 		trap    #SET_FLAG
 		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
-return_5C694:
+entevdft_5C694:
+		
 		rts
 
 	; End of function sub_5C67A

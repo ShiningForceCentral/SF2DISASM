@@ -2,14 +2,9 @@
 ; ASM FILE data\maps\entries\map62\mapsetups\s2.asm :
 ; 0x5C7B6..0x5C820 : 
 ms_map62_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w sub_5C7C2-ms_map62_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_5C7F6-ms_map62_EntityEvents
-		dc.w $FD00
-		dc.w return_5C81E-ms_map62_EntityEvents
+		msEntityEvent 128, DOWN, sub_5C7C2-ms_map62_EntityEvents
+		msEntityEvent 129, DOWN, sub_5C7F6-ms_map62_EntityEvents
+		msDefaultEntityEvent 0, return_5C81E-ms_map62_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

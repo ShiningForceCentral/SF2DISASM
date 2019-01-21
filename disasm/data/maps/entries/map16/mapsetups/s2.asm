@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map16\mapsetups\s2.asm :
 ; 0x51E32..0x51EE4 : 
 ms_map16_EntityEvents:
-		dc.b $94
-		dc.b 3
-		dc.w sub_51E50-ms_map16_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_119-ms_map16_EntityEvents
+		msEntityEvent 148, DOWN, sub_51E50-ms_map16_EntityEvents
+		msDefaultEntityEvent 0, nullsub_119-ms_map16_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

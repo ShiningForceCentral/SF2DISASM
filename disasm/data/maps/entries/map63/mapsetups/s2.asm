@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map63\mapsetups\s2.asm :
 ; 0x5C98A..0x5C9E2 : 
 ms_map63_EntityEvents:
-		dc.b $1D
-		dc.b 0
-		dc.w sub_5C992-ms_map63_EntityEvents
-		dc.w $FD00
-		dc.w return_5C9E0-ms_map63_EntityEvents
+		msEntityEvent 29, RIGHT, sub_5C992-ms_map63_EntityEvents
+		msDefaultEntityEvent 0, return_5C9E0-ms_map63_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

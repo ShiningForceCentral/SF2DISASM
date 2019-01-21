@@ -2,92 +2,35 @@
 ; ASM FILE data\maps\entries\map37\mapsetups\s2.asm :
 ; 0x5F86C..0x5F9D2 : 
 ms_map37_EntityEvents:
-		dc.b 1
-		dc.b 3
-		dc.w sub_5F8E0-ms_map37_EntityEvents
-		dc.b 2
-		dc.b 3
-		dc.w sub_5F8E8-ms_map37_EntityEvents
-		dc.b 3
-		dc.b 3
-		dc.w sub_5F8F0-ms_map37_EntityEvents
-		dc.b 4
-		dc.b 3
-		dc.w sub_5F8F8-ms_map37_EntityEvents
-		dc.b 5
-		dc.b 3
-		dc.w sub_5F900-ms_map37_EntityEvents
-		dc.b 6
-		dc.b 3
-		dc.w sub_5F908-ms_map37_EntityEvents
-		dc.b 7
-		dc.b 3
-		dc.w sub_5F910-ms_map37_EntityEvents
-		dc.b 8
-		dc.b 3
-		dc.w sub_5F918-ms_map37_EntityEvents
-		dc.b 9
-		dc.b 3
-		dc.w sub_5F920-ms_map37_EntityEvents
-		dc.b $A
-		dc.b 3
-		dc.w sub_5F928-ms_map37_EntityEvents
-		dc.b $B
-		dc.b 3
-		dc.w sub_5F930-ms_map37_EntityEvents
-		dc.b $C
-		dc.b 3
-		dc.w sub_5F938-ms_map37_EntityEvents
-		dc.b $D
-		dc.b 3
-		dc.w sub_5F940-ms_map37_EntityEvents
-		dc.b $E
-		dc.b 3
-		dc.w sub_5F948-ms_map37_EntityEvents
-		dc.b $F
-		dc.b 3
-		dc.w sub_5F950-ms_map37_EntityEvents
-		dc.b $10
-		dc.b 3
-		dc.w sub_5F958-ms_map37_EntityEvents
-		dc.b $11
-		dc.b 3
-		dc.w sub_5F960-ms_map37_EntityEvents
-		dc.b $12
-		dc.b 3
-		dc.w sub_5F968-ms_map37_EntityEvents
-		dc.b $13
-		dc.b 3
-		dc.w sub_5F970-ms_map37_EntityEvents
-		dc.b $14
-		dc.b 3
-		dc.w sub_5F978-ms_map37_EntityEvents
-		dc.b $15
-		dc.b 3
-		dc.w sub_5F980-ms_map37_EntityEvents
-		dc.b $16
-		dc.b 3
-		dc.w sub_5F988-ms_map37_EntityEvents
-		dc.b $17
-		dc.b 3
-		dc.w sub_5F990-ms_map37_EntityEvents
-		dc.b $18
-		dc.b 3
-		dc.w sub_5F998-ms_map37_EntityEvents
-		dc.b $1A
-		dc.b 1
-		dc.w sub_5F9A8-ms_map37_EntityEvents
-		dc.b $1D
-		dc.b 3
-		dc.w sub_5F9BE-ms_map37_EntityEvents
-		dc.b $80
-		dc.b 3
-		dc.w sub_5F9CC-ms_map37_EntityEvents
-		dc.b $81
-		dc.b 0
-		dc.w return_5F9D0-ms_map37_EntityEvents
-		dc.w $FD00
-		dc.w sub_5F9E6-ms_map37_EntityEvents
+		msEntityEvent 1, DOWN, sub_5F8E0-ms_map37_EntityEvents
+		msEntityEvent 2, DOWN, sub_5F8E8-ms_map37_EntityEvents
+		msEntityEvent 3, DOWN, sub_5F8F0-ms_map37_EntityEvents
+		msEntityEvent 4, DOWN, sub_5F8F8-ms_map37_EntityEvents
+		msEntityEvent 5, DOWN, sub_5F900-ms_map37_EntityEvents
+		msEntityEvent 6, DOWN, sub_5F908-ms_map37_EntityEvents
+		msEntityEvent 7, DOWN, sub_5F910-ms_map37_EntityEvents
+		msEntityEvent 8, DOWN, sub_5F918-ms_map37_EntityEvents
+		msEntityEvent 9, DOWN, sub_5F920-ms_map37_EntityEvents
+		msEntityEvent 10, DOWN, sub_5F928-ms_map37_EntityEvents
+		msEntityEvent 11, DOWN, sub_5F930-ms_map37_EntityEvents
+		msEntityEvent 12, DOWN, sub_5F938-ms_map37_EntityEvents
+		msEntityEvent 13, DOWN, sub_5F940-ms_map37_EntityEvents
+		msEntityEvent 14, DOWN, sub_5F948-ms_map37_EntityEvents
+		msEntityEvent 15, DOWN, sub_5F950-ms_map37_EntityEvents
+		msEntityEvent 16, DOWN, sub_5F958-ms_map37_EntityEvents
+		msEntityEvent 17, DOWN, sub_5F960-ms_map37_EntityEvents
+		msEntityEvent 18, DOWN, sub_5F968-ms_map37_EntityEvents
+		msEntityEvent 19, DOWN, sub_5F970-ms_map37_EntityEvents
+		msEntityEvent 20, DOWN, sub_5F978-ms_map37_EntityEvents
+		msEntityEvent 21, DOWN, sub_5F980-ms_map37_EntityEvents
+		msEntityEvent 22, DOWN, sub_5F988-ms_map37_EntityEvents
+		msEntityEvent 23, DOWN, sub_5F990-ms_map37_EntityEvents
+		msEntityEvent 24, DOWN, sub_5F998-ms_map37_EntityEvents
+		msEntityEvent 26, UP, sub_5F9A8-ms_map37_EntityEvents
+		msEntityEvent 29, DOWN, sub_5F9BE-ms_map37_EntityEvents
+		msEntityEvent 128, DOWN, sub_5F9CC-ms_map37_EntityEvents
+		msEntityEvent 129, RIGHT, entevt_5F9D0-ms_map37_EntityEvents
+		msDefaultEntityEvent 0, sub_5F9E6-ms_map37_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -366,7 +309,7 @@ sub_5F9C6:
 sub_5F9CC:
 		trap    #TEXTBOX
 		dc.w $B                 ; "{LEADER}, take it easy!{W1}"
-return_5F9D0:
+entevt_5F9D0:
 		rts
 
 	; End of function sub_5F9CC

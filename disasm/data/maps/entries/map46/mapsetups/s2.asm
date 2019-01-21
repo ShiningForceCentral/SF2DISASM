@@ -2,98 +2,37 @@
 ; ASM FILE data\maps\entries\map46\mapsetups\s2.asm :
 ; 0x5C0F8..0x5C264 : 
 ms_map46_EntityEvents:
-		dc.b 1
-		dc.b 1
-		dc.w sub_5C174-ms_map46_EntityEvents
-		dc.b 2
-		dc.b 1
-		dc.w sub_5C17C-ms_map46_EntityEvents
-		dc.b 3
-		dc.b 1
-		dc.w sub_5C184-ms_map46_EntityEvents
-		dc.b 4
-		dc.b 1
-		dc.w sub_5C18C-ms_map46_EntityEvents
-		dc.b 5
-		dc.b 1
-		dc.w sub_5C194-ms_map46_EntityEvents
-		dc.b 6
-		dc.b 1
-		dc.w sub_5C19C-ms_map46_EntityEvents
-		dc.b 7
-		dc.b 1
-		dc.w sub_5C1A4-ms_map46_EntityEvents
-		dc.b 8
-		dc.b 1
-		dc.w sub_5C1AC-ms_map46_EntityEvents
-		dc.b 9
-		dc.b 1
-		dc.w sub_5C1B4-ms_map46_EntityEvents
-		dc.b $A
-		dc.b 1
-		dc.w sub_5C1BC-ms_map46_EntityEvents
-		dc.b $B
-		dc.b 1
-		dc.w sub_5C1C4-ms_map46_EntityEvents
-		dc.b $C
-		dc.b 1
-		dc.w sub_5C1CC-ms_map46_EntityEvents
-		dc.b $D
-		dc.b 1
-		dc.w sub_5C1D4-ms_map46_EntityEvents
-		dc.b $E
-		dc.b 1
-		dc.w sub_5C1DC-ms_map46_EntityEvents
-		dc.b $F
-		dc.b 1
-		dc.w sub_5C1E4-ms_map46_EntityEvents
-		dc.b $10
-		dc.b 1
-		dc.w sub_5C1EC-ms_map46_EntityEvents
-		dc.b $11
-		dc.b 1
-		dc.w sub_5C1F4-ms_map46_EntityEvents
-		dc.b $12
-		dc.b 1
-		dc.w sub_5C1FC-ms_map46_EntityEvents
-		dc.b $13
-		dc.b 1
-		dc.w sub_5C204-ms_map46_EntityEvents
-		dc.b $14
-		dc.b 1
-		dc.w sub_5C20C-ms_map46_EntityEvents
-		dc.b $15
-		dc.b 1
-		dc.w sub_5C214-ms_map46_EntityEvents
-		dc.b $16
-		dc.b 1
-		dc.w sub_5C21C-ms_map46_EntityEvents
-		dc.b $17
-		dc.b 1
-		dc.w sub_5C224-ms_map46_EntityEvents
-		dc.b $18
-		dc.b 1
-		dc.w sub_5C22C-ms_map46_EntityEvents
-		dc.b $19
-		dc.b 1
-		dc.w sub_5C234-ms_map46_EntityEvents
-		dc.b $1A
-		dc.b 1
-		dc.w sub_5C23C-ms_map46_EntityEvents
-		dc.b $1B
-		dc.b 1
-		dc.w sub_5C244-ms_map46_EntityEvents
-		dc.b $1C
-		dc.b 1
-		dc.w sub_5C24C-ms_map46_EntityEvents
-		dc.b $1D
-		dc.b 1
-		dc.w sub_5C254-ms_map46_EntityEvents
-		dc.b $80
-		dc.b 1
-		dc.w sub_5C25C-ms_map46_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_148-ms_map46_EntityEvents
+		msEntityEvent 1, UP, sub_5C174-ms_map46_EntityEvents
+		msEntityEvent 2, UP, sub_5C17C-ms_map46_EntityEvents
+		msEntityEvent 3, UP, sub_5C184-ms_map46_EntityEvents
+		msEntityEvent 4, UP, sub_5C18C-ms_map46_EntityEvents
+		msEntityEvent 5, UP, sub_5C194-ms_map46_EntityEvents
+		msEntityEvent 6, UP, sub_5C19C-ms_map46_EntityEvents
+		msEntityEvent 7, UP, sub_5C1A4-ms_map46_EntityEvents
+		msEntityEvent 8, UP, sub_5C1AC-ms_map46_EntityEvents
+		msEntityEvent 9, UP, sub_5C1B4-ms_map46_EntityEvents
+		msEntityEvent 10, UP, sub_5C1BC-ms_map46_EntityEvents
+		msEntityEvent 11, UP, sub_5C1C4-ms_map46_EntityEvents
+		msEntityEvent 12, UP, sub_5C1CC-ms_map46_EntityEvents
+		msEntityEvent 13, UP, sub_5C1D4-ms_map46_EntityEvents
+		msEntityEvent 14, UP, sub_5C1DC-ms_map46_EntityEvents
+		msEntityEvent 15, UP, sub_5C1E4-ms_map46_EntityEvents
+		msEntityEvent 16, UP, sub_5C1EC-ms_map46_EntityEvents
+		msEntityEvent 17, UP, sub_5C1F4-ms_map46_EntityEvents
+		msEntityEvent 18, UP, sub_5C1FC-ms_map46_EntityEvents
+		msEntityEvent 19, UP, sub_5C204-ms_map46_EntityEvents
+		msEntityEvent 20, UP, sub_5C20C-ms_map46_EntityEvents
+		msEntityEvent 21, UP, sub_5C214-ms_map46_EntityEvents
+		msEntityEvent 22, UP, sub_5C21C-ms_map46_EntityEvents
+		msEntityEvent 23, UP, sub_5C224-ms_map46_EntityEvents
+		msEntityEvent 24, UP, sub_5C22C-ms_map46_EntityEvents
+		msEntityEvent 25, UP, sub_5C234-ms_map46_EntityEvents
+		msEntityEvent 26, UP, sub_5C23C-ms_map46_EntityEvents
+		msEntityEvent 27, UP, sub_5C244-ms_map46_EntityEvents
+		msEntityEvent 28, UP, sub_5C24C-ms_map46_EntityEvents
+		msEntityEvent 29, UP, sub_5C254-ms_map46_EntityEvents
+		msEntityEvent 128, UP, sub_5C25C-ms_map46_EntityEvents
+		msDefaultEntityEvent 0, nullsub_148-ms_map46_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

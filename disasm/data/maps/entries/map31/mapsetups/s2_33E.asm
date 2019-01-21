@@ -2,38 +2,17 @@
 ; ASM FILE data\maps\entries\map31\mapsetups\s2_33E.asm :
 ; 0x5D49E..0x5D552 : 
 ms_map31_flag33E_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_5D4CA-ms_map31_flag33E_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_5D4D4-ms_map31_flag33E_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_5D4E2-ms_map31_flag33E_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_5D4E8-ms_map31_flag33E_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_5D4F2-ms_map31_flag33E_EntityEvents
-		dc.b $85
-		dc.b 1
-		dc.w sub_5D50E-ms_map31_flag33E_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_5D514-ms_map31_flag33E_EntityEvents
-		dc.b $87
-		dc.b 1
-		dc.w sub_5D51E-ms_map31_flag33E_EntityEvents
-		dc.b $88
-		dc.b 1
-		dc.w sub_5D526-ms_map31_flag33E_EntityEvents
-		dc.b $8A
-		dc.b 1
-		dc.w sub_5D542-ms_map31_flag33E_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_137-ms_map31_flag33E_EntityEvents
+		msEntityEvent 128, UP, sub_5D4CA-ms_map31_flag33E_EntityEvents
+		msEntityEvent 129, UP, sub_5D4D4-ms_map31_flag33E_EntityEvents
+		msEntityEvent 130, UP, sub_5D4E2-ms_map31_flag33E_EntityEvents
+		msEntityEvent 131, UP, sub_5D4E8-ms_map31_flag33E_EntityEvents
+		msEntityEvent 132, UP, sub_5D4F2-ms_map31_flag33E_EntityEvents
+		msEntityEvent 133, UP, sub_5D50E-ms_map31_flag33E_EntityEvents
+		msEntityEvent 134, UP, sub_5D514-ms_map31_flag33E_EntityEvents
+		msEntityEvent 135, UP, sub_5D51E-ms_map31_flag33E_EntityEvents
+		msEntityEvent 136, UP, sub_5D526-ms_map31_flag33E_EntityEvents
+		msEntityEvent 138, UP, sub_5D542-ms_map31_flag33E_EntityEvents
+		msDefaultEntityEvent 0, nullsub_137-ms_map31_flag33E_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

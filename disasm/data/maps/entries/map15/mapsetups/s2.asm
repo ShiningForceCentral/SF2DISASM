@@ -2,44 +2,19 @@
 ; ASM FILE data\maps\entries\map15\mapsetups\s2.asm :
 ; 0x5CEEA..0x5CF9E : 
 ms_map15_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_5CF1E-ms_map15_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_5CF28-ms_map15_EntityEvents
-		dc.b $82
-		dc.b 3
-		dc.w sub_5CF32-ms_map15_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_5CF3C-ms_map15_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_5CF46-ms_map15_EntityEvents
-		dc.b $85
-		dc.b 3
-		dc.w sub_5CF50-ms_map15_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_5CF5A-ms_map15_EntityEvents
-		dc.b $87
-		dc.b 1
-		dc.w sub_5CF64-ms_map15_EntityEvents
-		dc.b $88
-		dc.b 1
-		dc.w sub_5CF6E-ms_map15_EntityEvents
-		dc.b $89
-		dc.b 1
-		dc.w sub_5CF78-ms_map15_EntityEvents
-		dc.b $8A
-		dc.b 3
-		dc.w sub_5CF86-ms_map15_EntityEvents
-		dc.b $8B
-		dc.b 3
-		dc.w sub_5CF8E-ms_map15_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_117-ms_map15_EntityEvents
+		msEntityEvent 128, UP, sub_5CF1E-ms_map15_EntityEvents
+		msEntityEvent 129, UP, sub_5CF28-ms_map15_EntityEvents
+		msEntityEvent 130, DOWN, sub_5CF32-ms_map15_EntityEvents
+		msEntityEvent 131, UP, sub_5CF3C-ms_map15_EntityEvents
+		msEntityEvent 132, UP, sub_5CF46-ms_map15_EntityEvents
+		msEntityEvent 133, DOWN, sub_5CF50-ms_map15_EntityEvents
+		msEntityEvent 134, UP, sub_5CF5A-ms_map15_EntityEvents
+		msEntityEvent 135, UP, sub_5CF64-ms_map15_EntityEvents
+		msEntityEvent 136, UP, sub_5CF6E-ms_map15_EntityEvents
+		msEntityEvent 137, UP, sub_5CF78-ms_map15_EntityEvents
+		msEntityEvent 138, DOWN, sub_5CF86-ms_map15_EntityEvents
+		msEntityEvent 139, DOWN, sub_5CF8E-ms_map15_EntityEvents
+		msDefaultEntityEvent 0, nullsub_117-ms_map15_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

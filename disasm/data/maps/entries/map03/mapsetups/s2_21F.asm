@@ -2,53 +2,22 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\s2_21F.asm :
 ; 0x62738..0x62820 : 
 ms_map3_flag21F_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w sub_6277A-ms_map3_flag21F_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_62784-ms_map3_flag21F_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_6278E-ms_map3_flag21F_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_62794-ms_map3_flag21F_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_6279A-ms_map3_flag21F_EntityEvents
-		dc.b $85
-		dc.b 3
-		dc.w sub_627A4-ms_map3_flag21F_EntityEvents
-		dc.b $86
-		dc.b 3
-		dc.w sub_627AA-ms_map3_flag21F_EntityEvents
-		dc.b $87
-		dc.b 1
-		dc.w sub_627B4-ms_map3_flag21F_EntityEvents
-		dc.b $88
-		dc.b 1
-		dc.w sub_627BC-ms_map3_flag21F_EntityEvents
-		dc.b $89
-		dc.b 1
-		dc.w sub_627C6-ms_map3_flag21F_EntityEvents
-		dc.b $8A
-		dc.b 1
-		dc.w sub_627D0-ms_map3_flag21F_EntityEvents
-		dc.b 1
-		dc.b 1
-		dc.w sub_627F8-ms_map3_flag21F_EntityEvents
-		dc.b 2
-		dc.b 1
-		dc.w sub_62802-ms_map3_flag21F_EntityEvents
-		dc.b 3
-		dc.b 1
-		dc.w sub_6280C-ms_map3_flag21F_EntityEvents
-		dc.b 4
-		dc.b 1
-		dc.w sub_62816-ms_map3_flag21F_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_111-ms_map3_flag21F_EntityEvents
+		msEntityEvent 128, DOWN, sub_6277A-ms_map3_flag21F_EntityEvents
+		msEntityEvent 129, DOWN, sub_62784-ms_map3_flag21F_EntityEvents
+		msEntityEvent 130, UP, sub_6278E-ms_map3_flag21F_EntityEvents
+		msEntityEvent 131, UP, sub_62794-ms_map3_flag21F_EntityEvents
+		msEntityEvent 132, UP, sub_6279A-ms_map3_flag21F_EntityEvents
+		msEntityEvent 133, DOWN, sub_627A4-ms_map3_flag21F_EntityEvents
+		msEntityEvent 134, DOWN, sub_627AA-ms_map3_flag21F_EntityEvents
+		msEntityEvent 135, UP, sub_627B4-ms_map3_flag21F_EntityEvents
+		msEntityEvent 136, UP, sub_627BC-ms_map3_flag21F_EntityEvents
+		msEntityEvent 137, UP, sub_627C6-ms_map3_flag21F_EntityEvents
+		msEntityEvent 138, UP, sub_627D0-ms_map3_flag21F_EntityEvents
+		msEntityEvent 1, UP, sub_627F8-ms_map3_flag21F_EntityEvents
+		msEntityEvent 2, UP, sub_62802-ms_map3_flag21F_EntityEvents
+		msEntityEvent 3, UP, sub_6280C-ms_map3_flag21F_EntityEvents
+		msEntityEvent 4, UP, sub_62816-ms_map3_flag21F_EntityEvents
+		msDefaultEntityEvent 0, nullsub_111-ms_map3_flag21F_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

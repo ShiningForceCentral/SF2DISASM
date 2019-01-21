@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map21\mapsetups\s2_21F.asm :
 ; 0x6345E..0x63472 : 
 ms_map21_flag21F_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w sub_63468-ms_map21_flag21F_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_127-ms_map21_flag21F_EntityEvents
+		msEntityEvent 128, DOWN, sub_63468-ms_map21_flag21F_EntityEvents
+		msDefaultEntityEvent 0, nullsub_127-ms_map21_flag21F_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -2,23 +2,12 @@
 ; ASM FILE data\maps\entries\map30\mapsetups\s2.asm :
 ; 0x5A20C..0x5A2C2 : 
 ms_map30_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_5A224-ms_map30_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_5A236-ms_map30_EntityEvents
-		dc.b $82
-		dc.b 0
-		dc.w sub_5A240-ms_map30_EntityEvents
-		dc.b $83
-		dc.b 3
-		dc.w sub_5A25C-ms_map30_EntityEvents
-		dc.b $84
-		dc.b 3
-		dc.w sub_5A272-ms_map30_EntityEvents
-		dc.w $FD00
-		dc.w return_5A276-ms_map30_EntityEvents
+		msEntityEvent 128, UP, sub_5A224-ms_map30_EntityEvents
+		msEntityEvent 129, DOWN, sub_5A236-ms_map30_EntityEvents
+		msEntityEvent 130, RIGHT, sub_5A240-ms_map30_EntityEvents
+		msEntityEvent 131, DOWN, sub_5A25C-ms_map30_EntityEvents
+		msEntityEvent 132, DOWN, sub_5A272-ms_map30_EntityEvents
+		msDefaultEntityEvent 0, entevdft_5A276-ms_map30_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -92,7 +81,8 @@ return_5A270:
 sub_5A272:
 		trap    #TEXTBOX
 		dc.w $6AD               ; "Dig, dig!{N}Hey hoo, hey hoo!{W2}{N}To Grans we are a diggin'!{N}Hey hoo, hey hoo!{W1}"
-return_5A276:
+entevdft_5A276:
+		
 		rts
 
 	; End of function sub_5A272

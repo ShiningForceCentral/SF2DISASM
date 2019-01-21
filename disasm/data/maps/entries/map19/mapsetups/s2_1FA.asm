@@ -2,68 +2,27 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\s2_1FA.asm :
 ; 0x5301C..0x530BA : 
 ms_map19_flag1FA_EntityEvents:
-		dc.b $81
-		dc.b 3
-		dc.w sub_530B4-ms_map19_flag1FA_EntityEvents
-		dc.b $83
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $86
-		dc.b 3
-		dc.w sub_53080-ms_map19_flag1FA_EntityEvents
-		dc.b $87
-		dc.b 3
-		dc.w sub_53086-ms_map19_flag1FA_EntityEvents
-		dc.b $88
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $89
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $8A
-		dc.b 0
-		dc.w sub_53094-ms_map19_flag1FA_EntityEvents
-		dc.b $8B
-		dc.b 0
-		dc.w sub_5309E-ms_map19_flag1FA_EntityEvents
-		dc.b $8C
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $8D
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $8E
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $8F
-		dc.b 0
-		dc.w sub_530A8-ms_map19_flag1FA_EntityEvents
-		dc.b $90
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $91
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $92
-		dc.b 0
-		dc.w sub_530AE-ms_map19_flag1FA_EntityEvents
-		dc.b $93
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $94
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $95
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $96
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.b $99
-		dc.b 0
-		dc.w sub_53070-ms_map19_flag1FA_EntityEvents
-		dc.w $FD00
-		dc.w (return_52F0A-ms_map19_flag1FA_EntityEvents) & $FFFF
+		msEntityEvent 129, DOWN, sub_530B4-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 131, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 134, DOWN, sub_53080-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 135, DOWN, sub_53086-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 136, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 137, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 138, RIGHT, sub_53094-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 139, RIGHT, sub_5309E-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 140, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 141, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 142, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 143, RIGHT, sub_530A8-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 144, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 145, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 146, RIGHT, sub_530AE-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 147, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 148, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 149, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 150, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msEntityEvent 153, RIGHT, sub_53070-ms_map19_flag1FA_EntityEvents
+		msDefaultEntityEvent 0, (return_52F0A-ms_map19_flag1FA_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

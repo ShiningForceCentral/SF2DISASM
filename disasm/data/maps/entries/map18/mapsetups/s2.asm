@@ -2,20 +2,11 @@
 ; ASM FILE data\maps\entries\map18\mapsetups\s2.asm :
 ; 0x52ABA..0x52B20 : 
 ms_map18_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w sub_52ACE-ms_map18_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_52B00-ms_map18_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_52B0A-ms_map18_EntityEvents
-		dc.b $83
-		dc.b 3
-		dc.w sub_52B14-ms_map18_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_122-ms_map18_EntityEvents
+		msEntityEvent 128, DOWN, sub_52ACE-ms_map18_EntityEvents
+		msEntityEvent 129, DOWN, sub_52B00-ms_map18_EntityEvents
+		msEntityEvent 130, UP, sub_52B0A-ms_map18_EntityEvents
+		msEntityEvent 131, DOWN, sub_52B14-ms_map18_EntityEvents
+		msDefaultEntityEvent 0, nullsub_122-ms_map18_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

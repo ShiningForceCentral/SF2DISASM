@@ -2,26 +2,13 @@
 ; ASM FILE data\maps\entries\map20\mapsetups\s2_21F.asm :
 ; 0x63234..0x6329A : 
 ms_map20_flag21F_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w sub_63252-ms_map20_flag21F_EntityEvents
-		dc.b $81
-		dc.b 0
-		dc.w sub_63270-ms_map20_flag21F_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_6327E-ms_map20_flag21F_EntityEvents
-		dc.b $83
-		dc.b 3
-		dc.w sub_63284-ms_map20_flag21F_EntityEvents
-		dc.b $84
-		dc.b 3
-		dc.w sub_6328A-ms_map20_flag21F_EntityEvents
-		dc.b $85
-		dc.b 3
-		dc.w sub_63290-ms_map20_flag21F_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_125-ms_map20_flag21F_EntityEvents
+		msEntityEvent 128, DOWN, sub_63252-ms_map20_flag21F_EntityEvents
+		msEntityEvent 129, RIGHT, sub_63270-ms_map20_flag21F_EntityEvents
+		msEntityEvent 130, UP, sub_6327E-ms_map20_flag21F_EntityEvents
+		msEntityEvent 131, DOWN, sub_63284-ms_map20_flag21F_EntityEvents
+		msEntityEvent 132, DOWN, sub_6328A-ms_map20_flag21F_EntityEvents
+		msEntityEvent 133, DOWN, sub_63290-ms_map20_flag21F_EntityEvents
+		msDefaultEntityEvent 0, nullsub_125-ms_map20_flag21F_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

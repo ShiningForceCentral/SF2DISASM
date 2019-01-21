@@ -2,53 +2,22 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\s2_21F.asm :
 ; 0x62AFE..0x62BCA : 
 ms_map19_flag21F_EntityEvents:
-		dc.b 5
-		dc.b 1
-		dc.w sub_62B4A-ms_map19_flag21F_EntityEvents
-		dc.b 7
-		dc.b 1
-		dc.w sub_62B58-ms_map19_flag21F_EntityEvents
-		dc.b 8
-		dc.b 1
-		dc.w sub_62B62-ms_map19_flag21F_EntityEvents
-		dc.b $B
-		dc.b 1
-		dc.w sub_62B6C-ms_map19_flag21F_EntityEvents
-		dc.b $A
-		dc.b 1
-		dc.w sub_62B76-ms_map19_flag21F_EntityEvents
-		dc.b $13
-		dc.b 1
-		dc.w sub_62B80-ms_map19_flag21F_EntityEvents
-		dc.b $19
-		dc.b 1
-		dc.w sub_62B8A-ms_map19_flag21F_EntityEvents
-		dc.b $1B
-		dc.b 1
-		dc.w sub_62B94-ms_map19_flag21F_EntityEvents
-		dc.b $1A
-		dc.b 1
-		dc.w sub_62BA2-ms_map19_flag21F_EntityEvents
-		dc.b $80
-		dc.b 3
-		dc.w sub_62B40-ms_map19_flag21F_EntityEvents
-		dc.b $82
-		dc.b 3
-		dc.w sub_62BAC-ms_map19_flag21F_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_62BB2-ms_map19_flag21F_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_62BB8-ms_map19_flag21F_EntityEvents
-		dc.b $85
-		dc.b 0
-		dc.w sub_62BBE-ms_map19_flag21F_EntityEvents
-		dc.b $86
-		dc.b 0
-		dc.w sub_62BC4-ms_map19_flag21F_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_124-ms_map19_flag21F_EntityEvents
+		msEntityEvent 5, UP, sub_62B4A-ms_map19_flag21F_EntityEvents
+		msEntityEvent 7, UP, sub_62B58-ms_map19_flag21F_EntityEvents
+		msEntityEvent 8, UP, sub_62B62-ms_map19_flag21F_EntityEvents
+		msEntityEvent 11, UP, sub_62B6C-ms_map19_flag21F_EntityEvents
+		msEntityEvent 10, UP, sub_62B76-ms_map19_flag21F_EntityEvents
+		msEntityEvent 19, UP, sub_62B80-ms_map19_flag21F_EntityEvents
+		msEntityEvent 25, UP, sub_62B8A-ms_map19_flag21F_EntityEvents
+		msEntityEvent 27, UP, sub_62B94-ms_map19_flag21F_EntityEvents
+		msEntityEvent 26, UP, sub_62BA2-ms_map19_flag21F_EntityEvents
+		msEntityEvent 128, DOWN, sub_62B40-ms_map19_flag21F_EntityEvents
+		msEntityEvent 130, DOWN, sub_62BAC-ms_map19_flag21F_EntityEvents
+		msEntityEvent 131, UP, sub_62BB2-ms_map19_flag21F_EntityEvents
+		msEntityEvent 132, UP, sub_62BB8-ms_map19_flag21F_EntityEvents
+		msEntityEvent 133, RIGHT, sub_62BBE-ms_map19_flag21F_EntityEvents
+		msEntityEvent 134, RIGHT, sub_62BC4-ms_map19_flag21F_EntityEvents
+		msDefaultEntityEvent 0, nullsub_124-ms_map19_flag21F_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

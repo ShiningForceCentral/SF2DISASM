@@ -2,47 +2,20 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\s2.asm :
 ; 0x52E02..0x52F60 : 
 ms_map19_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_52E3A-ms_map19_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_52E4E-ms_map19_EntityEvents
-		dc.b $82
-		dc.b 0
-		dc.w sub_52E62-ms_map19_EntityEvents
-		dc.b $83
-		dc.b 0
-		dc.w sub_52E68-ms_map19_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_52E6E-ms_map19_EntityEvents
-		dc.b $85
-		dc.b 3
-		dc.w sub_52E82-ms_map19_EntityEvents
-		dc.b $86
-		dc.b 3
-		dc.w sub_52E96-ms_map19_EntityEvents
-		dc.b $87
-		dc.b 1
-		dc.w sub_52EAA-ms_map19_EntityEvents
-		dc.b $88
-		dc.b 3
-		dc.w sub_52EBE-ms_map19_EntityEvents
-		dc.b $89
-		dc.b 3
-		dc.w sub_52ED2-ms_map19_EntityEvents
-		dc.b $8A
-		dc.b 3
-		dc.w sub_52ED8-ms_map19_EntityEvents
-		dc.b $8B
-		dc.b 3
-		dc.w sub_52EEC-ms_map19_EntityEvents
-		dc.b $8C
-		dc.b 1
-		dc.w sub_52EF2-ms_map19_EntityEvents
-		dc.w $FD00
-		dc.w return_52F0A-ms_map19_EntityEvents
+		msEntityEvent 128, UP, sub_52E3A-ms_map19_EntityEvents
+		msEntityEvent 129, UP, sub_52E4E-ms_map19_EntityEvents
+		msEntityEvent 130, RIGHT, sub_52E62-ms_map19_EntityEvents
+		msEntityEvent 131, RIGHT, sub_52E68-ms_map19_EntityEvents
+		msEntityEvent 132, UP, sub_52E6E-ms_map19_EntityEvents
+		msEntityEvent 133, DOWN, sub_52E82-ms_map19_EntityEvents
+		msEntityEvent 134, DOWN, sub_52E96-ms_map19_EntityEvents
+		msEntityEvent 135, UP, sub_52EAA-ms_map19_EntityEvents
+		msEntityEvent 136, DOWN, sub_52EBE-ms_map19_EntityEvents
+		msEntityEvent 137, DOWN, sub_52ED2-ms_map19_EntityEvents
+		msEntityEvent 138, DOWN, sub_52ED8-ms_map19_EntityEvents
+		msEntityEvent 139, DOWN, sub_52EEC-ms_map19_EntityEvents
+		msEntityEvent 140, UP, sub_52EF2-ms_map19_EntityEvents
+		msDefaultEntityEvent 0, return_52F0A-ms_map19_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

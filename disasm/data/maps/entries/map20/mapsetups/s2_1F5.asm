@@ -2,29 +2,14 @@
 ; ASM FILE data\maps\entries\map20\mapsetups\s2_1F5.asm :
 ; 0x53830..0x538B4 : 
 ms_map20_flag1F5_EntityEvents:
-		dc.b $80 
-		dc.b   0
-		dc.w sub_53850-ms_map20_flag1F5_EntityEvents
-		dc.b $81
-		dc.b 0
-		dc.w sub_53856-ms_map20_flag1F5_EntityEvents
-		dc.b $82
-		dc.b 3
-		dc.w sub_5385C-ms_map20_flag1F5_EntityEvents
-		dc.b $83
-		dc.b 3
-		dc.w sub_53864-ms_map20_flag1F5_EntityEvents
-		dc.b $84
-		dc.b 3
-		dc.w sub_53878-ms_map20_flag1F5_EntityEvents
-		dc.b $85
-		dc.b 3
-		dc.w sub_5388C-ms_map20_flag1F5_EntityEvents
-		dc.b $86
-		dc.b 0
-		dc.w sub_538A0-ms_map20_flag1F5_EntityEvents
-		dc.w $FD00
-		dc.w (return_53814-ms_map20_flag1F5_EntityEvents) & $FFFF
+		msEntityEvent 128, RIGHT, sub_53850-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 129, RIGHT, sub_53856-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 130, DOWN, sub_5385C-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 131, DOWN, sub_53864-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 132, DOWN, sub_53878-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 133, DOWN, sub_5388C-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 134, RIGHT, sub_538A0-ms_map20_flag1F5_EntityEvents
+		msDefaultEntityEvent 0, (return_53814-ms_map20_flag1F5_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

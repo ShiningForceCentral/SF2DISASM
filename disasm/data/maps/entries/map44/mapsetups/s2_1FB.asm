@@ -2,38 +2,17 @@
 ; ASM FILE data\maps\entries\map44\mapsetups\s2_1FB.asm :
 ; 0x5448A..0x5455E : 
 ms_map44_flag1FB_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_544E6-ms_map44_flag1FB_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_544EC-ms_map44_flag1FB_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_544F2-ms_map44_flag1FB_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_544F8-ms_map44_flag1FB_EntityEvents
-		dc.b $87
-		dc.b 1
-		dc.w sub_544FE-ms_map44_flag1FB_EntityEvents
-		dc.b $88
-		dc.b 1
-		dc.w sub_54504-ms_map44_flag1FB_EntityEvents
-		dc.b $89
-		dc.b 1
-		dc.w sub_5450A-ms_map44_flag1FB_EntityEvents
-		dc.b $8A
-		dc.b 1
-		dc.w sub_54510-ms_map44_flag1FB_EntityEvents
-		dc.b $8B
-		dc.b 1
-		dc.w sub_54550-ms_map44_flag1FB_EntityEvents
-		dc.b $8C
-		dc.b 1
-		dc.w sub_54556-ms_map44_flag1FB_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_146-ms_map44_flag1FB_EntityEvents
+		msEntityEvent 128, UP, sub_544E6-ms_map44_flag1FB_EntityEvents
+		msEntityEvent 129, UP, sub_544EC-ms_map44_flag1FB_EntityEvents
+		msEntityEvent 130, UP, sub_544F2-ms_map44_flag1FB_EntityEvents
+		msEntityEvent 134, UP, sub_544F8-ms_map44_flag1FB_EntityEvents
+		msEntityEvent 135, UP, sub_544FE-ms_map44_flag1FB_EntityEvents
+		msEntityEvent 136, UP, sub_54504-ms_map44_flag1FB_EntityEvents
+		msEntityEvent 137, UP, sub_5450A-ms_map44_flag1FB_EntityEvents
+		msEntityEvent 138, UP, sub_54510-ms_map44_flag1FB_EntityEvents
+		msEntityEvent 139, UP, sub_54550-ms_map44_flag1FB_EntityEvents
+		msEntityEvent 140, UP, sub_54556-ms_map44_flag1FB_EntityEvents
+		msDefaultEntityEvent 0, nullsub_146-ms_map44_flag1FB_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

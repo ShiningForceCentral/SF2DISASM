@@ -2,32 +2,15 @@
 ; ASM FILE data\maps\entries\map25\mapsetups\s2.asm :
 ; 0x5D224..0x5D33A : 
 ms_map25_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_5D248-ms_map25_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_5D24E-ms_map25_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_5D25C-ms_map25_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_5D26A-ms_map25_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_5D274-ms_map25_EntityEvents
-		dc.b $85
-		dc.b 1
-		dc.w sub_5D27A-ms_map25_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_5D2D2-ms_map25_EntityEvents
-		dc.b $87
-		dc.b 3
-		dc.w sub_5D2EA-ms_map25_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_132-ms_map25_EntityEvents
+		msEntityEvent 128, UP, sub_5D248-ms_map25_EntityEvents
+		msEntityEvent 129, UP, sub_5D24E-ms_map25_EntityEvents
+		msEntityEvent 130, UP, sub_5D25C-ms_map25_EntityEvents
+		msEntityEvent 131, UP, sub_5D26A-ms_map25_EntityEvents
+		msEntityEvent 132, UP, sub_5D274-ms_map25_EntityEvents
+		msEntityEvent 133, UP, sub_5D27A-ms_map25_EntityEvents
+		msEntityEvent 134, UP, sub_5D2D2-ms_map25_EntityEvents
+		msEntityEvent 135, DOWN, sub_5D2EA-ms_map25_EntityEvents
+		msDefaultEntityEvent 0, nullsub_132-ms_map25_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

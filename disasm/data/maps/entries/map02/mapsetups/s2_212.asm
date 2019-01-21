@@ -2,35 +2,16 @@
 ; ASM FILE data\maps\entries\map02\mapsetups\s2_212.asm :
 ; 0x5E9C8..0x5EA20 : 
 ms_map2_flag212_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_5E9F0-ms_map2_flag212_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_5E9FA-ms_map2_flag212_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_5EA00-ms_map2_flag212_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_5EA06-ms_map2_flag212_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_5EA10-ms_map2_flag212_EntityEvents
-		dc.b $85
-		dc.b 1
-		dc.w sub_5EA1A-ms_map2_flag212_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w (sub_5E9A4-ms_map2_flag212_EntityEvents) & $FFFF
-		dc.b $87
-		dc.b 1
-		dc.w (sub_5E9B2-ms_map2_flag212_EntityEvents) & $FFFF
-		dc.b $88
-		dc.b 1
-		dc.w (sub_5E9C0-ms_map2_flag212_EntityEvents) & $FFFF
-		dc.w $FD00
-		dc.w (nullsub_154-ms_map2_flag212_EntityEvents) & $FFFF
+		msEntityEvent 128, UP, sub_5E9F0-ms_map2_flag212_EntityEvents
+		msEntityEvent 129, UP, sub_5E9FA-ms_map2_flag212_EntityEvents
+		msEntityEvent 130, UP, sub_5EA00-ms_map2_flag212_EntityEvents
+		msEntityEvent 131, UP, sub_5EA06-ms_map2_flag212_EntityEvents
+		msEntityEvent 132, UP, sub_5EA10-ms_map2_flag212_EntityEvents
+		msEntityEvent 133, UP, sub_5EA1A-ms_map2_flag212_EntityEvents
+		msEntityEvent 134, UP, (sub_5E9A4-ms_map2_flag212_EntityEvents) & $FFFF
+		msEntityEvent 135, UP, (sub_5E9B2-ms_map2_flag212_EntityEvents) & $FFFF
+		msEntityEvent 136, UP, (sub_5E9C0-ms_map2_flag212_EntityEvents) & $FFFF
+		msDefaultEntityEvent 0, (nullsub_154-ms_map2_flag212_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

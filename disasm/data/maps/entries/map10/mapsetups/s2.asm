@@ -2,77 +2,30 @@
 ; ASM FILE data\maps\entries\map10\mapsetups\s2.asm :
 ; 0x56D80..0x56E9C : 
 ms_map10_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w sub_56DE0-ms_map10_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_56DE6-ms_map10_EntityEvents
-		dc.b $82
-		dc.b 0
-		dc.w sub_56DF0-ms_map10_EntityEvents
-		dc.b $83
-		dc.b 0
-		dc.w sub_56DFE-ms_map10_EntityEvents
-		dc.b $84
-		dc.b 0
-		dc.w sub_56E08-ms_map10_EntityEvents
-		dc.b $85
-		dc.b 0
-		dc.w sub_56E12-ms_map10_EntityEvents
-		dc.b $86
-		dc.b 0
-		dc.w sub_56E1C-ms_map10_EntityEvents
-		dc.b $87
-		dc.b 0
-		dc.w sub_56E22-ms_map10_EntityEvents
-		dc.b $88
-		dc.b 0
-		dc.w sub_56E2C-ms_map10_EntityEvents
-		dc.b $89
-		dc.b 3
-		dc.w sub_56E36-ms_map10_EntityEvents
-		dc.b $8A
-		dc.b 3
-		dc.w sub_56E44-ms_map10_EntityEvents
-		dc.b $8B
-		dc.b 1
-		dc.w sub_56E4C-ms_map10_EntityEvents
-		dc.b $8C
-		dc.b 3
-		dc.w sub_56E52-ms_map10_EntityEvents
-		dc.b $8D
-		dc.b 3
-		dc.w sub_56E58-ms_map10_EntityEvents
-		dc.b $8E
-		dc.b 3
-		dc.w sub_56E5E-ms_map10_EntityEvents
-		dc.b $8F
-		dc.b 3
-		dc.w sub_56E64-ms_map10_EntityEvents
-		dc.b $90
-		dc.b 1
-		dc.w sub_56E6A-ms_map10_EntityEvents
-		dc.b $91
-		dc.b 3
-		dc.w sub_56E70-ms_map10_EntityEvents
-		dc.b $92
-		dc.b 3
-		dc.w sub_56E7A-ms_map10_EntityEvents
-		dc.b $93
-		dc.b 1
-		dc.w sub_56E84-ms_map10_EntityEvents
-		dc.b $94
-		dc.b 1
-		dc.w sub_56E8A-ms_map10_EntityEvents
-		dc.b $95
-		dc.b 3
-		dc.w sub_56E90-ms_map10_EntityEvents
-		dc.b $A
-		dc.b 3
-		dc.w sub_56E96-ms_map10_EntityEvents
-		dc.w $FD00
-		dc.w return_56E9A-ms_map10_EntityEvents
+		msEntityEvent 128, DOWN, sub_56DE0-ms_map10_EntityEvents
+		msEntityEvent 129, DOWN, sub_56DE6-ms_map10_EntityEvents
+		msEntityEvent 130, RIGHT, sub_56DF0-ms_map10_EntityEvents
+		msEntityEvent 131, RIGHT, sub_56DFE-ms_map10_EntityEvents
+		msEntityEvent 132, RIGHT, sub_56E08-ms_map10_EntityEvents
+		msEntityEvent 133, RIGHT, sub_56E12-ms_map10_EntityEvents
+		msEntityEvent 134, RIGHT, sub_56E1C-ms_map10_EntityEvents
+		msEntityEvent 135, RIGHT, sub_56E22-ms_map10_EntityEvents
+		msEntityEvent 136, RIGHT, sub_56E2C-ms_map10_EntityEvents
+		msEntityEvent 137, DOWN, sub_56E36-ms_map10_EntityEvents
+		msEntityEvent 138, DOWN, sub_56E44-ms_map10_EntityEvents
+		msEntityEvent 139, UP, sub_56E4C-ms_map10_EntityEvents
+		msEntityEvent 140, DOWN, sub_56E52-ms_map10_EntityEvents
+		msEntityEvent 141, DOWN, sub_56E58-ms_map10_EntityEvents
+		msEntityEvent 142, DOWN, sub_56E5E-ms_map10_EntityEvents
+		msEntityEvent 143, DOWN, sub_56E64-ms_map10_EntityEvents
+		msEntityEvent 144, UP, sub_56E6A-ms_map10_EntityEvents
+		msEntityEvent 145, DOWN, sub_56E70-ms_map10_EntityEvents
+		msEntityEvent 146, DOWN, sub_56E7A-ms_map10_EntityEvents
+		msEntityEvent 147, UP, sub_56E84-ms_map10_EntityEvents
+		msEntityEvent 148, UP, sub_56E8A-ms_map10_EntityEvents
+		msEntityEvent 149, DOWN, sub_56E90-ms_map10_EntityEvents
+		msEntityEvent 10, DOWN, sub_56E96-ms_map10_EntityEvents
+		msDefaultEntityEvent 0, entevdft_56E9A-ms_map10_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -314,7 +267,8 @@ sub_56E90:
 sub_56E96:
 		trap    #TEXTBOX
 		dc.w $639               ; "If...God Volcanon doesn't{N}calm down...{W1}"
-return_56E9A:
+entevdft_56E9A:
+		
 		rts
 
 	; End of function sub_56E96

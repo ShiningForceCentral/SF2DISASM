@@ -2,17 +2,10 @@
 ; ASM FILE data\maps\entries\map17\mapsetups\s2_212.asm :
 ; 0x611E0..0x61208 : 
 ms_map17_flag212_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_611F0-ms_map17_flag212_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_611FA-ms_map17_flag212_EntityEvents
-		dc.b $83
-		dc.b 3
-		dc.w sub_61200-ms_map17_flag212_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_19-ms_map17_flag212_EntityEvents
+		msEntityEvent 128, UP, sub_611F0-ms_map17_flag212_EntityEvents
+		msEntityEvent 129, DOWN, sub_611FA-ms_map17_flag212_EntityEvents
+		msEntityEvent 131, DOWN, sub_61200-ms_map17_flag212_EntityEvents
+		msDefaultEntityEvent 0, nullsub_19-ms_map17_flag212_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

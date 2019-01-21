@@ -2,53 +2,22 @@
 ; ASM FILE data\maps\entries\map38\mapsetups\s2.asm :
 ; 0x5DB76..0x5DCD0 : 
 ms_map38_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_5DBB6-ms_map38_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_5DBC0-ms_map38_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_5DBC6-ms_map38_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_5DBCC-ms_map38_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_5DBD2-ms_map38_EntityEvents
-		dc.b $85
-		dc.b 1
-		dc.w sub_5DBE0-ms_map38_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_5DBEA-ms_map38_EntityEvents
-		dc.b $87
-		dc.b 1
-		dc.w sub_5DBF8-ms_map38_EntityEvents
-		dc.b $88
-		dc.b 1
-		dc.w sub_5DC02-ms_map38_EntityEvents
-		dc.b $89
-		dc.b 0
-		dc.w sub_5DC08-ms_map38_EntityEvents
-		dc.b $8A
-		dc.b 3
-		dc.w sub_5DC56-ms_map38_EntityEvents
-		dc.b $8B
-		dc.b 1
-		dc.w sub_5DCA4-ms_map38_EntityEvents
-		dc.b $8C
-		dc.b 1
-		dc.w sub_5DCAC-ms_map38_EntityEvents
-		dc.b $8D
-		dc.b 1
-		dc.w sub_5DCBA-ms_map38_EntityEvents
-		dc.b $1A
-		dc.b 1
-		dc.w sub_5DCC8-ms_map38_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_141-ms_map38_EntityEvents
+		msEntityEvent 128, UP, sub_5DBB6-ms_map38_EntityEvents
+		msEntityEvent 129, UP, sub_5DBC0-ms_map38_EntityEvents
+		msEntityEvent 130, UP, sub_5DBC6-ms_map38_EntityEvents
+		msEntityEvent 131, UP, sub_5DBCC-ms_map38_EntityEvents
+		msEntityEvent 132, UP, sub_5DBD2-ms_map38_EntityEvents
+		msEntityEvent 133, UP, sub_5DBE0-ms_map38_EntityEvents
+		msEntityEvent 134, UP, sub_5DBEA-ms_map38_EntityEvents
+		msEntityEvent 135, UP, sub_5DBF8-ms_map38_EntityEvents
+		msEntityEvent 136, UP, sub_5DC02-ms_map38_EntityEvents
+		msEntityEvent 137, RIGHT, sub_5DC08-ms_map38_EntityEvents
+		msEntityEvent 138, DOWN, sub_5DC56-ms_map38_EntityEvents
+		msEntityEvent 139, UP, sub_5DCA4-ms_map38_EntityEvents
+		msEntityEvent 140, UP, sub_5DCAC-ms_map38_EntityEvents
+		msEntityEvent 141, UP, sub_5DCBA-ms_map38_EntityEvents
+		msEntityEvent 26, UP, sub_5DCC8-ms_map38_EntityEvents
+		msDefaultEntityEvent 0, nullsub_141-ms_map38_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -2,40 +2,23 @@
 ; ASM FILE data\maps\entries\map14\mapsetups\s2.asm :
 ; 0x58EBA..0x58F0E : 
 ms_map14_EntityEvents:
-		dc.b   1
-		dc.b   1
-		dc.b   0
-		dc.b $24 
-		dc.b 2
-		dc.b 0
-		dc.w sub_58EE4-ms_map14_EntityEvents
-		dc.b 4
-		dc.b 1
-		dc.w sub_58EEA-ms_map14_EntityEvents
-		dc.b 5
-		dc.b 1
-		dc.w sub_58EF0-ms_map14_EntityEvents
-		dc.b 6
-		dc.b 1
-		dc.w sub_58EF6-ms_map14_EntityEvents
-		dc.b $80
-		dc.b 1
-		dc.w sub_58EFC-ms_map14_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_58F02-ms_map14_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_58F08-ms_map14_EntityEvents
-		dc.w $FD00
-		dc.w return_58EE2-ms_map14_EntityEvents
+		msEntityEvent 1, UP, sub_58EDE-ms_map14_EntityEvents
+		msEntityEvent 2, RIGHT, sub_58EE4-ms_map14_EntityEvents
+		msEntityEvent 4, UP, sub_58EEA-ms_map14_EntityEvents
+		msEntityEvent 5, UP, sub_58EF0-ms_map14_EntityEvents
+		msEntityEvent 6, UP, sub_58EF6-ms_map14_EntityEvents
+		msEntityEvent 128, UP, sub_58EFC-ms_map14_EntityEvents
+		msEntityEvent 129, DOWN, sub_58F02-ms_map14_EntityEvents
+		msEntityEvent 130, UP, sub_58F08-ms_map14_EntityEvents
+		msDefaultEntityEvent 0, entevdft_58EE2-ms_map14_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_58EDE:
 		trap    #TEXTBOX
 		dc.w $8CD               ; "That's OK.  {NAME;3} needed{N}a bath anyway.{W1}"
-return_58EE2:
+entevdft_58EE2:
+		
 		rts
 
 	; End of function sub_58EDE

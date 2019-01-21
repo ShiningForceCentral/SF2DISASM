@@ -58,4 +58,14 @@ emsEnd:	macro
 	dc.w $FFFF
 	endm	
 	
+msEntityEvent:	macro
+	dc.b \1
+	dc.b \2
+	dc.w \3
+	endm
 	
+msDefaultEntityEvent:	macro
+	dc.b $FD
+	dc.b \1
+	dc.w \2
+	endm

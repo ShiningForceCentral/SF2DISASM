@@ -2,47 +2,20 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\s2_261.asm :
 ; 0x52F90..0x5301C : 
 ms_map19_flag261_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w sub_52FC8-ms_map19_flag261_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_52FCE-ms_map19_flag261_EntityEvents
-		dc.b $82
-		dc.b 3
-		dc.w sub_52FEE-ms_map19_flag261_EntityEvents
-		dc.b $83
-		dc.b 3
-		dc.w (sub_52E4E-ms_map19_flag261_EntityEvents) & $FFFF
-		dc.b $85
-		dc.b 1
-		dc.w sub_52FE8-ms_map19_flag261_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w (sub_52E62-ms_map19_flag261_EntityEvents) & $FFFF
-		dc.b $86
-		dc.b 0
-		dc.w sub_52FE2-ms_map19_flag261_EntityEvents
-		dc.b $87
-		dc.b 1
-		dc.w sub_52FF4-ms_map19_flag261_EntityEvents
-		dc.b $88
-		dc.b 3
-		dc.w sub_52FFA-ms_map19_flag261_EntityEvents
-		dc.b $89
-		dc.b 1
-		dc.w sub_53000-ms_map19_flag261_EntityEvents
-		dc.b $8A
-		dc.b 3
-		dc.w sub_53006-ms_map19_flag261_EntityEvents
-		dc.b $8B
-		dc.b 1
-		dc.w sub_5300C-ms_map19_flag261_EntityEvents
-		dc.b $8C
-		dc.b 1
-		dc.w sub_53016-ms_map19_flag261_EntityEvents
-		dc.w $FD00
-		dc.w (return_52F0A-ms_map19_flag261_EntityEvents) & $FFFF
+		msEntityEvent 128, DOWN, sub_52FC8-ms_map19_flag261_EntityEvents
+		msEntityEvent 129, DOWN, sub_52FCE-ms_map19_flag261_EntityEvents
+		msEntityEvent 130, DOWN, sub_52FEE-ms_map19_flag261_EntityEvents
+		msEntityEvent 131, DOWN, (sub_52E4E-ms_map19_flag261_EntityEvents) & $FFFF
+		msEntityEvent 133, UP, sub_52FE8-ms_map19_flag261_EntityEvents
+		msEntityEvent 132, UP, (sub_52E62-ms_map19_flag261_EntityEvents) & $FFFF
+		msEntityEvent 134, RIGHT, sub_52FE2-ms_map19_flag261_EntityEvents
+		msEntityEvent 135, UP, sub_52FF4-ms_map19_flag261_EntityEvents
+		msEntityEvent 136, DOWN, sub_52FFA-ms_map19_flag261_EntityEvents
+		msEntityEvent 137, UP, sub_53000-ms_map19_flag261_EntityEvents
+		msEntityEvent 138, DOWN, sub_53006-ms_map19_flag261_EntityEvents
+		msEntityEvent 139, UP, sub_5300C-ms_map19_flag261_EntityEvents
+		msEntityEvent 140, UP, sub_53016-ms_map19_flag261_EntityEvents
+		msDefaultEntityEvent 0, (return_52F0A-ms_map19_flag261_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

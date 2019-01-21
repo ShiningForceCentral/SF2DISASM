@@ -2,56 +2,23 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\s2_1FA.asm :
 ; 0x511CA..0x512E0 : 
 ms_map3_flag1FA_EntityEvents:
-		dc.b $80
-		dc.b 0
-		dc.w sub_51210-ms_map3_flag1FA_EntityEvents
-		dc.b $81
-		dc.b 0
-		dc.w sub_51210-ms_map3_flag1FA_EntityEvents
-		dc.b $82
-		dc.b 3
-		dc.w sub_51220-ms_map3_flag1FA_EntityEvents
-		dc.b $83
-		dc.b 3
-		dc.w sub_51226-ms_map3_flag1FA_EntityEvents
-		dc.b $84
-		dc.b 0
-		dc.w sub_5122C-ms_map3_flag1FA_EntityEvents
-		dc.b $85
-		dc.b 3
-		dc.w sub_51232-ms_map3_flag1FA_EntityEvents
-		dc.b $86
-		dc.b 3
-		dc.w sub_51238-ms_map3_flag1FA_EntityEvents
-		dc.b $87
-		dc.b 3
-		dc.w sub_5123E-ms_map3_flag1FA_EntityEvents
-		dc.b $88
-		dc.b 3
-		dc.w sub_51244-ms_map3_flag1FA_EntityEvents
-		dc.b $89
-		dc.b 3
-		dc.w (sub_51170-ms_map3_flag1FA_EntityEvents) & $FFFF
-		dc.b $8A
-		dc.b 3
-		dc.w (sub_510FA-ms_map3_flag1FA_EntityEvents) & $FFFF
-		dc.b $8B
-		dc.b 0
-		dc.w sub_51210-ms_map3_flag1FA_EntityEvents
-		dc.b $8C
-		dc.b 3
-		dc.w sub_5124A-ms_map3_flag1FA_EntityEvents
-		dc.b $8D
-		dc.b 3
-		dc.w sub_51250-ms_map3_flag1FA_EntityEvents
-		dc.b $8E
-		dc.b 3
-		dc.w (sub_511BC-ms_map3_flag1FA_EntityEvents) & $FFFF
-		dc.b 6
-		dc.b 0
-		dc.w sub_51256-ms_map3_flag1FA_EntityEvents
-		dc.w $FD00
-		dc.w (return_5105A-ms_map3_flag1FA_EntityEvents) & $FFFF
+		msEntityEvent 128, RIGHT, sub_51210-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 129, RIGHT, sub_51210-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 130, DOWN, sub_51220-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 131, DOWN, sub_51226-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 132, RIGHT, sub_5122C-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 133, DOWN, sub_51232-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 134, DOWN, sub_51238-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 135, DOWN, sub_5123E-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 136, DOWN, sub_51244-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 137, DOWN, (sub_51170-ms_map3_flag1FA_EntityEvents) & $FFFF
+		msEntityEvent 138, DOWN, (sub_510FA-ms_map3_flag1FA_EntityEvents) & $FFFF
+		msEntityEvent 139, RIGHT, sub_51210-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 140, DOWN, sub_5124A-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 141, DOWN, sub_51250-ms_map3_flag1FA_EntityEvents
+		msEntityEvent 142, DOWN, (sub_511BC-ms_map3_flag1FA_EntityEvents) & $FFFF
+		msEntityEvent 6, RIGHT, sub_51256-ms_map3_flag1FA_EntityEvents
+		msDefaultEntityEvent 0, (entevdft_5105A-ms_map3_flag1FA_EntityEvents) & $FFFF
 		dc.b $FF
 		dc.b $FF
 

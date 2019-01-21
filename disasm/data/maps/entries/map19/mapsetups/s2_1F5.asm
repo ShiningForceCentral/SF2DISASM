@@ -2,18 +2,10 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\s2_1F5.asm :
 ; 0x52F60..0x52F90 : 
 ms_map19_flag1F5_EntityEvents:
-		dc.b $80 
-		dc.b   1
-		dc.b   0
-		dc.b $10
-		dc.b $81
-		dc.b 3
-		dc.w sub_52F84-ms_map19_flag1F5_EntityEvents
-		dc.b $82
-		dc.b 3
-		dc.w sub_52F8A-ms_map19_flag1F5_EntityEvents
-		dc.w $FD00
-		dc.w (return_52F0A-ms_map19_flag1F5_EntityEvents) & $FFFF
+		msEntityEvent 128, UP, sub_52F70-ms_map19_flag1F5_EntityEvents
+		msEntityEvent 129, DOWN, sub_52F84-ms_map19_flag1F5_EntityEvents
+		msEntityEvent 130, DOWN, sub_52F8A-ms_map19_flag1F5_EntityEvents
+		msDefaultEntityEvent 0, (return_52F0A-ms_map19_flag1F5_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

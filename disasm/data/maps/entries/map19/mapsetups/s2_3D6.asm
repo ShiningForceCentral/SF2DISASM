@@ -2,62 +2,25 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\s2_3D6.asm :
 ; 0x62BCA..0x62C6C : 
 ms_map19_flag3D6_EntityEvents:
-		dc.b 3
-		dc.b 1
-		dc.w sub_62C22-ms_map19_flag3D6_EntityEvents
-		dc.b 2
-		dc.b 1
-		dc.w sub_62C28-ms_map19_flag3D6_EntityEvents
-		dc.b 5
-		dc.b 1
-		dc.w sub_62C2E-ms_map19_flag3D6_EntityEvents
-		dc.b 7
-		dc.b 1
-		dc.w sub_62C34-ms_map19_flag3D6_EntityEvents
-		dc.b 8
-		dc.b 1
-		dc.w sub_62C3E-ms_map19_flag3D6_EntityEvents
-		dc.b $B
-		dc.b 1
-		dc.w sub_62C44-ms_map19_flag3D6_EntityEvents
-		dc.b $A
-		dc.b 1
-		dc.w sub_62C4A-ms_map19_flag3D6_EntityEvents
-		dc.b $13
-		dc.b 1
-		dc.w sub_62C50-ms_map19_flag3D6_EntityEvents
-		dc.b $19
-		dc.b 1
-		dc.w sub_62C56-ms_map19_flag3D6_EntityEvents
-		dc.b $1B
-		dc.b 1
-		dc.w sub_62C5C-ms_map19_flag3D6_EntityEvents
-		dc.b $1A
-		dc.b 1
-		dc.w sub_62C66-ms_map19_flag3D6_EntityEvents
-		dc.b $80
-		dc.b 3
-		dc.w sub_62C16-ms_map19_flag3D6_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_62C1C-ms_map19_flag3D6_EntityEvents
-		dc.b $82
-		dc.b 3
-		dc.w (sub_62BAC-ms_map19_flag3D6_EntityEvents) & $FFFF
-		dc.b $83
-		dc.b 1
-		dc.w (sub_62BB2-ms_map19_flag3D6_EntityEvents) & $FFFF
-		dc.b $84
-		dc.b 1
-		dc.w (sub_62BB8-ms_map19_flag3D6_EntityEvents) & $FFFF
-		dc.b $85
-		dc.b 0
-		dc.w (sub_62BBE-ms_map19_flag3D6_EntityEvents) & $FFFF
-		dc.b $86
-		dc.b 0
-		dc.w (sub_62BC4-ms_map19_flag3D6_EntityEvents) & $FFFF
-		dc.w $FD00
-		dc.w (nullsub_124-ms_map19_flag3D6_EntityEvents) & $FFFF
+		msEntityEvent 3, UP, sub_62C22-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 2, UP, sub_62C28-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 5, UP, sub_62C2E-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 7, UP, sub_62C34-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 8, UP, sub_62C3E-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 11, UP, sub_62C44-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 10, UP, sub_62C4A-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 19, UP, sub_62C50-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 25, UP, sub_62C56-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 27, UP, sub_62C5C-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 26, UP, sub_62C66-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 128, DOWN, sub_62C16-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 129, UP, sub_62C1C-ms_map19_flag3D6_EntityEvents
+		msEntityEvent 130, DOWN, (sub_62BAC-ms_map19_flag3D6_EntityEvents) & $FFFF
+		msEntityEvent 131, UP, (sub_62BB2-ms_map19_flag3D6_EntityEvents) & $FFFF
+		msEntityEvent 132, UP, (sub_62BB8-ms_map19_flag3D6_EntityEvents) & $FFFF
+		msEntityEvent 133, RIGHT, (sub_62BBE-ms_map19_flag3D6_EntityEvents) & $FFFF
+		msEntityEvent 134, RIGHT, (sub_62BC4-ms_map19_flag3D6_EntityEvents) & $FFFF
+		msDefaultEntityEvent 0, (nullsub_124-ms_map19_flag3D6_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

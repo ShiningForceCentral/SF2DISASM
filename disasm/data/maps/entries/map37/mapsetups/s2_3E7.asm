@@ -2,20 +2,11 @@
 ; ASM FILE data\maps\entries\map37\mapsetups\s2_3E7.asm :
 ; 0x5F9D2..0x5FA22 : 
 ms_map37_flag3E7_EntityEvents:
-		dc.b $1A
-		dc.b 1
-		dc.w sub_5F9F8-ms_map37_flag3E7_EntityEvents
-byte_5F9D6:     dc.b $80
-		dc.b 1
-		dc.w sub_5F9FE-ms_map37_flag3E7_EntityEvents
-		dc.b $81
-		dc.b 0
-		dc.w return_5F9F6-ms_map37_flag3E7_EntityEvents
-		dc.b 7
-		dc.b 1
-		dc.w sub_5FA10-ms_map37_flag3E7_EntityEvents
-		dc.w $FD00
-		dc.w sub_5F9E6-ms_map37_flag3E7_EntityEvents
+		msEntityEvent 26, UP, sub_5F9F8-ms_map37_flag3E7_EntityEvents
+byte_5F9D6:     msEntityEvent 128, UP, sub_5F9FE-ms_map37_flag3E7_EntityEvents
+		msEntityEvent 129, RIGHT, entevt_5F9F6-ms_map37_flag3E7_EntityEvents
+		msEntityEvent 7, UP, sub_5FA10-ms_map37_flag3E7_EntityEvents
+		msDefaultEntityEvent 0, sub_5F9E6-ms_map37_flag3E7_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -25,7 +16,7 @@ sub_5F9E6:
 		move.w  #$EAC,d0
 		add.w   d7,d0
 		jsr     (DisplayText).w 
-return_5F9F6:
+entevt_5F9F6:
 		rts
 
 	; End of function sub_5F9E6

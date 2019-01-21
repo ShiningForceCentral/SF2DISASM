@@ -2,62 +2,25 @@
 ; ASM FILE data\maps\entries\map16\mapsetups\s2_212.asm :
 ; 0x61058..0x6114E : 
 ms_map16_flag212_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_610A4-ms_map16_flag212_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_610AE-ms_map16_flag212_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_610B4-ms_map16_flag212_EntityEvents
-		dc.b $83
-		dc.b 3
-		dc.w sub_610BA-ms_map16_flag212_EntityEvents
-		dc.b $84
-		dc.b 3
-		dc.w sub_610C4-ms_map16_flag212_EntityEvents
-		dc.b $85
-		dc.b 1
-		dc.w sub_610CE-ms_map16_flag212_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_610D8-ms_map16_flag212_EntityEvents
-		dc.b $87
-		dc.b 1
-		dc.w sub_610DE-ms_map16_flag212_EntityEvents
-		dc.b $88
-		dc.b 1
-		dc.w sub_610E4-ms_map16_flag212_EntityEvents
-		dc.b $89
-		dc.b 1
-		dc.w sub_610EA-ms_map16_flag212_EntityEvents
-		dc.b $8A
-		dc.b 1
-		dc.w sub_610F8-ms_map16_flag212_EntityEvents
-		dc.b $8B
-		dc.b 1
-		dc.w sub_61100-ms_map16_flag212_EntityEvents
-		dc.b $8C
-		dc.b 1
-		dc.w sub_6110A-ms_map16_flag212_EntityEvents
-		dc.b $8D
-		dc.b 1
-		dc.w sub_61110-ms_map16_flag212_EntityEvents
-		dc.b $8E
-		dc.b 0
-		dc.w sub_61116-ms_map16_flag212_EntityEvents
-		dc.b $8F
-		dc.b 1
-		dc.w sub_6112E-ms_map16_flag212_EntityEvents
-		dc.b $90
-		dc.b 1
-		dc.w sub_6113C-ms_map16_flag212_EntityEvents
-		dc.b $91
-		dc.b 0
-		dc.w sub_61146-ms_map16_flag212_EntityEvents
-		dc.w $FD00
-		dc.w return_6114C-ms_map16_flag212_EntityEvents
+		msEntityEvent 128, UP, sub_610A4-ms_map16_flag212_EntityEvents
+		msEntityEvent 129, DOWN, sub_610AE-ms_map16_flag212_EntityEvents
+		msEntityEvent 130, UP, sub_610B4-ms_map16_flag212_EntityEvents
+		msEntityEvent 131, DOWN, sub_610BA-ms_map16_flag212_EntityEvents
+		msEntityEvent 132, DOWN, sub_610C4-ms_map16_flag212_EntityEvents
+		msEntityEvent 133, UP, sub_610CE-ms_map16_flag212_EntityEvents
+		msEntityEvent 134, UP, sub_610D8-ms_map16_flag212_EntityEvents
+		msEntityEvent 135, UP, sub_610DE-ms_map16_flag212_EntityEvents
+		msEntityEvent 136, UP, sub_610E4-ms_map16_flag212_EntityEvents
+		msEntityEvent 137, UP, sub_610EA-ms_map16_flag212_EntityEvents
+		msEntityEvent 138, UP, sub_610F8-ms_map16_flag212_EntityEvents
+		msEntityEvent 139, UP, sub_61100-ms_map16_flag212_EntityEvents
+		msEntityEvent 140, UP, sub_6110A-ms_map16_flag212_EntityEvents
+		msEntityEvent 141, UP, sub_61110-ms_map16_flag212_EntityEvents
+		msEntityEvent 142, RIGHT, sub_61116-ms_map16_flag212_EntityEvents
+		msEntityEvent 143, UP, sub_6112E-ms_map16_flag212_EntityEvents
+		msEntityEvent 144, UP, sub_6113C-ms_map16_flag212_EntityEvents
+		msEntityEvent 145, RIGHT, sub_61146-ms_map16_flag212_EntityEvents
+		msDefaultEntityEvent 0, entevdft_6114C-ms_map16_flag212_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -249,7 +212,8 @@ sub_6113C:
 
 sub_61146:
 		jsr     j_CaravanActions
-return_6114C:
+entevdft_6114C:
+		
 		rts
 
 	; End of function sub_61146

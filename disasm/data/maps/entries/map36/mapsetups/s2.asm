@@ -2,47 +2,20 @@
 ; ASM FILE data\maps\entries\map36\mapsetups\s2.asm :
 ; 0x5D84A..0x5D924 : 
 ms_map36_EntityEvents:
-		dc.b $16
-		dc.b 1
-		dc.w sub_5D8FA-ms_map36_EntityEvents
-		dc.b $80
-		dc.b 1
-		dc.w sub_5D884-ms_map36_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_5D88A-ms_map36_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_5D894-ms_map36_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_5D89E-ms_map36_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_5D8BC-ms_map36_EntityEvents
-		dc.b $85
-		dc.b 1
-		dc.w sub_5D8CA-ms_map36_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_5D8D8-ms_map36_EntityEvents
-		dc.b $87
-		dc.b 1
-		dc.w sub_5D8E2-ms_map36_EntityEvents
-		dc.b $88
-		dc.b 1
-		dc.w sub_5D8F0-ms_map36_EntityEvents
-		dc.b $89
-		dc.b 1
-		dc.w sub_5D904-ms_map36_EntityEvents
-		dc.b $8A
-		dc.b 1
-		dc.w sub_5D90E-ms_map36_EntityEvents
-		dc.b $8B
-		dc.b 1
-		dc.w sub_5D91C-ms_map36_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_140-ms_map36_EntityEvents
+		msEntityEvent 22, UP, sub_5D8FA-ms_map36_EntityEvents
+		msEntityEvent 128, UP, sub_5D884-ms_map36_EntityEvents
+		msEntityEvent 129, UP, sub_5D88A-ms_map36_EntityEvents
+		msEntityEvent 130, UP, sub_5D894-ms_map36_EntityEvents
+		msEntityEvent 131, UP, sub_5D89E-ms_map36_EntityEvents
+		msEntityEvent 132, UP, sub_5D8BC-ms_map36_EntityEvents
+		msEntityEvent 133, UP, sub_5D8CA-ms_map36_EntityEvents
+		msEntityEvent 134, UP, sub_5D8D8-ms_map36_EntityEvents
+		msEntityEvent 135, UP, sub_5D8E2-ms_map36_EntityEvents
+		msEntityEvent 136, UP, sub_5D8F0-ms_map36_EntityEvents
+		msEntityEvent 137, UP, sub_5D904-ms_map36_EntityEvents
+		msEntityEvent 138, UP, sub_5D90E-ms_map36_EntityEvents
+		msEntityEvent 139, UP, sub_5D91C-ms_map36_EntityEvents
+		msDefaultEntityEvent 0, nullsub_140-ms_map36_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

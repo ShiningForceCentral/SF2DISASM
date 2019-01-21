@@ -2,29 +2,14 @@
 ; ASM FILE data\maps\entries\map29\mapsetups\s2.asm :
 ; 0x5A0F0..0x5A14E : 
 ms_map29_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w j_j_BlacksmithActions-ms_map29_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w j_j_ChurchActions_0-ms_map29_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_5A11C-ms_map29_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_5A128-ms_map29_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_5A12E-ms_map29_EntityEvents
-		dc.b $85
-		dc.b 1
-		dc.w sub_5A138-ms_map29_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_5A142-ms_map29_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_136-ms_map29_EntityEvents
+		msEntityEvent 128, DOWN, j_j_BlacksmithActions-ms_map29_EntityEvents
+		msEntityEvent 129, UP, j_j_ChurchActions_0-ms_map29_EntityEvents
+		msEntityEvent 130, UP, sub_5A11C-ms_map29_EntityEvents
+		msEntityEvent 131, UP, sub_5A128-ms_map29_EntityEvents
+		msEntityEvent 132, UP, sub_5A12E-ms_map29_EntityEvents
+		msEntityEvent 133, UP, sub_5A138-ms_map29_EntityEvents
+		msEntityEvent 134, UP, sub_5A142-ms_map29_EntityEvents
+		msDefaultEntityEvent 0, nullsub_136-ms_map29_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

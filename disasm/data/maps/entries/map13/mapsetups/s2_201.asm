@@ -2,47 +2,20 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s2_201.asm :
 ; 0x5814C..0x5822A : 
 ms_map13_flag201_EntityEvents:
-		dc.b $80 
-		dc.b   1
-		dc.w sub_58184-ms_map13_flag201_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_5818A-ms_map13_flag201_EntityEvents
-		dc.b $82
-		dc.b 0
-		dc.w (sub_58078-ms_map13_flag201_EntityEvents) & $FFFF
-		dc.b $83
-		dc.b 1
-		dc.w (sub_58090-ms_map13_flag201_EntityEvents) & $FFFF
-		dc.b $84
-		dc.b 1
-		dc.w (sub_5809E-ms_map13_flag201_EntityEvents) & $FFFF
-		dc.b $85
-		dc.b 3
-		dc.w sub_58190-ms_map13_flag201_EntityEvents
-		dc.b $86
-		dc.b 3
-		dc.w (sub_580C6-ms_map13_flag201_EntityEvents) & $FFFF
-		dc.b $87
-		dc.b 1
-		dc.w sub_58196-ms_map13_flag201_EntityEvents
-		dc.b $88
-		dc.b 1
-		dc.w sub_5819C-ms_map13_flag201_EntityEvents
-		dc.b $89
-		dc.b 0
-		dc.w sub_581A2-ms_map13_flag201_EntityEvents
-		dc.b $8A
-		dc.b 3
-		dc.w sub_58218-ms_map13_flag201_EntityEvents
-		dc.b $8B
-		dc.b 1
-		dc.w sub_5821E-ms_map13_flag201_EntityEvents
-		dc.b $8C
-		dc.b 1
-		dc.w sub_58224-ms_map13_flag201_EntityEvents
-		dc.w $FD00
-		dc.w (nullsub_116-ms_map13_flag201_EntityEvents) & $FFFF
+		msEntityEvent 128, UP, sub_58184-ms_map13_flag201_EntityEvents
+		msEntityEvent 129, UP, sub_5818A-ms_map13_flag201_EntityEvents
+		msEntityEvent 130, RIGHT, (sub_58078-ms_map13_flag201_EntityEvents) & $FFFF
+		msEntityEvent 131, UP, (sub_58090-ms_map13_flag201_EntityEvents) & $FFFF
+		msEntityEvent 132, UP, (sub_5809E-ms_map13_flag201_EntityEvents) & $FFFF
+		msEntityEvent 133, DOWN, sub_58190-ms_map13_flag201_EntityEvents
+		msEntityEvent 134, DOWN, (sub_580C6-ms_map13_flag201_EntityEvents) & $FFFF
+		msEntityEvent 135, UP, sub_58196-ms_map13_flag201_EntityEvents
+		msEntityEvent 136, UP, sub_5819C-ms_map13_flag201_EntityEvents
+		msEntityEvent 137, RIGHT, sub_581A2-ms_map13_flag201_EntityEvents
+		msEntityEvent 138, DOWN, sub_58218-ms_map13_flag201_EntityEvents
+		msEntityEvent 139, UP, sub_5821E-ms_map13_flag201_EntityEvents
+		msEntityEvent 140, UP, sub_58224-ms_map13_flag201_EntityEvents
+		msDefaultEntityEvent 0, (nullsub_116-ms_map13_flag201_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

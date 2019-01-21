@@ -2,26 +2,13 @@
 ; ASM FILE data\maps\entries\map23\mapsetups\s2.asm :
 ; 0x59B44..0x59BA8 : 
 ms_map23_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_59B60-ms_map23_EntityEvents
-		dc.b $81
-		dc.b 3
-		dc.w sub_59B6A-ms_map23_EntityEvents
-		dc.b $82
-		dc.b 3
-		dc.w sub_59B70-ms_map23_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_59B7A-ms_map23_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_59B84-ms_map23_EntityEvents
-		dc.b $85
-		dc.b 1
-		dc.w sub_59B9E-ms_map23_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_129-ms_map23_EntityEvents
+		msEntityEvent 128, UP, sub_59B60-ms_map23_EntityEvents
+		msEntityEvent 129, DOWN, sub_59B6A-ms_map23_EntityEvents
+		msEntityEvent 130, DOWN, sub_59B70-ms_map23_EntityEvents
+		msEntityEvent 131, UP, sub_59B7A-ms_map23_EntityEvents
+		msEntityEvent 132, UP, sub_59B84-ms_map23_EntityEvents
+		msEntityEvent 133, UP, sub_59B9E-ms_map23_EntityEvents
+		msDefaultEntityEvent 0, nullsub_129-ms_map23_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

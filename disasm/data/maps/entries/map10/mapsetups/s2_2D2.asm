@@ -2,89 +2,34 @@
 ; ASM FILE data\maps\entries\map10\mapsetups\s2_2D2.asm :
 ; 0x56E9C..0x56F8A : 
 ms_map10_flag2D2_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w (sub_56DE0-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $81
-		dc.b 3
-		dc.w (sub_56DE6-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $82
-		dc.b 0
-		dc.w (sub_56DF0-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $83
-		dc.b 0
-		dc.w (sub_56DFE-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $84
-		dc.b 0
-		dc.w (sub_56E08-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $85
-		dc.b 0
-		dc.w (sub_56E12-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $86
-		dc.b 0
-		dc.w (sub_56E1C-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $87
-		dc.b 0
-		dc.w (sub_56E22-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $88
-		dc.b 0
-		dc.w (sub_56E2C-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $89
-		dc.b 3
-		dc.w (sub_56E36-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $8A
-		dc.b 3
-		dc.w (sub_56E44-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $8B
-		dc.b 1
-		dc.w (sub_56E4C-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $8C
-		dc.b 3
-		dc.w (sub_56E52-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $8D
-		dc.b 3
-		dc.w (sub_56E58-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $8E
-		dc.b 3
-		dc.w (sub_56E5E-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $8F
-		dc.b 3
-		dc.w (sub_56E64-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $90
-		dc.b 1
-		dc.w (sub_56E6A-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $91
-		dc.b 3
-		dc.w (sub_56E70-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $92
-		dc.b 3
-		dc.w (sub_56E7A-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $93
-		dc.b 3
-		dc.w sub_56F0C-ms_map10_flag2D2_EntityEvents
-		dc.b $94
-		dc.b 1
-		dc.w sub_56F40-ms_map10_flag2D2_EntityEvents
-		dc.b $95
-		dc.b 3
-		dc.w (sub_56E90-ms_map10_flag2D2_EntityEvents) & $FFFF
-		dc.b $96
-		dc.b 3
-		dc.w sub_56F4E-ms_map10_flag2D2_EntityEvents
-		dc.b $97
-		dc.b 3
-		dc.w sub_56F58-ms_map10_flag2D2_EntityEvents
-		dc.b $98
-		dc.b 3
-		dc.w sub_56F62-ms_map10_flag2D2_EntityEvents
-		dc.b $99
-		dc.b 3
-		dc.w sub_56F68-ms_map10_flag2D2_EntityEvents
-		dc.b $A
-		dc.b 3
-		dc.w sub_56F80-ms_map10_flag2D2_EntityEvents
-		dc.w $FD00
-		dc.w (return_56E9A-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 128, DOWN, (sub_56DE0-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 129, DOWN, (sub_56DE6-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 130, RIGHT, (sub_56DF0-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 131, RIGHT, (sub_56DFE-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 132, RIGHT, (sub_56E08-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 133, RIGHT, (sub_56E12-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 134, RIGHT, (sub_56E1C-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 135, RIGHT, (sub_56E22-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 136, RIGHT, (sub_56E2C-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 137, DOWN, (sub_56E36-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 138, DOWN, (sub_56E44-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 139, UP, (sub_56E4C-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 140, DOWN, (sub_56E52-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 141, DOWN, (sub_56E58-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 142, DOWN, (sub_56E5E-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 143, DOWN, (sub_56E64-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 144, UP, (sub_56E6A-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 145, DOWN, (sub_56E70-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 146, DOWN, (sub_56E7A-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 147, DOWN, sub_56F0C-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 148, UP, sub_56F40-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 149, DOWN, (sub_56E90-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 150, DOWN, sub_56F4E-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 151, DOWN, sub_56F58-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 152, DOWN, sub_56F62-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 153, DOWN, sub_56F68-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 10, DOWN, sub_56F80-ms_map10_flag2D2_EntityEvents
+		msDefaultEntityEvent 0, (entevdft_56E9A-ms_map10_flag2D2_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

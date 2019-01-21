@@ -2,26 +2,13 @@
 ; ASM FILE data\maps\entries\map26\mapsetups\s2.asm :
 ; 0x59D6A..0x59DB6 : 
 ms_map26_EntityEvents:
-		dc.b $10
-		dc.b 1
-		dc.w sub_59D86-ms_map26_EntityEvents
-		dc.b $11
-		dc.b 1
-		dc.w sub_59D90-ms_map26_EntityEvents
-		dc.b $80
-		dc.b 1
-		dc.w sub_59D9A-ms_map26_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w nullsub_133-ms_map26_EntityEvents
-		dc.b $85
-		dc.b 3
-		dc.w sub_59DA4-ms_map26_EntityEvents
-		dc.b $86
-		dc.b 0
-		dc.w sub_59DAC-ms_map26_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_133-ms_map26_EntityEvents
+		msEntityEvent 16, UP, sub_59D86-ms_map26_EntityEvents
+		msEntityEvent 17, UP, sub_59D90-ms_map26_EntityEvents
+		msEntityEvent 128, UP, sub_59D9A-ms_map26_EntityEvents
+		msEntityEvent 129, UP, nullsub_133-ms_map26_EntityEvents
+		msEntityEvent 133, DOWN, sub_59DA4-ms_map26_EntityEvents
+		msEntityEvent 134, RIGHT, sub_59DAC-ms_map26_EntityEvents
+		msDefaultEntityEvent 0, nullsub_133-ms_map26_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

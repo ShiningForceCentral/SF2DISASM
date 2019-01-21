@@ -2,14 +2,9 @@
 ; ASM FILE data\maps\entries\map08\mapsetups\s2.asm :
 ; 0x56084..0x561AE : 
 ms_map8_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_56090-ms_map8_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_560AC-ms_map8_EntityEvents
-		dc.w $FD00
-		dc.w return_56144-ms_map8_EntityEvents
+		msEntityEvent 128, UP, sub_56090-ms_map8_EntityEvents
+		msEntityEvent 129, UP, sub_560AC-ms_map8_EntityEvents
+		msDefaultEntityEvent 0, return_56144-ms_map8_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

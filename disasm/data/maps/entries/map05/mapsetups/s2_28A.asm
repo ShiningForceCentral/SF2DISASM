@@ -2,53 +2,22 @@
 ; ASM FILE data\maps\entries\map05\mapsetups\s2_28A.asm :
 ; 0x51A82..0x51C22 : 
 ms_map5_flag28A_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_51B1E-ms_map5_flag28A_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_51BB8-ms_map5_flag28A_EntityEvents
-		dc.b $82
-		dc.b 3
-		dc.w sub_51BC2-ms_map5_flag28A_EntityEvents
-		dc.b $83
-		dc.b 3
-		dc.w sub_51BCC-ms_map5_flag28A_EntityEvents
-		dc.b $84
-		dc.b 3
-		dc.w sub_51BD2-ms_map5_flag28A_EntityEvents
-		dc.b $85
-		dc.b 1
-		dc.w sub_51B50-ms_map5_flag28A_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_51B56-ms_map5_flag28A_EntityEvents
-		dc.b $87
-		dc.b 3
-		dc.w sub_51BDC-ms_map5_flag28A_EntityEvents
-		dc.b $88
-		dc.b 3
-		dc.w sub_51BE2-ms_map5_flag28A_EntityEvents
-		dc.b $89
-		dc.b 3
-		dc.w sub_51BF0-ms_map5_flag28A_EntityEvents
-		dc.b $8A
-		dc.b 3
-		dc.w sub_51BFA-ms_map5_flag28A_EntityEvents
-		dc.b $8B
-		dc.b 1
-		dc.w sub_51C04-ms_map5_flag28A_EntityEvents
-		dc.b $8C
-		dc.b 3
-		dc.w sub_51C0E-ms_map5_flag28A_EntityEvents
-		dc.b $8D
-		dc.b 3
-		dc.w sub_51BAE-ms_map5_flag28A_EntityEvents
-		dc.b $8E
-		dc.b 1
-		dc.w sub_51C1C-ms_map5_flag28A_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_113-ms_map5_flag28A_EntityEvents
+		msEntityEvent 128, UP, sub_51B1E-ms_map5_flag28A_EntityEvents
+		msEntityEvent 129, UP, sub_51BB8-ms_map5_flag28A_EntityEvents
+		msEntityEvent 130, DOWN, sub_51BC2-ms_map5_flag28A_EntityEvents
+		msEntityEvent 131, DOWN, sub_51BCC-ms_map5_flag28A_EntityEvents
+		msEntityEvent 132, DOWN, sub_51BD2-ms_map5_flag28A_EntityEvents
+		msEntityEvent 133, UP, sub_51B50-ms_map5_flag28A_EntityEvents
+		msEntityEvent 134, UP, sub_51B56-ms_map5_flag28A_EntityEvents
+		msEntityEvent 135, DOWN, sub_51BDC-ms_map5_flag28A_EntityEvents
+		msEntityEvent 136, DOWN, sub_51BE2-ms_map5_flag28A_EntityEvents
+		msEntityEvent 137, DOWN, sub_51BF0-ms_map5_flag28A_EntityEvents
+		msEntityEvent 138, DOWN, sub_51BFA-ms_map5_flag28A_EntityEvents
+		msEntityEvent 139, UP, sub_51C04-ms_map5_flag28A_EntityEvents
+		msEntityEvent 140, DOWN, sub_51C0E-ms_map5_flag28A_EntityEvents
+		msEntityEvent 141, DOWN, sub_51BAE-ms_map5_flag28A_EntityEvents
+		msEntityEvent 142, UP, sub_51C1C-ms_map5_flag28A_EntityEvents
+		msDefaultEntityEvent 0, nullsub_113-ms_map5_flag28A_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

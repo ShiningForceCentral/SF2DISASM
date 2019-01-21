@@ -2,20 +2,11 @@
 ; ASM FILE data\maps\entries\map11\mapsetups\s2.asm :
 ; 0x57A0C..0x57A68 : 
 ms_map11_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_57A20-ms_map11_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_57A2A-ms_map11_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_57A34-ms_map11_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_57A3A-ms_map11_EntityEvents
-		dc.w $FD00
-		dc.w return_57A66-ms_map11_EntityEvents
+		msEntityEvent 128, UP, sub_57A20-ms_map11_EntityEvents
+		msEntityEvent 129, UP, sub_57A2A-ms_map11_EntityEvents
+		msEntityEvent 130, UP, sub_57A34-ms_map11_EntityEvents
+		msEntityEvent 131, UP, sub_57A3A-ms_map11_EntityEvents
+		msDefaultEntityEvent 0, return_57A66-ms_map11_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

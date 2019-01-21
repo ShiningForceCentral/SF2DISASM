@@ -2,29 +2,14 @@
 ; ASM FILE data\maps\entries\map33\mapsetups\s2.asm :
 ; 0x5A766..0x5AA8A : 
 ms_map33_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w sub_5A788-ms_map33_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_5A7D2-ms_map33_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_5A7F0-ms_map33_EntityEvents
-		dc.b $E
-		dc.b 1
-		dc.w sub_5A842-ms_map33_EntityEvents
-		dc.b $10
-		dc.b 1
-		dc.w sub_5A864-ms_map33_EntityEvents
-		dc.b $11
-		dc.b 1
-		dc.w sub_5A886-ms_map33_EntityEvents
-		dc.b $F
-		dc.b 1
-		dc.w sub_5A8A8-ms_map33_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_138-ms_map33_EntityEvents
+		msEntityEvent 128, DOWN, sub_5A788-ms_map33_EntityEvents
+		msEntityEvent 129, UP, sub_5A7D2-ms_map33_EntityEvents
+		msEntityEvent 130, UP, sub_5A7F0-ms_map33_EntityEvents
+		msEntityEvent 14, UP, sub_5A842-ms_map33_EntityEvents
+		msEntityEvent 16, UP, sub_5A864-ms_map33_EntityEvents
+		msEntityEvent 17, UP, sub_5A886-ms_map33_EntityEvents
+		msEntityEvent 15, UP, sub_5A8A8-ms_map33_EntityEvents
+		msDefaultEntityEvent 0, nullsub_138-ms_map33_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

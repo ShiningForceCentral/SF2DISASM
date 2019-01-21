@@ -2,89 +2,34 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\s2_261.asm :
 ; 0x5105C..0x511CA : 
 ms_map3_flag261_EntityEvents:
-		dc.b $80
-		dc.b 3
-		dc.w sub_510CC-ms_map3_flag261_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_510E0-ms_map3_flag261_EntityEvents
-		dc.b $82
-		dc.b 3
-		dc.w sub_510F4-ms_map3_flag261_EntityEvents
-		dc.b $83
-		dc.b 3
-		dc.w sub_510FA-ms_map3_flag261_EntityEvents
-		dc.b $84
-		dc.b 3
-		dc.w sub_51108-ms_map3_flag261_EntityEvents
-		dc.b $85
-		dc.b 1
-		dc.w sub_5110E-ms_map3_flag261_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_51114-ms_map3_flag261_EntityEvents
-		dc.b $87
-		dc.b 3
-		dc.w sub_5111A-ms_map3_flag261_EntityEvents
-		dc.b $88
-		dc.b 3
-		dc.w sub_51124-ms_map3_flag261_EntityEvents
-		dc.b $89
-		dc.b 3
-		dc.w sub_5112A-ms_map3_flag261_EntityEvents
-		dc.b $8A
-		dc.b 3
-		dc.w sub_51130-ms_map3_flag261_EntityEvents
-		dc.b $8B
-		dc.b 3
-		dc.w sub_51130-ms_map3_flag261_EntityEvents
-		dc.b $8C
-		dc.b 3
-		dc.w sub_51136-ms_map3_flag261_EntityEvents
-		dc.b $8D
-		dc.b 3
-		dc.w sub_51140-ms_map3_flag261_EntityEvents
-		dc.b $8E
-		dc.b 1
-		dc.w sub_51146-ms_map3_flag261_EntityEvents
-		dc.b $8F
-		dc.b 1
-		dc.w sub_5114C-ms_map3_flag261_EntityEvents
-		dc.b $90
-		dc.b 3
-		dc.w sub_51152-ms_map3_flag261_EntityEvents
-		dc.b $91
-		dc.b 1
-		dc.w sub_51158-ms_map3_flag261_EntityEvents
-		dc.b $92
-		dc.b 1
-		dc.w sub_5115E-ms_map3_flag261_EntityEvents
-		dc.b $93
-		dc.b 1
-		dc.w sub_51164-ms_map3_flag261_EntityEvents
-		dc.b 6
-		dc.b 1
-		dc.w sub_5116A-ms_map3_flag261_EntityEvents
-		dc.b $94
-		dc.b 3
-		dc.w sub_51170-ms_map3_flag261_EntityEvents
-		dc.b $95
-		dc.b 3
-		dc.w sub_51178-ms_map3_flag261_EntityEvents
-		dc.b $96
-		dc.b 1
-		dc.w sub_5117E-ms_map3_flag261_EntityEvents
-		dc.b $97
-		dc.b 3
-		dc.w sub_51194-ms_map3_flag261_EntityEvents
-		dc.b $98
-		dc.b 1
-		dc.w sub_511A8-ms_map3_flag261_EntityEvents
-		dc.b $99
-		dc.b 3
-		dc.w sub_511BC-ms_map3_flag261_EntityEvents
-		dc.w $FD00
-		dc.w (return_5105A-ms_map3_flag261_EntityEvents) & $FFFF
+		msEntityEvent 128, DOWN, sub_510CC-ms_map3_flag261_EntityEvents
+		msEntityEvent 129, UP, sub_510E0-ms_map3_flag261_EntityEvents
+		msEntityEvent 130, DOWN, sub_510F4-ms_map3_flag261_EntityEvents
+		msEntityEvent 131, DOWN, sub_510FA-ms_map3_flag261_EntityEvents
+		msEntityEvent 132, DOWN, sub_51108-ms_map3_flag261_EntityEvents
+		msEntityEvent 133, UP, sub_5110E-ms_map3_flag261_EntityEvents
+		msEntityEvent 134, UP, sub_51114-ms_map3_flag261_EntityEvents
+		msEntityEvent 135, DOWN, sub_5111A-ms_map3_flag261_EntityEvents
+		msEntityEvent 136, DOWN, sub_51124-ms_map3_flag261_EntityEvents
+		msEntityEvent 137, DOWN, sub_5112A-ms_map3_flag261_EntityEvents
+		msEntityEvent 138, DOWN, sub_51130-ms_map3_flag261_EntityEvents
+		msEntityEvent 139, DOWN, sub_51130-ms_map3_flag261_EntityEvents
+		msEntityEvent 140, DOWN, sub_51136-ms_map3_flag261_EntityEvents
+		msEntityEvent 141, DOWN, sub_51140-ms_map3_flag261_EntityEvents
+		msEntityEvent 142, UP, sub_51146-ms_map3_flag261_EntityEvents
+		msEntityEvent 143, UP, sub_5114C-ms_map3_flag261_EntityEvents
+		msEntityEvent 144, DOWN, sub_51152-ms_map3_flag261_EntityEvents
+		msEntityEvent 145, UP, sub_51158-ms_map3_flag261_EntityEvents
+		msEntityEvent 146, UP, sub_5115E-ms_map3_flag261_EntityEvents
+		msEntityEvent 147, UP, sub_51164-ms_map3_flag261_EntityEvents
+		msEntityEvent 6, UP, sub_5116A-ms_map3_flag261_EntityEvents
+		msEntityEvent 148, DOWN, sub_51170-ms_map3_flag261_EntityEvents
+		msEntityEvent 149, DOWN, sub_51178-ms_map3_flag261_EntityEvents
+		msEntityEvent 150, UP, sub_5117E-ms_map3_flag261_EntityEvents
+		msEntityEvent 151, DOWN, sub_51194-ms_map3_flag261_EntityEvents
+		msEntityEvent 152, UP, sub_511A8-ms_map3_flag261_EntityEvents
+		msEntityEvent 153, DOWN, sub_511BC-ms_map3_flag261_EntityEvents
+		msDefaultEntityEvent 0, (entevdft_5105A-ms_map3_flag261_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

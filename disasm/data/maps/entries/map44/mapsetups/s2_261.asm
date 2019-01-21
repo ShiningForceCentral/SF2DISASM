@@ -2,20 +2,9 @@
 ; ASM FILE data\maps\entries\map44\mapsetups\s2_261.asm :
 ; 0x5446A..0x54482 : 
 ms_map44_flag261_EntityEvents:
-		dc.b $80
-		dc.b 1
-		dc.w sub_544C2-ms_map44_flag261_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_544C8-ms_map44_flag261_EntityEvents
-		dc.b $82
-		dc.b 0
-		dc.w sub_544CE-ms_map44_flag261_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_544D4-ms_map44_flag261_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_544DA-ms_map44_flag261_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_146-ms_map44_flag261_EntityEvents
+		msEntityEvent 128, UP, sub_544C2-ms_map44_flag261_EntityEvents
+		msEntityEvent 129, UP, sub_544C8-ms_map44_flag261_EntityEvents
+		msEntityEvent 130, RIGHT, sub_544CE-ms_map44_flag261_EntityEvents
+		msEntityEvent 131, UP, sub_544D4-ms_map44_flag261_EntityEvents
+		msEntityEvent 132, UP, sub_544DA-ms_map44_flag261_EntityEvents
+		msDefaultEntityEvent 0, nullsub_146-ms_map44_flag261_EntityEvents

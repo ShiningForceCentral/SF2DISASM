@@ -2,44 +2,19 @@
 ; ASM FILE data\maps\entries\map09\mapsetups\s2.asm :
 ; 0x56722..0x56856 : 
 ms_map9_EntityEvents:
-		dc.b $B
-		dc.b 0
-		dc.w sub_567E6-ms_map9_EntityEvents
-		dc.b $C
-		dc.b 3
-		dc.w sub_56842-ms_map9_EntityEvents
-		dc.b $80
-		dc.b 1
-		dc.w sub_56756-ms_map9_EntityEvents
-		dc.b $81
-		dc.b 1
-		dc.w sub_5675C-ms_map9_EntityEvents
-		dc.b $82
-		dc.b 1
-		dc.w sub_56762-ms_map9_EntityEvents
-		dc.b $83
-		dc.b 1
-		dc.w sub_56768-ms_map9_EntityEvents
-		dc.b $84
-		dc.b 1
-		dc.w sub_56776-ms_map9_EntityEvents
-		dc.b $85
-		dc.b 3
-		dc.w sub_56784-ms_map9_EntityEvents
-		dc.b $86
-		dc.b 1
-		dc.w sub_5678C-ms_map9_EntityEvents
-		dc.b $87
-		dc.b 1
-		dc.w sub_567C8-ms_map9_EntityEvents
-		dc.b $88
-		dc.b 1
-		dc.w sub_567D2-ms_map9_EntityEvents
-		dc.b $89
-		dc.b 1
-		dc.w sub_567D8-ms_map9_EntityEvents
-		dc.w $FD00
-		dc.w nullsub_114-ms_map9_EntityEvents
+		msEntityEvent 11, RIGHT, sub_567E6-ms_map9_EntityEvents
+		msEntityEvent 12, DOWN, sub_56842-ms_map9_EntityEvents
+		msEntityEvent 128, UP, sub_56756-ms_map9_EntityEvents
+		msEntityEvent 129, UP, sub_5675C-ms_map9_EntityEvents
+		msEntityEvent 130, UP, sub_56762-ms_map9_EntityEvents
+		msEntityEvent 131, UP, sub_56768-ms_map9_EntityEvents
+		msEntityEvent 132, UP, sub_56776-ms_map9_EntityEvents
+		msEntityEvent 133, DOWN, sub_56784-ms_map9_EntityEvents
+		msEntityEvent 134, UP, sub_5678C-ms_map9_EntityEvents
+		msEntityEvent 135, UP, sub_567C8-ms_map9_EntityEvents
+		msEntityEvent 136, UP, sub_567D2-ms_map9_EntityEvents
+		msEntityEvent 137, UP, sub_567D8-ms_map9_EntityEvents
+		msDefaultEntityEvent 0, nullsub_114-ms_map9_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
