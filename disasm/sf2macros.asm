@@ -117,3 +117,39 @@ incbinIfExpandedRom:	macro
 	incbin \1
 	endc
 	endm
+	
+sndCom:	macro
+	trap #SOUND_COMMAND
+	dc.w \1
+	endm
+	
+chkFlg:	macro
+	trap #CHECK_FLAG
+	dc.w \1
+	endm
+	
+setFlg:	macro
+	trap #SET_FLAG
+	dc.w \1
+	endm
+	
+clrFlg:	macro
+	trap #CLEAR_FLAG
+	dc.w \1
+	endm
+	
+checkFlg:	macro
+	trap #4
+	dc.w \1
+	endm
+	
+txt:	macro
+	trap #TEXTBOX
+	dc.w \1
+	endm
+	
+clsTxt:	macro
+	trap #TEXTBOX
+	dc.w $FFFF
+	endm
+	
