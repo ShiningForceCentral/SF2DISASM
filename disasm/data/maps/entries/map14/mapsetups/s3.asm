@@ -13,8 +13,7 @@ ms_map14_ZoneEvents:
 sub_58E50:
 		lea     cs_58E5C(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $101
+		setFlg $101             ; Temporary map setup flag 01
 return_58E5A:
 		rts
 

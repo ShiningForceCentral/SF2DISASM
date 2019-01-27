@@ -15,63 +15,53 @@ LevelUpCutscene:
 		move.b  (a5)+,d1
 		cmpi.b  #$FF,d1
 		bne.s   loc_22BEA
-		trap    #TEXTBOX
-		dc.w $94                ; "It has no use.{W2}"
-		bra.w   loc_22C5A
+		txt $94                 ; "It has no use.{W2}"
+		bra.w   byte_22C5A      
 loc_22BEA:
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $F4                ; "{NAME} became{N}level {#}!"
+		txt $F4                 ; "{NAME} became{N}level {#}!"
 		move.b  (a5)+,d1
 		beq.s   loc_22BFE
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $10A               ; "{D1}HP increased by {#}!"
+		txt $10A                ; "{D1}HP increased by {#}!"
 loc_22BFE:
 		move.b  (a5)+,d1
 		beq.s   loc_22C0A
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $10B               ; "{D1}MP increased by {#}!"
+		txt $10B                ; "{D1}MP increased by {#}!"
 loc_22C0A:
 		move.b  (a5)+,d1
 		beq.s   loc_22C16
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $10C               ; "{D1}Attack increased by {#}!"
+		txt $10C                ; "{D1}Attack increased by {#}!"
 loc_22C16:
 		move.b  (a5)+,d1
 		beq.s   loc_22C22
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $10D               ; "{D1}Defense increased by {#}!"
+		txt $10D                ; "{D1}Defense increased by {#}!"
 loc_22C22:
 		move.b  (a5)+,d1
 		beq.s   loc_22C2E
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $10E               ; "{D1}Agility increased by {#}!"
+		txt $10E                ; "{D1}Agility increased by {#}!"
 loc_22C2E:
 		move.b  (a5)+,d1
 		cmpi.b  #$FF,d1
-		beq.w   loc_22C5A
+		beq.w   byte_22C5A      
 		move.l  d1,d2
 		andi.w  #$3F,d2 
 		lsr.w   #6,d1
 		bne.s   loc_22C4C
 		move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $10F               ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
-		bra.s   loc_22C5A
+		txt $10F                ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
+		bra.s   byte_22C5A      
 loc_22C4C:
 		addq.w  #1,d1
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		move.w  d2,((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $110               ; "{D1}{SPELL} increased to{N}level {#}!"
-loc_22C5A:
-		trap    #TEXTBOX
-		dc.w $DC3               ; "{W1}"
+		txt $110                ; "{D1}{SPELL} increased to{N}level {#}!"
+byte_22C5A:
+		txt $DC3                ; "{W1}"
 		rts
 
 	; End of function LevelUpCutscene
@@ -497,8 +487,7 @@ loc_2306A:
 		ori.b   #$C,$1C(a1)
 loc_23074:
 		move.w  ((MOVE_SOUND-$1000000)).w,d0
-		trap    #SOUND_COMMAND
-		dc.w SOUND_COMMAND_GET_D0_PARAMETER
+		sndCom SOUND_COMMAND_GET_D0_PARAMETER
 		bsr.w   UpdateControlledUnitPos
 		move.w  -2(a6),d0
 		jsr     j_WaitForEntityToStopMoving
@@ -539,7 +528,7 @@ sub_230E2:
 		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 		bne.s   loc_230F2
 		moveq   #$FFFFFFFF,d0
-		bra.w   loc_2321E
+		bra.w   byte_2321E
 loc_230F2:
 		jsr     (WaitForVInt).w 
 		move.w  d0,d6
@@ -639,24 +628,23 @@ loc_231E0:
 		beq.s   loc_231F6
 		jsr     j_HideFighterMiniStatusWindow
 		move.w  #$FFFF,d0
-		bra.w   loc_2321E
+		bra.w   byte_2321E
 loc_231F6:
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_23208
 		clr.w   d0
 		move.b  (a0,d1.w),d0
-		bra.w   loc_2321E
+		bra.w   byte_2321E
 loc_23208:
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_2321A
 		clr.w   d0
 		move.b  (a0,d1.w),d0
-		bra.w   loc_2321E
+		bra.w   byte_2321E
 loc_2321A:
 		bra.w   loc_23186
-loc_2321E:
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+byte_2321E:
+		sndCom SFX_VALIDATION
 		bsr.w   HideUnitCursor
 		movem.l (sp)+,d1-a0
 		rts

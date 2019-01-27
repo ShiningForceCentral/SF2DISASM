@@ -6,8 +6,8 @@
 
 ms_map55_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $3E7
+		 
+		chkFlg $3E7             ; set after the Nazca ship shootdown scene
 		beq.s   return_5E27A
 		lea     byte_5E320(pc), a0
 		trap    #6

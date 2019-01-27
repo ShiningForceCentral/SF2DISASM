@@ -20,16 +20,14 @@ ms_map62_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C834:
-		trap    #CHECK_FLAG
-		dc.w $2D9
+		 
+		chkFlg $2D9             ; ???
 		bne.s   return_5C84A
-		trap    #CHECK_FLAG
-		dc.w $100
+		chkFlg $100             ; Temporary map setup flag 00
 		bne.s   return_5C84A
 		lea     cs_5C876(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
+		setFlg $100             ; Temporary map setup flag 00
 return_5C84A:
 		rts
 
@@ -39,19 +37,16 @@ return_5C84A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C84C:
-		trap    #CHECK_FLAG
-		dc.w $2D9
+		 
+		chkFlg $2D9             ; ???
 		bne.s   return_5C868
-		trap    #CHECK_FLAG
-		dc.w $100
+		chkFlg $100             ; Temporary map setup flag 00
 		beq.s   return_5C868
-		trap    #CHECK_FLAG
-		dc.w $101
+		chkFlg $101             ; Temporary map setup flag 01
 		bne.s   return_5C868
 		lea     cs_5C8FE(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $101
+		setFlg $101             ; Temporary map setup flag 01
 return_5C868:
 		rts
 

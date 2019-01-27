@@ -6,8 +6,8 @@
 
 ms_map25_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $320
+		 
+		chkFlg $320             ; set after the merchant in Ketto runs to his store
 		beq.s   return_5D3A8
 		lea     cs_5D3AA(pc), a0
 		trap    #6

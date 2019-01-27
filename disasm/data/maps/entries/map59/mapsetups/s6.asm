@@ -6,9 +6,9 @@
 
 ms_map59_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $3E7
-		bne.s   loc_5EB18
+		 
+		chkFlg $3E7             ; set after the Nazca ship shootdown scene
+		bne.s   byte_5EB18      
 		lea     cs_5EB44(pc), a0
 		trap    #6
 		lea     cs_5EBFC(pc), a0
@@ -19,21 +19,15 @@ ms_map59_InitFunction:
 		trap    #6
 		lea     cs_5EF60(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $3E7               ; set after the Nazca ship shootdown scene
+		setFlg $3E7             ; set after the Nazca ship shootdown scene
 		move.b  #$2D,((EGRESS_MAP_INDEX-$1000000)).w 
-		trap    #SET_FLAG
-		dc.w $1B4               ; Battle 36 unlocked
-		trap    #SET_FLAG
-		dc.w $1B8               ; Battle 40 unlocked
-		trap    #SET_FLAG
-		dc.w $1BA               ; Battle 42 unlocked
-		trap    #SET_FLAG
-		dc.w $1BB               ; Battle 43 unlocked
+		setFlg $1B4             ; Battle 36 unlocked
+		setFlg $1B8             ; Battle 40 unlocked
+		setFlg $1BA             ; Battle 42 unlocked
+		setFlg $1BB             ; Battle 43 unlocked
 		rts
-loc_5EB18:
-		trap    #CHECK_FLAG
-		dc.w $1BB
+byte_5EB18:
+		chkFlg $1BB             ; Battle 43 unlocked
 		beq.s   return_5EB24
 		lea     cs_5EB26(pc), a0
 		trap    #6

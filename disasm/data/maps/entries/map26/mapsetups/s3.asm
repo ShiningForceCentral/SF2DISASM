@@ -11,13 +11,12 @@ ms_map26_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_59DBE:
-		trap    #CHECK_FLAG
-		dc.w $30C
+		 
+		chkFlg $30C             ; set after the man tries to lift the giant ring in Floor World
 		bne.s   return_59DCE
 		lea     cs_59F20(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $30C               ; set after the man tries to lift the giant ring in Floor World
+		setFlg $30C             ; set after the man tries to lift the giant ring in Floor World
 return_59DCE:
 		rts
 

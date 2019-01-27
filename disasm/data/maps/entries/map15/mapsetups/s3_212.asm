@@ -19,16 +19,14 @@ nullsub_77:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D008:
-		trap    #CHECK_FLAG
-		dc.w $2D4
+		 
+		chkFlg $2D4             ; set after the scene where Skreech falls in Bedoe
 		beq.s   return_5D01E
-		trap    #CHECK_FLAG
-		dc.w $334
+		chkFlg $334             ; set after Skreech's join scene has played in Tristan
 		bne.s   return_5D01E
 		lea     cs_5D04E(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $334               ; set after Skreech's join scene has played in Tristan
+		setFlg $334             ; set after Skreech's join scene has played in Tristan
 return_5D01E:
 		rts
 

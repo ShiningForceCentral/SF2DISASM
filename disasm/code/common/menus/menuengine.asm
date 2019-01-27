@@ -635,29 +635,25 @@ loc_102A4:
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_102B6
 		moveq   #1,d1
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_10328
 loc_102B6:
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_102C8
 		moveq   #2,d1
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_10328
 loc_102C8:
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_102DA
 		clr.w   d1
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_10328
 loc_102DA:
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_102EC
 		moveq   #3,d1
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_10328
 loc_102EC:
 		; no dpad button was pressed
@@ -1000,8 +996,7 @@ loc_10616:
 		moveq   #1,d1
 		cmpi.w  #$7F,((DISPLAYED_ICON_2-$1000000)).w 
 		beq.s   loc_10630
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_106B4
 loc_10630:
 		btst    #3,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -1009,15 +1004,13 @@ loc_10630:
 		moveq   #2,d1
 		cmpi.w  #$7F,((DISPLAYED_ICON_3-$1000000)).w 
 		beq.s   loc_1064A
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_106B4
 loc_1064A:
 		btst    #0,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1065C
 		clr.w   d1
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_106B4
 loc_1065C:
 		btst    #1,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -1025,8 +1018,7 @@ loc_1065C:
 		moveq   #3,d1
 		cmpi.w  #$7F,((DISPLAYED_ICON_4-$1000000)).w 
 		beq.s   loc_10676
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_106B4
 loc_10676:
 		btst    #4,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -1427,8 +1419,7 @@ loc_10AD8:
 		moveq   #1,d1
 		cmpi.w  #$3F,((DISPLAYED_ICON_2-$1000000)).w 
 		beq.s   loc_10AF2
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_10B76
 loc_10AF2:
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -1436,15 +1427,13 @@ loc_10AF2:
 		moveq   #2,d1
 		cmpi.w  #$3F,((DISPLAYED_ICON_3-$1000000)).w 
 		beq.s   loc_10B0C
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_10B76
 loc_10B0C:
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10B1E
 		clr.w   d1
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_10B76
 loc_10B1E:
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -1452,8 +1441,7 @@ loc_10B1E:
 		moveq   #3,d1
 		cmpi.w  #$3F,((DISPLAYED_ICON_4-$1000000)).w 
 		beq.s   loc_10B38
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_10B76
 loc_10B38:
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -1610,8 +1598,8 @@ rjt_10CBE:      dc.w (sub_10800-rjt_10CBE) & $FFFF
 ; =============== S U B R O U T I N E =======================================
 
 sub_10CC6:
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+		 
+		sndCom SFX_VALIDATION
 		move.w  d0,-(sp)
 		lea     TextHighlightTiles(pc), a0
 		lea     ($BC00).l,a1
@@ -1648,19 +1636,17 @@ loc_10D1E:
 		beq.s   loc_10D32
 		moveq   #$FFFFFFFF,d0
 		jsr     (WaitForVInt).w 
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+		sndCom SFX_VALIDATION
 		rts
 loc_10D32:
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_10D3E
-		bra.w   loc_10D48
+		bra.w   byte_10D48
 loc_10D3E:
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.w   loc_10DC0
-loc_10D48:
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+byte_10D48:
+		sndCom SFX_VALIDATION
 		lsl.w   #6,d5
 		or.w    d5,d0
 		jsr     (WaitForVInt).w 
@@ -1672,8 +1658,8 @@ loc_10D48:
 ; =============== S U B R O U T I N E =======================================
 
 sub_10D56:
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		 
+		sndCom SFX_MENU_SELECTION
 		movem.w d0-d5,-(sp)
 		lsl.w   #2,d4
 		add.w   d5,d4
@@ -3715,8 +3701,7 @@ loc_123DA:
 loc_123F2:
 		move.w  -2(a6),d0
 		bne.s   loc_12446
-		trap    #CHECK_FLAG
-		dc.w $180               ; set after Bowie obtains the jewel of light/evil... whichever it is
+		chkFlg $180             ; set after Bowie obtains the jewel of light/evil... whichever it is
 		beq.s   loc_12446
 		move.w  d7,-(sp)
 		lea     aJewel(pc), a0  
@@ -3730,8 +3715,7 @@ loc_123F2:
 		adda.w  #$39E,a1
 		move.w  #$92,d1 
 		bsr.w   CopyMemberScreenIconsToVDPTileOrder
-		trap    #CHECK_FLAG
-		dc.w $181               ; set after Bowie obtains King Galam's jewel
+		chkFlg $181             ; set after Bowie obtains King Galam's jewel
 		beq.s   loc_12446
 		movea.l -6(a6),a1
 		adda.w  #$3A2,a1
@@ -4642,8 +4626,7 @@ loc_13116:
 		beq.s   loc_13138
 		move.b  ((word_FFB13D-$1000000)).w,d0
 		addq.b  #1,d0
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		cmp.b   d2,d0
 		ble.s   loc_13130
 		clr.b   d0
@@ -4655,8 +4638,7 @@ loc_13138:
 		beq.s   loc_13156
 		move.b  ((word_FFB13D-$1000000)).w,d0
 		subq.b  #1,d0
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bge.s   loc_1314E
 		move.b  d2,d0
 loc_1314E:
@@ -4670,8 +4652,7 @@ loc_13156:
 		blt.s   loc_1317A
 		clr.w   d1
 		bsr.w   sub_133A0
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		move.w  d0,((word_FFB138-$1000000)).w
 		bsr.w   sub_13478
 		bra.s   loc_1319A
@@ -4681,8 +4662,7 @@ loc_1317A:
 		blt.s   loc_1319A
 		clr.w   d1
 		bsr.w   sub_133A0
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		move.w  d0,((word_FFB136-$1000000)).w
 		move.b  #1,((word_FFAF9E-$1000000)).w
 		bsr.w   sub_134A8
@@ -4699,8 +4679,7 @@ loc_1319A:
 		bge.s   loc_131CC
 		clr.w   d1
 		bsr.w   sub_133A0
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		move.w  d0,((word_FFB138-$1000000)).w
 		bsr.w   sub_13478
 loc_131CC:
@@ -4714,8 +4693,7 @@ loc_131CE:
 		bge.s   loc_131F6
 		clr.w   d1
 		bsr.w   sub_133A0
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		move.w  d0,((word_FFB136-$1000000)).w
 		clr.b   ((word_FFAF9E-$1000000)).w
 		bsr.w   sub_134A8
@@ -4737,8 +4715,7 @@ loc_13220:
 		move.b  (a0,d0.w),d0
 		bsr.w   sub_132BC
 		beq.s   loc_1323E
-		trap    #SOUND_COMMAND
-		dc.w SFX_REFUSAL
+		sndCom SFX_REFUSAL
 		moveq   #$A,d1
 		bra.s   loc_13214
 loc_1323E:
@@ -5864,8 +5841,7 @@ unk_13EDE:      dc.b $C0
 
 sub_13F14:
 		movem.l d0/d3-a1,-(sp)
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+		sndCom SFX_VALIDATION
 		lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
 		moveq   #0,d1
 		jsr     j_GetItemAndNumberOfItems
@@ -5901,8 +5877,7 @@ loc_13F88:
 		moveq   #1,d1
 		cmpi.w  #$7F,((DISPLAYED_ICON_2-$1000000)).w 
 		beq.s   loc_13FA2
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_1401E
 loc_13FA2:
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -5910,15 +5885,13 @@ loc_13FA2:
 		moveq   #2,d1
 		cmpi.w  #$7F,((DISPLAYED_ICON_3-$1000000)).w 
 		beq.s   loc_13FBC
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_1401E
 loc_13FBC:
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_13FCE
 		clr.w   d1
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_1401E
 loc_13FCE:
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -5926,8 +5899,7 @@ loc_13FCE:
 		moveq   #3,d1
 		cmpi.w  #$7F,((DISPLAYED_ICON_4-$1000000)).w 
 		beq.s   loc_13FE8
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_1401E
 loc_13FE8:
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -5971,8 +5943,7 @@ loc_14052:
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d1
 		ext.w   d1
 		bpl.s   loc_14062
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+		sndCom SFX_VALIDATION
 		moveq   #$FFFFFFFF,d1
 		bra.s   loc_1406E
 loc_14062:
@@ -6199,8 +6170,7 @@ loc_14264:
 		moveq   #1,d1
 		cmpi.w  #$7F,((DISPLAYED_ICON_2-$1000000)).w 
 		beq.s   loc_1427E
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_142FA
 loc_1427E:
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -6208,15 +6178,13 @@ loc_1427E:
 		moveq   #2,d1
 		cmpi.w  #$7F,((DISPLAYED_ICON_3-$1000000)).w 
 		beq.s   loc_14298
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_142FA
 loc_14298:
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_142AA
 		clr.w   d1
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_142FA
 loc_142AA:
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -6224,8 +6192,7 @@ loc_142AA:
 		moveq   #3,d1
 		cmpi.w  #$7F,((DISPLAYED_ICON_4-$1000000)).w 
 		beq.s   loc_142C4
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_142FA
 loc_142C4:
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -6382,8 +6349,7 @@ sub_1443E:
 
 sub_1445A:
 		movem.l d0/d3-a1,-(sp)
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+		sndCom SFX_VALIDATION
 		lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
 		moveq   #0,d1
 		jsr     j_GetSpellAndNumberOfSpells
@@ -6424,8 +6390,7 @@ loc_144DE:
 		moveq   #1,d1
 		cmpi.w  #$3F,((DISPLAYED_ICON_2-$1000000)).w 
 		beq.s   loc_144F8
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_14574
 loc_144F8:
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -6433,15 +6398,13 @@ loc_144F8:
 		moveq   #2,d1
 		cmpi.w  #$3F,((DISPLAYED_ICON_3-$1000000)).w 
 		beq.s   loc_14512
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_14574
 loc_14512:
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14524
 		clr.w   d1
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_14574
 loc_14524:
 		btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -6449,26 +6412,25 @@ loc_14524:
 		moveq   #3,d1
 		cmpi.w  #$3F,((DISPLAYED_ICON_4-$1000000)).w 
 		beq.s   loc_1453E
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_14574
 loc_1453E:
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14550
 		move.b  #$FF,((CURRENT_DIAMENU_CHOICE-$1000000)).w
-		bra.w   loc_145A8
+		bra.w   byte_145A8
 loc_14550:
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_14562
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-		bra.w   loc_145A8
+		bra.w   byte_145A8
 loc_14562:
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.s   loc_1458A
 		clr.w   d0
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-		bra.w   loc_145A8
+		bra.w   byte_145A8
 loc_14574:
 		move.w  d1,-(sp)
 		clr.w   d0
@@ -6490,9 +6452,8 @@ loc_1458A:
 loc_145A0:
 		jsr     (WaitForVInt).w 
 		bra.w   loc_144DE
-loc_145A8:
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+byte_145A8:
+		sndCom SFX_VALIDATION
 		move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d1
 		ext.w   d1
 		bpl.s   loc_145BC
@@ -6523,8 +6484,7 @@ loc_145EA:
 		tst.w   d3
 		ble.s   loc_14600
 		subq.w  #1,d3
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_1463E
 loc_14600:
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -6532,8 +6492,7 @@ loc_14600:
 		cmp.w   d4,d3
 		bge.s   loc_14616
 		addq.w  #1,d3
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_1463E
 loc_14616:
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -6564,8 +6523,7 @@ loc_14654:
 		bsr.w   sub_146AE
 		tst.b   d3
 		bpl.s   loc_1466C
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+		sndCom SFX_VALIDATION
 		move.w  d4,d3
 		bsr.w   sub_1474C
 		bra.w   loc_144D8
@@ -6728,13 +6686,10 @@ sub_1477E:
 		cmp.w   d4,d1
 		beq.w   return_147E6
 		jsr     sub_14422(pc)
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM  ; cursed item effect
-		trap    #TEXTBOX
-		dc.w $2B                ; "Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}"
+		sndCom MUSIC_CURSED_ITEM
+		txt $2B                 ; "Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}"
 		bsr.w   WaitForMusicResumeAndPlayerInput_0
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		jsr     sub_1443E(pc)
 		bra.w   return_147E6
 loc_147B8:
@@ -6744,13 +6699,10 @@ loc_147B8:
 		bne.w   return_147E6
 		move.w  d0,(TEXT_NAME_INDEX_1).l
 		jsr     sub_14422(pc)
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM  ; cursed item effect
-		trap    #TEXTBOX
-		dc.w $22                ; "Gosh!  {NAME} is{N}cursed!{W2}"
+		sndCom MUSIC_CURSED_ITEM
+		txt $22                 ; "Gosh!  {NAME} is{N}cursed!{W2}"
 		bsr.w   WaitForMusicResumeAndPlayerInput_0
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		jsr     sub_1443E(pc)
 return_147E6:
 		rts
@@ -6835,8 +6787,7 @@ loc_148BC:
 		cmp.w   ((word_FFB12E-$1000000)).w,d2
 		bge.s   loc_14906
 		addq.w  #1,d0
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		cmp.w   ((word_FFB134-$1000000)).w,d0
 		blt.s   loc_148FA
 		addq.w  #1,((word_FFB130-$1000000)).w
@@ -6857,8 +6808,7 @@ loc_14906:
 		add.w   d0,d2
 		ble.s   loc_1494A
 		subq.w  #1,d0
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bge.s   loc_1493E
 		subq.w  #1,((word_FFB130-$1000000)).w
 		move.w  #5,((word_FFB132-$1000000)).w
@@ -6875,8 +6825,7 @@ loc_1494A:
 		tst.w   ((word_FFB130-$1000000)).w
 		beq.s   loc_1496A
 		subq.w  #1,((word_FFB130-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		move.b  #1,((word_FFAF9E-$1000000)).w
 		bsr.w   sub_14E62
 loc_1496A:
@@ -6888,8 +6837,7 @@ loc_1496A:
 		cmp.w   ((word_FFB12E-$1000000)).w,d2
 		bge.s   loc_149C2
 		addq.w  #1,((word_FFB130-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		move.w  ((word_FFB132-$1000000)).w,d0
 		move.w  ((word_FFB130-$1000000)).w,d2
 		move.w  d2,d1
@@ -8387,15 +8335,13 @@ loc_15314:
 		btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.w   loc_15328
 		clr.w   d1
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_15378
 loc_15328:
 		btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		beq.w   loc_1533C
 		moveq   #$FFFFFFFF,d1
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_15378
 loc_1533C:
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -9206,13 +9152,12 @@ sub_15A20:
 		bne.s   loc_15A30
 		move.b  ((MESSAGE_SPEED-$1000000)).w,d3
 		andi.w  #3,d3
-		bra.s   loc_15A38
+		bra.s   byte_15A38
 loc_15A30:
 		move.b  ((DISPLAY_BATTLE_MESSAGES-$1000000)).w,d3
 		andi.w  #1,d3
-loc_15A38:
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+byte_15A38:
+		sndCom SFX_MENU_SELECTION
 		rts
 
 	; End of function sub_15A20
@@ -9225,13 +9170,12 @@ sub_15A3E:
 		bne.s   loc_15A4C
 		andi.w  #3,d3
 		move.b  d3,((MESSAGE_SPEED-$1000000)).w
-		bra.s   loc_15A54
+		bra.s   byte_15A54
 loc_15A4C:
 		andi.w  #1,d3
 		move.b  d3,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
-loc_15A54:
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+byte_15A54:
+		sndCom SFX_MENU_SELECTION
 		rts
 
 	; End of function sub_15A3E
@@ -9341,18 +9285,17 @@ loc_15CDC:
 		btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_15E94
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
-		bne.w   loc_15DDA
+		bne.w   byte_15DDA
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
-		bne.w   loc_15D2C
+		bne.w   byte_15D2C
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
-		bne.w   loc_15D2C
+		bne.w   byte_15D2C
 loc_15D22:
 		bsr.w   sub_15F24
 		jsr     (WaitForVInt).w 
 		bra.s   loc_15CDC
-loc_15D2C:
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+byte_15D2C:
+		sndCom SFX_VALIDATION
 		clr.w   d0
 		move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d0
 		cmpi.w  #$13,d0
@@ -9410,9 +9353,8 @@ loc_15DCC:
 		bra.s   loc_15DCC
 return_15DD8:
 		rts
-loc_15DDA:
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+byte_15DDA:
+		sndCom SFX_VALIDATION
 		bra.s   loc_15DAC
 loc_15DE0:
 		cmpi.w  #7,-$18(a6)
@@ -9445,8 +9387,7 @@ loc_15E26:
 		moveq   #0,d0
 loc_15E2E:
 		move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_15D22
 loc_15E3A:
 		cmpi.w  #7,-$18(a6)
@@ -9479,8 +9420,7 @@ loc_15E80:
 		moveq   #$17,d0
 loc_15E88:
 		move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_15D22
 loc_15E94:
 		cmpi.w  #7,-$18(a6)
@@ -9493,8 +9433,7 @@ loc_15E94:
 loc_15EAC:
 		move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
 		bsr.s   sub_15EE0
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bra.w   loc_15D22
 loc_15EBA:
 		cmpi.w  #7,-$18(a6)
@@ -9506,8 +9445,7 @@ loc_15EBA:
 		moveq   #0,d0
 loc_15ED2:
 		move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		bsr.s   sub_15EE0
 		bra.w   loc_15D22
 
@@ -9873,8 +9811,7 @@ loc_163A8:
 		move.w  -$A(a6),d0
 loc_163B2:
 		move.w  d0,-8(a6)
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		rts
 
 	; End of function ModifyPromptNumber
@@ -9926,21 +9863,19 @@ loc_16440:
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_16484
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
-		bne.w   loc_16464
+		bne.w   byte_16464
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
-		bne.w   loc_16474
+		bne.w   byte_16474
 loc_1645E:
 		jsr     (WaitForVInt).w 
 		bra.s   loc_163F6
-loc_16464:
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+byte_16464:
+		sndCom SFX_VALIDATION
 		move.w  -8(a6),d1
 		jsr     j_SetFlag
 		bra.s   loc_1645E
-loc_16474:
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION
+byte_16474:
+		sndCom SFX_VALIDATION
 		move.w  -8(a6),d1
 		jsr     j_ClearFlag
 		bra.s   loc_1645E
@@ -10000,8 +9935,7 @@ loc_164F8:
 		move.w  #$3FF,d0
 loc_16502:
 		move.w  d0,-8(a6)
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		rts
 
 	; End of function sub_164E8
@@ -10071,8 +10005,7 @@ VInt_UpdateTimerWindow:
 		move.l  d1,((SPECIAL_BATTLE_TIME-$1000000)).w
 		subq.w  #1,d0
 		bsr.w   sub_165C0
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		sndCom SFX_MENU_SELECTION
 		tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
 		bne.s   loc_165BA
 		move.w  #$8080,d1
@@ -10180,9 +10113,9 @@ loc_16714:
 		btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
 		bne.w   loc_16756
 		btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
-		bne.w   loc_1675A
+		bne.w   byte_1675A
 		btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
-		bne.w   loc_1675A
+		bne.w   byte_1675A
 		movem.l d6-d7,-(sp)
 		move.w  #$100,d6
 		jsr     (UpdateRandomSeed).w
@@ -10195,9 +10128,8 @@ loc_16752:
 		bra.w   loc_166C2
 loc_16756:
 		move.w  #$FFFF,d0
-loc_1675A:
-		trap    #SOUND_COMMAND
-		dc.w SFX_VALIDATION     ; validation
+byte_1675A:
+		sndCom SFX_VALIDATION
 		movem.w d0,-(sp)
 		move.w  -6(a6),d0
 		move.w  #$2001,d1
@@ -10216,8 +10148,8 @@ loc_1675A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_1678A:
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SELECTION
+		 
+		sndCom SFX_MENU_SELECTION
 		add.w   d3,d0
 		andi.w  #3,d0
 		move.w  -$C(a6),d1

@@ -16,13 +16,12 @@ ms_map9_Section5:
 ; =============== S U B R O U T I N E =======================================
 
 sub_568B0:
-		trap    #CHECK_FLAG
-		dc.w $2D7               ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
+		 
+		chkFlg $2D7             ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 		bne.s   return_568C2
 		lea     cs_569BC(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2D7               ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
+		setFlg $2D7             ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 		moveq   #$FFFFFFFF,d6
 return_568C2:
 		rts

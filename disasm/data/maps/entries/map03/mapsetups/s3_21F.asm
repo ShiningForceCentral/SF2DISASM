@@ -21,12 +21,9 @@ nullsub_70:
 sub_6282A:
 		lea     cs_6283E(pc), a0
 		trap    #6
-		trap    #TEXTBOX
-		dc.w $F48               ; "Wait, wait!{W2}"
-		trap    #TEXTBOX
-		dc.w $F49               ; "Sir Astral told me not to{N}let you go out today!{W2}"
-		trap    #TEXTBOX
-		dc.w $F4A               ; "You have to be here.{W1}"
+		txt $F48                ; "Wait, wait!{W2}"
+		txt $F49                ; "Sir Astral told me not to{N}let you go out today!{W2}"
+		txt $F4A                ; "You have to be here.{W1}"
 		rts
 
 	; End of function sub_6282A

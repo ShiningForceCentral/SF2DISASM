@@ -17,14 +17,12 @@ ms_map66_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FAA0:
-		trap    #CHECK_FLAG
-		dc.w $219               ; Battle 37 completed
+		 
+		chkFlg $219             ; Battle 37 completed
 		beq.s   return_4FAB8
-		trap    #CHECK_FLAG
-		dc.w $21A               ; Battle 38 completed
+		chkFlg $21A             ; Battle 38 completed
 		bne.s   return_4FAB8
-		trap    #SET_FLAG
-		dc.w $1B6               ; Battle 38 unlocked
+		setFlg $1B6             ; Battle 38 unlocked
 		move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_4FAB8:
 		rts
@@ -35,14 +33,12 @@ return_4FAB8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FABA:
-		trap    #CHECK_FLAG
-		dc.w $21A               ; Battle 38 completed
+		 
+		chkFlg $21A             ; Battle 38 completed
 		beq.s   return_4FAD2
-		trap    #CHECK_FLAG
-		dc.w $21B               ; Battle 39 completed
+		chkFlg $21B             ; Battle 39 completed
 		bne.s   return_4FAD2
-		trap    #SET_FLAG
-		dc.w $1B7               ; Battle 39 unlocked
+		setFlg $1B7             ; Battle 39 unlocked
 		move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_4FAD2:
 		rts

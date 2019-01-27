@@ -50,10 +50,8 @@ EndGame:
 		dc.w VINTS_ADD
 		dc.l VInt_WitchEndBlink
 		move.w  #$46,((CURRENT_SPEAK_SOUND-$1000000)).w 
-		trap    #TEXTBOX
-		dc.w $EF                ; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $EF                 ; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
+		clsTxt
 		move.w  #$5A,d0 
 		jsr     (Sleep).w       
 		move.b  #2,((FADING_SETTING-$1000000)).w
@@ -144,14 +142,11 @@ EndGame:
 		move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
 		move.w  #$12C,d0
 		jsr     (Sleep).w       
-		trap    #SOUND_COMMAND
-		dc.w SOUND_COMMAND_FADE_OUT
+		sndCom SOUND_COMMAND_FADE_OUT
 		move.w  #$2A30,d0       ; wait for 3 minutes
 		jsr     (Sleep).w       
-		trap    #TEXTBOX
-		dc.w $1D1               ; "And more...{W1}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $1D1                ; "And more...{W1}"
+		clsTxt
 		move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
 		jsr     (FadeOutToBlack).w
 		lea     (PALETTE_1_BIS).l,a0
@@ -160,8 +155,7 @@ loc_27C2C:
 		clr.l   (a0)+
 		dbf     d7,loc_27C2C
 		jsr     j_ClearEntities
-		trap    #SET_FLAG
-		dc.w $190               ; Battle 0 unlocked
+		setFlg $190             ; Battle 0 unlocked
 		move.w  #$3F,d0 
 		jsr     (GetNextBattleOnMap).w
 		move.w  d7,d1

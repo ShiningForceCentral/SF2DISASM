@@ -7,13 +7,11 @@
 ms_map37_flag3E7_InitFunction:
 		
 		jsr     sub_47948
-		trap    #CHECK_FLAG
-		dc.w $100
+		chkFlg $100             ; Temporary map setup flag 00
 		bne.s   return_5FABA
 		lea     cs_5FABC(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
+		setFlg $100             ; Temporary map setup flag 00
 return_5FABA:
 		rts
 

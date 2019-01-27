@@ -6,14 +6,13 @@
 
 ms_map12_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $2D5               ; set after telling Rohde that you're going to get the Caravan
-		bne.s   loc_57D10
+		 
+		chkFlg $2D5             ; set after telling Rohde that you're going to get the Caravan
+		bne.s   byte_57D10      
 		lea     cs_57D22(pc), a0
 		trap    #6
-loc_57D10:
-		trap    #CHECK_FLAG
-		dc.w $206               ; Battle 18 completed
+byte_57D10:
+		chkFlg $206             ; Battle 18 completed
 		beq.s   return_57D20
 		move.w  #$80,d0 
 		jsr     MoveEntityOutOfMap

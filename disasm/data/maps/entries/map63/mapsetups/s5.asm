@@ -16,8 +16,8 @@ ms_map63_Section5:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5CA32:
-		trap    #CHECK_FLAG
-		dc.w $1D
+		 
+		chkFlg $1D              ; Claude joined
 		bne.s   loc_5CA4C
 		moveq   #$75,d0 
 		jsr     sub_4F542

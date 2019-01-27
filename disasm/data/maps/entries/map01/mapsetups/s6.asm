@@ -6,8 +6,8 @@
 
 ms_map1_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $15
+		 
+		chkFlg $15              ; Taya joined
 		beq.s   return_5E770
 		move.w  #$88,d0 
 		jsr     MoveEntityOutOfMap

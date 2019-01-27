@@ -6,8 +6,8 @@
 
 ms_map40_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $1FB               ; Battle 7 completed
+		 
+		chkFlg $1FB             ; Battle 7 completed
 		beq.s   return_53FD6
 		lea     cs_53FD8(pc), a0
 		trap    #6

@@ -6,14 +6,13 @@
 
 ms_map10_flag2D2_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $31F               ; set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
-		beq.s   loc_5709E
+		 
+		chkFlg $31F             ; set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
+		beq.s   byte_5709E      
 		move.w  #$A,d0
 		jsr     MoveEntityOutOfMap
-loc_5709E:
-		trap    #CHECK_FLAG
-		dc.w $2D4               ; set after the scene where Skreech falls in Bedoe
+byte_5709E:
+		chkFlg $2D4             ; set after the scene where Skreech falls in Bedoe
 		beq.s   return_570AE
 		move.w  #$98,d0 
 		jsr     MoveEntityOutOfMap

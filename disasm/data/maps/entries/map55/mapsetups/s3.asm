@@ -11,8 +11,8 @@ ms_map55_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5E250:
-		trap    #CHECK_FLAG
-		dc.w $216
+		 
+		chkFlg $216             ; Battle 34 completed
 		beq.s   return_5E25C
 		lea     byte_5E27C(pc), a0
 		trap    #6

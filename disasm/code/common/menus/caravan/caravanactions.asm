@@ -55,13 +55,12 @@ sub_22028:
 		jsr     sub_10040
 		move.w  d0,-2(a6)
 		cmpi.w  #$FFFF,d0
-		beq.w   loc_220E8
+		beq.w   byte_220E8      
 		jsr     j_GetCurrentHP
 		tst.w   d1
 		bne.s   loc_22070
 		move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $13                ; "{NAME} is dead.{N}Are you sure?"
+		txt $13                 ; "{NAME} is dead.{N}Are you sure?"
 		jsr     j_YesNoChoiceBox
 		tst.w   d0
 		bne.w   loc_220FE
@@ -81,7 +80,7 @@ loc_22098:
 		bsr.w   ChooseCaravanPortrait
 		jsr     sub_10040
 		cmpi.w  #$FFFF,d0
-		beq.s   loc_220DE
+		beq.s   byte_220DE      
 		tst.w   d0
 		beq.s   loc_220D4
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
@@ -97,18 +96,14 @@ loc_220D4:
 		bsr.w   ChooseCaravanPortrait
 loc_220DC:
 		bra.s   loc_220E6
-loc_220DE:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_220DE:
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 loc_220E6:
 		bra.s   loc_220F2
-loc_220E8:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_220E8:
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 		rts
 
 	; End of function sub_22028
@@ -139,7 +134,7 @@ sub_22102:
 		bsr.w   ChooseCaravanPortrait
 		jsr     sub_10040
 		cmpi.w  #$FFFF,d0
-		beq.s   loc_22144
+		beq.s   byte_22144      
 		tst.w   d0
 		beq.s   loc_2213A
 		jsr     j_LeaveBattleParty
@@ -152,11 +147,9 @@ loc_2213A:
 		bsr.w   ChooseCaravanPortrait
 loc_22142:
 		bra.s   loc_2214E
-loc_22144:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_22144:
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 		rts
 
 	; End of function sub_22102
@@ -224,9 +217,8 @@ Caravan_DescribeItem:
 		move.w  d1,-6(a6)
 		move.w  d2,-4(a6)
 		cmpi.w  #$FFFF,d0
-		beq.w   loc_222E0
-		trap    #CHECK_FLAG
-		dc.w $46                ; Astral is a follower
+		beq.w   byte_222E0      
+		chkFlg $46              ; Astral is a follower
 		bne.s   loc_221BE
 		moveq   #$B,d0
 		bra.s   loc_221C0
@@ -242,46 +234,40 @@ loc_221C0:
 		jsr     j_GetItemType
 		tst.w   d2
 		bne.s   loc_221E8
-		trap    #TEXTBOX
-		dc.w $5C                ; "It's a tool.{W2}"
+		txt $5C                 ; "It's a tool.{W2}"
 		bra.s   loc_221F8
 loc_221E8:
 		cmpi.w  #1,d2
-		bne.s   loc_221F4
-		trap    #TEXTBOX
-		dc.w $5A                ; "It's a weapon.{W2}"
+		bne.s   byte_221F4      
+		txt $5A                 ; "It's a weapon.{W2}"
 		bra.s   loc_221F8
-loc_221F4:
-		trap    #TEXTBOX
-		dc.w $5B                ; "It's a ring.{W2}"
+byte_221F4:
+		txt $5B                 ; "It's a ring.{W2}"
 loc_221F8:
 		move.w  -4(a6),d1
 		jsr     j_GetItemDefAddress
 		cmpi.b  #SPELLIDX_NOTHING,ITEMDEF_OFFSET_SPELL(a0)
-		beq.s   loc_22210
-		trap    #TEXTBOX
-		dc.w $5D                ; "It has a special effect when{N}used in battle.{W2}"
+		beq.s   byte_22210      
+		txt $5D                 ; "It has a special effect when{N}used in battle.{W2}"
 		bra.s   loc_22214
-loc_22210:
-		trap    #TEXTBOX
-		dc.w $5E                ; "It has no effect in battle.{W2}"
+byte_22210:
+		txt $5E                 ; "It has no effect in battle.{W2}"
 loc_22214:
 		move.w  -4(a6),d1
 		jsr     j_GetItemType
 		tst.w   d2
 		beq.w   loc_222A8
 		cmpi.w  #ITEMIDX_POWER_RING,d1
-		beq.w   loc_222A4
+		beq.w   byte_222A4      
 		cmpi.w  #ITEMIDX_PROTECT_RING,d1
-		beq.w   loc_222A4
+		beq.w   byte_222A4      
 		cmpi.w  #ITEMIDX_QUICK_RING,d1
-		beq.w   loc_222A4
+		beq.w   byte_222A4      
 		cmpi.w  #ITEMIDX_RUNNING_RING,d1
-		beq.w   loc_222A4
+		beq.w   byte_222A4      
 		move.w  -4(a6),d1
 		move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $60                ; "The {ITEM} is for{N}"
+		txt $60                 ; "The {ITEM} is for{N}"
 		jsr     j_UpdateForce
 		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
 		subq.w  #1,d7
@@ -294,59 +280,48 @@ loc_22266:
 		bcc.s   loc_2228E
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 						; argument (char idx) for trap #5 using a {NAME} command
-		trap    #TEXTBOX
-		dc.w $62                ; "{DICT}{NAME},"
+		txt $62                 ; "{DICT}{NAME},"
 		addq.w  #1,d6
 		cmpi.w  #1,d6
 		bne.s   loc_22284
-		trap    #TEXTBOX
-		dc.w $63                ; "{N}"
+		txt $63                 ; "{N}"
 loc_22284:
 		cmpi.w  #4,d6
 		bne.s   loc_2228E
-		trap    #TEXTBOX
-		dc.w $63                ; "{N}"
+		txt $63                 ; "{N}"
 loc_2228E:
 		dbf     d7,loc_22266
 		tst.w   d6
-		bne.s   loc_2229C
-		trap    #TEXTBOX
-		dc.w $61                ; "nobody so far.{W2}"
+		bne.s   byte_2229C      
+		txt $61                 ; "nobody so far.{W2}"
 		bra.s   loc_222A0
-loc_2229C:
-		trap    #TEXTBOX
-		dc.w $64                ; "to equip.{W2}"
+byte_2229C:
+		txt $64                 ; "to equip.{W2}"
 loc_222A0:
 		bra.w   loc_222A8
-loc_222A4:
-		trap    #TEXTBOX
-		dc.w $5F                ; "Everybody can equip it.{W2}"
+byte_222A4:
+		txt $5F                 ; "Everybody can equip it.{W2}"
 loc_222A8:
 		move.w  -4(a6),d1
 		jsr     j_GetItemDefAddress
 		btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
 		beq.s   loc_222C0
-		trap    #TEXTBOX
-		dc.w $66                ; "You can't sell it at a shop.{W2}"
-		bra.s   loc_222D4
+		txt $66                 ; "You can't sell it at a shop.{W2}"
+		bra.s   byte_222D4
 loc_222C0:
 		clr.l   d1
 		move.w  ITEMDEF_OFFSET_PRICE(a0),d1
 		mulu.w  #ITEM_SELLPRICE_MULTIPLIER,d1
 		lsr.l   #ITEM_SELLPRICE_BITSHIFTRIGHT,d1
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $65                ; "It brings {#} gold coins{N}at a shop.{W2}"
-loc_222D4:
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $65                 ; "It brings {#} gold coins{N}at a shop.{W2}"
+byte_222D4:
+		clsTxt
 		jsr     j_HidePortraitWindow
 		bra.s   loc_222EA
-loc_222E0:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_222E0:
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 		rts
 
 	; End of function Caravan_DescribeItem
@@ -383,7 +358,7 @@ sub_222FA:
 		move.w  d1,-6(a6)
 		move.w  d2,-4(a6)
 		cmpi.w  #$FFFF,d0
-		beq.s   loc_2236A
+		beq.s   byte_2236A      
 		bsr.w   sub_2294C       
 		bcs.w   loc_22380
 		move.w  -4(a6),d1
@@ -395,11 +370,9 @@ sub_222FA:
 		move.w  #$57,d1 
 		bsr.w   ChooseCaravanPortrait
 		bra.s   loc_22374
-loc_2236A:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_2236A:
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 		rts
 loc_22374:
 		bra.s   loc_22380
@@ -432,7 +405,7 @@ sub_22384:
 		move.w  d1,-6(a6)
 		move.w  d2,-4(a6)
 		cmpi.w  #$FFFF,d2
-		beq.w   loc_2247E
+		beq.w   byte_2247E      
 		moveq   #0,d1
 		bsr.w   sub_228D8
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -481,11 +454,9 @@ loc_22422:
 		bsr.w   ChooseCaravanPortrait
 loc_2247C:
 		bra.s   loc_22488
-loc_2247E:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_2247E:
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 		rts
 
 	; End of function sub_22384
@@ -521,13 +492,12 @@ sub_22498:
 		jsr     sub_2299E
 		bcs.w   loc_22534
 		cmpi.w  #$FFFF,-4(a6)
-		beq.s   loc_2251E
+		beq.s   byte_2251E      
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $2C                ; "The {ITEM} will be{N}discarded.  Are you sure?"
+		txt $2C                 ; "The {ITEM} will be{N}discarded.  Are you sure?"
 		jsr     j_YesNoChoiceBox
 		tst.w   d0
-		bne.s   loc_22518
+		bne.s   byte_22518      
 		move.w  -6(a6),d1
 		jsr     j_RemoveItemFromCaravan
 		move.w  -4(a6),d1
@@ -540,16 +510,13 @@ loc_22508:
 		move.w  #$2A,d1 
 		bsr.w   ChooseCaravanPortrait
 		bra.s   loc_2251C
-loc_22518:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
+byte_22518:
+		txt $4                  ; "Did you change your mind?{W2}"
 loc_2251C:
 		bra.s   loc_22528
-loc_2251E:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_2251E:
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 		rts
 
 	; End of function sub_22498
@@ -620,7 +587,7 @@ loc_22574:
 		move.w  d1,-6(a6)
 		move.w  d2,-4(a6)
 		cmpi.w  #$FFFF,d0
-		beq.s   loc_225FA
+		beq.s   byte_225FA      
 		move.w  -4(a6),d1
 		jsr     sub_229CA
 		tst.w   d2
@@ -631,16 +598,15 @@ loc_22574:
 		move.b  #0,((byte_FFB13C-$1000000)).w
 		jsr     sub_10040
 		cmpi.w  #$FFFF,d0
-		beq.s   loc_225E4
+		beq.s   byte_225E4      
 		move.w  -4(a6),d1
 		bsr.w   UseFieldItem    
 		move.w  -2(a6),d0
 		move.w  -6(a6),d1
 		jsr     j_RemoveItemBySlot
 		bra.s   loc_225E8
-loc_225E4:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
+byte_225E4:
+		txt $4                  ; "Did you change your mind?{W2}"
 loc_225E8:
 		bra.s   loc_225F8
 loc_225EA:
@@ -649,11 +615,9 @@ loc_225EA:
 		bsr.w   ChooseCaravanPortrait
 loc_225F8:
 		bra.s   loc_22604
-loc_225FA:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_225FA:
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 		rts
 
 	; End of function sub_2256C
@@ -684,7 +648,7 @@ loc_22618:
 		move.w  d1,-6(a6)
 		move.w  d2,-4(a6)
 		cmpi.w  #$FFFF,d0
-		beq.w   loc_22760
+		beq.w   byte_22760      
 		bsr.w   sub_2294C       
 		bcs.w   loc_2276A
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -697,7 +661,7 @@ loc_22618:
 		move.w  d1,-$C(a6)
 		move.w  d2,-$A(a6)
 		cmpi.w  #$FFFF,d0
-		beq.w   loc_2275A
+		beq.w   byte_2275A      
 		cmp.w   -2(a6),d0
 		bne.s   loc_226B6
 		move.w  -2(a6),d0
@@ -750,16 +714,13 @@ loc_226F6:
 		bsr.w   ChooseCaravanPortrait
 loc_22758:
 		bra.s   loc_2275E
-loc_2275A:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
+byte_2275A:
+		txt $4                  ; "Did you change your mind?{W2}"
 loc_2275E:
 		bra.s   loc_2276A
-loc_22760:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_22760:
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 		rts
 
 	; End of function sub_22610
@@ -788,10 +749,8 @@ loc_2277E:
 		jsr     sub_10044
 		cmpi.w  #$FFFF,d0
 		bne.s   loc_227A6
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 		rts
 
 	; End of function sub_22776
@@ -822,18 +781,17 @@ loc_227B8:
 		move.w  d1,-6(a6)
 		move.w  d2,-4(a6)
 		cmpi.w  #$FFFF,-2(a6)
-		beq.s   loc_2284E
+		beq.s   byte_2284E      
 		bsr.w   sub_2294C       
 		bcs.w   loc_22858
 		move.w  -4(a6),d1
 		jsr     sub_2299E
 		bcs.w   loc_22858
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $2C                ; "The {ITEM} will be{N}discarded.  Are you sure?"
+		txt $2C                 ; "The {ITEM} will be{N}discarded.  Are you sure?"
 		jsr     j_YesNoChoiceBox
 		tst.w   d0
-		bne.s   loc_22844
+		bne.s   byte_22844      
 		move.w  -2(a6),d0
 		move.w  -6(a6),d1
 		jsr     j_DropItemBySlot
@@ -847,18 +805,14 @@ loc_22834:
 		move.w  #$2A,d1 
 		bsr.w   ChooseCaravanPortrait
 		bra.s   loc_2284C
-loc_22844:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_22844:
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 loc_2284C:
 		bra.s   loc_22858
-loc_2284E:
-		trap    #TEXTBOX
-		dc.w 4                  ; "Did you change your mind?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_2284E:
+		txt $4                  ; "Did you change your mind?{W2}"
+		clsTxt
 		rts
 
 	; End of function sub_227B0
@@ -915,8 +869,7 @@ ChooseCaravanPortrait:
 		
 		movem.l d0-d1,-(sp)
 		move.l  d1,-(sp)
-		trap    #CHECK_FLAG
-		dc.w $46                ; Astral is a follower
+		chkFlg $46              ; Astral is a follower
 		bne.s   loc_228B8       
 		moveq   #$B,d0          ; ROHDE portrait idx
 		bra.s   loc_228BA
@@ -927,8 +880,7 @@ loc_228BA:
 		jsr     j_InitPortraitWindow
 		move.l  (sp)+,d0
 		jsr     (DisplayText).w 
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		jsr     j_HidePortraitWindow
 		movem.l (sp)+,d0-d1
 		rts
@@ -1004,8 +956,7 @@ sub_2294C:
 		beq.s   loc_22988
 		jsr     j_IsItemCursed
 		bcc.w   loc_22986
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM
+		sndCom MUSIC_CURSED_ITEM
 		move.w  #$3C,d0 
 		jsr     (Sleep).w       
 		move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w

@@ -6,8 +6,8 @@
 
 ms_map41_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $3A2
+		 
+		chkFlg $3A2             ; set after opening Devil's Head with the Force Sword
 		beq.s   return_5F4AC
 		lea     cs_5F4AE(pc), a0
 		trap    #6

@@ -11,13 +11,12 @@ ms_map27_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_59F9A:
-		trap    #CHECK_FLAG
-		dc.w $30D
+		 
+		chkFlg $30D             ; set after the scene where you're surprised by Willard inside the wall
 		bne.s   return_59FAA
 		lea     cs_59FB8(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $30D               ; set after the scene where you're surprised by Willard inside the wall
+		setFlg $30D             ; set after the scene where you're surprised by Willard inside the wall
 return_59FAA:
 		rts
 

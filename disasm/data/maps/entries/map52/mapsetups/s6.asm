@@ -6,8 +6,8 @@
 
 ms_map52_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $2CA
+		 
+		chkFlg $2CA             ; set after winning the cliff battle outside Bedoe, before Peter delivers lines
 		beq.s   return_5C4EC
 
 	; End of function ms_map52_InitFunction
@@ -16,13 +16,12 @@ ms_map52_InitFunction:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C4DC:
-		trap    #CHECK_FLAG
-		dc.w $2C8
+		 
+		chkFlg $2C8             ; set after Peter delivers his lines after the cliffs before Bedoe battle
 		bne.s   return_5C4EC
 		lea     byte_5C622(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2C8               ; set after Peter delivers his lines after the cliffs before Bedoe battle
+		setFlg $2C8             ; set after Peter delivers his lines after the cliffs before Bedoe battle
 return_5C4EC:
 		rts
 

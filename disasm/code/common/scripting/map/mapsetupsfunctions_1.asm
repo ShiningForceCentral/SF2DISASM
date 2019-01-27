@@ -54,8 +54,7 @@ loc_47566:
 loc_4756A:
 		jsr     (a0)
 		jsr     j_HidePortraitWindow
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 loc_47576:
 		jsr     (WaitForVInt).w 
 		moveq   #0,d0
@@ -110,8 +109,7 @@ loc_475FA:
 loc_475FE:
 		jsr     (a0)
 		jsr     j_HidePortraitWindow
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 loc_4760A:
 		jsr     (WaitForVInt).w 
 		moveq   #0,d0
@@ -193,8 +191,7 @@ loc_476A8:
 		jsr     (sub_6052).w    
 loc_476C4:
 		jsr     j_HidePortraitWindow
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_ACTIVATE
 		dc.l VInt_UpdateEntities
@@ -289,8 +286,7 @@ loc_4774C:
 		jsr     (DisplayText).w 
 loc_4776E:
 		jsr     j_HidePortraitWindow
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		moveq   #$FFFFFFFF,d7
 		rts
 loc_4777C:
@@ -459,8 +455,7 @@ loc_47896:
 		move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 		move.w  #$7530,((word_FFB196-$1000000)).w
 		jsr     (WaitForCameraToCatchUp).w
-		trap    #SOUND_COMMAND
-		dc.w SFX_BOOST          ; boost effect ?
+		sndCom SFX_BOOST
 		bsr.w   ExecuteFlashScreenScript
 loc_478C0:
 		movem.l (sp)+,d1/d6-d7

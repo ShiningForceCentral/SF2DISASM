@@ -25,19 +25,15 @@ nullsub_168:
 
 sub_50A9A:
 		move.w  #$73,((TEXT_NAME_INDEX_1-$1000000)).w 
-		trap    #TEXTBOX
-		dc.w $1A5               ; "{LEADER} uses the {ITEM}.{D3}"
-		trap    #CHECK_FLAG
-		dc.w $384               ; set after using the Dry Stone to open the way to the Dwarven Village
-		bne.s   loc_50AB6
-		trap    #SET_FLAG
-		dc.w $384               ; set after using the Dry Stone to open the way to the Dwarven Village
+		txt $1A5                ; "{LEADER} uses the {ITEM}.{D3}"
+		chkFlg $384             ; set after using the Dry Stone to open the way to the Dwarven Village
+		bne.s   byte_50AB6      
+		setFlg $384             ; set after using the Dry Stone to open the way to the Dwarven Village
 		lea     cs_50ABE(pc), a0
 		trap    #6
 		bra.s   loc_50ABA
-loc_50AB6:
-		trap    #TEXTBOX
-		dc.w $1A6               ; "But nothing happened.{D1}"
+byte_50AB6:
+		txt $1A6                ; "But nothing happened.{D1}"
 loc_50ABA:
 		moveq   #$FFFFFFFF,d6
 		rts

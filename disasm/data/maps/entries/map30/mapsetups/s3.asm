@@ -11,19 +11,16 @@ ms_map30_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A2CA:
-		trap    #CHECK_FLAG
-		dc.w $45
+		 
+		chkFlg $45              ; Fairy is a follower
 		beq.s   return_5A2E6
-		trap    #CHECK_FLAG
-		dc.w $2F8
+		chkFlg $2F8             ; set after the fairy cures the sick dwarf in the mine
 		bne.s   return_5A2E6
 		lea     cs_5A33A(pc), a0
 		trap    #6
 		bsr.s   sub_5A278
-		trap    #SET_FLAG
-		dc.w $2F8               ; set after the fairy cures the sick dwarf in the mine
-		trap    #CLEAR_FLAG
-		dc.w $45                ; Fairy is a follower
+		setFlg $2F8             ; set after the fairy cures the sick dwarf in the mine
+		clrFlg $45              ; Fairy is a follower
 return_5A2E6:
 		rts
 

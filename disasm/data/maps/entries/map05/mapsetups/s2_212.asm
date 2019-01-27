@@ -12,8 +12,8 @@ ms_map5_flag212_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_60452:
-		trap    #TEXTBOX
-		dc.w $D9B               ; "I can't believe it!{N}I want to die, but I can't!{W1}"
+		 
+		txt $D9B                ; "I can't believe it!{N}I want to die, but I can't!{W1}"
 		rts
 
 	; End of function sub_60452
@@ -51,20 +51,17 @@ sub_60468:
 ; =============== S U B R O U T I N E =======================================
 
 sub_60476:
-		trap    #CHECK_FLAG
-		dc.w $1C
-		beq.s   loc_60494
+		 
+		chkFlg $1C              ; Lemon joined
+		beq.s   byte_60494      
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
-		trap    #TEXTBOX
-		dc.w $FF2               ; "A hole.{W1}"
+		txt $1A7                ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+		txt $FF2                ; "A hole.{W1}"
 		bra.s   return_604C6
-loc_60494:
-		trap    #CHECK_FLAG
-		dc.w $3B1
+byte_60494:
+		chkFlg $3B1             ; set after recruiting Lemon in Yeel
 		bne.s   return_604C6
 		lea     cs_6060E(pc), a0
 		trap    #6
@@ -74,10 +71,8 @@ loc_60494:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
-		trap    #TEXTBOX
-		dc.w $D9B               ; "I can't believe it!{N}I want to die, but I can't!{W1}"
-		trap    #SET_FLAG
-		dc.w $3B1               ; set after recruiting Lemon in Yeel
+		txt $D9B                ; "I can't believe it!{N}I want to die, but I can't!{W1}"
+		setFlg $3B1             ; set after recruiting Lemon in Yeel
 return_604C6:
 		rts
 

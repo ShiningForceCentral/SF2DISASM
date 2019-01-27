@@ -22,13 +22,12 @@ nullsub_97:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DCDE:
-		trap    #CHECK_FLAG
-		dc.w $38F
+		 
+		chkFlg $38F             ; set after the Petro death scene in Roft
 		bne.s   return_5DCEE
 		lea     cs_5DE2E(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $38F               ; set after the Petro death scene in Roft
+		setFlg $38F             ; set after the Petro death scene in Roft
 return_5DCEE:
 		rts
 
@@ -38,31 +37,25 @@ return_5DCEE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DCF0:
-		trap    #CHECK_FLAG
-		dc.w $38F
+		 
+		chkFlg $38F             ; set after the Petro death scene in Roft
 		beq.s   return_5DD24
-		trap    #CHECK_FLAG
-		dc.w $4C
-		beq.s   loc_5DD08
+		chkFlg $4C              ; Zynk is a follower
+		beq.s   byte_5DD08      
 		lea     cs_5DE76(pc), a0
 		trap    #6
-		trap    #CLEAR_FLAG
-		dc.w $4C                ; Zynk is a follower
+		clrFlg $4C              ; Zynk is a follower
 		bra.s   return_5DD24
-loc_5DD08:
-		trap    #CHECK_FLAG
-		dc.w $399
+byte_5DD08:
+		chkFlg $399             ; set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
 		beq.s   return_5DD24
-		trap    #CHECK_FLAG
-		dc.w $1A
+		chkFlg $1A              ; Zynk joined
 		bne.s   return_5DD24
-		trap    #CHECK_FLAG
-		btst    d0,d0
+		chkFlg $100             ; Temporary map setup flag 00
 		beq.s   return_5DD24
 		lea     cs_5DE76(pc), a0
 		trap    #6
-		trap    #CLEAR_FLAG
-		dc.w $4C                ; Zynk is a follower
+		clrFlg $4C              ; Zynk is a follower
 return_5DD24:
 		rts
 

@@ -6,8 +6,8 @@
 
 ms_map3_flag1FA_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w 6                  ; Kiwi joined
+		 
+		chkFlg $6               ; Kiwi joined
 		beq.s   loc_5136C
 		lea     cs_51374(pc), a0
 		trap    #6

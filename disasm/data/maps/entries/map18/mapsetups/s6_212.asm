@@ -6,13 +6,12 @@
 
 ms_map18_flag212_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $398
+		 
+		chkFlg $398             ; set after the scene with Zeon plays as you leave the Galam Drawbridge area
 		bne.s   loc_612A8
 		lea     cs_612BE(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $398               ; set after the scene with Zeon plays as you leave the Galam Drawbridge area
+		setFlg $398             ; set after the scene with Zeon plays as you leave the Galam Drawbridge area
 loc_612A8:
 		move.w  #$80,d0 
 		jsr     MoveEntityOutOfMap

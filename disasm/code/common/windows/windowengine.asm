@@ -164,8 +164,8 @@ CopyFFC000toFFC800:
 
 MoveWindowWithSFX:
 		
-		trap    #SOUND_COMMAND
-		dc.w SFX_MENU_SWITCH
+		 
+		sndCom SFX_MENU_SWITCH
 
 	; End of function MoveWindowWithSFX
 

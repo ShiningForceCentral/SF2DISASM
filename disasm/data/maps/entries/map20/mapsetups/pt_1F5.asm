@@ -7,4 +7,4 @@ ms_map20_flag1F5:
 		dc.l ms_map20_flag1F5_ZoneEvents
 		dc.l ms_map20_AreaDescriptions
 		dc.l ms_map20_Section5
-		dc.l loc_53988
+		dc.l byte_53988         

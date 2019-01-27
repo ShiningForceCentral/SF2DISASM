@@ -6,8 +6,8 @@
 
 DisplaySegaLogo:
 		
-		trap    #SOUND_COMMAND
-		dc.w SOUND_COMMAND_INIT_DRIVER
+		 
+		sndCom SOUND_COMMAND_INIT_DRIVER
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_CLEAR
 		jsr     (DisableDisplayAndVInt).w
@@ -1157,8 +1157,7 @@ VInt_CheckConfigurationModeCheat:
 		cmpi.b  #$FF,(a0)
 		bne.s   loc_28FAE
 		move.b  #$FF,((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_ITEM
+		sndCom MUSIC_ITEM
 		rts
 loc_28FAE:
 		move.b  (a0),d0
@@ -1181,8 +1180,7 @@ VInt_CheckDebugModeCheat:
 		cmpi.b  #$FF,(a0)
 		bne.s   loc_28FE2
 		move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM
+		sndCom MUSIC_CURSED_ITEM
 		rts
 loc_28FE2:
 		move.b  (a0),d0

@@ -6,8 +6,8 @@
 
 ms_map39_flag33E_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $344
+		 
+		chkFlg $344             ; set after the scene where Zynk stops you as you leave the Moun underground
 		bne.s   return_5E0EC
 		lea     cs_5E0EE(pc), a0
 		trap    #6

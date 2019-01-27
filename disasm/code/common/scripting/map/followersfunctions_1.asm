@@ -17,8 +17,7 @@ InitializeFollowerEntities:
 		lea     pt_eas_Followers(pc), a6
 		lea     ((byte_FFAFB0-$1000000)).w,a5
 		move.b  #1,(a5)
-		trap    #CHECK_FLAG
-		dc.w $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
+		chkFlg $41              ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 		beq.s   loc_442D2
 		bsr.s   IsOverworldMap
 		beq.s   loc_442D2

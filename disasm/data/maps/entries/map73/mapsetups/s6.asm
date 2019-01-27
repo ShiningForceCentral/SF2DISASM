@@ -6,25 +6,21 @@
 
 ms_map73_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $2BC               ; set after ship arrives in Parmecia and you regain control of Bowie
-		bne.s   loc_50354
+		 
+		chkFlg $2BC             ; set after ship arrives in Parmecia and you regain control of Bowie
+		bne.s   byte_50354      
 		lea     cs_503A6(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2BC               ; set after ship arrives in Parmecia and you regain control of Bowie
+		setFlg $2BC             ; set after ship arrives in Parmecia and you regain control of Bowie
 		rts
-loc_50354:
-		trap    #CHECK_FLAG
-		dc.w $1FC               ; Battle 8 completed
+byte_50354:
+		chkFlg $1FC             ; Battle 8 completed
 		beq.s   return_5036C
-		trap    #CHECK_FLAG
-		dc.w $2C1               ; set after you automatically walk into New Granseal after it is built
+		chkFlg $2C1             ; set after you automatically walk into New Granseal after it is built
 		bne.s   return_5036C
 		lea     cs_50806(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2C1               ; set after you automatically walk into New Granseal after it is built
+		setFlg $2C1             ; set after you automatically walk into New Granseal after it is built
 		rts
 return_5036C:
 		rts

@@ -23,8 +23,8 @@ ms_map67_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FB24:
-		trap    #CHECK_FLAG
-		dc.w $208               ; Battle 20 completed
+		 
+		chkFlg $208             ; Battle 20 completed
 		bne.s   return_4FB30
 		lea     cs_4FB64(pc), a0
 		trap    #MAPSCRIPT
@@ -37,11 +37,10 @@ return_4FB30:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FB32:
-		trap    #CHECK_FLAG
-		dc.w $2EF               ; set after Elric opens the passage to Devil's Tail
+		 
+		chkFlg $2EF             ; set after Elric opens the passage to Devil's Tail
 		bne.s   return_4FB56
-		trap    #CHECK_FLAG
-		dc.w $D                 ; Elric joined
+		chkFlg $D               ; Elric joined
 		beq.s   return_4FB56
 		move.w  #$D,d0
 		jsr     j_GetCurrentHP
@@ -49,8 +48,7 @@ sub_4FB32:
 		beq.s   return_4FB56
 		lea     cs_4FC32(pc), a0
 		trap    #MAPSCRIPT
-		trap    #SET_FLAG
-		dc.w $2EF               ; set after Elric opens the passage to Devil's Tail
+		setFlg $2EF             ; set after Elric opens the passage to Devil's Tail
 return_4FB56:
 		rts
 

@@ -145,83 +145,70 @@ loc_2386C:
 		bne.s   loc_238E8
 		; block has chest flag set
 		jsr     (OpenChest).w
-		trap    #TEXTBOX
-		dc.w $193               ; "{NAME} opened the chest.{W2}{CLEAR}"
+		txt $193                ; "{NAME} opened the chest.{W2}{CLEAR}"
 		move.w  d2,d0
 		andi.w  #$7F,d0 
 		cmpi.b  #$7F,d0 
 		bne.w   loc_239C8
-		trap    #TEXTBOX
-		dc.w $198               ; "But, it was empty.{W1}"
-		bra.w   loc_23994
+		txt $198                ; "But, it was empty.{W1}"
+		bra.w   byte_23994
 loc_238E8:
 		cmpi.w  #$2C00,d3
 		bne.s   loc_2390C
 		jsr     (CheckNonChestItem).w
-		trap    #TEXTBOX
-		dc.w $194               ; "{NAME} investigated{N}the vase.{W2}{CLEAR}"
+		txt $194                ; "{NAME} investigated{N}the vase.{W2}{CLEAR}"
 		move.w  d2,d0
 		andi.w  #$7F,d0 
 		cmpi.b  #$7F,d0 
 		bne.w   loc_239C8
-		trap    #TEXTBOX
-		dc.w $199               ; "It was dark inside.{W1}"
-		bra.w   loc_23994
+		txt $199                ; "It was dark inside.{W1}"
+		bra.w   byte_23994
 loc_2390C:
 		cmpi.w  #$3000,d3
 		bne.s   loc_23930
 		jsr     (CheckNonChestItem).w
-		trap    #TEXTBOX
-		dc.w $195               ; "{NAME} looked in{N}the barrel.{W2}{CLEAR}"
+		txt $195                ; "{NAME} looked in{N}the barrel.{W2}{CLEAR}"
 		move.w  d2,d0
 		andi.w  #$7F,d0 
 		cmpi.b  #$7F,d0 
 		bne.w   loc_239C8
-		trap    #TEXTBOX
-		dc.w $19A               ; "It was empty.{W1}"
-		bra.w   loc_23994
+		txt $19A                ; "It was empty.{W1}"
+		bra.w   byte_23994
 loc_23930:
 		cmpi.w  #$3400,d3
 		bne.s   loc_23954
 		jsr     (CheckNonChestItem).w
-		trap    #TEXTBOX
-		dc.w $1AB               ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+		txt $1AB                ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
 		move.w  d2,d0
 		andi.w  #$7F,d0 
 		cmpi.b  #$7F,d0 
 		bne.w   loc_239C8
-		trap    #TEXTBOX
-		dc.w $19C               ; "Nothing was there.{W1}"
-		bra.w   loc_23994
+		txt $19C                ; "Nothing was there.{W1}"
+		bra.w   byte_23994
 loc_23954:
 		cmpi.w  #$1C00,d3
 		bne.s   loc_23978
 		jsr     (CheckNonChestItem).w
-		trap    #TEXTBOX
-		dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+		txt $1A7                ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
 		move.w  d2,d0
 		andi.w  #$7F,d0 
 		cmpi.b  #$7F,d0 
 		bne.w   loc_239C8
-		trap    #TEXTBOX
-		dc.w $19C               ; "Nothing was there.{W1}"
-		bra.w   loc_23994
+		txt $19C                ; "Nothing was there.{W1}"
+		bra.w   byte_23994
 loc_23978:
 		jsr     j_RunMapSetupFunction
-		bne.w   loc_23994
+		bne.w   byte_23994
 		tst.w   d6
-		beq.s   loc_2398C
+		beq.s   byte_2398C      
 		clr.w   d0
 		bra.w   return_2399A
-loc_2398C:
-		trap    #TEXTBOX
-		dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
-		trap    #TEXTBOX
-		dc.w $19C               ; "Nothing was there.{W1}"
-loc_23994:
+byte_2398C:
+		txt $1A7                ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+		txt $19C                ; "Nothing was there.{W1}"
+byte_23994:
 		; finish up by closing windows
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		moveq   #$FFFFFFFF,d0
 return_2399A:
 		rts

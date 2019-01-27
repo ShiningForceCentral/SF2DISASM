@@ -11,16 +11,14 @@ ms_map42_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5FE0C:
-		trap    #CHECK_FLAG
-		dc.w $3E7
+		 
+		chkFlg $3E7             ; set after the Nazca ship shootdown scene
 		beq.s   return_5FE22
-		trap    #CHECK_FLAG
-		dc.w $385
+		chkFlg $385             ; set after the you're pulled toward the Force Sword in the Jewel Cave
 		bne.s   return_5FE22
 		lea     cs_5FE9A(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $385               ; set after the you're pulled toward the Force Sword in the Jewel Cave
+		setFlg $385             ; set after the you're pulled toward the Force Sword in the Jewel Cave
 return_5FE22:
 		rts
 

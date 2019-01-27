@@ -6,21 +6,19 @@
 
 ms_map13_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $2C7               ; set after you dislodge the turtle/fairy in Polca
-		bne.s   loc_582EC
+		 
+		chkFlg $2C7             ; set after you dislodge the turtle/fairy in Polca
+		bne.s   byte_582EC      
 		lea     cs_58310(pc), a0
 		trap    #6
-loc_582EC:
-		trap    #CHECK_FLAG
-		dc.w $2CC               ; set after your raft-giving conversation with the mayor in Polca
-		beq.s   loc_582FE
+byte_582EC:
+		chkFlg $2CC             ; set after your raft-giving conversation with the mayor in Polca
+		beq.s   byte_582FE      
 		move.w  #$89,d0 
 		moveq   #3,d1
 		jsr     sub_4781A
-loc_582FE:
-		trap    #CHECK_FLAG
-		dc.w $2CE               ; set after Oddler runs after you as you leave Polca, and tags along
+byte_582FE:
+		chkFlg $2CE             ; set after Oddler runs after you as you leave Polca, and tags along
 		beq.s   return_5830E
 		move.w  #$8C,d0 
 		jsr     MoveEntityOutOfMap

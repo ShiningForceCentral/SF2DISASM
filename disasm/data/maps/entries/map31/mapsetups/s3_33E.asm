@@ -19,13 +19,12 @@ nullsub_93:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D560:
-		trap    #CHECK_FLAG
-		dc.w $342
+		 
+		chkFlg $342             ; set after making the Arm of Golem appear in Moun
 		bne.s   return_5D570
 		lea     cs_5D644(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $342               ; set after making the Arm of Golem appear in Moun
+		setFlg $342             ; set after making the Arm of Golem appear in Moun
 return_5D570:
 		rts
 

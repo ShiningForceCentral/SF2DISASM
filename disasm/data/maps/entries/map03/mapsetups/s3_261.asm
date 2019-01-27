@@ -14,15 +14,13 @@ ms_map3_flag261_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_50EF6:
-		trap    #CHECK_FLAG
-		dc.w 3                  ; Jaha joined
+		 
+		chkFlg $3               ; Jaha joined
 		bne.s   return_50F0A
 		lea     cs_516A8(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $192               ; Battle 2 unlocked
-		trap    #CLEAR_FLAG
-		dc.w $42                ; Sarah + Chester are followers
+		setFlg $192             ; Battle 2 unlocked
+		clrFlg $42              ; Sarah + Chester are followers
 return_50F0A:
 		rts
 

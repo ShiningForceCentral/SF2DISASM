@@ -17,16 +17,14 @@ ms_map61_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C6A6:
-		trap    #CHECK_FLAG
-		dc.w $2DA
+		 
+		chkFlg $2DA             ; set after the old man opens the door to the Woodel Panel shrine interior
 		bne.s   return_5C6BC
-		trap    #CHECK_FLAG
-		dc.w $4D
+		chkFlg $4D              ; Old man is a follower
 		beq.s   return_5C6BC
 		lea     cs_5C6CA(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2DA               ; set after the old man opens the door to the Woodel Panel shrine interior
+		setFlg $2DA             ; set after the old man opens the door to the Woodel Panel shrine interior
 return_5C6BC:
 		rts
 

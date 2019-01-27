@@ -6,18 +6,17 @@
 
 ms_map20_flag21F_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $3D6
-		beq.s   loc_633BA
+		 
+		chkFlg $3D6
+		beq.s   byte_633BA
 		lea     cs_633B2(pc), a0
 		trap    #6
-		bra.w   loc_633BA
+		bra.w   byte_633BA
 cs_633B2:
 		setPos $80,27,50,LEFT
 		csc_end
-loc_633BA:
-		trap    #0
-		dc.w 8
+byte_633BA:
+		sndCom MUSIC_TOWN
 		jsr     (FadeInFromBlack).w
 		rts
 

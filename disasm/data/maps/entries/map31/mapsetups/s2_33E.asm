@@ -17,10 +17,9 @@ ms_map31_flag33E_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D4CA:
-		trap    #TEXTBOX
-		dc.w $7F0               ; "Moun was the busiest town in{N}Parmecia.{W2}"
-		trap    #TEXTBOX
-		dc.w $7F1               ; "But now, it's like a ghost{N}town.{W1}"
+		 
+		txt $7F0                ; "Moun was the busiest town in{N}Parmecia.{W2}"
+		txt $7F1                ; "But now, it's like a ghost{N}town.{W1}"
 		rts
 
 	; End of function sub_5D4CA
@@ -39,8 +38,8 @@ sub_5D4D4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D4E2:
-		trap    #TEXTBOX
-		dc.w $7F2               ; "You saved us!{N}You saved our town!{W1}"
+		 
+		txt $7F2                ; "You saved us!{N}You saved our town!{W1}"
 		rts
 
 	; End of function sub_5D4E2
@@ -49,10 +48,9 @@ sub_5D4E2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D4E8:
-		trap    #TEXTBOX
-		dc.w $7F3               ; "The priest once told me that{N}golems were made by the{N}ancients.{W2}"
-		trap    #TEXTBOX
-		dc.w $7F4               ; "Some golems are bad, some{N}are good.  I want to see a{N}good golem!{W1}"
+		 
+		txt $7F3                ; "The priest once told me that{N}golems were made by the{N}ancients.{W2}"
+		txt $7F4                ; "Some golems are bad, some{N}are good.  I want to see a{N}good golem!{W1}"
 		rts
 
 	; End of function sub_5D4E8
@@ -61,17 +59,15 @@ sub_5D4E8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D4F2:
-		trap    #TEXTBOX
-		dc.w $7F8               ; "Did you see the Arm of Golem{N}in town?{N}"
+		 
+		txt $7F8                ; "Did you see the Arm of Golem{N}in town?{N}"
 		jsr     j_YesNoPrompt
 		btst    #0,d0
-		bne.s   loc_5D508
-		trap    #TEXTBOX
-		dc.w $7F9               ; "It moves around as if it's{N}searching for something.{N}Maybe it's body?{W1}"
+		bne.s   byte_5D508      
+		txt $7F9                ; "It moves around as if it's{N}searching for something.{N}Maybe it's body?{W1}"
 		bra.s   return_5D50C
-loc_5D508:
-		trap    #TEXTBOX
-		dc.w $7FA               ; "Hmmm...where is it now?{N}It surprises us everyday.{W1}"
+byte_5D508:
+		txt $7FA                ; "Hmmm...where is it now?{N}It surprises us everyday.{W1}"
 return_5D50C:
 		rts
 
@@ -81,8 +77,8 @@ return_5D50C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D50E:
-		trap    #TEXTBOX
-		dc.w $7F5               ; "We'll really miss you,{N}{NAME;26}....{W1}"
+		 
+		txt $7F5                ; "We'll really miss you,{N}{NAME;26}....{W1}"
 		rts
 
 	; End of function sub_5D50E
@@ -91,10 +87,9 @@ sub_5D50E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D514:
-		trap    #TEXTBOX
-		dc.w $7F6               ; "The Arm of Golem suddenly{N}moved a little.{W2}"
-		trap    #TEXTBOX
-		dc.w $7F7               ; "Will you get rid of it?{W1}"
+		 
+		txt $7F6                ; "The Arm of Golem suddenly{N}moved a little.{W2}"
+		txt $7F7                ; "Will you get rid of it?{W1}"
 		rts
 
 	; End of function sub_5D514
@@ -112,11 +107,10 @@ sub_5D51E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D526:
-		trap    #CHECK_FLAG
-		dc.w $340
+		 
+		chkFlg $340             ; set after talking to the painter in Moun for the first time
 		bne.s   loc_5D538
-		trap    #SET_FLAG
-		dc.w $340               ; set after talking to the painter in Moun for the first time
+		setFlg $340             ; set after talking to the painter in Moun for the first time
 		lea     cs_5D652(pc), a0
 		trap    #6
 		bra.s   return_5D53E

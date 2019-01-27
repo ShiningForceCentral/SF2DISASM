@@ -8,8 +8,8 @@ ms_map63_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C992:
-		trap    #CHECK_FLAG
-		dc.w $1D
+		 
+		chkFlg $1D              ; Claude joined
 		bne.s   return_5C9E0
 		moveq   #$75,d1 
 		jsr     j_sub_9146
@@ -21,12 +21,9 @@ sub_5C992:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
-		trap    #TEXTBOX
-		dc.w $1051              ; "Olooooo...Oloo....{N}Have you seen my arm?{W2}"
-		trap    #TEXTBOX
-		dc.w $1052              ; "I can't move...without my{N}arm...oloooo....{W1}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $1051               ; "Olooooo...Oloo....{N}Have you seen my arm?{W2}"
+		txt $1052               ; "I can't move...without my{N}arm...oloooo....{W1}"
+		clsTxt
 		bra.s   return_5C9E0
 loc_5C9D2:
 		moveq   #$75,d0 

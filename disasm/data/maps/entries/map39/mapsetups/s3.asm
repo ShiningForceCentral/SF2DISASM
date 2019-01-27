@@ -19,13 +19,12 @@ nullsub_98:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5E0BC:
-		trap    #CHECK_FLAG
-		dc.w $33E
+		 
+		chkFlg $33E             ; set after the Gyan join scene in the Moun underground
 		bne.s   return_5E0CC
 		lea     cs_5E0F8(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $33E               ; set after the Gyan join scene in the Moun underground
+		setFlg $33E             ; set after the Gyan join scene in the Moun underground
 return_5E0CC:
 		rts
 

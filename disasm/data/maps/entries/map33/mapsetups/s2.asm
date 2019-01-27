@@ -22,46 +22,33 @@ nullsub_138:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A788:
-		trap    #CHECK_FLAG
-		dc.w $16
-		beq.s   loc_5A7A0
-		trap    #TEXTBOX
-		dc.w $7A0               ; "(Sob, sob){N}(Sob, sob){N}Oh, {LEADER}!{W2}"
-		trap    #TEXTBOX
-		dc.w $7A1               ; "Oddler regained his memory{N}and suddenly went berserk.{W2}"
-		trap    #TEXTBOX
-		dc.w $7A2               ; "He had a fearful face,{N}but my master seemed to{N}understand everything.{W2}"
-		trap    #TEXTBOX
-		dc.w $7A3               ; "He fell into the sea to stop{N}Oddler.{N}Is Mr. Creed still alive?{W1}"
+		 
+		chkFlg $16              ; Frayja joined
+		beq.s   byte_5A7A0      
+		txt $7A0                ; "(Sob, sob){N}(Sob, sob){N}Oh, {LEADER}!{W2}"
+		txt $7A1                ; "Oddler regained his memory{N}and suddenly went berserk.{W2}"
+		txt $7A2                ; "He had a fearful face,{N}but my master seemed to{N}understand everything.{W2}"
+		txt $7A3                ; "He fell into the sea to stop{N}Oddler.{N}Is Mr. Creed still alive?{W1}"
 		bra.s   return_5A7D0
-loc_5A7A0:
-		trap    #CHECK_FLAG
-		dc.w $312
-		beq.s   loc_5A7B0
-		trap    #TEXTBOX
-		dc.w $79E               ; "Is he getting back his{N}memory yet?{W2}"
-		trap    #TEXTBOX
-		dc.w $79F               ; "He's suffering from a very{N}bad headache.{W1}"
+byte_5A7A0:
+		chkFlg $312             ; set after Oddler elects to stay behind at Creed's Mansion
+		beq.s   byte_5A7B0      
+		txt $79E                ; "Is he getting back his{N}memory yet?{W2}"
+		txt $79F                ; "He's suffering from a very{N}bad headache.{W1}"
 		bra.s   return_5A7D0
-loc_5A7B0:
-		trap    #CHECK_FLAG
-		dc.w $310
-		beq.s   loc_5A7C0
-		trap    #TEXTBOX
-		dc.w $771               ; "My master would like to{N}help you, {LEADER}.{W2}"
-		trap    #TEXTBOX
-		dc.w $772               ; "Please choose one.{W1}"
+byte_5A7B0:
+		chkFlg $310             ; set after the event in the basement of Creed's Mansion
+		beq.s   byte_5A7C0      
+		txt $771                ; "My master would like to{N}help you, {LEADER}.{W2}"
+		txt $772                ; "Please choose one.{W1}"
 		bra.s   return_5A7D0
-loc_5A7C0:
-		trap    #CHECK_FLAG
-		dc.w $30F
-		beq.s   loc_5A7CC
-		trap    #TEXTBOX
-		dc.w $770               ; "Arc Valley was unsealed and{N}Zeon woke up?{W2}{N}This is a nightmare!{W1}"
+byte_5A7C0:
+		chkFlg $30F             ; set after the scene where Creed restores the Force and heads down the basement
+		beq.s   byte_5A7CC      
+		txt $770                ; "Arc Valley was unsealed and{N}Zeon woke up?{W2}{N}This is a nightmare!{W1}"
 		bra.s   return_5A7D0
-loc_5A7CC:
-		trap    #TEXTBOX
-		dc.w $723               ; "Mr. Creed is too busy!{N}Go away!{W1}"
+byte_5A7CC:
+		txt $723                ; "Mr. Creed is too busy!{N}Go away!{W1}"
 return_5A7D0:
 		rts
 
@@ -71,21 +58,16 @@ return_5A7D0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A7D2:
-		trap    #CHECK_FLAG
-		dc.w $312
-		beq.s   loc_5A7E2
-		trap    #TEXTBOX
-		dc.w $79A               ; "We devils can't help you.{W2}"
-		trap    #TEXTBOX
-		dc.w $79B               ; "People of the Earth have{N}to seal Zeon again by{N}themselves.{W1}"
+		 
+		chkFlg $312             ; set after Oddler elects to stay behind at Creed's Mansion
+		beq.s   byte_5A7E2      
+		txt $79A                ; "We devils can't help you.{W2}"
+		txt $79B                ; "People of the Earth have{N}to seal Zeon again by{N}themselves.{W1}"
 		bra.s   return_5A7EE
-loc_5A7E2:
-		trap    #TEXTBOX
-		dc.w $76A               ; "Maybe the Jewel of Evil has{N}a secret.{W2}"
-		trap    #TEXTBOX
-		dc.w $76B               ; "Storytellers in Tristan might{N}know something.{W2}"
-		trap    #TEXTBOX
-		dc.w $76C               ; "Tristan is in North Parmecia.{W1}"
+byte_5A7E2:
+		txt $76A                ; "Maybe the Jewel of Evil has{N}a secret.{W2}"
+		txt $76B                ; "Storytellers in Tristan might{N}know something.{W2}"
+		txt $76C                ; "Tristan is in North Parmecia.{W1}"
 return_5A7EE:
 		rts
 
@@ -95,35 +77,26 @@ return_5A7EE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A7F0:
-		trap    #CHECK_FLAG
-		dc.w $312
-		beq.s   loc_5A800
-		trap    #TEXTBOX
-		dc.w $79C               ; "Hello, {LEADER}.{N}How are you?{W2}"
-		trap    #TEXTBOX
-		dc.w $79D               ; "I'm well...but, I've had a{N}bad headache lately.{W1}"
+		 
+		chkFlg $312             ; set after Oddler elects to stay behind at Creed's Mansion
+		beq.s   byte_5A800      
+		txt $79C                ; "Hello, {LEADER}.{N}How are you?{W2}"
+		txt $79D                ; "I'm well...but, I've had a{N}bad headache lately.{W1}"
 		bra.s   return_5A826
-loc_5A800:
-		trap    #CHECK_FLAG
-		dc.w $2F7
-		bne.s   loc_5A80C
-		trap    #TEXTBOX
-		dc.w $77F               ; "Hey, you're going east,{N}right?{N}I'm going with you!{W1}"
-		bra.s   loc_5A814
-loc_5A80C:
-		trap    #TEXTBOX
-		dc.w $76D               ; "Oh, is a dwarf sick?{N}Really?{W2}"
-		trap    #TEXTBOX
-		dc.w $76E               ; "OK, I think I can help him.{N}Bring me to him.{W1}"
-loc_5A814:
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_5A800:
+		chkFlg $2F7             ; set after talking to one of the dwarves in the mine near the Fairy Woods
+		bne.s   byte_5A80C      
+		txt $77F                ; "Hey, you're going east,{N}right?{N}I'm going with you!{W1}"
+		bra.s   byte_5A814
+byte_5A80C:
+		txt $76D                ; "Oh, is a dwarf sick?{N}Really?{W2}"
+		txt $76E                ; "OK, I think I can help him.{N}Bring me to him.{W1}"
+byte_5A814:
+		clsTxt
 		lea     cs_5A828(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2FA               ; set after the fairy tags along at Creed's
-		trap    #SET_FLAG
-		dc.w $311               ; set after the fairy tags along at Creed's
+		setFlg $2FA             ; set after the fairy tags along at Creed's
+		setFlg $311             ; set after the fairy tags along at Creed's
 return_5A826:
 		rts
 
@@ -138,18 +111,16 @@ cs_5A828:       setBlocks 17,13,1,1,9,5
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A842:
-		trap    #1
-		dc.w $16
+		 
+		chkFlg $16              ; Frayja joined
 		bne.s   loc_5A85C
-		trap    #CHECK_FLAG
-		dc.w $313
-		bne.s   loc_5A856
+		chkFlg $313             ; ???
+		bne.s   byte_5A856      
 		lea     cs_5A8CA(pc), a0
 		trap    #6
 		dc.w $6004
-loc_5A856:
-		trap    #TEXTBOX
-		dc.w $775               ; "What a pity...then, I wish{N}happiness to all of you.{W1}"
+byte_5A856:
+		txt $775                ; "What a pity...then, I wish{N}happiness to all of you.{W1}"
 		bra.s   return_5A862
 loc_5A85C:
 		lea     cs_5A90E(pc), a0
@@ -163,18 +134,16 @@ return_5A862:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A864:
-		trap    #CHECK_FLAG
-		dc.w $16
+		 
+		chkFlg $16              ; Frayja joined
 		bne.s   loc_5A87E
-		trap    #CHECK_FLAG
-		dc.w $313
-		bne.s   loc_5A878
+		chkFlg $313             ; ???
+		bne.s   byte_5A878      
 		lea     cs_5A93A(pc), a0
 		trap    #6
 		dc.w $6004
-loc_5A878:
-		trap    #TEXTBOX
-		dc.w $778               ; "Tut!  OK, I have a{N}comfortable life here.{W1}"
+byte_5A878:
+		txt $778                ; "Tut!  OK, I have a{N}comfortable life here.{W1}"
 		bra.s   return_5A884
 loc_5A87E:
 		lea     cs_5A97E(pc), a0
@@ -188,18 +157,16 @@ return_5A884:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A886:
-		trap    #CHECK_FLAG
-		dc.w $16
+		 
+		chkFlg $16              ; Frayja joined
 		bne.s   loc_5A8A0
-		trap    #CHECK_FLAG
-		dc.w $313
-		bne.s   loc_5A89A
+		chkFlg $313             ; ???
+		bne.s   byte_5A89A      
 		lea     cs_5A9AA(pc), a0
 		trap    #6
 		bra.s   loc_5A89E
-loc_5A89A:
-		trap    #TEXTBOX
-		dc.w $77B               ; "My magic could've been a{N}great help to you.{W1}"
+byte_5A89A:
+		txt $77B                ; "My magic could've been a{N}great help to you.{W1}"
 loc_5A89E:
 		bra.s   return_5A8A6
 loc_5A8A0:
@@ -214,18 +181,16 @@ return_5A8A6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A8A8:
-		trap    #CHECK_FLAG
-		dc.w $16
+		 
+		chkFlg $16              ; Frayja joined
 		bne.s   loc_5A8C2
-		trap    #CHECK_FLAG
-		dc.w $313
-		bne.s   loc_5A8BC
+		chkFlg $313             ; ???
+		bne.s   byte_5A8BC      
 		lea     cs_5AA1A(pc), a0
 		trap    #6
 		bra.s   loc_5A8C0
-loc_5A8BC:
-		trap    #TEXTBOX
-		dc.w $77E               ; "You...snot nose!{W1}"
+byte_5A8BC:
+		txt $77E                ; "You...snot nose!{W1}"
 loc_5A8C0:
 		bra.s   return_5A8C8
 loc_5A8C2:

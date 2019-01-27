@@ -7,4 +7,4 @@ ms_map21_flag1FA:
 		dc.l ms_map21_ZoneEvents
 		dc.l ms_map21_AreaDescriptions
 		dc.l ms_map21_Section5
-		dc.l loc_53F1C
+		dc.l byte_53F1C         

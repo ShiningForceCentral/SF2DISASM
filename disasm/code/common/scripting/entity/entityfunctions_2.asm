@@ -22,8 +22,7 @@ loc_449D2:
 loc_449F0:
 		cmpi.b  #$B,d0          ; Rhode !
 		bne.s   loc_44A04
-		trap    #CHECK_FLAG
-		dc.w $B                 ; Rohde joined
+		chkFlg $B               ; Rohde joined
 		bne.s   loc_44A04
 		move.w  #$AA,d4 
 		bra.w   loc_44A5A

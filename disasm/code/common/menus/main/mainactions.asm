@@ -25,8 +25,7 @@ loc_212A8:
 		cmpi.w  #0,d0
 		bne.w   loc_212D8
 		bsr.w   sub_219EC       
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 loc_212B8:
 		move.b  #0,((byte_FFB13C-$1000000)).w
 		jsr     sub_10040
@@ -54,31 +53,26 @@ loc_212E0:
 		addq.l  #1,d1
 		move.l  d1,-$20(a6)
 		cmpi.w  #2,-$1C(a6)
-		beq.w   loc_213A8
+		beq.w   byte_213A8      
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 		move.l  -$20(a6),((TEXT_NUMBER-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $F3                ; "{NAME} cast{N}{SPELL} level {#}!"
-		trap    #SOUND_COMMAND
-		dc.w SFX_SPELL_CAST
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $F3                 ; "{NAME} cast{N}{SPELL} level {#}!"
+		sndCom SFX_SPELL_CAST
+		clsTxt
 		cmpi.w  #$A,-$1C(a6)
 		beq.w   loc_21354
-loc_21348:
-		trap    #TEXTBOX
-		dc.w $138               ; "But nothing happened."
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_21348:
+		txt $138                ; "But nothing happened."
+		clsTxt
 		bra.w   loc_21478
 loc_21354:
 		clr.w   d0
 		move.b  ((CURRENT_MAP-$1000000)).w,d0
 		cmpi.w  #$42,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
-		blt.s   loc_21348
+		blt.s   byte_21348      
 		cmpi.w  #$4E,d0 
-		bgt.s   loc_21348
+		bgt.s   byte_21348      
 loc_21366:
 		move.b  -$1A(a6),d1
 		jsr     j_GetSpellDefAddress
@@ -97,11 +91,9 @@ loc_21366:
 		move.b  d3,(a0)+
 		clr.b   ((PLAYER_TYPE-$1000000)).w
 		bra.w   loc_212A0
-loc_213A8:
-		trap    #TEXTBOX
-		dc.w $6C                ; "Use magic on whom?{D1}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_213A8:
+		txt $6C                 ; "Use magic on whom?{D1}"
+		clsTxt
 		move.b  #0,((byte_FFB13C-$1000000)).w
 		move.w  #$7F,((word_FFB13A-$1000000)).w 
 		jsr     sub_10044
@@ -111,10 +103,8 @@ loc_213A8:
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 		move.l  -$20(a6),((TEXT_NUMBER-$1000000)).w
-		trap    #TEXTBOX        ; {NAME} cast{N}{SPELL} level {#}!
-		dc.w $F3                ; "{NAME} cast{N}{SPELL} level {#}!"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $F3                 ; "{NAME} cast{N}{SPELL} level {#}!"
+		clsTxt
 		move.b  -$1A(a6),d1
 		jsr     j_GetSpellDefAddress
 		move.b  1(a0),d1
@@ -130,32 +120,27 @@ loc_213A8:
 		bclr    #2,d1
 		beq.s   loc_2143C
 		move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $12F               ; "{NAME} is no longer{N}cursed."
+		txt $12F                ; "{NAME} is no longer{N}cursed."
 		moveq   #$FFFFFFFF,d2
 		jsr     j_UnequipAllItemsIfNotCursed
 loc_2143C:
 		bclr    #0,d1
 		beq.s   loc_2144E
 		move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $12E               ; "{NAME} is no longer{N}stunned."
+		txt $12E                ; "{NAME} is no longer{N}stunned."
 		moveq   #$FFFFFFFF,d2
 loc_2144E:
 		bclr    #1,d1
 		beq.s   loc_21460
 		move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $12D               ; "{NAME} is no longer{N}poisoned."
+		txt $12D                ; "{NAME} is no longer{N}poisoned."
 		moveq   #$FFFFFFFF,d2
 loc_21460:
 		tst.w   d2
-		bne.s   loc_21468
-		trap    #TEXTBOX
-		dc.w $1A6               ; "But nothing happened.{D1}"
-loc_21468:
-		trap    #TEXTBOX
-		dc.w $FFFF
+		bne.s   byte_21468
+		txt $1A6                ; "But nothing happened.{D1}"
+byte_21468:
+		clsTxt
 		jsr     j_SetStatus
 		jsr     j_ApplyStatusAndItemsOnStats
 loc_21478:
@@ -182,7 +167,7 @@ loc_214A4:
 		move.w  d1,-$C(a6)
 		move.w  d2,-8(a6)
 		cmpi.w  #$FFFF,d0
-		beq.w   loc_2158E
+		beq.w   byte_2158E
 		cmpi.w  #4,d2
 		bne.w   loc_2150E
 		clr.w   d0
@@ -196,8 +181,7 @@ loc_214A4:
 		jsr     j_RemoveItemBySlot
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $49                ; "{NAME} used the{N}{ITEM}.{W2}"
+		txt $49                 ; "{NAME} used the{N}{ITEM}.{W2}"
 		bra.w   loc_21366
 loc_2150E:
 		move.w  -8(a6),d1
@@ -212,19 +196,15 @@ loc_2150E:
 		bne.w   loc_212A0
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $49                ; "{NAME} used the{N}{ITEM}.{W2}"
+		txt $49                 ; "{NAME} used the{N}{ITEM}.{W2}"
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $1A6               ; "But nothing happened.{D1}"
-		trap    #TEXTBOX
-		dc.w $FFFF
-		bra.w   loc_2158E
+		txt $1A6                ; "But nothing happened.{D1}"
+		clsTxt
+		bra.w   byte_2158E
 loc_21558:
 		move.w  -8(a6),d1
 		move.w  #$32,d1 
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		move.b  #0,((byte_FFB13C-$1000000)).w
 		jsr     sub_10040
 		cmpi.w  #$FFFF,d0
@@ -234,9 +214,8 @@ loc_21558:
 		move.w  -4(a6),d0
 		move.w  -$C(a6),d1
 		jsr     j_RemoveItemBySlot
-loc_2158E:
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_2158E:
+		clsTxt
 		bra.w   loc_219D8
 loc_21596:
 		cmpi.w  #1,d0
@@ -248,7 +227,7 @@ loc_2159E:
 		jsr     sub_10044
 		cmpi.w  #$FFFF,d0
 		bne.w   loc_215C0
-		bra.w   loc_2184E
+		bra.w   byte_2184E
 loc_215C0:
 		move.w  d0,-4(a6)
 		move.w  d1,-$C(a6)
@@ -267,10 +246,8 @@ loc_215C0:
 		jsr     j_IsItemCursed
 		bcc.w   loc_21662
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM
-		trap    #TEXTBOX
-		dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+		sndCom MUSIC_CURSED_ITEM
+		txt $37                 ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 		bsr.w   WaitForMusicResumeAndPlayerInput
 		bra.s   loc_2159E
 loc_21618:
@@ -286,20 +263,15 @@ loc_21618:
 		jsr     j_IsItemCursed
 		bcc.w   loc_21662
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM
-		trap    #TEXTBOX
-		dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+		sndCom MUSIC_CURSED_ITEM
+		txt $37                 ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 		bsr.w   WaitForMusicResumeAndPlayerInput
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		bra.w   loc_2159E
 loc_21662:
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $36                ; "Pass the {ITEM}{N}to whom?{D1}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $36                 ; "Pass the {ITEM}{N}to whom?{D1}"
+		clsTxt
 		move.b  #2,((byte_FFB13C-$1000000)).w
 		move.w  -8(a6),((word_FFB13A-$1000000)).w
 		jsr     sub_10044
@@ -326,16 +298,14 @@ loc_2168E:
 		bne.s   loc_216E4
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $4A                ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
+		txt $4A                 ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
 		bra.s   loc_216F4
 loc_216E4:
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -6(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $41                ; "The {ITEM} now{N}belongs to {NAME}.{W2}"
+		txt $41                 ; "The {ITEM} now{N}belongs to {NAME}.{W2}"
 loc_216F4:
-		bra.w   loc_2184E
+		bra.w   byte_2184E
 loc_216F8:
 		move.w  -6(a6),d0
 		move.w  -$E(a6),d1
@@ -354,13 +324,10 @@ loc_216F8:
 		jsr     j_IsItemCursed
 		bcc.w   loc_2179E
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM
-		trap    #TEXTBOX
-		dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+		sndCom MUSIC_CURSED_ITEM
+		txt $37                 ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 		bsr.w   WaitForMusicResumeAndPlayerInput
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		bra.w   loc_21662
 loc_21758:
 		cmpi.w  #0,d2
@@ -375,10 +342,8 @@ loc_21758:
 		jsr     j_IsItemCursed
 		bcc.w   loc_2179E
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM
-		trap    #TEXTBOX
-		dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+		sndCom MUSIC_CURSED_ITEM
+		txt $37                 ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 		bsr.w   WaitForMusicResumeAndPlayerInput
 		bra.w   loc_21662
 loc_2179E:
@@ -419,18 +384,15 @@ loc_2181A:
 		bne.s   loc_21838
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $4A                ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
-		bra.s   loc_2184E
+		txt $4A                 ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
+		bra.s   byte_2184E
 loc_21838:
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -6(a6),((TEXT_NAME_INDEX_2-$1000000)).w
 		move.w  -$A(a6),((TEXT_NAME_INDEX_3-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $42                ; "The {ITEM} was{N}exchanged for {NAME}'s{N}{ITEM}.{W2}"
-loc_2184E:
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $42                 ; "The {ITEM} was{N}exchanged for {NAME}'s{N}{ITEM}.{W2}"
+byte_2184E:
+		clsTxt
 		bra.w   loc_219D8
 loc_21856:
 		cmpi.w  #2,d0
@@ -446,8 +408,7 @@ loc_21880:
 		bra.w   loc_21894
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $46                ; "{NAME} is already{N}equipped with the{N}{ITEM}.{W2}"
+		txt $46                 ; "{NAME} is already{N}equipped with the{N}{ITEM}.{W2}"
 loc_21894:
 		bra.w   loc_219D8
 loc_21898:
@@ -457,7 +418,7 @@ loc_21898:
 		jsr     sub_10044
 		cmpi.w  #$FFFF,d0
 		bne.w   loc_218BA
-		bra.w   loc_219D0
+		bra.w   byte_219D0
 loc_218BA:
 		move.w  d0,-4(a6)
 		move.w  d1,-$C(a6)
@@ -470,16 +431,13 @@ loc_218BA:
 		cmpi.b  #0,d1
 		beq.s   loc_218F2
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $3E                ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
-		bra.w   loc_219D0
+		txt $3E                 ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
+		bra.w   byte_219D0
 loc_218F2:
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $45                ; "The {ITEM} will be{N}discarded.  OK?"
+		txt $45                 ; "The {ITEM} will be{N}discarded.  OK?"
 		jsr     j_YesNoChoiceBox
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		cmpi.w  #0,d0
 		beq.w   loc_21910
 		bra.s   loc_21898
@@ -498,14 +456,11 @@ loc_21910:
 		jsr     j_IsItemCursed
 		bcc.w   loc_219A0
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM
-		trap    #TEXTBOX
-		dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+		sndCom MUSIC_CURSED_ITEM
+		txt $37                 ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
 		bsr.w   WaitForMusicResumeAndPlayerInput
-		trap    #TEXTBOX
-		dc.w $FFFF
-		bra.w   loc_219D0
+		clsTxt
+		bra.w   byte_219D0
 loc_21962:
 		cmpi.w  #0,d2
 		beq.w   loc_219A0
@@ -519,25 +474,22 @@ loc_21962:
 		jsr     j_IsItemCursed
 		bcc.w   loc_219A0
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $37                ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
-		bra.w   loc_219D0
+		txt $37                 ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+		bra.w   byte_219D0
 loc_219A0:
 		move.w  -4(a6),d0
 		move.w  -$C(a6),d1
 		jsr     j_RemoveItemBySlot
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $43                ; "The {ITEM} is discarded.{W2}"
+		txt $43                 ; "The {ITEM} is discarded.{W2}"
 		move.b  -$14(a6),d1
 		andi.b  #8,d1
 		cmpi.b  #0,d1
-		beq.s   loc_219D0
+		beq.s   byte_219D0
 		move.w  -8(a6),d1
 		jsr     j_AddItemToDeals
-loc_219D0:
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_219D0:
+		clsTxt
 		bra.w   *+4
 loc_219D8:
 		bra.w   loc_21484

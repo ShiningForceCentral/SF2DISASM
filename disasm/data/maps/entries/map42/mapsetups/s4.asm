@@ -26,8 +26,8 @@ word_5FE34:     dc.w $2702
 ; =============== S U B R O U T I N E =======================================
 
 sub_5FE42:
-		trap    #CHECK_FLAG
-		dc.w $386
+		 
+		chkFlg $386             ; set after you pull the Force Sword out
 		bne.s   loc_5FE52
 		move.w  #$D06,d0
 		jsr     (DisplayText).w 
@@ -47,13 +47,12 @@ return_5FE66:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5FE68:
-		trap    #CHECK_FLAG
-		dc.w $386
+		 
+		chkFlg $386             ; set after you pull the Force Sword out
 		bne.s   loc_5FE7A
 		lea     cs_5FF06(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $386               ; set after you pull the Force Sword out
+		setFlg $386             ; set after you pull the Force Sword out
 		bra.s   return_5FE8E
 loc_5FE7A:
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w

@@ -8,20 +8,15 @@ ms_map61_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C67A:
-		trap    #CHECK_FLAG
-		dc.w $100
-		bne.s   loc_5C684
-		trap    #TEXTBOX
-		dc.w $E3D               ; "I'm Paseran of Ribble.{N}I'm studying the ancient{N}petroglyphs.{W2}"
-loc_5C684:
-		trap    #TEXTBOX
-		dc.w $E3E               ; "{NAME;11} told me about{N}a family who has an ancient{N}tomb in Parmecia.{W2}"
-		trap    #TEXTBOX
-		dc.w $E3F               ; "According to my studies,{N}his house should be around{N}here somewhere.{W2}"
-		trap    #TEXTBOX
-		dc.w $E40               ; "Or, maybe it's to the east.{W1}"
-		trap    #SET_FLAG
-		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
+		 
+		chkFlg $100             ; Temporary map setup flag 00
+		bne.s   byte_5C684      
+		txt $E3D                ; "I'm Paseran of Ribble.{N}I'm studying the ancient{N}petroglyphs.{W2}"
+byte_5C684:
+		txt $E3E                ; "{NAME;11} told me about{N}a family who has an ancient{N}tomb in Parmecia.{W2}"
+		txt $E3F                ; "According to my studies,{N}his house should be around{N}here somewhere.{W2}"
+		txt $E40                ; "Or, maybe it's to the east.{W1}"
+		setFlg $100             ; Temporary map setup flag 00
 entevdft_5C694:
 		
 		rts

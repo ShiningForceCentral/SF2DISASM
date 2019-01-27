@@ -6,8 +6,8 @@
 
 ms_map45_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $19
+		 
+		chkFlg $19              ; Shiela joined
 		beq.s   loc_600AA
 		move.w  #$19,d0
 		jsr     MoveEntityOutOfMap

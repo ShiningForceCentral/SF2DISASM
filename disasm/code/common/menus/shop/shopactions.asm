@@ -10,13 +10,11 @@ ShopMenuActions:
 		link    a6,#-$16
 		moveq   #0,d1
 		move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
-		blt.s   loc_2007A
+		blt.s   byte_2007A      
 		jsr     j_InitPortraitWindow
-loc_2007A:
-		trap    #TEXTBOX
-		dc.w $9E                ; "What's up, boy!{N}We guarantee all items to{N}be in good condition!{D3}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_2007A:
+		txt $9E                 ; "What's up, boy!{N}We guarantee all items to{N}be in good condition!{D3}"
+		clsTxt
 		jsr     j_HidePortraitWindow
 loc_20088:
 		moveq   #0,d0
@@ -30,13 +28,11 @@ loc_20088:
 loc_200A2:
 		moveq   #0,d1
 		move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
-		blt.s   loc_200B0
+		blt.s   byte_200B0      
 		jsr     j_InitPortraitWindow
-loc_200B0:
-		trap    #TEXTBOX
-		dc.w $A1                ; "{CLEAR}Thank you!  Come again!{W1}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_200B0:
+		txt $A1                 ; "{CLEAR}Thank you!  Come again!{W1}"
+		clsTxt
 		jsr     j_HidePortraitWindow
 		unlk    a6
 		movem.l (sp)+,d0-a5
@@ -44,14 +40,13 @@ loc_200B0:
 loc_200C6:
 		cmpi.w  #0,d0
 		bne.w   loc_202CA
-loc_200CE:
-		trap    #TEXTBOX
-		dc.w $A2                ; "What do you want to buy?"
+byte_200CE:
+		txt $A2                 ; "What do you want to buy?"
 		jsr     sub_207E6(pc)
 		nop
 		jsr     sub_1004C
 		cmpi.w  #$FFFF,d0
-		beq.w   loc_207CC
+		beq.w   byte_207CC
 		move.w  d0,-$C(a6)
 		move.w  d0,d1
 		jsr     j_GetItemDefAddress
@@ -59,30 +54,25 @@ loc_200CE:
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		clr.l   ((TEXT_NUMBER-$1000000)).w
 		move.w  -4(a6),((word_FFB778-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $A3                ; "The {ITEM} costs{N}{#} gold coins.{N}OK?"
+		txt $A3                 ; "The {ITEM} costs{N}{#} gold coins.{N}OK?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		beq.s   loc_20120
-loc_20118:
-		trap    #TEXTBOX
-		dc.w $A4                ; "{CLEAR}Oh...shucks!{W2}"
-		bra.w   loc_202C2
+byte_20118:
+		txt $A4                 ; "{CLEAR}Oh...shucks!{W2}"
+		bra.w   byte_202C2
 loc_20120:
 		jsr     j_GetGold
 		move.l  d1,-8(a6)
 		clr.l   d0
 		move.w  -4(a6),d0
 		cmp.l   d0,d1
-		bcc.s   loc_2013C
-		trap    #TEXTBOX
-		dc.w $A5                ; "You need more money to buy{N}it.{W2}"
-		bra.w   loc_202C2
-loc_2013C:
-		trap    #TEXTBOX
-		dc.w $A6                ; "Who gets it?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		bcc.s   byte_2013C      
+		txt $A5                 ; "You need more money to buy{N}it.{W2}"
+		bra.w   byte_202C2
+byte_2013C:
+		txt $A6                 ; "Who gets it?{W2}"
+		clsTxt
 		jsr     j_UpdateForce
 		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
@@ -92,25 +82,23 @@ loc_2013C:
 loc_2015E:
 		move.b  (a0)+,(a1)+
 		dbf     d7,loc_2015E
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		move.w  -$C(a6),((word_FFB13A-$1000000)).w
 		move.b  #0,((byte_FFB13C-$1000000)).w
 		jsr     sub_10044
 		cmpi.w  #$FFFF,d0
-		beq.s   loc_20118
+		beq.s   byte_20118      
 		move.w  d0,-$A(a6)
 		moveq   #0,d1
 		jsr     j_GetItemAndNumberOfItems
 		cmpi.w  #4,d2
 		bcs.s   loc_201AC
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $A8                ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
+		txt $A8                 ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
-		beq.s   loc_2013C
-		bra.w   loc_20118
+		beq.s   byte_2013C      
+		bra.w   byte_20118      
 loc_201AC:
 		move.w  -$C(a6),d1
 		jsr     j_GetItemType
@@ -121,11 +109,10 @@ loc_201AC:
 		jsr     j_IsWeaponOrRingEquippable
 		bcs.s   loc_201E4
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $A7                ; "{NAME} can't be{N}equipped with it.  OK?"
+		txt $A7                 ; "{NAME} can't be{N}equipped with it.  OK?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
-		bne.w   loc_2013C
+		bne.w   byte_2013C      
 loc_201E4:
 		moveq   #0,d1
 		move.w  -4(a6),d1
@@ -136,12 +123,11 @@ loc_201E4:
 		move.w  -$C(a6),d1
 		move.w  -$A(a6),d0
 		jsr     j_IsWeaponOrRingEquippable
-		bcc.w   loc_202BE
-		trap    #TEXTBOX
-		dc.w $AD                ; "{CLEAR}Equip it now?"
+		bcc.w   byte_202BE      
+		txt $AD                 ; "{CLEAR}Equip it now?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
-		bne.w   loc_202BE
+		bne.w   byte_202BE      
 		move.w  -$C(a6),d1
 		jsr     j_GetItemType
 		cmpi.w  #1,d2
@@ -155,9 +141,8 @@ loc_201E4:
 		cmpi.w  #2,d2
 		bne.w   loc_2028A
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
-		bra.s   loc_202BE
+		txt $B0                 ; "{NAME} can't remove{N}the cursed equipment.{W2}"
+		bra.s   byte_202BE      
 loc_2025E:
 		move.w  -$A(a6),d0
 		jsr     j_GetEquippedRing
@@ -168,9 +153,8 @@ loc_2025E:
 		cmpi.w  #2,d2
 		bne.w   loc_2028A
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
-		bra.s   loc_202BE
+		txt $B0                 ; "{NAME} can't remove{N}the cursed equipment.{W2}"
+		bra.s   byte_202BE      
 loc_2028A:
 		moveq   #0,d1
 		jsr     j_GetItemAndNumberOfItems
@@ -178,35 +162,28 @@ loc_2028A:
 		subq.w  #1,d1
 		jsr     j_EquipItem
 		cmpi.w  #2,d2
-		bne.s   loc_202B8
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM  ; cursed item
+		bne.s   byte_202B8      
+		sndCom MUSIC_CURSED_ITEM
 		jsr     WaitForMusicResumeAndPlayerInput_Shop(pc)
 		nop
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $AF                ; "Gee, {NAME} gets{N}cursed.{W2}"
+		txt $AF                 ; "Gee, {NAME} gets{N}cursed.{W2}"
 		bra.s   loc_202BC
-loc_202B8:
-		trap    #TEXTBOX
-		dc.w $AE                ; "Ah, it suits you!{W2}"
+byte_202B8:
+		txt $AE                 ; "Ah, it suits you!{W2}"
 loc_202BC:
-		bra.s   loc_202C2
-loc_202BE:
-		trap    #TEXTBOX
-		dc.w $A9                ; "{CLEAR}Here ya go!{N}Use it wisely!{W2}"
-loc_202C2:
-		trap    #TEXTBOX
-		dc.w $FFFF
-		bra.w   loc_200CE
+		bra.s   byte_202C2
+byte_202BE:
+		txt $A9                 ; "{CLEAR}Here ya go!{N}Use it wisely!{W2}"
+byte_202C2:
+		clsTxt
+		bra.w   byte_200CE      
 loc_202CA:
 		cmpi.w  #1,d0
 		bne.w   loc_20442
-loc_202D2:
-		trap    #TEXTBOX
-		dc.w $B1                ; "Whose and which item do{N}you want to sell?{D3}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_202D2:
+		txt $B1                 ; "Whose and which item do{N}you want to sell?{D3}"
+		clsTxt
 		jsr     j_UpdateForce
 		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
@@ -216,13 +193,12 @@ loc_202D2:
 loc_202F4:
 		move.b  (a0)+,(a1)+
 		dbf     d7,loc_202F4
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		move.b  #1,((byte_FFB13C-$1000000)).w
 		move.w  #$7F,((word_FFB13A-$1000000)).w 
 		jsr     sub_10044
 		cmpi.w  #$FFFF,d0
-		beq.w   loc_207CC
+		beq.w   byte_207CC
 		clr.w   -$16(a6)
 		move.w  d0,-$A(a6)
 		move.w  d1,-$E(a6)
@@ -240,29 +216,25 @@ loc_202F4:
 		andi.b  #ITEMTYPE_MASK_UNSELLABLE,d1
 		cmpi.b  #0,d1
 		beq.s   loc_20364
-		trap    #TEXTBOX
-		dc.w $B4                ; "{CLEAR}Sorry, I can't buy that....{W2}"
-		bra.w   loc_2043A
+		txt $B4                 ; "{CLEAR}Sorry, I can't buy that....{W2}"
+		bra.w   byte_2043A
 loc_20364:
 		move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
 		move.b  -$14(a6),d1
 		andi.b  #ITEMTYPE_MASK_RARE,d1
 		cmpi.b  #0,d1
-		beq.s   loc_20384
+		beq.s   byte_20384      
 		move.w  #1,-$16(a6)
-		trap    #TEXTBOX
-		dc.w $B7                ; "Wow, it's a rare bird.{N}I'll pay {#} gold coins{N}for it. OK?"
+		txt $B7                 ; "Wow, it's a rare bird.{N}I'll pay {#} gold coins{N}for it. OK?"
 		bra.s   loc_20388
-loc_20384:
-		trap    #TEXTBOX
-		dc.w $B2                ; "I'll pay {#} gold coins{N}for it, OK?"
+byte_20384:
+		txt $B2                 ; "I'll pay {#} gold coins{N}for it, OK?"
 loc_20388:
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		beq.s   loc_2039C
-		trap    #TEXTBOX
-		dc.w $B3                ; "{CLEAR}Too bad.{W2}"
-		bra.w   loc_2043A
+		txt $B3                 ; "{CLEAR}Too bad.{W2}"
+		bra.w   byte_2043A
 loc_2039C:
 		move.w  -$C(a6),d1
 		jsr     j_GetItemType
@@ -277,9 +249,8 @@ loc_2039C:
 		move.w  -$C(a6),d1
 		jsr     j_IsItemCursed
 		bcc.w   loc_2040C
-		trap    #TEXTBOX
-		dc.w $B8                ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
-		bra.w   loc_2043A
+		txt $B8                 ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
+		bra.w   byte_2043A
 loc_203DC:
 		move.w  -$A(a6),d0
 		jsr     j_GetEquippedRing
@@ -290,9 +261,8 @@ loc_203DC:
 		move.w  -$C(a6),d1
 		jsr     j_IsItemCursed
 		bcc.w   loc_2040C
-		trap    #TEXTBOX
-		dc.w $B8                ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
-		bra.w   loc_2043A
+		txt $B8                 ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
+		bra.w   byte_2043A
 loc_2040C:
 		move.l  -8(a6),d1
 		jsr     j_IncreaseGold
@@ -300,24 +270,20 @@ loc_2040C:
 		move.w  -$E(a6),d1
 		jsr     j_DropItemBySlot
 		cmpi.w  #0,-$16(a6)
-		beq.s   loc_20436
+		beq.s   byte_20436      
 		move.w  -$C(a6),d1
 		jsr     j_AddItemToDeals
-loc_20436:
-		trap    #TEXTBOX
-		dc.w $B5                ; "{CLEAR}Yeah, I got it.{W2}"
-loc_2043A:
-		trap    #TEXTBOX
-		dc.w $FFFF
-		bra.w   loc_202D2
+byte_20436:
+		txt $B5                 ; "{CLEAR}Yeah, I got it.{W2}"
+byte_2043A:
+		clsTxt
+		bra.w   byte_202D2      
 loc_20442:
 		cmpi.w  #2,d0
 		bne.w   loc_205B4
-loc_2044A:
-		trap    #TEXTBOX
-		dc.w $BA                ; "Whose and which item{N}should I repair?{D1}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_2044A:
+		txt $BA                 ; "Whose and which item{N}should I repair?{D1}"
+		clsTxt
 		jsr     j_UpdateForce
 		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
@@ -327,13 +293,12 @@ loc_2044A:
 loc_2046C:
 		move.b  (a0)+,(a1)+
 		dbf     d7,loc_2046C
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		move.b  #1,((byte_FFB13C-$1000000)).w
 		move.w  #$7F,((word_FFB13A-$1000000)).w 
 		jsr     sub_10044
 		cmpi.w  #$FFFF,d0
-		beq.w   loc_207CC
+		beq.w   byte_207CC
 		move.w  d0,-$A(a6)
 		move.w  d1,-$E(a6)
 		move.w  d2,-$C(a6)
@@ -351,20 +316,17 @@ loc_2046C:
 		move.w  (a0),d2
 		btst    #$F,d2
 		bne.w   loc_204DC
-		trap    #TEXTBOX
-		dc.w $BC                ; "It's not damaged.{W2}"
-		bra.w   loc_205AC
+		txt $BC                 ; "It's not damaged.{W2}"
+		bra.w   byte_205AC
 loc_204DC:
 		clr.l   ((TEXT_NUMBER-$1000000)).w
 		move.w  -4(a6),((word_FFB778-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $BB                ; "{CLEAR}Will you pay {#} gold{N}coins to repair it?"
+		txt $BB                 ; "{CLEAR}Will you pay {#} gold{N}coins to repair it?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		beq.s   loc_204FE
-		trap    #TEXTBOX
-		dc.w $B3                ; "{CLEAR}Too bad.{W2}"
-		bra.w   loc_205AC
+		txt $B3                 ; "{CLEAR}Too bad.{W2}"
+		bra.w   byte_205AC
 loc_204FE:
 		jsr     j_GetGold
 		move.l  d1,-8(a6)
@@ -372,9 +334,8 @@ loc_204FE:
 		move.w  -4(a6),d0
 		cmp.l   d0,d1
 		bcc.s   loc_2051A
-		trap    #TEXTBOX
-		dc.w $BD                ; "You don't have enough{N}money...{W2}"
-		bra.w   loc_205AC
+		txt $BD                 ; "You don't have enough{N}money...{W2}"
+		bra.w   byte_205AC
 loc_2051A:
 		move.w  -$C(a6),d1
 		jsr     j_GetItemType
@@ -389,9 +350,8 @@ loc_2051A:
 		move.w  -$C(a6),d1
 		jsr     j_IsItemCursed
 		bcc.w   loc_2058A
-		trap    #TEXTBOX
-		dc.w $BE                ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
-		bra.w   loc_205AC
+		txt $BE                 ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
+		bra.w   byte_205AC
 loc_2055A:
 		move.w  -$A(a6),d0
 		jsr     j_GetEquippedRing
@@ -402,9 +362,8 @@ loc_2055A:
 		move.w  -$C(a6),d1
 		jsr     j_IsItemCursed
 		bcc.w   loc_2058A
-		trap    #TEXTBOX
-		dc.w $BE                ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
-		bra.w   loc_205AC
+		txt $BE                 ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
+		bra.w   byte_205AC
 loc_2058A:
 		moveq   #0,d1
 		move.w  -4(a6),d1
@@ -412,28 +371,23 @@ loc_2058A:
 		move.w  -$A(a6),d0
 		move.w  -$E(a6),d1
 		jsr     j_RepairItemBySlot
-		trap    #TEXTBOX
-		dc.w $BF                ; "{CLEAR}OK, one moment please!{W2}"
-		trap    #TEXTBOX
-		dc.w $C0                ; "{CLEAR}Here you go!{N}Beautiful, huh?{W2}"
-loc_205AC:
-		trap    #TEXTBOX
-		dc.w $FFFF
-		bra.w   loc_2044A
+		txt $BF                 ; "{CLEAR}OK, one moment please!{W2}"
+		txt $C0                 ; "{CLEAR}Here you go!{N}Beautiful, huh?{W2}"
+byte_205AC:
+		clsTxt
+		bra.w   byte_2044A      
 loc_205B4:
 		jsr     DetermineDealsItemsNotInCurrentShop(pc)
 		nop
 		tst.w   ((word_FFB12E-$1000000)).w
-		bne.s   loc_205C8
-		trap    #TEXTBOX
-		dc.w $AC                ; "I'm very sorry!{N}I'm out of stock!{W2}"
-		bra.w   loc_207CC
-loc_205C8:
-		trap    #TEXTBOX
-		dc.w $AB                ; "You must be surprised!{D1}{N}What would you like?"
+		bne.s   byte_205C8      
+		txt $AC                 ; "I'm very sorry!{N}I'm out of stock!{W2}"
+		bra.w   byte_207CC
+byte_205C8:
+		txt $AB                 ; "You must be surprised!{D1}{N}What would you like?"
 		jsr     sub_1004C
 		cmpi.w  #$FFFF,d0
-		beq.w   loc_207CC
+		beq.w   byte_207CC
 		move.w  d0,-$C(a6)
 		move.w  d0,d1
 		jsr     j_GetItemDefAddress
@@ -441,30 +395,25 @@ loc_205C8:
 		move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		clr.l   ((TEXT_NUMBER-$1000000)).w
 		move.w  -4(a6),((word_FFB778-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $A3                ; "The {ITEM} costs{N}{#} gold coins.{N}OK?"
+		txt $A3                 ; "The {ITEM} costs{N}{#} gold coins.{N}OK?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		beq.s   loc_20614
-loc_2060C:
-		trap    #TEXTBOX
-		dc.w $A4                ; "{CLEAR}Oh...shucks!{W2}"
-		bra.w   loc_207C4
+byte_2060C:
+		txt $A4                 ; "{CLEAR}Oh...shucks!{W2}"
+		bra.w   byte_207C4
 loc_20614:
 		jsr     j_GetGold
 		move.l  d1,-8(a6)
 		clr.l   d0
 		move.w  -4(a6),d0
 		cmp.l   d0,d1
-		bcc.s   loc_20630
-		trap    #TEXTBOX
-		dc.w $A5                ; "You need more money to buy{N}it.{W2}"
-		bra.w   loc_207C4
-loc_20630:
-		trap    #TEXTBOX
-		dc.w $A6                ; "Who gets it?{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		bcc.s   byte_20630      
+		txt $A5                 ; "You need more money to buy{N}it.{W2}"
+		bra.w   byte_207C4
+byte_20630:
+		txt $A6                 ; "Who gets it?{W2}"
+		clsTxt
 		jsr     j_UpdateForce
 		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
 		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
@@ -474,25 +423,23 @@ loc_20630:
 loc_20652:
 		move.b  (a0)+,(a1)+
 		dbf     d7,loc_20652
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		move.w  -$C(a6),((word_FFB13A-$1000000)).w
 		move.b  #0,((byte_FFB13C-$1000000)).w
 		jsr     sub_10044
 		cmpi.w  #$FFFF,d0
-		beq.s   loc_2060C
+		beq.s   byte_2060C      
 		move.w  d0,-$A(a6)
 		moveq   #0,d1
 		jsr     j_GetItemAndNumberOfItems
 		cmpi.w  #4,d2
 		bcs.s   loc_206A0
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $A8                ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
+		txt $A8                 ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
-		beq.s   loc_20630
-		bra.w   loc_2060C
+		beq.s   byte_20630      
+		bra.w   byte_2060C      
 loc_206A0:
 		move.w  -$C(a6),d1
 		jsr     j_GetItemType
@@ -503,11 +450,10 @@ loc_206A0:
 		jsr     j_IsWeaponOrRingEquippable
 		bcs.s   loc_206D8
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $A7                ; "{NAME} can't be{N}equipped with it.  OK?"
+		txt $A7                 ; "{NAME} can't be{N}equipped with it.  OK?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
-		bne.w   loc_20630
+		bne.w   byte_20630      
 loc_206D8:
 		moveq   #0,d1
 		move.w  -4(a6),d1
@@ -520,12 +466,11 @@ loc_206D8:
 		move.w  -$C(a6),d1
 		move.w  -$A(a6),d0
 		jsr     j_IsWeaponOrRingEquippable
-		bcc.w   loc_207C0
-		trap    #TEXTBOX
-		dc.w $AD                ; "{CLEAR}Equip it now?"
+		bcc.w   byte_207C0      
+		txt $AD                 ; "{CLEAR}Equip it now?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
-		bne.w   loc_207C0
+		bne.w   byte_207C0      
 		move.w  -$C(a6),d1
 		jsr     j_GetItemType
 		cmpi.w  #1,d2
@@ -539,9 +484,8 @@ loc_206D8:
 		cmpi.w  #2,d2
 		bne.w   loc_20788
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
-		bra.s   loc_207C0
+		txt $B0                 ; "{NAME} can't remove{N}the cursed equipment.{W2}"
+		bra.s   byte_207C0      
 loc_2075C:
 		move.w  -$A(a6),d0
 		jsr     j_GetEquippedRing
@@ -552,9 +496,8 @@ loc_2075C:
 		cmpi.w  #2,d2
 		bne.w   loc_20788
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $B0                ; "{NAME} can't remove{N}the cursed equipment.{W2}"
-		bra.s   loc_207C0
+		txt $B0                 ; "{NAME} can't remove{N}the cursed equipment.{W2}"
+		bra.s   byte_207C0      
 loc_20788:
 		moveq   #0,d1
 		jsr     j_GetItemAndNumberOfItems
@@ -562,32 +505,25 @@ loc_20788:
 		subq.w  #1,d1
 		jsr     j_EquipItem
 		cmpi.w  #2,d2
-		bne.s   loc_207BA
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_CURSED_ITEM
+		bne.s   byte_207BA      
+		sndCom MUSIC_CURSED_ITEM
 		jsr     WaitForMusicResumeAndPlayerInput_Shop(pc)
 		nop
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		trap    #TEXTBOX
-		dc.w $AF                ; "Gee, {NAME} gets{N}cursed.{W2}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $AF                 ; "Gee, {NAME} gets{N}cursed.{W2}"
+		clsTxt
 		bra.s   loc_207BE
-loc_207BA:
-		trap    #TEXTBOX
-		dc.w $AE                ; "Ah, it suits you!{W2}"
+byte_207BA:
+		txt $AE                 ; "Ah, it suits you!{W2}"
 loc_207BE:
-		bra.s   loc_207C4
-loc_207C0:
-		trap    #TEXTBOX
-		dc.w $A9                ; "{CLEAR}Here ya go!{N}Use it wisely!{W2}"
-loc_207C4:
-		trap    #TEXTBOX
-		dc.w $FFFF
+		bra.s   byte_207C4
+byte_207C0:
+		txt $A9                 ; "{CLEAR}Here ya go!{N}Use it wisely!{W2}"
+byte_207C4:
+		clsTxt
 		bra.w   loc_205B4
-loc_207CC:
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_207CC:
+		clsTxt
 		bra.w   loc_20088
 
 	; End of function ShopMenuActions

@@ -25,13 +25,12 @@ nullsub_74:
 ; =============== S U B R O U T I N E =======================================
 
 sub_56F9C:
-		trap    #CHECK_FLAG
-		dc.w $2D0               ; set after the King of Bedoe speaks to his soldiers and they disperse
+		 
+		chkFlg $2D0             ; set after the King of Bedoe speaks to his soldiers and they disperse
 		bne.s   return_56FAC
 		lea     cs_573EC(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2D0               ; set after the King of Bedoe speaks to his soldiers and they disperse
+		setFlg $2D0             ; set after the King of Bedoe speaks to his soldiers and they disperse
 return_56FAC:
 		rts
 
@@ -41,13 +40,12 @@ return_56FAC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_56FAE:
-		trap    #CHECK_FLAG
-		dc.w $2D1               ; set after you approach the King of Bedoe, starts with Luke speaking to Peter
+		 
+		chkFlg $2D1             ; set after you approach the King of Bedoe, starts with Luke speaking to Peter
 		bne.s   return_56FBE
 		lea     cs_574A6(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2D1               ; set after you approach the King of Bedoe, starts with Luke speaking to Peter
+		setFlg $2D1             ; set after you approach the King of Bedoe, starts with Luke speaking to Peter
 return_56FBE:
 		rts
 

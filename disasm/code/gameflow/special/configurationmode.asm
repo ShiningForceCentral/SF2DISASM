@@ -16,41 +16,35 @@ CheatModeConfiguration:
 loc_7E58:
 		tst.b   ((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
 		beq.w   return_7EC4
-		trap    #TEXTBOX
-		dc.w $1C0               ; "Configuration....{D3}"
-		trap    #TEXTBOX
-		dc.w $1C2               ; "{CLEAR}Special Turbo"
+		txt $1C0                ; "Configuration....{D3}"
+		txt $1C2                ; "{CLEAR}Special Turbo"
 		jsr     j_YesNoChoiceBox
 		tst.w   d0
-		bne.s   loc_7E78
+		bne.s   byte_7E78       
 		move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
-loc_7E78:
-		trap    #TEXTBOX
-		dc.w $1C3               ; "{CLEAR}Control Opponent"
+byte_7E78:
+		txt $1C3                ; "{CLEAR}Control Opponent"
 		jsr     j_YesNoChoiceBox
 		tst.w   d0
-		bne.s   loc_7E8C
+		bne.s   byte_7E8C       
 		move.b  #$FF,((CONTROL_OPPONENT_CHEAT-$1000000)).w
-loc_7E8C:
-		trap    #TEXTBOX
-		dc.w $1C4               ; "{CLEAR}Auto Battle"
+byte_7E8C:
+		txt $1C4                ; "{CLEAR}Auto Battle"
 		jsr     j_YesNoChoiceBox
 		tst.w   d0
-		bne.s   loc_7EA0
+		bne.s   byte_7EA0       
 		move.b  #$FF,((AUTO_BATTLE_CHEAT-$1000000)).w
-loc_7EA0:
-		trap    #TEXTBOX
-		dc.w $1C7               ; "{CLEAR}Game Completed"
+byte_7EA0:
+		txt $1C7                ; "{CLEAR}Game Completed"
 		jsr     j_YesNoChoiceBox
 		tst.w   d0
 		bne.s   loc_7EB8
 		bset    #7,(SAVE_FLAGS).l
-		bra.s   loc_7EC0
+		bra.s   byte_7EC0       
 loc_7EB8:
 		bclr    #7,(SAVE_FLAGS).l
-loc_7EC0:
-		trap    #TEXTBOX
-		dc.w $1CD               ; "Configuration is done.{N}Go ahead!{W1}"
+byte_7EC0:
+		txt $1CD                ; "Configuration is done.{N}Go ahead!{W1}"
 return_7EC4:
 		rts
 

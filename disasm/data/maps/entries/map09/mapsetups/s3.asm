@@ -17,13 +17,12 @@ ms_map9_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_56866:
-		trap    #CHECK_FLAG
-		dc.w $2D6               ; set after talking to the priest in upstairs Hassan
+		 
+		chkFlg $2D6             ; set after talking to the priest in upstairs Hassan
 		bne.s   return_56876
 		lea     cs_568F6(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2D6               ; set after talking to the priest in upstairs Hassan
+		setFlg $2D6             ; set after talking to the priest in upstairs Hassan
 return_56876:
 		rts
 

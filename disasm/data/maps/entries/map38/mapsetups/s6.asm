@@ -6,31 +6,24 @@
 
 ms_map38_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $399
-		beq.s   loc_5DD78
-		trap    #SET_FLAG
-		dc.w $38F               ; set after the Petro death scene in Roft
-		trap    #CHECK_FLAG
-		dc.w $1A
-		bne.s   loc_5DD78
-		trap    #CHECK_FLAG
-		dc.w $104
-		bne.s   loc_5DD78
+		 
+		chkFlg $399             ; set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
+		beq.s   byte_5DD78      
+		setFlg $38F             ; set after the Petro death scene in Roft
+		chkFlg $1A              ; Zynk joined
+		bne.s   byte_5DD78      
+		chkFlg $104             ; Temporary map setup flag 04
+		bne.s   byte_5DD78      
 		lea     cs_5DD8E(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $104
-loc_5DD78:
-		trap    #CHECK_FLAG
-		dc.w $38E
+		setFlg $104             ; Temporary map setup flag 04
+byte_5DD78:
+		chkFlg $38E             ; set after the initial scene on entering Roft (where the guy thinks you're Galam)
 		bne.s   return_5DD8C
 		lea     cs_5DD9C(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $38E               ; set after the initial scene on entering Roft (where the guy thinks you're Galam)
-		trap    #SET_FLAG
-		dc.w $102
+		setFlg $38E             ; set after the initial scene on entering Roft (where the guy thinks you're Galam)
+		setFlg $102             ; Temporary map setup flag 02
 return_5DD8C:
 		rts
 

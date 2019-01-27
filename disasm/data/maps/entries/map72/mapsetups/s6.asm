@@ -6,11 +6,10 @@
 
 ms_map72_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $2CC               ; set after your raft-giving conversation with the mayor in Polca
+		 
+		chkFlg $2CC             ; set after your raft-giving conversation with the mayor in Polca
 		beq.s   return_4FF40
-		trap    #CHECK_FLAG
-		dc.w $A                 ; Luke joined
+		chkFlg $A               ; Luke joined
 		bne.s   return_4FF40
 		lea     cs_4FF5A(pc), a0
 		trap    #6

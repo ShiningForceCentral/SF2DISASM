@@ -51,8 +51,8 @@ word_5D584:     dc.w $81A
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D5B0:
-		trap    #CHECK_FLAG
-		dc.w $340
+		 
+		chkFlg $340             ; set after talking to the painter in Moun for the first time
 		beq.s   return_5D5BC
 		lea     cs_5D732(pc), a0
 		trap    #6
@@ -65,39 +65,32 @@ return_5D5BC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D5BE:
-		trap    #CHECK_FLAG
-		dc.w $342
+		 
+		chkFlg $342             ; set after making the Arm of Golem appear in Moun
 		beq.s   return_5D60C
-		trap    #CHECK_FLAG
-		dc.w $343
+		chkFlg $343             ; set after picking up the Arm of Golem in Moun
 		bne.s   return_5D60C
-		trap    #TEXTBOX
-		dc.w $7E1               ; "{LEADER} found the Arm of{N}Golem.{W2}"
-		trap    #TEXTBOX
-		dc.w $7E2               ; "Pick it up?"
+		txt $7E1                ; "{LEADER} found the Arm of{N}Golem.{W2}"
+		txt $7E2                ; "Pick it up?"
 		jsr     j_YesNoPrompt
 		tst.w   d0
-		bne.s   loc_5D608
+		bne.s   byte_5D608      
 		move.w  #$75,d0 
 		moveq   #0,d1
 		jsr     sub_4F48A
 		btst    #0,d0
-		bne.s   loc_5D5FE
-		trap    #SET_FLAG
-		dc.w $343               ; set after picking up the Arm of Golem in Moun
+		bne.s   byte_5D5FE      
+		setFlg $343             ; set after picking up the Arm of Golem in Moun
 		move.w  #$89,d0 
 		jsr     MoveEntityOutOfMap
 		bra.s   loc_5D606
-loc_5D5FE:
-		trap    #TEXTBOX
-		dc.w $7E4               ; "But {LEADER}'s hands{N}are full.{W1}"
-		trap    #TEXTBOX
-		dc.w $7E7               ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
+byte_5D5FE:
+		txt $7E4                ; "But {LEADER}'s hands{N}are full.{W1}"
+		txt $7E7                ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 loc_5D606:
 		bra.s   return_5D60C
-loc_5D608:
-		trap    #TEXTBOX
-		dc.w $7E7               ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
+byte_5D608:
+		txt $7E7                ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 return_5D60C:
 		rts
 

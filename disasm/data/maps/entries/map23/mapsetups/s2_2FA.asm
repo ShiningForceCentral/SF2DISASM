@@ -11,8 +11,8 @@ ms_map23_flag2FA_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_59BBC:
-		trap    #TEXTBOX
-		dc.w $6A5               ; "Hey, you met Creed, didn't{N}you?{W1}"
+		 
+		txt $6A5                ; "Hey, you met Creed, didn't{N}you?{W1}"
 		rts
 
 	; End of function sub_59BBC
@@ -21,8 +21,8 @@ sub_59BBC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_59BC2:
-		trap    #TEXTBOX
-		dc.w $6A6               ; "The evil has completely{N}lifted from the forest.{W1}"
+		 
+		txt $6A6                ; "The evil has completely{N}lifted from the forest.{W1}"
 		rts
 
 	; End of function sub_59BC2
@@ -31,10 +31,9 @@ sub_59BC2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_59BC8:
-		trap    #TEXTBOX
-		dc.w $6A7               ; "Is that sick dwarf better?{W2}"
-		trap    #TEXTBOX
-		dc.w $6A8               ; "Can he see the fairy now?{W1}"
+		 
+		txt $6A7                ; "Is that sick dwarf better?{W2}"
+		txt $6A8                ; "Can he see the fairy now?{W1}"
 		rts
 
 	; End of function sub_59BC8

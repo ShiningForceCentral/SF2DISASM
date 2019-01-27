@@ -19,11 +19,10 @@ nullsub_87:
 ; =============== S U B R O U T I N E =======================================
 
 sub_595E8:
-		trap    #CHECK_FLAG
-		dc.w $309
+		 
+		chkFlg $309             ; set after the Desktop King tells you to fight on the chessboard
 		beq.s   return_59600
-		trap    #CHECK_FLAG
-		dc.w $20A
+		chkFlg $20A             ; Battle 22 completed
 		bne.s   return_59600
 		move.b  #$16,((EGRESS_MAP_INDEX-$1000000)).w
 		lea     cs_5994E(pc), a0

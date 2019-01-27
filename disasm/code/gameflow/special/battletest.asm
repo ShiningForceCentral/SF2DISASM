@@ -76,8 +76,7 @@ DebugModeBattleTest:
 		bsr.w   j_SetCurrentATK
 		bsr.w   j_SetCurrentDEF
 		bsr.w   j_SetCurrentHP
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_BATTLE_THEME_3
+		sndCom MUSIC_BATTLE_THEME_3
 		bsr.w   EnableDisplayAndInterrupts
 		bsr.w   InitDisplay     
 		bsr.w   EnableDisplayAndInterrupts
@@ -97,15 +96,13 @@ DebugModeBattleTest:
 		move.l  #$18191A1B,(a0)+
 		move.l  #$1C1D1E1F,(a0)+
 		bsr.w   CheatModeConfiguration
-loc_77DE:
-		trap    #TEXTBOX
-		dc.w $1C8               ; "Battle number?{D1}"
+byte_77DE:
+		txt $1C8                ; "Battle number?{D1}"
 		clr.w   d0
 		clr.w   d1
 		move.w  #$31,d2 
 		jsr     j_NumberPrompt
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		tst.w   d0
 		blt.w   loc_7894
 		movem.w d0-d2,-(sp)
@@ -137,24 +134,22 @@ loc_7820:
 		move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
 		jsr     j_ExecuteBattleLoop
 		jsr     j_ChurchActions
-		trap    #TEXTBOX
-		dc.w $1CC               ; "Shop number?{D1}"
+		txt $1CC                ; "Shop number?{D1}"
 		move.w  #0,d0
 		move.w  #0,d1
 		move.w  #$64,d2 
 		jsr     j_NumberPrompt
-		trap    #TEXTBOX
-		dc.w $FFFF
+		clsTxt
 		move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		jsr     j_MainMenuActions
 		jsr     j_CaravanActions
-		bra.w   loc_77DE
+		bra.w   byte_77DE       
 loc_7894:
 		bsr.w   sub_78BC
 		jsr     sub_10040
 		tst.b   d0
-		bne.w   loc_77DE
+		bne.w   byte_77DE       
 		bpl.s   loc_78B6
 		movem.l d0-a6,-(sp)
 		jsr     j_ChurchActions

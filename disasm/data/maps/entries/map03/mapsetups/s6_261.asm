@@ -6,8 +6,8 @@
 
 ms_map3_flag261_InitFunction:
 		
-		trap    #1
-		dc.w 3                  ; Jaha joined
+		 
+		chkFlg $3               ; Jaha joined
 		beq.s   return_513CC
 		lea     cs_513CE(pc), a0
 		trap    #6

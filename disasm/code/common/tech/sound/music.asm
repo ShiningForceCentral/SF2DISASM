@@ -8,12 +8,10 @@
 
 PlayMusicAfterCurrentOne:
 		
-		trap    #SOUND_COMMAND
-		dc.w SOUND_COMMAND_WAIT_MUSIC_END
+		 
+		sndCom SOUND_COMMAND_WAIT_MUSIC_END
 						; Wait for current music to end
-		trap    #SOUND_COMMAND
-		dc.w SOUND_COMMAND_GET_D0_PARAMETER
-						; get d0 value, if $FB : play previous music
+		sndCom SOUND_COMMAND_GET_D0_PARAMETER
 loc_16C6:
 		moveq   #3,d0
 		bsr.w   Sleep           

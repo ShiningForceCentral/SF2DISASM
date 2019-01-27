@@ -26,13 +26,12 @@ ms_map51_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C2F2:
-		trap    #CHECK_FLAG
-		dc.w $1D6
+		 
+		chkFlg $1D6             ; set after you approach the pond to rescue Elric at the Harpy Pond
 		bne.s   return_5C302
 		lea     cs_5C312(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $1D6               ; set after you approach the pond to rescue Elric at the Harpy Pond
+		setFlg $1D6             ; set after you approach the pond to rescue Elric at the Harpy Pond
 return_5C302:
 		rts
 
@@ -42,8 +41,8 @@ return_5C302:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C304:
-		trap    #CHECK_FLAG
-		dc.w $1D6
+		 
+		chkFlg $1D6             ; set after you approach the pond to rescue Elric at the Harpy Pond
 		bne.s   return_5C310
 		lea     cs_5C3AA(pc), a0
 		trap    #6

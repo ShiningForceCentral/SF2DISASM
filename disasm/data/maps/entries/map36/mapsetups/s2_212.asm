@@ -18,15 +18,13 @@ ms_map36_flag212_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D954:
-		trap    #CHECK_FLAG
-		dc.w $32B
+		 
+		chkFlg $32B             ; set after Frayja asks to go to Moun with you
 		bne.s   return_5D968
 		lea     cs_5DA28(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $32B               ; set after Frayja asks to go to Moun with you
-		trap    #SET_FLAG
-		dc.w $52                ; Frayja is a follower
+		setFlg $32B             ; set after Frayja asks to go to Moun with you
+		setFlg $52              ; Frayja is a follower
 return_5D968:
 		rts
 
@@ -36,8 +34,8 @@ return_5D968:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D96A:
-		trap    #TEXTBOX
-		dc.w $CEC               ; "Thanks to the rain, I'm fine.{W1}"
+		 
+		txt $CEC                ; "Thanks to the rain, I'm fine.{W1}"
 		rts
 
 	; End of function sub_5D96A
@@ -46,10 +44,9 @@ sub_5D96A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D970:
-		trap    #TEXTBOX
-		dc.w $CED               ; "The devils escaped when they{N}saw our soldiers. {W2}"
-		trap    #TEXTBOX
-		dc.w $CEE               ; "They're such chickens!{W1}"
+		 
+		txt $CED                ; "The devils escaped when they{N}saw our soldiers. {W2}"
+		txt $CEE                ; "They're such chickens!{W1}"
 		rts
 
 	; End of function sub_5D970
@@ -58,10 +55,9 @@ sub_5D970:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D97A:
-		trap    #TEXTBOX
-		dc.w $CEF               ; "Vicar {NAME;22} wants to go{N}to Moun and save the people.{W2}"
-		trap    #TEXTBOX
-		dc.w $CF0               ; "But, the devils will surge{N}into Parmecia as soon as{N}he opens the gate!{W1}"
+		 
+		txt $CEF                ; "Vicar {NAME;22} wants to go{N}to Moun and save the people.{W2}"
+		txt $CF0                ; "But, the devils will surge{N}into Parmecia as soon as{N}he opens the gate!{W1}"
 		rts
 
 	; End of function sub_5D97A
@@ -70,8 +66,8 @@ sub_5D97A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D984:
-		trap    #TEXTBOX
-		dc.w $CF1               ; "I'm no longer thirsty,{N}but I'm not totally healthy{N}yet.{W1}"
+		 
+		txt $CF1                ; "I'm no longer thirsty,{N}but I'm not totally healthy{N}yet.{W1}"
 		rts
 
 	; End of function sub_5D984
@@ -80,16 +76,13 @@ sub_5D984:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D98A:
-		trap    #CHECK_FLAG
-		dc.w $101
-		bne.s   loc_5D998
-		trap    #TEXTBOX
-		dc.w $CF2               ; "Practice!  Who needs{N}practice?!  Ha!{W2}"
-		trap    #SET_FLAG
-		dc.w $101
-loc_5D998:
-		trap    #TEXTBOX
-		dc.w $CF3               ; "Oooh...I can't lift this{N}spear!{W1}"
+		 
+		chkFlg $101             ; Temporary map setup flag 01
+		bne.s   byte_5D998      
+		txt $CF2                ; "Practice!  Who needs{N}practice?!  Ha!{W2}"
+		setFlg $101             ; Temporary map setup flag 01
+byte_5D998:
+		txt $CF3                ; "Oooh...I can't lift this{N}spear!{W1}"
 		rts
 
 	; End of function sub_5D98A
@@ -98,10 +91,9 @@ loc_5D998:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D99E:
-		trap    #TEXTBOX
-		dc.w $CF4               ; "I just saw a warrior who{N}came from the south a year{N}ago.{W2}"
-		trap    #TEXTBOX
-		dc.w $CF5               ; "He was shocked to find out{N}that the tunnel was blocked,{N}and went to Moun.{W1}"
+		 
+		txt $CF4                ; "I just saw a warrior who{N}came from the south a year{N}ago.{W2}"
+		txt $CF5                ; "He was shocked to find out{N}that the tunnel was blocked,{N}and went to Moun.{W1}"
 		rts
 
 	; End of function sub_5D99E
@@ -110,10 +102,9 @@ sub_5D99E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D9A8:
-		trap    #TEXTBOX
-		dc.w $CF6               ; "Thank you, strangers!{N}You saved us!{W2}"
-		trap    #TEXTBOX
-		dc.w $CF7               ; "But I didn't think we would{N}be saved by humans!{W1}"
+		 
+		txt $CF6                ; "Thank you, strangers!{N}You saved us!{W2}"
+		txt $CF7                ; "But I didn't think we would{N}be saved by humans!{W1}"
 		rts
 
 	; End of function sub_5D9A8
@@ -122,12 +113,10 @@ sub_5D9A8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5D9B2:
-		trap    #TEXTBOX
-		dc.w $CF8               ; "The King is a little upset.{W2}"
-		trap    #TEXTBOX
-		dc.w $CF9               ; "We've always believed that{N}centaurs were the best{N}warriors.{W2}"
-		trap    #TEXTBOX
-		dc.w $CFA               ; "But we were wrong.{N}I understand now.{W1}"
+		 
+		txt $CF8                ; "The King is a little upset.{W2}"
+		txt $CF9                ; "We've always believed that{N}centaurs were the best{N}warriors.{W2}"
+		txt $CFA                ; "But we were wrong.{N}I understand now.{W1}"
 		rts
 
 	; End of function sub_5D9B2

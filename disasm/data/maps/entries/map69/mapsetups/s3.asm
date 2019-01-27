@@ -28,11 +28,10 @@ CheckRandomBattle17:
 ; =============== S U B R O U T I N E =======================================
 
 sub_4FDBE:
-		trap    #CHECK_FLAG
-		dc.w $1FD               ; Battle 9 completed
+		 
+		chkFlg $1FD             ; Battle 9 completed
 		bne.s   return_4FDD0
-		trap    #SET_FLAG
-		dc.w $199               ; Battle 9 unlocked
+		setFlg $199             ; Battle 9 unlocked
 		move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_4FDD0:
 		rts

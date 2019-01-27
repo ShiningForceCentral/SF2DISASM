@@ -50,11 +50,9 @@ loc_25B58:
 loc_25B64:
 		add.w   d1,d0
 		bne.s   loc_25BAA
-		trap    #SOUND_COMMAND
-		dc.w SOUND_COMMAND_FADE_OUT
+		sndCom SOUND_COMMAND_FADE_OUT
 		bsr.w   sub_25A6C
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_HEADQUARTERS ; headquarters
+		sndCom MUSIC_HEADQUARTERS
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_DEACTIVATE
 		dc.l VInt_UpdateEntities
@@ -68,11 +66,9 @@ loc_25B64:
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_ACTIVATE
 		dc.l VInt_UpdateEntities
-		trap    #SOUND_COMMAND
-		dc.w SOUND_COMMAND_FADE_OUT
+		sndCom SOUND_COMMAND_FADE_OUT
 		bsr.w   sub_25A74
-		trap    #SOUND_COMMAND
-		dc.w SOUND_COMMAND_PLAY_PREVIOUS_MUSIC
+		sndCom SOUND_COMMAND_PLAY_PREVIOUS_MUSIC
 		bra.w   return_25BF2
 loc_25BAA:
 		bsr.w   GetActivatedEntity

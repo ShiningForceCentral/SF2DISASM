@@ -106,7 +106,7 @@ sub_441AA:
 		cmpi.b  #2,((PLAYER_TYPE-$1000000)).w
 		beq.w   loc_44262
 		cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
-		beq.w   loc_441F0
+		beq.w   byte_441F0      
 		mulu.w  #$180,d1
 		mulu.w  #$180,d2
 		lea     ((FOLLOWERS_LIST-$1000000)).w,a0
@@ -115,16 +115,15 @@ loc_441D2:
 		clr.w   d0
 		move.b  (a0)+,d0
 		cmpi.b  #$FF,d0
-		beq.s   loc_441F0
+		beq.s   byte_441F0      
 		lsl.w   #5,d0
 		move.w  d1,(a1,d0.w)
 		move.w  d2,2(a1,d0.w)
 		move.w  d1,$C(a1,d0.w)
 		move.w  d2,$E(a1,d0.w)
 		bra.s   loc_441D2
-loc_441F0:
-		trap    #CHECK_FLAG
-		dc.w $40                ; Raft is unlocked (0x05264)
+byte_441F0:
+		chkFlg $40              ; Raft is unlocked (0x05264)
 		beq.w   loc_44262
 		move.b  ((CURRENT_MAP-$1000000)).w,d0
 		cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0

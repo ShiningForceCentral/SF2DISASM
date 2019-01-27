@@ -25,8 +25,8 @@ entevt_5F9F6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9F8:
-		trap    #TEXTBOX
-		dc.w $D24               ; "Was it...too wild?{W1}"
+		 
+		txt $D24                ; "Was it...too wild?{W1}"
 		rts
 
 	; End of function sub_5F9F8
@@ -35,13 +35,12 @@ sub_5F9F8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9FE:
-		trap    #CHECK_FLAG
-		dc.w $101
+		 
+		chkFlg $101             ; Temporary map setup flag 01
 		bne.s   return_5FA0E
 		lea     cs_5FB30(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $101
+		setFlg $101             ; Temporary map setup flag 01
 return_5FA0E:
 		rts
 
@@ -51,15 +50,13 @@ return_5FA0E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5FA10:
-		trap    #CHECK_FLAG
-		dc.w $101
-		bne.s   loc_5FA1C
-		trap    #TEXTBOX
-		dc.w $D23               ; "{LEADER}, come on!{W1}"
+		 
+		chkFlg $101             ; Temporary map setup flag 01
+		bne.s   byte_5FA1C      
+		txt $D23                ; "{LEADER}, come on!{W1}"
 		bra.s   return_5FA20
-loc_5FA1C:
-		trap    #TEXTBOX
-		dc.w $D2A               ; "We must finish our{N}preparations before Geshp{N}finds us.{W1}"
+byte_5FA1C:
+		txt $D2A                ; "We must finish our{N}preparations before Geshp{N}finds us.{W1}"
 return_5FA20:
 		rts
 

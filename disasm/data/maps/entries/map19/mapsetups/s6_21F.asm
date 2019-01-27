@@ -6,47 +6,40 @@
 
 ms_map19_flag21F_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $19
-		bne.s   loc_62CAE
+		 
+		chkFlg $19              ; Shiela joined
+		bne.s   byte_62CAE      
 		move.w  #$19,d0
 		jsr     MoveEntityOutOfMap
-loc_62CAE:
-		trap    #CHECK_FLAG
-		dc.w 8
-		bne.s   loc_62CBE
+byte_62CAE:
+		chkFlg $8               ; May joined
+		bne.s   byte_62CBE      
 		move.w  #8,d0
 		jsr     MoveEntityOutOfMap
-loc_62CBE:
-		trap    #CHECK_FLAG
-		dc.w $1B
+byte_62CBE:
+		chkFlg $1B              ; Chaz joined
 		bne.s   loc_62CCE
 		move.w  #$1B,d0
 		jsr     MoveEntityOutOfMap
 loc_62CCE:
 		lea     cs_62D06(pc), a0
 		trap    #6
-		trap    #CHECK_FLAG
-		dc.w $3D5
-		beq.s   loc_62CFC
-		trap    #CHECK_FLAG
-		dc.w $3D6
-		bne.s   loc_62CF2
+		chkFlg $3D5
+		beq.s   byte_62CFC
+		chkFlg $3D6
+		bne.s   byte_62CF2
 		lea     cs_62D0E(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $3D6
+		setFlg $3D6
 		move.b  #$FF,((FOLLOWERS_LIST-$1000000)).w
 		bra.s   loc_62CFA
-loc_62CF2:
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_TOWN
+byte_62CF2:
+		sndCom MUSIC_TOWN
 		jsr     (FadeInFromBlack).w
 loc_62CFA:
 		bra.s   return_62D04
-loc_62CFC:
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_TOWN
+byte_62CFC:
+		sndCom MUSIC_TOWN
 		jsr     (FadeInFromBlack).w
 return_62D04:
 		rts

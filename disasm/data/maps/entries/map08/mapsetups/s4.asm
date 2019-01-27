@@ -60,18 +60,18 @@ word_561FC:     dc.w $50F
 		dc.w $F12
 		dc.b 0
 		dc.b 1
-		dc.w loc_562BA-word_561FC
+		dc.w byte_562BA-word_561FC
 		dc.w $1012
 		dc.b 0
 		dc.b 1
-		dc.w loc_562BA-word_561FC
+		dc.w byte_562BA-word_561FC
 		dc.w $FD00
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_56246:
-		trap    #CHECK_FLAG
-		dc.w $2C4               ; set after the scene in Ribble where the mayor confronts Bowie
+		 
+		chkFlg $2C4             ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   loc_56256
 		move.w  #$546,d0
 		jsr     (DisplayText).w 
@@ -91,8 +91,8 @@ return_5626A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5626C:
-		trap    #CHECK_FLAG
-		dc.w $2C4               ; set after the scene in Ribble where the mayor confronts Bowie
+		 
+		chkFlg $2C4             ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   loc_56284
 		move.w  #$547,d0
 		jsr     (DisplayText).w 
@@ -122,9 +122,8 @@ sub_5629A:
 		jsr     (DisplayText).w 
 		move.w  #$550,d0
 		jmp     (DisplayText).w 
-loc_562BA:
-		trap    #CHECK_FLAG
-		dc.w $2DB               ; set after you open the tree in Ribble with the wooden plank
+byte_562BA:
+		chkFlg $2DB             ; set after you open the tree in Ribble with the wooden plank
 		bne.s   loc_562CA
 		move.w  #$54A,d0
 		jmp     (DisplayText).w 

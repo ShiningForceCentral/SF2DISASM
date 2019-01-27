@@ -22,29 +22,23 @@ nullsub_94:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5AA98:
-		trap    #CHECK_FLAG
-		dc.w $306
-		bne.s   loc_5AAAA
+		 
+		chkFlg $306             ; set after the first scene with Goliath at Creed's Mansion
+		bne.s   byte_5AAAA      
 		lea     cs_5AC58(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $306               ; set after the first scene with Goliath at Creed's Mansion
+		setFlg $306             ; set after the first scene with Goliath at Creed's Mansion
 		bra.s   return_5AAC8
-loc_5AAAA:
-		trap    #CHECK_FLAG
-		dc.w $311
+byte_5AAAA:
+		chkFlg $311             ; set after the fairy tags along at Creed's
 		beq.s   return_5AAC8
-		trap    #CHECK_FLAG
-		dc.w $312
+		chkFlg $312             ; set after Oddler elects to stay behind at Creed's Mansion
 		bne.s   return_5AAC8
 		lea     cs_5B466(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $312               ; set after Oddler elects to stay behind at Creed's Mansion
-		trap    #SET_FLAG
-		dc.w $45                ; Fairy is a follower
-		trap    #CLEAR_FLAG
-		dc.w $44                ; Oddler is a follower
+		setFlg $312             ; set after Oddler elects to stay behind at Creed's Mansion
+		setFlg $45              ; Fairy is a follower
+		clrFlg $44              ; Oddler is a follower
 return_5AAC8:
 		rts
 
@@ -54,8 +48,8 @@ return_5AAC8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5AACA:
-		trap    #CHECK_FLAG
-		dc.w $30F
+		 
+		chkFlg $30F             ; set after the scene where Creed restores the Force and heads down the basement
 		bne.s   return_5AAD6
 		lea     cs_5AF36(pc), a0
 		trap    #6

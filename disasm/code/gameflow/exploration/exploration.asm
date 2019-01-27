@@ -893,7 +893,7 @@ loc_3ECC:
 		addi.w  #$80,d0 
 		addi.w  #$80,d2 
 		dbf     d7,loc_3EC8
-		bra.s   loc_3F06
+		bra.s   byte_3F06
 loc_3EEC:
 		movem.w d2/d6,-(sp)
 loc_3EF0:
@@ -903,9 +903,8 @@ loc_3EF0:
 		movem.w (sp)+,d2/d6
 		addi.w  #$80,d2 
 		dbf     d7,loc_3EEC
-loc_3F06:
-		trap    #SOUND_COMMAND
-		dc.w SFX_DOOR_OPEN      ; door open
+byte_3F06:
+		sndCom SFX_DOOR_OPEN
 		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		beq.s   loc_3F18
 		bset    #0,((byte_FFA82D-$1000000)).w
@@ -1088,8 +1087,7 @@ loc_40BE:
 		dbf     d7,loc_40BA
 loc_40D8:
 		move.w  #$FFFF,(a3)
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_NOTHING
+		sndCom MUSIC_NOTHING
 		bset    #0,((byte_FFA82D-$1000000)).w
 loc_40E6:
 		move.w  (sp)+,d7
@@ -1127,8 +1125,7 @@ loc_4130:
 		movem.w (sp)+,d2/d6
 		addi.w  #$80,d2 
 		dbf     d7,loc_412C
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_NOTHING
+		sndCom MUSIC_NOTHING
 		bset    #0,((byte_FFA82D-$1000000)).w
 loc_4150:
 		movem.w (sp)+,d7

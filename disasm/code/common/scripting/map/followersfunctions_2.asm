@@ -21,8 +21,7 @@ InitializeFollowerActscripts:
 		movem.l a6,-(sp)
 		lea     Followers(pc), a4
 		lea     pt_eas_Followers(pc), a6
-		trap    #CHECK_FLAG
-		dc.w $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
+		chkFlg $41              ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 		beq.s   loc_443D2
 		bsr.w   IsOverworldMap
 		beq.s   loc_443D2
@@ -55,15 +54,14 @@ loc_443FE:
 
 sub_44404:
 		cmpi.b  #2,((PLAYER_TYPE-$1000000)).w
-		bne.s   loc_44420
+		bne.s   byte_44420      
 		move.b  #$3D,((ENTITY_MAPSPRITE-$1000000)).w 
 		bsr.w   sub_4446C
 		move.w  #$40,d1 
 		move.w  d1,d2
 		bra.w   loc_4443C
-loc_44420:
-		trap    #CHECK_FLAG
-		dc.w $40                ; Raft is unlocked (0x05264)
+byte_44420:
+		chkFlg $40              ; Raft is unlocked (0x05264)
 		beq.w   return_4446A
 		move.b  ((CURRENT_MAP-$1000000)).w,d0
 		cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0

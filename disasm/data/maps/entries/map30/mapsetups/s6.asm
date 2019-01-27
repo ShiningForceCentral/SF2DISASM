@@ -6,14 +6,13 @@
 
 ms_map30_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $2F9
-		beq.s   loc_5A2FE
+		 
+		chkFlg $2F9             ; set after the dwarf gives Bowie the cannon
+		beq.s   byte_5A2FE      
 		lea     cs_5A30C(pc), a0
 		trap    #6
-loc_5A2FE:
-		trap    #CHECK_FLAG
-		dc.w $2F8
+byte_5A2FE:
+		chkFlg $2F8             ; set after the fairy cures the sick dwarf in the mine
 		bne.s   return_5A30A
 		lea     cs_5A31E(pc), a0
 		trap    #6

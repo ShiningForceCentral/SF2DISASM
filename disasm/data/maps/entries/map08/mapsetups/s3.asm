@@ -17,18 +17,15 @@ ms_map8_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_561BE:
-		trap    #CHECK_FLAG
-		dc.w $2C4
+		 
+		chkFlg $2C4             ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   return_561D8
-		trap    #CHECK_FLAG
-		dc.w $102
+		chkFlg $102             ; Temporary map setup flag 02
 		bne.s   return_561D8
 		lea     cs_563B2(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2BF               ; set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
-		trap    #SET_FLAG
-		dc.w $102
+		setFlg $2BF             ; set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
+		setFlg $102             ; Temporary map setup flag 02
 return_561D8:
 		rts
 
@@ -38,13 +35,12 @@ return_561D8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_561DA:
-		trap    #CHECK_FLAG
-		dc.w $2C4
+		 
+		chkFlg $2C4             ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   return_561EA
 		lea     cs_56422(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2C4               ; set after the scene in Ribble where the mayor confronts Bowie
+		setFlg $2C4             ; set after the scene in Ribble where the mayor confronts Bowie
 return_561EA:
 		rts
 

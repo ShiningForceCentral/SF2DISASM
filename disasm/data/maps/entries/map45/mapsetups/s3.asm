@@ -19,8 +19,8 @@ nullsub_103:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6006A:
-		trap    #CHECK_FLAG
-		dc.w $19
+		 
+		chkFlg $19              ; Shiela joined
 		bne.s   return_60076
 		lea     cs_600CE(pc), a0
 		trap    #6

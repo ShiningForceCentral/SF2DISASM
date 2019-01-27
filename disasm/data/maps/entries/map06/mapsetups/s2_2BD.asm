@@ -21,37 +21,32 @@ ms_map6_flag2BD_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_549C0:
-		trap    #CHECK_FLAG
-		dc.w $2BE
-		bne.s   loc_549D0
-		trap    #TEXTBOX
-		dc.w $3FF               ; "May I help...oh, sorry.{W2}"
-		trap    #TEXTBOX
-		dc.w $400               ; "Old habits die hard.{W1}"
+		 
+		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+		bne.s   byte_549D0      
+		txt $3FF                ; "May I help...oh, sorry.{W2}"
+		txt $400                ; "Old habits die hard.{W1}"
 		bra.s   return_54A0C
-loc_549D0:
-		trap    #CHECK_FLAG
-		dc.w $322
+byte_549D0:
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
 		bne.s   loc_549F2
 		cmpi.b  #1,((byte_FFB651-$1000000)).w
-		bne.s   loc_549EC
+		bne.s   byte_549EC      
 		move.b  #$11,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		bra.s   loc_549F0
-loc_549EC:
-		trap    #TEXTBOX
-		dc.w $40C               ; "I'll miss you, {LEADER}.{N}I must find another customer.{W1}"
+byte_549EC:
+		txt $40C                ; "I'll miss you, {LEADER}.{N}I must find another customer.{W1}"
 loc_549F0:
 		bra.s   return_54A0C
 loc_549F2:
 		cmpi.b  #1,((byte_FFB651-$1000000)).w
-		bne.s   loc_54A08
+		bne.s   byte_54A08      
 		move.b  #$17,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		bra.s   return_54A0C
-loc_54A08:
-		trap    #TEXTBOX
-		dc.w $44B               ; "I've a large stock 'cause I{N}heard about the war.  Buy now.{W1}"
+byte_54A08:
+		txt $44B                ; "I've a large stock 'cause I{N}heard about the war.  Buy now.{W1}"
 return_54A0C:
 		rts
 
@@ -61,27 +56,21 @@ return_54A0C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54A0E:
-		trap    #CHECK_FLAG
-		dc.w $322
-		bne.s   loc_54A2E
-		trap    #CHECK_FLAG
-		dc.w $2BE
-		bne.s   loc_54A24
-		trap    #TEXTBOX
-		dc.w $3FD               ; "Papa is out now.{W2}"
-		trap    #TEXTBOX
-		dc.w $3FE               ; "He ran outside to see{N}the bird.{W1}"
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		bne.s   byte_54A2E      
+		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+		bne.s   byte_54A24      
+		txt $3FD                ; "Papa is out now.{W2}"
+		txt $3FE                ; "He ran outside to see{N}the bird.{W1}"
 		bra.s   loc_54A2C
-loc_54A24:
-		trap    #TEXTBOX
-		dc.w $40D               ; "My father said...you would{N}be a nice boy for me to{N}marry someday!{W2}"
-		trap    #TEXTBOX
-		dc.w $40E               ; "Oh, it's embarrassing!{W1}"
+byte_54A24:
+		txt $40D                ; "My father said...you would{N}be a nice boy for me to{N}marry someday!{W2}"
+		txt $40E                ; "Oh, it's embarrassing!{W1}"
 loc_54A2C:
 		bra.s   return_54A32
-loc_54A2E:
-		trap    #TEXTBOX
-		dc.w $44C               ; "You're back, darling!{N}Oh, you're leaving again?{W1}"
+byte_54A2E:
+		txt $44C                ; "You're back, darling!{N}Oh, you're leaving again?{W1}"
 return_54A32:
 		rts
 
@@ -91,37 +80,28 @@ return_54A32:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54A34:
-		trap    #CHECK_FLAG
-		dc.w $322
-		bne.s   loc_54A60
-		trap    #CHECK_FLAG
-		dc.w $2BE
-		bne.s   loc_54A56
-		trap    #CHECK_FLAG
-		dc.w $2BD
-		bne.s   loc_54A50
-		trap    #TEXTBOX
-		dc.w $403               ; "{LEADER}!  Your father{N}was also very curious.{W2}"
-		trap    #TEXTBOX
-		dc.w $404               ; "He must be indigenous to{N}the mainland.{W1}"
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		bne.s   byte_54A60      
+		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+		bne.s   byte_54A56      
+		chkFlg $2BD             ; set after the scene with Peter and the kids in New Granseal
+		bne.s   byte_54A50      
+		txt $403                ; "{LEADER}!  Your father{N}was also very curious.{W2}"
+		txt $404                ; "He must be indigenous to{N}the mainland.{W1}"
 		bra.s   loc_54A54
-loc_54A50:
-		trap    #TEXTBOX
-		dc.w $421               ; "That was pretty fun!{N}I'm going home.{W1}"
+byte_54A50:
+		txt $421                ; "That was pretty fun!{N}I'm going home.{W1}"
 loc_54A54:
 		bra.s   loc_54A5E
-loc_54A56:
-		trap    #TEXTBOX
-		dc.w $40F               ; "You're leaving again?{N}Under King's order?{W2}"
-		trap    #TEXTBOX
-		dc.w $410               ; "Of course, I'll miss you,{N}but this'll be a good{N}experience for you.{W1}"
+byte_54A56:
+		txt $40F                ; "You're leaving again?{N}Under King's order?{W2}"
+		txt $410                ; "Of course, I'll miss you,{N}but this'll be a good{N}experience for you.{W1}"
 loc_54A5E:
 		bra.s   return_54A68
-loc_54A60:
-		trap    #TEXTBOX
-		dc.w $44D               ; "You brought so many friends{N}this time.{W2}"
-		trap    #TEXTBOX
-		dc.w $44E               ; "You're loved by everyone,{N}my son!{W1}"
+byte_54A60:
+		txt $44D                ; "You brought so many friends{N}this time.{W2}"
+		txt $44E                ; "You're loved by everyone,{N}my son!{W1}"
 return_54A68:
 		rts
 
@@ -131,35 +111,27 @@ return_54A68:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54A6A:
-		trap    #CHECK_FLAG
-		dc.w $322
-		bne.s   loc_54A96
-		trap    #CHECK_FLAG
-		dc.w $2BE
-		bne.s   loc_54A8C
-		trap    #CHECK_FLAG
-		dc.w $2BD
-		bne.s   loc_54A86
-		trap    #TEXTBOX
-		dc.w $406               ; "Wow!  It's very big!{N}He doesn't wear anything!{W2}"
-		trap    #TEXTBOX
-		dc.w $407               ; "I've seen many animal-like{N}races here, but they all{N}wore clothes!{W1}"
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		bne.s   byte_54A96      
+		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+		bne.s   byte_54A8C      
+		chkFlg $2BD             ; set after the scene with Peter and the kids in New Granseal
+		bne.s   byte_54A86      
+		txt $406                ; "Wow!  It's very big!{N}He doesn't wear anything!{W2}"
+		txt $407                ; "I've seen many animal-like{N}races here, but they all{N}wore clothes!{W1}"
 		bra.s   loc_54A8A
-loc_54A86:
-		trap    #TEXTBOX
-		dc.w $422               ; "It was surprising!{N}The bird spoke!{W1}"
+byte_54A86:
+		txt $422                ; "It was surprising!{N}The bird spoke!{W1}"
 loc_54A8A:
 		bra.s   loc_54A94
-loc_54A8C:
-		trap    #TEXTBOX
-		dc.w $411               ; "{LEADER}, you look so sad.{W2}"
-		trap    #TEXTBOX
-		dc.w $412               ; "Are you going somewhere?{W1}"
+byte_54A8C:
+		txt $411                ; "{LEADER}, you look so sad.{W2}"
+		txt $412                ; "Are you going somewhere?{W1}"
 loc_54A94:
 		bra.s   return_54A9A
-loc_54A96:
-		trap    #TEXTBOX
-		dc.w $44F               ; "You've grown up so quickly!{W1}"
+byte_54A96:
+		txt $44F                ; "You've grown up so quickly!{W1}"
 return_54A9A:
 		rts
 
@@ -169,31 +141,26 @@ return_54A9A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54A9C:
-		trap    #CHECK_FLAG
-		dc.w $322
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
 		bne.s   loc_54AD0
-		trap    #CHECK_FLAG
-		dc.w $2BE
+		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
 		bne.s   loc_54ABA
-		trap    #CHECK_FLAG
-		dc.w $2BD
-		bne.s   loc_54AB4
-		trap    #TEXTBOX
-		dc.w $408               ; "Mmmmm!  He's shining.{N}Is this a bird or a god?{W1}"
+		chkFlg $2BD             ; set after the scene with Peter and the kids in New Granseal
+		bne.s   byte_54AB4      
+		txt $408                ; "Mmmmm!  He's shining.{N}Is this a bird or a god?{W1}"
 		bra.s   loc_54AB8
-loc_54AB4:
-		trap    #TEXTBOX
-		dc.w $423               ; "See, that bird is special!{N}He belongs to a god!{W1}"
+byte_54AB4:
+		txt $423                ; "See, that bird is special!{N}He belongs to a god!{W1}"
 loc_54AB8:
 		bra.s   loc_54ACE
 loc_54ABA:
 		cmpi.b  #1,((byte_FFB651-$1000000)).w
-		bne.s   loc_54ACA
+		bne.s   byte_54ACA      
 		jsr     j_ChurchActions
 		bra.s   loc_54ACE
-loc_54ACA:
-		trap    #TEXTBOX
-		dc.w $413               ; "I'd at least like to have{N}a roof.{W1}"
+byte_54ACA:
+		txt $413                ; "I'd at least like to have{N}a roof.{W1}"
 loc_54ACE:
 		bra.s   return_54AD6
 loc_54AD0:
@@ -207,47 +174,39 @@ return_54AD6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54AD8:
-		trap    #CHECK_FLAG
-		dc.w $2BE
-		bne.s   loc_54AF4
-		trap    #CHECK_FLAG
-		dc.w $2BD
-		bne.s   loc_54AEE
-		trap    #TEXTBOX
-		dc.w $401               ; "You know, I never leave{N}my shop.{W2}"
-		trap    #TEXTBOX
-		dc.w $402               ; "I didn't know birds like{N}this existed!{W1}"
+		 
+		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+		bne.s   byte_54AF4      
+		chkFlg $2BD             ; set after the scene with Peter and the kids in New Granseal
+		bne.s   byte_54AEE      
+		txt $401                ; "You know, I never leave{N}my shop.{W2}"
+		txt $402                ; "I didn't know birds like{N}this existed!{W1}"
 		bra.s   loc_54AF2
-loc_54AEE:
-		trap    #TEXTBOX
-		dc.w $420               ; "The bird is gone.{N}Now, back to work!{W1}"
+byte_54AEE:
+		txt $420                ; "The bird is gone.{N}Now, back to work!{W1}"
 loc_54AF2:
 		bra.s   return_54B34
-loc_54AF4:
-		trap    #CHECK_FLAG
-		dc.w $322
+byte_54AF4:
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
 		bne.s   loc_54B1A
 		cmpi.b  #1,((byte_FFB651-$1000000)).w
-		bne.s   loc_54B10
+		bne.s   byte_54B10      
 		move.b  #2,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		bra.s   loc_54B18
-loc_54B10:
-		trap    #TEXTBOX
-		dc.w $414               ; "I can't make any decent{N}weapons now.{W2}"
-		trap    #TEXTBOX
-		dc.w $415               ; "I want to go back to{N}Grans....{W1}"
+byte_54B10:
+		txt $414                ; "I can't make any decent{N}weapons now.{W2}"
+		txt $415                ; "I want to go back to{N}Grans....{W1}"
 loc_54B18:
 		bra.s   return_54B34
 loc_54B1A:
 		cmpi.b  #1,((byte_FFB651-$1000000)).w
-		bne.s   loc_54B30
+		bne.s   byte_54B30      
 		move.b  #8,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		bra.s   return_54B34
-loc_54B30:
-		trap    #TEXTBOX
-		dc.w $450               ; "We have various kinds of{N}weapons, thanks to the{N}trading.{W1}"
+byte_54B30:
+		txt $450                ; "We have various kinds of{N}weapons, thanks to the{N}trading.{W1}"
 return_54B34:
 		rts
 
@@ -257,23 +216,19 @@ return_54B34:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54B36:
-		trap    #CHECK_FLAG
-		dc.w $322
-		bne.s   loc_54B4E
-		trap    #CHECK_FLAG
-		dc.w $2BE
-		bne.s   loc_54B48
-		trap    #TEXTBOX
-		dc.w $405               ; "What a big bird!{N}How beautiful!{N}It's legendary!{W1}"
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		bne.s   byte_54B4E      
+		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+		bne.s   byte_54B48      
+		txt $405                ; "What a big bird!{N}How beautiful!{N}It's legendary!{W1}"
 		bra.s   loc_54B4C
-loc_54B48:
-		trap    #TEXTBOX
-		dc.w $416               ; "That's a phoenix!{N}I feel very lucky to{N}see him in my lifetime!{W1}"
+byte_54B48:
+		txt $416                ; "That's a phoenix!{N}I feel very lucky to{N}see him in my lifetime!{W1}"
 loc_54B4C:
 		bra.s   return_54B52
-loc_54B4E:
-		trap    #TEXTBOX
-		dc.w $451               ; "Disaster again?{W1}"
+byte_54B4E:
+		txt $451                ; "Disaster again?{W1}"
 return_54B52:
 		rts
 
@@ -283,31 +238,25 @@ return_54B52:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54B54:
-		trap    #CHECK_FLAG
-		dc.w $322
-		bne.s   loc_54B78
-		trap    #CHECK_FLAG
-		dc.w $2BE
-		bne.s   loc_54B72
-		trap    #CHECK_FLAG
-		dc.w $2BD
-		bne.s   loc_54B6C
-		trap    #TEXTBOX
-		dc.w $409               ; "Hey, why don't you touch it?{N}It may be a stuffed animal!{W1}"
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		bne.s   byte_54B78      
+		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+		bne.s   byte_54B72      
+		chkFlg $2BD             ; set after the scene with Peter and the kids in New Granseal
+		bne.s   byte_54B6C      
+		txt $409                ; "Hey, why don't you touch it?{N}It may be a stuffed animal!{W1}"
 		bra.s   loc_54B70
-loc_54B6C:
-		trap    #TEXTBOX
-		dc.w $424               ; "Oh, it's you, {LEADER}.{N}I'll never forget you.{N}Thanks for saving me!{W1}"
+byte_54B6C:
+		txt $424                ; "Oh, it's you, {LEADER}.{N}I'll never forget you.{N}Thanks for saving me!{W1}"
 loc_54B70:
 		bra.s   loc_54B76
-loc_54B72:
-		trap    #TEXTBOX
-		dc.w $417               ; "This house will be completed{N}by the time you return.{W1}"
+byte_54B72:
+		txt $417                ; "This house will be completed{N}by the time you return.{W1}"
 loc_54B76:
 		bra.s   return_54B7C
-loc_54B78:
-		trap    #TEXTBOX
-		dc.w $452               ; "Hey, it's a nice house, isn't{N}it?{W1}"
+byte_54B78:
+		txt $452                ; "Hey, it's a nice house, isn't{N}it?{W1}"
 return_54B7C:
 		rts
 
@@ -317,25 +266,20 @@ return_54B7C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54B7E:
-		trap    #CHECK_FLAG
-		dc.w $322
-		bne.s   loc_54B96
-		trap    #CHECK_FLAG
-		dc.w $2BE
-		bne.s   loc_54B90
-		trap    #TEXTBOX
-		dc.w $40B               ; "This is boring!{W1}"
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		bne.s   byte_54B96      
+		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+		bne.s   byte_54B90      
+		txt $40B                ; "This is boring!{W1}"
 		bra.s   loc_54B94
-loc_54B90:
-		trap    #TEXTBOX
-		dc.w $418               ; "Shhh...{N}I'm hiding here.{N}It's a secret!{W1}"
+byte_54B90:
+		txt $418                ; "Shhh...{N}I'm hiding here.{N}It's a secret!{W1}"
 loc_54B94:
 		bra.s   return_54B9E
-loc_54B96:
-		trap    #TEXTBOX
-		dc.w $453               ; "Anything exciting?{W2}"
-		trap    #TEXTBOX
-		dc.w $454               ; "A war against the devils?{N}No, no!{N}I don't want to go.{W1}"
+byte_54B96:
+		txt $453                ; "Anything exciting?{W2}"
+		txt $454                ; "A war against the devils?{N}No, no!{N}I don't want to go.{W1}"
 return_54B9E:
 		rts
 
@@ -345,15 +289,13 @@ return_54B9E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54BA0:
-		trap    #CHECK_FLAG
-		dc.w $322
-		bne.s   loc_54BAC
-		trap    #TEXTBOX
-		dc.w $419               ; "Are you ready?!{N}Hey, did you see my friends?{W1}"
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		bne.s   byte_54BAC      
+		txt $419                ; "Are you ready?!{N}Hey, did you see my friends?{W1}"
 		bra.s   return_54BB0
-loc_54BAC:
-		trap    #TEXTBOX
-		dc.w $455               ; "Welcome back, {LEADER}.{N}I know, you're going away{N}again soon.{W1}"
+byte_54BAC:
+		txt $455                ; "Welcome back, {LEADER}.{N}I know, you're going away{N}again soon.{W1}"
 return_54BB0:
 		rts
 
@@ -363,19 +305,15 @@ return_54BB0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54BB2:
-		trap    #CHECK_FLAG
-		dc.w $322
-		bne.s   loc_54BC2
-		trap    #TEXTBOX
-		dc.w $41A               ; "I'm looking towards the{N}north.{W2}"
-		trap    #TEXTBOX
-		dc.w $41B               ; "The northern half of this{N}landmass is always cloudy.{W1}"
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		bne.s   byte_54BC2      
+		txt $41A                ; "I'm looking towards the{N}north.{W2}"
+		txt $41B                ; "The northern half of this{N}landmass is always cloudy.{W1}"
 		bra.s   return_54BCA
-loc_54BC2:
-		trap    #TEXTBOX
-		dc.w $456               ; "I've been watching the{N}northern sky.{W2}"
-		trap    #TEXTBOX
-		dc.w $457               ; "I saw something big fall{N}from the sky to the north.{W1}"
+byte_54BC2:
+		txt $456                ; "I've been watching the{N}northern sky.{W2}"
+		txt $457                ; "I saw something big fall{N}from the sky to the north.{W1}"
 return_54BCA:
 		rts
 
@@ -385,35 +323,27 @@ return_54BCA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54BCC:
-		trap    #CHECK_FLAG
-		dc.w $322
-		bne.s   loc_54BF8
-		trap    #CHECK_FLAG
-		dc.w $2BE
-		bne.s   loc_54BEE
-		trap    #CHECK_FLAG
-		dc.w $2BD
-		bne.s   loc_54BE4
-		trap    #TEXTBOX
-		dc.w $40A               ; "I can't see!{N}I can't see!{W1}"
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		bne.s   byte_54BF8      
+		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+		bne.s   byte_54BEE      
+		chkFlg $2BD             ; set after the scene with Peter and the kids in New Granseal
+		bne.s   byte_54BE4      
+		txt $40A                ; "I can't see!{N}I can't see!{W1}"
 		bra.s   loc_54BEC
-loc_54BE4:
-		trap    #TEXTBOX
-		dc.w $425               ; "The Minister was upset...{W2}"
-		trap    #TEXTBOX
-		dc.w $426               ; "He looked at me scornfully.{N}I will be disciplined!{W1}"
+byte_54BE4:
+		txt $425                ; "The Minister was upset...{W2}"
+		txt $426                ; "He looked at me scornfully.{N}I will be disciplined!{W1}"
 loc_54BEC:
 		bra.s   loc_54BF6
-loc_54BEE:
-		trap    #TEXTBOX
-		dc.w $41C               ; "There is a village to the{N}east of here.{W2}"
-		trap    #TEXTBOX
-		dc.w $41D               ; "But everybody jumps into a{N}house when I try to talk{N}to them....{W1}"
+byte_54BEE:
+		txt $41C                ; "There is a village to the{N}east of here.{W2}"
+		txt $41D                ; "But everybody jumps into a{N}house when I try to talk{N}to them....{W1}"
 loc_54BF6:
 		bra.s   return_54BFC
-loc_54BF8:
-		trap    #TEXTBOX
-		dc.w $458               ; "How have you been,{N}{LEADER}.{N}Oh, you look strong.{W1}"
+byte_54BF8:
+		txt $458                ; "How have you been,{N}{LEADER}.{N}Oh, you look strong.{W1}"
 return_54BFC:
 		rts
 
@@ -423,15 +353,13 @@ return_54BFC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54BFE:
-		trap    #CHECK_FLAG
-		dc.w $322
-		bne.s   loc_54C0A
-		trap    #TEXTBOX
-		dc.w $41E               ; "Are my friends still playing?{N}Nobody came to find me.{W1}"
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		bne.s   byte_54C0A      
+		txt $41E                ; "Are my friends still playing?{N}Nobody came to find me.{W1}"
 		bra.s   return_54C0E
-loc_54C0A:
-		trap    #TEXTBOX
-		dc.w $459               ; "I'm not allowed to go out{N}'cause it's so dangerous.{W1}"
+byte_54C0A:
+		txt $459                ; "I'm not allowed to go out{N}'cause it's so dangerous.{W1}"
 return_54C0E:
 		rts
 
@@ -441,85 +369,64 @@ return_54C0E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54C10:
-		trap    #CHECK_FLAG
-		dc.w $322
-		bne.w   loc_54C32
-		trap    #CHECK_FLAG
-		dc.w $2BE
-		bne.s   loc_54C24
-		trap    #TEXTBOX
-		dc.w $41F               ; "Mmmmmm....{W1}"
+		 
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		bne.w   byte_54C32      
+		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+		bne.s   byte_54C24      
+		txt $41F                ; "Mmmmmm....{W1}"
 		bra.s   return_54C30
-loc_54C24:
-		trap    #TEXTBOX
-		dc.w $427               ; "Listen, I've invented{N}something!{N}An explosive!{W2}"
-		trap    #TEXTBOX
-		dc.w $428               ; "You can blow up the rocks{N}blocking the North Cave{N}with it!{W2}"
-		trap    #TEXTBOX
-		dc.w $429               ; "Ah...no you can't.{N}You'll be blown up too!{W1}"
+byte_54C24:
+		txt $427                ; "Listen, I've invented{N}something!{N}An explosive!{W2}"
+		txt $428                ; "You can blow up the rocks{N}blocking the North Cave{N}with it!{W2}"
+		txt $429                ; "Ah...no you can't.{N}You'll be blown up too!{W1}"
 return_54C30:
 		rts
-loc_54C32:
-		trap    #CHECK_FLAG
-		dc.w $324
-		bne.w   loc_54CC0
-		trap    #CHECK_FLAG
-		dc.w $325
+byte_54C32:
+		chkFlg $324             ; set after the dwarf gives you dynamite
+		bne.w   byte_54CC0      
+		chkFlg $325             ; set after coming back to New Granseal after Creed's Mansion,when Astral joins
 		bne.s   loc_54C4C
-		trap    #TEXTBOX
-		dc.w $45A               ; "Sir Astral forbids me to use{N}the dynamite.{W2}"
-		trap    #TEXTBOX
-		dc.w $45B               ; "I need his permission to give{N}it to you.{W1}"
+		txt $45A                ; "Sir Astral forbids me to use{N}the dynamite.{W2}"
+		txt $45B                ; "I need his permission to give{N}it to you.{W1}"
 		bra.w   loc_54CBE
 loc_54C4C:
 		moveq   #$72,d1 
 		jsr     j_sub_9146
 		cmpi.w  #$FFFF,d0
-		bne.s   loc_54C8E
-		trap    #TEXTBOX
-		dc.w $45C               ; "Sir Astral, may I give him{N}the dynamite?{W1}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		bne.s   byte_54C8E      
+		txt $45C                ; "Sir Astral, may I give him{N}the dynamite?{W1}"
+		clsTxt
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		move.w  #$1F,d0
 		jsr     GetEntityPortraitAndSpeechSfx
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
-		trap    #TEXTBOX
-		dc.w $45D               ; "It's too dangerous to use it{N}as it is.{W2}"
-		trap    #TEXTBOX
-		dc.w $45E               ; "We need some way to{N}detonate the dynamite{N}safely.{W1}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $45D                ; "It's too dangerous to use it{N}as it is.{W2}"
+		txt $45E                ; "We need some way to{N}detonate the dynamite{N}safely.{W1}"
+		clsTxt
 		bra.s   loc_54CBE
-loc_54C8E:
-		trap    #TEXTBOX
-		dc.w $45F               ; "Oh, that cannon would be{N}perfect!{W1}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+byte_54C8E:
+		txt $45F                ; "Oh, that cannon would be{N}perfect!{W1}"
+		clsTxt
 		lea     cs_54CC6(pc), a0
 		trap    #6
-		trap    #TEXTBOX
-		dc.w $460               ; "Sir Astral said it was OK!{N}Here is the explosive.{W1}"
-		trap    #TEXTBOX
-		dc.w $FFFF
+		txt $460                ; "Sir Astral said it was OK!{N}Here is the explosive.{W1}"
+		clsTxt
 		move.w  #$74,d0 
 		moveq   #0,d1
 		bsr.w   sub_4F48A
 		btst    #0,d0
-		bne.s   loc_54CBA
-		trap    #SET_FLAG
-		dc.w $324               ; set after the dwarf gives you dynamite
+		bne.s   byte_54CBA      
+		setFlg $324             ; set after the dwarf gives you dynamite
 		bra.s   loc_54CBE
-loc_54CBA:
-		trap    #TEXTBOX
-		dc.w $6C1               ; "Oh, your hands are full.{N}I'll give it to you later.{W1}"
+byte_54CBA:
+		txt $6C1                ; "Oh, your hands are full.{N}I'll give it to you later.{W1}"
 loc_54CBE:
 		bra.s   return_54CC4
-loc_54CC0:
-		trap    #TEXTBOX
-		dc.w $462               ; "Please destroy the rocks{N}blocking the cave!{W1}"
+byte_54CC0:
+		txt $462                ; "Please destroy the rocks{N}blocking the cave!{W1}"
 return_54CC4:
 		rts
 

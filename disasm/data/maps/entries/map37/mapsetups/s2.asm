@@ -260,8 +260,8 @@ sub_5F9A0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9A8:
-		trap    #TEXTBOX
-		dc.w $D30               ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
+		 
+		txt $D30                ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
 		rts
 
 	; End of function sub_5F9A8
@@ -297,8 +297,8 @@ sub_5F9BE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9C6:
-		trap    #TEXTBOX
-		dc.w $B                 ; "{LEADER}, take it easy!{W1}"
+		 
+		txt $B                  ; "{LEADER}, take it easy!{W1}"
 		rts
 
 	; End of function sub_5F9C6
@@ -307,8 +307,8 @@ sub_5F9C6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F9CC:
-		trap    #TEXTBOX
-		dc.w $B                 ; "{LEADER}, take it easy!{W1}"
+		 
+		txt $B                  ; "{LEADER}, take it easy!{W1}"
 entevt_5F9D0:
 		rts
 

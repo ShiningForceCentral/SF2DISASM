@@ -6,8 +6,8 @@
 
 ms_map51_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $1D6
+		 
+		chkFlg $1D6             ; set after you approach the pond to rescue Elric at the Harpy Pond
 		bne.s   return_5C3D6
 		lea     cs_5C3D8(pc), a0
 		trap    #6

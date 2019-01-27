@@ -13,7 +13,7 @@ LoadBattleMusic:
 		move.b  ((MAP_AREA_MUSIC_INDEX-$1000000)).w,d0
 loc_454C:
 		cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
-		beq.s   loc_4586
+		beq.s   byte_4586
 loc_4554:
 		cmpi.b  #0,d0
 		bne.s   loc_455E
@@ -33,11 +33,10 @@ loc_4572:
 		move.w  #MUSIC_BATTLE_THEME_1,d0
 loc_457C:
 		cmpi.b  #MUSIC_CASTLE,d0
-		bne.s   loc_4586
+		bne.s   byte_4586
 		move.w  #MUSIC_BATTLE_THEME_1,d0
-loc_4586:
-		trap    #SOUND_COMMAND
-		dc.w SOUND_COMMAND_GET_D0_PARAMETER
+byte_4586:
+		sndCom SOUND_COMMAND_GET_D0_PARAMETER
 		move.w  (sp)+,d0
 		rts
 

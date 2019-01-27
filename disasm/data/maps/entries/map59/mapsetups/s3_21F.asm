@@ -19,8 +19,8 @@ nullsub_106:
 ; =============== S U B R O U T I N E =======================================
 
 sub_615C0:
-		trap    #CHECK_FLAG
-		dc.w $21F
+		 
+		chkFlg $21F             ; Battle 43 completed
 		beq.s   return_615CC
 		lea     cs_62658(pc), a0
 		trap    #6

@@ -11,28 +11,21 @@ ms_map74_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5098C:
-		trap    #CHECK_FLAG
-		dc.w $20F               ; Battle 27 completed
-		bne.s   loc_509AC
-		trap    #SET_FLAG
-		dc.w $1AB               ; Battle 27 unlocked
+		 
+		chkFlg $20F             ; Battle 27 completed
+		bne.s   byte_509AC      
+		setFlg $1AB             ; Battle 27 unlocked
 		move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
-		trap    #SET_FLAG
-		dc.w $1AC               ; Battle 28 unlocked
-		trap    #SET_FLAG
-		dc.w $1AD               ; Battle 29 unlocked
-		trap    #SET_FLAG
-		dc.w $1AE               ; Battle 30 unlocked
+		setFlg $1AC             ; Battle 28 unlocked
+		setFlg $1AD             ; Battle 29 unlocked
+		setFlg $1AE             ; Battle 30 unlocked
 		bra.s   return_509C4
-loc_509AC:
-		trap    #CHECK_FLAG
-		dc.w $32B               ; set after Frayja asks to go to Moun with you
+byte_509AC:
+		chkFlg $32B             ; set after Frayja asks to go to Moun with you
 		beq.s   return_509C4
-		trap    #CHECK_FLAG
-		dc.w $214               ; Battle 32 completed
+		chkFlg $214             ; Battle 32 completed
 		bne.s   return_509C4
-		trap    #SET_FLAG
-		dc.w $1B0               ; Battle 32 unlocked
+		setFlg $1B0             ; Battle 32 unlocked
 		move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_509C4:
 		rts

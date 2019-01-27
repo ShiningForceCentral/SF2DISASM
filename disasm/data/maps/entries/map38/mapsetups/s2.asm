@@ -22,10 +22,9 @@ ms_map38_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DBB6:
-		trap    #TEXTBOX
-		dc.w $859               ; "Welcome to Roft.{W2}"
-		trap    #TEXTBOX
-		dc.w $85A               ; "Every peaceful person is{N}welcome!{W1}"
+		 
+		txt $859                ; "Welcome to Roft.{W2}"
+		txt $85A                ; "Every peaceful person is{N}welcome!{W1}"
 		rts
 
 	; End of function sub_5DBB6
@@ -34,8 +33,8 @@ sub_5DBB6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DBC0:
-		trap    #TEXTBOX
-		dc.w $85B               ; "Mr. Petro and Mr. Paseran{N}came from the south.{W1}"
+		 
+		txt $85B                ; "Mr. Petro and Mr. Paseran{N}came from the south.{W1}"
 		rts
 
 	; End of function sub_5DBC0
@@ -44,8 +43,8 @@ sub_5DBC0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DBC6:
-		trap    #TEXTBOX
-		dc.w $85C               ; "{NAME;26}, are you OK?{N}You were captured by the{N}devils!{W1}"
+		 
+		txt $85C                ; "{NAME;26}, are you OK?{N}You were captured by the{N}devils!{W1}"
 		rts
 
 	; End of function sub_5DBC6
@@ -54,8 +53,8 @@ sub_5DBC6:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DBCC:
-		trap    #TEXTBOX
-		dc.w $85D               ; "The devils kidnapped{N}Mr. Petro and stole the{N}Nazca Ship.{W1}"
+		 
+		txt $85D                ; "The devils kidnapped{N}Mr. Petro and stole the{N}Nazca Ship.{W1}"
 		rts
 
 	; End of function sub_5DBCC
@@ -64,12 +63,10 @@ sub_5DBCC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DBD2:
-		trap    #TEXTBOX
-		dc.w $85E               ; "Mr. Paseran came here{N}through the tunnel in the{N}south.{W2}"
-		trap    #TEXTBOX
-		dc.w $85F               ; "We've been told that devils{N}live there.{W2}"
-		trap    #TEXTBOX
-		dc.w $860               ; "And we have seen many{N}devils here since he came{N}to Roft.{W1}"
+		 
+		txt $85E                ; "Mr. Paseran came here{N}through the tunnel in the{N}south.{W2}"
+		txt $85F                ; "We've been told that devils{N}live there.{W2}"
+		txt $860                ; "And we have seen many{N}devils here since he came{N}to Roft.{W1}"
 		rts
 
 	; End of function sub_5DBD2
@@ -78,10 +75,9 @@ sub_5DBD2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DBE0:
-		trap    #TEXTBOX
-		dc.w $861               ; "Red Baron is a cruel killer.{W2}"
-		trap    #TEXTBOX
-		dc.w $862               ; "He has smeared his armor with{N}the blood of his enemies.{W1}"
+		 
+		txt $861                ; "Red Baron is a cruel killer.{W2}"
+		txt $862                ; "He has smeared his armor with{N}the blood of his enemies.{W1}"
 		rts
 
 	; End of function sub_5DBE0
@@ -90,12 +86,10 @@ sub_5DBE0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DBEA:
-		trap    #TEXTBOX
-		dc.w $863               ; "Do you know of Mithril?{W2}"
-		trap    #TEXTBOX
-		dc.w $864               ; "Mithril weapons are awfully{N}strong.{W2}"
-		trap    #TEXTBOX
-		dc.w $865               ; "They may help you in your{N}battles.{W1}"
+		 
+		txt $863                ; "Do you know of Mithril?{W2}"
+		txt $864                ; "Mithril weapons are awfully{N}strong.{W2}"
+		txt $865                ; "They may help you in your{N}battles.{W1}"
 		rts
 
 	; End of function sub_5DBEA
@@ -104,10 +98,9 @@ sub_5DBEA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DBF8:
-		trap    #TEXTBOX
-		dc.w $866               ; "We were able to find Mithril{N}on Grans before.{W2}"
-		trap    #TEXTBOX
-		dc.w $867               ; "The Dwarven Blacksmith lives{N}in Grans Forest.{W1}"
+		 
+		txt $866                ; "We were able to find Mithril{N}on Grans before.{W2}"
+		txt $867                ; "The Dwarven Blacksmith lives{N}in Grans Forest.{W1}"
 		rts
 
 	; End of function sub_5DBF8
@@ -116,8 +109,8 @@ sub_5DBF8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DC02:
-		trap    #TEXTBOX
-		dc.w $868               ; "Nobody but the Dwarven{N}Blacksmith can work with{N}Mithril.{W1}"
+		 
+		txt $868                ; "Nobody but the Dwarven{N}Blacksmith can work with{N}Mithril.{W1}"
 		rts
 
 	; End of function sub_5DC02
@@ -126,47 +119,34 @@ sub_5DC02:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DC08:
-		trap    #CHECK_FLAG
-		dc.w $38E
+		 
+		chkFlg $38E             ; set after the initial scene on entering Roft (where the guy thinks you're Galam)
 		beq.s   return_5DC54
-		trap    #CHECK_FLAG
-		dc.w $102
-		beq.s   loc_5DC34
-		trap    #CHECK_FLAG
-		dc.w $38F
+		chkFlg $102             ; Temporary map setup flag 02
+		beq.s   byte_5DC34      
+		chkFlg $38F             ; set after the Petro death scene in Roft
 		beq.s   loc_5DC32
-		trap    #CHECK_FLAG
-		dc.w $100
-		bne.s   loc_5DC2E
-		trap    #TEXTBOX
-		dc.w $871               ; "(Sob...sob...){N}He's gone....{W2}"
-		trap    #TEXTBOX
-		dc.w $872               ; "We never had a chance to fly{N}in the Nazca Ship!{W1}"
-		trap    #SET_FLAG
-		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
+		chkFlg $100             ; Temporary map setup flag 00
+		bne.s   byte_5DC2E      
+		txt $871                ; "(Sob...sob...){N}He's gone....{W2}"
+		txt $872                ; "We never had a chance to fly{N}in the Nazca Ship!{W1}"
+		setFlg $100             ; Temporary map setup flag 00
 		bra.s   loc_5DC32
-loc_5DC2E:
-		trap    #TEXTBOX
-		dc.w $871               ; "(Sob...sob...){N}He's gone....{W2}"
+byte_5DC2E:
+		txt $871                ; "(Sob...sob...){N}He's gone....{W2}"
 loc_5DC32:
 		bra.s   return_5DC54
-loc_5DC34:
-		trap    #CHECK_FLAG
-		dc.w $38F
+byte_5DC34:
+		chkFlg $38F             ; set after the Petro death scene in Roft
 		beq.s   return_5DC54
-		trap    #CHECK_FLAG
-		dc.w $100
-		bne.s   loc_5DC50
-		trap    #TEXTBOX
-		dc.w $875               ; "The Nazca Ship crashed?{W1}"
-		trap    #TEXTBOX
-		dc.w $876               ; "I hope Petro gets on the{N}Nazca Ship in the great{N}beyond.{W1}"
-		trap    #SET_FLAG
-		dc.w $100               ; .0118=apparently reset on map load, usually used to skip some lines of entities
+		chkFlg $100             ; Temporary map setup flag 00
+		bne.s   byte_5DC50      
+		txt $875                ; "The Nazca Ship crashed?{W1}"
+		txt $876                ; "I hope Petro gets on the{N}Nazca Ship in the great{N}beyond.{W1}"
+		setFlg $100             ; Temporary map setup flag 00
 		bra.w   return_5DC54
-loc_5DC50:
-		trap    #TEXTBOX
-		dc.w $875               ; "The Nazca Ship crashed?{W1}"
+byte_5DC50:
+		txt $875                ; "The Nazca Ship crashed?{W1}"
 return_5DC54:
 		rts
 
@@ -176,47 +156,34 @@ return_5DC54:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DC56:
-		trap    #CHECK_FLAG
-		dc.w $38E
+		 
+		chkFlg $38E             ; set after the initial scene on entering Roft (where the guy thinks you're Galam)
 		beq.s   return_5DCA2
-		trap    #CHECK_FLAG
-		dc.w $102
-		beq.s   loc_5DC82
-		trap    #CHECK_FLAG
-		dc.w $38F
+		chkFlg $102             ; Temporary map setup flag 02
+		beq.s   byte_5DC82      
+		chkFlg $38F             ; set after the Petro death scene in Roft
 		beq.s   loc_5DC80
-		trap    #CHECK_FLAG
-		dc.w $101
-		bne.s   loc_5DC7C
-		trap    #TEXTBOX
-		dc.w $873               ; "The devils killed Petro.{N}They lied to us!{W2}"
-		trap    #TEXTBOX
-		dc.w $874               ; "How cruel they are!{W1}"
-		trap    #SET_FLAG
-		dc.w $101
+		chkFlg $101             ; Temporary map setup flag 01
+		bne.s   byte_5DC7C      
+		txt $873                ; "The devils killed Petro.{N}They lied to us!{W2}"
+		txt $874                ; "How cruel they are!{W1}"
+		setFlg $101             ; Temporary map setup flag 01
 		bra.s   loc_5DC80
-loc_5DC7C:
-		trap    #TEXTBOX
-		dc.w $873               ; "The devils killed Petro.{N}They lied to us!{W2}"
+byte_5DC7C:
+		txt $873                ; "The devils killed Petro.{N}They lied to us!{W2}"
 loc_5DC80:
 		bra.s   return_5DCA2
-loc_5DC82:
-		trap    #CHECK_FLAG
-		dc.w $38F
+byte_5DC82:
+		chkFlg $38F             ; set after the Petro death scene in Roft
 		beq.s   return_5DCA2
-		trap    #CHECK_FLAG
-		dc.w $101
-		bne.s   loc_5DC9E
-		trap    #TEXTBOX
-		dc.w $877               ; "The devils lied, and then{N}killed Petro.{W2}"
-		trap    #TEXTBOX
-		dc.w $878               ; "Please defeat the devils for{N}him!{W1}"
-		trap    #SET_FLAG
-		dc.w $101
+		chkFlg $101             ; Temporary map setup flag 01
+		bne.s   byte_5DC9E      
+		txt $877                ; "The devils lied, and then{N}killed Petro.{W2}"
+		txt $878                ; "Please defeat the devils for{N}him!{W1}"
+		setFlg $101             ; Temporary map setup flag 01
 		bra.w   return_5DCA2
-loc_5DC9E:
-		trap    #TEXTBOX
-		dc.w $877               ; "The devils lied, and then{N}killed Petro.{W2}"
+byte_5DC9E:
+		txt $877                ; "The devils lied, and then{N}killed Petro.{W2}"
 return_5DCA2:
 		rts
 
@@ -255,8 +222,8 @@ sub_5DCBA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5DCC8:
-		trap    #TEXTBOX
-		dc.w $869               ; "Huh!  Huh!{W1}"
+		 
+		txt $869                ; "Huh!  Huh!{W1}"
 		rts
 
 	; End of function sub_5DCC8

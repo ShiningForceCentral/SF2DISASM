@@ -6,25 +6,22 @@
 
 ms_map5_flag212_InitFunction:
 		
-		trap    #1
-		dc.w $3B0
+		 
+		chkFlg $3B0             ; set after Lemon jumps off the cliff in Yeel
 		bne.s   loc_60630
 		lea     cs_607DE(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $3B0               ; set after Lemon jumps off the cliff in Yeel
-		bra.s   loc_60636
+		setFlg $3B0             ; set after Lemon jumps off the cliff in Yeel
+		bra.s   byte_60636      
 loc_60630:
 		lea     cs_6060E(pc), a0
 		trap    #6
-loc_60636:
-		trap    #CHECK_FLAG
-		dc.w $3AE
-		bne.s   loc_6067C
+byte_60636:
+		chkFlg $3AE             ; set after the scene in underground Yeel where Chaz paces and consults books
+		bne.s   byte_6067C      
 		cmpi.l  #$6005580,((ENTITY_DATA-$1000000)).w
-		bne.s   loc_6067C
-		trap    #CHECK_FLAG
-		dc.w $1C                ; if character 1C joined the Force : Lemon ?
+		bne.s   byte_6067C      
+		chkFlg $1C              ; Lemon joined
 		beq.s   loc_6065E
 		lea     cs_60656(pc), a0
 		trap    #6
@@ -35,57 +32,47 @@ cs_60656:
 loc_6065E:
 		lea     cs_60C42(pc), a0
 		trap    #6
-		trap    #CHECK_FLAG
-		dc.w $3A2
+		chkFlg $3A2             ; set after opening Devil's Head with the Force Sword
 		beq.s   loc_60672
 		lea     cs_60EB2(pc), a0
 		trap    #6
-		bra.s   loc_60678
+		bra.s   byte_60678      
 loc_60672:
 		lea     cs_60CA4(pc), a0
 		trap    #6
-loc_60678:
-		trap    #SET_FLAG
-		dc.w $3AE               ; set after the scene in underground Yeel where Chaz paces and consults books
-loc_6067C:
-		trap    #CHECK_FLAG
-		dc.w $1B
-		beq.s   loc_6068C
+byte_60678:
+		setFlg $3AE             ; set after the scene in underground Yeel where Chaz paces and consults books
+byte_6067C:
+		chkFlg $1B              ; Chaz joined
+		beq.s   byte_6068C      
 		move.w  #$1B,d0
 		jsr     MoveEntityOutOfMap
-loc_6068C:
-		trap    #CHECK_FLAG
-		dc.w $3B0
-		bne.s   loc_6069C
+byte_6068C:
+		chkFlg $3B0             ; set after Lemon jumps off the cliff in Yeel
+		bne.s   byte_6069C      
 		move.w  #$82,d0 
 		jsr     MoveEntityOutOfMap
-loc_6069C:
-		trap    #CHECK_FLAG
-		dc.w $3AD
-		beq.s   loc_606B4
+byte_6069C:
+		chkFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
+		beq.s   byte_606B4      
 		lea     cs_606AC(pc), a0
 		trap    #6
-		bra.w   loc_606B4
+		bra.w   byte_606B4      
 cs_606AC:
 		setPos $80,26,50,DOWN
 		csc_end
-loc_606B4:
-		trap    #1
-		dc.w $1C
-		beq.s   loc_606BE
-		trap    #SET_FLAG
-		dc.w $3B1               ; set after recruiting Lemon in Yeel
-loc_606BE:
-		trap    #CHECK_FLAG
-		dc.w $3AC
+byte_606B4:
+		chkFlg $1C              ; Lemon joined
+		beq.s   byte_606BE      
+		setFlg $3B1             ; set after recruiting Lemon in Yeel
+byte_606BE:
+		chkFlg $3AC             ; set after playing the piano in Yeel (during the late game)
 		beq.s   return_606E8
-		trap    #CHECK_FLAG
-		dc.w $3AD
+		chkFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
 		bne.s   return_606E8
 		lea     cs_606EA(pc), a0
 		trap    #6
-		trap    #CHECK_FLAG
-		dc.w $1C
+		chkFlg $1C              ; Lemon joined
 		beq.s   return_606E8
 		lea     cs_606E0(pc), a0
 		trap    #6

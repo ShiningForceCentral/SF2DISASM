@@ -23,25 +23,21 @@ ms_map6_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54CE8:
-		trap    #CHECK_FLAG
-		dc.w $2C2
-		bne.s   loc_54CFA
+		 
+		chkFlg $2C2             ; set after the scene with the sailor and soldier in New Granseal (Peter intro)
+		bne.s   byte_54CFA      
 		lea     cs_54E86(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2C2               ; set after the scene with the sailor and soldier in New Granseal (Peter intro)
+		setFlg $2C2             ; set after the scene with the sailor and soldier in New Granseal (Peter intro)
 		bra.s   return_54D10
-loc_54CFA:
-		trap    #CHECK_FLAG
-		dc.w $322
+byte_54CFA:
+		chkFlg $322             ; set after the event in the basement of Creed's Mansion
 		beq.s   return_54D10
-		trap    #CHECK_FLAG
-		dc.w $323
+		chkFlg $323             ; set after returning to New Granseal, when the soldier greets you
 		bne.s   return_54D10
 		lea     cs_55242(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $323               ; set after returning to New Granseal, when the soldier greets you
+		setFlg $323             ; set after returning to New Granseal, when the soldier greets you
 return_54D10:
 		rts
 
@@ -51,13 +47,12 @@ return_54D10:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54D12:
-		trap    #CHECK_FLAG
-		dc.w $2BD
+		 
+		chkFlg $2BD             ; set after the scene with Peter and the kids in New Granseal
 		bne.s   return_54D22
 		lea     cs_54F26(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $2BD               ; set after the scene with Peter and the kids in New Granseal
+		setFlg $2BD             ; set after the scene with Peter and the kids in New Granseal
 return_54D22:
 		rts
 
@@ -67,16 +62,14 @@ return_54D22:
 ; =============== S U B R O U T I N E =======================================
 
 sub_54D24:
-		trap    #CHECK_FLAG
-		dc.w $325
+		 
+		chkFlg $325             ; set after coming back to New Granseal after Creed's Mansion,when Astral joins
 		beq.s   return_54D3A
-		trap    #CHECK_FLAG
-		dc.w $326
+		chkFlg $326             ; set after the scene with Janet, when you go to leave New Granseal
 		bne.s   return_54D3A
 		lea     cs_55288(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $326               ; set after the scene with Janet, when you go to leave New Granseal
+		setFlg $326             ; set after the scene with Janet, when you go to leave New Granseal
 return_54D3A:
 		rts
 

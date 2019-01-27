@@ -6,20 +6,17 @@
 
 ms_map31_flag33E_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $340
-		beq.s   loc_5D62A
+		 
+		chkFlg $340             ; set after talking to the painter in Moun for the first time
+		beq.s   byte_5D62A      
 		lea     cs_5D63C(pc), a0
 		trap    #6
-loc_5D62A:
-		trap    #CHECK_FLAG
-		dc.w $342
+byte_5D62A:
+		chkFlg $342             ; set after making the Arm of Golem appear in Moun
 		beq.s   return_5D63A
-		trap    #CHECK_FLAG
-		dc.w $343
+		chkFlg $343             ; set after picking up the Arm of Golem in Moun
 		bne.s   return_5D63A
-		trap    #CLEAR_FLAG
-		dc.w $342               ; set after making the Arm of Golem appear in Moun
+		clrFlg $342             ; set after making the Arm of Golem appear in Moun
 return_5D63A:
 		rts
 

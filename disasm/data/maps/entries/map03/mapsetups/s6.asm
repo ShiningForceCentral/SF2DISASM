@@ -6,25 +6,23 @@
 
 ms_map3_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w 1                  ; Sarah joined
-		beq.s   loc_51390
+		 
+		chkFlg $1               ; Sarah joined
+		beq.s   byte_51390      
 		lea     cs_513BA(pc), a0
 		trap    #6
-		bra.s   loc_513A8
-loc_51390:
-		trap    #CHECK_FLAG
-		dc.w $25A               ; set after Astral's second basement line
-		beq.s   loc_513A8
+		bra.s   byte_513A8      
+byte_51390:
+		chkFlg $25A             ; set after Astral's second basement line
+		beq.s   byte_513A8      
 		lea     cs_513A0(pc), a0
 		trap    #6
-		bra.w   loc_513A8
+		bra.w   byte_513A8      
 cs_513A0:
 		setPos $1,41,10,UP
 		csc_end
-loc_513A8:
-		trap    #1
-		dc.w $25B               ; set after the messenger scene
+byte_513A8:
+		chkFlg $25B             ; set after the messenger scene
 		beq.s   return_513B8
 		move.w  #$8E,d0
 		jsr     MoveEntityOutOfMap

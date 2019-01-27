@@ -289,8 +289,7 @@ CheckForTaros:
 		movem.l d0-d1,-(sp)
 		cmpi.b  #BATTLEIDX_TAROS,((CURRENT_BATTLE-$1000000)).w
 		bne.w   loc_9F22
-		trap    #CLEAR_FLAG
-		dc.w $70                ; cleared, set, and checked in ASM x09EC4..x09F27 (CheckForTaros ASM)
+		clrFlg $70              ; Currently attacking Taros with Achille Sword
 		tst.b   (a4)
 		bne.w   loc_9F08
 		cmpi.w  #ACTION_ATTACK,(a3)
@@ -303,15 +302,13 @@ CheckForTaros:
 		jsr     GetEquippedWeapon
 		cmpi.w  #ITEMIDX_ACHILLES_SWORD,d1
 		bne.w   loc_9F08
-		trap    #SET_FLAG
-		dc.w $70                ; cleared, set, and checked in ASM x09EC4..x09F27 (CheckForTaros ASM)
+		setFlg $70              ; Currently attacking Taros with Achille Sword
 loc_9F08:
 		move.b  (a5),d0
 		jsr     GetEnemyID
 		cmpi.w  #$58,d1 
 		bne.s   loc_9F22
-		trap    #CHECK_FLAG
-		dc.w $70                ; cleared, set, and checked in ASM x09EC4..x09F27 (CheckForTaros ASM)
+		chkFlg $70              ; Currently attacking Taros with Achille Sword
 		bne.s   loc_9F22
 		move.b  #$FF,-BCSTACK_OFFSET_INEFFECTIVEATTACK(a2)
 loc_9F22:

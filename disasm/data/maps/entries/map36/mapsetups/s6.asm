@@ -6,8 +6,8 @@
 
 ms_map36_InitFunction:
 		
-		trap    #CHECK_FLAG
-		dc.w $16
+		 
+		chkFlg $16              ; Frayja joined
 		beq.s   return_5DA26
 		move.w  #$16,d0
 		jsr     MoveEntityOutOfMap

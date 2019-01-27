@@ -298,8 +298,8 @@ sub_5C254:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5C25C:
-		trap    #TEXTBOX
-		dc.w $B                 ; "{LEADER}, take it easy!{W1}"
+		 
+		txt $B                  ; "{LEADER}, take it easy!{W1}"
 		rts
 
 	; End of function sub_5C25C

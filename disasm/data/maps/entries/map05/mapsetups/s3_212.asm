@@ -22,26 +22,23 @@ nullsub_73:
 ; =============== S U B R O U T I N E =======================================
 
 sub_604D6:
-		trap    #CHECK_FLAG
-		dc.w $3AC
+		 
+		chkFlg $3AC             ; set after playing the piano in Yeel (during the late game)
 		beq.s   return_60500
-		trap    #CHECK_FLAG
-		dc.w $3AD
+		chkFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
 		bne.s   return_60500
 		lea     cs_6093A(pc), a0
 		trap    #6
-		trap    #CHECK_FLAG
-		dc.w $3A2
+		chkFlg $3A2             ; set after opening Devil's Head with the Force Sword
 		beq.s   loc_604F6
 		lea     cs_60BA6(pc), a0
 		trap    #6
-		bra.s   loc_604FC
+		bra.s   byte_604FC      
 loc_604F6:
 		lea     cs_60B10(pc), a0
 		trap    #6
-loc_604FC:
-		trap    #SET_FLAG
-		dc.w $3AD               ; set after Chaz and the priest go downstars in Yeel
+byte_604FC:
+		setFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
 return_60500:
 		rts
 
@@ -51,18 +48,15 @@ return_60500:
 ; =============== S U B R O U T I N E =======================================
 
 sub_60502:
-		trap    #CHECK_FLAG
-		dc.w $1C
+		 
+		chkFlg $1C              ; Lemon joined
 		bne.s   return_6051C
-		trap    #CHECK_FLAG
-		dc.w $1B
+		chkFlg $1B              ; Chaz joined
 		beq.s   return_6051C
 		lea     cs_60708(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $47                ; Lemon is a follower
-		trap    #SET_FLAG
-		dc.w $3B1               ; set after recruiting Lemon in Yeel
+		setFlg $47              ; Lemon is a follower
+		setFlg $3B1             ; set after recruiting Lemon in Yeel
 return_6051C:
 		rts
 

@@ -8,12 +8,9 @@ ms_map43_InitFunction:
 		
 		lea     cs_540C0(pc), a0
 		trap    #6
-		trap    #SET_FLAG
-		dc.w $264               ; set after event at Hawel's house
-		trap    #SET_FLAG
-		dc.w $28A               ; set after event at Hawel's house
-		trap    #CLEAR_FLAG
-		dc.w $48                ; Kazin is a follower
+		setFlg $264             ; set after event at Hawel's house
+		setFlg $28A             ; set after event at Hawel's house
+		clrFlg $48              ; Kazin is a follower
 		move.b  #$2B,((EGRESS_MAP_INDEX-$1000000)).w 
 return_540BE:
 		rts

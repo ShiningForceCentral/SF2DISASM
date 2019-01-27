@@ -26,26 +26,22 @@ word_5F41E:     dc.w $607
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F42C:
-		trap    #CHECK_FLAG
-		dc.w $3A2
-		bne.s   loc_5F44C
+		 
+		chkFlg $3A2             ; set after opening Devil's Head with the Force Sword
+		bne.s   byte_5F44C      
 		moveq   #$43,d1 
 		jsr     j_sub_9146
 		cmpi.w  #$FFFF,d0
-		bne.s   loc_5F446
-		trap    #TEXTBOX
-		dc.w $DB7               ; "A statue of a devil's head.{N}It looks ready to bite you.{W1}"
+		bne.s   byte_5F446      
+		txt $DB7                ; "A statue of a devil's head.{N}It looks ready to bite you.{W1}"
 		bra.s   loc_5F44A
-loc_5F446:
-		trap    #TEXTBOX
-		dc.w $DB8               ; "A statue of a fierce{N}devil's head.  There's a{N}slit at its mouth.{W1}"
+byte_5F446:
+		txt $DB8                ; "A statue of a fierce{N}devil's head.  There's a{N}slit at its mouth.{W1}"
 loc_5F44A:
 		bra.s   return_5F454
-loc_5F44C:
-		trap    #TEXTBOX
-		dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
-		trap    #TEXTBOX
-		dc.w $19C               ; "Nothing was there.{W1}"
+byte_5F44C:
+		txt $1A7                ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+		txt $19C                ; "Nothing was there.{W1}"
 return_5F454:
 		rts
 
@@ -55,17 +51,14 @@ return_5F454:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5F456:
-		trap    #CHECK_FLAG
-		dc.w $3A2
-		bne.s   loc_5F462
-		trap    #TEXTBOX
-		dc.w $DB7               ; "A statue of a devil's head.{N}It looks ready to bite you.{W1}"
+		 
+		chkFlg $3A2             ; set after opening Devil's Head with the Force Sword
+		bne.s   byte_5F462      
+		txt $DB7                ; "A statue of a devil's head.{N}It looks ready to bite you.{W1}"
 		bra.s   return_5F46A
-loc_5F462:
-		trap    #TEXTBOX
-		dc.w $1A7               ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
-		trap    #TEXTBOX
-		dc.w $19C               ; "Nothing was there.{W1}"
+byte_5F462:
+		txt $1A7                ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+		txt $19C                ; "Nothing was there.{W1}"
 return_5F46A:
 		rts
 

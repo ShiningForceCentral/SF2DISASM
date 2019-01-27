@@ -36,9 +36,8 @@ PlayIntroOrEndCutscene:
 		move.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 		jsr     (sub_4EC6).w
 		move.w  (sp)+,d0
-		bne.s   loc_47F72
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_INTRO
+		bne.s   byte_47F72
+		sndCom MUSIC_INTRO
 		lea     IntroCutscene1(pc), a0
 		trap    #MAPSCRIPT
 		lea     IntroCutscene2(pc), a0
@@ -48,9 +47,8 @@ PlayIntroOrEndCutscene:
 		lea     IntroCutscene4(pc), a0
 		trap    #MAPSCRIPT
 		bra.s   return_47F7C
-loc_47F72:
-		trap    #SOUND_COMMAND
-		dc.w MUSIC_PIANO_THEME
+byte_47F72:
+		sndCom MUSIC_PIANO_THEME
 		lea     EndCutscene(pc), a0
 		trap    #MAPSCRIPT
 return_47F7C:
