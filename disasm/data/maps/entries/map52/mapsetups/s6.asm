@@ -19,15 +19,14 @@ sub_5C4DC:
 		 
 		chkFlg $2C8             ; set after Peter delivers his lines after the cliffs before Bedoe battle
 		bne.s   return_5C4EC
-		lea     byte_5C622(pc), a0
-		trap    #6
+		script  cs_5C622
 		setFlg $2C8             ; set after Peter delivers his lines after the cliffs before Bedoe battle
 return_5C4EC:
 		rts
 
 	; End of function sub_5C4DC
 
-byte_5C4EE:     textCursor $575
+cs_5C4EE:       textCursor $575
 		cameraSpeed $30
 		setActscriptWait $0,eas_Init
 		setActscriptWait $7,eas_Init
@@ -105,7 +104,7 @@ byte_5C4EE:     textCursor $575
 		setStoryFlag $C         ; Battle 12 unlocked
 		warp $34,$0,$0,$0
 		csc_end
-byte_5C622:     setPos $7,22,8,RIGHT
+cs_5C622:       setPos $7,22,8,RIGHT
 		textCursor $9BD
 		fadeInB
 		nextText $0,$7          ; "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"

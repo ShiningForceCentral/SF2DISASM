@@ -14,8 +14,7 @@ sub_59F9A:
 		 
 		chkFlg $30D             ; set after the scene where you're surprised by Willard inside the wall
 		bne.s   return_59FAA
-		lea     cs_59FB8(pc), a0
-		trap    #6
+		script  cs_59FB8
 		setFlg $30D             ; set after the scene where you're surprised by Willard inside the wall
 return_59FAA:
 		rts

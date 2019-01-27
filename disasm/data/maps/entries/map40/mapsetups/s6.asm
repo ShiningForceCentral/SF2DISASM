@@ -9,8 +9,7 @@ ms_map40_InitFunction:
 		 
 		chkFlg $1FB             ; Battle 7 completed
 		beq.s   return_53FD6
-		lea     cs_53FD8(pc), a0
-		trap    #6
+		script  cs_53FD8
 return_53FD6:
 		rts
 

@@ -25,8 +25,7 @@ sub_595E8:
 		chkFlg $20A             ; Battle 22 completed
 		bne.s   return_59600
 		move.b  #$16,((EGRESS_MAP_INDEX-$1000000)).w
-		lea     cs_5994E(pc), a0
-		trap    #6
+		script  cs_5994E
 return_59600:
 		rts
 

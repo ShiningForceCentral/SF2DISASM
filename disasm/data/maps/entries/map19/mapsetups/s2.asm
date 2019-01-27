@@ -182,14 +182,12 @@ sub_52EEC:
 sub_52EF2:
 		 
 		chkFlg $25F             ; set after talking to Astral about going to the tower
-		bne.s   loc_52F04
-		lea     cs_52F0C(pc), a0
-		trap    #6
+		bne.s   byte_52F04
+		script  cs_52F0C
 		setFlg $25F             ; set after talking to Astral about going to the tower
 		bra.s   return_52F0A
-loc_52F04:
-		lea     cs_52F24(pc), a0
-		trap    #6
+byte_52F04:
+		script  cs_52F24
 return_52F0A:
 		rts
 

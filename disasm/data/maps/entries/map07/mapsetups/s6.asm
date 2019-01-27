@@ -10,8 +10,7 @@ ms_map7_InitFunction:
 		chkFlg $2C3             ; set after the "one year has passed" text, after New Granseal is built
 		bne.s   return_55830
 		move.b  #6,((EGRESS_MAP_INDEX-$1000000)).w
-		lea     cs_55832(pc), a0
-		trap    #6
+		script  cs_55832
 		setFlg $2C3             ; set after the "one year has passed" text, after New Granseal is built
 		setFlg $19B             ; Battle 11 unlocked
 return_55830:

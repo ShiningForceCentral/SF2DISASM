@@ -25,8 +25,7 @@ sub_5C834:
 		bne.s   return_5C84A
 		chkFlg $100             ; Temporary map setup flag 00
 		bne.s   return_5C84A
-		lea     cs_5C876(pc), a0
-		trap    #6
+		script  cs_5C876
 		setFlg $100             ; Temporary map setup flag 00
 return_5C84A:
 		rts
@@ -44,8 +43,7 @@ sub_5C84C:
 		beq.s   return_5C868
 		chkFlg $101             ; Temporary map setup flag 01
 		bne.s   return_5C868
-		lea     cs_5C8FE(pc), a0
-		trap    #6
+		script  cs_5C8FE
 		setFlg $101             ; Temporary map setup flag 01
 return_5C868:
 		rts

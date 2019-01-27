@@ -21,8 +21,7 @@ sub_5CA32:
 		bne.s   loc_5CA4C
 		moveq   #$75,d0 
 		jsr     sub_4F542
-		lea     cs_5CBB4(pc), a0
-		trap    #6
+		script  cs_5CBB4
 		move.w  #$FFFF,d6
 		bra.s   return_5CA4E
 loc_5CA4C:

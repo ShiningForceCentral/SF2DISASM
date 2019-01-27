@@ -17,8 +17,7 @@ sub_50EF6:
 		 
 		chkFlg $3               ; Jaha joined
 		bne.s   return_50F0A
-		lea     cs_516A8(pc), a0
-		trap    #6
+		script  cs_516A8
 		setFlg $192             ; Battle 2 unlocked
 		clrFlg $42              ; Sarah + Chester are followers
 return_50F0A:

@@ -28,8 +28,7 @@ sub_56F9C:
 		 
 		chkFlg $2D0             ; set after the King of Bedoe speaks to his soldiers and they disperse
 		bne.s   return_56FAC
-		lea     cs_573EC(pc), a0
-		trap    #6
+		script  cs_573EC
 		setFlg $2D0             ; set after the King of Bedoe speaks to his soldiers and they disperse
 return_56FAC:
 		rts
@@ -43,8 +42,7 @@ sub_56FAE:
 		 
 		chkFlg $2D1             ; set after you approach the King of Bedoe, starts with Luke speaking to Peter
 		bne.s   return_56FBE
-		lea     cs_574A6(pc), a0
-		trap    #6
+		script  cs_574A6
 		setFlg $2D1             ; set after you approach the King of Bedoe, starts with Luke speaking to Peter
 return_56FBE:
 		rts

@@ -6,8 +6,8 @@
 
 ExecuteFlashScreenScript:
 		
-		lea     cs_FlashScreen(pc), a0
-		trap    #MAPSCRIPT
+		 
+		script  cs_FlashScreen
 		rts
 
 	; End of function ExecuteFlashScreenScript

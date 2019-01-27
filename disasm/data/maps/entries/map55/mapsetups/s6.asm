@@ -9,16 +9,14 @@ ms_map55_InitFunction:
 		 
 		chkFlg $3E7             ; set after the Nazca ship shootdown scene
 		beq.s   return_5E27A
-		lea     byte_5E320(pc), a0
-		trap    #6
-		lea     cs_5E346(pc), a0
-		trap    #6
+		script  cs_5E320
+		script  cs_5E346
 return_5E27A:
 		rts
 
 	; End of function ms_map55_InitFunction
 
-byte_5E27C:     setActscriptWait $0,eas_5E2C4
+cs_5E27C:       setActscriptWait $0,eas_5E2C4
 		setActscriptWait $7,eas_Init
 		setActscriptWait $7,eas_5E2C4
 		setActscriptWait $1F,eas_Init
@@ -54,7 +52,7 @@ eas_5E2C4:       ac_set1Cb5 $0
 		 ac_updateSprite
 		 ac_wait 1
 		 ac_jump eas_Idle
-byte_5E320:     mapLoad 75,8,14
+cs_5E320:       mapLoad 75,8,14
 		loadMapEntities ce_5E33E
 		setActscriptWait $0,eas_Init
 		playSound MUSIC_MAIN_THEME

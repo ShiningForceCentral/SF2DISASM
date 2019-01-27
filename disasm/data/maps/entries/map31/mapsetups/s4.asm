@@ -54,8 +54,7 @@ sub_5D5B0:
 		 
 		chkFlg $340             ; set after talking to the painter in Moun for the first time
 		beq.s   return_5D5BC
-		lea     cs_5D732(pc), a0
-		trap    #6
+		script  cs_5D732
 return_5D5BC:
 		rts
 

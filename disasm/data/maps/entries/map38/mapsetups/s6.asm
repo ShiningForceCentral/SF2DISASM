@@ -14,14 +14,12 @@ ms_map38_InitFunction:
 		bne.s   byte_5DD78      
 		chkFlg $104             ; Temporary map setup flag 04
 		bne.s   byte_5DD78      
-		lea     cs_5DD8E(pc), a0
-		trap    #6
+		script  cs_5DD8E
 		setFlg $104             ; Temporary map setup flag 04
 byte_5DD78:
 		chkFlg $38E             ; set after the initial scene on entering Roft (where the guy thinks you're Galam)
 		bne.s   return_5DD8C
-		lea     cs_5DD9C(pc), a0
-		trap    #6
+		script  cs_5DD9C
 		setFlg $38E             ; set after the initial scene on entering Roft (where the guy thinks you're Galam)
 		setFlg $102             ; Temporary map setup flag 02
 return_5DD8C:

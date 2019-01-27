@@ -8,38 +8,32 @@ ms_map5_flag212_InitFunction:
 		
 		 
 		chkFlg $3B0             ; set after Lemon jumps off the cliff in Yeel
-		bne.s   loc_60630
-		lea     cs_607DE(pc), a0
-		trap    #6
+		bne.s   byte_60630
+		script  cs_607DE
 		setFlg $3B0             ; set after Lemon jumps off the cliff in Yeel
 		bra.s   byte_60636      
-loc_60630:
-		lea     cs_6060E(pc), a0
-		trap    #6
+byte_60630:
+		script  cs_6060E
 byte_60636:
 		chkFlg $3AE             ; set after the scene in underground Yeel where Chaz paces and consults books
 		bne.s   byte_6067C      
 		cmpi.l  #$6005580,((ENTITY_DATA-$1000000)).w
 		bne.s   byte_6067C      
 		chkFlg $1C              ; Lemon joined
-		beq.s   loc_6065E
-		lea     cs_60656(pc), a0
-		trap    #6
-		bra.w   loc_6065E
+		beq.s   byte_6065E
+		script  cs_60656
+		bra.w   byte_6065E
 cs_60656:
 		setPos $1C,27,55,UP
 		csc_end
-loc_6065E:
-		lea     cs_60C42(pc), a0
-		trap    #6
+byte_6065E:
+		script  cs_60C42
 		chkFlg $3A2             ; set after opening Devil's Head with the Force Sword
-		beq.s   loc_60672
-		lea     cs_60EB2(pc), a0
-		trap    #6
+		beq.s   byte_60672
+		script  cs_60EB2
 		bra.s   byte_60678      
-loc_60672:
-		lea     cs_60CA4(pc), a0
-		trap    #6
+byte_60672:
+		script  cs_60CA4
 byte_60678:
 		setFlg $3AE             ; set after the scene in underground Yeel where Chaz paces and consults books
 byte_6067C:
@@ -55,8 +49,7 @@ byte_6068C:
 byte_6069C:
 		chkFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
 		beq.s   byte_606B4      
-		lea     cs_606AC(pc), a0
-		trap    #6
+		script  cs_606AC
 		bra.w   byte_606B4      
 cs_606AC:
 		setPos $80,26,50,DOWN
@@ -70,12 +63,10 @@ byte_606BE:
 		beq.s   return_606E8
 		chkFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
 		bne.s   return_606E8
-		lea     cs_606EA(pc), a0
-		trap    #6
+		script  cs_606EA
 		chkFlg $1C              ; Lemon joined
 		beq.s   return_606E8
-		lea     cs_606E0(pc), a0
-		trap    #6
+		script  cs_606E0
 		bra.w   return_606E8
 cs_606E0:
 		setPos $1C,11,10,UP

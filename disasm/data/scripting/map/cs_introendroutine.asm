@@ -38,19 +38,14 @@ PlayIntroOrEndCutscene:
 		move.w  (sp)+,d0
 		bne.s   byte_47F72
 		sndCom MUSIC_INTRO
-		lea     IntroCutscene1(pc), a0
-		trap    #MAPSCRIPT
-		lea     IntroCutscene2(pc), a0
-		trap    #MAPSCRIPT
-		lea     IntroCutscene3(pc), a0
-		trap    #MAPSCRIPT
-		lea     IntroCutscene4(pc), a0
-		trap    #MAPSCRIPT
+		script  IntroCutscene1
+		script  IntroCutscene2
+		script  IntroCutscene3
+		script  IntroCutscene4
 		bra.s   return_47F7C
 byte_47F72:
 		sndCom MUSIC_PIANO_THEME
-		lea     EndCutscene(pc), a0
-		trap    #MAPSCRIPT
+		script  EndCutscene
 return_47F7C:
 		rts
 

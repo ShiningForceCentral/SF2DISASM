@@ -39,11 +39,10 @@ sub_5A236:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5A240:
-		lea     cs_5A256(pc), a0
-		trap    #6
+		 
+		script  cs_5A256
 		txt $6AB                ; "(Shiver)...cold...{N}Oh...I'm so cold....{W1}"
-		lea     cs_5A256(pc), a0
-		trap    #6
+		script  cs_5A256
 		setFlg $2F7             ; set after talking to one of the dwarves in the mine near the Fairy Woods
 		rts
 
@@ -105,8 +104,7 @@ loc_5A296:
 		clsTxt
 		setFlg $2F9             ; set after the dwarf gives Bowie the cannon
 		sndCom SOUND_COMMAND_PLAY_PREVIOUS_MUSIC
-		lea     cs_5A4FE(pc), a0
-		trap    #6
+		script  cs_5A4FE
 return_5A2C0:
 		rts
 

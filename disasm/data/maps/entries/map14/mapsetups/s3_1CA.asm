@@ -11,8 +11,8 @@ ms_map14_flag1CA_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_58F54:
-		lea     cs_58F5C(pc), a0
-		trap    #6
+		 
+		script  cs_58F5C
 		rts
 
 	; End of function sub_58F54

@@ -38,8 +38,7 @@ sub_5F9FE:
 		 
 		chkFlg $101             ; Temporary map setup flag 01
 		bne.s   return_5FA0E
-		lea     cs_5FB30(pc), a0
-		trap    #6
+		script  cs_5FB30
 		setFlg $101             ; Temporary map setup flag 01
 return_5FA0E:
 		rts

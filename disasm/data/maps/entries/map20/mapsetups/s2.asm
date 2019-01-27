@@ -82,8 +82,7 @@ sub_537FE:
 		 
 		chkFlg $101             ; Temporary map setup flag 01
 		bne.s   byte_53810      
-		lea     cs_53816(pc), a0
-		trap    #6
+		script  cs_53816
 		setFlg $101             ; Temporary map setup flag 01
 		bra.s   return_53814
 byte_53810:

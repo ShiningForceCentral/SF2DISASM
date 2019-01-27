@@ -14,13 +14,11 @@ sub_5F370:
 		clr.w   d0
 		jsr     WaitForEntityToStopMoving
 		tst.b   ((ENTITY_FACING-$1000000)).w
-		bne.s   loc_5F38E
-		lea     cs_5F3A2(pc), a0
-		trap    #MAPSCRIPT
+		bne.s   byte_5F38E
+		script  cs_5F3A2
 		bra.s   return_5F394
-loc_5F38E:
-		lea     cs_5F3C4(pc), a0
-		trap    #MAPSCRIPT
+byte_5F38E:
+		script  cs_5F3C4
 return_5F394:
 		rts
 

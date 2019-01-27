@@ -28,8 +28,7 @@ sub_5C992:
 loc_5C9D2:
 		moveq   #$75,d0 
 		jsr     sub_4F542
-		lea     cs_5CBB4(pc), a0
-		trap    #6
+		script  cs_5CBB4
 return_5C9E0:
 		rts
 

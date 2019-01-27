@@ -21,8 +21,7 @@ byte_53EC8:
 		txt $243                ; "Sir Astral is already{N}inside the tower.  Hurry!{W1}"
 		chkFlg $100             ; Temporary map setup flag 00
 		bne.s   return_53EDC
-		lea     cs_53EF4(pc), a0
-		trap    #6
+		script  cs_53EF4
 		setFlg $100             ; Temporary map setup flag 00
 return_53EDC:
 		rts

@@ -30,14 +30,11 @@ ms_map24_InitFunction:
 		tst.w   d0
 		bne.s   byte_59C92      
 		txt $1D9                ; "...set...GO!{W2}"
-		lea     cs_StartSpecialBattle(pc), a0
-		trap    #6
+		script  cs_StartSpecialBattle
 		bra.s   return_59C9C
 byte_59C92:
 		txt $1DA                ; "Oh, what a pity!{N}Please visit me anytime!!{W1}"
-		lea     cs_LeaveSpecialBattle(pc), a0
-						; some script
-		trap    #6
+		script  cs_LeaveSpecialBattle
 return_59C9C:
 		rts
 cs_StartSpecialBattle:
@@ -73,8 +70,7 @@ byte_59CF0:
 byte_59CF4:
 		txt $1DF                ; "Come back again!{N}See ya!{W1}"
 		clsTxt
-		lea     cs_LeaveSpecialBattle(pc), a0
-		trap    #6
+		script  cs_LeaveSpecialBattle
 		clrFlg $220             ; Battle 44 completed
 		rts
 

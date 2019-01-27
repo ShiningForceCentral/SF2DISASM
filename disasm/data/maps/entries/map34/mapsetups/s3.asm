@@ -14,8 +14,7 @@ sub_5B69E:
 		 
 		chkFlg $310             ; set after the event in the basement of Creed's Mansion
 		bne.s   return_5B6B2
-		lea     cs_5B6C0(pc), a0
-		trap    #6
+		script  cs_5B6C0
 		setFlg $310             ; set after the event in the basement of Creed's Mansion
 		setFlg $322             ; set after the event in the basement of Creed's Mansion
 return_5B6B2:

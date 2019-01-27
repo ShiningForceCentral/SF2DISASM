@@ -24,8 +24,7 @@ sub_5D008:
 		beq.s   return_5D01E
 		chkFlg $334             ; set after Skreech's join scene has played in Tristan
 		bne.s   return_5D01E
-		lea     cs_5D04E(pc), a0
-		trap    #6
+		script  cs_5D04E
 		setFlg $334             ; set after Skreech's join scene has played in Tristan
 return_5D01E:
 		rts

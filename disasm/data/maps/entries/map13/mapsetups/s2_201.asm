@@ -90,13 +90,12 @@ byte_581C4:
 		bra.s   loc_58204
 byte_581D4:
 		chkFlg $106             ; Temporary map setup flag 06
-		bne.s   loc_581E4
+		bne.s   byte_581E4
 		txt $5AA                ; "Please, take him!{W1}"
 		setFlg $106             ; Temporary map setup flag 06
 		bra.s   loc_58204
-loc_581E4:
-		lea     cs_58856(pc), a0
-		trap    #6
+byte_581E4:
+		script  cs_58856
 		setFlg $2CC             ; set after your raft-giving conversation with the mayor in Polca
 		setFlg $40              ; Raft is unlocked (0x05264)
 		move.b  #$48,((RAFT_MAP_INDEX-$1000000)).w 

@@ -38,8 +38,7 @@ sub_51AC2:
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
 		txt $313                ; "Sir Hawel lives just outside{N}of this village.{W1}"
-		lea     cs_51B14(pc), a0
-		trap    #6
+		script  cs_51B14
 		setFlg $48              ; Kazin is a follower
 		rts
 

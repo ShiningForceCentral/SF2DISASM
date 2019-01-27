@@ -140,8 +140,7 @@ sub_523BA:
 		 
 		chkFlg $100             ; Temporary map setup flag 00
 		bne.s   byte_523CC      
-		lea     cs_52A3C(pc), a0
-		trap    #6
+		script  cs_52A3C
 		setFlg $100             ; Temporary map setup flag 00
 		bra.s   return_523D0
 byte_523CC:

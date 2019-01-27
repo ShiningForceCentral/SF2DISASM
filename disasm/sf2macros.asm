@@ -153,3 +153,8 @@ clsTxt:	macro
 	dc.w $FFFF
 	endm
 	
+script:	macro
+	lea \1(pc), a0
+	trap #MAPSCRIPT
+	endm
+	

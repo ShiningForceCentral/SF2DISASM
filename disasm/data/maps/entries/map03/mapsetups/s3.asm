@@ -35,8 +35,8 @@ ms_map3_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_50D74:
-		lea     cs_51444(pc), a0
-		trap    #6
+		 
+		script  cs_51444
 		chkFlg $101             ; Temporary map setup flag 01
 		bne.s   byte_50DA6      
 		jsr     (WaitForCameraToCatchUp).l
@@ -60,8 +60,7 @@ sub_50DAC:
 		 
 		chkFlg $258             ; set after agreeing to try getting into the castle
 		bne.s   byte_50DE6      
-		lea     cs_5144C(pc), a0
-		trap    #6
+		script  cs_5144C
 		chkFlg $102             ; Temporary map setup flag 02
 		bne.s   byte_50DE0      
 		jsr     (WaitForCameraToCatchUp).l
@@ -77,8 +76,7 @@ byte_50DE0:
 byte_50DE6:
 		chkFlg $25C             ; set after the guards have listened to Sarah and allowed you into the castle
 		bne.s   return_50DF6
-		lea     cs_51652(pc), a0
-		trap    #6
+		script  cs_51652
 		setFlg $25C             ; set after the guards have listened to Sarah and allowed you into the castle
 return_50DF6:
 		rts
@@ -92,8 +90,7 @@ sub_50DF8:
 		 
 		chkFlg $258             ; set after agreeing to try getting into the castle
 		bne.s   byte_50E32      
-		lea     cs_51454(pc), a0
-		trap    #6
+		script  cs_51454
 		chkFlg $103             ; Temporary map setup flag 03
 		bne.s   byte_50E2C      
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
@@ -109,8 +106,7 @@ byte_50E2C:
 byte_50E32:
 		chkFlg $25C             ; set after the guards have listened to Sarah and allowed you into the castle
 		bne.s   return_50E42
-		lea     cs_51652(pc), a0
-		trap    #6
+		script  cs_51652
 		setFlg $25C             ; set after the guards have listened to Sarah and allowed you into the castle
 return_50E42:
 		rts
@@ -124,8 +120,7 @@ sub_50E44:
 		 
 		chkFlg $259             ; set after Bowie is intercepted by his mother going downstairs
 		bne.s   return_50E64
-		lea     cs_5145C(pc), a0
-		trap    #6
+		script  cs_5145C
 		move.w  #$80,d0 
 		moveq   #5,d1
 		moveq   #6,d2
@@ -166,8 +161,7 @@ byte_50E96:
 		txt $202                ; "By the way, {LEADER},{N}what did you think of the{N}storm last night?{W2}"
 		txt $203                ; "Did you feel something evil,{N}or anything?{W2}"
 		txt $204                ; "No, nothing?!{N}Perhaps it was just my{N}imagination.  Sorry.{W1}"
-		lea     cs_5148C(pc), a0
-		trap    #6
+		script  cs_5148C
 		setFlg $104             ; Temporary map setup flag 04
 return_50ED0:
 		rts
@@ -183,8 +177,7 @@ sub_50ED2:
 		beq.s   return_50EE8
 		chkFlg $25B             ; set after the messenger scene
 		bne.s   return_50EE8
-		lea     cs_5149A(pc), a0
-		trap    #6
+		script  cs_5149A
 		setFlg $25B             ; set after the messenger scene
 return_50EE8:
 		rts

@@ -50,8 +50,7 @@ sub_58078:
 		 
 		chkFlg $2C7             ; set after you dislodge the turtle/fairy in Polca
 		bne.s   byte_5808A      
-		lea     cs_58512(pc), a0
-		trap    #6
+		script  cs_58512
 		setFlg $2C7             ; set after you dislodge the turtle/fairy in Polca
 		bra.s   return_5808E
 byte_5808A:
@@ -137,8 +136,7 @@ sub_580DA:
 		bne.s   byte_580FC      
 		chkFlg $101             ; Temporary map setup flag 01
 		bne.s   byte_580F2      
-		lea     cs_58116(pc), a0
-		trap    #6
+		script  cs_58116
 		setFlg $101             ; Temporary map setup flag 01
 		bra.s   loc_580FA
 byte_580F2:

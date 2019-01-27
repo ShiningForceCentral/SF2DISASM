@@ -109,14 +109,12 @@ sub_5D51E:
 sub_5D526:
 		 
 		chkFlg $340             ; set after talking to the painter in Moun for the first time
-		bne.s   loc_5D538
+		bne.s   byte_5D538
 		setFlg $340             ; set after talking to the painter in Moun for the first time
-		lea     cs_5D652(pc), a0
-		trap    #6
+		script  cs_5D652
 		bra.s   return_5D53E
-loc_5D538:
-		lea     byte_5D724(pc), a0
-		trap    #6
+byte_5D538:
+		script  cs_5D724
 return_5D53E:
 		rts
 

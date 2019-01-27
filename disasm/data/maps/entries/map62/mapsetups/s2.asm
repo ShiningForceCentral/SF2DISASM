@@ -42,14 +42,12 @@ sub_5C7F6:
 		chkFlg $2D9             ; ???
 		bne.s   byte_5C81A      
 		chkFlg $2D8             ; ???
-		bne.s   loc_5C80E
-		lea     cs_5C8D4(pc), a0
-		trap    #6
+		bne.s   byte_5C80E
+		script  cs_5C8D4
 		setFlg $2D8             ; ???
 		bra.s   loc_5C818
-loc_5C80E:
-		lea     cs_5C914(pc), a0
-		trap    #6
+byte_5C80E:
+		script  cs_5C914
 		setFlg $2D9             ; ???
 loc_5C818:
 		bra.s   return_5C81E

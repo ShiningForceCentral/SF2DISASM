@@ -26,8 +26,7 @@ sub_4FB24:
 		 
 		chkFlg $208             ; Battle 20 completed
 		bne.s   return_4FB30
-		lea     cs_4FB64(pc), a0
-		trap    #MAPSCRIPT
+		script  cs_4FB64
 return_4FB30:
 		rts
 
@@ -46,8 +45,7 @@ sub_4FB32:
 		jsr     j_GetCurrentHP
 		tst.w   d1
 		beq.s   return_4FB56
-		lea     cs_4FC32(pc), a0
-		trap    #MAPSCRIPT
+		script  cs_4FC32
 		setFlg $2EF             ; set after Elric opens the passage to Devil's Tail
 return_4FB56:
 		rts

@@ -34,8 +34,8 @@ sub_53856:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5385C:
-		lea     cs_53C42(pc), a0
-		trap    #6
+		 
+		script  cs_53C42
 		rts
 
 	; End of function sub_5385C

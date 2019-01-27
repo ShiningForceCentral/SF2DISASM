@@ -66,20 +66,17 @@ sub_4FE98:
 		jsr     sub_4F542
 		moveq   #$74,d0 
 		jsr     sub_4F542
-		lea     cs_4FFDA(pc), a0
-		trap    #MAPSCRIPT
+		script  cs_4FFDA
 		setFlg $2EE             ; set after Rohde clears the blockage at the North Cliff cave
 		bra.s   loc_4FEF2
 loc_4FEE6:
 		move.w  #$74,((TEXT_NAME_INDEX_1-$1000000)).w 
-		lea     cs_5023E(pc), a0
-		trap    #MAPSCRIPT
+		script  cs_5023E
 loc_4FEF2:
 		bra.s   byte_4FF00      
 loc_4FEF4:
 		move.w  #$74,((TEXT_NAME_INDEX_1-$1000000)).w 
-		lea     cs_5023E(pc), a0
-		trap    #MAPSCRIPT
+		script  cs_5023E
 byte_4FF00:
 		setFlg $100             ; Temporary map setup flag 00
 return_4FF04:

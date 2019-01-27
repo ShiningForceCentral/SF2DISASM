@@ -9,14 +9,12 @@ ms_map6_InitFunction:
 		 
 		chkFlg $322             ; set after the event in the basement of Creed's Mansion
 		beq.s   byte_54E62      
-		lea     cs_54E70(pc), a0
-		trap    #6
+		script  cs_54E70
 		rts
 byte_54E62:
 		chkFlg $2C2             ; set after the scene with the sailor and soldier in New Granseal (Peter intro)
 		beq.s   return_54E6E
-		lea     cs_54E78(pc), a0
-		trap    #6
+		script  cs_54E78
 return_54E6E:
 		rts
 

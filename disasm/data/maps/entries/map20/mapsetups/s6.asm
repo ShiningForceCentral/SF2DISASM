@@ -9,19 +9,16 @@ ms_map20_InitFunction:
 		cmpi.l  #$22803780,((ENTITY_DATA-$1000000)).w
 		bne.s   byte_53988      
 		chkFlg $25D             ; set after the scene in the King's bedroom
-		bne.s   loc_53982
-		lea     cs_53996(pc), a0
-		trap    #6
+		bne.s   byte_53982
+		script  cs_53996
 		setFlg $25D             ; set after the scene in the King's bedroom
 		bra.s   byte_53988      
-loc_53982:
-		lea     cs_53B60(pc), a0
-		trap    #6
+byte_53982:
+		script  cs_53B60
 byte_53988:
 		chkFlg $1FB             ; Battle 7 completed
 		beq.s   return_53994
-		lea     cs_53FD8(pc), a0
-		trap    #6
+		script  cs_53FD8
 return_53994:
 		rts
 

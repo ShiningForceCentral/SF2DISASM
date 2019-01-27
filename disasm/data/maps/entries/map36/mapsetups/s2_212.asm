@@ -21,8 +21,7 @@ sub_5D954:
 		 
 		chkFlg $32B             ; set after Frayja asks to go to Moun with you
 		bne.s   return_5D968
-		lea     cs_5DA28(pc), a0
-		trap    #6
+		script  cs_5DA28
 		setFlg $32B             ; set after Frayja asks to go to Moun with you
 		setFlg $52              ; Frayja is a follower
 return_5D968:

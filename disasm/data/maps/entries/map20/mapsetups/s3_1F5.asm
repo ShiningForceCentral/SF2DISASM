@@ -21,8 +21,7 @@ sub_5376E:
 		jsr     j_SetCurrentHP
 		jsr     j_GetMaxMP
 		jsr     j_SetCurrentMP
-		lea     cs_53B66(pc), a0
-		trap    #6
+		script  cs_53B66
 		rts
 
 	; End of function sub_5376E

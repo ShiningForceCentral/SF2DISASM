@@ -16,8 +16,7 @@ sub_56FC8:
 		bne.s   return_56FDE
 		chkFlg $2D4             ; set after the scene where Skreech falls in Bedoe
 		bne.s   return_56FDE
-		lea     cs_5779C(pc), a0
-		trap    #6
+		script  cs_5779C
 		setFlg $2D4             ; set after the scene where Skreech falls in Bedoe
 return_56FDE:
 		rts

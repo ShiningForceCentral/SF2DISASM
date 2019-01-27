@@ -27,7 +27,7 @@ loc_47E8A:
 		jsr     j_SetFlag
 		movea.l 4(a0),a0
 loc_47EC0:
-		trap    #6
+		trap    #MAPSCRIPT
 loc_47EC2:
 		movem.l (sp)+,d0-d1/a0
 		rts

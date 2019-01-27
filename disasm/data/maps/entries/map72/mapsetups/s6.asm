@@ -11,8 +11,7 @@ ms_map72_InitFunction:
 		beq.s   return_4FF40
 		chkFlg $A               ; Luke joined
 		bne.s   return_4FF40
-		lea     cs_4FF5A(pc), a0
-		trap    #6
+		script  cs_4FF5A
 return_4FF40:
 		rts
 

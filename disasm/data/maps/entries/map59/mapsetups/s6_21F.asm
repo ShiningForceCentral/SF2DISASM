@@ -9,8 +9,7 @@ ms_map59_flag21F_InitFunction:
 		 
 		chkFlg $21F             ; Battle 43 completed
 		beq.s   return_615E4
-		lea     cs_615E6(pc), a0
-		trap    #6
+		script  cs_615E6
 return_615E4:
 		rts
 

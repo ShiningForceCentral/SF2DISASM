@@ -53,8 +53,7 @@ sub_60582:
 		 
 		chkFlg $3AC             ; set after playing the piano in Yeel (during the late game)
 		bne.s   return_6058E
-		lea     cs_60F64(pc), a0
-		trap    #6
+		script  cs_60F64
 return_6058E:
 		rts
 
@@ -67,8 +66,7 @@ sub_60590:
 		 
 		chkFlg $3B1             ; set after recruiting Lemon in Yeel
 		bne.s   byte_605C4      
-		lea     cs_6060E(pc), a0
-		trap    #6
+		script  cs_6060E
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		move.w  #$1C,d0
 		jsr     GetEntityPortraitAndSpeechSfx

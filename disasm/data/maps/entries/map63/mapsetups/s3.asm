@@ -22,14 +22,12 @@ ms_map63_ZoneEvents:
 sub_5C9F6:
 		 
 		chkFlg $100             ; Temporary map setup flag 00
-		bne.s   loc_5CA08
-		lea     cs_5CA6E(pc), a0
-		trap    #6
+		bne.s   byte_5CA08
+		script  cs_5CA6E
 		setFlg $100             ; Temporary map setup flag 00
 		bra.s   return_5CA12
-loc_5CA08:
-		lea     cs_5CB34(pc), a0
-		trap    #6
+byte_5CA08:
+		script  cs_5CB34
 		clrFlg $100             ; Temporary map setup flag 00
 return_5CA12:
 		rts
@@ -40,8 +38,8 @@ return_5CA12:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5CA14:
-		lea     cs_5CC26(pc), a0
-		trap    #6
+		 
+		script  cs_5CC26
 		rts
 
 	; End of function sub_5CA14
@@ -50,8 +48,8 @@ sub_5CA14:
 ; =============== S U B R O U T I N E =======================================
 
 sub_5CA1C:
-		lea     cs_5CCF6(pc), a0
-		trap    #6
+		 
+		script  cs_5CCF6
 return_5CA22:
 		rts
 

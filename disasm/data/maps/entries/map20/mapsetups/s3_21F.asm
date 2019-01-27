@@ -27,15 +27,13 @@ nullsub_85:
 sub_632AC:
 		 
 		sndCom SOUND_COMMAND_FADE_OUT
-		lea     cs_632EA(pc), a0
-		trap    #6
+		script  cs_632EA
 		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
 		txt $FAE                ; "The Princess is asleep.{N}Will you kiss her?"
 		jsr     j_YesNoPrompt
 		tst.w   d0
 		bne.s   byte_632E0
-		lea     cs_EndKiss(pc), a0
-		trap    #MAPSCRIPT
+		script  cs_EndKiss
 		jsr     PlayEndCredits
 		moveq   #$FFFFFFFF,d0
 		jsr     PlayIntroOrEndCutscene
@@ -81,8 +79,7 @@ sub_63330:
 		 
 		chkFlg $3D8
 		bne.s   return_6335C
-		lea     cs_6335E(pc), a0
-		trap    #6
+		script  cs_6335E
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		move.w  #$80,d0 
 		jsr     GetEntityPortraitAndSpeechSfx

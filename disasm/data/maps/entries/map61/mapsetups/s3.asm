@@ -22,8 +22,7 @@ sub_5C6A6:
 		bne.s   return_5C6BC
 		chkFlg $4D              ; Old man is a follower
 		beq.s   return_5C6BC
-		lea     cs_5C6CA(pc), a0
-		trap    #6
+		script  cs_5C6CA
 		setFlg $2DA             ; set after the old man opens the door to the Woodel Panel shrine interior
 return_5C6BC:
 		rts

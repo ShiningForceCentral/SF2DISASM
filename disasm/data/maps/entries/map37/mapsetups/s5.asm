@@ -43,8 +43,7 @@ sub_5FA38:
 byte_5FA76:
 		txt $D2F                ; "{LEADER} fit the {ITEM}{N}into the cockpit.{W1}"
 		clsTxt
-		lea     cs_5FB6A(pc), a0
-		trap    #6
+		script  cs_5FB6A
 loc_5FA84:
 		moveq   #$FFFFFFFF,d6
 return_5FA86:

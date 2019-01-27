@@ -18,18 +18,16 @@ byte_62CAE:
 		jsr     MoveEntityOutOfMap
 byte_62CBE:
 		chkFlg $1B              ; Chaz joined
-		bne.s   loc_62CCE
+		bne.s   byte_62CCE
 		move.w  #$1B,d0
 		jsr     MoveEntityOutOfMap
-loc_62CCE:
-		lea     cs_62D06(pc), a0
-		trap    #6
+byte_62CCE:
+		script  cs_62D06
 		chkFlg $3D5
 		beq.s   byte_62CFC
 		chkFlg $3D6
 		bne.s   byte_62CF2
-		lea     cs_62D0E(pc), a0
-		trap    #6
+		script  cs_62D0E
 		setFlg $3D6
 		move.b  #$FF,((FOLLOWERS_LIST-$1000000)).w
 		bra.s   loc_62CFA

@@ -179,8 +179,7 @@ sub_54510:
 		txt $3F1                ; "{LEADER}, are you ready{N}to leave port?{W1}"
 		jsr     j_YesNoPrompt
 		bne.s   byte_5454A      
-		lea     cs_54578(pc), a0
-		trap    #6
+		script  cs_54578
 		bra.s   return_5454E
 byte_5454A:
 		txt $3F2                ; "Then come back here very{N}soon.{W1}"

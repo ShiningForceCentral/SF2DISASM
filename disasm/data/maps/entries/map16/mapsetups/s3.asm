@@ -17,8 +17,7 @@ sub_51EF0:
 		 
 		chkFlg $297             ; set after Galam and Lemon leave with their army
 		bne.s   return_51F00
-		lea     cs_51F88(pc), a0
-		trap    #6
+		script  cs_51F88
 		setFlg $297             ; set after Galam and Lemon leave with their army
 return_51F00:
 		rts
@@ -34,14 +33,12 @@ sub_51F02:
 		bne.s   return_51F26
 		move.b  #$10,((EGRESS_MAP_INDEX-$1000000)).w
 		chkFlg $298             ; set after the Galam guards catch you sneaking around, but before battle
-		bne.s   loc_51F20
-		lea     cs_521BA(pc), a0
-		trap    #6
+		bne.s   byte_51F20
+		script  cs_521BA
 		setFlg $298             ; set after the Galam guards catch you sneaking around, but before battle
 		bra.s   return_51F26
-loc_51F20:
-		lea     cs_5227C(pc), a0
-		trap    #6
+byte_51F20:
+		script  cs_5227C
 return_51F26:
 		rts
 

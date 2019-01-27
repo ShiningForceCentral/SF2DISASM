@@ -23,12 +23,11 @@ ms_map8_Section5:
 sub_562F2:
 		 
 		chkFlg $2DB             ; set after you open the tree in Ribble with the wooden plank
-		beq.s   loc_562FC
+		beq.s   byte_562FC
 		moveq   #0,d6
 		bra.s   return_56312
-loc_562FC:
-		lea     cs_56314(pc), a0
-		trap    #6
+byte_562FC:
+		script  cs_56314
 		setFlg $2DB             ; set after you open the tree in Ribble with the wooden plank
 		moveq   #$70,d0 
 		jsr     sub_4F542       ; remove wooden panel from items ?

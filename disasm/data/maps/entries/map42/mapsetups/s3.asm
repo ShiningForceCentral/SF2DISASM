@@ -16,8 +16,7 @@ sub_5FE0C:
 		beq.s   return_5FE22
 		chkFlg $385             ; set after the you're pulled toward the Force Sword in the Jewel Cave
 		bne.s   return_5FE22
-		lea     cs_5FE9A(pc), a0
-		trap    #6
+		script  cs_5FE9A
 		setFlg $385             ; set after the you're pulled toward the Force Sword in the Jewel Cave
 return_5FE22:
 		rts

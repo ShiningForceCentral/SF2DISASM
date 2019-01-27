@@ -17,8 +17,7 @@ sub_5E3B0:
 		 
 		chkFlg $321             ; set after Zalbard taunts you in the scene outside the Mitula Shrine
 		bne.s   return_5E3C0
-		lea     cs_5E3C2(pc), a0
-		trap    #6
+		script  cs_5E3C2
 		setFlg $321             ; set after Zalbard taunts you in the scene outside the Mitula Shrine
 return_5E3C0:
 		rts

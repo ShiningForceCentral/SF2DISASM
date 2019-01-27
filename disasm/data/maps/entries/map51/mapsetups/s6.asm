@@ -9,8 +9,7 @@ ms_map51_InitFunction:
 		 
 		chkFlg $1D6             ; set after you approach the pond to rescue Elric at the Harpy Pond
 		bne.s   return_5C3D6
-		lea     cs_5C3D8(pc), a0
-		trap    #6
+		script  cs_5C3D8
 return_5C3D6:
 		rts
 

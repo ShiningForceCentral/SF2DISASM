@@ -6,8 +6,8 @@
 
 ms_map44_flag1FB_InitFunction:
 		
-		lea     cs_54570(pc), a0
-		trap    #6
+		 
+		script  cs_54570
 return_5456E:
 		rts
 

@@ -9,8 +9,7 @@ ms_map31_flag33E_InitFunction:
 		 
 		chkFlg $340             ; set after talking to the painter in Moun for the first time
 		beq.s   byte_5D62A      
-		lea     cs_5D63C(pc), a0
-		trap    #6
+		script  cs_5D63C
 byte_5D62A:
 		chkFlg $342             ; set after making the Arm of Golem appear in Moun
 		beq.s   return_5D63A
@@ -80,7 +79,7 @@ cs_5D712:       textCursor $7EA
 		nextText $0,$88         ; "Oh, please!  It won't take{N}long.  Will you pose{N}for me?"
 		jump cs_5D65E
 		csc_end
-byte_5D724:     textCursor $7EE
+cs_5D724:       textCursor $7EE
 		nextText $0,$88         ; "It's you!{W2}"
 		nextSingleText $0,$88   ; "Ah, how talented I am!{N}Hmmmm?{W1}"
 		csc_end

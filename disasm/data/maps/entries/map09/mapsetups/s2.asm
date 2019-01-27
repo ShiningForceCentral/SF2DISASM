@@ -148,15 +148,14 @@ sub_567E6:
 		bra.s   loc_56828
 byte_56804:
 		chkFlg $31E             ; set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
-		bne.s   loc_5681E
+		bne.s   byte_5681E
 		txt $55B                ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
 		jsr     j_HidePortraitWindow
 		clsTxt
 		moveq   #$28,d0 
 		jsr     (Sleep).w       
-loc_5681E:
-		lea     cs_569BC(pc), a0
-		trap    #6
+byte_5681E:
+		script  cs_569BC
 		setFlg $2D7             ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 loc_56828:
 		bra.s   return_56840
@@ -165,8 +164,7 @@ byte_5682A:
 		bne.s   return_56840
 		move.w  #$B,d0
 		jsr     sub_47832
-		lea     cs_56AE6(pc), a0
-		trap    #6
+		script  cs_56AE6
 return_56840:
 		rts
 
@@ -179,8 +177,7 @@ sub_56842:
 		 
 		chkFlg $100             ; Temporary map setup flag 00
 		bne.s   return_56852
-		lea     cs_56B02(pc), a0
-		trap    #6
+		script  cs_56B02
 		setFlg $100             ; Temporary map setup flag 00
 return_56852:
 		rts

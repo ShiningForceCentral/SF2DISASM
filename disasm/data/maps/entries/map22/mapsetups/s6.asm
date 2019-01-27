@@ -9,16 +9,14 @@ ms_map22_InitFunction:
 		 
 		chkFlg $308             ; set after the scene where Goliath places you on the Desktop
 		bne.s   byte_5963E      
-		lea     cs_59656(pc), a0
-		trap    #6
+		script  cs_59656
 		setFlg $308             ; set after the scene where Goliath places you on the Desktop
 byte_5963E:
 		chkFlg $20A             ; Battle 22 completed
 		beq.s   return_59654
 		chkFlg $30A             ; set after the scene that plays after you win the chess battle
 		bne.s   return_59654
-		lea     cs_5996E(pc), a0
-		trap    #6
+		script  cs_5996E
 		setFlg $30A             ; set after the scene that plays after you win the chess battle
 return_59654:
 		rts

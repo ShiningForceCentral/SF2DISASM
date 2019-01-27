@@ -9,8 +9,7 @@ ms_map13_InitFunction:
 		 
 		chkFlg $2C7             ; set after you dislodge the turtle/fairy in Polca
 		bne.s   byte_582EC      
-		lea     cs_58310(pc), a0
-		trap    #6
+		script  cs_58310
 byte_582EC:
 		chkFlg $2CC             ; set after your raft-giving conversation with the mayor in Polca
 		beq.s   byte_582FE      

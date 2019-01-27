@@ -16,8 +16,7 @@ sub_5A2CA:
 		beq.s   return_5A2E6
 		chkFlg $2F8             ; set after the fairy cures the sick dwarf in the mine
 		bne.s   return_5A2E6
-		lea     cs_5A33A(pc), a0
-		trap    #6
+		script  cs_5A33A
 		bsr.s   sub_5A278
 		setFlg $2F8             ; set after the fairy cures the sick dwarf in the mine
 		clrFlg $45              ; Fairy is a follower

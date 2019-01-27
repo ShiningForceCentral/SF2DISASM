@@ -18,8 +18,7 @@ sub_5E05C:
 		 
 		chkFlg $33E             ; set after the Gyan join scene in the Moun underground
 		beq.s   return_5E070
-		lea     cs_5E20A(pc), a0
-		trap    #6
+		script  cs_5E20A
 		setFlg $4C              ; Zynk is a follower
 		setFlg $344             ; set after the scene where Zynk stops you as you leave the Moun underground
 return_5E070:

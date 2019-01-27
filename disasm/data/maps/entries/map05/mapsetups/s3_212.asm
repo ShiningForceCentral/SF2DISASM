@@ -27,16 +27,13 @@ sub_604D6:
 		beq.s   return_60500
 		chkFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
 		bne.s   return_60500
-		lea     cs_6093A(pc), a0
-		trap    #6
+		script  cs_6093A
 		chkFlg $3A2             ; set after opening Devil's Head with the Force Sword
-		beq.s   loc_604F6
-		lea     cs_60BA6(pc), a0
-		trap    #6
+		beq.s   byte_604F6
+		script  cs_60BA6
 		bra.s   byte_604FC      
-loc_604F6:
-		lea     cs_60B10(pc), a0
-		trap    #6
+byte_604F6:
+		script  cs_60B10
 byte_604FC:
 		setFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
 return_60500:
@@ -53,8 +50,7 @@ sub_60502:
 		bne.s   return_6051C
 		chkFlg $1B              ; Chaz joined
 		beq.s   return_6051C
-		lea     cs_60708(pc), a0
-		trap    #6
+		script  cs_60708
 		setFlg $47              ; Lemon is a follower
 		setFlg $3B1             ; set after recruiting Lemon in Yeel
 return_6051C:

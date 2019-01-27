@@ -9,8 +9,7 @@ ms_map37_flag3E7_InitFunction:
 		jsr     sub_47948
 		chkFlg $100             ; Temporary map setup flag 00
 		bne.s   return_5FABA
-		lea     cs_5FABC(pc), a0
-		trap    #6
+		script  cs_5FABC
 		setFlg $100             ; Temporary map setup flag 00
 return_5FABA:
 		rts

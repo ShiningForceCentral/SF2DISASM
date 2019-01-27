@@ -8,12 +8,10 @@ ms_map3_flag1FA_InitFunction:
 		
 		 
 		chkFlg $6               ; Kiwi joined
-		beq.s   loc_5136C
-		lea     cs_51374(pc), a0
-		trap    #6
-loc_5136C:
-		lea     cs_5137A(pc), a0
-		trap    #6
+		beq.s   byte_5136C
+		script  cs_51374
+byte_5136C:
+		script  cs_5137A
 		rts
 
 	; End of function ms_map3_flag1FA_InitFunction

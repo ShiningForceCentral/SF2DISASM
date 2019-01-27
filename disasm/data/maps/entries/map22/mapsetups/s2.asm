@@ -181,8 +181,7 @@ byte_5959E:
 		txt $70B                ; "Floor World is very{N}dangerous.  Take care!{W1}"
 		chkFlg $102             ; Temporary map setup flag 02
 		bne.s   return_595B2
-		lea     cs_599A4(pc), a0
-		trap    #6
+		script  cs_599A4
 		setFlg $102             ; Temporary map setup flag 02
 return_595B2:
 		rts

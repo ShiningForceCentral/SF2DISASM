@@ -22,8 +22,7 @@ sub_5D560:
 		 
 		chkFlg $342             ; set after making the Arm of Golem appear in Moun
 		bne.s   return_5D570
-		lea     cs_5D644(pc), a0
-		trap    #6
+		script  cs_5D644
 		setFlg $342             ; set after making the Arm of Golem appear in Moun
 return_5D570:
 		rts

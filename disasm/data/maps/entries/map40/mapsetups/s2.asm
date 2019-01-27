@@ -10,8 +10,8 @@ ms_map40_EntityEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_53FA2:
-		lea     cs_53FE0(pc), a0
-		trap    #6
+		 
+		script  cs_53FE0
 		rts
 
 	; End of function sub_53FA2

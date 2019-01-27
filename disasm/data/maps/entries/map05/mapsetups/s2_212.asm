@@ -22,8 +22,8 @@ sub_60452:
 ; =============== S U B R O U T I N E =======================================
 
 sub_60458:
-		lea     cs_60F18(pc), a0
-		trap    #6
+		 
+		script  cs_60F18
 		rts
 
 	; End of function sub_60458
@@ -63,8 +63,7 @@ sub_60476:
 byte_60494:
 		chkFlg $3B1             ; set after recruiting Lemon in Yeel
 		bne.s   return_604C6
-		lea     cs_6060E(pc), a0
-		trap    #6
+		script  cs_6060E
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		move.w  #$1C,d0
 		jsr     GetEntityPortraitAndSpeechSfx

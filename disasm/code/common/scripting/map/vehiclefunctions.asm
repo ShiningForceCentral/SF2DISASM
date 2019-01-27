@@ -10,8 +10,7 @@ MapEventType2:
 		
 		clr.w   d0
 		bsr.w   MakeEntityIdle
-		lea     word_45284(pc), a0
-		trap    #MAPSCRIPT
+		script  cs_45284
 		lea     byte_45316(pc), a1
 		bsr.s   ApplyActscriptToFollowers
 		bsr.s   WaitForFollowersStopped
@@ -20,24 +19,11 @@ MapEventType2:
 
 	; End of function MapEventType2
 
-word_45284:     dc.w $15                ; mapscript
-		dc.b $1E
-		dc.b $FF
-		dc.l eas_452A4
-		dc.w $15
-		dc.b 0
-		dc.b $FF
-		dc.l eas_452B2
-		dc.w $19
-		dc.b $1E
-		dc.b $40
-		dc.b $40
-		dc.b 3
-		dc.w $15
-		dc.b 0
-		dc.b $FF
-		dc.l eas_45308
-		dc.w $FFFF
+cs_45284:       setActscriptWait $1E,eas_452A4
+		setActscriptWait $0,eas_452B2
+		setPos $1E,64,64,DOWN
+		setActscriptWait $0,eas_45308
+		csc_end
 eas_452A4:       ac_0E $0,$0,$1
 		 ac_waitDest
 word_452AE:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FF4E
@@ -82,8 +68,7 @@ MapEventType4:
 		
 		clr.w   d0
 		bsr.w   MakeEntityIdle
-		lea     word_45348(pc), a0
-		trap    #MAPSCRIPT
+		script  cs_45348
 		lea     byte_45368(pc), a1
 		bsr.w   ApplyActscriptToFollowers
 		bsr.w   WaitForFollowersStopped
@@ -93,17 +78,10 @@ MapEventType4:
 
 	; End of function MapEventType4
 
-word_45348:     dc.w $15
-		dc.w $1EFF
-		dc.l eas_45360
-		dc.w $1A
-		dc.w 0
-		dc.w 0
-		dc.w $15
-		dc.b 0
-		dc.b $FF
-		dc.l eas_4536C
-		dc.w $FFFF
+cs_45348:       setActscriptWait $1E,eas_45360
+		setSprite $0,$0
+		setActscriptWait $0,eas_4536C
+		csc_end
 eas_45360:       ac_clonePos $0
 word_45364:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FE98
 		dc.w (eas_Idle-word_45364) & $FFFF
@@ -145,8 +123,7 @@ MapEventType3:
 		clr.w   d0
 		bsr.w   MakeEntityIdle
 		clr.b   ((byte_FFAFB0-$1000000)).w
-		lea     word_453F2(pc), a0
-		trap    #MAPSCRIPT
+		script  cs_453F2
 		lea     byte_45434(pc), a1
 		bsr.w   ApplyActscriptToHeroAndFollowers
 		bsr.w   WaitForHeroAndFollowersStopped
@@ -156,20 +133,10 @@ return_453F0:
 
 	; End of function MapEventType3
 
-word_453F2:     dc.w $15
-		dc.b 0
-		dc.b $FF
-		dc.l eas_4540C
-		dc.w $19
-		dc.b $9F
-		dc.b $40
-		dc.b $40
-		dc.b 3
-		dc.w $15
-		dc.b 0
-		dc.b $FF
-		dc.l eas_45426
-		dc.w $FFFF
+cs_453F2:       setActscriptWait $0,eas_4540C
+		setPos $9F,64,64,DOWN
+		setActscriptWait $0,eas_45426
+		csc_end
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -202,8 +169,7 @@ MapEventType5:
 		clr.w   d0
 		bsr.w   MakeEntityIdle
 		move.b  #1,((byte_FFAFB0-$1000000)).w
-		lea     word_45470(pc), a0
-		trap    #MAPSCRIPT
+		script  cs_45470
 		lea     byte_45488(pc), a1
 		bsr.w   ApplyActscriptToHeroAndFollowers
 		bsr.w   WaitForHeroAndFollowersStopped
@@ -213,18 +179,10 @@ MapEventType5:
 
 	; End of function MapEventType5
 
-word_45470:     dc.w $15
-		dc.b $9F
-		dc.b $FF
-		dc.l eas_45360
-		dc.w $1A
-		dc.w 0
-		dc.w 0
-		dc.w $15
-		dc.b 0
-		dc.b $FF
-		dc.l eas_4548C
-		dc.w $FFFF
+cs_45470:       setActscriptWait $9F,eas_45360
+		setSprite $0,$0
+		setActscriptWait $0,eas_4548C
+		csc_end
 byte_45488:      ac_clonePos $1F
 eas_4548C:       ac_09 $0,$1
 		 ac_soundCommand $59
@@ -296,8 +254,7 @@ ShrinkIntoCaravanBowieAndFollowers:
 		bsr.w   MakeEntityIdle
 		moveq   #1,d0
 		bsr.w   MakeEntityIdle
-		lea     ms_BowieShrinkIn(pc), a0
-		trap    #MAPSCRIPT
+		script  ms_BowieShrinkIn
 		lea     eas_ShrinkIn(pc), a1
 		bsr.w   ApplyActscriptToFollowers
 		bsr.w   WaitForFollowersStopped
@@ -351,8 +308,7 @@ GrowOutBowieAndFollowoers:
 		
 		clr.w   d0
 		bsr.w   MakeEntityIdle
-		lea     ms_BowieGrowOut(pc), a0
-		trap    #MAPSCRIPT
+		script  ms_BowieGrowOut
 		lea     eas_GrowOut(pc), a1
 		bsr.w   ApplyActscriptToFollowers
 		bsr.w   WaitForFollowersStopped

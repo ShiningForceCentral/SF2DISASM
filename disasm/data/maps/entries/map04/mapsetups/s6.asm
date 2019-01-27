@@ -8,14 +8,12 @@ ms_map4_InitFunction:
 		
 		 
 		chkFlg $270             ; set after the soldiers are swallowed up by the earthquake
-		bne.s   loc_5173A
-		lea     cs_51750(pc), a0
-		trap    #6
+		bne.s   byte_5173A
+		script  cs_51750
 		setFlg $270             ; set after the soldiers are swallowed up by the earthquake
 		bra.s   return_51740
-loc_5173A:
-		lea     cs_51742(pc), a0
-		trap    #6
+byte_5173A:
+		script  cs_51742
 return_51740:
 		rts
 

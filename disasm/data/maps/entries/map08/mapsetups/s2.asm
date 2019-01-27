@@ -93,8 +93,8 @@ sub_560E2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_560EE:
-		lea     cs_56172(pc), a0
-		trap    #6
+		 
+		script  cs_56172
 		rts
 
 	; End of function sub_560EE
@@ -162,8 +162,7 @@ sub_56138:
 		 
 		chkFlg $8               ; May joined
 		bne.s   return_56144
-		lea     cs_56146(pc), a0
-		trap    #6
+		script  cs_56146
 return_56144:
 		rts
 

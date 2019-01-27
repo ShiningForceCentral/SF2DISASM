@@ -29,8 +29,7 @@ sub_5C2F2:
 		 
 		chkFlg $1D6             ; set after you approach the pond to rescue Elric at the Harpy Pond
 		bne.s   return_5C302
-		lea     cs_5C312(pc), a0
-		trap    #6
+		script  cs_5C312
 		setFlg $1D6             ; set after you approach the pond to rescue Elric at the Harpy Pond
 return_5C302:
 		rts
@@ -44,8 +43,7 @@ sub_5C304:
 		 
 		chkFlg $1D6             ; set after you approach the pond to rescue Elric at the Harpy Pond
 		bne.s   return_5C310
-		lea     cs_5C3AA(pc), a0
-		trap    #6
+		script  cs_5C3AA
 return_5C310:
 		rts
 

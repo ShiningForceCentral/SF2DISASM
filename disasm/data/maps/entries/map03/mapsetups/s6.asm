@@ -9,14 +9,12 @@ ms_map3_InitFunction:
 		 
 		chkFlg $1               ; Sarah joined
 		beq.s   byte_51390      
-		lea     cs_513BA(pc), a0
-		trap    #6
+		script  cs_513BA
 		bra.s   byte_513A8      
 byte_51390:
 		chkFlg $25A             ; set after Astral's second basement line
 		beq.s   byte_513A8      
-		lea     cs_513A0(pc), a0
-		trap    #6
+		script  cs_513A0
 		bra.w   byte_513A8      
 cs_513A0:
 		setPos $1,41,10,UP

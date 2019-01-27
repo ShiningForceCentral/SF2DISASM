@@ -6,8 +6,8 @@
 
 ms_map43_InitFunction:
 		
-		lea     cs_540C0(pc), a0
-		trap    #6
+		 
+		script  cs_540C0
 		setFlg $264             ; set after event at Hawel's house
 		setFlg $28A             ; set after event at Hawel's house
 		clrFlg $48              ; Kazin is a follower

@@ -65,8 +65,7 @@ sub_5D89E:
 		bne.s   byte_5D8B6      
 		txt $CD6                ; "Devils are coming to town?{N}OK, I'll beat them up!{W1}"
 		clsTxt
-		lea     cs_5DA7A(pc), a0
-		trap    #6
+		script  cs_5DA7A
 		setFlg $32A             ; set after speaking to a centaur at Pacalon castle (the one who moves and shivers)
 byte_5D8B6:
 		txt $CD7                ; "Oh, I can't.  I'm too hungry!{W1}"

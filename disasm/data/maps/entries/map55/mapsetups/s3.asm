@@ -14,8 +14,7 @@ sub_5E250:
 		 
 		chkFlg $216             ; Battle 34 completed
 		beq.s   return_5E25C
-		lea     byte_5E27C(pc), a0
-		trap    #6
+		script  cs_5E27C
 return_5E25C:
 		rts
 

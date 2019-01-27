@@ -16,8 +16,7 @@ sub_614DE:
 		bne.s   return_614FC
 		chkFlg $387             ; set after the first time you talk to Creed on path up Ancient Tower
 		bne.s   byte_614F4      
-		lea     cs_6150A(pc), a0
-		trap    #6
+		script  cs_6150A
 		setFlg $387             ; set after the first time you talk to Creed on path up Ancient Tower
 byte_614F4:
 		setFlg $1B9             ; Battle 41 unlocked

@@ -148,8 +148,7 @@ sub_51256:
 		txt $2A5                ; "Oooo!  Ooooo!{W1}"
 		clsTxt
 		jsr     j_HidePortraitWindow
-		lea     cs_512BA(pc), a0
-		trap    #6
+		script  cs_512BA
 return_512B8:
 		rts
 

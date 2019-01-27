@@ -115,8 +115,7 @@ sub_5E70E:
 		 
 		chkFlg $349             ; set after the Taya join scene has played inside the Mitula Shrine
 		bne.s   return_5E71E
-		lea     cs_5E772(pc), a0
-		trap    #6
+		script  cs_5E772
 		setFlg $349             ; set after the Taya join scene has played inside the Mitula Shrine
 return_5E71E:
 		rts

@@ -50,8 +50,7 @@ sub_5FE68:
 		 
 		chkFlg $386             ; set after you pull the Force Sword out
 		bne.s   loc_5FE7A
-		lea     cs_5FF06(pc), a0
-		trap    #6
+		script  cs_5FF06
 		setFlg $386             ; set after you pull the Force Sword out
 		bra.s   return_5FE8E
 loc_5FE7A:

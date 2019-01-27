@@ -9,8 +9,7 @@ ms_map25_InitFunction:
 		 
 		chkFlg $320             ; set after the merchant in Ketto runs to his store
 		beq.s   return_5D3A8
-		lea     cs_5D3AA(pc), a0
-		trap    #6
+		script  cs_5D3AA
 return_5D3A8:
 		rts
 

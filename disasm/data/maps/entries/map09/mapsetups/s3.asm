@@ -20,8 +20,7 @@ sub_56866:
 		 
 		chkFlg $2D6             ; set after talking to the priest in upstairs Hassan
 		bne.s   return_56876
-		lea     cs_568F6(pc), a0
-		trap    #6
+		script  cs_568F6
 		setFlg $2D6             ; set after talking to the priest in upstairs Hassan
 return_56876:
 		rts

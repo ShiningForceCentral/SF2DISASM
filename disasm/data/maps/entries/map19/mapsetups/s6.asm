@@ -9,13 +9,11 @@ ms_map19_InitFunction:
 		 
 		chkFlg $25D             ; set after the scene in the King's bedroom
 		bne.s   byte_530F6      
-		lea     cs_53104(pc), a0
-		trap    #6
+		script  cs_53104
 byte_530F6:
 		chkFlg $260             ; set after agreeing to go to the tower with Astral
 		beq.s   return_53102
-		lea     cs_53104(pc), a0
-		trap    #6
+		script  cs_53104
 return_53102:
 		rts
 

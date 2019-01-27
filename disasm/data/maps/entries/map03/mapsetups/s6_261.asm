@@ -9,8 +9,7 @@ ms_map3_flag261_InitFunction:
 		 
 		chkFlg $3               ; Jaha joined
 		beq.s   return_513CC
-		lea     cs_513CE(pc), a0
-		trap    #6
+		script  cs_513CE
 return_513CC:
 		rts
 

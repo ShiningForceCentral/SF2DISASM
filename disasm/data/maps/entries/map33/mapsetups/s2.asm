@@ -93,8 +93,7 @@ byte_5A80C:
 		txt $76E                ; "OK, I think I can help him.{N}Bring me to him.{W1}"
 byte_5A814:
 		clsTxt
-		lea     cs_5A828(pc), a0
-		trap    #6
+		script  cs_5A828
 		setFlg $2FA             ; set after the fairy tags along at Creed's
 		setFlg $311             ; set after the fairy tags along at Creed's
 return_5A826:
@@ -113,18 +112,16 @@ cs_5A828:       setBlocks 17,13,1,1,9,5
 sub_5A842:
 		 
 		chkFlg $16              ; Frayja joined
-		bne.s   loc_5A85C
+		bne.s   byte_5A85C
 		chkFlg $313             ; ???
 		bne.s   byte_5A856      
-		lea     cs_5A8CA(pc), a0
-		trap    #6
+		script  cs_5A8CA
 		dc.w $6004
 byte_5A856:
 		txt $775                ; "What a pity...then, I wish{N}happiness to all of you.{W1}"
 		bra.s   return_5A862
-loc_5A85C:
-		lea     cs_5A90E(pc), a0
-		trap    #6
+byte_5A85C:
+		script  cs_5A90E
 return_5A862:
 		rts
 
@@ -136,18 +133,16 @@ return_5A862:
 sub_5A864:
 		 
 		chkFlg $16              ; Frayja joined
-		bne.s   loc_5A87E
+		bne.s   byte_5A87E
 		chkFlg $313             ; ???
 		bne.s   byte_5A878      
-		lea     cs_5A93A(pc), a0
-		trap    #6
+		script  cs_5A93A
 		dc.w $6004
 byte_5A878:
 		txt $778                ; "Tut!  OK, I have a{N}comfortable life here.{W1}"
 		bra.s   return_5A884
-loc_5A87E:
-		lea     cs_5A97E(pc), a0
-		trap    #6
+byte_5A87E:
+		script  cs_5A97E
 return_5A884:
 		rts
 
@@ -159,19 +154,17 @@ return_5A884:
 sub_5A886:
 		 
 		chkFlg $16              ; Frayja joined
-		bne.s   loc_5A8A0
+		bne.s   byte_5A8A0
 		chkFlg $313             ; ???
 		bne.s   byte_5A89A      
-		lea     cs_5A9AA(pc), a0
-		trap    #6
+		script  cs_5A9AA
 		bra.s   loc_5A89E
 byte_5A89A:
 		txt $77B                ; "My magic could've been a{N}great help to you.{W1}"
 loc_5A89E:
 		bra.s   return_5A8A6
-loc_5A8A0:
-		lea     cs_5A9EE(pc), a0
-		trap    #6
+byte_5A8A0:
+		script  cs_5A9EE
 return_5A8A6:
 		rts
 
@@ -183,19 +176,17 @@ return_5A8A6:
 sub_5A8A8:
 		 
 		chkFlg $16              ; Frayja joined
-		bne.s   loc_5A8C2
+		bne.s   byte_5A8C2
 		chkFlg $313             ; ???
 		bne.s   byte_5A8BC      
-		lea     cs_5AA1A(pc), a0
-		trap    #6
+		script  cs_5AA1A
 		bra.s   loc_5A8C0
 byte_5A8BC:
 		txt $77E                ; "You...snot nose!{W1}"
 loc_5A8C0:
 		bra.s   return_5A8C8
-loc_5A8C2:
-		lea     cs_5AA5E(pc), a0
-		trap    #6
+byte_5A8C2:
+		script  cs_5AA5E
 return_5A8C8:
 		rts
 

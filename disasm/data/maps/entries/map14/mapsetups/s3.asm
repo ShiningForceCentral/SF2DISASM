@@ -11,8 +11,8 @@ ms_map14_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 sub_58E50:
-		lea     cs_58E5C(pc), a0
-		trap    #6
+		 
+		script  cs_58E5C
 		setFlg $101             ; Temporary map setup flag 01
 return_58E5A:
 		rts

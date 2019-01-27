@@ -19,11 +19,10 @@ sub_59610:
 		moveq   #$7D,d1 
 		jsr     j_sub_9146
 		cmpi.w  #$FFFF,d0
-		beq.s   loc_59624
+		beq.s   byte_59624
 		jsr     j_RemoveItemBySlot
-loc_59624:
-		lea     cs_599B2(pc), a0
-		trap    #6
+byte_59624:
+		script  cs_599B2
 		moveq   #$FFFFFFFF,d6
 return_5962C:
 		rts

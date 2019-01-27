@@ -86,8 +86,7 @@ sub_5D27A:
 		movem.l (sp)+,d0
 		move.b  d0,((MESSAGE_SPEED-$1000000)).w
 		setFlg $320             ; set after the merchant in Ketto runs to his store
-		lea     cs_5D3B8(pc), a0
-		trap    #6
+		script  cs_5D3B8
 		bra.s   return_5D2D0
 loc_5D2C4:
 		move.b  #9,((CURRENT_SHOP_INDEX-$1000000)).w

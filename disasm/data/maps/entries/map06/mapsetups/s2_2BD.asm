@@ -410,8 +410,7 @@ loc_54C4C:
 byte_54C8E:
 		txt $45F                ; "Oh, that cannon would be{N}perfect!{W1}"
 		clsTxt
-		lea     cs_54CC6(pc), a0
-		trap    #6
+		script  cs_54CC6
 		txt $460                ; "Sir Astral said it was OK!{N}Here is the explosive.{W1}"
 		clsTxt
 		move.w  #$74,d0 

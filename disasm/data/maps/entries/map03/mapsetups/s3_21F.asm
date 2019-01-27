@@ -19,8 +19,8 @@ nullsub_70:
 ; =============== S U B R O U T I N E =======================================
 
 sub_6282A:
-		lea     cs_6283E(pc), a0
-		trap    #6
+		 
+		script  cs_6283E
 		txt $F48                ; "Wait, wait!{W2}"
 		txt $F49                ; "Sir Astral told me not to{N}let you go out today!{W2}"
 		txt $F4A                ; "You have to be here.{W1}"

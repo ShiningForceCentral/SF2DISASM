@@ -9,16 +9,14 @@ ms_map17_InitFunction:
 		 
 		chkFlg $294             ; set after initial wake-up in prison sequence
 		bne.s   byte_52460      
-		lea     cs_5249E(pc), a0
-		trap    #6
+		script  cs_5249E
 		setFlg $294             ; set after initial wake-up in prison sequence
 byte_52460:
 		chkFlg $297             ; set after Galam and Lemon leave with their army
 		beq.s   byte_52476      
 		move.w  #$83,d0 
 		jsr     MoveEntityOutOfMap
-		lea     cs_5247C(pc), a0
-		trap    #6
+		script  cs_5247C
 byte_52476:
 		setFlg $263             ; set after prison wake-up sequence IF 0297 is *not* also set
 		rts

@@ -36,8 +36,7 @@ byte_50F6A:
 		txt $1E1                ; "strange today.{W1}"
 		chkFlg $100             ; Temporary map setup flag 00
 		bne.s   loc_50F82
-		lea     cs_513D6(pc), a0
-		trap    #6
+		script  cs_513D6
 		setFlg $100             ; Temporary map setup flag 00
 loc_50F82:
 		bra.s   loc_50F88
@@ -48,8 +47,7 @@ loc_50F88:
 byte_50F8A:
 		chkFlg $42              ; Sarah + Chester are followers
 		bne.s   return_50F96
-		lea     cs_513E2(pc), a0
-		trap    #6
+		script  cs_513E2
 return_50F96:
 		rts
 

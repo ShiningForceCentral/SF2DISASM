@@ -104,8 +104,8 @@ sub_627AA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_627B4:
-		lea     cs_628C8(pc), a0
-		trap    #6
+		 
+		script  cs_628C8
 		rts
 
 	; End of function sub_627B4
@@ -144,8 +144,7 @@ sub_627D0:
 		bne.s   byte_627F2      
 		txt $FC1                ; "Now, let's go see the King!{W1}"
 		setFlg $3D5
-		lea     cs_6290C(pc), a0
-		trap    #6
+		script  cs_6290C
 		bra.s   return_627F6
 byte_627F2:
 		txt $FC2                ; "No?  You said NO?{N}We have no time to waste!{W1}"

@@ -14,8 +14,7 @@ sub_59DBE:
 		 
 		chkFlg $30C             ; set after the man tries to lift the giant ring in Floor World
 		bne.s   return_59DCE
-		lea     cs_59F20(pc), a0
-		trap    #6
+		script  cs_59F20
 		setFlg $30C             ; set after the man tries to lift the giant ring in Floor World
 return_59DCE:
 		rts

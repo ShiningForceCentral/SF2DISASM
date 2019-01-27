@@ -22,8 +22,7 @@ sub_615C0:
 		 
 		chkFlg $21F             ; Battle 43 completed
 		beq.s   return_615CC
-		lea     cs_62658(pc), a0
-		trap    #6
+		script  cs_62658
 return_615CC:
 		rts
 

@@ -9,8 +9,7 @@ ms_map12_InitFunction:
 		 
 		chkFlg $2D5             ; set after telling Rohde that you're going to get the Caravan
 		bne.s   byte_57D10      
-		lea     cs_57D22(pc), a0
-		trap    #6
+		script  cs_57D22
 byte_57D10:
 		chkFlg $206             ; Battle 18 completed
 		beq.s   return_57D20

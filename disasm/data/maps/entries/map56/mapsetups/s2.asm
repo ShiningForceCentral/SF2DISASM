@@ -11,8 +11,7 @@ sub_614B2:
 		 
 		chkFlg $387             ; set after the first time you talk to Creed on path up Ancient Tower
 		bne.s   byte_614C2      
-		lea     cs_6150A(pc), a0
-		trap    #6
+		script  cs_6150A
 		setFlg $387             ; set after the first time you talk to Creed on path up Ancient Tower
 byte_614C2:
 		txt $E1B                ; "There is no church around{N}here.  Think of me as a{N}priest.{W1}"

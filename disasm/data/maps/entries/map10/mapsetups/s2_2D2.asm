@@ -42,8 +42,7 @@ sub_56F0C:
 		jsr     j_YesNoPrompt
 		tst.w   d0
 		bne.s   byte_56F30      
-		lea     cs_5797A(pc), a0
-		trap    #6
+		script  cs_5797A
 		setFlg $31F             ; set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
 		bra.s   loc_56F38
 byte_56F30:
@@ -109,8 +108,7 @@ sub_56F68:
 		 
 		chkFlg $2D3             ; set after the hatchling in Bedoe shows you he can almost fly
 		bne.s   byte_56F7A      
-		lea     cs_5766C(pc), a0
-		trap    #6
+		script  cs_5766C
 		setFlg $2D3             ; set after the hatchling in Bedoe shows you he can almost fly
 		bra.s   return_56F7E
 byte_56F7A:

@@ -9,8 +9,7 @@ ms_map37_InitFunction:
 		jsr     sub_47948
 		chkFlg $344             ; set after the scene where Zynk stops you as you leave the Moun underground
 		beq.s   return_5FA9A
-		lea     cs_5FA9C(pc), a0
-		trap    #6
+		script  cs_5FA9C
 return_5FA9A:
 		rts
 

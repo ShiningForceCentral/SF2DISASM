@@ -22,8 +22,7 @@ sub_561BE:
 		bne.s   return_561D8
 		chkFlg $102             ; Temporary map setup flag 02
 		bne.s   return_561D8
-		lea     cs_563B2(pc), a0
-		trap    #6
+		script  cs_563B2
 		setFlg $2BF             ; set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
 		setFlg $102             ; Temporary map setup flag 02
 return_561D8:
@@ -38,8 +37,7 @@ sub_561DA:
 		 
 		chkFlg $2C4             ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   return_561EA
-		lea     cs_56422(pc), a0
-		trap    #6
+		script  cs_56422
 		setFlg $2C4             ; set after the scene in Ribble where the mayor confronts Bowie
 return_561EA:
 		rts
