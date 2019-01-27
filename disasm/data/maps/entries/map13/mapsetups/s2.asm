@@ -21,14 +21,14 @@ ms_map13_EntityEvents:
 
 sub_58056:
 		 
-		chkFlg $100             ; Temporary map setup flag 00
+		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   byte_58068      
-		txt $58C                ; "How did you come to{N}Polca Village?{W2}"
-		txt $58D                ; "Through the cave?{N}Nobody has come to this{N}village since...{W2}"
-		setFlg $100             ; Temporary map setup flag 00
+		txt     $58C            ; "How did you come to{N}Polca Village?{W2}"
+		txt     $58D            ; "Through the cave?{N}Nobody has come to this{N}village since...{W2}"
+		setFlg  $100            ; Temporary map setup flag 00
 byte_58068:
-		txt $58E                ; "Oh, you defeated that{N}hobgoblin?  Wow!{W2}"
-		txt $58F                ; "Now we can use that tunnel{N}to travel between Polca and{N}the wilderness area!{W1}"
+		txt     $58E            ; "Oh, you defeated that{N}hobgoblin?  Wow!{W2}"
+		txt     $58F            ; "Now we can use that tunnel{N}to travel between Polca and{N}the wilderness area!{W1}"
 		rts
 
 	; End of function sub_58056
@@ -38,7 +38,7 @@ byte_58068:
 
 sub_58072:
 		 
-		txt $590                ; "Breathe deeply....{W2}{N}Wonderful air, huh?{W1}"
+		txt     $590            ; "Breathe deeply....{W2}{N}Wonderful air, huh?{W1}"
 		rts
 
 	; End of function sub_58072
@@ -48,13 +48,13 @@ sub_58072:
 
 sub_58078:
 		 
-		chkFlg $2C7             ; set after you dislodge the turtle/fairy in Polca
+		chkFlg  $2C7            ; set after you dislodge the turtle/fairy in Polca
 		bne.s   byte_5808A      
 		script  cs_58512
-		setFlg $2C7             ; set after you dislodge the turtle/fairy in Polca
+		setFlg  $2C7            ; set after you dislodge the turtle/fairy in Polca
 		bra.s   return_5808E
 byte_5808A:
-		txt $591                ; "In ancient times, there{N}were magic tunnels.{W2}{N}People traveled easily{N}through the tunnels.{W1}"
+		txt     $591            ; "In ancient times, there{N}were magic tunnels.{W2}{N}People traveled easily{N}through the tunnels.{W1}"
 return_5808E:
 		rts
 
@@ -85,14 +85,14 @@ sub_5809E:
 
 sub_580AC:
 		 
-		chkFlg $2C6             ; set after Oddler wanders down from the mountain
+		chkFlg  $2C6            ; set after Oddler wanders down from the mountain
 		bne.s   byte_580B8      
-		txt $592                ; "To the east is the sacred{N}area of Volcanon.{W1}"
+		txt     $592            ; "To the east is the sacred{N}area of Volcanon.{W1}"
 		bra.s   return_580C4
 byte_580B8:
-		txt $5B9                ; "He came down from the{N}mountain....{W2}"
-		txt $5BA                ; "He's not from Polca, or{N}Bedoe....{W2}"
-		txt $5BB                ; "Where did he come from?{W1}"
+		txt     $5B9            ; "He came down from the{N}mountain....{W2}"
+		txt     $5BA            ; "He's not from Polca, or{N}Bedoe....{W2}"
+		txt     $5BB            ; "Where did he come from?{W1}"
 return_580C4:
 		rts
 
@@ -112,7 +112,7 @@ sub_580C6:
 
 sub_580CE:
 		 
-		txt $593                ; "Mt. Volcano is home to{N}beastmen.{W2}{N}We were a warlike tribe, but{N}we've almost forgotten how{N}to fight.{W1}"
+		txt     $593            ; "Mt. Volcano is home to{N}beastmen.{W2}{N}We were a warlike tribe, but{N}we've almost forgotten how{N}to fight.{W1}"
 		rts
 
 	; End of function sub_580CE
@@ -122,7 +122,7 @@ sub_580CE:
 
 sub_580D4:
 		 
-		txt $594                ; "Young men these days are{N}lucky!  I wish I was young{N}again!{W1}"
+		txt     $594            ; "Young men these days are{N}lucky!  I wish I was young{N}again!{W1}"
 		rts
 
 	; End of function sub_580D4
@@ -132,20 +132,20 @@ sub_580D4:
 
 sub_580DA:
 		 
-		chkFlg $2C6             ; set after Oddler wanders down from the mountain
+		chkFlg  $2C6            ; set after Oddler wanders down from the mountain
 		bne.s   byte_580FC      
-		chkFlg $101             ; Temporary map setup flag 01
+		chkFlg  $101            ; Temporary map setup flag 01
 		bne.s   byte_580F2      
 		script  cs_58116
-		setFlg $101             ; Temporary map setup flag 01
+		setFlg  $101            ; Temporary map setup flag 01
 		bra.s   loc_580FA
 byte_580F2:
-		txt $597                ; "Whoa!  Mt. Volcano erupted!{W2}"
-		txt $598                ; "It's an evil omen.{W1}"
+		txt     $597            ; "Whoa!  Mt. Volcano erupted!{W2}"
+		txt     $598            ; "It's an evil omen.{W1}"
 loc_580FA:
 		bra.s   return_58100
 byte_580FC:
-		txt $5B7                ; "Oh, this is serious!{N}I hope he survives the night.{W1}"
+		txt     $5B7            ; "Oh, this is serious!{N}I hope he survives the night.{W1}"
 return_58100:
 		rts
 
@@ -156,7 +156,7 @@ return_58100:
 
 sub_58102:
 		 
-		txt $599                ; "Clank!  Clank!{N}All of our weapons are made{N}by me!{W2}{N}But, who uses them in this{N}peaceful country?{W1}"
+		txt     $599            ; "Clank!  Clank!{N}All of our weapons are made{N}by me!{W2}{N}But, who uses them in this{N}peaceful country?{W1}"
 		rts
 
 	; End of function sub_58102
@@ -166,7 +166,7 @@ sub_58102:
 
 sub_58108:
 		 
-		txt $59A                ; "Hirsute?  'Cause I'm a{N}beastman.{W2}{N}I'm not hairy enough though.{N}I envy those hairy guys!{W1}"
+		txt     $59A            ; "Hirsute?  'Cause I'm a{N}beastman.{W2}{N}I'm not hairy enough though.{N}I envy those hairy guys!{W1}"
 		rts
 
 	; End of function sub_58108
@@ -176,7 +176,7 @@ sub_58108:
 
 sub_5810E:
 		 
-		txt $5B8                ; "Ah...stop...no!{N}I don't want...to see....{N}My...head...aches....{W1}"
+		txt     $5B8            ; "Ah...stop...no!{N}I don't want...to see....{N}My...head...aches....{W1}"
 		rts
 
 	; End of function sub_5810E

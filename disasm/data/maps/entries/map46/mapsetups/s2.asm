@@ -299,7 +299,7 @@ sub_5C254:
 
 sub_5C25C:
 		 
-		txt $B                  ; "{LEADER}, take it easy!{W1}"
+		txt     $B              ; "{LEADER}, take it easy!{W1}"
 		rts
 
 	; End of function sub_5C25C

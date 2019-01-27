@@ -24,7 +24,7 @@ ms_map67_ZoneEvents:
 
 sub_4FB24:
 		 
-		chkFlg $208             ; Battle 20 completed
+		chkFlg  $208            ; Battle 20 completed
 		bne.s   return_4FB30
 		script  cs_4FB64
 return_4FB30:
@@ -37,16 +37,16 @@ return_4FB30:
 
 sub_4FB32:
 		 
-		chkFlg $2EF             ; set after Elric opens the passage to Devil's Tail
+		chkFlg  $2EF            ; set after Elric opens the passage to Devil's Tail
 		bne.s   return_4FB56
-		chkFlg $D               ; Elric joined
+		chkFlg  $D              ; Elric joined
 		beq.s   return_4FB56
 		move.w  #$D,d0
 		jsr     j_GetCurrentHP
 		tst.w   d1
 		beq.s   return_4FB56
 		script  cs_4FC32
-		setFlg $2EF             ; set after Elric opens the passage to Devil's Tail
+		setFlg  $2EF            ; set after Elric opens the passage to Devil's Tail
 return_4FB56:
 		rts
 

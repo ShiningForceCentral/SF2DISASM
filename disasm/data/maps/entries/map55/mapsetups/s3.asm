@@ -12,7 +12,7 @@ ms_map55_ZoneEvents:
 
 sub_5E250:
 		 
-		chkFlg $216             ; Battle 34 completed
+		chkFlg  $216            ; Battle 34 completed
 		beq.s   return_5E25C
 		script  cs_5E27C
 return_5E25C:

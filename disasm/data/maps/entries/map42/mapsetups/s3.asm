@@ -12,12 +12,12 @@ ms_map42_ZoneEvents:
 
 sub_5FE0C:
 		 
-		chkFlg $3E7             ; set after the Nazca ship shootdown scene
+		chkFlg  $3E7            ; set after the Nazca ship shootdown scene
 		beq.s   return_5FE22
-		chkFlg $385             ; set after the you're pulled toward the Force Sword in the Jewel Cave
+		chkFlg  $385            ; set after the you're pulled toward the Force Sword in the Jewel Cave
 		bne.s   return_5FE22
 		script  cs_5FE9A
-		setFlg $385             ; set after the you're pulled toward the Force Sword in the Jewel Cave
+		setFlg  $385            ; set after the you're pulled toward the Force Sword in the Jewel Cave
 return_5FE22:
 		rts
 

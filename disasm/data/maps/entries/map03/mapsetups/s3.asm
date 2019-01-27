@@ -37,7 +37,7 @@ ms_map3_ZoneEvents:
 sub_50D74:
 		 
 		script  cs_51444
-		chkFlg $101             ; Temporary map setup flag 01
+		chkFlg  $101            ; Temporary map setup flag 01
 		bne.s   byte_50DA6      
 		jsr     (WaitForCameraToCatchUp).l
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
@@ -45,10 +45,10 @@ sub_50D74:
 		jsr     GetEntityPortraitAndSpeechSfx
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
-		txt $1F2                ; "You unruly boy!{N}Where on earth are you{N}going?{W2}"
-		txt $1F3                ; "There is no school outside!{N}Go to school!{W1}"
+		txt     $1F2            ; "You unruly boy!{N}Where on earth are you{N}going?{W2}"
+		txt     $1F3            ; "There is no school outside!{N}Go to school!{W1}"
 byte_50DA6:
-		setFlg $101             ; Temporary map setup flag 01
+		setFlg  $101            ; Temporary map setup flag 01
 		rts
 
 	; End of function sub_50D74
@@ -58,10 +58,10 @@ byte_50DA6:
 
 sub_50DAC:
 		 
-		chkFlg $258             ; set after agreeing to try getting into the castle
+		chkFlg  $258            ; set after agreeing to try getting into the castle
 		bne.s   byte_50DE6      
 		script  cs_5144C
-		chkFlg $102             ; Temporary map setup flag 02
+		chkFlg  $102            ; Temporary map setup flag 02
 		bne.s   byte_50DE0      
 		jsr     (WaitForCameraToCatchUp).l
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
@@ -69,15 +69,15 @@ sub_50DAC:
 		jsr     GetEntityPortraitAndSpeechSfx
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
-		txt $1F1                ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
+		txt     $1F1            ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 byte_50DE0:
-		setFlg $102             ; Temporary map setup flag 02
+		setFlg  $102            ; Temporary map setup flag 02
 		bra.s   return_50DF6
 byte_50DE6:
-		chkFlg $25C             ; set after the guards have listened to Sarah and allowed you into the castle
+		chkFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
 		bne.s   return_50DF6
 		script  cs_51652
-		setFlg $25C             ; set after the guards have listened to Sarah and allowed you into the castle
+		setFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
 return_50DF6:
 		rts
 
@@ -88,10 +88,10 @@ return_50DF6:
 
 sub_50DF8:
 		 
-		chkFlg $258             ; set after agreeing to try getting into the castle
+		chkFlg  $258            ; set after agreeing to try getting into the castle
 		bne.s   byte_50E32      
 		script  cs_51454
-		chkFlg $103             ; Temporary map setup flag 03
+		chkFlg  $103            ; Temporary map setup flag 03
 		bne.s   byte_50E2C      
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		move.w  #$8B,d0 
@@ -99,15 +99,15 @@ sub_50DF8:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     (WaitForCameraToCatchUp).l
-		txt $1F1                ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
+		txt     $1F1            ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 byte_50E2C:
-		setFlg $103             ; Temporary map setup flag 03
+		setFlg  $103            ; Temporary map setup flag 03
 		bra.s   return_50E42
 byte_50E32:
-		chkFlg $25C             ; set after the guards have listened to Sarah and allowed you into the castle
+		chkFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
 		bne.s   return_50E42
 		script  cs_51652
-		setFlg $25C             ; set after the guards have listened to Sarah and allowed you into the castle
+		setFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
 return_50E42:
 		rts
 
@@ -118,7 +118,7 @@ return_50E42:
 
 sub_50E44:
 		 
-		chkFlg $259             ; set after Bowie is intercepted by his mother going downstairs
+		chkFlg  $259            ; set after Bowie is intercepted by his mother going downstairs
 		bne.s   return_50E64
 		script  cs_5145C
 		move.w  #$80,d0 
@@ -126,7 +126,7 @@ sub_50E44:
 		moveq   #6,d2
 		moveq   #1,d3
 		jsr     sub_47808
-		setFlg $259             ; set after Bowie is intercepted by his mother going downstairs
+		setFlg  $259            ; set after Bowie is intercepted by his mother going downstairs
 return_50E64:
 		rts
 
@@ -137,9 +137,9 @@ return_50E64:
 
 sub_50E66:
 		 
-		chkFlg $25B             ; set after the messenger scene
+		chkFlg  $25B            ; set after the messenger scene
 		bne.s   return_50ED0
-		chkFlg $25A             ; set after Astral's second basement line
+		chkFlg  $25A            ; set after Astral's second basement line
 		bne.s   byte_50E96      
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		move.w  #$8E,d0 
@@ -147,10 +147,10 @@ sub_50E66:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
-		txt $201                ; "Mmm...aahh...{N}Oh, yeah!  It must be....{N}No, it's not a....{W1}"
+		txt     $201            ; "Mmm...aahh...{N}Oh, yeah!  It must be....{N}No, it's not a....{W1}"
 		bra.s   return_50ED0
 byte_50E96:
-		chkFlg $104             ; Temporary map setup flag 04
+		chkFlg  $104            ; Temporary map setup flag 04
 		bne.s   return_50ED0
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		move.w  #$8E,d0 
@@ -158,11 +158,11 @@ byte_50E96:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
-		txt $202                ; "By the way, {LEADER},{N}what did you think of the{N}storm last night?{W2}"
-		txt $203                ; "Did you feel something evil,{N}or anything?{W2}"
-		txt $204                ; "No, nothing?!{N}Perhaps it was just my{N}imagination.  Sorry.{W1}"
+		txt     $202            ; "By the way, {LEADER},{N}what did you think of the{N}storm last night?{W2}"
+		txt     $203            ; "Did you feel something evil,{N}or anything?{W2}"
+		txt     $204            ; "No, nothing?!{N}Perhaps it was just my{N}imagination.  Sorry.{W1}"
 		script  cs_5148C
-		setFlg $104             ; Temporary map setup flag 04
+		setFlg  $104            ; Temporary map setup flag 04
 return_50ED0:
 		rts
 
@@ -173,12 +173,12 @@ return_50ED0:
 
 sub_50ED2:
 		 
-		chkFlg $25A             ; set after Astral's second basement line
+		chkFlg  $25A            ; set after Astral's second basement line
 		beq.s   return_50EE8
-		chkFlg $25B             ; set after the messenger scene
+		chkFlg  $25B            ; set after the messenger scene
 		bne.s   return_50EE8
 		script  cs_5149A
-		setFlg $25B             ; set after the messenger scene
+		setFlg  $25B            ; set after the messenger scene
 return_50EE8:
 		rts
 

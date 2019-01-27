@@ -12,11 +12,11 @@ ms_map18_flag212_ZoneEvents:
 
 sub_61262:
 		 
-		chkFlg $4C              ; Zynk is a follower
+		chkFlg  $4C             ; Zynk is a follower
 		beq.s   return_61276
 		script  cs_6143C
-		clrFlg $4C              ; Zynk is a follower
-		setFlg $399             ; set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
+		clrFlg  $4C             ; Zynk is a follower
+		setFlg  $399            ; set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
 return_61276:
 		rts
 

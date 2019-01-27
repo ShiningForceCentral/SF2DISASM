@@ -20,11 +20,11 @@ nullsub_75:
 
 sub_57A72:
 		 
-		chkFlg $2D2             ; set after speaking with Volcanon
+		chkFlg  $2D2            ; set after speaking with Volcanon
 		bne.s   return_57A86
 		script  cs_57AAA
-		setFlg $2D2             ; set after speaking with Volcanon
-		setFlg $2C7             ; set after you dislodge the turtle/fairy in Polca
+		setFlg  $2D2            ; set after speaking with Volcanon
+		setFlg  $2C7            ; set after you dislodge the turtle/fairy in Polca
 return_57A86:
 		rts
 

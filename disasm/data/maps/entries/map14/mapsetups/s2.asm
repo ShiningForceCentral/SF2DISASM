@@ -16,7 +16,7 @@ ms_map14_EntityEvents:
 
 sub_58EDE:
 		 
-		txt $8CD                ; "That's OK.  {NAME;3} needed{N}a bath anyway.{W1}"
+		txt     $8CD            ; "That's OK.  {NAME;3} needed{N}a bath anyway.{W1}"
 entevdft_58EE2:
 		
 		rts
@@ -28,7 +28,7 @@ entevdft_58EE2:
 
 sub_58EE4:
 		 
-		txt $8CF                ; "I can't talk now!{N}I'm working!{W1}"
+		txt     $8CF            ; "I can't talk now!{N}I'm working!{W1}"
 		rts
 
 	; End of function sub_58EE4
@@ -38,7 +38,7 @@ sub_58EE4:
 
 sub_58EEA:
 		 
-		txt $8CE                ; "{LEADER}, bring that plank{N}above deck.{W1}"
+		txt     $8CE            ; "{LEADER}, bring that plank{N}above deck.{W1}"
 		rts
 
 	; End of function sub_58EEA
@@ -48,7 +48,7 @@ sub_58EEA:
 
 sub_58EF0:
 		 
-		txt $8D0                ; "Boy, I sure hope {NAME;3}{N}can swim....{W1}"
+		txt     $8D0            ; "Boy, I sure hope {NAME;3}{N}can swim....{W1}"
 		rts
 
 	; End of function sub_58EF0
@@ -58,7 +58,7 @@ sub_58EF0:
 
 sub_58EF6:
 		 
-		txt $8D1                ; "What can I do to help?{W1}"
+		txt     $8D1            ; "What can I do to help?{W1}"
 		rts
 
 	; End of function sub_58EF6
@@ -68,7 +68,7 @@ sub_58EF6:
 
 sub_58EFC:
 		 
-		txt $8D2                ; "Our home town will be{N}reborn!{W1}"
+		txt     $8D2            ; "Our home town will be{N}reborn!{W1}"
 		rts
 
 	; End of function sub_58EFC
@@ -78,7 +78,7 @@ sub_58EFC:
 
 sub_58F02:
 		 
-		txt $8D3                ; "They're mining granite for{N}our town at North Cliff.{W1}"
+		txt     $8D3            ; "They're mining granite for{N}our town at North Cliff.{W1}"
 		rts
 
 	; End of function sub_58F02
@@ -88,7 +88,7 @@ sub_58F02:
 
 sub_58F08:
 		 
-		txt $8D4                ; "You had better bring up that{N}plank!{W1}"
+		txt     $8D4            ; "You had better bring up that{N}plank!{W1}"
 		rts
 
 	; End of function sub_58F08

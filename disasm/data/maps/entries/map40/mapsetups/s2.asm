@@ -22,7 +22,7 @@ sub_53FA2:
 sub_53FAA:
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-		txt $3E8                ; "He's already dead.{N}{LEADER} feels regret.{W1}"
+		txt     $3E8            ; "He's already dead.{N}{LEADER} feels regret.{W1}"
 entevdft_53FB8:
 		
 		rts

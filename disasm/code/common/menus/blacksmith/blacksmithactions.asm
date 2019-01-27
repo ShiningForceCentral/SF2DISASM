@@ -13,7 +13,7 @@ BlacksmithActions:
 		blt.s   byte_21A50      
 		jsr     j_InitPortraitWindow
 byte_21A50:
-		txt $C2                 ; "Welcome to the Dwarf{N}Craftsman!{D3}"
+		txt     $C2             ; "Welcome to the Dwarf{N}Craftsman!{D3}"
 		jsr     j_HidePortraitWindow
 		clr.w   -$12(a6)
 		clr.w   -$E(a6)
@@ -25,7 +25,7 @@ byte_21A50:
 		blt.s   byte_21A7C      
 		jsr     j_InitPortraitWindow
 byte_21A7C:
-		txt $C6                 ; "{CLEAR}Thank you very much!{W1}"
+		txt     $C6             ; "{CLEAR}Thank you very much!{W1}"
 		clsTxt
 		jsr     j_HidePortraitWindow
 		unlk    a6
@@ -70,21 +70,21 @@ loc_21AE8:
 		sub.w   -$10(a6),d0
 		cmpi.w  #4,d0
 		beq.w   return_21B40
-		txt $C4                 ; "{CLEAR}Anything else?"
+		txt     $C4             ; "{CLEAR}Anything else?"
 		bra.w   loc_21B3C
 loc_21B0E:
 		cmpi.w  #0,-$E(a6)
 		beq.w   byte_21B38      
-		txt $CE                 ; "Oops...{N}I needs some more time.{W1}"
+		txt     $CE             ; "Oops...{N}I needs some more time.{W1}"
 		move.w  -$12(a6),d0
 		add.w   -$E(a6),d0
 		sub.w   -$10(a6),d0
 		cmpi.w  #4,d0
 		beq.w   return_21B40
-		txt $C4                 ; "{CLEAR}Anything else?"
+		txt     $C4             ; "{CLEAR}Anything else?"
 		bra.w   loc_21B3C
 byte_21B38:
-		txt $C3                 ; "We can create a great and{N}special weapon for you if you{N}have some special material.{W1}"
+		txt     $C3             ; "We can create a great and{N}special weapon for you if you{N}have some special material.{W1}"
 loc_21B3C:
 		bsr.w   loc_21CDA
 return_21B40:
@@ -98,8 +98,8 @@ return_21B40:
 sub_21B42:
 		movem.l d0-a1,-(sp)
 		move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		txt $CF                 ; "{CLEAR}I've been waiting!{N}This {ITEM} is for{N}you.  Isn't it great?!{W1}"
-		txt $A6                 ; "Who gets it?{W2}"
+		txt     $CF             ; "{CLEAR}I've been waiting!{N}This {ITEM} is for{N}you.  Isn't it great?!{W1}"
+		txt     $A6             ; "Who gets it?{W2}"
 		clsTxt
 byte_21B58:
 		clsTxt
@@ -108,7 +108,7 @@ byte_21B58:
 		jsr     sub_10044
 		cmpi.w  #$FFFF,d0
 		bne.s   loc_21B7C
-		txt $C5                 ; "{CLEAR}What a pity!{W2}"
+		txt     $C5             ; "{CLEAR}What a pity!{W2}"
 		bra.w   loc_21CD4
 loc_21B7C:
 		move.w  d0,-6(a6)
@@ -117,11 +117,11 @@ loc_21B7C:
 		cmpi.w  #4,d2
 		bcs.s   loc_21BAC
 		move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		txt $D0                 ; "{NAME}'s hands are are{N}full.  May I pass it to{N}somebody else?"
+		txt     $D0             ; "{NAME}'s hands are are{N}full.  May I pass it to{N}somebody else?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		beq.s   byte_21B58
-		txt $C5                 ; "{CLEAR}What a pity!{W2}"
+		txt     $C5             ; "{CLEAR}What a pity!{W2}"
 		bra.w   loc_21CD4
 loc_21BAC:
 		move.w  -$A(a6),d1
@@ -133,7 +133,7 @@ loc_21BAC:
 		jsr     j_IsWeaponOrRingEquippable
 		bcs.s   loc_21BE4
 		move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		txt $A7                 ; "{NAME} can't be{N}equipped with it.  OK?"
+		txt     $A7             ; "{NAME} can't be{N}equipped with it.  OK?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		bne.w   byte_21B58
@@ -153,7 +153,7 @@ loc_21BE4:
 		move.w  -6(a6),d0
 		jsr     j_IsWeaponOrRingEquippable
 		bcc.w   byte_21CD0      
-		txt $AD                 ; "{CLEAR}Equip it now?"
+		txt     $AD             ; "{CLEAR}Equip it now?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		bne.w   byte_21CD0      
@@ -170,7 +170,7 @@ loc_21BE4:
 		cmpi.w  #2,d2
 		bne.w   loc_21C9A
 		move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		txt $B0                 ; "{NAME} can't remove{N}the cursed equipment.{W2}"
+		txt     $B0             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 		bra.s   byte_21CD0      
 loc_21C6E:
 		move.w  -6(a6),d0
@@ -182,7 +182,7 @@ loc_21C6E:
 		cmpi.w  #2,d2
 		bne.w   loc_21C9A
 		move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		txt $B0                 ; "{NAME} can't remove{N}the cursed equipment.{W2}"
+		txt     $B0             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
 		bra.s   byte_21CD0      
 loc_21C9A:
 		moveq   #0,d1
@@ -192,23 +192,23 @@ loc_21C9A:
 		jsr     j_EquipItem
 		cmpi.w  #2,d2
 		bne.s   byte_21CC8      
-		sndCom MUSIC_CURSED_ITEM
+		sndCom  MUSIC_CURSED_ITEM
 		bsr.w   WaitForMusicResumeAndPlayerInput_Blacksmith
 		move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		txt $AF                 ; "Gee, {NAME} gets{N}cursed.{W2}"
+		txt     $AF             ; "Gee, {NAME} gets{N}cursed.{W2}"
 		bra.w   loc_21CD4
 byte_21CC8:
-		txt $AE                 ; "Ah, it suits you!{W2}"
+		txt     $AE             ; "Ah, it suits you!{W2}"
 		bra.w   loc_21CD4
 byte_21CD0:
-		txt $D1                 ; "{CLEAR}Here you go!{N}It's a great weapon!{W2}"
+		txt     $D1             ; "{CLEAR}Here you go!{N}It's a great weapon!{W2}"
 loc_21CD4:
 		movem.l (sp)+,d0-a1
 		rts
 loc_21CDA:
 		movem.l d0-d2,-(sp)
 byte_21CDE:
-		txt $C7                 ; "What kind of material do you{N}have?{D1}"
+		txt     $C7             ; "What kind of material do you{N}have?{D1}"
 		clsTxt
 		move.b  #1,((byte_FFB13C-$1000000)).w
 		move.w  #ITEMIDX_NOTHING,((word_FFB13A-$1000000)).w
@@ -220,10 +220,10 @@ byte_21CDE:
 		move.w  d2,-$A(a6)
 		cmpi.w  #$7B,d2 
 		beq.w   byte_21D1A      
-		txt $C8                 ; "Sorry, I've never worked{N}with that before....{W1}"
+		txt     $C8             ; "Sorry, I've never worked{N}with that before....{W1}"
 		bra.s   byte_21CDE      
 byte_21D1A:
-		txt $C9                 ; "{CLEAR}Whose weapon should I{N}make?{D1}"
+		txt     $C9             ; "{CLEAR}Whose weapon should I{N}make?{D1}"
 		clsTxt
 		move.b  #0,((byte_FFB13C-$1000000)).w
 		move.w  #ITEMIDX_NOTHING,((word_FFB13A-$1000000)).w
@@ -236,32 +236,32 @@ byte_21D1A:
 		cmpi.w  #$C,d1
 		bcc.w   loc_21D5C
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		txt $D3                 ; "{NAME} has to be promoted{N}first.{W1}"
+		txt     $D3             ; "{NAME} has to be promoted{N}first.{W1}"
 		bra.s   byte_21D1A      
 loc_21D5C:
 		bsr.w   sub_21E8E
 		cmpi.w  #0,d0
 		beq.w   loc_21D74
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-		txt $D4                 ; "Sorry, I can't create a{N}weapon for {NAME}.{W1}"
+		txt     $D4             ; "Sorry, I can't create a{N}weapon for {NAME}.{W1}"
 		bra.s   byte_21D1A      
 loc_21D74:
 		move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
 		move.l  #$1388,((TEXT_NUMBER-$1000000)).w
-		txt $CA                 ; "For {NAME}!  It will cost{N}{#} gold coins.  OK?"
+		txt     $CA             ; "For {NAME}!  It will cost{N}{#} gold coins.  OK?"
 		jsr     sub_10050
 		jsr     j_YesNoChoiceBox
 		jsr     sub_10058
 		cmpi.w  #0,d0
 		beq.s   loc_21DA6
-		txt $C5                 ; "{CLEAR}What a pity!{W2}"
+		txt     $C5             ; "{CLEAR}What a pity!{W2}"
 		bra.w   byte_21D1A      
 loc_21DA6:
 		jsr     j_GetGold
 		move.l  d1,-4(a6)
 		cmpi.l  #$1388,d1
 		bcc.w   loc_21DC2
-		txt $CB                 ; "You have to bring more{N}money.{W2}"
+		txt     $CB             ; "You have to bring more{N}money.{W2}"
 		bra.w   loc_21E30
 loc_21DC2:
 		move.l  #$1388,d1
@@ -273,8 +273,8 @@ loc_21DC2:
 		bsr.w   PickMithrilWeapon
 		move.w  #$50,d1 
 		jsr     j_ClearFlag
-		txt $CC                 ; "{CLEAR}Great!{W2}"
-		txt $CD                 ; "Please stop by shortly.{N}I'll surprise you!{W1}"
+		txt     $CC             ; "{CLEAR}Great!{W2}"
+		txt     $CD             ; "Please stop by shortly.{N}I'll surprise you!{W1}"
 		move.w  -$E(a6),d0
 		move.w  -$12(a6),d1
 		move.w  -$10(a6),d2
@@ -282,14 +282,14 @@ loc_21DC2:
 		sub.w   d2,d0
 		cmpi.w  #4,d0
 		bne.s   byte_21E16      
-		txt $D2                 ; "Sorry, that's all for today.{W1}"
+		txt     $D2             ; "Sorry, that's all for today.{W1}"
 		bra.w   loc_21E30
 byte_21E16:
-		txt $C4                 ; "{CLEAR}Anything else?"
+		txt     $C4             ; "{CLEAR}Anything else?"
 		jsr     j_YesNoChoiceBox
 		cmpi.w  #0,d0
 		beq.w   byte_21CDE      
-		txt $C5                 ; "{CLEAR}What a pity!{W2}"
+		txt     $C5             ; "{CLEAR}What a pity!{W2}"
 		clsTxt
 loc_21E30:
 		movem.l (sp)+,d0-d2

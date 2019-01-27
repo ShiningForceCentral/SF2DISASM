@@ -32,7 +32,7 @@ loc_257D0:
 		jsr     j_InitMapEntities
 		jsr     (LoadMapEntitySprites).w
 		bsr.w   loc_2588A
-		setFlg $50              ; set @ loc_257D0, also set during exploration loop at 0x25824
+		setFlg  $50             ; set @ loc_257D0, also set during exploration loop at 0x25824
 		bra.s   loc_25836
 loc_25828:
 		bsr.w   WaitForFadeToFinish
@@ -185,7 +185,7 @@ ProcessMapEvent:
 		beq.w   ProcessMapEventType5
 		subq.w  #1,d0
 		beq.w   loc_25A7C
-		sndCom SFX_BATTLEFIELD_DEATH
+		sndCom  SFX_BATTLEFIELD_DEATH
 		rts
 loc_25978:
 		tst.b   ((MAP_EVENT_PARAM_1-$1000000)).w
@@ -193,7 +193,7 @@ loc_25978:
 		bne.w   loc_259CC
 		movem.w d0,-(sp)        ; cutscene commands $07 go here
 		move.w  ((WARP_SFX-$1000000)).w,d0
-		sndCom SOUND_COMMAND_GET_D0_PARAMETER
+		sndCom  SOUND_COMMAND_GET_D0_PARAMETER
 		clr.w   ((WARP_SFX-$1000000)).w
 		movem.w (sp)+,d0
 		clr.w   d0
@@ -224,7 +224,7 @@ loc_259CC:
 		move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0
 		cmpi.b  #$47,d0 
 		bne.s   loc_259E8       ; HARDCODED check if map is overworld pacalon, switch if water not restored
-		chkFlg $212             ; Battle 30 completed
+		chkFlg  $212            ; Battle 30 completed
 		beq.s   loc_259E8
 		move.w  #$4E,d0 
 loc_259E8:

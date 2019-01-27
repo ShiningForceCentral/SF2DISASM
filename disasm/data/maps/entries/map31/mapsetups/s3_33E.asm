@@ -20,10 +20,10 @@ nullsub_93:
 
 sub_5D560:
 		 
-		chkFlg $342             ; set after making the Arm of Golem appear in Moun
+		chkFlg  $342            ; set after making the Arm of Golem appear in Moun
 		bne.s   return_5D570
 		script  cs_5D644
-		setFlg $342             ; set after making the Arm of Golem appear in Moun
+		setFlg  $342            ; set after making the Arm of Golem appear in Moun
 return_5D570:
 		rts
 

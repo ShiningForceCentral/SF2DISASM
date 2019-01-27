@@ -12,8 +12,8 @@ ms_map11_EntityEvents:
 
 sub_57A20:
 		 
-		txt $C4B                ; "Devils?{W2}"
-		txt $C4C                ; "They can't enter the shrine.{W1}"
+		txt     $C4B            ; "Devils?{W2}"
+		txt     $C4C            ; "They can't enter the shrine.{W1}"
 		rts
 
 	; End of function sub_57A20
@@ -23,8 +23,8 @@ sub_57A20:
 
 sub_57A2A:
 		 
-		txt $C4D                ; "This is a sacred area.{W2}"
-		txt $C4E                ; "Volcanon's shrine is here.{W1}"
+		txt     $C4D            ; "This is a sacred area.{W2}"
+		txt     $C4E            ; "Volcanon's shrine is here.{W1}"
 		rts
 
 	; End of function sub_57A2A
@@ -34,7 +34,7 @@ sub_57A2A:
 
 sub_57A34:
 		 
-		txt $C74                ; "This shrine was built on top{N}of the mountain to watch{N}over everything.{W1}"
+		txt     $C74            ; "This shrine was built on top{N}of the mountain to watch{N}over everything.{W1}"
 		rts
 
 	; End of function sub_57A34
@@ -44,19 +44,19 @@ sub_57A34:
 
 sub_57A3A:
 		 
-		txt $C75                ; "Do you know the legend{N}of the phoenix?{W1}"
+		txt     $C75            ; "Do you know the legend{N}of the phoenix?{W1}"
 		jsr     j_YesNoPrompt
 		tst.w   d0
 		bne.s   byte_57A56      
-		txt $C76                ; "And {NAME;7} was born from{N}holy fire.{W2}"
-		txt $C77                ; "Volcanon is the highest{N}of gods and can revive{N}anything.{W2}"
-		txt $C78                ; "Phoenix serve and work for{N}him.{N}They help the people.{W1}"
+		txt     $C76            ; "And {NAME;7} was born from{N}holy fire.{W2}"
+		txt     $C77            ; "Volcanon is the highest{N}of gods and can revive{N}anything.{W2}"
+		txt     $C78            ; "Phoenix serve and work for{N}him.{N}They help the people.{W1}"
 		bra.s   return_57A66
 byte_57A56:
-		txt $C79                ; "A phoenix is the legendary{N}bird who can't be killed.{W2}"
-		txt $C7A                ; "It is life itself.{W2}"
-		txt $C7B                ; "When his first life is{N}nearly over, he bursts into{N}holy fire to finish it.{W2}"
-		txt $C7C                ; "The fire creates another{N}life for the phoenix on the{N}ground.{W1}"
+		txt     $C79            ; "A phoenix is the legendary{N}bird who can't be killed.{W2}"
+		txt     $C7A            ; "It is life itself.{W2}"
+		txt     $C7B            ; "When his first life is{N}nearly over, he bursts into{N}holy fire to finish it.{W2}"
+		txt     $C7C            ; "The fire creates another{N}life for the phoenix on the{N}ground.{W1}"
 return_57A66:
 		rts
 

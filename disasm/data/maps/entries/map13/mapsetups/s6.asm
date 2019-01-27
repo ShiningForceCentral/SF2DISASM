@@ -7,17 +7,17 @@
 ms_map13_InitFunction:
 		
 		 
-		chkFlg $2C7             ; set after you dislodge the turtle/fairy in Polca
+		chkFlg  $2C7            ; set after you dislodge the turtle/fairy in Polca
 		bne.s   byte_582EC      
 		script  cs_58310
 byte_582EC:
-		chkFlg $2CC             ; set after your raft-giving conversation with the mayor in Polca
+		chkFlg  $2CC            ; set after your raft-giving conversation with the mayor in Polca
 		beq.s   byte_582FE      
 		move.w  #$89,d0 
 		moveq   #3,d1
 		jsr     sub_4781A
 byte_582FE:
-		chkFlg $2CE             ; set after Oddler runs after you as you leave Polca, and tags along
+		chkFlg  $2CE            ; set after Oddler runs after you as you leave Polca, and tags along
 		beq.s   return_5830E
 		move.w  #$8C,d0 
 		jsr     MoveEntityOutOfMap

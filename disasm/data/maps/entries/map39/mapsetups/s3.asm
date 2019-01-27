@@ -20,10 +20,10 @@ nullsub_98:
 
 sub_5E0BC:
 		 
-		chkFlg $33E             ; set after the Gyan join scene in the Moun underground
+		chkFlg  $33E            ; set after the Gyan join scene in the Moun underground
 		bne.s   return_5E0CC
 		script  cs_5E0F8
-		setFlg $33E             ; set after the Gyan join scene in the Moun underground
+		setFlg  $33E            ; set after the Gyan join scene in the Moun underground
 return_5E0CC:
 		rts
 

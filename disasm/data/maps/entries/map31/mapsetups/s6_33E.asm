@@ -7,15 +7,15 @@
 ms_map31_flag33E_InitFunction:
 		
 		 
-		chkFlg $340             ; set after talking to the painter in Moun for the first time
+		chkFlg  $340            ; set after talking to the painter in Moun for the first time
 		beq.s   byte_5D62A      
 		script  cs_5D63C
 byte_5D62A:
-		chkFlg $342             ; set after making the Arm of Golem appear in Moun
+		chkFlg  $342            ; set after making the Arm of Golem appear in Moun
 		beq.s   return_5D63A
-		chkFlg $343             ; set after picking up the Arm of Golem in Moun
+		chkFlg  $343            ; set after picking up the Arm of Golem in Moun
 		bne.s   return_5D63A
-		clrFlg $342             ; set after making the Arm of Golem appear in Moun
+		clrFlg  $342            ; set after making the Arm of Golem appear in Moun
 return_5D63A:
 		rts
 

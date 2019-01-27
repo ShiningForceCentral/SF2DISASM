@@ -23,19 +23,19 @@ nullsub_73:
 
 sub_604D6:
 		 
-		chkFlg $3AC             ; set after playing the piano in Yeel (during the late game)
+		chkFlg  $3AC            ; set after playing the piano in Yeel (during the late game)
 		beq.s   return_60500
-		chkFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
+		chkFlg  $3AD            ; set after Chaz and the priest go downstars in Yeel
 		bne.s   return_60500
 		script  cs_6093A
-		chkFlg $3A2             ; set after opening Devil's Head with the Force Sword
+		chkFlg  $3A2            ; set after opening Devil's Head with the Force Sword
 		beq.s   byte_604F6
 		script  cs_60BA6
 		bra.s   byte_604FC      
 byte_604F6:
 		script  cs_60B10
 byte_604FC:
-		setFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
+		setFlg  $3AD            ; set after Chaz and the priest go downstars in Yeel
 return_60500:
 		rts
 
@@ -46,13 +46,13 @@ return_60500:
 
 sub_60502:
 		 
-		chkFlg $1C              ; Lemon joined
+		chkFlg  $1C             ; Lemon joined
 		bne.s   return_6051C
-		chkFlg $1B              ; Chaz joined
+		chkFlg  $1B             ; Chaz joined
 		beq.s   return_6051C
 		script  cs_60708
-		setFlg $47              ; Lemon is a follower
-		setFlg $3B1             ; set after recruiting Lemon in Yeel
+		setFlg  $47             ; Lemon is a follower
+		setFlg  $3B1            ; set after recruiting Lemon in Yeel
 return_6051C:
 		rts
 

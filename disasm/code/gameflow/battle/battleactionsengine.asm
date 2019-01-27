@@ -289,7 +289,7 @@ CheckForTaros:
 		movem.l d0-d1,-(sp)
 		cmpi.b  #BATTLEIDX_TAROS,((CURRENT_BATTLE-$1000000)).w
 		bne.w   loc_9F22
-		clrFlg $70              ; Currently attacking Taros with Achille Sword
+		clrFlg  $70             ; Currently attacking Taros with Achille Sword
 		tst.b   (a4)
 		bne.w   loc_9F08
 		cmpi.w  #ACTION_ATTACK,(a3)
@@ -302,13 +302,13 @@ CheckForTaros:
 		jsr     GetEquippedWeapon
 		cmpi.w  #ITEMIDX_ACHILLES_SWORD,d1
 		bne.w   loc_9F08
-		setFlg $70              ; Currently attacking Taros with Achille Sword
+		setFlg  $70             ; Currently attacking Taros with Achille Sword
 loc_9F08:
 		move.b  (a5),d0
 		jsr     GetEnemyID
 		cmpi.w  #$58,d1 
 		bne.s   loc_9F22
-		chkFlg $70              ; Currently attacking Taros with Achille Sword
+		chkFlg  $70             ; Currently attacking Taros with Achille Sword
 		bne.s   loc_9F22
 		move.b  #$FF,-BCSTACK_OFFSET_INEFFECTIVEATTACK(a2)
 loc_9F22:

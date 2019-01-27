@@ -76,7 +76,7 @@ DebugModeBattleTest:
 		bsr.w   j_SetCurrentATK
 		bsr.w   j_SetCurrentDEF
 		bsr.w   j_SetCurrentHP
-		sndCom MUSIC_BATTLE_THEME_3
+		sndCom  MUSIC_BATTLE_THEME_3
 		bsr.w   EnableDisplayAndInterrupts
 		bsr.w   InitDisplay     
 		bsr.w   EnableDisplayAndInterrupts
@@ -97,7 +97,7 @@ DebugModeBattleTest:
 		move.l  #$1C1D1E1F,(a0)+
 		bsr.w   CheatModeConfiguration
 byte_77DE:
-		txt $1C8                ; "Battle number?{D1}"
+		txt     $1C8            ; "Battle number?{D1}"
 		clr.w   d0
 		clr.w   d1
 		move.w  #$31,d2 
@@ -134,7 +134,7 @@ loc_7820:
 		move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
 		jsr     j_ExecuteBattleLoop
 		jsr     j_ChurchActions
-		txt $1CC                ; "Shop number?{D1}"
+		txt     $1CC            ; "Shop number?{D1}"
 		move.w  #0,d0
 		move.w  #0,d1
 		move.w  #$64,d2 

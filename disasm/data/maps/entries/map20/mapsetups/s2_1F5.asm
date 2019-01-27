@@ -15,7 +15,7 @@ ms_map20_flag1F5_EntityEvents:
 
 sub_53850:
 		 
-		txt $896                ; "Guooooorrrr!{W1}"
+		txt     $896            ; "Guooooorrrr!{W1}"
 		rts
 
 	; End of function sub_53850
@@ -25,7 +25,7 @@ sub_53850:
 
 sub_53856:
 		 
-		txt $250                ; "Let me pass!{N}I must see my father!{W1}"
+		txt     $250            ; "Let me pass!{N}I must see my father!{W1}"
 		rts
 
 	; End of function sub_53856
@@ -45,12 +45,12 @@ sub_5385C:
 
 sub_53864:
 		 
-		chkFlg $103             ; Temporary map setup flag 03
+		chkFlg  $103            ; Temporary map setup flag 03
 		bne.s   byte_53872      
-		txt $251                ; "I saw a devil enter the{N}King's body...{W2}"
-		setFlg $103             ; Temporary map setup flag 03
+		txt     $251            ; "I saw a devil enter the{N}King's body...{W2}"
+		setFlg  $103            ; Temporary map setup flag 03
 byte_53872:
-		txt $252                ; "and the King became{N}violent!{W1}"
+		txt     $252            ; "and the King became{N}violent!{W1}"
 		rts
 
 	; End of function sub_53864
@@ -60,12 +60,12 @@ byte_53872:
 
 sub_53878:
 		 
-		chkFlg $104             ; Temporary map setup flag 04
+		chkFlg  $104            ; Temporary map setup flag 04
 		bne.s   byte_53886      
-		txt $253                ; "Hurry to the Princess's{N}bedroom!  Hold the King{N}down!{W1}"
-		setFlg $104             ; Temporary map setup flag 04
+		txt     $253            ; "Hurry to the Princess's{N}bedroom!  Hold the King{N}down!{W1}"
+		setFlg  $104            ; Temporary map setup flag 04
 byte_53886:
-		txt $254                ; "The King knocked down{N}the Princess....{W1}"
+		txt     $254            ; "The King knocked down{N}the Princess....{W1}"
 		rts
 
 	; End of function sub_53878
@@ -75,12 +75,12 @@ byte_53886:
 
 sub_5388C:
 		 
-		chkFlg $105             ; Temporary map setup flag 05
+		chkFlg  $105            ; Temporary map setup flag 05
 		bne.s   byte_5389A      
-		txt $24C                ; "Ooo, ouch!{N}I didn't think he could{N}be so strong!{W2}"
-		setFlg $105             ; Temporary map setup flag 05
+		txt     $24C            ; "Ooo, ouch!{N}I didn't think he could{N}be so strong!{W2}"
+		setFlg  $105            ; Temporary map setup flag 05
 byte_5389A:
-		txt $24D                ; "Ouch!  I was knocked down!{W1}"
+		txt     $24D            ; "Ouch!  I was knocked down!{W1}"
 		rts
 
 	; End of function sub_5388C
@@ -90,12 +90,12 @@ byte_5389A:
 
 sub_538A0:
 		 
-		chkFlg $106             ; Temporary map setup flag 06
+		chkFlg  $106            ; Temporary map setup flag 06
 		bne.s   byte_538AE      
-		txt $24E                ; "Princess Elis!{N}I can't let you up there.{W2}"
-		setFlg $106             ; Temporary map setup flag 06
+		txt     $24E            ; "Princess Elis!{N}I can't let you up there.{W2}"
+		setFlg  $106            ; Temporary map setup flag 06
 byte_538AE:
-		txt $24F                ; "Trust Sir Astral!{N}He knows how to cure{N}the King!{W1}"
+		txt     $24F            ; "Trust Sir Astral!{N}He knows how to cure{N}the King!{W1}"
 		rts
 
 	; End of function sub_538A0

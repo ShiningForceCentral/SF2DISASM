@@ -123,7 +123,7 @@ loc_441D2:
 		move.w  d2,$E(a1,d0.w)
 		bra.s   loc_441D2
 byte_441F0:
-		chkFlg $40              ; Raft is unlocked (0x05264)
+		chkFlg  $40             ; Raft is unlocked (0x05264)
 		beq.w   loc_44262
 		move.b  ((CURRENT_MAP-$1000000)).w,d0
 		cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0

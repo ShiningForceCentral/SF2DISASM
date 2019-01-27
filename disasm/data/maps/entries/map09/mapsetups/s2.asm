@@ -20,7 +20,7 @@ ms_map9_EntityEvents:
 
 sub_56756:
 		 
-		txt $553                ; "Hassan is a port town.{W2}{N}But, we've had no trading{N}recently.{W1}"
+		txt     $553            ; "Hassan is a port town.{W2}{N}But, we've had no trading{N}recently.{W1}"
 		rts
 
 	; End of function sub_56756
@@ -30,7 +30,7 @@ sub_56756:
 
 sub_5675C:
 		 
-		txt $554                ; "Our ancestors came here from{N}Rune by way of the sea.{W2}{N}They should've avoided such{N}an inconvenient place like{N}this.{W1}"
+		txt     $554            ; "Our ancestors came here from{N}Rune by way of the sea.{W2}{N}They should've avoided such{N}an inconvenient place like{N}this.{W1}"
 		rts
 
 	; End of function sub_5675C
@@ -40,7 +40,7 @@ sub_5675C:
 
 sub_56762:
 		 
-		txt $565                ; "I think I'll take a nap{N}now.  Bye.{W1}"
+		txt     $565            ; "I think I'll take a nap{N}now.  Bye.{W1}"
 		rts
 
 	; End of function sub_56762
@@ -79,9 +79,9 @@ sub_56784:
 
 sub_5678C:
 		 
-		chkFlg $2D5             ; set after telling Rohde that you're going to get the Caravan
+		chkFlg  $2D5            ; set after telling Rohde that you're going to get the Caravan
 		bne.s   byte_567C2      
-		txt $555                ; "Dr. {NAME;11} lives in the{N}house over there.{W2}"
+		txt     $555            ; "Dr. {NAME;11} lives in the{N}house over there.{W2}"
 		move.w  #$86,d0 
 		moveq   #3,d1
 		jsr     sub_4781A
@@ -92,10 +92,10 @@ sub_5678C:
 		addq.w  #2,d1
 		andi.w  #3,d1
 		jsr     sub_4781A
-		txt $556                ; "He is eccentric.{N}He hates talking, but...{W2}{N}a historical topic may{N}interest him.{W1}"
+		txt     $556            ; "He is eccentric.{N}He hates talking, but...{W2}{N}a historical topic may{N}interest him.{W1}"
 		bra.s   return_567C6
 byte_567C2:
-		txt $55A                ; "Dr. {NAME;11}!  Hmmm,{N}are you a magician?{W1}"
+		txt     $55A            ; "Dr. {NAME;11}!  Hmmm,{N}are you a magician?{W1}"
 return_567C6:
 		rts
 
@@ -106,8 +106,8 @@ return_567C6:
 
 sub_567C8:
 		 
-		txt $557                ; "How on earth did you come{N}to Hassan?{W2}"
-		txt $558                ; "By raft?  Wow!{N}You killed the Kraken?!{W1}"
+		txt     $557            ; "How on earth did you come{N}to Hassan?{W2}"
+		txt     $558            ; "By raft?  Wow!{N}You killed the Kraken?!{W1}"
 		rts
 
 	; End of function sub_567C8
@@ -117,7 +117,7 @@ sub_567C8:
 
 sub_567D2:
 		 
-		txt $559                ; "The river is drying up{N}because of the drought.{W2}{N}To the west?{N}If you really want to go,{N}ask Dr. {NAME;11}....{W1}"
+		txt     $559            ; "The river is drying up{N}because of the drought.{W2}{N}To the west?{N}If you really want to go,{N}ask Dr. {NAME;11}....{W1}"
 		rts
 
 	; End of function sub_567D2
@@ -137,30 +137,30 @@ sub_567D8:
 
 sub_567E6:
 		 
-		chkFlg $2D7             ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
+		chkFlg  $2D7            ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 		bne.s   byte_5682A      
 		moveq   #$3D,d1 
 		jsr     j_sub_9146
 		cmpi.w  #$FFFF,d0
 		bne.s   byte_56804      
-		txt $55B                ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
-		setFlg $31E             ; set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
+		txt     $55B            ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
+		setFlg  $31E            ; set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
 		bra.s   loc_56828
 byte_56804:
-		chkFlg $31E             ; set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
+		chkFlg  $31E            ; set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
 		bne.s   byte_5681E
-		txt $55B                ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
+		txt     $55B            ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
 		jsr     j_HidePortraitWindow
 		clsTxt
 		moveq   #$28,d0 
 		jsr     (Sleep).w       
 byte_5681E:
 		script  cs_569BC
-		setFlg $2D7             ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
+		setFlg  $2D7            ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 loc_56828:
 		bra.s   return_56840
 byte_5682A:
-		chkFlg $2D5             ; set after telling Rohde that you're going to get the Caravan
+		chkFlg  $2D5            ; set after telling Rohde that you're going to get the Caravan
 		bne.s   return_56840
 		move.w  #$B,d0
 		jsr     sub_47832
@@ -175,10 +175,10 @@ return_56840:
 
 sub_56842:
 		 
-		chkFlg $100             ; Temporary map setup flag 00
+		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   return_56852
 		script  cs_56B02
-		setFlg $100             ; Temporary map setup flag 00
+		setFlg  $100            ; Temporary map setup flag 00
 return_56852:
 		rts
 

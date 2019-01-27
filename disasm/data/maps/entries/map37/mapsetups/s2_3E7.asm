@@ -26,7 +26,7 @@ entevt_5F9F6:
 
 sub_5F9F8:
 		 
-		txt $D24                ; "Was it...too wild?{W1}"
+		txt     $D24            ; "Was it...too wild?{W1}"
 		rts
 
 	; End of function sub_5F9F8
@@ -36,10 +36,10 @@ sub_5F9F8:
 
 sub_5F9FE:
 		 
-		chkFlg $101             ; Temporary map setup flag 01
+		chkFlg  $101            ; Temporary map setup flag 01
 		bne.s   return_5FA0E
 		script  cs_5FB30
-		setFlg $101             ; Temporary map setup flag 01
+		setFlg  $101            ; Temporary map setup flag 01
 return_5FA0E:
 		rts
 
@@ -50,12 +50,12 @@ return_5FA0E:
 
 sub_5FA10:
 		 
-		chkFlg $101             ; Temporary map setup flag 01
+		chkFlg  $101            ; Temporary map setup flag 01
 		bne.s   byte_5FA1C      
-		txt $D23                ; "{LEADER}, come on!{W1}"
+		txt     $D23            ; "{LEADER}, come on!{W1}"
 		bra.s   return_5FA20
 byte_5FA1C:
-		txt $D2A                ; "We must finish our{N}preparations before Geshp{N}finds us.{W1}"
+		txt     $D2A            ; "We must finish our{N}preparations before Geshp{N}finds us.{W1}"
 return_5FA20:
 		rts
 

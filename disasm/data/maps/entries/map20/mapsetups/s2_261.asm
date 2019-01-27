@@ -15,7 +15,7 @@ ms_map20_flag261_EntityEvents:
 
 sub_538D4:
 		 
-		txt $256                ; "Sir Astral is sleeping{N}in the King's bedroom.{N}Don't worry!{W1}"
+		txt     $256            ; "Sir Astral is sleeping{N}in the King's bedroom.{N}Don't worry!{W1}"
 		rts
 
 	; End of function sub_538D4
@@ -25,12 +25,12 @@ sub_538D4:
 
 sub_538DA:
 		 
-		chkFlg $101             ; Temporary map setup flag 01
+		chkFlg  $101            ; Temporary map setup flag 01
 		bne.s   byte_538E8      
-		txt $259                ; "Thank you, {LEADER}.{N}You've saved the King's{N}life.{W2}{N}I heard that you are going{N}to Yeel.{W2}{N}I'll take care of Sir Astral{N}for you.{W2}"
-		setFlg $101             ; Temporary map setup flag 01
+		txt     $259            ; "Thank you, {LEADER}.{N}You've saved the King's{N}life.{W2}{N}I heard that you are going{N}to Yeel.{W2}{N}I'll take care of Sir Astral{N}for you.{W2}"
+		setFlg  $101            ; Temporary map setup flag 01
 byte_538E8:
-		txt $25A                ; "Please be careful.{W1}"
+		txt     $25A            ; "Please be careful.{W1}"
 		rts
 
 	; End of function sub_538DA
@@ -40,12 +40,12 @@ byte_538E8:
 
 sub_538EE:
 		 
-		chkFlg $102             ; Temporary map setup flag 02
+		chkFlg  $102            ; Temporary map setup flag 02
 		bne.s   byte_538FC      
-		txt $25B                ; "Are you going to see{N}Mr. Hawel?{W2}"
-		setFlg $102             ; Temporary map setup flag 02
+		txt     $25B            ; "Are you going to see{N}Mr. Hawel?{W2}"
+		setFlg  $102            ; Temporary map setup flag 02
 byte_538FC:
-		txt $25C                ; "I wouldn't let you go alone{N}if I weren't...{W2}{N}I trust you, son.{W1}"
+		txt     $25C            ; "I wouldn't let you go alone{N}if I weren't...{W2}{N}I trust you, son.{W1}"
 		rts
 
 	; End of function sub_538EE
@@ -55,12 +55,12 @@ byte_538FC:
 
 sub_53902:
 		 
-		chkFlg $104             ; Temporary map setup flag 04
+		chkFlg  $104            ; Temporary map setup flag 04
 		bne.s   byte_53910      
-		txt $25D                ; "Princess Elis has not rested{N}since the King collapsed.{W2}"
-		setFlg $104             ; Temporary map setup flag 04
+		txt     $25D            ; "Princess Elis has not rested{N}since the King collapsed.{W2}"
+		setFlg  $104            ; Temporary map setup flag 04
 byte_53910:
-		txt $25E                ; "I understand her reasoning,{N}but she might get sick, too.{W1}"
+		txt     $25E            ; "I understand her reasoning,{N}but she might get sick, too.{W1}"
 		rts
 
 	; End of function sub_53902
@@ -70,7 +70,7 @@ byte_53910:
 
 sub_53916:
 		 
-		txt $236                ; "This east tower was built{N}in order to watch for{N}invaders.{W1}"
+		txt     $236            ; "This east tower was built{N}in order to watch for{N}invaders.{W1}"
 		rts
 
 	; End of function sub_53916
@@ -80,7 +80,7 @@ sub_53916:
 
 sub_5391C:
 		 
-		txt $25F                ; "She has been shrivering like{N}this since she came back{N}from the King's room.{W2}{N}She won't work.{W1}"
+		txt     $25F            ; "She has been shrivering like{N}this since she came back{N}from the King's room.{W2}{N}She won't work.{W1}"
 		rts
 
 	; End of function sub_5391C
@@ -90,7 +90,7 @@ sub_5391C:
 
 sub_53922:
 		 
-		txt $260                ; "I...I've never seen such a{N}horrible face....{W2}{N}I can't tell anybody.{N}They wouldn't believe me.{W1}"
+		txt     $260            ; "I...I've never seen such a{N}horrible face....{W2}{N}I can't tell anybody.{N}They wouldn't believe me.{W1}"
 		rts
 
 	; End of function sub_53922

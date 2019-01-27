@@ -14,8 +14,8 @@ ms_map26_EntityEvents:
 
 sub_59D86:
 		 
-		txt $6CE                ; "You want to see Creed?{N}Are you serious?!{W2}"
-		txt $6CF                ; "A hole in the wall leads{N}to Creed, but don't use it!{W1}"
+		txt     $6CE            ; "You want to see Creed?{N}Are you serious?!{W2}"
+		txt     $6CF            ; "A hole in the wall leads{N}to Creed, but don't use it!{W1}"
 		rts
 
 	; End of function sub_59D86
@@ -25,8 +25,8 @@ sub_59D86:
 
 sub_59D90:
 		 
-		txt $6D0                ; "We came down here to{N}escape, but devils live in{N}the tunnel....{W2}"
-		txt $6D1                ; "They're too ferocious!{N}I'm gonna stay in Floor{N}World.{W1}"
+		txt     $6D0            ; "We came down here to{N}escape, but devils live in{N}the tunnel....{W2}"
+		txt     $6D1            ; "They're too ferocious!{N}I'm gonna stay in Floor{N}World.{W1}"
 		rts
 
 	; End of function sub_59D90
@@ -36,8 +36,8 @@ sub_59D90:
 
 sub_59D9A:
 		 
-		txt $6D2                ; "We left Desktop Kingdom long{N}ago.{W2}"
-		txt $6D3                ; "{NAME;16} is a brave leader.{N}We trust him!{W1}"
+		txt     $6D2            ; "We left Desktop Kingdom long{N}ago.{W2}"
+		txt     $6D3            ; "{NAME;16} is a brave leader.{N}We trust him!{W1}"
 		rts
 
 	; End of function sub_59D9A

@@ -47,7 +47,7 @@ loc_71EC:
 		jsr     (SetFFDE94b3andWait).w
 		bsr.w   InitDisplay     
 		bsr.w   DisableDisplayAndVInt
-		sndCom MUSIC_TITLE
+		sndCom  MUSIC_TITLE
 		jsr     TitleScreen
 		bne.s   loc_724E        
 		move    #$2700,sr
@@ -83,7 +83,7 @@ loc_729C:
 		moveq   #2,d1
 		jsr     (DmaTilesViaFF8804).w
 		bsr.w   EnableDisplayAndInterrupts
-		sndCom MUSIC_WITCH
+		sndCom  MUSIC_WITCH
 		bsr.w   FadeInFromBlack
 		trap    #VINT_FUNCTIONS
 		dc.w VINTS_ADD
@@ -107,37 +107,37 @@ loc_729C:
 		tst.w   d0
 		bpl.s   loc_7332
 		move.l  #1,((TEXT_NUMBER-$1000000)).w
-		sndCom MUSIC_CORRUPTED_SAVE
-		txt $ED                 ; "Ooops!  Record {#} has{N}vanished!{W2}"
+		sndCom  MUSIC_CORRUPTED_SAVE
+		txt     $ED             ; "Ooops!  Record {#} has{N}vanished!{W2}"
 		jsr     j_FadeOut_WaitForP2Input
 loc_7332:
 		tst.w   d1
 		bpl.s   loc_734C
 		move.l  #2,((TEXT_NUMBER-$1000000)).w
-		sndCom MUSIC_CORRUPTED_SAVE
-		txt $ED                 ; "Ooops!  Record {#} has{N}vanished!{W2}"
+		sndCom  MUSIC_CORRUPTED_SAVE
+		txt     $ED             ; "Ooops!  Record {#} has{N}vanished!{W2}"
 		jsr     j_FadeOut_WaitForP2Input
 loc_734C:
 		btst    #7,((P1_INPUT-$1000000)).w
 		bne.w   loc_73AA
-		txt $D8                 ; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
+		txt     $D8             ; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
 		bsr.w   WaitForVInt     
 		bsr.w   sub_7CF4
 		bsr.w   WaitForVInt     
 		move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 		move.w  #6,((word_FFB07C-$1000000)).w
 		move.b  #$FF,((byte_FFB082-$1000000)).w
-		txt $D9                 ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
+		txt     $D9             ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
 loc_737C:
 		btst    #7,((P1_INPUT-$1000000)).w
 		bne.w   byte_73C2       
-		txt $DA                 ; "Yes, yes...I used a spell{N}on you.{W2}"
+		txt     $DA             ; "Yes, yes...I used a spell{N}on you.{W2}"
 		btst    #7,((P1_INPUT-$1000000)).w
 		bne.w   byte_73C2       
-		txt $DB                 ; "Ha, ha.  Where are you{N}going?  You can't escape{W2}"
+		txt     $DB             ; "Ha, ha.  Where are you{N}going?  You can't escape{W2}"
 		btst    #7,((P1_INPUT-$1000000)).w
 		bne.w   byte_73C2       
-		txt $DC                 ; "from this mystery forest{N}unless you help me.{W2}"
+		txt     $DC             ; "from this mystery forest{N}unless you help me.{W2}"
 		bra.w   byte_73C2       
 loc_73AA:
 		bsr.w   WaitForVInt     
@@ -146,7 +146,7 @@ loc_73AA:
 		move.w  #$1E,((BLINK_COUNTER-$1000000)).w
 		move.b  #$FF,((byte_FFB082-$1000000)).w
 byte_73C2:
-		txt $DD                 ; "{CLEAR}Whatcha gonna do?"
+		txt     $DD             ; "{CLEAR}Whatcha gonna do?"
 		move.b  (SAVE_FLAGS).l,d3
 		andi.w  #3,d3
 		bne.s   loc_73D8

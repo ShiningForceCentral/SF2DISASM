@@ -51,7 +51,7 @@ word_60558:     dc.w $90F
 
 sub_60582:
 		 
-		chkFlg $3AC             ; set after playing the piano in Yeel (during the late game)
+		chkFlg  $3AC            ; set after playing the piano in Yeel (during the late game)
 		bne.s   return_6058E
 		script  cs_60F64
 return_6058E:
@@ -64,7 +64,7 @@ return_6058E:
 
 sub_60590:
 		 
-		chkFlg $3B1             ; set after recruiting Lemon in Yeel
+		chkFlg  $3B1            ; set after recruiting Lemon in Yeel
 		bne.s   byte_605C4      
 		script  cs_6060E
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
@@ -73,11 +73,11 @@ sub_60590:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
-		txt $D9B                ; "I can't believe it!{N}I want to die, but I can't!{W1}"
-		setFlg $3B1             ; set after recruiting Lemon in Yeel
+		txt     $D9B            ; "I can't believe it!{N}I want to die, but I can't!{W1}"
+		setFlg  $3B1            ; set after recruiting Lemon in Yeel
 		bra.s   return_60604
 byte_605C4:
-		chkFlg $1C              ; Lemon joined
+		chkFlg  $1C             ; Lemon joined
 		bne.s   loc_605EE
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		move.w  #$1C,d0
@@ -85,14 +85,14 @@ byte_605C4:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
-		txt $D9B                ; "I can't believe it!{N}I want to die, but I can't!{W1}"
+		txt     $D9B            ; "I can't believe it!{N}I want to die, but I can't!{W1}"
 		bra.s   return_60604
 loc_605EE:
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
-		txt $1A7                ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
-		txt $FF2                ; "A hole.{W1}"
+		txt     $1A7            ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+		txt     $FF2            ; "A hole.{W1}"
 return_60604:
 		rts
 

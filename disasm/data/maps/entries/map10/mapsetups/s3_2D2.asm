@@ -12,12 +12,12 @@ ms_map10_flag2D2_ZoneEvents:
 
 sub_56FC8:
 		 
-		chkFlg $D               ; Elric joined
+		chkFlg  $D              ; Elric joined
 		bne.s   return_56FDE
-		chkFlg $2D4             ; set after the scene where Skreech falls in Bedoe
+		chkFlg  $2D4            ; set after the scene where Skreech falls in Bedoe
 		bne.s   return_56FDE
 		script  cs_5779C
-		setFlg $2D4             ; set after the scene where Skreech falls in Bedoe
+		setFlg  $2D4            ; set after the scene where Skreech falls in Bedoe
 return_56FDE:
 		rts
 

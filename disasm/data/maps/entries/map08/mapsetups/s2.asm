@@ -10,14 +10,14 @@ ms_map8_EntityEvents:
 
 sub_56090:
 		 
-		chkFlg $100             ; Temporary map setup flag 00
+		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   byte_560A6      
-		setFlg $100             ; Temporary map setup flag 00
-		txt $529                ; "Our ancestors came from{N}Rune, a southern island,{N}long ago.{W2}"
-		txt $52A                ; "Since then, we've travelled{N}up here.{W2}"
-		txt $52B                ; "The mountains to the north{N}block our journey.{W2}"
+		setFlg  $100            ; Temporary map setup flag 00
+		txt     $529            ; "Our ancestors came from{N}Rune, a southern island,{N}long ago.{W2}"
+		txt     $52A            ; "Since then, we've travelled{N}up here.{W2}"
+		txt     $52B            ; "The mountains to the north{N}block our journey.{W2}"
 byte_560A6:
-		txt $52C                ; "Are you going to{N}Mt. Volcano?{N}That's {NAME;7}'s hometown?{W1}"
+		txt     $52C            ; "Are you going to{N}Mt. Volcano?{N}That's {NAME;7}'s hometown?{W1}"
 		rts
 
 	; End of function sub_56090
@@ -27,7 +27,7 @@ byte_560A6:
 
 sub_560AC:
 		 
-		txt $52D                ; "We won't hide from you{N}anymore.  Ribble has many{N}ancient ruins.{W1}"
+		txt     $52D            ; "We won't hide from you{N}anymore.  Ribble has many{N}ancient ruins.{W1}"
 		rts
 
 	; End of function sub_560AC
@@ -37,7 +37,7 @@ sub_560AC:
 
 sub_560B2:
 		 
-		txt $52E                ; "Men are so selfish.{N}My husband has gone to the{N}east to work.  What about me?{W1}"
+		txt     $52E            ; "Men are so selfish.{N}My husband has gone to the{N}east to work.  What about me?{W1}"
 		rts
 
 	; End of function sub_560B2
@@ -56,9 +56,9 @@ j_j_ChurchActions:
 
 sub_560BE:
 		 
-		txt $52F                ; "Keseran is a historian.{N}But Mr. {NAME;11} is smarter{N}than him!{W2}"
-		txt $530                ; "I saw a strange hollow in a{N}tree.  Does something go{N}there?{W2}"
-		txt $531                ; "Is what you're looking for in{N}Ribble?{W1}"
+		txt     $52F            ; "Keseran is a historian.{N}But Mr. {NAME;11} is smarter{N}than him!{W2}"
+		txt     $530            ; "I saw a strange hollow in a{N}tree.  Does something go{N}there?{W2}"
+		txt     $531            ; "Is what you're looking for in{N}Ribble?{W1}"
 		rts
 
 	; End of function sub_560BE
@@ -68,13 +68,13 @@ sub_560BE:
 
 sub_560CC:
 		 
-		chkFlg $2DB             ; set after you open the tree in Ribble with the wooden plank
+		chkFlg  $2DB            ; set after you open the tree in Ribble with the wooden plank
 		bne.s   byte_560DC      
-		txt $532                ; "I can't find it!{W2}"
-		txt $533                ; "The hidden door to the{N}ancient ruins must be near{N}this tree!{W1}"
+		txt     $532            ; "I can't find it!{W2}"
+		txt     $533            ; "The hidden door to the{N}ancient ruins must be near{N}this tree!{W1}"
 		bra.s   return_560E0
 byte_560DC:
-		txt $545                ; "Wow, the ancient door!{N}I knew it was there!  I did!{W1}"
+		txt     $545            ; "Wow, the ancient door!{N}I knew it was there!  I did!{W1}"
 return_560E0:
 		rts
 
@@ -104,10 +104,10 @@ sub_560EE:
 
 sub_560F6:
 		 
-		txt $539                ; "Paseran and I are pupils{N}of Mr. {NAME;11} of Hassan.{W2}"
-		txt $53A                ; "The ancient ruins around here{N}are very interesting to us!{W2}"
-		txt $53B                ; "We're sure there are ruins{N}under Ribble, but we can't{N}find the door?{W2}"
-		txt $53C                ; "I'll find it before Paseran!{N}I think that tree has{N}something to do with it.{W1}"
+		txt     $539            ; "Paseran and I are pupils{N}of Mr. {NAME;11} of Hassan.{W2}"
+		txt     $53A            ; "The ancient ruins around here{N}are very interesting to us!{W2}"
+		txt     $53B            ; "We're sure there are ruins{N}under Ribble, but we can't{N}find the door?{W2}"
+		txt     $53C            ; "I'll find it before Paseran!{N}I think that tree has{N}something to do with it.{W1}"
 		rts
 
 	; End of function sub_560F6
@@ -117,8 +117,8 @@ sub_560F6:
 
 sub_56108:
 		 
-		txt $53D                ; "We recently came from Hassan.{N}Hassan is a port in the south.{W2}"
-		txt $53E                ; "It was once very prosperous,{N}but now it's desolate.{W1}"
+		txt     $53D            ; "We recently came from Hassan.{N}Hassan is a port in the south.{W2}"
+		txt     $53E            ; "It was once very prosperous,{N}but now it's desolate.{W1}"
 		rts
 
 	; End of function sub_56108
@@ -128,8 +128,8 @@ sub_56108:
 
 sub_56112:
 		 
-		txt $53F                ; "My dad went to the cave in{N}the north.{W2}"
-		txt $540                ; "But, I'm not worried!{N}He's very strong.{W1}"
+		txt     $53F            ; "My dad went to the cave in{N}the north.{W2}"
+		txt     $540            ; "But, I'm not worried!{N}He's very strong.{W1}"
 		rts
 
 	; End of function sub_56112
@@ -139,8 +139,8 @@ sub_56112:
 
 sub_5611C:
 		 
-		txt $541                ; "My dear husband never{N}returned from the cave.{W2}"
-		txt $542                ; "The cave was somehow{N}blocked.  How can I explain{N}this to my son?{W1}"
+		txt     $541            ; "My dear husband never{N}returned from the cave.{W2}"
+		txt     $542            ; "The cave was somehow{N}blocked.  How can I explain{N}this to my son?{W1}"
 		rts
 
 	; End of function sub_5611C
@@ -160,7 +160,7 @@ sub_56126:
 
 sub_56138:
 		 
-		chkFlg $8               ; May joined
+		chkFlg  $8              ; May joined
 		bne.s   return_56144
 		script  cs_56146
 return_56144:

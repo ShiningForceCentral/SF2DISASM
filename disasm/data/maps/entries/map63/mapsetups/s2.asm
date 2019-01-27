@@ -9,7 +9,7 @@ ms_map63_EntityEvents:
 
 sub_5C992:
 		 
-		chkFlg $1D              ; Claude joined
+		chkFlg  $1D             ; Claude joined
 		bne.s   return_5C9E0
 		moveq   #$75,d1 
 		jsr     j_sub_9146
@@ -21,8 +21,8 @@ sub_5C992:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
-		txt $1051               ; "Olooooo...Oloo....{N}Have you seen my arm?{W2}"
-		txt $1052               ; "I can't move...without my{N}arm...oloooo....{W1}"
+		txt     $1051           ; "Olooooo...Oloo....{N}Have you seen my arm?{W2}"
+		txt     $1052           ; "I can't move...without my{N}arm...oloooo....{W1}"
 		clsTxt
 		bra.s   return_5C9E0
 loc_5C9D2:

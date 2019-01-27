@@ -7,7 +7,7 @@
 ms_map20_flag21F_InitFunction:
 		
 		 
-		chkFlg $3D6
+		chkFlg  $3D6
 		beq.s   byte_633BA
 		script  cs_633B2
 		bra.w   byte_633BA
@@ -15,7 +15,7 @@ cs_633B2:
 		setPos $80,27,50,LEFT
 		csc_end
 byte_633BA:
-		sndCom MUSIC_TOWN
+		sndCom  MUSIC_TOWN
 		jsr     (FadeInFromBlack).w
 		rts
 

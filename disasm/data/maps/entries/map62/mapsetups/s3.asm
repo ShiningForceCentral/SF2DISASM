@@ -21,12 +21,12 @@ ms_map62_ZoneEvents:
 
 sub_5C834:
 		 
-		chkFlg $2D9             ; ???
+		chkFlg  $2D9            ; ???
 		bne.s   return_5C84A
-		chkFlg $100             ; Temporary map setup flag 00
+		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   return_5C84A
 		script  cs_5C876
-		setFlg $100             ; Temporary map setup flag 00
+		setFlg  $100            ; Temporary map setup flag 00
 return_5C84A:
 		rts
 
@@ -37,14 +37,14 @@ return_5C84A:
 
 sub_5C84C:
 		 
-		chkFlg $2D9             ; ???
+		chkFlg  $2D9            ; ???
 		bne.s   return_5C868
-		chkFlg $100             ; Temporary map setup flag 00
+		chkFlg  $100            ; Temporary map setup flag 00
 		beq.s   return_5C868
-		chkFlg $101             ; Temporary map setup flag 01
+		chkFlg  $101            ; Temporary map setup flag 01
 		bne.s   return_5C868
 		script  cs_5C8FE
-		setFlg $101             ; Temporary map setup flag 01
+		setFlg  $101            ; Temporary map setup flag 01
 return_5C868:
 		rts
 

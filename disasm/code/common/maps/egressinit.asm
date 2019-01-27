@@ -13,7 +13,7 @@
 GetEgressPositionForMap:
 		
 		 
-		chkFlg $18F             ; set after first battle's cutscene OR first save? Checked at witch screens
+		chkFlg  $18F            ; set after first battle's cutscene OR first save? Checked at witch screens
 		bne.s   loc_75FC        ; egress always goes back to granseal church (Wiz : or is it Bowie's room ?) if you haven't triggered the gizmos cutscene
 		moveq   #3,d0           ; HARDCODED default egress position
 		moveq   #$38,d1 
@@ -39,7 +39,7 @@ loc_7618:
 		move.b  (a0)+,d2
 		move.b  (a0)+,d3
 byte_7620:
-		chkFlg $40              ; Raft is unlocked (0x05264)
+		chkFlg  $40             ; Raft is unlocked (0x05264)
 		beq.s   loc_764A
 		conditionalPc lea,RaftResetMapCoords,a0
 						; separate raft egress locations?

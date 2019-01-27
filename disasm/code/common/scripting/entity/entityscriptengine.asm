@@ -619,7 +619,7 @@ loc_5220:
 		bne.s   loc_5256
 		cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 		bne.s   loc_5256
-		chkFlg $41              ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
+		chkFlg  $41             ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
 		beq.s   loc_5256
 		move.w  #2,((MAP_EVENT_TYPE-$1000000)).w
 		movem.w (sp)+,d2-d3
@@ -629,7 +629,7 @@ loc_5256:
 		bne.s   loc_5278
 		cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
 		bne.s   loc_5278
-		chkFlg $40              ; Raft is unlocked (0x05264)
+		chkFlg  $40             ; Raft is unlocked (0x05264)
 		beq.s   loc_5278
 		move.w  #3,((MAP_EVENT_TYPE-$1000000)).w
 		movem.w (sp)+,d2-d3
@@ -673,7 +673,7 @@ loc_52DE:
 loc_52E8:
 		move.w  d0,-(sp)
 		move.w  ((MOVE_SOUND-$1000000)).w,d0
-		sndCom SOUND_COMMAND_GET_D0_PARAMETER
+		sndCom  SOUND_COMMAND_GET_D0_PARAMETER
 		move.w  (sp)+,d0
 		move.w  d2,4(a0)
 		beq.s   loc_5300
@@ -1833,7 +1833,7 @@ esc22_setEntityFacing:
 esc23_sendSoundCommand:
 		
 		move.w  2(a1),d0
-		sndCom SOUND_COMMAND_GET_D0_PARAMETER
+		sndCom  SOUND_COMMAND_GET_D0_PARAMETER
 		addq.l  #4,a1
 		bra.w   esc_clearTimerGoToNextCommand
 

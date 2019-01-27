@@ -7,7 +7,7 @@
 ms_map3_flag1FA_InitFunction:
 		
 		 
-		chkFlg $6               ; Kiwi joined
+		chkFlg  $6              ; Kiwi joined
 		beq.s   byte_5136C
 		script  cs_51374
 byte_5136C:

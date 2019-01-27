@@ -23,20 +23,20 @@ word_4FCDE:     dc.w $3917
 
 sub_4FCE6:
 		 
-		txt $1A8                ; "{NAME} investigated.{W2}{CLEAR}"
-		chkFlg $2EF             ; set after Elric opens the passage to Devil's Tail
+		txt     $1A8            ; "{NAME} investigated.{W2}{CLEAR}"
+		chkFlg  $2EF            ; set after Elric opens the passage to Devil's Tail
 		bne.s   byte_4FD3C      
-		txt $A1E                ; "There's a wobbly rock.{W1}"
+		txt     $A1E            ; "There's a wobbly rock.{W1}"
 		clsTxt
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		move.w  #7,d0
 		jsr     GetEntityPortraitAndSpeechSfx
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
-		chkFlg $D               ; Elric joined
+		chkFlg  $D              ; Elric joined
 		bne.s   loc_4FD22
 		jsr     LoadAndDisplayCurrentPortrait
-		txt $A1F                ; "That rock looks{N}suspicious....{W1}"
+		txt     $A1F            ; "That rock looks{N}suspicious....{W1}"
 		bra.s   loc_4FD3A
 loc_4FD22:
 		move.w  #$D,d0
@@ -44,11 +44,11 @@ loc_4FD22:
 		tst.w   d1
 		bne.s   loc_4FD3A
 		jsr     LoadAndDisplayCurrentPortrait
-		txt $A20                ; "Maybe {NAME;13} can{N}help us.{W1}"
+		txt     $A20            ; "Maybe {NAME;13} can{N}help us.{W1}"
 loc_4FD3A:
 		bra.s   return_4FD40
 byte_4FD3C:
-		txt $1B2                ; "Nothing special there.{W1}"
+		txt     $1B2            ; "Nothing special there.{W1}"
 return_4FD40:
 		rts
 

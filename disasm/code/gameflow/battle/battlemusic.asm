@@ -36,7 +36,7 @@ loc_457C:
 		bne.s   byte_4586
 		move.w  #MUSIC_BATTLE_THEME_1,d0
 byte_4586:
-		sndCom SOUND_COMMAND_GET_D0_PARAMETER
+		sndCom  SOUND_COMMAND_GET_D0_PARAMETER
 		move.w  (sp)+,d0
 		rts
 

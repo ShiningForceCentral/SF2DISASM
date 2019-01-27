@@ -9,9 +9,9 @@
 PlayMusicAfterCurrentOne:
 		
 		 
-		sndCom SOUND_COMMAND_WAIT_MUSIC_END
+		sndCom  SOUND_COMMAND_WAIT_MUSIC_END
 						; Wait for current music to end
-		sndCom SOUND_COMMAND_GET_D0_PARAMETER
+		sndCom  SOUND_COMMAND_GET_D0_PARAMETER
 loc_16C6:
 		moveq   #3,d0
 		bsr.w   Sleep           

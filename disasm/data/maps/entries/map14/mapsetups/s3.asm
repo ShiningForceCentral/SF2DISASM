@@ -13,7 +13,7 @@ ms_map14_ZoneEvents:
 sub_58E50:
 		 
 		script  cs_58E5C
-		setFlg $101             ; Temporary map setup flag 01
+		setFlg  $101            ; Temporary map setup flag 01
 return_58E5A:
 		rts
 

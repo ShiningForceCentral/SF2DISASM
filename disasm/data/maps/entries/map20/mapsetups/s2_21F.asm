@@ -22,15 +22,15 @@ nullsub_125:
 
 sub_63252:
 		 
-		chkFlg $3D6
+		chkFlg  $3D6
 		bne.s   byte_63266      
-		txt $F66                ; "{LEADER}!{W2}"
-		txt $F67                ; "I'm waiting for Sir Astral.{W2}"
-		txt $F68                ; "{LEADER}, will you go{N}see him?{W1}"
+		txt     $F66            ; "{LEADER}!{W2}"
+		txt     $F67            ; "I'm waiting for Sir Astral.{W2}"
+		txt     $F68            ; "{LEADER}, will you go{N}see him?{W1}"
 		bra.s   return_6326E
 byte_63266:
-		txt $FAA                ; "You shouldered quite a{N}burden for the kingdom.{W2}"
-		txt $FAB                ; "I'll be happy if you rule{N}this kingdom with Princess{N}Elis!{W1}"
+		txt     $FAA            ; "You shouldered quite a{N}burden for the kingdom.{W2}"
+		txt     $FAB            ; "I'll be happy if you rule{N}this kingdom with Princess{N}Elis!{W1}"
 return_6326E:
 		rts
 
@@ -42,7 +42,7 @@ return_6326E:
 sub_63270:
 		moveq   #1,d0
 		jsr     j_ClosePortraitEyes
-		txt $FAF                ; "Zzzzz....{W1}"
+		txt     $FAF            ; "Zzzzz....{W1}"
 		rts
 
 	; End of function sub_63270
@@ -52,7 +52,7 @@ sub_63270:
 
 sub_6327E:
 		 
-		txt $FB0                ; "I'm splitting firewood!{N}My back hurts!{W1}"
+		txt     $FB0            ; "I'm splitting firewood!{N}My back hurts!{W1}"
 		rts
 
 	; End of function sub_6327E
@@ -62,7 +62,7 @@ sub_6327E:
 
 sub_63284:
 		 
-		txt $FB6                ; "This is the east tower.{N}I'm on watch.{W1}"
+		txt     $FB6            ; "This is the east tower.{N}I'm on watch.{W1}"
 		rts
 
 	; End of function sub_63284
@@ -72,7 +72,7 @@ sub_63284:
 
 sub_6328A:
 		 
-		txt $FB7                ; "What a view!{N}Parmecia is beautiful!{W1}"
+		txt     $FB7            ; "What a view!{N}Parmecia is beautiful!{W1}"
 		rts
 
 	; End of function sub_6328A
@@ -82,8 +82,8 @@ sub_6328A:
 
 sub_63290:
 		 
-		txt $FB8                ; "Yeeee!  Who are you!?{N}{LEADER}!{W2}"
-		txt $FB9                ; "I wouldn't have screamed{N}if I knew it was you.{W1}"
+		txt     $FB8            ; "Yeeee!  Who are you!?{N}{LEADER}!{W2}"
+		txt     $FB9            ; "I wouldn't have screamed{N}if I knew it was you.{W1}"
 		rts
 
 	; End of function sub_63290

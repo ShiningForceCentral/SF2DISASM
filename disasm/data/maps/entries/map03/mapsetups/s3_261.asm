@@ -15,11 +15,11 @@ ms_map3_flag261_ZoneEvents:
 
 sub_50EF6:
 		 
-		chkFlg $3               ; Jaha joined
+		chkFlg  $3              ; Jaha joined
 		bne.s   return_50F0A
 		script  cs_516A8
-		setFlg $192             ; Battle 2 unlocked
-		clrFlg $42              ; Sarah + Chester are followers
+		setFlg  $192            ; Battle 2 unlocked
+		clrFlg  $42             ; Sarah + Chester are followers
 return_50F0A:
 		rts
 

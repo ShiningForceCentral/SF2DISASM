@@ -24,18 +24,18 @@ ms_map6_ZoneEvents:
 
 sub_54CE8:
 		 
-		chkFlg $2C2             ; set after the scene with the sailor and soldier in New Granseal (Peter intro)
+		chkFlg  $2C2            ; set after the scene with the sailor and soldier in New Granseal (Peter intro)
 		bne.s   byte_54CFA      
 		script  cs_54E86
-		setFlg $2C2             ; set after the scene with the sailor and soldier in New Granseal (Peter intro)
+		setFlg  $2C2            ; set after the scene with the sailor and soldier in New Granseal (Peter intro)
 		bra.s   return_54D10
 byte_54CFA:
-		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		beq.s   return_54D10
-		chkFlg $323             ; set after returning to New Granseal, when the soldier greets you
+		chkFlg  $323            ; set after returning to New Granseal, when the soldier greets you
 		bne.s   return_54D10
 		script  cs_55242
-		setFlg $323             ; set after returning to New Granseal, when the soldier greets you
+		setFlg  $323            ; set after returning to New Granseal, when the soldier greets you
 return_54D10:
 		rts
 
@@ -46,10 +46,10 @@ return_54D10:
 
 sub_54D12:
 		 
-		chkFlg $2BD             ; set after the scene with Peter and the kids in New Granseal
+		chkFlg  $2BD            ; set after the scene with Peter and the kids in New Granseal
 		bne.s   return_54D22
 		script  cs_54F26
-		setFlg $2BD             ; set after the scene with Peter and the kids in New Granseal
+		setFlg  $2BD            ; set after the scene with Peter and the kids in New Granseal
 return_54D22:
 		rts
 
@@ -60,12 +60,12 @@ return_54D22:
 
 sub_54D24:
 		 
-		chkFlg $325             ; set after coming back to New Granseal after Creed's Mansion,when Astral joins
+		chkFlg  $325            ; set after coming back to New Granseal after Creed's Mansion,when Astral joins
 		beq.s   return_54D3A
-		chkFlg $326             ; set after the scene with Janet, when you go to leave New Granseal
+		chkFlg  $326            ; set after the scene with Janet, when you go to leave New Granseal
 		bne.s   return_54D3A
 		script  cs_55288
-		setFlg $326             ; set after the scene with Janet, when you go to leave New Granseal
+		setFlg  $326            ; set after the scene with Janet, when you go to leave New Granseal
 return_54D3A:
 		rts
 

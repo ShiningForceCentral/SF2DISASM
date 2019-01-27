@@ -29,7 +29,7 @@ ms_map19_flag1FA_EntityEvents:
 sub_53070:
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
-		txt $2A6                ; "Already passed away...{N}{LEADER} feels pity.{W1}"
+		txt     $2A6            ; "Already passed away...{N}{LEADER} feels pity.{W1}"
 		rts
 
 	; End of function sub_53070
@@ -39,7 +39,7 @@ sub_53070:
 
 sub_53080:
 		 
-		txt $2A7                ; "This is a nightmare.{W1}"
+		txt     $2A7            ; "This is a nightmare.{W1}"
 		rts
 
 	; End of function sub_53080
@@ -49,9 +49,9 @@ sub_53080:
 
 sub_53086:
 		 
-		txt $2A8                ; "The Galam soldiers scared{N}me.{W2}"
-		txt $2A9                ; "But when Sir Astral made{N}an incantation, King Galam{N}screamed.{W2}"
-		txt $2AA                ; "He ran upstairs with a{N}pained look on his face.{W1}"
+		txt     $2A8            ; "The Galam soldiers scared{N}me.{W2}"
+		txt     $2A9            ; "But when Sir Astral made{N}an incantation, King Galam{N}screamed.{W2}"
+		txt     $2AA            ; "He ran upstairs with a{N}pained look on his face.{W1}"
 		rts
 
 	; End of function sub_53086
@@ -61,8 +61,8 @@ sub_53086:
 
 sub_53094:
 		 
-		txt $2AB                ; "We Granseal soldiers{N}fought against Galam with{N}all our strength.{W2}"
-		txt $2AC                ; "But we were powerless{N}against King Galam's magic.{W1}"
+		txt     $2AB            ; "We Granseal soldiers{N}fought against Galam with{N}all our strength.{W2}"
+		txt     $2AC            ; "But we were powerless{N}against King Galam's magic.{W1}"
 		rts
 
 	; End of function sub_53094
@@ -72,8 +72,8 @@ sub_53094:
 
 sub_5309E:
 		 
-		txt $2AD                ; "What King Galam said was{N}wrong!{W2}"
-		txt $2AE                ; "We did not attack Galam!{W1}"
+		txt     $2AD            ; "What King Galam said was{N}wrong!{W2}"
+		txt     $2AE            ; "We did not attack Galam!{W1}"
 		rts
 
 	; End of function sub_5309E
@@ -83,7 +83,7 @@ sub_5309E:
 
 sub_530A8:
 		 
-		txt $2AF                ; "Nobody knew that King Galam{N}was a wizard!{W1}"
+		txt     $2AF            ; "Nobody knew that King Galam{N}was a wizard!{W1}"
 		rts
 
 	; End of function sub_530A8
@@ -93,7 +93,7 @@ sub_530A8:
 
 sub_530AE:
 		 
-		txt $2B0                ; "Why are we at war?{W1}"
+		txt     $2B0            ; "Why are we at war?{W1}"
 		rts
 
 	; End of function sub_530AE
@@ -103,7 +103,7 @@ sub_530AE:
 
 sub_530B4:
 		 
-		txt $2B1                ; "The Princess was taken{N}away...and I'm paralyzed{N}with fear.{W1}"
+		txt     $2B1            ; "The Princess was taken{N}away...and I'm paralyzed{N}with fear.{W1}"
 		rts
 
 	; End of function sub_530B4

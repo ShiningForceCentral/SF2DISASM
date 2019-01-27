@@ -47,13 +47,13 @@ CheckRandomBattle26:
 
 sub_4FE98:
 		 
-		chkFlg $2EE             ; set after Rohde clears the blockage at the North Cliff cave
+		chkFlg  $2EE            ; set after Rohde clears the blockage at the North Cliff cave
 		bne.s   return_4FF04
-		chkFlg $325             ; set after coming back to New Granseal after Creed's Mansion,when Astral joins
+		chkFlg  $325            ; set after coming back to New Granseal after Creed's Mansion,when Astral joins
 		beq.s   return_4FF04
-		chkFlg $100             ; Temporary map setup flag 00
+		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   return_4FF04
-		clrFlg $100             ; Temporary map setup flag 00
+		clrFlg  $100            ; Temporary map setup flag 00
 		moveq   #$72,d1 
 		jsr     j_sub_9146
 		cmpi.w  #$FFFF,d0
@@ -67,7 +67,7 @@ sub_4FE98:
 		moveq   #$74,d0 
 		jsr     sub_4F542
 		script  cs_4FFDA
-		setFlg $2EE             ; set after Rohde clears the blockage at the North Cliff cave
+		setFlg  $2EE            ; set after Rohde clears the blockage at the North Cliff cave
 		bra.s   loc_4FEF2
 loc_4FEE6:
 		move.w  #$74,((TEXT_NAME_INDEX_1-$1000000)).w 
@@ -78,7 +78,7 @@ loc_4FEF4:
 		move.w  #$74,((TEXT_NAME_INDEX_1-$1000000)).w 
 		script  cs_5023E
 byte_4FF00:
-		setFlg $100             ; Temporary map setup flag 00
+		setFlg  $100            ; Temporary map setup flag 00
 return_4FF04:
 		rts
 
@@ -90,7 +90,7 @@ return_4FF04:
 CheckRandomBattle24:
 		
 		 
-		chkFlg $20B             ; Battle 23 completed
+		chkFlg  $20B            ; Battle 23 completed
 		bne.s   loc_4FF18
 		move.w  #8,d0
 		jsr     CheckRandomBattle

@@ -904,7 +904,7 @@ loc_3EF0:
 		addi.w  #$80,d2 
 		dbf     d7,loc_3EEC
 byte_3F06:
-		sndCom SFX_DOOR_OPEN
+		sndCom  SFX_DOOR_OPEN
 		tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
 		beq.s   loc_3F18
 		bset    #0,((byte_FFA82D-$1000000)).w
@@ -1087,7 +1087,7 @@ loc_40BE:
 		dbf     d7,loc_40BA
 loc_40D8:
 		move.w  #$FFFF,(a3)
-		sndCom MUSIC_NOTHING
+		sndCom  MUSIC_NOTHING
 		bset    #0,((byte_FFA82D-$1000000)).w
 loc_40E6:
 		move.w  (sp)+,d7
@@ -1125,7 +1125,7 @@ loc_4130:
 		movem.w (sp)+,d2/d6
 		addi.w  #$80,d2 
 		dbf     d7,loc_412C
-		sndCom MUSIC_NOTHING
+		sndCom  MUSIC_NOTHING
 		bset    #0,((byte_FFA82D-$1000000)).w
 loc_4150:
 		movem.w (sp)+,d7

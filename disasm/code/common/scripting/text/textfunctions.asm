@@ -210,7 +210,7 @@ loc_6472:
 		move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
 		andi.b  #$7F,d1 
 		beq.s   loc_6472
-		sndCom SFX_VALIDATION
+		sndCom  SFX_VALIDATION
 		clr.w   d2
 		bsr.s   sub_64A8
 		move.w  (sp)+,d0
@@ -837,7 +837,7 @@ loc_68C2:
 		beq.s   loc_68DC
 		move.w  d0,-(sp)
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,d0
-		sndCom SOUND_COMMAND_GET_D0_PARAMETER
+		sndCom  SOUND_COMMAND_GET_D0_PARAMETER
 		move.w  (sp)+,d0
 loc_68DC:
 		bra.s   loc_68E2

@@ -15,11 +15,11 @@ ms_map52_ZoneEvents:
 
 sub_5C4B6:
 		 
-		chkFlg $2C9             ; set after the scene at the cliffs before Bedoe, where the devils are searching
+		chkFlg  $2C9            ; set after the scene at the cliffs before Bedoe, where the devils are searching
 		bne.s   return_5C4CA
 		lea     cs_5C4EE(pc), a0
 		jsr     ExecuteMapScript
-		setFlg $2C9             ; set after the scene at the cliffs before Bedoe, where the devils are searching
+		setFlg  $2C9            ; set after the scene at the cliffs before Bedoe, where the devils are searching
 return_5C4CA:
 		rts
 

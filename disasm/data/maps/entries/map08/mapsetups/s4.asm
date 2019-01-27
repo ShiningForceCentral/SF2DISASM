@@ -71,7 +71,7 @@ word_561FC:     dc.w $50F
 
 sub_56246:
 		 
-		chkFlg $2C4             ; set after the scene in Ribble where the mayor confronts Bowie
+		chkFlg  $2C4            ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   loc_56256
 		move.w  #$546,d0
 		jsr     (DisplayText).w 
@@ -92,7 +92,7 @@ return_5626A:
 
 sub_5626C:
 		 
-		chkFlg $2C4             ; set after the scene in Ribble where the mayor confronts Bowie
+		chkFlg  $2C4            ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   loc_56284
 		move.w  #$547,d0
 		jsr     (DisplayText).w 
@@ -123,7 +123,7 @@ sub_5629A:
 		move.w  #$550,d0
 		jmp     (DisplayText).w 
 byte_562BA:
-		chkFlg $2DB             ; set after you open the tree in Ribble with the wooden plank
+		chkFlg  $2DB            ; set after you open the tree in Ribble with the wooden plank
 		bne.s   loc_562CA
 		move.w  #$54A,d0
 		jmp     (DisplayText).w 

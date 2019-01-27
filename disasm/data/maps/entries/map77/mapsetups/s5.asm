@@ -25,14 +25,14 @@ nullsub_168:
 
 sub_50A9A:
 		move.w  #$73,((TEXT_NAME_INDEX_1-$1000000)).w 
-		txt $1A5                ; "{LEADER} uses the {ITEM}.{D3}"
-		chkFlg $384             ; set after using the Dry Stone to open the way to the Dwarven Village
+		txt     $1A5            ; "{LEADER} uses the {ITEM}.{D3}"
+		chkFlg  $384            ; set after using the Dry Stone to open the way to the Dwarven Village
 		bne.s   byte_50AB6      
-		setFlg $384             ; set after using the Dry Stone to open the way to the Dwarven Village
+		setFlg  $384            ; set after using the Dry Stone to open the way to the Dwarven Village
 		script  cs_50ABE
 		bra.s   loc_50ABA
 byte_50AB6:
-		txt $1A6                ; "But nothing happened.{D1}"
+		txt     $1A6            ; "But nothing happened.{D1}"
 loc_50ABA:
 		moveq   #$FFFFFFFF,d6
 		rts

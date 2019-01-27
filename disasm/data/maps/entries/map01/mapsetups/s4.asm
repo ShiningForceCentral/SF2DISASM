@@ -30,10 +30,10 @@ word_5E736:     dc.w $B03
 
 sub_5E746:
 		 
-		chkFlg $349             ; set after the Taya join scene has played inside the Mitula Shrine
+		chkFlg  $349            ; set after the Taya join scene has played inside the Mitula Shrine
 		bne.s   return_5E756
 		script  cs_5E772
-		setFlg $349             ; set after the Taya join scene has played inside the Mitula Shrine
+		setFlg  $349            ; set after the Taya join scene has played inside the Mitula Shrine
 return_5E756:
 		rts
 

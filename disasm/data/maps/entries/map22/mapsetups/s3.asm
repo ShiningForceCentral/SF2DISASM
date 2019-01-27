@@ -20,9 +20,9 @@ nullsub_87:
 
 sub_595E8:
 		 
-		chkFlg $309             ; set after the Desktop King tells you to fight on the chessboard
+		chkFlg  $309            ; set after the Desktop King tells you to fight on the chessboard
 		beq.s   return_59600
-		chkFlg $20A             ; Battle 22 completed
+		chkFlg  $20A            ; Battle 22 completed
 		bne.s   return_59600
 		move.b  #$16,((EGRESS_MAP_INDEX-$1000000)).w
 		script  cs_5994E

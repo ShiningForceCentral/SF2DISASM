@@ -18,7 +18,7 @@ ms_map44_flag1FB_EntityEvents:
 
 sub_544B6:
 		 
-		txt $271                ; "My husband rushed out{N}of here when he saw the{N}sun rise.{W2}{N}Yeah, maybe he'll make{N}a good haul today.{W1}"
+		txt     $271            ; "My husband rushed out{N}of here when he saw the{N}sun rise.{W2}{N}Yeah, maybe he'll make{N}a good haul today.{W1}"
 		rts
 
 	; End of function sub_544B6
@@ -28,7 +28,7 @@ sub_544B6:
 
 sub_544BC:
 		 
-		txt $32A                ; "Meow!{W1}"
+		txt     $32A            ; "Meow!{W1}"
 		rts
 
 	; End of function sub_544BC
@@ -38,7 +38,7 @@ sub_544BC:
 
 sub_544C2:
 		 
-		txt $26C                ; "Hang it all!{N}Where have all the fish gone?!{N}My boss was really upset.{W1}"
+		txt     $26C            ; "Hang it all!{N}Where have all the fish gone?!{N}My boss was really upset.{W1}"
 		rts
 
 	; End of function sub_544C2
@@ -48,7 +48,7 @@ sub_544C2:
 
 sub_544C8:
 		 
-		txt $26D                ; "It's strange...{N}The sea is so calm.{W2}{N}I have never seen such a{N}quiet sea before!{W1}"
+		txt     $26D            ; "It's strange...{N}The sea is so calm.{W2}{N}I have never seen such a{N}quiet sea before!{W1}"
 		rts
 
 	; End of function sub_544C8
@@ -58,7 +58,7 @@ sub_544C8:
 
 sub_544CE:
 		 
-		txt $26E                ; "I'm so sorry.  I have no fish{N}for you today.{W2}{N}I don't know why, but we{N}made no haul.{W1}"
+		txt     $26E            ; "I'm so sorry.  I have no fish{N}for you today.{W2}{N}I don't know why, but we{N}made no haul.{W1}"
 		rts
 
 	; End of function sub_544CE
@@ -68,7 +68,7 @@ sub_544CE:
 
 sub_544D4:
 		 
-		txt $26F                ; "Meow! {W1}"
+		txt     $26F            ; "Meow! {W1}"
 		rts
 
 	; End of function sub_544D4
@@ -78,7 +78,7 @@ sub_544D4:
 
 sub_544DA:
 		 
-		txt $270                ; "Hey, you!{N}This ship is for{N}fishermen only!{W2}{N}Get out of here, you{N}silly kid!{W1}"
+		txt     $270            ; "Hey, you!{N}This ship is for{N}fishermen only!{W2}{N}Get out of here, you{N}silly kid!{W1}"
 		rts
 
 	; End of function sub_544DA
@@ -88,7 +88,7 @@ sub_544DA:
 
 sub_544E0:
 		 
-		txt $272                ; "I heard that Galam invaded{N}this kingdom while I was{N}fishing.{W2}{N}What's going on in the{N}castle?{W1}"
+		txt     $272            ; "I heard that Galam invaded{N}this kingdom while I was{N}fishing.{W2}{N}What's going on in the{N}castle?{W1}"
 		rts
 
 	; End of function sub_544E0
@@ -98,7 +98,7 @@ sub_544E0:
 
 sub_544E6:
 		 
-		txt $3E9                ; "The town was destroyed{N}by the earthquake....{W1}"
+		txt     $3E9            ; "The town was destroyed{N}by the earthquake....{W1}"
 		rts
 
 	; End of function sub_544E6
@@ -108,7 +108,7 @@ sub_544E6:
 
 sub_544EC:
 		 
-		txt $3EA                ; "It was big enough to cause{N}a tsunami!{W1}"
+		txt     $3EA            ; "It was big enough to cause{N}a tsunami!{W1}"
 		rts
 
 	; End of function sub_544EC
@@ -118,7 +118,7 @@ sub_544EC:
 
 sub_544F2:
 		 
-		txt $3EB                ; "Leave port now!{N}Right now!{W1}"
+		txt     $3EB            ; "Leave port now!{N}Right now!{W1}"
 		rts
 
 	; End of function sub_544F2
@@ -128,7 +128,7 @@ sub_544F2:
 
 sub_544F8:
 		 
-		txt $3EC                ; "Who are you?{N}Don't push me.{N}The ship is full!{W1}"
+		txt     $3EC            ; "Who are you?{N}Don't push me.{N}The ship is full!{W1}"
 		rts
 
 	; End of function sub_544F8
@@ -138,7 +138,7 @@ sub_544F8:
 
 sub_544FE:
 		 
-		txt $3ED                ; "Ouch...{N}I have bruises everywhere!{W1}"
+		txt     $3ED            ; "Ouch...{N}I have bruises everywhere!{W1}"
 		rts
 
 	; End of function sub_544FE
@@ -148,7 +148,7 @@ sub_544FE:
 
 sub_54504:
 		 
-		txt $3EE                ; "There is no room for you{N}here!{W1}"
+		txt     $3EE            ; "There is no room for you{N}here!{W1}"
 		rts
 
 	; End of function sub_54504
@@ -158,7 +158,7 @@ sub_54504:
 
 sub_5450A:
 		 
-		txt $3EF                ; "Oh, my!  Granseal is{N}collapsing....{W1}"
+		txt     $3EF            ; "Oh, my!  Granseal is{N}collapsing....{W1}"
 		rts
 
 	; End of function sub_5450A
@@ -168,7 +168,7 @@ sub_5450A:
 
 sub_54510:
 		 
-		txt $3F0                ; "Sire!  Sir Astral!{N}Glad to see you again!{N}Can we put out now?{W1}"
+		txt     $3F0            ; "Sire!  Sir Astral!{N}Glad to see you again!{N}Can we put out now?{W1}"
 		clsTxt
 		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
 		move.w  #$1F,d0
@@ -176,13 +176,13 @@ sub_54510:
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
-		txt $3F1                ; "{LEADER}, are you ready{N}to leave port?{W1}"
+		txt     $3F1            ; "{LEADER}, are you ready{N}to leave port?{W1}"
 		jsr     j_YesNoPrompt
 		bne.s   byte_5454A      
 		script  cs_54578
 		bra.s   return_5454E
 byte_5454A:
-		txt $3F2                ; "Then come back here very{N}soon.{W1}"
+		txt     $3F2            ; "Then come back here very{N}soon.{W1}"
 return_5454E:
 		rts
 
@@ -193,7 +193,7 @@ return_5454E:
 
 sub_54550:
 		 
-		txt $3F3                ; "King Granseal!{N}Sir Astral...oh,{N}Minister!{W1}"
+		txt     $3F3            ; "King Granseal!{N}Sir Astral...oh,{N}Minister!{W1}"
 		rts
 
 	; End of function sub_54550
@@ -203,7 +203,7 @@ sub_54550:
 
 sub_54556:
 		 
-		txt $3F4                ; "Everything is ready!{N}We can go anytime!{W1}"
+		txt     $3F4            ; "Everything is ready!{N}We can go anytime!{W1}"
 		rts
 
 	; End of function sub_54556

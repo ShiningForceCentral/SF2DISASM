@@ -26,7 +26,7 @@ ms_map19_flag3D6_EntityEvents:
 
 sub_62C16:
 		 
-		txt $FA8                ; "The Minister is waiting{N}for you.{W1}"
+		txt     $FA8            ; "The Minister is waiting{N}for you.{W1}"
 		rts
 
 	; End of function sub_62C16
@@ -36,7 +36,7 @@ sub_62C16:
 
 sub_62C1C:
 		 
-		txt $FA9                ; "Oh, {LEADER}!{N}I really respect you.{W2}"
+		txt     $FA9            ; "Oh, {LEADER}!{N}I really respect you.{W2}"
 		rts
 
 	; End of function sub_62C1C
@@ -46,7 +46,7 @@ sub_62C1C:
 
 sub_62C22:
 		 
-		txt $FBD                ; "It's OK...{W2}{N}I'll find a girl someday!{W1}"
+		txt     $FBD            ; "It's OK...{W2}{N}I'll find a girl someday!{W1}"
 		rts
 
 	; End of function sub_62C22
@@ -56,7 +56,7 @@ sub_62C22:
 
 sub_62C28:
 		 
-		txt $F9D                ; "What does he mean?{N}I don't understand!{W1}"
+		txt     $F9D            ; "What does he mean?{N}I don't understand!{W1}"
 		rts
 
 	; End of function sub_62C28
@@ -66,7 +66,7 @@ sub_62C28:
 
 sub_62C2E:
 		 
-		txt $FBE                ; "Don't worry.{N}He's tough.{W1}"
+		txt     $FBE            ; "Don't worry.{N}He's tough.{W1}"
 		rts
 
 	; End of function sub_62C2E
@@ -76,8 +76,8 @@ sub_62C2E:
 
 sub_62C34:
 		 
-		txt $FBA                ; "Hurry, {LEADER}!{N}Princess Elis is upstairs!{W2}"
-		txt $FBB                ; "You were so cool in our{N}adventure two years ago!{W1}"
+		txt     $FBA            ; "Hurry, {LEADER}!{N}Princess Elis is upstairs!{W2}"
+		txt     $FBB            ; "You were so cool in our{N}adventure two years ago!{W1}"
 		rts
 
 	; End of function sub_62C34
@@ -87,7 +87,7 @@ sub_62C34:
 
 sub_62C3E:
 		 
-		txt $F92                ; "{LEADER} is a human!{N}They will make a cute couple!{W1}"
+		txt     $F92            ; "{LEADER} is a human!{N}They will make a cute couple!{W1}"
 		rts
 
 	; End of function sub_62C3E
@@ -97,7 +97,7 @@ sub_62C3E:
 
 sub_62C44:
 		 
-		txt $F9E                ; "They remind me of when I{N}was young.{W1}"
+		txt     $F9E            ; "They remind me of when I{N}was young.{W1}"
 		rts
 
 	; End of function sub_62C44
@@ -107,7 +107,7 @@ sub_62C44:
 
 sub_62C4A:
 		 
-		txt $FBC                ; "{LEADER}, go kiss her!{W1}"
+		txt     $FBC            ; "{LEADER}, go kiss her!{W1}"
 		rts
 
 	; End of function sub_62C4A
@@ -117,7 +117,7 @@ sub_62C4A:
 
 sub_62C50:
 		 
-		txt $F94                ; "I think he's the best{N}choice.{W1}"
+		txt     $F94            ; "I think he's the best{N}choice.{W1}"
 		rts
 
 	; End of function sub_62C50
@@ -127,7 +127,7 @@ sub_62C50:
 
 sub_62C56:
 		 
-		txt $FBF                ; "You're blushing!{N}Just be cool!{W1}"
+		txt     $FBF            ; "You're blushing!{N}Just be cool!{W1}"
 		rts
 
 	; End of function sub_62C56
@@ -137,8 +137,8 @@ sub_62C56:
 
 sub_62C5C:
 		 
-		txt $FA2                ; "{NAME;4} will take care{N}of {NAME;1}.{W2}"
-		txt $FA3                ; "Everything went as you{N}expected, huh?{W1}"
+		txt     $FA2            ; "{NAME;4} will take care{N}of {NAME;1}.{W2}"
+		txt     $FA3            ; "Everything went as you{N}expected, huh?{W1}"
 		rts
 
 	; End of function sub_62C5C
@@ -148,7 +148,7 @@ sub_62C5C:
 
 sub_62C66:
 		 
-		txt $FC0                ; "He was young before?{W1}"
+		txt     $FC0            ; "He was young before?{W1}"
 		rts
 
 	; End of function sub_62C66

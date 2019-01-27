@@ -21,14 +21,14 @@ ms_map63_ZoneEvents:
 
 sub_5C9F6:
 		 
-		chkFlg $100             ; Temporary map setup flag 00
+		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   byte_5CA08
 		script  cs_5CA6E
-		setFlg $100             ; Temporary map setup flag 00
+		setFlg  $100            ; Temporary map setup flag 00
 		bra.s   return_5CA12
 byte_5CA08:
 		script  cs_5CB34
-		clrFlg $100             ; Temporary map setup flag 00
+		clrFlg  $100            ; Temporary map setup flag 00
 return_5CA12:
 		rts
 

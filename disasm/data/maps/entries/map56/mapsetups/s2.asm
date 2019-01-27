@@ -9,13 +9,13 @@ ms_map56_EntityEvents:
 
 sub_614B2:
 		 
-		chkFlg $387             ; set after the first time you talk to Creed on path up Ancient Tower
+		chkFlg  $387            ; set after the first time you talk to Creed on path up Ancient Tower
 		bne.s   byte_614C2      
 		script  cs_6150A
-		setFlg $387             ; set after the first time you talk to Creed on path up Ancient Tower
+		setFlg  $387            ; set after the first time you talk to Creed on path up Ancient Tower
 byte_614C2:
-		txt $E1B                ; "There is no church around{N}here.  Think of me as a{N}priest.{W1}"
-		txt $E1C                ; "Now, what can I do for you?{W1}"
+		txt     $E1B            ; "There is no church around{N}here.  Think of me as a{N}priest.{W1}"
+		txt     $E1C            ; "Now, what can I do for you?{W1}"
 		clsTxt
 		jmp     j_ChurchActions
 entevdft_614D4:

@@ -52,7 +52,7 @@ word_5D584:     dc.w $81A
 
 sub_5D5B0:
 		 
-		chkFlg $340             ; set after talking to the painter in Moun for the first time
+		chkFlg  $340            ; set after talking to the painter in Moun for the first time
 		beq.s   return_5D5BC
 		script  cs_5D732
 return_5D5BC:
@@ -65,12 +65,12 @@ return_5D5BC:
 
 sub_5D5BE:
 		 
-		chkFlg $342             ; set after making the Arm of Golem appear in Moun
+		chkFlg  $342            ; set after making the Arm of Golem appear in Moun
 		beq.s   return_5D60C
-		chkFlg $343             ; set after picking up the Arm of Golem in Moun
+		chkFlg  $343            ; set after picking up the Arm of Golem in Moun
 		bne.s   return_5D60C
-		txt $7E1                ; "{LEADER} found the Arm of{N}Golem.{W2}"
-		txt $7E2                ; "Pick it up?"
+		txt     $7E1            ; "{LEADER} found the Arm of{N}Golem.{W2}"
+		txt     $7E2            ; "Pick it up?"
 		jsr     j_YesNoPrompt
 		tst.w   d0
 		bne.s   byte_5D608      
@@ -79,17 +79,17 @@ sub_5D5BE:
 		jsr     sub_4F48A
 		btst    #0,d0
 		bne.s   byte_5D5FE      
-		setFlg $343             ; set after picking up the Arm of Golem in Moun
+		setFlg  $343            ; set after picking up the Arm of Golem in Moun
 		move.w  #$89,d0 
 		jsr     MoveEntityOutOfMap
 		bra.s   loc_5D606
 byte_5D5FE:
-		txt $7E4                ; "But {LEADER}'s hands{N}are full.{W1}"
-		txt $7E7                ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
+		txt     $7E4            ; "But {LEADER}'s hands{N}are full.{W1}"
+		txt     $7E7            ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 loc_5D606:
 		bra.s   return_5D60C
 byte_5D608:
-		txt $7E7                ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
+		txt     $7E7            ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 return_5D60C:
 		rts
 

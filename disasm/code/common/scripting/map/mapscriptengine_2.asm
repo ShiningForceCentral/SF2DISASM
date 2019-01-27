@@ -299,7 +299,7 @@ csc04_setTextIndex:
 csc05_playSound:
 		
 		move.w  (a6)+,d0
-		sndCom SOUND_COMMAND_GET_D0_PARAMETER
+		sndCom  SOUND_COMMAND_GET_D0_PARAMETER
 		rts
 
 	; End of function csc05_playSound
@@ -341,10 +341,10 @@ csc08_joinForce:
 		move.w  (a6)+,d0
 		bclr    #$F,d0
 		bne.s   byte_473B0
-		sndCom MUSIC_JOIN
+		sndCom  MUSIC_JOIN
 		bra.s   loc_473B4       
 byte_473B0:
-		sndCom MUSIC_SAD_JOIN
+		sndCom  MUSIC_SAD_JOIN
 loc_473B4:
 		cmpi.w  #$80,d0 ; HARDCODED use case
 		bne.s   loc_473D4
@@ -352,14 +352,14 @@ loc_473B4:
 		jsr     j_JoinForce
 		move.w  #2,d0
 		jsr     j_JoinForce
-		txt $1BF                ; "{NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force."
+		txt     $1BF            ; "{NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force."
 		bra.s   loc_473EC
 loc_473D4:
 		jsr     j_JoinForce
 		jsr     j_GetClass      
 		move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
-		txt $1BE                ; "{NAME} the {CLASS} {N}has joined the force."
+		txt     $1BE            ; "{NAME} the {CLASS} {N}has joined the force."
 loc_473EC:
 		jsr     j_FadeOut_WaitForP2Input
 		clsTxt

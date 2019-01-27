@@ -7,22 +7,22 @@
 ms_map59_InitFunction:
 		
 		 
-		chkFlg $3E7             ; set after the Nazca ship shootdown scene
+		chkFlg  $3E7            ; set after the Nazca ship shootdown scene
 		bne.s   byte_5EB18      
 		script  cs_5EB44
 		script  cs_5EBFC
 		script  cs_5ED06
 		script  cs_5EDB8
 		script  cs_5EF60
-		setFlg $3E7             ; set after the Nazca ship shootdown scene
+		setFlg  $3E7            ; set after the Nazca ship shootdown scene
 		move.b  #$2D,((EGRESS_MAP_INDEX-$1000000)).w 
-		setFlg $1B4             ; Battle 36 unlocked
-		setFlg $1B8             ; Battle 40 unlocked
-		setFlg $1BA             ; Battle 42 unlocked
-		setFlg $1BB             ; Battle 43 unlocked
+		setFlg  $1B4            ; Battle 36 unlocked
+		setFlg  $1B8            ; Battle 40 unlocked
+		setFlg  $1BA            ; Battle 42 unlocked
+		setFlg  $1BB            ; Battle 43 unlocked
 		rts
 byte_5EB18:
-		chkFlg $1BB             ; Battle 43 unlocked
+		chkFlg  $1BB            ; Battle 43 unlocked
 		beq.s   return_5EB24
 		script  cs_5EB26
 return_5EB24:

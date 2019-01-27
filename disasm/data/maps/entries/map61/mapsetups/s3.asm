@@ -18,12 +18,12 @@ ms_map61_ZoneEvents:
 
 sub_5C6A6:
 		 
-		chkFlg $2DA             ; set after the old man opens the door to the Woodel Panel shrine interior
+		chkFlg  $2DA            ; set after the old man opens the door to the Woodel Panel shrine interior
 		bne.s   return_5C6BC
-		chkFlg $4D              ; Old man is a follower
+		chkFlg  $4D             ; Old man is a follower
 		beq.s   return_5C6BC
 		script  cs_5C6CA
-		setFlg $2DA             ; set after the old man opens the door to the Woodel Panel shrine interior
+		setFlg  $2DA            ; set after the old man opens the door to the Woodel Panel shrine interior
 return_5C6BC:
 		rts
 

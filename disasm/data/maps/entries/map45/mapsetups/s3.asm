@@ -20,7 +20,7 @@ nullsub_103:
 
 sub_6006A:
 		 
-		chkFlg $19              ; Shiela joined
+		chkFlg  $19             ; Shiela joined
 		bne.s   return_60076
 		script  cs_600CE
 return_60076:

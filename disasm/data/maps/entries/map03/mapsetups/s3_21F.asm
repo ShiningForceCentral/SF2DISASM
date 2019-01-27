@@ -21,9 +21,9 @@ nullsub_70:
 sub_6282A:
 		 
 		script  cs_6283E
-		txt $F48                ; "Wait, wait!{W2}"
-		txt $F49                ; "Sir Astral told me not to{N}let you go out today!{W2}"
-		txt $F4A                ; "You have to be here.{W1}"
+		txt     $F48            ; "Wait, wait!{W2}"
+		txt     $F49            ; "Sir Astral told me not to{N}let you go out today!{W2}"
+		txt     $F4A            ; "You have to be here.{W1}"
 		rts
 
 	; End of function sub_6282A

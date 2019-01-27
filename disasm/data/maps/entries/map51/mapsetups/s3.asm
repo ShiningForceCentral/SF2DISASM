@@ -27,10 +27,10 @@ ms_map51_ZoneEvents:
 
 sub_5C2F2:
 		 
-		chkFlg $1D6             ; set after you approach the pond to rescue Elric at the Harpy Pond
+		chkFlg  $1D6            ; set after you approach the pond to rescue Elric at the Harpy Pond
 		bne.s   return_5C302
 		script  cs_5C312
-		setFlg $1D6             ; set after you approach the pond to rescue Elric at the Harpy Pond
+		setFlg  $1D6            ; set after you approach the pond to rescue Elric at the Harpy Pond
 return_5C302:
 		rts
 
@@ -41,7 +41,7 @@ return_5C302:
 
 sub_5C304:
 		 
-		chkFlg $1D6             ; set after you approach the pond to rescue Elric at the Harpy Pond
+		chkFlg  $1D6            ; set after you approach the pond to rescue Elric at the Harpy Pond
 		bne.s   return_5C310
 		script  cs_5C3AA
 return_5C310:

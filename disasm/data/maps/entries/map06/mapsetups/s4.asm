@@ -72,7 +72,7 @@ word_54D9A:     dc.w $507
 
 sub_54DDE:
 		 
-		chkFlg $2BE             ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
+		chkFlg  $2BE            ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
 		bne.s   loc_54DEE
 		move.w  #$FFB,d0
 		jsr     (DisplayText).w 
@@ -98,19 +98,19 @@ sub_54E04:
 		tst.w   d0
 		bne.s   return_54E4A
 		ori.b   #0,d0
-		sndCom SFX_FALLING
+		sndCom  SFX_FALLING
 		moveq   #$32,d0 
 		jsr     (Sleep).w       
-		chkFlg $322             ; set after the event in the basement of Creed's Mansion
+		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   loc_54E38
-		sndCom SFX_BLO
+		sndCom  SFX_BLO
 		move.w  #$FFF,d0
 		jsr     (DisplayText).w 
 		bra.s   return_54E4A
 loc_54E38:
 		moveq   #$32,d0 
 		jsr     (Sleep).w       
-		sndCom SFX_BLO
+		sndCom  SFX_BLO
 		move.w  #$1000,d0
 		jsr     (DisplayText).w 
 return_54E4A:

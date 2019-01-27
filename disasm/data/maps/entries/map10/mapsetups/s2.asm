@@ -31,7 +31,7 @@ ms_map10_EntityEvents:
 
 sub_56DE0:
 		 
-		txt $621                ; "Mighty Volcanon!  He easily{N}defeated the greater devil!{W1}"
+		txt     $621            ; "Mighty Volcanon!  He easily{N}defeated the greater devil!{W1}"
 		rts
 
 	; End of function sub_56DE0
@@ -41,8 +41,8 @@ sub_56DE0:
 
 sub_56DE6:
 		 
-		txt $624                ; "They know that they can't{N}defeat our God.{W2}"
-		txt $625                ; "What was their true{N}purpose?{W1}"
+		txt     $624            ; "They know that they can't{N}defeat our God.{W2}"
+		txt     $625            ; "What was their true{N}purpose?{W1}"
 		rts
 
 	; End of function sub_56DE6
@@ -62,8 +62,8 @@ sub_56DF0:
 
 sub_56DFE:
 		 
-		txt $61C                ; "Creed is the last greater{N}devil to survive the war.{W2}"
-		txt $61D                ; "But he retired from the army{N}and now lives alone in{N}Devil's Tail.{W1}"
+		txt     $61C            ; "Creed is the last greater{N}devil to survive the war.{W2}"
+		txt     $61D            ; "But he retired from the army{N}and now lives alone in{N}Devil's Tail.{W1}"
 		rts
 
 	; End of function sub_56DFE
@@ -73,8 +73,8 @@ sub_56DFE:
 
 sub_56E08:
 		 
-		txt $61A                ; "The devils were almost{N}annihilated before.{N}"
-		txt $61B                ; "Why did they attack Bedoe?{W1}"
+		txt     $61A            ; "The devils were almost{N}annihilated before.{N}"
+		txt     $61B            ; "Why did they attack Bedoe?{W1}"
 		rts
 
 	; End of function sub_56E08
@@ -84,8 +84,8 @@ sub_56E08:
 
 sub_56E12:
 		 
-		txt $628                ; "(Burp)...I'm not afraid{N}of devils...{W2}"
-		txt $629                ; "as long as I drink a{N}rootbeer first...(burp).{W1}"
+		txt     $628            ; "(Burp)...I'm not afraid{N}of devils...{W2}"
+		txt     $629            ; "as long as I drink a{N}rootbeer first...(burp).{W1}"
 		rts
 
 	; End of function sub_56E12
@@ -95,7 +95,7 @@ sub_56E12:
 
 sub_56E1C:
 		 
-		txt $61E                ; "Uuuu...ooo....{N}He's...a...terrible...{W1}"
+		txt     $61E            ; "Uuuu...ooo....{N}He's...a...terrible...{W1}"
 		rts
 
 	; End of function sub_56E1C
@@ -105,8 +105,8 @@ sub_56E1C:
 
 sub_56E22:
 		 
-		txt $622                ; "Ouch...the greater devil was{N}incredibly strong.{W2}"
-		txt $623                ; "But the other devils were{N}strong as well!{W1}"
+		txt     $622            ; "Ouch...the greater devil was{N}incredibly strong.{W2}"
+		txt     $623            ; "But the other devils were{N}strong as well!{W1}"
 		rts
 
 	; End of function sub_56E22
@@ -116,8 +116,8 @@ sub_56E22:
 
 sub_56E2C:
 		 
-		txt $62C                ; "Yes, they were strong.{N}But...{W2}"
-		txt $62D                ; "Monsters like the Kraken and{N}Taros are much bigger!{W1}"
+		txt     $62C            ; "Yes, they were strong.{N}But...{W2}"
+		txt     $62D            ; "Monsters like the Kraken and{N}Taros are much bigger!{W1}"
 		rts
 
 	; End of function sub_56E2C
@@ -146,7 +146,7 @@ sub_56E44:
 
 sub_56E4C:
 		 
-		txt $62E                ; "My spouse was...killed...{N}in the war....{W1}"
+		txt     $62E            ; "My spouse was...killed...{N}in the war....{W1}"
 		rts
 
 	; End of function sub_56E4C
@@ -156,7 +156,7 @@ sub_56E4C:
 
 sub_56E52:
 		 
-		txt $62F                ; "Zzzz...dad, no...come back...!{W1}"
+		txt     $62F            ; "Zzzz...dad, no...come back...!{W1}"
 		rts
 
 	; End of function sub_56E52
@@ -166,7 +166,7 @@ sub_56E52:
 
 sub_56E58:
 		 
-		txt $630                ; "The devils?!  I thought they{N}were only an old legend.{W1}"
+		txt     $630            ; "The devils?!  I thought they{N}were only an old legend.{W1}"
 		rts
 
 	; End of function sub_56E58
@@ -176,7 +176,7 @@ sub_56E58:
 
 sub_56E5E:
 		 
-		txt $631                ; "I never let my hatchling{N}go out!{W1}"
+		txt     $631            ; "I never let my hatchling{N}go out!{W1}"
 		rts
 
 	; End of function sub_56E5E
@@ -186,7 +186,7 @@ sub_56E5E:
 
 sub_56E64:
 		 
-		txt $632                ; "Have you seen my dad?{N}Mom won't tell me anyhting{N}about him.{W1}"
+		txt     $632            ; "Have you seen my dad?{N}Mom won't tell me anyhting{N}about him.{W1}"
 		rts
 
 	; End of function sub_56E64
@@ -196,7 +196,7 @@ sub_56E64:
 
 sub_56E6A:
 		 
-		txt $633                ; "We have a lot of weapons,{N}but I don't want to use any{N}of them!{W1}"
+		txt     $633            ; "We have a lot of weapons,{N}but I don't want to use any{N}of them!{W1}"
 		rts
 
 	; End of function sub_56E6A
@@ -206,8 +206,8 @@ sub_56E6A:
 
 sub_56E70:
 		 
-		txt $634                ; "I'm bored!{N}I want to go out!{W2}"
-		txt $635                ; "How wonderful it would be to{N}fly on such a beautiful day!{W1}"
+		txt     $634            ; "I'm bored!{N}I want to go out!{W2}"
+		txt     $635            ; "How wonderful it would be to{N}fly on such a beautiful day!{W1}"
 		rts
 
 	; End of function sub_56E70
@@ -217,8 +217,8 @@ sub_56E70:
 
 sub_56E7A:
 		 
-		txt $636                ; "We need a lot of hot water{N}to treat these injured men.{W2}"
-		txt $637                ; "I've been standing here all{N}day!{W1}"
+		txt     $636            ; "We need a lot of hot water{N}to treat these injured men.{W2}"
+		txt     $637            ; "I've been standing here all{N}day!{W1}"
 		rts
 
 	; End of function sub_56E7A
@@ -228,7 +228,7 @@ sub_56E7A:
 
 sub_56E84:
 		 
-		txt $68E                ; "Hmmm...you're right.{N}{NAME;7}, go ahead.{W1}"
+		txt     $68E            ; "Hmmm...you're right.{N}{NAME;7}, go ahead.{W1}"
 		rts
 
 	; End of function sub_56E84
@@ -238,7 +238,7 @@ sub_56E84:
 
 sub_56E8A:
 		 
-		txt $68D                ; "He should talk to him.{W1}"
+		txt     $68D            ; "He should talk to him.{W1}"
 		rts
 
 	; End of function sub_56E8A
@@ -248,7 +248,7 @@ sub_56E8A:
 
 sub_56E90:
 		 
-		txt $626                ; "Kneel before King Bedoe.{N}Just kidding.{W1}"
+		txt     $626            ; "Kneel before King Bedoe.{N}Just kidding.{W1}"
 		rts
 
 	; End of function sub_56E90
@@ -258,7 +258,7 @@ sub_56E90:
 
 sub_56E96:
 		 
-		txt $639                ; "If...God Volcanon doesn't{N}calm down...{W1}"
+		txt     $639            ; "If...God Volcanon doesn't{N}calm down...{W1}"
 entevdft_56E9A:
 		
 		rts

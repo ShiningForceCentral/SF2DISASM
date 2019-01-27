@@ -7,19 +7,19 @@
 ms_map5_flag212_InitFunction:
 		
 		 
-		chkFlg $3B0             ; set after Lemon jumps off the cliff in Yeel
+		chkFlg  $3B0            ; set after Lemon jumps off the cliff in Yeel
 		bne.s   byte_60630
 		script  cs_607DE
-		setFlg $3B0             ; set after Lemon jumps off the cliff in Yeel
+		setFlg  $3B0            ; set after Lemon jumps off the cliff in Yeel
 		bra.s   byte_60636      
 byte_60630:
 		script  cs_6060E
 byte_60636:
-		chkFlg $3AE             ; set after the scene in underground Yeel where Chaz paces and consults books
+		chkFlg  $3AE            ; set after the scene in underground Yeel where Chaz paces and consults books
 		bne.s   byte_6067C      
 		cmpi.l  #$6005580,((ENTITY_DATA-$1000000)).w
 		bne.s   byte_6067C      
-		chkFlg $1C              ; Lemon joined
+		chkFlg  $1C             ; Lemon joined
 		beq.s   byte_6065E
 		script  cs_60656
 		bra.w   byte_6065E
@@ -28,26 +28,26 @@ cs_60656:
 		csc_end
 byte_6065E:
 		script  cs_60C42
-		chkFlg $3A2             ; set after opening Devil's Head with the Force Sword
+		chkFlg  $3A2            ; set after opening Devil's Head with the Force Sword
 		beq.s   byte_60672
 		script  cs_60EB2
 		bra.s   byte_60678      
 byte_60672:
 		script  cs_60CA4
 byte_60678:
-		setFlg $3AE             ; set after the scene in underground Yeel where Chaz paces and consults books
+		setFlg  $3AE            ; set after the scene in underground Yeel where Chaz paces and consults books
 byte_6067C:
-		chkFlg $1B              ; Chaz joined
+		chkFlg  $1B             ; Chaz joined
 		beq.s   byte_6068C      
 		move.w  #$1B,d0
 		jsr     MoveEntityOutOfMap
 byte_6068C:
-		chkFlg $3B0             ; set after Lemon jumps off the cliff in Yeel
+		chkFlg  $3B0            ; set after Lemon jumps off the cliff in Yeel
 		bne.s   byte_6069C      
 		move.w  #$82,d0 
 		jsr     MoveEntityOutOfMap
 byte_6069C:
-		chkFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
+		chkFlg  $3AD            ; set after Chaz and the priest go downstars in Yeel
 		beq.s   byte_606B4      
 		script  cs_606AC
 		bra.w   byte_606B4      
@@ -55,16 +55,16 @@ cs_606AC:
 		setPos $80,26,50,DOWN
 		csc_end
 byte_606B4:
-		chkFlg $1C              ; Lemon joined
+		chkFlg  $1C             ; Lemon joined
 		beq.s   byte_606BE      
-		setFlg $3B1             ; set after recruiting Lemon in Yeel
+		setFlg  $3B1            ; set after recruiting Lemon in Yeel
 byte_606BE:
-		chkFlg $3AC             ; set after playing the piano in Yeel (during the late game)
+		chkFlg  $3AC            ; set after playing the piano in Yeel (during the late game)
 		beq.s   return_606E8
-		chkFlg $3AD             ; set after Chaz and the priest go downstars in Yeel
+		chkFlg  $3AD            ; set after Chaz and the priest go downstars in Yeel
 		bne.s   return_606E8
 		script  cs_606EA
-		chkFlg $1C              ; Lemon joined
+		chkFlg  $1C             ; Lemon joined
 		beq.s   return_606E8
 		script  cs_606E0
 		bra.w   return_606E8

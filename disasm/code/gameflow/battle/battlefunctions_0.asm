@@ -15,35 +15,35 @@ LevelUpCutscene:
 		move.b  (a5)+,d1
 		cmpi.b  #$FF,d1
 		bne.s   loc_22BEA
-		txt $94                 ; "It has no use.{W2}"
+		txt     $94             ; "It has no use.{W2}"
 		bra.w   byte_22C5A      
 loc_22BEA:
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		txt $F4                 ; "{NAME} became{N}level {#}!"
+		txt     $F4             ; "{NAME} became{N}level {#}!"
 		move.b  (a5)+,d1
 		beq.s   loc_22BFE
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		txt $10A                ; "{D1}HP increased by {#}!"
+		txt     $10A            ; "{D1}HP increased by {#}!"
 loc_22BFE:
 		move.b  (a5)+,d1
 		beq.s   loc_22C0A
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		txt $10B                ; "{D1}MP increased by {#}!"
+		txt     $10B            ; "{D1}MP increased by {#}!"
 loc_22C0A:
 		move.b  (a5)+,d1
 		beq.s   loc_22C16
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		txt $10C                ; "{D1}Attack increased by {#}!"
+		txt     $10C            ; "{D1}Attack increased by {#}!"
 loc_22C16:
 		move.b  (a5)+,d1
 		beq.s   loc_22C22
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		txt $10D                ; "{D1}Defense increased by {#}!"
+		txt     $10D            ; "{D1}Defense increased by {#}!"
 loc_22C22:
 		move.b  (a5)+,d1
 		beq.s   loc_22C2E
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
-		txt $10E                ; "{D1}Agility increased by {#}!"
+		txt     $10E            ; "{D1}Agility increased by {#}!"
 loc_22C2E:
 		move.b  (a5)+,d1
 		cmpi.b  #$FF,d1
@@ -53,15 +53,15 @@ loc_22C2E:
 		lsr.w   #6,d1
 		bne.s   loc_22C4C
 		move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
-		txt $10F                ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
+		txt     $10F            ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
 		bra.s   byte_22C5A      
 loc_22C4C:
 		addq.w  #1,d1
 		move.l  d1,((TEXT_NUMBER-$1000000)).w
 		move.w  d2,((TEXT_NAME_INDEX_1-$1000000)).w
-		txt $110                ; "{D1}{SPELL} increased to{N}level {#}!"
+		txt     $110            ; "{D1}{SPELL} increased to{N}level {#}!"
 byte_22C5A:
-		txt $DC3                ; "{W1}"
+		txt     $DC3            ; "{W1}"
 		rts
 
 	; End of function LevelUpCutscene
@@ -487,7 +487,7 @@ loc_2306A:
 		ori.b   #$C,$1C(a1)
 loc_23074:
 		move.w  ((MOVE_SOUND-$1000000)).w,d0
-		sndCom SOUND_COMMAND_GET_D0_PARAMETER
+		sndCom  SOUND_COMMAND_GET_D0_PARAMETER
 		bsr.w   UpdateControlledUnitPos
 		move.w  -2(a6),d0
 		jsr     j_WaitForEntityToStopMoving
@@ -644,7 +644,7 @@ loc_23208:
 loc_2321A:
 		bra.w   loc_23186
 byte_2321E:
-		sndCom SFX_VALIDATION
+		sndCom  SFX_VALIDATION
 		bsr.w   HideUnitCursor
 		movem.l (sp)+,d1-a0
 		rts

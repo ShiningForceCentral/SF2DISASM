@@ -8,9 +8,9 @@ ms_map43_InitFunction:
 		
 		 
 		script  cs_540C0
-		setFlg $264             ; set after event at Hawel's house
-		setFlg $28A             ; set after event at Hawel's house
-		clrFlg $48              ; Kazin is a follower
+		setFlg  $264            ; set after event at Hawel's house
+		setFlg  $28A            ; set after event at Hawel's house
+		clrFlg  $48             ; Kazin is a follower
 		move.b  #$2B,((EGRESS_MAP_INDEX-$1000000)).w 
 return_540BE:
 		rts

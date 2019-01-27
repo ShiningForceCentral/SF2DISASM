@@ -7,7 +7,7 @@
 ms_map40_InitFunction:
 		
 		 
-		chkFlg $1FB             ; Battle 7 completed
+		chkFlg  $1FB            ; Battle 7 completed
 		beq.s   return_53FD6
 		script  cs_53FD8
 return_53FD6:

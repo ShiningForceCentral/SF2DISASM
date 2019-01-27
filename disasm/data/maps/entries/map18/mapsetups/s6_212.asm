@@ -7,10 +7,10 @@
 ms_map18_flag212_InitFunction:
 		
 		 
-		chkFlg $398             ; set after the scene with Zeon plays as you leave the Galam Drawbridge area
+		chkFlg  $398            ; set after the scene with Zeon plays as you leave the Galam Drawbridge area
 		bne.s   loc_612A8
 		script  cs_612BE
-		setFlg $398             ; set after the scene with Zeon plays as you leave the Galam Drawbridge area
+		setFlg  $398            ; set after the scene with Zeon plays as you leave the Galam Drawbridge area
 loc_612A8:
 		move.w  #$80,d0 
 		jsr     MoveEntityOutOfMap

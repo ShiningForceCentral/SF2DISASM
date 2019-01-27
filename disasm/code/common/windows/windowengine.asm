@@ -165,7 +165,7 @@ CopyFFC000toFFC800:
 MoveWindowWithSFX:
 		
 		 
-		sndCom SFX_MENU_SWITCH
+		sndCom  SFX_MENU_SWITCH
 
 	; End of function MoveWindowWithSFX
 

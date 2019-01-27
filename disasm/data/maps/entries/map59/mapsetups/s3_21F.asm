@@ -20,7 +20,7 @@ nullsub_106:
 
 sub_615C0:
 		 
-		chkFlg $21F             ; Battle 43 completed
+		chkFlg  $21F            ; Battle 43 completed
 		beq.s   return_615CC
 		script  cs_62658
 return_615CC:

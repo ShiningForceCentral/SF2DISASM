@@ -7,10 +7,10 @@
 ms_map19_flag261_InitFunction:
 		
 		 
-		chkFlg $262             ; set after you agree to go to see Hawel
+		chkFlg  $262            ; set after you agree to go to see Hawel
 		bne.s   return_5311C
 		script  cs_53176
-		setFlg $262             ; set after you agree to go to see Hawel
+		setFlg  $262            ; set after you agree to go to see Hawel
 return_5311C:
 		rts
 

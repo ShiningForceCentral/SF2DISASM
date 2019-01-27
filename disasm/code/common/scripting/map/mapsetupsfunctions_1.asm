@@ -455,7 +455,7 @@ loc_47896:
 		move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 		move.w  #$7530,((word_FFB196-$1000000)).w
 		jsr     (WaitForCameraToCatchUp).w
-		sndCom SFX_BOOST
+		sndCom  SFX_BOOST
 		bsr.w   ExecuteFlashScreenScript
 loc_478C0:
 		movem.l (sp)+,d1/d6-d7

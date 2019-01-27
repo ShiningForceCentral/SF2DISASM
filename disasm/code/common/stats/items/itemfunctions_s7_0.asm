@@ -24,7 +24,7 @@ loc_4F4A2:
 		tst.w   d5
 		beq.w   loc_4F53C
 		move.w  d4,(TEXT_NAME_INDEX_1).l
-		txt $D6                 ; "Found the {ITEM}, but{N}can't carry it.{N}You must discard something.{W1}"
+		txt     $D6             ; "Found the {ITEM}, but{N}can't carry it.{N}You must discard something.{W1}"
 		clsTxt
 		movem.w d4,-(sp)
 		bsr.w   sub_4F570
@@ -33,8 +33,8 @@ loc_4F4A2:
 		move.w  d2,(TEXT_NAME_INDEX_2).l
 		jsr     j_AddItem
 		move.w  d1,(TEXT_NAME_INDEX_3).l
-		sndCom MUSIC_ITEM
-		txt $D7                 ; "{NAME} discarded{N}the {ITEM} and{N}picked up the {ITEM}."
+		sndCom  MUSIC_ITEM
+		txt     $D7             ; "{NAME} discarded{N}the {ITEM} and{N}picked up the {ITEM}."
 		jsr     j_FadeOut_WaitForP2Input
 		jsr     (WaitForPlayerInput).w
 		clsTxt
@@ -45,8 +45,8 @@ loc_4F510:
 		jsr     j_AddItem
 		move.w  d0,(TEXT_NAME_INDEX_1).l
 		move.w  d1,(TEXT_NAME_INDEX_2).l
-		sndCom MUSIC_ITEM
-		txt $D5                 ; "{NAME} received the{N}{ITEM}."
+		sndCom  MUSIC_ITEM
+		txt     $D5             ; "{NAME} received the{N}{ITEM}."
 		jsr     j_FadeOut_WaitForP2Input
 		jsr     (WaitForPlayerInput).w
 		clsTxt
@@ -110,11 +110,11 @@ loc_4F5B6:
 		cmpi.b  #0,d1
 		beq.s   loc_4F5F0
 		move.w  -4(a6),(TEXT_NAME_INDEX_1).l
-		txt $25                 ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
+		txt     $25             ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
 		bra.w   loc_4F6CA
 loc_4F5F0:
 		move.w  -4(a6),(TEXT_NAME_INDEX_1).l
-		txt $2C                 ; "The {ITEM} will be{N}discarded.  Are you sure?"
+		txt     $2C             ; "The {ITEM} will be{N}discarded.  Are you sure?"
 		jsr     j_YesNoChoiceBox
 		clsTxt
 		cmpi.w  #0,d0
@@ -135,7 +135,7 @@ loc_4F610:
 		jsr     j_IsItemCursed
 		bcc.w   loc_4F69C
 		move.w  -4(a6),(TEXT_NAME_INDEX_1).l
-		txt $1E                 ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
+		txt     $1E             ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
 		clsTxt
 		bra.w   loc_4F6CA
 loc_4F65C:
@@ -151,7 +151,7 @@ loc_4F65C:
 		jsr     j_IsItemCursed
 		bcc.w   loc_4F69C
 		move.w  -4(a6),(TEXT_NAME_INDEX_1).l
-		txt $1E                 ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
+		txt     $1E             ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
 		bra.w   loc_4F6CA
 loc_4F69C:
 		move.w  -2(a6),d0

@@ -7,7 +7,7 @@
 ms_map21_flag21F_InitFunction:
 		
 		 
-		sndCom MUSIC_TOWN
+		sndCom  MUSIC_TOWN
 		jsr     (FadeInFromBlack).w
 		rts
 

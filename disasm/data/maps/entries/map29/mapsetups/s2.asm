@@ -42,7 +42,7 @@ sub_5A11C:
 
 sub_5A128:
 		 
-		txt $84D                ; "I think...I've met you{N}somewhere before.{W1}"
+		txt     $84D            ; "I think...I've met you{N}somewhere before.{W1}"
 		rts
 
 	; End of function sub_5A128
@@ -52,8 +52,8 @@ sub_5A128:
 
 sub_5A12E:
 		 
-		txt $84E                ; "It's very dangerous outside.{N}We can't go to Galam.{W2}"
-		txt $84F                ; "But, we have to leave here{N}very soon.{W1}"
+		txt     $84E            ; "It's very dangerous outside.{N}We can't go to Galam.{W2}"
+		txt     $84F            ; "But, we have to leave here{N}very soon.{W1}"
 		rts
 
 	; End of function sub_5A12E
@@ -63,8 +63,8 @@ sub_5A12E:
 
 sub_5A138:
 		 
-		txt $850                ; "The Dwarven Blacksmith is{N}very good.{W2}"
-		txt $851                ; "You can place a custom order{N}with him.{W1}"
+		txt     $850            ; "The Dwarven Blacksmith is{N}very good.{W2}"
+		txt     $851            ; "You can place a custom order{N}with him.{W1}"
 		rts
 
 	; End of function sub_5A138
@@ -74,8 +74,8 @@ sub_5A138:
 
 sub_5A142:
 		 
-		txt $852                ; "Mithril is very hard to find.{W2}"
-		txt $853                ; "Go see the blacksmith if you{N}have any Mithril.{W1}"
+		txt     $852            ; "Mithril is very hard to find.{W2}"
+		txt     $853            ; "Go see the blacksmith if you{N}have any Mithril.{W1}"
 		rts
 
 	; End of function sub_5A142

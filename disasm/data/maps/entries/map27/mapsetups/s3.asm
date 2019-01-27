@@ -12,10 +12,10 @@ ms_map27_ZoneEvents:
 
 sub_59F9A:
 		 
-		chkFlg $30D             ; set after the scene where you're surprised by Willard inside the wall
+		chkFlg  $30D            ; set after the scene where you're surprised by Willard inside the wall
 		bne.s   return_59FAA
 		script  cs_59FB8
-		setFlg $30D             ; set after the scene where you're surprised by Willard inside the wall
+		setFlg  $30D            ; set after the scene where you're surprised by Willard inside the wall
 return_59FAA:
 		rts
 

@@ -11,12 +11,12 @@ ms_map19_flag1F5_EntityEvents:
 
 sub_52F70:
 		 
-		chkFlg $100             ; Temporary map setup flag 00
+		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   byte_52F7E      
-		txt $249                ; "Well, boy.  Did you hear a{N}strange noise?{W2}"
-		setFlg $100             ; Temporary map setup flag 00
+		txt     $249            ; "Well, boy.  Did you hear a{N}strange noise?{W2}"
+		setFlg  $100            ; Temporary map setup flag 00
 byte_52F7E:
-		txt $24A                ; "I don't know why, but{N}everybody ignores my{N}questions....{W1}"
+		txt     $24A            ; "I don't know why, but{N}everybody ignores my{N}questions....{W1}"
 		rts
 
 	; End of function sub_52F70
@@ -26,7 +26,7 @@ byte_52F7E:
 
 sub_52F84:
 		 
-		txt $247                ; "The Minister ordered me{N}to stand here.{N}What's happening upstairs?{W1}"
+		txt     $247            ; "The Minister ordered me{N}to stand here.{N}What's happening upstairs?{W1}"
 		rts
 
 	; End of function sub_52F84
@@ -36,7 +36,7 @@ sub_52F84:
 
 sub_52F8A:
 		 
-		txt $248                ; "By the Minister's order,{N}I cannot let you pass.{N}Sorry!{W1}"
+		txt     $248            ; "By the Minister's order,{N}I cannot let you pass.{N}Sorry!{W1}"
 		rts
 
 	; End of function sub_52F8A

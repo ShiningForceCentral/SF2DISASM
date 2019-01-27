@@ -23,10 +23,10 @@ nullsub_97:
 
 sub_5DCDE:
 		 
-		chkFlg $38F             ; set after the Petro death scene in Roft
+		chkFlg  $38F            ; set after the Petro death scene in Roft
 		bne.s   return_5DCEE
 		script  cs_5DE2E
-		setFlg $38F             ; set after the Petro death scene in Roft
+		setFlg  $38F            ; set after the Petro death scene in Roft
 return_5DCEE:
 		rts
 
@@ -37,22 +37,22 @@ return_5DCEE:
 
 sub_5DCF0:
 		 
-		chkFlg $38F             ; set after the Petro death scene in Roft
+		chkFlg  $38F            ; set after the Petro death scene in Roft
 		beq.s   return_5DD24
-		chkFlg $4C              ; Zynk is a follower
+		chkFlg  $4C             ; Zynk is a follower
 		beq.s   byte_5DD08      
 		script  cs_5DE76
-		clrFlg $4C              ; Zynk is a follower
+		clrFlg  $4C             ; Zynk is a follower
 		bra.s   return_5DD24
 byte_5DD08:
-		chkFlg $399             ; set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
+		chkFlg  $399            ; set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
 		beq.s   return_5DD24
-		chkFlg $1A              ; Zynk joined
+		chkFlg  $1A             ; Zynk joined
 		bne.s   return_5DD24
-		chkFlg $100             ; Temporary map setup flag 00
+		chkFlg  $100            ; Temporary map setup flag 00
 		beq.s   return_5DD24
 		script  cs_5DE76
-		clrFlg $4C              ; Zynk is a follower
+		clrFlg  $4C             ; Zynk is a follower
 return_5DD24:
 		rts
 

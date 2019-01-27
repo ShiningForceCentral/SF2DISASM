@@ -261,7 +261,7 @@ sub_5F9A0:
 
 sub_5F9A8:
 		 
-		txt $D30                ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
+		txt     $D30            ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
 		rts
 
 	; End of function sub_5F9A8
@@ -298,7 +298,7 @@ sub_5F9BE:
 
 sub_5F9C6:
 		 
-		txt $B                  ; "{LEADER}, take it easy!{W1}"
+		txt     $B              ; "{LEADER}, take it easy!{W1}"
 		rts
 
 	; End of function sub_5F9C6
@@ -308,7 +308,7 @@ sub_5F9C6:
 
 sub_5F9CC:
 		 
-		txt $B                  ; "{LEADER}, take it easy!{W1}"
+		txt     $B              ; "{LEADER}, take it easy!{W1}"
 entevt_5F9D0:
 		rts
 

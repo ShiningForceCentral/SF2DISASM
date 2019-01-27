@@ -7,7 +7,7 @@
 ms_map3_flag261_InitFunction:
 		
 		 
-		chkFlg $3               ; Jaha joined
+		chkFlg  $3              ; Jaha joined
 		beq.s   return_513CC
 		script  cs_513CE
 return_513CC:

@@ -27,7 +27,7 @@ word_5FE34:     dc.w $2702
 
 sub_5FE42:
 		 
-		chkFlg $386             ; set after you pull the Force Sword out
+		chkFlg  $386            ; set after you pull the Force Sword out
 		bne.s   loc_5FE52
 		move.w  #$D06,d0
 		jsr     (DisplayText).w 
@@ -48,10 +48,10 @@ return_5FE66:
 
 sub_5FE68:
 		 
-		chkFlg $386             ; set after you pull the Force Sword out
+		chkFlg  $386            ; set after you pull the Force Sword out
 		bne.s   loc_5FE7A
 		script  cs_5FF06
-		setFlg $386             ; set after you pull the Force Sword out
+		setFlg  $386            ; set after you pull the Force Sword out
 		bra.s   return_5FE8E
 loc_5FE7A:
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w

@@ -7,13 +7,13 @@
 ms_map26_InitFunction:
 		
 		 
-		chkFlg $30B             ; set after the Cotton Balloon pops and you land in Floor World
+		chkFlg  $30B            ; set after the Cotton Balloon pops and you land in Floor World
 		bne.s   byte_59DF2      
 		script  cs_59E04
-		setFlg $30B             ; set after the Cotton Balloon pops and you land in Floor World
+		setFlg  $30B            ; set after the Cotton Balloon pops and you land in Floor World
 		move.b  #$1A,((EGRESS_MAP_INDEX-$1000000)).w
 byte_59DF2:
-		chkFlg $30C             ; set after the man tries to lift the giant ring in Floor World
+		chkFlg  $30C            ; set after the man tries to lift the giant ring in Floor World
 		beq.s   return_59E02
 		move.w  #$81,d0 
 		jsr     MoveEntityOutOfMap

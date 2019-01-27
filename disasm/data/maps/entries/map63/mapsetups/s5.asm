@@ -17,7 +17,7 @@ ms_map63_Section5:
 
 sub_5CA32:
 		 
-		chkFlg $1D              ; Claude joined
+		chkFlg  $1D             ; Claude joined
 		bne.s   loc_5CA4C
 		moveq   #$75,d0 
 		jsr     sub_4F542

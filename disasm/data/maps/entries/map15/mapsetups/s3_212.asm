@@ -20,12 +20,12 @@ nullsub_77:
 
 sub_5D008:
 		 
-		chkFlg $2D4             ; set after the scene where Skreech falls in Bedoe
+		chkFlg  $2D4            ; set after the scene where Skreech falls in Bedoe
 		beq.s   return_5D01E
-		chkFlg $334             ; set after Skreech's join scene has played in Tristan
+		chkFlg  $334            ; set after Skreech's join scene has played in Tristan
 		bne.s   return_5D01E
 		script  cs_5D04E
-		setFlg $334             ; set after Skreech's join scene has played in Tristan
+		setFlg  $334            ; set after Skreech's join scene has played in Tristan
 return_5D01E:
 		rts
 
