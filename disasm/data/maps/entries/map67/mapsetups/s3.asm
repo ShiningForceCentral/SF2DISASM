@@ -2,23 +2,12 @@
 ; ASM FILE data\maps\entries\map67\mapsetups\s3.asm :
 ; 0x4FB0C..0x4FCCE : 
 ms_map67_ZoneEvents:
-		dc.b $39
-		dc.b $19
-		dc.w sub_4FB32-ms_map67_ZoneEvents
-		dc.b $38
-		dc.b $1A
-		dc.w sub_4FB24-ms_map67_ZoneEvents
-		dc.b $39
-		dc.b $1A
-		dc.w sub_4FB24-ms_map67_ZoneEvents
-		dc.b $3A
-		dc.b $18
-		dc.w sub_4FB24-ms_map67_ZoneEvents
-		dc.b $3A
-		dc.b $19
-		dc.w sub_4FB24-ms_map67_ZoneEvents
-		dc.w $FD00
-		dc.w CheckRandomBattle21-ms_map67_ZoneEvents
+		msZoneEvent 57, 25, sub_4FB32-ms_map67_ZoneEvents
+		msZoneEvent 56, 26, sub_4FB24-ms_map67_ZoneEvents
+		msZoneEvent 57, 26, sub_4FB24-ms_map67_ZoneEvents
+		msZoneEvent 58, 24, sub_4FB24-ms_map67_ZoneEvents
+		msZoneEvent 58, 25, sub_4FB24-ms_map67_ZoneEvents
+		msDefaultZoneEvent 0, CheckRandomBattle21-ms_map67_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

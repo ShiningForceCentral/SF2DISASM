@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map14\mapsetups\s3_1CA.asm :
 ; 0x58F4C..0x58F9A : 
 ms_map14_flag1CA_ZoneEvents:
-		dc.b $FF
-		dc.b $F
-		dc.w sub_58F54-ms_map14_flag1CA_ZoneEvents
-		dc.w $FD00
-		dc.w (return_58E5A-ms_map14_flag1CA_ZoneEvents) & $FFFF
+		msZoneEvent 255, 15, sub_58F54-ms_map14_flag1CA_ZoneEvents
+		msDefaultZoneEvent 0, (return_58E5A-ms_map14_flag1CA_ZoneEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

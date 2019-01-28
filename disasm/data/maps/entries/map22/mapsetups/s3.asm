@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map22\mapsetups\s3.asm :
 ; 0x595DE..0x59602 : 
 ms_map22_ZoneEvents:
-		dc.b $FF
-		dc.b $10
-		dc.w sub_595E8-ms_map22_ZoneEvents
-		dc.w $FD00
-		dc.w nullsub_87-ms_map22_ZoneEvents
+		msZoneEvent 255, 16, sub_595E8-ms_map22_ZoneEvents
+		msDefaultZoneEvent 0, nullsub_87-ms_map22_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

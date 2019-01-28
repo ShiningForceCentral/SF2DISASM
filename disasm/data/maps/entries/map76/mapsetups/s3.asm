@@ -2,8 +2,7 @@
 ; ASM FILE data\maps\entries\map76\mapsetups\s3.asm :
 ; 0x50A24..0x50A3E : 
 ms_map76_ZoneEvents:
-		dc.w $FD00
-		dc.w sub_50A28-ms_map76_ZoneEvents
+		msDefaultZoneEvent 0, sub_50A28-ms_map76_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

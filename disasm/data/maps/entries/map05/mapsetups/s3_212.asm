@@ -2,14 +2,9 @@
 ; ASM FILE data\maps\entries\map05\mapsetups\s3_212.asm :
 ; 0x604C8..0x60548 : 
 ms_map5_flag212_ZoneEvents:
-		dc.b $B
-		dc.b 8
-		dc.w sub_604D6-ms_map5_flag212_ZoneEvents
-		dc.b $FF
-		dc.b $2A
-		dc.w sub_60502-ms_map5_flag212_ZoneEvents
-		dc.w $FD00
-		dc.w nullsub_73-ms_map5_flag212_ZoneEvents
+		msZoneEvent 11, 8, sub_604D6-ms_map5_flag212_ZoneEvents
+		msZoneEvent 255, 42, sub_60502-ms_map5_flag212_ZoneEvents
+		msDefaultZoneEvent 0, nullsub_73-ms_map5_flag212_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

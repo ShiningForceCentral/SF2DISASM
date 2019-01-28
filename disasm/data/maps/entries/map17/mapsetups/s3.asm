@@ -2,17 +2,10 @@
 ; ASM FILE data\maps\entries\map17\mapsetups\s3.asm :
 ; 0x523E4..0x52442 : 
 ms_map17_ZoneEvents:
-		dc.b $35
-		dc.b 5
-		dc.w sub_523F4-ms_map17_ZoneEvents
-		dc.b $2B
-		dc.b 9
-		dc.w sub_52406-ms_map17_ZoneEvents
-		dc.b $39
-		dc.b 5
-		dc.w sub_5242E-ms_map17_ZoneEvents
-		dc.w $FD00
-		dc.w nullsub_79-ms_map17_ZoneEvents
+		msZoneEvent 53, 5, sub_523F4-ms_map17_ZoneEvents
+		msZoneEvent 43, 9, sub_52406-ms_map17_ZoneEvents
+		msZoneEvent 57, 5, sub_5242E-ms_map17_ZoneEvents
+		msDefaultZoneEvent 0, nullsub_79-ms_map17_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

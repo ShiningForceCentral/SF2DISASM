@@ -2,17 +2,10 @@
 ; ASM FILE data\maps\entries\map66\mapsetups\s3.asm :
 ; 0x4FA90..0x4FAE0 : 
 ms_map66_ZoneEvents:
-		dc.b $FF
-		dc.b 9
-		dc.w sub_4FAA0-ms_map66_ZoneEvents
-		dc.b $FF
-		dc.b $A
-		dc.w sub_4FAA0-ms_map66_ZoneEvents
-		dc.b $FF
-		dc.b $1C
-		dc.w sub_4FABA-ms_map66_ZoneEvents
-		dc.w $FD00
-		dc.w CheckRandomBattle3-ms_map66_ZoneEvents
+		msZoneEvent 255, 9, sub_4FAA0-ms_map66_ZoneEvents
+		msZoneEvent 255, 10, sub_4FAA0-ms_map66_ZoneEvents
+		msZoneEvent 255, 28, sub_4FABA-ms_map66_ZoneEvents
+		msDefaultZoneEvent 0, CheckRandomBattle3-ms_map66_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

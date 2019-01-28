@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map34\mapsetups\s3.asm :
 ; 0x5B696..0x5B6B4 : 
 ms_map34_ZoneEvents:
-		dc.b $FF
-		dc.b $D
-		dc.w sub_5B69E-ms_map34_ZoneEvents
-		dc.w $FD00
-		dc.w return_5B6B2-ms_map34_ZoneEvents
+		msZoneEvent 255, 13, sub_5B69E-ms_map34_ZoneEvents
+		msDefaultZoneEvent 0, return_5B6B2-ms_map34_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

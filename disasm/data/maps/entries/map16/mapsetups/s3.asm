@@ -2,14 +2,9 @@
 ; ASM FILE data\maps\entries\map16\mapsetups\s3.asm :
 ; 0x51EE4..0x51F2A : 
 ms_map16_ZoneEvents:
-		dc.b $11
-		dc.b $FF
-		dc.w sub_51EF0-ms_map16_ZoneEvents
-		dc.b 3
-		dc.b $FF
-		dc.w sub_51F02-ms_map16_ZoneEvents
-		dc.w $FD00
-		dc.w sub_51F28-ms_map16_ZoneEvents
+		msZoneEvent 17, 255, sub_51EF0-ms_map16_ZoneEvents
+		msZoneEvent 3, 255, sub_51F02-ms_map16_ZoneEvents
+		msDefaultZoneEvent 0, sub_51F28-ms_map16_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -2,8 +2,7 @@
 ; ASM FILE data\maps\entries\map77\mapsetups\s3.asm :
 ; 0x50A6A..0x50A84 : 
 ms_map77_ZoneEvents:
-		dc.w $FD00
-		dc.w sub_50A6E-ms_map77_ZoneEvents
+		msDefaultZoneEvent 0, sub_50A6E-ms_map77_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

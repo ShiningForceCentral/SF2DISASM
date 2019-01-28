@@ -2,17 +2,10 @@
 ; ASM FILE data\maps\entries\map08\mapsetups\s3.asm :
 ; 0x561AE..0x561EC : 
 ms_map8_ZoneEvents:
-		dc.b  $F
-		dc.b $1C
-		dc.w sub_561BE-ms_map8_ZoneEvents
-		dc.b $10
-		dc.b $1C
-		dc.w sub_561BE-ms_map8_ZoneEvents
-		dc.b $E
-		dc.b 8
-		dc.w sub_561DA-ms_map8_ZoneEvents
-		dc.w $FD00
-		dc.w return_561EA-ms_map8_ZoneEvents
+		msZoneEvent 15, 28, sub_561BE-ms_map8_ZoneEvents
+		msZoneEvent 16, 28, sub_561BE-ms_map8_ZoneEvents
+		msZoneEvent 14, 8, sub_561DA-ms_map8_ZoneEvents
+		msDefaultZoneEvent 0, return_561EA-ms_map8_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map56\mapsetups\s3.asm :
 ; 0x614D6..0x614FE : 
 ms_map56_ZoneEvents:
-		dc.b $2B
-		dc.b $28
-		dc.w sub_614DE-ms_map56_ZoneEvents
-		dc.w $FD00
-		dc.w return_614FC-ms_map56_ZoneEvents
+		msZoneEvent 43, 40, sub_614DE-ms_map56_ZoneEvents
+		msDefaultZoneEvent 0, return_614FC-ms_map56_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

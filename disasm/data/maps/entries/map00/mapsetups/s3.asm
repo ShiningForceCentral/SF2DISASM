@@ -2,14 +2,9 @@
 ; ASM FILE data\maps\entries\map00\mapsetups\s3.asm :
 ; 0x5E3A4..0x5E61E : 
 ms_map0_ZoneEvents:
-		dc.b $E
-		dc.b $C
-		dc.w sub_5E3B0-ms_map0_ZoneEvents
-		dc.b $F
-		dc.b $C
-		dc.w sub_5E3B0-ms_map0_ZoneEvents
-		dc.w $FD00
-		dc.w return_5E3C0-ms_map0_ZoneEvents
+		msZoneEvent 14, 12, sub_5E3B0-ms_map0_ZoneEvents
+		msZoneEvent 15, 12, sub_5E3B0-ms_map0_ZoneEvents
+		msDefaultZoneEvent 0, return_5E3C0-ms_map0_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

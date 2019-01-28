@@ -2,17 +2,10 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s3.asm :
 ; 0x5822A..0x582AC : 
 ms_map13_ZoneEvents:
-		dc.b $18
-		dc.b $FF
-		dc.w sub_5823A-ms_map13_ZoneEvents
-		dc.b $FF
-		dc.b $B
-		dc.w sub_5827C-ms_map13_ZoneEvents
-		dc.b $FF
-		dc.b $1E
-		dc.w sub_58294-ms_map13_ZoneEvents
-		dc.w $FD00
-		dc.w return_582AA-ms_map13_ZoneEvents
+		msZoneEvent 24, 255, sub_5823A-ms_map13_ZoneEvents
+		msZoneEvent 255, 11, sub_5827C-ms_map13_ZoneEvents
+		msZoneEvent 255, 30, sub_58294-ms_map13_ZoneEvents
+		msDefaultZoneEvent 0, return_582AA-ms_map13_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

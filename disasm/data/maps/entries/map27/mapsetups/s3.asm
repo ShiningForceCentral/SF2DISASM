@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map27\mapsetups\s3.asm :
 ; 0x59F92..0x59FAC : 
 ms_map27_ZoneEvents:
-		dc.b $FF
-		dc.b $13
-		dc.w sub_59F9A-ms_map27_ZoneEvents
-		dc.w $FD00
-		dc.w return_59FAA-ms_map27_ZoneEvents
+		msZoneEvent 255, 19, sub_59F9A-ms_map27_ZoneEvents
+		msDefaultZoneEvent 0, return_59FAA-ms_map27_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -2,17 +2,10 @@
 ; ASM FILE data\maps\entries\map69\mapsetups\s3.asm :
 ; 0x4FDA2..0x4FDD2 : 
 ms_map69_ZoneEvents:
-		dc.b $17
-		dc.b $FF
-		dc.w CheckRandomBattle17-ms_map69_ZoneEvents
-		dc.b $18
-		dc.b $FF
-		dc.w CheckRandomBattle17-ms_map69_ZoneEvents
-		dc.b $19
-		dc.b $FF
-		dc.w CheckRandomBattle17-ms_map69_ZoneEvents
-		dc.w $FD00
-		dc.w sub_4FDBE-ms_map69_ZoneEvents
+		msZoneEvent 23, 255, CheckRandomBattle17-ms_map69_ZoneEvents
+		msZoneEvent 24, 255, CheckRandomBattle17-ms_map69_ZoneEvents
+		msZoneEvent 25, 255, CheckRandomBattle17-ms_map69_ZoneEvents
+		msDefaultZoneEvent 0, sub_4FDBE-ms_map69_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -2,17 +2,10 @@
 ; ASM FILE data\maps\entries\map10\mapsetups\s3.asm :
 ; 0x56F8A..0x56FC0 : 
 ms_map10_ZoneEvents:
-		dc.b $1D
-		dc.b $FF
-		dc.w sub_56F9C-ms_map10_ZoneEvents
-		dc.b $21
-		dc.b $FF
-		dc.w sub_56FAE-ms_map10_ZoneEvents
-		dc.b $1F
-		dc.b $35
-		dc.w sub_56FAE-ms_map10_ZoneEvents
-		dc.w $FD00
-		dc.w nullsub_74-ms_map10_ZoneEvents
+		msZoneEvent 29, 255, sub_56F9C-ms_map10_ZoneEvents
+		msZoneEvent 33, 255, sub_56FAE-ms_map10_ZoneEvents
+		msZoneEvent 31, 53, sub_56FAE-ms_map10_ZoneEvents
+		msDefaultZoneEvent 0, nullsub_74-ms_map10_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

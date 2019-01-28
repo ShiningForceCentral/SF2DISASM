@@ -36,7 +36,7 @@ cs_54578:       textCursor $3F5
 		endActions
 		entityActionsWait $0
 		 moveRight 4
-byte_545B6:      moveDown 1
+dftentevt_545B6: moveDown 1
 		 moveRight 1
 		 moveRight 1
 		 moveRight 2

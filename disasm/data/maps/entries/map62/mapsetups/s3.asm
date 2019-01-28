@@ -2,20 +2,11 @@
 ; ASM FILE data\maps\entries\map62\mapsetups\s3.asm :
 ; 0x5C820..0x5C86A : 
 ms_map62_ZoneEvents:
-		dc.b 5
-		dc.b $F
-		dc.w sub_5C834-ms_map62_ZoneEvents
-		dc.b 6
-		dc.b $F
-		dc.w sub_5C834-ms_map62_ZoneEvents
-		dc.b 5
-		dc.b $10
-		dc.w sub_5C84C-ms_map62_ZoneEvents
-		dc.b 6
-		dc.b $10
-		dc.w sub_5C84C-ms_map62_ZoneEvents
-		dc.w $FD00
-		dc.w return_5C868-ms_map62_ZoneEvents
+		msZoneEvent 5, 15, sub_5C834-ms_map62_ZoneEvents
+		msZoneEvent 6, 15, sub_5C834-ms_map62_ZoneEvents
+		msZoneEvent 5, 16, sub_5C84C-ms_map62_ZoneEvents
+		msZoneEvent 6, 16, sub_5C84C-ms_map62_ZoneEvents
+		msDefaultZoneEvent 0, return_5C868-ms_map62_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

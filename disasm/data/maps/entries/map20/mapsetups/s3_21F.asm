@@ -2,17 +2,10 @@
 ; ASM FILE data\maps\entries\map20\mapsetups\s3_21F.asm :
 ; 0x6329A..0x63364 : 
 ms_map20_flag21F_ZoneEvents:
-		dc.b $13
-		dc.b $34
-		dc.w sub_632AC-ms_map20_flag21F_ZoneEvents
-		dc.b $1A
-		dc.b $FF
-		dc.w sub_632FA-ms_map20_flag21F_ZoneEvents
-		dc.b $1B
-		dc.b $34
-		dc.w sub_63330-ms_map20_flag21F_ZoneEvents
-		dc.w $FD00
-		dc.w nullsub_85-ms_map20_flag21F_ZoneEvents
+		msZoneEvent 19, 52, sub_632AC-ms_map20_flag21F_ZoneEvents
+		msZoneEvent 26, 255, sub_632FA-ms_map20_flag21F_ZoneEvents
+		msZoneEvent 27, 52, sub_63330-ms_map20_flag21F_ZoneEvents
+		msDefaultZoneEvent 0, nullsub_85-ms_map20_flag21F_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -2,23 +2,12 @@
 ; ASM FILE data\maps\entries\map07\mapsetups\s3.asm :
 ; 0x5579E..0x557EE : 
 ms_map7_ZoneEvents:
-		dc.b 9
-		dc.b 8
-		dc.w sub_557B6-ms_map7_ZoneEvents
-		dc.b $A
-		dc.b 8
-		dc.w sub_557B6-ms_map7_ZoneEvents
-		dc.b $B
-		dc.b 8
-		dc.w sub_557B6-ms_map7_ZoneEvents
-		dc.b $C
-		dc.b 8
-		dc.w sub_557B6-ms_map7_ZoneEvents
-		dc.b $D
-		dc.b 8
-		dc.w sub_557B6-ms_map7_ZoneEvents
-		dc.w $FD00
-		dc.w return_557EC-ms_map7_ZoneEvents
+		msZoneEvent 9, 8, sub_557B6-ms_map7_ZoneEvents
+		msZoneEvent 10, 8, sub_557B6-ms_map7_ZoneEvents
+		msZoneEvent 11, 8, sub_557B6-ms_map7_ZoneEvents
+		msZoneEvent 12, 8, sub_557B6-ms_map7_ZoneEvents
+		msZoneEvent 13, 8, sub_557B6-ms_map7_ZoneEvents
+		msDefaultZoneEvent 0, return_557EC-ms_map7_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

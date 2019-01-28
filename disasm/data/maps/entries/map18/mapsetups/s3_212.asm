@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map18\mapsetups\s3_212.asm :
 ; 0x6125A..0x61278 : 
 ms_map18_flag212_ZoneEvents:
-		dc.b $FF
-		dc.b $16
-		dc.w sub_61262-ms_map18_flag212_ZoneEvents
-		dc.w $FD00
-		dc.w return_61276-ms_map18_flag212_ZoneEvents
+		msZoneEvent 255, 22, sub_61262-ms_map18_flag212_ZoneEvents
+		msDefaultZoneEvent 0, return_61276-ms_map18_flag212_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

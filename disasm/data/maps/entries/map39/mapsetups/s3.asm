@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map39\mapsetups\s3.asm :
 ; 0x5E0B2..0x5E0CE : 
 ms_map39_ZoneEvents:
-		dc.b $12
-		dc.b 7
-		dc.w sub_5E0BC-ms_map39_ZoneEvents
-		dc.w $FD00
-		dc.w nullsub_98-ms_map39_ZoneEvents
+		msZoneEvent 18, 7, sub_5E0BC-ms_map39_ZoneEvents
+		msDefaultZoneEvent 0, nullsub_98-ms_map39_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -2,14 +2,9 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\s3_261.asm :
 ; 0x50EEA..0x50F0C : 
 ms_map3_flag261_ZoneEvents:
-		dc.b 2
-		dc.b $17
-		dc.w return_50F0A-ms_map3_flag261_ZoneEvents
-		dc.b 2
-		dc.b $FF
-		dc.w sub_50EF6-ms_map3_flag261_ZoneEvents
-		dc.w $FD00
-		dc.w (return_50EE8-ms_map3_flag261_ZoneEvents) & $FFFF
+		msZoneEvent 2, 23, return_50F0A-ms_map3_flag261_ZoneEvents
+		msZoneEvent 2, 255, sub_50EF6-ms_map3_flag261_ZoneEvents
+		msDefaultZoneEvent 0, (return_50EE8-ms_map3_flag261_ZoneEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

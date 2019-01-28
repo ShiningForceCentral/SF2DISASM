@@ -2,35 +2,16 @@
 ; ASM FILE data\maps\entries\map72\mapsetups\s3.asm :
 ; 0x4FE64..0x4FF24 : 
 ms_map72_ZoneEvents:
-		dc.b $20
-		dc.b $FF
-		dc.w CheckRandomBattle26-ms_map72_ZoneEvents
-		dc.b $21
-		dc.b $FF
-		dc.w CheckRandomBattle26-ms_map72_ZoneEvents
-		dc.b $22
-		dc.b $FF
-		dc.w CheckRandomBattle26-ms_map72_ZoneEvents
-		dc.b $19
-		dc.b $25
-		dc.w sub_4FE98-ms_map72_ZoneEvents
-		dc.b $1A
-		dc.b $25
-		dc.w sub_4FE98-ms_map72_ZoneEvents
-		dc.b $1B
-		dc.b $25
-		dc.w sub_4FE98-ms_map72_ZoneEvents
-		dc.b $1C
-		dc.b $25
-		dc.w sub_4FE98-ms_map72_ZoneEvents
-		dc.b $1D
-		dc.b $25
-		dc.w sub_4FE98-ms_map72_ZoneEvents
-		dc.b $1E
-		dc.b $25
-		dc.w sub_4FE98-ms_map72_ZoneEvents
-		dc.w $FD00
-		dc.w CheckRandomBattle24-ms_map72_ZoneEvents
+		msZoneEvent 32, 255, CheckRandomBattle26-ms_map72_ZoneEvents
+		msZoneEvent 33, 255, CheckRandomBattle26-ms_map72_ZoneEvents
+		msZoneEvent 34, 255, CheckRandomBattle26-ms_map72_ZoneEvents
+		msZoneEvent 25, 37, sub_4FE98-ms_map72_ZoneEvents
+		msZoneEvent 26, 37, sub_4FE98-ms_map72_ZoneEvents
+		msZoneEvent 27, 37, sub_4FE98-ms_map72_ZoneEvents
+		msZoneEvent 28, 37, sub_4FE98-ms_map72_ZoneEvents
+		msZoneEvent 29, 37, sub_4FE98-ms_map72_ZoneEvents
+		msZoneEvent 30, 37, sub_4FE98-ms_map72_ZoneEvents
+		msDefaultZoneEvent 0, CheckRandomBattle24-ms_map72_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

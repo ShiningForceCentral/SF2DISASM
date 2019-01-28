@@ -2,17 +2,10 @@
 ; ASM FILE data\maps\entries\map09\mapsetups\s3.asm :
 ; 0x56856..0x5687A : 
 ms_map9_ZoneEvents:
-		dc.b 4
-		dc.b $39
-		dc.w sub_56866-ms_map9_ZoneEvents
-		dc.b 4
-		dc.b $3A
-		dc.w sub_56866-ms_map9_ZoneEvents
-		dc.b 4
-		dc.b $3B
-		dc.w sub_56866-ms_map9_ZoneEvents
-		dc.w $FD00
-		dc.w nullsub_183-ms_map9_ZoneEvents
+		msZoneEvent 4, 57, sub_56866-ms_map9_ZoneEvents
+		msZoneEvent 4, 58, sub_56866-ms_map9_ZoneEvents
+		msZoneEvent 4, 59, sub_56866-ms_map9_ZoneEvents
+		msDefaultZoneEvent 0, nullsub_183-ms_map9_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map11\mapsetups\s3.asm :
 ; 0x57A68..0x57A88 : 
 ms_map11_ZoneEvents:
-		dc.b $27
-		dc.b $B
-		dc.w sub_57A72-ms_map11_ZoneEvents
-		dc.w $FD00
-		dc.w nullsub_75-ms_map11_ZoneEvents
+		msZoneEvent 39, 11, sub_57A72-ms_map11_ZoneEvents
+		msDefaultZoneEvent 0, nullsub_75-ms_map11_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map31\mapsetups\s3_33E.asm :
 ; 0x5D556..0x5D574 : 
 ms_map31_flag33E_ZoneEvents:
-		dc.b 5
-		dc.b 2
-		dc.w sub_5D560-ms_map31_flag33E_ZoneEvents
-		dc.w $FD00
-		dc.w nullsub_93-ms_map31_flag33E_ZoneEvents
+		msZoneEvent 5, LEFT, sub_5D560-ms_map31_flag33E_ZoneEvents
+		msDefaultZoneEvent 0, nullsub_93-ms_map31_flag33E_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

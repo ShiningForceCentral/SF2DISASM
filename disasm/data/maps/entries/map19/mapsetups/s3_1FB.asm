@@ -2,17 +2,10 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\s3_1FB.asm :
 ; 0x52DA4..0x52E02 : 
 ms_map19_flag1FB_ZoneEvents:
-		dc.b $10
-		dc.b 5
-		dc.w sub_52DDE-ms_map19_flag1FB_ZoneEvents
-		dc.b $19
-		dc.b $D
-		dc.w sub_52DF0-ms_map19_flag1FB_ZoneEvents
-		dc.b $19
-		dc.b $E
-		dc.w sub_52DF0-ms_map19_flag1FB_ZoneEvents
-		dc.w $FD00
-		dc.w nullsub_82-ms_map19_flag1FB_ZoneEvents
+		msZoneEvent 16, 5, sub_52DDE-ms_map19_flag1FB_ZoneEvents
+		msZoneEvent 25, 13, sub_52DF0-ms_map19_flag1FB_ZoneEvents
+		msZoneEvent 25, 14, sub_52DF0-ms_map19_flag1FB_ZoneEvents
+		msDefaultZoneEvent 0, nullsub_82-ms_map19_flag1FB_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 

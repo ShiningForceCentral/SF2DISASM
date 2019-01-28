@@ -2,11 +2,8 @@
 ; ASM FILE data\maps\entries\map74\mapsetups\s3.asm :
 ; 0x50984..0x509C6 : 
 ms_map74_ZoneEvents:
-		dc.b $FF
-		dc.b $3D
-		dc.w sub_5098C-ms_map74_ZoneEvents
-		dc.w $FD00
-		dc.w return_509C4-ms_map74_ZoneEvents
+		msZoneEvent 255, 61, sub_5098C-ms_map74_ZoneEvents
+		msDefaultZoneEvent 0, return_509C4-ms_map74_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
