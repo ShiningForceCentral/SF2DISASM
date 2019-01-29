@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map33\mapsetups\s3.asm :
 ; 0x5AA8A..0x5AAD8 : 
 ms_map33_ZoneEvents:
-		msZoneEvent 15, 21, sub_5AA98-ms_map33_ZoneEvents
-		msZoneEvent 12, 14, sub_5AACA-ms_map33_ZoneEvents
+		msZoneEvent 15, 21, Map33_ZoneEvent0-ms_map33_ZoneEvents
+		msZoneEvent 12, 14, Map33_ZoneEvent1-ms_map33_ZoneEvents
 		msDefaultZoneEvent 0, nullsub_94-ms_map33_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
@@ -16,7 +16,8 @@ nullsub_94:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5AA98:
+Map33_ZoneEvent0:
+		
 		 
 		chkFlg  $306            ; set after the first scene with Goliath at Creed's Mansion
 		bne.s   byte_5AAAA      
@@ -35,12 +36,13 @@ byte_5AAAA:
 return_5AAC8:
 		rts
 
-	; End of function sub_5AA98
+	; End of function Map33_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5AACA:
+Map33_ZoneEvent1:
+		
 		 
 		chkFlg  $30F            ; set after the scene where Creed restores the Force and heads down the basement
 		bne.s   return_5AAD6
@@ -48,5 +50,5 @@ sub_5AACA:
 return_5AAD6:
 		rts
 
-	; End of function sub_5AACA
+	; End of function Map33_ZoneEvent1
 

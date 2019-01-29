@@ -2,14 +2,15 @@
 ; ASM FILE data\maps\entries\map66\mapsetups\s3.asm :
 ; 0x4FA90..0x4FAE0 : 
 ms_map66_ZoneEvents:
-		msZoneEvent 255, 9, sub_4FAA0-ms_map66_ZoneEvents
-		msZoneEvent 255, 10, sub_4FAA0-ms_map66_ZoneEvents
-		msZoneEvent 255, 28, sub_4FABA-ms_map66_ZoneEvents
+		msZoneEvent 255, 9, Map66_ZoneEvent0-ms_map66_ZoneEvents
+		msZoneEvent 255, 10, Map66_ZoneEvent0-ms_map66_ZoneEvents
+		msZoneEvent 255, 28, Map66_ZoneEvent2-ms_map66_ZoneEvents
 		msDefaultZoneEvent 0, CheckRandomBattle3-ms_map66_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FAA0:
+Map66_ZoneEvent0:
+		
 		 
 		chkFlg  $219            ; Battle 37 completed
 		beq.s   return_4FAB8
@@ -20,12 +21,13 @@ sub_4FAA0:
 return_4FAB8:
 		rts
 
-	; End of function sub_4FAA0
+	; End of function Map66_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FABA:
+Map66_ZoneEvent2:
+		
 		 
 		chkFlg  $21A            ; Battle 38 completed
 		beq.s   return_4FAD2
@@ -36,7 +38,7 @@ sub_4FABA:
 return_4FAD2:
 		rts
 
-	; End of function sub_4FABA
+	; End of function Map66_ZoneEvent2
 
 
 ; =============== S U B R O U T I N E =======================================

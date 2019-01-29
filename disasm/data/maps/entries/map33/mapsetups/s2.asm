@@ -2,13 +2,13 @@
 ; ASM FILE data\maps\entries\map33\mapsetups\s2.asm :
 ; 0x5A766..0x5AA8A : 
 ms_map33_EntityEvents:
-		msEntityEvent 128, DOWN, sub_5A788-ms_map33_EntityEvents
-		msEntityEvent 129, UP, sub_5A7D2-ms_map33_EntityEvents
-		msEntityEvent 130, UP, sub_5A7F0-ms_map33_EntityEvents
-		msEntityEvent 14, UP, sub_5A842-ms_map33_EntityEvents
-		msEntityEvent 16, UP, sub_5A864-ms_map33_EntityEvents
-		msEntityEvent 17, UP, sub_5A886-ms_map33_EntityEvents
-		msEntityEvent 15, UP, sub_5A8A8-ms_map33_EntityEvents
+		msEntityEvent 128, DOWN, Map33_EntityEvent0-ms_map33_EntityEvents
+		msEntityEvent 129, UP, Map33_EntityEvent1-ms_map33_EntityEvents
+		msEntityEvent 130, UP, Map33_EntityEvent2-ms_map33_EntityEvents
+		msEntityEvent 14, UP, Map33_EntityEvent3-ms_map33_EntityEvents
+		msEntityEvent 16, UP, Map33_EntityEvent4-ms_map33_EntityEvents
+		msEntityEvent 17, UP, Map33_EntityEvent5-ms_map33_EntityEvents
+		msEntityEvent 15, UP, Map33_EntityEvent6-ms_map33_EntityEvents
 		msDefaultEntityEvent 0, nullsub_138-ms_map33_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
@@ -21,7 +21,8 @@ nullsub_138:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A788:
+Map33_EntityEvent0:
+		
 		 
 		chkFlg  $16             ; Frayja joined
 		beq.s   byte_5A7A0      
@@ -52,12 +53,13 @@ byte_5A7CC:
 return_5A7D0:
 		rts
 
-	; End of function sub_5A788
+	; End of function Map33_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A7D2:
+Map33_EntityEvent1:
+		
 		 
 		chkFlg  $312            ; set after Oddler elects to stay behind at Creed's Mansion
 		beq.s   byte_5A7E2      
@@ -71,12 +73,13 @@ byte_5A7E2:
 return_5A7EE:
 		rts
 
-	; End of function sub_5A7D2
+	; End of function Map33_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A7F0:
+Map33_EntityEvent2:
+		
 		 
 		chkFlg  $312            ; set after Oddler elects to stay behind at Creed's Mansion
 		beq.s   byte_5A800      
@@ -99,7 +102,7 @@ byte_5A814:
 return_5A826:
 		rts
 
-	; End of function sub_5A7F0
+	; End of function Map33_EntityEvent2
 
 cs_5A828:       setBlocks 17,13,1,1,9,5
 		textCursor $76F
@@ -109,7 +112,8 @@ cs_5A828:       setBlocks 17,13,1,1,9,5
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A842:
+Map33_EntityEvent3:
+		
 		 
 		chkFlg  $16             ; Frayja joined
 		bne.s   byte_5A85C
@@ -125,12 +129,13 @@ byte_5A85C:
 return_5A862:
 		rts
 
-	; End of function sub_5A842
+	; End of function Map33_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A864:
+Map33_EntityEvent4:
+		
 		 
 		chkFlg  $16             ; Frayja joined
 		bne.s   byte_5A87E
@@ -146,12 +151,13 @@ byte_5A87E:
 return_5A884:
 		rts
 
-	; End of function sub_5A864
+	; End of function Map33_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A886:
+Map33_EntityEvent5:
+		
 		 
 		chkFlg  $16             ; Frayja joined
 		bne.s   byte_5A8A0
@@ -168,12 +174,13 @@ byte_5A8A0:
 return_5A8A6:
 		rts
 
-	; End of function sub_5A886
+	; End of function Map33_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A8A8:
+Map33_EntityEvent6:
+		
 		 
 		chkFlg  $16             ; Frayja joined
 		bne.s   byte_5A8C2
@@ -190,7 +197,7 @@ byte_5A8C2:
 return_5A8C8:
 		rts
 
-	; End of function sub_5A8A8
+	; End of function Map33_EntityEvent6
 
 cs_5A8CA:       textCursor $773
 		nextText $0,$E          ; "I'm {NAME;14}, a knight.{N}I was looking for a magic{N}sword.{W2}"

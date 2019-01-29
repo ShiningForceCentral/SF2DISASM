@@ -2,307 +2,337 @@
 ; ASM FILE data\maps\entries\map46\mapsetups\s2.asm :
 ; 0x5C0F8..0x5C264 : 
 ms_map46_EntityEvents:
-		msEntityEvent 1, UP, sub_5C174-ms_map46_EntityEvents
-		msEntityEvent 2, UP, sub_5C17C-ms_map46_EntityEvents
-		msEntityEvent 3, UP, sub_5C184-ms_map46_EntityEvents
-		msEntityEvent 4, UP, sub_5C18C-ms_map46_EntityEvents
-		msEntityEvent 5, UP, sub_5C194-ms_map46_EntityEvents
-		msEntityEvent 6, UP, sub_5C19C-ms_map46_EntityEvents
-		msEntityEvent 7, UP, sub_5C1A4-ms_map46_EntityEvents
-		msEntityEvent 8, UP, sub_5C1AC-ms_map46_EntityEvents
-		msEntityEvent 9, UP, sub_5C1B4-ms_map46_EntityEvents
-		msEntityEvent 10, UP, sub_5C1BC-ms_map46_EntityEvents
-		msEntityEvent 11, UP, sub_5C1C4-ms_map46_EntityEvents
-		msEntityEvent 12, UP, sub_5C1CC-ms_map46_EntityEvents
-		msEntityEvent 13, UP, sub_5C1D4-ms_map46_EntityEvents
-		msEntityEvent 14, UP, sub_5C1DC-ms_map46_EntityEvents
-		msEntityEvent 15, UP, sub_5C1E4-ms_map46_EntityEvents
-		msEntityEvent 16, UP, sub_5C1EC-ms_map46_EntityEvents
-		msEntityEvent 17, UP, sub_5C1F4-ms_map46_EntityEvents
-		msEntityEvent 18, UP, sub_5C1FC-ms_map46_EntityEvents
-		msEntityEvent 19, UP, sub_5C204-ms_map46_EntityEvents
-		msEntityEvent 20, UP, sub_5C20C-ms_map46_EntityEvents
-		msEntityEvent 21, UP, sub_5C214-ms_map46_EntityEvents
-		msEntityEvent 22, UP, sub_5C21C-ms_map46_EntityEvents
-		msEntityEvent 23, UP, sub_5C224-ms_map46_EntityEvents
-		msEntityEvent 24, UP, sub_5C22C-ms_map46_EntityEvents
-		msEntityEvent 25, UP, sub_5C234-ms_map46_EntityEvents
-		msEntityEvent 26, UP, sub_5C23C-ms_map46_EntityEvents
-		msEntityEvent 27, UP, sub_5C244-ms_map46_EntityEvents
-		msEntityEvent 28, UP, sub_5C24C-ms_map46_EntityEvents
-		msEntityEvent 29, UP, sub_5C254-ms_map46_EntityEvents
-		msEntityEvent 128, UP, sub_5C25C-ms_map46_EntityEvents
+		msEntityEvent 1, UP, Map46_EntityEvent0-ms_map46_EntityEvents
+		msEntityEvent 2, UP, Map46_EntityEvent1-ms_map46_EntityEvents
+		msEntityEvent 3, UP, Map46_EntityEvent2-ms_map46_EntityEvents
+		msEntityEvent 4, UP, Map46_EntityEvent3-ms_map46_EntityEvents
+		msEntityEvent 5, UP, Map46_EntityEvent4-ms_map46_EntityEvents
+		msEntityEvent 6, UP, Map46_EntityEvent5-ms_map46_EntityEvents
+		msEntityEvent 7, UP, Map46_EntityEvent6-ms_map46_EntityEvents
+		msEntityEvent 8, UP, Map46_EntityEvent7-ms_map46_EntityEvents
+		msEntityEvent 9, UP, Map46_EntityEvent8-ms_map46_EntityEvents
+		msEntityEvent 10, UP, Map46_EntityEvent9-ms_map46_EntityEvents
+		msEntityEvent 11, UP, Map46_EntityEvent10-ms_map46_EntityEvents
+		msEntityEvent 12, UP, Map46_EntityEvent11-ms_map46_EntityEvents
+		msEntityEvent 13, UP, Map46_EntityEvent12-ms_map46_EntityEvents
+		msEntityEvent 14, UP, Map46_EntityEvent13-ms_map46_EntityEvents
+		msEntityEvent 15, UP, Map46_EntityEvent14-ms_map46_EntityEvents
+		msEntityEvent 16, UP, Map46_EntityEvent15-ms_map46_EntityEvents
+		msEntityEvent 17, UP, Map46_EntityEvent16-ms_map46_EntityEvents
+		msEntityEvent 18, UP, Map46_EntityEvent17-ms_map46_EntityEvents
+		msEntityEvent 19, UP, Map46_EntityEvent18-ms_map46_EntityEvents
+		msEntityEvent 20, UP, Map46_EntityEvent19-ms_map46_EntityEvents
+		msEntityEvent 21, UP, Map46_EntityEvent20-ms_map46_EntityEvents
+		msEntityEvent 22, UP, Map46_EntityEvent21-ms_map46_EntityEvents
+		msEntityEvent 23, UP, Map46_EntityEvent22-ms_map46_EntityEvents
+		msEntityEvent 24, UP, Map46_EntityEvent23-ms_map46_EntityEvents
+		msEntityEvent 25, UP, Map46_EntityEvent24-ms_map46_EntityEvents
+		msEntityEvent 26, UP, Map46_EntityEvent25-ms_map46_EntityEvents
+		msEntityEvent 27, UP, Map46_EntityEvent26-ms_map46_EntityEvents
+		msEntityEvent 28, UP, Map46_EntityEvent27-ms_map46_EntityEvents
+		msEntityEvent 29, UP, Map46_EntityEvent28-ms_map46_EntityEvents
+		msEntityEvent 128, UP, Map46_EntityEvent29-ms_map46_EntityEvents
 		msDefaultEntityEvent 0, nullsub_148-ms_map46_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C174:
+Map46_EntityEvent0:
+		
 		moveq   #1,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C174
+	; End of function Map46_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C17C:
+Map46_EntityEvent1:
+		
 		moveq   #2,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C17C
+	; End of function Map46_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C184:
+Map46_EntityEvent2:
+		
 		moveq   #3,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C184
+	; End of function Map46_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C18C:
+Map46_EntityEvent3:
+		
 		moveq   #4,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C18C
+	; End of function Map46_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C194:
+Map46_EntityEvent4:
+		
 		moveq   #5,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C194
+	; End of function Map46_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C19C:
+Map46_EntityEvent5:
+		
 		moveq   #6,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C19C
+	; End of function Map46_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1A4:
+Map46_EntityEvent6:
+		
 		moveq   #7,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1A4
+	; End of function Map46_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1AC:
+Map46_EntityEvent7:
+		
 		moveq   #8,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1AC
+	; End of function Map46_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1B4:
+Map46_EntityEvent8:
+		
 		moveq   #9,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1B4
+	; End of function Map46_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1BC:
+Map46_EntityEvent9:
+		
 		moveq   #$A,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1BC
+	; End of function Map46_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1C4:
+Map46_EntityEvent10:
+		
 		moveq   #$B,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1C4
+	; End of function Map46_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1CC:
+Map46_EntityEvent11:
+		
 		moveq   #$C,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1CC
+	; End of function Map46_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1D4:
+Map46_EntityEvent12:
+		
 		moveq   #$D,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1D4
+	; End of function Map46_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1DC:
+Map46_EntityEvent13:
+		
 		moveq   #$E,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1DC
+	; End of function Map46_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1E4:
+Map46_EntityEvent14:
+		
 		moveq   #$F,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1E4
+	; End of function Map46_EntityEvent14
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1EC:
+Map46_EntityEvent15:
+		
 		moveq   #$10,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1EC
+	; End of function Map46_EntityEvent15
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1F4:
+Map46_EntityEvent16:
+		
 		moveq   #$11,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1F4
+	; End of function Map46_EntityEvent16
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C1FC:
+Map46_EntityEvent17:
+		
 		moveq   #$12,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C1FC
+	; End of function Map46_EntityEvent17
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C204:
+Map46_EntityEvent18:
+		
 		moveq   #$13,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C204
+	; End of function Map46_EntityEvent18
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C20C:
+Map46_EntityEvent19:
+		
 		moveq   #$14,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C20C
+	; End of function Map46_EntityEvent19
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C214:
+Map46_EntityEvent20:
+		
 		moveq   #$15,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C214
+	; End of function Map46_EntityEvent20
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C21C:
+Map46_EntityEvent21:
+		
 		moveq   #$16,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C21C
+	; End of function Map46_EntityEvent21
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C224:
+Map46_EntityEvent22:
+		
 		moveq   #$17,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C224
+	; End of function Map46_EntityEvent22
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C22C:
+Map46_EntityEvent23:
+		
 		moveq   #$18,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C22C
+	; End of function Map46_EntityEvent23
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C234:
+Map46_EntityEvent24:
+		
 		moveq   #$19,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C234
+	; End of function Map46_EntityEvent24
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C23C:
+Map46_EntityEvent25:
+		
 		moveq   #$1A,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C23C
+	; End of function Map46_EntityEvent25
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C244:
+Map46_EntityEvent26:
+		
 		moveq   #$1B,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C244
+	; End of function Map46_EntityEvent26
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C24C:
+Map46_EntityEvent27:
+		
 		moveq   #$1C,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C24C
+	; End of function Map46_EntityEvent27
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C254:
+Map46_EntityEvent28:
+		
 		moveq   #$1D,d0
 		jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5C254
+	; End of function Map46_EntityEvent28
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C25C:
+Map46_EntityEvent29:
+		
 		 
 		txt     $B              ; "{LEADER}, take it easy!{W1}"
 		rts
 
-	; End of function sub_5C25C
+	; End of function Map46_EntityEvent29
 
 
 ; =============== S U B R O U T I N E =======================================

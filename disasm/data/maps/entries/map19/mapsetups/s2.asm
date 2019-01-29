@@ -2,24 +2,25 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\s2.asm :
 ; 0x52E02..0x52F60 : 
 ms_map19_EntityEvents:
-		msEntityEvent 128, UP, sub_52E3A-ms_map19_EntityEvents
-		msEntityEvent 129, UP, sub_52E4E-ms_map19_EntityEvents
-		msEntityEvent 130, RIGHT, sub_52E62-ms_map19_EntityEvents
-		msEntityEvent 131, RIGHT, sub_52E68-ms_map19_EntityEvents
-		msEntityEvent 132, UP, sub_52E6E-ms_map19_EntityEvents
-		msEntityEvent 133, DOWN, sub_52E82-ms_map19_EntityEvents
-		msEntityEvent 134, DOWN, sub_52E96-ms_map19_EntityEvents
-		msEntityEvent 135, UP, sub_52EAA-ms_map19_EntityEvents
-		msEntityEvent 136, DOWN, sub_52EBE-ms_map19_EntityEvents
-		msEntityEvent 137, DOWN, sub_52ED2-ms_map19_EntityEvents
-		msEntityEvent 138, DOWN, sub_52ED8-ms_map19_EntityEvents
-		msEntityEvent 139, DOWN, sub_52EEC-ms_map19_EntityEvents
-		msEntityEvent 140, UP, sub_52EF2-ms_map19_EntityEvents
+		msEntityEvent 128, UP, Map19_EntityEvent0-ms_map19_EntityEvents
+		msEntityEvent 129, UP, Map19_EntityEvent1-ms_map19_EntityEvents
+		msEntityEvent 130, RIGHT, Map19_EntityEvent2-ms_map19_EntityEvents
+		msEntityEvent 131, RIGHT, Map19_EntityEvent3-ms_map19_EntityEvents
+		msEntityEvent 132, UP, Map19_EntityEvent4-ms_map19_EntityEvents
+		msEntityEvent 133, DOWN, Map19_EntityEvent5-ms_map19_EntityEvents
+		msEntityEvent 134, DOWN, Map19_EntityEvent6-ms_map19_EntityEvents
+		msEntityEvent 135, UP, Map19_EntityEvent7-ms_map19_EntityEvents
+		msEntityEvent 136, DOWN, Map19_EntityEvent8-ms_map19_EntityEvents
+		msEntityEvent 137, DOWN, Map19_EntityEvent9-ms_map19_EntityEvents
+		msEntityEvent 138, DOWN, Map19_EntityEvent10-ms_map19_EntityEvents
+		msEntityEvent 139, DOWN, Map19_EntityEvent11-ms_map19_EntityEvents
+		msEntityEvent 140, UP, Map19_EntityEvent12-ms_map19_EntityEvents
 		msDefaultEntityEvent 0, return_52F0A-ms_map19_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52E3A:
+Map19_EntityEvent0:
+		
 		 
 		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   byte_52E48      
@@ -29,12 +30,13 @@ byte_52E48:
 		txt     $220            ; "I'm going to the Ancient{N}Shrine in the south to{N}kill some rats.{W1}"
 		rts
 
-	; End of function sub_52E3A
+	; End of function Map19_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52E4E:
+Map19_EntityEvent1:
+		
 		 
 		chkFlg  $101            ; Temporary map setup flag 01
 		bne.s   byte_52E5C      
@@ -44,32 +46,35 @@ byte_52E5C:
 		txt     $222            ; "Some younger soldiers{N}think that peace is boring,{N}but they're wrong.{W1}"
 		rts
 
-	; End of function sub_52E4E
+	; End of function Map19_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52E62:
+Map19_EntityEvent2:
+		
 		 
 		txt     $223            ; "Zzzzz....{N}Zzzzz....{W1}"
 		rts
 
-	; End of function sub_52E62
+	; End of function Map19_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52E68:
+Map19_EntityEvent3:
+		
 		 
 		txt     $224            ; "Zz...huh...who are you?{N}I'm tired because I was{N}standing watch all night{W2}{N}long...zzzz....{W1}"
 		rts
 
-	; End of function sub_52E68
+	; End of function Map19_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52E6E:
+Map19_EntityEvent4:
+		
 		 
 		chkFlg  $102            ; Temporary map setup flag 02
 		bne.s   byte_52E7C      
@@ -79,12 +84,13 @@ byte_52E7C:
 		txt     $226            ; "The weapons inside could{N}be rusty.  We haven't{N}opened the door for many{W2}{N}years.{W1}"
 		rts
 
-	; End of function sub_52E6E
+	; End of function Map19_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52E82:
+Map19_EntityEvent5:
+		
 		 
 		chkFlg  $103            ; Temporary map setup flag 03
 		bne.s   byte_52E90      
@@ -94,12 +100,13 @@ byte_52E90:
 		txt     $228            ; "Why don't you go back to{N}school?{W1}"
 		rts
 
-	; End of function sub_52E82
+	; End of function Map19_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52E96:
+Map19_EntityEvent6:
+		
 		 
 		chkFlg  $104            ; Temporary map setup flag 04
 		bne.s   byte_52EA4      
@@ -109,12 +116,13 @@ byte_52EA4:
 		txt     $22A            ; "He was in such a hurry.{N}Do you know why?{W1}"
 		rts
 
-	; End of function sub_52E96
+	; End of function Map19_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52EAA:
+Map19_EntityEvent7:
+		
 		 
 		chkFlg  $105            ; Temporary map setup flag 05
 		bne.s   byte_52EB8      
@@ -124,12 +132,13 @@ byte_52EB8:
 		txt     $22C            ; "I thought the King would{N}be the last person to{N}oversleep.{W1}"
 		rts
 
-	; End of function sub_52EAA
+	; End of function Map19_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52EBE:
+Map19_EntityEvent8:
+		
 		 
 		chkFlg  $106            ; Temporary map setup flag 06
 		bne.s   byte_52ECC      
@@ -139,22 +148,24 @@ byte_52ECC:
 		txt     $22E            ; "But I think that's OK.{N}A soldier's job is fighting.{W1}"
 		rts
 
-	; End of function sub_52EBE
+	; End of function Map19_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52ED2:
+Map19_EntityEvent9:
+		
 		 
 		txt     $22F            ; "What is she doing now?{N}She brought the King his{N}breakfast over an hour ago.{W1}"
 		rts
 
-	; End of function sub_52ED2
+	; End of function Map19_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52ED8:
+Map19_EntityEvent10:
+		
 		 
 		chkFlg  $107            ; Temporary map setup flag 07
 		bne.s   byte_52EE6      
@@ -164,22 +175,24 @@ byte_52EE6:
 		txt     $231            ; "But, he's still sleeping.{N}Did I arrive too early?{W1}"
 		rts
 
-	; End of function sub_52ED8
+	; End of function Map19_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52EEC:
+Map19_EntityEvent11:
+		
 		 
 		txt     $232            ; "The cook said that the{N}King didn't eat today.{N}I wonder why?{W1}"
 		rts
 
-	; End of function sub_52EEC
+	; End of function Map19_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52EF2:
+Map19_EntityEvent12:
+		
 		 
 		chkFlg  $25F            ; set after talking to Astral about going to the tower
 		bne.s   byte_52F04
@@ -191,7 +204,7 @@ byte_52F04:
 return_52F0A:
 		rts
 
-	; End of function sub_52EF2
+	; End of function Map19_EntityEvent12
 
 cs_52F0C:       textCursor $23F
 		nextText $0,$8C         ; "I didn't want to involve{N}you, my children...but{N}this might be a good{W2}{N}opportunity for you to{N}learn how to properly{N}serve your King.{W2}{N}Are you ready, {LEADER}?{W1}"

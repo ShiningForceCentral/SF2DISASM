@@ -2,38 +2,39 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\s2_261.asm :
 ; 0x5105C..0x511CA : 
 ms_map3_flag261_EntityEvents:
-		msEntityEvent 128, DOWN, sub_510CC-ms_map3_flag261_EntityEvents
-		msEntityEvent 129, UP, sub_510E0-ms_map3_flag261_EntityEvents
-		msEntityEvent 130, DOWN, sub_510F4-ms_map3_flag261_EntityEvents
-		msEntityEvent 131, DOWN, sub_510FA-ms_map3_flag261_EntityEvents
-		msEntityEvent 132, DOWN, sub_51108-ms_map3_flag261_EntityEvents
-		msEntityEvent 133, UP, sub_5110E-ms_map3_flag261_EntityEvents
-		msEntityEvent 134, UP, sub_51114-ms_map3_flag261_EntityEvents
-		msEntityEvent 135, DOWN, sub_5111A-ms_map3_flag261_EntityEvents
-		msEntityEvent 136, DOWN, sub_51124-ms_map3_flag261_EntityEvents
-		msEntityEvent 137, DOWN, sub_5112A-ms_map3_flag261_EntityEvents
-		msEntityEvent 138, DOWN, sub_51130-ms_map3_flag261_EntityEvents
-		msEntityEvent 139, DOWN, sub_51130-ms_map3_flag261_EntityEvents
-		msEntityEvent 140, DOWN, sub_51136-ms_map3_flag261_EntityEvents
-		msEntityEvent 141, DOWN, sub_51140-ms_map3_flag261_EntityEvents
-		msEntityEvent 142, UP, sub_51146-ms_map3_flag261_EntityEvents
-		msEntityEvent 143, UP, sub_5114C-ms_map3_flag261_EntityEvents
-		msEntityEvent 144, DOWN, sub_51152-ms_map3_flag261_EntityEvents
-		msEntityEvent 145, UP, sub_51158-ms_map3_flag261_EntityEvents
-		msEntityEvent 146, UP, sub_5115E-ms_map3_flag261_EntityEvents
-		msEntityEvent 147, UP, sub_51164-ms_map3_flag261_EntityEvents
-		msEntityEvent 6, UP, sub_5116A-ms_map3_flag261_EntityEvents
-		msEntityEvent 148, DOWN, sub_51170-ms_map3_flag261_EntityEvents
-		msEntityEvent 149, DOWN, sub_51178-ms_map3_flag261_EntityEvents
-		msEntityEvent 150, UP, sub_5117E-ms_map3_flag261_EntityEvents
-		msEntityEvent 151, DOWN, sub_51194-ms_map3_flag261_EntityEvents
-		msEntityEvent 152, UP, sub_511A8-ms_map3_flag261_EntityEvents
-		msEntityEvent 153, DOWN, sub_511BC-ms_map3_flag261_EntityEvents
+		msEntityEvent 128, DOWN, Map3_261_EntityEvent0-ms_map3_flag261_EntityEvents
+		msEntityEvent 129, UP, Map3_261_EntityEvent1-ms_map3_flag261_EntityEvents
+		msEntityEvent 130, DOWN, Map3_261_EntityEvent2-ms_map3_flag261_EntityEvents
+		msEntityEvent 131, DOWN, Map3_261_EntityEvent3-ms_map3_flag261_EntityEvents
+		msEntityEvent 132, DOWN, Map3_261_EntityEvent4-ms_map3_flag261_EntityEvents
+		msEntityEvent 133, UP, Map3_261_EntityEvent5-ms_map3_flag261_EntityEvents
+		msEntityEvent 134, UP, Map3_261_EntityEvent6-ms_map3_flag261_EntityEvents
+		msEntityEvent 135, DOWN, Map3_261_EntityEvent7-ms_map3_flag261_EntityEvents
+		msEntityEvent 136, DOWN, Map3_261_EntityEvent8-ms_map3_flag261_EntityEvents
+		msEntityEvent 137, DOWN, Map3_261_EntityEvent9-ms_map3_flag261_EntityEvents
+		msEntityEvent 138, DOWN, Map3_261_EntityEvent10-ms_map3_flag261_EntityEvents
+		msEntityEvent 139, DOWN, Map3_261_EntityEvent10-ms_map3_flag261_EntityEvents
+		msEntityEvent 140, DOWN, Map3_261_EntityEvent12-ms_map3_flag261_EntityEvents
+		msEntityEvent 141, DOWN, Map3_261_EntityEvent13-ms_map3_flag261_EntityEvents
+		msEntityEvent 142, UP, Map3_261_EntityEvent14-ms_map3_flag261_EntityEvents
+		msEntityEvent 143, UP, Map3_261_EntityEvent15-ms_map3_flag261_EntityEvents
+		msEntityEvent 144, DOWN, Map3_261_EntityEvent16-ms_map3_flag261_EntityEvents
+		msEntityEvent 145, UP, Map3_261_EntityEvent17-ms_map3_flag261_EntityEvents
+		msEntityEvent 146, UP, Map3_261_EntityEvent18-ms_map3_flag261_EntityEvents
+		msEntityEvent 147, UP, Map3_261_EntityEvent19-ms_map3_flag261_EntityEvents
+		msEntityEvent 6, UP, Map3_261_EntityEvent20-ms_map3_flag261_EntityEvents
+		msEntityEvent 148, DOWN, Map3_261_EntityEvent21-ms_map3_flag261_EntityEvents
+		msEntityEvent 149, DOWN, Map3_261_EntityEvent22-ms_map3_flag261_EntityEvents
+		msEntityEvent 150, UP, Map3_261_EntityEvent23-ms_map3_flag261_EntityEvents
+		msEntityEvent 151, DOWN, Map3_261_EntityEvent24-ms_map3_flag261_EntityEvents
+		msEntityEvent 152, UP, Map3_261_EntityEvent25-ms_map3_flag261_EntityEvents
+		msEntityEvent 153, DOWN, Map3_261_EntityEvent26-ms_map3_flag261_EntityEvents
 		msDefaultEntityEvent 0, (entevdft_5105A-ms_map3_flag261_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_510CC:
+Map3_261_EntityEvent0:
+		
 		 
 		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   byte_510DA      
@@ -43,12 +44,13 @@ byte_510DA:
 		txt     $274            ; "Good luck, {LEADER}.{N}Your father would have{N}been proud of you.{W1}"
 		rts
 
-	; End of function sub_510CC
+	; End of function Map3_261_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_510E0:
+Map3_261_EntityEvent1:
+		
 		 
 		chkFlg  $101            ; Temporary map setup flag 01
 		bne.s   byte_510EE      
@@ -58,213 +60,234 @@ byte_510EE:
 		txt     $276            ; "{LEADER}, you have to{N}study hard and be a fine{N}man like him.{W1}"
 		rts
 
-	; End of function sub_510E0
+	; End of function Map3_261_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_510F4:
+Map3_261_EntityEvent2:
+		
 		 
 		txt     $277            ; "He thinks of you as his{N}grandson.{W2}{N}Sometimes he may annoy{N}you, but it's because he{N}loves you.{W1}"
 		rts
 
-	; End of function sub_510F4
+	; End of function Map3_261_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_510FA:
+Map3_261_EntityEvent3:
+		
 		move.b  #0,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		rts
 
-	; End of function sub_510FA
+	; End of function Map3_261_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51108:
+Map3_261_EntityEvent4:
+		
 		 
 		txt     $278            ; "Why don't you stop by my{N}shop before you set out{N}on your journey?{W1}"
 		rts
 
-	; End of function sub_51108
+	; End of function Map3_261_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5110E:
+Map3_261_EntityEvent5:
+		
 		 
 		txt     $279            ; "That Galam messenger rushed{N}out of town.{N}He looked pale.{W1}"
 		rts
 
-	; End of function sub_5110E
+	; End of function Map3_261_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51114:
+Map3_261_EntityEvent6:
+		
 		 
 		txt     $27A            ; "Don't listen to what that{N}fortune teller says.{N}She's a liar.{W1}"
 		rts
 
-	; End of function sub_51114
+	; End of function Map3_261_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5111A:
+Map3_261_EntityEvent7:
+		
 		 
 		txt     $27B            ; "Hear what I have to say!{N}I can see the ruins in my{N}crystal!{W2}"
 		txt     $27C            ; "The war!  Granseal will{N}fall in the war! {N}Believe me!{W1}"
 		rts
 
-	; End of function sub_5111A
+	; End of function Map3_261_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51124:
+Map3_261_EntityEvent8:
+		
 		 
 		txt     $27D            ; "You heard about it?{N}The King was sick.{W1}"
 		rts
 
-	; End of function sub_51124
+	; End of function Map3_261_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5112A:
+Map3_261_EntityEvent9:
+		
 		 
 		txt     $27E            ; "Yes, I heard about it.{N}Soldiers of the castle{N}were talking about it.{W2}{N}It must be true!{W1}"
 		rts
 
-	; End of function sub_5112A
+	; End of function Map3_261_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51130:
+Map3_261_EntityEvent10:
+		
 		 
 		txt     $27F            ; "The Minister said you{N}could enter anytime you{N}want.{W1}"
 		rts
 
-	; End of function sub_51130
+	; End of function Map3_261_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51136:
+Map3_261_EntityEvent12:
+		
 		 
 		txt     $280            ; "Welcome!{N}We have very novel animals{N}from the mainland!!{W2}"
 		txt     $281            ; "You don't want a pet?{N}I'll lower my prices for{N}you!{W1}"
 		rts
 
-	; End of function sub_51136
+	; End of function Map3_261_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51140:
+Map3_261_EntityEvent13:
+		
 		 
 		txt     $282            ; "He looks so sad...{N}I feel sorry for him.{W1}"
 		rts
 
-	; End of function sub_51140
+	; End of function Map3_261_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51146:
+Map3_261_EntityEvent14:
+		
 		 
 		txt     $283            ; "Bok-bok-bok.{N}Bok-gawk!{W1}"
 		rts
 
-	; End of function sub_51146
+	; End of function Map3_261_EntityEvent14
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5114C:
+Map3_261_EntityEvent15:
+		
 		 
 		txt     $284            ; "Watch out!{N}Don't loiter around here!{N}Ever!{W1}"
 		rts
 
-	; End of function sub_5114C
+	; End of function Map3_261_EntityEvent15
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51152:
+Map3_261_EntityEvent16:
+		
 		 
 		txt     $285            ; "Sorry, my husband is{N}angry.  He didn't catch any{N}fish today.{W1}"
 		rts
 
-	; End of function sub_51152
+	; End of function Map3_261_EntityEvent16
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51158:
+Map3_261_EntityEvent17:
+		
 		 
 		txt     $286            ; "Granseal harbor is behind{N}me.{W2}{N}A ship just docked a few{N}minutes ago.{W1}"
 		rts
 
-	; End of function sub_51158
+	; End of function Map3_261_EntityEvent17
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5115E:
+Map3_261_EntityEvent18:
+		
 		 
 		txt     $287            ; "The human caught me when{N}I was taking a walk in{N}Parmecia.{W1}"
 		rts
 
-	; End of function sub_5115E
+	; End of function Map3_261_EntityEvent18
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51164:
+Map3_261_EntityEvent19:
+		
 		 
 		txt     $288            ; "Release me! Get me out of{N}here or I shall eat you up!!{W1}"
 		rts
 
-	; End of function sub_51164
+	; End of function Map3_261_EntityEvent19
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5116A:
+Map3_261_EntityEvent20:
+		
 		 
 		txt     $289            ; "Me...(sob)...so hungry.{N}Hungry....{W1}"
 		rts
 
-	; End of function sub_5116A
+	; End of function Map3_261_EntityEvent20
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51170:
+Map3_261_EntityEvent21:
+		
 		jsr     j_ChurchActions
 		rts
 
-	; End of function sub_51170
+	; End of function Map3_261_EntityEvent21
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51178:
+Map3_261_EntityEvent22:
+		
 		 
 		txt     $28A            ; "I envy you!  You saw{N}the beautiful Princess Elis!{W1}"
 		rts
 
-	; End of function sub_51178
+	; End of function Map3_261_EntityEvent22
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5117E:
+Map3_261_EntityEvent23:
+		
 		 
 		chkFlg  $116            ; Temporary map setup flag 16
 		bne.s   byte_5118E      
@@ -276,12 +299,13 @@ byte_5118E:
 return_51192:
 		rts
 
-	; End of function sub_5117E
+	; End of function Map3_261_EntityEvent23
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51194:
+Map3_261_EntityEvent24:
+		
 		 
 		chkFlg  $117            ; Temporary map setup flag 17
 		bne.s   byte_511A2      
@@ -291,12 +315,13 @@ byte_511A2:
 		txt     $293            ; "I don't think it's right{N}to hold animals captive.{W1}"
 		rts
 
-	; End of function sub_51194
+	; End of function Map3_261_EntityEvent24
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_511A8:
+Map3_261_EntityEvent25:
+		
 		 
 		chkFlg  $118            ; Temporary map setup flag 18
 		bne.s   byte_511B6      
@@ -306,15 +331,16 @@ byte_511B6:
 		txt     $295            ; "I'm an inventor.{N}I'm looking for some sulfur.{W1}"
 		rts
 
-	; End of function sub_511A8
+	; End of function Map3_261_EntityEvent25
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_511BC:
+Map3_261_EntityEvent26:
+		
 		move.b  #$F,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		rts
 
-	; End of function sub_511BC
+	; End of function Map3_261_EntityEvent26
 

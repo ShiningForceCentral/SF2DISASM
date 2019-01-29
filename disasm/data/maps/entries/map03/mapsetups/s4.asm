@@ -7,17 +7,17 @@
 ms_map3_AreaDescriptions:
 		
 		move.w  #$FC3,d3
-		lea     word_512F0(pc), a0
+		lea     byte_512F0(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map3_AreaDescriptions
 
-word_512F0:     dc.w $916
+byte_512F0:     dc.b 9
+		dc.b $16
 		dc.b 0
 		dc.b 0
-		dc.b 2
-		dc.b 0
+		dc.w $200
 		dc.w $704
 		dc.b 0
 		dc.b 0

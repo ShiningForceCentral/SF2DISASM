@@ -2,22 +2,23 @@
 ; ASM FILE data\maps\entries\map07\mapsetups\s2_325.asm :
 ; 0x55584..0x5579E : 
 ms_map7_flag325_EntityEvents:
-		msEntityEvent 128, DOWN, sub_5561E-ms_map7_flag325_EntityEvents
-		msEntityEvent 129, DOWN, sub_555E8-ms_map7_flag325_EntityEvents
-		msEntityEvent 130, DOWN, sub_55648-ms_map7_flag325_EntityEvents
-		msEntityEvent 131, UP, sub_5565E-ms_map7_flag325_EntityEvents
-		msEntityEvent 132, DOWN, sub_55674-ms_map7_flag325_EntityEvents
-		msEntityEvent 133, DOWN, sub_556B2-ms_map7_flag325_EntityEvents
-		msEntityEvent 134, UP, sub_556E4-ms_map7_flag325_EntityEvents
-		msEntityEvent 135, DOWN, sub_55702-ms_map7_flag325_EntityEvents
-		msEntityEvent 136, DOWN, sub_55730-ms_map7_flag325_EntityEvents
-		msEntityEvent 137, DOWN, sub_55776-ms_map7_flag325_EntityEvents
-		msEntityEvent 138, DOWN, sub_5577C-ms_map7_flag325_EntityEvents
+		msEntityEvent 128, DOWN, Map7_EntityEvent0-ms_map7_flag325_EntityEvents
+		msEntityEvent 129, DOWN, Map7_EntityEvent1-ms_map7_flag325_EntityEvents
+		msEntityEvent 130, DOWN, Map7_EntityEvent2-ms_map7_flag325_EntityEvents
+		msEntityEvent 131, UP, Map7_EntityEvent3-ms_map7_flag325_EntityEvents
+		msEntityEvent 132, DOWN, Map7_EntityEvent4-ms_map7_flag325_EntityEvents
+		msEntityEvent 133, DOWN, Map7_EntityEvent5-ms_map7_flag325_EntityEvents
+		msEntityEvent 134, UP, Map7_EntityEvent6-ms_map7_flag325_EntityEvents
+		msEntityEvent 135, DOWN, Map7_EntityEvent7-ms_map7_flag325_EntityEvents
+		msEntityEvent 136, DOWN, Map7_EntityEvent8-ms_map7_flag325_EntityEvents
+		msEntityEvent 137, DOWN, Map7_EntityEvent9-ms_map7_flag325_EntityEvents
+		msEntityEvent 138, DOWN, Map7_EntityEvent10-ms_map7_flag325_EntityEvents
 		msDefaultEntityEvent 0, entevdft_5579C-ms_map7_flag325_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_555B4:
+Map7_EntityEvent11:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   return_555E6
@@ -39,12 +40,13 @@ byte_555E2:
 return_555E6:
 		rts
 
-	; End of function sub_555B4
+	; End of function Map7_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_555E8:
+Map7_EntityEvent1:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_55618      
@@ -69,12 +71,13 @@ byte_55618:
 return_5561C:
 		rts
 
-	; End of function sub_555E8
+	; End of function Map7_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5561E:
+Map7_EntityEvent0:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_5563E      
@@ -94,12 +97,13 @@ byte_5563E:
 return_55646:
 		rts
 
-	; End of function sub_5561E
+	; End of function Map7_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55648:
+Map7_EntityEvent2:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_55658      
@@ -111,12 +115,13 @@ byte_55658:
 return_5565C:
 		rts
 
-	; End of function sub_55648
+	; End of function Map7_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5565E:
+Map7_EntityEvent3:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_5566E      
@@ -128,12 +133,13 @@ byte_5566E:
 return_55672:
 		rts
 
-	; End of function sub_5565E
+	; End of function Map7_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55674:
+Map7_EntityEvent4:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_556A0      
@@ -163,12 +169,13 @@ byte_556AC:
 return_556B0:
 		rts
 
-	; End of function sub_55674
+	; End of function Map7_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_556B2:
+Map7_EntityEvent5:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_556DA      
@@ -192,12 +199,13 @@ byte_556DA:
 return_556E2:
 		rts
 
-	; End of function sub_556B2
+	; End of function Map7_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_556E4:
+Map7_EntityEvent6:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_556FC      
@@ -214,12 +222,13 @@ byte_556FC:
 return_55700:
 		rts
 
-	; End of function sub_556E4
+	; End of function Map7_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55702:
+Map7_EntityEvent7:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_5572A      
@@ -243,12 +252,13 @@ byte_5572A:
 return_5572E:
 		rts
 
-	; End of function sub_55702
+	; End of function Map7_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55730:
+Map7_EntityEvent8:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_55760      
@@ -279,22 +289,24 @@ byte_5576C:
 return_55774:
 		rts
 
-	; End of function sub_55730
+	; End of function Map7_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55776:
+Map7_EntityEvent9:
+		
 		 
 		txt     $48D            ; "Oh, the King looks so sad.{W1}"
 		rts
 
-	; End of function sub_55776
+	; End of function Map7_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5577C:
+Map7_EntityEvent10:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_5578C      
@@ -306,27 +318,29 @@ byte_5578C:
 return_55790:
 		rts
 
-	; End of function sub_5577C
+	; End of function Map7_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55792:
+Map7_2BD_EntityEvent12:
+		
 		 
 		txt     $4A2            ; "{LEADER}, something{N}important is happening.{W1}"
 		rts
 
-	; End of function sub_55792
+	; End of function Map7_2BD_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55798:
+Map7_2BD_EntityEvent14:
+		
 		 
 		txt     $4A3            ; "{LEADER}, Sir Astral is{N}over there. {W1}"
 entevdft_5579C:
 		
 		rts
 
-	; End of function sub_55798
+	; End of function Map7_2BD_EntityEvent14
 

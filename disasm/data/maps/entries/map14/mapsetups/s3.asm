@@ -2,19 +2,20 @@
 ; ASM FILE data\maps\entries\map14\mapsetups\s3.asm :
 ; 0x58E48..0x58EBA : 
 ms_map14_ZoneEvents:
-		msZoneEvent 45, 5, sub_58E50-ms_map14_ZoneEvents
+		msZoneEvent 45, 5, Map14_ZoneEvent0-ms_map14_ZoneEvents
 		msDefaultZoneEvent 0, return_58E5A-ms_map14_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58E50:
+Map14_ZoneEvent0:
+		
 		 
 		script  cs_58E5C
 		setFlg  $101            ; Temporary map setup flag 01
 return_58E5A:
 		rts
 
-	; End of function sub_58E50
+	; End of function Map14_ZoneEvent0
 
 cs_58E5C:       textCursor $8D5
 		nextText $FF,$FF        ; "Bring up the plank?"

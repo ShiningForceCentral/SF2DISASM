@@ -67,11 +67,11 @@ sub_60590:
 		chkFlg  $3B1            ; set after recruiting Lemon in Yeel
 		bne.s   byte_605C4      
 		script  cs_6060E
-		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
+		move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
 		move.w  #$1C,d0
 		jsr     GetEntityPortraitAndSpeechSfx
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  d2,((SPEECH_SFX-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
 		txt     $D9B            ; "I can't believe it!{N}I want to die, but I can't!{W1}"
 		setFlg  $3B1            ; set after recruiting Lemon in Yeel
@@ -79,17 +79,17 @@ sub_60590:
 byte_605C4:
 		chkFlg  $1C             ; Lemon joined
 		bne.s   loc_605EE
-		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
+		move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
 		move.w  #$1C,d0
 		jsr     GetEntityPortraitAndSpeechSfx
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  d2,((SPEECH_SFX-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
 		txt     $D9B            ; "I can't believe it!{N}I want to die, but I can't!{W1}"
 		bra.s   return_60604
 loc_605EE:
-		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
-		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
+		clr.w   ((SPEECH_SFX-$1000000)).w
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
 		txt     $1A7            ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
 		txt     $FF2            ; "A hole.{W1}"

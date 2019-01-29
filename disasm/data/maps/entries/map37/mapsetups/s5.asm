@@ -32,11 +32,11 @@ sub_5FA38:
 		bne.s   byte_5FA76      
 		txt     $D2D            ; "{LEADER} tries to use{N}the {ITEM}.{W2}{N}But, he doesn't know how.{W1}"
 		clsTxt
-		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
+		move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
 		move.w  #$80,d0 
 		jsr     GetEntityPortraitAndSpeechSfx
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  d2,((SPEECH_SFX-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
 		txt     $D2E            ; "Well, {LEADER}.  Let's go{N}back to look for someone{N}who knows about this ship.{W1}"
 		bra.s   loc_5FA84

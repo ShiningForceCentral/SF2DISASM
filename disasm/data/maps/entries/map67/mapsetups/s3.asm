@@ -2,16 +2,17 @@
 ; ASM FILE data\maps\entries\map67\mapsetups\s3.asm :
 ; 0x4FB0C..0x4FCCE : 
 ms_map67_ZoneEvents:
-		msZoneEvent 57, 25, sub_4FB32-ms_map67_ZoneEvents
-		msZoneEvent 56, 26, sub_4FB24-ms_map67_ZoneEvents
-		msZoneEvent 57, 26, sub_4FB24-ms_map67_ZoneEvents
-		msZoneEvent 58, 24, sub_4FB24-ms_map67_ZoneEvents
-		msZoneEvent 58, 25, sub_4FB24-ms_map67_ZoneEvents
+		msZoneEvent 57, 25, Map67_ZoneEvent0-ms_map67_ZoneEvents
+		msZoneEvent 56, 26, Map67_ZoneEvent1-ms_map67_ZoneEvents
+		msZoneEvent 57, 26, Map67_ZoneEvent1-ms_map67_ZoneEvents
+		msZoneEvent 58, 24, Map67_ZoneEvent1-ms_map67_ZoneEvents
+		msZoneEvent 58, 25, Map67_ZoneEvent1-ms_map67_ZoneEvents
 		msDefaultZoneEvent 0, CheckRandomBattle21-ms_map67_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FB24:
+Map67_ZoneEvent1:
+		
 		 
 		chkFlg  $208            ; Battle 20 completed
 		bne.s   return_4FB30
@@ -19,12 +20,13 @@ sub_4FB24:
 return_4FB30:
 		rts
 
-	; End of function sub_4FB24
+	; End of function Map67_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FB32:
+Map67_ZoneEvent0:
+		
 		 
 		chkFlg  $2EF            ; set after Elric opens the passage to Devil's Tail
 		bne.s   return_4FB56
@@ -39,7 +41,7 @@ sub_4FB32:
 return_4FB56:
 		rts
 
-	; End of function sub_4FB32
+	; End of function Map67_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================

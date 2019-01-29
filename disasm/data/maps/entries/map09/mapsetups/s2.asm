@@ -2,82 +2,89 @@
 ; ASM FILE data\maps\entries\map09\mapsetups\s2.asm :
 ; 0x56722..0x56856 : 
 ms_map9_EntityEvents:
-		msEntityEvent 11, RIGHT, sub_567E6-ms_map9_EntityEvents
-		msEntityEvent 12, DOWN, sub_56842-ms_map9_EntityEvents
-		msEntityEvent 128, UP, sub_56756-ms_map9_EntityEvents
-		msEntityEvent 129, UP, sub_5675C-ms_map9_EntityEvents
-		msEntityEvent 130, UP, sub_56762-ms_map9_EntityEvents
-		msEntityEvent 131, UP, sub_56768-ms_map9_EntityEvents
-		msEntityEvent 132, UP, sub_56776-ms_map9_EntityEvents
-		msEntityEvent 133, DOWN, sub_56784-ms_map9_EntityEvents
-		msEntityEvent 134, UP, sub_5678C-ms_map9_EntityEvents
-		msEntityEvent 135, UP, sub_567C8-ms_map9_EntityEvents
-		msEntityEvent 136, UP, sub_567D2-ms_map9_EntityEvents
-		msEntityEvent 137, UP, sub_567D8-ms_map9_EntityEvents
+		msEntityEvent 11, RIGHT, Map9_EntityEvent0-ms_map9_EntityEvents
+		msEntityEvent 12, DOWN, Map9_EntityEvent1-ms_map9_EntityEvents
+		msEntityEvent 128, UP, Map9_EntityEvent2-ms_map9_EntityEvents
+		msEntityEvent 129, UP, Map9_EntityEvent3-ms_map9_EntityEvents
+		msEntityEvent 130, UP, Map9_EntityEvent4-ms_map9_EntityEvents
+		msEntityEvent 131, UP, Map9_EntityEvent5-ms_map9_EntityEvents
+		msEntityEvent 132, UP, Map9_EntityEvent6-ms_map9_EntityEvents
+		msEntityEvent 133, DOWN, Map9_EntityEvent7-ms_map9_EntityEvents
+		msEntityEvent 134, UP, Map9_EntityEvent8-ms_map9_EntityEvents
+		msEntityEvent 135, UP, Map9_EntityEvent9-ms_map9_EntityEvents
+		msEntityEvent 136, UP, Map9_EntityEvent10-ms_map9_EntityEvents
+		msEntityEvent 137, UP, Map9_EntityEvent11-ms_map9_EntityEvents
 		msDefaultEntityEvent 0, nullsub_114-ms_map9_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56756:
+Map9_EntityEvent2:
+		
 		 
 		txt     $553            ; "Hassan is a port town.{W2}{N}But, we've had no trading{N}recently.{W1}"
 		rts
 
-	; End of function sub_56756
+	; End of function Map9_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5675C:
+Map9_EntityEvent3:
+		
 		 
 		txt     $554            ; "Our ancestors came here from{N}Rune by way of the sea.{W2}{N}They should've avoided such{N}an inconvenient place like{N}this.{W1}"
 		rts
 
-	; End of function sub_5675C
+	; End of function Map9_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56762:
+Map9_EntityEvent4:
+		
 		 
 		txt     $565            ; "I think I'll take a nap{N}now.  Bye.{W1}"
 		rts
 
-	; End of function sub_56762
+	; End of function Map9_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56768:
+Map9_EntityEvent5:
+		
 		move.b  #6,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		rts
 
-	; End of function sub_56768
+	; End of function Map9_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56776:
+Map9_EntityEvent6:
+		
 		move.b  #$15,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		rts
 
-	; End of function sub_56776
+	; End of function Map9_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56784:
+Map9_EntityEvent7:
+		
 		jsr     j_ChurchActions
 		rts
 
-	; End of function sub_56784
+	; End of function Map9_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5678C:
+Map9_EntityEvent8:
+		
 		 
 		chkFlg  $2D5            ; set after telling Rohde that you're going to get the Caravan
 		bne.s   byte_567C2      
@@ -99,43 +106,47 @@ byte_567C2:
 return_567C6:
 		rts
 
-	; End of function sub_5678C
+	; End of function Map9_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_567C8:
+Map9_EntityEvent9:
+		
 		 
 		txt     $557            ; "How on earth did you come{N}to Hassan?{W2}"
 		txt     $558            ; "By raft?  Wow!{N}You killed the Kraken?!{W1}"
 		rts
 
-	; End of function sub_567C8
+	; End of function Map9_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_567D2:
+Map9_EntityEvent10:
+		
 		 
 		txt     $559            ; "The river is drying up{N}because of the drought.{W2}{N}To the west?{N}If you really want to go,{N}ask Dr. {NAME;11}....{W1}"
 		rts
 
-	; End of function sub_567D2
+	; End of function Map9_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_567D8:
+Map9_EntityEvent11:
+		
 		move.b  #7,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		rts
 
-	; End of function sub_567D8
+	; End of function Map9_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_567E6:
+Map9_EntityEvent0:
+		
 		 
 		chkFlg  $2D7            ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 		bne.s   byte_5682A      
@@ -168,12 +179,13 @@ byte_5682A:
 return_56840:
 		rts
 
-	; End of function sub_567E6
+	; End of function Map9_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56842:
+Map9_EntityEvent1:
+		
 		 
 		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   return_56852
@@ -182,7 +194,7 @@ sub_56842:
 return_56852:
 		rts
 
-	; End of function sub_56842
+	; End of function Map9_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================

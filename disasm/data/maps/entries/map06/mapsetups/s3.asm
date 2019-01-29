@@ -2,16 +2,17 @@
 ; ASM FILE data\maps\entries\map06\mapsetups\s3.asm :
 ; 0x54CD0..0x54D3C : 
 ms_map6_ZoneEvents:
-		msZoneEvent 10, 9, sub_54CE8-ms_map6_ZoneEvents
-		msZoneEvent 11, 9, sub_54CE8-ms_map6_ZoneEvents
-		msZoneEvent 19, 23, sub_54D12-ms_map6_ZoneEvents
-		msZoneEvent 19, 29, sub_54D24-ms_map6_ZoneEvents
-		msZoneEvent 20, 29, sub_54D24-ms_map6_ZoneEvents
+		msZoneEvent 10, 9, Map6_ZoneEvent0-ms_map6_ZoneEvents
+		msZoneEvent 11, 9, Map6_ZoneEvent0-ms_map6_ZoneEvents
+		msZoneEvent 19, 23, Map6_ZoneEvent2-ms_map6_ZoneEvents
+		msZoneEvent 19, 29, Map6_ZoneEvent3-ms_map6_ZoneEvents
+		msZoneEvent 20, 29, Map6_ZoneEvent3-ms_map6_ZoneEvents
 		msDefaultZoneEvent 0, return_54D3A-ms_map6_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54CE8:
+Map6_ZoneEvent0:
+		
 		 
 		chkFlg  $2C2            ; set after the scene with the sailor and soldier in New Granseal (Peter intro)
 		bne.s   byte_54CFA      
@@ -28,12 +29,13 @@ byte_54CFA:
 return_54D10:
 		rts
 
-	; End of function sub_54CE8
+	; End of function Map6_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54D12:
+Map6_ZoneEvent2:
+		
 		 
 		chkFlg  $2BD            ; set after the scene with Peter and the kids in New Granseal
 		bne.s   return_54D22
@@ -42,12 +44,13 @@ sub_54D12:
 return_54D22:
 		rts
 
-	; End of function sub_54D12
+	; End of function Map6_ZoneEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54D24:
+Map6_ZoneEvent3:
+		
 		 
 		chkFlg  $325            ; set after coming back to New Granseal after Creed's Mansion,when Astral joins
 		beq.s   return_54D3A
@@ -58,5 +61,5 @@ sub_54D24:
 return_54D3A:
 		rts
 
-	; End of function sub_54D24
+	; End of function Map6_ZoneEvent3
 

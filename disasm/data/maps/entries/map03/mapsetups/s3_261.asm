@@ -2,21 +2,23 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\s3_261.asm :
 ; 0x50EEA..0x50F0C : 
 ms_map3_flag261_ZoneEvents:
-		msZoneEvent 2, 23, return_50F0A-ms_map3_flag261_ZoneEvents
-		msZoneEvent 2, 255, sub_50EF6-ms_map3_flag261_ZoneEvents
+		msZoneEvent 2, 23, Map3_261_ZoneEvent0-ms_map3_flag261_ZoneEvents
+		msZoneEvent 2, 255, Map3_261_ZoneEvent1-ms_map3_flag261_ZoneEvents
 		msDefaultZoneEvent 0, (return_50EE8-ms_map3_flag261_ZoneEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50EF6:
+Map3_261_ZoneEvent1:
+		
 		 
 		chkFlg  $3              ; Jaha joined
-		bne.s   return_50F0A
+		bne.s   Map3_261_ZoneEvent0
 		script  cs_516A8
 		setFlg  $192            ; Battle 2 unlocked
 		clrFlg  $42             ; Sarah + Chester are followers
-return_50F0A:
+Map3_261_ZoneEvent0:
+		
 		rts
 
-	; End of function sub_50EF6
+	; End of function Map3_261_ZoneEvent1
 

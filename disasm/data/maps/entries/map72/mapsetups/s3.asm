@@ -2,31 +2,32 @@
 ; ASM FILE data\maps\entries\map72\mapsetups\s3.asm :
 ; 0x4FE64..0x4FF24 : 
 ms_map72_ZoneEvents:
-		msZoneEvent 32, 255, CheckRandomBattle26-ms_map72_ZoneEvents
-		msZoneEvent 33, 255, CheckRandomBattle26-ms_map72_ZoneEvents
-		msZoneEvent 34, 255, CheckRandomBattle26-ms_map72_ZoneEvents
-		msZoneEvent 25, 37, sub_4FE98-ms_map72_ZoneEvents
-		msZoneEvent 26, 37, sub_4FE98-ms_map72_ZoneEvents
-		msZoneEvent 27, 37, sub_4FE98-ms_map72_ZoneEvents
-		msZoneEvent 28, 37, sub_4FE98-ms_map72_ZoneEvents
-		msZoneEvent 29, 37, sub_4FE98-ms_map72_ZoneEvents
-		msZoneEvent 30, 37, sub_4FE98-ms_map72_ZoneEvents
+		msZoneEvent 32, 255, Map72_ZoneEvent0-ms_map72_ZoneEvents
+		msZoneEvent 33, 255, Map72_ZoneEvent0-ms_map72_ZoneEvents
+		msZoneEvent 34, 255, Map72_ZoneEvent0-ms_map72_ZoneEvents
+		msZoneEvent 25, 37, Map72_ZoneEvent3-ms_map72_ZoneEvents
+		msZoneEvent 26, 37, Map72_ZoneEvent3-ms_map72_ZoneEvents
+		msZoneEvent 27, 37, Map72_ZoneEvent3-ms_map72_ZoneEvents
+		msZoneEvent 28, 37, Map72_ZoneEvent3-ms_map72_ZoneEvents
+		msZoneEvent 29, 37, Map72_ZoneEvent3-ms_map72_ZoneEvents
+		msZoneEvent 30, 37, Map72_ZoneEvent3-ms_map72_ZoneEvents
 		msDefaultZoneEvent 0, CheckRandomBattle24-ms_map72_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-CheckRandomBattle26:
+Map72_ZoneEvent0:
 		
 		move.w  #$1A,d0
 		jsr     CheckRandomBattle
 		rts
 
-	; End of function CheckRandomBattle26
+	; End of function Map72_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FE98:
+Map72_ZoneEvent3:
+		
 		 
 		chkFlg  $2EE            ; set after Rohde clears the blockage at the North Cliff cave
 		bne.s   return_4FF04
@@ -63,7 +64,7 @@ byte_4FF00:
 return_4FF04:
 		rts
 
-	; End of function sub_4FE98
+	; End of function Map72_ZoneEvent3
 
 
 ; =============== S U B R O U T I N E =======================================

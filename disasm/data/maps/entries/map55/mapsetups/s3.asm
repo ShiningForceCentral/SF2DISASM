@@ -2,12 +2,13 @@
 ; ASM FILE data\maps\entries\map55\mapsetups\s3.asm :
 ; 0x5E248..0x5E25E : 
 ms_map55_ZoneEvents:
-		msZoneEvent 7, 7, sub_5E250-ms_map55_ZoneEvents
+		msZoneEvent 7, 7, Map55_ZoneEvent0-ms_map55_ZoneEvents
 		msDefaultZoneEvent 0, return_5E25C-ms_map55_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5E250:
+Map55_ZoneEvent0:
+		
 		 
 		chkFlg  $216            ; Battle 34 completed
 		beq.s   return_5E25C
@@ -15,5 +16,5 @@ sub_5E250:
 return_5E25C:
 		rts
 
-	; End of function sub_5E250
+	; End of function Map55_ZoneEvent0
 

@@ -2,74 +2,80 @@
 ; ASM FILE data\maps\entries\map25\mapsetups\s2.asm :
 ; 0x5D224..0x5D33A : 
 ms_map25_EntityEvents:
-		msEntityEvent 128, UP, sub_5D248-ms_map25_EntityEvents
-		msEntityEvent 129, UP, sub_5D24E-ms_map25_EntityEvents
-		msEntityEvent 130, UP, sub_5D25C-ms_map25_EntityEvents
-		msEntityEvent 131, UP, sub_5D26A-ms_map25_EntityEvents
-		msEntityEvent 132, UP, sub_5D274-ms_map25_EntityEvents
-		msEntityEvent 133, UP, sub_5D27A-ms_map25_EntityEvents
-		msEntityEvent 134, UP, sub_5D2D2-ms_map25_EntityEvents
-		msEntityEvent 135, DOWN, sub_5D2EA-ms_map25_EntityEvents
+		msEntityEvent 128, UP, Map25_EntityEvent0-ms_map25_EntityEvents
+		msEntityEvent 129, UP, Map25_EntityEvent1-ms_map25_EntityEvents
+		msEntityEvent 130, UP, Map25_EntityEvent2-ms_map25_EntityEvents
+		msEntityEvent 131, UP, Map25_EntityEvent3-ms_map25_EntityEvents
+		msEntityEvent 132, UP, Map25_EntityEvent4-ms_map25_EntityEvents
+		msEntityEvent 133, UP, Map25_EntityEvent5-ms_map25_EntityEvents
+		msEntityEvent 134, UP, Map25_EntityEvent6-ms_map25_EntityEvents
+		msEntityEvent 135, DOWN, Map25_EntityEvent7-ms_map25_EntityEvents
 		msDefaultEntityEvent 0, nullsub_132-ms_map25_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5D248:
+Map25_EntityEvent0:
+		
 		 
 		txt     $7A4            ; "Ketto is on the southern{N}edge of North Parmecia.{W1}"
 		rts
 
-	; End of function sub_5D248
+	; End of function Map25_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5D24E:
+Map25_EntityEvent1:
+		
 		 
 		txt     $7A5            ; "Where did you come from,{N}boy?{W2}"
 		txt     $7A6            ; "From South Parmecia?{N}Really?{W2}"
 		txt     $7A7            ; "The tunnel to the south is{N}blocked.{W1}"
 		rts
 
-	; End of function sub_5D24E
+	; End of function Map25_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5D25C:
+Map25_EntityEvent2:
+		
 		 
 		txt     $7A8            ; "From South Parmecia?{N}Why did you come here?{W2}"
 		txt     $7A9            ; "Pacalon has become isolated{N}since we opposed the devils.{W2}"
 		txt     $7AA            ; "If I were you, I'd leave.{W1}"
 		rts
 
-	; End of function sub_5D25C
+	; End of function Map25_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5D26A:
+Map25_EntityEvent3:
+		
 		 
 		txt     $7AB            ; "It's unusually hot!{W2}"
 		txt     $7AC            ; "Is Mitula as sick as I've{N}heard?{W1}"
 		rts
 
-	; End of function sub_5D26A
+	; End of function Map25_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5D274:
+Map25_EntityEvent4:
+		
 		 
 		txt     $7AD            ; "The devils forbade us to go{N}out. {W1}"
 		rts
 
-	; End of function sub_5D274
+	; End of function Map25_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5D27A:
+Map25_EntityEvent5:
+		
 		 
 		chkFlg  $320            ; set after the merchant in Ketto runs to his store
 		bne.s   loc_5D2C4
@@ -94,12 +100,13 @@ loc_5D2C4:
 return_5D2D0:
 		rts
 
-	; End of function sub_5D27A
+	; End of function Map25_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5D2D2:
+Map25_EntityEvent6:
+		
 		 
 		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   loc_5D2E0
@@ -109,7 +116,7 @@ loc_5D2E0:
 		jsr     j_ChurchActions
 		rts
 
-	; End of function sub_5D2D2
+	; End of function Map25_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -122,7 +129,8 @@ nullsub_131:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5D2EA:
+Map25_EntityEvent7:
+		
 		 
 		chkFlg  $320            ; set after the merchant in Ketto runs to his store
 		bne.s   loc_5D32A
@@ -153,7 +161,7 @@ loc_5D32A:
 return_5D336:
 		rts
 
-	; End of function sub_5D2EA
+	; End of function Map25_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================

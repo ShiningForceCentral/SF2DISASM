@@ -2,12 +2,13 @@
 ; ASM FILE data\maps\entries\map30\mapsetups\s3.asm :
 ; 0x5A2C2..0x5A2E8 : 
 ms_map30_ZoneEvents:
-		msZoneEvent 7, 13, sub_5A2CA-ms_map30_ZoneEvents
+		msZoneEvent 7, 13, Map30_ZoneEvent0-ms_map30_ZoneEvents
 		msDefaultZoneEvent 0, return_5A2E6-ms_map30_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A2CA:
+Map30_ZoneEvent0:
+		
 		 
 		chkFlg  $45             ; Fairy is a follower
 		beq.s   return_5A2E6
@@ -20,5 +21,5 @@ sub_5A2CA:
 return_5A2E6:
 		rts
 
-	; End of function sub_5A2CA
+	; End of function Map30_ZoneEvent0
 

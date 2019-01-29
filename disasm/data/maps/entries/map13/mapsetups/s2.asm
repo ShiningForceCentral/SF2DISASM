@@ -2,24 +2,25 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s2.asm :
 ; 0x5801E..0x5814C : 
 ms_map13_EntityEvents:
-		msEntityEvent 9, UP, sub_58108-ms_map13_EntityEvents
-		msEntityEvent 128, UP, sub_58056-ms_map13_EntityEvents
-		msEntityEvent 129, UP, sub_58072-ms_map13_EntityEvents
-		msEntityEvent 130, RIGHT, sub_58078-ms_map13_EntityEvents
-		msEntityEvent 131, UP, sub_58090-ms_map13_EntityEvents
-		msEntityEvent 132, UP, sub_5809E-ms_map13_EntityEvents
-		msEntityEvent 133, DOWN, sub_580AC-ms_map13_EntityEvents
-		msEntityEvent 134, DOWN, sub_580C6-ms_map13_EntityEvents
-		msEntityEvent 135, UP, sub_580CE-ms_map13_EntityEvents
-		msEntityEvent 136, UP, sub_580D4-ms_map13_EntityEvents
-		msEntityEvent 137, DOWN, sub_580DA-ms_map13_EntityEvents
-		msEntityEvent 138, DOWN, sub_58102-ms_map13_EntityEvents
-		msEntityEvent 140, RIGHT, sub_5810E-ms_map13_EntityEvents
+		msEntityEvent 9, UP, Map13_EntityEvent0-ms_map13_EntityEvents
+		msEntityEvent 128, UP, Map13_EntityEvent1-ms_map13_EntityEvents
+		msEntityEvent 129, UP, Map13_EntityEvent2-ms_map13_EntityEvents
+		msEntityEvent 130, RIGHT, Map13_EntityEvent3-ms_map13_EntityEvents
+		msEntityEvent 131, UP, Map13_EntityEvent4-ms_map13_EntityEvents
+		msEntityEvent 132, UP, Map13_EntityEvent5-ms_map13_EntityEvents
+		msEntityEvent 133, DOWN, Map13_EntityEvent6-ms_map13_EntityEvents
+		msEntityEvent 134, DOWN, Map13_EntityEvent7-ms_map13_EntityEvents
+		msEntityEvent 135, UP, Map13_EntityEvent8-ms_map13_EntityEvents
+		msEntityEvent 136, UP, Map13_EntityEvent9-ms_map13_EntityEvents
+		msEntityEvent 137, DOWN, Map13_EntityEvent10-ms_map13_EntityEvents
+		msEntityEvent 138, DOWN, Map13_EntityEvent11-ms_map13_EntityEvents
+		msEntityEvent 140, RIGHT, Map13_EntityEvent12-ms_map13_EntityEvents
 		msDefaultEntityEvent 0, nullsub_116-ms_map13_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58056:
+Map13_EntityEvent1:
+		
 		 
 		chkFlg  $100            ; Temporary map setup flag 00
 		bne.s   byte_58068      
@@ -31,22 +32,24 @@ byte_58068:
 		txt     $58F            ; "Now we can use that tunnel{N}to travel between Polca and{N}the wilderness area!{W1}"
 		rts
 
-	; End of function sub_58056
+	; End of function Map13_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58072:
+Map13_EntityEvent2:
+		
 		 
 		txt     $590            ; "Breathe deeply....{W2}{N}Wonderful air, huh?{W1}"
 		rts
 
-	; End of function sub_58072
+	; End of function Map13_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58078:
+Map13_EntityEvent3:
+		
 		 
 		chkFlg  $2C7            ; set after you dislodge the turtle/fairy in Polca
 		bne.s   byte_5808A      
@@ -58,32 +61,35 @@ byte_5808A:
 return_5808E:
 		rts
 
-	; End of function sub_58078
+	; End of function Map13_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58090:
+Map13_EntityEvent4:
+		
 		move.b  #4,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		rts
 
-	; End of function sub_58090
+	; End of function Map13_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5809E:
+Map13_EntityEvent5:
+		
 		move.b  #$13,((CURRENT_SHOP_INDEX-$1000000)).w
 		jsr     j_ShopActions
 		rts
 
-	; End of function sub_5809E
+	; End of function Map13_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_580AC:
+Map13_EntityEvent6:
+		
 		 
 		chkFlg  $2C6            ; set after Oddler wanders down from the mountain
 		bne.s   byte_580B8      
@@ -96,41 +102,45 @@ byte_580B8:
 return_580C4:
 		rts
 
-	; End of function sub_580AC
+	; End of function Map13_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_580C6:
+Map13_EntityEvent7:
+		
 		jsr     j_ChurchActions
 		rts
 
-	; End of function sub_580C6
+	; End of function Map13_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_580CE:
+Map13_EntityEvent8:
+		
 		 
 		txt     $593            ; "Mt. Volcano is home to{N}beastmen.{W2}{N}We were a warlike tribe, but{N}we've almost forgotten how{N}to fight.{W1}"
 		rts
 
-	; End of function sub_580CE
+	; End of function Map13_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_580D4:
+Map13_EntityEvent9:
+		
 		 
 		txt     $594            ; "Young men these days are{N}lucky!  I wish I was young{N}again!{W1}"
 		rts
 
-	; End of function sub_580D4
+	; End of function Map13_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_580DA:
+Map13_EntityEvent10:
+		
 		 
 		chkFlg  $2C6            ; set after Oddler wanders down from the mountain
 		bne.s   byte_580FC      
@@ -149,37 +159,40 @@ byte_580FC:
 return_58100:
 		rts
 
-	; End of function sub_580DA
+	; End of function Map13_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58102:
+Map13_EntityEvent11:
+		
 		 
 		txt     $599            ; "Clank!  Clank!{N}All of our weapons are made{N}by me!{W2}{N}But, who uses them in this{N}peaceful country?{W1}"
 		rts
 
-	; End of function sub_58102
+	; End of function Map13_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58108:
+Map13_EntityEvent0:
+		
 		 
 		txt     $59A            ; "Hirsute?  'Cause I'm a{N}beastman.{W2}{N}I'm not hairy enough though.{N}I envy those hairy guys!{W1}"
 		rts
 
-	; End of function sub_58108
+	; End of function Map13_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5810E:
+Map13_EntityEvent12:
+		
 		 
 		txt     $5B8            ; "Ah...stop...no!{N}I don't want...to see....{N}My...head...aches....{W1}"
 		rts
 
-	; End of function sub_5810E
+	; End of function Map13_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================

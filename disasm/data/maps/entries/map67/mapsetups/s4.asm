@@ -28,11 +28,11 @@ sub_4FCE6:
 		bne.s   byte_4FD3C      
 		txt     $A1E            ; "There's a wobbly rock.{W1}"
 		clsTxt
-		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
+		move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
 		move.w  #7,d0
 		jsr     GetEntityPortraitAndSpeechSfx
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  d2,((SPEECH_SFX-$1000000)).w
 		chkFlg  $D              ; Elric joined
 		bne.s   loc_4FD22
 		jsr     LoadAndDisplayCurrentPortrait

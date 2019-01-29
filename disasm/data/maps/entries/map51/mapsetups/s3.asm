@@ -2,17 +2,18 @@
 ; ASM FILE data\maps\entries\map51\mapsetups\s3.asm :
 ; 0x5C2D6..0x5C3C0 : 
 ms_map51_ZoneEvents:
-		msZoneEvent 9, 6, sub_5C2F2-ms_map51_ZoneEvents
-		msZoneEvent 9, 7, sub_5C2F2-ms_map51_ZoneEvents
-		msZoneEvent 9, 8, sub_5C2F2-ms_map51_ZoneEvents
-		msZoneEvent 9, 9, sub_5C2F2-ms_map51_ZoneEvents
-		msZoneEvent 9, 24, sub_5C304-ms_map51_ZoneEvents
-		msZoneEvent 10, 24, sub_5C304-ms_map51_ZoneEvents
+		msZoneEvent 9, 6, Map51_ZoneEvent0-ms_map51_ZoneEvents
+		msZoneEvent 9, 7, Map51_ZoneEvent0-ms_map51_ZoneEvents
+		msZoneEvent 9, 8, Map51_ZoneEvent0-ms_map51_ZoneEvents
+		msZoneEvent 9, 9, Map51_ZoneEvent0-ms_map51_ZoneEvents
+		msZoneEvent 9, 24, Map51_ZoneEvent4-ms_map51_ZoneEvents
+		msZoneEvent 10, 24, Map51_ZoneEvent4-ms_map51_ZoneEvents
 		msDefaultZoneEvent 0, return_5C310-ms_map51_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C2F2:
+Map51_ZoneEvent0:
+		
 		 
 		chkFlg  $1D6            ; set after you approach the pond to rescue Elric at the Harpy Pond
 		bne.s   return_5C302
@@ -21,12 +22,13 @@ sub_5C2F2:
 return_5C302:
 		rts
 
-	; End of function sub_5C2F2
+	; End of function Map51_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C304:
+Map51_ZoneEvent4:
+		
 		 
 		chkFlg  $1D6            ; set after you approach the pond to rescue Elric at the Harpy Pond
 		bne.s   return_5C310
@@ -34,7 +36,7 @@ sub_5C304:
 return_5C310:
 		rts
 
-	; End of function sub_5C304
+	; End of function Map51_ZoneEvent4
 
 cs_5C312:       textCursor $9FB
 		setActscriptWait $7,eas_Init

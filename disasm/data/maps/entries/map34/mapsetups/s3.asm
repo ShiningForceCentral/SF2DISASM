@@ -2,12 +2,13 @@
 ; ASM FILE data\maps\entries\map34\mapsetups\s3.asm :
 ; 0x5B696..0x5B6B4 : 
 ms_map34_ZoneEvents:
-		msZoneEvent 255, 13, sub_5B69E-ms_map34_ZoneEvents
+		msZoneEvent 255, 13, Map34_ZoneEvent0-ms_map34_ZoneEvents
 		msDefaultZoneEvent 0, return_5B6B2-ms_map34_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B69E:
+Map34_ZoneEvent0:
+		
 		 
 		chkFlg  $310            ; set after the event in the basement of Creed's Mansion
 		bne.s   return_5B6B2
@@ -17,5 +18,5 @@ sub_5B69E:
 return_5B6B2:
 		rts
 
-	; End of function sub_5B69E
+	; End of function Map34_ZoneEvent0
 

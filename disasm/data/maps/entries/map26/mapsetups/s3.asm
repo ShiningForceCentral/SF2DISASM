@@ -2,12 +2,13 @@
 ; ASM FILE data\maps\entries\map26\mapsetups\s3.asm :
 ; 0x59DB6..0x59DD2 : 
 ms_map26_ZoneEvents:
-		msZoneEvent 14, 255, sub_59DBE-ms_map26_ZoneEvents
+		msZoneEvent 14, 255, Map26_ZoneEvent0-ms_map26_ZoneEvents
 		msDefaultZoneEvent 0, nullsub_91-ms_map26_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59DBE:
+Map26_ZoneEvent0:
+		
 		 
 		chkFlg  $30C            ; set after the man tries to lift the giant ring in Floor World
 		bne.s   return_59DCE
@@ -16,7 +17,7 @@ sub_59DBE:
 return_59DCE:
 		rts
 
-	; End of function sub_59DBE
+	; End of function Map26_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================

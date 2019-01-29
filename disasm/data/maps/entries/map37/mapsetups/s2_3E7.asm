@@ -2,10 +2,10 @@
 ; ASM FILE data\maps\entries\map37\mapsetups\s2_3E7.asm :
 ; 0x5F9D2..0x5FA22 : 
 ms_map37_flag3E7_EntityEvents:
-		msEntityEvent 26, UP, sub_5F9F8-ms_map37_flag3E7_EntityEvents
-byte_5F9D6:     msEntityEvent 128, UP, sub_5F9FE-ms_map37_flag3E7_EntityEvents
-		msEntityEvent 129, RIGHT, entevt_5F9F6-ms_map37_flag3E7_EntityEvents
-		msEntityEvent 7, UP, sub_5FA10-ms_map37_flag3E7_EntityEvents
+		msEntityEvent 26, UP, Map37_3E7_EntityEvent0-ms_map37_flag3E7_EntityEvents
+byte_5F9D6:     msEntityEvent 128, UP, Map37_3E7_EntityEvent1-ms_map37_flag3E7_EntityEvents
+		msEntityEvent 129, RIGHT, Map37_3E7_EntityEvent2-ms_map37_flag3E7_EntityEvents
+		msEntityEvent 7, UP, Map37_3E7_EntityEvent3-ms_map37_flag3E7_EntityEvents
 		msDefaultEntityEvent 0, sub_5F9E6-ms_map37_flag3E7_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
@@ -16,7 +16,8 @@ sub_5F9E6:
 		move.w  #$EAC,d0
 		add.w   d7,d0
 		jsr     (DisplayText).w 
-entevt_5F9F6:
+Map37_3E7_EntityEvent2:
+		
 		rts
 
 	; End of function sub_5F9E6
@@ -24,17 +25,19 @@ entevt_5F9F6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5F9F8:
+Map37_3E7_EntityEvent0:
+		
 		 
 		txt     $D24            ; "Was it...too wild?{W1}"
 		rts
 
-	; End of function sub_5F9F8
+	; End of function Map37_3E7_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5F9FE:
+Map37_3E7_EntityEvent1:
+		
 		 
 		chkFlg  $101            ; Temporary map setup flag 01
 		bne.s   return_5FA0E
@@ -43,12 +46,13 @@ sub_5F9FE:
 return_5FA0E:
 		rts
 
-	; End of function sub_5F9FE
+	; End of function Map37_3E7_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FA10:
+Map37_3E7_EntityEvent3:
+		
 		 
 		chkFlg  $101            ; Temporary map setup flag 01
 		bne.s   byte_5FA1C      
@@ -59,5 +63,5 @@ byte_5FA1C:
 return_5FA20:
 		rts
 
-	; End of function sub_5FA10
+	; End of function Map37_3E7_EntityEvent3
 

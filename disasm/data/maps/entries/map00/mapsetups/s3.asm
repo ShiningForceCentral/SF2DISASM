@@ -2,13 +2,14 @@
 ; ASM FILE data\maps\entries\map00\mapsetups\s3.asm :
 ; 0x5E3A4..0x5E61E : 
 ms_map0_ZoneEvents:
-		msZoneEvent 14, 12, sub_5E3B0-ms_map0_ZoneEvents
-		msZoneEvent 15, 12, sub_5E3B0-ms_map0_ZoneEvents
+		msZoneEvent 14, 12, Map0_ZoneEvent0-ms_map0_ZoneEvents
+		msZoneEvent 15, 12, Map0_ZoneEvent0-ms_map0_ZoneEvents
 		msDefaultZoneEvent 0, return_5E3C0-ms_map0_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5E3B0:
+Map0_ZoneEvent0:
+		
 		 
 		chkFlg  $321            ; set after Zalbard taunts you in the scene outside the Mitula Shrine
 		bne.s   return_5E3C0
@@ -17,7 +18,7 @@ sub_5E3B0:
 return_5E3C0:
 		rts
 
-	; End of function sub_5E3B0
+	; End of function Map0_ZoneEvent0
 
 cs_5E3C2:       textCursor $AAB
 		setActscriptWait $7,eas_Init

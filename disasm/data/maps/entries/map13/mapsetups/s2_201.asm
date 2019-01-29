@@ -2,74 +2,80 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s2_201.asm :
 ; 0x5814C..0x5822A : 
 ms_map13_flag201_EntityEvents:
-		msEntityEvent 128, UP, sub_58184-ms_map13_flag201_EntityEvents
-		msEntityEvent 129, UP, sub_5818A-ms_map13_flag201_EntityEvents
-		msEntityEvent 130, RIGHT, (sub_58078-ms_map13_flag201_EntityEvents) & $FFFF
-		msEntityEvent 131, UP, (sub_58090-ms_map13_flag201_EntityEvents) & $FFFF
-		msEntityEvent 132, UP, (sub_5809E-ms_map13_flag201_EntityEvents) & $FFFF
-		msEntityEvent 133, DOWN, sub_58190-ms_map13_flag201_EntityEvents
-		msEntityEvent 134, DOWN, (sub_580C6-ms_map13_flag201_EntityEvents) & $FFFF
-		msEntityEvent 135, UP, sub_58196-ms_map13_flag201_EntityEvents
-		msEntityEvent 136, UP, sub_5819C-ms_map13_flag201_EntityEvents
-		msEntityEvent 137, RIGHT, sub_581A2-ms_map13_flag201_EntityEvents
-		msEntityEvent 138, DOWN, sub_58218-ms_map13_flag201_EntityEvents
-		msEntityEvent 139, UP, sub_5821E-ms_map13_flag201_EntityEvents
-		msEntityEvent 140, UP, sub_58224-ms_map13_flag201_EntityEvents
+		msEntityEvent 128, UP, Map13_201_EntityEvent0-ms_map13_flag201_EntityEvents
+		msEntityEvent 129, UP, Map13_201_EntityEvent1-ms_map13_flag201_EntityEvents
+		msEntityEvent 130, RIGHT, (Map13_EntityEvent3-ms_map13_flag201_EntityEvents) & $FFFF
+		msEntityEvent 131, UP, (Map13_EntityEvent4-ms_map13_flag201_EntityEvents) & $FFFF
+		msEntityEvent 132, UP, (Map13_EntityEvent5-ms_map13_flag201_EntityEvents) & $FFFF
+		msEntityEvent 133, DOWN, Map13_201_EntityEvent5-ms_map13_flag201_EntityEvents
+		msEntityEvent 134, DOWN, (Map13_EntityEvent7-ms_map13_flag201_EntityEvents) & $FFFF
+		msEntityEvent 135, UP, Map13_201_EntityEvent7-ms_map13_flag201_EntityEvents
+		msEntityEvent 136, UP, Map13_201_EntityEvent8-ms_map13_flag201_EntityEvents
+		msEntityEvent 137, RIGHT, Map13_201_EntityEvent9-ms_map13_flag201_EntityEvents
+		msEntityEvent 138, DOWN, Map13_201_EntityEvent10-ms_map13_flag201_EntityEvents
+		msEntityEvent 139, UP, Map13_201_EntityEvent11-ms_map13_flag201_EntityEvents
+		msEntityEvent 140, UP, Map13_201_EntityEvent12-ms_map13_flag201_EntityEvents
 		msDefaultEntityEvent 0, (nullsub_116-ms_map13_flag201_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58184:
+Map13_201_EntityEvent0:
+		
 		 
 		txt     $59F            ; "I've been to a desolate{N}port town in the south....{W1}"
 		rts
 
-	; End of function sub_58184
+	; End of function Map13_201_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5818A:
+Map13_201_EntityEvent1:
+		
 		 
 		txt     $5A0            ; "They say, a huge monster{N}lives in the river.{W1}"
 		rts
 
-	; End of function sub_5818A
+	; End of function Map13_201_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58190:
+Map13_201_EntityEvent5:
+		
 		 
 		txt     $5A1            ; "You saw Volcanon?{N}Are you serious?{W2}{N}I've never met him, though{N}I've lived here all my life.{W1}"
 		rts
 
-	; End of function sub_58190
+	; End of function Map13_201_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58196:
+Map13_201_EntityEvent7:
+		
 		 
 		txt     $5A2            ; "There's a desert in the south.{W2}{N}Ancient ruins lay in the{N}desert.{W1}"
 		rts
 
-	; End of function sub_58196
+	; End of function Map13_201_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5819C:
+Map13_201_EntityEvent8:
+		
 		 
 		txt     $5A3            ; "I could help you if I were{N}younger.{W2}{N}But now I'm too darn old.{N}Drat!{W1}"
 		rts
 
-	; End of function sub_5819C
+	; End of function Map13_201_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_581A2:
+Map13_201_EntityEvent9:
+		
 		 
 		chkFlg  $2CE            ; set after Oddler runs after you as you leave Polca, and tags along
 		bne.s   byte_58212      
@@ -116,35 +122,38 @@ byte_58212:
 return_58216:
 		rts
 
-	; End of function sub_581A2
+	; End of function Map13_201_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58218:
+Map13_201_EntityEvent10:
+		
 		 
 		txt     $5A5            ; "Clank!  Clank!{W2}{N}I heard that blacksmiths in{N}ancient times made special{N}weapons from a rare metal.{W1}"
 		rts
 
-	; End of function sub_58218
+	; End of function Map13_201_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5821E:
+Map13_201_EntityEvent11:
+		
 		 
 		txt     $5A6            ; "I need more hair and more{N}courage!{W2}{N}I couldn't move when I{N}saw the devils....{W1}"
 		rts
 
-	; End of function sub_5821E
+	; End of function Map13_201_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58224:
+Map13_201_EntityEvent12:
+		
 		 
 		txt     $5A7            ; "Who are you?{N}Excuse me, but...{N}I'm blind.{W1}"
 		rts
 
-	; End of function sub_58224
+	; End of function Map13_201_EntityEvent12
 

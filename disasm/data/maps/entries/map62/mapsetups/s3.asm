@@ -2,15 +2,16 @@
 ; ASM FILE data\maps\entries\map62\mapsetups\s3.asm :
 ; 0x5C820..0x5C86A : 
 ms_map62_ZoneEvents:
-		msZoneEvent 5, 15, sub_5C834-ms_map62_ZoneEvents
-		msZoneEvent 6, 15, sub_5C834-ms_map62_ZoneEvents
-		msZoneEvent 5, 16, sub_5C84C-ms_map62_ZoneEvents
-		msZoneEvent 6, 16, sub_5C84C-ms_map62_ZoneEvents
+		msZoneEvent 5, 15, Map62_ZoneEvent0-ms_map62_ZoneEvents
+		msZoneEvent 6, 15, Map62_ZoneEvent0-ms_map62_ZoneEvents
+		msZoneEvent 5, 16, Map62_ZoneEvent2-ms_map62_ZoneEvents
+		msZoneEvent 6, 16, Map62_ZoneEvent2-ms_map62_ZoneEvents
 		msDefaultZoneEvent 0, return_5C868-ms_map62_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C834:
+Map62_ZoneEvent0:
+		
 		 
 		chkFlg  $2D9            ; ???
 		bne.s   return_5C84A
@@ -21,12 +22,13 @@ sub_5C834:
 return_5C84A:
 		rts
 
-	; End of function sub_5C834
+	; End of function Map62_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C84C:
+Map62_ZoneEvent2:
+		
 		 
 		chkFlg  $2D9            ; ???
 		bne.s   return_5C868
@@ -39,5 +41,5 @@ sub_5C84C:
 return_5C868:
 		rts
 
-	; End of function sub_5C84C
+	; End of function Map62_ZoneEvent2
 

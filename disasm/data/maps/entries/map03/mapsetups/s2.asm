@@ -2,27 +2,28 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\s2.asm :
 ; 0x50F10..0x5105C : 
 ms_map3_EntityEvents:
-		msEntityEvent 1, DOWN, sub_50F54-ms_map3_EntityEvents
-		msEntityEvent 2, RIGHT, sub_50F98-ms_map3_EntityEvents
-		msEntityEvent 128, UP, sub_50FBA-ms_map3_EntityEvents
-		msEntityEvent 129, DOWN, sub_50FCC-ms_map3_EntityEvents
-		msEntityEvent 130, UP, sub_50FD6-ms_map3_EntityEvents
-		msEntityEvent 131, UP, sub_50FE4-ms_map3_EntityEvents
-		msEntityEvent 132, RIGHT, sub_50FEA-ms_map3_EntityEvents
-		msEntityEvent 133, UP, sub_50FF0-ms_map3_EntityEvents
-		msEntityEvent 134, UP, sub_50FFE-ms_map3_EntityEvents
-		msEntityEvent 137, UP, sub_51004-ms_map3_EntityEvents
-		msEntityEvent 138, UP, sub_5100E-ms_map3_EntityEvents
-		msEntityEvent 139, UP, sub_51020-ms_map3_EntityEvents
-		msEntityEvent 140, UP, sub_51032-ms_map3_EntityEvents
-		msEntityEvent 141, UP, sub_5103C-ms_map3_EntityEvents
-		msEntityEvent 144, UP, sub_50FFE-ms_map3_EntityEvents
-		msEntityEvent 142, DOWN, sub_51044-ms_map3_EntityEvents
+		msEntityEvent 1, DOWN, Map3_EntityEvent0-ms_map3_EntityEvents
+		msEntityEvent 2, RIGHT, Map3_EntityEvent1-ms_map3_EntityEvents
+		msEntityEvent 128, UP, Map3_EntityEvent2-ms_map3_EntityEvents
+		msEntityEvent 129, DOWN, Map3_EntityEvent3-ms_map3_EntityEvents
+		msEntityEvent 130, UP, Map3_EntityEvent4-ms_map3_EntityEvents
+		msEntityEvent 131, UP, Map3_EntityEvent5-ms_map3_EntityEvents
+		msEntityEvent 132, RIGHT, Map3_EntityEvent6-ms_map3_EntityEvents
+		msEntityEvent 133, UP, Map3_EntityEvent7-ms_map3_EntityEvents
+		msEntityEvent 134, UP, Map3_EntityEvent8-ms_map3_EntityEvents
+		msEntityEvent 137, UP, Map3_EntityEvent9-ms_map3_EntityEvents
+		msEntityEvent 138, UP, Map3_EntityEvent10-ms_map3_EntityEvents
+		msEntityEvent 139, UP, Map3_EntityEvent11-ms_map3_EntityEvents
+		msEntityEvent 140, UP, Map3_EntityEvent12-ms_map3_EntityEvents
+		msEntityEvent 141, UP, Map3_EntityEvent13-ms_map3_EntityEvents
+		msEntityEvent 144, UP, Map3_EntityEvent8-ms_map3_EntityEvents
+		msEntityEvent 142, DOWN, Map3_EntityEvent15-ms_map3_EntityEvents
 		msDefaultEntityEvent 0, entevdft_5105A-ms_map3_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50F54:
+Map3_EntityEvent0:
+		
 		 
 		chkFlg  $25B            ; set after the messenger scene
 		bne.s   byte_50F8A      
@@ -51,12 +52,13 @@ byte_50F8A:
 return_50F96:
 		rts
 
-	; End of function sub_50F54
+	; End of function Map3_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50F98:
+Map3_EntityEvent1:
+		
 		 
 		chkFlg  $25B            ; set after the messenger scene
 		bne.s   byte_50FB4      
@@ -74,12 +76,13 @@ byte_50FB4:
 return_50FB8:
 		rts
 
-	; End of function sub_50F98
+	; End of function Map3_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50FBA:
+Map3_EntityEvent2:
+		
 		 
 		chkFlg  $25A            ; set after Astral's second basement line
 		bne.s   byte_50FC6      
@@ -90,88 +93,96 @@ byte_50FC6:
 return_50FCA:
 		rts
 
-	; End of function sub_50FBA
+	; End of function Map3_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50FCC:
+Map3_EntityEvent3:
+		
 		 
 		txt     $1E4            ; "He thinks of you as his own{N}grandson.{W2}"
 		txt     $1E5            ; "Sometimes he may badger{N}you, but that's because he{N}loves you.{W1}"
 		rts
 
-	; End of function sub_50FCC
+	; End of function Map3_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50FD6:
+Map3_EntityEvent4:
+		
 		 
 		txt     $1E6            ; "Hi, boy!  Good morning.{N}Are you going to school?{W2}"
 		txt     $1E7            ; "Say, Sir Astral certainly{N}is a great person.{W2}"
 		txt     $1E8            ; "He even teaches a{N}mischievous kid like you.{W1}"
 		rts
 
-	; End of function sub_50FD6
+	; End of function Map3_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50FE4:
+Map3_EntityEvent5:
+		
 		 
 		txt     $1E9            ; "Good morning {LEADER}!{N}It's a wonderful day,{N}isn't it?{W1}"
 		rts
 
-	; End of function sub_50FE4
+	; End of function Map3_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50FEA:
+Map3_EntityEvent6:
+		
 		 
 		txt     $1EA            ; "Zzzzz...zzzzz....{W1}"
 		rts
 
-	; End of function sub_50FEA
+	; End of function Map3_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50FF0:
+Map3_EntityEvent7:
+		
 		 
 		txt     $1EB            ; "Sir Astral is the wisest{N}person in Granseal.{W2}"
 		txt     $1EC            ; "He's such a great man, he{N}opened a school all{N}by himself.{W2}"
 		txt     $1ED            ; "You must realize how lucky{N}you are.{W1}"
 		rts
 
-	; End of function sub_50FF0
+	; End of function Map3_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50FFE:
+Map3_EntityEvent8:
+		
 		 
 		txt     $1EE            ; "Hi, would-be customer!{N}Sorry, we are not open yet.{W1}"
 		rts
 
-	; End of function sub_50FFE
+	; End of function Map3_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51004:
+Map3_EntityEvent9:
+		
 		 
 		txt     $1EF            ; "Granseal's harbor is behind{N}me.{W2}"
 		txt     $1F0            ; "All ships left early this{N}morning.{W1}"
 		rts
 
-	; End of function sub_51004
+	; End of function Map3_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5100E:
+Map3_EntityEvent10:
+		
 		 
 		chkFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
 		bne.s   byte_5101A      
@@ -182,12 +193,13 @@ byte_5101A:
 return_5101E:
 		rts
 
-	; End of function sub_5100E
+	; End of function Map3_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51020:
+Map3_EntityEvent11:
+		
 		 
 		chkFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
 		bne.s   byte_5102C      
@@ -198,32 +210,35 @@ byte_5102C:
 return_51030:
 		rts
 
-	; End of function sub_51020
+	; End of function Map3_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51032:
+Map3_EntityEvent12:
+		
 		 
 		txt     $1F2            ; "You unruly boy!{N}Where on earth are you{N}going?{W2}"
 		txt     $1F3            ; "There is no school outside!{N}Go to school!{W1}"
 		rts
 
-	; End of function sub_51032
+	; End of function Map3_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5103C:
+Map3_EntityEvent13:
+		
 		jsr     j_ChurchActions
 		rts
 
-	; End of function sub_5103C
+	; End of function Map3_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51044:
+Map3_EntityEvent15:
+		
 		 
 		chkFlg  $105            ; Temporary map setup flag 05
 		bne.s   byte_51052      
@@ -236,5 +251,5 @@ entevdft_5105A:
 		
 		rts
 
-	; End of function sub_51044
+	; End of function Map3_EntityEvent15
 

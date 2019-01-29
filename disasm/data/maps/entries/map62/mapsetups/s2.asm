@@ -2,13 +2,14 @@
 ; ASM FILE data\maps\entries\map62\mapsetups\s2.asm :
 ; 0x5C7B6..0x5C820 : 
 ms_map62_EntityEvents:
-		msEntityEvent 128, DOWN, sub_5C7C2-ms_map62_EntityEvents
-		msEntityEvent 129, DOWN, sub_5C7F6-ms_map62_EntityEvents
+		msEntityEvent 128, DOWN, Map62_EntityEvent0-ms_map62_EntityEvents
+		msEntityEvent 129, DOWN, Map62_EntityEvent1-ms_map62_EntityEvents
 		msDefaultEntityEvent 0, return_5C81E-ms_map62_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C7C2:
+Map62_EntityEvent0:
+		
 		 
 		chkFlg  $2DC            ; set after the old man fails to open the way to Grans in the Wooden Panel shrine
 		bne.s   byte_5C7F0      
@@ -32,12 +33,13 @@ byte_5C7F0:
 return_5C7F4:
 		rts
 
-	; End of function sub_5C7C2
+	; End of function Map62_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5C7F6:
+Map62_EntityEvent1:
+		
 		 
 		chkFlg  $2D9            ; ???
 		bne.s   byte_5C81A      
@@ -56,5 +58,5 @@ byte_5C81A:
 return_5C81E:
 		rts
 
-	; End of function sub_5C7F6
+	; End of function Map62_EntityEvent1
 

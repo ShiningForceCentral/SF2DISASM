@@ -2,12 +2,13 @@
 ; ASM FILE data\maps\entries\map56\mapsetups\s3.asm :
 ; 0x614D6..0x614FE : 
 ms_map56_ZoneEvents:
-		msZoneEvent 43, 40, sub_614DE-ms_map56_ZoneEvents
+		msZoneEvent 43, 40, Map56_ZoneEvent0-ms_map56_ZoneEvents
 		msDefaultZoneEvent 0, return_614FC-ms_map56_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_614DE:
+Map56_ZoneEvent0:
+		
 		 
 		chkFlg  $388            ; will be set with the 0387, but only if the event isn't triggered by speaking
 		bne.s   return_614FC
@@ -21,5 +22,5 @@ byte_614F4:
 return_614FC:
 		rts
 
-	; End of function sub_614DE
+	; End of function Map56_ZoneEvent0
 

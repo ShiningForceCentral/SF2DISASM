@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map05\mapsetups\s3_212.asm :
 ; 0x604C8..0x60548 : 
 ms_map5_flag212_ZoneEvents:
-		msZoneEvent 11, 8, sub_604D6-ms_map5_flag212_ZoneEvents
-		msZoneEvent 255, 42, sub_60502-ms_map5_flag212_ZoneEvents
+		msZoneEvent 11, 8, Map5_212_ZoneEvent0-ms_map5_flag212_ZoneEvents
+		msZoneEvent 255, 42, Map5_212_ZoneEvent1-ms_map5_flag212_ZoneEvents
 		msDefaultZoneEvent 0, nullsub_73-ms_map5_flag212_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
@@ -16,7 +16,8 @@ nullsub_73:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_604D6:
+Map5_212_ZoneEvent0:
+		
 		 
 		chkFlg  $3AC            ; set after playing the piano in Yeel (during the late game)
 		beq.s   return_60500
@@ -34,12 +35,13 @@ byte_604FC:
 return_60500:
 		rts
 
-	; End of function sub_604D6
+	; End of function Map5_212_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_60502:
+Map5_212_ZoneEvent1:
+		
 		 
 		chkFlg  $1C             ; Lemon joined
 		bne.s   return_6051C
@@ -51,7 +53,7 @@ sub_60502:
 return_6051C:
 		rts
 
-	; End of function sub_60502
+	; End of function Map5_212_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================

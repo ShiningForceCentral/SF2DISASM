@@ -6,7 +6,8 @@ ms_map21_flag1FA_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_53EAE:
+Map21_EntityEvent0:
+		
 		 
 		chkFlg  $260            ; set after agreeing to go to the tower with Astral
 		bne.s   byte_53EC8      
@@ -26,29 +27,31 @@ byte_53EC8:
 return_53EDC:
 		rts
 
-	; End of function sub_53EAE
+	; End of function Map21_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_53EDE:
-		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
-		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
+Map21_1F5_EntityEvent0:
+		
+		move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
+		clr.w   ((SPEECH_SFX-$1000000)).w
 		txt     $244            ; "He's fainted.{W1}"
 		rts
 
-	; End of function sub_53EDE
+	; End of function Map21_1F5_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_53EEE:
+Map21_261_EntityEvent0:
+		
 		 
 		txt     $245            ; "It was a devil!{N}I don't want to stand{N}here any more!{W2}{N}Hey, you!  Can you stand{N}guard for me here?{W1}"
 nullsub_126:
 		rts
 
-	; End of function sub_53EEE
+	; End of function Map21_261_EntityEvent0
 
 cs_53EF4:       entityActionsWait $80
 		 moveRight 1

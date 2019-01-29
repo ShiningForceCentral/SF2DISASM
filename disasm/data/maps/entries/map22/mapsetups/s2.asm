@@ -2,112 +2,120 @@
 ; ASM FILE data\maps\entries\map22\mapsetups\s2.asm :
 ; 0x59474..0x595DE : 
 ms_map22_EntityEvents:
-		msEntityEvent 14, UP, sub_5950A-ms_map22_EntityEvents
-		msEntityEvent 15, UP, sub_59514-ms_map22_EntityEvents
-		msEntityEvent 128, RIGHT, sub_594E4-ms_map22_EntityEvents
-		msEntityEvent 129, DOWN, sub_594EC-ms_map22_EntityEvents
-		msEntityEvent 130, DOWN, sub_594F6-ms_map22_EntityEvents
-		msEntityEvent 131, UP, sub_59500-ms_map22_EntityEvents
-		msEntityEvent 132, UP, sub_59522-ms_map22_EntityEvents
-		msEntityEvent 133, UP, sub_5952A-ms_map22_EntityEvents
-		msEntityEvent 134, DOWN, sub_59554-ms_map22_EntityEvents
-		msEntityEvent 135, DOWN, sub_5957C-ms_map22_EntityEvents
-		msEntityEvent 136, DOWN, sub_59592-ms_map22_EntityEvents
-		msEntityEvent 137, RIGHT, sub_595D2-ms_map22_EntityEvents
-		msEntityEvent 138, RIGHT, sub_595CC-ms_map22_EntityEvents
-		msEntityEvent 139, RIGHT, sub_595C6-ms_map22_EntityEvents
-		msEntityEvent 140, RIGHT, sub_595C6-ms_map22_EntityEvents
-		msEntityEvent 141, RIGHT, sub_595C0-ms_map22_EntityEvents
-		msEntityEvent 142, RIGHT, sub_595C0-ms_map22_EntityEvents
-		msEntityEvent 143, RIGHT, sub_595B4-ms_map22_EntityEvents
-		msEntityEvent 144, RIGHT, sub_595B4-ms_map22_EntityEvents
-		msEntityEvent 145, RIGHT, sub_595CC-ms_map22_EntityEvents
-		msEntityEvent 146, RIGHT, sub_595CC-ms_map22_EntityEvents
-		msEntityEvent 147, RIGHT, sub_595BA-ms_map22_EntityEvents
-		msEntityEvent 148, RIGHT, sub_595BA-ms_map22_EntityEvents
-		msEntityEvent 149, RIGHT, sub_595BA-ms_map22_EntityEvents
-		msEntityEvent 150, RIGHT, sub_595BA-ms_map22_EntityEvents
-		msEntityEvent 151, RIGHT, sub_595BA-ms_map22_EntityEvents
-		msEntityEvent 152, RIGHT, sub_595BA-ms_map22_EntityEvents
+		msEntityEvent 14, UP, Map22_EntityEvent0-ms_map22_EntityEvents
+		msEntityEvent 15, UP, Map22_EntityEvent1-ms_map22_EntityEvents
+		msEntityEvent 128, RIGHT, Map22_EntityEvent2-ms_map22_EntityEvents
+		msEntityEvent 129, DOWN, Map22_EntityEvent3-ms_map22_EntityEvents
+		msEntityEvent 130, DOWN, Map22_EntityEvent4-ms_map22_EntityEvents
+		msEntityEvent 131, UP, Map22_EntityEvent5-ms_map22_EntityEvents
+		msEntityEvent 132, UP, Map22_EntityEvent6-ms_map22_EntityEvents
+		msEntityEvent 133, UP, Map22_EntityEvent7-ms_map22_EntityEvents
+		msEntityEvent 134, DOWN, Map22_EntityEvent8-ms_map22_EntityEvents
+		msEntityEvent 135, DOWN, Map22_EntityEvent9-ms_map22_EntityEvents
+		msEntityEvent 136, DOWN, Map22_EntityEvent10-ms_map22_EntityEvents
+		msEntityEvent 137, RIGHT, Map22_EntityEvent11-ms_map22_EntityEvents
+		msEntityEvent 138, RIGHT, Map22_EntityEvent12-ms_map22_EntityEvents
+		msEntityEvent 139, RIGHT, Map22_EntityEvent13-ms_map22_EntityEvents
+		msEntityEvent 140, RIGHT, Map22_EntityEvent13-ms_map22_EntityEvents
+		msEntityEvent 141, RIGHT, Map22_EntityEvent15-ms_map22_EntityEvents
+		msEntityEvent 142, RIGHT, Map22_EntityEvent15-ms_map22_EntityEvents
+		msEntityEvent 143, RIGHT, Map22_EntityEvent17-ms_map22_EntityEvents
+		msEntityEvent 144, RIGHT, Map22_EntityEvent17-ms_map22_EntityEvents
+		msEntityEvent 145, RIGHT, Map22_EntityEvent12-ms_map22_EntityEvents
+		msEntityEvent 146, RIGHT, Map22_EntityEvent12-ms_map22_EntityEvents
+		msEntityEvent 147, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
+		msEntityEvent 148, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
+		msEntityEvent 149, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
+		msEntityEvent 150, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
+		msEntityEvent 151, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
+		msEntityEvent 152, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
 		msDefaultEntityEvent 0, nullsub_128-ms_map22_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_594E4:
+Map22_EntityEvent2:
+		
 		jsr     j_CaravanActions
 		rts
 
-	; End of function sub_594E4
+	; End of function Map22_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_594EC:
+Map22_EntityEvent3:
+		
 		 
 		txt     $6E6            ; "Creed is a fine gentleman.{W2}"
 		txt     $6E7            ; "His magic saved us a long time{N}ago during a natural disaster.{W1}"
 		rts
 
-	; End of function sub_594EC
+	; End of function Map22_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_594F6:
+Map22_EntityEvent4:
+		
 		 
 		txt     $6E8            ; "Devils cannot use their magic{N}to affect human lives.{W2}"
 		txt     $6E9            ; "Supposedly, it's one of their{N}rules.{W1}"
 		rts
 
-	; End of function sub_594F6
+	; End of function Map22_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59500:
+Map22_EntityEvent5:
+		
 		 
 		txt     $6EA            ; "This Kingdom was made by{N}Creed.  There's no concept{N}of TIME here.{W2}"
 		txt     $6EB            ; "We never get old.{N}We never die.{N}What is the meaning of life?{W1}"
 		rts
 
-	; End of function sub_59500
+	; End of function Map22_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5950A:
+Map22_EntityEvent0:
+		
 		 
 		txt     $6EC            ; "I was there during the{N}disaster.{W2}"
 		txt     $6ED            ; "I was looking for the{N}legendary sword.{N}I hate it here!{W1}"
 		rts
 
-	; End of function sub_5950A
+	; End of function Map22_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59514:
+Map22_EntityEvent1:
+		
 		 
 		txt     $6EE            ; "Are you from the outside?{N}Why did you come here?{W2}"
 		txt     $6EF            ; "Ah, a mistake.  I see.{W2}"
 		txt     $6F0            ; "I suggest you see King{N}Ponpei.{N}He's a good man.{W1}"
 		rts
 
-	; End of function sub_59514
+	; End of function Map22_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59522:
+Map22_EntityEvent6:
+		
 		jsr     j_ChurchActions
 		rts
 
-	; End of function sub_59522
+	; End of function Map22_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5952A:
+Map22_EntityEvent7:
+		
 		 
 		chkFlg  $20A            ; Battle 22 completed
 		bne.s   byte_59536      
@@ -126,12 +134,13 @@ byte_5954A:
 return_59552:
 		rts
 
-	; End of function sub_5952A
+	; End of function Map22_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59554:
+Map22_EntityEvent8:
+		
 		 
 		chkFlg  $20A            ; Battle 22 completed
 		bne.s   byte_59576      
@@ -149,12 +158,13 @@ byte_59576:
 return_5957A:
 		rts
 
-	; End of function sub_59554
+	; End of function Map22_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5957C:
+Map22_EntityEvent9:
+		
 		 
 		chkFlg  $309            ; set after the Desktop King tells you to fight on the chessboard
 		bne.s   byte_5958C      
@@ -166,12 +176,13 @@ byte_5958C:
 return_59590:
 		rts
 
-	; End of function sub_5957C
+	; End of function Map22_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59592:
+Map22_EntityEvent10:
+		
 		 
 		chkFlg  $D4             ; Cotton Balloon (chest on chessboard, Desktop Kingdom)
 		bne.s   byte_5959E      
@@ -186,68 +197,74 @@ byte_5959E:
 return_595B2:
 		rts
 
-	; End of function sub_59592
+	; End of function Map22_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_595B4:
+Map22_EntityEvent17:
+		
 		 
 		txt     $6F9            ; "Mr. Creed gave me this solid,{N}armored body!{W1}"
 		rts
 
-	; End of function sub_595B4
+	; End of function Map22_EntityEvent17
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_595BA:
+Map22_EntityEvent21:
+		
 		 
 		txt     $6FA            ; "My attack power is the best{N}in the army!{W1}"
 		rts
 
-	; End of function sub_595BA
+	; End of function Map22_EntityEvent21
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_595C0:
+Map22_EntityEvent15:
+		
 		 
 		txt     $6FB            ; "We knights are always ready{N}to fight!{W1}"
 		rts
 
-	; End of function sub_595C0
+	; End of function Map22_EntityEvent15
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_595C6:
+Map22_EntityEvent13:
+		
 		 
 		txt     $6FC            ; "Is healing is my only ability?{N}Ha, ha!  You have a lot to{N}learn!{W1}"
 		rts
 
-	; End of function sub_595C6
+	; End of function Map22_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_595CC:
+Map22_EntityEvent12:
+		
 		 
 		txt     $6FD            ; "I lead the army with the King.{W1}"
 		rts
 
-	; End of function sub_595CC
+	; End of function Map22_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_595D2:
+Map22_EntityEvent11:
+		
 		 
 		txt     $6FE            ; "The Chess Army of Desktop{N}Kingdom is a well balanced{N}force!{W2}"
 		txt     $6FF            ; "If it is King Ponpei's wish,{N}we will accept your{N}challenge!{W1}"
 		rts
 
-	; End of function sub_595D2
+	; End of function Map22_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================

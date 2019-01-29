@@ -2,14 +2,15 @@
 ; ASM FILE data\maps\entries\map17\mapsetups\s3.asm :
 ; 0x523E4..0x52442 : 
 ms_map17_ZoneEvents:
-		msZoneEvent 53, 5, sub_523F4-ms_map17_ZoneEvents
-		msZoneEvent 43, 9, sub_52406-ms_map17_ZoneEvents
-		msZoneEvent 57, 5, sub_5242E-ms_map17_ZoneEvents
+		msZoneEvent 53, 5, Map17_ZoneEvent0-ms_map17_ZoneEvents
+		msZoneEvent 43, 9, Map17_ZoneEvent1-ms_map17_ZoneEvents
+		msZoneEvent 57, 5, Map17_ZoneEvent2-ms_map17_ZoneEvents
 		msDefaultZoneEvent 0, nullsub_79-ms_map17_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_523F4:
+Map17_ZoneEvent0:
+		
 		 
 		chkFlg  $295            ; set after prison scene, ending in Slade unlocking/Sarah accusing
 		bne.s   return_52404
@@ -18,12 +19,13 @@ sub_523F4:
 return_52404:
 		rts
 
-	; End of function sub_523F4
+	; End of function Map17_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52406:
+Map17_ZoneEvent1:
+		
 		 
 		chkFlg  $296            ; set after you try to go upstairs, and Slade opens the secret tunnel
 		bne.s   byte_5241E      
@@ -38,12 +40,13 @@ byte_5241E:
 return_5242C:
 		rts
 
-	; End of function sub_52406
+	; End of function Map17_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5242E:
+Map17_ZoneEvent2:
+		
 		 
 		chkFlg  $296            ; set after you try to go upstairs, and Slade opens the secret tunnel
 		beq.s   return_5243E
@@ -52,7 +55,7 @@ sub_5242E:
 return_5243E:
 		rts
 
-	; End of function sub_5242E
+	; End of function Map17_ZoneEvent2
 
 
 ; =============== S U B R O U T I N E =======================================

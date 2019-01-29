@@ -2,48 +2,52 @@
 ; ASM FILE data\maps\entries\map20\mapsetups\s2_1F5.asm :
 ; 0x53830..0x538B4 : 
 ms_map20_flag1F5_EntityEvents:
-		msEntityEvent 128, RIGHT, sub_53850-ms_map20_flag1F5_EntityEvents
-		msEntityEvent 129, RIGHT, sub_53856-ms_map20_flag1F5_EntityEvents
-		msEntityEvent 130, DOWN, sub_5385C-ms_map20_flag1F5_EntityEvents
-		msEntityEvent 131, DOWN, sub_53864-ms_map20_flag1F5_EntityEvents
-		msEntityEvent 132, DOWN, sub_53878-ms_map20_flag1F5_EntityEvents
-		msEntityEvent 133, DOWN, sub_5388C-ms_map20_flag1F5_EntityEvents
-		msEntityEvent 134, RIGHT, sub_538A0-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 128, RIGHT, Map20_1F5_EntityEvent0-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 129, RIGHT, Map20_1F5_EntityEvent1-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 130, DOWN, Map20_1F5_EntityEvent2-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 131, DOWN, Map20_1F5_EntityEvent3-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 132, DOWN, Map20_1F5_EntityEvent4-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 133, DOWN, Map20_1F5_EntityEvent5-ms_map20_flag1F5_EntityEvents
+		msEntityEvent 134, RIGHT, Map20_1F5_EntityEvent6-ms_map20_flag1F5_EntityEvents
 		msDefaultEntityEvent 0, (return_53814-ms_map20_flag1F5_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_53850:
+Map20_1F5_EntityEvent0:
+		
 		 
 		txt     $896            ; "Guooooorrrr!{W1}"
 		rts
 
-	; End of function sub_53850
+	; End of function Map20_1F5_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_53856:
+Map20_1F5_EntityEvent1:
+		
 		 
 		txt     $250            ; "Let me pass!{N}I must see my father!{W1}"
 		rts
 
-	; End of function sub_53856
+	; End of function Map20_1F5_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5385C:
+Map20_1F5_EntityEvent2:
+		
 		 
 		script  cs_53C42
 		rts
 
-	; End of function sub_5385C
+	; End of function Map20_1F5_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_53864:
+Map20_1F5_EntityEvent3:
+		
 		 
 		chkFlg  $103            ; Temporary map setup flag 03
 		bne.s   byte_53872      
@@ -53,12 +57,13 @@ byte_53872:
 		txt     $252            ; "and the King became{N}violent!{W1}"
 		rts
 
-	; End of function sub_53864
+	; End of function Map20_1F5_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_53878:
+Map20_1F5_EntityEvent4:
+		
 		 
 		chkFlg  $104            ; Temporary map setup flag 04
 		bne.s   byte_53886      
@@ -68,12 +73,13 @@ byte_53886:
 		txt     $254            ; "The King knocked down{N}the Princess....{W1}"
 		rts
 
-	; End of function sub_53878
+	; End of function Map20_1F5_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5388C:
+Map20_1F5_EntityEvent5:
+		
 		 
 		chkFlg  $105            ; Temporary map setup flag 05
 		bne.s   byte_5389A      
@@ -83,12 +89,13 @@ byte_5389A:
 		txt     $24D            ; "Ouch!  I was knocked down!{W1}"
 		rts
 
-	; End of function sub_5388C
+	; End of function Map20_1F5_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_538A0:
+Map20_1F5_EntityEvent6:
+		
 		 
 		chkFlg  $106            ; Temporary map setup flag 06
 		bne.s   byte_538AE      
@@ -98,5 +105,5 @@ byte_538AE:
 		txt     $24F            ; "Trust Sir Astral!{N}He knows how to cure{N}the King!{W1}"
 		rts
 
-	; End of function sub_538A0
+	; End of function Map20_1F5_EntityEvent6
 

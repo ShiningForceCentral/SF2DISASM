@@ -2,38 +2,39 @@
 ; ASM FILE data\maps\entries\map10\mapsetups\s2_2D2.asm :
 ; 0x56E9C..0x56F8A : 
 ms_map10_flag2D2_EntityEvents:
-		msEntityEvent 128, DOWN, (sub_56DE0-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 129, DOWN, (sub_56DE6-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 130, RIGHT, (sub_56DF0-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 131, RIGHT, (sub_56DFE-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 132, RIGHT, (sub_56E08-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 133, RIGHT, (sub_56E12-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 134, RIGHT, (sub_56E1C-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 135, RIGHT, (sub_56E22-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 136, RIGHT, (sub_56E2C-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 137, DOWN, (sub_56E36-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 138, DOWN, (sub_56E44-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 139, UP, (sub_56E4C-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 140, DOWN, (sub_56E52-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 141, DOWN, (sub_56E58-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 142, DOWN, (sub_56E5E-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 143, DOWN, (sub_56E64-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 144, UP, (sub_56E6A-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 145, DOWN, (sub_56E70-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 146, DOWN, (sub_56E7A-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 147, DOWN, sub_56F0C-ms_map10_flag2D2_EntityEvents
-		msEntityEvent 148, UP, sub_56F40-ms_map10_flag2D2_EntityEvents
-		msEntityEvent 149, DOWN, (sub_56E90-ms_map10_flag2D2_EntityEvents) & $FFFF
-		msEntityEvent 150, DOWN, sub_56F4E-ms_map10_flag2D2_EntityEvents
-		msEntityEvent 151, DOWN, sub_56F58-ms_map10_flag2D2_EntityEvents
-		msEntityEvent 152, DOWN, sub_56F62-ms_map10_flag2D2_EntityEvents
-		msEntityEvent 153, DOWN, sub_56F68-ms_map10_flag2D2_EntityEvents
-		msEntityEvent 10, DOWN, sub_56F80-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 128, DOWN, (Map10_EntityEvent0-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 129, DOWN, (Map10_EntityEvent1-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 130, RIGHT, (Map10_EntityEvent2-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 131, RIGHT, (Map10_EntityEvent3-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 132, RIGHT, (Map10_EntityEvent4-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 133, RIGHT, (Map10_EntityEvent5-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 134, RIGHT, (Map10_EntityEvent6-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 135, RIGHT, (Map10_EntityEvent7-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 136, RIGHT, (Map10_EntityEvent8-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 137, DOWN, (Map10_EntityEvent9-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 138, DOWN, (Map10_EntityEvent10-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 139, UP, (Map10_EntityEvent11-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 140, DOWN, (Map10_EntityEvent12-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 141, DOWN, (Map10_EntityEvent13-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 142, DOWN, (Map10_EntityEvent14-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 143, DOWN, (Map10_EntityEvent15-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 144, UP, (Map10_EntityEvent16-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 145, DOWN, (Map10_EntityEvent17-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 146, DOWN, (Map10_EntityEvent18-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 147, DOWN, Map10_2D2_EntityEvent19-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 148, UP, Map10_2D2_EntityEvent20-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 149, DOWN, (Map10_EntityEvent21-ms_map10_flag2D2_EntityEvents) & $FFFF
+		msEntityEvent 150, DOWN, Map10_2D2_EntityEvent22-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 151, DOWN, Map10_2D2_EntityEvent23-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 152, DOWN, Map10_2D2_EntityEvent24-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 153, DOWN, Map10_2D2_EntityEvent25-ms_map10_flag2D2_EntityEvents
+		msEntityEvent 10, DOWN, Map10_2D2_EntityEvent26-ms_map10_flag2D2_EntityEvents
 		msDefaultEntityEvent 0, (entevdft_56E9A-ms_map10_flag2D2_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56F0C:
+Map10_2D2_EntityEvent19:
+		
 		 
 		chkFlg  $31F            ; set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
 		bne.s   byte_56F3A      
@@ -55,56 +56,61 @@ byte_56F3A:
 return_56F3E:
 		rts
 
-	; End of function sub_56F0C
+	; End of function Map10_2D2_EntityEvent19
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56F40:
+Map10_2D2_EntityEvent20:
+		
 		 
 		txt     $63E            ; "We can't calm down{N}Volcanon.{W2}"
 		txt     $63F            ; "Without his protection, the{N}people that live on the{N}ground will perish.{W2}"
 		txt     $640            ; "Only Tristan and Bedoe{N}will survive.{W1}"
 		rts
 
-	; End of function sub_56F40
+	; End of function Map10_2D2_EntityEvent20
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56F4E:
+Map10_2D2_EntityEvent22:
+		
 		 
 		txt     $63A            ; "Something happened in{N}North Parmecia.{W2}"
 		txt     $63B            ; "I saw a strange cloud!{W1}"
 		rts
 
-	; End of function sub_56F4E
+	; End of function Map10_2D2_EntityEvent22
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56F58:
+Map10_2D2_EntityEvent23:
+		
 		 
 		txt     $63C            ; "Goddess Mitula lives on the{N}north side of Tristan through{N}the mountains.{W2}"
 		txt     $63D            ; "The people living in Tristan{N}are kind, but weak.{N}I wonder if they are alright?{W1}"
 		rts
 
-	; End of function sub_56F58
+	; End of function Map10_2D2_EntityEvent23
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56F62:
+Map10_2D2_EntityEvent24:
+		
 		 
 		txt     $64F            ; "Shhhh!  My hatchling is{N}sleeping.  Quiet!{W1}"
 		rts
 
-	; End of function sub_56F62
+	; End of function Map10_2D2_EntityEvent24
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56F68:
+Map10_2D2_EntityEvent25:
+		
 		 
 		chkFlg  $2D3            ; set after the hatchling in Bedoe shows you he can almost fly
 		bne.s   byte_56F7A      
@@ -116,16 +122,17 @@ byte_56F7A:
 return_56F7E:
 		rts
 
-	; End of function sub_56F68
+	; End of function Map10_2D2_EntityEvent25
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56F80:
+Map10_2D2_EntityEvent26:
+		
 		 
 		txt     $641            ; "Volcanon was very angry,{N}wasn't he?{W2}"
 		txt     $642            ; "We can no longer depend on{N}him.  We must do it{N}ourselves!{W1}"
 		rts
 
-	; End of function sub_56F80
+	; End of function Map10_2D2_EntityEvent26
 

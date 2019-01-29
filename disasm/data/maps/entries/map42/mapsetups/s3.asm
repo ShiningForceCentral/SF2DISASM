@@ -2,12 +2,13 @@
 ; ASM FILE data\maps\entries\map42\mapsetups\s3.asm :
 ; 0x5FE04..0x5FE24 : 
 ms_map42_ZoneEvents:
-		msZoneEvent 19, 21, sub_5FE0C-ms_map42_ZoneEvents
+		msZoneEvent 19, 21, Map42_ZoneEvent0-ms_map42_ZoneEvents
 		msDefaultZoneEvent 0, return_5FE22-ms_map42_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FE0C:
+Map42_ZoneEvent0:
+		
 		 
 		chkFlg  $3E7            ; set after the Nazca ship shootdown scene
 		beq.s   return_5FE22
@@ -18,5 +19,5 @@ sub_5FE0C:
 return_5FE22:
 		rts
 
-	; End of function sub_5FE0C
+	; End of function Map42_ZoneEvent0
 

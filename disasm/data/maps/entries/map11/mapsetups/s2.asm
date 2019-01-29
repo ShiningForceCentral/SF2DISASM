@@ -2,47 +2,51 @@
 ; ASM FILE data\maps\entries\map11\mapsetups\s2.asm :
 ; 0x57A0C..0x57A68 : 
 ms_map11_EntityEvents:
-		msEntityEvent 128, UP, sub_57A20-ms_map11_EntityEvents
-		msEntityEvent 129, UP, sub_57A2A-ms_map11_EntityEvents
-		msEntityEvent 130, UP, sub_57A34-ms_map11_EntityEvents
-		msEntityEvent 131, UP, sub_57A3A-ms_map11_EntityEvents
+		msEntityEvent 128, UP, Map11_EntityEvent0-ms_map11_EntityEvents
+		msEntityEvent 129, UP, Map11_EntityEvent1-ms_map11_EntityEvents
+		msEntityEvent 130, UP, Map11_EntityEvent2-ms_map11_EntityEvents
+		msEntityEvent 131, UP, Map11_EntityEvent3-ms_map11_EntityEvents
 		msDefaultEntityEvent 0, return_57A66-ms_map11_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57A20:
+Map11_EntityEvent0:
+		
 		 
 		txt     $C4B            ; "Devils?{W2}"
 		txt     $C4C            ; "They can't enter the shrine.{W1}"
 		rts
 
-	; End of function sub_57A20
+	; End of function Map11_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57A2A:
+Map11_EntityEvent1:
+		
 		 
 		txt     $C4D            ; "This is a sacred area.{W2}"
 		txt     $C4E            ; "Volcanon's shrine is here.{W1}"
 		rts
 
-	; End of function sub_57A2A
+	; End of function Map11_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57A34:
+Map11_EntityEvent2:
+		
 		 
 		txt     $C74            ; "This shrine was built on top{N}of the mountain to watch{N}over everything.{W1}"
 		rts
 
-	; End of function sub_57A34
+	; End of function Map11_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57A3A:
+Map11_EntityEvent3:
+		
 		 
 		txt     $C75            ; "Do you know the legend{N}of the phoenix?{W1}"
 		jsr     j_YesNoPrompt
@@ -60,5 +64,5 @@ byte_57A56:
 return_57A66:
 		rts
 
-	; End of function sub_57A3A
+	; End of function Map11_EntityEvent3
 

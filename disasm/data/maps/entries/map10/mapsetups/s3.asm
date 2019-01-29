@@ -2,9 +2,9 @@
 ; ASM FILE data\maps\entries\map10\mapsetups\s3.asm :
 ; 0x56F8A..0x56FC0 : 
 ms_map10_ZoneEvents:
-		msZoneEvent 29, 255, sub_56F9C-ms_map10_ZoneEvents
-		msZoneEvent 33, 255, sub_56FAE-ms_map10_ZoneEvents
-		msZoneEvent 31, 53, sub_56FAE-ms_map10_ZoneEvents
+		msZoneEvent 29, 255, Map10_ZoneEvent0-ms_map10_ZoneEvents
+		msZoneEvent 33, 255, Map10_ZoneEvent1-ms_map10_ZoneEvents
+		msZoneEvent 31, 53, Map10_ZoneEvent1-ms_map10_ZoneEvents
 		msDefaultZoneEvent 0, nullsub_74-ms_map10_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
@@ -17,7 +17,8 @@ nullsub_74:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56F9C:
+Map10_ZoneEvent0:
+		
 		 
 		chkFlg  $2D0            ; set after the King of Bedoe speaks to his soldiers and they disperse
 		bne.s   return_56FAC
@@ -26,12 +27,13 @@ sub_56F9C:
 return_56FAC:
 		rts
 
-	; End of function sub_56F9C
+	; End of function Map10_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56FAE:
+Map10_ZoneEvent1:
+		
 		 
 		chkFlg  $2D1            ; set after you approach the King of Bedoe, starts with Luke speaking to Peter
 		bne.s   return_56FBE
@@ -40,5 +42,5 @@ sub_56FAE:
 return_56FBE:
 		rts
 
-	; End of function sub_56FAE
+	; End of function Map10_ZoneEvent1
 

@@ -2,14 +2,15 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s3.asm :
 ; 0x5822A..0x582AC : 
 ms_map13_ZoneEvents:
-		msZoneEvent 24, 255, sub_5823A-ms_map13_ZoneEvents
-		msZoneEvent 255, 11, sub_5827C-ms_map13_ZoneEvents
-		msZoneEvent 255, 30, sub_58294-ms_map13_ZoneEvents
+		msZoneEvent 24, 255, Map13_ZoneEvent0-ms_map13_ZoneEvents
+		msZoneEvent 255, 11, Map13_ZoneEvent1-ms_map13_ZoneEvents
+		msZoneEvent 255, 30, Map13_ZoneEvent2-ms_map13_ZoneEvents
 		msDefaultZoneEvent 0, return_582AA-ms_map13_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5823A:
+Map13_ZoneEvent0:
+		
 		 
 		chkFlg  $2C6            ; set after Oddler wanders down from the mountain
 		bne.s   byte_58264      
@@ -34,12 +35,13 @@ byte_58264:
 return_5827A:
 		rts
 
-	; End of function sub_5823A
+	; End of function Map13_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5827C:
+Map13_ZoneEvent1:
+		
 		 
 		chkFlg  $2CC            ; set after your raft-giving conversation with the mayor in Polca
 		beq.s   return_58292
@@ -50,12 +52,13 @@ sub_5827C:
 return_58292:
 		rts
 
-	; End of function sub_5827C
+	; End of function Map13_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58294:
+Map13_ZoneEvent2:
+		
 		 
 		chkFlg  $2CC            ; set after your raft-giving conversation with the mayor in Polca
 		beq.s   return_582AA
@@ -66,5 +69,5 @@ sub_58294:
 return_582AA:
 		rts
 
-	; End of function sub_58294
+	; End of function Map13_ZoneEvent2
 

@@ -2,12 +2,13 @@
 ; ASM FILE data\maps\entries\map74\mapsetups\s3.asm :
 ; 0x50984..0x509C6 : 
 ms_map74_ZoneEvents:
-		msZoneEvent 255, 61, sub_5098C-ms_map74_ZoneEvents
+		msZoneEvent 255, 61, Map74_ZoneEvent0-ms_map74_ZoneEvents
 		msDefaultZoneEvent 0, return_509C4-ms_map74_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5098C:
+Map74_ZoneEvent0:
+		
 		 
 		chkFlg  $20F            ; Battle 27 completed
 		bne.s   byte_509AC      
@@ -27,5 +28,5 @@ byte_509AC:
 return_509C4:
 		rts
 
-	; End of function sub_5098C
+	; End of function Map74_ZoneEvent0
 

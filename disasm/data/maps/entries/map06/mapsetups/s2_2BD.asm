@@ -2,25 +2,26 @@
 ; ASM FILE data\maps\entries\map06\mapsetups\s2_2BD.asm :
 ; 0x54984..0x54CD0 : 
 ms_map6_flag2BD_EntityEvents:
-		msEntityEvent 128, UP, sub_549C0-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 129, UP, sub_54A0E-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 130, UP, sub_54A34-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 131, UP, sub_54A6A-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 132, UP, sub_54A9C-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 133, UP, sub_54AD8-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 134, UP, sub_54B36-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 135, UP, sub_54B54-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 136, UP, sub_54B7E-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 137, UP, sub_54BA0-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 138, UP, sub_54BB2-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 139, UP, sub_54BCC-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 140, UP, sub_54BFE-ms_map6_flag2BD_EntityEvents
-		msEntityEvent 141, UP, sub_54C10-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 128, UP, Map6_EntityEvent0-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 129, UP, Map6_EntityEvent1-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 130, UP, Map6_EntityEvent2-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 131, UP, Map6_EntityEvent3-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 132, UP, Map6_EntityEvent4-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 133, UP, Map6_EntityEvent5-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 134, UP, Map6_EntityEvent6-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 135, UP, Map6_EntityEvent7-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 136, UP, Map6_EntityEvent8-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 137, UP, Map6_EntityEvent9-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 138, UP, Map6_EntityEvent10-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 139, UP, Map6_EntityEvent11-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 140, UP, Map6_EntityEvent12-ms_map6_flag2BD_EntityEvents
+		msEntityEvent 141, UP, Map6_EntityEvent13-ms_map6_flag2BD_EntityEvents
 		msDefaultEntityEvent 0, return_54C30-ms_map6_flag2BD_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_549C0:
+Map6_EntityEvent0:
+		
 		 
 		chkFlg  $2BE            ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
 		bne.s   byte_549D0      
@@ -50,12 +51,13 @@ byte_54A08:
 return_54A0C:
 		rts
 
-	; End of function sub_549C0
+	; End of function Map6_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54A0E:
+Map6_EntityEvent1:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_54A2E      
@@ -74,12 +76,13 @@ byte_54A2E:
 return_54A32:
 		rts
 
-	; End of function sub_54A0E
+	; End of function Map6_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54A34:
+Map6_EntityEvent2:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_54A60      
@@ -105,12 +108,13 @@ byte_54A60:
 return_54A68:
 		rts
 
-	; End of function sub_54A34
+	; End of function Map6_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54A6A:
+Map6_EntityEvent3:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_54A96      
@@ -135,12 +139,13 @@ byte_54A96:
 return_54A9A:
 		rts
 
-	; End of function sub_54A6A
+	; End of function Map6_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54A9C:
+Map6_EntityEvent4:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   loc_54AD0
@@ -168,12 +173,13 @@ loc_54AD0:
 return_54AD6:
 		rts
 
-	; End of function sub_54A9C
+	; End of function Map6_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54AD8:
+Map6_EntityEvent5:
+		
 		 
 		chkFlg  $2BE            ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
 		bne.s   byte_54AF4      
@@ -210,12 +216,13 @@ byte_54B30:
 return_54B34:
 		rts
 
-	; End of function sub_54AD8
+	; End of function Map6_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54B36:
+Map6_EntityEvent6:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_54B4E      
@@ -232,12 +239,13 @@ byte_54B4E:
 return_54B52:
 		rts
 
-	; End of function sub_54B36
+	; End of function Map6_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54B54:
+Map6_EntityEvent7:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_54B78      
@@ -260,12 +268,13 @@ byte_54B78:
 return_54B7C:
 		rts
 
-	; End of function sub_54B54
+	; End of function Map6_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54B7E:
+Map6_EntityEvent8:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_54B96      
@@ -283,12 +292,13 @@ byte_54B96:
 return_54B9E:
 		rts
 
-	; End of function sub_54B7E
+	; End of function Map6_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54BA0:
+Map6_EntityEvent9:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_54BAC      
@@ -299,12 +309,13 @@ byte_54BAC:
 return_54BB0:
 		rts
 
-	; End of function sub_54BA0
+	; End of function Map6_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54BB2:
+Map6_EntityEvent10:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_54BC2      
@@ -317,12 +328,13 @@ byte_54BC2:
 return_54BCA:
 		rts
 
-	; End of function sub_54BB2
+	; End of function Map6_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54BCC:
+Map6_EntityEvent11:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_54BF8      
@@ -347,12 +359,13 @@ byte_54BF8:
 return_54BFC:
 		rts
 
-	; End of function sub_54BCC
+	; End of function Map6_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54BFE:
+Map6_EntityEvent12:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.s   byte_54C0A      
@@ -363,12 +376,13 @@ byte_54C0A:
 return_54C0E:
 		rts
 
-	; End of function sub_54BFE
+	; End of function Map6_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54C10:
+Map6_EntityEvent13:
+		
 		 
 		chkFlg  $322            ; set after the event in the basement of Creed's Mansion
 		bne.w   byte_54C32      
@@ -397,11 +411,11 @@ loc_54C4C:
 		bne.s   byte_54C8E      
 		txt     $45C            ; "Sir Astral, may I give him{N}the dynamite?{W1}"
 		clsTxt
-		move.w  ((CURRENT_SPEAK_SOUND-$1000000)).w,((word_FFB09E-$1000000)).w
+		move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
 		move.w  #$1F,d0
 		jsr     GetEntityPortraitAndSpeechSfx
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  d2,((SPEECH_SFX-$1000000)).w
 		jsr     LoadAndDisplayCurrentPortrait
 		txt     $45D            ; "It's too dangerous to use it{N}as it is.{W2}"
 		txt     $45E            ; "We need some way to{N}detonate the dynamite{N}safely.{W1}"
@@ -429,7 +443,7 @@ byte_54CC0:
 return_54CC4:
 		rts
 
-	; End of function sub_54C10
+	; End of function Map6_EntityEvent13
 
 cs_54CC6:       setFacing $1F,UP
 		nod $1F

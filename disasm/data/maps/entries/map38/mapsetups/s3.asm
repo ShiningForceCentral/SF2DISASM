@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map38\mapsetups\s3.asm :
 ; 0x5DCD0..0x5DD26 : 
 ms_map38_ZoneEvents:
-		msZoneEvent 12, 6, sub_5DCDE-ms_map38_ZoneEvents
-		msZoneEvent 12, 8, sub_5DCF0-ms_map38_ZoneEvents
+		msZoneEvent 12, 6, Map38_ZoneEvent0-ms_map38_ZoneEvents
+		msZoneEvent 12, 8, Map38_ZoneEvent1-ms_map38_ZoneEvents
 		msDefaultZoneEvent 0, nullsub_97-ms_map38_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
@@ -16,7 +16,8 @@ nullsub_97:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5DCDE:
+Map38_ZoneEvent0:
+		
 		 
 		chkFlg  $38F            ; set after the Petro death scene in Roft
 		bne.s   return_5DCEE
@@ -25,12 +26,13 @@ sub_5DCDE:
 return_5DCEE:
 		rts
 
-	; End of function sub_5DCDE
+	; End of function Map38_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5DCF0:
+Map38_ZoneEvent1:
+		
 		 
 		chkFlg  $38F            ; set after the Petro death scene in Roft
 		beq.s   return_5DD24
@@ -51,5 +53,5 @@ byte_5DD08:
 return_5DD24:
 		rts
 
-	; End of function sub_5DCF0
+	; End of function Map38_ZoneEvent1
 
