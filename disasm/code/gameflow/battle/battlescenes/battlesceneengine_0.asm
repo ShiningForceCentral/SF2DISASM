@@ -1661,7 +1661,7 @@ loc_1910C:
 		bcs.w   return_191DE
 		jsr     j_SetCurrentEXP
 		jsr     j_LevelUp
-		clr.w   (CURRENT_SPEAK_SOUND).l
+		clr.w   (SPEECH_SFX).l
 		lea     (byte_FFAF82).l,a5
 		move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
 		moveq   #0,d0
@@ -1741,7 +1741,7 @@ bsc10_displayMessage:
 		move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
 		move.l  (a6)+,((TEXT_NUMBER-$1000000)).w
-		clr.w   (CURRENT_SPEAK_SOUND).l
+		clr.w   (SPEECH_SFX).l
 		tst.b   ((DISPLAY_BATTLE_MESSAGES-$1000000)).w
 		bne.s   loc_1920C
 		jsr     (DisplayText).l 
@@ -1777,7 +1777,7 @@ bsc11_displayMessageWithNoWait:
 		move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
 		move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
 		move.l  (a6)+,((TEXT_NUMBER-$1000000)).w
-		clr.w   (CURRENT_SPEAK_SOUND).l
+		clr.w   (SPEECH_SFX).l
 		jmp     (DisplayText).l 
 
 	; End of function bsc11_displayMessageWithNoWait

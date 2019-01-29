@@ -393,7 +393,7 @@ loc_23EAA:
 
 sub_23EB0:
 		jsr     (sub_4ED8).w
-		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
+		clr.w   ((SPEECH_SFX-$1000000)).w
 		link    a6,#-$10
 		andi.w  #$FF,d0
 		move.w  d0,-2(a6)
@@ -1926,7 +1926,7 @@ loc_25188:
 
 sub_2519E:
 		clr.b   ((word_FFAF8E-$1000000)).w
-		clr.w   ((MOVE_SOUND-$1000000)).w
+		clr.w   ((MOVE_SFX-$1000000)).w
 		bsr.w   ControlUnitCursor
 		btst    #INPUT_A_B_BIT,((P1_INPUT-$1000000)).w
 		beq.s   BattlefieldMenuActions
@@ -2023,7 +2023,7 @@ loc_252A6:
 		bmi.w   loc_25236
 		move.l  ((SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER_FROM_SRAM-$1000000)).w
 		setFlg  $58             ; checks if a game has been saved for copying purposes? (or if saved from battle?)
-		move.w  ((SAVE_SLOT_BEING_USED-$1000000)).w,d0
+		move.w  ((SAVE_SLOT_INDEX-$1000000)).w,d0
 		                enableSram
 		jsr     (SaveGame).l
                 disableSram
@@ -2511,17 +2511,17 @@ UpdateMoveSound:
 		
 		cmpi.b  #CODE_NOTHING_BYTE,((CURRENT_BATTLE-$1000000)).w
 		bne.s   loc_2579E
-		clr.w   ((MOVE_SOUND-$1000000)).w
+		clr.w   ((MOVE_SFX-$1000000)).w
 		bra.s   loc_257A4
 loc_2579E:
-		move.w  #SFX_WALKING,((MOVE_SOUND-$1000000)).w
+		move.w  #SFX_WALKING,((MOVE_SFX-$1000000)).w
 loc_257A4:
 		movem.w d0-d7,-(sp)
 		jsr     j_GetEquippedRing
 		cmpi.w  #ITEMIDX_CHIRRUP_SANDALS,d1
 						; HARDCODED chirrup sandals sfx
 		bne.s   loc_257BA
-		move.w  #SFX_BLOAB,((MOVE_SOUND-$1000000)).w
+		move.w  #SFX_BLOAB,((MOVE_SFX-$1000000)).w
 loc_257BA:
 		movem.w (sp)+,d0-d7
 		rts

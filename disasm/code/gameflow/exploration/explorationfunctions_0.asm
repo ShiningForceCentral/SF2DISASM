@@ -114,7 +114,7 @@ sub_23862:
 		rts
 loc_2386C:
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
-		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
+		clr.w   ((SPEECH_SFX-$1000000)).w
 		lea     ((ENTITY_DATA-$1000000)).w,a0
 		lsl.w   #5,d0
 		adda.w  d0,a0

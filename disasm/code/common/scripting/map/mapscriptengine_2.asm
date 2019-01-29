@@ -164,10 +164,10 @@ csc00_displaySingleTextbox:
 		movea.l (sp)+,a6
 		move.w  (a6),d0
 		bsr.w   GetEntityPortraitAndSpeechSfx
-		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  d2,((SPEECH_SFX-$1000000)).w
 		bra.s   loc_47270
 loc_4726A:
-		move.w  #0,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  #0,((SPEECH_SFX-$1000000)).w
 loc_47270:
 		adda.w  #2,a6
 		move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
@@ -199,10 +199,10 @@ csc01_displaySingleTextboxWithVars:
 		movea.l (sp)+,a6
 		move.w  (a6),d0
 		bsr.w   GetEntityPortraitAndSpeechSfx
-		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  d2,((SPEECH_SFX-$1000000)).w
 		bra.s   loc_472BE
 loc_472B8:
-		move.w  #0,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  #0,((SPEECH_SFX-$1000000)).w
 loc_472BE:
 		adda.w  #2,a6
 		move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
@@ -233,10 +233,10 @@ csc02_displayTextbox:
 		movea.l (sp)+,a6
 		move.w  (a6),d0
 		bsr.w   GetEntityPortraitAndSpeechSfx
-		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  d2,((SPEECH_SFX-$1000000)).w
 		bra.s   loc_47314
 loc_4730E:
-		move.w  #0,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  #0,((SPEECH_SFX-$1000000)).w
 loc_47314:
 		adda.w  #2,a6
 		move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
@@ -263,10 +263,10 @@ csc03_displayTextboxWithVars:
 		movea.l (sp)+,a6
 		move.w  (a6),d0
 		bsr.w   GetEntityPortraitAndSpeechSfx
-		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  d2,((SPEECH_SFX-$1000000)).w
 		bra.s   loc_47352
 loc_4734C:
-		move.w  #0,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  #0,((SPEECH_SFX-$1000000)).w
 loc_47352:
 		adda.w  #2,a6
 		move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
@@ -336,7 +336,7 @@ csc07_executeMapSystemEvent:
 
 csc08_joinForce:
 		
-		move.w  #0,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  #0,((SPEECH_SFX-$1000000)).w
 		jsr     (WaitForCameraToCatchUp).w
 		move.w  (a6)+,d0
 		bclr    #$F,d0

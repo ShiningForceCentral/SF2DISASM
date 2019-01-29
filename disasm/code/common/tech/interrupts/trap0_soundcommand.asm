@@ -21,7 +21,7 @@ loc_466:
 		bne.s   loc_472
 		move.w  d0,d1           ; if param = FFFF, then get param from d0
 loc_472:
-		tst.b   ((DONT_SEND_SOUND_COMMANDS-$1000000)).w
+		tst.b   ((SOUND_COMMANDS_DEACTIVATED-$1000000)).w
 		bne.s   loc_48A
 		lea     (SOUND_COMMAND_QUEUE).l,a0
 		moveq   #3,d0

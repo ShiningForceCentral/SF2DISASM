@@ -21,7 +21,7 @@ InitWitchSuspendVIntFunctions:
 		bsr.w   InitDisplay     
 		bsr.w   DisableDisplayAndVInt
 		clr.b   ((byte_FFB198-$1000000)).w
-		move.w  #$48,((CURRENT_SPEAK_SOUND-$1000000)).w 
+		move.w  #$48,((SPEECH_SFX-$1000000)).w 
 		bsr.w   DisplayWitchScreen
 		bsr.w   EnableDisplayAndInterrupts
 		movea.l (p_WitchLayout).l,a0

@@ -69,7 +69,7 @@ loc_47576:
 
 sub_47586:
 		movem.l d0-d5/d7-a1,-(sp)
-		clr.w   ((CURRENT_SPEAK_SOUND-$1000000)).w
+		clr.w   ((SPEECH_SFX-$1000000)).w
 		andi.w  #ITEM_MASK_IDX,d4
 		move.b  d2,((byte_FFB651-$1000000)).w
 		moveq   #0,d6
@@ -153,7 +153,7 @@ loc_4765A:
 		bra.s   loc_47638
 loc_4765E:
 		bsr.w   GetEntityPortraitAndSpeechSfx
-		move.w  d2,((CURRENT_SPEAK_SOUND-$1000000)).w
+		move.w  d2,((SPEECH_SFX-$1000000)).w
 		move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
 		blt.s   loc_47670
 		bsr.w   LoadAndDisplayCurrentPortrait

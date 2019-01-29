@@ -486,7 +486,7 @@ loc_2306A:
 		beq.s   loc_23074
 		ori.b   #$C,$1C(a1)
 loc_23074:
-		move.w  ((MOVE_SOUND-$1000000)).w,d0
+		move.w  ((MOVE_SFX-$1000000)).w,d0
 		sndCom  SOUND_COMMAND_GET_D0_PARAMETER
 		bsr.w   UpdateControlledUnitPos
 		move.w  -2(a6),d0

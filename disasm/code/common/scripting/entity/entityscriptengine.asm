@@ -672,7 +672,7 @@ loc_52DE:
 		bne.w   loc_531E
 loc_52E8:
 		move.w  d0,-(sp)
-		move.w  ((MOVE_SOUND-$1000000)).w,d0
+		move.w  ((MOVE_SFX-$1000000)).w,d0
 		sndCom  SOUND_COMMAND_GET_D0_PARAMETER
 		move.w  (sp)+,d0
 		move.w  d2,4(a0)
