@@ -6,26 +6,21 @@
 
 ms_map42_AreaDescriptions:
 		
-		move.w  #$1B2,d3
-		lea     word_5FE34(pc), a0
+		move.w  #$1B2,d3        ; "Nothing special there.{W1}"
+		lea     byte_5FE34(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map42_AreaDescriptions
 
-word_5FE34:     dc.w $2702
-		dc.b $FF
-		dc.b 1
-		dc.w sub_5FE68-word_5FE34
-		dc.w $2702
-		dc.b 0
-		dc.b 1
-		dc.w sub_5FE42-word_5FE34
-		dc.w $FD00
+byte_5FE34:     msDescFunctionD6 39, 2, $FF, Map42_DescFunc0-byte_5FE34
+		msDescFunction 39, 2, Map42_DescFunc1-byte_5FE34
+		msDescEnd
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FE42:
+Map42_DescFunc1:
+		
 		 
 		chkFlg  $386            ; set after you pull the Force Sword out
 		bne.s   loc_5FE52
@@ -41,12 +36,13 @@ loc_5FE52:
 return_5FE66:
 		rts
 
-	; End of function sub_5FE42
+	; End of function Map42_DescFunc1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FE68:
+Map42_DescFunc0:
+		
 		 
 		chkFlg  $386            ; set after you pull the Force Sword out
 		bne.s   loc_5FE7A
@@ -62,5 +58,5 @@ loc_5FE7A:
 return_5FE8E:
 		rts
 
-	; End of function sub_5FE68
+	; End of function Map42_DescFunc0
 

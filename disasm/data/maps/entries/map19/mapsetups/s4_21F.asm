@@ -6,26 +6,17 @@
 
 ms_map19_flag21F_AreaDescriptions:
 		
-		move.w  #$FD4,d3
-		lea     word_62C82(pc), a0
+		move.w  #$FD4,d3        ; "A book...{N}GRANSEAL KINGS{W1}"
+		lea     byte_62C82(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map19_flag21F_AreaDescriptions
 
-word_62C82:     dc.w $1303
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 0
-		dc.w $1403
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $D14
-		dc.b 0
-		dc.b 0
-		dc.b 5
-		dc.b 2
-		dc.w $FD00
+byte_62C82:     msDesc 19, 3, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}GRANSEAL KINGS{W1}"
+		msDesc 20, 3, 4, 1      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}TREASURES{W1}"
+		msDesc 13, 20, 5, 2     ; "{NAME} looked into{N}the well.{W2}{CLEAR}"
+														; "A deep, dark well.{N}...very cool!{W1}"
+		msDescEnd

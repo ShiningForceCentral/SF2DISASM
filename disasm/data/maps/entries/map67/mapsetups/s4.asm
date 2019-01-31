@@ -6,22 +6,20 @@
 
 ms_map67_AreaDescriptions:
 		
-		move.w  #$1B2,d3
-		lea     word_4FCDE(pc), a0
+		move.w  #$1B2,d3        ; "Nothing special there.{W1}"
+		lea     byte_4FCDE(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map67_AreaDescriptions
 
-word_4FCDE:     dc.w $3917
-		dc.b 0
-		dc.b 1
-		dc.w sub_4FCE6-word_4FCDE
-		dc.w $FD00
+byte_4FCDE:     msDescFunction 57, 23, Map67_DescFunc0-byte_4FCDE
+		msDescEnd
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FCE6:
+Map67_DescFunc0:
+		
 		 
 		txt     $1A8            ; "{NAME} investigated.{W2}{CLEAR}"
 		chkFlg  $2EF            ; set after Elric opens the passage to Devil's Tail
@@ -52,5 +50,5 @@ byte_4FD3C:
 return_4FD40:
 		rts
 
-	; End of function sub_4FCE6
+	; End of function Map67_DescFunc0
 

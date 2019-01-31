@@ -6,26 +6,21 @@
 
 ms_map41_AreaDescriptions:
 		
-		move.w  #$DB7,d3
-		lea     word_5F41E(pc), a0
+		move.w  #$DB7,d3        ; "A statue of a devil's head.{N}It looks ready to bite you.{W1}"
+		lea     byte_5F41E(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map41_AreaDescriptions
 
-word_5F41E:     dc.w $607
-		dc.b $FF
-		dc.b 1
-		dc.w sub_5F42C-word_5F41E
-		dc.w $607
-		dc.b 0
-		dc.b 1
-		dc.w sub_5F456-word_5F41E
-		dc.w $FD00
+byte_5F41E:     msDescFunctionD6 6, 7, $FF, Map41_DescFunc0-byte_5F41E
+		msDescFunction 6, 7, Map41_DescFunc1-byte_5F41E
+		msDescEnd
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5F42C:
+Map41_DescFunc0:
+		
 		 
 		chkFlg  $3A2            ; set after opening Devil's Head with the Force Sword
 		bne.s   byte_5F44C      
@@ -45,12 +40,13 @@ byte_5F44C:
 return_5F454:
 		rts
 
-	; End of function sub_5F42C
+	; End of function Map41_DescFunc0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5F456:
+Map41_DescFunc1:
+		
 		 
 		chkFlg  $3A2            ; set after opening Devil's Head with the Force Sword
 		bne.s   byte_5F462      
@@ -62,5 +58,5 @@ byte_5F462:
 return_5F46A:
 		rts
 
-	; End of function sub_5F456
+	; End of function Map41_DescFunc1
 

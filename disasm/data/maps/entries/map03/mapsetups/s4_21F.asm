@@ -6,96 +6,45 @@
 
 ms_map3_flag21F_AreaDescriptions:
 		
-		move.w  #$FC3,d3
-		lea     word_62856(pc), a0
+		move.w  #$FC3,d3        ; "Welcome!{N}WEAPONS and ITEMS{W1}"
+		lea     byte_62856(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map3_flag21F_AreaDescriptions
 
-word_62856:     dc.w $916
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 0
-		dc.w $704
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $709
-		dc.b 0
-		dc.b 0
-		dc.b 3
-		dc.b 2
-		dc.w $1A0D
-		dc.b 0
-		dc.b 0
-		dc.b 5
-		dc.b 3
-		dc.w $2806
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 4
-		dc.w $2906
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 5
-		dc.w $2A06
-		dc.b 0
-		dc.b 0
-		dc.b 6
-		dc.b 6
-		dc.w $2B06
-		dc.b 0
-		dc.b 0
-		dc.b 6
-		dc.b 7
-		dc.w $2C06
-		dc.b 0
-		dc.b 0
-		dc.b 6
-		dc.b 8
-		dc.w $350D
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 9
-		dc.w $360D
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b $A
-		dc.w $370D
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b $B
-		dc.w $380D
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b $C
-		dc.w $380F
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b $D
-		dc.w $390F
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b $E
-		dc.w $3A0F
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b $F
-		dc.w $3B0F
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b $10
-		dc.w $FD00
+byte_62856:     msDesc 9, 22, 2, 0      ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "Welcome!{N}WEAPONS and ITEMS{W1}"
+		msDesc 7, 4, 4, 1       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}ATTITUDE OF SOLDIERS{W1}"
+		msDesc 7, 9, 3, 2       ; "{NAME} investigated{N}the wash basin.{W2}{CLEAR}"
+														; "Soapy water...{N}(gulp, gulp)...yuck!{N}That tastes disgusting!{W1}"
+		msDesc 26, 13, 5, 3     ; "{NAME} looked into{N}the well.{W2}{CLEAR}"
+														; "A deep well.{W1}"
+		msDesc 40, 6, 4, 4      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}HEALING MAGIC{W1}"
+		msDesc 41, 6, 4, 5      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}BEGINNER SWORDSMANSHIP{W1}"
+		msDesc 42, 6, 6, 6      ; "{NAME} looked at{N}the paper.{W2}{CLEAR}"
+														; "It reads...{N}Nothing to fear but fear{N}itself.{W1}"
+		msDesc 43, 6, 6, 7      ; "{NAME} looked at{N}the paper.{W2}{CLEAR}"
+														; "It reads...{N}Look before you leap.{W1}"
+		msDesc 44, 6, 6, 8      ; "{NAME} looked at{N}the paper.{W2}{CLEAR}"
+														; "It reads...{N}No pain, no gain.{N}...is this true?{W1}"
+		msDesc 53, 13, 4, 9     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}THE LEGEND OF MAX{W1}"
+		msDesc 54, 13, 4, 10    ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}BE GOOD{W1}"
+		msDesc 55, 13, 4, 11    ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}LITTLE DINOSAURS{W1}"
+		msDesc 56, 13, 4, 12    ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}SEGA GUIDE{N}...sounds good.{W1}"
+		msDesc 56, 15, 4, 13    ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}AN OLD GOAT{N}...Sir Astral?{W1}"
+		msDesc 57, 15, 4, 14    ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}GUIDE TO THE CASTLE{W1}"
+		msDesc 58, 15, 4, 15    ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}STUDY OF YOGURT{W1}"
+		msDesc 59, 15, 4, 16    ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}SCIENCE 101{W1}"
+		msDescEnd

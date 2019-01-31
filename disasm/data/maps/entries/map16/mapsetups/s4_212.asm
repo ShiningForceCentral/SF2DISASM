@@ -6,56 +6,29 @@
 
 ms_map16_flag212_AreaDescriptions:
 		
-		move.w  #$FEA,d3
-		lea     word_61164(pc), a0
+		move.w  #$FEA,d3        ; "A book...{N}HISTORY OF GALAM{W1}"
+		lea     byte_61164(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map16_flag212_AreaDescriptions
 
-word_61164:     dc.w $1405
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 0
-		dc.w $1505
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $2710
-		dc.b 0
-		dc.b 0
-		dc.b 5
-		dc.b 2
-		dc.w $2419
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 3
-		dc.w $2619
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 4
-		dc.w $210A
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 5
-		dc.w $1A11
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 6
-		dc.w $2415
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 7
-		dc.w $1718
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.b 8
-		dc.w $FD00
+byte_61164:     msDesc 20, 5, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}HISTORY OF GALAM{W1}"
+		msDesc 21, 5, 4, 1      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}SOLDIERS{W1}"
+		msDesc 39, 16, 5, 2     ; "{NAME} looked into{N}the well.{W2}{CLEAR}"
+														; "A deep well.{W1}"
+		msDesc 36, 25, 2, 3     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "ITEMS{W1}"
+		msDesc 38, 25, 2, 4     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "WEAPONS{W1}"
+		msDesc 33, 10, 4, 5     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}JOY OF FANTASY{W1}"
+		msDesc 26, 17, 4, 6     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}MYTHOLOGY{W1}"
+		msDesc 36, 21, 4, 7     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}ART OF SELLING{W1}"
+		msDesc 23, 24, 0, 8     ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+														; "A hole.{W1}"
+		msDescEnd

@@ -1,13 +1,13 @@
 Map setup definitions
 
-0x4f6e2     start of map setups list
+0x4F6E2     Map Setups Table
 
-Address 1   entity locations
-Address 2   entity-activated events (entity #, facing, offset to cutscene script (2 bytes)) (entity is FD for "default")
-Address 3   zone-activated events
-Address 4   interactive things (notes, books, wells, etc)
+Address 1   Entities
+Address 2   Entity Events : entity, facing, function
+Address 3   Zone Events : x, y, function
+Address 4   Area Descriptions function with base text index and entry table : x, y, investigation line, description line / x, y, function
 Address 5   flag + tile locations + ??? (seems rather special; only Ribble, Hassan, DesktopWorld, Nazca Ship, Devil's Head, etc have it)
-Address 6   map initialization function
+Address 6   Init Function
 
 
 

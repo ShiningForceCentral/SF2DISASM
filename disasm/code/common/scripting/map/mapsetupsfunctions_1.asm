@@ -261,24 +261,25 @@ DisplayAreaDescription:
 		clr.w   d7
 loc_4772C:
 		cmpi.b  #$FD,(a0,d7.w)
-		bne.s   loc_47738
+		bne.s   loc_47738       
 		clr.w   d7
 		rts
 loc_47738:
-		cmp.w   (a0,d7.w),d0
+		cmp.w   (a0,d7.w),d0    ; check coordinates
 		bne.w   loc_4778C
 		tst.b   2(a0,d7.w)
 		beq.s   loc_4774C
-		tst.w   d6
+		tst.w   d6              ; Case when byte 2 not clear, but what's the content of d6 ?
 		bne.w   loc_4778C
 loc_4774C:
 		tst.b   3(a0,d7.w)
-		bne.s   loc_4777C
+		bne.s   loc_4777C       
 		clr.w   d0
-		move.b  4(a0,d7.w),d0
+		move.b  4(a0,d7.w),d0   ; byte 4 : Investigation line index
 		clr.w   d1
-		move.b  5(a0,d7.w),d1
-		addi.w  #$1A7,d0        ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+		move.b  5(a0,d7.w),d1   ; byte 5 : Description line index
+		addi.w  #$1A7,d0        ; HARDCODED investigation line start index
+														; "{NAME} investigated{N}the area.{W2}{CLEAR}"
 														; Followed by all other "investigation" lines
 		jsr     (DisplayText).w 
 		move.w  d1,d0
@@ -290,7 +291,7 @@ loc_4776E:
 		moveq   #$FFFFFFFF,d7
 		rts
 loc_4777C:
-		adda.w  4(a0,d7.w),a0
+		adda.w  4(a0,d7.w),a0   ; when bytes 2-3 = $0001, execute function
 		movem.w d6,-(sp)
 		jsr     (a0)
 		movem.w (sp)+,d6

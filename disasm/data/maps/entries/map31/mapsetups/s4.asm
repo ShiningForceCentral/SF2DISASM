@@ -6,51 +6,31 @@
 
 ms_map31_AreaDescriptions:
 		
-		move.w  #$1045,d3
-		lea     word_5D584(pc), a0
+		move.w  #$1045,d3       ; "A book...{N}MYSTERY OF NAZCA{W1}"
+		lea     byte_5D584(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map31_AreaDescriptions
 
-word_5D584:     dc.w $81A
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 0
-		dc.w $1416
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $421
-		dc.b 0
-		dc.b 0
-		dc.b 5
-		dc.b 2
-		dc.w $1912
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 3
-		dc.w $1A12
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 4
-		dc.w $1D05
-		dc.b 0
-		dc.b 1
-		dc.w sub_5D5B0-word_5D584
-		dc.w $803
-		dc.b 1
-		dc.b 1
-		dc.w sub_5D5BE-word_5D584
-		dc.w $FD00
+byte_5D584:     msDesc 8, 26, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}MYSTERY OF NAZCA{W1}"
+		msDesc 20, 22, 4, 1     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}A PAINTING FLIES{W1}"
+		msDesc 4, 33, 5, 2      ; "{NAME} looked into{N}the well.{W2}{CLEAR}"
+														; "A dried up well.{W1}"
+		msDesc 25, 18, 2, 3     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "WEAPONS SHOP{W1}"
+		msDesc 26, 18, 2, 4     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "ITEMS SHOP{W1}"
+		msDescFunction 29, 5, Map31_DescFunc0-byte_5D584
+		msDescFunctionD6 8, 3, $1, Map31_DescFunc1-byte_5D584
+		msDescEnd
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5D5B0:
+Map31_DescFunc0:
+		
 		 
 		chkFlg  $340            ; set after talking to the painter in Moun for the first time
 		beq.s   return_5D5BC
@@ -58,12 +38,13 @@ sub_5D5B0:
 return_5D5BC:
 		rts
 
-	; End of function sub_5D5B0
+	; End of function Map31_DescFunc0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5D5BE:
+Map31_DescFunc1:
+		
 		 
 		chkFlg  $342            ; set after making the Arm of Golem appear in Moun
 		beq.s   return_5D60C
@@ -93,5 +74,5 @@ byte_5D608:
 return_5D60C:
 		rts
 
-	; End of function sub_5D5BE
+	; End of function Map31_DescFunc1
 

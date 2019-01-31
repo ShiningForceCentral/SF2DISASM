@@ -6,70 +6,35 @@
 
 ms_map8_AreaDescriptions:
 		
-		move.w  #$546,d3
-		lea     word_561FC(pc), a0
+		move.w  #$546,d3        ; "It reads...{N}NO STRANGERS!{N}-Shopkeeper{W1}"
+		lea     byte_561FC(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map8_AreaDescriptions
 
-word_561FC:     dc.w $50F
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b $B
-		dc.w $1B0F
-		dc.b 0
-		dc.b 0
-		dc.b 5
-		dc.b $C
-		dc.w $60F
-		dc.b 0
-		dc.b 1
-		dc.w sub_56246-word_561FC
-		dc.w $70F
-		dc.b 0
-		dc.b 1
-		dc.w sub_56246-word_561FC
-		dc.w $719
-		dc.b 0
-		dc.b 1
-		dc.w sub_5626C-word_561FC
-		dc.w $190C
-		dc.b 0
-		dc.b 1
-		dc.w sub_5626C-word_561FC
-		dc.w $1618
-		dc.b 0
-		dc.b 1
-		dc.w sub_5626C-word_561FC
-		dc.w $619
-		dc.b 0
-		dc.b 0
-		dc.b 6
-		dc.b 3
-		dc.w $1A0C
-		dc.b 0
-		dc.b 0
-		dc.b 6
-		dc.b 6
-		dc.w $1808
-		dc.b 0
-		dc.b 1
-		dc.w sub_5629A-word_561FC
-		dc.w $F12
-		dc.b 0
-		dc.b 1
-		dc.w byte_562BA-word_561FC
-		dc.w $1012
-		dc.b 0
-		dc.b 1
-		dc.w byte_562BA-word_561FC
-		dc.w $FD00
+byte_561FC:     msDesc 5, 15, 2, 11     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "WEAPONS AND ITEMS{N}BY HASSAN{W1}"
+		msDesc 27, 15, 5, 12    ; "{NAME} looked into{N}the well.{W2}{CLEAR}"
+														; "A very deep well.{W1}"
+		msDescFunction 6, 15, Map8_DescFunc0-byte_561FC
+		msDescFunction 7, 15, Map8_DescFunc0-byte_561FC
+		msDescFunction 7, 25, Map8_DescFunc2-byte_561FC
+		msDescFunction 25, 12, Map8_DescFunc2-byte_561FC
+		msDescFunction 22, 24, Map8_DescFunc2-byte_561FC
+		msDesc 6, 25, 6, 3      ; "{NAME} looked at{N}the paper.{W2}{CLEAR}"
+														; "Historian Paseran{W1}"
+		msDesc 26, 12, 6, 6     ; "{NAME} looked at{N}the paper.{W2}{CLEAR}"
+														; "Historian Keseran{W1}"
+		msDescFunction 24, 8, Map8_DescFunc5-byte_561FC
+		msDescFunction 15, 18, Map8_DescFunc6-byte_561FC
+		msDescFunction 16, 18, Map8_DescFunc6-byte_561FC
+		msDescEnd
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56246:
+Map8_DescFunc0:
+		
 		 
 		chkFlg  $2C4            ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   loc_56256
@@ -85,12 +50,13 @@ loc_56256:
 return_5626A:
 		rts
 
-	; End of function sub_56246
+	; End of function Map8_DescFunc0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5626C:
+Map8_DescFunc2:
+		
 		 
 		chkFlg  $2C4            ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   loc_56284
@@ -108,12 +74,13 @@ loc_56284:
 return_56298:
 		rts
 
-	; End of function sub_5626C
+	; End of function Map8_DescFunc2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5629A:
+Map8_DescFunc5:
+		
 		move.w  #$54D,d0
 		jsr     (DisplayText).w 
 		move.w  #$54E,d0
@@ -122,7 +89,8 @@ sub_5629A:
 		jsr     (DisplayText).w 
 		move.w  #$550,d0
 		jmp     (DisplayText).w 
-byte_562BA:
+Map8_DescFunc6:
+		
 		chkFlg  $2DB            ; set after you open the tree in Ribble with the wooden plank
 		bne.s   loc_562CA
 		move.w  #$54A,d0
@@ -136,5 +104,5 @@ loc_562CA:
 		jsr     (DisplayText).w 
 		rts
 
-	; End of function sub_5629A
+	; End of function Map8_DescFunc5
 

@@ -6,58 +6,31 @@
 
 ms_map43_AreaDescriptions:
 		
-		move.w  #$FE1,d3
-		lea     word_5406C(pc), a0
+		move.w  #$FE1,d3        ; "A book...{N}DIARY{W1}"
+		lea     byte_5406C(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map43_AreaDescriptions
 
-word_5406C:     dc.w $302
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 0
-		dc.w $402
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $502
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 2
-		dc.w $802
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 3
-		dc.w $305
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 4
-		dc.w $405
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 5
-		dc.w $906
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 6
-		dc.w $C06
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 7
-		dc.w $F0A
-		dc.b 0
-		dc.b 0
-		dc.b 5
-		dc.b 8
-		dc.w $FD00
+byte_5406C:     msDesc 3, 2, 4, 0       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}DIARY{W1}"
+		msDesc 4, 2, 4, 1       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}HISTORY OF GRANS{W1}"
+		msDesc 5, 2, 4, 2       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}THE GROUND SEAL{W1}"
+		msDesc 8, 2, 4, 3       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}SACRED WAR{W1}"
+		msDesc 3, 5, 4, 4       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}LIVING ALONE{W1}"
+		msDesc 4, 5, 4, 5       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}STUDY OF THE TOWER{W1}"
+		msDesc 9, 6, 4, 6       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}MOUNTAINS{W1}"
+		msDesc 12, 6, 4, 7      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}VILLAGES{W1}"
+		msDesc 15, 10, 5, 8     ; "{NAME} looked into{N}the well.{W2}{CLEAR}"
+														; "A deep, and dirty well.{W1}"
+		msDescEnd
 		dc.b $4E 
 		dc.b $75 

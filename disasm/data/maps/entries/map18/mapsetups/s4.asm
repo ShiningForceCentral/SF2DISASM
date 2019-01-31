@@ -6,18 +6,15 @@
 
 ms_map18_AreaDescriptions:
 		
-		move.w  #$FF3,d3
-		lea     word_52B36(pc), a0
+		move.w  #$FF3,d3        ; "It reads...{N}RESPECT YOUR PARENTS{W1}"
+		lea     byte_52B36(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map18_AreaDescriptions
 
-word_52B36:     dc.w $C09
-		dc.b 0
-		dc.b 0
-		dc.b 6
-		dc.b 0
-		dc.w $FD00
+byte_52B36:     msDesc 12, 9, 6, 0      ; "{NAME} looked at{N}the paper.{W2}{CLEAR}"
+														; "It reads...{N}RESPECT YOUR PARENTS{W1}"
+		msDescEnd
 		dc.b $4E 
 		dc.b $75 

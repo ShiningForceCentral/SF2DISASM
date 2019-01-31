@@ -6,16 +6,13 @@
 
 ms_map11_AreaDescriptions:
 		
-		move.w  #$1010,d3
-		lea     word_57A98(pc), a0
+		move.w  #$1010,d3       ; "A big statue of a heroic{N}bird.{W1}"
+		lea     byte_57A98(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map11_AreaDescriptions
 
-word_57A98:     dc.w $60C
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 0
-		dc.w $FD00
+byte_57A98:     msDesc 6, 12, 9, 0      ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A big statue of a heroic{N}bird.{W1}"
+		msDescEnd

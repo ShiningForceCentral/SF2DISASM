@@ -6,46 +6,25 @@
 
 ms_map2_AreaDescriptions:
 		
-		move.w  #$1030,d3
-		lea     word_5EA36(pc), a0
+		move.w  #$1030,d3       ; "Various weapons!{N}-inquire within{W1}"
+		lea     byte_5EA36(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map2_AreaDescriptions
 
-word_5EA36:     dc.w $80D
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 0
-		dc.w $F0A
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 1
-		dc.w $110E
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 2
-		dc.w $1112
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 3
-		dc.w $1912
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 4
-		dc.w $605
-		dc.b 0
-		dc.b 0
-		dc.b 5
-		dc.b 5
-		dc.w $190E
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 7
-		dc.w $FD00
+byte_5EA36:     msDesc 8, 13, 2, 0      ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "Various weapons!{N}-inquire within{W1}"
+		msDesc 15, 10, 2, 1     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "Various tools!{N}-inquire within{W1}"
+		msDesc 17, 14, 9, 2     ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of a fine soldier.{W1}"
+		msDesc 17, 18, 9, 3     ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of a fine soldier.{W1}"
+		msDesc 25, 18, 9, 4     ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of a fine soldier.{W1}"
+		msDesc 6, 5, 5, 5       ; "{NAME} looked into{N}the well.{W2}{CLEAR}"
+														; "A sturdy well.{N}No water there.{W1}"
+		msDesc 25, 14, 9, 7     ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of a fine soldier.{W1}"
+		msDescEnd

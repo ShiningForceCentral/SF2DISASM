@@ -6,26 +6,17 @@
 
 ms_map23_AreaDescriptions:
 		
-		move.w  #$1015,d3
-		lea     word_59BE8(pc), a0
+		move.w  #$1015,d3       ; "A book...{N}AN APPLE A DAY{W1}"
+		lea     byte_59BE8(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map23_AreaDescriptions
 
-word_59BE8:     dc.w $514
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 0
-		dc.w $3302
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $3402
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 2
-		dc.w $FD00
+byte_59BE8:     msDesc 5, 20, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}AN APPLE A DAY{W1}"
+		msDesc 51, 2, 4, 1      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}HOME-MADE POTIONS{W1}"
+		msDesc 52, 2, 4, 2      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}FAIRIES{W1}"
+		msDescEnd

@@ -6,71 +6,39 @@
 
 ms_map6_AreaDescriptions:
 		
-		move.w  #$FF4,d3
-		lea     word_54D9A(pc), a0
+		move.w  #$FF4,d3        ; "A book...{N}GREAT VOYAGE{W1}"
+		lea     byte_54D9A(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map6_AreaDescriptions
 
-word_54D9A:     dc.w $507
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 0
-		dc.w $607
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $40E
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 2
-		dc.w $50E
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 3
-		dc.w $60E
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 4
-		dc.w $1306
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 5
-		dc.w $110D
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 6
-		dc.w $100D
-		dc.b 0
-		dc.b 1
-		dc.w sub_54DDE-word_54D9A
-		dc.w $1D07
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 8
-		dc.w $1411
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 9
-		dc.w $1518
-		dc.b 0
-		dc.b 1
-		dc.w sub_54E04-word_54D9A
-		dc.w $FD00
+byte_54D9A:     msDesc 5, 7, 4, 0       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}GREAT VOYAGE{W1}"
+		msDesc 6, 7, 4, 1       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}FATHER CARPENTER{W1}"
+		msDesc 4, 14, 4, 2      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}SOAP OPERAS{W1}"
+		msDesc 5, 14, 4, 3      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A magazine...{N}HUNTER'S LIFE{W1}"
+		msDesc 6, 14, 4, 4      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}DESPOTISM{W1}"
+		msDesc 19, 6, 4, 5      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}AGRICULTURE{W1}"
+		msDesc 17, 13, 2, 6     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "ITEMS{W1}"
+		msDescFunction 16, 13, Map6_DescFunc0-byte_54D9A
+		msDesc 29, 7, 2, 8      ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "WEAPONS{W1}"
+		msDesc 20, 17, 4, 9     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}BUY AND SELL{W1}"
+		msDescFunction 21, 24, Map6_DescFunc1-byte_54D9A
+		msDescEnd
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54DDE:
+Map6_DescFunc0:
+		
 		 
 		chkFlg  $2BE            ; set after the scene with Peter at the Castle (ends with you leaving the Castle)
 		bne.s   loc_54DEE
@@ -86,12 +54,13 @@ loc_54DEE:
 return_54E02:
 		rts
 
-	; End of function sub_54DDE
+	; End of function Map6_DescFunc0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54E04:
+Map6_DescFunc1:
+		
 		move.w  #$FFE,d0
 		jsr     (DisplayText).w 
 		jsr     j_YesNoPrompt
@@ -116,5 +85,5 @@ loc_54E38:
 return_54E4A:
 		rts
 
-	; End of function sub_54E04
+	; End of function Map6_DescFunc1
 

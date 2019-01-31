@@ -6,16 +6,13 @@
 
 ms_map29_AreaDescriptions:
 		
-		move.w  #$104F,d3
-		lea     word_5A164(pc), a0
+		move.w  #$104F,d3       ; "A book...{N}LIFE IN A CAVE{W1}"
+		lea     byte_5A164(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map29_AreaDescriptions
 
-word_5A164:     dc.w $3609
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 0
-		dc.w $FD00
+byte_5A164:     msDesc 54, 9, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}LIFE IN A CAVE{W1}"
+		msDescEnd

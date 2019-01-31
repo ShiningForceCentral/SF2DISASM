@@ -6,126 +6,57 @@
 
 ms_map33_AreaDescriptions:
 		
-		move.w  #$1018,d3
-		lea     word_5AAE8(pc), a0
+		move.w  #$1018,d3       ; "A book...{N}DEMON KINGS{W1}"
+		lea     byte_5AAE8(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map33_AreaDescriptions
 
-word_5AAE8:     dc.w $E02
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 0
-		dc.w $F02
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $1002
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 2
-		dc.w $1102
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 3
-		dc.w $1202
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 4
-		dc.w $1602
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 5
-		dc.w $E04
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 6
-		dc.w $F04
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 7
-		dc.w $1505
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 8
-		dc.w $1605
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 9
-		dc.w $90A
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b $A
-		dc.w $2A02
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 0
-		dc.w $2B02
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $2C02
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 2
-		dc.w $2D02
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 3
-		dc.w $2E02
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 4
-		dc.w $3202
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 5
-		dc.w $2A04
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 6
-		dc.w $2B04
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 7
-		dc.w $3105
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 8
-		dc.w $3205
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 9
-		dc.w $250A
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b $A
-		dc.w $B09
-		dc.b 0
-		dc.b 0
-		dc.b $A
-		dc.b $B
-		dc.w $FD00
+byte_5AAE8:     msDesc 14, 2, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}DEMON KINGS{W1}"
+		msDesc 15, 2, 4, 1      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}NEWT COOKING{W1}"
+		msDesc 16, 2, 4, 2      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}VAMPIRES{W1}"
+		msDesc 17, 2, 4, 3      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}CALL OF EVIL{W1}"
+		msDesc 18, 2, 4, 4      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}STUDY OF RUNES{W1}"
+		msDesc 22, 2, 4, 5      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}TODAY'S MAGIC{W1}"
+		msDesc 14, 4, 4, 6      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}EVIL CONTACT{W1}"
+		msDesc 15, 4, 4, 7      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}MAGICAL CHANGES{W1}"
+		msDesc 21, 5, 4, 8      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}BASIC RULES OF{N}POSSESSION{W1}"
+		msDesc 22, 5, 4, 9      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}GODS VS. DEVILS{W1}"
+		msDesc 9, 10, 4, 10     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}CHANNELING{W1}"
+		msDesc 42, 2, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}DEMON KINGS{W1}"
+		msDesc 43, 2, 4, 1      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}NEWT COOKING{W1}"
+		msDesc 44, 2, 4, 2      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}VAMPIRES{W1}"
+		msDesc 45, 2, 4, 3      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}CALL OF EVIL{W1}"
+		msDesc 46, 2, 4, 4      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}STUDY OF RUNES{W1}"
+		msDesc 50, 2, 4, 5      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}TODAY'S MAGIC{W1}"
+		msDesc 42, 4, 4, 6      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}EVIL CONTACT{W1}"
+		msDesc 43, 4, 4, 7      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}MAGICAL CHANGES{W1}"
+		msDesc 49, 5, 4, 8      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}BASIC RULES OF{N}POSSESSION{W1}"
+		msDesc 50, 5, 4, 9      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}GODS VS. DEVILS{W1}"
+		msDesc 37, 10, 4, 10    ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}CHANNELING{W1}"
+		msDesc 11, 9, 10, 11    ; "{NAME} investigated{N}the door.{W2}{CLEAR}"
+														; "It's locked.{W1}"
+		msDescEnd

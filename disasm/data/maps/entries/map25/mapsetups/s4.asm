@@ -6,66 +6,33 @@
 
 ms_map25_AreaDescriptions:
 		
-		move.w  #$1024,d3
-		lea     word_5D350(pc), a0
+		move.w  #$1024,d3       ; "A book...{N}TRAVELS{W1}"
+		lea     byte_5D350(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map25_AreaDescriptions
 
-word_5D350:     dc.w $20A
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 0
-		dc.w $30A
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $210
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 2
-		dc.w $61A
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 3
-		dc.w $F1A
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 4
-		dc.w $F0F
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 5
-		dc.w $E12
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 6
-		dc.w $1013
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 7
-		dc.w $161D
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 8
-		dc.w $1B18
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 9
-		dc.w $101C
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b $B
-		dc.w $FD00
+byte_5D350:     msDesc 2, 10, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}TRAVELS{W1}"
+		msDesc 3, 10, 4, 1      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}VILLAGES AND TOWNS{W1}"
+		msDesc 2, 16, 2, 2      ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "It reads...{N}Don't go out!  Or you'll{N}be punished!{N}- Devils{W1}"
+		msDesc 6, 26, 2, 3      ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "It reads...{N}You doubt the punishment?{N}- Devils{W1}"
+		msDesc 15, 26, 2, 4     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "It reads...{N}Church is closed!{W1}"
+		msDesc 15, 15, 2, 5     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "It reads...{N}No praying today!{N}- Devils{W1}"
+		msDesc 14, 18, 2, 6     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "It reads...{N}Pacalon will never come to{N}save you!{W1}"
+		msDesc 16, 19, 2, 7     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "It reads...{N}Don't work!{W1}"
+		msDesc 22, 29, 2, 8     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "It reads...{N}Mitula ignores you!{W1}"
+		msDesc 27, 24, 2, 9     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "It reads...{N}No weapon or item sales!{N}- Devils{W1}"
+		msDesc 16, 28, 2, 11    ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "It reads...{N}Village of Ketto{W1}"
+		msDescEnd

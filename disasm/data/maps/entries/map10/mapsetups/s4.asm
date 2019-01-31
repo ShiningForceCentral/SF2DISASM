@@ -6,56 +6,29 @@
 
 ms_map10_AreaDescriptions:
 		
-		move.w  #$1007,d3
-		lea     word_56FF0(pc), a0
+		move.w  #$1007,d3       ; "ITEMS{W1}"
+		lea     byte_56FF0(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map10_AreaDescriptions
 
-word_56FF0:     dc.w $2017
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 0
-		dc.w $1E1B
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 1
-		dc.w $2623
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 2
-		dc.w $2822
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 3
-		dc.w $B2A
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 4
-		dc.w $C2A
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 5
-		dc.w $1D30
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 6
-		dc.w $1E30
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 7
-		dc.w $2819
-		dc.b 0
-		dc.b 0
-		dc.b 6
-		dc.b 8
-		dc.w $FD00
+byte_56FF0:     msDesc 32, 23, 2, 0     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "ITEMS{W1}"
+		msDesc 30, 27, 2, 1     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "WEAPONS{W1}"
+		msDesc 38, 35, 4, 2     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}PHOENIX{W1}"
+		msDesc 40, 34, 4, 3     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}HOW TO FLY{W1}"
+		msDesc 11, 42, 4, 4     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}FIGHT WHILE FLYING{W1}"
+		msDesc 12, 42, 4, 5     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A magazine...{N}BIRDMEN TODAY{W1}"
+		msDesc 29, 48, 4, 6     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}DECORATE YOUR NEST{W1}"
+		msDesc 30, 48, 4, 7     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}WINGS AND FEATHERS{W1}"
+		msDesc 40, 25, 6, 8     ; "{NAME} looked at{N}the paper.{W2}{CLEAR}"
+														; "It reads...{N}Don't drink and fly!{W1}"
+		msDescEnd

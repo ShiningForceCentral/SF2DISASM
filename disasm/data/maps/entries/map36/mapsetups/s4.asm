@@ -6,56 +6,29 @@
 
 ms_map36_AreaDescriptions:
 		
-		move.w  #$1038,d3
-		lea     word_5D9D6(pc), a0
+		move.w  #$1038,d3       ; "A book...{N}PACALON KINGS{W1}"
+		lea     byte_5D9D6(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map36_AreaDescriptions
 
-word_5D9D6:     dc.w $2303
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 0
-		dc.w $2403
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $3808
-		dc.b 0
-		dc.b 0
-		dc.b $A
-		dc.b 2
-		dc.w $130F
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 3
-		dc.w $170F
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 4
-		dc.w $1A08
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 5
-		dc.w $2008
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 6
-		dc.w $1A0B
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 7
-		dc.w $200B
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 8
-		dc.w $FD00
+byte_5D9D6:     msDesc 35, 3, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}PACALON KINGS{W1}"
+		msDesc 36, 3, 4, 1      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}PALADIN HONOR{W1}"
+		msDesc 56, 8, 10, 2     ; "{NAME} investigated{N}the door.{W2}{CLEAR}"
+														; "It's locked.{W1}"
+		msDesc 19, 15, 9, 3     ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of a fine soldier.{W1}"
+		msDesc 23, 15, 9, 4     ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of a fine soldier.{W1}"
+		msDesc 26, 8, 9, 5      ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of a fine soldier.{W1}"
+		msDesc 32, 8, 9, 6      ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of a fine soldier.{W1}"
+		msDesc 26, 11, 9, 7     ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of a fine soldier.{W1}"
+		msDesc 32, 11, 9, 8     ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of a fine soldier.{W1}"
+		msDescEnd

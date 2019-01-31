@@ -6,42 +6,24 @@
 
 ms_map5_flag212_AreaDescriptions:
 		
-		move.w  #$D9C,d3
-		lea     word_60558(pc), a0
+		move.w  #$D9C,d3        ; "A poster...{N}PULL IT!  PUSH IT!{W1}"
+		lea     byte_60558(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map5_flag212_AreaDescriptions
 
-word_60558:     dc.w $90F
-		dc.b 0
-		dc.b 0
-		dc.b 6
-		dc.b 0
-		dc.w $A10
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.w $B10
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 2
-		dc.w $1732
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 3
-		dc.w $160B
-		dc.b 0
-		dc.b 1
-		dc.w sub_60582-word_60558
-		dc.w $1321
-		dc.b 0
-		dc.b 1
-		dc.w sub_60590-word_60558
-		dc.w $FD00
+byte_60558:     msDesc 9, 15, 6, 0      ; "{NAME} looked at{N}the paper.{W2}{CLEAR}"
+														; "A poster...{N}PULL IT!  PUSH IT!{W1}"
+		msDesc 10, 16, 4, 1     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}ANCIENT KINGDOMS{W1}"
+		msDesc 11, 16, 4, 2     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}CIVILIZATIONS{W1}"
+		msDesc 23, 50, 4, 3     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}THE ANCIENT TOWER{W1}"
+		msDescFunction 22, 11, Map5_212_DescFunc0-byte_60558
+		msDescFunction 19, 33, Map5_212_DescFunc1-byte_60558
+		msDescEnd
 		dc.b $4E 
 		dc.b $75 
 		dc.b $4E 
@@ -49,7 +31,8 @@ word_60558:     dc.w $90F
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_60582:
+Map5_212_DescFunc0:
+		
 		 
 		chkFlg  $3AC            ; set after playing the piano in Yeel (during the late game)
 		bne.s   return_6058E
@@ -57,12 +40,13 @@ sub_60582:
 return_6058E:
 		rts
 
-	; End of function sub_60582
+	; End of function Map5_212_DescFunc0
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_60590:
+Map5_212_DescFunc1:
+		
 		 
 		chkFlg  $3B1            ; set after recruiting Lemon in Yeel
 		bne.s   byte_605C4      
@@ -96,5 +80,5 @@ loc_605EE:
 return_60604:
 		rts
 
-	; End of function sub_60590
+	; End of function Map5_212_DescFunc1
 

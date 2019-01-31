@@ -6,26 +6,17 @@
 
 ms_map15_AreaDescriptions:
 		
-		move.w  #$1041,d3
-		lea     word_5D030(pc), a0
+		move.w  #$1041,d3       ; "A statue of beautiful Mitula.{W1}"
+		lea     byte_5D030(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map15_AreaDescriptions
 
-word_5D030:     dc.w $1F03
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 0
-		dc.w $21B
-		dc.b 0
-		dc.b 0
-		dc.b 2
-		dc.b 1
-		dc.w $160E
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 2
-		dc.w $FD00
+byte_5D030:     msDesc 31, 3, 9, 0      ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of beautiful Mitula.{W1}"
+		msDesc 2, 27, 2, 1      ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
+														; "WEAPONS AND ITEMS{N}-Welcome{W1}"
+		msDesc 22, 14, 4, 2     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+														; "A book...{N}MITULA'S CODE{W1}"
+		msDescEnd

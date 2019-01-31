@@ -6,29 +6,24 @@
 
 ms_map1_AreaDescriptions:
 		
-		move.w  #$1044,d3
-		lea     word_5E736(pc), a0
+		move.w  #$1044,d3       ; "A statue of beautiful Mitula.{W1}"
+		lea     byte_5E736(pc), a0
 		nop
 		jmp     DisplayAreaDescription
 
 	; End of function ms_map1_AreaDescriptions
 
-word_5E736:     dc.w $B03
-		dc.b 0
-		dc.b 0
-		dc.b 9
-		dc.b 0
-		dc.w $2C1A
-		dc.b 0
-		dc.b 1
-		dc.w sub_5E746-word_5E736
-		dc.w $FD00
+byte_5E736:     msDesc 11, 3, 9, 0      ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
+														; "A statue of beautiful Mitula.{W1}"
+		msDescFunction 44, 26, Map1_DescFunc0-byte_5E736
+		msDescEnd
 		dc.b $4E 
 		dc.b $75 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5E746:
+Map1_DescFunc0:
+		
 		 
 		chkFlg  $349            ; set after the Taya join scene has played inside the Mitula Shrine
 		bne.s   return_5E756
@@ -37,5 +32,5 @@ sub_5E746:
 return_5E756:
 		rts
 
-	; End of function sub_5E746
+	; End of function Map1_DescFunc0
 
