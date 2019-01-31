@@ -3,7 +3,7 @@
 ; 0x50EEA..0x50F0C : 
 ms_map3_flag261_ZoneEvents:
 		msZoneEvent 2, 23, Map3_261_ZoneEvent0-ms_map3_flag261_ZoneEvents
-		msZoneEvent 2, 255, Map3_261_ZoneEvent1-ms_map3_flag261_ZoneEvents
+		msZoneEvent 2, NO_DIRECTION, Map3_261_ZoneEvent1-ms_map3_flag261_ZoneEvents
 		msDefaultZoneEvent 0, (return_50EE8-ms_map3_flag261_ZoneEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================

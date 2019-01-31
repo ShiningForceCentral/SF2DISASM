@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map10\mapsetups\s3.asm :
 ; 0x56F8A..0x56FC0 : 
 ms_map10_ZoneEvents:
-		msZoneEvent 29, 255, Map10_ZoneEvent0-ms_map10_ZoneEvents
-		msZoneEvent 33, 255, Map10_ZoneEvent1-ms_map10_ZoneEvents
+		msZoneEvent 29, NO_DIRECTION, Map10_ZoneEvent0-ms_map10_ZoneEvents
+		msZoneEvent 33, NO_DIRECTION, Map10_ZoneEvent1-ms_map10_ZoneEvents
 		msZoneEvent 31, 53, Map10_ZoneEvent1-ms_map10_ZoneEvents
 		msDefaultZoneEvent 0, nullsub_74-ms_map10_ZoneEvents
 

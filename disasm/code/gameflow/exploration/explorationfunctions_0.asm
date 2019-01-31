@@ -197,7 +197,7 @@ loc_23954:
 		txt     $19C            ; "Nothing was there.{W1}"
 		bra.w   byte_23994
 loc_23978:
-		jsr     j_RunMapSetupFunction
+		jsr     j_RunMapSetupAreaDescription
 		bne.w   byte_23994
 		tst.w   d6
 		beq.s   byte_2398C      

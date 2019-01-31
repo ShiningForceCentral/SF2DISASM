@@ -53,13 +53,14 @@ sub_44070:		jmp     sub_45C82(pc)
 sub_44074:		jmp     sub_45B84(pc)
 sub_44078:		jmp     sub_474EE(pc)
 j_ExecuteEntityEvent:		
-		jmp     ExecuteEntityEvent(pc)
+		jmp     RunMapSetupEntityEvent(pc)
 j_RunMapSetupZoneEvent:		
 		jmp     RunMapSetupZoneEvent(pc)
 j_ExecuteEntityEvent_0:		
-		jmp     ExecuteEntityEvent(pc)
+		jmp     RunMapSetupEntityEvent(pc)
 ; triggers a map setup function according to up to 4 criterias in d1-d4
-sub_44088:		jmp     sub_47586(pc)
+j_RunMapSetupItemEvent:		
+		jmp     RunMapSetupItemEvent(pc)
 j_GetMapSetupEntities:		
 		jmp     GetMapSetupEntityList(pc)
 j_MapEventType3:		
@@ -80,8 +81,8 @@ j_RunMapSetupInitFunction:
 sub_440AC:		jmp     sub_441AA(pc)
 j_GetForceMemberSpriteIdx:		
 		jmp     GetForceMemberSpriteIdx(pc)
-j_RunMapSetupFunction:		
-		jmp     RunMapSetupFunction(pc)
+j_RunMapSetupAreaDescription:		
+		jmp     RunMapSetupAreaDescription(pc)
 sub_440B8:		jmp     sub_444A2(pc)
 j_PlayIntroOrEndCutscene:		
 		jmp     PlayIntroOrEndCutscene(pc)

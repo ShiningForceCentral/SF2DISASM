@@ -2,25 +2,14 @@
 ; ASM FILE data\maps\entries\map08\mapsetups\s5.asm :
 ; 0x562E0..0x563A2 : 
 ms_map8_Section5:
-		dc.b $F
-		dc.b $13
-		dc.b 1
-		dc.b $70
-		dc.w sub_562F2-ms_map8_Section5
-		dc.b $10
-		dc.b $13
-		dc.b 1
-		dc.b $70
-		dc.w sub_562F2-ms_map8_Section5
-		dc.b $FD
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.w return_56312-ms_map8_Section5
+		msItemEvent 15, 19, UP, 112, Map8_ItemEvent0-ms_map8_Section5
+		msItemEvent 16, 19, UP, 112, Map8_ItemEvent0-ms_map8_Section5
+		msDefaultItemEvent return_56312-ms_map8_Section5
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_562F2:
+Map8_ItemEvent0:
+		
 		 
 		chkFlg  $2DB            ; set after you open the tree in Ribble with the wooden plank
 		beq.s   byte_562FC
@@ -35,7 +24,7 @@ byte_562FC:
 return_56312:
 		rts
 
-	; End of function sub_562F2
+	; End of function Map8_ItemEvent0
 
 cs_56314:       hideText
 		setActscriptWait $0,eas_Init

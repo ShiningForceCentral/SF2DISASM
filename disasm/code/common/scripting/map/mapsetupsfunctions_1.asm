@@ -67,7 +67,8 @@ loc_47576:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47586:
+RunMapSetupItemEvent:
+		
 		movem.l d0-d5/d7-a1,-(sp)
 		clr.w   ((SPEECH_SFX-$1000000)).w
 		andi.w  #ITEM_MASK_IDX,d4
@@ -86,23 +87,23 @@ loc_475AA:
 loc_475B8:
 		cmpi.b  #$FF,(a0,d7.w)
 		beq.w   loc_475CA
-		cmp.b   (a0,d7.w),d1
-		bne.w   loc_475F6
+		cmp.b   (a0,d7.w),d1    ; x
+		bne.w   loc_475F6       
 loc_475CA:
 		cmpi.b  #$FF,1(a0,d7.w)
-		beq.w   loc_475DC
-		cmp.b   1(a0,d7.w),d2
-		bne.w   loc_475F6
+		beq.w   loc_475DC       
+		cmp.b   1(a0,d7.w),d2   ; y
+		bne.w   loc_475F6       
 loc_475DC:
-		cmpi.b  #$FF,2(a0,d7.w)
-		beq.w   loc_475EE
-		cmp.b   2(a0,d7.w),d3
-		bne.w   loc_475F6
+		cmpi.b  #$FF,2(a0,d7.w) ; if entry value $FF then don't care about facing value
+		beq.w   loc_475EE       
+		cmp.b   2(a0,d7.w),d3   ; facing
+		bne.w   loc_475F6       
 loc_475EE:
-		cmp.b   3(a0,d7.w),d4
+		cmp.b   3(a0,d7.w),d4   ; item
 		beq.w   loc_475FA
 loc_475F6:
-		addq.w  #6,d7
+		addq.w  #6,d7           ; next entry
 		bra.s   loc_475AA
 loc_475FA:
 		adda.w  4(a0,d7.w),a0
@@ -117,14 +118,14 @@ loc_4760A:
 		movem.l (sp)+,d0-d5/d7-a1
 		rts
 
-	; End of function sub_47586
+	; End of function RunMapSetupItemEvent
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; In: D0 = entity event idx
 
-ExecuteEntityEvent:
+RunMapSetupEntityEvent:
 		
 		movem.l d0-a1,-(sp)
 		move.b  d2,((byte_FFB651-$1000000)).w
@@ -199,7 +200,7 @@ loc_476D6:
 		movem.l (sp)+,d0-a1
 		rts
 
-	; End of function ExecuteEntityEvent
+	; End of function RunMapSetupEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -234,7 +235,7 @@ loc_476FC:
 
 ; =============== S U B R O U T I N E =======================================
 
-RunMapSetupFunction:
+RunMapSetupAreaDescription:
 		
 		movem.l d0-a1,-(sp)
 		bsr.w   GetCurrentMapSetup
@@ -248,7 +249,7 @@ loc_4771A:
 		movem.l (sp)+,d0-a1
 		rts
 
-	; End of function RunMapSetupFunction
+	; End of function RunMapSetupAreaDescription
 
 
 ; =============== S U B R O U T I N E =======================================

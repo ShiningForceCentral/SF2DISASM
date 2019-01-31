@@ -2,16 +2,8 @@
 ; ASM FILE data\maps\entries\map41\mapsetups\s5.asm :
 ; 0x5F46C..0x5F4A0 : 
 ms_map41_Section5:
-		dc.b 6
-		dc.b 8
-		dc.b 1
-		dc.b $43
-		dc.w sub_5F47A-ms_map41_Section5
-		dc.b $FD
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.w nullsub_69-ms_map41_Section5
+		msItemEvent 6, 8, UP, 67, Map41_ItemEvent0-ms_map41_Section5
+		msDefaultItemEvent nullsub_69-ms_map41_Section5
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -23,7 +15,8 @@ nullsub_69:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5F47A:
+Map41_ItemEvent0:
+		
 		 
 		chkFlg  $3A2            ; set after opening Devil's Head with the Force Sword
 		bne.s   return_5F49E
@@ -38,5 +31,5 @@ loc_5F49A:
 return_5F49E:
 		rts
 
-	; End of function sub_5F47A
+	; End of function Map41_ItemEvent0
 

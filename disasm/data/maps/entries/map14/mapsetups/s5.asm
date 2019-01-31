@@ -2,11 +2,7 @@
 ; ASM FILE data\maps\entries\map14\mapsetups\s5.asm :
 ; 0x58F9C..0x592E0 : 
 ms_map14_Section5:
-		dc.b $FD 
-		dc.b   0
-		dc.b 0
-		dc.b 0
-		dc.w nullsub_178-ms_map14_Section5
+		msDefaultItemEvent nullsub_178-ms_map14_Section5
 
 ; =============== S U B R O U T I N E =======================================
 

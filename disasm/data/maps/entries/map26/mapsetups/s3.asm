@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map26\mapsetups\s3.asm :
 ; 0x59DB6..0x59DD2 : 
 ms_map26_ZoneEvents:
-		msZoneEvent 14, 255, Map26_ZoneEvent0-ms_map26_ZoneEvents
+		msZoneEvent 14, NO_DIRECTION, Map26_ZoneEvent0-ms_map26_ZoneEvents
 		msDefaultZoneEvent 0, nullsub_91-ms_map26_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================

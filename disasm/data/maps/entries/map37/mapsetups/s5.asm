@@ -2,16 +2,8 @@
 ; ASM FILE data\maps\entries\map37\mapsetups\s5.asm :
 ; 0x5FA2A..0x5FA88 : 
 ms_map37_Section5:
-		dc.b 8
-		dc.b $B
-		dc.b 2
-		dc.b $71
-		dc.w sub_5FA38-ms_map37_Section5
-		dc.b $FD
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.w nullsub_68-ms_map37_Section5
+		msItemEvent 8, 11, LEFT, 113, Map37_ItemEvent0-ms_map37_Section5
+		msDefaultItemEvent nullsub_68-ms_map37_Section5
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -23,7 +15,8 @@ nullsub_68:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FA38:
+Map37_ItemEvent0:
+		
 		 
 		chkFlg  $3E7            ; set after the Nazca ship shootdown scene
 		bne.s   return_5FA86
@@ -49,5 +42,5 @@ loc_5FA84:
 return_5FA86:
 		rts
 
-	; End of function sub_5FA38
+	; End of function Map37_ItemEvent0
 

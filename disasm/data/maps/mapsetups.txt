@@ -6,7 +6,7 @@ Address 1   Entities
 Address 2   Entity Events : entity, facing, function
 Address 3   Zone Events : x, y, function
 Address 4   Area Descriptions function with base text index and entry table : x, y, investigation line, description line / x, y, function
-Address 5   flag + tile locations + ??? (seems rather special; only Ribble, Hassan, DesktopWorld, Nazca Ship, Devil's Head, etc have it)
+Address 5   Item Events : x, y, facing, item, function 
 Address 6   Init Function
 
 

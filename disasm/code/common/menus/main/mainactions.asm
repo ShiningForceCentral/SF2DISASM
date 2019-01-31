@@ -191,7 +191,7 @@ loc_2150E:
 		bsr.w   sub_22C60       
 		move.w  -8(a6),d4
 		move.w  -$C(a6),d5
-		jsr     sub_44088       
+		jsr     j_RunMapSetupItemEvent
 		tst.w   d6
 		bne.w   loc_212A0
 		move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w

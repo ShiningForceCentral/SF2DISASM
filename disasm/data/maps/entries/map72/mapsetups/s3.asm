@@ -2,9 +2,9 @@
 ; ASM FILE data\maps\entries\map72\mapsetups\s3.asm :
 ; 0x4FE64..0x4FF24 : 
 ms_map72_ZoneEvents:
-		msZoneEvent 32, 255, Map72_ZoneEvent0-ms_map72_ZoneEvents
-		msZoneEvent 33, 255, Map72_ZoneEvent0-ms_map72_ZoneEvents
-		msZoneEvent 34, 255, Map72_ZoneEvent0-ms_map72_ZoneEvents
+		msZoneEvent 32, NO_DIRECTION, Map72_ZoneEvent0-ms_map72_ZoneEvents
+		msZoneEvent 33, NO_DIRECTION, Map72_ZoneEvent0-ms_map72_ZoneEvents
+		msZoneEvent 34, NO_DIRECTION, Map72_ZoneEvent0-ms_map72_ZoneEvents
 		msZoneEvent 25, 37, Map72_ZoneEvent3-ms_map72_ZoneEvents
 		msZoneEvent 26, 37, Map72_ZoneEvent3-ms_map72_ZoneEvents
 		msZoneEvent 27, 37, Map72_ZoneEvent3-ms_map72_ZoneEvents

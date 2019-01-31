@@ -38,14 +38,14 @@ Map8_DescFunc0:
 		 
 		chkFlg  $2C4            ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   loc_56256
-		move.w  #$546,d0
+		move.w  #$546,d0        ; It reads...{N}NO STRANGERS!{N}-Shopkeeper{W1}
 		jsr     (DisplayText).w 
 		bra.s   return_5626A
 loc_56256:
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
-		move.w  #$1A8,d0
+		move.w  #$1A8,d0        ; {NAME} investigated.{W2}{CLEAR}
 		jsr     (DisplayText).w 
-		move.w  #$1B2,d0
+		move.w  #$1B2,d0        ; Nothing special there.{W1}
 		jsr     (DisplayText).w 
 return_5626A:
 		rts
@@ -60,16 +60,16 @@ Map8_DescFunc2:
 		 
 		chkFlg  $2C4            ; set after the scene in Ribble where the mayor confronts Bowie
 		bne.s   loc_56284
-		move.w  #$547,d0
+		move.w  #$547,d0        ; {LEADER} checks the door.{W2}
 		jsr     (DisplayText).w 
-		move.w  #$548,d0
+		move.w  #$548,d0        ; It's locked.{W1}
 		jsr     (DisplayText).w 
 		bra.s   return_56298
 loc_56284:
 		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
-		move.w  #$1A8,d0
+		move.w  #$1A8,d0        ; {NAME} investigated.{W2}{CLEAR}
 		jsr     (DisplayText).w 
-		move.w  #$1B2,d0
+		move.w  #$1B2,d0        ; Nothing special there.{W1}
 		jsr     (DisplayText).w 
 return_56298:
 		rts
@@ -81,28 +81,38 @@ return_56298:
 
 Map8_DescFunc5:
 		
-		move.w  #$54D,d0
+		move.w  #$54D,d0        ; Found Keseran's diary.{N}{LEADER} reads it.{W2}
 		jsr     (DisplayText).w 
-		move.w  #$54E,d0
+		move.w  #$54E,d0        ; I spent another day{N}searching for it....{N}I'LL NEVER GIVE UP!{W2}
 		jsr     (DisplayText).w 
-		move.w  #$54F,d0
+		move.w  #$54F,d0        ; I'll find the Caravan, even{N}if I have to travel all over{N}the continent!{W2}
 		jsr     (DisplayText).w 
-		move.w  #$550,d0
+		move.w  #$550,d0        ; I need the Achilles Sword{N}to defeat the giant Taros{N}in the shrine!{W1}
 		jmp     (DisplayText).w 
-Map8_DescFunc6:
-		
-		chkFlg  $2DB            ; set after you open the tree in Ribble with the wooden plank
-		bne.s   loc_562CA
-		move.w  #$54A,d0
-		jmp     (DisplayText).w 
-		dc.w $6014
-loc_562CA:
-		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
-		move.w  #$1A8,d0
-		jsr     (DisplayText).w 
-		move.w  #$1B2,d0
-		jsr     (DisplayText).w 
-		rts
 
 	; End of function Map8_DescFunc5
+
+
+; =============== S U B R O U T I N E =======================================
+
+; set after you open the tree in Ribble with the wooden plank
+
+Map8_DescFunc6:
+		
+		 
+		chkFlg  $2DB            ; set after you open the tree in Ribble with the wooden plank
+		bne.s   loc_562CA
+		move.w  #$54A,d0        ; There's a hollow to put{N}something into!{W1}
+		jmp     (DisplayText).w 
+		bra.s   return_562DE
+loc_562CA:
+		clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
+		move.w  #$1A8,d0        ; {NAME} investigated.{W2}{CLEAR}
+		jsr     (DisplayText).w 
+		move.w  #$1B2,d0        ; Nothing special there.{W1}
+		jsr     (DisplayText).w 
+return_562DE:
+		rts
+
+	; End of function Map8_DescFunc6
 

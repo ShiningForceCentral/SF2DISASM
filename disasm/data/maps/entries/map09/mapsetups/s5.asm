@@ -2,20 +2,13 @@
 ; ASM FILE data\maps\entries\map09\mapsetups\s5.asm :
 ; 0x568A4..0x568C4 : 
 ms_map9_Section5:
-		dc.b $10
-		dc.b $3A
-		dc.b $FF
-		dc.b $3D
-		dc.w sub_568B0-ms_map9_Section5
-		dc.b $FD
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.w return_568C2-ms_map9_Section5
+		msItemEvent 16, 58, NO_DIRECTION, 61, Map9_ItemEvent0-ms_map9_Section5
+		msDefaultItemEvent return_568C2-ms_map9_Section5
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_568B0:
+Map9_ItemEvent0:
+		
 		 
 		chkFlg  $2D7            ; set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 		bne.s   return_568C2
@@ -25,5 +18,5 @@ sub_568B0:
 return_568C2:
 		rts
 
-	; End of function sub_568B0
+	; End of function Map9_ItemEvent0
 

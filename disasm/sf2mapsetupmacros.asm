@@ -82,8 +82,6 @@ msDefaultZoneEvent:	macro
 	dc.w \2
 	endm
 
-
-	
 msDesc:	macro
 	dc.b \1
 	dc.b \2
@@ -112,3 +110,16 @@ msDescFunctionD6:	macro
 msDescEnd:	macro
 	dc.w $FD00
 	endm	
+	
+msItemEvent:	macro
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.w \5
+	endm
+	
+msDefaultItemEvent:	macro
+	dc.l $FD000000
+	dc.w \1
+	endm

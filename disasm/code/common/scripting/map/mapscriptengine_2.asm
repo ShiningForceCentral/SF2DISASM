@@ -573,7 +573,7 @@ sub_474EE:
 		moveq   #0,d0
 		move.b  #$11,((CURRENT_MAP-$1000000)).w
 						; Mt Volcanon Shrine ?
-		bsr.w   ExecuteEntityEvent
+		bsr.w   RunMapSetupEntityEvent
 		rts
 
 	; End of function sub_474EE

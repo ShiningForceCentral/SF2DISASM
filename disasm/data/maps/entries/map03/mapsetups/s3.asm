@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\s3.asm :
 ; 0x50D4C..0x50EEA : 
 ms_map3_ZoneEvents:
-		msZoneEvent 2, 255, Map3_ZoneEvent0-ms_map3_ZoneEvents
+		msZoneEvent 2, NO_DIRECTION, Map3_ZoneEvent0-ms_map3_ZoneEvents
 		msZoneEvent 27, 5, Map3_ZoneEvent1-ms_map3_ZoneEvents
 		msZoneEvent 28, 5, Map3_ZoneEvent1-ms_map3_ZoneEvents
 		msZoneEvent 29, 5, Map3_ZoneEvent1-ms_map3_ZoneEvents

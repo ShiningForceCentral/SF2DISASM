@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\s3_21F.asm :
 ; 0x62820..0x62846 : 
 ms_map3_flag21F_ZoneEvents:
-		msZoneEvent 2, 255, Map3_21F_ZoneEvent0-ms_map3_flag21F_ZoneEvents
+		msZoneEvent 2, NO_DIRECTION, Map3_21F_ZoneEvent0-ms_map3_flag21F_ZoneEvents
 		msDefaultZoneEvent 0, nullsub_70-ms_map3_flag21F_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
