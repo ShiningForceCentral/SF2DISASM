@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map16\mapsetups\s3_zoneevents.asm :
 ; 0x51EE4..0x51F2A : 
 ms_map16_ZoneEvents:
-                msZoneEvent 17, NO_DIRECTION, Map16_ZoneEvent0-ms_map16_ZoneEvents
-                msZoneEvent 3, NO_DIRECTION, Map16_ZoneEvent1-ms_map16_ZoneEvents
+                msZoneEvent 17, 255, Map16_ZoneEvent0-ms_map16_ZoneEvents
+                msZoneEvent 3, 255, Map16_ZoneEvent1-ms_map16_ZoneEvents
                 msDefaultZoneEvent 0, sub_51F28-ms_map16_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================

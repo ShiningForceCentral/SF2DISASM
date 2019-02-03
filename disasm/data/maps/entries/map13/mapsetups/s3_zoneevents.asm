@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s3_zoneevents.asm :
 ; 0x5822A..0x582AC : 
 ms_map13_ZoneEvents:
-                msZoneEvent 24, NO_DIRECTION, Map13_ZoneEvent0-ms_map13_ZoneEvents
+                msZoneEvent 24, 255, Map13_ZoneEvent0-ms_map13_ZoneEvents
                 msZoneEvent 255, 11, Map13_ZoneEvent1-ms_map13_ZoneEvents
                 msZoneEvent 255, 30, Map13_ZoneEvent2-ms_map13_ZoneEvents
                 msDefaultZoneEvent 0, return_582AA-ms_map13_ZoneEvents

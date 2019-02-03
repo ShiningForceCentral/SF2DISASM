@@ -2,9 +2,9 @@
 ; ASM FILE data\maps\entries\map69\mapsetups\s3_zoneevents.asm :
 ; 0x4FDA2..0x4FDD2 : 
 ms_map69_ZoneEvents:
-                msZoneEvent 23, NO_DIRECTION, Map69_ZoneEvent0-ms_map69_ZoneEvents
-                msZoneEvent 24, NO_DIRECTION, Map69_ZoneEvent0-ms_map69_ZoneEvents
-                msZoneEvent 25, NO_DIRECTION, Map69_ZoneEvent0-ms_map69_ZoneEvents
+                msZoneEvent 23, 255, Map69_ZoneEvent0-ms_map69_ZoneEvents
+                msZoneEvent 24, 255, Map69_ZoneEvent0-ms_map69_ZoneEvents
+                msZoneEvent 25, 255, Map69_ZoneEvent0-ms_map69_ZoneEvents
                 msDefaultZoneEvent 0, sub_4FDBE-ms_map69_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
