@@ -113,8 +113,8 @@ j_ClearEntities:
 		include "code\common\scripting\map\mapsetupsfunctions_1.asm"		; Map setups functions
 		include "code\common\scripting\map\resetalliesstats.asm"		; CSC 55 function
 		include "code\common\scripting\text\headquartersquotes.asm"		; Headquarters quote function
-		include "data\maps\entries\map37\mapsetups\s6_47948.asm"		; Map 37 init function
-		include "data\maps\entries\map46\mapsetups\s6_47992.asm"		; Map 46 init function
+		include "data\maps\entries\map37\mapsetups\s6_initfunction_47948.asm"		; Map 37 init function
+		include "data\maps\entries\map46\mapsetups\s6_initfunction_47992.asm"		; Map 46 init function
 		include "code\common\scripting\map\ms_empty.asm"		; Empty mapscript
 		include "code\gameflow\battle\beforebattlecutscenesstart.asm"		; Before battle cutscenes function start
 		include "data\battles\beforebattlecutscenes.asm"		; Before battle cutscenes
