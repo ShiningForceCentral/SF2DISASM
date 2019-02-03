@@ -5,14 +5,14 @@
 ; =============== S U B R O U T I N E =======================================
 
 ms_map29_AreaDescriptions:
-		
-		move.w  #$104F,d3       ; "A book...{N}LIFE IN A CAVE{W1}"
-		lea     byte_5A164(pc), a0
-		nop
-		jmp     DisplayAreaDescription
+                
+                move.w  #$104F,d3       ; "A book...{N}LIFE IN A CAVE{W1}"
+                lea     byte_5A164(pc), a0
+                nop
+                jmp     DisplayAreaDescription
 
 	; End of function ms_map29_AreaDescriptions
 
 byte_5A164:     msDesc 54, 9, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
-														; "A book...{N}LIFE IN A CAVE{W1}"
-		msDescEnd
+                                        ; "A book...{N}LIFE IN A CAVE{W1}"
+                msDescEnd

@@ -2,27 +2,29 @@
 ; ASM FILE data\maps\entries\map63\mapsetups\s3_zoneevents.asm :
 ; 0x5C9E2..0x5CA24 : 
 ms_map63_ZoneEvents:
-		msZoneEvent 15, 55, Map63_ZoneEvent0-ms_map63_ZoneEvents
-		msZoneEvent 13, 42, Map63_ZoneEvent0-ms_map63_ZoneEvents
-		msZoneEvent 10, 21, Map63_ZoneEvent2-ms_map63_ZoneEvents
-		msZoneEvent 8, 7, Map63_ZoneEvent3-ms_map63_ZoneEvents
-		msDefaultZoneEvent 0, dftentevt_5CA22-ms_map63_ZoneEvents
+                msZoneEvent 15, 55, Map63_ZoneEvent0-ms_map63_ZoneEvents
+                msZoneEvent 13, 42, Map63_ZoneEvent0-ms_map63_ZoneEvents
+                msZoneEvent 10, 21, Map63_ZoneEvent2-ms_map63_ZoneEvents
+                msZoneEvent 8, 7, Map63_ZoneEvent3-ms_map63_ZoneEvents
+                msDefaultZoneEvent 0, dftentevt_5CA22-ms_map63_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map63_ZoneEvent0:
-		
-		 
-		chkFlg  $100            ; Temporary map setup flag 00
-		bne.s   byte_5CA08
-		script  cs_5CA6E
-		setFlg  $100            ; Temporary map setup flag 00
-		bra.s   return_5CA12
+                
+                 
+                chkFlg  $100            ; Temporary map setup flag 00
+                bne.s   byte_5CA08
+                script  cs_5CA6E
+                setFlg  $100            ; Temporary map setup flag 00
+                bra.s   return_5CA12
 byte_5CA08:
-		script  cs_5CB34
-		clrFlg  $100            ; Temporary map setup flag 00
+                
+                script  cs_5CB34
+                clrFlg  $100            ; Temporary map setup flag 00
 return_5CA12:
-		rts
+                
+                rts
 
 	; End of function Map63_ZoneEvent0
 
@@ -30,10 +32,10 @@ return_5CA12:
 ; =============== S U B R O U T I N E =======================================
 
 Map63_ZoneEvent2:
-		
-		 
-		script  cs_5CC26
-		rts
+                
+                 
+                script  cs_5CC26
+                rts
 
 	; End of function Map63_ZoneEvent2
 
@@ -41,12 +43,12 @@ Map63_ZoneEvent2:
 ; =============== S U B R O U T I N E =======================================
 
 Map63_ZoneEvent3:
-		
-		 
-		script  cs_5CCF6
+                
+                 
+                script  cs_5CCF6
 dftentevt_5CA22:
-		
-		rts
+                
+                rts
 
 	; End of function Map63_ZoneEvent3
 

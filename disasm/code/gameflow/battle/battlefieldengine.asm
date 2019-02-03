@@ -11,13 +11,13 @@
 ;     Out: A0 = start of grid + offset
 
 ConvertCoordToOffset:
-		
-		move.l  d2,-(sp)
-		mulu.w  #$30,d2 
-		add.w   d1,d2
-		adda.l  d2,a0
-		move.l  (sp)+,d2
-		rts
+                
+                move.l  d2,-(sp)
+                mulu.w  #$30,d2 
+                add.w   d1,d2
+                adda.l  d2,a0
+                move.l  (sp)+,d2
+                rts
 
 	; End of function ConvertCoordToOffset
 
@@ -27,17 +27,18 @@ ConvertCoordToOffset:
 ;     Clear valid target index grid at RAM:5600.
 
 ClearTargetGrid:
-		
-		movem.l d0-d1/a0,-(sp)
-		lea     (FF5600_LOADING_SPACE).l,a0
-		move.w  #$240,d0
-		moveq   #$FFFFFFFF,d1
+                
+                movem.l d0-d1/a0,-(sp)
+                lea     (FF5600_LOADING_SPACE).l,a0
+                move.w  #$240,d0
+                moveq   #$FFFFFFFF,d1
 loc_C0B8:
-		move.l  d1,(a0)+
-		subq.w  #1,d0
-		bne.s   loc_C0B8
-		movem.l (sp)+,d0-d1/a0
-		rts
+                
+                move.l  d1,(a0)+
+                subq.w  #1,d0
+                bne.s   loc_C0B8
+                movem.l (sp)+,d0-d1/a0
+                rts
 
 	; End of function ClearTargetGrid
 
@@ -47,19 +48,20 @@ loc_C0B8:
 ;     Clear moveable tile data at RAM:4400 and RAM:4d00.
 
 ClearMovableGrid:
-		
-		movem.l d0-a6,-(sp)
-		lea     ((byte_FF4000+$400)).l,a0
-		lea     ((byte_FF4A00+$300)).l,a1
-		move.w  #$240,d0
-		moveq   #$FFFFFFFF,d1
+                
+                movem.l d0-a6,-(sp)
+                lea     ((byte_FF4000+$400)).l,a0
+                lea     ((byte_FF4A00+$300)).l,a1
+                move.w  #$240,d0
+                moveq   #$FFFFFFFF,d1
 loc_C0DA:
-		move.l  d1,(a0)+
-		move.l  d1,(a1)+
-		subq.w  #1,d0
-		bne.s   loc_C0DA
-		movem.l (sp)+,d0-a6
-		rts
+                
+                move.l  d1,(a0)+
+                move.l  d1,(a1)+
+                subq.w  #1,d0
+                bne.s   loc_C0DA
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function ClearMovableGrid
 
@@ -72,13 +74,13 @@ loc_C0DA:
 ;     Out: D0 = terrain at offset
 
 GetTargetAtCoordOffset:
-		
-		movem.l d1-a6,-(sp)
-		lea     (FF5600_LOADING_SPACE).l,a0
-		bsr.s   ConvertCoordToOffset
-		move.b  (a0),d0
-		movem.l (sp)+,d1-a6
-		rts
+                
+                movem.l d1-a6,-(sp)
+                lea     (FF5600_LOADING_SPACE).l,a0
+                bsr.s   ConvertCoordToOffset
+                move.b  (a0),d0
+                movem.l (sp)+,d1-a6
+                rts
 
 	; End of function GetTargetAtCoordOffset
 
@@ -88,14 +90,14 @@ GetTargetAtCoordOffset:
 ; get distance from current unit to entity D0 -> D0
 
 GetMoveCostToEntity:
-		
-		movem.l d1-a6,-(sp)
-		jsr     GetYPos
-		move.b  d1,d2
-		jsr     GetXPos
-		bsr.w   GetDestinationMoveCost
-		movem.l (sp)+,d1-a6
-		rts
+                
+                movem.l d1-a6,-(sp)
+                jsr     GetYPos
+                move.b  d1,d2
+                jsr     GetXPos
+                bsr.w   GetDestinationMoveCost
+                movem.l (sp)+,d1-a6
+                rts
 
 	; End of function GetMoveCostToEntity
 
@@ -105,19 +107,19 @@ GetMoveCostToEntity:
 ; get movecost to get to tile D1,D2 -> D0
 
 GetDestinationMoveCost:
-		
-		movem.l d1-a6,-(sp)
-		lea     ((byte_FF4000+$400)).l,a0
-		lea     ((byte_FF4A00+$300)).l,a1
-		clr.w   d0
-		mulu.w  #$30,d2 
-		andi.w  #$FF,d1
-		add.w   d1,d2
-		move.b  (a1,d2.w),d0
-		lsl.w   #8,d0
-		move.b  (a0,d2.w),d0
-		movem.l (sp)+,d1-a6
-		rts
+                
+                movem.l d1-a6,-(sp)
+                lea     ((byte_FF4000+$400)).l,a0
+                lea     ((byte_FF4A00+$300)).l,a1
+                clr.w   d0
+                mulu.w  #$30,d2 
+                andi.w  #$FF,d1
+                add.w   d1,d2
+                move.b  (a1,d2.w),d0
+                lsl.w   #8,d0
+                move.b  (a0,d2.w),d0
+                movem.l (sp)+,d1-a6
+                rts
 
 	; End of function GetDestinationMoveCost
 
@@ -127,14 +129,14 @@ GetDestinationMoveCost:
 ; get terrain type of tile under entity D0 -> D0
 
 GetCurrentTerrainType:
-		
-		movem.l d1-a6,-(sp)
-		jsr     GetYPos
-		move.w  d1,d2
-		jsr     GetXPos
-		bsr.w   GetTerrain      
-		movem.l (sp)+,d1-a6
-		rts
+                
+                movem.l d1-a6,-(sp)
+                jsr     GetYPos
+                move.w  d1,d2
+                jsr     GetXPos
+                bsr.w   GetTerrain      
+                movem.l (sp)+,d1-a6
+                rts
 
 	; End of function GetCurrentTerrainType
 
@@ -147,12 +149,13 @@ GetCurrentTerrainType:
 ;     Out: D0 = target at offset
 
 GetTerrain:
-		movem.l d1-a6,-(sp)
-		lea     (BATTLE_TERRAIN).l,a0
-		bsr.w   ConvertCoordToOffset
-		move.b  (a0),d0
-		movem.l (sp)+,d1-a6
-		rts
+                
+                movem.l d1-a6,-(sp)
+                lea     (BATTLE_TERRAIN).l,a0
+                bsr.w   ConvertCoordToOffset
+                move.b  (a0),d0
+                movem.l (sp)+,d1-a6
+                rts
 
 	; End of function GetTerrain
 
@@ -160,13 +163,15 @@ GetTerrain:
 ; =============== S U B R O U T I N E =======================================
 
 SetTerrain:
-		movem.l d1-a6,-(sp)
+                
+                movem.l d1-a6,-(sp)
 loc_C17A:
-		lea     (BATTLE_TERRAIN).l,a0
-		bsr.w   ConvertCoordToOffset
-		move.b  d0,(a0)
-		movem.l (sp)+,d1-a6
-		rts
+                
+                lea     (BATTLE_TERRAIN).l,a0
+                bsr.w   ConvertCoordToOffset
+                move.b  d0,(a0)
+                movem.l (sp)+,d1-a6
+                rts
 
 	; End of function SetTerrain
 
@@ -174,26 +179,31 @@ loc_C17A:
 ; =============== S U B R O U T I N E =======================================
 
 MemorizePath:
-		movem.l d0-a6,-(sp)     ; copy current moving unit's terrain list to memory
+                
+                movem.l d0-a6,-(sp)     ; copy current moving unit's terrain list to memory
 loc_C190:
-		jsr     GetUpperMoveType
-		lsl.w   #4,d1
-		lea     MoveTypeTerrainCosts(pc), a0
-		adda.w  d1,a0
-		lea     ((MOVE_COST_LIST-$1000000)).w,a1
-		moveq   #$F,d7
+                
+                jsr     GetUpperMoveType
+                lsl.w   #4,d1
+                lea     MoveTypeTerrainCosts(pc), a0
+                adda.w  d1,a0
+                lea     ((MOVE_COST_LIST-$1000000)).w,a1
+                moveq   #$F,d7
 loc_C1A4:
-		move.b  (a0)+,d1
-		andi.b  #$F,d1
+                
+                move.b  (a0)+,d1
+                andi.b  #$F,d1
 loc_C1AA:
-		cmpi.b  #$F,d1
-		bne.s   loc_C1B2
-		moveq   #$FFFFFFFF,d1
+                
+                cmpi.b  #$F,d1
+                bne.s   loc_C1B2
+                moveq   #$FFFFFFFF,d1
 loc_C1B2:
-		move.b  d1,(a1)+
-		dbf     d7,loc_C1A4
-		movem.l (sp)+,d0-a6
-		rts
+                
+                move.b  d1,(a1)+
+                dbf     d7,loc_C1A4
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function MemorizePath
 
@@ -201,15 +211,16 @@ loc_C1B2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_C1BE:
-		movem.l d0/d2-a6,-(sp)
-		bsr.s   MemorizePath
-		lea     ((MOVE_COST_LIST-$1000000)).w,a0
-		bsr.w   GetCurrentTerrainType
-		andi.w  #$F,d0
-		adda.w  d0,a0
-		move.b  (a0),d1
-		movem.l (sp)+,d0/d2-a6
-		rts
+                
+                movem.l d0/d2-a6,-(sp)
+                bsr.s   MemorizePath
+                lea     ((MOVE_COST_LIST-$1000000)).w,a0
+                bsr.w   GetCurrentTerrainType
+                andi.w  #$F,d0
+                adda.w  d0,a0
+                move.b  (a0),d1
+                movem.l (sp)+,d0/d2-a6
+                rts
 
 	; End of function sub_C1BE
 
@@ -217,20 +228,22 @@ sub_C1BE:
 ; =============== S U B R O U T I N E =======================================
 
 GetMoveCost:
-		movem.l d0/d2-a6,-(sp)
-		jsr     GetUpperMoveType
-		lsl.w   #4,d1
-		lea     MoveTypeTerrainCosts(pc), a0
-		adda.w  d1,a0
-		bsr.w   GetCurrentTerrainType
-		andi.w  #$F,d0
-		adda.w  d0,a0
-		move.b  (a0),d1
-		lsr.b   #4,d1
+                
+                movem.l d0/d2-a6,-(sp)
+                jsr     GetUpperMoveType
+                lsl.w   #4,d1
+                lea     MoveTypeTerrainCosts(pc), a0
+                adda.w  d1,a0
+                bsr.w   GetCurrentTerrainType
+                andi.w  #$F,d0
+                adda.w  d0,a0
+                move.b  (a0),d1
+                lsr.b   #4,d1
 loc_C1FA:
-		andi.b  #$F,d1
-		movem.l (sp)+,d0/d2-a6
-		rts
+                
+                andi.b  #$F,d1
+                movem.l (sp)+,d0/d2-a6
+                rts
 
 	; End of function GetMoveCost
 
@@ -242,18 +255,20 @@ loc_C1FA:
 ;         D2 = Y coord
 
 SetMovableAtCoord:
-		
-		movem.l d0-a6,-(sp)
+                
+                movem.l d0-a6,-(sp)
 loc_C208:
-		lea     ((byte_FF4000+$400)).l,a0
-		bsr.w   ConvertCoordToOffset
+                
+                lea     ((byte_FF4000+$400)).l,a0
+                bsr.w   ConvertCoordToOffset
 loc_C212:
-		move.b  #0,(a0)
-		lea     ((byte_FF4A00+$300)).l,a0
-		bsr.w   ConvertCoordToOffset
-		move.b  #0,(a0)
-		movem.l (sp)+,d0-a6
-		rts
+                
+                move.b  #0,(a0)
+                lea     ((byte_FF4A00+$300)).l,a0
+                bsr.w   ConvertCoordToOffset
+                move.b  #0,(a0)
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function SetMovableAtCoord
 
@@ -266,18 +281,19 @@ loc_C212:
 ;     Out: D2 = resistance bitmask
 
 GetResistanceToSpell:
-		
-		movem.l d0-d1/d3-a6,-(sp)
-		andi.b  #SPELL_MASK_IDX,d1
+                
+                movem.l d0-d1/d3-a6,-(sp)
+                andi.b  #SPELL_MASK_IDX,d1
 loc_C232:
-		move.b  SpellElements(pc,d1.w),d2
-		jsr     GetCurrentResistance
-		andi.w  #SPELL_MASK_ALLRESIST,d1
-		ror.w   d2,d1
-		move.w  d1,d2
-		andi.w  #SPELL_MASK_RESIST,d2
-		movem.l (sp)+,d0-d1/d3-a6
-		rts
+                
+                move.b  SpellElements(pc,d1.w),d2
+                jsr     GetCurrentResistance
+                andi.w  #SPELL_MASK_ALLRESIST,d1
+                ror.w   d2,d1
+                move.w  d1,d2
+                andi.w  #SPELL_MASK_RESIST,d2
+                movem.l (sp)+,d0-d1/d3-a6
+                rts
 
 	; End of function GetResistanceToSpell
 
@@ -286,34 +302,37 @@ SpellElements:  incbin "data/stats/spells/spellelements.bin"
 ; =============== S U B R O U T I N E =======================================
 
 sub_C27A:
-		movem.l d0-d2/d4-a6,-(sp)
-		btst    #7,d0
-		bne.s   loc_C2A4
-		moveq   #1,d3
-		cmpi.b  #0,d1
-		beq.w   loc_C2C2
-		moveq   #0,d3
-		cmp.b   d0,d1
-		bne.w   loc_C2C2
-		moveq   #2,d0
-		jsr     (GetRandomOrDebugValue).w
-		beq.w   loc_C2C2
-		moveq   #1,d3
-		bra.s   loc_C2C2
+                
+                movem.l d0-d2/d4-a6,-(sp)
+                btst    #7,d0
+                bne.s   loc_C2A4
+                moveq   #1,d3
+                cmpi.b  #0,d1
+                beq.w   loc_C2C2
+                moveq   #0,d3
+                cmp.b   d0,d1
+                bne.w   loc_C2C2
+                moveq   #2,d0
+                jsr     (GetRandomOrDebugValue).w
+                beq.w   loc_C2C2
+                moveq   #1,d3
+                bra.s   loc_C2C2
 loc_C2A4:
-		moveq   #1,d3
-		cmpi.b  #$80,d1
-		beq.w   loc_C2C2
-		moveq   #0,d3
-		cmp.b   d0,d1
-		bne.w   loc_C2C2
-		moveq   #2,d0
-		jsr     (GetRandomOrDebugValue).w
-		beq.w   loc_C2C2
-		moveq   #1,d3
+                
+                moveq   #1,d3
+                cmpi.b  #$80,d1
+                beq.w   loc_C2C2
+                moveq   #0,d3
+                cmp.b   d0,d1
+                bne.w   loc_C2C2
+                moveq   #2,d0
+                jsr     (GetRandomOrDebugValue).w
+                beq.w   loc_C2C2
+                moveq   #1,d3
 loc_C2C2:
-		movem.l (sp)+,d0-d2/d4-a6
-		rts
+                
+                movem.l (sp)+,d0-d2/d4-a6
+                rts
 
 	; End of function sub_C27A
 
@@ -323,23 +342,26 @@ loc_C2C2:
 ; entity D0's current MOV*2, X, Y -> D0, D3, D4
 
 GetMoveInfo:
-		movem.l d1-d2/d5-a1,-(sp)
-		bsr.w   MemorizePath
+                
+                movem.l d1-d2/d5-a1,-(sp)
+                bsr.w   MemorizePath
 loc_C2D0:
-		lea     ((byte_FF4000+$400)).l,a2
-		lea     ((byte_FF4A00+$300)).l,a3
-		lea     (BATTLE_TERRAIN).l,a4
-		lea     ((MOVE_COST_LIST-$1000000)).w,a5
-		jsr     GetXPos
-		move.w  d1,d3
+                
+                lea     ((byte_FF4000+$400)).l,a2
+                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (BATTLE_TERRAIN).l,a4
+                lea     ((MOVE_COST_LIST-$1000000)).w,a5
+                jsr     GetXPos
+                move.w  d1,d3
 loc_C2EE:
-		jsr     GetYPos
-		move.w  d1,d4
-		jsr     GetCurrentMOV
-		move.w  d1,d0
-		add.w   d0,d0
-		movem.l (sp)+,d1-d2/d5-a1
-		rts
+                
+                jsr     GetYPos
+                move.w  d1,d4
+                jsr     GetCurrentMOV
+                move.w  d1,d0
+                add.w   d0,d0
+                movem.l (sp)+,d1-d2/d5-a1
+                rts
 
 	; End of function GetMoveInfo
 
@@ -349,47 +371,52 @@ loc_C2EE:
 ; get index and max/min range of current character's current weapon (D1,D3,D4)
 
 GetWeaponRange:
-		
-		movem.l d0-d2/d5-a6,-(sp)
-		jsr     GetEquippedWeapon
-		cmpi.w  #$FFFF,d1
-		bne.s   loc_C368
-		clr.l   d3
-		clr.l   d4
-		btst    #7,d0
-		bne.s   loc_C338
-		jsr     GetClass
-		cmpi.w  #$16,d1
-		bne.s   loc_C338
-		move.w  #2,d3
-		move.w  #1,d4
-		bra.w   loc_C37A
+                
+                movem.l d0-d2/d5-a6,-(sp)
+                jsr     GetEquippedWeapon
+                cmpi.w  #$FFFF,d1
+                bne.s   loc_C368
+                clr.l   d3
+                clr.l   d4
+                btst    #7,d0
+                bne.s   loc_C338
+                jsr     GetClass
+                cmpi.w  #$16,d1
+                bne.s   loc_C338
+                move.w  #2,d3
+                move.w  #1,d4
+                bra.w   loc_C37A
 loc_C338:
-		jsr     GetEnemyID
-		cmpi.b  #$3B,d1 
-		bne.s   loc_C350
-		move.w  #2,d3
-		move.w  #1,d4
-		bra.w   loc_C37A
+                
+                jsr     GetEnemyID
+                cmpi.b  #$3B,d1 
+                bne.s   loc_C350
+                move.w  #2,d3
+                move.w  #1,d4
+                bra.w   loc_C37A
 loc_C350:
-		cmpi.b  #$57,d1 
-		bne.s   loc_C362
-		move.w  #3,d3
-		move.w  #1,d4
-		bra.w   loc_C37A
+                
+                cmpi.b  #$57,d1 
+                bne.s   loc_C362
+                move.w  #3,d3
+                move.w  #1,d4
+                bra.w   loc_C37A
 loc_C362:
-		moveq   #1,d3
-		moveq   #1,d4
-		bra.s   loc_C37A
+                
+                moveq   #1,d3
+                moveq   #1,d4
+                bra.s   loc_C37A
 loc_C368:
-		jsr     GetItemDefAddress
-		clr.w   d3
-		clr.w   d4
-		move.b  4(a0),d3
-		move.b  5(a0),d4
+                
+                jsr     GetItemDefAddress
+                clr.w   d3
+                clr.w   d4
+                move.b  4(a0),d3
+                move.b  5(a0),d4
 loc_C37A:
-		movem.l (sp)+,d0-d2/d5-a6
-		rts
+                
+                movem.l (sp)+,d0-d2/d5-a6
+                rts
 
 	; End of function GetWeaponRange
 
@@ -397,13 +424,13 @@ loc_C37A:
 ; =============== S U B R O U T I N E =======================================
 
 GetSpellRange:
-		
-		movem.l d0-d2/d5-a6,-(sp)
-		jsr     GetSpellDefAddress
-		move.b  4(a0),d3
-		move.b  5(a0),d4
-		movem.l (sp)+,d0-d2/d5-a6
-		rts
+                
+                movem.l d0-d2/d5-a6,-(sp)
+                jsr     GetSpellDefAddress
+                move.b  4(a0),d3
+                move.b  5(a0),d4
+                movem.l (sp)+,d0-d2/d5-a6
+                rts
 
 	; End of function GetSpellRange
 
@@ -411,12 +438,13 @@ GetSpellRange:
 ; =============== S U B R O U T I N E =======================================
 
 GetItemRange:
-		movem.l d0-d2/d5-a6,-(sp)
-		jsr     GetItemDefAddress
-		move.b  4(a0),d3
-		move.b  5(a0),d4
-		movem.l (sp)+,d0-d2/d5-a6
-		rts
+                
+                movem.l d0-d2/d5-a6,-(sp)
+                jsr     GetItemDefAddress
+                move.b  4(a0),d3
+                move.b  5(a0),d4
+                movem.l (sp)+,d0-d2/d5-a6
+                rts
 
 	; End of function GetItemRange
 
@@ -427,28 +455,32 @@ GetItemRange:
 ; Out: D1 = whether combatant is inflicted with MUDDLE 2
 
 CheckMuddled2:
-		
-		movem.l d0/d2-a6,-(sp)
-		bsr.w   GetStatus
-		move.w  d1,d2
-		andi.w  #$30,d1 
-		tst.w   d1
-		beq.s   loc_C3D6
-		move.w  d2,d1
-		andi.w  #8,d1
-		tst.w   d1
-		beq.s   loc_C3D2
-		move.w  #1,d1
-		bra.s   loc_C3D4
+                
+                movem.l d0/d2-a6,-(sp)
+                bsr.w   GetStatus
+                move.w  d1,d2
+                andi.w  #$30,d1 
+                tst.w   d1
+                beq.s   loc_C3D6
+                move.w  d2,d1
+                andi.w  #8,d1
+                tst.w   d1
+                beq.s   loc_C3D2
+                move.w  #1,d1
+                bra.s   loc_C3D4
 loc_C3D2:
-		clr.w   d1
+                
+                clr.w   d1
 loc_C3D4:
-		bra.s   loc_C3D8
+                
+                bra.s   loc_C3D8
 loc_C3D6:
-		clr.w   d1
+                
+                clr.w   d1
 loc_C3D8:
-		movem.l (sp)+,d0/d2-a6
-		rts
+                
+                movem.l (sp)+,d0/d2-a6
+                rts
 
 	; End of function CheckMuddled2
 
@@ -456,18 +488,18 @@ loc_C3D8:
 ; =============== S U B R O U T I N E =======================================
 
 GenerateTargetRangeLists:
-		
-		movem.l d0-a6,-(sp)
-		move.w  #$FFFF,d3
-		bsr.w   UpdateTargetList
-		move.l  d0,-(sp)
-		bsr.w   GetMoveInfo     
-		bsr.w   MakeRangeLists
-		move.l  (sp)+,d0
-		move.w  #0,d3
-		bsr.w   UpdateTargetList
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l d0-a6,-(sp)
+                move.w  #$FFFF,d3
+                bsr.w   UpdateTargetList
+                move.l  d0,-(sp)
+                bsr.w   GetMoveInfo     
+                bsr.w   MakeRangeLists
+                move.l  (sp)+,d0
+                move.w  #0,d3
+                bsr.w   UpdateTargetList
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function GenerateTargetRangeLists
 
@@ -475,31 +507,33 @@ GenerateTargetRangeLists:
 ; =============== S U B R O U T I N E =======================================
 
 j_sub_C404_0:
-		movem.l d0-a6,-(sp)
-		bsr.w   ClearTargetGrid 
-		bsr.w   ClearMovableGrid
-		move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
-		eori.w  #$FFFF,d0
-		bsr.w   MakeTargetList
-		eori.w  #$FFFF,d0
-		bsr.w   GetWeaponRange  
-		move.w  d3,d2
-		move.w  d4,d3
-		moveq   #$FFFFFFFF,d5
-		addq.b  #1,d2
-		lea     pt_SpellRanges(pc), a1
-		nop
-		move.w  d2,d4
-		lsl.w   #2,d4
-		adda.w  d4,a1
-		sub.b   d3,d2
+                
+                movem.l d0-a6,-(sp)
+                bsr.w   ClearTargetGrid 
+                bsr.w   ClearMovableGrid
+                move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                eori.w  #$FFFF,d0
+                bsr.w   MakeTargetList
+                eori.w  #$FFFF,d0
+                bsr.w   GetWeaponRange  
+                move.w  d3,d2
+                move.w  d4,d3
+                moveq   #$FFFFFFFF,d5
+                addq.b  #1,d2
+                lea     pt_SpellRanges(pc), a1
+                nop
+                move.w  d2,d4
+                lsl.w   #2,d4
+                adda.w  d4,a1
+                sub.b   d3,d2
 loc_C43C:
-		movea.l -(a1),a0
-		bsr.w   ApplyRelativeCoordListToGrids
-		subq.w  #1,d2
-		bne.s   loc_C43C
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movea.l -(a1),a0
+                bsr.w   ApplyRelativeCoordListToGrids
+                subq.w  #1,d2
+                bne.s   loc_C43C
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function j_sub_C404_0
 
@@ -510,19 +544,20 @@ loc_C43C:
 ;     D1 = item idx
 
 CreateItemRangeGrid:
-		
-		movem.l d0-a6,-(sp)
-		bsr.w   ClearTargetGrid 
-		bsr.w   ClearMovableGrid
-		move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
-		jsr     GetItemDefAddress
-		move.b  9(a0),d1
-		cmpi.b  #$3F,d1 
-		beq.s   loc_C472
-		bsr.w   CreateSpellRangeGrid
+                
+                movem.l d0-a6,-(sp)
+                bsr.w   ClearTargetGrid 
+                bsr.w   ClearMovableGrid
+                move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                jsr     GetItemDefAddress
+                move.b  9(a0),d1
+                cmpi.b  #$3F,d1 
+                beq.s   loc_C472
+                bsr.w   CreateSpellRangeGrid
 loc_C472:
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function CreateItemRangeGrid
 
@@ -534,48 +569,54 @@ loc_C472:
 ;         D1 = spell idx
 
 CreateSpellRangeGrid:
-		
-		movem.l d0-a6,-(sp)
-		bsr.w   ClearTargetGrid 
-		bsr.w   ClearMovableGrid
-		move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
-		jsr     GetSpellDefAddress
-		btst    #7,d0
-		bne.s   loc_C4AA
-		btst    #6,3(a0)
-		beq.s   loc_C4A4
-		bsr.w   MakeTargetListAllies
-		bra.s   loc_C4A8
+                
+                movem.l d0-a6,-(sp)
+                bsr.w   ClearTargetGrid 
+                bsr.w   ClearMovableGrid
+                move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                jsr     GetSpellDefAddress
+                btst    #7,d0
+                bne.s   loc_C4AA
+                btst    #6,3(a0)
+                beq.s   loc_C4A4
+                bsr.w   MakeTargetListAllies
+                bra.s   loc_C4A8
 loc_C4A4:
-		bsr.w   MakeTargetListMonsters
+                
+                bsr.w   MakeTargetListMonsters
 loc_C4A8:
-		bra.s   loc_C4BC
+                
+                bra.s   loc_C4BC
 loc_C4AA:
-		btst    #6,3(a0)
-		beq.s   loc_C4B8
-		bsr.w   MakeTargetListMonsters
-		bra.s   loc_C4BC
+                
+                btst    #6,3(a0)
+                beq.s   loc_C4B8
+                bsr.w   MakeTargetListMonsters
+                bra.s   loc_C4BC
 loc_C4B8:
-		bsr.w   MakeTargetListAllies
+                
+                bsr.w   MakeTargetListAllies
 loc_C4BC:
-		moveq   #$FFFFFFFF,d5
-		moveq   #0,d2
-		move.b  4(a0),d2
-		move.b  5(a0),d3
-		addq.b  #1,d2
-		lea     pt_SpellRanges(pc), a1
-		nop
-		move.w  d2,d4
-		lsl.w   #2,d4
-		adda.w  d4,a1
-		sub.b   d3,d2
+                
+                moveq   #$FFFFFFFF,d5
+                moveq   #0,d2
+                move.b  4(a0),d2
+                move.b  5(a0),d3
+                addq.b  #1,d2
+                lea     pt_SpellRanges(pc), a1
+                nop
+                move.w  d2,d4
+                lsl.w   #2,d4
+                adda.w  d4,a1
+                sub.b   d3,d2
 loc_C4D8:
-		movea.l -(a1),a0
-		bsr.w   ApplyRelativeCoordListToGrids
-		subq.w  #1,d2
-		bne.s   loc_C4D8
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movea.l -(a1),a0
+                bsr.w   ApplyRelativeCoordListToGrids
+                subq.w  #1,d2
+                bne.s   loc_C4D8
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function CreateSpellRangeGrid
 
@@ -583,17 +624,18 @@ loc_C4D8:
 ; =============== S U B R O U T I N E =======================================
 
 j_sub_C4E8_0:
-		movem.l d0-a6,-(sp)
-		bsr.w   ClearTargetGrid 
-		bsr.w   ClearMovableGrid
-		move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
-		bsr.w   MakeTargetList
-		moveq   #$FFFFFFFF,d5
-		lea     SpellRange1(pc), a0
-		nop
-		bsr.w   ApplyRelativeCoordListToGrids
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l d0-a6,-(sp)
+                bsr.w   ClearTargetGrid 
+                bsr.w   ClearMovableGrid
+                move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                bsr.w   MakeTargetList
+                moveq   #$FFFFFFFF,d5
+                lea     SpellRange1(pc), a0
+                nop
+                bsr.w   ApplyRelativeCoordListToGrids
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function j_sub_C4E8_0
 
@@ -607,125 +649,132 @@ j_sub_C4E8_0:
 ;         D2 = starting Y coord
 
 ApplyRelativeCoordListToGrids:
-		
-		movem.l d0-a6,-(sp)
-		jsr     GetXPos
-		cmpi.w  #$FFFF,d1
-		beq.w   loc_C58A
-		move.w  d1,d3
-		jsr     GetYPos
-		move.w  d1,d4
-		clr.w   d7
-		move.b  (a0)+,d7
-		subq.w  #1,d7
+                
+                movem.l d0-a6,-(sp)
+                jsr     GetXPos
+                cmpi.w  #$FFFF,d1
+                beq.w   loc_C58A
+                move.w  d1,d3
+                jsr     GetYPos
+                move.w  d1,d4
+                clr.w   d7
+                move.b  (a0)+,d7
+                subq.w  #1,d7
 loc_C532:
-		move.w  d4,d2
-		add.b   1(a0),d2
-		cmpi.w  #$30,d2 
+                
+                move.w  d4,d2
+                add.b   1(a0),d2
+                cmpi.w  #$30,d2 
 loc_C53C:
-		bcc.w   loc_C584
-		move.w  d3,d1
-		add.b   (a0),d1
-		cmpi.w  #$30,d1 
-		bcc.w   loc_C584
-		tst.b   d5
-		beq.s   loc_C55E
-		bsr.w   GetTerrain      
-		cmpi.b  #$FF,d0
-		beq.s   loc_C55E
-		bsr.w   SetMovableAtCoord
+                
+                bcc.w   loc_C584
+                move.w  d3,d1
+                add.b   (a0),d1
+                cmpi.w  #$30,d1 
+                bcc.w   loc_C584
+                tst.b   d5
+                beq.s   loc_C55E
+                bsr.w   GetTerrain      
+                cmpi.b  #$FF,d0
+                beq.s   loc_C55E
+                bsr.w   SetMovableAtCoord
 loc_C55E:
-		bsr.w   GetTargetAtCoordOffset
-		cmpi.b  #$FF,d0
-		beq.w   loc_C584
-		jsr     GetCurrentHP
-		tst.w   d1
-		beq.w   loc_C584
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
-		adda.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a1
-		move.b  d0,(a1)
-		addq.w  #1,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                
+                bsr.w   GetTargetAtCoordOffset
+                cmpi.b  #$FF,d0
+                beq.w   loc_C584
+                jsr     GetCurrentHP
+                tst.w   d1
+                beq.w   loc_C584
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
+                adda.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a1
+                move.b  d0,(a1)
+                addq.w  #1,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 loc_C584:
-		addq.l  #2,a0
-		dbf     d7,loc_C532
+                
+                addq.l  #2,a0
+                dbf     d7,loc_C532
 loc_C58A:
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function ApplyRelativeCoordListToGrids
 
 pt_SpellRanges: dc.l SpellRange0
-		dc.l SpellRange1
-		dc.l SpellRange2
-		dc.l SpellRange3
+                dc.l SpellRange1
+                dc.l SpellRange2
+                dc.l SpellRange3
 SpellRange0:    dc.b 1
-		dc.b 0
-		dc.b 0
+                dc.b 0
+                dc.b 0
 SpellRange1:    dc.b 4
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.b 0
-		dc.b 0
-		dc.b $FF
-		dc.b $FF
-		dc.b 0
+                dc.b 0
+                dc.b 1
+                dc.b 1
+                dc.b 0
+                dc.b 0
+                dc.b $FF
+                dc.b $FF
+                dc.b 0
 SpellRange2:    dc.b 8
-		dc.b 0
-		dc.b $FE
-		dc.b $FF
-		dc.b $FF
-		dc.b $FE
-		dc.b 0
-		dc.b $FF
-		dc.b 1
-		dc.b 0
-		dc.b 2
-		dc.b 1
-		dc.b 1
-		dc.b 2
-		dc.b 0
-		dc.b 1
-		dc.b $FF
+                dc.b 0
+                dc.b $FE
+                dc.b $FF
+                dc.b $FF
+                dc.b $FE
+                dc.b 0
+                dc.b $FF
+                dc.b 1
+                dc.b 0
+                dc.b 2
+                dc.b 1
+                dc.b 1
+                dc.b 2
+                dc.b 0
+                dc.b 1
+                dc.b $FF
 SpellRange3:    dc.b $C
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.b 2
-		dc.b 2
-		dc.b 1
-		dc.b 3
-		dc.b 0
-		dc.b 2
-		dc.b $FF
-		dc.b 1
-		dc.b $FE
-		dc.b 0
-		dc.b $FD
-		dc.b $FF
-		dc.b $FE
-		dc.b $FE
-		dc.b $FF
-		dc.b $FD
-		dc.b 0
-		dc.b $FE
-		dc.b 1
-		dc.b $FF
-		dc.b 2
+                dc.b 0
+                dc.b 3
+                dc.b 1
+                dc.b 2
+                dc.b 2
+                dc.b 1
+                dc.b 3
+                dc.b 0
+                dc.b 2
+                dc.b $FF
+                dc.b 1
+                dc.b $FE
+                dc.b 0
+                dc.b $FD
+                dc.b $FF
+                dc.b $FE
+                dc.b $FE
+                dc.b $FF
+                dc.b $FD
+                dc.b 0
+                dc.b $FE
+                dc.b 1
+                dc.b $FF
+                dc.b 2
 
 ; =============== S U B R O U T I N E =======================================
 
 j_sub_C5D6_0:
-		movem.l d0-a6,-(sp)
-		move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
-		jsr     GetItemDefAddress
-		move.b  9(a0),d1
-		cmpi.b  #$FF,d1
-		beq.s   loc_C5F4
-		bsr.w   CreateTargetGridFromSpell
+                
+                movem.l d0-a6,-(sp)
+                move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                jsr     GetItemDefAddress
+                move.b  9(a0),d1
+                cmpi.b  #$FF,d1
+                beq.s   loc_C5F4
+                bsr.w   CreateTargetGridFromSpell
 loc_C5F4:
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function j_sub_C5D6_0
 
@@ -733,16 +782,18 @@ loc_C5F4:
 ; =============== S U B R O U T I N E =======================================
 
 j_sub_C5FA_0:
-		movem.l d0-a6,-(sp)
-		move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
-		jsr     GetItemDefAddress
-		move.b  9(a0),d1
-		cmpi.b  #$FF,d1
-		beq.s   loc_C618
-		bsr.w   CreateTargetGrid
+                
+                movem.l d0-a6,-(sp)
+                move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                jsr     GetItemDefAddress
+                move.b  9(a0),d1
+                cmpi.b  #$FF,d1
+                beq.s   loc_C618
+                bsr.w   CreateTargetGrid
 loc_C618:
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function j_sub_C5FA_0
 
@@ -750,13 +801,14 @@ loc_C618:
 ; =============== S U B R O U T I N E =======================================
 
 CreateTargetGridFromSpell:
-		
-		cmpi.b  #$19,d1
-		bne.s   loc_C62A
-		bsr.w   MakeTargetListEverybody
-		bra.s   CreateTargetGrid
+                
+                cmpi.b  #$19,d1
+                bne.s   loc_C62A
+                bsr.w   MakeTargetListEverybody
+                bra.s   CreateTargetGrid
 loc_C62A:
-		bsr.w   MakeTargetList
+                
+                bsr.w   MakeTargetList
 
 	; End of function CreateTargetGridFromSpell
 
@@ -764,42 +816,47 @@ loc_C62A:
 ; =============== S U B R O U T I N E =======================================
 
 CreateTargetGrid:
-		
-		movem.l d0-a6,-(sp)
-		move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
-		jsr     GetSpellDefAddress
-		cmpi.b  #$C1,d1
-		beq.w   loc_C678
-		cmpi.b  #$2A,d1 
-		beq.w   loc_C678
-		moveq   #0,d2
-		move.b  6(a0),d2
-		addq.b  #1,d2
-		lea     pt_SpellRanges(pc), a1
-		move.w  d2,d4
-		lsl.w   #2,d4
-		adda.w  d4,a1
-		cmpi.b  #$19,d1
-		bne.s   loc_C668
-		subq.b  #1,d2
+                
+                movem.l d0-a6,-(sp)
+                move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                jsr     GetSpellDefAddress
+                cmpi.b  #$C1,d1
+                beq.w   loc_C678
+                cmpi.b  #$2A,d1 
+                beq.w   loc_C678
+                moveq   #0,d2
+                move.b  6(a0),d2
+                addq.b  #1,d2
+                lea     pt_SpellRanges(pc), a1
+                move.w  d2,d4
+                lsl.w   #2,d4
+                adda.w  d4,a1
+                cmpi.b  #$19,d1
+                bne.s   loc_C668
+                subq.b  #1,d2
 loc_C668:
-		moveq   #0,d5
+                
+                moveq   #0,d5
 loc_C66A:
-		movea.l -(a1),a0
-		bsr.w   ApplyRelativeCoordListToGrids
-		subq.w  #1,d2
-		bne.s   loc_C66A
-		bra.w   loc_C688
+                
+                movea.l -(a1),a0
+                bsr.w   ApplyRelativeCoordListToGrids
+                subq.w  #1,d2
+                bne.s   loc_C66A
+                bra.w   loc_C688
 loc_C678:
-		btst    #7,d0
-		bne.s   loc_C684
-		bsr.w   sub_C68E
-		bra.s   loc_C688
+                
+                btst    #7,d0
+                bne.s   loc_C684
+                bsr.w   sub_C68E
+                bra.s   loc_C688
 loc_C684:
-		bsr.w   sub_C6D4
+                
+                bsr.w   sub_C6D4
 loc_C688:
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function CreateTargetGrid
 
@@ -807,32 +864,39 @@ loc_C688:
 ; =============== S U B R O U T I N E =======================================
 
 sub_C68E:
-		movem.l d0-a6,-(sp)
+                
+                movem.l d0-a6,-(sp)
 loc_C692:
-		move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-		move.w  #0,d0
-		bra.s   loc_C6A4
+                
+                move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+                move.w  #0,d0
+                bra.s   loc_C6A4
 loc_C6A2:
-		addq.w  #1,d0
+                
+                addq.w  #1,d0
 loc_C6A4:
-		cmpi.w  #$1D,d0
-		bgt.s   loc_C6CE
-		jsr     GetXPos
-		cmpi.b  #$FF,d1
-		beq.w   loc_C6CC
+                
+                cmpi.w  #$1D,d0
+                bgt.s   loc_C6CE
+                jsr     GetXPos
+                cmpi.b  #$FF,d1
+                beq.w   loc_C6CC
 loc_C6B8:
-		jsr     GetCurrentHP
-		tst.w   d1
-		beq.w   loc_C6CC
-		move.b  d0,(a0)
-		addq.l  #1,a0
-		addq.w  #1,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                
+                jsr     GetCurrentHP
+                tst.w   d1
+                beq.w   loc_C6CC
+                move.b  d0,(a0)
+                addq.l  #1,a0
+                addq.w  #1,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 loc_C6CC:
-		bra.s   loc_C6A2
+                
+                bra.s   loc_C6A2
 loc_C6CE:
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function sub_C68E
 
@@ -840,30 +904,35 @@ loc_C6CE:
 ; =============== S U B R O U T I N E =======================================
 
 sub_C6D4:
-		movem.l d0-a6,-(sp)
-		move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-		move.w  #$80,d0 
-		bra.s   loc_C6EA
+                
+                movem.l d0-a6,-(sp)
+                move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+                move.w  #$80,d0 
+                bra.s   loc_C6EA
 loc_C6E8:
-		addq.w  #1,d0
+                
+                addq.w  #1,d0
 loc_C6EA:
-		cmpi.w  #$9F,d0 
-		bgt.s   loc_C714
-		jsr     GetXPos
-		cmpi.b  #$FF,d1
-		beq.w   loc_C712
-		jsr     GetCurrentHP
-		tst.w   d1
-		beq.w   loc_C712
-		move.b  d0,(a0)
-		addq.l  #1,a0
-		addq.w  #1,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                
+                cmpi.w  #$9F,d0 
+                bgt.s   loc_C714
+                jsr     GetXPos
+                cmpi.b  #$FF,d1
+                beq.w   loc_C712
+                jsr     GetCurrentHP
+                tst.w   d1
+                beq.w   loc_C712
+                move.b  d0,(a0)
+                addq.l  #1,a0
+                addq.w  #1,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
 loc_C712:
-		bra.s   loc_C6E8
+                
+                bra.s   loc_C6E8
 loc_C714:
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function sub_C6D4
 
@@ -879,83 +948,91 @@ loc_C714:
 ;      D2 = chosen y pos
 
 GetClosestAttackPosition:
-		
-		movem.l d0/d3-a6,-(sp)
-		link    a6,#-6
-		move.b  d1,-1(a6)
-		move.b  d2,-2(a6)
-		move.b  #$FF,-3(a6)
-		move.b  #$FF,-4(a6)
-		move.b  #$FF,-5(a6)
-		cmpi.b  #$30,d1 
-		bcc.w   loc_C7E2
-		cmpi.b  #$30,d2 
-		bcc.w   loc_C7E2
-		move.b  d3,d6
-		neg.b   d6              ; D6 is now -max range
+                
+                movem.l d0/d3-a6,-(sp)
+                link    a6,#-6
+                move.b  d1,-1(a6)
+                move.b  d2,-2(a6)
+                move.b  #$FF,-3(a6)
+                move.b  #$FF,-4(a6)
+                move.b  #$FF,-5(a6)
+                cmpi.b  #$30,d1 
+                bcc.w   loc_C7E2
+                cmpi.b  #$30,d2 
+                bcc.w   loc_C7E2
+                move.b  d3,d6
+                neg.b   d6              ; D6 is now -max range
 loc_C750:
-		move.b  d3,d5
-		move.b  d6,d0
-		or.b    d0,d0
-		bge.s   loc_C75A
-		neg.b   d0
+                
+                move.b  d3,d5
+                move.b  d6,d0
+                or.b    d0,d0
+                bge.s   loc_C75A
+                neg.b   d0
 loc_C75A:
-		sub.b   d0,d5
-		neg.b   d5              ; D5 is now (max range - max range) ???
-		move.b  d3,d0
+                
+                sub.b   d0,d5
+                neg.b   d5              ; D5 is now (max range - max range) ???
+                move.b  d3,d0
 loc_C760:
-		cmp.b   d4,d0
-		bcs.w   loc_C7BE
-		move.b  -1(a6),d1
-		add.b   d5,d1
-		cmpi.b  #$30,d1 
-		bcc.w   loc_C7BE
-		move.b  -2(a6),d2
-		add.b   d6,d2
-		cmpi.b  #$30,d2 
-		bcc.w   loc_C7BE
-		bsr.w   GetDestinationMoveCost
-		tst.w   d0              ; already in range, so end because it can't get cheaper
-		beq.w   loc_C7EA
-		btst    #$F,d0
-		bne.w   loc_C7BE
-		cmp.b   -5(a6),d0
-		bcc.w   loc_C7BE
-		move.b  d0,d7
-		andi.w  #$FF,d1
-		andi.w  #$FF,d2
-		bsr.w   GetTargetAtCoordOffset
-		cmpi.b  #$FF,d0
-		bne.w   loc_C7BE        ; already someone there, so it can't be chosen
-		move.b  d7,-5(a6)
-		move.b  d1,-3(a6)
-		move.b  d2,-4(a6)
+                
+                cmp.b   d4,d0
+                bcs.w   loc_C7BE
+                move.b  -1(a6),d1
+                add.b   d5,d1
+                cmpi.b  #$30,d1 
+                bcc.w   loc_C7BE
+                move.b  -2(a6),d2
+                add.b   d6,d2
+                cmpi.b  #$30,d2 
+                bcc.w   loc_C7BE
+                bsr.w   GetDestinationMoveCost
+                tst.w   d0              ; already in range, so end because it can't get cheaper
+                beq.w   loc_C7EA
+                btst    #$F,d0
+                bne.w   loc_C7BE
+                cmp.b   -5(a6),d0
+                bcc.w   loc_C7BE
+                move.b  d0,d7
+                andi.w  #$FF,d1
+                andi.w  #$FF,d2
+                bsr.w   GetTargetAtCoordOffset
+                cmpi.b  #$FF,d0
+                bne.w   loc_C7BE        ; already someone there, so it can't be chosen
+                move.b  d7,-5(a6)
+                move.b  d1,-3(a6)
+                move.b  d2,-4(a6)
 loc_C7BE:
-		addq.b  #1,d5
-		move.b  d5,d1
-		or.b    d1,d1
-		bge.s   loc_C7C8
-		neg.b   d1
+                
+                addq.b  #1,d5
+                move.b  d5,d1
+                or.b    d1,d1
+                bge.s   loc_C7C8
+                neg.b   d1
 loc_C7C8:
-		move.b  d6,d0
-		or.b    d0,d0
-		bge.s   loc_C7D0
-		neg.b   d0
+                
+                move.b  d6,d0
+                or.b    d0,d0
+                bge.s   loc_C7D0
+                neg.b   d0
 loc_C7D0:
-		add.b   d1,d0
-		cmp.b   d3,d0
-		bls.s   loc_C760
-		cmp.b   d3,d6
-		beq.w   loc_C7E2
-		addq.b  #1,d6
-		bra.w   loc_C750
+                
+                add.b   d1,d0
+                cmp.b   d3,d0
+                bls.s   loc_C760
+                cmp.b   d3,d6
+                beq.w   loc_C7E2
+                addq.b  #1,d6
+                bra.w   loc_C750
 loc_C7E2:
-		move.b  -3(a6),d1
-		move.b  -4(a6),d2
+                
+                move.b  -3(a6),d1
+                move.b  -4(a6),d2
 loc_C7EA:
-		unlk    a6
-		movem.l (sp)+,d0/d3-a6
-		rts
+                
+                unlk    a6
+                movem.l (sp)+,d0/d3-a6
+                rts
 
 	; End of function GetClosestAttackPosition
 
@@ -963,9 +1040,9 @@ loc_C7EA:
 ; =============== S U B R O U T I N E =======================================
 
 MakeTargetList:
-		
-		btst    #7,d0
-		bne.w   MakeTargetListMonsters; generate list of targets: opposite alignment of D0
+                
+                btst    #7,d0
+                bne.w   MakeTargetListMonsters; generate list of targets: opposite alignment of D0
 
 	; End of function MakeTargetList
 
@@ -975,12 +1052,12 @@ MakeTargetList:
 ;     Clear target grid, then add allies.
 
 MakeTargetListAllies:
-		
-		movem.l d0-a0,-(sp)
-		bsr.w   ClearTargetGrid 
-		moveq   #0,d0
-		moveq   #$1D,d7
-		bra.w   loc_C828
+                
+                movem.l d0-a0,-(sp)
+                bsr.w   ClearTargetGrid 
+                moveq   #0,d0
+                moveq   #$1D,d7
+                bra.w   loc_C828
 
 	; End of function MakeTargetListAllies
 
@@ -988,12 +1065,12 @@ MakeTargetListAllies:
 ; =============== S U B R O U T I N E =======================================
 
 MakeTargetListMonsters:
-		
-		movem.l d0-a0,-(sp)
-		bsr.w   ClearTargetGrid 
-		move.w  #$80,d0 
-		moveq   #$1F,d7
-		bra.w   loc_C828
+                
+                movem.l d0-a0,-(sp)
+                bsr.w   ClearTargetGrid 
+                move.w  #$80,d0 
+                moveq   #$1F,d7
+                bra.w   loc_C828
 
 	; End of function MakeTargetListMonsters
 
@@ -1001,37 +1078,42 @@ MakeTargetListMonsters:
 ; =============== S U B R O U T I N E =======================================
 
 MakeTargetListEverybody:
-		
-		movem.l d0-a0,-(sp)
-		bsr.s   MakeTargetListAllies
-		move.w  #COM_ENEMY_START,d0
-		moveq   #COM_ENEMIES_COUNTER,d7
+                
+                movem.l d0-a0,-(sp)
+                bsr.s   MakeTargetListAllies
+                move.w  #COM_ENEMY_START,d0
+                moveq   #COM_ENEMIES_COUNTER,d7
 loc_C828:
-		jsr     GetCurrentHP
-		tst.w   d1
-		beq.w   loc_C86E
-		jsr     GetCharacterWord34
-		btst    #3,d1
-		beq.s   loc_C844
-		bra.w   loc_C86E
+                
+                jsr     GetCurrentHP
+                tst.w   d1
+                beq.w   loc_C86E
+                jsr     GetCharacterWord34
+                btst    #3,d1
+                beq.s   loc_C844
+                bra.w   loc_C86E
 loc_C844:
-		jsr     GetYPos
+                
+                jsr     GetYPos
 loc_C84A:
-		cmpi.w  #MAP_SIZE_MAXHEIGHT,d1
-		bcc.w   loc_C86E
-		move.w  d1,d2
-		jsr     GetXPos
-		cmpi.w  #MAP_SIZE_MAXWIDTH,d1
-		bcc.w   loc_C86E
-		lea     (FF5600_LOADING_SPACE).l,a0
-		bsr.w   ConvertCoordToOffset
-		move.b  d0,(a0)
+                
+                cmpi.w  #MAP_SIZE_MAXHEIGHT,d1
+                bcc.w   loc_C86E
+                move.w  d1,d2
+                jsr     GetXPos
+                cmpi.w  #MAP_SIZE_MAXWIDTH,d1
+                bcc.w   loc_C86E
+                lea     (FF5600_LOADING_SPACE).l,a0
+                bsr.w   ConvertCoordToOffset
+                move.b  d0,(a0)
 loc_C86E:
-		addq.b  #1,d0
+                
+                addq.b  #1,d0
 loc_C870:
-		dbf     d7,loc_C828
-		movem.l (sp)+,d0-a0
-		rts
+                
+                dbf     d7,loc_C828
+                movem.l (sp)+,d0-a0
+                rts
 
 	; End of function MakeTargetListEverybody
 
@@ -1039,9 +1121,9 @@ loc_C870:
 ; =============== S U B R O U T I N E =======================================
 
 UpdateTargetList:
-		
-		btst    #7,d0
-		beq.w   UpdateTargetListMonsters
+                
+                btst    #7,d0
+                beq.w   UpdateTargetListMonsters
 
 	; End of function UpdateTargetList
 
@@ -1049,11 +1131,11 @@ UpdateTargetList:
 ; =============== S U B R O U T I N E =======================================
 
 UpdateTargetListCharacters:
-		
-		movem.l d0-a0,-(sp)
-		moveq   #COM_ALLY_START,d0
-		moveq   #COM_ALLIES_COUNTER,d7
-		bra.w   loc_C898
+                
+                movem.l d0-a0,-(sp)
+                moveq   #COM_ALLY_START,d0
+                moveq   #COM_ALLIES_COUNTER,d7
+                bra.w   loc_C898
 
 	; End of function UpdateTargetListCharacters
 
@@ -1061,45 +1143,50 @@ UpdateTargetListCharacters:
 ; =============== S U B R O U T I N E =======================================
 
 UpdateTargetListMonsters:
-		
-		movem.l d0-a0,-(sp)
-		move.w  #COM_ENEMY_START,d0
-		moveq   #COM_ENEMIES_COUNTER,d7
+                
+                movem.l d0-a0,-(sp)
+                move.w  #COM_ENEMY_START,d0
+                moveq   #COM_ENEMIES_COUNTER,d7
 loc_C898:
-		jsr     GetCurrentHP
-		tst.w   d1
-		beq.w   loc_C8F4
-		jsr     GetYPos
-		move.w  d1,d2
-		cmpi.w  #MAP_SIZE_MAXHEIGHT,d2
-		bcc.w   loc_C8F4
-		jsr     GetXPos
-		cmpi.w  #MAP_SIZE_MAXWIDTH,d1
-		bcc.w   loc_C8F4
-		lea     (BATTLE_TERRAIN).l,a0
-		bsr.w   ConvertCoordToOffset
-		move.b  (a0),d4
-		cmpi.b  #$FF,d4
-		bne.s   loc_C8D8
-		bra.w   loc_C8F4
+                
+                jsr     GetCurrentHP
+                tst.w   d1
+                beq.w   loc_C8F4
+                jsr     GetYPos
+                move.w  d1,d2
+                cmpi.w  #MAP_SIZE_MAXHEIGHT,d2
+                bcc.w   loc_C8F4
+                jsr     GetXPos
+                cmpi.w  #MAP_SIZE_MAXWIDTH,d1
+                bcc.w   loc_C8F4
+                lea     (BATTLE_TERRAIN).l,a0
+                bsr.w   ConvertCoordToOffset
+                move.b  (a0),d4
+                cmpi.b  #$FF,d4
+                bne.s   loc_C8D8
+                bra.w   loc_C8F4
 loc_C8D8:
-		btst    #6,d4
-		beq.s   loc_C8E6
-		tst.w   d3
-		bne.s   loc_C8E6
-		bra.w   loc_C8F4
+                
+                btst    #6,d4
+                beq.s   loc_C8E6
+                tst.w   d3
+                bne.s   loc_C8E6
+                bra.w   loc_C8F4
 loc_C8E6:
-		tst.w   d3
-		bne.s   loc_C8F0
-		bclr    #7,(a0)
-		bra.s   loc_C8F4
+                
+                tst.w   d3
+                bne.s   loc_C8F0
+                bclr    #7,(a0)
+                bra.s   loc_C8F4
 loc_C8F0:
-		bset    #7,(a0)
+                
+                bset    #7,(a0)
 loc_C8F4:
-		addq.b  #1,d0
-		dbf     d7,loc_C898
-		movem.l (sp)+,d0-a0
-		rts
+                
+                addq.b  #1,d0
+                dbf     d7,loc_C898
+                movem.l (sp)+,d0-a0
+                rts
 
 	; End of function UpdateTargetListMonsters
 
@@ -1107,33 +1194,37 @@ loc_C8F4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_C900:
-		movem.l d0-a0,-(sp)
-		move.w  #0,d0
-		moveq   #$1D,d7
+                
+                movem.l d0-a0,-(sp)
+                move.w  #0,d0
+                moveq   #$1D,d7
 loc_C90A:
-		jsr     GetCurrentHP
-		tst.w   d1
-		beq.w   loc_C94C
-		jsr     GetYPos
-		move.w  d1,d2
-		cmpi.w  #$30,d2 
-		bcc.w   loc_C94C
-		jsr     GetXPos
-		cmpi.w  #$30,d1 
-		bcc.w   loc_C94C
-		lea     ((byte_FF4A00+$300)).l,a0
-		bsr.w   ConvertCoordToOffset
-		tst.w   d3
-		bne.s   loc_C948
-		bclr    #7,(a0)
-		bra.s   loc_C94C
+                
+                jsr     GetCurrentHP
+                tst.w   d1
+                beq.w   loc_C94C
+                jsr     GetYPos
+                move.w  d1,d2
+                cmpi.w  #$30,d2 
+                bcc.w   loc_C94C
+                jsr     GetXPos
+                cmpi.w  #$30,d1 
+                bcc.w   loc_C94C
+                lea     ((byte_FF4A00+$300)).l,a0
+                bsr.w   ConvertCoordToOffset
+                tst.w   d3
+                bne.s   loc_C948
+                bclr    #7,(a0)
+                bra.s   loc_C94C
 loc_C948:
-		bset    #7,(a0)
+                
+                bset    #7,(a0)
 loc_C94C:
-		addq.b  #1,d0
-		dbf     d7,loc_C90A
-		movem.l (sp)+,d0-a0
-		rts
+                
+                addq.b  #1,d0
+                dbf     d7,loc_C90A
+                movem.l (sp)+,d0-a0
+                rts
 
 	; End of function sub_C900
 
@@ -1141,148 +1232,171 @@ loc_C94C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_C958:
-		movem.l d1-a2,-(sp)
-		move.l  d0,-(sp)
-		moveq   #$FFFFFFFF,d3
-		bsr.w   UpdateTargetList
-		bsr.w   GetMoveInfo     
-		bsr.w   MakeRangeLists
-		moveq   #0,d3
-		bsr.w   UpdateTargetList
-		clr.w   ((byte_FF8808-$1000000)).w
-		clr.w   ((word_FF8806-$1000000)).w
-		clr.w   ((FF8804_LOADING_SPACE-$1000000)).w
-		move.l  (sp)+,d0
-		moveq   #0,d3
-		bsr.w   GetNextUsableAttackItem
-		cmpi.w  #$7F,d1 
-		beq.w   loc_CA02
-		bsr.w   MakeTargetListEverybody
-		bsr.w   GetTargetsReachableByItem
-		move.w  ((byte_FF8808-$1000000)).w,d7
-		subq.w  #1,d7
-		bcs.w   loc_CA02
-		move.l  d1,-(sp)
-		btst    #7,d0
-		bne.s   loc_C9BC
-		bsr.w   CheckMuddled2   
-		tst.b   d1
-		bne.s   loc_C9B6
-		bsr.w   MakeTargetListMonsters
-		bra.s   loc_C9BA
+                
+                movem.l d1-a2,-(sp)
+                move.l  d0,-(sp)
+                moveq   #$FFFFFFFF,d3
+                bsr.w   UpdateTargetList
+                bsr.w   GetMoveInfo     
+                bsr.w   MakeRangeLists
+                moveq   #0,d3
+                bsr.w   UpdateTargetList
+                clr.w   ((byte_FF8808-$1000000)).w
+                clr.w   ((word_FF8806-$1000000)).w
+                clr.w   ((FF8804_LOADING_SPACE-$1000000)).w
+                move.l  (sp)+,d0
+                moveq   #0,d3
+                bsr.w   GetNextUsableAttackItem
+                cmpi.w  #$7F,d1 
+                beq.w   loc_CA02
+                bsr.w   MakeTargetListEverybody
+                bsr.w   GetTargetsReachableByItem
+                move.w  ((byte_FF8808-$1000000)).w,d7
+                subq.w  #1,d7
+                bcs.w   loc_CA02
+                move.l  d1,-(sp)
+                btst    #7,d0
+                bne.s   loc_C9BC
+                bsr.w   CheckMuddled2   
+                tst.b   d1
+                bne.s   loc_C9B6
+                bsr.w   MakeTargetListMonsters
+                bra.s   loc_C9BA
 loc_C9B6:
-		bsr.w   MakeTargetListAllies
+                
+                bsr.w   MakeTargetListAllies
 loc_C9BA:
-		bra.s   loc_C9CE
+                
+                bra.s   loc_C9CE
 loc_C9BC:
-		bsr.w   CheckMuddled2   
-		tst.b   d1
-		bne.s   loc_C9CA
-		bsr.w   MakeTargetListAllies
-		bra.s   loc_C9CE
+                
+                bsr.w   CheckMuddled2   
+                tst.b   d1
+                bne.s   loc_C9CA
+                bsr.w   MakeTargetListAllies
+                bra.s   loc_C9CE
 loc_C9CA:
-		bsr.w   MakeTargetListMonsters
+                
+                bsr.w   MakeTargetListMonsters
 loc_C9CE:
-		move.l  (sp)+,d1
-		lea     (word_FF880A).l,a0
-		move.w  d2,(a0)
-		jsr     GetItemDefAddress
+                
+                move.l  (sp)+,d1
+                lea     (word_FF880A).l,a0
+                move.w  d2,(a0)
+                jsr     GetItemDefAddress
 loc_C9DE:
-		move.b  9(a0),d1
-		lea     ((byte_FF886E-$1000000)).w,a0
-		lea     ((byte_FF88FE-$1000000)).w,a1
-		lea     ((byte_FF898E-$1000000)).w,a2
+                
+                move.b  9(a0),d1
+                lea     ((byte_FF886E-$1000000)).w,a0
+                lea     ((byte_FF88FE-$1000000)).w,a1
+                lea     ((byte_FF898E-$1000000)).w,a2
 loc_C9EE:
-		move.b  (a0,d7.w),d2
-		move.b  (a1,d7.w),d5
-		bsr.w   sub_CAEA
-		move.b  d6,(a2,d7.w)
-		dbf     d7,loc_C9EE
+                
+                move.b  (a0,d7.w),d2
+                move.b  (a1,d7.w),d5
+                bsr.w   sub_CAEA
+                move.b  d6,(a2,d7.w)
+                dbf     d7,loc_C9EE
 loc_CA02:
-		moveq   #0,d3
-		bsr.w   GetNextUsableAttackSpell
-		cmpi.w  #$3F,d1 
-		beq.w   loc_CA7A
-		bsr.w   MakeTargetListEverybody
-		bsr.w   GetTargetsReachableBySpell
-		move.w  ((word_FF8806-$1000000)).w,d7
-		subq.w  #1,d7
-		bcs.w   loc_CA7A
-		move.l  d1,-(sp)
-		btst    #7,d0
-		bne.s   loc_CA3E
-		bsr.w   CheckMuddled2   
-		tst.b   d1
-		bne.s   loc_CA38
-		bsr.w   MakeTargetListMonsters
-		bra.s   loc_CA3C
+                
+                moveq   #0,d3
+                bsr.w   GetNextUsableAttackSpell
+                cmpi.w  #$3F,d1 
+                beq.w   loc_CA7A
+                bsr.w   MakeTargetListEverybody
+                bsr.w   GetTargetsReachableBySpell
+                move.w  ((word_FF8806-$1000000)).w,d7
+                subq.w  #1,d7
+                bcs.w   loc_CA7A
+                move.l  d1,-(sp)
+                btst    #7,d0
+                bne.s   loc_CA3E
+                bsr.w   CheckMuddled2   
+                tst.b   d1
+                bne.s   loc_CA38
+                bsr.w   MakeTargetListMonsters
+                bra.s   loc_CA3C
 loc_CA38:
-		bsr.w   MakeTargetListAllies
+                
+                bsr.w   MakeTargetListAllies
 loc_CA3C:
-		bra.s   loc_CA50
+                
+                bra.s   loc_CA50
 loc_CA3E:
-		bsr.w   CheckMuddled2   
-		tst.b   d1
-		bne.s   loc_CA4C
-		bsr.w   MakeTargetListAllies
-		bra.s   loc_CA50
+                
+                bsr.w   CheckMuddled2   
+                tst.b   d1
+                bne.s   loc_CA4C
+                bsr.w   MakeTargetListAllies
+                bra.s   loc_CA50
 loc_CA4C:
-		bsr.w   MakeTargetListMonsters
+                
+                bsr.w   MakeTargetListMonsters
 loc_CA50:
-		move.l  (sp)+,d1
-		lea     (word_FF880C).l,a0
-		move.w  d1,(a0)
-		lea     ((byte_FF883E-$1000000)).w,a0
-		lea     ((byte_FF88CE-$1000000)).w,a1
-		lea     ((byte_FF895E-$1000000)).w,a2
+                
+                move.l  (sp)+,d1
+                lea     (word_FF880C).l,a0
+                move.w  d1,(a0)
+                lea     ((byte_FF883E-$1000000)).w,a0
+                lea     ((byte_FF88CE-$1000000)).w,a1
+                lea     ((byte_FF895E-$1000000)).w,a2
 loc_CA66:
-		move.b  (a0,d7.w),d2
-		move.b  (a1,d7.w),d5
-		bsr.w   sub_CAEA
-		move.b  d6,(a2,d7.w)
-		dbf     d7,loc_CA66
+                
+                move.b  (a0,d7.w),d2
+                move.b  (a1,d7.w),d5
+                bsr.w   sub_CAEA
+                move.b  d6,(a2,d7.w)
+                dbf     d7,loc_CA66
 loc_CA7A:
-		bsr.w   MakeTargetListEverybody
-		bsr.w   GetTargetsReachableByAttack
-		move.w  ((FF8804_LOADING_SPACE-$1000000)).w,d7
-		subq.w  #1,d7
-		bcs.w   loc_CAE4
-		move.l  d1,-(sp)
-		btst    #7,d0
-		bne.s   loc_CAA8
-		bsr.w   CheckMuddled2   
-		tst.b   d1
-		bne.s   loc_CAA2
-		bsr.w   MakeTargetListMonsters
-		bra.s   loc_CAA6
+                
+                bsr.w   MakeTargetListEverybody
+                bsr.w   GetTargetsReachableByAttack
+                move.w  ((FF8804_LOADING_SPACE-$1000000)).w,d7
+                subq.w  #1,d7
+                bcs.w   loc_CAE4
+                move.l  d1,-(sp)
+                btst    #7,d0
+                bne.s   loc_CAA8
+                bsr.w   CheckMuddled2   
+                tst.b   d1
+                bne.s   loc_CAA2
+                bsr.w   MakeTargetListMonsters
+                bra.s   loc_CAA6
 loc_CAA2:
-		bsr.w   MakeTargetListAllies
+                
+                bsr.w   MakeTargetListAllies
 loc_CAA6:
-		bra.s   loc_CABA
+                
+                bra.s   loc_CABA
 loc_CAA8:
-		bsr.w   CheckMuddled2   
-		tst.b   d1
-		bne.s   loc_CAB6
-		bsr.w   MakeTargetListAllies
-		bra.s   loc_CABA
+                
+                bsr.w   CheckMuddled2   
+                tst.b   d1
+                bne.s   loc_CAB6
+                bsr.w   MakeTargetListAllies
+                bra.s   loc_CABA
 loc_CAB6:
-		bsr.w   MakeTargetListMonsters
+                
+                bsr.w   MakeTargetListMonsters
 loc_CABA:
-		move.l  (sp)+,d1
-		lea     ((byte_FF880E-$1000000)).w,a0
-		lea     ((byte_FF889E-$1000000)).w,a1
-		lea     ((byte_FF892E-$1000000)).w,a2
+                
+                move.l  (sp)+,d1
+                lea     ((byte_FF880E-$1000000)).w,a0
+                lea     ((byte_FF889E-$1000000)).w,a1
+                lea     ((byte_FF892E-$1000000)).w,a2
 loc_CAC8:
-		move.b  (a0,d7.w),d2
-		move.b  (a1,d7.w),d5
-		move.b  #$3F,d1 
-		bsr.w   sub_CAEA
-		move.b  d6,(a2,d7.w)
-		dbf     d7,loc_CAC8
-		bsr.w   MakeTargetListEverybody
+                
+                move.b  (a0,d7.w),d2
+                move.b  (a1,d7.w),d5
+                move.b  #$3F,d1 
+                bsr.w   sub_CAEA
+                move.b  d6,(a2,d7.w)
+                dbf     d7,loc_CAC8
+                bsr.w   MakeTargetListEverybody
 loc_CAE4:
-		movem.l (sp)+,d1-a2
-		rts
+                
+                movem.l (sp)+,d1-a2
+                rts
 
 	; End of function sub_C958
 
@@ -1290,24 +1404,27 @@ loc_CAE4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_CAEA:
-		movem.l d0-d5/d7-a6,-(sp)
-		moveq   #0,d6
-		cmpi.b  #$3F,d1 
-		bne.s   loc_CAFE
-		move.b  d2,d1
-		bsr.w   sub_CB18
-		bra.s   loc_CB12
+                
+                movem.l d0-d5/d7-a6,-(sp)
+                moveq   #0,d6
+                cmpi.b  #$3F,d1 
+                bne.s   loc_CAFE
+                move.b  d2,d1
+                bsr.w   sub_CB18
+                bra.s   loc_CB12
 loc_CAFE:
-		move.b  d0,d3
-		move.b  d2,d0
-		bsr.w   CreateTargetGrid
-		tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
-		beq.s   loc_CB12
-		move.b  d3,d0
-		bsr.w   sub_CBA2
+                
+                move.b  d0,d3
+                move.b  d2,d0
+                bsr.w   CreateTargetGrid
+                tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                beq.s   loc_CB12
+                move.b  d3,d0
+                bsr.w   sub_CBA2
 loc_CB12:
-		movem.l (sp)+,d0-d5/d7-a6
-		rts
+                
+                movem.l (sp)+,d0-d5/d7-a6
+                rts
 
 	; End of function sub_CAEA
 
@@ -1315,97 +1432,106 @@ loc_CB12:
 ; =============== S U B R O U T I N E =======================================
 
 sub_CB18:
-		movem.l d0-d5/d7-a6,-(sp)
-		move.b  d1,d3
-		move.b  d0,d4
-		bsr.w   sub_CC0C
-		btst    #7,d0
-		beq.s   loc_CB3A
-		jsr     GetCharacterWord34
-		move.w  d1,d2
-		rol.w   #4,d2
-		andi.w  #$F,d2
-		bra.s   loc_CB3E
+                
+                movem.l d0-d5/d7-a6,-(sp)
+                move.b  d1,d3
+                move.b  d0,d4
+                bsr.w   sub_CC0C
+                btst    #7,d0
+                beq.s   loc_CB3A
+                jsr     GetCharacterWord34
+                move.w  d1,d2
+                rol.w   #4,d2
+                andi.w  #$F,d2
+                bra.s   loc_CB3E
 loc_CB3A:
-		move.w  #2,d2
+                
+                move.w  #2,d2
 loc_CB3E:
-		move.l  d1,-(sp)
-		bsr.w   GetDifficulty
-		mulu.w  #4,d1
-		add.w   d1,d2
-		move.l  (sp)+,d1
-		lsl.w   #2,d2
-		movea.l off_CB62(pc,d2.w),a0
-		move.b  d3,d0
-		bsr.w   sub_CC8A
-		clr.w   d7
-		jsr     (a0)
-		movem.l (sp)+,d0-d5/d7-a6
-		rts
+                
+                move.l  d1,-(sp)
+                bsr.w   GetDifficulty
+                mulu.w  #4,d1
+                add.w   d1,d2
+                move.l  (sp)+,d1
+                lsl.w   #2,d2
+                movea.l off_CB62(pc,d2.w),a0
+                move.b  d3,d0
+                bsr.w   sub_CC8A
+                clr.w   d7
+                jsr     (a0)
+                movem.l (sp)+,d0-d5/d7-a6
+                rts
 
 	; End of function sub_CB18
 
 off_CB62:       dc.l sub_CCA0
-		dc.l sub_CCD4
-		dc.l sub_CD18
-		dc.l sub_CD4C
-		dc.l sub_CCA0
-		dc.l sub_CCD4
-		dc.l sub_CCA0
-		dc.l sub_CD4C
-		dc.l sub_CCD4
-		dc.l sub_CCD4
-		dc.l sub_CCD4
-		dc.l sub_CCD4
-		dc.l sub_CCD4
-		dc.l sub_CCD4
-		dc.l sub_CCD4
-		dc.l sub_CCD4
+                dc.l sub_CCD4
+                dc.l sub_CD18
+                dc.l sub_CD4C
+                dc.l sub_CCA0
+                dc.l sub_CCD4
+                dc.l sub_CCA0
+                dc.l sub_CD4C
+                dc.l sub_CCD4
+                dc.l sub_CCD4
+                dc.l sub_CCD4
+                dc.l sub_CCD4
+                dc.l sub_CCD4
+                dc.l sub_CCD4
+                dc.l sub_CCD4
+                dc.l sub_CCD4
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_CBA2:
-		movem.l d0-d5/d7-a6,-(sp)
-		move.w  d0,d4
-		move.b  d1,d3
-		btst    #7,d0
-		beq.s   loc_CBC0
-		jsr     GetCharacterWord34
-		move.w  d1,d2
-		rol.w   #4,d2
-		andi.w  #3,d2
-		bra.s   loc_CBC4
+                
+                movem.l d0-d5/d7-a6,-(sp)
+                move.w  d0,d4
+                move.b  d1,d3
+                btst    #7,d0
+                beq.s   loc_CBC0
+                jsr     GetCharacterWord34
+                move.w  d1,d2
+                rol.w   #4,d2
+                andi.w  #3,d2
+                bra.s   loc_CBC4
 loc_CBC0:
-		move.w  #2,d2
+                
+                move.w  #2,d2
 loc_CBC4:
-		move.l  d1,-(sp)
-		bsr.w   GetDifficulty
-		mulu.w  #4,d1
-		add.w   d1,d2
-		move.l  (sp)+,d1
-		lsl.w   #2,d2
-		movea.l off_CB62(pc,d2.w),a0
-		move.b  d3,d1
-		moveq   #0,d3
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
+                
+                move.l  d1,-(sp)
+                bsr.w   GetDifficulty
+                mulu.w  #4,d1
+                add.w   d1,d2
+                move.l  (sp)+,d1
+                lsl.w   #2,d2
+                movea.l off_CB62(pc,d2.w),a0
+                move.b  d3,d1
+                moveq   #0,d3
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
 loc_CBE0:
-		move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
-		subq.w  #1,d7
-		bcs.w   loc_CC04
+                
+                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                subq.w  #1,d7
+                bcs.w   loc_CC04
 loc_CBEA:
-		move.b  (a1)+,d0
-		bsr.w   GetSpellPowerAdjustedForResistance
-		bsr.w   sub_CC8A
-		move.l  d7,-(sp)
-		move.w  #1,d7
-		jsr     (a0)
-		move.l  (sp)+,d7
-		add.w   d6,d3
-		dbf     d7,loc_CBEA
+                
+                move.b  (a1)+,d0
+                bsr.w   GetSpellPowerAdjustedForResistance
+                bsr.w   sub_CC8A
+                move.l  d7,-(sp)
+                move.w  #1,d7
+                jsr     (a0)
+                move.l  (sp)+,d7
+                add.w   d6,d3
+                dbf     d7,loc_CBEA
 loc_CC04:
-		move.w  d3,d6
-		movem.l (sp)+,d0-d5/d7-a6
-		rts
+                
+                move.w  d3,d6
+                movem.l (sp)+,d0-d5/d7-a6
+                rts
 
 	; End of function sub_CBA2
 
@@ -1413,30 +1539,33 @@ loc_CC04:
 ; =============== S U B R O U T I N E =======================================
 
 sub_CC0C:
-		movem.l d0-d5/d7-a6,-(sp)
-		move.b  d1,d2
-		jsr     GetCurrentATK
-		move.b  d2,d0
-		move.w  d1,d2
-		jsr     GetCurrentDEF
-		sub.w   d1,d2
-		bhi.s   loc_CC28
-		moveq   #1,d2
+                
+                movem.l d0-d5/d7-a6,-(sp)
+                move.b  d1,d2
+                jsr     GetCurrentATK
+                move.b  d2,d0
+                move.w  d1,d2
+                jsr     GetCurrentDEF
+                sub.w   d1,d2
+                bhi.s   loc_CC28
+                moveq   #1,d2
 loc_CC28:
-		move.w  d2,d6
-		jsr     GetMoveCost
-		move.w  #$100,d2
-		tst.b   d1
-		beq.w   loc_CC4A
-		move.w  #$E6,d2 
-		cmpi.b  #1,d1
-		beq.w   loc_CC4A
-		move.w  #$CD,d2 
+                
+                move.w  d2,d6
+                jsr     GetMoveCost
+                move.w  #$100,d2
+                tst.b   d1
+                beq.w   loc_CC4A
+                move.w  #$E6,d2 
+                cmpi.b  #1,d1
+                beq.w   loc_CC4A
+                move.w  #$CD,d2 
 loc_CC4A:
-		mulu.w  d2,d6
-		lsr.w   #8,d6
-		movem.l (sp)+,d0-d5/d7-a6
-		rts
+                
+                mulu.w  d2,d6
+                lsr.w   #8,d6
+                movem.l (sp)+,d0-d5/d7-a6
+                rts
 
 	; End of function sub_CC0C
 
@@ -1448,28 +1577,31 @@ loc_CC4A:
 ; Out: D6 = adjusted power
 
 GetSpellPowerAdjustedForResistance:
-		
-		movem.l d0-d5/d7-a0,-(sp)
-		bsr.w   GetResistanceToSpell
-		jsr     GetSpellDefAddress
-		moveq   #0,d6
-		move.b  SPELLDEF_OFFSET_POWER(a0),d6
-		move.w  d6,d3
-		lsr.w   #2,d3
-		cmpi.b  #SPELLDEF_RESIST_MINOR,d2
-		bne.s   loc_CC74
-		sub.w   d3,d6
+                
+                movem.l d0-d5/d7-a0,-(sp)
+                bsr.w   GetResistanceToSpell
+                jsr     GetSpellDefAddress
+                moveq   #0,d6
+                move.b  SPELLDEF_OFFSET_POWER(a0),d6
+                move.w  d6,d3
+                lsr.w   #2,d3
+                cmpi.b  #SPELLDEF_RESIST_MINOR,d2
+                bne.s   loc_CC74
+                sub.w   d3,d6
 loc_CC74:
-		cmpi.b  #SPELLDEF_RESIST_MAJOR,d2
-		bne.s   loc_CC7C
-		lsr.w   #1,d6
+                
+                cmpi.b  #SPELLDEF_RESIST_MAJOR,d2
+                bne.s   loc_CC7C
+                lsr.w   #1,d6
 loc_CC7C:
-		cmpi.b  #SPELLDEF_RESIST_WEAKNESS,d2
-		bne.s   loc_CC84
-		add.w   d3,d6
+                
+                cmpi.b  #SPELLDEF_RESIST_WEAKNESS,d2
+                bne.s   loc_CC84
+                add.w   d3,d6
 loc_CC84:
-		movem.l (sp)+,d0-d5/d7-a0
-		rts
+                
+                movem.l (sp)+,d0-d5/d7-a0
+                rts
 
 	; End of function GetSpellPowerAdjustedForResistance
 
@@ -1477,14 +1609,16 @@ loc_CC84:
 ; =============== S U B R O U T I N E =======================================
 
 sub_CC8A:
-		movem.l d0/d2-a6,-(sp)
-		jsr     GetCurrentHP
-		sub.w   d6,d1
-		bcc.s   loc_CC9A
-		moveq   #0,d1
+                
+                movem.l d0/d2-a6,-(sp)
+                jsr     GetCurrentHP
+                sub.w   d6,d1
+                bcc.s   loc_CC9A
+                moveq   #0,d1
 loc_CC9A:
-		movem.l (sp)+,d0/d2-a6
-		rts
+                
+                movem.l (sp)+,d0/d2-a6
+                rts
 
 	; End of function sub_CC8A
 
@@ -1492,25 +1626,28 @@ loc_CC9A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_CCA0:
-		movem.l d0-d5/d7-a6,-(sp)
-		moveq   #1,d6
-		tst.w   d1
-		bne.s   loc_CCAE
-		addi.w  #$F,d6
+                
+                movem.l d0-d5/d7-a6,-(sp)
+                moveq   #1,d6
+                tst.w   d1
+                bne.s   loc_CCAE
+                addi.w  #$F,d6
 loc_CCAE:
-		lea     (ENEMY_TARGETTING_COMMAND_LIST).l,a1
-		clr.w   d5
-		move.b  d4,d5
-		andi.b  #$7F,d5 
-		clr.w   d7
-		move.b  (a1,d5.w),d7
-		cmp.b   d0,d7
-		bne.s   loc_CCCA
-		addi.w  #2,d6
+                
+                lea     (ENEMY_TARGETTING_COMMAND_LIST).l,a1
+                clr.w   d5
+                move.b  d4,d5
+                andi.b  #$7F,d5 
+                clr.w   d7
+                move.b  (a1,d5.w),d7
+                cmp.b   d0,d7
+                bne.s   loc_CCCA
+                addi.w  #2,d6
 loc_CCCA:
-		bsr.w   sub_CE36
-		movem.l (sp)+,d0-d5/d7-a6
-		rts
+                
+                bsr.w   sub_CE36
+                movem.l (sp)+,d0-d5/d7-a6
+                rts
 
 	; End of function sub_CCA0
 
@@ -1518,33 +1655,38 @@ loc_CCCA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_CCD4:
-		movem.l d0-d5/d7-a6,-(sp)
-		moveq   #1,d6
-		tst.w   d1
-		bne.s   loc_CCE2
-		addi.w  #$F,d6
+                
+                movem.l d0-d5/d7-a6,-(sp)
+                moveq   #1,d6
+                tst.w   d1
+                bne.s   loc_CCE2
+                addi.w  #$F,d6
 loc_CCE2:
-		bsr.w   sub_D2F8
-		bcs.s   loc_CCEA
-		addq.w  #1,d6
+                
+                bsr.w   sub_D2F8
+                bcs.s   loc_CCEA
+                addq.w  #1,d6
 loc_CCEA:
-		bsr.w   sub_D362
-		bcs.s   loc_CCF2
-		addq.w  #1,d6
+                
+                bsr.w   sub_D362
+                bcs.s   loc_CCF2
+                addq.w  #1,d6
 loc_CCF2:
-		lea     (ENEMY_TARGETTING_COMMAND_LIST).l,a1
-		clr.w   d5
-		move.b  d4,d5
-		andi.b  #$7F,d5 
-		clr.w   d7
-		move.b  (a1,d5.w),d7
-		cmp.b   d0,d7
-		bne.s   loc_CD0E
-		addi.w  #2,d6
+                
+                lea     (ENEMY_TARGETTING_COMMAND_LIST).l,a1
+                clr.w   d5
+                move.b  d4,d5
+                andi.b  #$7F,d5 
+                clr.w   d7
+                move.b  (a1,d5.w),d7
+                cmp.b   d0,d7
+                bne.s   loc_CD0E
+                addi.w  #2,d6
 loc_CD0E:
-		bsr.w   sub_CE36
-		movem.l (sp)+,d0-d5/d7-a6
-		rts
+                
+                bsr.w   sub_CE36
+                movem.l (sp)+,d0-d5/d7-a6
+                rts
 
 	; End of function sub_CCD4
 
@@ -1552,28 +1694,32 @@ loc_CD0E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_CD18:
-		movem.l d0-d5/d7-a6,-(sp)
-		moveq   #3,d6
-		jsr     j_randomLessThanD6
-		tst.b   d7
-		beq.w   loc_CD3C
-		move.b  d5,d0
-		add.b   d0,d0
-		moveq   #$12,d6
-		sub.b   d0,d6
-		bcc.s   loc_CD36
-		moveq   #0,d6
+                
+                movem.l d0-d5/d7-a6,-(sp)
+                moveq   #3,d6
+                jsr     j_randomLessThanD6
+                tst.b   d7
+                beq.w   loc_CD3C
+                move.b  d5,d0
+                add.b   d0,d0
+                moveq   #$12,d6
+                sub.b   d0,d6
+                bcc.s   loc_CD36
+                moveq   #0,d6
 loc_CD36:
-		addq.w  #1,d6
-		bra.w   loc_CD46
+                
+                addq.w  #1,d6
+                bra.w   loc_CD46
 loc_CD3C:
-		moveq   #1,d6
-		tst.w   d1
-		bne.s   loc_CD46
-		addi.w  #$F,d6
+                
+                moveq   #1,d6
+                tst.w   d1
+                bne.s   loc_CD46
+                addi.w  #$F,d6
 loc_CD46:
-		movem.l (sp)+,d0-d5/d7-a6
-		rts
+                
+                movem.l (sp)+,d0-d5/d7-a6
+                rts
 
 	; End of function sub_CD18
 
@@ -1581,18 +1727,21 @@ loc_CD46:
 ; =============== S U B R O U T I N E =======================================
 
 sub_CD4C:
-		movem.l d0-d5/d7-a6,-(sp)
-		moveq   #1,d6
-		tst.w   d1
-		bne.s   loc_CD5A
-		addi.w  #$F,d6
+                
+                movem.l d0-d5/d7-a6,-(sp)
+                moveq   #1,d6
+                tst.w   d1
+                bne.s   loc_CD5A
+                addi.w  #$F,d6
 loc_CD5A:
-		bsr.w   sub_D362
-		bcs.s   loc_CD62
-		addq.w  #1,d6
+                
+                bsr.w   sub_D362
+                bcs.s   loc_CD62
+                addq.w  #1,d6
 loc_CD62:
-		movem.l (sp)+,d0-d5/d7-a6
-		rts
+                
+                movem.l (sp)+,d0-d5/d7-a6
+                rts
 
 	; End of function sub_CD4C
 
@@ -1603,52 +1752,57 @@ loc_CD62:
 ;     D4 = heal spell idx
 
 sub_CD68:
-		movem.l d0-d1/d3-a6,-(sp)
-		clr.w   d5
-		move.b  d4,d5
-		lsr.w   #6,d5
-		andi.w  #3,d5
-		move.w  d1,d3
-		jsr     GetCurrentHP
-		move.w  d1,d2
-		jsr     GetMaxHP
-		sub.w   d2,d1           ; d1 = max HP - current HP
-		moveq   #$FFFFFFFF,d2
-		cmpi.w  #ENEMYAI_THRESHOLD_HEAL1,d1
-		bls.w   loc_CDDC
-		moveq   #0,d2
-		cmpi.w  #ENEMYAI_THRESHOLD_HEAL2,d1
-		bls.w   loc_CDB8
-		cmpi.w  #2,d5
-		bcs.w   loc_CDB8
-		moveq   #2,d2
-		cmpi.w  #ENEMYAI_THRESHOLD_HEAL3,d1
-		bls.w   loc_CDB8
-		cmpi.w  #3,d5
+                
+                movem.l d0-d1/d3-a6,-(sp)
+                clr.w   d5
+                move.b  d4,d5
+                lsr.w   #6,d5
+                andi.w  #3,d5
+                move.w  d1,d3
+                jsr     GetCurrentHP
+                move.w  d1,d2
+                jsr     GetMaxHP
+                sub.w   d2,d1           ; d1 = max HP - current HP
+                moveq   #$FFFFFFFF,d2
+                cmpi.w  #ENEMYAI_THRESHOLD_HEAL1,d1
+                bls.w   loc_CDDC
+                moveq   #0,d2
+                cmpi.w  #ENEMYAI_THRESHOLD_HEAL2,d1
+                bls.w   loc_CDB8
+                cmpi.w  #2,d5
+                bcs.w   loc_CDB8
+                moveq   #2,d2
+                cmpi.w  #ENEMYAI_THRESHOLD_HEAL3,d1
+                bls.w   loc_CDB8
+                cmpi.w  #3,d5
 loc_CDB2:
-		bcs.w   loc_CDB8
-		moveq   #3,d2
+                
+                bcs.w   loc_CDB8
+                moveq   #3,d2
 loc_CDB8:
-		move.w  d3,d0
-		jsr     GetCurrentMP
-		move.w  d1,d3
+                
+                move.w  d3,d0
+                jsr     GetCurrentMP
+                move.w  d1,d3
 loc_CDC2:
-		moveq   #0,d1
-		add.w   d2,d1
-		lsl.w   #5,d1
-		add.w   d4,d1
-		jsr     GetSpellDefAddress
-		cmp.b   SPELLDEF_OFFSET_MPCOST(a0),d3
-						; check if spell cost is more than current MP
-		bcc.w   loc_CDDC
-		dbf     d2,loc_CDC2
+                
+                moveq   #0,d1
+                add.w   d2,d1
+                lsl.w   #5,d1
+                add.w   d4,d1
+                jsr     GetSpellDefAddress
+                cmp.b   SPELLDEF_OFFSET_MPCOST(a0),d3; check if spell cost is more than current MP
+                bcc.w   loc_CDDC
+                dbf     d2,loc_CDC2
 loc_CDDC:
-		cmpi.b  #1,d2
-		bne.s   loc_CDE4
-		moveq   #0,d2
+                
+                cmpi.b  #1,d2
+                bne.s   loc_CDE4
+                moveq   #0,d2
 loc_CDE4:
-		movem.l (sp)+,d0-d1/d3-a6
-		rts
+                
+                movem.l (sp)+,d0-d1/d3-a6
+                rts
 
 	; End of function sub_CD68
 
@@ -1656,33 +1810,39 @@ loc_CDE4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_CDEA:
-		movem.l d0-d5/d7-a6,-(sp)
-		bsr.w   GetLowerMoveType
-		cmpi.w  #$D,d1
-		bne.s   loc_CE00
-		move.w  #$D,d6
-		bra.w   loc_CE30
+                
+                movem.l d0-d5/d7-a6,-(sp)
+                bsr.w   GetLowerMoveType
+                cmpi.w  #$D,d1
+                bne.s   loc_CE00
+                move.w  #$D,d6
+                bra.w   loc_CE30
 loc_CE00:
-		cmpi.w  #$E,d1
-		bne.s   loc_CE0E
-		move.w  #$D,d6
-		bra.w   loc_CE30
+                
+                cmpi.w  #$E,d1
+                bne.s   loc_CE0E
+                move.w  #$D,d6
+                bra.w   loc_CE30
 loc_CE0E:
-		bsr.w   GetUpperMoveType
-		lea     (byte_D8F4).l,a0
-		move.w  #$D,d6
-		clr.w   d0
+                
+                bsr.w   GetUpperMoveType
+                lea     (byte_D8F4).l,a0
+                move.w  #$D,d6
+                clr.w   d0
 loc_CE1E:
-		cmp.b   (a0,d0.w),d1
-		bne.s   loc_CE28
-		bra.w   loc_CE30
+                
+                cmp.b   (a0,d0.w),d1
+                bne.s   loc_CE28
+                bra.w   loc_CE30
 loc_CE28:
-		addi.w  #1,d0
-		subq.w  #1,d6
-		bne.s   loc_CE1E
+                
+                addi.w  #1,d0
+                subq.w  #1,d6
+                bne.s   loc_CE1E
 loc_CE30:
-		movem.l (sp)+,d0-d5/d7-a6
-		rts
+                
+                movem.l (sp)+,d0-d5/d7-a6
+                rts
 
 	; End of function sub_CDEA
 
@@ -1690,42 +1850,48 @@ loc_CE30:
 ; =============== S U B R O U T I N E =======================================
 
 sub_CE36:
-		movem.l d0-d5/d7-a6,-(sp)
-		clr.w   d5
-		move.b  d0,d5
-		move.w  d4,d0
-		btst    #7,d0
-		beq.s   loc_CE4A
-		bra.w   loc_CE90
+                
+                movem.l d0-d5/d7-a6,-(sp)
+                clr.w   d5
+                move.b  d0,d5
+                move.w  d4,d0
+                btst    #7,d0
+                beq.s   loc_CE4A
+                bra.w   loc_CE90
 loc_CE4A:
-		bsr.w   CheckMuddled2   
-		tst.b   d1
-		beq.s   loc_CE56
-		bra.w   loc_CE90
+                
+                bsr.w   CheckMuddled2   
+                tst.b   d1
+                beq.s   loc_CE56
+                bra.w   loc_CE90
 loc_CE56:
-		cmpi.b  #1,d7
-		bne.s   loc_CE66
-		lea     (byte_DA22).l,a4
-		bra.w   loc_CE80
+                
+                cmpi.b  #1,d7
+                bne.s   loc_CE66
+                lea     (byte_DA22).l,a4
+                bra.w   loc_CE80
 loc_CE66:
-		clr.l   d0
-		move.b  d4,d0
-		jsr     GetUpperMoveType
-		clr.l   d3
-		move.b  d1,d3
-		lea     (off_D9C2).l,a4 
-		lsl.l   #2,d3
-		movea.l (a4,d3.l),a4
+                
+                clr.l   d0
+                move.b  d4,d0
+                jsr     GetUpperMoveType
+                clr.l   d3
+                move.b  d1,d3
+                lea     (off_D9C2).l,a4 
+                lsl.l   #2,d3
+                movea.l (a4,d3.l),a4
 loc_CE80:
-		clr.w   d0
-		move.b  d5,d0
-		bsr.w   GetClass
-		clr.w   d2
-		move.b  (a4,d1.w),d2
-		add.w   d2,d6
+                
+                clr.w   d0
+                move.b  d5,d0
+                bsr.w   GetClass
+                clr.w   d2
+                move.b  (a4,d1.w),d2
+                add.w   d2,d6
 loc_CE90:
-		movem.l (sp)+,d0-d5/d7-a6
-		rts
+                
+                movem.l (sp)+,d0-d5/d7-a6
+                rts
 
 	; End of function sub_CE36
 
@@ -1733,26 +1899,28 @@ loc_CE90:
 ; =============== S U B R O U T I N E =======================================
 
 sub_CE96:
-		movem.l d0/d3-a6,-(sp)
-		jsr     GetYPos
-		move.w  d1,d2
-		jsr     GetXPos
-		bsr.w   MakeTargetListEverybody
-		moveq   #0,d3
-		moveq   #0,d4
-		move.w  d1,d5
-		move.w  d2,d6
-		bsr.w   GetClosestAttackPosition
-		cmpi.w  #$FFFF,d1
-		bne.w   loc_CECC
-		moveq   #1,d3
-		moveq   #1,d4
-		move.w  d5,d1
-		move.w  d6,d2
-		bsr.w   GetClosestAttackPosition
+                
+                movem.l d0/d3-a6,-(sp)
+                jsr     GetYPos
+                move.w  d1,d2
+                jsr     GetXPos
+                bsr.w   MakeTargetListEverybody
+                moveq   #0,d3
+                moveq   #0,d4
+                move.w  d1,d5
+                move.w  d2,d6
+                bsr.w   GetClosestAttackPosition
+                cmpi.w  #$FFFF,d1
+                bne.w   loc_CECC
+                moveq   #1,d3
+                moveq   #1,d4
+                move.w  d5,d1
+                move.w  d6,d2
+                bsr.w   GetClosestAttackPosition
 loc_CECC:
-		movem.l (sp)+,d0/d3-a6
-		rts
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
 
 	; End of function sub_CE96
 
@@ -1765,28 +1933,30 @@ loc_CECC:
 ; Out: D1 = spell idx
 
 GetHighestUsableSpellLevel:
-		
-		movem.l d0/d2-a6,-(sp)
-		move.w  d1,d2
-		jsr     GetCurrentMP
-		move.w  d1,d3
-		move.w  d2,d1
-		andi.w  #$3F,d1 
-		lsr.w   #6,d2
-		andi.w  #3,d2
+                
+                movem.l d0/d2-a6,-(sp)
+                move.w  d1,d2
+                jsr     GetCurrentMP
+                move.w  d1,d3
+                move.w  d2,d1
+                andi.w  #$3F,d1 
+                lsr.w   #6,d2
+                andi.w  #3,d2
 loc_CEEC:
-		moveq   #0,d1
-		add.w   d2,d1
-		lsl.w   #6,d1
-		add.w   d4,d1
-		jsr     GetSpellDefAddress
-		cmp.b   1(a0),d3
-		bcc.w   loc_CF08
-		dbf     d2,loc_CEEC
-		moveq   #$3F,d1 
+                
+                moveq   #0,d1
+                add.w   d2,d1
+                lsl.w   #6,d1
+                add.w   d4,d1
+                jsr     GetSpellDefAddress
+                cmp.b   1(a0),d3
+                bcc.w   loc_CF08
+                dbf     d2,loc_CEEC
+                moveq   #$3F,d1 
 loc_CF08:
-		movem.l (sp)+,d0/d2-a6
-		rts
+                
+                movem.l (sp)+,d0/d2-a6
+                rts
 
 	; End of function GetHighestUsableSpellLevel
 
@@ -1799,29 +1969,34 @@ loc_CF08:
 ;      D2 = slot
 
 GetSlotContainingSpell:
-		
-		movem.l d0/d3-a6,-(sp)
-		andi.b  #$3F,d1 
-		move.b  d1,d4
-		moveq   #0,d3
+                
+                movem.l d0/d3-a6,-(sp)
+                andi.b  #$3F,d1 
+                move.b  d1,d4
+                moveq   #0,d3
 loc_CF1A:
-		move.w  d3,d1
+                
+                move.w  d3,d1
 loc_CF1C:
-		jsr     GetSpellAndNumberOfSpells
-		move.w  d1,d2
-		andi.b  #$3F,d2 
-		cmp.b   d4,d2
-		beq.w   loc_CF38
-		addq.w  #1,d3
+                
+                jsr     GetSpellAndNumberOfSpells
+                move.w  d1,d2
+                andi.b  #$3F,d2 
+                cmp.b   d4,d2
+                beq.w   loc_CF38
+                addq.w  #1,d3
 loc_CF30:
-		cmpi.w  #4,d3
-		bcs.s   loc_CF1A
-		moveq   #$3F,d1 
+                
+                cmpi.w  #4,d3
+                bcs.s   loc_CF1A
+                moveq   #$3F,d1 
 loc_CF38:
-		move.w  d3,d2
+                
+                move.w  d3,d2
 loc_CF3A:
-		movem.l (sp)+,d0/d3-a6
-		rts
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
 
 	; End of function GetSlotContainingSpell
 
@@ -1834,29 +2009,34 @@ loc_CF3A:
 ;      D2 = slot
 
 GetSlotContainingItem:
-		
-		movem.l d0/d3-a6,-(sp)
+                
+                movem.l d0/d3-a6,-(sp)
 loc_CF44:
-		andi.w  #$7F,d1 
-		move.w  d1,d4
-		moveq   #0,d3
+                
+                andi.w  #$7F,d1 
+                move.w  d1,d4
+                moveq   #0,d3
 loc_CF4C:
-		move.w  d3,d1
+                
+                move.w  d3,d1
 loc_CF4E:
-		jsr     GetCharItemAtSlotAndNumberOfItems
-		move.w  d1,d2
-		andi.w  #$7F,d2 
-		cmp.w   d4,d2
-		beq.w   loc_CF6C
-		addq.w  #1,d3
+                
+                jsr     GetCharItemAtSlotAndNumberOfItems
+                move.w  d1,d2
+                andi.w  #$7F,d2 
+                cmp.w   d4,d2
+                beq.w   loc_CF6C
+                addq.w  #1,d3
 loc_CF62:
-		cmpi.w  #4,d3
-		bcs.s   loc_CF4C
-		move.w  #$7F,d1 
+                
+                cmpi.w  #4,d3
+                bcs.s   loc_CF4C
+                move.w  #$7F,d1 
 loc_CF6C:
-		move.w  d3,d2
-		movem.l (sp)+,d0/d3-a6
-		rts
+                
+                move.w  d3,d2
+                movem.l (sp)+,d0/d3-a6
+                rts
 
 	; End of function GetSlotContainingItem
 
@@ -1864,71 +2044,86 @@ loc_CF6C:
 ; =============== S U B R O U T I N E =======================================
 
 GetNextUsableAttackSpell:
-		
-		movem.l d0/d3-a6,-(sp)
-		bsr.w   CheckMuddled2   
-		move.w  d1,d7
-		btst    #CHAR_BIT_ENEMY,d0
-		bne.s   loc_CF88
+                
+                movem.l d0/d3-a6,-(sp)
+                bsr.w   CheckMuddled2   
+                move.w  d1,d7
+                btst    #CHAR_BIT_ENEMY,d0
+                bne.s   loc_CF88
 loc_CF84:
-		move.w  #1,d7
+                
+                move.w  #1,d7
 loc_CF88:
-		move.w  d3,d1
+                
+                move.w  d3,d1
 loc_CF8A:
-		jsr     GetSpellAndNumberOfSpells
-		move.w  d1,d4
-		andi.w  #SPELL_MASK_IDX,d4
-		cmpi.w  #SPELLIDX_NOTHING,d4
-		bne.s   loc_CFA0
-		bra.w   loc_CFFC
+                
+                jsr     GetSpellAndNumberOfSpells
+                move.w  d1,d4
+                andi.w  #SPELL_MASK_IDX,d4
+                cmpi.w  #SPELLIDX_NOTHING,d4
+                bne.s   loc_CFA0
+                bra.w   loc_CFFC
 loc_CFA0:
-		tst.b   d7
-		beq.s   loc_CFEA
-		move.w  d1,d5
-		andi.b  #SPELL_MASK_IDX,d5
-		cmpi.b  #SPELLIDX_BLAZE,d5
-		bne.s   loc_CFB4
-		bra.w   loc_CFEA
+                
+                tst.b   d7
+                beq.s   loc_CFEA
+                move.w  d1,d5
+                andi.b  #SPELL_MASK_IDX,d5
+                cmpi.b  #SPELLIDX_BLAZE,d5
+                bne.s   loc_CFB4
+                bra.w   loc_CFEA
 loc_CFB4:
-		cmpi.b  #SPELLIDX_FREEZE,d5
-		bne.s   loc_CFBE
-		bra.w   loc_CFEA
+                
+                cmpi.b  #SPELLIDX_FREEZE,d5
+                bne.s   loc_CFBE
+                bra.w   loc_CFEA
 loc_CFBE:
-		cmpi.b  #SPELLIDX_BOLT,d5
-		bne.s   loc_CFC8
-		bra.w   loc_CFEA
+                
+                cmpi.b  #SPELLIDX_BOLT,d5
+                bne.s   loc_CFC8
+                bra.w   loc_CFEA
 loc_CFC8:
-		cmpi.b  #SPELLIDX_BLAST,d5
-		bne.s   loc_CFD2
-		bra.w   loc_CFEA
+                
+                cmpi.b  #SPELLIDX_BLAST,d5
+                bne.s   loc_CFD2
+                bra.w   loc_CFEA
 loc_CFD2:
-		cmpi.b  #SPELLIDX_KATON,d5
-		bne.s   loc_CFDC
-		bra.w   loc_CFEA
+                
+                cmpi.b  #SPELLIDX_KATON,d5
+                bne.s   loc_CFDC
+                bra.w   loc_CFEA
 loc_CFDC:
-		cmpi.b  #SPELLIDX_RAIJIN,d5
-		bne.s   loc_CFE6
-		bra.w   loc_CFEA
+                
+                cmpi.b  #SPELLIDX_RAIJIN,d5
+                bne.s   loc_CFE6
+                bra.w   loc_CFEA
 loc_CFE6:
-		bra.w   loc_CFFC
+                
+                bra.w   loc_CFFC
 loc_CFEA:
-		jsr     GetSpellDefAddress
-		move.b  SPELLDEF_OFFSET_PROPS(a0),d2
-		andi.b  #SPELLDEF_PROPS_TYPE_MASK,d2
-		beq.w   loc_D00C
+                
+                jsr     GetSpellDefAddress
+                move.b  SPELLDEF_OFFSET_PROPS(a0),d2
+                andi.b  #SPELLDEF_PROPS_TYPE_MASK,d2
+                beq.w   loc_D00C
 loc_CFFC:
-		addq.w  #1,d3
-		cmpi.w  #CHAR_SPELLSLOTS,d3
-		bcs.s   loc_CF88
+                
+                addq.w  #1,d3
+                cmpi.w  #CHAR_SPELLSLOTS,d3
+                bcs.s   loc_CF88
 loc_D004:
-		move.w  #SPELLIDX_NOTHING,d1
-		bra.w   loc_D012
+                
+                move.w  #SPELLIDX_NOTHING,d1
+                bra.w   loc_D012
 loc_D00C:
-		bsr.w   GetHighestUsableSpellLevel
-		move.w  d3,d2
+                
+                bsr.w   GetHighestUsableSpellLevel
+                move.w  d3,d2
 loc_D012:
-		movem.l (sp)+,d0/d3-a6
-		rts
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
 
 	; End of function GetNextUsableAttackSpell
 
@@ -1942,33 +2137,38 @@ loc_D012:
 ;      D2 = spell slot
 
 GetNextHealingSpell:
-		
-		movem.l d0/d3-a6,-(sp)
+                
+                movem.l d0/d3-a6,-(sp)
 loc_D01C:
-		move.w  d3,d1
-		jsr     GetSpellAndNumberOfSpells
-		move.w  d1,d4
-		andi.w  #$3F,d4 
-		cmpi.w  #$3F,d4 
-		bne.s   loc_D034
-		bra.w   loc_D04A
+                
+                move.w  d3,d1
+                jsr     GetSpellAndNumberOfSpells
+                move.w  d1,d4
+                andi.w  #$3F,d4 
+                cmpi.w  #$3F,d4 
+                bne.s   loc_D034
+                bra.w   loc_D04A
 loc_D034:
-		jsr     GetSpellDefAddress
-		move.b  3(a0),d2
-		andi.b  #3,d2
-		cmpi.b  #1,d2
-		beq.w   loc_D05A
+                
+                jsr     GetSpellDefAddress
+                move.b  3(a0),d2
+                andi.b  #3,d2
+                cmpi.b  #1,d2
+                beq.w   loc_D05A
 loc_D04A:
-		addq.w  #1,d3
-		cmpi.w  #4,d3
-		bcs.s   loc_D01C
-		move.w  #$3F,d1 
-		bra.w   loc_D05C
+                
+                addq.w  #1,d3
+                cmpi.w  #4,d3
+                bcs.s   loc_D01C
+                move.w  #$3F,d1 
+                bra.w   loc_D05C
 loc_D05A:
-		move.w  d3,d2
+                
+                move.w  d3,d2
 loc_D05C:
-		movem.l (sp)+,d0/d3-a6
-		rts
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
 
 	; End of function GetNextHealingSpell
 
@@ -1976,33 +2176,38 @@ loc_D05C:
 ; =============== S U B R O U T I N E =======================================
 
 GetNextStatusSpell:
-		
-		movem.l d0/d3-a6,-(sp)
+                
+                movem.l d0/d3-a6,-(sp)
 loc_D066:
-		move.w  d3,d1
-		jsr     GetSpellAndNumberOfSpells
-		move.w  d1,d4
-		andi.w  #SPELL_MASK_IDX,d4
-		cmpi.w  #SPELLIDX_NOTHING,d4
-		bne.s   loc_D07E
-		bra.w   loc_D094
+                
+                move.w  d3,d1
+                jsr     GetSpellAndNumberOfSpells
+                move.w  d1,d4
+                andi.w  #SPELL_MASK_IDX,d4
+                cmpi.w  #SPELLIDX_NOTHING,d4
+                bne.s   loc_D07E
+                bra.w   loc_D094
 loc_D07E:
-		jsr     GetSpellDefAddress
-		move.b  SPELLDEF_OFFSET_PROPS(a0),d2
-		andi.b  #SPELLDEF_PROPS_TYPE_MASK,d2
-		cmpi.b  #SPELLDEF_TYPE_STATUS,d2
-		beq.w   loc_D0A4
+                
+                jsr     GetSpellDefAddress
+                move.b  SPELLDEF_OFFSET_PROPS(a0),d2
+                andi.b  #SPELLDEF_PROPS_TYPE_MASK,d2
+                cmpi.b  #SPELLDEF_TYPE_STATUS,d2
+                beq.w   loc_D0A4
 loc_D094:
-		addq.w  #1,d3
-		cmpi.w  #CHAR_SPELLSLOTS,d3
-		bcs.s   loc_D066
-		move.w  #SPELLIDX_NOTHING,d1
-		bra.w   loc_D0A6
+                
+                addq.w  #1,d3
+                cmpi.w  #CHAR_SPELLSLOTS,d3
+                bcs.s   loc_D066
+                move.w  #SPELLIDX_NOTHING,d1
+                bra.w   loc_D0A6
 loc_D0A4:
-		move.w  d3,d2
+                
+                move.w  d3,d2
 loc_D0A6:
-		movem.l (sp)+,d0/d3-a6
-		rts
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
 
 	; End of function GetNextStatusSpell
 
@@ -2017,71 +2222,83 @@ loc_D0A6:
 ;      D2 = item slot
 
 GetNextUsableAttackItem:
-		
-		movem.l d0/d3-a6,-(sp)
-		bsr.w   CheckMuddled2   
-		move.w  d1,d6
-		btst    #CHAR_BIT_ENEMY,d0
-		bne.s   loc_D0C0
-		move.w  #1,d6
+                
+                movem.l d0/d3-a6,-(sp)
+                bsr.w   CheckMuddled2   
+                move.w  d1,d6
+                btst    #CHAR_BIT_ENEMY,d0
+                bne.s   loc_D0C0
+                move.w  #1,d6
 loc_D0C0:
-		move.w  d3,d1
-		jsr     GetCharItemAtSlotAndNumberOfItems
-		cmpi.w  #ITEMIDX_NOTHING,d1
-		bne.s   loc_D0D2
-		bra.w   loc_D0DC
+                
+                move.w  d3,d1
+                jsr     GetCharItemAtSlotAndNumberOfItems
+                cmpi.w  #ITEMIDX_NOTHING,d1
+                bne.s   loc_D0D2
+                bra.w   loc_D0DC
 loc_D0D2:
-		jsr     IsItemUsableInBattle
-		bcs.w   loc_D0E8
+                
+                jsr     IsItemUsableInBattle
+                bcs.w   loc_D0E8
 loc_D0DC:
-		addq.w  #1,d3
-		cmpi.w  #CHAR_ITEMSLOTS,d3
-		bcs.s   loc_D0C0
-		bra.w   loc_D156
+                
+                addq.w  #1,d3
+                cmpi.w  #CHAR_ITEMSLOTS,d3
+                bcs.s   loc_D0C0
+                bra.w   loc_D156
 loc_D0E8:
-		btst    #ITEM_BIT_EQUIPPED,d1
-		bne.w   loc_D0F8
-		btst    #ITEM_BIT_ENEMYUSE,d1
-		beq.w   loc_D156
+                
+                btst    #ITEM_BIT_EQUIPPED,d1
+                bne.w   loc_D0F8
+                btst    #ITEM_BIT_ENEMYUSE,d1
+                beq.w   loc_D156
 loc_D0F8:
-		jsr     GetItemDefAddress
-		move.w  d1,d7
-		clr.w   d1
-		move.b  ITEMDEF_OFFSET_SPELL(a0),d1
-		tst.b   d6
-		beq.s   loc_D13C
-		move.w  d1,d5
-		andi.b  #SPELL_MASK_IDX,d5
-		cmpi.b  #SPELLIDX_BLAZE,d5
-		bne.s   loc_D11A
-		bra.w   loc_D13C
+                
+                jsr     GetItemDefAddress
+                move.w  d1,d7
+                clr.w   d1
+                move.b  ITEMDEF_OFFSET_SPELL(a0),d1
+                tst.b   d6
+                beq.s   loc_D13C
+                move.w  d1,d5
+                andi.b  #SPELL_MASK_IDX,d5
+                cmpi.b  #SPELLIDX_BLAZE,d5
+                bne.s   loc_D11A
+                bra.w   loc_D13C
 loc_D11A:
-		cmpi.b  #SPELLIDX_FREEZE,d5
-		bne.s   loc_D124
-		bra.w   loc_D13C
+                
+                cmpi.b  #SPELLIDX_FREEZE,d5
+                bne.s   loc_D124
+                bra.w   loc_D13C
 loc_D124:
-		cmpi.b  #SPELLIDX_BOLT,d5
-		bne.s   loc_D12E
-		bra.w   loc_D13C
+                
+                cmpi.b  #SPELLIDX_BOLT,d5
+                bne.s   loc_D12E
+                bra.w   loc_D13C
 loc_D12E:
-		cmpi.b  #SPELLIDX_BLAST,d5
-		bne.s   loc_D138
-		bra.w   loc_D13C
+                
+                cmpi.b  #SPELLIDX_BLAST,d5
+                bne.s   loc_D138
+                bra.w   loc_D13C
 loc_D138:
-		bra.w   loc_D156
+                
+                bra.w   loc_D156
 loc_D13C:
-		jsr     GetSpellDefAddress
-		move.b  SPELLDEF_OFFSET_PROPS(a0),d2
-		andi.b  #SPELLDEF_PROPS_TYPE_MASK,d2
-		bne.w   loc_D156
-		move.w  d3,d2
-		move.w  d7,d1
-		bra.w   loc_D15A
+                
+                jsr     GetSpellDefAddress
+                move.b  SPELLDEF_OFFSET_PROPS(a0),d2
+                andi.b  #SPELLDEF_PROPS_TYPE_MASK,d2
+                bne.w   loc_D156
+                move.w  d3,d2
+                move.w  d7,d1
+                bra.w   loc_D15A
 loc_D156:
-		move.w  #ITEMIDX_NOTHING,d1
+                
+                move.w  #ITEMIDX_NOTHING,d1
 loc_D15A:
-		movem.l (sp)+,d0/d3-a6
-		rts
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
 
 	; End of function GetNextUsableAttackItem
 
@@ -2096,43 +2313,48 @@ loc_D15A:
 ;      D2 = item slot
 
 GetNextUsableHealingItem:
-		
-		movem.l d0/d3-a6,-(sp)
+                
+                movem.l d0/d3-a6,-(sp)
 loc_D164:
-		move.w  d3,d1
-		jsr     GetCharItemAtSlotAndNumberOfItems
-		cmpi.w  #ITEMIDX_NOTHING,d1
-		bne.s   loc_D176
-		bra.w   loc_D1BA
+                
+                move.w  d3,d1
+                jsr     GetCharItemAtSlotAndNumberOfItems
+                cmpi.w  #ITEMIDX_NOTHING,d1
+                bne.s   loc_D176
+                bra.w   loc_D1BA
 loc_D176:
-		move.w  d1,d7
-		jsr     IsItemUsableInBattle
-		bcc.s   loc_D1BA
-		cmpi.b  #8,d7
-		beq.s   loc_D18E
-		btst    #ITEM_BIT_ENEMYUSE,d1
-		beq.w   loc_D1BA
+                
+                move.w  d1,d7
+                jsr     IsItemUsableInBattle
+                bcc.s   loc_D1BA
+                cmpi.b  #8,d7
+                beq.s   loc_D18E
+                btst    #ITEM_BIT_ENEMYUSE,d1
+                beq.w   loc_D1BA
 loc_D18E:
-		jsr     GetItemDefAddress
-		move.w  d1,d7
-		clr.w   d1
-		move.b  9(a0),d1
-		jsr     GetSpellDefAddress
-		move.b  3(a0),d2
-		andi.b  #3,d2
-		cmpi.b  #1,d2
-		bne.w   loc_D1BA
-		move.w  d3,d2
-		move.w  d7,d1
-		bra.w   loc_D1C6
+                
+                jsr     GetItemDefAddress
+                move.w  d1,d7
+                clr.w   d1
+                move.b  9(a0),d1
+                jsr     GetSpellDefAddress
+                move.b  3(a0),d2
+                andi.b  #3,d2
+                cmpi.b  #1,d2
+                bne.w   loc_D1BA
+                move.w  d3,d2
+                move.w  d7,d1
+                bra.w   loc_D1C6
 loc_D1BA:
-		addq.w  #1,d3
-		cmpi.w  #4,d3
-		bcs.s   loc_D164
-		move.w  #$7F,d1 
+                
+                addq.w  #1,d3
+                cmpi.w  #4,d3
+                bcs.s   loc_D164
+                move.w  #$7F,d1 
 loc_D1C6:
-		movem.l (sp)+,d0/d3-a6
-		rts
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
 
 	; End of function GetNextUsableHealingItem
 
@@ -2140,13 +2362,13 @@ loc_D1C6:
 ; =============== S U B R O U T I N E =======================================
 
 GetTargetsReachableByAttack:
-		
-		movem.l d0-d5/d7-a3,-(sp)
-		lea     ((FF8804_LOADING_SPACE-$1000000)).w,a1
-		lea     ((byte_FF880E-$1000000)).w,a2
-		lea     ((byte_FF889E-$1000000)).w,a3
-		bsr.w   GetWeaponRange  
-		bra.w   loc_D22E
+                
+                movem.l d0-d5/d7-a3,-(sp)
+                lea     ((FF8804_LOADING_SPACE-$1000000)).w,a1
+                lea     ((byte_FF880E-$1000000)).w,a2
+                lea     ((byte_FF889E-$1000000)).w,a3
+                bsr.w   GetWeaponRange  
+                bra.w   loc_D22E
 
 	; End of function GetTargetsReachableByAttack
 
@@ -2154,17 +2376,17 @@ GetTargetsReachableByAttack:
 ; =============== S U B R O U T I N E =======================================
 
 GetTargetsReachableByItem:
-		
-		movem.l d0-d5/d7-a3,-(sp)
-		lea     ((byte_FF8808-$1000000)).w,a1
-		lea     ((byte_FF886E-$1000000)).w,a2
-		lea     ((byte_FF88FE-$1000000)).w,a3
-		jsr     GetItemDefAddress
-		move.b  9(a0),d1
-		jsr     GetSpellDefAddress
-		move.b  4(a0),d3
-		move.b  5(a0),d4
-		bra.w   loc_D22E
+                
+                movem.l d0-d5/d7-a3,-(sp)
+                lea     ((byte_FF8808-$1000000)).w,a1
+                lea     ((byte_FF886E-$1000000)).w,a2
+                lea     ((byte_FF88FE-$1000000)).w,a3
+                jsr     GetItemDefAddress
+                move.b  9(a0),d1
+                jsr     GetSpellDefAddress
+                move.b  4(a0),d3
+                move.b  5(a0),d4
+                bra.w   loc_D22E
 
 	; End of function GetTargetsReachableByItem
 
@@ -2172,55 +2394,64 @@ GetTargetsReachableByItem:
 ; =============== S U B R O U T I N E =======================================
 
 GetTargetsReachableBySpell:
-		
-		movem.l d0-d5/d7-a3,-(sp)
-		lea     ((word_FF8806-$1000000)).w,a1
-		lea     ((byte_FF883E-$1000000)).w,a2
-		lea     ((byte_FF88CE-$1000000)).w,a3
-		jsr     GetSpellDefAddress
-		move.b  4(a0),d3
-		move.b  5(a0),d4
+                
+                movem.l d0-d5/d7-a3,-(sp)
+                lea     ((word_FF8806-$1000000)).w,a1
+                lea     ((byte_FF883E-$1000000)).w,a2
+                lea     ((byte_FF88CE-$1000000)).w,a3
+                jsr     GetSpellDefAddress
+                move.b  4(a0),d3
+                move.b  5(a0),d4
 loc_D22E:
-		bsr.w   CheckMuddled2   
-		tst.b   d1
-		beq.s   loc_D23A
-		eori.b  #$80,d0         ; flip enemy bit, to get the opposite type when muddled
+                
+                bsr.w   CheckMuddled2   
+                tst.b   d1
+                beq.s   loc_D23A
+                eori.b  #$80,d0         ; flip enemy bit, to get the opposite type when muddled
 loc_D23A:
-		btst    #7,d0
-		beq.s   loc_D248
-		moveq   #0,d0
-		move.w  #$1D,d7
-		bra.s   loc_D250
+                
+                btst    #7,d0
+                beq.s   loc_D248
+                moveq   #0,d0
+                move.w  #$1D,d7
+                bra.s   loc_D250
 loc_D248:
-		move.b  #$80,d0
+                
+                move.b  #$80,d0
 loc_D24C:
-		move.w  #$1F,d7
+                
+                move.w  #$1F,d7
 loc_D250:
-		move.w  #0,(a1)
+                
+                move.w  #0,(a1)
 loc_D254:
-		jsr     GetCurrentHP
-		tst.w   d1
-		bne.s   loc_D262
-		bra.w   loc_D28A        ; combatant is dead, so skip
+                
+                jsr     GetCurrentHP
+                tst.w   d1
+                bne.s   loc_D262
+                bra.w   loc_D28A        ; combatant is dead, so skip
 loc_D262:
-		jsr     GetYPos
-		move.b  d1,d2
-		jsr     GetXPos
-		bsr.w   GetClosestAttackPosition
-		cmpi.b  #$FF,d1
+                
+                jsr     GetYPos
+                move.b  d1,d2
+                jsr     GetXPos
+                bsr.w   GetClosestAttackPosition
+                cmpi.b  #$FF,d1
 loc_D278:
-		beq.w   loc_D28A
-		addq.w  #1,(a1)
-		move.b  d0,(a2)+
-		move.b  d0,d5
-		bsr.w   GetDestinationMoveCost
-		move.b  d0,(a3)+
-		move.b  d5,d0
+                
+                beq.w   loc_D28A
+                addq.w  #1,(a1)
+                move.b  d0,(a2)+
+                move.b  d0,d5
+                bsr.w   GetDestinationMoveCost
+                move.b  d0,(a3)+
+                move.b  d5,d0
 loc_D28A:
-		addq.b  #1,d0
-		dbf     d7,loc_D254
-		movem.l (sp)+,d0-d5/d7-a3
-		rts
+                
+                addq.b  #1,d0
+                dbf     d7,loc_D254
+                movem.l (sp)+,d0-d5/d7-a3
+                rts
 
 	; End of function GetTargetsReachableBySpell
 
@@ -2228,24 +2459,25 @@ loc_D28A:
 ; =============== S U B R O U T I N E =======================================
 
 IsCharacterLessThanHalfHP:
-		
-		movem.l d1-d2,-(sp)
-		jsr     GetCurrentHP
-		move.w  d1,d2
-		jsr     GetMaxHP
-		bra.w   loc_D2C8
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
-		jsr     GetMaxHP
-		bra.w   loc_D2C8
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
-		jsr     GetCurrentHP
+                
+                movem.l d1-d2,-(sp)
+                jsr     GetCurrentHP
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D2C8
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D2C8
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetCurrentHP
 loc_D2C8:
-		add.w   d2,d2
-		cmp.w   d2,d1
-		movem.l (sp)+,d1-d2
-		rts
+                
+                add.w   d2,d2
+                cmp.w   d2,d1
+                movem.l (sp)+,d1-d2
+                rts
 
 	; End of function IsCharacterLessThanHalfHP
 
@@ -2253,17 +2485,20 @@ loc_D2C8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D2D2:
-		movem.l d1-d2,-(sp)
-		jsr     GetCurrentHP
-		move.w  d1,d2
-		jsr     GetMaxHP
+                
+                movem.l d1-d2,-(sp)
+                jsr     GetCurrentHP
+                move.w  d1,d2
+                jsr     GetMaxHP
 loc_D2E4:
-		bra.w   loc_D304
+                
+                bra.w   loc_D304
 loc_D2E8:
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
-		jsr     GetMaxHP
-		bra.w   loc_D304
+                
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D304
 
 	; End of function sub_D2D2
 
@@ -2271,14 +2506,16 @@ loc_D2E8:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D2F8:
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
-		jsr     GetCurrentHP
+                
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetCurrentHP
 loc_D304:
-		mulu.w  #3,d2
-		cmp.w   d2,d1
-		movem.l (sp)+,d1-d2
-		rts
+                
+                mulu.w  #3,d2
+                cmp.w   d2,d1
+                movem.l (sp)+,d1-d2
+                rts
 
 	; End of function sub_D2F8
 
@@ -2286,11 +2523,12 @@ loc_D304:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D310:
-		movem.l d1-d2,-(sp)
-		jsr     GetCurrentHP
-		move.w  d1,d2
-		jsr     GetMaxHP
-		bra.w   loc_D342
+                
+                movem.l d1-d2,-(sp)
+                jsr     GetCurrentHP
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D342
 
 	; End of function sub_D310
 
@@ -2298,10 +2536,11 @@ sub_D310:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D326:
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
-		jsr     GetMaxHP
-		bra.w   loc_D342
+                
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D342
 
 	; End of function sub_D326
 
@@ -2309,10 +2548,12 @@ sub_D326:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D336:
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
+                
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
 loc_D33C:
-		jsr     GetCurrentHP
+                
+                jsr     GetCurrentHP
 
 	; End of function sub_D336
 
@@ -2320,10 +2561,11 @@ loc_D33C:
 ; START OF FUNCTION CHUNK FOR sub_D310
 
 loc_D342:
-		lsl.w   #2,d2
-		cmp.w   d2,d1
-		movem.l (sp)+,d1-d2
-		rts
+                
+                lsl.w   #2,d2
+                cmp.w   d2,d1
+                movem.l (sp)+,d1-d2
+                rts
 
 ; END OF FUNCTION CHUNK FOR sub_D310
 
@@ -2331,11 +2573,12 @@ loc_D342:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D34C:
-		movem.l d1-d2,-(sp)
-		jsr     GetCurrentHP
-		move.w  d1,d2
-		jsr     GetMaxHP
-		bra.w   loc_D37E
+                
+                movem.l d1-d2,-(sp)
+                jsr     GetCurrentHP
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D37E
 
 	; End of function sub_D34C
 
@@ -2343,18 +2586,20 @@ sub_D34C:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D362:
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
-		jsr     GetMaxHP
-		bra.w   loc_D37E
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
-		jsr     GetCurrentHP
+                
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D37E
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetCurrentHP
 loc_D37E:
-		mulu.w  #5,d2
-		cmp.w   d2,d1
-		movem.l (sp)+,d1-d2
-		rts
+                
+                mulu.w  #5,d2
+                cmp.w   d2,d1
+                movem.l (sp)+,d1-d2
+                rts
 
 	; End of function sub_D362
 
@@ -2362,25 +2607,28 @@ loc_D37E:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D38A:
-		movem.l d1-d2,-(sp)
-		jsr     GetCurrentHP
-		move.w  d1,d2
+                
+                movem.l d1-d2,-(sp)
+                jsr     GetCurrentHP
+                move.w  d1,d2
 loc_D396:
-		jsr     GetMaxHP
-		bra.w   loc_D3BC
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
-		jsr     GetMaxHP
-		bra.w   loc_D3BC
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
-		jsr     GetCurrentHP
+                
+                jsr     GetMaxHP
+                bra.w   loc_D3BC
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D3BC
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetCurrentHP
 loc_D3BC:
-		mulu.w  #3,d2
-		add.w   d1,d1
-		cmp.w   d2,d1
-		movem.l (sp)+,d1-d2
-		rts
+                
+                mulu.w  #3,d2
+                add.w   d1,d1
+                cmp.w   d2,d1
+                movem.l (sp)+,d1-d2
+                rts
 
 	; End of function sub_D38A
 
@@ -2388,11 +2636,12 @@ loc_D3BC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D3CA:
-		movem.l d1-d2,-(sp)
-		jsr     GetCurrentMP
-		move.w  d1,d2
-		jsr     GetMaxMP
-		bra.w   loc_D3FC
+                
+                movem.l d1-d2,-(sp)
+                jsr     GetCurrentMP
+                move.w  d1,d2
+                jsr     GetMaxMP
+                bra.w   loc_D3FC
 
 	; End of function sub_D3CA
 
@@ -2400,10 +2649,11 @@ sub_D3CA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D3E0:
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
-		jsr     GetMaxMP
-		bra.w   loc_D3FC
+                
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetMaxMP
+                bra.w   loc_D3FC
 
 	; End of function sub_D3E0
 
@@ -2411,9 +2661,10 @@ sub_D3E0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D3F0:
-		movem.l d1-d2,-(sp)
-		move.w  d1,d2
-		jsr     GetCurrentMP
+                
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetCurrentMP
 
 	; End of function sub_D3F0
 
@@ -2421,10 +2672,11 @@ sub_D3F0:
 ; START OF FUNCTION CHUNK FOR sub_D3CA
 
 loc_D3FC:
-		mulu.w  #3,d2
-		cmp.w   d2,d1
-		movem.l (sp)+,d1-d2
-		rts
+                
+                mulu.w  #3,d2
+                cmp.w   d2,d1
+                movem.l (sp)+,d1-d2
+                rts
 
 ; END OF FUNCTION CHUNK FOR sub_D3CA
 
@@ -2432,22 +2684,24 @@ loc_D3FC:
 ; =============== S U B R O U T I N E =======================================
 
 GetDifficulty:
-		
-		movem.l d0/d2-a6,-(sp)
-		clr.w   d2
-		move.w  #$4E,d1 
-		bsr.w   CheckFlag
-		beq.s   loc_D41C
-		move.w  #1,d2
+                
+                movem.l d0/d2-a6,-(sp)
+                clr.w   d2
+                move.w  #$4E,d1 
+                bsr.w   CheckFlag
+                beq.s   loc_D41C
+                move.w  #1,d2
 loc_D41C:
-		move.w  #$4F,d1 
-		bsr.w   CheckFlag
-		beq.s   loc_D428
-		addq.w  #2,d2
+                
+                move.w  #$4F,d1 
+                bsr.w   CheckFlag
+                beq.s   loc_D428
+                addq.w  #2,d2
 loc_D428:
-		move.w  d2,d1
-		movem.l (sp)+,d0/d2-a6
-		rts
+                
+                move.w  d2,d1
+                movem.l (sp)+,d0/d2-a6
+                rts
 
 	; End of function GetDifficulty
 
@@ -2455,23 +2709,26 @@ loc_D428:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D430:
-		movem.l d0/d2-a6,-(sp)
-		link    a6,#-2
-		move.b  d0,-1(a6)
-		move.b  d1,-2(a6)
-		clr.w   d0
-		move.b  -1(a6),d0
-		bsr.w   GetCurrentTerrainType
-		btst    #7,d0
-		bne.s   loc_D454
-		clr.w   d1
-		bra.s   loc_D458
+                
+                movem.l d0/d2-a6,-(sp)
+                link    a6,#-2
+                move.b  d0,-1(a6)
+                move.b  d1,-2(a6)
+                clr.w   d0
+                move.b  -1(a6),d0
+                bsr.w   GetCurrentTerrainType
+                btst    #7,d0
+                bne.s   loc_D454
+                clr.w   d1
+                bra.s   loc_D458
 loc_D454:
-		move.b  #$FF,d1
+                
+                move.b  #$FF,d1
 loc_D458:
-		unlk    a6
-		movem.l (sp)+,d0/d2-a6
-		rts
+                
+                unlk    a6
+                movem.l (sp)+,d0/d2-a6
+                rts
 
 	; End of function sub_D430
 
@@ -2479,52 +2736,60 @@ loc_D458:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D460:
-		movem.l d0-a6,-(sp)
-		move.w  d0,d7
-		move.w  #5,d1
-		bsr.w   GetTargetsReachableBySpell
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  (a0),d0
-		tst.w   d0
-		bne.s   loc_D47C
-		bra.w   loc_D4DA
+                
+                movem.l d0-a6,-(sp)
+                move.w  d0,d7
+                move.w  #5,d1
+                bsr.w   GetTargetsReachableBySpell
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  (a0),d0
+                tst.w   d0
+                bne.s   loc_D47C
+                bra.w   loc_D4DA
 loc_D47C:
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  (a0),d5
-		subi.w  #1,d5
-		lea     ((byte_FF883E-$1000000)).w,a0
-		lea     ((byte_FF880E-$1000000)).w,a1
+                
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  (a0),d5
+                subi.w  #1,d5
+                lea     ((byte_FF883E-$1000000)).w,a0
+                lea     ((byte_FF880E-$1000000)).w,a1
 loc_D48E:
-		move.b  (a0)+,(a1)+
-		dbf     d5,loc_D48E
-		lea     ((byte_FF895E-$1000000)).w,a0
-		lea     ((byte_FF880E-$1000000)).w,a1
-		lea     ((byte_FF883E-$1000000)).w,a4
-		clr.w   d4
-		clr.w   d5
-		lea     ((word_FF8806-$1000000)).w,a3
-		move.w  (a3),d6
-		subi.w  #1,d6
+                
+                move.b  (a0)+,(a1)+
+                dbf     d5,loc_D48E
+                lea     ((byte_FF895E-$1000000)).w,a0
+                lea     ((byte_FF880E-$1000000)).w,a1
+                lea     ((byte_FF883E-$1000000)).w,a4
+                clr.w   d4
+                clr.w   d5
+                lea     ((word_FF8806-$1000000)).w,a3
+                move.w  (a3),d6
+                subi.w  #1,d6
 loc_D4AE:
-		clr.w   d0
-		move.b  (a1,d4.w),d0
+                
+                clr.w   d0
+                move.b  (a1,d4.w),d0
 loc_D4B4:
-		move.w  #$46,d1 
-		bsr.w   CreateTargetGrid
-		bsr.w   sub_D7AA
-		tst.w   d1
-		beq.s   loc_D4D0
-		move.b  d1,(a0,d5.w)
+                
+                move.w  #$46,d1 
+                bsr.w   CreateTargetGrid
+                bsr.w   sub_D7AA
+                tst.w   d1
+                beq.s   loc_D4D0
+                move.b  d1,(a0,d5.w)
 loc_D4C8:
-		move.b  d0,(a4,d5.w)
-		addi.w  #1,d5
+                
+                move.b  d0,(a4,d5.w)
+                addi.w  #1,d5
 loc_D4D0:
-		addi.w  #1,d4
-		dbf     d6,loc_D4AE
-		move.w  d5,(a3)
+                
+                addi.w  #1,d4
+                dbf     d6,loc_D4AE
+                move.w  d5,(a3)
 loc_D4DA:
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function sub_D460
 
@@ -2532,52 +2797,60 @@ loc_D4DA:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D4E0:
-		movem.l d0-a6,-(sp)
-		move.w  d0,d7
-		move.w  #$46,d1 
-		bsr.w   GetTargetsReachableBySpell
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  (a0),d0
-		tst.w   d0
-		bne.s   loc_D4FC
-		bra.w   loc_D55A
+                
+                movem.l d0-a6,-(sp)
+                move.w  d0,d7
+                move.w  #$46,d1 
+                bsr.w   GetTargetsReachableBySpell
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  (a0),d0
+                tst.w   d0
+                bne.s   loc_D4FC
+                bra.w   loc_D55A
 loc_D4FC:
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  (a0),d5
-		subi.w  #1,d5
-		lea     ((byte_FF883E-$1000000)).w,a0
-		lea     ((byte_FF880E-$1000000)).w,a1
+                
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  (a0),d5
+                subi.w  #1,d5
+                lea     ((byte_FF883E-$1000000)).w,a0
+                lea     ((byte_FF880E-$1000000)).w,a1
 loc_D50E:
-		move.b  (a0)+,(a1)+
-		dbf     d5,loc_D50E
-		lea     ((byte_FF895E-$1000000)).w,a0
-		lea     ((byte_FF880E-$1000000)).w,a1
+                
+                move.b  (a0)+,(a1)+
+                dbf     d5,loc_D50E
+                lea     ((byte_FF895E-$1000000)).w,a0
+                lea     ((byte_FF880E-$1000000)).w,a1
 loc_D51C:
-		lea     ((byte_FF883E-$1000000)).w,a4
-		clr.w   d4
-		clr.w   d5
+                
+                lea     ((byte_FF883E-$1000000)).w,a4
+                clr.w   d4
+                clr.w   d5
 loc_D524:
-		lea     ((word_FF8806-$1000000)).w,a3
-		move.w  (a3),d6
-		subi.w  #1,d6
+                
+                lea     ((word_FF8806-$1000000)).w,a3
+                move.w  (a3),d6
+                subi.w  #1,d6
 loc_D52E:
-		clr.w   d0
-		move.b  (a1,d4.w),d0
-		move.w  #$46,d1 
-		bsr.w   CreateTargetGrid
-		bsr.w   sub_D742
-		tst.w   d1
-		beq.s   loc_D550
-		move.b  d1,(a0,d5.w)
-		move.b  d0,(a4,d5.w)
-		addi.w  #1,d5
+                
+                clr.w   d0
+                move.b  (a1,d4.w),d0
+                move.w  #$46,d1 
+                bsr.w   CreateTargetGrid
+                bsr.w   sub_D742
+                tst.w   d1
+                beq.s   loc_D550
+                move.b  d1,(a0,d5.w)
+                move.b  d0,(a4,d5.w)
+                addi.w  #1,d5
 loc_D550:
-		addi.w  #1,d4
-		dbf     d6,loc_D52E
-		move.w  d5,(a3)
+                
+                addi.w  #1,d4
+                dbf     d6,loc_D52E
+                move.w  d5,(a3)
 loc_D55A:
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function sub_D4E0
 
@@ -2585,78 +2858,90 @@ loc_D55A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D560:
-		movem.l d0-a6,-(sp)
-		move.w  d0,d7
-		move.w  #6,d1
-		bsr.w   GetTargetsReachableBySpell
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  (a0),d0
-		tst.w   d0
-		bne.s   loc_D57C
-		bra.w   loc_D626
+                
+                movem.l d0-a6,-(sp)
+                move.w  d0,d7
+                move.w  #6,d1
+                bsr.w   GetTargetsReachableBySpell
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  (a0),d0
+                tst.w   d0
+                bne.s   loc_D57C
+                bra.w   loc_D626
 loc_D57C:
-		move.w  d0,d5
-		subi.w  #1,d5
-		lea     ((byte_FF883E-$1000000)).w,a1
-		lea     ((byte_FF895E-$1000000)).w,a2
-		lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
+                
+                move.w  d0,d5
+                subi.w  #1,d5
+                lea     ((byte_FF883E-$1000000)).w,a1
+                lea     ((byte_FF895E-$1000000)).w,a2
+                lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
 loc_D592:
-		clr.w   d0
-		move.b  (a1)+,d0
-		move.w  #6,d1
-		bsr.w   CreateTargetGrid
-		bsr.w   sub_D6F2
-		move.b  d1,(a2)+
-		dbf     d5,loc_D592
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  (a0),d5
+                
+                clr.w   d0
+                move.b  (a1)+,d0
+                move.w  #6,d1
+                bsr.w   CreateTargetGrid
+                bsr.w   sub_D6F2
+                move.b  d1,(a2)+
+                dbf     d5,loc_D592
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  (a0),d5
 loc_D5AE:
-		subi.w  #1,d5
-		lea     ((byte_FF883E-$1000000)).w,a0
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
+                
+                subi.w  #1,d5
+                lea     ((byte_FF883E-$1000000)).w,a0
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
 loc_D5BA:
-		move.b  (a0)+,(a1)+
+                
+                move.b  (a0)+,(a1)+
 loc_D5BC:
-		dbf     d5,loc_D5BA
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  (a0),d5
-		subi.w  #1,d5
-		lea     ((byte_FF883E-$1000000)).w,a1
-		lea     ((byte_FF895E-$1000000)).w,a2
-		lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
-		lea     ((byte_FF892E-$1000000)).w,a5
-		clr.w   d4
-		clr.w   d3
+                
+                dbf     d5,loc_D5BA
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  (a0),d5
+                subi.w  #1,d5
+                lea     ((byte_FF883E-$1000000)).w,a1
+                lea     ((byte_FF895E-$1000000)).w,a2
+                lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
+                lea     ((byte_FF892E-$1000000)).w,a5
+                clr.w   d4
+                clr.w   d3
 loc_D5E2:
-		clr.w   d0
-		move.b  (a2,d3.w),d0
-		cmpi.b  #2,d0
-		blt.s   loc_D5FE
-		move.b  d0,(a5,d4.w)
-		move.b  (a4,d3.w),d0
-		move.b  d0,(a1,d4.w)
-		addi.w  #1,d4
+                
+                clr.w   d0
+                move.b  (a2,d3.w),d0
+                cmpi.b  #2,d0
+                blt.s   loc_D5FE
+                move.b  d0,(a5,d4.w)
+                move.b  (a4,d3.w),d0
+                move.b  d0,(a1,d4.w)
+                addi.w  #1,d4
 loc_D5FE:
-		addi.w  #1,d3
-		dbf     d5,loc_D5E2
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  d4,(a0)
-		tst.w   d4
-		bne.s   loc_D614
-		bra.w   loc_D626
+                
+                addi.w  #1,d3
+                dbf     d5,loc_D5E2
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  d4,(a0)
+                tst.w   d4
+                bne.s   loc_D614
+                bra.w   loc_D626
 loc_D614:
-		subi.w  #1,d4
+                
+                subi.w  #1,d4
 loc_D618:
-		lea     ((byte_FF892E-$1000000)).w,a0
-		lea     ((byte_FF895E-$1000000)).w,a1
+                
+                lea     ((byte_FF892E-$1000000)).w,a0
+                lea     ((byte_FF895E-$1000000)).w,a1
 loc_D620:
-		move.b  (a0)+,(a1)+
-		dbf     d4,loc_D620
+                
+                move.b  (a0)+,(a1)+
+                dbf     d4,loc_D620
 loc_D626:
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function sub_D560
 
@@ -2664,75 +2949,85 @@ loc_D626:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D62C:
-		movem.l d0-a6,-(sp)
-		move.w  d0,d7
-		move.w  #$47,d1 
-		bsr.w   GetTargetsReachableBySpell
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  (a0),d0
-		tst.w   d0
-		bne.s   loc_D648
-		bra.w   loc_D6EC
+                
+                movem.l d0-a6,-(sp)
+                move.w  d0,d7
+                move.w  #$47,d1 
+                bsr.w   GetTargetsReachableBySpell
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  (a0),d0
+                tst.w   d0
+                bne.s   loc_D648
+                bra.w   loc_D6EC
 loc_D648:
-		move.w  d0,d5
-		subi.w  #1,d5
-		lea     ((byte_FF883E-$1000000)).w,a1
-		lea     ((byte_FF895E-$1000000)).w,a2
-		lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
+                
+                move.w  d0,d5
+                subi.w  #1,d5
+                lea     ((byte_FF883E-$1000000)).w,a1
+                lea     ((byte_FF895E-$1000000)).w,a2
+                lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
 loc_D65A:
-		clr.w   d0
-		move.b  (a1)+,d0
-		move.w  #$47,d1 
-		bsr.w   CreateTargetGrid
-		move.w  (a3),d2
-		move.b  d2,(a2)+
-		dbf     d5,loc_D65A
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  (a0),d5
-		subi.w  #1,d5
-		lea     ((byte_FF883E-$1000000)).w,a0
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
+                
+                clr.w   d0
+                move.b  (a1)+,d0
+                move.w  #$47,d1 
+                bsr.w   CreateTargetGrid
+                move.w  (a3),d2
+                move.b  d2,(a2)+
+                dbf     d5,loc_D65A
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  (a0),d5
+                subi.w  #1,d5
+                lea     ((byte_FF883E-$1000000)).w,a0
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
 loc_D680:
-		move.b  (a0)+,(a1)+
-		dbf     d5,loc_D680
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  (a0),d5
-		subi.w  #1,d5
-		lea     ((byte_FF883E-$1000000)).w,a1
-		lea     ((byte_FF895E-$1000000)).w,a2
-		lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
-		lea     ((byte_FF892E-$1000000)).w,a5
-		clr.w   d4
-		clr.w   d3
+                
+                move.b  (a0)+,(a1)+
+                dbf     d5,loc_D680
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  (a0),d5
+                subi.w  #1,d5
+                lea     ((byte_FF883E-$1000000)).w,a1
+                lea     ((byte_FF895E-$1000000)).w,a2
+                lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a4
+                lea     ((byte_FF892E-$1000000)).w,a5
+                clr.w   d4
+                clr.w   d3
 loc_D6A8:
-		clr.w   d0
-		move.b  (a2,d3.w),d0
-		cmpi.b  #3,d0
-		blt.s   loc_D6C4
-		move.b  d0,(a5,d4.w)
-		move.b  (a4,d3.w),d0
-		move.b  d0,(a1,d4.w)
-		addi.w  #1,d4
+                
+                clr.w   d0
+                move.b  (a2,d3.w),d0
+                cmpi.b  #3,d0
+                blt.s   loc_D6C4
+                move.b  d0,(a5,d4.w)
+                move.b  (a4,d3.w),d0
+                move.b  d0,(a1,d4.w)
+                addi.w  #1,d4
 loc_D6C4:
-		addi.w  #1,d3
-		dbf     d5,loc_D6A8
+                
+                addi.w  #1,d3
+                dbf     d5,loc_D6A8
 loc_D6CC:
-		lea     ((word_FF8806-$1000000)).w,a0
-		move.w  d4,(a0)
-		tst.w   d4
-		bne.s   loc_D6DA
-		bra.w   loc_D6EC
+                
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  d4,(a0)
+                tst.w   d4
+                bne.s   loc_D6DA
+                bra.w   loc_D6EC
 loc_D6DA:
-		subi.w  #1,d4
-		lea     ((byte_FF892E-$1000000)).w,a0
-		lea     ((byte_FF895E-$1000000)).w,a1
+                
+                subi.w  #1,d4
+                lea     ((byte_FF892E-$1000000)).w,a0
+                lea     ((byte_FF895E-$1000000)).w,a1
 loc_D6E6:
-		move.b  (a0)+,(a1)+
-		dbf     d4,loc_D6E6
+                
+                move.b  (a0)+,(a1)+
+                dbf     d4,loc_D6E6
 loc_D6EC:
-		movem.l (sp)+,d0-a6
-		rts
+                
+                movem.l (sp)+,d0-a6
+                rts
 
 	; End of function sub_D62C
 
@@ -2740,34 +3035,38 @@ loc_D6EC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D6F2:
-		movem.l d0/d2-a6,-(sp)
-		lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
-		move.w  (a0),d7
-		subi.w  #1,d7
-		clr.w   d6
-		clr.w   d5
+                
+                movem.l d0/d2-a6,-(sp)
+                lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a1
+                move.w  (a0),d7
+                subi.w  #1,d7
+                clr.w   d6
+                clr.w   d5
 loc_D708:
-		clr.w   d0
-		move.b  (a1,d5.w),d0
-		clr.w   d3
-		bsr.w   GetNextUsableAttackSpell
-		cmpi.w  #$3F,d1 
-		beq.s   loc_D722
-		addi.w  #1,d6
-		bra.w   loc_D732
+                
+                clr.w   d0
+                move.b  (a1,d5.w),d0
+                clr.w   d3
+                bsr.w   GetNextUsableAttackSpell
+                cmpi.w  #$3F,d1 
+                beq.s   loc_D722
+                addi.w  #1,d6
+                bra.w   loc_D732
 loc_D722:
-		clr.w   d3
-		bsr.w   GetNextHealingSpell
-		cmpi.w  #$3F,d1 
-		beq.s   loc_D732
-		addi.w  #1,d6
+                
+                clr.w   d3
+                bsr.w   GetNextHealingSpell
+                cmpi.w  #$3F,d1 
+                beq.s   loc_D732
+                addi.w  #1,d6
 loc_D732:
-		addi.w  #1,d5
-		dbf     d7,loc_D708
-		move.w  d6,d1
-		movem.l (sp)+,d0/d2-a6
-		rts
+                
+                addi.w  #1,d5
+                dbf     d7,loc_D708
+                move.w  d6,d1
+                movem.l (sp)+,d0/d2-a6
+                rts
 
 	; End of function sub_D6F2
 
@@ -2775,44 +3074,49 @@ loc_D732:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D742:
-		movem.l d0/d2-a6,-(sp)
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-		lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
-		clr.w   d4
-		lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
-		clr.w   d5
-		move.w  (a3),d6
-		tst.w   d6
-		bne.s   loc_D760
-		bra.w   loc_D7A2
+                
+                movem.l d0/d2-a6,-(sp)
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
+                clr.w   d4
+                lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
+                clr.w   d5
+                move.w  (a3),d6
+                tst.w   d6
+                bne.s   loc_D760
+                bra.w   loc_D7A2
 loc_D760:
-		subi.w  #1,d6
+                
+                subi.w  #1,d6
 loc_D764:
-		clr.w   d0
-		move.b  (a0,d4.w),d0
-		clr.w   d3
-		bsr.w   GetNextUsableAttackSpell
-		cmpi.b  #$3F,d1 
-		bne.s   loc_D792
-		andi.b  #$7F,d0 
-		move.b  (a2,d0.w),d2
-		cmpi.b  #$FF,d2
-		beq.s   loc_D792
-		move.w  d2,d0
-		bsr.w   GetCurrentHP
-		tst.w   d1
-		beq.s   loc_D792
-		addi.w  #1,d5
+                
+                clr.w   d0
+                move.b  (a0,d4.w),d0
+                clr.w   d3
+                bsr.w   GetNextUsableAttackSpell
+                cmpi.b  #$3F,d1 
+                bne.s   loc_D792
+                andi.b  #$7F,d0 
+                move.b  (a2,d0.w),d2
+                cmpi.b  #$FF,d2
+                beq.s   loc_D792
+                move.w  d2,d0
+                bsr.w   GetCurrentHP
+                tst.w   d1
+                beq.s   loc_D792
+                addi.w  #1,d5
 loc_D792:
-		addi.w  #1,d4
-		dbf     d6,loc_D764
-		cmpi.w  #2,d5
-		bge.s   loc_D7A2
-		clr.w   d5
+                
+                addi.w  #1,d4
+                dbf     d6,loc_D764
+                cmpi.w  #2,d5
+                bge.s   loc_D7A2
+                clr.w   d5
 loc_D7A2:
-		move.w  d5,d1
-		movem.l (sp)+,d0/d2-a6
-		rts
+                
+                move.w  d5,d1
+                movem.l (sp)+,d0/d2-a6
+                rts
 
 	; End of function sub_D742
 
@@ -2820,440 +3124,455 @@ loc_D7A2:
 ; =============== S U B R O U T I N E =======================================
 
 sub_D7AA:
-		movem.l d0/d2-a6,-(sp)
-		lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-		lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
-		clr.w   d4
-		clr.w   d5
-		lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
-		move.w  (a3),d6
-		tst.w   d6
-		bne.s   loc_D7C8
-		bra.w   loc_D81C
+                
+                movem.l d0/d2-a6,-(sp)
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
+                clr.w   d4
+                clr.w   d5
+                lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a3
+                move.w  (a3),d6
+                tst.w   d6
+                bne.s   loc_D7C8
+                bra.w   loc_D81C
 loc_D7C8:
-		subi.w  #1,d6
+                
+                subi.w  #1,d6
 loc_D7CC:
-		clr.w   d0
-		move.b  (a0,d4.w),d0
-		clr.w   d3
-		bsr.w   GetNextUsableAttackSpell
-		cmpi.b  #$3F,d1 
-		bne.s   loc_D814
-		andi.b  #$7F,d0 
-		move.b  (a2,d0.w),d2
-		cmpi.b  #$FF,d2
-		beq.s   loc_D814
-		move.w  d2,d0
-		bsr.w   GetCurrentHP
-		tst.w   d1
-		beq.s   loc_D814
-		move.b  (a0,d4.w),d0
-		bsr.w   GetCurrentATK
-		move.w  #$FF,d0
-		sub.w   d1,d0
-		add.w   d0,d5
-		cmpi.w  #$FF,d5
-		addi.w  #1,d5
-		ble.s   loc_D814
-		move.w  #$FF,d5
+                
+                clr.w   d0
+                move.b  (a0,d4.w),d0
+                clr.w   d3
+                bsr.w   GetNextUsableAttackSpell
+                cmpi.b  #$3F,d1 
+                bne.s   loc_D814
+                andi.b  #$7F,d0 
+                move.b  (a2,d0.w),d2
+                cmpi.b  #$FF,d2
+                beq.s   loc_D814
+                move.w  d2,d0
+                bsr.w   GetCurrentHP
+                tst.w   d1
+                beq.s   loc_D814
+                move.b  (a0,d4.w),d0
+                bsr.w   GetCurrentATK
+                move.w  #$FF,d0
+                sub.w   d1,d0
+                add.w   d0,d5
+                cmpi.w  #$FF,d5
+                addi.w  #1,d5
+                ble.s   loc_D814
+                move.w  #$FF,d5
 loc_D814:
-		addi.w  #1,d4
-		dbf     d6,loc_D7CC
+                
+                addi.w  #1,d4
+                dbf     d6,loc_D7CC
 loc_D81C:
-		move.w  d5,d1
-		movem.l (sp)+,d0/d2-a6
-		rts
+                
+                move.w  d5,d1
+                movem.l (sp)+,d0/d2-a6
+                rts
 
 	; End of function sub_D7AA
 
 MoveTypeTerrainCosts:
-		incbin "data/battles/global/movetypeterraincosts.bin"
+                incbin "data/battles/global/movetypeterraincosts.bin"
 byte_D8F4:      dc.b $FF                ; related to move types
-		dc.b $C
-		dc.b $B
-		dc.b $A
-		dc.b 9
-		dc.b 8
-		dc.b 6
-		dc.b 5
-		dc.b 4
-		dc.b 3
-		dc.b 2
-		dc.b 1
-		dc.b 7
+                dc.b $C
+                dc.b $B
+                dc.b $A
+                dc.b 9
+                dc.b 8
+                dc.b 6
+                dc.b 5
+                dc.b 4
+                dc.b 3
+                dc.b 2
+                dc.b 1
+                dc.b 7
 byte_D901:      dc.b 0
-		dc.b $C
-		dc.b 3
-		dc.b $12
-		dc.b $11
-		dc.b 4
-		dc.b $13
-		dc.b $14
-		dc.b 6
-		dc.b 9
-		dc.b $17
-		dc.b $E
-		dc.b $1A
-		dc.b $A
-		dc.b $1B
-		dc.b 5
-		dc.b 8
-		dc.b $15
-		dc.b $19
-		dc.b $16
-		dc.b 7
-		dc.b $18
-		dc.b 1
-		dc.b $D
-		dc.b $1D
-		dc.b 2
-		dc.b $1F
-		dc.b $10
-		dc.b $F
-		dc.b $1E
-		dc.b $B
-		dc.b $1C
+                dc.b $C
+                dc.b 3
+                dc.b $12
+                dc.b $11
+                dc.b 4
+                dc.b $13
+                dc.b $14
+                dc.b 6
+                dc.b 9
+                dc.b $17
+                dc.b $E
+                dc.b $1A
+                dc.b $A
+                dc.b $1B
+                dc.b 5
+                dc.b 8
+                dc.b $15
+                dc.b $19
+                dc.b $16
+                dc.b 7
+                dc.b $18
+                dc.b 1
+                dc.b $D
+                dc.b $1D
+                dc.b 2
+                dc.b $1F
+                dc.b $10
+                dc.b $F
+                dc.b $1E
+                dc.b $B
+                dc.b $1C
 byte_D921:      dc.b 0
-		dc.b $C
-		dc.b $B
-		dc.b $1C
-		dc.b $1E
-		dc.b 2
-		dc.b $F
-		dc.b $10
-		dc.b $1F
-		dc.b $1D
-		dc.b 1
-		dc.b $D
-		dc.b 7
-		dc.b $18
-		dc.b 8
-		dc.b 5
-		dc.b $16
-		dc.b $19
-		dc.b $15
-		dc.b $A
-		dc.b $1B
-		dc.b 3
-		dc.b $11
-		dc.b $12
-		dc.b 4
-		dc.b $14
-		dc.b $13
-		dc.b 9
-		dc.b 6
-		dc.b $1A
-		dc.b $E
-		dc.b $17
+                dc.b $C
+                dc.b $B
+                dc.b $1C
+                dc.b $1E
+                dc.b 2
+                dc.b $F
+                dc.b $10
+                dc.b $1F
+                dc.b $1D
+                dc.b 1
+                dc.b $D
+                dc.b 7
+                dc.b $18
+                dc.b 8
+                dc.b 5
+                dc.b $16
+                dc.b $19
+                dc.b $15
+                dc.b $A
+                dc.b $1B
+                dc.b 3
+                dc.b $11
+                dc.b $12
+                dc.b 4
+                dc.b $14
+                dc.b $13
+                dc.b 9
+                dc.b 6
+                dc.b $1A
+                dc.b $E
+                dc.b $17
 byte_D941:      dc.b 6
-		dc.b 9
-		dc.b $17
-		dc.b $E
-		dc.b $1A
-		dc.b 3
-		dc.b $12
-		dc.b $11
-		dc.b 4
-		dc.b $13
-		dc.b $14
-		dc.b 0
-		dc.b $C
-		dc.b $A
-		dc.b $1B
-		dc.b 5
-		dc.b 8
-		dc.b $15
-		dc.b $19
-		dc.b $16
-		dc.b 7
-		dc.b $18
-		dc.b 1
-		dc.b $D
-		dc.b $1D
-		dc.b 2
-		dc.b $1F
-		dc.b $10
-		dc.b $F
-		dc.b $1E
-		dc.b $B
-		dc.b $1C
+                dc.b 9
+                dc.b $17
+                dc.b $E
+                dc.b $1A
+                dc.b 3
+                dc.b $12
+                dc.b $11
+                dc.b 4
+                dc.b $13
+                dc.b $14
+                dc.b 0
+                dc.b $C
+                dc.b $A
+                dc.b $1B
+                dc.b 5
+                dc.b 8
+                dc.b $15
+                dc.b $19
+                dc.b $16
+                dc.b 7
+                dc.b $18
+                dc.b 1
+                dc.b $D
+                dc.b $1D
+                dc.b 2
+                dc.b $1F
+                dc.b $10
+                dc.b $F
+                dc.b $1E
+                dc.b $B
+                dc.b $1C
 byte_D961:      dc.b 0
-		dc.b $C
-		dc.b 3
-		dc.b $12
-		dc.b $11
-		dc.b 4
-		dc.b $13
-		dc.b $14
-		dc.b 2
-		dc.b $1F
-		dc.b $10
-		dc.b $F
-		dc.b $1E
-		dc.b 7
-		dc.b $18
-		dc.b 1
-		dc.b $D
-		dc.b $1D
-		dc.b $B
-		dc.b $1C
-		dc.b 6
-		dc.b 9
-		dc.b $17
-		dc.b $E
-		dc.b $1A
-		dc.b $A
-		dc.b $1B
-		dc.b 5
-		dc.b 8
-		dc.b $15
-		dc.b $19
-		dc.b $16
-		dc.b $FF
+                dc.b $C
+                dc.b 3
+                dc.b $12
+                dc.b $11
+                dc.b 4
+                dc.b $13
+                dc.b $14
+                dc.b 2
+                dc.b $1F
+                dc.b $10
+                dc.b $F
+                dc.b $1E
+                dc.b 7
+                dc.b $18
+                dc.b 1
+                dc.b $D
+                dc.b $1D
+                dc.b $B
+                dc.b $1C
+                dc.b 6
+                dc.b 9
+                dc.b $17
+                dc.b $E
+                dc.b $1A
+                dc.b $A
+                dc.b $1B
+                dc.b 5
+                dc.b 8
+                dc.b $15
+                dc.b $19
+                dc.b $16
+                dc.b $FF
 off_D982:       dc.l byte_D901          ; related to move type
-		dc.l byte_D901
-		dc.l byte_D901
-		dc.l byte_D901
-		dc.l byte_D901
-		dc.l byte_D961
-		dc.l byte_D961
-		dc.l byte_D901
+                dc.l byte_D901
+                dc.l byte_D901
+                dc.l byte_D901
+                dc.l byte_D901
+                dc.l byte_D961
+                dc.l byte_D961
+                dc.l byte_D901
 off_D9A2:       dc.l byte_D941
 off_D9A6:       dc.l byte_D941
-		dc.l byte_D921
-		dc.l byte_D921
-		dc.l byte_D901
-		dc.l byte_D901
-		dc.l byte_D901
-		dc.l byte_D901
+                dc.l byte_D921
+                dc.l byte_D921
+                dc.l byte_D901
+                dc.l byte_D901
+                dc.l byte_D901
+                dc.l byte_D901
 off_D9C2:       dc.l byte_DA02          ; Gives values from Upper Move Type and Class
-		dc.l byte_DA02
-		dc.l byte_DA02
-		dc.l byte_DA02
-		dc.l byte_DA02
-		dc.l byte_DA62
-		dc.l byte_DA62
-		dc.l byte_DA02
-		dc.l byte_DA42
-		dc.l byte_DA42
-		dc.l byte_DA22
-		dc.l byte_DA22
-		dc.l byte_DA02
-		dc.l byte_DA02
+                dc.l byte_DA02
+                dc.l byte_DA02
+                dc.l byte_DA02
+                dc.l byte_DA02
+                dc.l byte_DA62
+                dc.l byte_DA62
+                dc.l byte_DA02
+                dc.l byte_DA42
+                dc.l byte_DA42
+                dc.l byte_DA22
+                dc.l byte_DA22
+                dc.l byte_DA02
+                dc.l byte_DA02
 off_D9FA:       dc.l byte_DA02
-		dc.l byte_DA02
+                dc.l byte_DA02
 byte_DA02:      dc.b 4
-		dc.b 1
-		dc.b 0
-		dc.b 4
-		dc.b 4
-		dc.b 2
-		dc.b 2
-		dc.b 1
-		dc.b 2
-		dc.b 2
-		dc.b 2
-		dc.b 0
-		dc.b 4
-		dc.b 1
-		dc.b 2
-		dc.b 0
-		dc.b 0
-		dc.b 4
-		dc.b 4
-		dc.b 4
-		dc.b 4
-		dc.b 2
-		dc.b 2
-		dc.b 2
-		dc.b 1
-		dc.b 2
-		dc.b 2
-		dc.b 2
-		dc.b 0
-		dc.b 1
-		dc.b 0
-		dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 4
+                dc.b 4
+                dc.b 2
+                dc.b 2
+                dc.b 1
+                dc.b 2
+                dc.b 2
+                dc.b 2
+                dc.b 0
+                dc.b 4
+                dc.b 1
+                dc.b 2
+                dc.b 0
+                dc.b 0
+                dc.b 4
+                dc.b 4
+                dc.b 4
+                dc.b 4
+                dc.b 2
+                dc.b 2
+                dc.b 2
+                dc.b 1
+                dc.b 2
+                dc.b 2
+                dc.b 2
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 0
 byte_DA22:      dc.b 3
-		dc.b 1
-		dc.b 3
-		dc.b 0
-		dc.b 0
-		dc.b 1
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.b 0
-		dc.b 1
-		dc.b 3
-		dc.b 3
-		dc.b 2
-		dc.b 0
-		dc.b 3
-		dc.b 3
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.b 0
-		dc.b 1
-		dc.b 1
-		dc.b 0
-		dc.b 1
-		dc.b 3
-		dc.b 2
-		dc.b 3
-		dc.b 3
+                dc.b 1
+                dc.b 3
+                dc.b 0
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 3
+                dc.b 3
+                dc.b 2
+                dc.b 0
+                dc.b 3
+                dc.b 3
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 1
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 3
+                dc.b 2
+                dc.b 3
+                dc.b 3
 byte_DA42:      dc.b 3
-		dc.b 1
-		dc.b 0
-		dc.b 3
-		dc.b 3
-		dc.b 2
-		dc.b 4
-		dc.b 2
-		dc.b 2
-		dc.b 4
-		dc.b 2
-		dc.b 0
-		dc.b 3
-		dc.b 1
-		dc.b 4
-		dc.b 0
-		dc.b 0
-		dc.b 3
-		dc.b 3
-		dc.b 3
-		dc.b 3
-		dc.b 2
-		dc.b 2
-		dc.b 4
-		dc.b 2
-		dc.b 2
-		dc.b 4
-		dc.b 2
-		dc.b 0
-		dc.b 1
-		dc.b 0
-		dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 3
+                dc.b 3
+                dc.b 2
+                dc.b 4
+                dc.b 2
+                dc.b 2
+                dc.b 4
+                dc.b 2
+                dc.b 0
+                dc.b 3
+                dc.b 1
+                dc.b 4
+                dc.b 0
+                dc.b 0
+                dc.b 3
+                dc.b 3
+                dc.b 3
+                dc.b 3
+                dc.b 2
+                dc.b 2
+                dc.b 4
+                dc.b 2
+                dc.b 2
+                dc.b 4
+                dc.b 2
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 0
 byte_DA62:      dc.b 3
-		dc.b 2
-		dc.b 2
-		dc.b 3
-		dc.b 3
-		dc.b 0
-		dc.b 1
-		dc.b 2
-		dc.b 0
-		dc.b 1
-		dc.b 0
-		dc.b 1
-		dc.b 3
-		dc.b 2
-		dc.b 1
-		dc.b 2
-		dc.b 2
-		dc.b 3
-		dc.b 3
-		dc.b 3
-		dc.b 3
-		dc.b 0
-		dc.b 0
-		dc.b 1
-		dc.b 2
-		dc.b 0
-		dc.b 1
-		dc.b 0
-		dc.b 1
-		dc.b 2
-		dc.b 2
-		dc.b 2
+                dc.b 2
+                dc.b 2
+                dc.b 3
+                dc.b 3
+                dc.b 0
+                dc.b 1
+                dc.b 2
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 3
+                dc.b 2
+                dc.b 1
+                dc.b 2
+                dc.b 2
+                dc.b 3
+                dc.b 3
+                dc.b 3
+                dc.b 3
+                dc.b 0
+                dc.b 0
+                dc.b 1
+                dc.b 2
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 2
+                dc.b 2
+                dc.b 2
 
 ; =============== S U B R O U T I N E =======================================
 
 MakeRangeLists:
-		
-		movem.l d0-a5,-(sp)
-		link    a6,#-$40
-		lea     (a6),a1
-		move.w  #$F,d5
-		move.l  #$40004000,d1
+                
+                movem.l d0-a5,-(sp)
+                link    a6,#-$40
+                lea     (a6),a1
+                move.w  #$F,d5
+                move.l  #$40004000,d1
 loc_DA96:
-		move.l  d1,-(a1)
-		dbf     d5,loc_DA96
-		lea     (a3),a1
-		move.w  #$8F,d5 
-		moveq   #$FFFFFFFF,d1
+                
+                move.l  d1,-(a1)
+                dbf     d5,loc_DA96
+                lea     (a3),a1
+                move.w  #$8F,d5 
+                moveq   #$FFFFFFFF,d1
 loc_DAA4:
-		move.l  d1,(a1)+
-		move.l  d1,(a1)+
-		move.l  d1,(a1)+
-		move.l  d1,(a1)+
-		dbf     d5,loc_DAA4
-		lea     (a2),a1
-		move.w  #$8F,d5 
-		moveq   #$FFFFFFFF,d1
+                
+                move.l  d1,(a1)+
+                move.l  d1,(a1)+
+                move.l  d1,(a1)+
+                move.l  d1,(a1)+
+                dbf     d5,loc_DAA4
+                lea     (a2),a1
+                move.w  #$8F,d5 
+                moveq   #$FFFFFFFF,d1
 loc_DAB8:
-		move.l  d1,(a1)+
-		move.l  d1,(a1)+
-		move.l  d1,(a1)+
-		move.l  d1,(a1)+
-		dbf     d5,loc_DAB8
-		clr.w   d6
-		moveq   #0,d5
-		move.b  d4,d5
-		mulu.w  #$30,d5 
-		andi.w  #$FF,d3
-		add.w   d3,d5
+                
+                move.l  d1,(a1)+
+                move.l  d1,(a1)+
+                move.l  d1,(a1)+
+                move.l  d1,(a1)+
+                dbf     d5,loc_DAB8
+                clr.w   d6
+                moveq   #0,d5
+                move.b  d4,d5
+                mulu.w  #$30,d5 
+                andi.w  #$FF,d3
+                add.w   d3,d5
 loc_DAD4:
-		move.b  d6,(a2,d5.w)
-		move.w  d6,d1
-		lsr.w   #8,d1
-		move.b  d1,(a3,d5.w)
-		tst.b   1(a3,d5.w)
-		bpl.s   loc_DAEC
-		addq.w  #1,d5
-		bsr.s   sub_DB48
-		subq.w  #1,d5
+                
+                move.b  d6,(a2,d5.w)
+                move.w  d6,d1
+                lsr.w   #8,d1
+                move.b  d1,(a3,d5.w)
+                tst.b   1(a3,d5.w)
+                bpl.s   loc_DAEC
+                addq.w  #1,d5
+                bsr.s   sub_DB48
+                subq.w  #1,d5
 loc_DAEC:
-		tst.b   -1(a3,d5.w)
-		bpl.s   loc_DAF8
-		subq.w  #1,d5
-		bsr.s   sub_DB48
-		addq.w  #1,d5
+                
+                tst.b   -1(a3,d5.w)
+                bpl.s   loc_DAF8
+                subq.w  #1,d5
+                bsr.s   sub_DB48
+                addq.w  #1,d5
 loc_DAF8:
-		tst.b   -$30(a3,d5.w)
-		bpl.s   loc_DB08
-		subi.w  #$30,d5 
-		bsr.s   sub_DB48
-		addi.w  #$30,d5 
+                
+                tst.b   -$30(a3,d5.w)
+                bpl.s   loc_DB08
+                subi.w  #$30,d5 
+                bsr.s   sub_DB48
+                addi.w  #$30,d5 
 loc_DB08:
-		tst.b   $30(a3,d5.w)
-		bpl.s   loc_DB18
-		addi.w  #$30,d5 
-		bsr.s   sub_DB48
-		subi.w  #$30,d5 
+                
+                tst.b   $30(a3,d5.w)
+                bpl.s   loc_DB18
+                addi.w  #$30,d5 
+                bsr.s   sub_DB48
+                subi.w  #$30,d5 
 loc_DB18:
-		move.w  d0,d1
-		andi.w  #$1F,d1
-		add.w   d1,d1
-		move.w  -$40(a6,d1.w),d5
-		btst    #$E,d5
-		bne.s   loc_DB38
-		move.b  (a3,d5.w),-$40(a6,d1.w)
-		move.b  (a2,d5.w),-$3F(a6,d1.w)
-		bra.s   loc_DAD4
+                
+                move.w  d0,d1
+                andi.w  #$1F,d1
+                add.w   d1,d1
+                move.w  -$40(a6,d1.w),d5
+                btst    #$E,d5
+                bne.s   loc_DB38
+                move.b  (a3,d5.w),-$40(a6,d1.w)
+                move.b  (a2,d5.w),-$3F(a6,d1.w)
+                bra.s   loc_DAD4
 loc_DB38:
-		addq.w  #1,d6
-		subq.w  #1,d0
-		bmi.s   loc_DB40
-		bne.s   loc_DB18
+                
+                addq.w  #1,d6
+                subq.w  #1,d0
+                bmi.s   loc_DB40
+                bne.s   loc_DB18
 loc_DB40:
-		unlk    a6
-		movem.l (sp)+,d0-a5
-		rts
+                
+                unlk    a6
+                movem.l (sp)+,d0-a5
+                rts
 
 	; End of function MakeRangeLists
 
@@ -3261,38 +3580,43 @@ loc_DB40:
 ; =============== S U B R O U T I N E =======================================
 
 sub_DB48:
-		cmpi.w  #$900,d5
-		bcs.s   loc_DB50
-		rts
+                
+                cmpi.w  #$900,d5
+                bcs.s   loc_DB50
+                rts
 loc_DB50:
-		move.b  (a4,d5.w),d1
-		btst    #7,d1
-		beq.s   loc_DB5C
-		rts
+                
+                move.b  (a4,d5.w),d1
+                btst    #7,d1
+                beq.s   loc_DB5C
+                rts
 loc_DB5C:
-		andi.w  #$1F,d1
-		move.b  (a5,d1.w),d2
-		ext.w   d2
-		cmp.w   d2,d0
-		bcc.s   loc_DB6C
-		rts
+                
+                andi.w  #$1F,d1
+                move.b  (a5,d1.w),d2
+                ext.w   d2
+                cmp.w   d2,d0
+                bcc.s   loc_DB6C
+                rts
 loc_DB6C:
-		beq.s   loc_DB8A
-		move.w  d0,d1
-		sub.w   d2,d1
-		andi.w  #$1F,d1
-		add.w   d1,d1
-		move.b  -$40(a6,d1.w),(a3,d5.w)
-		move.b  -$3F(a6,d1.w),(a2,d5.w)
-		move.w  d5,-$40(a6,d1.w)
-		rts
+                
+                beq.s   loc_DB8A
+                move.w  d0,d1
+                sub.w   d2,d1
+                andi.w  #$1F,d1
+                add.w   d1,d1
+                move.b  -$40(a6,d1.w),(a3,d5.w)
+                move.b  -$3F(a6,d1.w),(a2,d5.w)
+                move.w  d5,-$40(a6,d1.w)
+                rts
 loc_DB8A:
-		add.w   d6,d2
-		move.b  d2,(a2,d5.w)
-		move.w  d2,d1
-		lsr.w   #8,d1
-		move.b  d1,(a3,d5.w)
-		rts
+                
+                add.w   d6,d2
+                move.b  d2,(a2,d5.w)
+                move.w  d2,d1
+                lsr.w   #8,d1
+                move.b  d1,(a3,d5.w)
+                rts
 
 	; End of function sub_DB48
 
@@ -3300,11 +3624,11 @@ loc_DB8A:
 ; =============== S U B R O U T I N E =======================================
 
 MakeBattleEntityCancelMoveString_0:
-		
-		movem.l d0-d6/a0-a5,-(sp)
-		bsr.w   sub_DBA8
-		movem.l (sp)+,d0-d6/a0-a5
-		rts
+                
+                movem.l d0-d6/a0-a5,-(sp)
+                bsr.w   sub_DBA8
+                movem.l (sp)+,d0-d6/a0-a5
+                rts
 
 	; End of function MakeBattleEntityCancelMoveString_0
 
@@ -3312,175 +3636,213 @@ MakeBattleEntityCancelMoveString_0:
 ; =============== S U B R O U T I N E =======================================
 
 sub_DBA8:
-		clr.w   d2
-		move.b  d1,d2
-		mulu.w  #$30,d2 
-		andi.w  #$FF,d0
-		add.w   d0,d2
-		lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-		clr.b   d3
+                
+                clr.w   d2
+                move.b  d1,d2
+                mulu.w  #$30,d2 
+                andi.w  #$FF,d0
+                add.w   d0,d2
+                lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
+                clr.b   d3
 loc_DBBC:
-		move.b  (a3,d2.w),d4
-		lsl.w   #8,d4
-		move.b  (a2,d2.w),d4
-		tst.w   d4
-		bne.s   loc_DBCE
+                
+                move.b  (a3,d2.w),d4
+                lsl.w   #8,d4
+                move.b  (a2,d2.w),d4
+                tst.w   d4
+                bne.s   loc_DBCE
 loc_DBCA:
-		bra.w   loc_DD0A
+                
+                bra.w   loc_DD0A
 loc_DBCE:
-		subq.w  #1,d4
-		clr.b   d5
-		clr.b   d0
-		addq.w  #1,d2
-		move.b  (a3,d2.w),d0
-		lsl.w   #8,d0
-		move.b  (a2,d2.w),d0
-		tst.w   d0
-		bpl.s   loc_DBE8
-		bra.w   loc_DBFA
+                
+                subq.w  #1,d4
+                clr.b   d5
+                clr.b   d0
+                addq.w  #1,d2
+                move.b  (a3,d2.w),d0
+                lsl.w   #8,d0
+                move.b  (a2,d2.w),d0
+                tst.w   d0
+                bpl.s   loc_DBE8
+                bra.w   loc_DBFA
 loc_DBE8:
-		cmp.w   d4,d0
-		bmi.s   loc_DBEE
-		bne.s   loc_DBFA
+                
+                cmp.w   d4,d0
+                bmi.s   loc_DBEE
+                bne.s   loc_DBFA
 loc_DBEE:
-		cmpi.w  #$900,d2
-		bcc.s   loc_DBFA
-		bset    #0,d5
-		move.w  d0,d4
+                
+                cmpi.w  #$900,d2
+                bcc.s   loc_DBFA
+                bset    #0,d5
+                move.w  d0,d4
 loc_DBFA:
-		subq.w  #1,d2
-		clr.b   d0
-		subq.w  #1,d2
+                
+                subq.w  #1,d2
+                clr.b   d0
+                subq.w  #1,d2
 loc_DC00:
-		move.b  (a3,d2.w),d0
-		lsl.w   #8,d0
+                
+                move.b  (a3,d2.w),d0
+                lsl.w   #8,d0
 loc_DC06:
-		move.b  (a2,d2.w),d0
-		tst.w   d0
-		bpl.s   loc_DC12
-		bra.w   loc_DC2E
+                
+                move.b  (a2,d2.w),d0
+                tst.w   d0
+                bpl.s   loc_DC12
+                bra.w   loc_DC2E
 loc_DC12:
-		cmp.w   d4,d0
-		bmi.s   loc_DC18
-		bne.s   loc_DC2E
+                
+                cmp.w   d4,d0
+                bmi.s   loc_DC18
+                bne.s   loc_DC2E
 loc_DC18:
-		cmpi.w  #$900,d2
-		bcc.s   loc_DC2E
-		tst.b   d5
-		bne.s   loc_DC28
-		moveq   #4,d5
-		bra.w   loc_DC2C
+                
+                cmpi.w  #$900,d2
+                bcc.s   loc_DC2E
+                tst.b   d5
+                bne.s   loc_DC28
+                moveq   #4,d5
+                bra.w   loc_DC2C
 loc_DC28:
-		bset    #2,d5
+                
+                bset    #2,d5
 loc_DC2C:
-		move.w  d0,d4
+                
+                move.w  d0,d4
 loc_DC2E:
-		addq.w  #1,d2
-		clr.b   d0
-		subi.w  #$30,d2 
-		move.b  (a3,d2.w),d0
-		lsl.w   #8,d0
-		move.b  (a2,d2.w),d0
-		tst.w   d0
-		bpl.s   loc_DC48
-		bra.w   loc_DC64
+                
+                addq.w  #1,d2
+                clr.b   d0
+                subi.w  #$30,d2 
+                move.b  (a3,d2.w),d0
+                lsl.w   #8,d0
+                move.b  (a2,d2.w),d0
+                tst.w   d0
+                bpl.s   loc_DC48
+                bra.w   loc_DC64
 loc_DC48:
-		cmp.w   d4,d0
-		bmi.s   loc_DC4E
-		bne.s   loc_DC64
+                
+                cmp.w   d4,d0
+                bmi.s   loc_DC4E
+                bne.s   loc_DC64
 loc_DC4E:
-		cmpi.w  #$900,d2
-		bcc.s   loc_DC64
-		tst.b   d5
-		bne.s   loc_DC5E
-		moveq   #2,d5
-		bra.w   loc_DC62
+                
+                cmpi.w  #$900,d2
+                bcc.s   loc_DC64
+                tst.b   d5
+                bne.s   loc_DC5E
+                moveq   #2,d5
+                bra.w   loc_DC62
 loc_DC5E:
-		bset    #1,d5
+                
+                bset    #1,d5
 loc_DC62:
-		move.w  d0,d4
+                
+                move.w  d0,d4
 loc_DC64:
-		addi.w  #$30,d2 
-		clr.b   d0
-		addi.w  #$30,d2 
-		move.b  (a3,d2.w),d0
-		lsl.w   #8,d0
-		move.b  (a2,d2.w),d0
-		tst.w   d0
-		bpl.s   loc_DC80
-		bra.w   loc_DC9C
+                
+                addi.w  #$30,d2 
+                clr.b   d0
+                addi.w  #$30,d2 
+                move.b  (a3,d2.w),d0
+                lsl.w   #8,d0
+                move.b  (a2,d2.w),d0
+                tst.w   d0
+                bpl.s   loc_DC80
+                bra.w   loc_DC9C
 loc_DC80:
-		cmp.w   d4,d0
-		bmi.s   loc_DC86
-		bne.s   loc_DC9C
+                
+                cmp.w   d4,d0
+                bmi.s   loc_DC86
+                bne.s   loc_DC9C
 loc_DC86:
-		cmpi.w  #$900,d2
-		bcc.s   loc_DC9C
-		tst.b   d5
-		bne.s   loc_DC96
-		moveq   #8,d5
-		bra.w   loc_DC9A
+                
+                cmpi.w  #$900,d2
+                bcc.s   loc_DC9C
+                tst.b   d5
+                bne.s   loc_DC96
+                moveq   #8,d5
+                bra.w   loc_DC9A
 loc_DC96:
-		bset    #3,d5
+                
+                bset    #3,d5
 loc_DC9A:
-		move.w  d0,d4
+                
+                move.w  d0,d4
 loc_DC9C:
-		subi.w  #$30,d2 
-		move.b  d3,d1
-		and.b   d5,d1
-		bne.s   loc_DCAA
-		bra.w   loc_DCB4
+                
+                subi.w  #$30,d2 
+                move.b  d3,d1
+                and.b   d5,d1
+                bne.s   loc_DCAA
+                bra.w   loc_DCB4
 loc_DCAA:
-		move.b  d5,d1
-		eor.b   d3,d1
-		beq.s   loc_DCB4
-		bra.w   loc_DCB6
+                
+                move.b  d5,d1
+                eor.b   d3,d1
+                beq.s   loc_DCB4
+                bra.w   loc_DCB6
 loc_DCB4:
-		move.b  d5,d1
+                
+                move.b  d5,d1
 loc_DCB6:
-		ror.b   #1,d1
-		bcc.s   loc_DCBE
-		bra.w   loc_DCDA
+                
+                ror.b   #1,d1
+                bcc.s   loc_DCBE
+                bra.w   loc_DCDA
 loc_DCBE:
-		ror.b   #1,d1
-		bcc.s   loc_DCC6
-		bra.w   loc_DCE6
+                
+                ror.b   #1,d1
+                bcc.s   loc_DCC6
+                bra.w   loc_DCE6
 loc_DCC6:
-		ror.b   #1,d1
-		bcc.s   loc_DCCE
-		bra.w   loc_DCF2
+                
+                ror.b   #1,d1
+                bcc.s   loc_DCCE
+                bra.w   loc_DCF2
 loc_DCCE:
-		ror.b   #1,d1
-		bcc.s   loc_DCD6
-		bra.w   loc_DCFC
+                
+                ror.b   #1,d1
+                bcc.s   loc_DCD6
+                bra.w   loc_DCFC
 loc_DCD6:
-		bra.w   loc_DD0A
+                
+                bra.w   loc_DD0A
 loc_DCDA:
-		moveq   #0,d5
-		moveq   #1,d3
-		addi.w  #1,d2
-		bra.w   loc_DD04
+                
+                moveq   #0,d5
+                moveq   #1,d3
+                addi.w  #1,d2
+                bra.w   loc_DD04
 loc_DCE6:
-		moveq   #1,d5
-		moveq   #2,d3
-		subi.w  #$30,d2 
+                
+                moveq   #1,d5
+                moveq   #2,d3
+                subi.w  #$30,d2 
 loc_DCEE:
-		bra.w   loc_DD04
+                
+                bra.w   loc_DD04
 loc_DCF2:
-		moveq   #2,d5
-		moveq   #4,d3
-		subq.w  #1,d2
-		bra.w   loc_DD04
+                
+                moveq   #2,d5
+                moveq   #4,d3
+                subq.w  #1,d2
+                bra.w   loc_DD04
 loc_DCFC:
-		moveq   #3,d5
-		moveq   #8,d3
-		addi.w  #$30,d2 
+                
+                moveq   #3,d5
+                moveq   #8,d3
+                addi.w  #$30,d2 
 loc_DD04:
-		move.b  d5,(a0)+
-		bra.w   loc_DBBC
+                
+                move.b  d5,(a0)+
+                bra.w   loc_DBBC
 loc_DD0A:
-		move.b  #$FF,(a0)
-		rts
+                
+                move.b  #$FF,(a0)
+                rts
 
 	; End of function sub_DBA8
 
@@ -3488,39 +3850,45 @@ loc_DD0A:
 ; =============== S U B R O U T I N E =======================================
 
 sub_DD10:
-		movem.l d0-d6/a0-a5,-(sp)
-		bsr.w   sub_DBA8
-		lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
-		move.w  a0,d0
-		move.w  a1,d1
-		sub.w   d1,d0
-		bne.s   loc_DD28
-		bra.w   loc_DD5A
+                
+                movem.l d0-d6/a0-a5,-(sp)
+                bsr.w   sub_DBA8
+                lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
+                move.w  a0,d0
+                move.w  a1,d1
+                sub.w   d1,d0
+                bne.s   loc_DD28
+                bra.w   loc_DD5A
 loc_DD28:
-		move.w  d0,d2
-		lsr.w   #1,d2
-		bcc.s   loc_DD30
-		addq.w  #1,d2
+                
+                move.w  d0,d2
+                lsr.w   #1,d2
+                bcc.s   loc_DD30
+                addq.w  #1,d2
 loc_DD30:
-		subq.w  #1,d2
-		suba.w  #1,a0
+                
+                subq.w  #1,d2
+                suba.w  #1,a0
 loc_DD36:
-		move.b  (a0),d0
-		move.b  (a1),d1
-		eori.b  #2,d1
-		move.b  d1,(a0)
-		cmpa.w  a0,a1
-		bne.s   loc_DD48
-		bra.w   loc_DD5A
+                
+                move.b  (a0),d0
+                move.b  (a1),d1
+                eori.b  #2,d1
+                move.b  d1,(a0)
+                cmpa.w  a0,a1
+                bne.s   loc_DD48
+                bra.w   loc_DD5A
 loc_DD48:
-		eori.b  #2,d0
-		move.b  d0,(a1)
-		suba.w  #1,a0
-		adda.w  #1,a1
-		dbf     d2,loc_DD36
+                
+                eori.b  #2,d0
+                move.b  d0,(a1)
+                suba.w  #1,a0
+                adda.w  #1,a1
+                dbf     d2,loc_DD36
 loc_DD5A:
-		movem.l (sp)+,d0-d6/a0-a5
-		rts
+                
+                movem.l (sp)+,d0-d6/a0-a5
+                rts
 
 	; End of function sub_DD10
 
@@ -3530,10 +3898,10 @@ loc_DD5A:
 ; unused, pointless
 
 AddAllToStack:
-		
-		movem.l d0-a5,-(sp)
-		movem.l (sp)+,d0-a5
-		rts
+                
+                movem.l d0-a5,-(sp)
+                movem.l (sp)+,d0-a5
+                rts
 
 	; End of function AddAllToStack
 
@@ -3541,11 +3909,11 @@ AddAllToStack:
 ; =============== S U B R O U T I N E =======================================
 
 j_makeEnemyMoveOrder:
-		
-		movem.l d0-d6/a0-a5,-(sp)
-		bsr.w   MakeEnemyMoveOrder
-		movem.l (sp)+,d0-d6/a0-a5
-		rts
+                
+                movem.l d0-d6/a0-a5,-(sp)
+                bsr.w   MakeEnemyMoveOrder
+                movem.l (sp)+,d0-d6/a0-a5
+                rts
 
 	; End of function j_makeEnemyMoveOrder
 
@@ -3555,186 +3923,222 @@ j_makeEnemyMoveOrder:
 ; create enemy move order from movecost lists
 
 MakeEnemyMoveOrder:
-		
-		clr.w   d2
-		move.b  d1,d2
-		mulu.w  #$30,d2 
-		andi.w  #$FF,d0
-		add.w   d0,d2
-		move.b  (a3,d2.w),d6
-		lsl.w   #8,d6
-		move.b  (a2,d2.w),d6
-		ext.w   d3
-		sub.w   d3,d6
-		tst.w   d6
-		bpl.s   loc_DD9A
-		clr.w   d6
+                
+                clr.w   d2
+                move.b  d1,d2
+                mulu.w  #$30,d2 
+                andi.w  #$FF,d0
+                add.w   d0,d2
+                move.b  (a3,d2.w),d6
+                lsl.w   #8,d6
+                move.b  (a2,d2.w),d6
+                ext.w   d3
+                sub.w   d3,d6
+                tst.w   d6
+                bpl.s   loc_DD9A
+                clr.w   d6
 loc_DD9A:
-		lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-		clr.b   d3
+                
+                lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
+                clr.b   d3
 loc_DDA0:
-		move.b  (a3,d2.w),d4
-		lsl.w   #8,d4
-		move.b  (a2,d2.w),d4
-		cmp.w   d4,d6
-		bcs.s   loc_DDB2
-		bra.w   loc_DEF6
+                
+                move.b  (a3,d2.w),d4
+                lsl.w   #8,d4
+                move.b  (a2,d2.w),d4
+                cmp.w   d4,d6
+                bcs.s   loc_DDB2
+                bra.w   loc_DEF6
 loc_DDB2:
-		tst.w   d4
-		bne.s   loc_DDBA
-		bra.w   loc_DEF6
+                
+                tst.w   d4
+                bne.s   loc_DDBA
+                bra.w   loc_DEF6
 loc_DDBA:
-		subq.w  #1,d4
-		clr.b   d5
-		clr.b   d0
-		addq.w  #1,d2
-		move.b  (a3,d2.w),d0
-		lsl.w   #8,d0
-		move.b  (a2,d2.w),d0
-		tst.w   d0
-		bpl.s   loc_DDD4
-		bra.w   loc_DDE6
+                
+                subq.w  #1,d4
+                clr.b   d5
+                clr.b   d0
+                addq.w  #1,d2
+                move.b  (a3,d2.w),d0
+                lsl.w   #8,d0
+                move.b  (a2,d2.w),d0
+                tst.w   d0
+                bpl.s   loc_DDD4
+                bra.w   loc_DDE6
 loc_DDD4:
-		cmp.w   d4,d0
-		bmi.s   loc_DDDA
-		bne.s   loc_DDE6
+                
+                cmp.w   d4,d0
+                bmi.s   loc_DDDA
+                bne.s   loc_DDE6
 loc_DDDA:
-		cmpi.w  #$900,d2
-		bcc.s   loc_DDE6
-		bset    #0,d5
-		move.w  d0,d4
+                
+                cmpi.w  #$900,d2
+                bcc.s   loc_DDE6
+                bset    #0,d5
+                move.w  d0,d4
 loc_DDE6:
-		subq.w  #1,d2
-		clr.b   d0
-		subq.w  #1,d2
-		move.b  (a3,d2.w),d0
-		lsl.w   #8,d0
-		move.b  (a2,d2.w),d0
-		tst.w   d0
-		bpl.s   loc_DDFE
-		bra.w   loc_DE1A
+                
+                subq.w  #1,d2
+                clr.b   d0
+                subq.w  #1,d2
+                move.b  (a3,d2.w),d0
+                lsl.w   #8,d0
+                move.b  (a2,d2.w),d0
+                tst.w   d0
+                bpl.s   loc_DDFE
+                bra.w   loc_DE1A
 loc_DDFE:
-		cmp.w   d4,d0
-		bmi.s   loc_DE04
-		bne.s   loc_DE1A
+                
+                cmp.w   d4,d0
+                bmi.s   loc_DE04
+                bne.s   loc_DE1A
 loc_DE04:
-		cmpi.w  #$900,d2
-		bcc.s   loc_DE1A
-		tst.b   d5
-		bne.s   loc_DE14
-		moveq   #4,d5
-		bra.w   loc_DE18
+                
+                cmpi.w  #$900,d2
+                bcc.s   loc_DE1A
+                tst.b   d5
+                bne.s   loc_DE14
+                moveq   #4,d5
+                bra.w   loc_DE18
 loc_DE14:
-		bset    #2,d5
+                
+                bset    #2,d5
 loc_DE18:
-		move.w  d0,d4
+                
+                move.w  d0,d4
 loc_DE1A:
-		addq.w  #1,d2
-		clr.b   d0
-		subi.w  #$30,d2 
+                
+                addq.w  #1,d2
+                clr.b   d0
+                subi.w  #$30,d2 
 loc_DE22:
-		move.b  (a3,d2.w),d0
-		lsl.w   #8,d0
-		move.b  (a2,d2.w),d0
-		tst.w   d0
-		bpl.s   loc_DE34
-		bra.w   loc_DE50
+                
+                move.b  (a3,d2.w),d0
+                lsl.w   #8,d0
+                move.b  (a2,d2.w),d0
+                tst.w   d0
+                bpl.s   loc_DE34
+                bra.w   loc_DE50
 loc_DE34:
-		cmp.w   d4,d0
-		bmi.s   loc_DE3A
-		bne.s   loc_DE50
+                
+                cmp.w   d4,d0
+                bmi.s   loc_DE3A
+                bne.s   loc_DE50
 loc_DE3A:
-		cmpi.w  #$900,d2
-		bcc.s   loc_DE50
-		tst.b   d5
-		bne.s   loc_DE4A
-		moveq   #2,d5
-		bra.w   loc_DE4E
+                
+                cmpi.w  #$900,d2
+                bcc.s   loc_DE50
+                tst.b   d5
+                bne.s   loc_DE4A
+                moveq   #2,d5
+                bra.w   loc_DE4E
 loc_DE4A:
-		bset    #1,d5
+                
+                bset    #1,d5
 loc_DE4E:
-		move.w  d0,d4
+                
+                move.w  d0,d4
 loc_DE50:
-		addi.w  #$30,d2 
-		clr.b   d0
-		addi.w  #$30,d2 
-		move.b  (a3,d2.w),d0
-		lsl.w   #8,d0
-		move.b  (a2,d2.w),d0
-		tst.w   d0
-		bpl.s   loc_DE6C
-		bra.w   loc_DE88
+                
+                addi.w  #$30,d2 
+                clr.b   d0
+                addi.w  #$30,d2 
+                move.b  (a3,d2.w),d0
+                lsl.w   #8,d0
+                move.b  (a2,d2.w),d0
+                tst.w   d0
+                bpl.s   loc_DE6C
+                bra.w   loc_DE88
 loc_DE6C:
-		cmp.w   d4,d0
-		bmi.s   loc_DE72
-		bne.s   loc_DE88
+                
+                cmp.w   d4,d0
+                bmi.s   loc_DE72
+                bne.s   loc_DE88
 loc_DE72:
-		cmpi.w  #$900,d2
-		bcc.s   loc_DE88
-		tst.b   d5
-		bne.s   loc_DE82
-		moveq   #8,d5
-		bra.w   loc_DE86
+                
+                cmpi.w  #$900,d2
+                bcc.s   loc_DE88
+                tst.b   d5
+                bne.s   loc_DE82
+                moveq   #8,d5
+                bra.w   loc_DE86
 loc_DE82:
-		bset    #3,d5
+                
+                bset    #3,d5
 loc_DE86:
-		move.w  d0,d4
+                
+                move.w  d0,d4
 loc_DE88:
-		subi.w  #$30,d2 
-		move.b  d3,d1
-		and.b   d5,d1
-		bne.s   loc_DE96
-		bra.w   loc_DEA0
+                
+                subi.w  #$30,d2 
+                move.b  d3,d1
+                and.b   d5,d1
+                bne.s   loc_DE96
+                bra.w   loc_DEA0
 loc_DE96:
-		move.b  d5,d1
-		eor.b   d3,d1
-		beq.s   loc_DEA0
-		bra.w   loc_DEA2
+                
+                move.b  d5,d1
+                eor.b   d3,d1
+                beq.s   loc_DEA0
+                bra.w   loc_DEA2
 loc_DEA0:
-		move.b  d5,d1
+                
+                move.b  d5,d1
 loc_DEA2:
-		ror.b   #1,d1
-		bcc.s   loc_DEAA
-		bra.w   loc_DEC6
+                
+                ror.b   #1,d1
+                bcc.s   loc_DEAA
+                bra.w   loc_DEC6
 loc_DEAA:
-		ror.b   #1,d1
-		bcc.s   loc_DEB2
-		bra.w   loc_DED2
+                
+                ror.b   #1,d1
+                bcc.s   loc_DEB2
+                bra.w   loc_DED2
 loc_DEB2:
-		ror.b   #1,d1
-		bcc.s   loc_DEBA
-		bra.w   loc_DEDE
+                
+                ror.b   #1,d1
+                bcc.s   loc_DEBA
+                bra.w   loc_DEDE
 loc_DEBA:
-		ror.b   #1,d1
-		bcc.s   loc_DEC2
-		bra.w   loc_DEE8
+                
+                ror.b   #1,d1
+                bcc.s   loc_DEC2
+                bra.w   loc_DEE8
 loc_DEC2:
-		bra.w   loc_DEF6
+                
+                bra.w   loc_DEF6
 loc_DEC6:
-		moveq   #0,d5
-		moveq   #1,d3
-		addi.w  #1,d2
-		bra.w   loc_DEF0
+                
+                moveq   #0,d5
+                moveq   #1,d3
+                addi.w  #1,d2
+                bra.w   loc_DEF0
 loc_DED2:
-		moveq   #1,d5
-		moveq   #2,d3
-		subi.w  #$30,d2 
-		bra.w   loc_DEF0
+                
+                moveq   #1,d5
+                moveq   #2,d3
+                subi.w  #$30,d2 
+                bra.w   loc_DEF0
 loc_DEDE:
-		moveq   #2,d5
-		moveq   #4,d3
-		subq.w  #1,d2
-		bra.w   loc_DEF0
+                
+                moveq   #2,d5
+                moveq   #4,d3
+                subq.w  #1,d2
+                bra.w   loc_DEF0
 loc_DEE8:
-		moveq   #3,d5
-		moveq   #8,d3
-		addi.w  #$30,d2 
+                
+                moveq   #3,d5
+                moveq   #8,d3
+                addi.w  #$30,d2 
 loc_DEF0:
-		move.b  d5,(a0)+
-		bra.w   loc_DDA0
+                
+                move.b  d5,(a0)+
+                bra.w   loc_DDA0
 loc_DEF6:
-		move.b  #$FF,(a0)
-		rts
+                
+                move.b  #$FF,(a0)
+                rts
 
 	; End of function MakeEnemyMoveOrder
 

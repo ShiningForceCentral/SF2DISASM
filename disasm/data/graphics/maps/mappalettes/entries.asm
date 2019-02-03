@@ -2,21 +2,21 @@
 ; ASM FILE data\graphics\maps\mappalettes\entries.asm :
 ; 0x9494A..0x94B8A : Map palettes
 pt_MapPalettes: dc.l MapPalette00
-		dc.l MapPalette01
-		dc.l MapPalette02
-		dc.l MapPalette03
-		dc.l MapPalette04
-		dc.l MapPalette05
-		dc.l MapPalette06
-		dc.l MapPalette07
-		dc.l MapPalette08
-		dc.l MapPalette09
-		dc.l MapPalette10
-		dc.l MapPalette11
-		dc.l MapPalette12
-		dc.l MapPalette13
-		dc.l MapPalette14
-		dc.l MapPalette15
+                dc.l MapPalette01
+                dc.l MapPalette02
+                dc.l MapPalette03
+                dc.l MapPalette04
+                dc.l MapPalette05
+                dc.l MapPalette06
+                dc.l MapPalette07
+                dc.l MapPalette08
+                dc.l MapPalette09
+                dc.l MapPalette10
+                dc.l MapPalette11
+                dc.l MapPalette12
+                dc.l MapPalette13
+                dc.l MapPalette14
+                dc.l MapPalette15
 MapPalette00:   incbin "data/graphics/maps/mappalettes/mappalette00.bin"
 MapPalette01:   incbin "data/graphics/maps/mappalettes/mappalette01.bin"
 MapPalette02:   incbin "data/graphics/maps/mappalettes/mappalette02.bin"

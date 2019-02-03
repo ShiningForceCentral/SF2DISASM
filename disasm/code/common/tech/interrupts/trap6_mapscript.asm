@@ -7,14 +7,14 @@
 ; execute map script at a0
 
 Trap6_TriggerAndExecuteMapScript:
-		
-		movem.l d0-a6,-(sp)
-		trap    #VINT_FUNCTIONS
-		dc.w VINTS_ACTIVATE
-		dc.l VInt_UpdateEntities
-		jsr     j_ExecuteMapScript
-		movem.l (sp)+,d0-a6
-		rte
+                
+                movem.l d0-a6,-(sp)
+                trap    #VINT_FUNCTIONS
+                dc.w VINTS_ACTIVATE
+                dc.l VInt_UpdateEntities
+                jsr     j_ExecuteMapScript
+                movem.l (sp)+,d0-a6
+                rte
 
 	; End of function Trap6_TriggerAndExecuteMapScript
 

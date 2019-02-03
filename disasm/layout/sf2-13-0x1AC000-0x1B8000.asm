@@ -4,13 +4,13 @@
 ; FREE SPACE : 133 bytes.
 
 
-		include "code\gameflow\battle\battle_s13_0.asm"		; Jump interface for section functions
-		include "code\common\scripting\endcredits.asm"		; Ending credits functions
-		include "code\gameflow\battle\battle_s13_1.asm"		; Battle init, terrain, AI stuff to split more properly
-		includeIfVanillaRom "data\battles\terrainentries.asm"		; Battle terrain data
-		include "code\gameflow\battle\battle_s13_2.asm"		; Battle init, terrain, AI stuff to split more properly
+                include "code\gameflow\battle\battle_s13_0.asm"    ; Jump interface for section functions
+                include "code\common\scripting\endcredits.asm"    ; Ending credits functions
+                include "code\gameflow\battle\battle_s13_1.asm"    ; Battle init, terrain, AI stuff to split more properly
+                includeIfVanillaRom "data\battles\terrainentries.asm"    ; Battle terrain data
+                include "code\gameflow\battle\battle_s13_2.asm"    ; Battle init, terrain, AI stuff to split more properly
 EnemyData:      incbin "data/stats/enemies/enemydata.bin"
-		includeIfVanillaRom "data\battles\spritesetentries.asm"		; Battle sprite sets
-		include "code\gameflow\battle\battle_s13_3.asm"		; Data related to UpgradeUnitIdx function
-		includeIfVanillaRom "code\specialscreens\endkiss\graphics.asm"		; End Kiss Graphics
-		align $1B8000
+                includeIfVanillaRom "data\battles\spritesetentries.asm"    ; Battle sprite sets
+                include "code\gameflow\battle\battle_s13_3.asm"    ; Data related to UpgradeUnitIdx function
+                includeIfVanillaRom "code\specialscreens\endkiss\graphics.asm"    ; End Kiss Graphics
+                align $1B8000

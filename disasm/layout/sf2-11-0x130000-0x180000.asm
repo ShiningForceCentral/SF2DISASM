@@ -5,7 +5,7 @@
 
 
 p_pt_EnemyBattleSprites:
-		dc.l pt_EnemyBattleSprites
-		includeIfVanillaRom "data\graphics\battles\battlesprites\enemies\entries.asm"		; Enemy battle sprites
-		;includeIfExpandedRom data\maps\mapsetupsstorage.asm
-		align $180000
+                dc.l pt_EnemyBattleSprites
+                includeIfVanillaRom "data\graphics\battles\battlesprites\enemies\entries.asm"    ; Enemy battle sprites
+                ;includeIfExpandedRom data\maps\mapsetupsstorage.asm
+                align $180000

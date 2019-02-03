@@ -13,20 +13,23 @@
 ; ...more
 
 MainBattleAndExplorationLoop:
-		
-		clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
+                
+                clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
 loc_75C8:
-		bsr.w   AlterMapIndexIfChanged
-		bsr.w   GetNextBattleOnMap
-		cmpi.w  #$FFFF,d7
-		beq.w   loc_75E4
-		move.w  d7,d1
-		jsr     j_ExecuteBattleLoop
+                
+                bsr.w   AlterMapIndexIfChanged
+                bsr.w   GetNextBattleOnMap
+                cmpi.w  #$FFFF,d7
+                beq.w   loc_75E4
+                move.w  d7,d1
+                jsr     j_ExecuteBattleLoop
 loc_75E0:
-		bsr.w   AlterMapIndexIfChanged
+                
+                bsr.w   AlterMapIndexIfChanged
 loc_75E4:
-		jsr     j_ExecuteExplorationLoop
-		bra.s   loc_75C8
+                
+                jsr     j_ExecuteExplorationLoop
+                bra.s   loc_75C8
 
 	; End of function MainBattleAndExplorationLoop
 

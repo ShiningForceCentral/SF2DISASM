@@ -5,49 +5,51 @@
 ; =============== S U B R O U T I N E =======================================
 
 PlayIntroOrEndCutscene:
-		
-		move.w  d0,-(sp)
-		jsr     (InitWindowProperties).w
-		move.b  #$FF,((byte_FFB198-$1000000)).w
-		move.b  #$FF,((WINDOW_HIDING_FORBIDDEN-$1000000)).w
-		trap    #VINT_FUNCTIONS
-		dc.w VINTS_CLEAR
-		trap    #VINT_FUNCTIONS
-		dc.w VINTS_ADD
-		dc.l VInt_4744
-		trap    #VINT_FUNCTIONS
-		dc.w VINTS_ADD
-		dc.l VInt_UpdateEntities
-		trap    #VINT_FUNCTIONS
-		dc.w VINTS_ADD
-		dc.l VInt_AdjustCameraToPlayer
-		trap    #VINT_FUNCTIONS
-		dc.w VINTS_ADD
-		dc.l VInt_3930          
-		trap    #VINT_FUNCTIONS
-		dc.w VINTS_ADD
-		dc.l VInt_UpdateSprites
-		trap    #VINT_FUNCTIONS
-		dc.w VINTS_ADD
-		dc.l VInt_UpdateWindows
-		trap    #VINT_FUNCTIONS
-		dc.w VINTS_ADD
-		dc.l VInt_UpdateAnimatingTiles
-		move.b  #$FF,((CURRENT_BATTLE-$1000000)).w
-		jsr     (sub_4EC6).w
-		move.w  (sp)+,d0
-		bne.s   byte_47F72
-		sndCom  MUSIC_INTRO
-		script  IntroCutscene1
-		script  IntroCutscene2
-		script  IntroCutscene3
-		script  IntroCutscene4
-		bra.s   return_47F7C
+                
+                move.w  d0,-(sp)
+                jsr     (InitWindowProperties).w
+                move.b  #$FF,((byte_FFB198-$1000000)).w
+                move.b  #$FF,((WINDOW_HIDING_FORBIDDEN-$1000000)).w
+                trap    #VINT_FUNCTIONS
+                dc.w VINTS_CLEAR
+                trap    #VINT_FUNCTIONS
+                dc.w VINTS_ADD
+                dc.l VInt_4744
+                trap    #VINT_FUNCTIONS
+                dc.w VINTS_ADD
+                dc.l VInt_UpdateEntities
+                trap    #VINT_FUNCTIONS
+                dc.w VINTS_ADD
+                dc.l VInt_AdjustCameraToPlayer
+                trap    #VINT_FUNCTIONS
+                dc.w VINTS_ADD
+                dc.l VInt_3930          
+                trap    #VINT_FUNCTIONS
+                dc.w VINTS_ADD
+                dc.l VInt_UpdateSprites
+                trap    #VINT_FUNCTIONS
+                dc.w VINTS_ADD
+                dc.l VInt_UpdateWindows
+                trap    #VINT_FUNCTIONS
+                dc.w VINTS_ADD
+                dc.l VInt_UpdateAnimatingTiles
+                move.b  #$FF,((CURRENT_BATTLE-$1000000)).w
+                jsr     (sub_4EC6).w
+                move.w  (sp)+,d0
+                bne.s   byte_47F72
+                sndCom  MUSIC_INTRO
+                script  IntroCutscene1
+                script  IntroCutscene2
+                script  IntroCutscene3
+                script  IntroCutscene4
+                bra.s   return_47F7C
 byte_47F72:
-		sndCom  MUSIC_PIANO_THEME
-		script  EndCutscene
+                
+                sndCom  MUSIC_PIANO_THEME
+                script  EndCutscene
 return_47F7C:
-		rts
+                
+                rts
 
 	; End of function PlayIntroOrEndCutscene
 

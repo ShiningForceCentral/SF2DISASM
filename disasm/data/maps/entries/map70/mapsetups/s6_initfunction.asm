@@ -5,8 +5,8 @@
 ; =============== S U B R O U T I N E =======================================
 
 ms_map70_InitFunction:
-		
-		rts
+                
+                rts
 
 	; End of function ms_map70_InitFunction
 

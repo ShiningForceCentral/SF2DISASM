@@ -7,10 +7,10 @@
 ; still to confirm
 
 WaitForFollowersStopped:
-		
-		lea     ((byte_FFAF23-$1000000)).w,a0
-		bsr.w   WaitForPartyEntitiesIdle
-		rts
+                
+                lea     ((byte_FFAF23-$1000000)).w,a0
+                bsr.w   WaitForPartyEntitiesIdle
+                rts
 
 	; End of function WaitForFollowersStopped
 
@@ -20,10 +20,10 @@ WaitForFollowersStopped:
 ; to confirm
 
 WaitForHeroAndFollowersStopped:
-		
-		lea     ((FOLLOWERS_LIST-$1000000)).w,a0
-		bsr.w   WaitForPartyEntitiesIdle
-		rts
+                
+                lea     ((FOLLOWERS_LIST-$1000000)).w,a0
+                bsr.w   WaitForPartyEntitiesIdle
+                rts
 
 	; End of function WaitForHeroAndFollowersStopped
 
@@ -33,24 +33,27 @@ WaitForHeroAndFollowersStopped:
 ; to confirm
 
 WaitForPartyEntitiesIdle:
-		
-		cmpi.b  #$FF,(a0)+
-		beq.w   return_4524A
-		jsr     (WaitForVInt).w 
+                
+                cmpi.b  #$FF,(a0)+
+                beq.w   return_4524A
+                jsr     (WaitForVInt).w 
 loc_45224:
-		cmpi.b  #$FF,(a0)+
-		bne.s   loc_45224
-		clr.w   d0
-		move.b  -2(a0),d0
-		movem.l d0/a0,-(sp)
-		bsr.w   GetEntityRAMAddress
+                
+                cmpi.b  #$FF,(a0)+
+                bne.s   loc_45224
+                clr.w   d0
+                move.b  -2(a0),d0
+                movem.l d0/a0,-(sp)
+                bsr.w   GetEntityRAMAddress
 loc_45238:
-		jsr     (WaitForVInt).w 
-		cmpi.l  #eas_Idle,$14(a0)
-		bne.s   loc_45238
-		movem.l (sp)+,d0/a0
+                
+                jsr     (WaitForVInt).w 
+                cmpi.l  #eas_Idle,$14(a0)
+                bne.s   loc_45238
+                movem.l (sp)+,d0/a0
 return_4524A:
-		rts
+                
+                rts
 
 	; End of function WaitForPartyEntitiesIdle
 
@@ -60,9 +63,9 @@ return_4524A:
 ; might be related to followers
 
 ApplyActscriptToHeroAndFollowers:
-		
-		lea     ((FOLLOWERS_LIST-$1000000)).w,a0
-		bra.w   ApplyActscriptToPartyEntities
+                
+                lea     ((FOLLOWERS_LIST-$1000000)).w,a0
+                bra.w   ApplyActscriptToPartyEntities
 
 	; End of function ApplyActscriptToHeroAndFollowers
 
@@ -72,8 +75,8 @@ ApplyActscriptToHeroAndFollowers:
 ; to confirm
 
 ApplyActscriptToFollowers:
-		
-		lea     ((byte_FFAF23-$1000000)).w,a0
+                
+                lea     ((byte_FFAF23-$1000000)).w,a0
 
 	; End of function ApplyActscriptToFollowers
 
@@ -81,14 +84,15 @@ ApplyActscriptToFollowers:
 ; START OF FUNCTION CHUNK FOR ApplyActscriptToHeroAndFollowers
 
 ApplyActscriptToPartyEntities:
-		
-		move.b  (a0)+,d0
-		cmpi.b  #$FF,d0
-		beq.s   return_45266
-		bsr.w   SetEntityActscript
-		bra.s   ApplyActscriptToPartyEntities
+                
+                move.b  (a0)+,d0
+                cmpi.b  #$FF,d0
+                beq.s   return_45266
+                bsr.w   SetEntityActscript
+                bra.s   ApplyActscriptToPartyEntities
 return_45266:
-		rts
+                
+                rts
 
 ; END OF FUNCTION CHUNK FOR ApplyActscriptToHeroAndFollowers
 

@@ -5,8 +5,8 @@
 ; =============== S U B R O U T I N E =======================================
 
 ms_map27_AreaDescriptions:
-		
-		rts
+                
+                rts
 
 	; End of function ms_map27_AreaDescriptions
 

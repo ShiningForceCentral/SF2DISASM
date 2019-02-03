@@ -5,7 +5,8 @@
 ; =============== S U B R O U T I N E =======================================
 
 HInt:
-		rte
+                
+                rte
 
 	; End of function HInt
 

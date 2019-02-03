@@ -2,29 +2,29 @@
 ; ASM FILE data\graphics\battles\spells\entries.asm :
 ; 0x1BEEE0..0x1C46C2 : Spell Graphics
 pt_SpellGraphics:
-		dc.l SpellGraphics00
-		dc.l SpellGraphics01
-		dc.l SpellGraphics02
-		dc.l SpellGraphics03
-		dc.l SpellGraphics04
-		dc.l SpellGraphics05
-		dc.l SpellGraphics06
-		dc.l SpellGraphics07
-		dc.l SpellGraphics08
-		dc.l SpellGraphics09
-		dc.l SpellGraphics10
-		dc.l SpellGraphics11
-		dc.l SpellGraphics12
-		dc.l SpellGraphics13
-		dc.l SpellGraphics14
-		dc.l SpellGraphics15
-		dc.l SpellGraphics16
-		dc.l SpellGraphics17
-		dc.l SpellGraphics18
-		dc.l SpellGraphics19
-		dc.l SpellGraphics20
-		dc.l SpellGraphics21
-		dc.l SpellGraphics22
+                dc.l SpellGraphics00
+                dc.l SpellGraphics01
+                dc.l SpellGraphics02
+                dc.l SpellGraphics03
+                dc.l SpellGraphics04
+                dc.l SpellGraphics05
+                dc.l SpellGraphics06
+                dc.l SpellGraphics07
+                dc.l SpellGraphics08
+                dc.l SpellGraphics09
+                dc.l SpellGraphics10
+                dc.l SpellGraphics11
+                dc.l SpellGraphics12
+                dc.l SpellGraphics13
+                dc.l SpellGraphics14
+                dc.l SpellGraphics15
+                dc.l SpellGraphics16
+                dc.l SpellGraphics17
+                dc.l SpellGraphics18
+                dc.l SpellGraphics19
+                dc.l SpellGraphics20
+                dc.l SpellGraphics21
+                dc.l SpellGraphics22
 SpellGraphics00:incbin "data/graphics/battles/spells/spellgraphics00.bin"
 SpellGraphics01:incbin "data/graphics/battles/spells/spellgraphics01.bin"
 SpellGraphics02:incbin "data/graphics/battles/spells/spellgraphics02.bin"

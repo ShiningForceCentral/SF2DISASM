@@ -4,38 +4,38 @@
 ; FREE SPACE : 462 bytes.
 
 
-		incbin "data/sound/pcmbank0.bin"
-		incbin "data/sound/pcmbank1.bin"
-		incbin "data/sound/yminst.bin"
+                incbin "data/sound/pcmbank0.bin"
+                incbin "data/sound/pcmbank1.bin"
+                incbin "data/sound/yminst.bin"
 SoundDriver:    incbin "data/sound/sounddriver.bin"
 p_StatGrowthCurves:
-		dc.l StatGrowthCurves
+                dc.l StatGrowthCurves
 p_pt_CharacterStats:
-		dc.l pt_AllyStats
+                dc.l pt_AllyStats
 p_CharacterStartData:
-		dc.l AllyStartData
+                dc.l AllyStartData
 p_ClassData:    dc.l ClassData
 p_JewelEndScreenTiles:
-		dc.l JewelsEndScreenTiles
+                dc.l JewelsEndScreenTiles
 p_JewelEndScreenLayout:
-		dc.l JewelsEndScreenLayout
+                dc.l JewelsEndScreenLayout
 p_plt_JewelsEndScreen:
-		dc.l plt_JewelsEndScreen
+                dc.l plt_JewelsEndScreen
 p_plt_SuspendString:
-		dc.l plt_SuspendString
+                dc.l plt_SuspendString
 p_SuspendStringTiles:
-		dc.l SuspendStringTiles
-		dc.l unused_BasePalettes
+                dc.l SuspendStringTiles
+                dc.l unused_BasePalettes
 p_BaseTiles:    dc.l BaseTiles
 StatGrowthCurves:
-		incbin "data/stats/allies/growthcurves.bin"
-		include "data\stats\allies\stats\entries.asm"		; Ally stats
+                incbin "data/stats/allies/growthcurves.bin"
+                include "data\stats\allies\stats\entries.asm"    ; Ally stats
 AllyStartData:  incbin "data/stats/allies/allystartdata.bin"
 ClassData:      incbin "data/stats/allies/classes/classdata.bin"
-		includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"		; Jewel End Graphics
-		includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"		; Suspend String Graphics
+                includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
+                includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
 unused_BasePalettes:
-		incbin "data/graphics/tech/unusedbasepalettes.bin"
-						; two almost identical palettes which look like UI/sprites palette
+                incbin "data/graphics/tech/unusedbasepalettes.bin"
+                                                        ; two almost identical palettes which look like UI/sprites palette
 BaseTiles:      incbin "data/graphics/tech/basetiles.bin"
-		align $1F0000
+                align $1F0000

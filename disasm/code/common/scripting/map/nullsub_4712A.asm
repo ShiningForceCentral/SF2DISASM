@@ -5,7 +5,8 @@
 ; =============== S U B R O U T I N E =======================================
 
 nullsub_14:
-		rts
+                
+                rts
 
 	; End of function nullsub_14
 
