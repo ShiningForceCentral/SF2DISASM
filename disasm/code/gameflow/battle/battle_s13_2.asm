@@ -4,7 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B120A:
+; Never called, probably what remains of some debugging code ?
+
+BattleDebugFunction1B120A:
                 
                 moveq   #4,d1
                 jsr     j_AddItemToCaravan
@@ -35,7 +37,7 @@ loc_1B126E:
                 bra.s   loc_1B126E
                 rts
 
-	; End of function sub_1B120A
+	; End of function BattleDebugFunction1B120A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -261,7 +263,7 @@ loc_1B142C:
                 move.b  8(a0),d2
                 jsr     j_SetKills
                 move.w  4(a0),d1
-                bsr.w   sub_1B1504      
+                bsr.w   InitEnemyItems  
                 jsr     j_GetCharacterWord34
                 move.w  d1,d2
                 andi.w  #$F000,d2
@@ -308,7 +310,7 @@ loc_1B14F4:
 
 ; handle custom item idx of monster list entry starting at A0 -> ???
 
-sub_1B1504:
+InitEnemyItems:
                 
                 movem.l d0-a0,-(sp)
                 cmpi.w  #ITEMIDX_NOTHING,d1
@@ -340,7 +342,7 @@ loc_1B154E:
                 movem.l (sp)+,d0-a0
                 rts
 
-	; End of function sub_1B1504
+	; End of function InitEnemyItems
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -562,6 +564,8 @@ loc_1B16F8:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Battle-related
+
 sub_1B16FE:
                 
                 movem.l d1-a6,-(sp)
@@ -614,7 +618,7 @@ loc_1B177A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; check if battle can be upgraded based on index in RAM:f712 (0x0000=no, 0xffff=yes) -> D1
+; Check if current battle can be upgraded (0x0000=no, 0xffff=yes) -> D1
 
 DoesBattleUpgrade:
                 
@@ -653,7 +657,9 @@ loc_1B17B6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B17BC:
+; Strange use case where "Battle completed" flag is set for battle 4 in spite of being alreeady set earlier.
+
+UpgradeBattle:
                 
                 movem.l d0-a6,-(sp)
                 lea     ((CURRENT_BATTLE-$1000000)).w,a0
@@ -682,7 +688,7 @@ loc_1B17F8:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_1B17BC
+	; End of function UpgradeBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -707,7 +713,7 @@ loc_1B181C:
                 move.b  (a1,d3.w),d1
                 cmp.b   d1,d7
                 bne.s   loc_1B183E
-                addi.w  #$1F4,d1
+                addi.w  #$1F4,d1        ; HARDCODED "Battle completed" flag index start
                 jsr     j_CheckFlag
                 bne.s   loc_1B1836
                 clr.w   d1
