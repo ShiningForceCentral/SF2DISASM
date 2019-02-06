@@ -111,14 +111,14 @@ loc_100104:
                 moveq   #$64,d0 
                 bsr.w   WaitForPlayer1InputStart
                 moveq   #$20,d0 
-                bsr.w   sub_100218
+                bsr.w   TitleScreenLoop1
                 move.b  #1,((FADING_SETTING-$1000000)).w
                 clr.w   ((byte_FFDFAA-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
                 moveq   #$10,d0
-                bsr.w   sub_100218
+                bsr.w   TitleScreenLoop1
                 moveq   #$32,d0 
                 bsr.w   WaitForPlayer1InputStart
                 move.b  #1,((FADING_SETTING-$1000000)).w
@@ -131,7 +131,7 @@ loc_100104:
                 move.w  #$12C,d0
                 bsr.w   WaitForPlayer1InputStart
                 move.w  #$258,d0
-                bsr.w   TitleScreenEnd
+                bsr.w   TitleScreenLoop2
                 jsr     (FadeOutToWhite).w
                 lea     (PALETTE_1_BIS).l,a0
                 moveq   #$1F,d7
@@ -156,7 +156,7 @@ WaitForPlayer1InputStart:
                 
                 jsr     (WaitForVInt).w 
                 btst    #7,((P1_INPUT-$1000000)).w
-                bne.w   loc_10029E
+                bne.w   TitleScreenEnd
                 subq.w  #1,d0
                 bne.s   WaitForPlayer1InputStart
                 rts
@@ -166,28 +166,28 @@ WaitForPlayer1InputStart:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_100218:
+TitleScreenLoop1:
                 
                 btst    #0,((byte_FFDEA0-$1000000)).w
                 bne.s   loc_10022C
-                addq.w  #1,(word_FFD500).l
-                subq.w  #1,(byte_FFD502).l
+                addq.w  #1,(dword_FFD500).l
+                subq.w  #1,(dword_FFD500+2).l
 loc_10022C:
                 
                 jsr     (StoreVdpCommandsbis).w
                 jsr     (SetFFDE94b3andWait).w
-                btst    #7,((P1_INPUT-$1000000)).w
-                bne.w   loc_10029E
+                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                bne.w   TitleScreenEnd
                 subq.w  #1,d0
-                bne.s   sub_100218
+                bne.s   TitleScreenLoop1
                 rts
 
-	; End of function sub_100218
+	; End of function TitleScreenLoop1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-TitleScreenEnd:
+TitleScreenLoop2:
                 
                 movem.w d0,-(sp)
                 conditionalPc lea,TitleScreenLayoutA,a0
@@ -207,16 +207,22 @@ loc_100260:
                 lea     ($C000).l,a1
                 move.w  #$380,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
                 movem.w (sp)+,d0
                 jsr     (WaitForVInt).w 
                 btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
-                bne.w   loc_10029E
+                bne.w   TitleScreenEnd
                 subq.w  #1,d0
-                bne.s   TitleScreenEnd
+                bne.s   TitleScreenLoop2
                 rts
-loc_10029E:
+
+	; End of function TitleScreenLoop2
+
+
+; =============== S U B R O U T I N E =======================================
+
+TitleScreenEnd:
                 
                 move.l  (sp)+,d0
                 clr.w   d6

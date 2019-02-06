@@ -9,7 +9,7 @@ ms_map20_flag261_EntityEvents:
                 msEntityEvent 133, DOWN, Map20_261_EntityEvent4-ms_map20_flag261_EntityEvents
                 msEntityEvent 134, DOWN, Map20_261_EntityEvent5-ms_map20_flag261_EntityEvents
                 msEntityEvent 135, DOWN, Map20_261_EntityEvent6-ms_map20_flag261_EntityEvents
-                msDefaultEntityEvent 0, (return_53814-ms_map20_flag261_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map20_DefaultEntityEvent-ms_map20_flag261_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -27,10 +27,10 @@ Map20_261_EntityEvent0:
 Map20_261_EntityEvent1:
                 
                  
-                chkFlg  $101            ; Temporary map setup flag 01
+                chkFlg  $101            ; TEMP FLAG #01
                 bne.s   byte_538E8      
                 txt     $259            ; "Thank you, {LEADER}.{N}You've saved the King's{N}life.{W2}{N}I heard that you are going{N}to Yeel.{W2}{N}I'll take care of Sir Astral{N}for you.{W2}"
-                setFlg  $101            ; Temporary map setup flag 01
+                setFlg  $101            ; TEMP FLAG #01
 byte_538E8:
                 
                 txt     $25A            ; "Please be careful.{W1}"
@@ -44,10 +44,10 @@ byte_538E8:
 Map20_261_EntityEvent2:
                 
                  
-                chkFlg  $102            ; Temporary map setup flag 02
+                chkFlg  $102            ; TEMP FLAG #02
                 bne.s   byte_538FC      
                 txt     $25B            ; "Are you going to see{N}Mr. Hawel?{W2}"
-                setFlg  $102            ; Temporary map setup flag 02
+                setFlg  $102            ; TEMP FLAG #02
 byte_538FC:
                 
                 txt     $25C            ; "I wouldn't let you go alone{N}if I weren't...{W2}{N}I trust you, son.{W1}"
@@ -61,10 +61,10 @@ byte_538FC:
 Map20_261_EntityEvent4:
                 
                  
-                chkFlg  $104            ; Temporary map setup flag 04
+                chkFlg  $104            ; TEMP FLAG #04
                 bne.s   byte_53910      
                 txt     $25D            ; "Princess Elis has not rested{N}since the King collapsed.{W2}"
-                setFlg  $104            ; Temporary map setup flag 04
+                setFlg  $104            ; TEMP FLAG #04
 byte_53910:
                 
                 txt     $25E            ; "I understand her reasoning,{N}but she might get sick, too.{W1}"

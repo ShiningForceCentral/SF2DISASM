@@ -32,7 +32,7 @@ ms_map46_EntityEvents:
                 msEntityEvent 28, UP, Map46_EntityEvent27-ms_map46_EntityEvents
                 msEntityEvent 29, UP, Map46_EntityEvent28-ms_map46_EntityEvents
                 msEntityEvent 128, UP, Map46_EntityEvent29-ms_map46_EntityEvents
-                msDefaultEntityEvent 0, nullsub_148-ms_map46_EntityEvents
+                msDefaultEntityEvent Map46_DefaultEntityEvent-ms_map46_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -337,9 +337,9 @@ Map46_EntityEvent29:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_148:
+Map46_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_148
+	; End of function Map46_DefaultEntityEvent
 

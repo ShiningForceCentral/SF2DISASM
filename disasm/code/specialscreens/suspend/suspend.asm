@@ -16,7 +16,7 @@ SuspendGame:
                 lea     ($8000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 movea.l (p_plt_SuspendString).l,a0
                 lea     (PALLETE_2_BIS).l,a1
@@ -41,7 +41,7 @@ SuspendGame:
                 lea     ($C000).l,a1
                 move.w  #$380,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 rts
 

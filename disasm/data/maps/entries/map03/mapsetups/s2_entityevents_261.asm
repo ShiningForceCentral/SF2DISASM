@@ -29,17 +29,17 @@ ms_map3_flag261_EntityEvents:
                 msEntityEvent 151, DOWN, Map3_261_EntityEvent24-ms_map3_flag261_EntityEvents
                 msEntityEvent 152, UP, Map3_261_EntityEvent25-ms_map3_flag261_EntityEvents
                 msEntityEvent 153, DOWN, Map3_261_EntityEvent26-ms_map3_flag261_EntityEvents
-                msDefaultEntityEvent 0, (entevdft_5105A-ms_map3_flag261_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map3_DefaultEntityEvent-ms_map3_flag261_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
 Map3_261_EntityEvent0:
                 
                  
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   byte_510DA      
                 txt     $273            ; "The castle guard said the{N}King chose you to lead a{N}mission.{N}{LEADER}, my dear,{W2}{N}I didn't know you were old{N}enough to work for the{N}King.{W1}"
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
 byte_510DA:
                 
                 txt     $274            ; "Good luck, {LEADER}.{N}Your father would have{N}been proud of you.{W1}"
@@ -53,10 +53,10 @@ byte_510DA:
 Map3_261_EntityEvent1:
                 
                  
-                chkFlg  $101            ; Temporary map setup flag 01
+                chkFlg  $101            ; TEMP FLAG #01
                 bne.s   byte_510EE      
                 txt     $275            ; "I knew your father very{N}well.{N}He was a great leader.{W2}"
-                setFlg  $101            ; Temporary map setup flag 01
+                setFlg  $101            ; TEMP FLAG #01
 byte_510EE:
                 
                 txt     $276            ; "{LEADER}, you have to{N}study hard and be a fine{N}man like him.{W1}"
@@ -291,10 +291,10 @@ Map3_261_EntityEvent22:
 Map3_261_EntityEvent23:
                 
                  
-                chkFlg  $116            ; Temporary map setup flag 16
+                chkFlg  $116            ; TEMP FLAG #16
                 bne.s   byte_5118E      
                 txt     $28B            ; "A pet shop has newly opened,{N}but Mom never lets me go?{N}Why?{W1}"
-                setFlg  $116            ; Temporary map setup flag 16
+                setFlg  $116            ; TEMP FLAG #16
                 bra.s   return_51192
 byte_5118E:
                 
@@ -311,10 +311,10 @@ return_51192:
 Map3_261_EntityEvent24:
                 
                  
-                chkFlg  $117            ; Temporary map setup flag 17
+                chkFlg  $117            ; TEMP FLAG #17
                 bne.s   byte_511A2      
                 txt     $292            ; "Strangers from the mainland{N}opened a pet shop.{W2}"
-                setFlg  $117            ; Temporary map setup flag 17
+                setFlg  $117            ; TEMP FLAG #17
 byte_511A2:
                 
                 txt     $293            ; "I don't think it's right{N}to hold animals captive.{W1}"
@@ -328,10 +328,10 @@ byte_511A2:
 Map3_261_EntityEvent25:
                 
                  
-                chkFlg  $118            ; Temporary map setup flag 18
+                chkFlg  $118            ; TEMP FLAG #18
                 bne.s   byte_511B6      
                 txt     $294            ; "(Sniff, sniff)...have you{N}seen or smelt any sulfur?{W2}"
-                setFlg  $118            ; Temporary map setup flag 18
+                setFlg  $118            ; TEMP FLAG #18
 byte_511B6:
                 
                 txt     $295            ; "I'm an inventor.{N}I'm looking for some sulfur.{W1}"

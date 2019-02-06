@@ -174,8 +174,8 @@ cs_56422:       textCursor $50E
                 setBlocks 32,2,1,1,22,24
                 setBlocks 32,2,1,1,7,25
                 setBlocks 32,3,2,1,6,15
-                setF $2C5               ; set after the mayor in Ribble scene... this flag unlocks the doors
-                executeSubroutine sub_56632
+                setF $2C5               ; Set after the mayor in Ribble scene... this flag unlocks the doors
+                executeSubroutine csub_56632
                 followEntity $7,$0,$2
                 csWait 50
                 fadeInB
@@ -183,9 +183,9 @@ cs_56422:       textCursor $50E
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56632:
+csub_56632:
                 
                 jmp     (sub_40F2).w
 
-	; End of function sub_56632
+	; End of function csub_56632
 

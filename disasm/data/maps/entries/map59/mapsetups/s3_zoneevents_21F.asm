@@ -3,15 +3,15 @@
 ; 0x615B6..0x615CE : 
 ms_map59_flag21F_ZoneEvents:
                 msZoneEvent 255, 36, Map59_21F_ZoneEvent0-ms_map59_flag21F_ZoneEvents
-                msDefaultZoneEvent 0, nullsub_106-ms_map59_flag21F_ZoneEvents
+                msDefaultZoneEvent Map59_21F_DefaultZoneEvent-ms_map59_flag21F_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_106:
+Map59_21F_DefaultZoneEvent:
                 
                 rts
 
-	; End of function nullsub_106
+	; End of function Map59_21F_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================

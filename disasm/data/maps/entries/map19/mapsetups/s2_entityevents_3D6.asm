@@ -20,7 +20,7 @@ ms_map19_flag3D6_EntityEvents:
                 msEntityEvent 132, UP, (Map19_21F_EntityEvent12-ms_map19_flag3D6_EntityEvents) & $FFFF
                 msEntityEvent 133, RIGHT, (Map19_21F_EntityEvent13-ms_map19_flag3D6_EntityEvents) & $FFFF
                 msEntityEvent 134, RIGHT, (Map19_21F_EntityEvent14-ms_map19_flag3D6_EntityEvents) & $FFFF
-                msDefaultEntityEvent 0, (nullsub_124-ms_map19_flag3D6_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map19_21F_DefaultEntityEvent-ms_map19_flag3D6_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

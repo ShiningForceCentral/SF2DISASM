@@ -13,7 +13,7 @@ ms_map9_InitFunction:
                 jsr     MoveEntityOutOfMap
 byte_568D4:
                 
-                chkFlg  $41             ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
+                chkFlg  $41             ; Caravan is unlocked
                 beq.s   byte_568E4      
                 move.w  #$B,d0
                 jsr     MoveEntityOutOfMap
@@ -146,7 +146,7 @@ cs_56A82:       textCursor $572
                 setActscript $B,eas_Jump
                 nextSingleText $C0,$B   ; "Let's go!{W1}"
                 setPriority $0,$FFFF
-                setF $2D5               ; set after telling Rohde that you're going to get the Caravan
+                setF $2D5               ; Set after telling Rohde that you're going to get the Caravan
                 setF $54                ; Rohde is a follower
                 setStoryFlag $12        ; Battle 18 unlocked
                 followEntity $B,$1F,$2

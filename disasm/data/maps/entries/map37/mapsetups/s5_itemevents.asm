@@ -3,15 +3,15 @@
 ; 0x5FA2A..0x5FA88 : 
 ms_map37_Section5:
                 msItemEvent 8, 11, LEFT, 113, Map37_ItemEvent0-ms_map37_Section5
-                msDefaultItemEvent nullsub_68-ms_map37_Section5
+                msDefaultItemEvent Map37_DefaultItemEvent1-ms_map37_Section5
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_68:
+Map37_DefaultItemEvent1:
                 
                 rts
 
-	; End of function nullsub_68
+	; End of function Map37_DefaultItemEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -19,10 +19,10 @@ nullsub_68:
 Map37_ItemEvent0:
                 
                  
-                chkFlg  $3E7            ; set after the Nazca ship shootdown scene
+                chkFlg  $3E7            ; Set after the Nazca ship shootdown scene
                 bne.s   return_5FA86
                 move.w  #$71,((TEXT_NAME_INDEX_1-$1000000)).w 
-                chkFlg  $344            ; set after the scene where Zynk stops you as you leave the Moun underground
+                chkFlg  $344            ; Set after the scene where Zynk stops you as you leave the Moun underground
                 bne.s   byte_5FA76      
                 txt     $D2D            ; "{LEADER} tries to use{N}the {ITEM}.{W2}{N}But, he doesn't know how.{W1}"
                 clsTxt

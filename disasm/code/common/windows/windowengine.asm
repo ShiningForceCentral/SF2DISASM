@@ -384,7 +384,7 @@ loc_4AA2:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
                 clr.b   ((byte_FFA8FF-$1000000)).w
 return_4AC6:
@@ -549,13 +549,13 @@ sub_4BEA:
                 add.w   d6,d6
                 cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
                 bne.s   return_4C36
-                move.w  (word_FFD500).l,d1
+                move.w  (dword_FFD500).l,d1
                 addq.w  #4,d1
                 lsr.w   #3,d1
                 lsl.w   #6,d1
                 add.w   d1,d6
                 andi.w  #$7FF,d6
-                move.w  (word_FFD100).l,d1
+                move.w  (dword_FFD100).l,d1
                 addq.w  #4,d1
                 lsr.w   #3,d1
                 add.w   d1,d1

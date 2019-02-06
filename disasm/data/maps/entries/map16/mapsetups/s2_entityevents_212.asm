@@ -20,7 +20,7 @@ ms_map16_flag212_EntityEvents:
                 msEntityEvent 143, UP, Map16_212_EntityEvent15-ms_map16_flag212_EntityEvents
                 msEntityEvent 144, UP, Map16_212_EntityEvent16-ms_map16_flag212_EntityEvents
                 msEntityEvent 145, RIGHT, Map16_212_EntityEvent17-ms_map16_flag212_EntityEvents
-                msDefaultEntityEvent 0, entevdft_6114C-ms_map16_flag212_EntityEvents
+                msDefaultEntityEvent Map16_212_DefaultEntityEvent-ms_map16_flag212_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -222,7 +222,7 @@ Map16_212_EntityEvent16:
 Map16_212_EntityEvent17:
                 
                 jsr     j_CaravanActions
-entevdft_6114C:
+Map16_212_DefaultEntityEvent:
                 
                 rts
 

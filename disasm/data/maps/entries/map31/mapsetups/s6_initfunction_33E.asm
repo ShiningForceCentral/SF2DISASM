@@ -7,16 +7,16 @@
 ms_map31_flag33E_InitFunction:
                 
                  
-                chkFlg  $340            ; set after talking to the painter in Moun for the first time
+                chkFlg  $340            ; Set after talking to the painter in Moun for the first time
                 beq.s   byte_5D62A      
                 script  cs_5D63C
 byte_5D62A:
                 
-                chkFlg  $342            ; set after making the Arm of Golem appear in Moun
+                chkFlg  $342            ; Set after making the Arm of Golem appear in Moun
                 beq.s   return_5D63A
-                chkFlg  $343            ; set after picking up the Arm of Golem in Moun
+                chkFlg  $343            ; Set after picking up the Arm of Golem in Moun
                 bne.s   return_5D63A
-                clrFlg  $342            ; set after making the Arm of Golem appear in Moun
+                clrFlg  $342            ; Set after making the Arm of Golem appear in Moun
 return_5D63A:
                 
                 rts
@@ -95,7 +95,7 @@ cs_5D732:       executeSubroutine sub_5D73E
 sub_5D73E:
                 
                 movem.l d0-d2/a0,-(sp)
-                move.w  #$34,d0 
+                move.w  #$34,d0 ; Bowie painting portrait index
                 moveq   #$FFFFFFFF,d1
                 clr.w   d2
                 jsr     j_InitPortraitWindow

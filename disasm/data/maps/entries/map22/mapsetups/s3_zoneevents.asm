@@ -3,15 +3,15 @@
 ; 0x595DE..0x59602 : 
 ms_map22_ZoneEvents:
                 msZoneEvent 255, 16, Map22_ZoneEvent0-ms_map22_ZoneEvents
-                msDefaultZoneEvent 0, nullsub_87-ms_map22_ZoneEvents
+                msDefaultZoneEvent Map22_DefaultZoneEvent-ms_map22_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_87:
+Map22_DefaultZoneEvent:
                 
                 rts
 
-	; End of function nullsub_87
+	; End of function Map22_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -19,7 +19,7 @@ nullsub_87:
 Map22_ZoneEvent0:
                 
                  
-                chkFlg  $309            ; set after the Desktop King tells you to fight on the chessboard
+                chkFlg  $309            ; Set after the Desktop King tells you to fight on the chessboard
                 beq.s   return_59600
                 chkFlg  $20A            ; Battle 22 completed
                 bne.s   return_59600

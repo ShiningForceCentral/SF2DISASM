@@ -24,7 +24,7 @@ CheckRegion:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 lea     (PALETTE_1).l,a0
                 move.l  #$EEE,(a0)+
                 clr.l   (a0)+

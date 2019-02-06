@@ -9,13 +9,13 @@ ms_map29_EntityEvents:
                 msEntityEvent 132, UP, Map29_EntityEvent4-ms_map29_EntityEvents
                 msEntityEvent 133, UP, Map29_EntityEvent5-ms_map29_EntityEvents
                 msEntityEvent 134, UP, Map29_EntityEvent6-ms_map29_EntityEvents
-                msDefaultEntityEvent 0, nullsub_136-ms_map29_EntityEvents
+                msDefaultEntityEvent Map29_DefaultEntityEvent-ms_map29_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map29_EntityEvent0:
                 
-                jmp     (MapTileset053+$32-ms_map29_EntityEvents)
+                jmp     j_BlacksmithActions
 
 	; End of function Map29_EntityEvent0
 
@@ -88,9 +88,9 @@ Map29_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_136:
+Map29_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_136
+	; End of function Map29_DefaultEntityEvent
 

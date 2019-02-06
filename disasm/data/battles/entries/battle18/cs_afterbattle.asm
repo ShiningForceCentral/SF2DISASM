@@ -258,7 +258,7 @@ abcs_battle18:  textCursor $9E0
                 setFacing $7,DOWN
                 setFacing $1F,DOWN
                 csWait 180
-                setF $41                ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
+                setF $41                ; Caravan is unlocked
                 clearF $54              ; Rohde is a follower
                 csc_end
 ce_4B6BE:       mainEntity 12,9,UP

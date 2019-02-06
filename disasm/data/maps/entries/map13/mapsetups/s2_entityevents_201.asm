@@ -15,7 +15,7 @@ ms_map13_flag201_EntityEvents:
                 msEntityEvent 138, DOWN, Map13_201_EntityEvent10-ms_map13_flag201_EntityEvents
                 msEntityEvent 139, UP, Map13_201_EntityEvent11-ms_map13_flag201_EntityEvents
                 msEntityEvent 140, UP, Map13_201_EntityEvent12-ms_map13_flag201_EntityEvents
-                msDefaultEntityEvent 0, (nullsub_116-ms_map13_flag201_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map13_DefaultEntityEvent-ms_map13_flag201_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -77,36 +77,36 @@ Map13_201_EntityEvent8:
 Map13_201_EntityEvent9:
                 
                  
-                chkFlg  $2CE            ; set after Oddler runs after you as you leave Polca, and tags along
+                chkFlg  $2CE            ; Set after Oddler runs after you as you leave Polca, and tags along
                 bne.s   byte_58212      
-                chkFlg  $2CD            ; set after the mayor first tries to have you take Oddler with you (Peter declines)
+                chkFlg  $2CD            ; Set after the mayor first tries to have you take Oddler with you (Peter declines)
                 bne.s   byte_5820C      
-                chkFlg  $2CC            ; set after your raft-giving conversation with the mayor in Polca
+                chkFlg  $2CC            ; Set after your raft-giving conversation with the mayor in Polca
                 bne.s   byte_58206      
-                chkFlg  $104            ; Temporary map setup flag 04
+                chkFlg  $104            ; TEMP FLAG #04
                 bne.s   byte_581C4      
                 txt     $5A8            ; "Pl...please...take that boy{N}with you!{W1}"
-                setFlg  $104            ; Temporary map setup flag 04
+                setFlg  $104            ; TEMP FLAG #04
                 bra.s   loc_58204
 byte_581C4:
                 
-                chkFlg  $105            ; Temporary map setup flag 05
+                chkFlg  $105            ; TEMP FLAG #05
                 bne.s   byte_581D4      
                 txt     $5A9            ; "Ddddd...don't kill me!{W1}"
-                setFlg  $105            ; Temporary map setup flag 05
+                setFlg  $105            ; TEMP FLAG #05
                 bra.s   loc_58204
 byte_581D4:
                 
-                chkFlg  $106            ; Temporary map setup flag 06
+                chkFlg  $106            ; TEMP FLAG #06
                 bne.s   byte_581E4
                 txt     $5AA            ; "Please, take him!{W1}"
-                setFlg  $106            ; Temporary map setup flag 06
+                setFlg  $106            ; TEMP FLAG #06
                 bra.s   loc_58204
 byte_581E4:
                 
                 script  cs_58856
-                setFlg  $2CC            ; set after your raft-giving conversation with the mayor in Polca
-                setFlg  $40             ; Raft is unlocked (0x05264)
+                setFlg  $2CC            ; Set after your raft-giving conversation with the mayor in Polca
+                setFlg  $40             ; Raft is unlocked
                 move.b  #$48,((RAFT_MAP_INDEX-$1000000)).w 
                 move.b  #$2B,((RAFT_X-$1000000)).w 
                 move.b  #$30,((RAFT_Y-$1000000)).w 

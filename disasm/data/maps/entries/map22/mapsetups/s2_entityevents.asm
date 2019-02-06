@@ -29,7 +29,7 @@ ms_map22_EntityEvents:
                 msEntityEvent 150, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
                 msEntityEvent 151, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
                 msEntityEvent 152, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
-                msDefaultEntityEvent 0, nullsub_128-ms_map22_EntityEvents
+                msDefaultEntityEvent Map22_DefaultEntityEvent-ms_map22_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -123,11 +123,11 @@ Map22_EntityEvent7:
                 bra.s   return_59552
 byte_59536:
                 
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   byte_5954A      
                 txt     $706            ; "He's just kidding, but to{N}tell the truth, the Cotton{W2}"
                 txt     $707            ; "Balloon is a very special{N}treasure.{W1}"
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
                 bra.s   return_59552
 byte_5954A:
                 
@@ -147,7 +147,7 @@ Map22_EntityEvent8:
                  
                 chkFlg  $20A            ; Battle 22 completed
                 bne.s   byte_59576      
-                chkFlg  $309            ; set after the Desktop King tells you to fight on the chessboard
+                chkFlg  $309            ; Set after the Desktop King tells you to fight on the chessboard
                 bne.s   byte_5956C      
                 txt     $6F2            ; "So, you were not able to see{N}Creed?{W2}"
                 txt     $6F3            ; "Somewhere in Floor World,{N}there's a tunnel that leads{N}to Creed.{W2}"
@@ -155,7 +155,7 @@ Map22_EntityEvent8:
 byte_5956C:
                 
                 txt     $6F5            ; "You may go to the chessboard{N}now.{W1}"
-                setFlg  $309            ; set after the Desktop King tells you to fight on the chessboard
+                setFlg  $309            ; Set after the Desktop King tells you to fight on the chessboard
                 bra.s   return_5957A
 byte_59576:
                 
@@ -172,7 +172,7 @@ return_5957A:
 Map22_EntityEvent9:
                 
                  
-                chkFlg  $309            ; set after the Desktop King tells you to fight on the chessboard
+                chkFlg  $309            ; Set after the Desktop King tells you to fight on the chessboard
                 bne.s   byte_5958C      
                 txt     $6F7            ; "The Chess Army is very{N}strong.{W2}"
                 txt     $6F8            ; "It will be good training for{N}you.{W1}"
@@ -199,10 +199,10 @@ Map22_EntityEvent10:
 byte_5959E:
                 
                 txt     $70B            ; "Floor World is very{N}dangerous.  Take care!{W1}"
-                chkFlg  $102            ; Temporary map setup flag 02
+                chkFlg  $102            ; TEMP FLAG #02
                 bne.s   return_595B2
                 script  cs_599A4
-                setFlg  $102            ; Temporary map setup flag 02
+                setFlg  $102            ; TEMP FLAG #02
 return_595B2:
                 
                 rts
@@ -279,9 +279,9 @@ Map22_EntityEvent11:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_128:
+Map22_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_128
+	; End of function Map22_DefaultEntityEvent
 

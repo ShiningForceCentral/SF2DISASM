@@ -3,7 +3,7 @@
 ; 0x58F3C..0x58F4C : 
 ms_map14_flag1CA_EntityEvents:
                 msEntityEvent 128, UP, Map14_1CA_EntityEvent0-ms_map14_flag1CA_EntityEvents
-                msDefaultEntityEvent 1, (entevdft_58EE2-ms_map14_flag1CA_EntityEvents) & $FFFF
+                msDftEntityEvent 1, (Map14_DefaultEntityEvent-ms_map14_flag1CA_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

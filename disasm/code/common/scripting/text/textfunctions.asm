@@ -961,27 +961,27 @@ loc_690C:
                 
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 lea     (byte_FF6C02).l,a0
                 lea     ($CC00).l,a1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 lea     (byte_FF7002).l,a0
                 lea     ($D000).l,a1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   SetFFDE94b3andWait
                 lea     (byte_FF7402).l,a0
                 lea     ($D400).l,a1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
 loc_694C:
                 
                 cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
                 bne.s   loc_6976
                 lea     (byte_FF7802).l,a0
                 lea     ($D800).l,a1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 lea     (byte_FF7C02).l,a0
                 lea     ($DC00).l,a1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
 loc_6976:
                 
                 bra.w   Set_FFDE94_bit3 
@@ -1017,10 +1017,10 @@ loc_69A4:
                 lea     ($C800).l,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 lea     (byte_FF6C02).l,a0
                 lea     ($CC00).l,a1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bra.w   SetFFDE94b3andWait
 loc_69D8:
                 
@@ -1032,10 +1032,10 @@ loc_69DC:
                 lea     ($D000).l,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 lea     (byte_FF7402).l,a0
                 lea     ($D400).l,a1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bra.w   SetFFDE94b3andWait
 loc_6A0C:
                 
@@ -1043,10 +1043,10 @@ loc_6A0C:
                 lea     ($D800).l,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 lea     (byte_FF7C02).l,a0
                 lea     ($DC00).l,a1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bra.w   SetFFDE94b3andWait
 
 	; End of function HandleBlinkingDialogueCursor
@@ -1207,7 +1207,7 @@ loc_6B4C:
                 adda.w  d0,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
                 rts
 

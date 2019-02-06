@@ -7,7 +7,7 @@
 ms_map39_flag33E_InitFunction:
                 
                  
-                chkFlg  $344            ; set after the scene where Zynk stops you as you leave the Moun underground
+                chkFlg  $344            ; Set after the scene where Zynk stops you as you leave the Moun underground
                 bne.s   return_5E0EC
                 script  cs_5E0EE
 return_5E0EC:

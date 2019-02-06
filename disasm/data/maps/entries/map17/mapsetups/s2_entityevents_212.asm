@@ -5,7 +5,7 @@ ms_map17_flag212_EntityEvents:
                 msEntityEvent 128, UP, Map17_212_EntityEvent0-ms_map17_flag212_EntityEvents
                 msEntityEvent 129, DOWN, Map17_212_EntityEvent1-ms_map17_flag212_EntityEvents
                 msEntityEvent 131, DOWN, Map17_212_EntityEvent2-ms_map17_flag212_EntityEvents
-                msDefaultEntityEvent 0, nullsub_19-ms_map17_flag212_EntityEvents
+                msDefaultEntityEvent Map17_212_DefaultEntityEvent-ms_map17_flag212_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -43,9 +43,9 @@ Map17_212_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_19:
+Map17_212_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_19
+	; End of function Map17_212_DefaultEntityEvent
 

@@ -11,15 +11,15 @@ ms_map1_EntityEvents:
                 msEntityEvent 134, UP, Map1_EntityEvent6-ms_map1_EntityEvents
                 msEntityEvent 135, UP, Map1_EntityEvent7-ms_map1_EntityEvents
                 msEntityEvent 136, UP, Map1_EntityEvent8-ms_map1_EntityEvents
-                msDefaultEntityEvent 0, nullsub_153-ms_map1_EntityEvents
+                msDefaultEntityEvent Map1_DefaultEntityEvent-ms_map1_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_153:
+Map1_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_153
+	; End of function Map1_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -123,10 +123,10 @@ Map1_EntityEvent7:
 Map1_EntityEvent8:
                 
                  
-                chkFlg  $349            ; set after the Taya join scene has played inside the Mitula Shrine
+                chkFlg  $349            ; Set after the Taya join scene has played inside the Mitula Shrine
                 bne.s   return_5E71E
                 script  cs_5E772
-                setFlg  $349            ; set after the Taya join scene has played inside the Mitula Shrine
+                setFlg  $349            ; Set after the Taya join scene has played inside the Mitula Shrine
 return_5E71E:
                 
                 rts

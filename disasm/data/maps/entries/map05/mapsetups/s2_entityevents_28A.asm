@@ -17,7 +17,7 @@ ms_map5_flag28A_EntityEvents:
                 msEntityEvent 140, DOWN, Map5_28A_EntityEvent12-ms_map5_flag28A_EntityEvents
                 msEntityEvent 141, DOWN, Map5_EntityEvent14-ms_map5_flag28A_EntityEvents
                 msEntityEvent 142, UP, Map5_28A_EntityEvent14-ms_map5_flag28A_EntityEvents
-                msDefaultEntityEvent 0, nullsub_113-ms_map5_flag28A_EntityEvents
+                msDefaultEntityEvent Map5_DefaultEntityEvent-ms_map5_flag28A_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -234,11 +234,11 @@ Map5_EntityEvent14:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_113:
+Map5_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_113
+	; End of function Map5_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================

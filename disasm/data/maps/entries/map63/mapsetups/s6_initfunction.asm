@@ -210,7 +210,7 @@ cs_5CDDA:       csc_end
 
 csub_5CDDC:
                 
-                move.b  #$A9,($FFFFA849).w
+                move.b  #$A9,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
                 rts
 
 	; End of function csub_5CDDC

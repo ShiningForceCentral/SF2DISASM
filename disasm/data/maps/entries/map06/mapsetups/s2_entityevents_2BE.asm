@@ -16,4 +16,4 @@ ms_map6_flag2BE_EntityEvents:
                 msEntityEvent 139, DOWN, Map6_EntityEvent11-ms_map6_flag2BE_EntityEvents
                 msEntityEvent 140, UP, Map6_EntityEvent12-ms_map6_flag2BE_EntityEvents
                 msEntityEvent 141, UP, Map6_EntityEvent13-ms_map6_flag2BE_EntityEvents
-                msDefaultEntityEvent 0, return_54C30-ms_map6_flag2BE_EntityEvents
+                msDefaultEntityEvent Map6_DefaultEntityEvent-ms_map6_flag2BE_EntityEvents

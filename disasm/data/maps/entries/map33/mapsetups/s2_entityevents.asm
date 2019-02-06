@@ -9,15 +9,15 @@ ms_map33_EntityEvents:
                 msEntityEvent 16, UP, Map33_EntityEvent4-ms_map33_EntityEvents
                 msEntityEvent 17, UP, Map33_EntityEvent5-ms_map33_EntityEvents
                 msEntityEvent 15, UP, Map33_EntityEvent6-ms_map33_EntityEvents
-                msDefaultEntityEvent 0, nullsub_138-ms_map33_EntityEvents
+                msDefaultEntityEvent Map33_DefaultEntityEvent-ms_map33_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_138:
+Map33_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_138
+	; End of function Map33_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -34,21 +34,21 @@ Map33_EntityEvent0:
                 bra.s   return_5A7D0
 byte_5A7A0:
                 
-                chkFlg  $312            ; set after Oddler elects to stay behind at Creed's Mansion
+                chkFlg  $312            ; Set after Oddler elects to stay behind at Creed's Mansion
                 beq.s   byte_5A7B0      
                 txt     $79E            ; "Is he getting back his{N}memory yet?{W2}"
                 txt     $79F            ; "He's suffering from a very{N}bad headache.{W1}"
                 bra.s   return_5A7D0
 byte_5A7B0:
                 
-                chkFlg  $310            ; set after the event in the basement of Creed's Mansion
+                chkFlg  $310            ; Set after the event in the basement of Creed's Mansion
                 beq.s   byte_5A7C0      
                 txt     $771            ; "My master would like to{N}help you, {LEADER}.{W2}"
                 txt     $772            ; "Please choose one.{W1}"
                 bra.s   return_5A7D0
 byte_5A7C0:
                 
-                chkFlg  $30F            ; set after the scene where Creed restores the Force and heads down the basement
+                chkFlg  $30F            ; Set after the scene where Creed restores the Force and heads down the basement
                 beq.s   byte_5A7CC      
                 txt     $770            ; "Arc Valley was unsealed and{N}Zeon woke up?{W2}{N}This is a nightmare!{W1}"
                 bra.s   return_5A7D0
@@ -67,7 +67,7 @@ return_5A7D0:
 Map33_EntityEvent1:
                 
                  
-                chkFlg  $312            ; set after Oddler elects to stay behind at Creed's Mansion
+                chkFlg  $312            ; Set after Oddler elects to stay behind at Creed's Mansion
                 beq.s   byte_5A7E2      
                 txt     $79A            ; "We devils can't help you.{W2}"
                 txt     $79B            ; "People of the Earth have{N}to seal Zeon again by{N}themselves.{W1}"
@@ -89,14 +89,14 @@ return_5A7EE:
 Map33_EntityEvent2:
                 
                  
-                chkFlg  $312            ; set after Oddler elects to stay behind at Creed's Mansion
+                chkFlg  $312            ; Set after Oddler elects to stay behind at Creed's Mansion
                 beq.s   byte_5A800      
                 txt     $79C            ; "Hello, {LEADER}.{N}How are you?{W2}"
                 txt     $79D            ; "I'm well...but, I've had a{N}bad headache lately.{W1}"
                 bra.s   return_5A826
 byte_5A800:
                 
-                chkFlg  $2F7            ; set after talking to one of the dwarves in the mine near the Fairy Woods
+                chkFlg  $2F7            ; Set after talking to one of the dwarves in the mine near the Fairy Woods
                 bne.s   byte_5A80C      
                 txt     $77F            ; "Hey, you're going east,{N}right?{N}I'm going with you!{W1}"
                 bra.s   byte_5A814
@@ -108,8 +108,8 @@ byte_5A814:
                 
                 clsTxt
                 script  cs_5A828
-                setFlg  $2FA            ; set after the fairy tags along at Creed's
-                setFlg  $311            ; set after the fairy tags along at Creed's
+                setFlg  $2FA            ; Set after the fairy tags along at Creed's
+                setFlg  $311            ; Set after the fairy tags along at Creed's
 return_5A826:
                 
                 rts

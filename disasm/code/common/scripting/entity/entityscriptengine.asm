@@ -19,10 +19,10 @@ loc_4C74:
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_4CB2
                 move.w  ((word_FFA806-$1000000)).w,d2
-                sub.w   (byte_FFD102).l,d2
+                sub.w   (dword_FFD100+2).l,d2
                 asl.w   #4,d2
                 add.w   ((word_FFA814-$1000000)).w,d2
-                move.w  (byte_FFD502).l,d3
+                move.w  (dword_FFD500+2).l,d3
                 sub.w   ((word_FFA80A-$1000000)).w,d3
                 asl.w   #4,d3
                 add.w   ((word_FFA816-$1000000)).w,d3
@@ -30,10 +30,10 @@ loc_4C74:
 loc_4CB2:
                 
                 move.w  ((word_FFA804-$1000000)).w,d2
-                sub.w   (word_FFD100).l,d2
+                sub.w   (dword_FFD100).l,d2
                 asl.w   #4,d2
                 add.w   ((word_FFA810-$1000000)).w,d2
-                move.w  (word_FFD500).l,d3
+                move.w  (dword_FFD500).l,d3
                 sub.w   ((word_FFA808-$1000000)).w,d3
                 asl.w   #4,d3
                 add.w   ((word_FFA812-$1000000)).w,d3
@@ -683,7 +683,7 @@ loc_5220:
                 bne.s   loc_5256
                 cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_5256
-                chkFlg  $41             ; Caravan is unlocked (0x4428A..0x44337, 0x44338..0x44403)
+                chkFlg  $41             ; Caravan is unlocked
                 beq.s   loc_5256
                 move.w  #2,((MAP_EVENT_TYPE-$1000000)).w
                 movem.w (sp)+,d2-d3
@@ -694,7 +694,7 @@ loc_5256:
                 bne.s   loc_5278
                 cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_5278
-                chkFlg  $40             ; Raft is unlocked (0x05264)
+                chkFlg  $40             ; Raft is unlocked
                 beq.s   loc_5278
                 move.w  #3,((MAP_EVENT_TYPE-$1000000)).w
                 movem.w (sp)+,d2-d3
@@ -2592,7 +2592,7 @@ FacingValuesbis:dc.b 0
 
 ; In: D0 = entity idx
 
-sub_6052:
+UpdateEntityProperties:
                 
                 movem.l d0-a2,-(sp)
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
@@ -2601,13 +2601,13 @@ sub_6052:
                 cmpi.b  #$FF,d2
                 beq.s   loc_6072
                 andi.w  #$7F,d2 
-                andi.b  #$80,$1D(a0)
-                or.b    d2,$1D(a0)
+                andi.b  #$80,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                or.b    d2,ENTITYDEF_OFFSET_FLAGS_B(a0)
 loc_6072:
                 
                 cmpi.b  #$FF,d3
                 beq.s   loc_607C
-                move.b  d3,$13(a0)
+                move.b  d3,ENTITYDEF_OFFSET_MAPSPRITE(a0)
 loc_607C:
                 
                 move.w  d1,d6
@@ -2616,16 +2616,16 @@ loc_607C:
                 movem.l (sp)+,d0-a2
                 rts
 
-	; End of function sub_6052
+	; End of function UpdateEntityProperties
 
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdateEntitySprite:
                 
-                btst    #6,$1D(a0)
+                btst    #6,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 beq.w   return_6180
-                cmp.b   $10(a0),d6
+                cmp.b   ENTITYDEF_OFFSET_FACING(a0),d6
                 beq.w   return_6180
                 cmpi.b  #7,((NUM_SPRITES_TO_LOAD-$1000000)).w
                 bge.w   return_6180
@@ -2652,12 +2652,12 @@ loc_60B6:
                 cmpi.b  #$F0,d1
                 bcc.w   loc_617C
                 clr.w   d1
-                move.b  $12(a0),d1
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
                 cmpi.b  #$20,d1 
                 beq.w   loc_617C
                 move.w  d1,-(sp)
                 clr.w   d1
-                move.b  $1D(a0),d1
+                move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d1
                 move.w  d1,-(sp)
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
                 move.w  d1,d0
@@ -2718,7 +2718,7 @@ loc_615E:
                 adda.w  d1,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
 loc_617C:
                 

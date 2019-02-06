@@ -15,18 +15,18 @@ ms_map13_EntityEvents:
                 msEntityEvent 137, DOWN, Map13_EntityEvent10-ms_map13_EntityEvents
                 msEntityEvent 138, DOWN, Map13_EntityEvent11-ms_map13_EntityEvents
                 msEntityEvent 140, RIGHT, Map13_EntityEvent12-ms_map13_EntityEvents
-                msDefaultEntityEvent 0, nullsub_116-ms_map13_EntityEvents
+                msDefaultEntityEvent Map13_DefaultEntityEvent-ms_map13_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map13_EntityEvent1:
                 
                  
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   byte_58068      
                 txt     $58C            ; "How did you come to{N}Polca Village?{W2}"
                 txt     $58D            ; "Through the cave?{N}Nobody has come to this{N}village since...{W2}"
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
 byte_58068:
                 
                 txt     $58E            ; "Oh, you defeated that{N}hobgoblin?  Wow!{W2}"
@@ -52,10 +52,10 @@ Map13_EntityEvent2:
 Map13_EntityEvent3:
                 
                  
-                chkFlg  $2C7            ; set after you dislodge the turtle/fairy in Polca
+                chkFlg  $2C7            ; Set after you dislodge the turtle/fairy in Polca, also set after you speak to Volcanon
                 bne.s   byte_5808A      
                 script  cs_58512
-                setFlg  $2C7            ; set after you dislodge the turtle/fairy in Polca
+                setFlg  $2C7            ; Set after you dislodge the turtle/fairy in Polca, also set after you speak to Volcanon
                 bra.s   return_5808E
 byte_5808A:
                 
@@ -94,7 +94,7 @@ Map13_EntityEvent5:
 Map13_EntityEvent6:
                 
                  
-                chkFlg  $2C6            ; set after Oddler wanders down from the mountain
+                chkFlg  $2C6            ; Set after Oddler wanders down from the mountain
                 bne.s   byte_580B8      
                 txt     $592            ; "To the east is the sacred{N}area of Volcanon.{W1}"
                 bra.s   return_580C4
@@ -147,12 +147,12 @@ Map13_EntityEvent9:
 Map13_EntityEvent10:
                 
                  
-                chkFlg  $2C6            ; set after Oddler wanders down from the mountain
+                chkFlg  $2C6            ; Set after Oddler wanders down from the mountain
                 bne.s   byte_580FC      
-                chkFlg  $101            ; Temporary map setup flag 01
+                chkFlg  $101            ; TEMP FLAG #01
                 bne.s   byte_580F2      
                 script  cs_58116
-                setFlg  $101            ; Temporary map setup flag 01
+                setFlg  $101            ; TEMP FLAG #01
                 bra.s   loc_580FA
 byte_580F2:
                 
@@ -206,11 +206,11 @@ Map13_EntityEvent12:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_116:
+Map13_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_116
+	; End of function Map13_DefaultEntityEvent
 
 cs_58116:       textCursor $595
                 nextSingleText $0,$89   ; "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"

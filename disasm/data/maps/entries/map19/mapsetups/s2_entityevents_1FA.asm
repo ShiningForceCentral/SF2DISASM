@@ -22,7 +22,7 @@ ms_map19_flag1FA_EntityEvents:
                 msEntityEvent 149, RIGHT, Map19_1FA_EntityEvent1-ms_map19_flag1FA_EntityEvents
                 msEntityEvent 150, RIGHT, Map19_1FA_EntityEvent1-ms_map19_flag1FA_EntityEvents
                 msEntityEvent 153, RIGHT, Map19_1FA_EntityEvent1-ms_map19_flag1FA_EntityEvents
-                msDefaultEntityEvent 0, (return_52F0A-ms_map19_flag1FA_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map19_DefaultEntityEvent-ms_map19_flag1FA_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

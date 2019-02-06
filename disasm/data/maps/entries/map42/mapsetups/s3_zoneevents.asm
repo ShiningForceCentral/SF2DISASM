@@ -3,20 +3,20 @@
 ; 0x5FE04..0x5FE24 : 
 ms_map42_ZoneEvents:
                 msZoneEvent 19, 21, Map42_ZoneEvent0-ms_map42_ZoneEvents
-                msDefaultZoneEvent 0, return_5FE22-ms_map42_ZoneEvents
+                msDefaultZoneEvent Map42_DefaultZoneEvent-ms_map42_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map42_ZoneEvent0:
                 
                  
-                chkFlg  $3E7            ; set after the Nazca ship shootdown scene
-                beq.s   return_5FE22
-                chkFlg  $385            ; set after the you're pulled toward the Force Sword in the Jewel Cave
-                bne.s   return_5FE22
+                chkFlg  $3E7            ; Set after the Nazca ship shootdown scene
+                beq.s   Map42_DefaultZoneEvent
+                chkFlg  $385            ; Set after the you're pulled toward the Force Sword in the Jewel Cave
+                bne.s   Map42_DefaultZoneEvent
                 script  cs_5FE9A
-                setFlg  $385            ; set after the you're pulled toward the Force Sword in the Jewel Cave
-return_5FE22:
+                setFlg  $385            ; Set after the you're pulled toward the Force Sword in the Jewel Cave
+Map42_DefaultZoneEvent:
                 
                 rts
 

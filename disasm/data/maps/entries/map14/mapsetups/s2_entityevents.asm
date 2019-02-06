@@ -10,7 +10,7 @@ ms_map14_EntityEvents:
                 msEntityEvent 128, UP, Map14_EntityEvent5-ms_map14_EntityEvents
                 msEntityEvent 129, DOWN, Map14_EntityEvent6-ms_map14_EntityEvents
                 msEntityEvent 130, UP, Map14_EntityEvent7-ms_map14_EntityEvents
-                msDefaultEntityEvent 0, entevdft_58EE2-ms_map14_EntityEvents
+                msDefaultEntityEvent Map14_DefaultEntityEvent-ms_map14_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -18,7 +18,7 @@ Map14_EntityEvent0:
                 
                  
                 txt     $8CD            ; "That's OK.  {NAME;3} needed{N}a bath anyway.{W1}"
-entevdft_58EE2:
+Map14_DefaultEntityEvent:
                 
                 rts
 

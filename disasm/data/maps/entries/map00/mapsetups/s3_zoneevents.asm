@@ -4,18 +4,18 @@
 ms_map0_ZoneEvents:
                 msZoneEvent 14, 12, Map0_ZoneEvent0-ms_map0_ZoneEvents
                 msZoneEvent 15, 12, Map0_ZoneEvent0-ms_map0_ZoneEvents
-                msDefaultZoneEvent 0, return_5E3C0-ms_map0_ZoneEvents
+                msDefaultZoneEvent Map0_DefaultZoneEvent-ms_map0_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map0_ZoneEvent0:
                 
                  
-                chkFlg  $321            ; set after Zalbard taunts you in the scene outside the Mitula Shrine
-                bne.s   return_5E3C0
+                chkFlg  $321            ; Set after Zalbard taunts you in the scene outside the Mitula Shrine
+                bne.s   Map0_DefaultZoneEvent
                 script  cs_5E3C2
-                setFlg  $321            ; set after Zalbard taunts you in the scene outside the Mitula Shrine
-return_5E3C0:
+                setFlg  $321            ; Set after Zalbard taunts you in the scene outside the Mitula Shrine
+Map0_DefaultZoneEvent:
                 
                 rts
 
@@ -159,5 +159,5 @@ cs_5E3C2:       textCursor $AAB
                 followEntity $1F,$0,$2
                 followEntity $7,$1F,$2
                 setBlocks 0,38,2,3,14,10
-                setF $348               ; set after the door to the Mitula Shrine is opened
+                setF $348               ; Set after the door to the Mitula Shrine is opened
                 csc_end

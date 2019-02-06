@@ -3,15 +3,15 @@
 ; 0x50A8C..0x50AE6 : 
 ms_map77_Section5:
                 msItemEvent 43, 42, LEFT, 115, Map77_ItemEvent0-ms_map77_Section5
-                msDefaultItemEvent nullsub_168-ms_map77_Section5
+                msDefaultItemEvent Map77_DefaultItemEvent1-ms_map77_Section5
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_168:
+Map77_DefaultItemEvent1:
                 
                 rts
 
-	; End of function nullsub_168
+	; End of function Map77_DefaultItemEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -20,9 +20,9 @@ Map77_ItemEvent0:
                 
                 move.w  #$73,((TEXT_NAME_INDEX_1-$1000000)).w 
                 txt     $1A5            ; "{LEADER} uses the {ITEM}.{D3}"
-                chkFlg  $384            ; set after using the Dry Stone to open the way to the Dwarven Village
+                chkFlg  $384            ; Set after using the Dry Stone to open the way to the Dwarven Village
                 bne.s   byte_50AB6      
-                setFlg  $384            ; set after using the Dry Stone to open the way to the Dwarven Village
+                setFlg  $384            ; Set after using the Dry Stone to open the way to the Dwarven Village
                 script  cs_50ABE
                 bra.s   loc_50ABA
 byte_50AB6:

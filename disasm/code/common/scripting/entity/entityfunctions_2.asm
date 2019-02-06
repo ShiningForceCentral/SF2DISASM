@@ -263,12 +263,12 @@ AddFollower:
                 movem.l a0-a1,-(sp)
                 move.w  d0,-(sp)
                 bsr.w   GetEntityRAMAddress
-                movea.l (dword_FFB1A0).l,a1
+                movea.l (ENTITY_WALKING_PARAMS).l,a1
                 move.l  a1,$14(a0)
                 lea     eas_Follower1(pc), a0
                 move.w  #$2A,d7 
                 jsr     (CopyBytes).w   
-                addi.l  #$2A,(dword_FFB1A0).l 
+                addi.l  #$2A,(ENTITY_WALKING_PARAMS).l 
                 move.w  d1,$1E(a1)
                 move.w  d2,$20(a1)
                 move.w  d3,$22(a1)
@@ -338,12 +338,12 @@ SetWalkingActscript:
                 move.w  d0,-(sp)
                 movem.l a0-a1,-(sp)
                 bsr.w   GetEntityRAMAddress
-                movea.l (dword_FFB1A0).l,a1
+                movea.l (ENTITY_WALKING_PARAMS).l,a1
                 move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 lea     eas_Walking(pc), a0
                 move.w  #$32,d7 
                 jsr     (CopyBytes).w   
-                addi.l  #$32,(dword_FFB1A0).l 
+                addi.l  #$32,(ENTITY_WALKING_PARAMS).l 
                 move.w  d1,$22(a1)
                 move.w  d2,$24(a1)
                 move.w  d3,$26(a1)
@@ -362,13 +362,13 @@ sub_44D0E:
                 move.w  d0,-(sp)
                 movem.l a0-a2,-(sp)
                 bsr.w   GetEntityRAMAddress
-                movea.l (dword_FFB1A0).l,a1
+                movea.l (ENTITY_WALKING_PARAMS).l,a1
                 move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 lea     eas_Walking(pc), a0
                 move.w  #$20,d7 
                 jsr     (CopyBytes).w   
-                addi.l  #$20,(dword_FFB1A0).l 
-                movea.l (dword_FFB1A0).l,a1
+                addi.l  #$20,(ENTITY_WALKING_PARAMS).l 
+                movea.l (ENTITY_WALKING_PARAMS).l,a1
                 movea.l d5,a2
                 move.l  a1,d5
 loc_44D48:
@@ -405,7 +405,7 @@ loc_44D90:
                 
                 move.w  #$34,(a1)+ 
                 move.l  d5,(a1)+
-                move.l  a1,(dword_FFB1A0).l
+                move.l  a1,(ENTITY_WALKING_PARAMS).l
                 movem.l (sp)+,a0-a2
                 move.w  (sp)+,d0
                 rts

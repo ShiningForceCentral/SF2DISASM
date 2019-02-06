@@ -1075,9 +1075,9 @@ csc22_animateEntityFadeInOrOut:
                 moveq   #$16,d7
 loc_46B74:
                 
-                bsr.w   sub_470CA
+                bsr.w   LoadMapsprite
                 jsr     sub_45CA6
-                bsr.w   sub_4709E
+                bsr.w   sub_4709E       
                 jsr     (WaitForVInt).w 
                 jsr     (WaitForVInt).w 
                 add.w   4(a1),d0
@@ -1085,67 +1085,63 @@ loc_46B74:
                 dbf     d7,loc_46B74
                 cmpi.w  #4,d2
                 bne.s   return_46BB0
-                bsr.w   sub_470CA
+                bsr.w   LoadMapsprite
                 move.l  #$FFFF,d0
                 jsr     sub_45E10
-                bsr.w   sub_4709E
+                bsr.w   sub_4709E       
 return_46BB0:
                 
                 rts
-
-	; End of function csc22_animateEntityFadeInOrOut
-
-byte_46BB2:     dc.b 0
-                dc.b   1
-                dc.b   0
-                dc.b   0
-                dc.b   0
-                dc.b   0
-                dc.b   0
-                dc.b   1
-                dc.b   0
-                dc.b   1
-                dc.b   0
+byte_46BB2:
+                
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 0
                 dc.b $15
-                dc.b   0
-                dc.b   0
+                dc.b 0
+                dc.b 0
                 dc.b $FF
                 dc.b $FF
-                dc.b   0
-                dc.b   1
-                dc.b   0
-                dc.b   0
-                dc.b   0
-                dc.b   1
-                dc.b   0
-                dc.b   0
-                dc.b   0
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 0
+                dc.b 0
                 dc.b $16
-                dc.b   0
-                dc.b   0
+                dc.b 0
+                dc.b 0
                 dc.b $FF
                 dc.b $FF
-                dc.b   0
-                dc.b   0
-                dc.b   0
-                dc.b   1
-                dc.b   0
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 1
+                dc.b 0
                 dc.b $16
-                dc.b   0
-                dc.b   1
+                dc.b 0
+                dc.b 1
                 dc.b $FF
                 dc.b $FF
-                dc.b   0
+                dc.b 0
                 dc.b $16
-                dc.b   0
-                dc.b   1
+                dc.b 0
+                dc.b 1
                 dc.b $FF
                 dc.b $FF
-                dc.b   0
-                dc.b   1
-
-; START OF FUNCTION CHUNK FOR csc22_animateEntityFadeInOrOut
-
+                dc.b 0
+                dc.b 1
 loc_46BE2:
                 
                 tst.w   d1              ; manage param 6/7
@@ -1160,9 +1156,9 @@ loc_46BF0:
                 moveq   #$F,d7
 loc_46BF2:
                 
-                bsr.w   sub_470CA
+                bsr.w   LoadMapsprite
                 jsr     sub_45E10
-                bsr.w   sub_4709E
+                bsr.w   sub_4709E       
                 jsr     (WaitForVInt).w 
                 jsr     (WaitForVInt).w 
                 jsr     (WaitForVInt).w 
@@ -1179,7 +1175,7 @@ loc_46C1A:
                 dbf     d7,loc_46BF2
                 rts
 
-; END OF FUNCTION CHUNK FOR csc22_animateEntityFadeInOrOut
+	; End of function csc22_animateEntityFadeInOrOut
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1255,9 +1251,9 @@ csc26_entityNodHead:
                 jsr     (Sleep).w       
 loc_46C8A:
                 
-                bsr.w   sub_470CA
+                bsr.w   LoadMapsprite
                 jsr     sub_45D70
-                bsr.w   sub_4709E
+                bsr.w   sub_4709E       
                 moveq   #$14,d0
                 jsr     (Sleep).w       
                 bsr.w   UpdateEntitySprite_0
@@ -1281,16 +1277,16 @@ csc27_entityShakeHead:
                 moveq   #6,d7
 loc_46CC8:
                 
-                bsr.w   sub_470CA
+                bsr.w   LoadMapsprite
                 jsr     sub_45D1C
-                bsr.w   sub_4709E
+                bsr.w   sub_4709E       
                 jsr     (WaitForVInt).w 
                 jsr     (WaitForVInt).w 
                 bsr.w   UpdateEntitySprite_0
                 jsr     (WaitForVInt).w 
-                bsr.w   sub_470CA
+                bsr.w   LoadMapsprite
                 jsr     sub_45D46
-                bsr.w   sub_4709E
+                bsr.w   sub_4709E       
                 jsr     (WaitForVInt).w 
                 jsr     (WaitForVInt).w 
                 bsr.w   UpdateEntitySprite_0
@@ -1545,9 +1541,9 @@ csc30_removeEntityShadow:
                 move.w  (a6)+,d0
                 bsr.w   GetEntityAddressFromPlayableCharacterIdx
                 lea     (FF6802_LOADING_SPACE).l,a0
-                bsr.w   sub_470CA
+                bsr.w   LoadMapsprite
                 jsr     sub_45A8C
-                bsr.w   sub_4709E
+                bsr.w   sub_4709E       
                 jsr     (WaitForVInt).w 
                 rts
 
@@ -1824,6 +1820,8 @@ return_4709C:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Launches DMA
+
 sub_4709E:
                 
                 movem.l d0-d1/a0-a1,-(sp)
@@ -1837,7 +1835,7 @@ sub_4709E:
                 adda.w  d1,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
@@ -1847,18 +1845,18 @@ sub_4709E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_470CA:
+LoadMapsprite:
                 
                 movem.l d0-d1/d6/a1,-(sp)
                 movea.l a0,a1
                 clr.w   d6
-                move.b  $10(a5),d6
+                move.b  ENTITYDEF_OFFSET_FACING(a5),d6
                 bne.s   loc_470DA
                 moveq   #2,d6
 loc_470DA:
                 
                 clr.w   d1
-                move.b  $13(a5),d1
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1
@@ -1872,5 +1870,5 @@ loc_470DA:
                 movem.l (sp)+,d0-d1/d6/a1
                 rts
 
-	; End of function sub_470CA
+	; End of function LoadMapsprite
 

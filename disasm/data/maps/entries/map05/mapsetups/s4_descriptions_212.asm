@@ -34,7 +34,7 @@ byte_60558:     msDesc 9, 15, 6, 0      ; "{NAME} looked at{N}the paper.{W2}{CLE
 Map5_212_DescFunc0:
                 
                  
-                chkFlg  $3AC            ; set after playing the piano in Yeel (during the late game)
+                chkFlg  $3AC            ; Set after playing the piano in Yeel (during the late game)
                 bne.s   return_6058E
                 script  cs_60F64
 return_6058E:
@@ -49,7 +49,7 @@ return_6058E:
 Map5_212_DescFunc1:
                 
                  
-                chkFlg  $3B1            ; set after recruiting Lemon in Yeel
+                chkFlg  $3B1            ; Set after recruiting Lemon in Yeel
                 bne.s   byte_605C4      
                 script  cs_6060E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
@@ -59,7 +59,7 @@ Map5_212_DescFunc1:
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
                 txt     $D9B            ; "I can't believe it!{N}I want to die, but I can't!{W1}"
-                setFlg  $3B1            ; set after recruiting Lemon in Yeel
+                setFlg  $3B1            ; Set after recruiting Lemon in Yeel
                 bra.s   return_60604
 byte_605C4:
                 

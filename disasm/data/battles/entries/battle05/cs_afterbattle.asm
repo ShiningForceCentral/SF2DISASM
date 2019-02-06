@@ -15,7 +15,7 @@ abcs_battle05:  textCursor $91C
                 setActscriptWait $5,eas_Jump
                 setActscriptWait $5,eas_Jump
                 nextText $0,$5          ; "{LEADER}, did you use{N}magic?{W2}"
-                setF $180               ; set after Bowie obtains the jewel of light/evil... whichever it is
+                setF $180               ; Set after Bowie obtains the jewel of light/evil... whichever it is
                 csWait 30
                 nextText $0,$5          ; "Ummm...I can't remove it!{N}Is it cursed?{W2}"
                 setActscriptWait $5,eas_46172

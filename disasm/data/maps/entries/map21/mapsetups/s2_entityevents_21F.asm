@@ -3,15 +3,15 @@
 ; 0x6345E..0x63472 : 
 ms_map21_flag21F_EntityEvents:
                 msEntityEvent 128, DOWN, Map21_21F_EntityEvent0-ms_map21_flag21F_EntityEvents
-                msDefaultEntityEvent 0, nullsub_127-ms_map21_flag21F_EntityEvents
+                msDefaultEntityEvent Map21_21F_DefaultEntityEvent-ms_map21_flag21F_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_127:
+Map21_21F_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_127
+	; End of function Map21_21F_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================

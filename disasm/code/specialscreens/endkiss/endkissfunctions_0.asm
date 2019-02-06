@@ -127,7 +127,7 @@ loc_2C6A4:
                 lea     (FF0000_RAM_START).l,a0
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 movem.l (sp)+,d0-a3
                 movem.l d0-a3,-(sp)
@@ -135,7 +135,7 @@ loc_2C6A4:
                 lea     (byte_FF0C00).l,a0
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 movem.l (sp)+,d0-a3
                 cmpi.w  #$10,d7

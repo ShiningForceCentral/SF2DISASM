@@ -2,13 +2,13 @@
 ; ASM FILE data\maps\entries\map77\mapsetups\s2_entityevents.asm :
 ; 0x50A84..0x50A8A : 
 ms_map77_EntityEvents:
-                msDefaultEntityEvent 0, nullsub_165-ms_map77_EntityEvents
+                msDefaultEntityEvent Map77_DefaultEntityEvent-ms_map77_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_165:
+Map77_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_165
+	; End of function Map77_DefaultEntityEvent
 

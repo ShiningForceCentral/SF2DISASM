@@ -7,7 +7,7 @@
 ms_map16_InitFunction:
                 
                  
-                chkFlg  $298            ; set after the Galam guards catch you sneaking around, but before battle
+                chkFlg  $298            ; Set after the Galam guards catch you sneaking around, but before battle
                 beq.s   return_51F86
                 move.w  #$91,d0 
                 jsr     MoveEntityOutOfMap

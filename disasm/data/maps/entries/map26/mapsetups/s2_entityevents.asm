@@ -8,7 +8,7 @@ ms_map26_EntityEvents:
                 msEntityEvent 129, UP, Map26_EntityEvent3-ms_map26_EntityEvents
                 msEntityEvent 133, DOWN, Map26_EntityEvent4-ms_map26_EntityEvents
                 msEntityEvent 134, RIGHT, Map26_EntityEvent5-ms_map26_EntityEvents
-                msDefaultEntityEvent 0, Map26_EntityEvent3-ms_map26_EntityEvents
+                msDefaultEntityEvent Map26_EntityEvent3-ms_map26_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

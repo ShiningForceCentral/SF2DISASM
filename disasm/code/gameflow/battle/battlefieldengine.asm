@@ -1697,7 +1697,7 @@ sub_CD18:
                 
                 movem.l d0-d5/d7-a6,-(sp)
                 moveq   #3,d6
-                jsr     j_randomLessThanD6
+                jsr     j_randomUnderD6
                 tst.b   d7
                 beq.w   loc_CD3C
                 move.b  d5,d0

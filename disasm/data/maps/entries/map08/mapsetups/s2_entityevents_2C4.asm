@@ -16,4 +16,4 @@ ms_map8_flag2C4_EntityEvents:
                 msEntityEvent 139, DOWN, Map8_2C4_EntityEvent11-ms_map8_flag2C4_EntityEvents
                 msEntityEvent 8, UP, Map8_2C4_EntityEvent12-ms_map8_flag2C4_EntityEvents
                 msEntityEvent 140, 7, Map8_2C4_EntityEvent13-ms_map8_flag2C4_EntityEvents
-                msDefaultEntityEvent 0, return_56144-ms_map8_flag2C4_EntityEvents
+                msDefaultEntityEvent Map8_DefaultEntityEvent-ms_map8_flag2C4_EntityEvents

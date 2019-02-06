@@ -18,7 +18,7 @@ ms_map3_flag1FA_EntityEvents:
                 msEntityEvent 141, DOWN, Map3_1FA_EntityEvent13-ms_map3_flag1FA_EntityEvents
                 msEntityEvent 142, DOWN, (Map3_261_EntityEvent26-ms_map3_flag1FA_EntityEvents) & $FFFF
                 msEntityEvent 6, RIGHT, Map3_1FA_EntityEvent15-ms_map3_flag1FA_EntityEvents
-                msDefaultEntityEvent 0, (entevdft_5105A-ms_map3_flag1FA_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map3_DefaultEntityEvent-ms_map3_flag1FA_EntityEvents) & $FFFF
                 dc.b $FF
                 dc.b $FF
 

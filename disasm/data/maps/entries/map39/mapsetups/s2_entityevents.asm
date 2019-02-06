@@ -10,18 +10,18 @@ ms_map39_EntityEvents:
                 msEntityEvent 132, DOWN, Map39_EntityEvent5-ms_map39_EntityEvents
                 msEntityEvent 133, UP, Map39_EntityEvent6-ms_map39_EntityEvents
                 msEntityEvent 134, UP, Map39_EntityEvent7-ms_map39_EntityEvents
-                msDefaultEntityEvent 0, nullsub_142-ms_map39_EntityEvents
+                msDefaultEntityEvent Map39_DefaultEntityEvent-ms_map39_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map39_EntityEvent0:
                 
                  
-                chkFlg  $33E            ; set after the Gyan join scene in the Moun underground
+                chkFlg  $33E            ; Set after the Gyan join scene in the Moun underground
                 beq.s   return_5E070
                 script  cs_5E20A
                 setFlg  $4C             ; Zynk is a follower
-                setFlg  $344            ; set after the scene where Zynk stops you as you leave the Moun underground
+                setFlg  $344            ; Set after the scene where Zynk stops you as you leave the Moun underground
 return_5E070:
                 
                 rts
@@ -101,7 +101,7 @@ Map39_EntityEvent6:
 Map39_EntityEvent7:
                 
                  
-                chkFlg  $33E            ; set after the Gyan join scene in the Moun underground
+                chkFlg  $33E            ; Set after the Gyan join scene in the Moun underground
                 bne.s   byte_5E0AA      
                 txt     $802            ; "{NAME;24} of Ribble is{N}behind me.{W2}"
                 txt     $803            ; "He stood guard at the west{N}gate.{W1}"
@@ -118,9 +118,9 @@ return_5E0AE:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_142:
+Map39_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_142
+	; End of function Map39_DefaultEntityEvent
 

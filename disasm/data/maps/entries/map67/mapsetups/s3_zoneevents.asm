@@ -7,7 +7,7 @@ ms_map67_ZoneEvents:
                 msZoneEvent 57, 26, Map67_ZoneEvent1-ms_map67_ZoneEvents
                 msZoneEvent 58, 24, Map67_ZoneEvent1-ms_map67_ZoneEvents
                 msZoneEvent 58, 25, Map67_ZoneEvent1-ms_map67_ZoneEvents
-                msDefaultZoneEvent 0, CheckRandomBattle21-ms_map67_ZoneEvents
+                msDefaultZoneEvent Map67_DefaultZoneEvent-ms_map67_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -29,7 +29,7 @@ return_4FB30:
 Map67_ZoneEvent0:
                 
                  
-                chkFlg  $2EF            ; set after Elric opens the passage to Devil's Tail
+                chkFlg  $2EF            ; Set after Elric opens the passage to Devil's Tail
                 bne.s   return_4FB56
                 chkFlg  $D              ; Elric joined
                 beq.s   return_4FB56
@@ -38,7 +38,7 @@ Map67_ZoneEvent0:
                 tst.w   d1
                 beq.s   return_4FB56
                 script  cs_4FC32
-                setFlg  $2EF            ; set after Elric opens the passage to Devil's Tail
+                setFlg  $2EF            ; Set after Elric opens the passage to Devil's Tail
 return_4FB56:
                 
                 rts
@@ -48,13 +48,13 @@ return_4FB56:
 
 ; =============== S U B R O U T I N E =======================================
 
-CheckRandomBattle21:
+Map67_DefaultZoneEvent:
                 
                 move.w  #$15,d0
                 jsr     CheckRandomBattle
                 rts
 
-	; End of function CheckRandomBattle21
+	; End of function Map67_DefaultZoneEvent
 
 cs_4FB64:       textCursor $9EF
                 setActscriptWait $1F,eas_Init

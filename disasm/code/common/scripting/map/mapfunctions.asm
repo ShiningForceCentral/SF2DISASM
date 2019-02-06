@@ -135,7 +135,7 @@ loc_441D2:
                 bra.s   loc_441D2
 byte_441F0:
                 
-                chkFlg  $40             ; Raft is unlocked (0x05264)
+                chkFlg  $40             ; Raft is unlocked
                 beq.w   loc_44262
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
                 cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0
@@ -159,7 +159,7 @@ byte_441F0:
                 move.w  d3,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
                 bra.s   loc_44262
 loc_44248:
                 

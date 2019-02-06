@@ -100,6 +100,8 @@ loc_1AC362:
 
 ; =============== S U B R O U T I N E =======================================
 
+; AI-related
+
 sub_1AC38E:
                 
                 movem.l d0/d5-a6,-(sp)
@@ -281,7 +283,7 @@ sub_1AC4F0:
                 move.b  (a0,d1.w),d1
                 cmpi.b  #$FF,d1
                 beq.s   loc_1AC516
-                bsr.w   sub_1AC5AA
+                bsr.w   sub_1AC5AA      
                 bra.w   loc_1AC5A4
 loc_1AC516:
                 
@@ -332,13 +334,13 @@ loc_1AC576:
                 dbf     d4,loc_1AC554
                 lea     unk_1AC848(pc), a0
                 nop
-                bsr.w   sub_1AC7FE
+                bsr.w   sub_1AC7FE      
                 lea     unk_1AC84B(pc), a0
                 nop
-                bsr.w   sub_1AC7FE
+                bsr.w   sub_1AC7FE      
                 lea     unk_1AC854(pc), a0
                 nop
-                bsr.w   sub_1AC7FE
+                bsr.w   sub_1AC7FE      
 loc_1AC5A4:
                 
                 movem.l (sp)+,d0-a6
@@ -348,6 +350,8 @@ loc_1AC5A4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; AI-related
 
 sub_1AC5AA:
                 
@@ -399,19 +403,19 @@ loc_1AC60C:
                 dbf     d4,loc_1AC5EA
                 lea     unk_1AC848(pc), a0
                 nop
-                bsr.w   sub_1AC7FE
+                bsr.w   sub_1AC7FE      
                 lea     unk_1AC84B(pc), a0
                 nop
-                bsr.w   sub_1AC7FE
+                bsr.w   sub_1AC7FE      
                 lea     unk_1AC854(pc), a0
                 nop
-                bsr.w   sub_1AC7FE
+                bsr.w   sub_1AC7FE      
                 lea     unk_1AC865(pc), a0
                 nop
-                bsr.w   sub_1AC7FE
+                bsr.w   sub_1AC7FE      
                 lea     unk_1AC87E(pc), a0
                 nop
-                bsr.w   sub_1AC7FE
+                bsr.w   sub_1AC7FE      
 loc_1AC64E:
                 
                 movem.l (sp)+,d0-a6
@@ -458,53 +462,55 @@ loc_1AC684:
 
 ; =============== S U B R O U T I N E =======================================
 
+; AI-related
+
 sub_1AC69A:
                 
                 movem.l d0-a6,-(sp)
                 clr.l   d7
                 move.b  d0,d7
-                bsr.w   sub_1AC38E
+                bsr.w   sub_1AC38E      
                 clr.l   d6
                 clr.l   d5
                 move.b  d1,d5
                 tst.b   d5
                 bne.s   loc_1AC6C8
                 move.b  #1,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
                 move.b  #2,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
                 move.b  #3,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
 loc_1AC6C8:
                 
                 cmpi.b  #1,d5
                 bne.s   loc_1AC6E6
                 move.b  #0,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
                 move.b  #2,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
                 move.b  #3,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
 loc_1AC6E6:
                 
                 cmpi.b  #3,d5
                 bne.s   loc_1AC704
                 move.b  #0,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
                 move.b  #1,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
                 move.b  #3,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
 loc_1AC704:
                 
                 cmpi.b  #2,d5
                 bne.s   loc_1AC722
                 move.b  #0,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
                 move.b  #1,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
                 move.b  #2,d1
-                bsr.w   sub_1AC728
+                bsr.w   sub_1AC728      
 loc_1AC722:
                 
                 movem.l (sp)+,d0-a6
@@ -514,6 +520,8 @@ loc_1AC722:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; AI-related
 
 sub_1AC728:
                 
@@ -595,6 +603,8 @@ loc_1AC7E6:
 
 ; =============== S U B R O U T I N E =======================================
 
+; AI-related
+
 sub_1AC7FE:
                 
                 movem.l d0-a1,-(sp)
@@ -626,10 +636,10 @@ loc_1AC83C:
 
 	; End of function sub_1AC7FE
 
-unk_1AC848:     dc.b   1
+unk_1AC848:     dc.b   1                ; AI-related data
                 dc.b   0
                 dc.b   0
-unk_1AC84B:     dc.b   4
+unk_1AC84B:     dc.b   4                ; AI-related data
                 dc.b   0
                 dc.b   1
                 dc.b   1
@@ -638,7 +648,7 @@ unk_1AC84B:     dc.b   4
                 dc.b $FF
                 dc.b $FF
                 dc.b   0
-unk_1AC854:     dc.b   8
+unk_1AC854:     dc.b   8                ; AI-related data
                 dc.b   0
                 dc.b $FE 
                 dc.b $FF
@@ -655,7 +665,7 @@ unk_1AC854:     dc.b   8
                 dc.b   0
                 dc.b   1
                 dc.b $FF
-unk_1AC865:     dc.b  $C
+unk_1AC865:     dc.b  $C                ; AI-related data
                 dc.b   0
                 dc.b $FD 
                 dc.b $FF
@@ -680,7 +690,7 @@ unk_1AC865:     dc.b  $C
                 dc.b $FF
                 dc.b   1
                 dc.b $FE 
-unk_1AC87E:     dc.b $10
+unk_1AC87E:     dc.b $10                ; AI-related data
                 dc.b   0
                 dc.b $FC 
                 dc.b $FF
@@ -716,6 +726,8 @@ unk_1AC87E:     dc.b $10
                 dc.b $FF
 
 ; =============== S U B R O U T I N E =======================================
+
+; AI-related
 
 sub_1AC8A0:
                 
@@ -904,6 +916,8 @@ unk_1AC9F0:     dc.b $FF                ; Secret Bonus Battle
 
 ; =============== S U B R O U T I N E =======================================
 
+; AI-related
+
 sub_1AC9FC:
                 
                 movem.l d0/d2-a6,-(sp)
@@ -930,14 +944,14 @@ loc_1ACA1E:
                 move.w  2(a0),d2
                 move.w  4(a0),d3
                 move.w  6(a0),d4
-                bsr.w   sub_1ACA72
+                bsr.w   sub_1ACA72      
                 bra.s   loc_1ACA6A
 loc_1ACA40:
                 
                 move.w  2(a0),d2
                 move.w  4(a0),d3
                 move.w  8(a0),d4
-                bsr.w   sub_1ACA72
+                bsr.w   sub_1ACA72      
                 cmpi.b  #0,d6
                 beq.s   loc_1ACA5A
                 bra.w   loc_1ACA6A
@@ -946,7 +960,7 @@ loc_1ACA5A:
                 move.w  6(a0),d2
                 move.w  4(a0),d3
                 move.w  8(a0),d4
-                bsr.w   sub_1ACA72
+                bsr.w   sub_1ACA72      
 loc_1ACA6A:
                 
                 move.w  d6,d1
@@ -957,6 +971,8 @@ loc_1ACA6A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; AI-related
 
 sub_1ACA72:
                 
@@ -990,7 +1006,7 @@ loc_1ACA9A:
 loc_1ACAAE:
                 
                 or.b    d1,d5
-                bsr.w   sub_1ACAD6
+                bsr.w   sub_1ACAD6      
                 tst.w   d6
                 bne.s   loc_1ACABC
                 bra.w   loc_1ACACC
@@ -1012,6 +1028,8 @@ loc_1ACAD0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; AI-related
 
 sub_1ACAD6:
                 
@@ -1430,7 +1448,7 @@ loc_1ACE68:
                 move.w  (a0),d1
                 btst    d0,d1
                 bne.s   loc_1ACE8A
-                bsr.w   sub_1AC9FC
+                bsr.w   sub_1AC9FC      
                 tst.b   d1
                 beq.s   loc_1ACE8A
                 clr.w   d1
@@ -1673,7 +1691,7 @@ GetRandomValueSigned:
 
 ; =============== S U B R O U T I N E =======================================
 
-RandomLessThanD6:
+RandomUnderD6:
                 
                 movem.l d0-d5/a0-a6,-(sp)
                 move.b  d6,d1
@@ -1701,7 +1719,7 @@ loc_1AD0D4:
                 movem.l (sp)+,d0-d5/a0-a6
                 rts
 
-	; End of function RandomLessThanD6
+	; End of function RandomUnderD6
 
 
 ; =============== S U B R O U T I N E =======================================

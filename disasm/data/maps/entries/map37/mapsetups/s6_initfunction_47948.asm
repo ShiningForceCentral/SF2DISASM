@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47948:
+InitNazcaShipForceMembers:
                 
                 movem.l d0-a2,-(sp)
                 moveq   #1,d0
@@ -18,11 +18,11 @@ loc_47958:
                 bne.s   loc_47982
                 move.w  #$5E80,d2
                 move.w  d2,(a0)
-                move.w  d2,2(a0)
-                move.w  d2,$C(a0)
-                move.w  d2,$E(a0)
-                move.b  #3,$10(a0)
-                move.l  #eas_Idle,$14(a0)
+                move.w  d2,ENTITYDEF_OFFSET_Y(a0)
+                move.w  d2,ENTITYDEF_OFFSET_XDEST(a0)
+                move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
+                move.b  #3,ENTITYDEF_OFFSET_FACING(a0)
+                move.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
 loc_47982:
                 
                 addq.w  #1,d0
@@ -31,5 +31,5 @@ loc_47982:
                 movem.l (sp)+,d0-a2
                 rts
 
-	; End of function sub_47948
+	; End of function InitNazcaShipForceMembers
 

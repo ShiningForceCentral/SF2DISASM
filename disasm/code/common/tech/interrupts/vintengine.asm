@@ -1322,13 +1322,13 @@ loc_F94:
                 
                 lea     ($E000).l,a6
                 lsl.w   #1,d5
-                move.w  (byte_FFD102).l,d7
+                move.w  (dword_FFD100+2).l,d7
                 addq.w  #4,d7
                 lsr.w   #2,d7
                 sub.w   d7,d5
                 andi.w  #$7E,d5 
                 lsl.w   #7,d6
-                move.w  (byte_FFD502).l,d7
+                move.w  (dword_FFD500+2).l,d7
                 subq.w  #8,d7
                 lsl.w   #4,d7
                 add.w   d7,d6
@@ -1342,12 +1342,12 @@ loc_F94:
                 lsl.w   #1,d5
 loc_FD4:
                 
-                move.w  (word_FFD100).l,d7
+                move.w  (dword_FFD100).l,d7
                 lsr.w   #2,d7
                 sub.w   d7,d5
                 andi.w  #$7E,d5 
                 lsl.w   #7,d6
-                move.w  (word_FFD500).l,d7
+                move.w  (dword_FFD500).l,d7
                 lsl.w   #4,d7
                 add.w   d7,d6
 loc_FEE:
@@ -1548,7 +1548,7 @@ loc_1188:
 
 ; DMA stuff. d0 = DMA destination ?
 
-sub_119E:
+DMA_119E:
                 
                 move    sr,-(sp)
 loc_11A0:
@@ -1612,7 +1612,7 @@ loc_1214:
                 move    (sp)+,sr
                 rts
 
-	; End of function sub_119E
+	; End of function DMA_119E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1680,7 +1680,7 @@ loc_1294:
 ClearHscrollStuff:
                 
                 movem.l d7/a6,-(sp)
-                lea     (word_FFD100).l,a6
+                lea     (dword_FFD100).l,a6
 loc_12B4:
                 
                 move.w  #$FF,d7
@@ -1700,7 +1700,7 @@ loc_12B8:
 ClearOtherHscrollStuff:
                 
                 movem.l d7/a6,-(sp)
-                lea     (byte_FFD102).l,a6
+                lea     ((dword_FFD100+2)).l,a6
                 bra.s   loc_12B4
 
 	; End of function ClearOtherHscrollStuff
@@ -1742,7 +1742,7 @@ loc_12FC:
 ClearVscrollStuff:
                 
                 movem.l d7/a6,-(sp)
-                lea     (word_FFD500).l,a6
+                lea     (dword_FFD500).l,a6
 loc_132C:
                 
                 move.w  #$13,d7
@@ -1762,7 +1762,7 @@ loc_1330:
 ClearOtherVscrollStuff:
                 
                 movem.l d7/a6,-(sp)
-                lea     (byte_FFD502).l,a6
+                lea     ((dword_FFD500+2)).l,a6
                 bra.s   loc_132C
 
 	; End of function ClearOtherVscrollStuff
@@ -1803,7 +1803,7 @@ sub_1372:
                 
                 movem.w d1,-(sp)
                 bsr.s   PrepareSomethingForDMA
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 movem.w (sp)+,d1
                 rts
 
@@ -1844,7 +1844,7 @@ DmaTilesViaFF8804bis:
                 
                 movem.w d1,-(sp)
                 bsr.s   LoadTilesAtFF8804
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 movem.w (sp)+,d1
                 rts
 
@@ -1862,7 +1862,7 @@ sub_13C0:
                 lea     ($C000).l,a1
                 move.w  #$800,d0
                 move.w  #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
@@ -1881,7 +1881,7 @@ sub_13E4:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 move.w  #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
                 movem.l (sp)+,d0-d1/a0-a1
                 rts

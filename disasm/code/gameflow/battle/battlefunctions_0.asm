@@ -618,7 +618,7 @@ loc_2315E:
                 move.w  d4,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
                 move.w  (sp)+,d0
                 bsr.w   sub_2322C
                 move.b  #1,((FIGHTER_IS_TARGETTING-$1000000)).w
@@ -1054,7 +1054,7 @@ loc_234DA:
                 adda.w  d1,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
 loc_23538:
                 

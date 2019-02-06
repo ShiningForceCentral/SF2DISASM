@@ -13,7 +13,7 @@ ms_map3_InitFunction:
                 bra.s   byte_513A8      
 byte_51390:
                 
-                chkFlg  $25A            ; set after Astral's second basement line
+                chkFlg  $25A            ; Set after Astral's second basement line
                 beq.s   byte_513A8      
                 script  cs_513A0
                 bra.w   byte_513A8      
@@ -23,7 +23,7 @@ cs_513A0:
                 csc_end
 byte_513A8:
                 
-                chkFlg  $25B            ; set after the messenger scene
+                chkFlg  $25B            ; Set after the messenger scene
                 beq.s   return_513B8
                 move.w  #$8E,d0
                 jsr     MoveEntityOutOfMap

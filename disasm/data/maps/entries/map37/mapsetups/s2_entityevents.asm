@@ -30,7 +30,7 @@ ms_map37_EntityEvents:
                 msEntityEvent 29, DOWN, Map37_EntityEvent25-ms_map37_EntityEvents
                 msEntityEvent 128, DOWN, Map37_EntityEvent26-ms_map37_EntityEvents
                 msEntityEvent 129, RIGHT, Map37_EntityEvent27-ms_map37_EntityEvents
-                msDefaultEntityEvent 0, sub_5F9E6-ms_map37_EntityEvents
+                msDefaultEntityEvent Map37_DefaultEntityEvent-ms_map37_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 

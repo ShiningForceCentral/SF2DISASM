@@ -2,11 +2,11 @@
 ; ASM FILE data\maps\entries\map76\mapsetups\s3_zoneevents.asm :
 ; 0x50A24..0x50A3E : 
 ms_map76_ZoneEvents:
-                msDefaultZoneEvent 0, sub_50A28-ms_map76_ZoneEvents
+                msDefaultZoneEvent Map76_DefaultZoneEvent-ms_map76_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50A28:
+Map76_DefaultZoneEvent:
                 
                  
                 chkFlg  $217            ; Battle 35 completed
@@ -17,7 +17,7 @@ return_50A3A:
                 
                 rts
 
-	; End of function sub_50A28
+	; End of function Map76_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================

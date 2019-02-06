@@ -1052,11 +1052,11 @@ j_UnequipAllItemsIfNotCursed:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_sub_9146:
+j_GetItemInventoryLocation:
                 
-                jmp     j_sub_9146_0(pc)
+                jmp     GetItemInventoryLocation(pc)
 
-	; End of function j_sub_9146
+	; End of function j_GetItemInventoryLocation
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4121,14 +4121,14 @@ loc_9138:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_sub_9146_0:
+GetItemInventoryLocation:
                 
                 movem.l d2-d3/d6-a0,-(sp)
                 move.w  d1,d3
                 bsr.w   UpdateForce     
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d6
-                subq.w  #1,d6           ; one enemy down ?
+                subq.w  #1,d6
 loc_915A:
                 
                 move.b  (a0)+,d0
@@ -4160,7 +4160,7 @@ loc_918E:
                 movem.l (sp)+,d2-d3/d6-a0
                 rts
 
-	; End of function j_sub_9146_0
+	; End of function GetItemInventoryLocation
 
 
 ; =============== S U B R O U T I N E =======================================

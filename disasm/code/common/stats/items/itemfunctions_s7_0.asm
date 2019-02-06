@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F48A:
+GetMandatoryItem:
                 
                 movem.l d1-d5/a0,-(sp)
                 move.w  d0,d4
@@ -29,7 +29,7 @@ loc_4F4A2:
                 txt     $D6             ; "Found the {ITEM}, but{N}can't carry it.{N}You must discard something.{W1}"
                 clsTxt
                 movem.w d4,-(sp)
-                bsr.w   sub_4F570
+                bsr.w   DiscardItem
                 movem.w (sp)+,d1
                 move.w  d0,(TEXT_NAME_INDEX_1).l
                 move.w  d2,(TEXT_NAME_INDEX_2).l
@@ -59,16 +59,16 @@ loc_4F53C:
                 movem.l (sp)+,d1-d5/a0
                 rts
 
-	; End of function sub_4F48A
+	; End of function GetMandatoryItem
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F542:
+RemoveItemFromInventory:
                 
                 movem.w d1-d2,-(sp)
                 move.w  d0,d1
-                jsr     j_sub_9146
+                jsr     j_GetItemInventoryLocation
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_4F56A
                 jsr     j_RemoveItemBySlot
@@ -81,12 +81,12 @@ loc_4F56A:
                 movem.w (sp)+,d1-d2
                 rts
 
-	; End of function sub_4F542
+	; End of function RemoveItemFromInventory
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F570:
+DiscardItem:
                 
                 movem.l d7-a1,-(sp)
                 link    a6,#-$C
@@ -190,5 +190,5 @@ loc_4F6CE:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function sub_4F570
+	; End of function DiscardItem
 

@@ -17,7 +17,7 @@ ms_map38_EntityEvents:
                 msEntityEvent 140, UP, Map38_EntityEvent12-ms_map38_EntityEvents
                 msEntityEvent 141, UP, Map38_EntityEvent13-ms_map38_EntityEvents
                 msEntityEvent 26, UP, Map38_EntityEvent14-ms_map38_EntityEvents
-                msDefaultEntityEvent 0, nullsub_141-ms_map38_EntityEvents
+                msDefaultEntityEvent Map38_DefaultEntityEvent-ms_map38_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -130,17 +130,17 @@ Map38_EntityEvent8:
 Map38_EntityEvent9:
                 
                  
-                chkFlg  $38E            ; set after the initial scene on entering Roft (where the guy thinks you're Galam)
+                chkFlg  $38E            ; Set after the initial scene on entering Roft (where the guy thinks you're Galam)
                 beq.s   return_5DC54
-                chkFlg  $102            ; Temporary map setup flag 02
+                chkFlg  $102            ; TEMP FLAG #02
                 beq.s   byte_5DC34      
-                chkFlg  $38F            ; set after the Petro death scene in Roft
+                chkFlg  $38F            ; Set after the Petro death scene in Roft
                 beq.s   loc_5DC32
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   byte_5DC2E      
                 txt     $871            ; "(Sob...sob...){N}He's gone....{W2}"
                 txt     $872            ; "We never had a chance to fly{N}in the Nazca Ship!{W1}"
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
                 bra.s   loc_5DC32
 byte_5DC2E:
                 
@@ -150,13 +150,13 @@ loc_5DC32:
                 bra.s   return_5DC54
 byte_5DC34:
                 
-                chkFlg  $38F            ; set after the Petro death scene in Roft
+                chkFlg  $38F            ; Set after the Petro death scene in Roft
                 beq.s   return_5DC54
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   byte_5DC50      
                 txt     $875            ; "The Nazca Ship crashed?{W1}"
                 txt     $876            ; "I hope Petro gets on the{N}Nazca Ship in the great{N}beyond.{W1}"
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
                 bra.w   return_5DC54
 byte_5DC50:
                 
@@ -173,17 +173,17 @@ return_5DC54:
 Map38_EntityEvent10:
                 
                  
-                chkFlg  $38E            ; set after the initial scene on entering Roft (where the guy thinks you're Galam)
+                chkFlg  $38E            ; Set after the initial scene on entering Roft (where the guy thinks you're Galam)
                 beq.s   return_5DCA2
-                chkFlg  $102            ; Temporary map setup flag 02
+                chkFlg  $102            ; TEMP FLAG #02
                 beq.s   byte_5DC82      
-                chkFlg  $38F            ; set after the Petro death scene in Roft
+                chkFlg  $38F            ; Set after the Petro death scene in Roft
                 beq.s   loc_5DC80
-                chkFlg  $101            ; Temporary map setup flag 01
+                chkFlg  $101            ; TEMP FLAG #01
                 bne.s   byte_5DC7C      
                 txt     $873            ; "The devils killed Petro.{N}They lied to us!{W2}"
                 txt     $874            ; "How cruel they are!{W1}"
-                setFlg  $101            ; Temporary map setup flag 01
+                setFlg  $101            ; TEMP FLAG #01
                 bra.s   loc_5DC80
 byte_5DC7C:
                 
@@ -193,13 +193,13 @@ loc_5DC80:
                 bra.s   return_5DCA2
 byte_5DC82:
                 
-                chkFlg  $38F            ; set after the Petro death scene in Roft
+                chkFlg  $38F            ; Set after the Petro death scene in Roft
                 beq.s   return_5DCA2
-                chkFlg  $101            ; Temporary map setup flag 01
+                chkFlg  $101            ; TEMP FLAG #01
                 bne.s   byte_5DC9E      
                 txt     $877            ; "The devils lied, and then{N}killed Petro.{W2}"
                 txt     $878            ; "Please defeat the devils for{N}him!{W1}"
-                setFlg  $101            ; Temporary map setup flag 01
+                setFlg  $101            ; TEMP FLAG #01
                 bra.w   return_5DCA2
 byte_5DC9E:
                 
@@ -256,9 +256,9 @@ Map38_EntityEvent14:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_141:
+Map38_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_141
+	; End of function Map38_DefaultEntityEvent
 

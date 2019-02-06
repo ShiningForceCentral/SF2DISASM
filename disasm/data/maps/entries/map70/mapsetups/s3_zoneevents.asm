@@ -6,7 +6,7 @@ ms_map70_ZoneEvents:
                 msZoneEvent 17, 255, Map70_ZoneEvent0-ms_map70_ZoneEvents
                 msZoneEvent 18, 255, Map70_ZoneEvent0-ms_map70_ZoneEvents
                 msZoneEvent 19, 255, Map70_ZoneEvent0-ms_map70_ZoneEvents
-                msDefaultZoneEvent 0, sub_4FE1E-ms_map70_ZoneEvents
+                msDefaultZoneEvent Map70_DefaultZoneEvent-ms_map70_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -21,7 +21,7 @@ Map70_ZoneEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FE1E:
+Map70_DefaultZoneEvent:
                 
                  
                 chkFlg  $1FE            ; Battle 10 completed
@@ -32,5 +32,5 @@ return_4FE30:
                 
                 rts
 
-	; End of function sub_4FE1E
+	; End of function Map70_DefaultZoneEvent
 

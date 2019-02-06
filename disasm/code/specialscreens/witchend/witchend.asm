@@ -200,7 +200,7 @@ sub_27C64:
 
 VInt_FallingJewels:
                 
-                subq.w  #1,(word_FFD500).l
+                subq.w  #1,(dword_FFD500).l
                 jsr     (StoreVdpCommandsbis).w
                 jsr     (Set_FFDE94_bit3).w
                 rts
@@ -283,7 +283,7 @@ loc_27D6A:
                 lea     ($E000).l,a1
                 move.w  #$200,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
 loc_27D8A:
                 

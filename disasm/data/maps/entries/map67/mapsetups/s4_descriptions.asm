@@ -22,7 +22,7 @@ Map67_DescFunc0:
                 
                  
                 txt     $1A8            ; "{NAME} investigated.{W2}{CLEAR}"
-                chkFlg  $2EF            ; set after Elric opens the passage to Devil's Tail
+                chkFlg  $2EF            ; Set after Elric opens the passage to Devil's Tail
                 bne.s   byte_4FD3C      
                 txt     $A1E            ; "There's a wobbly rock.{W1}"
                 clsTxt

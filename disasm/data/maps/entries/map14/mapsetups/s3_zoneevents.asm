@@ -3,7 +3,7 @@
 ; 0x58E48..0x58EBA : 
 ms_map14_ZoneEvents:
                 msZoneEvent 45, 5, Map14_ZoneEvent0-ms_map14_ZoneEvents
-                msDefaultZoneEvent 0, return_58E5A-ms_map14_ZoneEvents
+                msDefaultZoneEvent Map14_DefaultZoneEvent-ms_map14_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -11,8 +11,8 @@ Map14_ZoneEvent0:
                 
                  
                 script  cs_58E5C
-                setFlg  $101            ; Temporary map setup flag 01
-return_58E5A:
+                setFlg  $101            ; TEMP FLAG #01
+Map14_DefaultZoneEvent:
                 
                 rts
 

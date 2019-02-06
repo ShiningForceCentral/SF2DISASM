@@ -52,14 +52,14 @@ InitRamVdpData:
                 move.b  d0,(CTRL1_BIS).l
                 move.b  d0,(CTRL2).l
                 move.b  d0,(CTRL3_BIS).l
-                lea     (word_FFD100).l,a0
+                lea     (dword_FFD100).l,a0
                 move.w  #$FF,d0
 loc_276:
                 
                 move.w  #0,(a0)+        ; clear from FFD100 to FFD500
                 move.w  #0,(a0)+
                 dbf     d0,loc_276      
-                lea     (word_FFD500).l,a0
+                lea     (dword_FFD500).l,a0
                 move.w  #$13,d0
 loc_28C:
                 

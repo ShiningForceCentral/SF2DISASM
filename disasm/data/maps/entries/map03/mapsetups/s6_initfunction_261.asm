@@ -44,7 +44,7 @@ cs_51406:       textCursor $217
                 nextSingleText $0,$1    ; "Great!{N}Let's go right now!{N}Hurry!{W1}"
                 setFacing $2,LEFT
                 nextSingleText $0,$2    ; "What?  {LEADER}, are you{N}going?  I'm going too!{W1}"
-                setF $258               ; set after agreeing to try getting into the castle
+                setF $258               ; Set after agreeing to try getting into the castle
                 setF $42                ; Sarah + Chester are followers
                 join $80
                 followEntity $1,$0,$2
@@ -189,7 +189,7 @@ cs_51614:       textCursor $217
                 nextSingleText $0,$1    ; "Great!{N}Let's go right now!{N}Hurry!{W1}"
                 setFacing $2,LEFT
                 nextSingleText $0,$2    ; "What?  {LEADER}, are you{N}going?  I'm going too!{W1}"
-                setF $258               ; set after agreeing to try getting into the castle
+                setF $258               ; Set after agreeing to try getting into the castle
                 setF $42                ; Sarah + Chester are followers
                 join $80
                 followEntity $1,$0,$2

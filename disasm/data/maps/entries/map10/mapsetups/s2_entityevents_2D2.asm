@@ -29,14 +29,14 @@ ms_map10_flag2D2_EntityEvents:
                 msEntityEvent 152, DOWN, Map10_2D2_EntityEvent24-ms_map10_flag2D2_EntityEvents
                 msEntityEvent 153, DOWN, Map10_2D2_EntityEvent25-ms_map10_flag2D2_EntityEvents
                 msEntityEvent 10, DOWN, Map10_2D2_EntityEvent26-ms_map10_flag2D2_EntityEvents
-                msDefaultEntityEvent 0, (entevdft_56E9A-ms_map10_flag2D2_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map10_DefaultEntityEvent-ms_map10_flag2D2_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
 Map10_2D2_EntityEvent19:
                 
                  
-                chkFlg  $31F            ; set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
+                chkFlg  $31F            ; Set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
                 bne.s   byte_56F3A      
                 txt     $643            ; "God Volcanon has forsaken{N}the people of the Earth.{W2}"
                 txt     $644            ; "Are you going to kill Zeon{N}as he demanded?{W1}"
@@ -44,7 +44,7 @@ Map10_2D2_EntityEvent19:
                 tst.w   d0
                 bne.s   byte_56F30      
                 script  cs_5797A
-                setFlg  $31F            ; set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
+                setFlg  $31F            ; Set after you agree to kill Zeon in Bedoe (King's yes/no dialog)
                 bra.s   loc_56F38
 byte_56F30:
                 
@@ -116,10 +116,10 @@ Map10_2D2_EntityEvent24:
 Map10_2D2_EntityEvent25:
                 
                  
-                chkFlg  $2D3            ; set after the hatchling in Bedoe shows you he can almost fly
+                chkFlg  $2D3            ; Set after the hatchling in Bedoe shows you he can almost fly
                 bne.s   byte_56F7A      
                 script  cs_5766C
-                setFlg  $2D3            ; set after the hatchling in Bedoe shows you he can almost fly
+                setFlg  $2D3            ; Set after the hatchling in Bedoe shows you he can almost fly
                 bra.s   return_56F7E
 byte_56F7A:
                 

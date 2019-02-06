@@ -464,7 +464,7 @@ loc_20FE6:
                 
                 move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP_INDEX-$1000000)).w
                 move.w  ((SAVE_SLOT_INDEX-$1000000)).w,d0
-                setFlg  $18F            ; set after first battle's cutscene OR first save? Checked at witch screens
+                setFlg  $18F            ; Set after first battle's cutscene OR first save? Checked at witch screens
                                 enableSram
                 jsr     (SaveGame).w
                 disableSram
@@ -722,7 +722,7 @@ loc_2126C:
                 clr.w   d1
                 move.b  ((ENTITY_FACING-$1000000)).w,d1
                 moveq   #$FFFFFFFF,d2
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
 loc_21278:
                 
                 movem.l (sp)+,d0-d4/a0

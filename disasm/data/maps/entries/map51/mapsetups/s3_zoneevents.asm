@@ -8,17 +8,17 @@ ms_map51_ZoneEvents:
                 msZoneEvent 9, 9, Map51_ZoneEvent0-ms_map51_ZoneEvents
                 msZoneEvent 9, 24, Map51_ZoneEvent4-ms_map51_ZoneEvents
                 msZoneEvent 10, 24, Map51_ZoneEvent4-ms_map51_ZoneEvents
-                msDefaultZoneEvent 0, return_5C310-ms_map51_ZoneEvents
+                msDefaultZoneEvent Map51_DefaultZoneEvent-ms_map51_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map51_ZoneEvent0:
                 
                  
-                chkFlg  $1D6            ; set after you approach the pond to rescue Elric at the Harpy Pond
+                chkFlg  $1D6            ; Set after you approach the pond to rescue Elric at the Harpy Pond
                 bne.s   return_5C302
                 script  cs_5C312
-                setFlg  $1D6            ; set after you approach the pond to rescue Elric at the Harpy Pond
+                setFlg  $1D6            ; Set after you approach the pond to rescue Elric at the Harpy Pond
 return_5C302:
                 
                 rts
@@ -31,10 +31,10 @@ return_5C302:
 Map51_ZoneEvent4:
                 
                  
-                chkFlg  $1D6            ; set after you approach the pond to rescue Elric at the Harpy Pond
-                bne.s   return_5C310
+                chkFlg  $1D6            ; Set after you approach the pond to rescue Elric at the Harpy Pond
+                bne.s   Map51_DefaultZoneEvent
                 script  cs_5C3AA
-return_5C310:
+Map51_DefaultZoneEvent:
                 
                 rts
 

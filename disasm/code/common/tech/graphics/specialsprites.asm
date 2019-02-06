@@ -111,7 +111,7 @@ loc_25CD2:
                 lea     ($AF00).l,a1
                 move.w  #$480,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
                 movem.l (sp)+,d0-d2/a0-a1
                 rts

@@ -5,17 +5,17 @@ ms_map17_ZoneEvents:
                 msZoneEvent 53, 5, Map17_ZoneEvent0-ms_map17_ZoneEvents
                 msZoneEvent 43, 9, Map17_ZoneEvent1-ms_map17_ZoneEvents
                 msZoneEvent 57, 5, Map17_ZoneEvent2-ms_map17_ZoneEvents
-                msDefaultZoneEvent 0, nullsub_79-ms_map17_ZoneEvents
+                msDefaultZoneEvent Map17_DefaultZoneEvent-ms_map17_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map17_ZoneEvent0:
                 
                  
-                chkFlg  $295            ; set after prison scene, ending in Slade unlocking/Sarah accusing
+                chkFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
                 bne.s   return_52404
                 script  cs_52530
-                setFlg  $295            ; set after prison scene, ending in Slade unlocking/Sarah accusing
+                setFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
 return_52404:
                 
                 rts
@@ -28,11 +28,11 @@ return_52404:
 Map17_ZoneEvent1:
                 
                  
-                chkFlg  $296            ; set after you try to go upstairs, and Slade opens the secret tunnel
+                chkFlg  $296            ; Set after you try to go upstairs, and Slade opens the secret tunnel
                 bne.s   byte_5241E      
                 script  cs_528D4
                 script  cs_528CA
-                setFlg  $296            ; set after you try to go upstairs, and Slade opens the secret tunnel
+                setFlg  $296            ; Set after you try to go upstairs, and Slade opens the secret tunnel
                 bra.s   return_5242C
 byte_5241E:
                 
@@ -51,7 +51,7 @@ return_5242C:
 Map17_ZoneEvent2:
                 
                  
-                chkFlg  $296            ; set after you try to go upstairs, and Slade opens the secret tunnel
+                chkFlg  $296            ; Set after you try to go upstairs, and Slade opens the secret tunnel
                 beq.s   return_5243E
                 script  cs_52938
                 setFlg  $49             ; Slade is a follower
@@ -64,9 +64,9 @@ return_5243E:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_79:
+Map17_DefaultZoneEvent:
                 
                 rts
 
-	; End of function nullsub_79
+	; End of function Map17_DefaultZoneEvent
 

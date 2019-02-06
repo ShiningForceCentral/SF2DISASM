@@ -4,15 +4,15 @@
 ms_map38_ZoneEvents:
                 msZoneEvent 12, 6, Map38_ZoneEvent0-ms_map38_ZoneEvents
                 msZoneEvent 12, 8, Map38_ZoneEvent1-ms_map38_ZoneEvents
-                msDefaultZoneEvent 0, nullsub_97-ms_map38_ZoneEvents
+                msDefaultZoneEvent Map38_DefaultZoneEvent-ms_map38_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_97:
+Map38_DefaultZoneEvent:
                 
                 rts
 
-	; End of function nullsub_97
+	; End of function Map38_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -20,10 +20,10 @@ nullsub_97:
 Map38_ZoneEvent0:
                 
                  
-                chkFlg  $38F            ; set after the Petro death scene in Roft
+                chkFlg  $38F            ; Set after the Petro death scene in Roft
                 bne.s   return_5DCEE
                 script  cs_5DE2E
-                setFlg  $38F            ; set after the Petro death scene in Roft
+                setFlg  $38F            ; Set after the Petro death scene in Roft
 return_5DCEE:
                 
                 rts
@@ -36,7 +36,7 @@ return_5DCEE:
 Map38_ZoneEvent1:
                 
                  
-                chkFlg  $38F            ; set after the Petro death scene in Roft
+                chkFlg  $38F            ; Set after the Petro death scene in Roft
                 beq.s   return_5DD24
                 chkFlg  $4C             ; Zynk is a follower
                 beq.s   byte_5DD08      
@@ -45,11 +45,11 @@ Map38_ZoneEvent1:
                 bra.s   return_5DD24
 byte_5DD08:
                 
-                chkFlg  $399            ; set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
+                chkFlg  $399            ; Set after Zynk leaves you at the Galam Drawbridge (for Roft/Petro death scene)
                 beq.s   return_5DD24
                 chkFlg  $1A             ; Zynk joined
                 bne.s   return_5DD24
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 beq.s   return_5DD24
                 script  cs_5DE76
                 clrFlg  $4C             ; Zynk is a follower

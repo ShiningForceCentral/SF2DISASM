@@ -2,15 +2,15 @@
 ; ASM FILE data\maps\entries\map14\mapsetups\s5_itemevents.asm :
 ; 0x58F9C..0x592E0 : 
 ms_map14_Section5:
-                msDefaultItemEvent nullsub_178-ms_map14_Section5
+                msDefaultItemEvent Map14_DefaultItemEvent0-ms_map14_Section5
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_178:
+Map14_DefaultItemEvent0:
                 
                 rts
 
-	; End of function nullsub_178
+	; End of function Map14_DefaultItemEvent0
 
 cs_58FA4:       textCursor $8D6
                 reloadMap 8,7

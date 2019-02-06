@@ -5,7 +5,7 @@ ms_map69_ZoneEvents:
                 msZoneEvent 23, 255, Map69_ZoneEvent0-ms_map69_ZoneEvents
                 msZoneEvent 24, 255, Map69_ZoneEvent0-ms_map69_ZoneEvents
                 msZoneEvent 25, 255, Map69_ZoneEvent0-ms_map69_ZoneEvents
-                msDefaultZoneEvent 0, sub_4FDBE-ms_map69_ZoneEvents
+                msDefaultZoneEvent Map69_DefaultZoneEvent-ms_map69_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -20,7 +20,7 @@ Map69_ZoneEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FDBE:
+Map69_DefaultZoneEvent:
                 
                  
                 chkFlg  $1FD            ; Battle 9 completed
@@ -31,5 +31,5 @@ return_4FDD0:
                 
                 rts
 
-	; End of function sub_4FDBE
+	; End of function Map69_DefaultZoneEvent
 

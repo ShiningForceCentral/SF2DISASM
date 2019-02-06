@@ -10,7 +10,7 @@ ms_map25_EntityEvents:
                 msEntityEvent 133, UP, Map25_EntityEvent5-ms_map25_EntityEvents
                 msEntityEvent 134, UP, Map25_EntityEvent6-ms_map25_EntityEvents
                 msEntityEvent 135, DOWN, Map25_EntityEvent7-ms_map25_EntityEvents
-                msDefaultEntityEvent 0, nullsub_132-ms_map25_EntityEvents
+                msDefaultEntityEvent Map25_DefaultEntityEvent-ms_map25_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -77,7 +77,7 @@ Map25_EntityEvent4:
 Map25_EntityEvent5:
                 
                  
-                chkFlg  $320            ; set after the merchant in Ketto runs to his store
+                chkFlg  $320            ; Set after the merchant in Ketto runs to his store
                 bne.s   loc_5D2C4
                 move.b  ((MESSAGE_SPEED-$1000000)).w,d0
                 movem.l d0,-(sp)
@@ -91,7 +91,7 @@ Map25_EntityEvent5:
                 txt     $7B1            ; "Do you want to buy one?{N}Oh, you do?!  OK, come to my{N}shop!{W1}"
                 movem.l (sp)+,d0
                 move.b  d0,((MESSAGE_SPEED-$1000000)).w
-                setFlg  $320            ; set after the merchant in Ketto runs to his store
+                setFlg  $320            ; Set after the merchant in Ketto runs to his store
                 script  cs_5D3B8
                 bra.s   return_5D2D0
 loc_5D2C4:
@@ -110,10 +110,10 @@ return_5D2D0:
 Map25_EntityEvent6:
                 
                  
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   loc_5D2E0
                 txt     $7B3            ; "Sorry, I can't open my{N}church for you.{N}Please understand.{W1}"
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
 loc_5D2E0:
                 
                 jsr     j_ChurchActions
@@ -136,9 +136,9 @@ nullsub_131:
 Map25_EntityEvent7:
                 
                  
-                chkFlg  $320            ; set after the merchant in Ketto runs to his store
+                chkFlg  $320            ; Set after the merchant in Ketto runs to his store
                 bne.s   loc_5D32A
-                chkFlg  $101            ; Temporary map setup flag 01
+                chkFlg  $101            ; TEMP FLAG #01
                 bne.s   byte_5D324      
                 txt     $7B4            ; "Hey, listen to me.{W1}"
                 jsr     j_YesNoPrompt
@@ -155,7 +155,7 @@ byte_5D316:
                 txt     $7B9            ; "I don't want to bother you.{W1}"
 byte_5D31E:
                 
-                setFlg  $101            ; Temporary map setup flag 01
+                setFlg  $101            ; TEMP FLAG #01
                 bra.s   loc_5D328
 byte_5D324:
                 
@@ -176,9 +176,9 @@ return_5D336:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_132:
+Map25_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_132
+	; End of function Map25_DefaultEntityEvent
 

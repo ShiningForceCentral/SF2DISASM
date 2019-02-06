@@ -49,7 +49,7 @@ loc_4450A:
                 adda.w  d6,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 movem.l (sp)+,a0-a1
                 movem.l (sp)+,d0-d7
@@ -137,7 +137,7 @@ loc_445A0:
                 move.w  d3,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
                 movem.l (sp)+,d0-a0
                 rts
 
@@ -170,7 +170,7 @@ DeclareNewEntity:
                 move.b  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 tst.l   d5
                 bpl.s   loc_4463C
-                move.l  (dword_FFB1A0).l,-(sp)
+                move.l  (ENTITY_WALKING_PARAMS).l,-(sp)
                 movem.l d0-d4,-(sp)
                 move.w  d5,d2
                 move.b  d5,d3
@@ -233,7 +233,7 @@ loc_44688:
                 
                 clr.l   (a0)+
                 dbf     d7,loc_44688
-                move.l  #FF5600_LOADING_SPACE,(dword_FFB1A0).l
+                move.l  #FF5600_LOADING_SPACE,(ENTITY_WALKING_PARAMS).l
                 jsr     (sub_19B0).w
                 movem.l (sp)+,d7-a0
                 rts

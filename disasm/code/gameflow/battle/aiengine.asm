@@ -155,7 +155,7 @@ loc_E06A:
                 bne.s   loc_E076
 loc_E070:
                 
-                jsr     sub_1AC030
+                jsr     sub_1AC030      
 loc_E076:
                 
                 move.w  d5,d1
@@ -230,7 +230,7 @@ HandleLineAttackerAI:
                 move.w  d0,d7
                 bsr.w   MakeTargetListAllies
                 move.w  d7,d0
-                jsr     sub_1AC05C
+                jsr     sub_1AC05C      
                 lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
                 move.w  (a0),d0
                 tst.w   d0
@@ -274,7 +274,7 @@ HandleExploderAI:
                 tst.w   d0
                 beq.s   loc_E190
                 move.w  #6,d6
-                jsr     j_randomLessThanD6
+                jsr     j_randomUnderD6
                 cmpi.b  #4,d7
                 bne.s   loc_E190
                 lea     (BATTLESCENE_ACTION_TYPE).l,a0
@@ -1273,7 +1273,7 @@ loc_EA78:
                 
                 jsr     j_clearTerrainListObstructions
                 move.b  -1(a6),d0
-                jsr     sub_1AC028
+                jsr     sub_1AC028      
                 move.b  -1(a6),d0
                 clr.w   d1
                 bsr.w   sub_E78C
@@ -1329,7 +1329,7 @@ loc_EB10:
                 
                 jsr     j_clearTerrainListObstructions
                 move.b  -1(a6),d0
-                jsr     sub_1AC028
+                jsr     sub_1AC028      
                 move.b  -1(a6),d0
                 clr.w   d1
                 bsr.w   sub_E78C
@@ -1373,7 +1373,7 @@ loc_EB90:
                 
                 cmpi.w  #2,d2
                 bne.s   loc_EB9C
-                jsr     sub_1AC030
+                jsr     sub_1AC030      
 loc_EB9C:
                 
                 unlk    a6
@@ -1710,7 +1710,7 @@ loc_EEC2:
 loc_EEC6:
                 
                 move.b  #2,d6
-                jsr     j_randomLessThanD6
+                jsr     j_randomUnderD6
                 cmpi.b  #1,d7
                 bne.s   loc_EEDC
                 bra.w   loc_EF14
@@ -2051,7 +2051,7 @@ loc_F1F2:
                 
                 cmpi.b  #2,d1
                 bne.s   loc_F1FE
-                jsr     sub_1AC030
+                jsr     sub_1AC030      
 loc_F1FE:
                 
                 bsr.w   GetMoveInfo     
@@ -2337,7 +2337,7 @@ loc_F48C:
                 cmpi.b  #2,d1
                 bne.s   loc_F49A
                 move.b  d7,d0
-                jsr     sub_1AC030
+                jsr     sub_1AC030      
 loc_F49A:
                 
                 move.w  d7,d0
@@ -2395,7 +2395,7 @@ sub_F522:
                 link    a6,#-4
                 move.b  d0,-3(a6)
                 move.w  #8,d6
-                jsr     j_randomLessThanD6
+                jsr     j_randomUnderD6
                 cmpi.b  #2,d7
                 bne.s   loc_F554
                 lea     (BATTLESCENE_ACTION_TYPE).l,a2
@@ -2468,7 +2468,7 @@ loc_F5DE:
                 bne.s   loc_F62A
                 clr.w   d6
                 move.w  #2,d6
-                jsr     j_randomLessThanD6
+                jsr     j_randomUnderD6
                 tst.b   d7
                 bne.s   loc_F624
                 move.b  #4,d1
@@ -2571,7 +2571,7 @@ loc_F6FA:
                 dbf     d4,loc_F6F2
                 move.w  d7,d5
                 move.w  d0,d6
-                jsr     j_randomLessThanD6
+                jsr     j_randomUnderD6
                 clr.l   d4
                 move.b  -4(a6),d4
                 subi.w  #1,d4

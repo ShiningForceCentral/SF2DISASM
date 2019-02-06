@@ -17,7 +17,7 @@ rbcs_battle32:  textCursor $B21
                 setFacing $17,DOWN
                 nextSingleText $0,$17   ; "Hey, Granseal guys!{N}I'm on your side from now{N}on! OK?{W1}"
                 joinForceAI $17,$FFFF   ; 0054 JOIN FORCE WITH AI
-                setF $182               ; set during battle 32, after Jaro switches sides
+                setF $182               ; Set during battle 32, after Jaro switches sides
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================

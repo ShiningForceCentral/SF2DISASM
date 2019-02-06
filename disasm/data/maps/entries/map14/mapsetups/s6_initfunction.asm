@@ -7,10 +7,10 @@
 ms_map14_InitFunction:
                 
                  
-                chkFlg  $2BF            ; set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
+                chkFlg  $2BF            ; Set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
                 bne.s   return_58F28
                 script  cs_58FA4
-                setFlg  $2BF            ; set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
+                setFlg  $2BF            ; Set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
                 move.b  #$E,((EGRESS_MAP_INDEX-$1000000)).w
 return_58F28:
                 

@@ -7,4 +7,4 @@ ms_map44_flag261_EntityEvents:
                 msEntityEvent 130, RIGHT, Map44_261_EntityEvent2-ms_map44_flag261_EntityEvents
                 msEntityEvent 131, UP, Map44_261_EntityEvent3-ms_map44_flag261_EntityEvents
                 msEntityEvent 132, UP, Map44_261_EntityEvent4-ms_map44_flag261_EntityEvents
-                msDefaultEntityEvent 0, nullsub_146-ms_map44_flag261_EntityEvents
+                msDefaultEntityEvent Map44_DefaultEntityEvent-ms_map44_flag261_EntityEvents

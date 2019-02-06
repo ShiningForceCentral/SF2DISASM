@@ -47,8 +47,8 @@ j_ExecuteAfterBattleCutscene:
                 jmp     ExecuteAfterBattleCutscene(pc)
 j_ApplyPositionsAfterEnemyLeaderDies:                
                 jmp     ApplyPositionsAfterEnemyLeaderDies(pc)
-j_ExecuteBattleCutscene_Region:                
-                jmp     ExecuteBattleCutscene_Region(pc)
+j_ExecuteBattleRegionCutscene:                
+                jmp     ExecuteBattleRegionCutscene(pc)
 j_LaunchFading:                
                 jmp     LaunchFading(pc)
 sub_4405C:                

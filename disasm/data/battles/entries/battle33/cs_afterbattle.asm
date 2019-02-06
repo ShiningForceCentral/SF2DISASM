@@ -159,7 +159,7 @@ abcs_battle33:  textCursor $B3C
                 nextSingleText $0,$1F   ; "{NAME;26} knows where{N}they're hiding.{W1}"
                 followEntity $1F,$0,$2
                 followEntity $7,$1F,$2
-                setF $341               ; set after the scene after you win the battle in Moun plays out
+                setF $341               ; Set after the scene after you win the battle in Moun plays out
                 csc_end
 ce_4D322:       mainEntity 11,11,UP
                 entity 13,11,UP,7,eas_Init

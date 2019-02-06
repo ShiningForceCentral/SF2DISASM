@@ -11,7 +11,7 @@ ms_map3_ZoneEvents:
                 msZoneEvent 4, 4, Map3_ZoneEvent6-ms_map3_ZoneEvents
                 msZoneEvent 58, 13, Map3_ZoneEvent7-ms_map3_ZoneEvents
                 msZoneEvent 43, 10, Map3_ZoneEvent8-ms_map3_ZoneEvents
-                msDefaultZoneEvent 0, return_50EE8-ms_map3_ZoneEvents
+                msDefaultZoneEvent Map3_DefaultZoneEvent-ms_map3_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -19,7 +19,7 @@ Map3_ZoneEvent0:
                 
                  
                 script  cs_51444
-                chkFlg  $101            ; Temporary map setup flag 01
+                chkFlg  $101            ; TEMP FLAG #01
                 bne.s   byte_50DA6      
                 jsr     (WaitForCameraToCatchUp).l
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
@@ -31,7 +31,7 @@ Map3_ZoneEvent0:
                 txt     $1F3            ; "There is no school outside!{N}Go to school!{W1}"
 byte_50DA6:
                 
-                setFlg  $101            ; Temporary map setup flag 01
+                setFlg  $101            ; TEMP FLAG #01
                 rts
 
 	; End of function Map3_ZoneEvent0
@@ -42,10 +42,10 @@ byte_50DA6:
 Map3_ZoneEvent1:
                 
                  
-                chkFlg  $258            ; set after agreeing to try getting into the castle
+                chkFlg  $258            ; Set after agreeing to try getting into the castle
                 bne.s   byte_50DE6      
                 script  cs_5144C
-                chkFlg  $102            ; Temporary map setup flag 02
+                chkFlg  $102            ; TEMP FLAG #02
                 bne.s   byte_50DE0      
                 jsr     (WaitForCameraToCatchUp).l
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
@@ -56,14 +56,14 @@ Map3_ZoneEvent1:
                 txt     $1F1            ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 byte_50DE0:
                 
-                setFlg  $102            ; Temporary map setup flag 02
+                setFlg  $102            ; TEMP FLAG #02
                 bra.s   return_50DF6
 byte_50DE6:
                 
-                chkFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
+                chkFlg  $25C            ; Set after the guards have listened to Sarah and allowed you into the castle
                 bne.s   return_50DF6
                 script  cs_51652
-                setFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
+                setFlg  $25C            ; Set after the guards have listened to Sarah and allowed you into the castle
 return_50DF6:
                 
                 rts
@@ -76,10 +76,10 @@ return_50DF6:
 Map3_ZoneEvent4:
                 
                  
-                chkFlg  $258            ; set after agreeing to try getting into the castle
+                chkFlg  $258            ; Set after agreeing to try getting into the castle
                 bne.s   byte_50E32      
                 script  cs_51454
-                chkFlg  $103            ; Temporary map setup flag 03
+                chkFlg  $103            ; TEMP FLAG #03
                 bne.s   byte_50E2C      
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$8B,d0 
@@ -90,14 +90,14 @@ Map3_ZoneEvent4:
                 txt     $1F1            ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 byte_50E2C:
                 
-                setFlg  $103            ; Temporary map setup flag 03
+                setFlg  $103            ; TEMP FLAG #03
                 bra.s   return_50E42
 byte_50E32:
                 
-                chkFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
+                chkFlg  $25C            ; Set after the guards have listened to Sarah and allowed you into the castle
                 bne.s   return_50E42
                 script  cs_51652
-                setFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
+                setFlg  $25C            ; Set after the guards have listened to Sarah and allowed you into the castle
 return_50E42:
                 
                 rts
@@ -110,15 +110,15 @@ return_50E42:
 Map3_ZoneEvent6:
                 
                  
-                chkFlg  $259            ; set after Bowie is intercepted by his mother going downstairs
+                chkFlg  $259            ; Set after Bowie is intercepted by his mother going downstairs
                 bne.s   return_50E64
                 script  cs_5145C
                 move.w  #$80,d0 
                 moveq   #5,d1
                 moveq   #6,d2
                 moveq   #1,d3
-                jsr     sub_47808
-                setFlg  $259            ; set after Bowie is intercepted by his mother going downstairs
+                jsr     MakeEntityWalk
+                setFlg  $259            ; Set after Bowie is intercepted by his mother going downstairs
 return_50E64:
                 
                 rts
@@ -131,9 +131,9 @@ return_50E64:
 Map3_ZoneEvent7:
                 
                  
-                chkFlg  $25B            ; set after the messenger scene
+                chkFlg  $25B            ; Set after the messenger scene
                 bne.s   return_50ED0
-                chkFlg  $25A            ; set after Astral's second basement line
+                chkFlg  $25A            ; Set after Astral's second basement line
                 bne.s   byte_50E96      
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$8E,d0 
@@ -145,7 +145,7 @@ Map3_ZoneEvent7:
                 bra.s   return_50ED0
 byte_50E96:
                 
-                chkFlg  $104            ; Temporary map setup flag 04
+                chkFlg  $104            ; TEMP FLAG #04
                 bne.s   return_50ED0
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$8E,d0 
@@ -157,7 +157,7 @@ byte_50E96:
                 txt     $203            ; "Did you feel something evil,{N}or anything?{W2}"
                 txt     $204            ; "No, nothing?!{N}Perhaps it was just my{N}imagination.  Sorry.{W1}"
                 script  cs_5148C
-                setFlg  $104            ; Temporary map setup flag 04
+                setFlg  $104            ; TEMP FLAG #04
 return_50ED0:
                 
                 rts
@@ -170,13 +170,13 @@ return_50ED0:
 Map3_ZoneEvent8:
                 
                  
-                chkFlg  $25A            ; set after Astral's second basement line
-                beq.s   return_50EE8
-                chkFlg  $25B            ; set after the messenger scene
-                bne.s   return_50EE8
+                chkFlg  $25A            ; Set after Astral's second basement line
+                beq.s   Map3_DefaultZoneEvent
+                chkFlg  $25B            ; Set after the messenger scene
+                bne.s   Map3_DefaultZoneEvent
                 script  cs_5149A
-                setFlg  $25B            ; set after the messenger scene
-return_50EE8:
+                setFlg  $25B            ; Set after the messenger scene
+Map3_DefaultZoneEvent:
                 
                 rts
 

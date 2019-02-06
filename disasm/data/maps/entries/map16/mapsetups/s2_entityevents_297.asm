@@ -21,4 +21,4 @@ ms_map16_flag297_EntityEvents:
                 msEntityEvent 144, UP, Map16_297_EntityEvent16-ms_map16_flag297_EntityEvents
                 msEntityEvent 145, UP, Map16_EntityEvent0-ms_map16_flag297_EntityEvents
                 msEntityEvent 148, DOWN, Map16_EntityEvent0-ms_map16_flag297_EntityEvents
-                msDefaultEntityEvent 0, nullsub_119-ms_map16_flag297_EntityEvents
+                msDefaultEntityEvent Map16_DefaultEntityEvent-ms_map16_flag297_EntityEvents

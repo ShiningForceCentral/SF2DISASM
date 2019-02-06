@@ -3,15 +3,15 @@
 ; 0x60060..0x60078 : 
 ms_map45_ZoneEvents:
                 msZoneEvent 255, 17, Map45_ZoneEvent0-ms_map45_ZoneEvents
-                msDefaultZoneEvent 0, nullsub_103-ms_map45_ZoneEvents
+                msDefaultZoneEvent Map45_DefaultZoneEvent-ms_map45_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_103:
+Map45_DefaultZoneEvent:
                 
                 rts
 
-	; End of function nullsub_103
+	; End of function Map45_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================

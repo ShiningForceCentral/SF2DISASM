@@ -3,15 +3,15 @@
 ; 0x5D556..0x5D574 : 
 ms_map31_flag33E_ZoneEvents:
                 msZoneEvent 5, 2, Map31_33E_ZoneEvent0-ms_map31_flag33E_ZoneEvents
-                msDefaultZoneEvent 0, nullsub_93-ms_map31_flag33E_ZoneEvents
+                msDefaultZoneEvent Map31_DefaultZoneEvent-ms_map31_flag33E_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_93:
+Map31_DefaultZoneEvent:
                 
                 rts
 
-	; End of function nullsub_93
+	; End of function Map31_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -19,10 +19,10 @@ nullsub_93:
 Map31_33E_ZoneEvent0:
                 
                  
-                chkFlg  $342            ; set after making the Arm of Golem appear in Moun
+                chkFlg  $342            ; Set after making the Arm of Golem appear in Moun
                 bne.s   return_5D570
                 script  cs_5D644
-                setFlg  $342            ; set after making the Arm of Golem appear in Moun
+                setFlg  $342            ; Set after making the Arm of Golem appear in Moun
 return_5D570:
                 
                 rts

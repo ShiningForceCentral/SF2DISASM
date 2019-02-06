@@ -5,7 +5,7 @@ ms_map66_ZoneEvents:
                 msZoneEvent 255, 9, Map66_ZoneEvent0-ms_map66_ZoneEvents
                 msZoneEvent 255, 10, Map66_ZoneEvent0-ms_map66_ZoneEvents
                 msZoneEvent 255, 28, Map66_ZoneEvent2-ms_map66_ZoneEvents
-                msDefaultZoneEvent 0, CheckRandomBattle3-ms_map66_ZoneEvents
+                msDefaultZoneEvent Map66_DefaultZoneEvent-ms_map66_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -45,11 +45,11 @@ return_4FAD2:
 
 ; =============== S U B R O U T I N E =======================================
 
-CheckRandomBattle3:
+Map66_DefaultZoneEvent:
                 
                 move.w  #3,d0           ; flag $1F7 : Battle 3 completed
                 jsr     CheckRandomBattle
                 rts
 
-	; End of function CheckRandomBattle3
+	; End of function Map66_DefaultZoneEvent
 

@@ -80,7 +80,7 @@ bbcs_33:        textCursor $B32
                 executeSubroutine sub_4D078
                 textCursor $B3B
                 nextSingleText $0,$1F   ; "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
-                setF $33F               ; set after Frayja forces his way into the party just before the battle in Moun
+                setF $33F               ; Set after Frayja forces his way into the party just before the battle in Moun
                 clearF $52              ; Frayja is a follower
                 csc_end
 ce_4D048:       mainEntity 26,37,LEFT

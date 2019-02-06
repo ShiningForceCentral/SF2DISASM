@@ -12,7 +12,7 @@ ms_map31_flag33E_EntityEvents:
                 msEntityEvent 135, UP, Map31_33E_EntityEvent7-ms_map31_flag33E_EntityEvents
                 msEntityEvent 136, UP, Map31_33E_EntityEvent8-ms_map31_flag33E_EntityEvents
                 msEntityEvent 138, UP, Map31_33E_EntityEvent9-ms_map31_flag33E_EntityEvents
-                msDefaultEntityEvent 0, nullsub_137-ms_map31_flag33E_EntityEvents
+                msDefaultEntityEvent Map31_DefaultEntityEvent-ms_map31_flag33E_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -119,9 +119,9 @@ Map31_33E_EntityEvent7:
 Map31_33E_EntityEvent8:
                 
                  
-                chkFlg  $340            ; set after talking to the painter in Moun for the first time
+                chkFlg  $340            ; Set after talking to the painter in Moun for the first time
                 bne.s   byte_5D538
-                setFlg  $340            ; set after talking to the painter in Moun for the first time
+                setFlg  $340            ; Set after talking to the painter in Moun for the first time
                 script  cs_5D652
                 bra.s   return_5D53E
 byte_5D538:
@@ -156,9 +156,9 @@ Map31_33E_EntityEvent9:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_137:
+Map31_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_137
+	; End of function Map31_DefaultEntityEvent
 

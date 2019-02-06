@@ -4,4 +4,4 @@
 ms_map44_EntityEvents:
                 msEntityEvent 128, UP, Map44_EntityEvent0-ms_map44_EntityEvents
                 msEntityEvent 129, UP, Map44_EntityEvent1-ms_map44_EntityEvents
-                msDefaultEntityEvent 0, nullsub_146-ms_map44_EntityEvents
+                msDefaultEntityEvent Map44_DefaultEntityEvent-ms_map44_EntityEvents

@@ -72,14 +72,14 @@ sub_30BE:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 lea     (byte_FFE000).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
 loc_30E6:
                 
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bra.w   SetFFDE94b3andWait
 
 	; End of function sub_30BE
@@ -121,7 +121,7 @@ loc_312C:
                 movea.l a1,a0
                 moveq   #$20,d0 
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
                 movem.w (sp)+,d0-d5/d7
                 movem.l (sp)+,a0-a5
@@ -169,7 +169,7 @@ loc_3196:
                 movea.l a2,a0
                 moveq   #$20,d0 
                 moveq   #$40,d1 
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
                 movem.w (sp)+,d0-d5/d7
                 movem.l (sp)+,a0-a5

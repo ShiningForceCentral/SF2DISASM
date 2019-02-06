@@ -6,7 +6,7 @@
 
 ; executes cutscenes activated by regions
 
-ExecuteBattleCutscene_Region:
+ExecuteBattleRegionCutscene:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     loc_47EC0(pc), a0
@@ -35,5 +35,5 @@ loc_47EC2:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function ExecuteBattleCutscene_Region
+	; End of function ExecuteBattleRegionCutscene
 

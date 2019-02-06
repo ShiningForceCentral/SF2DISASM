@@ -21,6 +21,3 @@ ExecuteAfterBattleCutscene:
                 bsr.w   ExecuteMapScript
                 movem.l (sp)+,d0/a0
                 bra.w   loc_47D54
-
-	; End of function ExecuteAfterBattleCutscene
-

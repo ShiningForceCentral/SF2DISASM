@@ -22,10 +22,10 @@ byte_5F41E:     msDescFunctionD6 6, 7, $FF, Map41_DescFunc0-byte_5F41E
 Map41_DescFunc0:
                 
                  
-                chkFlg  $3A2            ; set after opening Devil's Head with the Force Sword
+                chkFlg  $3A2            ; Set after opening Devil's Head with the Force Sword
                 bne.s   byte_5F44C      
-                moveq   #$43,d1 
-                jsr     j_sub_9146
+                moveq   #$43,d1 ; force sword
+                jsr     j_GetItemInventoryLocation; check if force sword available in inventory ?
                 cmpi.w  #$FFFF,d0
                 bne.s   byte_5F446      
                 txt     $DB7            ; "A statue of a devil's head.{N}It looks ready to bite you.{W1}"
@@ -52,7 +52,7 @@ return_5F454:
 Map41_DescFunc1:
                 
                  
-                chkFlg  $3A2            ; set after opening Devil's Head with the Force Sword
+                chkFlg  $3A2            ; Set after opening Devil's Head with the Force Sword
                 bne.s   byte_5F462      
                 txt     $DB7            ; "A statue of a devil's head.{N}It looks ready to bite you.{W1}"
                 bra.s   return_5F46A

@@ -6,7 +6,7 @@ ms_map18_EntityEvents:
                 msEntityEvent 129, DOWN, Map18_EntityEvent1-ms_map18_EntityEvents
                 msEntityEvent 130, UP, Map18_EntityEvent2-ms_map18_EntityEvents
                 msEntityEvent 131, DOWN, Map18_EntityEvent3-ms_map18_EntityEvents
-                msDefaultEntityEvent 0, nullsub_122-ms_map18_EntityEvents
+                msDefaultEntityEvent Map18_DefaultEntityEvent-ms_map18_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -66,9 +66,9 @@ Map18_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_122:
+Map18_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_122
+	; End of function Map18_DefaultEntityEvent
 

@@ -807,7 +807,7 @@ loc_26E8:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_26C0
@@ -878,7 +878,7 @@ loc_27AE:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_2786
@@ -949,7 +949,7 @@ loc_2874:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_284C
@@ -1016,7 +1016,7 @@ loc_293A:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_2912

@@ -5,17 +5,17 @@ ms_map19_flag1F5_EntityEvents:
                 msEntityEvent 128, UP, Map19_1F5_EntityEvent0-ms_map19_flag1F5_EntityEvents
                 msEntityEvent 129, DOWN, Map19_1F5_EntityEvent1-ms_map19_flag1F5_EntityEvents
                 msEntityEvent 130, DOWN, Map19_1F5_EntityEvent2-ms_map19_flag1F5_EntityEvents
-                msDefaultEntityEvent 0, (return_52F0A-ms_map19_flag1F5_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map19_DefaultEntityEvent-ms_map19_flag1F5_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
 Map19_1F5_EntityEvent0:
                 
                  
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   byte_52F7E      
                 txt     $249            ; "Well, boy.  Did you hear a{N}strange noise?{W2}"
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
 byte_52F7E:
                 
                 txt     $24A            ; "I don't know why, but{N}everybody ignores my{N}questions....{W1}"

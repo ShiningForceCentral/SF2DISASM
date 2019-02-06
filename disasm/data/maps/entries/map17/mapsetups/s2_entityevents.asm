@@ -14,7 +14,7 @@ ms_map17_EntityEvents:
                 msEntityEvent 1, DOWN, Map17_EntityEvent9-ms_map17_EntityEvents
                 msEntityEvent 4, DOWN, Map17_EntityEvent10-ms_map17_EntityEvents
                 msEntityEvent 5, RIGHT, Map17_EntityEvent11-ms_map17_EntityEvents
-                msDefaultEntityEvent 0, nullsub_120-ms_map17_EntityEvents
+                msDefaultEntityEvent Map17_DefaultEntityEvent-ms_map17_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -30,7 +30,7 @@ Map17_EntityEvent9:
 Map17_EntityEvent7:
                 
                  
-                chkFlg  $295            ; set after prison scene, ending in Slade unlocking/Sarah accusing
+                chkFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
                 bne.s   return_5235C
                 txt     $37D            ; "We're talking about{N}Ground Seal.{N}Please, join in.{W1}"
 return_5235C:
@@ -45,7 +45,7 @@ return_5235C:
 Map17_EntityEvent8:
                 
                  
-                chkFlg  $295            ; set after prison scene, ending in Slade unlocking/Sarah accusing
+                chkFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
                 bne.s   return_52368
                 txt     $380            ; "Hey!  Don't interrupt!{N}Sit down next to me!{W1}"
 return_52368:
@@ -60,7 +60,7 @@ return_52368:
 Map17_EntityEvent10:
                 
                  
-                chkFlg  $295            ; set after prison scene, ending in Slade unlocking/Sarah accusing
+                chkFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
                 bne.s   return_52374
                 txt     $37F            ; "Hey, {LEADER}!{N}King Galam also knows about{N}Ground Seal!{W1}"
 return_52374:
@@ -124,7 +124,7 @@ Map17_EntityEvent2:
 Map17_EntityEvent4:
                 
                  
-                chkFlg  $295            ; set after prison scene, ending in Slade unlocking/Sarah accusing
+                chkFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
                 bne.s   byte_523AE      
                 txt     $37E            ; "You got a raw deal, huh?{N}The same thing happened to{N}the rat next door.{W1}"
                 bra.s   return_523B2
@@ -154,10 +154,10 @@ Map17_EntityEvent5:
 Map17_EntityEvent3:
                 
                  
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   byte_523CC      
                 script  cs_52A3C
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
                 bra.s   return_523D0
 byte_523CC:
                 
@@ -182,11 +182,11 @@ Map17_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_120:
+Map17_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_120
+	; End of function Map17_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================

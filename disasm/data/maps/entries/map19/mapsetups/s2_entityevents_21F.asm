@@ -17,15 +17,15 @@ ms_map19_flag21F_EntityEvents:
                 msEntityEvent 132, UP, Map19_21F_EntityEvent12-ms_map19_flag21F_EntityEvents
                 msEntityEvent 133, RIGHT, Map19_21F_EntityEvent13-ms_map19_flag21F_EntityEvents
                 msEntityEvent 134, RIGHT, Map19_21F_EntityEvent14-ms_map19_flag21F_EntityEvents
-                msDefaultEntityEvent 0, nullsub_124-ms_map19_flag21F_EntityEvents
+                msDefaultEntityEvent Map19_21F_DefaultEntityEvent-ms_map19_flag21F_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_124:
+Map19_21F_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_124
+	; End of function Map19_21F_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================

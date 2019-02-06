@@ -814,17 +814,17 @@ loc_3D40:
 
 sub_3D46:
                 
-                move.l  ((word_FFA808-$1000000)).w,(word_FFD500).l
-                move.l  ((word_FFA804-$1000000)).w,(word_FFD100).l
+                move.l  ((word_FFA808-$1000000)).w,(dword_FFD500).l
+                move.l  ((word_FFA804-$1000000)).w,(dword_FFD100).l
                 move.w  ((QUAKE_AMPLITUDE-$1000000)).w,d6
                 beq.s   loc_3D7E
                 addq.w  #1,d6
                 bsr.w   GetRandomValue
-                add.w   d0,(word_FFD100).l
-                add.w   d0,(byte_FFD102).l
+                add.w   d0,(dword_FFD100).l
+                add.w   d0,(dword_FFD100+2).l
                 bsr.w   GetRandomValue
-                add.w   d0,(word_FFD500).l
-                add.w   d0,(byte_FFD502).l
+                add.w   d0,(dword_FFD500).l
+                add.w   d0,(dword_FFD500+2).l
 loc_3D7E:
                 
                 bsr.w   StoreVdpCommands
@@ -1557,7 +1557,7 @@ loc_435E:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
 loc_439A:
                 
                 movem.w (sp)+,d7
@@ -1592,7 +1592,7 @@ loc_43BE:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 movem.w (sp)+,d7
                 movem.l (sp)+,a0-a1
                 rts

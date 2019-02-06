@@ -7,7 +7,7 @@ ms_map5_flag212_EntityEvents:
                 msEntityEvent 128, DOWN, Map5_212_EntityEvent2-ms_map5_flag212_EntityEvents
                 msEntityEvent 129, DOWN, Map5_212_EntityEvent3-ms_map5_flag212_EntityEvents
                 msEntityEvent 130, RIGHT, Map5_212_EntityEvent4-ms_map5_flag212_EntityEvents
-                msDefaultEntityEvent 0, return_604C6-ms_map5_flag212_EntityEvents
+                msDefaultEntityEvent Map5_212_DefaultEntityEvent-ms_map5_flag212_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -64,11 +64,11 @@ Map5_212_EntityEvent4:
                 clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     $1A7            ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
                 txt     $FF2            ; "A hole.{W1}"
-                bra.s   return_604C6
+                bra.s   Map5_212_DefaultEntityEvent
 byte_60494:
                 
-                chkFlg  $3B1            ; set after recruiting Lemon in Yeel
-                bne.s   return_604C6
+                chkFlg  $3B1            ; Set after recruiting Lemon in Yeel
+                bne.s   Map5_212_DefaultEntityEvent
                 script  cs_6060E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$1C,d0
@@ -77,8 +77,8 @@ byte_60494:
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
                 txt     $D9B            ; "I can't believe it!{N}I want to die, but I can't!{W1}"
-                setFlg  $3B1            ; set after recruiting Lemon in Yeel
-return_604C6:
+                setFlg  $3B1            ; Set after recruiting Lemon in Yeel
+Map5_212_DefaultEntityEvent:
                 
                 rts
 

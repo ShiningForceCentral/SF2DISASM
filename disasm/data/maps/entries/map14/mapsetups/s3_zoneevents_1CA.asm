@@ -3,7 +3,7 @@
 ; 0x58F4C..0x58F9A : 
 ms_map14_flag1CA_ZoneEvents:
                 msZoneEvent 255, 15, Map14_1CA_ZoneEvent0-ms_map14_flag1CA_ZoneEvents
-                msDefaultZoneEvent 0, (return_58E5A-ms_map14_flag1CA_ZoneEvents) & $FFFF
+                msDefaultZoneEvent (Map14_DefaultZoneEvent-ms_map14_flag1CA_ZoneEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

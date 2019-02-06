@@ -9,17 +9,17 @@ ms_map20_EntityEvents:
                 msEntityEvent 133, DOWN, Map20_EntityEvent4-ms_map20_EntityEvents
                 msEntityEvent 134, DOWN, Map20_EntityEvent5-ms_map20_EntityEvents
                 msEntityEvent 135, DOWN, Map20_EntityEvent6-ms_map20_EntityEvents
-                msDefaultEntityEvent 0, return_53814-ms_map20_EntityEvents
+                msDefaultEntityEvent Map20_DefaultEntityEvent-ms_map20_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map20_EntityEvent2:
                 
                  
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   byte_537DA      
                 txt     $23A            ; "Legend regarding the{N}tower?  Mmmm, do I have{N}"
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
 byte_537DA:
                 
                 txt     $23B            ; "to go to school again?{W1}"
@@ -88,15 +88,15 @@ Map20_EntityEvent5:
 Map20_EntityEvent6:
                 
                  
-                chkFlg  $101            ; Temporary map setup flag 01
+                chkFlg  $101            ; TEMP FLAG #01
                 bne.s   byte_53810      
                 script  cs_53816
-                setFlg  $101            ; Temporary map setup flag 01
-                bra.s   return_53814
+                setFlg  $101            ; TEMP FLAG #01
+                bra.s   Map20_DefaultEntityEvent
 byte_53810:
                 
                 txt     $235            ; "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
-return_53814:
+Map20_DefaultEntityEvent:
                 
                 rts
 

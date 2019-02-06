@@ -25,11 +25,12 @@ GetEntityPortraitAndSpeechSfx:
                 clr.w   d1
                 clr.w   d2
                 bsr.w   GetEntityAddressFromPlayableCharacterIdx
-                move.b  $13(a5),d0      ; sprite number
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0
+                                                        ; sprite number
                 lea     SpriteDialogProperties(pc), a0
 loc_45650:
                 
-                cmp.b   (a0),d0         ; get sprite's owner (it implies that each force member has a unique sprite !!)
+                cmp.b   (a0),d0         ; get sprite's owner (implies that each force member has a unique sprite !)
                 bne.s   loc_45662
                 move.b  1(a0),d1        ; get portrait index
                 ext.w   d1
@@ -488,29 +489,29 @@ loc_45C5C:
 	; End of function sub_45BBE
 
 byte_45C6A:     dc.b 0
-                dc.b   0
-                dc.b   1
-                dc.b   1
-                dc.b   2
-                dc.b   2
-                dc.b   3
-                dc.b   3
-                dc.b $60 
-                dc.b $60 
-                dc.b $61 
-                dc.b $61 
-                dc.b $62 
-                dc.b $62 
-                dc.b $63 
-                dc.b $63 
-                dc.b $C0 
-                dc.b $C0 
-                dc.b $C1 
-                dc.b $C1 
-                dc.b $C2 
-                dc.b $C2 
-                dc.b $C3 
-                dc.b $C3 
+                dc.b 0
+                dc.b 1
+                dc.b 1
+                dc.b 2
+                dc.b 2
+                dc.b 3
+                dc.b 3
+                dc.b $60
+                dc.b $60
+                dc.b $61
+                dc.b $61
+                dc.b $62
+                dc.b $62
+                dc.b $63
+                dc.b $63
+                dc.b $C0
+                dc.b $C0
+                dc.b $C1
+                dc.b $C1
+                dc.b $C2
+                dc.b $C2
+                dc.b $C3
+                dc.b $C3
 
 ; =============== S U B R O U T I N E =======================================
 

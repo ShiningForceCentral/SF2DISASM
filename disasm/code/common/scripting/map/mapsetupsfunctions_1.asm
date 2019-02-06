@@ -201,7 +201,7 @@ loc_47680:
                 move.w  d2,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
 loc_476A8:
                 
                 trap    #VINT_FUNCTIONS
@@ -214,7 +214,7 @@ loc_476A8:
                 ; finish event by closing windows
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
 loc_476C4:
                 
                 jsr     j_HidePortraitWindow
@@ -421,7 +421,7 @@ MoveEntityOutOfMap:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47808:
+MakeEntityWalk:
                 
                 move.l  d0,-(sp)
                 jsr     j_GetEntityIndex
@@ -429,10 +429,12 @@ sub_47808:
                 move.l  (sp)+,d0
                 rts
 
-	; End of function sub_47808
+	; End of function MakeEntityWalk
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; reset entity flags and sprite
 
 sub_4781A:
                 
@@ -440,7 +442,7 @@ sub_4781A:
                 jsr     j_GetEntityIndex
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
                 movem.l (sp)+,d0-d3
                 rts
 
@@ -448,6 +450,8 @@ sub_4781A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; reset entity flags and sprite and facing ?
 
 sub_47832:
                 
@@ -458,7 +462,7 @@ sub_47832:
                 andi.w  #3,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
                 movem.l (sp)+,d0-d3
                 rts
 

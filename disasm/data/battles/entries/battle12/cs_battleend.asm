@@ -8,5 +8,5 @@ edcs_battle12:  textCursor $9BA
                 setCameraEntity $0
                 nextText $0,$80         ; "Ah!  You have the Jewel of{N}Evil around your neck.{W2}"
                 nextSingleText $0,$80   ; "It's you, {LEADER}.{N}We've been waiting for you.{W1}"
-                setF $2CA               ; set after winning the cliff battle outside Bedoe, before Peter delivers lines
+                setF $2CA               ; Set after winning the cliff battle outside Bedoe, before Peter delivers lines
                 csc_end

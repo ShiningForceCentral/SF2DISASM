@@ -67,11 +67,11 @@ j_GetBattleSpriteSetSubsection:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AC01C:
+j_BattleDebugFunction1B120A:
                 
-                jmp     sub_1B120A(pc)
+                jmp     BattleDebugFunction1B120A(pc)
 
-	; End of function sub_1AC01C
+	; End of function j_BattleDebugFunction1B120A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -85,18 +85,22 @@ j_GetCombatantStartPos:
 
 ; =============== S U B R O U T I N E =======================================
 
+; AI-related
+
 sub_1AC024:
                 
-                jmp     sub_1AC38E(pc)
+                jmp     sub_1AC38E(pc)  
 
 	; End of function sub_1AC024
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; AI-related
+
 sub_1AC028:
                 
-                jmp     sub_1AC69A(pc)
+                jmp     sub_1AC69A(pc)  
 
 	; End of function sub_1AC028
 
@@ -111,6 +115,8 @@ j_getMoveListForEnemyTarget:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; AI-related
 
 sub_1AC030:
                 
@@ -130,9 +136,11 @@ j_clearTerrainListObstructions:
 
 ; =============== S U B R O U T I N E =======================================
 
+; AI-related
+
 sub_1AC038:
                 
-                jmp     sub_1AC9FC(pc)
+                jmp     sub_1AC9FC(pc)  
 
 	; End of function sub_1AC038
 
@@ -157,11 +165,11 @@ j_GetListOfSpawningEnemies:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_randomLessThanD6:
+j_randomUnderD6:
                 
-                jmp     RandomLessThanD6(pc)
+                jmp     RandomUnderD6(pc)
 
-	; End of function j_randomLessThanD6
+	; End of function j_randomUnderD6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -175,11 +183,11 @@ j_IsSpecialBattle:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AC04C:
+j_UpgradeBattle:
                 
-                jmp     sub_1B17BC(pc)
+                jmp     UpgradeBattle(pc)
 
-	; End of function sub_1AC04C
+	; End of function j_UpgradeBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -193,9 +201,11 @@ j_ShouldBattleUpgrade:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Battle-related
+
 sub_1AC054:
                 
-                jmp     sub_1B16FE(pc)
+                jmp     sub_1B16FE(pc)  
 
 	; End of function sub_1AC054
 
@@ -211,9 +221,11 @@ j_CheckTriggerRegionFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
+; AI-related
+
 sub_1AC05C:
                 
-                jmp     sub_1AC8A0(pc)
+                jmp     sub_1AC8A0(pc)  
 
 	; End of function sub_1AC05C
 

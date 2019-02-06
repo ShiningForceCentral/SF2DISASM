@@ -120,7 +120,7 @@ sub_7D0C:
                 lea     ($E000).l,a1
                 move.w  #$220,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   SetFFDE94b3andWait
                 rts
 
@@ -229,7 +229,7 @@ loc_7E16:
                 lea     ($E000).l,a1
                 move.w  #$200,d0
                 moveq   #2,d1
-                bsr.w   sub_119E        
+                bsr.w   DMA_119E        
                 bsr.w   Set_FFDE94_bit3 
 loc_7E36:
                 

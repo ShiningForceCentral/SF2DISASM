@@ -70,7 +70,7 @@ csub_5FF56:
                 
                 move.w  #$43,d0 
                 moveq   #1,d1
-                jmp     sub_4F48A
+                jmp     GetMandatoryItem
 
 	; End of function csub_5FF56
 

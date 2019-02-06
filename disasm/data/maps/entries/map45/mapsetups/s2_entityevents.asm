@@ -6,7 +6,7 @@ ms_map45_EntityEvents:
                 msEntityEvent 129, DOWN, Map45_EntityEvent1-ms_map45_EntityEvents
                 msEntityEvent 130, DOWN, Map45_EntityEvent2-ms_map45_EntityEvents
                 msEntityEvent 131, UP, Map45_EntityEvent3-ms_map45_EntityEvents
-                msDefaultEntityEvent 0, nullsub_147-ms_map45_EntityEvents
+                msDefaultEntityEvent Map45_DefaultEntityEvent-ms_map45_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -57,9 +57,9 @@ Map45_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_147:
+Map45_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_147
+	; End of function Map45_DefaultEntityEvent
 

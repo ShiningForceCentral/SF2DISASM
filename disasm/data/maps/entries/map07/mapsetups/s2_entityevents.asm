@@ -14,4 +14,4 @@ ms_map7_EntityEvents:
                 msEntityEvent 137, DOWN, Map7_EntityEvent9-ms_map7_EntityEvents
                 msEntityEvent 138, DOWN, Map7_EntityEvent10-ms_map7_EntityEvents
                 msEntityEvent 139, UP, Map7_EntityEvent11-ms_map7_EntityEvents
-                msDefaultEntityEvent 0, entevdft_5579C-ms_map7_EntityEvents
+                msDefaultEntityEvent Map7_DefaultEntityEvent-ms_map7_EntityEvents

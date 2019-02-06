@@ -15,15 +15,15 @@ ms_map36_EntityEvents:
                 msEntityEvent 137, UP, Map36_EntityEvent10-ms_map36_EntityEvents
                 msEntityEvent 138, UP, Map36_EntityEvent11-ms_map36_EntityEvents
                 msEntityEvent 139, UP, Map36_EntityEvent12-ms_map36_EntityEvents
-                msDefaultEntityEvent 0, nullsub_140-ms_map36_EntityEvents
+                msDefaultEntityEvent Map36_DefaultEntityEvent-ms_map36_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_140:
+Map36_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_140
+	; End of function Map36_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -66,12 +66,12 @@ Map36_EntityEvent3:
 Map36_EntityEvent4:
                 
                  
-                chkFlg  $32A            ; set after speaking to a centaur at Pacalon castle (the one who moves and shivers)
+                chkFlg  $32A            ; Set after speaking to a centaur at Pacalon castle (the one who moves and shivers)
                 bne.s   byte_5D8B6      
                 txt     $CD6            ; "Devils are coming to town?{N}OK, I'll beat them up!{W1}"
                 clsTxt
                 script  cs_5DA7A
-                setFlg  $32A            ; set after speaking to a centaur at Pacalon castle (the one who moves and shivers)
+                setFlg  $32A            ; Set after speaking to a centaur at Pacalon castle (the one who moves and shivers)
 byte_5D8B6:
                 
                 txt     $CD7            ; "Oh, I can't.  I'm too hungry!{W1}"

@@ -64,12 +64,12 @@ loc_7494:
                 
                 btst    #0,d0
                 beq.s   loc_749E
-                setFlg  $4E             ; Difficulty
+                setFlg  $4E             ; Difficulty bit 0
 loc_749E:
                 
                 btst    #1,d0
                 beq.s   loc_74A8        
-                setFlg  $4F             ; Difficulty
+                setFlg  $4F             ; Difficulty bit 1
 loc_74A8:
                 
                 addi.w  #$E9,d0 ; difficulty choice reactions
@@ -126,7 +126,7 @@ loc_74FE:
                 txt     $E0             ; "Now, good luck!{N}You have no time to waste!{W1}"
                 clsTxt
                 clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
-                chkFlg  $58             ; checks if a game has been saved for copying purposes? (or if saved from battle?)
+                chkFlg  $58             ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 beq.s   loc_753A
                 jsr     j_ExecuteBattleLoop
                 bra.w   loc_75E0

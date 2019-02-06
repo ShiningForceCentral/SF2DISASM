@@ -16,4 +16,4 @@ ms_map6_EntityEvents:
                 msEntityEvent 139, RIGHT, Map6_EntityEvent11-ms_map6_EntityEvents
                 msEntityEvent 140, UP, Map6_EntityEvent12-ms_map6_EntityEvents
                 msEntityEvent 141, RIGHT, Map6_EntityEvent13-ms_map6_EntityEvents
-                msDefaultEntityEvent 0, return_54C30-ms_map6_EntityEvents
+                msDefaultEntityEvent Map6_DefaultEntityEvent-ms_map6_EntityEvents

@@ -7,7 +7,7 @@
 ms_map72_InitFunction:
                 
                  
-                chkFlg  $2CC            ; set after your raft-giving conversation with the mayor in Polca
+                chkFlg  $2CC            ; Set after your raft-giving conversation with the mayor in Polca
                 beq.s   return_4FF40
                 chkFlg  $A              ; Luke joined
                 bne.s   return_4FF40

@@ -112,7 +112,7 @@ csub_4D694:
                 
                 moveq   #$71,d0 
                 moveq   #1,d1
-                jmp     sub_4F48A
+                jmp     GetMandatoryItem
 
 	; End of function csub_4D694
 

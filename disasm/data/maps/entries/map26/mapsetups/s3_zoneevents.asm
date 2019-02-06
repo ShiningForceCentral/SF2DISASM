@@ -3,17 +3,17 @@
 ; 0x59DB6..0x59DD2 : 
 ms_map26_ZoneEvents:
                 msZoneEvent 14, 255, Map26_ZoneEvent0-ms_map26_ZoneEvents
-                msDefaultZoneEvent 0, nullsub_91-ms_map26_ZoneEvents
+                msDefaultZoneEvent Map26_DefaultZoneEvent-ms_map26_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map26_ZoneEvent0:
                 
                  
-                chkFlg  $30C            ; set after the man tries to lift the giant ring in Floor World
+                chkFlg  $30C            ; Set after the man tries to lift the giant ring in Floor World
                 bne.s   return_59DCE
                 script  cs_59F20
-                setFlg  $30C            ; set after the man tries to lift the giant ring in Floor World
+                setFlg  $30C            ; Set after the man tries to lift the giant ring in Floor World
 return_59DCE:
                 
                 rts
@@ -23,9 +23,9 @@ return_59DCE:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_91:
+Map26_DefaultZoneEvent:
                 
                 rts
 
-	; End of function nullsub_91
+	; End of function Map26_DefaultZoneEvent
 

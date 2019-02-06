@@ -50,7 +50,7 @@ cs_LeaveSpecialBattle:
                 csc_end
 loc_59CB2:
                 
-                move.l  ($FFFFDF22).w,d0
+                move.l  ((SPECIAL_BATTLE_TIME-$1000000)).w,d0
                 divs.w  #$3C,d0 
                 move.w  d0,d1
                 ext.l   d1

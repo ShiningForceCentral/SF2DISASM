@@ -13,17 +13,17 @@ ms_map36_flag212_EntityEvents:
                 msEntityEvent 135, UP, (Map36_EntityEvent6-ms_map36_flag212_EntityEvents) & $FFFF
                 msEntityEvent 136, UP, Map36_212_EntityEvent9-ms_map36_flag212_EntityEvents
                 msEntityEvent 137, UP, (Map36_EntityEvent12-ms_map36_flag212_EntityEvents) & $FFFF
-                msDefaultEntityEvent 0, (nullsub_140-ms_map36_flag212_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map36_DefaultEntityEvent-ms_map36_flag212_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
 Map36_212_EntityEvent0:
                 
                  
-                chkFlg  $32B            ; set after Frayja asks to go to Moun with you
+                chkFlg  $32B            ; Set after Frayja asks to go to Moun with you
                 bne.s   return_5D968
                 script  cs_5DA28
-                setFlg  $32B            ; set after Frayja asks to go to Moun with you
+                setFlg  $32B            ; Set after Frayja asks to go to Moun with you
                 setFlg  $52             ; Frayja is a follower
 return_5D968:
                 
@@ -83,10 +83,10 @@ Map36_212_EntityEvent4:
 Map36_212_EntityEvent5:
                 
                  
-                chkFlg  $101            ; Temporary map setup flag 01
+                chkFlg  $101            ; TEMP FLAG #01
                 bne.s   byte_5D998      
                 txt     $CF2            ; "Practice!  Who needs{N}practice?!  Ha!{W2}"
-                setFlg  $101            ; Temporary map setup flag 01
+                setFlg  $101            ; TEMP FLAG #01
 byte_5D998:
                 
                 txt     $CF3            ; "Oooh...I can't lift this{N}spear!{W1}"

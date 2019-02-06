@@ -1118,8 +1118,8 @@ cs_62658:       setQuake 5
                 textCursor $F44
                 nextSingleText $FF,$FF  ; "Two years have passed{N}since Mitula resealed Zeon.{W1}"
                 nextSingleText $0,$88   ; "Wow, is it true?{N}Did Elis' face turn pink?{W1}"
-                clearF $180             ; set after Bowie obtains the jewel of light/evil... whichever it is
-                clearF $181             ; set after Bowie obtains King Galam's jewel
+                clearF $180             ; Set after Bowie obtains the jewel of light/evil... whichever it is
+                clearF $181             ; Set after Bowie obtains King Galam's jewel
                 resetForceBattleStats
                 warp $3,$38,$3,$3
                 csc_end

@@ -6,7 +6,7 @@ ms_map11_EntityEvents:
                 msEntityEvent 129, UP, Map11_EntityEvent1-ms_map11_EntityEvents
                 msEntityEvent 130, UP, Map11_EntityEvent2-ms_map11_EntityEvents
                 msEntityEvent 131, UP, Map11_EntityEvent3-ms_map11_EntityEvents
-                msDefaultEntityEvent 0, return_57A66-ms_map11_EntityEvents
+                msDefaultEntityEvent Map11_DefaultEntityEvent-ms_map11_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -55,14 +55,14 @@ Map11_EntityEvent3:
                 txt     $C76            ; "And {NAME;7} was born from{N}holy fire.{W2}"
                 txt     $C77            ; "Volcanon is the highest{N}of gods and can revive{N}anything.{W2}"
                 txt     $C78            ; "Phoenix serve and work for{N}him.{N}They help the people.{W1}"
-                bra.s   return_57A66
+                bra.s   Map11_DefaultEntityEvent
 byte_57A56:
                 
                 txt     $C79            ; "A phoenix is the legendary{N}bird who can't be killed.{W2}"
                 txt     $C7A            ; "It is life itself.{W2}"
                 txt     $C7B            ; "When his first life is{N}nearly over, he bursts into{N}holy fire to finish it.{W2}"
                 txt     $C7C            ; "The fire creates another{N}life for the phoenix on the{N}ground.{W1}"
-return_57A66:
+Map11_DefaultEntityEvent:
                 
                 rts
 

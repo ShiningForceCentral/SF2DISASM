@@ -18,28 +18,28 @@ ms_map3_EntityEvents:
                 msEntityEvent 141, UP, Map3_EntityEvent13-ms_map3_EntityEvents
                 msEntityEvent 144, UP, Map3_EntityEvent8-ms_map3_EntityEvents
                 msEntityEvent 142, DOWN, Map3_EntityEvent15-ms_map3_EntityEvents
-                msDefaultEntityEvent 0, entevdft_5105A-ms_map3_EntityEvents
+                msDefaultEntityEvent Map3_DefaultEntityEvent-ms_map3_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map3_EntityEvent0:
                 
                  
-                chkFlg  $25B            ; set after the messenger scene
+                chkFlg  $25B            ; Set after the messenger scene
                 bne.s   byte_50F8A      
-                chkFlg  $25A            ; set after Astral's second basement line
+                chkFlg  $25A            ; Set after Astral's second basement line
                 bne.s   byte_50F84      
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   byte_50F6A      
                 txt     $200            ; "Hi, {LEADER}!{N}How are you?{W2}"
 byte_50F6A:
                 
                 txt     $1E0            ; "Sir Astral is in the{N}basement, but he looks{N}"
                 txt     $1E1            ; "strange today.{W1}"
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   loc_50F82
                 script  cs_513D6
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
 loc_50F82:
                 
                 bra.s   loc_50F88
@@ -66,9 +66,9 @@ return_50F96:
 Map3_EntityEvent1:
                 
                  
-                chkFlg  $25B            ; set after the messenger scene
+                chkFlg  $25B            ; Set after the messenger scene
                 bne.s   byte_50FB4      
-                chkFlg  $25A            ; set after Astral's second basement line
+                chkFlg  $25A            ; Set after Astral's second basement line
                 bne.s   byte_50FAA      
                 txt     $1E2            ; "Hooo...I'm sleepy.{N}{NAME;3} must be sleeping{N}soundly about now.{W1}"
                 bra.s   loc_50FB2
@@ -94,7 +94,7 @@ return_50FB8:
 Map3_EntityEvent2:
                 
                  
-                chkFlg  $25A            ; set after Astral's second basement line
+                chkFlg  $25A            ; Set after Astral's second basement line
                 bne.s   byte_50FC6      
                 txt     $1E3            ; "Hurry to school!{N}Sir Astral and {NAME;1} must{N}be waiting.{W1}"
                 bra.s   return_50FCA
@@ -196,7 +196,7 @@ Map3_EntityEvent9:
 Map3_EntityEvent10:
                 
                  
-                chkFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
+                chkFlg  $25C            ; Set after the guards have listened to Sarah and allowed you into the castle
                 bne.s   byte_5101A      
                 txt     $1F1            ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
                 bra.s   return_5101E
@@ -215,7 +215,7 @@ return_5101E:
 Map3_EntityEvent11:
                 
                  
-                chkFlg  $25C            ; set after the guards have listened to Sarah and allowed you into the castle
+                chkFlg  $25C            ; Set after the guards have listened to Sarah and allowed you into the castle
                 bne.s   byte_5102C      
                 txt     $1F1            ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
                 bra.s   return_51030
@@ -256,15 +256,15 @@ Map3_EntityEvent13:
 Map3_EntityEvent15:
                 
                  
-                chkFlg  $105            ; Temporary map setup flag 05
+                chkFlg  $105            ; TEMP FLAG #05
                 bne.s   byte_51052      
                 txt     $1F4            ; "Oh, morning {LEADER}.{N}When did you come in?{W2}"
-                setFlg  $105            ; Temporary map setup flag 05
+                setFlg  $105            ; TEMP FLAG #05
 byte_51052:
                 
                 txt     $1F5            ; "Is it time to start school?{N}OK, I'm coming up soon.{W1}"
-                setFlg  $25A            ; set after Astral's second basement line
-entevdft_5105A:
+                setFlg  $25A            ; Set after Astral's second basement line
+Map3_DefaultEntityEvent:
                 
                 rts
 

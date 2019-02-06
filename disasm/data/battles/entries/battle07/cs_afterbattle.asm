@@ -514,7 +514,7 @@ abcs_battle07:  textCursor $951
                 setCameraEntity $FFFF
                 cameraSpeed $28
                 nextSingleText $FF,$FF  ; "The two jewels merge{N}together.{W1}"
-                setF $181               ; set after Bowie obtains King Galam's jewel
+                setF $181               ; Set after Bowie obtains King Galam's jewel
                 setCamDest 8,3
                 waitIdle $82
                 setFacing $82,DOWN
@@ -640,7 +640,7 @@ abcs_battle07:  textCursor $951
                 followEntity $85,$83,$2
                 followEntity $86,$85,$2
                 setF $4A                ; Astral + King are followers
-                setF $280               ; set after the end of battle 7's long sequence, cleared at docks?
+                setF $280               ; Set after the end of battle 7's long sequence, cleared at docks?
                 csc_end
 ce_4A912:       mainEntity 13,23,UP
                 entity 63,63,RIGHT,178,eas_Init

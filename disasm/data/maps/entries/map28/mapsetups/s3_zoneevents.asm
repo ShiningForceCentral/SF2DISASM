@@ -2,11 +2,11 @@
 ; ASM FILE data\maps\entries\map28\mapsetups\s3_zoneevents.asm :
 ; 0x5F36C..0x5F396 : 
 ms_map28_ZoneEvents:
-                msDefaultZoneEvent 0, sub_5F370-ms_map28_ZoneEvents
+                msDefaultZoneEvent Map28_DefaultZoneEvent-ms_map28_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5F370:
+Map28_DefaultZoneEvent:
                 
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
@@ -24,5 +24,5 @@ return_5F394:
                 
                 rts
 
-	; End of function sub_5F370
+	; End of function Map28_DefaultZoneEvent
 

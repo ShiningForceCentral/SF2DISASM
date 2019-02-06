@@ -3,7 +3,7 @@
 ; 0x53766..0x537AC : 
 ms_map20_flag1F5_ZoneEvents:
                 msZoneEvent 27, 52, Map20_1F5_ZoneEvent0-ms_map20_flag1F5_ZoneEvents
-                msDefaultZoneEvent 0, nullsub_84-ms_map20_flag1F5_ZoneEvents
+                msDefaultZoneEvent Map20_DefaultZoneEvent-ms_map20_flag1F5_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -27,9 +27,9 @@ Map20_1F5_ZoneEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_84:
+Map20_DefaultZoneEvent:
                 
                 rts
 
-	; End of function nullsub_84
+	; End of function Map20_DefaultZoneEvent
 

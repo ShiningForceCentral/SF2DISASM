@@ -257,107 +257,114 @@ sub_493EC:
 
 	; End of function sub_493EC
 
-                dc.w $20
-                dc.w $1F
-                dc.w 7
-                dc.w $1F
-                dc.w 1
-                dc.w $1F
-                dc.w 2
-                dc.w $1F
-                dc.w 6
-                dc.w $21
-                dc.w $80
-                dc.w $21
-                dc.w $96
-                dc.w $1F
-                dc.w 3
-                dc.w $1D
-                dc.w 0
-                dc.w $FFFF
-                dc.w $24
-                dc.w $FFFF
-                dc.w $18
-                dc.w 0
-                dc.w $28
-                dc.w $2E
-                dc.w 0
-                dc.w $19
-                dc.w $60D
-                dc.w $1703
-                dc.w $18
-                dc.w 6
-                dc.w $28
-                dc.w $22
-                dc.w 6
-                dc.w 7
-                dc.w 5
-                dc.w 4
-                dc.w $FFFF
-                dc.w 4
-                dc.w $18A
-                dc.w $1D
-                dc.w 0
-                dc.w 3
-                dc.w 0
-                dc.w 3
-                dc.w $A
-                dc.w 1
-                dc.w 0
-                dc.w 4
-                dc.w $14
-                dc.w $1D
-                dc.w 0
-                dc.w $8078
-                dc.w $1E
-                dc.w 4
-                dc.w $142
-                dc.w 2
-                dc.w 0
-                dc.w 0
-                dc.w 0
-                dc.w $FFFF
-                dc.w $14
-                dc.w $501
-                dc.w $15
-                dc.w 0
-                dc.w $11
-                dc.w 1
-                dc.w $10
+                updateDefeatedAllies
+                allyDefeated $7
+                allyDefeated $1
+                allyDefeated $2
+                allyDefeated $6
+                reviveAlly $80
+                reviveAlly $96
+                allyDefeated $3
+                showPortrait $0
+                csc_end
+                setCameraEntity $FFFF
+                entityFlashWhite $0,$28
+                hide $0
+                setPos $6,13,23,DOWN
+                entityFlashWhite $6,$28
+                animEntityFX $6,7
+                playSound MUSIC_PROMOTED_ATTACK_LOOP
+                csc_end
+                textCursor $18A
+                showPortrait $0
+                nextTextVar $0,$0,$0,$3,$A; "{NAME} found{N}the {ITEM}.{D1}"
+                nextSingleTextVar $0,$0,$0,$4; "{NAME} received{N}the {ITEM}."
                 dc.b 0
-                dc.b $20
-                dc.w $12
-                dc.w 0
-                dc.w $13
-                dc.w $FFFF
-                dc.w 4
-                dc.w 0
-                dc.w $FFFF
-                dc.w 0
-                dc.w 5
-                dc.w 4
-                dc.w 0
-                dc.w 1
-                dc.w 0
-                dc.w 5
-                dc.w 4
-                dc.w 0
-                dc.w 0
-                dc.w 0
-                dc.w 5
-                dc.w $15
-                dc.w $FFFF
-                dc.w $30
-                dc.w $BD50
-                dc.b $80
-                dc.b $80
+                dc.b $14
                 dc.b 0
                 dc.b $1D
                 dc.b 0
                 dc.b 0
                 dc.b $80
-                dc.b $3C
+                dc.b $78
                 dc.b 0
                 dc.b $1E
+                dc.b 0
+                dc.b 4
+                dc.b 1
+                dc.b $42
+                dc.b 0
+                dc.b 2
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
                 dc.b $FF
                 dc.b $FF
+                dc.b 0
+                dc.b $14
+                dc.b 5
+                dc.b 1
+                dc.b 0
+                dc.b $15
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b $11
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b $10
+                dc.b 0
+                dc.b $20
+                dc.b 0
+                dc.b $12
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b $13
+                dc.b $FF
+                dc.b $FF
+                dc.b 0
+                dc.b 4
+                dc.b 0
+                dc.b 0
+                dc.b $FF
+                dc.b $FF
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 5
+                dc.b 0
+                dc.b 4
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 5
+                dc.b 0
+                dc.b 4
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 5
+                dc.b 0
+                dc.b $15
+                dc.b $FF
+                dc.b $FF
+word_494AC:     dc.w $30                ;   0030 BRANCH TO CURRENT ADDR. + $BD50
+                dc.w (eas_Idle-word_494AC) & $FFFF
+                ac_end
+                showPortrait $0
+                csWait 60
+                hidePortrait
+                csc_end

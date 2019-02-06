@@ -592,7 +592,7 @@ loc_1854A:
                 lea     ($D800).l,a1
                 move.w  #$400,d0
                 move.w  #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
 loc_18596:
                 
@@ -693,7 +693,7 @@ loc_1862E:
                 lea     ($D800).l,a1
                 move.w  #$400,d0
                 move.w  #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
 loc_18664:
                 
@@ -848,13 +848,13 @@ loc_187BC:
                 lea     ($2000).w,a1
                 move.w  #$900,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 lea     (FF7A02_LOADING_SPACE).l,a0
                 lea     ($3200).w,a1
                 move.w  #$900,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,d0
                 bsr.w   sub_19E6E
@@ -865,7 +865,7 @@ loc_187BC:
                 lea     ($F000).l,a1
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
 loc_18818:
                 
                 move.w  ((CHARACTER_WEAPON_SPRITE-$1000000)).w,d0
@@ -898,7 +898,7 @@ loc_18864:
                 lea     ($D800).l,a1
                 move.w  #$400,d0
                 move.w  #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
 loc_1888C:
                 
@@ -1233,18 +1233,18 @@ sub_18BAA:
                 beq.s   loc_18BD6
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 bra.s   loc_18BF4
 loc_18BD6:
                 
                 move.w  #$100,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 lea     (word_FF9802).l,a0
                 lea     ($4C00).w,a1
                 move.w  #$200,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
 loc_18BF4:
                 
                 jsr     (Set_FFDE94_bit3).w
@@ -1275,7 +1275,7 @@ sub_18C1E:
                 bsr.w   sub_1F1CC
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
                 movem.l a0-a2,-(sp)
                 bchg    #7,(a2)
@@ -1297,7 +1297,7 @@ loc_18C5A:
                 lea     ($C180).l,a1
                 move.w  #$1A0,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
                 movem.l (sp)+,a0-a2
                 addq.w  #8,a2
@@ -1317,7 +1317,7 @@ sub_18C94:
                 movem.l a0-a2,-(sp)
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
                 bchg    #7,(a2)
                 bchg    #7,2(a2)
@@ -1338,7 +1338,7 @@ loc_18CD0:
                 lea     ($C180).l,a1
                 move.w  #$1A0,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
                 movem.l (sp)+,a0-a2
                 lea     -$600(a0),a0
@@ -2307,11 +2307,11 @@ loc_194DC:
                 
                 move.w  #$600,d0
                 move.w  #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 move.w  #$600,d0
                 move.w  #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
 return_194FC:
                 
@@ -2542,7 +2542,7 @@ loc_19684:
                 
                 move.w  #$900,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 movea.l (sp)+,a0
                 cmpi.w  #$FFFF,((CHARACTER_WEAPON_SPRITE-$1000000)).w
@@ -2550,7 +2550,7 @@ loc_19684:
                 lea     ($D800).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
 loc_196B0:
                 
@@ -2637,11 +2637,11 @@ loc_19748:
                 
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jmp     (SetFFDE94b3andWait).w
 
 	; End of function sub_1971C
@@ -2868,7 +2868,7 @@ loc_198E0:
                 
                 move.w  #$40F8,(a0)+
                 dbf     d0,loc_198E0
-                lea     BattleSceneLayout(pc), a1
+                lea     BackgroundLayout(pc), a1
                 move.w  #$BF,d0 
 loc_198F0:
                 
@@ -2921,7 +2921,7 @@ loc_19932:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jmp     (Set_FFDE94_bit3).w
 
 	; End of function sub_19926
@@ -3349,11 +3349,11 @@ loc_19C58:
                 lea     (loc_B600).l,a1
                 move.w  #$500,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 lea     ($D800).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
 loc_19CA0:
                 
@@ -3417,7 +3417,7 @@ sub_19CE8:
                 lea     ($F000).l,a1
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jmp     (SetFFDE94b3andWait).w
 
 	; End of function sub_19CE8
@@ -6178,25 +6178,25 @@ loc_1B0EE:
                 lea     ($3000).w,a1
                 move.w  #$100,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
                 lea     (byte_FF8D04).l,a0
                 lea     ($4200).w,a1
                 move.w  #$100,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
                 lea     (byte_FF8F04).l,a0
                 lea     ($B400).l,a1
                 move.w  #$100,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
                 lea     (byte_FF9104).l,a0
                 lea     ($DE00).l,a1
                 move.w  #$100,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 moveq   #$26,d0 
                 lea     byte_1B1FA(pc), a0
@@ -13536,7 +13536,7 @@ loc_1EFB0:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (Set_FFDE94_bit3).w
 return_1EFD6:
                 
@@ -13816,7 +13816,7 @@ sub_1F1F0:
                 
                 movem.l d0/a0,-(sp)
                 move.w  d6,((word_FFB3EE-$1000000)).w
-                lea     ((word_FFD500-$1000000)).w,a0
+                lea     ((dword_FFD500-$1000000)).w,a0
                 moveq   #$13,d0
 loc_1F1FE:
                 
@@ -13848,7 +13848,7 @@ loc_1F232:
                 addi.w  #$10,d6
 loc_1F236:
                 
-                lea     ((byte_FFD102-$1000000)).w,a0
+                lea     ((dword_FFD100+2-$1000000)).w,a0
                 move.w  #$FF,d0
 loc_1F23E:
                 
@@ -13874,7 +13874,7 @@ sub_1F254:
                 subq.w  #8,d6
 loc_1F266:
                 
-                lea     ((byte_FFD502-$1000000)).w,a0
+                lea     ((dword_FFD500+2-$1000000)).w,a0
                 moveq   #$13,d0
 loc_1F26C:
                 
@@ -13901,8 +13901,8 @@ sub_1F282:
                 beq.s   return_1F2F4
                 tst.w   ((word_FFB3C4-$1000000)).w
                 beq.s   return_1F2F4
-                lea     ((word_FFD100-$1000000)).w,a3
-                lea     ((word_FFD500-$1000000)).w,a4
+                lea     ((dword_FFD100-$1000000)).w,a3
+                lea     ((dword_FFD500-$1000000)).w,a4
                 lea     ((dword_FFB3C0-$1000000)).w,a5
                 bra.s   loc_1F2D0
 loc_1F2AE:
@@ -13913,8 +13913,8 @@ loc_1F2AE:
                 beq.s   return_1F2F4
                 tst.w   ((word_FFB3CA-$1000000)).w
                 beq.s   return_1F2F4
-                lea     ((byte_FFD102-$1000000)).w,a3
-                lea     ((byte_FFD502-$1000000)).w,a4
+                lea     ((dword_FFD100+2-$1000000)).w,a3
+                lea     ((dword_FFD500+2-$1000000)).w,a4
                 lea     ((dword_FFB3C6-$1000000)).w,a5
 loc_1F2D0:
                 

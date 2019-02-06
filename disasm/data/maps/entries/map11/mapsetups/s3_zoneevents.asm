@@ -3,15 +3,15 @@
 ; 0x57A68..0x57A88 : 
 ms_map11_ZoneEvents:
                 msZoneEvent 39, 11, Map11_ZoneEvent0-ms_map11_ZoneEvents
-                msDefaultZoneEvent 0, nullsub_75-ms_map11_ZoneEvents
+                msDefaultZoneEvent Map11_DefaultZoneEvent-ms_map11_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_75:
+Map11_DefaultZoneEvent:
                 
                 rts
 
-	; End of function nullsub_75
+	; End of function Map11_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -19,11 +19,11 @@ nullsub_75:
 Map11_ZoneEvent0:
                 
                  
-                chkFlg  $2D2            ; set after speaking with Volcanon
+                chkFlg  $2D2            ; Set after speaking with Volcanon
                 bne.s   return_57A86
                 script  cs_57AAA
-                setFlg  $2D2            ; set after speaking with Volcanon
-                setFlg  $2C7            ; set after you dislodge the turtle/fairy in Polca
+                setFlg  $2D2            ; Set after speaking with Volcanon
+                setFlg  $2C7            ; Set after you dislodge the turtle/fairy in Polca, also set after you speak to Volcanon
 return_57A86:
                 
                 rts

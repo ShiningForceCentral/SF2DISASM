@@ -13,7 +13,7 @@ ExecuteExplorationLoop:
 loc_257D0:
                 
                 jsr     HealAliveCharsAndImmortals
-                jsr     sub_258EA(pc)
+                jsr     FadeOutToBlackAll(pc)
                 nop
                 move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
                 move.w  d0,-(sp)
@@ -33,12 +33,12 @@ loc_257D0:
                 jsr     j_InitMapEntities
                 jsr     (LoadMapEntitySprites).w
                 bsr.w   loc_2588A
-                setFlg  $50             ; set @ loc_257D0, also set during exploration loop at 0x25824
+                setFlg  $50             ; Set @ loc_257D0, also set during exploration loop at 0x25824
                 bra.s   loc_25836
 loc_25828:
                 
                 bsr.w   WaitForFadeToFinish
-                bsr.w   sub_258A8
+                bsr.w   sub_258A8       
                 jsr     sub_440AC
 loc_25836:
                 
@@ -57,7 +57,7 @@ loc_25836:
 loc_2586A:
                 
                 clr.w   d0              ; MAIN MAP LOOP
-                bsr.w   UpdateMoveSound
+                bsr.w   SetMoveSfx
                 bsr.w   WaitForEvent
                 tst.w   d0
                 beq.s   loc_2587E
@@ -90,6 +90,8 @@ loc_25896:
 
 ; =============== S U B R O U T I N E =======================================
 
+; update main entity properties
+
 sub_258A8:
                 
                 movem.l d0-d3/a0,-(sp)
@@ -98,23 +100,23 @@ sub_258A8:
                 blt.s   loc_258BE
                 mulu.w  #$180,d1
                 move.w  d1,(a0)
-                move.w  d1,$C(a0)
+                move.w  d1,ENTITYDEF_OFFSET_XDEST(a0)
 loc_258BE:
                 
                 tst.b   d2
                 blt.s   loc_258CE
                 mulu.w  #$180,d2
-                move.w  d2,2(a0)
-                move.w  d2,$E(a0)
+                move.w  d2,ENTITYDEF_OFFSET_Y(a0)
+                move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
 loc_258CE:
                 
-                move.b  d3,$10(a0)
+                move.b  d3,ENTITYDEF_OFFSET_FACING(a0)
                 clr.w   d0
                 jsr     j_GetForceMemberSpriteIdx
                 move.w  d3,d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
                 movem.l (sp)+,d0-d3/a0
                 rts
 
@@ -123,9 +125,9 @@ loc_258CE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_258EA:
+FadeOutToBlackAll:
                 
-                move.b  #2,((FADING_SETTING-$1000000)).w
+                move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((byte_FFDFAA-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
@@ -135,7 +137,7 @@ sub_258EA:
                 dc.l VInt_3930          
                 rts
 
-	; End of function sub_258EA
+	; End of function FadeOutToBlackAll
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -184,13 +186,13 @@ loc_25948:
 
 ; =============== S U B R O U T I N E =======================================
 
-; deal with "system" event (RAM:a84a)
+; deal with "system" event (RAM:FFA84A)
 
 ProcessMapEvent:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
                 subq.w  #1,d0
-                beq.w   loc_25978       
+                beq.w   ProcessMapEventType1
                 subq.w  #1,d0
                 beq.w   ProcessMapEventType2
                 subq.w  #1,d0
@@ -203,9 +205,17 @@ ProcessMapEvent:
                 beq.w   loc_25A7C
                 sndCom  SFX_BATTLEFIELD_DEATH
                 rts
-loc_25978:
+
+	; End of function ProcessMapEvent
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Event type 1
+
+ProcessMapEventType1:
                 
-                tst.b   ((MAP_EVENT_PARAM_1-$1000000)).w; Event type 1
+                tst.b   ((MAP_EVENT_PARAM_1-$1000000)).w
                 bne.w   loc_259CC
                 movem.w d0,-(sp)        ; cutscene commands $07 go here
                 move.w  ((WARP_SFX-$1000000)).w,d0
@@ -273,7 +283,7 @@ loc_25A18:
                 jsr     sub_440AC
                 rts
 
-	; End of function ProcessMapEvent
+	; End of function ProcessMapEventType1
 
 
 ; =============== S U B R O U T I N E =======================================

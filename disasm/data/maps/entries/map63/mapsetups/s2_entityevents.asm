@@ -3,7 +3,7 @@
 ; 0x5C98A..0x5C9E2 : 
 ms_map63_EntityEvents:
                 msEntityEvent 29, RIGHT, Map63_EntityEvent0-ms_map63_EntityEvents
-                msDefaultEntityEvent 0, return_5C9E0-ms_map63_EntityEvents
+                msDefaultEntityEvent Map63_DefaultEntityEvent-ms_map63_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -11,9 +11,9 @@ Map63_EntityEvent0:
                 
                  
                 chkFlg  $1D             ; Claude joined
-                bne.s   return_5C9E0
+                bne.s   Map63_DefaultEntityEvent
                 moveq   #$75,d1 
-                jsr     j_sub_9146
+                jsr     j_GetItemInventoryLocation
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_5C9D2
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
@@ -25,13 +25,13 @@ Map63_EntityEvent0:
                 txt     $1051           ; "Olooooo...Oloo....{N}Have you seen my arm?{W2}"
                 txt     $1052           ; "I can't move...without my{N}arm...oloooo....{W1}"
                 clsTxt
-                bra.s   return_5C9E0
+                bra.s   Map63_DefaultEntityEvent
 loc_5C9D2:
                 
                 moveq   #$75,d0 
-                jsr     sub_4F542
+                jsr     RemoveItemFromInventory
                 script  cs_5CBB4
-return_5C9E0:
+Map63_DefaultEntityEvent:
                 
                 rts
 

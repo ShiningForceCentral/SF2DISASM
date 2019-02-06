@@ -18,4 +18,4 @@ ms_map5_EntityEvents:
                 msEntityEvent 140, DOWN, Map5_EntityEvent13-ms_map5_EntityEvents
                 msEntityEvent 141, DOWN, Map5_EntityEvent14-ms_map5_EntityEvents
                 msEntityEvent 142, UP, Map5_EntityEvent15-ms_map5_EntityEvents
-                msDefaultEntityEvent 0, nullsub_113-ms_map5_EntityEvents
+                msDefaultEntityEvent Map5_DefaultEntityEvent-ms_map5_EntityEvents

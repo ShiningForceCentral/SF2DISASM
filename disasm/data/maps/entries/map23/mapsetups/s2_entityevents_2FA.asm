@@ -6,7 +6,7 @@ ms_map23_flag2FA_EntityEvents:
                 msEntityEvent 129, UP, Map23_2FA_EntityEvent1-ms_map23_flag2FA_EntityEvents
                 msEntityEvent 130, DOWN, Map23_2FA_EntityEvent2-ms_map23_flag2FA_EntityEvents
                 msEntityEvent 131, UP, (Map23_EntityEvent5-ms_map23_flag2FA_EntityEvents) & $FFFF
-                msDefaultEntityEvent 0, (nullsub_129-ms_map23_flag2FA_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map23_DefaultEntityEvent-ms_map23_flag2FA_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

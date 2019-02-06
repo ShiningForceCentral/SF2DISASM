@@ -10,11 +10,11 @@
 ExecuteBattleLoop:
                 
                 clr.b   ((PLAYER_TYPE-$1000000)).w
-                setFlg  $18F            ; set after first battle's cutscene OR first save? Checked at witch screens
-                chkFlg  $58             ; checks if a game has been saved for copying purposes? (or if saved from battle?)
+                setFlg  $18F            ; Set after first battle's cutscene OR first save? Checked at witch screens
+                chkFlg  $58             ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 beq.s   loc_23AB2
                 move.l  ((SECONDS_COUNTER_FROM_SRAM-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
-                clrFlg  $58             ; checks if a game has been saved for copying purposes? (or if saved from battle?)
+                clrFlg  $58             ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 jsr     j_ClearEnemyMoveInfo
                 clr.b   ((CAMERA_ENTITY-$1000000)).w
                 bsr.w   LoadBattle      
@@ -48,7 +48,7 @@ loc_23ADA:
 loc_23B0A:
                 
                 bsr.w   UpdateAllEnemyAI; start of battle loop
-                jsr     j_ExecuteBattleCutscene_Region
+                jsr     j_ExecuteBattleRegionCutscene
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.s   loc_23B1E
                 bsr.w   PrintAllActivatedDefCons
@@ -279,11 +279,11 @@ loc_23D44:
                 jsr     GetEgressPositionForBattle(pc)
                 nop
                 moveq   #$FFFFFFFF,d4
-                cmpi.b  #4,((CURRENT_BATTLE-$1000000)).w
+                cmpi.b  #4,((CURRENT_BATTLE-$1000000)).w; HARDCODED battle 4 upgrade
                 bne.s   return_23D96
                 clrFlg  $194            ; Battle 4 unlocked
                 setFlg  $1F8            ; Battle 4 completed
-                jsr     sub_1AC04C
+                jsr     j_UpgradeBattle
                 moveq   #$11,d0
                 clr.w   d4
 return_23D96:
@@ -535,7 +535,7 @@ loc_23FE6:
                 moveq   #3,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).l    
+                jsr     (UpdateEntityProperties).l
                 bsr.w   sub_2519E
                 move.w  -2(a6),d0
                 bsr.w   ClearEntityBlinkingFlag
@@ -723,7 +723,7 @@ loc_2420E:
                 moveq   #3,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).l    
+                jsr     (UpdateEntityProperties).l
                 move.w  -2(a6),d0
                 jsr     j_HideLandEffectWindow
                 jsr     j_HideFighterMiniStatusWindow
@@ -994,7 +994,7 @@ loc_244D4:
                 andi.w  #3,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).l    
+                jsr     (UpdateEntityProperties).l
                 moveq   #3,d0
                 jsr     (Sleep).w       
                 dbf     d7,loc_244D4
@@ -1043,7 +1043,7 @@ loc_24534:
                 andi.w  #3,d1
                 clr.w   d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).l    
+                jsr     (UpdateEntityProperties).l
                 cmpi.b  #GFX_MAX_SPRITES_TO_LOAD,((NUM_SPRITES_TO_LOAD-$1000000)).w
                 blt.s   loc_2455E
                 jsr     (WaitForVInt).w 
@@ -1078,7 +1078,7 @@ loc_245A4:
                 sub.w   d6,d1
                 clr.w   d2
                 move.w  #$3F,d3 
-                jsr     (sub_6052).l    
+                jsr     (UpdateEntityProperties).l
                 cmpi.b  #7,((NUM_SPRITES_TO_LOAD-$1000000)).w
                 blt.s   loc_245C6
                 jsr     (WaitForVInt).w 
@@ -1166,7 +1166,7 @@ loc_2466C:
                 bsr.w   GetEntityNumberOfCombatant
                 move.b  d0,((CAMERA_ENTITY-$1000000)).w
                 move.w  -2(a6),d0
-                bsr.w   UpdateMoveSound
+                bsr.w   SetMoveSfx
                 bsr.w   ControlBattleUnit
                 jsr     (WaitForCameraToCatchUp).w
                 btst    #INPUT_A_B_BIT,d4
@@ -2046,7 +2046,7 @@ loc_250B0:
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 move.w  d1,d2
                 move.w  d0,d1
-                jsr     sub_1AC054
+                jsr     sub_1AC054      
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_250FC
                 move.w  #$80,((BATTLESCENE_ACTION_TYPE-$1000000)).w 
@@ -2225,7 +2225,7 @@ loc_252A6:
                 tst.w   d0
                 bmi.w   loc_25236
                 move.l  ((SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER_FROM_SRAM-$1000000)).w
-                setFlg  $58             ; checks if a game has been saved for copying purposes? (or if saved from battle?)
+                setFlg  $58             ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 move.w  ((SAVE_SLOT_INDEX-$1000000)).w,d0
                                 enableSram
                 jsr     (SaveGame).l
@@ -2241,7 +2241,7 @@ byte_252E6:
                 jmp     (WitchSuspend).w
 byte_252F2:
                 
-                clrFlg  $58             ; checks if a game has been saved for copying purposes? (or if saved from battle?)
+                clrFlg  $58             ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 bra.w   loc_25236
 
 	; End of function BattlefieldMenuActions
@@ -2257,7 +2257,7 @@ sub_252FA:
                 bsr.w   CreateMoveableRangeForUnit
                 move.w  -2(a6),d0
                 move.w  -2(a6),d0
-                bsr.w   UpdateMoveSound
+                bsr.w   SetMoveSfx
                 lea     (BATTLE_ENTITY_MOVE_STRING).l,a0
                 jsr     MoveBattleEntityByMoveString
                 move.w  -2(a6),d0
@@ -2342,7 +2342,7 @@ loc_2544A:
                 cmpi.w  #6,d0
                 bne.w   loc_2547A
                 move.w  -2(a6),d0
-                jsr     sub_1AC05C
+                jsr     sub_1AC05C      
                 jsr     (WaitForCameraToCatchUp).w
                 bsr.w   CreateMoveableRangeForUnit
                 clr.b   ((word_FFAF8E-$1000000)).w
@@ -2406,7 +2406,7 @@ loc_254D4:
                 move.w  d4,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
-                jsr     (sub_6052).l    
+                jsr     (UpdateEntityProperties).l
                 move.w  -4(a6),d0
                 bsr.w   sub_2322C
                 bsr.w   WaitForUnitCursor
@@ -2570,7 +2570,7 @@ LoadBattle:
                 move.w  d0,-(sp)
                 clr.w   d1
                 move.b  ((CURRENT_MAP-$1000000)).w,d1
-                bsr.w   sub_258EA
+                bsr.w   FadeOutToBlackAll
                 move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
                 jsr     (LoadMapTilesets).w
                 bsr.w   WaitForFadeToFinish
@@ -2743,7 +2743,7 @@ loc_2578A:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateMoveSound:
+SetMoveSfx:
                 
                 cmpi.b  #CODE_NOTHING_BYTE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_2579E
@@ -2756,7 +2756,7 @@ loc_257A4:
                 
                 movem.w d0-d7,-(sp)
                 jsr     j_GetEquippedRing
-                cmpi.w  #ITEMIDX_CHIRRUP_SANDALS,d1; HARDCODED chirrup sandals sfx
+                cmpi.w  #ITEMIDX_CHIRRUP_SANDALS,d1; HARDCODED chirrup sandals item index for specific sfx
                 bne.s   loc_257BA
                 move.w  #SFX_BLOAB,((MOVE_SFX-$1000000)).w
 loc_257BA:
@@ -2764,5 +2764,5 @@ loc_257BA:
                 movem.w (sp)+,d0-d7
                 rts
 
-	; End of function UpdateMoveSound
+	; End of function SetMoveSfx
 

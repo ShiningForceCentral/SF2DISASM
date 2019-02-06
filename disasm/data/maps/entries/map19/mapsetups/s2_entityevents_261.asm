@@ -15,7 +15,7 @@ ms_map19_flag261_EntityEvents:
                 msEntityEvent 138, DOWN, Map19_261_EntityEvent10-ms_map19_flag261_EntityEvents
                 msEntityEvent 139, UP, Map19_261_EntityEvent11-ms_map19_flag261_EntityEvents
                 msEntityEvent 140, UP, Map19_261_EntityEvent12-ms_map19_flag261_EntityEvents
-                msDefaultEntityEvent 0, (return_52F0A-ms_map19_flag261_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map19_DefaultEntityEvent-ms_map19_flag261_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -33,10 +33,10 @@ Map19_261_EntityEvent0:
 Map19_261_EntityEvent1:
                 
                  
-                chkFlg  $101            ; Temporary map setup flag 01
+                chkFlg  $101            ; TEMP FLAG #01
                 bne.s   byte_52FDC      
                 txt     $262            ; "Sir Astral is sleeping in{N}the King's bedroom.{W2}{N}He needs some more rest{N}because he is so old.{W2}"
-                setFlg  $101            ; Temporary map setup flag 01
+                setFlg  $101            ; TEMP FLAG #01
 byte_52FDC:
                 
                 txt     $263            ; "Why don't you see him{N}before you leave?{N}He would be pleased.{W1}"

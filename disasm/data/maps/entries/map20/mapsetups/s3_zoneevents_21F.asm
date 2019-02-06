@@ -5,15 +5,15 @@ ms_map20_flag21F_ZoneEvents:
                 msZoneEvent 19, 52, Map20_21F_ZoneEvent0-ms_map20_flag21F_ZoneEvents
                 msZoneEvent 26, 255, Map20_21F_ZoneEvent1-ms_map20_flag21F_ZoneEvents
                 msZoneEvent 27, 52, Map20_21F_ZoneEvent2-ms_map20_flag21F_ZoneEvents
-                msDefaultZoneEvent 0, nullsub_85-ms_map20_flag21F_ZoneEvents
+                msDefaultZoneEvent Map20_21F_DefaultZoneEvent-ms_map20_flag21F_ZoneEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_85:
+Map20_21F_DefaultZoneEvent:
                 
                 rts
 
-	; End of function nullsub_85
+	; End of function Map20_21F_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================

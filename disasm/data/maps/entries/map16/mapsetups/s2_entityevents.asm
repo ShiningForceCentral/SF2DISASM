@@ -3,7 +3,7 @@
 ; 0x51E32..0x51EE4 : 
 ms_map16_EntityEvents:
                 msEntityEvent 148, DOWN, Map16_EntityEvent0-ms_map16_EntityEvents
-                msDefaultEntityEvent 0, nullsub_119-ms_map16_EntityEvents
+                msDefaultEntityEvent Map16_DefaultEntityEvent-ms_map16_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -204,9 +204,9 @@ Map16_297_EntityEvent16:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_119:
+Map16_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_119
+	; End of function Map16_DefaultEntityEvent
 

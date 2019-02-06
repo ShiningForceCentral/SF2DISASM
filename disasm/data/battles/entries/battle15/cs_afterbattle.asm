@@ -77,7 +77,7 @@ abcs_battle15:  textCursor $9CA
                 endActions
                 hide $1E
                 clearF $4D              ; Old man is a follower
-                setF $2DC               ; set after the old man fails to open the way to Grans in the Wooden Panel shrine
+                setF $2DC               ; Set after the old man fails to open the way to Grans in the Wooden Panel shrine
                 followEntity $7,$0,$2
                 followEntity $1F,$7,$2
                 warp $32,$1B,$B,$1

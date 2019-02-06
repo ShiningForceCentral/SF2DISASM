@@ -8,7 +8,7 @@ ms_map23_EntityEvents:
                 msEntityEvent 131, UP, Map23_EntityEvent3-ms_map23_EntityEvents
                 msEntityEvent 132, UP, Map23_EntityEvent4-ms_map23_EntityEvents
                 msEntityEvent 133, UP, Map23_EntityEvent5-ms_map23_EntityEvents
-                msDefaultEntityEvent 0, nullsub_129-ms_map23_EntityEvents
+                msDefaultEntityEvent Map23_DefaultEntityEvent-ms_map23_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -90,9 +90,9 @@ Map23_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_129:
+Map23_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_129
+	; End of function Map23_DefaultEntityEvent
 

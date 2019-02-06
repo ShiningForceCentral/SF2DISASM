@@ -37,7 +37,8 @@ cs_54578:       textCursor $3F5
                 endActions
                 entityActionsWait $0
                  moveRight 4
-dftentevt_545B6: moveDown 1
+Map21_DefaultZoneEvent:
+                 moveDown 1
                  moveRight 1
                  moveRight 1
                  moveRight 2
@@ -122,7 +123,7 @@ dftentevt_545B6: moveDown 1
                 setQuake 0
                 csWait 120
                 warp $49,$1A,$D,$0
-                clearF $280             ; set after the end of battle 7's long sequence, cleared at docks?
+                clearF $280             ; Set after the end of battle 7's long sequence, cleared at docks?
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -132,7 +133,7 @@ csub_54714:
                 moveq   #$F,d7
 loc_54716:
                 
-                subq.b  #1,($FFFFA846).w
+                subq.b  #1,((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
                 moveq   #4,d0
                 jsr     (Sleep).w       
                 dbf     d7,loc_54716

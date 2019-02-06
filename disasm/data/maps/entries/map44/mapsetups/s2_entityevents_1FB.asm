@@ -12,7 +12,7 @@ ms_map44_flag1FB_EntityEvents:
                 msEntityEvent 138, UP, Map44_1FB_EntityEvent7-ms_map44_flag1FB_EntityEvents
                 msEntityEvent 139, UP, Map44_1FB_EntityEvent8-ms_map44_flag1FB_EntityEvents
                 msEntityEvent 140, UP, Map44_1FB_EntityEvent9-ms_map44_flag1FB_EntityEvents
-                msDefaultEntityEvent 0, nullsub_146-ms_map44_flag1FB_EntityEvents
+                msDefaultEntityEvent Map44_DefaultEntityEvent-ms_map44_flag1FB_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -231,9 +231,9 @@ Map44_1FB_EntityEvent9:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_146:
+Map44_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_146
+	; End of function Map44_DefaultEntityEvent
 

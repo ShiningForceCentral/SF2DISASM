@@ -43,7 +43,7 @@ loc_280AA:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_CheckConfigurationModeCheat
-                move.l  #InputSequence_DebugMode,((dword_FFB1A0-$1000000)).w
+                move.l  #InputSequence_DebugMode,((ENTITY_WALKING_PARAMS-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_CheckDebugModeCheat
@@ -1188,7 +1188,7 @@ InputSequence_ConfigurationMode:
 
 VInt_CheckDebugModeCheat:
                 
-                movea.l ((dword_FFB1A0-$1000000)).w,a0
+                movea.l ((ENTITY_WALKING_PARAMS-$1000000)).w,a0
                 cmpi.b  #$FF,(a0)
                 bne.s   loc_28FE2
                 move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
@@ -1199,7 +1199,7 @@ loc_28FE2:
                 move.b  (a0),d0
                 cmp.b   ((P1_INPUT-$1000000)).w,d0
                 bne.s   return_28FEE
-                addq.l  #1,((dword_FFB1A0-$1000000)).w
+                addq.l  #1,((ENTITY_WALKING_PARAMS-$1000000)).w
 return_28FEE:
                 
                 rts

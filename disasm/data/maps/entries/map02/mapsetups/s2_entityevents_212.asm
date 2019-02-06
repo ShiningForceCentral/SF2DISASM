@@ -11,7 +11,7 @@ ms_map2_flag212_EntityEvents:
                 msEntityEvent 134, UP, (Map2_EntityEvent7-ms_map2_flag212_EntityEvents) & $FFFF
                 msEntityEvent 135, UP, (Map2_EntityEvent8-ms_map2_flag212_EntityEvents) & $FFFF
                 msEntityEvent 136, UP, (Map2_EntityEvent9-ms_map2_flag212_EntityEvents) & $FFFF
-                msDefaultEntityEvent 0, (nullsub_154-ms_map2_flag212_EntityEvents) & $FFFF
+                msDefaultEntityEvent (Map2_DefaultEntityEvent-ms_map2_flag212_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

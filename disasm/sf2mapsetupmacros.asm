@@ -66,6 +66,12 @@ msEntityEvent:	macro
 	
 msDefaultEntityEvent:	macro
 	dc.b $FD
+	dc.b 0
+	dc.w \1
+	endm
+	
+msDftEntityEvent:	macro
+	dc.b $FD
 	dc.b \1
 	dc.w \2
 	endm
@@ -77,6 +83,12 @@ msZoneEvent:	macro
 	endm
 	
 msDefaultZoneEvent:	macro
+	dc.b $FD
+	dc.b 0
+	dc.w \1
+	endm
+	
+msDftZoneEvent:	macro
 	dc.b $FD
 	dc.b \1
 	dc.w \2

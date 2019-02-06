@@ -4,16 +4,16 @@
 ms_map8_EntityEvents:
                 msEntityEvent 128, UP, Map8_EntityEvent0-ms_map8_EntityEvents
                 msEntityEvent 129, UP, Map8_EntityEvent1-ms_map8_EntityEvents
-                msDefaultEntityEvent 0, return_56144-ms_map8_EntityEvents
+                msDefaultEntityEvent Map8_DefaultEntityEvent-ms_map8_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
 Map8_EntityEvent0:
                 
                  
-                chkFlg  $100            ; Temporary map setup flag 00
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   byte_560A6      
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
                 txt     $529            ; "Our ancestors came from{N}Rune, a southern island,{N}long ago.{W2}"
                 txt     $52A            ; "Since then, we've travelled{N}up here.{W2}"
                 txt     $52B            ; "The mountains to the north{N}block our journey.{W2}"
@@ -74,7 +74,7 @@ Map8_2C4_EntityEvent4:
 Map8_2C4_EntityEvent5:
                 
                  
-                chkFlg  $2DB            ; set after you open the tree in Ribble with the wooden plank
+                chkFlg  $2DB            ; Set after you open the tree in Ribble with the wooden plank
                 bne.s   byte_560DC      
                 txt     $532            ; "I can't find it!{W2}"
                 txt     $533            ; "The hidden door to the{N}ancient ruins must be near{N}this tree!{W1}"
@@ -177,9 +177,9 @@ Map8_2C4_EntityEvent12:
                 
                  
                 chkFlg  $8              ; May joined
-                bne.s   return_56144
+                bne.s   Map8_DefaultEntityEvent
                 script  cs_56146
-return_56144:
+Map8_DefaultEntityEvent:
                 
                 rts
 

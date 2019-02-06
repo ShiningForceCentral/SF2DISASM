@@ -8,15 +8,15 @@ ms_map20_flag21F_EntityEvents:
                 msEntityEvent 131, DOWN, Map20_21F_EntityEvent3-ms_map20_flag21F_EntityEvents
                 msEntityEvent 132, DOWN, Map20_21F_EntityEvent4-ms_map20_flag21F_EntityEvents
                 msEntityEvent 133, DOWN, Map20_21F_EntityEvent5-ms_map20_flag21F_EntityEvents
-                msDefaultEntityEvent 0, nullsub_125-ms_map20_flag21F_EntityEvents
+                msDefaultEntityEvent Map20_21F_DefaultEntityEvent-ms_map20_flag21F_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_125:
+Map20_21F_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_125
+	; End of function Map20_21F_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================

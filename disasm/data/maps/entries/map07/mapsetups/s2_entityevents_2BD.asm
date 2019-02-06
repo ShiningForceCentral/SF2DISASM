@@ -18,4 +18,4 @@ ms_map7_flag2BD_EntityEvents:
                 msEntityEvent 2, DOWN, Map7_2BD_EntityEvent12-ms_map7_flag2BD_EntityEvents
                 msEntityEvent 1, DOWN, Map7_2BD_EntityEvent14-ms_map7_flag2BD_EntityEvents
                 msEntityEvent 3, DOWN, Map7_2BD_EntityEvent12-ms_map7_flag2BD_EntityEvents
-                msDefaultEntityEvent 0, entevdft_5579C-ms_map7_flag2BD_EntityEvents
+                msDefaultEntityEvent Map7_DefaultEntityEvent-ms_map7_flag2BD_EntityEvents

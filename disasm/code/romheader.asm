@@ -9,7 +9,7 @@ p_Start:        dc.l Start              ; Start Address
 off_10:         dc.l Int_IllegalInstruction; Illegal instruction
                 dc.l Int_ZeroDivide     ; Zero Divide
                 dc.l Int_OtherError     ; CHK instruction
-                dc.l Int_OtherError     ; TRAPV instruction
+off_1C:         dc.l Int_OtherError     ; TRAPV instruction
                 dc.l Int_OtherError     ; Privilege Violation
                 dc.l Int_OtherError     ; Trace
                 dc.l Int_OtherError     ; Line 1010 Emulator

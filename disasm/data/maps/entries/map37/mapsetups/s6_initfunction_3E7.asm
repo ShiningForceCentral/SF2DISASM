@@ -6,11 +6,11 @@
 
 ms_map37_flag3E7_InitFunction:
                 
-                jsr     sub_47948
-                chkFlg  $100            ; Temporary map setup flag 00
+                jsr     InitNazcaShipForceMembers
+                chkFlg  $100            ; TEMP FLAG #00
                 bne.s   return_5FABA
                 script  cs_5FABC
-                setFlg  $100            ; Temporary map setup flag 00
+                setFlg  $100            ; TEMP FLAG #00
 return_5FABA:
                 
                 rts
@@ -173,7 +173,7 @@ csub_5FD3A:
                 moveq   #7,d7
 loc_5FD3C:
                 
-                subq.b  #1,($FFFFA849).w
+                subq.b  #1,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
                 moveq   #4,d0
                 jsr     (Sleep).w       
                 dbf     d7,loc_5FD3C

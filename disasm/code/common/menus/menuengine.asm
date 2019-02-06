@@ -856,7 +856,7 @@ loc_10420:
                 lea     ($B800).l,a1
                 move.w  #$90,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function LoadVDPTileListForDiamenuIconTop
 
@@ -876,7 +876,7 @@ loc_10440:
                 lea     ($B920).l,a1
                 move.w  #$C0,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function LoadVDPTileListForDiamenuIconLeft
 
@@ -896,7 +896,7 @@ loc_1046A:
                 lea     ($BAA0).l,a1
                 move.w  #$C0,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function LoadVDPTileListForDiamenuIconRight
 
@@ -998,7 +998,7 @@ loc_10558:
                 lea     ($BC20).l,a1
                 move.w  #$90,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function LoadVDPTileListForDiamenuIconBottom
 
@@ -1286,7 +1286,7 @@ loc_10810:
                 lea     ($B800).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function sub_10800
 
@@ -1306,7 +1306,7 @@ loc_10830:
                 lea     ($B8C0).l,a1
                 move.w  #$80,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function sub_10820
 
@@ -1326,7 +1326,7 @@ loc_1085A:
                 lea     ($BA80).l,a1
                 move.w  #$80,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function sub_1084A
 
@@ -1424,7 +1424,7 @@ loc_10930:
                 lea     ($B9C0).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function sub_10920
 
@@ -1749,7 +1749,7 @@ sub_10CC6:
                 lea     ($BC00).l,a1
                 move.w  #$A0,d0 
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 move.w  (sp)+,d0
                 move.w  d0,d4
@@ -2773,7 +2773,7 @@ loc_11830:
                 movea.w d2,a1
                 move.w  #$50,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function sub_11826
 
@@ -3389,7 +3389,7 @@ loc_11D6C:
                 moveq   #3,d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
                 bra.s   loc_11DDC
 loc_11DBC:
                 
@@ -3402,7 +3402,7 @@ loc_11DBC:
                 moveq   #3,d1
                 moveq   #$FFFFFFFF,d2
                 move.w  #$AB,d3 
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
 loc_11DDC:
                 
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
@@ -3471,7 +3471,7 @@ loc_11E82:
                 move.b  $10(a0),d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
                 bra.s   loc_11EBA
 loc_11E94:
                 
@@ -3486,7 +3486,7 @@ loc_11E94:
                 move.b  $10(a0),d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
-                jsr     (sub_6052).w    
+                jsr     (UpdateEntityProperties).w
 loc_11EBA:
                 
                 jsr     (WaitForVint_andFFA900Clear).w
@@ -3975,7 +3975,7 @@ loc_123F2:
                 
                 move.w  -2(a6),d0
                 bne.s   loc_12446
-                chkFlg  $180            ; set after Bowie obtains the jewel of light/evil... whichever it is
+                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
                 beq.s   loc_12446
                 move.w  d7,-(sp)
                 lea     aJewel(pc), a0  
@@ -3989,7 +3989,7 @@ loc_123F2:
                 adda.w  #$39E,a1
                 move.w  #$92,d1 
                 bsr.w   CopyMemberScreenIconsToVDPTileOrder
-                chkFlg  $181            ; set after Bowie obtains King Galam's jewel
+                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
                 beq.s   loc_12446
                 movea.l -6(a6),a1
                 adda.w  #$3A2,a1
@@ -4125,7 +4125,7 @@ loc_12556:
                 lea     ($DA00).l,a1
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 unlk    a6
                 rts
@@ -4174,7 +4174,7 @@ loc_1261C:
                 lea     ($E000).l,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jmp     (SetFFDE94b3andWait).w
 
 	; End of function sub_12606
@@ -4481,21 +4481,21 @@ loc_12BF4:
                 lea     ($B800).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 lea     ($C800).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 lea     ($D000).l,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 lea     ($F000).l,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jmp     (SetFFDE94b3andWait).w
 
 ; END OF FUNCTION CHUNK FOR sub_129E8
@@ -4761,13 +4761,13 @@ loc_12EB4:
                 lea     ($C800).l,a1
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 lea     (byte_FF7402).l,a0
                 lea     ($D400).l,a1
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 move.w  d4,d0
                 move.w  #$8080,d1
@@ -4950,7 +4950,7 @@ loc_13066:
                 lea     ($B800).l,a1
                 move.w  #$A0,d0 
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 jsr     (WaitForVint_andFFA900Clear).l
                 moveq   #$14,d1
@@ -6138,7 +6138,7 @@ loc_13C20:
                 lea     ($BC00).l,a1
                 move.w  #$180,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
 loc_13C36:
                 
                 movea.l -6(a6),a1
@@ -6441,7 +6441,7 @@ loc_14098:
                 lea     ($BC00).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function DMAicon1
 
@@ -6459,7 +6459,7 @@ loc_140B8:
                 lea     ($BCC0).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function DMAicon2
 
@@ -6477,7 +6477,7 @@ loc_140D8:
                 lea     ($BD80).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function DMAicon3
 
@@ -6495,7 +6495,7 @@ loc_140F8:
                 lea     ($BE40).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function DMAicon4
 
@@ -7641,7 +7641,7 @@ loc_14C0E:
                 lea     ($B800).l,a1
                 move.w  #$3C0,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (SetFFDE94b3andWait).w
                 rts
 
@@ -9054,7 +9054,7 @@ loc_1543A:
                 lea     ($B800).l,a1
                 move.w  #$90,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function sub_1542A
 
@@ -9072,7 +9072,7 @@ loc_1545A:
                 lea     ($B920).l,a1
                 move.w  #$90,d0 
                 moveq   #2,d1
-                jmp     (sub_119E).w    
+                jmp     (DMA_119E).w    
 
 	; End of function sub_1544A
 
@@ -9338,7 +9338,7 @@ loc_15674:
                 lea     ($F800).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (sub_119E).w    
+                jsr     (DMA_119E).w    
                 jsr     (StoreVdpCommandster).w
                 movem.l (sp)+,d0-a3
                 rts

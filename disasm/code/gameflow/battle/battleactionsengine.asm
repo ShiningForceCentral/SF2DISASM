@@ -252,7 +252,7 @@ loc_9E3E:
                 jsr     MakeTargetListEverybody
                 move.b  #$FF,((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w
                 move.b  (a4),d0
-                jsr     sub_1AC05C
+                jsr     sub_1AC05C      
 loc_9E5A:
                 
                 bsr.w   SortTargets

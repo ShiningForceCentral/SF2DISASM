@@ -9,7 +9,7 @@ abcs_battle16:  executeSubroutine csub_4B1D0
 
 csub_4B1CA:
                 
-                clr.b   ($FFFFF710).w   
+                clr.b   ((PLAYER_TYPE-$1000000)).w
                 rts
 
 	; End of function csub_4B1CA

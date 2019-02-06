@@ -8,10 +8,10 @@ ms_map20_InitFunction:
                 
                 cmpi.l  #$22803780,((ENTITY_DATA-$1000000)).w
                 bne.s   byte_53988      
-                chkFlg  $25D            ; set after the scene in the King's bedroom
+                chkFlg  $25D            ; Set after the scene in the King's bedroom
                 bne.s   byte_53982
                 script  cs_53996
-                setFlg  $25D            ; set after the scene in the King's bedroom
+                setFlg  $25D            ; Set after the scene in the King's bedroom
                 bra.s   byte_53988      
 byte_53982:
                 
@@ -323,7 +323,7 @@ cs_53C42:       setCamDest 19,48
                 reloadMap 0,0
                 csWait 1
                 nextSingleText $FF,$FF  ; "Astral is exhausted.{N}He won't wake up!{W2}{N}The Minister summons the{N}soldiers to the hall to kill{N}the evil spirit.{W1}"
-                setF $261               ; set after the scene where Astral exorcises the Gizmo
+                setF $261               ; Set after the scene where Astral exorcises the Gizmo
                 warp $13,$1D,$8,$1
                 playSound MUSIC_CASTLE
                 csc_end

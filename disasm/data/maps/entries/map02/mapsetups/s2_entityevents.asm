@@ -12,15 +12,15 @@ ms_map2_EntityEvents:
                 msEntityEvent 135, UP, Map2_EntityEvent7-ms_map2_EntityEvents
                 msEntityEvent 136, UP, Map2_EntityEvent8-ms_map2_EntityEvents
                 msEntityEvent 137, UP, Map2_EntityEvent9-ms_map2_EntityEvents
-                msDefaultEntityEvent 0, nullsub_154-ms_map2_EntityEvents
+                msDefaultEntityEvent Map2_DefaultEntityEvent-ms_map2_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_154:
+Map2_DefaultEntityEvent:
                 
                 rts
 
-	; End of function nullsub_154
+	; End of function Map2_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
