@@ -1152,7 +1152,7 @@ LoadMap:
                 clr.b   ((CAMERA_SCROLLING_MASK-$1000000)).w
                 move.w  d0,-(sp)
                 move.w  d1,-(sp)
-                bsr.w   InitDisplay     
+                bsr.w   InitDisplay
                 move.w  (sp)+,d1
                 ext.w   d1
                 bpl.s   loc_2ACC        

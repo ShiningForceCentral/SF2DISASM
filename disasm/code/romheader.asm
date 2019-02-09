@@ -88,4 +88,4 @@ RomEndAddress:  declareRomEnd           ; Rom End Adress
                 dc.b '            '     ; Modem data
                 dc.b '                    '; Memo
                 dc.b '                    '
-aU:             dc.b 'U               ' ; Countries codes
+aU:             headerRegion            ; Countries codes

@@ -117,7 +117,9 @@ loc_2385C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_23862:
+; Get item or area description
+
+CheckArea:
                 
                 move.b  ((CAMERA_ENTITY-$1000000)).w,d0
                 ext.w   d0
@@ -132,7 +134,7 @@ loc_2386C:
                 adda.w  d0,a0
                 move.w  (a0,d0.w),d2
                 move.w  ENTITYDEF_OFFSET_Y(a0,d0.w),d1
-                move.b  $10(a0,d0.w),d3
+                move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),d3
                 move.w  d2,d0
                 andi.w  #3,d3
                 move.w  d3,d5
@@ -233,7 +235,7 @@ return_2399A:
                 
                 rts
 
-	; End of function sub_23862
+	; End of function CheckArea
 
 
 ; =============== S U B R O U T I N E =======================================

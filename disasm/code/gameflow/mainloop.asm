@@ -12,24 +12,24 @@
 ;     D7 = battle idx (FFFF for none)
 ; ...more
 
-MainBattleAndExplorationLoop:
+MainLoop:
                 
-                clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
+                clr.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w
 loc_75C8:
                 
-                bsr.w   AlterMapIndexIfChanged
-                bsr.w   GetNextBattleOnMap
+                bsr.w   CheckMapSwitch  ; Check table "FlagSwitchedMaps" for possible flag-triggered map switch
+                bsr.w   CheckBattle     ; Check table "BattleMapCoords" and then "Battle unlocked" flags for possible battle according to map and player coords
                 cmpi.w  #$FFFF,d7
-                beq.w   loc_75E4
+                beq.w   loc_75E4        ; If battle index available, enter battle loop
                 move.w  d7,d1
-                jsr     j_ExecuteBattleLoop
+                jsr     j_BattleLoop    ; Return when battle ends
 loc_75E0:
                 
-                bsr.w   AlterMapIndexIfChanged
+                bsr.w   CheckMapSwitch  ; Check table "FlagSwitchedMaps" for possible flag-triggered map switch
 loc_75E4:
                 
-                jsr     j_ExecuteExplorationLoop
-                bra.s   loc_75C8
+                jsr     j_ExplorationLoop
+                bra.s   loc_75C8        ; Return in case of warp event
 
-	; End of function MainBattleAndExplorationLoop
+	; End of function MainLoop
 

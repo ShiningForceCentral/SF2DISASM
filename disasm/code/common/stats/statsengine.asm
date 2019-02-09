@@ -1178,11 +1178,11 @@ j_Promote:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_DebugModeSelectAction:
+j_DebugModeActionSelect:
                 
-                jmp     DebugModeSelectAction(pc)
+                jmp     DebugModeActionSelect(pc)
 
-	; End of function j_DebugModeSelectAction
+	; End of function j_DebugModeActionSelect
 
 
 ; =============== S U B R O U T I N E =======================================

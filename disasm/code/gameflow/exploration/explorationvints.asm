@@ -4,7 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-SetExplorationVIntFunctions:
+; Manage debug actions, entity events, item finds, area descriptions, caravan or main menu
+
+ProcessPlayerAction:
                 
                 move.b  ((P1_INPUT-$1000000)).w,d7
                 clr.w   d0
@@ -12,16 +14,18 @@ SetExplorationVIntFunctions:
                 clr.w   d0
                 jsr     j_WaitForEntityToStopMoving
                 jsr     (WaitForCameraToCatchUp).l
-                btst    #6,d7
-                bne.w   loc_25BCC
-                btst    #5,d7
-                bne.w   loc_25B02
+                btst    #INPUT_A_A_BIT,d7
+                bne.w   loc_25BCC       
+                btst    #INPUT_A_C_BIT,d7
+                bne.w   loc_25B02       
                 rts
 loc_25B02:
                 
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
-                beq.s   loc_25B40
+                                                        ; BUTTON C PUSHED
+                beq.s   loc_25B40       
                 btst    #INPUT_A_B_BIT,((P2_INPUT-$1000000)).w
+                                                        ; If Debug Mode and P1 C pushed while P2 B pushed, access Debug Flag Setter and then Chuch Actions
                 beq.s   loc_25B22
                 move.w  #$258,d0
                 jsr     j_DebugFlagSetter
@@ -30,24 +34,25 @@ loc_25B02:
 loc_25B22:
                 
                 btst    #INPUT_A_C_BIT,((P2_INPUT-$1000000)).w
-                bne.w   loc_25BF4
+                bne.w   loc_25BF4       
                 btst    #INPUT_A_A_BIT,((P2_INPUT-$1000000)).w
-                beq.s   loc_25B40
+                                                        ; If Debug Mode and P1 C pushed while P2 A pushed, access Debug Mode Action Select
+                beq.s   loc_25B40       
                 jsr     (FadeOutToBlack).w
-                jsr     j_DebugModeSelectAction
+                jsr     j_DebugModeActionSelect
                 rts
 loc_25B40:
                 
-                lea     ((ENTITY_DATA-$1000000)).w,a0
+                lea     ((ENTITY_DATA-$1000000)).w,a0; Not in debug mode
                 cmpi.b  #$3E,$33(a0) 
                 bne.s   loc_25BAA
-                move.w  $C(a0),d0
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
                 sub.w   $2C(a0),d0
                 bge.s   loc_25B58
                 neg.w   d0
 loc_25B58:
                 
-                move.w  $E(a0),d1
+                move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
                 sub.w   $2E(a0),d1
                 bge.s   loc_25B64
                 neg.w   d1
@@ -55,8 +60,8 @@ loc_25B64:
                 
                 add.w   d1,d0
                 bne.s   loc_25BAA
-                sndCom  SOUND_COMMAND_FADE_OUT
-                bsr.w   sub_25A6C
+                sndCom  SOUND_COMMAND_FADE_OUT; CARAVAN ACTIONS
+                bsr.w   j_j_ShrinkInBowieAndFollowers
                 sndCom  MUSIC_HEADQUARTERS
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
@@ -79,18 +84,18 @@ loc_25BAA:
                 
                 bsr.w   GetActivatedEntity
                 tst.w   d0
-                blt.s   loc_25BC0
+                blt.s   loc_25BC0       
                 bsr.w   GetEntityEventIdx
-                jsr     j_ExecuteEntityEvent
+                jsr     j_RunEntityEvent
                 bra.w   return_25BF2
 loc_25BC0:
                 
-                moveq   #1,d6
-                jsr     sub_23862
+                moveq   #1,d6           ; No entity event
+                jsr     CheckArea       
                 bne.w   return_25BF2
 loc_25BCC:
                 
-                trap    #VINT_FUNCTIONS
+                trap    #VINT_FUNCTIONS ; Button A pushed, or button C pushed with no other event : main menu
                 dc.w VINTS_DEACTIVATE
                 dc.l VInt_UpdateEntities
                 trap    #VINT_FUNCTIONS
@@ -108,8 +113,8 @@ return_25BF2:
                 rts
 loc_25BF4:
                 
-                jsr     j_ExecuteDebugMapScript
+                jsr     j_DebugMapScript; If Debug Mode and P1 C pushed while P2 C pushed, execute debug cutscene
                 rts
 
-	; End of function SetExplorationVIntFunctions
+	; End of function ProcessPlayerAction
 

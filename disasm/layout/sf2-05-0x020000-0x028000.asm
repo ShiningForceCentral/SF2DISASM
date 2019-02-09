@@ -16,8 +16,8 @@ j_CaravanActions:
                 jmp     CaravanMenuActions(pc)
 j_LevelUpCutscene:                
                 jmp     LevelUpCutscene(pc)
-j_ExecuteExplorationLoop:                
-                jmp     ExecuteExplorationLoop(pc)
+j_ExplorationLoop:                
+                jmp     ExplorationLoop(pc)
 j_LoadUnitCursorTileData:                
                 jmp     LoadUnitCursorTileData(pc)
 sub_20020:                
@@ -30,20 +30,20 @@ j_SetUnitCursorDestinationToNextBattleEntity:
                 jmp     SetUnitCursorDestinationToNextBattleEntity(pc)
 j_SetCameraDestInTiles:                
                 jmp     SetCameraDestInTiles(pc)
-j_ExecuteBattleLoop:                
-                jmp     ExecuteBattleLoop(pc)
-j_ExecuteBattleLoop_Unused:                
-                jmp     ExecuteBattleLoop(pc)
+j_BattleLoop:                
+                jmp     BattleLoop(pc)  
+j_BattleLoop_Unused:                
+                jmp     BattleLoop(pc)  
 j_GetEntityEventIdx:                
                 jmp     GetEntityEventIdx(pc)
 j_GetEntityIndex:                
                 jmp     GetEntityNumberOfCombatant(pc)
-j_FadeOut_WaitForP2Input:                
+j_FadeOut_WaitForP1Input:                
                 jmp     FadeOut_WaitForP1Input(pc)
 j_SetEntityPosition:                
                 jmp     SetEntityPosition(pc)
-sub_2004C:                
-                jmp     sub_23862(pc)
+j_CheckArea:                
+                jmp     CheckArea(pc)   
 j_UpdateSpecialSprites:                
                 jmp     UpdateSpecialSprites(pc)
 j_LoadSpecialSprite:                

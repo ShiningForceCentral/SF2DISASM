@@ -30,7 +30,7 @@ loc_9BC4:
                 beq.s   loc_9BD8
 loc_9BD4:
                 
-                bsr.w   DebugModeSelectAction
+                bsr.w   DebugModeActionSelect
 loc_9BD8:
                 
                 btst    #INPUT_A_START_BIT,((P2_INPUT-$1000000)).w

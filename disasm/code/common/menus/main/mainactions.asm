@@ -545,7 +545,7 @@ loc_219D8:
 loc_219DC:
                 
                 clr.w   d6
-                jsr     sub_2004C
+                jsr     j_CheckArea
                 bra.w   loc_212A0
 loc_219E8:
                 

@@ -2,7 +2,7 @@
 ; ASM FILE code\gameflow\exploration\explorationfunctions_1.asm :
 ; 0x239C8..0x23A84 : Exploration functions
 
-; START OF FUNCTION CHUNK FOR sub_23862
+; START OF FUNCTION CHUNK FOR CheckArea
 
 loc_239C8:
                 
@@ -68,5 +68,5 @@ loc_23A66:
                 jsr     (RefillNonChestItem).w
                 bra.w   byte_23994
 
-; END OF FUNCTION CHUNK FOR sub_23862
+; END OF FUNCTION CHUNK FOR CheckArea
 

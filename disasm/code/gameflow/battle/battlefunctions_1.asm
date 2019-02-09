@@ -7,7 +7,7 @@
 ; In: D0 = map idx
 ;     D1 = battle idx
 
-ExecuteBattleLoop:
+BattleLoop:
                 
                 clr.b   ((PLAYER_TYPE-$1000000)).w
                 setFlg  $18F            ; Set after first battle's cutscene OR first save? Checked at witch screens
@@ -26,7 +26,7 @@ loc_23AB2:
                 movem.w d0-d1,-(sp)
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 move.b  d1,((CURRENT_BATTLE-$1000000)).w
-                bsr.w   SetBattleVIntFunctions
+                bsr.w   SetBaseVIntFunctions
                 jsr     j_ExecuteBattleCutscene_Intro
                 movem.w (sp)+,d0-d1
                 move.b  d0,((CURRENT_MAP-$1000000)).w
@@ -133,7 +133,7 @@ loc_23BF4:
                 dbf     d7,loc_23BC2    
                 rts
 
-	; End of function ExecuteBattleLoop
+	; End of function BattleLoop
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -222,7 +222,7 @@ return_23CB8:
 	; End of function GetRemainingFighters
 
 
-; START OF FUNCTION CHUNK FOR ExecuteBattleLoop
+; START OF FUNCTION CHUNK FOR BattleLoop
 
 loc_23CBA:
                 
@@ -290,7 +290,7 @@ return_23D96:
                 
                 rts
 
-; END OF FUNCTION CHUNK FOR ExecuteBattleLoop
+; END OF FUNCTION CHUNK FOR BattleLoop
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -697,7 +697,7 @@ loc_241C4:
                 
                 movem.l a6,-(sp)
                 jsr     j_InitializeBattleScene
-                move.b  #$FF,((WINDOW_HIDING_FORBIDDEN-$1000000)).w
+                move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 jsr     j_ExecuteBattleSceneScript
                 jsr     sub_1800C
                 jsr     j_ApplyPositionsAfterEnemyLeaderDies
@@ -709,7 +709,7 @@ loc_241C4:
                 jsr     LoadBattle(pc)  
                 nop
                 jsr     (WaitForVInt).w 
-                clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
+                clr.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
                 movem.l (sp)+,a6
                 bra.s   loc_2423E
@@ -2603,9 +2603,9 @@ loc_25646:
                 jsr     (LoadMap).w     
                 jsr     (WaitForVInt).w 
                 jsr     (LoadMapEntitySprites).w
-                bsr.w   SetBattleVIntFunctions
+                bsr.w   SetBaseVIntFunctions
                 jsr     j_LoadBattleTerrainData
-                jsr     (LoadBattleMusic).w
+                jsr     (PlayMapMusic).w
                 jsr     (FadeInFromBlack).w
                 cmpi.b  #BATTLEIDX_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w
                                                         ; if battle 44, then special battle !

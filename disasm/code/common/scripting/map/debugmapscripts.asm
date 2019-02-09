@@ -7,7 +7,7 @@ DebugMapScripts:dc.l dms_01
 
 ; =============== S U B R O U T I N E =======================================
 
-ExecuteDebugMapScript:
+DebugMapScript:
                 
                 clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 moveq   #0,d0
@@ -19,5 +19,5 @@ ExecuteDebugMapScript:
                 bsr.w   ExecuteMapScript
                 rts
 
-	; End of function ExecuteDebugMapScript
+	; End of function DebugMapScript
 

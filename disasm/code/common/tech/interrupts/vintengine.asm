@@ -18,7 +18,7 @@ VInt:
                 bsr.w   UpdateSoundAndInputAndPalettes
                 andi    #$F800,sr       ; disable interrupts
                 clr.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
-                tst.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
+                tst.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 bne.s   loc_5DA
                 btst    #7,((P1_INPUT-$1000000)).w; if Start pushed, hide windows
                 beq.s   loc_5DA

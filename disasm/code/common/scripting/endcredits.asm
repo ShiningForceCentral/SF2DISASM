@@ -13,7 +13,7 @@ PlayEndCredits:
                 jsr     (DisableDisplayAndVInt).w
                 jsr     (ClearVsramAndSprites).w
                 jsr     (EnableDisplayAndInterrupts).w
-                jsr     (InitDisplay).w 
+                jsr     (InitDisplay).w
                 bsr.w   ClearPalette2
                 jsr     (DisableDisplayAndVInt).w
                 bsr.w   LoadEndCreditsFont

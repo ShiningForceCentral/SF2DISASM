@@ -19,7 +19,7 @@ GameInit:
                 btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
                 beq.s   loc_7118
                 jsr     (EnableDisplayAndInterrupts).w
-                bsr.w   InitDisplay     
+                bsr.w   InitDisplay
                 jsr     (EnableDisplayAndInterrupts).w
                 jmp     j_rts
 loc_7118:
@@ -29,7 +29,7 @@ loc_7118:
                 btst    #INPUT_A_DOWN_BIT,((P1_INPUT-$1000000)).w
                 beq.w   j_GameIntro
                 jsr     (EnableDisplayAndInterrupts).w
-                bsr.w   InitDisplay     
+                bsr.w   InitDisplay
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   FadeInFromBlack
                 trap    #VINT_FUNCTIONS
@@ -50,8 +50,8 @@ loc_7118:
                 move.w  #$258,d0
                 jsr     j_DebugFlagSetter
                 movem.w (sp)+,d0-d4
-                jsr     j_ExecuteExplorationLoop
-                bra.w   MainBattleAndExplorationLoop
+                jsr     j_ExplorationLoop
+                bra.w   MainLoop        
 
 	; End of function GameInit
 

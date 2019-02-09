@@ -4,9 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; overrides music index if we're in a battle
-
-LoadBattleMusic:
+PlayMapMusic:
                 
                 move.w  d0,-(sp)
                 clr.w   d0
@@ -21,7 +19,7 @@ loc_4554:
                 bne.s   loc_455E
 loc_455A:
                 
-                move.w  #MUSIC_BATTLE_THEME_3,d0; HARDCODED music indexes here
+                move.w  #MUSIC_BATTLE_THEME_3,d0; HARDCODED battle music indexes here
 loc_455E:
                 
                 cmpi.b  #MUSIC_TOWN,d0
@@ -48,5 +46,5 @@ byte_4586:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function LoadBattleMusic
+	; End of function PlayMapMusic
 

@@ -4697,7 +4697,7 @@ loc_12DDE:
 
 PlayEndKiss:
                 
-                move.b  #$FF,(WINDOW_HIDING_FORBIDDEN).l
+                move.b  #$FF,(DEACTIVATE_WINDOW_HIDING).l
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 move.w  #$120E,d0
                 move.w  #$707,d1

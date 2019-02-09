@@ -6,7 +6,7 @@
 
 ; init vint contextual functions
 
-SetBattleVIntFunctions:
+SetBaseVIntFunctions:
                 
                 jsr     (InitWindowProperties).w
                 trap    #VINT_FUNCTIONS
@@ -34,5 +34,5 @@ SetBattleVIntFunctions:
                 dc.l VInt_UpdateAnimatingTiles
                 rts
 
-	; End of function SetBattleVIntFunctions
+	; End of function SetBaseVIntFunctions
 

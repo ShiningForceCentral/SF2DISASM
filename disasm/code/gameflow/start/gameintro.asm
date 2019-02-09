@@ -49,7 +49,7 @@ loc_71EC:
                 jsr     (ClearVscrollStuff).w
                 jsr     (ClearOtherVscrollStuff).w
                 jsr     (SetFFDE94b3andWait).w
-                bsr.w   InitDisplay     
+                bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndVInt
                 sndCom  MUSIC_TITLE
                 jsr     TitleScreen
@@ -63,7 +63,7 @@ loc_724E:
                 bsr.w   DisableDisplayAndVInt; title screen -> witch menu
                 bsr.w   ClearVsramAndSprites
                 bsr.w   EnableDisplayAndInterrupts
-                move.b  #$FF,((WINDOW_HIDING_FORBIDDEN-$1000000)).w
+                move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 clr.w   d6
@@ -72,7 +72,7 @@ loc_724E:
                 jsr     (ClearVscrollStuff).w
                 jsr     (ClearOtherVscrollStuff).w
                 jsr     (SetFFDE94b3andWait).w
-                bsr.w   InitDisplay     
+                bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndVInt
                 clr.b   ((byte_FFB198-$1000000)).w
                 move.w  #$48,((SPEECH_SFX-$1000000)).w 
@@ -115,7 +115,7 @@ loc_729C:
                 move.l  #1,((TEXT_NUMBER-$1000000)).w
                 sndCom  MUSIC_CORRUPTED_SAVE
                 txt     $ED             ; "Ooops!  Record {#} has{N}vanished!{W2}"
-                jsr     j_FadeOut_WaitForP2Input
+                jsr     j_FadeOut_WaitForP1Input
 loc_7332:
                 
                 tst.w   d1
@@ -123,7 +123,7 @@ loc_7332:
                 move.l  #2,((TEXT_NUMBER-$1000000)).w
                 sndCom  MUSIC_CORRUPTED_SAVE
                 txt     $ED             ; "Ooops!  Record {#} has{N}vanished!{W2}"
-                jsr     j_FadeOut_WaitForP2Input
+                jsr     j_FadeOut_WaitForP1Input
 loc_734C:
                 
                 btst    #7,((P1_INPUT-$1000000)).w

@@ -158,3 +158,12 @@ script:	macro
 	trap #MAPSCRIPT
 	endm
 	
+flagSwitchedMap:	macro
+	dc.w \1
+	dc.w \2
+	dc.w \3
+	endm
+
+flagSwitchedMapsEnd:	macro
+	dc.w $FFFF
+	endm

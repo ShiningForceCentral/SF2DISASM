@@ -383,7 +383,7 @@ loc_473D4:
                 txt     $1BE            ; "{NAME} the {CLASS} {N}has joined the force."
 loc_473EC:
                 
-                jsr     j_FadeOut_WaitForP2Input
+                jsr     j_FadeOut_WaitForP1Input
                 clsTxt
                 moveq   #$A,d0
                 jsr     (Sleep).w       

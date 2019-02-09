@@ -8,7 +8,7 @@
 ; In: D0 = map idx
 ; Out: D0 = new map idx
 
-AlterMapIndexIfChanged:
+CheckMapSwitch:
                 
                 movem.l d1-d2/a0,-(sp)
                 lea     FlagSwitchedMaps(pc), a0
@@ -32,5 +32,5 @@ loc_7982:
                 movem.l (sp)+,d1-d2/a0
                 rts
 
-	; End of function AlterMapIndexIfChanged
+	; End of function CheckMapSwitch
 

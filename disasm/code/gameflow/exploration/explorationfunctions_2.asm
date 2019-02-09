@@ -4,10 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ExecuteExplorationLoop:
+ExplorationLoop:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
-                subi.w  #$4E20,((word_FFB196-$1000000)).w
+                subi.w  #20000,((word_FFB196-$1000000)).w
                 bge.s   loc_257D0
                 clr.w   ((word_FFB196-$1000000)).w
 loc_257D0:
@@ -32,7 +32,7 @@ loc_257D0:
                 jsr     j_GetMapSetupEntities
                 jsr     j_InitMapEntities
                 jsr     (LoadMapEntitySprites).w
-                bsr.w   loc_2588A
+                bsr.w   ClearMapTempFlags
                 setFlg  $50             ; Set @ loc_257D0, also set during exploration loop at 0x25824
                 bra.s   loc_25836
 loc_25828:
@@ -42,50 +42,56 @@ loc_25828:
                 jsr     sub_440AC
 loc_25836:
                 
-                jsr     (sub_4EC6).w
+                jsr     (sub_4EC6).w    
                 move.w  (sp)+,d1
                 move.w  #$FFFF,d0
                 move.b  #0,((CAMERA_ENTITY-$1000000)).w
                 jsr     (LoadMap).w     
-                bsr.w   SetBattleVIntFunctions
+                bsr.w   SetBaseVIntFunctions
                 jsr     j_RunMapSetupInitFunction
                 move.l  (dword_FFD084).l,d0
                 cmp.l   (PALETTE_1_0F).l,d0
                 beq.s   loc_2586A       
-                jsr     (LoadBattleMusic).w
+                jsr     (PlayMapMusic).w
                 jsr     (FadeInFromBlack).w
 loc_2586A:
                 
-                clr.w   d0              ; MAIN MAP LOOP
+                clr.w   d0              ; MAIN EXPLORATION LOOP
                 bsr.w   SetMoveSfx
-                bsr.w   WaitForEvent
+                bsr.w   WaitForEvent    
                 tst.w   d0
-                beq.s   loc_2587E
-                bsr.w   ProcessMapEvent ; map event
+                beq.s   loc_2587E       
+                bsr.w   ProcessMapEvent ; Map event
                 bra.s   loc_2586A       
 loc_2587E:
                 
-                tst.w   d1
+                tst.w   d1              ; Player action (A/C button)
                 beq.s   loc_25888
-                bsr.w   SetExplorationVIntFunctions; A or C button pushed
+                bsr.w   ProcessPlayerAction
                 bra.s   loc_2586A       
 loc_25888:
                 
                 bra.s   loc_2586A       
-loc_2588A:
+
+	; End of function ExplorationLoop
+
+
+; =============== S U B R O U T I N E =======================================
+
+ClearMapTempFlags:
                 
                 movem.w d1/d7,-(sp)
-                move.w  #$100,d1
-                move.w  #$7F,d7 
+                move.w  #$100,d1        ; Map setup temp flag start index
+                move.w  #$7F,d7 ; Number of available temp flags
 loc_25896:
                 
-                jsr     j_ClearFlag
+                jsr     j_ClearFlag     ; Clear map setup temp flags
                 addq.w  #1,d1
-                dbf     d7,loc_25896
+                dbf     d7,loc_25896    
                 movem.w (sp)+,d1/d7
                 rts
 
-	; End of function ExecuteExplorationLoop
+	; End of function ClearMapTempFlags
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -157,16 +163,18 @@ return_2591A:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Wait for event OR player action (A/C button)
+
 WaitForEvent:
                 
                 move.w  ((MAP_EVENT_TYPE-$1000000)).w,d0
                 bne.s   loc_25930       
-                move.b  #0,((CAMERA_ENTITY-$1000000)).w
+                move.b  #0,((CAMERA_ENTITY-$1000000)).w; Follow main entity
                 clr.w   d0
                 jsr     j_SetControlledEntityActScript
 loc_25930:
                 
-                clr.w   d0              ; SECONDARY MAP LOOP - wait for map event
+                clr.w   d0              ; SECONDARY EXPLORATION LOOP - Wait for event OR player action (A/C button)
                 clr.w   d1
                 move.w  ((MAP_EVENT_TYPE-$1000000)).w,d0
                 beq.s   loc_2593C
@@ -186,23 +194,21 @@ loc_25948:
 
 ; =============== S U B R O U T I N E =======================================
 
-; deal with "system" event (RAM:FFA84A)
-
 ProcessMapEvent:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType1
+                beq.w   ProcessMapEventType1; Warp
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType2
+                beq.w   ProcessMapEventType2; Control Caravan
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType3
+                beq.w   ProcessMapEventType3; Control Raft
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType4
+                beq.w   ProcessMapEventType4; Get out of Caravan ?
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType5
+                beq.w   ProcessMapEventType5; Get out of Raft ?
                 subq.w  #1,d0
-                beq.w   loc_25A7C
+                beq.w   ProcessMapEventType6; Zone Event
                 sndCom  SFX_BATTLEFIELD_DEATH
                 rts
 
@@ -211,7 +217,7 @@ ProcessMapEvent:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Event type 1
+; Warp
 
 ProcessMapEventType1:
                 
@@ -224,28 +230,32 @@ ProcessMapEventType1:
                 movem.w (sp)+,d0
                 clr.w   d0
                 jsr     j_MakeEntityIdle
-                movem.l (sp)+,d0
+                movem.l (sp)+,d0        ; Alter stack pointer to exit from exploration loop and return to MainLoop
                 clr.w   d0
                 clr.w   d1
                 clr.w   d2
                 clr.w   d3
                 clr.w   d4
                 move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0
+                                                        ; map
                 bsr.w   UpdatePlayerPosFromMapEvent
                 move.b  ((MAP_EVENT_PARAM_3-$1000000)).w,d5
-                blt.s   loc_259BA
+                                                        ; X
+                blt.s   loc_259BA       
                 move.b  d5,d1
 loc_259BA:
                 
                 move.b  ((MAP_EVENT_PARAM_4-$1000000)).w,d5
-                blt.s   loc_259C2
+                                                        ; Y
+                blt.s   loc_259C2       
                 move.b  d5,d2
 loc_259C2:
                 
                 move.b  ((MAP_EVENT_PARAM_5-$1000000)).w,d3
+                                                        ; Facing
                 move.b  ((MAP_EVENT_PARAM_1-$1000000)).w,d4
                                                         ; 0
-                rts
+                rts                     ; Directly goes back to MainLoop
 loc_259CC:
                 
                 clr.w   d0
@@ -356,12 +366,12 @@ ProcessMapEventType5:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25A6C:
+j_j_ShrinkInBowieAndFollowers:
                 
                 jsr     j_ShrinkInBowieAndFollowers
                 rts
 
-	; End of function sub_25A6C
+	; End of function j_j_ShrinkInBowieAndFollowers
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -374,16 +384,20 @@ sub_25A74:
 	; End of function sub_25A74
 
 
-; START OF FUNCTION CHUNK FOR ProcessMapEvent
+; =============== S U B R O U T I N E =======================================
 
-loc_25A7C:
+; Zone Event
+
+ProcessMapEventType6:
                 
-                clr.w   d0              ; Event type 6
-                jsr     sub_4401C       
+                clr.w   d0
+                jsr     j_ApplyInitActscript
                 move.w  ((MAP_EVENT_PARAM_1-$1000000)).w,d1
+                                                        ; X
                 move.w  ((MAP_EVENT_PARAM_3-$1000000)).w,d2
+                                                        ; Y
                 jsr     j_RunMapSetupZoneEvent
                 rts
 
-; END OF FUNCTION CHUNK FOR ProcessMapEvent
+	; End of function ProcessMapEventType6
 

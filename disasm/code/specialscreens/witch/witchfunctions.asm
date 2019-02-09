@@ -6,7 +6,7 @@
 
 InitWitchSuspendVIntFunctions:
                 
-                move.b  #$FF,((WINDOW_HIDING_FORBIDDEN-$1000000)).w
+                move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 clr.w   d6
@@ -18,7 +18,7 @@ InitWitchSuspendVIntFunctions:
                 bsr.w   DisableDisplayAndVInt
                 bsr.w   ClearVsramAndSprites
                 bsr.w   EnableDisplayAndInterrupts
-                bsr.w   InitDisplay     
+                bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndVInt
                 clr.b   ((byte_FFB198-$1000000)).w
                 move.w  #$48,((SPEECH_SFX-$1000000)).w 

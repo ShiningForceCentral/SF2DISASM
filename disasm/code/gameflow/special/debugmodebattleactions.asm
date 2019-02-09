@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-DebugModeSelectAction:
+DebugModeActionSelect:
                 
                 movem.l d0-d3/a0,-(sp)
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
@@ -83,7 +83,7 @@ loc_9B3E:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-	; End of function DebugModeSelectAction
+	; End of function DebugModeActionSelect
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -226,19 +226,17 @@ MakeEntityIdle:
 
 ; =============== S U B R O U T I N E =======================================
 
-; set entity D0's movescript to 0x460ce (default? don't move?)
-
-sub_44C02:
+ApplyInitActscript:
                 
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityRAMAddress
-                move.l  #eas_Init,$14(a0)
+                move.l  #eas_Init,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 rts
 
-	; End of function sub_44C02
+	; End of function ApplyInitActscript
 
 
 ; =============== S U B R O U T I N E =======================================

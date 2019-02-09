@@ -159,9 +159,9 @@ loc_27C2C:
                 jsr     j_ClearEntities
                 setFlg  $190            ; Battle 0 unlocked
                 move.w  #$3F,d0 
-                jsr     (GetNextBattleOnMap).w
+                jsr     (CheckBattle).w 
                 move.w  d7,d1
-                bsr.w   ExecuteBattleLoop
+                bsr.w   BattleLoop      
                 jsr     (FadeOutToWhite).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR

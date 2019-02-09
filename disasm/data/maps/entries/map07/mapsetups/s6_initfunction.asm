@@ -460,7 +460,7 @@ cs_55BEE:       textCursor $4E1
                 nextSingleText $0,$8B   ; "I'm going with you as an{N}adviser.{W1}"
                 playSound MUSIC_JOIN
                 nextText $FF,$FF        ; "Adviser Astral has joined the{N}force."
-                executeSubroutine j_FadeOut_WaitForP2Input
+                executeSubroutine j_FadeOut_WaitForP1Input
                 hideText
                 nextSingleText $0,$8B   ; "We have to remove the rocks{N}blocking the passageway{N}leading to North Parmecia.{W2}{N}Maybe we can use an{N}explosive!{W1}"
                 nod $0

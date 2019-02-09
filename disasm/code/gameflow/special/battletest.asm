@@ -78,7 +78,7 @@ DebugModeBattleTest:
                 bsr.w   j_SetCurrentHP
                 sndCom  MUSIC_BATTLE_THEME_3
                 bsr.w   EnableDisplayAndInterrupts
-                bsr.w   InitDisplay     
+                bsr.w   InitDisplay
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   FadeInFromBlack
                 trap    #VINT_FUNCTIONS
@@ -134,7 +134,7 @@ loc_7820:
                 move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
-                jsr     j_ExecuteBattleLoop
+                jsr     j_BattleLoop
                 jsr     j_ChurchActions
                 txt     $1CC            ; "Shop number?{D1}"
                 move.w  #0,d0

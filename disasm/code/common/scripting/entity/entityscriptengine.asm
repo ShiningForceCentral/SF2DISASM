@@ -279,6 +279,8 @@ loc_4EBE:
 
 ; =============== S U B R O U T I N E =======================================
 
+; related to sprite updates during VInt
+
 sub_4EC6:
                 
                 move.b  #2,((byte_FFAF6A-$1000000)).w

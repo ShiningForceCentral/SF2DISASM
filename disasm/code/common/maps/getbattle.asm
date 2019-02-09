@@ -10,7 +10,7 @@
 ; Out: D7 = battle idx to trigger (FFFF if none)
 ; ...more
 
-GetNextBattleOnMap:
+CheckBattle:
                 
                 movem.l d1-d6/a0,-(sp)
                 move.w  d1,d4
@@ -29,7 +29,7 @@ loc_79BA:
                 
                 cmp.b   (a0),d0
                 bne.s   loc_7A24
-                move.w  #FLAGIDX_BATTLE0,d1
+                move.w  #$190,d1        ; "Battle unlocked" starting flag index
                 add.w   d7,d1
                 jsr     j_CheckFlag
                 beq.s   loc_7A24
@@ -72,5 +72,5 @@ loc_7A30:
                 movem.l (sp)+,d1-d6/a0
                 rts
 
-	; End of function GetNextBattleOnMap
+	; End of function CheckBattle
 

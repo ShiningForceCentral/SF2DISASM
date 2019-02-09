@@ -20,8 +20,6 @@ dword_300A:     dc.l $1000305
 
 ; =============== S U B R O U T I N E =======================================
 
-; or something like that ?
-
 InitDisplay:
                 
                 trap    #VINT_FUNCTIONS

@@ -18,9 +18,8 @@ j_SetControlledEntityActScript:
                 jmp     SetControlledEntityActScript(pc)
 j_MakeEntityIdle:                
                 jmp     MakeEntityIdle(pc)
-; set entity D0's movescript to 0x460ce (default? don't move?)
-sub_4401C:                
-                jmp     sub_44C02(pc)   
+j_ApplyInitActscript:                
+                jmp     ApplyInitActscript(pc)
 j_SetEntityMovescriptToIdle:                
                 jmp     SetEntityMovescriptToIdle(pc)
 sub_44024:                
@@ -31,8 +30,8 @@ sub_4402C:
                 jmp     sub_44BC0(pc)
 sub_44030:                
                 jmp     sub_44BD6(pc)
-j_ExecuteDebugMapScript:                
-                jmp     ExecuteDebugMapScript(pc)
+j_DebugMapScript:                
+                jmp     DebugMapScript(pc)
 j_nullsub_14:                
                 jmp     nullsub_14(pc)
 j_ExecuteMapScript:                
@@ -67,7 +66,7 @@ sub_44074:
                 jmp     sub_45B84(pc)
 sub_44078:                
                 jmp     sub_474EE(pc)
-j_ExecuteEntityEvent:                
+j_RunEntityEvent:                
                 jmp     RunMapSetupEntityEvent(pc)
 j_RunMapSetupZoneEvent:                
                 jmp     RunMapSetupZoneEvent(pc)

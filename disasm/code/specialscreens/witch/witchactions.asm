@@ -33,9 +33,9 @@ loc_7428:
                 clsTxt
                 clr.w   d0
                 jsr     j_NameCharacter
-                btst    #7,(SAVE_FLAGS).l
+                btst    #7,(SAVE_FLAGS).l; "Game completed" bit
                 beq.w   byte_7476       
-                btst    #7,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
                 beq.w   byte_7476       
                 moveq   #1,d0
                 moveq   #$1B,d7
@@ -72,7 +72,7 @@ loc_749E:
                 setFlg  $4F             ; Difficulty bit 1
 loc_74A8:
                 
-                addi.w  #$E9,d0 ; difficulty choice reactions
+                addi.w  #$E9,d0 ; HARDCODED text index for difficulty choice reactions
                 bsr.w   DisplayText     
                 txt     $E0             ; "Now, good luck!{N}You have no time to waste!{W1}"
 loc_74B4:
@@ -83,14 +83,14 @@ loc_74B4:
                 bsr.w   SaveGame
                 disableSram
                 clsTxt
-                move.b  #3,d0
-                move.w  #$38,d1 
-                move.w  #3,d2
-                move.w  #3,d3
+                move.b  #3,d0           ; HARDCODED new game starting map
+                move.w  #$38,d1 ; HARDCODED main entity starting X
+                move.w  #3,d2           ; HARDCODED main entity starting Y
+                move.w  #3,d3           ; HARDCODED main entity starting facing
                 moveq   #1,d4
 loc_74DE:
                 
-                bra.w   MainBattleAndExplorationLoop
+                bra.w   MainLoop        
 
 	; End of function WitchNew
 
@@ -125,11 +125,11 @@ loc_74FE:
                 bsr.w   CheatModeConfiguration
                 txt     $E0             ; "Now, good luck!{N}You have no time to waste!{W1}"
                 clsTxt
-                clr.b   ((WINDOW_HIDING_FORBIDDEN-$1000000)).w
+                clr.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 chkFlg  $58             ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 beq.s   loc_753A
-                jsr     j_ExecuteBattleLoop
-                bra.w   loc_75E0
+                jsr     j_BattleLoop
+                bra.w   loc_75E0        
 loc_753A:
                 
                 clr.w   d0
@@ -137,7 +137,7 @@ loc_753A:
                 jsr     GetEgressPositionForMap(pc)
                 nop
                 moveq   #$FFFFFFFF,d4
-                bra.w   loc_75E0
+                bra.w   loc_75E0        
 
 	; End of function WitchLoad
 

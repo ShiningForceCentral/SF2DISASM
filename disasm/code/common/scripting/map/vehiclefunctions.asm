@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to Caravan ... warp into Caravan ?
+; Control Caravan
 
 MapEventType2:
                 
@@ -115,6 +115,8 @@ word_453C2:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FE3A
                 dc.w (eas_Idle-word_453C2) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
+
+; Control Raft
 
 MapEventType3:
                 

@@ -37,7 +37,7 @@ loc_4F4A2:
                 move.w  d1,(TEXT_NAME_INDEX_3).l
                 sndCom  MUSIC_ITEM
                 txt     $D7             ; "{NAME} discarded{N}the {ITEM} and{N}picked up the {ITEM}."
-                jsr     j_FadeOut_WaitForP2Input
+                jsr     j_FadeOut_WaitForP1Input
                 jsr     (WaitForPlayerInput).w
                 clsTxt
                 moveq   #2,d0
@@ -50,7 +50,7 @@ loc_4F510:
                 move.w  d1,(TEXT_NAME_INDEX_2).l
                 sndCom  MUSIC_ITEM
                 txt     $D5             ; "{NAME} received the{N}{ITEM}."
-                jsr     j_FadeOut_WaitForP2Input
+                jsr     j_FadeOut_WaitForP1Input
                 jsr     (WaitForPlayerInput).w
                 clsTxt
                 clr.w   d0
