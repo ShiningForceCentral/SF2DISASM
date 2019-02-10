@@ -134,7 +134,7 @@ loc_753A:
                 
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                jsr     GetEgressPositionForMap(pc)
+                jsr     GetSavePointForMap(pc)
                 nop
                 moveq   #$FFFFFFFF,d4
                 bra.w   loc_75E0        

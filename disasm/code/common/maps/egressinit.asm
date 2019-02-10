@@ -10,12 +10,12 @@
 ;      D2 = Y
 ;      D3 = facing
 
-GetEgressPositionForMap:
+GetSavePointForMap:
                 
                  
                 chkFlg  $18F            ; Set after first battle's cutscene OR first save? Checked at witch screens
-                bne.s   loc_75FC        ; egress always goes back to granseal church (Wiz : or is it Bowie's room ?) if you haven't triggered the gizmos cutscene
-                moveq   #3,d0           ; HARDCODED default egress position
+                bne.s   loc_75FC        ; egress always goes back to Bowie's room if you haven't triggered the gizmos cutscene
+                moveq   #3,d0           ; HARDCODED initial egress position : map, x, y, facing
                 moveq   #$38,d1 
                 moveq   #3,d2
                 moveq   #3,d3
@@ -26,32 +26,33 @@ loc_75FC:
                 moveq   #1,d1
                 moveq   #1,d2
                 moveq   #1,d3
-                conditionalPc lea,SavepointMapCoords,a0
+                conditionalPc lea,SavepointMapCoordinates,a0
 loc_7608:
                 
                 cmpi.b  #$FF,(a0)
                 beq.w   byte_7620       
                 cmp.b   (a0),d0
-                beq.s   loc_7618
+                beq.s   loc_7618        
                 addq.l  #4,a0
                 bra.s   loc_7608
 loc_7618:
                 
-                move.b  (a0)+,d0
-                move.b  (a0)+,d1
-                move.b  (a0)+,d2
-                move.b  (a0)+,d3
+                move.b  (a0)+,d0        ; map
+                move.b  (a0)+,d1        ; x
+                move.b  (a0)+,d2        ; y
+                move.b  (a0)+,d3        ; facing
 byte_7620:
                 
                 chkFlg  $40             ; Raft is unlocked
                 beq.s   loc_764A
-                conditionalPc lea,RaftResetMapCoords,a0; separate raft egress locations?
+                conditionalPc lea,RaftResetMapCoordinates-4,a0
+                                                        ; Some egress locations imply to put the raft back in an initial place
 loc_762A:
                 
                 addq.l  #4,a0
                 cmpi.b  #$FF,(a0)
                 beq.w   loc_7638
-                cmp.b   (a0),d0
+                cmp.b   (a0),d0         ; If found egress map matches entry map, then move raft back to given location
                 bne.s   loc_762A
 loc_7638:
                 
@@ -63,5 +64,5 @@ loc_764A:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function GetEgressPositionForMap
+	; End of function GetSavePointForMap
 

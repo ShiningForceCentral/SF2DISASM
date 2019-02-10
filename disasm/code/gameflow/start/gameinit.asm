@@ -44,7 +44,7 @@ loc_7118:
                 jsr     j_NumberPrompt
                 clr.w   d1
                 move.b  DebugModeAvailableMaps(pc,d0.w),d0
-                bsr.w   GetEgressPositionForMap
+                bsr.w   GetSavePointForMap
                 moveq   #0,d4
                 movem.w d0-d4,-(sp)
                 move.w  #$258,d0

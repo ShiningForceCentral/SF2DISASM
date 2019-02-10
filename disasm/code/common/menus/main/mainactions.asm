@@ -91,7 +91,7 @@ loc_21366:
                 jsr     j_DecreaseCurrentMP
                 jsr     j_ExecuteFlashScreenScript
                 move.b  ((EGRESS_MAP_INDEX-$1000000)).w,d0
-                jsr     (GetEgressPositionForMap).w
+                jsr     (GetSavePointForMap).w
                 lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
                 move.w  #1,(a0)+
                 move.b  #0,(a0)+
