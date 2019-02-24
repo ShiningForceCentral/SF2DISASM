@@ -4,11 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = number of sprites
-; 
-; set default values in sprite table
+; D0 = Number of sprites to initialize
 
-InitSpriteTable:
+InitSprites:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     (SPRITE_TABLE).l,a0
@@ -26,7 +24,7 @@ loc_177E:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function InitSpriteTable
+	; End of function InitSprites
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -288,7 +286,7 @@ loc_193C:
 sub_1942:
                 
                 movem.l d0-d2/d7-a1,-(sp)
-                lea     (SPRITE_LINK).l,a1
+                lea     (SPRITE_00_LINK).l,a1
                 clr.w   d1
                 moveq   #2,d0
                 bsr.w   sub_196C
@@ -371,19 +369,19 @@ loc_19BC:
 
 ; =============== S U B R O U T I N E =======================================
 
-; moves palettes, no idea why
+; Palette copies to figure out
 
 sub_19C8:
                 
                 movem.l d7-a1,-(sp)
-                lea     (PALETTE_1_BIS).l,a1
+                lea     (PALETTE_1_BASE).l,a1
                 move.w  #$80,d7 
                 jsr     CopyBytes(pc)   
-                lea     (PALETTE_1).l,a0
-                lea     ((byte_FFDF2A-$1000000)).w,a1
+                lea     (PALETTE_1_CURRENT).l,a0
+                lea     ((PALETTE_1_BACKUP-$1000000)).w,a1
                 move.w  #$80,d7 
                 jsr     CopyBytes(pc)   
-                move.b  #$20,((byte_FFDFAA-$1000000)).w 
+                move.b  #$20,((FADING_TIMER-$1000000)).w 
                 movem.l (sp)+,d7-a1
                 rts
 
@@ -392,22 +390,22 @@ sub_19C8:
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to palette updating
+; related to palette updating, maybe unused
 
 sub_19F8:
                 
                 clr.w   d6
-                move.b  ((byte_FFDFAA-$1000000)).w,d6
+                move.b  ((FADING_TIMER-$1000000)).w,d6
                 bne.s   loc_1A02
                 rts
 loc_1A02:
                 
-                lea     (PALETTE_1_BIS).l,a0
-                lea     (PALETTE_1).l,a1
-                lea     ((byte_FFDF2A-$1000000)).w,a2
+                lea     (PALETTE_1_BASE).l,a0
+                lea     (PALETTE_1_CURRENT).l,a1
+                lea     ((PALETTE_1_BACKUP-$1000000)).w,a2
                 moveq   #$3F,d7 
                 subq.w  #1,d6
-                move.b  d6,((byte_FFDFAA-$1000000)).w
+                move.b  d6,((FADING_TIMER-$1000000)).w
                 lsr.w   #2,d6
 loc_1A1C:
                 
@@ -446,10 +444,10 @@ loc_1A1C:
                 move.b  d2,(a1)+
                 move.w  (sp)+,d7
                 dbf     d7,loc_1A1C
-                jsr     StoreVdpCommandster(pc)
-                tst.b   ((byte_FFDFAA-$1000000)).w
+                jsr     ApplyVIntCramDMA(pc)
+                tst.b   ((FADING_TIMER-$1000000)).w
                 bne.s   return_1A7E
-                lea     ((byte_FFDF2A-$1000000)).w,a0
+                lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
                 tst.b   ((byte_FFDFAB-$1000000)).w
                 bne.w   sub_19C8        
 return_1A7E:
@@ -461,11 +459,11 @@ return_1A7E:
 
 ; =============== S U B R O U T I N E =======================================
 
-rts1:
+nullsub_1A80:
                 
                 rts
 
-	; End of function rts1
+	; End of function nullsub_1A80
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -479,11 +477,7 @@ nullsub_5:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Basic tile decompression
-; 
-;     In: A0 = address of compressed data
-;         A1 = dest address in RAM
-; 
+; Basic tile decompression : A0=Source, A1=Destination
 
 LoadSpriteData:
                 
@@ -998,10 +992,7 @@ loc_1E3E:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Stack tile decompression
-; 
-;     In: A0 = address of compressed data
-;         A1 = dest address in RAM
+; Stack decompression : A0=Source, A1=Destination
 
 LoadCompressedData:
                 

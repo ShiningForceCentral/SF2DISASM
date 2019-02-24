@@ -7,8 +7,8 @@
 ApplyStormEffect:
                 
                 movem.l d0/a0-a1,-(sp)
-                lea     (PALETTE_1).l,a0
-                lea     ((byte_FFDF2A-$1000000)).w,a1
+                lea     (PALETTE_1_CURRENT).l,a0
+                lea     ((PALETTE_1_BACKUP-$1000000)).w,a1
                 moveq   #7,d0
 loc_48FF2:
                 
@@ -16,23 +16,23 @@ loc_48FF2:
                 dbf     d0,loc_48FF2    
                 lea     plt_IntroStormEffect(pc), a0
                 nop
-                lea     (PALETTE_1).l,a1
+                lea     (PALETTE_1_CURRENT).l,a1
                 moveq   #7,d0
 loc_49006:
                 
                 move.l  (a0)+,(a1)+     ; replace palette 1
                 dbf     d0,loc_49006    
-                jsr     (StoreVdpCommandster).w
+                jsr     (ApplyVIntCramDMA).w
                 moveq   #$A,d0
                 jsr     (Sleep).w       
-                lea     ((byte_FFDF2A-$1000000)).w,a0
-                lea     (PALETTE_1).l,a1
+                lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
+                lea     (PALETTE_1_CURRENT).l,a1
                 moveq   #7,d0
 loc_49022:
                 
                 move.l  (a0)+,(a1)+     ; restore original palette
                 dbf     d0,loc_49022    
-                jsr     (StoreVdpCommandster).w
+                jsr     (ApplyVIntCramDMA).w
                 moveq   #$A,d0
                 jsr     (Sleep).w       
                 movem.l (sp)+,d0/a0-a1

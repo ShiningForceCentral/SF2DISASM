@@ -2598,7 +2598,7 @@ loc_25646:
                 divs.w  #$180,d0
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 moveq   #$3F,d0 
-                jsr     (InitSpriteTable).w
+                jsr     (InitSprites).w 
                 move.w  #$FFFF,d0
                 jsr     (LoadMap).w     
                 jsr     (WaitForVInt).w 

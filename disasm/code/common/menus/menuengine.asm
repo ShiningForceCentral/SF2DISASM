@@ -435,7 +435,7 @@ sub_100C8:
 WriteTilesFromNumber:
                 
                 jsr     (WriteAsciiNumber).w
-                lea     ((byte_FFDE80-$1000000)).w,a0
+                lea     ((LOADED_NUMBER-$1000000)).w,a0
                 moveq   #$A,d0
                 sub.w   d7,d0
                 adda.w  d0,a0
@@ -603,8 +603,8 @@ loc_101D4:
 
 sub_101E6:
                 
-                move.b  #8,(byte_FFDCBB).l
-                clr.b   (byte_FFDE7B).l
+                move.b  #8,(SPRITE_07_LINK).l
+                clr.b   (SPRITE_63_LINK).l
                 rts
 
 	; End of function sub_101E6
@@ -856,7 +856,7 @@ loc_10420:
                 lea     ($B800).l,a1
                 move.w  #$90,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function LoadVDPTileListForDiamenuIconTop
 
@@ -876,7 +876,7 @@ loc_10440:
                 lea     ($B920).l,a1
                 move.w  #$C0,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function LoadVDPTileListForDiamenuIconLeft
 
@@ -896,7 +896,7 @@ loc_1046A:
                 lea     ($BAA0).l,a1
                 move.w  #$C0,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function LoadVDPTileListForDiamenuIconRight
 
@@ -998,7 +998,7 @@ loc_10558:
                 lea     ($BC20).l,a1
                 move.w  #$90,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function LoadVDPTileListForDiamenuIconBottom
 
@@ -1286,7 +1286,7 @@ loc_10810:
                 lea     ($B800).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function sub_10800
 
@@ -1306,7 +1306,7 @@ loc_10830:
                 lea     ($B8C0).l,a1
                 move.w  #$80,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function sub_10820
 
@@ -1326,7 +1326,7 @@ loc_1085A:
                 lea     ($BA80).l,a1
                 move.w  #$80,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function sub_1084A
 
@@ -1424,7 +1424,7 @@ loc_10930:
                 lea     ($B9C0).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function sub_10920
 
@@ -1749,8 +1749,8 @@ sub_10CC6:
                 lea     ($BC00).l,a1
                 move.w  #$A0,d0 
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 move.w  (sp)+,d0
                 move.w  d0,d4
                 lsr.w   #6,d4
@@ -1869,7 +1869,7 @@ dword_10DD2:    dc.l $13C0D09
 
 sub_10DE2:
                 
-                lea     (byte_FFDCC0).l,a1
+                lea     (SPRITE_08).l,a1
                 lea     dword_10DD2(pc), a0
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
@@ -1881,7 +1881,7 @@ sub_10DE2:
                 move.w  #1,-8(a1)
 loc_10E06:
                 
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 beq.s   loc_10E18
                 move.w  #1,-$10(a1)
                 move.w  #1,-8(a1)
@@ -2773,7 +2773,7 @@ loc_11830:
                 movea.w d2,a1
                 move.w  #$50,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function sub_11826
 
@@ -4125,8 +4125,8 @@ loc_12556:
                 lea     ($DA00).l,a1
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 unlk    a6
                 rts
 
@@ -4174,8 +4174,8 @@ loc_1261C:
                 lea     ($E000).l,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jmp     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jmp     (WaitForDMAQueueProcessing).w
 
 	; End of function sub_12606
 
@@ -4231,8 +4231,8 @@ sub_12892:
                 movem.l d0,-(sp)
                 jsr     (WaitForVInt).w 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                lea     (PALETTE_1).l,a0
-                lea     (PALETTE_2).l,a1
+                lea     (PALETTE_1_CURRENT).l,a0
+                lea     (PALETTE_2_CURRENT).l,a1
                 move.l  $40(a0),$40(a1)
                 move.l  (a0)+,(a1)+
                 move.l  $40(a0),$40(a1)
@@ -4249,11 +4249,11 @@ sub_12892:
                 move.l  (a0)+,(a1)+
                 move.l  $40(a0),$40(a1)
                 move.l  (a0)+,(a1)+
-                jsr     (StoreVdpCommandster).w
+                jsr     (ApplyVIntCramDMA).w
                 move.b  #9,((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #5,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #5,((FADING_PALETTE_BITMAP-$1000000)).w
                 bsr.w   sub_129E8
 loc_1291E:
                 
@@ -4297,19 +4297,19 @@ loc_1291E:
                 move.b  #$A,((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #5,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #5,((FADING_PALETTE_BITMAP-$1000000)).w
                 jsr     (WaitForVint_andFFA900Clear).w
                 move.w  d0,-2(a6)
                 jsr     (ClearWindowAndUpdateEndPtr).w
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 move.l  -$20(a6),((byte_FFAEE2-$1000000)).w
                 move.l  -$20(a6),((byte_FFAEEE-$1000000)).w
-                lea     (PALETTE_1_BIS).l,a0
-                lea     (PALETTE_1).l,a1
+                lea     (PALETTE_1_BASE).l,a0
+                lea     (PALETTE_1_CURRENT).l,a1
                 move.w  #$80,d7 
                 jsr     (CopyBytes).w   
-                jsr     (StoreVdpCommandster).w
+                jsr     (ApplyVIntCramDMA).w
                 unlk    a6
                 rts
 
@@ -4481,22 +4481,22 @@ loc_12BF4:
                 lea     ($B800).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
+                jsr     (ApplyVIntVramDMA).w
                 lea     ($C800).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 lea     ($D000).l,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 lea     ($F000).l,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jmp     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jmp     (WaitForDMAQueueProcessing).w
 
 ; END OF FUNCTION CHUNK FOR sub_129E8
 
@@ -4560,12 +4560,12 @@ sub_12CB0:
 loc_12CB2:
                 
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.b  ((byte_FFDEA0-$1000000)).w,d0
+                move.b  ((FRAME_COUNTER-$1000000)).w,d0
                 andi.w  #1,d0
                 lsl.w   #4,d0
                 lsl.w   #5,d0
                 adda.w  d0,a0
-                lea     (byte_FFDD00).l,a1
+                lea     (SPRITE_16).l,a1
                 moveq   #$2F,d7 
                 move.w  -$A(a6),d4
                 lsr.w   #2,d4
@@ -4577,7 +4577,7 @@ loc_12CB2:
                 lsl.w   #3,d4
                 move.w  #$E7,d3 
                 sub.w   d4,d3
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 beq.s   loc_12CF0
                 moveq   #1,d6
 loc_12CF0:
@@ -4731,23 +4731,23 @@ loc_12E3A:
                 dbf     d7,loc_12E3A
                 move.w  #$F800,(a1)+
                 move.b  #5,((FADING_COUNTER_MAX-$1000000)).w
-                lea     (PALETTE_3).l,a0
-                lea     (PALETTE_4).l,a1
+                lea     (PALETTE_3_CURRENT).l,a0
+                lea     (PALETTE_4_CURRENT).l,a1
                 move.w  #$20,d7 
                 jsr     (CopyBytes).w   
-                lea     (PALETTE_3).l,a0
-                lea     (PALETTE3_BIS).l,a1
+                lea     (PALETTE_3_CURRENT).l,a0
+                lea     (PALETTE_3_BASE).l,a1
                 move.w  #$20,d7 
                 jsr     (CopyBytes).w   
                 movea.l (p_plt_endKiss).l,a0
-                lea     (PALETTE_2).l,a1
+                lea     (PALETTE_2_CURRENT).l,a1
                 move.w  #$20,d7 
                 jsr     (CopyBytes).w   
                 lea     $80(a1),a1
                 jsr     (CopyBytes).w   
-                jsr     (StoreVdpCommandster).w
-                lea     (PALETTE_1).l,a0
-                lea     (PALETTE_1_BIS).l,a1
+                jsr     (ApplyVIntCramDMA).w
+                lea     (PALETTE_1_CURRENT).l,a0
+                lea     (PALETTE_1_BASE).l,a1
                 move.w  #$80,d7 
                 jsr     (CopyBytes).w   
                 lea     (FF6802_LOADING_SPACE).l,a1
@@ -4761,14 +4761,14 @@ loc_12EB4:
                 lea     ($C800).l,a1
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 lea     (byte_FF7402).l,a0
                 lea     ($D400).l,a1
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 move.w  d4,d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
@@ -4950,8 +4950,8 @@ loc_13066:
                 lea     ($B800).l,a1
                 move.w  #$A0,d0 
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 jsr     (WaitForVint_andFFA900Clear).l
                 moveq   #$14,d1
 loc_13100:
@@ -5251,13 +5251,13 @@ LoadCharPortrait:
 
 sub_133A0:
                 
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 beq.s   loc_133A8
                 moveq   #1,d1
 loc_133A8:
                 
                 move.w  d0,-(sp)
-                lea     (byte_FFDCC0).l,a0
+                lea     (SPRITE_08).l,a0
                 lea     unk_13452(pc), a1
                 cmpi.w  #7,d1
                 bge.s   loc_133C0
@@ -6138,7 +6138,7 @@ loc_13C20:
                 lea     ($BC00).l,a1
                 move.w  #$180,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
+                jsr     (ApplyVIntVramDMA).w
 loc_13C36:
                 
                 movea.l -6(a6),a1
@@ -6441,7 +6441,7 @@ loc_14098:
                 lea     ($BC00).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function DMAicon1
 
@@ -6459,7 +6459,7 @@ loc_140B8:
                 lea     ($BCC0).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function DMAicon2
 
@@ -6477,7 +6477,7 @@ loc_140D8:
                 lea     ($BD80).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function DMAicon3
 
@@ -6495,7 +6495,7 @@ loc_140F8:
                 lea     ($BE40).l,a1
                 move.w  #$60,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function DMAicon4
 
@@ -6738,7 +6738,7 @@ loc_14366:
                 bsr.w   sub_14074       
                 moveq   #$14,d1
                 bsr.w   sub_146AE
-                move.b  #$10,(byte_FFDCCB).l
+                move.b  #$10,(SPRITE_09_LINK).l
                 subq.w  #1,d6
                 bne.s   loc_14384
                 moveq   #$1E,d6
@@ -7080,11 +7080,11 @@ CleanIconCorners:
 sub_146AE:
                 
                 movem.w d0/d2,-(sp)
-                lea     (byte_FFDCC0).l,a0
+                lea     (SPRITE_08).l,a0
                 lea     unk_14724(pc), a1
                 move.w  ((word_FFB138-$1000000)).w,d0
                 lsl.w   #4,d0
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 beq.s   loc_146CE
                 moveq   #1,d1
                 move.w  #$100,d0
@@ -7303,7 +7303,7 @@ loc_14814:
                 lea     unk_151D6(pc), a0
                 lea     ($FE00).l,a1
                 move.w  #$100,d0
-                jsr     (DmaTilesViaFF8804bis).w
+                jsr     (ApplyVIntVramDMAOnCompressedTiles).w
                 jsr     (WaitForVint_andFFA900Clear).l
                 bsr.w   sub_14EDE
 loc_148BC:
@@ -7467,7 +7467,7 @@ loc_14A26:
 
 sub_14A82:
                 
-                lea     (byte_FFDCC0).l,a0
+                lea     (SPRITE_08).l,a0
                 cmpi.w  #7,d1
                 bge.s   loc_14A9A
                 move.w  #1,(a0)
@@ -7641,8 +7641,8 @@ loc_14C0E:
                 lea     ($B800).l,a1
                 move.w  #$3C0,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 rts
 
 	; End of function sub_14BB0
@@ -9054,7 +9054,7 @@ loc_1543A:
                 lea     ($B800).l,a1
                 move.w  #$90,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function sub_1542A
 
@@ -9072,7 +9072,7 @@ loc_1545A:
                 lea     ($B920).l,a1
                 move.w  #$90,d0 
                 moveq   #2,d1
-                jmp     (DMA_119E).w    
+                jmp     (ApplyVIntVramDMA).w
 
 	; End of function sub_1544A
 
@@ -9320,9 +9320,9 @@ loc_1565C:
                 dbf     d0,loc_1565C
 loc_15662:
                 
-                lea     (PALETTE_2).l,a1
-                lea     (PALLETE_2_BIS).l,a2
-                lea     ((byte_FFDF4A-$1000000)).w,a3
+                lea     (PALETTE_2_CURRENT).l,a1
+                lea     (PALLETE_2_BASE).l,a2
+                lea     ((PALETTE_2_BACKUP-$1000000)).w,a3
                 moveq   #7,d7
 loc_15674:
                 
@@ -9338,8 +9338,8 @@ loc_15674:
                 lea     ($F800).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (StoreVdpCommandster).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (ApplyVIntCramDMA).w
                 movem.l (sp)+,d0-a3
                 rts
 
@@ -9550,7 +9550,7 @@ sub_157E8:
                 beq.w   return_15810
                 movem.l d0-a2,-(sp)
                 bsr.w   DrawLandEffectWindow
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 bne.s   loc_1580C
                 move.w  ((LAND_EFFECT_WINDOW_IDX-$1000000)).w,d0
                 subq.w  #1,d0
@@ -9625,8 +9625,8 @@ sub_1586E:
                 lea     ($B800).l,a1
                 move.w  #$C0,d0 
                 moveq   #2,d1
-                jsr     (DmaTilesViaFF8804bis).w
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMAOnCompressedTiles).w
+                jsr     (EnableDMAQueueProcessing).w
                 jsr     (WaitForVint_andFFA900Clear).l
                 clr.w   d4
                 bsr.w   sub_15A20
@@ -9709,7 +9709,7 @@ CopyBattlefieldOptionsMenuLayout:
 
 sub_1598C:
                 
-                lea     (byte_FFDCC0).l,a0
+                lea     (SPRITE_08).l,a0
                 moveq   #3,d7
 loc_15994:
                 
@@ -9725,10 +9725,10 @@ loc_15994:
 
 sub_159A0:
                 
-                tst.w   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.w   ((HIDE_WINDOWS-$1000000)).w
                 bne.s   sub_1598C
                 movem.w d3-d4/d7,-(sp)
-                lea     (byte_FFDCC0).l,a0
+                lea     (SPRITE_08).l,a0
                 lea     unk_15A00(pc), a1
                 clr.w   d3
                 move.b  ((MESSAGE_SPEED-$1000000)).w,d3
@@ -9857,8 +9857,8 @@ NameCharacter:
                 lea     ($B800).l,a1
                 move.w  #$C0,d0 
                 moveq   #2,d1
-                jsr     (DmaTilesViaFF8804bis).w
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMAOnCompressedTiles).w
+                jsr     (WaitForDMAQueueProcessing).w
                 move.w  #$1C07,d0
                 move.w  #$21C,d1
                 jsr     (CreateWindow).w
@@ -10206,12 +10206,12 @@ loc_15F22:
 
 sub_15F24:
                 
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 beq.s   loc_15F2C
                 moveq   #1,d1
 loc_15F2C:
                 
-                lea     (byte_FFDCC0).l,a0
+                lea     (SPRITE_08).l,a0
                 cmpi.w  #7,d1
                 bge.s   loc_15F50
                 move.w  #1,(a0)
@@ -10751,7 +10751,7 @@ VInt_UpdateTimerWindow:
                 subq.w  #1,d0
                 bsr.w   sub_165C0
                 sndCom  SFX_MENU_SELECTION
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 bne.s   loc_165BA
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
@@ -10821,10 +10821,10 @@ WitchMainMenu:
                 move.w  d0,-6(a6)
                 move.l  a1,-4(a6)
                 movea.l (p_plt_WitchChoice).l,a0
-                lea     (PALETTE_2).l,a1
+                lea     (PALETTE_2_CURRENT).l,a1
                 move.w  #$20,d7 
                 jsr     (CopyBytes).w   
-                jsr     (StoreVdpCommandster).w
+                jsr     (ApplyVIntCramDMA).w
                 bsr.w   sub_1679E
                 move.w  -6(a6),d0
                 move.w  #$202,d1

@@ -83,7 +83,7 @@ loc_47A2:
                 movea.w d2,a1
                 lsl.w   #4,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
 return_47C4:
                 
                 rts

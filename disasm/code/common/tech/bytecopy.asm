@@ -4,10 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-;     Copy D7 bytes from A0 to A1.
-;     In: A0 = src address
-;         A1 = dest address
-;         D7 = number of bytes to copy
+; A0=Source, A1=Destination, D7=Length
 
 CopyBytes:
                 

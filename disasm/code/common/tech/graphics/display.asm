@@ -29,22 +29,22 @@ InitDisplay:
                 bsr.w   DisableDisplayAndVInt
                 bsr.w   ClearSpriteTable
                 move.w  #$8C00,d0       ; H32 cell mode, no interlace
-                bsr.w   SetVdpReg       
+                bsr.w   SetVdpReg
                 move.w  #$9000,d0       ; scroll size : V32 cell, H32 cell
-                bsr.w   SetVdpReg       
+                bsr.w   SetVdpReg
                 move.w  #$8230,d0       ; scroll A table VRAM address : C000
-                bsr.w   SetVdpReg       
+                bsr.w   SetVdpReg
                 move.w  #$8407,d0       ; scroll B table VRAM address : E000
-                bsr.w   SetVdpReg       
+                bsr.w   SetVdpReg
                 move.w  #$8B00,d0       ; disable external interrupt, full scrolls
-                bsr.w   SetVdpReg       
+                bsr.w   SetVdpReg
                 move.w  #$8D3B,d0       ; H Scroll table VRAM address : EC00
-                bsr.w   SetVdpReg       
+                bsr.w   SetVdpReg
                 lea     BlackScreenLayout(pc), a0
                 lea     ($EF80).l,a1
                 move.w  #$40,d0 
                 moveq   #2,d1
-                bsr.w   DmaFromRamToVram
+                bsr.w   ApplyImmediateVramDMA
                 lea     MaskSprites(pc), a0
 loc_307E:
                 
@@ -52,7 +52,7 @@ loc_307E:
                 moveq   #$38,d7 
                 bsr.w   CopyBytes       
                 lea     plt_BasePalette(pc), a0
-                lea     (PALETTE3_BIS).l,a1
+                lea     (PALETTE_3_BASE).l,a1
                 move.w  #$20,d7 
                 bsr.w   CopyBytes       
                 rts
@@ -70,15 +70,15 @@ sub_30BE:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
                 lea     (byte_FFE000).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
 loc_30E6:
                 
-                bsr.w   DMA_119E        
-                bra.w   SetFFDE94b3andWait
+                bsr.w   ApplyVIntVramDMA
+                bra.w   WaitForDMAQueueProcessing
 
 	; End of function sub_30BE
 
@@ -119,8 +119,8 @@ loc_312C:
                 movea.l a1,a0
                 moveq   #$20,d0 
                 moveq   #2,d1
-                bsr.w   DMA_119E        
-                bsr.w   Set_FFDE94_bit3 
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   EnableDMAQueueProcessing
                 movem.w (sp)+,d0-d5/d7
                 movem.l (sp)+,a0-a5
                 rts
@@ -167,7 +167,7 @@ loc_3196:
                 movea.l a2,a0
                 moveq   #$20,d0 
                 moveq   #$40,d1 
-                bsr.w   DMA_119E        
-                bsr.w   Set_FFDE94_bit3 
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   EnableDMAQueueProcessing
                 movem.w (sp)+,d0-d5/d7
                 movem.l (sp)+,a0-a5

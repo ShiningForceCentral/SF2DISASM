@@ -123,14 +123,14 @@ loc_22C9E:
                 dbf     d7,loc_22C8C
                 movem.l (sp)+,d6-a1
                 movem.l d0/a0,-(sp)
-                lea     (PALLETE_2_BIS).l,a0
+                lea     (PALLETE_2_BASE).l,a0
                 moveq   #7,d0
 loc_22CC2:
                 
                 move.l  -$20(a0),(a0)+
                 dbf     d0,loc_22CC2
                 movem.l (sp)+,d0/a0
-                move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.b  #5,((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  #1,((FADING_COUNTER-$1000000)).w
@@ -178,7 +178,7 @@ loc_22D2A:
                 lea     $80(a1),a1
                 dbf     d7,loc_22D26
                 movem.l (sp)+,d6-a1
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 clr.b   ((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  #1,((FADING_COUNTER-$1000000)).w
@@ -1004,8 +1004,8 @@ LoadUnitCursorTileData:
                 lea     UnitCursorTiles(pc), a0
                 lea     ($D000).l,a1
                 move.w  #$800,d0
-                jsr     (DmaTilesViaFF8804bis).w
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMAOnCompressedTiles).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,d0-a1
                 rts
 
@@ -1054,8 +1054,8 @@ loc_234DA:
                 adda.w  d1,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
 loc_23538:
                 
                 movem.l (sp)+,d0-d2/a0-a1
@@ -1096,7 +1096,7 @@ sub_23554:
                 andi.w  #$F,d2
                 lsl.w   #6,d2
                 adda.w  d2,a0
-                lea     (byte_FFDCC0).l,a1
+                lea     (SPRITE_08).l,a1
                 moveq   #7,d7
 loc_23572:
                 
@@ -1215,7 +1215,7 @@ word_2358C:     dc.w $74
 
 sub_2364C:
                 
-                move.l  #$10F10,(byte_FFDCC0).l
+                move.l  #$10F10,(SPRITE_08).l
                 rts
 
 	; End of function sub_2364C

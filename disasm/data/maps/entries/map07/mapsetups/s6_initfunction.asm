@@ -473,8 +473,8 @@ cs_55BEE:       textCursor $4E1
 
 csub_55EF4:
                 
-                lea     (PALETTE_1).l,a0
-                lea     (PALETTE_1_BIS).l,a1
+                lea     (PALETTE_1_CURRENT).l,a0
+                lea     (PALETTE_1_BASE).l,a1
                 lea     plt_55F6A(pc), a2
                 moveq   #$3F,d0 
 loc_55F06:
@@ -516,7 +516,7 @@ loc_55F34:
                 move.w  d4,(a1)+
                 dbf     d0,loc_55F06
                 clr.b   ((byte_FFDFAB-$1000000)).w
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 jmp     (sub_19C8).w    
 
 	; End of function csub_55EF4
@@ -539,7 +539,7 @@ plt_55F6A:      dc.w $E0C
 sub_55F82:
                 
                 clr.b   ((byte_FFDFAB-$1000000)).w
-                lea     ((byte_FFDF2A-$1000000)).w,a0
+                lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
                 jmp     (sub_19C8).w    
 
 	; End of function sub_55F82

@@ -24,7 +24,7 @@ LoadSpecialSprite:
                 move.w  d0,d1
                 lsl.w   #2,d0
                 movea.l pt_SpecialSprites(pc,d0.w),a0
-                lea     (PALETTE_4_BIS).l,a1
+                lea     (PALETTE_4_BASE).l,a1
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
@@ -60,7 +60,7 @@ LoadBattleSpecialSprite:
                 lea     ($AF00).l,a1
                 move.w  #$480,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 bra.w   loc_25CB0
 
 	; End of function LoadBattleSpecialSprite
@@ -77,7 +77,7 @@ LoadExplorationSpecialSprite:
                 lea     ($A3C0).l,a1
                 move.w  #$A20,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 bra.w   *+4
 loc_25CB0:
                 
@@ -111,8 +111,8 @@ loc_25CD2:
                 lea     ($AF00).l,a1
                 move.w  #$480,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,d0-d2/a0-a1
                 rts
 
@@ -159,7 +159,7 @@ rjt_25D2E:      dc.w UpdateBattleSpecialSprite-rjt_25D2E
 
 UpdateBattleSpecialSprite:
                 
-                lea     (byte_FFDE60).l,a1
+                lea     (SPRITE_60).l,a1
                 move.b  $1E(a0),d2
                 cmpi.b  #$F,d2
                 ble.s   loc_25D56
@@ -175,7 +175,7 @@ loc_25D5A:
                 addq.b  #2,d2
 loc_25D64:
                 
-                btst    #0,((byte_FFDEA0-$1000000)).w
+                btst    #0,((FRAME_COUNTER-$1000000)).w
                 beq.s   loc_25D7A
                 addq.b  #1,d2
                 cmpi.b  #$1E,d2
@@ -211,7 +211,7 @@ UpdateExplorationSpecialSprite:
                 
                 clr.w   d6
                 move.b  $11(a0),d6
-                lea     (byte_FFDDF0).l,a1
+                lea     (SPRITE_46).l,a1
                 lea     byte_2788C(pc), a0
                 movem.l d0-d1,-(sp)
                 sub.w   d6,d1
@@ -229,7 +229,7 @@ loc_25DB0:
                 dbf     d7,loc_25DB0
                 movem.l (sp)+,d0-d1
                 sub.w   d6,d0
-                btst    #0,((byte_FFDEA0-$1000000)).w
+                btst    #0,((FRAME_COUNTER-$1000000)).w
                 bne.s   loc_25DD6
                 move.w  #$180,d0
 loc_25DD6:

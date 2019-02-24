@@ -86,7 +86,7 @@ loc_6310:
                 bsr.w   ClearNextLineOfDialoguePixels; line end reached
                 move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 addi.b  #$10,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 beq.s   loc_6332
                 cmpi.b  #$20,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w 
                 bra.s   loc_6338
@@ -200,7 +200,7 @@ loc_6434:
                 bsr.w   ClearNextLineOfDialoguePixels
                 move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 addi.b  #$10,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 beq.s   loc_6456
                 cmpi.b  #$20,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w 
                 bra.s   loc_645C
@@ -246,20 +246,20 @@ loc_6472:
 
 sub_64A8:
                 
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 beq.s   loc_64B0
                 moveq   #1,d2
 loc_64B0:
                 
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_64C2
 loc_64BA:
                 
-                lea     (byte_FFDCB8).l,a0
+                lea     (SPRITE_07).l,a0
                 bra.s   loc_64C8
 loc_64C2:
                 
-                lea     (byte_FFDD18).l,a0
+                lea     (SPRITE_19).l,a0
 loc_64C8:
                 
                 cmpi.w  #7,d2
@@ -336,7 +336,7 @@ number:
                 jsr     (WriteAsciiNumber).w
                 lea     ((RAM_Dialog_StringToPrint-$1000000)).w,a1
                 move.l  a1,((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
-                lea     ((byte_FFDE80-$1000000)).w,a0
+                lea     ((LOADED_NUMBER-$1000000)).w,a0
                 moveq   #9,d1
 loc_6568:
                 
@@ -741,7 +741,7 @@ sub_676E:
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 bsr.w   sub_6872
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6794
                 move.w  #$1D08,d0
                 bra.s   loc_6798
@@ -755,7 +755,7 @@ loc_6798:
                 addq.w  #1,d0
                 move.w  d0,((TEXT_WINDOW_INDEX-$1000000)).w
                 bsr.w   sub_67E6
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_67CE
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
@@ -786,7 +786,7 @@ return_67E4:
 
 sub_67E6:
                 
-                cmpi.w  #VDPTILE_IDX_SCREEN_BLACKBAR,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #VDPTILE_IDX_SCREEN_BLACKBAR,(SPRITE_00_TILE_FLAGS).l
                                                         ; check if we are on the map or in battle (by checking for presence of black bar sprites)
                 bne.s   loc_67F6
                 move.w  #WINDOW_DIALOGUE_TILELINECOUNTER_EVENT,d6
@@ -814,7 +814,7 @@ loc_6822:
                 bsr.w   CopyLineOfVDPTileOrderForDialogueWindowToRAM
                 move.w  (sp)+,d1
                 addi.w  #$20,d1 
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6844
 loc_6838:
                 
@@ -961,30 +961,30 @@ loc_690C:
                 
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
                 lea     (byte_FF6C02).l,a0
                 lea     ($CC00).l,a1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
                 lea     (byte_FF7002).l,a0
                 lea     ($D000).l,a1
-                bsr.w   DMA_119E        
-                bsr.w   SetFFDE94b3andWait
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   WaitForDMAQueueProcessing
                 lea     (byte_FF7402).l,a0
                 lea     ($D400).l,a1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
 loc_694C:
                 
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6976
                 lea     (byte_FF7802).l,a0
                 lea     ($D800).l,a1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
                 lea     (byte_FF7C02).l,a0
                 lea     ($DC00).l,a1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
 loc_6976:
                 
-                bra.w   Set_FFDE94_bit3 
+                bra.w   EnableDMAQueueProcessing
 
 ; END OF FUNCTION CHUNK FOR sub_6872
 
@@ -996,7 +996,7 @@ HandleBlinkingDialogueCursor:
                 move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d0
                 lsl.w   #3,d0
                 add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_699A
                 cmpi.b  #$30,d0 
                 blt.s   loc_6998
@@ -1017,11 +1017,11 @@ loc_69A4:
                 lea     ($C800).l,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
                 lea     (byte_FF6C02).l,a0
                 lea     ($CC00).l,a1
-                bsr.w   DMA_119E        
-                bra.w   SetFFDE94b3andWait
+                bsr.w   ApplyVIntVramDMA
+                bra.w   WaitForDMAQueueProcessing
 loc_69D8:
                 
                 cmpi.b  #$20,d0 
@@ -1032,22 +1032,22 @@ loc_69DC:
                 lea     ($D000).l,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
                 lea     (byte_FF7402).l,a0
                 lea     ($D400).l,a1
-                bsr.w   DMA_119E        
-                bra.w   SetFFDE94b3andWait
+                bsr.w   ApplyVIntVramDMA
+                bra.w   WaitForDMAQueueProcessing
 loc_6A0C:
                 
                 lea     (byte_FF7802).l,a0
                 lea     ($D800).l,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
                 lea     (byte_FF7C02).l,a0
                 lea     ($DC00).l,a1
-                bsr.w   DMA_119E        
-                bra.w   SetFFDE94b3andWait
+                bsr.w   ApplyVIntVramDMA
+                bra.w   WaitForDMAQueueProcessing
 
 	; End of function HandleBlinkingDialogueCursor
 
@@ -1064,7 +1064,7 @@ HideTextBox:
                 move.w  #$21D,d1
 loc_6A44:
                 
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6A56
                 moveq   #8,d2
                 bsr.w   MoveWindowWithoutSFX
@@ -1108,7 +1108,7 @@ loc_6A90:
                 add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
 loc_6A96:
                 
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6AAC
                 cmpi.b  #$30,d0 
                 blt.s   loc_6AAA
@@ -1156,7 +1156,7 @@ sub_6AE0:
                 move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d0
                 move.w  d0,-(sp)
                 addq.w  #1,d0
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6AF8
                 cmpi.w  #6,d0
                 bra.s   loc_6AFC
@@ -1185,7 +1185,7 @@ loc_6B18:
                 move.w  (sp)+,d0
                 lsl.w   #3,d0
                 add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6B42
                 cmpi.b  #$30,d0 
                 blt.s   loc_6B40
@@ -1207,8 +1207,8 @@ loc_6B4C:
                 adda.w  d0,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   DMA_119E        
-                bsr.w   Set_FFDE94_bit3 
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   EnableDMAQueueProcessing
                 rts
 
 	; End of function sub_6AE0
@@ -1288,7 +1288,7 @@ sub_6BDE:
                 move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d3
                 lsl.w   #3,d3
                 add.b   d3,d0
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6C04
                 cmpi.b  #$30,d0 
                 blt.s   loc_6C02

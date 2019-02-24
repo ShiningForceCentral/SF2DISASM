@@ -114,8 +114,8 @@ cs_612BE:       textCursor $E61
 
 csub_61426:
                 
-                lea     (PALETTE_1).l,a0
-                lea     (PALETTE_1_BIS).l,a1
+                lea     (PALETTE_1_CURRENT).l,a0
+                lea     (PALETTE_1_BASE).l,a1
                 moveq   #$F,d0
 loc_61434:
                 

@@ -13,31 +13,31 @@ DisplaySegaLogo:
                 jsr     (DisableDisplayAndVInt).w
                 jsr     (ClearVsramAndSprites).w
                 move.w  #$8C81,d0
-                jsr     (SetVdpReg).w   
+                jsr     (SetVdpReg).w
                 move.w  #$9000,d0
-                jsr     (SetVdpReg).w   
+                jsr     (SetVdpReg).w
                 move.w  #$8230,d0
-                jsr     (SetVdpReg).w   
+                jsr     (SetVdpReg).w
                 move.w  #$8406,d0
-                jsr     (SetVdpReg).w   
+                jsr     (SetVdpReg).w
                 move.w  #$8B03,d0
-                jsr     (SetVdpReg).w   
+                jsr     (SetVdpReg).w
                 lea     SegaLogo(pc), a0
                 lea     ($2000).w,a1
                 move.w  #$C00,d0
                 move.w  #2,d1
-                jsr     (DmaTilesViaFF8804).w
+                jsr     (ApplyImmediateVramDMAOnCompressedTiles).w
                 lea     SegaLogoPalette(pc), a0
-                lea     (PALETTE_1).l,a1
-                lea     (PALETTE_1_BIS).l,a2
+                lea     (PALETTE_1_CURRENT).l,a1
+                lea     (PALETTE_1_BASE).l,a2
                 moveq   #7,d7
 loc_280AA:
                 
                 move.l  (a0),(a1)+
                 move.l  (a0)+,(a2)+
                 dbf     d7,loc_280AA
-                jsr     (StoreVdpCommandster).w
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntCramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 jsr     (EnableDisplayAndInterrupts).w
                 move.l  #InputSequence_ConfigurationMode,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
@@ -48,10 +48,10 @@ loc_280AA:
                 dc.w VINTS_ADD
                 dc.l VInt_CheckDebugModeCheat
                 move.b  #1,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 bsr.w   CalculateRomChecksum
                 lea     byte_28BB8(pc), a0
                 nop
@@ -59,8 +59,8 @@ loc_280AA:
                 moveq   #$14,d0
                 jsr     (Sleep).w       
                 bsr.w   sub_28B12
-                move.l  #$D80405,(dword_FFDCA0).l
-                move.l  #$62014A,(dword_FFDCA4).l
+                move.l  #$D80405,(SPRITE_04).l
+                move.l  #$62014A,(SPRITE_04_TILE_FLAGS).l
                 moveq   #$A,d0
                 jsr     (Sleep).w       
                 move.w  #$28,d0 
@@ -68,12 +68,12 @@ loc_2812E:
                 
                 lea     SegaLogoColors+4(pc,d0.w),a0; lea     segaLogoColors(pc,d0.w),a0
                 movem.l d0,-(sp)
-                lea     (dword_FFD084).l,a1
-                lea     (PALETTE_1_0F).l,a2
+                lea     (PALETTE_1_BASE_02).l,a1
+                lea     (PALETTE_1_CURRENT_02).l,a2
                 moveq   #$A,d0
                 bsr.w   LoadSegaLogoPalette
                 jsr     (DuplicatePalettes).w
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (EnableDMAQueueProcessing).w
                 move.w  #3,d0
                 jsr     (Sleep).w       
                 movem.l (sp)+,d0
@@ -105,8 +105,8 @@ CheckStartButtonAtSegaLogo:
                 beq.s   loc_2812E       
 loc_2818E:
                 
-                move.l  #$D80405,(dword_FFDCA0).l
-                move.l  #$62014A,(dword_FFDCA4).l
+                move.l  #$D80405,(SPRITE_04).l
+                move.l  #$62014A,(SPRITE_04_TILE_FLAGS).l
                 jsr     (FadeOutToBlack).w
                 moveq   #$FFFFFFFF,d0
                 rts
@@ -124,7 +124,7 @@ sub_28B12:
                 cmpi.b  #$FF,(a0)
                 beq.w   loc_28B64
                 moveq   #3,d7
-                lea     (byte_FFDC98).l,a1
+                lea     (SPRITE_03).l,a1
                 lea     word_28BB0(pc), a2
 loc_28B26:
                 
@@ -158,7 +158,7 @@ loc_28B68:
                 lea     byte_28F31(pc), a0
                 nop
                 moveq   #3,d7
-                lea     (byte_FFDC98).l,a1
+                lea     (SPRITE_03).l,a1
                 lea     word_28BB0(pc), a2
 loc_28B7A:
                 

@@ -334,7 +334,7 @@ loc_49D8:
                 andi.w  #$FF,d2
                 or.w    d2,d1
                 move.w  d1,6(a2)
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 bne.s   loc_4A40
                 bsr.w   sub_4AC8
                 bra.s   loc_4A72
@@ -361,7 +361,7 @@ loc_4A72:
                 
                 lea     $10(a2),a2
                 dbf     d7,loc_49D8
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 beq.s   loc_4A92
                 tst.b   ((byte_FFA8FE-$1000000)).w
                 bne.s   loc_4A90
@@ -384,8 +384,8 @@ loc_4AA2:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
-                bsr.w   Set_FFDE94_bit3 
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   EnableDMAQueueProcessing
                 clr.b   ((byte_FFA8FF-$1000000)).w
 return_4AC6:
                 
@@ -457,7 +457,7 @@ loc_4B38:
                 dbf     d0,loc_4AEC
 loc_4B46:
                 
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 bne.s   loc_4B52
                 move.b  #$FF,((byte_FFA8FF-$1000000)).w
 loc_4B52:
@@ -522,7 +522,7 @@ loc_4BC6:
                 dbf     d0,loc_4B86
 loc_4BD4:
                 
-                tst.b   ((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                tst.b   ((HIDE_WINDOWS-$1000000)).w
                 bne.s   loc_4BE0
                 move.b  #$FF,((byte_FFA8FF-$1000000)).w
 loc_4BE0:
@@ -547,15 +547,15 @@ sub_4BEA:
                 asl.w   #5,d6
                 add.w   d1,d6
                 add.w   d6,d6
-                cmpi.w  #$C77C,(SPRITE_VDP_TILE_INDEX).l
+                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   return_4C36
-                move.w  (dword_FFD500).l,d1
+                move.w  (VERTICAL_SCROLL_DATA).l,d1
                 addq.w  #4,d1
                 lsr.w   #3,d1
                 lsl.w   #6,d1
                 add.w   d1,d6
                 andi.w  #$7FF,d6
-                move.w  (dword_FFD100).l,d1
+                move.w  (HORIZONTAL_SCROLL_DATA).l,d1
                 addq.w  #4,d1
                 lsr.w   #3,d1
                 add.w   d1,d1

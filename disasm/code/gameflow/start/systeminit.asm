@@ -6,17 +6,17 @@
 
 SystemInit:
                 
-                bsr.s   VDP_init
+                bsr.s   InitVDP
                 bsr.w   InitZ80
-                bsr.s   InitRamVdpData
-                jmp     (GameInit).l
+                bsr.s   InitVDPData
+                jmp     (InitGame).l
 
 	; End of function SystemInit
 
 
 ; =============== S U B R O U T I N E =======================================
 
-VDP_init:
+InitVDP:
                 
                 move.w  #$3FFE,d0
                 lea     (FF0000_RAM_START).l,a0
@@ -31,59 +31,59 @@ loc_218:
 loc_22E:
                 
                 move.w  (a0)+,d0
-                bsr.w   SetVdpReg       
+                bsr.w   SetVdpReg
                 dbf     d1,loc_22E
                 clr.w   d0
                 clr.w   d1
                 clr.w   d2
-                bsr.w   DmaVramFill     
+                bsr.w   ApplyVramDMAFill
                 rts
 
-	; End of function VDP_init
+	; End of function InitVDP
 
 
 ; =============== S U B R O U T I N E =======================================
 
-InitRamVdpData:
+InitVDPData:
                 
-                move.l  #byte_FFD780,(dword_FFDED0).l
-                move.l  #byte_FFD550,(VDP_REG_COMMANDS).l
+                move.l  #VDP_COMMAND_QUEUE,(VDP_COMMAND_QUEUE_POINTER).l
+                move.l  #DMA_QUEUE,(DMA_QUEUE_POINTER).l
                 moveq   #$40,d0 ; PD2 output mode ?
                 move.b  d0,(CTRL1_BIS).l
                 move.b  d0,(CTRL2).l
                 move.b  d0,(CTRL3_BIS).l
-                lea     (dword_FFD100).l,a0
+                lea     (HORIZONTAL_SCROLL_DATA).l,a0
                 move.w  #$FF,d0
 loc_276:
                 
                 move.w  #0,(a0)+        ; clear from FFD100 to FFD500
                 move.w  #0,(a0)+
                 dbf     d0,loc_276      
-                lea     (dword_FFD500).l,a0
+                lea     (VERTICAL_SCROLL_DATA).l,a0
                 move.w  #$13,d0
 loc_28C:
                 
                 move.w  #0,(a0)+        ; clear next 80d bytes
                 move.w  #0,(a0)+
                 dbf     d0,loc_28C      
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 moveq   #$7F,d1 
 loc_2A0:
                 
                 clr.w   (a0)+           ; clear palette replicas ?
                 dbf     d1,loc_2A0      
                 bsr.w   ClearSpriteTable
-                bsr.w   StoreVdpCommands
-                bsr.w   StoreVdpCommandsbis
-                bsr.w   Set_FFDE94_bit3 
+                bsr.w   UpdateVDPHScrollData
+                bsr.w   UpdateVDPVScrollData
+                bsr.w   EnableDMAQueueProcessing
                 rts
 
-	; End of function InitRamVdpData
+	; End of function InitVDPData
 
 vdp_init_params:dc.w $8004              ; disable H int, enable read H V counter
                 dc.w $8124              ; disable display, enable Vint, disable DMA, V28 cell mode
                 dc.w $8230              ; scroll A table VRAM address : C000
-                dc.w $8338              ; window table VRAM address : E000 ?
+                dc.w $8338              ; window table VRAM address : E000
                 dc.w $8407              ; scroll B table VRAM address : E000
                 dc.w $8574              ; sprite attribute table VRAM address : E800
                 dc.w $8600              ; always 0

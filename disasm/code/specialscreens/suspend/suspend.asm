@@ -16,17 +16,17 @@ SuspendGame:
                 lea     ($8000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 movea.l (p_plt_SuspendString).l,a0
-                lea     (PALLETE_2_BIS).l,a1
+                lea     (PALLETE_2_BASE).l,a1
                 moveq   #$20,d7 
                 jsr     (CopyBytes).w   
                 move.b  #1,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
                 moveq   #3,d0
                 jsr     (Sleep).w       
                 lea     (byte_FFC000).l,a0
@@ -41,8 +41,8 @@ SuspendGame:
                 lea     ($C000).l,a1
                 move.w  #$380,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 rts
 
 	; End of function SuspendGame

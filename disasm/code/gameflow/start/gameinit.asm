@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-GameInit:
+InitGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
@@ -53,5 +53,5 @@ loc_7118:
                 jsr     j_ExplorationLoop
                 bra.w   MainLoop        
 
-	; End of function GameInit
+	; End of function InitGame
 

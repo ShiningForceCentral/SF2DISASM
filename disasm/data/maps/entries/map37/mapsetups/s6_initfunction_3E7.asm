@@ -227,9 +227,11 @@ loc_5FD68:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 sub_5FD7C:
                 
-                bsr.w   sub_5FD92
+                bsr.w   sub_5FD92       
                 moveq   #$17,d7
 loc_5FD82:
                 
@@ -244,14 +246,16 @@ loc_5FD82:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 sub_5FD92:
                 
                 move.b  #1,((byte_FFDFAB-$1000000)).w
                 lea     plt_5FDB4(pc), a0
-                lea     (PALETTE_4_BIS).l,a1
+                lea     (PALETTE_4_BASE).l,a1
                 moveq   #$20,d7 
                 jsr     (CopyBytes).w   
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 jsr     (sub_19C8).w    
                 rts
 

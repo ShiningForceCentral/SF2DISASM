@@ -11,27 +11,27 @@ EndKissPictureSequence:
                 jsr     (LoadCompressedData).w
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     ($C800).l,a1
-                bsr.w   sub_2C642
+                bsr.w   DisplayEndingKissWithPixelFilling
                 move.w  #$168,d0
                 jsr     (Sleep).w       ; wait for 6 seconds
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 moveq   #7,d7
 loc_2C5A6:
                 
                 clr.l   (a0)+
                 dbf     d7,loc_2C5A6
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 clr.b   (byte_FFDFAB).l 
                 jsr     (sub_19C8).w    
                 move.w  #$366,d0        ; wait for 14 seconds
                 jsr     (Sleep).w       
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 moveq   #$1F,d7
 loc_2C5CC:
                 
                 clr.l   (a0)+
                 dbf     d7,loc_2C5CC
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 clr.b   (byte_FFDFAB).l 
                 jsr     (sub_19C8).w    
                 rts
@@ -44,11 +44,11 @@ loc_2C5CC:
 sub_2C5E4:
                 
                 movem.l d0-a3,-(sp)
-                lea     (PALETTE_1).l,a0
-                lea     (PALETTE_1_BIS).l,a1
+                lea     (PALETTE_1_CURRENT).l,a0
+                lea     (PALETTE_1_BASE).l,a1
                 move.w  #$80,d7 
                 jsr     (CopyBytes).w   
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 moveq   #7,d7
 loc_2C604:
                 
@@ -57,7 +57,7 @@ loc_2C604:
                 andi.l  #$EEE0EEE,d0
                 move.l  d0,(a0)+
                 dbf     d7,loc_2C604
-                lea     (PALETTE3_BIS).l,a0
+                lea     (PALETTE_3_BASE).l,a0
                 moveq   #$F,d7
 loc_2C61C:
                 
@@ -66,7 +66,7 @@ loc_2C61C:
                 andi.l  #$EEE0EEE,d0
                 move.l  d0,(a0)+
                 dbf     d7,loc_2C61C
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 clr.b   (byte_FFDFAB).l 
                 jsr     (sub_19C8).w    
                 movem.l (sp)+,d0-a3
@@ -77,7 +77,7 @@ loc_2C61C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2C642:
+DisplayEndingKissWithPixelFilling:
                 
                 move.w  #$BFF,d7
                 lea     (FF0000_RAM_START).l,a2
@@ -127,16 +127,16 @@ loc_2C6A4:
                 lea     (FF0000_RAM_START).l,a0
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 movem.l (sp)+,d0-a3
                 movem.l d0-a3,-(sp)
                 lea     $C00(a1),a1
                 lea     (byte_FF0C00).l,a0
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 movem.l (sp)+,d0-a3
                 cmpi.w  #$10,d7
                 bne.s   loc_2C6F6
@@ -146,9 +146,9 @@ loc_2C6F6:
                 dbf     d7,loc_2C65E
                 rts
 
-	; End of function sub_2C642
+	; End of function DisplayEndingKissWithPixelFilling
 
-byte_2C6FC:     dc.b $13
+byte_2C6FC:     dc.b $13                ; Pixel appearance parameters for end kiss picture
                 dc.b   9
                 dc.b $1D
                 dc.b $33 

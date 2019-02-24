@@ -40,7 +40,7 @@ cs_5EB26:       executeSubroutine csub_5EB34
 
 csub_5EB34:
                 
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 moveq   #$1F,d7
 loc_5EB3C:
                 
@@ -424,10 +424,10 @@ cs_5EF60:       textCursor $E9B
 csub_5F14C:
                 
                 lea     plt_5F17E(pc), a0
-                lea     (PALETTE_4_BIS).l,a1
+                lea     (PALETTE_4_BASE).l,a1
                 moveq   #$20,d7 
                 jsr     (CopyBytes).w   
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 clr.b   ((byte_FFDFAB-$1000000)).w
                 jsr     (sub_19C8).w    
                 rts

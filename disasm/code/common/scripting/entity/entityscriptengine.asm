@@ -15,14 +15,14 @@ loc_4C74:
                 move.b  ((byte_FFAF69-$1000000)).w,d6
                 sub.b   ((byte_FFAF6B-$1000000)).w,d6
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                lea     (byte_FFDD00).l,a1
+                lea     (SPRITE_16).l,a1
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_4CB2
                 move.w  ((word_FFA806-$1000000)).w,d2
-                sub.w   (dword_FFD100+2).l,d2
+                sub.w   (HORIZONTAL_SCROLL_DATA+2).l,d2
                 asl.w   #4,d2
                 add.w   ((word_FFA814-$1000000)).w,d2
-                move.w  (dword_FFD500+2).l,d3
+                move.w  (VERTICAL_SCROLL_DATA+2).l,d3
                 sub.w   ((word_FFA80A-$1000000)).w,d3
                 asl.w   #4,d3
                 add.w   ((word_FFA816-$1000000)).w,d3
@@ -30,10 +30,10 @@ loc_4C74:
 loc_4CB2:
                 
                 move.w  ((word_FFA804-$1000000)).w,d2
-                sub.w   (dword_FFD100).l,d2
+                sub.w   (HORIZONTAL_SCROLL_DATA).l,d2
                 asl.w   #4,d2
                 add.w   ((word_FFA810-$1000000)).w,d2
-                move.w  (dword_FFD500).l,d3
+                move.w  (VERTICAL_SCROLL_DATA).l,d3
                 sub.w   ((word_FFA808-$1000000)).w,d3
                 asl.w   #4,d3
                 add.w   ((word_FFA812-$1000000)).w,d3
@@ -2720,8 +2720,8 @@ loc_615E:
                 adda.w  d1,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
-                bsr.w   Set_FFDE94_bit3 
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   EnableDMAQueueProcessing
 loc_617C:
                 
                 movem.l (sp)+,a0-a1
@@ -2784,7 +2784,7 @@ loc_61BA:
                 adda.w  d1,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                bsr.w   DmaFromRamToVram
+                bsr.w   ApplyImmediateVramDMA
 loc_61F6:
                 
                 movem.l (sp)+,a0-a1

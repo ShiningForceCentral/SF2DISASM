@@ -49,8 +49,8 @@ loc_4450A:
                 adda.w  d6,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 movem.l (sp)+,a0-a1
                 movem.l (sp)+,d0-d7
                 unlk    a6

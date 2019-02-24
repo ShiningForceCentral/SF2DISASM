@@ -149,7 +149,7 @@ loc_3736:
 sub_3758:
                 
                 clr.w   ((word_FFA80E-$1000000)).w
-                cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_3770
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3770
@@ -191,7 +191,7 @@ return_37B0:
 sub_37B2:
                 
                 clr.w   ((word_FFA80E-$1000000)).w
-                cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_37CA
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_37CA
@@ -239,7 +239,7 @@ sub_380C:
                 clr.w   ((word_FFA80E-$1000000)).w
 loc_3810:
                 
-                cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_3824
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_3824
@@ -279,7 +279,7 @@ return_3864:
 sub_3866:
                 
                 clr.w   ((word_FFA80E-$1000000)).w
-                cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_387E
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_387E
@@ -384,14 +384,14 @@ VInt_3930:
                 move.b  ((CAMERA_SCROLLING_MASK-$1000000)).w,d0
                 andi.b  #$C,d0
                 beq.s   loc_3944
-                move.b  #$FF,((DISPLAY_WINDOWS_TOGGLE-$1000000)).w
+                move.b  #$FF,((HIDE_WINDOWS-$1000000)).w
 loc_3944:
                 
                 tst.b   ((CAMERA_SCROLLING_MASK-$1000000)).w
                 beq.w   loc_3C44
                 movem.w d0-d7,-(sp)
                 clr.w   ((word_FFA80E-$1000000)).w
-                cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_3968
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3968
@@ -545,7 +545,7 @@ loc_3AB8:
 loc_3AC8:
                 
                 clr.w   ((word_FFA80E-$1000000)).w
-                cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_3AE0
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_3AE0
@@ -814,21 +814,21 @@ loc_3D40:
 
 sub_3D46:
                 
-                move.l  ((word_FFA808-$1000000)).w,(dword_FFD500).l
-                move.l  ((word_FFA804-$1000000)).w,(dword_FFD100).l
+                move.l  ((word_FFA808-$1000000)).w,(VERTICAL_SCROLL_DATA).l
+                move.l  ((word_FFA804-$1000000)).w,(HORIZONTAL_SCROLL_DATA).l
                 move.w  ((QUAKE_AMPLITUDE-$1000000)).w,d6
                 beq.s   loc_3D7E
                 addq.w  #1,d6
                 bsr.w   GetRandomValue
-                add.w   d0,(dword_FFD100).l
-                add.w   d0,(dword_FFD100+2).l
+                add.w   d0,(HORIZONTAL_SCROLL_DATA).l
+                add.w   d0,(HORIZONTAL_SCROLL_DATA+2).l
                 bsr.w   GetRandomValue
-                add.w   d0,(dword_FFD500).l
-                add.w   d0,(dword_FFD500+2).l
+                add.w   d0,(VERTICAL_SCROLL_DATA).l
+                add.w   d0,(VERTICAL_SCROLL_DATA+2).l
 loc_3D7E:
                 
-                bsr.w   StoreVdpCommands
-                bsr.w   StoreVdpCommandsbis
+                bsr.w   UpdateVDPHScrollData
+                bsr.w   UpdateVDPVScrollData
                 rts
 
 	; End of function sub_3D46
@@ -1557,7 +1557,7 @@ loc_435E:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
 loc_439A:
                 
                 movem.w (sp)+,d7
@@ -1592,7 +1592,7 @@ loc_43BE:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
+                bsr.w   ApplyVIntVramDMA
                 movem.w (sp)+,d7
                 movem.l (sp)+,a0-a1
                 rts
@@ -1620,7 +1620,7 @@ sub_43F8:
                 lea     MapOffsetHashTable(pc), a3
                 lea     (FF0000_RAM_START).l,a4
                 lea     (FF2000_LOADING_SPACE).l,a5
-                cmpi.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 bne.w   loc_44B4
                 moveq   #$20,d7 
 loc_4434:

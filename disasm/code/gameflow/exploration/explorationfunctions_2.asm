@@ -49,8 +49,8 @@ loc_25836:
                 jsr     (LoadMap).w     
                 bsr.w   SetBaseVIntFunctions
                 jsr     j_RunMapSetupInitFunction
-                move.l  (dword_FFD084).l,d0
-                cmp.l   (PALETTE_1_0F).l,d0
+                move.l  (PALETTE_1_BASE_02).l,d0
+                cmp.l   (PALETTE_1_CURRENT_02).l,d0
                 beq.s   loc_2586A       
                 jsr     (PlayMapMusic).w
                 jsr     (FadeInFromBlack).w
@@ -134,10 +134,10 @@ loc_258CE:
 FadeOutToBlackAll:
                 
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
                 dc.l VInt_3930          
@@ -270,7 +270,7 @@ loc_259E8:
                 
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 moveq   #$FFFFFFFF,d0
-                jsr     (sub_25B0).w
+                jsr     (ProcessMapTransition).w
                 move.b  ((MAP_EVENT_PARAM_3-$1000000)).w,d0
                 blt.s   loc_25A04
                 mulu.w  #$180,d0

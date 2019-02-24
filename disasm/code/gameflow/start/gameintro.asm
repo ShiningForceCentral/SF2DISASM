@@ -13,19 +13,19 @@ j_GameIntro:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_71C4:
+j_j_DisplaySegaLogo:
                 
                 jsr     j_DisplaySegaLogo
                 bne.w   loc_71EC
 
-	; End of function sub_71C4
+	; End of function j_j_DisplaySegaLogo
 
 
-; START OF FUNCTION CHUNK FOR GameInit
+; START OF FUNCTION CHUNK FOR InitGame
 
 GameIntro:
                 
-                move.l  sp,(SECONDS_COUNTER_0).l
+                move.l  sp,(GAME_INTRO_SP_OFFSET).l
                 move.l  #loc_71EC,((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
                 jsr     (EnableDisplayAndInterrupts).w
                 clr.w   d0
@@ -36,19 +36,19 @@ loc_71EC:
                 clr.w   ((QUAKE_AMPLITUDE-$1000000)).w
                 move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
                 bsr.w   EnableInterrupts
-                lea     (PALETTE_1).l,a0
-                lea     (PALETTE_1_BIS).l,a1
+                lea     (PALETTE_1_CURRENT).l,a0
+                lea     (PALETTE_1_BASE).l,a1
                 move.w  #$80,d7 
                 bsr.w   CopyBytes       
                 bsr.w   FadeOutToBlack
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 clr.w   d6
-                jsr     (ClearHscrollStuff).w
-                jsr     (ClearOtherHscrollStuff).w
-                jsr     (ClearVscrollStuff).w
-                jsr     (ClearOtherVscrollStuff).w
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (UpdateForegroundHScrollData).w
+                jsr     (UpdateBackgroundHScrollData).w
+                jsr     (UpdateForegroundVScrollData).w
+                jsr     (UpdateBackgroundVScrollData).w
+                jsr     (WaitForDMAQueueProcessing).w
                 bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndVInt
                 sndCom  MUSIC_TITLE
@@ -67,11 +67,11 @@ loc_724E:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 clr.w   d6
-                jsr     (ClearHscrollStuff).w
-                jsr     (ClearOtherHscrollStuff).w
-                jsr     (ClearVscrollStuff).w
-                jsr     (ClearOtherVscrollStuff).w
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (UpdateForegroundHScrollData).w
+                jsr     (UpdateBackgroundHScrollData).w
+                jsr     (UpdateForegroundVScrollData).w
+                jsr     (UpdateBackgroundVScrollData).w
+                jsr     (WaitForDMAQueueProcessing).w
                 bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndVInt
                 clr.b   ((byte_FFB198-$1000000)).w
@@ -87,7 +87,7 @@ loc_729C:
                 lea     ($8000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DmaTilesViaFF8804).w
+                jsr     (ApplyImmediateVramDMAOnCompressedTiles).w
                 bsr.w   EnableDisplayAndInterrupts
                 sndCom  MUSIC_WITCH
                 bsr.w   FadeInFromBlack
@@ -184,7 +184,7 @@ loc_73E8:
                 move.w  rjt_WitchChoice(pc,d0.w),d0
                 jmp     rjt_WitchChoice(pc,d0.w)
 
-; END OF FUNCTION CHUNK FOR GameInit
+; END OF FUNCTION CHUNK FOR InitGame
 
 rjt_WitchChoice:dc.w WitchNew-rjt_WitchChoice
                 dc.w WitchLoad-rjt_WitchChoice

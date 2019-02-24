@@ -4,8 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; d6 determines the random number max value
-; (number of seed upper bits)
+; d6 = random number max value (number of seed upper bits)
 
 UpdateRandomSeed:
                 

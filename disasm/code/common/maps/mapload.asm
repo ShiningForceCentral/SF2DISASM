@@ -4,8 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A0 = compressed map layout data (block indexes)
-;     A1 = RAM address to put map layout data
+; A0=Source, A1=Destination
 
 LoadMapLayoutData:
                 
@@ -666,7 +665,7 @@ loc_257A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25B0:
+ProcessMapTransition:
                 
                 clr.w   d1
                 move.b  ((CURRENT_MAP-$1000000)).w,d1
@@ -683,8 +682,8 @@ sub_25B0:
                 lea     ($2000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-                bsr.w   DmaTilesViaFF8804bis
-                bsr.w   SetFFDE94b3andWait
+                bsr.w   ApplyVIntVramDMAOnCompressedTiles
+                bsr.w   WaitForDMAQueueProcessing
 loc_25E8:
                 
                 addq.l  #1,a5
@@ -697,8 +696,8 @@ loc_25E8:
                 lea     ($4000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-                bsr.w   DmaTilesViaFF8804bis
-                bsr.w   SetFFDE94b3andWait
+                bsr.w   ApplyVIntVramDMAOnCompressedTiles
+                bsr.w   WaitForDMAQueueProcessing
 loc_260E:
                 
                 movea.l (p_pt_MapTiles).l,a0
@@ -710,8 +709,8 @@ loc_260E:
                 lea     ($5000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-                bsr.w   DmaTilesViaFF8804bis
-                bsr.w   SetFFDE94b3andWait
+                bsr.w   ApplyVIntVramDMAOnCompressedTiles
+                bsr.w   WaitForDMAQueueProcessing
 loc_2632:
                 
                 addq.l  #1,a5
@@ -721,7 +720,7 @@ loc_2632:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l VInt_3930          
-                bsr.w   sub_2D58
+                bsr.w   LoadMapBlocksAndLayout
                 movea.l (a5)+,a4
                 move.w  (a4)+,d0
                 move.w  (a4)+,d1
@@ -731,37 +730,36 @@ loc_2632:
                 mulu.w  #$180,d1
                 mulu.w  #$180,d2
                 mulu.w  #$180,d3
-                bsr.w   sub_2670        
+                bsr.w   ApplyOverworldMapTransition
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l 0
                 rts
 
-	; End of function sub_25B0
+	; End of function ProcessMapTransition
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to 4 choices apparently
-
-sub_2670:
+ApplyOverworldMapTransition:
                 
                 move.b  ((MAP_EVENT_PARAM_1-$1000000)).w,d0
-                andi.w  #3,d0
+                andi.w  #3,d0           ; Facing
                 add.w   d0,d0
-                move.w  rjt_2682(pc,d0.w),d0
-                jmp     rjt_2682(pc,d0.w)
+                move.w  rjt_OverworldMapTransition(pc,d0.w),d0
+                jmp     rjt_OverworldMapTransition(pc,d0.w)
 
-	; End of function sub_2670
+	; End of function ApplyOverworldMapTransition
 
-rjt_2682:       dc.w sub_268A-rjt_2682
-                dc.w sub_2816-rjt_2682
-                dc.w sub_2750-rjt_2682
-                dc.w sub_28DC-rjt_2682
+rjt_OverworldMapTransition:
+                dc.w ApplyOverworldMapTransition_Right-rjt_OverworldMapTransition
+                dc.w ApplyOverworldMapTransition_Up-rjt_OverworldMapTransition
+                dc.w ApplyOverworldMapTransition_Left-rjt_OverworldMapTransition
+                dc.w ApplyOverworldMapTransition_Down-rjt_OverworldMapTransition
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_268A:
+ApplyOverworldMapTransition_Right:
                 
                 move.w  #0,((word_FFA810-$1000000)).w
                 move.w  #0,((word_FFA814-$1000000)).w
@@ -807,8 +805,8 @@ loc_26E8:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
-                bsr.w   Set_FFDE94_bit3 
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   EnableDMAQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_26C0
                 bsr.w   WaitForVInt     
@@ -821,12 +819,12 @@ loc_26E8:
                 nop
                 rts
 
-	; End of function sub_268A
+	; End of function ApplyOverworldMapTransition_Right
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2750:
+ApplyOverworldMapTransition_Left:
                 
                 move.w  #$4F80,((word_FFA810-$1000000)).w
                 move.w  #$4F80,((word_FFA814-$1000000)).w
@@ -878,8 +876,8 @@ loc_27AE:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
-                bsr.w   Set_FFDE94_bit3 
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   EnableDMAQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_2786
 loc_27F6:
@@ -898,12 +896,12 @@ off_280A:
                 nop
                 rts
 
-	; End of function sub_2750
+	; End of function ApplyOverworldMapTransition_Left
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2816:
+ApplyOverworldMapTransition_Up:
                 
                 move.w  #$5100,((word_FFA812-$1000000)).w
                 move.w  #$5100,((word_FFA816-$1000000)).w
@@ -949,8 +947,8 @@ loc_2874:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
-                bsr.w   Set_FFDE94_bit3 
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   EnableDMAQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_284C
                 bsr.w   WaitForVInt     
@@ -965,12 +963,12 @@ loc_28C0:
                 nop
                 rts
 
-	; End of function sub_2816
+	; End of function ApplyOverworldMapTransition_Up
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_28DC:
+ApplyOverworldMapTransition_Down:
                 
                 move.w  #0,((word_FFA812-$1000000)).w
                 move.w  #0,((word_FFA816-$1000000)).w
@@ -1016,8 +1014,8 @@ loc_293A:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
-                bsr.w   Set_FFDE94_bit3 
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   EnableDMAQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_2912
                 bsr.w   WaitForVInt     
@@ -1030,7 +1028,7 @@ loc_293A:
                 nop
                 rts
 
-	; End of function sub_28DC
+	; End of function ApplyOverworldMapTransition_Down
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1038,7 +1036,7 @@ loc_293A:
 sub_29A2:
                 
                 movem.l d0-a0,-(sp)
-                lea     (byte_FFDD00).l,a0
+                lea     (SPRITE_16).l,a0
                 moveq   #$1F,d7
                 move.w  d2,d0
                 move.w  d2,d1
@@ -1177,10 +1175,10 @@ loc_2AD4:
                 move.b  (a5)+,d0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
-                lea     (PALETTE_1_BIS).l,a1
+                lea     (PALETTE_1_BASE).l,a1
                 move.w  #$20,d7 
                 bsr.w   CopyBytes       
-                clr.w   (PALETTE_1_BIS).l
+                clr.w   (PALETTE_1_BASE).l
                 tst.b   (a5)+
                 blt.s   loc_2B1C
 loc_2B08:
@@ -1191,7 +1189,7 @@ loc_2B12:
                 
                 move.w  #$800,d0
                 moveq   #2,d1
-                bsr.w   DmaFromRamToVram
+                bsr.w   ApplyImmediateVramDMA
 loc_2B1C:
                 
                 tst.b   (a5)+
@@ -1202,7 +1200,7 @@ loc_2B20:
                 lea     ($3000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-                bsr.w   DmaFromRamToVram
+                bsr.w   ApplyImmediateVramDMA
 loc_2B34:
                 
                 tst.b   (a5)+
@@ -1213,7 +1211,7 @@ loc_2B34:
                 moveq   #2,d1
 loc_2B48:
                 
-                bsr.w   DmaFromRamToVram
+                bsr.w   ApplyImmediateVramDMA
 loc_2B4C:
                 
                 tst.b   (a5)+
@@ -1226,7 +1224,7 @@ loc_2B56:
                 moveq   #2,d1
 loc_2B60:
                 
-                bsr.w   DmaFromRamToVram
+                bsr.w   ApplyImmediateVramDMA
 loc_2B64:
                 
                 tst.b   (a5)+
@@ -1237,10 +1235,10 @@ loc_2B68:
                 lea     ($6000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-                bsr.w   DmaFromRamToVram
+                bsr.w   ApplyImmediateVramDMA
 loc_2B7C:
                 
-                bsr.w   sub_2D58        ; load blocks and layout ?
+                bsr.w   LoadMapBlocksAndLayout; load blocks and layout ?
 loc_2B80:
                 
                 movea.l (a5)+,a4        ; move map properties address to A4
@@ -1439,8 +1437,8 @@ loc_2CF6:
                 andi.w  #$FF,d3
                 move.w  d3,((word_FFA80A-$1000000)).w
                 bsr.w   EnableDisplayAndInterrupts
-                bsr.w   StoreVdpCommands
-                bsr.w   StoreVdpCommandsbis
+                bsr.w   UpdateVDPHScrollData
+                bsr.w   UpdateVDPVScrollData
                 bsr.w   InitWindowProperties
                 bsr.w   ToggleRoofOnMapLoad
                 bsr.w   WaitForVInt     
@@ -1453,11 +1451,11 @@ loc_2CF6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2D58:
+LoadMapBlocksAndLayout:
                 
                 movea.l (a5)+,a0
                 lea     (FF2000_LOADING_SPACE).l,a1
-                bsr.w   LoadMapBlocks   ; load blocks ?
+                bsr.w   LoadMapBlocks   
                 movea.l (a5)+,a0
                 lea     (FF0000_RAM_START).l,a1
                 bsr.w   LoadMapLayoutData
@@ -1513,7 +1511,7 @@ return_2DEA:
                 
                 rts
 
-	; End of function sub_2D58
+	; End of function LoadMapBlocksAndLayout
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1633,9 +1631,9 @@ loc_2F04:
                 move.w  #$8721,d0
 loc_2F08:
                 
-                bsr.w   SetVdpReg       
+                bsr.w   SetVdpReg
                 move.w  #$8700,d0
-                bsr.w   SetVdpReg       
+                bsr.w   SetVdpReg
                 bsr.w   WaitForVInt     
                 bsr.w   sub_2F24
                 tst.b   ((CAMERA_SCROLLING_MASK-$1000000)).w

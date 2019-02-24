@@ -92,7 +92,7 @@ loc_1AC362:
                 lea     ($2000).w,a1    ; ?
                 move.w  #$800,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 rts
 
 	; End of function LoadEndCreditsFont

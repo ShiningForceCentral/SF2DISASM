@@ -97,10 +97,10 @@ loc_1808C:
                 jsr     (WaitForVInt).w 
                 jsr     (DisableDisplayAndVInt).w
                 move.w  #$8B07,d0       ; set VScroll : each 2 cells, HScroll : each 1 line
-                jsr     (SetVdpReg).w   
+                jsr     (SetVdpReg).w
                 jsr     (ClearSpriteTable).w
                 moveq   #$3F,d0 
-                jsr     (InitSpriteTable).w
+                jsr     (InitSprites).w 
                 jsr     (sub_19B0).w
                 bsr.w   InitializeBattleScenePalettes
                 lea     (byte_FFC000).l,a0
@@ -115,30 +115,30 @@ loc_180CC:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 lea     (byte_FFC000).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 bsr.w   sub_198C8
                 lea     (byte_FFC000).l,a0
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 lea     (FF2000_LOADING_SPACE).l,a0
                 lea     ($7400).w,a1
                 move.w  #$C00,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 lea     (FF3800_LOADING_SPACE).l,a0
                 lea     ($8C00).l,a1
                 move.w  #$C00,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 lea     ((byte_FFB542-$1000000)).w,a0
-                lea     ((PALETTE_4_BIS-$1000000)).w,a1
+                lea     ((PALETTE_4_BASE-$1000000)).w,a1
                 moveq   #7,d0
 loc_1814E:
                 
@@ -165,7 +165,7 @@ loc_18198:
                 cmpi.w  #$FFFF,((BATTLESCENE_CHARACTER-$1000000)).w
                 beq.w   loc_1828C
                 lea     byte_1F576(pc), a0
-                lea     ((dword_FFDC88-$1000000)).w,a1
+                lea     ((SPRITE_01-$1000000)).w,a1
                 lea     (byte_FFAFA1).l,a2
                 moveq   #8,d0
 loc_181B2:
@@ -193,7 +193,7 @@ loc_181B2:
                 cmpi.w  #$FFFF,d1
                 beq.w   loc_1822A
                 lea     byte_1F686(pc), a0
-                lea     ((dword_FFDCF0-$1000000)).w,a1
+                lea     ((SPRITE_14-$1000000)).w,a1
                 lea     (word_FFAFAE).l,a2
                 moveq   #2,d0
 loc_18218:
@@ -228,7 +228,7 @@ loc_1822A:
                 lea     ($D800).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 move.w  ((CHARACTER_WEAPON_PALETTE-$1000000)).w,d0
                 bsr.w   LoadWeaponPalette
 loc_1828C:
@@ -237,7 +237,7 @@ loc_1828C:
                 lea     ($F600).l,a1
                 move.w  #$270,d0
                 moveq   #2,d1
-                jsr     (DmaTilesViaFF8804).w
+                jsr     (ApplyImmediateVramDMAOnCompressedTiles).w
                 bsr.w   sub_1928C
                 move.w  ((ALLY_BATTLESPRITE_ANIM_COUNTER-$1000000)).w,d0
                 lsr.w   #1,d0
@@ -246,7 +246,7 @@ loc_1828C:
                 move.b  #$20,((byte_FFB580-$1000000)).w 
                 jsr     (EnableInterrupts).w
                 clr.w   d6
-                jsr     (ClearHscrollStuff).w
+                jsr     (UpdateForegroundHScrollData).w
                 move.w  #$FFD4,d6
                 bsr.w   sub_1F1CC
                 clr.w   d6
@@ -301,7 +301,7 @@ loc_18358:
                 move.w  #$FFFF,((word_FFB3FA-$1000000)).w
                 cmpi.b  #$FF,((BATTLE_BACKGROUND-$1000000)).w
                 beq.s   loc_18388
-                lea     ((byte_FFDCF6-$1000000)).w,a0
+                lea     ((SPRITE_14_Y-$1000000)).w,a0
                 moveq   #2,d1
 loc_1837E:
                 
@@ -592,8 +592,8 @@ loc_1854A:
                 lea     ($D800).l,a1
                 move.w  #$400,d0
                 move.w  #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
 loc_18596:
                 
                 movem.w (sp)+,d5-d7
@@ -693,8 +693,8 @@ loc_1862E:
                 lea     ($D800).l,a1
                 move.w  #$400,d0
                 move.w  #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
 loc_18664:
                 
                 move.w  ((ALLY_BATTLESPRITE_ANIM_SPEED-$1000000)).w,d0
@@ -848,14 +848,14 @@ loc_187BC:
                 lea     ($2000).w,a1
                 move.w  #$900,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 lea     (FF7A02_LOADING_SPACE).l,a0
                 lea     ($3200).w,a1
                 move.w  #$900,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,d0
                 bsr.w   sub_19E6E
                 move.b  d1,((BATTLE_BACKGROUND-$1000000)).w
@@ -865,7 +865,7 @@ loc_187BC:
                 lea     ($F000).l,a1
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
+                jsr     (ApplyVIntVramDMA).w
 loc_18818:
                 
                 move.w  ((CHARACTER_WEAPON_SPRITE-$1000000)).w,d0
@@ -898,8 +898,8 @@ loc_18864:
                 lea     ($D800).l,a1
                 move.w  #$400,d0
                 move.w  #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
 loc_1888C:
                 
                 bsr.w   sub_1892A
@@ -962,7 +962,7 @@ loc_18908:
                 move.w  d0,((word_FFB3FA-$1000000)).w
                 cmpi.b  #$FF,((BATTLE_BACKGROUND-$1000000)).w
                 beq.s   loc_18922
-                lea     ((byte_FFDCF6-$1000000)).w,a0
+                lea     ((SPRITE_14_Y-$1000000)).w,a0
                 moveq   #2,d2
 loc_1891A:
                 
@@ -984,8 +984,8 @@ return_18928:
 
 sub_1892A:
                 
-                lea     ((PALETTE_1_BIS-$1000000)).w,a0
-                lea     ((PALETTE_1-$1000000)).w,a1
+                lea     ((PALETTE_1_BASE-$1000000)).w,a0
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a1
                 moveq   #$1F,d0
 loc_18934:
                 
@@ -1012,7 +1012,7 @@ bsc06_switchEnemies:
                 bsr.w   sub_1F1CC
                 clr.w   d6
                 bsr.w   sub_1F1F0
-                lea     ((word_FFDCF4-$1000000)).w,a0
+                lea     ((SPRITE_14_TILE_FLAGS-$1000000)).w,a0
                 bset    #7,(a0)
                 bset    #7,8(a0)
                 bset    #7,$10(a0)
@@ -1126,7 +1126,7 @@ loc_18A96:
 loc_18AAC:
                 
                 lea     ((byte_FFB542-$1000000)).w,a0
-                lea     ((PALETTE_4_BIS-$1000000)).w,a1
+                lea     ((PALETTE_4_BASE-$1000000)).w,a1
                 moveq   #7,d0
 loc_18AB6:
                 
@@ -1182,7 +1182,7 @@ loc_18B30:
                 jsr     (WaitForVInt).w 
                 tst.w   d0
                 bne.s   loc_18B30
-                lea     ((word_FFDCF4-$1000000)).w,a0
+                lea     ((SPRITE_14_TILE_FLAGS-$1000000)).w,a0
                 bclr    #7,(a0)
                 bclr    #7,8(a0)
                 bclr    #7,$10(a0)
@@ -1233,21 +1233,21 @@ sub_18BAA:
                 beq.s   loc_18BD6
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
+                jsr     (ApplyVIntVramDMA).w
                 bra.s   loc_18BF4
 loc_18BD6:
                 
                 move.w  #$100,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
+                jsr     (ApplyVIntVramDMA).w
                 lea     (word_FF9802).l,a0
                 lea     ($4C00).w,a1
                 move.w  #$200,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
+                jsr     (ApplyVIntVramDMA).w
 loc_18BF4:
                 
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,d0-d2/a0-a2
 return_18BFC:
                 
@@ -1275,8 +1275,8 @@ sub_18C1E:
                 bsr.w   sub_1F1CC
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l a0-a2,-(sp)
                 bchg    #7,(a2)
                 bchg    #7,2(a2)
@@ -1297,8 +1297,8 @@ loc_18C5A:
                 lea     ($C180).l,a1
                 move.w  #$1A0,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,a0-a2
                 addq.w  #8,a2
                 move.w  (sp)+,d6
@@ -1317,8 +1317,8 @@ sub_18C94:
                 movem.l a0-a2,-(sp)
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 bchg    #7,(a2)
                 bchg    #7,2(a2)
                 bchg    #7,4(a2)
@@ -1338,8 +1338,8 @@ loc_18CD0:
                 lea     ($C180).l,a1
                 move.w  #$1A0,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,a0-a2
                 lea     -$600(a0),a0
                 lea     -$600(a1),a1
@@ -1501,7 +1501,7 @@ loc_18E30:
                 move.b  #1,((FADING_COUNTER_MAX-$1000000)).w
                 move.b  #7,((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
-                move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.w  ((word_FFB3EC-$1000000)).w,d4
                 move.w  ((word_FFB3F0-$1000000)).w,d5
@@ -1655,7 +1655,7 @@ loc_18FC6:
                 move.b  #1,((FADING_COUNTER_MAX-$1000000)).w
                 move.b  #7,((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
-                move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.w  ((word_FFB3EC-$1000000)).w,d4
                 move.w  ((word_FFB3F0-$1000000)).w,d5
@@ -2167,7 +2167,7 @@ sub_193C4:
                 subi.w  #$70,d0 
 loc_193E0:
                 
-                lea     ((dword_FFDC88-$1000000)).w,a1
+                lea     ((SPRITE_01-$1000000)).w,a1
                 btst    #0,((byte_FFB56E-$1000000)).w
                 bne.s   loc_193F0
                 clr.w   d2
@@ -2307,12 +2307,12 @@ loc_194DC:
                 
                 move.w  #$600,d0
                 move.w  #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 move.w  #$600,d0
                 move.w  #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
 return_194FC:
                 
                 rts
@@ -2344,7 +2344,7 @@ sub_19504:
                 subi.w  #$70,d0 
 loc_19520:
                 
-                lea     ((dword_FFDCF0-$1000000)).w,a1
+                lea     ((SPRITE_14-$1000000)).w,a1
                 moveq   #2,d7
 loc_19526:
                 
@@ -2429,7 +2429,7 @@ loc_195AC:
                 andi.w  #$30,d7 
                 add.w   d7,d7
                 adda.w  d7,a0
-                lea     ((byte_FFDCD0-$1000000)).w,a1
+                lea     ((SPRITE_10-$1000000)).w,a1
                 moveq   #3,d7
 loc_195BE:
                 
@@ -2542,16 +2542,16 @@ loc_19684:
                 
                 move.w  #$900,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 movea.l (sp)+,a0
                 cmpi.w  #$FFFF,((CHARACTER_WEAPON_SPRITE-$1000000)).w
                 beq.s   loc_196B0
                 lea     ($D800).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
 loc_196B0:
                 
                 jmp     (WaitForVInt).w 
@@ -2637,12 +2637,12 @@ loc_19748:
                 
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 move.w  #$600,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jmp     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jmp     (WaitForDMAQueueProcessing).w
 
 	; End of function sub_1971C
 
@@ -2829,8 +2829,8 @@ loc_19880:
 
 InitializeBattleScenePalettes:
                 
-                lea     ((PALETTE_1_BIS-$1000000)).w,a0
-                lea     ((PALETTE_1-$1000000)).w,a1
+                lea     ((PALETTE_1_BASE-$1000000)).w,a0
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a1
                 moveq   #$1F,d0
 loc_1988E:
                 
@@ -2838,7 +2838,7 @@ loc_1988E:
                 clr.l   (a1)+
                 dbf     d0,loc_1988E
                 lea     plt_BattleSceneBasePalette(pc), a0
-                lea     ((PALETTE3_BIS-$1000000)).w,a1
+                lea     ((PALETTE_3_BASE-$1000000)).w,a1
                 moveq   #7,d0
 loc_198A0:
                 
@@ -2900,7 +2900,7 @@ loc_19912:
 loc_1991C:
                 
                 moveq   #$10,d0
-                jsr     (InitSpriteTable).w
+                jsr     (InitSprites).w 
                 jmp     (sub_1942).w    
 
 ; END OF FUNCTION CHUNK FOR bsc07_switchAllies
@@ -2921,8 +2921,8 @@ loc_19932:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jmp     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jmp     (EnableDMAQueueProcessing).w
 
 	; End of function sub_19926
 
@@ -2932,7 +2932,7 @@ loc_19932:
 sub_19952:
                 
                 movem.l d0/a0,-(sp)
-                lea     ((dword_FFDCF0-$1000000)).w,a0
+                lea     ((SPRITE_14-$1000000)).w,a0
                 moveq   #2,d0
 loc_1995C:
                 
@@ -2959,7 +2959,7 @@ sub_19970:
                 adda.w  d0,a0
                 lsl.w   #5,d1
                 adda.w  d1,a0
-                lea     ((PALLETE_2_BIS-$1000000)).w,a1
+                lea     ((PALLETE_2_BASE-$1000000)).w,a1
                 clr.w   (a1)+
                 addq.w  #2,a0
                 moveq   #$E,d0
@@ -2985,7 +2985,7 @@ sub_1999E:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 move.w  #$C00,d0
-                jmp     (DmaTilesViaFF8804).w
+                jmp     (ApplyImmediateVramDMAOnCompressedTiles).w
 
 	; End of function sub_1999E
 
@@ -3003,8 +3003,8 @@ sub_199BC:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 move.w  #$C00,d0
-                jsr     (DmaTilesViaFF8804bis).w
-                jmp     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMAOnCompressedTiles).w
+                jmp     (WaitForDMAQueueProcessing).w
 
 	; End of function sub_199BC
 
@@ -3024,7 +3024,7 @@ LoadPaletteForBattleScene:
                 adda.w  d0,a0
                 lsl.w   #5,d1
                 adda.w  d1,a0
-                lea     ((PALETTE_1_BIS-$1000000)).w,a1
+                lea     ((PALETTE_1_BASE-$1000000)).w,a1
                 clr.w   (a1)+
                 addq.w  #2,a0
                 moveq   #$E,d0
@@ -3053,7 +3053,7 @@ LoadAllyBattleSprite:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 move.w  #$900,d0
-                jmp     (DmaTilesViaFF8804).w
+                jmp     (ApplyImmediateVramDMAOnCompressedTiles).w
 
 	; End of function LoadAllyBattleSprite
 
@@ -3073,8 +3073,8 @@ sub_19A2A:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 move.w  #$900,d0
-                jsr     (DmaTilesViaFF8804bis).w
-                jmp     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMAOnCompressedTiles).w
+                jmp     (WaitForDMAQueueProcessing).w
 
 	; End of function sub_19A2A
 
@@ -3085,7 +3085,7 @@ LoadWeaponPalette:
                 
                 movea.l (p_plt_BattleSceneWeaponColors).l,a0
                 lsl.w   #2,d0
-                move.l  (a0,d0.w),((WEAPON_PALETTE-$1000000)).w
+                move.l  (a0,d0.w),((PALETTE_1_BASE_0E-$1000000)).w
                 rts
 
 	; End of function LoadWeaponPalette
@@ -3121,14 +3121,14 @@ LoadBattleSceneGround:
                 movea.l (p_pt_BattleSceneGrounds).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
-                lea     ((PALETTE3_BIS-$1000000)).w,a1
+                lea     ((PALETTE_3_BASE-$1000000)).w,a1
                 move.l  (a0)+,6(a1)
                 move.w  (a0)+,$10(a1)
                 move.w  (a0),d0
                 adda.w  d0,a0
                 lea     ($F000).l,a1
                 move.w  #$300,d0
-                jmp     (DmaTilesViaFF8804).w
+                jmp     (ApplyImmediateVramDMAOnCompressedTiles).w
                 rts
 
 	; End of function LoadBattleSceneGround
@@ -3285,7 +3285,7 @@ sub_19BCC:
                 movea.l (p_pt_BattleSceneGrounds).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
-                lea     ((PALETTE3_BIS-$1000000)).w,a1
+                lea     ((PALETTE_3_BASE-$1000000)).w,a1
                 move.l  (a0)+,6(a1)
                 move.w  (a0)+,$10(a1)
                 move.w  (a0),d0
@@ -3308,8 +3308,8 @@ LoadInvocationSprite:
                 move.w  (a0)+,d0
                 lea     -2(a0,d0.w),a1
                 addq.w  #2,a1
-                lea     ((PALETTE_1_01-$1000000)).w,a2
-                lea     ((word_FFD082-$1000000)).w,a3
+                lea     ((PALETTE_1_CURRENT_01-$1000000)).w,a2
+                lea     ((PALETTE_1_BASE_01-$1000000)).w,a3
                 moveq   #$E,d0
 loc_19C14:
                 
@@ -3325,21 +3325,21 @@ loc_19C14:
                 btst    #6,((byte_FFB56E-$1000000)).w
                 beq.s   loc_19C58
                 lea     ($2000).w,a1
-                jsr     (DmaTilesViaFF8804bis).w
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMAOnCompressedTiles).w
+                jsr     (WaitForDMAQueueProcessing).w
                 movea.l (sp)+,a0
                 move.w  (a0),d0
                 adda.w  d0,a0
                 lea     ($3200).w,a1
                 move.w  #$900,d0
-                jsr     (DmaTilesViaFF8804bis).w
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMAOnCompressedTiles).w
+                jsr     (WaitForDMAQueueProcessing).w
                 bra.s   loc_19CA0
 loc_19C58:
                 
                 lea     ($A400).l,a1
-                jsr     (DmaTilesViaFF8804bis).w
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMAOnCompressedTiles).w
+                jsr     (WaitForDMAQueueProcessing).w
                 movea.l (sp)+,a0
                 move.w  (a0),d0
                 adda.w  d0,a0
@@ -3349,12 +3349,12 @@ loc_19C58:
                 lea     (loc_B600).l,a1
                 move.w  #$500,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
+                jsr     (ApplyVIntVramDMA).w
                 lea     ($D800).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
 loc_19CA0:
                 
                 movea.l (sp)+,a0
@@ -3374,20 +3374,20 @@ LoadSpellGraphics:
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0
-                lea     ((PALETTE_3-$1000000)).w,a1
-                lea     ((PALETTE3_BIS-$1000000)).w,a2
+                lea     ((PALETTE_3_CURRENT-$1000000)).w,a1
+                lea     ((PALETTE_3_BASE-$1000000)).w,a2
                 move.w  (a0),$12(a1)
                 move.w  (a0)+,$12(a2)
                 move.w  (a0),$1A(a1)
                 move.w  (a0)+,$1A(a2)
                 move.w  (a0),$1C(a1)
                 move.w  (a0)+,$1C(a2)
-                jsr     (StoreVdpCommandster).w
+                jsr     (ApplyVIntCramDMA).w
                 lea     ($A400).l,a1
                 lsr.w   #1,d0
                 moveq   #2,d1
-                jsr     (DmaTilesViaFF8804bis).w
-                jmp     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMAOnCompressedTiles).w
+                jmp     (WaitForDMAQueueProcessing).w
 
 	; End of function LoadSpellGraphics
 
@@ -3402,23 +3402,23 @@ sub_19CE8:
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0        ; load bytes 0-1
-                lea     ((PALETTE_3-$1000000)).w,a1
-                lea     ((PALETTE3_BIS-$1000000)).w,a2
+                lea     ((PALETTE_3_CURRENT-$1000000)).w,a1
+                lea     ((PALETTE_3_BASE-$1000000)).w,a2
                 move.w  (a0),$12(a1)    ; load 3 colors on 3rd palette
                 move.w  (a0)+,$12(a2)
                 move.w  (a0),$1A(a1)
                 move.w  (a0)+,$1A(a2)
                 move.w  (a0),$1C(a1)
                 move.w  (a0)+,$1C(a2)
-                jsr     (StoreVdpCommandster).w
+                jsr     (ApplyVIntCramDMA).w
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 lea     (FF8804_LOADING_SPACE).l,a0
                 lea     ($F000).l,a1
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jmp     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jmp     (WaitForDMAQueueProcessing).w
 
 	; End of function sub_19CE8
 
@@ -3605,10 +3605,10 @@ loc_19EA8:
 FadeInFromBlackIntoBattlescene:
                 
                 move.b  #1,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 rts
 
 	; End of function FadeInFromBlackIntoBattlescene
@@ -3619,10 +3619,10 @@ FadeInFromBlackIntoBattlescene:
 FadeOutToBlackForBattlescene:
                 
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 rts
 
 	; End of function FadeOutToBlackForBattlescene
@@ -3851,8 +3851,8 @@ rjt_1A048:      dc.w nullsub_184-rjt_1A048; related to ally or enemy reaction
 
 loc_1A088:
                 
-                jsr     (StoreVdpCommandster).w
-                jmp     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntCramDMA).w
+                jmp     (EnableDMAQueueProcessing).w
 
 ; END OF FUNCTION CHUNK FOR sub_1A034
 
@@ -3872,8 +3872,8 @@ sub_1A092:
                 
                 tst.b   ((byte_FFB584-$1000000)).w
                 bne.s   loc_1A0A2
-                jsr     (StoreVdpCommandster).w
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntCramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 bra.s   return_1A0A8
 loc_1A0A2:
                 
@@ -3891,8 +3891,8 @@ return_1A0A8:
 sub_1A0AA:
                 
                 movem.l d7-a1,-(sp)
-                lea     ((PALETTE_1-$1000000)).w,a0
-                lea     ((PALETTE_1_BIS-$1000000)).w,a1
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
+                lea     ((PALETTE_1_BASE-$1000000)).w,a1
                 moveq   #$1F,d7
 loc_1A0B8:
                 
@@ -3909,8 +3909,8 @@ loc_1A0B8:
 sub_1A0C4:
                 
                 movem.l a0-a1,-(sp)
-                lea     ((PALETTE_3-$1000000)).w,a0
-                lea     ((PALETTE3_BIS-$1000000)).w,a1
+                lea     ((PALETTE_3_CURRENT-$1000000)).w,a0
+                lea     ((PALETTE_3_BASE-$1000000)).w,a1
                 move.w  $12(a0),$12(a1)
                 move.l  $1A(a0),$1A(a1)
                 movem.l (sp)+,a0-a1
@@ -3924,8 +3924,8 @@ sub_1A0C4:
 sub_1A0E2:
                 
                 movem.l a0-a1,-(sp)
-                lea     ((PALETTE_3-$1000000)).w,a0
-                lea     ((PALETTE3_BIS-$1000000)).w,a1
+                lea     ((PALETTE_3_CURRENT-$1000000)).w,a0
+                lea     ((PALETTE_3_BASE-$1000000)).w,a1
                 move.w  $12(a1),$12(a0)
                 move.l  $1A(a1),$1A(a0)
                 movem.l (sp)+,a0-a1
@@ -3939,7 +3939,7 @@ sub_1A0E2:
 sub_1A100:
                 
                 movem.l d6-a0,-(sp)
-                lea     ((PALETTE_1-$1000000)).w,a0
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 moveq   #$3F,d7 
 loc_1A10A:
                 
@@ -3969,7 +3969,7 @@ sub_1A11E:
 sub_1A122:
                 
                 movem.l d5-a0,-(sp)
-                lea     ((PALETTE_1-$1000000)).w,a0
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 moveq   #$3F,d7 
 loc_1A12C:
                 
@@ -4002,7 +4002,7 @@ sub_1A146:
 sub_1A14A:
                 
                 movem.l d0-d2/a0,-(sp)
-                lea     ((PALETTE_1-$1000000)).w,a0
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 moveq   #$3F,d2 
 loc_1A154:
                 
@@ -4054,7 +4054,7 @@ sub_1A198:
 sub_1A19E:
                 
                 movem.l d0-d1/a0,-(sp)
-                lea     ((PALETTE_1-$1000000)).w,a0
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 moveq   #$3F,d7 
 loc_1A1A8:
                 
@@ -4087,7 +4087,7 @@ sub_1A1C4:
 sub_1A1CA:
                 
                 movem.l d0-d1/a0,-(sp)
-                lea     ((PALETTE_1-$1000000)).w,a0
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 moveq   #$3F,d7 
 loc_1A1D4:
                 
@@ -4120,7 +4120,7 @@ sub_1A1F0:
 sub_1A1F6:
                 
                 movem.l d0-d1/a0,-(sp)
-                lea     ((PALETTE_1-$1000000)).w,a0
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 moveq   #$3F,d7 
 loc_1A200:
                 
@@ -4154,8 +4154,8 @@ sub_1A222:
                 
                 movem.l d0/a0-a1,-(sp)
                 bsr.s   sub_1A1F6
-                lea     ((PALETTE_1-$1000000)).w,a0
-                lea     ((PALETTE_1_BIS-$1000000)).w,a1
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
+                lea     ((PALETTE_1_BASE-$1000000)).w,a1
                 moveq   #7,d0
 loc_1A232:
                 
@@ -4179,15 +4179,15 @@ loc_1A242:
 sub_1A24E:
                 
                 movem.l d7-a1,-(sp)
-                lea     ((PALETTE_1-$1000000)).w,a0
-                lea     ((PALETTE_1_BIS-$1000000)).w,a1
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
+                lea     ((PALETTE_1_BASE-$1000000)).w,a1
                 moveq   #$1F,d7
 loc_1A25C:
                 
                 move.l  (a1)+,(a0)+
                 dbf     d7,loc_1A25C
-                jsr     (StoreVdpCommandster).w
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntCramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,d7-a1
                 rts
 
@@ -4199,8 +4199,8 @@ loc_1A25C:
 sub_1A270:
                 
                 movem.l d7-a1,-(sp)
-                lea     ((PALETTE_1-$1000000)).w,a0
-                lea     ((PALETTE_1_BIS-$1000000)).w,a1
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
+                lea     ((PALETTE_1_BASE-$1000000)).w,a1
                 move.w  $52(a0),-(sp)
                 move.l  $5A(a0),-(sp)
                 moveq   #$1F,d7
@@ -4208,11 +4208,11 @@ loc_1A286:
                 
                 move.l  (a1)+,(a0)+
                 dbf     d7,loc_1A286
-                lea     ((PALETTE_1-$1000000)).w,a0
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 move.l  (sp)+,$5A(a0)
                 move.w  (sp)+,$52(a0)
-                jsr     (StoreVdpCommandster).w
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntCramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,d7-a1
                 rts
 
@@ -4229,14 +4229,14 @@ ExecSpellAnimationFlash:
                 moveq   #3,d7
 loc_1A2AA:
                 
-                move.w  d6,((PALETTE_1-$1000000)).w
-                move.w  d6,((PALETTE_3_0F-$1000000)).w
-                jsr     (StoreVdpCommandster).w
+                move.w  d6,((PALETTE_1_CURRENT-$1000000)).w
+                move.w  d6,((PALETTE_3_CURRENT_02-$1000000)).w
+                jsr     (ApplyVIntCramDMA).w
                 moveq   #4,d0
                 jsr     (Sleep).w       
-                clr.w   ((PALETTE_1-$1000000)).w
-                clr.w   ((PALETTE_3_0F-$1000000)).w
-                jsr     (StoreVdpCommandster).w
+                clr.w   ((PALETTE_1_CURRENT-$1000000)).w
+                clr.w   ((PALETTE_3_CURRENT_02-$1000000)).w
+                jsr     (ApplyVIntCramDMA).w
                 moveq   #3,d0
                 jsr     (Sleep).w       
                 dbf     d7,loc_1A2AA
@@ -4324,9 +4324,9 @@ LoadInvocationSpell:
                 moveq   #8,d0
                 jsr     (Sleep).w       
                 bchg    #6,((byte_FFB56E-$1000000)).w
-                jsr     (StoreVdpCommandster).w
+                jsr     (ApplyVIntCramDMA).w
                 bsr.w   sub_1A380
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (WaitForDMAQueueProcessing).w
                 bset    #4,((byte_FFB56F-$1000000)).w
                 rts
 
@@ -4337,7 +4337,7 @@ LoadInvocationSpell:
 
 sub_1A380:
                 
-                lea     ((dword_FFDD20-$1000000)).w,a1
+                lea     ((SPRITE_20-$1000000)).w,a1
                 tst.w   4(a0)
                 bne.s   loc_1A39C
                 bclr    #5,((byte_FFB56F-$1000000)).w
@@ -4384,7 +4384,7 @@ loc_1A3C6:
 
 sub_1A3E8:
                 
-                lea     ((byte_FFDD24-$1000000)).w,a0
+                lea     ((SPRITE_20_TILE_FLAGS-$1000000)).w,a0
                 lea     (byte_1F776).l,a1
                 moveq   #$11,d0
                 btst    #5,((byte_FFB56F-$1000000)).w
@@ -4414,15 +4414,15 @@ loc_1A418:
                 beq.s   return_1A474
                 bsr.w   bsc0D_endAnimation
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
 loc_1A43E:
                 
                 tst.b   ((FADING_SETTING-$1000000)).w
                 bne.s   loc_1A43E
-                lea     ((dword_FFDD20-$1000000)).w,a0
+                lea     ((SPRITE_20-$1000000)).w,a0
                 moveq   #$11,d0
 loc_1A44A:
                 
@@ -5530,15 +5530,15 @@ loc_1AC08:
                 moveq   #9,d0
                 bsr.w   LoadSpellGraphics
                 movea.l (sp)+,a0
-                lea     ((PALETTE_3-$1000000)).w,a1
-                lea     ((PALETTE3_BIS-$1000000)).w,a2
+                lea     ((PALETTE_3_CURRENT-$1000000)).w,a1
+                lea     ((PALETTE_3_BASE-$1000000)).w,a2
                 move.w  (a0),$12(a1)
                 move.w  (a0)+,$12(a2)
                 move.w  (a0),$1A(a1)
                 move.w  (a0)+,$1A(a2)
                 move.w  (a0),$1C(a1)
                 move.w  (a0),$1C(a2)
-                jsr     (StoreVdpCommandster).w
+                jsr     (ApplyVIntCramDMA).w
                 lea     ((byte_FFB532-$1000000)).w,a0
                 btst    #7,((byte_FFB586-$1000000)).w
                 bne.s   loc_1AC5C
@@ -6148,7 +6148,7 @@ sa12_Atlas:
                 moveq   #3,d0
                 bsr.w   LoadInvocationSpell
                 sndCom  SFX_INTRO_LIGHTNING
-                lea     ((dword_FFDD20-$1000000)).w,a0
+                lea     ((SPRITE_20-$1000000)).w,a0
                 moveq   #$15,d0
 loc_1B0EA:
                 
@@ -6178,32 +6178,32 @@ loc_1B0EE:
                 lea     ($3000).w,a1
                 move.w  #$100,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 lea     (byte_FF8D04).l,a0
                 lea     ($4200).w,a1
                 move.w  #$100,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 lea     (byte_FF8F04).l,a0
                 lea     ($B400).l,a1
                 move.w  #$100,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 lea     (byte_FF9104).l,a0
                 lea     ($DE00).l,a1
                 move.w  #$100,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (WaitForDMAQueueProcessing).w
                 moveq   #$26,d0 
                 lea     byte_1B1FA(pc), a0
                 bsr.w   sub_19F5E
                 jsr     (WaitForVInt).w 
                 sndCom  SFX_BATTLEFIELD_DEATH
-                lea     ((byte_FFDDB0-$1000000)).w,a0
+                lea     ((SPRITE_38-$1000000)).w,a0
                 moveq   #$13,d0
                 moveq   #1,d1
 loc_1B1A4:
@@ -6316,7 +6316,7 @@ loc_1B268:
                 moveq   #2,d0
                 moveq   #0,d1
                 moveq   #$10,d2
-                lea     ((byte_FFDDB0-$1000000)).w,a0
+                lea     ((SPRITE_38-$1000000)).w,a0
 loc_1B2A0:
                 
                 subi.w  #5,(a0)
@@ -6523,15 +6523,15 @@ sa16_:
                 cmpi.w  #2,d1
                 bcs.s   loc_1B4CE
                 lea     byte_1B4F0(pc), a0
-                lea     ((PALETTE_3-$1000000)).w,a1
-                lea     ((PALETTE3_BIS-$1000000)).w,a2
+                lea     ((PALETTE_3_CURRENT-$1000000)).w,a1
+                lea     ((PALETTE_3_BASE-$1000000)).w,a2
                 move.w  (a0),$12(a1)
                 move.w  (a0)+,$12(a2)
                 move.w  (a0),$1A(a1)
                 move.w  (a0)+,$1A(a2)
                 move.w  (a0),$1C(a1)
                 move.w  (a0),$1C(a2)
-                jsr     (StoreVdpCommandster).w
+                jsr     (ApplyVIntCramDMA).w
 loc_1B4CE:
                 
                 move.w  #$E4,((byte_FFB404-$1000000)).w 
@@ -6626,7 +6626,7 @@ loc_1B594:
                 jsr     (sub_1942).w    
                 sndCom  SFX_PSHHH
                 move.w  #5,4(a5)
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
 loc_1B5B2:
                 
                 jsr     (WaitForVInt).w 
@@ -6934,10 +6934,10 @@ nullsub_22:
 
 sub_1B82A:
                 
-                clr.w   ((PALETTE_1-$1000000)).w
-                clr.w   ((PALETTE_3_0F-$1000000)).w
-                jsr     (StoreVdpCommandster).w
-                jsr     (Set_FFDE94_bit3).w
+                clr.w   ((PALETTE_1_CURRENT-$1000000)).w
+                clr.w   ((PALETTE_3_CURRENT_02-$1000000)).w
+                jsr     (ApplyVIntCramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 bsr.w   sub_1A00A
                 bsr.w   ClearSpellAnimationProperties
                 cmpi.b  #$11,((byte_FFB587-$1000000)).w
@@ -6945,7 +6945,7 @@ sub_1B82A:
                 cmpi.b  #$14,((byte_FFB587-$1000000)).w
                 bhi.s   loc_1B858
                 moveq   #$10,d0
-                jsr     (InitSpriteTable).w
+                jsr     (InitSprites).w 
 loc_1B858:
                 
                 clr.w   ((byte_FFB404-$1000000)).w
@@ -7002,7 +7002,7 @@ sub_1B8B2:
                 cmp.b   ((byte_FFB569-$1000000)).w,d0
                 bcs.s   loc_1B8F8
                 clr.b   ((byte_FFB568-$1000000)).w
-                tst.w   ((PALETTE_1-$1000000)).w
+                tst.w   ((PALETTE_1_CURRENT-$1000000)).w
                 bne.s   loc_1B8D6
                 move.w  4(a0),d0
                 move.w  (a0),d1
@@ -7017,10 +7017,10 @@ loc_1B8DC:
                 jsr     (UpdateRandomSeed).w
                 add.w   d7,d0
                 move.b  d0,((byte_FFB569-$1000000)).w
-                move.w  d1,((PALETTE_1-$1000000)).w
-                move.w  d1,((PALETTE_3_0F-$1000000)).w
-                jsr     (StoreVdpCommandster).w
-                jsr     (Set_FFDE94_bit3).w
+                move.w  d1,((PALETTE_1_CURRENT-$1000000)).w
+                move.w  d1,((PALETTE_3_CURRENT_02-$1000000)).w
+                jsr     (ApplyVIntCramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
 loc_1B8F8:
                 
                 movem.w (sp)+,d0-d1/d6-d7
@@ -7091,7 +7091,7 @@ nullsub_13:
 sub_1B93C:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 tst.w   (a5)
                 beq.w   loc_1B9EA
@@ -7153,7 +7153,7 @@ loc_1B9D0:
 loc_1B9EA:
                 
                 lea     ((byte_FFB41E-$1000000)).w,a5
-                lea     ((byte_FFDDC0-$1000000)).w,a4
+                lea     ((SPRITE_40-$1000000)).w,a4
                 moveq   #$28,d0 
                 clr.w   d1
                 move.b  5(a3),d1
@@ -7739,7 +7739,7 @@ word_1BE82:     dc.w $C
 sub_1BE9E:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 moveq   #$26,d0 
                 btst    #2,((byte_FFB586-$1000000)).w
                 beq.w   loc_1BF5C
@@ -8205,7 +8205,7 @@ byte_1C242:     dc.b $E
 sub_1C248:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 tst.w   4(a3)
                 bne.w   loc_1C362
@@ -8380,7 +8380,7 @@ loc_1C43A:
                 lea     $C(a5),a5
                 lea     $20(a4),a4
                 move.w  #$FFF0,d2
-                lea     ((byte_FFDDB0-$1000000)).w,a0
+                lea     ((SPRITE_38-$1000000)).w,a0
                 bsr.w   sub_1C46E
                 lea     $C(a5),a5
                 addq.w  #8,a4
@@ -8531,7 +8531,7 @@ byte_1C51E:     dc.b 0
 sub_1C53E:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 moveq   #$26,d0 
                 move.w  $A(a3),d1
@@ -8796,7 +8796,7 @@ byte_1C7EE:     dc.b 0
 sub_1C7F6:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 moveq   #7,d1
 loc_1C804:
@@ -9333,7 +9333,7 @@ byte_1CC48:     dc.b $60
 sub_1CC56:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 tst.w   (a5)
                 beq.w   loc_1CD70
@@ -9561,7 +9561,7 @@ byte_1CE48:     dc.b 0
 spellanim_Bolt:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 moveq   #$26,d0 
                 move.w  (a3),d1
@@ -9768,7 +9768,7 @@ return_1D036:
 sub_1D038:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 moveq   #$26,d0 
                 moveq   #3,d1
@@ -9856,7 +9856,7 @@ byte_1D0F6:     dc.b 0
 sub_1D0FE:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 moveq   #$26,d0 
                 moveq   #$18,d1
@@ -10083,7 +10083,7 @@ word_1D2AA:     dc.w $20
 sub_1D2E6:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 moveq   #$18,d1
                 moveq   #$26,d0 
@@ -10229,7 +10229,7 @@ loc_1D444:
                 beq.w   sub_1B82A
 loc_1D45C:
                 
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB406-$1000000)).w,a5
                 moveq   #$17,d0
 loc_1D466:
@@ -10334,7 +10334,7 @@ byte_1D4C8:     dc.b 0
 sub_1D4E6:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 tst.w   (a5)
                 beq.w   return_1D5C4
@@ -10434,7 +10434,7 @@ return_1D5C4:
 sub_1D5C6:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 moveq   #$26,d0 
                 moveq   #7,d1
@@ -10636,7 +10636,7 @@ byte_1D776:     dc.b 1
 sub_1D786:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 tst.w   $C(a3)
                 bne.w   loc_1D8AE
@@ -10925,7 +10925,7 @@ byte_1D9EA:     dc.b 0
 sub_1D9FC:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 tst.w   $C(a3)
                 bne.w   loc_1DB2E
@@ -11052,10 +11052,10 @@ loc_1DB2E:
                 bne.s   loc_1DB62
                 bsr.w   sub_1DC36
                 move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.w  #1,(a4)
                 bsr.w   sub_1B8FE
 loc_1DB62:
@@ -11066,10 +11066,10 @@ loc_1DB62:
                 bne.s   loc_1DB8E
                 bsr.w   sub_1DC48
                 move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
 loc_1DB8E:
                 
                 cmpi.w  #$36,(a5) 
@@ -11121,7 +11121,7 @@ loc_1DBF8:
                 
                 tst.w   ((byte_FFB404-$1000000)).w
                 bne.s   return_1DC12
-                lea     ((PALETTE_1_BIS-$1000000)).w,a0
+                lea     ((PALETTE_1_BASE-$1000000)).w,a0
                 lea     ((byte_FFB41E-$1000000)).w,a1
                 moveq   #$1F,d0
 loc_1DC08:
@@ -11164,7 +11164,7 @@ loc_1DC30:
 
 sub_1DC36:
                 
-                lea     ((PALETTE_1-$1000000)).w,a0
+                lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 lea     ((byte_FFB41E-$1000000)).w,a1
                 moveq   #$1F,d0
 loc_1DC40:
@@ -11181,7 +11181,7 @@ loc_1DC40:
 sub_1DC48:
                 
                 lea     ((byte_FFB41E-$1000000)).w,a0
-                lea     ((PALETTE_1_BIS-$1000000)).w,a1
+                lea     ((PALETTE_1_BASE-$1000000)).w,a1
                 movem.l a0-a1,-(sp)
                 moveq   #$3F,d0 
 loc_1DC56:
@@ -11203,7 +11203,7 @@ loc_1DC56:
 
 LoadPalette1FromFFB41E:
                 
-                lea     ((PALETTE_1_BIS-$1000000)).w,a0
+                lea     ((PALETTE_1_BASE-$1000000)).w,a0
                 lea     ((byte_FFB41E-$1000000)).w,a1
                 moveq   #$1F,d0
 loc_1DC80:
@@ -11316,7 +11316,7 @@ byte_1DC88:     dc.b 0
 sub_1DCE8:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 subq.w  #1,((byte_FFB532-$1000000)).w
                 bne.s   loc_1DCFA
                 clr.b   ((byte_FFB588-$1000000)).w
@@ -11456,7 +11456,7 @@ byte_1DE1E:     dc.b 2
 sub_1DE24:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 tst.w   (a5)
                 beq.w   loc_1DE80
                 addq.w  #1,(a5)
@@ -11658,16 +11658,16 @@ loc_1DFEA:
                 bne.w   loc_1E010
                 move.b  #3,4(a5)
                 lea     byte_1E10E(pc), a0
-                lea     ((dword_FFDC88-$1000000)).w,a4
+                lea     ((SPRITE_01-$1000000)).w,a4
                 moveq   #7,d0
                 bsr.w   sub_1E0DA
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 moveq   #$A,d0
                 bsr.w   sub_1E0DA
 loc_1E010:
                 
                 lea     $C(a5),a5
-                lea     ((byte_FFDE60-$1000000)).w,a4
+                lea     ((SPRITE_60-$1000000)).w,a4
                 moveq   #$3C,d0 
                 moveq   #2,d1
 loc_1E01C:
@@ -11815,7 +11815,7 @@ byte_1E10E:     dc.b 0
 sub_1E134:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((dword_FFDD20-$1000000)).w,a4
+                lea     ((SPRITE_20-$1000000)).w,a4
                 bsr.s   sub_1E160
                 lea     $C(a5),a5
                 lea     $90(a4),a4
@@ -12046,7 +12046,7 @@ byte_1E290:     dc.b $89
 sub_1E2D4:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 tst.w   (a5)
                 beq.w   return_1E452
@@ -12083,10 +12083,10 @@ loc_1E33C:
                 move.w  #$C563,4(a4)
                 sndCom  SFX_PRISM_LASER_FIRING
                 move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
 loc_1E36C:
                 
                 move.w  #$D8,d3 
@@ -12097,10 +12097,10 @@ loc_1E36C:
                 addq.w  #1,2(a5)
                 move.w  #$1E,4(a5)
                 move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 bra.w   return_1E452
 loc_1E3A8:
                 
@@ -12344,7 +12344,7 @@ loc_1E5C6:
 sub_1E5D0:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 moveq   #$F,d7
                 moveq   #$26,d6 
 loc_1E5DC:
@@ -12564,7 +12564,7 @@ byte_1E78E:     dc.b 0
 sub_1E7B2:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 addq.b  #1,2(a3)
                 move.b  2(a3),3(a3)
@@ -12803,7 +12803,7 @@ byte_1E8F2:     dc.b 0
 sub_1E958:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 tst.w   (a5)
                 beq.w   loc_1CD70
@@ -12870,7 +12870,7 @@ loc_1E9E2:
 loc_1EA0C:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 btst    #0,((byte_FFB586-$1000000)).w
                 beq.w   loc_1EAB2
                 moveq   #$26,d0 
@@ -13057,7 +13057,7 @@ byte_1EBAA:     dc.b 0
 sub_1EBBA:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 moveq   #$26,d0 
                 moveq   #$F,d1
 loc_1EBC6:
@@ -13190,7 +13190,7 @@ byte_1ECBC:     dc.b 0
 sub_1ECC8:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
-                lea     ((byte_FFDDB0-$1000000)).w,a4
+                lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
                 tst.w   (a5)
                 beq.w   return_1EDDA
@@ -13399,7 +13399,7 @@ loc_1EEB6:
                 lea     $48(a0),a0
 loc_1EEC6:
                 
-                lea     ((byte_FFDC8C-$1000000)).w,a1
+                lea     ((SPRITE_01_TILE_FLAGS-$1000000)).w,a1
                 moveq   #8,d7
 loc_1EECC:
                 
@@ -13422,7 +13422,7 @@ loc_1EEF6:
                 andi.w  #$30,d7 
                 add.w   d7,d7
                 adda.w  d7,a0
-                lea     ((byte_FFDCD0-$1000000)).w,a1
+                lea     ((SPRITE_10-$1000000)).w,a1
                 moveq   #3,d7
 loc_1EF08:
                 
@@ -13465,7 +13465,7 @@ sub_1EF36:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jmp     (DmaFromRamToVram).w
+                jmp     (ApplyImmediateVramDMA).w
 
 	; End of function sub_1EF36
 
@@ -13536,8 +13536,8 @@ loc_1EFB0:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
 return_1EFD6:
                 
                 rts
@@ -13579,7 +13579,7 @@ loc_1F01A:
                 add.w   ((word_FFB3F2-$1000000)).w,d4
                 lea     ((word_FFB3FA-$1000000)).w,a1
                 bsr.w   sub_1F0B0
-                lea     ((byte_FFDD08-$1000000)).w,a0
+                lea     ((SPRITE_17-$1000000)).w,a0
                 move.w  d1,(a0)+
                 move.w  d2,(a0)+
                 move.w  d3,(a0)+
@@ -13617,7 +13617,7 @@ loc_1F082:
                 add.w   ((word_FFB3EC-$1000000)).w,d4
                 lea     ((word_FFB3F6-$1000000)).w,a1
                 bsr.s   sub_1F0B0
-                lea     ((byte_FFDD10-$1000000)).w,a0
+                lea     ((SPRITE_18-$1000000)).w,a0
                 move.w  d1,(a0)+
                 move.w  d2,(a0)+
                 move.w  d3,(a0)+
@@ -13760,7 +13760,7 @@ sub_1F176:
                 beq.w   return_1F1CA
                 add.w   d0,((word_FFB3F2-$1000000)).w
                 add.w   d1,((word_FFB3F4-$1000000)).w
-                lea     ((dword_FFDC88-$1000000)).w,a0
+                lea     ((SPRITE_01-$1000000)).w,a0
                 moveq   #8,d2
 loc_1F19E:
                 
@@ -13770,7 +13770,7 @@ loc_1F19E:
                 dbf     d2,loc_1F19E
                 cmpi.w  #$FFFF,((CHARACTER_WEAPON_SPRITE-$1000000)).w
                 beq.s   loc_1F1C2
-                lea     ((byte_FFDCD0-$1000000)).w,a0
+                lea     ((SPRITE_10-$1000000)).w,a0
                 moveq   #3,d2
 loc_1F1B6:
                 
@@ -13802,8 +13802,8 @@ loc_1F1DA:
                 move.w  d6,(a0)
                 addq.w  #4,a0
                 dbf     d0,loc_1F1DA
-                jsr     (StoreVdpCommands).w
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (UpdateVDPHScrollData).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,d0/a0
                 rts
 
@@ -13816,15 +13816,15 @@ sub_1F1F0:
                 
                 movem.l d0/a0,-(sp)
                 move.w  d6,((word_FFB3EE-$1000000)).w
-                lea     ((dword_FFD500-$1000000)).w,a0
+                lea     ((VERTICAL_SCROLL_DATA-$1000000)).w,a0
                 moveq   #$13,d0
 loc_1F1FE:
                 
                 move.w  d6,(a0)
                 addq.w  #4,a0
                 dbf     d0,loc_1F1FE
-                jsr     (StoreVdpCommandsbis).w
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (UpdateVDPVScrollData).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,d0/a0
                 rts
 
@@ -13848,15 +13848,15 @@ loc_1F232:
                 addi.w  #$10,d6
 loc_1F236:
                 
-                lea     ((dword_FFD100+2-$1000000)).w,a0
+                lea     ((HORIZONTAL_SCROLL_DATA+2-$1000000)).w,a0
                 move.w  #$FF,d0
 loc_1F23E:
                 
                 move.w  d6,(a0)
                 addq.w  #4,a0
                 dbf     d0,loc_1F23E
-                jsr     (StoreVdpCommands).w
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (UpdateVDPHScrollData).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,d0/a0
                 rts
 
@@ -13874,15 +13874,15 @@ sub_1F254:
                 subq.w  #8,d6
 loc_1F266:
                 
-                lea     ((dword_FFD500+2-$1000000)).w,a0
+                lea     ((VERTICAL_SCROLL_DATA+2-$1000000)).w,a0
                 moveq   #$13,d0
 loc_1F26C:
                 
                 move.w  d6,(a0)
                 addq.w  #4,a0
                 dbf     d0,loc_1F26C
-                jsr     (StoreVdpCommandsbis).w
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (UpdateVDPVScrollData).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,d0/a0
                 rts
 
@@ -13901,8 +13901,8 @@ sub_1F282:
                 beq.s   return_1F2F4
                 tst.w   ((word_FFB3C4-$1000000)).w
                 beq.s   return_1F2F4
-                lea     ((dword_FFD100-$1000000)).w,a3
-                lea     ((dword_FFD500-$1000000)).w,a4
+                lea     ((HORIZONTAL_SCROLL_DATA-$1000000)).w,a3
+                lea     ((VERTICAL_SCROLL_DATA-$1000000)).w,a4
                 lea     ((dword_FFB3C0-$1000000)).w,a5
                 bra.s   loc_1F2D0
 loc_1F2AE:
@@ -13913,8 +13913,8 @@ loc_1F2AE:
                 beq.s   return_1F2F4
                 tst.w   ((word_FFB3CA-$1000000)).w
                 beq.s   return_1F2F4
-                lea     ((dword_FFD100+2-$1000000)).w,a3
-                lea     ((dword_FFD500+2-$1000000)).w,a4
+                lea     ((HORIZONTAL_SCROLL_DATA+2-$1000000)).w,a3
+                lea     ((VERTICAL_SCROLL_DATA+2-$1000000)).w,a4
                 lea     ((dword_FFB3C6-$1000000)).w,a5
 loc_1F2D0:
                 
@@ -14006,8 +14006,8 @@ loc_1F368:
 loc_1F378:
                 
                 dbf     d0,loc_1F368
-                jsr     (StoreVdpCommands).w
-                jmp     (Set_FFDE94_bit3).w
+                jsr     (UpdateVDPHScrollData).w
+                jmp     (EnableDMAQueueProcessing).w
 loc_1F384:
                 
                 move.w  4(a5),d0
@@ -14036,8 +14036,8 @@ loc_1F3BA:
                 
                 addq.w  #4,a0
                 dbf     d1,loc_1F3B0
-                jsr     (StoreVdpCommands).w
-                jmp     (Set_FFDE94_bit3).w
+                jsr     (UpdateVDPHScrollData).w
+                jmp     (EnableDMAQueueProcessing).w
 loc_1F3C8:
                 
                 clr.w   4(a5)
@@ -14150,7 +14150,7 @@ loc_1F470:
                 addq.w  #4,a1
                 add.w   d0,d1
                 dbf     d2,loc_1F470
-                jmp     (StoreVdpCommands).w
+                jmp     (UpdateVDPHScrollData).w
 
 	; End of function sub_1F45E
 
@@ -14180,8 +14180,8 @@ loc_1F4A8:
                 addq.w  #4,a1
                 add.w   d0,d1
                 dbf     d2,loc_1F4A8
-                jsr     (StoreVdpCommandsbis).w
-                jmp     (Set_FFDE94_bit3).w
+                jsr     (UpdateVDPVScrollData).w
+                jmp     (EnableDMAQueueProcessing).w
 
 	; End of function sub_1F496
 
@@ -14207,7 +14207,7 @@ loc_1F4F6:
                 add.w   d2,(a3)
                 addq.w  #4,a3
                 dbf     d3,loc_1F4F6
-                jsr     (StoreVdpCommands).w
+                jsr     (UpdateVDPHScrollData).w
 loc_1F502:
                 
                 lea     byte_1F528(pc), a0
@@ -14223,10 +14223,10 @@ loc_1F518:
                 add.w   d2,(a4)
                 addq.w  #4,a4
                 dbf     d3,loc_1F518
-                jsr     (StoreVdpCommandsbis).w
+                jsr     (UpdateVDPVScrollData).w
 loc_1F524:
                 
-                jmp     (Set_FFDE94_bit3).w
+                jmp     (EnableDMAQueueProcessing).w
 
 ; END OF FUNCTION CHUNK FOR sub_1F282
 

@@ -10,11 +10,11 @@ InitWitchSuspendVIntFunctions:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 clr.w   d6
-                jsr     (ClearHscrollStuff).w
-                jsr     (ClearOtherHscrollStuff).w
-                jsr     (ClearVscrollStuff).w
-                jsr     (ClearOtherVscrollStuff).w
-                jsr     (SetFFDE94b3andWait).w
+                jsr     (UpdateForegroundHScrollData).w
+                jsr     (UpdateBackgroundHScrollData).w
+                jsr     (UpdateForegroundVScrollData).w
+                jsr     (UpdateBackgroundVScrollData).w
+                jsr     (WaitForDMAQueueProcessing).w
                 bsr.w   DisableDisplayAndVInt
                 bsr.w   ClearVsramAndSprites
                 bsr.w   EnableDisplayAndInterrupts
@@ -57,7 +57,7 @@ DisplayWitchScreen:
                 lea     ($2000).w,a1
                 move.w  #$2000,d0
                 moveq   #2,d1
-                bsr.w   DmaFromRamToVram
+                bsr.w   ApplyImmediateVramDMA
                 movea.l (p_WitchLayout).l,a0
                 lea     (byte_FFE000).l,a1
                 move.w  #$800,d7
@@ -66,9 +66,9 @@ DisplayWitchScreen:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   DmaFromRamToVram
+                bsr.w   ApplyImmediateVramDMA
                 movea.l (p_plt_Witch).l,a0
-                lea     (PALETTE_1_BIS).l,a1
+                lea     (PALETTE_1_BASE).l,a1
                 moveq   #$20,d7 
                 bsr.w   CopyBytes       
                 lea     $20(a0),a0
@@ -120,8 +120,8 @@ sub_7D0C:
                 lea     ($E000).l,a1
                 move.w  #$220,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
-                bsr.w   SetFFDE94b3andWait
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   WaitForDMAQueueProcessing
                 rts
 
 	; End of function sub_7D0C
@@ -229,8 +229,8 @@ loc_7E16:
                 lea     ($E000).l,a1
                 move.w  #$200,d0
                 moveq   #2,d1
-                bsr.w   DMA_119E        
-                bsr.w   Set_FFDE94_bit3 
+                bsr.w   ApplyVIntVramDMA
+                bsr.w   EnableDMAQueueProcessing
 loc_7E36:
                 
                 unlk    a6

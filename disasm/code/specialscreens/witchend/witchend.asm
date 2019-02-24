@@ -18,7 +18,7 @@ EndGame:
                 lea     ($2000).w,a1
                 move.w  #$2000,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 movea.l (p_WitchEndLayout).l,a0
                 lea     (byte_FFE000).l,a1
                 move.w  #$800,d7
@@ -27,16 +27,16 @@ EndGame:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 lea     (byte_FFC000).l,a0
                 move.l  #$21382139,$21E(a0)
                 move.l  #$21422143,$25E(a0)
                 lea     ($C000).l,a1
                 move.w  #$380,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 movea.l (p_plt_WitchEnd).l,a0
-                lea     (PALETTE_1_BIS).l,a1
+                lea     (PALETTE_1_BASE).l,a1
                 moveq   #$20,d7 
                 jsr     (CopyBytes).w   
                 lea     $20(a1),a1
@@ -56,10 +56,10 @@ EndGame:
                 move.w  #$5A,d0 
                 jsr     (Sleep).w       
                 move.b  #2,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
                 moveq   #$3C,d0 
                 jsr     (Sleep).w       
                 clr.b   ((byte_FFB082-$1000000)).w
@@ -72,10 +72,10 @@ EndGame:
                 moveq   #$1E,d0
                 jsr     (Sleep).w       
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
                 moveq   #$3C,d0 
                 jsr     (Sleep).w       
                 trap    #VINT_FUNCTIONS
@@ -88,7 +88,7 @@ EndGame:
                 lea     ($C000).l,a1
                 move.w  #$380,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 movea.l (p_JewelEndScreenTiles).l,a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
@@ -97,7 +97,7 @@ EndGame:
                 lea     ($2000).w,a1
                 move.w  #$2000,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 movea.l (p_JewelEndScreenLayout).l,a0
                 lea     (byte_FFE000).l,a1
                 move.w  #$800,d7
@@ -106,17 +106,17 @@ EndGame:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (DmaFromRamToVram).w
+                jsr     (ApplyImmediateVramDMA).w
                 movea.l (p_plt_JewelsEndScreen).l,a0
-                lea     (PALETTE_1_BIS).l,a1
+                lea     (PALETTE_1_BASE).l,a1
                 moveq   #$40,d7 
                 jsr     (CopyBytes).w   
                 jsr     (EnableDisplayAndInterrupts).w
                 move.b  #1,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #1,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
                 moveq   #$78,d0 
                 jsr     (Sleep).w       
                 move.w  #0,d0
@@ -137,10 +137,10 @@ EndGame:
                 moveq   #$78,d0 
                 jsr     (Sleep).w       
                 move.b  #1,((FADING_SETTING-$1000000)).w
-                clr.w   ((byte_FFDFAA-$1000000)).w
+                clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #2,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.w  #$12C,d0
                 jsr     (Sleep).w       
                 sndCom  SOUND_COMMAND_FADE_OUT
@@ -150,7 +150,7 @@ EndGame:
                 clsTxt
                 move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
                 jsr     (FadeOutToBlack).w
-                lea     (PALETTE_1_BIS).l,a0
+                lea     (PALETTE_1_BASE).l,a0
                 moveq   #$1F,d7
 loc_27C2C:
                 
@@ -200,9 +200,9 @@ sub_27C64:
 
 VInt_FallingJewels:
                 
-                subq.w  #1,(dword_FFD500).l
-                jsr     (StoreVdpCommandsbis).w
-                jsr     (Set_FFDE94_bit3).w
+                subq.w  #1,(VERTICAL_SCROLL_DATA).l
+                jsr     (UpdateVDPVScrollData).w
+                jsr     (EnableDMAQueueProcessing).w
                 rts
 
 	; End of function VInt_FallingJewels
@@ -283,8 +283,8 @@ loc_27D6A:
                 lea     ($E000).l,a1
                 move.w  #$200,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
 loc_27D8A:
                 
                 unlk    a6

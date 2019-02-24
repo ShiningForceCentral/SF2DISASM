@@ -107,10 +107,10 @@ csc36_resetMap:
 csc37_loadMapAndFadeIn:
                 
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   (byte_FFDFAA).l 
+                clr.w   (FADING_TIMER).l
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
 
 	; End of function csc37_loadMapAndFadeIn
 
@@ -450,9 +450,9 @@ LaunchFading:
                 
                 move.b  d3,-(sp)
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,d3
-                clr.w   (byte_FFDFAA).l 
+                clr.w   (FADING_TIMER).l
                 clr.b   ((FADING_POINTER-$1000000)).w
-                move.b  d0,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  d0,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.b  d1,((FADING_COUNTER_MAX-$1000000)).w
                 move.b  d2,((FADING_SETTING-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
@@ -463,7 +463,7 @@ loc_467C6:
                 bne.s   loc_467C6
                 jsr     (WaitForVInt).w 
                 move.b  d3,((FADING_COUNTER_MAX-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_FLAGS-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.b  (sp)+,d3
                 rts
 
@@ -1835,8 +1835,8 @@ sub_4709E:
                 adda.w  d1,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                jsr     (DMA_119E).w    
-                jsr     (Set_FFDE94_bit3).w
+                jsr     (ApplyVIntVramDMA).w
+                jsr     (EnableDMAQueueProcessing).w
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 

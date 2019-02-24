@@ -28,6 +28,15 @@ VINTS_ACTIVATE: equ $4
 
 ; ---------------------------------------------------------------------------
 
+; enum VIntBitmap
+VDP_COMMAND_REQUEST: equ $0
+DEACTIVATE_DMA: equ $1
+DMA_REQUEST: equ $3
+VRAM_READ_REQUEST: equ $4
+ENABLE_VINT: equ $7
+
+; ---------------------------------------------------------------------------
+
 ; enum GraphicsValues
 GFX_MAX_SPRITES_TO_LOAD: equ $7
 GFX_DIAMENU_ICON_NUM_PIXELS: equ $240
