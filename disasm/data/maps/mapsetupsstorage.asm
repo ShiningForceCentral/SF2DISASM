@@ -40,6 +40,7 @@
                 include "data\maps\entries\map72\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map72\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map72\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map72\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map73\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map73\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map73\mapsetups\s3_zoneevents.asm"    ; 
@@ -92,6 +93,7 @@
                 include "data\maps\entries\map03\mapsetups\s6_initfunction_1FA.asm"    ; 
                 include "data\maps\entries\map03\mapsetups\s6_initfunction.asm"    ; 
                 include "data\maps\entries\map03\mapsetups\s6_initfunction_261.asm"    ; 
+                include "data\maps\entries\map03\mapsetups\scripts_1.asm"    ; 
                 include "data\maps\entries\map04\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map04\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map04\mapsetups\s3_zoneevents.asm"    ; 
@@ -99,6 +101,7 @@
                 include "data\maps\entries\map04\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map04\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map04\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map04\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map05\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map05\mapsetups\pointertable_28A.asm"    ; 
                 include "data\maps\entries\map05\mapsetups\s1_entities.asm"    ; 
@@ -119,6 +122,7 @@
                 include "data\maps\entries\map16\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map16\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map16\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map16\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map17\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map17\mapsetups\pointertable_1F9.asm"    ; 
                 include "data\maps\entries\map17\mapsetups\s1_entities.asm"    ; 
@@ -129,6 +133,7 @@
                 include "data\maps\entries\map17\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map17\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map17\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map17\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map18\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map18\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map18\mapsetups\s2_entityevents.asm"    ; 
@@ -160,6 +165,7 @@
                 include "data\maps\entries\map19\mapsetups\s6_initfunction_261.asm"    ; 
                 include "data\maps\entries\map19\mapsetups\s6_initfunction_1FA.asm"    ; 
                 include "data\maps\entries\map19\mapsetups\s6_initfunction_1FB.asm"    ; 
+                include "data\maps\entries\map19\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map20\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map20\mapsetups\pointertable_1F5.asm"    ; 
                 include "data\maps\entries\map20\mapsetups\pointertable_261.asm"    ; 
@@ -177,6 +183,7 @@
                 include "data\maps\entries\map20\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map20\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map20\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map20\mapsetups\scripts_1.asm"    ; 
                 include "data\maps\entries\map21\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map21\mapsetups\pointertable_1F5.asm"    ; 
                 include "data\maps\entries\map21\mapsetups\pointertable_261.asm"    ; 
@@ -201,6 +208,7 @@
                 include "data\maps\entries\map40\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map40\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map40\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map40\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map43\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map43\mapsetups\pointertable_264.asm"    ; 
                 include "data\maps\entries\map43\mapsetups\s1_entities.asm"    ; 
@@ -226,6 +234,7 @@
                 include "data\maps\entries\map44\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map44\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map44\mapsetups\s6_initfunction_1FB.asm"    ; 
+                include "data\maps\entries\map44\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map06\mapsetups\pointertable_2BE.asm"    ; 
                 include "data\maps\entries\map06\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map06\mapsetups\pointertable_2BD.asm"    ; 
@@ -240,6 +249,7 @@
                 include "data\maps\entries\map06\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map06\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map06\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map06\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map07\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map07\mapsetups\pointertable_2BD.asm"    ; 
                 include "data\maps\entries\map07\mapsetups\pointertable_325.asm"    ; 
@@ -253,6 +263,7 @@
                 include "data\maps\entries\map07\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map07\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map07\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map07\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map08\mapsetups\pointertable_2C4.asm"    ; 
                 include "data\maps\entries\map08\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map08\mapsetups\s1_entities_2C4.asm"    ; 
@@ -263,6 +274,7 @@
                 include "data\maps\entries\map08\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map08\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map08\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map08\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map09\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map09\mapsetups\pointertable_206.asm"    ; 
                 include "data\maps\entries\map09\mapsetups\s1_entities.asm"    ; 
@@ -272,6 +284,7 @@
                 include "data\maps\entries\map09\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map09\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map09\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map09\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map10\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map10\mapsetups\pointertable_2D2.asm"    ; 
                 include "data\maps\entries\map10\mapsetups\s1_entities.asm"    ; 
@@ -284,6 +297,7 @@
                 include "data\maps\entries\map10\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map10\mapsetups\s6_initfunction.asm"    ; 
                 include "data\maps\entries\map10\mapsetups\s6_initfunction_2D2.asm"    ; 
+                include "data\maps\entries\map10\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map11\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map11\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map11\mapsetups\s2_entityevents.asm"    ; 
@@ -291,6 +305,7 @@
                 include "data\maps\entries\map11\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map11\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map11\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map11\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map12\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map12\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map12\mapsetups\s2_entityevents.asm"    ; 
@@ -312,6 +327,7 @@
                 include "data\maps\entries\map13\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map13\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map13\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map13\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map14\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map14\mapsetups\pointertable_1CA.asm"    ; 
                 include "data\maps\entries\map14\mapsetups\s3_zoneevents.asm"    ; 
@@ -322,8 +338,10 @@
                 include "data\maps\entries\map14\mapsetups\s1_entities_1CA.asm"    ; 
                 include "data\maps\entries\map14\mapsetups\s2_entityevents_1CA.asm"    ; 
                 include "data\maps\entries\map14\mapsetups\s3_zoneevents_1CA.asm"    ; 
+                include "data\maps\entries\map14\mapsetups\scripts_1.asm"    ; 
                 include "data\maps\entries\map14\mapsetups\s6_initfunction_1CA.asm"    ; 
                 include "data\maps\entries\map14\mapsetups\s5_itemevents.asm"    ; 
+                include "data\maps\entries\map14\mapsetups\scripts_2.asm"    ; 
                 include "data\maps\entries\map22\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map22\mapsetups\pointertable_20A.asm"    ; 
                 include "data\maps\entries\map22\mapsetups\s1_entities.asm"    ; 
@@ -333,6 +351,7 @@
                 include "data\maps\entries\map22\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map22\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map22\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map22\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map23\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map23\mapsetups\pointertable_2FA.asm"    ; 
                 include "data\maps\entries\map23\mapsetups\s1_entities.asm"    ; 
@@ -357,6 +376,7 @@
                 include "data\maps\entries\map26\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map26\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map26\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map26\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map27\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map27\mapsetups\pointertable_20B.asm"    ; 
                 include "data\maps\entries\map27\mapsetups\s1_entities.asm"    ; 
@@ -366,6 +386,7 @@
                 include "data\maps\entries\map27\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map27\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map27\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map27\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map29\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map29\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map29\mapsetups\s2_entityevents.asm"    ; 
@@ -384,6 +405,7 @@
                 include "data\maps\entries\map30\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map30\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map30\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map30\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map33\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map33\mapsetups\pointertable_20B.asm"    ; 
                 include "data\maps\entries\map33\mapsetups\pointertable_310.asm"    ; 
@@ -398,6 +420,7 @@
                 include "data\maps\entries\map33\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map33\mapsetups\s6_initfunction.asm"    ; 
                 include "data\maps\entries\map33\mapsetups\s6_initfunction_312.asm"    ; 
+                include "data\maps\entries\map33\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map34\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map34\mapsetups\pointertable_310.asm"    ; 
                 include "data\maps\entries\map34\mapsetups\s1_entities.asm"    ; 
@@ -407,6 +430,7 @@
                 include "data\maps\entries\map34\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map34\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map34\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map34\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map46\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map46\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map46\mapsetups\s2_entityevents.asm"    ; 
@@ -432,6 +456,7 @@
                 include "data\maps\entries\map52\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map52\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map52\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map52\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map61\mapsetups\pointertable_2D9.asm"    ; 
                 include "data\maps\entries\map61\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map61\mapsetups\s1_entities.asm"    ; 
@@ -441,6 +466,7 @@
                 include "data\maps\entries\map61\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map61\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map61\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map61\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map62\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map62\mapsetups\pointertable_4D.asm"    ; 
                 include "data\maps\entries\map62\mapsetups\s1_entities.asm"    ; 
@@ -450,6 +476,7 @@
                 include "data\maps\entries\map62\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map62\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map62\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map62\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map63\mapsetups\pointertable_1D.asm"    ; 
                 include "data\maps\entries\map63\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map63\mapsetups\s1_entities.asm"    ; 
@@ -459,6 +486,7 @@
                 include "data\maps\entries\map63\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map63\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map63\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map63\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map15\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map15\mapsetups\pointertable_212.asm"    ; 
                 include "data\maps\entries\map15\mapsetups\s1_entities.asm"    ; 
@@ -470,6 +498,7 @@
                 include "data\maps\entries\map15\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map15\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map15\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map15\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map25\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map25\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map25\mapsetups\s2_entityevents.asm"    ; 
@@ -477,6 +506,7 @@
                 include "data\maps\entries\map25\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map25\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map25\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map25\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map31\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map31\mapsetups\pointertable_33E.asm"    ; 
                 include "data\maps\entries\map31\mapsetups\s1_entities.asm"    ; 
@@ -490,6 +520,7 @@
                 include "data\maps\entries\map31\mapsetups\s5_itemevents_33E.asm"    ; 
                 include "data\maps\entries\map31\mapsetups\s6_initfunction.asm"    ; 
                 include "data\maps\entries\map31\mapsetups\s6_initfunction_33E.asm"    ; 
+                include "data\maps\entries\map31\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map36\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map36\mapsetups\pointertable_212.asm"    ; 
                 include "data\maps\entries\map36\mapsetups\s1_entities.asm"    ; 
@@ -500,6 +531,7 @@
                 include "data\maps\entries\map36\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map36\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map36\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map36\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map38\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map38\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map38\mapsetups\s2_entityevents.asm"    ; 
@@ -507,6 +539,7 @@
                 include "data\maps\entries\map38\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map38\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map38\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map38\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map39\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map39\mapsetups\pointertable_33E.asm"    ; 
                 include "data\maps\entries\map39\mapsetups\s1_entities.asm"    ; 
@@ -518,6 +551,7 @@
                 include "data\maps\entries\map39\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map39\mapsetups\s6_initfunction.asm"    ; 
                 include "data\maps\entries\map39\mapsetups\s6_initfunction_33E.asm"    ; 
+                include "data\maps\entries\map39\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map55\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map55\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map55\mapsetups\s2_entityevents.asm"    ; 
@@ -525,6 +559,7 @@
                 include "data\maps\entries\map55\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map55\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map55\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map55\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map00\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map00\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map00\mapsetups\s2_entityevents.asm"    ; 
@@ -539,6 +574,7 @@
                 include "data\maps\entries\map01\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map01\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map01\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map01\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map02\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map02\mapsetups\pointertable_212.asm"    ; 
                 include "data\maps\entries\map02\mapsetups\s1_entities.asm"    ; 
@@ -564,6 +600,7 @@
                 include "data\maps\entries\map28\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map28\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map28\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map28\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map41\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map41\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map41\mapsetups\s2_entityevents.asm"    ; 
@@ -571,6 +608,7 @@
                 include "data\maps\entries\map41\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map41\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map41\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map41\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map37\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map37\mapsetups\pointertable_3E7.asm"    ; 
                 include "data\maps\entries\map37\mapsetups\s1_entities.asm"    ; 
@@ -582,6 +620,7 @@
                 include "data\maps\entries\map37\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map37\mapsetups\s6_initfunction.asm"    ; 
                 include "data\maps\entries\map37\mapsetups\s6_initfunction_3E7.asm"    ; 
+                include "data\maps\entries\map37\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map42\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map42\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map42\mapsetups\s2_entityevents.asm"    ; 
@@ -589,6 +628,7 @@
                 include "data\maps\entries\map42\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map42\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map42\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map42\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map45\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map45\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map45\mapsetups\s2_entityevents.asm"    ; 
@@ -596,6 +636,7 @@
                 include "data\maps\entries\map45\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map45\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map45\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map45\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map05\mapsetups\pointertable_212.asm"    ; 
                 include "data\maps\entries\map05\mapsetups\pointertable_1C.asm"    ; 
                 include "data\maps\entries\map05\mapsetups\s1_entities_212.asm"    ; 
@@ -604,7 +645,9 @@
                 include "data\maps\entries\map05\mapsetups\s3_zoneevents_212.asm"    ; 
                 include "data\maps\entries\map05\mapsetups\s4_descriptions_212.asm"    ; 
                 include "data\maps\entries\map05\mapsetups\s5_itemevents_212.asm"    ; 
+                include "data\maps\entries\map05\mapsetups\scripts_2.asm"    ; 
                 include "data\maps\entries\map05\mapsetups\s6_initfunction_212.asm"    ; 
+                include "data\maps\entries\map05\mapsetups\scripts_1.asm"    ; 
                 include "data\maps\entries\map16\mapsetups\pointertable_212.asm"    ; 
                 include "data\maps\entries\map16\mapsetups\s1_entities_212.asm"    ; 
                 include "data\maps\entries\map16\mapsetups\s2_entityevents_212.asm"    ; 
@@ -626,6 +669,7 @@
                 include "data\maps\entries\map18\mapsetups\s4_descriptions_212.asm"    ; 
                 include "data\maps\entries\map18\mapsetups\s5_itemevents_212.asm"    ; 
                 include "data\maps\entries\map18\mapsetups\s6_initfunction_212.asm"    ; 
+                include "data\maps\entries\map18\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map56\mapsetups\pointertable.asm"    ; 
                 include "data\maps\entries\map56\mapsetups\s1_entities.asm"    ; 
                 include "data\maps\entries\map56\mapsetups\s2_entityevents.asm"    ; 
@@ -633,6 +677,7 @@
                 include "data\maps\entries\map56\mapsetups\s4_descriptions.asm"    ; 
                 include "data\maps\entries\map56\mapsetups\s5_itemevents.asm"    ; 
                 include "data\maps\entries\map56\mapsetups\s6_initfunction.asm"    ; 
+                include "data\maps\entries\map56\mapsetups\scripts.asm"    ; 
                 include "data\maps\entries\map59\mapsetups\pointertable_21F.asm"    ; 
                 include "data\maps\entries\map59\mapsetups\s1_entities_21F.asm"    ; 
                 include "data\maps\entries\map59\mapsetups\s2_entityevents_21F.asm"    ; 
@@ -647,6 +692,7 @@
                 include "data\maps\entries\map03\mapsetups\s4_descriptions_21F.asm"    ; 
                 include "data\maps\entries\map03\mapsetups\s5_itemevents_21F.asm"    ; 
                 include "data\maps\entries\map03\mapsetups\s6_initfunction_21F.asm"    ; 
+                include "data\maps\entries\map03\mapsetups\scripts_2.asm"    ; 
                 include "data\maps\entries\map19\mapsetups\pointertable_21F.asm"    ; 
                 include "data\maps\entries\map19\mapsetups\pointertable_3D6.asm"    ; 
                 include "data\maps\entries\map19\mapsetups\s1_entities_21F.asm"    ; 
@@ -664,6 +710,7 @@
                 include "data\maps\entries\map20\mapsetups\s4_descriptions_21F.asm"    ; 
                 include "data\maps\entries\map20\mapsetups\s5_itemevents_21F.asm"    ; 
                 include "data\maps\entries\map20\mapsetups\s6_initfunction_21F.asm"    ; 
+                include "data\maps\entries\map20\mapsetups\scripts_2.asm"    ; 
                 include "data\maps\entries\map21\mapsetups\pointertable_21F.asm"    ; 
                 include "data\maps\entries\map21\mapsetups\s1_entities_21F.asm"    ; 
                 include "data\maps\entries\map21\mapsetups\s2_entityevents_21F.asm"    ; 
