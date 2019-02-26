@@ -1,13 +1,88 @@
-Map setup definitions
+MAP SETUP DEFINITIONS
 
-0x4F6E2     Map Setups Table
+- MAP SETUPS MAIN TABLE :
+  - Path : disasm\data\maps\mapsetups.asm
+  - For each map with at least one map setup entry :
+    - First entry = default entry
+    - Following entries are conditioned by a flag
+    - Entries end with key word $FFFD
+  - Dedicated macros for easier edits : 
+    - msMap : map index, map setup pointer
+    - msFlag : flag index, map setup pointer
+    - msMapEnd
 
-Address 1   Entities
-Address 2   Entity Events : entity, facing, function
-Address 3   Zone Events : x, y, function
-Address 4   Area Descriptions function with base text index and entry table : x, y, investigation line, description line / x, y, function
-Address 5   Item Events : x, y, facing, item, function 
-Address 6   Init Function
+- MAP SETUPS LAYOUT :
+  - Path : disasm\data\maps\entries\mapXX\mapsetups\
+  - Each map setup is a 6-pointer table : one pointer for each main section.
+  - Summary :
+    1 - Entity declarations : 
+          List of entities to initialize when loading the map (villagers or other more special cases).
+		2 - Entity Events : 
+          Functions triggered when approaching entity with action button
+		3 - Zone Events : 
+          Functions triggered when moving into specific map locations. 
+          BEWARE : zone events have to be used in conjunction with corresponding trigger flag on map layout data, in order to trigger the search for corresponding zone event.
+		4 - Area Descriptions :
+          Text or functions triggered when investigating specific map locations
+		5 - Item Events :
+          Functions triggered when using specific item on specific map location
+		6 - Init Function :
+          Function triggered after map is loaded
+  Each section is split into a specific ASM file.
+  No matter the section, a lot of those triggered functions rely on triggering underlying cutscene scripts.
+  Some of those cutscenes are stored right after the related section, in the same ASM file.
+  In other cases, scripts can be stored only after all sections of related map setup. In such case, these scripts are split into a dedicated "scripts.asm" file.
 
+- SECTION DETAILS :
 
+  - SECTION 1 : ENTITIES
+    List of all entities to initialize when the map is loaded.
+    Mostly used for NPCs naturally, but it can also be used for anything else which is represented by a map sprite which should move and/or be interactive. Hence the abstract name of "entity".
+    Entity indexes are implicitely assigned in order or declaration :
+      - If mapsprite index is outside of Force Member index range (0-$1D), then apply auto-incremented entity index starting from value $80.
+      - If mapsprite index inside Force Member index range, then entity index = Force Member index, and apply actual mapsprite of Force Member.
+  	There are 3 types of entity declarations :
+  		- Fixed entity : no specific movement declared at this point, but a specific actscript is assigned to entity
+  		- Walking Entity : entity walks randomly inside of a zone of specified size
+  		- Sequenced entity : entity applies a specified move sequenced
+  	Dedicated macros :
+  	  - msFixedEntity : X, Y, Facing, Mapsprite, Actscript pointer
+  	  - msWalkingEntity : X, Y, Facing, Mapsprite, Zone X, Zone Y, Zone size
+  	  - msSequencedEntity : X, Y, Facing, Mapsprite, Move sequence pointer
+  	      Move sequence is a series of direction byte values (use constants UP/DOWN/LEFT/RIGHT) ended with macro "msEnd"
+  	      Example : data\maps\entries\map03\mapsetups\s1_entities_261.asm (Inventor NPC looking for sulfur)
+  	      
+  - SECTION 2 : ENTITY EVENTS
+  	Triggered when interacting with given entity by pressing the action button in front of it.
+    Dedicated macros :
+      - msEntityEvent : Entity index, Facing, Function relative pointer
+      	  TODO : Figure out Facing value's actual impact here.
+      - msDefaultEntityEvent : Default function relative pointer (typically an empty function)
 
+  - SECTION 3 : ZONE EVENTS
+    Triggered when stepping on a map block with trigger flag, and location matches event coordinates.
+    Don't forget to activate trigger flag on corresponding map blocks in the map's layout data.
+    Dedicated macros : 
+      - msZoneEvent : X, Y, Function relative pointer
+      - msDefaultEntityEvent : Default function relative pointer (typically an empty function)
+    If X or Y value = 255 (or -1, or $FF), then ignore this criteria (used to trigger event from a whole map row or column)
+    
+  - SECTION 4 : AREA DESCRIPTIONS
+  	Text descriptions for area which can be investigated, or functions to trigger instead.
+  	This section starts with a code template for base description line index initialization.
+  	Base investigation line index : $1A7.
+  	Base description line index is applied in the section's code on register D3.
+    Dedicated macros :
+      - msDesc : X, Y, Investigation line relative index, Description line relative index
+      - msDescFunction : X, Y, Function relative pointer
+      - msDescEnd
+
+  - SECTION 5 : ITEM EVENTS
+    Triggered when using specified item on specified location.
+    Dedicated macros : 
+      - msItemEvent : X, Y, Facing, Item index, Function relative pointer
+          TODO : Figure out Facing value's actual impact here.
+      - msDefaultItemEvent : Default function relative pointer (typically an empty function)
+
+  - SECTION 6 : INITIALIZATION FUNCTION
+    This function is called once the map is loaded.
