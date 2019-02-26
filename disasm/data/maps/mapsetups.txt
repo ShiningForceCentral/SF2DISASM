@@ -17,16 +17,16 @@ MAP SETUP DEFINITIONS
   - Summary :
     1 - Entity declarations : 
           List of entities to initialize when loading the map (villagers or other more special cases).
-		2 - Entity Events : 
+    2 - Entity Events : 
           Functions triggered when approaching entity with action button
-		3 - Zone Events : 
+    3 - Zone Events : 
           Functions triggered when moving into specific map locations. 
           BEWARE : zone events have to be used in conjunction with corresponding trigger flag on map layout data, in order to trigger the search for corresponding zone event.
-		4 - Area Descriptions :
+    4 - Area Descriptions :
           Text or functions triggered when investigating specific map locations
-		5 - Item Events :
+    5 - Item Events :
           Functions triggered when using specific item on specific map location
-		6 - Init Function :
+    6 - Init Function :
           Function triggered after map is loaded
   Each section is split into a specific ASM file.
   No matter the section, a lot of those triggered functions rely on triggering underlying cutscene scripts.
