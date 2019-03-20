@@ -6,9 +6,9 @@
 
 CheatModeConfiguration:
                 
-                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 beq.w   return_7EC4
-                btst    #INPUT_A_UP_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((P1_INPUT-$1000000)).w
                 beq.s   loc_7E58
                                 enableSram
                 btst    #7,(SAVE_FLAGS).l

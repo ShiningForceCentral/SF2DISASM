@@ -70,7 +70,7 @@ LoadBattleSpecialSprite:
 
 LoadExplorationSpecialSprite:
                 
-                lea     ((byte_FF4A00+$300)).l,a1
+                lea     (FF4D00_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
                 jsr     (LoadCompressedData).w
                 movea.l (sp)+,a0
@@ -134,33 +134,34 @@ loc_25D0C:
                 clr.w   d5
 loc_25D0E:
                 
-                cmpi.b  #$F0,$13(a0)
+                cmpi.b  #$F0,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.w   loc_25DF0
                 move.b  #$FF,d6
-                sub.b   $13(a0),d6
+                sub.b   ENTITYDEF_OFFSET_MAPSPRITE(a0),d6
                 andi.w  #$F,d6
                 add.w   d6,d6
-                move.w  rjt_25D2E(pc,d6.w),d6
-                jmp     rjt_25D2E(pc,d6.w)
+                move.w  rjt_SpecialSpriteUpdate(pc,d6.w),d6
+                jmp     rjt_SpecialSpriteUpdate(pc,d6.w)
 
 	; End of function UpdateSpecialSprites
 
-rjt_25D2E:      dc.w UpdateBattleSpecialSprite-rjt_25D2E
-                dc.w UpdateBattleSpecialSprite-rjt_25D2E
-                dc.w UpdateExplorationSpecialSprite-rjt_25D2E
-                dc.w UpdateBattleSpecialSprite-rjt_25D2E
-                dc.w UpdateBattleSpecialSprite-rjt_25D2E
-                dc.w UpdateBattleSpecialSprite-rjt_25D2E
-                dc.w UpdateBattleSpecialSprite-rjt_25D2E
-                dc.w UpdateBattleSpecialSprite-rjt_25D2E
-                dc.w UpdateBattleSpecialSprite-rjt_25D2E
+rjt_SpecialSpriteUpdate:
+                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
+                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
+                dc.w UpdateExplorationSpecialSprite-rjt_SpecialSpriteUpdate
+                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
+                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
+                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
+                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
+                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
+                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdateBattleSpecialSprite:
                 
                 lea     (SPRITE_60).l,a1
-                move.b  $1E(a0),d2
+                move.b  ENTITYDEF_OFFSET_ANIMCOUNTER(a0),d2
                 cmpi.b  #$F,d2
                 ble.s   loc_25D56
                 lea     byte_2784C(pc), a2
@@ -170,7 +171,7 @@ loc_25D56:
                 lea     byte_2786C(pc), a2
 loc_25D5A:
                 
-                btst    #4,$1D(a0)
+                btst    #4,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 beq.s   loc_25D64
                 addq.b  #2,d2
 loc_25D64:
@@ -183,7 +184,7 @@ loc_25D64:
                 clr.w   d2
 loc_25D76:
                 
-                move.b  d2,$1E(a0)
+                move.b  d2,ENTITYDEF_OFFSET_ANIMCOUNTER(a0)
 loc_25D7A:
                 
                 movea.l a2,a0
@@ -212,7 +213,7 @@ UpdateExplorationSpecialSprite:
                 clr.w   d6
                 move.b  $11(a0),d6
                 lea     (SPRITE_46).l,a1
-                lea     byte_2788C(pc), a0
+                lea     SpecialSpriteData_NazcaShip(pc), a0
                 movem.l d0-d1,-(sp)
                 sub.w   d6,d1
                 moveq   #8,d7

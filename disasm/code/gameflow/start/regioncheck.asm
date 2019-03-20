@@ -20,7 +20,7 @@ CheckRegion:
                 lea     aSystems_(pc), a0
                 lea     (byte_FFC41A).l,a1
                 bsr.w   LoadRegionCheckString
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1

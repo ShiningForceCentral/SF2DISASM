@@ -1066,7 +1066,7 @@ loc_E81E:
                 move.w  d1,d0
                 move.w  d2,d1
                 lea     ((byte_FF4000+$400)).l,a2
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
                 bra.w   loc_E984
 loc_E86C:
@@ -1096,7 +1096,7 @@ loc_E89A:
                 move.w  d1,d0
                 move.w  d2,d1
                 lea     ((byte_FF4000+$400)).l,a2
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
                 bra.w   loc_E984
 loc_E8D0:
@@ -1160,7 +1160,7 @@ loc_E94C:
                 lea     ((byte_FF4000+$400)).l,a2
 loc_E96E:
                 
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
 loc_E974:
                 
                 bsr.w   sub_DD10
@@ -1592,7 +1592,7 @@ loc_EDBA:
                 move.w  d1,d0
                 move.w  d2,d1
                 lea     ((byte_FF4000+$400)).l,a2
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
                 clr.w   d1
 loc_EDD0:
@@ -1665,7 +1665,7 @@ loc_EE48:
 loc_EE6C:
                 
                 move.b  #6,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 cmpi.b  #2,d7
                 bne.s   loc_EE7E
                 bra.w   loc_EEFA
@@ -1689,7 +1689,7 @@ loc_EE98:
 loc_EE9A:
                 
                 move.b  #6,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 cmpi.b  #3,d7
                 bne.s   loc_EEAC
                 bra.w   loc_EF14
@@ -2279,7 +2279,7 @@ loc_F3D0:
                 move.w  d1,d3
                 move.w  #$80,d0 
                 lea     ((byte_FF4000+$400)).l,a2
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     KrakenMoveCosts(pc), a5
                 nop
@@ -2299,7 +2299,7 @@ loc_F404:
                 lea     ((byte_FF4000+$400)).l,a2
 loc_F42A:
                 
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     ((MOVE_COST_LIST-$1000000)).w,a5
 loc_F43A:
@@ -2374,7 +2374,7 @@ loc_F4FE:
                 move.w  d1,d0
                 move.w  d2,d1
                 lea     ((byte_FF4000+$400)).l,a2
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
 loc_F512:
                 
@@ -2613,7 +2613,7 @@ loc_F72E:
                 add.b   -1(a6),d0
                 add.b   -2(a6),d1
                 lea     ((byte_FF4000+$400)).l,a2
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
                 lea     (BATTLESCENE_ACTION_TYPE).l,a2
                 move.w  #3,(a2)
@@ -2659,7 +2659,7 @@ sub_F7A0:
                 move.w  d2,d4
                 move.w  #$80,d0 
                 lea     ((byte_FF4000+$400)).l,a2
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     ((MOVE_COST_LIST-$1000000)).w,a5
                 bsr.w   MakeRangeLists
@@ -2743,7 +2743,7 @@ loc_F8CE:
                 move.w  d1,d0
                 move.w  d2,d1
                 lea     ((byte_FF4000+$400)).l,a2
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
 loc_F8DE:
                 
                 bsr.w   sub_DD10

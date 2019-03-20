@@ -65,7 +65,8 @@ byte_2786C:     dc.b 0
                 dc.b $B7 
                 dc.b   0
                 dc.b $8C 
-byte_2788C:     dc.b 0
+SpecialSpriteData_NazcaShip:
+                dc.b 0
                 dc.b $60 
                 dc.b  $A
                 dc.b $38 

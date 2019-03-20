@@ -137,7 +137,7 @@ loc_22CC2:
                 bra.w   loc_22D56
 GetBattleMapProperties:
                 
-                lea     ((byte_FF4A00+$300)).l,a0;     Get battle map dimensions, address of movable bool grid, address of map tiles starting at top-left of battle map.
+                lea     (FF4D00_LOADING_SPACE).l,a0;     Get battle map dimensions, address of movable bool grid, address of map tiles starting at top-left of battle map.
                                         ;     Out: A0 = address of movable bool grid
                                         ;          A1 = address of map tile at top-left battle map X/Y
                                         ;          D6 = width of battle map
@@ -186,12 +186,12 @@ loc_22D56:
                 
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_22D6A
-                bset    #0,((byte_FFA82D-$1000000)).w
+                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 move.b  #$FF,((byte_FFA8FF-$1000000)).w
                 bra.s   return_22D70
 loc_22D6A:
                 
-                bset    #1,((byte_FFA82D-$1000000)).w
+                bset    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
 return_22D70:
                 
                 rts
@@ -208,7 +208,7 @@ HideUnitCursor:
                 move.w  #$6F00,d0
                 move.w  d0,(a0)
                 move.w  d0,ENTITYDEF_OFFSET_XDEST(a0)
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 movem.l (sp)+,d0/a0
                 rts
 
@@ -236,10 +236,10 @@ ControlUnitCursor:
                 move.w  d2,$C(a0)
                 move.w  d3,$E(a0)
                 move.b  #$FF,((byte_FFDE9D-$1000000)).w
-                move.b  #$30,((CAMERA_ENTITY-$1000000)).w 
+                move.b  #$30,((VIEW_TARGET_ENTITY-$1000000)).w 
 loc_22DD2:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
                 andi.w  #$70,d0 
                 beq.s   loc_22DD2
@@ -256,7 +256,7 @@ loc_22DD2:
                 move.w  #$6F00,(a0)
                 move.w  #$6F00,$C(a0)
                 clr.b   ((byte_FFDE9D-$1000000)).w
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 rts
 
 	; End of function ControlUnitCursor
@@ -282,7 +282,7 @@ ControlBattleUnit:
                 move.b  $11(a1),d0
                 lsl.b   #4,d0
                 move.b  d0,$11(a1)
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.b  #$21,$12(a1) 
                 bsr.w   sub_234C8
                 move.w  -2(a6),d0
@@ -293,7 +293,7 @@ ControlBattleUnit:
 loc_22E68:
                 
                 bsr.w   UpdateControlledUnitPos
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d4
                 andi.w  #$70,d4 
                 beq.s   loc_22E68
@@ -304,7 +304,7 @@ loc_22E68:
                 move.w  (sp)+,d0
                 move.b  d0,$12(a1)
                 bsr.w   sub_234C8
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  ENTITYDEF_OFFSET_XDEST(a1),d2
                 ext.l   d2
                 divs.w  #$180,d2
@@ -315,7 +315,7 @@ loc_22E68:
                 move.b  d3,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 move.w  -2(a6),d0
                 jsr     j_SetEntityMovescriptToIdle
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 unlk    a6
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
@@ -441,7 +441,7 @@ MoveBattleEntityByMoveString:
                 lea     ((ENTITY_DATA-$1000000)).w,a1
                 bsr.s   GetEntityCombatantNumber
                 move.w  d0,-2(a6)
-                move.b  d0,((CAMERA_ENTITY-$1000000)).w
+                move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 lsl.w   #5,d0
                 adda.w  d0,a1
                 move.b  $12(a1),d0
@@ -449,7 +449,7 @@ MoveBattleEntityByMoveString:
                 move.b  $11(a1),d0
                 lsl.b   #4,d0
                 move.b  d0,$11(a1)
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.b  #$21,$12(a1) 
                 bsr.w   sub_234C8
                 move.w  -2(a6),d0
@@ -531,7 +531,7 @@ loc_2308E:
                 move.w  (sp)+,d0
                 move.b  d0,$12(a1)
                 bsr.w   sub_234C8
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  (a1),d2
                 ext.l   d2
                 divs.w  #$180,d2
@@ -564,15 +564,15 @@ sub_230E2:
                 bra.w   byte_2321E
 loc_230F2:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.w  d0,d6
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
                 clr.w   d1
                 bra.w   loc_23110
 loc_23102:
                 
-                jsr     (WaitForVInt).w 
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForVInt).w
+                jsr     (WaitForViewScrollEnd).w
                 jsr     j_HideFighterMiniStatusWindow
 loc_23110:
                 
@@ -622,15 +622,15 @@ loc_2315E:
                 move.w  (sp)+,d0
                 bsr.w   sub_2322C
                 move.b  #1,((FIGHTER_IS_TARGETTING-$1000000)).w
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 jsr     j_CreateFighterMiniStatusWindow
                 movem.l (sp)+,d1-a0
 loc_23186:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 cmpi.w  #1,d7
                 beq.s   loc_231E0
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_231A4
                 subq.w  #1,d1
                 bge.s   loc_231A0
@@ -641,7 +641,7 @@ loc_231A0:
                 bra.w   loc_23102
 loc_231A4:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_231B8
                 subq.w  #1,d1
                 bge.s   loc_231B4
@@ -652,7 +652,7 @@ loc_231B4:
                 bra.w   loc_23102
 loc_231B8:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_231CC
                 addq.w  #1,d1
                 cmp.w   d7,d1
@@ -663,7 +663,7 @@ loc_231C8:
                 bra.w   loc_23102
 loc_231CC:
                 
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_231E0
                 addq.w  #1,d1
                 cmp.w   d7,d1
@@ -674,21 +674,21 @@ loc_231DC:
                 bra.w   loc_23102
 loc_231E0:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_231F6
                 jsr     j_HideFighterMiniStatusWindow
                 move.w  #$FFFF,d0
                 bra.w   byte_2321E
 loc_231F6:
                 
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_23208
                 clr.w   d0
                 move.b  (a0,d1.w),d0
                 bra.w   byte_2321E
 loc_23208:
                 
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_2321A
                 clr.w   d0
                 move.b  (a0,d1.w),d0
@@ -716,8 +716,8 @@ sub_2322C:
                 jsr     j_GetYPos
                 move.w  d1,d3
                 bsr.w   GetEntityNumberOfCombatant
-                move.b  d0,((CAMERA_ENTITY-$1000000)).w
-                jsr     (WaitForVInt).w 
+                move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
+                jsr     (WaitForVInt).w
                 bsr.w   sub_23256
                 movem.l (sp)+,d0-a0
                 rts
@@ -751,7 +751,7 @@ sub_23256:
                 move.w  d3,$E(a0)
                 bsr.w   sub_23414
                 bsr.w   WaitForUnitCursor
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 rts
 
 	; End of function sub_23256
@@ -777,7 +777,7 @@ SetUnitCursorDestinationToNextCombatant:
 
 SetUnitCursorDestinationToNextBattleEntity:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bsr.w   LoadUnitCursorTileData
                 clr.w   d4
                 clr.w   d5
@@ -791,7 +791,7 @@ SetUnitCursorDestinationToNextBattleEntity:
                 mulu.w  #$180,d5
                 moveq   #ENTITYIDX_UNITCURSOR,d0
                 jsr     j_SetUnitCursorActscript
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 lsl.w   #5,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
@@ -904,7 +904,7 @@ loc_2340A:
                 
                 move.w  d0,d2
                 move.w  d1,d3
-                jsr     (SetCameraDest).w
+                jsr     (SetViewDest).w
                 rts
 
 	; End of function SetUnitCursorDestinationToNextBattleEntity
@@ -989,7 +989,7 @@ SetCameraDestInTiles:
                 mulu.w  #$180,d3
                 movem.w d2-d3,-(sp)
                 movem.w (sp)+,d0-d1
-                jsr     (SetCameraDest).w
+                jsr     (SetViewDest).w
                 rts
 
 	; End of function SetCameraDestInTiles
@@ -1000,7 +1000,7 @@ SetCameraDestInTiles:
 LoadUnitCursorTileData:
                 
                 movem.l d0-a1,-(sp)
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 lea     UnitCursorTiles(pc), a0
                 lea     ($D000).l,a1
                 move.w  #$800,d0

@@ -20,15 +20,15 @@ EndGame:
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDMA).w
                 movea.l (p_WitchEndLayout).l,a0
-                lea     (byte_FFE000).l,a1
+                lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$800,d7
                 jsr     (CopyBytes).w   
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDMA).w
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 move.l  #$21382139,$21E(a0)
                 move.l  #$21422143,$25E(a0)
                 lea     ($C000).l,a1
@@ -82,7 +82,7 @@ EndGame:
                 dc.w VINTS_REMOVE
                 dc.l VInt_FallingJewels
                 jsr     (DisableDisplayAndVInt).w
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 clr.l   $21E(a0)
                 clr.l   $25E(a0)
                 lea     ($C000).l,a1
@@ -99,10 +99,10 @@ EndGame:
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDMA).w
                 movea.l (p_JewelEndScreenLayout).l,a0
-                lea     (byte_FFE000).l,a1
+                lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$800,d7
                 jsr     (CopyBytes).w   
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
@@ -185,8 +185,8 @@ sub_27C64:
                 adda.w  d0,a0
                 lea     (byte_FFE31C).l,a1
                 move.w  #$503,d1
-                jsr     (sub_7D28).w
-                jsr     (sub_7D0C).w
+                jsr     (UpdateWitchLayoutZone).w
+                jsr     (QueueDmaForWitchLayout).w
                 moveq   #4,d0
                 jsr     (Sleep).w       
                 move.w  (sp)+,d0
@@ -224,7 +224,7 @@ VInt_WitchEndBlink:
                 lea     $700(a0),a0
                 lea     (byte_FFE0DC).l,a1
                 move.w  #$403,d1
-                jsr     (sub_7D28).w
+                jsr     (UpdateWitchLayoutZone).w
                 addq.w  #1,-2(a6)
 loc_27CDC:
                 
@@ -234,10 +234,10 @@ loc_27CDC:
                 lea     $720(a0),a0
                 lea     (byte_FFE0DC).l,a1
                 move.w  #$403,d1
-                jsr     (sub_7D28).w
+                jsr     (UpdateWitchLayoutZone).w
                 addq.w  #1,-2(a6)
                 moveq   #$78,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$1E,d7
                 move.w  d7,(a2)
 loc_27D08:
@@ -257,7 +257,7 @@ loc_27D1A:
                 lea     $718(a0),a0
                 lea     (byte_FFE19C).l,a1
                 move.w  #$401,d1
-                jsr     (sub_7D28).w
+                jsr     (UpdateWitchLayoutZone).w
                 addq.w  #1,-2(a6)
 loc_27D3E:
                 
@@ -269,17 +269,17 @@ loc_27D42:
                 lea     $738(a0),a0
                 lea     (byte_FFE19C).l,a1
                 move.w  #$401,d1
-                jsr     (sub_7D28).w
+                jsr     (UpdateWitchLayoutZone).w
                 addq.w  #1,-2(a6)
                 moveq   #5,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$A,d7
                 move.w  d7,(a2)
 loc_27D6A:
                 
                 tst.w   -2(a6)
                 beq.s   loc_27D8A
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$200,d0
                 moveq   #2,d1

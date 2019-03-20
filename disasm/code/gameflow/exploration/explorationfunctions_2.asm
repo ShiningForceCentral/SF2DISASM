@@ -15,7 +15,7 @@ loc_257D0:
                 jsr     HealAliveCharsAndImmortals
                 jsr     FadeOutToBlackAll(pc)
                 nop
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  d0,-(sp)
                 cmpi.b  #$FF,d0         ; map idx is FF, not provided
                 beq.s   loc_25828
@@ -45,7 +45,7 @@ loc_25836:
                 jsr     (sub_4EC6).w    
                 move.w  (sp)+,d1
                 move.w  #$FFFF,d0
-                move.b  #0,((CAMERA_ENTITY-$1000000)).w
+                move.b  #0,((VIEW_TARGET_ENTITY-$1000000)).w
                 jsr     (LoadMap).w     
                 bsr.w   SetBaseVIntFunctions
                 jsr     j_RunMapSetupInitFunction
@@ -140,7 +140,7 @@ FadeOutToBlackAll:
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
-                dc.l VInt_3930          
+                dc.l VInt_UpdateScrollingData
                 rts
 
 	; End of function FadeOutToBlackAll
@@ -152,7 +152,7 @@ WaitForFadeToFinish:
                 
                 tst.b   ((FADING_SETTING-$1000000)).w
                 beq.s   return_2591A
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.s   WaitForFadeToFinish
 return_2591A:
                 
@@ -169,7 +169,8 @@ WaitForEvent:
                 
                 move.w  ((MAP_EVENT_TYPE-$1000000)).w,d0
                 bne.s   loc_25930       
-                move.b  #0,((CAMERA_ENTITY-$1000000)).w; Follow main entity
+                move.b  #0,((VIEW_TARGET_ENTITY-$1000000)).w
+                                                        ; Follow main entity
                 clr.w   d0
                 jsr     j_SetControlledEntityActScript
 loc_25930:
@@ -198,17 +199,17 @@ ProcessMapEvent:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType1; Warp
+                beq.w   ProcessMapEventType1_Warp; Warp
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType2; Control Caravan
+                beq.w   ProcessMapEventType2_GetIntoCaravan
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType3; Control Raft
+                beq.w   ProcessMapEventType3_GetIntoRaft
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType4; Get out of Caravan ?
+                beq.w   ProcessMapEventType4_GetOutOfCaravan
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType5; Get out of Raft ?
+                beq.w   ProcessMapEventType5_GetOutOfRaft
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType6; Zone Event
+                beq.w   ProcessMapEventType6_ZoneEvent
                 sndCom  SFX_BATTLEFIELD_DEATH
                 rts
 
@@ -217,9 +218,7 @@ ProcessMapEvent:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Warp
-
-ProcessMapEventType1:
+ProcessMapEventType1_Warp:
                 
                 tst.b   ((MAP_EVENT_PARAM_1-$1000000)).w
                 bne.w   loc_259CC
@@ -293,7 +292,7 @@ loc_25A18:
                 jsr     sub_440AC
                 rts
 
-	; End of function ProcessMapEventType1
+	; End of function ProcessMapEventType1_Warp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -318,50 +317,42 @@ UpdatePlayerPosFromMapEvent:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Event type 2
-
-ProcessMapEventType2:
+ProcessMapEventType2_GetIntoCaravan:
                 
                 jsr     j_MapEventType2 
                 rts
 
-	; End of function ProcessMapEventType2
+	; End of function ProcessMapEventType2_GetIntoCaravan
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Event type 3
-
-ProcessMapEventType3:
+ProcessMapEventType3_GetIntoRaft:
                 
                 jsr     j_MapEventType3
                 rts
 
-	; End of function ProcessMapEventType3
+	; End of function ProcessMapEventType3_GetIntoRaft
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Event type 4
-
-ProcessMapEventType4:
+ProcessMapEventType4_GetOutOfCaravan:
                 
                 jsr     j_MapEventType4
                 rts
 
-	; End of function ProcessMapEventType4
+	; End of function ProcessMapEventType4_GetOutOfCaravan
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Event type 5
-
-ProcessMapEventType5:
+ProcessMapEventType5_GetOutOfRaft:
                 
                 jsr     j_MapEventType5
                 rts
 
-	; End of function ProcessMapEventType5
+	; End of function ProcessMapEventType5_GetOutOfRaft
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -376,19 +367,17 @@ j_j_ShrinkInBowieAndFollowers:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25A74:
+j_j_GrowOutBowieAndFollowers:
                 
-                jsr     j_GrowOutBowieAndFollowoers
+                jsr     j_GrowOutBowieAndFollowers
                 rts
 
-	; End of function sub_25A74
+	; End of function j_j_GrowOutBowieAndFollowers
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Zone Event
-
-ProcessMapEventType6:
+ProcessMapEventType6_ZoneEvent:
                 
                 clr.w   d0
                 jsr     j_ApplyInitActscript
@@ -399,5 +388,5 @@ ProcessMapEventType6:
                 jsr     j_RunMapSetupZoneEvent
                 rts
 
-	; End of function ProcessMapEventType6
+	; End of function ProcessMapEventType6_ZoneEvent
 

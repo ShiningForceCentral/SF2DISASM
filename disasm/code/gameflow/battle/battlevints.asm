@@ -4,8 +4,6 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; init vint contextual functions
-
 SetBaseVIntFunctions:
                 
                 jsr     (InitWindowProperties).w
@@ -13,16 +11,16 @@ SetBaseVIntFunctions:
                 dc.w VINTS_CLEAR
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                dc.l VInt_4744
+                dc.l VInt_UpdateMapPlanes
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateEntities
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                dc.l VInt_AdjustCameraToPlayer
+                dc.l VInt_UpdateViewData
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                dc.l VInt_3930          
+                dc.l VInt_UpdateScrollingData
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateSprites
@@ -31,7 +29,7 @@ SetBaseVIntFunctions:
                 dc.l VInt_UpdateWindows
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                dc.l VInt_UpdateAnimatingTiles
+                dc.l VInt_UpdateMapAnimations
                 rts
 
 	; End of function SetBaseVIntFunctions

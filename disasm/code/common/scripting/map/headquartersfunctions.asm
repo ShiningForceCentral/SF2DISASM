@@ -110,7 +110,7 @@ loc_479D0:
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 movem.w (sp)+,d0-d4
 loc_47A28:
                 

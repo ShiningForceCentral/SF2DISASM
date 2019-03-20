@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\battlesceneengine_0.asm :
-; 0x18000..0x1FA8A : Battlescene engine
+; 0x18000..0x1F806 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -89,12 +89,12 @@ loc_1807C:
                 bsr.w   LoadBattleBackground
 loc_1808C:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 tst.b   ((FADING_SETTING-$1000000)).w
                 bne.s   loc_1808C
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 jsr     (DisableDisplayAndVInt).w
                 move.w  #$8B07,d0       ; set VScroll : each 2 cells, HScroll : each 1 line
                 jsr     (SetVdpReg).w
@@ -103,26 +103,26 @@ loc_1808C:
                 jsr     (InitSprites).w 
                 jsr     (sub_19B0).w
                 bsr.w   InitializeBattleScenePalettes
-                lea     (byte_FFC000).l,a0
-                lea     (byte_FFE000).l,a1
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
+                lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$1FF,d0
 loc_180CC:
                 
                 clr.l   (a0)+
                 clr.l   (a1)+
                 dbf     d0,loc_180CC
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDMA).w
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDMA).w
                 bsr.w   sub_198C8
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
@@ -179,11 +179,11 @@ loc_181B2:
                 move.w  ((CHARACTER_BATTLE_SPRITE-$1000000)).w,d0
                 clr.w   d1
                 lea     ($2000).w,a1
-                bsr.w   LoadAllyBattleSprite
+                bsr.w   LoadAllyBattleSpriteFrame
                 move.w  ((CHARACTER_BATTLE_SPRITE-$1000000)).w,d0
                 bsr.w   GetAllyBattleSpriteIdleAnimate
                 lea     ($3200).w,a1
-                bsr.w   LoadAllyBattleSprite
+                bsr.w   LoadAllyBattleSpriteFrame
                 move.w  ((CHARACTER_BATTLE_SPRITE-$1000000)).w,d0
                 move.w  ((CHARACTER_BATTLE_PALETTE-$1000000)).w,d1
                 bsr.w   LoadPaletteForBattleScene
@@ -251,12 +251,12 @@ loc_1828C:
                 bsr.w   sub_1F1CC
                 clr.w   d6
                 bsr.w   sub_1F1F0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.w  #$FFEA,d6
                 bsr.w   sub_1F214
                 clr.w   d6
                 bsr.w   sub_1F254
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 jsr     (sub_1942).w    
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
@@ -286,7 +286,7 @@ loc_18318:
                 bsr.w   sub_19504
 loc_18342:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bsr.w   FadeInFromBlackIntoBattlescene
                 clr.w   d0
                 move.b  (SKIRMISH_MUSIC_INDEX).l,d0
@@ -310,7 +310,7 @@ loc_1837E:
                 dbf     d1,loc_1837E
 loc_18388:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 dbf     d0,loc_18358
 loc_18390:
                 
@@ -631,7 +631,7 @@ bsc03_moveAllyBSprite:
                 beq.s   return_185DC
                 move.w  (a6)+,((word_FFB3FA-$1000000)).w
                 move.w  (a6),((word_FFB3FC-$1000000)).w
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
 return_185DC:
                 
                 rts
@@ -649,7 +649,7 @@ bsc02_moveEnemyBSprite:
                 beq.s   return_185F2
                 move.w  (a6)+,((word_FFB3F6-$1000000)).w
                 move.w  (a6),((word_FFB3F8-$1000000)).w; no + ... is it the next bsc ?
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
 return_185F2:
                 
                 rts
@@ -778,7 +778,7 @@ bsc07_switchAllies:
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_1871E
                 move.w  d1,d0
-                bsr.w   sub_19BCC       
+                bsr.w   LoadGround
 loc_1871E:
                 
                 move.w  d7,d0
@@ -971,7 +971,7 @@ loc_1891A:
                 dbf     d2,loc_1891A
 loc_18922:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.s   sub_188D4
 return_18928:
                 
@@ -1082,7 +1082,7 @@ loc_18A2A:
                 bsr.w   sub_18C94
 loc_18A2E:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 movem.w (sp)+,d0-d2
                 dbf     d0,loc_18A18
                 move.w  (a6),d0
@@ -1154,7 +1154,7 @@ loc_18AEC:
                 lea     (byte_FFC1B8).l,a2
 loc_18AFE:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 moveq   #7,d0
                 clr.w   d3
                 moveq   #0,d6
@@ -1172,14 +1172,14 @@ loc_18B1E:
                 bsr.w   sub_18C94
 loc_18B22:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 movem.w (sp)+,d0-d3
                 addq.w  #1,d3
                 dbf     d0,loc_18B08
 loc_18B30:
                 
                 bsr.w   sub_18D14
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 tst.w   d0
                 bne.s   loc_18B30
                 lea     ((SPRITE_14_TILE_FLAGS-$1000000)).w,a0
@@ -1188,7 +1188,7 @@ loc_18B30:
                 bclr    #7,$10(a0)
                 clr.w   d6
                 bsr.w   sub_1F1CC
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
                 cmpi.w  #$FFFF,d0
                 beq.s   loc_18B8C
@@ -1510,7 +1510,7 @@ loc_18E6E:
                 
                 movem.w d0/d4-d5,-(sp)
                 moveq   #5,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subq.w  #2,d7
                 asl.w   #1,d7
                 move.w  d7,d6
@@ -1519,7 +1519,7 @@ loc_18E6E:
                 add.w   d4,d6
                 bsr.w   sub_1F214
                 moveq   #5,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subq.w  #2,d7
                 asl.w   #1,d7
                 move.w  d7,d6
@@ -1534,7 +1534,7 @@ loc_18E6E:
                 movem.w (sp)+,d0-d1
                 bsr.w   sub_19504
                 jsr     (sub_1942).w    
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 movem.w (sp)+,d0/d4-d5
                 dbf     d0,loc_18E6E
                 clr.w   d6
@@ -1556,7 +1556,7 @@ loc_18EF8:
                 
                 move.w  (sp)+,d0
                 move.b  d0,((FADING_COUNTER_MAX-$1000000)).w
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bset    #1,((byte_FFB56E-$1000000)).w
                 move.w  ((BATTLESCENE_CHARACTER-$1000000)).w,d0
                 jsr     j_GetCurrentHP
@@ -1663,20 +1663,20 @@ loc_18FC6:
 loc_19004:
                 
                 moveq   #7,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subq.w  #3,d7
                 asl.w   #1,d7
                 move.w  d7,d6
                 add.w   d4,d6
                 bsr.w   sub_1F214
                 moveq   #7,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subq.w  #3,d7
                 asl.w   #1,d7
                 move.w  d7,d6
                 add.w   d5,d6
                 bsr.w   sub_1F254
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 dbf     d0,loc_19004
                 move.w  d4,d6
                 bsr.w   sub_1F214
@@ -1689,7 +1689,7 @@ loc_19048:
                 
                 move.w  (sp)+,d0
                 move.b  d0,((FADING_COUNTER_MAX-$1000000)).w
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bset    #3,((byte_FFB56E-$1000000)).w
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
                 jsr     j_GetCurrentHP
@@ -1729,10 +1729,10 @@ bsc0C_makeActorIdleAndEndAnimation:
                 
                 bsr.w   MakeActorIdle   
                 move.b  #3,((byte_FFB585-$1000000)).w
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bsr.w   sub_1A24E
                 bsr.w   sub_1F2F6
-                jmp     (WaitForVInt).w 
+                jmp     (WaitForVInt).w
 
 	; End of function bsc0C_makeActorIdleAndEndAnimation
 
@@ -1748,7 +1748,7 @@ loc_190C4:
                 bne.s   loc_190C4       
                 bsr.w   sub_1A24E
                 bsr.w   sub_1F2F6
-                jmp     (WaitForVInt).w 
+                jmp     (WaitForVInt).w
 
 	; End of function bsc0D_endAnimation
 
@@ -1898,7 +1898,7 @@ loc_1921A:
                 
                 tst.b   ((P1_INPUT-$1000000)).w
                 bne.s   return_19228
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 dbf     d0,loc_1921A
 return_19228:
                 
@@ -1946,7 +1946,7 @@ loc_19258:
                 
                 tst.b   ((P1_INPUT-$1000000)).w
                 bne.s   byte_19266
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 dbf     d0,loc_19258
 byte_19266:
                 
@@ -2223,7 +2223,7 @@ loc_1944E:
                 lea     ($2000).w,a1
 loc_19452:
                 
-                bsr.w   sub_19A2A       
+                bsr.w   VIntLoadAllyBattleSpriteFrame
 return_19456:
                 
                 rts
@@ -2237,7 +2237,7 @@ sub_19458:
                 
                 tst.b   ((byte_FFB56D-$1000000)).w
                 beq.s   return_19462
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
 return_19462:
                 
                 rts
@@ -2294,7 +2294,7 @@ sub_194AA:
                 move.w  ((ENEMY_BATTLE_SPRITE-$1000000)).w,d0
                 cmpi.w  #$FFFF,d0
                 beq.s   return_194FC
-                bsr.w   sub_19B24       
+                bsr.w   LoadEnemyBattleSpriteFrame
                 lea     (FF8804_LOADING_SPACE).l,a0
                 btst    #2,((byte_FFB56E-$1000000)).w
                 beq.s   loc_194D8
@@ -2554,7 +2554,7 @@ loc_19684:
                 jsr     (EnableDMAQueueProcessing).w
 loc_196B0:
                 
-                jmp     (WaitForVInt).w 
+                jmp     (WaitForVInt).w
 
 	; End of function sub_19632
 
@@ -2593,7 +2593,7 @@ loc_196F6:
                 bsr.w   GetEnemyBattleSpriteIdleAnimate
 loc_196FA:
                 
-                bsr.w   sub_19B24       
+                bsr.w   LoadEnemyBattleSpriteFrame
                 lea     word_19764(pc), a1
                 moveq   #7,d7
 loc_19704:
@@ -2857,7 +2857,7 @@ plt_BattleSceneBasePalette:
 sub_198C8:
                 
                 movem.l d0/a0-a1,-(sp)
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 move.w  #$BF,d0 
 loc_198D6:
                 
@@ -3039,10 +3039,9 @@ loc_19A04:
 
 ; =============== S U B R O U T I N E =======================================
 
-;     In: D0 = battle sprite idx
-;         D1 = frame idx
+; D0=Battlesprite idx, D1=Frame idx
 
-LoadAllyBattleSprite:
+LoadAllyBattleSpriteFrame:
                 
                 movea.l (p_pt_AllyBattleSprites).l,a0
                 lsl.w   #2,d0
@@ -3055,14 +3054,14 @@ LoadAllyBattleSprite:
                 move.w  #$900,d0
                 jmp     (ApplyImmediateVramDMAOnCompressedTiles).w
 
-	; End of function LoadAllyBattleSprite
+	; End of function LoadAllyBattleSpriteFrame
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Load ally battlesprite and set FFDE94 bit 3 and wait
+; D0=Battlesprite idx, D1=Frame idx
 
-sub_19A2A:
+VIntLoadAllyBattleSpriteFrame:
                 
                 movea.l (p_pt_AllyBattleSprites).l,a0
                 lsl.w   #2,d0
@@ -3076,7 +3075,7 @@ sub_19A2A:
                 jsr     (ApplyVIntVramDMAOnCompressedTiles).w
                 jmp     (WaitForDMAQueueProcessing).w
 
-	; End of function sub_19A2A
+	; End of function VIntLoadAllyBattleSpriteFrame
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3093,8 +3092,7 @@ LoadWeaponPalette:
 
 ; =============== S U B R O U T I N E =======================================
 
-; ???
-; In: D0 = weapon sprite idx
+; D0=Weapon sprite idx
 
 LoadWeaponSprite:
                 
@@ -3191,9 +3189,7 @@ LoadNewAllyBattleSprite:
 
 ; =============== S U B R O U T I N E =======================================
 
-; loads enemy battle sprite
-
-sub_19B24:
+LoadEnemyBattleSpriteFrame:
                 
                 movea.l (p_pt_EnemyBattleSprites).l,a0
                 lsl.w   #2,d0
@@ -3206,7 +3202,7 @@ sub_19B24:
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jmp     (LoadCompressedData).w
 
-	; End of function sub_19B24
+	; End of function LoadEnemyBattleSpriteFrame
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3278,9 +3274,7 @@ return_19BCA:
 
 ; =============== S U B R O U T I N E =======================================
 
-; loads battlescene ground
-
-sub_19BCC:
+LoadGround:
                 
                 movea.l (p_pt_BattleSceneGrounds).l,a0
                 lsl.w   #2,d0
@@ -3293,7 +3287,7 @@ sub_19BCC:
                 lea     (byte_FF8C02).l,a1
                 jmp     (LoadCompressedData).w
 
-	; End of function sub_19BCC
+	; End of function LoadGround
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3441,7 +3435,7 @@ loc_19D4C:
                 bcc.w   loc_19D90
                 movem.l d0/a0,-(sp)
                 jsr     j_GetClass      
-                lea     AllyBattleSprites(pc), a0
+                lea     AllyBattleSpritesTable(pc), a0
                 mulu.w  #9,d0
                 adda.w  d0,a0
                 moveq   #2,d0
@@ -3469,7 +3463,7 @@ loc_19D90:
                 
                 move.l  a0,-(sp)
                 jsr     j_GetEnemyID
-                lea     EnemyBattleSprites(pc), a0
+                lea     EnemyBattleSpritesTable(pc), a0
                 add.w   d1,d1
                 move.b  1(a0,d1.w),d2
                 ext.w   d2
@@ -3493,12 +3487,12 @@ GetWeaponSpriteAndPalette:
                 bcc.w   loc_19DF2
                 jsr     j_GetEquippedWeapon
                 andi.w  #$7F,d1 
-                cmpi.w  #$1A,d1
+                cmpi.w  #$1A,d1         ; HARDCODED start index for weapon items with battle scene graphics
                 bcs.w   loc_19DF2
-                cmpi.w  #$6D,d1 
+                cmpi.w  #$6D,d1 ; HARDCODED end index for weapon items with battle scene graphics
                 bhi.w   loc_19DF2
-                lea     WeaponBattleSprites(pc), a0
-                subi.w  #$1A,d1
+                lea     WeaponSprites(pc), a0
+                subi.w  #$1A,d1         ; Same here : HARDCODED start index for weapon items with battle scene graphics
                 add.w   d1,d1
                 move.b  (a0,d1.w),d2
                 ext.w   d2
@@ -4318,7 +4312,7 @@ LoadInvocationSpell:
                 clr.w   2(a6)
                 bsr.w   bsc07_switchAllies
                 movem.l (sp)+,d0/a6
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 clr.w   d1
                 bsr.w   LoadInvocationSprite
                 moveq   #8,d0
@@ -4517,13 +4511,13 @@ loc_1A4A6:
 loc_1A500:
                 
                 moveq   #$F,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.w  d7,d0
                 andi.w  #1,d0
                 addq.w  #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #$10,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.w  d1,d4
                 lsl.w   #3,d4
                 add.w   d4,d7
@@ -5077,20 +5071,20 @@ loc_1A898:
                 moveq   #2,d1
                 clr.w   d2
                 moveq   #$20,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.w  d7,d3
                 bsr.w   sub_19FAA
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  d4,2(a0)
                 moveq   #$1E,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.w  d7,8(a0)
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 moveq   #$C,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.w  d7,4(a0)
                 movem.l (sp)+,d0-d1/a0
@@ -5205,7 +5199,7 @@ loc_1A99E:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 moveq   #$20,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.b  d7,2(a0)
                 move.b  #2,(a1)+
@@ -5331,7 +5325,7 @@ loc_1AAD4:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 moveq   #$20,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.w  d7,4(a0)
                 dbf     d1,loc_1AAD4
@@ -5351,7 +5345,7 @@ loc_1AB0C:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 moveq   #8,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.w  d7,2(a0)
                 movem.l (sp)+,d0/a0
                 bsr.w   sub_19F5E
@@ -5557,19 +5551,19 @@ loc_1AC64:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 moveq   #4,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #6,d7
                 move.w  d7,4(a0)
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 moveq   #4,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$C,d7
                 move.w  d7,4(a0)
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 moveq   #4,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$12,d7
                 move.w  d7,4(a0)
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -6091,7 +6085,7 @@ loc_1B026:
                 movem.w d1-d2,-(sp)
                 cmpi.w  #1,d2
                 beq.s   byte_1B036
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.s   loc_1B040
 byte_1B036:
                 
@@ -6160,7 +6154,7 @@ loc_1B0EE:
                 addq.w  #8,a0
                 dbf     d1,loc_1B0EE
                 movea.l (sp)+,a0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 dbf     d0,loc_1B0EA
                 moveq   #3,d0
                 moveq   #1,d1
@@ -6201,7 +6195,7 @@ loc_1B0EE:
                 moveq   #$26,d0 
                 lea     byte_1B1FA(pc), a0
                 bsr.w   sub_19F5E
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 sndCom  SFX_BATTLEFIELD_DEATH
                 lea     ((SPRITE_38-$1000000)).w,a0
                 moveq   #$13,d0
@@ -6211,7 +6205,7 @@ loc_1B1A4:
                 move.w  (a0),d2
                 exg     d1,d2
                 move.w  d2,(a0)
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 dbf     d0,loc_1B1A4
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
@@ -6332,7 +6326,7 @@ loc_1B2B8:
                 move.w  #$C786,4(a0)
 loc_1B2BE:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 dbf     d2,loc_1B2A0
                 moveq   #$E,d0
                 bsr.w   LoadSpellGraphics
@@ -6477,7 +6471,7 @@ loc_1B42E:
                 moveq   #1,d0
                 jsr     sub_1A2F6(pc)
                 moveq   #$10,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.w  d7,2(a0)
                 dbf     d1,loc_1B42E
@@ -6629,7 +6623,7 @@ loc_1B594:
                 lea     ((SPRITE_38-$1000000)).w,a4
 loc_1B5B2:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 addq.w  #1,(a5)
                 btst    #0,1(a5)
                 bne.s   loc_1B5CA
@@ -6958,7 +6952,7 @@ loc_1B858:
                 clr.b   ((byte_FFB56A-$1000000)).w
                 clr.b   ((byte_FFB588-$1000000)).w
                 clr.b   ((byte_FFB589-$1000000)).w
-                jmp     (WaitForVInt).w 
+                jmp     (WaitForVInt).w
 
 	; End of function sub_1B82A
 
@@ -7014,7 +7008,7 @@ loc_1B8D6:
 loc_1B8DC:
                 
                 move.w  d0,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d7,d0
                 move.b  d0,((byte_FFB569-$1000000)).w
                 move.w  d1,((PALETTE_1_CURRENT-$1000000)).w
@@ -7183,14 +7177,14 @@ loc_1BA30:
 loc_1BA42:
                 
                 move.w  #$60,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$80,d7 
                 clr.w   d0
                 move.b  6(a3),d0
                 add.w   d0,d7
                 move.w  d7,6(a4)
                 move.w  #$100,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$300,d7
                 btst    #7,((byte_FFB586-$1000000)).w
                 bne.s   loc_1BA70
@@ -7199,7 +7193,7 @@ loc_1BA70:
                 
                 move.w  d7,4(a5)
                 move.w  #$200,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$700,d7
                 move.w  d7,6(a5)
                 sndCom  SFX_DESOUL_HOVERING
@@ -7346,7 +7340,7 @@ loc_1BBE8:
                 
                 move.w  #1,(a5)
                 move.w  #$14,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.w  d7,2(a5)
 loc_1BBFA:
@@ -7591,7 +7585,7 @@ loc_1BE00:
                 moveq   #$21,d6 
 loc_1BE02:
                 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 clr.w   d3
                 move.b  byte_1BE1C(pc,d5.w),d3
                 add.w   d3,d7
@@ -7769,13 +7763,13 @@ loc_1BEEC:
 loc_1BEF4:
                 
                 moveq   #$30,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d7,d2
                 move.w  d2,(a4)
                 move.w  #$200,2(a4)
                 move.w  #$C570,4(a4)
                 moveq   #$30,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d7,d1
                 move.w  d1,6(a4)
                 addq.w  #1,2(a5)
@@ -7829,7 +7823,7 @@ loc_1BF88:
                 bne.w   loc_1BFF4
                 lea     (byte_FFAFA0).l,a0
                 moveq   #$28,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 btst    #7,((byte_FFB586-$1000000)).w
                 bne.s   loc_1BFBC
                 addi.w  #$8C,d7 
@@ -7845,7 +7839,7 @@ loc_1BFC6:
                 move.w  d7,(a4)
                 move.l  (a1),2(a4)
                 moveq   #8,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   (a3),d7
                 move.w  d7,6(a4)
                 addq.b  #1,2(a5)
@@ -7861,7 +7855,7 @@ loc_1BFF4:
                 bcs.s   loc_1C024
                 addq.b  #1,2(a5)
                 move.w  #$100,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.b  d7,3(a5)
                 clr.w   6(a5)
                 move.w  (a4),8(a5)
@@ -7992,7 +7986,7 @@ loc_1C148:
                 bne.s   loc_1C178
                 sndCom  SFX_TINKLING
                 moveq   #$E,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
 loc_1C170:
                 
                 addi.w  #$A,d7
@@ -8561,7 +8555,7 @@ loc_1C57E:
                 andi.w  #7,d1
                 move.w  d1,2(a5)
                 moveq   #$10,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$E6,d7 
                 lsl.w   #4,d7
                 move.w  d7,4(a5)
@@ -8701,13 +8695,13 @@ loc_1C6E0:
 loc_1C6F2:
                 
                 moveq   #$1C,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.w  d7,8(a5)
                 move.w  (a0),6(a4)
                 move.w  (a0)+,$E(a4)
                 moveq   #$20,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   (a0),d7
                 move.w  d7,(a4)
                 move.w  d7,8(a4)
@@ -8718,7 +8712,7 @@ loc_1C720:
                 subq.w  #1,$10(a5)
                 bne.w   loc_1C73E
                 moveq   #$C,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #3,d7
                 move.w  d7,$10(a5)
                 move.w  6(a4),$C(a3)
@@ -8809,7 +8803,7 @@ loc_1C804:
                 subq.b  #1,2(a5)
                 bne.w   loc_1C9A0
                 moveq   #6,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 cmpi.w  #4,d7
                 bcc.s   loc_1C84C
                 clr.w   2(a5)
@@ -8852,7 +8846,7 @@ loc_1C872:
                 lea     byte_1CBBA(pc), a0
                 adda.w  d7,a0
                 moveq   #$20,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subi.w  #$10,d7
                 add.w   2(a0),d7
                 add.w   2(a3),d7
@@ -8861,13 +8855,13 @@ loc_1C872:
                 or.w    4(a0),d2
                 move.w  d2,4(a4)
                 moveq   #$20,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subi.w  #$10,d7
                 add.w   (a0),d7
                 add.w   (a3),d7
                 move.w  d7,6(a4)
                 move.w  #$100,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d3,d7
                 tst.w   (a0)
                 bmi.s   loc_1C8C2
@@ -8876,7 +8870,7 @@ loc_1C8C2:
                 
                 move.w  d7,4(a5)
                 move.w  #$100,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d4,d7
                 tst.w   2(a0)
                 bmi.s   loc_1C8D8
@@ -8962,7 +8956,7 @@ loc_1C968:
 loc_1C994:
                 
                 moveq   #8,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.b  d7,2(a5)
 loc_1C9A0:
@@ -8983,7 +8977,7 @@ loc_1C9A0:
                 move.b  d0,2(a5)
                 bne.w   loc_1CA22
                 move.w  #$7FF,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.w  d7,d0
                 andi.w  #7,d0
                 move.w  d0,4(a5)
@@ -9421,7 +9415,7 @@ loc_1CD36:
                 subq.w  #1,4(a5)
                 bne.w   loc_1CD70
                 moveq   #8,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #2,d7
                 move.w  d7,4(a5)
                 cmpi.b  #$19,((byte_FFB584-$1000000)).w
@@ -9582,11 +9576,11 @@ loc_1CE62:
 loc_1CE86:
                 
                 move.w  #$60,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   4(a3),d7
                 move.w  d7,6(a5)
                 moveq   #2,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.b  d7,8(a5)
 loc_1CEA0:
                 
@@ -9640,7 +9634,7 @@ loc_1CEF6:
                 move.b  ((byte_FFB586-$1000000)).w,d6
                 andi.w  #7,d6
                 add.w   d6,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #2,d7
                 addq.w  #1,2(a5)
                 move.w  d7,4(a5)
@@ -9675,7 +9669,7 @@ loc_1CF68:
                 move.b  ((byte_FFB586-$1000000)).w,d6
                 andi.w  #7,d6
                 lsl.w   #2,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #2,d7
                 clr.w   2(a5)
                 move.w  d7,4(a5)
@@ -9793,7 +9787,7 @@ loc_1D06A:
                 move.w  #1,(a4)
                 move.w  #1,6(a4)
                 move.w  #8,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #5,d7
                 move.w  d7,4(a5)
                 bra.w   loc_1D0D4
@@ -9805,11 +9799,11 @@ loc_1D090:
                 lea     byte_1D0EE(pc), a0
                 moveq   #1,d1
                 moveq   #$20,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   (a3),d7
                 move.w  d7,d2
                 moveq   #$20,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   2(a3),d7
                 move.w  d7,d3
                 jsr     sub_19FAA
@@ -9869,11 +9863,11 @@ loc_1D10E:
                 cmpi.w  #2,(a5)
                 bne.w   loc_1D15E
                 move.w  #$80,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$80,d7 
                 move.w  d7,4(a5)
                 move.w  #$500,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subi.w  #$300,d7
                 move.w  d7,6(a5)
                 clr.l   8(a5)
@@ -9953,7 +9947,7 @@ loc_1D208:
                 
                 bne.w   loc_1D22E
                 move.w  #$20,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$40,d7 
                 move.w  d7,2(a5)
                 clr.w   4(a5)
@@ -10453,7 +10447,7 @@ loc_1D5F6:
                 
                 bsr.w   sub_19F5E
                 moveq   #$10,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subq.w  #8,d7
                 add.w   d7,(a4)
                 addq.w  #1,2(a5)
@@ -10527,7 +10521,7 @@ loc_1D69E:
                 bcs.w   loc_1D748
                 move.w  4(a3),6(a4)
                 moveq   #$10,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subq.w  #8,d7
                 add.w   6(a3),d7
                 move.w  d7,(a4)
@@ -10766,7 +10760,7 @@ loc_1D8B6:
                 tst.w   2(a5)
                 bne.w   loc_1D928
                 moveq   #2,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 lea     byte_1D9CE(pc), a0
                 move.b  d7,$A(a5)
                 beq.s   loc_1D8DC
@@ -10774,19 +10768,19 @@ loc_1D8B6:
 loc_1D8DC:
                 
                 moveq   #$50,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subi.w  #$28,d7 
                 add.w   8(a3),d7
                 move.w  d7,d2
                 moveq   #$50,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subi.w  #$28,d7 
                 add.w   $A(a3),d7
                 move.w  d7,d3
                 moveq   #1,d1
                 bsr.w   sub_19FAA
                 moveq   #4,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 lsr.w   #1,d7
                 bcc.s   loc_1D912
                 bset    #3,4(a4)
@@ -11332,24 +11326,24 @@ loc_1DCFC:
                 cmpi.w  #2,(a5)
                 bne.w   loc_1DD74
                 move.w  #$300,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subi.w  #$700,d7
                 move.w  d7,2(a5)
                 moveq   #$35,d1 
                 sub.w   d0,d1
                 move.w  d1,d0
                 moveq   #3,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 lsl.w   #3,d7
                 lea     byte_1DE06(pc), a0
                 adda.w  d7,a0
                 bsr.w   sub_19F5E
                 move.w  #$100,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$80,d7 
                 move.w  d7,6(a4)
                 move.w  #$40,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$100,d7
                 move.w  d7,(a4)
                 btst    #0,d7
@@ -11508,7 +11502,7 @@ loc_1DEA0:
                 move.w  2(a5),d1
                 bne.w   loc_1DEFC
                 moveq   #$20,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.w  d7,d1
                 andi.w  #1,d1
                 move.b  d1,6(a5)
@@ -11524,10 +11518,10 @@ loc_1DECE:
                 jsr     sub_19F5E
                 or.b    d7,4(a4)
                 move.w  #$80,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d7,6(a4)
                 move.w  #$A0,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d7,(a4)
                 addq.w  #1,2(a5)
                 move.w  #3,4(a5)
@@ -11683,7 +11677,7 @@ loc_1E01C:
                 lea     byte_1E106(pc), a0
                 bsr.w   sub_19F5E
                 move.w  #$100,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d7,6(a4)
                 addq.w  #1,2(a5)
                 move.w  #5,4(a5)
@@ -11725,7 +11719,7 @@ loc_1E0AE:
                 
                 clr.w   2(a5)
                 moveq   #8,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #4,d7
                 move.w  d7,4(a5)
 loc_1E0C0:
@@ -11747,7 +11741,7 @@ loc_1E0C0:
 sub_1E0DA:
                 
                 moveq   #$70,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$98,d7 
                 move.w  d7,(a4)+
                 move.w  #$700,(a4)+
@@ -11861,10 +11855,10 @@ loc_1E188:
                 addq.w  #1,2(a5)
                 clr.l   4(a5)
                 moveq   #$18,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d7,d0
                 moveq   #$30,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.w  d7,d2
                 addi.w  #$10,d2
                 bra.w   loc_1E268
@@ -11924,7 +11918,7 @@ loc_1E228:
                 tst.w   ((byte_FFB404-$1000000)).w
                 beq.w   loc_1E25E
                 moveq   #2,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 tst.w   d7
                 bne.s   byte_1E240
                 sndCom  SFX_HIT_1
@@ -11938,7 +11932,7 @@ loc_1E244:
                 clr.w   2(a5)
                 move.w  #2,4(a5)
                 moveq   #2,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.w  d7,8(a5)
 return_1E25C:
                 
@@ -12242,17 +12236,17 @@ loc_1E4C4:
                 subq.w  #1,2(a5)
                 bne.w   loc_1E5C6
                 moveq   #$38,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.w  d7,d2
                 addi.w  #$C8,d2 
                 move.w  d2,(a4)
                 clr.w   2(a4)
                 moveq   #3,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #-$3AE0,d7
                 move.w  d7,4(a4)
                 moveq   #$14,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$D4,d7 
                 move.w  d7,6(a4)
                 subi.w  #$C0,d7 
@@ -12321,7 +12315,7 @@ loc_1E596:
                 bne.s   loc_1E5C2
                 move.w  #1,(a5)
                 move.w  #4,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.w  d7,2(a5)
                 sndCom  SFX_PRISM_LASER_LOADING
@@ -12355,11 +12349,11 @@ loc_1E5DC:
                 bne.s   loc_1E622
                 movem.w d6-d7,-(sp)
                 move.w  #$200,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$140,d7
                 move.w  d7,2(a5)
                 move.w  #$100,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subi.w  #$200,d7
                 move.w  d7,4(a5)
                 movem.w (sp)+,d6-d7
@@ -12421,7 +12415,7 @@ loc_1E68C:
                 movem.w d6-d7,-(sp)
                 clr.w   2(a5)
                 move.w  #$20,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subi.w  #$40,d7 
                 move.w  d7,4(a5)
                 clr.l   6(a5)
@@ -12587,7 +12581,7 @@ loc_1E7EE:
                 bsr.w   sub_19F5E
                 move.w  (a4),8(a5)
                 moveq   #$28,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   (a3),d7
                 move.w  d7,2(a5)
                 bra.w   loc_1E8AA
@@ -13069,7 +13063,7 @@ loc_1EBC6:
                 cmpi.w  #2,(a5)
                 bne.w   loc_1EC22
                 moveq   #7,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 lea     byte_1EC9A(pc), a0
                 bclr    #0,d7
                 bne.s   loc_1EBF2
@@ -13081,11 +13075,11 @@ loc_1EBF2:
                 lsl.w   #2,d7
                 or.b    d7,4(a4)
                 move.w  #$C0,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$A0,d7 
                 move.w  d7,6(a4)
                 move.w  #$80,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$A0,d7 
                 move.w  d7,(a4)
                 sndCom  SFX_BATTLEFIELD_DEATH
@@ -13461,7 +13455,7 @@ sub_1EF2E:
 sub_1EF36:
                 
                 bsr.w   sub_1EF50
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
@@ -13532,7 +13526,7 @@ loc_1EFB0:
                 tst.b   ((byte_FFB56D-$1000000)).w
                 bne.s   return_1EFD6
                 move.b  #1,((byte_FFB56D-$1000000)).w
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
@@ -14937,9 +14931,3 @@ byte_1F7BE:     dc.b $81
                 dc.b   0
                 dc.b   0
                 dc.b   0
-AllyBattleSprites:
-                incbin "data/stats/allies/allybattlesprites.bin"
-EnemyBattleSprites:
-                incbin "data/stats/enemies/enemybattlesprites.bin"
-WeaponBattleSprites:
-                incbin "data/stats/items/weaponsprites.bin"

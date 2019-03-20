@@ -664,7 +664,7 @@ loc_10250:
                 bsr.w   LoadMainMenuIcon
 loc_1026E:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 clr.w   d6
                 bsr.w   LoadVDPTileListForDiamenuIconTop
                 bsr.w   LoadVDPTileListForDiamenuIconLeft
@@ -674,7 +674,7 @@ loc_1026E:
                 move.w  #$C15,d1
                 move.w  #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.l  -8(a6),d0
                 beq.s   loc_102A2
                 movea.l d0,a0
@@ -684,28 +684,28 @@ loc_102A2:
                 moveq   #$1E,d6
 loc_102A4:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_102B6
                 moveq   #1,d1
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10328
 loc_102B6:
                 
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_102C8
                 moveq   #2,d1
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10328
 loc_102C8:
                 
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_102DA
                 clr.w   d1
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10328
 loc_102DA:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_102EC
                 moveq   #3,d1
                 sndCom  SFX_MENU_SELECTION
@@ -713,7 +713,7 @@ loc_102DA:
 loc_102EC:
                 
                 ; no dpad button was pressed
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10300
                 moveq   #$FFFFFFFF,d1   ; B pressed, so cancel menu
                 moveq   #$FFFFFFFF,d0
@@ -721,7 +721,7 @@ loc_102EC:
                 bra.w   loc_10382
 loc_10300:
                 
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10314
                 clr.w   d1              ; C pressed, so confirm menu
                 clr.w   d0
@@ -729,7 +729,7 @@ loc_10300:
                 bra.w   loc_10382
 loc_10314:
                 
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10358
                 clr.w   d1              ; A pressed, so confirm menu
                 clr.w   d0
@@ -767,10 +767,10 @@ loc_10366:
                 
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.b  d7,((RANDOM_WAITING_FOR_INPUT-$1000000)).w
                 movem.l (sp)+,d6-d7
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.w   loc_102A4
 loc_10382:
                 
@@ -787,7 +787,7 @@ loc_10398:
                 
                 move.w  #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  -$C(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).w
                 movem.w (sp)+,d0-d1
@@ -807,7 +807,7 @@ LoadDiamenuWindowVDPTileData:
                 lea     DiamondMenuLayout(pc), a0
                 move.w  -$C(a6),d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  #$D8,d7 
                 jsr     (CopyBytes).w   
                 move.w  -4(a6),d0
@@ -820,7 +820,7 @@ LoadDiamenuWindowVDPTileData:
                 movea.l (a0,d0.w),a0
                 move.w  -$C(a6),d0
                 move.w  #$B04,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 moveq   #$FFFFFFDC,d1
                 moveq   #$C,d7
                 bra.w   WriteTilesFromASCII
@@ -1065,7 +1065,7 @@ loc_105B2:
                 move.w  #$C15,d1
                 move.w  #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.l  -8(a6),d0
                 beq.s   loc_10614
                 movea.l d0,a0
@@ -1161,7 +1161,7 @@ loc_106E8:
                 moveq   #$1E,d6
 loc_106F6:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.w   loc_10616
 loc_106FE:
                 
@@ -1186,7 +1186,7 @@ loc_10726:
                 
                 move.w  #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  -$C(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).w
                 movem.w (sp)+,d0-d1
@@ -1205,7 +1205,7 @@ sub_10748:
                 lea     UnidentifiedLayout02(pc), a0
                 move.w  -$C(a6),d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  #$D8,d7 
                 jsr     (CopyBytes).w   
                 lsl.w   #1,d0
@@ -1219,7 +1219,7 @@ sub_10748:
                 move.w  #ITEMIDX_NOTHING,((word_FFB18C-$1000000)).w
                 move.w  -$C(a6),d0
                 move.w  #$903,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 lea     aNothing(pc), a0
                 moveq   #$FFFFFFDC,d1
                 moveq   #$A,d7
@@ -1232,7 +1232,7 @@ loc_10798:
                 jsr     j_FindItemName
                 move.w  -$C(a6),d0
                 move.w  #$902,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 moveq   #$FFFFFFDC,d1
                 bsr.w   WriteTilesFromASCII
                 move.w  (sp)+,d1
@@ -1241,7 +1241,7 @@ loc_10798:
                 lea     aEquipped(pc), a0
                 move.w  -$C(a6),d0
                 move.w  #$904,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 moveq   #$FFFFFFDC,d1
                 moveq   #$A,d7
                 bsr.w   WriteTilesFromASCII
@@ -1529,7 +1529,7 @@ loc_10A74:
                 move.w  #$C15,d1
                 move.w  #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
 loc_10ACC:
                 
                 move.l  -8(a6),d0
@@ -1541,7 +1541,7 @@ loc_10AD6:
                 moveq   #$1E,d6
 loc_10AD8:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10AF2
                 moveq   #1,d1
                 cmpi.w  #$3F,((DISPLAYED_ICON_2-$1000000)).w 
@@ -1550,7 +1550,7 @@ loc_10AD8:
                 bra.w   loc_10B76
 loc_10AF2:
                 
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10B0C
                 moveq   #2,d1
                 cmpi.w  #$3F,((DISPLAYED_ICON_3-$1000000)).w 
@@ -1559,14 +1559,14 @@ loc_10AF2:
                 bra.w   loc_10B76
 loc_10B0C:
                 
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10B1E
                 clr.w   d1
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10B76
 loc_10B1E:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10B38
                 moveq   #3,d1
                 cmpi.w  #$3F,((DISPLAYED_ICON_4-$1000000)).w 
@@ -1575,7 +1575,7 @@ loc_10B1E:
                 bra.w   loc_10B76
 loc_10B38:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10B4E
                 moveq   #$FFFFFFFF,d1
                 moveq   #$FFFFFFFF,d0
@@ -1583,7 +1583,7 @@ loc_10B38:
                 bra.w   loc_10BEC
 loc_10B4E:
                 
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10B62
                 clr.w   d1
                 clr.w   d0
@@ -1591,7 +1591,7 @@ loc_10B4E:
                 bra.w   loc_10BBC
 loc_10B62:
                 
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10BA6
                 clr.w   d1
                 clr.w   d0
@@ -1626,7 +1626,7 @@ loc_10BA6:
                 moveq   #$1E,d6
 loc_10BB4:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.w   loc_10AD8
 loc_10BBC:
                 
@@ -1658,7 +1658,7 @@ loc_10C02:
                 
                 move.w  #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  -$C(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).w
                 movem.w (sp)+,d0-d1
@@ -1676,7 +1676,7 @@ sub_10C22:
                 lea     UnidentifiedLayout01(pc), a0
                 move.w  -$C(a6),d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  #$D8,d7 
                 jsr     (CopyBytes).w   
                 lsl.w   #1,d0
@@ -1690,12 +1690,12 @@ sub_10C22:
                 jsr     j_FindSpellName
                 move.w  -$C(a6),d0
                 move.w  #$902,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 moveq   #$FFFFFFDC,d1
                 bsr.w   WriteTilesFromASCII
                 move.w  -$C(a6),d0
                 move.w  #$903,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  (sp)+,d1
                 move.w  d1,-(sp)
                 lea     byte_110E4(pc), a0
@@ -1709,7 +1709,7 @@ sub_10C22:
                 jsr     (CopyBytes).w   
                 move.w  -$C(a6),d0
                 move.w  #$C04,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  (sp)+,d1
                 jsr     j_GetSpellCost
                 move.w  d1,d0
@@ -1756,10 +1756,10 @@ sub_10CC6:
                 lsr.w   #6,d4
                 move.w  d4,d5
                 andi.w  #$3F,d0 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
 loc_10CF4:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10D0A
                 subq.w  #1,d5
                 cmpi.w  #$FFFF,d5
@@ -1770,7 +1770,7 @@ loc_10D06:
                 bra.w   sub_10D56
 loc_10D0A:
                 
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10D1E
                 addq.w  #1,d5
                 cmp.w   d4,d5
@@ -1781,27 +1781,27 @@ loc_10D1A:
                 bra.w   sub_10D56
 loc_10D1E:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10D32
                 moveq   #$FFFFFFFF,d0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 sndCom  SFX_VALIDATION
                 rts
 loc_10D32:
                 
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10D3E
                 bra.w   byte_10D48
 loc_10D3E:
                 
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.w   loc_10DC0
 byte_10D48:
                 
                 sndCom  SFX_VALIDATION
                 lsl.w   #6,d5
                 or.w    d5,d0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 rts
 
 	; End of function sub_10CC6
@@ -1823,7 +1823,7 @@ sub_10D56:
                 move.w  d0,-(sp)
                 move.w  -$C(a6),d0
                 move.w  #$903,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  #$C,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
@@ -1850,7 +1850,7 @@ loc_10DAE:
 loc_10DC0:
                 
                 bsr.w   sub_10DE2
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 subq.w  #1,d6
                 bne.s   loc_10DCE
                 moveq   #$14,d6
@@ -2357,7 +2357,7 @@ sub_113C6:
                 move.w  #$212,d1
                 move.w  #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a2
                 rts
 
@@ -2388,7 +2388,7 @@ sub_1141E:
                 move.w  #$F612,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  ((byte_FFB18E-$1000000)).w,d0
                 jsr     (ClearWindowAndUpdateEndPtr).w
                 movem.l (sp)+,d0-a2
@@ -2404,7 +2404,7 @@ DrawBattleEquipWindowStats:
                 link    a6,#-4
                 move.w  ((byte_FFB18E-$1000000)).w,d0
                 move.w  #$701,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.l  a1,-4(a6)
                 move.w  ((MOVING_BATTLE_ENTITY_IDX-$1000000)).w,d0
                 jsr     j_GetCurrentATK
@@ -2460,7 +2460,7 @@ loc_11594:
                 jsr     (CreateWindow).w
                 move.w  d0,(a2)
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  (sp)+,d0
                 bsr.w   sub_118BE
                 move.w  #1,d1
@@ -2478,9 +2478,9 @@ loc_115C4:
                 move.w  (a2),d0
                 move.w  #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bsr.w   sub_11804
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a2
                 rts
 
@@ -2507,7 +2507,7 @@ loc_11600:
                 
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  (a2),d0
                 jsr     (ClearWindowAndUpdateEndPtr).w
                 movem.l (sp)+,d0-a2
@@ -2545,7 +2545,7 @@ sub_11638:
                 movem.w d0,-(sp)
                 clr.w   d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 movem.w (sp)+,d0
                 bsr.w   sub_118BE
                 move.w  (sp)+,d1
@@ -2563,10 +2563,10 @@ loc_11674:
                 ori.w   #1,d1
                 clr.w   d0
                 moveq   #1,d2
-                jsr     (MoveWindowWithoutSFX).l
-                jsr     (WaitForVInt).w 
+                jsr     (MoveWindow).l  
+                jsr     (WaitForVInt).w
                 bsr.w   sub_11804
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a1
                 rts
 loc_11694:
@@ -2578,7 +2578,7 @@ loc_11694:
                 clr.w   d0
                 move.w  #$2006,d1
                 moveq   #1,d2
-                jsr     (MoveWindowWithoutSFX).l
+                jsr     (MoveWindow).l  
                 movem.l (sp)+,d0-a1
                 rts
 loc_116B8:
@@ -2591,7 +2591,7 @@ loc_116B8:
                 movem.w d0,-(sp)
                 moveq   #1,d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 movem.w (sp)+,d0
                 bsr.w   sub_118BE
                 move.w  (sp)+,d1
@@ -2609,10 +2609,10 @@ loc_116F6:
                 ori.w   #$14,d1
                 moveq   #1,d0
                 moveq   #1,d2
-                jsr     (MoveWindowWithoutSFX).l
-                jsr     (WaitForVInt).w 
+                jsr     (MoveWindow).l  
+                jsr     (WaitForVInt).w
                 bsr.w   sub_11804
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a1
 return_11714:
                 
@@ -2632,7 +2632,7 @@ sub_11716:
                 moveq   #1,d0
                 move.w  #$2006,d1
                 moveq   #1,d2
-                jsr     (MoveWindowWithoutSFX).l
+                jsr     (MoveWindow).l  
                 movem.l (sp)+,d0-a1
                 rts
 
@@ -3211,7 +3211,7 @@ loc_11BC4:
                 
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_HandlePortraitBlinking
@@ -3244,7 +3244,7 @@ loc_11C08:
                 
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 jsr     (ClearWindowAndUpdateEndPtr).w
@@ -3320,7 +3320,7 @@ loc_11CD2:
                 jsr     (MoveWindowWithSFX).w
 loc_11CE6:
                 
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  #$A7C0,((word_FFB07E-$1000000)).w
                 move.w  #$14,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
@@ -3360,13 +3360,13 @@ loc_11D32:
                 move.w  #$740,d1
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_11D64
-                add.w   ((word_FFA814-$1000000)).w,d0
-                add.w   ((word_FFA816-$1000000)).w,d1
+                add.w   ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
+                add.w   ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
                 bra.s   loc_11D6C
 loc_11D64:
                 
-                add.w   ((word_FFA810-$1000000)).w,d0
-                add.w   ((word_FFA812-$1000000)).w,d1
+                add.w   ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
+                add.w   ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
 loc_11D6C:
                 
                 move.b  $11(a0),d7
@@ -3447,7 +3447,7 @@ loc_11E40:
 loc_11E54:
                 
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_11E94
                 clr.w   d0
@@ -3489,7 +3489,7 @@ loc_11E94:
                 jsr     (UpdateEntityProperties).w
 loc_11EBA:
                 
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  -$A(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).w
                 move.w  -8(a6),d0
@@ -3531,13 +3531,13 @@ LoadTileDataForMemberScreen:
                 
                 move.w  -4(a6),d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  -2(a6),d0
                 bsr.w   BuildMemberStatsWindow
                 move.w  -8(a6),d0
                 lea     AllyKillDefeatWindowLayout(pc), a0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  #WINDOW_MEMBER_KD_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
@@ -3563,7 +3563,7 @@ loc_11F5A:
                 move.w  -8(a6),d0
                 lea     AllyKillDefeatWindowLayout(pc), a0
                 move.w  #$101,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  -2(a6),d0       ; get character idx from stack
                 lsr.w   #4,d0
                 andi.w  #$F,d0
@@ -3596,13 +3596,13 @@ loc_11FA6:
                 move.w  -6(a6),d0
                 lea     WindowBorderTiles(pc), a0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  #$A0,d7 
                 jsr     (CopyBytes).w   
                 lea     CharacterStatsWindowLayout(pc), a0
                 move.w  -$A(a6),d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  #$40,d7 
                 jsr     (CopyBytes).w   
                 adda.w  #$22,a1 
@@ -4159,7 +4159,7 @@ CopyMemberScreenIconsToVDPTileOrder:
 
 sub_12606:
                 
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 move.w  #$97F,d0
 loc_12610:
                 
@@ -4170,7 +4170,7 @@ loc_12610:
 loc_1261C:
                 
                 dbf     d0,loc_12610
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$800,d0
                 moveq   #2,d1
@@ -4229,7 +4229,7 @@ sub_12892:
                 move.l  #$70007000,((byte_FFAEE2-$1000000)).w
                 move.l  #$70007000,((byte_FFAEEE-$1000000)).w
                 movem.l d0,-(sp)
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 lea     (PALETTE_1_CURRENT).l,a0
                 lea     (PALETTE_2_CURRENT).l,a1
@@ -4257,7 +4257,7 @@ sub_12892:
                 bsr.w   sub_129E8
 loc_1291E:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 tst.b   ((FADING_SETTING-$1000000)).w
                 bne.s   loc_1291E
                 move.w  -$E(a6),d0
@@ -4282,7 +4282,7 @@ loc_1291E:
                 move.w  -2(a6),d0
                 move.w  #6,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 bsr.w   sub_12CB0
                 move.w  -$E(a6),d0
                 neg.w   d0
@@ -4298,7 +4298,7 @@ loc_1291E:
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #5,((FADING_PALETTE_BITMAP-$1000000)).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  d0,-2(a6)
                 jsr     (ClearWindowAndUpdateEndPtr).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -4679,7 +4679,7 @@ loc_12DC6:
                 dbf     d7,loc_12DB4
                 clr.b   3(a0,d0.w)
                 movem.l (sp)+,d0-d2/d7-a0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 subq.w  #1,d6
                 bne.s   loc_12DDE
                 moveq   #$14,d6
@@ -4803,7 +4803,7 @@ sub_12F12:
                 move.w  #$1617,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).l
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
                 unlk    a6
                 movem.l (sp)+,d0-a1
 return_12F5C:
@@ -4824,7 +4824,7 @@ sub_12F5E:
                 move.w  ((word_FFB086-$1000000)).w,d0
                 subq.w  #1,d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
+                jsr     (GetWindowTileAddress).l
                 move.l  a1,-$12(a6)
                 bsr.w   sub_14B28       
                 move.w  ((word_FFB086-$1000000)).w,d0
@@ -4858,7 +4858,7 @@ sub_12F9A:
                 jsr     (MoveWindowWithSFX).l
 loc_12FCA:
                 
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
                 move.w  ((word_FFB086-$1000000)).w,d0
                 subq.w  #1,d0
                 jsr     (ClearWindowAndUpdateEndPtr).l
@@ -4945,14 +4945,14 @@ loc_13066:
                 move.w  -8(a6),d0
                 move.w  #$A01,d1
                 jsr     (MoveWindowWithSFX).l
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 lea     TextHighlightTiles(pc), a0
                 lea     ($B800).l,a1
                 move.w  #$A0,d0 
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDMA).w
                 jsr     (WaitForDMAQueueProcessing).w
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
                 moveq   #$14,d1
 loc_13100:
                 
@@ -4969,7 +4969,7 @@ loc_13114:
 loc_13116:
                 
                 move.w  (sp)+,d1
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13138
                 move.b  ((word_FFB13D-$1000000)).w,d0
                 addq.b  #1,d0
@@ -4983,7 +4983,7 @@ loc_13130:
                 bsr.w   sub_13478
 loc_13138:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13156
                 move.b  ((word_FFB13D-$1000000)).w,d0
                 subq.b  #1,d0
@@ -4996,7 +4996,7 @@ loc_1314E:
                 bsr.w   sub_13478
 loc_13156:
                 
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1319A
                 move.w  ((word_FFB138-$1000000)).w,d0
                 subq.w  #1,d0
@@ -5020,7 +5020,7 @@ loc_1317A:
                 bsr.w   sub_134A8
 loc_1319A:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_131F6
                 move.w  ((word_FFB138-$1000000)).w,d0
                 addq.w  #1,d0
@@ -5054,16 +5054,16 @@ loc_131CE:
                 bsr.w   sub_134A8
 loc_131F6:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_13254
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_13220
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_13220
 loc_13214:
                 
                 bsr.w   sub_133A0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.w   loc_13100
 loc_13220:
                 
@@ -5105,7 +5105,7 @@ loc_13256:
                 move.w  -8(a6),d0
                 move.w  #$20F3,d1
                 jsr     (MoveWindowWithSFX).l
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
                 move.w  -4(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).l
                 move.w  -6(a6),d0
@@ -5390,7 +5390,7 @@ sub_134A8:
                 move.w  d0,-(sp)
                 move.w  -4(a6),d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
+                jsr     (GetWindowTileAddress).l
                 movea.l a1,a0
                 tst.b   ((word_FFAF9E-$1000000)).w
                 beq.s   loc_134E0
@@ -5422,7 +5422,7 @@ loc_13510:
                 move.w  -4(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bsr.w   sub_1354C
                 move.w  -4(a6),d0
                 move.w  #$8080,d1
@@ -5450,18 +5450,18 @@ sub_1354C:
                 move.w  d0,-2(a6)
                 move.w  -4(a6),d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
+                jsr     (GetWindowTileAddress).l
                 move.w  -2(a6),d0
                 bsr.w   WriteMemberListText
                 move.w  -8(a6),d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
+                jsr     (GetWindowTileAddress).l
                 move.w  -2(a6),d0
                 bsr.w   sub_137BC
                 move.w  -6(a6),d0
                 lea     WindowBorderTiles(pc), a0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
+                jsr     (GetWindowTileAddress).l
                 move.w  #$A0,d7 
                 jsr     (CopyBytes).w   
                 rts
@@ -5664,7 +5664,7 @@ sub_137AC:
                 
                 move.w  -8(a6),d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
+                jsr     (GetWindowTileAddress).l
                 move.w  -2(a6),d0
 
 	; End of function sub_137AC
@@ -6308,11 +6308,11 @@ sub_13F14:
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableItemIcon
                 bsr.w   CleanIconCorners
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 moveq   #$1E,d6
 loc_13F88:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13FA2
                 moveq   #1,d1
                 cmpi.w  #$7F,((DISPLAYED_ICON_2-$1000000)).w 
@@ -6321,7 +6321,7 @@ loc_13F88:
                 bra.w   loc_1401E
 loc_13FA2:
                 
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13FBC
                 moveq   #2,d1
                 cmpi.w  #$7F,((DISPLAYED_ICON_3-$1000000)).w 
@@ -6330,14 +6330,14 @@ loc_13FA2:
                 bra.w   loc_1401E
 loc_13FBC:
                 
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13FCE
                 clr.w   d1
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_1401E
 loc_13FCE:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13FE8
                 moveq   #3,d1
                 cmpi.w  #$7F,((DISPLAYED_ICON_4-$1000000)).w 
@@ -6346,20 +6346,20 @@ loc_13FCE:
                 bra.w   loc_1401E
 loc_13FE8:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13FFA
                 move.b  #$FF,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 bra.w   loc_14052
 loc_13FFA:
                 
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1400C
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
                 bra.w   loc_14052
 loc_1400C:
                 
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14034
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -6386,7 +6386,7 @@ loc_14034:
                 moveq   #$1E,d6
 loc_1404A:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.w   loc_13F88
 loc_14052:
                 
@@ -6523,7 +6523,7 @@ loc_1410C:
                 bpl.s   loc_1414A
                 moveq   #1,d7
                 bsr.w   sub_143E0
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 bra.w   loc_141C8
 loc_1414A:
                 
@@ -6555,7 +6555,7 @@ loc_14162:
                 bne.s   loc_141AC
                 moveq   #1,d7
                 bsr.w   sub_143E0
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 moveq   #$FFFFFFFF,d1
                 bra.w   loc_141C8
 loc_141AC:
@@ -6636,11 +6636,11 @@ loc_141FE:
                 bsr.w   DMAicon2
                 bsr.w   DMAicon3
                 bsr.w   DMAicon4
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 moveq   #$1E,d6
 loc_14264:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1427E
                 moveq   #1,d1
                 cmpi.w  #$7F,((DISPLAYED_ICON_2-$1000000)).w 
@@ -6649,7 +6649,7 @@ loc_14264:
                 bra.w   loc_142FA
 loc_1427E:
                 
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14298
                 moveq   #2,d1
                 cmpi.w  #$7F,((DISPLAYED_ICON_3-$1000000)).w 
@@ -6658,14 +6658,14 @@ loc_1427E:
                 bra.w   loc_142FA
 loc_14298:
                 
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_142AA
                 clr.w   d1
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_142FA
 loc_142AA:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_142C4
                 moveq   #3,d1
                 cmpi.w  #$7F,((DISPLAYED_ICON_4-$1000000)).w 
@@ -6674,20 +6674,20 @@ loc_142AA:
                 bra.w   loc_142FA
 loc_142C4:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_142D6
                 move.b  #$FF,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 bra.w   loc_1438C
 loc_142D6:
                 
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_142E8
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
                 bra.w   loc_1438C
 loc_142E8:
                 
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14366
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -6744,7 +6744,7 @@ loc_14366:
                 moveq   #$1E,d6
 loc_14384:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.w   loc_14264
 loc_1438C:
                 
@@ -6789,7 +6789,7 @@ sub_143E0:
                 move.w  #$2001,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.b  d7,((word_FFAF8C-$1000000)).w
                 clr.w   d5
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d5
@@ -6816,7 +6816,7 @@ sub_14422:
                 move.w  #$21C,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 movem.w (sp)+,d0-d2/d7
                 rts
 
@@ -6832,7 +6832,7 @@ sub_1443E:
                 move.w  #$20E,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 movem.w (sp)+,d0-d2/d7
                 rts
 
@@ -6878,11 +6878,11 @@ sub_1445A:
                 bsr.w   CleanIconCorners
 loc_144D8:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 moveq   #$1E,d6
 loc_144DE:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_144F8
                 moveq   #1,d1
                 cmpi.w  #$3F,((DISPLAYED_ICON_2-$1000000)).w 
@@ -6891,7 +6891,7 @@ loc_144DE:
                 bra.w   loc_14574
 loc_144F8:
                 
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14512
                 moveq   #2,d1
                 cmpi.w  #$3F,((DISPLAYED_ICON_3-$1000000)).w 
@@ -6900,14 +6900,14 @@ loc_144F8:
                 bra.w   loc_14574
 loc_14512:
                 
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14524
                 clr.w   d1
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_14574
 loc_14524:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1453E
                 moveq   #3,d1
                 cmpi.w  #$3F,((DISPLAYED_ICON_4-$1000000)).w 
@@ -6916,20 +6916,20 @@ loc_14524:
                 bra.w   loc_14574
 loc_1453E:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14550
                 move.b  #$FF,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 bra.w   byte_145A8
 loc_14550:
                 
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14562
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
                 bra.w   byte_145A8
 loc_14562:
                 
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1458A
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -6956,7 +6956,7 @@ loc_1458A:
                 moveq   #$1E,d6
 loc_145A0:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.w   loc_144DE
 byte_145A8:
                 
@@ -6984,11 +6984,11 @@ loc_145BC:
                 move.w  d4,d3
                 moveq   #$13,d1
                 bsr.w   sub_146AE
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 moveq   #$14,d1
 loc_145EA:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14600
                 tst.w   d3
                 ble.s   loc_14600
@@ -6997,7 +6997,7 @@ loc_145EA:
                 bra.w   loc_1463E
 loc_14600:
                 
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14616
                 cmp.w   d4,d3
                 bge.s   loc_14616
@@ -7006,18 +7006,18 @@ loc_14600:
                 bra.w   loc_1463E
 loc_14616:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14626
                 move.b  #$FF,d3
                 bra.w   loc_14654
 loc_14626:
                 
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14632
                 bra.w   loc_14654
 loc_14632:
                 
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14644
                 bra.w   loc_14654
 loc_1463E:
@@ -7032,7 +7032,7 @@ loc_14644:
                 moveq   #$14,d1
 loc_1464E:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.s   loc_145EA
 loc_14654:
                 
@@ -7182,7 +7182,7 @@ sub_1474C:
                 add.w   d1,d1
                 addq.w  #5,d1
                 ori.w   #$1300,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 clr.w   d1
                 move.w  d3,d0
                 addq.w  #1,d0
@@ -7304,12 +7304,12 @@ loc_14814:
                 lea     ($FE00).l,a1
                 move.w  #$100,d0
                 jsr     (ApplyVIntVramDMAOnCompressedTiles).w
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
                 bsr.w   sub_14EDE
 loc_148BC:
                 
                 move.w  ((word_FFB132-$1000000)).w,d0
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14906
                 move.w  ((word_FFB130-$1000000)).w,d2
                 mulu.w  #6,d2
@@ -7334,7 +7334,7 @@ loc_148FA:
 loc_14906:
                 
                 move.w  ((word_FFB132-$1000000)).w,d0
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1494A
                 move.w  ((word_FFB130-$1000000)).w,d2
                 mulu.w  #6,d2
@@ -7355,7 +7355,7 @@ loc_1493E:
                 bra.w   loc_149E0
 loc_1494A:
                 
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1496A
                 tst.w   ((word_FFB130-$1000000)).w
                 beq.s   loc_1496A
@@ -7365,7 +7365,7 @@ loc_1494A:
                 bsr.w   sub_14E62
 loc_1496A:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_149C2
                 move.w  ((word_FFB130-$1000000)).w,d2
                 addq.w  #1,d2
@@ -7401,16 +7401,16 @@ loc_149B6:
                 bsr.w   sub_14E62
 loc_149C2:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_149EC
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_149F2
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_149F2
 loc_149E0:
                 
                 bsr.w   sub_14A82
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.w   loc_148BC
 loc_149EC:
                 
@@ -7434,7 +7434,7 @@ loc_14A0A:
                 subq.w  #1,d0
                 move.w  #$8080,d1
                 moveq   #4,d2
-                jsr     (MoveWindowWithoutSFX).l
+                jsr     (MoveWindow).l  
 loc_14A26:
                 
                 move.w  -2(a6),d0
@@ -7449,7 +7449,7 @@ loc_14A26:
                 move.w  #$2017,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).l
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
                 move.w  -$E(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).l
                 move.w  -8(a6),d0
@@ -7776,7 +7776,7 @@ loc_14D4A:
                 move.w  -8(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
-                jmp     (WaitForVInt).w 
+                jmp     (WaitForVInt).w
 
 	; End of function sub_14D0C
 
@@ -7920,7 +7920,7 @@ loc_14EAE:
                 move.w  -2(a6),d0
                 move.w  #$201,d1
                 moveq   #4,d2
-                jsr     (MoveWindowWithoutSFX).l
+                jsr     (MoveWindow).l  
                 bra.s   sub_14EDE
 
 	; End of function sub_14E62
@@ -7936,7 +7936,7 @@ sub_14EC0:
                 move.w  -2(a6),d0
                 move.w  #$201,d1
                 moveq   #4,d2
-                jsr     (MoveWindowWithoutSFX).l
+                jsr     (MoveWindow).l  
 
 	; End of function sub_14EC0
 
@@ -7951,7 +7951,7 @@ sub_14EDE:
                 ror.w   #6,d1
                 ori.w   #$106,d1
                 moveq   #4,d2
-                jsr     (MoveWindowWithoutSFX).l
+                jsr     (MoveWindow).l  
                 moveq   #$A,d1
                 rts
 
@@ -8910,7 +8910,7 @@ loc_152F0:
                 jsr     (MoveWindowWithSFX).w
 loc_15302:
                 
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  (sp)+,d0
                 beq.w   loc_15312
 loc_1530C:
@@ -8922,35 +8922,35 @@ loc_15312:
                 moveq   #$F,d6
 loc_15314:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.w   loc_15328
                 clr.w   d1
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_15378
 loc_15328:
                 
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.w   loc_1533C
                 moveq   #$FFFFFFFF,d1
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_15378
 loc_1533C:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.w   loc_15350
                 moveq   #$FFFFFFFF,d0
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 bra.w   loc_153D6
 loc_15350:
                 
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.w   loc_15364
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
                 bra.w   loc_153D6
 loc_15364:
                 
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.w   loc_153C0
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
@@ -8993,7 +8993,7 @@ loc_153C0:
                 moveq   #$14,d6
 loc_153CE:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.w   loc_15314
 loc_153D6:
                 
@@ -9017,7 +9017,7 @@ loc_153F6:
                 jsr     (MoveWindowWithSFX).w
 loc_15408:
                 
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  -2(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).w
                 unlk    a6
@@ -9133,7 +9133,7 @@ aAAA_0:         dc.b '–`–a–a–aÿ`'
 ClosePortraitEyes:
                 
                 clr.b   ((byte_FFB082-$1000000)).w
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.w  d0,-(sp)
                 btst    #0,d0
                 bne.s   loc_1550A
@@ -9190,7 +9190,7 @@ loc_1555E:
                 move.w  ((BLINK_TILE_NUMBER-$1000000)).w,d7
                 bsr.w   UpdatePortrait  
                 moveq   #$78,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$1E,d7
                 move.w  d7,(a0)
 loc_1557C:
@@ -9221,7 +9221,7 @@ loc_155A8:
                 move.w  ((MOUTH_TILE_NUMBER-$1000000)).w,d7
                 bsr.w   UpdatePortrait  
                 moveq   #5,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$A,d7
                 move.w  d7,(a0)
 return_155C2:
@@ -9245,7 +9245,7 @@ loc_155C8:
                 move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$101,d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.w  (sp)+,d1
                 subq.w  #1,d7
 loc_155DC:
@@ -9380,7 +9380,7 @@ sub_156CE:
                 
                 movem.l d7-a1,-(sp)
                 lea     MenuLayout_15706(pc), a0
-                lea     ((VDP_TILE_IDX_LIST-$1000000)).w,a1
+                lea     ((WINDOW_TILE_LAYOUTS-$1000000)).w,a1
                 move.w  #$30,d7 
                 jsr     (CopyBytes).w   
                 movem.l (sp)+,d7-a1
@@ -9389,7 +9389,7 @@ sub_156CE:
                 lea     ((byte_FFB812-$1000000)).w,a1
                 moveq   #$FFFFFFF0,d1
                 bsr.w   WriteTilesFromASCII
-                lea     ((VDP_TILE_IDX_LIST-$1000000)).w,a0
+                lea     ((WINDOW_TILE_LAYOUTS-$1000000)).w,a0
                 move.w  #$803,d0
                 move.w  #4,d2
                 rts
@@ -9510,7 +9510,7 @@ CreateLandEffectWindow:
 loc_157A6:
                 
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a2
                 rts
 
@@ -9529,7 +9529,7 @@ HideLandEffectWindow:
                 move.w  #$F801,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  ((LAND_EFFECT_WINDOW_IDX-$1000000)).w,d0
                 subq.w  #1,d0
                 jsr     (ClearWindowAndUpdateEndPtr).w
@@ -9573,7 +9573,7 @@ DrawLandEffectWindow:
                 move.w  ((LAND_EFFECT_WINDOW_IDX-$1000000)).w,d0
                 subq.w  #1,d0
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).w
+                jsr     (GetWindowTileAddress).w
                 move.l  a1,d3
                 move.w  #$805,d0
                 bsr.w   CopyWindowTilesToRAM
@@ -9627,44 +9627,44 @@ sub_1586E:
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDMAOnCompressedTiles).w
                 jsr     (EnableDMAQueueProcessing).w
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
                 clr.w   d4
                 bsr.w   sub_15A20
                 moveq   #$14,d6
 loc_158D6:
                 
                 bsr.w   sub_159A0
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_158E8
                 addq.w  #1,d3
                 bsr.w   sub_15A3E
 loc_158E8:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_158F6
                 subq.w  #1,d3
                 bsr.w   sub_15A3E
 loc_158F6:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_15906
                 eori.w  #1,d4
                 bsr.w   sub_15A20
 loc_15906:
                 
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_15916
                 eori.w  #1,d4
                 bsr.w   sub_15A20
 loc_15916:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_15940
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_1594C
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_1594C
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 subq.w  #1,d6
                 bne.s   loc_1593E
                 moveq   #$14,d6
@@ -9682,7 +9682,7 @@ loc_1594C:
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).l
                 bsr.w   sub_1598C
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
                 move.w  -6(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).l
                 unlk    a6
@@ -9892,7 +9892,7 @@ NameCharacter:
                 move.w  -$E(a6),d0
                 move.w  #$201,d1
                 jsr     (MoveWindowWithSFX).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 jsr     sub_15CC4(pc)
                 nop
                 move.w  -$14(a6),d0
@@ -9914,7 +9914,7 @@ loc_15C72:
                 move.w  #$F8F6,d1
                 jsr     (MoveWindowWithSFX).w
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                jsr     (WaitForVint_andFFA900Clear).w
+                jsr     (WaitForWindowMovementEnd).w
                 move.w  -$12(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).w
                 move.w  -$10(a6),d0
@@ -9942,24 +9942,24 @@ sub_15CC4:
                 moveq   #$14,d1
 loc_15CDC:
                 
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_15DE0
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_15E3A
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_15EBA
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_15E94
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   byte_15DDA
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   byte_15D2C
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   byte_15D2C
 loc_15D22:
                 
                 bsr.w   sub_15F24
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.s   loc_15CDC
 byte_15D2C:
                 
@@ -9994,7 +9994,7 @@ loc_15D72:
                 move.w  -$10(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 moveq   #$14,d1
                 cmpi.w  #7,-$18(a6)
                 bne.s   loc_15D96
@@ -10439,48 +10439,48 @@ NumberPrompt:
                 move.w  #$1801,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).l
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
 loc_162C6:
                 
                 bsr.w   sub_16376
                 move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_162E6
                 moveq   #1,d3
                 bsr.w   ModifyPromptNumber
 loc_162E6:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_162F4
                 moveq   #$FFFFFFFF,d3
                 bsr.w   ModifyPromptNumber
 loc_162F4:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16302
                 moveq   #$A,d3
                 bsr.w   ModifyPromptNumber
 loc_16302:
                 
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16310
                 moveq   #$FFFFFFF6,d3
                 bsr.w   ModifyPromptNumber
 loc_16310:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_16344
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_1634A
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_1634A
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 movem.l (sp)+,d6-d7
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.s   loc_162C6       ; bra.s loc_162C6
 loc_16344:
                 
@@ -10491,7 +10491,7 @@ loc_1634A:
                 move.w  #$2001,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).l
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
                 move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).l
                 move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6),d0
@@ -10562,46 +10562,46 @@ DebugFlagSetter:
                 move.w  #$1801,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).l
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
 loc_163F6:
                 
                 bsr.w   sub_164AC
                 move.w  -6(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16416
                 moveq   #1,d3
                 bsr.w   sub_164E8
 loc_16416:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16424
                 moveq   #$FFFFFFFF,d3
                 bsr.w   sub_164E8
 loc_16424:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16432
                 moveq   #$A,d3
                 bsr.w   sub_164E8
 loc_16432:
                 
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16440
                 moveq   #$FFFFFFF6,d3
                 bsr.w   sub_164E8
 loc_16440:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_16484
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   byte_16464
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   byte_16474
 loc_1645E:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.s   loc_163F6
 byte_16464:
                 
@@ -10621,7 +10621,7 @@ loc_16484:
                 move.w  #$2001,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).l
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
                 move.w  -6(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).l
                 unlk    a6
@@ -10722,7 +10722,7 @@ RemoveTimerWindow:
                 subq.w  #1,d0
                 move.w  #$2020,d1
                 jsr     (SetWindowDestination).l
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 jsr     (ClearWindowAndUpdateEndPtr).l
                 clr.w   ((TIMER_WINDOW_INDEX-$1000000)).w
                 trap    #VINT_FUNCTIONS
@@ -10769,7 +10769,7 @@ sub_165C0:
                 
                 move.w  d0,-(sp)
                 clr.w   d1
-                jsr     (GetAddressOfWindowTileDataStartingAtCoord).l
+                jsr     (GetWindowTileAddress).l
                 movem.l a1,-(sp)
                 lea     TimerWindowLayout(pc), a0
                 moveq   #$40,d7 
@@ -10829,7 +10829,7 @@ WitchMainMenu:
                 move.w  -6(a6),d0
                 move.w  #$202,d1
                 jsr     (SetWindowDestination).l
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 movem.w (sp)+,d0
 loc_166C2:
                 
@@ -10839,41 +10839,41 @@ loc_166C2:
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
                 movem.w (sp)+,d0
-                btst    #INPUT_A_RIGHT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_166EA
                 moveq   #1,d3
                 bsr.w   sub_1678A
 loc_166EA:
                 
-                btst    #INPUT_A_LEFT_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_166F8
                 moveq   #$FFFFFFFF,d3
                 bsr.w   sub_1678A
 loc_166F8:
                 
-                btst    #INPUT_A_DOWN_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16706
                 moveq   #1,d3
                 bsr.w   sub_1678A
 loc_16706:
                 
-                btst    #INPUT_A_UP_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16714
                 moveq   #$FFFFFFFF,d3
                 bsr.w   sub_1678A
 loc_16714:
                 
-                btst    #INPUT_A_B_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_16756
-                btst    #INPUT_A_C_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   byte_1675A
-                btst    #INPUT_A_A_BIT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   byte_1675A
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 movem.l (sp)+,d6-d7
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 subq.w  #1,-8(a6)
                 bne.s   loc_16752
                 move.w  #$14,-8(a6)
@@ -10890,7 +10890,7 @@ byte_1675A:
                 move.w  -6(a6),d0
                 move.w  #$2001,d1
                 jsr     (SetWindowDestination).l
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.w  -6(a6),d0
                 jsr     (ClearWindowAndUpdateEndPtr).l
                 movem.w (sp)+,d0
@@ -11186,7 +11186,7 @@ loc_16A10:
                 move.w  #$10B,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).l
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
 loc_16A2A:
                 
                 movem.l (sp)+,d0-a1
@@ -11206,7 +11206,7 @@ sub_16A30:
                 move.w  #$F60B,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).l
-                jsr     (WaitForVint_andFFA900Clear).l
+                jsr     (WaitForWindowMovementEnd).l
                 jsr     (ClearWindowAndUpdateEndPtr).l
                 clr.w   (word_FFB08C).l
 loc_16A5C:

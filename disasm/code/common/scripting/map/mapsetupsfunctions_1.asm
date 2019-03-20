@@ -65,7 +65,7 @@ loc_4756A:
                 clsTxt
 loc_47576:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 moveq   #0,d0
                 bsr.w   WaitForEntityToStopMoving
                 movem.l (sp)+,d0-a1
@@ -130,7 +130,7 @@ loc_475FE:
                 clsTxt
 loc_4760A:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 moveq   #0,d0
                 bsr.w   WaitForEntityToStopMoving
                 movem.l (sp)+,d0-d5/d7-a1
@@ -195,7 +195,7 @@ loc_47680:
                 movem.w d0-d2/d6,-(sp)
                 btst    #0,d6
                 beq.s   loc_476A8
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 addi.w  #2,d2
                 andi.w  #3,d2
                 move.w  d2,d1
@@ -489,7 +489,7 @@ loc_4786E:
 loc_4787A:
                 
                 moveq   #8,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 tst.w   d7
                 bne.s   loc_47888
                 moveq   #$FFFFFFFF,d1
@@ -498,7 +498,7 @@ loc_47888:
                 
                 clr.w   d1
                 moveq   #4,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.l  #2,d7
                 move.w  d7,((word_FFB196-$1000000)).w
 loc_47896:
@@ -510,7 +510,7 @@ loc_47896:
                 jsr     j_SetFlag
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
                 move.w  #$7530,((word_FFB196-$1000000)).w
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 sndCom  SFX_BOOST
                 bsr.w   ExecuteFlashScreenScript
 loc_478C0:

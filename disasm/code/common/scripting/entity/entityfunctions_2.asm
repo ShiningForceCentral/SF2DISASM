@@ -433,7 +433,7 @@ loc_44DAE:
                 move.w  d5,d6
                 or.w    d4,d6
                 beq.s   loc_44DD0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bra.s   loc_44DAE
 loc_44DD0:
                 

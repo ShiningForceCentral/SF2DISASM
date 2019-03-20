@@ -4,13 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; 8 = foreground x, 4 = foreground y, 2 = background x, 1 = background y
-; 
 ; Out: Z = is scrolling
 
-IsMapScrollingToFollowCameraTarget:
+IsMapScrollingToViewTarget:
                 
-                move.b  ((CAMERA_SCROLLING_MASK-$1000000)).w,d7
+                move.b  ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w,d7
                 tst.w   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
                 beq.s   loc_4736
                 andi.b  #3,d7
@@ -24,36 +22,36 @@ loc_4740:
                 tst.b   d7
                 rts
 
-	; End of function IsMapScrollingToFollowCameraTarget
+	; End of function IsMapScrollingToViewTarget
 
 
 ; =============== S U B R O U T I N E =======================================
 
-VInt_4744:
+VInt_UpdateMapPlanes:
                 
-                bclr    #0,((byte_FFA82D-$1000000)).w
+                bclr    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 beq.s   loc_4764
-                bsr.w   sub_4344
-                movea.l ((WINDOW_TILES_END-$1000000)).w,a1
-                cmpa.l  #VDP_TILE_IDX_LIST,a1
+                bsr.w   UpdateVdpPlaneA 
+                movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
+                cmpa.l  #WINDOW_TILE_LAYOUTS,a1
                 beq.s   loc_4764
-                bsr.w   CopyFFC000toFFC800
-                bsr.w   sub_48A0
+                bsr.w   CopyPlaneALayoutForWindows
+                bsr.w   FixWindowsPositions
 loc_4764:
                 
-                bclr    #1,((byte_FFA82D-$1000000)).w
+                bclr    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 beq.s   return_4770
-                bsr.w   sub_43A4
+                bsr.w   UpdateVdpPlaneB 
 return_4770:
                 
                 rts
 
-	; End of function VInt_4744
+	; End of function VInt_UpdateMapPlanes
 
 
 ; =============== S U B R O U T I N E =======================================
 
-VInt_UpdateAnimatingTiles:
+VInt_UpdateMapAnimations:
                 
                 move.l  ((TILE_ANIM_DATA_ADDR-$1000000)).w,d0
                 ble.s   return_47C4
@@ -88,5 +86,5 @@ return_47C4:
                 
                 rts
 
-	; End of function VInt_UpdateAnimatingTiles
+	; End of function VInt_UpdateMapAnimations
 

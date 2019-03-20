@@ -13,7 +13,7 @@ byte_5F9D6:     msEntityEvent 128, UP, Map37_3E7_EntityEvent1-ms_map37_flag3E7_E
 Map37_DefaultEntityEvent:
                 
                 moveq   #(byte_5F9D6-ms_map37_flag3E7_EntityEvents),d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 move.w  #$EAC,d0
                 add.w   d7,d0
                 jsr     (DisplayText).w 

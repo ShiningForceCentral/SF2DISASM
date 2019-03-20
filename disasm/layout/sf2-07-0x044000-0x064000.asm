@@ -88,8 +88,8 @@ j_MapEventType4:
                 jmp     MapEventType4(pc)
 j_ShrinkInBowieAndFollowers:                
                 jmp     ShrinkIntoCaravanBowieAndFollowers(pc)
-j_GrowOutBowieAndFollowoers:                
-                jmp     GrowOutBowieAndFollowoers(pc)
+j_GrowOutBowieAndFollowers:                
+                jmp     GrowOutBowieAndFollowers(pc)
 j_RunMapSetupInitFunction:                
                 jmp     RunMapSetupInitFunction(pc)
 sub_440AC:                

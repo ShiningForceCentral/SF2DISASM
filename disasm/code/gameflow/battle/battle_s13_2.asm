@@ -910,7 +910,7 @@ loc_1B19B0:
                 addi.w  #1,d6
 loc_1B19B8:
                 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d7,d3
                 cmp.b   1(a0),d3
                 bge.s   loc_1B19D8

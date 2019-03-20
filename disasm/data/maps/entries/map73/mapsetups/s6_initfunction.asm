@@ -48,8 +48,8 @@ loc_50370:
 
 sub_50380:
                 
-                move.w  #$1200,((word_FFA814-$1000000)).w
-                move.w  #$3F60,((word_FFA816-$1000000)).w
+                move.w  #$1200,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
+                move.w  #$3F60,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
                 rts
 
 	; End of function sub_50380
@@ -63,7 +63,7 @@ sub_5038E:
 loc_50390:
                 
                 subq.b  #1,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 dbf     d7,loc_50390
                 rts
 

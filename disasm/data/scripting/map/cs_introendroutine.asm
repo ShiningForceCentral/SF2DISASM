@@ -14,16 +14,16 @@ PlayIntroOrEndCutscene:
                 dc.w VINTS_CLEAR
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                dc.l VInt_4744
+                dc.l VInt_UpdateMapPlanes
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateEntities
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                dc.l VInt_AdjustCameraToPlayer
+                dc.l VInt_UpdateViewData
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                dc.l VInt_3930          
+                dc.l VInt_UpdateScrollingData
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateSprites
@@ -32,7 +32,7 @@ PlayIntroOrEndCutscene:
                 dc.l VInt_UpdateWindows
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                dc.l VInt_UpdateAnimatingTiles
+                dc.l VInt_UpdateMapAnimations
                 move.b  #$FF,((CURRENT_BATTLE-$1000000)).w
                 jsr     (sub_4EC6).w    
                 move.w  (sp)+,d0

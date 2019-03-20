@@ -224,11 +224,11 @@ loc_6472:
                 
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
-                bsr.w   UpdateRandomSeed
+                bsr.w   GenerateRandomNumber
                 move.b  d7,((RANDOM_WAITING_FOR_INPUT-$1000000)).w
                 movem.l (sp)+,d6-d7
                 bsr.s   sub_64A8
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
                 andi.b  #$7F,d1 
                 beq.s   loc_6472
@@ -368,10 +368,10 @@ loc_659C:
                 
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
-                bsr.w   UpdateRandomSeed
+                bsr.w   GenerateRandomNumber
                 move.b  d7,((RANDOM_WAITING_FOR_INPUT-$1000000)).w
                 movem.l (sp)+,d6-d7
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
 loc_65B4:
                 
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
@@ -395,7 +395,7 @@ loc_65D8:
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
                 andi.b  #$7F,d1 
                 bne.s   loc_65F0
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
 loc_65EC:
                 
                 dbf     d0,loc_65D8
@@ -428,7 +428,7 @@ clear:
                 move.w  (sp)+,d0
                 move.w  #$8080,d1
                 bsr.w   SetWindowDestination
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 bra.w   loc_62CA
 color:
                 
@@ -761,7 +761,7 @@ loc_6798:
                 subq.w  #1,d0
                 move.w  #$213,d1
                 move.w  #8,d2
-                bsr.w   MoveWindowWithoutSFX
+                bsr.w   MoveWindow      
                 moveq   #8,d0
                 bsr.w   Sleep           
                 bra.s   return_67E4
@@ -771,10 +771,10 @@ loc_67CE:
                 subq.w  #1,d0
                 move.w  #$215,d1
                 move.w  #1,d2
-                bsr.w   MoveWindowWithoutSFX
+                bsr.w   MoveWindow      
 loc_67E0:
                 
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
 return_67E4:
                 
                 rts
@@ -939,7 +939,7 @@ loc_68E6:
                 bne.s   return_68FA
 loc_68F2:
                 
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 dbf     d0,loc_68E6
 return_68FA:
                 
@@ -952,7 +952,7 @@ return_68FA:
 
 loc_68FC:
                 
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
 loc_6900:
                 
                 lea     (FF6802_LOADING_SPACE).l,a0
@@ -1067,19 +1067,19 @@ loc_6A44:
                 cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6A56
                 moveq   #8,d2
-                bsr.w   MoveWindowWithoutSFX
+                bsr.w   MoveWindow      
                 bra.s   loc_6A68
 loc_6A56:
                 
                 moveq   #1,d2
-                bsr.w   MoveWindowWithoutSFX
+                bsr.w   MoveWindow      
                 moveq   #1,d0
                 move.w  #$8080,d1
                 moveq   #1,d2
-                bsr.w   MoveWindowWithoutSFX
+                bsr.w   MoveWindow      
 loc_6A68:
                 
-                bsr.w   WaitForVint_andFFA900Clear
+                bsr.w   WaitForWindowMovementEnd
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 bsr.w   ClearWindowAndUpdateEndPtr
@@ -1143,7 +1143,7 @@ sub_6AD2:
                 
                 bsr.w   sub_6AE0
                 bsr.w   sub_6AE0
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 rts
 
 	; End of function sub_6AD2
@@ -1181,7 +1181,7 @@ loc_6B18:
                 
                 move.w  #$8080,d1
                 bsr.w   SetWindowDestination
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 move.w  (sp)+,d0
                 lsl.w   #3,d0
                 add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0

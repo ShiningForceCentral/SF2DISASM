@@ -4,29 +4,29 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-VInt_AdjustCameraToPlayer:
+VInt_UpdateViewData:
                 
                 clr.w   d0
-                move.b  ((CAMERA_ENTITY-$1000000)).w,d0
-                bmi.w   loc_468C
+                move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d0
+                bmi.w   loc_468C        
                 lsl.w   #5,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
-                move.w  (a0)+,d4
-                move.w  (a0)+,d5
+                move.w  (a0)+,d4        ; Entity X
+                move.w  (a0)+,d5        ; Entity Y
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_45E8
-                move.w  ((word_FFA814-$1000000)).w,d2
-                move.w  ((word_FFA816-$1000000)).w,d3
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d3
                 bra.s   loc_45F0
 loc_45E8:
                 
-                move.w  ((word_FFA810-$1000000)).w,d2
-                move.w  ((word_FFA812-$1000000)).w,d3
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d3
 loc_45F0:
                 
                 clr.w   d6
-                bsr.w   IsMapScrollingToFollowCameraTarget
+                bsr.w   IsMapScrollingToViewTarget
                 bne.w   return_4706
                 move.w  d2,d7
                 addi.w  #$600,d7
@@ -80,15 +80,15 @@ loc_4676:
                 beq.s   loc_4688
                 move.w  d2,d0
                 move.w  d3,d1
-                bsr.w   SetCameraDest
+                bsr.w   SetViewDest
                 addq.w  #1,((word_FFA828-$1000000)).w
-                bra.s   loc_468C
+                bra.s   loc_468C        
 loc_4688:
                 
                 clr.w   ((word_FFA828-$1000000)).w
 loc_468C:
                 
-                move.w  ((word_FFA828-$1000000)).w,d7
+                move.w  ((word_FFA828-$1000000)).w,d7; No entity to follow
                 cmpi.w  #6,d7
                 ble.s   loc_469C
                 move.w  #$20,d7 
@@ -98,19 +98,19 @@ loc_469C:
                 move.w  #$18,d7
 loc_46A0:
                 
-                cmpi.b  #$30,((CAMERA_ENTITY-$1000000)).w
+                cmpi.b  #$30,((VIEW_TARGET_ENTITY-$1000000)).w
                 bne.s   loc_46AA
                 moveq   #$40,d7 
 loc_46AA:
                 
                 cmpi.b  #5,((FADING_SETTING-$1000000)).w
                 bne.s   loc_46B4
-                moveq   #$20,d7 ; base camera speed
+                moveq   #$20,d7 
 loc_46B4:
                 
-                tst.w   ((CAMERA_SPEED-$1000000)).w
+                tst.w   ((VIEW_SCROLLING_SPEED-$1000000)).w
                 beq.s   loc_46BE
-                move.w  ((CAMERA_SPEED-$1000000)).w,d7
+                move.w  ((VIEW_SCROLLING_SPEED-$1000000)).w,d7
 loc_46BE:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
@@ -147,30 +147,28 @@ return_4706:
                 
                 rts
 
-	; End of function VInt_AdjustCameraToPlayer
+	; End of function VInt_UpdateViewData
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; wait for end of scrolling
-
-WaitForCameraToCatchUp:
+WaitForViewScrollEnd:
                 
                 move.w  d7,-(sp)
 loc_470A:
                 
-                bsr.w   IsMapScrollingToFollowCameraTarget
+                bsr.w   IsMapScrollingToViewTarget
                 beq.s   loc_4716
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 bra.s   loc_470A
 loc_4716:
                 
-                bsr.w   WaitForVInt     
-                bsr.w   IsMapScrollingToFollowCameraTarget
+                bsr.w   WaitForVInt
+                bsr.w   IsMapScrollingToViewTarget
                 bne.s   loc_470A
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 move.w  (sp)+,d7
                 rts
 
-	; End of function WaitForCameraToCatchUp
+	; End of function WaitForViewScrollEnd
 

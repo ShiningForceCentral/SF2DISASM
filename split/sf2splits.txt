@@ -845,9 +845,6 @@
 #split	0xB1E,0xB96,data/graphics/tech/fadingdata.bin
 #split	0x309E,0x30BE,data/graphics/tech/basepalette.bin
 #split	0x31CE,0x364E,data/maps/global/mapoffsethashtable.bin
-#split	0x7A36,0x7B71,data/battles/global/battlemapcoords.bin
-#split	0x7B71,0x7BCA,data/battles/global/savepointmapcoords.bin
-#split	0x7BCA,0x7BDE,data/battles/global/raftresetmapcoords.bin
 #split	0x853A,0x855A,data/stats/allies/classes/classtypes.bin
 #split	0xACCA,0xACEA,data/stats/allies/classes/criticalhitsettings.bin
 #split	0xBCF0,0xBD24,data/stats/items/itembreakmessages.bin
@@ -880,9 +877,6 @@
 #split	0x17F3E,0x17FDA,data/stats/allies/classes/classnames.bin
 #split	0x198A8,0x198C8,data/graphics/battles/plt_battlescenebasepalette.bin
 #split	0x19E5E,0x19E6E,data/battles/global/terrainbackgrounds.bin
-#split	0x1F806,0x1F914,data/stats/allies/allybattlesprites.bin
-#split	0x1F914,0x1F9E2,data/stats/enemies/enemybattlesprites.bin
-#split	0x1F9E2,0x1FA8A,data/stats/items/weaponsprites.bin
 #split	0x1FAEA,0x1FDEA,data/graphics/tech/backgroundlayout.bin
 #split	0x20878,0x20A02,data/stats/items/shopitems.bin
 #split	0x21046,0x21072,data/stats/allies/promotions.bin

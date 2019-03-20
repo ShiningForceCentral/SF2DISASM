@@ -191,15 +191,15 @@ ENEMYAI_THRESHOLD_HEAL3: equ $1C
 
 ; ---------------------------------------------------------------------------
 
-; enum Controller_Input_A_Bitfield
-INPUT_A_UP_BIT: equ $0
-INPUT_A_DOWN_BIT: equ $1
-INPUT_A_LEFT_BIT: equ $2
-INPUT_A_RIGHT_BIT: equ $3
-INPUT_A_B_BIT: equ $4
-INPUT_A_C_BIT: equ $5
-INPUT_A_A_BIT: equ $6
-INPUT_A_START_BIT: equ $7
+; enum Controller_Input_A_Bitmap
+INPUT_A_UP: equ $0
+INPUT_A_DOWN: equ $1
+INPUT_A_LEFT: equ $2
+INPUT_A_RIGHT: equ $3
+INPUT_A_B: equ $4
+INPUT_A_C: equ $5
+INPUT_A_A: equ $6
+INPUT_A_START: equ $7
 
 ; ---------------------------------------------------------------------------
 
@@ -657,6 +657,22 @@ STATUSEFFECT_LASTING_EFFECTS_MASK: equ $7
 
 ; enum Gold
 GOLD_STARTING_AMOUNT: equ $3C
+
+; ---------------------------------------------------------------------------
+
+; enum WindowProperties
+ACTIVE: equ $0
+LAYOUT_OFFSET: equ $2
+WIDTH: equ $4
+HEIGHT: equ $5
+X: equ $6
+Y: equ $7
+ANIM_ORIG_X: equ $8
+ANIM_ORIG_Y: equ $9
+ANIM_DEST_X: equ $A
+ANIM_DEST_Y: equ $B
+ANIM_LENGTH: equ $C
+ANIM_COUNTER: equ $D
 
 ; ---------------------------------------------------------------------------
 

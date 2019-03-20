@@ -439,7 +439,7 @@ loc_21EE8:
                 dbf     d7,loc_21EE4
                 clr.w   d0
                 move.w  #2,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 cmpi.w  #0,d7
                 bne.w   loc_21F16
                 move.w  #2,d0
@@ -456,7 +456,7 @@ loc_21F22:
                 move.b  (a0)+,d0
                 move.b  (a0)+,d1
                 move.w  d0,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 cmpi.w  #0,d7
                 beq.w   loc_21F3C
                 dbf     d5,loc_21F22

@@ -4,9 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; d6 = random number max value (number of seed upper bits)
+; In: D6=Value range, Out: D7=Random value
 
-UpdateRandomSeed:
+GenerateRandomNumber:
                 
                 move.w  (RANDOM_SEED).l,d7
                 mulu.w  #$D,d7
@@ -21,7 +21,7 @@ UpdateRandomSeed:
                 lsr.w   #1,d7
                 rts
 
-	; End of function UpdateRandomSeed
+	; End of function GenerateRandomNumber
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -88,20 +88,20 @@ GetRandomOrDebugValue:
                 tst.b   (DEBUG_MODE_ACTIVATED).l
                 beq.s   loc_16B2
                 moveq   #0,d0
-                btst    #INPUT_A_RIGHT_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_RIGHT,((P1_INPUT-$1000000)).w
                 bne.w   loc_16B8
                 moveq   #1,d0
-                btst    #INPUT_A_UP_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((P1_INPUT-$1000000)).w
                 bne.w   loc_16B8
                 moveq   #2,d0
-                btst    #INPUT_A_LEFT_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_LEFT,((P1_INPUT-$1000000)).w
                 bne.w   loc_16B8
                 moveq   #3,d0
-                btst    #INPUT_A_DOWN_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((P1_INPUT-$1000000)).w
                 bne.w   loc_16B8
 loc_16B2:
                 
-                bsr.w   UpdateRandomSeed
+                bsr.w   GenerateRandomNumber
                 move.w  d7,d0
 loc_16B8:
                 

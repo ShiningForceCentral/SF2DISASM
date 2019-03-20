@@ -18,25 +18,25 @@ loc_4C74:
                 lea     (SPRITE_16).l,a1
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_4CB2
-                move.w  ((word_FFA806-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
                 sub.w   (HORIZONTAL_SCROLL_DATA+2).l,d2
                 asl.w   #4,d2
-                add.w   ((word_FFA814-$1000000)).w,d2
+                add.w   ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
                 move.w  (VERTICAL_SCROLL_DATA+2).l,d3
-                sub.w   ((word_FFA80A-$1000000)).w,d3
+                sub.w   ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
                 asl.w   #4,d3
-                add.w   ((word_FFA816-$1000000)).w,d3
+                add.w   ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d3
                 bra.s   loc_4CD2
 loc_4CB2:
                 
-                move.w  ((word_FFA804-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
                 sub.w   (HORIZONTAL_SCROLL_DATA).l,d2
                 asl.w   #4,d2
-                add.w   ((word_FFA810-$1000000)).w,d2
+                add.w   ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d2
                 move.w  (VERTICAL_SCROLL_DATA).l,d3
-                sub.w   ((word_FFA808-$1000000)).w,d3
+                sub.w   ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
                 asl.w   #4,d3
-                add.w   ((word_FFA812-$1000000)).w,d3
+                add.w   ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d3
 loc_4CD2:
                 
                 subi.w  #$F,d2
@@ -45,7 +45,7 @@ loc_4CD2:
 loc_4CDC:
                 
                 move.w  (a0),d0
-                move.w  2(a0),d1
+                move.w  ENTITYDEF_OFFSET_Y(a0),d1
                 sub.w   d2,d0
                 sub.w   d3,d1
                 asr.w   #4,d0
@@ -58,7 +58,7 @@ loc_4CDC:
                 blt.w   sub_4E1E
                 cmpi.w  #$100,d1
                 bgt.w   sub_4E1E
-                btst    #7,$1D(a0)
+                btst    #7,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 beq.s   loc_4D18
                 tst.b   d6
                 bge.w   sub_4E1E
@@ -73,7 +73,7 @@ loc_4D20:
                 bra.w   loc_4DC4
 loc_4D2A:
                 
-                move.b  $1E(a0),d4
+                move.b  ENTITYDEF_OFFSET_ANIMCOUNTER(a0),d4
                 cmpi.b  #$F,d4
                 bge.s   loc_4D3A
                 move.w  #$380,d5
@@ -86,7 +86,7 @@ loc_4D3E:
                 cmpi.b  #$FF,d4
                 beq.s   loc_4D5C
                 addq.b  #1,d4
-                btst    #4,$1D(a0)
+                btst    #4,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 beq.s   loc_4D50
                 addq.b  #2,d4
 loc_4D50:
@@ -96,7 +96,7 @@ loc_4D50:
                 clr.w   d4
 loc_4D58:
                 
-                move.b  d4,$1E(a0)
+                move.b  d4,ENTITYDEF_OFFSET_ANIMCOUNTER(a0)
 loc_4D5C:
                 
                 move.w  d6,-(sp)
@@ -933,7 +933,7 @@ loc_5472:
                 move.w  (a0),d0
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
                 moveq   #4,d6
-                bsr.w   UpdateRandomSeed
+                bsr.w   GenerateRandomNumber
                 move.w  d7,d6
                 movem.w (sp)+,d7
                 bne.s   loc_549A
@@ -1057,12 +1057,6 @@ loc_55C4:
                 
                 move.w  (sp)+,d6
                 addq.l  #8,a1
-
-	; End of function esc06_
-
-
-; START OF FUNCTION CHUNK FOR esc04_moveToRelativeDest
-
 loc_55C8:
                 
                 clr.w   d4
@@ -1099,7 +1093,7 @@ loc_55FC:
                 move.w  d5,6(a0)
                 bra.w   esc_clearTimerGoToNextCommand
 
-; END OF FUNCTION CHUNK FOR esc04_moveToRelativeDest
+	; End of function esc06_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1340,7 +1334,7 @@ esc08_:
                 moveq   #$FFFFFFFF,d6
 loc_5810:
                 
-                btst    #INPUT_A_UP_BIT,-$A(a6)
+                btst    #INPUT_A_UP,-$A(a6)
                 beq.s   loc_582C
                 cmp.w   -2(a6),d1
                 ble.s   loc_582C
@@ -1351,7 +1345,7 @@ loc_5810:
                 moveq   #1,d6
 loc_582C:
                 
-                btst    #INPUT_A_DOWN_BIT,-$A(a6)
+                btst    #INPUT_A_DOWN,-$A(a6)
                 beq.s   loc_5846
                 cmp.w   -6(a6),d1
                 bge.s   loc_5846
@@ -1361,7 +1355,7 @@ loc_582C:
                 moveq   #3,d6
 loc_5846:
                 
-                btst    #INPUT_A_LEFT_BIT,-$A(a6)
+                btst    #INPUT_A_LEFT,-$A(a6)
                 beq.s   loc_5862
                 cmp.w   -4(a6),d0
                 ble.s   loc_5862
@@ -1372,7 +1366,7 @@ loc_5846:
                 moveq   #2,d6
 loc_5862:
                 
-                btst    #INPUT_A_RIGHT_BIT,-$A(a6)
+                btst    #INPUT_A_RIGHT,-$A(a6)
                 beq.s   loc_587C
                 cmp.w   -8(a6),d0
                 bge.s   loc_587C
@@ -2093,7 +2087,7 @@ esc33_randomBranch:
                 
                 movem.w d6-d7,-(sp)
                 move.w  #2,d6
-                bsr.w   UpdateRandomSeed
+                bsr.w   GenerateRandomNumber
                 tst.w   d7
                 movem.w (sp)+,d6-d7
                 bne.s   loc_5D04
@@ -2200,10 +2194,6 @@ UpdateNextEntity:
 
 ; =============== S U B R O U T I N E =======================================
 
-; update entity based on entity params (all movement is done here, it seems like)
-; 
-; In: A0 = entity RAM addr
-
 UpdateEntityData:
                 
                 move.w  (a0),d0         ; X position
@@ -2234,14 +2224,14 @@ loc_5DA0:
                 lsr.w   #2,d6
                 lsr.w   #2,d7           ; ok so d7 = 3/4 * original X offset, and d6 = original X offset / 4
                 clr.w   d4
-                btst    #0,$1C(a0)
+                btst    #0,ENTITYDEF_OFFSET_FLAGS_A(a0)
                 beq.s   loc_5DC0
                 cmp.w   d7,d0
                 blt.s   loc_5DC0
                 move.b  $18(a0),d4
 loc_5DC0:
                 
-                btst    #2,$1C(a0)
+                btst    #2,ENTITYDEF_OFFSET_FLAGS_A(a0)
                 beq.s   loc_5DD2
                 cmp.w   d6,d0
                 bge.s   loc_5DD2
@@ -2262,7 +2252,7 @@ loc_5DDC:
                 lsr.w   #2,d6
                 lsr.w   #2,d7
                 clr.w   d5
-                btst    #1,$1C(a0)
+                btst    #1,ENTITYDEF_OFFSET_FLAGS_A(a0)
                 beq.s   loc_5DFC
                 cmp.w   d7,d1
                 blt.s   loc_5DFC
@@ -2439,17 +2429,17 @@ loc_5F54:
                 clr.b   $11(a0)
 loc_5F5E:
                 
-                move.b  $1D(a0),d1
+                move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d1
                 cmpi.w  #$3400,d0
                 bne.s   loc_5F70
-                bset    #5,$1D(a0)
+                bset    #5,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 bra.s   loc_5F76
 loc_5F70:
                 
-                bclr    #5,$1D(a0)
+                bclr    #5,ENTITYDEF_OFFSET_FLAGS_B(a0)
 loc_5F76:
                 
-                move.b  $1D(a0),d2
+                move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d2
                 eor.b   d2,d1
                 btst    #5,d1
                 beq.s   loc_5F8A
@@ -2558,8 +2548,6 @@ return_6022:
 
 ; =============== S U B R O U T I N E =======================================
 
-; load all entities for the current map
-
 LoadMapEntitySprites:
                 
                 bsr.w   DisableDisplayAndVInt
@@ -2570,7 +2558,7 @@ loc_602E:
                 cmpi.w  #$7000,(a0)
                 beq.s   loc_603C
                 move.w  d7,-(sp)
-                bsr.w   sub_618A
+                bsr.w   DmaMapSprite
                 move.w  (sp)+,d7
 loc_603C:
                 
@@ -2581,7 +2569,7 @@ loc_603C:
 
 	; End of function LoadMapEntitySprites
 
-FacingValuesbis:dc.b 0
+FacingValues_2: dc.b 0
                 dc.b 1
                 dc.b 2
                 dc.b 3
@@ -2592,7 +2580,7 @@ FacingValuesbis:dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = entity idx
+; In D0=Entity index
 
 UpdateEntityProperties:
                 
@@ -2637,14 +2625,13 @@ UpdateEntitySprite:
 
 ; =============== S U B R O U T I N E =======================================
 
-; a0 : entity address
-; d6 : facing
+; A0=Entity address, D6=Facing
 
 ChangeEntitySprite:
                 
                 move.b  d6,ENTITYDEF_OFFSET_FACING(a0)
                 ext.w   d6
-                move.b  FacingValuesbis(pc,d6.w),d6
+                move.b  FacingValues_2(pc,d6.w),d6
                 bne.s   loc_60B6
                 addq.w  #2,d6
 loc_60B6:
@@ -2742,10 +2729,10 @@ FacingValues:   dc.b 0                  ; 8 bytes holding facing values for spri
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_618A:
+DmaMapSprite:
                 
                 clr.w   d6
-                move.b  $10(a0),d6
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d6
                 move.b  FacingValues(pc,d6.w),d6
                 bne.s   loc_6198
                 addq.w  #2,d6
@@ -2753,11 +2740,11 @@ loc_6198:
                 
                 movem.l a0-a1,-(sp)
                 clr.w   d1
-                move.b  $12(a0),d1
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
                 move.w  d1,-(sp)
                 clr.w   d1
-                move.b  $13(a0),d1
-                cmpi.w  #$F0,d1 
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+                cmpi.w  #240,d1         ; HARDCODED special sprite mapsprite start index
                 blt.s   loc_61BA
                 jsr     j_LoadSpecialSprite
                 move.w  (sp)+,d1
@@ -2790,7 +2777,7 @@ loc_61F6:
                 movem.l (sp)+,a0-a1
                 rts
 
-	; End of function sub_618A
+	; End of function DmaMapSprite
 
 
 ; =============== S U B R O U T I N E =======================================

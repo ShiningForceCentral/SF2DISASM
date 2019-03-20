@@ -28,7 +28,7 @@ TitleScreen:
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDMA).w
                 conditionalPc lea,TitleScreenLayoutA,a0
-                lea     (byte_FFC000).l,a1
+                lea     (PLANE_A_MAP_LAYOUT).l,a1
                 move.w  #$700,d7
                 jsr     (CopyBytes).w   
                 conditionalPc lea,TitleScreenLayoutA,a0
@@ -40,7 +40,7 @@ TitleScreen:
                 lea     (byte_FFC480).l,a1
                 moveq   #$40,d7 
                 jsr     (CopyBytes).w   
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$380,d0
                 moveq   #2,d1
@@ -154,7 +154,7 @@ loc_1001EC:
 
 WaitForPlayer1InputStart:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 btst    #7,((P1_INPUT-$1000000)).w
                 bne.w   TitleScreenEnd
                 subq.w  #1,d0
@@ -176,7 +176,7 @@ loc_10022C:
                 
                 jsr     (UpdateVDPVScrollData).w
                 jsr     (WaitForDMAQueueProcessing).w
-                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 bne.w   TitleScreenEnd
                 subq.w  #1,d0
                 bne.s   TitleScreenLoop1
@@ -203,15 +203,15 @@ loc_100260:
                 lea     (byte_FFC480).l,a1
                 moveq   #$40,d7 
                 jsr     (CopyBytes).w   
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$380,d0
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDMA).w
                 jsr     (EnableDMAQueueProcessing).w
                 movem.w (sp)+,d0
-                jsr     (WaitForVInt).w 
-                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                jsr     (WaitForVInt).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 bne.w   TitleScreenEnd
                 subq.w  #1,d0
                 bne.s   TitleScreenLoop2

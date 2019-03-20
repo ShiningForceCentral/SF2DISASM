@@ -8,13 +8,13 @@ InitWindowProperties:
                 
                 move.l  a0,-(sp)
                 move.w  d7,-(sp)
-                lea     (WINDOW_PROPERTIES).l,a0
+                lea     (WINDOW_ENTRIES).l,a0
                 moveq   #$1F,d7
 loc_47D2:
                 
                 clr.l   (a0)+
                 dbf     d7,loc_47D2
-                move.l  #VDP_TILE_IDX_LIST,((WINDOW_TILES_END-$1000000)).w
+                move.l  #WINDOW_TILE_LAYOUTS,((WINDOW_LAYOUTS_END-$1000000)).w
                 move.w  (sp)+,d7
                 movea.l (sp)+,a0
                 clr.b   ((WINDOW_IS_PRESENT-$1000000)).w
@@ -40,7 +40,7 @@ CreateWindow:
                 
                 move.l  a0,-(sp)
                 movem.w d6-d7,-(sp)
-                lea     (WINDOW_PROPERTIES).l,a0
+                lea     (WINDOW_ENTRIES).l,a0
                 clr.w   d6
                 moveq   #7,d7
 loc_4812:
@@ -54,10 +54,10 @@ loc_4812:
                 bra.w   loc_485E
 loc_4826:
                 
-                movea.l ((WINDOW_TILES_END-$1000000)).w,a1
-                cmpa.l  #VDP_TILE_IDX_LIST,a1
+                movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
+                cmpa.l  #WINDOW_TILE_LAYOUTS,a1
                 bne.s   loc_4836        
-                bsr.w   CopyFFC000toFFC800
+                bsr.w   CopyPlaneALayoutForWindows
 loc_4836:
                 
                 move.l  a1,(a0)+        ; window tiles end
@@ -73,7 +73,7 @@ loc_4836:
                 mulu.w  d7,d0
                 add.w   d0,d0
                 adda.w  d0,a1
-                move.l  a1,((WINDOW_TILES_END-$1000000)).w
+                move.l  a1,((WINDOW_LAYOUTS_END-$1000000)).w
                 move.w  d6,d0
                 movea.l -$10(a0),a1
 loc_485E:
@@ -87,9 +87,7 @@ loc_485E:
 
 ; =============== S U B R O U T I N E =======================================
 
-;     startWindowTransition ???
-;     In: D0 = window number
-;     Cross: getAddressOfWindowInfo
+; In DO=Windows index, D1=Value ($8080->X/Y), Out A0=Window properties
 
 SetWindowDestination:
                 
@@ -98,17 +96,17 @@ SetWindowDestination:
                 bsr.w   GetWindowInfo   
                 tst.l   (a0)
                 beq.w   loc_4898
-                move.w  6(a0),d0
-                cmp.w   $A(a0),d0
+                move.w  X(a0),d0
+                cmp.w   ANIM_DEST_X(a0),d0
                 bne.w   loc_4898
                 cmpi.w  #$8080,d1
                 bne.s   loc_488A
                 move.w  d0,d1
 loc_488A:
                 
-                move.w  d1,8(a0)
-                move.w  d1,$A(a0)
-                move.w  #$100,$C(a0)
+                move.w  d1,ANIM_ORIG_X(a0)
+                move.w  d1,ANIM_DEST_X(a0)
+                move.w  #$100,ANIM_LENGTH(a0)
 loc_4898:
                 
                 movem.w (sp)+,d0-d1
@@ -120,10 +118,10 @@ loc_4898:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_48A0:
+FixWindowsPositions:
                 
                 movem.w d0-d1/d7,-(sp)
-                bsr.w   CopyFFC000toFFC800
+                bsr.w   CopyPlaneALayoutForWindows
                 clr.w   d0
                 move.w  #$8080,d1
                 moveq   #7,d7
@@ -135,7 +133,7 @@ loc_48B0:
                 movem.w (sp)+,d0-d1/d7
                 rts
 
-	; End of function sub_48A0
+	; End of function FixWindowsPositions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -155,24 +153,24 @@ sub_48BE:
 
 ; =============== S U B R O U T I N E =======================================
 
-CopyFFC000toFFC800:
+CopyPlaneALayoutForWindows:
                 
                 movem.l a0-a1,-(sp)
                 move.w  d7,-(sp)
-                lea     (byte_FFC000).l,a0
-                lea     (byte_FFC800).l,a1
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
+                lea     (PLANE_A_MAP_AND_WINDOWS_LAYOUT).l,a1
                 move.w  #$800,d7
                 bsr.w   CopyBytes       
                 move.w  (sp)+,d7
                 movem.l (sp)+,a0-a1
                 rts
 
-	; End of function CopyFFC000toFFC800
+	; End of function CopyPlaneALayoutForWindows
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; set window D0's dest to D1 (xxyy) and play window switching sound
+; D0=Windows index, D1=Destination, D2=Anim max
 
 MoveWindowWithSFX:
                 
@@ -184,9 +182,9 @@ MoveWindowWithSFX:
 
 ; =============== S U B R O U T I N E =======================================
 
-; set window D0's dest to D1 (xxyy)
+; D0=Windows index, D1=Destination, D2=Anim max
 
-MoveWindowWithoutSFX:
+MoveWindow:
                 
                 tst.b   ((SPECIAL_TURBO_CHEAT-$1000000)).w
                 beq.s   loc_4900
@@ -198,18 +196,18 @@ loc_4900:
                 bsr.w   GetWindowInfo   
                 cmpi.w  #$8080,d1
                 bne.s   loc_4914
-                move.w  6(a0),d1
+                move.w  X(a0),d1
 loc_4914:
                 
-                move.w  6(a0),8(a0)
-                move.w  d1,$A(a0)
-                move.b  d2,$C(a0)
-                clr.b   $D(a0)
+                move.w  X(a0),ANIM_ORIG_X(a0)
+                move.w  d1,ANIM_DEST_X(a0)
+                move.b  d2,ANIM_LENGTH(a0)
+                clr.b   ANIM_COUNTER(a0)
                 movem.w (sp)+,d0-d1
                 movea.l (sp)+,a0
                 rts
 
-	; End of function MoveWindowWithoutSFX
+	; End of function MoveWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -220,7 +218,7 @@ ClearWindowAndUpdateEndPtr:
                 bsr.w   GetWindowInfo   
                 clr.l   (a0)
                 clr.l   d1
-                lea     (WINDOW_PROPERTIES).l,a0
+                lea     (WINDOW_ENTRIES).l,a0
                 moveq   #7,d0
                 clr.w   d3
                 clr.w   d4
@@ -230,15 +228,15 @@ loc_4946:
                 cmp.l   d1,d2
                 bls.s   loc_4956
                 move.l  d2,d1
-                move.b  4(a0),d3
-                move.b  5(a0),d4
+                move.b  WIDTH(a0),d3
+                move.b  HEIGHT(a0),d4
 loc_4956:
                 
                 lea     $10(a0),a0
                 dbf     d0,loc_4946
                 tst.l   d1
                 bne.s   loc_496A
-                move.l  #VDP_TILE_IDX_LIST,d1
+                move.l  #WINDOW_TILE_LAYOUTS,d1
                 bra.s   loc_4972
 loc_496A:
                 
@@ -248,7 +246,7 @@ loc_496A:
                 add.l   d3,d1
 loc_4972:
                 
-                move.l  d1,((WINDOW_TILES_END-$1000000)).w
+                move.l  d1,((WINDOW_LAYOUTS_END-$1000000)).w
                 movem.l (sp)+,d0-d4/a0-a1
                 rts
 
@@ -257,28 +255,28 @@ loc_4972:
 
 ; =============== S U B R O U T I N E =======================================
 
-WaitForVint_andFFA900Clear:
+WaitForWindowMovementEnd:
                 
-                bsr.w   WaitForVInt     
-                tst.b   ((word_FFA900-$1000000)).w
-                bne.s   WaitForVint_andFFA900Clear
+                bsr.w   WaitForVInt
+                tst.b   ((MOVING_WINDOWS_BITMAP-$1000000)).w
+                bne.s   WaitForWindowMovementEnd
                 rts
 
-	; End of function WaitForVint_andFFA900Clear
+	; End of function WaitForWindowMovementEnd
 
 
 ; =============== S U B R O U T I N E =======================================
 
 VInt_UpdateWindows:
                 
-                cmpi.l  #VDP_TILE_IDX_LIST,((WINDOW_TILES_END-$1000000)).w
+                cmpi.l  #WINDOW_TILE_LAYOUTS,((WINDOW_LAYOUTS_END-$1000000)).w
                 bne.s   loc_4994
                 rts
 loc_4994:
                 
-                clr.b   ((word_FFA900-$1000000)).w
+                clr.b   ((MOVING_WINDOWS_BITMAP-$1000000)).w
                 moveq   #7,d7
-                lea     (WINDOW_PROPERTIES).l,a2
+                lea     (WINDOW_ENTRIES).l,a2
 loc_49A0:
                 
                 tst.l   (a2)
@@ -288,7 +286,7 @@ loc_49A0:
                 beq.w   loc_49C8
                 moveq   #7,d0
                 sub.w   d7,d0
-                bset    d0,((word_FFA900-$1000000)).w
+                bset    d0,((MOVING_WINDOWS_BITMAP-$1000000)).w
                 movea.l (a2),a0
                 move.w  4(a2),d0
                 move.w  6(a2),d1
@@ -298,7 +296,7 @@ loc_49C8:
                 lea     $10(a2),a2
                 dbf     d7,loc_49A0
                 moveq   #7,d7
-                lea     (WINDOW_PROPERTIES).l,a2
+                lea     (WINDOW_ENTRIES).l,a2
 loc_49D8:
                 
                 tst.l   (a2)
@@ -365,7 +363,7 @@ loc_4A72:
                 beq.s   loc_4A92
                 tst.b   ((byte_FFA8FE-$1000000)).w
                 bne.s   loc_4A90
-                bsr.w   CopyFFC000toFFC800
+                bsr.w   CopyPlaneALayoutForWindows
                 move.w  #$FFFF,((byte_FFA8FE-$1000000)).w
 loc_4A90:
                 
@@ -374,14 +372,14 @@ loc_4A92:
                 
                 tst.b   ((byte_FFA8FE-$1000000)).w
                 beq.s   loc_4AA2
-                bsr.w   sub_48A0
+                bsr.w   FixWindowsPositions
                 move.w  #$FF,((byte_FFA8FE-$1000000)).w
 loc_4AA2:
                 
                 tst.b   ((byte_FFA8FF-$1000000)).w
                 beq.s   return_4AC6
-                lea     (byte_FFC800).l,a0
-                lea     ($C000).l,a1
+                lea     (PLANE_A_MAP_AND_WINDOWS_LAYOUT).l,a0
+                lea     ($C000).l,a1    ; Update VDP Plane A
                 move.w  #$400,d0
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDMA
@@ -400,7 +398,7 @@ sub_4AC8:
                 
                 movem.l a0-a1,-(sp)
                 movem.w d0-d3/d6-d7,-(sp)
-                lea     (byte_FFC800).l,a1
+                lea     (PLANE_A_MAP_AND_WINDOWS_LAYOUT).l,a1
 loc_4AD6:
                 
                 bsr.w   sub_4BEA
@@ -475,8 +473,8 @@ sub_4B5C:
                 
                 movem.l a0-a1,-(sp)
                 movem.w d0-d1/d6-d7,-(sp)
-                lea     (byte_FFC000).l,a0
-                lea     (byte_FFC800).l,a1
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
+                lea     (PLANE_A_MAP_AND_WINDOWS_LAYOUT).l,a1
                 bsr.w   sub_4BEA
                 move.w  d0,d1
                 ext.w   d0
@@ -574,14 +572,12 @@ return_4C36:
 
 ; =============== S U B R O U T I N E =======================================
 
-;     Get address in RAM of window info, starting at RAM:a87e.
-;     In: D0 = window idx
-;     Out: A0 = address of window info
+; In D0=Window index, Out A0=Address
 
 GetWindowInfo:
                 
                 lsl.w   #4,d0
-                lea     (WINDOW_PROPERTIES).l,a0
+                lea     (WINDOW_ENTRIES).l,a0
                 adda.w  d0,a0
                 rts
 
@@ -590,12 +586,9 @@ GetWindowInfo:
 
 ; =============== S U B R O U T I N E =======================================
 
-;     Get address of specific tile based on coord for a window.
-;     In: D0 = window idx
-;         D1 = X/Y coord, stacked into a word
-;     Out: A1 = address of window coord
+; In D0=Windows index, D1=Tile coords, Out A1=Address
 
-GetAddressOfWindowTileDataStartingAtCoord:
+GetWindowTileAddress:
                 
                 move.l  a0,-(sp)
                 movem.w d0-d2,-(sp)
@@ -614,5 +607,5 @@ GetAddressOfWindowTileDataStartingAtCoord:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function GetAddressOfWindowTileDataStartingAtCoord
+	; End of function GetWindowTileAddress
 

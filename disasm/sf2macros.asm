@@ -191,3 +191,25 @@ raftResetMapCoords:	macro
 	dc.b \3
 	dc.b \4
 	endm
+	
+allyBattleSprites:	macro
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.b \5
+	dc.b \6
+	dc.b \7
+	dc.b \8
+	dc.b \9
+	endm
+	
+enemyBattleSprite:	macro
+	dc.b \1
+	dc.b \2
+	endm
+	
+weaponSprite:	macro
+	dc.b \1
+	dc.b \2
+	endm

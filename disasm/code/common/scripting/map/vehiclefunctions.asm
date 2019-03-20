@@ -257,7 +257,7 @@ sub_454E4:
 
 ShrinkIntoCaravanBowieAndFollowers:
                 
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 clr.w   d0
                 bsr.w   MakeEntityIdle
                 moveq   #1,d0
@@ -312,7 +312,7 @@ word_455A8:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FC54
 
 ; =============== S U B R O U T I N E =======================================
 
-GrowOutBowieAndFollowoers:
+GrowOutBowieAndFollowers:
                 
                 clr.w   d0
                 bsr.w   MakeEntityIdle
@@ -324,7 +324,7 @@ GrowOutBowieAndFollowoers:
                 move.b  #0,((PLAYER_TYPE-$1000000)).w
                 rts
 
-	; End of function GrowOutBowieAndFollowoers
+	; End of function GrowOutBowieAndFollowers
 
 ms_BowieGrowOut:dc.w $15
                 dc.b 0

@@ -10,7 +10,7 @@
 
 GetActivatedEntity:
                 
-                move.b  ((CAMERA_ENTITY-$1000000)).w,d0
+                move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d0
                 ext.w   d0
                 bpl.s   loc_237A4
                 rts
@@ -51,7 +51,7 @@ loc_237C8:
                 moveq   #$2F,d7 
 loc_237FE:
                 
-                cmp.b   ((CAMERA_ENTITY-$1000000)).w,d0
+                cmp.b   ((VIEW_TARGET_ENTITY-$1000000)).w,d0
                 beq.w   loc_2382A       ; skip this entity because it's the player!
                 bsr.w   CheckIfEntityIsFollower
                 bne.w   loc_2382A       ; skip this entity because it's a follower!
@@ -121,7 +121,7 @@ loc_2385C:
 
 CheckArea:
                 
-                move.b  ((CAMERA_ENTITY-$1000000)).w,d0
+                move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d0
                 ext.w   d0
                 bpl.s   loc_2386C
                 rts

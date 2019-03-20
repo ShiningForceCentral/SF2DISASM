@@ -36,7 +36,7 @@ WaitForPartyEntitiesIdle:
                 
                 cmpi.b  #$FF,(a0)+
                 beq.w   return_4524A
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
 loc_45224:
                 
                 cmpi.b  #$FF,(a0)+
@@ -47,7 +47,7 @@ loc_45224:
                 bsr.w   GetEntityRAMAddress
 loc_45238:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 cmpi.l  #eas_Idle,$14(a0)
                 bne.s   loc_45238
                 movem.l (sp)+,d0/a0

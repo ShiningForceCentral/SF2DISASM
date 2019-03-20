@@ -26,14 +26,14 @@ loc_9BC4:
                 
                 tst.b   (DEBUG_MODE_ACTIVATED).l
                 beq.s   loc_9BE4
-                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 beq.s   loc_9BD8
 loc_9BD4:
                 
                 bsr.w   DebugModeActionSelect
 loc_9BD8:
                 
-                btst    #INPUT_A_START_BIT,((P2_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P2_INPUT-$1000000)).w
                 beq.s   loc_9BE4
                 bsr.w   DebugModeSelectHits
 loc_9BE4:

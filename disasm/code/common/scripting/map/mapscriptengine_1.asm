@@ -6,12 +6,12 @@
 
 csc32_setCameraDestInTiles:
                 
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 nop
                 move.w  (a6)+,d2
                 move.w  (a6)+,d3
                 jsr     j_SetCameraDestInTiles
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 rts
 
 	; End of function csc32_setCameraDestInTiles
@@ -66,8 +66,8 @@ csc34_setBlocks:
                 move.w  (a6)+,d1
                 move.w  (a6)+,d2
                 jsr     (CopyMapBlocks).w
-                bset    #0,(byte_FFA82D).l
-                bset    #1,(byte_FFA82D).l
+                bset    #0,(VIEW_PLANE_UPDATE_TRIGGERS).l
+                bset    #1,(VIEW_PLANE_UPDATE_TRIGGERS).l
                 rts
 
 	; End of function csc34_setBlocks
@@ -119,13 +119,13 @@ csc37_loadMapAndFadeIn:
 
 csc48_loadMap:
                 
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 nop
                 move.w  (a6),d1
                 jsr     (LoadMapTilesets).w
 loc_465C4:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 tst.b   ((FADING_SETTING-$1000000)).w
                 bne.s   loc_465C4
                 trap    #VINT_FUNCTIONS
@@ -146,7 +146,7 @@ loc_465C4:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l 0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 rts
 
 	; End of function csc48_loadMap
@@ -342,7 +342,7 @@ csc44_reloadEntities:
 
 csc45_cameraSpeed:
                 
-                move.w  (a6)+,((CAMERA_SPEED-$1000000)).w
+                move.w  (a6)+,((VIEW_SCROLLING_SPEED-$1000000)).w
                 nop
                 rts
 
@@ -353,7 +353,7 @@ csc45_cameraSpeed:
 
 csc46_reloadMap:
                 
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 nop
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
@@ -373,7 +373,7 @@ csc46_reloadMap:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l 0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 rts
 
 	; End of function csc46_reloadMap
@@ -458,10 +458,10 @@ LaunchFading:
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
 loc_467C6:
                 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 tst.b   ((FADING_SETTING-$1000000)).w
                 bne.s   loc_467C6
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.b  d3,((FADING_COUNTER_MAX-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.b  (sp)+,d3
@@ -809,8 +809,8 @@ csc17_setEntityPosAndFacingWithFlash:
 loc_469BA:
                 
                 move.w  d2,(a5)
-                jsr     (WaitForVInt).w 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
+                jsr     (WaitForVInt).w
                 move.w  d1,(a5)
                 move.w  d7,d0
                 subi.w  #$F,d0
@@ -838,13 +838,13 @@ loc_469E8:
                 
                 ori.b   #4,ENTITYDEF_OFFSET_FLAGS_B(a5); set bit 2
                 bsr.w   UpdateEntitySprite_0
-                jsr     (WaitForVInt).w 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
+                jsr     (WaitForVInt).w
                 andi.b  #$FB,ENTITYDEF_OFFSET_FLAGS_B(a5)
                                                         ; clear bit 2
                 bsr.w   UpdateEntitySprite_0
-                jsr     (WaitForVInt).w 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
+                jsr     (WaitForVInt).w
                 dbf     d7,loc_469E8    
                 rts
 
@@ -893,7 +893,7 @@ csc1A_setEntitySprite:
 loc_46A5E:
                 
                 move.b  d0,$13(a5)
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bsr.w   UpdateEntitySprite_0
                 rts
 
@@ -953,7 +953,7 @@ loc_46AAC:
                 moveq   #$FFFFFFFF,d4
 loc_46AB6:
                 
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 bsr.w   GetEntityPortraitAndSpeechSfx
                 cmpi.w  #$FFFF,d1
                 beq.s   return_46AD0
@@ -972,7 +972,7 @@ return_46AD0:
 
 csc1E_hidePortrait:
                 
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 jsr     j_HidePortraitWindow
                 rts
 
@@ -1078,8 +1078,8 @@ loc_46B74:
                 bsr.w   LoadMapsprite
                 jsr     sub_45CA6
                 bsr.w   sub_4709E       
-                jsr     (WaitForVInt).w 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
+                jsr     (WaitForVInt).w
                 add.w   4(a1),d0
                 add.w   6(a1),d1
                 dbf     d7,loc_46B74
@@ -1159,9 +1159,9 @@ loc_46BF2:
                 bsr.w   LoadMapsprite
                 jsr     sub_45E10
                 bsr.w   sub_4709E       
-                jsr     (WaitForVInt).w 
-                jsr     (WaitForVInt).w 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
+                jsr     (WaitForVInt).w
+                jsr     (WaitForVInt).w
                 btst    #$F,d1
                 beq.s   loc_46C16
                 lsr.l   #1,d0
@@ -1214,7 +1214,7 @@ loc_46C4A:
                 move.b  (a5,d0.w),d0
 loc_46C52:
                 
-                move.b  d0,((CAMERA_ENTITY-$1000000)).w
+                move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 nop
                 rts
 
@@ -1280,17 +1280,17 @@ loc_46CC8:
                 bsr.w   LoadMapsprite
                 jsr     sub_45D1C
                 bsr.w   sub_4709E       
-                jsr     (WaitForVInt).w 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
+                jsr     (WaitForVInt).w
                 bsr.w   UpdateEntitySprite_0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 bsr.w   LoadMapsprite
                 jsr     sub_45D46
                 bsr.w   sub_4709E       
-                jsr     (WaitForVInt).w 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
+                jsr     (WaitForVInt).w
                 bsr.w   UpdateEntitySprite_0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 dbf     d7,loc_46CC8
                 move.b  #0,$1E(a5)
                 rts
@@ -1544,7 +1544,7 @@ csc30_removeEntityShadow:
                 bsr.w   LoadMapsprite
                 jsr     sub_45A8C
                 bsr.w   sub_4709E       
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 rts
 
 	; End of function csc30_removeEntityShadow
@@ -1560,7 +1560,7 @@ csc50_setEntitySize:
                 move.w  (a6)+,((SPRITE_SIZE-$1000000)).w
                 ori.b   #8,ENTITYDEF_OFFSET_FLAGS_B(a5)
                 bsr.w   UpdateEntitySprite_0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.w  d6,((SPRITE_SIZE-$1000000)).w
                 rts
 
@@ -1655,7 +1655,7 @@ loc_46FAE:
 loc_46FB4:
                 
                 bsr.w   UpdateEntitySprite_0
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 rts
 
 	; End of function csc52_faceEntity

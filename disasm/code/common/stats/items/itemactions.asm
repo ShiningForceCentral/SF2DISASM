@@ -139,7 +139,7 @@ loc_22AA0:
 FieldItem_IncreaseATK:
                 
                 moveq   #3,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #2,d7
                 clr.l   d1
                 move.w  d7,d1
@@ -159,7 +159,7 @@ FieldItem_IncreaseATK:
 FieldItem_IncreaseDEF:
                 
                 moveq   #3,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #2,d7
                 clr.l   d1
                 move.w  d7,d1
@@ -179,7 +179,7 @@ FieldItem_IncreaseDEF:
 FieldItem_IncreaseAGI:
                 
                 moveq   #3,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #2,d7
                 clr.l   d1
                 move.w  d7,d1
@@ -226,7 +226,7 @@ loc_22B42:
 FieldItem_IncreaseHP:
                 
                 moveq   #3,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #2,d7
                 clr.l   d1
                 move.w  d7,d1
@@ -249,7 +249,7 @@ FieldItem_IncreaseMP:
                 tst.w   d1
                 beq.s   byte_22BBC      
                 moveq   #3,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addq.w  #2,d7
                 clr.l   d1
                 move.w  d7,d1

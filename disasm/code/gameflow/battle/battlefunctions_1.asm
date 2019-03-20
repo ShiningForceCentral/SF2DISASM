@@ -16,7 +16,7 @@ BattleLoop:
                 move.l  ((SECONDS_COUNTER_FROM_SRAM-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
                 clrFlg  $58             ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 jsr     j_ClearEnemyMoveInfo
-                clr.b   ((CAMERA_ENTITY-$1000000)).w
+                clr.b   ((VIEW_TARGET_ENTITY-$1000000)).w
                 bsr.w   LoadBattle      
                 bra.w   loc_23B40       
                 bra.w   loc_23B0A       
@@ -457,7 +457,7 @@ loc_23EDA:
                 clr.b   ((word_FFAF8E-$1000000)).w
                 move.w  -2(a6),d0
                 bsr.w   GetEntityNumberOfCombatant
-                move.b  d0,((CAMERA_ENTITY-$1000000)).w
+                move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  -2(a6),d0
                 bsr.w   SetUnitCursorDestinationToNextCombatant
                 move.w  -2(a6),d0
@@ -485,7 +485,7 @@ loc_23F58:
 loc_23F5E:
                 
                 bsr.w   WaitForUnitCursor; player controlled unit (normal force member, enemy with control opponent cheat)
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
                 move.w  -2(a6),d0
                 move.w  d0,((MOVING_BATTLE_ENTITY_IDX-$1000000)).w
@@ -523,7 +523,7 @@ loc_23FE6:
                 bsr.w   sub_24662
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_2403A
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 move.w  -2(a6),d0
                 clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
                 jsr     j_HideLandEffectWindow
@@ -578,7 +578,7 @@ loc_24090:
                 tst.w   ((BATTLESCENE_ACTION_TYPE-$1000000)).w
                 bne.s   loc_240E6       
                 moveq   #4,d6
-                jsr     (UpdateRandomSeed).w; Kiwi's special attack ?
+                jsr     (GenerateRandomNumber).w; Kiwi's special attack ?
                 tst.w   d7
                 bne.s   loc_240E6       
                 move.w  ((word_FFB630-$1000000)).w,((word_FFB632-$1000000)).w
@@ -611,8 +611,8 @@ loc_240E6:
                 jsr     j_DisplayTimerWindow
 loc_240F4:
                 
-                jsr     (WaitForVInt).w 
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
+                jsr     (WaitForVInt).w
                 move.w  -2(a6),d0
                 jsr     j_WriteSkirmishScript
                 move.w  -2(a6),d0
@@ -708,15 +708,15 @@ loc_241C4:
                 move.w  -4(a6),d0
                 jsr     LoadBattle(pc)  
                 nop
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 clr.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 movem.l (sp)+,a6
                 bra.s   loc_2423E
 loc_2420E:
                 
-                jsr     (WaitForCameraToCatchUp).w
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForViewScrollEnd).w
+                jsr     (WaitForVInt).w
                 clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
                 move.w  -2(a6),d0
                 bsr.w   GetEntityNumberOfCombatant
@@ -755,7 +755,7 @@ HandleAfterTurnEffects:
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 andi.w  #$FFFE,d2
                 move.w  #2,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 tst.w   d7
                 bne.s   byte_24288      
                 txt     $166            ; "{CLEAR}{NAME} is no longer stunned.{D3}"
@@ -777,7 +777,7 @@ loc_24294:
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 andi.w  #$FF3F,d2
                 move.w  d1,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 andi.w  #$C0,d7 
                 bne.s   byte_242BE      
                 txt     $162            ; "{CLEAR}{NAME} has awakened.{D3}"
@@ -799,7 +799,7 @@ loc_242CE:
                 beq.s   loc_24308
                 andi.w  #$FFCF,d2
                 move.w  d1,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 andi.w  #$30,d7 
                 bne.s   loc_242FC
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
@@ -822,7 +822,7 @@ loc_24308:
                 beq.s   loc_24344
                 andi.w  #$FCFF,d2
                 move.w  d1,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 andi.w  #$300,d7
                 bne.s   loc_24338
                 move.w  #6,((TEXT_NAME_INDEX_1-$1000000)).w
@@ -976,11 +976,11 @@ loc_24492:
                 clr.b   ((word_FFAF8E-$1000000)).w
                 move.w  -2(a6),d0
                 bsr.w   GetEntityNumberOfCombatant
-                move.b  d0,((CAMERA_ENTITY-$1000000)).w
+                move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  -2(a6),d0
                 bsr.w   SetUnitCursorDestinationToNextCombatant
                 bsr.w   WaitForUnitCursor
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 bsr.w   HideUnitCursor
 loc_244D2:
                 
@@ -1046,7 +1046,7 @@ loc_24534:
                 jsr     (UpdateEntityProperties).l
                 cmpi.b  #GFX_MAX_SPRITES_TO_LOAD,((NUM_SPRITES_TO_LOAD-$1000000)).w
                 blt.s   loc_2455E
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 clr.b   ((NUM_SPRITES_TO_LOAD-$1000000)).w
 loc_2455E:
                 
@@ -1081,7 +1081,7 @@ loc_245A4:
                 jsr     (UpdateEntityProperties).l
                 cmpi.b  #7,((NUM_SPRITES_TO_LOAD-$1000000)).w
                 blt.s   loc_245C6
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 clr.b   ((NUM_SPRITES_TO_LOAD-$1000000)).w
 loc_245C6:
                 
@@ -1164,12 +1164,12 @@ loc_2466C:
                 move.w  -2(a6),d0
                 bsr.w   ClearEntityBlinkingFlag
                 bsr.w   GetEntityNumberOfCombatant
-                move.b  d0,((CAMERA_ENTITY-$1000000)).w
+                move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  -2(a6),d0
                 bsr.w   SetMoveSfx
                 bsr.w   ControlBattleUnit
-                jsr     (WaitForCameraToCatchUp).w
-                btst    #INPUT_A_B_BIT,d4
+                jsr     (WaitForViewScrollEnd).w
+                btst    #INPUT_A_B,d4
                 beq.w   loc_246EC
                 movem.w d2-d3,-(sp)
                 move.w  ((word_FFB08E-$1000000)).w,d3
@@ -1179,7 +1179,7 @@ loc_2466C:
                 bsr.s   UpdateTargetListForCombatant
                 moveq   #$1E,d0
                 lea     ((byte_FF4000+$400)).l,a2
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 jsr     j_MakeRangeLists
                 clr.w   d0
@@ -1229,7 +1229,7 @@ loc_24746:
                 
                 move.w  d1,-(sp)
                 jsr     ClearFadingBlockRange
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 move.w  -2(a6),d0
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 jsr     (CheckChestItem).w
@@ -1819,7 +1819,7 @@ loc_24D6C:
 loc_24DCC:
                 
                 bsr.w   HideUnitCursor
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 clr.w   d0
                 lea     (InitStack).w,a0
                 jsr     sub_10004
@@ -2120,7 +2120,7 @@ sub_2519E:
                 clr.b   ((word_FFAF8E-$1000000)).w
                 clr.w   ((MOVE_SFX-$1000000)).w
                 bsr.w   ControlUnitCursor
-                btst    #INPUT_A_B_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((P1_INPUT-$1000000)).w
                 beq.s   BattlefieldMenuActions
                 move.w  -2(a6),d0
                 rts
@@ -2145,7 +2145,7 @@ loc_251BC:
                 jsr     j_GetYPos
                 cmp.w   d1,d3
                 bne.w   loc_25226
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 btst    #6,((P1_INPUT-$1000000)).w
                 beq.s   loc_251F4
                 jsr     j_MemberStatsScreen
@@ -2232,7 +2232,7 @@ loc_252A6:
                 disableSram
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.w   byte_252E6
-                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_252F2      
 byte_252E6:
                 
@@ -2275,7 +2275,7 @@ sub_252FA:
                 bne.w   loc_2537E
                 move.w  -2(a6),d0
                 jsr     j_sub_C404
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
                 clr.b   ((word_FFAF8E-$1000000)).w
                 move.w  ((word_FFB630-$1000000)).w,d0
@@ -2290,7 +2290,7 @@ loc_2537E:
                 move.w  ((word_FFB630-$1000000)).w,d1
                 move.w  -2(a6),d0
                 jsr     j_CreateSpellRangeGrid
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
                 move.w  ((word_FFB630-$1000000)).w,d1
                 jsr     j_GetSpellDefAddress
@@ -2307,7 +2307,7 @@ loc_253BE:
                 move.w  ((word_FFB630-$1000000)).w,d1
                 move.w  -2(a6),d0
                 jsr     j_CreateItemRangeGrid
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
                 move.w  ((word_FFB630-$1000000)).w,d1
                 jsr     j_GetItemDefAddress
@@ -2327,7 +2327,7 @@ loc_2540A:
                 move.w  ((word_FFB630-$1000000)).w,d1
                 move.w  -2(a6),d0
                 jsr     j_CreateSpellRangeGrid
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
                 move.w  ((word_FFB630-$1000000)).w,d1
                 jsr     j_GetSpellDefAddress
@@ -2343,7 +2343,7 @@ loc_2544A:
                 bne.w   loc_2547A
                 move.w  -2(a6),d0
                 jsr     sub_1AC05C      
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
                 clr.b   ((word_FFAF8E-$1000000)).w
                 move.w  ((word_FFB630-$1000000)).w,d0
@@ -2410,7 +2410,7 @@ loc_254D4:
                 move.w  -4(a6),d0
                 bsr.w   sub_2322C
                 bsr.w   WaitForUnitCursor
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 move.b  #1,((FIGHTER_IS_TARGETTING-$1000000)).w
                 jsr     j_CreateFighterMiniStatusWindow
                 moveq   #$F,d0
@@ -2530,12 +2530,12 @@ AddRandomizedAGIToTurnOrder:
                 andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
                 move.w  d1,d6
                 lsr.w   #3,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d7,d1
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 sub.w   d7,d1
                 moveq   #3,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 subq.w  #1,d7
                 add.w   d7,d1
                 move.b  d0,(a0)+
@@ -2548,9 +2548,9 @@ AddRandomizedAGIToTurnOrder:
                 divu.w  #6,d1
                 move.w  d1,d6
                 lsr.w   #3,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d7,d1
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 sub.w   d7,d1
                 move.b  d0,(a0)+
                 move.b  d1,(a0)+
@@ -2571,16 +2571,16 @@ LoadBattle:
                 clr.w   d1
                 move.b  ((CURRENT_MAP-$1000000)).w,d1
                 bsr.w   FadeOutToBlackAll
-                move.b  #$FF,((CAMERA_ENTITY-$1000000)).w
+                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 jsr     (LoadMapTilesets).w
                 bsr.w   WaitForFadeToFinish
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 jsr     j_MoveEntitiesToBattlePositions
                 move.w  (sp)+,d0
                 bsr.w   GetEntityNumberOfCombatant
-                move.b  d0,((CAMERA_ENTITY-$1000000)).w
+                move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 bpl.s   loc_25646
                 clr.w   d0
 loc_25646:
@@ -2601,7 +2601,7 @@ loc_25646:
                 jsr     (InitSprites).w 
                 move.w  #$FFFF,d0
                 jsr     (LoadMap).w     
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 jsr     (LoadMapEntitySprites).w
                 bsr.w   SetBaseVIntFunctions
                 jsr     j_LoadBattleTerrainData

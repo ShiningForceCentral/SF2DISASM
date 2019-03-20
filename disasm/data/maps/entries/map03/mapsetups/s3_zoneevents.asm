@@ -21,7 +21,7 @@ Map3_ZoneEvent0:
                 script  cs_51444
                 chkFlg  $101            ; TEMP FLAG #01
                 bne.s   byte_50DA6      
-                jsr     (WaitForCameraToCatchUp).l
+                jsr     (WaitForViewScrollEnd).l
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$8C,d0 
                 jsr     GetEntityPortraitAndSpeechSfx
@@ -47,7 +47,7 @@ Map3_ZoneEvent1:
                 script  cs_5144C
                 chkFlg  $102            ; TEMP FLAG #02
                 bne.s   byte_50DE0      
-                jsr     (WaitForCameraToCatchUp).l
+                jsr     (WaitForViewScrollEnd).l
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$8A,d0 
                 jsr     GetEntityPortraitAndSpeechSfx
@@ -86,7 +86,7 @@ Map3_ZoneEvent4:
                 jsr     GetEntityPortraitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
-                jsr     (WaitForCameraToCatchUp).l
+                jsr     (WaitForViewScrollEnd).l
                 txt     $1F1            ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 byte_50E2C:
                 

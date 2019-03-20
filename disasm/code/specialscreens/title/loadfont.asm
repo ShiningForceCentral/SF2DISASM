@@ -14,7 +14,7 @@ LoadTitleScreenFont:
                 move.w  #$800,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDMA).w
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 move.w  #$6200,d0
                 move.w  #$3FF,d7
 loc_2C76E:
@@ -22,7 +22,7 @@ loc_2C76E:
                 move.w  #0,(a0)+
                 addq.w  #1,d0
                 dbf     d7,loc_2C76E
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$380,d0
                 moveq   #2,d1

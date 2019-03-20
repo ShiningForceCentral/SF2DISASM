@@ -3073,8 +3073,8 @@ loc_8AA4:
                 moveq   #1,d7
 loc_8AB2:
                 
-                move.b  1(a0),d1
-                move.b  (a0),d2
+                move.b  1(a0),d1        ; value
+                move.b  (a0),d2         ; effect code
                 cmpi.b  #$FF,d2
                 beq.w   loc_8AD2
                 cmpi.b  #$11,d2
@@ -3091,7 +3091,7 @@ loc_8AC8:
 loc_8AD2:
                 
                 addq.w  #2,a0
-                dbf     d7,loc_8AB2
+                dbf     d7,loc_8AB2     
                 movem.l (sp)+,d1-d2/d7-a1
                 rtr
 
@@ -5033,9 +5033,9 @@ loc_96DC:
 loc_96FE:
                 
                 move.w  #$80,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 add.w   d7,d4
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 sub.w   d7,d4
                 addi.w  #$80,d4 
                 lsr.w   #8,d4

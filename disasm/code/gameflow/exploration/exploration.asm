@@ -38,7 +38,7 @@ sub_364E:
                 bra.s   loc_3690
 loc_368C:
                 
-                move.w  ((word_FFA80E-$1000000)).w,d6
+                move.w  ((TILE_PALETTE_MASK-$1000000)).w,d6
 loc_3690:
                 
                 andi.w  #$3FF,d0
@@ -57,12 +57,12 @@ loc_3690:
 
 ; =============== S U B R O U T I N E =======================================
 
-SetCameraDest:
+SetViewDest:
                 
                 movem.w d0-d7,-(sp)
                 bra.w   loc_36BE
 
-	; End of function SetCameraDest
+	; End of function SetViewDest
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -102,7 +102,7 @@ loc_36BE:
                 bra.s   loc_3706
 loc_3702:
                 
-                move.w  ((word_FFA810-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
 loc_3706:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
@@ -111,7 +111,7 @@ loc_3706:
                 bra.s   loc_3716
 loc_3712:
                 
-                move.w  ((word_FFA812-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
 loc_3716:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
@@ -120,7 +120,7 @@ loc_3716:
                 bra.s   loc_3726
 loc_3722:
                 
-                move.w  ((word_FFA814-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
 loc_3726:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
@@ -129,7 +129,7 @@ loc_3726:
                 bra.s   loc_3736
 loc_3732:
                 
-                move.w  ((word_FFA816-$1000000)).w,d3
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d3
 loc_3736:
                 
                 lea     (byte_FF9A04).l,a2
@@ -148,33 +148,33 @@ loc_3736:
 
 sub_3758:
                 
-                clr.w   ((word_FFA80E-$1000000)).w
+                clr.w   ((TILE_PALETTE_MASK-$1000000)).w
                 cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_3770
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3770
 loc_376A:
                 
-                move.w  #$2000,((word_FFA80E-$1000000)).w
+                move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_3770:
                 
-                move.w  ((word_FFA810-$1000000)).w,d4
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d4
                 cmp.w   d0,d4
                 beq.s   return_37B0
-                bset    #3,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bset    #3,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 cmp.w   d0,d4
                 bge.s   return_37B0
                 movem.w d0-d3,-(sp)
                 clr.w   d4
                 clr.w   d5
-                move.w  ((word_FFA810-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 asr.w   #4,d0
-                move.w  ((word_FFA812-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
                 asr.w   #4,d1
                 addi.w  #$100,d0
-                move.w  ((word_FFA804-$1000000)).w,d2
-                move.w  ((word_FFA808-$1000000)).w,d3
-                lea     (byte_FFC000).l,a1
+                move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
+                lea     (PLANE_A_MAP_LAYOUT).l,a1
 loc_37A8:
                 
                 bsr.w   sub_3158
@@ -190,18 +190,18 @@ return_37B0:
 
 sub_37B2:
                 
-                clr.w   ((word_FFA80E-$1000000)).w
+                clr.w   ((TILE_PALETTE_MASK-$1000000)).w
                 cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_37CA
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_37CA
-                move.w  #$2000,((word_FFA80E-$1000000)).w
+                move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_37CA:
                 
-                move.w  ((word_FFA812-$1000000)).w,d4
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d4
                 cmp.w   d1,d4
                 beq.s   return_380A
-                bset    #2,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bset    #2,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 cmp.w   d1,d4
                 bge.s   return_380A
                 movem.w d0-d3,-(sp)
@@ -209,20 +209,20 @@ loc_37CA:
                 clr.w   d5
 loc_37E4:
                 
-                move.w  ((word_FFA810-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 asr.w   #4,d0
 loc_37EA:
                 
-                move.w  ((word_FFA812-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
                 asr.w   #4,d1
 loc_37F0:
                 
                 addi.w  #$100,d1
-                move.w  ((word_FFA804-$1000000)).w,d2
-                move.w  ((word_FFA808-$1000000)).w,d3
+                move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
 loc_37FC:
                 
-                lea     (byte_FFC000).l,a1
+                lea     (PLANE_A_MAP_LAYOUT).l,a1
                 bsr.w   sub_30EE
                 movem.w (sp)+,d0-d3
 return_380A:
@@ -236,35 +236,35 @@ return_380A:
 
 sub_380C:
                 
-                clr.w   ((word_FFA80E-$1000000)).w
+                clr.w   ((TILE_PALETTE_MASK-$1000000)).w
 loc_3810:
                 
                 cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_3824
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_3824
-                move.w  #$2000,((word_FFA80E-$1000000)).w
+                move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_3824:
                 
-                move.w  ((word_FFA814-$1000000)).w,d4
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d4
                 cmp.w   d2,d4
                 beq.s   return_3864
-                bset    #1,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bset    #1,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 cmp.w   d2,d4
                 bge.s   return_3864
                 movem.w d0-d3,-(sp)
                 clr.w   d4
                 clr.w   d5
-                move.w  ((word_FFA814-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 asr.w   #4,d0
-                move.w  ((word_FFA816-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
                 asr.w   #4,d1
                 addi.w  #$100,d0
 loc_384E:
                 
-                move.w  ((word_FFA806-$1000000)).w,d2
-                move.w  ((word_FFA80A-$1000000)).w,d3
-                lea     (byte_FFE000).l,a1
+                move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
+                lea     (PLANE_B_LAYOUT).l,a1
                 bsr.w   sub_3158
                 movem.w (sp)+,d0-d3
 return_3864:
@@ -278,33 +278,33 @@ return_3864:
 
 sub_3866:
                 
-                clr.w   ((word_FFA80E-$1000000)).w
+                clr.w   ((TILE_PALETTE_MASK-$1000000)).w
                 cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_387E
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_387E
-                move.w  #$2000,((word_FFA80E-$1000000)).w
+                move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_387E:
                 
-                move.w  ((word_FFA816-$1000000)).w,d4
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d4
                 cmp.w   d3,d4
                 beq.s   return_38BE
-                bset    #0,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bset    #0,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 cmp.w   d3,d4
                 bge.s   return_38BE
                 movem.w d0-d3,-(sp)
                 clr.w   d4
                 clr.w   d5
-                move.w  ((word_FFA814-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 asr.w   #4,d0
 loc_389E:
                 
-                move.w  ((word_FFA816-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
                 asr.w   #4,d1
                 addi.w  #$100,d1
-                move.w  ((word_FFA806-$1000000)).w,d2
-                move.w  ((word_FFA80A-$1000000)).w,d3
-                lea     (byte_FFE000).l,a1
+                move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
+                lea     (PLANE_B_LAYOUT).l,a1
                 bsr.w   sub_30EE
                 movem.w (sp)+,d0-d3
 return_38BE:
@@ -320,19 +320,19 @@ sub_38C0:
                 
                 movem.l d2-d3/a0,-(sp)
                 clr.w   d2
-                move.b  ((CAMERA_ENTITY-$1000000)).w,d2
+                move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d2
                 bpl.s   loc_38E6
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_38DC
 loc_38D2:
                 
-                move.w  ((word_FFA810-$1000000)).w,d0
-                move.w  ((word_FFA812-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
                 bra.s   loc_38E4
 loc_38DC:
                 
-                move.w  ((word_FFA814-$1000000)).w,d0
-                move.w  ((word_FFA816-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
 loc_38E4:
                 
                 bra.s   loc_392A
@@ -345,8 +345,8 @@ loc_38E6:
                 move.w  (a0)+,d3
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_390A
-                sub.w   ((word_FFA814-$1000000)).w,d2
-                sub.w   ((word_FFA816-$1000000)).w,d3
+                sub.w   ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
+                sub.w   ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d3
 loc_3900:
                 
                 move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d0
@@ -354,8 +354,8 @@ loc_3900:
                 bra.s   loc_391A
 loc_390A:
                 
-                sub.w   ((word_FFA810-$1000000)).w,d2
-                sub.w   ((word_FFA812-$1000000)).w,d3
+                sub.w   ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d2
+                sub.w   ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d3
                 move.w  ((MAP_AREA_BACKGROUND_STARTX-$1000000)).w,d0
                 move.w  ((MAP_AREA_BACKGROUND_STARTY-$1000000)).w,d1
 loc_391A:
@@ -376,33 +376,31 @@ loc_392A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Related to camera position ?
-
-VInt_3930:
+VInt_UpdateScrollingData:
                 
                 link    a6,#-2
-                move.b  ((CAMERA_SCROLLING_MASK-$1000000)).w,d0
+                move.b  ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w,d0
                 andi.b  #$C,d0
                 beq.s   loc_3944
                 move.b  #$FF,((HIDE_WINDOWS-$1000000)).w
 loc_3944:
                 
-                tst.b   ((CAMERA_SCROLLING_MASK-$1000000)).w
+                tst.b   ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 beq.w   loc_3C44
                 movem.w d0-d7,-(sp)
-                clr.w   ((word_FFA80E-$1000000)).w
+                clr.w   ((TILE_PALETTE_MASK-$1000000)).w
                 cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_3968
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3968
 loc_3962:
                 
-                move.w  #$2000,((word_FFA80E-$1000000)).w
+                move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_3968:
                 
-                btst    #3,((CAMERA_SCROLLING_MASK-$1000000)).w
+                btst    #3,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 beq.w   loc_3A1A
-                move.w  ((word_FFA810-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 move.w  d0,d5
                 move.w  d0,d7
                 move.w  ((word_FFA818-$1000000)).w,d1
@@ -428,12 +426,12 @@ loc_39A2:
                 beq.s   loc_39D4
                 movem.w d0-d1,-(sp)
                 asr.w   #4,d0
-                move.w  ((word_FFA812-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
                 asr.w   #4,d1
                 add.w   d6,d0
-                move.w  ((word_FFA804-$1000000)).w,d2
-                move.w  ((word_FFA808-$1000000)).w,d3
-                lea     (byte_FFC000).l,a1
+                move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
+                lea     (PLANE_A_MAP_LAYOUT).l,a1
                 lea     (byte_FF9A04).l,a2
                 bsr.w   sub_3158
                 movem.w (sp)+,d0-d1
@@ -444,13 +442,13 @@ loc_39D4:
                 sub.w   d1,d4
                 bne.s   loc_39E6
                 move.w  d1,d0
-                bclr    #3,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bclr    #3,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 loc_39E6:
                 
                 eor.w   d5,d4
                 bge.s   loc_39F2
                 move.w  d1,d0
-                bclr    #3,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bclr    #3,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 loc_39F2:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
@@ -465,16 +463,16 @@ loc_3A00:
                 subi.w  #$6000,d0
 loc_3A0A:
                 
-                move.w  d0,((word_FFA810-$1000000)).w
+                move.w  d0,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
                 lsr.w   #4,d0
                 neg.w   d0
                 andi.w  #$FF,d0
-                move.w  d0,((word_FFA804-$1000000)).w
+                move.w  d0,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
 loc_3A1A:
                 
-                btst    #2,((CAMERA_SCROLLING_MASK-$1000000)).w
+                btst    #2,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 beq.w   loc_3AC8
-                move.w  ((word_FFA812-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d0
                 move.w  d0,d5
                 move.w  d0,d7
                 move.w  ((word_FFA81A-$1000000)).w,d1
@@ -501,12 +499,12 @@ loc_3A54:
                 movem.w d0-d1,-(sp)
                 asr.w   #4,d0
                 move.w  d0,d1
-                move.w  ((word_FFA810-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 asr.w   #4,d0
                 add.w   d6,d1
-                move.w  ((word_FFA804-$1000000)).w,d2
-                move.w  ((word_FFA808-$1000000)).w,d3
-                lea     (byte_FFC000).l,a1
+                move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
+                lea     (PLANE_A_MAP_LAYOUT).l,a1
                 bsr.w   sub_30EE
                 movem.w (sp)+,d0-d1
 loc_3A82:
@@ -516,13 +514,13 @@ loc_3A82:
                 sub.w   d1,d4
                 bne.s   loc_3A94
                 move.w  d1,d0
-                bclr    #2,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bclr    #2,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 loc_3A94:
                 
                 eor.w   d5,d4
                 bge.s   loc_3AA0
                 move.w  d1,d0
-                bclr    #2,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bclr    #2,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 loc_3AA0:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
@@ -537,24 +535,24 @@ loc_3AAE:
                 subi.w  #$6000,d0
 loc_3AB8:
                 
-                move.w  d0,((word_FFA812-$1000000)).w
+                move.w  d0,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
                 lsr.w   #4,d0
                 addq.w  #8,d0
                 andi.w  #$FF,d0
-                move.w  d0,((word_FFA808-$1000000)).w
+                move.w  d0,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
 loc_3AC8:
                 
-                clr.w   ((word_FFA80E-$1000000)).w
+                clr.w   ((TILE_PALETTE_MASK-$1000000)).w
                 cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_3AE0
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_3AE0
-                move.w  #$2000,((word_FFA80E-$1000000)).w
+                move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_3AE0:
                 
-                btst    #1,((CAMERA_SCROLLING_MASK-$1000000)).w
+                btst    #1,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 beq.w   loc_3B92
-                move.w  ((word_FFA814-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 move.w  d0,d5
                 move.w  d0,d7
                 move.w  ((word_FFA81C-$1000000)).w,d1
@@ -580,12 +578,12 @@ loc_3B1A:
                 beq.s   loc_3B4C
                 movem.w d0-d1,-(sp)
                 asr.w   #4,d0
-                move.w  ((word_FFA816-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
                 asr.w   #4,d1
                 add.w   d6,d0
-                move.w  ((word_FFA806-$1000000)).w,d2
-                move.w  ((word_FFA80A-$1000000)).w,d3
-                lea     (byte_FFE000).l,a1
+                move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
+                lea     (PLANE_B_LAYOUT).l,a1
                 lea     (byte_FF9A84).l,a2
                 bsr.w   sub_3158
                 movem.w (sp)+,d0-d1
@@ -596,13 +594,13 @@ loc_3B4C:
                 sub.w   d1,d4
                 bne.s   loc_3B5E
                 move.w  d1,d0
-                bclr    #1,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bclr    #1,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 loc_3B5E:
                 
                 eor.w   d5,d4
                 bge.s   loc_3B6A
                 move.w  d1,d0
-                bclr    #1,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bclr    #1,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 loc_3B6A:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
@@ -617,16 +615,16 @@ loc_3B78:
                 subi.w  #$6000,d0
 loc_3B82:
                 
-                move.w  d0,((word_FFA814-$1000000)).w
+                move.w  d0,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
                 lsr.w   #4,d0
                 neg.w   d0
                 andi.w  #$FF,d0
-                move.w  d0,((word_FFA806-$1000000)).w
+                move.w  d0,((VIEW_PLANE_B_X_COUNTER-$1000000)).w
 loc_3B92:
                 
-                btst    #0,((CAMERA_SCROLLING_MASK-$1000000)).w
+                btst    #0,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 beq.w   loc_3C40
-                move.w  ((word_FFA816-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d0
                 move.w  d0,d5
                 move.w  d0,d7
                 move.w  ((word_FFA81E-$1000000)).w,d1
@@ -653,12 +651,12 @@ loc_3BCC:
                 movem.w d0-d1,-(sp)
                 asr.w   #4,d0
                 move.w  d0,d1
-                move.w  ((word_FFA814-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 asr.w   #4,d0
                 add.w   d6,d1
-                move.w  ((word_FFA806-$1000000)).w,d2
-                move.w  ((word_FFA80A-$1000000)).w,d3
-                lea     (byte_FFE000).l,a1
+                move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
+                lea     (PLANE_B_LAYOUT).l,a1
                 bsr.w   sub_30EE
                 movem.w (sp)+,d0-d1
 loc_3BFA:
@@ -668,13 +666,13 @@ loc_3BFA:
                 sub.w   d1,d4
                 bne.s   loc_3C0C
                 move.w  d1,d0
-                bclr    #0,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bclr    #0,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 loc_3C0C:
                 
                 eor.w   d5,d4
                 bge.s   loc_3C18
                 move.w  d1,d0
-                bclr    #0,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bclr    #0,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 loc_3C18:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
@@ -689,11 +687,11 @@ loc_3C26:
                 subi.w  #$6000,d0
 loc_3C30:
                 
-                move.w  d0,((word_FFA816-$1000000)).w
+                move.w  d0,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
                 lsr.w   #4,d0
                 addq.w  #8,d0
                 andi.w  #$FF,d0
-                move.w  d0,((word_FFA80A-$1000000)).w
+                move.w  d0,((VIEW_PLANE_B_Y_COUNTER-$1000000)).w
 loc_3C40:
                 
                 movem.w (sp)+,d0-d7
@@ -712,7 +710,7 @@ loc_3C44:
                 bra.s   loc_3C82
 loc_3C6C:
                 
-                move.w  ((word_FFA810-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d1
                 ext.w   d0
                 add.w   d0,d1
                 tst.w   d0
@@ -724,7 +722,7 @@ loc_3C7A:
                 move.w  d1,((word_FFA818-$1000000)).w
 loc_3C82:
                 
-                bset    #3,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bset    #3,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 loc_3C88:
                 
                 move.b  ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w,d0
@@ -738,7 +736,7 @@ loc_3C88:
                 bra.s   loc_3CBE
 loc_3CA8:
                 
-                move.w  ((word_FFA812-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
                 ext.w   d0
                 add.w   d0,d1
                 tst.w   d0
@@ -750,7 +748,7 @@ loc_3CB6:
                 move.w  d1,((word_FFA81A-$1000000)).w
 loc_3CBE:
                 
-                bset    #2,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bset    #2,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 loc_3CC4:
                 
                 move.b  ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w,d0
@@ -766,7 +764,7 @@ loc_3CC4:
                 bra.s   loc_3D02
 loc_3CEC:
                 
-                move.w  ((word_FFA814-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d1
                 ext.w   d0
                 add.w   d0,d1
                 tst.w   d0
@@ -778,11 +776,11 @@ loc_3CFA:
                 move.w  d1,((word_FFA81C-$1000000)).w
 loc_3D02:
                 
-                bset    #1,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bset    #1,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 loc_3D08:
                 
                 move.b  ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w,d0
-                beq.s   sub_3D46
+                beq.s   FinalizeScrollDataUpdate
                 cmpi.b  #$80,d0
                 bne.s   loc_3D2A
                 bsr.w   sub_38C0
@@ -793,7 +791,7 @@ loc_3D08:
                 bra.s   loc_3D40
 loc_3D2A:
                 
-                move.w  ((word_FFA816-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
                 ext.w   d0
                 add.w   d0,d1
                 tst.w   d0
@@ -805,17 +803,17 @@ loc_3D38:
                 move.w  d1,((word_FFA81E-$1000000)).w
 loc_3D40:
                 
-                bset    #0,((CAMERA_SCROLLING_MASK-$1000000)).w
+                bset    #0,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
 
-	; End of function VInt_3930
+	; End of function VInt_UpdateScrollingData
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3D46:
+FinalizeScrollDataUpdate:
                 
-                move.l  ((word_FFA808-$1000000)).w,(VERTICAL_SCROLL_DATA).l
-                move.l  ((word_FFA804-$1000000)).w,(HORIZONTAL_SCROLL_DATA).l
+                move.l  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,(VERTICAL_SCROLL_DATA).l
+                move.l  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,(HORIZONTAL_SCROLL_DATA).l
                 move.w  ((QUAKE_AMPLITUDE-$1000000)).w,d6
                 beq.s   loc_3D7E
                 addq.w  #1,d6
@@ -831,16 +829,16 @@ loc_3D7E:
                 bsr.w   UpdateVDPVScrollData
                 rts
 
-	; End of function sub_3D46
+	; End of function FinalizeScrollDataUpdate
 
 
 ; =============== S U B R O U T I N E =======================================
 
 GetRandomValue:
                 
-                bsr.w   UpdateRandomSeed
+                bsr.w   GenerateRandomNumber
                 move.w  d7,d0
-                bsr.w   UpdateRandomSeed
+                bsr.w   GenerateRandomNumber
                 sub.w   d7,d0
                 rts
 
@@ -854,11 +852,11 @@ sub_3D96:
                 bsr.w   CopyMapBlocks
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3DA8
-                bset    #0,((byte_FFA82D-$1000000)).w
+                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 bra.s   return_3DAE
 loc_3DA8:
                 
-                bset    #1,((byte_FFA82D-$1000000)).w
+                bset    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
 return_3DAE:
                 
                 rts
@@ -1018,11 +1016,11 @@ byte_3F06:
                 sndCom  SFX_DOOR_OPEN
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3F18
-                bset    #0,((byte_FFA82D-$1000000)).w
+                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 bra.s   loc_3F1E
 loc_3F18:
                 
-                bset    #1,((byte_FFA82D-$1000000)).w
+                bset    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
 loc_3F1E:
                 
                 movem.w (sp)+,d0-d7
@@ -1045,7 +1043,7 @@ loc_3F24:
 ToggleRoofOnMapLoad:
                 
                 movem.l d0-a1,-(sp)
-                move.b  ((CAMERA_ENTITY-$1000000)).w,d4
+                move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d4
                 bpl.s   loc_3F38
                 clr.w   d4
 loc_3F38:
@@ -1217,7 +1215,7 @@ loc_40D8:
                 
                 move.w  #$FFFF,(a3)
                 sndCom  MUSIC_NOTHING
-                bset    #0,((byte_FFA82D-$1000000)).w
+                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
 loc_40E6:
                 
                 move.w  (sp)+,d7
@@ -1260,7 +1258,7 @@ loc_4130:
                 addi.w  #$80,d2 
                 dbf     d7,loc_412C
                 sndCom  MUSIC_NOTHING
-                bset    #0,((byte_FFA82D-$1000000)).w
+                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
 loc_4150:
                 
                 movem.w (sp)+,d7
@@ -1287,11 +1285,11 @@ loc_416E:
                                                         ; set block idx to open chest
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_4188
-                bset    #0,((byte_FFA82D-$1000000)).w
+                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 bra.s   loc_418E
 loc_4188:
                 
-                bset    #1,((byte_FFA82D-$1000000)).w
+                bset    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
 loc_418E:
                 
                 movem.l (sp)+,d0-d1/a2
@@ -1312,11 +1310,11 @@ CloseChest:
                 move.w  #MAP_BLOCKIDX_CLOSEDCHEST,(a2,d0.w)
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_41BA
-                bset    #0,((byte_FFA82D-$1000000)).w
+                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 bra.s   loc_41C0
 loc_41BA:
                 
-                bset    #1,((byte_FFA82D-$1000000)).w
+                bset    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
 loc_41C0:
                 
                 movem.l (sp)+,d0-d1/a2
@@ -1531,30 +1529,32 @@ loc_4340:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4344:
+; Updates plane A
+
+UpdateVdpPlaneA:
                 
                 movem.l a0-a1,-(sp)
                 movem.w d7,-(sp)
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_4358
-                clr.w   ((word_FFA80E-$1000000)).w
+                clr.w   ((TILE_PALETTE_MASK-$1000000)).w
                 bra.s   loc_435E
 loc_4358:
                 
-                move.w  #$2000,((word_FFA80E-$1000000)).w
+                move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_435E:
                 
-                move.w  ((word_FFA810-$1000000)).w,d0
-                move.w  ((word_FFA812-$1000000)).w,d1
-                move.w  ((word_FFA804-$1000000)).w,d2
-                move.w  ((word_FFA808-$1000000)).w,d3
-                lea     (byte_FFC000).l,a1
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
+                lea     (PLANE_A_MAP_LAYOUT).l,a1
                 bsr.w   sub_43F8
-                movea.l ((WINDOW_TILES_END-$1000000)).w,a1
-                cmpa.l  #VDP_TILE_IDX_LIST,a1
+                movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
+                cmpa.l  #WINDOW_TILE_LAYOUTS,a1
                 bne.s   loc_439A
-                lea     (byte_FFC000).l,a0
-                lea     ($C000).l,a1
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
+                lea     ($C000).l,a1    ; Update VDP Plane A layout data
                 move.w  #$400,d0
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDMA
@@ -1564,32 +1564,34 @@ loc_439A:
                 movem.l (sp)+,a0-a1
                 rts
 
-	; End of function sub_4344
+	; End of function UpdateVdpPlaneA
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43A4:
+; Updates plane B
+
+UpdateVdpPlaneB:
                 
                 movem.l a0-a1,-(sp)
                 movem.w d7,-(sp)
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_43B8
-                clr.w   ((word_FFA80E-$1000000)).w
+                clr.w   ((TILE_PALETTE_MASK-$1000000)).w
                 bra.s   loc_43BE
 loc_43B8:
                 
-                move.w  #$2000,((word_FFA80E-$1000000)).w
+                move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_43BE:
                 
-                move.w  ((word_FFA814-$1000000)).w,d0
-                move.w  ((word_FFA816-$1000000)).w,d1
-                move.w  ((word_FFA806-$1000000)).w,d2
-                move.w  ((word_FFA80A-$1000000)).w,d3
-                lea     (byte_FFE000).l,a1
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
+                move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
+                lea     (PLANE_B_LAYOUT).l,a1
                 bsr.w   sub_43F8
-                lea     (byte_FFE000).l,a0
-                lea     ($E000).l,a1
+                lea     (PLANE_B_LAYOUT).l,a0
+                lea     ($E000).l,a1    ; Update VDP Plane B layout data
                 move.w  #$400,d0
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDMA
@@ -1597,7 +1599,7 @@ loc_43BE:
                 movem.l (sp)+,a0-a1
                 rts
 
-	; End of function sub_43A4
+	; End of function UpdateVdpPlaneB
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1672,7 +1674,7 @@ loc_4496:
                 bclr    #$B,d3
                 addq.w  #1,d1
                 dbf     d7,loc_4434
-                bsr.w   sub_3D46
+                bsr.w   FinalizeScrollDataUpdate
                 rts
 loc_44B4:
                 
@@ -1713,7 +1715,7 @@ loc_44F0:
                 bra.s   loc_44FE
 loc_44FA:
                 
-                move.w  ((word_FFA80E-$1000000)).w,d4
+                move.w  ((TILE_PALETTE_MASK-$1000000)).w,d4
 loc_44FE:
                 
                 andi.w  #$3FF,d0

@@ -82,8 +82,8 @@ loc_2812E:
                 move.w  #$3C,d0 
 loc_28164:
                 
-                jsr     (WaitForVInt).w 
-                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                jsr     (WaitForVInt).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 bne.w   loc_2818E
                 subq.w  #1,d0
                 bne.s   loc_28164
@@ -101,7 +101,7 @@ loc_28164:
 
 CheckStartButtonAtSegaLogo:
                 
-                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 beq.s   loc_2812E       
 loc_2818E:
                 
@@ -145,8 +145,8 @@ loc_28B26:
                 move.w  (a2)+,2(a1)
                 subq.w  #8,a1
                 dbf     d7,loc_28B26
-                jsr     (WaitForVInt).w 
-                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                jsr     (WaitForVInt).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 bne.s   loc_28B68
                 bra.s   sub_28B12
 loc_28B64:
@@ -1133,8 +1133,8 @@ LoadSegaLogoPalette:
 
 CalculateRomChecksum:
                 
-                jsr     (WaitForVInt).w 
-                btst    #INPUT_A_START_BIT,((P2_INPUT-$1000000)).w
+                jsr     (WaitForVInt).w
+                btst    #INPUT_A_START,((P2_INPUT-$1000000)).w
                 beq.s   return_28F96    ; execute only if P2 START pressed
                 lea     (RomEndAddress).w,a0
                 move.l  (a0),d1

@@ -719,7 +719,7 @@ loc_2632:
                 dc.l 0
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
-                dc.l VInt_3930          
+                dc.l VInt_UpdateScrollingData
                 bsr.w   LoadMapBlocksAndLayout
                 movea.l (a5)+,a4
                 move.w  (a4)+,d0
@@ -761,20 +761,20 @@ rjt_OverworldMapTransition:
 
 ApplyOverworldMapTransition_Right:
                 
-                move.w  #0,((word_FFA810-$1000000)).w
-                move.w  #0,((word_FFA814-$1000000)).w
+                move.w  #0,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
+                move.w  #0,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
                 move.w  #0,((word_FFA818-$1000000)).w
                 move.w  #0,((word_FFA81C-$1000000)).w
-                jsr     sub_43A4(pc)
+                jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1D,d7
-                lea     (byte_FFE000).l,a0
-                lea     (byte_FFC000).l,a1
+                lea     (PLANE_B_LAYOUT).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a1
                 move.w  #2,d0
                 move.w  #$3E,d1 
 loc_26C0:
                 
-                subq.w  #8,((word_FFA804-$1000000)).w
+                subq.w  #8,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
                 cmpi.w  #$14,d7
                 bge.s   loc_26D0
                 move.w  #$F900,d2
@@ -786,7 +786,7 @@ loc_26D4:
                 
                 move.w  #$F800,d3
                 bsr.w   sub_29A2
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 move.w  #$1F,d6
                 movem.l d0-d1,-(sp)
 loc_26E8:
@@ -801,7 +801,7 @@ loc_26E8:
                 addq.w  #2,d1
                 andi.w  #$3E,d1 
                 movem.l d0-d1/a0-a1,-(sp)
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
@@ -809,13 +809,13 @@ loc_26E8:
                 bsr.w   EnableDMAQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_26C0
-                bsr.w   WaitForVInt     
-                move.w  #0,((word_FFA804-$1000000)).w
-                move.w  #0,((word_FFA806-$1000000)).w
+                bsr.w   WaitForVInt
+                move.w  #0,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
+                move.w  #0,((VIEW_PLANE_B_X_COUNTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
-                dc.l VInt_3930          
-                jsr     sub_4344(pc)
+                dc.l VInt_UpdateScrollingData
+                jsr     UpdateVdpPlaneA(pc)
                 nop
                 rts
 
@@ -826,24 +826,24 @@ loc_26E8:
 
 ApplyOverworldMapTransition_Left:
                 
-                move.w  #$4F80,((word_FFA810-$1000000)).w
-                move.w  #$4F80,((word_FFA814-$1000000)).w
+                move.w  #$4F80,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
+                move.w  #$4F80,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
                 move.w  #$4F80,((word_FFA818-$1000000)).w
                 move.w  #$4F80,((word_FFA81C-$1000000)).w
-                jsr     sub_43A4(pc)
+                jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1D,d7
 loc_2772:
                 
-                lea     (byte_FFE000).l,a0
-                lea     (byte_FFC000).l,a1
+                lea     (PLANE_B_LAYOUT).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a1
                 move.w  #$3C,d0 
 loc_2782:
                 
                 move.w  #0,d1
 loc_2786:
                 
-                addq.w  #8,((word_FFA804-$1000000)).w
+                addq.w  #8,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
                 cmpi.w  #$14,d7
                 bge.s   loc_2796
                 move.w  #$700,d2
@@ -857,7 +857,7 @@ loc_279A:
                 bsr.w   sub_29A2
 loc_27A2:
                 
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 move.w  #$1F,d6
                 movem.l d0-d1,-(sp)
 loc_27AE:
@@ -872,7 +872,7 @@ loc_27AE:
                 subq.w  #2,d1
                 andi.w  #$3E,d1 
                 movem.l d0-d1/a0-a1,-(sp)
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
@@ -882,17 +882,17 @@ loc_27AE:
                 dbf     d7,loc_2786
 loc_27F6:
                 
-                bsr.w   WaitForVInt     
-                move.w  #8,((word_FFA804-$1000000)).w
+                bsr.w   WaitForVInt
+                move.w  #8,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
 loc_2800:
                 
-                move.w  #8,((word_FFA806-$1000000)).w
+                move.w  #8,((VIEW_PLANE_B_X_COUNTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
 off_280A:
                 
-                dc.l VInt_3930          
-                jsr     sub_4344(pc)
+                dc.l VInt_UpdateScrollingData
+                jsr     UpdateVdpPlaneA(pc)
                 nop
                 rts
 
@@ -903,20 +903,20 @@ off_280A:
 
 ApplyOverworldMapTransition_Up:
                 
-                move.w  #$5100,((word_FFA812-$1000000)).w
-                move.w  #$5100,((word_FFA816-$1000000)).w
+                move.w  #$5100,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
+                move.w  #$5100,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
                 move.w  #$5100,((word_FFA81A-$1000000)).w
                 move.w  #$5100,((word_FFA81E-$1000000)).w
-                jsr     sub_43A4(pc)
+                jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1A,d7
-                lea     (byte_FFE000).l,a0
-                lea     (byte_FFC000).l,a1
+                lea     (PLANE_B_LAYOUT).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a1
                 move.w  #$6C0,d0
                 move.w  #0,d1
 loc_284C:
                 
-                subq.w  #8,((word_FFA808-$1000000)).w
+                subq.w  #8,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
                 cmpi.w  #$14,d7
                 bge.s   loc_285C
                 move.w  #7,d2
@@ -928,7 +928,7 @@ loc_2860:
                 
                 move.w  #8,d3
                 bsr.w   sub_29A2
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 move.w  #$1F,d6
                 movem.l d0-d1,-(sp)
 loc_2874:
@@ -943,7 +943,7 @@ loc_2874:
                 subi.w  #$40,d1 
                 andi.w  #$7FE,d1
                 movem.l d0-d1/a0-a1,-(sp)
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
@@ -951,15 +951,15 @@ loc_2874:
                 bsr.w   EnableDMAQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_284C
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
 loc_28C0:
                 
-                move.w  #$18,((word_FFA808-$1000000)).w
-                move.w  #$18,((word_FFA80A-$1000000)).w
+                move.w  #$18,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
+                move.w  #$18,((VIEW_PLANE_B_Y_COUNTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
-                dc.l VInt_3930          
-                jsr     sub_4344(pc)
+                dc.l VInt_UpdateScrollingData
+                jsr     UpdateVdpPlaneA(pc)
                 nop
                 rts
 
@@ -970,20 +970,20 @@ loc_28C0:
 
 ApplyOverworldMapTransition_Down:
                 
-                move.w  #0,((word_FFA812-$1000000)).w
-                move.w  #0,((word_FFA816-$1000000)).w
+                move.w  #0,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
+                move.w  #0,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
                 move.w  #0,((word_FFA81A-$1000000)).w
                 move.w  #0,((word_FFA81E-$1000000)).w
-                jsr     sub_43A4(pc)
+                jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1A,d7
-                lea     (byte_FFE000).l,a0
-                lea     (byte_FFC000).l,a1
+                lea     (PLANE_B_LAYOUT).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a1
                 move.w  #$140,d0
                 move.w  #0,d1
 loc_2912:
                 
-                addq.w  #8,((word_FFA808-$1000000)).w
+                addq.w  #8,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
                 cmpi.w  #$14,d7
                 bge.s   loc_2922
                 move.w  #$F9,d2 
@@ -995,7 +995,7 @@ loc_2926:
                 
                 move.w  #$F8,d3 
                 bsr.w   sub_29A2
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 move.w  #$1F,d6
                 movem.l d0-d1,-(sp)
 loc_293A:
@@ -1010,7 +1010,7 @@ loc_293A:
                 addi.w  #$40,d1 
                 andi.w  #$7FE,d1
                 movem.l d0-d1/a0-a1,-(sp)
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
@@ -1018,13 +1018,13 @@ loc_293A:
                 bsr.w   EnableDMAQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_2912
-                bsr.w   WaitForVInt     
-                move.w  #8,((word_FFA808-$1000000)).w
-                move.w  #8,((word_FFA80A-$1000000)).w
+                bsr.w   WaitForVInt
+                move.w  #8,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
+                move.w  #8,((VIEW_PLANE_B_Y_COUNTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
-                dc.l VInt_3930          
-                jsr     sub_4344(pc)
+                dc.l VInt_UpdateScrollingData
+                jsr     UpdateVdpPlaneA(pc)
                 nop
                 rts
 
@@ -1143,11 +1143,11 @@ loc_2A86:
 
 LoadMap:
                 
-                move.l  ((word_FFA818-$1000000)).w,((word_FFA810-$1000000)).w
-                move.l  ((word_FFA81C-$1000000)).w,((word_FFA814-$1000000)).w
+                move.l  ((word_FFA818-$1000000)).w,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
+                move.l  ((word_FFA81C-$1000000)).w,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
                 clr.l   ((word_FFA820-$1000000)).w
                 clr.l   ((word_FFA824-$1000000)).w
-                clr.b   ((CAMERA_SCROLLING_MASK-$1000000)).w
+                clr.b   ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 move.w  d0,-(sp)
                 move.w  d1,-(sp)
                 bsr.w   InitDisplay
@@ -1276,7 +1276,7 @@ loc_2BC0:
                 cmpi.w  #$FFFF,d4
                 bne.s   loc_2BE6
                 move.l  a0,-(sp)
-                move.b  ((CAMERA_ENTITY-$1000000)).w,d4
+                move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d4
                 bpl.s   loc_2BD0
                 clr.w   d4
 loc_2BD0:
@@ -1388,62 +1388,62 @@ loc_2C9A:
                 mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d3
                 lsr.l   #8,d3
                 add.w   d4,d0
-                move.w  d0,((word_FFA810-$1000000)).w
+                move.w  d0,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
                 add.w   d5,d1
-                move.w  d1,((word_FFA812-$1000000)).w
+                move.w  d1,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
                 add.w   d6,d2
-                move.w  d2,((word_FFA814-$1000000)).w
+                move.w  d2,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
                 add.w   d7,d3
-                move.w  d3,((word_FFA816-$1000000)).w
+                move.w  d3,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
                 bsr.w   sub_38C0
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
                 beq.s   loc_2CD8
-                move.w  d0,((word_FFA810-$1000000)).w
+                move.w  d0,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
 loc_2CD8:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
                 beq.s   loc_2CE2
-                move.w  d1,((word_FFA812-$1000000)).w
+                move.w  d1,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
 loc_2CE2:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
                 beq.s   loc_2CEC
-                move.w  d0,((word_FFA814-$1000000)).w
+                move.w  d0,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
 loc_2CEC:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
                 beq.s   loc_2CF6
-                move.w  d1,((word_FFA816-$1000000)).w
+                move.w  d1,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
 loc_2CF6:
                 
-                move.w  ((word_FFA810-$1000000)).w,d0
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 lsr.w   #4,d0
                 neg.w   d0
                 andi.w  #$FF,d0
-                move.w  d0,((word_FFA804-$1000000)).w
-                move.w  ((word_FFA812-$1000000)).w,d1
+                move.w  d0,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
                 lsr.w   #4,d1
                 addq.w  #8,d1
                 andi.w  #$FF,d1
-                move.w  d1,((word_FFA808-$1000000)).w
-                move.w  ((word_FFA814-$1000000)).w,d2
+                move.w  d1,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
                 lsr.w   #4,d2
                 neg.w   d2
                 andi.w  #$FF,d2
-                move.w  d2,((word_FFA806-$1000000)).w
-                move.w  ((word_FFA816-$1000000)).w,d3
+                move.w  d2,((VIEW_PLANE_B_X_COUNTER-$1000000)).w
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d3
                 lsr.w   #4,d3
                 addq.w  #8,d3
                 andi.w  #$FF,d3
-                move.w  d3,((word_FFA80A-$1000000)).w
+                move.w  d3,((VIEW_PLANE_B_Y_COUNTER-$1000000)).w
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   UpdateVDPHScrollData
                 bsr.w   UpdateVDPVScrollData
                 bsr.w   InitWindowProperties
                 bsr.w   ToggleRoofOnMapLoad
-                bsr.w   WaitForVInt     
-                bsr.w   sub_4344
-                bsr.w   sub_43A4
+                bsr.w   WaitForVInt
+                bsr.w   UpdateVdpPlaneA 
+                bsr.w   UpdateVdpPlaneB 
                 rts
 
 	; End of function LoadMap
@@ -1606,17 +1606,17 @@ return_2EBE:
 sub_2EC0:
                 
                 move.w  #$20,d6 
-                bsr.w   UpdateRandomSeed
+                bsr.w   GenerateRandomNumber
                 move.w  d7,d0
                 move.w  #4,d6
-                bsr.w   UpdateRandomSeed
+                bsr.w   GenerateRandomNumber
                 move.w  d7,d1
                 addi.w  #$1C,d1
                 move.w  #$10,d6
-                bsr.w   UpdateRandomSeed
+                bsr.w   GenerateRandomNumber
                 move.w  d7,d2
                 move.w  #4,d6
-                bsr.w   UpdateRandomSeed
+                bsr.w   GenerateRandomNumber
                 move.w  d7,d3
                 move.w  #4,d4
 loc_2EF0:
@@ -1625,7 +1625,7 @@ loc_2EF0:
                 move.w  #4,d6
                 move.w  #4,d7
                 bsr.w   sub_36B2
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
 loc_2F04:
                 
                 move.w  #$8721,d0
@@ -1634,9 +1634,9 @@ loc_2F08:
                 bsr.w   SetVdpReg
                 move.w  #$8700,d0
                 bsr.w   SetVdpReg
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 bsr.w   sub_2F24
-                tst.b   ((CAMERA_SCROLLING_MASK-$1000000)).w
+                tst.b   ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 bne.s   loc_2F04
                 rts
 

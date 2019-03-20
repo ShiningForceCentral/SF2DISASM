@@ -14,7 +14,7 @@ ExecuteMapScript:
                 clr.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
 loc_47140:
                 
-                btst    #INPUT_A_START_BIT,((P2_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P2_INPUT-$1000000)).w
                                                         ; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
                 beq.s   loc_47156
                 tst.b   (DEBUG_MODE_ACTIVATED).l
@@ -138,10 +138,10 @@ loc_47234:
                 
                 tst.w   ((TEXT_WINDOW_INDEX-$1000000)).w
                 beq.s   loc_4723E
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
 loc_4723E:
                 
-                clr.w   ((CAMERA_SPEED-$1000000)).w
+                clr.w   ((VIEW_SCROLLING_SPEED-$1000000)).w
                 movem.l (sp)+,d0-a6
                 rts
 
@@ -179,7 +179,7 @@ loc_47270:
                 
                 adda.w  #2,a6
                 move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 jsr     (DisplayText).l 
                 addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
                                                         ; increment script number (move forward in script bank)
@@ -220,7 +220,7 @@ loc_472BE:
                 move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 jsr     (DisplayText).l 
                 addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
                 jsr     j_HidePortraitWindow
@@ -254,7 +254,7 @@ loc_47314:
                 
                 adda.w  #2,a6
                 move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 jsr     (DisplayText).l 
                 addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
                 bra.s   return_47330
@@ -290,7 +290,7 @@ loc_47352:
                 move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 jsr     (DisplayText).l 
                 addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
                 rts
@@ -355,7 +355,7 @@ csc07_executeMapSystemEvent:
 csc08_joinForce:
                 
                 move.w  #0,((SPEECH_SFX-$1000000)).w
-                jsr     (WaitForCameraToCatchUp).w
+                jsr     (WaitForViewScrollEnd).w
                 move.w  (a6)+,d0
                 bclr    #$F,d0
                 bne.s   byte_473B0

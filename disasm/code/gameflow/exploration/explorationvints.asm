@@ -13,10 +13,10 @@ ProcessPlayerAction:
                 jsr     j_MakeEntityIdle
                 clr.w   d0
                 jsr     j_WaitForEntityToStopMoving
-                jsr     (WaitForCameraToCatchUp).l
-                btst    #INPUT_A_A_BIT,d7
+                jsr     (WaitForViewScrollEnd).l
+                btst    #INPUT_A_A,d7
                 bne.w   loc_25BCC       
-                btst    #INPUT_A_C_BIT,d7
+                btst    #INPUT_A_C,d7
                 bne.w   loc_25B02       
                 rts
 loc_25B02:
@@ -24,7 +24,7 @@ loc_25B02:
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                                                         ; BUTTON C PUSHED
                 beq.s   loc_25B40       
-                btst    #INPUT_A_B_BIT,((P2_INPUT-$1000000)).w
+                btst    #INPUT_A_B,((P2_INPUT-$1000000)).w
                                                         ; If Debug Mode and P1 C pushed while P2 B pushed, access Debug Flag Setter and then Chuch Actions
                 beq.s   loc_25B22
                 move.w  #$258,d0
@@ -33,9 +33,9 @@ loc_25B02:
                 rts
 loc_25B22:
                 
-                btst    #INPUT_A_C_BIT,((P2_INPUT-$1000000)).w
+                btst    #INPUT_A_C,((P2_INPUT-$1000000)).w
                 bne.w   loc_25BF4       
-                btst    #INPUT_A_A_BIT,((P2_INPUT-$1000000)).w
+                btst    #INPUT_A_A,((P2_INPUT-$1000000)).w
                                                         ; If Debug Mode and P1 C pushed while P2 A pushed, access Debug Mode Action Select
                 beq.s   loc_25B40       
                 jsr     (FadeOutToBlack).w
@@ -68,16 +68,16 @@ loc_25B64:
                 dc.l VInt_UpdateEntities
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
-                dc.l VInt_AdjustCameraToPlayer
+                dc.l VInt_UpdateViewData
                 jsr     j_CaravanActions
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
-                dc.l VInt_AdjustCameraToPlayer
+                dc.l VInt_UpdateViewData
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l VInt_UpdateEntities
                 sndCom  SOUND_COMMAND_FADE_OUT
-                bsr.w   sub_25A74
+                bsr.w   j_j_GrowOutBowieAndFollowers
                 sndCom  SOUND_COMMAND_PLAY_PREVIOUS_MUSIC
                 bra.w   return_25BF2
 loc_25BAA:
@@ -100,11 +100,11 @@ loc_25BCC:
                 dc.l VInt_UpdateEntities
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
-                dc.l VInt_AdjustCameraToPlayer
+                dc.l VInt_UpdateViewData
                 jsr     j_MainMenuActions
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
-                dc.l VInt_AdjustCameraToPlayer
+                dc.l VInt_UpdateViewData
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l VInt_UpdateEntities

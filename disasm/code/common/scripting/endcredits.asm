@@ -9,7 +9,7 @@ PlayEndCredits:
                 jmp     *+4(pc)
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
-                jsr     (WaitForVInt).w 
+                jsr     (WaitForVInt).w
                 jsr     (DisableDisplayAndVInt).w
                 jsr     (ClearVsramAndSprites).w
                 jsr     (EnableDisplayAndInterrupts).w
@@ -17,7 +17,7 @@ PlayEndCredits:
                 bsr.w   ClearPalette2
                 jsr     (DisableDisplayAndVInt).w
                 bsr.w   LoadEndCreditsFont
-                lea     (byte_FFE000).l,a1
+                lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$27C0,d1
                 moveq   #7,d7
 loc_1AC09C:
@@ -31,7 +31,7 @@ loc_1AC09E:
                 addq.w  #2,d1
                 lea     $34(a1),a1
                 dbf     d7,loc_1AC09C
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
@@ -74,11 +74,11 @@ loc_1AC10E:
                 clr.l   (a0)+
                 jsr     (ApplyVIntCramDMA).w
                 move.w  #$40,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$80,d7 
                 move.w  d7,(HORIZONTAL_SCROLL_DATA+2).l
                 move.w  #$60,d6 
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$20,d7 
                 neg.w   d7
                 move.w  d7,(VERTICAL_SCROLL_DATA+2).l
@@ -170,7 +170,7 @@ loc_1AC220:
 EndCreditSubroutine:
                 
                 move.b  (a0)+,d1
-                lea     (byte_FFC000).l,a1
+                lea     (PLANE_A_MAP_LAYOUT).l,a1
                 move.w  (VERTICAL_SCROLL_DATA).l,d0
                 lsr.w   #3,d0
                 addi.w  #$1C,d0
@@ -204,7 +204,7 @@ loc_1AC262:
 loc_1AC280:
                 
                 move.l  a0,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1

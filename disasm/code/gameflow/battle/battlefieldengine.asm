@@ -51,7 +51,7 @@ ClearMovableGrid:
                 
                 movem.l d0-a6,-(sp)
                 lea     ((byte_FF4000+$400)).l,a0
-                lea     ((byte_FF4A00+$300)).l,a1
+                lea     (FF4D00_LOADING_SPACE).l,a1
                 move.w  #$240,d0
                 moveq   #$FFFFFFFF,d1
 loc_C0DA:
@@ -110,7 +110,7 @@ GetDestinationMoveCost:
                 
                 movem.l d1-a6,-(sp)
                 lea     ((byte_FF4000+$400)).l,a0
-                lea     ((byte_FF4A00+$300)).l,a1
+                lea     (FF4D00_LOADING_SPACE).l,a1
                 clr.w   d0
                 mulu.w  #$30,d2 
                 andi.w  #$FF,d1
@@ -264,7 +264,7 @@ loc_C208:
 loc_C212:
                 
                 move.b  #0,(a0)
-                lea     ((byte_FF4A00+$300)).l,a0
+                lea     (FF4D00_LOADING_SPACE).l,a0
                 bsr.w   ConvertCoordToOffset
                 move.b  #0,(a0)
                 movem.l (sp)+,d0-a6
@@ -348,7 +348,7 @@ GetMoveInfo:
 loc_C2D0:
                 
                 lea     ((byte_FF4000+$400)).l,a2
-                lea     ((byte_FF4A00+$300)).l,a3
+                lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     ((MOVE_COST_LIST-$1000000)).w,a5
                 jsr     GetXPos
@@ -1210,7 +1210,7 @@ loc_C90A:
                 jsr     GetXPos
                 cmpi.w  #$30,d1 
                 bcc.w   loc_C94C
-                lea     ((byte_FF4A00+$300)).l,a0
+                lea     (FF4D00_LOADING_SPACE).l,a0
                 bsr.w   ConvertCoordToOffset
                 tst.w   d3
                 bne.s   loc_C948

@@ -57,7 +57,7 @@ WaitForPlayerInput:
                 
                 andi.b  #$FF,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.s   return_1584
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 bra.s   WaitForPlayerInput
 return_1584:
                 
@@ -72,13 +72,13 @@ WaitForPlayer1NewButtonPush:
                 
                 andi.b  #$FF,((P1_INPUT-$1000000)).w
                 beq.s   loc_1594
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 bra.s   WaitForPlayer1NewButtonPush
 loc_1594:
                 
                 andi.b  #$FF,((P1_INPUT-$1000000)).w
                 bne.s   return_15A2
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 bra.s   loc_1594
 return_15A2:
                 
@@ -126,7 +126,7 @@ loc_15DE:
                 
                 andi.b  #$FF,((P1_INPUT-$1000000)).w
                 bne.s   loc_15EE
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 dbf     d5,loc_15DE
 loc_15EE:
                 

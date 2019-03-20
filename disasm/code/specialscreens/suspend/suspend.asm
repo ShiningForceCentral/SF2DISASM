@@ -29,7 +29,7 @@ SuspendGame:
                 move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
                 moveq   #3,d0
                 jsr     (Sleep).w       
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 move.l  #$24002401,$5EC(a0)
                 move.l  #$24022403,$5F0(a0)
                 move.l  #$24042405,$5F4(a0)

@@ -25,7 +25,7 @@ InitDisplay:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE   ; clear all triggers
                 dc.l 0
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 bsr.w   DisableDisplayAndVInt
                 bsr.w   ClearSpriteTable
                 move.w  #$8C00,d0       ; H32 cell mode, no interlace
@@ -66,12 +66,12 @@ plt_BasePalette:incbin "data/graphics/tech/basepalette.bin"
 
 sub_30BE:
                 
-                lea     (byte_FFC000).l,a0
+                lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDMA
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1

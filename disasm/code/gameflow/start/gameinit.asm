@@ -15,8 +15,8 @@ InitGame:
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.w   GameIntro
                 bsr.w   EnableDisplayAndInterrupts
-                bsr.w   WaitForVInt     
-                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                bsr.w   WaitForVInt
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 beq.s   loc_7118
                 jsr     (EnableDisplayAndInterrupts).w
                 bsr.w   InitDisplay
@@ -24,9 +24,9 @@ InitGame:
                 jmp     j_rts
 loc_7118:
                 
-                btst    #INPUT_A_UP_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_UP,((P1_INPUT-$1000000)).w
                 bne.w   DebugModeBattleTest
-                btst    #INPUT_A_DOWN_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_DOWN,((P1_INPUT-$1000000)).w
                 beq.w   j_GameIntro
                 jsr     (EnableDisplayAndInterrupts).w
                 bsr.w   InitDisplay

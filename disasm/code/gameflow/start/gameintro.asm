@@ -75,7 +75,8 @@ loc_724E:
                 bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndVInt
                 clr.b   ((byte_FFB198-$1000000)).w
-                move.w  #$48,((SPEECH_SFX-$1000000)).w 
+                move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w
+                                                        ; Witch speech SFX
                 bsr.w   DisplayWitchScreen
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
@@ -95,7 +96,7 @@ loc_729C:
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
                 bsr.w   InitWindowProperties
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_WitchBlink
@@ -126,33 +127,33 @@ loc_7332:
                 jsr     j_FadeOut_WaitForP1Input
 loc_734C:
                 
-                btst    #7,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 bne.w   loc_73AA
                 txt     $D8             ; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
-                bsr.w   WaitForVInt     
-                bsr.w   sub_7CF4
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
+                bsr.w   UpdateWitchHead
+                bsr.w   WaitForVInt
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
                 move.b  #$FF,((byte_FFB082-$1000000)).w
                 txt     $D9             ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
 loc_737C:
                 
-                btst    #7,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_73C2       
                 txt     $DA             ; "Yes, yes...I used a spell{N}on you.{W2}"
-                btst    #7,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_73C2       
                 txt     $DB             ; "Ha, ha.  Where are you{N}going?  You can't escape{W2}"
-                btst    #7,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_73C2       
                 txt     $DC             ; "from this mystery forest{N}unless you help me.{W2}"
                 bra.w   byte_73C2       
 loc_73AA:
                 
-                bsr.w   WaitForVInt     
-                bsr.w   sub_7CF4
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
+                bsr.w   UpdateWitchHead
+                bsr.w   WaitForVInt
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.b  #$FF,((byte_FFB082-$1000000)).w
 byte_73C2:

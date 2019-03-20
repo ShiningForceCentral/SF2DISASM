@@ -22,7 +22,7 @@ WitchSuspend:
                 move.w  #$258,d0
 loc_7068:
                 
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 btst    #7,((P1_INPUT-$1000000)).w
                 dbne    d0,loc_7068
                 sndCom  SOUND_COMMAND_FADE_OUT

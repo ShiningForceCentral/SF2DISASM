@@ -4,7 +4,7 @@
 InitStack:      ; File Name   : D:\SEGADEV\IDB\SF2\sf2.bin
                 dc.l InitStack          ; Initial Stack
 p_Start:        dc.l Start              ; Start Address
-                dc.l Int_OtherError     ; Bus Error
+off_8:          dc.l Int_OtherError     ; Bus Error
                 dc.l Int_AdressError    ; Address Error
 off_10:         dc.l Int_IllegalInstruction; Illegal instruction
                 dc.l Int_ZeroDivide     ; Zero Divide

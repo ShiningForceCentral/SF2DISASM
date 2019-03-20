@@ -227,7 +227,7 @@ loc_1AC46A:
                 move.w  #$2F,d4 
                 move.w  #0,d2
                 lea     (BATTLE_TERRAIN).l,a0
-                lea     ((byte_FF4A00+$300)).l,a1
+                lea     (FF4D00_LOADING_SPACE).l,a1
 loc_1AC49E:
                 
                 move.w  #$2F,d3 

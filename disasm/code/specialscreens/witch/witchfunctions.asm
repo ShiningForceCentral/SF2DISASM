@@ -26,16 +26,16 @@ InitWitchSuspendVIntFunctions:
                 bsr.w   EnableDisplayAndInterrupts
                 movea.l (p_WitchLayout).l,a0
                 lea     $700(a0),a0
-                lea     (byte_FFE15C).l,a1
+                lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$707,d1
-                bsr.w   sub_7D28
-                bsr.w   sub_7D0C
+                bsr.w   UpdateWitchLayoutZone
+                bsr.w   QueueDmaForWitchLayout
                 bsr.w   FadeInFromBlack
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
                 bsr.w   InitWindowProperties
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_WitchBlink
@@ -59,21 +59,21 @@ DisplayWitchScreen:
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDMA
                 movea.l (p_WitchLayout).l,a0
-                lea     (byte_FFE000).l,a1
+                lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$800,d7
                 bsr.w   CopyBytes       
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDMA
-                movea.l (p_plt_Witch).l,a0
+                movea.l (p_plt_Witch).l,a0; Two palettes
                 lea     (PALETTE_1_BASE).l,a1
-                moveq   #$20,d7 
+                moveq   #$20,d7 ; Palette 1
                 bsr.w   CopyBytes       
                 lea     $20(a0),a0
                 lea     $60(a1),a1
-                moveq   #$20,d7 
+                moveq   #$20,d7 ; Palette 4
                 bsr.w   CopyBytes       
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
@@ -87,36 +87,36 @@ DisplayWitchScreen:
 sub_7CDC:
                 
                 movea.l (p_WitchLayout).l,a0
-                lea     (byte_FFE000).l,a1
+                lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$800,d7
                 bsr.w   CopyBytes       
 loc_7CF0:
                 
-                bra.w   sub_7D0C
+                bra.w   QueueDmaForWitchLayout
 
 	; End of function sub_7CDC
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7CF4:
+UpdateWitchHead:
                 
                 movea.l (p_WitchLayout).l,a0
                 lea     $700(a0),a0
 loc_7CFE:
                 
-                lea     (byte_FFE15C).l,a1
+                lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$707,d1
-                bsr.w   sub_7D28
+                bsr.w   UpdateWitchLayoutZone
 
-	; End of function sub_7CF4
+	; End of function UpdateWitchHead
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D0C:
+QueueDmaForWitchLayout:
                 
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$220,d0
                 moveq   #2,d1
@@ -124,12 +124,14 @@ sub_7D0C:
                 bsr.w   WaitForDMAQueueProcessing
                 rts
 
-	; End of function sub_7D0C
+	; End of function QueueDmaForWitchLayout
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D28:
+; D1=Width/Height
+
+UpdateWitchLayoutZone:
                 
                 movem.l d0-a1,-(sp)
                 move.w  d1,d6
@@ -151,7 +153,7 @@ loc_7D3C:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function sub_7D28
+	; End of function UpdateWitchLayoutZone
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -170,7 +172,7 @@ VInt_WitchBlink:
                 lea     $762(a0),a0
                 lea     (byte_FFE21E).l,a1
                 move.w  #$302,d1
-                bsr.s   sub_7D28
+                bsr.s   UpdateWitchLayoutZone
                 addq.w  #1,-2(a6)
 loc_7D8A:
                 
@@ -178,13 +180,13 @@ loc_7D8A:
                 bne.s   loc_7DB4
                 movea.l (p_WitchLayout).l,a0
                 lea     $700(a0),a0
-                lea     (byte_FFE15C).l,a1
+                lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$705,d1
-                bsr.s   sub_7D28
+                bsr.s   UpdateWitchLayoutZone
                 addq.w  #1,-2(a6)
                 moveq   #$78,d6 
-                jsr     (UpdateRandomSeed).w
-                addi.w  #$1E,d7
+                jsr     (GenerateRandomNumber).w
+                addi.w  #$1E,d7         ; minimum frames between two blinks
                 move.w  d7,(a2)
 loc_7DB4:
                 
@@ -203,7 +205,7 @@ loc_7DC6:
                 lea     $780(a0),a0
                 lea     (byte_FFE29E).l,a1
                 move.w  #$301,d1
-                bsr.w   sub_7D28
+                bsr.w   UpdateWitchLayoutZone
                 addq.w  #1,-2(a6)
 loc_7DEA:
                 
@@ -215,17 +217,17 @@ loc_7DEE:
                 lea     $77A(a0),a0
                 lea     (byte_FFE29E).l,a1
                 move.w  #$301,d1
-                bsr.w   sub_7D28
+                bsr.w   UpdateWitchLayoutZone
                 addq.w  #1,-2(a6)
                 moveq   #5,d6
-                jsr     (UpdateRandomSeed).w
+                jsr     (GenerateRandomNumber).w
                 addi.w  #$A,d7
                 move.w  d7,(a2)
 loc_7E16:
                 
                 tst.w   -2(a6)
                 beq.s   loc_7E36
-                lea     (byte_FFE000).l,a0
+                lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$200,d0
                 moveq   #2,d1

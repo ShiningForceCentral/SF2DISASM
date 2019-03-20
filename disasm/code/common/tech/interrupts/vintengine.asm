@@ -9,18 +9,18 @@ VInt:
                 movem.l d0-a6,-(sp)
                 bclr    #ENABLE_VINT,(VINT_PARAMS).l
                 beq.s   loc_5EC
-                bsr.w   WaitUntilNoDMAInProgress
+                bsr.w   WaitDmaEnd
                 bsr.w   DisableDisplay
-                bsr.w   ProcessVdpCommandQueues
+                bsr.w   ProcessVdpQueues
                 bsr.w   EnableDisplayOnVdp
                 bsr.w   ProcessVramRead
                 bsr.w   ApplyFadingFX
-                bsr.w   UpdateSoundAndInputAndPalettes
+                bsr.w   ApplyZ80BusUpdates
                 andi    #$F800,sr       ; disable interrupts
                 clr.b   ((HIDE_WINDOWS-$1000000)).w
                 tst.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 bne.s   loc_5DA
-                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                                                         ; if Start pushed, hide windows
                 beq.s   loc_5DA
                 move.b  #$FF,((HIDE_WINDOWS-$1000000)).w
@@ -37,7 +37,7 @@ loc_5EC:
                 move.w  (VDP_REG00_STATUS).l,(VDP_Control).l
                 move.l  ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w,d0
                 beq.s   loc_620
-                btst    #INPUT_A_START_BIT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 beq.s   loc_620
                 clr.l   ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
                 movea.l (GAME_INTRO_SP_OFFSET).l,sp; if P1 START pushed during intro cutscenes, stop and go back to game intro flow
@@ -99,13 +99,13 @@ DisableDisplay:
 
 ; =============== S U B R O U T I N E =======================================
 
-ProcessVdpCommandQueues:
+ProcessVdpQueues:
                 
                 bsr.s   ProcessVdpCommandQueue
                 bsr.w   ProcessDMAQueue
                 rts
 
-	; End of function ProcessVdpCommandQueues
+	; End of function ProcessVdpQueues
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -402,7 +402,7 @@ loc_8D6:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateSoundAndInputAndPalettes:
+ApplyZ80BusUpdates:
                 
                 move.w  #$100,(Z80BusReq).l
 loc_8E6:
@@ -603,7 +603,7 @@ loc_AAC:
                 bsr.w   sub_19F8        
                 rts
 
-	; End of function UpdateSoundAndInputAndPalettes
+	; End of function ApplyZ80BusUpdates
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -655,7 +655,7 @@ FadingData:     incbin "data/graphics/tech/fadingdata.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
-WaitUntilNoDMAInProgress:
+WaitDmaEnd:
                 
                 movem.w d0,-(sp)
 loc_B9A:
@@ -666,7 +666,7 @@ loc_B9A:
                 movem.w (sp)+,d0
                 rts
 
-	; End of function WaitUntilNoDMAInProgress
+	; End of function WaitDmaEnd
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -687,7 +687,7 @@ GetVdpRegStatus:
 
 SetVdpReg:
                 
-                bsr.s   WaitUntilNoDMAInProgress
+                bsr.s   WaitDmaEnd
                 movem.l d0-d1/a0,-(sp)
                 lea     (VDP_REG00_STATUS).l,a0
                 move.w  d0,(VDP_Control).l
@@ -705,7 +705,7 @@ SetVdpReg:
 
 ApplyLogicalOrOnVdpReg:
                 
-                bsr.s   WaitUntilNoDMAInProgress
+                bsr.s   WaitDmaEnd
                 movem.l d0-d1/a0,-(sp)
                 lea     (VDP_REG00_STATUS).l,a0
                 add.w   d0,d0
@@ -719,7 +719,7 @@ ApplyLogicalOrOnVdpReg:
 
 ApplyLogicalAndOnVdpReg:
                 
-                bsr.s   WaitUntilNoDMAInProgress
+                bsr.s   WaitDmaEnd
                 movem.l d0-d1/a0,-(sp)
                 lea     (VDP_REG00_STATUS).l,a0
                 add.w   d0,d0
@@ -934,10 +934,10 @@ ExecuteFading:
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
 loc_D0E:
                 
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 tst.b   ((FADING_SETTING-$1000000)).w; wait until fade end
                 bne.s   loc_D0E
-                bsr.w   WaitForVInt     
+                bsr.w   WaitForVInt
                 rts
 
 	; End of function ExecuteFading
@@ -1047,7 +1047,7 @@ loc_DC2:
 
 UpdateVDPSpriteTable:
                 
-                bsr.w   WaitUntilNoDMAInProgress
+                bsr.w   WaitDmaEnd
                 lea     (VDP_Control).l,a6
                 move.w  #$8134,(a6)     ; disable display, enable Vint, enable DMA
                 move.l  #$94019300,(a6) ; DMA Length : $100
@@ -1106,7 +1106,7 @@ loc_E42:
                 clr.w   d2
                 bsr.w   ApplyVramDMAFill
                 move.w  #$1FF,d7
-                lea     ((byte_FFC000-$1000000)).w,a6
+                lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a6
 loc_E62:
                 
                 clr.l   (a6)+
@@ -1158,8 +1158,6 @@ loc_EC8:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Wait until VInt func is called, i.e. next frame
-
 WaitForVInt:
                 
                 bset    #ENABLE_VINT,(VINT_PARAMS).l
@@ -1184,7 +1182,7 @@ Sleep:
                 bcs.w   loc_F14
 loc_F0E:
                 
-                bsr.s   WaitForVInt     
+                bsr.s   WaitForVInt
                 dbf     d0,loc_F0E
 loc_F14:
                 
@@ -1209,7 +1207,7 @@ RequestVdpCommandQueueProcessing:
 WaitForVdpCommandQueueProcessing:
                 
                 bsr.s   RequestVdpCommandQueueProcessing
-                bra.w   WaitForVInt     
+                bra.w   WaitForVInt
 
 	; End of function WaitForVdpCommandQueueProcessing
 
@@ -1229,7 +1227,7 @@ EnableDMAQueueProcessing:
 WaitForDMAQueueProcessing:
                 
                 bsr.s   EnableDMAQueueProcessing
-                bra.w   WaitForVInt     
+                bra.w   WaitForVInt
 
 	; End of function WaitForDMAQueueProcessing
 
@@ -1846,7 +1844,7 @@ ApplyVIntVramDMAOnCompressedTiles:
 sub_13C0:
                 
                 movem.l d0-d1/a0-a1,-(sp)
-                lea     ((byte_FFC000-$1000000)).w,a0
+                lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a0
                 lea     ($C000).l,a1
                 move.w  #$800,d0
                 move.w  #2,d1
@@ -1865,7 +1863,7 @@ sub_13C0:
 sub_13E4:
                 
                 movem.l d0-d1/a0-a1,-(sp)
-                lea     ((byte_FFC000-$1000000)).w,a0
+                lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 move.w  #2,d1
@@ -1884,7 +1882,7 @@ sub_13E4:
 DMAandWait:
                 
                 bsr.s   sub_13C0        
-                bra.w   WaitForVInt     
+                bra.w   WaitForVInt
 
 	; End of function DMAandWait
 
