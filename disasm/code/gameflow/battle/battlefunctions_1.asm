@@ -2040,7 +2040,7 @@ loc_250B0:
                 txt     $193            ; "{NAME} opened the chest.{W2}{CLEAR}"
                 move.w  ((byte_FFB180-$1000000)).w,d1
                 andi.w  #ITEM_MASK_IDX,d1
-                cmpi.w  #$7F,d1 
+                cmpi.w  #ITEMIDX_NOTHING,d1
                 beq.w   byte_25178      
                 move.w  -2(a6),d0
                 bsr.w   GetEntityPositionAfterApplyingFacing
@@ -2058,7 +2058,7 @@ loc_250B0:
 loc_250FC:
                 
                 move.w  ((byte_FFB180-$1000000)).w,d2
-                cmpi.w  #$80,d2 
+                cmpi.w  #ITEMIDX_CHEST_GOLD_AMOUNTS_START,d2
                 blt.s   loc_25124
                 bsr.w   GetChestGoldAmount
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
@@ -2132,7 +2132,7 @@ sub_2519E:
 
 BattlefieldMenuActions:
                 
-                moveq   #$3D,d7 
+                moveq   #COM_ALL_COUNTER,d7
                 clr.w   d0
 loc_251BC:
                 
@@ -2171,9 +2171,9 @@ loc_2521C:
 loc_25226:
                 
                 addq.w  #1,d0
-                cmpi.w  #$1E,d0
+                cmpi.w  #COM_ALLIES_NUM,d0
                 bne.s   loc_25232
-                move.w  #$80,d0 
+                move.w  #COM_ENEMY_START,d0
 loc_25232:
                 
                 dbf     d7,loc_251BC
@@ -2425,8 +2425,8 @@ loc_254D4:
 
 UpdateAllEnemyAI:
                 
-                move.w  #$80,d0 
-                moveq   #$1F,d7
+                move.w  #COM_ENEMY_START,d0
+                moveq   #COM_ENEMIES_COUNTER,d7
 loc_25512:
                 
                 move.w  d7,-(sp)
@@ -2471,7 +2471,7 @@ loc_2554C:
                 dbf     d7,loc_2554C
                 movea.l (sp)+,a0
                 clr.w   d0
-                moveq   #$1D,d7
+                moveq   #COM_ALLIES_COUNTER,d7
 loc_2555A:
                 
                 move.w  d7,-(sp)
@@ -2479,8 +2479,9 @@ loc_2555A:
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,loc_2555A
-                move.w  #$80,d0 
-                moveq   #$1D,d7
+                move.w  #COM_ENEMY_START,d0
+                moveq   #$1D,d7         ; that is technically a bug.
+                                        ;  As we're iterating enemy combatants, we should be moving value $1F instead
 loc_2556E:
                 
                 move.w  d7,-(sp)
@@ -2488,7 +2489,7 @@ loc_2556E:
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,loc_2556E
-                moveq   #$3D,d6 
+                moveq   #COM_ALL_COUNTER,d6
 loc_2557E:
                 
                 moveq   #$3E,d7 
@@ -2663,7 +2664,7 @@ sub_256E6:
                 move.w  d0,d2
                 move.w  d1,d3
                 clr.w   d0
-                move.w  #$3D,d7 
+                move.w  #COM_ALL_COUNTER,d7
 loc_256F4:
                 
                 jsr     j_GetXPos
@@ -2677,9 +2678,9 @@ loc_256F4:
 loc_25712:
                 
                 addq.w  #1,d0
-                cmpi.w  #$1E,d0
+                cmpi.w  #COM_ALLIES_NUM,d0
                 bne.s   loc_2571E
-                move.w  #$80,d0 
+                move.w  #COM_ENEMY_START,d0
 loc_2571E:
                 
                 dbf     d7,loc_256F4

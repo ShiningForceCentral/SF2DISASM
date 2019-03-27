@@ -300,8 +300,8 @@ sub_10080:
 
 p_ItemNames:    dc.l ItemNames
 p_ClassNames:   dc.l ClassNames
-p_ItemDefs:     dc.l ItemDefs
-p_SpellData:    dc.l SpellDefs
+p_ItemDefs:     dc.l ItemDefs           
+p_SpellDefs:    dc.l SpellDefs          
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1214,7 +1214,7 @@ sub_10748:
                 andi.w  #3,d0
                 lsl.w   #1,d0
                 move.w  (a0,d0.w),d1
-                cmpi.w  #$80,d1 
+                cmpi.w  #ICONIDX_UNARMED,d1
                 bne.s   loc_10798
                 move.w  #ITEMIDX_NOTHING,((word_FFB18C-$1000000)).w
                 move.w  -$C(a6),d0
@@ -1438,14 +1438,14 @@ loc_10930:
 
 LoadIHighlightableSpellIcon:
                 
-                andi.w  #$3F,d0 
-                cmpi.w  #$3F,d0 
+                andi.w  #SPELL_MASK_IDX,d0
+                cmpi.w  #SPELLIDX_NOTHING,d0
                 bne.s   loc_10950
-                move.w  #$7F,d0 
+                move.w  #ICONIDX_NOTHING,d0
                 bra.s   loc_10954
 loc_10950:
                 
-                addi.w  #$82,d0 
+                addi.w  #ICONIDX_HEAL,d0
 loc_10954:
                 
                 bra.w   LoadHighlightableIcon
@@ -1457,9 +1457,9 @@ loc_10954:
 
 LoadHighlightableItemIcon:
                 
-                cmpi.w  #$80,d0 
+                cmpi.w  #ICONIDX_UNARMED,d0
                 beq.s   LoadHighlightableIcon
-                andi.w  #$7F,d0 
+                andi.w  #ITEM_MASK_IDX,d0
 
 	; End of function LoadHighlightableItemIcon
 
@@ -4007,7 +4007,7 @@ loc_1244E:
                 sub.w   d6,d1
                 move.w  -2(a6),d0
                 jsr     j_GetSpellAndNumberOfSpells
-                cmpi.b  #$3F,d1 
+                cmpi.b  #SPELLIDX_NOTHING,d1
                 beq.w   loc_124BC
                 movem.l d1/a0,-(sp)
                 jsr     j_GetSpellDefAddress
@@ -4015,8 +4015,8 @@ loc_1244E:
                 movem.l (sp)+,d1/a0
                 beq.s   loc_124B8
                 move.l  a0,-(sp)
-                andi.w  #$3F,d1 
-                addi.w  #$82,d1 
+                andi.w  #SPELL_MASK_IDX,d1
+                addi.w  #ICONIDX_HEAL,d1
                 movea.l (p_Icons).l,a0
                 move.w  d1,d2
                 add.w   d1,d1
@@ -4054,11 +4054,11 @@ loc_124BE:
                 move.w  #$C0,d7 
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
-                btst    #$F,d1
+                btst    #ITEM_BIT_BROKEN,d1
                 beq.s   loc_12536
                 movem.l d2-d3/a0-a1,-(sp)
                 movea.l (p_Icons).l,a0
-                lea     $6F00(a0),a0
+                lea     ICON_OFFSET_CRACKS(a0),a0
                 move.w  #$BF,d2 
 loc_1250A:
                 
@@ -4093,7 +4093,7 @@ loc_12536:
                 dbf     d6,loc_124BE
 loc_12556:
                 
-                move.w  #$92,d1 
+                move.w  #ICONIDX_JEWEL_OF_LIGHT,d1
                 movea.l (p_Icons).l,a0
                 move.w  d1,d2
                 add.w   d1,d1
@@ -4107,7 +4107,7 @@ loc_12556:
                 ori.b   #$F0,$9C(a1)
                 ori.b   #$F,$BF(a1)
                 adda.w  #$C0,a1 
-                move.w  #$93,d1 
+                move.w  #ICONIDX_JEWEL_OF_EVIL,d1
                 movea.l (p_Icons).l,a0
                 move.w  d1,d2
                 add.w   d1,d1
@@ -5868,7 +5868,7 @@ WriteEquipMiniStatus:
                 moveq   #$A,d7
                 bsr.w   WriteTilesFromASCII
                 move.w  d5,d1
-                cmpi.w  #$80,d1 
+                cmpi.w  #ICONIDX_UNARMED,d1
                 beq.s   loc_139A0
                 jsr     j_FindItemName
                 bra.s   loc_139A6
@@ -6017,7 +6017,7 @@ loc_13AFE:
                 bsr.w   WriteTilesFromASCII
                 movem.l (sp)+,a0-a1
                 movem.w (sp)+,d0-d1/d6-d7
-                btst    #7,d1
+                btst    #ITEM_BIT_EQUIPPED,d1
                 beq.w   loc_13B3E
                 move.w  #$C0B1,-2(a1)
 loc_13B3E:
@@ -6055,15 +6055,15 @@ LoadItemIcon:
 
 LoadSpellIcon:
                 
-                andi.w  #$3F,d1 
+                andi.w  #SPELL_MASK_IDX,d1
                 movea.l (p_Icons).l,a0
-                cmpi.w  #$3F,d1 
+                cmpi.w  #SPELLIDX_NOTHING,d1
                 bne.s   loc_13B7E
-                move.w  #$7F,d1 
+                move.w  #ICONIDX_NOTHING,d1
                 bra.s   LoadIcon
 loc_13B7E:
                 
-                addi.w  #$82,d1 
+                addi.w  #ICONIDX_HEAL,d1
 
 	; End of function LoadSpellIcon
 
@@ -9455,7 +9455,7 @@ MenuLayout_15706:
 GetCharPortraitIdx:
                 
                 move.w  d1,-(sp)
-                cmpi.b  #$1E,d0
+                cmpi.b  #COM_ALLIES_NUM,d0
                 bhi.w   loc_1576E
                 jsr     j_GetClass      
                 cmpi.b  #$C,d1          ; stupid CMP mechanism for alternate portraits, need to improve that one day

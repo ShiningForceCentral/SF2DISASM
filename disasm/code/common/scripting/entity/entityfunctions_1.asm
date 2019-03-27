@@ -249,7 +249,7 @@ MoveEntitiesToBattlePositions:
                 link    a6,#-$10
                 bsr.s   ClearEntities   
                 lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a1
-                moveq   #$1D,d7
+                moveq   #COM_ALLIES_COUNTER,d7
                 clr.w   -4(a6)
                 clr.w   d0
 loc_446B8:
@@ -303,8 +303,8 @@ loc_44736:
                 addq.w  #1,-4(a6)
                 dbf     d7,loc_446B8
                 lea     ((byte_FFB160-$1000000)).w,a1
-                moveq   #$1F,d7
-                move.w  #$80,-4(a6) 
+                moveq   #COM_ENEMIES_COUNTER,d7
+                move.w  #COM_ENEMY_START,-4(a6)
 loc_4474A:
                 
                 move.w  d0,-(sp)

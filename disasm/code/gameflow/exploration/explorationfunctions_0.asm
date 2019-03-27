@@ -161,8 +161,8 @@ loc_2386C:
                 jsr     (OpenChest).w
                 txt     $193            ; "{NAME} opened the chest.{W2}{CLEAR}"
                 move.w  d2,d0
-                andi.w  #$7F,d0 
-                cmpi.b  #$7F,d0 
+                andi.w  #ITEM_MASK_IDX,d0
+                cmpi.b  #ITEMIDX_NOTHING,d0
                 bne.w   loc_239C8
                 txt     $198            ; "But, it was empty.{W1}"
                 bra.w   byte_23994
@@ -173,8 +173,8 @@ loc_238E8:
                 jsr     (CheckNonChestItem).w
                 txt     $194            ; "{NAME} investigated{N}the vase.{W2}{CLEAR}"
                 move.w  d2,d0
-                andi.w  #$7F,d0 
-                cmpi.b  #$7F,d0 
+                andi.w  #ITEM_MASK_IDX,d0
+                cmpi.b  #ITEMIDX_NOTHING,d0
                 bne.w   loc_239C8
                 txt     $199            ; "It was dark inside.{W1}"
                 bra.w   byte_23994
@@ -185,8 +185,8 @@ loc_2390C:
                 jsr     (CheckNonChestItem).w
                 txt     $195            ; "{NAME} looked in{N}the barrel.{W2}{CLEAR}"
                 move.w  d2,d0
-                andi.w  #$7F,d0 
-                cmpi.b  #$7F,d0 
+                andi.w  #ITEM_MASK_IDX,d0
+                cmpi.b  #ITEMIDX_NOTHING,d0
                 bne.w   loc_239C8
                 txt     $19A            ; "It was empty.{W1}"
                 bra.w   byte_23994
@@ -197,8 +197,8 @@ loc_23930:
                 jsr     (CheckNonChestItem).w
                 txt     $1AB            ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                 move.w  d2,d0
-                andi.w  #$7F,d0 
-                cmpi.b  #$7F,d0 
+                andi.w  #ITEM_MASK_IDX,d0
+                cmpi.b  #ITEMIDX_NOTHING,d0
                 bne.w   loc_239C8
                 txt     $19C            ; "Nothing was there.{W1}"
                 bra.w   byte_23994
@@ -209,8 +209,8 @@ loc_23954:
                 jsr     (CheckNonChestItem).w
                 txt     $1A7            ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
                 move.w  d2,d0
-                andi.w  #$7F,d0 
-                cmpi.b  #$7F,d0 
+                andi.w  #ITEM_MASK_IDX,d0
+                cmpi.b  #ITEMIDX_NOTHING,d0
                 bne.w   loc_239C8
                 txt     $19C            ; "Nothing was there.{W1}"
                 bra.w   byte_23994
@@ -244,7 +244,7 @@ return_2399A:
 
 GetChestGoldAmount:
                 
-                subi.w  #$80,d2 
+                subi.w  #ITEMIDX_CHEST_GOLD_AMOUNTS_START,d2
                 andi.w  #ITEM_MASK_IDX,d2
                 add.w   d2,d2
                 move.w  ChestGoldAmounts(pc,d2.w),d1

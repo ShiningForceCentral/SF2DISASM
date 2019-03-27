@@ -40,8 +40,6 @@ loc_62A8:
                 
                 move.l  #TEXT_NAME_INDEX_1,((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
-loc_62B6:
-                
                 cmpi.b  #1,((COMPRESSED_STRING_LENGTH-$1000000)).w
                                                         ; check length
                 beq.w   loc_62FE
@@ -81,8 +79,6 @@ sub_6308:
                 
                 cmpi.b  #$CC,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 bls.s   return_634C
-loc_6310:
-                
                 bsr.w   ClearNextLineOfDialoguePixels; line end reached
                 move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 addi.b  #$10,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
@@ -741,6 +737,8 @@ sub_676E:
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 bsr.w   sub_6872
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
+loc_6784:
+                
                 cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6794
                 move.w  #$1D08,d0
@@ -832,8 +830,6 @@ loc_6844:
 loc_684E:
                 
                 dbf     d6,loc_6822
-loc_6852:
-                
                 move.w  #$D060,d0
                 move.w  #$D061,d1
                 move.w  #$D860,d2
@@ -872,8 +868,6 @@ loc_6866:
 sub_6872:
                 
                 clr.w   ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w
-loc_6876:
-                
                 move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 loc_687C:
                 
@@ -901,8 +895,6 @@ loc_68A8:
                 
                 beq.w   return_68FA
                 move.w  d0,-(sp)
-loc_68AE:
-                
                 bsr.w   HandleBlinkingDialogueCursor
                 move.w  (sp)+,d1
                 clr.w   d0

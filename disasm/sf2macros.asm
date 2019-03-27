@@ -192,6 +192,36 @@ raftResetMapCoords:	macro
 	dc.b \4
 	endm
 	
+spellElement:	macro
+	dc.b \1
+	endm
+	
+itemDef:	macro
+	dc.l \1
+	dc.b \2
+	dc.b \3
+	dc.w \4
+	dc.b \5
+	dc.b \6
+	dc.b \7
+	dc.b \8
+	dc.b \9
+	dc.b \10
+	dc.b \11
+	dc.b \12
+	endm
+	
+spellDef:	macro
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.b \5
+	dc.b \6
+	dc.b \7
+	dc.b \8
+	endm
+	
 allyBattleSprites:	macro
 	dc.b \1
 	dc.b \2
@@ -212,4 +242,65 @@ enemyBattleSprite:	macro
 weaponSprite:	macro
 	dc.b \1
 	dc.b \2
+	endm
+	
+allyMapSprite:	macro
+	dc.b \1
+	endm
+	
+enemyMapSprite:	macro
+	dc.b \1
+	endm
+	
+enemyDef:	macro
+	dc.b \1
+	dcb.b 9,0
+	dc.b \2
+	dc.b \3
+	dc.w \4
+	dcb.b 2,0
+	dc.b \5
+	dc.b 0
+	dc.b \6
+	dc.b 0
+	dc.b \7
+	dc.b 0
+	dc.b \8
+	dc.b 0
+	dc.b \9
+	dc.b 0
+	dc.w \10
+	dcb.b 2,0
+	dc.b \11
+	dc.b 0
+	dc.w \12
+	dc.w \13
+	dc.w \14
+	dc.w \15
+	dc.b \16
+	dc.b \17
+	dc.b \18
+	dc.b \19
+	dc.w \20
+	dcb.b 3,0
+	dc.b \21
+	dcb.b 2,0
+	dc.w \22
+	dcb.b 2,0
+	endm
+	
+allyStartDef:	macro
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.b \5
+	dc.b \6
+	endm
+	
+classDef:	macro
+	dc.b \1
+	dc.w \2
+	dc.b \3
+	dc.b \4
 	endm

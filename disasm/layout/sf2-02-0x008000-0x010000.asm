@@ -9,7 +9,7 @@
                 include "code\gameflow\battle\battleactionsengine.asm"    ; Battle actions engine
                 include "code\gameflow\battle\battlefieldengine.asm"    ; Battlefield engine
                 include "code\gameflow\battle\aiengine.asm"    ; AI engine
-SpellNames:     incbin "data/stats/spells/spellnames.bin"
-AllyNames:      incbin "data/stats/allies/allynames.bin"
-EnemyNames:     incbin "data/stats/enemies/enemynames.bin"
-                align $8000
+                include "data\stats\spells\spellnames.asm"    ; Spell names
+                include "data\stats\allies\allynames.asm"    ; Ally names
+                include "data\stats\enemies\enemynames.asm"    ; Enemy names
+algn_FF87:      align $8000

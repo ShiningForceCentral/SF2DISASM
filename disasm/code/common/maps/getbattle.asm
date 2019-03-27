@@ -62,8 +62,6 @@ loc_7A24:
                 
                 addq.l  #7,a0
                 addq.w  #1,d7
-loc_7A28:
-                
                 dbf     d6,loc_79BA
                 moveq   #$FFFFFFFF,d7
                 move.w  (sp)+,d0

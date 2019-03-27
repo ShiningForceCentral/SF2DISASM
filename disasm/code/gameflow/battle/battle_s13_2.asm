@@ -45,8 +45,8 @@ loc_1B126E:
 InitAllForceBattlePositions:
                 
                 movem.l d0-a6,-(sp)
-                moveq   #0,d0
-                moveq   #$1D,d7
+                moveq   #COM_ALLY_START,d0
+                moveq   #COM_ALLIES_COUNTER,d7
                 move.w  #$FFFF,d1
 loc_1B127E:
                 
@@ -100,8 +100,8 @@ loc_1B12EC:
 InitAllEnemyBattlePositions:
                 
                 movem.l d0/d7,-(sp)
-                move.b  #$80,d0
-                moveq   #$1F,d7
+                move.b  #COM_ENEMY_START,d0
+                moveq   #COM_ENEMIES_COUNTER,d7
 loc_1B12FC:
                 
                 bsr.w   InitEnemyBattlePosition
@@ -354,8 +354,8 @@ loc_1B154E:
 GetEnemyOriginalPosOccupied:
                 
                 movem.l d0-d2/d7,-(sp)
-                moveq   #0,d0
-                moveq   #$1D,d7
+                moveq   #COM_ALLY_START,d0
+                moveq   #COM_ALLIES_COUNTER,d7
 loc_1B155C:
                 
                 jsr     j_GetXPos
@@ -369,8 +369,8 @@ loc_1B1576:
                 
                 addq.w  #1,d0
                 dbf     d7,loc_1B155C
-                move.w  #$80,d0 
-                moveq   #$1F,d7
+                move.w  #COM_ENEMY_START,d0
+                moveq   #COM_ENEMIES_COUNTER,d7
 loc_1B1582:
                 
                 jsr     j_GetXPos

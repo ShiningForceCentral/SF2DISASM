@@ -468,8 +468,6 @@ loc_97A:
                 bne.s   loc_994         ; if FC, then update music level
                 andi.b  #$F,d1
                 move.b  d1,(Z80_SoundDriverMusicLevel).l
-loc_98A:
-                
                 move.b  d0,(Z80_SoundDriverCommand).l
                 bra.w   loc_9F6
 loc_994:
@@ -492,8 +490,6 @@ loc_9B8:
                 
                 cmpi.b  #$40,d0 
                 bgt.s   loc_9C6
-loc_9BE:
-                
                 move.b  #$F,(Z80_SoundDriverFadeInData).l
                                                         ; if music, put this fade in parameter : no fade in
 loc_9C6:
@@ -501,8 +497,6 @@ loc_9C6:
                 move.b  d0,(Z80_SoundDriverCommand).l; send music/sfx command to Z80
                 cmpi.b  #$40,d0 
                 bge.s   loc_9F6
-loc_9D2:
-                
                 movem.l d7-a0,-(sp)
                 lea     ((WAIT_FOR_MUSIC_END-$1000000)).w,a0
                 moveq   #8,d7
@@ -518,8 +512,6 @@ loc_9DC:
 loc_9F6:
                 
                 bsr.w   UpdatePlayerInputs
-loc_9FA:
-                
                 tst.b   ((byte_FFDE9D-$1000000)).w
                 bne.s   loc_A60
                 moveq   #2,d0
@@ -536,8 +528,6 @@ loc_9FA:
                 bgt.s   loc_A54         
                 move.b  ((PRIMARY_WALKING_DIRECTION-$1000000)).w,d0
                                                         ; get current walking direction
-loc_A26:
-                
                 eor.b   d0,((P1_INPUT-$1000000)).w; get new direction
                 moveq   #2,d0
                 move.b  ((P1_INPUT-$1000000)).w,d1
@@ -1052,8 +1042,6 @@ UpdateVDPSpriteTable:
                 move.w  #$8134,(a6)     ; disable display, enable Vint, enable DMA
                 move.l  #$94019300,(a6) ; DMA Length : $100
                 move.l  #$96EE9540,(a6) ; 1110 1110 0100 0000
-loc_DF6:
-                
                 move.w  #$977F,(a6)     ; 0111 1111
                                         ; DMD1-0 : 01 -> DMA transfer (DMD0 becomes SA23)
                                         ; SA23-1 : 111 1111 1110 1110 0100 0000 -> 0x7FEE40 * 2 = 0xFFDC80
@@ -1096,8 +1084,6 @@ ClearScrollTableData:
                 
                 movem.l d7/a6,-(sp)
                 move.w  #$C000,d0       ; clear scroll A table
-loc_E42:
-                
                 move.w  #$1000,d1
                 clr.w   d2
                 bsr.w   ApplyVramDMAFill
@@ -1110,8 +1096,6 @@ loc_E42:
 loc_E62:
                 
                 clr.l   (a6)+
-loc_E64:
-                
                 dbf     d7,loc_E62
                 move.w  #$1FF,d7
                 adda.w  #$1800,a6
@@ -1248,8 +1232,6 @@ sub_F3A:
 loc_F50:
                 
                 move.w  d0,(a4)+
-loc_F52:
-                
                 move.l  a4,(VDP_COMMAND_QUEUE_POINTER).l
                 addq.b  #1,(VDP_COMMAND_COUNTER).l
                 clr.l   d7
@@ -1290,8 +1272,6 @@ sub_F76:
 sub_F90:
                 
                 movem.l d5-d7,-(sp)
-loc_F94:
-                
                 lea     ($E000).l,a6
                 lsl.w   #1,d5
                 move.w  (HORIZONTAL_SCROLL_DATA+2).l,d7
@@ -1312,8 +1292,6 @@ loc_F94:
                 movem.l d5-d6,-(sp)
                 adda.l  #$C000,a6
                 lsl.w   #1,d5
-loc_FD4:
-                
                 move.w  (HORIZONTAL_SCROLL_DATA).l,d7
                 lsr.w   #2,d7
                 sub.w   d7,d5
@@ -1322,8 +1300,6 @@ loc_FD4:
                 move.w  (VERTICAL_SCROLL_DATA).l,d7
                 lsl.w   #4,d7
                 add.w   d7,d6
-loc_FEE:
-                
                 andi.w  #$F80,d6
                 or.w    d6,d5
                 adda.w  d5,a6
@@ -1357,14 +1333,10 @@ sub_1014:
                 
                 bsr.w   DisableInterrupts
                 lea     (byte_FFDB80).l,a4
-loc_101E:
-                
                 movem.l d5-d6,-(sp)
                 move.w  (word_FFDEA6).l,d5
                 lsr.w   #8,d5
                 move.w  (word_FFDEA6).l,d6
-loc_1030:
-                
                 andi.w  #$FF,d6
                 bsr.w   sub_F90         
                 movem.l (sp)+,d5-d6
@@ -1380,8 +1352,6 @@ loc_104E:
                 
                 ori.l   #$FF0000,d3
                 movea.l d3,a3
-loc_1056:
-                
                 movea.l (VDP_COMMAND_QUEUE_POINTER).l,a5
                 move.w  (word_FFDEA8).l,d3
                 andi.l  #$FF,d3
@@ -1408,17 +1378,11 @@ loc_1088:
                 movem.l (sp)+,d3-d4/a3-a6
                 bsr.w   EnableInterrupts
                 bra.w   WaitForVdpCommandQueueProcessing
-loc_10AC:
-                
                 bsr.w   DisableInterrupts
-loc_10B0:
-                
                 lea     (byte_FFDB80).l,a4
                 movem.l d5-d6,-(sp)
                 move.w  (word_FFDEA6).l,d5
                 lsr.w   #8,d5
-loc_10C2:
-                
                 move.w  (word_FFDEA6).l,d6
                 andi.w  #$FF,d6
                 bsr.w   sub_F90         
@@ -1437,8 +1401,6 @@ ApplyImmediateVramDMA:
                 
                 move    sr,-(sp)
                 move    #$2700,sr
-loc_10E2:
-                
                 move.w  #$100,(Z80BusReq).l
 loc_10EA:
                 
@@ -1446,8 +1408,6 @@ loc_10EA:
                 bne.s   loc_10EA
                 movem.l d2,-(sp)
                 movem.l d0/a6,-(sp)
-loc_10FC:
-                
                 lea     (VDP_Control).l,a6
                 cmpi.w  #2,d1
                 beq.s   loc_1112
@@ -1465,8 +1425,6 @@ loc_1112:
                 lsr.w   #8,d0
                 swap    d0
                 move.w  d2,d0
-loc_1126:
-                
                 ori.l   #$94009300,d0
                 move.l  d0,(a6)
                 move.l  #$96009500,d2
@@ -1487,15 +1445,11 @@ loc_1126:
                 move.w  d0,(a6)
                 move.w  a1,d0
                 rol.w   #2,d0
-loc_115C:
-                
                 andi.w  #3,d0
                 ori.b   #$80,d0
                 move.w  d0,(DMA_ADDR_MSBYTE).l
                 move.w  (DMA_ADDR_MSBYTE).l,(a6)
                 move.w  (VDP_REG01_STATUS).l,(a6)
-loc_1176:
-                
                 move.w  #0,(Z80BusReq).l
                 cmpi.w  #2,d1
                 beq.s   loc_1188
@@ -1522,8 +1476,6 @@ loc_1188:
 ApplyVIntVramDMA:
                 
                 move    sr,-(sp)
-loc_11A0:
-                
                 move    #$2700,sr
                 move.b  ((VINT_ENABLED-$1000000)).w,-(sp)
                 sf      ((VINT_ENABLED-$1000000)).w; gives msb sign
@@ -1531,7 +1483,7 @@ loc_11A0:
                 movem.l d0/a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.l  d1,d2
-                addi.w  #$8F00,d1
+                addi.w  #-$7100,d1
                 move.w  d1,(a6)+        ; Apply auto-increment from D1
                 move.l  d2,d1
                 clr.w   d2
@@ -1551,8 +1503,6 @@ loc_11A0:
                 swap    d2
                 move.l  d2,(a6)+
                 swap    d0
-loc_11EE:
-                
                 ori.w   #$9700,d0
                 move.w  d0,(a6)+        ; Apply source address from A0
                 move.w  a1,d0
@@ -1561,16 +1511,10 @@ loc_11EE:
                 move.w  d0,(a6)+
                 move.w  a1,d0
                 rol.w   #2,d0
-loc_1204:
-                
                 andi.w  #3,d0
                 ori.b   #$80,d0
                 move.w  d0,(a6)+        ; Apply VRAM write destination address from A1
-loc_120E:
-                
                 move.l  a6,(DMA_QUEUE_POINTER).l
-loc_1214:
-                
                 addq.b  #1,(DMA_QUEUE_SIZE).l
                 movem.l (sp)+,d0/a6
                 moveq   #0,d2
@@ -1596,17 +1540,11 @@ sub_1234:
                 move.w  a6,d7
                 andi.w  #$3FFF,d7
                 ori.w   #$4000,d7
-loc_1242:
-                
                 move.w  d7,(VDP_Control).l
                 move.w  a6,d7
                 lsr.w   #8,d7
                 lsr.w   #6,d7
-loc_124E:
-                
                 move.w  d7,(VDP_Control).l
-loc_1254:
-                
                 movem.w (sp)+,d7
                 rts
 
@@ -1618,8 +1556,6 @@ loc_1254:
 UpdateVDPHScrollData:
                 
                 movem.l a6,-(sp)
-loc_125E:
-                
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.w  #$8F02,(a6)+    ; auto-increment : 2
                 btst    #1,(VDP_REG0B_VALUE).l; Check HScroll mode
@@ -1637,8 +1573,6 @@ loc_1284:
                 move.w  #$9580,(a6)+
                 move.w  #$977F,(a6)+    ; RAM to VRAM, address : 0xFFD100
                 move.w  #$6C00,(a6)+    ; 0110 1100 0000 0000
-loc_1294:
-                
                 move.w  #$83,(a6)+ ; 0000 0000 1000 0011
                                         ; CD0 = 1 -> Write
                                         ; CD3-1 = 0 -> VRAM

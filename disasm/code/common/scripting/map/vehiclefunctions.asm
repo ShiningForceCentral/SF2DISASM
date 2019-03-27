@@ -143,11 +143,11 @@ cs_453F2:       setActscriptWait $0,eas_4540C
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4540A:
+nullsub_1:
                 
                 rts
 
-	; End of function sub_4540A
+	; End of function nullsub_1
 
 eas_4540C:       ac_0E $1F,$0,$0
 byte_45414:      ac_wait 6
@@ -274,16 +274,9 @@ ShrinkIntoCaravanBowieAndFollowers:
 	; End of function ShrinkIntoCaravanBowieAndFollowers
 
 ms_BowieShrinkIn:
-                dc.w $15
-                dc.b 0
-                dc.b $FF
-                dc.l eas_ShrinkIn
-                dc.w $19
-                dc.b 0
-                dc.b $40
-                dc.b $40
-                dc.b 3
-                dc.w $FFFF
+                setActscriptWait $0,eas_ShrinkIn
+                setPos $0,64,64,DOWN
+                csc_end
 eas_ShrinkIn:    ac_0E $1,$0,$0
                  ac_wait 6
                  ac_set1Db3 $FFFF
@@ -326,11 +319,8 @@ GrowOutBowieAndFollowers:
 
 	; End of function GrowOutBowieAndFollowers
 
-ms_BowieGrowOut:dc.w $15
-                dc.b 0
-                dc.b $FF
-                dc.l eas_GrowOut
-                dc.w $FFFF
+ms_BowieGrowOut:setActscriptWait $0,eas_GrowOut
+                csc_end
 eas_GrowOut:     ac_clonePos $1
                  ac_set1Db3 $FFFF
                  ac_soundCommand $59

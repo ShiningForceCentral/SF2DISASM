@@ -5,13 +5,13 @@ BlackScreenLayout:
                 dcb.b $80,$22
 MaskSprites:    dc.l $800301
                 dc.l $C77C0080
-dword_2FF2:     dc.l $A00302
+                dc.l $A00302
                 dc.l $C77C0080
                 dc.l $C00303
-dword_2FFE:     dc.l $C77C0080
+                dc.l $C77C0080
                 dc.l $E00304
                 dc.l $C77C0080
-dword_300A:     dc.l $1000305
+                dc.l $1000305
                 dc.l $C77C0080
                 dc.l $1200306
                 dc.l $C77C0080
@@ -46,8 +46,6 @@ InitDisplay:
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDMA
                 lea     MaskSprites(pc), a0
-loc_307E:
-                
                 lea     (SPRITE_TABLE).l,a1
                 moveq   #$38,d7 
                 bsr.w   CopyBytes       
@@ -75,8 +73,6 @@ sub_30BE:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-loc_30E6:
-                
                 bsr.w   ApplyVIntVramDMA
                 bra.w   WaitForDMAQueueProcessing
 

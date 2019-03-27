@@ -3486,7 +3486,7 @@ GetWeaponSpriteAndPalette:
                 cmpi.w  #$80,d0 
                 bcc.w   loc_19DF2
                 jsr     j_GetEquippedWeapon
-                andi.w  #$7F,d1 
+                andi.w  #ITEM_MASK_IDX,d1
                 cmpi.w  #$1A,d1         ; HARDCODED start index for weapon items with battle scene graphics
                 bcs.w   loc_19DF2
                 cmpi.w  #$6D,d1 ; HARDCODED end index for weapon items with battle scene graphics
@@ -4795,8 +4795,6 @@ loc_1A6B4:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-loc_1A6C0:
-                
                 move.b  #2,((byte_FFB587-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
 loc_1A6CC:

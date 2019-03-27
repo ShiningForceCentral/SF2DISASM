@@ -9,7 +9,7 @@
                 include "code\gameflow\battle\battle_s13_1.asm"    ; Battle init, terrain, AI stuff to split more properly
                 includeIfVanillaRom "data\battles\terrainentries.asm"    ; Battle terrain data
                 include "code\gameflow\battle\battle_s13_2.asm"    ; Battle init, terrain, AI stuff to split more properly
-EnemyData:      incbin "data/stats/enemies/enemydata.bin"
+                include "data\stats\enemies\enemydefs.asm"    ; Enemy definitions
                 includeIfVanillaRom "data\battles\spritesetentries.asm"    ; Battle sprite sets
                 include "code\gameflow\battle\battle_s13_3.asm"    ; Data related to UpgradeUnitIdx function
                 includeIfVanillaRom "code\specialscreens\endkiss\graphics.asm"    ; End Kiss Graphics

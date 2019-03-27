@@ -360,8 +360,6 @@ loc_2346:
                 move.w  d4,(a2)+        ; push current value on top of stack
                 cmp.w   d6,d1           ; if existing stack value = saved value, do nothing else
                 beq.s   return_2370
-loc_234E:
-                
                 dbf     d5,loc_235C
                 subq.w  #4,d2           ; if last stack value to process
                 bcc.s   return_235A     ; if stack already maxed to 4, do nothing else
@@ -469,8 +467,6 @@ loc_241C:
 loc_242A:
                 
                 add.w   d0,d0
-loc_242C:
-                
                 bcs.w   loc_2436
                 move.w  -2(a1),(a1)+    ; 00 : repeat last output tile
                 bra.s   loc_240A        
@@ -520,6 +516,8 @@ loc_2480:
                 ori.w   #$1000,d2
                 add.w   d1,d1
                 or.w    d2,d1
+loc_2496:
+                
                 move.w  (a2,d1.w),(a1)+
                 bra.w   loc_240A        
 loc_249E:
@@ -838,8 +836,6 @@ loc_2772:
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
                 move.w  #$3C,d0 
-loc_2782:
-                
                 move.w  #0,d1
 loc_2786:
                 
@@ -855,8 +851,6 @@ loc_279A:
                 
                 move.w  #$800,d3
                 bsr.w   sub_29A2
-loc_27A2:
-                
                 bsr.w   WaitForVInt
                 move.w  #$1F,d6
                 movem.l d0-d1,-(sp)
@@ -880,17 +874,11 @@ loc_27AE:
                 bsr.w   EnableDMAQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_2786
-loc_27F6:
-                
                 bsr.w   WaitForVInt
                 move.w  #8,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
-loc_2800:
-                
                 move.w  #8,((VIEW_PLANE_B_X_COUNTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
-off_280A:
-                
                 dc.l VInt_UpdateScrollingData
                 jsr     UpdateVdpPlaneA(pc)
                 nop
@@ -952,8 +940,6 @@ loc_2874:
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_284C
                 bsr.w   WaitForVInt
-loc_28C0:
-                
                 move.w  #$18,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
                 move.w  #$18,((VIEW_PLANE_B_Y_COUNTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
@@ -1181,12 +1167,8 @@ loc_2AD4:
                 clr.w   (PALETTE_1_BASE).l
                 tst.b   (a5)+
                 blt.s   loc_2B1C
-loc_2B08:
-                
                 lea     (FF3000_MAP_TILESET_1).l,a0
                 lea     ($2000).w,a1
-loc_2B12:
-                
                 move.w  #$800,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDMA
@@ -1194,8 +1176,6 @@ loc_2B1C:
                 
                 tst.b   (a5)+
                 blt.s   loc_2B34
-loc_2B20:
-                
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     ($3000).w,a1
                 move.w  #$800,d0
@@ -1209,16 +1189,12 @@ loc_2B34:
                 lea     ($4000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-loc_2B48:
-                
                 bsr.w   ApplyImmediateVramDMA
 loc_2B4C:
                 
                 tst.b   (a5)+
                 blt.s   loc_2B64
                 lea     (FF1000_MAP_TILESET_4).l,a0
-loc_2B56:
-                
                 lea     ($5000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
@@ -1229,8 +1205,6 @@ loc_2B64:
                 
                 tst.b   (a5)+
                 blt.s   loc_2B7C        
-loc_2B68:
-                
                 lea     (FF2000_LOADING_SPACE).l,a0
                 lea     ($6000).w,a1
                 move.w  #$800,d0
@@ -1251,8 +1225,6 @@ loc_2B82:
                 move.w  (a4)+,d1
                 move.w  (a4)+,d2
                 move.w  (a4)+,d3
-loc_2B92:
-                
                 mulu.w  #$180,d0
                 mulu.w  #$180,d1
                 mulu.w  #$180,d2
@@ -1264,8 +1236,6 @@ loc_2BA6:
                 move.w  (a4)+,d2
                 move.w  (a4)+,d3
                 mulu.w  #$180,d0
-loc_2BB0:
-                
                 mulu.w  #$180,d1
                 mulu.w  #$180,d2
                 mulu.w  #$180,d3
@@ -1314,8 +1284,6 @@ loc_2C14:
                 
                 bsr.w   LoadMapArea
                 move.w  (sp)+,d0
-loc_2C1A:
-                
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_2C70
                 move.w  d4,d0
@@ -1323,8 +1291,6 @@ loc_2C1A:
                 move.w  d0,d2
                 move.w  d1,d3
                 subi.w  #$780,d0
-loc_2C2C:
-                
                 subi.w  #$780,d1
                 addi.w  #$780,d2
                 addi.w  #$600,d3
@@ -1335,8 +1301,6 @@ loc_2C42:
                 
                 cmp.w   ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d2
                 ble.s   loc_2C50
-loc_2C48:
-                
                 move.w  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d0
                 subi.w  #$F00,d0
 loc_2C50:
@@ -1349,8 +1313,6 @@ loc_2C5A:
                 cmp.w   ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d3
                 ble.s   loc_2C68
                 move.w  ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d1
-loc_2C64:
-                
                 subi.w  #$D80,d1
 loc_2C68:
                 
@@ -1377,8 +1339,6 @@ loc_2C70:
                 lsl.w   #7,d5
                 lsl.w   #7,d6
                 lsl.w   #7,d7
-loc_2C9A:
-                
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d0
                 lsr.l   #8,d0
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d1
@@ -1501,8 +1461,6 @@ loc_2DD4:
                 
                 cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
                 beq.s   return_2DEA
-loc_2DDC:
-                
                 move.w  ((BATTLE_AREA_X-$1000000)).w,d0
                 move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d1
                 clr.w   d2
@@ -1545,50 +1503,36 @@ loc_2E2C:
                 mulu.w  #3,d0
                 move.w  d0,((MAP_AREA_LAYER2_STARTX-$1000000)).w
                 move.w  (a4)+,d0
-loc_2E38:
-                
                 mulu.w  #3,d0
                 move.w  d0,((MAP_AREA_LAYER2_STARTY-$1000000)).w
                 move.w  (a4)+,d0
                 mulu.w  #3,d0
                 move.w  d0,((MAP_AREA_BACKGROUND_STARTX-$1000000)).w
                 move.w  (a4)+,d0
-loc_2E4C:
-                
                 mulu.w  #3,d0
                 move.w  d0,((MAP_AREA_BACKGROUND_STARTY-$1000000)).w
                 move.w  (a4)+,((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w
                 move.w  (a4)+,((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w
                 move.w  (a4)+,((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w
-loc_2E60:
-                
                 move.w  (a4)+,((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w
                 move.l  (a4)+,((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
                 move.b  (a4)+,((MAP_AREA_LAYER_TYPE-$1000000)).w
-loc_2E6C:
-                
                 move.b  (a4)+,((MAP_AREA_MUSIC_INDEX-$1000000)).w
                 movea.l (a5),a4
                 move.w  #1,((TILE_ANIM_COUNTER-$1000000)).w
                 move.l  $18(a5),((TILE_ANIM_DATA_ADDR-$1000000)).w
                 blt.s   return_2EBE
-loc_2E80:
-                
                 movea.l ((TILE_ANIM_DATA_ADDR-$1000000)).w,a1
                 move.w  (a1)+,d0
                 movea.l (p_pt_MapTiles).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.l  a1,-(sp)
-loc_2E94:
-                
                 lea     (FF6802_LOADING_SPACE).l,a1
                 bsr.w   LoadCompressedData
                 movea.l (sp)+,a1
                 move.w  (a1)+,d7
                 lea     (FF6802_LOADING_SPACE).l,a0
-loc_2EA8:
-                
                 lea     (byte_FF9B04).l,a1
                 lsl.w   #5,d7
                 bsr.w   CopyBytes       
@@ -1619,8 +1563,6 @@ sub_2EC0:
                 bsr.w   GenerateRandomNumber
                 move.w  d7,d3
                 move.w  #4,d4
-loc_2EF0:
-                
                 move.w  #4,d5
                 move.w  #4,d6
                 move.w  #4,d7
@@ -1629,8 +1571,6 @@ loc_2EF0:
 loc_2F04:
                 
                 move.w  #$8721,d0
-loc_2F08:
-                
                 bsr.w   SetVdpReg
                 move.w  #$8700,d0
                 bsr.w   SetVdpReg

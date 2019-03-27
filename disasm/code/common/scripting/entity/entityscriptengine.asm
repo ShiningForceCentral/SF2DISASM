@@ -67,8 +67,6 @@ loc_4D18:
                 tst.w   d7
                 bne.s   loc_4D2A
                 move.b  $11(a0),d5
-loc_4D20:
-                
                 jsr     j_UpdateSpecialSprites
                 bra.w   loc_4DC4
 loc_4D2A:
@@ -158,8 +156,6 @@ loc_4DC4:
                 blt.w   loc_4E0A
                 cmpi.w  #$100,d1
                 bgt.w   loc_4E0A
-loc_4E00:
-                
                 jsr     sub_20020
                 bra.w   loc_4E10
 loc_4E0A:
@@ -214,8 +210,6 @@ loc_4E4C:
                 
                 tst.b   (a0)+
                 beq.s   loc_4E5E
-loc_4E50:
-                
                 move.w  #$3F,d0 
                 sub.w   d7,d0
                 move.b  d0,3(a1,d6.w)
@@ -1135,8 +1129,6 @@ loc_5646:
 loc_5658:
                 
                 adda.w  #$20,a2 
-loc_565C:
-                
                 dbf     d6,loc_5624     
 loc_5660:
                 
@@ -1155,8 +1147,6 @@ esc07_:
                 
                 link    a6,#-$A
                 move.l  ((MAP_AREA_LAYER1_STARTX-$1000000)).w,-4(a6)
-loc_5672:
-                
                 move.l  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,-8(a6)
                 move.b  ((P1_INPUT-$1000000)).w,-$A(a6)
                 move.w  (a0),d0
@@ -1258,8 +1248,6 @@ loc_575C:
                 cmpi.w  #$400,d3
                 bne.s   loc_5782
                 bsr.w   OpenDoor        
-loc_577A:
-                
                 move.w  (a4,d2.w),d3
                 andi.w  #$3C00,d3
 loc_5782:
@@ -1268,15 +1256,11 @@ loc_5782:
                 bne.s   loc_5794
                 bsr.w   WarpIfSetAtPoint
                 movem.w (sp)+,d2-d3
-loc_5790:
-                
                 bra.w   loc_57C0
 loc_5794:
                 
                 cmpi.w  #$3800,d3
                 bne.s   loc_57A2
-loc_579A:
-                
                 movem.w (sp)+,d2-d3
                 bra.w   loc_57C0
 loc_57A2:
@@ -1285,8 +1269,6 @@ loc_57A2:
                 bcc.s   loc_57B8
                 move.w  #4,((MAP_EVENT_TYPE-$1000000)).w
                 movem.w (sp)+,d2-d3
-loc_57B4:
-                
                 bra.w   loc_57E0
 loc_57B8:
                 
@@ -1332,8 +1314,6 @@ esc08_:
                 clr.w   d4
                 clr.w   d5
                 moveq   #$FFFFFFFF,d6
-loc_5810:
-                
                 btst    #INPUT_A_UP,-$A(a6)
                 beq.s   loc_582C
                 cmp.w   -2(a6),d1
@@ -2135,7 +2115,7 @@ loc_5D38:
                 bne.s   loc_5D42
 loc_5D3E:
                 
-                bsr.w   sub_40F2
+                bsr.w   csub_56632_0
 loc_5D42:
                 
                 addq.l  #2,a1
@@ -2656,8 +2636,6 @@ loc_60B6:
                 subq.w  #1,d1
                 lsl.w   #2,d1
                 lea     (pt_MapSprites).l,a0
-loc_60F4:
-                
                 movea.l (a0,d1.w),a0
                 lea     (FF8002_LOADING_SPACE).l,a1
                 clr.w   d0
@@ -2665,8 +2643,6 @@ loc_60F4:
                 addq.b  #1,((NUM_SPRITES_TO_LOAD-$1000000)).w
                 mulu.w  #$240,d0        ; two sprites to load for the walking animation
                 lea     (a1,d0.w),a1
-loc_6110:
-                
                 jsr     (LoadSpriteData).w
                 movea.l a1,a0
                 move.w  (sp)+,d1

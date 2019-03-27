@@ -90,8 +90,6 @@ sub_7CDC:
                 lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$800,d7
                 bsr.w   CopyBytes       
-loc_7CF0:
-                
                 bra.w   QueueDmaForWitchLayout
 
 	; End of function sub_7CDC
@@ -103,8 +101,6 @@ UpdateWitchHead:
                 
                 movea.l (p_WitchLayout).l,a0
                 lea     $700(a0),a0
-loc_7CFE:
-                
                 lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$707,d1
                 bsr.w   UpdateWitchLayoutZone

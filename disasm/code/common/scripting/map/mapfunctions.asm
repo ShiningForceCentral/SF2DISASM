@@ -62,7 +62,7 @@ loc_44104:
                 bra.s   loc_44104
 loc_44146:
                 
-                cmpi.b  #$1E,d4
+                cmpi.b  #COM_ALLIES_NUM,d4
                 bcc.s   loc_44170
                 ext.w   d4
                 tst.b   (a1,d4.w)

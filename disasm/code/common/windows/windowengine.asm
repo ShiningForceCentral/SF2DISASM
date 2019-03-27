@@ -399,8 +399,6 @@ sub_4AC8:
                 movem.l a0-a1,-(sp)
                 movem.w d0-d3/d6-d7,-(sp)
                 lea     (PLANE_A_MAP_AND_WINDOWS_LAYOUT).l,a1
-loc_4AD6:
-                
                 bsr.w   sub_4BEA
                 move.w  d0,d1
                 ext.w   d0
@@ -444,8 +442,6 @@ loc_4B1C:
 loc_4B30:
                 
                 dbf     d1,loc_4B06
-loc_4B34:
-                
                 movem.w (sp)+,d1-d2/d6
 loc_4B38:
                 
@@ -494,8 +490,6 @@ loc_4B98:
                 
                 tst.w   d2
                 bmi.w   loc_4BAC
-loc_4B9E:
-                
                 cmpi.w  #$20,d2 
                 bge.w   loc_4BAC
                 move.w  (a0,d6.w),(a1,d6.w)

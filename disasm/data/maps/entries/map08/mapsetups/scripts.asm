@@ -169,7 +169,7 @@ cs_56422:       textCursor $50E
 
 csub_56632:
                 
-                jmp     (sub_40F2).w
+                jmp     (csub_56632_0).w
 
 	; End of function csub_56632
 

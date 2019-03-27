@@ -6,7 +6,7 @@
 
 GetForceMemberSpriteIdx:
                 
-                cmpi.w  #$1E,d0         ; HARDCODED Force member max index
+                cmpi.w  #COM_ALLIES_NUM,d0; HARDCODED Force member max index
                 blt.s   loc_449D2
                 move.w  d0,d4
                 bra.w   return_44A5C
@@ -32,7 +32,7 @@ loc_44A04:
                 
                 move.w  d0,d4
                 andi.w  #$1F,d4
-                move.b  AllySprites(pc,d4.w),d4
+                move.b  AllyMapSprites(pc,d4.w),d4; sprite IDs for each force character in battle
                 jsr     j_GetClass      
                 cmpi.b  #$C,d1          ; HERO
                 beq.w   loc_44A5A       ; HARDCODED class->sprite ?
@@ -71,8 +71,36 @@ return_44A5C:
 
 	; End of function GetForceMemberSpriteIdx
 
-AllySprites:    incbin "data/stats/allies/allyspriteids.bin"
-                                                        ; sprite IDs for each force character in battle
+AllyMapSprites: allyMapSprite 1         ; BOWIE
+                allyMapSprite 4         ; SARAH
+                allyMapSprite 7         ; CHESTER
+                allyMapSprite 10        ; JAHA
+                allyMapSprite 13        ; KAZIN
+                allyMapSprite 15        ; SLADE
+                allyMapSprite 17        ; KIWI
+                allyMapSprite 19        ; PETER
+                allyMapSprite 21        ; MAY
+                allyMapSprite 23        ; GERHALT
+                allyMapSprite 25        ; LUKE
+                allyMapSprite 26        ; ROHDE
+                allyMapSprite 29        ; RICK
+                allyMapSprite 32        ; ELRIC
+                allyMapSprite 35        ; ERIC
+                allyMapSprite 38        ; KARNA
+                allyMapSprite 41        ; RANDOLF
+                allyMapSprite 44        ; TYRIN
+                allyMapSprite 47        ; JANET
+                allyMapSprite 49        ; HIGINS
+                allyMapSprite 49        ; SKREECH
+                allyMapSprite 50        ; TAYA
+                allyMapSprite 52        ; FRAYJA
+                allyMapSprite 52        ; JARO
+                allyMapSprite 54        ; GYAN
+                allyMapSprite 54        ; SHEELA
+                allyMapSprite 55        ; ZYNK
+                allyMapSprite 57        ; CHAZ
+                allyMapSprite 57        ; LEMON
+                allyMapSprite 58        ; CLAUDE
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -92,7 +120,7 @@ loc_44A8E:
                 move.w  d1,-(sp)
                 jsr     j_GetEnemyID
                 clr.w   d4
-                move.b  EnemySprites(pc,d1.w),d4
+                move.b  EnemyMapSprites(pc,d1.w),d4
                 move.w  (sp)+,d1
 loc_44A9E:
                 
@@ -101,7 +129,172 @@ loc_44A9E:
 
 	; End of function GetCombatantSpriteIdx
 
-EnemySprites:   incbin "data/stats/enemies/enemyspriteids.bin"
+EnemyMapSprites:enemyMapSprite 64       ; OOZE
+                enemyMapSprite 65       ; HUGE RAT
+                enemyMapSprite 66       ; GALAM SOLDIER
+                enemyMapSprite 67       ; GALAM KNIGHT
+                enemyMapSprite 68       ; GOBLIN
+                enemyMapSprite 69       ; GREEN OOZE
+                enemyMapSprite 70       ; DARK DWARF
+                enemyMapSprite 71       ; HOBGOBLIN
+                enemyMapSprite 72       ; ZOMBIE
+                enemyMapSprite 73       ; GOLEM
+                enemyMapSprite 74       ; KRAKEN LEG
+                enemyMapSprite 75       ; SOULSOWER
+                enemyMapSprite 76       ; ORC
+                enemyMapSprite 77       ; PAWN
+                enemyMapSprite 78       ; KNIGHT
+                enemyMapSprite 79       ; RAT
+                enemyMapSprite 80       ; BUBBLING OOZE
+                enemyMapSprite 81       ; SKELETON
+                enemyMapSprite 82       ; DARK SOLDIER
+                enemyMapSprite 83       ; LIZARDMAN
+                enemyMapSprite 84       ; WORM
+                enemyMapSprite 85       ; DARK KNIGHT
+                enemyMapSprite 86       ; ORC LORD
+                enemyMapSprite 87       ; DEVIL SOLDIER
+                enemyMapSprite 88       ; CERBERUS
+                enemyMapSprite 89       ; MUD MAN
+                enemyMapSprite 90       ; DRAGONEWT
+                enemyMapSprite 91       ; PURPLE WORM
+                enemyMapSprite 92       ; EXECUTIONER
+                enemyMapSprite 93       ; HELL HOUND
+                enemyMapSprite 94       ; MINOTAUR
+                enemyMapSprite 95       ; CYCLOPS
+                enemyMapSprite 96       ; BURST ROCK
+                enemyMapSprite 97       ; HYDRA
+                enemyMapSprite 98       ; CHAOS WARRIOR
+                enemyMapSprite 99       ; REAPER
+                enemyMapSprite 100      ; EVIL BEAST
+                enemyMapSprite 101      ; PYROHYDRA
+                enemyMapSprite 102      ; ZEON GUARD
+                enemyMapSprite 103      ; GIZMO
+                enemyMapSprite 104      ; HUGE BAT
+                enemyMapSprite 105      ; VAMPIRE BAT
+                enemyMapSprite 106      ; EVIL CLOUD
+                enemyMapSprite 107      ; GARGOYLE
+                enemyMapSprite 108      ; HARPY
+                enemyMapSprite 109      ; LESSER DEMON
+                enemyMapSprite 110      ; WYVERN
+                enemyMapSprite 111      ; HARPY QUEEN
+                enemyMapSprite 112      ; PEGASUS KNIGHT
+                enemyMapSprite 113      ; GRIFFIN
+                enemyMapSprite 114      ; MIST DEMON
+                enemyMapSprite 115      ; WHITE DRAGON
+                enemyMapSprite 116      ; DEMON
+                enemyMapSprite 117      ; CHAOS DRAGON
+                enemyMapSprite 118      ; DEVIL GRIFFIN
+                enemyMapSprite 119      ; ARCH DEMON
+                enemyMapSprite 120      ; GALAM ARCHER
+                enemyMapSprite 121      ; HUNTER GOBLIN
+                enemyMapSprite 122      ; DEATH ARCHER
+                enemyMapSprite 123      ; KRAKEN ARM
+                enemyMapSprite 124      ; ARROW LAUNCHER
+                enemyMapSprite 125      ; ROOK
+                enemyMapSprite 126      ; DARK SNIPER
+                enemyMapSprite 127      ; BOW MASTER
+                enemyMapSprite 128      ; BOW RIDER
+                enemyMapSprite 129      ; DARK GUNNER
+                enemyMapSprite 130      ; HORSEMAN
+                enemyMapSprite 131      ; GALAM MAGE
+                enemyMapSprite 132      ; WITCH
+                enemyMapSprite 133      ; MASTER MAGE
+                enemyMapSprite 134      ; DARK MADAM
+                enemyMapSprite 135      ; QUEEN
+                enemyMapSprite 136      ; WIZARD
+                enemyMapSprite 137      ; NECROMANCER
+                enemyMapSprite 138      ; CHAOS WIZARD
+                enemyMapSprite 139      ; DEMON MASTER
+                enemyMapSprite 140      ; DARK CLERIC
+                enemyMapSprite 141      ; DEATH MONK
+                enemyMapSprite 142      ; BLACK MONK
+                enemyMapSprite 143      ; HIGH PRIEST
+                enemyMapSprite 144      ; EVIL BISHOP
+                enemyMapSprite 145      ; DARK BISHOP
+                enemyMapSprite 146      ; MASTER MONK
+                enemyMapSprite 147      ; SHAMAN
+                enemyMapSprite 148      ; EVIL BISHOP
+                enemyMapSprite 149      ; BLUE SHAMAN
+                enemyMapSprite 150      ; DARK SMOKE
+                enemyMapSprite 254      ; KRAKEN HEAD
+                enemyMapSprite 255      ; TAROS
+                enemyMapSprite 153      ; KING
+                enemyMapSprite 154      ; WILLARD
+                enemyMapSprite 155      ; ZALBARD
+                enemyMapSprite 156      ; CAMEELA
+                enemyMapSprite 157      ; PRISM FLOWER
+                enemyMapSprite 158      ; RED BARON
+                enemyMapSprite 159      ; GESHP
+                enemyMapSprite 160      ; ODD EYE
+                enemyMapSprite 164      ; GALAM
+                enemyMapSprite 251      ; ZEON
+                enemyMapSprite 52       ; JAR
+                enemyMapSprite 133      ; MASTER MAGE
+                enemyMapSprite 137      ; NECROMANCER
+                enemyMapSprite 149      ; BLUE SHAMAN
+                enemyMapSprite 167
+                enemyMapSprite 168
+                enemyMapSprite 169
+                enemyMapSprite 170
+                enemyMapSprite 171
+                enemyMapSprite 172
+                enemyMapSprite 173
+                enemyMapSprite 174
+                enemyMapSprite 175
+                enemyMapSprite 176
+                enemyMapSprite 177
+                enemyMapSprite 178
+                enemyMapSprite 179
+                enemyMapSprite 180
+                enemyMapSprite 181
+                enemyMapSprite 182
+                enemyMapSprite 183
+                enemyMapSprite 184
+                enemyMapSprite 185
+                enemyMapSprite 186
+                enemyMapSprite 187
+                enemyMapSprite 188
+                enemyMapSprite 199
+                enemyMapSprite 190
+                enemyMapSprite 191
+                enemyMapSprite 192
+                enemyMapSprite 193
+                enemyMapSprite 194
+                enemyMapSprite 195
+                enemyMapSprite 196
+                enemyMapSprite 197
+                enemyMapSprite 198
+                enemyMapSprite 199
+                enemyMapSprite 200
+                enemyMapSprite 201
+                enemyMapSprite 202
+                enemyMapSprite 203
+                enemyMapSprite 204
+                enemyMapSprite 205
+                enemyMapSprite 206
+                enemyMapSprite 207
+                enemyMapSprite 208
+                enemyMapSprite 209
+                enemyMapSprite 210
+                enemyMapSprite 211
+                enemyMapSprite 212
+                enemyMapSprite 213
+                enemyMapSprite 214
+                enemyMapSprite 215
+                enemyMapSprite 216
+                enemyMapSprite 217
+                enemyMapSprite 218
+                enemyMapSprite 219
+                enemyMapSprite 220
+                enemyMapSprite 221
+                enemyMapSprite 222
+                enemyMapSprite 223
+                enemyMapSprite 224
+                enemyMapSprite 225
+                enemyMapSprite 226
+                enemyMapSprite 227
+                enemyMapSprite 228
+                enemyMapSprite 229
 
 ; =============== S U B R O U T I N E =======================================
 

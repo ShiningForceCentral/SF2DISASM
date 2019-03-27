@@ -153,8 +153,6 @@ loc_E06A:
                 
                 cmpi.b  #2,d6
                 bne.s   loc_E076
-loc_E070:
-                
                 jsr     sub_1AC030      
 loc_E076:
                 
@@ -166,8 +164,6 @@ loc_E076:
                 clr.w   d2
                 move.b  (a1),d2
                 adda.w  #1,a1
-loc_E08C:
-                
                 subi.b  #1,d2
 loc_E090:
                 
@@ -208,8 +204,6 @@ loc_E0D2:
                 bsr.w   GetCurrentHP
                 tst.w   d1
                 bne.s   loc_E0DE
-loc_E0DA:
-                
                 addi.w  #1,d3
 loc_E0DE:
                 
@@ -431,7 +425,7 @@ byte_E25B:      dc.b 3
                 dc.b $16
                 dc.b $FF
 off_E260:       dc.l byte_E26C
-off_E264:       dc.l byte_E277
+                dc.l byte_E277
                 dc.l byte_E283
 byte_E26C:      dc.b 5
                 dc.b 4
@@ -905,13 +899,9 @@ loc_E6C0:
                 
                 clr.w   d0
                 move.b  (a0,d6.w),d0
-loc_E6C6:
-                
                 cmpi.b  #$7F,-2(a6) 
                 beq.s   loc_E6DA
                 clr.w   d1
-loc_E6D0:
-                
                 move.b  -2(a6),d1
                 bsr.w   GetItemRange
                 bra.s   loc_E6E4
@@ -925,20 +915,14 @@ loc_E6E4:
                 bsr.w   GetYPos
                 move.w  d1,d2
                 bsr.w   GetXPos
-loc_E6EE:
-                
                 bsr.w   GetClosestAttackPosition
                 cmpi.b  #$FF,d1
                 beq.s   loc_E6FC
-loc_E6F8:
-                
                 bra.w   loc_E70A
 loc_E6FC:
                 
                 addi.w  #1,d6
                 subq.w  #1,d5
-loc_E702:
-                
                 bne.w   loc_E660
                 bra.w   loc_E776
 loc_E70A:
@@ -949,8 +933,6 @@ loc_E70A:
                 lea     ((byte_FF4000+$400)).l,a3
                 bsr.w   sub_DD10
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
-loc_E722:
-                
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a1
                 cmpi.b  #$7F,-2(a6) 
                 bne.s   loc_E748
@@ -970,8 +952,6 @@ loc_E748:
                 move.w  d0,6(a1)
                 clr.w   d0
                 move.b  (a0,d6.w),d0
-loc_E75C:
-                
                 move.w  d0,4(a1)
                 clr.w   d0
                 move.b  -4(a6),d0
@@ -1158,11 +1138,7 @@ loc_E94C:
                 move.w  d1,d0
                 move.w  d2,d1
                 lea     ((byte_FF4000+$400)).l,a2
-loc_E96E:
-                
                 lea     (FF4D00_LOADING_SPACE).l,a3
-loc_E974:
-                
                 bsr.w   sub_DD10
                 bra.w   loc_E984
 loc_E97C:
@@ -1189,8 +1165,6 @@ sub_E98C:
                 bne.s   loc_E9B2
                 move.b  #$FF,d1
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
-loc_E9A2:
-                
                 move.w  #3,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #$FF,(a0)
@@ -1200,8 +1174,6 @@ loc_E9B2:
                 move.b  d0,-1(a6)
                 move.b  d1,-2(a6)
                 move.b  d2,-4(a6)
-loc_E9BE:
-                
                 bsr.w   GetCurrentMOV
                 tst.b   d1
                 bne.s   loc_E9DE
@@ -1220,29 +1192,21 @@ loc_E9DE:
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
                 move.w  #3,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-loc_E9F8:
-                
                 move.b  #$FF,(a0)
                 bra.w   loc_EB7A
 loc_EA00:
                 
                 move.b  d1,-3(a6)
-loc_EA04:
-                
                 btst    #6,d1
                 bne.s   loc_EA2E
                 clr.w   d0
                 move.b  d1,d0
-loc_EA0E:
-                
                 bsr.w   GetCurrentHP
                 tst.w   d1
                 bne.s   loc_EA2E
                 move.b  #$FF,d1
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
                 move.w  #3,(a0)
-loc_EA22:
-                
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #$FF,(a0)
                 bra.w   loc_EB7A
@@ -1284,8 +1248,6 @@ loc_EA78:
 loc_EA9C:
                 
                 jsr     j_clearTerrainListObstructions
-loc_EAA2:
-                
                 move.b  -1(a6),d0
                 move.b  -3(a6),d1
                 bsr.w   sub_F7A0
@@ -1297,8 +1259,6 @@ loc_EAA2:
                 move.b  #$FF,(a0)
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
                 move.w  #3,(a0)
-loc_EACA:
-                
                 bra.w   loc_EB7A
                 move.w  #$FFFF,d1
                 bra.s   loc_EAE2
@@ -2222,8 +2182,6 @@ loc_F35E:
                 cmpi.b  #1,d0
                 bgt.s   loc_F392
                 move.b  (a0,d5.w),d0
-loc_F368:
-                
                 sub.b   1(a0,d5.w),d0
                 bpl.s   loc_F370
                 neg.b   d0
@@ -2297,8 +2255,6 @@ loc_F404:
                 move.w  d1,d3
                 move.w  #$80,d0 
                 lea     ((byte_FF4000+$400)).l,a2
-loc_F42A:
-                
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     ((MOVE_COST_LIST-$1000000)).w,a5
@@ -2312,8 +2268,6 @@ loc_F43A:
                 bsr.w   GetYPos
                 move.w  d2,d0
                 bsr.w   j_makeEnemyMoveOrder
-loc_F454:
-                
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  (a0),d0
                 cmpi.b  #$FF,d0
@@ -2744,8 +2698,6 @@ loc_F8CE:
                 move.w  d2,d1
                 lea     ((byte_FF4000+$400)).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-loc_F8DE:
-                
                 bsr.w   sub_DD10
 loc_F8E2:
                 
@@ -2761,8 +2713,6 @@ loc_F8E2:
 sub_F8EA:
                 
                 movem.l d0/d3-a6,-(sp)
-loc_F8EE:
-                
                 link    a6,#-4
                 move.w  d0,d7
                 bsr.w   GetEnemyAISetting3233
@@ -2774,8 +2724,6 @@ loc_F8EE:
                 move.b  -3(a6),d0
                 cmpi.b  #$FF,d0
                 beq.s   loc_F924
-loc_F916:
-                
                 cmpi.b  #$F,d1
                 beq.s   loc_F924
                 move.b  #1,d1
@@ -2785,8 +2733,6 @@ loc_F924:
                 move.b  -4(a6),d0
                 cmpi.b  #$FF,d0
                 beq.s   loc_F93C
-loc_F92E:
-                
                 cmpi.b  #$F,d2
                 beq.s   loc_F93C
                 move.b  #1,d1
@@ -2796,8 +2742,6 @@ loc_F93C:
                 move.b  -3(a6),d0
                 cmpi.b  #$FF,d0
                 beq.s   loc_F96E
-loc_F946:
-                
                 move.b  -1(a6),d0
                 cmpi.b  #$F,d0
                 bne.s   loc_F96E
@@ -2805,13 +2749,9 @@ loc_F946:
                 cmpi.b  #$FF,d0
                 bne.s   loc_F96E
                 move.b  -2(a6),d0
-loc_F95E:
-                
                 cmpi.b  #$F,d0
                 beq.s   loc_F96E
                 clr.w   d1
-loc_F966:
-                
                 move.b  #1,d2
                 bra.w   loc_F9AC
 loc_F96E:
@@ -2824,14 +2764,10 @@ loc_F96E:
                 beq.s   loc_F98A
                 clr.w   d1
                 clr.w   d2
-loc_F986:
-                
                 bra.w   loc_F9AC
 loc_F98A:
                 
                 move.b  -4(a6),d0
-loc_F98E:
-                
                 cmpi.b  #$FF,d0
                 bne.s   loc_F9A6
                 move.b  -2(a6),d0

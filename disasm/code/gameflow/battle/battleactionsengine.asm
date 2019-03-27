@@ -16,20 +16,12 @@ WriteSkirmishScript:
                 lea     (FF0000_RAM_START).l,a6; beginning of battle scene command list
                 move.b  #0,-BCSTACK_OFFSET_DEBUGDODGE(a2)
                 move.b  #0,-BCSTACK_OFFSET_DEBUGCRIT(a2)
-loc_9BB8:
-                
                 move.b  #0,-BCSTACK_OFFSET_DEBUGDOUBLE(a2)
-loc_9BBE:
-                
                 move.b  #0,-BCSTACK_OFFSET_DEBUGCOUNTER(a2)
-loc_9BC4:
-                
                 tst.b   (DEBUG_MODE_ACTIVATED).l
                 beq.s   loc_9BE4
                 btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 beq.s   loc_9BD8
-loc_9BD4:
-                
                 bsr.w   DebugModeActionSelect
 loc_9BD8:
                 
@@ -54,14 +46,10 @@ loc_9BE4:
                 move.b  d1,-BCSTACK_OFFSET_RANGED(a2)
                 move.b  d1,-$F(a2)
                 move.b  d1,-BCSTACK_OFFSET_EXPLODE(a2)
-loc_9C22:
-                
                 move.b  d1,-BCSTACK_OFFSET_INEFFECTIVEATTACK(a2)
                 bsr.w   DetermineTargetsByAction
                 bsr.w   InitSkirmishProperties
                 bsr.w   CheckForTaros
-loc_9C32:
-                
                 bsr.w   InitSkirmishDisplayedChars
                 tst.b   -BCSTACK_OFFSET_INACTION_CURSE(a2)
                 beq.s   loc_9C5A
@@ -167,15 +155,11 @@ loc_9D3E:
                 bsr.w   WriteSkirmishScript_SwitchTargets
                 exg     a4,a5
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
-loc_9D84:
-                
                 bsr.w   CreateBattleSceneText
                 bsr.w   CreateBattleSceneAnimation
                 bsr.w   WriteSkirmishScript_SwitchTargets
                 bsr.w   WriteSkirmishScript_DoAction
                 bsr.w   WriteSkirmishScript_EnemyDropItem
-loc_9D98:
-                
                 bsr.w   WriteSkirmishScript_IdleSprite
 loc_9D9C:
                 
@@ -183,14 +167,10 @@ loc_9D9C:
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
                 tst.b   -BCSTACK_OFFSET_EXPLODE(a2)
                 beq.s   loc_9DC4
-loc_9DAA:
-                
                 move.b  #0,-BCSTACK_OFFSET_EXPLODE(a2)
                 move.w  #ACTION_BURSTROCK,(a3)
                 move.b  -BCSTACK_OFFSET_EXPLODECHAR(a2),(a4)
                 move.w  #$C,(a6)+
-loc_9DBC:
-                
                 bsr.w   DetermineTargetsByAction
                 bra.w   loc_9C7E
 loc_9DC4:
@@ -412,8 +392,6 @@ loc_9F8E:
                 bne.s   loc_9FE6
                 move.b  (a4),d0
                 move.b  (a5),d1
-loc_9F98:
-                
                 jsr     GetDistanceBetweenEntities
                 cmpi.w  #2,d2           ; check if block distance between attacker and target is >= 2
                 bcs.s   loc_9FB0
@@ -423,8 +401,6 @@ loc_9F98:
 loc_9FB0:
                 
                 move.b  (a4),d0
-loc_9FB2:
-                
                 jsr     GetStatus
                 andi.w  #CHAR_STATUS_MASK_CURSE,d1
                 beq.s   loc_9FCA
@@ -557,26 +533,18 @@ loc_A09E:
                 cmpi.w  #$1F,d2
                 beq.w   loc_A132
                 cmpi.w  #$20,d2 
-loc_A10E:
-                
                 beq.w   loc_A132
                 move.w  2(a3),d2
                 move.w  #$119,d1        ; {NAME} blew out{N}aqua-breath!
-loc_A11A:
-                
                 cmpi.w  #$28,d2 
                 beq.w   loc_A132
                 move.w  #$11A,d1        ; {NAME} blew out{N}bubble-breath!
-loc_A126:
-                
                 cmpi.w  #$68,d2 
                 beq.w   loc_A132
                 move.w  #$112,d1        ; {NAME} cast{N}{SPELL} level {#}!
 loc_A132:
                 
                 move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d2
-loc_A136:
-                
                 move.w  ((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w,d3
                 addq.w  #1,d3
                 move.w  #$10,(a6)+
@@ -597,8 +565,6 @@ loc_A150:
                 move.w  d2,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
-loc_A170:
-                
                 bra.w   loc_A1FA
 loc_A174:
                 
@@ -837,28 +803,28 @@ loc_A3AE:
 loc_A3B2:
                 
                 lea     -$18(a2),a0
-                move.w  #0,d0
+                move.w  #COM_ALLY_START,d0
                 bra.s   loc_A3BE
 loc_A3BC:
                 
                 addq.w  #1,d0
 loc_A3BE:
                 
-                cmpi.w  #$1D,d0
+                cmpi.w  #COM_ALLY_END,d0
                 bgt.s   loc_A3CE
                 move.w  -(a0),d1
                 jsr     SetCurrentHP
                 bra.s   loc_A3BC
 loc_A3CE:
                 
-                move.w  #$80,d0 
+                move.w  #COM_ENEMY_START,d0
                 bra.s   loc_A3D6
 loc_A3D4:
                 
                 addq.w  #1,d0
 loc_A3D6:
                 
-                cmpi.w  #$9F,d0 
+                cmpi.w  #COM_ENEMY_END,d0
                 bgt.s   loc_A3E6
                 move.w  -(a0),d1
                 jsr     SetCurrentHP
@@ -1388,8 +1354,6 @@ sub_A872:
 loc_A8A2:
                 
                 move.b  (a5),d0
-loc_A8A4:
-                
                 jsr     GetMaxHP
                 tst.w   d1
                 beq.w   loc_A8C4
@@ -3057,13 +3021,9 @@ sub_B680:
                 btst    #7,d0
                 bne.s   loc_B6A2
                 move.w  #$B,(a6)+
-loc_B692:
-                
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
-loc_B69C:
-                
                 move.w  #2,(a6)+
                 bra.s   loc_B6B4
 loc_B6A2:
@@ -3074,8 +3034,6 @@ loc_B6A6:
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
-loc_B6B0:
-                
                 move.w  #2,(a6)+
 loc_B6B4:
                 

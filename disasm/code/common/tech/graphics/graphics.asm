@@ -510,8 +510,6 @@ loc_1AA2:
                 bcs.w   loc_1B10
                 move.l  (a0)+,(a1)+
                 add.w   d0,d0
-loc_1AC0:
-                
                 bcs.w   loc_1B26
                 add.w   d0,d0
                 bcs.w   loc_1B10
@@ -599,8 +597,6 @@ loc_1B72:
                 
                 move.w  -2(a1),d1
                 swap    d1
-loc_1B78:
-                
                 move.w  -2(a1),d1
                 bclr    #0,d2
                 bne.s   loc_1B84
@@ -627,29 +623,17 @@ loc_1B88:
                 move.l  d1,(a1)+
                 move.l  d1,(a1)+
                 bra.w   loc_1AA2
-loc_1BAC:
-                
                 movem.l d0-a2/a5,-(sp)
                 link    a6,#-$20
-loc_1BB4:
-                
                 lea     -$20(a6),a5
                 moveq   #1,d3
                 move.l  d3,(a5)+
                 move.l  #$20003,(a5)+
                 move.l  #$40005,(a5)+
-loc_1BC8:
-                
                 move.l  #$60007,(a5)+
-loc_1BCE:
-                
                 move.l  #$80009,(a5)+
                 move.l  #$A000B,(a5)+
-loc_1BDA:
-                
                 move.l  #$C000D,(a5)+
-loc_1BE0:
-                
                 move.l  #$E000F,(a5)+
                 lea     -$20(a6),a5
                 clr.w   d3
@@ -674,8 +658,6 @@ loc_1C06:
                 add.w   d0,d0
                 bcs.s   loc_1C22
                 moveq   #0,d1
-loc_1C0C:
-                
                 dbf     d3,loc_1C14
                 moveq   #$F,d3
                 move.w  (a0)+,d0
@@ -684,8 +666,6 @@ loc_1C14:
                 add.w   d0,d0
                 addx.w  d1,d1
                 bset    d1,d2
-loc_1C1A:
-                
                 dbf     d4,loc_1BEE
                 bra.w   loc_1C7A
 loc_1C22:
@@ -1007,11 +987,7 @@ LoadCompressedData:
                 moveq   #0,d4           ; d4 = 00000000
                 move.l  #$40005,(a5)+
                 move.l  #$60007,(a5)+
-loc_1E6C:
-                
                 move.l  #$80009,(a5)+
-loc_1E72:
-                
                 move.l  #$A000B,(a5)+
                 move.l  #$C000D,(a5)+
                 move.l  #$E000F,(a5)+   ; stack area : 
@@ -1182,8 +1158,6 @@ loc_1F68:
                 dc.w $CD44              ; exg     d6,d4
                 dc.w $DE44              ; add.w   d4,d7
                 dbf     d3,loc_1F30     
-loc_1F72:
-                
                 bra.w   loc_2040        
 loc_1F76:
                 

@@ -172,7 +172,7 @@ loc_78BA:
 
 sub_78BC:
                 
-                moveq   #$1D,d7
+                moveq   #COM_ALLIES_COUNTER,d7
                 clr.w   d0
                 lea     (FF0000_RAM_START).l,a0
 loc_78C6:
@@ -209,7 +209,7 @@ loc_78C6:
 
 LevelUpWholeForce:
                 
-                moveq   #$1D,d7
+                moveq   #COM_ALLIES_COUNTER,d7
                 clr.w   d0
 loc_7924:
                 

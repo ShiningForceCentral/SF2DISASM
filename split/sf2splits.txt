@@ -850,11 +850,7 @@
 #split	0xBCF0,0xBD24,data/stats/items/itembreakmessages.bin
 #split	0xBE52,0xBECC,data/battles/global/enemyitemdrops.bin
 #split	0xBECC,0xC024,data/stats/enemies/enemygold.bin
-#split	0xC24E,0xC27A,data/stats/spells/spellelements.bin
 #split	0xD824,0xD8F4,data/battles/global/movetypeterraincosts.bin
-#split	0xF9C4,0xFAD6,data/stats/spells/spellnames.bin
-#split	0xFAD6,0xFB8A,data/stats/allies/allynames.bin
-#split	0xFB8A,0xFF87,data/stats/enemies/enemynames.bin
 #split	0x1098A,0x10A4A,data/graphics/tech/iconhighlighttiles.bin
 #split	0x10E1C,0x10EF4,data/graphics/tech/menus/diamondmenulayout.bin
 #split	0x10EF4,0x10FCC,data/graphics/tech/menus/unidentifiedlayout01.bin
@@ -871,14 +867,10 @@
 #split	0x16204,0x1623A,data/graphics/tech/windowlayouts/alphabetendwindowlayout.bin
 #split	0x16618,0x16658,data/graphics/tech/windowlayouts/timerwindowwindowlayout.bin
 #split	0x16A62,0x16EA6,data/graphics/tech/windowlayouts/memberstatswindowslayout.bin
-#split	0x16EA6,0x176A6,data/stats/items/itemdefs.bin
-#split	0x176A6,0x1796E,data/stats/spells/spelldefs.bin
-#split	0x1796E,0x17F3E,data/stats/items/itemnames.bin
-#split	0x17F3E,0x17FDA,data/stats/allies/classes/classnames.bin
 #split	0x198A8,0x198C8,data/graphics/battles/plt_battlescenebasepalette.bin
 #split	0x19E5E,0x19E6E,data/battles/global/terrainbackgrounds.bin
 #split	0x1FAEA,0x1FDEA,data/graphics/tech/backgroundlayout.bin
-#split	0x20878,0x20A02,data/stats/items/shopitems.bin
+#split	0x20981,0x20A02,data/stats/items/debugshop.bin
 #split	0x21046,0x21072,data/stats/allies/promotions.bin
 #split	0x21F62,0x21F92,data/stats/allies/classes/mithrilweaponclasses.bin
 #split	0x21F92,0x21FD2,data/stats/items/mithrilweapons.bin
@@ -914,8 +906,6 @@
 #split	0x2E196,0x2E394,data/scripting/text/huffmantreeoffsets.bin
 #split	0x2E394,0x2EB34,data/scripting/text/huffmantrees.bin
 #split	0x4201E,0x425ED,data/scripting/gamestaff.bin
-#split	0x44A5E,0x44A7C,data/stats/allies/allyspriteids.bin
-#split	0x44AA4,0x44B4A,data/stats/enemies/enemyspriteids.bin
 #split	0x4567A,0x45858,data/spritedialogdefs.bin
 #split	0x47C8E,0x47CBC,data/battles/global/enemyleaderpresence.bin
 #split	0x1002BE,0x10033E,data/graphics/specialscreens/titlescreen/titlepalettes.bin
@@ -931,7 +921,6 @@
 #split	0x1AA5FA,0x1AA8CA,data/graphics/tech/battlescenetransitiontilesb.bin
 #split	0x1AA8CA,0x1AAA82,data/graphics/battles/spells/animations/boltanimdataa.bin
 #split	0x1AAA82,0x1AAC3A,data/graphics/battles/spells/animations/boltanimdatab.bin
-#split	0x1B1A66,0x1B30EE,data/stats/enemies/enemydata.bin
 #split	0x1B6DB0,0x1B6DBC,data/battles/global/specialbattles.bin
 #split	0x1B6DDA,0x1B6DFA,data/graphics/specialscreens/endingkiss/endingkisspalette.bin
 #split	0x1B6DFA,0x1B7C9A,data/graphics/specialscreens/endingkiss/endingkisstiles.bin
@@ -948,8 +937,6 @@
 #split	0x1EB000,0x1EC000,data/sound/yminst.bin
 /*#split	0x1EC000,0x1EE000,data/sound/sounddriver.bin*/
 #split	0x1EE02C,0x1EE270,data/stats/allies/growthcurves.bin
-#split	0x1EE7D0,0x1EE890,data/stats/allies/allystartdata.bin
-#split	0x1EE890,0x1EE930,data/stats/allies/classes/classdata.bin
 #split	0x1EE930,0x1EF102,data/graphics/specialscreens/endingjewels/endingjewelslayout.bin
 #split	0x1EF102,0x1EF142,data/graphics/specialscreens/endingjewels/endingjewelspalette.bin
 #split	0x1EF142,0x1EF4BA,data/graphics/specialscreens/endingjewels/endingjewelstiles.bin

@@ -11,8 +11,8 @@ loc_47C48:
                 move.b  EnemyLeaderPresence(pc,d0.w),d0
                 tst.b   d0
                 beq.s   loc_47C88
-                move.w  #$80,d0 
-                moveq   #$1F,d7
+                move.w  #COM_ENEMY_START,d0
+                moveq   #COM_ENEMIES_COUNTER,d7
                 lea     (DEAD_COMBATANTS_LIST).l,a0
 loc_47C62:
                 

@@ -104,21 +104,15 @@ DebugModeSelectTargetEnemy:
 DebugModeSelectHits:
                 
                 movem.l d0/a0-a6,-(sp)
-loc_9B5C:
-                
                 jsr     j_YesNoPrompt
                 tst.w   d0
                 seq     -BCSTACK_OFFSET_DEBUGDODGE(a2)
-loc_9B68:
-                
                 jsr     j_YesNoPrompt
                 tst.w   d0
                 seq     -BCSTACK_OFFSET_DEBUGCRIT(a2)
                 jsr     j_YesNoPrompt
                 tst.w   d0
                 seq     -BCSTACK_OFFSET_DEBUGDOUBLE(a2)
-loc_9B80:
-                
                 jsr     j_YesNoPrompt
                 tst.w   d0
                 seq     -BCSTACK_OFFSET_DEBUGCOUNTER(a2)

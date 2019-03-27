@@ -97,8 +97,6 @@ sub_15A4:
                 move.b  ((P1_INPUT-$1000000)).w,d7
                 and.b   ((byte_FFDE9E-$1000000)).w,d7
                 beq.s   loc_15CA
-loc_15B2:
-                
                 addq.b  #1,((byte_FFDE9F-$1000000)).w
                 move.b  ((byte_FFDE9F-$1000000)).w,d7
                 cmpi.b  #$A,d7

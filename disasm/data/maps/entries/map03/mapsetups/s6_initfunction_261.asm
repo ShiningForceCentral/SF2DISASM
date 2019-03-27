@@ -21,9 +21,9 @@ cs_513CE:       hide $3
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_513D4:
+nullsub_2:
                 
                 rts
 
-	; End of function sub_513D4
+	; End of function nullsub_2
 

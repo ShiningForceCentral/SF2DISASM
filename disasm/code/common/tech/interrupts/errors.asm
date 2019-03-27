@@ -31,8 +31,6 @@ Int_IllegalInstruction:
 Int_ZeroDivide:
                 
                 move.l  #'ZERO',(ERRCODE_BYTE0).l
-loc_4CE:
-                
                 move.l  2(sp),(ERRCODE_BYTE4).l
                 bsr.w   SaveErrorCode
                 bra.w   Int_ExternalInterrupt

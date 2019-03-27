@@ -3598,7 +3598,7 @@ loc_8DBC:
                 
                 lea     CHAR_OFFSET_ITEM_0(a0,d1.w),a0
                 move.w  (a0),d1
-                andi.w  #ITEM_MAX_IDX,d1
+                andi.w  #ITEM_MASK_IDX,d1
                 cmpi.w  #ITEMIDX_NOTHING,d1
                 beq.s   loc_8DF8        
                 btst    #ITEM_BIT_EQUIPPED,ITEM_OFFSET_IDXANDEQUIPBYTE(a0)
@@ -3680,8 +3680,6 @@ loc_8E52:
 loc_8E54:
                 
                 movem.l (sp)+,d0/a0
-loc_8E58:
-                
                 bra.w   ApplyStatusAndItemsOnStats
 
 	; End of function DropItemBySlot
@@ -3880,8 +3878,6 @@ IsWeaponOrRingEquippable:
 GetWeaponNewATKandDEF:
                 
                 movem.l d0/d4-d6/a0,-(sp)
-loc_8FA0:
-                
                 bsr.w   GetCharEntryAddress
                 clr.w   d2
                 move.b  CHAR_OFFSET_ATK_CURRENT(a0),d2; current ATK
@@ -4142,7 +4138,7 @@ loc_916A:
                 
                 move.w  d7,d1
                 bsr.w   GetCharItemAtSlotAndNumberOfItems
-                andi.w  #$7F,d1 
+                andi.w  #ITEM_MASK_IDX,d1
                 cmp.w   d3,d1
                 bne.s   loc_917E
                 move.w  d7,d1
@@ -4173,16 +4169,16 @@ GetItemSlotContainingIndex:
                 
                 movem.l d1/d3/d7,-(sp)
                 move.w  d1,d3
-                andi.w  #$7F,d3 
+                andi.w  #ITEM_MASK_IDX,d3
                 moveq   #0,d2
-                moveq   #3,d7
+                moveq   #CHAR_ITEMSLOTS_COUNTER,d7
 loc_91A2:
                 
                 move.w  d2,d1
                 move.l  d2,-(sp)
                 jsr     GetCharItemAtSlotAndNumberOfItems(pc)
                 move.l  (sp)+,d2
-                andi.w  #$7F,d1 
+                andi.w  #ITEM_MASK_IDX,d1
                 cmp.b   d3,d1
                 beq.w   loc_91C0
                 addq.w  #1,d2
@@ -4205,7 +4201,7 @@ loc_91C0:
 FindSpellName:
                 
                 move.w  d1,-(sp)
-                andi.w  #$3F,d1 
+                andi.w  #SPELL_MASK_IDX,d1
                 movea.l (p_SpellNames).l,a0
                 bsr.w   FindName        
                 move.w  (sp)+,d1
@@ -4225,15 +4221,15 @@ GetSpellDefAddress:
                 move.l  d0,-(sp)
 loc_91DC:
                 
-                movea.l (p_SpellData).l,a0
-                moveq   #$63,d0 
+                movea.l (p_SpellDefs).l,a0
+                moveq   #SPELL_DEFS_COUNTER,d0
 loc_91E4:
                 
                 cmp.b   (a0),d1
                 beq.s   loc_91F6
                 lea     SPELLDEF_SIZE(a0),a0
                 dbf     d0,loc_91E4
-                movea.l (p_SpellData).l,a0
+                movea.l (p_SpellDefs).l,a0
 loc_91F6:
                 
                 move.l  (sp)+,d0
@@ -4755,7 +4751,7 @@ LevelUp:
 loc_94A4:
                 
                 lsl.w   #2,d0
-                movea.l (p_pt_CharacterStats).l,a0
+                movea.l (p_pt_AllyStats).l,a0
                 movea.l (a0,d0.w),a0
 loc_94B0:
                 
@@ -4795,8 +4791,6 @@ loc_94E2:
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-loc_94FE:
-                
                 bsr.w   GetMaxHP
                 bsr.w   sub_96BA
                 move.b  d1,1(a1)
@@ -4807,8 +4801,6 @@ loc_94FE:
                 bsr.w   GetMaxMP
                 bsr.w   sub_96BA
                 move.b  d1,2(a1)
-loc_9520:
-                
                 bsr.w   IncreaseMaxMP
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
@@ -4838,8 +4830,6 @@ loc_9520:
                 bsr.w   GetClass
                 cmpi.w  #$B,d1
                 blt.s   loc_957E
-loc_957A:
-                
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5
 loc_957E:
                 
@@ -4852,7 +4842,7 @@ loc_9584:
                 bne.s   loc_95A2
                 move.w  d0,d2
                 lsl.w   #2,d2
-                movea.l (p_pt_CharacterStats).l,a0
+                movea.l (p_pt_AllyStats).l,a0
                 movea.l (a0,d2.w),a0
                 lea     $10(a0),a0
                 bra.s   loc_9584
@@ -4886,16 +4876,12 @@ InitCharacterStats:
                 move.w  d1,-(sp)
                 move.w  d0,d2
                 lsl.w   #2,d2
-loc_95D0:
-                
-                movea.l (p_pt_CharacterStats).l,a0
+                movea.l (p_pt_AllyStats).l,a0
                 movea.l (a0,d2.w),a0
                 clr.w   d1
                 addq.l  #2,a0
                 move.b  (a0)+,d1
                 bsr.w   SetMaxHP
-loc_95E4:
-                
                 bsr.w   SetCurrentHP
                 clr.w   d1
                 addq.l  #2,a0
@@ -4926,7 +4912,7 @@ loc_962C:
                 
                 move.w  d0,d2
                 lsl.w   #2,d2
-                movea.l (p_pt_CharacterStats).l,a0
+                movea.l (p_pt_AllyStats).l,a0
                 movea.l (a0,d2.w),a0
 loc_963A:
                 
@@ -4950,7 +4936,7 @@ loc_9650:
                 bne.s   loc_966E
                 move.w  d0,d2
                 lsl.w   #2,d2
-                movea.l (p_pt_CharacterStats).l,a0
+                movea.l (p_pt_AllyStats).l,a0
                 movea.l (a0,d2.w),a0
                 lea     $10(a0),a0
                 bra.s   loc_9650
@@ -5124,7 +5110,7 @@ loc_97A0:
                 
                 move.w  d0,d1
                 mulu.w  #CHARDEF_STARTDATA_ENTRYSIZE,d1
-                movea.l (p_CharacterStartData).l,a0
+                movea.l (p_AllyStartDefs).l,a0
                 adda.w  d1,a0
                 suba.w  #$A,a1
                 move.b  (a0)+,d1
@@ -5161,7 +5147,7 @@ SetCharacterClassData:
                 mulu.w  #$38,d0 
                 lea     ((CHARACTER_DATA-$1000000)).w,a1
                 adda.w  d0,a1
-                movea.l (p_ClassData).l,a0
+                movea.l (p_ClassDefs).l,a0
 loc_980C:
                 
                 andi.w  #$1F,d1
@@ -5522,7 +5508,7 @@ AddItemToCaravan:
                 bcs.s   loc_9A5C
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
                 move.w  ((NUM_ITEMS_IN_CARAVAN-$1000000)).w,d0
-                andi.w  #ITEM_MAX_IDX,d1
+                andi.w  #ITEM_MASK_IDX,d1
                 move.b  d1,(a0,d0.w)
                 addq.w  #1,((NUM_ITEMS_IN_CARAVAN-$1000000)).w
 loc_9A5C:

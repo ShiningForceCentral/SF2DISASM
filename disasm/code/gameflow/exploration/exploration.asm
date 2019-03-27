@@ -153,8 +153,6 @@ sub_3758:
                 beq.s   loc_3770
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3770
-loc_376A:
-                
                 move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_3770:
                 
@@ -175,8 +173,6 @@ loc_3770:
                 move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
-loc_37A8:
-                
                 bsr.w   sub_3158
                 movem.w (sp)+,d0-d3
 return_37B0:
@@ -207,21 +203,13 @@ loc_37CA:
                 movem.w d0-d3,-(sp)
                 clr.w   d4
                 clr.w   d5
-loc_37E4:
-                
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 asr.w   #4,d0
-loc_37EA:
-                
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
                 asr.w   #4,d1
-loc_37F0:
-                
                 addi.w  #$100,d1
                 move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
-loc_37FC:
-                
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
                 bsr.w   sub_30EE
                 movem.w (sp)+,d0-d3
@@ -237,8 +225,6 @@ return_380A:
 sub_380C:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
-loc_3810:
-                
                 cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 beq.s   loc_3824
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
@@ -260,8 +246,6 @@ loc_3824:
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
                 asr.w   #4,d1
                 addi.w  #$100,d0
-loc_384E:
-                
                 move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_B_LAYOUT).l,a1
@@ -297,8 +281,6 @@ loc_387E:
                 clr.w   d5
                 move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 asr.w   #4,d0
-loc_389E:
-                
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
                 asr.w   #4,d1
                 addi.w  #$100,d1
@@ -324,8 +306,6 @@ sub_38C0:
                 bpl.s   loc_38E6
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_38DC
-loc_38D2:
-                
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
                 bra.s   loc_38E4
@@ -347,8 +327,6 @@ loc_38E6:
                 bne.s   loc_390A
                 sub.w   ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
                 sub.w   ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d3
-loc_3900:
-                
                 move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d0
                 move.w  ((MAP_AREA_LAYER2_STARTY-$1000000)).w,d1
                 bra.s   loc_391A
@@ -393,8 +371,6 @@ loc_3944:
                 beq.s   loc_3968
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3968
-loc_3962:
-                
                 move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_3968:
                 
@@ -1090,17 +1066,11 @@ loc_3F60:
                 cmp.w   d0,d4
                 blt.w   loc_3FCA
                 cmp.w   d1,d5
-loc_3FB6:
-                
                 blt.w   loc_3FCA
                 cmp.w   d2,d4
-loc_3FBC:
-                
                 bgt.w   loc_3FCA
                 cmp.w   d3,d5
                 bgt.w   loc_3FCA
-loc_3FC6:
-                
                 bra.w   loc_3FCE
 loc_3FCA:
                 
@@ -1231,7 +1201,7 @@ loc_40EA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_40F2:
+csub_56632_0:
                 
                 movem.w d7,-(sp)
                 tst.w   ((word_FFAF42-$1000000)).w
@@ -1264,7 +1234,7 @@ loc_4150:
                 movem.w (sp)+,d7
                 rts
 
-	; End of function sub_40F2
+	; End of function csub_56632_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1272,7 +1242,7 @@ loc_4150:
 OpenChest:
                 
                 movem.l d0-d1/a2,-(sp)
-                bsr.w   GetChestItem
+                bsr.w   GetChestItem    
                 tst.w   d0
                 blt.s   loc_418E
                 jsr     j_CheckFlag
@@ -1303,7 +1273,7 @@ loc_418E:
 CloseChest:
                 
                 movem.l d0-d1/a2,-(sp)
-                bsr.w   GetChestItem
+                bsr.w   GetChestItem    
                 tst.w   d0
                 blt.s   loc_41C0
                 jsr     j_ClearFlag
@@ -1328,7 +1298,7 @@ loc_41C0:
 CheckChestItem:
                 
                 movem.l d0-d1/a2,-(sp)
-                bsr.w   GetChestItem
+                bsr.w   GetChestItem    
                 tst.w   d0
                 blt.s   loc_41F0
                 jsr     j_CheckFlag
@@ -1390,6 +1360,14 @@ loc_422C:
 
 ; =============== S U B R O U T I N E =======================================
 
+; IN : 
+; - d0d1 : candidate coordinates
+; OUT :
+; - d0 : layout block offset
+; - d1 : item flag
+; - d2 : item index
+; - a2 : map layout offset
+
 GetChestItem:
                 
                 clr.w   d2
@@ -1398,7 +1376,7 @@ GetChestItem:
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data
                 movea.l $22(a2),a2      ; get address of current map's chest item data
-                bra.w   GetItem         
+                bra.w   GetItem
 
 	; End of function GetChestItem
 
@@ -1417,15 +1395,7 @@ GetNonChestItem:
 	; End of function GetNonChestItem
 
 
-; =============== S U B R O U T I N E =======================================
-
-; IN : 
-; - d0\d1 : candidate coordinates
-; OUT :
-; - d0 : layout block offset
-; - d1 : item flag
-; - d2 : item index
-; - a2 : map layout offset
+; START OF FUNCTION CHUNK FOR GetChestItem
 
 GetItem:
                 
@@ -1477,7 +1447,7 @@ loc_42D8:
                 addq.l  #4,a2           ; go to next item
                 bra.s   loc_4290
 
-	; End of function GetItem
+; END OF FUNCTION CHUNK FOR GetChestItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1693,8 +1663,6 @@ loc_44BC:
                 ext.w   d0
                 add.w   d1,d1
                 clr.w   d5
-loc_44D2:
-                
                 move.b  1(a3,d1.w),d5
                 move.b  (a3,d1.w),d1
                 ext.w   d1
@@ -1707,8 +1675,6 @@ loc_44D2:
                 add.w   d5,d2
                 add.w   d2,d2
                 move.w  (a4,d0.w),d0
-loc_44F0:
-                
                 cmpi.w  #$C000,d0
                 bcs.s   loc_44FA
                 clr.w   d4

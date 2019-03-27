@@ -191,6 +191,20 @@ ENEMYAI_THRESHOLD_HEAL3: equ $1C
 
 ; ---------------------------------------------------------------------------
 
+; enum Icon_Offsets
+ICON_OFFSET_CRACKS: equ $6F00
+
+; ---------------------------------------------------------------------------
+
+; enum IconDef_Idx
+ICONIDX_NOTHING: equ $7F
+ICONIDX_UNARMED: equ $80
+ICONIDX_HEAL: equ $82
+ICONIDX_JEWEL_OF_LIGHT: equ $92
+ICONIDX_JEWEL_OF_EVIL: equ $93
+
+; ---------------------------------------------------------------------------
+
 ; enum Controller_Input_A_Bitmap
 INPUT_A_UP: equ $0
 INPUT_A_DOWN: equ $1
@@ -245,6 +259,7 @@ ITEMIDX_TAROS_SWORD: equ $6E
 ITEMIDX_LIFE_RING: equ $7C
 ITEMIDX_CHIRRUP_SANDALS: equ $7E
 ITEMIDX_NOTHING: equ $7F
+ITEMIDX_CHEST_GOLD_AMOUNTS_START: equ $80
 
 ; ---------------------------------------------------------------------------
 
@@ -473,6 +488,7 @@ SPELL_OFFSET_IDX: equ $0
 SPELL_MASK_RESIST: equ $3
 SPELL_OFFSET_LV: equ $6
 SPELL_IDX_REALMASK: equ $3F
+SPELL_DEFS_COUNTER: equ $63
 SPELL_MASK_LV: equ $C0
 SPELL_MASK: equ $FF
 SPELL_MASK_ALLRESIST: equ $C0FF

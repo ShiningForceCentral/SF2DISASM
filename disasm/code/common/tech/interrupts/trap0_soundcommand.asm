@@ -15,8 +15,6 @@ Trap0_SoundCommand:
                 movem.l d0-d1/a0,-(sp)
                 movea.l $E(sp),a0
                 move.w  (a0),d1         ; get interrupt param
-loc_466:
-                
                 addq.l  #2,$E(sp)
                 cmpi.w  #$FFFF,d1
                 bne.s   loc_472

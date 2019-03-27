@@ -64,8 +64,6 @@ loc_6F34:
 loc_6F38:
                 
                 lea     (SRAM_START).l,a0
-loc_6F3E:
-                
                 move.w  #$1FFF,d7
 loc_6F42:
                 
@@ -98,8 +96,6 @@ SaveGame:
                 tst.b   d0
                 bne.s   loc_6F88
                 lea     (SAVE1_CHARACTER_DATA).l,a1
-loc_6F7E:
-                
                 lea     (SAVE1_CHECKSUM).l,a2
                 clr.w   d1
                 bra.s   loc_6F96
@@ -218,6 +214,8 @@ loc_7024:
                 add.b   (a0),d0
                 addq.l  #2,a0
                 dbf     d7,loc_7024
+loc_702E:
+                
                 movem.l (sp)+,d7-a1
                 rts
 
