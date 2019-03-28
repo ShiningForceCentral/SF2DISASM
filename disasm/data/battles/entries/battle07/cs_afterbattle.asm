@@ -457,7 +457,7 @@ abcs_battle07:  textCursor $951
                  ac_jump eas_Idle       ;   
                 ac_end
                 setActscriptWait $0,eas_46172
-                setSprite $0,MAPSPRITE_BOWIE_BASE
+                setSprite $0,ALLY_BOWIE
                 customActscriptWait $0
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $1          ;   
@@ -546,7 +546,7 @@ abcs_battle07:  textCursor $951
                 csWait 60
                 nextSingleText $0,$85   ; "She's gone....{N}Elis!{W1}"
                 nextSingleText $0,$83   ; "We couldn't help the{N}Princess.{W1}"
-                setSprite $0,MAPSPRITE_BOWIE_BASE
+                setSprite $0,ALLY_BOWIE
                 setActscriptWait $0,eas_Init
                 startEntity $0
                 headshake $0

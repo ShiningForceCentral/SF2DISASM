@@ -44,5 +44,5 @@ abcs_battle21:  textCursor $A17
                 warp $43,$1A,$17,$3
                 csc_end
 ce_4B948:       mainEntity 10,22,LEFT
-                entity 11,23,LEFT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 11,23,LEFT,ALLY_PETER,eas_Init
                 dc.w $FFFF

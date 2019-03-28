@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map06\mapsetups\s1_entities.asm :
 ; 0x547F8..0x5489A : 
 ms_map6_Entities:
-                msFixedEntity 18, 25, UP, MAPSPRITE_CHESTER_SPECIAL, eas_46212
+                msFixedEntity 18, 25, UP, ALLY_PETER, eas_46212
                 msFixedEntity 20, 23, DOWN, MAPSPRITE_SAILOR, eas_Init2
                 msWalkingEntity 18, 8, DOWN, MAPSPRITE_GIRL, 18, 8, 1
                 msFixedEntity 16, 23, DOWN, MAPSPRITE_WOMAN1, eas_Init2

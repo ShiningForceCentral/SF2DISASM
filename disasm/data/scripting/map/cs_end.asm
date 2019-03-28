@@ -176,11 +176,11 @@ EndCutscene:    mapLoad 20,19,33
                 fadeOutB
                 csc_end
 ce_492CC:       mainEntity 63,63,DOWN
-                entity 63,63,DOWN,MAPSPRITE_KAZIN_BASE,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_SARAH_BASE,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_JAHA_SPECIAL,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_SARAH_PROMO,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 63,63,DOWN,ALLY_ROHDE,eas_Init
+                entity 63,63,DOWN,ALLY_CHESTER,eas_Init
+                entity 63,63,DOWN,ALLY_LUKE,eas_Init
+                entity 63,63,DOWN,ALLY_JAHA,eas_Init
+                entity 63,63,DOWN,ALLY_PETER,eas_Init
                 entity 21,40,RIGHT,MAPSPRITE_ASTRAL,eas_Init
                 entity 21,39,RIGHT,MAPSPRITE_GRANSEAL_KING,eas_Init
                 entity 22,38,RIGHT,MAPSPRITE_MINISTER,eas_Init

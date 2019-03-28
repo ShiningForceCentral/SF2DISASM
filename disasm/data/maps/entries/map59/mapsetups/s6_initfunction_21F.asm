@@ -116,7 +116,7 @@ cs_615E6:       textCursor $EB0
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setSprite $1C,MAPSPRITE_RICK_PROMO
+                setSprite $1C,ALLY_LEMON
                 setFacing $1C,RIGHT
                 setCamDest 7,5
                 entityActions $84

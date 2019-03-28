@@ -254,7 +254,7 @@ IntroCutscene1: textCursor $105A
                 fadeOutToBlackHalf
                 csc_end
 ce_48340:       mainEntity 63,63,UP
-                entity 63,63,DOWN,MAPSPRITE_CHESTER_BASE,eas_Init
+                entity 63,63,DOWN,ALLY_SLADE,eas_Init
                 entity 63,63,UP,MAPSPRITE_WORKER,eas_Init
                 entity 63,63,UP,MAPSPRITE_WORKER,eas_Init
                 entity 26,4,DOWN,MAPSPRITE_OBJECT1,eas_Init

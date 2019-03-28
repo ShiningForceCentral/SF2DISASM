@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map09\mapsetups\s1_entities.asm :
 ; 0x56666..0x566C0 : 
 ms_map9_Entities:
-                msFixedEntity 16, 59, DOWN, MAPSPRITE_KAZIN_BASE, eas_Init
+                msFixedEntity 16, 59, DOWN, ALLY_ROHDE, eas_Init
                 msWalkingEntity 13, 13, DOWN, MAPSPRITE_VIKING, 13, 13, 2
                 msWalkingEntity 20, 41, DOWN, MAPSPRITE_MAN1, 20, 41, 2
                 msFixedEntity 7, 58, UP, MAPSPRITE_PRIEST, eas_Init2

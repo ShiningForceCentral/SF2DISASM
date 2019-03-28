@@ -81,7 +81,7 @@ cs_4D3C6:       entityActionsWait $1F
                 nextSingleText $0,$1F   ; "{LEADER}, get her!{W1}"
                 csc_end
 ce_4D48E:       mainEntity 29,29,LEFT
-                entity 30,28,LEFT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 30,28,LEFT,ALLY_PETER,eas_Init
                 entity 11,10,DOWN,MAPSPRITE_CAMEELA,eas_Init
                 entity 11,6,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 30,29,LEFT,MAPSPRITE_CARAVAN,eas_Init

@@ -169,7 +169,7 @@ abcs_battle30:  textCursor $ACD
                 followEntity $7,$1F,$2
                 csc_end
 ce_4C96C:       mainEntity 10,13,UP
-                entity 12,13,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 12,13,UP,ALLY_PETER,eas_Init
                 entity 11,10,DOWN,MAPSPRITE_ZALBARD,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_MITULA,eas_Init
                 entity 63,63,UP,MAPSPRITE_ORB,eas_Init

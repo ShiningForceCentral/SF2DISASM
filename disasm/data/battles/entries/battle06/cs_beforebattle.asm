@@ -56,7 +56,7 @@ bbcs_06:        textCursor $926
                 setStoryFlag $7         ; Battle 7 unlocked
                 csc_end
 ce_49CBA:       mainEntity 30,9,DOWN
-                entity 29,8,DOWN,MAPSPRITE_CHESTER_BASE,eas_Init
+                entity 29,8,DOWN,ALLY_SLADE,eas_Init
                 entity 32,20,UP,MAPSPRITE_GALAM_SOLDIER,eas_Init
                 entity 36,13,LEFT,MAPSPRITE_GALAM_SOLDIER,eas_Init
                 entity 37,14,UP,MAPSPRITE_GALAM_ARCHER,eas_Init

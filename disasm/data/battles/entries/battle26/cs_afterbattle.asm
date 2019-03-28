@@ -97,7 +97,7 @@ abcs_battle26:  textCursor $A4D
                 addNewFollower $13
                 csc_end
 ce_4BE4A:       mainEntity 19,16,UP
-                entity 17,14,DOWN,MAPSPRITE_CHESTER_SPECIAL,eas_Init
-                entity 18,14,DOWN,MAPSPRITE_PETER_PROMO,eas_Init
+                entity 17,14,DOWN,ALLY_PETER,eas_Init
+                entity 18,14,DOWN,ALLY_HIGINS,eas_Init
                 entity 63,63,UP,MAPSPRITE_EVIL_CLOUD,eas_Init
                 dc.w $FFFF

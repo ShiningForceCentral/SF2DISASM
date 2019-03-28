@@ -40,5 +40,5 @@ abcs_battle20:  textCursor $A06
                 followEntity $D,$1F,$2
                 csc_end
 ce_4B780:       mainEntity 6,10,UP
-                entity 6,8,DOWN,MAPSPRITE_KAZIN_SPECIAL,eas_Init
+                entity 6,8,DOWN,ALLY_ELRIC,eas_Init
                 dc.w $FFFF

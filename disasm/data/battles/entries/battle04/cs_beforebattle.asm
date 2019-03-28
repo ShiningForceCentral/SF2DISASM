@@ -36,11 +36,11 @@ bbcs_04:        textCursor $907
                 endActions
                 csc_end
 ce_4989E:       mainEntity 5,9,DOWN
-                entity 6,9,DOWN,MAPSPRITE_SARAH_SPECIAL,eas_Init
-                entity 5,8,DOWN,MAPSPRITE_BOWIE_PROMO,eas_Init
-                entity 5,7,DOWN,MAPSPRITE_SARAH_BASE,eas_Init
-                entity 6,8,DOWN,MAPSPRITE_SARAH_PROMO,eas_Init
-                entity 13,17,UP,MAPSPRITE_RICK_PROMO,eas_Init
+                entity 6,9,DOWN,ALLY_KAZIN,eas_Init
+                entity 5,8,DOWN,ALLY_SARAH,eas_Init
+                entity 5,7,DOWN,ALLY_CHESTER,eas_Init
+                entity 6,8,DOWN,ALLY_JAHA,eas_Init
+                entity 13,17,UP,ALLY_LEMON,eas_Init
                 entity 14,17,UP,MAPSPRITE_GALAM_ARCHER,eas_Init
                 entity 11,18,UP,MAPSPRITE_GALAM_SOLDIER,eas_Init
                 entity 12,18,UP,MAPSPRITE_GALAM_SOLDIER,eas_Init

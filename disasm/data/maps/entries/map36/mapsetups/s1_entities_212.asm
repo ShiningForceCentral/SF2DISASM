@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map36\mapsetups\s1_entities_212.asm :
 ; 0x5D7F0..0x5D84A : 
 ms_map36_flag212_Entities:
-                msFixedEntity 27, 8, LEFT, MAPSPRITE_GERHALT_BASE, eas_Init
+                msFixedEntity 27, 8, LEFT, ALLY_FRAYJA, eas_Init
                 msFixedEntity 25, 24, LEFT, MAPSPRITE_POCALON_SOLDIER, eas_Init
                 msWalkingEntity 12, 25, DOWN, MAPSPRITE_POCALON_SOLDIER, 12, 25, 1
                 msWalkingEntity 21, 16, DOWN, MAPSPRITE_POCALON_SOLDIER, 21, 16, 1

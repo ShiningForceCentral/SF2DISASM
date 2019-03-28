@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map72\mapsetups\scripts.asm :
 ; 0x4FFDA..0x50312 : 
 cs_4FFDA:       textCursor $D0D
-                newEntity $B,63,63,UP,MAPSPRITE_KAZIN_BASE
+                newEntity $B,63,63,UP,ALLY_ROHDE
                 newEntity $80,63,63,LEFT,MAPSPRITE_OBJECT4
                 newEntity $81,63,63,LEFT,MAPSPRITE_EFFECT3
                 setActscriptWait $7,eas_Init

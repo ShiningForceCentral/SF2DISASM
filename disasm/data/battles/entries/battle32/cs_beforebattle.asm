@@ -50,8 +50,8 @@ bbcs_32:        textCursor $B1D
                 setActscriptWait $86,eas_Jump
                 csc_end
 ce_4CCC0:       mainEntity 15,44,UP
-                entity 16,45,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
-                entity 15,46,UP,MAPSPRITE_GERHALT_BASE,eas_Init
+                entity 16,45,UP,ALLY_PETER,eas_Init
+                entity 15,46,UP,ALLY_FRAYJA,eas_Init
                 entity 14,21,DOWN,MAPSPRITE_DEATH_ARCHER,eas_Init
                 entity 12,21,DOWN,MAPSPRITE_NECROMANCER,eas_Init
                 entity 13,20,DOWN,MAPSPRITE_DEATH_MONK,eas_Init

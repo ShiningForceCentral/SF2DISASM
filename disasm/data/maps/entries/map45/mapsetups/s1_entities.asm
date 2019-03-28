@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map45\mapsetups\s1_entities.asm :
 ; 0x5FF7A..0x60024 : 
 ms_map45_Entities:
-                msFixedEntity 6, 6, DOWN, MAPSPRITE_LUKE_PROMO, eas_Init
+                msFixedEntity 6, 6, DOWN, ALLY_SHEELA, eas_Init
                 msWalkingEntity 12, 30, DOWN, MAPSPRITE_ZELOT, 12, 30, 1
                 msFixedEntity 12, 27, RIGHT, MAPSPRITE_ZELOT, eas_Init
                 msFixedEntity 13, 27, LEFT, MAPSPRITE_ZELOT, eas_Init

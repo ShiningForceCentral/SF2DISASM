@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map01\mapsetups\s1_entities.asm :
 ; 0x5E642..0x5E694 : 
 ms_map1_Entities:
-                msFixedEntity 63, 63, DOWN, MAPSPRITE_MAY_PROMO, eas_Init
+                msFixedEntity 63, 63, DOWN, ALLY_TAYA, eas_Init
                 msFixedEntity 41, 8, DOWN, MAPSPRITE_BLANK, eas_Init
                 msFixedEntity 43, 8, DOWN, MAPSPRITE_BLANK, eas_Init
                 msFixedEntity 45, 10, LEFT, MAPSPRITE_BLANK, eas_Init

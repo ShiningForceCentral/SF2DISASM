@@ -212,7 +212,7 @@ abcs_battle28:  textCursor $A6E
                 csc_end
 ce_4C3B4:       mainEntity 12,28,DOWN
                 entity 12,31,UP,MAPSPRITE_POSE3,eas_Init
-                entity 13,28,DOWN,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 13,28,DOWN,ALLY_PETER,eas_Init
                 entity 12,27,DOWN,MAPSPRITE_CARAVAN,eas_Init
                 entity 63,63,LEFT,MAPSPRITE_EFFECT3,eas_Init
                 dc.w $FFFF

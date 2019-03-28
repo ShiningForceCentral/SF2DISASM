@@ -84,8 +84,8 @@ bbcs_33:        textCursor $B32
                 clearF $52              ; Frayja is a follower
                 csc_end
 ce_4D048:       mainEntity 26,37,LEFT
-                entity 27,38,LEFT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
-                entity 27,36,LEFT,MAPSPRITE_GERHALT_BASE,eas_Init
+                entity 27,38,LEFT,ALLY_PETER,eas_Init
+                entity 27,36,LEFT,ALLY_FRAYJA,eas_Init
                 entity 10,10,DOWN,MAPSPRITE_SHAMAN,eas_Init
                 entity 9,10,DOWN,MAPSPRITE_DEVIL_SOLDIER,eas_Init
                 entity 11,10,DOWN,MAPSPRITE_DEVIL_SOLDIER,eas_Init

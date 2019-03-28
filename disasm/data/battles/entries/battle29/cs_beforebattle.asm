@@ -120,7 +120,7 @@ bbcs_29:        textCursor $A9E
                 nextSingleText $0,$1F   ; "{LEADER}, attack!{W1}"
                 csc_end
 ce_4C5AE:       mainEntity 15,33,UP
-                entity 16,34,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 16,34,UP,ALLY_PETER,eas_Init
                 entity 15,30,DOWN,MAPSPRITE_PRIEST,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_DEATH_MONK,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_ORC_LORD,eas_Init

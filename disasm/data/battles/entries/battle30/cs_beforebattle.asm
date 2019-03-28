@@ -46,6 +46,6 @@ bbcs_30:        textCursor $AC8
                 flashScreenWhite $28
                 csc_end
 ce_4C690:       mainEntity 11,26,UP
-                entity 11,28,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 11,28,UP,ALLY_PETER,eas_Init
                 entity 13,4,DOWN,MAPSPRITE_ZALBARD,eas_Init
                 dc.w $FFFF

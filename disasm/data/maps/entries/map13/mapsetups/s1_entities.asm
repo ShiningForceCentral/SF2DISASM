@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s1_entities.asm :
 ; 0x57E96..0x57F08 : 
 ms_map13_Entities:
-                msFixedEntity 23, 13, DOWN, MAPSPRITE_JAHA_PROMO, eas_Init
+                msFixedEntity 23, 13, DOWN, ALLY_GERHALT, eas_Init
                 msWalkingEntity 13, 27, DOWN, MAPSPRITE_POCALON_SOLDIER, 13, 27, 2
                 msWalkingEntity 6, 21, DOWN, MAPSPRITE_POCALON_MAID, 6, 21, 2
                 msFixedEntity 1, 11, DOWN, MAPSPRITE_TURTLE, eas_Init2

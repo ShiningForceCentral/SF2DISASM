@@ -114,7 +114,7 @@ cs_52530:       textCursor $385
                 setCamDest 43,0
                 setActscriptWait $5,eas_Init
                 startEntity $5
-                setSprite $5,MAPSPRITE_CHESTER_BASE
+                setSprite $5,ALLY_SLADE
                 setActscriptWait $5,eas_Jump
                 entityActionsWait $5
                  moveRight 1
@@ -252,7 +252,7 @@ cs_528D4:       textCursor $3B3
                 csWait 30
                 setActscriptWait $5,eas_Init
                 startEntity $5
-                setSprite $5,MAPSPRITE_CHESTER_BASE
+                setSprite $5,ALLY_SLADE
                 entityActionsWait $5
                  moveLeft 2
                 endActions

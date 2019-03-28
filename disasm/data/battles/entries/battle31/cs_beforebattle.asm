@@ -113,8 +113,8 @@ bbcs_31:        textCursor $AFB
                 animEntityFX $80,6
                 csc_end
 ce_4CB92:       mainEntity 21,4,DOWN
-                entity 20,3,DOWN,MAPSPRITE_CHESTER_SPECIAL,eas_Init
-                entity 21,3,DOWN,MAPSPRITE_GERHALT_BASE,eas_Init
+                entity 20,3,DOWN,ALLY_PETER,eas_Init
+                entity 21,3,DOWN,ALLY_FRAYJA,eas_Init
                 entity 21,8,UP,MAPSPRITE_GESHP,eas_Init
                 entity 21,11,UP,MAPSPRITE_CAMEELA,eas_Init
                 entity 63,63,LEFT,MAPSPRITE_FLAME1,eas_Init

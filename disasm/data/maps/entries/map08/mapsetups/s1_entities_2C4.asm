@@ -15,5 +15,5 @@ ms_map8_flag2C4_Entities:
                 msFixedEntity 19, 14, RIGHT, MAPSPRITE_BOY, eas_Init2
                 msFixedEntity 19, 11, DOWN, MAPSPRITE_WOMAN2, eas_Init2
                 msFixedEntity 4, 11, DOWN, MAPSPRITE_SAILOR, eas_Init
-                msWalkingEntity 18, 27, DOWN, MAPSPRITE_JAHA_BASE, 18, 27, 2
+                msWalkingEntity 18, 27, DOWN, ALLY_MAY, 18, 27, 2
                 msEntitiesEnd

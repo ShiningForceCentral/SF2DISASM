@@ -117,7 +117,7 @@ csub_4D694:
 	; End of function csub_4D694
 
 ce_4D69E:       mainEntity 7,12,UP
-                entity 9,11,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 9,11,UP,ALLY_PETER,eas_Init
                 entity 7,9,DOWN,MAPSPRITE_CAMEELA,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 6,12,UP,MAPSPRITE_CARAVAN,eas_Init

@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map15\mapsetups\s1_entities_212.asm :
 ; 0x5CE90..0x5CEEA : 
 ms_map15_flag212_Entities:
-                msFixedEntity 63, 63, UP, MAPSPRITE_MAY_BASE, eas_Init
+                msFixedEntity 63, 63, UP, ALLY_SKREECH, eas_Init
                 msWalkingEntity 27, 28, DOWN, MAPSPRITE_DUCK, 27, 28, 1
                 msWalkingEntity 14, 28, DOWN, MAPSPRITE_BEASTMAN1, 14, 28, 1
                 msFixedEntity 31, 12, LEFT, MAPSPRITE_BEASTMAN2, eas_Init

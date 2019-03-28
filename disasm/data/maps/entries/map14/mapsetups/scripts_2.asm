@@ -215,12 +215,12 @@ cs_59142:       textCursor $8E6
                 warp $48,$1,$1,$3
                 csc_end
 ce_59270:       mainEntity 13,11,DOWN
-                entity 12,20,UP,MAPSPRITE_SARAH_PROMO,eas_Init
-                entity 14,20,UP,MAPSPRITE_CHESTER_BASE,eas_Init
-                entity 14,21,UP,MAPSPRITE_BOWIE_PROMO,eas_Init
-                entity 14,22,UP,MAPSPRITE_CHESTER_PROMO,eas_Init
-                entity 14,23,UP,MAPSPRITE_SARAH_BASE,eas_Init
-                entity 14,24,UP,MAPSPRITE_SARAH_SPECIAL,eas_Init
+                entity 12,20,UP,ALLY_JAHA,eas_Init
+                entity 14,20,UP,ALLY_SLADE,eas_Init
+                entity 14,21,UP,ALLY_SARAH,eas_Init
+                entity 14,22,UP,ALLY_KIWI,eas_Init
+                entity 14,23,UP,ALLY_CHESTER,eas_Init
+                entity 14,24,UP,ALLY_KAZIN,eas_Init
                 entity 13,13,UP,MAPSPRITE_SAILOR,eas_Init
                 entity 9,13,LEFT,MAPSPRITE_MAN2,eas_Init
                 entity 16,13,RIGHT,MAPSPRITE_MAN1,eas_Init

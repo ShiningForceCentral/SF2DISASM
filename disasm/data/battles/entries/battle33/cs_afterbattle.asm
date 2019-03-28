@@ -162,7 +162,7 @@ abcs_battle33:  textCursor $B3C
                 setF $341               ; Set after the scene after you win the battle in Moun plays out
                 csc_end
 ce_4D322:       mainEntity 11,11,UP
-                entity 13,11,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 13,11,UP,ALLY_PETER,eas_Init
                 entity 16,8,UP,MAPSPRITE_OBJECT2,eas_Init
-                entity 16,8,DOWN,MAPSPRITE_ROHDE_SPECIAL,eas_Init
+                entity 16,8,DOWN,ALLY_ZYNK,eas_Init
                 dc.w $FFFF

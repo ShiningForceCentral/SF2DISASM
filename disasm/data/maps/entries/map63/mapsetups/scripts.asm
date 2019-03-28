@@ -68,7 +68,7 @@ cs_5CB34:       setBlocksVar 16,53,1,1,15,54
                 csc_end
 cs_5CBB4:       textCursor $1053
                 nextSingleText $FF,$FF  ; "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
-                setSprite $1D,MAPSPRITE_RICK_SPECIAL
+                setSprite $1D,ALLY_CLAUDE
                 startEntity $1D
                 nextSingleText $0,$1D   ; "O...ooo...wow!{W1}"
                 setActscriptWait $1D,eas_Jump

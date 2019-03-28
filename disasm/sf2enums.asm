@@ -976,3 +976,37 @@ MAPSPRITE_EVIL_SPIRIT: equ $FC
 MAPSPRITE_NAZCA_SHIP: equ $FD
 MAPSPRITE_KRAKEN: equ $FE
 MAPSPRITE_TAROS: equ $FF
+
+; ---------------------------------------------------------------------------
+
+; enum Allies
+ALLY_BOWIE: equ $0
+ALLY_SARAH: equ $1
+ALLY_CHESTER: equ $2
+ALLY_JAHA: equ $3
+ALLY_KAZIN: equ $4
+ALLY_SLADE: equ $5
+ALLY_KIWI: equ $6
+ALLY_PETER: equ $7
+ALLY_MAY: equ $8
+ALLY_GERHALT: equ $9
+ALLY_LUKE: equ $A
+ALLY_ROHDE: equ $B
+ALLY_RICK: equ $C
+ALLY_ELRIC: equ $D
+ALLY_ERIC: equ $E
+ALLY_KARNA: equ $F
+ALLY_RANDOLF: equ $10
+ALLY_TYRIN: equ $11
+ALLY_JANET: equ $12
+ALLY_HIGINS: equ $13
+ALLY_SKREECH: equ $14
+ALLY_TAYA: equ $15
+ALLY_FRAYJA: equ $16
+ALLY_JARO: equ $17
+ALLY_GYAN: equ $18
+ALLY_SHEELA: equ $19
+ALLY_ZYNK: equ $1A
+ALLY_CHAZ: equ $1B
+ALLY_LEMON: equ $1C
+ALLY_CLAUDE: equ $1D

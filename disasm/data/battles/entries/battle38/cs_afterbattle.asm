@@ -313,7 +313,7 @@ cs_4DF00:       setActscriptWait $80,eas_46172
                 followEntity $1F,$1E,$3
                 csc_end
 ce_4E372:       mainEntity 8,23,DOWN
-                entity 5,25,RIGHT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 5,25,RIGHT,ALLY_PETER,eas_Init
                 entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init
                 entity 63,63,LEFT,MAPSPRITE_EFFECT3,eas_Init
                 entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init

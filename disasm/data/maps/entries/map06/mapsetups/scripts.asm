@@ -297,7 +297,7 @@ cs_55242:       textCursor $463
                 hide $8E
                 csc_end
 cs_55288:       textCursor $466
-                newEntity $12,16,22,DOWN,MAPSPRITE_PETER_BASE
+                newEntity $12,16,22,DOWN,ALLY_JANET
                 setActscriptWait $1F,eas_Init
                 setActscriptWait $7,eas_Init
                 nextSingleText $0,$12   ; "I finally found you.{N}You're {LEADER}, right?{W1}"

@@ -107,7 +107,7 @@ IntroCutscene3: textCursor $1077
                  ac_jump eas_Idle       ;   
                 ac_end
                 setActscriptWait $5,eas_46172
-                setSprite $5,MAPSPRITE_CHESTER_BASE
+                setSprite $5,ALLY_SLADE
                 setFacing $5,UP
                 entityActionsWait $5
                  moveDown 1
@@ -151,7 +151,7 @@ IntroCutscene3: textCursor $1077
                 setActscriptWait $5,eas_46172
                 hide $82
                 setBlocks 26,18,1,1,26,4
-                setSprite $5,MAPSPRITE_CHESTER_BASE
+                setSprite $5,ALLY_SLADE
                 setFacing $5,UP
                 entityActions $5
                  moveDown 1
@@ -208,7 +208,7 @@ IntroCutscene3: textCursor $1077
                 setActscriptWait $5,eas_Init
                 nextSingleText $80,$5   ; "I did?{D2}"
                 csWait 30
-                setSprite $5,MAPSPRITE_CHESTER_BASE
+                setSprite $5,ALLY_SLADE
                 headshake $5
                 nextSingleText $80,$5   ; "Oh, I got them!{N}I have the legendary{N}jewels!  Bravo!{D2}"
                 setActscriptWait $5,eas_Jump
@@ -348,7 +348,7 @@ IntroCutscene3: textCursor $1077
                 fadeOutToBlackHalf
                 csc_end
 ce_48A50:       mainEntity 63,63,UP
-                entity 26,7,UP,MAPSPRITE_CHESTER_BASE,eas_Init
+                entity 26,7,UP,ALLY_SLADE,eas_Init
                 entity 26,5,UP,MAPSPRITE_WORKER,eas_Init
                 entity 27,6,UP,MAPSPRITE_WORKER,eas_Init
                 entity 26,4,DOWN,MAPSPRITE_OBJECT1,eas_Init

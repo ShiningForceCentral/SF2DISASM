@@ -74,7 +74,7 @@ cs_4D728:       fadeInB
                 nextSingleText $0,$1F   ; "After him, now!{W1}"
                 csc_end
 ce_4D832:       mainEntity 43,9,LEFT
-                entity 44,10,LEFT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 44,10,LEFT,ALLY_PETER,eas_Init
                 entity 27,16,UP,MAPSPRITE_GESHP,eas_Init
                 entity 26,21,UP,MAPSPRITE_MUD_MAN,eas_Init
                 entity 29,21,UP,MAPSPRITE_MUD_MAN,eas_Init

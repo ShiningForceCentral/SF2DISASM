@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map05\mapsetups\s1_entities.asm :
 ; 0x51942..0x519C4 : 
 ms_map5_Entities:
-                msFixedEntity 7, 6, DOWN, MAPSPRITE_SARAH_SPECIAL, eas_Init
+                msFixedEntity 7, 6, DOWN, ALLY_KAZIN, eas_Init
                 msWalkingEntity 22, 36, DOWN, MAPSPRITE_MAN3, 22, 36, 1
                 msWalkingEntity 20, 28, DOWN, MAPSPRITE_MAN2, 20, 28, 1
                 msFixedEntity 20, 16, RIGHT, MAPSPRITE_MAN3, eas_Init

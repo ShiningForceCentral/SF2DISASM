@@ -271,8 +271,8 @@ cs_4EF5E:       stopEntity $80
                 setStoryFlag $2B        ; Battle 43 unlocked
                 csc_end
 ce_4F328:       mainEntity 13,17,UP
-                entity 15,15,LEFT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
-                entity 12,19,RIGHT,MAPSPRITE_RICK_PROMO,eas_Init
+                entity 15,15,LEFT,ALLY_PETER,eas_Init
+                entity 12,19,RIGHT,ALLY_LEMON,eas_Init
                 entity 13,19,DOWN,MAPSPRITE_GALAM_EVIL,eas_Init
                 entity 13,15,DOWN,MAPSPRITE_ELIS,eas_Init
                 entity 62,62,DOWN,MAPSPRITE_ZEON,eas_Init

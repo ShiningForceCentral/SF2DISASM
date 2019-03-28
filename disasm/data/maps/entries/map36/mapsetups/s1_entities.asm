@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map36\mapsetups\s1_entities.asm :
 ; 0x5D786..0x5D7F0 : 
 ms_map36_Entities:
-                msFixedEntity 28, 6, DOWN, MAPSPRITE_GERHALT_BASE, eas_Init
+                msFixedEntity 28, 6, DOWN, ALLY_FRAYJA, eas_Init
                 msWalkingEntity 18, 24, DOWN, MAPSPRITE_POCALON_SOLDIER, 18, 24, 1
                 msFixedEntity 33, 26, LEFT, MAPSPRITE_POCALON_SOLDIER, eas_Init
                 msFixedEntity 7, 5, RIGHT, MAPSPRITE_POCALON_SOLDIER, eas_Init

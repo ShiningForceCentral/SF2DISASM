@@ -76,7 +76,7 @@ csub_4CEE4:
 	; End of function csub_4CEE4
 
 ce_4CEEC:       mainEntity 10,25,UP
-                entity 11,25,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
-                entity 11,26,UP,MAPSPRITE_GERHALT_BASE,eas_Init
-                entity 10,22,DOWN,MAPSPRITE_GERHALT_PROMO,eas_Init
+                entity 11,25,UP,ALLY_PETER,eas_Init
+                entity 11,26,UP,ALLY_FRAYJA,eas_Init
+                entity 10,22,DOWN,ALLY_JARO,eas_Init
                 dc.w $FFFF

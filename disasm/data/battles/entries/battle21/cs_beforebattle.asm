@@ -43,7 +43,7 @@ bbcs_21:        textCursor $A10
                 setActscriptWait $85,eas_Jump
                 csc_end
 ce_4B84C:       mainEntity 27,23,LEFT
-                entity 28,24,LEFT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 28,24,LEFT,ALLY_PETER,eas_Init
                 entity 8,22,LEFT,MAPSPRITE_SKELETON,eas_Init
                 entity 9,21,LEFT,MAPSPRITE_DARK_CLERIC,eas_Init
                 entity 9,23,LEFT,MAPSPRITE_DARK_MADAM,eas_Init

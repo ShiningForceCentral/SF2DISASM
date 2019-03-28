@@ -266,13 +266,13 @@ cs_50624:       fadeInB
                 csc_end
 ce_506DE:       mainEntity 63,63,UP
                 entity 63,63,DOWN,MAPSPRITE_ASTRAL,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_BOWIE_PROMO,eas_Init
+                entity 63,63,DOWN,ALLY_SARAH,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_MINISTER,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_SARAH_PROMO,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_CHESTER_PROMO,eas_Init
+                entity 63,63,DOWN,ALLY_JAHA,eas_Init
+                entity 63,63,DOWN,ALLY_KIWI,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_SAILOR,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_CHESTER_BASE,eas_Init
+                entity 63,63,DOWN,ALLY_SLADE,eas_Init
                 entity 5,5,RIGHT,MAPSPRITE_BOAT,eas_Init
                 dc.w $FFFF
 ce_5072E:       mainEntity 0,0,UP
@@ -291,12 +291,12 @@ ce_5072E:       mainEntity 0,0,UP
                 entity 23,27,UP,MAPSPRITE_MAN2,eas_Init
                 dc.w $FFFF
 ce_5079E:       mainEntity 40,8,LEFT
-                entity 51,8,DOWN,MAPSPRITE_BOWIE_PROMO,eas_Init
-                entity 41,10,DOWN,MAPSPRITE_SARAH_BASE,eas_Init
-                entity 51,4,DOWN,MAPSPRITE_SARAH_PROMO,eas_Init
-                entity 39,8,RIGHT,MAPSPRITE_SARAH_SPECIAL,eas_Init
-                entity 49,4,UP,MAPSPRITE_CHESTER_BASE,eas_Init
-                entity 38,5,DOWN,MAPSPRITE_CHESTER_PROMO,eas_Init
+                entity 51,8,DOWN,ALLY_SARAH,eas_Init
+                entity 41,10,DOWN,ALLY_CHESTER,eas_Init
+                entity 51,4,DOWN,ALLY_JAHA,eas_Init
+                entity 39,8,RIGHT,ALLY_KAZIN,eas_Init
+                entity 49,4,UP,ALLY_SLADE,eas_Init
+                entity 38,5,DOWN,ALLY_KIWI,eas_Init
                 entity 41,4,DOWN,MAPSPRITE_WORKER,eas_Init
                 entity 53,10,DOWN,MAPSPRITE_WORKER,eas_Init
                 entity 47,5,DOWN,MAPSPRITE_MAN2,eas_Init

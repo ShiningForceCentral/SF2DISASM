@@ -82,10 +82,10 @@ cs_4AAB6:       fadeInB
                 csc_end
 ce_4ABBE:       mainEntity 14,37,UP
                 entity 14,35,UP,MAPSPRITE_WORKER,eas_Init
-                entity 13,36,UP,MAPSPRITE_BOWIE_PROMO,eas_Init
-                entity 12,35,UP,MAPSPRITE_SARAH_PROMO,eas_Init
-                entity 15,36,UP,MAPSPRITE_SARAH_SPECIAL,eas_Init
-                entity 16,35,UP,MAPSPRITE_SARAH_BASE,eas_Init
-                entity 16,34,LEFT,MAPSPRITE_CHESTER_PROMO,eas_Init
+                entity 13,36,UP,ALLY_SARAH,eas_Init
+                entity 12,35,UP,ALLY_JAHA,eas_Init
+                entity 15,36,UP,ALLY_KAZIN,eas_Init
+                entity 16,35,UP,ALLY_CHESTER,eas_Init
+                entity 16,34,LEFT,ALLY_KIWI,eas_Init
                 entity 14,34,DOWN,MAPSPRITE_WORKER,eas_Init
                 dc.w $FFFF

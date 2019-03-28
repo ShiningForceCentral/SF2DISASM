@@ -215,8 +215,8 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
                 nod $0
                 csc_end
 ce_4E878:       mainEntity 16,39,UP
-                entity 15,40,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
-                entity 15,41,UP,MAPSPRITE_RICK_PROMO,eas_Init
+                entity 15,40,UP,ALLY_PETER,eas_Init
+                entity 15,41,UP,ALLY_LEMON,eas_Init
                 entity 16,41,UP,MAPSPRITE_CARAVAN,eas_Init
                 entity 16,4,DOWN,MAPSPRITE_ODD_EYE,eas_Init
                 entity 63,63,UP,MAPSPRITE_EFFECT3,eas_Init

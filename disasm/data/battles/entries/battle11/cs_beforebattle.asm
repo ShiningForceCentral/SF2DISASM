@@ -45,7 +45,7 @@ bbcs_11:        textCursor $9B3
                 playSound $FD
                 csc_end
 ce_4ACA0:       mainEntity 15,24,UP
-                entity 15,25,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 15,25,UP,ALLY_PETER,eas_Init
                 entity 15,3,DOWN,MAPSPRITE_HOBGOBLIN,eas_Init
                 entity 16,4,DOWN,MAPSPRITE_VAMPIRE_BAT,eas_Init
                 entity 14,4,DOWN,MAPSPRITE_WITCH,eas_Init

@@ -50,6 +50,6 @@ cs_4DDFE:       playSound MUSIC_BATTLE_THEME_1
                 setQuake 0
                 csc_end
 ce_4DE74:       mainEntity 14,9,DOWN
-                entity 13,8,DOWN,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 13,8,DOWN,ALLY_PETER,eas_Init
                 entity 13,23,UP,MAPSPRITE_GESHP,eas_Init
                 dc.w $FFFF

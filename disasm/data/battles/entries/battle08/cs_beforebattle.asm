@@ -47,11 +47,11 @@ cs_4A994:       playSound MUSIC_MAIN_THEME
                 csc_end
 ce_4AA14:       mainEntity 4,50,RIGHT
                 entity 5,50,RIGHT,MAPSPRITE_WORKER,eas_Init
-                entity 4,49,RIGHT,MAPSPRITE_BOWIE_PROMO,eas_Init
-                entity 4,51,RIGHT,MAPSPRITE_SARAH_PROMO,eas_Init
-                entity 3,50,RIGHT,MAPSPRITE_SARAH_SPECIAL,eas_Init
-                entity 2,50,RIGHT,MAPSPRITE_SARAH_BASE,eas_Init
-                entity 1,50,RIGHT,MAPSPRITE_CHESTER_PROMO,eas_Init
+                entity 4,49,RIGHT,ALLY_SARAH,eas_Init
+                entity 4,51,RIGHT,ALLY_JAHA,eas_Init
+                entity 3,50,RIGHT,ALLY_KAZIN,eas_Init
+                entity 2,50,RIGHT,ALLY_CHESTER,eas_Init
+                entity 1,50,RIGHT,ALLY_KIWI,eas_Init
                 entity 14,34,DOWN,MAPSPRITE_WORKER,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_WITCH,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GOBLIN,eas_Init

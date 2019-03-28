@@ -82,8 +82,8 @@ cs_4EDE8:       stopEntity $81
                 setQuake 0
                 csc_end
 ce_4EEDC:       mainEntity 13,35,UP
-                entity 12,36,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
-                entity 13,36,UP,MAPSPRITE_RICK_PROMO,eas_Init
+                entity 12,36,UP,ALLY_PETER,eas_Init
+                entity 13,36,UP,ALLY_LEMON,eas_Init
                 entity 13,18,DOWN,MAPSPRITE_GALAM_EVIL,eas_Init
                 entity 13,15,DOWN,MAPSPRITE_ELIS,eas_Init
                 dc.w $FFFF

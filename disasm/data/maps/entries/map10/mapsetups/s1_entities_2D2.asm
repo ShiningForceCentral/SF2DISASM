@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map10\mapsetups\s1_entities_2D2.asm :
 ; 0x56CA6..0x56D80 : 
 ms_map10_flag2D2_Entities:
-                msFixedEntity 38, 51, DOWN, MAPSPRITE_JAHA_SPECIAL, eas_Init
+                msFixedEntity 38, 51, DOWN, ALLY_LUKE, eas_Init
                 msWalkingEntity 34, 8, DOWN, MAPSPRITE_BIRDMAN, 34, 8, 1
                 msWalkingEntity 37, 8, DOWN, MAPSPRITE_BIRDMAN, 37, 8, 1
                 msFixedEntity 34, 24, DOWN, MAPSPRITE_SAILOR, eas_Init

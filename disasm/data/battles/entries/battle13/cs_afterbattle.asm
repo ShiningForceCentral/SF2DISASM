@@ -38,5 +38,5 @@ abcs_battle13:  textCursor $9BF
                 warp $D,$10,$C,$3
                 csc_end
 ce_4AD96:       mainEntity 16,12,DOWN
-                entity 16,13,DOWN,MAPSPRITE_JAHA_SPECIAL,eas_Init
+                entity 16,13,DOWN,ALLY_LUKE,eas_Init
                 dc.w $FFFF

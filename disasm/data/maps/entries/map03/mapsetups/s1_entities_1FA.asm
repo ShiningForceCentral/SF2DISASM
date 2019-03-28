@@ -17,5 +17,5 @@ ms_map3_flag1FA_Entities:
                 msWalkingEntity 26, 24, DOWN, MAPSPRITE_BOY, 26, 24, 3
                 msFixedEntity 7, 11, DOWN, MAPSPRITE_WOMAN1, eas_Init
                 msFixedEntity 8, 18, DOWN, MAPSPRITE_SAILOR, eas_Init
-                msFixedEntity 37, 21, UP, MAPSPRITE_CHESTER_PROMO, eas_Init
+                msFixedEntity 37, 21, UP, ALLY_KIWI, eas_Init
                 msEntitiesEnd

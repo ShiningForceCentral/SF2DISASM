@@ -147,8 +147,8 @@ ce_559AE:       mainEntity 11,7,UP
                 entity 8,7,RIGHT,MAPSPRITE_MAID,eas_Init
                 entity 14,7,LEFT,MAPSPRITE_MAID,eas_Init
                 entity 10,5,DOWN,MAPSPRITE_ASTRAL,eas_Init
-                entity 12,7,UP,MAPSPRITE_SARAH_PROMO,eas_Init
-                entity 11,8,UP,MAPSPRITE_BOWIE_PROMO,eas_Init
-                entity 11,9,UP,MAPSPRITE_SARAH_SPECIAL,eas_Init
-                entity 11,10,UP,MAPSPRITE_SARAH_BASE,eas_Init
+                entity 12,7,UP,ALLY_JAHA,eas_Init
+                entity 11,8,UP,ALLY_SARAH,eas_Init
+                entity 11,9,UP,ALLY_KAZIN,eas_Init
+                entity 11,10,UP,ALLY_CHESTER,eas_Init
                 dc.w $FFFF

@@ -79,7 +79,7 @@ MapEventType4:
 	; End of function MapEventType4
 
 cs_45348:       setActscriptWait $1E,eas_45360
-                setSprite $0,MAPSPRITE_BOWIE_BASE
+                setSprite $0,ALLY_BOWIE
                 setActscriptWait $0,eas_4536C
                 csc_end
 eas_45360:       ac_clonePos $0
@@ -184,7 +184,7 @@ MapEventType5:
 	; End of function MapEventType5
 
 cs_45470:       setActscriptWait $9F,eas_45360
-                setSprite $0,MAPSPRITE_BOWIE_BASE
+                setSprite $0,ALLY_BOWIE
                 setActscriptWait $0,eas_4548C
                 csc_end
 byte_45488:      ac_clonePos $1F
