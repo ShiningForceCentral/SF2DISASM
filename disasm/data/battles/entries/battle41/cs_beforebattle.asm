@@ -24,6 +24,6 @@ cs_4ED48:       playSound MUSIC_BATTLE_THEME_3
                 nextSingleText $0,$80   ; "You shall die now!{W1}"
                 csc_end
 ce_4ED76:       mainEntity 17,24,RIGHT
-                entity 16,24,RIGHT,7,eas_Init
-                entity 16,6,DOWN,99,eas_Init
+                entity 16,24,RIGHT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 16,6,DOWN,MAPSPRITE_REAPER,eas_Init
                 dc.w $FFFF

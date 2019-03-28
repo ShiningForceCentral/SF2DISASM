@@ -84,11 +84,11 @@ bbcs_33:        textCursor $B32
                 clearF $52              ; Frayja is a follower
                 csc_end
 ce_4D048:       mainEntity 26,37,LEFT
-                entity 27,38,LEFT,7,eas_Init
-                entity 27,36,LEFT,22,eas_Init
-                entity 10,10,DOWN,147,eas_Init
-                entity 9,10,DOWN,87,eas_Init
-                entity 11,10,DOWN,87,eas_Init
+                entity 27,38,LEFT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 27,36,LEFT,MAPSPRITE_GERHALT_BASE,eas_Init
+                entity 10,10,DOWN,MAPSPRITE_SHAMAN,eas_Init
+                entity 9,10,DOWN,MAPSPRITE_DEVIL_SOLDIER,eas_Init
+                entity 11,10,DOWN,MAPSPRITE_DEVIL_SOLDIER,eas_Init
                 dc.w $FFFF
 
 ; =============== S U B R O U T I N E =======================================

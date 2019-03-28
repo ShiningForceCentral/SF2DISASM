@@ -98,7 +98,7 @@ cs_4FB64:       textCursor $9EF
                 warp $33,$B,$16,$1
                 csc_end
 cs_4FC32:       textCursor $A21
-                newEntity $D,57,25,UP,$FF
+                newEntity $D,57,25,UP,MAPSPRITE_TAROS
                 setActscriptWait $D,eas_Init
                 entityActionsWait $D
                  moveUp 1

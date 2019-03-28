@@ -51,7 +51,7 @@ return_62D04:
 
 	; End of function ms_map19_flag21F_InitFunction
 
-cs_62D06:       setSprite $B,$AA
+cs_62D06:       setSprite $B,MAPSPRITE_NPC_ROHDE
                 csc_end
 cs_62D0E:       textCursor $F7F
                 setCameraEntity $81

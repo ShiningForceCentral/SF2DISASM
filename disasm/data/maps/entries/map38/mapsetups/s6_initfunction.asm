@@ -29,7 +29,7 @@ return_5DD8C:
 
 	; End of function ms_map38_InitFunction
 
-cs_5DD8E:       newEntity $1A,11,8,DOWN,$FF
+cs_5DD8E:       newEntity $1A,11,8,DOWN,MAPSPRITE_TAROS
                 setFacing $1A,DOWN
                 csc_end
 cs_5DD9C:       setPos $80,14,26,DOWN

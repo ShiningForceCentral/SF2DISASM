@@ -185,13 +185,13 @@ bbcs_26:        textCursor $A24
                 animEntityFX $80,6
                 csc_end
 ce_4BC5A:       mainEntity 7,25,RIGHT
-                entity 6,26,RIGHT,7,eas_Init
-                entity 18,14,UP,19,eas_Init
-                entity 18,11,DOWN,159,eas_Init
-                entity 17,11,DOWN,109,eas_Init
-                entity 19,11,DOWN,145,eas_Init
-                entity 20,10,DOWN,83,eas_Init
-                entity 63,63,DOWN,106,eas_Init
-                entity 17,15,UP,233,eas_Init
-                entity 19,15,UP,233,eas_Init
+                entity 6,26,RIGHT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 18,14,UP,MAPSPRITE_PETER_PROMO,eas_Init
+                entity 18,11,DOWN,MAPSPRITE_GESHP,eas_Init
+                entity 17,11,DOWN,MAPSPRITE_LESSER_DEMON,eas_Init
+                entity 19,11,DOWN,MAPSPRITE_DARK_BISHOP,eas_Init
+                entity 20,10,DOWN,MAPSPRITE_LIZARDMAN,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_EVIL_CLOUD,eas_Init
+                entity 17,15,UP,MAPSPRITE_POCALON_SOLDIER,eas_Init
+                entity 19,15,UP,MAPSPRITE_POCALON_SOLDIER,eas_Init
                 dc.w $FFFF

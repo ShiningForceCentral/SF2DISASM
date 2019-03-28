@@ -65,6 +65,6 @@ bbcs_18:        textCursor $9D8
                 nextSingleText $0,$80   ; "Time's up!  Now we battle.{W1}"
                 csc_end
 ce_4B2DA:       mainEntity 12,32,UP
-                entity 12,8,DOWN,255,eas_Init
-                entity 12,5,DOWN,62,eas_Init
+                entity 12,8,DOWN,MAPSPRITE_TAROS,eas_Init
+                entity 12,5,DOWN,MAPSPRITE_CARAVAN,eas_Init
                 dc.w $FFFF

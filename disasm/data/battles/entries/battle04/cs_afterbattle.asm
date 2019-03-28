@@ -97,12 +97,12 @@ abcs_battle04:  textCursor $90F
                 warp $11,$0,$0,$0
                 csc_end
 ce_49A6A:       mainEntity 13,20,DOWN
-                entity 14,21,DOWN,1,eas_Init
-                entity 12,21,DOWN,2,eas_Init
-                entity 13,22,DOWN,3,eas_Init
-                entity 11,22,DOWN,4,eas_Init
-                entity 63,63,UP,28,eas_Init
-                entity 17,18,LEFT,120,eas_Init
-                entity 17,19,LEFT,66,eas_Init
-                entity 17,21,LEFT,66,eas_Init
+                entity 14,21,DOWN,MAPSPRITE_BOWIE_PROMO,eas_Init
+                entity 12,21,DOWN,MAPSPRITE_SARAH_BASE,eas_Init
+                entity 13,22,DOWN,MAPSPRITE_SARAH_PROMO,eas_Init
+                entity 11,22,DOWN,MAPSPRITE_SARAH_SPECIAL,eas_Init
+                entity 63,63,UP,MAPSPRITE_RICK_PROMO,eas_Init
+                entity 17,18,LEFT,MAPSPRITE_GALAM_ARCHER,eas_Init
+                entity 17,19,LEFT,MAPSPRITE_GALAM_SOLDIER,eas_Init
+                entity 17,21,LEFT,MAPSPRITE_GALAM_SOLDIER,eas_Init
                 dc.w $FFFF

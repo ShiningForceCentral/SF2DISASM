@@ -109,11 +109,11 @@ bbcs_28:        textCursor $A65
                 nod $0
                 csc_end
 ce_4C03C:       mainEntity 1,8,RIGHT
-                entity 0,9,RIGHT,7,eas_Init
-                entity 0,8,RIGHT,62,eas_Init
-                entity 12,24,UP,176,eas_Init
-                entity 13,13,LEFT,84,eas_Init
-                entity 12,17,UP,84,eas_Init
-                entity 11,22,DOWN,84,eas_Init
-                entity 11,25,RIGHT,84,eas_Init
+                entity 0,9,RIGHT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 0,8,RIGHT,MAPSPRITE_CARAVAN,eas_Init
+                entity 12,24,UP,MAPSPRITE_POSE3,eas_Init
+                entity 13,13,LEFT,MAPSPRITE_WORM,eas_Init
+                entity 12,17,UP,MAPSPRITE_WORM,eas_Init
+                entity 11,22,DOWN,MAPSPRITE_WORM,eas_Init
+                entity 11,25,RIGHT,MAPSPRITE_WORM,eas_Init
                 dc.w $FFFF

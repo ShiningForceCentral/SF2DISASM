@@ -30,7 +30,7 @@ cs_4D9F0:       animEntityFX $80,6
                 followEntity $1F,$81,$3
                 csc_end
 ce_4DA46:       mainEntity 11,20,DOWN
-                entity 10,19,DOWN,7,eas_Init
-                entity 11,23,DOWN,159,eas_Init
-                entity 11,19,DOWN,62,eas_Init
+                entity 10,19,DOWN,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 11,23,DOWN,MAPSPRITE_GESHP,eas_Init
+                entity 11,19,DOWN,MAPSPRITE_CARAVAN,eas_Init
                 dc.w $FFFF

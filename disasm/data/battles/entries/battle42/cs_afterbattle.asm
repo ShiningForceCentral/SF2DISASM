@@ -65,7 +65,7 @@ cs_4EF5E:       stopEntity $80
                 csWait 50
                 setActscriptWait $81,eas_Init
                 setFacing $81,DOWN
-                setSprite $81,$D8
+                setSprite $81,MAPSPRITE_POSE6
                 nextSingleText $C0,$81  ; "Wha...What?{W1}"
                 setActscriptWait $1F,eas_Jump
                 nextSingleText $0,$1F   ; "It's me!  Astral!{W1}"
@@ -88,7 +88,7 @@ cs_4EF5E:       stopEntity $80
                 setFacing $81,DOWN
                 setFacing $7,UP
                 nextSingleText $0,$7    ; "{LEADER}, say something.{W1}"
-                setSprite $81,$CC
+                setSprite $81,MAPSPRITE_ELIS
                 setFacing $81,DOWN
                 startEntity $81
                 nextSingleText $C0,$81  ; "Oh, it's you.{W1}"
@@ -205,7 +205,7 @@ cs_4EF5E:       stopEntity $80
                 ac_end
                 csWait 110
                 playSound MUSIC_ZEON_ATTACK
-                setSprite $80,$B2
+                setSprite $80,MAPSPRITE_EFFECT3
                 setFacing $80,DOWN
                 startEntity $80
                 entityActionsWait $80
@@ -271,9 +271,9 @@ cs_4EF5E:       stopEntity $80
                 setStoryFlag $2B        ; Battle 43 unlocked
                 csc_end
 ce_4F328:       mainEntity 13,17,UP
-                entity 15,15,LEFT,7,eas_Init
-                entity 12,19,RIGHT,28,eas_Init
-                entity 13,19,DOWN,164,eas_Init
-                entity 13,15,DOWN,204,eas_Init
-                entity 62,62,DOWN,251,eas_Init
+                entity 15,15,LEFT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 12,19,RIGHT,MAPSPRITE_RICK_PROMO,eas_Init
+                entity 13,19,DOWN,MAPSPRITE_GALAM_EVIL,eas_Init
+                entity 13,15,DOWN,MAPSPRITE_ELIS,eas_Init
+                entity 62,62,DOWN,MAPSPRITE_ZEON,eas_Init
                 dc.w $FFFF

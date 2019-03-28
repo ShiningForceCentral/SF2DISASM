@@ -3,14 +3,14 @@
 ; 0x53176..0x53634 : 
 cs_53176:       setCameraEntity $FFFF
                 textCursor $2D1
-                newEntity $90,29,9,UP,$CF
-                newEntity $91,28,9,UP,$CE
-                newEntity $92,28,10,UP,$CA
-                newEntity $93,28,11,UP,$CA
+                newEntity $90,29,9,UP,MAPSPRITE_SOLDIER2
+                newEntity $91,28,9,UP,MAPSPRITE_SOLDIER1
+                newEntity $92,28,10,UP,MAPSPRITE_WORKER
+                newEntity $93,28,11,UP,MAPSPRITE_WORKER
                 csWait 1
-                newEntity $94,30,9,UP,$CE
-                newEntity $95,30,10,UP,$CA
-                newEntity $96,30,11,UP,$CA
+                newEntity $94,30,9,UP,MAPSPRITE_SOLDIER1
+                newEntity $95,30,10,UP,MAPSPRITE_WORKER
+                newEntity $96,30,11,UP,MAPSPRITE_WORKER
                 csWait 1
                 setPos $0,26,9,RIGHT
                 setPos $1,26,10,RIGHT

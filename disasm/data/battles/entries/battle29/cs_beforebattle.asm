@@ -98,14 +98,14 @@ bbcs_29:        textCursor $A9E
                 entityFlashWhite $80,$1E
                 playSound MUSIC_BATTLE_THEME_1
                 stopEntity $80
-                setSprite $80,$AF
+                setSprite $80,MAPSPRITE_EFFECT2
                 setFacing $80,UP
                 csWait 8
                 setFacing $80,LEFT
                 csWait 8
                 setFacing $80,DOWN
                 csWait 8
-                setSprite $80,$55
+                setSprite $80,MAPSPRITE_DARK_KNIGHT
                 startEntity $80
                 setPos $81,14,12,DOWN
                 csWait 30
@@ -120,10 +120,10 @@ bbcs_29:        textCursor $A9E
                 nextSingleText $0,$1F   ; "{LEADER}, attack!{W1}"
                 csc_end
 ce_4C5AE:       mainEntity 15,33,UP
-                entity 16,34,UP,7,eas_Init
-                entity 15,30,DOWN,192,eas_Init
-                entity 63,63,DOWN,141,eas_Init
-                entity 63,63,DOWN,86,eas_Init
-                entity 63,63,DOWN,136,eas_Init
-                entity 63,63,DOWN,84,eas_Init
+                entity 16,34,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 15,30,DOWN,MAPSPRITE_PRIEST,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_DEATH_MONK,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_ORC_LORD,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_WIZARD,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_WORM,eas_Init
                 dc.w $FFFF

@@ -22,7 +22,7 @@ return_600B0:
 	; End of function ms_map45_InitFunction
 
 cs_600B2:       setActscriptWait $19,eas_45F9C
-                setSprite $19,$D9
+                setSprite $19,MAPSPRITE_POSE7
                 setActscriptWait $19,eas_Init3
                 setFacing $19,UP
                 csc_end

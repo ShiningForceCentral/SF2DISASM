@@ -26,7 +26,7 @@ return_4FF40:
                 nextSingleText $0,$0    ; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
                 csc_end
 cs_4FF5A:       textCursor $614
-                newEntity $A,43,47,DOWN,$FF
+                newEntity $A,43,47,DOWN,MAPSPRITE_TAROS
                 csWait 1
                 setPos $0,45,47,LEFT
                 setPos $7,44,47,DOWN

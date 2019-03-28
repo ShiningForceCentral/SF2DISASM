@@ -35,7 +35,7 @@ cs_4D502:       stopEntity $80
                 tintMap
                 setActscriptWait $80,eas_Init
                 setFacing $80,LEFT
-                setSprite $80,$B4
+                setSprite $80,MAPSPRITE_OBJECT3
                 startEntity $80
                 setActscript $80,eas_AnimSpeedx2
                 setActscript $0,eas_Jump
@@ -46,7 +46,7 @@ cs_4D592:       setActscriptWait $1F,eas_Jump
                 nextSingleText $0,$80   ; "Geshp!{W1}"
                 nextSingleText $C0,$81  ; "Ha, ha, ha!  You acted just{N}as I planned!{W1}"
                 nextSingleText $0,$80   ; "Ouuuuu...Ges...{W1}"
-                setSprite $80,$9C
+                setSprite $80,MAPSPRITE_CAMEELA
                 setActscriptWait $80,eas_Die
                 nextSingleText $0,$1F   ; "How horrible!{W1}"
                 nextText $C0,$81        ; "It's the law.  Traitors{N}die by fire.{W2}"
@@ -117,9 +117,9 @@ csub_4D694:
 	; End of function csub_4D694
 
 ce_4D69E:       mainEntity 7,12,UP
-                entity 9,11,UP,7,eas_Init
-                entity 7,9,DOWN,156,eas_Init
-                entity 63,63,DOWN,159,eas_Init
-                entity 6,12,UP,62,eas_Init
-                entity 63,63,LEFT,172,eas_Init
+                entity 9,11,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 7,9,DOWN,MAPSPRITE_CAMEELA,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GESHP,eas_Init
+                entity 6,12,UP,MAPSPRITE_CARAVAN,eas_Init
+                entity 63,63,LEFT,MAPSPRITE_ORB,eas_Init
                 dc.w $FFFF

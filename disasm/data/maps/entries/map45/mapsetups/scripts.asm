@@ -143,7 +143,7 @@ cs_600CE:       textCursor $823
                 endActions
                 hide $86
                 setActscriptWait $19,eas_Init
-                setSprite $19,$19
+                setSprite $19,MAPSPRITE_LUKE_PROMO
                 entityActionsWait $19
                  moveDown 2
                 endActions

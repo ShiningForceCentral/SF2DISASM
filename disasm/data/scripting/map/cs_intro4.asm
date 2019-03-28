@@ -357,10 +357,10 @@ IntroCutscene4: textCursor $1089
                 fadeOutToBlackHalf
                 csc_end
 ce_48FAA:       mainEntity 63,63,UP
-                entity 12,6,DOWN,203,eas_Init
-                entity 10,7,DOWN,205,eas_Init
-                entity 63,63,RIGHT,206,eas_Init
-                entity 63,63,DOWN,159,eas_Init
-                entity 63,63,UP,187,eas_Init
-                entity 63,63,DOWN,183,eas_Init
+                entity 12,6,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 10,7,DOWN,MAPSPRITE_MINISTER,eas_Init
+                entity 63,63,RIGHT,MAPSPRITE_SOLDIER1,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GESHP,eas_Init
+                entity 63,63,UP,MAPSPRITE_EFFECT6,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_EFFECT4,eas_Init
                 dc.w $FFFF

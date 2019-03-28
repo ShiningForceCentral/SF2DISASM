@@ -254,11 +254,11 @@ IntroCutscene1: textCursor $105A
                 fadeOutToBlackHalf
                 csc_end
 ce_48340:       mainEntity 63,63,UP
-                entity 63,63,DOWN,5,eas_Init
-                entity 63,63,UP,202,eas_Init
-                entity 63,63,UP,202,eas_Init
-                entity 26,4,DOWN,173,eas_Init
-                entity 63,63,LEFT,183,eas_Init
-                entity 63,63,UP,183,eas_Init
-                entity 63,63,UP,183,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_CHESTER_BASE,eas_Init
+                entity 63,63,UP,MAPSPRITE_WORKER,eas_Init
+                entity 63,63,UP,MAPSPRITE_WORKER,eas_Init
+                entity 26,4,DOWN,MAPSPRITE_OBJECT1,eas_Init
+                entity 63,63,LEFT,MAPSPRITE_EFFECT4,eas_Init
+                entity 63,63,UP,MAPSPRITE_EFFECT4,eas_Init
+                entity 63,63,UP,MAPSPRITE_EFFECT4,eas_Init
                 dc.w $FFFF

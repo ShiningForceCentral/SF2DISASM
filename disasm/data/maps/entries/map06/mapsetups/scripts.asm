@@ -278,7 +278,7 @@ cs_54F26:       textCursor $432
                 setFacing $82,DOWN
                 csc_end
 cs_55242:       textCursor $463
-                newEntity $8E,11,0,DOWN,$CE
+                newEntity $8E,11,0,DOWN,MAPSPRITE_SOLDIER1
                 customActscriptWait $8E
                  ac_setSpeed 40,40      ;   
                  ac_jump eas_Idle       ;   
@@ -297,7 +297,7 @@ cs_55242:       textCursor $463
                 hide $8E
                 csc_end
 cs_55288:       textCursor $466
-                newEntity $12,16,22,DOWN,$12
+                newEntity $12,16,22,DOWN,MAPSPRITE_PETER_BASE
                 setActscriptWait $1F,eas_Init
                 setActscriptWait $7,eas_Init
                 nextSingleText $0,$12   ; "I finally found you.{N}You're {LEADER}, right?{W1}"

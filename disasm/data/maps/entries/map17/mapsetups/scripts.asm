@@ -88,7 +88,7 @@ cs_52530:       textCursor $385
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setSprite $5,$3B
+                setSprite $5,MAPSPRITE_POSE1
                 csWait 20
                 nextSingleText $0,$4    ; "Does he want the jewels?{W1}"
                 nextSingleText $0,$5    ; "What?{W1}"
@@ -114,7 +114,7 @@ cs_52530:       textCursor $385
                 setCamDest 43,0
                 setActscriptWait $5,eas_Init
                 startEntity $5
-                setSprite $5,$5
+                setSprite $5,MAPSPRITE_CHESTER_BASE
                 setActscriptWait $5,eas_Jump
                 entityActionsWait $5
                  moveRight 1
@@ -224,7 +224,7 @@ cs_52530:       textCursor $385
                 endActions
                 stopEntity $5
                 setFacing $5,UP
-                setSprite $5,$3B
+                setSprite $5,MAPSPRITE_POSE1
                 csWait 40
                 nextText $0,$1          ; "I know the thief {NAME;5}{N}always steals for poor{N}people, but you made a{W2}"
                 nextText $0,$1          ; "serious mistake this time!!{W2}"
@@ -252,7 +252,7 @@ cs_528D4:       textCursor $3B3
                 csWait 30
                 setActscriptWait $5,eas_Init
                 startEntity $5
-                setSprite $5,$5
+                setSprite $5,MAPSPRITE_CHESTER_BASE
                 entityActionsWait $5
                  moveLeft 2
                 endActions

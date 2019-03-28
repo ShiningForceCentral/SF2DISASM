@@ -262,5 +262,5 @@ abcs_battle18:  textCursor $9E0
                 clearF $54              ; Rohde is a follower
                 csc_end
 ce_4B6BE:       mainEntity 12,9,UP
-                entity 12,5,DOWN,62,eas_Init
+                entity 12,5,DOWN,MAPSPRITE_CARAVAN,eas_Init
                 dc.w $FFFF

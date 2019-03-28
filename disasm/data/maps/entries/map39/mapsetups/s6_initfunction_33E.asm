@@ -16,5 +16,5 @@ return_5E0EC:
 
 	; End of function ms_map39_flag33E_InitFunction
 
-cs_5E0EE:       newEntity $1A,4,12,UP,$FF
+cs_5E0EE:       newEntity $1A,4,12,UP,MAPSPRITE_TAROS
                 csc_end

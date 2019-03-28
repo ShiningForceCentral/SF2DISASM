@@ -130,12 +130,12 @@ bbcs_01:        textCursor $8F4
                 nextSingleText $0,$87   ; "We'll stop the evil Gizmo{N}here.  {LEADER}, defeat{N}these fiends!{W1}"
                 csc_end
 ce_49694:       mainEntity 7,16,UP
-                entity 63,63,DOWN,114,eas_Init
-                entity 63,63,DOWN,103,eas_Init
-                entity 63,63,DOWN,103,eas_Init
-                entity 63,63,DOWN,103,eas_Init
-                entity 63,63,DOWN,103,eas_Init
-                entity 63,63,DOWN,103,eas_Init
-                entity 63,63,DOWN,103,eas_Init
-                entity 7,11,UP,209,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_MIST_DEMON,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
+                entity 7,11,UP,MAPSPRITE_ASTRAL,eas_Init
                 dc.w $FFFF

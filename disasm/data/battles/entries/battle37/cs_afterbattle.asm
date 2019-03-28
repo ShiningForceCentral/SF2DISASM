@@ -116,6 +116,6 @@ cs_4DBEE:       stopEntity $1C
                 nextSingleText $0,$1F   ; "I think we'll meet him again.{N}{LEADER}, let's go.{W1}"
                 csc_end
 ce_4DD8C:       mainEntity 36,57,DOWN
-                entity 33,59,RIGHT,7,eas_Init
-                entity 35,59,DOWN,28,eas_Init
+                entity 33,59,RIGHT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 35,59,DOWN,MAPSPRITE_RICK_PROMO,eas_Init
                 dc.w $FFFF

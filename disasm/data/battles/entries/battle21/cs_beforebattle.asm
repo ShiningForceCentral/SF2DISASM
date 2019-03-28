@@ -43,11 +43,11 @@ bbcs_21:        textCursor $A10
                 setActscriptWait $85,eas_Jump
                 csc_end
 ce_4B84C:       mainEntity 27,23,LEFT
-                entity 28,24,LEFT,7,eas_Init
-                entity 8,22,LEFT,81,eas_Init
-                entity 9,21,LEFT,140,eas_Init
-                entity 9,23,LEFT,134,eas_Init
-                entity 63,63,RIGHT,124,eas_Init
-                entity 63,63,RIGHT,108,eas_Init
-                entity 63,63,RIGHT,76,eas_Init
+                entity 28,24,LEFT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 8,22,LEFT,MAPSPRITE_SKELETON,eas_Init
+                entity 9,21,LEFT,MAPSPRITE_DARK_CLERIC,eas_Init
+                entity 9,23,LEFT,MAPSPRITE_DARK_MADAM,eas_Init
+                entity 63,63,RIGHT,MAPSPRITE_ARROW_LAUNCHER,eas_Init
+                entity 63,63,RIGHT,MAPSPRITE_HARPY,eas_Init
+                entity 63,63,RIGHT,MAPSPRITE_ORC,eas_Init
                 dc.w $FFFF

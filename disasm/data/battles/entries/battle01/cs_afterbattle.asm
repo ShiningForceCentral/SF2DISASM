@@ -31,9 +31,9 @@ abcs_battle01:  textCursor $901
                 csWait 30
                 mapFadeOutToWhite
                 animEntityFX $80,6
-                setSprite $80,$3C
+                setSprite $80,MAPSPRITE_BLANK
                 setPos $80,7,10,DOWN
-                setSprite $80,$72
+                setSprite $80,MAPSPRITE_MIST_DEMON
                 mapFadeInFromWhite
                 csWait 30
                 entityActionsWait $81
@@ -54,9 +54,9 @@ abcs_battle01:  textCursor $901
                 csWait 70
                 mapFadeOutToWhite
                 animEntityFX $80,6
-                setSprite $80,$3C
+                setSprite $80,MAPSPRITE_BLANK
                 setPos $80,7,16,DOWN
-                setSprite $80,$72
+                setSprite $80,MAPSPRITE_MIST_DEMON
                 mapFadeInFromWhite
                 csWait 30
                 nextSingleText $0,$81   ; "It disappeared again.{W1}"
@@ -78,6 +78,6 @@ abcs_battle01:  textCursor $901
                 csWait 40
                 csc_end
 ce_497F6:       mainEntity 8,6,UP
-                entity 7,4,DOWN,114,eas_Init
-                entity 7,6,RIGHT,209,eas_Init
+                entity 7,4,DOWN,MAPSPRITE_MIST_DEMON,eas_Init
+                entity 7,6,RIGHT,MAPSPRITE_ASTRAL,eas_Init
                 dc.w $FFFF

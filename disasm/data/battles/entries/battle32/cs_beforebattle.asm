@@ -50,13 +50,13 @@ bbcs_32:        textCursor $B1D
                 setActscriptWait $86,eas_Jump
                 csc_end
 ce_4CCC0:       mainEntity 15,44,UP
-                entity 16,45,UP,7,eas_Init
-                entity 15,46,UP,22,eas_Init
-                entity 14,21,DOWN,122,eas_Init
-                entity 12,21,DOWN,137,eas_Init
-                entity 13,20,DOWN,141,eas_Init
-                entity 16,22,DOWN,112,eas_Init
-                entity 14,24,DOWN,87,eas_Init
-                entity 16,24,DOWN,88,eas_Init
-                entity 18,23,DOWN,137,eas_Init
+                entity 16,45,UP,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 15,46,UP,MAPSPRITE_GERHALT_BASE,eas_Init
+                entity 14,21,DOWN,MAPSPRITE_DEATH_ARCHER,eas_Init
+                entity 12,21,DOWN,MAPSPRITE_NECROMANCER,eas_Init
+                entity 13,20,DOWN,MAPSPRITE_DEATH_MONK,eas_Init
+                entity 16,22,DOWN,MAPSPRITE_PEGASUS_KNIGHT,eas_Init
+                entity 14,24,DOWN,MAPSPRITE_DEVIL_SOLDIER,eas_Init
+                entity 16,24,DOWN,MAPSPRITE_CERBERUS,eas_Init
+                entity 18,23,DOWN,MAPSPRITE_NECROMANCER,eas_Init
                 dc.w $FFFF

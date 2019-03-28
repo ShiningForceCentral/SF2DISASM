@@ -139,12 +139,12 @@ bbcs_07:        textCursor $935
                 setActscriptWait $87,eas_Jump
                 csc_end
 ce_49F36:       mainEntity 13,35,UP
-                entity 13,17,DOWN,164,eas_Init
-                entity 13,21,UP,209,eas_Init
-                entity 12,14,DOWN,204,eas_Init
-                entity 12,35,UP,203,eas_Init
-                entity 14,35,UP,205,eas_Init
-                entity 63,63,UP,131,eas_Init
-                entity 63,63,DOWN,120,eas_Init
-                entity 63,63,DOWN,67,eas_Init
+                entity 13,17,DOWN,MAPSPRITE_GALAM_EVIL,eas_Init
+                entity 13,21,UP,MAPSPRITE_ASTRAL,eas_Init
+                entity 12,14,DOWN,MAPSPRITE_ELIS,eas_Init
+                entity 12,35,UP,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 14,35,UP,MAPSPRITE_MINISTER,eas_Init
+                entity 63,63,UP,MAPSPRITE_GALAM_MAGE,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GALAM_ARCHER,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GALAM_KNIGHT,eas_Init
                 dc.w $FFFF

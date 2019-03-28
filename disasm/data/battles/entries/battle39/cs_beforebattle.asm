@@ -50,9 +50,9 @@ cs_4E41A:       fadeInB
                 nextSingleText $0,$80   ; "Excellent!{N}Welcome to your graveyard!{W1}"
                 csc_end
 ce_4E4AC:       mainEntity 8,9,DOWN
-                entity 8,20,DOWN,97,eas_Init
-                entity 7,23,UP,138,eas_Init
+                entity 8,20,DOWN,MAPSPRITE_HYDRA,eas_Init
+                entity 7,23,UP,MAPSPRITE_CHAOS_WIZARD,eas_Init
                 entity 9,23,UP,148,eas_Init
-                entity 6,23,UP,129,eas_Init
-                entity 10,23,UP,95,eas_Init
+                entity 6,23,UP,MAPSPRITE_DARK_GUNNER,eas_Init
+                entity 10,23,UP,MAPSPRITE_CYCLOPS,eas_Init
                 dc.w $FFFF

@@ -422,7 +422,7 @@ cs_5766C:       textCursor $690
                 entityActionsWait $99
                  jumpRight 1
                 endActions
-                setSprite $99,$B6
+                setSprite $99,MAPSPRITE_CHICK_Flying
                 setActscriptWait $99,eas_46172
                 customActscriptWait $99
                  ac_setSpeed 4,4        ;   
@@ -439,7 +439,7 @@ cs_5766C:       textCursor $690
                 entityActionsWait $99
                  moveDown 6
                 endActions
-                setSprite $99,$E6
+                setSprite $99,MAPSPRITE_CHICK
                 nextSingleText $0,$99   ; "Hmmm...strange...{W1}"
                 setActscriptWait $99,eas_Init
                 entityActionsWait $99
@@ -458,7 +458,7 @@ cs_5766C:       textCursor $690
                  moveRight 1
                  jumpRight 1
                 endActions
-                setSprite $99,$B6
+                setSprite $99,MAPSPRITE_CHICK_Flying
                 setActscriptWait $99,eas_46172
                 entityActionsWait $99
                  moveDown 1
@@ -489,7 +489,7 @@ cs_5766C:       textCursor $690
                  moveUp 11
                 endActions
                 setFacing $99,LEFT
-                setSprite $99,$E6
+                setSprite $99,MAPSPRITE_CHICK
                 setFacing $0,RIGHT
                 setFacing $7,RIGHT
                 nextSingleText $0,$99   ; "See.  I told you!{N}I can fly...sort of.{W1}"

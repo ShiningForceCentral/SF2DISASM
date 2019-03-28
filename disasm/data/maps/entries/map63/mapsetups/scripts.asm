@@ -68,7 +68,7 @@ cs_5CB34:       setBlocksVar 16,53,1,1,15,54
                 csc_end
 cs_5CBB4:       textCursor $1053
                 nextSingleText $FF,$FF  ; "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
-                setSprite $1D,$1D
+                setSprite $1D,MAPSPRITE_RICK_SPECIAL
                 startEntity $1D
                 nextSingleText $0,$1D   ; "O...ooo...wow!{W1}"
                 setActscriptWait $1D,eas_Jump
@@ -182,7 +182,7 @@ cs_5CCF6:       entityFlashWhite $0,$32
                 setActscriptWait $0,eas_Init
                 startEntity $0
                 jumpIfFlagSet $1D,cs_5CDDA; Claude joined
-                setSprite $1D,$B0
+                setSprite $1D,MAPSPRITE_POSE3
                 setFacing $1D,DOWN
                 stopEntity $1D
 cs_5CDDA:       csc_end

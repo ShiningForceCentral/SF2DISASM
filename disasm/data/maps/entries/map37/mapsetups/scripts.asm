@@ -232,5 +232,5 @@ plt_5FDB4:      dc.w 0
                 dc.w 0
                 dc.w $EEE
 ce_5FDD4:       mainEntity 0,0,DOWN
-                entity 45,17,RIGHT,253,eas_Init
+                entity 45,17,RIGHT,MAPSPRITE_NAZCA_SHIP,eas_Init
                 dc.w $FFFF

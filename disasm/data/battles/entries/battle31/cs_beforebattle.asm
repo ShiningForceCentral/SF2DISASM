@@ -113,13 +113,13 @@ bbcs_31:        textCursor $AFB
                 animEntityFX $80,6
                 csc_end
 ce_4CB92:       mainEntity 21,4,DOWN
-                entity 20,3,DOWN,7,eas_Init
-                entity 21,3,DOWN,22,eas_Init
-                entity 21,8,UP,159,eas_Init
-                entity 21,11,UP,156,eas_Init
-                entity 63,63,LEFT,171,eas_Init
-                entity 63,63,UP,141,eas_Init
-                entity 63,63,UP,145,eas_Init
-                entity 63,63,UP,86,eas_Init
-                entity 63,63,UP,111,eas_Init
+                entity 20,3,DOWN,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 21,3,DOWN,MAPSPRITE_GERHALT_BASE,eas_Init
+                entity 21,8,UP,MAPSPRITE_GESHP,eas_Init
+                entity 21,11,UP,MAPSPRITE_CAMEELA,eas_Init
+                entity 63,63,LEFT,MAPSPRITE_FLAME1,eas_Init
+                entity 63,63,UP,MAPSPRITE_DEATH_MONK,eas_Init
+                entity 63,63,UP,MAPSPRITE_DARK_BISHOP,eas_Init
+                entity 63,63,UP,MAPSPRITE_ORC_LORD,eas_Init
+                entity 63,63,UP,MAPSPRITE_HARPY_QUEEN,eas_Init
                 dc.w $FFFF

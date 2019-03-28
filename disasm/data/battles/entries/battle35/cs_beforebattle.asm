@@ -74,14 +74,14 @@ cs_4D728:       fadeInB
                 nextSingleText $0,$1F   ; "After him, now!{W1}"
                 csc_end
 ce_4D832:       mainEntity 43,9,LEFT
-                entity 44,10,LEFT,7,eas_Init
-                entity 27,16,UP,159,eas_Init
-                entity 26,21,UP,89,eas_Init
-                entity 29,21,UP,89,eas_Init
-                entity 31,24,UP,89,eas_Init
-                entity 28,28,UP,89,eas_Init
-                entity 24,24,UP,90,eas_Init
-                entity 24,25,UP,91,eas_Init
-                entity 24,26,UP,113,eas_Init
-                entity 24,27,UP,114,eas_Init
+                entity 44,10,LEFT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 27,16,UP,MAPSPRITE_GESHP,eas_Init
+                entity 26,21,UP,MAPSPRITE_MUD_MAN,eas_Init
+                entity 29,21,UP,MAPSPRITE_MUD_MAN,eas_Init
+                entity 31,24,UP,MAPSPRITE_MUD_MAN,eas_Init
+                entity 28,28,UP,MAPSPRITE_MUD_MAN,eas_Init
+                entity 24,24,UP,MAPSPRITE_DRAGONEWT,eas_Init
+                entity 24,25,UP,MAPSPRITE_PURPLE_WORM,eas_Init
+                entity 24,26,UP,MAPSPRITE_GRIFFIN,eas_Init
+                entity 24,27,UP,MAPSPRITE_MIST_DEMON,eas_Init
                 dc.w $FFFF

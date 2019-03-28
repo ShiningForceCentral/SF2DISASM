@@ -110,9 +110,9 @@ IntroCutscene2: textCursor $106A
                 csWait 30
                 csc_end
 ce_48510:       mainEntity 63,63,UP
-                entity 12,6,DOWN,203,eas_Init
-                entity 10,7,DOWN,205,eas_Init
-                entity 12,13,UP,206,eas_Init
-                entity 9,6,LEFT,187,eas_Init
-                entity 15,6,LEFT,187,eas_Init
+                entity 12,6,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 10,7,DOWN,MAPSPRITE_MINISTER,eas_Init
+                entity 12,13,UP,MAPSPRITE_SOLDIER1,eas_Init
+                entity 9,6,LEFT,MAPSPRITE_EFFECT6,eas_Init
+                entity 15,6,LEFT,MAPSPRITE_EFFECT6,eas_Init
                 dc.w $FFFF

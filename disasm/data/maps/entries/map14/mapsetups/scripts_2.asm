@@ -215,17 +215,17 @@ cs_59142:       textCursor $8E6
                 warp $48,$1,$1,$3
                 csc_end
 ce_59270:       mainEntity 13,11,DOWN
-                entity 12,20,UP,3,eas_Init
-                entity 14,20,UP,5,eas_Init
-                entity 14,21,UP,1,eas_Init
-                entity 14,22,UP,6,eas_Init
-                entity 14,23,UP,2,eas_Init
-                entity 14,24,UP,4,eas_Init
-                entity 13,13,UP,193,eas_Init
-                entity 9,13,LEFT,196,eas_Init
-                entity 16,13,RIGHT,194,eas_Init
-                entity 13,20,UP,202,eas_Init
-                entity 12,11,RIGHT,179,eas_Init3
-                entity 13,11,DOWN,179,eas_Init3
-                entity 14,11,LEFT,179,eas_Init3
+                entity 12,20,UP,MAPSPRITE_SARAH_PROMO,eas_Init
+                entity 14,20,UP,MAPSPRITE_CHESTER_BASE,eas_Init
+                entity 14,21,UP,MAPSPRITE_BOWIE_PROMO,eas_Init
+                entity 14,22,UP,MAPSPRITE_CHESTER_PROMO,eas_Init
+                entity 14,23,UP,MAPSPRITE_SARAH_BASE,eas_Init
+                entity 14,24,UP,MAPSPRITE_SARAH_SPECIAL,eas_Init
+                entity 13,13,UP,MAPSPRITE_SAILOR,eas_Init
+                entity 9,13,LEFT,MAPSPRITE_MAN2,eas_Init
+                entity 16,13,RIGHT,MAPSPRITE_MAN1,eas_Init
+                entity 13,20,UP,MAPSPRITE_WORKER,eas_Init
+                entity 12,11,RIGHT,MAPSPRITE_OBJECT2,eas_Init3
+                entity 13,11,DOWN,MAPSPRITE_OBJECT2,eas_Init3
+                entity 14,11,LEFT,MAPSPRITE_OBJECT2,eas_Init3
                 dc.w $FFFF

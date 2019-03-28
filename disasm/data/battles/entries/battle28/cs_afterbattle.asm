@@ -39,7 +39,7 @@ abcs_battle28:  textCursor $A6E
                 nextText $0,$1F         ; "We'll take you with us.{W2}"
                 nextSingleText $0,$1F   ; "Tristan is the nearest town.{N}I think you had better rest{N}there.{W1}"
                 nextSingleText $0,$80   ; "Thank you, sir.{W1}"
-                setSprite $80,$C5
+                setSprite $80,MAPSPRITE_WOMAN2
                 entityActions $80
                  moveUp 2
                 endActions
@@ -87,14 +87,14 @@ abcs_battle28:  textCursor $A6E
                 entityFlashWhite $80,$28
                 flashScreenWhite $14
                 setPos $80,11,30,RIGHT
-                setSprite $80,$AF
+                setSprite $80,MAPSPRITE_EFFECT2
                 setFacing $80,UP
                 csWait 8
                 setFacing $80,LEFT
                 csWait 8
                 setFacing $80,DOWN
                 csWait 8
-                setSprite $80,$9C
+                setSprite $80,MAPSPRITE_CAMEELA
                 setFacing $80,RIGHT
                 startEntity $80
                 setActscript $0,eas_Jump
@@ -211,8 +211,8 @@ abcs_battle28:  textCursor $A6E
                 warp $FF,$10,$1E,$0
                 csc_end
 ce_4C3B4:       mainEntity 12,28,DOWN
-                entity 12,31,UP,176,eas_Init
-                entity 13,28,DOWN,7,eas_Init
-                entity 12,27,DOWN,62,eas_Init
-                entity 63,63,LEFT,178,eas_Init
+                entity 12,31,UP,MAPSPRITE_POSE3,eas_Init
+                entity 13,28,DOWN,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 12,27,DOWN,MAPSPRITE_CARAVAN,eas_Init
+                entity 63,63,LEFT,MAPSPRITE_EFFECT3,eas_Init
                 dc.w $FFFF

@@ -230,7 +230,7 @@ cs_50624:       fadeInB
                  moveDown 2
                 endActions
                 setFacing $3,DOWN
-                setSprite $3,$3B
+                setSprite $3,MAPSPRITE_POSE1
                 csWait 60
                 nextText $0,$3          ; "Ugh...ugghhh...{N}It's stuck!{W2}"
                 nextSingleText $0,$3    ; "Heave!  Heave!{N}Come oooooooooon!{W1}"
@@ -265,44 +265,44 @@ cs_50624:       fadeInB
                 setPriority $84,$FFFF
                 csc_end
 ce_506DE:       mainEntity 63,63,UP
-                entity 63,63,DOWN,209,eas_Init
-                entity 63,63,DOWN,1,eas_Init
-                entity 63,63,DOWN,205,eas_Init
-                entity 63,63,DOWN,3,eas_Init
-                entity 63,63,DOWN,6,eas_Init
-                entity 63,63,DOWN,203,eas_Init
-                entity 63,63,DOWN,193,eas_Init
-                entity 63,63,DOWN,5,eas_Init
-                entity 5,5,RIGHT,211,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_ASTRAL,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_BOWIE_PROMO,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_MINISTER,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_SARAH_PROMO,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_CHESTER_PROMO,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_SAILOR,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_CHESTER_BASE,eas_Init
+                entity 5,5,RIGHT,MAPSPRITE_BOAT,eas_Init
                 dc.w $FFFF
 ce_5072E:       mainEntity 0,0,UP
-                entity 23,30,DOWN,205,eas_Init
-                entity 19,29,UP,198,eas_Init
-                entity 21,29,LEFT,196,eas_Init
-                entity 20,30,DOWN,199,eas_Init
-                entity 20,31,UP,199,eas_Init
-                entity 19,32,DOWN,197,eas_Init
-                entity 23,34,DOWN,200,eas_Init
-                entity 24,34,DOWN,201,eas_Init
-                entity 27,29,DOWN,194,eas_Init
-                entity 27,30,LEFT,193,eas_Init
-                entity 26,31,UP,194,eas_Init
-                entity 24,26,UP,197,eas_Init
-                entity 23,27,UP,196,eas_Init
+                entity 23,30,DOWN,MAPSPRITE_MINISTER,eas_Init
+                entity 19,29,UP,MAPSPRITE_MAN3,eas_Init
+                entity 21,29,LEFT,MAPSPRITE_MAN2,eas_Init
+                entity 20,30,DOWN,MAPSPRITE_WOMAN3,eas_Init
+                entity 20,31,UP,MAPSPRITE_WOMAN3,eas_Init
+                entity 19,32,DOWN,MAPSPRITE_WOMAN2,eas_Init
+                entity 23,34,DOWN,MAPSPRITE_BOY,eas_Init
+                entity 24,34,DOWN,MAPSPRITE_GIRL,eas_Init
+                entity 27,29,DOWN,MAPSPRITE_MAN1,eas_Init
+                entity 27,30,LEFT,MAPSPRITE_SAILOR,eas_Init
+                entity 26,31,UP,MAPSPRITE_MAN1,eas_Init
+                entity 24,26,UP,MAPSPRITE_WOMAN2,eas_Init
+                entity 23,27,UP,MAPSPRITE_MAN2,eas_Init
                 dc.w $FFFF
 ce_5079E:       mainEntity 40,8,LEFT
-                entity 51,8,DOWN,1,eas_Init
-                entity 41,10,DOWN,2,eas_Init
-                entity 51,4,DOWN,3,eas_Init
-                entity 39,8,RIGHT,4,eas_Init
-                entity 49,4,UP,5,eas_Init
-                entity 38,5,DOWN,6,eas_Init
-                entity 41,4,DOWN,202,eas_Init
-                entity 53,10,DOWN,202,eas_Init
-                entity 47,5,DOWN,196,eas_Init
-                entity 44,6,RIGHT,179,eas_Init
-                entity 45,6,DOWN,179,eas_Init
-                entity 46,6,LEFT,179,eas_Init
+                entity 51,8,DOWN,MAPSPRITE_BOWIE_PROMO,eas_Init
+                entity 41,10,DOWN,MAPSPRITE_SARAH_BASE,eas_Init
+                entity 51,4,DOWN,MAPSPRITE_SARAH_PROMO,eas_Init
+                entity 39,8,RIGHT,MAPSPRITE_SARAH_SPECIAL,eas_Init
+                entity 49,4,UP,MAPSPRITE_CHESTER_BASE,eas_Init
+                entity 38,5,DOWN,MAPSPRITE_CHESTER_PROMO,eas_Init
+                entity 41,4,DOWN,MAPSPRITE_WORKER,eas_Init
+                entity 53,10,DOWN,MAPSPRITE_WORKER,eas_Init
+                entity 47,5,DOWN,MAPSPRITE_MAN2,eas_Init
+                entity 44,6,RIGHT,MAPSPRITE_OBJECT2,eas_Init
+                entity 45,6,DOWN,MAPSPRITE_OBJECT2,eas_Init
+                entity 46,6,LEFT,MAPSPRITE_OBJECT2,eas_Init
                 dc.w $FFFF
 cs_50806:       textCursor $8F0
                 loadMapEntities ce_5094A
@@ -378,7 +378,7 @@ cs_50806:       textCursor $8F0
                 warp $7,$B,$A,$1
                 csc_end
 ce_5094A:       mainEntity 61,48,LEFT
-                entity 62,48,LEFT,202,eas_Init
-                entity 63,48,LEFT,202,eas_Init
-                entity 28,49,RIGHT,211,eas_Init
+                entity 62,48,LEFT,MAPSPRITE_WORKER,eas_Init
+                entity 63,48,LEFT,MAPSPRITE_WORKER,eas_Init
+                entity 28,49,RIGHT,MAPSPRITE_BOAT,eas_Init
                 dc.w $FFFF

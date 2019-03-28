@@ -144,10 +144,10 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
                 followEntity $1C,$1F,$2
                 csc_end
 ce_4ECD6:       mainEntity 15,10,UP
-                entity 13,8,RIGHT,7,eas_Init
-                entity 17,8,LEFT,28,eas_Init
-                entity 63,63,DOWN,173,eas_Init
-                entity 63,63,DOWN,173,eas_Init
-                entity 63,63,DOWN,173,eas_Init
-                entity 15,8,DOWN,160,eas_Init
+                entity 13,8,RIGHT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 17,8,LEFT,MAPSPRITE_RICK_PROMO,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_OBJECT1,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_OBJECT1,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_OBJECT1,eas_Init
+                entity 15,8,DOWN,MAPSPRITE_ODD_EYE,eas_Init
                 dc.w $FFFF

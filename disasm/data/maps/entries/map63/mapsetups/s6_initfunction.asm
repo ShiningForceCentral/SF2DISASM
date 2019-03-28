@@ -16,7 +16,7 @@ return_5CA5C:
 
 	; End of function ms_map63_InitFunction
 
-cs_5CA5E:       setSprite $1D,$B0
+cs_5CA5E:       setSprite $1D,MAPSPRITE_POSE3
                 setFacing $1D,DOWN
                 stopEntity $1D
                 csc_end

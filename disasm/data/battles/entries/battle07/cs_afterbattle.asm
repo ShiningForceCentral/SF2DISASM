@@ -218,10 +218,10 @@ abcs_battle07:  textCursor $951
                 nextSingleText $C0,$82  ; "Here they come!{N}Ha, ha, ha!{W1}"
                 nextSingleText $0,$83   ; "What?{W1}"
                 setCamDest 8,3
-                setSprite $80,$B4
+                setSprite $80,MAPSPRITE_OBJECT3
                 setPos $80,12,5,UP
                 animEntityFX $80,7
-                setSprite $81,$B4
+                setSprite $81,MAPSPRITE_OBJECT3
                 setPos $81,13,5,UP
                 animEntityFX $81,7
                 customActscriptWait $80
@@ -400,7 +400,7 @@ abcs_battle07:  textCursor $951
                  ac_jump eas_Idle       ;   
                 ac_end
                 setFacing $0,UP
-                setSprite $0,$B1
+                setSprite $0,MAPSPRITE_POSE4
                 entityActions $0
                  moveUp 8
                 endActions
@@ -457,7 +457,7 @@ abcs_battle07:  textCursor $951
                  ac_jump eas_Idle       ;   
                 ac_end
                 setActscriptWait $0,eas_46172
-                setSprite $0,$0
+                setSprite $0,MAPSPRITE_BOWIE_BASE
                 customActscriptWait $0
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $1          ;   
@@ -498,7 +498,7 @@ abcs_battle07:  textCursor $951
                 entityActionsWait $0
                  moveDown 1
                 endActions
-                setSprite $0,$B1
+                setSprite $0,MAPSPRITE_POSE4
                 customActscriptWait $0
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $0          ;   
@@ -546,7 +546,7 @@ abcs_battle07:  textCursor $951
                 csWait 60
                 nextSingleText $0,$85   ; "She's gone....{N}Elis!{W1}"
                 nextSingleText $0,$83   ; "We couldn't help the{N}Princess.{W1}"
-                setSprite $0,$0
+                setSprite $0,MAPSPRITE_BOWIE_BASE
                 setActscriptWait $0,eas_Init
                 startEntity $0
                 headshake $0
@@ -643,11 +643,11 @@ abcs_battle07:  textCursor $951
                 setF $280               ; Set after the end of battle 7's long sequence, cleared at docks?
                 csc_end
 ce_4A912:       mainEntity 13,23,UP
-                entity 63,63,RIGHT,178,eas_Init
-                entity 63,63,RIGHT,178,eas_Init
-                entity 13,17,UP,164,eas_Init
-                entity 13,21,UP,209,eas_Init
-                entity 12,14,DOWN,204,eas_Init
-                entity 12,27,UP,203,eas_Init
-                entity 14,27,UP,205,eas_Init
+                entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init
+                entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init
+                entity 13,17,UP,MAPSPRITE_GALAM_EVIL,eas_Init
+                entity 13,21,UP,MAPSPRITE_ASTRAL,eas_Init
+                entity 12,14,DOWN,MAPSPRITE_ELIS,eas_Init
+                entity 12,27,UP,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 14,27,UP,MAPSPRITE_MINISTER,eas_Init
                 dc.w $FFFF

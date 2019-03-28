@@ -46,7 +46,7 @@ cs_5F4B8:       setActscriptWait $0,eas_Init
                 followEntity $7,$0,$2
                 followEntity $1F,$7,$2
                 csc_end
-cs_5F594:       newEntity $1C,6,15,UP,$FF
+cs_5F594:       newEntity $1C,6,15,UP,MAPSPRITE_TAROS
                 textCursor $DB9
                 nextSingleText $0,$1C   ; "Sir Astral!  {LEADER}!{W1}"
                 setDest $1F,6,10

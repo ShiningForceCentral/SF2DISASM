@@ -78,7 +78,7 @@ IntroCutscene3: textCursor $1077
                 csWait 6
                 setActscriptWait $5,eas_461AA
                 setFacing $5,DOWN
-                setSprite $5,$BB
+                setSprite $5,MAPSPRITE_EFFECT6
                 csWait 20
                 shiver $5
                 setActscript $80,eas_Jump
@@ -107,7 +107,7 @@ IntroCutscene3: textCursor $1077
                  ac_jump eas_Idle       ;   
                 ac_end
                 setActscriptWait $5,eas_46172
-                setSprite $5,$5
+                setSprite $5,MAPSPRITE_CHESTER_BASE
                 setFacing $5,UP
                 entityActionsWait $5
                  moveDown 1
@@ -137,7 +137,7 @@ IntroCutscene3: textCursor $1077
                 csWait 6
                 setActscriptWait $5,eas_461AA
                 setFacing $5,DOWN
-                setSprite $5,$BB
+                setSprite $5,MAPSPRITE_EFFECT6
                 nextSingleText $FF,$FF  ; "{NAME;5} the thief{N}grabbed the two jewels.{D2}"
                 csWait 20
                 nextSingleText $80,$5   ; "One...two...{D2}"
@@ -151,7 +151,7 @@ IntroCutscene3: textCursor $1077
                 setActscriptWait $5,eas_46172
                 hide $82
                 setBlocks 26,18,1,1,26,4
-                setSprite $5,$5
+                setSprite $5,MAPSPRITE_CHESTER_BASE
                 setFacing $5,UP
                 entityActions $5
                  moveDown 1
@@ -204,11 +204,11 @@ IntroCutscene3: textCursor $1077
                 nextSingleText $0,$81   ; "You did it!{N}You have the legendary{N}jewels!{D2}"
                 csWait 20
                 setFacing $5,UP
-                setSprite $5,$3B
+                setSprite $5,MAPSPRITE_POSE1
                 setActscriptWait $5,eas_Init
                 nextSingleText $80,$5   ; "I did?{D2}"
                 csWait 30
-                setSprite $5,$5
+                setSprite $5,MAPSPRITE_CHESTER_BASE
                 headshake $5
                 nextSingleText $80,$5   ; "Oh, I got them!{N}I have the legendary{N}jewels!  Bravo!{D2}"
                 setActscriptWait $5,eas_Jump
@@ -348,8 +348,8 @@ IntroCutscene3: textCursor $1077
                 fadeOutToBlackHalf
                 csc_end
 ce_48A50:       mainEntity 63,63,UP
-                entity 26,7,UP,5,eas_Init
-                entity 26,5,UP,202,eas_Init
-                entity 27,6,UP,202,eas_Init
-                entity 26,4,DOWN,173,eas_Init
+                entity 26,7,UP,MAPSPRITE_CHESTER_BASE,eas_Init
+                entity 26,5,UP,MAPSPRITE_WORKER,eas_Init
+                entity 27,6,UP,MAPSPRITE_WORKER,eas_Init
+                entity 26,4,DOWN,MAPSPRITE_OBJECT1,eas_Init
                 dc.w $FFFF

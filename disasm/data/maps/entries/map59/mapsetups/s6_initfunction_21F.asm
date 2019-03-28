@@ -53,7 +53,7 @@ cs_615E6:       textCursor $EB0
                  faceRight 40
                 endActions
                 setFacing $1C,DOWN
-                setSprite $1C,$BA
+                setSprite $1C,MAPSPRITE_EFFECT5
                 csWait 20
                 nextSingleText $0,$1C   ; "I don't know what to say.{W1}"
                 nextText $80,$86        ; "I can't see very well.{N}Am I dying?{W2}"
@@ -81,14 +81,14 @@ cs_615E6:       textCursor $EB0
                  faceLeft 10
                 endActions
                 stopEntity $84
-                setSprite $84,$B1
+                setSprite $84,MAPSPRITE_POSE4
                 nextSingleText $80,$84  ; "Can you see me now?{N}King Galam?{W1}"
                 shiver $86
                 setActscriptWait $86,eas_Init
                 setActscriptWait $86,eas_Jump
                 startEntity $86
                 startEntity $84
-                setSprite $84,$CC
+                setSprite $84,MAPSPRITE_ELIS
                 setFacing $84,DOWN
                 setFacing $86,DOWN
                 setActscriptWait $86,eas_46172
@@ -116,7 +116,7 @@ cs_615E6:       textCursor $EB0
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setSprite $1C,$1C
+                setSprite $1C,MAPSPRITE_RICK_PROMO
                 setFacing $1C,RIGHT
                 setCamDest 7,5
                 entityActions $84
@@ -151,7 +151,7 @@ cs_615E6:       textCursor $EB0
                 flashScreenWhite $4
                 csWait 10
                 setActscriptWait $86,eas_Init
-                setSprite $86,$A3
+                setSprite $86,MAPSPRITE_GALAM_ZEON
                 shiver $86
                 playSound MUSIC_ZEON_ATTACK
                 nextSingleText $80,$86  ; "I'm not Galam, you fools!{W1}"
@@ -1072,7 +1072,7 @@ cs_615E6:       textCursor $EB0
                 nod $0
                 hide $84
                 setFacing $0,DOWN
-                setSprite $0,$AE
+                setSprite $0,MAPSPRITE_POSE2
                 csWait 30
                 csWait 5
                 setActscript $7,eas_461B6

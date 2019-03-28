@@ -24,7 +24,7 @@ EndCutscene:    mapLoad 20,19,33
                  ac_setSpeed 20,20      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setSprite $B,$AA
+                setSprite $B,MAPSPRITE_NPC_ROHDE
                 fadeInB
                 csWait 60
                 setPos $0,25,35,RIGHT
@@ -176,15 +176,15 @@ EndCutscene:    mapLoad 20,19,33
                 fadeOutB
                 csc_end
 ce_492CC:       mainEntity 63,63,DOWN
-                entity 63,63,DOWN,11,eas_Init
-                entity 63,63,DOWN,2,eas_Init
-                entity 63,63,DOWN,10,eas_Init
-                entity 63,63,DOWN,3,eas_Init
-                entity 63,63,DOWN,7,eas_Init
-                entity 21,40,RIGHT,209,eas_Init
-                entity 21,39,RIGHT,203,eas_Init
-                entity 22,38,RIGHT,205,eas_Init
-                entity 63,63,DOWN,204,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_KAZIN_BASE,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_SARAH_BASE,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_JAHA_SPECIAL,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_SARAH_PROMO,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 21,40,RIGHT,MAPSPRITE_ASTRAL,eas_Init
+                entity 21,39,RIGHT,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 22,38,RIGHT,MAPSPRITE_MINISTER,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_ELIS,eas_Init
                 dc.w $FFFF
 dms_01:         faceEntity $86,$0
                 addNewFollower $5

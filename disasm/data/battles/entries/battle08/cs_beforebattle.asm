@@ -46,15 +46,15 @@ cs_4A994:       playSound MUSIC_MAIN_THEME
                 setActscriptWait $85,eas_Jump
                 csc_end
 ce_4AA14:       mainEntity 4,50,RIGHT
-                entity 5,50,RIGHT,202,eas_Init
-                entity 4,49,RIGHT,1,eas_Init
-                entity 4,51,RIGHT,3,eas_Init
-                entity 3,50,RIGHT,4,eas_Init
-                entity 2,50,RIGHT,2,eas_Init
-                entity 1,50,RIGHT,6,eas_Init
-                entity 14,34,DOWN,202,eas_Init
-                entity 63,63,DOWN,132,eas_Init
-                entity 63,63,DOWN,68,eas_Init
-                entity 63,63,DOWN,69,eas_Init
-                entity 63,63,DOWN,121,eas_Init
+                entity 5,50,RIGHT,MAPSPRITE_WORKER,eas_Init
+                entity 4,49,RIGHT,MAPSPRITE_BOWIE_PROMO,eas_Init
+                entity 4,51,RIGHT,MAPSPRITE_SARAH_PROMO,eas_Init
+                entity 3,50,RIGHT,MAPSPRITE_SARAH_SPECIAL,eas_Init
+                entity 2,50,RIGHT,MAPSPRITE_SARAH_BASE,eas_Init
+                entity 1,50,RIGHT,MAPSPRITE_CHESTER_PROMO,eas_Init
+                entity 14,34,DOWN,MAPSPRITE_WORKER,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_WITCH,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GOBLIN,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_GREEN_OOZE,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_HUNTER_GOBLIN,eas_Init
                 dc.w $FFFF

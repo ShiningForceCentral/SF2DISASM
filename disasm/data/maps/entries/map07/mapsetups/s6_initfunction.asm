@@ -135,20 +135,20 @@ cs_55832:       textCursor $50A
                 reloadEntities ms_map7_Entities
                 csc_end
 ce_559AE:       mainEntity 11,7,UP
-                entity 12,5,DOWN,205,eas_Init
-                entity 11,4,DOWN,203,eas_Init
-                entity 10,7,UP,206,eas_Init
-                entity 10,8,UP,206,eas_Init
-                entity 10,9,UP,206,eas_Init
-                entity 10,10,UP,207,eas_Init
-                entity 12,8,UP,207,eas_Init
-                entity 12,9,UP,207,eas_Init
-                entity 12,10,UP,207,eas_Init
-                entity 8,7,RIGHT,208,eas_Init
-                entity 14,7,LEFT,208,eas_Init
-                entity 10,5,DOWN,209,eas_Init
-                entity 12,7,UP,3,eas_Init
-                entity 11,8,UP,1,eas_Init
-                entity 11,9,UP,4,eas_Init
-                entity 11,10,UP,2,eas_Init
+                entity 12,5,DOWN,MAPSPRITE_MINISTER,eas_Init
+                entity 11,4,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 10,7,UP,MAPSPRITE_SOLDIER1,eas_Init
+                entity 10,8,UP,MAPSPRITE_SOLDIER1,eas_Init
+                entity 10,9,UP,MAPSPRITE_SOLDIER1,eas_Init
+                entity 10,10,UP,MAPSPRITE_SOLDIER2,eas_Init
+                entity 12,8,UP,MAPSPRITE_SOLDIER2,eas_Init
+                entity 12,9,UP,MAPSPRITE_SOLDIER2,eas_Init
+                entity 12,10,UP,MAPSPRITE_SOLDIER2,eas_Init
+                entity 8,7,RIGHT,MAPSPRITE_MAID,eas_Init
+                entity 14,7,LEFT,MAPSPRITE_MAID,eas_Init
+                entity 10,5,DOWN,MAPSPRITE_ASTRAL,eas_Init
+                entity 12,7,UP,MAPSPRITE_SARAH_PROMO,eas_Init
+                entity 11,8,UP,MAPSPRITE_BOWIE_PROMO,eas_Init
+                entity 11,9,UP,MAPSPRITE_SARAH_SPECIAL,eas_Init
+                entity 11,10,UP,MAPSPRITE_SARAH_BASE,eas_Init
                 dc.w $FFFF

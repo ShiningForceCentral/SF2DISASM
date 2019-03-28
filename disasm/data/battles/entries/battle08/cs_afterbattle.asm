@@ -27,10 +27,10 @@ cs_4AAB6:       fadeInB
                 setFacing $80,RIGHT
                 nextSingleText $0,$80   ; "....{W1}"
                 setActscriptWait $81,eas_Init
-                setSprite $81,$3B
+                setSprite $81,MAPSPRITE_POSE1
                 setFacing $81,LEFT
                 nextSingleText $C0,$81  ; "{LEADER}, are you ready{N}for battle?{D3}"
-                setSprite $81,$CA
+                setSprite $81,MAPSPRITE_WORKER
                 setFacing $81,DOWN
                 nextSingleText $C0,$81  ; "Do you need more preparations?"
                 setActscriptWait $81,eas_Init
@@ -81,11 +81,11 @@ cs_4AAB6:       fadeInB
                 warp $49,$3E,$31,$2
                 csc_end
 ce_4ABBE:       mainEntity 14,37,UP
-                entity 14,35,UP,202,eas_Init
-                entity 13,36,UP,1,eas_Init
-                entity 12,35,UP,3,eas_Init
-                entity 15,36,UP,4,eas_Init
-                entity 16,35,UP,2,eas_Init
-                entity 16,34,LEFT,6,eas_Init
-                entity 14,34,DOWN,202,eas_Init
+                entity 14,35,UP,MAPSPRITE_WORKER,eas_Init
+                entity 13,36,UP,MAPSPRITE_BOWIE_PROMO,eas_Init
+                entity 12,35,UP,MAPSPRITE_SARAH_PROMO,eas_Init
+                entity 15,36,UP,MAPSPRITE_SARAH_SPECIAL,eas_Init
+                entity 16,35,UP,MAPSPRITE_SARAH_BASE,eas_Init
+                entity 16,34,LEFT,MAPSPRITE_CHESTER_PROMO,eas_Init
+                entity 14,34,DOWN,MAPSPRITE_WORKER,eas_Init
                 dc.w $FFFF

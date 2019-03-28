@@ -243,7 +243,7 @@ cs_4DF00:       setActscriptWait $80,eas_46172
                  moveDown 3
                 endActions
                 setFacing $88,LEFT
-                setSprite $88,$B4
+                setSprite $88,MAPSPRITE_OBJECT3
                 setActscript $88,eas_AnimSpeedx2
                 setActscript $80,eas_JumpLeft
                 playSound SFX_BOLT_SPELL
@@ -293,7 +293,7 @@ cs_4DF00:       setActscriptWait $80,eas_46172
                 setQuake 0
                 setCameraEntity $FFFF
                 csWait 40
-                setSprite $88,$9F
+                setSprite $88,MAPSPRITE_GESHP
                 setActscriptWait $88,eas_Die
                 flickerOnce
                 cameraSpeed $30
@@ -313,15 +313,15 @@ cs_4DF00:       setActscriptWait $80,eas_46172
                 followEntity $1F,$1E,$3
                 csc_end
 ce_4E372:       mainEntity 8,23,DOWN
-                entity 5,25,RIGHT,7,eas_Init
-                entity 63,63,RIGHT,178,eas_Init
-                entity 63,63,LEFT,178,eas_Init
-                entity 63,63,RIGHT,178,eas_Init
-                entity 63,63,LEFT,178,eas_Init
-                entity 63,63,RIGHT,178,eas_Init
-                entity 63,63,LEFT,178,eas_Init
-                entity 63,63,RIGHT,178,eas_Init
-                entity 63,63,LEFT,178,eas_Init
-                entity 6,27,DOWN,159,eas_Init
-                entity 63,63,DOWN,162,eas_Init
+                entity 5,25,RIGHT,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init
+                entity 63,63,LEFT,MAPSPRITE_EFFECT3,eas_Init
+                entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init
+                entity 63,63,LEFT,MAPSPRITE_EFFECT3,eas_Init
+                entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init
+                entity 63,63,LEFT,MAPSPRITE_EFFECT3,eas_Init
+                entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init
+                entity 63,63,LEFT,MAPSPRITE_EFFECT3,eas_Init
+                entity 6,27,DOWN,MAPSPRITE_GESHP,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_FILLER4,eas_Init
                 dc.w $FFFF

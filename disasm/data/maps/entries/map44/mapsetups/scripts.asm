@@ -75,7 +75,7 @@ Map21_DefaultZoneEvent:
                 loadMapFadeIn 66,28,26
                 loadMapEntities ce_54736
                 setActscriptWait $0,eas_Init
-                setSprite $0,$D3
+                setSprite $0,MAPSPRITE_BOAT
                 fadeInB
                 customActscriptWait $0
                  ac_setSpeed 20,20      ;   

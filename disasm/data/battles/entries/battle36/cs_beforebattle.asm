@@ -49,11 +49,11 @@ cs_4D8D6:       playSound MUSIC_BATTLE_THEME_1
                 setFacing $0,DOWN
                 csc_end
 ce_4D964:       mainEntity 19,1,DOWN
-                entity 18,0,DOWN,7,eas_Init
-                entity 16,16,UP,159,eas_Init
-                entity 19,0,DOWN,62,eas_Init
-                entity 12,16,RIGHT,157,eas_Init
-                entity 13,17,UP,157,eas_Init
-                entity 14,19,LEFT,157,eas_Init
-                entity 15,20,UP,157,eas_Init
+                entity 18,0,DOWN,MAPSPRITE_CHESTER_SPECIAL,eas_Init
+                entity 16,16,UP,MAPSPRITE_GESHP,eas_Init
+                entity 19,0,DOWN,MAPSPRITE_CARAVAN,eas_Init
+                entity 12,16,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
+                entity 13,17,UP,MAPSPRITE_PRISM_FLOWER,eas_Init
+                entity 14,19,LEFT,MAPSPRITE_PRISM_FLOWER,eas_Init
+                entity 15,20,UP,MAPSPRITE_PRISM_FLOWER,eas_Init
                 dc.w $FFFF
