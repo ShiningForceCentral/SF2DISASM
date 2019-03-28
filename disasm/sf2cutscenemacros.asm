@@ -1122,6 +1122,10 @@ ac_soundCommand:	macro
 	dc.w \1
 	endm
 
+ac_branch:	macro
+	dc.w $30
+	endm
+
 ac_jump:	macro
 	dc.w $34
 	dc.l \1

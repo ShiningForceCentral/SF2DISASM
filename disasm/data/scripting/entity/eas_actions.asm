@@ -96,7 +96,7 @@ eas_RotateRight: ac_setAnimCounter $0
                  ac_setFacing DOWN
                  ac_updateSprite
                  ac_wait 5
-word_45FEC:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFD0
+word_45FEC:      ac_branch
                 dc.w (eas_RotateRight-word_45FEC) & $FFFF
 eas_RotateRightHighSpeed:
                  ac_setAnimCounter $0
@@ -113,7 +113,7 @@ eas_RotateRightHighSpeed:
                  ac_setFacing DOWN
                  ac_updateSprite
                  ac_wait 1
-word_46020:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFD0
+word_46020:      ac_branch
                 dc.w (eas_RotateRightHighSpeed-word_46020) & $FFFF
 eas_Die:         ac_setAnimCounter $0
                  ac_setFacing LEFT
@@ -258,7 +258,7 @@ byte_4622E:      ac_setFacing RIGHT
                  ac_setFacing LEFT
                  ac_updateSprite
                  ac_wait 60
-word_46242:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFEC
+word_46242:      ac_branch
                 dc.w (byte_4622E-word_46242) & $FFFF
 eas_46246:       ac_setSpeed 0,0
                  ac_11 $101
@@ -267,7 +267,7 @@ eas_46246:       ac_setSpeed 0,0
                  ac_set1Cb7 $FFFF
                  ac_set1Cb5 $FFFF
                  ac_set1Cb6 $0
-word_46262:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $4C
+word_46262:      ac_branch
                 dc.w byte_462AE-word_46262
 eas_46266:       ac_setSpeed 0,0
                  ac_11 $101
@@ -300,7 +300,7 @@ byte_462AE:      ac_moveRel 65535,0
                  ac_moveRel 1,0
                  ac_waitDest
                  ac_wait 60
-word_462DA:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFA8
+word_462DA:      ac_branch
                 dc.w (byte_46282-word_462DA) & $FFFF
                  ac_soundCommand $57
                  ac_setSprite 63
@@ -443,7 +443,7 @@ eas_464CE:       ac_moveRel 1,1
                  ac_waitDest
 eas_464D6:       ac_moveRel 1,65535
                  ac_waitDest
-word_464DE:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFE0
+word_464DE:      ac_branch
                 dc.w (eas_464BE-word_464DE) & $FFFF
 eas_464E2:       ac_moveRel 65535,1
                  ac_waitDest
@@ -453,5 +453,5 @@ eas_464F2:       ac_moveRel 1,65535
                  ac_waitDest
 eas_464FA:       ac_moveRel 1,1
                  ac_waitDest
-word_46502:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFE0
+word_46502:      ac_branch
                 dc.w (eas_464E2-word_46502) & $FFFF

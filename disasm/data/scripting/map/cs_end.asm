@@ -228,7 +228,7 @@ eas_493A2:       ac_set1Cb7 $FFFF
                  ac_waitDest
                  ac_40
                  ac_wait 1
-word_493CA:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $BA74
+word_493CA:      ac_branch
                 dc.w (eas_ControlledCharacter-word_493CA) & $FFFF
                 dc.w 4                  ; 0004 SET TEXT INDEX 142
                 dc.w $142
@@ -279,28 +279,30 @@ sub_493EC:
                 showPortrait $0
                 nextTextVar $0,$0,$0,$3,$A; "{NAME} found{N}the {ITEM}.{D1}"
                 nextSingleTextVar $0,$0,$0,$4; "{NAME} received{N}the {ITEM}."
-                dc.l $14001D            ; cutscene parsing mistake, letting this unformatted, probably unused
-                dc.l $8078
-                dc.l $1E0004
-                dc.l $1420002
-                dc.l 0
-                dc.l $FFFF
-                dc.l $140501
-                dc.l $150000
-                dc.l $110001
-                dc.l $100020
-                dc.l $120000
-                dc.l $13FFFF
-                dc.l $40000
-                dc.l $FFFF0000
-                dc.l $50004
-                dc.l 1
-                dc.l 5
-                dc.l $40000
-                dc.l 0
-                dc.l $50015
-                dc.l $FFFF0030
-                dc.l $BD508080
-                dc.l $1D0000
-                dc.l $803C001E
-                dc.w $FFFF
+                dc.l $14001D            ; Unused cutscene with parsing mistake here and below, letting it unformatted.
+                 ac_wait 32888          ;   
+                 ac_setAnimSpeedX2 $4   ;   
+                dc.w $142               ;   Unkown command : 142
+                 ac_02                  ;   
+                 ac_wait 0              ;   
+                 ac_wait 65535          ;   
+                 ac_setAnimCounter $501 ;   
+                 ac_autoFacing $0       ;   
+                 ac_11 $1               ;   
+                 ac_setSpeed 0,32       ;   
+                 ac_12 $0               ;   
+                 ac_13 $FFFF            ;   
+                 ac_moveRel 0,65535     ;   
+                 ac_wait 5              ;   
+                 ac_moveRel 0,1         ;   
+                 ac_wait 5              ;   
+                 ac_moveRel 0,0         ;   
+                 ac_wait 5              ;   
+                 ac_autoFacing $FFFF    ;   
+word_494AC:      ac_branch              ;   
+                dc.w (eas_Idle-word_494AC) & $FFFF
+                ac_end
+                showPortrait $0
+                csWait 60
+                hidePortrait
+                csc_end

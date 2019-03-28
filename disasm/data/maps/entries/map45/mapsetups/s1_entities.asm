@@ -35,5 +35,5 @@ eas_5FFC8:       ac_11 $0
                  ac_setFacing RIGHT
                  ac_updateSprite
                  ac_wait 8
-word_60020:     dc.w $30                ; 0030 BRANCH TO CURRENT ADDR. + $FFA8
+word_60020:      ac_branch
                 dc.w (eas_5FFC8-word_60020) & $FFFF
