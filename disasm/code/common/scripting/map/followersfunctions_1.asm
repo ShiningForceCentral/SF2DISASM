@@ -6,9 +6,9 @@
 
 InitializeFollowerEntities:
                 
-                cmpi.b  #$2E,((CURRENT_MAP-$1000000)).w ; new granseal headquarters
+                cmpi.b  #$2E,((CURRENT_MAP-$1000000)).w  ; new granseal headquarters
                 beq.w   return_44336    ; HARDCODED maps with no followers
-                cmpi.b  #$25,((CURRENT_MAP-$1000000)).w ; nazca ship headquarters
+                cmpi.b  #$25,((CURRENT_MAP-$1000000)).w  ; nazca ship headquarters
                 beq.w   return_44336
                 movem.l a6,-(sp)
                 lea     Followers(pc), a4
@@ -34,9 +34,9 @@ loc_442D2:
                 move.w  d0,-(sp)
                 clr.w   d0
                 move.b  1(a4),d0
-                cmpi.b  #COM_ALLIES_NUM,d0; HARDCODED max force member index
+                cmpi.b  #COM_ALLIES_NUM,d0 ; HARDCODED max force member index
                 bcc.s   loc_44302
-                bsr.w   GetForceMemberSpriteIdx
+                bsr.w   GetAllyMapSprite
                 bra.s   loc_44308
 loc_44302:
                 

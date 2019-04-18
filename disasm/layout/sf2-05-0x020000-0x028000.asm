@@ -55,11 +55,20 @@ j_EndGame:
 j_SuspendGame:                
                 jmp     SuspendGame(pc)
                 include "code\common\menus\shop\shopactions.asm"    ; Shop functions
-                include "code\common\menus\church\churchactions.asm"    ; Church functions
+                include "data\stats\items\shopdefs.asm"    ; Shop definitions
+                include "code\common\menus\church\churchactions_1.asm"    ; Church functions
+                include "data\stats\allies\promotions.asm"    ; Promotions
+                include "code\common\menus\church\churchactions_2.asm"    ; Church functions
                 include "code\common\menus\main\mainactions.asm"    ; Main menu functions
                 include "code\common\menus\blacksmith\blacksmithactions.asm"    ; Blacksmith functions
-                include "code\common\menus\caravan\caravanactions.asm"    ; Caravan functions
-                include "code\common\stats\items\itemactions.asm"    ; Item functions
+                include "data\stats\allies\classes\mithrilweaponclasses.asm"    ; Mithril weapon class lists
+                include "data\stats\items\mithrilweapons.asm"    ; Mithril weapon lists
+                include "code\common\menus\caravan\caravanactions_1.asm"    ; Caravan functions
+                include "data\stats\items\specialcaravandescriptions.asm"    ; Special Caravan descriptions
+                include "code\common\menus\caravan\caravanactions_2.asm"    ; Caravan functions
+                include "code\common\stats\items\itemactions_1.asm"    ; Item functions
+                include "data\stats\items\usableoutsidebattleitems.asm"    ; Usable outside battle items
+                include "code\common\stats\items\itemactions_2.asm"    ; Item functions
                 include "code\gameflow\battle\battlefunctions_0.asm"    ; Battle functions
                 include "code\gameflow\exploration\explorationfunctions_0.asm"    ; Exploration functions
                 include "data\stats\items\chestgoldamounts.asm"    ; Chest gold amounts

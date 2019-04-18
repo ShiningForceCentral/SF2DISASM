@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\shop\shopactions.asm :
-; 0x20064..0x20A02 : Shop functions
+; 0x20064..0x20878 : Shop functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -234,7 +234,7 @@ loc_202F4:
                 lsr.l   #2,d0
                 move.l  d0,-8(a6)
                 move.b  -$14(a6),d1
-                andi.b  #ITEMTYPE_MASK_UNSELLABLE,d1
+                andi.b  #ITEMTYPE_UNSELLABLE,d1
                 cmpi.b  #0,d1
                 beq.s   loc_20364
                 txt     $B4             ; "{CLEAR}Sorry, I can't buy that....{W2}"
@@ -243,7 +243,7 @@ loc_20364:
                 
                 move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
                 move.b  -$14(a6),d1
-                andi.b  #ITEMTYPE_MASK_RARE,d1
+                andi.b  #ITEMTYPE_RARE,d1
                 cmpi.b  #0,d1
                 beq.s   byte_20384      
                 move.w  #1,-$16(a6)
@@ -673,7 +673,7 @@ loc_2084C:
 GetCurrentShopDefAddress:
                 
                 movem.l d0/d7,-(sp)
-                lea     ShopItems(pc), a0
+                lea     ShopDefs(pc), a0
                 clr.w   d7
                 move.b  (CURRENT_SHOP_INDEX).l,d7
                 subq.b  #1,d7
@@ -691,34 +691,3 @@ loc_20872:
 
 	; End of function GetCurrentShopDefAddress
 
-ShopItems:      dc.b 5, 57, 72, 33, 85, 103
-                dc.b 7, 57, 72, 73, 33, 85, 86, 103
-                dc.b 9, 57, 58, 73, 74, 33, 34, 85, 86, 103
-                dc.b 11, 57, 58, 73, 74, 33, 34, 85, 86, 103, 104, 45
-                dc.b 11, 58, 59, 73, 74, 33, 34, 86, 87, 103, 104, 45
-                dc.b 12, 58, 59, 74, 75, 34, 35, 86, 87, 104, 105, 45, 46
-                dc.b 12, 59, 60, 74, 75, 35, 36, 88, 89, 105, 106, 46, 47
-                dc.b 6, 62, 37, 76, 48, 90, 26
-                dc.b 10, 62, 63, 77, 38, 48, 49, 90, 91, 26, 27
-                dc.b 10, 62, 63, 77, 78, 38, 48, 49, 91, 92, 27
-                dc.b 10, 63, 64, 77, 78, 38, 49, 50, 91, 92, 27
-                dc.b 12, 63, 64, 78, 79, 38, 39, 49, 50, 91, 92, 27, 28
-                dc.b 12, 63, 64, 78, 79, 38, 39, 49, 50, 91, 92, 28, 29
-                dc.b 12, 63, 64, 78, 79, 38, 39, 49, 50, 91, 92, 28, 29
-                dc.b 12, 63, 64, 78, 79, 38, 39, 49, 50, 91, 92, 28, 29
-                dc.b 4, 0, 1, 3, 4
-                dc.b 4, 0, 1, 3, 4
-                dc.b 4, 0, 1, 3, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-                dc.b 6, 0, 1, 2, 3, 5, 4
-DebugShop:      incbin "data/stats/items/debugshop.bin"

@@ -9,7 +9,7 @@ abcs_battle36:  textCursor $B89
                 setPos $7,10,19,DOWN
                 setActscriptWait $1F,eas_Init
                 setPos $1F,12,19,DOWN
-                jumpIfFlagClear $4C,cs_4D9F0; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4D9F0 ; Zynk is a follower
                 setActscriptWait $1A,eas_Init
                 setPos $1A,63,62,DOWN
 cs_4D9F0:       animEntityFX $80,6

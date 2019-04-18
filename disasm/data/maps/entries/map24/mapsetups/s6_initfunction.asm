@@ -66,7 +66,7 @@ loc_59CB2:
                 txt     $1DD            ; "Congratulations!{N}You made it!"
                 move.l  d0,((SPECIAL_BATTLE_RECORD-$1000000)).w
                 sndCom  MUSIC_ITEM
-                jsr     j_FadeOut_WaitForP1Input; fade out music and wait for P2 input ?!
+                jsr     j_FadeOut_WaitForP1Input ; fade out music and wait for P2 input ?!
                 bra.s   byte_59CF4      
 byte_59CF0:
                 

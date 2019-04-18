@@ -12,7 +12,7 @@ bbcs_08:        textCursor $99D
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                jumpIfFlagSet $6,cs_4A994; Kiwi joined
+                jumpIfFlagSet $6,cs_4A994 ; Kiwi joined
                 setPos $6,63,63,DOWN
 cs_4A994:       playSound MUSIC_MAIN_THEME
                 fadeInB

@@ -1216,7 +1216,7 @@ sub_10748:
                 move.w  (a0,d0.w),d1
                 cmpi.w  #ICONIDX_UNARMED,d1
                 bne.s   loc_10798
-                move.w  #ITEMIDX_NOTHING,((word_FFB18C-$1000000)).w
+                move.w  #ITEM_NOTHING,((word_FFB18C-$1000000)).w
                 move.w  -$C(a6),d0
                 move.w  #$903,d1
                 jsr     (GetWindowTileAddress).w
@@ -1439,7 +1439,7 @@ loc_10930:
 LoadIHighlightableSpellIcon:
                 
                 andi.w  #SPELL_MASK_IDX,d0
-                cmpi.w  #SPELLIDX_NOTHING,d0
+                cmpi.w  #SPELL_NOTHING,d0
                 bne.s   loc_10950
                 move.w  #ICONIDX_NOTHING,d0
                 bra.s   loc_10954
@@ -1892,7 +1892,7 @@ loc_10E18:
 	; End of function sub_10DE2
 
 DiamondMenuLayout:
-                incbin "data/graphics/tech/menus/diamondmenulayout.bin"
+                incbin "data/graphics/tech/menus/diamondmenulayout.bin" 
                                                         ; tile layout for diamond menus
 UnidentifiedLayout01:
                 incbin "data/graphics/tech/menus/unidentifiedlayout01.bin"
@@ -3272,21 +3272,21 @@ BuildMemberStatsScreen:
                 clr.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
                 move.w  #WINDOW_MEMBER_STATS_SIZE,d0
                 move.w  #WINDOW_MEMBER_STATS_DEST,d1
-                jsr     (CreateWindow).w; stats window, on the right
+                jsr     (CreateWindow).w ; stats window, on the right
                 move.w  d0,-4(a6)
                 move.w  #$80A,d0
                 move.w  #WINDOW_MEMBER_PORTRAIT_DEST,d1
-                jsr     (CreateWindow).w; portrait, upper left
+                jsr     (CreateWindow).w ; portrait, upper left
                 move.w  d0,-6(a6)
                 addq.w  #1,d0
                 move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 move.w  #WINDOW_MEMBER_KD_SIZE,d0
                 move.w  #WINDOW_MEMBER_KD_DEST,d1
-                jsr     (CreateWindow).w; kills/defeat, middle left
+                jsr     (CreateWindow).w ; kills/defeat, middle left
                 move.w  d0,-8(a6)
                 move.w  #WINDOW_MEMBER_GOLD_SIZE,d0
                 move.w  #WINDOW_MEMBER_GOLD_DEST,d1
-                jsr     (CreateWindow).w; gold, bottom left
+                jsr     (CreateWindow).w ; gold, bottom left
                 move.w  d0,-$A(a6)
                 move.w  -2(a6),d0
                 bsr.w   GetPortraitIdx  
@@ -3384,7 +3384,7 @@ loc_11D6C:
                 bne.s   loc_11DBC
                 clr.b   ((NUM_SPRITES_TO_LOAD-$1000000)).w
                 move.w  -2(a6),d0
-                jsr     j_GetForceMemberSpriteIdx
+                jsr     j_GetAllyMapSprite
                 clr.w   d0
                 moveq   #3,d1
                 moveq   #$FFFFFFFF,d2
@@ -3453,7 +3453,7 @@ loc_11E54:
                 clr.w   d0
                 tst.b   ((PLAYER_TYPE-$1000000)).w
                 bne.s   loc_11E74
-                jsr     j_GetForceMemberSpriteIdx
+                jsr     j_GetAllyMapSprite
                 bra.s   loc_11E82
 loc_11E74:
                 
@@ -3480,7 +3480,7 @@ loc_11E94:
                 tst.w   d1
                 bne.s   loc_11EBA
                 clr.w   d0
-                jsr     j_GetForceMemberSpriteIdx
+                jsr     j_GetAllyMapSprite
                 clr.w   d0
                 clr.w   d1
                 move.b  $10(a0),d1
@@ -3922,7 +3922,7 @@ loc_1234A:
                 move.w  #3,d1
                 sub.w   d6,d1
                 jsr     j_GetItemAndNumberOfItems
-                cmpi.b  #ITEMIDX_NOTHING,d1
+                cmpi.b  #ITEM_NOTHING,d1
                 beq.w   loc_123F2
                 bsr.w   CopyMemberScreenIconsToVDPTileOrder
                 movem.w d0-d1/d6-d7,-(sp)
@@ -4007,7 +4007,7 @@ loc_1244E:
                 sub.w   d6,d1
                 move.w  -2(a6),d0
                 jsr     j_GetSpellAndNumberOfSpells
-                cmpi.b  #SPELLIDX_NOTHING,d1
+                cmpi.b  #SPELL_NOTHING,d1
                 beq.w   loc_124BC
                 movem.l d1/a0,-(sp)
                 jsr     j_GetSpellDefAddress
@@ -4043,7 +4043,7 @@ loc_124BE:
                 sub.w   d6,d1
                 move.w  -2(a6),d0
                 jsr     j_GetItemAndNumberOfItems
-                cmpi.b  #ITEMIDX_NOTHING,d1
+                cmpi.b  #ITEM_NOTHING,d1
                 beq.w   loc_12556
                 move.l  a0,-(sp)
                 move.w  d1,-(sp)
@@ -4203,8 +4203,7 @@ return_1264C:
 	; End of function GetPortraitIdx
 
 WindowBorderTiles:
-                incbin "data/graphics/tech/windowbordertiles.bin"
-                                                        ; compressed
+                incbin "data/graphics/tech/windowbordertiles.bin" ; compressed
 PortraitWindowLayout:
                 incbin "data/graphics/tech/windowlayouts/portraitwindowlayout.bin"
 AllyKillDefeatWindowLayout:
@@ -4902,7 +4901,7 @@ loc_1302C:
 loc_13030:
                 
                 clr.b   ((byte_FFB13C-$1000000)).w
-                move.w  #ITEMIDX_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
                 move.b  #2,((word_FFAF8C-$1000000)).w
                 cmpi.b  #2,((word_FFB13D-$1000000)).w
                 bne.s   loc_1304C
@@ -6008,7 +6007,7 @@ loc_13AFE:
                 moveq   #3,d1
                 sub.w   d6,d1
                 jsr     j_GetItemAndNumberOfItems
-                cmpi.b  #ITEMIDX_NOTHING,d1
+                cmpi.b  #ITEM_NOTHING,d1
                 beq.w   return_13B46
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
@@ -6057,7 +6056,7 @@ LoadSpellIcon:
                 
                 andi.w  #SPELL_MASK_IDX,d1
                 movea.l (p_Icons).l,a0
-                cmpi.w  #SPELLIDX_NOTHING,d1
+                cmpi.w  #SPELL_NOTHING,d1
                 bne.s   loc_13B7E
                 move.w  #ICONIDX_NOTHING,d1
                 bra.s   LoadIcon
@@ -9332,8 +9331,7 @@ loc_15674:
                 dbf     d7,loc_15674
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
-                addq.b  #6,((INPUT_REPEAT_DELAYER-$1000000)).w
-                                                        ; Allow hold input to be applied directly. ... why ?
+                addq.b  #6,((INPUT_REPEAT_DELAYER-$1000000)).w ; Allow hold input to be applied directly. ... why ?
                 movea.l a1,a0
                 lea     ($F800).l,a1
                 move.w  #$400,d0

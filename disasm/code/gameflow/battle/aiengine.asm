@@ -646,8 +646,7 @@ loc_E40A:
                 bra.w   loc_E490
 loc_E45E:
                 
-                lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a1
-                                                        ; enemy 0 has less than half HP, and we have a healing rain, so use it
+                lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a1 ; enemy 0 has less than half HP, and we have a healing rain, so use it
                 move.w  #2,(a1)
                 clr.w   d0
                 move.b  -3(a6),d0

@@ -118,7 +118,7 @@ loc_258CE:
                 
                 move.b  d3,ENTITYDEF_OFFSET_FACING(a0)
                 clr.w   d0
-                jsr     j_GetForceMemberSpriteIdx
+                jsr     j_GetAllyMapSprite
                 move.w  d3,d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
@@ -169,8 +169,7 @@ WaitForEvent:
                 
                 move.w  ((MAP_EVENT_TYPE-$1000000)).w,d0
                 bne.s   loc_25930       
-                move.b  #0,((VIEW_TARGET_ENTITY-$1000000)).w
-                                                        ; Follow main entity
+                move.b  #0,((VIEW_TARGET_ENTITY-$1000000)).w ; Follow main entity
                 clr.w   d0
                 jsr     j_SetControlledEntityActScript
 loc_25930:
@@ -199,7 +198,7 @@ ProcessMapEvent:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
                 subq.w  #1,d0
-                beq.w   ProcessMapEventType1_Warp; Warp
+                beq.w   ProcessMapEventType1_Warp ; Warp
                 subq.w  #1,d0
                 beq.w   ProcessMapEventType2_GetIntoCaravan
                 subq.w  #1,d0
@@ -235,25 +234,20 @@ ProcessMapEventType1_Warp:
                 clr.w   d2
                 clr.w   d3
                 clr.w   d4
-                move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0
-                                                        ; map
+                move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0 ; map
                 bsr.w   UpdatePlayerPosFromMapEvent
-                move.b  ((MAP_EVENT_PARAM_3-$1000000)).w,d5
-                                                        ; X
+                move.b  ((MAP_EVENT_PARAM_3-$1000000)).w,d5 ; X
                 blt.s   loc_259BA       
                 move.b  d5,d1
 loc_259BA:
                 
-                move.b  ((MAP_EVENT_PARAM_4-$1000000)).w,d5
-                                                        ; Y
+                move.b  ((MAP_EVENT_PARAM_4-$1000000)).w,d5 ; Y
                 blt.s   loc_259C2       
                 move.b  d5,d2
 loc_259C2:
                 
-                move.b  ((MAP_EVENT_PARAM_5-$1000000)).w,d3
-                                                        ; Facing
-                move.b  ((MAP_EVENT_PARAM_1-$1000000)).w,d4
-                                                        ; 0
+                move.b  ((MAP_EVENT_PARAM_5-$1000000)).w,d3 ; Facing
+                move.b  ((MAP_EVENT_PARAM_1-$1000000)).w,d4 ; 0
                 rts                     ; Directly goes back to MainLoop
 loc_259CC:
                 
@@ -304,11 +298,11 @@ UpdatePlayerPosFromMapEvent:
                 move.w  (a0),d1         ; X
                 ext.l   d1
                 divs.w  #$180,d1
-                move.w  ENTITYDEF_OFFSET_Y(a0),d2; Y
+                move.w  ENTITYDEF_OFFSET_Y(a0),d2 ; Y
                 ext.l   d2
                 divs.w  #$180,d2
                 clr.w   d3
-                move.b  ENTITYDEF_OFFSET_FACING(a0),d3; Facing
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d3 ; Facing
                 movea.l (sp)+,a0
                 rts
 
@@ -381,10 +375,8 @@ ProcessMapEventType6_ZoneEvent:
                 
                 clr.w   d0
                 jsr     j_ApplyInitActscript
-                move.w  ((MAP_EVENT_PARAM_1-$1000000)).w,d1
-                                                        ; X
-                move.w  ((MAP_EVENT_PARAM_3-$1000000)).w,d2
-                                                        ; Y
+                move.w  ((MAP_EVENT_PARAM_1-$1000000)).w,d1 ; X
+                move.w  ((MAP_EVENT_PARAM_3-$1000000)).w,d2 ; Y
                 jsr     j_RunMapSetupZoneEvent
                 rts
 

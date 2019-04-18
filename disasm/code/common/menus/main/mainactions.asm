@@ -438,7 +438,7 @@ loc_21856:
                 bne.w   loc_21898
                 bsr.w   sub_219EC       
                 move.b  #3,((byte_FFB13C-$1000000)).w
-                move.w  #ITEMIDX_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_21880
@@ -456,7 +456,7 @@ loc_21898:
                 
                 bsr.w   sub_219EC       
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEMIDX_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_218BA

@@ -11,7 +11,7 @@ bbcs_38:        textCursor $BBB
                 setPos $1F,15,8,DOWN
                 setActscriptWait $1E,eas_Init
                 setPos $1E,14,8,DOWN
-                jumpIfFlagClear $4C,cs_4DDFE; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4DDFE ; Zynk is a follower
                 setActscriptWait $1A,eas_Init
                 setPos $1A,63,63,DOWN
 cs_4DDFE:       playSound MUSIC_BATTLE_THEME_1

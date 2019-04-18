@@ -15,8 +15,8 @@ ms_map22_Entities:
                 msFixedEntity 33, 24, LEFT, MAPSPRITE_SOLDIER1, eas_Init
                 msFixedEntity 24, 5, DOWN, MAPSPRITE_KING, eas_Init
                 msFixedEntity 26, 5, DOWN, MAPSPRITE_QUEEN, eas_Init
-                msFixedEntity 22, 5, DOWN, MAPSPRITE_EVIL_BISHOP, eas_Init
-                msFixedEntity 28, 5, DOWN, MAPSPRITE_EVIL_BISHOP, eas_Init
+                msFixedEntity 22, 5, DOWN, MAPSPRITE_BISHOP, eas_Init
+                msFixedEntity 28, 5, DOWN, MAPSPRITE_BISHOP, eas_Init
                 msFixedEntity 20, 5, DOWN, MAPSPRITE_KNIGHT, eas_Init
                 msFixedEntity 30, 5, DOWN, MAPSPRITE_KNIGHT, eas_Init
                 msFixedEntity 18, 5, DOWN, MAPSPRITE_ROOK, eas_Init

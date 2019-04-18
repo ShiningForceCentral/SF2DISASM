@@ -219,13 +219,13 @@ Map19_DefaultEntityEvent:
 cs_52F0C:       textCursor $23F
                 nextText $0,$8C         ; "I didn't want to involve{N}you, my children...but{N}this might be a good{W2}{N}opportunity for you to{N}learn how to properly{N}serve your King.{W2}{N}Are you ready, {LEADER}?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_52F40; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_52F40 ; YES/NO prompt answer
                 nextSingleText $0,$8C   ; "Then, I'll wait for you here.{W2}{N}We have to hurry.{N}Come back when you're{N}ready.{W1}"
                 csc_end
 cs_52F24:       textCursor $241
                 nextText $0,$8C         ; "Are you ready, {LEADER}?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_52F40; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_52F40 ; YES/NO prompt answer
                 textCursor $240
                 nextSingleText $0,$8C   ; "Then, I'll wait for you here.{W2}{N}We have to hurry.{N}Come back when you're{N}ready.{W1}"
                 csc_end

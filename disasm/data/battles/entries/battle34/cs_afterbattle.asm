@@ -9,7 +9,7 @@ abcs_battle34:  textCursor $B5F
                 setPos $7,9,11,UP
                 setActscriptWait $1F,eas_Init
                 setPos $1F,5,11,UP
-                jumpIfFlagClear $4C,cs_4D502; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4D502 ; Zynk is a follower
                 setActscriptWait $1A,eas_Init
                 setPos $1A,8,12,UP
 cs_4D502:       stopEntity $80
@@ -40,7 +40,7 @@ cs_4D502:       stopEntity $80
                 setActscript $80,eas_AnimSpeedx2
                 setActscript $0,eas_Jump
                 setActscript $7,eas_Jump
-                jumpIfFlagClear $4C,cs_4D592; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4D592 ; Zynk is a follower
                 setActscript $1A,eas_Jump
 cs_4D592:       setActscriptWait $1F,eas_Jump
                 nextSingleText $0,$80   ; "Geshp!{W1}"
@@ -59,7 +59,7 @@ cs_4D592:       setActscriptWait $1F,eas_Jump
                 nextSingleText $0,$7    ; "Prism Flowers?{N}What are they?{W1}"
                 setFacing $1F,RIGHT
                 nextSingleText $0,$1F   ; "I have no idea, but it's{N}probably a trap.{W1}"
-                jumpIfFlagClear $4C,cs_4D620; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4D620 ; Zynk is a follower
                 customActscriptWait $1A
                  ac_setSpeed 24,24      ;   
                  ac_jump eas_Idle       ;   
@@ -88,7 +88,7 @@ cs_4D620:       textCursor $B74
                  moveUp 1
                 endActions
                 setFacing $7,LEFT
-                jumpIfFlagClear $4C,cs_4D654; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4D654 ; Zynk is a follower
                 entityActionsWait $1A
                  moveRight 1
                 endActions
@@ -102,7 +102,7 @@ cs_4D654:       nod $0
                 followEntity $82,$0,$2
                 followEntity $7,$82,$1
                 followEntity $1F,$82,$3
-                jumpIfFlagClear $4C,cs_4D692; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4D692 ; Zynk is a follower
                 followEntity $1A,$82,$2
 cs_4D692:       csc_end
 

@@ -25,8 +25,7 @@ GetEntityPortraitAndSpeechSfx:
                 clr.w   d1
                 clr.w   d2
                 bsr.w   GetEntityAddressFromPlayableCharacterIdx
-                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0
-                                                        ; sprite number
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0 ; sprite number
                 lea     SpriteDialogProperties(pc), a0
 loc_45650:
                 
@@ -51,7 +50,7 @@ loc_45674:
 	; End of function GetEntityPortraitAndSpeechSfx
 
 SpriteDialogProperties:
-                incbin "data/spritedialogdefs.bin"; bowie
+                incbin "data/spritedialogdefs.bin" ; bowie
 
 ; =============== S U B R O U T I N E =======================================
 

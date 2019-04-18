@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\blacksmith\blacksmithactions.asm :
-; 0x21A3A..0x21FD2 : Blacksmith functions
+; 0x21A3A..0x21F62 : Blacksmith functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -234,7 +234,7 @@ byte_21CDE:
                 txt     $C7             ; "What kind of material do you{N}have?{D1}"
                 clsTxt
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEMIDX_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_21E30
@@ -250,7 +250,7 @@ byte_21D1A:
                 txt     $C9             ; "{CLEAR}Whose weapon should I{N}make?{D1}"
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                move.w  #ITEMIDX_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_21CDE      
@@ -482,7 +482,3 @@ loc_21F5C:
 
 	; End of function PickMithrilWeapon
 
-MithrilWeaponClassLists:
-                incbin "data/stats/allies/classes/mithrilweaponclasses.bin"
-MithrilWeaponLists:
-                incbin "data/stats/items/mithrilweapons.bin"

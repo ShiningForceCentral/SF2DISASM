@@ -1,35 +1,272 @@
 
 ; ASM FILE data\stats\allies\classes\classdefs.asm :
 ; 0x1EE890..0x1EE930 : Class definitions
-ClassDefs:      classDef 6, 0, 16, 3    ; SDMN
-                classDef 7, 0, 32, 3    ; KNTE
-                classDef 5, 0, 16, 3    ; WARR
-                classDef 5, 0, 176, 3   ; MAGE
-                classDef 5, 0, 192, 3   ; PRST
-                classDef 5, 0, 128, 3   ; ACHR
-                classDef 6, 0, 80, 3    ; BDMN
-                classDef 5, 0, 48, 3    ; WFMN
-                classDef 6, 0, 144, 3   ; RNGR
-                classDef 6, 0, 96, 3    ; PHNK
-                classDef 7, 0, 16, 19   ; THIF
-                classDef 5, 0, 48, 3    ; TORT
-                classDef 6, 0, 16, 147  ; HERO
-                classDef 7, 0, 32, 67   ; PLDN
-                classDef 7, 0, 80, 67   ; PGNT
-                classDef 5, 0, 16, 67   ; GLDT
-                classDef 6, 0, 16, 68   ; BRN
-                classDef 5, 0, 176, 67  ; WIZ
-                classDef 5, 0, 176, 67  ; SORC
-                classDef 5, 0, 192, 67  ; VICR
-                classDef 5, 0, 16, 131  ; MMNK
-                classDef 6, 0, 128, 67  ; SNIP
-                classDef 5, 0, 64, 67   ; BRGN
-                classDef 6, 0, 80, 67   ; BDBT
-                classDef 5, 0, 48, 131  ; WFBR
-                classDef 6, 0, 144, 67  ; BWNT
-                classDef 7, 32896, 80, 67; PHNX
-                classDef 7, 0, 48, 148  ; NINJ
-                classDef 7, 43520, 96, 67; MNST
-                classDef 4, 16640, 16, 67; RBT
-                classDef 4, 21888, 16, 67; GLM
-                classDef 6, 0, 16, 132  ; RDBN
+ClassDefs:      mov 6                   ; SDMN
+                resistance 0
+                moveType MOVETYPE_REGULAR
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 7                   ; KNTE
+                resistance 0
+                moveType MOVETYPE_CENTAUR
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 5                   ; WARR
+                resistance 0
+                moveType MOVETYPE_REGULAR
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 5                   ; MAGE
+                resistance 0
+                moveType MOVETYPE_MAGE
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 5                   ; PRST
+                resistance 0
+                moveType MOVETYPE_HEALER
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 5                   ; ACHR
+                resistance 0
+                moveType MOVETYPE_ARCHER
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 6                   ; BDMN
+                resistance 0
+                moveType MOVETYPE_FLYING
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 5                   ; WFMN
+                resistance 0
+                moveType MOVETYPE_STEALTH
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 6                   ; RNGR
+                resistance 0
+                moveType MOVETYPE_CENTAUR_ARCHER
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 6                   ; PHNK
+                resistance 0
+                moveType MOVETYPE_HOVERING
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 7                   ; THIF
+                resistance 0
+                moveType MOVETYPE_REGULAR
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN16|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 5                   ; TORT
+                resistance 0
+                moveType MOVETYPE_STEALTH
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN32
+                    
+                mov 6                   ; HERO
+                resistance 0
+                moveType MOVETYPE_REGULAR
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN16|&
+                    PROWESS_COUNTER_1IN8
+                    
+                mov 7                   ; PLDN
+                resistance 0
+                moveType MOVETYPE_CENTAUR
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 7                   ; PGNT
+                resistance 0
+                moveType MOVETYPE_FLYING
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 5                   ; GLDT
+                resistance 0
+                moveType MOVETYPE_REGULAR
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 6                   ; BRN
+                resistance 0
+                moveType MOVETYPE_REGULAR
+                prowess &
+                    PROWESS_CRITICAL150_1IN8|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 5                   ; WIZ
+                resistance 0
+                moveType MOVETYPE_MAGE
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 5                   ; SORC
+                resistance 0
+                moveType MOVETYPE_MAGE
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 5                   ; VICR
+                resistance 0
+                moveType MOVETYPE_HEALER
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 5                   ; MMNK
+                resistance 0
+                moveType MOVETYPE_REGULAR
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN8
+                    
+                mov 6                   ; SNIP
+                resistance 0
+                moveType MOVETYPE_ARCHER
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 5                   ; BRGN
+                resistance 0
+                moveType MOVETYPE_BRASS_GUNNER
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 6                   ; BDBT
+                resistance 0
+                moveType MOVETYPE_FLYING
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 5                   ; WFBR
+                resistance 0
+                moveType MOVETYPE_STEALTH
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN8
+                    
+                mov 6                   ; BWNT
+                resistance 0
+                moveType MOVETYPE_CENTAUR_ARCHER
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 7                   ; PHNX
+                resistance &
+                    FIRE_RESIST_MAJOR|&
+                    STATUS_RESIST_MAJOR
+                moveType MOVETYPE_FLYING
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 7                   ; NINJ
+                resistance 0
+                moveType MOVETYPE_STEALTH
+                prowess &
+                    PROWESS_CRITICAL150_1IN8|&
+                    PROWESS_DOUBLE_1IN16|&
+                    PROWESS_COUNTER_1IN8
+                    
+                mov 7                   ; MNST
+                resistance &
+                    UNDEFINED1_RESIST_MAJOR|&
+                    UNDEFINED2_RESIST_MAJOR|&
+                    UNDEFINED3_RESIST_MAJOR|&
+                    STATUS_RESIST_MAJOR
+                moveType MOVETYPE_HOVERING
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 4                   ; RBT
+                resistance &
+                    UNDEFINED1_RESIST_MINOR|&
+                    STATUS_RESIST_MINOR
+                moveType MOVETYPE_REGULAR
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 4                   ; GLM
+                resistance &
+                    FIRE_RESIST_MAJOR|&
+                    UNDEFINED1_RESIST_MINOR|&
+                    UNDEFINED2_RESIST_MINOR|&
+                    UNDEFINED3_RESIST_MINOR|&
+                    STATUS_RESIST_MINOR
+                moveType MOVETYPE_REGULAR
+                prowess &
+                    PROWESS_CRITICAL125_1IN16|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN16
+                    
+                mov 6                   ; RDBN
+                resistance 0
+                moveType MOVETYPE_REGULAR
+                prowess &
+                    PROWESS_CRITICAL150_1IN8|&
+                    PROWESS_DOUBLE_1IN32|&
+                    PROWESS_COUNTER_1IN8
+                    

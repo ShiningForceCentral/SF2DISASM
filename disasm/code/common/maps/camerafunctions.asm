@@ -88,7 +88,7 @@ loc_4688:
                 clr.w   ((word_FFA828-$1000000)).w
 loc_468C:
                 
-                move.w  ((word_FFA828-$1000000)).w,d7; No entity to follow
+                move.w  ((word_FFA828-$1000000)).w,d7 ; No entity to follow
                 cmpi.w  #6,d7
                 ble.s   loc_469C
                 move.w  #$20,d7 

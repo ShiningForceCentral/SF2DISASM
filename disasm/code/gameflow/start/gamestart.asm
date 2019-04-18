@@ -182,6 +182,8 @@ loc_3DE:
 InitZ80:
                 
                 movem.l d0-a1,-(sp)
+loc_3FA:
+                
                 move.w  #$100,(Z80BusReq).l
                 move.w  #$100,(Z80BusReset).l
                 lea     (Z80_Memory).l,a0

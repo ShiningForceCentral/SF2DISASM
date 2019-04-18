@@ -17,7 +17,7 @@ ApplyPositionsAfterEnemyLeaderDies:
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.w   loc_47E66
-                lea     AfterBattlePositions(pc), a0; if Bowie alive and enemy leader dead
+                lea     AfterBattlePositions(pc), a0 ; if Bowie alive and enemy leader dead
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 loc_47DCA:
@@ -28,12 +28,12 @@ loc_47DCA:
                 beq.w   loc_47DEE       ; entry first word is battle index
                 adda.w  #6,a0           ; 6-byte entries ?
                 bra.s   loc_47DCA
-                move.w  #$80FF,(DEAD_COMBATANTS_LIST).l; dead code ?
+                move.w  #$80FF,(DEAD_COMBATANTS_LIST).l ; dead code ?
                 move.w  #1,(DEAD_COMBATANTS_LIST_LENGTH).l
 loc_47DEE:
                 
                 moveq   #COM_ALLY_START,d0
-                moveq   #COM_ALLIES_COUNTER,d7; HARDCODED $1D limit for number of allies ?
+                moveq   #COM_ALLIES_COUNTER,d7 ; HARDCODED $1D limit for number of allies ?
 loc_47DF2:
                 
                 move.w  #$FFFF,d1

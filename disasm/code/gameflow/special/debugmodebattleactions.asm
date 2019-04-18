@@ -29,7 +29,7 @@ rjt_DebugModeBattleActions:
                 dc.w loc_9B38-rjt_DebugModeBattleActions
 loc_9AD0:
                 
-                bsr.w   DebugModeSelectTargetEnemy; attack
+                bsr.w   DebugModeSelectTargetEnemy ; attack
                 move.w  d0,(a0)+
                 bra.w   loc_9B3E
 loc_9ADA:
@@ -76,8 +76,7 @@ loc_9B34:
                 bra.w   loc_9B3E
 loc_9B38:
                 
-                move.b  #$24,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; use prism laser
+                move.b  #$24,((CURRENT_BATTLE-$1000000)).w  ; use prism laser
 loc_9B3E:
                 
                 movem.l (sp)+,d0-d3/a0

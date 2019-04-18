@@ -8,9 +8,9 @@ bbcs_39:        textCursor $BD5
                 setPos $7,9,8,DOWN
                 setPos $1F,7,8,DOWN
                 setPos $1E,8,8,DOWN
-                jumpIfFlagClear $4C,cs_4E40C; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4E40C ; Zynk is a follower
                 setPos $1A,8,7,DOWN
-cs_4E40C:       jumpIfFlagClear $47,cs_4E41A; Lemon is a follower
+cs_4E40C:       jumpIfFlagClear $47,cs_4E41A ; Lemon is a follower
                 setPos $1C,63,62,DOWN
 cs_4E41A:       fadeInB
                 cameraSpeed $30
@@ -52,7 +52,7 @@ cs_4E41A:       fadeInB
 ce_4E4AC:       mainEntity 8,9,DOWN
                 entity 8,20,DOWN,MAPSPRITE_HYDRA,eas_Init
                 entity 7,23,UP,MAPSPRITE_CHAOS_WIZARD,eas_Init
-                entity 9,23,UP,148,eas_Init
+                entity 9,23,UP,MAPSPRITE_EVIL_BISHOP,eas_Init
                 entity 6,23,UP,MAPSPRITE_DARK_GUNNER,eas_Init
                 entity 10,23,UP,MAPSPRITE_CYCLOPS,eas_Init
                 dc.w $FFFF

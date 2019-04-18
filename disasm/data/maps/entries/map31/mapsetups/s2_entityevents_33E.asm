@@ -136,11 +136,11 @@ return_5D53E:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_4:
+nullsub_5D540:
                 
                 rts
 
-	; End of function nullsub_4
+	; End of function nullsub_5D540
 
 
 ; =============== S U B R O U T I N E =======================================

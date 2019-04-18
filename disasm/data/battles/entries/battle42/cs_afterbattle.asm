@@ -11,7 +11,7 @@ abcs_battle42:  textCursor $C22
                 setPos $1F,11,15,RIGHT
                 setActscriptWait $1C,eas_Init
                 setPos $1C,12,19,RIGHT
-                jumpIfFlagClear $4C,cs_4EF5E; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4EF5E ; Zynk is a follower
                 setActscriptWait $1A,eas_Init
                 setPos $1A,63,62,DOWN
 cs_4EF5E:       stopEntity $80

@@ -9,7 +9,7 @@ bbcs_34:        textCursor $B4F
                 setPos $7,30,28,LEFT
                 setActscriptWait $1F,eas_Init
                 setPos $1F,30,30,LEFT
-                jumpIfFlagClear $4C,cs_4D38E; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4D38E ; Zynk is a follower
                 setActscriptWait $1A,eas_Init
                 setPos $1A,31,29,LEFT
 cs_4D38E:       animEntityFX $81,6
@@ -25,7 +25,7 @@ cs_4D38E:       animEntityFX $81,6
                 entityActions $82
                  moveLeft 3
                 endActions
-                jumpIfFlagClear $4C,cs_4D3C6; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4D3C6 ; Zynk is a follower
                 entityActions $1A
                  moveLeft 3
                 endActions

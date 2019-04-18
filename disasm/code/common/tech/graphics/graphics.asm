@@ -468,11 +468,11 @@ nullsub_1A80:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_5:
+nullsub_1A82:
                 
                 rts
 
-	; End of function nullsub_5
+	; End of function nullsub_1A82
 
 
 ; =============== S U B R O U T I N E =======================================

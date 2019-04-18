@@ -8,7 +8,7 @@ loc_239C8:
                 
                 clr.w   d0
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
-                cmpi.w  #ITEMIDX_CHEST_GOLD_AMOUNTS_START,d2
+                cmpi.w  #ITEM_IDX_GOLD_CHESTS_START,d2
                 blt.s   loc_239EE
                 bsr.s   GetChestGoldAmount
                 move.l  d1,((TEXT_NUMBER-$1000000)).w

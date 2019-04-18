@@ -324,7 +324,7 @@ loc_4F06:
 	; End of function VInt_UpdateEntities
 
 rjt_EntityScriptCommands:
-                dc.w esc00_wait-rjt_EntityScriptCommands; esc for Entity Script Command
+                dc.w esc00_wait-rjt_EntityScriptCommands ; esc for Entity Script Command
                 dc.w esc01_waitUntilDestination-rjt_EntityScriptCommands
                 dc.w esc02_-rjt_EntityScriptCommands
                 dc.w esc03_-rjt_EntityScriptCommands
@@ -434,7 +434,7 @@ esc01_waitUntilDestination:
                 
                 move.w  (a0),d0         ; pos
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
-                move.w  ENTITYDEF_OFFSET_XDEST(a0),d2; dest
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),d2 ; dest
                 move.w  ENTITYDEF_OFFSET_YDEST(a0),d3
                 move.w  d2,d4
                 move.w  d3,d5
@@ -1464,7 +1464,7 @@ esc09_:
                 movem.l d2-d3,-(sp)
                 move.w  2(a1),d2
                 move.w  4(a1),d3
-                move.b  ENTITYDEF_OFFSET_FACING(a0),d0; facing
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d0 ; facing
                 move.w  d0,d1
                 andi.w  #4,d0
                 andi.w  #3,d1
@@ -1518,7 +1518,7 @@ esc0E_:
                 lsl.w   #5,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a1
                 adda.w  d0,a1
-                move.b  ENTITYDEF_OFFSET_FACING(a1),d0; other entity facing
+                move.b  ENTITYDEF_OFFSET_FACING(a1),d0 ; other entity facing
                 move.w  d0,d1
                 andi.w  #4,d0
                 andi.w  #3,d1
@@ -1624,7 +1624,7 @@ esc0F_waitUntilOtherEntityReachesDest:
                 adda.w  d0,a0
                 move.w  (a0),d0         ; pos
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
-                move.w  ENTITYDEF_OFFSET_XDEST(a0),d2; dest
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),d2 ; dest
                 move.w  ENTITYDEF_OFFSET_YDEST(a0),d3
                 move.w  d2,d4
                 move.w  d3,d5
@@ -2177,9 +2177,9 @@ UpdateNextEntity:
 UpdateEntityData:
                 
                 move.w  (a0),d0         ; X position
-                move.w  ENTITYDEF_OFFSET_Y(a0),d1; Y position
-                move.w  ENTITYDEF_OFFSET_XDEST(a0),d2; X destination
-                move.w  ENTITYDEF_OFFSET_YDEST(a0),d3; Y destination
+                move.w  ENTITYDEF_OFFSET_Y(a0),d1 ; Y position
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),d2 ; X destination
+                move.w  ENTITYDEF_OFFSET_YDEST(a0),d3 ; Y destination
                 move.w  d2,d4           ; keep X destination
                 move.w  d3,d5           ; keep Y destination
                 sub.w   d0,d4           ; get X dest - X pos
@@ -2190,7 +2190,7 @@ UpdateEntityData:
                 movem.w d4-d5,-(sp)     ; keep dest
                 clr.w   d4
                 clr.w   d5
-                movem.w d0-d1/d6-d7,-(sp); keep pos
+                movem.w d0-d1/d6-d7,-(sp) ; keep pos
                 sub.w   d2,d0
                 beq.w   loc_5DD2
                 bpl.s   loc_5DA0        
@@ -2432,7 +2432,7 @@ loc_5F8E:
                 
                 cmpi.b  #$1E,ENTITYDEF_OFFSET_ANIMCOUNTER(a0)
                 ble.s   return_5F9A
-                clr.b   ENTITYDEF_OFFSET_ANIMCOUNTER(a0); reset animation counter if it reached max value
+                clr.b   ENTITYDEF_OFFSET_ANIMCOUNTER(a0) ; reset animation counter if it reached max value
 return_5F9A:
                 
                 rts
@@ -2786,7 +2786,7 @@ loc_6226:
                 add.w   d3,d1
 loc_622E:
                 
-                lea     MapOffsetHashTable(pc), a3; jump here if in battle
+                lea     MapOffsetHashTable(pc), a3 ; jump here if in battle
                 lea     (FF0000_RAM_START).l,a4
                 move.w  d0,d2
                 move.w  d1,d3

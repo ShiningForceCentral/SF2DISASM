@@ -9,7 +9,7 @@ bbcs_36:        textCursor $B82
                 setPos $7,18,0,DOWN
                 setActscriptWait $1F,eas_Init
                 setPos $1F,20,0,DOWN
-                jumpIfFlagClear $4C,cs_4D8D6; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4D8D6 ; Zynk is a follower
                 setActscriptWait $1A,eas_Init
                 setPos $1A,63,62,DOWN
 cs_4D8D6:       playSound MUSIC_BATTLE_THEME_1

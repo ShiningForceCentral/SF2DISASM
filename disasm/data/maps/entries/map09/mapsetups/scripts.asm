@@ -95,7 +95,7 @@ cs_569BC:       textCursor $566
                 nextText $C0,$B         ; "I'm the only one who can{N}drive it!{W2}"
                 nextText $C0,$B         ; "You are going to get the{N}Caravan, aren't you?!{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_56A82; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_56A82 ; YES/NO prompt answer
                 customActscriptWait $B
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
@@ -129,7 +129,7 @@ cs_56AE6:       textCursor $570
                 nextText $C0,$B         ; "You again?!{W1}"
                 nextText $C0,$B         ; "You changed your mind?{N}Hmmm....{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_56A82; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_56A82 ; YES/NO prompt answer
                 jump cs_56A70
 cs_56B02:       textCursor $583
                 setPriority $C,$FFFF

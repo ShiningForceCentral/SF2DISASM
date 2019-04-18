@@ -45,8 +45,7 @@ byte_7620:
                 
                 chkFlg  $40             ; Raft is unlocked
                 beq.s   loc_764A
-                conditionalPc lea,RaftResetMapCoordinates-4,a0
-                                                        ; Some egress locations imply to put the raft back in an initial place
+                conditionalPc lea,RaftResetMapCoordinates-4,a0 ; Some egress locations imply to put the raft back in an initial place
 loc_762A:
                 
                 addq.l  #4,a0

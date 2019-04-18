@@ -66,7 +66,7 @@ loc_280AA:
                 move.w  #$28,d0 
 loc_2812E:
                 
-                lea     SegaLogoColors+4(pc,d0.w),a0; lea     segaLogoColors(pc,d0.w),a0
+                lea     SegaLogoColors+4(pc,d0.w),a0 ; lea     segaLogoColors(pc,d0.w),a0
                 movem.l d0,-(sp)
                 lea     (PALETTE_1_BASE_02).l,a1
                 lea     (PALETTE_1_CURRENT_02).l,a2

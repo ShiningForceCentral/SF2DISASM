@@ -32,8 +32,8 @@ sub_44030:
                 jmp     sub_44BD6(pc)
 j_DebugMapScript:                
                 jmp     DebugMapScript(pc)
-j_nullsub_14:                
-                jmp     nullsub_14(pc)
+j_nullsub_4712A:                
+                jmp     nullsub_4712A(pc)
 j_ExecuteMapScript:                
                 jmp     ExecuteMapScript(pc)
 j_ExecuteBattleCutscene_Intro:                
@@ -94,8 +94,8 @@ j_RunMapSetupInitFunction:
                 jmp     RunMapSetupInitFunction(pc)
 sub_440AC:                
                 jmp     sub_441AA(pc)
-j_GetForceMemberSpriteIdx:                
-                jmp     GetForceMemberSpriteIdx(pc)
+j_GetAllyMapSprite:                
+                jmp     GetAllyMapSprite(pc)
 j_RunMapSetupAreaDescription:                
                 jmp     RunMapSetupAreaDescription(pc)
 sub_440B8:                
@@ -116,6 +116,10 @@ j_ClearEntities:
                 include "code\common\scripting\entity\entityfunctions_1.asm"    ; Entity functions
                 include "data\battles\global\battleneutralentities.asm"    ; Battle entities which are not force members or enemies
                 include "data\scripting\entity\eas_battleneutralentities.asm"    ; Entity actscripts for battle entities which are not force members or enemies
+                include "code\common\scripting\entity\getallymapsprite.asm"    ; Get ally map sprite ID function
+                include "data\stats\allies\allymapsprites.asm"    ; Ally map sprite IDs
+                include "code\common\scripting\entity\getcombatantmapsprite.asm"    ; Get combatant map sprite ID function
+                include "data\stats\enemies\enemymapsprites.asm"    ; Enemy map sprite IDs
                 include "code\common\scripting\entity\entityfunctions_2.asm"    ; Entity functions
                 include "data\scripting\entity\eas_main.asm"    ; Main entity actscripts
                 include "code\common\scripting\entity\entityfunctions_3.asm"    ; Entity functions

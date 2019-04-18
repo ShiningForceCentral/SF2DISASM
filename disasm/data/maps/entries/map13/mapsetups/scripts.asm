@@ -536,7 +536,7 @@ cs_58AE2:       textCursor $5ED
                 nextText $80,$7         ; "{LEADER}, will you take{N}"
                 nextText $80,$7         ; "him with us?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_58B7A; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_58B7A ; YES/NO prompt answer
                 nextText $0,$7          ; "I agree.  Our journey will{N}be too difficult on him,{N}as he is blind.{W2}"
                 csWait 30
                 setFacing $0,UP
@@ -598,7 +598,7 @@ cs_58BEA:       textCursor $605
                 nextText $80,$7         ; "{LEADER}, will you take{N}"
                 nextText $80,$7         ; "him with us?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_58D4C; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_58D4C ; YES/NO prompt answer
                 textCursor $607
                 hideText
                 nextSingleText $0,$8C   ; "Huh?{W1}"

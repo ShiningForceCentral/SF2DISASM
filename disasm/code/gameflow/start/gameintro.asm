@@ -60,7 +60,7 @@ loc_71EC:
                 jmp     (a0)            ; reset
 loc_724E:
                 
-                bsr.w   DisableDisplayAndVInt; title screen -> witch menu
+                bsr.w   DisableDisplayAndVInt ; title screen -> witch menu
                 bsr.w   ClearVsramAndSprites
                 bsr.w   EnableDisplayAndInterrupts
                 move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
@@ -75,7 +75,7 @@ loc_724E:
                 bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndVInt
                 clr.b   ((byte_FFB198-$1000000)).w
-                move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w
+                move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w 
                                                         ; Witch speech SFX
                 bsr.w   DisplayWitchScreen
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w

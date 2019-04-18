@@ -18,7 +18,7 @@ abcs_battle38:  textCursor $BC4
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                jumpIfFlagClear $4C,cs_4DF00; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4DF00 ; Zynk is a follower
                 setActscriptWait $1A,eas_Init
                 setPos $1A,63,62,DOWN
 cs_4DF00:       setActscriptWait $80,eas_46172

@@ -1247,12 +1247,11 @@ OpenChest:
                 blt.s   loc_418E
                 jsr     j_CheckFlag
                 beq.s   loc_416E
-                move.w  #ITEMIDX_NOTHING,d2
+                move.w  #ITEM_NOTHING,d2
 loc_416E:
                 
                 jsr     j_SetFlag
-                move.w  #MAP_BLOCKIDX_OPENCHEST,(a2,d0.w)
-                                                        ; set block idx to open chest
+                move.w  #MAP_BLOCKIDX_OPENCHEST,(a2,d0.w) ; set block idx to open chest
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_4188
                 bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
@@ -1371,7 +1370,7 @@ loc_422C:
 GetChestItem:
                 
                 clr.w   d2
-                move.b  ((CURRENT_MAP-$1000000)).w,d2; current map I guess
+                move.b  ((CURRENT_MAP-$1000000)).w,d2 ; current map I guess
                 movea.l (p_pt_MapData).l,a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data

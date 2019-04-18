@@ -63,7 +63,7 @@ loc_1AC10E:
                 move.b  (a0),d0
                 jsr     j_GetCharPortraitIdx
                 jsr     j_LoadPortrait
-                lea     (PALETTE_2_CURRENT).l,a0; clear palette 2
+                lea     (PALETTE_2_CURRENT).l,a0 ; clear palette 2
                 clr.l   (a0)+
                 clr.l   (a0)+
                 clr.l   (a0)+

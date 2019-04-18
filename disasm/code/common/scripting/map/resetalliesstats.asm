@@ -8,7 +8,7 @@ ResetAlliesBattleStats:
                 
                 movem.l d0-d7,-(sp)
                 clr.w   d0
-                moveq   #COM_ALLIES_COUNTER,d7; HARDCODED max number of allies
+                moveq   #COM_ALLIES_COUNTER,d7 ; HARDCODED max number of allies
 loc_478CE:
                 
                 jsr     j_GetCurrentHP

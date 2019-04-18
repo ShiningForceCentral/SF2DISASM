@@ -27,7 +27,7 @@ eas_5FFC8:       ac_11 $0
                  ac_setFacing RIGHT
                  ac_updateSprite
                  ac_wait 8
-                 ac_setFacing UP
+byte_60000:      ac_setFacing UP
                  ac_updateSprite
                  ac_moveRel 0,1
                  ac_wait 8

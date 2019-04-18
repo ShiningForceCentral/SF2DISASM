@@ -1,132 +1,132 @@
 
 ; ASM FILE data\stats\items\itemnames.asm :
 ; 0x1796E..0x17F3E : Item names
-ItemNames:      dc.b 12, 'Medical', 13, 'Herb'
-                dc.b 12, 'Healing', 13, 'Seed'
-                dc.b 12, 'Healing', 13, 'Drop'
-                dc.b 8, 'Antidote'
-                dc.b 10, 'Angel', 13, 'Wing'
-                dc.b 12, 'Fairy', 13, 'Powder'
-                dc.b 13, 'Healing', 13, 'Water'
-                dc.b 10, 'Fairy', 13, 'Tear'
-                dc.b 12, 'Healing', 13, 'Rain'
-                dc.b 11, 'Power', 13, 'Water'
-                dc.b 12, 'Protect', 13, 'Milk'
-                dc.b 13, 'Quick', 13, 'Chicken'
-                dc.b 15, 'Running', 13, 'Pimento'
-                dc.b 14, 'Cheerful', 13, 'Bread'
-                dc.b 12, 'Bright', 13, 'Honey'
-                dc.b 11, 'Brave', 13, 'Apple'
-                dc.b 12, 'Shining', 13, 'Ball'
-                dc.b 8, 'Blizzard'
-                dc.b 12, 'Holy', 13, 'Thunder'
-                dc.b 10, 'Power', 13, 'Ring'
-                dc.b 12, 'Protect', 13, 'Ring'
-                dc.b 10, 'Quick', 13, 'Ring'
-                dc.b 12, 'Running', 13, 'Ring'
-                dc.b 10, 'White', 13, 'Ring'
-                dc.b 10, 'Black', 13, 'Ring'
-                dc.b 9, 'Evil', 13, 'Ring'
-                dc.b 13, 'Leather', 13, 'Glove'
-                dc.b 11, 'Power', 13, 'Glove'
-                dc.b 14, 'Brass', 11, 'Knuckles'
-                dc.b 13, 'Iron', 11, 'Knuckles'
-                dc.b 14, 'Misty', 11, 'Knuckles'
-                dc.b 14, 'Giant', 11, 'Knuckles'
-                dc.b 13, 'Evil', 11, 'Knuckles'
-                dc.b 9, 'Short', 13, 'Axe'
-                dc.b 8, 'Hand Axe'
-                dc.b 10, 'Middle', 13, 'Axe'
-                dc.b 9, 'Power', 13, 'Axe'
-                dc.b 10, 'Battle', 13, 'Axe'
-                dc.b 9, 'Large', 13, 'Axe'
-                dc.b 9, 'Great', 13, 'Axe'
-                dc.b 8, 'Heat Axe'
-                dc.b 9, 'Atlas', 13, 'Axe'
-                dc.b 10, 'Ground', 13, 'Axe'
-                dc.b 8, 'Rune Axe'
-                dc.b 8, 'Evil Axe'
-                dc.b 12, 'Wooden', 13, 'Arrow'
-                dc.b 10, 'Iron', 13, 'Arrow'
-                dc.b 11, 'Steel', 13, 'Arrow'
-                dc.b 11, 'Robin', 13, 'Arrow'
-                dc.b 13, 'Assault', 13, 'Shell'
-                dc.b 10, 'Great', 13, 'Shot'
-                dc.b 12, 'Nazca', 13, 'Cannon'
-                dc.b 11, 'Buster', 13, 'Shot'
-                dc.b 12, 'Hyper', 13, 'Cannon'
-                dc.b 12, 'Grand', 13, 'Cannon'
-                dc.b 9, 'Evil', 13, 'Shot'
-                dc.b 12, 'Wooden', 13, 'Stick'
-                dc.b 11, 'Short', 13, 'Sword'
-                dc.b 12, 'Middle', 13, 'Sword'
-                dc.b 10, 'Long', 13, 'Sword'
-                dc.b 11, 'Steel', 13, 'Sword'
-                dc.b 14, 'Achilles', 13, 'Sword'
-                dc.b 11, 'Broad', 13, 'Sword'
-                dc.b 12, 'Buster', 13, 'Sword'
-                dc.b 11, 'Great', 13, 'Sword'
-                dc.b 14, 'Critical', 13, 'Sword'
-                dc.b 12, 'Battle', 13, 'Sword'
-                dc.b 11, 'Force', 13, 'Sword'
-                dc.b 13, 'Counter', 13, 'Sword'
-                dc.b 8, 'Levanter'
-                dc.b 10, 'Dark', 13, 'Sword'
-                dc.b 12, 'Wooden', 13, 'Sword'
-                dc.b 11, 'Short', 13, 'Spear'
-                dc.b 12, 'Bronze', 13, 'Lance'
-                dc.b 5, 'Spear'
-                dc.b 11, 'Steel', 13, 'Lance'
-                dc.b 11, 'Power', 13, 'Spear'
-                dc.b 11, 'Heavy', 13, 'Lance'
-                dc.b 7, 'Javelin'
-                dc.b 12, 'Chrome', 13, 'Lance'
-                dc.b 8, 'Valkyrie'
-                dc.b 10, 'Holy', 13, 'Lance'
-                dc.b 12, 'Mist', 13, 'Javelin'
-                dc.b 7, 'Halberd'
-                dc.b 10, 'Evil', 13, 'Lance'
-                dc.b 10, 'Wooden', 13, 'Rod'
-                dc.b 9, 'Short', 13, 'Rod'
-                dc.b 10, 'Bronze', 13, 'Rod'
-                dc.b 8, 'Iron', 13, 'Rod'
-                dc.b 11, 'Power', 13, 'Stick'
-                dc.b 5, 'Flail'
-                dc.b 14, 'Guardian', 13, 'Staff'
-                dc.b 11, 'Indra', 13, 'Staff'
-                dc.b 10, 'Mage', 13, 'Staff'
-                dc.b 10, 'Wish', 13, 'Staff'
-                dc.b 9, 'Great', 13, 'Rod'
-                dc.b 12, 'Supply', 13, 'Staff'
-                dc.b 10, 'Holy', 13, 'Staff'
-                dc.b 12, 'Freeze', 13, 'Staff'
-                dc.b 13, 'Goddess', 13, 'Staff'
-                dc.b 13, 'Mystery', 13, 'Staff'
-                dc.b 9, 'Demon', 13, 'Rod'
-                dc.b 9, 'Iron', 13, 'Ball'
-                dc.b 11, 'Short', 13, 'Knife'
-                dc.b 6, 'Dagger'
-                dc.b 5, 'Knife'
-                dc.b 15, 'Thieve', 39, 's', 13, 'Dagger'
-                dc.b 6, 'Katana'
-                dc.b 12, 'Ninja', 13, 'Katana'
-                dc.b 7, 'Gisarme'
-                dc.b 11, 'Taros', 13, 'Sword'
-                dc.b 13, 'Right of', 13, 'Hope'
-                dc.b 12, 'Wooden', 13, 'Panel'
-                dc.b 7, 'Sky Orb'
-                dc.b 6, 'Cannon'
-                dc.b 9, 'Dry', 13, 'Stone'
-                dc.b 8, 'Dynamite'
-                dc.b 12, 'Arm of', 13, 'Golem'
-                dc.b 12, 'Pegasus', 13, 'Wing'
-                dc.b 13, 'Warrior', 13, 'Pride'
-                dc.b 11, 'Silver', 13, 'Tank'
-                dc.b 11, 'Secret', 13, 'Book'
-                dc.b 10, 'Vigor', 13, 'Ball'
-                dc.b 7, 'Mithril'
-                dc.b 9, 'Life', 13, 'Ring'
-                dc.b 14, 'Cotton', 13, 'Balloon'
-                dc.b 15, 'Chirrup', 13, 'Sandals'
-                dc.b 5, 'Empty'
+ItemNames:      itemName "Medical", 13, "Herb"
+                itemName "Healing", 13, "Seed"
+                itemName "Healing", 13, "Drop"
+                itemName "Antidote"
+                itemName "Angel", 13, "Wing"
+                itemName "Fairy", 13, "Powder"
+                itemName "Healing", 13, "Water"
+                itemName "Fairy", 13, "Tear"
+                itemName "Healing", 13, "Rain"
+                itemName "Power", 13, "Water"
+                itemName "Protect", 13, "Milk"
+                itemName "Quick", 13, "Chicken"
+                itemName "Running", 13, "Pimento"
+                itemName "Cheerful", 13, "Bread"
+                itemName "Bright", 13, "Honey"
+                itemName "Brave", 13, "Apple"
+                itemName "Shining", 13, "Ball"
+                itemName "Blizzard"
+                itemName "Holy", 13, "Thunder"
+                itemName "Power", 13, "Ring"
+                itemName "Protect", 13, "Ring"
+                itemName "Quick", 13, "Ring"
+                itemName "Running", 13, "Ring"
+                itemName "White", 13, "Ring"
+                itemName "Black", 13, "Ring"
+                itemName "Evil", 13, "Ring"
+                itemName "Leather", 13, "Glove"
+                itemName "Power", 13, "Glove"
+                itemName "Brass", 11, "Knuckles"
+                itemName "Iron", 11, "Knuckles"
+                itemName "Misty", 11, "Knuckles"
+                itemName "Giant", 11, "Knuckles"
+                itemName "Evil", 11, "Knuckles"
+                itemName "Short", 13, "Axe"
+                itemName "Hand Axe"
+                itemName "Middle", 13, "Axe"
+                itemName "Power", 13, "Axe"
+                itemName "Battle", 13, "Axe"
+                itemName "Large", 13, "Axe"
+                itemName "Great", 13, "Axe"
+                itemName "Heat Axe"
+                itemName "Atlas", 13, "Axe"
+                itemName "Ground", 13, "Axe"
+                itemName "Rune Axe"
+                itemName "Evil Axe"
+                itemName "Wooden", 13, "Arrow"
+                itemName "Iron", 13, "Arrow"
+                itemName "Steel", 13, "Arrow"
+                itemName "Robin", 13, "Arrow"
+                itemName "Assault", 13, "Shell"
+                itemName "Great", 13, "Shot"
+                itemName "Nazca", 13, "Cannon"
+                itemName "Buster", 13, "Shot"
+                itemName "Hyper", 13, "Cannon"
+                itemName "Grand", 13, "Cannon"
+                itemName "Evil", 13, "Shot"
+                itemName "Wooden", 13, "Stick"
+                itemName "Short", 13, "Sword"
+                itemName "Middle", 13, "Sword"
+                itemName "Long", 13, "Sword"
+                itemName "Steel", 13, "Sword"
+                itemName "Achilles", 13, "Sword"
+                itemName "Broad", 13, "Sword"
+                itemName "Buster", 13, "Sword"
+                itemName "Great", 13, "Sword"
+                itemName "Critical", 13, "Sword"
+                itemName "Battle", 13, "Sword"
+                itemName "Force", 13, "Sword"
+                itemName "Counter", 13, "Sword"
+                itemName "Levanter"
+                itemName "Dark", 13, "Sword"
+                itemName "Wooden", 13, "Sword"
+                itemName "Short", 13, "Spear"
+                itemName "Bronze", 13, "Lance"
+                itemName "Spear"
+                itemName "Steel", 13, "Lance"
+                itemName "Power", 13, "Spear"
+                itemName "Heavy", 13, "Lance"
+                itemName "Javelin"
+                itemName "Chrome", 13, "Lance"
+                itemName "Valkyrie"
+                itemName "Holy", 13, "Lance"
+                itemName "Mist", 13, "Javelin"
+                itemName "Halberd"
+                itemName "Evil", 13, "Lance"
+                itemName "Wooden", 13, "Rod"
+                itemName "Short", 13, "Rod"
+                itemName "Bronze", 13, "Rod"
+                itemName "Iron", 13, "Rod"
+                itemName "Power", 13, "Stick"
+                itemName "Flail"
+                itemName "Guardian", 13, "Staff"
+                itemName "Indra", 13, "Staff"
+                itemName "Mage", 13, "Staff"
+                itemName "Wish", 13, "Staff"
+                itemName "Great", 13, "Rod"
+                itemName "Supply", 13, "Staff"
+                itemName "Holy", 13, "Staff"
+                itemName "Freeze", 13, "Staff"
+                itemName "Goddess", 13, "Staff"
+                itemName "Mystery", 13, "Staff"
+                itemName "Demon", 13, "Rod"
+                itemName "Iron", 13, "Ball"
+                itemName "Short", 13, "Knife"
+                itemName "Dagger"
+                itemName "Knife"
+                itemName "Thieve's", 13, "Dagger"
+                itemName "Katana"
+                itemName "Ninja", 13, "Katana"
+                itemName "Gisarme"
+                itemName "Taros", 13, "Sword"
+                itemName "Right of", 13, "Hope"
+                itemName "Wooden", 13, "Panel"
+                itemName "Sky Orb"
+                itemName "Cannon"
+                itemName "Dry", 13, "Stone"
+                itemName "Dynamite"
+                itemName "Arm of", 13, "Golem"
+                itemName "Pegasus", 13, "Wing"
+                itemName "Warrior", 13, "Pride"
+                itemName "Silver", 13, "Tank"
+                itemName "Secret", 13, "Book"
+                itemName "Vigor", 13, "Ball"
+                itemName "Mithril"
+                itemName "Life", 13, "Ring"
+                itemName "Cotton", 13, "Balloon"
+                itemName "Chirrup", 13, "Sandals"
+                itemName "Empty"
                 align 2                 ; make sure end of variable length table is word-aligned

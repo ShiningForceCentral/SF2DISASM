@@ -24,8 +24,7 @@ LoadBaseTiles:
                 lea     (0).w,a1
                 move.w  #$1000,d0
                 moveq   #2,d1
-                bsr.w   ApplyImmediateVramDMAOnCompressedTiles
-                                                        ; load base tiles
+                bsr.w   ApplyImmediateVramDMAOnCompressedTiles ; load base tiles
                 rts
 
 	; End of function LoadBaseTiles

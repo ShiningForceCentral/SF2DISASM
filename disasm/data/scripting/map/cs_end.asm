@@ -277,8 +277,8 @@ sub_493EC:
                 csc_end
                 textCursor $18A
                 showPortrait $0
-                nextTextVar $0,$0,$0,$3,$A; "{NAME} found{N}the {ITEM}.{D1}"
-                nextSingleTextVar $0,$0,$0,$4; "{NAME} received{N}the {ITEM}."
+                nextTextVar $0,$0,$0,$3,$A ; "{NAME} found{N}the {ITEM}.{D1}"
+                nextSingleTextVar $0,$0,$0,$4 ; "{NAME} received{N}the {ITEM}."
                 dc.l $14001D            ; Unused cutscene with parsing mistake here and below, letting it unformatted.
                  ac_wait 32888          ;   
                  ac_setAnimSpeedX2 $4   ;   

@@ -57,8 +57,7 @@ InitDisplay:
 
 	; End of function InitDisplay
 
-plt_BasePalette:incbin "data/graphics/tech/basepalette.bin"
-                                                        ; Palette for UI/Sprites
+plt_BasePalette:incbin "data/graphics/tech/basepalette.bin" ; Palette for UI/Sprites
 
 ; =============== S U B R O U T I N E =======================================
 

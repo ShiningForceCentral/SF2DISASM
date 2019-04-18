@@ -105,7 +105,7 @@ loc_479D0:
                 move.b  #3,ENTITYDEF_OFFSET_FACING(a0)
                 move.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movem.w d0-d4,-(sp)
-                jsr     j_GetForceMemberSpriteIdx
+                jsr     j_GetAllyMapSprite
                 move.w  #3,d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3

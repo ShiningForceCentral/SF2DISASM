@@ -33,7 +33,7 @@ loc_7428:
                 clsTxt
                 clr.w   d0
                 jsr     j_NameCharacter
-                btst    #7,(SAVE_FLAGS).l; "Game completed" bit
+                btst    #7,(SAVE_FLAGS).l ; "Game completed" bit
                 beq.w   byte_7476       
                 btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 beq.w   byte_7476       

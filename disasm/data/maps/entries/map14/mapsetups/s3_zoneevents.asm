@@ -21,7 +21,7 @@ Map14_DefaultZoneEvent:
 cs_58E5C:       textCursor $8D5
                 nextText $FF,$FF        ; "Bring up the plank?"
                 yesNo
-                jumpIfFlagClear $59,cs_58EB8; YES/NO prompt answer
+                jumpIfFlagClear $59,cs_58EB8 ; YES/NO prompt answer
                 hideText
                 entityActionsWait $0
                  moveDown 1

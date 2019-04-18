@@ -1,106 +1,106 @@
 
 ; ASM FILE data\stats\enemies\enemynames.asm :
 ; 0xFB8A..0xFF87 : Enemy names
-EnemyNames:     dc.b 4, 'OOZE'
-                dc.b 8, 'HUGE RAT'
-                dc.b 13, 'GALAM SOLDIER'
-                dc.b 12, 'GALAM KNIGHT'
-                dc.b 6, 'GOBLIN'
-                dc.b 10, 'GREEN OOZE'
-                dc.b 10, 'DARK DWARF'
-                dc.b 9, 'HOBGOBLIN'
-                dc.b 6, 'ZOMBIE'
-                dc.b 5, 'GOLEM'
-                dc.b 10, 'KRAKEN LEG'
-                dc.b 9, 'SOULSOWER'
-                dc.b 3, 'ORC'
-                dc.b 4, 'PAWN'
-                dc.b 6, 'KNIGHT'
-                dc.b 3, 'RAT'
-                dc.b 13, 'BUBBLING OOZE'
-                dc.b 8, 'SKELETON'
-                dc.b 12, 'DARK SOLDIER'
-                dc.b 9, 'LIZARDMAN'
-                dc.b 4, 'WORM'
-                dc.b 11, 'DARK KNIGHT'
-                dc.b 8, 'ORC LORD'
-                dc.b 13, 'DEVIL SOLDIER'
-                dc.b 8, 'CERBERUS'
-                dc.b 7, 'MUD MAN'
-                dc.b 9, 'DRAGONEWT'
-                dc.b 11, 'PURPLE WORM'
-                dc.b 11, 'EXECUTIONER'
-                dc.b 10, 'HELL HOUND'
-                dc.b 8, 'MINOTAUR'
-                dc.b 7, 'CYCLOPS'
-                dc.b 10, 'BURST ROCK'
-                dc.b 5, 'HYDRA'
-                dc.b 13, 'CHAOS WARRIOR'
-                dc.b 6, 'REAPER'
-                dc.b 10, 'EVIL BEAST'
-                dc.b 9, 'PYROHYDRA'
-                dc.b 10, 'ZEON GUARD'
-                dc.b 5, 'GIZMO'
-                dc.b 8, 'HUGE BAT'
-                dc.b 11, 'VAMPIRE BAT'
-                dc.b 10, 'EVIL CLOUD'
-                dc.b 8, 'GARGOYLE'
-                dc.b 5, 'HARPY'
-                dc.b 12, 'LESSER DEMON'
-                dc.b 6, 'WYVERN'
-                dc.b 11, 'HARPY QUEEN'
-                dc.b 14, 'PEGASUS KNIGHT'
-                dc.b 7, 'GRIFFIN'
-                dc.b 10, 'MIST DEMON'
-                dc.b 12, 'WHITE DRAGON'
-                dc.b 5, 'DEMON'
-                dc.b 12, 'CHAOS DRAGON'
-                dc.b 13, 'DEVIL GRIFFIN'
-                dc.b 10, 'ARCH DEMON'
-                dc.b 12, 'GALAM ARCHER'
-                dc.b 13, 'HUNTER GOBLIN'
-                dc.b 12, 'DEATH ARCHER'
-                dc.b 10, 'KRAKEN ARM'
-                dc.b 14, 'ARROW LAUNCHER'
-                dc.b 4, 'ROOK'
-                dc.b 11, 'DARK SNIPER'
-                dc.b 10, 'BOW MASTER'
-                dc.b 9, 'BOW RIDER'
-                dc.b 11, 'DARK GUNNER'
-                dc.b 8, 'HORSEMAN'
-                dc.b 10, 'GALAM MAGE'
-                dc.b 5, 'WITCH'
-                dc.b 11, 'MASTER MAGE'
-                dc.b 10, 'DARK MADAM'
-                dc.b 5, 'QUEEN'
-                dc.b 6, 'WIZARD'
-                dc.b 11, 'NECROMANCER'
-                dc.b 12, 'CHAOS WIZARD'
-                dc.b 12, 'DEMON MASTER'
-                dc.b 11, 'DARK CLERIC'
-                dc.b 10, 'DEATH MONK'
-                dc.b 10, 'BLACK MONK'
-                dc.b 11, 'HIGH PRIEST'
-                dc.b 11, 'EVIL BISHOP'
-                dc.b 11, 'DARK BISHOP'
-                dc.b 11, 'MASTER MONK'
-                dc.b 6, 'SHAMAN'
-                dc.b 11, 'EVIL BISHOP'
-                dc.b 11, 'BLUE SHAMAN'
-                dc.b 10, 'DARK SMOKE'
-                dc.b 11, 'KRAKEN HEAD'
-                dc.b 5, 'TAROS'
-                dc.b 4, 'KING'
-                dc.b 7, 'WILLARD'
-                dc.b 7, 'ZALBARD'
-                dc.b 7, 'CAMEELA'
-                dc.b 12, 'PRISM FLOWER'
-                dc.b 9, 'RED BARON'
-                dc.b 5, 'GESHP'
-                dc.b 7, 'ODD EYE'
-                dc.b 5, 'GALAM'
-                dc.b 4, 'ZEON'
-                dc.b 4, 'JAR', 0        ; here is the cause of the infamous JAR bug, an innocent typo :)
-                dc.b 11, 'MASTER MAGE'
-                dc.b 11, 'NECROMANCER'
-                dc.b 11, 'BLUE SHAMAN'
+EnemyNames:     enemyName "OOZE"
+                enemyName "HUGE RAT"
+                enemyName "GALAM SOLDIER"
+                enemyName "GALAM KNIGHT"
+                enemyName "GOBLIN"
+                enemyName "GREEN OOZE"
+                enemyName "DARK DWARF"
+                enemyName "HOBGOBLIN"
+                enemyName "ZOMBIE"
+                enemyName "GOLEM"
+                enemyName "KRAKEN LEG"
+                enemyName "SOULSOWER"
+                enemyName "ORC"
+                enemyName "PAWN"
+                enemyName "KNIGHT"
+                enemyName "RAT"
+                enemyName "BUBBLING OOZE"
+                enemyName "SKELETON"
+                enemyName "DARK SOLDIER"
+                enemyName "LIZARDMAN"
+                enemyName "WORM"
+                enemyName "DARK KNIGHT"
+                enemyName "ORC LORD"
+                enemyName "DEVIL SOLDIER"
+                enemyName "CERBERUS"
+                enemyName "MUD MAN"
+                enemyName "DRAGONEWT"
+                enemyName "PURPLE WORM"
+                enemyName "EXECUTIONER"
+                enemyName "HELL HOUND"
+                enemyName "MINOTAUR"
+                enemyName "CYCLOPS"
+                enemyName "BURST ROCK"
+                enemyName "HYDRA"
+                enemyName "CHAOS WARRIOR"
+                enemyName "REAPER"
+                enemyName "EVIL BEAST"
+                enemyName "PYROHYDRA"
+                enemyName "ZEON GUARD"
+                enemyName "GIZMO"
+                enemyName "HUGE BAT"
+                enemyName "VAMPIRE BAT"
+                enemyName "EVIL CLOUD"
+                enemyName "GARGOYLE"
+                enemyName "HARPY"
+                enemyName "LESSER DEMON"
+                enemyName "WYVERN"
+                enemyName "HARPY QUEEN"
+                enemyName "PEGASUS KNIGHT"
+                enemyName "GRIFFIN"
+                enemyName "MIST DEMON"
+                enemyName "WHITE DRAGON"
+                enemyName "DEMON"
+                enemyName "CHAOS DRAGON"
+                enemyName "DEVIL GRIFFIN"
+                enemyName "ARCH DEMON"
+                enemyName "GALAM ARCHER"
+                enemyName "HUNTER GOBLIN"
+                enemyName "DEATH ARCHER"
+                enemyName "KRAKEN ARM"
+                enemyName "ARROW LAUNCHER"
+                enemyName "ROOK"
+                enemyName "DARK SNIPER"
+                enemyName "BOW MASTER"
+                enemyName "BOW RIDER"
+                enemyName "DARK GUNNER"
+                enemyName "HORSEMAN"
+                enemyName "GALAM MAGE"
+                enemyName "WITCH"
+                enemyName "MASTER MAGE"
+                enemyName "DARK MADAM"
+                enemyName "QUEEN"
+                enemyName "WIZARD"
+                enemyName "NECROMANCER"
+                enemyName "CHAOS WIZARD"
+                enemyName "DEMON MASTER"
+                enemyName "DARK CLERIC"
+                enemyName "DEATH MONK"
+                enemyName "BLACK MONK"
+                enemyName "HIGH PRIEST"
+                enemyName "EVIL BISHOP"
+                enemyName "DARK BISHOP"
+                enemyName "MASTER MONK"
+                enemyName "SHAMAN"
+                enemyName "EVIL BISHOP"
+                enemyName "BLUE SHAMAN"
+                enemyName "DARK SMOKE"
+                enemyName "KRAKEN HEAD"
+                enemyName "TAROS"
+                enemyName "KING"
+                enemyName "WILLARD"
+                enemyName "ZALBARD"
+                enemyName "CAMEELA"
+                enemyName "PRISM FLOWER"
+                enemyName "RED BARON"
+                enemyName "GESHP"
+                enemyName "ODD EYE"
+                enemyName "GALAM"
+                enemyName "ZEON"
+                enemyName "JAR", 0      ; here is the cause of the infamous JAR bug, an innocent typo :)
+                enemyName "MASTER MAGE"
+                enemyName "NECROMANCER"
+                enemyName "BLUE SHAMAN"

@@ -228,7 +228,7 @@ InitEnemyStats:
                 bsr.w   UpgradeUnitIdx  
                 move.w  d1,d6
                 mulu.w  #$38,d1 
-                lea     EnemyData(pc), a1
+                lea     EnemyDefs(pc), a1
                 adda.w  d1,a1
                 move.l  a0,-(sp)
                 jsr     j_GetCharacterRAMAddress_0
@@ -313,7 +313,7 @@ loc_1B14F4:
 InitEnemyItems:
                 
                 movem.l d0-a0,-(sp)
-                cmpi.w  #ITEMIDX_NOTHING,d1
+                cmpi.w  #ITEM_NOTHING,d1
                 beq.w   loc_1B154E
                 jsr     j_AddItem
                 btst    #7,d1
@@ -624,11 +624,11 @@ DoesBattleUpgrade:
                 
                 movem.l d0/d2-a6,-(sp)
                 clr.w   d1              ; clear d1 for "false"
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0; point to battle index in RAM
+                lea     ((CURRENT_BATTLE-$1000000)).w,a0 ; point to battle index in RAM
                 clr.w   d7
                 move.b  (a0),d7         ; d7 contains battle index
                 clr.w   d6
-                lea     SpecialBattles(pc), a0; point to length of table
+                lea     SpecialBattles(pc), a0 ; point to length of table
                 nop
                 move.b  (a0)+,d6        ; put length of table in d6
                 tst.b   d6
@@ -763,7 +763,7 @@ loc_1B186C:
                 clr.l   d1
                 move.b  d5,d1
                 mulu.w  #$38,d1 
-                lea     EnemyData(pc), a1
+                lea     EnemyDefs(pc), a1
                 adda.w  d1,a1
                 move.b  $31(a1),d2
                 lsr.w   #4,d2

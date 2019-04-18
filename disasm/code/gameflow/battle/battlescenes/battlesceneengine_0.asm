@@ -85,7 +85,7 @@ loc_1807C:
                 
                 bsr.w   GetBattleBackground
                 move.w  d1,d0
-                lea     (FF2000_LOADING_SPACE).l,a1; store it in RAM for DMA
+                lea     (FF2000_LOADING_SPACE).l,a1 ; store it in RAM for DMA
                 bsr.w   LoadBattleBackground
 loc_1808C:
                 
@@ -342,9 +342,9 @@ rjt_BattlesceneScriptCommands:
                 
                 dc.w bsc00_animateEnemyAction-rjt_BattlesceneScriptCommands
                 dc.w bsc01_animateAllyAction-rjt_BattlesceneScriptCommands
-                dc.w bsc02_moveEnemyBSprite-rjt_BattlesceneScriptCommands
+                dc.w bsc02_moveEnemyBSprite-rjt_BattlesceneScriptCommands 
                                                         ; not found any use case, still to figure out
-                dc.w bsc03_moveAllyBSprite-rjt_BattlesceneScriptCommands
+                dc.w bsc03_moveAllyBSprite-rjt_BattlesceneScriptCommands 
                                                         ; same as previous command
                 dc.w bsc04_makeEnemyIdle-rjt_BattlesceneScriptCommands
                 dc.w bsc05_makeAllyIdle-rjt_BattlesceneScriptCommands
@@ -354,9 +354,9 @@ rjt_BattlesceneScriptCommands:
                 dc.w bsc09_switchToAllyAlone-rjt_BattlesceneScriptCommands
                 dc.w bsc0A_executeEnemyReaction-rjt_BattlesceneScriptCommands
                 dc.w bsc0B_executeAllyReaction-rjt_BattlesceneScriptCommands
-                dc.w bsc0C_makeActorIdleAndEndAnimation-rjt_BattlesceneScriptCommands
+                dc.w bsc0C_makeActorIdleAndEndAnimation-rjt_BattlesceneScriptCommands 
                                                         ; still to figure out exactly, not found any use case yet
-                dc.w bsc0D_endAnimation-rjt_BattlesceneScriptCommands
+                dc.w bsc0D_endAnimation-rjt_BattlesceneScriptCommands 
                                                         ; still to figure out more precisely
                 dc.w bsc0E_sleep-rjt_BattlesceneScriptCommands
                 dc.w bsc0F_giveEXP-rjt_BattlesceneScriptCommands
@@ -364,7 +364,7 @@ rjt_BattlesceneScriptCommands:
                 dc.w bsc11_displayMessageWithNoWait-rjt_BattlesceneScriptCommands
                 dc.w j_hideTextBox-rjt_BattlesceneScriptCommands
                 dc.w j_WaitForPlayerInput-rjt_BattlesceneScriptCommands
-                dc.w nullsub_10-rjt_BattlesceneScriptCommands
+                dc.w nullsub_183F2-rjt_BattlesceneScriptCommands
 loc_183EA:
                 
                 clr.w   d0
@@ -384,11 +384,11 @@ j_WaitForPlayerInput:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_10:
+nullsub_183F2:
                 
                 rts
 
-	; End of function nullsub_10
+	; End of function nullsub_183F2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -648,7 +648,7 @@ bsc02_moveEnemyBSprite:
                 cmpi.w  #$FFFF,((BATTLESCENE_ENEMY-$1000000)).w
                 beq.s   return_185F2
                 move.w  (a6)+,((word_FFB3F6-$1000000)).w
-                move.w  (a6),((word_FFB3F8-$1000000)).w; no + ... is it the next bsc ?
+                move.w  (a6),((word_FFB3F8-$1000000)).w ; no + ... is it the next bsc ?
                 jsr     (WaitForVInt).w
 return_185F2:
                 
@@ -759,7 +759,7 @@ return_186D8:
 bsc07_switchAllies:
                 
                 cmpi.b  #1,((byte_FFB589-$1000000)).w
-                beq.s   bsc07_switchAllies; loop as long as value 1
+                beq.s   bsc07_switchAllies ; loop as long as value 1
                 move.b  #2,((byte_FFB589-$1000000)).w
                 bclr    #1,((byte_FFB56E-$1000000)).w
                 move.w  (a6)+,d7
@@ -1004,7 +1004,7 @@ loc_18934:
 bsc06_switchEnemies:
                 
                 cmpi.b  #1,((byte_FFB589-$1000000)).w
-                beq.s   bsc06_switchEnemies; loop as long as value 1
+                beq.s   bsc06_switchEnemies ; loop as long as value 1
                 move.b  #2,((byte_FFB589-$1000000)).w
                 andi.b  #$C,((byte_FFB583-$1000000)).w
                 bclr    #3,((byte_FFB56E-$1000000)).w
@@ -1744,7 +1744,7 @@ bsc0D_endAnimation:
                 move.b  #2,((byte_FFB585-$1000000)).w
 loc_190C4:
                 
-                tst.b   ((byte_FFB584-$1000000)).w; wait for byte cleared
+                tst.b   ((byte_FFB584-$1000000)).w ; wait for byte cleared
                 bne.s   loc_190C4       
                 bsr.w   sub_1A24E
                 bsr.w   sub_1F2F6
@@ -2849,7 +2849,7 @@ loc_198A0:
 	; End of function InitializeBattleScenePalettes
 
 plt_BattleSceneBasePalette:
-                incbin "data/graphics/battles/plt_battlescenebasepalette.bin"
+                incbin "data/graphics/battles/plt_battlescenebasepalette.bin" 
                                                         ; Base palette for battlescene UI and ground
 
 ; =============== S U B R O U T I N E =======================================
@@ -3491,7 +3491,7 @@ GetWeaponSpriteAndPalette:
                 bcs.w   loc_19DF2
                 cmpi.w  #$6D,d1 ; HARDCODED end index for weapon items with battle scene graphics
                 bhi.w   loc_19DF2
-                lea     WeaponSprites(pc), a0
+                lea     WeaponGraphicsTable(pc), a0
                 subi.w  #$1A,d1         ; Same here : HARDCODED start index for weapon items with battle scene graphics
                 add.w   d1,d1
                 move.b  (a0,d1.w),d2
@@ -3552,8 +3552,7 @@ loc_19E58:
 	; End of function GetBattleBackground
 
 TerrainBackgrounds:
-                incbin "data/battles/global/terrainbackgrounds.bin"
-                                                        ; mostly used for overworld battles, I guess !
+                incbin "data/battles/global/terrainbackgrounds.bin" ; mostly used for overworld battles, I guess !
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -3789,7 +3788,7 @@ word_1A020:     dc.w 1
 sub_1A028:
                 
                 tst.b   ((byte_FFB584-$1000000)).w
-                beq.w   nullsub_184
+                beq.w   nullsub_1A090
                 bsr.w   sub_1A0AA
 
 	; End of function sub_1A028
@@ -3808,38 +3807,38 @@ sub_1A034:
 
 	; End of function sub_1A034
 
-rjt_1A048:      dc.w nullsub_184-rjt_1A048; related to ally or enemy reaction
+rjt_1A048:      dc.w nullsub_1A090-rjt_1A048 ; related to ally or enemy reaction
                 dc.w sub_1A21C-rjt_1A048
                 dc.w sub_1A198-rjt_1A048
                 dc.w sub_1A198-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
                 dc.w sub_1A146-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
                 dc.w sub_1A11E-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
                 dc.w sub_1A146-rjt_1A048
                 dc.w sub_1A21C-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
                 dc.w sub_1A222-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
                 dc.w sub_1A11E-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
                 dc.w sub_1A198-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
-                dc.w nullsub_184-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
+                dc.w nullsub_1A090-rjt_1A048
 
 ; START OF FUNCTION CHUNK FOR sub_1A034
 
@@ -3853,11 +3852,11 @@ loc_1A088:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_184:
+nullsub_1A090:
                 
                 rts
 
-	; End of function nullsub_184
+	; End of function nullsub_1A090
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4440,11 +4439,11 @@ return_1A474:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_12:
+nullsub_1A476:
                 
                 rts
 
-	; End of function nullsub_12
+	; End of function nullsub_1A476
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4460,7 +4459,7 @@ sa00_Nothing:
 
 sa01_:
                 
-                bsr.s   nullsub_12
+                bsr.s   nullsub_1A476
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #$22E,d0
@@ -4758,7 +4757,7 @@ byte_1A614:     dc.b 0
 
 sa02_:
                 
-                bsr.w   nullsub_12
+                bsr.w   nullsub_1A476
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #$E22,d0
@@ -4767,7 +4766,7 @@ sa02_:
                 moveq   #$B,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
-                lea     (loc_1A6CC+2)(pc), a0; need to fix that ugly offset reference with the true data begin label
+                lea     (loc_1A6CC+2)(pc), a0 ; need to fix that ugly offset reference with the true data begin label
                 bclr    #7,d1
                 beq.s   loc_1A680
                 lea     $30(a0),a0
@@ -4906,7 +4905,7 @@ loc_1A6CC:
 
 sa03_:
                 
-                bsr.w   nullsub_12
+                bsr.w   nullsub_1A476
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #$222,d0
@@ -5152,7 +5151,7 @@ byte_1A918:     dc.b $FF
 
 sa05_:
                 
-                bsr.w   nullsub_12
+                bsr.w   nullsub_1A476
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #$CC2,d0
@@ -5295,7 +5294,7 @@ byte_1AA88:     dc.b 0
 
 sa07_:
                 
-                bsr.w   nullsub_12
+                bsr.w   nullsub_1A476
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #$ECA,d0
@@ -6880,7 +6879,7 @@ loc_1B7D8:
 	; End of function sub_1B7B0
 
 rjt_SpellAnimations:
-                dc.w nullsub_13-rjt_SpellAnimations
+                dc.w nullsub_1B93A-rjt_SpellAnimations
                 dc.w sub_1B93C-rjt_SpellAnimations
                 dc.w sub_1BE9E-rjt_SpellAnimations
                 dc.w sub_1C248-rjt_SpellAnimations
@@ -6890,7 +6889,7 @@ rjt_SpellAnimations:
                 dc.w spellanim_Bolt-rjt_SpellAnimations
                 dc.w sub_1CFFC-rjt_SpellAnimations
                 dc.w sub_1D038-rjt_SpellAnimations
-                dc.w nullsub_22-rjt_SpellAnimations
+                dc.w nullsub_1B828-rjt_SpellAnimations
                 dc.w sub_1D0FE-rjt_SpellAnimations
                 dc.w sub_1D2E6-rjt_SpellAnimations
                 dc.w sub_1D4E6-rjt_SpellAnimations
@@ -6904,7 +6903,7 @@ rjt_SpellAnimations:
                 dc.w sub_1E2D4-rjt_SpellAnimations
                 dc.w sub_1E5D0-rjt_SpellAnimations
                 dc.w sub_1E7B2-rjt_SpellAnimations
-                dc.w nullsub_22-rjt_SpellAnimations
+                dc.w nullsub_1B828-rjt_SpellAnimations
                 dc.w sub_1CFFC-rjt_SpellAnimations
                 dc.w sub_1E958-rjt_SpellAnimations
                 dc.w sub_1D038-rjt_SpellAnimations
@@ -6915,11 +6914,11 @@ rjt_SpellAnimations:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_22:
+nullsub_1B828:
                 
                 rts
 
-	; End of function nullsub_22
+	; End of function nullsub_1B828
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -7069,11 +7068,11 @@ word_1B930:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_13:
+nullsub_1B93A:
                 
                 rts
 
-	; End of function nullsub_13
+	; End of function nullsub_1B93A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -7802,7 +7801,7 @@ loc_1BF5C:
                 addq.b  #1,$C(a3)
                 move.b  $C(a3),$D(a3)
                 lea     loc_1C170(pc), a2
-                lea     (loc_1C184+2)(pc), a1; undefine operand to undo
+                lea     (loc_1C184+2)(pc), a1 ; undefine operand to undo
                 move.b  ((byte_FFB586-$1000000)).w,d2
                 andi.w  #7,d2
                 move.w  d2,d1

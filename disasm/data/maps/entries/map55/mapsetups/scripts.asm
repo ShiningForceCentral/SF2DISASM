@@ -6,7 +6,7 @@ cs_5E27C:       setActscriptWait $0,eas_5E2C4
                 setActscriptWait $7,eas_5E2C4
                 setActscriptWait $1F,eas_Init
                 setActscriptWait $1F,eas_5E2C4
-                jumpIfFlagClear $4C,cs_5E2BC; Zynk is a follower
+                jumpIfFlagClear $4C,cs_5E2BC ; Zynk is a follower
                 setActscriptWait $1A,eas_Init
                 setActscriptWait $1A,eas_5E2C4
 cs_5E2BC:       warp $25,$1D,$8,$2

@@ -12,12 +12,11 @@ DisplayText:
                 move.w  d0,-(sp)
                 bsr.w   sub_676E
                 move.w  (sp)+,d0
-                move.b  #1,((CURRENTLY_TYPEWRITING-$1000000)).w
-                                                        ; "Currently typewriting"
+                move.b  #1,((CURRENTLY_TYPEWRITING-$1000000)).w ; "Currently typewriting"
                 movem.w d0,-(sp)        ; save string #
                 lsr.w   #6,d0
                 andi.b  #$FC,d0         ; string # -> bank pointer offset
-                movea.l (p_pt_TextBanks).l,a0; load script bank pointer
+                movea.l (p_pt_TextBanks).l,a0 ; load script bank pointer
                 movea.l (a0,d0.w),a0
                 movem.w (sp)+,d0        ; restore string #
                 andi.w  #$FF,d0         ; restrict to range 0-255
@@ -30,29 +29,27 @@ GoToNextString:
                 addq.l  #1,a0
 loc_6298:
                 
-                dbf     d0,GoToNextString; loop until wanted string reached
-                clr.l   ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
+                dbf     d0,GoToNextString ; loop until wanted string reached
+                clr.l   ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w 
                                                         ; get ready
                 clr.b   ((byte_FFB6D8-$1000000)).w
-                move.b  (a0)+,((COMPRESSED_STRING_LENGTH-$1000000)).w
+                move.b  (a0)+,((COMPRESSED_STRING_LENGTH-$1000000)).w 
                                                         ; keep length of current string
 loc_62A8:
                 
                 move.l  #TEXT_NAME_INDEX_1,((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
-                cmpi.b  #1,((COMPRESSED_STRING_LENGTH-$1000000)).w
-                                                        ; check length
+                cmpi.b  #1,((COMPRESSED_STRING_LENGTH-$1000000)).w ; check length
                 beq.w   loc_62FE
                 jsr     j_InitDecoder   ; initialize decoder
-                move.l  a0,((COMPRESSED_STRING_POINTER-$1000000)).w
-                                                        ; keep string pointer
+                move.l  a0,((COMPRESSED_STRING_POINTER-$1000000)).w ; keep string pointer
 loc_62CA:
                 
                 bsr.w   GetNextTextSymbol
                 cmpi.b  #$FE,d0
                 beq.s   loc_62FE
                 cmpi.b  #$EE,d0
-                bcc.w   ParseSpecialTextSymbol; if symbol >= $EE
+                bcc.w   ParseSpecialTextSymbol ; if symbol >= $EE
                 bset    #0,((byte_FFB6D8-$1000000)).w
                 bne.s   loc_62F2
                 cmpi.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
@@ -79,7 +76,7 @@ sub_6308:
                 
                 cmpi.b  #$CC,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 bls.s   return_634C
-                bsr.w   ClearNextLineOfDialoguePixels; line end reached
+                bsr.w   ClearNextLineOfDialoguePixels ; line end reached
                 move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 addi.b  #$10,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
                 cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
@@ -784,7 +781,7 @@ return_67E4:
 
 sub_67E6:
                 
-                cmpi.w  #VDPTILE_IDX_SCREEN_BLACKBAR,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_IDX_SCREEN_BLACKBAR,(SPRITE_00_TILE_FLAGS).l 
                                                         ; check if we are on the map or in battle (by checking for presence of black bar sprites)
                 bne.s   loc_67F6
                 move.w  #WINDOW_DIALOGUE_TILELINECOUNTER_EVENT,d6

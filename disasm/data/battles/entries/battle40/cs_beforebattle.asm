@@ -13,7 +13,7 @@ bbcs_40:        textCursor $BDC
                 setPos $1C,15,41,UP
                 setActscriptWait $80,eas_Init
                 setPos $80,16,41,UP
-                jumpIfFlagClear $4C,cs_4E544; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4E544 ; Zynk is a follower
                 setActscriptWait $1A,eas_Init
                 setPos $1A,63,62,DOWN
 cs_4E544:       setBlocks 11,6,11,29,44,0

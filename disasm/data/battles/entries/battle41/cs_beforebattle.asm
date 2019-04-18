@@ -8,7 +8,7 @@ bbcs_41:        textCursor $C0B
                 setPos $7,16,24,RIGHT
                 setPos $1F,15,24,RIGHT
                 setPos $1C,14,24,RIGHT
-                jumpIfFlagClear $4C,cs_4ED48; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4ED48 ; Zynk is a follower
                 setPos $1A,13,24,RIGHT
 cs_4ED48:       playSound MUSIC_BATTLE_THEME_3
                 fadeInB

@@ -33,7 +33,7 @@ loc_444D6:
                 muls.w  #$180,d2
                 moveq   #3,d3
                 move.l  #eas_Idle,d5
-                bsr.w   GetCombatantSpriteIdx
+                bsr.w   GetCombatantMapSprite
                 bsr.w   sub_44536
                 movem.l a0-a1,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a0
@@ -102,7 +102,7 @@ InitializeNewEntity:
                 move.w  d0,-(sp)
                 tst.b   d0
                 blt.s   loc_4457E
-                bsr.w   GetForceMemberSpriteIdx
+                bsr.w   GetAllyMapSprite
 loc_4457E:
                 
                 lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
@@ -289,7 +289,7 @@ loc_44702:
                 muls.w  #$180,d2
                 moveq   #3,d3
                 move.l  #eas_Standing,d5
-                bsr.w   GetCombatantSpriteIdx
+                bsr.w   GetCombatantMapSprite
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
                 move.b  d0,(a1)+
@@ -348,7 +348,7 @@ loc_447AA:
                 muls.w  #$180,d2
                 moveq   #3,d3
                 move.l  #eas_Standing,d5
-                bsr.w   GetCombatantSpriteIdx
+                bsr.w   GetCombatantMapSprite
                 cmpi.b  #$F0,d4
                 bcs.s   loc_447E8
                 move.w  d0,-(sp)

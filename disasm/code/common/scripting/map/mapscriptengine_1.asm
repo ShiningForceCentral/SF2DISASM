@@ -510,7 +510,7 @@ rjt_EntityMoveCommands:
                 dc.w csc2D_9_faceUp-rjt_EntityMoveCommands
                 dc.w csc2D_A_faceLeft-rjt_EntityMoveCommands
                 dc.w csc2D_B_faceDown-rjt_EntityMoveCommands
-                dc.w loc_468F2-rjt_EntityMoveCommands; related to face down
+                dc.w loc_468F2-rjt_EntityMoveCommands ; related to face down
                 dc.w csc2D_D_jump-rjt_EntityMoveCommands
                 dc.w csc2D_E_jumpRight-rjt_EntityMoveCommands
                 dc.w csc2D_F_jumpLeft-rjt_EntityMoveCommands
@@ -734,11 +734,9 @@ csc14_setEntityActscriptManual:
                 
                 move.b  (a6)+,d0
                 bsr.w   GetEntityAddressFromPlayableCharacterIdx
-                move.b  d0,ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER(a5)
-                                                        ; timer for next actscript read
+                move.b  d0,ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER(a5) ; timer for next actscript read
                 move.b  (a6)+,d0
-                move.l  a6,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a5)
-                                                        ; address of new actscript
+                move.l  a6,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a5) ; address of new actscript
                 tst.b   d0
                 beq.w   loc_46970
 loc_46966:
@@ -836,12 +834,11 @@ csc18_flashEntityWhite:
                 lsr.w   #2,d7
 loc_469E8:
                 
-                ori.b   #4,ENTITYDEF_OFFSET_FLAGS_B(a5); set bit 2
+                ori.b   #4,ENTITYDEF_OFFSET_FLAGS_B(a5) ; set bit 2
                 bsr.w   UpdateEntitySprite_0
                 jsr     (WaitForVInt).w
                 jsr     (WaitForVInt).w
-                andi.b  #$FB,ENTITYDEF_OFFSET_FLAGS_B(a5)
-                                                        ; clear bit 2
+                andi.b  #$FB,ENTITYDEF_OFFSET_FLAGS_B(a5) ; clear bit 2
                 bsr.w   UpdateEntitySprite_0
                 jsr     (WaitForVInt).w
                 jsr     (WaitForVInt).w
@@ -888,7 +885,7 @@ csc1A_setEntitySprite:
                 move.w  (a6)+,d0
                 cmpi.w  #COM_ALLIES_NUM,d0
                 bcc.s   loc_46A5E
-                jsr     GetForceMemberSpriteIdx
+                jsr     GetAllyMapSprite
                 move.w  d4,d0
 loc_46A5E:
                 
@@ -1802,7 +1799,7 @@ AdjustScriptPointerByCharAliveStatus:
                 
                 btst    #7,d0
                 bne.s   return_4709C
-                cmpi.b  #COM_ALLIES_NUM,d0; HARDCODED force member index limit
+                cmpi.b  #COM_ALLIES_NUM,d0 ; HARDCODED force member index limit
                 bge.s   return_4709C    ; it must be a force member
                 jsr     j_GetCurrentHP
                 tst.w   d1

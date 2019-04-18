@@ -22,9 +22,9 @@ return_50A3A:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_166:
+nullsub_50A3C:
                 
                 rts
 
-	; End of function nullsub_166
+	; End of function nullsub_50A3C
 

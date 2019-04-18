@@ -202,7 +202,7 @@ cs_53176:       setCameraEntity $FFFF
                 nextText $0,$8C         ; "Why don't you go to Yeel{N}and bring Hawel back here?{W2}"
                 nextText $0,$8C         ; "I don't think this is a{N}difficult job.{N}Will you go?{W1}"
 cs_53482:       yesNo
-                jumpIfFlagSet $59,cs_534AC; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_534AC ; YES/NO prompt answer
                 hideText
                 textCursor $2F5
                 setActscriptWait $8A,eas_Jump

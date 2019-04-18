@@ -1,332 +1,6 @@
 
-; ASM FILE code\gameflow\battle\battlefieldengine.asm :
-; 0xC09A..0xDEFC : Battlefield engine
-
-; =============== S U B R O U T I N E =======================================
-
-;     Convert coordinate to offset and add to address argument.
-;     In: A0 = start of grid
-;         D1 = X coord
-;         D2 = Y coord
-;     Out: A0 = start of grid + offset
-
-ConvertCoordToOffset:
-                
-                move.l  d2,-(sp)
-                mulu.w  #$30,d2 
-                add.w   d1,d2
-                adda.l  d2,a0
-                move.l  (sp)+,d2
-                rts
-
-	; End of function ConvertCoordToOffset
-
-
-; =============== S U B R O U T I N E =======================================
-
-;     Clear valid target index grid at RAM:5600.
-
-ClearTargetGrid:
-                
-                movem.l d0-d1/a0,-(sp)
-                lea     (FF5600_LOADING_SPACE).l,a0
-                move.w  #$240,d0
-                moveq   #$FFFFFFFF,d1
-loc_C0B8:
-                
-                move.l  d1,(a0)+
-                subq.w  #1,d0
-                bne.s   loc_C0B8
-                movem.l (sp)+,d0-d1/a0
-                rts
-
-	; End of function ClearTargetGrid
-
-
-; =============== S U B R O U T I N E =======================================
-
-;     Clear moveable tile data at RAM:4400 and RAM:4d00.
-
-ClearMovableGrid:
-                
-                movem.l d0-a6,-(sp)
-                lea     ((byte_FF4000+$400)).l,a0
-                lea     (FF4D00_LOADING_SPACE).l,a1
-                move.w  #$240,d0
-                moveq   #$FFFFFFFF,d1
-loc_C0DA:
-                
-                move.l  d1,(a0)+
-                move.l  d1,(a1)+
-                subq.w  #1,d0
-                bne.s   loc_C0DA
-                movem.l (sp)+,d0-a6
-                rts
-
-	; End of function ClearMovableGrid
-
-
-; =============== S U B R O U T I N E =======================================
-
-;     Get value at converted coordinate offset.
-;     In: D1 = X coord
-;         D2 = Y coord
-;     Out: D0 = terrain at offset
-
-GetTargetAtCoordOffset:
-                
-                movem.l d1-a6,-(sp)
-                lea     (FF5600_LOADING_SPACE).l,a0
-                bsr.s   ConvertCoordToOffset
-                move.b  (a0),d0
-                movem.l (sp)+,d1-a6
-                rts
-
-	; End of function GetTargetAtCoordOffset
-
-
-; =============== S U B R O U T I N E =======================================
-
-; get distance from current unit to entity D0 -> D0
-
-GetMoveCostToEntity:
-                
-                movem.l d1-a6,-(sp)
-                jsr     GetYPos
-                move.b  d1,d2
-                jsr     GetXPos
-                bsr.w   GetDestinationMoveCost
-                movem.l (sp)+,d1-a6
-                rts
-
-	; End of function GetMoveCostToEntity
-
-
-; =============== S U B R O U T I N E =======================================
-
-; get movecost to get to tile D1,D2 -> D0
-
-GetDestinationMoveCost:
-                
-                movem.l d1-a6,-(sp)
-                lea     ((byte_FF4000+$400)).l,a0
-                lea     (FF4D00_LOADING_SPACE).l,a1
-                clr.w   d0
-                mulu.w  #$30,d2 
-                andi.w  #$FF,d1
-                add.w   d1,d2
-                move.b  (a1,d2.w),d0
-                lsl.w   #8,d0
-                move.b  (a0,d2.w),d0
-                movem.l (sp)+,d1-a6
-                rts
-
-	; End of function GetDestinationMoveCost
-
-
-; =============== S U B R O U T I N E =======================================
-
-; get terrain type of tile under entity D0 -> D0
-
-GetCurrentTerrainType:
-                
-                movem.l d1-a6,-(sp)
-                jsr     GetYPos
-                move.w  d1,d2
-                jsr     GetXPos
-                bsr.w   GetTerrain      
-                movem.l (sp)+,d1-a6
-                rts
-
-	; End of function GetCurrentTerrainType
-
-
-; =============== S U B R O U T I N E =======================================
-
-;     Get obstruction at converted coordinate offset.
-;     In: D1 = X coord
-;         D2 = Y coord
-;     Out: D0 = target at offset
-
-GetTerrain:
-                
-                movem.l d1-a6,-(sp)
-                lea     (BATTLE_TERRAIN).l,a0
-                bsr.w   ConvertCoordToOffset
-                move.b  (a0),d0
-                movem.l (sp)+,d1-a6
-                rts
-
-	; End of function GetTerrain
-
-
-; =============== S U B R O U T I N E =======================================
-
-SetTerrain:
-                
-                movem.l d1-a6,-(sp)
-                lea     (BATTLE_TERRAIN).l,a0
-                bsr.w   ConvertCoordToOffset
-                move.b  d0,(a0)
-                movem.l (sp)+,d1-a6
-                rts
-
-	; End of function SetTerrain
-
-
-; =============== S U B R O U T I N E =======================================
-
-MemorizePath:
-                
-                movem.l d0-a6,-(sp)     ; copy current moving unit's terrain list to memory
-                jsr     GetUpperMoveType
-                lsl.w   #4,d1
-                lea     MoveTypeTerrainCosts(pc), a0
-                adda.w  d1,a0
-                lea     ((MOVE_COST_LIST-$1000000)).w,a1
-                moveq   #$F,d7
-loc_C1A4:
-                
-                move.b  (a0)+,d1
-                andi.b  #$F,d1
-                cmpi.b  #$F,d1
-                bne.s   loc_C1B2
-                moveq   #$FFFFFFFF,d1
-loc_C1B2:
-                
-                move.b  d1,(a1)+
-                dbf     d7,loc_C1A4
-                movem.l (sp)+,d0-a6
-                rts
-
-	; End of function MemorizePath
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_C1BE:
-                
-                movem.l d0/d2-a6,-(sp)
-                bsr.s   MemorizePath
-                lea     ((MOVE_COST_LIST-$1000000)).w,a0
-                bsr.w   GetCurrentTerrainType
-                andi.w  #$F,d0
-                adda.w  d0,a0
-                move.b  (a0),d1
-                movem.l (sp)+,d0/d2-a6
-                rts
-
-	; End of function sub_C1BE
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetMoveCost:
-                
-                movem.l d0/d2-a6,-(sp)
-                jsr     GetUpperMoveType
-                lsl.w   #4,d1
-                lea     MoveTypeTerrainCosts(pc), a0
-                adda.w  d1,a0
-                bsr.w   GetCurrentTerrainType
-                andi.w  #$F,d0
-                adda.w  d0,a0
-                move.b  (a0),d1
-                lsr.b   #4,d1
-                andi.b  #$F,d1
-                movem.l (sp)+,d0/d2-a6
-                rts
-
-	; End of function GetMoveCost
-
-
-; =============== S U B R O U T I N E =======================================
-
-;     Set coord to movable in movable grid.
-;     In: D1 = X coord
-;         D2 = Y coord
-
-SetMovableAtCoord:
-                
-                movem.l d0-a6,-(sp)
-                lea     ((byte_FF4000+$400)).l,a0
-                bsr.w   ConvertCoordToOffset
-                move.b  #0,(a0)
-                lea     (FF4D00_LOADING_SPACE).l,a0
-                bsr.w   ConvertCoordToOffset
-                move.b  #0,(a0)
-                movem.l (sp)+,d0-a6
-                rts
-
-	; End of function SetMovableAtCoord
-
-
-; =============== S U B R O U T I N E =======================================
-
-;     Get resistance to spell of combatant.
-;     In: D0 = combatant idx
-;         D1 = spell idx
-;     Out: D2 = resistance bitmask
-
-GetResistanceToSpell:
-                
-                movem.l d0-d1/d3-a6,-(sp)
-                andi.b  #SPELL_MASK_IDX,d1
-                move.b  SpellElements(pc,d1.w),d2
-                jsr     GetCurrentResistance
-                andi.w  #SPELL_MASK_ALLRESIST,d1
-                ror.w   d2,d1
-                move.w  d1,d2
-                andi.w  #SPELL_MASK_RESIST,d2
-                movem.l (sp)+,d0-d1/d3-a6
-                rts
-
-	; End of function GetResistanceToSpell
-
-SpellElements:  spellElement 8          ; HEAL
-                spellElement 8          ; AURA
-                spellElement 14         ; DETOX
-                spellElement 14         ; BOOST
-                spellElement 14         ; SLOW
-                spellElement 14         ; ATTACK
-                spellElement 14         ; DISPEL
-                spellElement 14         ; MUDDLE
-                spellElement 14         ; DESOUL
-                spellElement 14         ; SLEEP
-                spellElement 8          ; EGRESS
-                spellElement 6          ; BLAZE
-                spellElement 4          ; FREEZE
-                spellElement 2          ; BOLT
-                spellElement 0          ; BLAST
-                spellElement 8          ; SPOIT
-                spellElement 8          ; HEALIN
-                spellElement 6          ; FLAME
-                spellElement 4          ; SNOW
-                spellElement 8          ; DEMON
-                spellElement 8          ; POWER
-                spellElement 8          ; GUARD
-                spellElement 8          ; SPEED
-                spellElement 8          ; IDATEN
-                spellElement 8          ; HEALTH
-                spellElement 8          ; B.ROCK
-                spellElement 8          ; LASER
-                spellElement 8          ; KATON
-                spellElement 8          ; RAIJIN
-                spellElement 0          ; DAO
-                spellElement 6          ; APOLLO
-                spellElement 4          ; NEPTUN
-                spellElement 8          ; ATLAS
-                spellElement 8          ; POWDER
-                spellElement 8          ; G.TEAR
-                spellElement 8          ; HANNY
-                spellElement 8          ; BRAVE
-                spellElement 6          ; F.BALL
-                spellElement 4          ; BREZAD
-                spellElement 2          ; THUNDR
-                spellElement 4          ; AQUA
-                spellElement 6          ; KIWI
-                spellElement 8          ; SHINE
-                spellElement 2          ; ODDEYE
+; ASM FILE code\gameflow\battle\battlefieldengine_2.asm :
+; 0xC27A..0xDEFC : Battlefield engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1063,7 +737,7 @@ loc_C7EA:
 MakeTargetList:
                 
                 btst    #7,d0
-                bne.w   MakeTargetListMonsters; generate list of targets: opposite alignment of D0
+                bne.w   MakeTargetListMonsters ; generate list of targets: opposite alignment of D0
 
 	; End of function MakeTargetList
 
@@ -1808,7 +1482,7 @@ loc_CDC2:
                 lsl.w   #5,d1
                 add.w   d4,d1
                 jsr     GetSpellDefAddress
-                cmp.b   SPELLDEF_OFFSET_MPCOST(a0),d3; check if spell cost is more than current MP
+                cmp.b   SPELLDEF_OFFSET_MPCOST(a0),d3 ; check if spell cost is more than current MP
                 bcc.w   loc_CDDC
                 dbf     d2,loc_CDC2
 loc_CDDC:
@@ -2062,7 +1736,7 @@ loc_CF88:
                 jsr     GetSpellAndNumberOfSpells
                 move.w  d1,d4
                 andi.w  #SPELL_MASK_IDX,d4
-                cmpi.w  #SPELLIDX_NOTHING,d4
+                cmpi.w  #SPELL_NOTHING,d4
                 bne.s   loc_CFA0
                 bra.w   loc_CFFC
 loc_CFA0:
@@ -2071,32 +1745,32 @@ loc_CFA0:
                 beq.s   loc_CFEA
                 move.w  d1,d5
                 andi.b  #SPELL_MASK_IDX,d5
-                cmpi.b  #SPELLIDX_BLAZE,d5
+                cmpi.b  #SPELL_BLAZE,d5
                 bne.s   loc_CFB4
                 bra.w   loc_CFEA
 loc_CFB4:
                 
-                cmpi.b  #SPELLIDX_FREEZE,d5
+                cmpi.b  #SPELL_FREEZE,d5
                 bne.s   loc_CFBE
                 bra.w   loc_CFEA
 loc_CFBE:
                 
-                cmpi.b  #SPELLIDX_BOLT,d5
+                cmpi.b  #SPELL_BOLT,d5
                 bne.s   loc_CFC8
                 bra.w   loc_CFEA
 loc_CFC8:
                 
-                cmpi.b  #SPELLIDX_BLAST,d5
+                cmpi.b  #SPELL_BLAST,d5
                 bne.s   loc_CFD2
                 bra.w   loc_CFEA
 loc_CFD2:
                 
-                cmpi.b  #SPELLIDX_KATON,d5
+                cmpi.b  #SPELL_KATON,d5
                 bne.s   loc_CFDC
                 bra.w   loc_CFEA
 loc_CFDC:
                 
-                cmpi.b  #SPELLIDX_RAIJIN,d5
+                cmpi.b  #SPELL_RAIJIN,d5
                 bne.s   loc_CFE6
                 bra.w   loc_CFEA
 loc_CFE6:
@@ -2106,14 +1780,14 @@ loc_CFEA:
                 
                 jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
-                andi.b  #SPELLDEF_PROPS_TYPE_MASK,d2
+                andi.b  #SPELLPROPS_MASK_TYPE,d2
                 beq.w   loc_D00C
 loc_CFFC:
                 
                 addq.w  #1,d3
                 cmpi.w  #CHAR_SPELLSLOTS,d3
                 bcs.s   loc_CF88
-                move.w  #SPELLIDX_NOTHING,d1
+                move.w  #SPELL_NOTHING,d1
                 bra.w   loc_D012
 loc_D00C:
                 
@@ -2183,22 +1857,22 @@ loc_D066:
                 jsr     GetSpellAndNumberOfSpells
                 move.w  d1,d4
                 andi.w  #SPELL_MASK_IDX,d4
-                cmpi.w  #SPELLIDX_NOTHING,d4
+                cmpi.w  #SPELL_NOTHING,d4
                 bne.s   loc_D07E
                 bra.w   loc_D094
 loc_D07E:
                 
                 jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
-                andi.b  #SPELLDEF_PROPS_TYPE_MASK,d2
-                cmpi.b  #SPELLDEF_TYPE_STATUS,d2
+                andi.b  #SPELLPROPS_MASK_TYPE,d2
+                cmpi.b  #SPELLPROPS_TYPE_STATUS,d2
                 beq.w   loc_D0A4
 loc_D094:
                 
                 addq.w  #1,d3
                 cmpi.w  #CHAR_SPELLSLOTS,d3
                 bcs.s   loc_D066
-                move.w  #SPELLIDX_NOTHING,d1
+                move.w  #SPELL_NOTHING,d1
                 bra.w   loc_D0A6
 loc_D0A4:
                 
@@ -2232,7 +1906,7 @@ loc_D0C0:
                 
                 move.w  d3,d1
                 jsr     GetCharItemAtSlotAndNumberOfItems
-                cmpi.w  #ITEMIDX_NOTHING,d1
+                cmpi.w  #ITEM_NOTHING,d1
                 bne.s   loc_D0D2
                 bra.w   loc_D0DC
 loc_D0D2:
@@ -2261,22 +1935,22 @@ loc_D0F8:
                 beq.s   loc_D13C
                 move.w  d1,d5
                 andi.b  #SPELL_MASK_IDX,d5
-                cmpi.b  #SPELLIDX_BLAZE,d5
+                cmpi.b  #SPELL_BLAZE,d5
                 bne.s   loc_D11A
                 bra.w   loc_D13C
 loc_D11A:
                 
-                cmpi.b  #SPELLIDX_FREEZE,d5
+                cmpi.b  #SPELL_FREEZE,d5
                 bne.s   loc_D124
                 bra.w   loc_D13C
 loc_D124:
                 
-                cmpi.b  #SPELLIDX_BOLT,d5
+                cmpi.b  #SPELL_BOLT,d5
                 bne.s   loc_D12E
                 bra.w   loc_D13C
 loc_D12E:
                 
-                cmpi.b  #SPELLIDX_BLAST,d5
+                cmpi.b  #SPELL_BLAST,d5
                 bne.s   loc_D138
                 bra.w   loc_D13C
 loc_D138:
@@ -2286,14 +1960,14 @@ loc_D13C:
                 
                 jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
-                andi.b  #SPELLDEF_PROPS_TYPE_MASK,d2
+                andi.b  #SPELLPROPS_MASK_TYPE,d2
                 bne.w   loc_D156
                 move.w  d3,d2
                 move.w  d7,d1
                 bra.w   loc_D15A
 loc_D156:
                 
-                move.w  #ITEMIDX_NOTHING,d1
+                move.w  #ITEM_NOTHING,d1
 loc_D15A:
                 
                 movem.l (sp)+,d0/d3-a6
@@ -2318,7 +1992,7 @@ loc_D164:
                 
                 move.w  d3,d1
                 jsr     GetCharItemAtSlotAndNumberOfItems
-                cmpi.w  #ITEMIDX_NOTHING,d1
+                cmpi.w  #ITEM_NOTHING,d1
                 bne.s   loc_D176
                 bra.w   loc_D1BA
 loc_D176:
@@ -2406,7 +2080,7 @@ loc_D22E:
                 bsr.w   CheckMuddled2   
                 tst.b   d1
                 beq.s   loc_D23A
-                eori.b  #COM_TYPE_REALMASK,d0; flip enemy bit, to get the opposite type when muddled
+                eori.b  #COM_TYPE_REALMASK,d0 ; flip enemy bit, to get the opposite type when muddled
 loc_D23A:
                 
                 btst    #7,d0

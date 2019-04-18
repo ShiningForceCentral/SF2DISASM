@@ -4,9 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_14:
+nullsub_4712A:
                 
                 rts
 
-	; End of function nullsub_14
+	; End of function nullsub_4712A
 

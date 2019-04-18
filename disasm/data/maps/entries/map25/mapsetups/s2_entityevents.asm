@@ -124,11 +124,11 @@ loc_5D2E0:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_131:
+nullsub_5D2E8:
                 
                 rts
 
-	; End of function nullsub_131
+	; End of function nullsub_5D2E8
 
 
 ; =============== S U B R O U T I N E =======================================

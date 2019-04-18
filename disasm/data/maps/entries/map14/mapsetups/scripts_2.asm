@@ -116,7 +116,7 @@ cs_58FA4:       textCursor $8D6
 cs_59122:       textCursor $8E3
                 nextText $0,$80         ; "Would you go to North{N}Cliff and check on his{N}friend?{D1}"
                 yesNo
-                jumpIfFlagSet $59,cs_59142; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_59142 ; YES/NO prompt answer
                 nextText $0,$80         ; "What did you say?{N}I didn't hear you.{W2}"
                 nextText $0,$80         ; "OK, once again!{W1}"
                 jump cs_59122

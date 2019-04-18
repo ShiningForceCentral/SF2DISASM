@@ -9,7 +9,7 @@
                 incbin "data/sound/yminst.bin"
 SoundDriver:    incbin "data/sound/sounddriver.bin"
 p_StatGrowthCurves:
-                dc.l StatGrowthCurves
+                dc.l StatGrowthCurves   
 p_pt_AllyStats: dc.l pt_AllyStats
 p_AllyStartDefs:dc.l AllyStartDefs      
 p_ClassDefs:    dc.l ClassDefs          
@@ -25,15 +25,13 @@ p_SuspendStringTiles:
                 dc.l SuspendStringTiles
                 dc.l unused_BasePalettes
 p_BaseTiles:    dc.l BaseTiles
-StatGrowthCurves:
-                incbin "data/stats/allies/growthcurves.bin"
+                include "data\stats\allies\growthcurves.asm"    ; Stat growth curves
                 include "data\stats\allies\stats\entries.asm"    ; Ally stats
-                include "data\stats\allies\allystartdata.asm"    ; Ally start data
+                include "data\stats\allies\allystartdefs.asm"    ; Ally start definitions
                 include "data\stats\allies\classes\classdefs.asm"    ; Class definitions
                 includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
                 includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
 unused_BasePalettes:
-                incbin "data/graphics/tech/unusedbasepalettes.bin"
-                                                        ; two almost identical palettes which look like UI/sprites palette
+                incbin "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
 BaseTiles:      incbin "data/graphics/tech/basetiles.bin"
                 align $1F0000

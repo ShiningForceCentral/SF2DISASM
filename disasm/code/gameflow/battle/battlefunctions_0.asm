@@ -137,7 +137,7 @@ loc_22CC2:
                 bra.w   loc_22D56
 GetBattleMapProperties:
                 
-                lea     (FF4D00_LOADING_SPACE).l,a0;     Get battle map dimensions, address of movable bool grid, address of map tiles starting at top-left of battle map.
+                lea     (FF4D00_LOADING_SPACE).l,a0 ;     Get battle map dimensions, address of movable bool grid, address of map tiles starting at top-left of battle map.
                                         ;     Out: A0 = address of movable bool grid
                                         ;          A1 = address of map tile at top-left battle map X/Y
                                         ;          D6 = width of battle map

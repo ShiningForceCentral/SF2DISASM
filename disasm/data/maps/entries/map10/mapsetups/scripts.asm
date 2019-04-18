@@ -422,7 +422,7 @@ cs_5766C:       textCursor $690
                 entityActionsWait $99
                  jumpRight 1
                 endActions
-                setSprite $99,MAPSPRITE_CHICK_Flying
+                setSprite $99,MAPSPRITE_CHICK_FLYING
                 setActscriptWait $99,eas_46172
                 customActscriptWait $99
                  ac_setSpeed 4,4        ;   
@@ -458,7 +458,7 @@ cs_5766C:       textCursor $690
                  moveRight 1
                  jumpRight 1
                 endActions
-                setSprite $99,MAPSPRITE_CHICK_Flying
+                setSprite $99,MAPSPRITE_CHICK_FLYING
                 setActscriptWait $99,eas_46172
                 entityActionsWait $99
                  moveDown 1

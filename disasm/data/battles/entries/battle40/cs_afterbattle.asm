@@ -11,7 +11,7 @@ abcs_battle40:  textCursor $BF9
                 setPos $1F,15,6,DOWN
                 setActscriptWait $1C,eas_Init
                 setPos $1C,17,8,LEFT
-                jumpIfFlagClear $4C,cs_4EAEE; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4EAEE ; Zynk is a follower
                 setActscriptWait $1A,eas_Init
                 setPos $1A,63,62,DOWN
 cs_4EAEE:       setBlocks 11,6,11,29,44,0

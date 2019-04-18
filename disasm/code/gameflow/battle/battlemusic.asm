@@ -13,7 +13,7 @@ PlayMapMusic:
                 beq.s   byte_4586
                 cmpi.b  #0,d0
                 bne.s   loc_455E
-                move.w  #MUSIC_BATTLE_THEME_3,d0; HARDCODED battle music indexes here
+                move.w  #MUSIC_BATTLE_THEME_3,d0 ; HARDCODED battle music indexes here
 loc_455E:
                 
                 cmpi.b  #MUSIC_TOWN,d0

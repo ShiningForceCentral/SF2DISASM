@@ -1,92 +1,888 @@
 
 ; ASM FILE data\stats\spells\spelldefs.asm :
 ; 0x176A6..0x1796E : Spell definitions
-SpellDefs:      spellDef 0, 3, 4, 193, 1, 0, 0, 15; HEAL 1
-                spellDef 64, 5, 36, 193, 2, 0, 0, 15; HEAL 2
-                spellDef 128, 10, 68, 193, 3, 0, 0, 30; HEAL 3
-                spellDef 192, 20, 100, 193, 1, 0, 0, 255; HEAL 4
-                spellDef 1, 7, 4, 193, 3, 0, 1, 15; AURA 1
-                spellDef 65, 11, 36, 193, 3, 0, 2, 15; AURA 2
-                spellDef 129, 15, 68, 193, 3, 0, 2, 30; AURA 3
-                spellDef 193, 20, 100, 193, 0, 0, 0, 255; AURA 4
-                spellDef 2, 3, 6, 193, 1, 0, 0, 0; DETOX 1
-                spellDef 66, 6, 38, 193, 2, 0, 0, 0; DETOX 2
-                spellDef 130, 10, 70, 193, 2, 0, 0, 0; DETOX 3
-                spellDef 194, 16, 102, 193, 3, 0, 2, 0; DETOX 4
-                spellDef 3, 2, 8, 194, 1, 0, 1, 15; BOOST 1
-                spellDef 67, 5, 40, 194, 2, 0, 2, 15; BOOST 2
-                spellDef 4, 3, 9, 130, 1, 1, 1, 15; SLOW 1
-                spellDef 68, 6, 41, 130, 2, 1, 2, 15; SLOW 2
-                spellDef 5, 7, 8, 194, 3, 1, 0, 15; ATTACK 1
-                spellDef 6, 5, 9, 130, 2, 1, 1, 0; DISPEL 1
-                spellDef 7, 6, 9, 130, 2, 1, 1, 0; MUDDLE 1
-                spellDef 71, 11, 9, 130, 2, 1, 2, 0; MUDDLE 2
-                spellDef 8, 8, 3, 128, 2, 1, 0, 0; DESOUL 1
-                spellDef 72, 13, 35, 128, 2, 1, 1, 0; DESOUL 2
-                spellDef 9, 4, 9, 130, 2, 1, 1, 0; SLEEP 1
-                spellDef 10, 8, 0, 195, 0, 0, 0, 0; EGRESS 1
-                spellDef 11, 2, 1, 128, 2, 1, 0, 6; BLAZE 1
-                spellDef 75, 6, 33, 128, 2, 1, 1, 10; BLAZE 2
-                spellDef 139, 10, 65, 128, 2, 1, 1, 15; BLAZE 3
-                spellDef 203, 10, 97, 128, 2, 1, 0, 40; BLAZE 4
-                spellDef 12, 3, 2, 128, 2, 1, 0, 10; FREEZE 1
-                spellDef 76, 7, 34, 128, 2, 1, 1, 12; FREEZE 2
-                spellDef 140, 12, 66, 128, 3, 1, 1, 18; FREEZE 3
-                spellDef 204, 12, 98, 128, 3, 1, 0, 50; FREEZE 4
-                spellDef 13, 8, 7, 128, 2, 1, 1, 14; BOLT 1
-                spellDef 77, 15, 39, 128, 3, 1, 2, 16; BOLT 2
-                spellDef 141, 20, 71, 128, 3, 1, 2, 25; BOLT 3
-                spellDef 205, 20, 103, 128, 3, 1, 0, 60; BOLT 4
-                spellDef 14, 2, 5, 128, 1, 1, 0, 6; BLAST 1
-                spellDef 78, 5, 37, 128, 2, 1, 1, 8; BLAST 2
-                spellDef 142, 8, 69, 128, 2, 1, 1, 12; BLAST 3
-                spellDef 206, 8, 101, 128, 2, 1, 0, 30; BLAST 4
-                spellDef 15, 0, 10, 3, 2, 1, 0, 10; SPOIT 1
-                spellDef 16, 0, 4, 65, 1, 0, 0, 10; HEALIN 1
-                spellDef 80, 0, 36, 65, 1, 0, 0, 20; HEALIN 2
-                spellDef 144, 0, 68, 65, 1, 0, 0, 30; HEALIN 3
-                spellDef 17, 0, 12, 0, 1, 1, 0, 16; FLAME 1
-                spellDef 81, 0, 44, 0, 1, 1, 0, 24; FLAME 2
-                spellDef 145, 0, 76, 0, 1, 1, 0, 34; FLAME 3
-                spellDef 18, 0, 55, 0, 1, 1, 0, 20; SNOW 1
-                spellDef 82, 0, 87, 0, 1, 1, 0, 28; SNOW 2
-                spellDef 146, 0, 119, 0, 1, 1, 0, 35; SNOW 3
-                spellDef 19, 0, 11, 0, 2, 1, 1, 34; DEMON 1
-                spellDef 83, 0, 43, 0, 3, 1, 2, 38; DEMON 2
-                spellDef 20, 0, 0, 67, 0, 0, 0, 4; POWER 1
-                spellDef 21, 0, 0, 67, 0, 0, 0, 4; GUARD 1
-                spellDef 22, 0, 0, 67, 0, 0, 0, 4; SPEED 1
-                spellDef 23, 0, 0, 67, 0, 0, 0, 2; IDATEN 1
-                spellDef 24, 0, 0, 67, 0, 0, 0, 4; HEALTH 1
-                spellDef 25, 0, 30, 0, 0, 0, 2, 18; B.ROCK 1
-                spellDef 26, 0, 0, 0, 0, 0, 3, 16; LASER 1
-                spellDef 27, 6, 33, 128, 2, 1, 1, 12; KATON 1
-                spellDef 91, 10, 65, 128, 2, 1, 1, 16; KATON 2
-                spellDef 155, 12, 97, 128, 2, 1, 0, 42; KATON 3
-                spellDef 28, 15, 39, 128, 3, 1, 2, 18; RAIJIN 1
-                spellDef 92, 18, 71, 128, 3, 1, 2, 26; RAIJIN 2
-                spellDef 156, 20, 103, 128, 3, 1, 0, 58; RAIJIN 3
-                spellDef 29, 8, 17, 128, 2, 1, 1, 18; DAO 1
-                spellDef 93, 15, 49, 128, 2, 1, 1, 40; DAO 2
-                spellDef 30, 10, 18, 128, 2, 1, 1, 23; APOLLO 1
-                spellDef 94, 17, 50, 128, 2, 1, 1, 50; APOLLO 2
-                spellDef 31, 12, 19, 128, 2, 1, 1, 30; NEPTUN 1
-                spellDef 95, 19, 51, 128, 2, 1, 1, 61; NEPTUN 2
-                spellDef 32, 14, 20, 128, 2, 1, 1, 35; ATLAS 1
-                spellDef 96, 23, 52, 128, 3, 1, 1, 73; ATLAS 2
-                spellDef 33, 0, 0, 65, 1, 0, 0, 0; POWDER 1
-                spellDef 34, 0, 0, 65, 1, 0, 0, 10; G.TEAR 1
-                spellDef 98, 0, 0, 65, 1, 0, 0, 20; G.TEAR 2
-                spellDef 35, 0, 0, 67, 0, 0, 0, 4; HANNY 1
-                spellDef 36, 0, 0, 67, 0, 0, 0, 1; BRAVE 1
-                spellDef 37, 0, 65, 0, 1, 1, 0, 20; F.BALL 1
-                spellDef 38, 0, 66, 0, 1, 1, 0, 33; BREZAD 1
-                spellDef 39, 0, 71, 0, 1, 1, 0, 50; THUNDR 1
-                spellDef 40, 0, 22, 0, 3, 1, 0, 13; AQUA 1
-                spellDef 104, 0, 54, 0, 1, 1, 0, 15; AQUA 2
-                spellDef 41, 0, 76, 0, 1, 1, 0, 28; KIWI 1
-                spellDef 105, 0, 76, 0, 1, 1, 0, 36; KIWI 2
-                spellDef 169, 0, 76, 0, 1, 1, 0, 45; KIWI 3
-                spellDef 233, 0, 76, 0, 1, 1, 0, 58; KIWI 4
-                spellDef 42, 0, 0, 65, 0, 0, 0, 255; SHINE 1
-                spellDef 43, 0, 31, 0, 3, 1, 1, 20; ODDEYE 1
+SpellDefs:      index SPELL_HEAL        ; HEAL 1
+                mpCost 3
+                animation SPELLANIMIDX_FAIRY
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 1
+                radius 0
+                power 15
+                    
+                index SPELL_HEAL|SPELL_LV2 ; HEAL 2
+                mpCost 5
+                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 2
+                radius 0
+                power 15
+                    
+                index SPELL_HEAL|SPELL_LV3 ; HEAL 3
+                mpCost 10
+                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 3
+                radius 0
+                power 30
+                    
+                index SPELL_HEAL|SPELL_LV4 ; HEAL 4
+                mpCost 20
+                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_3
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 1
+                radius 0
+                power 255
+                    
+                index SPELL_AURA        ; AURA 1
+                mpCost 7
+                animation SPELLANIMIDX_FAIRY
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 3
+                radius 1
+                power 15
+                    
+                index SPELL_AURA|SPELL_LV2 ; AURA 2
+                mpCost 11
+                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 3
+                radius 2
+                power 15
+                    
+                index SPELL_AURA|SPELL_LV3 ; AURA 3
+                mpCost 15
+                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 3
+                radius 2
+                power 30
+                    
+                index SPELL_AURA|SPELL_LV4 ; AURA 4
+                mpCost 20
+                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_3
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 0
+                radius 0
+                power 255
+                    
+                index SPELL_DETOX       ; DETOX 1
+                mpCost 3
+                animation SPELLANIMIDX_DETOX
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 1
+                radius 0
+                power 0
+                    
+                index SPELL_DETOX|SPELL_LV2 ; DETOX 2
+                mpCost 6
+                animation SPELLANIMIDX_DETOX|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 2
+                radius 0
+                power 0
+                    
+                index SPELL_DETOX|SPELL_LV3 ; DETOX 3
+                mpCost 10
+                animation SPELLANIMIDX_DETOX|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 2
+                radius 0
+                power 0
+                    
+                index SPELL_DETOX|SPELL_LV4 ; DETOX 4
+                mpCost 16
+                animation SPELLANIMIDX_DETOX|SPELLANIMPARAM_3
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 3
+                radius 2
+                power 0
+                    
+                index SPELL_BOOST       ; BOOST 1
+                mpCost 2
+                animation SPELLANIMIDX_BUFF
+                properties &
+                    SPELLPROPS_TYPE_STATUS|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 1
+                radius 1
+                power 15
+                    
+                index SPELL_BOOST|SPELL_LV2 ; BOOST 2
+                mpCost 5
+                animation SPELLANIMIDX_BUFF|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_STATUS|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 2
+                radius 2
+                power 15
+                    
+                index SPELL_SLOW        ; SLOW 1
+                mpCost 3
+                animation SPELLANIMIDX_DEBUFF
+                properties &
+                    SPELLPROPS_TYPE_STATUS|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 1
+                radius 1
+                power 15
+                    
+                index SPELL_SLOW|SPELL_LV2 ; SLOW 2
+                mpCost 6
+                animation SPELLANIMIDX_DEBUFF|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_STATUS|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 2
+                power 15
+                    
+                index SPELL_ATTACK      ; ATTACK 1
+                mpCost 7
+                animation SPELLANIMIDX_BUFF
+                properties &
+                    SPELLPROPS_TYPE_STATUS|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 3
+                radius 0
+                power 15
+                    
+                index SPELL_DISPEL      ; DISPEL 1
+                mpCost 5
+                animation SPELLANIMIDX_DEBUFF
+                properties &
+                    SPELLPROPS_TYPE_STATUS|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 0
+                    
+                index SPELL_MUDDLE      ; MUDDLE 1
+                mpCost 6
+                animation SPELLANIMIDX_DEBUFF
+                properties &
+                    SPELLPROPS_TYPE_STATUS|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 0
+                    
+                index SPELL_MUDDLE|SPELL_LV2 ; MUDDLE 2
+                mpCost 11
+                animation SPELLANIMIDX_DEBUFF
+                properties &
+                    SPELLPROPS_TYPE_STATUS|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 2
+                power 0
+                    
+                index SPELL_DESOUL      ; DESOUL 1
+                mpCost 8
+                animation SPELLANIMIDX_DESOUL
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 0
+                power 0
+                    
+                index SPELL_DESOUL|SPELL_LV2 ; DESOUL 2
+                mpCost 13
+                animation SPELLANIMIDX_DESOUL|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 0
+                    
+                index SPELL_SLEEP       ; SLEEP 1
+                mpCost 4
+                animation SPELLANIMIDX_DEBUFF
+                properties &
+                    SPELLPROPS_TYPE_STATUS|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 0
+                    
+                index SPELL_EGRESS      ; EGRESS 1
+                mpCost 8
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_SPECIAL|&
+                    SPELLPROPS_TARGET_TEAMMATES|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 0, 0
+                radius 0
+                power 0
+                    
+                index SPELL_BLAZE       ; BLAZE 1
+                mpCost 2
+                animation SPELLANIMIDX_BLAZE
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 0
+                power 6
+                    
+                index SPELL_BLAZE|SPELL_LV2 ; BLAZE 2
+                mpCost 6
+                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 10
+                    
+                index SPELL_BLAZE|SPELL_LV3 ; BLAZE 3
+                mpCost 10
+                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 15
+                    
+                index SPELL_BLAZE|SPELL_LV4 ; BLAZE 4
+                mpCost 10
+                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_3
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 0
+                power 40
+                    
+                index SPELL_FREEZE      ; FREEZE 1
+                mpCost 3
+                animation SPELLANIMIDX_FREEZE
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 0
+                power 10
+                    
+                index SPELL_FREEZE|SPELL_LV2 ; FREEZE 2
+                mpCost 7
+                animation SPELLANIMIDX_FREEZE|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 12
+                    
+                index SPELL_FREEZE|SPELL_LV3 ; FREEZE 3
+                mpCost 12
+                animation SPELLANIMIDX_FREEZE|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 3
+                radius 1
+                power 18
+                    
+                index SPELL_FREEZE|SPELL_LV4 ; FREEZE 4
+                mpCost 12
+                animation SPELLANIMIDX_FREEZE|SPELLANIMPARAM_3
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 3
+                radius 0
+                power 50
+                    
+                index SPELL_BOLT        ; BOLT 1
+                mpCost 8
+                animation SPELLANIMIDX_BOLT
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 14
+                    
+                index SPELL_BOLT|SPELL_LV2 ; BOLT 2
+                mpCost 15
+                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 3
+                radius 2
+                power 16
+                    
+                index SPELL_BOLT|SPELL_LV3 ; BOLT 3
+                mpCost 20
+                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 3
+                radius 2
+                power 25
+                    
+                index SPELL_BOLT|SPELL_LV4 ; BOLT 4
+                mpCost 20
+                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_3
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 3
+                radius 0
+                power 60
+                    
+                index SPELL_BLAST       ; BLAST 1
+                mpCost 2
+                animation SPELLANIMIDX_BLAST
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 1
+                radius 0
+                power 6
+                    
+                index SPELL_BLAST|SPELL_LV2 ; BLAST 2
+                mpCost 5
+                animation SPELLANIMIDX_BLAST|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 8
+                    
+                index SPELL_BLAST|SPELL_LV3 ; BLAST 3
+                mpCost 8
+                animation SPELLANIMIDX_BLAST|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 12
+                    
+                index SPELL_BLAST|SPELL_LV4 ; BLAST 4
+                mpCost 8
+                animation SPELLANIMIDX_BLAST|SPELLANIMPARAM_3
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 0
+                power 30
+                    
+                index SPELL_SPOIT       ; SPOIT 1
+                mpCost 0
+                animation SPELLANIMIDX_MAGIC_DRAIN
+                properties &
+                    SPELLPROPS_TYPE_SPECIAL
+                range 1, 2
+                radius 0
+                power 10
+                    
+                index SPELL_HEALIN      ; HEALIN 1
+                mpCost 0
+                animation SPELLANIMIDX_FAIRY
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 1
+                radius 0
+                power 10
+                    
+                index SPELL_HEALIN|SPELL_LV2 ; HEALIN 2
+                mpCost 0
+                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 1
+                radius 0
+                power 20
+                    
+                index SPELL_HEALIN|SPELL_LV3 ; HEALIN 3
+                mpCost 0
+                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 1
+                radius 0
+                power 30
+                    
+                index SPELL_FLAME       ; FLAME 1
+                mpCost 0
+                animation SPELLANIMIDX_FLAME_BREATH
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 16
+                    
+                index SPELL_FLAME|SPELL_LV2 ; FLAME 2
+                mpCost 0
+                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 24
+                    
+                index SPELL_FLAME|SPELL_LV3 ; FLAME 3
+                mpCost 0
+                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 34
+                    
+                index SPELL_SNOW        ; SNOW 1
+                mpCost 0
+                animation SPELLANIMIDX_SNOW_BREATH|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 20
+                    
+                index SPELL_SNOW|SPELL_LV2 ; SNOW 2
+                mpCost 0
+                animation SPELLANIMIDX_SNOW_BREATH|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 28
+                    
+                index SPELL_SNOW|SPELL_LV3 ; SNOW 3
+                mpCost 0
+                animation SPELLANIMIDX_SNOW_BREATH|SPELLANIMPARAM_3
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 35
+                    
+                index SPELL_DEMON       ; DEMON 1
+                mpCost 0
+                animation SPELLANIMIDX_DEMON_BREATH
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 2
+                radius 1
+                power 34
+                    
+                index SPELL_DEMON|SPELL_LV2 ; DEMON 2
+                mpCost 0
+                animation SPELLANIMIDX_DEMON_BREATH|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 3
+                radius 2
+                power 38
+                    
+                index SPELL_POWER       ; POWER 1
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_SPECIAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 0
+                radius 0
+                power 4
+                    
+                index SPELL_GUARD       ; GUARD 1
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_SPECIAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 0
+                radius 0
+                power 4
+                    
+                index SPELL_SPEED       ; SPEED 1
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_SPECIAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 0
+                radius 0
+                power 4
+                    
+                index SPELL_IDATEN      ; IDATEN 1
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_SPECIAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 0
+                radius 0
+                power 2
+                    
+                index SPELL_HEALTH      ; HEALTH 1
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_SPECIAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 0
+                radius 0
+                power 4
+                    
+                index SPELL_B_ROCK      ; B.ROCK 1
+                mpCost 0
+                animation SPELLANIMIDX_BURST_ROCK
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 0, 0
+                radius 2
+                power 18
+                    
+                index SPELL_LASER       ; LASER 1
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 0, 0
+                radius 3
+                power 16
+                    
+                index SPELL_KATON       ; KATON 1
+                mpCost 6
+                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 12
+                    
+                index SPELL_KATON|SPELL_LV2 ; KATON 2
+                mpCost 10
+                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 16
+                    
+                index SPELL_KATON|SPELL_LV3 ; KATON 3
+                mpCost 12
+                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_3
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 0
+                power 42
+                    
+                index SPELL_RAIJIN      ; RAIJIN 1
+                mpCost 15
+                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 3
+                radius 2
+                power 18
+                    
+                index SPELL_RAIJIN|SPELL_LV2 ; RAIJIN 2
+                mpCost 18
+                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 3
+                radius 2
+                power 26
+                    
+                index SPELL_RAIJIN|SPELL_LV3 ; RAIJIN 3
+                mpCost 20
+                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_3
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 3
+                radius 0
+                power 58
+                    
+                index SPELL_DAO         ; DAO 1
+                mpCost 8
+                animation SPELLANIMIDX_DAO
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 18
+                    
+                index SPELL_DAO|SPELL_LV2 ; DAO 2
+                mpCost 15
+                animation SPELLANIMIDX_DAO|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 40
+                    
+                index SPELL_APOLLO      ; APOLLO 1
+                mpCost 10
+                animation SPELLANIMIDX_APOLLO
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 23
+                    
+                index SPELL_APOLLO|SPELL_LV2 ; APOLLO 2
+                mpCost 17
+                animation SPELLANIMIDX_APOLLO|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 50
+                    
+                index SPELL_NEPTUN      ; NEPTUN 1
+                mpCost 12
+                animation SPELLANIMIDX_NEPTUN
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 30
+                    
+                index SPELL_NEPTUN|SPELL_LV2 ; NEPTUN 2
+                mpCost 19
+                animation SPELLANIMIDX_NEPTUN|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 61
+                    
+                index SPELL_ATLAS       ; ATLAS 1
+                mpCost 14
+                animation SPELLANIMIDX_ATLAS
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 2
+                radius 1
+                power 35
+                    
+                index SPELL_ATLAS|SPELL_LV2 ; ATLAS 2
+                mpCost 23
+                animation SPELLANIMIDX_ATLAS|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK|&
+                    SPELLPROPS_AFFECTEDBYSILENCE
+                range 1, 3
+                radius 1
+                power 73
+                    
+                index SPELL_POWDER      ; POWDER 1
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 1
+                radius 0
+                power 0
+                    
+                index SPELL_G_TEAR      ; G.TEAR 1
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 1
+                radius 0
+                power 10
+                    
+                index SPELL_G_TEAR|SPELL_LV2 ; G.TEAR 2
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 1
+                radius 0
+                power 20
+                    
+                index SPELL_HANNY       ; HANNY 1
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_SPECIAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 0
+                radius 0
+                power 4
+                    
+                index SPELL_BRAVE       ; BRAVE 1
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_SPECIAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 0
+                radius 0
+                power 1
+                    
+                index SPELL_FBALL       ; F.BALL 1
+                mpCost 0
+                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 20
+                    
+                index SPELL_BREZAD      ; BREZAD 1
+                mpCost 0
+                animation SPELLANIMIDX_FREEZE|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 33
+                    
+                index SPELL_THUNDR      ; THUNDR 1
+                mpCost 0
+                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 50
+                    
+                index SPELL_AQUA        ; AQUA 1
+                mpCost 0
+                animation SPELLANIMIDX_BUBBLE_BREATH
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 3
+                radius 0
+                power 13
+                    
+                index SPELL_AQUA|SPELL_LV2 ; AQUA 2
+                mpCost 0
+                animation SPELLANIMIDX_BUBBLE_BREATH|SPELLANIMPARAM_1
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 15
+                    
+                index SPELL_KIWI        ; KIWI 1
+                mpCost 0
+                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 28
+                    
+                index SPELL_KIWI|SPELL_LV2 ; KIWI 2
+                mpCost 0
+                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 36
+                    
+                index SPELL_KIWI|SPELL_LV3 ; KIWI 3
+                mpCost 0
+                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 45
+                    
+                index SPELL_KIWI|SPELL_LV4 ; KIWI 4
+                mpCost 0
+                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_2
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 1
+                radius 0
+                power 58
+                    
+                index SPELL_SHINE       ; SHINE 1
+                mpCost 0
+                animation SPELLANIMIDX_NONE
+                properties &
+                    SPELLPROPS_TYPE_HEAL|&
+                    SPELLPROPS_TARGET_TEAMMATES
+                range 0, 0
+                radius 0
+                power 255
+                    
+                index SPELL_ODDEYE      ; ODDEYE 1
+                mpCost 0
+                animation SPELLANIMIDX_ODD_EYE_BEAM
+                properties &
+                    SPELLPROPS_TYPE_ATTACK
+                range 1, 3
+                radius 1
+                power 20
+                    

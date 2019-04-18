@@ -9,7 +9,7 @@ cs_5D652:       textCursor $7E8
                 nextText $0,$88         ; "May I paint your portrait?"
 cs_5D65E:       textCursor $7EB
                 yesNo
-                jumpIfFlagClear $59,cs_5D712; YES/NO prompt answer
+                jumpIfFlagClear $59,cs_5D712 ; YES/NO prompt answer
                 hideText
                 nextSingleText $0,$88   ; "Excellent!{W1}"
                 nextSingleText $0,$88   ; "Then, would you stand over{N}there, in front of the{N}flowers?{W1}"

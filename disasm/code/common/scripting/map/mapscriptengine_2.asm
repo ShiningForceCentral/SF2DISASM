@@ -14,8 +14,7 @@ ExecuteMapScript:
                 clr.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
 loc_47140:
                 
-                btst    #INPUT_A_START,((P2_INPUT-$1000000)).w
-                                                        ; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
+                btst    #INPUT_A_START,((P2_INPUT-$1000000)).w ; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
                 beq.s   loc_47156
                 tst.b   (DEBUG_MODE_ACTIVATED).l
                 beq.s   loc_47156
@@ -42,7 +41,7 @@ loc_47174:
                 bra.s   loc_47140       
 rjt_cutsceneScriptCommands:
                 
-                dc.w csc00_displaySingleTextbox-rjt_cutsceneScriptCommands
+                dc.w csc00_displaySingleTextbox-rjt_cutsceneScriptCommands 
                                                         ; csc for Cutscene Script Command
                 dc.w csc01_displaySingleTextboxWithVars-rjt_cutsceneScriptCommands
                 dc.w csc02_displayTextbox-rjt_cutsceneScriptCommands
@@ -53,7 +52,7 @@ rjt_cutsceneScriptCommands:
                 dc.w csc07_executeMapSystemEvent-rjt_cutsceneScriptCommands
                 dc.w csc08_joinForce-rjt_cutsceneScriptCommands
                 dc.w csc09_hideTextBoxAndPortrait-rjt_cutsceneScriptCommands
-                dc.w csc0A_executeSubroutine-rjt_cutsceneScriptCommands
+                dc.w csc0A_executeSubroutine-rjt_cutsceneScriptCommands 
                                                         ; execute subroutine xxxxxxxx
                 dc.w csc0B_jump-rjt_cutsceneScriptCommands
                 dc.w csc0C_jumpIfFlagSet-rjt_cutsceneScriptCommands
@@ -181,8 +180,7 @@ loc_47270:
                 move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
                 jsr     (WaitForViewScrollEnd).w
                 jsr     (DisplayText).l 
-                addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
-                                                        ; increment script number (move forward in script bank)
+                addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w ; increment script number (move forward in script bank)
                 jsr     j_HidePortraitWindow
                 clsTxt
                 moveq   #$A,d0
@@ -583,7 +581,7 @@ loc_474D0:
                 
                 cmpi.w  #2,d0
                 bne.s   loc_474DC
-                jsr     j_BlacksmithActions; xxxx = 2
+                jsr     j_BlacksmithActions ; xxxx = 2
 loc_474DC:
                 
                 movea.l (sp)+,a6
@@ -611,7 +609,7 @@ csc13_setStoryFlag:
 sub_474EE:
                 
                 moveq   #0,d0
-                move.b  #$11,((CURRENT_MAP-$1000000)).w; Mt Volcanon Shrine ?
+                move.b  #$11,((CURRENT_MAP-$1000000)).w ; Mt Volcanon Shrine ?
                 bsr.w   RunMapSetupEntityEvent
                 rts
 

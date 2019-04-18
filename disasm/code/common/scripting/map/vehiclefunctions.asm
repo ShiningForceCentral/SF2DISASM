@@ -143,11 +143,11 @@ cs_453F2:       setActscriptWait $0,eas_4540C
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_1:
+nullsub_4540A:
                 
                 rts
 
-	; End of function nullsub_1
+	; End of function nullsub_4540A
 
 eas_4540C:       ac_0E $1F,$0,$0
 byte_45414:      ac_wait 6

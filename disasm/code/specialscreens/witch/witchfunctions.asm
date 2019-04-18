@@ -67,7 +67,7 @@ DisplayWitchScreen:
                 move.w  #$400,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDMA
-                movea.l (p_plt_Witch).l,a0; Two palettes
+                movea.l (p_plt_Witch).l,a0 ; Two palettes
                 lea     (PALETTE_1_BASE).l,a1
                 moveq   #$20,d7 ; Palette 1
                 bsr.w   CopyBytes       

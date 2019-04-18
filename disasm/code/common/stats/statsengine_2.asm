@@ -1,2096 +1,6 @@
 
-; ASM FILE code\common\stats\statsengine.asm :
-; 0x8000..0x9A9A : Character stats engine
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCharName:
-                
-                jmp     GetCharName(pc) 
-
-	; End of function j_GetCharName
-
-
-; =============== S U B R O U T I N E =======================================
-
-; get entity's class index ?
-
-j_GetClass:
-                
-                jmp     GetClass(pc)
-
-	; End of function j_GetClass
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetYPos:
-                
-                jmp     GetYPos(pc)
-
-	; End of function j_GetYPos
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetMaxMP:
-                
-                jmp     GetMaxMP(pc)
-
-	; End of function j_GetMaxMP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetMaxHP:
-                
-                jmp     GetMaxHP(pc)
-
-	; End of function j_GetMaxHP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetXPos:
-                
-                jmp     GetXPos(pc)
-
-	; End of function j_GetXPos
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetUpperMoveType:
-                
-                jmp     GetUpperMoveType(pc)
-
-	; End of function j_GetUpperMoveType
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetStatus:
-                
-                jmp     GetStatus(pc)
-
-	; End of function j_GetStatus
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCurrentSpecialAbility:
-                
-                jmp     GetCurrentProwess(pc)
-
-	; End of function j_GetCurrentSpecialAbility
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetBaseSpecialAbility:
-                
-                jmp     GetBaseProwess(pc)
-
-	; End of function j_GetBaseSpecialAbility
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetBaseMOV:
-                
-                jmp     GetBaseMOV(pc)
-
-	; End of function j_GetBaseMOV
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetBaseDEF:
-                
-                jmp     GetBaseDEF(pc)
-
-	; End of function j_GetBaseDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetBaseResistance:
-                
-                jmp     GetBaseResistance(pc)
-
-	; End of function j_GetBaseResistance
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetBaseATK:
-                
-                jmp     GetBaseATK(pc)
-
-	; End of function j_GetBaseATK
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetBaseAGI:
-                
-                jmp     GetBaseAGI(pc)
-
-	; End of function j_GetBaseAGI
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCurrentMOV:
-                
-                jmp     GetCurrentMOV(pc)
-
-	; End of function j_GetCurrentMOV
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCurrentMP:
-                
-                jmp     GetCurrentMP(pc)
-
-	; End of function j_GetCurrentMP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCurrentLevel:
-                
-                jmp     GetCurrentLevel(pc)
-
-	; End of function j_GetCurrentLevel
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCurrentHP:
-                
-                jmp     GetCurrentHP(pc)
-
-	; End of function j_GetCurrentHP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCurrentEXP:
-                
-                jmp     GetCurrentEXP(pc)
-
-	; End of function j_GetCurrentEXP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCurrentDEF:
-                
-                jmp     GetCurrentDEF(pc)
-
-	; End of function j_GetCurrentDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCurrentResistance:
-                
-                jmp     GetCurrentResistance(pc)
-
-	; End of function j_GetCurrentResistance
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCurrentATK:
-                
-                jmp     GetCurrentATK(pc)
-
-	; End of function j_GetCurrentATK
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetEnemyAISetting3233:
-                
-                jmp     GetEnemyAISetting3233(pc)
-
-	; End of function j_GetEnemyAISetting3233
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetEnemyAISetting36:
-                
-                jmp     GetEnemyAISetting36(pc)
-
-	; End of function j_GetEnemyAISetting36
-
-
-; =============== S U B R O U T I N E =======================================
-
-; related to AI control on 0x0004 ?
-
-j_GetCharacterWord34:
-                
-                jmp     GetCharacterWord34(pc)
-
-	; End of function j_GetCharacterWord34
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCurrentAGI:
-                
-                jmp     GetCurrentAGI(pc)
-
-	; End of function j_GetCurrentAGI
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetEnemyID:
-                
-                jmp     GetEnemyID(pc)
-
-	; End of function j_GetEnemyID
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetSomethingClassType:
-                
-                jmp     GetSomethingClassType(pc)
-
-	; End of function j_GetSomethingClassType
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetKills:
-                
-                jmp     GetKills(pc)
-
-	; End of function j_GetKills
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetDefeats:
-                
-                jmp     GetDefeats(pc)
-
-	; End of function j_GetDefeats
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_CopyCharNameToRAM:
-                
-                jmp     CopyCharNameToRAM(pc)
-
-	; End of function j_CopyCharNameToRAM
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetYPos:
-                
-                jmp     SetYPos(pc)
-
-	; End of function j_SetYPos
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetMaxMP:
-                
-                jmp     SetMaxMP(pc)
-
-	; End of function j_SetMaxMP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetMaxHP:
-                
-                jmp     SetMaxHP(pc)
-
-	; End of function j_SetMaxHP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetXPos:
-                
-                jmp     SetXPos(pc)
-
-	; End of function j_SetXPos
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetMoveType:
-                
-                jmp     SetMoveType(pc)
-
-	; End of function j_SetMoveType
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetStatus:
-                
-                jmp     SetStatus(pc)
-
-	; End of function j_SetStatus
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetCurrentSomething:
-                
-                jmp     SetCurrentSomething(pc)
-
-	; End of function j_SetCurrentSomething
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetBaseSomething:
-                
-                jmp     SetBaseSomething(pc)
-
-	; End of function j_SetBaseSomething
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetBaseMOV:
-                
-                jmp     SetBaseMOV(pc)
-
-	; End of function j_SetBaseMOV
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetBaseDEF:
-                
-                jmp     SetBaseDEF(pc)
-
-	; End of function j_SetBaseDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetBaseResistance:
-                
-                jmp     SetBaseResistance(pc)
-
-	; End of function j_SetBaseResistance
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetBaseATK:
-                
-                jmp     SetBaseATK(pc)
-
-	; End of function j_SetBaseATK
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetBaseAGI:
-                
-                jmp     SetBaseAGI(pc)
-
-	; End of function j_SetBaseAGI
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetCurrentMOV:
-                
-                jmp     SetCurrentMOV(pc)
-
-	; End of function j_SetCurrentMOV
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetCurrentMP:
-                
-                jmp     SetCurrentMP(pc)
-
-	; End of function j_SetCurrentMP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetLevel:
-                
-                jmp     SetLevel(pc)
-
-	; End of function j_SetLevel
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetCurrentHP:
-                
-                jmp     SetCurrentHP(pc)
-
-	; End of function j_SetCurrentHP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetCurrentEXP:
-                
-                jmp     SetCurrentEXP(pc)
-
-	; End of function j_SetCurrentEXP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetCurrentDEF:
-                
-                jmp     SetCurrentDEF(pc)
-
-	; End of function j_SetCurrentDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetClass:
-                
-                jmp     SetClass(pc)
-
-	; End of function j_SetClass
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetCurrentResistance:
-                
-                jmp     SetCurrentResistance(pc)
-
-	; End of function j_SetCurrentResistance
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetCurrentATK:
-                
-                jmp     SetCurrentATK(pc)
-
-	; End of function j_SetCurrentATK
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetKills:
-                
-                jmp     SetKills(pc)    
-
-	; End of function j_SetKills
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetDefeats:
-                
-                jmp     SetDefeats(pc)  
-
-	; End of function j_SetDefeats
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetCharacterWord34:
-                
-                jmp     SetCharacterWord34(pc)
-
-	; End of function j_SetCharacterWord34
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetCurrentAGI:
-                
-                jmp     SetCurrentAGI(pc)
-
-	; End of function j_SetCurrentAGI
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetEnemyID:
-                
-                jmp     SetEnemyID(pc)
-
-	; End of function j_SetEnemyID
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseMP:
-                
-                jmp     IncreaseMaxMP(pc)
-
-	; End of function j_IncreaseMP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseMaxHP:
-                
-                jmp     IncreaseMaxHP(pc)
-
-	; End of function j_IncreaseMaxHP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseBaseMOV:
-                
-                jmp     IncreaseBaseMOV(pc)
-
-	; End of function j_IncreaseBaseMOV
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseBaseDEF:
-                
-                jmp     IncreaseBaseDEF(pc)
-
-	; End of function j_IncreaseBaseDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseBaseATK:
-                
-                jmp     IncreaseBaseATK(pc)
-
-	; End of function j_IncreaseBaseATK
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseAGI:
-                
-                jmp     IncreaseBaseAGI(pc)
-
-	; End of function j_IncreaseAGI
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseCurrentMOV:
-                
-                jmp     IncreaseCurrentMOV(pc)
-
-	; End of function j_IncreaseCurrentMOV
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseCurrentMP:
-                
-                jmp     IncreaseCurrentMP(pc)
-
-	; End of function j_IncreaseCurrentMP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseLevel:
-                
-                jmp     IncreaseLevel(pc)
-
-	; End of function j_IncreaseLevel
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseCurrentHP:
-                
-                jmp     IncreaseCurrentHP(pc)
-
-	; End of function j_IncreaseCurrentHP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseEXP:
-                
-                jmp     IncreaseEXP(pc)
-
-	; End of function j_IncreaseEXP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseCurrentDEF:
-                
-                jmp     IncreaseCurrentDEF(pc)
-
-	; End of function j_IncreaseCurrentDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseCurrentATK:
-                
-                jmp     IncreaseCurrentATK(pc)
-
-	; End of function j_IncreaseCurrentATK
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseCurrentAGI:
-                
-                jmp     IncreaseCurrentAGI(pc)
-
-	; End of function j_IncreaseCurrentAGI
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseKills:
-                
-                jmp     IncreaseKills(pc)
-
-	; End of function j_IncreaseKills
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseDefeats:
-                
-                jmp     IncreaseDefeats(pc)
-
-	; End of function j_IncreaseDefeats
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DecreaseBaseMOV:
-                
-                jmp     DecreaseBaseMOV(pc)
-
-	; End of function j_DecreaseBaseMOV
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DecreaseBaseDEF:
-                
-                jmp     DecreaseBaseDEF(pc)
-
-	; End of function j_DecreaseBaseDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DecreaseBaseAGI:
-                
-                jmp     DecreaseBaseAGI(pc)
-
-	; End of function j_DecreaseBaseAGI
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DecreaseCurrentMOV:
-                
-                jmp     DecreaseCurrentMOV(pc)
-
-	; End of function j_DecreaseCurrentMOV
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DecreaseCurrentMP:
-                
-                jmp     DecreaseCurrentMP(pc)
-
-	; End of function j_DecreaseCurrentMP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DecreaseCurrentHP:
-                
-                jmp     DecreaseCurrentHP(pc)
-
-	; End of function j_DecreaseCurrentHP
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DecreaseCurrentDEF:
-                
-                jmp     DecreaseCurrentDEF(pc)
-
-	; End of function j_DecreaseCurrentDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DecreaseCurrentATK:
-                
-                jmp     DecreaseCurrentATK(pc)
-
-	; End of function j_DecreaseCurrentATK
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DecreaseCurrentAGI:
-                
-                jmp     DecreaseCurrentAGI(pc)
-
-	; End of function j_DecreaseCurrentAGI
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetClassName:
-                
-                jmp     GetClassName(pc)
-
-	; End of function j_GetClassName
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetGold:
-                
-                jmp     SetGold(pc)
-
-	; End of function j_SetGold
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetGold:
-                
-                jmp     GetGold(pc)
-
-	; End of function j_GetGold
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IncreaseGold:
-                
-                jmp     IncreaseGold(pc)
-
-	; End of function j_IncreaseGold
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DecreaseGold:
-                
-                jmp     DecreaseGold(pc)
-
-	; End of function j_DecreaseGold
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_ApplyStatusAndItemsOnStats:
-                
-                jmp     ApplyStatusAndItemsOnStats(pc)
-
-	; End of function j_ApplyStatusAndItemsOnStats
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_ApplyItemOnStats:
-                
-                jmp     ApplyItemOnStats(pc)
-
-	; End of function j_ApplyItemOnStats
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_FindItemName:
-                
-                jmp     FindItemName(pc)
-
-	; End of function j_FindItemName
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetItemDefAddress:
-                
-                jmp     GetItemDefAddress(pc)
-
-	; End of function j_GetItemDefAddress
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetItemAndNumberOfItems:
-                
-                jmp     GetCharItemAtSlotAndNumberOfItems(pc)
-
-	; End of function j_GetItemAndNumberOfItems
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetItemType:
-                
-                jmp     GetItemType(pc) 
-
-	; End of function j_GetItemType
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetEquippedWeapon:
-                
-                jmp     GetEquippedWeapon(pc)
-
-	; End of function j_GetEquippedWeapon
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetEquippedRing:
-                
-                jmp     GetEquippedRing(pc)
-
-	; End of function j_GetEquippedRing
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_BreakItem:
-                
-                jmp     BreakItem(pc)   
-
-	; End of function j_BreakItem
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_RepairItemBySlot:
-                
-                jmp     RepairItemBySlot(pc)
-
-	; End of function j_RepairItemBySlot
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_EquipItem:
-                
-                jmp     EquipItemBySlot(pc)
-
-	; End of function j_EquipItem
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_UnequipItemIfNotCursed:
-                
-                jmp     UnequipItemBySlotIfNotCursed(pc)
-
-	; End of function j_UnequipItemIfNotCursed
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_UnequipItemBySlot:
-                
-                jmp     UnequipItemBySlot(pc)
-
-	; End of function j_UnequipItemBySlot
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_AddItem:
-                
-                jmp     AddItem(pc)     
-
-	; End of function j_AddItem
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_RemoveItemBySlot:
-                
-                jmp     RemoveItemBySlot(pc)
-
-	; End of function j_RemoveItemBySlot
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DropItemBySlot:
-                
-                jmp     DropItemBySlot(pc)
-
-	; End of function j_DropItemBySlot
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_UnequipWeapon:
-                
-                jmp     UnequipWeapon(pc)
-
-	; End of function j_UnequipWeapon
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_UnequipRing:
-                
-                jmp     UnequipRing(pc)
-
-	; End of function j_UnequipRing
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetEquippableWeapons:
-                
-                jmp     GetEquippableWeapons(pc)
-
-	; End of function j_GetEquippableWeapons
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetEquippableRings:
-                
-                jmp     GetEquippableRings(pc)
-
-	; End of function j_GetEquippableRings
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IsWeaponOrRingEquippable:
-                
-                jmp     IsWeaponOrRingEquippable(pc)
-
-	; End of function j_IsWeaponOrRingEquippable
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetWeaponNewATKandDEF:
-                
-                jmp     GetWeaponNewATKandDEF(pc)
-
-	; End of function j_GetWeaponNewATKandDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_OrderItems:
-                
-                jmp     OrderItems(pc)
-
-	; End of function j_OrderItems
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IsItemCursed:
-                
-                jmp     IsItemCursed(pc)
-
-	; End of function j_IsItemCursed
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IsItemUsableInBattle:
-                
-                jmp     IsItemUsableInBattle(pc)
-
-	; End of function j_IsItemUsableInBattle
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_IsItemUsableWeaponInBattle:
-                
-                jmp     IsItemUsableWeaponInBattle(pc)
-
-	; End of function j_IsItemUsableWeaponInBattle
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_UnequipAllItemsIfNotCursed:
-                
-                jmp     UnequipAllItemsIfNotCursed(pc)
-
-	; End of function j_UnequipAllItemsIfNotCursed
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetItemInventoryLocation:
-                
-                jmp     GetItemInventoryLocation(pc)
-
-	; End of function j_GetItemInventoryLocation
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetItemSlotContainingIndex:
-                
-                jmp     GetItemSlotContainingIndex(pc)
-
-	; End of function j_GetItemSlotContainingIndex
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_FindSpellName:
-                
-                jmp     FindSpellName(pc)
-
-	; End of function j_FindSpellName
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetSpellDefAddress:
-                
-                jmp     GetSpellDefAddress(pc)
-
-	; End of function j_GetSpellDefAddress
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetSpellAndNumberOfSpells:
-                
-                jmp     GetSpellAndNumberOfSpells(pc)
-
-	; End of function j_GetSpellAndNumberOfSpells
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetSpellCost:
-                
-                jmp     GetSpellCost(pc)
-
-	; End of function j_GetSpellCost
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_LearnSpell:
-                
-                jmp     LearnSpell(pc)  
-
-	; End of function j_LearnSpell
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCharacterRAMAddress_0:
-                
-                jmp     GetCharEntryAddress(pc)
-
-	; End of function j_GetCharacterRAMAddress_0
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetDistanceBetweenEntities:
-                
-                jmp     GetDistanceBetweenEntities(pc)
-
-	; End of function j_GetDistanceBetweenEntities
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_nullsub_6:
-                
-                jmp     nullsub_6(pc)
-
-	; End of function j_nullsub_6
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCharEntryAddress:
-                
-                jmp     GetCharEntryAddress(pc)
-
-	; End of function j_GetCharEntryAddress
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_NewGame:
-                
-                jmp     NewGame(pc)
-
-	; End of function j_NewGame
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_LevelUp:
-                
-                jmp     LevelUp(pc)
-
-	; End of function j_LevelUp
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_Promote:
-                
-                jmp     Promote(pc)
-
-	; End of function j_Promote
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DebugModeActionSelect:
-                
-                jmp     DebugModeActionSelect(pc)
-
-	; End of function j_DebugModeActionSelect
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_WriteSkirmishScript:
-                
-                jmp     WriteSkirmishScript(pc)
-
-	; End of function j_WriteSkirmishScript
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_sub_C404:
-                
-                jmp     j_sub_C404_0(pc)
-
-	; End of function j_sub_C404
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_CreateSpellRangeGrid:
-                
-                jmp     CreateSpellRangeGrid(pc)
-
-	; End of function j_CreateSpellRangeGrid
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_CreateItemRangeGrid:
-                
-                jmp     CreateItemRangeGrid(pc)
-
-	; End of function j_CreateItemRangeGrid
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_sub_C4E8:
-                
-                jmp     j_sub_C4E8_0(pc)
-
-	; End of function j_sub_C4E8
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_sub_C5D6:
-                
-                jmp     j_sub_C5D6_0(pc)
-
-	; End of function j_sub_C5D6
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_sub_C5FA:
-                
-                jmp     j_sub_C5FA_0(pc)
-
-	; End of function j_sub_C5FA
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_CreateTargetGridFromSpell:
-                
-                jmp     CreateTargetGridFromSpell(pc)
-
-	; End of function j_CreateTargetGridFromSpell
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_CreateTargetGrid:
-                
-                jmp     CreateTargetGrid(pc)
-
-	; End of function j_CreateTargetGrid
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_MakeTargetList:
-                
-                jmp     MakeTargetList(pc)
-
-	; End of function j_MakeTargetList
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_MakeTargetListAllies:
-                
-                jmp     MakeTargetListAllies(pc)
-
-	; End of function j_MakeTargetListAllies
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_MakeTargetListMonsters:
-                
-                jmp     MakeTargetListMonsters(pc)
-
-	; End of function j_MakeTargetListMonsters
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_MakeTargetListEverybody:
-                
-                jmp     MakeTargetListEverybody(pc)
-
-	; End of function j_MakeTargetListEverybody
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_UpdateTargetListCharacters:
-                
-                jmp     UpdateTargetListCharacters(pc)
-
-	; End of function j_UpdateTargetListCharacters
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_UpdateTargetListMonsters:
-                
-                jmp     UpdateTargetListMonsters(pc)
-
-	; End of function j_UpdateTargetListMonsters
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_ConvertCoordToOffset:
-                
-                jmp     ConvertCoordToOffset(pc)
-
-	; End of function j_ConvertCoordToOffset
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_ClearMovableGrid:
-                
-                jmp     ClearMovableGrid(pc)
-
-	; End of function j_ClearMovableGrid
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_ClearTargetGrid:
-                
-                jmp     ClearTargetGrid(pc)
-
-	; End of function j_ClearTargetGrid
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetTargetAtCoordOffset:
-                
-                jmp     GetTargetAtCoordOffset(pc)
-
-	; End of function j_GetTargetAtCoordOffset
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetMoveCost:
-                
-                jmp     GetMoveCost(pc)
-
-	; End of function j_GetMoveCost
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetCurrentTerrainType:
-                
-                jmp     GetCurrentTerrainType(pc)
-
-	; End of function j_GetCurrentTerrainType
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetMovableAtCoord:
-                
-                jmp     SetMovableAtCoord(pc)
-
-	; End of function j_SetMovableAtCoord
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_CheckFlag:
-                
-                jmp     CheckFlag(pc)
-
-	; End of function j_CheckFlag
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetFlag:
-                
-                jmp     SetFlag(pc)
-
-	; End of function j_SetFlag
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_ClearFlag:
-                
-                jmp     ClearFlag(pc)
-
-	; End of function j_ClearFlag
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_UpdateForce:
-                
-                jmp     UpdateForce(pc) 
-
-	; End of function j_UpdateForce
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_JoinForce:
-                
-                jmp     JoinForce(pc)
-
-	; End of function j_JoinForce
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_LeaveForce:
-                
-                jmp     LeaveForce(pc)
-
-	; End of function j_LeaveForce
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D0 = character idx
-
-j_IsInBattleParty:
-                
-                jmp     IsInBattleParty(pc)
-
-	; End of function j_IsInBattleParty
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D0 = character idx
-
-j_JoinBattleParty:
-                
-                jmp     JoinBattleParty(pc)
-
-	; End of function j_JoinBattleParty
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D0 = character idx
-
-j_LeaveBattleParty:
-                
-                jmp     LeaveBattleParty(pc)
-
-	; End of function j_LeaveBattleParty
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetDealsItemAmount:
-                
-                jmp     GetDealsItemAmount(pc)
-
-	; End of function j_GetDealsItemAmount
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_AddItemToDeals:
-                
-                jmp     AddItemToDeals(pc)
-
-	; End of function j_AddItemToDeals
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_RemoveItemFromDeals:
-                
-                jmp     RemoveItemFromDeals(pc)
-
-	; End of function j_RemoveItemFromDeals
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_AddItemToCaravan:
-                
-                jmp     AddItemToCaravan(pc)
-
-	; End of function j_AddItemToCaravan
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_RemoveItemFromCaravan:
-                
-                jmp     RemoveItemFromCaravan(pc)
-
-	; End of function j_RemoveItemFromCaravan
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_AddAllToStack:
-                
-                jmp     AddAllToStack(pc)
-
-	; End of function j_AddAllToStack
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_sub_DEFC:
-                
-                jmp     j_sub_DEFC_0(pc)
-
-	; End of function j_sub_DEFC
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_MakeRangeLists:
-                
-                jmp     MakeRangeLists(pc)
-
-	; End of function j_MakeRangeLists
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GenerateTargetRangeLists:
-                
-                jmp     GenerateTargetRangeLists(pc)
-
-	; End of function j_GenerateTargetRangeLists
-
-
-; =============== S U B R O U T I N E =======================================
-
-MakeBattleEntityCancelMoveString:
-                
-                jmp     MakeBattleEntityCancelMoveString_0(pc)
-
-	; End of function MakeBattleEntityCancelMoveString
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetTerrain:
-                
-                jmp     GetTerrain(pc)  
-
-	; End of function j_GetTerrain
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SetTerrain:
-                
-                jmp     SetTerrain(pc)
-
-	; End of function j_SetTerrain
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_ClearEnemyMoveInfo:
-                
-                jmp     ClearEnemyMoveInfo(pc)
-
-	; End of function j_ClearEnemyMoveInfo
-
-
-; =============== S U B R O U T I N E =======================================
-
-; entity D0's current MOV*2, X, Y -> D0, D3, D4
-
-j_GetMoveInfo:
-                
-                jmp     GetMoveInfo(pc) 
-
-	; End of function j_GetMoveInfo
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetDifficulty:
-                
-                jmp     GetDifficulty(pc)
-
-	; End of function j_GetDifficulty
-
-p_SpellNames:   dc.l SpellNames
-p_AllyNames:    dc.l AllyNames
-p_EnemyNames:   dc.l EnemyNames
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D0 = char idx
-; Out: A0 = address of name
-;      D7 = length of name
-
-GetCharName:
-                
-                movem.l d0-d1,-(sp)
-                btst    #CHAR_BIT_ENEMY,d0
-                bne.s   loc_82F0
-                bsr.w   GetCharEntryAddress
-                moveq   #CHAR_NAME_COUNTER,d0
-                clr.w   d7
-loc_82E2:
-                
-                tst.b   (a0,d7.w)
-                beq.s   loc_82EE
-                addq.w  #1,d7
-                dbf     d0,loc_82E2
-loc_82EE:
-                
-                bra.s   loc_8300
-loc_82F0:
-                
-                clr.w   d1
-                bsr.w   GetEnemyID
-                movea.l (p_EnemyNames).l,a0
-                bsr.w   FindName        
-loc_8300:
-                
-                movem.l (sp)+,d0-d1
-                rts
-
-	; End of function GetCharName
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetClass:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_CLASS_IDX,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetClass
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetCurrentLevel:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_LEVEL,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetCurrentLevel
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetMaxHP:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_HP_MAX,d7
-                bsr.w   GetCharacterWord
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetMaxHP
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetCurrentHP:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_HP_CURRENT,d7
-                bsr.w   GetCharacterWord
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetCurrentHP
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetMaxMP:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_MP_MAX,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetMaxMP
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetCurrentMP:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_MP_CURRENT,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetCurrentMP
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetBaseATK:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_ATK_MAX,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetBaseATK
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetCurrentATK:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_ATK_CURRENT,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetCurrentATK
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetBaseDEF:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_DEF_MAX,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetBaseDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetCurrentDEF:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_DEF_CURRENT,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetCurrentDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetBaseAGI:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_AGI_MAX,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetBaseAGI
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetCurrentAGI:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_AGI_CURRENT,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetCurrentAGI
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetBaseMOV:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_MOV_MAX,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetBaseMOV
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetCurrentMOV:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_MOV_CURRENT,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetCurrentMOV
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetBaseResistance:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_RESIST_BASE,d7
-loc_83EC:
-                
-                bsr.w   GetCharacterWord
-loc_83F0:
-                
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetBaseResistance
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetCurrentResistance:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_RESIST_CURRENT,d7
-                bsr.w   GetCharacterWord
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetCurrentResistance
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetBaseProwess:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_SPECIAL_BASE,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetBaseProwess
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetCurrentProwess:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_PROWESS_CURRENT,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetCurrentProwess
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetStatus:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_STATUS,d7
-                bsr.w   GetCharacterWord
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetStatus
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetXPos:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_X,d7
-loc_843C:
-                
-                bsr.w   GetCharacterByte
-                ext.w   d1
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetXPos
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetYPos:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_Y,d7
-                bsr.w   GetCharacterByte
-                ext.w   d1
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetYPos
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetCurrentEXP:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_EXP,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetCurrentEXP
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetUpperMoveType:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #$31,d7 
-                bsr.w   GetCharacterByte
-                lsr.w   #4,d1
-                andi.w  #$F,d1
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetUpperMoveType
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetLowerMoveType:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #$31,d7 
-                bsr.w   GetCharacterByte
-                andi.w  #$F,d1
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetLowerMoveType
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetEnemyAISetting3233:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #$32,d7 
-                bsr.w   GetCharacterWord
-                move.w  d1,d2
-                lsr.w   #8,d1
-                andi.w  #$FF,d1
-                andi.w  #$FF,d2
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetEnemyAISetting3233
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D0 = char idx
-; Out: D1 = high 4 bits
-;      D2 = low 4 bits
-
-GetEnemyAISetting36:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #$36,d7 
-                bsr.w   GetCharacterByte
-                move.w  d1,d2
-                lsr.w   #4,d1
-                andi.w  #$F,d1
-                andi.w  #$F,d2
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetEnemyAISetting36
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetCharacterWord34:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #$34,d7 
-                bsr.w   GetCharacterWord
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetCharacterWord34
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetEnemyID:
-                
-                btst    #CHAR_BIT_ENEMY,d0
-                bne.s   loc_84EA
-                move.w  #$FFFF,d1
-                rts
-                bra.s   GetKills
-loc_84EA:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_ENEMYIDX,d7
-                bsr.w   GetCharacterByte
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetEnemyID
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetKills:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_KILLS,d7
-                bsr.w   GetCharacterWord
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetKills
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetDefeats:
-                
-                movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_DEFEATS,d7
-                bsr.w   GetCharacterWord
-                movem.l (sp)+,d7-a0
-                rts
-
-	; End of function GetDefeats
-
-
-; =============== S U B R O U T I N E =======================================
-
-GetSomethingClassType:
-                
-                btst    #CHAR_BIT_ENEMY,d0
-                bne.s   loc_8536
-                moveq   #0,d1
-                bsr.w   GetClass
-                move.b  ClassTypes(pc,d1.w),d1
-                mulu.w  #$1E,d1
-                add.w   d0,d1
-                bset    #$F,d1
-                bra.s   return_8538
-loc_8536:
-                
-                bsr.s   GetEnemyID
-return_8538:
-                
-                rts
-
-	; End of function GetSomethingClassType
-
-ClassTypes:     incbin "data/stats/allies/classes/classtypes.bin"
-                                                        ; 0,1,2 = base class, promoted class, special promoted class
+; ASM FILE code\common\stats\statsengine_2.asm :
+; 0x855A..0x9A9A : Character stats engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2326,20 +236,20 @@ SetCurrentResistance:
 
 ; =============== S U B R O U T I N E =======================================
 
-SetBaseSomething:
+SetBaseProwess:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #CHAR_OFFSET_SPECIAL_BASE,d7
+                moveq   #CHAR_OFFSET_PROWESS_BASE,d7
                 bsr.w   SetCharacterByte
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetBaseSomething
+	; End of function SetBaseProwess
 
 
 ; =============== S U B R O U T I N E =======================================
 
-SetCurrentSomething:
+SetCurrentProwess:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #CHAR_OFFSET_PROWESS_CURRENT,d7
@@ -2347,7 +257,7 @@ SetCurrentSomething:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetCurrentSomething
+	; End of function SetCurrentProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2905,7 +815,7 @@ loc_8986:
 
 SetGold:
                 
-                move.l  d1,((CURRENT_GOLD-$1000000)).w; puts d1's value at F600 in RAM
+                move.l  d1,((CURRENT_GOLD-$1000000)).w ; puts d1's value at F600 in RAM
                 rts
 
 	; End of function SetGold
@@ -2978,7 +888,7 @@ loc_89F4:
                 
                 move.w  (a1),d1
                 andi.w  #ITEM_MASK_IDX,d1
-                cmpi.w  #ITEMIDX_NOTHING,d1
+                cmpi.w  #ITEM_NOTHING,d1
                 beq.s   loc_8A12
                 btst    #ITEM_BIT_EQUIPPED,ITEM_OFFSET_IDXANDEQUIPBYTE(a1)
                 beq.s   loc_8A12
@@ -3098,12 +1008,12 @@ loc_8AD2:
 	; End of function ApplyItemOnStats
 
 pt_EquipEffectFunctions:
-                dc.l nullsub_7
-                dc.l nullsub_7
+                dc.l nullsub_8B22
+                dc.l nullsub_8B22
                 dc.l EquipEffect_IncreaseCriticalProwess
                 dc.l EquipEffect_IncreaseDoubleAttackProwess
                 dc.l EquipEffect_IncreaseCounterAttackProwess
-                dc.l nullsub_7
+                dc.l nullsub_8B22
                 dc.l IncreaseCurrentATK
                 dc.l IncreaseCurrentDEF
                 dc.l IncreaseCurrentAGI
@@ -3118,11 +1028,11 @@ pt_EquipEffectFunctions:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_7:
+nullsub_8B22:
                 
                 rts
 
-	; End of function nullsub_7
+	; End of function nullsub_8B22
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3237,7 +1147,7 @@ InitCurrentStats:
                 move.b  CHAR_OFFSET_AGI_MAX(a0),CHAR_OFFSET_AGI_CURRENT(a0)
                 move.b  CHAR_OFFSET_MOV_MAX(a0),CHAR_OFFSET_MOV_CURRENT(a0)
                 move.w  CHAR_OFFSET_RESIST_BASE(a0),CHAR_OFFSET_RESIST_CURRENT(a0)
-                move.b  CHAR_OFFSET_SPECIAL_BASE(a0),CHAR_OFFSET_PROWESS_CURRENT(a0)
+                move.b  CHAR_OFFSET_PROWESS_BASE(a0),CHAR_OFFSET_PROWESS_CURRENT(a0)
                 movea.l (sp)+,a0
                 rts
 
@@ -3300,7 +1210,7 @@ loc_8C10:
                 
                 move.w  (a0)+,d0
                 andi.w  #ITEM_MASK_IDX,d0
-                cmpi.w  #ITEMIDX_NOTHING,d0
+                cmpi.w  #ITEM_NOTHING,d0
                 beq.s   loc_8C1E
                 addq.w  #1,d2
 loc_8C1E:
@@ -3336,7 +1246,7 @@ loc_8C42:
                 bra.s   loc_8C48
 loc_8C44:
                 
-                move.w  #ITEMTYPE_IDX_WEAPON,d2; weapon
+                move.w  #ITEMTYPE_IDX_WEAPON,d2 ; weapon
 loc_8C48:
                 
                 movea.l (sp)+,a0
@@ -3350,12 +1260,12 @@ loc_8C48:
 GetEquippedWeapon:
                 
                 movem.l d3-d4/a0-a1,-(sp)
-                move.w  #ITEMTYPE_MASK_WEAPON,d4
+                move.w  #ITEMTYPE_WEAPON,d4
                 bra.s   GetEquippedItemByType
 GetEquippedRing:
                 
                 movem.l d3-d4/a0-a1,-(sp)
-                move.w  #ITEMTYPE_MASK_RING,d4
+                move.w  #ITEMTYPE_RING,d4
 GetEquippedItemByType:
                 
                 bsr.w   GetCharEntryAddress
@@ -3368,7 +1278,7 @@ loc_8C6A:
                 btst    #ITEM_BIT_EQUIPPED,d1
                 beq.s   loc_8C88        
                 andi.w  #ITEM_MASK_IDX,d1
-                cmpi.w  #ITEMIDX_NOTHING,d1
+                cmpi.w  #ITEM_NOTHING,d1
                 beq.s   loc_8C88        
                 bsr.w   GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d1
@@ -3409,7 +1319,7 @@ loc_8CB0:
                 
                 move.w  (a0)+,d2
                 andi.w  #ITEM_MASK_IDX,d2
-                cmpi.w  #ITEMIDX_NOTHING,d2
+                cmpi.w  #ITEM_NOTHING,d2
                 beq.s   loc_8CC6
                 dbf     d0,loc_8CB0     ; loop over all items to make sure there's a slot open
                 move.w  #1,d2           ; no empty slot available
@@ -3440,7 +1350,7 @@ BreakItem:
                 lea     CHAR_OFFSET_ITEM_0(a0,d1.w),a0
                 move.w  (a0),d1
                 andi.w  #ITEM_MASK_IDX,d1
-                cmpi.w  #ITEMIDX_NOTHING,d1
+                cmpi.w  #ITEM_NOTHING,d1
                 beq.s   loc_8CF6
                 bset    #ITEM_UPPERBIT_BROKEN,(a0)
                 clr.w   d2
@@ -3466,7 +1376,7 @@ RepairItemBySlot:
                 lea     CHAR_OFFSET_ITEM_0(a0,d1.w),a0
                 move.w  (a0),d1
                 andi.w  #ITEM_MASK_IDX,d1
-                cmpi.w  #ITEMIDX_NOTHING,d1
+                cmpi.w  #ITEM_NOTHING,d1
                 beq.s   loc_8D2A        
                 bclr    #7,(a0)
                 beq.s   loc_8D24
@@ -3503,7 +1413,7 @@ EquipItemBySlot:
                 lea     CHAR_OFFSET_ITEM_0(a0,d1.w),a0
                 move.w  (a0),d1         ; get item entry
                 andi.w  #ITEM_MASK_IDX,d1
-                cmpi.w  #ITEMIDX_NOTHING,d1; test if item is "nothing"
+                cmpi.w  #ITEM_NOTHING,d1 ; test if item is "nothing"
                 beq.s   loc_8D5E        
                 bsr.s   IsItemEquippableAndCursed
                 cmpi.w  #1,d2
@@ -3541,7 +1451,7 @@ IsItemEquippableAndCursed:
                 move.l  (a0),d1         ; get class-equippable bitfield
                 lsr.l   d0,d1           ; push relevant class-equippable bit into carry
                 bcc.s   loc_8D94        
-                btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
+                btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0) 
                                                         ; test cursed bit of itemdef's misc byte
                 bne.s   loc_8D8E        
                 clr.w   d2              ; code 0: equippable
@@ -3599,7 +1509,7 @@ loc_8DBC:
                 lea     CHAR_OFFSET_ITEM_0(a0,d1.w),a0
                 move.w  (a0),d1
                 andi.w  #ITEM_MASK_IDX,d1
-                cmpi.w  #ITEMIDX_NOTHING,d1
+                cmpi.w  #ITEM_NOTHING,d1
                 beq.s   loc_8DF8        
                 btst    #ITEM_BIT_EQUIPPED,ITEM_OFFSET_IDXANDEQUIPBYTE(a0)
                 beq.s   loc_8DF2        
@@ -3664,7 +1574,7 @@ DropItemBySlot:
                 move.w  (a0),d1
                 move.w  #3,d2
                 andi.w  #ITEM_MASK_IDX,d1
-                cmpi.w  #ITEMIDX_NOTHING,d1
+                cmpi.w  #ITEM_NOTHING,d1
                 beq.s   loc_8E54
                 movem.l a0,-(sp)
                 bsr.w   GetItemDefAddress
@@ -3697,12 +1607,12 @@ RemoveAndArrangeItems:
                 bmi.s   loc_8E6E        ; no items to rearrange, so skip to removal
 loc_8E64:
                 
-                move.w  SIZE_ITEM(a0),(a0); shift item -1 slots
+                move.w  SIZE_ITEM(a0),(a0) ; shift item -1 slots
                 addq.w  #SIZE_ITEM,a0
                 dbf     d2,loc_8E64     
 loc_8E6E:
                 
-                move.w  #ITEMIDX_NOTHING,(a0); replace item with nothing
+                move.w  #ITEM_NOTHING,(a0) ; replace item with nothing
                 clr.w   d2
                 rts
 
@@ -3724,7 +1634,7 @@ RemoveItemBySlot:
                 move.w  (a0),d1
                 move.w  d1,d2
                 andi.w  #ITEM_MASK_IDX,d2
-                cmpi.w  #ITEMIDX_NOTHING,d2
+                cmpi.w  #ITEM_NOTHING,d2
                 beq.s   loc_8E9A
                 bsr.s   RemoveAndArrangeItems
                 bra.w   loc_8E9E
@@ -3744,7 +1654,7 @@ loc_8E9E:
 UnequipWeapon:
                 
                 movem.l d0-d2/a0-a1,-(sp)
-                move.w  #ITEMTYPE_MASK_WEAPON,d2; weapon
+                move.w  #ITEMTYPE_WEAPON,d2 ; weapon
                 bra.s   UnequipItemByType
 
 	; End of function UnequipWeapon
@@ -3755,7 +1665,7 @@ UnequipWeapon:
 UnequipRing:
                 
                 movem.l d0-d2/a0-a1,-(sp)
-                move.w  #ITEMTYPE_MASK_RING,d2; ring
+                move.w  #ITEMTYPE_RING,d2 ; ring
 UnequipItemByType:
                 
                 bsr.w   GetCharEntryAddress
@@ -3812,7 +1722,7 @@ loc_8F38:
                 
                 move.w  (a1)+,d1
                 andi.w  #ITEM_MASK_IDX,d1
-                cmpi.w  #ITEMIDX_NOTHING,d1; skip if empty slot
+                cmpi.w  #ITEM_NOTHING,d1 ; skip if empty slot
                 beq.s   loc_8F4E
                 bsr.s   IsItemEquippable
                 bcc.s   loc_8F4E
@@ -3861,7 +1771,7 @@ loc_8F7A:
 IsWeaponOrRingEquippable:
                 
                 movem.l d0/d2-d6/a0,-(sp)
-                move.w  #ITEMTYPE_MASK_WEAPONORRING,d2
+                move.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2
                 bsr.w   GetCharEntryAddress
                 move.b  CHAR_OFFSET_CLASS_IDX(a0),d0
                 moveq   #1,d3
@@ -3880,11 +1790,11 @@ GetWeaponNewATKandDEF:
                 movem.l d0/d4-d6/a0,-(sp)
                 bsr.w   GetCharEntryAddress
                 clr.w   d2
-                move.b  CHAR_OFFSET_ATK_CURRENT(a0),d2; current ATK
+                move.b  CHAR_OFFSET_ATK_CURRENT(a0),d2 ; current ATK
                 clr.w   d3
-                move.b  CHAR_OFFSET_DEF_CURRENT(a0),d3; current DEF
+                move.b  CHAR_OFFSET_DEF_CURRENT(a0),d3 ; current DEF
                 movem.w d0/d2-d3,-(sp)
-                move.w  #ITEMTYPE_MASK_WEAPONORRING,d2
+                move.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2
                 clr.w   d0
                 move.b  CHAR_OFFSET_CLASS_IDX(a0),d0
                 moveq   #1,d3
@@ -3897,7 +1807,7 @@ GetWeaponNewATKandDEF:
                 bsr.w   GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d2
                 movem.l (sp)+,d1/a0
-                andi.w  #ITEMTYPE_MASK_WEAPONORRING,d2; get weapon/ring type
+                andi.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2 ; get weapon/ring type
                 bsr.w   GetCharATKandDEFWithSpecificWeapon
 loc_8FE8:
                 
@@ -3951,7 +1861,7 @@ loc_903A:
                 move.w  CHAR_OFFSET_ITEM_0(a0,d4.w),d5
                 movem.l d4-d5/a0,-(sp)
                 bset    #ITEM_BIT_EQUIPPED,d1
-                move.w  d1,CHAR_OFFSET_ITEM_0(a0,d4.w); equip item
+                move.w  d1,CHAR_OFFSET_ITEM_0(a0,d4.w) ; equip item
                 bsr.w   ApplyStatusAndItemsOnStats
                 clr.w   d2
                 move.b  CHAR_OFFSET_ATK_CURRENT(a0),d2
@@ -3959,7 +1869,7 @@ loc_903A:
                 move.b  CHAR_OFFSET_DEF_CURRENT(a0),d3
                 movem.l (sp)+,d4-d5/a0
                 movem.w d2-d3,-(sp)
-                move.w  d5,CHAR_OFFSET_ITEM_0(a0,d4.w); and unequip
+                move.w  d5,CHAR_OFFSET_ITEM_0(a0,d4.w) ; and unequip
                 bsr.w   ApplyStatusAndItemsOnStats
                 movem.w (sp)+,d2-d3
                 movem.l (sp)+,d0-d1/d4-a0
@@ -4099,7 +2009,7 @@ loc_9114:
                 btst    #ITEM_BIT_EQUIPPED,d1
                 beq.s   loc_9138
                 andi.w  #ITEM_MASK_IDX,d1
-                cmpi.w  #ITEMIDX_NOTHING,d1
+                cmpi.w  #ITEM_NOTHING,d1
                 beq.s   loc_9138
                 bsr.w   GetItemDefAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
@@ -4257,7 +2167,7 @@ loc_920E:
                 
                 move.b  (a0)+,d0
                 andi.b  #SPELL_MASK_IDX,d0
-                cmpi.b  #SPELLIDX_NOTHING,d0
+                cmpi.b  #SPELL_NOTHING,d0
                 beq.s   loc_921C
                 addq.w  #1,d2
 loc_921C:
@@ -4284,7 +2194,7 @@ LearnSpell:
                 move.w  d1,d5
                 move.w  #1,d2
                 moveq   #CHAR_SPELLSLOTS_COUNTER,d3
-                andi.w  #SPELL_MASK_IDX,d4; get spell index ?
+                andi.w  #SPELL_MASK_IDX,d4 ; get spell index ?
                 lsr.w   #SPELL_OFFSET_LV,d5
 loc_9242:
                 
@@ -4306,7 +2216,7 @@ loc_925E:
                 
                 move.b  (a0)+,d0        ; loop through spells to find the next empty slot
                 andi.b  #SPELL_MASK_IDX,d0
-                cmpi.b  #SPELLIDX_NOTHING,d0
+                cmpi.b  #SPELL_NOTHING,d0
                 beq.s   loc_9274
                 dbf     d3,loc_925E     
                 move.w  #2,d2
@@ -4727,11 +2637,11 @@ loc_947C:
 
 ; =============== S U B R O U T I N E =======================================
 
-nullsub_6:
+nullsub_9482:
                 
                 rts
 
-	; End of function nullsub_6
+	; End of function nullsub_9482
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4744,31 +2654,31 @@ LevelUp:
                 bsr.w   GetClass
                 move.w  d1,d3
                 bsr.w   GetCurrentLevel
-                moveq   #$63,d2 
-                cmpi.w  #$C,d3
-                bge.s   loc_94A4
-                moveq   #$28,d2 
-loc_94A4:
+                moveq   #CHAR_LEVELCAP_PROMOTED,d2
+                cmpi.w  #CHAR_CLASS_FIRSTPROMOTED,d3
+                bge.s   @IsPromoted
+                moveq   #CHAR_LEVELCAP_BASE,d2
+@IsPromoted:
                 
                 lsl.w   #2,d0
                 movea.l (p_pt_AllyStats).l,a0
                 movea.l (a0,d0.w),a0
-loc_94B0:
+@EvaluateClass:
                 
-                tst.b   (a0)
-                bmi.w   loc_94C6
-                cmp.b   (a0)+,d3
-                beq.s   loc_94C2
-loc_94BA:
+                tst.b   (a0)            ; If this byte is negative, we haven't found a matching stat block for our class...
+                bmi.w   @Abort          ;  so the level up routine is aborted.
+                cmp.b   (a0)+,d3        ;  Else, if this stat block is matching our class...
+                beq.s   @EvaluateLevel  ;  move on to level evaluation.
+@Loop:
                 
-                cmpi.b  #$FE,(a0)+
-                bcs.s   loc_94BA
-                bra.s   loc_94B0
-loc_94C2:
+                cmpi.b  #CODE_USE_FIRST_SPELL_LIST,(a0)+ ; loop until we come across an "end of spell list" control code
+                bcs.s   @Loop           
+                bra.s   @EvaluateClass  
+@EvaluateLevel:
                 
-                cmp.w   d2,d1
-                blt.s   loc_94E2
-loc_94C6:
+                cmp.w   d2,d1           ; if current level is below level cap...
+                blt.s   @EvaluateStatGains ;  move on to stat gains evaluation
+@Abort:
                 
                 lea     (byte_FFAF82).l,a1
                 move.b  #$FF,(a1)+
@@ -4778,8 +2688,8 @@ loc_94C6:
                 clr.b   (a1)+
                 clr.b   (a1)+
                 move.b  #$FF,(a1)
-                bra.w   loc_95BE
-loc_94E2:
+                bra.w   @Done
+@EvaluateStatGains:
                 
                 lea     (byte_FFAF82).l,a1
                 move.w  -2(a6),d0
@@ -4792,35 +2702,35 @@ loc_94E2:
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
                 bsr.w   GetMaxHP
-                bsr.w   sub_96BA
+                bsr.w   CalculateStatGain
                 move.b  d1,1(a1)
                 bsr.w   IncreaseMaxHP
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
                 bsr.w   GetMaxMP
-                bsr.w   sub_96BA
+                bsr.w   CalculateStatGain
                 move.b  d1,2(a1)
                 bsr.w   IncreaseMaxMP
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
                 bsr.w   GetBaseATK
-                bsr.w   sub_96BA
+                bsr.w   CalculateStatGain
                 move.b  d1,3(a1)
                 bsr.w   IncreaseBaseATK
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
                 bsr.w   GetBaseDEF
-                bsr.w   sub_96BA
+                bsr.w   CalculateStatGain
                 move.b  d1,4(a1)
                 bsr.w   IncreaseBaseDEF
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
                 bsr.w   GetBaseAGI
-                bsr.w   sub_96BA
+                bsr.w   CalculateStatGain
                 move.b  d1,5(a1)
                 bsr.w   IncreaseBaseAGI
                 addq.w  #1,d5
@@ -4828,38 +2738,38 @@ loc_94E2:
                 bsr.w   SetLevel
                 move.b  d5,(a1)
                 bsr.w   GetClass
-                cmpi.w  #$B,d1
-                blt.s   loc_957E
+                cmpi.w  #CLASS_TORT,d1  ; If class is listed before TORT ? (Shouldn't it be HERO ?)
+                blt.s   @NotPromoted
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5
-loc_957E:
+@NotPromoted:
                 
                 move.b  #$FF,6(a1)
-loc_9584:
+@CheckUseFirstSpellList:
                 
                 move.b  (a0)+,d2
                 move.b  (a0)+,d1
-                cmpi.b  #$FE,d2
-                bne.s   loc_95A2
+                cmpi.b  #CODE_USE_FIRST_SPELL_LIST,d2
+                bne.s   @EvaluateSpellList
                 move.w  d0,d2
                 lsl.w   #2,d2
                 movea.l (p_pt_AllyStats).l,a0
                 movea.l (a0,d2.w),a0
                 lea     $10(a0),a0
-                bra.s   loc_9584
-loc_95A2:
+                bra.s   @CheckUseFirstSpellList
+@EvaluateSpellList:
                 
-                cmpi.b  #$FF,d2
-                beq.w   loc_95BA
+                cmpi.b  #CODE_TERMINATOR_BYTE,d2
+                beq.w   @SpellList_Done
                 cmp.b   d2,d5
-                bne.s   loc_9584
+                bne.s   @CheckUseFirstSpellList
                 bsr.w   LearnSpell      
                 tst.w   d2
-                bne.s   loc_95BA
+                bne.s   @SpellList_Done
                 move.b  d1,6(a1)
-loc_95BA:
+@SpellList_Done:
                 
                 bsr.w   ApplyStatusAndItemsOnStats
-loc_95BE:
+@Done:
                 
                 unlk    a6
                 movem.l (sp)+,d0-a1
@@ -4960,7 +2870,7 @@ loc_9696:
                 
                 lsl.w   #4,d2
                 or.w    d2,d1
-                bsr.w   SetBaseSomething
+                bsr.w   SetBaseProwess
                 bra.s   loc_96A4
 loc_96A0:
                 
@@ -4986,37 +2896,44 @@ loc_96B4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_96BA:
+; In: D1 = current stat value
+;     D2 = growth curve ID
+;     D3 = starting value
+;     D4 = projected value
+;     D5 = current level
+; Out: D1 = stat gain value
+
+CalculateStatGain:
                 
-                tst.b   d2
-                bne.s   loc_96C4
-                move.w  #0,d1
+                tst.b   d2              ; If curve type other than None
+                bne.s   @EvaluateLevel  ;  ...keep going.
+                move.w  #0,d1           ;  Otherwise, stat_gain_value = 0
                 rts
-loc_96C4:
+@EvaluateLevel:
                 
                 movem.l d0/d2-a0,-(sp)
-                movem.w d1-d5,-(sp)
-                cmpi.w  #$1E,d5
-                blt.s   loc_96DC
+                movem.w d1-d5,-(sp)     ; -> backup function arguments
+                cmpi.w  #CHAR_STATGAIN_PROJECTIONLEVEL,d5 ; If current level within projection
+                blt.s   @GetCurveParams ;  ...keep going.
                 move.w  #$100,d0
                 move.w  #$180,d4
-                bra.s   loc_96FE
-loc_96DC:
+                bra.s   @RandomizeStatGain
+@GetCurveParams:
                 
-                andi.w  #7,d2
+                andi.w  #GROWTHCURVE_MASK_IDX,d2
                 subq.w  #1,d2
-                muls.w  #$74,d2 
+                muls.w  #GROWTHCURVE_DEF_SIZE,d2
                 movea.l (p_StatGrowthCurves).l,a0
                 adda.w  d2,a0
                 move.w  d5,d2
                 subq.w  #1,d2
                 lsl.w   #2,d2
                 adda.w  d2,a0
-                move.w  (a0)+,d0
-                move.w  (a0)+,d7
-                sub.w   d3,d4
+                move.w  (a0)+,d0        ; D0 = curve_param_1 for current level
+                move.w  (a0)+,d7        ; D7 = curve_param_2 for current level
+                sub.w   d3,d4           ; D4 = projected growth
                 mulu.w  d7,d4
-loc_96FE:
+@RandomizeStatGain:
                 
                 move.w  #$80,d6 
                 jsr     (GenerateRandomNumber).w
@@ -5025,24 +2942,24 @@ loc_96FE:
                 sub.w   d7,d4
                 addi.w  #$80,d4 
                 lsr.w   #8,d4
-                move.w  d4,d6
-                movem.w (sp)+,d1-d5
-                sub.w   d3,d4
+                move.w  d4,d6           ; D6 = randomized stat gain
+                movem.w (sp)+,d1-d5     ; <- restore function arguments
+                sub.w   d3,d4           ; D4 = projected growth
                 mulu.w  d4,d0
                 addi.w  #$80,d0 
                 lsr.w   #8,d0
-                add.w   d3,d0
+                add.w   d3,d0           ; D0 = expected minimum stat for current level
                 add.w   d6,d1
-                cmp.w   d0,d1
-                bge.s   loc_972E
-                addq.w  #1,d6
-loc_972E:
+                cmp.w   d0,d1           ; If new value greater than expected minimum
+                bge.s   @Done           ;  ...we're done.
+                addq.w  #1,d6           ;  Otherwise, lovingly apply "loser pity bonus."
+@Done:
                 
-                move.w  d6,d1
+                move.w  d6,d1           ; return stat gain value -> D1
                 movem.l (sp)+,d0/d2-a0
                 rts
 
-	; End of function sub_96BA
+	; End of function CalculateStatGain
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5058,9 +2975,9 @@ loc_9740:
                 sub.w   d7,d0
                 bsr.w   InitCharacterDataInRAM
                 dbf     d7,loc_9740
-                moveq   #GOLD_STARTING_AMOUNT,d1; starting gold value
+                moveq   #GOLD_STARTING_AMOUNT,d1 ; starting gold value
                 bsr.w   SetGold
-                moveq   #CHAR_IDX_BOWIE,d0; starting character
+                moveq   #ALLY_BOWIE,d0  ; starting character
                 bsr.w   JoinForce
                 movem.w (sp)+,d0-d1/d7
                 rts
@@ -5271,7 +3188,7 @@ GetFlag:
                 
                 andi.l  #FLAG_MASK,d1
                 divu.w  #8,d1           ; get the byte in which the flag is stored
-                lea     ((GAME_FLAGS-$1000000)).w,a0; go to the flag location in RAM
+                lea     ((GAME_FLAGS-$1000000)).w,a0 ; go to the flag location in RAM
                 adda.w  d1,a0           ; go to the concerned byte
                 swap    d1
                 moveq   #$FFFFFF80,d0
@@ -5295,7 +3212,7 @@ UpdateForce:
                 moveq   #0,d3
                 moveq   #0,d4
                 moveq   #0,d0
-                moveq   #COM_ALLIES_COUNTER,d7; loop 30 times
+                moveq   #COM_ALLIES_COUNTER,d7 ; loop 30 times
 loc_991A:
                 
                 move.w  d0,d1
@@ -5546,7 +3463,7 @@ loc_9A86:
                 dbf     d7,loc_9A78
                 cmpa.l  a1,a0
                 beq.s   loc_9A94
-                move.b  #ITEMIDX_NOTHING,(a0)
+                move.b  #ITEM_NOTHING,(a0)
 loc_9A94:
                 
                 movem.l (sp)+,d0/d7-a1

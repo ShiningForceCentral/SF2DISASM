@@ -229,7 +229,7 @@ cs_5A8CA:       textCursor $773
                 nextText $0,$E          ; "I'm {NAME;14}, a knight.{N}I was looking for a magic{N}sword.{W2}"
                 nextText $0,$E          ; "I would do anything for{N}Mr. Creed!  Please choose me.{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_5A8E6; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_5A8E6 ; YES/NO prompt answer
                 nextSingleText $0,$E    ; "What a pity...then, I wish{N}happiness to all of you.{W1}"
                 csc_end
 cs_5A8E6:       join $E
@@ -243,7 +243,7 @@ cs_5A90E:       textCursor $780
                 nextText $0,$E          ; "I really want to find the{N}legendary magic sword....{W2}"
                 nextText $0,$E          ; "But I can't do that if I'm{N}stuck here.{W2}{N}May I join your force?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_5A92A; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_5A92A ; YES/NO prompt answer
                 nextSingleText $0,$E    ; "No?  Then I'll continue my{N}search for the legendary{N}magic sword alone.{W1}"
                 csc_end
 cs_5A92A:       join $E
@@ -254,7 +254,7 @@ cs_5A93A:       textCursor $776
                 nextText $0,$10         ; "Hee, hee...I'm not only a{N}dwarf, I'm {NAME;16}.{W2}"
                 nextText $0,$10         ; "I'm known as the strongest{N}warrior of my people.{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_5A956; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_5A956 ; YES/NO prompt answer
                 nextSingleText $0,$10   ; "Tut!  OK, I have a{N}comfortable life here.{W1}"
                 csc_end
 cs_5A956:       join $10
@@ -268,7 +268,7 @@ cs_5A97E:       textCursor $783
                 nextText $0,$10         ; "I was surprised to find I{N}had returned to my original{N}size!{W2}"
                 nextText $0,$10         ; "What should I do now?{N}I can go anywhere...{N}maybe...with you?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_5A99A; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_5A99A ; YES/NO prompt answer
                 nextSingleText $0,$10   ; "Fine!  I'll stay in this{N}mansion then.{W1}"
                 csc_end
 cs_5A99A:       join $10
@@ -279,7 +279,7 @@ cs_5A9AA:       textCursor $779
                 nextText $0,$11         ; "I'm {NAME;17}, a mage.{N}I studied magic in Ponpei.{W2}"
                 nextText $0,$11         ; "I'll miss my friends, but if{N}I can be of help, I'll go{N}with you!{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_5A9C6; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_5A9C6 ; YES/NO prompt answer
                 nextSingleText $0,$11   ; "My magic could've been a{N}great help to you.{W1}"
                 csc_end
 cs_5A9C6:       join $11
@@ -293,7 +293,7 @@ cs_5A9EE:       textCursor $786
                 nextText $0,$11         ; "I'm not sure why, but I'm{N}free.{W2}"
                 nextText $0,$11         ; "Can I join your force?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_5AA0A; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_5AA0A ; YES/NO prompt answer
                 nextSingleText $0,$11   ; "You may regret refusing me.{W1}"
                 csc_end
 cs_5AA0A:       join $11
@@ -304,7 +304,7 @@ cs_5AA1A:       textCursor $77C
                 nextText $0,$F          ; "I'm {NAME;15}, a priest.{N}I think I'm rather young{N}for my profession....{W2}"
                 nextText $0,$F          ; "I don't want to stay in this{N}awful place forever.{N}Choose me!{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_5AA36; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_5AA36 ; YES/NO prompt answer
                 nextSingleText $0,$F    ; "You...snot nose!{W1}"
                 csc_end
 cs_5AA36:       join $F
@@ -318,7 +318,7 @@ cs_5AA5E:       textCursor $789
                 nextText $0,$F          ; "I'm free!  Fresh air smells{N}so good!{W2}"
                 nextText $0,$F          ; "Where should I go?{N}Hey, may I go with you?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_5AA7A; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_5AA7A ; YES/NO prompt answer
                 nextSingleText $0,$F    ; "Why, how rude!{W1}"
                 csc_end
 cs_5AA7A:       join $F

@@ -47,7 +47,7 @@ loc_2134:
                 
                 add.w   d0,d0           ; 0...
                 bcs.w   loc_214E        
-                bsr.w   ReadMapLayoutBarrelForBlockFlags; 00 : Output next block from block set
+                bsr.w   ReadMapLayoutBarrelForBlockFlags ; 00 : Output next block from block set
                 addq.w  #1,d7
                 or.w    d7,d1
                 bsr.w   SaveBlockToLeftStackMap
@@ -132,8 +132,7 @@ loc_21D0:
                 
                 add.w   d0,d0
                 bcs.w   loc_2208        
-                lea     (FF6800_MAP_LOADING_LEFT_HISTORY_MAP).l,a5
-                                                        ; 10 : get block from left history map
+                lea     (FF6800_MAP_LOADING_LEFT_HISTORY_MAP).l,a5 ; 10 : get block from left history map
                 bra.w   loc_21F0
 loc_21E0:
                 
@@ -186,8 +185,7 @@ loc_2236:
                 
                 add.w   d0,d0
                 bcs.w   loc_226E        ; 111
-                lea     (FF8800_MAP_LOADING_UPPER_HISTORY_MAP).l,a5
-                                                        ; 110 : Get block from upper block history map
+                lea     (FF8800_MAP_LOADING_UPPER_HISTORY_MAP).l,a5 ; 110 : Get block from upper block history map
                 bra.w   loc_2256
 loc_2246:
                 
@@ -1149,7 +1147,7 @@ LoadMap:
                 bra.w   loc_2B80        
 loc_2ACC:
                 
-                clr.w   ((word_FFAF42-$1000000)).w; Load new map D1
+                clr.w   ((word_FFAF42-$1000000)).w ; Load new map D1
                 move.b  d1,((CURRENT_MAP-$1000000)).w
 loc_2AD4:
                 
@@ -1212,7 +1210,7 @@ loc_2B64:
                 bsr.w   ApplyImmediateVramDMA
 loc_2B7C:
                 
-                bsr.w   LoadMapBlocksAndLayout; load blocks and layout ?
+                bsr.w   LoadMapBlocksAndLayout ; load blocks and layout ?
 loc_2B80:
                 
                 movea.l (a5)+,a4        ; move map properties address to A4

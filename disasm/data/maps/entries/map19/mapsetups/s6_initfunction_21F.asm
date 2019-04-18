@@ -224,7 +224,7 @@ cs_62D0E:       textCursor $F7F
                 nextText $0,$5          ; "I understand {NAME;3}, but{N}she is a human.{W2}"
                 nextSingleText $0,$5    ; "A human is the best choice.{W1}"
                 shiver $3
-                jumpIfFlagClear $8,cs_62FB0; May joined
+                jumpIfFlagClear $8,cs_62FB0 ; May joined
                 entityActionsWait $8
                  moveDown 1
                  faceRight 1

@@ -544,7 +544,7 @@ cs_60F18:       textCursor $D8F
 cs_60F64:       textCursor $D98
                 nextText $FF,$FF        ; "It's a fine-looking piano.{N}Will you play it?{W1}"
                 yesNo
-                jumpIfFlagClear $59,cs_60FA4; YES/NO prompt answer
+                jumpIfFlagClear $59,cs_60FA4 ; YES/NO prompt answer
                 textCursor $D99
                 playSound MUSIC_PIANO_THEME
                 csWait 120

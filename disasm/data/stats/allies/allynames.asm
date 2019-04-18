@@ -1,33 +1,33 @@
 
 ; ASM FILE data\stats\allies\allynames.asm :
 ; 0xFAD6..0xFB8A : Ally names
-AllyNames:      dc.b 5, 'BOWIE'
-                dc.b 5, 'SARAH'
-                dc.b 7, 'CHESTER'
-                dc.b 4, 'JAHA'
-                dc.b 5, 'KAZIN'
-                dc.b 5, 'SLADE'
-                dc.b 4, 'KIWI'
-                dc.b 5, 'PETER'
-                dc.b 3, 'MAY'
-                dc.b 7, 'GERHALT'
-                dc.b 4, 'LUKE'
-                dc.b 5, 'ROHDE'
-                dc.b 4, 'RICK'
-                dc.b 5, 'ELRIC'
-                dc.b 4, 'ERIC'
-                dc.b 5, 'KARNA'
-                dc.b 7, 'RANDOLF'
-                dc.b 5, 'TYRIN'
-                dc.b 5, 'JANET'
-                dc.b 6, 'HIGINS'
-                dc.b 7, 'SKREECH'
-                dc.b 4, 'TAYA'
-                dc.b 6, 'FRAYJA'
-                dc.b 4, 'JARO'
-                dc.b 4, 'GYAN'
-                dc.b 6, 'SHEELA'
-                dc.b 4, 'ZYNK'
-                dc.b 4, 'CHAZ'
-                dc.b 5, 'LEMON'
-                dc.b 6, 'CLAUDE'
+AllyNames:      allyName "BOWIE"
+                allyName "SARAH"
+                allyName "CHESTER"
+                allyName "JAHA"
+                allyName "KAZIN"
+                allyName "SLADE"
+                allyName "KIWI"
+                allyName "PETER"
+                allyName "MAY"
+                allyName "GERHALT"
+                allyName "LUKE"
+                allyName "ROHDE"
+                allyName "RICK"
+                allyName "ELRIC"
+                allyName "ERIC"
+                allyName "KARNA"
+                allyName "RANDOLF"
+                allyName "TYRIN"
+                allyName "JANET"
+                allyName "HIGINS"
+                allyName "SKREECH"
+                allyName "TAYA"
+                allyName "FRAYJA"
+                allyName "JARO"
+                allyName "GYAN"
+                allyName "SHEELA"
+                allyName "ZYNK"
+                allyName "CHAZ"
+                allyName "LEMON"
+                allyName "CLAUDE"

@@ -181,7 +181,7 @@ cs_5CCF6:       entityFlashWhite $0,$32
                 entityFlashWhite $0,$32
                 setActscriptWait $0,eas_Init
                 startEntity $0
-                jumpIfFlagSet $1D,cs_5CDDA; Claude joined
+                jumpIfFlagSet $1D,cs_5CDDA ; Claude joined
                 setSprite $1D,MAPSPRITE_POSE3
                 setFacing $1D,DOWN
                 stopEntity $1D

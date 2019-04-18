@@ -75,7 +75,7 @@ loc_4415A:
                 movem.w d0-d1,-(sp)
                 clr.w   d0
                 move.b  d4,d0
-                bsr.w   GetForceMemberSpriteIdx
+                bsr.w   GetAllyMapSprite
                 movem.w (sp)+,d0-d1
                 bra.s   loc_44172
 loc_44170:
@@ -96,7 +96,7 @@ loc_44180:
                 movem.w (sp)+,d1-d3
                 clr.w   d0
                 clr.l   d6
-                bsr.w   GetForceMemberSpriteIdx
+                bsr.w   GetAllyMapSprite
                 move.l  #eas_Idle,d5
                 bsr.w   DeclareNewEntity
                 move.w  #$10,((SPRITE_SIZE-$1000000)).w

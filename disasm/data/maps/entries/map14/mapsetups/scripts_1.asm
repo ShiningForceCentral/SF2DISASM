@@ -5,7 +5,7 @@ cs_58F5C:       moveNextToPlayer $81,DOWN
                 textCursor $C84
                 nextText $0,$81         ; "Are you ready?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_58F7E; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_58F7E ; YES/NO prompt answer
                 textCursor $C86
                 nextSingleText $0,$81   ; "I want to leave soon.{N}Finish your preparations.{W1}"
                 csc_end

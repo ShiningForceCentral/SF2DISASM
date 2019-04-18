@@ -21,11 +21,9 @@ ProcessPlayerAction:
                 rts
 loc_25B02:
                 
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
-                                                        ; BUTTON C PUSHED
+                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w ; BUTTON C PUSHED
                 beq.s   loc_25B40       
-                btst    #INPUT_A_B,((P2_INPUT-$1000000)).w
-                                                        ; If Debug Mode and P1 C pushed while P2 B pushed, access Debug Flag Setter and then Chuch Actions
+                btst    #INPUT_A_B,((P2_INPUT-$1000000)).w ; If Debug Mode and P1 C pushed while P2 B pushed, access Debug Flag Setter and then Chuch Actions
                 beq.s   loc_25B22
                 move.w  #$258,d0
                 jsr     j_DebugFlagSetter
@@ -35,15 +33,14 @@ loc_25B22:
                 
                 btst    #INPUT_A_C,((P2_INPUT-$1000000)).w
                 bne.w   loc_25BF4       
-                btst    #INPUT_A_A,((P2_INPUT-$1000000)).w
-                                                        ; If Debug Mode and P1 C pushed while P2 A pushed, access Debug Mode Action Select
+                btst    #INPUT_A_A,((P2_INPUT-$1000000)).w ; If Debug Mode and P1 C pushed while P2 A pushed, access Debug Mode Action Select
                 beq.s   loc_25B40       
                 jsr     (FadeOutToBlack).w
                 jsr     j_DebugModeActionSelect
                 rts
 loc_25B40:
                 
-                lea     ((ENTITY_DATA-$1000000)).w,a0; Not in debug mode
+                lea     ((ENTITY_DATA-$1000000)).w,a0 ; Not in debug mode
                 cmpi.b  #$3E,$33(a0) 
                 bne.s   loc_25BAA
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
@@ -60,7 +57,7 @@ loc_25B64:
                 
                 add.w   d1,d0
                 bne.s   loc_25BAA
-                sndCom  SOUND_COMMAND_FADE_OUT; CARAVAN ACTIONS
+                sndCom  SOUND_COMMAND_FADE_OUT ; CARAVAN ACTIONS
                 bsr.w   j_j_ShrinkInBowieAndFollowers
                 sndCom  MUSIC_HEADQUARTERS
                 trap    #VINT_FUNCTIONS
@@ -113,7 +110,7 @@ return_25BF2:
                 rts
 loc_25BF4:
                 
-                jsr     j_DebugMapScript; If Debug Mode and P1 C pushed while P2 C pushed, execute debug cutscene
+                jsr     j_DebugMapScript ; If Debug Mode and P1 C pushed while P2 C pushed, execute debug cutscene
                 rts
 
 	; End of function ProcessPlayerAction

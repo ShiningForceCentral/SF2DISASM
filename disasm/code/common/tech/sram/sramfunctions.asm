@@ -109,7 +109,7 @@ loc_6F96:
                 move.w  #$FB0,d7
                 bsr.w   CopyBytesToSRAM 
                 move.b  d0,(a2)         ; d0 = save checksum
-                bset    d1,(SAVE_FLAGS).l; indicate busy save slot
+                bset    d1,(SAVE_FLAGS).l ; indicate busy save slot
                 movem.l (sp)+,d0-d1/d7-a2
                 rts
 

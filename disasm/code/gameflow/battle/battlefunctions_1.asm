@@ -47,7 +47,7 @@ loc_23ADA:
                 jsr     j_ExecuteBattleCutscene_Start
 loc_23B0A:
                 
-                bsr.w   UpdateAllEnemyAI; start of battle loop
+                bsr.w   UpdateAllEnemyAI ; start of battle loop
                 jsr     j_ExecuteBattleRegionCutscene
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.s   loc_23B1E
@@ -108,7 +108,7 @@ loc_23B6A:
                 bra.s   loc_23B40       
 loc_23BB4:
                 
-                moveq   #COM_ENEMIES_COUNTER,d7; kill all enemies
+                moveq   #COM_ENEMIES_COUNTER,d7 ; kill all enemies
                 move.w  #COM_ENEMY_START,d0
                 lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0
                 clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
@@ -142,12 +142,12 @@ HealAliveCharsAndImmortals:
                 
                 movem.l d0-d7,-(sp)
                 clr.w   d0
-                moveq   #CHAR_MAX_IDX,d7
+                moveq   #COM_ALLIES_COUNTER,d7
 loc_23C04:
                 
-                cmpi.b  #CHAR_IDX_PETER,d0
+                cmpi.b  #ALLY_PETER,d0
                 beq.w   loc_23C1E
-                cmpi.b  #CHAR_IDX_LEMON,d0
+                cmpi.b  #ALLY_LEMON,d0
                 beq.w   loc_23C1E
                 jsr     j_GetCurrentHP
                 tst.w   d1
@@ -227,7 +227,7 @@ return_23CB8:
 loc_23CBA:
                 
                 bsr.w   HealAliveCharsAndImmortals
-                cmpi.b  #BATTLEIDX_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w
+                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
                                                         ; HARDCODED Battle check for fairy woods
                 bne.s   loc_23CCC
                 jsr     j_DisplayTimerWindow
@@ -279,7 +279,8 @@ loc_23D44:
                 jsr     GetEgressPositionForBattle(pc)
                 nop
                 moveq   #$FFFFFFFF,d4
-                cmpi.b  #4,((CURRENT_BATTLE-$1000000)).w; HARDCODED battle 4 upgrade
+                cmpi.b  #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS,((CURRENT_BATTLE-$1000000)).w 
+                                                        ; HARDCODED battle 4 upgrade
                 bne.s   return_23D96
                 clrFlg  $194            ; Battle 4 unlocked
                 setFlg  $1F8            ; Battle 4 completed
@@ -437,7 +438,7 @@ sub_23EB0:
 loc_23EC4:
                 
                 bsr.w   ClearDeadCombatantsListLength
-                cmpi.b  #BATTLEIDX_TAROS,((CURRENT_BATTLE-$1000000)).w
+                cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_23EDA
                 tst.w   -2(a6)
                 bne.s   loc_23EDA
@@ -484,7 +485,7 @@ loc_23F58:
                 jsr     j_sub_DEFC      ; AI controlled unit (enemy, auto-control cheat, MUDDLEd force member)
 loc_23F5E:
                 
-                bsr.w   WaitForUnitCursor; player controlled unit (normal force member, enemy with control opponent cheat)
+                bsr.w   WaitForUnitCursor ; player controlled unit (normal force member, enemy with control opponent cheat)
                 jsr     (WaitForViewScrollEnd).w
                 clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
                 move.w  -2(a6),d0
@@ -549,7 +550,7 @@ loc_2403A:
                 bne.s   loc_24052
                 move.w  ((word_FFB630-$1000000)).w,d0
                 andi.w  #SPELL_MASK_IDX,d0
-                cmpi.w  #SPELLIDX_EGRESS,d0
+                cmpi.w  #SPELL_EGRESS,d0
                 beq.w   loc_23DC4
 loc_24052:
                 
@@ -557,7 +558,7 @@ loc_24052:
                 bne.s   loc_2406A
                 move.w  ((word_FFB630-$1000000)).w,d0
                 andi.w  #ITEM_MASK_IDX,d0
-                cmpi.w  #ITEMIDX_ANGEL_WING,d0
+                cmpi.w  #ITEM_ANGEL_WING,d0
                 beq.w   sub_23D98       
 loc_2406A:
                 
@@ -578,7 +579,7 @@ loc_24090:
                 tst.w   ((BATTLESCENE_ACTION_TYPE-$1000000)).w
                 bne.s   loc_240E6       
                 moveq   #4,d6
-                jsr     (GenerateRandomNumber).w; Kiwi's special attack ?
+                jsr     (GenerateRandomNumber).w ; Kiwi's special attack ?
                 tst.w   d7
                 bne.s   loc_240E6       
                 move.w  ((word_FFB630-$1000000)).w,((word_FFB632-$1000000)).w
@@ -605,7 +606,7 @@ loc_240DC:
                 move.w  d0,((word_FFB630-$1000000)).w
 loc_240E6:
                 
-                cmpi.b  #BATTLEIDX_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w
+                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
                                                         ; HARDCODED Battle check : Fairy wood secret battle
                 bne.s   loc_240F4
                 jsr     j_DisplayTimerWindow
@@ -631,12 +632,12 @@ loc_24128:
                 bra.w   loc_241A4
 loc_2412C:
                 
-                move.b  #MUSIC_ENEMY_ATTACK,((SKIRMISH_MUSIC_INDEX-$1000000)).w
+                move.b  #MUSIC_ENEMY_ATTACK,((SKIRMISH_MUSIC_INDEX-$1000000)).w 
                                                         ; enemy
                 jsr     j_GetEnemyID
                 cmpi.b  #$57,d1 
                 bne.s   loc_24144
-                move.b  #MUSIC_BOSS_ATTACK,((SKIRMISH_MUSIC_INDEX-$1000000)).w
+                move.b  #MUSIC_BOSS_ATTACK,((SKIRMISH_MUSIC_INDEX-$1000000)).w 
                                                         ; boss
 loc_24144:
                 
@@ -677,7 +678,7 @@ loc_24198:
                 
                 cmpi.b  #$62,d1 
                 bne.s   loc_241A4
-                move.b  #MUSIC_ZEON_ATTACK,((SKIRMISH_MUSIC_INDEX-$1000000)).w
+                move.b  #MUSIC_ZEON_ATTACK,((SKIRMISH_MUSIC_INDEX-$1000000)).w 
                                                         ; zeon
 loc_241A4:
                 
@@ -700,8 +701,7 @@ loc_241C4:
                 move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 jsr     j_ExecuteBattleSceneScript
                 jsr     sub_1800C
-                jsr     j_ApplyPositionsAfterEnemyLeaderDies
-                                                        ; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
+                jsr     j_ApplyPositionsAfterEnemyLeaderDies ; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
                 movem.l (sp)+,a6
                 movem.l a6,-(sp)
                 clr.w   d0
@@ -915,7 +915,7 @@ loc_243F0:
 loc_2441E:
                 
                 jsr     j_GetEquippedRing
-                cmpi.w  #ITEMIDX_LIFE_RING,d1
+                cmpi.w  #ITEM_LIFE_RING,d1
                 bne.s   loc_2444C
                 jsr     j_GetCurrentHP
                 move.w  d1,d2
@@ -1029,8 +1029,7 @@ HandleKilledCombatants:
                 moveq   #ANIM_SPRITE_DEATH_NUM_SPINS,d6
 loc_24526:
                 
-                lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0
-                                                        ; loop point for sprite death spin animation
+                lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0 ; loop point for sprite death spin animation
                 lea     ((ENTITY_ANIMCOUNTER-$1000000)).w,a1
                 move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
@@ -2040,7 +2039,7 @@ loc_250B0:
                 txt     $193            ; "{NAME} opened the chest.{W2}{CLEAR}"
                 move.w  ((byte_FFB180-$1000000)).w,d1
                 andi.w  #ITEM_MASK_IDX,d1
-                cmpi.w  #ITEMIDX_NOTHING,d1
+                cmpi.w  #ITEM_NOTHING,d1
                 beq.w   byte_25178      
                 move.w  -2(a6),d0
                 bsr.w   GetEntityPositionAfterApplyingFacing
@@ -2058,7 +2057,7 @@ loc_250B0:
 loc_250FC:
                 
                 move.w  ((byte_FFB180-$1000000)).w,d2
-                cmpi.w  #ITEMIDX_CHEST_GOLD_AMOUNTS_START,d2
+                cmpi.w  #ITEM_IDX_GOLD_CHESTS_START,d2
                 blt.s   loc_25124
                 bsr.w   GetChestGoldAmount
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
@@ -2608,7 +2607,7 @@ loc_25646:
                 jsr     j_LoadBattleTerrainData
                 jsr     (PlayMapMusic).w
                 jsr     (FadeInFromBlack).w
-                cmpi.b  #BATTLEIDX_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w
+                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
                                                         ; if battle 44, then special battle !
                 bne.s   return_256A0
                 jsr     j_SpecialBattle
@@ -2757,7 +2756,7 @@ loc_257A4:
                 
                 movem.w d0-d7,-(sp)
                 jsr     j_GetEquippedRing
-                cmpi.w  #ITEMIDX_CHIRRUP_SANDALS,d1; HARDCODED chirrup sandals item index for specific sfx
+                cmpi.w  #ITEM_CHIRRUP_SANDALS,d1 ; HARDCODED chirrup sandals item index for specific sfx
                 bne.s   loc_257BA
                 move.w  #SFX_BLOAB,((MOVE_SFX-$1000000)).w
 loc_257BA:

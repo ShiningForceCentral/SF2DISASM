@@ -99,7 +99,7 @@ cs_503A6:       textCursor $8BF
                 nextSingleText $FF,$FF  ; "And so the ship heads east{N}for Parmecia.{W1}"
                 csWait 120
                 nextSingleText $0,$1    ; "I feel...sick...to my...{N}stomach...ohhh....{W1}"
-                jumpIfFlagClear $6,cs_50426; Kiwi joined
+                jumpIfFlagClear $6,cs_50426 ; Kiwi joined
                 nextSingleText $C0,$6   ; "{NAME;1}, look!{W1}"
                 nextSingleText $0,$1    ; "Sorry, {NAME;6}...I can't{N}do anything right now....{W1}"
                 nextSingleText $C0,$6   ; "That's not what...{W1}"
@@ -213,7 +213,7 @@ cs_50426:       textCursor $8B5
                 stopEntity $83
                 stopEntity $84
                 stopEntity $85
-                jumpIfFlagSet $6,cs_50624; Kiwi joined
+                jumpIfFlagSet $6,cs_50624 ; Kiwi joined
                 hide $6
 cs_50624:       fadeInB
                 entityActionsWait $3

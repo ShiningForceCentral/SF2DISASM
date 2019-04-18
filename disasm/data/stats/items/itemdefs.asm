@@ -1,259 +1,1785 @@
 
 ; ASM FILE data\stats\items\itemdefs.asm :
 ; 0x16EA6..0x176A6 : Item definitions
-ItemDefs:       itemDef 0, 1, 0, 10, 32, 16, 0, 0, 0, 0, 0, 0
-                                                        ; Medical Herb
-                itemDef 0, 1, 0, 200, 32, 80, 0, 0, 0, 0, 0, 0
-                                                        ; Healing Seed
-                itemDef 0, 1, 0, 300, 32, 144, 0, 0, 0, 0, 0, 0
-                                                        ; Healing Drop
-                itemDef 0, 1, 0, 20, 32, 2, 0, 0, 0, 0, 0, 0
-                                                        ; Antidote
-                itemDef 0, 0, 0, 40, 32, 10, 0, 0, 0, 0, 0, 0
-                                                        ; Angel Wing
-                itemDef 0, 1, 0, 100, 32, 33, 0, 0, 0, 0, 0, 0
-                                                        ; Fairy Powder
-                itemDef 0, 1, 0, 400, 32, 192, 0, 0, 0, 0, 0, 0
-                                                        ; Healing Water
-                itemDef 0, 1, 0, 300, 32, 98, 0, 0, 0, 0, 0, 0
-                                                        ; Fairy Tear
-                itemDef 0, 0, 0, 10000, 40, 193, 0, 0, 0, 0, 0, 0
-                                                        ; Healing Rain
-                itemDef 0, 0, 0, 500, 32, 20, 0, 0, 0, 0, 0, 0
-                                                        ; Power Water
-                itemDef 0, 0, 0, 500, 32, 21, 0, 0, 0, 0, 0, 0
-                                                        ; Protect Milk
-                itemDef 0, 0, 0, 500, 32, 22, 0, 0, 0, 0, 0, 0
-                                                        ; Quick Chicken
-                itemDef 0, 0, 0, 1500, 32, 23, 0, 0, 0, 0, 0, 0
-                                                        ; Running Pimento
-                itemDef 0, 0, 0, 500, 32, 24, 0, 0, 0, 0, 0, 0
-                                                        ; Cheerful Bread
-                itemDef 0, 0, 0, 500, 32, 35, 0, 0, 0, 0, 0, 0
-                                                        ; Bright Honey
-                itemDef 0, 0, 0, 500, 32, 36, 0, 0, 0, 0, 0, 0
-                                                        ; Brave Apple
-                itemDef 0, 1, 0, 1000, 40, 37, 0, 0, 0, 0, 0, 0
-                                                        ; Shining Ball
-                itemDef 0, 1, 0, 1200, 40, 38, 0, 0, 0, 0, 0, 0
-                                                        ; Blizzard
-                itemDef 0, 1, 0, 1500, 40, 39, 0, 0, 0, 0, 0, 0
-                                                        ; Holy Thunder
-                itemDef -1, 0, 0, 3000, 140, 5, 6, 5, 0, 0, 0, 0
-                                                        ; Power Ring
-                itemDef -1, 0, 0, 3000, 140, 3, 7, 5, 0, 0, 0, 0
-                                                        ; Protect Ring
-                itemDef -1, 0, 0, 3000, 140, 63, 8, 5, 0, 0, 0, 0
-                                                        ; Quick Ring
-                itemDef -1, 0, 0, 3000, 12, 63, 9, 2, 0, 0, 0, 0
-                                                        ; Running Ring
-                itemDef 528384, 0, 0, 5000, 140, 65, 7, 10, 0, 0, 0, 0
-                                                        ; White Ring
-                itemDef 393216, 0, 0, 5000, 204, 75, 6, 10, 0, 0, 0, 0
-                                                        ; Black Ring
-                itemDef 917504, 0, 0, 5000, 204, 77, 6, 15, 0, 0, 0, 0
-                                                        ; Evil Ring
-                itemDef 1048576, 1, 1, 1300, 2, 63, 6, 26, 0, 0, 0, 0
-                                                        ; Leather Glove
-                itemDef 1048576, 1, 1, 1800, 2, 63, 6, 33, 0, 0, 0, 0
-                                                        ; Power Glove
-                itemDef 1048576, 1, 1, 2900, 2, 63, 6, 39, 0, 0, 0, 0
-                                                        ; Brass Knuckles
-                itemDef 1048576, 1, 1, 4800, 2, 63, 6, 43, 0, 0, 0, 0
-                                                        ; Iron Knuckles
-                itemDef 1048576, 1, 1, 5500, 138, 15, 6, 48, 0, 0, 0, 0
-                                                        ; Misty Knuckles
-                itemDef 1048576, 1, 1, 7500, 138, 7, 6, 55, 0, 0, 0, 0
-                                                        ; Giant Knuckles
-                itemDef 1048576, 1, 1, 9500, 74, 63, 6, 63, 0, 0, 0, 0
-                                                        ; Evil Knuckles
-                itemDef -2147385340, 1, 1, 120, 2, 63, 6, 5, 0, 0, 0, 0
-                                                        ; Short Axe
-                itemDef -2147385340, 1, 1, 340, 2, 63, 6, 9, 0, 0, 0, 0
-                                                        ; Hand Axe
-                itemDef -2147385340, 1, 1, 610, 2, 63, 6, 13, 0, 0, 0, 0
-                                                        ; Middle Axe
-                itemDef -2147385340, 1, 1, 1100, 2, 63, 6, 17, 0, 0, 0, 0
-                                                        ; Power Axe
-                itemDef -2147385340, 1, 1, 1370, 2, 63, 6, 21, 0, 0, 0, 0
-                                                        ; Battle Axe
-                itemDef -2147385344, 1, 1, 2250, 2, 63, 6, 25, 0, 0, 0, 0
-                                                        ; Large Axe
-                itemDef -2147385344, 1, 1, 4600, 2, 63, 6, 28, 0, 0, 0, 0
-                                                        ; Great Axe
-                itemDef -2147385344, 1, 1, 7200, 138, 75, 6, 32, 0, 0, 0, 0
-                                                        ; Heat Axe
-                itemDef -2147385344, 1, 1, 9600, 138, 139, 6, 35, 0, 0, 0, 0
-                                                        ; Atlas Axe
-                itemDef -2147385344, 1, 1, 10000, 10, 63, 6, 39, 9, 1, 0, 0
-                                                        ; Ground Axe
-                itemDef -2147385344, 1, 1, 10000, 138, 66, 6, 42, 2, 1, 0, 0
-                                                        ; Rune Axe
-                itemDef -2147385344, 1, 1, 15000, 74, 63, 6, 50, 11, 5, 0, 0
-                                                        ; Evil Axe
-                itemDef 39846176, 2, 2, 250, 2, 63, 6, 7, 0, 0, 0, 0
-                                                        ; Wooden Arrow
-                itemDef 39846176, 2, 2, 600, 2, 63, 6, 12, 0, 0, 0, 0
-                                                        ; Iron Arrow
-                itemDef 39846176, 2, 2, 1270, 2, 63, 6, 17, 0, 0, 0, 0
-                                                        ; Steel Arrow
-                itemDef 39845888, 3, 2, 1480, 2, 63, 6, 21, 2, 1, 0, 0
-                                                        ; Robin Arrow
-                itemDef 39845888, 3, 2, 2500, 2, 63, 6, 25, 0, 0, 0, 0
-                                                        ; Assault Shell
-                itemDef 39845888, 3, 2, 5000, 2, 63, 6, 29, 0, 0, 0, 0
-                                                        ; Great Shot
-                itemDef 39845888, 3, 2, 3000, 10, 63, 6, 33, 2, 1, 0, 0
-                                                        ; Nazca Cannon
-                itemDef 39845888, 3, 2, 6800, 10, 63, 6, 37, 0, 0, 0, 0
-                                                        ; Buster Shot
-                itemDef 39845888, 3, 2, 8700, 10, 63, 6, 40, 0, 0, 0, 0
-                                                        ; Hyper Cannon
-                itemDef 39845888, 3, 2, 9800, 138, 6, 6, 43, 0, 0, 0, 0
-                                                        ; Grand Cannon
-                itemDef 39845888, 3, 2, 13000, 74, 63, 6, 51, 11, 5, 0, 0
-                                                        ; Evil Shot
-                itemDef 24578, 1, 1, 70, 2, 63, 6, 3, 0, 0, 0, 0
-                                                        ; Wooden Stick
-                itemDef -2004807615, 1, 1, 140, 2, 63, 6, 5, 0, 0, 0, 0
-                                                        ; Short Sword
-                itemDef -2004807615, 1, 1, 340, 2, 63, 6, 8, 0, 0, 0, 0
-                                                        ; Middle Sword
-                itemDef -2004807615, 1, 1, 620, 2, 63, 6, 12, 0, 0, 0, 0
-                                                        ; Long Sword
-                itemDef -2004807615, 1, 1, 1120, 2, 63, 6, 16, 0, 0, 0, 0
-                                                        ; Steel Sword
-                itemDef 4097, 1, 1, 1350, 10, 63, 6, 19, 0, 0, 0, 0
-                                                        ; Achilles Sword
-                itemDef -2004807680, 1, 1, 1600, 2, 63, 6, 22, 0, 0, 0, 0
-                                                        ; Broad Sword
-                itemDef -2004807680, 1, 1, 2600, 2, 63, 6, 26, 0, 0, 0, 0
-                                                        ; Buster Sword
-                itemDef -2004807680, 1, 1, 5100, 2, 63, 6, 29, 0, 0, 0, 0
-                                                        ; Great Sword
-                itemDef -2004807680, 1, 1, 7200, 10, 63, 6, 32, 2, 1, 0, 0
-                                                        ; Critical Sword
-                itemDef -2139025408, 1, 1, 9200, 10, 63, 6, 35, 0, 0, 0, 0
-                                                        ; Battle Sword
-                itemDef 4096, 1, 1, 10000, 26, 63, 6, 46, 0, 0, 0, 0
-                                                        ; Force Sword
-                itemDef -2139025408, 1, 1, 13000, 10, 63, 6, 39, 4, 1, 0, 0
-                                                        ; Counter Sword
-                itemDef 4096, 1, 1, 14000, 138, 139, 6, 42, 0, 0, 0, 0
-                                                        ; Levanter
-                itemDef -2004807680, 1, 1, 17000, 202, 8, 6, 50, 11, 5, 0, 0
-                                                        ; Dark Sword
-                itemDef -2004807615, 1, 1, 60, 2, 63, 6, 3, 0, 0, 0, 0
-                                                        ; Wooden Sword
-                itemDef 24578, 2, 1, 120, 2, 63, 6, 6, 0, 0, 0, 0
-                                                        ; Short Spear
-                itemDef 24578, 1, 1, 260, 2, 63, 6, 9, 0, 0, 0, 0
-                                                        ; Bronze Lance
-                itemDef 24578, 2, 1, 460, 2, 63, 6, 12, 0, 0, 0, 0
-                                                        ; Spear
-                itemDef 24578, 1, 1, 810, 2, 63, 6, 16, 0, 0, 0, 0
-                                                        ; Steel Lance
-                itemDef 24578, 2, 1, 1270, 2, 63, 6, 20, 0, 0, 0, 0
-                                                        ; Power Spear
-                itemDef 24576, 1, 1, 1600, 2, 63, 6, 23, 0, 0, 0, 0
-                                                        ; Heavy Lance
-                itemDef 24576, 2, 1, 3400, 2, 63, 6, 26, 0, 0, 0, 0
-                                                        ; Javelin
-                itemDef 24576, 1, 1, 6900, 2, 63, 6, 31, 0, 0, 0, 0
-                                                        ; Chrome Lance
-                itemDef 24576, 2, 1, 7700, 138, 5, 6, 33, 0, 0, 0, 0
-                                                        ; Valkyrie
-                itemDef 24576, 1, 1, 9300, 138, 16, 6, 39, 7, 5, 0, 0
-                                                        ; Holy Lance
-                itemDef 24576, 2, 1, 9900, 10, 63, 6, 42, 0, 0, 0, 0
-                                                        ; Mist Javelin
-                itemDef 24576, 1, 1, 7300, 138, 13, 6, 37, 0, 0, 0, 0
-                                                        ; Halberd
-                itemDef 24576, 1, 1, 11000, 74, 63, 6, 48, 13, 2, 0, 0
-                                                        ; Evil Lance
-                itemDef 917528, 1, 1, 60, 2, 63, 6, 3, 0, 0, 0, 0
-                                                        ; Wooden Rod
-                itemDef 917528, 1, 1, 130, 2, 63, 6, 5, 0, 0, 0, 0
-                                                        ; Short Rod
-                itemDef 917528, 1, 1, 360, 2, 63, 6, 8, 0, 0, 0, 0
-                                                        ; Bronze Rod
-                itemDef 917528, 1, 1, 560, 2, 63, 6, 12, 0, 0, 0, 0
-                                                        ; Iron Rod
-                itemDef 917528, 1, 1, 1050, 2, 63, 6, 15, 0, 0, 0, 0
-                                                        ; Power Stick
-                itemDef 917504, 1, 1, 1490, 2, 63, 6, 19, 0, 0, 0, 0
-                                                        ; Flail
-                itemDef 917504, 1, 1, 2380, 2, 63, 6, 22, 7, 5, 0, 0
-                                                        ; Guardian Staff
-                itemDef 917504, 1, 1, 3200, 130, 15, 6, 25, 0, 0, 0, 0
-                                                        ; Indra Staff
-                itemDef 393216, 1, 1, 6300, 138, 75, 6, 27, 0, 0, 0, 0
-                                                        ; Mage Staff
-                itemDef 524288, 1, 1, 6100, 138, 5, 6, 26, 0, 0, 0, 0
-                                                        ; Wish Staff
-                itemDef 917504, 1, 1, 7900, 10, 63, 6, 28, 0, 0, 0, 0
-                                                        ; Great Rod
-                itemDef 393216, 1, 1, 8500, 138, 15, 6, 32, 0, 0, 0, 0
-                                                        ; Supply Staff
-                itemDef 524288, 1, 1, 9000, 10, 63, 6, 29, 1, 3, 0, 0
-                                                        ; Holy Staff
-                itemDef 393216, 1, 1, 9500, 138, 140, 6, 37, 0, 0, 0, 0
-                                                        ; Freeze Staff
-                itemDef 524288, 1, 1, 9700, 138, 65, 6, 31, 0, 0, 0, 0
-                                                        ; Goddess Staff
-                itemDef 917504, 1, 1, 10000, 10, 63, 6, 39, 5, 2, 0, 0
-                                                        ; Mystery Staff
-                itemDef 917504, 1, 1, 12500, 202, 15, 6, 50, 12, 10, 0, 0
-                                                        ; Demon Rod
-                itemDef 0, 1, 1, 3800, 202, 139, 6, 44, 0, 0, 0, 0
-                                                        ; Iron Ball
-                itemDef 1024, 1, 1, 70, 2, 63, 6, 5, 0, 0, 0, 0
-                                                        ; Short Knife
-                itemDef 1024, 1, 1, 320, 2, 63, 6, 8, 0, 0, 0, 0
-                                                        ; Dagger
-                itemDef 1024, 1, 1, 500, 2, 63, 6, 12, 0, 0, 0, 0
-                                                        ; Knife
-                itemDef 1024, 1, 1, 940, 2, 63, 6, 17, 8, 5, 0, 0
-                                                        ; Thieve's Dagger
-                itemDef 134217728, 1, 1, 9600, 10, 63, 6, 34, 0, 0, 0, 0
-                                                        ; Katana
-                itemDef 134217728, 1, 1, 11500, 10, 63, 6, 39, 3, 1, 0, 0
-                                                        ; Ninja Katana
-                itemDef 134217728, 1, 1, 15000, 10, 63, 6, 42, 14, 6, 0, 0
-                                                        ; Gisarme
-                itemDef 0, 2, 1, 10000, 138, 77, 6, 32, 0, 0, 0, 0
-                                                        ; Taros Sword
-                itemDef 0, 0, 0, 10000, 40, 42, 0, 0, 0, 0, 0, 0
-                                                        ; Right of Hope
-                itemDef 0, 0, 0, 0, 24, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Wooden Panel
-                itemDef 0, 0, 0, 0, 24, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Sky Orb
-                itemDef 0, 0, 0, 0, 24, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Cannon
-                itemDef 0, 0, 0, 0, 24, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Dry Stone
-                itemDef 0, 0, 0, 0, 24, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Dynamite
-                itemDef 0, 0, 0, 0, 24, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Arm of Golem
-                itemDef 0, 0, 0, 3000, 8, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Pegasus Wing
-                itemDef 0, 0, 0, 3000, 8, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Warrior Pride
-                itemDef 0, 0, 0, 3000, 8, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Silver Tank
-                itemDef 0, 0, 0, 3000, 8, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Secret Book
-                itemDef 0, 0, 0, 3000, 8, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Vigor Ball
-                itemDef 0, 0, 0, 2000, 8, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Mithril
-                itemDef -4096, 0, 0, 5000, 12, 63, 1, 5, 0, 0, 0, 0
-                                                        ; Life Ring
-                itemDef 0, 0, 0, 0, 24, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Cotton Balloon
-                itemDef -1, 0, 0, 5, 12, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Chirrup Sandals
-                itemDef 0, 0, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0
-                                                        ; Empty
+ItemDefs:       equipFlags 0            ; Medical Herb
+                range 0, 1
+                price 10
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_HEALIN
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Healing Seed
+                range 0, 1
+                price 200
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_HEALIN|SPELL_LV2
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Healing Drop
+                range 0, 1
+                price 300
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_HEALIN|SPELL_LV3
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Antidote
+                range 0, 1
+                price 20
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_DETOX
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Angel Wing
+                range 0, 0
+                price 40
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_EGRESS
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Fairy Powder
+                range 0, 1
+                price 100
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_POWDER
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Healing Water
+                range 0, 1
+                price 400
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_HEAL|SPELL_LV4
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Fairy Tear
+                range 0, 1
+                price 300
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_G_TEAR|SPELL_LV2
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Healing Rain
+                range 0, 0
+                price 10000
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_AURA|SPELL_LV4
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Power Water
+                range 0, 0
+                price 500
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_POWER
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Protect Milk
+                range 0, 0
+                price 500
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_GUARD
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Quick Chicken
+                range 0, 0
+                price 500
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_SPEED
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Running Pimento
+                range 0, 0
+                price 1500
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_IDATEN
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Cheerful Bread
+                range 0, 0
+                price 500
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_HEALTH
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Bright Honey
+                range 0, 0
+                price 500
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_HANNY
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Brave Apple
+                range 0, 0
+                price 500
+                itemType &
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_BRAVE
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Shining Ball
+                range 0, 1
+                price 1000
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_FBALL
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Blizzard
+                range 0, 1
+                price 1200
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_BREZAD
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Holy Thunder
+                range 0, 1
+                price 1500
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_THUNDR
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags EQUIPFLAGS_ALL ; Power Ring
+                range 0, 0
+                price 3000
+                itemType &
+                    ITEMTYPE_RING|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_ATTACK
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 5, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags EQUIPFLAGS_ALL ; Protect Ring
+                range 0, 0
+                price 3000
+                itemType &
+                    ITEMTYPE_RING|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_BOOST
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_DEF, 5, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags EQUIPFLAGS_ALL ; Quick Ring
+                range 0, 0
+                price 3000
+                itemType &
+                    ITEMTYPE_RING|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_AGI, 5, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags EQUIPFLAGS_ALL ; Running Ring
+                range 0, 0
+                price 3000
+                itemType &
+                    ITEMTYPE_RING|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_MOV, 2, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; White Ring
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_VICR
+                range 0, 0
+                price 5000
+                itemType &
+                    ITEMTYPE_RING|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_AURA|SPELL_LV2
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_DEF, 10, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Black Ring
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC
+                range 0, 0
+                price 5000
+                itemType &
+                    ITEMTYPE_RING|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CURSED|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_BLAZE|SPELL_LV2
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 10, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Evil Ring
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 0, 0
+                price 5000
+                itemType &
+                    ITEMTYPE_RING|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CURSED|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_BOLT|SPELL_LV2
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 15, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Leather Glove
+                    EQUIPFLAG_MMNK
+                range 1, 1
+                price 1300
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 26, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Power Glove
+                    EQUIPFLAG_MMNK
+                range 1, 1
+                price 1800
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 33, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Brass Knuckles
+                    EQUIPFLAG_MMNK
+                range 1, 1
+                price 2900
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 39, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Iron Knuckles
+                    EQUIPFLAG_MMNK
+                range 1, 1
+                price 4800
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 43, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Misty Knuckles
+                    EQUIPFLAG_MMNK
+                range 1, 1
+                price 5500
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_SPOIT
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 48, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Giant Knuckles
+                    EQUIPFLAG_MMNK
+                range 1, 1
+                price 7500
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_MUDDLE
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 55, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Evil Knuckles
+                    EQUIPFLAG_MMNK
+                range 1, 1
+                price 9500
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CURSED
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 63, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Short Axe
+                    EQUIPFLAG_WARR|&
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 120
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 5, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Hand Axe
+                    EQUIPFLAG_WARR|&
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 340
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 9, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Middle Axe
+                    EQUIPFLAG_WARR|&
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 610
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 13, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Power Axe
+                    EQUIPFLAG_WARR|&
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 1100
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 17, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Battle Axe
+                    EQUIPFLAG_WARR|&
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 1370
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 21, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Large Axe
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 2250
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 25, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Great Axe
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 4600
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 28, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Heat Axe
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 7200
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_BLAZE|SPELL_LV2
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 32, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Atlas Axe
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 9600
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_BLAZE|SPELL_LV3
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 35, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Ground Axe
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 10000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 39, &
+                    EQUIPEFFECT_INCREASE_MOV, 1, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Rune Axe
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 10000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_DETOX|SPELL_LV2
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 42, &
+                    EQUIPEFFECT_INCREASE_CRITICAL, 1, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Evil Axe
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 15000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CURSED
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 50, &
+                    EQUIPEFFECT_DECREASE_DEF, 5, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Wooden Arrow
+                    EQUIPFLAG_ACHR|&
+                    EQUIPFLAG_RNGR|&
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BWNT
+                range 2, 2
+                price 250
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 7, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Iron Arrow
+                    EQUIPFLAG_ACHR|&
+                    EQUIPFLAG_RNGR|&
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BWNT
+                range 2, 2
+                price 600
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 12, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Steel Arrow
+                    EQUIPFLAG_ACHR|&
+                    EQUIPFLAG_RNGR|&
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BWNT
+                range 2, 2
+                price 1270
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 17, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Robin Arrow
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BWNT
+                range 2, 3
+                price 1480
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 21, &
+                    EQUIPEFFECT_INCREASE_CRITICAL, 1, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Assault Shell
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BWNT
+                range 2, 3
+                price 2500
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 25, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Great Shot
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BWNT
+                range 2, 3
+                price 5000
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 29, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Nazca Cannon
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BWNT
+                range 2, 3
+                price 3000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 33, &
+                    EQUIPEFFECT_INCREASE_CRITICAL, 1, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Buster Shot
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BWNT
+                range 2, 3
+                price 6800
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 37, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Hyper Cannon
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BWNT
+                range 2, 3
+                price 8700
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 40, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Grand Cannon
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BWNT
+                range 2, 3
+                price 9800
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_DISPEL
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 43, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Evil Shot
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BWNT
+                range 2, 3
+                price 13000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CURSED
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 51, &
+                    EQUIPEFFECT_DECREASE_DEF, 5, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Wooden Stick
+                    EQUIPFLAG_KNTE|&
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 1
+                price 70
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 3, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Short Sword
+                    EQUIPFLAG_SDMN|&
+                    EQUIPFLAG_BDMN|&
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_NINJ|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 140
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 5, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Middle Sword
+                    EQUIPFLAG_SDMN|&
+                    EQUIPFLAG_BDMN|&
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_NINJ|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 340
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 8, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Long Sword
+                    EQUIPFLAG_SDMN|&
+                    EQUIPFLAG_BDMN|&
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_NINJ|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 620
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 12, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Steel Sword
+                    EQUIPFLAG_SDMN|&
+                    EQUIPFLAG_BDMN|&
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_NINJ|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 1120
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 16, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Achilles Sword
+                    EQUIPFLAG_SDMN|&
+                    EQUIPFLAG_HERO
+                range 1, 1
+                price 1350
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 19, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Broad Sword
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_NINJ|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 1600
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 22, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Buster Sword
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_NINJ|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 2600
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 26, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Great Sword
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_NINJ|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 5100
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 29, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Critical Sword
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_NINJ|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 7200
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 32, &
+                    EQUIPEFFECT_INCREASE_CRITICAL, 1, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Battle Sword
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 9200
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 35, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Force Sword
+                    EQUIPFLAG_HERO
+                range 1, 1
+                price 10000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_UNSELLABLE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 46, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Counter Sword
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 13000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 39, &
+                    EQUIPEFFECT_INCREASE_COUNTER, 1, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Levanter
+                    EQUIPFLAG_HERO
+                range 1, 1
+                price 14000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_BLAZE|SPELL_LV3
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 42, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Dark Sword
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_NINJ|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 17000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CURSED|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_DESOUL
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 50, &
+                    EQUIPEFFECT_DECREASE_DEF, 5, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Wooden Sword
+                    EQUIPFLAG_SDMN|&
+                    EQUIPFLAG_BDMN|&
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_NINJ|&
+                    EQUIPFLAG_RDBN
+                range 1, 1
+                price 60
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 3, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Short Spear
+                    EQUIPFLAG_KNTE|&
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 2
+                price 120
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 6, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Bronze Lance
+                    EQUIPFLAG_KNTE|&
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 1
+                price 260
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 9, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Spear
+                    EQUIPFLAG_KNTE|&
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 2
+                price 460
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 12, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Steel Lance
+                    EQUIPFLAG_KNTE|&
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 1
+                price 810
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 16, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Power Spear
+                    EQUIPFLAG_KNTE|&
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 2
+                price 1270
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 20, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Heavy Lance
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 1
+                price 1600
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 23, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Javelin
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 2
+                price 3400
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 26, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Chrome Lance
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 1
+                price 6900
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 31, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Valkyrie
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 2
+                price 7700
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_ATTACK
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 33, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Holy Lance
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 1
+                price 9300
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_HEALIN
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 39, &
+                    EQUIPEFFECT_INCREASE_DEF, 5, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Mist Javelin
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 2
+                price 9900
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 42, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Halberd
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 1
+                price 7300
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_BOLT
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 37, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Evil Lance
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT
+                range 1, 1
+                price 11000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CURSED
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 48, &
+                    EQUIPEFFECT_DECREASE_MOV, 2, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Wooden Rod
+                    EQUIPFLAG_MAGE|&
+                    EQUIPFLAG_PRST|&
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 60
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 3, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Short Rod
+                    EQUIPFLAG_MAGE|&
+                    EQUIPFLAG_PRST|&
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 130
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 5, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Bronze Rod
+                    EQUIPFLAG_MAGE|&
+                    EQUIPFLAG_PRST|&
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 360
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 8, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Iron Rod
+                    EQUIPFLAG_MAGE|&
+                    EQUIPFLAG_PRST|&
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 560
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 12, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Power Stick
+                    EQUIPFLAG_MAGE|&
+                    EQUIPFLAG_PRST|&
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 1050
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 15, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Flail
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 1490
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 19, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Guardian Staff
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 2380
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 22, &
+                    EQUIPEFFECT_INCREASE_DEF, 5, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Indra Staff
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 3200
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_SPOIT
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 25, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Mage Staff
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC
+                range 1, 1
+                price 6300
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_BLAZE|SPELL_LV2
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 27, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Wish Staff
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 6100
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_ATTACK
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 26, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Great Rod
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 7900
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 28, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Supply Staff
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC
+                range 1, 1
+                price 8500
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_SPOIT
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 32, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Holy Staff
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 9000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 29, &
+                    EQUIPEFFECT_UNDEFINED1, 3, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Freeze Staff
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC
+                range 1, 1
+                price 9500
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_FREEZE|SPELL_LV3
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 37, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Goddess Staff
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 9700
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_AURA|SPELL_LV2
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 31, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Mystery Staff
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 10000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 39, &
+                    EQUIPEFFECT_UNDEFINED2, 2, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Demon Rod
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR
+                range 1, 1
+                price 12500
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CURSED|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_SPOIT
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 50, &
+                    EQUIPEFFECT_DECREASE_AGI, 10, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Iron Ball
+                range 1, 1
+                price 3800
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CURSED|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_BLAZE|SPELL_LV3
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 44, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Short Knife
+                    EQUIPFLAG_THIF
+                range 1, 1
+                price 70
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 5, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Dagger
+                    EQUIPFLAG_THIF
+                range 1, 1
+                price 320
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 8, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Knife
+                    EQUIPFLAG_THIF
+                range 1, 1
+                price 500
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 12, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Thieve's Dagger
+                    EQUIPFLAG_THIF
+                range 1, 1
+                price 940
+                itemType &
+                    ITEMTYPE_WEAPON
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 17, &
+                    EQUIPEFFECT_INCREASE_AGI, 5, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Katana
+                    EQUIPFLAG_NINJ
+                range 1, 1
+                price 9600
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 34, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Ninja Katana
+                    EQUIPFLAG_NINJ
+                range 1, 1
+                price 11500
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 39, &
+                    EQUIPEFFECT_INCREASE_DOUBLE, 1, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Gisarme
+                    EQUIPFLAG_NINJ
+                range 1, 1
+                price 15000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 42, &
+                    EQUIPEFFECT_SET_CRITICAL, 6, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Taros Sword
+                range 1, 2
+                price 10000
+                itemType &
+                    ITEMTYPE_WEAPON|&
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_MAGICAL
+                useSpell SPELL_BOLT|SPELL_LV2
+                equipEffects &
+                    EQUIPEFFECT_INCREASE_ATK, 32, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Right of Hope
+                range 0, 0
+                price 10000
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_CONSUMABLE
+                useSpell SPELL_SHINE
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Wooden Panel
+                range 0, 0
+                price 0
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_UNSELLABLE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Sky Orb
+                range 0, 0
+                price 0
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_UNSELLABLE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Cannon
+                range 0, 0
+                price 0
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_UNSELLABLE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Dry Stone
+                range 0, 0
+                price 0
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_UNSELLABLE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Dynamite
+                range 0, 0
+                price 0
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_UNSELLABLE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Arm of Golem
+                range 0, 0
+                price 0
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_UNSELLABLE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Pegasus Wing
+                range 0, 0
+                price 3000
+                itemType &
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Warrior Pride
+                range 0, 0
+                price 3000
+                itemType &
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Silver Tank
+                range 0, 0
+                price 3000
+                itemType &
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Secret Book
+                range 0, 0
+                price 3000
+                itemType &
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Vigor Ball
+                range 0, 0
+                price 3000
+                itemType &
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Mithril
+                range 0, 0
+                price 2000
+                itemType &
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags &            ; Life Ring
+                    EQUIPFLAG_HERO|&
+                    EQUIPFLAG_PLDN|&
+                    EQUIPFLAG_PGNT|&
+                    EQUIPFLAG_GLDT|&
+                    EQUIPFLAG_BRN|&
+                    EQUIPFLAG_WIZ|&
+                    EQUIPFLAG_SORC|&
+                    EQUIPFLAG_VICR|&
+                    EQUIPFLAG_MMNK|&
+                    EQUIPFLAG_SNIP|&
+                    EQUIPFLAG_BRGN|&
+                    EQUIPFLAG_BDBT|&
+                    EQUIPFLAG_WFBR|&
+                    EQUIPFLAG_BWNT|&
+                    EQUIPFLAG_PHNX|&
+                    EQUIPFLAG_NINJ|&
+                    EQUIPFLAG_MNST|&
+                    EQUIPFLAG_RBT|&
+                    EQUIPFLAG_GLM|&
+                    EQUIPFLAG_RDBN
+                range 0, 0
+                price 5000
+                itemType &
+                    ITEMTYPE_RING|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_UNDEFINED1, 5, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Cotton Balloon
+                range 0, 0
+                price 0
+                itemType &
+                    ITEMTYPE_RARE|&
+                    ITEMTYPE_UNSELLABLE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags EQUIPFLAGS_ALL ; Chirrup Sandals
+                range 0, 0
+                price 5
+                itemType &
+                    ITEMTYPE_RING|&
+                    ITEMTYPE_RARE
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    
+                equipFlags 0            ; Empty
+                range 0, 0
+                price 0
+                itemType 0
+                useSpell SPELL_NOTHING
+                equipEffects &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0, &
+                    EQUIPEFFECT_NONE, 0
+                    

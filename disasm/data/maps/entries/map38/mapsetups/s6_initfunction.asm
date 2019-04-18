@@ -38,7 +38,7 @@ cs_5DD9C:       setPos $80,14,26,DOWN
                 setPos $0,14,28,UP
                 setPos $7,13,29,UP
                 setPos $1F,14,29,UP
-                jumpIfFlagSet $4C,cs_5DE22; Zynk is a follower
+                jumpIfFlagSet $4C,cs_5DE22 ; Zynk is a follower
 cs_5DDC2:       playSound MUSIC_TOWN
                 fadeInB
                 setCameraEntity $80

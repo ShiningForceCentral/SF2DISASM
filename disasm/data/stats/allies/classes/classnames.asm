@@ -1,35 +1,35 @@
 
 ; ASM FILE data\stats\allies\classes\classnames.asm :
 ; 0x17F3E..0x17FDA : Class names
-ClassNames:     dc.b 4, 'SDMN'
-                dc.b 4, 'KNTE'
-                dc.b 4, 'WARR'
-                dc.b 4, 'MAGE'
-                dc.b 4, 'PRST'
-                dc.b 4, 'ACHR'
-                dc.b 4, 'BDMN'
-                dc.b 4, 'WFMN'
-                dc.b 4, 'RNGR'
-                dc.b 4, 'PHNK'
-                dc.b 4, 'THIF'
-                dc.b 4, 'TORT'
-                dc.b 4, 'HERO'
-                dc.b 4, 'PLDN'
-                dc.b 4, 'PGNT'
-                dc.b 4, 'GLDT'
-                dc.b 3, 'BRN'
-                dc.b 3, 'WIZ'
-                dc.b 4, 'SORC'
-                dc.b 4, 'VICR'
-                dc.b 4, 'MMNK'
-                dc.b 4, 'SNIP'
-                dc.b 4, 'BRGN'
-                dc.b 4, 'BDBT'
-                dc.b 4, 'WFBR'
-                dc.b 4, 'BWNT'
-                dc.b 4, 'PHNX'
-                dc.b 4, 'NINJ'
-                dc.b 4, 'MNST'
-                dc.b 3, 'RBT'
-                dc.b 3, 'GLM'
-                dc.b 4, 'RDBN'
+ClassNames:     className "SDMN"
+                className "KNTE"
+                className "WARR"
+                className "MAGE"
+                className "PRST"
+                className "ACHR"
+                className "BDMN"
+                className "WFMN"
+                className "RNGR"
+                className "PHNK"
+                className "THIF"
+                className "TORT"
+                className "HERO"
+                className "PLDN"
+                className "PGNT"
+                className "GLDT"
+                className "BRN"
+                className "WIZ"
+                className "SORC"
+                className "VICR"
+                className "MMNK"
+                className "SNIP"
+                className "BRGN"
+                className "BDBT"
+                className "WFBR"
+                className "BWNT"
+                className "PHNX"
+                className "NINJ"
+                className "MNST"
+                className "RBT"
+                className "GLM"
+                className "RDBN"

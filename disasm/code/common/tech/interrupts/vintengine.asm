@@ -20,8 +20,7 @@ VInt:
                 clr.b   ((HIDE_WINDOWS-$1000000)).w
                 tst.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 bne.s   loc_5DA
-                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
-                                                        ; if Start pushed, hide windows
+                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w ; if Start pushed, hide windows
                 beq.s   loc_5DA
                 move.b  #$FF,((HIDE_WINDOWS-$1000000)).w
 loc_5DA:
@@ -40,7 +39,7 @@ loc_5EC:
                 btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
                 beq.s   loc_620
                 clr.l   ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
-                movea.l (GAME_INTRO_SP_OFFSET).l,sp; if P1 START pushed during intro cutscenes, stop and go back to game intro flow
+                movea.l (GAME_INTRO_SP_OFFSET).l,sp ; if P1 START pushed during intro cutscenes, stop and go back to game intro flow
                 movea.l d0,a0
                 move    #$2300,sr       ; enable interrupts
                 jmp     (a0)
@@ -160,11 +159,10 @@ return_6FE:
 
 ProcessVramRead:
                 
-                bclr    #VRAM_READ_REQUEST,(VINT_PARAMS).l
-                                                        ; Check if VRAM read requested
+                bclr    #VRAM_READ_REQUEST,(VINT_PARAMS).l ; Check if VRAM read requested
                 beq.s   return_73E
                 lea     (VDP_COMMAND_QUEUE).l,a0
-                move.w  #$8F02,(VDP_Control).l; autoincrement 02
+                move.w  #$8F02,(VDP_Control).l ; autoincrement 02
                 move.w  (a0),d7
                 andi.w  #$3FFF,d7
                 move.w  d7,(VDP_Control).l
@@ -188,20 +186,20 @@ return_73E:
 
 ProcessDMAQueue:
                 
-                bclr    #DMA_REQUEST,(VINT_PARAMS).l; Check is DMA requested
+                bclr    #DMA_REQUEST,(VINT_PARAMS).l ; Check is DMA requested
                 bne.s   loc_754         
-                btst    #DEACTIVATE_DMA,(VINT_PARAMS).l; Check if DMA deactivated
+                btst    #DEACTIVATE_DMA,(VINT_PARAMS).l ; Check if DMA deactivated
                 bne.s   return_7CC
 loc_754:
                 
-                move.w  #$100,(Z80BusReq).l; Bus request
+                move.w  #$100,(Z80BusReq).l ; Bus request
 loc_75C:
                 
-                btst    #0,(Z80BusReq).l; Check bus availability
+                btst    #0,(Z80BusReq).l ; Check bus availability
                 bne.s   loc_75C         
-                btst    #DEACTIVATE_DMA,(VINT_PARAMS).l; Check if DMA deactivated
+                btst    #DEACTIVATE_DMA,(VINT_PARAMS).l ; Check if DMA deactivated
                 bne.s   return_7CC
-                bsr.w   UpdateVDPSpriteTable; Update sprites
+                bsr.w   UpdateVDPSpriteTable ; Update sprites
                 tst.b   (DMA_QUEUE_SIZE).l
                 beq.s   loc_7BA
                 lea     (DMA_QUEUE).l,a0
@@ -244,7 +242,7 @@ Trap9_ManageContextualFunctions:
                 addq.l  #2,$3E(sp)
                 add.w   d0,d0
                 move.w  rjt_Trap9ActionsOfs(pc,d0.w),d0
-                jmp     rjt_Trap9ActionsOfs(pc,d0.w); jump according to the first two bytes parameter : $0000 to $0004
+                jmp     rjt_Trap9ActionsOfs(pc,d0.w) ; jump according to the first two bytes parameter : $0000 to $0004
 
 	; End of function Trap9_ManageContextualFunctions
 
@@ -373,7 +371,7 @@ loc_8A8:
                 bra.w   loc_8D6
 loc_8B8:
                 
-                bset    d1,((VINT_FUNCS_ENABLED_BITFIELD-$1000000)).w
+                bset    d1,((VINT_FUNCS_ENABLED_BITFIELD-$1000000)).w 
                                                         ; set trigger
                 bra.w   loc_8D6
 loc_8C0:
@@ -453,14 +451,13 @@ loc_95A:
                 
                 cmpi.b  #$FD,d0
                 bcs.s   loc_96A
-                move.b  d0,(Z80_SoundDriverCommand).l; if command >= FD, then send it to Z80
+                move.b  d0,(Z80_SoundDriverCommand).l ; if command >= FD, then send it to Z80
                 bra.w   loc_9F6
 loc_96A:
                 
                 cmpi.b  #$F0,d0
                 bne.s   loc_97A
-                move.b  #1,((WAIT_FOR_MUSIC_END-$1000000)).w
-                                                        ; if F0, then wait for current music to end before sending commands to Z80
+                move.b  #1,((WAIT_FOR_MUSIC_END-$1000000)).w ; if F0, then wait for current music to end before sending commands to Z80
                 bra.w   loc_9F6
 loc_97A:
                 
@@ -475,7 +472,7 @@ loc_994:
                 movem.l d0,-(sp)
                 andi.b  #$7F,d0 ; a music/sfx index mask that must be changed to allow indexes above $80
                                         ; also change stuff at 9AA then !
-                cmp.b   ((MUSIC_STACK-$1000000)).w,d0; compare with last played music
+                cmp.b   ((MUSIC_STACK-$1000000)).w,d0 ; compare with last played music
                 movem.l (sp)+,d0
                 bne.s   loc_9AA
                 bra.w   loc_9F6         ; if same to last played music, let current music play
@@ -490,11 +487,10 @@ loc_9B8:
                 
                 cmpi.b  #$40,d0 
                 bgt.s   loc_9C6
-                move.b  #$F,(Z80_SoundDriverFadeInData).l
-                                                        ; if music, put this fade in parameter : no fade in
+                move.b  #$F,(Z80_SoundDriverFadeInData).l ; if music, put this fade in parameter : no fade in
 loc_9C6:
                 
-                move.b  d0,(Z80_SoundDriverCommand).l; send music/sfx command to Z80
+                move.b  d0,(Z80_SoundDriverCommand).l ; send music/sfx command to Z80
                 cmpi.b  #$40,d0 
                 bge.s   loc_9F6
                 movem.l d7-a0,-(sp)
@@ -526,9 +522,8 @@ loc_9F6:
                 dbcc    d0,*+4
                 tst.w   d0
                 bgt.s   loc_A54         
-                move.b  ((PRIMARY_WALKING_DIRECTION-$1000000)).w,d0
-                                                        ; get current walking direction
-                eor.b   d0,((P1_INPUT-$1000000)).w; get new direction
+                move.b  ((PRIMARY_WALKING_DIRECTION-$1000000)).w,d0 ; get current walking direction
+                eor.b   d0,((P1_INPUT-$1000000)).w ; get new direction
                 moveq   #2,d0
                 move.b  ((P1_INPUT-$1000000)).w,d1
                 lsr.w   #1,d1
@@ -541,28 +536,25 @@ loc_9F6:
                 dbcc    d0,*+4
                 tst.w   d0
                 bgt.s   loc_A52
-                andi.b  #3,((P1_INPUT-$1000000)).w; if both directions are new, only keep vertical one
+                andi.b  #3,((P1_INPUT-$1000000)).w ; if both directions are new, only keep vertical one
 loc_A52:
                 
                 bra.s   loc_A60
 loc_A54:
                 
-                move.b  ((P1_INPUT-$1000000)).w,d1; if only one direction pushed, set it as primary
+                move.b  ((P1_INPUT-$1000000)).w,d1 ; if only one direction pushed, set it as primary
                 andi.w  #$F,d1
                 move.b  d1,((PRIMARY_WALKING_DIRECTION-$1000000)).w
 loc_A60:
                 
                 move.b  ((P1_INPUT-$1000000)).w,d0
-                move.b  d0,((CURRENT_PLAYER_INPUT-$1000000)).w
-                                                        ; overwrite P2 6-button data with P1 state with walking direction
+                move.b  d0,((CURRENT_PLAYER_INPUT-$1000000)).w ; overwrite P2 6-button data with P1 state with walking direction
                 cmp.b   ((LAST_PLAYER_INPUT-$1000000)).w,d0
                 bne.s   loc_A86         
-                addq.b  #1,((INPUT_REPEAT_DELAYER-$1000000)).w
-                                                        ; if input is the same then increment counter and ignore input
+                addq.b  #1,((INPUT_REPEAT_DELAYER-$1000000)).w ; if input is the same then increment counter and ignore input
                 cmpi.b  #$18,((INPUT_REPEAT_DELAYER-$1000000)).w
                 bcc.s   loc_A80
-                clr.b   ((CURRENT_PLAYER_INPUT-$1000000)).w
-                                                        ; keep current input only when counter reaches $18
+                clr.b   ((CURRENT_PLAYER_INPUT-$1000000)).w ; keep current input only when counter reaches $18
                 bra.s   loc_A84
 loc_A80:
                 
@@ -639,8 +631,7 @@ return_B1C:
 
 	; End of function ApplyFadingFX
 
-FadingData:     incbin "data/graphics/tech/fadingdata.bin"
-                                                        ; 80 : end
+FadingData:     incbin "data/graphics/tech/fadingdata.bin" ; 80 : end
                                         ; 8x : go x backward
 
 ; =============== S U B R O U T I N E =======================================
@@ -718,7 +709,7 @@ ApplyLogicalAndOnVdpReg:
 	; End of function ApplyLogicalAndOnVdpReg
 
 
-; =============== S U B R O U T I N E =======================================
+; START OF FUNCTION CHUNK FOR ApplyLogicalOrOnVdpReg
 
 SendVDPCommand:
                 
@@ -727,7 +718,7 @@ SendVDPCommand:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function SendVDPCommand
+; END OF FUNCTION CHUNK FOR ApplyLogicalOrOnVdpReg
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -925,7 +916,7 @@ ExecuteFading:
 loc_D0E:
                 
                 bsr.w   WaitForVInt
-                tst.b   ((FADING_SETTING-$1000000)).w; wait until fade end
+                tst.b   ((FADING_SETTING-$1000000)).w ; wait until fade end
                 bne.s   loc_D0E
                 bsr.w   WaitForVInt
                 rts
@@ -1046,7 +1037,7 @@ UpdateVDPSpriteTable:
                                         ; DMD1-0 : 01 -> DMA transfer (DMD0 becomes SA23)
                                         ; SA23-1 : 111 1111 1110 1110 0100 0000 -> 0x7FEE40 * 2 = 0xFFDC80
                 move.w  #$6800,(a6)     ; 0110 1000 0000 0000
-                move.w  #$83,(DMA_ADDR_MSBYTE).l ; 0000 0000 1000 0011
+                move.w  #$83,(DMA_ADDR_MSBYTE).l  ; 0000 0000 1000 0011
                                         ; CD5-0 : 100001 -> DMA Write to VRAM
                                         ; A15-0 : 1110 1000 0000 0000 -> 0xE800
                 move.w  (DMA_ADDR_MSBYTE).l,(a6)
@@ -1119,12 +1110,12 @@ sub_E7C:
                 move.w  (VDP_REG01_STATUS).l,d3
                 ori.b   #$10,d3
                 move.w  d3,(VDP_Control).l
-                move.w  #$8F01,(VDP_Control).l; auto increment : 1
-                move.w  #$9300,(VDP_Control).l; DMA length : $100
+                move.w  #$8F01,(VDP_Control).l ; auto increment : 1
+                move.w  #$9300,(VDP_Control).l ; DMA length : $100
                 move.w  #$9401,(VDP_Control).l
-                move.w  #$9780,(VDP_Control).l; VRAM fill
+                move.w  #$9780,(VDP_Control).l ; VRAM fill
                 move.w  #$C000,(VDP_Control).l
-                move.w  #$80,(VDP_Control).l ; CRAM address 0x80
+                move.w  #$80,(VDP_Control).l  ; CRAM address 0x80
                 move.w  #0,(VDP_Data).l
 loc_EC8:
                 
@@ -1133,7 +1124,7 @@ loc_EC8:
                 bne.s   loc_EC8
                 move.w  (VDP_REG01_STATUS).l,d3
                 move.w  d3,(VDP_Control).l
-                move.w  #$8F02,(VDP_Control).l; auto increment : 2
+                move.w  #$8F02,(VDP_Control).l ; auto increment : 2
                 movem.l (sp)+,d0-d3
                 rts
 
@@ -1148,7 +1139,7 @@ WaitForVInt:
                 move.b  #1,((WAITING_NEXT_VINT-$1000000)).w
 loc_EFC:
                 
-                tst.b   ((WAITING_NEXT_VINT-$1000000)).w; wait until FFDEF7 clear
+                tst.b   ((WAITING_NEXT_VINT-$1000000)).w ; wait until FFDEF7 clear
                 bne.s   loc_EFC         
                 rts
 
@@ -1305,6 +1296,8 @@ sub_F90:
                 adda.w  d5,a6
                 movem.l (sp)+,d5-d7
                 andi.w  #$7E,d5 
+loc_FFE:
+                
                 andi.w  #$F80,d6
                 rts
 
@@ -1478,7 +1471,7 @@ ApplyVIntVramDMA:
                 move    sr,-(sp)
                 move    #$2700,sr
                 move.b  ((VINT_ENABLED-$1000000)).w,-(sp)
-                sf      ((VINT_ENABLED-$1000000)).w; gives msb sign
+                sf      ((VINT_ENABLED-$1000000)).w ; gives msb sign
                 movem.l d2,-(sp)
                 movem.l d0/a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
@@ -1558,7 +1551,7 @@ UpdateVDPHScrollData:
                 movem.l a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.w  #$8F02,(a6)+    ; auto-increment : 2
-                btst    #1,(VDP_REG0B_VALUE).l; Check HScroll mode
+                btst    #1,(VDP_REG0B_VALUE).l ; Check HScroll mode
                 bne.s   loc_127C        
                 move.w  #$9400,(a6)+    ; If HScroll mode = 00, then full screen
                 move.w  #$9302,(a6)+    ; DMA length = 2
@@ -1627,7 +1620,7 @@ UpdateVDPVScrollData:
                 movem.l a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.w  #$8F02,(a6)+    ; auto-inc : 2
-                btst    #2,(VDP_REG0B_VALUE).l; Check vertical scrolling mode
+                btst    #2,(VDP_REG0B_VALUE).l ; Check vertical scrolling mode
                 bne.s   loc_12F4        
                 move.w  #$9400,(a6)+    ; If VS mode = 0, then full screen (1 longword only in VSRAM)
                 move.w  #$9304,(a6)+    ; DMA length = 4
@@ -1828,19 +1821,19 @@ DMAandWait:
 ApplyVramDMAFill:
                 
                 movem.l d0-d3,-(sp)
-                move.w  (VDP_REG01_STATUS).l,d3; get last 16+ vdp reg config command ?
+                move.w  (VDP_REG01_STATUS).l,d3 ; get last 16+ vdp reg config command ?
                 ori.b   #$10,d3         ; make sure it concerns a 16+ vdp reg
-                move.w  d3,(VDP_Control).l; send command again
-                move.w  #$8F01,(VDP_Control).l; set auto increment bias number to 1
+                move.w  d3,(VDP_Control).l ; send command again
+                move.w  #$8F01,(VDP_Control).l ; set auto increment bias number to 1
                 movem.l d1,-(sp)
                 andi.w  #$FF,d1
                 ori.w   #$9300,d1
-                move.w  d1,(VDP_Control).l; DMA length counter low : 0
+                move.w  d1,(VDP_Control).l ; DMA length counter low : 0
                 movem.l (sp)+,d1
                 lsr.w   #8,d1
                 ori.w   #$9400,d1       ; DMA length counter high : 1
                 move.w  d1,(VDP_Control).l
-                move.w  #$9780,(VDP_Control).l; VRAM fill
+                move.w  #$9780,(VDP_Control).l ; VRAM fill
                 movem.l d0,-(sp)
                 andi.w  #$3FFF,d0       ; d0 : destination address
                 ori.w   #$4000,d0
@@ -1849,16 +1842,16 @@ ApplyVramDMAFill:
                 rol.w   #2,d0
                 andi.w  #3,d0
                 ori.w   #$80,d0 ; errr .. CD5 set to 1 ? doesn't correspond to any access mode
-                move.w  d0,(VDP_Control).l; destination address, second word
+                move.w  d0,(VDP_Control).l ; destination address, second word
                 move.w  d2,(VDP_Data).l ; writes 0 everytime
 loc_1480:
                 
                 move.w  (VDP_Control).l,d0
                 andi.w  #2,d0           ; wait for DMA free
                 bne.s   loc_1480
-                move.w  (VDP_REG01_STATUS).l,d3; get last vdp 16+ reg config command and send it
+                move.w  (VDP_REG01_STATUS).l,d3 ; get last vdp 16+ reg config command and send it
                 move.w  d3,(VDP_Control).l
-                move.w  #$8F02,(VDP_Control).l; auto increment bias number : 2
+                move.w  #$8F02,(VDP_Control).l ; auto increment bias number : 2
                 movem.l (sp)+,d0-d3
                 rts
 

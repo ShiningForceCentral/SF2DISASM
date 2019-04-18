@@ -9,7 +9,7 @@ cs_513D6:       entityActionsWait $1
 cs_513E2:       textCursor $216
                 nextText $0,$1          ; "{LEADER}, so you decided{N}to go?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_51406; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_51406 ; YES/NO prompt answer
                 textCursor $214
                 nextText $0,$1          ; "No?  Really?{N}Then I'm not going either!{W2}"
                 nextSingleText $0,$1    ; "But, if you change your{N}mind, let me know right{N}away!{W1}"
@@ -150,7 +150,7 @@ cs_5149A:       textCursor $205
                 setFacing $1,UP
                 nextText $C0,$1         ; "{LEADER}, maybe we can{N}meet the Princess!{N}Are you going with us?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_51614; YES/NO prompt answer
+                jumpIfFlagSet $59,cs_51614 ; YES/NO prompt answer
                 nextText $0,$1          ; "No?  Really?{N}Then I'm not going either!{W2}"
                 nextSingleText $0,$1    ; "But, if you change your{N}mind, let me know right{N}away!{W1}"
                 entityActionsWait $1

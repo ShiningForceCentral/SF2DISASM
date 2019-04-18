@@ -11,7 +11,7 @@ bbcs_35:        textCursor $B76
                 setPos $1F,44,8,LEFT
                 setActscriptWait $1E,eas_Init
                 setPos $1E,44,9,LEFT
-                jumpIfFlagClear $4C,cs_4D728; Zynk is a follower
+                jumpIfFlagClear $4C,cs_4D728 ; Zynk is a follower
                 setActscriptWait $1A,eas_Init
                 setPos $1A,63,62,DOWN
 cs_4D728:       fadeInB

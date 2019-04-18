@@ -6,7 +6,7 @@ InitStack:      ; File Name   : D:\SEGADEV\IDB\SF2\sf2.bin
 p_Start:        dc.l Start              ; Start Address
                 dc.l Int_OtherError     ; Bus Error
                 dc.l Int_AdressError    ; Address Error
-                dc.l Int_IllegalInstruction; Illegal instruction
+                dc.l Int_IllegalInstruction ; Illegal instruction
                 dc.l Int_ZeroDivide     ; Zero Divide
                 dc.l Int_OtherError     ; CHK instruction
                 dc.l Int_OtherError     ; TRAPV instruction
@@ -27,11 +27,11 @@ p_Start:        dc.l Start              ; Start Address
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Spurious Interrupt
-                dc.l Int_ExternalInterrupt; Level 1 interrupt
-                dc.l Int_ExternalInterrupt; Level 2/External  interrupt
-                dc.l Int_ExternalInterrupt; Level 3 interrupt
+                dc.l Int_ExternalInterrupt ; Level 1 interrupt
+                dc.l Int_ExternalInterrupt ; Level 2/External  interrupt
+                dc.l Int_ExternalInterrupt ; Level 3 interrupt
                 dc.l HInt               ; Level 4/Horizontal interrupt
-                dc.l Int_ExternalInterrupt; Level 5 interrupt
+                dc.l Int_ExternalInterrupt ; Level 5 interrupt
                 dc.l VInt               ; Level 6/Vertical interrupt
                 dc.l IntLvl7            ; Level 7 interrupt
                 dc.l Trap0_SoundCommand 
@@ -41,15 +41,15 @@ p_Start:        dc.l Start              ; Start Address
                 dc.l Trap4_CheckFlag
                 dc.l Trap5_TextBox
                 dc.l Trap6_TriggerAndExecuteMapScript
-                dc.l Int_ExternalInterrupt; Trap
-                dc.l Int_ExternalInterrupt; Trap
-                dc.l Trap9_ManageContextualFunctions; Trap
-                dc.l Int_ExternalInterrupt; Trap
-                dc.l Int_ExternalInterrupt; Trap
-                dc.l Int_ExternalInterrupt; Trap
-                dc.l Int_ExternalInterrupt; Trap
-                dc.l Int_ExternalInterrupt; Trap
-                dc.l Int_ExternalInterrupt; Trap
+                dc.l Int_ExternalInterrupt ; Trap
+                dc.l Int_ExternalInterrupt ; Trap
+                dc.l Trap9_ManageContextualFunctions ; Trap
+                dc.l Int_ExternalInterrupt ; Trap
+                dc.l Int_ExternalInterrupt ; Trap
+                dc.l Int_ExternalInterrupt ; Trap
+                dc.l Int_ExternalInterrupt ; Trap
+                dc.l Int_ExternalInterrupt ; Trap
+                dc.l Int_ExternalInterrupt ; Trap
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
@@ -86,6 +86,6 @@ RomEndAddress:  declareRomEnd           ; Rom End Adress
                 dc.l $200001            ; Sram Start Address
                 dc.l $203FFF            ; Sram End Address
                 dc.b '            '     ; Modem data
-                dc.b '                    '; Memo
+                dc.b '                    ' ; Memo
                 dc.b '                    '
 aU:             headerRegion            ; Countries codes

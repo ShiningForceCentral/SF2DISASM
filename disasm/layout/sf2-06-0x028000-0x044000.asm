@@ -43,8 +43,7 @@ j_LoadTitleScreenFont:
 VariableWidthFont:
                 incbin "data/graphics/tech/fonts/variablewidthfont.bin"
 MenuTiles_Uncompressed:
-                incbin "data/graphics/tech/menus/mainmenutiles.bin"
-                                                        ; uncompressed
+                incbin "data/graphics/tech/menus/mainmenutiles.bin" ; uncompressed
 MenuTiles_Item: incbin "data/graphics/tech/menus/menutilesitem.bin"
 MenuTiles_BattleField:
                 incbin "data/graphics/tech/menus/menutilesbattlefield.bin"
@@ -63,9 +62,8 @@ SpeechBalloonTiles:
                 include "code\specialscreens\endkiss\endkissfunctions_0.asm"    ; End kiss function
                 include "code\specialscreens\title\loadfont.asm"    ; Title screen font loading function
 UnusedCloudTiles:
-                incbin "data/graphics/tech/unusedcloudtiles.bin"
-                                                        ; no reference to that ? looks like compressed tiles but no idea of what they represent (32x8 tiles)
-StaticWidthFont:incbin "data/graphics/tech/fonts/staticwidthfont.bin"
+                incbin "data/graphics/tech/unusedcloudtiles.bin" ; no reference to that ? looks like compressed tiles but no idea of what they represent (32x8 tiles)
+StaticWidthFont:incbin "data/graphics/tech/fonts/staticwidthfont.bin" 
                                                         ; used for title screen
 TitleScreenPalettes:
                 incbin "data/graphics/specialscreens/titlescreen/titlescreenpalettes.bin"

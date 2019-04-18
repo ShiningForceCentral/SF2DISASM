@@ -18,8 +18,7 @@ j_ExecuteBattleCutscene_Intro_0:
                 clr.w   d0
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d0
                 add.w   d0,d0
-                move.w  rpt_BeforeBattleCutscenes(pc,d0.w),d0
-                                                        ; rpt_BattleCutscenes
+                move.w  rpt_BeforeBattleCutscenes(pc,d0.w),d0 ; rpt_BattleCutscenes
                 lea     rpt_BeforeBattleCutscenes(pc,d0.w),a0
                 bsr.w   ExecuteMapScript
                 movem.l (sp)+,d0/a0
