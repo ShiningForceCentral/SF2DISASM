@@ -736,7 +736,7 @@ sub_1AC8A0:
                 lea     ((CURRENT_BATTLE-$1000000)).w,a0
                 clr.w   d2
                 move.b  (a0),d2
-                lea     unk_1AC9B8(pc), a0
+                lea     byte_1AC9B8(pc), a0
                 nop
                 clr.w   d1
                 move.b  (a0)+,d1
@@ -854,10 +854,10 @@ loc_1AC9AC:
 
 	; End of function sub_1AC8A0
 
-unk_1AC9B8:     dc.b   3                ; AI-related data, 3 entries, for battles 36, 43 and 0
-                dc.b $24 
-                dc.b $2B 
-                dc.b   0
+byte_1AC9B8:    dc.b 3                  ; AI-related data, 3 entries, for battles 36, 43 and 0
+                dc.b BATTLE_VERSUS_PRISM_FLOWERS
+                dc.b BATTLE_VERSUS_ZEON
+                dc.b BATTLE_VERSUS_ALL_BOSSES
 off_1AC9BC:     dc.l unk_1AC9C8         
                 dc.l unk_1AC9E0         
                 dc.l unk_1AC9F0         

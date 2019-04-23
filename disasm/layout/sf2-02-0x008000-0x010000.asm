@@ -17,7 +17,8 @@
                 include "data\stats\enemies\enemygold.asm"    ; Enemy gold amounts
                 include "code\gameflow\battle\battleactionsengine_4.asm"    ; Battle actions engine
                 include "code\gameflow\battle\battlefieldengine_1.asm"    ; Battlefield engine
-                include "data\stats\spells\spellelements.asm"    ; Spell elements
+                include "data\stats\spells\spellelements.asm"    ; Spell elements table
+                wordAlignIfExpandedRom
                 include "code\gameflow\battle\battlefieldengine_2.asm"    ; Battlefield engine
                 include "code\gameflow\battle\aiengine.asm"    ; AI engine
                 include "data\stats\spells\spellnames.asm"    ; Spell names

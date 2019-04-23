@@ -88,6 +88,7 @@ COM_STATUS_MASK_SLEEP: equ $C0
 
 ; enum CharDef
 CHARDEF_STARTDATA_ENTRYSIZE: equ $6
+CHAR_CLASS_LASTNONPROMOTED: equ $B
 CHAR_CLASS_FIRSTPROMOTED: equ $C
 CHAR_CLASS_EXTRALEVEL: equ $14
 CHAR_STATGAIN_PROJECTIONLEVEL: equ $1E
@@ -115,34 +116,51 @@ CLASSDEF_OFFSET_PROWESS: equ $4
 ; ---------------------------------------------------------------------------
 
 ; enum Resistance (bitfield)
-WIND_RESIST_MINOR: equ $1
-WIND_RESIST_MAJOR: equ $2
-WIND_WEAKNESS: equ $3
-LIGHTNING_RESIST_MINOR: equ $4
-LIGHTNING_RESIST_MAJOR: equ $8
-LIGHTNING_WEAKNESS: equ $C
-ICE_RESIST_MINOR: equ $10
-ICE_RESIST_MAJOR: equ $20
-ICE_WEAKNESS: equ $30
-FIRE_RESIST_MINOR: equ $40
-FIRE_RESIST_MAJOR: equ $80
-FIRE_WEAKNESS: equ $C0
-UNDEFINED1_RESIST_MINOR: equ $100
-UNDEFINED1_RESIST_MAJOR: equ $200
-UNDEFINED1_WEAKNESS: equ $300
-UNDEFINED2_RESIST_MINOR: equ $400
-UNDEFINED2_RESIST_MAJOR: equ $800
-UNDEFINED2_WEAKNESS: equ $C00
-UNDEFINED3_RESIST_MINOR: equ $1000
-UNDEFINED3_RESIST_MAJOR: equ $2000
-UNDEFINED3_WEAKNESS: equ $3000
-STATUS_RESIST_MINOR: equ $4000
-STATUS_RESIST_MAJOR: equ $8000
-STATUS_IMMUNITY: equ $C000
+RESISTANCE_WIND_MINOR: equ $1
+RESISTANCE_WIND_MAJOR: equ $2
+RESISTANCE_WIND_WEAKNESS: equ $3
+RESISTANCE_LIGHTNING_MINOR: equ $4
+RESISTANCE_LIGHTNING_MAJOR: equ $8
+RESISTANCE_LIGHTNING_WEAKNESS: equ $C
+RESISTANCE_ICE_MINOR: equ $10
+RESISTANCE_ICE_MAJOR: equ $20
+RESISTANCE_ICE_WEAKNESS: equ $30
+RESISTANCE_FIRE_MINOR: equ $40
+RESISTANCE_FIRE_MAJOR: equ $80
+RESISTANCE_FIRE_WEAKNESS: equ $C0
+RESISTANCE_UNDEFINED1_MINOR: equ $100
+RESISTANCE_UNDEFINED1_MAJOR: equ $200
+RESISTANCE_UNDEFINED1_WEAKNESS: equ $300
+RESISTANCE_UNDEFINED2_MINOR: equ $400
+RESISTANCE_UNDEFINED2_MAJOR: equ $800
+RESISTANCE_UNDEFINED2_WEAKNESS: equ $C00
+RESISTANCE_UNDEFINED3_MINOR: equ $1000
+RESISTANCE_UNDEFINED3_MAJOR: equ $2000
+RESISTANCE_UNDEFINED3_WEAKNESS: equ $3000
+RESISTANCE_STATUS_MINOR: equ $4000
+RESISTANCE_STATUS_MAJOR: equ $8000
+RESISTANCE_STATUS_IMMUNITY: equ $C000
+
+; ---------------------------------------------------------------------------
+
+; enum Resistance_None
+RESISTANCE_NONE: equ $0
 
 ; ---------------------------------------------------------------------------
 
 ; enum MoveType (bitfield)
+MOVETYPE_LOWERNIBBLE_REGULAR: equ $1
+MOVETYPE_LOWERNIBBLE_CENTAUR: equ $2
+MOVETYPE_LOWERNIBBLE_STEALTH: equ $3
+MOVETYPE_LOWERNIBBLE_BRASS_GUNNER: equ $4
+MOVETYPE_LOWERNIBBLE_FLYING: equ $5
+MOVETYPE_LOWERNIBBLE_HOVERING: equ $6
+MOVETYPE_LOWERNIBBLE_AQUATIC: equ $7
+MOVETYPE_LOWERNIBBLE_ARCHER: equ $8
+MOVETYPE_LOWERNIBBLE_CENTAUR_ARCHER: equ $9
+MOVETYPE_LOWERNIBBLE_STEALTH_ARCHER: equ $A
+MOVETYPE_LOWERNIBBLE_MAGE: equ $B
+MOVETYPE_LOWERNIBBLE_HEALER: equ $C
 MOVETYPE_REGULAR: equ $10
 MOVETYPE_CENTAUR: equ $20
 MOVETYPE_STEALTH: equ $30
@@ -155,6 +173,11 @@ MOVETYPE_CENTAUR_ARCHER: equ $90
 MOVETYPE_STEALTH_ARCHER: equ $A0
 MOVETYPE_MAGE: equ $B0
 MOVETYPE_HEALER: equ $C0
+
+; ---------------------------------------------------------------------------
+
+; enum MoveType_Props
+MOVETYPE_MASK_LOWERNIBBLE: equ $F
 
 ; ---------------------------------------------------------------------------
 
@@ -225,9 +248,9 @@ CLASS_NONE: equ $FF
 
 ; enum ClassTypes
 CLASSTYPE_BASE: equ $0
-CLASSTYPE_PROMOTED_REGULAR: equ $1
-CLASSTYPE_PROMOTED_SPECIAL: equ $2
-CLASSTYPE_RED_BARON: equ $FF
+CLASSTYPE_PROMO: equ $1
+CLASSTYPE_SPECIAL: equ $2
+CLASSTYPE_REDBARON: equ $FF
 
 ; ---------------------------------------------------------------------------
 
@@ -243,7 +266,14 @@ ENEMYIDX_TAROS: equ $58
 
 ; ---------------------------------------------------------------------------
 
-; enum EnemyDef_SpellPower
+; enum EnemyDef
+ENEMYDEF_OFFSET_SPELLPOWER: equ $A
+ENEMYDEF_OFFSET_MOVETYPE: equ $31
+ENEMYDEF_ENTRY_SIZE: equ $38
+
+; ---------------------------------------------------------------------------
+
+; enum SpellPower
 SPELLPOWER_REGULAR: equ $0
 SPELLPOWER_ENHANCED: equ $63
 
@@ -385,8 +415,9 @@ EQUIPFLAG_RDBN: equ $80000000
 
 ; ---------------------------------------------------------------------------
 
-; enum EquipFlags_All
-EQUIPFLAGS_ALL: equ $FFFFFFFF
+; enum EquipFlags_Other
+EQUIPFLAG_NONE: equ $0
+EQUIPFLAG_ALL: equ $FFFFFFFF
 
 ; ---------------------------------------------------------------------------
 
@@ -570,13 +601,20 @@ ITEMTYPE_MAGICAL: equ $80
 
 ; ---------------------------------------------------------------------------
 
+; enum ItemType_None
+ITEMTYPE_NONE: equ $0
+
+; ---------------------------------------------------------------------------
+
 ; enum ItemType_Props
 ITEMTYPE_BIT_WEAPON: equ $1
 ITEMTYPE_IDX_WEAPON: equ $1
 ITEMTYPE_BIT_RING: equ $2
 ITEMTYPE_BIT_RARE: equ $3
 ITEMTYPE_BIT_UNSELLABLE: equ $4
+ITEMTYPE_BIT_CONSUMABLE: equ $5
 ITEMTYPE_BIT_CURSED: equ $6
+ITEMTYPE_BIT_MAGICAL: equ $7
 
 ; ---------------------------------------------------------------------------
 
@@ -765,7 +803,7 @@ SPELLANIMIDX_NONE: equ $0
 SPELLANIMIDX_BLAZE: equ $1
 SPELLANIMIDX_FREEZE: equ $2
 SPELLANIMIDX_DESOUL: equ $3
-SPELLANIMIDX_FAIRY: equ $4
+SPELLANIMIDX_HEALING_FAIRY: equ $4
 SPELLANIMIDX_BLAST: equ $5
 SPELLANIMIDX_DETOX: equ $6
 SPELLANIMIDX_BOLT: equ $7
@@ -782,9 +820,9 @@ SPELLANIMIDX_BUBBLE_BREATH: equ $16
 SPELLANIMIDX_SNOW_BREATH: equ $17
 SPELLANIMIDX_BURST_ROCK: equ $1E
 SPELLANIMIDX_ODD_EYE_BEAM: equ $1F
-SPELLANIMPARAM_1: equ $20
-SPELLANIMPARAM_2: equ $40
-SPELLANIMPARAM_3: equ $60
+SPELLANIMIDX_LV2: equ $20
+SPELLANIMIDX_LV3: equ $40
+SPELLANIMIDX_LV4: equ $60
 
 ; ---------------------------------------------------------------------------
 
@@ -860,10 +898,9 @@ SPELL_LV4: equ $C0
 SPELL_OFFSET_IDX: equ $0
 SPELL_MASK_RESIST: equ $3
 SPELL_OFFSET_LV: equ $6
-SPELL_IDX_REALMASK: equ $3F
 SPELL_DEFS_COUNTER: equ $63
 SPELL_MASK_LV: equ $C0
-SPELL_MASK: equ $FF
+SPELL_MASK_ENTRY: equ $FF
 SPELL_MASK_ALLRESIST: equ $C0FF
 
 ; ---------------------------------------------------------------------------
@@ -938,6 +975,7 @@ BATTLE_OUTSIDE_ANCIENT_TOWER: equ $29
 BATTLE_VERSUS_GALAM: equ $2A
 BATTLE_VERSUS_ZEON: equ $2B
 BATTLE_FAIRY_WOODS: equ $2C
+NOT_CURRENTLY_IN_BATTLE: equ $FF
 
 ; ---------------------------------------------------------------------------
 
@@ -1005,7 +1043,7 @@ FLAG_MASK: equ $3FF
 ; ---------------------------------------------------------------------------
 
 ; enum Codes
-CODE_USE_FIRST_SPELL_LIST: equ $FE
+CODE_USEFIRSTSPELLLIST: equ $FE
 CODE_NOTHING_BYTE: equ $FF
 CODE_TERMINATOR_BYTE: equ $FF
 CODE_NOTHING_WORD: equ $FFFF
@@ -1169,8 +1207,8 @@ ALLYBATTLESPRITE_BRGN: equ $B
 ALLYBATTLESPRITE_ACHR: equ $C
 ALLYBATTLESPRITE_PLDN: equ $D
 ALLYBATTLESPRITE_BDBT: equ $E
-ALLYBATTLESPRITE_SORC_M: equ $F
-ALLYBATTLESPRITE_SORC_F: equ $10
+ALLYBATTLESPRITE_SORC_MALE: equ $F
+ALLYBATTLESPRITE_SORC_FEMALE: equ $10
 ALLYBATTLESPRITE_PGNT: equ $11
 ALLYBATTLESPRITE_GLDT: equ $12
 ALLYBATTLESPRITE_MMNK: equ $13

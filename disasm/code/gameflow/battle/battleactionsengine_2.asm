@@ -1795,13 +1795,13 @@ WriteSkirmishScript_UseItem:
                 
                 move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d1
                 jsr     GetItemDefAddress
-                move.b  9(a0),d0
+                move.b  ITEMDEF_OFFSET_SPELL(a0),d0
                 move.w  d0,2(a3)
-                andi.w  #$3F,d0 
+                andi.w  #SPELL_MASK_IDX,d0
                 move.w  d0,((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w
-                move.b  9(a0),d0
-                lsr.b   #6,d0
-                andi.w  #3,d0
+                move.b  ITEMDEF_OFFSET_SPELL(a0),d0
+                lsr.b   #SPELL_OFFSET_LV,d0
+                andi.w  #SPELL_UPPERMASK_LV,d0
                 move.w  d0,((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
                 bra.w   WriteSkirmishScript_UseSpell
 
@@ -1829,7 +1829,7 @@ WriteSkirmishScript_BreakUsedItem:
                 tst.w   d2
                 beq.w   loc_BC88
                 jsr     GetItemDefAddress
-                btst    #7,ITEMDEF_OFFSET_TYPE(a0)
+                btst    #ITEMTYPE_BIT_MAGICAL,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   loc_BC94
                 btst    #CHAR_BIT_ENEMY,(a4)
                 bne.w   loc_BC94

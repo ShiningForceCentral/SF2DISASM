@@ -9,7 +9,7 @@ PlayMapMusic:
                 move.w  d0,-(sp)
                 clr.w   d0
                 move.b  ((MAP_AREA_MUSIC_INDEX-$1000000)).w,d0
-                cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
+                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 beq.s   byte_4586
                 cmpi.b  #0,d0
                 bne.s   loc_455E

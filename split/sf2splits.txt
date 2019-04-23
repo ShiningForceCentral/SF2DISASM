@@ -867,7 +867,6 @@
 #split	0x2E394,0x2EB34,data/scripting/text/huffmantrees.bin
 #split	0x4201E,0x425ED,data/scripting/gamestaff.bin
 #split	0x4567A,0x45858,data/spritedialogdefs.bin
-#split	0x47C8E,0x47CBC,data/battles/global/enemyleaderpresence.bin
 #split	0x1002BE,0x10033E,data/graphics/specialscreens/titlescreen/titlepalettes.bin
 #split	0x10033E,0x1014E0,data/graphics/specialscreens/titlescreen/titletiles.bin
 #split	0x1014E0,0x101BE0,data/graphics/specialscreens/titlescreen/titlelayoutA.bin
@@ -881,7 +880,6 @@
 #split	0x1AA5FA,0x1AA8CA,data/graphics/tech/battlescenetransitiontilesb.bin
 #split	0x1AA8CA,0x1AAA82,data/graphics/battles/spells/animations/boltanimdataa.bin
 #split	0x1AAA82,0x1AAC3A,data/graphics/battles/spells/animations/boltanimdatab.bin
-#split	0x1B6DB0,0x1B6DBC,data/battles/global/specialbattles.bin
 #split	0x1B6DDA,0x1B6DFA,data/graphics/specialscreens/endingkiss/endingkisspalette.bin
 #split	0x1B6DFA,0x1B7C9A,data/graphics/specialscreens/endingkiss/endingkisstiles.bin
 #split	0x1BEE38,0x1BEEE0,data/graphics/battles/weapons/weaponpalettes.bin

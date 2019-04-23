@@ -1457,7 +1457,7 @@ loc_2DD0:
                 bra.s   loc_2DA6
 loc_2DD4:
                 
-                cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
+                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 beq.s   return_2DEA
                 move.w  ((BATTLE_AREA_X-$1000000)).w,d0
                 move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d1
@@ -1474,7 +1474,7 @@ return_2DEA:
 
 LoadMapArea:
                 
-                cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
+                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_2E06
                 move.w  d0,((MAP_AREA_LAYER1_STARTX-$1000000)).w
                 move.w  d1,((MAP_AREA_LAYER1_STARTY-$1000000)).w

@@ -14,6 +14,10 @@ align:	macro
 	endc
 	endm
 	
+wordAlign:	macro
+	dcb.b *%2,$FF
+	endm
+	
 headerRegion:	macro
 	if (EXPANDED_ROM=0)
 	dc.b 'U               '
@@ -94,6 +98,12 @@ alignIfExpandedRom:	macro
 	endc
 	endm
 	
+wordAlignIfExpandedRom:	macro
+	if (EXPANDED_ROM=1)
+	wordAlign
+	endc
+	endm
+	
 includeIfVanillaRom:	macro
 	if (EXPANDED_ROM=0)
 	include \1
@@ -158,6 +168,30 @@ script:	macro
 	trap #MAPSCRIPT
 	endm
 	
+	
+defineBitfield:	macro Prefix,Str
+val:	set		0
+next:	substr	,,"\Str"
+in:		set		instr("\next","|")
+		while	(in>0)
+prev:	substr	,in-1,"\next"
+val:	set		val|\Prefix\\prev
+next:	substr	in+1,,"\next"
+in:		set		instr("\next","|")
+		endw
+val:	set		val|\Prefix\\next
+		dc.\0	val
+		endm
+		
+tableEnd:	macro
+	if strcmp('\0','b')
+	dc.b CODE_TERMINATOR_BYTE
+	else
+	dc.w CODE_TERMINATOR_WORD
+	endc
+	endm
+	
+	
 flagSwitchedMap:	macro
 	dc.w \1
 	dc.w \2
@@ -192,16 +226,17 @@ raftResetMapCoords:	macro
 	dc.b \4
 	endm
 	
-;classType:	macro
-	;dc.b \1
-	;endm
 	
-criticalHitSetting:	macro
-	dc.b \1, \2
+classType:	macro
+	dc.b CLASSTYPE_\1
 	endm
 	
+;criticalHitSettings:	macro
+	;dc.b \1,\2
+	;endm
+	
 itemBreakMessage:	macro
-	dc.b \1, \2
+	dc.b ITEM_\1,\2
 	endm
 	
 	
@@ -212,7 +247,7 @@ itemBreakMessage:	macro
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	
 battle:			macro
-	dc.b \1
+	dc.b BATTLE_\1
 	endm
 	
 enemyEntity:	macro
@@ -220,7 +255,7 @@ enemyEntity:	macro
 	endm
 	
 itemDrop:		macro
-	dc.b \1
+	dc.b ITEM_\1
 	endm
 	
 dropFlag:			macro
@@ -235,9 +270,9 @@ dropFlag:			macro
 	;dc.w \1
 	;endm
 	
-;spellElement:	macro
-	;dc.b \1
-	;endm
+spellElement:	macro
+	dc.b SPELLELEMENT_\1
+	endm
 	
 spellName:	macro
 	dc.b strlen(\1)
@@ -269,11 +304,11 @@ enemyName:	macro
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 equipFlags:		macro
-	dc.l \1
+	defineBitfield.l EQUIPFLAG_,\1
 	endm
 	
-range:			macro	Min, Max
-	dc.b Max, Min
+range:			macro Min,Max
+	dc.b Max,Min
 	endm
 	
 price:			macro
@@ -281,15 +316,17 @@ price:			macro
 	endm
 	
 itemType:		macro
-	dc.b \1
+	defineBitfield.b ITEMTYPE_,\1
 	endm
 	
 useSpell:		macro
-	dc.b \1
+	defineBitfield.b SPELL_,\1
 	endm
 	
 equipEffects:	macro
-	dc.b \1, \2, \3, \4, \5, \6
+	dc.b EQUIPEFFECT_\1,\2
+	dc.b EQUIPEFFECT_\3,\4
+	dc.b EQUIPEFFECT_\5,\6
 	endm
 	
 	
@@ -300,24 +337,22 @@ equipEffects:	macro
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 index:		macro
-	dc.b \1
+	defineBitfield.b SPELL_,\1
 	endm
-
+	
 mpCost:		macro
 	dc.b \1
 	endm
 	
 animation:	macro
-	dc.b \1
+	defineBitfield.b SPELLANIMIDX_,\1
 	endm
 	
 properties:	macro
-	dc.b \1
+	defineBitfield.b SPELLPROPS_,\1
 	endm
 	
-;range:		macro	Min, Max	; see Item definitions
-	;dc.b Max, Min
-	;endm
+;range:						; see Item definitions
 	
 radius:		macro
 	dc.b \1
@@ -347,18 +382,26 @@ className:	macro
 	dc.b \1
 	endm
 	
-battleSprite:	macro
-	dc.b \1, \2
+allyBattleSprite:	macro
+	dc.b ALLYBATTLESPRITE_\1,\2
 	endm
 	
-weaponGraphics:	macro
-	dc.b \1, \2
+enemyBattleSprite:	macro
+	dc.b ENEMYBATTLESPRITE_\1,\2
+	endm
+	
+weaponSprite:	macro
+	dc.b WEAPONSPRITE_\1
+	endm
+	
+weaponPalette:	macro
+	dc.b WEAPONPALETTE_\1
 	endm
 	
 shopDef:	macro
 	dc.b narg
 	rept narg
-	dc.b \1
+	dc.b ITEM_\1
 	shift
 	endr
 	endm
@@ -366,31 +409,46 @@ shopDef:	macro
 promotionSection:	macro
 	dc.b narg
 	rept narg
-	dc.b \1
+	dc.b CLASS_\1
 	shift
 	endr
 	endm
 	
-weaponClass:	macro
+promotionItems:	macro
+	dc.b narg
+	rept narg
+	dc.b ITEM_\1
+	shift
+	endr
+	endm
+	
+mithrilWeaponClass:	macro
 	dc.w narg
 	rept narg
-	dc.w \1
+	dc.w CLASS_\1
 	shift
 	endr
 	endm
 	
 mithrilWeapons:	macro
-	dc.b \1, \2, \3, \4, \5, \6, \7, \8
+	dc.b \1,ITEM_\2
+	dc.b \3,ITEM_\4
+	dc.b \5,ITEM_\6
+	dc.b \7,ITEM_\8
 	endm
 	
 specialCaravanDescription:	macro
-	dc.b \1, \2
+	dc.b ITEM_\1,\2
 	dc.w \3
 	endm
 	
-;mapSprite:	macro
-	;dc.b \1
-	;endm
+usableOutsideBattleItem:	macro
+	dc.b ITEM_\1
+	endm
+	
+mapSprite:	macro
+	dc.b MAPSPRITE_\1
+	endm
 	
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -405,7 +463,7 @@ unknownByte:	macro
 	endm
 	
 spellPower:		macro
-	dc.b \1
+	dc.b SPELLPOWER_\1
 	endm
 	
 level:			macro
@@ -413,43 +471,51 @@ level:			macro
 	endm
 	
 maxHp:			macro
-	dc.w \1, 0
+	dc.w \1,0
 	endm
 	
 maxMp:			macro
-	dc.b \1, 0
+	dc.b \1,0
 	endm
 	
 baseAtk:		macro
-	dc.b \1, 0
+	dc.b \1,0
 	endm
 	
 baseDef:		macro
-	dc.b \1, 0
+	dc.b \1,0
 	endm
 	
 baseAgi:		macro
-	dc.b \1, 0
+	dc.b \1,0
 	endm
 	
 baseMov:		macro
-	dc.b \1, 0
+	dc.b \1,0
 	endm
 	
 baseResistance:	macro
-	dc.w \1, 0
+	defineBitfield.w RESISTANCE_,\1
+	dc.w 0
 	endm
 	
 baseProwess:	macro
-	dc.b \1, 0
+	defineBitfield.b PROWESS_,\1
+	dc.b 0
 	endm
 	
 items:			macro
-	dc.w \1, \2, \3, \4
+	defineBitfield.w ITEM_,\1
+	defineBitfield.w ITEM_,\2
+	defineBitfield.w ITEM_,\3
+	defineBitfield.w ITEM_,\4
 	endm
 	
 spells:			macro
-	dc.b \1, \2, \3, \4
+	defineBitfield.b SPELL_,\1
+	defineBitfield.b SPELL_,\2
+	defineBitfield.b SPELL_,\3
+	defineBitfield.b SPELL_,\4
 	endm
 	
 initialStatus:	macro
@@ -457,14 +523,23 @@ initialStatus:	macro
 	dcb.b 3,0
 	endm
 	
-;moveType:		macro		; see Class definitions
-	;dc.b \1
-	;endm
+;moveType:					; see Class definitions
 	
 unknownWord:	macro
 	dcb.b 2,0
 	dc.w \1
 	dcb.b 2,0
+	endm
+	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+	
+randomBattles:	macro
+	dc.b narg
+	rept narg
+	dc.b BATTLE_\1
+	shift
+	endr
 	endm
 	
 	
@@ -475,39 +550,41 @@ unknownWord:	macro
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	
 forClass:	macro
-	dc.b \1
+	dc.b CLASS_\1
 	endm
 	
-hpGrowth:	macro start, proj, curve
-	dc.b \curve, \start, \proj
+hpGrowth:	macro Start,Proj,Curve
+	dc.b GROWTHCURVE_\Curve,\Start,\Proj
 	endm
 	
-mpGrowth:	macro start, proj, curve
-	dc.b \curve, \start, \proj
+mpGrowth:	macro Start,Proj,Curve
+	dc.b GROWTHCURVE_\Curve,\Start,\Proj
 	endm
 	
-atkGrowth:	macro start, proj, curve
-	dc.b \curve, \start, \proj
+atkGrowth:	macro Start,Proj,Curve
+	dc.b GROWTHCURVE_\Curve,\Start,\Proj
 	endm
 	
-defGrowth:	macro start, proj, curve
-	dc.b \curve, \start, \proj
+defGrowth:	macro Start,Proj,Curve
+	dc.b GROWTHCURVE_\Curve,\Start,\Proj
 	endm
 	
-agiGrowth:	macro start, proj, curve
-	dc.b \curve, \start, \proj
+agiGrowth:	macro Start,Proj,Curve
+	dc.b GROWTHCURVE_\Curve,\Start,\Proj
 	endm
 	
 spellList:	macro
-	rept narg
+	rept narg/2
 	dc.b \1
+	defineBitfield.b SPELL_,\2
+	shift
 	shift
 	endr
 	dc.b CODE_TERMINATOR_BYTE
 	endm
 	
 useFirstSpellList:	macro
-	dc.b CODE_USE_FIRST_SPELL_LIST
+	dc.b CODE_USEFIRSTSPELLLIST
 	endm
 	
 	
@@ -518,7 +595,7 @@ useFirstSpellList:	macro
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 startClass:	macro
-	dc.b \1
+	dc.b CLASS_\1
 	endm
 	
 startLevel:	macro
@@ -526,7 +603,10 @@ startLevel:	macro
 	endm
 	
 startItems:	macro
-	dc.b \1, \2, \3, \4
+	defineBitfield.b ITEM_,\1
+	defineBitfield.b ITEM_,\2
+	defineBitfield.b ITEM_,\3
+	defineBitfield.b ITEM_,\4
 	endm
 	
 	
@@ -541,14 +621,14 @@ mov:		macro
 	endm
 	
 resistance:	macro
-	dc.w \1
+	defineBitfield.w RESISTANCE_,\1
 	endm
 	
 moveType:	macro
-	dc.b \1
+	defineBitfield.b MOVETYPE_,\1
 	endm
 	
 prowess:	macro
-	dc.b \1
+	defineBitfield.b PROWESS_,\1
 	endm
 	

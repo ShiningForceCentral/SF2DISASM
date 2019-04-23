@@ -1,6 +1,6 @@
 
 ; ASM FILE data\stats\items\itemnames.asm :
-; 0x1796E..0x17F3E : Item names
+; 0x1796E..0x17F3D : Item names
 ItemNames:      itemName "Medical", 13, "Herb"
                 itemName "Healing", 13, "Seed"
                 itemName "Healing", 13, "Drop"
@@ -129,4 +129,3 @@ ItemNames:      itemName "Medical", 13, "Herb"
                 itemName "Cotton", 13, "Balloon"
                 itemName "Chirrup", 13, "Sandals"
                 itemName "Empty"
-                align 2                 ; make sure end of variable length table is word-aligned

@@ -375,41 +375,41 @@ GetEgressPositionForBattle:
                 
                 clr.b   d7
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d7
-                cmpi.b  #$26,d7 
+                cmpi.b  #BATTLE_VERSUS_GESHP,d7
                 bne.s   loc_23E60
                 clrFlg  $1B6            ; Battle 38 unlocked
 loc_23E60:
                 
-                cmpi.b  #$27,d7 
+                cmpi.b  #BATTLE_TO_ANCIENT_SHRINE,d7
                 bne.s   loc_23E6A
                 clrFlg  $1B7            ; Battle 39 unlocked
 loc_23E6A:
                 
-                cmpi.b  #$10,d7
+                cmpi.b  #BATTLE_VERSUS_KRAKEN,d7
                 bne.s   loc_23E76
                 moveq   #$D,d0
                 bra.w   loc_23EAA
 loc_23E76:
                 
-                cmpi.b  #$11,d7
+                cmpi.b  #BATTLE_TO_TAROS_SHRINE,d7
                 bne.s   loc_23E82
                 moveq   #9,d0
                 bra.w   loc_23EAA
 loc_23E82:
                 
-                cmpi.b  #$D,d7
+                cmpi.b  #BATTLE_POLCA_VILLAGE,d7
                 bne.s   loc_23E8E
                 moveq   #$A,d0
                 bra.w   loc_23EAA
 loc_23E8E:
                 
-                cmpi.b  #$1F,d7
+                cmpi.b  #BATTLE_PACALON,d7
                 bne.s   loc_23E9A
                 moveq   #$24,d0 
                 bra.w   loc_23EAA
 loc_23E9A:
                 
-                cmpi.b  #$20,d7 
+                cmpi.b  #BATTLE_TO_MOUN,d7
                 bne.s   loc_23EA6
                 moveq   #2,d0
                 bra.w   loc_23EAA
@@ -2745,7 +2745,7 @@ loc_2578A:
 
 SetMoveSfx:
                 
-                cmpi.b  #CODE_NOTHING_BYTE,((CURRENT_BATTLE-$1000000)).w
+                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_2579E
                 clr.w   ((MOVE_SFX-$1000000)).w
                 bra.s   loc_257A4

@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: D0 = combatant ID
 ; Out: D4 = map sprite ID
 
 GetAllyMapSprite:
@@ -15,7 +16,8 @@ GetAllyMapSprite:
 @IsAlly:
                 
                 movem.w d1,-(sp)
-                cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w ; check if we're currently in battle
+                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w 
+                                                        ; check if we're currently in battle
                 bne.s   @IsAliveOrInBattle
                 jsr     j_GetCurrentHP
                 tst.w   d1              ; check if character is alive

@@ -1476,7 +1476,7 @@ ApplyVIntVramDMA:
                 movem.l d0/a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.l  d1,d2
-                addi.w  #-$7100,d1
+                addi.w  #$8F00,d1
                 move.w  d1,(a6)+        ; Apply auto-increment from D1
                 move.l  d2,d1
                 clr.w   d2

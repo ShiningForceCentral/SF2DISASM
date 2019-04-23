@@ -2,52 +2,52 @@
 ; ASM FILE data\stats\items\mithrilweapons.asm :
 ; 0x21F92..0x21FD2 : Mithril weapon lists
 MithrilWeaponLists:
-                ; Chance to obtain = 1/a, Item ID
+                ; 4 entries per weapon class, 2 bytes each :
                 mithrilWeapons &
-                    16, ITEM_LEVANTER, &
-                    8, ITEM_COUNTER_SWORD, &
-                    4, ITEM_BATTLE_SWORD, &
-                    1, ITEM_CRITICAL_SWORD
+                    16, LEVANTER, &
+                    8, COUNTER_SWORD, &
+                    4, BATTLE_SWORD, &
+                    1, CRITICAL_SWORD
                     
                 mithrilWeapons &
-                    16, ITEM_HOLY_LANCE, &
-                    8, ITEM_HALBERD, &
-                    4, ITEM_MIST_JAVELIN, &
-                    1, ITEM_VALKYRIE
+                    16, HOLY_LANCE, &
+                    8, HALBERD, &
+                    4, MIST_JAVELIN, &
+                    1, VALKYRIE
                     
                 mithrilWeapons &
-                    16, ITEM_RUNE_AXE, &
-                    8, ITEM_GROUND_AXE, &
-                    4, ITEM_ATLAS_AXE, &
-                    1, ITEM_HEAT_AXE
+                    16, RUNE_AXE, &
+                    8, GROUND_AXE, &
+                    4, ATLAS_AXE, &
+                    1, HEAT_AXE
                     
                 mithrilWeapons &
-                    16, ITEM_MYSTERY_STAFF, &
-                    8, ITEM_FREEZE_STAFF, &
-                    4, ITEM_GREAT_ROD, &
-                    1, ITEM_SUPPLY_STAFF
+                    16, MYSTERY_STAFF, &
+                    8, FREEZE_STAFF, &
+                    4, GREAT_ROD, &
+                    1, SUPPLY_STAFF
                     
                 mithrilWeapons &
-                    16, ITEM_MYSTERY_STAFF, &
-                    8, ITEM_GODDESS_STAFF, &
-                    4, ITEM_GREAT_ROD, &
-                    1, ITEM_HOLY_STAFF
+                    16, MYSTERY_STAFF, &
+                    8, GODDESS_STAFF, &
+                    4, GREAT_ROD, &
+                    1, HOLY_STAFF
                     
                 mithrilWeapons &
-                    16, ITEM_GRAND_CANNON, &
-                    8, ITEM_GRAND_CANNON, &
-                    4, ITEM_HYPER_CANNON, &
-                    1, ITEM_BUSTER_SHOT
+                    16, GRAND_CANNON, &
+                    8, GRAND_CANNON, &
+                    4, HYPER_CANNON, &
+                    1, BUSTER_SHOT
                     
                 mithrilWeapons &
-                    16, ITEM_GISARME, &
-                    8, ITEM_NINJA_KATANA, &
-                    4, ITEM_KATANA, &
-                    1, ITEM_CRITICAL_SWORD
+                    16, GISARME, &
+                    8, NINJA_KATANA, &
+                    4, KATANA, &
+                    1, CRITICAL_SWORD
                     
                 mithrilWeapons &
-                    16, ITEM_GIANT_KNUCKLES, &
-                    8, ITEM_GIANT_KNUCKLES, &
-                    4, ITEM_MISTY_KNUCKLES, &
-                    1, ITEM_MISTY_KNUCKLES
+                    16, GIANT_KNUCKLES, &
+                    8, GIANT_KNUCKLES, &
+                    4, MISTY_KNUCKLES, &
+                    1, MISTY_KNUCKLES
                     

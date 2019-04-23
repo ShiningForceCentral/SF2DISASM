@@ -1,887 +1,804 @@
 
 ; ASM FILE data\stats\spells\spelldefs.asm :
 ; 0x176A6..0x1796E : Spell definitions
-SpellDefs:      index SPELL_HEAL        ; HEAL 1
+SpellDefs:      ; index      enum Spells : SPELL_*
+                index HEAL              ; HEAL 1
                 mpCost 3
-                animation SPELLANIMIDX_FAIRY
+                animation HEALING_FAIRY
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 1
                 radius 0
                 power 15
                     
-                index SPELL_HEAL|SPELL_LV2 ; HEAL 2
+                index HEAL|LV2          ; HEAL 2
                 mpCost 5
-                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_1
+                animation HEALING_FAIRY|LV2
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 2
                 radius 0
                 power 15
                     
-                index SPELL_HEAL|SPELL_LV3 ; HEAL 3
+                index HEAL|LV3          ; HEAL 3
                 mpCost 10
-                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_2
+                animation HEALING_FAIRY|LV3
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 3
                 radius 0
                 power 30
                     
-                index SPELL_HEAL|SPELL_LV4 ; HEAL 4
+                index HEAL|LV4          ; HEAL 4
                 mpCost 20
-                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_3
+                animation HEALING_FAIRY|LV4
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 1
                 radius 0
                 power 255
                     
-                index SPELL_AURA        ; AURA 1
+                index AURA              ; AURA 1
                 mpCost 7
-                animation SPELLANIMIDX_FAIRY
+                animation HEALING_FAIRY
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 3
                 radius 1
                 power 15
                     
-                index SPELL_AURA|SPELL_LV2 ; AURA 2
+                index AURA|LV2          ; AURA 2
                 mpCost 11
-                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_1
+                animation HEALING_FAIRY|LV2
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 3
                 radius 2
                 power 15
                     
-                index SPELL_AURA|SPELL_LV3 ; AURA 3
+                index AURA|LV3          ; AURA 3
                 mpCost 15
-                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_2
+                animation HEALING_FAIRY|LV3
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 3
                 radius 2
                 power 30
                     
-                index SPELL_AURA|SPELL_LV4 ; AURA 4
+                index AURA|LV4          ; AURA 4
                 mpCost 20
-                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_3
+                animation HEALING_FAIRY|LV4
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 0
                 radius 0
                 power 255
                     
-                index SPELL_DETOX       ; DETOX 1
+                index DETOX             ; DETOX 1
                 mpCost 3
-                animation SPELLANIMIDX_DETOX
+                animation DETOX
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 1
                 radius 0
                 power 0
                     
-                index SPELL_DETOX|SPELL_LV2 ; DETOX 2
+                index DETOX|LV2         ; DETOX 2
                 mpCost 6
-                animation SPELLANIMIDX_DETOX|SPELLANIMPARAM_1
+                animation DETOX|LV2
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 2
                 radius 0
                 power 0
                     
-                index SPELL_DETOX|SPELL_LV3 ; DETOX 3
+                index DETOX|LV3         ; DETOX 3
                 mpCost 10
-                animation SPELLANIMIDX_DETOX|SPELLANIMPARAM_2
+                animation DETOX|LV3
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 2
                 radius 0
                 power 0
                     
-                index SPELL_DETOX|SPELL_LV4 ; DETOX 4
+                index DETOX|LV4         ; DETOX 4
                 mpCost 16
-                animation SPELLANIMIDX_DETOX|SPELLANIMPARAM_3
+                animation DETOX|LV4
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_HEAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 3
                 radius 2
                 power 0
                     
-                index SPELL_BOOST       ; BOOST 1
+                index BOOST             ; BOOST 1
                 mpCost 2
-                animation SPELLANIMIDX_BUFF
+                animation BUFF
                 properties &
-                    SPELLPROPS_TYPE_STATUS|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_STATUS|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 1
                 radius 1
                 power 15
                     
-                index SPELL_BOOST|SPELL_LV2 ; BOOST 2
+                index BOOST|LV2         ; BOOST 2
                 mpCost 5
-                animation SPELLANIMIDX_BUFF|SPELLANIMPARAM_1
+                animation BUFF|LV2
                 properties &
-                    SPELLPROPS_TYPE_STATUS|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_STATUS|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 2
                 radius 2
                 power 15
                     
-                index SPELL_SLOW        ; SLOW 1
+                index SLOW              ; SLOW 1
                 mpCost 3
-                animation SPELLANIMIDX_DEBUFF
+                animation DEBUFF
                 properties &
-                    SPELLPROPS_TYPE_STATUS|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_STATUS|AFFECTEDBYSILENCE
                 range 1, 1
                 radius 1
                 power 15
                     
-                index SPELL_SLOW|SPELL_LV2 ; SLOW 2
+                index SLOW|LV2          ; SLOW 2
                 mpCost 6
-                animation SPELLANIMIDX_DEBUFF|SPELLANIMPARAM_1
+                animation DEBUFF|LV2
                 properties &
-                    SPELLPROPS_TYPE_STATUS|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_STATUS|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 2
                 power 15
                     
-                index SPELL_ATTACK      ; ATTACK 1
+                index ATTACK            ; ATTACK 1
                 mpCost 7
-                animation SPELLANIMIDX_BUFF
+                animation BUFF
                 properties &
-                    SPELLPROPS_TYPE_STATUS|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_STATUS|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 1, 3
                 radius 0
                 power 15
                     
-                index SPELL_DISPEL      ; DISPEL 1
+                index DISPEL            ; DISPEL 1
                 mpCost 5
-                animation SPELLANIMIDX_DEBUFF
+                animation DEBUFF
                 properties &
-                    SPELLPROPS_TYPE_STATUS|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_STATUS|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 0
                     
-                index SPELL_MUDDLE      ; MUDDLE 1
+                index MUDDLE            ; MUDDLE 1
                 mpCost 6
-                animation SPELLANIMIDX_DEBUFF
+                animation DEBUFF
                 properties &
-                    SPELLPROPS_TYPE_STATUS|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_STATUS|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 0
                     
-                index SPELL_MUDDLE|SPELL_LV2 ; MUDDLE 2
+                index MUDDLE|LV2        ; MUDDLE 2
                 mpCost 11
-                animation SPELLANIMIDX_DEBUFF
+                animation DEBUFF
                 properties &
-                    SPELLPROPS_TYPE_STATUS|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_STATUS|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 2
                 power 0
                     
-                index SPELL_DESOUL      ; DESOUL 1
+                index DESOUL            ; DESOUL 1
                 mpCost 8
-                animation SPELLANIMIDX_DESOUL
+                animation DESOUL
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 0
                 power 0
                     
-                index SPELL_DESOUL|SPELL_LV2 ; DESOUL 2
+                index DESOUL|LV2        ; DESOUL 2
                 mpCost 13
-                animation SPELLANIMIDX_DESOUL|SPELLANIMPARAM_1
+                animation DESOUL|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 0
                     
-                index SPELL_SLEEP       ; SLEEP 1
+                index SLEEP             ; SLEEP 1
                 mpCost 4
-                animation SPELLANIMIDX_DEBUFF
+                animation DEBUFF
                 properties &
-                    SPELLPROPS_TYPE_STATUS|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_STATUS|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 0
                     
-                index SPELL_EGRESS      ; EGRESS 1
+                index EGRESS            ; EGRESS 1
                 mpCost 8
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_SPECIAL|&
-                    SPELLPROPS_TARGET_TEAMMATES|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_SPECIAL|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range 0, 0
                 radius 0
                 power 0
                     
-                index SPELL_BLAZE       ; BLAZE 1
+                index BLAZE             ; BLAZE 1
                 mpCost 2
-                animation SPELLANIMIDX_BLAZE
+                animation BLAZE
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 0
                 power 6
                     
-                index SPELL_BLAZE|SPELL_LV2 ; BLAZE 2
+                index BLAZE|LV2         ; BLAZE 2
                 mpCost 6
-                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_1
+                animation BLAZE|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 10
                     
-                index SPELL_BLAZE|SPELL_LV3 ; BLAZE 3
+                index BLAZE|LV3         ; BLAZE 3
                 mpCost 10
-                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_2
+                animation BLAZE|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 15
                     
-                index SPELL_BLAZE|SPELL_LV4 ; BLAZE 4
+                index BLAZE|LV4         ; BLAZE 4
                 mpCost 10
-                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_3
+                animation BLAZE|LV4
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 0
                 power 40
                     
-                index SPELL_FREEZE      ; FREEZE 1
+                index FREEZE            ; FREEZE 1
                 mpCost 3
-                animation SPELLANIMIDX_FREEZE
+                animation FREEZE
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 0
                 power 10
                     
-                index SPELL_FREEZE|SPELL_LV2 ; FREEZE 2
+                index FREEZE|LV2        ; FREEZE 2
                 mpCost 7
-                animation SPELLANIMIDX_FREEZE|SPELLANIMPARAM_1
+                animation FREEZE|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 12
                     
-                index SPELL_FREEZE|SPELL_LV3 ; FREEZE 3
+                index FREEZE|LV3        ; FREEZE 3
                 mpCost 12
-                animation SPELLANIMIDX_FREEZE|SPELLANIMPARAM_2
+                animation FREEZE|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 3
                 radius 1
                 power 18
                     
-                index SPELL_FREEZE|SPELL_LV4 ; FREEZE 4
+                index FREEZE|LV4        ; FREEZE 4
                 mpCost 12
-                animation SPELLANIMIDX_FREEZE|SPELLANIMPARAM_3
+                animation FREEZE|LV4
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 3
                 radius 0
                 power 50
                     
-                index SPELL_BOLT        ; BOLT 1
+                index BOLT              ; BOLT 1
                 mpCost 8
-                animation SPELLANIMIDX_BOLT
+                animation BOLT
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 14
                     
-                index SPELL_BOLT|SPELL_LV2 ; BOLT 2
+                index BOLT|LV2          ; BOLT 2
                 mpCost 15
-                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_1
+                animation BOLT|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 3
                 radius 2
                 power 16
                     
-                index SPELL_BOLT|SPELL_LV3 ; BOLT 3
+                index BOLT|LV3          ; BOLT 3
                 mpCost 20
-                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_2
+                animation BOLT|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 3
                 radius 2
                 power 25
                     
-                index SPELL_BOLT|SPELL_LV4 ; BOLT 4
+                index BOLT|LV4          ; BOLT 4
                 mpCost 20
-                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_3
+                animation BOLT|LV4
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 3
                 radius 0
                 power 60
                     
-                index SPELL_BLAST       ; BLAST 1
+                index BLAST             ; BLAST 1
                 mpCost 2
-                animation SPELLANIMIDX_BLAST
+                animation BLAST
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 1
                 radius 0
                 power 6
                     
-                index SPELL_BLAST|SPELL_LV2 ; BLAST 2
+                index BLAST|LV2         ; BLAST 2
                 mpCost 5
-                animation SPELLANIMIDX_BLAST|SPELLANIMPARAM_1
+                animation BLAST|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 8
                     
-                index SPELL_BLAST|SPELL_LV3 ; BLAST 3
+                index BLAST|LV3         ; BLAST 3
                 mpCost 8
-                animation SPELLANIMIDX_BLAST|SPELLANIMPARAM_2
+                animation BLAST|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 12
                     
-                index SPELL_BLAST|SPELL_LV4 ; BLAST 4
+                index BLAST|LV4         ; BLAST 4
                 mpCost 8
-                animation SPELLANIMIDX_BLAST|SPELLANIMPARAM_3
+                animation BLAST|LV4
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 0
                 power 30
                     
-                index SPELL_SPOIT       ; SPOIT 1
+                index SPOIT             ; SPOIT 1
                 mpCost 0
-                animation SPELLANIMIDX_MAGIC_DRAIN
+                animation MAGIC_DRAIN
                 properties &
-                    SPELLPROPS_TYPE_SPECIAL
+                    TYPE_SPECIAL
                 range 1, 2
                 radius 0
                 power 10
                     
-                index SPELL_HEALIN      ; HEALIN 1
+                index HEALIN            ; HEALIN 1
                 mpCost 0
-                animation SPELLANIMIDX_FAIRY
+                animation HEALING_FAIRY
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_HEAL|TARGET_TEAMMATES
                 range 0, 1
                 radius 0
                 power 10
                     
-                index SPELL_HEALIN|SPELL_LV2 ; HEALIN 2
+                index HEALIN|LV2        ; HEALIN 2
                 mpCost 0
-                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_1
+                animation HEALING_FAIRY|LV2
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_HEAL|TARGET_TEAMMATES
                 range 0, 1
                 radius 0
                 power 20
                     
-                index SPELL_HEALIN|SPELL_LV3 ; HEALIN 3
+                index HEALIN|LV3        ; HEALIN 3
                 mpCost 0
-                animation SPELLANIMIDX_FAIRY|SPELLANIMPARAM_2
+                animation HEALING_FAIRY|LV3
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_HEAL|TARGET_TEAMMATES
                 range 0, 1
                 radius 0
                 power 30
                     
-                index SPELL_FLAME       ; FLAME 1
+                index FLAME             ; FLAME 1
                 mpCost 0
-                animation SPELLANIMIDX_FLAME_BREATH
+                animation FLAME_BREATH
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 16
                     
-                index SPELL_FLAME|SPELL_LV2 ; FLAME 2
+                index FLAME|LV2         ; FLAME 2
                 mpCost 0
-                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_1
+                animation FLAME_BREATH|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 24
                     
-                index SPELL_FLAME|SPELL_LV3 ; FLAME 3
+                index FLAME|LV3         ; FLAME 3
                 mpCost 0
-                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_2
+                animation FLAME_BREATH|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 34
                     
-                index SPELL_SNOW        ; SNOW 1
+                index SNOW              ; SNOW 1
                 mpCost 0
-                animation SPELLANIMIDX_SNOW_BREATH|SPELLANIMPARAM_1
+                animation SNOW_BREATH|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 20
                     
-                index SPELL_SNOW|SPELL_LV2 ; SNOW 2
+                index SNOW|LV2          ; SNOW 2
                 mpCost 0
-                animation SPELLANIMIDX_SNOW_BREATH|SPELLANIMPARAM_2
+                animation SNOW_BREATH|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 28
                     
-                index SPELL_SNOW|SPELL_LV3 ; SNOW 3
+                index SNOW|LV3          ; SNOW 3
                 mpCost 0
-                animation SPELLANIMIDX_SNOW_BREATH|SPELLANIMPARAM_3
+                animation SNOW_BREATH|LV4
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 35
                     
-                index SPELL_DEMON       ; DEMON 1
+                index DEMON             ; DEMON 1
                 mpCost 0
-                animation SPELLANIMIDX_DEMON_BREATH
+                animation DEMON_BREATH
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 2
                 radius 1
                 power 34
                     
-                index SPELL_DEMON|SPELL_LV2 ; DEMON 2
+                index DEMON|LV2         ; DEMON 2
                 mpCost 0
-                animation SPELLANIMIDX_DEMON_BREATH|SPELLANIMPARAM_1
+                animation DEMON_BREATH|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 3
                 radius 2
                 power 38
                     
-                index SPELL_POWER       ; POWER 1
+                index POWER             ; POWER 1
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_SPECIAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_SPECIAL|TARGET_TEAMMATES
                 range 0, 0
                 radius 0
                 power 4
                     
-                index SPELL_GUARD       ; GUARD 1
+                index GUARD             ; GUARD 1
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_SPECIAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_SPECIAL|TARGET_TEAMMATES
                 range 0, 0
                 radius 0
                 power 4
                     
-                index SPELL_SPEED       ; SPEED 1
+                index SPEED             ; SPEED 1
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_SPECIAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_SPECIAL|TARGET_TEAMMATES
                 range 0, 0
                 radius 0
                 power 4
                     
-                index SPELL_IDATEN      ; IDATEN 1
+                index IDATEN            ; IDATEN 1
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_SPECIAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_SPECIAL|TARGET_TEAMMATES
                 range 0, 0
                 radius 0
                 power 2
                     
-                index SPELL_HEALTH      ; HEALTH 1
+                index HEALTH            ; HEALTH 1
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_SPECIAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_SPECIAL|TARGET_TEAMMATES
                 range 0, 0
                 radius 0
                 power 4
                     
-                index SPELL_B_ROCK      ; B.ROCK 1
+                index B_ROCK            ; B.ROCK 1
                 mpCost 0
-                animation SPELLANIMIDX_BURST_ROCK
+                animation BURST_ROCK
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 0, 0
                 radius 2
                 power 18
                     
-                index SPELL_LASER       ; LASER 1
+                index LASER             ; LASER 1
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 0, 0
                 radius 3
                 power 16
                     
-                index SPELL_KATON       ; KATON 1
+                index KATON             ; KATON 1
                 mpCost 6
-                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_1
+                animation BLAZE|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 12
                     
-                index SPELL_KATON|SPELL_LV2 ; KATON 2
+                index KATON|LV2         ; KATON 2
                 mpCost 10
-                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_2
+                animation BLAZE|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 16
                     
-                index SPELL_KATON|SPELL_LV3 ; KATON 3
+                index KATON|LV3         ; KATON 3
                 mpCost 12
-                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_3
+                animation BLAZE|LV4
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 0
                 power 42
                     
-                index SPELL_RAIJIN      ; RAIJIN 1
+                index RAIJIN            ; RAIJIN 1
                 mpCost 15
-                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_1
+                animation BOLT|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 3
                 radius 2
                 power 18
                     
-                index SPELL_RAIJIN|SPELL_LV2 ; RAIJIN 2
+                index RAIJIN|LV2        ; RAIJIN 2
                 mpCost 18
-                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_2
+                animation BOLT|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 3
                 radius 2
                 power 26
                     
-                index SPELL_RAIJIN|SPELL_LV3 ; RAIJIN 3
+                index RAIJIN|LV3        ; RAIJIN 3
                 mpCost 20
-                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_3
+                animation BOLT|LV4
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 3
                 radius 0
                 power 58
                     
-                index SPELL_DAO         ; DAO 1
+                index DAO               ; DAO 1
                 mpCost 8
-                animation SPELLANIMIDX_DAO
+                animation DAO
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 18
                     
-                index SPELL_DAO|SPELL_LV2 ; DAO 2
+                index DAO|LV2           ; DAO 2
                 mpCost 15
-                animation SPELLANIMIDX_DAO|SPELLANIMPARAM_1
+                animation DAO|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 40
                     
-                index SPELL_APOLLO      ; APOLLO 1
+                index APOLLO            ; APOLLO 1
                 mpCost 10
-                animation SPELLANIMIDX_APOLLO
+                animation APOLLO
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 23
                     
-                index SPELL_APOLLO|SPELL_LV2 ; APOLLO 2
+                index APOLLO|LV2        ; APOLLO 2
                 mpCost 17
-                animation SPELLANIMIDX_APOLLO|SPELLANIMPARAM_1
+                animation APOLLO|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 50
                     
-                index SPELL_NEPTUN      ; NEPTUN 1
+                index NEPTUN            ; NEPTUN 1
                 mpCost 12
-                animation SPELLANIMIDX_NEPTUN
+                animation NEPTUN
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 30
                     
-                index SPELL_NEPTUN|SPELL_LV2 ; NEPTUN 2
+                index NEPTUN|LV2        ; NEPTUN 2
                 mpCost 19
-                animation SPELLANIMIDX_NEPTUN|SPELLANIMPARAM_1
+                animation NEPTUN|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 61
                     
-                index SPELL_ATLAS       ; ATLAS 1
+                index ATLAS             ; ATLAS 1
                 mpCost 14
-                animation SPELLANIMIDX_ATLAS
+                animation ATLAS
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 2
                 radius 1
                 power 35
                     
-                index SPELL_ATLAS|SPELL_LV2 ; ATLAS 2
+                index ATLAS|LV2         ; ATLAS 2
                 mpCost 23
-                animation SPELLANIMIDX_ATLAS|SPELLANIMPARAM_1
+                animation ATLAS|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK|&
-                    SPELLPROPS_AFFECTEDBYSILENCE
+                    TYPE_ATTACK|AFFECTEDBYSILENCE
                 range 1, 3
                 radius 1
                 power 73
                     
-                index SPELL_POWDER      ; POWDER 1
+                index POWDER            ; POWDER 1
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_HEAL|TARGET_TEAMMATES
                 range 0, 1
                 radius 0
                 power 0
                     
-                index SPELL_G_TEAR      ; G.TEAR 1
+                index G_TEAR            ; G.TEAR 1
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_HEAL|TARGET_TEAMMATES
                 range 0, 1
                 radius 0
                 power 10
                     
-                index SPELL_G_TEAR|SPELL_LV2 ; G.TEAR 2
+                index G_TEAR|LV2        ; G.TEAR 2
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_HEAL|TARGET_TEAMMATES
                 range 0, 1
                 radius 0
                 power 20
                     
-                index SPELL_HANNY       ; HANNY 1
+                index HANNY             ; HANNY 1
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_SPECIAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_SPECIAL|TARGET_TEAMMATES
                 range 0, 0
                 radius 0
                 power 4
                     
-                index SPELL_BRAVE       ; BRAVE 1
+                index BRAVE             ; BRAVE 1
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_SPECIAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_SPECIAL|TARGET_TEAMMATES
                 range 0, 0
                 radius 0
                 power 1
                     
-                index SPELL_FBALL       ; F.BALL 1
+                index FBALL             ; F.BALL 1
                 mpCost 0
-                animation SPELLANIMIDX_BLAZE|SPELLANIMPARAM_2
+                animation BLAZE|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 20
                     
-                index SPELL_BREZAD      ; BREZAD 1
+                index BREZAD            ; BREZAD 1
                 mpCost 0
-                animation SPELLANIMIDX_FREEZE|SPELLANIMPARAM_2
+                animation FREEZE|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 33
                     
-                index SPELL_THUNDR      ; THUNDR 1
+                index THUNDR            ; THUNDR 1
                 mpCost 0
-                animation SPELLANIMIDX_BOLT|SPELLANIMPARAM_2
+                animation BOLT|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 50
                     
-                index SPELL_AQUA        ; AQUA 1
+                index AQUA              ; AQUA 1
                 mpCost 0
-                animation SPELLANIMIDX_BUBBLE_BREATH
+                animation BUBBLE_BREATH
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 3
                 radius 0
                 power 13
                     
-                index SPELL_AQUA|SPELL_LV2 ; AQUA 2
+                index AQUA|LV2          ; AQUA 2
                 mpCost 0
-                animation SPELLANIMIDX_BUBBLE_BREATH|SPELLANIMPARAM_1
+                animation BUBBLE_BREATH|LV2
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 15
                     
-                index SPELL_KIWI        ; KIWI 1
+                index KIWI              ; KIWI 1
                 mpCost 0
-                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_2
+                animation FLAME_BREATH|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 28
                     
-                index SPELL_KIWI|SPELL_LV2 ; KIWI 2
+                index KIWI|LV2          ; KIWI 2
                 mpCost 0
-                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_2
+                animation FLAME_BREATH|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 36
                     
-                index SPELL_KIWI|SPELL_LV3 ; KIWI 3
+                index KIWI|LV3          ; KIWI 3
                 mpCost 0
-                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_2
+                animation FLAME_BREATH|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 45
                     
-                index SPELL_KIWI|SPELL_LV4 ; KIWI 4
+                index KIWI|LV4          ; KIWI 4
                 mpCost 0
-                animation SPELLANIMIDX_FLAME_BREATH|SPELLANIMPARAM_2
+                animation FLAME_BREATH|LV3
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 1
                 radius 0
                 power 58
                     
-                index SPELL_SHINE       ; SHINE 1
+                index SHINE             ; SHINE 1
                 mpCost 0
-                animation SPELLANIMIDX_NONE
+                animation NONE
                 properties &
-                    SPELLPROPS_TYPE_HEAL|&
-                    SPELLPROPS_TARGET_TEAMMATES
+                    TYPE_HEAL|TARGET_TEAMMATES
                 range 0, 0
                 radius 0
                 power 255
                     
-                index SPELL_ODDEYE      ; ODDEYE 1
+                index ODDEYE            ; ODDEYE 1
                 mpCost 0
-                animation SPELLANIMIDX_ODD_EYE_BEAM
+                animation ODD_EYE_BEAM
                 properties &
-                    SPELLPROPS_TYPE_ATTACK
+                    TYPE_ATTACK
                 range 1, 3
                 radius 1
                 power 20

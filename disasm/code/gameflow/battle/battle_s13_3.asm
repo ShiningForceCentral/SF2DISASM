@@ -1,7 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battle_s13_3.asm :
-; 0x1B6DB0..0x1B6DDA : Data related to UpgradeUnitIdx function
-SpecialBattles: incbin "data/battles/global/specialbattles.bin"
+; 0x1B6DBC..0x1B6DDA : Data related to UpgradeUnitIdx function
 unk_1B6DBC:     dc.b   5
                 dc.b   0
                 dc.b $23 

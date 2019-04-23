@@ -1,36 +1,36 @@
 
 ; ASM FILE data\stats\allies\stats\entries.asm :
 ; 0x1EE270..0x1EE2F0 : Ally stats
-pt_AllyStats:   dc.l AllyStats00
-                dc.l AllyStats01
-                dc.l AllyStats02
-                dc.l AllyStats03
-                dc.l AllyStats04
-                dc.l AllyStats05
-                dc.l AllyStats06
-                dc.l AllyStats07
-                dc.l AllyStats08
-                dc.l AllyStats09
-                dc.l AllyStats10
-                dc.l AllyStats11
-                dc.l AllyStats12
-                dc.l AllyStats13
-                dc.l AllyStats14
-                dc.l AllyStats15
-                dc.l AllyStats16
-                dc.l AllyStats17
-                dc.l AllyStats18
-                dc.l AllyStats19
-                dc.l AllyStats20
-                dc.l AllyStats21
-                dc.l AllyStats22
-                dc.l AllyStats23
-                dc.l AllyStats24
-                dc.l AllyStats25
-                dc.l AllyStats26
-                dc.l AllyStats27
-                dc.l AllyStats28
-                dc.l AllyStats29
+pt_AllyStats:   dc.l AllyStats00        ; BOWIE
+                dc.l AllyStats01        ; SARAH
+                dc.l AllyStats02        ; CHESTER
+                dc.l AllyStats03        ; JAHA
+                dc.l AllyStats04        ; KAZIN
+                dc.l AllyStats05        ; SLADE
+                dc.l AllyStats06        ; KIWI
+                dc.l AllyStats07        ; PETER
+                dc.l AllyStats08        ; MAY
+                dc.l AllyStats09        ; GERHALT
+                dc.l AllyStats10        ; LUKE
+                dc.l AllyStats11        ; ROHDE
+                dc.l AllyStats12        ; RICK
+                dc.l AllyStats13        ; ELRIC
+                dc.l AllyStats14        ; ERIC
+                dc.l AllyStats15        ; KARNA
+                dc.l AllyStats16        ; RANDOLF
+                dc.l AllyStats17        ; TYRIN
+                dc.l AllyStats18        ; JANET
+                dc.l AllyStats19        ; HIGINS
+                dc.l AllyStats20        ; SKREECH
+                dc.l AllyStats21        ; TAYA
+                dc.l AllyStats22        ; FRAYJA
+                dc.l AllyStats23        ; JARO
+                dc.l AllyStats24        ; GYAN
+                dc.l AllyStats25        ; SHEELA
+                dc.l AllyStats26        ; ZYNK
+                dc.l AllyStats27        ; CHAZ
+                dc.l AllyStats28        ; LEMON
+                dc.l AllyStats29        ; CLAUDE
                 dc.l AllyStats29
                 dc.l AllyStats29
                 include "data\stats\allies\stats\allystats00.asm"    ; Ally stats 00
@@ -63,4 +63,4 @@ pt_AllyStats:   dc.l AllyStats00
                 include "data\stats\allies\stats\allystats27.asm"    ; Ally stats 27
                 include "data\stats\allies\stats\allystats28.asm"    ; Ally stats 28
                 include "data\stats\allies\stats\allystats29.asm"    ; Ally stats 29
-                dc.b $FF
+                wordAlign

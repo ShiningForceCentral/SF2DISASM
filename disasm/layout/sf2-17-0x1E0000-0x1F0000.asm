@@ -10,7 +10,7 @@
 SoundDriver:    incbin "data/sound/sounddriver.bin"
 p_StatGrowthCurves:
                 dc.l StatGrowthCurves   
-p_pt_AllyStats: dc.l pt_AllyStats
+p_pt_AllyStats: dc.l pt_AllyStats       
 p_AllyStartDefs:dc.l AllyStartDefs      
 p_ClassDefs:    dc.l ClassDefs          
 p_JewelEndScreenTiles:

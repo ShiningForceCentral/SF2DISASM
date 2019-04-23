@@ -420,9 +420,9 @@ word_E249:      dc.w 0
                 dc.b 0
                 dc.b 0
 byte_E25B:      dc.b 3
-                dc.b $10
-                dc.b $14
-                dc.b $16
+                dc.b BATTLE_VERSUS_KRAKEN
+                dc.b BATTLE_HARPIES_POND
+                dc.b BATTLE_CHESSBOARD
                 dc.b $FF
 off_E260:       dc.l byte_E26C
                 dc.l byte_E277

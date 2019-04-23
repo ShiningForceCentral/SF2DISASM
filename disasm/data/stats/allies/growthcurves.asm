@@ -2,8 +2,8 @@
 ; ASM FILE data\stats\allies\growthcurves.asm :
 ; 0x1EE02C..0x1EE270 : Stat growth curves
 StatGrowthCurves:
-                ; Expected total fraction of growth by this level = a/256, Fraction of growth to gain = b/256
-                dc.w 8, 8               ; Linear : level 2
+                ; 29 entries per curve (one per level up), 2 bytes each :
+                dc.w 8, 8               ;  level 2
                 dc.w 17, 9              ;  level 3
                 dc.w 26, 9              ;  level 4
                 dc.w 35, 9              ;  level 5
@@ -33,7 +33,8 @@ StatGrowthCurves:
                 dc.w 247, 9             ;  level 29
                 dc.w 256, 9             ;  level 30
                     
-                dc.w 6, 6               ; Late : level 2
+                ; Late
+                dc.w 6, 6               ;  level 2
                 dc.w 13, 7              ;  level 3
                 dc.w 20, 7              ;  level 4
                 dc.w 27, 7              ;  level 5
@@ -63,7 +64,8 @@ StatGrowthCurves:
                 dc.w 244, 10            ;  level 29
                 dc.w 256, 12            ;  level 30
                     
-                dc.w 11, 11             ; Early : level 2
+                ; Early
+                dc.w 11, 11             ;  level 2
                 dc.w 22, 11             ;  level 3
                 dc.w 32, 10             ;  level 4
                 dc.w 43, 11             ;  level 5
@@ -93,7 +95,8 @@ StatGrowthCurves:
                 dc.w 250, 8             ;  level 29
                 dc.w 256, 6             ;  level 30
                     
-                dc.w 6, 6               ; Middle : level 2
+                ; Middle
+                dc.w 6, 6               ;  level 2
                 dc.w 13, 7              ;  level 3
                 dc.w 21, 8              ;  level 4
                 dc.w 29, 8              ;  level 5
@@ -123,7 +126,8 @@ StatGrowthCurves:
                 dc.w 249, 7             ;  level 29
                 dc.w 256, 7             ;  level 30
                     
-                dc.w 12, 12             ; Early and late : level 2
+                ; Early and late
+                dc.w 12, 12             ;  level 2
                 dc.w 24, 12             ;  level 3
                 dc.w 35, 11             ;  level 4
                 dc.w 46, 11             ;  level 5

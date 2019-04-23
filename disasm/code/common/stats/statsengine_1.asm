@@ -2069,21 +2069,24 @@ GetDefeats:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: D0 = combatant ID
+; Out: D1 = something class type ??
+
 GetSomethingClassType:
                 
-                btst    #CHAR_BIT_ENEMY,d0
-                bne.s   loc_8536
+                btst    #CHAR_BIT_ENEMY,d0 ; check if combatant is an enemy
+                bne.s   @IsEnemy
                 moveq   #0,d1
                 bsr.w   GetClass
                 move.b  ClassTypesTable(pc,d1.w),d1 ; 0,1,2 = base class, promoted class, special promoted class
                 mulu.w  #$1E,d1
                 add.w   d0,d1
                 bset    #$F,d1
-                bra.s   return_8538
-loc_8536:
+                bra.s   @Return
+@IsEnemy:
                 
                 bsr.s   GetEnemyID
-return_8538:
+@Return:
                 
                 rts
 

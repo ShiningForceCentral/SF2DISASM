@@ -912,7 +912,7 @@ loc_3E10:
 
 OpenDoor:
                 
-                cmpi.b  #$FF,((CURRENT_BATTLE-$1000000)).w
+                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.w   return_3F22
                 movem.w d0-d7,-(sp)
                 lsr.w   #7,d0
@@ -1403,7 +1403,7 @@ GetItem:
                 move.w  d1,d5
                 clr.w   d2
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d2
-                cmpi.b  #$FF,d2
+                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,d2
                 beq.w   loc_4290        ; if we are not in battle branch
                 movem.l a0,-(sp)
                 conditionalWordAddr lea,BattleMapCoordinates,a0

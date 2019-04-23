@@ -2671,7 +2671,7 @@ LevelUp:
                 beq.s   @EvaluateLevel  ;  move on to level evaluation.
 @Loop:
                 
-                cmpi.b  #CODE_USE_FIRST_SPELL_LIST,(a0)+ ; loop until we come across an "end of spell list" control code
+                cmpi.b  #CODE_USEFIRSTSPELLLIST,(a0)+ ; loop until we come across an "end of spell list" control code
                 bcs.s   @Loop           
                 bra.s   @EvaluateClass  
 @EvaluateLevel:
@@ -2738,8 +2738,8 @@ LevelUp:
                 bsr.w   SetLevel
                 move.b  d5,(a1)
                 bsr.w   GetClass
-                cmpi.w  #CLASS_TORT,d1  ; If class is listed before TORT ? (Shouldn't it be HERO ?)
-                blt.s   @NotPromoted
+                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUGGED - CHAR_CLASS_FIRSTPROMOTED should be compared here OR...
+                blt.s   @NotPromoted    ;  alternatively, this branch condition should be "lower than or equal"
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5
 @NotPromoted:
                 
@@ -2748,7 +2748,7 @@ LevelUp:
                 
                 move.b  (a0)+,d2
                 move.b  (a0)+,d1
-                cmpi.b  #CODE_USE_FIRST_SPELL_LIST,d2
+                cmpi.b  #CODE_USEFIRSTSPELLLIST,d2
                 bne.s   @EvaluateSpellList
                 move.w  d0,d2
                 lsl.w   #2,d2

@@ -9,7 +9,7 @@
 WriteSkirmishScript:
                 
                 movem.l d0-a6,-(sp)
-                link    a2,#BTLSCENE_STACKNEGSIZE
+                link    a2,#-$98
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a3
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5
@@ -509,37 +509,37 @@ loc_A09E:
                 bne.w   loc_A150        ; HARDCODED spell text indexes !
                 move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d2
                 move.w  #$136,d1        ; {NAME} put on{N}a demon's smile.
-                cmpi.w  #$F,d2
+                cmpi.w  #SPELL_SPOIT,d2
                 beq.w   loc_A132
                 move.w  #$116,d1        ; {NAME} belched{N}out flames!
-                cmpi.w  #$11,d2
+                cmpi.w  #SPELL_FLAME,d2
                 beq.w   loc_A132
-                cmpi.w  #$29,d2 
+                cmpi.w  #SPELL_KIWI,d2
                 beq.w   loc_A132
                 move.w  #$117,d1        ; {NAME} blew out{N}a snowstorm!
-                cmpi.w  #$12,d2
+                cmpi.w  #SPELL_SNOW,d2
                 beq.w   loc_A132
                 move.w  #$114,d1        ; {NAME} cast{N}demon breath!
-                cmpi.w  #$13,d2
+                cmpi.w  #SPELL_DEMON,d2
                 beq.w   loc_A132
                 move.w  #$140,d1        ; Odd-eye beam!
-                cmpi.w  #$2B,d2 
+                cmpi.w  #SPELL_ODDEYE,d2
                 beq.w   loc_A132
                 move.w  #$11B,d1        ; {NAME} summoned{N}{SPELL}!{D1}
-                cmpi.w  #$1D,d2
+                cmpi.w  #SPELL_DAO,d2
                 beq.w   loc_A132
-                cmpi.w  #$1E,d2
+                cmpi.w  #SPELL_APOLLO,d2
                 beq.w   loc_A132
-                cmpi.w  #$1F,d2
+                cmpi.w  #SPELL_NEPTUN,d2
                 beq.w   loc_A132
-                cmpi.w  #$20,d2 
+                cmpi.w  #SPELL_ATLAS,d2
                 beq.w   loc_A132
                 move.w  2(a3),d2
                 move.w  #$119,d1        ; {NAME} blew out{N}aqua-breath!
-                cmpi.w  #$28,d2 
+                cmpi.w  #SPELL_AQUA,d2
                 beq.w   loc_A132
                 move.w  #$11A,d1        ; {NAME} blew out{N}bubble-breath!
-                cmpi.w  #$68,d2 
+                cmpi.w  #SPELL_AQUA|SPELL_LV2,d2
                 beq.w   loc_A132
                 move.w  #$112,d1        ; {NAME} cast{N}{SPELL} level {#}!
 loc_A132:
@@ -1282,14 +1282,14 @@ WriteSkirmishScript_EXPandGold:
                 tst.b   -7(a2)
                 bne.w   loc_A81E
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d0
-                lea     byte_A870(pc), a0
+                lea     HalvedEXPEarnedBattles(pc), a0
 loc_A810:
                 
-                cmpi.b  #$FF,(a0)
+                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
                 beq.w   loc_A81E
                 cmp.b   (a0)+,d0
                 bne.s   loc_A810
-                lsr.w   #1,d1
+                lsr.w   #1,d1           ; divide earned EXP by 2
 loc_A81E:
                 
                 move.w  #$10,d0
@@ -1332,8 +1332,9 @@ loc_A86A:
 
 	; End of function WriteSkirmishScript_EXPandGold
 
-byte_A870:      dc.b 1
-                dc.b $FF
+HalvedEXPEarnedBattles:
+                dc.b BATTLE_INSIDE_ANCIENT_TOWER
+                dc.b CODE_TERMINATOR_BYTE
 
 ; =============== S U B R O U T I N E =======================================
 

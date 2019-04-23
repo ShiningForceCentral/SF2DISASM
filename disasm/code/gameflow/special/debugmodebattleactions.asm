@@ -76,7 +76,8 @@ loc_9B34:
                 bra.w   loc_9B3E
 loc_9B38:
                 
-                move.b  #$24,((CURRENT_BATTLE-$1000000)).w  ; use prism laser
+                move.b  #BATTLE_VERSUS_PRISM_FLOWERS,((CURRENT_BATTLE-$1000000)).w 
+                                                        ; use prism laser
 loc_9B3E:
                 
                 movem.l (sp)+,d0-d3/a0

@@ -1,27 +1,27 @@
 
 ; ASM FILE data\stats\allies\stats\allystats13.asm :
 ; 0x1EE542..0x1EE575 : Ally stats 13
-AllyStats13:    forClass CLASS_ACHR
-                hpGrowth 12, 48, GROWTHCURVE_LATE
-                mpGrowth 0, 0, GROWTHCURVE_NONE
-                atkGrowth 6, 30, GROWTHCURVE_LATE
-                defGrowth 5, 31, GROWTHCURVE_LATE
-                agiGrowth 6, 30, GROWTHCURVE_EARLY
+AllyStats13:    forClass ACHR
+                hpGrowth 12, 48, LATE
+                mpGrowth 0, 0, NONE
+                atkGrowth 6, 30, LATE
+                defGrowth 5, 31, LATE
+                agiGrowth 6, 30, EARLY
                 spellList 
                     
-                forClass CLASS_SNIP
-                hpGrowth 33, 84, GROWTHCURVE_LATE
-                mpGrowth 0, 0, GROWTHCURVE_NONE
-                atkGrowth 20, 37, GROWTHCURVE_LINEAR
-                defGrowth 20, 62, GROWTHCURVE_LINEAR
-                agiGrowth 23, 63, GROWTHCURVE_LINEAR
+                forClass SNIP
+                hpGrowth 33, 84, LATE
+                mpGrowth 0, 0, NONE
+                atkGrowth 20, 37, LINEAR
+                defGrowth 20, 62, LINEAR
+                agiGrowth 23, 63, LINEAR
                 spellList 
                     
-                forClass CLASS_BRGN
-                hpGrowth 33, 84, GROWTHCURVE_LATE
-                mpGrowth 0, 0, GROWTHCURVE_NONE
-                atkGrowth 20, 40, GROWTHCURVE_LINEAR
-                defGrowth 20, 80, GROWTHCURVE_EARLY
-                agiGrowth 23, 55, GROWTHCURVE_LINEAR
+                forClass BRGN
+                hpGrowth 33, 84, LATE
+                mpGrowth 0, 0, NONE
+                atkGrowth 20, 40, LINEAR
+                defGrowth 20, 80, EARLY
+                agiGrowth 23, 55, LINEAR
                 spellList 
                     

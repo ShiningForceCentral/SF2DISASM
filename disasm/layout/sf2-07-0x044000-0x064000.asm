@@ -120,6 +120,7 @@ j_ClearEntities:
                 include "data\stats\allies\allymapsprites.asm"    ; Ally map sprite IDs
                 include "code\common\scripting\entity\getcombatantmapsprite.asm"    ; Get combatant map sprite ID function
                 include "data\stats\enemies\enemymapsprites.asm"    ; Enemy map sprite IDs
+                wordAlignIfExpandedRom
                 include "code\common\scripting\entity\entityfunctions_2.asm"    ; Entity functions
                 include "data\scripting\entity\eas_main.asm"    ; Main entity actscripts
                 include "code\common\scripting\entity\entityfunctions_3.asm"    ; Entity functions
@@ -143,6 +144,8 @@ j_ClearEntities:
                 include "code\gameflow\battle\battleendcutscenesstart.asm"    ; Battle end cutscenes function start
                 include "data\battles\battleendcutscenes.asm"    ; Enemy defeated cutscenes
                 include "code\gameflow\battle\battleendcutscenesend.asm"    ; Battle end cutscenes function end
+                include "data\battles\global\enemyleaderpresence.asm"    ; Enemy leader presence table
+                wordAlignIfExpandedRom
                 include "code\gameflow\battle\afterbattlecutscenesstart.asm"    ; After battle cutscenes function start
                 include "data\battles\afterbattlecutscenes.asm"    ; After battle cutscenes
                 include "code\gameflow\battle\afterbattlecutscenesend.asm"    ; After battle cutscenes function end

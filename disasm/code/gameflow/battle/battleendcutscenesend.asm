@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleendcutscenesend.asm :
-; 0x47C48..0x47CBC : Battle end cutscenes function end
+; 0x47C48..0x47C8E : Battle end cutscenes function end
 
 ; START OF FUNCTION CHUNK FOR ExecuteBattleCutscene_Defeated
 
@@ -34,5 +34,3 @@ loc_47C88:
 
 ; END OF FUNCTION CHUNK FOR ExecuteBattleCutscene_Defeated
 
-EnemyLeaderPresence:
-                incbin "data/battles/global/enemyleaderpresence.bin"

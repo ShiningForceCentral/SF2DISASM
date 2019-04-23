@@ -1,44 +1,44 @@
 
 ; ASM FILE data\stats\allies\stats\allystats04.asm :
 ; 0x1EE3D1..0x1EE426 : Ally stats 04
-AllyStats04:    forClass CLASS_MAGE
-                hpGrowth 10, 34, GROWTHCURVE_LINEAR
-                mpGrowth 7, 54, GROWTHCURVE_EARLY
-                atkGrowth 4, 18, GROWTHCURVE_LINEAR
-                defGrowth 4, 26, GROWTHCURVE_LINEAR
-                agiGrowth 6, 42, GROWTHCURVE_LINEAR
+AllyStats04:    forClass MAGE
+                hpGrowth 10, 34, LINEAR
+                mpGrowth 7, 54, EARLY
+                atkGrowth 4, 18, LINEAR
+                defGrowth 4, 26, LINEAR
+                agiGrowth 6, 42, LINEAR
                 spellList &
-                    1, SPELL_BLAZE, &
-                    5, SPELL_BLAZE|SPELL_LV2, &
-                    9, SPELL_MUDDLE, &
-                    13, SPELL_DISPEL, &
-                    18, SPELL_DESOUL, &
-                    22, SPELL_BLAZE|SPELL_LV3, &
-                    25, SPELL_MUDDLE|SPELL_LV2, &
-                    29, SPELL_DESOUL|SPELL_LV2, &
-                    35, SPELL_BLAZE|SPELL_LV4
+                    1, BLAZE, &
+                    5, BLAZE|LV2, &
+                    9, MUDDLE, &
+                    13, DISPEL, &
+                    18, DESOUL, &
+                    22, BLAZE|LV3, &
+                    25, MUDDLE|LV2, &
+                    29, DESOUL|LV2, &
+                    35, BLAZE|LV4
                     
-                forClass CLASS_WIZ
-                hpGrowth 26, 77, GROWTHCURVE_LATE
-                mpGrowth 40, 83, GROWTHCURVE_LINEAR
-                atkGrowth 13, 28, GROWTHCURVE_LINEAR
-                defGrowth 18, 57, GROWTHCURVE_LINEAR
-                agiGrowth 29, 83, GROWTHCURVE_EARLYANDLATE
+                forClass WIZ
+                hpGrowth 26, 77, LATE
+                mpGrowth 40, 83, LINEAR
+                atkGrowth 13, 28, LINEAR
+                defGrowth 18, 57, LINEAR
+                agiGrowth 29, 83, EARLYANDLATE
                 useFirstSpellList
                     
-                forClass CLASS_SORC
-                hpGrowth 26, 77, GROWTHCURVE_LATE
-                mpGrowth 40, 90, GROWTHCURVE_LINEAR
-                atkGrowth 13, 28, GROWTHCURVE_LINEAR
-                defGrowth 18, 60, GROWTHCURVE_LINEAR
-                agiGrowth 29, 60, GROWTHCURVE_EARLYANDLATE
+                forClass SORC
+                hpGrowth 26, 77, LATE
+                mpGrowth 40, 90, LINEAR
+                atkGrowth 13, 28, LINEAR
+                defGrowth 18, 60, LINEAR
+                agiGrowth 29, 60, EARLYANDLATE
                 spellList &
-                    21, SPELL_DAO, &
-                    24, SPELL_APOLLO, &
-                    27, SPELL_NEPTUN, &
-                    32, SPELL_DAO|SPELL_LV2, &
-                    37, SPELL_APOLLO|SPELL_LV2, &
-                    41, SPELL_ATLAS, &
-                    46, SPELL_NEPTUN|SPELL_LV2, &
-                    52, SPELL_ATLAS|SPELL_LV2
+                    21, DAO, &
+                    24, APOLLO, &
+                    27, NEPTUN, &
+                    32, DAO|LV2, &
+                    37, APOLLO|LV2, &
+                    41, ATLAS, &
+                    46, NEPTUN|LV2, &
+                    52, ATLAS|LV2
                     

@@ -20,7 +20,7 @@ loc_257D0:
                 cmpi.b  #$FF,d0         ; map idx is FF, not provided
                 beq.s   loc_25828
                 move.b  d0,((CURRENT_MAP-$1000000)).w
-                move.b  #$FF,((CURRENT_BATTLE-$1000000)).w
+                move.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 movem.w d1-d3,-(sp)
                 clr.w   d1
                 move.b  ((CURRENT_MAP-$1000000)).w,d1

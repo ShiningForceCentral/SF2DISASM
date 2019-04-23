@@ -22,7 +22,7 @@ BattleDebugFunction1B120A:
                 jsr     j_RemoveItemFromCaravan
                 moveq   #0,d0
                 jsr     j_JoinForce
-                move.b  #0,((CURRENT_BATTLE-$1000000)).w
+                move.b  #BATTLE_VERSUS_ALL_BOSSES,((CURRENT_BATTLE-$1000000)).w
                 jsr     j_InitEnemyList
                 bsr.w   InitAllForceBattlePositions
                 bsr.w   InitAllEnemyBattlePositions
@@ -122,7 +122,7 @@ InitEnemyBattlePosition:
                 movem.l d0-a6,-(sp)
                 lea     ((CURRENT_BATTLE-$1000000)).w,a0
                 move.b  (a0),d1
-                cmpi.b  #$20,d1 
+                cmpi.b  #BATTLE_TO_MOUN,d1
                 bne.s   loc_1B132E
                 cmpi.b  #$8F,d0
                 bne.s   loc_1B132E
@@ -628,7 +628,7 @@ DoesBattleUpgrade:
                 clr.w   d7
                 move.b  (a0),d7         ; d7 contains battle index
                 clr.w   d6
-                lea     SpecialBattles(pc), a0 ; point to length of table
+                lea     RandomBattlesList(pc), a0 ; point to length of table
                 nop
                 move.b  (a0)+,d6        ; put length of table in d6
                 tst.b   d6
@@ -664,7 +664,7 @@ UpgradeBattle:
                 movem.l d0-a6,-(sp)
                 lea     ((CURRENT_BATTLE-$1000000)).w,a0
                 move.b  (a0),d7
-                lea     SpecialBattles(pc), a1
+                lea     RandomBattlesList(pc), a1
                 nop
                 clr.w   d2
                 move.b  (a1),d2
@@ -700,7 +700,7 @@ ShouldBattleUpgrade:
                 movem.l d0/d2-a6,-(sp)
                 lea     ((CURRENT_BATTLE-$1000000)).w,a0
                 move.b  (a0),d7
-                lea     SpecialBattles(pc), a1
+                lea     RandomBattlesList(pc), a1
                 nop
                 clr.w   d2
                 move.b  (a1),d2
@@ -762,83 +762,83 @@ loc_1B186C:
                 clr.w   d4
                 clr.l   d1
                 move.b  d5,d1
-                mulu.w  #$38,d1 
+                mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
                 lea     EnemyDefs(pc), a1
                 adda.w  d1,a1
-                move.b  $31(a1),d2
-                lsr.w   #4,d2
-                andi.b  #$F,d2
-                cmpi.b  #1,d2
+                move.b  ENEMYDEF_OFFSET_MOVETYPE(a1),d2
+                lsr.w   #4,d2           ; shift movetype upper nibble to lower position
+                andi.b  #MOVETYPE_MASK_LOWERNIBBLE,d2
+                cmpi.b  #MOVETYPE_LOWERNIBBLE_REGULAR,d2
                 bne.s   loc_1B1896
                 lea     unk_1B6DBC(pc), a0
                 nop
                 bra.w   loc_1B193C
 loc_1B1896:
                 
-                cmpi.b  #2,d2
+                cmpi.b  #MOVETYPE_LOWERNIBBLE_CENTAUR,d2
                 bne.s   loc_1B18A6
                 lea     unk_1B6DBC(pc), a0
                 nop
                 bra.w   loc_1B193C
 loc_1B18A6:
                 
-                cmpi.b  #3,d2
+                cmpi.b  #MOVETYPE_LOWERNIBBLE_STEALTH,d2
                 bne.s   loc_1B18B6
                 lea     unk_1B6DBC(pc), a0
                 nop
                 bra.w   loc_1B193C
 loc_1B18B6:
                 
-                cmpi.b  #4,d2
+                cmpi.b  #MOVETYPE_LOWERNIBBLE_BRASS_GUNNER,d2
                 bne.s   loc_1B18C6
                 lea     unk_1B6DBC(pc), a0
                 nop
                 bra.w   loc_1B193C
 loc_1B18C6:
                 
-                cmpi.b  #5,d2
+                cmpi.b  #MOVETYPE_LOWERNIBBLE_FLYING,d2
                 bne.s   loc_1B18D6
                 lea     unk_1B6DC6(pc), a0
                 nop
                 bra.w   loc_1B193C
 loc_1B18D6:
                 
-                cmpi.b  #6,d2
+                cmpi.b  #MOVETYPE_LOWERNIBBLE_HOVERING,d2
                 bne.s   loc_1B18E6
                 lea     unk_1B6DC6(pc), a0
                 nop
                 bra.w   loc_1B193C
 loc_1B18E6:
                 
-                cmpi.b  #8,d2
+                cmpi.b  #MOVETYPE_LOWERNIBBLE_ARCHER,d2
                 bne.s   loc_1B18F6
                 lea     unk_1B6DCA(pc), a0
                 nop
                 bra.w   loc_1B193C
 loc_1B18F6:
                 
-                cmpi.b  #9,d2
+                cmpi.b  #MOVETYPE_LOWERNIBBLE_CENTAUR_ARCHER,d2
                 bne.s   loc_1B1906
                 lea     unk_1B6DCA(pc), a0
                 nop
                 bra.w   loc_1B193C
 loc_1B1906:
                 
-                cmpi.b  #$A,d2
+                cmpi.b  #MOVETYPE_LOWERNIBBLE_STEALTH_ARCHER,d2
                 bne.s   loc_1B1916
                 lea     unk_1B6DCA(pc), a0
                 nop
                 bra.w   loc_1B193C
 loc_1B1916:
                 
-                cmpi.b  #$B,d2
+                cmpi.b  #MOVETYPE_LOWERNIBBLE_MAGE,d2
                 bne.s   loc_1B1926
                 lea     unk_1B6DD0(pc), a0
                 nop
                 bra.w   loc_1B193C
 loc_1B1926:
                 
-                cmpi.b  #$C,d2
+                cmpi.b  #MOVETYPE_LOWERNIBBLE_HEALER,d2
                 bne.s   loc_1B1936
                 lea     unk_1B6DD5(pc), a0
                 nop
@@ -856,15 +856,15 @@ loc_1B193C:
                 jsr     j_GetCurrentLevel
                 move.w  d1,d2
                 jsr     j_GetClass      
-                cmpi.b  #$B,d1
+                cmpi.b  #CHAR_CLASS_LASTNONPROMOTED,d1
                 ble.s   loc_1B195C
-                addi.w  #$14,d2
+                addi.w  #CHAR_CLASS_EXTRALEVEL,d2
 loc_1B195C:
                 
                 lea     ((CURRENT_BATTLE-$1000000)).w,a1
                 clr.w   d1
                 move.b  (a1),d1
-                sub.w   d1,d2
+                sub.w   d1,d2           ; subtract battle ID from force leader's effective level
                 bne.s   loc_1B197A
                 tst.w   d4
                 bne.s   loc_1B1974
