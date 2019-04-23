@@ -116,9 +116,12 @@ j_ClearEntities:
                 include "code\common\scripting\entity\entityfunctions_1.asm"    ; Entity functions
                 include "data\battles\global\battleneutralentities.asm"    ; Battle entities which are not force members or enemies
                 include "data\scripting\entity\eas_battleneutralentities.asm"    ; Entity actscripts for battle entities which are not force members or enemies
-                include "code\common\scripting\entity\getallymapsprite.asm"    ; Get ally map sprite ID function
-                include "data\stats\allies\allymapsprites.asm"    ; Ally map sprite IDs
-                include "code\common\scripting\entity\getcombatantmapsprite.asm"    ; Get combatant map sprite ID function
+                includeIfVanillaRom "code\common\scripting\entity\getallymapsprite.asm"    ; Get ally map sprite ID function
+                includeIfVanillaRom "data\stats\allies\allymapsprites.asm"    ; Ally map sprite IDs
+                includeIfVanillaRom "code\common\scripting\entity\getcombatantmapsprite.asm"    ; Get combatant map sprite ID function
+                includeIfExpandedRom "code\common\scripting\entity\getallymapsprite-expanded.asm"
+                includeIfExpandedRom "code\common\scripting\entity\getcombatantmapsprite-expanded.asm"
+                includeIfExpandedRom "data\stats\allies\allymapsprites-expanded.asm"
                 include "data\stats\enemies\enemymapsprites.asm"    ; Enemy map sprite IDs
                 wordAlignIfExpandedRom
                 include "code\common\scripting\entity\entityfunctions_2.asm"    ; Entity functions
