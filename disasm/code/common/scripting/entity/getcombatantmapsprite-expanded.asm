@@ -8,23 +8,23 @@
 
 GetCombatantMapSprite:
                 
-				move.w	d0,-(sp)
+                move.w  d0,-(sp)
                 move.w  -4(a6),d0
                 tst.b   d0
-				bmi.s   @NotAlly
-				bsr.s   GetAllyMapSprite
+                bmi.s   @NotAlly
+                bsr.s   GetAllyMapSprite
                 bra.s   @Done
 @NotAlly:
                 
                 move.w  d1,-(sp)
-				jsr     GetEnemyID
+                jsr     GetEnemyID
                 clr.w   d4
                 move.b  EnemyMapSprites(pc,d1.w),d4
                 move.w  (sp)+,d1
 @Done:
                 
-				move.w	(sp)+,d0
+                move.w  (sp)+,d0
                 rts
 
-	; End of function GetCombatantMapSprite
+    ; End of function GetCombatantMapSprite
 
