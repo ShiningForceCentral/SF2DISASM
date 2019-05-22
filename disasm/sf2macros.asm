@@ -4,6 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 	include "sf2cutscenemacros.asm"
+	include "sf2mapmacros.asm"
 	include "sf2mapsetupmacros.asm"
 
 align:	macro

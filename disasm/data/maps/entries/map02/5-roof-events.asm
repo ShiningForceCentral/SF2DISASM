@@ -1,0 +1,40 @@
+
+; ASM FILE data\maps\entries\map02\5-roof-events.asm :
+; 0x96A12..0x96A5C : 
+                slbc 9, 13
+                  slbcSource 255, 255
+                  slbcSize   9, 7
+                  slbcDest   3, 38
+                slbc 14, 10
+                  slbcSource 255, 255
+                  slbcSize   5, 7
+                  slbcDest   13, 35
+                slbc 35, 11
+                  slbcSource 255, 255
+                  slbcSize   10, 7
+                  slbcDest   27, 36
+                slbc 10, 24
+                  slbcSource 255, 255
+                  slbcSize   9, 7
+                  slbcDest   3, 50
+                slbc 4, 19
+                  slbcSource 255, 255
+                  slbcSize   9, 7
+                  slbcDest   3, 50
+                slbc 17, 26
+                  slbcSource 255, 255
+                  slbcSize   6, 5
+                  slbcDest   13, 53
+                slbc 29, 26
+                  slbcSource 255, 255
+                  slbcSize   5, 5
+                  slbcDest   26, 53
+                slbc 35, 25
+                  slbcSource 255, 255
+                  slbcSize   5, 7
+                  slbcDest   34, 50
+                slbc 41, 15
+                  slbcSource 255, 255
+                  slbcSize   5, 9
+                  slbcDest   39, 38
+                endWord
