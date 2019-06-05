@@ -4,52 +4,52 @@
 abcs_battle38:  textCursor $BC4
                 loadMapFadeIn 66,3,22
                 loadMapEntities ce_4E372
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setPos $7,5,25,RIGHT
-                setActscriptWait $1F,eas_Init
-                setPos $1F,8,28,UP
-                setActscriptWait $1E,eas_Init
-                setPos $1E,9,24,DOWN
-                stopEntity $88
-                customActscriptWait $88
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setPos ALLY_PETER,5,25,RIGHT
+                setActscriptWait FOLLOWER_B,eas_Init
+                setPos FOLLOWER_B,8,28,UP
+                setActscriptWait FOLLOWER_A,eas_Init
+                setPos FOLLOWER_A,9,24,DOWN
+                stopEntity 136
+                customActscriptWait 136
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $1          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 jumpIfFlagClear $4C,cs_4DF00 ; Zynk is a follower
-                setActscriptWait $1A,eas_Init
-                setPos $1A,63,62,DOWN
-cs_4DF00:       setActscriptWait $80,eas_46172
-                setActscriptWait $81,eas_46172
-                setActscriptWait $82,eas_46172
-                setActscriptWait $83,eas_46172
-                setActscriptWait $84,eas_46172
-                setActscriptWait $85,eas_46172
-                setActscriptWait $86,eas_46172
-                setActscriptWait $87,eas_46172
-                setPriority $0,$0
-                setPriority $88,$FFFF
+                setActscriptWait ALLY_ZYNK,eas_Init
+                setPos ALLY_ZYNK,63,62,DOWN
+cs_4DF00:       setActscriptWait 128,eas_46172
+                setActscriptWait 129,eas_46172
+                setActscriptWait 130,eas_46172
+                setActscriptWait 131,eas_46172
+                setActscriptWait 132,eas_46172
+                setActscriptWait 133,eas_46172
+                setActscriptWait 134,eas_46172
+                setActscriptWait 135,eas_46172
+                setPriority ALLY_BOWIE,$0
+                setPriority 136,$FFFF
                 fadeInB
                 csWait 60
-                shiver $88
-                nextSingleText $0,$88   ; "My traps...{W1}"
+                shiver 136
+                nextSingleText $0,136   ; "My traps...{W1}"
                 csWait 60
-                customActscriptWait $88
+                customActscriptWait 136
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $0          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                startEntity $88
-                setFacing $88,UP
-                nextSingleText $0,$88   ; "I'm...at the end of my rope.{N}I...must...escape.{W1}"
-                customActscriptWait $88
+                startEntity 136
+                setFacing 136,UP
+                nextSingleText $0,136   ; "I'm...at the end of my rope.{N}I...must...escape.{W1}"
+                customActscriptWait 136
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $88
+                entityActionsWait 136
                  moveRight 1
                  moveUp 1
                  moveLeft 1
@@ -59,100 +59,100 @@ cs_4DF00:       setActscriptWait $80,eas_46172
                  moveRight 1
                  moveUp 1
                 endActions
-                entityActions $88
+                entityActions 136
                  moveUp 1
                 endActions
                 csWait 12
-                setActscriptWait $88,eas_461AA
+                setActscriptWait 136,eas_461AA
                 setQuake 1
-                stopEntity $88
-                setPos $88,8,24,LEFT
-                customActscriptWait $88
+                stopEntity 136
+                setPos 136,8,24,LEFT
+                customActscriptWait 136
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $1          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait $88,eas_46172
-                customActscriptWait $88
+                setActscriptWait 136,eas_46172
+                customActscriptWait 136
                  ac_setSpeed 40,40      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 setQuake 0
-                entityActionsWait $88
+                entityActionsWait 136
                  moveDown 1
                 endActions
-                setFacing $88,DOWN
-                entityActionsWait $88
+                setFacing 136,DOWN
+                entityActionsWait 136
                  moveDown 1
                 endActions
-                setFacing $88,RIGHT
-                entityActionsWait $88
+                setFacing 136,RIGHT
+                entityActionsWait 136
                  moveDown 1
                 endActions
-                setFacing $88,UP
+                setFacing 136,UP
                 csWait 40
-                shiver $88
+                shiver 136
                 csWait 60
-                customActscriptWait $88
+                customActscriptWait 136
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $0          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setFacing $88,DOWN
+                setFacing 136,DOWN
                 csWait 40
-                headshake $88
-                startEntity $88
+                headshake 136
+                startEntity 136
                 csWait 10
-                setActscriptWait $88,eas_Jump
-                setActscriptWait $88,eas_46172
-                nextSingleText $0,$88   ; "Nooooooo!{W1}"
-                entityActionsWait $88
+                setActscriptWait 136,eas_Jump
+                setActscriptWait 136,eas_46172
+                nextSingleText $0,136   ; "Nooooooo!{W1}"
+                entityActionsWait 136
                  moveUp 2
                 endActions
-                nextSingleText $0,$88   ; "Please...please let me go.{W1}"
-                entityActionsWait $1F
+                nextSingleText $0,136   ; "Please...please let me go.{W1}"
+                entityActionsWait FOLLOWER_B
                  moveUp 1
                 endActions
-                nextSingleText $C0,$1F  ; "We don't want to kill{N}you.{N}You've lost your powers.{W1}"
-                nextSingleText $0,$88   ; "I know...(sob, sob)....{W1}"
-                entityActionsWait $7
+                nextSingleText $C0,FOLLOWER_B ; "We don't want to kill{N}you.{N}You've lost your powers.{W1}"
+                nextSingleText $0,136   ; "I know...(sob, sob)....{W1}"
+                entityActionsWait ALLY_PETER
                  moveRight 1
                 endActions
-                nextSingleText $C0,$7   ; "You may go.{W1}"
-                setFacing $88,LEFT
-                nextSingleText $0,$88   ; "Thank you.{W1}"
-                setActscriptWait $88,eas_Init
-                setFacing $88,UP
-                setCameraEntity $88
+                nextSingleText $C0,ALLY_PETER ; "You may go.{W1}"
+                setFacing 136,LEFT
+                nextSingleText $0,136   ; "Thank you.{W1}"
+                setActscriptWait 136,eas_Init
+                setFacing 136,UP
+                setCameraEntity 136
                 csWait 60
-                entityActionsWait $0
+                entityActionsWait ALLY_BOWIE
                  moveRight 1
                 endActions
-                setFacing $0,DOWN
+                setFacing ALLY_BOWIE,DOWN
                 csWait 60
                 cameraSpeed $8
-                customActscriptWait $88
+                customActscriptWait 136
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $88
+                entityActionsWait 136
                  moveUp 1
                 endActions
-                setFacing $7,UP
-                setFacing $0,LEFT
-                entityActionsWait $88
+                setFacing ALLY_PETER,UP
+                setFacing ALLY_BOWIE,LEFT
+                entityActionsWait 136
                  moveUp 2
                 endActions
-                setFacing $0,UP
-                entityActionsWait $88
+                setFacing ALLY_BOWIE,UP
+                entityActionsWait 136
                  moveUp 2
                 endActions
                 csWait 40
-                setFacing $88,DOWN
-                nextSingleText $0,$88   ; "I won't forget this.{W1}"
-                entityActionsWait $88
+                setFacing 136,DOWN
+                nextSingleText $0,136   ; "I won't forget this.{W1}"
+                entityActionsWait 136
                  moveUp 3
                 endActions
                 flashScreenWhite $1E
@@ -160,157 +160,157 @@ cs_4DF00:       setActscriptWait $80,eas_46172
                 setQuake 3
                 csWait 50
                 csWait 5
-                setActscript $88,eas_461B6
+                setActscript 136,eas_461B6
                 csWait 80
                 setQuake 0
                 csWait 40
-                setFacing $88,DOWN
+                setFacing 136,DOWN
                 tintMap
-                nextSingleText $C0,$89  ; "Where are you going, Geshp?{W1}"
-                customActscriptWait $88
+                nextSingleText $C0,137  ; "Where are you going, Geshp?{W1}"
+                customActscriptWait 136
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait $88,eas_Jump
-                setActscriptWait $88,eas_Jump
+                setActscriptWait 136,eas_Jump
+                setActscriptWait 136,eas_Jump
                 csWait 30
-                setActscriptWait $88,eas_46172
-                entityActionsWait $88
+                setActscriptWait 136,eas_46172
+                entityActionsWait 136
                  moveUp 1
                 endActions
-                nextSingleText $C0,$89  ; "Do you remember your vow?{W1}"
-                headshake $88
-                nextText $C0,$89        ; "You failed to get the jewel{N}from {LEADER}.{W2}"
-                nextSingleText $C0,$89  ; "Now, you will pay with your{N}life.{W1}"
-                nextSingleText $0,$88   ; "No, please...NO!{W1}"
-                setPriority $88,$0
-                setPos $80,8,13,RIGHT
+                nextSingleText $C0,137  ; "Do you remember your vow?{W1}"
+                headshake 136
+                nextText $C0,137        ; "You failed to get the jewel{N}from {LEADER}.{W2}"
+                nextSingleText $C0,137  ; "Now, you will pay with your{N}life.{W1}"
+                nextSingleText $0,136   ; "No, please...NO!{W1}"
+                setPriority 136,$0
+                setPos 128,8,13,RIGHT
                 csWait 10
-                setPos $81,10,14,LEFT
+                setPos 129,10,14,LEFT
                 csWait 5
-                setActscript $88,eas_461B6
+                setActscript 136,eas_461B6
                 csWait 10
-                setPos $82,11,16,RIGHT
+                setPos 130,11,16,RIGHT
                 csWait 10
-                setPos $83,10,18,LEFT
+                setPos 131,10,18,LEFT
                 csWait 10
-                setPos $84,8,19,RIGHT
+                setPos 132,8,19,RIGHT
                 csWait 10
-                setPos $85,6,18,LEFT
+                setPos 133,6,18,LEFT
                 csWait 10
-                setPos $86,5,16,RIGHT
+                setPos 134,5,16,RIGHT
                 csWait 10
-                setPos $87,6,14,LEFT
+                setPos 135,6,14,LEFT
                 csWait 40
                 flashScreenWhite $14
                 tintMap
-                setFacing $88,DOWN
+                setFacing 136,DOWN
                 setQuake 3
-                customActscriptWait $80
+                customActscriptWait 128
                  ac_setSpeed 80,80      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $81
+                customActscriptWait 129
                  ac_setSpeed 80,80      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $82
+                customActscriptWait 130
                  ac_setSpeed 80,80      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $83
+                customActscriptWait 131
                  ac_setSpeed 80,80      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $84
+                customActscriptWait 132
                  ac_setSpeed 80,80      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $85
+                customActscriptWait 133
                  ac_setSpeed 80,80      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $86
+                customActscriptWait 134
                  ac_setSpeed 80,80      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $87
+                customActscriptWait 135
                  ac_setSpeed 80,80      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 playSound SFX_BOLT_SPELL
-                entityActionsWait $80
+                entityActionsWait 128
                  moveDown 3
                 endActions
-                setFacing $88,LEFT
-                setSprite $88,MAPSPRITE_OBJECT3
-                setActscript $88,eas_AnimSpeedx2
-                setActscript $80,eas_JumpLeft
+                setFacing 136,LEFT
+                setSprite 136,MAPSPRITE_OBJECT3
+                setActscript 136,eas_AnimSpeedx2
+                setActscript 128,eas_JumpLeft
                 playSound SFX_BOLT_SPELL
-                entityActionsWait $81
+                entityActionsWait 129
                  moveDownLeft 2
                 endActions
-                setActscript $81,eas_JumpRight
-                hide $80
+                setActscript 129,eas_JumpRight
+                hide 128
                 playSound SFX_BOLT_SPELL
-                entityActionsWait $82
+                entityActionsWait 130
                  moveLeft 3
                 endActions
-                setActscript $82,eas_JumpLeft
-                hide $81
+                setActscript 130,eas_JumpLeft
+                hide 129
                 playSound SFX_BOLT_SPELL
-                entityActionsWait $83
+                entityActionsWait 131
                  moveUpLeft 2
                 endActions
-                setActscript $83,eas_JumpRight
-                hide $82
+                setActscript 131,eas_JumpRight
+                hide 130
                 playSound SFX_BOLT_SPELL
-                entityActionsWait $84
+                entityActionsWait 132
                  moveUp 3
                 endActions
-                setActscript $84,eas_JumpLeft
-                hide $83
+                setActscript 132,eas_JumpLeft
+                hide 131
                 playSound SFX_BOLT_SPELL
-                entityActionsWait $85
+                entityActionsWait 133
                  moveUpRight 2
                 endActions
-                setActscript $85,eas_JumpRight
-                hide $84
+                setActscript 133,eas_JumpRight
+                hide 132
                 playSound SFX_BOLT_SPELL
-                entityActionsWait $86
+                entityActionsWait 134
                  moveRight 3
                 endActions
-                setActscript $86,eas_JumpLeft
-                hide $85
+                setActscript 134,eas_JumpLeft
+                hide 133
                 playSound SFX_BOLT_SPELL
-                entityActionsWait $87
+                entityActionsWait 135
                  moveDownRight 2
                 endActions
-                setActscript $87,eas_JumpRight
-                hide $86
+                setActscript 135,eas_JumpRight
+                hide 134
                 csWait 8
-                hide $87
+                hide 135
                 setQuake 0
-                setCameraEntity $FFFF
+                setCameraEntity 65535
                 csWait 40
-                setSprite $88,MAPSPRITE_GESHP
-                setActscriptWait $88,eas_Die
+                setSprite 136,MAPSPRITE_GESHP
+                setActscriptWait 136,eas_Die
                 flickerOnce
                 cameraSpeed $30
                 setCamDest 3,20
-                entityActionsWait $1F
+                entityActionsWait FOLLOWER_B
                  moveUp 3
                 endActions
-                nextSingleText $0,$1F   ; "Zeon is such an unfeeling{N}devil...(shiver).{W1}"
-                entityActionsWait $7
+                nextSingleText $0,FOLLOWER_B ; "Zeon is such an unfeeling{N}devil...(shiver).{W1}"
+                entityActionsWait ALLY_PETER
                  moveRight 1
                  moveUp 2
                 endActions
-                nextSingleText $0,$7    ; "He will do the same to us{N}if we lose to him.{W1}"
-                nextSingleText $0,$1F   ; "We must not be defeated.{W1}"
-                followEntity $1E,$0,$2
-                followEntity $7,$1E,$1
-                followEntity $1F,$1E,$3
+                nextSingleText $0,ALLY_PETER ; "He will do the same to us{N}if we lose to him.{W1}"
+                nextSingleText $0,FOLLOWER_B ; "We must not be defeated.{W1}"
+                followEntity FOLLOWER_A,ALLY_BOWIE,2
+                followEntity ALLY_PETER,FOLLOWER_A,1
+                followEntity FOLLOWER_B,FOLLOWER_A,3
                 csc_end
 ce_4E372:       mainEntity 8,23,DOWN
                 entity 5,25,RIGHT,ALLY_PETER,eas_Init

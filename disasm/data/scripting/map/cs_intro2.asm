@@ -4,12 +4,12 @@
 IntroCutscene2: textCursor $106A
                 mapLoad 65,7,2
                 loadMapEntities ce_48510
-                setActscriptWait $0,eas_Init
-                cloneEntity $84,$83
+                setActscriptWait ALLY_BOWIE,eas_Init
+                cloneEntity 132,131
                 resetMap
                 fadeInB
                 reloadMap 7,2
-                nextSingleText $80,$80  ; "Quite a storm.{D2}"
+                nextSingleText $80,128  ; "Quite a storm.{D2}"
                 loadMapFadeIn 65,7,2
                 fadeInB
                 csWait 40
@@ -17,81 +17,81 @@ IntroCutscene2: textCursor $106A
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
                 csWait 60
-                setFacing $81,RIGHT
-                nextSingleText $0,$81   ; "Excuse me?{D2}"
-                nextSingleText $80,$80  ; "It's a stormy night.{D2}"
-                setFacing $81,UP
+                setFacing 129,RIGHT
+                nextSingleText $0,129   ; "Excuse me?{D2}"
+                nextSingleText $80,128  ; "It's a stormy night.{D2}"
+                setFacing 129,UP
                 csWait 30
                 playSound SFX_DEMON_BREATH
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
                 csWait 40
-                setFacing $81,RIGHT
-                nod $81
+                setFacing 129,RIGHT
+                nod 129
                 csWait 20
-                nextSingleText $0,$81   ; "It's unusual for this time{N}of year.{D2}"
+                nextSingleText $0,129   ; "It's unusual for this time{N}of year.{D2}"
                 csWait 30
-                nextSingleText $0,$82   ; "Excuse me, your majesty.{D2}"
-                setFacing $81,DOWN
-                entityActionsWait $82
+                nextSingleText $0,130   ; "Excuse me, your majesty.{D2}"
+                setFacing 129,DOWN
+                entityActionsWait 130
                  moveUp 3
                 endActions
                 setCamDest 7,4
-                nextSingleText $0,$81   ; "Is it time to go to the{N}Ancient Tower?{D2}"
-                nod $82
-                nextSingleText $0,$82   ; "Yes, sire.{D2}"
-                entityActionsWait $81
+                nextSingleText $0,129   ; "Is it time to go to the{N}Ancient Tower?{D2}"
+                nod 130
+                nextSingleText $0,130   ; "Yes, sire.{D2}"
+                entityActionsWait 129
                  moveDown 1
                  moveRight 2
                  faceDown 10
                 endActions
-                nextSingleText $0,$81   ; "It's stormy outside.{N}Be careful.{D2}"
-                nod $82
+                nextSingleText $0,129   ; "It's stormy outside.{N}Be careful.{D2}"
+                nod 130
                 csWait 30
-                setCameraEntity $82
-                entityActionsWait $82
+                setCameraEntity 130
+                entityActionsWait 130
                  moveDown 3
                  moveLeft 5
                  moveUpLeft 3
                  moveLeft 1
                  moveUp 1
                 endActions
-                hide $82
-                setCameraEntity $FFFF
+                hide 130
+                setCameraEntity 65535
                 csWait 30
                 setCamDest 7,2
                 csWait 40
-                shiver $80
-                nextSingleText $80,$80  ; "Hmmm....{D2}"
-                setFacing $81,UP
-                nextSingleText $0,$81   ; "Excuse me, sire?{D2}"
-                nextSingleText $80,$80  ; "I have a bad feeling...{N}Oh, well.{D2}"
+                shiver 128
+                nextSingleText $80,128  ; "Hmmm....{D2}"
+                setFacing 129,UP
+                nextSingleText $0,129   ; "Excuse me, sire?{D2}"
+                nextSingleText $80,128  ; "I have a bad feeling...{N}Oh, well.{D2}"
                 csWait 40
-                setFacing $81,LEFT
+                setFacing 129,LEFT
                 csWait 40
-                customActscriptWait $81
+                customActscriptWait 129
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $81
+                entityActionsWait 129
                  moveLeft 2
                  faceDown 1
                 endActions
                 playSound SFX_SPELL_CAST
-                nextSingleText $0,$81   ; "Oh, a gust of wind!{D2}"
+                nextSingleText $0,129   ; "Oh, a gust of wind!{D2}"
                 csWait 20
-                shiver $80
-                setFacing $80,DOWN
-                nextSingleText $80,$80  ; "Make sure all the doors and{N}windows are shut!{D2}"
+                shiver 128
+                setFacing 128,DOWN
+                nextSingleText $80,128  ; "Make sure all the doors and{N}windows are shut!{D2}"
                 playSound SFX_SPELL_CAST
                 csWait 30
-                animEntityFX $83,6
+                animEntityFX 131,6
                 tintMap
                 csWait 5
-                setActscript $81,eas_461B6
+                setActscript 129,eas_461B6
                 csWait 30
                 csWait 5
-                setActscript $80,eas_461B6
+                setActscript 128,eas_461B6
                 playSound SFX_DEMON_BREATH
                 csWait 30
                 executeSubroutine ApplyStormEffect
@@ -101,10 +101,10 @@ IntroCutscene2: textCursor $106A
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
                 csWait 5
-                setActscript $81,eas_461B6
+                setActscript 129,eas_461B6
                 csWait 30
                 csWait 5
-                setActscript $80,eas_461B6
+                setActscript 128,eas_461B6
                 csWait 70
                 fadeOutToBlackHalf
                 csWait 30

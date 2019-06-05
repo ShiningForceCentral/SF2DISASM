@@ -28,7 +28,7 @@ Map67_DescFunc0:
                 clsTxt
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #7,d0
-                jsr     GetEntityPortraitAndSpeechSfx
+                jsr     GetEntityPortaitAndSpeechSound
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 chkFlg  $D              ; Elric joined

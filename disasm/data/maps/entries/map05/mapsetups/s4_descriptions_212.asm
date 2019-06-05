@@ -54,7 +54,7 @@ Map5_212_DescFunc1:
                 script  cs_6060E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$1C,d0
-                jsr     GetEntityPortraitAndSpeechSfx
+                jsr     GetEntityPortaitAndSpeechSound
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
@@ -67,7 +67,7 @@ byte_605C4:
                 bne.s   loc_605EE
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$1C,d0
-                jsr     GetEntityPortraitAndSpeechSfx
+                jsr     GetEntityPortaitAndSpeechSound
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait

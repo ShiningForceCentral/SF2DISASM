@@ -19,7 +19,7 @@ pt_eas_WorldmapFollowers:
 InitializeFollowerActscripts:
                 
                 movem.l a6,-(sp)
-                lea     Followers(pc), a4
+                lea     FollowersTable(pc), a4
                 lea     pt_eas_Followers(pc), a6
                 chkFlg  $41             ; Caravan is unlocked
                 beq.s   loc_443D2

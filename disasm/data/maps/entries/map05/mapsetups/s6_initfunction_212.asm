@@ -27,7 +27,7 @@ byte_60636:
                 bra.w   byte_6065E
 cs_60656:
                 
-                setPos $1C,27,55,UP
+                setPos ALLY_LEMON,27,55,UP
                 csc_end
 byte_6065E:
                 
@@ -62,7 +62,7 @@ byte_6069C:
                 bra.w   byte_606B4      
 cs_606AC:
                 
-                setPos $80,26,50,DOWN
+                setPos 128,26,50,DOWN
                 csc_end
 byte_606B4:
                 
@@ -82,7 +82,7 @@ byte_606BE:
                 bra.w   return_606E8
 cs_606E0:
                 
-                setPos $1C,11,10,UP
+                setPos ALLY_LEMON,11,10,UP
                 csc_end
 return_606E8:
                 
@@ -90,9 +90,9 @@ return_606E8:
 
 	; End of function ms_map5_flag212_InitFunction
 
-cs_606EA:       setPos $0,11,10,UP
-                setPos $7,11,10,UP
-                setPos $1F,11,10,UP
+cs_606EA:       setPos ALLY_BOWIE,11,10,UP
+                setPos ALLY_PETER,11,10,UP
+                setPos FOLLOWER_B,11,10,UP
                 csWait 1
                 reloadMap 5,4
                 csWait 10

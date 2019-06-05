@@ -17,7 +17,7 @@ InitMapEntities:
 sub_440D4:
                 
                 movem.l d0-a5,-(sp)
-                lea     GetEntityPortraitAndSpeechSfx(pc), a0
+                lea     GetEntityPortaitAndSpeechSound(pc), a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
 

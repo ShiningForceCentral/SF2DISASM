@@ -105,6 +105,24 @@ wordAlignIfExpandedRom:	macro
 	endc
 	endm
 	
+bsrIfVanillaRom:	macro
+	if (EXPANDED_ROM=0)
+	bsr.\0 \1
+	endc
+	endm
+	
+equIfVanillaRom:	macro
+	if (EXPANDED_ROM=0)
+\1: equ \2
+	endc
+	endm
+	
+equIfExpandedRom:	macro
+	if (EXPANDED_ROM=1)
+\1: equ \2
+	endc
+	endm
+	
 includeIfVanillaRom:	macro
 	if (EXPANDED_ROM=0)
 	include \1
@@ -116,7 +134,7 @@ incbinIfVanillaRom:	macro
 	incbin \1
 	endc
 	endm
-
+	
 includeIfExpandedRom:	macro
 	if (EXPANDED_ROM=1)
 	include \1
@@ -169,21 +187,21 @@ script:	macro
 	trap #MAPSCRIPT
 	endm
 	
+    
+defineBitfield:	macro
+v:	= 0
+n:	substr ,,"\2"
+i:	= instr("\n","|")
+	while (i>0)
+p:	substr ,i-1,"\n"
+v:	= v|\1\\p
+n:	substr i+1,,"\n"
+i:	= instr("\n","|")
+	endw
+v:	= v|\1\\n
+	dc.\0 v
+	endm
 	
-defineBitfield:	macro Prefix,Str
-val:	set		0
-next:	substr	,,"\Str"
-in:		set		instr("\next","|")
-		while	(in>0)
-prev:	substr	,in-1,"\next"
-val:	set		val|\Prefix\\prev
-next:	substr	in+1,,"\next"
-in:		set		instr("\next","|")
-		endw
-val:	set		val|\Prefix\\next
-		dc.\0	val
-		endm
-		
 tableEnd:	macro
 	if strcmp('\0','b')
 	dc.b CODE_TERMINATOR_BYTE
@@ -283,6 +301,12 @@ spellName:	macro
 allyName:	macro
 	dc.b strlen(\1)
 	dc.b \1
+	endm
+	
+allyNameIfExpandedRom:	macro
+	if (EXPANDED_ROM=1)
+	allyName \1
+	endc
 	endm
 	
 enemyName:	macro
@@ -386,6 +410,12 @@ className:	macro
 allyBattleSprite:	macro
 	dc.b ALLYBATTLESPRITE_\1,\2
 	endm
+    
+allyBattleSpriteIfExpandedRom:	macro
+	if (EXPANDED_ROM=1)
+	allyBattleSprite \1,\2
+	endc
+	endm
 	
 enemyBattleSprite:	macro
 	dc.b ENEMYBATTLESPRITE_\1,\2
@@ -447,8 +477,36 @@ usableOutsideBattleItem:	macro
 	dc.b ITEM_\1
 	endm
 	
+follower:	macro
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	endm
+	
 mapSprite:	macro
+	if (type(MAPSPRITE_\1)&32>0)
 	dc.b MAPSPRITE_\1
+	else
+	dc.b \1
+	endc
+	endm
+	
+portrait:	macro
+	if (type(PORTRAIT_\1)&32>0)
+	dc.b PORTRAIT_\1
+	else
+	dc.b \1
+	endc
+	endm
+	
+speechSound:	macro
+	if (type(SFX_\1)&32>0)
+	dc.b SFX_\1
+	else
+	dc.b \1
+	endc
+	dc.b 0
 	endm
 	
 	
@@ -552,6 +610,12 @@ randomBattles:	macro
 	
 forClass:	macro
 	dc.b CLASS_\1
+	endm
+    
+forClassIfExpandedRom:	macro
+	if (EXPANDED_ROM=1)
+	forClass \1
+	endc
 	endm
 	
 hpGrowth:	macro Start,Proj,Curve

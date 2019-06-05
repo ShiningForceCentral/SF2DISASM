@@ -51,245 +51,245 @@ loc_5EB3C:
 	; End of function csub_5EB34
 
 cs_5EB44:       textCursor $E73
-                setCameraEntity $FFFF
+                setCameraEntity 65535
                 reloadMap 8,2
                 loadMapEntities ce_5F19E
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 csWait 60
                 playSound MUSIC_WITCH
                 csWait 30
-                setActscript $80,eas_Transparent
+                setActscript 128,eas_Transparent
                 fadeInFromBlackHalf
-                nextSingleText $0,$80   ; "{LEADER} is almost here{N}already?{W1}"
-                nextSingleText $80,$81  ; "Yes, sir.  With an ancient{N}aircraft.  He'll be passing{N}over the cape soon.{W1}"
-                nextSingleText $0,$80   ; "Good.  I'll do anything to{N}get my powers back.{W1}"
-                nextText $80,$81        ; "They're stronger than we{N}thought.{W2}"
-                nextSingleText $80,$81  ; "But, I have an idea.  Please{N}let me try it.{W1}"
-                nextSingleText $0,$80   ; "Well?{W1}"
-                nextText $80,$81        ; "I think it's better for us{N}to shoot them down over the{N}"
-                nextSingleText $80,$81  ; "cape.{W1}"
-                nextSingleText $0,$80   ; "I agree.{W1}"
-                nextText $80,$81        ; "Thank you.  Then... may I{W2}"
-                nextSingleText $80,$81  ; "borrow Odd Eye?{W1}"
-                nextText $0,$80         ; "He's still damaged from his{N}battle against Volcanon.{W2}"
-                nextSingleText $0,$80   ; "Take Red Baron instead.{W1}"
-                shiver $81
-                shiver $81
-                nextSingleText $80,$81  ; "Thank you, sir.{W1}"
-                nextSingleText $0,$80   ; "They'll be passing over the{N}cape soon.  Go!{W1}"
-                nextSingleText $80,$81  ; "Yes, sir!{W1}"
-                animEntityFX $81,6
-                nextSingleText $0,$82   ; "That Geshp!  He wants{N}everything.{W1}"
-                setPos $82,9,9,DOWN
-                animEntityFX $82,7
-                entityActionsWait $82
+                nextSingleText $0,128   ; "{LEADER} is almost here{N}already?{W1}"
+                nextSingleText $80,129  ; "Yes, sir.  With an ancient{N}aircraft.  He'll be passing{N}over the cape soon.{W1}"
+                nextSingleText $0,128   ; "Good.  I'll do anything to{N}get my powers back.{W1}"
+                nextText $80,129        ; "They're stronger than we{N}thought.{W2}"
+                nextSingleText $80,129  ; "But, I have an idea.  Please{N}let me try it.{W1}"
+                nextSingleText $0,128   ; "Well?{W1}"
+                nextText $80,129        ; "I think it's better for us{N}to shoot them down over the{N}"
+                nextSingleText $80,129  ; "cape.{W1}"
+                nextSingleText $0,128   ; "I agree.{W1}"
+                nextText $80,129        ; "Thank you.  Then... may I{W2}"
+                nextSingleText $80,129  ; "borrow Odd Eye?{W1}"
+                nextText $0,128         ; "He's still damaged from his{N}battle against Volcanon.{W2}"
+                nextSingleText $0,128   ; "Take Red Baron instead.{W1}"
+                shiver 129
+                shiver 129
+                nextSingleText $80,129  ; "Thank you, sir.{W1}"
+                nextSingleText $0,128   ; "They'll be passing over the{N}cape soon.  Go!{W1}"
+                nextSingleText $80,129  ; "Yes, sir!{W1}"
+                animEntityFX 129,6
+                nextSingleText $0,130   ; "That Geshp!  He wants{N}everything.{W1}"
+                setPos 130,9,9,DOWN
+                animEntityFX 130,7
+                entityActionsWait 130
                  moveRight 4
                  moveUp 1
                 endActions
-                nextSingleText $0,$80   ; "You noticed that too?{W1}"
-                nod $82
-                nextText $0,$82         ; "Yes, King Zeon.{W2}"
-                nextSingleText $0,$82   ; "I'm afraid Geshp can't stop{N}{LEADER}'s advance.{W1}"
-                nextSingleText $0,$80   ; "You really think so?{W1}"
-                nextText $0,$82         ; "I was just thinking of{N}{LEADER}'s hidden powers.{W2}"
-                nextSingleText $0,$82   ; "We must never underestimate{N}him.{W1}"
-                nextSingleText $0,$80   ; "Anyway, it will be a{N}fantastic show!  Ha, ha!{W1}"
+                nextSingleText $0,128   ; "You noticed that too?{W1}"
+                nod 130
+                nextText $0,130         ; "Yes, King Zeon.{W2}"
+                nextSingleText $0,130   ; "I'm afraid Geshp can't stop{N}{LEADER}'s advance.{W1}"
+                nextSingleText $0,128   ; "You really think so?{W1}"
+                nextText $0,130         ; "I was just thinking of{N}{LEADER}'s hidden powers.{W2}"
+                nextSingleText $0,130   ; "We must never underestimate{N}him.{W1}"
+                nextSingleText $0,128   ; "Anyway, it will be a{N}fantastic show!  Ha, ha!{W1}"
                 csc_end
 cs_5EBFC:       loadMapFadeIn 53,8,14
                 textCursor $E8B
                 loadMapEntities ce_5F1DE
-                setActscriptWait $0,eas_Init
-                stopEntity $82
-                stopEntity $83
-                stopEntity $84
-                stopEntity $85
+                setActscriptWait ALLY_BOWIE,eas_Init
+                stopEntity 130
+                stopEntity 131
+                stopEntity 132
+                stopEntity 133
                 playSound MUSIC_BATTLE_THEME_1
                 fadeInB
-                setActscriptWait $82,eas_Init
-                setActscriptWait $86,eas_Init
-                setActscriptWait $87,eas_Init
-                setActscriptWait $88,eas_Init
-                customActscriptWait $82
+                setActscriptWait 130,eas_Init
+                setActscriptWait 134,eas_Init
+                setActscriptWait 135,eas_Init
+                setActscriptWait 136,eas_Init
+                customActscriptWait 130
                  ac_setSpeed 4,4        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $86
+                customActscriptWait 134
                  ac_setSpeed 4,4        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $87
+                customActscriptWait 135
                  ac_setSpeed 4,4        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $88
+                customActscriptWait 136
                  ac_setSpeed 4,4        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $82
+                entityActions 130
                  moveRight 3
                 endActions
-                entityActions $86
+                entityActions 134
                  moveRight 3
                 endActions
-                entityActions $87
+                entityActions 135
                  moveRight 3
                 endActions
-                entityActions $88
+                entityActions 136
                  moveRight 3
                 endActions
-                setFacing $80,LEFT
+                setFacing 128,LEFT
                 csWait 30
-                setFacing $80,RIGHT
+                setFacing 128,RIGHT
                 csWait 30
-                shiver $80
-                nextSingleText $0,$80   ; "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
+                shiver 128
+                nextSingleText $0,128   ; "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
                 setCamDest 10,14
-                setPos $81,15,16,DOWN
-                animEntityFX $81,7
-                nextSingleText $80,$81  ; "How are the Prism Flowers?{W1}"
-                nextSingleText $0,$80   ; "They're ready!{W1}"
-                nextSingleText $80,$81  ; "Excellent!{W1}"
-                nod $81
-                setCameraEntity $81
-                entityActionsWait $81
+                setPos 129,15,16,DOWN
+                animEntityFX 129,7
+                nextSingleText $80,129  ; "How are the Prism Flowers?{W1}"
+                nextSingleText $0,128   ; "They're ready!{W1}"
+                nextSingleText $80,129  ; "Excellent!{W1}"
+                nod 129
+                setCameraEntity 129
+                entityActionsWait 129
                  moveRight 2
                  moveUp 2
                 endActions
-                setFacing $81,RIGHT
-                nextText $80,$81        ; "Now, c'mon Granseal losers!{W2}"
-                nextSingleText $80,$81  ; "The Prism Flowers are waiting{N}for you!  Hee, heee!{W1}"
-                nod $81
-                nod $81
+                setFacing 129,RIGHT
+                nextText $80,129        ; "Now, c'mon Granseal losers!{W2}"
+                nextSingleText $80,129  ; "The Prism Flowers are waiting{N}for you!  Hee, heee!{W1}"
+                nod 129
+                nod 129
                 csc_end
 cs_5ED06:       textCursor $E91
                 loadMapFadeIn 73,0,0
                 loadMapEntities ce_5F1BE
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 executeSubroutine sub_5F31E
                 playSound MUSIC_MITULA_SHRINE
                 setBlocks 0,10,22,10,42,10
                 fadeInB
                 executeSubroutine sub_5FD92
-                nextSingleText $80,$1A  ; "There's Grans Island!{W1}"
-                nextSingleText $80,$7   ; "Alright!{W1}"
-                nextSingleText $0,$1F   ; "We've finally come home.{W1}"
+                nextSingleText $80,ALLY_ZYNK ; "There's Grans Island!{W1}"
+                nextSingleText $80,ALLY_PETER ; "Alright!{W1}"
+                nextSingleText $0,FOLLOWER_B ; "We've finally come home.{W1}"
                 loadMapFadeIn 53,10,13
                 loadMapEntities ce_5F23E
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 playSound MUSIC_BATTLE_THEME_1
-                stopEntity $80
-                stopEntity $82
-                stopEntity $83
-                stopEntity $84
+                stopEntity 128
+                stopEntity 130
+                stopEntity 131
+                stopEntity 132
                 fadeInB
-                nextSingleText $80,$81  ; "I see the Nazca Ship!{N}Everybody, get ready!{W1}"
+                nextSingleText $80,129  ; "I see the Nazca Ship!{N}Everybody, get ready!{W1}"
                 loadMapFadeIn 73,0,0
                 loadMapEntities ce_5F1BE
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 executeSubroutine sub_5F31E
                 playSound MUSIC_MITULA_SHRINE
                 setBlocks 0,10,22,10,42,10
                 fadeInB
                 executeSubroutine sub_5FD92
-                nextSingleText $0,$1F   ; "What's that?  I saw a flash{N}of light over there.{W1}"
-                nextSingleText $80,$7   ; "I didn't see it.  You must be{N}seeing things because you're{N}so old!  Ha, ha!{W1}"
-                nextText $0,$1F         ; "(Grumble)....{W2}"
-                nextSingleText $0,$1F   ; "Someday, {NAME;7}....{W1}"
+                nextSingleText $0,FOLLOWER_B ; "What's that?  I saw a flash{N}of light over there.{W1}"
+                nextSingleText $80,ALLY_PETER ; "I didn't see it.  You must be{N}seeing things because you're{N}so old!  Ha, ha!{W1}"
+                nextText $0,FOLLOWER_B  ; "(Grumble)....{W2}"
+                nextSingleText $0,FOLLOWER_B ; "Someday, {NAME;7}....{W1}"
                 csc_end
 cs_5EDB8:       textCursor $E99
                 loadMapFadeIn 53,10,13
                 loadMapEntities ce_5F28E
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 playSound MUSIC_ENEMY_ATTACK
-                setActscript $85,eas_5EF46
-                setActscript $86,eas_5EF46
-                setActscript $87,eas_5EF46
-                setActscript $88,eas_5EF46
-                setActscript $89,eas_5EF46
-                setActscript $8A,eas_5EF46
-                setActscript $8B,eas_5EF46
-                setActscript $8C,eas_5EF46
-                stopEntity $8D
-                stopEntity $8E
-                stopEntity $8F
-                stopEntity $90
+                setActscript 133,eas_5EF46
+                setActscript 134,eas_5EF46
+                setActscript 135,eas_5EF46
+                setActscript 136,eas_5EF46
+                setActscript 137,eas_5EF46
+                setActscript 138,eas_5EF46
+                setActscript 139,eas_5EF46
+                setActscript 140,eas_5EF46
+                stopEntity 141
+                stopEntity 142
+                stopEntity 143
+                stopEntity 144
                 fadeInB
-                setFacing $81,LEFT
-                nextSingleText $80,$81  ; "NOW!{W1}"
-                entityActionsWait $81
+                setFacing 129,LEFT
+                nextSingleText $80,129  ; "NOW!{W1}"
+                entityActionsWait 129
                  moveRight 1
                 endActions
-                nextSingleText $80,$81  ; "Shoot them!  Shoot them!{W1}"
+                nextSingleText $80,129  ; "Shoot them!  Shoot them!{W1}"
                 playSound SFX_BATTLEFIELD_DEATH
-                setPos $85,12,16,LEFT
+                setPos 133,12,16,LEFT
                 csWait 30
-                setFacing $85,UP
+                setFacing 133,UP
                 playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-                setPos $85,13,15,UP
-                entityActions $85
+                setPos 133,13,15,UP
+                entityActions 133
                  moveUpRight 10
                 endActions
                 flashScreenWhite $2
-                setPos $86,13,15,UP
-                entityActions $86
+                setPos 134,13,15,UP
+                entityActions 134
                  moveUpRight 10
                 endActions
                 csWait 20
                 playSound SFX_BATTLEFIELD_DEATH
-                setPos $87,13,17,LEFT
+                setPos 135,13,17,LEFT
                 csWait 30
-                setFacing $87,UP
+                setFacing 135,UP
                 playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-                setPos $87,14,16,UP
-                entityActions $87
+                setPos 135,14,16,UP
+                entityActions 135
                  moveUpRight 10
                 endActions
                 flashScreenWhite $2
-                setPos $88,14,16,UP
-                entityActions $88
+                setPos 136,14,16,UP
+                entityActions 136
                  moveUpRight 10
                 endActions
                 playSound SFX_BATTLEFIELD_DEATH
-                setPos $89,14,19,LEFT
+                setPos 137,14,19,LEFT
                 csWait 30
-                setFacing $89,UP
+                setFacing 137,UP
                 playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-                setPos $89,15,18,UP
-                entityActions $89
+                setPos 137,15,18,UP
+                entityActions 137
                  moveUpRight 10
                 endActions
                 flashScreenWhite $2
-                setPos $8A,15,18,UP
-                entityActions $8A
+                setPos 138,15,18,UP
+                entityActions 138
                  moveUpRight 10
                 endActions
                 csWait 10
                 playSound SFX_BATTLEFIELD_DEATH
-                setPos $8B,15,20,LEFT
+                setPos 139,15,20,LEFT
                 csWait 30
-                setFacing $8B,UP
+                setFacing 139,UP
                 playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-                setPos $8B,16,19,UP
-                entityActions $8B
+                setPos 139,16,19,UP
+                entityActions 139
                  moveUpRight 10
                 endActions
                 flashScreenWhite $2
-                setPos $8C,16,19,UP
-                entityActions $8C
+                setPos 140,16,19,UP
+                entityActions 140
                  moveUpRight 10
                 endActions
                 playSound SFX_BATTLEFIELD_DEATH
-                setPos $8B,12,16,LEFT
+                setPos 139,12,16,LEFT
                 csWait 30
-                setFacing $8B,UP
+                setFacing 139,UP
                 playSound SFX_PRISM_LASER_CUTSCENE_FIRING
-                setPos $8B,13,15,UP
-                entityActions $8B
+                setPos 139,13,15,UP
+                entityActions 139
                  moveUpRight 10
                 endActions
                 flashScreenWhite $2
-                setPos $8C,13,15,UP
-                entityActionsWait $8C
+                setPos 140,13,15,UP
+                entityActionsWait 140
                  moveUpRight 10
                 endActions
                 csc_end
@@ -303,40 +303,40 @@ cs_5EF60:       textCursor $E9B
                 loadMapFadeIn 37,4,6
                 loadEntitiesFromMapSetup 9,11,DOWN
                 executeSubroutine InitNazcaShipForceMembers
-                setPos $1A,8,10,RIGHT
+                setPos ALLY_ZYNK,8,10,RIGHT
                 executeSubroutine sub_5F32E
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
-                setActscriptWait $1A,eas_Init
-                setPos $80,9,12,UP
-                setPos $7,10,12,UP
-                setPos $1A,10,11,LEFT
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                setActscriptWait ALLY_ZYNK,eas_Init
+                setPos 128,9,12,UP
+                setPos ALLY_PETER,10,12,UP
+                setPos ALLY_ZYNK,10,11,LEFT
                 fadeInB
-                shiver $80
-                nextSingleText $0,$80   ; "I did see something!{W1}"
-                nextSingleText $80,$7   ; "Well, I didn't.{W1}"
-                nextSingleText $0,$80   ; "This could be bad.{W1}"
-                nextSingleText $80,$1A  ; "Sir Astral!  {LEADER}!{N}Something is coming straight{N}towards us!{W1}"
-                nextSingleText $0,$80   ; "What is it?{W1}"
+                shiver 128
+                nextSingleText $0,128   ; "I did see something!{W1}"
+                nextSingleText $80,ALLY_PETER ; "Well, I didn't.{W1}"
+                nextSingleText $0,128   ; "This could be bad.{W1}"
+                nextSingleText $80,ALLY_ZYNK ; "Sir Astral!  {LEADER}!{N}Something is coming straight{N}towards us!{W1}"
+                nextSingleText $0,128   ; "What is it?{W1}"
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
                 flashScreenWhite $14
                 setQuake 1
                 csWait 10
                 setQuake 0
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveRight 1
                  jumpRight 1
                  jumpLeft 1
                  jumpRight 1
                  jumpLeft 1
                 endActions
-                setFacing $7,LEFT
-                nextSingleText $80,$7   ; "Oooouu!!  What was that?!{N}Lightning?{W1}"
-                setFacing $0,RIGHT
-                setFacing $1A,DOWN
-                nextText $80,$1A        ; "An attack from the ground.{W2}"
-                nextSingleText $80,$1A  ; "I can't control the ship!{W1}"
+                setFacing ALLY_PETER,LEFT
+                nextSingleText $80,ALLY_PETER ; "Oooouu!!  What was that?!{N}Lightning?{W1}"
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing ALLY_ZYNK,DOWN
+                nextText $80,ALLY_ZYNK  ; "An attack from the ground.{W2}"
+                nextSingleText $80,ALLY_ZYNK ; "I can't control the ship!{W1}"
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
                 flashScreenWhite $14
@@ -349,15 +349,15 @@ cs_5EF60:       textCursor $E9B
                 flashScreenWhite $14
                 setQuake 1
                 csWait 10
-                nextText $80,$1A        ; "We've sustained damage to{N}the engine!{W2}"
-                nextSingleText $80,$1A  ; "We might crash!{W1}"
-                entityActionsWait $80
+                nextText $80,ALLY_ZYNK  ; "We've sustained damage to{N}the engine!{W2}"
+                nextSingleText $80,ALLY_ZYNK ; "We might crash!{W1}"
+                entityActionsWait 128
                  moveRight 1
                 endActions
-                setFacing $80,UP
-                shiver $80
-                nextText $0,$80         ; "Crash?!{W2}"
-                nextSingleText $80,$1A  ; "Geshp's trap!  Darn!{W1}"
+                setFacing 128,UP
+                shiver 128
+                nextText $0,128         ; "Crash?!{W2}"
+                nextSingleText $80,ALLY_ZYNK ; "Geshp's trap!  Darn!{W1}"
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
                 flashScreenWhite $14
@@ -368,18 +368,18 @@ cs_5EF60:       textCursor $E9B
                 flashScreenWhite $14
                 setQuake 1
                 csWait 10
-                setActscriptWait $7,eas_Jump
-                setActscriptWait $7,eas_Jump
-                nextText $80,$7         ; "I don't want to crash!{W2}"
-                nextSingleText $80,$7   ; "Sir Astral, please help us!{W1}"
-                nextSingleText $0,$80   ; "{NAME;26}, can you land on{N}that cape before the ship{N}crashes?{W1}"
-                nextSingleText $80,$1A  ; "I'm not sure,{W2}"
+                setActscriptWait ALLY_PETER,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
+                nextText $80,ALLY_PETER ; "I don't want to crash!{W2}"
+                nextSingleText $80,ALLY_PETER ; "Sir Astral, please help us!{W1}"
+                nextSingleText $0,128   ; "{NAME;26}, can you land on{N}that cape before the ship{N}crashes?{W1}"
+                nextSingleText $80,ALLY_ZYNK ; "I'm not sure,{W2}"
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
                 flashScreenWhite $14
                 setQuake 1
                 csWait 10
-                nextSingleText $80,$1A  ; "but I'll try.{W1}"
+                nextSingleText $80,ALLY_ZYNK ; "but I'll try.{W1}"
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
                 flashScreenWhite $14
@@ -391,14 +391,14 @@ cs_5EF60:       textCursor $E9B
                 setQuake 0
                 mapLoad 75,20,14
                 loadMapEntities ce_5F1CE
-                setActscriptWait $0,eas_Init
-                setCameraEntity $80
-                customActscriptWait $80
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setCameraEntity 128
+                customActscriptWait 128
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 cameraSpeed $10
-                entityActions $80
+                entityActions 128
                  moveLeft 12
                 endActions
                 executeSubroutine csub_5F326
@@ -410,7 +410,7 @@ cs_5EF60:       textCursor $E9B
                 setQuake 1
                 playSound SFX_INTRO_LIGHTNING
                 flashScreenWhite $3C
-                waitIdle $80
+                waitIdle 128
                 setBlocks 56,59,4,5,12,17
                 csWait 120
                 setQuake 0

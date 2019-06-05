@@ -16,7 +16,7 @@ abcs_battle43:  setCamDest 8,2
                 flashScreenWhite $14
                 playSound SFX_BLAST_SPELL
                 flashScreenWhite $14
-                hide $80
+                hide 128
                 playSound SFX_BIG_DOOR_RUMBLE
                 playSound SFX_BLAST_SPELL
                 flashScreenWhite $14

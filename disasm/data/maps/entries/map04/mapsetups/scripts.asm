@@ -11,7 +11,7 @@ eas_51840:       ac_setSpeed 0,0
                  ac_autoFacing $0
                  ac_moveRel 0,2
                  ac_set1Db3 $FFFF
-                 ac_soundCommand $58
+                 ac_soundCommand SFX_FALLING
                  ac_setFacing RIGHT
                  ac_setSize 22
                  ac_updateSprite

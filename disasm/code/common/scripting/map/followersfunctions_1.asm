@@ -11,7 +11,7 @@ InitializeFollowerEntities:
                 cmpi.b  #$25,((CURRENT_MAP-$1000000)).w  ; nazca ship headquarters
                 beq.w   return_44336
                 movem.l a6,-(sp)
-                lea     Followers(pc), a4
+                lea     FollowersTable(pc), a4
                 lea     pt_eas_Followers(pc), a6
                 lea     ((byte_FFAFB0-$1000000)).w,a5
                 move.b  #1,(a5)

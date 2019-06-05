@@ -168,7 +168,7 @@ csc00_displaySingleTextbox:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortraitAndSpeechSfx
+                bsr.w   GetEntityPortaitAndSpeechSound
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_47270
 loc_4726A:
@@ -206,7 +206,7 @@ csc01_displaySingleTextboxWithVars:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortraitAndSpeechSfx
+                bsr.w   GetEntityPortaitAndSpeechSound
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_472BE
 loc_472B8:
@@ -242,7 +242,7 @@ csc02_displayTextbox:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortraitAndSpeechSfx
+                bsr.w   GetEntityPortaitAndSpeechSound
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_47314
 loc_4730E:
@@ -276,7 +276,7 @@ csc03_displayTextboxWithVars:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortraitAndSpeechSfx
+                bsr.w   GetEntityPortaitAndSpeechSound
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_47352
 loc_4734C:

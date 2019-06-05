@@ -244,11 +244,11 @@ Caravan_DescribeItem:
                 beq.w   byte_222E0      
                 chkFlg  $46             ; Astral is a follower
                 bne.s   loc_221BE
-                moveq   #$B,d0
+                moveq   #PORTRAIT_ROHDE,d0
                 bra.s   loc_221C0
 loc_221BE:
                 
-                moveq   #$1F,d0
+                moveq   #PORTRAIT_ASTRAL,d0
 loc_221C0:
                 
                 moveq   #0,d1

@@ -13,7 +13,7 @@ ms_map20_flag21F_InitFunction:
                 bra.w   byte_633BA
 cs_633B2:
                 
-                setPos $80,27,50,LEFT
+                setPos 128,27,50,LEFT
                 csc_end
 byte_633BA:
                 

@@ -34,7 +34,7 @@ Map5_EntityEvent0:
                 clsTxt
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #4,d0
-                jsr     GetEntityPortraitAndSpeechSfx
+                jsr     GetEntityPortaitAndSpeechSound
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
@@ -45,7 +45,7 @@ Map5_EntityEvent0:
 
 	; End of function Map5_EntityEvent0
 
-cs_51B14:       followEntity $4,$0,$2
+cs_51B14:       followEntity ALLY_KAZIN,ALLY_BOWIE,2
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================

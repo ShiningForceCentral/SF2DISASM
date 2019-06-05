@@ -4,109 +4,109 @@
 bbcs_28:        textCursor $A65
                 loadMapFadeIn 47,0,4
                 loadMapEntities ce_4C03C
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setPos $7,0,9,RIGHT
-                setActscriptWait $1F,eas_Init
-                setPos $1F,0,7,RIGHT
-                stopEntity $81
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setPos ALLY_PETER,0,9,RIGHT
+                setActscriptWait FOLLOWER_B,eas_Init
+                setPos FOLLOWER_B,0,7,RIGHT
+                stopEntity 129
                 playSound MUSIC_BATTLE_THEME_3
                 fadeInB
                 cameraSpeed $30
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveRight 3
                 endActions
-                entityActions $1F
+                entityActions FOLLOWER_B
                  moveRight 3
                 endActions
-                entityActions $7
+                entityActions ALLY_PETER
                  moveRight 3
                 endActions
-                entityActionsWait $80
+                entityActionsWait 128
                  moveRight 3
                 endActions
                 csWait 40
-                setActscriptWait $1F,eas_Jump
-                entityActionsWait $1F
+                setActscriptWait FOLLOWER_B,eas_Jump
+                entityActionsWait FOLLOWER_B
                  moveRight 2
                  moveDown 1
                 endActions
-                setFacing $1F,RIGHT
-                nextSingleText $0,$1F   ; "Wow, look at that?{W1}"
+                setFacing FOLLOWER_B,RIGHT
+                nextSingleText $0,FOLLOWER_B ; "Wow, look at that?{W1}"
                 setCamDest 7,11
-                shiver $82
+                shiver 130
                 playSound SFX_MONSTER_SCREAM
                 csWait 30
-                shiver $83
+                shiver 131
                 playSound SFX_MONSTER_SCREAM
                 csWait 40
                 setCamDest 0,6
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveDown 1
                  moveRight 1
                 endActions
-                nextSingleText $0,$7    ; "Those monsters are eating{N}the bridge.{W1}"
-                nextSingleText $0,$81   ; "Help!  Help me!{W1}"
-                setActscript $0,eas_Jump
-                setActscript $1F,eas_Jump
-                setActscriptWait $7,eas_Jump
-                entityActionsWait $0
+                nextSingleText $0,ALLY_PETER ; "Those monsters are eating{N}the bridge.{W1}"
+                nextSingleText $0,129   ; "Help!  Help me!{W1}"
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscript FOLLOWER_B,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
+                entityActionsWait ALLY_BOWIE
                  moveDown 1
                  moveRight 1
                  moveDown 1
                 endActions
                 csWait 5
-                setActscript $0,eas_461B6
+                setActscript ALLY_BOWIE,eas_461B6
                 csWait 5
-                setActscript $7,eas_461E4
+                setActscript ALLY_PETER,eas_461E4
                 csWait 100
-                setActscriptWait $1F,eas_Jump
-                customActscriptWait $1F
+                setActscriptWait FOLLOWER_B,eas_Jump
+                customActscriptWait FOLLOWER_B
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $1F
+                entityActions FOLLOWER_B
                  moveDown 2
                 endActions
                 csWait 10
-                stopEntity $0
-                customActscriptWait $0
+                stopEntity ALLY_BOWIE
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 setQuake 2
                 playSound SFX_HIT_2
-                entityActionsWait $0
+                entityActionsWait ALLY_BOWIE
                  moveDown 1
                 endActions
-                setFacing $0,UP
-                customActscriptWait $0
+                setFacing ALLY_BOWIE,UP
+                customActscriptWait ALLY_BOWIE
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $2          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                waitIdle $1F
-                setFacing $1F,RIGHT
+                waitIdle FOLLOWER_B
+                setFacing FOLLOWER_B,RIGHT
                 setQuake 0
-                nextText $0,$1F         ; "Look!{W2}"
-                nextSingleText $0,$1F   ; "She's stranded on the{N}bridge.{W1}"
-                setFacing $7,RIGHT
-                shiver $0
+                nextText $0,FOLLOWER_B  ; "Look!{W2}"
+                nextSingleText $0,FOLLOWER_B ; "She's stranded on the{N}bridge.{W1}"
+                setFacing ALLY_PETER,RIGHT
+                shiver ALLY_BOWIE
                 setCamDest 7,21
-                nextSingleText $0,$7    ; "Get away from the bridge{N}before it falls into the{N}river!{W1}"
-                nextText $0,$81         ; "I sprained my ankle!{N}Please help me!{W2}"
-                nextSingleText $0,$81   ; "I can't stand up!{W1}"
+                nextSingleText $0,ALLY_PETER ; "Get away from the bridge{N}before it falls into the{N}river!{W1}"
+                nextText $0,129         ; "I sprained my ankle!{N}Please help me!{W2}"
+                nextSingleText $0,129   ; "I can't stand up!{W1}"
                 setCamDest 0,6
-                setFacing $1F,DOWN
-                setActscriptWait $1F,eas_Jump
+                setFacing FOLLOWER_B,DOWN
+                setActscriptWait FOLLOWER_B,eas_Jump
                 csWait 30
-                setActscriptWait $0,eas_Init
-                startEntity $0
-                headshake $0
-                nextSingleText $0,$1F   ; "{LEADER}, defeat all the{N}monsters!  Hurry!{W1}"
-                setActscript $7,eas_Jump
-                nod $0
+                setActscriptWait ALLY_BOWIE,eas_Init
+                startEntity ALLY_BOWIE
+                headshake ALLY_BOWIE
+                nextSingleText $0,FOLLOWER_B ; "{LEADER}, defeat all the{N}monsters!  Hurry!{W1}"
+                setActscript ALLY_PETER,eas_Jump
+                nod ALLY_BOWIE
                 csc_end
 ce_4C03C:       mainEntity 1,8,RIGHT
                 entity 0,9,RIGHT,ALLY_PETER,eas_Init

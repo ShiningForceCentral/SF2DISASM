@@ -22,7 +22,7 @@ byte_5AB98:
                 bra.w   loc_5ABB0
 cs_5ABA8:
                 
-                setPos $80,14,14,UP
+                setPos 128,14,14,UP
                 csc_end
 loc_5ABB0:
                 
@@ -41,7 +41,7 @@ byte_5ABBC:
                 bra.w   loc_5ABD4
 cs_5ABCC:
                 
-                setPos $80,17,10,DOWN
+                setPos 128,17,10,DOWN
                 csc_end
 loc_5ABD4:
                 
@@ -54,7 +54,7 @@ byte_5ABD6:
                 bra.w   byte_5ABEE      
 cs_5ABE6:
                 
-                setPos $80,17,12,DOWN
+                setPos 128,17,12,DOWN
                 csc_end
 byte_5ABEE:
                 
@@ -66,7 +66,7 @@ byte_5ABEE:
                 bra.w   byte_5AC0C      
 cs_5AC04:
                 
-                setPos $E,15,14,DOWN
+                setPos ALLY_ERIC,15,14,DOWN
                 csc_end
 byte_5AC0C:
                 
@@ -76,7 +76,7 @@ byte_5AC0C:
                 bra.w   byte_5AC24      
 cs_5AC1C:
                 
-                setPos $10,16,15,DOWN
+                setPos ALLY_RANDOLF,16,15,DOWN
                 csc_end
 byte_5AC24:
                 
@@ -86,7 +86,7 @@ byte_5AC24:
                 bra.w   byte_5AC3C      
 cs_5AC34:
                 
-                setPos $11,18,15,DOWN
+                setPos ALLY_TYRIN,18,15,DOWN
                 csc_end
 byte_5AC3C:
                 
@@ -96,7 +96,7 @@ byte_5AC3C:
                 bra.w   return_5AC54
 cs_5AC4C:
                 
-                setPos $F,19,14,DOWN
+                setPos ALLY_KARNA,19,14,DOWN
                 csc_end
 return_5AC54:
                 

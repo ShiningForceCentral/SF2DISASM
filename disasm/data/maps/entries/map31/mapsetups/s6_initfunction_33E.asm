@@ -23,5 +23,5 @@ return_5D63A:
 
 	; End of function ms_map31_flag33E_InitFunction
 
-cs_5D63C:       setPos $88,30,6,LEFT
+cs_5D63C:       setPos 136,30,6,LEFT
                 csc_end

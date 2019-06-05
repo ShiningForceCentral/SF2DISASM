@@ -82,40 +82,40 @@ sub_5039E:
 cs_503A6:       textCursor $8BF
                 resetForceBattleStats
                 reloadMap 0,0
-                setCameraEntity $FFFF
+                setCameraEntity 65535
                 loadMapEntities ce_506DE
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 setBlocks 0,10,22,10,42,10
                 playSound MUSIC_TOWN
                 fadeInB
                 textCursor $8A5
-                nextSingleText $0,$80   ; "We were almost swallowed{N}by that chasm.{W1}"
-                nextSingleText $C0,$0   ; "That was close!{W1}"
-                nextSingleText $C0,$1   ; "Sir Astral, where should{N}we go now?{W1}"
-                nextSingleText $0,$80   ; "I think we should to go{N}to the mainland.{N}Don't you agree, Minister?{W1}"
-                nextSingleText $0,$81   ; "We have no choice.{W1}"
-                nextSingleText $C0,$3   ; "Then, let's go to the{N}continent of Parmecia!{W1}"
+                nextSingleText $0,128   ; "We were almost swallowed{N}by that chasm.{W1}"
+                nextSingleText $C0,ALLY_BOWIE ; "That was close!{W1}"
+                nextSingleText $C0,ALLY_SARAH ; "Sir Astral, where should{N}we go now?{W1}"
+                nextSingleText $0,128   ; "I think we should to go{N}to the mainland.{N}Don't you agree, Minister?{W1}"
+                nextSingleText $0,129   ; "We have no choice.{W1}"
+                nextSingleText $C0,ALLY_JAHA ; "Then, let's go to the{N}continent of Parmecia!{W1}"
                 executeSubroutine sub_5036E
-                nextSingleText $FF,$FF  ; "And so the ship heads east{N}for Parmecia.{W1}"
+                nextSingleText $FF,255  ; "And so the ship heads east{N}for Parmecia.{W1}"
                 csWait 120
-                nextSingleText $0,$1    ; "I feel...sick...to my...{N}stomach...ohhh....{W1}"
+                nextSingleText $0,ALLY_SARAH ; "I feel...sick...to my...{N}stomach...ohhh....{W1}"
                 jumpIfFlagClear $6,cs_50426 ; Kiwi joined
-                nextSingleText $C0,$6   ; "{NAME;1}, look!{W1}"
-                nextSingleText $0,$1    ; "Sorry, {NAME;6}...I can't{N}do anything right now....{W1}"
-                nextSingleText $C0,$6   ; "That's not what...{W1}"
-                nextSingleText $0,$1    ; "Sorry...ohhh...!{W1}"
-                nextSingleText $C0,$6   ; "Hooray, land ho!{W1}"
-                nextSingleText $0,$1    ; "What?  Oh, it's true!{N}Sir Astral, we can see the {N}mainland!{W1}"
-                nextSingleText $0,$80   ; "Finally we've arrived.{N}King Granseal, can you see{N}Parmecia?{W1}"
-                nextSingleText $0,$82   ; "Oh, that's good...{W1}"
+                nextSingleText $C0,ALLY_KIWI ; "{NAME;1}, look!{W1}"
+                nextSingleText $0,ALLY_SARAH ; "Sorry, {NAME;6}...I can't{N}do anything right now....{W1}"
+                nextSingleText $C0,ALLY_KIWI ; "That's not what...{W1}"
+                nextSingleText $0,ALLY_SARAH ; "Sorry...ohhh...!{W1}"
+                nextSingleText $C0,ALLY_KIWI ; "Hooray, land ho!{W1}"
+                nextSingleText $0,ALLY_SARAH ; "What?  Oh, it's true!{N}Sir Astral, we can see the {N}mainland!{W1}"
+                nextSingleText $0,128   ; "Finally we've arrived.{N}King Granseal, can you see{N}Parmecia?{W1}"
+                nextSingleText $0,130   ; "Oh, that's good...{W1}"
 cs_50426:       textCursor $8B5
-                nextSingleText $0,$80   ; "Minister, we're approaching{N}Parmecia!{W1}"
-                nextSingleText $0,$81   ; "Land the ship, captain.{W1}"
-                nextSingleText $C0,$83  ; "Where?{W1}"
-                nextSingleText $0,$80   ; "Anywhere.  There!{N}No!  There!{W1}"
-                nextSingleText $80,$83  ; "But, the ship will be{N}destroyed!{W1}"
-                nextSingleText $0,$80   ; "It doesn't matter.  The ship{N}will be used for lumber after{N}we land, anyway.{W1}"
-                nextSingleText $80,$83  ; "Are you serious?  Just{N}don't complain that we{N}don't have a ship later!{W1}"
+                nextSingleText $0,128   ; "Minister, we're approaching{N}Parmecia!{W1}"
+                nextSingleText $0,129   ; "Land the ship, captain.{W1}"
+                nextSingleText $C0,131  ; "Where?{W1}"
+                nextSingleText $0,128   ; "Anywhere.  There!{N}No!  There!{W1}"
+                nextSingleText $80,131  ; "But, the ship will be{N}destroyed!{W1}"
+                nextSingleText $0,128   ; "It doesn't matter.  The ship{N}will be used for lumber after{N}we land, anyway.{W1}"
+                nextSingleText $80,131  ; "Are you serious?  Just{N}don't complain that we{N}don't have a ship later!{W1}"
                 executeSubroutine sub_50380
                 csWait 240
                 csWait 205
@@ -123,146 +123,146 @@ cs_50426:       textCursor $8B5
                 executeSubroutine sub_5038E
                 csWait 48
                 executeSubroutine sub_5039E
-                customActscriptWait $84
+                customActscriptWait 132
                  ac_setSpeed 1,1        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $84
+                entityActions 132
                  moveRight 1
                 endActions
-                nextSingleText $0,$5    ; "Whoa!{W1}"
-                nextSingleText $0,$1    ; "The ship has crashed into{N}the shore!  Oh, no!{W1}"
-                nextSingleText $0,$83   ; "Ouch!  Ouch!{N}That's what I call good{N}seamanship!{W1}"
+                nextSingleText $0,ALLY_SLADE ; "Whoa!{W1}"
+                nextSingleText $0,ALLY_SARAH ; "The ship has crashed into{N}the shore!  Oh, no!{W1}"
+                nextSingleText $0,131   ; "Ouch!  Ouch!{N}That's what I call good{N}seamanship!{W1}"
                 setQuake 0
-                waitIdle $84
+                waitIdle 132
                 csWait 30
-                stopEntity $84
+                stopEntity 132
                 csWait 30
                 textCursor $8BF
-                nextSingleText $FF,$FF  ; "The people of Granseal have{N}arrived at their new home.{W1}"
+                nextSingleText $FF,255  ; "The people of Granseal have{N}arrived at their new home.{W1}"
                 loadMapFadeIn 14,18,25
                 loadMapEntities ce_5072E
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 fadeInB
                 csWait 5
-                setActscript $81,eas_461B6
+                setActscript 129,eas_461B6
                 csWait 5
-                setActscript $82,eas_461B6
+                setActscript 130,eas_461B6
                 csWait 5
-                setActscript $83,eas_461B6
+                setActscript 131,eas_461B6
                 csWait 5
-                setActscript $84,eas_461B6
+                setActscript 132,eas_461B6
                 csWait 5
-                setActscript $85,eas_461B6
+                setActscript 133,eas_461B6
                 csWait 5
-                setActscript $86,eas_461B6
+                setActscript 134,eas_461B6
                 csWait 5
-                setActscript $87,eas_461B6
+                setActscript 135,eas_461B6
                 csWait 5
-                setActscript $88,eas_461B6
+                setActscript 136,eas_461B6
                 csWait 5
-                setActscript $89,eas_461B6
+                setActscript 137,eas_461B6
                 csWait 5
-                setActscript $8A,eas_461B6
+                setActscript 138,eas_461B6
                 csWait 5
-                setActscript $8B,eas_461B6
+                setActscript 139,eas_461B6
                 csWait 5
-                setActscript $8C,eas_461B6
-                setFacing $80,LEFT
+                setActscript 140,eas_461B6
+                setFacing 128,LEFT
                 csWait 60
-                setFacing $80,RIGHT
+                setFacing 128,RIGHT
                 csWait 60
-                setFacing $80,LEFT
+                setFacing 128,LEFT
                 csWait 30
-                nextSingleText $0,$80   ; "Everybody, listen up!{W1}"
+                nextSingleText $0,128   ; "Everybody, listen up!{W1}"
                 csWait 20
-                setFacing $81,RIGHT
-                setFacing $82,RIGHT
-                setFacing $83,RIGHT
-                setFacing $84,RIGHT
-                setFacing $85,RIGHT
-                setFacing $86,UP
-                setFacing $87,UP
-                setFacing $88,LEFT
-                setFacing $89,LEFT
-                setFacing $8A,LEFT
+                setFacing 129,RIGHT
+                setFacing 130,RIGHT
+                setFacing 131,RIGHT
+                setFacing 132,RIGHT
+                setFacing 133,RIGHT
+                setFacing 134,UP
+                setFacing 135,UP
+                setFacing 136,LEFT
+                setFacing 137,LEFT
+                setFacing 138,LEFT
                 csWait 20
-                setFacing $8B,DOWN
-                setFacing $8C,DOWN
-                nextText $0,$80         ; "Let's build a new Granseal{N}here!{W2}"
-                nextText $0,$80         ; "The ship will be a good{N}source of timber!{W2}"
-                nextSingleText $0,$80   ; "Break the ship apart and{N}bring the timber onto the{N}land!{W1}"
-                setActscript $81,eas_Walking
-                setActscript $82,eas_Walking
-                setActscript $83,eas_Walking
-                setActscript $84,eas_Walking
-                setActscript $85,eas_Walking
-                setActscript $86,eas_Walking
-                setActscript $87,eas_Walking
-                setActscript $88,eas_Walking
-                setActscript $89,eas_Walking
-                setActscript $8A,eas_Walking
-                setActscript $8B,eas_Walking
-                setActscript $8C,eas_Walking
+                setFacing 139,DOWN
+                setFacing 140,DOWN
+                nextText $0,128         ; "Let's build a new Granseal{N}here!{W2}"
+                nextText $0,128         ; "The ship will be a good{N}source of timber!{W2}"
+                nextSingleText $0,128   ; "Break the ship apart and{N}bring the timber onto the{N}land!{W1}"
+                setActscript 129,eas_Walking
+                setActscript 130,eas_Walking
+                setActscript 131,eas_Walking
+                setActscript 132,eas_Walking
+                setActscript 133,eas_Walking
+                setActscript 134,eas_Walking
+                setActscript 135,eas_Walking
+                setActscript 136,eas_Walking
+                setActscript 137,eas_Walking
+                setActscript 138,eas_Walking
+                setActscript 139,eas_Walking
+                setActscript 140,eas_Walking
                 csWait 80
                 loadMapFadeIn 14,45,2
                 loadMapEntities ce_5079E
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 setBlocks 51,7,1,1,63,63
                 setBlocks 51,6,1,1,51,7
-                stopEntity $83
-                stopEntity $84
-                stopEntity $85
+                stopEntity 131
+                stopEntity 132
+                stopEntity 133
                 jumpIfFlagSet $6,cs_50624 ; Kiwi joined
-                hide $6
+                hide ALLY_KIWI
 cs_50624:       fadeInB
-                entityActionsWait $3
+                entityActionsWait ALLY_JAHA
                  moveDown 1
                 endActions
-                nextText $0,$3          ; "We're going to break the{N}ship up into pieces and build{N}our new town....{W2}"
-                nextText $0,$3          ; "That means, we can't go back{N}to Grans Island!{W2}"
-                nextSingleText $0,$3    ; "Hey, listen to me!{W1}"
-                setFacing $1,UP
-                nextText $C0,$1         ; "Be quiet!  We know that.{W2}"
-                nextSingleText $0,$1    ; "Help me remove this plank!{W1}"
-                nextSingleText $0,$3    ; "OK, I'm coming.{W1}"
-                entityActionsWait $3
+                nextText $0,ALLY_JAHA   ; "We're going to break the{N}ship up into pieces and build{N}our new town....{W2}"
+                nextText $0,ALLY_JAHA   ; "That means, we can't go back{N}to Grans Island!{W2}"
+                nextSingleText $0,ALLY_JAHA ; "Hey, listen to me!{W1}"
+                setFacing ALLY_SARAH,UP
+                nextText $C0,ALLY_SARAH ; "Be quiet!  We know that.{W2}"
+                nextSingleText $0,ALLY_SARAH ; "Help me remove this plank!{W1}"
+                nextSingleText $0,ALLY_JAHA ; "OK, I'm coming.{W1}"
+                entityActionsWait ALLY_JAHA
                  moveDown 2
                 endActions
-                setFacing $3,DOWN
-                setSprite $3,MAPSPRITE_POSE1
+                setFacing ALLY_JAHA,DOWN
+                setSprite ALLY_JAHA,MAPSPRITE_POSE1
                 csWait 60
-                nextText $0,$3          ; "Ugh...ugghhh...{N}It's stuck!{W2}"
-                nextSingleText $0,$3    ; "Heave!  Heave!{N}Come oooooooooon!{W1}"
-                setActscriptWait $3,eas_46172
-                customActscriptWait $3
+                nextText $0,ALLY_JAHA   ; "Ugh...ugghhh...{N}It's stuck!{W2}"
+                nextSingleText $0,ALLY_JAHA ; "Heave!  Heave!{N}Come oooooooooon!{W1}"
+                setActscriptWait ALLY_JAHA,eas_46172
+                customActscriptWait ALLY_JAHA
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 setBlocks 63,63,1,1,51,7
                 playSound SFX_FALLING
-                entityActionsWait $3
+                entityActionsWait ALLY_JAHA
                  moveUp 4
                 endActions
                 setQuake 5
                 playSound SFX_DOOR_OPEN
                 csWait 10
-                hide $3
+                hide ALLY_JAHA
                 setBlocks 56,0,1,2,51,3
                 setQuake 0
                 csWait 30
-                nextSingleText $0,$5    ; "Oh, what a klutz!{W1}"
-                entityActionsWait $5
+                nextSingleText $0,ALLY_SLADE ; "Oh, what a klutz!{W1}"
+                entityActionsWait ALLY_SLADE
                  moveRight 2
                 endActions
-                setFacing $5,UP
+                setFacing ALLY_SLADE,UP
                 csWait 60
-                nextSingleText $C0,$1   ; "That's OK.  {NAME;3} needed{N}a bath anyway.{W1}"
+                nextSingleText $C0,ALLY_SARAH ; "That's OK.  {NAME;3} needed{N}a bath anyway.{W1}"
                 csWait 20
                 setCamDest 34,4
-                nextSingleText $0,$4    ; "{LEADER}, bring that plank{N}above deck.{W1}"
-                setPriority $0,$0
-                setPriority $84,$FFFF
+                nextSingleText $0,ALLY_KAZIN ; "{LEADER}, bring that plank{N}above deck.{W1}"
+                setPriority ALLY_BOWIE,$0
+                setPriority 132,$FFFF
                 csc_end
 ce_506DE:       mainEntity 63,63,UP
                 entity 63,63,DOWN,MAPSPRITE_ASTRAL,eas_Init
@@ -306,29 +306,29 @@ ce_5079E:       mainEntity 40,8,LEFT
                 dc.w $FFFF
 cs_50806:       textCursor $8F0
                 loadMapEntities ce_5094A
-                setActscriptWait $0,eas_Init
-                setActscriptWait $80,eas_Init
-                setActscriptWait $80,eas_Init
-                setActscriptWait $0,eas_Init
-                followEntity $81,$0,$2
-                followEntity $0,$80,$2
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait 128,eas_Init
+                setActscriptWait 128,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
+                followEntity 129,ALLY_BOWIE,2
+                followEntity ALLY_BOWIE,128,2
                 setBlocks 42,0,11,10,24,48
-                setCameraEntity $80
+                setCameraEntity 128
                 fadeInB
-                entityActionsWait $80
+                entityActionsWait 128
                  moveLeft 4
                  moveUp 1
                  moveLeft 2
                  moveUp 2
                 endActions
-                entityActionsWait $80
+                entityActionsWait 128
                  moveLeft 1
                  moveUp 1
                  moveUp 1
                  moveLeft 8
                  moveDown 2
                 endActions
-                entityActionsWait $80
+                entityActionsWait 128
                  moveLeft 8
                  moveDown 2
                  moveLeft 3
@@ -336,14 +336,14 @@ cs_50806:       textCursor $8F0
                  moveLeft 2
                  moveDown 2
                 endActions
-                entityActionsWait $80
+                entityActionsWait 128
                  moveLeft 5
                 endActions
-                setPosFlash $82,0,0,LEFT
-                nextSingleText $0,$80   ; "Look at that, {LEADER}!{N}They've finished breaking{N}up the ship.{W1}"
-                setFacing $0,DOWN
-                setFacing $80,DOWN
-                setFacing $81,DOWN
+                setPosFlash 130,0,0,LEFT
+                nextSingleText $0,128   ; "Look at that, {LEADER}!{N}They've finished breaking{N}up the ship.{W1}"
+                setFacing ALLY_BOWIE,DOWN
+                setFacing 128,DOWN
+                setFacing 129,DOWN
                 setCamDest 25,47
                 setBlocks 53,0,11,10,24,48
                 csWait 15
@@ -359,20 +359,20 @@ cs_50806:       textCursor $8F0
                 csWait 5
                 setBlocks 53,10,11,10,24,48
                 csWait 30
-                nextText $0,$80         ; "Wow, there's our new town!{W2}"
-                nextSingleText $0,$80   ; "But, our Granseal was much{N}more beautiful.{N}Cheer up!{W1}"
-                setCameraEntity $FFFF
-                setActscriptWait $80,eas_Init
-                setActscriptWait $81,eas_Init
-                setActscriptWait $0,eas_Init
-                setDest $80,29,52
-                setPos $80,0,0,DOWN
-                setDest $81,29,52
-                setPos $81,0,0,DOWN
-                setDest $0,29,52
-                setPos $0,0,0,DOWN
+                nextText $0,128         ; "Wow, there's our new town!{W2}"
+                nextSingleText $0,128   ; "But, our Granseal was much{N}more beautiful.{N}Cheer up!{W1}"
+                setCameraEntity 65535
+                setActscriptWait 128,eas_Init
+                setActscriptWait 129,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setDest 128,29,52
+                setPos 128,0,0,DOWN
+                setDest 129,29,52
+                setPos 129,0,0,DOWN
+                setDest ALLY_BOWIE,29,52
+                setPos ALLY_BOWIE,0,0,DOWN
                 csWait 60
-                nextSingleText $FF,$FF  ; "They worked hard to build{N}their new town.{W1}"
+                nextSingleText $FF,255  ; "They worked hard to build{N}their new town.{W1}"
                 playSound $FD
                 resetForceBattleStats
                 warp $7,$B,$A,$1

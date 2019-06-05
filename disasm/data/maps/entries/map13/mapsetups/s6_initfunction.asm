@@ -29,12 +29,12 @@ return_5830E:
 
 	; End of function ms_map13_InitFunction
 
-cs_58310:       setFacing $82,DOWN
-                customActscriptWait $82
+cs_58310:       setFacing 130,DOWN
+                customActscriptWait 130
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $3          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                startEntity $82
+                startEntity 130
                 csc_end

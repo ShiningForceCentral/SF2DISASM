@@ -3,63 +3,63 @@
 ; 0x5E772..0x5E86C : 
 cs_5E772:       textCursor $E41
                 csWait 30
-                setFacing $0,UP
-                setDest $0,44,27
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
+                setFacing ALLY_BOWIE,UP
+                setDest ALLY_BOWIE,44,27
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
                 flashScreenWhite $1E
                 csWait 30
                 flashScreenWhite $1E
-                setPos $88,63,62,DOWN
-                setPos $15,44,26,DOWN
-                stopEntity $15
+                setPos 136,63,62,DOWN
+                setPos ALLY_TAYA,44,26,DOWN
+                stopEntity ALLY_TAYA
                 csWait 30
                 flashScreenWhite $1E
                 csWait 30
-                setDest $7,43,27
-                setDest $1F,45,27
-                setFacing $7,UP
-                setFacing $1F,UP
-                nextSingleText $80,$15  ; "I feel...a power returning{N}me to human.{W2}"
-                nextSingleText $80,$15  ; "Hey!  The evil is gone!{N}Did you chase them away?{W1}"
-                startEntity $15
-                entityActionsWait $7
+                setDest ALLY_PETER,43,27
+                setDest FOLLOWER_B,45,27
+                setFacing ALLY_PETER,UP
+                setFacing FOLLOWER_B,UP
+                nextSingleText $80,ALLY_TAYA ; "I feel...a power returning{N}me to human.{W2}"
+                nextSingleText $80,ALLY_TAYA ; "Hey!  The evil is gone!{N}Did you chase them away?{W1}"
+                startEntity ALLY_TAYA
+                entityActionsWait ALLY_PETER
                  moveUp 1
                 endActions
-                setFacing $7,RIGHT
-                nextSingleText $0,$7    ; "{LEADER}, who is she?{W1}"
-                setFacing $15,LEFT
-                nextSingleText $80,$15  ; "Did you say {LEADER}?{N}Oh, you're from Granseal!{W1}"
-                nextSingleText $0,$7    ; "Yes, we are, but who are{N}you?{W1}"
-                shiver $15
-                nextSingleText $80,$15  ; "Do you know how long I've{N}been here as a stone statue?{W1}"
-                entityActionsWait $0
+                setFacing ALLY_PETER,RIGHT
+                nextSingleText $0,ALLY_PETER ; "{LEADER}, who is she?{W1}"
+                setFacing ALLY_TAYA,LEFT
+                nextSingleText $80,ALLY_TAYA ; "Did you say {LEADER}?{N}Oh, you're from Granseal!{W1}"
+                nextSingleText $0,ALLY_PETER ; "Yes, we are, but who are{N}you?{W1}"
+                shiver ALLY_TAYA
+                nextSingleText $80,ALLY_TAYA ; "Do you know how long I've{N}been here as a stone statue?{W1}"
+                entityActionsWait ALLY_BOWIE
                  moveDown 1
                 endActions
-                entityActionsWait $1F
+                entityActionsWait FOLLOWER_B
                  moveLeft 1
                 endActions
-                setFacing $1F,UP
-                entityActionsWait $0
+                setFacing FOLLOWER_B,UP
+                entityActionsWait ALLY_BOWIE
                  moveRight 1
                 endActions
-                entityActionsWait $0
+                entityActionsWait ALLY_BOWIE
                  moveUp 1
                 endActions
-                setFacing $0,UP
-                nextSingleText $0,$1F   ; "How do you know {LEADER}?{W1}"
-                setFacing $15,DOWN
-                nextSingleText $80,$15  ; "Oh, I'm sorry.{W2}"
-                nextSingleText $80,$15  ; "I'm {NAME;21}, a sorceress.{N}Goddess Mitula told me about{N}you.{W1}"
-                nextSingleText $0,$1F   ; "She did?{W1}"
-                nextSingleText $80,$15  ; "Yes.  She was worried about{N}you.{W2}"
-                nextSingleText $80,$15  ; "You are fated to fight Zeon.{W2}"
-                nextSingleText $80,$15  ; "But, she is unable to help{N}you.  It's an order from{N}Volcanon.{W2}"
-                nextSingleText $80,$15  ; "But, I'm here for her.{N}I'm here to help you.{W1}"
-                join $15
-                nextSingleText $80,$15  ; "You want to go to Grans,{N}right?  Then, I think we{N}can use the ancient ship.{W2}"
-                nextSingleText $80,$15  ; "Let's go to Nazca.{W1}"
-                followEntity $7,$0,$2
-                followEntity $1F,$7,$2
-                addNewFollower $15
+                setFacing ALLY_BOWIE,UP
+                nextSingleText $0,FOLLOWER_B ; "How do you know {LEADER}?{W1}"
+                setFacing ALLY_TAYA,DOWN
+                nextSingleText $80,ALLY_TAYA ; "Oh, I'm sorry.{W2}"
+                nextSingleText $80,ALLY_TAYA ; "I'm {NAME;21}, a sorceress.{N}Goddess Mitula told me about{N}you.{W1}"
+                nextSingleText $0,FOLLOWER_B ; "She did?{W1}"
+                nextSingleText $80,ALLY_TAYA ; "Yes.  She was worried about{N}you.{W2}"
+                nextSingleText $80,ALLY_TAYA ; "You are fated to fight Zeon.{W2}"
+                nextSingleText $80,ALLY_TAYA ; "But, she is unable to help{N}you.  It's an order from{N}Volcanon.{W2}"
+                nextSingleText $80,ALLY_TAYA ; "But, I'm here for her.{N}I'm here to help you.{W1}"
+                join ALLY_TAYA
+                nextSingleText $80,ALLY_TAYA ; "You want to go to Grans,{N}right?  Then, I think we{N}can use the ancient ship.{W2}"
+                nextSingleText $80,ALLY_TAYA ; "Let's go to Nazca.{W1}"
+                followEntity ALLY_PETER,ALLY_BOWIE,2
+                followEntity FOLLOWER_B,ALLY_PETER,2
+                addNewFollower ALLY_TAYA
                 csc_end

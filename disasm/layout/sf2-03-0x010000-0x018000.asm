@@ -4,7 +4,13 @@
 ; FREE SPACE : 38 bytes.
 
 
-                include "code\common\menus\menuengine.asm"    ; Menu engine
+                include "code\common\menus\menuengine_1.asm"    ; Menu engine
+                includeIfVanillaRom "code\common\menus\getcombatantportrait.asm"    ; Get combatant portrait index function
+                includeIfExpandedRom "code\common\menus\getcombatantportrait-expanded.asm"
+                include "code\common\menus\menuengine_2.asm"    ; Menu engine
+                includeIfVanillaRom "code\common\menus\getallyportrait.asm"    ; Get ally portrait index function
+                includeIfExpandedRom "code\common\menus\getallyportrait-expanded.asm"
+                include "code\common\menus\menuengine_3.asm"    ; Menu engine
                 include "data\stats\items\itemdefs.asm"    ; Item definitions
                 include "data\stats\spells\spelldefs.asm"    ; Spell definitions
                 include "data\stats\items\itemnames.asm"    ; Item names

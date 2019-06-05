@@ -57,9 +57,9 @@ Map21_DefaultEntityEvent:
 
 	; End of function Map21_261_EntityEvent0
 
-cs_53EF4:       entityActionsWait $80
+cs_53EF4:       entityActionsWait 128
                  moveRight 1
                 endActions
-                setFacing $87,DOWN
+                setFacing 135,DOWN
                 setStoryFlag $1         ; Battle 1 unlocked
                 csc_end

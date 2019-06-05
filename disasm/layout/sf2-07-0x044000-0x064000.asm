@@ -105,7 +105,7 @@ j_PlayIntroOrEndCutscene:
 j_ExecuteFlashScreenScript:                
                 jmp     ExecuteFlashScreenScript(pc)
 j_GetEntityPortaitAndSpeechSound:                
-                jmp     GetEntityPortraitAndSpeechSfx(pc)
+                jmp     GetEntityPortaitAndSpeechSound(pc)
 j_ClearEntities:                
                 jmp     ClearEntities(pc)
                 include "code\common\scripting\map\mapfunctions.asm"    ; Map functions
@@ -128,6 +128,10 @@ j_ClearEntities:
                 include "data\scripting\entity\eas_main.asm"    ; Main entity actscripts
                 include "code\common\scripting\entity\entityfunctions_3.asm"    ; Entity functions
                 include "code\common\scripting\map\vehiclefunctions.asm"    ; Mapscripts and functions for Caravan and Raft
+                includeIfVanillaRom "code\common\scripting\entity\getentityportaitandspeechsound.asm"    ; Get entity portrait and speech sound IDs function
+                includeIfVanillaRom "data\spritedialogproperties.asm"    ; Sprite dialog properties
+                includeIfExpandedRom "code\common\scripting\entity\getentityportaitandspeechsound-expanded.asm"
+                includeIfExpandedRom "data\spritedialogproperties-expanded.asm"
                 include "code\common\scripting\entity\entityfunctions_4.asm"    ; Entity functions
                 include "data\scripting\entity\eas_actions.asm"    ; Entity scripts for cutscene actions
                 include "code\common\scripting\map\mapscriptengine_1.asm"    ; Mapscript engine, part 1

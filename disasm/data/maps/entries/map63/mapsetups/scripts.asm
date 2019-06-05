@@ -67,43 +67,43 @@ cs_5CB34:       setBlocksVar 16,53,1,1,15,54
                 csWait 1
                 csc_end
 cs_5CBB4:       textCursor $1053
-                nextSingleText $FF,$FF  ; "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
-                setSprite $1D,ALLY_CLAUDE
-                startEntity $1D
-                nextSingleText $0,$1D   ; "O...ooo...wow!{W1}"
-                setActscriptWait $1D,eas_Jump
+                nextSingleText $FF,255  ; "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
+                setSprite ALLY_CLAUDE,ALLY_CLAUDE
+                startEntity ALLY_CLAUDE
+                nextSingleText $0,ALLY_CLAUDE ; "O...ooo...wow!{W1}"
+                setActscriptWait ALLY_CLAUDE,eas_Jump
                 setQuake 2
                 playSound SFX_DOOR_OPEN_HIGH_PITCH
                 csWait 20
                 setQuake 0
                 csWait 40
-                setFacing $1D,LEFT
+                setFacing ALLY_CLAUDE,LEFT
                 csWait 20
-                setFacing $1D,UP
+                setFacing ALLY_CLAUDE,UP
                 csWait 20
-                setFacing $1D,RIGHT
+                setFacing ALLY_CLAUDE,RIGHT
                 csWait 20
-                setFacing $1D,DOWN
-                setActscriptWait $1D,eas_Jump
+                setFacing ALLY_CLAUDE,DOWN
+                setActscriptWait ALLY_CLAUDE,eas_Jump
                 setQuake 2
                 playSound SFX_DOOR_OPEN_HIGH_PITCH
                 csWait 20
                 setQuake 0
                 csWait 30
-                nextText $0,$1D         ; "That feels good....{N}My power is back!{W1}"
-                nextText $0,$1D         ; "Thank you.{N}I can move again!{N}How can I express...{W1}"
-                nextSingleText $0,$1D   ; "Oh, yes!  I'll join you!{N}I'll protect you!{W1}"
-                join $1D
-                addNewFollower $1D
+                nextText $0,ALLY_CLAUDE ; "That feels good....{N}My power is back!{W1}"
+                nextText $0,ALLY_CLAUDE ; "Thank you.{N}I can move again!{N}How can I express...{W1}"
+                nextSingleText $0,ALLY_CLAUDE ; "Oh, yes!  I'll join you!{N}I'll protect you!{W1}"
+                join ALLY_CLAUDE
+                addNewFollower ALLY_CLAUDE
                 csc_end
-cs_5CC26:       entityFlashWhite $0,$32
-                setActscript $0,eas_RotateRightHighSpeed
+cs_5CC26:       entityFlashWhite ALLY_BOWIE,$32
+                setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 csWait 30
                 executeSubroutine FadeOutToWhite
                 mapLoad 64,0,0
                 loadEntitiesFromMapSetup 5,4,UP
                 executeSubroutine csub_5CDDC
-                setActscript $0,eas_RotateRightHighSpeed
+                setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 executeSubroutine FadeInFromWhite
                 csWait 30
                 executeSubroutine sub_5CDEC
@@ -132,21 +132,21 @@ cs_5CC26:       entityFlashWhite $0,$32
                 csWait 2
                 mapLoad 63,3,3
                 loadEntitiesFromMapSetup 8,7,UP
-                setActscript $0,eas_RotateRightHighSpeed
+                setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 executeSubroutine FadeInFromWhite
                 csWait 30
-                entityFlashWhite $0,$32
-                setActscriptWait $0,eas_Init
-                startEntity $0
+                entityFlashWhite ALLY_BOWIE,$32
+                setActscriptWait ALLY_BOWIE,eas_Init
+                startEntity ALLY_BOWIE
                 csc_end
-cs_5CCF6:       entityFlashWhite $0,$32
-                setActscript $0,eas_RotateRightHighSpeed
+cs_5CCF6:       entityFlashWhite ALLY_BOWIE,$32
+                setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 csWait 30
                 executeSubroutine FadeOutToWhite
                 mapLoad 64,0,0
                 loadEntitiesFromMapSetup 5,4,UP
                 executeSubroutine sub_5CDE4
-                setActscript $0,eas_RotateRightHighSpeed
+                setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 executeSubroutine FadeInFromWhite
                 csWait 30
                 executeSubroutine sub_5CDF2
@@ -175,16 +175,16 @@ cs_5CCF6:       entityFlashWhite $0,$32
                 csWait 2
                 mapLoad 63,5,17
                 loadEntitiesFromMapSetup 10,21,UP
-                setActscript $0,eas_RotateRightHighSpeed
+                setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 executeSubroutine FadeInFromWhite
                 csWait 30
-                entityFlashWhite $0,$32
-                setActscriptWait $0,eas_Init
-                startEntity $0
+                entityFlashWhite ALLY_BOWIE,$32
+                setActscriptWait ALLY_BOWIE,eas_Init
+                startEntity ALLY_BOWIE
                 jumpIfFlagSet $1D,cs_5CDDA ; Claude joined
-                setSprite $1D,MAPSPRITE_POSE3
-                setFacing $1D,DOWN
-                stopEntity $1D
+                setSprite ALLY_CLAUDE,MAPSPRITE_POSE3
+                setFacing ALLY_CLAUDE,DOWN
+                stopEntity ALLY_CLAUDE
 cs_5CDDA:       csc_end
 
 ; =============== S U B R O U T I N E =======================================

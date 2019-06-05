@@ -3,8 +3,8 @@
 ; 0x57F08..0x57F7A : 
 ms_map13_flag2C6_Entities:
                 msFixedEntity 23, 13, DOWN, ALLY_GERHALT, eas_Init
-                msWalkingEntity 13, 27, DOWN, MAPSPRITE_POCALON_SOLDIER, 13, 27, 2
-                msWalkingEntity 6, 21, DOWN, MAPSPRITE_POCALON_MAID, 6, 21, 2
+                msWalkingEntity 13, 27, DOWN, MAPSPRITE_PACALON_SOLDIER, 13, 27, 2
+                msWalkingEntity 6, 21, DOWN, MAPSPRITE_PACALON_MAID, 6, 21, 2
                 msFixedEntity 1, 11, DOWN, MAPSPRITE_TURTLE, eas_Init2
                 msFixedEntity 4, 7, RIGHT, MAPSPRITE_SAILOR, eas_Init
                 msFixedEntity 8, 7, LEFT, MAPSPRITE_SAILOR, eas_Init

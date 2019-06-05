@@ -29,20 +29,20 @@ Map8_DefaultItemEvent2:
 	; End of function Map8_ItemEvent0
 
 cs_56314:       hideText
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
                 setQuake 2
                 csWait 60
-                setActscript $0,eas_Jump
-                setActscriptWait $7,eas_Jump
-                entityActions $0
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
+                entityActions ALLY_BOWIE
                  moveDown 2
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveDown 2
                 endActions
-                setFacing $0,UP
-                setFacing $7,UP
+                setFacing ALLY_BOWIE,UP
+                setFacing ALLY_PETER,UP
                 playSound SFX_BATTLEFIELD_DEATH
                 setBlocks 32,17,2,2,15,19
                 csWait 30
@@ -60,5 +60,5 @@ cs_56314:       hideText
                 csWait 30
                 setQuake 0
                 csWait 30
-                followEntity $7,$0,$2
+                followEntity ALLY_PETER,ALLY_BOWIE,2
                 csc_end

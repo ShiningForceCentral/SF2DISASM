@@ -48,12 +48,14 @@ COM_ALLY_START: equ $0
 COM_POS_IDX: equ $0
 COM_BIT_SORT: equ $6
 COM_POS_TYPE: equ $7
-COM_ALLIES_COUNTER: equ $1D
-COM_ALLY_END: equ $1D
-COM_ALLIES_NUM: equ $1E
+COM_ALLIES_COUNTER: equ COM_ALLIES_NUM-1
+COM_ALLY_END: equ COM_ALLIES_NUM-1
+                equIfVanillaRom COM_ALLIES_NUM, $1E
+                equIfExpandedRom COM_ALLIES_NUM, $20
 COM_ENEMIES_COUNTER: equ $1F
 COM_ALLY_SPACEEND: equ $1F
-COM_ALL_COUNTER: equ $3D
+COM_ENEMIES_NUM: equ $20
+COM_ALL_COUNTER: equ COM_ALLIES_NUM+COM_ENEMIES_NUM-1
 COM_IDX_REALMASK: equ $3F
 COM_ALLYENDENEMYSTARTDIFFERENCE: equ $60
 COM_TYPE_REALMASK: equ $80
@@ -292,6 +294,7 @@ CHAR_NAME_COUNTER: equ $9
 CHAR_NAMELENGTH: equ $A
 CHAR_PROWESS_MASK_CRIT: equ $F
 CHAR_ENTRY_SIZE: equ $38
+CHAR_MASK_IDX: equ $FF
 CHAR_STATUS_MASK_SILENCE: equ $300
 
 ; ---------------------------------------------------------------------------
@@ -778,6 +781,11 @@ SFX_DEMON_BREATH: equ $75
 SFX_INTRO_LIGHTNING: equ $76
 SFX_BOLT_SPELL: equ $77
 SFX_TINKLING: equ $78
+
+; ---------------------------------------------------------------------------
+
+; enum Sfx_None
+SFX_NONE: equ $7F
 
 ; ---------------------------------------------------------------------------
 
@@ -1592,10 +1600,10 @@ MAPSPRITE_BEDOE_KING: equ $E3
 MAPSPRITE_BEDOE_MINISTER: equ $E4
 MAPSPRITE_BEDOE_SOLDIER: equ $E5
 MAPSPRITE_CHICK: equ $E6
-MAPSPRITE_POCALON_KING: equ $E7
-MAPSPRITE_POCALON_PRINCESS: equ $E8
-MAPSPRITE_POCALON_SOLDIER: equ $E9
-MAPSPRITE_POCALON_MAID: equ $EA
+MAPSPRITE_PACALON_KING: equ $E7
+MAPSPRITE_PACALON_PRINCESS: equ $E8
+MAPSPRITE_PACALON_SOLDIER: equ $E9
+MAPSPRITE_PACALON_MAID: equ $EA
 MAPSPRITE_HEN: equ $EB
 MAPSPRITE_BIRDMAN: equ $EC
 MAPSPRITE_END_LIST: equ $ED
@@ -1617,6 +1625,78 @@ MAPSPRITE_EVIL_SPIRIT: equ $FC
 MAPSPRITE_NAZCA_SHIP: equ $FD
 MAPSPRITE_KRAKEN: equ $FE
 MAPSPRITE_TAROS: equ $FF
+
+; ---------------------------------------------------------------------------
+
+; enum Mapsprites_Default
+MAPSPRITE_DEFAULT: equ $0
+
+; ---------------------------------------------------------------------------
+
+; enum Portraits
+PORTRAIT_BOWIE_BASE: equ $0
+PORTRAIT_SARAH: equ $1
+PORTRAIT_CHESTER: equ $2
+PORTRAIT_JAHA: equ $3
+PORTRAIT_KAZIN: equ $4
+PORTRAIT_SLADE_BASE: equ $5
+PORTRAIT_KIWI_BASE: equ $6
+PORTRAIT_PETER_BASE: equ $7
+PORTRAIT_MAY: equ $8
+PORTRAIT_GERHALT_BASE: equ $9
+PORTRAIT_LUKE: equ $A
+PORTRAIT_ROHDE: equ $B
+PORTRAIT_RICK: equ $C
+PORTRAIT_ELRIC: equ $D
+PORTRAIT_ERIC: equ $E
+PORTRAIT_KARNA: equ $F
+PORTRAIT_RANDOLF: equ $10
+PORTRAIT_TYRIN: equ $11
+PORTRAIT_JANET: equ $12
+PORTRAIT_HIGINS: equ $13
+PORTRAIT_SKREECH: equ $14
+PORTRAIT_TAYA: equ $15
+PORTRAIT_FRAYJA: equ $16
+PORTRAIT_JARO: equ $17
+PORTRAIT_GYAN: equ $18
+PORTRAIT_SHEELA: equ $19
+PORTRAIT_ZYNK: equ $1A
+PORTRAIT_CHAZ: equ $1B
+PORTRAIT_LEMON: equ $1C
+PORTRAIT_CLAUDE: equ $1D
+PORTRAIT_ELIS: equ $1E
+PORTRAIT_ASTRAL: equ $1F
+PORTRAIT_GRANSEAL_KING: equ $20
+PORTRAIT_SAILOR: equ $21
+PORTRAIT_PRIEST: equ $22
+PORTRAIT_MITULA: equ $24
+PORTRAIT_CREED: equ $25
+PORTRAIT_GALAM_KING: equ $26
+PORTRAIT_GALAM_EVIL: equ $27
+PORTRAIT_ODDLER: equ $28
+PORTRAIT_ODD_EYE: equ $29
+PORTRAIT_TAROS: equ $2A
+PORTRAIT_ZALBARD: equ $2B
+PORTRAIT_CAMEELA: equ $2C
+PORTRAIT_GESHP: equ $2D
+PORTRAIT_ZEON: equ $2E
+PORTRAIT_BOWIE_PROMO: equ $2F
+PORTRAIT_PETER_PROMO: equ $30
+PORTRAIT_GERHALT_PROMO: equ $31
+PORTRAIT_SLADE_PROMO: equ $32
+PORTRAIT_KIWI_PROMO: equ $33
+PORTRAIT_BOWIE_PAINTING: equ $34
+PORTRAIT_NONE: equ $FF
+PORTRAIT_DEFAULT: equ $FFFF
+
+; ---------------------------------------------------------------------------
+
+; enum SpriteDialogDef
+SPRITEDIALOGDEF_OFFSET_MAPSPRITE: equ $0
+SPRITEDIALOGDEF_OFFSET_PORTRAIT: equ $1
+SPRITEDIALOGDEF_OFFSET_SPEECHSOUND: equ $2
+SPRITEDIALOGDEF_OFFSET_UNDEFINED: equ $3
+SPRITEDIALOGDEF_ENTRY_SIZE: equ $4
 
 ; ---------------------------------------------------------------------------
 
@@ -1656,6 +1736,16 @@ ALLY_CLAUDE: equ $1D
 
 ; enum AllyEntry
 ALLY_MASK_IDX: equ $1F
+
+; ---------------------------------------------------------------------------
+
+; enum Followers
+                equIfVanillaRom FOLLOWER_A, $1E
+                equIfExpandedRom FOLLOWER_A, $9C
+                equIfVanillaRom FOLLOWER_B, $1F
+                equIfExpandedRom FOLLOWER_B, $9D
+FOLLOWER_C: equ $9E
+FOLLOWER_D: equ $9F
 
 ; ---------------------------------------------------------------------------
 

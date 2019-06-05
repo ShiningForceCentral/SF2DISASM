@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s1_entities_201.asm :
 ; 0x57FB4..0x5801E : 
 ms_map13_flag201_Entities:
-                msWalkingEntity 8, 27, DOWN, MAPSPRITE_POCALON_SOLDIER, 8, 27, 2
-                msWalkingEntity 6, 21, DOWN, MAPSPRITE_POCALON_MAID, 6, 21, 2
+                msWalkingEntity 8, 27, DOWN, MAPSPRITE_PACALON_SOLDIER, 8, 27, 2
+                msWalkingEntity 6, 21, DOWN, MAPSPRITE_PACALON_MAID, 6, 21, 2
                 msFixedEntity 1, 13, DOWN, MAPSPRITE_TURTLE, eas_Init2
                 msFixedEntity 4, 7, RIGHT, MAPSPRITE_SAILOR, eas_Init
                 msFixedEntity 8, 7, LEFT, MAPSPRITE_SAILOR, eas_Init

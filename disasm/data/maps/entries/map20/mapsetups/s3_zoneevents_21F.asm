@@ -41,9 +41,9 @@ byte_632E0:
 
 	; End of function Map20_21F_ZoneEvent0
 
-cs_632EA:       setActscriptWait $0,eas_Init
+cs_632EA:       setActscriptWait ALLY_BOWIE,eas_Init
                 csWait 1
-                shiver $0
+                shiver ALLY_BOWIE
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -57,7 +57,7 @@ Map20_21F_ZoneEvent1:
                 bne.s   return_6332E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$80,d0 
-                jsr     GetEntityPortraitAndSpeechSfx
+                jsr     GetEntityPortaitAndSpeechSound
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 txt     $FA9            ; "Oh, {LEADER}!{N}I really respect you.{W2}"
@@ -81,7 +81,7 @@ Map20_21F_ZoneEvent2:
                 script  cs_6335E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$80,d0 
-                jsr     GetEntityPortraitAndSpeechSfx
+                jsr     GetEntityPortaitAndSpeechSound
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 txt     $FAC            ; "{LEADER}, please kiss{N}her.{W1}"
@@ -92,5 +92,5 @@ return_6335C:
 
 	; End of function Map20_21F_ZoneEvent2
 
-cs_6335E:       setFacing $80,DOWN
+cs_6335E:       setFacing 128,DOWN
                 csc_end

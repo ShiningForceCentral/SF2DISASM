@@ -4,82 +4,82 @@
 bbcs_33:        textCursor $B32
                 loadMapFadeIn 31,22,29
                 loadMapEntities ce_4D048
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setPos $7,27,38,LEFT
-                setActscriptWait $1F,eas_Init
-                setPos $1F,27,37,LEFT
-                setActscriptWait $16,eas_Init
-                setPos $16,27,36,LEFT
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setPos ALLY_PETER,27,38,LEFT
+                setActscriptWait FOLLOWER_B,eas_Init
+                setPos FOLLOWER_B,27,37,LEFT
+                setActscriptWait ALLY_FRAYJA,eas_Init
+                setPos ALLY_FRAYJA,27,36,LEFT
                 setBlocks 16,8,1,1,32,1
                 setBlocks 3,39,1,1,16,8
                 playSound MUSIC_BATTLE_THEME_3
                 fadeInB
                 csWait 30
-                setFacing $0,UP
-                setFacing $7,UP
-                setFacing $1F,UP
-                entityActionsWait $16
+                setFacing ALLY_BOWIE,UP
+                setFacing ALLY_PETER,UP
+                setFacing FOLLOWER_B,UP
+                entityActionsWait ALLY_FRAYJA
                  moveUp 1
                 endActions
-                setFacing $16,DOWN
-                nextSingleText $0,$16   ; "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
-                entityActionsWait $16
+                setFacing ALLY_FRAYJA,DOWN
+                nextSingleText $0,ALLY_FRAYJA ; "I'm opening the gate of Moun.{N}Devils are waiting inside.{N}Be careful!{W1}"
+                entityActionsWait ALLY_FRAYJA
                  moveUp 1
                 endActions
-                nextSingleText $FF,$FF  ; "Vicar {NAME;22} uses{N}the gate key.{W1}"
+                nextSingleText $FF,255  ; "Vicar {NAME;22} uses{N}the gate key.{W1}"
                 csWait 30
                 setQuake 2
                 setBlocks 1,39,2,2,26,32
                 csWait 20
                 setQuake 0
-                setCameraEntity $0
+                setCameraEntity ALLY_BOWIE
                 csWait 50
-                entityActionsWait $0
+                entityActionsWait ALLY_BOWIE
                  moveUp 1
                 endActions
-                entityActions $16
+                entityActions ALLY_FRAYJA
                  moveUp 6
                  moveLeft 1
                  moveUp 1
                 endActions
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveUp 7
                 endActions
-                entityActions $1F
+                entityActions FOLLOWER_B
                  moveUp 6
                  moveLeft 2
                  moveUp 1
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveUp 8
                 endActions
                 csWait 30
                 cameraSpeed $30
                 setCamDest 5,8
-                entityActionsWait $80
+                entityActionsWait 128
                  moveDown 1
                 endActions
-                nextText $0,$80         ; "Welcome, losers!{W2}"
-                nextSingleText $0,$80   ; "Will you follow the example{N}of the people of Moun and die{N}without resistance?{W1}"
-                nextText $0,$16         ; "No!  I'm too late.{N}I killed a lot of people.{W2}"
-                nextSingleText $0,$16   ; "I can never forgive myself!{W1}"
+                nextText $0,128         ; "Welcome, losers!{W2}"
+                nextSingleText $0,128   ; "Will you follow the example{N}of the people of Moun and die{N}without resistance?{W1}"
+                nextText $0,ALLY_FRAYJA ; "No!  I'm too late.{N}I killed a lot of people.{W2}"
+                nextSingleText $0,ALLY_FRAYJA ; "I can never forgive myself!{W1}"
                 setCamDest 21,25
-                entityActionsWait $16
+                entityActionsWait ALLY_FRAYJA
                  moveDown 1
                 endActions
-                nextSingleText $0,$16   ; "{LEADER}, please let me{N}fight with you.  They must{N}die!{W1}"
-                join $16
-                entityActionsWait $1F
+                nextSingleText $0,ALLY_FRAYJA ; "{LEADER}, please let me{N}fight with you.  They must{N}die!{W1}"
+                join ALLY_FRAYJA
+                entityActionsWait FOLLOWER_B
                  moveUp 1
                 endActions
-                setFacing $1F,RIGHT
-                setFacing $0,LEFT
-                nextSingleText $0,$1F   ; "{LEADER}, {NAME;22} will be{N}a great asset.{W1}"
-                joinBatParty $16
+                setFacing FOLLOWER_B,RIGHT
+                setFacing ALLY_BOWIE,LEFT
+                nextSingleText $0,FOLLOWER_B ; "{LEADER}, {NAME;22} will be{N}a great asset.{W1}"
+                joinBatParty ALLY_FRAYJA
                 executeSubroutine sub_4D078
                 textCursor $B3B
-                nextSingleText $0,$1F   ; "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
+                nextSingleText $0,FOLLOWER_B ; "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
                 setF $33F               ; Set after Frayja forces his way into the party just before the battle in Moun
                 clearF $52              ; Frayja is a follower
                 csc_end

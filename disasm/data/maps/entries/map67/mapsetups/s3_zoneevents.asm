@@ -57,83 +57,83 @@ Map67_DefaultZoneEvent:
 	; End of function Map67_DefaultZoneEvent
 
 cs_4FB64:       textCursor $9EF
-                setActscriptWait $1F,eas_Init
-                setActscriptWait $1E,eas_Init
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Jump
-                nextSingleText $0,$1F   ; "Wait!{W1}"
-                setDest $1F,60,27
+                setActscriptWait FOLLOWER_B,eas_Init
+                setActscriptWait FOLLOWER_A,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Jump
+                nextSingleText $0,FOLLOWER_B ; "Wait!{W1}"
+                setDest FOLLOWER_B,60,27
                 csWait 5
-                setActscript $1F,eas_461B6
+                setActscript FOLLOWER_B,eas_461B6
                 csWait 120
                 setCamDest 53,24
-                setDest $7,59,27
-                setFacing $7,RIGHT
-                nextSingleText $C0,$7   ; "What's wrong, Oddler?{W1}"
-                setDest $0,60,26
-                setFacing $0,DOWN
-                setFacing $1F,UP
-                nextSingleText $0,$1F   ; "{LEADER}...{NAME;7}...can{N}you hear that?{W1}"
-                nextSingleText $C0,$7   ; "Hear what?{W1}"
+                setDest ALLY_PETER,59,27
+                setFacing ALLY_PETER,RIGHT
+                nextSingleText $C0,ALLY_PETER ; "What's wrong, Oddler?{W1}"
+                setDest ALLY_BOWIE,60,26
+                setFacing ALLY_BOWIE,DOWN
+                setFacing FOLLOWER_B,UP
+                nextSingleText $0,FOLLOWER_B ; "{LEADER}...{NAME;7}...can{N}you hear that?{W1}"
+                nextSingleText $C0,ALLY_PETER ; "Hear what?{W1}"
                 csWait 5
-                setActscript $7,eas_461B6
+                setActscript ALLY_PETER,eas_461B6
                 csWait 120
-                setFacing $7,DOWN
-                nextSingleText $C0,$7   ; "I don't hear anything.{W1}"
-                entityActionsWait $1F
+                setFacing ALLY_PETER,DOWN
+                nextSingleText $C0,ALLY_PETER ; "I don't hear anything.{W1}"
+                entityActionsWait FOLLOWER_B
                  moveDown 1
                 endActions
                 csWait 5
-                setActscript $1F,eas_461B6
+                setActscript FOLLOWER_B,eas_461B6
                 csWait 120
-                nextText $0,$1F         ; "Somebody is crying for help...{W2}"
-                nextSingleText $0,$1F   ; "from...over here.{W1}"
-                setDest $1F,57,25
-                setPos $1F,63,63,DOWN
+                nextText $0,FOLLOWER_B  ; "Somebody is crying for help...{W2}"
+                nextSingleText $0,FOLLOWER_B ; "from...over here.{W1}"
+                setDest FOLLOWER_B,57,25
+                setPos FOLLOWER_B,63,63,DOWN
                 csWait 40
-                setDest $7,57,25
-                setPos $7,63,63,DOWN
-                setDest $0,57,25
-                setPos $0,63,63,DOWN
+                setDest ALLY_PETER,57,25
+                setPos ALLY_PETER,63,63,DOWN
+                setDest ALLY_BOWIE,57,25
+                setPos ALLY_BOWIE,63,63,DOWN
                 warp $33,$B,$16,$1
                 csc_end
 cs_4FC32:       textCursor $A21
-                newEntity $D,57,25,UP,MAPSPRITE_TAROS
-                setActscriptWait $D,eas_Init
-                entityActionsWait $D
+                newEntity ALLY_ELRIC,57,25,UP,MAPSPRITE_TAROS
+                setActscriptWait ALLY_ELRIC,eas_Init
+                entityActionsWait ALLY_ELRIC
                  moveUp 1
                 endActions
-                setFacing $0,UP
-                setFacing $7,UP
-                setFacing $1F,UP
-                nextSingleText $0,$D    ; "Fairy said, move this rock{N}in this manner, and...{W1}"
+                setFacing ALLY_BOWIE,UP
+                setFacing ALLY_PETER,UP
+                setFacing FOLLOWER_B,UP
+                nextSingleText $0,ALLY_ELRIC ; "Fairy said, move this rock{N}in this manner, and...{W1}"
                 csWait 30
                 playSound SFX_SECRET_PATH_ROCK
                 csWait 30
-                setFacing $D,DOWN
-                setActscriptWait $D,eas_Jump
-                setActscriptWait $D,eas_Jump
-                nextSingleText $0,$D    ; "Got it!  Thanks, fairy!{W1}"
+                setFacing ALLY_ELRIC,DOWN
+                setActscriptWait ALLY_ELRIC,eas_Jump
+                setActscriptWait ALLY_ELRIC,eas_Jump
+                nextSingleText $0,ALLY_ELRIC ; "Got it!  Thanks, fairy!{W1}"
                 setQuake 1
                 playSound SFX_BIG_DOOR_RUMBLE
                 csWait 20
-                setFacing $D,UP
+                setFacing ALLY_ELRIC,UP
                 csWait 20
                 playSound SFX_DESOUL_HOVERING
                 setBlocks 0,0,3,2,56,22
                 csWait 30
                 setQuake 0
                 csWait 30
-                setFacing $D,DOWN
-                nextSingleText $0,$D    ; "{LEADER}, come on.{W1}"
-                entityActionsWait $D
+                setFacing ALLY_ELRIC,DOWN
+                nextSingleText $0,ALLY_ELRIC ; "{LEADER}, come on.{W1}"
+                entityActionsWait ALLY_ELRIC
                  moveUp 1
                 endActions
-                hide $D
-                entityActionsWait $0
+                hide ALLY_ELRIC
+                entityActionsWait ALLY_BOWIE
                  moveUp 1
                 endActions
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveUp 1
                 endActions
                 warp $20,$1D,$3,$2

@@ -2,24 +2,24 @@
 ; ASM FILE data\maps\entries\map44\mapsetups\scripts.asm :
 ; 0x54578..0x5473E : 
 cs_54578:       textCursor $3F5
-                nextSingleText $0,$1F   ; "OK.  Let's go!{W1}"
-                nod $8A
-                setFacing $8A,DOWN
-                nextSingleText $0,$8A   ; "Weigh anchor!{W1}"
-                setDest $0,11,13
-                entityActions $8B
+                nextSingleText $0,FOLLOWER_B ; "OK.  Let's go!{W1}"
+                nod 138
+                setFacing 138,DOWN
+                nextSingleText $0,138   ; "Weigh anchor!{W1}"
+                setDest ALLY_BOWIE,11,13
+                entityActions 139
                  moveRight 4
                  moveUp 9
                  faceLeft 2
                  faceDown 1
                 endActions
-                entityActions $8C
+                entityActions 140
                  faceRight 30
                  moveUp 9
                  faceRight 2
                  faceDown 1
                 endActions
-                entityActionsWait $0
+                entityActionsWait ALLY_BOWIE
                  moveRight 4
 Map21_DefaultZoneEvent:
                  moveDown 1
@@ -28,10 +28,10 @@ Map21_DefaultZoneEvent:
                  moveRight 2
                 endActions
                 csWait 30
-                setFacing $0,DOWN
-                setFacing $1F,DOWN
-                setFacing $1E,DOWN
-                setFacing $9F,DOWN
+                setFacing ALLY_BOWIE,DOWN
+                setFacing FOLLOWER_B,DOWN
+                setFacing FOLLOWER_A,DOWN
+                setFacing 159,DOWN
                 setCamDest 10,11
                 setBlocks 15,22,3,1,12,22
                 csWait 4
@@ -50,38 +50,38 @@ Map21_DefaultZoneEvent:
                 setBlocks 15,15,3,1,12,15
                 csWait 15
                 setCamDest 13,12
-                setFacing $9F,RIGHT
-                nextSingleText $0,$9F   ; "Sir Astral, where are we{N}headed?{W1}"
-                setFacing $1F,LEFT
-                nextSingleText $C0,$1F  ; "This earthquake must{N}have caused damage all{N}over the island.{W1}"
-                setFacing $1F,DOWN
-                nextSingleText $C0,$1F  ; "Maybe...to the east...to...{N}Oh, yes!  To the mainland!{W1}"
-                setActscriptWait $9F,eas_Jump
-                setActscriptWait $9F,eas_Jump
-                nextSingleText $0,$9F   ; "To Parmecia?!{N}Hmmmm....{W1}"
-                setFacing $1E,RIGHT
-                nextSingleText $0,$1E   ; "What?  To the mainland?{N}No!{W2}{N}What about Elis?!  No,{N}we'll stay here on Grans!{W1}"
-                setFacing $1E,DOWN
-                entityActions $1F
+                setFacing 159,RIGHT
+                nextSingleText $0,159   ; "Sir Astral, where are we{N}headed?{W1}"
+                setFacing FOLLOWER_B,LEFT
+                nextSingleText $C0,FOLLOWER_B ; "This earthquake must{N}have caused damage all{N}over the island.{W1}"
+                setFacing FOLLOWER_B,DOWN
+                nextSingleText $C0,FOLLOWER_B ; "Maybe...to the east...to...{N}Oh, yes!  To the mainland!{W1}"
+                setActscriptWait 159,eas_Jump
+                setActscriptWait 159,eas_Jump
+                nextSingleText $0,159   ; "To Parmecia?!{N}Hmmmm....{W1}"
+                setFacing FOLLOWER_A,RIGHT
+                nextSingleText $0,FOLLOWER_A ; "What?  To the mainland?{N}No!{W2}{N}What about Elis?!  No,{N}we'll stay here on Grans!{W1}"
+                setFacing FOLLOWER_A,DOWN
+                entityActions FOLLOWER_B
                  moveUp 1
                  moveLeft 2
                 endActions
                 setCamDest 11,12
-                nextSingleText $C0,$1F  ; "It's too dangerous to stay{N}here.{N}Weigh anchor right now!{W1}"
+                nextSingleText $C0,FOLLOWER_B ; "It's too dangerous to stay{N}here.{N}Weigh anchor right now!{W1}"
                 clearF $4A              ; Astral + King are followers
                 setCamDest 11,13
                 executeSubroutine csub_54714
                 csWait 120
                 loadMapFadeIn 66,28,26
                 loadMapEntities ce_54736
-                setActscriptWait $0,eas_Init
-                setSprite $0,MAPSPRITE_BOAT
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setSprite ALLY_BOWIE,MAPSPRITE_BOAT
                 fadeInB
-                customActscriptWait $0
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 20,20      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveRight 1
                  moveUp 2
                  moveRight 1

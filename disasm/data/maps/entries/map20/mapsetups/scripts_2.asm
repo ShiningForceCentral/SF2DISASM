@@ -2,36 +2,36 @@
 ; ASM FILE data\maps\entries\map20\mapsetups\scripts_2.asm :
 ; 0x633C4..0x6343C : 
 cs_EndKiss:     hideText
-                setCameraEntity $FFFF
-                setFacing $0,RIGHT
-                customActscriptWait $0
+                setCameraEntity 65535
+                setFacing ALLY_BOWIE,RIGHT
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 csWait 30
                 playSound MUSIC_ENDING
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveUpRight 1
                 endActions
                 csWait 10
-                setActscriptWait $0,eas_461AA
+                setActscriptWait ALLY_BOWIE,eas_461AA
                 csWait 80
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveRight 1
                 endActions
                 csWait 10
-                setActscriptWait $0,eas_461AA
-                stopEntity $0
+                setActscriptWait ALLY_BOWIE,eas_461AA
+                stopEntity ALLY_BOWIE
                 csWait 50
-                customActscriptWait $0
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 4,4        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveRight 1
                 endActions
                 csWait 16
-                setActscriptWait $0,eas_461AA
+                setActscriptWait ALLY_BOWIE,eas_461AA
                 csWait 120
                 executeSubroutine j_EndKiss
                 csc_end

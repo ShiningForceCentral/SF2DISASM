@@ -188,7 +188,7 @@ Map44_1FB_EntityEvent7:
                 clsTxt
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$1F,d0
-                jsr     GetEntityPortraitAndSpeechSfx
+                jsr     GetEntityPortaitAndSpeechSound
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait

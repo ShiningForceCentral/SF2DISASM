@@ -5,87 +5,87 @@ bbcs_16:        textCursor $9D1
                 loadMapFadeIn 49,9,10
                 executeSubroutine csub_4B1CA
                 loadMapEntities ce_4B15C
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 setBlocks 13,4,3,3,0,0
                 setBlocks 31,4,3,3,13,4
-                cloneEntity $81,$82
-                cloneEntity $83,$84
-                cloneEntity $83,$85
-                cloneEntity $83,$86
-                cloneEntity $83,$87
-                cloneEntity $83,$88
-                cloneEntity $83,$89
-                cloneEntity $83,$8A
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
-                setPos $7,15,15,LEFT
-                setPos $1F,13,14,DOWN
+                cloneEntity 129,130
+                cloneEntity 131,132
+                cloneEntity 131,133
+                cloneEntity 131,134
+                cloneEntity 131,135
+                cloneEntity 131,136
+                cloneEntity 131,137
+                cloneEntity 131,138
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                setPos ALLY_PETER,15,15,LEFT
+                setPos FOLLOWER_B,13,14,DOWN
                 fadeInB
                 csWait 30
                 csWait 5
-                setActscript $0,eas_461B6
+                setActscript ALLY_BOWIE,eas_461B6
                 csWait 5
-                setActscript $7,eas_461B6
+                setActscript ALLY_PETER,eas_461B6
                 csWait 5
-                setActscript $1F,eas_461B6
+                setActscript FOLLOWER_B,eas_461B6
                 csWait 120
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveRight 1
                 endActions
                 csWait 20
-                setFacing $0,DOWN
-                setFacing $7,DOWN
-                setFacing $1F,DOWN
-                nextSingleText $C0,$7   ; "Huh?  The raft stopped!{W1}"
-                setFacing $0,LEFT
-                setFacing $7,LEFT
-                setFacing $1F,RIGHT
-                nextSingleText $0,$1F   ; "Did the water stop flowing?{N}What's happening?{W1}"
+                setFacing ALLY_BOWIE,DOWN
+                setFacing ALLY_PETER,DOWN
+                setFacing FOLLOWER_B,DOWN
+                nextSingleText $C0,ALLY_PETER ; "Huh?  The raft stopped!{W1}"
+                setFacing ALLY_BOWIE,LEFT
+                setFacing ALLY_PETER,LEFT
+                setFacing FOLLOWER_B,RIGHT
+                nextSingleText $0,FOLLOWER_B ; "Did the water stop flowing?{N}What's happening?{W1}"
                 csWait 30
-                setFacing $7,UP
+                setFacing ALLY_PETER,UP
                 csWait 30
-                setActscriptWait $7,eas_Jump
-                setActscriptWait $7,eas_Jump
-                nextSingleText $C0,$7   ; "Wow!{D1}  What's that?{W1}"
-                setFacing $0,UP
-                setFacing $1F,UP
+                setActscriptWait ALLY_PETER,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
+                nextSingleText $C0,ALLY_PETER ; "Wow!{D1}  What's that?{W1}"
+                setFacing ALLY_BOWIE,UP
+                setFacing FOLLOWER_B,UP
                 csWait 20
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveUp 2
                 endActions
-                nextSingleText $C0,$7   ; "{LEADER}, look there!{W1}"
+                nextSingleText $C0,ALLY_PETER ; "{LEADER}, look there!{W1}"
                 setCamDest 9,0
                 playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 32770
                 playSound SFX_BIG_DOOR_RUMBLE
                 csWait 30
-                setActscriptWait $80,eas_46172
-                customActscriptWait $80
+                setActscriptWait 128,eas_46172
+                customActscriptWait 128
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setPos $80,14,5,DOWN
-                entityActionsWait $80
+                setPos 128,14,5,DOWN
+                entityActionsWait 128
                  moveUp 2
                 endActions
                 setBlocks 0,0,3,3,13,4
-                setPos $81,12,4,DOWN
-                setPos $82,16,4,DOWN
+                setPos 129,12,4,DOWN
+                setPos 130,16,4,DOWN
                 playSound SFX_BIG_DOOR_RUMBLE
-                animEntityFX $81,5
-                setPos $83,13,2,DOWN
-                setPos $84,15,2,DOWN
-                setPos $85,17,3,DOWN
-                setPos $86,11,4,DOWN
-                setPos $87,12,5,DOWN
-                setPos $88,13,5,DOWN
-                setPos $89,16,5,DOWN
-                setPos $8A,14,6,DOWN
-                animEntityFX $83,5
+                animEntityFX 129,5
+                setPos 131,13,2,DOWN
+                setPos 132,15,2,DOWN
+                setPos 133,17,3,DOWN
+                setPos 134,11,4,DOWN
+                setPos 135,12,5,DOWN
+                setPos 136,13,5,DOWN
+                setPos 137,16,5,DOWN
+                setPos 138,14,6,DOWN
+                animEntityFX 131,5
                 setQuake 16386
-                nextSingleText $C0,$7   ; "M...{D1}monster!{N}It appeared from the river!{W1}"
-                nextText $0,$1F         ; "It must be the monster they{N}mentioned in Polca.{W2}"
-                nextSingleText $0,$1F   ; "Watch out!{W1}"
+                nextSingleText $C0,ALLY_PETER ; "M...{D1}monster!{N}It appeared from the river!{W1}"
+                nextText $0,FOLLOWER_B  ; "It must be the monster they{N}mentioned in Polca.{W2}"
+                nextSingleText $0,FOLLOWER_B ; "Watch out!{W1}"
                 csWait 60
                 csc_end
 ce_4B15C:       mainEntity 15,14,RIGHT

@@ -2,97 +2,97 @@
 ; ASM FILE data\maps\entries\map15\mapsetups\scripts.asm :
 ; 0x5D04E..0x5D1CA : 
 cs_5D04E:       textCursor $7D6
-                setFacing $0,RIGHT
-                setDest $7,24,17
-                setFacing $7,RIGHT
-                setPos $14,31,33,UP
+                setFacing ALLY_BOWIE,RIGHT
+                setDest ALLY_PETER,24,17
+                setFacing ALLY_PETER,RIGHT
+                setPos ALLY_SKREECH,31,33,UP
                 csWait 1
                 setCamDest 26,22
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
-                setPos $7,24,17,RIGHT
-                setPos $1F,24,16,RIGHT
-                setPos $0,24,18,RIGHT
-                fly $14,$FFFF
-                entityActions $14
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                setPos ALLY_PETER,24,17,RIGHT
+                setPos FOLLOWER_B,24,16,RIGHT
+                setPos ALLY_BOWIE,24,18,RIGHT
+                fly ALLY_SKREECH,$FFFF
+                entityActions ALLY_SKREECH
                  moveUp 8
                 endActions
                 csWait 60
                 setCamDest 26,20
-                entityActions $14
+                entityActions ALLY_SKREECH
                  moveLeft 3
                 endActions
                 setCamDest 20,20
-                entityActions $14
+                entityActions ALLY_SKREECH
                  moveUp 10
                 endActions
                 setCamDest 20,10
-                entityActions $14
+                entityActions ALLY_SKREECH
                  moveRight 4
                 endActions
                 setCamDest 27,10
-                entityActions $14
+                entityActions ALLY_SKREECH
                  moveDown 5
                 endActions
                 setCamDest 27,15
-                entityActions $14
+                entityActions ALLY_SKREECH
                  moveLeft 19
                 endActions
                 setCamDest 9,15
-                entityActions $14
+                entityActions ALLY_SKREECH
                  moveUp 10
                 endActions
                 setCamDest 9,5
-                entityActions $14
+                entityActions ALLY_SKREECH
                  moveRight 13
                 endActions
                 setCamDest 20,5
-                entityActions $14
+                entityActions ALLY_SKREECH
                  moveDown 7
                 endActions
                 setCamDest 20,12
                 csWait 60
-                setDest $14,26,18
-                setFacing $14,LEFT
-                nextSingleText $80,$14  ; "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
-                entityActionsWait $7
+                setDest ALLY_SKREECH,26,18
+                setFacing ALLY_SKREECH,LEFT
+                nextSingleText $80,ALLY_SKREECH ; "Excuse me, are you{N}{LEADER} of Granseal?{W1}"
+                entityActionsWait ALLY_PETER
                  moveRight 2
                 endActions
-                setFacing $7,DOWN
-                setFacing $14,UP
-                nextSingleText $0,$7    ; "Yes, he's {LEADER},{N}but who are you?{W1}"
-                nextSingleText $80,$14  ; "I'm {NAME;20} of Bedoe.{W1}"
-                shiver $7
-                nextSingleText $0,$7    ; "Bedoe?{W1}"
-                nextSingleText $80,$14  ; "{LEADER} saved my life{N}there.{W1}"
-                setActscriptWait $7,eas_Jump
-                setActscriptWait $7,eas_Jump
-                nextText $0,$7          ; "{LEADER} saved...{W2}"
-                nextSingleText $0,$7    ; "Oh, yes!  I remember!{W1}"
-                nextText $80,$14        ; "You remember me?{W2}"
-                nextSingleText $80,$14  ; "Let me thank you.{N}May I go with you?{W1}"
-                entityActionsWait $7
+                setFacing ALLY_PETER,DOWN
+                setFacing ALLY_SKREECH,UP
+                nextSingleText $0,ALLY_PETER ; "Yes, he's {LEADER},{N}but who are you?{W1}"
+                nextSingleText $80,ALLY_SKREECH ; "I'm {NAME;20} of Bedoe.{W1}"
+                shiver ALLY_PETER
+                nextSingleText $0,ALLY_PETER ; "Bedoe?{W1}"
+                nextSingleText $80,ALLY_SKREECH ; "{LEADER} saved my life{N}there.{W1}"
+                setActscriptWait ALLY_PETER,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
+                nextText $0,ALLY_PETER  ; "{LEADER} saved...{W2}"
+                nextSingleText $0,ALLY_PETER ; "Oh, yes!  I remember!{W1}"
+                nextText $80,ALLY_SKREECH ; "You remember me?{W2}"
+                nextSingleText $80,ALLY_SKREECH ; "Let me thank you.{N}May I go with you?{W1}"
+                entityActionsWait ALLY_PETER
                  moveLeft 1
                  moveDown 1
                  faceRight 40
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveUp 1
                  moveRight 1
                  faceDown 40
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveLeft 1
                  moveDown 1
                  faceRight 40
                 endActions
-                setFacing $14,LEFT
-                nextSingleText $0,$7    ; "You grew up quickly, huh?{W1}"
-                nextSingleText $80,$14  ; "Yeah, I learned how to fight.{W1}"
-                join $14
-                followEntity $7,$0,$2
-                followEntity $1F,$7,$2
-                followEntity $14,$0,$5
-                fly $14,$0
+                setFacing ALLY_SKREECH,LEFT
+                nextSingleText $0,ALLY_PETER ; "You grew up quickly, huh?{W1}"
+                nextSingleText $80,ALLY_SKREECH ; "Yeah, I learned how to fight.{W1}"
+                join ALLY_SKREECH
+                followEntity ALLY_PETER,ALLY_BOWIE,2
+                followEntity FOLLOWER_B,ALLY_PETER,2
+                followEntity ALLY_SKREECH,ALLY_BOWIE,5
+                fly ALLY_SKREECH,$0
                 csc_end

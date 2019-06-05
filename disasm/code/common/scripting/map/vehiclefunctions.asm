@@ -19,10 +19,10 @@ MapEventType2:
 
 	; End of function MapEventType2
 
-cs_45284:       setActscriptWait $1E,eas_452A4
-                setActscriptWait $0,eas_452B2
-                setPos $1E,64,64,DOWN
-                setActscriptWait $0,eas_45308
+cs_45284:       setActscriptWait FOLLOWER_A,eas_452A4
+                setActscriptWait ALLY_BOWIE,eas_452B2
+                setPos FOLLOWER_A,64,64,DOWN
+                setActscriptWait ALLY_BOWIE,eas_45308
                 csc_end
 eas_452A4:       ac_0E $0,$0,$1
                  ac_waitDest
@@ -31,7 +31,7 @@ word_452AE:      ac_branch
 eas_452B2:       ac_0E $1,$0,$0
 eas_452BA:       ac_wait 6
                  ac_set1Db3 $FFFF
-                 ac_soundCommand $59
+                 ac_soundCommand SFX_WARP
                  ac_setSize 22
                  ac_updateSprite
                  ac_wait 1
@@ -53,7 +53,7 @@ eas_452BA:       ac_wait 6
                  ac_clonePos $1
 word_45304:      ac_branch
                 dc.w (eas_Idle-word_45304) & $FFFF
-eas_45308:       ac_setSprite 62
+eas_45308:       ac_setSprite MAPSPRITE_CARAVAN
                  ac_set1Db3 $0
                  ac_updateSprite
 word_45312:      ac_branch
@@ -78,9 +78,9 @@ MapEventType4:
 
 	; End of function MapEventType4
 
-cs_45348:       setActscriptWait $1E,eas_45360
-                setSprite $0,ALLY_BOWIE
-                setActscriptWait $0,eas_4536C
+cs_45348:       setActscriptWait FOLLOWER_A,eas_45360
+                setSprite ALLY_BOWIE,ALLY_BOWIE
+                setActscriptWait ALLY_BOWIE,eas_4536C
                 csc_end
 eas_45360:       ac_clonePos $0
 word_45364:      ac_branch
@@ -88,7 +88,7 @@ word_45364:      ac_branch
 byte_45368:      ac_clonePos $1
 eas_4536C:       ac_09 $0,$1
                  ac_set1Db3 $FFFF
-                 ac_soundCommand $59
+                 ac_soundCommand SFX_WARP
                  ac_setSize 12
                  ac_updateSprite
                  ac_wait 1
@@ -136,9 +136,9 @@ return_453F0:
 
 	; End of function MapEventType3
 
-cs_453F2:       setActscriptWait $0,eas_4540C
-                setPos $9F,64,64,DOWN
-                setActscriptWait $0,eas_45426
+cs_453F2:       setActscriptWait ALLY_BOWIE,eas_4540C
+                setPos 159,64,64,DOWN
+                setActscriptWait ALLY_BOWIE,eas_45426
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -151,12 +151,12 @@ nullsub_4540A:
 
 eas_4540C:       ac_0E $1F,$0,$0
 byte_45414:      ac_wait 6
-                 ac_soundCommand $59
+                 ac_soundCommand SFX_WARP
                  ac_waitDest
                  ac_clonePos $1F
 word_45422:      ac_branch
                 dc.w (eas_Idle-word_45422) & $FFFF
-eas_45426:       ac_setSprite 61
+eas_45426:       ac_setSprite MAPSPRITE_RAFT
                  ac_set1Db3 $0
                  ac_updateSprite
 word_45430:      ac_branch
@@ -183,13 +183,13 @@ MapEventType5:
 
 	; End of function MapEventType5
 
-cs_45470:       setActscriptWait $9F,eas_45360
-                setSprite $0,ALLY_BOWIE
-                setActscriptWait $0,eas_4548C
+cs_45470:       setActscriptWait 159,eas_45360
+                setSprite ALLY_BOWIE,ALLY_BOWIE
+                setActscriptWait ALLY_BOWIE,eas_4548C
                 csc_end
 byte_45488:      ac_clonePos $1F
 eas_4548C:       ac_09 $0,$1
-                 ac_soundCommand $59
+                 ac_soundCommand SFX_WARP
                  ac_waitDest
 word_45498:      ac_branch
                 dc.w (eas_Idle-word_45498) & $FFFF
@@ -274,13 +274,13 @@ ShrinkIntoCaravanBowieAndFollowers:
 	; End of function ShrinkIntoCaravanBowieAndFollowers
 
 ms_BowieShrinkIn:
-                setActscriptWait $0,eas_ShrinkIn
-                setPos $0,64,64,DOWN
+                setActscriptWait ALLY_BOWIE,eas_ShrinkIn
+                setPos ALLY_BOWIE,64,64,DOWN
                 csc_end
 eas_ShrinkIn:    ac_0E $1,$0,$0
                  ac_wait 6
                  ac_set1Db3 $FFFF
-                 ac_soundCommand $59
+                 ac_soundCommand SFX_WARP
                  ac_setSize 22
                  ac_updateSprite
                  ac_wait 1
@@ -319,11 +319,11 @@ GrowOutBowieAndFollowers:
 
 	; End of function GrowOutBowieAndFollowers
 
-ms_BowieGrowOut:setActscriptWait $0,eas_GrowOut
+ms_BowieGrowOut:setActscriptWait ALLY_BOWIE,eas_GrowOut
                 csc_end
 eas_GrowOut:     ac_clonePos $1
                  ac_set1Db3 $FFFF
-                 ac_soundCommand $59
+                 ac_soundCommand SFX_WARP
                  ac_setSize 12
                  ac_updateSprite
                  ac_wait 1

@@ -27,153 +27,153 @@ return_59654:
 
 cs_59656:       textCursor $6D4
                 reloadMap 0,19
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
-                stopEntity $0
-                stopEntity $7
-                stopEntity $1F
-                customActscriptWait $0
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                stopEntity ALLY_BOWIE
+                stopEntity ALLY_PETER
+                stopEntity FOLLOWER_B
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $7
+                customActscriptWait ALLY_PETER
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $1F
+                customActscriptWait FOLLOWER_B
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setPos $0,4,8,DOWN
-                setPos $7,3,7,DOWN
-                setPos $1F,5,7,DOWN
-                setPos $99,12,16,DOWN
-                setPos $9A,11,15,DOWN
-                setPos $9B,13,15,DOWN
-                removeShadow $0
-                removeShadow $7
-                removeShadow $1F
+                setPos ALLY_BOWIE,4,8,DOWN
+                setPos ALLY_PETER,3,7,DOWN
+                setPos FOLLOWER_B,5,7,DOWN
+                setPos 153,12,16,DOWN
+                setPos 154,11,15,DOWN
+                setPos 155,13,15,DOWN
+                removeShadow ALLY_BOWIE
+                removeShadow ALLY_PETER
+                removeShadow FOLLOWER_B
                 fadeInB
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveDown 16
                 endActions
-                entityActions $7
+                entityActions ALLY_PETER
                  moveDown 16
                 endActions
-                entityActions $1F
+                entityActions FOLLOWER_B
                  moveDown 16
                 endActions
-                entityActions $99
+                entityActions 153
                  moveDownLeft 8
                 endActions
-                entityActions $9A
+                entityActions 154
                  moveDownLeft 8
                 endActions
-                entityActionsWait $9B
+                entityActionsWait 155
                  moveDownLeft 8
                 endActions
-                hide $99
-                hide $9A
-                hide $9B
-                customActscriptWait $0
+                hide 153
+                hide 154
+                hide 155
+                customActscriptWait ALLY_BOWIE
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $1          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $7
+                customActscriptWait ALLY_PETER
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $3          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $1F
+                customActscriptWait FOLLOWER_B
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $3          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 csWait 100
-                startEntity $0
-                startEntity $7
-                startEntity $1F
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
-                headshake $0
-                headshake $7
-                headshake $1F
-                setFacing $0,UP
-                setFacing $7,RIGHT
-                setFacing $1F,LEFT
+                startEntity ALLY_BOWIE
+                startEntity ALLY_PETER
+                startEntity FOLLOWER_B
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                headshake ALLY_BOWIE
+                headshake ALLY_PETER
+                headshake FOLLOWER_B
+                setFacing ALLY_BOWIE,UP
+                setFacing ALLY_PETER,RIGHT
+                setFacing FOLLOWER_B,LEFT
                 csWait 20
-                nextText $C0,$1F        ; "What happened?{W2}"
-                nextText $C0,$1F        ; "A strange feeling swept over{N}me when I entered that door.{W2}"
-                nextSingleText $C0,$1F  ; "Then, it felt like...I was{N}lifted upward!{W1}"
-                nextText $0,$7          ; "It's very difficult to explain{N}what's happened to us....{W2}"
-                nextSingleText $0,$7    ; "Anyway, we're very small now.{W1}"
-                customActscriptWait $1F
+                nextText $C0,FOLLOWER_B ; "What happened?{W2}"
+                nextText $C0,FOLLOWER_B ; "A strange feeling swept over{N}me when I entered that door.{W2}"
+                nextSingleText $C0,FOLLOWER_B ; "Then, it felt like...I was{N}lifted upward!{W1}"
+                nextText $0,ALLY_PETER  ; "It's very difficult to explain{N}what's happened to us....{W2}"
+                nextSingleText $0,ALLY_PETER ; "Anyway, we're very small now.{W1}"
+                customActscriptWait FOLLOWER_B
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $1F
+                entityActionsWait FOLLOWER_B
                  moveLeft 1
                 endActions
-                nextSingleText $C0,$1F  ; "Small?  How small?{W1}"
+                nextSingleText $C0,FOLLOWER_B ; "Small?  How small?{W1}"
                 csWait 5
-                setActscript $7,eas_461B6
+                setActscript ALLY_PETER,eas_461B6
                 csWait 100
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveDown 2
                  moveRight 1
                 endActions
                 csWait 5
-                setActscript $7,eas_461B6
+                setActscript ALLY_PETER,eas_461B6
                 csWait 130
-                setFacing $7,UP
-                setFacing $0,DOWN
-                setFacing $1F,DOWN
-                nextSingleText $0,$7    ; "Let's see...now we're on a{N}desk...and it's very large,{N}like a village.{W1}"
-                nextSingleText $0,$80   ; "Exactly.{W1}"
-                entityActions $0
+                setFacing ALLY_PETER,UP
+                setFacing ALLY_BOWIE,DOWN
+                setFacing FOLLOWER_B,DOWN
+                nextSingleText $0,ALLY_PETER ; "Let's see...now we're on a{N}desk...and it's very large,{N}like a village.{W1}"
+                nextSingleText $0,128   ; "Exactly.{W1}"
+                entityActions ALLY_BOWIE
                  moveLeft 1
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveRight 1
                 endActions
                 csWait 5
-                setActscript $0,eas_461B6
+                setActscript ALLY_BOWIE,eas_461B6
                 csWait 10
                 csWait 5
-                setActscript $7,eas_461B6
+                setActscript ALLY_PETER,eas_461B6
                 csWait 5
-                setActscript $1F,eas_461B6
+                setActscript FOLLOWER_B,eas_461B6
                 csWait 130
-                setFacing $7,DOWN
-                setFacing $0,DOWN
-                setFacing $1F,DOWN
-                setActscriptWait $0,eas_Jump
-                setActscript $7,eas_Jump
-                shiver $0
-                shiver $7
-                setActscriptWait $0,eas_46172
-                setActscriptWait $7,eas_46172
-                entityActions $0
+                setFacing ALLY_PETER,DOWN
+                setFacing ALLY_BOWIE,DOWN
+                setFacing FOLLOWER_B,DOWN
+                setActscriptWait ALLY_BOWIE,eas_Jump
+                setActscript ALLY_PETER,eas_Jump
+                shiver ALLY_BOWIE
+                shiver ALLY_PETER
+                setActscriptWait ALLY_BOWIE,eas_46172
+                setActscriptWait ALLY_PETER,eas_46172
+                entityActions ALLY_BOWIE
                  moveUp 1
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveUp 1
                 endActions
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                nextText $0,$7          ; "Goliath!{W2}"
-                setActscriptWait $7,eas_Jump
-                setActscriptWait $7,eas_Jump
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                nextText $0,ALLY_PETER  ; "Goliath!{W2}"
+                setActscriptWait ALLY_PETER,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
                 csWait 10
-                nextSingleText $0,$7    ; "Hey, what did you do to us?{W1}"
-                nextText $0,$80         ; "I told you not to go in{N}there.  You didn't listen{N}to my warning.{W2}"
-                nextSingleText $0,$80   ; "You guys look so cute!{N}Ha, ha!{N}Bye, little kiddies!{W1}"
+                nextSingleText $0,ALLY_PETER ; "Hey, what did you do to us?{W1}"
+                nextText $0,128         ; "I told you not to go in{N}there.  You didn't listen{N}to my warning.{W2}"
+                nextSingleText $0,128   ; "You guys look so cute!{N}Ha, ha!{N}Bye, little kiddies!{W1}"
                 csWait 20
                 playSound SFX_DIALOG_BLEEP_6
                 csWait 20
@@ -184,9 +184,9 @@ cs_59656:       textCursor $6D4
                 playSound SFX_DIALOG_BLEEP_6
                 csWait 20
                 playSound SFX_DIALOG_BLEEP_6
-                setFacing $0,RIGHT
-                setFacing $7,RIGHT
-                setFacing $1F,RIGHT
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing ALLY_PETER,RIGHT
+                setFacing FOLLOWER_B,RIGHT
                 csWait 20
                 playSound SFX_DIALOG_BLEEP_8
                 csWait 20
@@ -198,20 +198,20 @@ cs_59656:       textCursor $6D4
                 csWait 20
                 playSound SFX_DIALOG_BLEEP_8
                 csWait 50
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveLeft 2
                 endActions
-                setFacing $0,DOWN
-                setFacing $7,UP
-                setFacing $1F,DOWN
-                nextText $0,$7          ; "{LEADER}, cheer up!{W2}"
-                nextSingleText $0,$7    ; "Let's look around this{N}Desktop Kingdom.{W1}"
-                setFacing $0,RIGHT
-                setFacing $1F,LEFT
-                nextSingleText $0,$1F   ; "I agree!  We can meet Creed{N}later.{W1}"
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
-                followEntity $7,$0,$2
-                followEntity $1F,$7,$2
+                setFacing ALLY_BOWIE,DOWN
+                setFacing ALLY_PETER,UP
+                setFacing FOLLOWER_B,DOWN
+                nextText $0,ALLY_PETER  ; "{LEADER}, cheer up!{W2}"
+                nextSingleText $0,ALLY_PETER ; "Let's look around this{N}Desktop Kingdom.{W1}"
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing FOLLOWER_B,LEFT
+                nextSingleText $0,FOLLOWER_B ; "I agree!  We can meet Creed{N}later.{W1}"
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                followEntity ALLY_PETER,ALLY_BOWIE,2
+                followEntity FOLLOWER_B,ALLY_PETER,2
                 csc_end

@@ -4,66 +4,66 @@
 abcs_battle32:  textCursor $B25
                 loadMapFadeIn 74,5,20
                 loadMapEntities ce_4CEEC
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setPos $7,11,25,UP
-                setActscriptWait $1F,eas_Init
-                setPos $1F,9,25,UP
-                setActscriptWait $16,eas_Init
-                setPos $16,11,26,UP
-                setActscriptWait $1E,eas_Init
-                setPos $1E,10,26,UP
-                setActscriptWait $17,eas_Init
-                setPos $17,10,22,DOWN
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setPos ALLY_PETER,11,25,UP
+                setActscriptWait FOLLOWER_B,eas_Init
+                setPos FOLLOWER_B,9,25,UP
+                setActscriptWait ALLY_FRAYJA,eas_Init
+                setPos ALLY_FRAYJA,11,26,UP
+                setActscriptWait FOLLOWER_A,eas_Init
+                setPos FOLLOWER_A,10,26,UP
+                setActscriptWait ALLY_JARO,eas_Init
+                setPos ALLY_JARO,10,22,DOWN
                 fadeInB
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveUp 1
                 endActions
-                nextSingleText $0,$7    ; "I can't believe it!{N}You might have been killed{N}by the devils.{W1}"
-                nextSingleText $0,$1F   ; "Indeed!  Why did you{N}change your mind?{W1}"
-                entityActionsWait $17
+                nextSingleText $0,ALLY_PETER ; "I can't believe it!{N}You might have been killed{N}by the devils.{W1}"
+                nextSingleText $0,FOLLOWER_B ; "Indeed!  Why did you{N}change your mind?{W1}"
+                entityActionsWait ALLY_JARO
                  moveDown 1
                 endActions
-                nextText $C0,$17        ; "I'm {NAME;23}, from Galam.{N}I was waiting for the chance{N}to escape from them.{W2}"
-                nextSingleText $C0,$17  ; "I can't stand their wicked{N}ways!{W1}"
-                entityActionsWait $7
+                nextText $C0,ALLY_JARO  ; "I'm {NAME;23}, from Galam.{N}I was waiting for the chance{N}to escape from them.{W2}"
+                nextSingleText $C0,ALLY_JARO ; "I can't stand their wicked{N}ways!{W1}"
+                entityActionsWait ALLY_PETER
                  moveUp 1
                 endActions
-                setFacing $7,LEFT
-                setFacing $17,RIGHT
-                nextSingleText $0,$7    ; "You have the same opinion{N}of them as we do.{W1}"
-                nextSingleText $C0,$17  ; "Please let me join you!{N}I could be a great help to{N}you.{W2}"
-                setFacing $17,DOWN
-                nextSingleText $C0,$17  ; "You need a professional{N}soldier like me.{W1}"
-                nextSingleText $0,$1F   ; "Oh, we welcome you.{W1}"
-                setActscriptWait $7,eas_46172
-                entityActionsWait $7
+                setFacing ALLY_PETER,LEFT
+                setFacing ALLY_JARO,RIGHT
+                nextSingleText $0,ALLY_PETER ; "You have the same opinion{N}of them as we do.{W1}"
+                nextSingleText $C0,ALLY_JARO ; "Please let me join you!{N}I could be a great help to{N}you.{W2}"
+                setFacing ALLY_JARO,DOWN
+                nextSingleText $C0,ALLY_JARO ; "You need a professional{N}soldier like me.{W1}"
+                nextSingleText $0,FOLLOWER_B ; "Oh, we welcome you.{W1}"
+                setActscriptWait ALLY_PETER,eas_46172
+                entityActionsWait ALLY_PETER
                  moveRight 1
                 endActions
-                nextSingleText $0,$7    ; "But, he was on the other{N}side just an minute ago.{W1}"
-                entityActionsWait $1F
+                nextSingleText $0,ALLY_PETER ; "But, he was on the other{N}side just an minute ago.{W1}"
+                entityActionsWait FOLLOWER_B
                  moveUp 1
                 endActions
-                setFacing $1F,RIGHT
-                nextSingleText $0,$1F   ; "I don't care, {NAME;7}.{N}He has seen the error of his{N}ways.{W1}"
-                setFacing $1F,DOWN
-                nextSingleText $0,$1F   ; "{LEADER}, don't you want{N}{NAME;23} to join our{N}force?{W1}"
-                nod $0
-                join $17
-                joinForceAI $17,$0      ; 0054 JOIN FORCE WITH AI
-                entityActionsWait $17
+                setFacing FOLLOWER_B,RIGHT
+                nextSingleText $0,FOLLOWER_B ; "I don't care, {NAME;7}.{N}He has seen the error of his{N}ways.{W1}"
+                setFacing FOLLOWER_B,DOWN
+                nextSingleText $0,FOLLOWER_B ; "{LEADER}, don't you want{N}{NAME;23} to join our{N}force?{W1}"
+                nod ALLY_BOWIE
+                join ALLY_JARO
+                joinForceAI ALLY_JARO,$0 ; 0054 JOIN FORCE WITH AI
+                entityActionsWait ALLY_JARO
                  moveDown 1
                 endActions
-                nextSingleText $C0,$17  ; "Oh, thank you!{W2}"
-                setActscriptWait $17,eas_Jump
-                setActscriptWait $17,eas_Jump
-                nextSingleText $C0,$17  ; "I'll try to do my best!{W1}"
+                nextSingleText $C0,ALLY_JARO ; "Oh, thank you!{W2}"
+                setActscriptWait ALLY_JARO,eas_Jump
+                setActscriptWait ALLY_JARO,eas_Jump
+                nextSingleText $C0,ALLY_JARO ; "I'll try to do my best!{W1}"
                 executeSubroutine csub_4CEE4
-                followEntity $1E,$0,$2
-                followEntity $7,$1E,$1
-                followEntity $1F,$1E,$3
-                followEntity $16,$1E,$2
-                followEntity $17,$16,$2
+                followEntity FOLLOWER_A,ALLY_BOWIE,2
+                followEntity ALLY_PETER,FOLLOWER_A,1
+                followEntity FOLLOWER_B,FOLLOWER_A,3
+                followEntity ALLY_FRAYJA,FOLLOWER_A,2
+                followEntity ALLY_JARO,ALLY_FRAYJA,2
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================

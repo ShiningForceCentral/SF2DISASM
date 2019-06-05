@@ -118,8 +118,8 @@ return_5A826:
 
 cs_5A828:       setBlocks 17,13,1,1,9,5
                 textCursor $76F
-                nextSingleText $FF,$FF  ; "{LEADER} decides to{N}take the fairy with him.{W1}"
-                followEntity $82,$1F,$2
+                nextSingleText $FF,255  ; "{LEADER} decides to{N}take the fairy with him.{W1}"
+                followEntity 130,FOLLOWER_B,2
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -226,102 +226,102 @@ return_5A8C8:
 	; End of function Map33_EntityEvent6
 
 cs_5A8CA:       textCursor $773
-                nextText $0,$E          ; "I'm {NAME;14}, a knight.{N}I was looking for a magic{N}sword.{W2}"
-                nextText $0,$E          ; "I would do anything for{N}Mr. Creed!  Please choose me.{W1}"
+                nextText $0,ALLY_ERIC   ; "I'm {NAME;14}, a knight.{N}I was looking for a magic{N}sword.{W2}"
+                nextText $0,ALLY_ERIC   ; "I would do anything for{N}Mr. Creed!  Please choose me.{W1}"
                 yesNo
                 jumpIfFlagSet $59,cs_5A8E6 ; YES/NO prompt answer
-                nextSingleText $0,$E    ; "What a pity...then, I wish{N}happiness to all of you.{W1}"
+                nextSingleText $0,ALLY_ERIC ; "What a pity...then, I wish{N}happiness to all of you.{W1}"
                 csc_end
-cs_5A8E6:       join $E
+cs_5A8E6:       join ALLY_ERIC
                 setF $313               ; ???
-                setActscript $10,eas_463AE
-                setActscript $11,eas_463AE
-                setActscriptWait $F,eas_463AE
-                addNewFollower $E
+                setActscript ALLY_RANDOLF,eas_463AE
+                setActscript ALLY_TYRIN,eas_463AE
+                setActscriptWait ALLY_KARNA,eas_463AE
+                addNewFollower ALLY_ERIC
                 csc_end
 cs_5A90E:       textCursor $780
-                nextText $0,$E          ; "I really want to find the{N}legendary magic sword....{W2}"
-                nextText $0,$E          ; "But I can't do that if I'm{N}stuck here.{W2}{N}May I join your force?{W1}"
+                nextText $0,ALLY_ERIC   ; "I really want to find the{N}legendary magic sword....{W2}"
+                nextText $0,ALLY_ERIC   ; "But I can't do that if I'm{N}stuck here.{W2}{N}May I join your force?{W1}"
                 yesNo
                 jumpIfFlagSet $59,cs_5A92A ; YES/NO prompt answer
-                nextSingleText $0,$E    ; "No?  Then I'll continue my{N}search for the legendary{N}magic sword alone.{W1}"
+                nextSingleText $0,ALLY_ERIC ; "No?  Then I'll continue my{N}search for the legendary{N}magic sword alone.{W1}"
                 csc_end
-cs_5A92A:       join $E
+cs_5A92A:       join ALLY_ERIC
                 setF $313               ; ???
-                addNewFollower $E
+                addNewFollower ALLY_ERIC
                 csc_end
 cs_5A93A:       textCursor $776
-                nextText $0,$10         ; "Hee, hee...I'm not only a{N}dwarf, I'm {NAME;16}.{W2}"
-                nextText $0,$10         ; "I'm known as the strongest{N}warrior of my people.{W1}"
+                nextText $0,ALLY_RANDOLF ; "Hee, hee...I'm not only a{N}dwarf, I'm {NAME;16}.{W2}"
+                nextText $0,ALLY_RANDOLF ; "I'm known as the strongest{N}warrior of my people.{W1}"
                 yesNo
                 jumpIfFlagSet $59,cs_5A956 ; YES/NO prompt answer
-                nextSingleText $0,$10   ; "Tut!  OK, I have a{N}comfortable life here.{W1}"
+                nextSingleText $0,ALLY_RANDOLF ; "Tut!  OK, I have a{N}comfortable life here.{W1}"
                 csc_end
-cs_5A956:       join $10
+cs_5A956:       join ALLY_RANDOLF
                 setF $313               ; ???
-                setActscript $E,eas_463AE
-                setActscript $11,eas_463AE
-                setActscriptWait $F,eas_463AE
-                addNewFollower $10
+                setActscript ALLY_ERIC,eas_463AE
+                setActscript ALLY_TYRIN,eas_463AE
+                setActscriptWait ALLY_KARNA,eas_463AE
+                addNewFollower ALLY_RANDOLF
                 csc_end
 cs_5A97E:       textCursor $783
-                nextText $0,$10         ; "I was surprised to find I{N}had returned to my original{N}size!{W2}"
-                nextText $0,$10         ; "What should I do now?{N}I can go anywhere...{N}maybe...with you?{W1}"
+                nextText $0,ALLY_RANDOLF ; "I was surprised to find I{N}had returned to my original{N}size!{W2}"
+                nextText $0,ALLY_RANDOLF ; "What should I do now?{N}I can go anywhere...{N}maybe...with you?{W1}"
                 yesNo
                 jumpIfFlagSet $59,cs_5A99A ; YES/NO prompt answer
-                nextSingleText $0,$10   ; "Fine!  I'll stay in this{N}mansion then.{W1}"
+                nextSingleText $0,ALLY_RANDOLF ; "Fine!  I'll stay in this{N}mansion then.{W1}"
                 csc_end
-cs_5A99A:       join $10
+cs_5A99A:       join ALLY_RANDOLF
                 setF $313               ; ???
-                addNewFollower $10
+                addNewFollower ALLY_RANDOLF
                 csc_end
 cs_5A9AA:       textCursor $779
-                nextText $0,$11         ; "I'm {NAME;17}, a mage.{N}I studied magic in Ponpei.{W2}"
-                nextText $0,$11         ; "I'll miss my friends, but if{N}I can be of help, I'll go{N}with you!{W1}"
+                nextText $0,ALLY_TYRIN  ; "I'm {NAME;17}, a mage.{N}I studied magic in Ponpei.{W2}"
+                nextText $0,ALLY_TYRIN  ; "I'll miss my friends, but if{N}I can be of help, I'll go{N}with you!{W1}"
                 yesNo
                 jumpIfFlagSet $59,cs_5A9C6 ; YES/NO prompt answer
-                nextSingleText $0,$11   ; "My magic could've been a{N}great help to you.{W1}"
+                nextSingleText $0,ALLY_TYRIN ; "My magic could've been a{N}great help to you.{W1}"
                 csc_end
-cs_5A9C6:       join $11
+cs_5A9C6:       join ALLY_TYRIN
                 setF $313               ; ???
-                setActscript $E,eas_463AE
-                setActscript $10,eas_463AE
-                setActscriptWait $F,eas_463AE
-                addNewFollower $11
+                setActscript ALLY_ERIC,eas_463AE
+                setActscript ALLY_RANDOLF,eas_463AE
+                setActscriptWait ALLY_KARNA,eas_463AE
+                addNewFollower ALLY_TYRIN
                 csc_end
 cs_5A9EE:       textCursor $786
-                nextText $0,$11         ; "I'm not sure why, but I'm{N}free.{W2}"
-                nextText $0,$11         ; "Can I join your force?{W1}"
+                nextText $0,ALLY_TYRIN  ; "I'm not sure why, but I'm{N}free.{W2}"
+                nextText $0,ALLY_TYRIN  ; "Can I join your force?{W1}"
                 yesNo
                 jumpIfFlagSet $59,cs_5AA0A ; YES/NO prompt answer
-                nextSingleText $0,$11   ; "You may regret refusing me.{W1}"
+                nextSingleText $0,ALLY_TYRIN ; "You may regret refusing me.{W1}"
                 csc_end
-cs_5AA0A:       join $11
+cs_5AA0A:       join ALLY_TYRIN
                 setF $313               ; ???
-                addNewFollower $11
+                addNewFollower ALLY_TYRIN
                 csc_end
 cs_5AA1A:       textCursor $77C
-                nextText $0,$F          ; "I'm {NAME;15}, a priest.{N}I think I'm rather young{N}for my profession....{W2}"
-                nextText $0,$F          ; "I don't want to stay in this{N}awful place forever.{N}Choose me!{W1}"
+                nextText $0,ALLY_KARNA  ; "I'm {NAME;15}, a priest.{N}I think I'm rather young{N}for my profession....{W2}"
+                nextText $0,ALLY_KARNA  ; "I don't want to stay in this{N}awful place forever.{N}Choose me!{W1}"
                 yesNo
                 jumpIfFlagSet $59,cs_5AA36 ; YES/NO prompt answer
-                nextSingleText $0,$F    ; "You...snot nose!{W1}"
+                nextSingleText $0,ALLY_KARNA ; "You...snot nose!{W1}"
                 csc_end
-cs_5AA36:       join $F
+cs_5AA36:       join ALLY_KARNA
                 setF $313               ; ???
-                setActscript $E,eas_463AE
-                setActscript $10,eas_463AE
-                setActscriptWait $11,eas_463AE
-                addNewFollower $F
+                setActscript ALLY_ERIC,eas_463AE
+                setActscript ALLY_RANDOLF,eas_463AE
+                setActscriptWait ALLY_TYRIN,eas_463AE
+                addNewFollower ALLY_KARNA
                 csc_end
 cs_5AA5E:       textCursor $789
-                nextText $0,$F          ; "I'm free!  Fresh air smells{N}so good!{W2}"
-                nextText $0,$F          ; "Where should I go?{N}Hey, may I go with you?{W1}"
+                nextText $0,ALLY_KARNA  ; "I'm free!  Fresh air smells{N}so good!{W2}"
+                nextText $0,ALLY_KARNA  ; "Where should I go?{N}Hey, may I go with you?{W1}"
                 yesNo
                 jumpIfFlagSet $59,cs_5AA7A ; YES/NO prompt answer
-                nextSingleText $0,$F    ; "Why, how rude!{W1}"
+                nextSingleText $0,ALLY_KARNA ; "Why, how rude!{W1}"
                 csc_end
-cs_5AA7A:       join $F
+cs_5AA7A:       join ALLY_KARNA
                 setF $313               ; ???
-                addNewFollower $F
+                addNewFollower ALLY_KARNA
                 csc_end

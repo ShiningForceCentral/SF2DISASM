@@ -4,259 +4,259 @@
 abcs_battle18:  textCursor $9E0
                 loadMapFadeIn 12,7,5
                 loadMapEntities ce_4B6BE
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
-                setActscriptWait $B,eas_Init
-                setPos $7,13,9,UP
-                setPos $1F,14,9,UP
-                setPos $B,5,9,RIGHT
-                stopEntity $80
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                setActscriptWait ALLY_ROHDE,eas_Init
+                setPos ALLY_PETER,13,9,UP
+                setPos FOLLOWER_B,14,9,UP
+                setPos ALLY_ROHDE,5,9,RIGHT
+                stopEntity 128
                 fadeInB
                 csWait 60
-                nextSingleText $0,$B    ; "{LEADER}, you're much{N}stronger than I thought.{W1}"
-                setFacing $0,LEFT
-                setFacing $7,LEFT
-                setFacing $1F,LEFT
+                nextSingleText $0,ALLY_ROHDE ; "{LEADER}, you're much{N}stronger than I thought.{W1}"
+                setFacing ALLY_BOWIE,LEFT
+                setFacing ALLY_PETER,LEFT
+                setFacing FOLLOWER_B,LEFT
                 csWait 30
-                setCameraEntity $B
+                setCameraEntity ALLY_ROHDE
                 csWait 120
-                entityActionsWait $B
+                entityActionsWait ALLY_ROHDE
                  moveRight 6
                 endActions
-                setFacing $0,UP
-                setFacing $7,UP
-                setFacing $1F,UP
-                entityActionsWait $B
+                setFacing ALLY_BOWIE,UP
+                setFacing ALLY_PETER,UP
+                setFacing FOLLOWER_B,UP
+                entityActionsWait ALLY_ROHDE
                  moveUp 4
                 endActions
-                setFacing $B,RIGHT
-                setCameraEntity $FFFF
+                setFacing ALLY_ROHDE,RIGHT
+                setCameraEntity 65535
                 setCamDest 7,1
                 csWait 30
-                setPos $B,12,6,UP
+                setPos ALLY_ROHDE,12,6,UP
                 csWait 20
-                setPos $B,13,5,LEFT
+                setPos ALLY_ROHDE,13,5,LEFT
                 csWait 20
-                setPos $B,12,6,UP
+                setPos ALLY_ROHDE,12,6,UP
                 csWait 20
-                setPos $B,11,5,RIGHT
+                setPos ALLY_ROHDE,11,5,RIGHT
                 csWait 20
-                setPos $B,12,6,UP
+                setPos ALLY_ROHDE,12,6,UP
                 csWait 20
-                setPos $B,13,5,LEFT
+                setPos ALLY_ROHDE,13,5,LEFT
                 csWait 20
-                nextSingleText $0,$B    ; "It's so small.  I'll just{N}try to...get inside....{W1}"
-                entityActions $B
+                nextSingleText $0,ALLY_ROHDE ; "It's so small.  I'll just{N}try to...get inside....{W1}"
+                entityActions ALLY_ROHDE
                  moveLeft 1
                 endActions
                 csWait 3
-                setActscript $B,eas_452BA
+                setActscript ALLY_ROHDE,eas_452BA
                 csWait 3
                 csWait 60
-                startEntity $80
+                startEntity 128
                 csWait 30
-                stopEntity $80
+                stopEntity 128
                 csWait 60
-                startEntity $80
+                startEntity 128
                 csWait 120
-                setFacing $80,LEFT
+                setFacing 128,LEFT
                 csWait 10
-                setFacing $80,UP
+                setFacing 128,UP
                 csWait 10
-                setFacing $80,RIGHT
+                setFacing 128,RIGHT
                 csWait 10
-                setFacing $80,DOWN
+                setFacing 128,DOWN
                 csWait 10
-                setFacing $80,LEFT
+                setFacing 128,LEFT
                 csWait 10
-                setFacing $80,UP
+                setFacing 128,UP
                 csWait 10
-                setFacing $80,RIGHT
+                setFacing 128,RIGHT
                 csWait 10
-                setFacing $80,DOWN
-                setActscript $80,eas_Jump
+                setFacing 128,DOWN
+                setActscript 128,eas_Jump
                 csWait 10
-                setPos $B,63,63,DOWN
-                customActscriptWait $80
+                setPos ALLY_ROHDE,63,63,DOWN
+                customActscriptWait 128
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 playSound SFX_FALLING
-                entityActions $80
+                entityActions 128
                  moveDown 9
                 endActions
                 csWait 20
-                customActscriptWait $0
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait $0,eas_46172
-                entityActions $0
+                setActscriptWait ALLY_BOWIE,eas_46172
+                entityActions ALLY_BOWIE
                  moveLeft 1
                 endActions
-                setFacing $0,RIGHT
-                setFacing $7,LEFT
-                setFacing $1F,LEFT
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing ALLY_PETER,LEFT
+                setFacing FOLLOWER_B,LEFT
                 csWait 60
                 setCamDest 7,4
-                setActscriptWait $0,eas_Init
-                setFacing $0,DOWN
-                setFacing $7,DOWN
-                setFacing $1F,DOWN
-                nextSingleText $0,$7    ; "Oh, he's gone!{W1}"
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setFacing ALLY_BOWIE,DOWN
+                setFacing ALLY_PETER,DOWN
+                setFacing FOLLOWER_B,DOWN
+                nextSingleText $0,ALLY_PETER ; "Oh, he's gone!{W1}"
                 csWait 60
-                setFacing $0,RIGHT
-                setFacing $7,LEFT
-                setFacing $1F,LEFT
-                nextSingleText $0,$7    ; "I hope he comes back.{N}Did {NAME;11} lie to us?{W1}"
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing ALLY_PETER,LEFT
+                setFacing FOLLOWER_B,LEFT
+                nextSingleText $0,ALLY_PETER ; "I hope he comes back.{N}Did {NAME;11} lie to us?{W1}"
                 csWait 30
-                setFacing $0,DOWN
-                setFacing $7,DOWN
-                setFacing $1F,DOWN
+                setFacing ALLY_BOWIE,DOWN
+                setFacing ALLY_PETER,DOWN
+                setFacing FOLLOWER_B,DOWN
                 csWait 150
-                setActscriptWait $80,eas_46172
-                entityActions $80
+                setActscriptWait 128,eas_46172
+                entityActions 128
                  moveUp 9
                 endActions
                 playSound SFX_FALLING
                 csWait 20
-                setFacing $80,LEFT
-                setFacing $1F,LEFT
+                setFacing 128,LEFT
+                setFacing FOLLOWER_B,LEFT
                 csWait 20
-                setFacing $0,UP
-                setFacing $7,UP
+                setFacing ALLY_BOWIE,UP
+                setFacing ALLY_PETER,UP
                 csWait 10
-                setFacing $0,LEFT
-                setFacing $7,RIGHT
+                setFacing ALLY_BOWIE,LEFT
+                setFacing ALLY_PETER,RIGHT
                 csWait 10
-                setFacing $0,DOWN
-                setFacing $7,DOWN
+                setFacing ALLY_BOWIE,DOWN
+                setFacing ALLY_PETER,DOWN
                 csWait 10
-                setFacing $0,RIGHT
-                setFacing $7,LEFT
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing ALLY_PETER,LEFT
                 csWait 10
-                setFacing $0,UP
-                setFacing $7,UP
+                setFacing ALLY_BOWIE,UP
+                setFacing ALLY_PETER,UP
                 csWait 10
-                setFacing $0,LEFT
-                setFacing $7,RIGHT
+                setFacing ALLY_BOWIE,LEFT
+                setFacing ALLY_PETER,RIGHT
                 csWait 10
-                setFacing $0,DOWN
-                setFacing $7,DOWN
+                setFacing ALLY_BOWIE,DOWN
+                setFacing ALLY_PETER,DOWN
                 csWait 10
-                setFacing $0,RIGHT
-                setFacing $7,LEFT
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing ALLY_PETER,LEFT
                 csWait 10
-                customActscriptWait $0
+                customActscriptWait ALLY_BOWIE
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $1          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $7
+                customActscriptWait ALLY_PETER
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $1          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                stopEntity $0
-                stopEntity $7
+                stopEntity ALLY_BOWIE
+                stopEntity ALLY_PETER
                 csWait 30
-                setFacing $80,DOWN
+                setFacing 128,DOWN
                 csWait 60
-                stopEntity $80
-                setActscriptWait $1F,eas_BumpLeft
-                setActscriptWait $1F,eas_BumpLeft
+                stopEntity 128
+                setActscriptWait FOLLOWER_B,eas_BumpLeft
+                setActscriptWait FOLLOWER_B,eas_BumpLeft
                 csWait 30
-                setPos $B,12,5,RIGHT
-                setActscriptWait $B,eas_4536C
+                setPos ALLY_ROHDE,12,5,RIGHT
+                setActscriptWait ALLY_ROHDE,eas_4536C
                 csWait 3
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setFacing $0,UP
-                setFacing $7,UP
-                setFacing $1F,UP
-                startEntity $0
-                startEntity $7
-                entityActionsWait $B
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setFacing ALLY_BOWIE,UP
+                setFacing ALLY_PETER,UP
+                setFacing FOLLOWER_B,UP
+                startEntity ALLY_BOWIE
+                startEntity ALLY_PETER
+                entityActionsWait ALLY_ROHDE
                  moveDown 3
                 endActions
-                nextSingleText $0,$B    ; "I never lie!{W1}"
-                entityActionsWait $B
+                nextSingleText $0,ALLY_ROHDE ; "I never lie!{W1}"
+                entityActionsWait ALLY_ROHDE
                  moveLeft 2
                 endActions
-                setFacing $B,DOWN
-                nextSingleText $0,$B    ; "The Ancients were...how{N}should I say this...great!{W1}"
-                entityActionsWait $B
+                setFacing ALLY_ROHDE,DOWN
+                nextSingleText $0,ALLY_ROHDE ; "The Ancients were...how{N}should I say this...great!{W1}"
+                entityActionsWait ALLY_ROHDE
                  moveRight 1
                 endActions
-                setFacing $B,UP
-                nextSingleText $0,$B    ; "No wonder the Caravan is so{N}small.  It carries miniaturized{N}people and items.{W2}"
-                entityActionsWait $B
+                setFacing ALLY_ROHDE,UP
+                nextSingleText $0,ALLY_ROHDE ; "No wonder the Caravan is so{N}small.  It carries miniaturized{N}people and items.{W2}"
+                entityActionsWait ALLY_ROHDE
                  moveUp 2
                 endActions
-                setFacing $B,DOWN
-                nextSingleText $0,$B    ; "I can drive this excellent{N}vehicle.  May I go with you{N}as a driver?{W1}"
+                setFacing ALLY_ROHDE,DOWN
+                nextSingleText $0,ALLY_ROHDE ; "I can drive this excellent{N}vehicle.  May I go with you{N}as a driver?{W1}"
                 csWait 30
-                nextSingleText $FF,$FF  ; "{NAME;11} the historian{N}tags along with the force.{W1}"
-                entityActionsWait $7
+                nextSingleText $FF,255  ; "{NAME;11} the historian{N}tags along with the force.{W1}"
+                entityActionsWait ALLY_PETER
                  moveUp 1
                 endActions
-                nextSingleText $0,$7    ; "You're kidding, right?{W1}"
-                entityActionsWait $7
+                nextSingleText $0,ALLY_PETER ; "You're kidding, right?{W1}"
+                entityActionsWait ALLY_PETER
                  moveDown 1
                 endActions
-                setFacing $7,LEFT
-                setFacing $0,RIGHT
-                setFacing $1F,LEFT
-                nextSingleText $0,$7    ; "Well, at least we can bring{N}a lot of soldiers with us.{W1}"
-                entityActionsWait $B
+                setFacing ALLY_PETER,LEFT
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing FOLLOWER_B,LEFT
+                nextSingleText $0,ALLY_PETER ; "Well, at least we can bring{N}a lot of soldiers with us.{W1}"
+                entityActionsWait ALLY_ROHDE
                  moveDown 1
                 endActions
-                setFacing $0,UP
-                setFacing $7,UP
-                setFacing $1F,UP
-                nextSingleText $0,$B    ; "But soldiers in the Caravan{N}cannot enter battle 'cause{N}they've been miniaturized.{W1}"
-                nextSingleText $0,$7    ; "We'll just have to see.{W1}"
-                setFacing $0,RIGHT
-                setFacing $7,LEFT
-                setFacing $1F,LEFT
-                nextSingleText $0,$7    ; "Humph.  I don't like this guy.{W1}"
-                entityActionsWait $B
+                setFacing ALLY_BOWIE,UP
+                setFacing ALLY_PETER,UP
+                setFacing FOLLOWER_B,UP
+                nextSingleText $0,ALLY_ROHDE ; "But soldiers in the Caravan{N}cannot enter battle 'cause{N}they've been miniaturized.{W1}"
+                nextSingleText $0,ALLY_PETER ; "We'll just have to see.{W1}"
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing ALLY_PETER,LEFT
+                setFacing FOLLOWER_B,LEFT
+                nextSingleText $0,ALLY_PETER ; "Humph.  I don't like this guy.{W1}"
+                entityActionsWait ALLY_ROHDE
                  moveUp 1
                 endActions
-                setFacing $B,DOWN
+                setFacing ALLY_ROHDE,DOWN
                 csWait 20
-                setActscriptWait $B,eas_Jump
-                setActscriptWait $B,eas_Jump
-                setFacing $0,UP
-                setFacing $7,UP
-                setFacing $1F,UP
-                nextSingleText $0,$B    ; "I wonder what adventures{N}we'll find with this Caravan!{W1}"
+                setActscriptWait ALLY_ROHDE,eas_Jump
+                setActscriptWait ALLY_ROHDE,eas_Jump
+                setFacing ALLY_BOWIE,UP
+                setFacing ALLY_PETER,UP
+                setFacing FOLLOWER_B,UP
+                nextSingleText $0,ALLY_ROHDE ; "I wonder what adventures{N}we'll find with this Caravan!{W1}"
                 csWait 30
-                entityActions $B
+                entityActions ALLY_ROHDE
                  moveUp 1
                 endActions
                 csWait 3
-                setActscript $B,eas_452BA
+                setActscript ALLY_ROHDE,eas_452BA
                 csWait 3
                 csWait 60
-                startEntity $80
-                setPos $B,63,63,DOWN
+                startEntity 128
+                setPos ALLY_ROHDE,63,63,DOWN
                 csWait 60
-                setActscriptWait $80,eas_Init
-                entityActions $80
+                setActscriptWait 128,eas_Init
+                entityActions 128
                  moveDown 9
                 endActions
                 csWait 30
-                setFacing $0,RIGHT
-                setFacing $7,LEFT
-                setFacing $1F,LEFT
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing ALLY_PETER,LEFT
+                setFacing FOLLOWER_B,LEFT
                 csWait 10
-                setFacing $0,DOWN
-                setFacing $7,DOWN
-                setFacing $1F,DOWN
+                setFacing ALLY_BOWIE,DOWN
+                setFacing ALLY_PETER,DOWN
+                setFacing FOLLOWER_B,DOWN
                 csWait 180
                 setF $41                ; Caravan is unlocked
                 clearF $54              ; Rohde is a follower

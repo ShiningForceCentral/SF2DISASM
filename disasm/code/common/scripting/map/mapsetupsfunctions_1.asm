@@ -175,7 +175,7 @@ loc_4765A:
                 bra.s   loc_47638
 loc_4765E:
                 
-                bsr.w   GetEntityPortraitAndSpeechSfx
+                bsr.w   GetEntityPortaitAndSpeechSound
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 blt.s   loc_47670

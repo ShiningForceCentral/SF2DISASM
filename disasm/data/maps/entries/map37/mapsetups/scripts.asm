@@ -2,43 +2,43 @@
 ; ASM FILE data\maps\entries\map37\mapsetups\scripts.asm :
 ; 0x5FB30..0x5FDE4 : 
 cs_5FB30:       textCursor $D25
-                setActscriptWait $80,eas_Init
-                setFacing $80,DOWN
-                headshake $80
-                nextText $0,$80         ; "Phew!  We've made it to{N}Grans Island!{W1}"
-                nextText $0,$80         ; "{LEADER}, Geshp's probably{N}coming for us!{W2}"
-                nextText $0,$80         ; "Evacuate the ship!{W1}"
-                nextText $0,$80         ; "What are you doing?{N}Get off the ship!{W2}"
-                nextSingleText $0,$80   ; "I'll go first.{W1}"
-                entityActionsWait $80
+                setActscriptWait 128,eas_Init
+                setFacing 128,DOWN
+                headshake 128
+                nextText $0,128         ; "Phew!  We've made it to{N}Grans Island!{W1}"
+                nextText $0,128         ; "{LEADER}, Geshp's probably{N}coming for us!{W2}"
+                nextText $0,128         ; "Evacuate the ship!{W1}"
+                nextText $0,128         ; "What are you doing?{N}Get off the ship!{W2}"
+                nextSingleText $0,128   ; "I'll go first.{W1}"
+                entityActionsWait 128
                  moveRight 4
                  moveUpRight 1
                  moveRight 3
                 endActions
-                hide $80
+                hide 128
                 csc_end
 cs_5FB6A:       textCursor $D31
                 playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 1
-                setActscriptWait $7,eas_Init
-                setActscriptWait $80,eas_Init
-                setActscriptWait $1A,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait 128,eas_Init
+                setActscriptWait ALLY_ZYNK,eas_Init
                 setCamDest 11,6
-                setActscriptWait $7,eas_Jump
-                setActscriptWait $7,eas_Jump
-                nextSingleText $80,$7   ; "Wow, the ship is vibrating!{W1}"
-                setFacing $80,UP
-                nextSingleText $0,$80   ; "What's going on?{W1}"
-                setDest $1A,11,11
-                setDest $1A,14,11
-                setDest $1A,15,10
-                setDest $1A,16,10
-                setFacing $1A,DOWN
-                nextSingleText $0,$1A   ; "Don't worry. {W1}"
-                setActscriptWait $7,eas_Jump
-                nextSingleText $80,$7   ; "But...but...{N}Woooooow!{W1}"
+                setActscriptWait ALLY_PETER,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
+                nextSingleText $80,ALLY_PETER ; "Wow, the ship is vibrating!{W1}"
+                setFacing 128,UP
+                nextSingleText $0,128   ; "What's going on?{W1}"
+                setDest ALLY_ZYNK,11,11
+                setDest ALLY_ZYNK,14,11
+                setDest ALLY_ZYNK,15,10
+                setDest ALLY_ZYNK,16,10
+                setFacing ALLY_ZYNK,DOWN
+                nextSingleText $0,ALLY_ZYNK ; "Don't worry. {W1}"
+                setActscriptWait ALLY_PETER,eas_Jump
+                nextSingleText $80,ALLY_PETER ; "But...but...{N}Woooooow!{W1}"
                 setCamDest 4,6
-                setFacing $0,UP
+                setFacing ALLY_BOWIE,UP
                 playSound $FE
                 playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 3
@@ -47,69 +47,69 @@ cs_5FB6A:       textCursor $D31
                 playSound MUSIC_MITULA_SHRINE
                 executeSubroutine csub_5FD3A
                 setQuake 0
-                entityActions $80
+                entityActions 128
                  moveUp 1
                  moveLeft 1
                  moveDownLeft 1
                  moveLeft 6
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveUp 1
                  moveLeft 2
                  moveDownLeft 1
                  moveLeft 5
                 endActions
-                setFacing $80,UP
-                setFacing $7,UP
-                nextSingleText $0,$7    ; "It's floating!  This big{N}ship is floating!{W1}"
-                setFacing $1A,LEFT
+                setFacing 128,UP
+                setFacing ALLY_PETER,UP
+                nextSingleText $0,ALLY_PETER ; "It's floating!  This big{N}ship is floating!{W1}"
+                setFacing ALLY_ZYNK,LEFT
                 setCamDest 11,6
-                nextSingleText $80,$1A  ; "We're going higher and{N}higher....{W1}"
+                nextSingleText $80,ALLY_ZYNK ; "We're going higher and{N}higher....{W1}"
                 csWait 40
                 fadeOutB
-                setCameraEntity $FFFF
+                setCameraEntity 65535
                 mapLoad 75,40,12
                 loadMapEntities ce_5FDD4
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 setBlocks 60,59,4,5,44,15
                 fadeInB
                 executeSubroutine sub_5FD7C
                 csWait 60
-                nextSingleText $0,$1F   ; "I've never experienced{N}anything like this in my{N}seventy years of life!{W1}"
+                nextSingleText $0,FOLLOWER_B ; "I've never experienced{N}anything like this in my{N}seventy years of life!{W1}"
                 csWait 60
                 fadeOutB
                 mapLoad 37,4,6
                 loadEntitiesFromMapSetup 9,11,RIGHT
                 csWait 1
-                setActscriptWait $7,eas_Init
-                setActscriptWait $80,eas_Init
-                setActscriptWait $1A,eas_Init
-                setPos $80,9,12,UP
-                setPos $7,10,12,UP
-                setPos $1A,10,11,LEFT
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait 128,eas_Init
+                setActscriptWait ALLY_ZYNK,eas_Init
+                setPos 128,9,12,UP
+                setPos ALLY_PETER,10,12,UP
+                setPos ALLY_ZYNK,10,11,LEFT
                 fadeInB
-                nextSingleText $80,$1A  ; "OK, now we'll head to{N}Grans Island.{W1}"
+                nextSingleText $80,ALLY_ZYNK ; "OK, now we'll head to{N}Grans Island.{W1}"
                 setQuake 1
                 csWait 10
                 setQuake 0
                 executeSubroutine sub_5FD4C
-                setFacing $80,LEFT
-                nextSingleText $0,$80   ; "Oh, we're flying!{W1}"
-                nextSingleText $0,$7    ; "The Ancients were greater{N}than we thought!{W1}"
-                setFacing $80,UP
-                setFacing $1A,DOWN
-                nextSingleText $80,$1A  ; "Oh, thank you very much.{W1}"
+                setFacing 128,LEFT
+                nextSingleText $0,128   ; "Oh, we're flying!{W1}"
+                nextSingleText $0,ALLY_PETER ; "The Ancients were greater{N}than we thought!{W1}"
+                setFacing 128,UP
+                setFacing ALLY_ZYNK,DOWN
+                nextSingleText $80,ALLY_ZYNK ; "Oh, thank you very much.{W1}"
                 csWait 60
                 fadeOutB
                 mapLoad 75,40,12
                 loadMapEntities ce_5FDD4
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 setBlocks 60,59,4,5,44,15
-                customActscriptWait $80
+                customActscriptWait 128
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $80
+                entityActions 128
                  moveLeft 30
                 endActions
                 executeSubroutine sub_5FD5E

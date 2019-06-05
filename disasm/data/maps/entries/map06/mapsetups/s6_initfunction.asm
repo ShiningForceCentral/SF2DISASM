@@ -22,8 +22,8 @@ return_54E6E:
 
 	; End of function ms_map6_InitFunction
 
-cs_54E70:       setPos $84,11,18,DOWN
+cs_54E70:       setPos 132,11,18,DOWN
                 csc_end
-cs_54E78:       setPos $8A,63,63,DOWN
-                setPos $8B,15,23,DOWN
+cs_54E78:       setPos 138,63,63,DOWN
+                setPos 139,15,23,DOWN
                 csc_end

@@ -4,92 +4,92 @@
 abcs_battle04:  textCursor $90F
                 loadMapFadeIn 66,9,16
                 loadMapEntities ce_49A6A
-                setActscriptWait $0,eas_Init
-                setPos $1,14,21,DOWN
-                setPos $2,12,21,DOWN
-                setPos $3,13,22,DOWN
-                setPos $4,11,22,DOWN
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setPos ALLY_SARAH,14,21,DOWN
+                setPos ALLY_CHESTER,12,21,DOWN
+                setPos ALLY_JAHA,13,22,DOWN
+                setPos ALLY_KAZIN,11,22,DOWN
                 fadeInB
-                nod $0
-                nextSingleText $0,$1C   ; "Your battle strategy was{N}wonderful!  I praise you.{W1}"
+                nod ALLY_BOWIE
+                nextSingleText $0,ALLY_LEMON ; "Your battle strategy was{N}wonderful!  I praise you.{W1}"
                 csWait 5
-                setActscript $3,eas_461B6
+                setActscript ALLY_JAHA,eas_461B6
                 csWait 5
-                setActscript $4,eas_461B6
-                setActscript $1,eas_Jump
-                setActscriptWait $2,eas_Jump
-                setActscript $1,eas_Jump
-                setActscriptWait $2,eas_Jump
+                setActscript ALLY_KAZIN,eas_461B6
+                setActscript ALLY_SARAH,eas_Jump
+                setActscriptWait ALLY_CHESTER,eas_Jump
+                setActscript ALLY_SARAH,eas_Jump
+                setActscriptWait ALLY_CHESTER,eas_Jump
                 csWait 80
-                setPos $1C,18,22,UP
-                entityActionsWait $1C
+                setPos ALLY_LEMON,18,22,UP
+                entityActionsWait ALLY_LEMON
                  moveUp 2
                 endActions
-                setFacing $1C,LEFT
-                setFacing $0,RIGHT
-                setFacing $1,RIGHT
-                setFacing $2,RIGHT
-                setFacing $3,RIGHT
-                setFacing $4,RIGHT
-                nextSingleText $0,$1C   ; "But, I can't let you escape.{W1}"
-                customActscriptWait $1C
+                setFacing ALLY_LEMON,LEFT
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing ALLY_SARAH,RIGHT
+                setFacing ALLY_CHESTER,RIGHT
+                setFacing ALLY_JAHA,RIGHT
+                setFacing ALLY_KAZIN,RIGHT
+                nextSingleText $0,ALLY_LEMON ; "But, I can't let you escape.{W1}"
+                customActscriptWait ALLY_LEMON
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $1C
+                entityActionsWait ALLY_LEMON
                  moveLeft 4
                 endActions
-                setActscriptWait $0,eas_46172
-                customActscriptWait $0
+                setActscriptWait ALLY_BOWIE,eas_46172
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 setQuake 2
                 playSound SFX_BATTLEFIELD_DEATH
-                entityActionsWait $0
+                entityActionsWait ALLY_BOWIE
                  moveLeft 1
                 endActions
                 setQuake 0
-                entityActionsWait $0
+                entityActionsWait ALLY_BOWIE
                  moveUp 1
                  moveRight 1
                 endActions
-                setActscript $0,eas_RotateRight
-                setFacing $1,UP
-                setFacing $2,UP
-                setFacing $3,UP
-                setFacing $4,UP
+                setActscript ALLY_BOWIE,eas_RotateRight
+                setFacing ALLY_SARAH,UP
+                setFacing ALLY_CHESTER,UP
+                setFacing ALLY_JAHA,UP
+                setFacing ALLY_KAZIN,UP
                 csWait 60
-                setActscriptWait $0,eas_Init
-                setFacing $0,DOWN
-                customActscriptWait $0
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setFacing ALLY_BOWIE,DOWN
+                customActscriptWait ALLY_BOWIE
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $1          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $1C
+                customActscriptWait ALLY_LEMON
                  ac_setSpeed 32,32      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $1C
+                entityActionsWait ALLY_LEMON
                  moveRight 1
                 endActions
-                nextSingleText $0,$1C   ; "That lad is their leader.{N}Take him!{W1}"
-                entityActions $82
+                nextSingleText $0,ALLY_LEMON ; "That lad is their leader.{N}Take him!{W1}"
+                entityActions 130
                  moveUp 1
                 endActions
-                entityActions $81
+                entityActions 129
                  moveLeft 3
                 endActions
-                entityActionsWait $80
+                entityActionsWait 128
                  moveLeft 5
                  moveDown 1
                 endActions
-                setFacing $82,LEFT
-                setFacing $1C,DOWN
-                nextSingleText $0,$1C   ; "Don't worry.  He has only{N}fainted.  Take them to Galam!{W1}"
-                entityActionsWait $1C
+                setFacing 130,LEFT
+                setFacing ALLY_LEMON,DOWN
+                nextSingleText $0,ALLY_LEMON ; "Don't worry.  He has only{N}fainted.  Take them to Galam!{W1}"
+                entityActionsWait ALLY_LEMON
                  moveRight 1
                  moveDown 1
                  moveRight 2

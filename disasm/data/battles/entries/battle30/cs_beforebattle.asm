@@ -4,44 +4,44 @@
 bbcs_30:        textCursor $AC8
                 loadMapFadeIn 1,7,21
                 loadMapEntities ce_4C690
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setPos $7,11,28,UP
-                setActscriptWait $1F,eas_Init
-                setPos $1F,11,27,UP
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setPos ALLY_PETER,11,28,UP
+                setActscriptWait FOLLOWER_B,eas_Init
+                setPos FOLLOWER_B,11,27,UP
                 playSound MUSIC_BATTLE_THEME_1
                 fadeInB
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveUp 2
                 endActions
-                entityActions $1F
+                entityActions FOLLOWER_B
                  moveUp 2
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveUp 2
                 endActions
-                nextSingleText $0,$80   ; "What a pleasure!{N}Nice to meet you.{W1}"
-                setActscriptWait $7,eas_Jump
-                entityActionsWait $1F
+                nextSingleText $0,128   ; "What a pleasure!{N}Nice to meet you.{W1}"
+                setActscriptWait ALLY_PETER,eas_Jump
+                entityActionsWait FOLLOWER_B
                  moveRight 1
                  moveUp 1
                 endActions
-                nod $1F
-                nextSingleText $C0,$1F  ; "Ohhh....{N}He's ugly, isn't he?{W1}"
+                nod FOLLOWER_B
+                nextSingleText $C0,FOLLOWER_B ; "Ohhh....{N}He's ugly, isn't he?{W1}"
                 setCamDest 7,0
-                entityActionsWait $80
+                entityActionsWait 128
                  moveLeft 2
                 endActions
-                setCameraEntity $80
-                entityActionsWait $80
+                setCameraEntity 128
+                entityActionsWait 128
                  moveDown 2
                 endActions
-                nextText $0,$80         ; "What?!{N}You dare insult me?!{W2}"
-                nextSingleText $0,$80   ; "I've never...{N}For that you will die!{W1}"
-                entityActionsWait $80
+                nextText $0,128         ; "What?!{N}You dare insult me?!{W2}"
+                nextSingleText $0,128   ; "I've never...{N}For that you will die!{W1}"
+                entityActionsWait 128
                  moveDown 1
                 endActions
-                nextSingleText $0,$80   ; "Are you ready to die?{W1}"
+                nextSingleText $0,128   ; "Are you ready to die?{W1}"
                 playSound SFX_INTRO_LIGHTNING
                 flashScreenWhite $28
                 csc_end

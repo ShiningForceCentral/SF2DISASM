@@ -4,10 +4,10 @@
 IntroCutscene4: textCursor $1089
                 mapLoad 65,7,3
                 loadMapEntities ce_48FAA
-                setActscriptWait $0,eas_Init
+                setActscriptWait ALLY_BOWIE,eas_Init
                 fadeInFromBlackHalf
                 csWait 40
-                entityActions $81
+                entityActions 129
                  moveDown 2
                 endActions
                 playSound SFX_INTRO_LIGHTNING
@@ -15,15 +15,15 @@ IntroCutscene4: textCursor $1089
                 executeSubroutine ApplyStormEffect
                 csWait 60
                 textCursor $1089
-                nextSingleText $0,$81   ; "Somebody bring a light to{N}the King's chamber!{D2}"
+                nextSingleText $0,129   ; "Somebody bring a light to{N}the King's chamber!{D2}"
                 csWait 20
                 playSound SFX_DEMON_BREATH
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
                 csWait 30
-                setFacing $81,UP
-                nextText $80,$80        ; "Oh...the wind blew out{N}all the candles!{D2}"
-                nextSingleText $80,$80  ; "It's so dark.{N}I can't see a thing.{D2}"
+                setFacing 129,UP
+                nextText $80,128        ; "Oh...the wind blew out{N}all the candles!{D2}"
+                nextSingleText $80,128  ; "It's so dark.{N}I can't see a thing.{D2}"
                 csWait 30
                 executeSubroutine ApplyStormEffect
                 setQuake 3
@@ -35,324 +35,324 @@ IntroCutscene4: textCursor $1089
                 mapFadeInFromWhite
                 tintMap
                 setQuake 0
-                customActscriptWait $80
+                customActscriptWait 128
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $80
+                entityActionsWait 128
                  moveDown 1
                 endActions
-                nextSingleText $80,$80  ; "What was that?{D2}"
+                nextSingleText $80,128  ; "What was that?{D2}"
                 csWait 5
-                setActscript $81,eas_461B6
+                setActscript 129,eas_461B6
                 csWait 80
-                entityActionsWait $81
+                entityActionsWait 129
                  moveUp 2
                 endActions
                 csWait 40
-                setActscriptWait $81,eas_46172
-                customActscriptWait $81
+                setActscriptWait 129,eas_46172
+                customActscriptWait 129
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $81
+                entityActionsWait 129
                  moveDown 1
                 endActions
-                nextSingleText $0,$81   ; "Sire, the Ancient Tower...{D2}"
-                entityActionsWait $80
+                nextSingleText $0,129   ; "Sire, the Ancient Tower...{D2}"
+                entityActionsWait 128
                  moveDown 1
                  faceLeft 1
                 endActions
-                nextSingleText $80,$80  ; "What's wrong?{D2}"
-                setActscriptWait $81,eas_Init
-                setActscriptWait $81,eas_Jump
-                setActscriptWait $81,eas_Jump
-                nextSingleText $0,$81   ; "It's collapsing!{N}Maybe it was struck by{N}lightning?{D2}"
-                entityActionsWait $80
+                nextSingleText $80,128  ; "What's wrong?{D2}"
+                setActscriptWait 129,eas_Init
+                setActscriptWait 129,eas_Jump
+                setActscriptWait 129,eas_Jump
+                nextSingleText $0,129   ; "It's collapsing!{N}Maybe it was struck by{N}lightning?{D2}"
+                entityActionsWait 128
                  moveUp 1
                 endActions
-                nextSingleText $80,$80  ; "No, not lightning...{D2}"
+                nextSingleText $80,128  ; "No, not lightning...{D2}"
                 csWait 20
-                customActscriptWait $80
+                customActscriptWait 128
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $80
+                entityActionsWait 128
                  moveDown 1
                 endActions
-                nextSingleText $80,$80  ; "To my knowledge, that tower{N}is impervious to any type{N}of disaster.{D2}"
+                nextSingleText $80,128  ; "To my knowledge, that tower{N}is impervious to any type{N}of disaster.{D2}"
                 playSound SFX_DEMON_BREATH
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
                 csWait 30
-                nextSingleText $0,$82   ; "Minister!{D2}"
-                setFacing $81,LEFT
-                setFacing $80,LEFT
+                nextSingleText $0,130   ; "Minister!{D2}"
+                setFacing 129,LEFT
+                setFacing 128,LEFT
                 setCamDest 0,5
-                setPos $82,3,9,DOWN
-                setCameraEntity $82
-                customActscriptWait $82
+                setPos 130,3,9,DOWN
+                setCameraEntity 130
+                customActscriptWait 130
                  ac_setSpeed 40,40      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $82
+                entityActionsWait 130
                  moveDown 1
                  moveRight 1
                  moveDownRight 3
                  moveRight 3
                  moveUp 2
                 endActions
-                setFacing $80,DOWN
-                setFacing $81,DOWN
+                setFacing 128,DOWN
+                setFacing 129,DOWN
                 csWait 20
-                nod $82
-                nod $82
+                nod 130
+                nod 130
                 csWait 20
-                setActscriptWait $81,eas_Init
+                setActscriptWait 129,eas_Init
                 setCamDest 7,5
-                entityActionsWait $81
+                entityActionsWait 129
                  moveDown 1
                 endActions
-                nextSingleText $0,$81   ; "What is it?{D2}"
-                nextSingleText $0,$82   ; "The...sealed door...{N}Ancient Tower...{D2}"
-                setActscriptWait $80,eas_Init
-                entityActionsWait $80
+                nextSingleText $0,129   ; "What is it?{D2}"
+                nextSingleText $0,130   ; "The...sealed door...{N}Ancient Tower...{D2}"
+                setActscriptWait 128,eas_Init
+                entityActionsWait 128
                  moveDown 1
                 endActions
-                nextSingleText $80,$80  ; "Go on.{D2}"
-                setActscriptWait $82,eas_Init
-                entityActionsWait $82
+                nextSingleText $80,128  ; "Go on.{D2}"
+                setActscriptWait 130,eas_Init
+                entityActionsWait 130
                  moveRight 2
                  faceUp 1
                 endActions
-                nextSingleText $0,$82   ; "It's open!{D2}"
-                setActscriptWait $81,eas_46172
-                customActscriptWait $81
+                nextSingleText $0,130   ; "It's open!{D2}"
+                setActscriptWait 129,eas_46172
+                customActscriptWait 129
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $81
+                entityActionsWait 129
                  moveUp 1
                 endActions
-                nextSingleText $0,$81   ; "That's impossible!{N}It can't be opened!{D2}"
-                entityActionsWait $82
+                nextSingleText $0,129   ; "That's impossible!{N}It can't be opened!{D2}"
+                entityActionsWait 130
                  moveLeft 2
                  faceUp 1
                 endActions
-                nextSingleText $0,$82   ; "I'm sure it was closed{N}before the lightning, but...{D2}"
+                nextSingleText $0,130   ; "I'm sure it was closed{N}before the lightning, but...{D2}"
                 csWait 40
-                setFacing $81,RIGHT
-                setFacing $80,LEFT
+                setFacing 129,RIGHT
+                setFacing 128,LEFT
                 csWait 40
-                setFacing $81,DOWN
-                setFacing $80,DOWN
+                setFacing 129,DOWN
+                setFacing 128,DOWN
                 csWait 40
-                nextSingleText $0,$81   ; "Strange.{D2}"
-                nod $81
-                nextSingleText $0,$81   ; "Sire, I'm going to go and{N}see what happened!{D2}"
-                setActscriptWait $81,eas_Init
-                entityActionsWait $81
+                nextSingleText $0,129   ; "Strange.{D2}"
+                nod 129
+                nextSingleText $0,129   ; "Sire, I'm going to go and{N}see what happened!{D2}"
+                setActscriptWait 129,eas_Init
+                entityActionsWait 129
                  moveDown 1
                  moveRight 1
                 endActions
-                setFacing $80,LEFT
-                nextSingleText $0,$81   ; "We must know the truth.{D2}"
+                setFacing 128,LEFT
+                nextSingleText $0,129   ; "We must know the truth.{D2}"
                 csWait 20
-                nod $80
-                nextSingleText $80,$80  ; "Be careful.{D2}"
-                entityActionsWait $81
+                nod 128
+                nextSingleText $80,128  ; "Be careful.{D2}"
+                entityActionsWait 129
                  moveLeft 1
                  moveDown 1
                 endActions
-                nextSingleText $0,$81   ; "Take me to the sealed door.{D2}"
-                nod $82
-                setCameraEntity $82
-                entityActions $82
+                nextSingleText $0,129   ; "Take me to the sealed door.{D2}"
+                nod 130
+                setCameraEntity 130
+                entityActions 130
                  moveDown 2
                  moveLeft 3
                  moveUpLeft 3
                  moveLeft 1
                  moveUp 1
                 endActions
-                entityActionsWait $81
+                entityActionsWait 129
                  moveDown 3
                  moveLeft 3
                  moveUpLeft 3
                  moveLeft 1
                  moveUp 1
                 endActions
-                hide $82
-                hide $81
-                setCameraEntity $FFFF
+                hide 130
+                hide 129
+                setCameraEntity 65535
                 csWait 30
                 setCamDest 7,5
-                setCameraEntity $80
+                setCameraEntity 128
                 playSound SFX_DEMON_BREATH
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
                 csWait 30
-                setFacing $80,DOWN
+                setFacing 128,DOWN
                 csWait 30
-                nextSingleText $80,$80  ; "Strange, strange indeed!{D2}"
-                customActscriptWait $80
+                nextSingleText $80,128  ; "Strange, strange indeed!{D2}"
+                customActscriptWait 128
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $80
+                entityActionsWait 128
                  moveUp 2
                 endActions
                 csWait 20
-                nextSingleText $80,$80  ; "Lightning at the Ancient{N}Tower.{D2}"
-                setFacing $80,DOWN
+                nextSingleText $80,128  ; "Lightning at the Ancient{N}Tower.{D2}"
+                setFacing 128,DOWN
                 csWait 30
-                setFacing $80,LEFT
+                setFacing 128,LEFT
                 csWait 30
-                setFacing $80,RIGHT
+                setFacing 128,RIGHT
                 csWait 30
-                setFacing $80,DOWN
+                setFacing 128,DOWN
                 csWait 30
-                nextSingleText $80,$80  ; "Huh?{N}Did I hear something?{D2}"
-                entityActionsWait $80
+                nextSingleText $80,128  ; "Huh?{N}Did I hear something?{D2}"
+                entityActionsWait 128
                  moveDown 1
                 endActions
-                nextSingleText $80,$80  ; "A sealed door that is open.{N}An unusual storm.{N}Everything is so strange.{D2}"
+                nextSingleText $80,128  ; "A sealed door that is open.{N}An unusual storm.{N}Everything is so strange.{D2}"
                 csWait 5
-                setActscript $80,eas_461B6
+                setActscript 128,eas_461B6
                 csWait 60
-                entityActionsWait $80
+                entityActionsWait 128
                  moveDown 1
                 endActions
-                nextSingleText $80,$80  ; "What?  I feel as if someone{N}is watching me.{N}It must be my nerves.{D2}"
-                setFacing $80,UP
+                nextSingleText $80,128  ; "What?  I feel as if someone{N}is watching me.{N}It must be my nerves.{D2}"
+                setFacing 128,UP
                 playSound SFX_INTRO_LIGHTNING
-                setPos $84,9,11,UP
+                setPos 132,9,11,UP
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
-                setPos $84,63,63,UP
+                setPos 132,63,63,UP
                 csWait 60
-                nextSingleText $80,$80  ; "I guess it was nothing.{N}I have to get a hold of{N}myself.{D2}"
-                headshake $80
-                customActscriptWait $80
+                nextSingleText $80,128  ; "I guess it was nothing.{N}I have to get a hold of{N}myself.{D2}"
+                headshake 128
+                customActscriptWait 128
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $80
+                entityActionsWait 128
                  moveUp 1
                 endActions
                 playSound SFX_INTRO_LIGHTNING
-                setPos $84,9,11,UP
+                setPos 132,9,11,UP
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
-                setPos $84,63,63,UP
+                setPos 132,63,63,UP
                 csWait 60
-                setFacing $80,DOWN
+                setFacing 128,DOWN
                 csWait 30
-                nextSingleText $80,$80  ; "What was that?{N}Who's there?!{D2}"
-                setActscriptWait $80,eas_46172
-                entityActionsWait $80
+                nextSingleText $80,128  ; "What was that?{N}Who's there?!{D2}"
+                setActscriptWait 128,eas_46172
+                entityActionsWait 128
                  moveUp 1
                 endActions
                 playSound SFX_INTRO_LIGHTNING
-                setPos $84,9,11,UP
+                setPos 132,9,11,UP
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
-                setPos $84,63,63,UP
+                setPos 132,63,63,UP
                 csWait 60
-                nextSingleText $80,$80  ; "It's not my imagination!{N}Somebody's in this room!{D2}"
+                nextSingleText $80,128  ; "It's not my imagination!{N}Somebody's in this room!{D2}"
                 csWait 5
-                setActscript $80,eas_461B6
+                setActscript 128,eas_461B6
                 csWait 80
                 playSound SFX_INTRO_LIGHTNING
-                setPos $84,9,11,UP
+                setPos 132,9,11,UP
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
-                setPos $84,63,63,UP
+                setPos 132,63,63,UP
                 csWait 60
-                setFacing $80,UP
-                setPos $83,9,2,DOWN
+                setFacing 128,UP
+                setPos 131,9,2,DOWN
                 setCamDest 7,1
                 csWait 30
-                setActscriptWait $80,eas_Init
-                setActscriptWait $80,eas_Jump
-                setActscriptWait $80,eas_Jump
-                nextSingleText $80,$80  ; "Hey!{D2}"
-                customActscriptWait $80
+                setActscriptWait 128,eas_Init
+                setActscriptWait 128,eas_Jump
+                setActscriptWait 128,eas_Jump
+                nextSingleText $80,128  ; "Hey!{D2}"
+                customActscriptWait 128
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait $80,eas_46172
-                entityActionsWait $80
+                setActscriptWait 128,eas_46172
+                entityActionsWait 128
                  moveDown 1
                 endActions
-                nextSingleText $80,$80  ; "Stay away from me!{D2}"
-                setActscriptWait $83,eas_Init2
-                setActscriptWait $83,eas_46172
-                stopEntity $83
-                entityActionsWait $83
+                nextSingleText $80,128  ; "Stay away from me!{D2}"
+                setActscriptWait 131,eas_Init2
+                setActscriptWait 131,eas_46172
+                stopEntity 131
+                entityActionsWait 131
                  moveRight 1
                  moveDown 1
                  moveRight 1
                  moveDown 1
                 endActions
-                entityActionsWait $83
+                entityActionsWait 131
                  moveRight 1
                  moveDown 1
                 endActions
-                startEntity $83
-                setCameraEntity $80
-                shiver $83
+                startEntity 131
+                setCameraEntity 128
+                shiver 131
                 csWait 30
-                shiver $83
-                shiver $83
+                shiver 131
+                shiver 131
                 csWait 20
-                entityActionsWait $80
+                entityActionsWait 128
                  moveDown 1
                 endActions
                 csWait 5
-                setActscript $80,eas_461E4
+                setActscript 128,eas_461E4
                 csWait 30
-                nextSingleText $80,$80  ; "Somebody...HELP!{D2}"
-                setFacing $80,UP
-                shiver $83
+                nextSingleText $80,128  ; "Somebody...HELP!{D2}"
+                setFacing 128,UP
+                shiver 131
                 csWait 30
-                shiver $83
-                customActscriptWait $85
+                shiver 131
+                customActscriptWait 133
                  ac_setSpeed 20,20      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setPos $85,12,5,DOWN
-                entityActions $85
+                setPos 133,12,5,DOWN
+                entityActions 133
                  moveDown 4
                 endActions
-                entityFlashWhite $85,$50
-                waitIdle $85
-                setActscript $80,eas_RotateRightHighSpeed
-                entityFlashWhite $85,$28
-                nextSingleText $80,$80  ; "Aughhhh!!!{D2}"
-                hide $85
+                entityFlashWhite 133,$50
+                waitIdle 133
+                setActscript 128,eas_RotateRightHighSpeed
+                entityFlashWhite 133,$28
+                nextSingleText $80,128  ; "Aughhhh!!!{D2}"
+                hide 133
                 csWait 30
-                setActscript $80,eas_RotateRight
+                setActscript 128,eas_RotateRight
                 csWait 50
-                entityActionsWait $80
+                entityActionsWait 128
                  faceDown 1
                  moveDown 1
                 endActions
-                setFacing $80,UP
-                customActscriptWait $80
+                setFacing 128,UP
+                customActscriptWait 128
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $2          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                nextSingleText $80,$80  ; "(Sigh)....{D2}"
-                shiver $83
+                nextSingleText $80,128  ; "(Sigh)....{D2}"
+                shiver 131
                 csWait 30
                 playSound SFX_INTRO_LIGHTNING
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
                 csWait 40
-                shiver $83
+                shiver 131
                 csWait 40
                 fadeOutToBlackHalf
                 csc_end

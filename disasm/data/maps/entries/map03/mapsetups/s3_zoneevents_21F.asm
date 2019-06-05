@@ -27,5 +27,5 @@ Map3_21F_ZoneEvent0:
 
 	; End of function Map3_21F_ZoneEvent0
 
-cs_6283E:       moveNextToPlayer $89,LEFT
+cs_6283E:       moveNextToPlayer 137,LEFT
                 csc_end

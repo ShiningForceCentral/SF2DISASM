@@ -17,350 +17,350 @@ return_615E4:
 	; End of function ms_map59_flag21F_InitFunction
 
 cs_615E6:       textCursor $EB0
-                setCameraEntity $FFFF
+                setCameraEntity 65535
                 reloadMap 9,6
-                setPos $0,12,11,UP
-                setPriority $0,$0
-                setPriority $80,$FFFF
+                setPos ALLY_BOWIE,12,11,UP
+                setPriority ALLY_BOWIE,$0
+                setPriority 128,$FFFF
                 setBlocks 12,39,7,4,10,3
-                setActscriptWait $82,eas_46172
-                setActscriptWait $80,eas_46172
-                setActscriptWait $83,eas_46172
-                setActscriptWait $0,eas_Init
-                setActscript $81,eas_Transparent
-                customActscriptWait $86
+                setActscriptWait 130,eas_46172
+                setActscriptWait 128,eas_46172
+                setActscriptWait 131,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscript 129,eas_Transparent
+                customActscriptWait 134
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $3          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait $86,eas_46172
-                entityActions $86
+                setActscriptWait 134,eas_46172
+                entityActions 134
                  moveDown 1
                 endActions
                 csWait 2
-                setActscriptWait $86,eas_461AA
+                setActscriptWait 134,eas_461AA
                 csWait 5
                 fadeInB
                 csWait 40
-                nextText $80,$86        ; "Where am I?{N}What's going on?{W2}"
-                nextSingleText $80,$86  ; "I...can't...sit up.{W1}"
-                shiver $86
-                nextSingleText $80,$86  ; "{NAME;28}, is that you?{N}{NAME;28}, what happened?{W1}"
-                nextSingleText $0,$1C   ; "King...King Galam...{W1}"
-                entityActionsWait $1C
+                nextText $80,134        ; "Where am I?{N}What's going on?{W2}"
+                nextSingleText $80,134  ; "I...can't...sit up.{W1}"
+                shiver 134
+                nextSingleText $80,134  ; "{NAME;28}, is that you?{N}{NAME;28}, what happened?{W1}"
+                nextSingleText $0,ALLY_LEMON ; "King...King Galam...{W1}"
+                entityActionsWait ALLY_LEMON
                  moveUp 1
                  faceRight 40
                 endActions
-                setFacing $1C,DOWN
-                setSprite $1C,MAPSPRITE_EFFECT5
+                setFacing ALLY_LEMON,DOWN
+                setSprite ALLY_LEMON,MAPSPRITE_EFFECT5
                 csWait 20
-                nextSingleText $0,$1C   ; "I don't know what to say.{W1}"
-                nextText $80,$86        ; "I can't see very well.{N}Am I dying?{W2}"
-                nextSingleText $80,$86  ; "I don't want to die!{N}{NAME;28}, tell me why.{W1}"
-                shiver $86
+                nextSingleText $0,ALLY_LEMON ; "I don't know what to say.{W1}"
+                nextText $80,134        ; "I can't see very well.{N}Am I dying?{W2}"
+                nextSingleText $80,134  ; "I don't want to die!{N}{NAME;28}, tell me why.{W1}"
+                shiver 134
                 csWait 30
-                shiver $1C
+                shiver ALLY_LEMON
                 csWait 30
-                entityActionsWait $84
+                entityActionsWait 132
                  moveRight 2
                  moveUp 4
                 endActions
-                nextSingleText $0,$84   ; "Poor King Galam.{N}You were possessed by a{N}devil.{W1}"
-                shiver $86
-                nextText $80,$86        ; "A devil?  I don't understand.{W2}"
-                nextSingleText $80,$86  ; "Are you...Elis, Princess{N}of Granseal?{W1}"
-                nod $84
-                nextSingleText $0,$84   ; "Yes.{W1}"
-                nextSingleText $80,$86  ; "I have not seen you for a{N}while.  Let me see your face.{W2}"
-                nod $84
-                entityActionsWait $84
+                nextSingleText $0,132   ; "Poor King Galam.{N}You were possessed by a{N}devil.{W1}"
+                shiver 134
+                nextText $80,134        ; "A devil?  I don't understand.{W2}"
+                nextSingleText $80,134  ; "Are you...Elis, Princess{N}of Granseal?{W1}"
+                nod 132
+                nextSingleText $0,132   ; "Yes.{W1}"
+                nextSingleText $80,134  ; "I have not seen you for a{N}while.  Let me see your face.{W2}"
+                nod 132
+                entityActionsWait 132
                  moveUp 1
                  moveRight 1
                  moveUp 1
                  faceLeft 10
                 endActions
-                stopEntity $84
-                setSprite $84,MAPSPRITE_POSE4
-                nextSingleText $80,$84  ; "Can you see me now?{N}King Galam?{W1}"
-                shiver $86
-                setActscriptWait $86,eas_Init
-                setActscriptWait $86,eas_Jump
-                startEntity $86
-                startEntity $84
-                setSprite $84,MAPSPRITE_ELIS
-                setFacing $84,DOWN
-                setFacing $86,DOWN
-                setActscriptWait $86,eas_46172
-                customActscriptWait $86
+                stopEntity 132
+                setSprite 132,MAPSPRITE_POSE4
+                nextSingleText $80,132  ; "Can you see me now?{N}King Galam?{W1}"
+                shiver 134
+                setActscriptWait 134,eas_Init
+                setActscriptWait 134,eas_Jump
+                startEntity 134
+                startEntity 132
+                setSprite 132,MAPSPRITE_ELIS
+                setFacing 132,DOWN
+                setFacing 134,DOWN
+                setActscriptWait 134,eas_46172
+                customActscriptWait 134
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $86
+                entityActions 134
                  moveRight 1
                 endActions
                 csWait 5
-                setActscriptWait $86,eas_461AA
-                entityActions $86
+                setActscriptWait 134,eas_461AA
+                entityActions 134
                  moveUp 1
                 endActions
                 csWait 2
-                setActscriptWait $86,eas_461AA
-                nextSingleText $FF,$FF  ; "King Galam grabbed Elis'{N}arms!{W1}"
-                setActscriptWait $84,eas_46172
-                customActscriptWait $86
+                setActscriptWait 134,eas_461AA
+                nextSingleText $FF,255  ; "King Galam grabbed Elis'{N}arms!{W1}"
+                setActscriptWait 132,eas_46172
+                customActscriptWait 134
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $84
+                customActscriptWait 132
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setSprite $1C,ALLY_LEMON
-                setFacing $1C,RIGHT
+                setSprite ALLY_LEMON,ALLY_LEMON
+                setFacing ALLY_LEMON,RIGHT
                 setCamDest 7,5
-                entityActions $84
+                entityActions 132
                  moveUp 1
                  moveLeft 1
                 endActions
-                entityActionsWait $86
+                entityActionsWait 134
                  moveUp 1
                  moveLeft 1
                 endActions
-                setActscript $0,eas_Jump
-                setActscript $7,eas_Jump
-                setActscript $85,eas_Jump
-                setActscriptWait $1C,eas_Jump
-                setActscript $0,eas_Jump
-                setActscript $7,eas_Jump
-                setActscript $85,eas_Jump
-                setActscriptWait $1C,eas_Jump
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscript ALLY_PETER,eas_Jump
+                setActscript 133,eas_Jump
+                setActscriptWait ALLY_LEMON,eas_Jump
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscript ALLY_PETER,eas_Jump
+                setActscript 133,eas_Jump
+                setActscriptWait ALLY_LEMON,eas_Jump
                 csWait 20
-                entityActionsWait $1C
+                entityActionsWait ALLY_LEMON
                  moveUp 1
                  faceRight 1
                 endActions
-                nextText $0,$1C         ; "What are you doing?{W2}"
-                nextSingleText $0,$1C   ; "King Galam!{N}You're standing?!{W1}"
-                setFacing $86,LEFT
-                nextSingleText $80,$86  ; "Ha, ha, ha!{N}Galam?{W1}"
+                nextText $0,ALLY_LEMON  ; "What are you doing?{W2}"
+                nextSingleText $0,ALLY_LEMON ; "King Galam!{N}You're standing?!{W1}"
+                setFacing 134,LEFT
+                nextSingleText $80,134  ; "Ha, ha, ha!{N}Galam?{W1}"
                 flashScreenWhite $4
                 csWait 10
                 flashScreenWhite $4
                 csWait 10
                 flashScreenWhite $4
                 csWait 10
-                setActscriptWait $86,eas_Init
-                setSprite $86,MAPSPRITE_GALAM_ZEON
-                shiver $86
+                setActscriptWait 134,eas_Init
+                setSprite 134,MAPSPRITE_GALAM_ZEON
+                shiver 134
                 playSound MUSIC_ZEON_ATTACK
-                nextSingleText $80,$86  ; "I'm not Galam, you fools!{W1}"
-                setActscript $84,eas_Jump
-                setActscript $0,eas_Jump
-                setActscript $7,eas_Jump
-                setActscript $85,eas_Jump
-                setActscriptWait $1C,eas_Jump
-                setActscript $84,eas_Jump
-                setActscript $0,eas_Jump
-                setActscript $7,eas_Jump
-                setActscript $85,eas_Jump
-                setActscriptWait $1C,eas_Jump
-                setActscriptWait $84,eas_46172
-                setActscript $84,eas_AnimSpeedx2
-                nextSingleText $80,$7   ; "Zeon!{W1}"
-                setActscriptWait $1C,eas_46172
-                customActscriptWait $1C
+                nextSingleText $80,134  ; "I'm not Galam, you fools!{W1}"
+                setActscript 132,eas_Jump
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscript ALLY_PETER,eas_Jump
+                setActscript 133,eas_Jump
+                setActscriptWait ALLY_LEMON,eas_Jump
+                setActscript 132,eas_Jump
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscript ALLY_PETER,eas_Jump
+                setActscript 133,eas_Jump
+                setActscriptWait ALLY_LEMON,eas_Jump
+                setActscriptWait 132,eas_46172
+                setActscript 132,eas_AnimSpeedx2
+                nextSingleText $80,ALLY_PETER ; "Zeon!{W1}"
+                setActscriptWait ALLY_LEMON,eas_46172
+                customActscriptWait ALLY_LEMON
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $1C
+                entityActionsWait ALLY_LEMON
                  moveLeft 1
                 endActions
-                nextSingleText $0,$1C   ; "How?!{N}You died!{W1}"
-                nextText $80,$86        ; "Never!{N}You don't know anything{N}about me!{W2}"
-                nextText $80,$86        ; "I can't be killed by the{N}sword.{W2}"
-                setFacing $86,DOWN
-                shiver $86
-                nextSingleText $80,$86  ; "All you can do is weaken me.{W1}"
+                nextSingleText $0,ALLY_LEMON ; "How?!{N}You died!{W1}"
+                nextText $80,134        ; "Never!{N}You don't know anything{N}about me!{W2}"
+                nextText $80,134        ; "I can't be killed by the{N}sword.{W2}"
+                setFacing 134,DOWN
+                shiver 134
+                nextSingleText $80,134  ; "All you can do is weaken me.{W1}"
                 csWait 20
-                shiver $85
-                nextText $80,$85        ; "Yes, Mitula told us to{N}weaken him!{W2}"
-                nextSingleText $80,$85  ; "I should have remembered{N}that before Elis was{N}captured!{W1}"
-                nextSingleText $0,$1C   ; "Y...you fiend!{W1}"
-                setActscriptWait $1C,eas_Init
-                customActscriptWait $1C
+                shiver 133
+                nextText $80,133        ; "Yes, Mitula told us to{N}weaken him!{W2}"
+                nextSingleText $80,133  ; "I should have remembered{N}that before Elis was{N}captured!{W1}"
+                nextSingleText $0,ALLY_LEMON ; "Y...you fiend!{W1}"
+                setActscriptWait ALLY_LEMON,eas_Init
+                customActscriptWait ALLY_LEMON
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $1C
+                entityActionsWait ALLY_LEMON
                  moveRight 1
                 endActions
-                setFacing $86,LEFT
-                nextSingleText $80,$86  ; "Stop!  Do you want me to kill{N}Elis?!{W1}"
-                shiver $1C
-                nextSingleText $0,$1C   ; "Scoundrel!{N}We have to save her!{W1}"
+                setFacing 134,LEFT
+                nextSingleText $80,134  ; "Stop!  Do you want me to kill{N}Elis?!{W1}"
+                shiver ALLY_LEMON
+                nextSingleText $0,ALLY_LEMON ; "Scoundrel!{N}We have to save her!{W1}"
                 setCamDest 8,5
                 csWait 30
-                setFacing $86,DOWN
-                nextSingleText $0,$86   ; "{LEADER}!  Phoenix!{N}Come here!{W1}"
+                setFacing 134,DOWN
+                nextSingleText $0,134   ; "{LEADER}!  Phoenix!{N}Come here!{W1}"
                 csWait 20
-                setFacing $7,LEFT
-                setFacing $0,RIGHT
+                setFacing ALLY_PETER,LEFT
+                setFacing ALLY_BOWIE,RIGHT
                 csWait 20
-                nextSingleText $80,$7   ; "Well, {LEADER}.{N}What should we do?{W1}"
-                nextText $0,$86         ; "Quickly!  My time is short,{N}but I can still choke her!{W2}"
-                nextSingleText $0,$86   ; "Get over here, NOW!{W1}"
+                nextSingleText $80,ALLY_PETER ; "Well, {LEADER}.{N}What should we do?{W1}"
+                nextText $0,134         ; "Quickly!  My time is short,{N}but I can still choke her!{W2}"
+                nextSingleText $0,134   ; "Get over here, NOW!{W1}"
                 csWait 20
-                nextSingleText $80,$7   ; "We have no choice....{W1}"
-                nod $0
-                nextSingleText $FF,$FF  ; "{LEADER} nods hopelessly.{W1}"
-                setFacing $7,UP
-                setFacing $0,UP
+                nextSingleText $80,ALLY_PETER ; "We have no choice....{W1}"
+                nod ALLY_BOWIE
+                nextSingleText $FF,255  ; "{LEADER} nods hopelessly.{W1}"
+                setFacing ALLY_PETER,UP
+                setFacing ALLY_BOWIE,UP
                 csWait 30
-                customActscriptWait $0
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $7
+                customActscriptWait ALLY_PETER
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveUp 1
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveUp 1
                 endActions
-                nextText $0,$86         ; "That's far enough.{N}Now, phoenix.{W2}"
-                nextSingleText $0,$86   ; "Take the Jewel of Evil{N}from {LEADER}!{W1}"
+                nextText $0,134         ; "That's far enough.{N}Now, phoenix.{W2}"
+                nextSingleText $0,134   ; "Take the Jewel of Evil{N}from {LEADER}!{W1}"
                 csWait 20
-                setFacing $7,LEFT
+                setFacing ALLY_PETER,LEFT
                 csWait 50
-                setFacing $7,UP
+                setFacing ALLY_PETER,UP
                 csWait 30
-                nextSingleText $80,$7   ; "But, we can't remove it.{W1}"
-                setActscriptWait $86,eas_Jump
-                setActscriptWait $86,eas_Jump
-                nextSingleText $0,$86   ; "Shut up!  Do it!{W1}"
-                nextSingleText $80,$7   ; "But...{W1}"
+                nextSingleText $80,ALLY_PETER ; "But, we can't remove it.{W1}"
+                setActscriptWait 134,eas_Jump
+                setActscriptWait 134,eas_Jump
+                nextSingleText $0,134   ; "Shut up!  Do it!{W1}"
+                nextSingleText $80,ALLY_PETER ; "But...{W1}"
                 csWait 30
-                setFacing $7,LEFT
-                setFacing $0,RIGHT
+                setFacing ALLY_PETER,LEFT
+                setFacing ALLY_BOWIE,RIGHT
                 csWait 20
-                entityActionsWait $0
+                entityActionsWait ALLY_BOWIE
                  moveRight 1
                 endActions
                 csWait 30
-                customActscriptWait $7
+                customActscriptWait ALLY_PETER
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $7
+                entityActions ALLY_PETER
                  moveLeft 1
                 endActions
                 csWait 15
-                setActscriptWait $7,eas_461AA
-                nextSingleText $FF,$FF  ; "{NAME;7} tugs at the{N}jewel.{W1}"
+                setActscriptWait ALLY_PETER,eas_461AA
+                nextSingleText $FF,255  ; "{NAME;7} tugs at the{N}jewel.{W1}"
                 csWait 20
-                nextSingleText $80,$7   ; "Nope.  Let me try this.{W1}"
-                shiver $7
-                nextSingleText $FF,$FF  ; "{NAME;7} removed the{N}jewel from {LEADER}'s neck.{W1}"
-                setActscriptWait $7,eas_46172
-                entityActions $7
+                nextSingleText $80,ALLY_PETER ; "Nope.  Let me try this.{W1}"
+                shiver ALLY_PETER
+                nextSingleText $FF,255  ; "{NAME;7} removed the{N}jewel from {LEADER}'s neck.{W1}"
+                setActscriptWait ALLY_PETER,eas_46172
+                entityActions ALLY_PETER
                  moveRight 1
                 endActions
                 csWait 15
-                setActscriptWait $7,eas_461AA
-                nextSingleText $80,$7   ; "Oh, my!{W1}"
+                setActscriptWait ALLY_PETER,eas_461AA
+                nextSingleText $80,ALLY_PETER ; "Oh, my!{W1}"
                 csWait 30
-                setFacing $7,UP
-                setFacing $0,UP
-                nextSingleText $80,$7   ; "What should I do with it?{W1}"
+                setFacing ALLY_PETER,UP
+                setFacing ALLY_BOWIE,UP
+                nextSingleText $80,ALLY_PETER ; "What should I do with it?{W1}"
                 csWait 20
-                setFacing $86,RIGHT
-                nextSingleText $0,$86   ; "Put it in front of me.{W1}"
+                setFacing 134,RIGHT
+                nextSingleText $0,134   ; "Put it in front of me.{W1}"
                 csWait 20
-                nod $7
-                nextSingleText $80,$7   ; "OK....{W1}"
-                entityActionsWait $7
+                nod ALLY_PETER
+                nextSingleText $80,ALLY_PETER ; "OK....{W1}"
+                entityActionsWait ALLY_PETER
                  moveUp 2
                  faceLeft 1
                 endActions
-                setFacing $86,RIGHT
+                setFacing 134,RIGHT
                 csWait 20
-                nod $7
+                nod ALLY_PETER
                 csWait 20
-                nextSingleText $FF,$FF  ; "{NAME;7} put the jewel on{N}the ground.{W1}"
-                entityActionsWait $7
+                nextSingleText $FF,255  ; "{NAME;7} put the jewel on{N}the ground.{W1}"
+                entityActionsWait ALLY_PETER
                  moveRight 2
                 endActions
-                nextSingleText $0,$86   ; "Excellent!{N}Finally, I have it back!{W1}"
-                setActscriptWait $86,eas_46172
-                customActscriptWait $86
+                nextSingleText $0,134   ; "Excellent!{N}Finally, I have it back!{W1}"
+                setActscriptWait 134,eas_46172
+                customActscriptWait 134
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $86
+                entityActions 134
                  moveRight 1
                 endActions
-                entityActionsWait $84
+                entityActionsWait 132
                  moveRight 1
                 endActions
-                setFacing $86,DOWN
+                setFacing 134,DOWN
                 csWait 30
-                nod $86
-                nextSingleText $FF,$FF  ; "Zeon picks up the jewel.{W1}"
+                nod 134
+                nextSingleText $FF,255  ; "Zeon picks up the jewel.{W1}"
                 csWait 40
                 playSound SFX_SPELL_CAST
-                entityFlashWhite $86,$14
+                entityFlashWhite 134,$14
                 csWait 20
                 playSound SFX_SPELL_CAST
-                entityFlashWhite $86,$14
+                entityFlashWhite 134,$14
                 csWait 20
                 playSound SFX_SPELL_CAST
-                entityFlashWhite $86,$14
+                entityFlashWhite 134,$14
                 csWait 20
-                nextSingleText $0,$86   ; "Oh...oh...I feel my powers{N}returning!{W1}"
-                setFacing $85,UP
-                shiver $85
-                nextText $80,$85        ; "Zeon is reviving.{N}We have to stop him!{W2}"
-                nextSingleText $80,$85  ; "How?  Mitula!  Volcanon!{N}Tell me!{W1}"
-                shiver $85
-                nextSingleText $0,$86   ; "Ha, ha!  Astral!{N}I'll have revived fully in a{N}few minutes.{W1}"
-                shiver $85
-                nextSingleText $0,$86   ; "You did a good job, Elis.{N}You may take a rest now.{W1}"
-                nextSingleText $80,$84  ; "A rest?  Wha...{W1}"
-                nextSingleText $FF,$FF  ; "A black cloud envelopes{N}Elis.{W1}"
-                setPos $83,14,8,LEFT
+                nextSingleText $0,134   ; "Oh...oh...I feel my powers{N}returning!{W1}"
+                setFacing 133,UP
+                shiver 133
+                nextText $80,133        ; "Zeon is reviving.{N}We have to stop him!{W2}"
+                nextSingleText $80,133  ; "How?  Mitula!  Volcanon!{N}Tell me!{W1}"
+                shiver 133
+                nextSingleText $0,134   ; "Ha, ha!  Astral!{N}I'll have revived fully in a{N}few minutes.{W1}"
+                shiver 133
+                nextSingleText $0,134   ; "You did a good job, Elis.{N}You may take a rest now.{W1}"
+                nextSingleText $80,132  ; "A rest?  Wha...{W1}"
+                nextSingleText $FF,255  ; "A black cloud envelopes{N}Elis.{W1}"
+                setPos 131,14,8,LEFT
                 csWait 50
-                nextSingleText $80,$84  ; "Ohhh....{W1}"
+                nextSingleText $80,132  ; "Ohhh....{W1}"
                 csWait 20
-                stopEntity $84
-                customActscriptWait $83
+                stopEntity 132
+                customActscriptWait 131
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $83
+                entityActions 131
                  moveDown 1
                 endActions
-                entityActionsWait $84
+                entityActionsWait 132
                  moveDown 1
                 endActions
-                setFacing $84,UP
-                customActscriptWait $84
+                setFacing 132,UP
+                customActscriptWait 132
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $2          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 csWait 20
-                hide $83
-                entityActionsWait $1C
+                hide 131
+                entityActionsWait ALLY_LEMON
                  moveRight 1
                 endActions
-                nextSingleText $0,$1C   ; "Princess!{W1}"
-                setFacing $86,LEFT
-                nextSingleText $0,$86   ; "And you too {NAME;28}.{N}So long!{W1}"
+                nextSingleText $0,ALLY_LEMON ; "Princess!{W1}"
+                setFacing 134,LEFT
+                nextSingleText $0,134   ; "And you too {NAME;28}.{N}So long!{W1}"
                 playSound SFX_BLAST_SPELL
                 flashScreenWhite $4
                 csWait 20
@@ -371,83 +371,83 @@ cs_615E6:       textCursor $EB0
                 flashScreenWhite $4
                 csWait 20
                 playSound SFX_BIG_DOOR_RUMBLE
-                setPos $82,12,8,LEFT
-                animEntityFX $82,5
-                setFacing $1C,DOWN
-                nextSingleText $0,$1C   ; "Aauugghhh!{N}I'm burning!{W1}"
-                customActscriptWait $1C
+                setPos 130,12,8,LEFT
+                animEntityFX 130,5
+                setFacing ALLY_LEMON,DOWN
+                nextSingleText $0,ALLY_LEMON ; "Aauugghhh!{N}I'm burning!{W1}"
+                customActscriptWait ALLY_LEMON
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $82
+                customActscriptWait 130
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $82
+                entityActions 130
                  moveDown 2
                 endActions
-                entityActionsWait $1C
+                entityActionsWait ALLY_LEMON
                  moveDown 2
                 endActions
-                setFacing $1C,DOWN
-                customActscriptWait $1C
+                setFacing ALLY_LEMON,DOWN
+                customActscriptWait ALLY_LEMON
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $2          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setFacing $0,LEFT
-                setFacing $85,LEFT
-                nextSingleText $0,$86   ; "That is special fire.{N}It burns even vampires!{W1}"
-                shiver $86
+                setFacing ALLY_BOWIE,LEFT
+                setFacing 133,LEFT
+                nextSingleText $0,134   ; "That is special fire.{N}It burns even vampires!{W1}"
+                shiver 134
                 csWait 20
-                setFacing $0,UP
-                setFacing $85,UP
-                nextSingleText $80,$7   ; "NO!{W1}"
-                setActscriptWait $7,eas_Init
-                setActscriptWait $85,eas_Init
-                entityActions $7
+                setFacing ALLY_BOWIE,UP
+                setFacing 133,UP
+                nextSingleText $80,ALLY_PETER ; "NO!{W1}"
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait 133,eas_Init
+                entityActions ALLY_PETER
                  moveLeft 1
                 endActions
-                entityActionsWait $85
+                entityActionsWait 133
                  moveUp 1
                 endActions
-                setFacing $85,LEFT
-                setFacing $86,RIGHT
-                customActscriptWait $7
+                setFacing 133,LEFT
+                setFacing 134,RIGHT
+                customActscriptWait ALLY_PETER
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $85
+                customActscriptWait 133
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait $7,eas_46172
-                setActscriptWait $85,eas_46172
-                setActscript $86,eas_BumpRight
-                entityFlashWhite $86,$28
+                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait 133,eas_46172
+                setActscript 134,eas_BumpRight
+                entityFlashWhite 134,$28
                 playSound SFX_BLAST_SPELL
-                setCameraEntity $7
-                entityActions $7
+                setCameraEntity ALLY_PETER
+                entityActions ALLY_PETER
                  moveRight 4
                 endActions
-                entityActions $85
+                entityActions 133
                  moveDownRight 4
                 endActions
                 playSound SFX_FALLING
-                waitIdle $85
+                waitIdle 133
                 playSound SFX_LIGHTNING_2
                 setQuake 4
-                setDest $86,13,8
-                setFacing $7,LEFT
-                customActscriptWait $7
+                setDest 134,13,8
+                setFacing ALLY_PETER,LEFT
+                customActscriptWait ALLY_PETER
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $3          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setFacing $85,UP
-                customActscriptWait $85
+                setFacing 133,UP
+                customActscriptWait 133
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $2          ;   
                  ac_updateSprite        ;   
@@ -455,43 +455,43 @@ cs_615E6:       textCursor $EB0
                 ac_end
                 csWait 30
                 setQuake 0
-                customActscriptWait $0
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setCameraEntity $0
-                entityActionsWait $0
+                setCameraEntity ALLY_BOWIE
+                entityActionsWait ALLY_BOWIE
                  moveUp 1
                 endActions
-                setActscriptWait $0,eas_BumpUp
-                nextSingleText $FF,$FF  ; "{LEADER} slapped the jewel{N}out of Zeon's hand.{W1}"
+                setActscriptWait ALLY_BOWIE,eas_BumpUp
+                nextSingleText $FF,255  ; "{LEADER} slapped the jewel{N}out of Zeon's hand.{W1}"
                 playSound $FD
-                setPos $81,14,8,DOWN
-                setActscriptWait $81,eas_46172
-                entityActions $81
+                setPos 129,14,8,DOWN
+                setActscriptWait 129,eas_46172
+                entityActions 129
                  moveRight 2
                 endActions
-                setFacing $86,DOWN
-                headshake $86
-                nextSingleText $0,$86   ; "Ouch, darn you {LEADER}!{W1}"
-                customActscriptWait $0
+                setFacing 134,DOWN
+                headshake 134
+                nextSingleText $0,134   ; "Ouch, darn you {LEADER}!{W1}"
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait $0,eas_46172
-                setActscript $86,eas_BumpDown
-                entityFlashWhite $86,$A
+                setActscriptWait ALLY_BOWIE,eas_46172
+                setActscript 134,eas_BumpDown
+                entityFlashWhite 134,$A
                 playSound SFX_BLAST_SPELL
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveDown 5
                 endActions
                 playSound SFX_FALLING
-                entityFlashWhite $86,$28
-                waitIdle $0
+                entityFlashWhite 134,$28
+                waitIdle ALLY_BOWIE
                 playSound SFX_LIGHTNING_2
                 setQuake 4
-                setFacing $0,UP
-                customActscriptWait $0
+                setFacing ALLY_BOWIE,UP
+                customActscriptWait ALLY_BOWIE
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $2          ;   
                  ac_updateSprite        ;   
@@ -500,88 +500,88 @@ cs_615E6:       textCursor $EB0
                 csWait 30
                 setQuake 0
                 csWait 30
-                nextSingleText $0,$0    ; "Ohhh....{W1}"
-                shiver $0
-                nextSingleText $FF,$FF  ; "{LEADER} is stunned.{W1}"
+                nextSingleText $0,ALLY_BOWIE ; "Ohhh....{W1}"
+                shiver ALLY_BOWIE
+                nextSingleText $FF,255  ; "{LEADER} is stunned.{W1}"
                 setCamDest 10,4
-                setFacing $86,DOWN
-                stopEntity $86
+                setFacing 134,DOWN
+                stopEntity 134
                 csWait 5
-                setActscript $86,eas_461B6
+                setActscript 134,eas_461B6
                 csWait 60
-                startEntity $86
-                nextSingleText $80,$86  ; "That's what you get!{W1}"
+                startEntity 134
+                nextSingleText $80,134  ; "That's what you get!{W1}"
                 csWait 30
-                setFacing $86,RIGHT
+                setFacing 134,RIGHT
                 csWait 30
-                customActscriptWait $86
+                customActscriptWait 134
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $86
+                entityActionsWait 134
                  moveRight 1
                 endActions
                 setCamDest 10,6
-                setPos $80,13,14,DOWN
-                animEntityFX $80,7
+                setPos 128,13,14,DOWN
+                animEntityFX 128,7
                 csWait 30
-                customActscriptWait $80
+                customActscriptWait 128
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $80
+                entityActionsWait 128
                  moveUp 3
                  moveUpLeft 1
                 endActions
                 csWait 30
                 playSound SFX_PRISM_LASER_FIRING
-                setPos $82,63,63,LEFT
-                animEntityFX $80,6
+                setPos 130,63,63,LEFT
+                animEntityFX 128,6
                 playSound MUSIC_FINAL_BATTLE
-                shiver $1C
+                shiver ALLY_LEMON
                 csWait 20
-                shiver $1C
+                shiver ALLY_LEMON
                 csWait 20
-                setActscriptWait $1C,eas_Init
-                startEntity $1C
-                setFacing $1C,DOWN
+                setActscriptWait ALLY_LEMON,eas_Init
+                startEntity ALLY_LEMON
+                setFacing ALLY_LEMON,DOWN
                 csWait 30
-                nextSingleText $0,$1C   ; "Groovy!{W1}"
-                customActscriptWait $1C
+                nextSingleText $0,ALLY_LEMON ; "Groovy!{W1}"
+                customActscriptWait ALLY_LEMON
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $1C
+                entityActionsWait ALLY_LEMON
                  moveUp 1
                 endActions
-                shiver $85
-                nextSingleText $80,$85  ; "{NAME;28}...{W1}"
-                entityActionsWait $1C
+                shiver 133
+                nextSingleText $80,133  ; "{NAME;28}...{W1}"
+                entityActionsWait ALLY_LEMON
                  moveUp 1
                  faceRight 1
                 endActions
-                shiver $86
+                shiver 134
                 setCamDest 8,3
-                nextSingleText $80,$86  ; "What?  How?{W1}"
-                setFacing $86,LEFT
+                nextSingleText $80,134  ; "What?  How?{W1}"
+                setFacing 134,LEFT
                 csWait 30
-                nextSingleText $80,$86  ; "{NAME;28}...leave, now!{W1}"
-                nextText $0,$1C         ; "King Galam...{W2}"
-                nextSingleText $0,$1C   ; "Please stop!{W1}"
-                nextSingleText $80,$86  ; "Get away!{W1}"
-                nextSingleText $0,$1C   ; "I'll go, but I'll take you{N}with me to another dimension.{W1}"
-                entityActionsWait $1C
+                nextSingleText $80,134  ; "{NAME;28}...leave, now!{W1}"
+                nextText $0,ALLY_LEMON  ; "King Galam...{W2}"
+                nextSingleText $0,ALLY_LEMON ; "Please stop!{W1}"
+                nextSingleText $80,134  ; "Get away!{W1}"
+                nextSingleText $0,ALLY_LEMON ; "I'll go, but I'll take you{N}with me to another dimension.{W1}"
+                entityActionsWait ALLY_LEMON
                  moveRight 1
                 endActions
-                nextSingleText $80,$86  ; "Die!{W1}"
-                setActscriptWait $1C,eas_46172
+                nextSingleText $80,134  ; "Die!{W1}"
+                setActscriptWait ALLY_LEMON,eas_46172
                 playSound SFX_BLAST_SPELL
                 flashScreenWhite $4
                 csWait 20
                 playSound SFX_BLAST_SPELL
                 flashScreenWhite $4
                 csWait 20
-                entityActions $1C
+                entityActions ALLY_LEMON
                  moveLeft 3
                 endActions
                 playSound SFX_BLAST_SPELL
@@ -593,31 +593,31 @@ cs_615E6:       textCursor $EB0
                 playSound SFX_BLAST_SPELL
                 flashScreenWhite $4
                 csWait 20
-                waitIdle $1C
+                waitIdle ALLY_LEMON
                 csWait 20
                 playSound SFX_BIG_DOOR_RUMBLE
-                setPos $82,10,8,LEFT
-                animEntityFX $82,5
+                setPos 130,10,8,LEFT
+                animEntityFX 130,5
                 setCamDest 8,6
-                setPos $80,13,14,DOWN
-                animEntityFX $80,7
+                setPos 128,13,14,DOWN
+                animEntityFX 128,7
                 csWait 30
-                customActscriptWait $80
+                customActscriptWait 128
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $80
+                entityActionsWait 128
                  moveUp 3
                  moveUpLeft 3
                 endActions
                 csWait 30
                 playSound SFX_PRISM_LASER_FIRING
-                setPos $82,63,63,LEFT
-                animEntityFX $80,6
+                setPos 130,63,63,LEFT
+                animEntityFX 128,6
                 csWait 40
                 setCamDest 8,3
-                nextSingleText $0,$1C   ; "King...Galam...{W1}"
-                entityActionsWait $1C
+                nextSingleText $0,ALLY_LEMON ; "King...Galam...{W1}"
+                entityActionsWait ALLY_LEMON
                  moveRight 1
                 endActions
                 playSound SFX_BLAST_SPELL
@@ -629,81 +629,81 @@ cs_615E6:       textCursor $EB0
                 playSound SFX_BLAST_SPELL
                 flashScreenWhite $4
                 csWait 10
-                entityActionsWait $1C
+                entityActionsWait ALLY_LEMON
                  moveLeft 1
                 endActions
                 csWait 50
-                entityActionsWait $1C
+                entityActionsWait ALLY_LEMON
                  moveRight 2
                 endActions
-                shiver $86
+                shiver 134
                 csWait 20
-                nextText $80,$86        ; "How?  It's not possible!{W2}"
-                nextText $80,$86        ; "You can't still be alive!{W2}"
-                setFacing $86,DOWN
-                headshake $86
-                setFacing $86,RIGHT
-                nextSingleText $80,$86  ; "Oh, my powers are fading.{N}Where's the jewel?!{W1}"
-                shiver $86
-                nextSingleText $0,$1C   ; "My King...come with me....{W1}"
-                entityActionsWait $1C
+                nextText $80,134        ; "How?  It's not possible!{W2}"
+                nextText $80,134        ; "You can't still be alive!{W2}"
+                setFacing 134,DOWN
+                headshake 134
+                setFacing 134,RIGHT
+                nextSingleText $80,134  ; "Oh, my powers are fading.{N}Where's the jewel?!{W1}"
+                shiver 134
+                nextSingleText $0,ALLY_LEMON ; "My King...come with me....{W1}"
+                entityActionsWait ALLY_LEMON
                  moveRight 1
                 endActions
-                entityActions $1C
+                entityActions ALLY_LEMON
                  moveRight 1
                 endActions
                 csWait 25
-                setActscriptWait $1C,eas_461AA
-                nextSingleText $80,$86  ; "No, I'll never go back to{N}such a terrible...{W1}"
-                headshake $86
-                setActscriptWait $86,eas_46172
-                customActscriptWait $86
+                setActscriptWait ALLY_LEMON,eas_461AA
+                nextSingleText $80,134  ; "No, I'll never go back to{N}such a terrible...{W1}"
+                headshake 134
+                setActscriptWait 134,eas_46172
+                customActscriptWait 134
                  ac_setSpeed 5,5        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $1C
+                customActscriptWait ALLY_LEMON
                  ac_setSpeed 5,5        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $86
+                entityActions 134
                  moveLeft 1
                 endActions
-                entityActions $1C
+                entityActions ALLY_LEMON
                  moveLeft 1
                 endActions
-                headshake $86
-                headshake $86
-                waitIdle $86
-                nextSingleText $80,$86  ; "I shall return!{N}Remember!{W1}"
-                setActscriptWait $1C,eas_46172
-                setActscriptWait $86,eas_46172
-                setFacing $86,DOWN
-                setFacing $1C,DOWN
-                setPriority $86,$FFFF
-                setPriority $1C,$0
-                entityActions $1C
+                headshake 134
+                headshake 134
+                waitIdle 134
+                nextSingleText $80,134  ; "I shall return!{N}Remember!{W1}"
+                setActscriptWait ALLY_LEMON,eas_46172
+                setActscriptWait 134,eas_46172
+                setFacing 134,DOWN
+                setFacing ALLY_LEMON,DOWN
+                setPriority 134,$FFFF
+                setPriority ALLY_LEMON,$0
+                entityActions ALLY_LEMON
                  moveUpRight 1
                 endActions
                 csWait 8
-                setActscriptWait $1C,eas_461AA
-                entityActions $86
+                setActscriptWait ALLY_LEMON,eas_461AA
+                entityActions 134
                  moveUp 3
                 endActions
-                entityActions $1C
+                entityActions ALLY_LEMON
                  moveUp 3
                 endActions
-                headshake $86
-                headshake $86
-                headshake $86
-                headshake $86
-                headshake $86
-                headshake $86
-                waitIdle $86
-                headshake $86
+                headshake 134
+                headshake 134
+                headshake 134
+                headshake 134
+                headshake 134
+                headshake 134
+                waitIdle 134
+                headshake 134
                 playSound SFX_FALLING
-                setActscript $86,eas_463AE
-                setActscriptWait $1C,eas_463AE
-                nextSingleText $80,$86  ; "Noooooooooo!{W1}"
+                setActscript 134,eas_463AE
+                setActscriptWait ALLY_LEMON,eas_463AE
+                nextSingleText $80,134  ; "Noooooooooo!{W1}"
                 csWait 30
                 setQuake 2
                 playSound SFX_BLAST_SPELL
@@ -720,387 +720,387 @@ cs_615E6:       textCursor $EB0
                 setQuake 0
                 csWait 60
                 playSound $FD
-                setCameraEntity $7
+                setCameraEntity ALLY_PETER
                 csWait 60
-                setActscriptWait $7,eas_Init
-                startEntity $7
-                setFacing $7,DOWN
-                headshake $7
+                setActscriptWait ALLY_PETER,eas_Init
+                startEntity ALLY_PETER
+                setFacing ALLY_PETER,DOWN
+                headshake ALLY_PETER
                 csWait 60
-                setFacing $7,LEFT
+                setFacing ALLY_PETER,LEFT
                 csWait 20
-                nextSingleText $80,$7   ; "{NAME;28} has taken Zeon{N}away.{W1}"
+                nextSingleText $80,ALLY_PETER ; "{NAME;28} has taken Zeon{N}away.{W1}"
                 playSound MUSIC_SAD_THEME_3
-                setCameraEntity $85
+                setCameraEntity 133
                 csWait 30
-                setActscriptWait $85,eas_Init
-                startEntity $85
-                setFacing $85,DOWN
-                headshake $85
+                setActscriptWait 133,eas_Init
+                startEntity 133
+                setFacing 133,DOWN
+                headshake 133
                 csWait 30
-                entityActionsWait $85
+                entityActionsWait 133
                  moveRight 1
                  faceUp 1
                 endActions
-                setFacing $7,DOWN
-                nextText $80,$85        ; "It's over.{W2}"
-                nextSingleText $80,$85  ; "But, what a tragic ending.{W1}"
-                nod $7
+                setFacing ALLY_PETER,DOWN
+                nextText $80,133        ; "It's over.{W2}"
+                nextSingleText $80,133  ; "But, what a tragic ending.{W1}"
+                nod ALLY_PETER
                 csWait 40
-                setActscriptWait $7,eas_Jump
-                setActscriptWait $7,eas_Jump
-                nextSingleText $80,$7   ; "{LEADER}?  Is he OK?{W1}"
-                setCameraEntity $7
-                entityActionsWait $7
+                setActscriptWait ALLY_PETER,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
+                nextSingleText $80,ALLY_PETER ; "{LEADER}?  Is he OK?{W1}"
+                setCameraEntity ALLY_PETER
+                entityActionsWait ALLY_PETER
                  moveRight 1
                  moveDown 4
                 endActions
-                entityActions $85
+                entityActions 133
                  moveDown 4
                  moveLeft 7
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveDown 5
                  moveLeft 6
                 endActions
-                setFacing $85,UP
-                setFacing $7,UP
+                setFacing 133,UP
+                setFacing ALLY_PETER,UP
                 csWait 40
-                setActscriptWait $0,eas_Init
-                startEntity $0
-                setFacing $0,DOWN
-                headshake $0
+                setActscriptWait ALLY_BOWIE,eas_Init
+                startEntity ALLY_BOWIE
+                setFacing ALLY_BOWIE,DOWN
+                headshake ALLY_BOWIE
                 csWait 30
-                nextSingleText $80,$7   ; "{LEADER},  Zeon was{N}taken away by {NAME;28}.{W1}"
-                nod $0
-                nextSingleText $FF,$FF  ; "{LEADER} nods.{W1}"
+                nextSingleText $80,ALLY_PETER ; "{LEADER},  Zeon was{N}taken away by {NAME;28}.{W1}"
+                nod ALLY_BOWIE
+                nextSingleText $FF,255  ; "{LEADER} nods.{W1}"
                 csWait 40
-                shiver $85
-                nextSingleText $80,$85  ; "Oh, is she...is Princess{N}Elis OK?{W1}"
-                entityActions $85
+                shiver 133
+                nextSingleText $80,133  ; "Oh, is she...is Princess{N}Elis OK?{W1}"
+                entityActions 133
                  moveUp 2
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveLeft 1
                  moveUp 1
                 endActions
-                setFacing $0,UP
+                setFacing ALLY_BOWIE,UP
                 setCamDest 8,5
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveUp 5
                  faceRight 1
                 endActions
-                entityActions $85
+                entityActions 133
                  moveUp 5
                  moveRight 2
                  moveUp 1
                  faceLeft 1
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveUp 6
                  moveRight 1
                  faceUp 1
                 endActions
                 csWait 20
-                setPriority $7,$FFFF
-                setPriority $84,$0
-                setActscriptWait $7,eas_BumpUp
-                setActscriptWait $7,eas_BumpUp
-                nextSingleText $80,$7   ; "Princess!{W1}"
-                nextSingleText $FF,$FF  ; "{NAME;7} shakes her{N}wildly.{W1}"
+                setPriority ALLY_PETER,$FFFF
+                setPriority 132,$0
+                setActscriptWait ALLY_PETER,eas_BumpUp
+                setActscriptWait ALLY_PETER,eas_BumpUp
+                nextSingleText $80,ALLY_PETER ; "Princess!{W1}"
+                nextSingleText $FF,255  ; "{NAME;7} shakes her{N}wildly.{W1}"
                 csWait 10
-                showPortrait $8084
+                showPortrait $80,132
                 executeSubroutine csub_6269C
-                nextSingleText $80,$84  ; "Elis does not respond.{W1}"
-                shiver $7
-                nextSingleText $80,$7   ; "She's so cold, and looks so{N}pale.{W2}"
-                entityActionsWait $7
+                nextSingleText $80,132  ; "Elis does not respond.{W1}"
+                shiver ALLY_PETER
+                nextSingleText $80,ALLY_PETER ; "She's so cold, and looks so{N}pale.{W2}"
+                entityActionsWait ALLY_PETER
                  moveRight 1
                  faceUp 1
                 endActions
-                nextSingleText $80,$7   ; "Sir Astral, is she dead?{W1}"
-                setFacing $85,DOWN
-                headshake $85
-                nextSingleText $80,$85  ; "I don't think so.{N}Let me see her.{W1}"
-                setFacing $85,LEFT
+                nextSingleText $80,ALLY_PETER ; "Sir Astral, is she dead?{W1}"
+                setFacing 133,DOWN
+                headshake 133
+                nextSingleText $80,133  ; "I don't think so.{N}Let me see her.{W1}"
+                setFacing 133,LEFT
                 csWait 30
-                customActscriptWait $85
+                customActscriptWait 133
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait $85,eas_46172
-                entityActions $85
+                setActscriptWait 133,eas_46172
+                entityActions 133
                  moveLeft 1
                 endActions
                 csWait 16
-                setActscriptWait $85,eas_461AA
+                setActscriptWait 133,eas_461AA
                 csWait 40
-                nextSingleText $FF,$FF  ; "Astral examines Elis.{W1}"
+                nextSingleText $FF,255  ; "Astral examines Elis.{W1}"
                 csWait 40
-                entityActions $85
+                entityActions 133
                  moveRight 1
                 endActions
                 csWait 16
-                setActscriptWait $85,eas_461AA
-                setFacing $85,DOWN
-                nextText $80,$85        ; "No. She's cold, but she's{N}breathing.{W2}"
-                nextSingleText $80,$85  ; "I don't understand....{W1}"
+                setActscriptWait 133,eas_461AA
+                setFacing 133,DOWN
+                nextText $80,133        ; "No. She's cold, but she's{N}breathing.{W2}"
+                nextSingleText $80,133  ; "I don't understand....{W1}"
                 csWait 50
                 playSound $FD
-                nextSingleText $0,$87   ; "She's in a coma.{W1}"
+                nextSingleText $0,135   ; "She's in a coma.{W1}"
                 csWait 5
-                setActscript $0,eas_461B6
+                setActscript ALLY_BOWIE,eas_461B6
                 csWait 5
-                setActscript $85,eas_461B6
+                setActscript 133,eas_461B6
                 csWait 5
-                setActscript $7,eas_461E4
+                setActscript ALLY_PETER,eas_461E4
                 csWait 120
-                setFacing $0,UP
-                setFacing $85,UP
-                setFacing $7,UP
+                setFacing ALLY_BOWIE,UP
+                setFacing 133,UP
+                setFacing ALLY_PETER,UP
                 playSound MUSIC_MITULA
-                setPos $87,13,7,DOWN
+                setPos 135,13,7,DOWN
                 playSound SFX_PRISM_LASER_FIRING
-                entityFlashWhite $87,$46
-                setActscript $0,eas_Jump
-                setActscript $85,eas_Jump
-                setActscriptWait $7,eas_Jump
-                setActscript $0,eas_Jump
-                setActscript $85,eas_Jump
-                setActscriptWait $7,eas_Jump
+                entityFlashWhite 135,$46
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscript 133,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscript 133,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
                 csWait 20
-                entityActionsWait $85
+                entityActionsWait 133
                  moveUp 1
                 endActions
-                setFacing $85,LEFT
-                nextSingleText $80,$85  ; "Goddess Mitula...?{W1}"
+                setFacing 133,LEFT
+                nextSingleText $80,133  ; "Goddess Mitula...?{W1}"
                 setCamDest 8,4
-                nod $87
-                nextSingleText $0,$87   ; "Hello, Astral.{N}{LEADER} and {NAME;7},{N}you did very well.{W1}"
-                entityActionsWait $7
+                nod 135
+                nextSingleText $0,135   ; "Hello, Astral.{N}{LEADER} and {NAME;7},{N}you did very well.{W1}"
+                entityActionsWait ALLY_PETER
                  moveUp 1
                 endActions
-                nextSingleText $0,$7    ; "Mitula!  I knew you would{N}come.{W1}"
-                shiver $87
-                nextSingleText $0,$87   ; "We've been watching.{W1}"
-                setActscriptWait $7,eas_Jump
-                setActscriptWait $7,eas_Jump
-                nextSingleText $80,$7   ; "We?  I don't see anybody{N}else?{W1}"
+                nextSingleText $0,ALLY_PETER ; "Mitula!  I knew you would{N}come.{W1}"
+                shiver 135
+                nextSingleText $0,135   ; "We've been watching.{W1}"
+                setActscriptWait ALLY_PETER,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
+                nextSingleText $80,ALLY_PETER ; "We?  I don't see anybody{N}else?{W1}"
                 csWait 5
-                setActscript $7,eas_461B6
+                setActscript ALLY_PETER,eas_461B6
                 csWait 80
-                nextSingleText $0,$87   ; "C'mon, {NAME;7}.{N}You know what I mean.{W1}"
-                setFacing $7,UP
-                nextSingleText $80,$7   ; "Volcanon?{W1}"
-                setActscriptWait $7,eas_46172
-                customActscriptWait $7
+                nextSingleText $0,135   ; "C'mon, {NAME;7}.{N}You know what I mean.{W1}"
+                setFacing ALLY_PETER,UP
+                nextSingleText $80,ALLY_PETER ; "Volcanon?{W1}"
+                setActscriptWait ALLY_PETER,eas_46172
+                customActscriptWait ALLY_PETER
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveDown 1
                 endActions
-                shiver $7
+                shiver ALLY_PETER
                 csWait 30
-                nextSingleText $0,$87   ; "Yes.  He helped you many{N}times.{W1}"
-                setActscriptWait $7,eas_Init
-                entityActionsWait $7
+                nextSingleText $0,135   ; "Yes.  He helped you many{N}times.{W1}"
+                setActscriptWait ALLY_PETER,eas_Init
+                entityActionsWait ALLY_PETER
                  moveLeft 3
                  moveUp 3
                  faceRight 1
                 endActions
                 setCamDest 8,3
-                nextSingleText $80,$7   ; "When?{W1}"
-                setFacing $87,LEFT
-                nextText $80,$87        ; "You doubt me?{W2}"
-                nextSingleText $80,$87  ; "How about {NAME;28}?{N}God Volcanon protected him{N}from the fire.{W1}"
-                setActscriptWait $7,eas_Jump
-                setActscriptWait $7,eas_Jump
-                nextSingleText $0,$7    ; "Really?  But he said, he{N}would forsake the people{N}of the earth.{W1}"
-                nextText $80,$87        ; "He said that to deceive the{N}devils.{W2}"
-                nextText $80,$87        ; "If he had joined you at{N}that time, Zeon would've{N}come to Parmecia.{W2}"
-                nextText $80,$87        ; "The entire continent might{N}have been destroyed.{W2}"
-                nextSingleText $80,$87  ; "And if Volcanon had joined{N}you, you would've leaned{N}on him, wouldn't you have?{W1}"
+                nextSingleText $80,ALLY_PETER ; "When?{W1}"
+                setFacing 135,LEFT
+                nextText $80,135        ; "You doubt me?{W2}"
+                nextSingleText $80,135  ; "How about {NAME;28}?{N}God Volcanon protected him{N}from the fire.{W1}"
+                setActscriptWait ALLY_PETER,eas_Jump
+                setActscriptWait ALLY_PETER,eas_Jump
+                nextSingleText $0,ALLY_PETER ; "Really?  But he said, he{N}would forsake the people{N}of the earth.{W1}"
+                nextText $80,135        ; "He said that to deceive the{N}devils.{W2}"
+                nextText $80,135        ; "If he had joined you at{N}that time, Zeon would've{N}come to Parmecia.{W2}"
+                nextText $80,135        ; "The entire continent might{N}have been destroyed.{W2}"
+                nextSingleText $80,135  ; "And if Volcanon had joined{N}you, you would've leaned{N}on him, wouldn't you have?{W1}"
                 csWait 20
-                nextText $80,$85        ; "The Jewel of Light was made{N}by him, wasn't it?{W2}"
-                setFacing $0,RIGHT
-                setFacing $87,RIGHT
-                setActscriptWait $85,eas_Init
-                entityActionsWait $85
+                nextText $80,133        ; "The Jewel of Light was made{N}by him, wasn't it?{W2}"
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing 135,RIGHT
+                setActscriptWait 133,eas_Init
+                entityActionsWait 133
                  moveLeft 1
                  moveUp 1
                  faceLeft 1
                 endActions
-                setFacing $0,UP
-                nextSingleText $80,$85  ; "It protected {NAME;28}, right?{W1}"
+                setFacing ALLY_BOWIE,UP
+                nextSingleText $80,133  ; "It protected {NAME;28}, right?{W1}"
                 csWait 20
-                setFacing $87,DOWN
+                setFacing 135,DOWN
                 csWait 30
-                shiver $87
-                nextSingleText $0,$87   ; "You're very smart, Astral.{W1}"
+                shiver 135
+                nextSingleText $0,135   ; "You're very smart, Astral.{W1}"
                 playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 1
                 csWait 90
                 setQuake 0
                 csWait 20
-                nextText $0,$87         ; "I have to go now.{W2}"
-                nextSingleText $0,$87   ; "I need the Jewel of Light.{W1}"
-                entityActionsWait $87
+                nextText $0,135         ; "I have to go now.{W2}"
+                nextSingleText $0,135   ; "I need the Jewel of Light.{W1}"
+                entityActionsWait 135
                  moveDown 1
                 endActions
-                setFacing $85,DOWN
-                setFacing $7,DOWN
+                setFacing 133,DOWN
+                setFacing ALLY_PETER,DOWN
                 csWait 30
-                setActscriptWait $87,eas_46172
-                customActscriptWait $87
+                setActscriptWait 135,eas_46172
+                customActscriptWait 135
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $87
+                entityActions 135
                  moveDown 1
                 endActions
                 csWait 16
-                setActscriptWait $87,eas_461AA
-                entityFlashWhite $87,$28
-                entityActions $87
+                setActscriptWait 135,eas_461AA
+                entityFlashWhite 135,$28
+                entityActions 135
                  moveUp 1
                 endActions
                 csWait 16
-                setActscriptWait $87,eas_461AA
-                nextSingleText $FF,$FF  ; "Mitula took the Jewel of{N}Light from {LEADER}.{W1}"
-                nod $87
-                nextSingleText $0,$87   ; "And I need the Jewel of Evil.{W1}"
-                setActscriptWait $87,eas_Init2
+                setActscriptWait 135,eas_461AA
+                nextSingleText $FF,255  ; "Mitula took the Jewel of{N}Light from {LEADER}.{W1}"
+                nod 135
+                nextSingleText $0,135   ; "And I need the Jewel of Evil.{W1}"
+                setActscriptWait 135,eas_Init2
                 csWait 10
-                entityActionsWait $87
+                entityActionsWait 135
                  moveRight 3
                 endActions
-                setFacing $85,RIGHT
-                setFacing $7,RIGHT
-                setFacing $0,RIGHT
+                setFacing 133,RIGHT
+                setFacing ALLY_PETER,RIGHT
+                setFacing ALLY_BOWIE,RIGHT
                 csWait 30
-                nod $87
-                hide $81
-                nextSingleText $FF,$FF  ; "Mitula took the Jewel{N}of Evil.{W1}"
-                setFacing $87,LEFT
+                nod 135
+                hide 129
+                nextSingleText $FF,255  ; "Mitula took the Jewel{N}of Evil.{W1}"
+                setFacing 135,LEFT
                 csWait 20
-                nextText $80,$87        ; "I have to seal Zeon before{N}he regains his power.{W2}"
-                nextSingleText $80,$87  ; "You had better leave now.{N}Arc Valley will be destroyed.{W1}"
-                setFacing $87,UP
+                nextText $80,135        ; "I have to seal Zeon before{N}he regains his power.{W2}"
+                nextSingleText $80,135  ; "You had better leave now.{N}Arc Valley will be destroyed.{W1}"
+                setFacing 135,UP
                 csWait 30
-                entityFlashWhite $87,$3C
-                nextSingleText $0,$85   ; "One more thing!{W1}"
+                entityFlashWhite 135,$3C
+                nextSingleText $0,133   ; "One more thing!{W1}"
                 csWait 30
-                setFacing $87,LEFT
-                nextSingleText $80,$87  ; "Yes?{W1}"
-                entityActionsWait $85
+                setFacing 135,LEFT
+                nextSingleText $80,135  ; "Yes?{W1}"
+                entityActionsWait 133
                  moveDown 1
                  faceRight 1
                 endActions
-                nextSingleText $0,$85   ; "How do we wake Elis up?{W1}"
-                nextText $80,$87        ; "She has been poisoned.{W2}"
-                nextSingleText $80,$87  ; "When the poison leaves her{N}body, her face will turn pink.{W1}"
-                setFacing $85,DOWN
+                nextSingleText $0,133   ; "How do we wake Elis up?{W1}"
+                nextText $80,135        ; "She has been poisoned.{W2}"
+                nextSingleText $80,135  ; "When the poison leaves her{N}body, her face will turn pink.{W1}"
+                setFacing 133,DOWN
                 csWait 20
-                nod $85
-                nextSingleText $0,$85   ; "Then she will awaken?{W1}"
+                nod 133
+                nextSingleText $0,133   ; "Then she will awaken?{W1}"
                 csWait 20
-                setFacing $85,RIGHT
-                nextText $80,$87        ; "If she's still sleeping, she{N}will need a kiss from her{N}true love.{W2}"
-                nextSingleText $80,$87  ; "This kiss will awaken her.{W1}"
-                shiver $85
-                entityActionsWait $85
+                setFacing 133,RIGHT
+                nextText $80,135        ; "If she's still sleeping, she{N}will need a kiss from her{N}true love.{W2}"
+                nextSingleText $80,135  ; "This kiss will awaken her.{W1}"
+                shiver 133
+                entityActionsWait 133
                  moveRight 1
                 endActions
-                nextSingleText $0,$85   ; "When will the poison leave?{W1}"
-                headshake $87
+                nextSingleText $0,133   ; "When will the poison leave?{W1}"
+                headshake 135
                 csWait 10
-                nextText $80,$87        ; "I have no idea.  It depends{N}on her physical strength.{W2}"
-                nextText $80,$87        ; "It may take a few months...{N}or a few years.{W2}"
-                nextSingleText $80,$87  ; "Now, I must go.{N}Good luck.{W1}"
-                setFacing $87,UP
+                nextText $80,135        ; "I have no idea.  It depends{N}on her physical strength.{W2}"
+                nextText $80,135        ; "It may take a few months...{N}or a few years.{W2}"
+                nextSingleText $80,135  ; "Now, I must go.{N}Good luck.{W1}"
+                setFacing 135,UP
                 csWait 30
-                entityFlashWhite $87,$64
-                hide $87
+                entityFlashWhite 135,$64
+                hide 135
                 csWait 50
                 playSound $FD
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveRight 1
                 endActions
-                nextSingleText $0,$7    ; "She's gone.{W1}"
-                customActscriptWait $85
+                nextSingleText $0,ALLY_PETER ; "She's gone.{W1}"
+                customActscriptWait 133
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $85
+                entityActionsWait 133
                  moveLeft 1
                  faceDown 10
                 endActions
-                shiver $85
-                nextSingleText $80,$85  ; "A few years....{W1}"
-                entityActionsWait $7
+                shiver 133
+                nextSingleText $80,133  ; "A few years....{W1}"
+                entityActionsWait ALLY_PETER
                  moveRight 1
                  faceDown 1
                  jumpUp 1
                  jumpUp 10
                 endActions
-                nextText $0,$7          ; "Sir Astral, c'mon!{W2}"
-                setFacing $85,UP
-                nextSingleText $0,$7    ; "Mitula told us to leave.{W1}"
-                shiver $85
-                nextSingleText $80,$85  ; "Oh, yeah...let's get out of{N}here!{W1}"
-                setActscriptWait $85,eas_Init
-                entityActionsWait $85
+                nextText $0,ALLY_PETER  ; "Sir Astral, c'mon!{W2}"
+                setFacing 133,UP
+                nextSingleText $0,ALLY_PETER ; "Mitula told us to leave.{W1}"
+                shiver 133
+                nextSingleText $80,133  ; "Oh, yeah...let's get out of{N}here!{W1}"
+                setActscriptWait 133,eas_Init
+                entityActionsWait 133
                  moveLeft 1
                  faceDown 1
                 endActions
-                setFacing $0,UP
-                nextSingleText $80,$85  ; "{LEADER}, you carry{N}Princess Elis!{W1}"
-                setPriority $0,$0
-                setPriority $84,$FFFF
-                nod $0
+                setFacing ALLY_BOWIE,UP
+                nextSingleText $80,133  ; "{LEADER}, you carry{N}Princess Elis!{W1}"
+                setPriority ALLY_BOWIE,$0
+                setPriority 132,$FFFF
+                nod ALLY_BOWIE
                 csWait 20
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveUp 1
                 endActions
                 csWait 2
-                setActscriptWait $0,eas_461AA
-                entityActionsWait $0
+                setActscriptWait ALLY_BOWIE,eas_461AA
+                entityActionsWait ALLY_BOWIE
                  moveRight 1
                  faceDown 20
                 endActions
-                nod $0
-                hide $84
-                setFacing $0,DOWN
-                setSprite $0,MAPSPRITE_POSE2
+                nod ALLY_BOWIE
+                hide 132
+                setFacing ALLY_BOWIE,DOWN
+                setSprite ALLY_BOWIE,MAPSPRITE_POSE2
                 csWait 30
                 csWait 5
-                setActscript $7,eas_461B6
+                setActscript ALLY_PETER,eas_461B6
                 csWait 5
-                setActscript $85,eas_461E4
+                setActscript 133,eas_461E4
                 setQuake 32771
                 playSound MUSIC_BOSS_ATTACK
-                nextSingleText $0,$85   ; "Oops!  She's sealing the{N}tower!{W1}"
-                entityActions $0
+                nextSingleText $0,133   ; "Oops!  She's sealing the{N}tower!{W1}"
+                entityActions ALLY_BOWIE
                  moveDown 1
                 endActions
                 csWait 2
-                setActscriptWait $0,eas_461AA
-                entityActionsWait $7
+                setActscriptWait ALLY_BOWIE,eas_461AA
+                entityActionsWait ALLY_PETER
                  moveDown 1
                 endActions
-                nextSingleText $0,$7    ; "Hurry!{W1}"
-                entityActionsWait $85
+                nextSingleText $0,ALLY_PETER ; "Hurry!{W1}"
+                entityActionsWait 133
                  moveDown 1
                  faceRight 1
                 endActions
-                nextSingleText $0,$85   ; "{LEADER}, run!{W1}"
-                setPriority $0,$FFFF
-                followEntity $7,$0,$2
-                followEntity $85,$7,$2
-                setActscriptWait $0,eas_46172
-                setCameraEntity $0
-                entityActions $0
+                nextSingleText $0,133   ; "{LEADER}, run!{W1}"
+                setPriority ALLY_BOWIE,$FFFF
+                followEntity ALLY_PETER,ALLY_BOWIE,2
+                followEntity 133,ALLY_PETER,2
+                setActscriptWait ALLY_BOWIE,eas_46172
+                setCameraEntity ALLY_BOWIE
+                entityActions ALLY_BOWIE
                  moveDown 1
                  moveLeft 1
                  moveDown 10
@@ -1116,8 +1116,8 @@ cs_62658:       setQuake 5
                 fadeInB
                 reloadMap 0,0
                 textCursor $F44
-                nextSingleText $FF,$FF  ; "Two years have passed{N}since Mitula resealed Zeon.{W1}"
-                nextSingleText $0,$88   ; "Wow, is it true?{N}Did Elis' face turn pink?{W1}"
+                nextSingleText $FF,255  ; "Two years have passed{N}since Mitula resealed Zeon.{W1}"
+                nextSingleText $0,136   ; "Wow, is it true?{N}Did Elis' face turn pink?{W1}"
                 clearF $180             ; Set after Bowie obtains the jewel of light/evil... whichever it is
                 clearF $181             ; Set after Bowie obtains King Galam's jewel
                 resetForceBattleStats

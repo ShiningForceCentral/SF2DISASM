@@ -24,11 +24,11 @@ return_5A30A:
 cs_5A30C:       setBlocks 21,6,2,2,7,5
                 setBlocks 21,0,4,4,6,0
                 csc_end
-cs_5A31E:       customActscriptWait $82
+cs_5A31E:       customActscriptWait 130
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $3          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                stopEntity $82
+                stopEntity 130
                 csc_end

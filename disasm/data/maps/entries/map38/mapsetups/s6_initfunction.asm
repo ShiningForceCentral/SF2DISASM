@@ -29,44 +29,44 @@ return_5DD8C:
 
 	; End of function ms_map38_InitFunction
 
-cs_5DD8E:       newEntity $1A,11,8,DOWN,MAPSPRITE_TAROS
-                setFacing $1A,DOWN
+cs_5DD8E:       newEntity ALLY_ZYNK,11,8,DOWN,MAPSPRITE_TAROS
+                setFacing ALLY_ZYNK,DOWN
                 csc_end
-cs_5DD9C:       setPos $80,14,26,DOWN
+cs_5DD9C:       setPos 128,14,26,DOWN
                 textCursor $854
                 csWait 1
-                setPos $0,14,28,UP
-                setPos $7,13,29,UP
-                setPos $1F,14,29,UP
+                setPos ALLY_BOWIE,14,28,UP
+                setPos ALLY_PETER,13,29,UP
+                setPos FOLLOWER_B,14,29,UP
                 jumpIfFlagSet $4C,cs_5DE22 ; Zynk is a follower
 cs_5DDC2:       playSound MUSIC_TOWN
                 fadeInB
-                setCameraEntity $80
-                setActscriptWait $80,eas_Jump
-                nextSingleText $0,$80   ; "Galam soldiers!  Run!{W1}"
-                entityActionsWait $80
+                setCameraEntity 128
+                setActscriptWait 128,eas_Jump
+                nextSingleText $0,128   ; "Galam soldiers!  Run!{W1}"
+                entityActionsWait 128
                  moveLeft 2
                 endActions
-                entityActionsWait $80
+                entityActionsWait 128
                  moveUp 1
                 endActions
-                entityActionsWait $80
+                entityActionsWait 128
                  moveLeft 2
                 endActions
-                setFacing $0,LEFT
-                setFacing $7,LEFT
-                setFacing $1F,LEFT
-                nextSingleText $0,$7    ; "No, wait!  We're not Galam{N}soldiers!{W1}"
-                setFacing $80,RIGHT
-                nextSingleText $0,$80   ; "No...?{W1}"
-                entityActionsWait $80
+                setFacing ALLY_BOWIE,LEFT
+                setFacing ALLY_PETER,LEFT
+                setFacing FOLLOWER_B,LEFT
+                nextSingleText $0,ALLY_PETER ; "No, wait!  We're not Galam{N}soldiers!{W1}"
+                setFacing 128,RIGHT
+                nextSingleText $0,128   ; "No...?{W1}"
+                entityActionsWait 128
                  moveDown 2
                 endActions
-                entityActionsWait $80
+                entityActionsWait 128
                  moveRight 2
                 endActions
-                nextSingleText $0,$80   ; "Oops.  My mistake.{W2}"
-                nextSingleText $0,$80   ; "Oh, it's obvious.  I can see{N}it in your eyes.{W1}"
+                nextSingleText $0,128   ; "Oops.  My mistake.{W2}"
+                nextSingleText $0,128   ; "Oh, it's obvious.  I can see{N}it in your eyes.{W1}"
                 csc_end
-cs_5DE22:       setPos $1A,15,29,UP
+cs_5DE22:       setPos ALLY_ZYNK,15,29,UP
                 jump cs_5DDC2

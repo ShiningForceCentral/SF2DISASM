@@ -19,7 +19,7 @@ byte_51390:
                 bra.w   byte_513A8      
 cs_513A0:
                 
-                setPos $1,41,10,UP
+                setPos ALLY_SARAH,41,10,UP
                 csc_end
 byte_513A8:
                 
@@ -33,5 +33,5 @@ return_513B8:
 
 	; End of function ms_map3_InitFunction
 
-cs_513BA:       hide $8E
+cs_513BA:       hide 142
                 csc_end

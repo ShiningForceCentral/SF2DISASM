@@ -1,56 +1,6 @@
 
 ; ASM FILE code\common\scripting\entity\entityfunctions_4.asm :
-; 0x45634..0x45E44 : Entity functions
-
-; =============== S U B R O U T I N E =======================================
-
-sub_45634:
-                
-                clr.w   d0
-                rts
-
-	; End of function sub_45634
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D0 = entity idx
-; Out: D1 = portrait idx
-;      D2 = speech sound idx
-
-GetEntityPortraitAndSpeechSfx:
-                
-                movem.l d0/a0/a5,-(sp)
-                andi.w  #$FF,d0
-                clr.w   d1
-                clr.w   d2
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
-                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0 ; sprite number
-                lea     SpriteDialogProperties(pc), a0
-loc_45650:
-                
-                cmp.b   (a0),d0         ; get sprite's owner (implies that each force member has a unique sprite !)
-                bne.s   loc_45662
-                move.b  1(a0),d1        ; get portrait index
-                ext.w   d1
-                move.b  2(a0),d2        ; get blip sound index
-                bra.w   loc_45674
-loc_45662:
-                
-                adda.w  #4,a0
-                cmpi.w  #$FFFF,(a0)
-                bne.s   loc_45650       
-                move.w  #$FFFF,d1       ; default portrait and blip
-                move.w  #$4A,d2 
-loc_45674:
-                
-                movem.l (sp)+,d0/a0/a5
-                rts
-
-	; End of function GetEntityPortraitAndSpeechSfx
-
-SpriteDialogProperties:
-                incbin "data/spritedialogdefs.bin" ; bowie
+; 0x45858..0x45E44 : Entity functions
 
 ; =============== S U B R O U T I N E =======================================
 

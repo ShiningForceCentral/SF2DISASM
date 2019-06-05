@@ -28,117 +28,117 @@ return_53994:
 	; End of function ms_map20_InitFunction
 
 cs_53996:       textCursor $880
-                setPos $0,23,39,DOWN
-                setPos $1,23,38,DOWN
-                setPos $2,23,37,DOWN
-                setActscriptWait $0,eas_Init
-                setActscriptWait $1,eas_Init
-                setActscriptWait $2,eas_Init
+                setPos ALLY_BOWIE,23,39,DOWN
+                setPos ALLY_SARAH,23,38,DOWN
+                setPos ALLY_CHESTER,23,37,DOWN
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_SARAH,eas_Init
+                setActscriptWait ALLY_CHESTER,eas_Init
                 fadeInB
                 csWait 20
-                setFacing $0,LEFT
+                setFacing ALLY_BOWIE,LEFT
                 csWait 20
                 setCamDest 12,34
-                setFacing $0,DOWN
-                nextSingleText $0,$80   ; "Mmmm....{N}Hmmm...mmmm....{W1}"
-                nextSingleText $0,$81   ; "Oh, father!{N}Please wake up.{W1}"
-                entityActionsWait $83
+                setFacing ALLY_BOWIE,DOWN
+                nextSingleText $0,128   ; "Mmmm....{N}Hmmm...mmmm....{W1}"
+                nextSingleText $0,129   ; "Oh, father!{N}Please wake up.{W1}"
+                entityActionsWait 131
                  moveRight 1
                 endActions
-                setFacing $83,UP
-                nextSingleText $0,$83   ; "Sir Astral?{W1}"
-                nextSingleText $80,$82  ; "Hmmm.  Nothing is wrong{N}with his body, but...{W1}"
-                setPriority $82,$0
-                setPriority $83,$FFFF
-                setActscriptWait $83,eas_BumpUp
-                setActscriptWait $83,eas_BumpUp
-                nextSingleText $0,$83   ; "He is suffering badly from{N}something....{W1}"
-                setFacing $82,DOWN
-                nextSingleText $80,$82  ; "Perhaps...it might be...{N}{D1}Well?{W1}"
+                setFacing 131,UP
+                nextSingleText $0,131   ; "Sir Astral?{W1}"
+                nextSingleText $80,130  ; "Hmmm.  Nothing is wrong{N}with his body, but...{W1}"
+                setPriority 130,$0
+                setPriority 131,$FFFF
+                setActscriptWait 131,eas_BumpUp
+                setActscriptWait 131,eas_BumpUp
+                nextSingleText $0,131   ; "He is suffering badly from{N}something....{W1}"
+                setFacing 130,DOWN
+                nextSingleText $80,130  ; "Perhaps...it might be...{N}{D1}Well?{W1}"
                 csWait 30
-                setFacing $82,RIGHT
+                setFacing 130,RIGHT
                 setCamDest 17,34
-                setFacing $82,DOWN
+                setFacing 130,DOWN
                 csWait 40
-                setFacing $82,RIGHT
+                setFacing 130,RIGHT
                 csWait 40
-                customActscriptWait $82
+                customActscriptWait 130
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $82
+                entityActionsWait 130
                  moveRight 2
                 endActions
-                setActscriptWait $82,eas_Init
-                nextSingleText $0,$82   ; "What are you doing here?!{W1}"
+                setActscriptWait 130,eas_Init
+                nextSingleText $0,130   ; "What are you doing here?!{W1}"
                 setCamDest 17,34
-                setActscript $0,eas_Jump
-                setActscript $1,eas_Jump
-                setActscriptWait $2,eas_Jump
-                setActscript $0,eas_Jump
-                setActscript $1,eas_Jump
-                setActscriptWait $2,eas_Jump
-                nextSingleText $80,$2   ; "Oops!{W1}"
-                entityActionsWait $2
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscript ALLY_SARAH,eas_Jump
+                setActscriptWait ALLY_CHESTER,eas_Jump
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscript ALLY_SARAH,eas_Jump
+                setActscriptWait ALLY_CHESTER,eas_Jump
+                nextSingleText $80,ALLY_CHESTER ; "Oops!{W1}"
+                entityActionsWait ALLY_CHESTER
                  moveLeft 2
                  moveDown 1
                 endActions
-                nextSingleText $80,$2   ; "Sorry, sir!{W1}"
-                entityActionsWait $1
+                nextSingleText $80,ALLY_CHESTER ; "Sorry, sir!{W1}"
+                entityActionsWait ALLY_SARAH
                  moveLeft 1
                 endActions
-                setFacing $1,DOWN
-                setFacing $0,LEFT
-                nextSingleText $80,$1   ; "Well, we just followed you....{W1}"
-                entityActionsWait $82
+                setFacing ALLY_SARAH,DOWN
+                setFacing ALLY_BOWIE,LEFT
+                nextSingleText $80,ALLY_SARAH ; "Well, we just followed you....{W1}"
+                entityActionsWait 130
                  moveRight 1
                 endActions
-                setFacing $82,UP
-                nextSingleText $80,$82  ; "Don't lie to me.{N}You wanted to see the{N}castle, didn't you?{W1}"
-                entityActionsWait $83
+                setFacing 130,UP
+                nextSingleText $80,130  ; "Don't lie to me.{N}You wanted to see the{N}castle, didn't you?{W1}"
+                entityActionsWait 131
                  moveUp 1
                 endActions
-                setFacing $83,RIGHT
-                nextSingleText $0,$83   ; "Sir Astral, who are they?{W1}"
+                setFacing 131,RIGHT
+                nextSingleText $0,131   ; "Sir Astral, who are they?{W1}"
                 csWait 5
-                setActscript $82,eas_461B6
-                nextSingleText $80,$82  ; "Oh...{D1}well...{D1}(mumble)...{D1}{N}They're my pupils....{W1}"
-                entityActionsWait $83
+                setActscript 130,eas_461B6
+                nextSingleText $80,130  ; "Oh...{D1}well...{D1}(mumble)...{D1}{N}They're my pupils....{W1}"
+                entityActionsWait 131
                  moveRight 1
                 endActions
-                setFacing $82,LEFT
-                nextText $0,$83         ; "So they are.   They look{N}like good kids.{W1}"
-                nextSingleText $0,$83   ; "You must have a special{N}reason to have them here,{N}right?{W1}"
-                nextSingleText $80,$82  ; "Um...{D1}I didn't mean for...{W1}"
-                setFacing $82,UP
+                setFacing 130,LEFT
+                nextText $0,131         ; "So they are.   They look{N}like good kids.{W1}"
+                nextSingleText $0,131   ; "You must have a special{N}reason to have them here,{N}right?{W1}"
+                nextSingleText $80,130  ; "Um...{D1}I didn't mean for...{W1}"
+                setFacing 130,UP
                 csWait 40
-                setFacing $82,RIGHT
+                setFacing 130,RIGHT
                 csWait 30
-                nextSingleText $FF,$FF  ; "Astral glares at {LEADER}.{W1}"
-                entityActionsWait $82
+                nextSingleText $FF,255  ; "Astral glares at {LEADER}.{W1}"
+                entityActionsWait 130
                  moveLeft 1
                 endActions
-                nextSingleText $80,$82  ; "(Cough){N}You said the door of the{N}Ancient Tower is open.{W2}{N}There must be a connection{N}between the open door and{N}the King's sickness.{W1}"
-                setFacing $82,DOWN
+                nextSingleText $80,130  ; "(Cough){N}You said the door of the{N}Ancient Tower is open.{W2}{N}There must be a connection{N}between the open door and{N}the King's sickness.{W1}"
+                setFacing 130,DOWN
                 csWait 60
-                setFacing $82,LEFT
-                nextSingleText $80,$82  ; "I called them here to help{N}me investigate the tower.{W1}"
-                nod $83
-                entityActionsWait $82
+                setFacing 130,LEFT
+                nextSingleText $80,130  ; "I called them here to help{N}me investigate the tower.{W1}"
+                nod 131
+                entityActionsWait 130
                  moveRight 1
                 endActions
-                nextSingleText $80,$82  ; "Now, pupils.  Follow me.{W1}"
-                setFacing $82,UP
-                nextSingleText $80,$82  ; "Don't give me any more{N}trouble!{W1}"
-                entityActions $1
+                nextSingleText $80,130  ; "Now, pupils.  Follow me.{W1}"
+                setFacing 130,UP
+                nextSingleText $80,130  ; "Don't give me any more{N}trouble!{W1}"
+                entityActions ALLY_SARAH
                  moveUp 1
                 endActions
-                entityActionsWait $82
+                entityActionsWait 130
                  moveUp 1
                  moveRight 1
                  moveUp 1
                 endActions
-                followEntity $1,$0,$2
-                followEntity $2,$1,$2
-cs_53B60:       hide $82
+                followEntity ALLY_SARAH,ALLY_BOWIE,2
+                followEntity ALLY_CHESTER,ALLY_SARAH,2
+cs_53B60:       hide 130
                 csc_end

@@ -3,176 +3,176 @@
 ; 0x49058..0x494BC : End cutscene
 EndCutscene:    mapLoad 20,19,33
                 loadMapEntities ce_492CC
-                setActscriptWait $0,eas_Init
-                customActscriptWait $0
+                setActscriptWait ALLY_BOWIE,eas_Init
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 20,20      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $80
+                customActscriptWait 128
                  ac_setSpeed 20,20      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $81
+                customActscriptWait 129
                  ac_setSpeed 20,20      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $82
+                customActscriptWait 130
                  ac_setSpeed 20,20      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $83
+                customActscriptWait 131
                  ac_setSpeed 20,20      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setSprite $B,MAPSPRITE_NPC_ROHDE
+                setSprite ALLY_ROHDE,MAPSPRITE_NPC_ROHDE
                 fadeInB
                 csWait 60
-                setPos $0,25,35,RIGHT
-                entityActionsWait $0
+                setPos ALLY_BOWIE,25,35,RIGHT
+                entityActionsWait ALLY_BOWIE
                  moveDownRight 1
                  moveRight 1
                 endActions
                 csWait 30
-                entityActionsWait $0
+                entityActionsWait ALLY_BOWIE
                  moveDown 4
                 endActions
-                setFacing $0,LEFT
-                entityActionsWait $80
+                setFacing ALLY_BOWIE,LEFT
+                entityActionsWait 128
                  moveRight 1
                 endActions
-                entityActionsWait $81
+                entityActionsWait 129
                  moveRight 1
                 endActions
                 csWait 60
-                nod $80
-                nod $81
-                nod $0
+                nod 128
+                nod 129
+                nod ALLY_BOWIE
                 csWait 40
-                entityActionsWait $0
+                entityActionsWait ALLY_BOWIE
                  moveUp 4
                 endActions
-                setFacing $0,LEFT
+                setFacing ALLY_BOWIE,LEFT
                 csWait 80
-                setPos $83,25,35,RIGHT
-                entityActionsWait $83
+                setPos 131,25,35,RIGHT
+                entityActionsWait 131
                  moveDownRight 1
                 endActions
                 csWait 40
-                nod $0
+                nod ALLY_BOWIE
                 csWait 60
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveDown 4
                 endActions
-                entityActionsWait $83
+                entityActionsWait 131
                  moveRight 1
                  moveDown 3
                 endActions
-                setFacing $0,LEFT
-                setFacing $83,LEFT
-                setActscript $80,eas_Jump
-                setActscript $81,eas_Jump
-                setActscriptWait $82,eas_Jump
+                setFacing ALLY_BOWIE,LEFT
+                setFacing 131,LEFT
+                setActscript 128,eas_Jump
+                setActscript 129,eas_Jump
+                setActscriptWait 130,eas_Jump
                 csWait 40
-                setFacing $82,DOWN
+                setFacing 130,DOWN
                 csWait 30
-                setFacing $81,UP
-                nod $82
+                setFacing 129,UP
+                nod 130
                 csWait 60
-                setFacing $80,UP
+                setFacing 128,UP
                 csWait 30
-                setFacing $81,DOWN
-                nod $80
+                setFacing 129,DOWN
+                nod 128
                 csWait 40
-                setFacing $81,RIGHT
+                setFacing 129,RIGHT
                 csWait 20
-                setFacing $80,RIGHT
+                setFacing 128,RIGHT
                 csWait 40
-                setFacing $0,UP
+                setFacing ALLY_BOWIE,UP
                 csWait 20
-                setFacing $83,DOWN
+                setFacing 131,DOWN
                 csWait 60
-                setFacing $0,LEFT
+                setFacing ALLY_BOWIE,LEFT
                 csWait 10
-                setFacing $83,LEFT
+                setFacing 131,LEFT
                 csWait 30
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveLeft 4
                 endActions
-                entityActionsWait $83
+                entityActionsWait 131
                  moveLeft 4
                 endActions
-                nod $81
-                nod $83
+                nod 129
+                nod 131
                 csWait 60
-                setFacing $82,UP
+                setFacing 130,UP
                 csWait 30
-                setActscriptWait $82,eas_Jump
+                setActscriptWait 130,eas_Jump
                 csWait 30
-                entityActionsWait $82
+                entityActionsWait 130
                  moveUp 1
                 endActions
-                setFacing $82,DOWN
-                setPos $B,23,37,DOWN
-                entityActions $B
+                setFacing 130,DOWN
+                setPos ALLY_ROHDE,23,37,DOWN
+                entityActions ALLY_ROHDE
                  moveDown 1
                  moveLeft 2
                  moveDown 2
                 endActions
                 csWait 20
-                setPos $2,23,37,DOWN
-                entityActions $2
+                setPos ALLY_CHESTER,23,37,DOWN
+                entityActions ALLY_CHESTER
                  moveDown 1
                  moveLeft 2
                  moveDown 1
                 endActions
                 csWait 20
-                setPos $A,23,37,DOWN
-                entityActions $A
+                setPos ALLY_LUKE,23,37,DOWN
+                entityActions ALLY_LUKE
                  moveDown 1
                  moveLeft 2
                 endActions
                 csWait 20
-                setPos $3,23,37,DOWN
-                entityActions $3
+                setPos ALLY_JAHA,23,37,DOWN
+                entityActions ALLY_JAHA
                  moveDown 1
                  moveLeft 1
                 endActions
                 csWait 20
-                setPos $7,23,37,DOWN
-                entityActions $7
+                setPos ALLY_PETER,23,37,DOWN
+                entityActions ALLY_PETER
                  moveDown 1
                 endActions
-                setFacing $B,RIGHT
+                setFacing ALLY_ROHDE,RIGHT
                 csWait 10
-                setFacing $2,RIGHT
+                setFacing ALLY_CHESTER,RIGHT
                 csWait 10
-                setFacing $A,DOWN
+                setFacing ALLY_LUKE,DOWN
                 csWait 10
-                setFacing $3,DOWN
-                setFacing $0,UP
-                setFacing $83,UP
+                setFacing ALLY_JAHA,DOWN
+                setFacing ALLY_BOWIE,UP
+                setFacing 131,UP
                 csWait 30
-                setFacing $0,LEFT
-                setFacing $83,LEFT
+                setFacing ALLY_BOWIE,LEFT
+                setFacing 131,LEFT
                 csWait 30
-                setFacing $0,UP
-                setFacing $83,UP
+                setFacing ALLY_BOWIE,UP
+                setFacing 131,UP
                 csWait 40
-                setActscript $B,eas_Jump
-                setActscript $2,eas_Jump
-                setActscript $A,eas_Jump
-                setActscript $3,eas_Jump
-                setActscript $7,eas_Jump
-                setFacing $83,LEFT
-                nod $80
-                setFacing $0,LEFT
+                setActscript ALLY_ROHDE,eas_Jump
+                setActscript ALLY_CHESTER,eas_Jump
+                setActscript ALLY_LUKE,eas_Jump
+                setActscript ALLY_JAHA,eas_Jump
+                setActscript ALLY_PETER,eas_Jump
+                setFacing 131,LEFT
+                nod 128
+                setFacing ALLY_BOWIE,LEFT
                 csWait 50
-                nod $0
-                setActscript $B,eas_Jump
-                setActscript $2,eas_Jump
-                setActscript $A,eas_Jump
-                setActscript $3,eas_Jump
-                setActscript $7,eas_Jump
+                nod ALLY_BOWIE
+                setActscript ALLY_ROHDE,eas_Jump
+                setActscript ALLY_CHESTER,eas_Jump
+                setActscript ALLY_LUKE,eas_Jump
+                setActscript ALLY_JAHA,eas_Jump
+                setActscript ALLY_PETER,eas_Jump
                 fadeOutB
                 csc_end
 ce_492CC:       mainEntity 63,63,DOWN
@@ -186,21 +186,21 @@ ce_492CC:       mainEntity 63,63,DOWN
                 entity 22,38,RIGHT,MAPSPRITE_MINISTER,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_ELIS,eas_Init
                 dc.w $FFFF
-dms_01:         faceEntity $86,$0
-                addNewFollower $5
-                addNewFollower $3
-                addNewFollower $1A
-                followEntity $7,$0,$2
-                moveEntityAboveAnother $0,$0
+dms_01:         faceEntity 134,ALLY_BOWIE
+                addNewFollower ALLY_SLADE
+                addNewFollower ALLY_JAHA
+                addNewFollower ALLY_ZYNK
+                followEntity ALLY_PETER,ALLY_BOWIE,2
+                moveEntityAboveAnother ALLY_BOWIE,ALLY_BOWIE
                 csc_end
-                setCameraEntity $0
-                setActscript $0,eas_ControlledCharacter
-cs_4934A:       entityFlashWhite $0,$B4
+                setCameraEntity ALLY_BOWIE
+                setActscript ALLY_BOWIE,eas_ControlledCharacter
+cs_4934A:       entityFlashWhite ALLY_BOWIE,$B4
                 jump cs_4934A
                 csc_end
                 textCursor $142
-                csc15 $1,$1,eas_ControlledCharacter
-                showPortrait $0
+                csc15 ALLY_SARAH,$1,eas_ControlledCharacter
+                showPortrait $0,ALLY_BOWIE
                 setQuake 32770
                 setQuake 16386
                 loadMapFadeIn 0,13,13
@@ -208,12 +208,12 @@ cs_4934A:       entityFlashWhite $0,$B4
                 csc_end
                 flashScreenWhite $3C
                 csc_end
-                stopEntity $4
-                csc15 $1,$1,eas_493A2
-                waitIdle $1
-                showPortrait $0
+                stopEntity ALLY_KAZIN
+                csc15 ALLY_SARAH,$1,eas_493A2
+                waitIdle ALLY_SARAH
+                showPortrait $0,ALLY_BOWIE
                 csWait 60
-                startEntity $4
+                startEntity ALLY_KAZIN
                 hidePortrait
                 csc_end
 eas_493A2:       ac_set1Cb7 $FFFF
@@ -258,27 +258,27 @@ sub_493EC:
 	; End of function sub_493EC
 
                 updateDefeatedAllies
-                allyDefeated $7
-                allyDefeated $1
-                allyDefeated $2
-                allyDefeated $6
-                reviveAlly $80
-                reviveAlly $96
-                allyDefeated $3
-                showPortrait $0
+                allyDefeated ALLY_PETER
+                allyDefeated ALLY_SARAH
+                allyDefeated ALLY_CHESTER
+                allyDefeated ALLY_KIWI
+                reviveAlly 128
+                reviveAlly 150
+                allyDefeated ALLY_JAHA
+                showPortrait $0,ALLY_BOWIE
                 csc_end
-                setCameraEntity $FFFF
-                entityFlashWhite $0,$28
-                hide $0
-                setPos $6,13,23,DOWN
-                entityFlashWhite $6,$28
-                animEntityFX $6,7
+                setCameraEntity 65535
+                entityFlashWhite ALLY_BOWIE,$28
+                hide ALLY_BOWIE
+                setPos ALLY_KIWI,13,23,DOWN
+                entityFlashWhite ALLY_KIWI,$28
+                animEntityFX ALLY_KIWI,7
                 playSound MUSIC_PROMOTED_ATTACK_LOOP
                 csc_end
                 textCursor $18A
-                showPortrait $0
-                nextTextVar $0,$0,$0,$3,$A ; "{NAME} found{N}the {ITEM}.{D1}"
-                nextSingleTextVar $0,$0,$0,$4 ; "{NAME} received{N}the {ITEM}."
+                showPortrait $0,ALLY_BOWIE
+                nextTextVar $0,ALLY_BOWIE,$0,$3,$A ; "{NAME} found{N}the {ITEM}.{D1}"
+                nextSingleTextVar $0,ALLY_BOWIE,$0,$4 ; "{NAME} received{N}the {ITEM}."
                 dc.l $14001D            ; Unused cutscene with parsing mistake here and below, letting it unformatted.
                  ac_wait 32888          ;   
                  ac_setAnimSpeedX2 $4   ;   
@@ -302,7 +302,7 @@ sub_493EC:
 word_494AC:      ac_branch              ;   
                 dc.w (eas_Idle-word_494AC) & $FFFF
                 ac_end
-                showPortrait $0
+                showPortrait $0,ALLY_BOWIE
                 csWait 60
                 hidePortrait
                 csc_end

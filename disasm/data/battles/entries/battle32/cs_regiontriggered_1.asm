@@ -4,19 +4,19 @@
 rbcs_battle32:  textCursor $B21
                 executeSubroutine csub_4CD56
                 cameraSpeed $38
-                setCameraEntity $17
+                setCameraEntity ALLY_JARO
                 csWait 60
-                nextSingleText $0,$17   ; "I'm tired of this.  I can no{N}longer fight for devils.{W1}"
-                setCameraEntity $80
+                nextSingleText $0,ALLY_JARO ; "I'm tired of this.  I can no{N}longer fight for devils.{W1}"
+                setCameraEntity 128
                 csWait 60
-                nextSingleText $0,$80   ; "{NAME;23}, what?{W1}"
-                setCameraEntity $17
+                nextSingleText $0,128   ; "{NAME;23}, what?{W1}"
+                setCameraEntity ALLY_JARO
                 csWait 60
-                setFacing $17,UP
-                nextSingleText $0,$17   ; "Didn't you hear me?{W1}"
-                setFacing $17,DOWN
-                nextSingleText $0,$17   ; "Hey, Granseal guys!{N}I'm on your side from now{N}on! OK?{W1}"
-                joinForceAI $17,$FFFF   ; 0054 JOIN FORCE WITH AI
+                setFacing ALLY_JARO,UP
+                nextSingleText $0,ALLY_JARO ; "Didn't you hear me?{W1}"
+                setFacing ALLY_JARO,DOWN
+                nextSingleText $0,ALLY_JARO ; "Hey, Granseal guys!{N}I'm on your side from now{N}on! OK?{W1}"
+                joinForceAI ALLY_JARO,$FFFF ; 0054 JOIN FORCE WITH AI
                 setF $182               ; Set during battle 32, after Jaro switches sides
                 csc_end
 

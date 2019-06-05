@@ -17,7 +17,7 @@ byte_5136C:
 
 	; End of function ms_map3_flag1FA_InitFunction
 
-cs_51374:       hide $6
+cs_51374:       hide ALLY_KIWI
                 csc_end
 cs_5137A:       playSound MUSIC_SAD_THEME_2
                 fadeInB

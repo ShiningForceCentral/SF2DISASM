@@ -16,6 +16,6 @@ return_5D3A8:
 
 	; End of function ms_map25_InitFunction
 
-cs_5D3AA:       setPos $85,25,18,RIGHT
-                setPos $87,25,17,RIGHT
+cs_5D3AA:       setPos 133,25,18,RIGHT
+                setPos 135,25,17,RIGHT
                 csc_end

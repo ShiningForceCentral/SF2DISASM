@@ -2,9 +2,10 @@
 ; ASM FILE data\stats\allies\allymapsprites-expanded.asm :
 ; Expanded ally map sprite IDs - works in tandem with ClassTypesTable located in data\stats\allies\classes\classtypes.asm
 AllyMapSprites: ; enum Mapsprites : MAPSPRITE_*
+                    
                 mapSprite BOWIE_BASE        ; BOWIE
                 mapSprite BOWIE_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
                 mapSprite SARAH_BASE        ; SARAH
                 mapSprite SARAH_PROMO
@@ -24,30 +25,30 @@ AllyMapSprites: ; enum Mapsprites : MAPSPRITE_*
                 
                 mapSprite SLADE_BASE        ; SLADE
                 mapSprite SLADE_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
                 mapSprite KIWI_BASE         ; KIWI
                 mapSprite KIWI_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
                 mapSprite PETER_BASE        ; PETER
                 mapSprite PETER_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
                 mapSprite MAY_BASE          ; MAY
                 mapSprite MAY_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
                 mapSprite GERHALT_BASE      ; GERHALT
                 mapSprite GERHALT_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
                 mapSprite LUKE_BASE         ; LUKE
                 mapSprite LUKE_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
-                dc.b 0                      ; ROHDE
-                dc.b 0
+                mapSprite DEFAULT           ; ROHDE
+                mapSprite DEFAULT
                 mapSprite ROHDE_SPECIAL
                 
                 mapSprite RICK_BASE         ; RICK
@@ -78,54 +79,54 @@ AllyMapSprites: ; enum Mapsprites : MAPSPRITE_*
                 mapSprite JANET_PROMO
                 mapSprite JANET_SPECIAL
                 
-                dc.b 0                      ; HIGINS
+                mapSprite DEFAULT           ; HIGINS
                 mapSprite HIGINS_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
-                dc.b 0                      ; SKREECH
+                mapSprite DEFAULT           ; SKREECH
                 mapSprite SKREECH_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
-                dc.b 0                      ; TAYA
-                dc.b 0
+                mapSprite DEFAULT           ; TAYA
+                mapSprite DEFAULT
                 mapSprite TAYA_SPECIAL
                 
-                dc.b 0                      ; FRAYJA
+                mapSprite DEFAULT           ; FRAYJA
                 mapSprite FRAYJA_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
-                dc.b 0                      ; JARO
-                dc.b 0
+                mapSprite DEFAULT           ; JARO
+                mapSprite DEFAULT
                 mapSprite JARO_SPECIAL
                 
-                dc.b 0                      ; GYAN
+                mapSprite DEFAULT           ; GYAN
                 mapSprite GYAN_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
-                dc.b 0                      ; SHEELA
-                dc.b 0
+                mapSprite DEFAULT           ; SHEELA
+                mapSprite DEFAULT
                 mapSprite SHEELA_SPECIAL
                 
-                dc.b 0                      ; ZYNK
+                mapSprite DEFAULT           ; ZYNK
                 mapSprite ZYNK_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
-                dc.b 0                      ; CHAZ
+                mapSprite DEFAULT           ; CHAZ
                 mapSprite CHAZ_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
-                dc.b 0                      ; LEMON
-                dc.b 0
+                mapSprite DEFAULT           ; LEMON
+                mapSprite DEFAULT
                 mapSprite LEMON_SPECIAL
                 
-                dc.b 0                      ; CLAUDE
+                mapSprite DEFAULT           ; CLAUDE
                 mapSprite CLAUDE_PROMO
-                dc.b 0
+                mapSprite DEFAULT
                 
-                dc.b 0
-                dc.b 0
-                dc.b 0
+                mapSprite DEFAULT
+                mapSprite DEFAULT
+                mapSprite DEFAULT
                 
-                dc.b 0
-                dc.b 0
-                dc.b 0
+                mapSprite DEFAULT
+                mapSprite DEFAULT
+                mapSprite DEFAULT

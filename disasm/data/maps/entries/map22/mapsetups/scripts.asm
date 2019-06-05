@@ -4,97 +4,97 @@
 cs_5994E:       textCursor $700
                 csWait 50
                 setCamDest 10,0
-                nextText $0,$86         ; "Are you ready?{W2}"
-                nextSingleText $0,$86   ; "Now, start the battle!{N}Do your best!{W1}"
+                nextText $0,134         ; "Are you ready?{W2}"
+                nextSingleText $0,134   ; "Now, start the battle!{N}Do your best!{W1}"
                 setStoryFlag $16        ; Battle 22 unlocked
                 warp $16,$0,$0,$0
                 csc_end
 cs_5996E:       textCursor $702
-                setCameraEntity $FFFF
+                setCameraEntity 65535
                 reloadMap 10,0
-                setPos $0,25,12,UP
-                setPos $7,24,13,UP
-                setPos $1F,25,13,UP
+                setPos ALLY_BOWIE,25,12,UP
+                setPos ALLY_PETER,24,13,UP
+                setPos FOLLOWER_B,25,13,UP
                 fadeInB
-                nextSingleText $0,$86   ; "Checkmate!{N}This is for you.{W1}"
+                nextSingleText $0,134   ; "Checkmate!{N}This is for you.{W1}"
                 setCamDest 20,7
-                nextText $0,$86         ; "A Cotton Balloon is inside.{W2}"
-                nextSingleText $0,$86   ; "With it you can leave{N}Desktop Kingdom safely.{N}Good luck!{W1}"
+                nextText $0,134         ; "A Cotton Balloon is inside.{W2}"
+                nextSingleText $0,134   ; "With it you can leave{N}Desktop Kingdom safely.{N}Good luck!{W1}"
                 csc_end
-cs_599A4:       entityActionsWait $88
+cs_599A4:       entityActionsWait 136
                  moveUp 1
                 endActions
-                setFacing $88,DOWN
+                setFacing 136,DOWN
                 csc_end
-cs_599B2:       setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
-                setDest $0,35,24
-                setDest $7,34,24
-                setDest $1F,33,24
-                entityActions $0
+cs_599B2:       setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                setDest ALLY_BOWIE,35,24
+                setDest ALLY_PETER,34,24
+                setDest FOLLOWER_B,33,24
+                entityActions ALLY_BOWIE
                  jumpRight 1
                  faceDown 1
                  moveDown 2
                 endActions
-                entityActions $7
+                entityActions ALLY_PETER
                  moveRight 1
                  jumpRight 1
                  moveDownRight 1
                  faceDown 1
                 endActions
-                entityActionsWait $1F
+                entityActionsWait FOLLOWER_B
                  moveRight 1
                  jumpRight 1
                  faceDown 1
                  moveDown 1
                 endActions
-                setPos $89,36,25,UP
-                setPos $8A,37,24,UP
-                setPos $8B,35,24,UP
-                stopEntity $0
-                stopEntity $7
-                stopEntity $1F
-                customActscriptWait $0
+                setPos 137,36,25,UP
+                setPos 138,37,24,UP
+                setPos 139,35,24,UP
+                stopEntity ALLY_BOWIE
+                stopEntity ALLY_PETER
+                stopEntity FOLLOWER_B
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $7
+                customActscriptWait ALLY_PETER
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $1F
+                customActscriptWait FOLLOWER_B
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $89
+                customActscriptWait 137
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $8A
+                customActscriptWait 138
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $8B
+                customActscriptWait 139
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveDown 6
                 endActions
-                entityActions $7
+                entityActions ALLY_PETER
                  moveDown 6
                 endActions
-                entityActions $1F
+                entityActions FOLLOWER_B
                  moveDown 6
                 endActions
-                entityActions $89
+                entityActions 137
                  moveDown 6
                 endActions
-                entityActions $8A
+                entityActions 138
                  moveDown 6
                 endActions
-                entityActionsWait $8B
+                entityActionsWait 139
                  moveDown 6
                 endActions
                 warp $1A,$1A,$8,$3

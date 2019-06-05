@@ -5,9 +5,9 @@ abcs_battle13:  textCursor $9BF
                 playSound $FD
                 loadMapFadeIn 13,11,8
                 loadMapEntities ce_4AD96
-                setActscriptWait $0,eas_Init
-                setPos $7,15,13,RIGHT
-                customActscriptWait $A
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setPos ALLY_PETER,15,13,RIGHT
+                customActscriptWait ALLY_LUKE
                  ac_setAnimCounter $0   ;   
                  ac_setFlip $1          ;   
                  ac_updateSprite        ;   
@@ -16,24 +16,24 @@ abcs_battle13:  textCursor $9BF
                 playSound MUSIC_TOWN
                 fadeInB
                 csWait 50
-                nextSingleText $0,$7    ; "{NAME;10}, are you OK?  {NAME;10}!{W1}"
+                nextSingleText $0,ALLY_PETER ; "{NAME;10}, are you OK?  {NAME;10}!{W1}"
                 csWait 50
-                setActscriptWait $A,eas_Init
-                setActscriptWait $A,eas_Jump
-                headshake $A
-                nextSingleText $C0,$A   ; "Squawk!  They knocked me{N}senseless.{W1}"
+                setActscriptWait ALLY_LUKE,eas_Init
+                setActscriptWait ALLY_LUKE,eas_Jump
+                headshake ALLY_LUKE
+                nextSingleText $C0,ALLY_LUKE ; "Squawk!  They knocked me{N}senseless.{W1}"
                 csWait 5
-                setActscript $A,eas_461B6
+                setActscript ALLY_LUKE,eas_461B6
                 csWait 60
-                nextText $C0,$A         ; "Where are the devils?{N}{LEADER}, did you defeat{N}them?{W2}"
-                setFacing $A,UP
-                nextSingleText $C0,$A   ; "Nobody in Bedoe can fight{N}like that.  Thank you.{W1}"
-                setFacing $A,LEFT
-                nextSingleText $0,$7    ; "He's a great fighter.{N}Volcanon doesn't know how{N}good he is!{W1}"
-                nextText $C0,$A         ; "He'll learn.{W2}"
-                nextSingleText $C0,$A   ; "Let's go see the mayor and{N}get a raft!{W1}"
-                setFacing $A,UP
-                nextSingleText $FF,$FF  ; "{CLEAR}{LEADER} decides to take{N}{NAME;10} the BDMN with him.{W1}{CLEAR}"
+                nextText $C0,ALLY_LUKE  ; "Where are the devils?{N}{LEADER}, did you defeat{N}them?{W2}"
+                setFacing ALLY_LUKE,UP
+                nextSingleText $C0,ALLY_LUKE ; "Nobody in Bedoe can fight{N}like that.  Thank you.{W1}"
+                setFacing ALLY_LUKE,LEFT
+                nextSingleText $0,ALLY_PETER ; "He's a great fighter.{N}Volcanon doesn't know how{N}good he is!{W1}"
+                nextText $C0,ALLY_LUKE  ; "He'll learn.{W2}"
+                nextSingleText $C0,ALLY_LUKE ; "Let's go see the mayor and{N}get a raft!{W1}"
+                setFacing ALLY_LUKE,UP
+                nextSingleText $FF,255  ; "{CLEAR}{LEADER} decides to take{N}{NAME;10} the BDMN with him.{W1}{CLEAR}"
                 setF $4B                ; Luke is a follower
                 warp $D,$10,$C,$3
                 csc_end

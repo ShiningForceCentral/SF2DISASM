@@ -4,33 +4,33 @@
 bbcs_04:        textCursor $907
                 loadMapFadeIn 66,1,5
                 loadMapEntities ce_4989E
-                setActscriptWait $0,eas_Init
-                setPos $4,6,9,DOWN
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setPos ALLY_KAZIN,6,9,DOWN
                 fadeInB
-                setActscriptWait $4,eas_Jump
-                nextSingleText $0,$4    ; "Who are they?{W1}"
+                setActscriptWait ALLY_KAZIN,eas_Jump
+                nextSingleText $0,ALLY_KAZIN ; "Who are they?{W1}"
                 setCamDest 7,13
-                nextSingleText $0,$4    ; "Galam soldiers!{W1}"
-                nextSingleText $C0,$1C  ; "Greetings, Granseal scum!{W1}"
-                nextSingleText $0,$4    ; "Why did you kill Sir{N}Hawel?  How could you be{N}so mean?{W1}"
-                nextSingleText $C0,$1C  ; "Ummm....{W1}"
-                nextText $0,$4          ; "Answer me!{W1}"
-                nextSingleText $0,$4    ; "{LEADER}, we must{N}defeat them so we can learn{N}the truth!{W1}"
-                setFacing $1C,DOWN
+                nextSingleText $0,ALLY_KAZIN ; "Galam soldiers!{W1}"
+                nextSingleText $C0,ALLY_LEMON ; "Greetings, Granseal scum!{W1}"
+                nextSingleText $0,ALLY_KAZIN ; "Why did you kill Sir{N}Hawel?  How could you be{N}so mean?{W1}"
+                nextSingleText $C0,ALLY_LEMON ; "Ummm....{W1}"
+                nextText $0,ALLY_KAZIN  ; "Answer me!{W1}"
+                nextSingleText $0,ALLY_KAZIN ; "{LEADER}, we must{N}defeat them so we can learn{N}the truth!{W1}"
+                setFacing ALLY_LEMON,DOWN
                 csWait 30
-                setFacing $1C,RIGHT
-                setFacing $80,LEFT
+                setFacing ALLY_LEMON,RIGHT
+                setFacing 128,LEFT
                 csWait 20
-                nextSingleText $C0,$1C  ; "Capture them alive!{W1}"
-                nod $80
-                entityActionsWait $1C
+                nextSingleText $C0,ALLY_LEMON ; "Capture them alive!{W1}"
+                nod 128
+                entityActionsWait ALLY_LEMON
                  moveDown 1
                  moveRight 2
                  moveDown 2
                  moveRight 1
                  moveDown 1
                 endActions
-                entityActionsWait $1C
+                entityActionsWait ALLY_LEMON
                  moveRight 2
                  moveDown 1
                 endActions

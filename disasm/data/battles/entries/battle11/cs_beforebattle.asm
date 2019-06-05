@@ -2,46 +2,46 @@
 ; ASM FILE data\battles\entries\battle11\cs_beforebattle.asm :
 ; 0x4ABFE..0x4ACC8 : Cutscene before battle 11
 bbcs_11:        textCursor $9B3
-                setCameraEntity $0
+                setCameraEntity ALLY_BOWIE
                 loadMapFadeIn 48,8,19
                 loadMapEntities ce_4ACA0
-                setActscriptWait $0,eas_Init
-                setCameraEntity $0
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setCameraEntity ALLY_BOWIE
                 executeSubroutine sub_458E
                 fadeInB
                 playSound $FD
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveLeft 1
                  moveUp 1
                 endActions
-                nextSingleText $0,$7    ; "You'll come to the foot of{N}Mt. Volcano through this{N}dark cave.{W2}"
-                setFacing $7,RIGHT
-                setFacing $0,LEFT
-                nextSingleText $0,$7    ; "But, I heard this cave is{N}home to a hobgoblin.{W1}"
+                nextSingleText $0,ALLY_PETER ; "You'll come to the foot of{N}Mt. Volcano through this{N}dark cave.{W2}"
+                setFacing ALLY_PETER,RIGHT
+                setFacing ALLY_BOWIE,LEFT
+                nextSingleText $0,ALLY_PETER ; "But, I heard this cave is{N}home to a hobgoblin.{W1}"
                 csWait 20
-                nextSingleText $0,$80   ; "Yes, it is!{W1}"
+                nextSingleText $0,128   ; "Yes, it is!{W1}"
                 playSound MUSIC_ENEMY_ATTACK
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveUp 1
                 endActions
                 csWait 5
-                setActscript $0,eas_461B6
+                setActscript ALLY_BOWIE,eas_461B6
                 csWait 5
-                setActscript $7,eas_461E4
+                setActscript ALLY_PETER,eas_461E4
                 csWait 120
-                setFacing $0,UP
-                entityActionsWait $7
+                setFacing ALLY_BOWIE,UP
+                entityActionsWait ALLY_PETER
                  moveUp 1
                 endActions
-                nextSingleText $0,$7    ; "Wh...Who said that?{W1}"
-                nextSingleText $0,$80   ; "Me!  The hobgoblin!{W1}"
+                nextSingleText $0,ALLY_PETER ; "Wh...Who said that?{W1}"
+                nextSingleText $0,128   ; "Me!  The hobgoblin!{W1}"
                 cameraSpeed $20
-                setCameraEntity $80
-                nextSingleText $0,$80   ; "Welcome to my home.{W2}"
-                entityActionsWait $80
+                setCameraEntity 128
+                nextSingleText $0,128   ; "Welcome to my home.{W2}"
+                entityActionsWait 128
                  moveDown 1
                 endActions
-                nextSingleText $0,$80   ; "Enjoy your visit because{N}you're not leaving!{W1}"
+                nextSingleText $0,128   ; "Enjoy your visit because{N}you're not leaving!{W1}"
                 playSound $FD
                 csc_end
 ce_4ACA0:       mainEntity 15,24,UP

@@ -24,67 +24,67 @@ return_57D20:
 
 cs_57D22:       textCursor $C7D
                 cameraSpeed $30
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
-                setPos $0,12,31,UP
-                setPos $7,13,31,UP
-                setPos $1F,11,31,UP
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                setPos ALLY_BOWIE,12,31,UP
+                setPos ALLY_PETER,13,31,UP
+                setPos FOLLOWER_B,11,31,UP
                 fadeInB
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveUp 5
                 endActions
-                entityActions $7
+                entityActions ALLY_PETER
                  moveUp 5
                 endActions
-                entityActionsWait $1F
+                entityActionsWait FOLLOWER_B
                  moveUp 5
                 endActions
-                nextSingleText $0,$80   ; "Stop!{W1}"
+                nextSingleText $0,128   ; "Stop!{W1}"
                 csWait 10
-                setActscript $0,eas_Jump
-                setActscript $7,eas_Jump
-                setActscriptWait $1F,eas_Jump
-                setActscript $0,eas_Jump
-                setActscript $7,eas_Jump
-                setActscriptWait $1F,eas_Jump
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscript ALLY_PETER,eas_Jump
+                setActscriptWait FOLLOWER_B,eas_Jump
+                setActscript ALLY_BOWIE,eas_Jump
+                setActscript ALLY_PETER,eas_Jump
+                setActscriptWait FOLLOWER_B,eas_Jump
                 csWait 30
                 csWait 5
-                setActscript $0,eas_461B6
+                setActscript ALLY_BOWIE,eas_461B6
                 csWait 5
-                setActscript $7,eas_461E4
+                setActscript ALLY_PETER,eas_461E4
                 csWait 5
-                setActscript $1F,eas_461B6
+                setActscript FOLLOWER_B,eas_461B6
                 csWait 80
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveUp 1
                 endActions
-                setFacing $0,UP
-                setFacing $1F,UP
-                nextSingleText $80,$7   ; "Who said that?{W1}"
+                setFacing ALLY_BOWIE,UP
+                setFacing FOLLOWER_B,UP
+                nextSingleText $80,ALLY_PETER ; "Who said that?{W1}"
                 setCamDest 7,5
-                nextSingleText $80,$7   ; "Wow, what a huge guy!{W1}"
+                nextSingleText $80,ALLY_PETER ; "Wow, what a huge guy!{W1}"
                 csWait 30
-                nextSingleText $0,$80   ; "Leave here!{N}I'll attack you if you don't!{W1}"
+                nextSingleText $0,128   ; "Leave here!{N}I'll attack you if you don't!{W1}"
                 setCamDest 7,21
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveDown 1
                 endActions
-                setFacing $0,RIGHT
-                setFacing $1F,RIGHT
-                setFacing $7,LEFT
-                nextText $80,$7         ; "Attack us?!  {LEADER},{N}let's get out of here!{W2}"
-                nextSingleText $80,$7   ; "We don't want to fight him!{W1}"
+                setFacing ALLY_BOWIE,RIGHT
+                setFacing FOLLOWER_B,RIGHT
+                setFacing ALLY_PETER,LEFT
+                nextText $80,ALLY_PETER ; "Attack us?!  {LEADER},{N}let's get out of here!{W2}"
+                nextSingleText $80,ALLY_PETER ; "We don't want to fight him!{W1}"
                 csWait 20
-                nod $0
-                nextSingleText $80,$7   ; "OK, hurry!{W1}"
-                entityActions $0
+                nod ALLY_BOWIE
+                nextSingleText $80,ALLY_PETER ; "OK, hurry!{W1}"
+                entityActions ALLY_BOWIE
                  moveDown 5
                 endActions
-                entityActions $7
+                entityActions ALLY_PETER
                  moveDown 5
                 endActions
-                entityActionsWait $1F
+                entityActionsWait FOLLOWER_B
                  moveDown 5
                 endActions
                 warp $44,$37,$2C,$3

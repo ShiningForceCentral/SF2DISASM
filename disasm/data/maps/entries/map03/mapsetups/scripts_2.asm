@@ -2,46 +2,46 @@
 ; ASM FILE data\maps\entries\map03\mapsetups\scripts_2.asm :
 ; 0x628C8..0x6299A : 
 cs_628C8:       textCursor $F4B
-                nextText $0,$87         ; "I envy you.{N}I'm an old woman now.{W2}"
-                nextSingleText $0,$87   ; "Nobody kisses me anymore.{W1}"
-                setDest $0,25,28
-                setFacing $0,UP
-                setDest $88,25,27
-                setFacing $88,RIGHT
-                setFacing $87,LEFT
-                nextText $0,$88         ; "You're wrong!{W2}"
-                nextSingleText $0,$88   ; "I'll kiss you!{W1}"
+                nextText $0,135         ; "I envy you.{N}I'm an old woman now.{W2}"
+                nextSingleText $0,135   ; "Nobody kisses me anymore.{W1}"
+                setDest ALLY_BOWIE,25,28
+                setFacing ALLY_BOWIE,UP
+                setDest 136,25,27
+                setFacing 136,RIGHT
+                setFacing 135,LEFT
+                nextText $0,136         ; "You're wrong!{W2}"
+                nextSingleText $0,136   ; "I'll kiss you!{W1}"
                 csWait 10
-                setActscriptWait $87,eas_Jump
-                setActscriptWait $87,eas_Jump
+                setActscriptWait 135,eas_Jump
+                setActscriptWait 135,eas_Jump
                 csc_end
 cs_6290C:       hideText
-                entityActionsWait $8A
+                entityActionsWait 138
                  moveDown 1
                 endActions
-                setDest $0,42,10
-                setDest $4,42,10
-                setDest $1,42,10
-                setDest $3,42,10
-                setDest $2,42,10
-                followEntity $0,$8A,$2
-                followEntity $4,$8A,$5
-                followEntity $1,$8A,$6
-                followEntity $3,$4,$2
-                followEntity $2,$1,$2
-                entityActionsWait $8A
+                setDest ALLY_BOWIE,42,10
+                setDest ALLY_KAZIN,42,10
+                setDest ALLY_SARAH,42,10
+                setDest ALLY_JAHA,42,10
+                setDest ALLY_CHESTER,42,10
+                followEntity ALLY_BOWIE,138,2
+                followEntity ALLY_KAZIN,138,5
+                followEntity ALLY_SARAH,138,6
+                followEntity ALLY_JAHA,ALLY_KAZIN,2
+                followEntity ALLY_CHESTER,ALLY_SARAH,2
+                entityActionsWait 138
                  moveDown 1
                  moveLeft 1
                  moveDown 1
                  moveDown 1
                  moveDown 1
                 endActions
-                entityActionsWait $8A
+                entityActionsWait 138
                  moveDown 3
                  moveLeft 6
                  eaWait 10
                 endActions
-                entityActionsWait $8A
+                entityActionsWait 138
                  moveUp 8
                  moveLeft 6
                  moveUp 2

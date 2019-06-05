@@ -16,7 +16,7 @@ return_513CC:
 
 	; End of function ms_map3_flag261_InitFunction
 
-cs_513CE:       hide $3
+cs_513CE:       hide ALLY_JAHA
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================

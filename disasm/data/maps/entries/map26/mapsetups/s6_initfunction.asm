@@ -25,73 +25,73 @@ return_59E02:
 	; End of function ms_map26_InitFunction
 
 cs_59E04:       textCursor $6CB
-                setCameraEntity $FFFF
+                setCameraEntity 65535
                 reloadMap 21,8
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
-                stopEntity $0
-                stopEntity $7
-                stopEntity $1F
-                customActscriptWait $0
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                stopEntity ALLY_BOWIE
+                stopEntity ALLY_PETER
+                stopEntity FOLLOWER_B
+                customActscriptWait ALLY_BOWIE
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $7
+                customActscriptWait ALLY_PETER
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $1F
+                customActscriptWait FOLLOWER_B
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $82
+                customActscriptWait 130
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $83
+                customActscriptWait 131
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                customActscriptWait $84
+                customActscriptWait 132
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setPos $0,26,7,DOWN
-                setPos $7,27,6,DOWN
-                setPos $1F,25,6,DOWN
-                setPos $82,26,6,UP
-                setPos $83,25,5,UP
-                setPos $84,27,5,UP
+                setPos ALLY_BOWIE,26,7,DOWN
+                setPos ALLY_PETER,27,6,DOWN
+                setPos FOLLOWER_B,25,6,DOWN
+                setPos 130,26,6,UP
+                setPos 131,25,5,UP
+                setPos 132,27,5,UP
                 fadeInB
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveDown 7
                 endActions
-                entityActions $7
+                entityActions ALLY_PETER
                  moveDown 7
                 endActions
-                entityActions $1F
+                entityActions FOLLOWER_B
                  moveDown 7
                 endActions
-                entityActions $82
+                entityActions 130
                  moveDown 7
                 endActions
-                entityActions $83
+                entityActions 131
                  moveDown 7
                 endActions
-                entityActionsWait $84
+                entityActionsWait 132
                  moveDown 7
                 endActions
                 csWait 20
-                startEntity $0
-                startEntity $7
-                startEntity $1F
+                startEntity ALLY_BOWIE
+                startEntity ALLY_PETER
+                startEntity FOLLOWER_B
                 csWait 40
-                hide $82
-                hide $83
-                hide $84
+                hide 130
+                hide 131
+                hide 132
                 csWait 30
-                nextSingleText $FF,$FF  ; "The Cotton Balloon popped.{W1}"
-                followEntity $7,$0,$2
-                followEntity $1F,$7,$2
+                nextSingleText $FF,255  ; "The Cotton Balloon popped.{W1}"
+                followEntity ALLY_PETER,ALLY_BOWIE,2
+                followEntity FOLLOWER_B,ALLY_PETER,2
                 csc_end

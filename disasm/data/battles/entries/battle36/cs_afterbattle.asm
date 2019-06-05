@@ -4,30 +4,30 @@
 abcs_battle36:  textCursor $B89
                 loadMapFadeIn 53,6,17
                 loadMapEntities ce_4DA46
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setPos $7,10,19,DOWN
-                setActscriptWait $1F,eas_Init
-                setPos $1F,12,19,DOWN
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setPos ALLY_PETER,10,19,DOWN
+                setActscriptWait FOLLOWER_B,eas_Init
+                setPos FOLLOWER_B,12,19,DOWN
                 jumpIfFlagClear $4C,cs_4D9F0 ; Zynk is a follower
-                setActscriptWait $1A,eas_Init
-                setPos $1A,63,62,DOWN
-cs_4D9F0:       animEntityFX $80,6
+                setActscriptWait ALLY_ZYNK,eas_Init
+                setPos ALLY_ZYNK,63,62,DOWN
+cs_4D9F0:       animEntityFX 128,6
                 fadeInB
-                animEntityFX $80,7
-                setActscriptWait $80,eas_Jump
+                animEntityFX 128,7
+                setActscriptWait 128,eas_Jump
                 csWait 5
-                setActscript $80,eas_461B6
+                setActscript 128,eas_461B6
                 csWait 120
-                setFacing $80,DOWN
-                nextText $0,$80         ; "Prism Flowers?{W2}"
-                nextSingleText $0,$80   ; "My Prism Flowers!{W1}"
-                setFacing $80,UP
-                nextSingleText $0,$80   ; "{LEADER}, I shall return{N}with Red Baron!{N}You'll pay for this!{W1}"
-                animEntityFX $80,6
-                followEntity $81,$0,$2
-                followEntity $7,$81,$1
-                followEntity $1F,$81,$3
+                setFacing 128,DOWN
+                nextText $0,128         ; "Prism Flowers?{W2}"
+                nextSingleText $0,128   ; "My Prism Flowers!{W1}"
+                setFacing 128,UP
+                nextSingleText $0,128   ; "{LEADER}, I shall return{N}with Red Baron!{N}You'll pay for this!{W1}"
+                animEntityFX 128,6
+                followEntity 129,ALLY_BOWIE,2
+                followEntity ALLY_PETER,129,1
+                followEntity FOLLOWER_B,129,3
                 csc_end
 ce_4DA46:       mainEntity 11,20,DOWN
                 entity 10,19,DOWN,ALLY_PETER,eas_Init

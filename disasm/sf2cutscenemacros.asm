@@ -306,11 +306,12 @@ stopEntity:	macro ;alias
 	
 csc1D:	macro
 	dc.w $1D
-	dc.w \1
+	dc.b \1
+    dc.b \2
 	endm
 	
 showPortrait:	macro ;alias
-	csc1D \1
+	csc1D \1,\2
 	endm		
 	
 csc1E:	macro

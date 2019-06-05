@@ -19,27 +19,27 @@ Map14_DefaultZoneEvent:
 	; End of function Map14_ZoneEvent0
 
 cs_58E5C:       textCursor $8D5
-                nextText $FF,$FF        ; "Bring up the plank?"
+                nextText $FF,255        ; "Bring up the plank?"
                 yesNo
                 jumpIfFlagClear $59,cs_58EB8 ; YES/NO prompt answer
                 hideText
-                entityActionsWait $0
+                entityActionsWait ALLY_BOWIE
                  moveDown 1
                 endActions
                 csWait 40
-                setActscriptWait $83,eas_46172
-                setActscriptWait $84,eas_46172
-                setActscriptWait $85,eas_46172
-                entityActions $0
+                setActscriptWait 131,eas_46172
+                setActscriptWait 132,eas_46172
+                setActscriptWait 133,eas_46172
+                entityActions ALLY_BOWIE
                  moveDown 3
                 endActions
-                entityActions $83
+                entityActions 131
                  moveDown 3
                 endActions
-                entityActions $84
+                entityActions 132
                  moveDown 3
                 endActions
-                entityActionsWait $85
+                entityActionsWait 133
                  moveDown 3
                 endActions
                 warp $E,$D,$B,$3

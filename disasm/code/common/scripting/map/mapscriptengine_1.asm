@@ -319,7 +319,7 @@ csc44_reloadEntities:
                 dc.w VINTS_DEACTIVATE
                 dc.l 0
                 moveq   #0,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 moveq   #0,d1
                 move.w  (a5),d1
                 divu.w  #$180,d1
@@ -475,7 +475,7 @@ loc_467C6:
 csc2D_entityActionSequence:
                 
                 move.b  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.b  d0,ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER(a5)
                 andi.b  #$9F,ENTITYDEF_OFFSET_FLAGS_A(a5)
                 move.b  (a6)+,d4
@@ -733,7 +733,7 @@ return_4694E:
 csc14_setEntityActscriptManual:
                 
                 move.b  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.b  d0,ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER(a5) ; timer for next actscript read
                 move.b  (a6)+,d0
                 move.l  a6,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a5) ; address of new actscript
@@ -759,7 +759,7 @@ loc_46970:
 csc15_setEntityActscript:
                 
                 move.b  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.b  d0,ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER(a5)
                 move.b  (a6)+,d0
                 move.l  (a6)+,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a5)
@@ -783,7 +783,7 @@ return_46998:
 csc16_waitUntilEntityIdle:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
 loc_469A0:
                 
                 cmpi.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a5)
@@ -800,7 +800,7 @@ loc_469A0:
 csc17_setEntityPosAndFacingWithFlash:
                 
                 move.b  (a6),d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  (a5),d1
                 move.w  #$FE80,d2
                 moveq   #$1E,d7
@@ -829,7 +829,7 @@ loc_469D0:
 csc18_flashEntityWhite:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  (a6)+,d7
                 lsr.w   #2,d7
 loc_469E8:
@@ -858,7 +858,7 @@ csc19_setEntityPosAndFacing:
                 moveq   #4,d7
                 bsr.w   AdjustScriptPointerByCharAliveStatus
                 move.b  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 moveq   #0,d0           ; set new pos-dest, and facing
                 move.b  (a6)+,d0
                 mulu.w  #$180,d0
@@ -881,7 +881,7 @@ csc19_setEntityPosAndFacing:
 csc1A_setEntitySprite:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  (a6)+,d0
                 cmpi.w  #COM_ALLIES_NUM,d0
                 bcc.s   loc_46A5E
@@ -907,7 +907,7 @@ csc1B_startEntityAnim:
                 moveq   #2,d7
                 bsr.w   AdjustScriptPointerByCharAliveStatus
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.b  #0,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
                 rts
 
@@ -924,7 +924,7 @@ csc1C_stopEntityAnim:
                 moveq   #2,d7
                 bsr.w   AdjustScriptPointerByCharAliveStatus
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.b  #$FF,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
                 rts
 
@@ -951,7 +951,7 @@ loc_46AAC:
 loc_46AB6:
                 
                 jsr     (WaitForViewScrollEnd).w
-                bsr.w   GetEntityPortraitAndSpeechSfx
+                bsr.w   GetEntityPortaitAndSpeechSound
                 cmpi.w  #$FFFF,d1
                 beq.s   return_46AD0
                 move.w  d1,d0
@@ -1055,7 +1055,7 @@ return_46B40:
 csc22_animateEntityFadeInOrOut:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 lea     (FF6802_LOADING_SPACE).l,a0
                 move.w  (a6)+,d0
                 moveq   #0,d1
@@ -1185,7 +1185,7 @@ csc23_setEntityFacing:
                 moveq   #2,d7
                 bsr.w   AdjustScriptPointerByCharAliveStatus
                 move.b  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.b  (a6)+,ENTITYDEF_OFFSET_FACING(a5)
                 bsr.w   UpdateEntitySprite_0
                 rts
@@ -1225,10 +1225,10 @@ loc_46C52:
 csc25_cloneEntity:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a5),d1
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.b  d1,ENTITYDEF_OFFSET_ENTNUM(a5)
                 rts
 
@@ -1240,7 +1240,7 @@ csc25_cloneEntity:
 csc26_entityNodHead:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.b  #$FF,$1E(a5)
                 lea     (FF6802_LOADING_SPACE).l,a0
                 moveq   #0,d7
@@ -1268,7 +1268,7 @@ loc_46C8A:
 csc27_entityShakeHead:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.b  #$FF,$1E(a5)
                 lea     (FF6802_LOADING_SPACE).l,a0
                 moveq   #6,d7
@@ -1300,11 +1300,11 @@ loc_46CC8:
 csc28_moveEntityNextToPlayer:
                 
                 moveq   #0,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  ENTITYDEF_OFFSET_XDEST(a5),d1
                 move.w  ENTITYDEF_OFFSET_YDEST(a5),d2
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  (a6)+,d3
                 tst.b   d3
                 bne.s   loc_46D30
@@ -1365,7 +1365,7 @@ csc29_setEntityDest:
                 
                 move.w  (a6)+,d0
                 move.w  d0,d6
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 moveq   #0,d1
                 moveq   #0,d2
                 move.w  (a6)+,d1
@@ -1407,7 +1407,7 @@ return_46DEC:
 csc2A_entityShiver:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  ((SPRITE_SIZE-$1000000)).w,d6
                 move.w  #$15,((SPRITE_SIZE-$1000000)).w
                 move.b  ENTITYDEF_OFFSET_ANIMCOUNTER(a5),d5
@@ -1459,10 +1459,10 @@ csc2C_followEntity:
                 moveq   #6,d7
                 bsr.w   AdjustScriptPointerByCharAliveStatus
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  d0,d3
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  d0,d1
                 move.w  d3,d0
                 move.w  (a6)+,d2
@@ -1500,7 +1500,7 @@ FollowerPositions:
 csc2E_hideEntity:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 jsr     HideEntity
                 rts
 
@@ -1514,7 +1514,7 @@ csc2E_hideEntity:
 csc2F_fly:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  (a6)+,d0
                 bne.s   loc_46EB8
                 clr.b   $11(a5)
@@ -1534,7 +1534,7 @@ return_46EBE:
 csc30_removeEntityShadow:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 lea     (FF6802_LOADING_SPACE).l,a0
                 bsr.w   LoadMapsprite
                 jsr     sub_45A8C
@@ -1550,7 +1550,7 @@ csc30_removeEntityShadow:
 csc50_setEntitySize:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  ((SPRITE_SIZE-$1000000)).w,d6
                 move.w  (a6)+,((SPRITE_SIZE-$1000000)).w
                 ori.b   #8,ENTITYDEF_OFFSET_FLAGS_B(a5)
@@ -1607,11 +1607,11 @@ csc52_faceEntity:
                 
                 move.w  (a6)+,d7
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  ENTITYDEF_OFFSET_XDEST(a5),d1
                 move.w  ENTITYDEF_OFFSET_YDEST(a5),d2
                 move.w  d7,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  d1,d3
                 sub.w   ENTITYDEF_OFFSET_XDEST(a5),d3
                 or.w    d3,d3
@@ -1661,7 +1661,7 @@ loc_46FB4:
 csc53_setPriority:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 lea     ((byte_FFAFB0-$1000000)).w,a0
                 nop
                 move.w  (a6)+,d1
@@ -1715,7 +1715,7 @@ csc55_resetCharacterBattleStats:
 csc56_addFollower:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 moveq   #0,d1
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a0
 loc_47014:
@@ -1739,10 +1739,10 @@ loc_47020:
 csc31_moveEntityAboveEntity:
                 
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 move.w  d0,d1
                 move.w  (a6)+,d0
-                bsr.w   GetEntityAddressFromPlayableCharacterIdx
+                bsr.w   GetEntityAddressFromCharacter
                 moveq   #$FFFFFFE8,d2
                 moveq   #0,d3
                 jsr     AddFollower
@@ -1757,10 +1757,10 @@ csc31_moveEntityAboveEntity:
 ;     In: D0 = playable character from FFB140
 ;     Out: A5 = entity info address in RAM
 
-GetEntityAddressFromPlayableCharacterIdx:
+GetEntityAddressFromCharacter:
                 
                 lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a5
-                andi.w  #$FF,d0
+                andi.w  #CHAR_MASK_IDX,d0
                 tst.b   d0
                 bpl.s   loc_4705A
                 subi.b  #$60,d0 
@@ -1774,7 +1774,7 @@ loc_4705A:
                 move.l  (sp)+,d0
                 rts
 
-	; End of function GetEntityAddressFromPlayableCharacterIdx
+	; End of function GetEntityAddressFromCharacter
 
 
 ; =============== S U B R O U T I N E =======================================

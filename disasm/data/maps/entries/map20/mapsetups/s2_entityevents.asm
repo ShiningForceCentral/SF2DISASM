@@ -103,8 +103,8 @@ Map20_DefaultEntityEvent:
 	; End of function Map20_EntityEvent6
 
 cs_53816:       textCursor $234
-                setActscriptWait $87,eas_Jump
-                setFacing $87,LEFT
-                nextText $0,$87         ; "(Scream!)...who are you?!{N}Get out of here!{W2}"
-                nextText $0,$87         ; "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
+                setActscriptWait 135,eas_Jump
+                setFacing 135,LEFT
+                nextText $0,135         ; "(Scream!)...who are you?!{N}Get out of here!{W2}"
+                nextText $0,135         ; "Boys are not allowed{N}to come into our dressing{N}room!!{W1}"
                 csc_end

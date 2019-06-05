@@ -2,7 +2,9 @@
 ; ASM FILE data\stats\items\itembreakmessages.asm :
 ; 0xBCF0..0xBD24 : Item break messages
 ItemBreakMessages:
-                ; - enum Items : ITEM_*
+                ; a : enum Items : ITEM_*
+                ; b : Message offset (added to base Message ID, refer to GetItemBreakMessage for implementation details)
+                    
                 itemBreakMessage POWER_RING, 1
                 itemBreakMessage PROTECT_RING, 1
                 itemBreakMessage QUICK_RING, 1

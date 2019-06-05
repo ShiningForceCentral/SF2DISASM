@@ -2,85 +2,85 @@
 ; ASM FILE data\maps\entries\map38\mapsetups\scripts.asm :
 ; 0x5DE2E..0x5DF84 : 
 cs_5DE2E:       textCursor $86A
-                stopEntity $8E
+                stopEntity 142
                 playSound $FD
                 setCamDest 8,0
-                shiver $89
+                shiver 137
                 playSound MUSIC_SAD_THEME_3
-                nextSingleText $0,$89   ; "Sir Petro, don't leave me{N}alone!{W1}"
-                nextSingleText $0,$8E   ; "Paseran...I'm sorry.{W1}"
-                shiver $89
-                nextSingleText $0,$89   ; "You promised to fly me in{N}the sky!{W1}"
-                nextText $0,$8E         ; "I know...with the Nazca{N}Ship...I promised...{W2}"
-                nextText $0,$8E         ; "I'd fly home...to see my{N}family....{W2}"
-                nextSingleText $0,$8E   ; "To show them how wonderful{N}the ancients were....{W1}"
-                shiver $89
+                nextSingleText $0,137   ; "Sir Petro, don't leave me{N}alone!{W1}"
+                nextSingleText $0,142   ; "Paseran...I'm sorry.{W1}"
+                shiver 137
+                nextSingleText $0,137   ; "You promised to fly me in{N}the sky!{W1}"
+                nextText $0,142         ; "I know...with the Nazca{N}Ship...I promised...{W2}"
+                nextText $0,142         ; "I'd fly home...to see my{N}family....{W2}"
+                nextSingleText $0,142   ; "To show them how wonderful{N}the ancients were....{W1}"
+                shiver 137
                 playSound $FD
-                nextSingleText $0,$89   ; "Petro!  No!{W1}"
+                nextSingleText $0,137   ; "Petro!  No!{W1}"
                 playSound $FB
                 csc_end
 cs_5DE76:       textCursor $879
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1F,eas_Init
-                setCameraEntity $1A
-                setDest $0,12,9
-                setDest $7,12,8
-                setDest $7,13,8
-                setDest $1F,12,8
-                setDest $1F,14,8
-                setActscriptWait $1A,eas_Init
-                setDest $1A,11,8
-                setFacing $0,LEFT
-                setFacing $7,LEFT
-                setFacing $1F,LEFT
-                entityActionsWait $1A
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                setCameraEntity ALLY_ZYNK
+                setDest ALLY_BOWIE,12,9
+                setDest ALLY_PETER,12,8
+                setDest ALLY_PETER,13,8
+                setDest FOLLOWER_B,12,8
+                setDest FOLLOWER_B,14,8
+                setActscriptWait ALLY_ZYNK,eas_Init
+                setDest ALLY_ZYNK,11,8
+                setFacing ALLY_BOWIE,LEFT
+                setFacing ALLY_PETER,LEFT
+                setFacing FOLLOWER_B,LEFT
+                entityActionsWait ALLY_ZYNK
                  moveLeft 2
                 endActions
-                entityActionsWait $7
+                entityActionsWait ALLY_PETER
                  moveLeft 2
                 endActions
-                entityActionsWait $1F
+                entityActionsWait FOLLOWER_B
                  moveLeft 1
                 endActions
-                entityActionsWait $1A
+                entityActionsWait ALLY_ZYNK
                  moveDown 1
                 endActions
-                entityActionsWait $1A
+                entityActionsWait ALLY_ZYNK
                  moveRight 1
                 endActions
-                entityActionsWait $1A
+                entityActionsWait ALLY_ZYNK
                  moveUp 1
                 endActions
-                entityActionsWait $1A
+                entityActionsWait ALLY_ZYNK
                  moveLeft 2
                 endActions
-                setActscriptWait $1A,eas_Jump
-                setActscript $1A,eas_Jump
-                nextSingleText $0,$7    ; "What's wrong with {NAME;26}?{W1}"
-                nextSingleText $0,$1F   ; "I have no idea, but he's{N}obviously disturbed!{W1}"
-                entityActionsWait $1A
+                setActscriptWait ALLY_ZYNK,eas_Jump
+                setActscript ALLY_ZYNK,eas_Jump
+                nextSingleText $0,ALLY_PETER ; "What's wrong with {NAME;26}?{W1}"
+                nextSingleText $0,FOLLOWER_B ; "I have no idea, but he's{N}obviously disturbed!{W1}"
+                entityActionsWait ALLY_ZYNK
                  moveUp 1
                 endActions
-                entityActionsWait $1A
+                entityActionsWait ALLY_ZYNK
                  moveRight 1
                 endActions
-                entityActionsWait $1A
+                entityActionsWait ALLY_ZYNK
                  moveDown 1
                 endActions
-                entityActionsWait $1A
+                entityActionsWait ALLY_ZYNK
                  moveLeft 2
                 endActions
                 csWait 30
-                nod $1A
-                setFacing $1A,RIGHT
-                nextSingleText $0,$1A   ; "{LEADER}, Sir Astral!{N}I am angry!{W2}"
-                nextSingleText $0,$1A   ; "I cannot forgive the{N}devils!{W2}"
-                nextSingleText $0,$1A   ; "I have overridden my{N}restrictions on fighting.{W2}"
-                nextSingleText $0,$1A   ; "I am joining your force as{N}a soldier!{W1}"
-                join $1A
+                nod ALLY_ZYNK
+                setFacing ALLY_ZYNK,RIGHT
+                nextSingleText $0,ALLY_ZYNK ; "{LEADER}, Sir Astral!{N}I am angry!{W2}"
+                nextSingleText $0,ALLY_ZYNK ; "I cannot forgive the{N}devils!{W2}"
+                nextSingleText $0,ALLY_ZYNK ; "I have overridden my{N}restrictions on fighting.{W2}"
+                nextSingleText $0,ALLY_ZYNK ; "I am joining your force as{N}a soldier!{W1}"
+                join ALLY_ZYNK
                 clearF $4C              ; Zynk is a follower
-                nextSingleText $0,$1A   ; "Let us go defeat the Devil{N}Army!{W1}"
-                followEntity $7,$0,$2
-                followEntity $1F,$7,$2
-                followEntity $1A,$1F,$2
+                nextSingleText $0,ALLY_ZYNK ; "Let us go defeat the Devil{N}Army!{W1}"
+                followEntity ALLY_PETER,ALLY_BOWIE,2
+                followEntity FOLLOWER_B,ALLY_PETER,2
+                followEntity ALLY_ZYNK,FOLLOWER_B,2
                 csc_end

@@ -185,26 +185,26 @@ Map8_DefaultEntityEvent:
 
 	; End of function Map8_2C4_EntityEvent12
 
-cs_56146:       setActscriptWait $8,eas_Init
-                setActscriptWait $8,eas_461AA
-                faceEntity $8,$0
+cs_56146:       setActscriptWait ALLY_MAY,eas_Init
+                setActscriptWait ALLY_MAY,eas_461AA
+                faceEntity ALLY_MAY,ALLY_BOWIE
                 textCursor $543
-                nextSingleText $0,$8    ; "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"
-                join $8
-                nextSingleText $0,$8    ; "Now, let's go!{W1}"
-                addNewFollower $8
+                nextSingleText $0,ALLY_MAY ; "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"
+                join ALLY_MAY
+                nextSingleText $0,ALLY_MAY ; "Now, let's go!{W1}"
+                addNewFollower ALLY_MAY
                 csc_end
 cs_56172:       textCursor $534
-                nextSingleText $0,$87   ; "To Mt. Volcano?{W1}"
-                setActscript $87,eas_Jump
-                setActscriptWait $86,eas_Jump
-                setFacing $86,RIGHT
-                setFacing $87,LEFT
+                nextSingleText $0,135   ; "To Mt. Volcano?{W1}"
+                setActscript 135,eas_Jump
+                setActscriptWait 134,eas_Jump
+                setFacing 134,RIGHT
+                setFacing 135,LEFT
                 csWait 57
-                setFacing $86,DOWN
-                nextText $0,$86         ; "Go east and then go north{N}along the river.  A cave is{N}there.{W2}"
-                nextSingleText $0,$86   ; "But, I don't recommend you{N}enter such a terrible place!{W1}"
-                setFacing $87,DOWN
-                nextText $0,$87         ; "We call it the Cave of{N}Darkness.  You can't see{N}anything inside.{W2}"
-                nextSingleText $0,$87   ; "The cave is the only way to{N}get to Mt. Volcano.{W1}"
+                setFacing 134,DOWN
+                nextText $0,134         ; "Go east and then go north{N}along the river.  A cave is{N}there.{W2}"
+                nextSingleText $0,134   ; "But, I don't recommend you{N}enter such a terrible place!{W1}"
+                setFacing 135,DOWN
+                nextText $0,135         ; "We call it the Cave of{N}Darkness.  You can't see{N}anything inside.{W2}"
+                nextSingleText $0,135   ; "The cave is the only way to{N}get to Mt. Volcano.{W1}"
                 csc_end

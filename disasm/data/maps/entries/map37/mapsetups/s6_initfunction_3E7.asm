@@ -19,31 +19,31 @@ return_5FABA:
 
 cs_5FABC:       textCursor $D1F
                 reloadMap 6,6
-                setPos $0,8,12,UP
-                setPos $7,13,12,UP
-                setPos $1A,10,10,DOWN
-                setPos $80,10,11,UP
-                stopEntity $80
+                setPos ALLY_BOWIE,8,12,UP
+                setPos ALLY_PETER,13,12,UP
+                setPos ALLY_ZYNK,10,10,DOWN
+                setPos 128,10,11,UP
+                stopEntity 128
                 playSound MUSIC_STOP
                 fadeInB
-                nextText $80,$7         ; "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
-                nextSingleText $80,$7   ; "Where's Sir Astral?{W1}"
-                setFacing $7,RIGHT
+                nextText $80,ALLY_PETER ; "Ouch!  Hey, {NAME;26}!{N}I like your wild driving!{W2}"
+                nextSingleText $80,ALLY_PETER ; "Where's Sir Astral?{W1}"
+                setFacing ALLY_PETER,RIGHT
                 csWait 20
-                setFacing $7,LEFT
+                setFacing ALLY_PETER,LEFT
                 csWait 20
-                setFacing $7,RIGHT
+                setFacing ALLY_PETER,RIGHT
                 csWait 20
-                setFacing $7,LEFT
+                setFacing ALLY_PETER,LEFT
                 csWait 20
-                shiver $7
-                nextSingleText $80,$7   ; "Oh, there he is!{W1}"
-                setActscriptWait $7,eas_Init
-                entityActionsWait $7
+                shiver ALLY_PETER
+                nextSingleText $80,ALLY_PETER ; "Oh, there he is!{W1}"
+                setActscriptWait ALLY_PETER,eas_Init
+                entityActionsWait ALLY_PETER
                  moveLeft 3
                  faceUp 1
                 endActions
-                nextSingleText $80,$7   ; "Sir Astral!  Are you OK?{W1}"
-                setFacing $7,LEFT
-                nextSingleText $80,$7   ; "{LEADER}, come on!{W1}"
+                nextSingleText $80,ALLY_PETER ; "Sir Astral!  Are you OK?{W1}"
+                setFacing ALLY_PETER,LEFT
+                nextSingleText $80,ALLY_PETER ; "{LEADER}, come on!{W1}"
                 csc_end

@@ -53,7 +53,7 @@ Map30_EntityEvent2:
 
 	; End of function Map30_EntityEvent2
 
-cs_5A256:       shiver $82
+cs_5A256:       shiver 130
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================

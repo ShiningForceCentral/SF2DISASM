@@ -4,82 +4,82 @@
 abcs_battle15:  textCursor $9CA
                 loadMapFadeIn 50,9,10
                 loadMapEntities ce_4AFB6
-                setActscriptWait $0,eas_Init
-                setActscriptWait $7,eas_Init
-                setActscriptWait $1E,eas_Init
-                setActscriptWait $1F,eas_Init
-                setPos $1E,14,19,UP
+                setActscriptWait ALLY_BOWIE,eas_Init
+                setActscriptWait ALLY_PETER,eas_Init
+                setActscriptWait FOLLOWER_A,eas_Init
+                setActscriptWait FOLLOWER_B,eas_Init
+                setPos FOLLOWER_A,14,19,UP
                 fadeInB
                 cameraSpeed $30
-                entityActionsWait $1E
+                entityActionsWait FOLLOWER_A
                  moveUp 5
                 endActions
-                nextSingleText $0,$1E   ; "It was lucky for me that I{N}met you.  Thank you.{W1}"
-                setFacing $1E,RIGHT
-                nextSingleText $0,$1E   ; "Follow me to the Ancient{N}Tunnel.{W1}"
-                entityActionsWait $1E
+                nextSingleText $0,FOLLOWER_A ; "It was lucky for me that I{N}met you.  Thank you.{W1}"
+                setFacing FOLLOWER_A,RIGHT
+                nextSingleText $0,FOLLOWER_A ; "Follow me to the Ancient{N}Tunnel.{W1}"
+                entityActionsWait FOLLOWER_A
                  moveRight 2
                  moveUp 2
                  moveRight 6
                 endActions
                 fadeOutB
-                setPos $0,27,10,UP
-                setPos $7,28,10,UP
-                setPos $1F,26,10,UP
-                setPos $1E,27,7,UP
+                setPos ALLY_BOWIE,27,10,UP
+                setPos ALLY_PETER,28,10,UP
+                setPos FOLLOWER_B,26,10,UP
+                setPos FOLLOWER_A,27,7,UP
                 setCamDest 21,5
                 fadeInB
-                nextText $0,$1E         ; "Why is this door closed?{N}That's strange...{W2}"
-                nextSingleText $0,$1E   ; "Oh well, let's go in.{W1}"
-                entityFlashWhite $1E,$28
+                nextText $0,FOLLOWER_A  ; "Why is this door closed?{N}That's strange...{W2}"
+                nextSingleText $0,FOLLOWER_A ; "Oh well, let's go in.{W1}"
+                entityFlashWhite FOLLOWER_A,$28
                 csWait 60
-                setActscriptWait $1E,eas_Jump
-                nextSingleText $0,$1E   ; "What?  Let me try again.{W1}"
-                entityFlashWhite $1E,$32
+                setActscriptWait FOLLOWER_A,eas_Jump
+                nextSingleText $0,FOLLOWER_A ; "What?  Let me try again.{W1}"
+                entityFlashWhite FOLLOWER_A,$32
                 setQuake 1
                 csWait 20
                 setQuake 0
                 csWait 90
-                nextSingleText $0,$1E   ; "Petro, my grandson, locked{N}the door.{W1}"
-                customActscriptWait $1E
+                nextSingleText $0,FOLLOWER_A ; "Petro, my grandson, locked{N}the door.{W1}"
+                customActscriptWait FOLLOWER_A
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                entityActionsWait $1E
+                entityActionsWait FOLLOWER_A
                  moveDown 1
                 endActions
-                nextSingleText $0,$1E   ; "Sorry, guys!  We can't go to{N}Grans Island this way.{W1}"
-                entityActions $1E
+                nextSingleText $0,FOLLOWER_A ; "Sorry, guys!  We can't go to{N}Grans Island this way.{W1}"
+                entityActions FOLLOWER_A
                  moveDown 2
                 endActions
                 csWait 15
-                entityActions $0
+                entityActions ALLY_BOWIE
                  moveDown 1
                 endActions
-                entityActions $7
+                entityActions ALLY_PETER
                  moveDown 1
                 endActions
-                entityActionsWait $1F
+                entityActionsWait FOLLOWER_B
                  moveDown 1
                 endActions
-                setFacing $0,UP
-                setFacing $7,UP
-                setFacing $1F,UP
-                waitIdle $1E
-                entityActionsWait $1E
+                setFacing ALLY_BOWIE,UP
+                setFacing ALLY_PETER,UP
+                setFacing FOLLOWER_B,UP
+                waitIdle FOLLOWER_A
+                entityActionsWait FOLLOWER_A
                  moveLeft 3
                 endActions
-                setFacing $0,LEFT
-                setFacing $7,LEFT
-                setFacing $1F,LEFT
-                entityActionsWait $1E
+                setFacing ALLY_BOWIE,LEFT
+                setFacing ALLY_PETER,LEFT
+                setFacing FOLLOWER_B,LEFT
+                entityActionsWait FOLLOWER_A
                  moveLeft 5
                 endActions
-                hide $1E
+                hide FOLLOWER_A
                 clearF $4D              ; Old man is a follower
                 setF $2DC               ; Set after the old man fails to open the way to Grans in the Wooden Panel shrine
-                followEntity $7,$0,$2
-                followEntity $1F,$7,$2
+                followEntity ALLY_PETER,ALLY_BOWIE,2
+                followEntity FOLLOWER_B,ALLY_PETER,2
                 warp $32,$1B,$B,$1
                 csc_end
 ce_4AFB6:       mainEntity 14,5,DOWN
