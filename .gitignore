@@ -292,9 +292,8 @@ disasm/data/sound/landstalkermusicbank1/*.*
 *.mt
 disasm/code/common/tech/sound/sounddriversf1.asm
 build/soundtest-ccs.txt
-disasm/data/sound/musicbank1/test120180917195648.txt
-disasm/data/sound/musicbank1/test.txt
-disasm/data/sound/musicbank1/test1.txt
+disasm/data/sound/musicbank*/test*.txt
 disasm/data/battles/global/newbattlemapcoords.asm
 disasm/data/maps/SF2MapEditor.jar
-disasm/data/maps/entries/map03/maphptiles.txt
+disasm/data/maps/entries/map*/*hptiles*.txt
+disasm/data/maps/entries/map*/*layoutflags*.txt
