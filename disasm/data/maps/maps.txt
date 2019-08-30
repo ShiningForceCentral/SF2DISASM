@@ -237,7 +237,7 @@ Rewrite algorithm :
     Byte 06     Dest X
     Byte 07     Dest Y
 - Ends with $FFFF
-
+
   
 **************** 7. Warps *********************
 
@@ -247,7 +247,7 @@ Warps
 - Layer 2 block copies (mostly roofs) triggered by stepping on a defined block.
     Byte 00  	Trigger X
     Byte 01     Trigger Y
-    Byte 02     Unused, always 00
+    Byte 02     Scrolling transition value $xy : x=1 to activate transition, y=direction
     Byte 03     Destination Map
     Byte 04     Destination X
     Byte 05     Destination Y
