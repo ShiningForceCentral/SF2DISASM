@@ -161,8 +161,16 @@ mWarp:	macro
 	dc.b \2
 	endm
 
+warpNoScroll:	macro
+	dc.b 0
+	endm
+
+warpScroll:	macro
+	dc.b 0x10+\1
+	endm
+
 warpMap:	macro
-	dc.w \1
+	dc.b \1
 	endm
 
 warpDest:	macro
