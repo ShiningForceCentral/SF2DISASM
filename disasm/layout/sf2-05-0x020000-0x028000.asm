@@ -84,8 +84,4 @@ j_SuspendGame:
                 include "code\common\tech\graphics\specialspritesanims.asm"    ; Special Sprites Animations
                 include "code\specialscreens\suspend\suspend.asm"    ; Suspend functions
                 include "code\specialscreens\witchend\witchend.asm"    ; Witch end functions
-                rts
-
-	; End of function VInt_WitchEndBlink
-
                 align $28000

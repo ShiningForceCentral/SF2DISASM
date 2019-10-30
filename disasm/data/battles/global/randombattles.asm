@@ -3,7 +3,7 @@
 ; 0x1B6DB0..0x1B6DBC : Random battles table
 RandomBattlesList:
                 ; enum Battles : BATTLE_*
-                    
+    
                 randomBattles &
                     TO_HAWEL_HOUSE, &
                     NORTH_CLIFF, &

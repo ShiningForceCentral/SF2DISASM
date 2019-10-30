@@ -2,8 +2,8 @@
 ; ASM FILE code\romheader.asm :
 ; 0x0..0x200 : ROM Header
 InitStack:      ; File Name   : D:\SEGADEV\IDB\SF2\sf2.bin
-                ; Format      : Binary file
-                ; Base Address: 0000h Range: 0000h - 200000h Loaded length: 200000h
+; Format      : Binary file
+; Base Address: 0000h Range: 0000h - 200000h Loaded length: 200000h
                 dc.l InitStack          ; Initial Stack
 p_Start:        dc.l Start              ; Start Address
                 dc.l Int_OtherError     ; Bus Error

@@ -3,7 +3,7 @@
 ; 0x47C8E..0x47CBC : Enemy leader presence table
 EnemyLeaderPresence:
                 ; 0 = no enemy leader
-                    
+    
                 dc.b 0                  ; Battle 0
                 dc.b 0                  ; Battle 1
                 dc.b 0                  ; Battle 2

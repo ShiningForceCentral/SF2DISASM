@@ -3,7 +3,7 @@
 ; 0x1F914..0x1F9E2 : Enemy battle sprites table
 EnemyBattleSpritesTable:
                 ; enemyBattleSprite enum EnemyBattleSprites : ENEMYBATTLESPRITE_*, Pallete ID
-                    
+    
                 enemyBattleSprite OOZE, 1 ; OOZE
                 enemyBattleSprite RAT, 0 ; HUGE RAT
                 enemyBattleSprite SOLDIER, 0 ; GALAM SOLDIER

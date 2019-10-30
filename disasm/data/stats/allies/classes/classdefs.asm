@@ -2,9 +2,9 @@
 ; ASM FILE data\stats\allies\classes\classdefs.asm :
 ; 0x1EE890..0x1EE930 : Class definitions
 ClassDefs:      ; resistance enum Resistance : RESISTANCE_*
-                ; moveType   enum MoveTypes : MOVETYPE_*
-                ; prowess    enum Prowess : PROWESS_*
-                    
+; moveType   enum MoveTypes : MOVETYPE_*
+; prowess    enum Prowess : PROWESS_*
+    
                 mov 6                   ; SDMN
                 resistance NONE
                 moveType REGULAR

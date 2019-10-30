@@ -3,7 +3,7 @@
 ; 0xC24E..0xC27A : Spell elements table
 SpellElementsTable:
                 ; enum SpellElements : SPELLELEMENT_*
-                    
+    
                 spellElement UNDEFINED1 ; HEAL
                 spellElement UNDEFINED1 ; AURA
                 spellElement STATUS     ; DETOX

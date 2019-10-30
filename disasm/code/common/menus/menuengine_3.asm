@@ -938,7 +938,7 @@ unk_1623A:      dc.b $3D
 NumberPrompt:
                 
                 movem.l d1-a1,-(sp)
-                link    a6,#-WINDOW_NUMPROMPT_STACK_NEGSIZE
+                link    a6,#$FFF0
                 move.w  d0,-WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6)
                 move.w  d1,-WINDOW_NUMPROMPT_STACK_OFFSET_MINNUM(a6)
                 move.w  d2,-WINDOW_NUMPROMPT_STACK_OFFSET_MAXNUM(a6)

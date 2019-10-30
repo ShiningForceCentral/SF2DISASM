@@ -25,5 +25,5 @@ SavepointMapCoordinates:
                 savePointMapCoords 22, 5, 8, 1
                 savePointMapCoords 29, 55, 10, 1
                 savePointMapCoords 2, 41, 10, 1
-                savePointMapCoords 36, 40, 5, 1
+byte_7BC9:      savePointMapCoords 36, 40, 5, 1
                 dc.b $FF

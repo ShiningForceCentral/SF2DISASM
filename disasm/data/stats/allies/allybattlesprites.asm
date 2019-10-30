@@ -3,9 +3,9 @@
 ; 0x1F806..0x1F914 : Ally battle sprites table
 AllyBattleSpritesTable:
                 ; 3 entries per ally, 3 bytes each :
-                ;  forClass         enum Classes : CLASS_*
-                ;  allyBattleSprite enum AllyBattleSprites : ALLYBATTLESPRITE_*, Pallete ID
-                    
+;  forClass         enum Classes : CLASS_*
+;  allyBattleSprite enum AllyBattleSprites : ALLYBATTLESPRITE_*, Pallete ID
+    
                 forClass SDMN           ; BOWIE
                 allyBattleSprite SDMN, 0
                 forClass HERO
@@ -215,18 +215,19 @@ AllyBattleSpritesTable:
                 allyBattleSprite NONE, 0
                 forClass NONE
                 allyBattleSprite NONE, 0
-; Additional entries to be defined in expanded ROM
+                ; Additional entries to be defined in expanded ROM
                 forClassIfExpandedRom RDBN
                 allyBattleSpriteIfExpandedRom SDMN, 0
                 forClassIfExpandedRom NONE
                 allyBattleSpriteIfExpandedRom NONE, 0
                 forClassIfExpandedRom NONE
                 allyBattleSpriteIfExpandedRom NONE, 0
-                    
+                
                 forClassIfExpandedRom RDBN
                 allyBattleSpriteIfExpandedRom SDMN, 0
                 forClassIfExpandedRom NONE
                 allyBattleSpriteIfExpandedRom NONE, 0
                 forClassIfExpandedRom NONE
                 allyBattleSpriteIfExpandedRom NONE, 0
+                
                     

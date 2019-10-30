@@ -2,12 +2,12 @@
 ; ASM FILE data\stats\enemies\enemydefs.asm :
 ; 0x1B1A66..0x1B30EE : Enemy definitions
 EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
-                ; baseResistance enum Resistance : RESISTANCE_*
-                ; baseProwess    enum Prowess : PROWESS_*
-                ; items          enum Items : ITEM_*
-                ; spells         enum Spells : SPELL_*
-                ; moveType       enum MoveTypes : MOVETYPE_*
-                    
+; baseResistance enum Resistance : RESISTANCE_*
+; baseProwess    enum Prowess : PROWESS_*
+; items          enum Items : ITEM_*
+; spells         enum Spells : SPELL_*
+; moveType       enum MoveTypes : MOVETYPE_*
+    
                 unknownByte 0           ; OOZE
                 spellPower REGULAR
                 level 0

@@ -2,12 +2,12 @@
 ; ASM FILE data\stats\items\itemdefs.asm :
 ; 0x16EA6..0x176A6 : Item definitions
 ItemDefs:       ; equipFlags   enum EquipFlags : EQUIPFLAG_*
-                ; range        Min, Max (0..3)
-                ; price        (0..65535)
-                ; itemType     enum ItemType : ITEMTYPE_*
-                ; useSpell     enum Spells : SPELL_*
-                ; equipEffects enum EquipEffects : EQUIPEFFECT_*, Effect value
-                    
+; range        Min, Max (0..3)
+; price        (0..65535)
+; itemType     enum ItemType : ITEMTYPE_*
+; useSpell     enum Spells : SPELL_*
+; equipEffects enum EquipEffects : EQUIPEFFECT_*, Effect value
+    
                 equipFlags NONE         ; Medical Herb
                 range 0, 1
                 price 10

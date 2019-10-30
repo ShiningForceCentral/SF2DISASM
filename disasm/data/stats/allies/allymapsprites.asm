@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\allies\allymapsprites.asm :
 ; 0x44A5E..0x44A7C : Ally map sprite IDs
 AllyMapSprites: ; enum Mapsprites : MAPSPRITE_*
-                    
+    
                 mapSprite BOWIE_PROMO   ; BOWIE
                 mapSprite SARAH_SPECIAL ; SARAH
                 mapSprite CHESTER_SPECIAL ; CHESTER

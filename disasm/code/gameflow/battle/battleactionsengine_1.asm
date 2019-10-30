@@ -9,7 +9,7 @@
 WriteSkirmishScript:
                 
                 movem.l d0-a6,-(sp)
-                link    a2,#BTLSCENE_STACKNEGSIZE
+                link    a2,#-$98
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a3
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a5

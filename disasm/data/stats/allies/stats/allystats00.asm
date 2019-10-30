@@ -2,9 +2,9 @@
 ; ASM FILE data\stats\allies\stats\allystats00.asm :
 ; 0x1EE2F0..0x1EE31C : Ally stats 00
 AllyStats00:    ; forClass  enum Classes : CLASS_*
-                ; ___Growth Starting value, Projected value, enum GrowthCurves : GROWTHCURVE_*
-                ; spellList Level learned at, enum Spells : SPELL_*
-                    
+; ___Growth Starting value, Projected value, enum GrowthCurves : GROWTHCURVE_*
+; spellList Level learned at, enum Spells : SPELL_*
+    
                 forClass SDMN
                 hpGrowth 12, 58, LINEAR
                 mpGrowth 8, 16, EARLY

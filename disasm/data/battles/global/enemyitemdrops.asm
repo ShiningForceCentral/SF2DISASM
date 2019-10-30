@@ -2,10 +2,10 @@
 ; ASM FILE data\battles\global\enemyitemdrops.asm :
 ; 0xBE52..0xBECC : Enemy item drops
 EnemyItemDrops: ; battle      enum Battles : BATTLE_*
-                ; enemyEntity Enemy entity ID (Entity ID + 128)
-                ; itemDrop    enum Items : ITEM_*
-                ; dropFlag    Drop flag ID
-                    
+; enemyEntity Enemy entity ID (Entity ID + 128)
+; itemDrop    enum Items : ITEM_*
+; dropFlag    Drop flag ID
+    
                 battle TO_HAWEL_HOUSE
                 enemyEntity 130
                 itemDrop MEDICAL_HERB

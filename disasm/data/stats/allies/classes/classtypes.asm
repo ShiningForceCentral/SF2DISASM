@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\allies\classes\classtypes.asm :
 ; 0x853A..0x855A : Class types table
 ClassTypesTable:; enum ClassTypes : CLASSTYPE_*
-                    
+    
                 classType BASE          ; SDMN
                 classType BASE          ; KNTE
                 classType BASE          ; WARR

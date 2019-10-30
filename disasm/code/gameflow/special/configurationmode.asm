@@ -6,11 +6,20 @@
 
 CheatModeConfiguration:
                 
+                if (EASY_CONFIGURATION_MODE=1)
+                bra.s   @CheckInput_Up
+                nop
+                nop
+                else
                 btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
+                endif
+                
                 beq.w   return_7EC4
+@CheckInput_Up:
+                
                 btst    #INPUT_A_UP,((P1_INPUT-$1000000)).w
                 beq.s   loc_7E58
-                                enableSram
+                enableSram
                 btst    #7,(SAVE_FLAGS).l
                 bne.w   nullsub_7FA4
 loc_7E58:

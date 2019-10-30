@@ -2,8 +2,8 @@
 ; ASM FILE data\stats\allies\allystartdefs.asm :
 ; 0x1EE7D0..0x1EE890 : Ally start definitions
 AllyStartDefs:  ; startClass enum Classes : CLASS_*
-                ; startItems enum Items : ITEM_*
-                    
+; startItems enum Items : ITEM_*
+    
                 startClass SDMN         ; BOWIE
                 startLevel 1
                 startItems &

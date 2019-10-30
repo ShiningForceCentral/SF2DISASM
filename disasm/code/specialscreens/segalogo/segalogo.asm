@@ -42,11 +42,23 @@ loc_280AA:
                 move.l  #InputSequence_ConfigurationMode,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
+                
+                if (EASY_CONFIGURATION_MODE=1)
+                dc.l VInt_ActivateConfigurationModeCheat
+                else
                 dc.l VInt_CheckConfigurationModeCheat
+                endif
+                
                 move.l  #InputSequence_DebugMode,((ENTITY_WALKING_PARAMS-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
+                
+                if (EASY_DEBUG_MODE=1)
+                dc.l VInt_ActivateDebugModeCheat
+                else
                 dc.l VInt_CheckDebugModeCheat
+                endif
+                
                 move.b  #1,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
@@ -87,9 +99,17 @@ loc_28164:
                 bne.w   loc_2818E
                 subq.w  #1,d0
                 bne.s   loc_28164
+                
+                if (EASY_CONFIGURATION_MODE=1)
+                bra.s   @Done
+                else
                 trap    #VINT_FUNCTIONS
+                endif
+                
                 dc.w VINTS_REMOVE
                 dc.l VInt_CheckConfigurationModeCheat
+@Done:
+                
                 jsr     (FadeOutToBlack).w
                 clr.w   d0
                 rts
@@ -1166,6 +1186,8 @@ VInt_CheckConfigurationModeCheat:
                 movea.l ((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w,a0
                 cmpi.b  #$FF,(a0)
                 bne.s   loc_28FAE
+VInt_ActivateConfigurationModeCheat:
+                
                 move.b  #$FF,((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
                 sndCom  MUSIC_ITEM
                 rts
@@ -1191,6 +1213,8 @@ VInt_CheckDebugModeCheat:
                 movea.l ((ENTITY_WALKING_PARAMS-$1000000)).w,a0
                 cmpi.b  #$FF,(a0)
                 bne.s   loc_28FE2
+VInt_ActivateDebugModeCheat:
+                
                 move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
                 rts

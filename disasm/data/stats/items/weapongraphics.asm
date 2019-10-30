@@ -3,8 +3,8 @@
 ; 0x1F9E2..0x1FA8A : Weapon graphics table
 WeaponGraphicsTable:
                 ; weaponSprite  enum WeaponSprites : WEAPONSPRITE_*
-                ; weaponPalette enum WeaponPalettes : WEAPONPALETTE_*
-                    
+; weaponPalette enum WeaponPalettes : WEAPONPALETTE_*
+    
                 weaponSprite NONE       ; Leather Glove
                 weaponPalette SHORT_AXE
                     

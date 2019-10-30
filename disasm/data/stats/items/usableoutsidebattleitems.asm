@@ -3,7 +3,7 @@
 ; 0x229E2..0x229EC : Usable outside battle items
 UsableOutsideBattleItems:
                 ; enum Items : ITEM_*
-                    
+    
                 usableOutsideBattleItem ANTIDOTE
                 usableOutsideBattleItem FAIRY_POWDER
                 usableOutsideBattleItem POWER_WATER

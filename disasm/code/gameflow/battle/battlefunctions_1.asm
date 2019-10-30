@@ -2226,7 +2226,7 @@ loc_252A6:
                 move.l  ((SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER_FROM_SRAM-$1000000)).w
                 setFlg  $58             ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 move.w  ((SAVE_SLOT_INDEX-$1000000)).w,d0
-                                enableSram
+                enableSram
                 jsr     (SaveGame).l
                 disableSram
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w

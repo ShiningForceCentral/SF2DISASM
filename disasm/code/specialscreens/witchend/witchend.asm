@@ -1,6 +1,6 @@
 
 ; ASM FILE code\specialscreens\witchend\witchend.asm :
-; 0x279D8..0x27D8C : Witch end functions
+; 0x279D8..0x27D8E : Witch end functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -8,7 +8,7 @@ EndGame:
                 
                 enableSram              
                 bset    #7,(SAVE_FLAGS).l
-                                disableSram
+                disableSram
                 jsr     (DisableDisplayAndVInt).w
                 movea.l (p_WitchEndTiles).l,a0
                 lea     (FF6802_LOADING_SPACE).l,a1
@@ -288,3 +288,7 @@ loc_27D6A:
 loc_27D8A:
                 
                 unlk    a6
+                rts
+
+	; End of function VInt_WitchEndBlink
+

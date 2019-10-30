@@ -3,8 +3,8 @@
 ; 0xACCA..0xACEA : Critical hit settings
 CriticalHitSettings:
                 ; a : Chance to perform critical hit = 1/a
-                ; b : Additional damage = damage/2^b
-                    
+; b : Additional damage = damage/2^b
+    
                 dc.b 32, 1              ; 1/32, 150% damage
                 dc.b 32, 2              ; 1/32, 125% damage
                 dc.b 16, 1              ; 1/16, 150% damage

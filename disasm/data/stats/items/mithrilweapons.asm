@@ -3,9 +3,9 @@
 ; 0x21F92..0x21FD2 : Mithril weapon lists
 MithrilWeaponLists:
                 ; 4 entries per weapon class, 2 bytes each :
-                ;  a : Chance to obtain = 1/a
-                ;  b : enum Items : ITEM_*
-                    
+;  a : Chance to obtain = 1/a
+;  b : enum Items : ITEM_*
+    
                 mithrilWeapons &
                     16, LEVANTER, &
                     8, COUNTER_SWORD, &

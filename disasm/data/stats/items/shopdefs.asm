@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\items\shopdefs.asm :
 ; 0x20878..0x20A02 : Shop definitions
 ShopDefs:       ; enum Items : ITEM_*
-                    
+    
                 shopDef &               ; Weapon shop 1
                     SHORT_SWORD, &
                     SHORT_SPEAR, &

@@ -2,13 +2,13 @@
 ; ASM FILE data\stats\spells\spelldefs.asm :
 ; 0x176A6..0x1796E : Spell definitions
 SpellDefs:      ; index      enum Spells : SPELL_*
-                ; mpCost     (0..255)
-                ; animation  enum SpellAnims : SPELLANIMIDX_*
-                ; properties enum SpellProps : SPELLPROPS_*
-                ; range      Min, Max (0..3)
-                ; radius     (0..2)
-                ; power      (0..255)
-                    
+; mpCost     (0..255)
+; animation  enum SpellAnims : SPELLANIMIDX_*
+; properties enum SpellProps : SPELLPROPS_*
+; range      Min, Max (0..3)
+; radius     (0..2)
+; power      (0..255)
+    
                 index HEAL              ; HEAL 1
                 mpCost 3
                 animation HEALING_FAIRY

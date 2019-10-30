@@ -3,10 +3,10 @@
 ; 0x1EE02C..0x1EE270 : Stat growth curves
 StatGrowthCurves:
                 ; 29 entries per curve (one per level), 2 bytes each :
-                ;  a : Total fraction of growth expected to have been gained by this level = a/256
-                ;  b : Fraction of growth to be gained this level = b/256
-                    
-                ; Linear
+;  a : Total fraction of growth expected to have been gained by this level = a/256
+;  b : Fraction of growth to be gained this level = b/256
+    
+; Linear
                 dc.w 8, 8               ;  level 2
                 dc.w 17, 9              ;  level 3
                 dc.w 26, 9              ;  level 4
