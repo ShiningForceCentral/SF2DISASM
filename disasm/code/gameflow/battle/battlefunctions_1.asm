@@ -933,7 +933,16 @@ loc_2444C:
                 andi.w  #2,d1
                 beq.s   loc_2447C
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
-                moveq   #2,d1
+                
+                if (PERCENT_POISON_DAMAGE>=1)
+                jsr     GetMaxHP
+                mulu.w  #PERCENT_POISON_DAMAGE,d1
+                divu.w  #100,d1
+                andi.l  #$FFFF,d1
+                else
+                moveq   #2,d1           ; constant poison damage
+                endif
+                
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     $133            ; "{CLEAR}{NAME} gets damaged{N}by {#} because of the poison.{D3}"
                 jsr     j_DecreaseCurrentHP
