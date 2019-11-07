@@ -1,14 +1,14 @@
 
 ; ASM FILE code\common\menus\menuengine_3.asm :
-; 0x15772..0x16EA6 : Menu engine
+; 0x15772..0x16A62 : Menu engine
 
 ; =============== S U B R O U T I N E =======================================
 
 CreateLandEffectWindow:
                 
                 movem.l d0-a2,-(sp)
-                move.w  #$805,d0
-                move.w  #$F801,d1
+                move.w  #WINDOW_LANDEFFECT_SIZE,d0
+                move.w  #WINDOW_LANDEFFECT_DEST,d1
                 jsr     (CreateWindow).w
                 addq.w  #1,d0
                 move.w  d0,((LAND_EFFECT_WINDOW_IDX-$1000000)).w
@@ -17,7 +17,7 @@ CreateLandEffectWindow:
                 subq.w  #1,d0
                 move.w  #$201,d1
                 move.w  #4,d2
-                cmpi.w  #$16,((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w
+                cmpi.w  #WINDOW_FIGHTERMINISTATUS_MAX_WIDTH,((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w
                 blt.s   loc_157A6
                 move.w  #$101,d1
 loc_157A6:
@@ -39,7 +39,7 @@ HideLandEffectWindow:
                 movem.l d0-a2,-(sp)
                 move.w  ((LAND_EFFECT_WINDOW_IDX-$1000000)).w,d0
                 subq.w  #1,d0
-                move.w  #$F801,d1
+                move.w  #WINDOW_LANDEFFECT_DEST,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSFX).w
                 jsr     (WaitForWindowMovementEnd).w
@@ -88,7 +88,7 @@ DrawLandEffectWindow:
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.l  a1,d3
-                move.w  #$805,d0
+                move.w  #WINDOW_LANDEFFECT_SIZE,d0
                 bsr.w   CopyWindowTilesToRAM
                 move.w  ((MOVING_BATTLE_ENTITY_IDX-$1000000)).w,d0
                 jsr     j_GetMoveCost
@@ -97,13 +97,13 @@ DrawLandEffectWindow:
                 moveq   #$FFFFFFF0,d1
                 moveq   #2,d7
                 movea.l d3,a1
-                adda.w  #$38,a1 
+                adda.w  #WINDOW_LANDEFFECT_TEXT_VALUE_OFFSET,a1
                 bsr.w   WriteTilesFromNumber
                 move.b  #$25,1(a1) 
                 moveq   #$FFFFFFF0,d1
-                moveq   #$F,d7
+                moveq   #WINDOW_LANDEFFECT_TEXT_HEADER_LENGTH,d7
                 movea.l d3,a1
-                adda.w  #$12,a1
+                adda.w  #WINDOW_LANDEFFECT_TEXT_HEADER_OFFSET,a1
                 lea     aLandEffect(pc), a0
                 nop
                 bsr.w   WriteTilesFromASCII
@@ -111,7 +111,11 @@ DrawLandEffectWindow:
 
 	; End of function DrawLandEffectWindow
 
-aLandEffect:    dc.b 'LAND',$B,'EFFECT',0
+aLandEffect:    if (THREE_DIGITS_STATS=1)
+                dc.b 'LE'
+                else
+                dc.b 'LAND',$B,'EFFECT',0
+                endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -938,7 +942,7 @@ unk_1623A:      dc.b $3D
 NumberPrompt:
                 
                 movem.l d1-a1,-(sp)
-                link    a6,#-WINDOW_NUMPROMPT_STACK_NEGSIZE
+                link    a6,#$FFF0
                 move.w  d0,-WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6)
                 move.w  d1,-WINDOW_NUMPROMPT_STACK_OFFSET_MINNUM(a6)
                 move.w  d2,-WINDOW_NUMPROMPT_STACK_OFFSET_MAXNUM(a6)
@@ -1729,5 +1733,3 @@ loc_16A5C:
 
 	; End of function sub_16A30
 
-MemberStatsWindowLayout:
-                incbin "data/graphics/tech/windowlayouts/memberstatswindowslayout.bin"

@@ -831,7 +831,6 @@
 #split	0x160B5,0x16204,data/graphics/tech/windowlayouts/alphabetwindowlayout.bin
 #split	0x16204,0x1623A,data/graphics/tech/windowlayouts/alphabetendwindowlayout.bin
 #split	0x16618,0x16658,data/graphics/tech/windowlayouts/timerwindowwindowlayout.bin
-#split	0x16A62,0x16EA6,data/graphics/tech/windowlayouts/memberstatswindowslayout.bin
 #split	0x198A8,0x198C8,data/graphics/battles/plt_battlescenebasepalette.bin
 #split	0x19E5E,0x19E6E,data/battles/global/terrainbackgrounds.bin
 #split	0x1FAEA,0x1FDEA,data/graphics/tech/backgroundlayout.bin

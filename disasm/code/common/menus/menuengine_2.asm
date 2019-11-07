@@ -1196,7 +1196,7 @@ sub_134A8:
                 adda.w  #$AE,a1 
                 move.w  #$20A,d7
                 jsr     (CopyBytes).w   
-                lea     unk_13EDE(pc), a0
+                lea     word_13EDE(pc), a0
                 suba.w  #$38,a1 
                 move.w  #$36,d7 
                 jsr     (CopyBytes).w   
@@ -1207,11 +1207,11 @@ loc_134E0:
                 adda.w  #$AE,a1 
                 move.w  #$1D0,d7
                 jsr     (CopyBytes).w   
-                lea     unk_13EDE(pc), a0
+                lea     word_13EDE(pc), a0
                 suba.w  #$38,a1 
                 move.w  #$36,d7 
                 jsr     (CopyBytes).w   
-                lea     unk_13EDE(pc), a0
+                lea     word_13EDE(pc), a0
                 adda.w  #$20A,a1
                 move.w  #$36,d7 
                 jsr     (CopyBytes).w   
@@ -1280,28 +1280,28 @@ WriteMemberListText:
                 move.w  #$FFC6,d1
                 suba.w  d1,a1
                 addq.w  #4,a1
-                moveq   #$1E,d7
+                moveq   #WINDOW_MEMBERLIST_HEADER_LENGTH,d7
                 move.b  ((word_FFB13D-$1000000)).w,d0
-                bne.s   loc_135D4
+                bne.s   @DetermineHeader
                 lea     aNameClassLevExp(pc), a0
-                bra.s   loc_135E4
-loc_135D4:
+                bra.s   @WriteHeader
+@DetermineHeader:
                 
                 cmpi.b  #1,d0
-                bne.s   loc_135E0
+                bne.s   @_
                 lea     aNameHpMpAtDfAgMv(pc), a0
-                bra.s   loc_135E4
-loc_135E0:
+                bra.s   @WriteHeader
+@_:
                 
                 lea     aNameAttackDefense(pc), a0
-loc_135E4:
+@WriteHeader:
                 
                 bsr.w   WriteTilesFromASCII
                 movea.l -6(a6),a1
                 adda.w  #$B2,a1 
                 moveq   #4,d5
                 move.w  ((word_FFB136-$1000000)).w,d4
-loc_135F6:
+@CreateEntry_Loop:
                 
                 lea     ((byte_FFB0AE-$1000000)).w,a0
                 clr.w   d0
@@ -1310,9 +1310,10 @@ loc_135F6:
                 move.l  a1,-(sp)
                 move.w  d0,d1
                 jsr     j_IsInBattleParty
-                beq.s   loc_13616
-                move.w  #$C0B0,-2(a1)
-loc_13616:
+                beq.s   @DetermineNameColor
+                move.w  #VDPTILE_IDX_MEMBERLIST_BATTLEPARTYSWORD,-2(a1) 
+                                                        ; display sword icon to denote battle party members
+@DetermineNameColor:
                 
                 move.l  a1,-(sp)
                 move.w  -$10(a6),d0
@@ -1322,18 +1323,18 @@ loc_13616:
                 moveq   #$FFFFFFC6,d1
                 moveq   #$A,d7
                 tst.w   d2
-                bne.s   loc_13638
+                bne.s   @WriteEntry_Name
                 bsr.w   sub_100C8       
-                bra.s   loc_1363C
-loc_13638:
+                bra.s   @WriteEntry_ClassLevExp
+@WriteEntry_Name:
                 
                 bsr.w   WriteTilesFromASCII
-loc_1363C:
+@WriteEntry_ClassLevExp:
                 
                 movea.l (sp)+,a1
                 lea     $10(a1),a1
                 tst.b   ((word_FFB13D-$1000000)).w
-                bne.s   loc_13690
+                bne.s   @WriteEntry_HpMpAtDfAgMv
                 move.l  a1,-(sp)
                 move.w  -$10(a6),d0
                 jsr     j_GetClass      
@@ -1355,101 +1356,129 @@ loc_1363C:
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-loc_13690:
+@WriteEntry_HpMpAtDfAgMv:
                 
                 cmpi.b  #1,((word_FFB13D-$1000000)).w
-                bne.w   loc_1371E
+                bne.w   @WriteEntry_Unequippable
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentHP
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
+                
+                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
+                endif
+                
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentMP
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
+                
+                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
+                endif
+                
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentATK
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
+                
+                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
+                endif
+                
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentDEF
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
+                
+                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
+                endif
+                
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentAGI
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
+                
+                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
+                endif
+                
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentMOV
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
+                
+                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
-loc_1371E:
+                endif
+                
+@WriteEntry_Unequippable:
                 
                 cmpi.b  #2,((word_FFB13D-$1000000)).w
-                bne.w   loc_13798
+                bne.w   @NextEntry
                 move.w  -$10(a6),d0
                 move.w  ((word_FFB13A-$1000000)).w,d1
                 jsr     j_IsWeaponOrRingEquippable
-                bcs.s   loc_13748
+                bcs.s   @WriteEntry_NewATKandDEF
                 lea     aUnequippable(pc), a0
                 addq.l  #4,a1
                 moveq   #$10,d7
                 moveq   #$FFFFFFC6,d1
                 bsr.w   WriteTilesFromASCII
-                bra.s   loc_13798
-loc_13748:
+                bra.s   @NextEntry
+@WriteEntry_NewATKandDEF:
                 
                 jsr     j_GetWeaponNewATKandDEF
+                
+                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
+                endif
+                
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentATK
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
-                move.w  #$C0A0,(a1)+
+                move.w  #VDPTILE_IDX_MEMBERLIST_ARROWPOINTINGRIGHT,(a1)+
                 move.w  d2,d0
                 ext.l   d0
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
-                addq.l  #8,a1
+                addq.l  #WINDOW_MEMBERLIST_ENTRY_NEW_DEF_OFFSET,a1
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentDEF
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
-                move.w  #$C0A0,(a1)+
+                move.w  #VDPTILE_IDX_MEMBERLIST_ARROWPOINTINGRIGHT,(a1)+
                 move.w  d3,d0
                 ext.l   d0
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 addq.l  #2,a1
-loc_13798:
+@NextEntry:
                 
                 movea.l (sp)+,a1
                 adda.w  #$74,a1 
                 addq.w  #1,d4
                 cmp.w   ((word_FFB12E-$1000000)).w,d4
-                dbeq    d5,loc_135F6
+                dbeq    d5,@CreateEntry_Loop
                 unlk    a6
                 rts
 
@@ -1688,7 +1717,7 @@ loc_139A6:
                 jsr     j_GetCurrentATK
                 move.w  d1,d0
                 ext.l   d0
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 movea.l -6(a6),a1
                 adda.w  #$13E,a1
@@ -1700,7 +1729,7 @@ loc_139A6:
                 jsr     j_GetCurrentDEF
                 move.w  d1,d0
                 ext.l   d0
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 movea.l -6(a6),a1
                 adda.w  #$192,a1
@@ -1712,7 +1741,7 @@ loc_139A6:
                 jsr     j_GetCurrentAGI
                 move.w  d1,d0
                 ext.l   d0
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 movea.l -6(a6),a1
                 adda.w  #$1E6,a1
@@ -1724,7 +1753,7 @@ loc_139A6:
                 jsr     j_GetCurrentMOV
                 move.w  d1,d0
                 ext.l   d0
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 bra.w   loc_13C36
                 rts
@@ -2002,7 +2031,12 @@ loc_13CDE:
 aNameClassLevExp:
                 dc.b 'NAME    CLASS     LEV EXP',0
 aNameHpMpAtDfAgMv:
+                if (THREE_DIGITS_STATS=1)
+                dc.b 'NAME     HP MP AT DF AG MV'
+                else
                 dc.b 'NAME    HP MP AT DF AG MV',0
+                endif
+                
 aNameAttackDefense:
                 dc.b 'NAME    ATTACK   DEFENSE',0
 aMagicItem:     dc.b 'MAGIC     ITEM'
@@ -2018,60 +2052,33 @@ aAgi:           dc.b 'AGI  ',0
 aNothing_2:     dc.b '\Nothing',0
 TextHighlightTiles:
                 incbin "data/graphics/tech/texthighlighttiles.bin"
-unk_13EDE:      dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
+word_13EDE:     dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
 
 ; =============== S U B R O U T I N E =======================================
 

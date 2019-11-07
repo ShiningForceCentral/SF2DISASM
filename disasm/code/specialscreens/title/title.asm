@@ -7,6 +7,8 @@
 TitleScreen:
                 
                 jmp     *+4(pc)
+loc_10000C:
+                
                 jsr     (DisableDisplayAndVInt).w
                 jsr     (ClearVsramAndSprites).w
                 move.w  #$8C00,d0

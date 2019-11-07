@@ -2403,35 +2403,35 @@ DrawBattleEquipWindowStats:
                 
                 link    a6,#-4
                 move.w  ((byte_FFB18E-$1000000)).w,d0
-                move.w  #$701,d1
+                move.w  #WINDOW_BATTLEEQUIP_STATS_TILE_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 move.l  a1,-4(a6)
                 move.w  ((MOVING_BATTLE_ENTITY_IDX-$1000000)).w,d0
                 jsr     j_GetCurrentATK
                 move.w  d1,d0
                 movea.l -4(a6),a1
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 move.w  ((MOVING_BATTLE_ENTITY_IDX-$1000000)).w,d0
                 jsr     j_GetCurrentDEF
                 move.w  d1,d0
                 movea.l -4(a6),a1
                 adda.w  #$28,a1 
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 move.w  ((MOVING_BATTLE_ENTITY_IDX-$1000000)).w,d0
                 jsr     j_GetCurrentAGI
                 move.w  d1,d0
                 movea.l -4(a6),a1
                 adda.w  #$50,a1 
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 move.w  ((MOVING_BATTLE_ENTITY_IDX-$1000000)).w,d0
                 jsr     j_GetCurrentMOV
                 move.w  d1,d0
                 movea.l -4(a6),a1
                 adda.w  #$78,a1 
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 unlk    a6
                 rts
@@ -2448,8 +2448,8 @@ CreateFighterMiniStatusWindow:
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a2,-(sp)
                 move.w  d0,-(sp)
-                move.w  #$1605,d0
-                move.w  #$2001,d1
+                move.w  #WINDOW_FIGHTERMINISTATUS_SIZE,d0
+                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
                 lea     ((FIGHTER_MINISTATUS_WINDOW_IDX-$1000000)).w,a2
                 tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
                 beq.s   loc_11594
@@ -2499,7 +2499,7 @@ HideFighterMiniStatusWindow:
 loc_115F0:
                 
                 move.w  (a2),d0
-                move.w  #$2001,d1
+                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
                 tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
                 beq.s   loc_11600
                 addi.w  #$15,d1
@@ -2522,11 +2522,11 @@ loc_11600:
 sub_1161A:
                 
                 jsr     (InitWindowProperties).w
-                move.w  #$1605,d0
-                move.w  #$2001,d1
+                move.w  #WINDOW_FIGHTERMINISTATUS_SIZE,d0
+                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
                 jsr     (CreateWindow).w
-                move.w  #$1605,d0
-                move.w  #$2001,d1
+                move.w  #WINDOW_FIGHTERMINISTATUS_SIZE,d0
+                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
                 jsr     (CreateWindow).w
                 rts
 
@@ -2857,11 +2857,11 @@ sub_118BE:
                 link    a6,#-8
                 move.l  a1,-8(a6)
                 movem.l d7/a1,-(sp)
-                move.w  #$36,d7 
-loc_118CE:
+                move.w  #WINDOW_FIGHTERMINISTATUS_COUNTER,d7
+@Clear_Loop:
                 
                 clr.l   (a1)+
-                dbf     d7,loc_118CE
+                dbf     d7,@Clear_Loop
                 movem.l (sp)+,d7/a1
                 ext.w   d0
                 move.w  d0,-2(a6)
@@ -2876,22 +2876,22 @@ loc_118CE:
                 move.w  d1,d3
                 movem.w (sp)+,d0-d1
                 move.w  d1,d6
-                cmp.w   d1,d3
-                ble.s   loc_1190E
+                cmp.w   d1,d3           ; keep highest of max HP or MP
+                ble.s   @CapStatBarLength
                 move.w  d3,d6
-loc_1190E:
+@CapStatBarLength:
                 
-                cmpi.w  #$64,d6 
-                ble.s   loc_11916
-                moveq   #$64,d6 
-loc_11916:
+                cmpi.w  #WINDOW_FIGHTERMINISTATUS_MAX_BAR_LENGTH,d6
+                ble.s   @CalculateStatBarWidth
+                moveq   #WINDOW_FIGHTERMINISTATUS_MAX_BAR_LENGTH,d6
+@CalculateStatBarWidth:
                 
                 addq.w  #3,d6
                 lsr.w   #3,d6
-                addi.w  #$A,d6
+                addi.w  #WINDOW_FIGHTERMINISTATUS_MIN_WIDTH,d6
                 movem.w d0-d1/d7,-(sp)
                 move.w  -2(a6),d0
-                blt.s   loc_11958
+                blt.s   @EnemyName
                 jsr     j_GetCharName
                 bsr.w   AdjustStringLengthForSpecialChars
                 move.w  d7,d4
@@ -2902,24 +2902,24 @@ loc_11916:
                 addq.w  #4,d4
                 jsr     j_GetCurrentLevel
                 cmpi.w  #$A,d1
-                blt.s   loc_11956
+                blt.s   @_
                 addq.w  #1,d4
-loc_11956:
+@_:
                 
-                bra.s   loc_11966
-loc_11958:
+                bra.s   @DetermineWidth
+@EnemyName:
                 
                 jsr     j_GetCharName
                 bsr.w   AdjustStringLengthForSpecialChars
                 move.w  d7,d4
                 addq.w  #2,d4
-loc_11966:
+@DetermineWidth:
                 
                 movem.w (sp)+,d0-d1/d7
                 cmp.w   d4,d6
-                bge.s   loc_11970
+                bge.s   @CopyTileColumns
                 move.w  d4,d6
-loc_11970:
+@CopyTileColumns:
                 
                 move.w  d6,((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w
                 lea     wl_FighterMiniStatus(pc), a0
@@ -2928,15 +2928,21 @@ loc_11970:
                 bsr.w   CopyFighterMinistatusWindowTileColumn
                 bsr.w   CopyFighterMinistatusWindowTileColumn
                 move.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,d7
-                subi.w  #9,d7
-loc_11990:
+                subi.w  #WINDOW_FIGHTERMINISTATUS_WIDTH_COUNTER,d7
+@Copy_Loop:
                 
-                lea     unk_11B0A(pc), a0
+                lea     word_11B0A(pc), a0
                 nop
                 bsr.w   CopyFighterMinistatusWindowTileColumn
-                dbf     d7,loc_11990
-                lea     unk_11B14(pc), a0
+                dbf     d7,@Copy_Loop
+                
+                if (THREE_DIGITS_STATS=1)
+                bsr.w   CopyFighterMinistatusWindowTileColumn
+                else
+                lea     word_11B14(pc), a0
                 nop
+                endif
+                
                 bsr.w   CopyFighterMinistatusWindowTileColumn
                 bsr.w   CopyFighterMinistatusWindowTileColumn
                 bsr.w   CopyFighterMinistatusWindowTileColumn
@@ -2946,13 +2952,13 @@ loc_11990:
                 move.w  -2(a6),d0
                 jsr     j_GetCharName
                 movea.l -8(a6),a1
-                adda.w  #$2C,a1 
+                adda.w  #WINDOW_FIGHTERMINISTATUS_NEXT_LINE_OFFSET,a1
                 addq.l  #2,a1
                 moveq   #$FFFFFFD4,d1
                 bsr.w   WriteTilesFromASCII
                 addq.w  #2,a1
                 move.w  -2(a6),d0
-                blt.s   loc_11A0E
+                blt.s   @DrawStatBar
                 jsr     j_GetClass      
                 jsr     j_GetClassName
                 move.w  #$FFD4,d1
@@ -2963,65 +2969,65 @@ loc_11990:
                 ext.l   d0
                 moveq   #2,d7
                 cmpi.w  #$A,d0
-                bge.s   loc_11A0A
+                bge.s   @WriteLevel
                 subq.w  #1,d7
-loc_11A0A:
+@WriteLevel:
                 
                 bsr.w   WriteTilesFromNumber
-loc_11A0E:
+@DrawStatBar:
                 
                 movem.w (sp)+,d0-d3
                 movem.w d0-d3,-(sp)
                 movem.w d2-d3,-(sp)
                 movea.l -8(a6),a1
-                adda.w  #$58,a1 
+                adda.w  #WINDOW_FIGHTERMINISTATUS_TWO_LINES_OFFSET,a1
                 addq.w  #6,a1
                 move.l  a1,-(sp)
                 lea     (FF8804_LOADING_SPACE).l,a0
                 moveq   #1,d2
                 bsr.w   DrawColoredStatBar
                 movea.l (sp)+,a1
-                adda.w  #$2C,a1 
+                adda.w  #WINDOW_FIGHTERMINISTATUS_NEXT_LINE_OFFSET,a1
                 movem.w (sp)+,d0-d1
                 tst.w   d1
-                beq.s   loc_11A4C
+                beq.s   @WriteStats
                 lea     (byte_FF8A04).l,a0
                 moveq   #6,d2
                 bsr.w   DrawColoredStatBar
-loc_11A4C:
+@WriteStats:
                 
                 movem.w (sp)+,d0-d3
                 ext.l   d0
                 movea.l -8(a6),a1
-                adda.w  #$58,a1 
+                adda.w  #WINDOW_FIGHTERMINISTATUS_TWO_LINES_OFFSET,a1
                 move.l  a1,-(sp)
                 adda.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
                 adda.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
-                suba.w  #$C,a1
+                suba.w  #WINDOW_FIGHTERMINISTATUS_STAT_VALUES_OFFSET,a1
                 move.l  a1,-(sp)
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 movea.l (sp)+,a1
-                addq.l  #6,a1
+                addq.l  #WINDOW_FIGHTERMINISTATUS_MAX_HP_OFFSET,a1
                 move.w  d1,d0
                 ext.l   d0
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 movea.l (sp)+,a1
-                adda.w  #$2C,a1 
+                adda.w  #WINDOW_FIGHTERMINISTATUS_NEXT_LINE_OFFSET,a1
                 adda.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
                 adda.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
-                suba.w  #$C,a1
+                suba.w  #WINDOW_FIGHTERMINISTATUS_STAT_VALUES_OFFSET,a1
                 move.l  a1,-(sp)
                 move.w  d2,d0
                 ext.l   d0
                 movea.l (sp)+,a1
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 addq.l  #2,a1
                 move.w  d3,d0
                 ext.l   d0
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 unlk    a6
                 rts
@@ -3035,11 +3041,15 @@ loc_11A4C:
 
 WriteStatValue:
                 
-                cmpi.w  #$64,d0 
+                cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d0
                 bge.s   loc_11ABC
                 ext.l   d0
                 bra.w   WriteTilesFromNumber
-                bra.s   UnknownValue    
+                
+                if (THREE_DIGITS_STATS=0)
+                bra.s   UnknownValue    ; useless instruction
+                endif
+                
 loc_11ABC:
                 
                 lea     UnknownValue(pc), a0
@@ -3047,7 +3057,13 @@ loc_11ABC:
 
 	; End of function WriteStatValue
 
-UnknownValue:   dc.b '??'
+UnknownValue:                   ; display "???" if value is greater than or equal to threshold (default is 400)
+                if (THREE_DIGITS_STATS=1)
+                dc.b '???',0
+                else
+                dc.b '??'
+                endif
+                
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -3057,13 +3073,13 @@ CopyFighterMinistatusWindowTileColumn:
                 
                 movem.l a1,-(sp)
                 move.w  (a0)+,(a1)
-                adda.w  #$2C,a1 
+                adda.w  #WINDOW_FIGHTERMINISTATUS_NEXT_LINE_OFFSET,a1
                 move.w  (a0)+,(a1)
-                adda.w  #$2C,a1 
+                adda.w  #WINDOW_FIGHTERMINISTATUS_NEXT_LINE_OFFSET,a1
                 move.w  (a0)+,(a1)
-                adda.w  #$2C,a1 
+                adda.w  #WINDOW_FIGHTERMINISTATUS_NEXT_LINE_OFFSET,a1
                 move.w  (a0)+,(a1)
-                adda.w  #$2C,a1 
+                adda.w  #WINDOW_FIGHTERMINISTATUS_NEXT_LINE_OFFSET,a1
                 move.w  (a0)+,(a1)
                 movem.l (sp)+,a1
                 addq.w  #2,a1
@@ -3072,96 +3088,60 @@ CopyFighterMinistatusWindowTileColumn:
 	; End of function CopyFighterMinistatusWindowTileColumn
 
 wl_FighterMiniStatus:
-                dc.b $C0 
-                dc.b $60 
-                dc.b $C0 
-                dc.b $70 
-                dc.b $C0 
-                dc.b $70 
-                dc.b $C0 
-                dc.b $70 
-                dc.b $D0 
-                dc.b $60 
-                dc.b $C0 
-                dc.b $61 
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $48 
-                dc.b $C0 
-                dc.b $4D 
-                dc.b $D0 
-                dc.b $61 
-                dc.b $C0 
-                dc.b $61 
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $50 
-                dc.b $C0 
-                dc.b $50 
-                dc.b $D0 
-                dc.b $61 
-unk_11B0A:      dc.b $C0 
-                dc.b $61 
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $D0 
-                dc.b $61 
-unk_11B14:      dc.b $C0 
-                dc.b $61 
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $30 
-                dc.b $C0 
-                dc.b $30 
-                dc.b $D0 
-                dc.b $61 
-                dc.b $C0 
-                dc.b $61 
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $2F 
-                dc.b $C0 
-                dc.b $2F 
-                dc.b $D0 
-                dc.b $61 
-                dc.b $C0 
-                dc.b $61 
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $20
-                dc.b $D0 
-                dc.b $61 
-                dc.b $C0 
-                dc.b $61 
-                dc.b $C0 
-                dc.b $20
-                dc.b $C0 
-                dc.b $30 
-                dc.b $C0 
-                dc.b $30 
-                dc.b $D0 
-                dc.b $61 
-                dc.b $C8 
-                dc.b $60 
-                dc.b $C8 
-                dc.b $70 
-                dc.b $C8 
-                dc.b $70 
-                dc.b $C8 
-                dc.b $70 
-                dc.b $D8 
-                dc.b $60 
+                dc.w $C060
+                dc.w $C070
+                dc.w $C070
+                dc.w $C070
+                dc.w $D060
+                dc.w $C061
+                dc.w $C020
+                dc.w $C048
+                dc.w $C04D
+                dc.w $D061
+                dc.w $C061
+                dc.w $C020
+                dc.w $C050
+                dc.w $C050
+                dc.w $D061
+word_11B0A:     dc.w $C061
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $D061
+word_11B14:     dc.w $C061
+                dc.w $C020
+                dc.w $C030
+                dc.w $C030
+                dc.w $D061
+                dc.w $C061
+                dc.w $C020
+                dc.w $C02F
+                dc.w $C02F
+                dc.w $D061
+                dc.w $C061
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $D061
+                
+                if (THREE_DIGITS_STATS=1)
+                dc.w $C061
+                dc.w $C020
+                dc.w $C020
+                dc.w $C020
+                dc.w $D061
+                endif
+                
+                dc.w $C061
+                dc.w $C020
+                dc.w $C030
+                dc.w $C030
+                dc.w $D061
+                dc.w $C860
+                dc.w $C870
+                dc.w $C870
+                dc.w $C870
+                dc.w $D860
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -3616,14 +3596,13 @@ return_11FEA:
 
 	; End of function LoadTileDataForMemberScreen
 
-byte_11FEC:     dc.b $4E
-                dc.b $2F
-                dc.b $41
-                dc.b 0
+aNA:            dc.b 'N/A',0
 
 ; =============== S U B R O U T I N E =======================================
 
 BuildMemberStatsWindow:
+                
+                module
                 
                 link    a6,#-6
                 move.w  d0,-2(a6)
@@ -3635,13 +3614,13 @@ BuildMemberStatsWindow:
                 movea.l -6(a6),a1
                 adda.w  #WINDOW_MEMBER_STATS_TEXT_CLASS_OFFSET,a1
                 tst.b   d0
-                blt.s   loc_1202E
+                blt.s   @WriteEnemyName
                 jsr     j_GetClass      
                 jsr     j_GetClassName
                 moveq   #$FFFFFFD6,d1
                 bsr.w   WriteTilesFromASCII
                 addq.w  #2,a1
-loc_1202E:
+@WriteEnemyName:
                 
                 move.w  -2(a6),d0
                 jsr     j_GetCharName
@@ -3653,122 +3632,122 @@ loc_1202E:
                 move.w  -2(a6),d0
                 jsr     j_GetStatus
                 move.w  d1,d2
-                andi.w  #4,d2
-                beq.s   loc_12066
+                andi.w  #COM_STATUS_MASK_CURSE,d2
+                beq.s   @AddTiles_Poison
                 move.l  #VDPTILE_STATUSEFFECT_CURSE,d0
                 bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
-loc_12066:
+@AddTiles_Poison:
                 
                 move.w  d1,d2
-                andi.w  #2,d2
-                beq.s   loc_12078
-                move.l  #$C0E8C0E9,d0
+                andi.w  #COM_STATUS_MASK_POISON,d2
+                beq.s   @AddTiles_Muddle
+                move.l  #VDPTILE_STATUSEFFECT_POISON,d0
                 bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
-loc_12078:
+@AddTiles_Muddle:
                 
                 move.w  d1,d2
-                andi.w  #$30,d2 
-                beq.s   loc_1208A
-                move.l  #$C0E2C0E3,d0
+                andi.w  #COM_STATUS_MASK_MUDDLE,d2
+                beq.s   @AddTiles_Silence
+                move.l  #VDPTILE_STATUSEFFECT_MUDDLE,d0
                 bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
-loc_1208A:
+@AddTiles_Silence:
                 
                 move.w  d1,d2
-                andi.w  #$300,d2
-                beq.s   loc_1209C
-                move.l  #$C0E4C0E5,d0
+                andi.w  #COM_STATUS_MASK_SILENCE,d2
+                beq.s   @AddTiles_Stun
+                move.l  #VDPTILE_STATUSEFFECT_SILENCE,d0
                 bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
-loc_1209C:
+@AddTiles_Stun:
                 
                 move.w  d1,d2
-                andi.w  #1,d2
-                beq.s   loc_120AE
-                move.l  #$C0EAC0EB,d0
+                andi.w  #COM_STATUS_MASK_STUN,d2
+                beq.s   @AddTiles_Sleep
+                move.l  #VDPTILE_STATUSEFFECT_STUN,d0
                 bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
-loc_120AE:
+@AddTiles_Sleep:
                 
                 move.w  d1,d2
-                andi.w  #$C0,d2 
-                beq.s   loc_120C0
-                move.l  #$C0E6C0E7,d0
+                andi.w  #COM_STATUS_MASK_SLEEP,d2
+                beq.s   @AddTiles_Attack
+                move.l  #VDPTILE_STATUSEFFECT_SLEEP,d0
                 bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
-loc_120C0:
+@AddTiles_Attack:
                 
                 move.w  d1,d2
-                andi.w  #$C000,d2
-                beq.s   loc_120D2
-                move.l  #$C0A1C0A2,d0
+                andi.w  #COM_STATUS_MASK_ATTACK,d2
+                beq.s   @AddTiles_Boost
+                move.l  #VDPTILE_STATUSEFFECT_ATTACK,d0
                 bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
-loc_120D2:
+@AddTiles_Boost:
                 
                 move.w  d1,d2
-                andi.w  #$3000,d2
-                beq.s   loc_120E4
-                move.l  #$C0A3C0A4,d0
+                andi.w  #COM_STATUS_MASK_BOOST,d2
+                beq.s   @AddTiles_Slow
+                move.l  #VDPTILE_STATUSEFFECT_BOOST,d0
                 bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
-loc_120E4:
+@AddTiles_Slow:
                 
                 move.w  d1,d2
-                andi.w  #$C00,d2
-                beq.s   loc_120F6
-                move.l  #$C0DDC0DF,d0
+                andi.w  #COM_STATUS_MASK_SLOW,d2
+                beq.s   @WriteCurrentHP
+                move.l  #VDPTILE_STATUSEFFECT_SLOW,d0
                 bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
-loc_120F6:
+@WriteCurrentHP:
                 
                 move.w  -2(a6),d0
                 jsr     j_GetCurrentHP
-                cmpi.w  #$64,d1 
-                bge.s   loc_12118
+                cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
+                bge.s   @WriteMaxHP
                 movea.l -6(a6),a1
-                adda.w  #$DC,a1 
-                moveq   #2,d7
+                adda.w  #WINDOW_MEMBER_STATS_CURRENT_HP_OFFSET,a1
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-loc_12118:
+@WriteMaxHP:
                 
                 move.w  -2(a6),d0
                 jsr     j_GetMaxHP
-                cmpi.w  #$64,d1 
-                bge.s   loc_1213A
+                cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
+                bge.s   @WriteCurrentMP
                 movea.l -6(a6),a1
-                adda.w  #$E2,a1 
-                moveq   #2,d7
+                adda.w  #WINDOW_MEMBER_STATS_MAX_HP_OFFSET,a1
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-loc_1213A:
+@WriteCurrentMP:
                 
                 move.w  -2(a6),d0
                 jsr     j_GetCurrentMP
-                cmpi.w  #$64,d1 
-                bge.s   loc_1215C
+                cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
+                bge.s   @WriteMaxMP
                 movea.l -6(a6),a1
-                adda.w  #$130,a1
-                moveq   #2,d7
+                adda.w  #WINDOW_MEMBER_STATS_CURRENT_MP_OFFSET,a1
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-loc_1215C:
+@WriteMaxMP:
                 
                 move.w  -2(a6),d0
                 jsr     j_GetMaxMP
-                cmpi.w  #$64,d1 
-                bge.s   loc_1217E
+                cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
+                bge.s   @WriteLevelAndEXP
                 movea.l -6(a6),a1
-                adda.w  #$136,a1
-                moveq   #2,d7
+                adda.w  #WINDOW_MEMBER_STATS_MAX_MP_OFFSET,a1
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-loc_1217E:
+@WriteLevelAndEXP:
                 
                 move.w  -2(a6),d0
                 tst.b   d0
-                blt.s   loc_121BC
+                blt.s   @NotAvailable
                 jsr     j_GetCurrentLevel
                 movea.l -6(a6),a1
-                adda.w  #$8E,a1 
+                adda.w  #WINDOW_MEMBER_STATS_LEVEL_OFFSET,a1
                 moveq   #2,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -3776,74 +3755,74 @@ loc_1217E:
                 move.w  -2(a6),d0
                 jsr     j_GetCurrentEXP
                 movea.l -6(a6),a1
-                adda.w  #$18A,a1
+                adda.w  #WINDOW_MEMBER_STATS_EXP_OFFSET,a1
                 moveq   #2,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-                bra.s   loc_121E0
-loc_121BC:
+                bra.s   @WriteCurrentATK
+@NotAvailable:
                 
-                lea     byte_11FEC(pc), a0
+                lea     aNA(pc), a0     
                 movea.l -6(a6),a1
-                adda.w  #$8C,a1 
+                adda.w  #WINDOW_MEMBER_STATS_ENEMY_LEVEL_OFFSET,a1
                 moveq   #3,d7
                 bsr.w   WriteTilesFromASCII
-                lea     byte_11FEC(pc), a0
+                lea     aNA(pc), a0     
                 movea.l -6(a6),a1
-                adda.w  #$188,a1
+                adda.w  #WINDOW_MEMBER_STATS_ENEMY_EXP_OFFSET,a1
                 moveq   #3,d7
                 bsr.w   WriteTilesFromASCII
-loc_121E0:
+@WriteCurrentATK:
                 
                 move.w  -2(a6),d0
                 jsr     j_GetCurrentATK
-                cmpi.w  #$64,d1 
-                bge.s   loc_12202
+                cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
+                bge.s   @WriteCurrentDEF
                 movea.l -6(a6),a1
-                adda.w  #$A0,a1 
-                moveq   #2,d7
+                adda.w  #WINDOW_MEMBER_STATS_ATK_OFFSET,a1
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-loc_12202:
+@WriteCurrentDEF:
                 
                 move.w  -2(a6),d0
                 jsr     j_GetCurrentDEF
-                cmpi.w  #$64,d1 
-                bge.s   loc_12224
+                cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
+                bge.s   @WriteCurrentAGI
                 movea.l -6(a6),a1
-                adda.w  #$F4,a1 
-                moveq   #2,d7
+                adda.w  #WINDOW_MEMBER_STATS_DEF_OFFSET,a1
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-loc_12224:
+@WriteCurrentAGI:
                 
                 move.w  -2(a6),d0
                 jsr     j_GetCurrentAGI
                 andi.w  #$7F,d1 
-                cmpi.w  #$64,d1 
-                bge.s   loc_1224A
+                cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
+                bge.s   @WriteCurrentMOV
                 movea.l -6(a6),a1
-                adda.w  #$148,a1
-                moveq   #2,d7
+                adda.w  #WINDOW_MEMBER_STATS_AGI_OFFSET,a1
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-loc_1224A:
+@WriteCurrentMOV:
                 
                 move.w  -2(a6),d0
                 jsr     j_GetCurrentMOV
-                cmpi.w  #$64,d1 
-                bge.s   loc_1226C
+                cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
+                bge.s   @WriteSpellNames
                 movea.l -6(a6),a1
-                adda.w  #$19C,a1
-                moveq   #2,d7
+                adda.w  #WINDOW_MEMBER_STATS_MOV_OFFSET,a1
+                moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-loc_1226C:
+@WriteSpellNames:
                 
                 move.w  #$C6D0,d7
                 move.w  -2(a6),d0
@@ -3853,19 +3832,19 @@ loc_1226C:
                 adda.w  #$224,a1
                 move.l  a1,-(sp)
                 moveq   #3,d6
-loc_12288:
+@SpellNames_Loop:
                 
                 move.w  -2(a6),d0
                 move.w  #3,d1
                 sub.w   d6,d1
                 jsr     j_GetSpellAndNumberOfSpells
                 cmpi.b  #$3F,d1 
-                beq.w   loc_1230E
+                beq.w   @Loop_Done
                 movem.l d1/a0,-(sp)
                 jsr     j_GetSpellDefAddress
                 btst    #7,3(a0)
                 movem.l (sp)+,d1/a0
-                beq.w   loc_1230A
+                beq.w   @SpellNames_Skip
                 bsr.w   CopyMemberScreenIconsToVDPTileOrder
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
@@ -3890,14 +3869,14 @@ loc_12288:
                 movem.l (sp)+,a0-a1
                 movem.w (sp)+,d6-d7
                 adda.w  #$7E,a1 
-loc_1230A:
+@SpellNames_Skip:
                 
-                dbf     d6,loc_12288
-loc_1230E:
+                dbf     d6,@SpellNames_Loop
+@Loop_Done:
                 
                 movea.l (sp)+,a0
                 cmpa.l  a0,a1
-                bne.w   loc_1232E
+                bne.w   @WriteItemNames
                 move.w  d7,-(sp)
                 lea     aNothing_0(pc), a0
                 movea.l -6(a6),a1
@@ -3906,24 +3885,24 @@ loc_1230E:
                 moveq   #$A,d7
                 bsr.w   WriteTilesFromASCII
                 move.w  (sp)+,d7
-loc_1232E:
+@WriteItemNames:
                 
                 move.w  -2(a6),d0
                 clr.w   d1
                 jsr     j_GetItemAndNumberOfItems
                 tst.w   d2
-                beq.w   loc_123DA
+                beq.w   @Write_Nothing
                 movea.l -6(a6),a1
                 adda.w  #$236,a1
                 moveq   #3,d6
-loc_1234A:
+@ItemNames_Loop:
                 
                 move.w  -2(a6),d0
                 move.w  #3,d1
                 sub.w   d6,d1
                 jsr     j_GetItemAndNumberOfItems
                 cmpi.b  #ITEM_NOTHING,d1
-                beq.w   loc_123F2
+                beq.w   @CopyJewelIcons
                 bsr.w   CopyMemberScreenIconsToVDPTileOrder
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
@@ -3934,7 +3913,7 @@ loc_1234A:
                 movem.l (sp)+,a0-a1
                 movem.w (sp)+,d0-d1/d6-d7
                 btst    #ITEM_BIT_EQUIPPED,d1
-                beq.w   loc_123AC
+                beq.w   @Next
                 movem.w d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
                 lea     aEquipped_0(pc), a0
@@ -3944,11 +3923,11 @@ loc_1234A:
                 bsr.w   WriteTilesFromASCII
                 movem.l (sp)+,a0-a1
                 movem.w (sp)+,d6-d7
-loc_123AC:
+@Next:
                 
                 adda.w  #$7E,a1 
-                dbf     d6,loc_1234A
-                bra.w   loc_123F2
+                dbf     d6,@ItemNames_Loop
+                bra.w   @CopyJewelIcons
 aNothing_0:
                 
                 dc.b '\Nothing',0
@@ -3961,7 +3940,7 @@ aNothing_1:
 aJewel:
                 
                 dc.b 'JEWEL',0
-loc_123DA:
+@Write_Nothing:
                 
                 move.w  d7,-(sp)
                 lea     aNothing_1(pc), a0
@@ -3971,12 +3950,12 @@ loc_123DA:
                 moveq   #$A,d7
                 bsr.w   WriteTilesFromASCII
                 move.w  (sp)+,d7
-loc_123F2:
+@CopyJewelIcons:
                 
                 move.w  -2(a6),d0
-                bne.s   loc_12446
+                bne.s   @DrawSpellIcons
                 chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
-                beq.s   loc_12446
+                beq.s   @DrawSpellIcons
                 move.w  d7,-(sp)
                 lea     aJewel(pc), a0  
                 movea.l -6(a6),a1
@@ -3990,30 +3969,30 @@ loc_123F2:
                 move.w  #$92,d1 
                 bsr.w   CopyMemberScreenIconsToVDPTileOrder
                 chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
-                beq.s   loc_12446
+                beq.s   @DrawSpellIcons
                 movea.l -6(a6),a1
                 adda.w  #$3A2,a1
                 move.w  #$92,d1 
                 bsr.w   CopyMemberScreenIconsToVDPTileOrder
                 movea.l -6(a6),a1
                 move.w  #$C053,$37E(a1)
-loc_12446:
+@DrawSpellIcons:
                 
                 lea     (byte_FF9004).l,a1
                 moveq   #3,d6
-loc_1244E:
+@SpellIcons_Loop:
                 
                 moveq   #3,d1
                 sub.w   d6,d1
                 move.w  -2(a6),d0
                 jsr     j_GetSpellAndNumberOfSpells
                 cmpi.b  #SPELL_NOTHING,d1
-                beq.w   loc_124BC
+                beq.w   @DrawItemIcons
                 movem.l d1/a0,-(sp)
                 jsr     j_GetSpellDefAddress
                 btst    #7,3(a0)
                 movem.l (sp)+,d1/a0
-                beq.s   loc_124B8
+                beq.s   @SpellIcons_Skip
                 move.l  a0,-(sp)
                 andi.w  #SPELL_MASK_IDX,d1
                 addi.w  #ICONIDX_HEAL,d1
@@ -4031,20 +4010,20 @@ loc_1244E:
                 ori.b   #$F,$BF(a1)
                 movea.l (sp)+,a0
                 adda.w  #$C0,a1 
-loc_124B8:
+@SpellIcons_Skip:
                 
-                dbf     d6,loc_1244E
-loc_124BC:
+                dbf     d6,@SpellIcons_Loop
+@DrawItemIcons:
                 
                 moveq   #3,d6
-loc_124BE:
+@ItemIcons_Loop:
                 
                 moveq   #3,d1
                 sub.w   d6,d1
                 move.w  -2(a6),d0
                 jsr     j_GetItemAndNumberOfItems
                 cmpi.b  #ITEM_NOTHING,d1
-                beq.w   loc_12556
+                beq.w   @DrawJewelIcons
                 move.l  a0,-(sp)
                 move.w  d1,-(sp)
                 andi.w  #ITEM_MASK_IDX,d1
@@ -4055,15 +4034,15 @@ loc_124BE:
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
                 btst    #ITEM_BIT_BROKEN,d1
-                beq.s   loc_12536
+                beq.s   @CleanIconCorners
                 movem.l d2-d3/a0-a1,-(sp)
                 movea.l (p_Icons).l,a0
                 lea     ICON_OFFSET_CRACKS(a0),a0
                 move.w  #$BF,d2 
-loc_1250A:
+@DrawCracks_Loop:
                 
                 move.b  (a0)+,d3
-                beq.s   loc_1252C
+                beq.s   @DrawCracks_Skip
                 andi.w  #$F0,d3 
                 beq.s   loc_12518
                 andi.b  #$F,(a1)
@@ -4077,12 +4056,12 @@ loc_12526:
                 
                 move.b  -1(a0),d3
                 or.b    d3,(a1)
-loc_1252C:
+@DrawCracks_Skip:
                 
                 addq.l  #1,a1
-                dbf     d2,loc_1250A
+                dbf     d2,@DrawCracks_Loop
                 movem.l (sp)+,d2-d3/a0-a1
-loc_12536:
+@CleanIconCorners:
                 
                 ori.b   #$F0,(a1)
                 ori.b   #$F,$23(a1)
@@ -4090,8 +4069,8 @@ loc_12536:
                 ori.b   #$F,$BF(a1)
                 movea.l (sp)+,a0
                 adda.w  #$C0,a1 
-                dbf     d6,loc_124BE
-loc_12556:
+                dbf     d6,@ItemIcons_Loop
+@DrawJewelIcons:
                 
                 move.w  #ICONIDX_JEWEL_OF_LIGHT,d1
                 movea.l (p_Icons).l,a0
@@ -4129,6 +4108,8 @@ loc_12556:
                 jsr     (WaitForDMAQueueProcessing).w
                 unlk    a6
                 rts
+                
+                modend
 
 	; End of function BuildMemberStatsWindow
 
