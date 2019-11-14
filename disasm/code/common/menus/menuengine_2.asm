@@ -672,11 +672,11 @@ loc_12FCA:
 sub_12FE6:
                 
                 clr.b   ((byte_FFB13C-$1000000)).w
-                move.w  #$7F,((word_FFB13A-$1000000)).w 
+                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
                 clr.b   ((word_FFAF8C-$1000000)).w
-                cmpi.b  #2,((word_FFB13D-$1000000)).w
+                cmpi.b  #2,((MEMBERLIST_PAGE-$1000000)).w
                 bne.s   loc_13000
-                clr.b   ((word_FFB13D-$1000000)).w
+                clr.b   ((MEMBERLIST_PAGE-$1000000)).w
 loc_13000:
                 
                 bra.w   loc_1304C
@@ -687,13 +687,13 @@ loc_13004:
                 jsr     j_GetItemType
                 tst.w   d2
                 beq.s   loc_13020
-                move.b  #2,((word_FFB13D-$1000000)).w
+                move.b  #2,((MEMBERLIST_PAGE-$1000000)).w
                 bra.s   loc_1302C
 loc_13020:
                 
-                cmpi.b  #2,((word_FFB13D-$1000000)).w
+                cmpi.b  #2,((MEMBERLIST_PAGE-$1000000)).w
                 bne.s   loc_1302C
-                clr.b   ((word_FFB13D-$1000000)).w
+                clr.b   ((MEMBERLIST_PAGE-$1000000)).w
 loc_1302C:
                 
                 bra.w   loc_1304C
@@ -702,9 +702,9 @@ loc_13030:
                 clr.b   ((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
                 move.b  #2,((word_FFAF8C-$1000000)).w
-                cmpi.b  #2,((word_FFB13D-$1000000)).w
+                cmpi.b  #2,((MEMBERLIST_PAGE-$1000000)).w
                 bne.s   loc_1304C
-                clr.b   ((word_FFB13D-$1000000)).w
+                clr.b   ((MEMBERLIST_PAGE-$1000000)).w
 loc_1304C:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
@@ -769,7 +769,7 @@ loc_13116:
                 move.w  (sp)+,d1
                 btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13138
-                move.b  ((word_FFB13D-$1000000)).w,d0
+                move.b  ((MEMBERLIST_PAGE-$1000000)).w,d0
                 addq.b  #1,d0
                 sndCom  SFX_MENU_SELECTION
                 cmp.b   d2,d0
@@ -777,20 +777,20 @@ loc_13116:
                 clr.b   d0
 loc_13130:
                 
-                move.b  d0,((word_FFB13D-$1000000)).w
+                move.b  d0,((MEMBERLIST_PAGE-$1000000)).w
                 bsr.w   sub_13478
 loc_13138:
                 
                 btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13156
-                move.b  ((word_FFB13D-$1000000)).w,d0
+                move.b  ((MEMBERLIST_PAGE-$1000000)).w,d0
                 subq.b  #1,d0
                 sndCom  SFX_MENU_SELECTION
                 bge.s   loc_1314E
                 move.b  d2,d0
 loc_1314E:
                 
-                move.b  d0,((word_FFB13D-$1000000)).w
+                move.b  d0,((MEMBERLIST_PAGE-$1000000)).w
                 bsr.w   sub_13478
 loc_13156:
                 
@@ -1056,7 +1056,7 @@ loc_133A8:
                 
                 move.w  d0,-(sp)
                 lea     (SPRITE_08).l,a0
-                lea     unk_13452(pc), a1
+                lea     tbl_SpriteDefs_TextHighlight_MemberList(pc), a1
                 cmpi.w  #7,d1
                 bge.s   loc_133C0
                 move.w  #$100,d0
@@ -1069,7 +1069,7 @@ loc_133C2:
                 move.w  ((word_FFB138-$1000000)).w,d2
                 lsl.w   #4,d2
                 add.w   d2,d0
-                moveq   #1,d7
+                moveq   #WINDOW_MEMBERLIST_HIGHLIGHT_SPRITES_COUNTER,d7
 loc_133CC:
                 
                 move.w  (a1)+,(a0)
@@ -1090,7 +1090,7 @@ loc_133CC:
                 move.w  #$104,(a0)
 loc_13404:
                 
-                move.w  #$B,2(a0)
+                move.w  #SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_3_LINK,2(a0)
                 move.w  #$D064,4(a0)
                 addq.l  #8,a0
                 move.w  #1,(a0)
@@ -1118,22 +1118,26 @@ loc_1344A:
 
 	; End of function sub_133A0
 
-unk_13452:      dc.b   1
-                dc.b   4
-                dc.b  $D
-                dc.b   9
-                dc.b $C5 
-                dc.b $C0 
-                dc.b   0
-                dc.b $9C 
-                dc.b   1
-                dc.b   4
-                dc.b  $D
-                dc.b  $A
-                dc.b $CD 
-                dc.b $C0 
-                dc.b   0
-                dc.b $BC 
+tbl_SpriteDefs_TextHighlight_MemberList:
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_INIT_Y
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_SIZE
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_LINK
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_PROPS
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_INIT_X
+                
+                if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                dc.w $104
+                dc.b 1
+                dc.b $A
+                dc.w $C5C2
+                dc.w $BC
+                endif
+                
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_INIT_Y
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_SIZE
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_LINK
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_PROPS
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_INIT_X
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1274,14 +1278,14 @@ WriteMemberListText:
                 link    a6,#-$10
                 move.w  d0,-2(a6)
                 move.l  a1,-6(a6)
-                move.w  #$1D0D,d0
+                move.w  #WINDOW_MEMBERLIST_SIZE,d0
                 bsr.w   CopyWindowTilesToRAM
                 movea.l -6(a6),a1
                 move.w  #$FFC6,d1
                 suba.w  d1,a1
                 addq.w  #4,a1
                 moveq   #WINDOW_MEMBERLIST_HEADER_LENGTH,d7
-                move.b  ((word_FFB13D-$1000000)).w,d0
+                move.b  ((MEMBERLIST_PAGE-$1000000)).w,d0
                 bne.s   @DetermineHeader
                 lea     aNameClassLevExp(pc), a0
                 bra.s   @WriteHeader
@@ -1299,7 +1303,7 @@ WriteMemberListText:
                 bsr.w   WriteTilesFromASCII
                 movea.l -6(a6),a1
                 adda.w  #$B2,a1 
-                moveq   #4,d5
+                moveq   #WINDOW_MEMBERLIST_ENTRIES_COUNTER,d5
                 move.w  ((word_FFB136-$1000000)).w,d4
 @CreateEntry_Loop:
                 
@@ -1321,7 +1325,7 @@ WriteMemberListText:
                 move.w  d1,d2
                 jsr     j_GetCharName
                 moveq   #$FFFFFFC6,d1
-                moveq   #$A,d7
+                moveq   #MEMBER_NAME_SAVED_CHARS_NUM,d7
                 tst.w   d2
                 bne.s   @WriteEntry_Name
                 bsr.w   sub_100C8       
@@ -1332,8 +1336,8 @@ WriteMemberListText:
 @WriteEntry_ClassLevExp:
                 
                 movea.l (sp)+,a1
-                lea     $10(a1),a1
-                tst.b   ((word_FFB13D-$1000000)).w
+                lea     WINDOW_MEMBERLIST_ENTRY_FIRST_OFFSET(a1),a1
+                tst.b   ((MEMBERLIST_PAGE-$1000000)).w
                 bne.s   @WriteEntry_HpMpAtDfAgMv
                 move.l  a1,-(sp)
                 move.w  -$10(a6),d0
@@ -1358,7 +1362,7 @@ WriteMemberListText:
                 bsr.w   WriteTilesFromNumber
 @WriteEntry_HpMpAtDfAgMv:
                 
-                cmpi.b  #1,((word_FFB13D-$1000000)).w
+                cmpi.b  #1,((MEMBERLIST_PAGE-$1000000)).w
                 bne.w   @WriteEntry_Unequippable
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentHP
@@ -1428,7 +1432,7 @@ WriteMemberListText:
                 
 @WriteEntry_Unequippable:
                 
-                cmpi.b  #2,((word_FFB13D-$1000000)).w
+                cmpi.b  #2,((MEMBERLIST_PAGE-$1000000)).w
                 bne.w   @NextEntry
                 move.w  -$10(a6),d0
                 move.w  ((word_FFB13A-$1000000)).w,d1
@@ -1459,7 +1463,7 @@ WriteMemberListText:
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
-                addq.l  #WINDOW_MEMBERLIST_ENTRY_NEW_DEF_OFFSET,a1
+                addq.l  #WINDOW_MEMBERLIST_ENTRY_NEW_DEFENSE_OFFSET,a1
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentDEF
                 moveq   #STATS_DIGITS_NUM,d7
@@ -2029,16 +2033,28 @@ loc_13CDE:
 	; End of function CopyWindowTilesToRAM
 
 aNameClassLevExp:
+                if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                dc.b 'NAME     CLASS     LEV EXP',0
+                else
                 dc.b 'NAME    CLASS     LEV EXP',0
+                endif
+                
 aNameHpMpAtDfAgMv:
-                if (THREE_DIGITS_STATS=1)
-                dc.b 'NAME     HP MP AT DF AG MV'
+                if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                dc.b 'NAME     HP MP AT DF AG MV',0
+                elseif (THREE_DIGITS_STATS=1)
+                dc.b 'NAME     HP MP AT DF AG MV',0
                 else
                 dc.b 'NAME    HP MP AT DF AG MV',0
                 endif
                 
 aNameAttackDefense:
+                if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                dc.b 'NAME     ATTACK   DEFENSE',0
+                else
                 dc.b 'NAME    ATTACK   DEFENSE',0
+                endif
+                
 aMagicItem:     dc.b 'MAGIC     ITEM'
 aItem_3:        dc.b '- ITEM -',0
 aMagic_2:       dc.b '- MAGIC -',0
@@ -2050,6 +2066,9 @@ aDef:           dc.b 'DEF  ',0
 aMov:           dc.b 'MOV  ',0
 aAgi:           dc.b 'AGI  ',0
 aNothing_2:     dc.b '\Nothing',0
+                
+                wordAlign               ; make sure tiles data is word aligned in case patches are applied
+                
 TextHighlightTiles:
                 incbin "data/graphics/tech/texthighlighttiles.bin"
 word_13EDE:     dc.w $C020
@@ -2886,7 +2905,7 @@ sub_146AE:
                 
                 movem.w d0/d2,-(sp)
                 lea     (SPRITE_08).l,a0
-                lea     unk_14724(pc), a1
+                lea     tbl_SpriteDefs_TextHighlight_ItemList(pc), a1
                 move.w  ((word_FFB138-$1000000)).w,d0
                 lsl.w   #4,d0
                 tst.b   ((HIDE_WINDOWS-$1000000)).w
@@ -2895,7 +2914,7 @@ sub_146AE:
                 move.w  #$100,d0
 loc_146CE:
                 
-                moveq   #1,d7
+                moveq   #WINDOW_MEMBERLIST_HIGHLIGHT_SPRITES_COUNTER,d7
 loc_146D0:
                 
                 move.w  (a1)+,(a0)
@@ -2936,46 +2955,41 @@ loc_14702:
 
 	; End of function sub_146AE
 
-unk_14724:      dc.b   1
-                dc.b   4
-                dc.b  $D
-                dc.b   9
-                dc.b $C5 
-                dc.b $C0 
-                dc.b   0
-                dc.b $9C 
-                dc.b   1
-                dc.b   4
-                dc.b  $D
-                dc.b  $A
-                dc.b $CD 
-                dc.b $C0 
-                dc.b   0
-                dc.b $BC 
-                dc.b   0
-                dc.b $A8 
-                dc.b  $D
-                dc.b  $B
-                dc.b $C5 
-                dc.b $C0 
-                dc.b   1
-                dc.b $2C 
-                dc.b   0
-                dc.b $A8 
-                dc.b   5
-                dc.b  $C
-                dc.b $C5 
-                dc.b $C2 
-                dc.b   1
-                dc.b $4C 
-                dc.b   0
-                dc.b $A8 
-                dc.b  $D
-                dc.b $10
-                dc.b $CD 
-                dc.b $C0 
-                dc.b   1
-                dc.b $54 
+tbl_SpriteDefs_TextHighlight_ItemList:
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_INIT_Y
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_SIZE
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_LINK
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_PROPS
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_INIT_X
+                
+                if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                dc.w $104
+                dc.b 1
+                dc.b $A
+                dc.w $C5C2
+                dc.w $BC
+                endif
+                
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_INIT_Y
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_SIZE
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_LINK
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_PROPS
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_INIT_X
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_1_INIT_Y
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_1_SIZE
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_1_LINK
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_1_PROPS
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_1_INIT_X
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_2_INIT_Y
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_2_SIZE
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_2_LINK
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_2_PROPS
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_2_INIT_X
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_3_INIT_Y
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_3_SIZE
+                dc.b SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_3_LINK
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_3_PROPS
+                dc.w SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_3_INIT_X
 
 ; =============== S U B R O U T I N E =======================================
 

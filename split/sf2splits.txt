@@ -827,9 +827,9 @@
 #split	0x1284E,0x1288E,data/graphics/tech/windowlayouts/characterstatsdefeatwindowlayout.bin
 #split	0x13D9E,0x13EDE,data/graphics/tech/texthighlighttiles.bin
 #split	0x15A5A,0x15BB0,data/graphics/tech/windowlayouts/battleconfigwindowlayout.bin
-#split	0x1607C,0x160B5,data/graphics/tech/windowlayouts/nameentrywindowlayout.bin
-#split	0x160B5,0x16204,data/graphics/tech/windowlayouts/alphabetwindowlayout.bin
-#split	0x16204,0x1623A,data/graphics/tech/windowlayouts/alphabetendwindowlayout.bin
+#split	0x1607C,0x160B4,data/graphics/tech/windowlayouts/alphabettopborderwindowlayout.bin
+#split	0x160B4,0x16204,data/graphics/tech/windowlayouts/alphabetwindowlayout.bin
+#split	0x1623A,0x16282,data/graphics/tech/alphabethighlighttiles.bin
 #split	0x16618,0x16658,data/graphics/tech/windowlayouts/timerwindowwindowlayout.bin
 #split	0x198A8,0x198C8,data/graphics/battles/plt_battlescenebasepalette.bin
 #split	0x19E5E,0x19E6E,data/battles/global/terrainbackgrounds.bin

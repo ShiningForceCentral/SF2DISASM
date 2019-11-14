@@ -11,6 +11,8 @@
                 includeIfVanillaRom "code\common\menus\getallyportrait.asm"    ; Get ally portrait index function
                 includeIfExpandedRom "code\common\menus\getallyportrait-expanded.asm"
                 include "code\common\menus\menuengine_3.asm"    ; Menu engine
+                include "data\graphics\tech\windowlayouts\namecharacterentrywindowlayout.asm"    ; Name character entry window layout
+                include "code\common\menus\menuengine_4.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\memberstatswindowlayout.asm"    ; Member stats window layout
                 include "data\stats\items\itemdefs.asm"    ; Item definitions
                 include "data\stats\spells\spelldefs.asm"    ; Spell definitions
