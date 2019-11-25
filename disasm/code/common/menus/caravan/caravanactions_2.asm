@@ -53,8 +53,8 @@ loc_22900:
                 move.w  ((NUMBER_OF_OTHER_PARTY_MEMBERS-$1000000)).w,d7
 loc_22908:
                 
-                lea     ((byte_FFB0AE-$1000000)).w,a1
-                move.w  d7,((word_FFB12E-$1000000)).w
+                lea     ((INDEX_LIST-$1000000)).w,a1
+                move.w  d7,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
                 subq.w  #1,d7
                 bcs.w   loc_22920
@@ -78,11 +78,11 @@ sub_22926:
                 
                 movem.l d7-a1,-(sp)
                 move.w  ((NUM_ITEMS_IN_CARAVAN-$1000000)).w,d7
-                move.w  d7,((word_FFB12E-$1000000)).w
+                move.w  d7,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
                 subq.w  #1,d7
                 bcs.w   loc_22946
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
-                lea     ((byte_FFB0AE-$1000000)).w,a1
+                lea     ((INDEX_LIST-$1000000)).w,a1
 loc_22940:
                 
                 move.b  (a0)+,(a1)+

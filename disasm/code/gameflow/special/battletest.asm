@@ -85,8 +85,8 @@ DebugModeBattleTest:
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
                 bsr.w   InitWindowProperties
-                move.w  #$1E,(word_FFB12E).l
-                lea     (byte_FFB0AE).l,a0
+                move.w  #$1E,(INDEX_LIST_ENTRIES_NUM).l
+                lea     (INDEX_LIST).l,a0
                 move.l  #$10203,(a0)+
                 move.l  #$4050607,(a0)+
                 move.l  #$8090A0B,(a0)+

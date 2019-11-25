@@ -674,9 +674,9 @@ sub_12FE6:
                 clr.b   ((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
                 clr.b   ((word_FFAF8C-$1000000)).w
-                cmpi.b  #2,((MEMBERLIST_PAGE-$1000000)).w
+                cmpi.b  #WINDOW_MEMBERLIST_PAGE_NEWATKANDDEF,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.s   loc_13000
-                clr.b   ((MEMBERLIST_PAGE-$1000000)).w
+                clr.b   ((CURRENT_MEMBERLIST_PAGE-$1000000)).w
 loc_13000:
                 
                 bra.w   loc_1304C
@@ -687,13 +687,13 @@ loc_13004:
                 jsr     j_GetItemType
                 tst.w   d2
                 beq.s   loc_13020
-                move.b  #2,((MEMBERLIST_PAGE-$1000000)).w
+                move.b  #WINDOW_MEMBERLIST_PAGE_NEWATKANDDEF,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bra.s   loc_1302C
 loc_13020:
                 
-                cmpi.b  #2,((MEMBERLIST_PAGE-$1000000)).w
+                cmpi.b  #WINDOW_MEMBERLIST_PAGE_NEWATKANDDEF,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.s   loc_1302C
-                clr.b   ((MEMBERLIST_PAGE-$1000000)).w
+                clr.b   ((CURRENT_MEMBERLIST_PAGE-$1000000)).w
 loc_1302C:
                 
                 bra.w   loc_1304C
@@ -702,15 +702,15 @@ loc_13030:
                 clr.b   ((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
                 move.b  #2,((word_FFAF8C-$1000000)).w
-                cmpi.b  #2,((MEMBERLIST_PAGE-$1000000)).w
+                cmpi.b  #WINDOW_MEMBERLIST_PAGE_NEWATKANDDEF,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.s   loc_1304C
-                clr.b   ((MEMBERLIST_PAGE-$1000000)).w
+                clr.b   ((CURRENT_MEMBERLIST_PAGE-$1000000)).w
 loc_1304C:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 move.w  ((word_FFB136-$1000000)).w,d0
                 add.w   ((word_FFB138-$1000000)).w,d0
-                cmp.w   ((word_FFB12E-$1000000)).w,d0
+                cmp.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w,d0
                 blt.s   loc_13066
                 clr.w   ((word_FFB136-$1000000)).w
                 clr.w   ((word_FFB138-$1000000)).w
@@ -720,8 +720,8 @@ loc_13066:
                 bsr.w   GetSelectedMember
                 move.w  d0,-2(a6)
                 bsr.w   LoadCharPortrait
-                move.w  #$1D0D,d0
-                move.w  #$220,d1
+                move.w  #WINDOW_MEMBERLIST_SIZE,d0
+                move.w  #WINDOW_MEMBERLIST_DEST,d1
                 jsr     (CreateWindow).l
                 move.w  d0,-4(a6)
                 move.w  #$80A,d0
@@ -759,17 +759,17 @@ loc_13100:
                 jsr     j_GetItemType
                 tst.w   d2
                 beq.s   loc_13114
-                moveq   #2,d2
+                moveq   #WINDOW_MEMBERLIST_PAGE_NEWATKANDDEF,d2
                 bra.s   loc_13116
 loc_13114:
                 
-                moveq   #1,d2
+                moveq   #WINDOW_MEMBERLIST_PAGE_HPMPATDFAGMV,d2
 loc_13116:
                 
                 move.w  (sp)+,d1
                 btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13138
-                move.b  ((MEMBERLIST_PAGE-$1000000)).w,d0
+                move.b  ((CURRENT_MEMBERLIST_PAGE-$1000000)).w,d0
                 addq.b  #1,d0
                 sndCom  SFX_MENU_SELECTION
                 cmp.b   d2,d0
@@ -777,20 +777,20 @@ loc_13116:
                 clr.b   d0
 loc_13130:
                 
-                move.b  d0,((MEMBERLIST_PAGE-$1000000)).w
+                move.b  d0,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bsr.w   sub_13478
 loc_13138:
                 
                 btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13156
-                move.b  ((MEMBERLIST_PAGE-$1000000)).w,d0
+                move.b  ((CURRENT_MEMBERLIST_PAGE-$1000000)).w,d0
                 subq.b  #1,d0
                 sndCom  SFX_MENU_SELECTION
                 bge.s   loc_1314E
                 move.b  d2,d0
 loc_1314E:
                 
-                move.b  d0,((MEMBERLIST_PAGE-$1000000)).w
+                move.b  d0,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bsr.w   sub_13478
 loc_13156:
                 
@@ -826,7 +826,7 @@ loc_1319A:
                 bgt.s   loc_131CE
                 move.w  d0,d2
                 add.w   ((word_FFB136-$1000000)).w,d2
-                cmp.w   ((word_FFB12E-$1000000)).w,d2
+                cmp.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w,d2
                 bge.s   loc_131CC
                 clr.w   d1
                 bsr.w   sub_133A0
@@ -842,7 +842,7 @@ loc_131CE:
                 addq.w  #1,d0
                 move.w  d0,d2
                 add.w   ((word_FFB138-$1000000)).w,d2
-                cmp.w   ((word_FFB12E-$1000000)).w,d2
+                cmp.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w,d2
                 bge.s   loc_131F6
                 clr.w   d1
                 bsr.w   sub_133A0
@@ -867,7 +867,7 @@ loc_13220:
                 
                 move.w  ((word_FFB136-$1000000)).w,d0
                 add.w   ((word_FFB138-$1000000)).w,d0
-                lea     ((byte_FFB0AE-$1000000)).w,a0
+                lea     ((INDEX_LIST-$1000000)).w,a0
                 move.b  (a0,d0.w),d0
                 bsr.w   sub_132BC
                 beq.s   loc_1323E
@@ -1097,7 +1097,7 @@ loc_13404:
                 move.w  #1,6(a0)
                 move.w  ((word_FFB136-$1000000)).w,d0
                 addq.w  #5,d0
-                cmp.w   ((word_FFB12E-$1000000)).w,d0
+                cmp.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w,d0
                 bge.s   loc_13438
                 cmpi.w  #7,d1
                 blt.s   loc_13438
@@ -1148,7 +1148,7 @@ GetSelectedMember:
                 
                 move.w  ((word_FFB136-$1000000)).w,d0
                 add.w   ((word_FFB138-$1000000)).w,d0
-                lea     ((byte_FFB0AE-$1000000)).w,a0
+                lea     ((INDEX_LIST-$1000000)).w,a0
                 move.b  (a0,d0.w),d0
                 andi.w  #$FF,d0
                 rts
@@ -1246,7 +1246,7 @@ sub_1354C:
                 
                 move.w  ((word_FFB138-$1000000)).w,d0
                 add.w   ((word_FFB136-$1000000)).w,d0
-                lea     ((byte_FFB0AE-$1000000)).w,a0
+                lea     ((INDEX_LIST-$1000000)).w,a0
                 move.b  (a0,d0.w),d0
                 andi.w  #$1F,d0
                 move.w  d0,-2(a6)
@@ -1275,39 +1275,89 @@ sub_1354C:
 
 WriteMemberListText:
                 
+                ; ---------------------------------------------------------------------------
+                
+; Constants required by patches Full_Class_Names and Three_Digits_Stats
+                
+@PAGE_HPMAXMPMAX: equ 1
+@HEADER_NAME_LENGTH: equ 4
+@HEADER_NAME_OFFSET: equ 62
+                if (THREE_DIGITS_STATS=1)
+@CURRENT_MP_OFFSET: equ 4
+                else
+@CURRENT_MP_OFFSET: equ 8
+                endif
+                
                 link    a6,#-$10
                 move.w  d0,-2(a6)
                 move.l  a1,-6(a6)
                 move.w  #WINDOW_MEMBERLIST_SIZE,d0
                 bsr.w   CopyWindowTilesToRAM
                 movea.l -6(a6),a1
+                
+; ---------------------------------------------------------------------------
+                
+@writeHeader_Name:  macro
+                adda.w  #@HEADER_NAME_OFFSET,a1
+                moveq   #@HEADER_NAME_LENGTH,d7
+                lea     aName(pc), a0
+                bsr.w   WriteTilesFromASCII
+                if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                adda.w  #10,a1
+                else
+                addq.w  #8,a1
+                endif
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeHeader_Name
+                elseif (THREE_DIGITS_STATS=1)
+                @writeHeader_Name
+                else
                 move.w  #$FFC6,d1
                 suba.w  d1,a1
                 addq.w  #4,a1
+                endif
+                
                 moveq   #WINDOW_MEMBERLIST_HEADER_LENGTH,d7
-                move.b  ((MEMBERLIST_PAGE-$1000000)).w,d0
-                bne.s   @DetermineHeader
+                move.b  ((CURRENT_MEMBERLIST_PAGE-$1000000)).w,d0
+                bne.s   @DetermineHeader_HpMpAtDfAgMv
                 lea     aNameClassLevExp(pc), a0
                 bra.s   @WriteHeader
-@DetermineHeader:
+@DetermineHeader_HpMpAtDfAgMv:
                 
-                cmpi.b  #1,d0
-                bne.s   @_
+                
+@determineHeader_HpMaxMpMax:    macro
+                cmpi.b  #@PAGE_HPMAXMPMAX,d0
+                bne.s   @DetermineHeader_AttDefAgiMvEx
+                lea     aHpMaxMpMax(pc), a0
+                bra.s   @WriteHeader
+@DetermineHeader_AttDefAgiMvEx:
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @determineHeader_HpMaxMpMax
+                elseif (THREE_DIGITS_STATS=1)
+                @determineHeader_HpMaxMpMax
+                endif
+                
+                cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMPATDFAGMV,d0
+                bne.s   @DetermineHeader_AttackDefense
                 lea     aNameHpMpAtDfAgMv(pc), a0
                 bra.s   @WriteHeader
-@_:
+@DetermineHeader_AttackDefense:
                 
                 lea     aNameAttackDefense(pc), a0
 @WriteHeader:
                 
                 bsr.w   WriteTilesFromASCII
                 movea.l -6(a6),a1
-                adda.w  #$B2,a1 
+                adda.w  #WINDOW_MEMBERLIST_ENTRY_NAME_OFFSET,a1
                 moveq   #WINDOW_MEMBERLIST_ENTRIES_COUNTER,d5
                 move.w  ((word_FFB136-$1000000)).w,d4
 @CreateEntry_Loop:
                 
-                lea     ((byte_FFB0AE-$1000000)).w,a0
+                lea     ((INDEX_LIST-$1000000)).w,a0
                 clr.w   d0
                 move.b  (a0,d4.w),d0
                 move.w  d0,-$10(a6)
@@ -1315,8 +1365,7 @@ WriteMemberListText:
                 move.w  d0,d1
                 jsr     j_IsInBattleParty
                 beq.s   @DetermineNameColor
-                move.w  #VDPTILE_IDX_MEMBERLIST_BATTLEPARTYSWORD,-2(a1) 
-                                                        ; display sword icon to denote battle party members
+                move.w  #VDPTILE_IDX_MEMBERLIST_SWORDICON,-2(a1) ; display sword icon to denote battle party members
 @DetermineNameColor:
                 
                 move.l  a1,-(sp)
@@ -1336,111 +1385,200 @@ WriteMemberListText:
 @WriteEntry_ClassLevExp:
                 
                 movea.l (sp)+,a1
-                lea     WINDOW_MEMBERLIST_ENTRY_FIRST_OFFSET(a1),a1
-                tst.b   ((MEMBERLIST_PAGE-$1000000)).w
+                lea     WINDOW_MEMBERLIST_ENTRY_INIT_OFFSET(a1),a1
+                tst.b   ((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.s   @WriteEntry_HpMpAtDfAgMv
                 move.l  a1,-(sp)
                 move.w  -$10(a6),d0
+                
+                if (FULL_CLASS_NAMES=1)
+                jsr     GetFullClassName_Wrapper
+                else
                 jsr     j_GetClass      
                 jsr     j_GetClassName
+                endif
+                
                 moveq   #$FFFFFFC6,d1
                 bsr.w   WriteTilesFromASCII
                 movea.l (sp)+,a1
-                lea     $16(a1),a1
+                lea     WINDOW_MEMBERLIST_ENTRY_LEVEL_OFFSET(a1),a1
                 move.w  -$10(a6),d0
+                
+@writeNumber:   macro
+                jsr     \1
+                bsr.w   WriteTilesFromNumber_Wrapper
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeNumber GetCurrentLevel
+                elseif (THREE_DIGITS_STATS=1)
+                @writeNumber GetCurrentLevel
+                else
                 jsr     j_GetCurrentLevel
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM_LEVEL,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-                addq.l  #4,a1
+                addq.l  #WINDOW_MEMBERLIST_ENTRY_EXP_OFFSET,a1
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentEXP
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM_EXP,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
+                endif
+                
 @WriteEntry_HpMpAtDfAgMv:
                 
-                cmpi.b  #1,((MEMBERLIST_PAGE-$1000000)).w
+                ; ---------------------------------------------------------------------------
+                
+@writeEntry_HpMaxMpMax: macro
+                cmpi.b  #@PAGE_HPMAXMPMAX,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
+                bne.s   @WriteEntry_AttDefAgiMvEx
+                    if (THREE_DIGITS_STATS=0)
+                    addq.w  #2,a1
+                    endif
+                move.w  -$10(a6),d0
+                jsr     GetCurrentHP
+                bsr.w   WriteStatValue_Wrapper
+                move.w  #VDPTILE_IDX_ASCII_SLASH,(a1)+
+                move.w  -$10(a6),d0
+                jsr     GetMaxHP
+                bsr.w   WriteStatValue_Wrapper
+                addq.w  #@CURRENT_MP_OFFSET,a1
+                move.w  -$10(a6),d0
+                jsr     GetCurrentMP
+                bsr.w   WriteStatValue_Wrapper
+                move.w  #VDPTILE_IDX_ASCII_SLASH,(a1)+
+                move.w  -$10(a6),d0
+                jsr     GetMaxMP
+                bsr.w   WriteStatValue_Wrapper
+@WriteEntry_AttDefAgiMvEx:
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeEntry_HpMaxMpMax
+                elseif (THREE_DIGITS_STATS=1)
+                @writeEntry_HpMaxMpMax
+                endif
+                
+                cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMPATDFAGMV,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.w   @WriteEntry_Unequippable
+                
+                if (FULL_CLASS_NAMES=1)
+                    if (THREE_DIGITS_STATS=0)
+                    addq.w  #2,a1
+                    endif
+                else
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentHP
                 moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
-                
-                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
-                endif
-                
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentMP
                 moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
-                
-                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
                 endif
                 
                 move.w  -$10(a6),d0
+                
+; ---------------------------------------------------------------------------
+                
+@writeStatValue:    macro
+                jsr     \1
+                bsr.w   WriteStatValue_Wrapper
+                addq.w  #2,a1
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeStatValue GetCurrentATK
+                elseif (THREE_DIGITS_STATS=1)
+                @writeStatValue GetCurrentATK
+                else
                 jsr     j_GetCurrentATK
                 moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
-                
-                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
                 endif
                 
                 move.w  -$10(a6),d0
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeStatValue GetCurrentDEF
+                elseif (THREE_DIGITS_STATS=1)
+                @writeStatValue GetCurrentDEF
+                else
                 jsr     j_GetCurrentDEF
                 moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
-                
-                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
                 endif
                 
                 move.w  -$10(a6),d0
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeStatValue GetCurrentAGI
+                elseif (THREE_DIGITS_STATS=1)
+                @writeStatValue GetCurrentAGI
+                else
                 jsr     j_GetCurrentAGI
                 moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
-                
-                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
                 endif
                 
                 move.w  -$10(a6),d0
+                
+; ---------------------------------------------------------------------------
+                
+@writeNumber_CurrentMOVandEXP:  macro
+                jsr     GetCurrentMOV
+                bsr.w   WriteTilesFromNumber_Wrapper
+                if (THREE_DIGITS_STATS=1)
+                addq.w  #2,a1
+                else
+                addq.w  #6,a1
+                endif
+                move.w  -$10(a6),d0
+                @writeNumber GetCurrentEXP
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeNumber_CurrentMOVandEXP
+                elseif (THREE_DIGITS_STATS=1)
+                @writeNumber_CurrentMOVandEXP
+                else
                 jsr     j_GetCurrentMOV
-                moveq   #STATS_DIGITS_NUM,d7
+                moveq   #STATS_DIGITS_NUM_MOV,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
-                
-                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
                 endif
                 
 @WriteEntry_Unequippable:
                 
-                cmpi.b  #2,((MEMBERLIST_PAGE-$1000000)).w
+                cmpi.b  #WINDOW_MEMBERLIST_PAGE_NEWATKANDDEF,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.w   @NextEntry
                 move.w  -$10(a6),d0
                 move.w  ((word_FFB13A-$1000000)).w,d1
                 jsr     j_IsWeaponOrRingEquippable
                 bcs.s   @WriteEntry_NewATKandDEF
                 lea     aUnequippable(pc), a0
-                addq.l  #4,a1
-                moveq   #$10,d7
+                addq.l  #WINDOW_MEMBERLIST_ENTRY_UNEQUIPPABLE_OFFSET,a1
+                moveq   #WINDOW_MEMBERLIST_ENTRY_UNEQUIPPABLE_LENGTH,d7
                 moveq   #$FFFFFFC6,d1
                 bsr.w   WriteTilesFromASCII
                 bra.s   @NextEntry
@@ -1453,35 +1591,72 @@ WriteMemberListText:
                 endif
                 
                 move.w  -$10(a6),d0
+                
+; ---------------------------------------------------------------------------
+                
+@writeNewATK:   macro
+                jsr     GetCurrentATK
+                bsr.w   WriteStatValue_Wrapper
+                move.w  #VDPTILE_IDX_MEMBERLIST_HORIZONTALARROW,(a1)+
+                moveq   #STATS_DIGITS_NUM,d7
+                move.w  d2,d0
+                bsr.w   WriteStatValue
+                addq.w  #WINDOW_MEMBERLIST_ENTRY_NEWDEFENSE_OFFSET,a1
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeNewATK
+                elseif (THREE_DIGITS_STATS=1)
+                @writeNewATK
+                else
                 jsr     j_GetCurrentATK
                 moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
-                move.w  #VDPTILE_IDX_MEMBERLIST_ARROWPOINTINGRIGHT,(a1)+
+                move.w  #VDPTILE_IDX_MEMBERLIST_HORIZONTALARROW,(a1)+
                 move.w  d2,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
-                addq.l  #WINDOW_MEMBERLIST_ENTRY_NEW_DEFENSE_OFFSET,a1
+                addq.l  #WINDOW_MEMBERLIST_ENTRY_NEWDEFENSE_OFFSET,a1
+                endif
+                
                 move.w  -$10(a6),d0
+                
+@writeNewDEF:   macro
+                jsr     GetCurrentDEF
+                bsr.w   WriteStatValue_Wrapper
+                move.w  #VDPTILE_IDX_MEMBERLIST_HORIZONTALARROW,(a1)+
+                moveq   #STATS_DIGITS_NUM,d7
+                move.w  d3,d0
+                bsr.w   WriteStatValue
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeNewDEF
+                elseif (THREE_DIGITS_STATS=1)
+                @writeNewDEF
+                else
                 jsr     j_GetCurrentDEF
                 moveq   #STATS_DIGITS_NUM,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
-                move.w  #VDPTILE_IDX_MEMBERLIST_ARROWPOINTINGRIGHT,(a1)+
+                move.w  #VDPTILE_IDX_MEMBERLIST_HORIZONTALARROW,(a1)+
                 move.w  d3,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUM,d7
                 bsr.w   WriteStatValue  
                 addq.l  #2,a1
+                endif
+                
 @NextEntry:
                 
                 movea.l (sp)+,a1
-                adda.w  #$74,a1 
+                adda.w  #WINDOW_MEMBERLIST_ENTRY_NEXT_OFFSET,a1
                 addq.w  #1,d4
-                cmp.w   ((word_FFB12E-$1000000)).w,d4
+                cmp.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w,d4
                 dbeq    d5,@CreateEntry_Loop
                 unlk    a6
                 rts
@@ -1537,6 +1712,15 @@ loc_1381E:
                 bsr.w   WriteTilesFromNumber
                 movea.l -6(a6),a1
                 adda.w  #$4E,a1 
+                
+                if (FULL_CLASS_NAMES=1)
+                move.l  d3,-(sp)
+                move.l  a1,d3
+                elseif (THREE_DIGITS_STATS=1)
+                move.l  d3,-(sp)
+                move.l  a1,d3
+                endif
+                
                 move.w  -2(a6),d0
                 jsr     j_GetStatus
                 move.w  d1,d2
@@ -1601,6 +1785,15 @@ loc_138C4:
                 move.l  #$C0DDC0DF,d0
                 bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 loc_138D6:
+                
+                
+; ---------------------------------------------------------------------------
+                
+                if (FULL_CLASS_NAMES=1)
+                move.l  (sp)+,d3
+                elseif (THREE_DIGITS_STATS=1)
+                move.l  (sp)+,d3
+                endif
                 
                 move.b  ((word_FFAF8C-$1000000)).w,d0
                 bne.s   loc_138E2
@@ -2029,32 +2222,78 @@ loc_13CDE:
                 move.w  #$D860,(a1)+
                 movem.w (sp)+,d0-d1/d6-d7
                 rts
+                
+; ---------------------------------------------------------------------------
+                
+aName:          
+                
+                if (FULL_CLASS_NAMES=1)
+                dc.b 'NAME'
+                elseif (THREE_DIGITS_STATS=1)
+                dc.b 'NAME'
+                endif
+                
 
 	; End of function CopyWindowTilesToRAM
 
 aNameClassLevExp:
-                if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
-                dc.b 'NAME     CLASS     LEV EXP',0
+                
+                if (FULL_CLASS_NAMES=1)
+                dc.b 'CLASS          LV'
+                elseif (THREE_DIGITS_STATS=1)
+                dc.b 'CLASS          LV'
                 else
-                dc.b 'NAME    CLASS     LEV EXP',0
+                dc.b 'NAME    '
+                    if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                    dc.b ' '
+                    endif
+                dc.b 'CLASS     LEV EXP',0
+                endif
+                
+; ---------------------------------------------------------------------------
+                
+aHpMaxMpMax:
+                
+                if (FULL_CLASS_NAMES=1)
+                dc.b ' HP/MAX   MP/MAX',0
+                elseif (THREE_DIGITS_STATS=1)
+                dc.b ' HP/MAX   MP/MAX',0
                 endif
                 
 aNameHpMpAtDfAgMv:
-                if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
-                dc.b 'NAME     HP MP AT DF AG MV',0
-                elseif (THREE_DIGITS_STATS=1)
-                dc.b 'NAME     HP MP AT DF AG MV',0
+                ; ---------------------------------------------------------------------------
+                
+                if (FULL_CLASS_NAMES=1)
+                    if (THREE_DIGITS_STATS=1)
+                    dc.b 'ATT DEF AGI MV EX'
+                    else
+                    dc.b ' AT DF AG MV  EXP'
+                    endif
                 else
-                dc.b 'NAME    HP MP AT DF AG MV',0
+                dc.b 'NAME    '
+                    if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                    dc.b ' '
+                    endif
+                
+                if (THREE_DIGITS_STATS=1)
+                dc.b 'ATT DEF AGI MV EX',0
+                else
+                dc.b 'HP MP AT DF AG MV',0
+                endif
+                
                 endif
                 
 aNameAttackDefense:
-                if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
-                dc.b 'NAME     ATTACK   DEFENSE',0
-                else
-                dc.b 'NAME    ATTACK   DEFENSE',0
+                ; ---------------------------------------------------------------------------
+                
+                if (FULL_CLASS_NAMES=0)
+                dc.b 'NAME    '
+                    if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                    dc.b ' '
+                    endif
                 endif
                 
+                dc.b 'ATTACK   DEFENSE',0
 aMagicItem:     dc.b 'MAGIC     ITEM'
 aItem_3:        dc.b '- ITEM -',0
 aMagic_2:       dc.b '- MAGIC -',0
@@ -3078,7 +3317,7 @@ sub_147FA:
                 move.w  ((word_FFB130-$1000000)).w,d0
                 mulu.w  #6,d0
                 add.w   ((word_FFB132-$1000000)).w,d0
-                cmp.w   ((word_FFB12E-$1000000)).w,d0
+                cmp.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w,d0
                 blt.s   loc_14814
                 clr.w   ((word_FFB130-$1000000)).w
                 clr.w   ((word_FFB132-$1000000)).w
@@ -3134,7 +3373,7 @@ loc_148BC:
                 mulu.w  #6,d2
                 add.w   d0,d2
                 addq.w  #1,d2
-                cmp.w   ((word_FFB12E-$1000000)).w,d2
+                cmp.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w,d2
                 bge.s   loc_14906
                 addq.w  #1,d0
                 sndCom  SFX_MENU_SELECTION
@@ -3189,7 +3428,7 @@ loc_1496A:
                 move.w  ((word_FFB130-$1000000)).w,d2
                 addq.w  #1,d2
                 mulu.w  #6,d2
-                cmp.w   ((word_FFB12E-$1000000)).w,d2
+                cmp.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w,d2
                 bge.s   loc_149C2
                 addq.w  #1,((word_FFB130-$1000000)).w
                 sndCom  SFX_MENU_SELECTION
@@ -3199,7 +3438,7 @@ loc_1496A:
                 add.w   d2,d2
                 add.w   d1,d2
                 add.w   d2,d2
-                move.w  ((word_FFB12E-$1000000)).w,d1
+                move.w  ((INDEX_LIST_ENTRIES_NUM-$1000000)).w,d1
                 sub.w   d2,d1
                 cmpi.w  #6,d1
                 ble.s   loc_149A8
@@ -3240,7 +3479,7 @@ loc_149F2:
                 move.w  ((word_FFB130-$1000000)).w,d1
                 mulu.w  #6,d1
                 add.w   ((word_FFB132-$1000000)).w,d1
-                lea     ((byte_FFB0AE-$1000000)).w,a0
+                lea     ((INDEX_LIST-$1000000)).w,a0
                 move.b  (a0,d1.w),d0
                 andi.w  #$FF,d0
 loc_14A0A:
@@ -3324,7 +3563,7 @@ loc_14AE6:
                 move.w  ((word_FFB130-$1000000)).w,d0
                 addq.w  #1,d0
                 mulu.w  #6,d0
-                cmp.w   ((word_FFB12E-$1000000)).w,d0
+                cmp.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w,d0
                 bge.s   loc_14B1E
                 cmpi.w  #7,d1
                 blt.s   loc_14B12
@@ -3419,14 +3658,14 @@ loc_14BCE:
                 
                 move.l  #$FFFFFFFF,(a0)+
                 dbf     d7,loc_14BCE
-                lea     ((byte_FFB0AE-$1000000)).w,a1
+                lea     ((INDEX_LIST-$1000000)).w,a1
                 move.w  ((word_FFB130-$1000000)).w,d0
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
                 add.w   d0,d0
                 adda.w  d0,a1
-                move.w  ((word_FFB12E-$1000000)).w,d1
+                move.w  ((INDEX_LIST_ENTRIES_NUM-$1000000)).w,d1
                 sub.w   d0,d1
                 cmpi.w  #6,d1
                 ble.s   loc_14BF8
@@ -3559,7 +3798,7 @@ sub_14CEC:
                 add.w   d0,d0
                 move.w  ((word_FFB132-$1000000)).w,d1
                 add.w   d1,d0
-                lea     ((byte_FFB0AE-$1000000)).w,a0
+                lea     ((INDEX_LIST-$1000000)).w,a0
                 move.b  (a0,d0.w),d0
                 andi.w  #$FF,d0
                 rts

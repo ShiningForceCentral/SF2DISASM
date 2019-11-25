@@ -770,6 +770,31 @@ DecreaseCurrentMOV:
                 bsr.w   DecreaseAndClampByte
                 movem.l (sp)+,d5-a0
                 rts
+                
+; ---------------------------------------------------------------------------
+                
+; Wrapper for function GetFullClassName : required by patch Full_Class_Names
+                
+; In: D0 = char idx
+                
+GetFullClassName_Wrapper:
+                
+                if (FULL_CLASS_NAMES=1)
+                bsr.w   GetClass
+                endif
+                
+                
+; Wrapper for function FindName : required by patch Full_Class_Names
+                
+GetFullClassName:
+                
+                if (FULL_CLASS_NAMES=1)
+                lea     FullClassNames, a0
+                bra.s   FindName
+                endif
+                
+; ---------------------------------------------------------------------------
+                
 
 	; End of function DecreaseCurrentMOV
 

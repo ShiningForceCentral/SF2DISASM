@@ -2200,9 +2200,9 @@ loc_25236:
                 move.w  ((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w,d7
                 beq.s   loc_25236
                 move.w  ((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w,d7
-                move.w  d7,((word_FFB12E-$1000000)).w
+                move.w  d7,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
-                lea     ((byte_FFB0AE-$1000000)).w,a1
+                lea     ((INDEX_LIST-$1000000)).w,a1
                 jsr     (CopyBytes).w   
 loc_25274:
                 

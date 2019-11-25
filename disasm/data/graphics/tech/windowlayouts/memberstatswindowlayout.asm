@@ -2,637 +2,760 @@
 ; ASM FILE data\graphics\tech\windowlayouts\memberstatswindowlayout.asm :
 ; 0x16A62..0x16EA6 : Member stats window layout
 MemberStatsWindowLayout:
-                dc.w $C060
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C061
-                dc.w $C860
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
                 
+                ; 1st line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPLEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_TOPRIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 2nd line
+                
+@blankLine:     macro
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                endm
+                
+                @blankLine
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 3rd line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 4th line
+                
+@firstStatsLine:    macro
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
                 if (THREE_DIGITS_STATS=0)
-                dc.w $C020
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
                 endif
-                
-                dc.w $C04C
-                dc.w $C056
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_L
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_V
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
                 if (THREE_DIGITS_STATS=1)
-                dc.w $C020              ; LV
-                dc.w $C020
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND      ; LV
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
                 endif
-                
-                dc.w $C03F
-                dc.w $C020
-                dc.w $C020
-                dc.w $C041
-                dc.w $C054
-                dc.w $C054
-                
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_A
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_T
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_T
                 if (THREE_DIGITS_STATS=0)
-                dc.w $C020
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
                 endif
-                
-                dc.w $C020
-                dc.w $C03F
-                dc.w $C03F
-                
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
                 if (THREE_DIGITS_STATS=1)
-                dc.w $C03F              ; ATK
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK            ; ATT
                 else
-                dc.w $C020
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
                 endif
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                endm
                 
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                
-                if (THREE_DIGITS_STATS=0)
-                dc.w $C020
-                endif
-                
-                dc.w $C048
-                dc.w $C050
-                dc.w $C020
-                dc.w $C03F
-                dc.w $C03F
-                
-                if (THREE_DIGITS_STATS=1)
-                dc.w $C03F              ; current HP
-                endif
-                
-                dc.w $C02F
-                dc.w $C03F
-                dc.w $C03F
-                
-                if (THREE_DIGITS_STATS=1)
-                dc.w $C03F              ; max HP
-                endif
-                
-                dc.w $C020
-                dc.w $C020
-                dc.w $C044
-                dc.w $C045
-                dc.w $C046
-                
-                if (THREE_DIGITS_STATS=0)
-                dc.w $C020
-                endif
-                
-                dc.w $C020
-                dc.w $C03F
-                dc.w $C03F
-                
-                if (THREE_DIGITS_STATS=1)
-                dc.w $C03F              ; DEF
+                if (FULL_CLASS_NAMES=1)
+                @blankLine
                 else
-                dc.w $C020
+                @firstStatsLine
                 endif
                 
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
+                ; ---------------------------------------------------------------------------
                 
-                if (THREE_DIGITS_STATS=0)
-                dc.w $C020
-                endif
+                ; 5th line
                 
-                dc.w $C04D
-                dc.w $C050
-                dc.w $C020
-                dc.w $C03F
-                dc.w $C03F
-                
-                if (THREE_DIGITS_STATS=1)
-                dc.w $C03F              ; current MP
-                endif
-                
-                dc.w $C02F
-                dc.w $C03F
-                dc.w $C03F
-                
-                if (THREE_DIGITS_STATS=1)
-                dc.w $C03F              ; max MP
-                endif
-                
-                dc.w $C020
-                dc.w $C020
-                dc.w $C041
-                dc.w $C047
-                dc.w $C049
-                
-                if (THREE_DIGITS_STATS=0)
-                dc.w $C020
-                endif
-                
-                dc.w $C020
-                dc.w $C03F
-                dc.w $C03F
-                
-                if (THREE_DIGITS_STATS=1)
-                dc.w $C03F              ; AGI
+                if (FULL_CLASS_NAMES=1)
+                @firstStatsLine
                 else
-                dc.w $C020
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
                 endif
                 
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
+                ; ---------------------------------------------------------------------------
                 
+                ; 6th line
+                
+@secondStatsLine:   macro
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
                 if (THREE_DIGITS_STATS=0)
-                dc.w $C020
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
                 endif
-                
-                dc.w $C045
-                dc.w $C058
-                dc.w $C050
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_H
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_P
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
                 if (THREE_DIGITS_STATS=1)
-                dc.w $C020              ; EXP
-                dc.w $C020
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK            ; current HP
                 endif
-                
-                dc.w $C03F
-                dc.w $C020
-                dc.w $C020
-                dc.w $C04D
-                dc.w $C04F
-                dc.w $C056
-                
+                dc.w VDPTILE_IDX_ASCII_SLASH
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK            ; max HP
+                endif
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_D
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_E
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_F
                 if (THREE_DIGITS_STATS=0)
-                dc.w $C020
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
                 endif
-                
-                dc.w $C020
-                dc.w $C03F
-                dc.w $C03F
-                
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
                 if (THREE_DIGITS_STATS=1)
-                dc.w $C03F              ; MOV
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK            ; DEF
                 else
-                dc.w $C020
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                endif
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @blankLine
+                else
+                @secondStatsLine
                 endif
                 
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C04D
-                dc.w $C041
-                dc.w $C047
-                dc.w $C049
-                dc.w $C043
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C049
-                dc.w $C054
-                dc.w $C045
-                dc.w $C04D
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $C070
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C020
-                dc.w $C870
-                dc.w $D060
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D061
-                dc.w $D860
+                ; ---------------------------------------------------------------------------
+                
+                ; 7th line
+                
+                if (FULL_CLASS_NAMES=1)
+                @secondStatsLine
+                else
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 8th line
+                
+@thirdStatsLine:    macro
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                if (THREE_DIGITS_STATS=0)
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                endif
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_M
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_P
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK            ; current MP
+                endif
+                dc.w VDPTILE_IDX_ASCII_SLASH
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK            ; max MP
+                endif
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_A
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_G
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_I
+                if (THREE_DIGITS_STATS=0)
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                endif
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK            ; AGI
+                else
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                endif
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @blankLine
+                else
+                @thirdStatsLine
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 9th line
+                
+                if (FULL_CLASS_NAMES=1)
+                @thirdStatsLine
+                else
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 10th line
+                
+@fourthStatsLine:   macro
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                if (THREE_DIGITS_STATS=0)
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                endif
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_E
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_X
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_P
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND      ; EXP
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                endif
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_M
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_O
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_V
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                dc.w VDPTILE_IDX_ASCII_QUESTION_MARK
+                if (THREE_DIGITS_STATS=0)
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                endif
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @blankLine
+                else
+                @fourthStatsLine
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 11th line
+                
+                if (FULL_CLASS_NAMES=1)
+                @fourthStatsLine
+                else
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 12th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 13th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_M
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_A
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_G
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_I
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_C
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_I
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_T
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_E
+                dc.w VDPTILE_IDX_ASCII_UPPERCASE_M
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 14th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 15th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 16th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 17th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 18th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 19th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 20th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 21th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 22th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 23th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 24th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 25th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER
+                
+; ---------------------------------------------------------------------------
+                
+                ; 26th line
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMLEFTBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMBORDER
+                dc.w VDPTILE_IDX_DIALOGUEWINDOW_BOTTOMRIGHTBORDER

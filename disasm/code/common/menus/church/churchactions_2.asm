@@ -10,9 +10,9 @@ sub_21072:
                 jsr     j_UpdateForce
                 clr.w   -$16(a6)
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((word_FFB12E-$1000000)).w
+                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                lea     ((byte_FFB0AE-$1000000)).w,a1
+                lea     ((INDEX_LIST-$1000000)).w,a1
                 subq.b  #1,d7
 loc_21094:
                 

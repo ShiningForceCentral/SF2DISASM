@@ -424,6 +424,27 @@ sub_100C8:
                 link    a6,#-2
                 move.w  #$FFFF,-2(a6)
                 bra.s   loc_100EA
+                
+; ---------------------------------------------------------------------------
+                
+; Wrapper for function WriteTilesFromNumber : required by patches Full_Class_Names and Three_Digits_Stats
+                
+WriteTilesFromNumber_Wrapper:
+                
+@DIGITS_NUM_LEVEL_EXP_MOV: equ 2
+                
+                if (FULL_CLASS_NAMES=1)
+                moveq   #@DIGITS_NUM_LEVEL_EXP_MOV,d7
+                move.w  d1,d0
+                ext.l   d0
+                elseif (THREE_DIGITS_STATS=1)
+                moveq   #@DIGITS_NUM_LEVEL_EXP_MOV,d7
+                move.w  d1,d0
+                ext.l   d0
+                endif
+                
+; ---------------------------------------------------------------------------
+                
 
 	; End of function sub_100C8
 
@@ -3031,6 +3052,23 @@ sub_118BE:
                 bsr.w   WriteStatValue  
                 unlk    a6
                 rts
+                
+; ---------------------------------------------------------------------------
+                
+; Wrapper for function WriteStatValue : required by patches Full_Class_Names and Three_Digits_Stats
+                
+WriteStatValue_Wrapper:
+                
+                if (FULL_CLASS_NAMES=1)
+                moveq   #STATS_DIGITS_NUM,d7
+                move.w  d1,d0
+                elseif (THREE_DIGITS_STATS=1)
+                moveq   #STATS_DIGITS_NUM,d7
+                move.w  d1,d0
+                endif
+                
+; ---------------------------------------------------------------------------
+                
 
 	; End of function sub_118BE
 
@@ -3042,22 +3080,23 @@ sub_118BE:
 WriteStatValue:
                 
                 cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d0
-                bge.s   loc_11ABC
+                bge.s   @WriteUnknownValue
                 ext.l   d0
                 bra.w   WriteTilesFromNumber
                 
                 if (THREE_DIGITS_STATS=0)
-                bra.s   UnknownValue    ; useless instruction
+                bra.s   UnknownValue    ; bad instruction
                 endif
                 
-loc_11ABC:
+@WriteUnknownValue:
                 
                 lea     UnknownValue(pc), a0
                 bra.w   WriteTilesFromASCII
 
 	; End of function WriteStatValue
 
-UnknownValue:                   ; display "???" if value is greater than or equal to threshold (default is 400)
+UnknownValue:   
+                ; display "???" if value is greater than or equal to threshold (default is 400)
                 if (THREE_DIGITS_STATS=1)
                 dc.b '???',0
                 else
@@ -3494,11 +3533,21 @@ AddStatusEffectTileIndexesToVDPTileOrder:
                 
                 move.l  d0,(a1)
                 subq.l  #4,a1
-                cmpi.w  #$C020,(a1)
-                beq.s   return_11EFC
+                cmpi.w  #VDPTILE_IDX_DIALOGUEWINDOW_BACKGROUND,(a1)
+                beq.s   @Return
+                
+                if (FULL_CLASS_NAMES=1)
+                addi.w  #42,d3
+                movea.l d3,a1
+                elseif (THREE_DIGITS_STATS=1)
+                addi.w  #42,d3
+                movea.l d3,a1
+                else
                 movea.l -6(a6),a1
                 adda.w  #$78,a1 
-return_11EFC:
+                endif
+                
+@Return:
                 
                 rts
 
@@ -3602,7 +3651,15 @@ aNA:            dc.b 'N/A',0
 
 BuildMemberStatsWindow:
                 
+                
+; ---------------------------------------------------------------------------
+                
                 module
+                
+; Constants required by patch Full_Class_Names
+                
+@NEXT_LINE_OFFSET: equ 42
+@FULL_CLASS_NAME_OFFSET: equ 86
                 
                 link    a6,#-6
                 move.w  d0,-2(a6)
@@ -3613,22 +3670,49 @@ BuildMemberStatsWindow:
                 move.w  -2(a6),d0
                 movea.l -6(a6),a1
                 adda.w  #WINDOW_MEMBER_STATS_TEXT_CLASS_OFFSET,a1
+                
+                if (FULL_CLASS_NAMES=1)
+                jsr     GetCharName
+                moveq   #$FFFFFFD6,d1
+                bsr.w   WriteTilesFromASCII
+                move.w  -2(a6),d0
                 tst.b   d0
-                blt.s   @WriteEnemyName
+                blt.s   @AddStatusEffectTiles
+                movea.l -6(a6),a1
+                adda.w  #@FULL_CLASS_NAME_OFFSET,a1
+                jsr     GetFullClassName_Wrapper
+                moveq   #$FFFFFFD6,d1
+                bsr.w   WriteTilesFromASCII
+                else
+                tst.b   d0
+                blt.s   @WriteMemberName
                 jsr     j_GetClass      
                 jsr     j_GetClassName
                 moveq   #$FFFFFFD6,d1
                 bsr.w   WriteTilesFromASCII
                 addq.w  #2,a1
-@WriteEnemyName:
+@WriteMemberName:
                 
                 move.w  -2(a6),d0
                 jsr     j_GetCharName
                 moveq   #$FFFFFFD6,d1
                 bsr.w   WriteTilesFromASCII
+                endif
+                
+@AddStatusEffectTiles:
+                
                 movea.l -6(a6),a1
-                adda.w  #$4E,a1 
-                lea     ((byte_FFB852-$1000000)).w,a0
+                adda.w  #WINDOW_MEMBER_STATS_STATUSEFFECT_TILES_OFFSET,a1
+                
+                if (FULL_CLASS_NAMES=1)
+                move.l  d3,-(sp)
+                move.l  a1,d3
+                elseif (THREE_DIGITS_STATS=1)
+                move.l  d3,-(sp)
+                move.l  a1,d3
+                endif
+                
+                lea     ((byte_FFB852-$1000000)).w,a0 ; unused (?)
                 move.w  -2(a6),d0
                 jsr     j_GetStatus
                 move.w  d1,d2
@@ -3694,7 +3778,35 @@ BuildMemberStatsWindow:
                 bsr.w   AddStatusEffectTileIndexesToVDPTileOrder
 @WriteCurrentHP:
                 
+                
+; ---------------------------------------------------------------------------
+                
+                if (FULL_CLASS_NAMES=1)
+                move.l  (sp)+,d3
+                elseif (THREE_DIGITS_STATS=1)
+                move.l  (sp)+,d3
+                endif
+                
                 move.w  -2(a6),d0
+                
+; ---------------------------------------------------------------------------
+                
+@writeStatValue:    macro
+                jsr     \1
+                movea.l -6(a6),a1
+                if (FULL_CLASS_NAMES=1)
+                adda.w  #\2+@NEXT_LINE_OFFSET,a1
+                else
+                adda.w  #\2,a1
+                endif
+                bsr.w   WriteStatValue_Wrapper
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeStatValue GetCurrentHP, WINDOW_MEMBER_STATS_CURRENT_HP_OFFSET
+                elseif (THREE_DIGITS_STATS=1)
+                @writeStatValue GetCurrentHP, WINDOW_MEMBER_STATS_CURRENT_HP_OFFSET
+                else
                 jsr     j_GetCurrentHP
                 cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
                 bge.s   @WriteMaxHP
@@ -3704,9 +3816,17 @@ BuildMemberStatsWindow:
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
+                endif
+                
 @WriteMaxHP:
                 
                 move.w  -2(a6),d0
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeStatValue GetMaxHP, WINDOW_MEMBER_STATS_MAX_HP_OFFSET
+                elseif (THREE_DIGITS_STATS=1)
+                @writeStatValue GetMaxHP, WINDOW_MEMBER_STATS_MAX_HP_OFFSET
+                else
                 jsr     j_GetMaxHP
                 cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
                 bge.s   @WriteCurrentMP
@@ -3716,9 +3836,17 @@ BuildMemberStatsWindow:
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
+                endif
+                
 @WriteCurrentMP:
                 
                 move.w  -2(a6),d0
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeStatValue GetCurrentMP, WINDOW_MEMBER_STATS_CURRENT_MP_OFFSET
+                elseif (THREE_DIGITS_STATS=1)
+                @writeStatValue GetCurrentMP, WINDOW_MEMBER_STATS_CURRENT_MP_OFFSET
+                else
                 jsr     j_GetCurrentMP
                 cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
                 bge.s   @WriteMaxMP
@@ -3728,9 +3856,17 @@ BuildMemberStatsWindow:
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
+                endif
+                
 @WriteMaxMP:
                 
                 move.w  -2(a6),d0
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeStatValue GetMaxMP, WINDOW_MEMBER_STATS_MAX_MP_OFFSET
+                elseif (THREE_DIGITS_STATS=1)
+                @writeStatValue GetMaxMP, WINDOW_MEMBER_STATS_MAX_MP_OFFSET
+                else
                 jsr     j_GetMaxMP
                 cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
                 bge.s   @WriteLevelAndEXP
@@ -3740,42 +3876,89 @@ BuildMemberStatsWindow:
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
+                endif
+                
 @WriteLevelAndEXP:
                 
                 move.w  -2(a6),d0
                 tst.b   d0
                 blt.s   @NotAvailable
+                
+@writeNumber:   macro
+                jsr     \1
+                movea.l -6(a6),a1
+                if (FULL_CLASS_NAMES=1)
+                adda.w  #\2+@NEXT_LINE_OFFSET,a1
+                else
+                adda.w  #\2,a1
+                endif
+                bsr.w   WriteTilesFromNumber_Wrapper
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeNumber GetCurrentLevel, WINDOW_MEMBER_STATS_LEVEL_OFFSET
+                elseif (THREE_DIGITS_STATS=1)
+                @writeNumber GetCurrentLevel, WINDOW_MEMBER_STATS_LEVEL_OFFSET
+                else
                 jsr     j_GetCurrentLevel
                 movea.l -6(a6),a1
                 adda.w  #WINDOW_MEMBER_STATS_LEVEL_OFFSET,a1
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM_LEVEL,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
+                endif
+                
                 move.w  -2(a6),d0
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeNumber GetCurrentEXP, WINDOW_MEMBER_STATS_EXP_OFFSET
+                elseif (THREE_DIGITS_STATS=1)
+                @writeNumber GetCurrentEXP, WINDOW_MEMBER_STATS_EXP_OFFSET
+                else
                 jsr     j_GetCurrentEXP
                 movea.l -6(a6),a1
                 adda.w  #WINDOW_MEMBER_STATS_EXP_OFFSET,a1
-                moveq   #2,d7
+                moveq   #STATS_DIGITS_NUM_EXP,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
+                endif
+                
                 bra.s   @WriteCurrentATK
 @NotAvailable:
                 
                 lea     aNA(pc), a0     
                 movea.l -6(a6),a1
+                
+                if (FULL_CLASS_NAMES=1)
+                adda.w  #WINDOW_MEMBER_STATS_ENEMY_LEVEL_OFFSET+@NEXT_LINE_OFFSET,a1
+                else
                 adda.w  #WINDOW_MEMBER_STATS_ENEMY_LEVEL_OFFSET,a1
-                moveq   #3,d7
+                endif
+                
+                moveq   #WINDOW_MEMBER_STATS_NA_LENGTH,d7
                 bsr.w   WriteTilesFromASCII
                 lea     aNA(pc), a0     
                 movea.l -6(a6),a1
+                
+                if (FULL_CLASS_NAMES=1)
+                adda.w  #WINDOW_MEMBER_STATS_ENEMY_EXP_OFFSET+@NEXT_LINE_OFFSET,a1
+                else
                 adda.w  #WINDOW_MEMBER_STATS_ENEMY_EXP_OFFSET,a1
-                moveq   #3,d7
+                endif
+                
+                moveq   #WINDOW_MEMBER_STATS_NA_LENGTH,d7
                 bsr.w   WriteTilesFromASCII
 @WriteCurrentATK:
                 
                 move.w  -2(a6),d0
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeStatValue GetCurrentATK, WINDOW_MEMBER_STATS_ATK_OFFSET
+                elseif (THREE_DIGITS_STATS=1)
+                @writeStatValue GetCurrentATK, WINDOW_MEMBER_STATS_ATK_OFFSET
+                else
                 jsr     j_GetCurrentATK
                 cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
                 bge.s   @WriteCurrentDEF
@@ -3785,9 +3968,17 @@ BuildMemberStatsWindow:
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
+                endif
+                
 @WriteCurrentDEF:
                 
                 move.w  -2(a6),d0
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeStatValue GetCurrentDEF, WINDOW_MEMBER_STATS_DEF_OFFSET
+                elseif (THREE_DIGITS_STATS=1)
+                @writeStatValue GetCurrentDEF, WINDOW_MEMBER_STATS_DEF_OFFSET
+                else
                 jsr     j_GetCurrentDEF
                 cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
                 bge.s   @WriteCurrentAGI
@@ -3797,11 +3988,31 @@ BuildMemberStatsWindow:
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
+                endif
+                
 @WriteCurrentAGI:
                 
                 move.w  -2(a6),d0
+                
+@writeStatValue_CurrentAGI: macro
+                jsr     GetCurrentAGI
+                andi.w  #STATS_MASK_DISPLAYED_AGI,d1
+                movea.l -6(a6),a1
+                if (FULL_CLASS_NAMES=1)
+                adda.w  #WINDOW_MEMBER_STATS_AGI_OFFSET+@NEXT_LINE_OFFSET,a1
+                else
+                adda.w  #WINDOW_MEMBER_STATS_AGI_OFFSET,a1
+                endif
+                bsr.w   WriteStatValue_Wrapper
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeStatValue_CurrentAGI
+                elseif (THREE_DIGITS_STATS=1)
+                @writeStatValue_CurrentAGI
+                else
                 jsr     j_GetCurrentAGI
-                andi.w  #$7F,d1 
+                andi.w  #STATS_MASK_DISPLAYED_AGI,d1
                 cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
                 bge.s   @WriteCurrentMOV
                 movea.l -6(a6),a1
@@ -3810,18 +4021,28 @@ BuildMemberStatsWindow:
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
+                endif
+                
 @WriteCurrentMOV:
                 
                 move.w  -2(a6),d0
+                
+                if (FULL_CLASS_NAMES=1)
+                @writeNumber GetCurrentMOV, WINDOW_MEMBER_STATS_MOV_OFFSET
+                elseif (THREE_DIGITS_STATS=1)
+                @writeNumber GetCurrentMOV, WINDOW_MEMBER_STATS_MOV_OFFSET
+                else
                 jsr     j_GetCurrentMOV
                 cmpi.w  #STATS_UNKNOWN_VALUE_THRESHOLD,d1
                 bge.s   @WriteSpellNames
                 movea.l -6(a6),a1
                 adda.w  #WINDOW_MEMBER_STATS_MOV_OFFSET,a1
-                moveq   #STATS_DIGITS_NUM,d7
+                moveq   #STATS_DIGITS_NUM_MOV,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
+                endif
+                
 @WriteSpellNames:
                 
                 move.w  #$C6D0,d7

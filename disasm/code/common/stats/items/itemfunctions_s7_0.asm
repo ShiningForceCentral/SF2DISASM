@@ -92,8 +92,8 @@ DiscardItem:
                 link    a6,#-$C
                 jsr     j_UpdateForce
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                lea     (byte_FFB0AE).l,a1
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,(word_FFB12E).l
+                lea     (INDEX_LIST).l,a1
+                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,(INDEX_LIST_ENTRIES_NUM).l
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
                 subq.w  #1,d7
 loc_4F596:

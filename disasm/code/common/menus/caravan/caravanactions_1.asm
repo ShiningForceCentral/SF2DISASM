@@ -52,7 +52,7 @@ sub_22028:
                 
                 moveq   #2,d1
                 bsr.w   sub_228D8
-                tst.w   ((word_FFB12E-$1000000)).w
+                tst.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
                 beq.w   loc_220F4
                 move.w  #$F,d1
                 bsr.w   ChooseCaravanPortrait
@@ -72,7 +72,7 @@ loc_22070:
                 
                 moveq   #1,d1
                 bsr.w   sub_228D8
-                cmpi.w  #$C,((word_FFB12E-$1000000)).w
+                cmpi.w  #$C,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
                 bcc.s   loc_22098
                 move.w  -2(a6),d0
                 jsr     j_JoinBattleParty
@@ -143,7 +143,7 @@ sub_22102:
                 
                 moveq   #1,d1
                 bsr.w   sub_228D8
-                tst.w   ((word_FFB12E-$1000000)).w
+                tst.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
                 beq.s   return_22150
                 move.w  #$10,d1
                 bsr.w   ChooseCaravanPortrait
@@ -232,7 +232,7 @@ return_22186:
 Caravan_DescribeItem:
                 
                 bsr.w   sub_22926       
-                tst.w   ((word_FFB12E-$1000000)).w
+                tst.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
                 beq.w   loc_222EC
                 move.w  #$59,d1 
                 bsr.w   ChooseCaravanPortrait
@@ -389,7 +389,7 @@ loc_222F6:
 sub_222FA:
                 
                 bsr.w   sub_22926       
-                cmpi.w  #$40,((word_FFB12E-$1000000)).w 
+                cmpi.w  #$40,((INDEX_LIST_ENTRIES_NUM-$1000000)).w 
                 bcc.s   loc_22376
                 moveq   #0,d1
                 bsr.w   sub_228D8
@@ -445,7 +445,7 @@ loc_22380:
 sub_22384:
                 
                 bsr.w   sub_22926       
-                tst.w   ((word_FFB12E-$1000000)).w
+                tst.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
                 beq.w   loc_2248A
                 move.w  #$56,d1 
                 bsr.w   ChooseCaravanPortrait
@@ -536,7 +536,7 @@ loc_22494:
 sub_22498:
                 
                 bsr.w   sub_22926       
-                tst.w   ((word_FFB12E-$1000000)).w
+                tst.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
                 beq.w   loc_2252A
                 move.w  #$55,d1 
                 bsr.w   ChooseCaravanPortrait
