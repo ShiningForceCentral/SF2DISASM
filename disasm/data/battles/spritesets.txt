@@ -25,7 +25,9 @@
   - 01 : X
   - 02 : Y
   - 03 : AI type index
-  - 04-05 : Item index
+  - 04-05 : Extra-Item
+            Byte 04 : Item flags (broken, ?, AI-usable, ?, ?, ?, ? ,? ,?) 
+            Byte 05 : Item index
   - 06 : Move order 1
          $FF : No order
          $0X : Follow Force Member X
