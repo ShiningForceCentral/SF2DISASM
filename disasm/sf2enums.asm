@@ -50,8 +50,11 @@ COM_BIT_SORT: equ $6
 COM_POS_TYPE: equ $7
 COM_ALLIES_COUNTER: equ COM_ALLIES_NUM-1
 COM_ALLY_END: equ COM_ALLIES_NUM-1
-                equIfVanillaRom COM_ALLIES_NUM, $1E
-                equIfExpandedRom COM_ALLIES_NUM, $20
+                if (FORCE_MEMBERS_EXPANSION=1)
+COM_ALLIES_NUM: equ $20
+                else
+COM_ALLIES_NUM: equ $1E
+                endif
 COM_ENEMIES_COUNTER: equ $1F
 COM_ALLY_SPACEEND: equ $1F
 COM_ENEMIES_NUM: equ $20
@@ -2025,10 +2028,16 @@ ALLY_MASK_IDX: equ $1F
 ; ---------------------------------------------------------------------------
 
 ; enum Followers
-                equIfVanillaRom FOLLOWER_A, $1E
-                equIfExpandedRom FOLLOWER_A, $9C
-                equIfVanillaRom FOLLOWER_B, $1F
-                equIfExpandedRom FOLLOWER_B, $9D
+                if (FORCE_MEMBERS_EXPANSION=1)
+FOLLOWER_A: equ $9C
+                else
+FOLLOWER_A: equ $1E
+                endif
+                if (FORCE_MEMBERS_EXPANSION=1)
+FOLLOWER_B: equ $9D
+                else
+FOLLOWER_B: equ $1F
+                endif
 FOLLOWER_C: equ $9E
 FOLLOWER_D: equ $9F
 

@@ -54,3 +54,13 @@ EIGHT_CHARACTERS_MEMBER_NAMES: equ 0
 ;     0 = OFF, 1 = ON
 ;
 FULL_CLASS_NAMES: equ 0
+
+; ---------------------------------------------------------------------------
+
+; patch Force_Members_Expansion
+;
+;     Enable the use of 2 additional force members
+;
+;     0 = OFF, 1 = ON
+;
+FORCE_MEMBERS_EXPANSION: equ 0

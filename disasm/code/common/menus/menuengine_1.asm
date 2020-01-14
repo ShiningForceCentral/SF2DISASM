@@ -8,7 +8,7 @@ j_ExecuteMenu:
                 
                 jmp     ExecuteMenu(pc) 
 
-	; End of function j_ExecuteMenu
+    ; End of function j_ExecuteMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -17,7 +17,7 @@ sub_10004:
                 
                 jmp     sub_10586(pc)
 
-	; End of function sub_10004
+    ; End of function sub_10004
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -26,7 +26,7 @@ sub_10008:
                 
                 jmp     sub_10586(pc)
 
-	; End of function sub_10008
+    ; End of function sub_10008
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -35,7 +35,7 @@ sub_1000C:
                 
                 jmp     sub_10586(pc)
 
-	; End of function sub_1000C
+    ; End of function sub_1000C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -44,7 +44,7 @@ sub_10010:
                 
                 jmp     sub_10A4A(pc)
 
-	; End of function sub_10010
+    ; End of function sub_10010
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -53,7 +53,7 @@ j_CreateFighterMiniStatusWindow:
                 
                 jmp     CreateFighterMiniStatusWindow(pc)
 
-	; End of function j_CreateFighterMiniStatusWindow
+    ; End of function j_CreateFighterMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -62,7 +62,7 @@ j_HideFighterMiniStatusWindow:
                 
                 jmp     HideFighterMiniStatusWindow(pc)
 
-	; End of function j_HideFighterMiniStatusWindow
+    ; End of function j_HideFighterMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -71,7 +71,7 @@ sub_1001C:
                 
                 jmp     sub_1161A(pc)
 
-	; End of function sub_1001C
+    ; End of function sub_1001C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -80,7 +80,7 @@ sub_10020:
                 
                 jmp     sub_11638(pc)
 
-	; End of function sub_10020
+    ; End of function sub_10020
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -89,7 +89,7 @@ sub_10024:
                 
                 jmp     loc_116B8(pc)
 
-	; End of function sub_10024
+    ; End of function sub_10024
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -98,7 +98,7 @@ sub_10028:
                 
                 jmp     loc_11694(pc)
 
-	; End of function sub_10028
+    ; End of function sub_10028
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -107,7 +107,7 @@ sub_1002C:
                 
                 jmp     sub_11716(pc)
 
-	; End of function sub_1002C
+    ; End of function sub_1002C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -116,7 +116,7 @@ j_MemberStatsScreen:
                 
                 jmp     BuildMemberStatsScreen(pc)
 
-	; End of function j_MemberStatsScreen
+    ; End of function j_MemberStatsScreen
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -125,7 +125,7 @@ sub_10034:
                 
                 jmp     sub_1288E(pc)
 
-	; End of function sub_10034
+    ; End of function sub_10034
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -134,7 +134,7 @@ j_InitPortraitWindow:
                 
                 jmp     InitPortraitWindow(pc)
 
-	; End of function j_InitPortraitWindow
+    ; End of function j_InitPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -143,7 +143,7 @@ j_HidePortraitWindow:
                 
                 jmp     HidePortraitWindow(pc)
 
-	; End of function j_HidePortraitWindow
+    ; End of function j_HidePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -152,7 +152,7 @@ sub_10040:
                 
                 jmp     sub_12FE6(pc)
 
-	; End of function sub_10040
+    ; End of function sub_10040
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -161,7 +161,7 @@ sub_10044:
                 
                 jmp     loc_13004(pc)
 
-	; End of function sub_10044
+    ; End of function sub_10044
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -170,7 +170,7 @@ sub_10048:
                 
                 jmp     loc_13030(pc)
 
-	; End of function sub_10048
+    ; End of function sub_10048
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -179,7 +179,7 @@ sub_1004C:
                 
                 jmp     sub_147FA(pc)
 
-	; End of function sub_1004C
+    ; End of function sub_1004C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -188,7 +188,7 @@ sub_10050:
                 
                 jmp     sub_12F12(pc)
 
-	; End of function sub_10050
+    ; End of function sub_10050
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -197,7 +197,7 @@ sub_10054:
                 
                 jmp     sub_12F5E(pc)
 
-	; End of function sub_10054
+    ; End of function sub_10054
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -206,7 +206,7 @@ sub_10058:
                 
                 jmp     sub_12F9A(pc)
 
-	; End of function sub_10058
+    ; End of function sub_10058
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -215,7 +215,7 @@ sub_1005C:
                 
                 jmp     sub_113C6(pc)
 
-	; End of function sub_1005C
+    ; End of function sub_1005C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -224,7 +224,7 @@ sub_10060:
                 
                 jmp     sub_11404(pc)
 
-	; End of function sub_10060
+    ; End of function sub_10060
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -233,7 +233,7 @@ sub_10064:
                 
                 jmp     sub_1141E(pc)
 
-	; End of function sub_10064
+    ; End of function sub_10064
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -242,7 +242,7 @@ j_CreateLandEffectWindow:
                 
                 jmp     CreateLandEffectWindow(pc)
 
-	; End of function j_CreateLandEffectWindow
+    ; End of function j_CreateLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -251,7 +251,7 @@ j_HideLandEffectWindow:
                 
                 jmp     HideLandEffectWindow(pc)
 
-	; End of function j_HideLandEffectWindow
+    ; End of function j_HideLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -260,7 +260,7 @@ sub_10070:
                 
                 jmp     sub_157E8(pc)
 
-	; End of function sub_10070
+    ; End of function sub_10070
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -269,7 +269,7 @@ j_YesNoChoiceBox:
                 
                 jmp     YesNoChoiceBox(pc)
 
-	; End of function j_YesNoChoiceBox
+    ; End of function j_YesNoChoiceBox
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -278,7 +278,7 @@ j_YesNoPrompt:
                 
                 jmp     YesNoPrompt(pc)
 
-	; End of function j_YesNoPrompt
+    ; End of function j_YesNoPrompt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -287,7 +287,7 @@ j_NameCharacter:
                 
                 jmp     NameCharacter(pc)
 
-	; End of function j_NameCharacter
+    ; End of function j_NameCharacter
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -296,7 +296,7 @@ sub_10080:
                 
                 jmp     sub_1586E(pc)   
 
-	; End of function sub_10080
+    ; End of function sub_10080
 
 p_ItemNames:    dc.l ItemNames
 p_ClassNames:   dc.l ClassNames
@@ -309,7 +309,7 @@ j_NumberPrompt:
                 
                 jmp     NumberPrompt(pc)
 
-	; End of function j_NumberPrompt
+    ; End of function j_NumberPrompt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -318,7 +318,7 @@ j_DebugFlagSetter:
                 
                 jmp     DebugFlagSetter(pc)
 
-	; End of function j_DebugFlagSetter
+    ; End of function j_DebugFlagSetter
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -327,7 +327,7 @@ j_SpecialBattle:
                 
                 jmp     DisplayTimerWindow(pc)
 
-	; End of function j_SpecialBattle
+    ; End of function j_SpecialBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -336,7 +336,7 @@ j_DisplayTimerWindow:
                 
                 jmp     RemoveTimerWindow(pc)
 
-	; End of function j_DisplayTimerWindow
+    ; End of function j_DisplayTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -345,7 +345,7 @@ j_VintFunc_16588:
                 
                 jmp     VInt_UpdateTimerWindow(pc)
 
-	; End of function j_VintFunc_16588
+    ; End of function j_VintFunc_16588
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -354,7 +354,7 @@ j_WitchMainMenu:
                 
                 jmp     WitchMainMenu(pc)
 
-	; End of function j_WitchMainMenu
+    ; End of function j_WitchMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -363,7 +363,7 @@ sub_100AC:
                 
                 jmp     sub_169AE(pc)
 
-	; End of function sub_100AC
+    ; End of function sub_100AC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -372,7 +372,7 @@ sub_100B0:
                 
                 jmp     sub_16A30(pc)
 
-	; End of function sub_100B0
+    ; End of function sub_100B0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -383,7 +383,7 @@ j_EndKiss:
                 
                 jmp     PlayEndKiss(pc)
 
-	; End of function j_EndKiss
+    ; End of function j_EndKiss
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -392,7 +392,7 @@ j_ClosePortraitEyes:
                 
                 jmp     ClosePortraitEyes(pc)
 
-	; End of function j_ClosePortraitEyes
+    ; End of function j_ClosePortraitEyes
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -401,7 +401,7 @@ j_LoadPortrait:
                 
                 jmp     LoadPortrait(pc)
 
-	; End of function j_LoadPortrait
+    ; End of function j_LoadPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -410,7 +410,7 @@ j_GetAllyPortrait:
                 
                 jmp     GetAllyPortrait(pc)
 
-	; End of function j_GetAllyPortrait
+    ; End of function j_GetAllyPortrait
 
 p_WindowLayout_MemberStats:
                 dc.l MemberStatsWindowLayout
@@ -446,7 +446,7 @@ WriteTilesFromNumber_Wrapper:
 ; ---------------------------------------------------------------------------
                 
 
-	; End of function sub_100C8
+    ; End of function sub_100C8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -461,7 +461,7 @@ WriteTilesFromNumber:
                 sub.w   d7,d0
                 adda.w  d0,a0
 
-	; End of function WriteTilesFromNumber
+    ; End of function WriteTilesFromNumber
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -571,7 +571,7 @@ loc_10186:
                 unlk    a6
                 rts
 
-	; End of function WriteTilesFromASCII
+    ; End of function WriteTilesFromASCII
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -617,7 +617,7 @@ loc_101D4:
                 movem.l (sp)+,d4-d5/a1
                 rts
 
-	; End of function sub_1018E
+    ; End of function sub_1018E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -628,7 +628,7 @@ sub_101E6:
                 clr.b   (SPRITE_63_LINK).l
                 rts
 
-	; End of function sub_101E6
+    ; End of function sub_101E6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -816,7 +816,7 @@ loc_10398:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-	; End of function ExecuteMenu
+    ; End of function ExecuteMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -846,7 +846,7 @@ LoadDiamenuWindowVDPTileData:
                 moveq   #$C,d7
                 bra.w   WriteTilesFromASCII
 
-	; End of function LoadDiamenuWindowVDPTileData
+    ; End of function LoadDiamenuWindowVDPTileData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -857,7 +857,7 @@ sub_103FE:
                 move.w  rjt_10408(pc,d0.w),d0
                 jmp     rjt_10408(pc,d0.w)
 
-	; End of function sub_103FE
+    ; End of function sub_103FE
 
 rjt_10408:      dc.w LoadVDPTileListForDiamenuIconTop-rjt_10408
                 dc.w LoadVDPTileListForDiamenuIconLeft-rjt_10408
@@ -879,7 +879,7 @@ loc_10420:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function LoadVDPTileListForDiamenuIconTop
+    ; End of function LoadVDPTileListForDiamenuIconTop
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -899,7 +899,7 @@ loc_10440:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function LoadVDPTileListForDiamenuIconLeft
+    ; End of function LoadVDPTileListForDiamenuIconLeft
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -919,7 +919,7 @@ loc_1046A:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function LoadVDPTileListForDiamenuIconRight
+    ; End of function LoadVDPTileListForDiamenuIconRight
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -961,7 +961,7 @@ loc_104D0:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function sub_10484
+    ; End of function sub_10484
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1003,7 +1003,7 @@ loc_10532:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function sub_104E6
+    ; End of function sub_104E6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1021,7 +1021,7 @@ loc_10558:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function LoadVDPTileListForDiamenuIconBottom
+    ; End of function LoadVDPTileListForDiamenuIconBottom
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1041,7 +1041,7 @@ loc_1057C:
                 move.l  (sp)+,d0
                 rts
 
-	; End of function LoadMainMenuIcon
+    ; End of function LoadMainMenuIcon
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1216,7 +1216,7 @@ loc_10726:
                 move.w  (sp)+,d6
                 rts
 
-	; End of function sub_10586
+    ; End of function sub_10586
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1270,7 +1270,7 @@ return_107D4:
                 
                 rts
 
-	; End of function sub_10748
+    ; End of function sub_10748
 
 aEquipped:      dc.b '\Equipped',0
 aNothing:       dc.b '\Nothing',0
@@ -1287,7 +1287,7 @@ sub_107EA:
                 move.w  rjt_107F8(pc,d0.w),d0
                 jmp     rjt_107F8(pc,d0.w)
 
-	; End of function sub_107EA
+    ; End of function sub_107EA
 
 rjt_107F8:      dc.w sub_10800-rjt_107F8
                 dc.w sub_10820-rjt_107F8
@@ -1309,7 +1309,7 @@ loc_10810:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function sub_10800
+    ; End of function sub_10800
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1329,7 +1329,7 @@ loc_10830:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function sub_10820
+    ; End of function sub_10820
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1349,7 +1349,7 @@ loc_1085A:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function sub_1084A
+    ; End of function sub_1084A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1389,7 +1389,7 @@ loc_108BA:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function sub_10874
+    ; End of function sub_10874
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1429,7 +1429,7 @@ loc_10910:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function sub_108CA
+    ; End of function sub_108CA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1447,7 +1447,7 @@ loc_10930:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function sub_10920
+    ; End of function sub_10920
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1471,7 +1471,7 @@ loc_10954:
                 
                 bra.w   LoadHighlightableIcon
 
-	; End of function LoadIHighlightableSpellIcon
+    ; End of function LoadIHighlightableSpellIcon
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1482,7 +1482,7 @@ LoadHighlightableItemIcon:
                 beq.s   LoadHighlightableIcon
                 andi.w  #ITEM_MASK_IDX,d0
 
-	; End of function LoadHighlightableItemIcon
+    ; End of function LoadHighlightableItemIcon
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1504,7 +1504,7 @@ loc_1097A:
                 dbf     d1,loc_1097A
                 rts
 
-	; End of function LoadHighlightableIcon
+    ; End of function LoadHighlightableIcon
 
 IconHighlightTiles:
                 incbin "data/graphics/tech/iconhighlighttiles.bin"
@@ -1687,7 +1687,7 @@ loc_10C02:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-	; End of function sub_10A4A
+    ; End of function sub_10A4A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1738,7 +1738,7 @@ sub_10C22:
                 bsr.w   WriteTilesFromNumber
                 rts
 
-	; End of function sub_10C22
+    ; End of function sub_10C22
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1752,7 +1752,7 @@ sub_10CB0:
                 move.w  rjt_10CBE(pc,d0.w),d0
                 jmp     rjt_10CBE(pc,d0.w)
 
-	; End of function sub_10CB0
+    ; End of function sub_10CB0
 
 rjt_10CBE:      dc.w (sub_10800-rjt_10CBE) & $FFFF
                 dc.w (sub_10820-rjt_10CBE) & $FFFF
@@ -1825,7 +1825,7 @@ byte_10D48:
                 jsr     (WaitForVInt).w
                 rts
 
-	; End of function sub_10CC6
+    ; End of function sub_10CC6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1879,7 +1879,7 @@ loc_10DCE:
                 
                 bra.w   loc_10CF4
 
-	; End of function sub_10D56
+    ; End of function sub_10D56
 
 dword_10DD2:    dc.l $13C0D09
                 dc.l $C5E00124
@@ -1910,7 +1910,7 @@ loc_10E18:
                 
                 bra.w   sub_101E6
 
-	; End of function sub_10DE2
+    ; End of function sub_10DE2
 
 DiamondMenuLayout:
                 incbin "data/graphics/tech/menus/diamondmenulayout.bin" 
@@ -2382,7 +2382,7 @@ sub_113C6:
                 movem.l (sp)+,d0-a2
                 rts
 
-	; End of function sub_113C6
+    ; End of function sub_113C6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2397,7 +2397,7 @@ sub_11404:
                 movem.l (sp)+,d0-a2
                 rts
 
-	; End of function sub_11404
+    ; End of function sub_11404
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2415,7 +2415,7 @@ sub_1141E:
                 movem.l (sp)+,d0-a2
                 rts
 
-	; End of function sub_1141E
+    ; End of function sub_1141E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2457,7 +2457,7 @@ DrawBattleEquipWindowStats:
                 unlk    a6
                 rts
 
-	; End of function DrawBattleEquipWindowStats
+    ; End of function DrawBattleEquipWindowStats
 
 BattleEquipWindowLayout:
                 incbin "data/graphics/tech/windowlayouts/battleequipwindowlayout.bin"
@@ -2505,7 +2505,7 @@ loc_115C4:
                 movem.l (sp)+,d0-a2
                 rts
 
-	; End of function CreateFighterMiniStatusWindow
+    ; End of function CreateFighterMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2535,7 +2535,7 @@ loc_11600:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-	; End of function HideFighterMiniStatusWindow
+    ; End of function HideFighterMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2551,7 +2551,7 @@ sub_1161A:
                 jsr     (CreateWindow).w
                 rts
 
-	; End of function sub_1161A
+    ; End of function sub_1161A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2639,7 +2639,7 @@ return_11714:
                 
                 rts
 
-	; End of function sub_11638
+    ; End of function sub_11638
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2657,7 +2657,7 @@ sub_11716:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function sub_11716
+    ; End of function sub_11716
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2761,7 +2761,7 @@ loc_117FA:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function DrawColoredStatBar
+    ; End of function DrawColoredStatBar
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2778,7 +2778,7 @@ sub_11804:
                 movem.l (sp)+,d0-d2/a0-a1
                 rts
 
-	; End of function sub_11804
+    ; End of function sub_11804
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2796,7 +2796,7 @@ loc_11830:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function sub_11826
+    ; End of function sub_11826
 
 dword_1183E:    dc.l $F11111FF
                 dc.l $FFFFFFFF
@@ -2836,7 +2836,7 @@ loc_1187A:
                 addq.w  #1,d7
                 rts
 
-	; End of function sub_11862
+    ; End of function sub_11862
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2868,7 +2868,7 @@ return_118BC:
                 
                 rts
 
-	; End of function AdjustStringLengthForSpecialChars
+    ; End of function AdjustStringLengthForSpecialChars
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3070,7 +3070,7 @@ WriteStatValue_Wrapper:
 ; ---------------------------------------------------------------------------
                 
 
-	; End of function sub_118BE
+    ; End of function sub_118BE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3093,7 +3093,7 @@ WriteStatValue:
                 lea     UnknownValue(pc), a0
                 bra.w   WriteTilesFromASCII
 
-	; End of function WriteStatValue
+    ; End of function WriteStatValue
 
 UnknownValue:   
                 ; display "???" if value is greater than or equal to threshold (default is 400)
@@ -3124,7 +3124,7 @@ CopyFighterMinistatusWindowTileColumn:
                 addq.w  #2,a1
                 rts
 
-	; End of function CopyFighterMinistatusWindowTileColumn
+    ; End of function CopyFighterMinistatusWindowTileColumn
 
 wl_FighterMiniStatus:
                 dc.w $C060
@@ -3218,7 +3218,11 @@ loc_11B9E:
                 move.w  #$A0,d7 
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d0
-                bsrIfVanillaRom.w GetAllyPortrait
+                
+                if (FORCE_MEMBERS_EXPANSION=0)
+                bsr.w   GetAllyPortrait 
+                endif
+                
                 bsr.w   LoadPortrait    
                 move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
@@ -3240,7 +3244,7 @@ return_11BE0:
                 
                 rts
 
-	; End of function InitPortraitWindow
+    ; End of function InitPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3272,7 +3276,7 @@ loc_11C08:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-	; End of function HidePortraitWindow
+    ; End of function HidePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3313,7 +3317,11 @@ BuildMemberStatsScreen:
                 bsr.w   LoadTileDataForMemberScreen
                 move.w  -$C(a6),d0
                 blt.s   loc_11CA6
-                bsrIfVanillaRom.w GetAllyPortrait
+                
+                if (FORCE_MEMBERS_EXPANSION=0)
+                bsr.w   GetAllyPortrait 
+                endif
+                
                 bsr.w   LoadPortrait    
 loc_11CA6:
                 
@@ -3522,7 +3530,7 @@ loc_11EBA:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-	; End of function BuildMemberStatsScreen
+    ; End of function BuildMemberStatsScreen
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3551,7 +3559,7 @@ AddStatusEffectTileIndexesToVDPTileOrder:
                 
                 rts
 
-	; End of function AddStatusEffectTileIndexesToVDPTileOrder
+    ; End of function AddStatusEffectTileIndexesToVDPTileOrder
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3643,7 +3651,7 @@ return_11FEA:
                 
                 rts
 
-	; End of function LoadTileDataForMemberScreen
+    ; End of function LoadTileDataForMemberScreen
 
 aNA:            dc.b 'N/A',0
 
@@ -4175,7 +4183,7 @@ aJewel:
                 
                 move.w  -2(a6),d0
                 bne.s   @DrawSpellIcons
-                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
+                chkFlg  $180
                 beq.s   @DrawSpellIcons
                 move.w  d7,-(sp)
                 lea     aJewel(pc), a0  
@@ -4189,7 +4197,7 @@ aJewel:
                 adda.w  #$39E,a1
                 move.w  #$92,d1 
                 bsr.w   CopyMemberScreenIconsToVDPTileOrder
-                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
+                chkFlg  $181
                 beq.s   @DrawSpellIcons
                 movea.l -6(a6),a1
                 adda.w  #$3A2,a1
@@ -4332,7 +4340,7 @@ loc_12526:
                 
                 modend
 
-	; End of function BuildMemberStatsWindow
+    ; End of function BuildMemberStatsWindow
 
                 dc.w $FFFF
 
@@ -4354,7 +4362,7 @@ CopyMemberScreenIconsToVDPTileOrder:
                 addq.w  #1,d7
                 rts
 
-	; End of function CopyMemberScreenIconsToVDPTileOrder
+    ; End of function CopyMemberScreenIconsToVDPTileOrder
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4379,5 +4387,5 @@ loc_1261C:
                 jsr     (ApplyVIntVramDMA).w
                 jmp     (WaitForDMAQueueProcessing).w
 
-	; End of function sub_12606
+    ; End of function sub_12606
 

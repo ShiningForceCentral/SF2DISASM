@@ -215,19 +215,24 @@ AllyBattleSpritesTable:
                 allyBattleSprite NONE, 0
                 forClass NONE
                 allyBattleSprite NONE, 0
-                ; Additional entries to be defined in expanded ROM
-                forClassIfExpandedRom RDBN
-                allyBattleSpriteIfExpandedRom SDMN, 0
-                forClassIfExpandedRom NONE
-                allyBattleSpriteIfExpandedRom NONE, 0
-                forClassIfExpandedRom NONE
-                allyBattleSpriteIfExpandedRom NONE, 0
                 
-                forClassIfExpandedRom RDBN
-                allyBattleSpriteIfExpandedRom SDMN, 0
-                forClassIfExpandedRom NONE
-                allyBattleSpriteIfExpandedRom NONE, 0
-                forClassIfExpandedRom NONE
-                allyBattleSpriteIfExpandedRom NONE, 0
+                ; Additional entries to be defined with force members expansion patch
+                if (FORCE_MEMBERS_EXPANSION=1)
+                
+                forClass RDBN
+                allyBattleSprite SDMN, 0
+                forClass NONE
+                allyBattleSprite NONE, 0
+                forClass NONE
+                allyBattleSprite NONE, 0
+                
+                forClass RDBN
+                allyBattleSprite SDMN, 0
+                forClass NONE
+                allyBattleSprite NONE, 0
+                forClass NONE
+                allyBattleSprite NONE, 0
+                
+                endif
                 
                     
