@@ -84,7 +84,7 @@ Map00:          include "data\maps\entries\map00\00-tilesets.asm"    ;
                 dc.l Map00s0_Blocks
                 dc.l Map00s1_Layout
                 dc.l Map00s2_Areas
-                dc.l Map00s3_FlagEvents 
+                dc.l Map00s3_FlagEvents
                 dc.l Map00s4_StepEvents
                 dc.l Map00s5_RoofEvents
                 dc.l Map00s6_WarpEvents
@@ -105,11 +105,11 @@ Map01:          include "data\maps\entries\map01\00-tilesets.asm"    ;
                 dc.l Map01s0_Blocks
                 dc.l Map01s1_Layout
                 dc.l Map01s2_Areas
-                dc.l Map01s3_FlagEvents 
+                dc.l Map01s3_FlagEvents
                 dc.l Map01s4_StepEvents
                 dc.l Map01s5_RoofEvents
                 dc.l Map01s6_WarpEvents
-                dc.l Map01s7_ChestItems 
+                dc.l Map01s7_ChestItems
                 dc.l Map01s8_OtherItems
                 dc.l Map01s9_Animations
 Map01s2_Areas:  include "data\maps\entries\map01\2-areas.asm"    ; 
@@ -126,7 +126,7 @@ Map02:          include "data\maps\entries\map02\00-tilesets.asm"    ;
                 dc.l Map02s0_Blocks
                 dc.l Map02s1_Layout
                 dc.l Map02s2_Areas
-                dc.l Map02s3_FlagEvents 
+                dc.l Map02s3_FlagEvents
                 dc.l Map02s4_StepEvents
                 dc.l Map02s5_RoofEvents
                 dc.l Map02s6_WarpEvents
@@ -146,7 +146,7 @@ Map03:          include "data\maps\entries\map03\00-tilesets.asm"    ;
                 dc.l Map03s0_Blocks
                 dc.l Map03s1_Layout
                 dc.l Map03s2_Areas
-                dc.l Map03s3_FlagEvents 
+                dc.l Map03s3_FlagEvents
                 dc.l Map03s4_StepEvents
                 dc.l Map03s5_RoofEvents
                 dc.l Map03s6_WarpEvents
@@ -167,7 +167,7 @@ Map04:          include "data\maps\entries\map04\00-tilesets.asm"    ;
                 dc.l Map04s0_Blocks
                 dc.l Map04s1_Layout
                 dc.l Map04s2_Areas
-                dc.l Map04s3_FlagEvents 
+                dc.l Map04s3_FlagEvents
                 dc.l Map04s4_StepEvents
                 dc.l Map04s5_RoofEvents
                 dc.l Map04s6_WarpEvents
@@ -187,7 +187,7 @@ Map05:          include "data\maps\entries\map05\00-tilesets.asm"    ;
                 dc.l Map05s0_Blocks
                 dc.l Map05s1_Layout
                 dc.l Map05s2_Areas
-                dc.l Map05s3_FlagEvents 
+                dc.l Map05s3_FlagEvents
                 dc.l Map05s4_StepEvents
                 dc.l Map05s5_RoofEvents
                 dc.l Map05s6_WarpEvents
@@ -207,7 +207,7 @@ Map06:          include "data\maps\entries\map06\00-tilesets.asm"    ;
                 dc.l Map06s0_Blocks
                 dc.l Map06s1_Layout
                 dc.l Map06s2_Areas
-                dc.l Map06s3_FlagEvents 
+                dc.l Map06s3_FlagEvents
                 dc.l Map06s4_StepEvents
                 dc.l Map06s5_RoofEvents
                 dc.l Map06s6_WarpEvents
@@ -233,7 +233,7 @@ Map07:          include "data\maps\entries\map07\00-tilesets.asm"    ;
                 dc.l Map07s5_RoofEvents
                 dc.l Map07s6_WarpEvents
                 dc.l Map07s7_ChestItems
-                dc.l Map07s8_OtherItems 
+                dc.l Map07s8_OtherItems
                 dc.l Map06s9_Animations
 Map07s2_Areas:  include "data\maps\entries\map07\2-areas.asm"    ; 
 Map07s3_FlagEvents:include "data\maps\entries\map07\3-flag-events.asm"    ; 
@@ -248,7 +248,7 @@ Map08:          include "data\maps\entries\map08\00-tilesets.asm"    ;
                 dc.l Map08s0_Blocks
                 dc.l Map08s1_Layout
                 dc.l Map08s2_Areas
-                dc.l Map08s3_FlagEvents 
+                dc.l Map08s3_FlagEvents
                 dc.l Map08s4_StepEvents
                 dc.l Map08s5_RoofEvents
                 dc.l Map08s6_WarpEvents
@@ -272,7 +272,7 @@ Map09:          include "data\maps\entries\map09\00-tilesets.asm"    ;
                 dc.l Map09s4_StepEvents
                 dc.l Map09s5_RoofEvents
                 dc.l Map09s6_WarpEvents
-                dc.l Map09s7_ChestItems 
+                dc.l Map09s7_ChestItems
                 dc.l Map09s8_OtherItems
                 dc.l Map09s9_Animations
 Map09s2_Areas:  include "data\maps\entries\map09\2-areas.asm"    ; 
@@ -410,7 +410,7 @@ Map16:          include "data\maps\entries\map16\00-tilesets.asm"    ;
                 dc.l Map16s0_Blocks
                 dc.l Map16s1_Layout
                 dc.l Map16s2_Areas
-                dc.l Map16s3_FlagEvents 
+                dc.l Map16s3_FlagEvents
                 dc.l Map16s4_StepEvents
                 dc.l Map16s5_RoofEvents
                 dc.l Map16s6_WarpEvents
@@ -431,7 +431,7 @@ Map17:          include "data\maps\entries\map17\00-tilesets.asm"    ;
                 dc.l Map17s0_Blocks
                 dc.l Map17s1_Layout
                 dc.l Map17s2_Areas
-                dc.l Map17s3_FlagEvents 
+                dc.l Map17s3_FlagEvents
                 dc.l Map17s4_StepEvents
                 dc.l Map17s5_RoofEvents
                 dc.l Map17s6_WarpEvents
@@ -451,7 +451,7 @@ Map18:          include "data\maps\entries\map18\00-tilesets.asm"    ;
                 dc.l Map18s0_Blocks
                 dc.l Map18s1_Layout
                 dc.l Map18s2_Areas
-                dc.l Map18s3_FlagEvents 
+                dc.l Map18s3_FlagEvents
                 dc.l Map18s4_StepEvents
                 dc.l Map18s5_RoofEvents
                 dc.l Map18s6_WarpEvents
@@ -531,7 +531,7 @@ Map22:          include "data\maps\entries\map22\00-tilesets.asm"    ;
                 dc.l Map22s0_Blocks
                 dc.l Map22s1_Layout
                 dc.l Map22s2_Areas
-                dc.l Map22s3_FlagEvents 
+                dc.l Map22s3_FlagEvents
                 dc.l Map22s4_StepEvents
                 dc.l Map22s5_RoofEvents
                 dc.l Map22s6_WarpEvents
@@ -571,7 +571,7 @@ Map24:          include "data\maps\entries\map24\00-tilesets.asm"    ;
                 dc.l Map23s0_Blocks
                 dc.l Map23s1_Layout
                 dc.l Map24s2_Areas
-                dc.l Map24s3_FlagEvents 
+                dc.l Map24s3_FlagEvents
                 dc.l Map24s4_StepEvents
                 dc.l Map24s5_RoofEvents
                 dc.l Map24s6_WarpEvents
@@ -649,7 +649,7 @@ Map28:          include "data\maps\entries\map28\00-tilesets.asm"    ;
                 dc.l Map28s0_Blocks
                 dc.l Map28s1_Layout
                 dc.l Map28s2_Areas
-                dc.l Map28s3_FlagEvents 
+                dc.l Map28s3_FlagEvents
                 dc.l Map28s4_StepEvents
                 dc.l Map28s5_RoofEvents
                 dc.l Map28s6_WarpEvents
@@ -711,7 +711,7 @@ Map31:          include "data\maps\entries\map31\00-tilesets.asm"    ;
                 dc.l Map31s0_Blocks
                 dc.l Map31s1_Layout
                 dc.l Map31s2_Areas
-                dc.l Map31s3_FlagEvents 
+                dc.l Map31s3_FlagEvents
                 dc.l Map31s4_StepEvents
                 dc.l Map31s5_RoofEvents
                 dc.l Map31s6_WarpEvents
@@ -751,11 +751,11 @@ Map33:          include "data\maps\entries\map33\00-tilesets.asm"    ;
                 dc.l Map33s0_Blocks
                 dc.l Map33s1_Layout
                 dc.l Map33s2_Areas
-                dc.l Map33s3_FlagEvents 
+                dc.l Map33s3_FlagEvents
                 dc.l Map33s4_StepEvents
                 dc.l Map33s5_RoofEvents
                 dc.l Map33s6_WarpEvents
-                dc.l Map33s7_ChestItems 
+                dc.l Map33s7_ChestItems
                 dc.l Map33s8_OtherItems
                 dc.l Map33s9_Animations
 Map33s2_Areas:  include "data\maps\entries\map33\2-areas.asm"    ; 
@@ -857,7 +857,7 @@ Map38:          include "data\maps\entries\map38\00-tilesets.asm"    ;
                 dc.l Map38s4_StepEvents
                 dc.l Map38s5_RoofEvents
                 dc.l Map38s6_WarpEvents
-                dc.l Map38s7_ChestItems 
+                dc.l Map38s7_ChestItems
                 dc.l Map38s8_OtherItems
                 dc.l Map15s9_Animations
 Map38s2_Areas:  include "data\maps\entries\map38\2-areas.asm"    ; 
@@ -934,7 +934,7 @@ Map42:          include "data\maps\entries\map42\00-tilesets.asm"    ;
                 dc.l Map42s0_Blocks
                 dc.l Map42s1_Layout
                 dc.l Map42s2_Areas
-                dc.l Map42s3_FlagEvents 
+                dc.l Map42s3_FlagEvents
                 dc.l Map42s4_StepEvents
                 dc.l Map42s5_RoofEvents
                 dc.l Map42s6_WarpEvents
@@ -1016,12 +1016,12 @@ Map46:          include "data\maps\entries\map46\00-tilesets.asm"    ;
                 dc.l Map07s0_Blocks
                 dc.l Map07s1_Layout
                 dc.l Map46s2_Areas
-                dc.l Map46s3_FlagEvents 
+                dc.l Map46s3_FlagEvents
                 dc.l Map46s4_StepEvents
                 dc.l Map46s5_RoofEvents
                 dc.l Map46s6_WarpEvents
                 dc.l Map46s7_ChestItems
-                dc.l Map46s8_OtherItems 
+                dc.l Map46s8_OtherItems
                 dc.l $FFFFFFFF
 Map46s2_Areas:  include "data\maps\entries\map46\2-areas.asm"    ; 
 Map46s3_FlagEvents:include "data\maps\entries\map46\3-flag-events.asm"    ; 
@@ -1096,11 +1096,11 @@ Map50:          include "data\maps\entries\map50\00-tilesets.asm"    ;
                 dc.l Map50s0_Blocks
                 dc.l Map50s1_Layout
                 dc.l Map50s2_Areas
-                dc.l Map50s3_FlagEvents 
+                dc.l Map50s3_FlagEvents
                 dc.l Map50s4_StepEvents
                 dc.l Map50s5_RoofEvents
                 dc.l Map50s6_WarpEvents
-                dc.l Map50s7_ChestItems 
+                dc.l Map50s7_ChestItems
                 dc.l Map50s8_OtherItems
                 dc.l Map50s9_Animations
 Map50s2_Areas:  include "data\maps\entries\map50\2-areas.asm"    ; 
@@ -1177,7 +1177,7 @@ Map54:          include "data\maps\entries\map54\00-tilesets.asm"    ;
                 dc.l Map54s0_Blocks
                 dc.l Map54s1_Layout
                 dc.l Map54s2_Areas
-                dc.l Map54s3_FlagEvents 
+                dc.l Map54s3_FlagEvents
                 dc.l Map54s4_StepEvents
                 dc.l Map54s5_RoofEvents
                 dc.l Map54s6_WarpEvents
@@ -1238,7 +1238,7 @@ Map57:          include "data\maps\entries\map57\00-tilesets.asm"    ;
                 dc.l Map57s0_Blocks
                 dc.l Map57s1_Layout
                 dc.l Map57s2_Areas
-                dc.l Map57s3_FlagEvents 
+                dc.l Map57s3_FlagEvents
                 dc.l Map57s4_StepEvents
                 dc.l Map57s5_RoofEvents
                 dc.l Map57s6_WarpEvents
@@ -1277,7 +1277,7 @@ Map59:          include "data\maps\entries\map59\00-tilesets.asm"    ;
                 dc.l Map59s0_Blocks
                 dc.l Map59s1_Layout
                 dc.l Map59s2_Areas
-                dc.l Map59s3_FlagEvents 
+                dc.l Map59s3_FlagEvents
                 dc.l Map59s4_StepEvents
                 dc.l Map59s5_RoofEvents
                 dc.l Map59s6_WarpEvents
@@ -1297,7 +1297,7 @@ Map60:          include "data\maps\entries\map60\00-tilesets.asm"    ;
                 dc.l Map60s0_Blocks
                 dc.l Map60s1_Layout
                 dc.l Map60s2_Areas
-                dc.l Map60s3_FlagEvents 
+                dc.l Map60s3_FlagEvents
                 dc.l Map60s4_StepEvents
                 dc.l Map60s5_RoofEvents
                 dc.l Map60s6_WarpEvents
@@ -1317,7 +1317,7 @@ Map61:          include "data\maps\entries\map61\00-tilesets.asm"    ;
                 dc.l Map61s0_Blocks
                 dc.l Map61s1_Layout
                 dc.l Map61s2_Areas
-                dc.l Map61s3_FlagEvents 
+                dc.l Map61s3_FlagEvents
                 dc.l Map61s4_StepEvents
                 dc.l Map61s5_RoofEvents
                 dc.l Map61s6_WarpEvents
@@ -1417,7 +1417,7 @@ Map66:          include "data\maps\entries\map66\00-tilesets.asm"    ;
                 dc.l Map66s0_Blocks
                 dc.l Map66s1_Layout
                 dc.l Map66s2_Areas
-                dc.l Map66s3_FlagEvents 
+                dc.l Map66s3_FlagEvents
                 dc.l Map66s4_StepEvents
                 dc.l Map66s5_RoofEvents
                 dc.l Map66s6_WarpEvents
@@ -1438,7 +1438,7 @@ Map67:          include "data\maps\entries\map67\00-tilesets.asm"    ;
                 dc.l Map67s0_Blocks
                 dc.l Map67s1_Layout
                 dc.l Map67s2_Areas
-                dc.l Map67s3_FlagEvents 
+                dc.l Map67s3_FlagEvents
                 dc.l Map67s4_StepEvents
                 dc.l Map67s5_RoofEvents
                 dc.l Map67s6_WarpEvents
@@ -1480,7 +1480,7 @@ Map69:          include "data\maps\entries\map69\00-tilesets.asm"    ;
                 dc.l Map69s0_Blocks
                 dc.l Map69s1_Layout
                 dc.l Map69s2_Areas
-                dc.l Map69s3_FlagEvents 
+                dc.l Map69s3_FlagEvents
                 dc.l Map69s4_StepEvents
                 dc.l Map69s5_RoofEvents
                 dc.l Map69s6_WarpEvents
@@ -1543,7 +1543,7 @@ Map72:          include "data\maps\entries\map72\00-tilesets.asm"    ;
                 dc.l Map72s0_Blocks
                 dc.l Map72s1_Layout
                 dc.l Map72s2_Areas
-                dc.l Map72s3_FlagEvents 
+                dc.l Map72s3_FlagEvents
                 dc.l Map72s4_StepEvents
                 dc.l Map72s5_RoofEvents
                 dc.l Map72s6_WarpEvents
@@ -1606,7 +1606,7 @@ Map75:          include "data\maps\entries\map75\00-tilesets.asm"    ;
                 dc.l Map75s0_Blocks
                 dc.l Map75s1_Layout
                 dc.l Map75s2_Areas
-                dc.l Map75s3_FlagEvents 
+                dc.l Map75s3_FlagEvents
                 dc.l Map75s4_StepEvents
                 dc.l Map75s5_RoofEvents
                 dc.l Map75s6_WarpEvents
@@ -1648,7 +1648,7 @@ Map77:          include "data\maps\entries\map77\00-tilesets.asm"    ;
                 dc.l Map77s0_Blocks
                 dc.l Map77s1_Layout
                 dc.l Map77s2_Areas
-                dc.l Map77s3_FlagEvents 
+                dc.l Map77s3_FlagEvents
                 dc.l Map77s4_StepEvents
                 dc.l Map77s5_RoofEvents
                 dc.l Map77s6_WarpEvents
