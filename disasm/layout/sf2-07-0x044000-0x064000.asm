@@ -116,28 +116,31 @@ j_ClearEntities:
                 include "code\common\scripting\entity\entityfunctions_1.asm"    ; Entity functions
                 include "data\battles\global\battleneutralentities.asm"    ; Battle entities which are not force members or enemies
                 include "data\scripting\entity\eas_battleneutralentities.asm"    ; Entity actscripts for battle entities which are not force members or enemies
+
                 if (FORCE_MEMBERS_EXPANSION=1)
-                include "code\common\scripting\entity\getallymapsprite-expanded.asm"
                 include "code\common\scripting\entity\getcombatantmapsprite-expanded.asm"
                 include "data\stats\allies\allymapsprites-expanded.asm"
                 else
-                include "code\common\scripting\entity\getallymapsprite.asm"    ; Get ally map sprite ID function
-                include "data\stats\allies\allymapsprites.asm"    ; Ally map sprite IDs
-                include "code\common\scripting\entity\getcombatantmapsprite.asm"    ; Get combatant map sprite ID function
+                include "code\common\scripting\entity\getallymapsprite.asm"    ; Get ally map sprite index function
+                include "data\stats\allies\allymapsprites.asm"    ; Ally map sprite indexes table
+                include "code\common\scripting\entity\getcombatantmapsprite.asm"    ; Get combatant map sprite index function
                 endif
-                include "data\stats\enemies\enemymapsprites.asm"    ; Enemy map sprite IDs
-                wordAlignIfExpandedRom
+
+                include "data\stats\enemies\enemymapsprites.asm"    ; Enemy map sprite indexes table
+                wordAlign
                 include "code\common\scripting\entity\entityfunctions_2.asm"    ; Entity functions
                 include "data\scripting\entity\eas_main.asm"    ; Main entity actscripts
                 include "code\common\scripting\entity\entityfunctions_3.asm"    ; Entity functions
                 include "code\common\scripting\map\vehiclefunctions.asm"    ; Mapscripts and functions for Caravan and Raft
+
                 if (FORCE_MEMBERS_EXPANSION=1)
                 include "code\common\scripting\entity\getentityportaitandspeechsound-expanded.asm"
                 include "data\spritedialogproperties-expanded.asm"
                 else
-                include "code\common\scripting\entity\getentityportaitandspeechsound.asm"    ; Get entity portrait and speech sound IDs function
+                include "code\common\scripting\entity\getentityportaitandspeechsound.asm"    ; Get entity portrait and speech sfx indexes function
                 include "data\spritedialogproperties.asm"    ; Sprite dialog properties
                 endif
+
                 include "code\common\scripting\entity\entityfunctions_4.asm"    ; Entity functions
                 include "data\scripting\entity\eas_actions.asm"    ; Entity scripts for cutscene actions
                 include "code\common\scripting\map\mapscriptengine_1.asm"    ; Mapscript engine, part 1
@@ -158,7 +161,7 @@ j_ClearEntities:
                 include "data\battles\battleendcutscenes.asm"    ; Enemy defeated cutscenes
                 include "code\gameflow\battle\battleendcutscenesend.asm"    ; Battle end cutscenes function end
                 include "data\battles\global\enemyleaderpresence.asm"    ; Enemy leader presence table
-                wordAlignIfExpandedRom
+                wordAlign
                 include "code\gameflow\battle\afterbattlecutscenesstart.asm"    ; After battle cutscenes function start
                 include "data\battles\afterbattlecutscenes.asm"    ; After battle cutscenes
                 include "code\gameflow\battle\afterbattlecutscenesend.asm"    ; After battle cutscenes function end

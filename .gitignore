@@ -297,3 +297,8 @@ disasm/data/battles/global/newbattlemapcoords.asm
 disasm/data/maps/SF2MapEditor.jar
 disasm/data/maps/entries/map*/*hptiles*.txt
 disasm/data/maps/entries/map*/*layoutflags*.txt
+
+# Old patch files
+disasm/code/common/menus/getallyportrait-expanded.asm
+disasm/code/common/scripting/entity/getallymapsprite-expanded.asm
+disasm/code/gameflow/special/battletest-expanded.asm

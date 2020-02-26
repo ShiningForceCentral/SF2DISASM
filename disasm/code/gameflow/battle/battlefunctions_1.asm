@@ -634,7 +634,7 @@ loc_2412C:
                 
                 move.b  #MUSIC_ENEMY_ATTACK,((SKIRMISH_MUSIC_INDEX-$1000000)).w 
                                                         ; enemy
-                jsr     j_GetEnemyID
+                jsr     j_GetEnemyIndex
                 cmpi.b  #$57,d1 
                 bne.s   loc_24144
                 move.b  #MUSIC_BOSS_ATTACK,((SKIRMISH_MUSIC_INDEX-$1000000)).w 

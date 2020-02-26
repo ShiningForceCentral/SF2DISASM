@@ -87,7 +87,7 @@ GetWeaponRange:
                 bra.w   loc_C37A
 loc_C338:
                 
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 cmpi.b  #$3B,d1 
                 bne.s   loc_C350
                 move.w  #2,d3

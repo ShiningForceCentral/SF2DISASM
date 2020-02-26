@@ -307,7 +307,7 @@ CheckForTaros:
                 cmpi.w  #ACTION_ATTACK,(a3)
                 bne.w   loc_9F08
                 move.b  (a5),d0
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 cmpi.w  #$58,d1 
                 bne.w   loc_9F08
                 move.b  (a4),d0
@@ -318,7 +318,7 @@ CheckForTaros:
 loc_9F08:
                 
                 move.b  (a5),d0
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 cmpi.w  #$58,d1 
                 bne.s   loc_9F22
                 chkFlg  $70             ; Currently attacking Taros with Achille Sword
@@ -603,7 +603,7 @@ loc_A1CA:
                 
                 cmpi.w  #6,(a3)
                 bne.s   loc_A1FA
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 cmpi.w  #$26,d1 
                 bne.s   loc_A1E2        
                 move.w  #$141,d1        ; 0141=Demon laser!
@@ -713,7 +713,7 @@ loc_A2B6:
                 moveq   #$54,d5 
                 cmpi.w  #CLASS_MNST,d1  ; MNST
                 beq.w   loc_A304
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 moveq   #$76,d5 
                 cmpi.w  #$1D,d1
                 beq.w   loc_A304
@@ -952,11 +952,11 @@ FinalCounterAttackCheck:
                 andi.w  #1,d1
                 bne.w   loc_A538
                 move.b  (a5),d0
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 cmpi.w  #$58,d1 
                 beq.w   loc_A538
                 move.b  (a4),d0
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 cmpi.w  #$20,d1 
                 beq.w   loc_A538
                 cmpi.w  #$57,d1 
@@ -1016,7 +1016,7 @@ GetEffectGraphicsIdx:
                 bra.s   loc_A58C
 loc_A57E:
                 
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 cmpi.w  #$41,d1 
                 beq.w   loc_A660
 loc_A58C:
@@ -1428,7 +1428,7 @@ GiveEXPandGoldForKill:
                 bpl.s   loc_A93A
 loc_A926:
                 
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 add.w   d1,d1
                 lea     EnemyGold(pc), a0
                 adda.w  d1,a0
@@ -1532,7 +1532,7 @@ loc_A9DE:
                 
                 move.b  (a0,d7.w),d0
                 bpl.s   loc_A9F8
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 cmpi.w  #ENEMYIDX_BURST_ROCK,d1
                 bne.s   loc_A9F8
                 ori.b   #$40,d0 

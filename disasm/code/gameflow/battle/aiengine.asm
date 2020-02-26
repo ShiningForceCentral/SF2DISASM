@@ -102,7 +102,7 @@ loc_DFE6:
                 move.w  d7,d0
                 btst    #7,d0
                 beq.s   loc_E01C
-                bsr.w   GetEnemyID
+                bsr.w   GetEnemyIndex
                 cmpi.w  #$5D,d1 ; check if Prism Flower
                 bne.s   loc_E000        
                 bsr.w   HandleLineAttackerAI
@@ -2209,7 +2209,7 @@ loc_F39E:
                 move.b  d7,d0
                 btst    #7,d0
                 beq.w   loc_F404
-                bsr.w   GetEnemyID
+                bsr.w   GetEnemyIndex
                 cmpi.b  #$A,d1          ; HARDCODED enemy indexes
                 bne.s   loc_F3B8
                 bra.w   loc_F3D0

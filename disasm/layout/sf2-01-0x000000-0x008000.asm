@@ -40,11 +40,7 @@
                 include "code\gameflow\mainloop.asm"    ; Main loop
                 include "code\common\maps\egressinit.asm"    ; Egress map init function
                 include "code\gameflow\start\basetiles.asm"    ; Base tiles loading
-                if (FORCE_MEMBERS_EXPANSION=1)
-                include "code\gameflow\special\battletest-expanded.asm"
-                else
                 include "code\gameflow\special\battletest.asm"    ; Battle test functions
-                endif
                 include "code\common\maps\mapinit_0.asm"    ; Map init functions
                 include "data\maps\global\flagswitchedmaps.asm"    ; Flag-switched maps
                 include "code\common\maps\getbattle.asm"    ; GetNextBattleOnMap function

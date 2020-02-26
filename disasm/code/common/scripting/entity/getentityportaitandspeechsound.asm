@@ -1,16 +1,6 @@
 
 ; ASM FILE code\common\scripting\entity\getentityportaitandspeechsound.asm :
-; 0x45634..0x4567A : Get entity portrait and speech sound IDs function
-
-; =============== S U B R O U T I N E =======================================
-
-sub_45634:
-                
-                clr.w   d0
-                rts
-
-    ; End of function sub_45634
-
+; 0x45638..0x4567A : Get entity portrait and speech sfx indexes function
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -25,22 +15,26 @@ GetEntityPortaitAndSpeechSound:
                 clr.w   d1
                 clr.w   d2
                 bsr.w   GetEntityAddressFromCharacter
-                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0 ; D0 = map sprite index
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0 ; entity's map sprite index -> D0
                 lea     SpriteDialogProperties(pc), a0
 @FindMapSprite_Loop:
                 
-                cmp.b   (a0),d0         ; loop until we find entry matching a given map sprite
-                bne.s   @NotFound       
-                move.b  SPRITEDIALOGDEF_OFFSET_PORTRAIT(a0),d1 ; Found matching sprite...
-                ext.w   d1              ;  return portrait and speech sound indexes -> D1, D2
+                cmp.b   (a0),d0         ; loop until we find entry matching the given map sprite
+                bne.s   @NotFound
+                
+                ; Found map sprite, so return portrait and speech sfx indexes -> D1, D2
+                move.b  SPRITEDIALOGDEF_OFFSET_PORTRAIT(a0),d1
+                ext.w   d1
                 move.b  SPRITEDIALOGDEF_OFFSET_SPEECHSOUND(a0),d2
                 bra.w   @Done
 @NotFound:
                 
-                adda.w  #SPRITEDIALOGDEF_ENTRY_SIZE,a0 ; evaluate next entry
-                cmpi.w  #CODE_TERMINATOR_WORD,(a0) ; As long as we haven't reached end of table...
-                bne.s   @FindMapSprite_Loop ;  keep searching.
-                move.w  #PORTRAIT_DEFAULT,d1 ;  Otherwise, return default portrait and sound
+                adda.w  #SPRITEDIALOGDEF_ENTRY_SIZE,a0
+                cmpi.w  #CODE_TERMINATOR_WORD,(a0)
+                bne.s   @FindMapSprite_Loop ; keep searching as long as we haven't reached end of table
+                
+                ; Otherwise, return default portrait and sound
+                move.w  #PORTRAIT_DEFAULT,d1
                 move.w  #SFX_DIALOG_BLEEP_6,d2
 @Done:
                 

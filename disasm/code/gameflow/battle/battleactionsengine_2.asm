@@ -9,7 +9,7 @@
 WriteSkirmishScript_InflictDamage:
                 
                 move.b  (a5),d0
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 cmpi.w  #ENEMYIDX_TAROS,d1
                 bne.s   loc_AD1C
                 tst.b   -BCSTACK_OFFSET_INEFFECTIVEATTACK(a2)
@@ -30,7 +30,7 @@ loc_AD1C:
 loc_AD26:
                 
                 move.b  (a5),d0
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 cmpi.w  #ENEMYIDX_BURST_ROCK,d1
                 bne.s   loc_AD3E
                 tst.w   d6
@@ -78,7 +78,7 @@ loc_AD92:
                 neg.w   d2
                 tst.b   -BCSTACK_OFFSET_TARGETDIES(a2)
                 beq.s   loc_ADBA
-                jsr     GetEnemyID
+                jsr     GetEnemyIndex
                 cmpi.b  #ENEMYIDX_BURST_ROCK,d1
                 bne.s   loc_ADBA
                 tst.w   d7

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\scripting\map\vehiclefunctions.asm :
-; 0x45268..0x45634 : Mapscripts and functions for Caravan and Raft
+; 0x45268..0x45638 : Mapscripts and functions for Caravan and Raft
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -348,3 +348,13 @@ eas_GrowOut:     ac_clonePos $1
                  ac_waitDest
 word_45630:      ac_branch
                 dc.w (eas_Idle-word_45630) & $FFFF
+
+; =============== S U B R O U T I N E =======================================
+
+sub_45634:
+                
+                clr.w   d0
+                rts
+
+    ; End of function sub_45634
+

@@ -56,10 +56,10 @@ j_SuspendGame:
                 jmp     SuspendGame(pc)
                 include "code\common\menus\shop\shopactions.asm"    ; Shop functions
                 include "data\stats\items\shopdefs.asm"    ; Shop definitions
-                wordAlignIfExpandedRom
+                wordAlign
                 include "code\common\menus\church\churchactions_1.asm"    ; Church functions
                 include "data\stats\allies\promotions.asm"    ; Promotions
-                wordAlignIfExpandedRom
+                wordAlign
                 include "code\common\menus\church\churchactions_2.asm"    ; Church functions
                 include "code\common\menus\main\mainactions.asm"    ; Main menu functions
                 include "code\common\menus\blacksmith\blacksmithactions.asm"    ; Blacksmith functions

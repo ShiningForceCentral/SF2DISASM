@@ -9,11 +9,11 @@
 GetCombatantPortrait:
                 
                 tst.b   d0
-                bpl.s   @IsAlly
+                bpl.s   @Ally
                 jsr     j_GetEntityPortaitAndSpeechSound
                 move.w  d1,d0
                 bra.s   @Return
-@IsAlly:
+@Ally:
                 
                 bsr.w   GetAllyPortrait 
 @Return:

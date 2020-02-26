@@ -248,15 +248,7 @@ j_GetCurrentAGI:
 
     ; End of function j_GetCurrentAGI
 
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetEnemyID:
-                
-                jmp     GetEnemyID(pc)
-
-    ; End of function j_GetEnemyID
-
+j_GetEnemyIndex:jmp     GetEnemyIndex(pc)
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1636,7 +1628,7 @@ loc_82EE:
 loc_82F0:
                 
                 clr.w   d1
-                bsr.w   GetEnemyID
+                bsr.w   GetEnemyIndex
                 movea.l (p_EnemyNames).l,a0
                 bsr.w   FindName        
 loc_8300:
@@ -2023,7 +2015,7 @@ GetCharacterWord34:
 
 ; =============== S U B R O U T I N E =======================================
 
-GetEnemyID:
+GetEnemyIndex:
                 
                 btst    #CHAR_BIT_ENEMY,d0
                 bne.s   loc_84EA
@@ -2038,7 +2030,7 @@ loc_84EA:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetEnemyID
+    ; End of function GetEnemyIndex
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2078,14 +2070,14 @@ GetSomethingClassType:
                 bne.s   @IsEnemy
                 moveq   #0,d1
                 bsr.w   GetClass
-                move.b  ClassTypesTable(pc,d1.w),d1 ; 0,1,2 = base class, promoted class, special promoted class
+                move.b  tbl_ClassTypes(pc,d1.w),d1 ; 0,1,2 = base class, promoted class, special promoted class
                 mulu.w  #$1E,d1
                 add.w   d0,d1
                 bset    #$F,d1
                 bra.s   @Return
 @IsEnemy:
                 
-                bsr.s   GetEnemyID
+                bsr.s   GetEnemyIndex
 @Return:
                 
                 rts

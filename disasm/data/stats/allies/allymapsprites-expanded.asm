@@ -1,7 +1,14 @@
 
 ; ASM FILE data\stats\allies\allymapsprites-expanded.asm :
-; Expanded ally map sprite IDs - works in tandem with ClassTypesTable located in data\stats\allies\classes\classtypes.asm
-AllyMapSprites: ; enum Mapsprites : MAPSPRITE_*
+; Expanded ally map sprite indexes table -- included when patch Force_Members_Expansion is enabled
+;
+;       Works in tandem with class types table located in data\stats\allies\classes\classtypes.asm
+
+tbl_AllyMapSprites:
+
+; 3 bytes per ally, one for each class type (base, promo, special)
+;
+; Syntax        mapSprite index (enum Mapsprites : MAPSPRITE_*)
                     
                 mapSprite BOWIE_BASE        ; BOWIE
                 mapSprite BOWIE_PROMO

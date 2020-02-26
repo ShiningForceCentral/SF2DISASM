@@ -3462,7 +3462,7 @@ loc_19D80:
 loc_19D90:
                 
                 move.l  a0,-(sp)
-                jsr     j_GetEnemyID
+                jsr     j_GetEnemyIndex
                 lea     EnemyBattleSpritesTable(pc), a0
                 add.w   d1,d1
                 move.b  1(a0,d1.w),d2
@@ -3519,7 +3519,7 @@ GetBattleBackground:
                 beq.s   loc_19E20
                 cmpi.w  #$80,d0 
                 bcs.s   loc_19E20
-                jsr     j_GetEnemyID
+                jsr     j_GetEnemyIndex
                 cmpi.w  #$62,d1 ; HARDCODED : if enemy is Zeon, get his own background
                 bne.s   loc_19E20
                 moveq   #$1B,d1

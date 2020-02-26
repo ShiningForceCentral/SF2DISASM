@@ -1,8 +1,9 @@
 
 ; ASM FILE data\stats\enemies\enemymapsprites.asm :
-; 0x44AA4..0x44B4A : Enemy map sprite IDs
-EnemyMapSprites:; enum Mapsprites : MAPSPRITE_*
-    
+; 0x44AA4..0x44B4A : Enemy map sprite indexes table
+tbl_EnemyMapSprites:
+                ; Syntax        mapSprite index (enum Mapsprites : MAPSPRITE_*)
+                
                 mapSprite OOZE          ; OOZE
                 mapSprite HUGE_RAT      ; HUGE RAT
                 mapSprite GALAM_SOLDIER ; GALAM SOLDIER
