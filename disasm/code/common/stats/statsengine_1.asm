@@ -248,7 +248,15 @@ j_GetCurrentAGI:
 
     ; End of function j_GetCurrentAGI
 
-j_GetEnemyIndex:jmp     GetEnemyIndex(pc)
+
+; =============== S U B R O U T I N E =======================================
+
+j_GetEnemyIndex:
+                
+                jmp     GetEnemyIndex(pc)
+
+    ; End of function j_GetEnemyIndex
+
 
 ; =============== S U B R O U T I N E =======================================
 

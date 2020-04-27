@@ -2483,7 +2483,7 @@ loc_2554C:
 loc_2555A:
                 
                 move.w  d7,-(sp)
-                bsr.w   AddRandomizedAGIToTurnOrder
+                bsr.w   AddRandomizedAGItoTurnOrder
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,loc_2555A
@@ -2493,7 +2493,7 @@ loc_2555A:
 loc_2556E:
                 
                 move.w  d7,-(sp)
-                bsr.w   AddRandomizedAGIToTurnOrder
+                bsr.w   AddRandomizedAGItoTurnOrder
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,loc_2556E
@@ -2524,16 +2524,16 @@ loc_25594:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: A0 = turn order in RAM
-;     D0 = char idx    
+;     D0 = combatant index
 
-AddRandomizedAGIToTurnOrder:
+AddRandomizedAGItoTurnOrder:
                 
                 jsr     j_GetXPos
                 tst.b   d1
-                bmi.w   return_2560E
+                bmi.w   @Return
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                beq.w   return_2560E
+                beq.w   @Return         ; skip if combatant is not alive
                 jsr     j_GetCurrentAGI
                 move.w  d1,d3
                 andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
@@ -2547,10 +2547,20 @@ AddRandomizedAGIToTurnOrder:
                 jsr     (GenerateRandomNumber).w
                 subq.w  #1,d7
                 add.w   d7,d1
+                
+                if (BUGFIX_SKIPPED_TURNS=1)
+                tst.b   d1
+                bpl.s   @AddTurnData
+                moveq   #CHAR_STATCAP_AGI_CURRENT,d1 ; cap randomized AGI
+                endif
+@AddTurnData:
+                
                 move.b  d0,(a0)+
                 move.b  d1,(a0)+
-                cmpi.w  #$80,d3 
-                blt.s   return_2560E
+                cmpi.w  #128,d3
+                blt.s   @Return
+                
+                ; Add a second turn if AGI >= 128
                 move.w  d3,d1
                 andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
                 mulu.w  #5,d1
@@ -2561,13 +2571,21 @@ AddRandomizedAGIToTurnOrder:
                 add.w   d7,d1
                 jsr     (GenerateRandomNumber).w
                 sub.w   d7,d1
+                
+                if (BUGFIX_SKIPPED_TURNS=1)
+                tst.b   d1
+                bpl.s   @AddSecondTurnData
+                moveq   #CHAR_STATCAP_AGI_CURRENT,d1 ; cap randomized AGI
+                endif
+@AddSecondTurnData:
+                
                 move.b  d0,(a0)+
                 move.b  d1,(a0)+
-return_2560E:
+@Return:
                 
                 rts
 
-    ; End of function AddRandomizedAGIToTurnOrder
+    ; End of function AddRandomizedAGItoTurnOrder
 
 
 ; =============== S U B R O U T I N E =======================================
