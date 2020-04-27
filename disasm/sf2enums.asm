@@ -2056,3 +2056,12 @@ GROWTHCURVE_EARLYANDLATE: equ $5
 ; enum GrowthCurves_Props
 GROWTHCURVE_MASK_IDX: equ $7
 GROWTHCURVE_DEF_SIZE: equ $74
+
+; ---------------------------------------------------------------------------
+
+; enum BattleMapCoordinates_Props
+                if (BUGFIX_SEARCH_IN_BATTLE=1)
+BATTLEMAPCOORDS_ENTRY_SIZE: equ 7
+                else
+BATTLEMAPCOORDS_ENTRY_SIZE: equ $5
+                endif
