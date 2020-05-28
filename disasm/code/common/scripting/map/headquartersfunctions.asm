@@ -29,7 +29,7 @@ loc_4793C:
                 jsr     sub_100B0
                 rts
 
-	; End of function DisplayHeadquartersQuote
+    ; End of function DisplayHeadquartersQuote
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -61,7 +61,7 @@ loc_47982:
                 movem.l (sp)+,d0-a2
                 rts
 
-	; End of function InitNazcaShipForceMembers
+    ; End of function InitNazcaShipForceMembers
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -120,7 +120,7 @@ loc_47A28:
                 movem.l (sp)+,d0-a2
                 rts
 
-	; End of function InitHeadquartersForceMembers
+    ; End of function InitHeadquartersForceMembers
 
 byte_47A38:     dc.b $11                ; related to headquarters
                 dc.b   7

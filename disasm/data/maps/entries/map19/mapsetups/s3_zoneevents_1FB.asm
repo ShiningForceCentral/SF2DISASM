@@ -13,7 +13,7 @@ Map19_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map19_DefaultZoneEvent
+    ; End of function Map19_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -29,7 +29,7 @@ return_52DC6:
                 
                 rts
 
-	; End of function Map19_1FA_ZoneEvent0
+    ; End of function Map19_1FA_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -46,7 +46,7 @@ return_52DDC:
                 
                 rts
 
-	; End of function Map19_1FA_ZoneEvent1
+    ; End of function Map19_1FA_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -62,7 +62,7 @@ return_52DEE:
                 
                 rts
 
-	; End of function Map19_1FB_ZoneEvent0
+    ; End of function Map19_1FB_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -78,5 +78,5 @@ return_52E00:
                 
                 rts
 
-	; End of function Map19_1FB_ZoneEvent1
+    ; End of function Map19_1FB_ZoneEvent1
 

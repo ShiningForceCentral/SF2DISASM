@@ -10,5 +10,5 @@ Map46_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map46_DefaultZoneEvent
+    ; End of function Map46_DefaultZoneEvent
 

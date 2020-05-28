@@ -105,5 +105,5 @@ return_4D098:
                 
                 rts
 
-	; End of function sub_4D078
+    ; End of function sub_4D078
 

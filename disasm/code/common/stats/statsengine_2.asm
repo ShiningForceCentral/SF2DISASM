@@ -21,7 +21,7 @@ return_8574:
                 
                 rts
 
-	; End of function CopyCharNameToRAM
+    ; End of function CopyCharNameToRAM
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -34,7 +34,7 @@ SetClass:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetClass
+    ; End of function SetClass
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -47,7 +47,7 @@ SetLevel:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetLevel
+    ; End of function SetLevel
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -60,7 +60,7 @@ SetMaxHP:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetMaxHP
+    ; End of function SetMaxHP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -73,7 +73,7 @@ SetCurrentHP:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetCurrentHP
+    ; End of function SetCurrentHP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ SetMaxMP:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetMaxMP
+    ; End of function SetMaxMP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -99,7 +99,7 @@ SetCurrentMP:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetCurrentMP
+    ; End of function SetCurrentMP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -114,7 +114,7 @@ loc_85DC:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetBaseATK
+    ; End of function SetBaseATK
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -127,7 +127,7 @@ SetCurrentATK:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetCurrentATK
+    ; End of function SetCurrentATK
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -140,7 +140,7 @@ SetBaseDEF:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetBaseDEF
+    ; End of function SetBaseDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -153,7 +153,7 @@ SetCurrentDEF:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetCurrentDEF
+    ; End of function SetCurrentDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -166,7 +166,7 @@ SetBaseAGI:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetBaseAGI
+    ; End of function SetBaseAGI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -179,7 +179,7 @@ SetCurrentAGI:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetCurrentAGI
+    ; End of function SetCurrentAGI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -192,7 +192,7 @@ SetBaseMOV:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetBaseMOV
+    ; End of function SetBaseMOV
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -205,7 +205,7 @@ SetCurrentMOV:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetCurrentMOV
+    ; End of function SetCurrentMOV
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -218,7 +218,7 @@ SetBaseResistance:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetBaseResistance
+    ; End of function SetBaseResistance
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -231,7 +231,7 @@ SetCurrentResistance:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetCurrentResistance
+    ; End of function SetCurrentResistance
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -244,7 +244,7 @@ SetBaseProwess:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetBaseProwess
+    ; End of function SetBaseProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -257,7 +257,7 @@ SetCurrentProwess:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetCurrentProwess
+    ; End of function SetCurrentProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -270,7 +270,7 @@ SetStatus:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetStatus
+    ; End of function SetStatus
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -283,7 +283,7 @@ SetXPos:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetXPos
+    ; End of function SetXPos
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -296,7 +296,7 @@ SetYPos:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetYPos
+    ; End of function SetYPos
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -309,7 +309,7 @@ SetCurrentEXP:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetCurrentEXP
+    ; End of function SetCurrentEXP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -322,7 +322,7 @@ SetMoveType:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetMoveType
+    ; End of function SetMoveType
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -340,7 +340,7 @@ SetKills:
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-	; End of function SetKills
+    ; End of function SetKills
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -358,7 +358,7 @@ SetDefeats:
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-	; End of function SetDefeats
+    ; End of function SetDefeats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -371,7 +371,7 @@ SetCharacterWord34:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetCharacterWord34
+    ; End of function SetCharacterWord34
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -384,7 +384,7 @@ SetEnemyID:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SetEnemyID
+    ; End of function SetEnemyID
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -399,7 +399,7 @@ IncreaseLevel:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseLevel
+    ; End of function IncreaseLevel
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -414,7 +414,7 @@ IncreaseMaxHP:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseMaxHP
+    ; End of function IncreaseMaxHP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -430,7 +430,7 @@ IncreaseCurrentHP:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseCurrentHP
+    ; End of function IncreaseCurrentHP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -445,7 +445,7 @@ IncreaseMaxMP:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseMaxMP
+    ; End of function IncreaseMaxMP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -461,7 +461,7 @@ IncreaseCurrentMP:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseCurrentMP
+    ; End of function IncreaseCurrentMP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -476,7 +476,7 @@ IncreaseBaseATK:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseBaseATK
+    ; End of function IncreaseBaseATK
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -491,7 +491,7 @@ IncreaseCurrentATK:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseCurrentATK
+    ; End of function IncreaseCurrentATK
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -506,7 +506,7 @@ IncreaseBaseDEF:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseBaseDEF
+    ; End of function IncreaseBaseDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -521,7 +521,7 @@ IncreaseCurrentDEF:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseCurrentDEF
+    ; End of function IncreaseCurrentDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -536,7 +536,7 @@ IncreaseBaseAGI:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseBaseAGI
+    ; End of function IncreaseBaseAGI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -551,7 +551,7 @@ IncreaseCurrentAGI:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseCurrentAGI
+    ; End of function IncreaseCurrentAGI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -566,7 +566,7 @@ IncreaseBaseMOV:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseBaseMOV
+    ; End of function IncreaseBaseMOV
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -581,7 +581,7 @@ IncreaseCurrentMOV:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseCurrentMOV
+    ; End of function IncreaseCurrentMOV
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -596,7 +596,7 @@ IncreaseEXP:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function IncreaseEXP
+    ; End of function IncreaseEXP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -615,7 +615,7 @@ return_8886:
                 
                 rts
 
-	; End of function IncreaseKills
+    ; End of function IncreaseKills
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -634,7 +634,7 @@ return_88A0:
                 
                 rts
 
-	; End of function IncreaseDefeats
+    ; End of function IncreaseDefeats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -650,7 +650,7 @@ DecreaseCurrentHP:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function DecreaseCurrentHP
+    ; End of function DecreaseCurrentHP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -666,7 +666,7 @@ DecreaseCurrentMP:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function DecreaseCurrentMP
+    ; End of function DecreaseCurrentMP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -681,7 +681,7 @@ DecreaseCurrentATK:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function DecreaseCurrentATK
+    ; End of function DecreaseCurrentATK
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -696,7 +696,7 @@ DecreaseBaseDEF:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function DecreaseBaseDEF
+    ; End of function DecreaseBaseDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -711,7 +711,7 @@ DecreaseCurrentDEF:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function DecreaseCurrentDEF
+    ; End of function DecreaseCurrentDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -726,7 +726,7 @@ DecreaseBaseAGI:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function DecreaseBaseAGI
+    ; End of function DecreaseBaseAGI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -741,7 +741,7 @@ DecreaseCurrentAGI:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function DecreaseCurrentAGI
+    ; End of function DecreaseCurrentAGI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -756,7 +756,7 @@ DecreaseBaseMOV:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function DecreaseBaseMOV
+    ; End of function DecreaseBaseMOV
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -796,7 +796,7 @@ GetFullClassName:
 ; ---------------------------------------------------------------------------
                 
 
-	; End of function DecreaseCurrentMOV
+    ; End of function DecreaseCurrentMOV
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -805,7 +805,7 @@ GetClassName:
                 
                 movea.l (p_ClassNames).l,a0
 
-	; End of function GetClassName
+    ; End of function GetClassName
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -833,7 +833,7 @@ loc_8986:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function FindName
+    ; End of function FindName
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -843,7 +843,7 @@ SetGold:
                 move.l  d1,((CURRENT_GOLD-$1000000)).w ; puts d1's value at F600 in RAM
                 rts
 
-	; End of function SetGold
+    ; End of function SetGold
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -853,7 +853,7 @@ GetGold:
                 move.l  ((CURRENT_GOLD-$1000000)).w,d1
                 rts
 
-	; End of function GetGold
+    ; End of function GetGold
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -872,7 +872,7 @@ loc_89AE:
                 move.l  d1,((CURRENT_GOLD-$1000000)).w
                 rts
 
-	; End of function IncreaseGold
+    ; End of function IncreaseGold
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -891,7 +891,7 @@ loc_89C2:
                 movem.l (sp)+,d0
                 rts
 
-	; End of function DecreaseGold
+    ; End of function DecreaseGold
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -930,7 +930,7 @@ loc_8A12:
                 movem.l (sp)+,d0-d3/a0-a2
                 rts
 
-	; End of function ApplyStatusAndItemsOnStats
+    ; End of function ApplyStatusAndItemsOnStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -980,7 +980,7 @@ return_8A8E:
                 
                 rts
 
-	; End of function ApplyMagicOnStats
+    ; End of function ApplyMagicOnStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1030,7 +1030,7 @@ loc_8AD2:
                 movem.l (sp)+,d1-d2/d7-a1
                 rtr
 
-	; End of function ApplyItemOnStats
+    ; End of function ApplyItemOnStats
 
 pt_EquipEffectFunctions:
                 dc.l nullsub_8B22
@@ -1057,7 +1057,7 @@ nullsub_8B22:
                 
                 rts
 
-	; End of function nullsub_8B22
+    ; End of function nullsub_8B22
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1078,7 +1078,7 @@ loc_8B3A:
                 or.b    d2,(a2)
                 rts
 
-	; End of function EquipEffect_IncreaseCriticalProwess
+    ; End of function EquipEffect_IncreaseCriticalProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1099,7 +1099,7 @@ loc_8B54:
                 or.b    d2,(a2)
                 rts
 
-	; End of function EquipEffect_IncreaseDoubleAttackProwess
+    ; End of function EquipEffect_IncreaseDoubleAttackProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1120,7 +1120,7 @@ loc_8B70:
                 or.b    d2,(a2)
                 rts
 
-	; End of function EquipEffect_IncreaseCounterAttackProwess
+    ; End of function EquipEffect_IncreaseCounterAttackProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1132,7 +1132,7 @@ EquipEffect_SetCriticalProwess:
                 or.b    d1,(a2)
                 rts
 
-	; End of function EquipEffect_SetCriticalProwess
+    ; End of function EquipEffect_SetCriticalProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1145,7 +1145,7 @@ EquipEffect_SetDoubleAttackProwess:
                 or.b    d1,(a2)
                 rts
 
-	; End of function EquipEffect_SetDoubleAttackProwess
+    ; End of function EquipEffect_SetDoubleAttackProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1158,7 +1158,7 @@ EquipEffect_SetCounterAttackProwess:
                 or.b    d1,(a2)
                 rts
 
-	; End of function EquipEffect_SetCounterAttackProwess
+    ; End of function EquipEffect_SetCounterAttackProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1176,7 +1176,7 @@ InitCurrentStats:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function InitCurrentStats
+    ; End of function InitCurrentStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1194,7 +1194,7 @@ FindItemName:
                 move.w  (sp)+,d1
                 rts
 
-	; End of function FindItemName
+    ; End of function FindItemName
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1212,7 +1212,7 @@ GetItemDefAddress:
                 move.l  (sp)+,d1
                 rts
 
-	; End of function GetItemDefAddress
+    ; End of function GetItemDefAddress
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1244,7 +1244,7 @@ loc_8C1E:
                 movem.l (sp)+,d0/d3/a0
                 rts
 
-	; End of function GetCharItemAtSlotAndNumberOfItems
+    ; End of function GetCharItemAtSlotAndNumberOfItems
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1277,7 +1277,7 @@ loc_8C48:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function GetItemType
+    ; End of function GetItemType
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1325,7 +1325,7 @@ loc_8C9C:
                 movem.l (sp)+,d3-d4/a0-a1
                 rts
 
-	; End of function GetEquippedWeapon
+    ; End of function GetEquippedWeapon
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1359,7 +1359,7 @@ loc_8CCE:
                 movem.l (sp)+,d0/a0
                 rts
 
-	; End of function AddItem
+    ; End of function AddItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1388,7 +1388,7 @@ loc_8CFA:
                 movem.l (sp)+,d1/a0
                 rts
 
-	; End of function BreakItem
+    ; End of function BreakItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1421,7 +1421,7 @@ loc_8D2E:
                 movem.l (sp)+,d1/a0
                 rts
 
-	; End of function RepairItemBySlot
+    ; End of function RepairItemBySlot
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1457,7 +1457,7 @@ loc_8D62:
                 movem.l (sp)+,d0-d1/a0
                 bra.w   ApplyStatusAndItemsOnStats
 
-	; End of function EquipItemBySlot
+    ; End of function EquipItemBySlot
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1495,7 +1495,7 @@ loc_8D98:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function IsItemEquippableAndCursed
+    ; End of function IsItemEquippableAndCursed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1515,7 +1515,7 @@ loc_8DAE:
                 movem.l (sp)+,d0-d1/a0
                 bra.w   ApplyStatusAndItemsOnStats
 
-	; End of function UnequipItemBySlotIfNotCursed
+    ; End of function UnequipItemBySlotIfNotCursed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1564,7 +1564,7 @@ return_8DFC:
                 
                 rts
 
-	; End of function IsItemInSlotEquippedAndCursed
+    ; End of function IsItemInSlotEquippedAndCursed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1580,7 +1580,7 @@ UnequipItemBySlot:
                 movem.l (sp)+,d0-d1/a0
                 bra.w   ApplyStatusAndItemsOnStats
 
-	; End of function UnequipItemBySlot
+    ; End of function UnequipItemBySlot
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1617,7 +1617,7 @@ loc_8E54:
                 movem.l (sp)+,d0/a0
                 bra.w   ApplyStatusAndItemsOnStats
 
-	; End of function DropItemBySlot
+    ; End of function DropItemBySlot
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1641,7 +1641,7 @@ loc_8E6E:
                 clr.w   d2
                 rts
 
-	; End of function RemoveAndArrangeItems
+    ; End of function RemoveAndArrangeItems
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1671,7 +1671,7 @@ loc_8E9E:
                 movem.l (sp)+,d0/a0
                 bra.w   ApplyStatusAndItemsOnStats
 
-	; End of function RemoveItemBySlot
+    ; End of function RemoveItemBySlot
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1682,7 +1682,7 @@ UnequipWeapon:
                 move.w  #ITEMTYPE_WEAPON,d2 ; weapon
                 bra.s   UnequipItemByType
 
-	; End of function UnequipWeapon
+    ; End of function UnequipWeapon
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1714,7 +1714,7 @@ loc_8EE0:
                 movem.l (sp)+,d0-d2/a0-a1
                 bra.w   ApplyStatusAndItemsOnStats
 
-	; End of function UnequipRing
+    ; End of function UnequipRing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1763,7 +1763,7 @@ loc_8F4E:
                 lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a0
                 rts
 
-	; End of function GetEquippableWeapons
+    ; End of function GetEquippableWeapons
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1788,7 +1788,7 @@ loc_8F7A:
                 movem.l (sp)+,a0
                 rts
 
-	; End of function IsItemEquippable
+    ; End of function IsItemEquippable
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1805,7 +1805,7 @@ IsWeaponOrRingEquippable:
                 movem.l (sp)+,d0/d2-d6/a0
                 rts
 
-	; End of function IsWeaponOrRingEquippable
+    ; End of function IsWeaponOrRingEquippable
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1839,7 +1839,7 @@ loc_8FE8:
                 movem.l (sp)+,d0/d4-d6/a0
                 rts
 
-	; End of function GetWeaponNewATKandDEF
+    ; End of function GetWeaponNewATKandDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1900,7 +1900,7 @@ loc_903A:
                 movem.l (sp)+,d0-d1/d4-a0
                 rts
 
-	; End of function GetCharATKandDEFWithSpecificWeapon
+    ; End of function GetCharATKandDEFWithSpecificWeapon
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1938,7 +1938,7 @@ loc_90A2:
                 movem.l (sp)+,d0-d3/a0-a1
                 rts
 
-	; End of function OrderItems
+    ; End of function OrderItems
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1959,7 +1959,7 @@ loc_90C8:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function IsItemCursed
+    ; End of function IsItemCursed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1986,7 +1986,7 @@ loc_90E2:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function IsItemUsableInBattle
+    ; End of function IsItemUsableInBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2015,7 +2015,7 @@ loc_9102:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function IsItemUsableWeaponInBattle
+    ; End of function IsItemUsableWeaponInBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2047,7 +2047,7 @@ loc_9138:
                 movem.l (sp)+,d0-d1/a0-a1
                 bra.w   ApplyStatusAndItemsOnStats
 
-	; End of function UnequipAllItemsIfNotCursed
+    ; End of function UnequipAllItemsIfNotCursed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2091,7 +2091,7 @@ loc_918E:
                 movem.l (sp)+,d2-d3/d6-a0
                 rts
 
-	; End of function GetItemInventoryLocation
+    ; End of function GetItemInventoryLocation
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2124,7 +2124,7 @@ loc_91C0:
                 movem.l (sp)+,d1/d3/d7
                 rts
 
-	; End of function GetItemSlotContainingIndex
+    ; End of function GetItemSlotContainingIndex
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2142,7 +2142,7 @@ FindSpellName:
                 move.w  (sp)+,d1
                 rts
 
-	; End of function FindSpellName
+    ; End of function FindSpellName
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2170,7 +2170,7 @@ loc_91F6:
                 move.l  (sp)+,d0
                 rts
 
-	; End of function GetSpellDefAddress
+    ; End of function GetSpellDefAddress
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2201,7 +2201,7 @@ loc_921C:
                 movem.l (sp)+,d0/d3/a0
                 rts
 
-	; End of function GetSpellAndNumberOfSpells
+    ; End of function GetSpellAndNumberOfSpells
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2257,7 +2257,7 @@ loc_9278:
                 movem.l (sp)+,d0/d3-d5/a0
                 rts
 
-	; End of function LearnSpell
+    ; End of function LearnSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2275,7 +2275,7 @@ GetSpellCost:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function GetSpellCost
+    ; End of function GetSpellCost
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2319,7 +2319,7 @@ loc_92DE:
                 
                 bra.s   loc_92DE
 
-	; End of function GetCharEntryAddress
+    ; End of function GetCharEntryAddress
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2330,7 +2330,7 @@ SetCharacterByte:
                 move.b  d1,(a0,d7.w)
                 rts
 
-	; End of function SetCharacterByte
+    ; End of function SetCharacterByte
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2341,7 +2341,7 @@ SetCharacterWord:
                 move.w  d1,(a0,d7.w)
                 rts
 
-	; End of function SetCharacterWord
+    ; End of function SetCharacterWord
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2352,7 +2352,7 @@ SetCharacterLong:
                 move.l  d1,(a0,d7.w)
                 rts
 
-	; End of function SetCharacterLong
+    ; End of function SetCharacterLong
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2368,7 +2368,7 @@ GetCharacterByte:
                 move.b  (a0,d7.w),d1
                 rts
 
-	; End of function GetCharacterByte
+    ; End of function GetCharacterByte
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2383,7 +2383,7 @@ GetCharacterWord:
                 move.w  (a0,d7.w),d1
                 rts
 
-	; End of function GetCharacterWord
+    ; End of function GetCharacterWord
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2394,7 +2394,7 @@ dup_GetCharacterWord:
                 move.w  (a0,d7.w),d1
                 rts
 
-	; End of function dup_GetCharacterWord
+    ; End of function dup_GetCharacterWord
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2423,7 +2423,7 @@ loc_932A:
                 andi.w  #$FF,d1
                 rts
 
-	; End of function IncreaseAndClampByte
+    ; End of function IncreaseAndClampByte
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2457,7 +2457,7 @@ loc_935C:
                 movem.w (sp)+,d2-d3
                 rts
 
-	; End of function Clamp7BitIncreasing
+    ; End of function Clamp7BitIncreasing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2490,7 +2490,7 @@ loc_938A:
                 andi.w  #$FF,d1
                 rts
 
-	; End of function DecreaseAndClampByte
+    ; End of function DecreaseAndClampByte
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2516,7 +2516,7 @@ loc_93AE:
                 move.w  d1,(a0,d7.w)
                 rts
 
-	; End of function ClampWordIncreasing
+    ; End of function ClampWordIncreasing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2546,7 +2546,7 @@ loc_93D2:
                 move.w  (sp)+,d4
                 rts
 
-	; End of function ClampWordDecreasing
+    ; End of function ClampWordDecreasing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2572,7 +2572,7 @@ loc_93F2:
                 move.l  d1,(a0,d7.w)
                 rts
 
-	; End of function sub_93DA
+    ; End of function sub_93DA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2602,7 +2602,7 @@ loc_9416:
                 move.l  (sp)+,d4
                 rts
 
-	; End of function sub_93F8
+    ; End of function sub_93F8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2657,7 +2657,7 @@ loc_947C:
                 movem.l (sp)+,d0-d1/d3-d5
                 rts
 
-	; End of function GetDistanceBetweenEntities
+    ; End of function GetDistanceBetweenEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2666,7 +2666,7 @@ nullsub_9482:
                 
                 rts
 
-	; End of function nullsub_9482
+    ; End of function nullsub_9482
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2800,7 +2800,7 @@ LevelUp:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function LevelUp
+    ; End of function LevelUp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2916,7 +2916,7 @@ loc_96B4:
                 movem.l (sp)+,d0-d2/a0
                 rts
 
-	; End of function InitCharacterStats
+    ; End of function InitCharacterStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2984,7 +2984,7 @@ CalculateStatGain:
                 movem.l (sp)+,d0/d2-a0
                 rts
 
-	; End of function CalculateStatGain
+    ; End of function CalculateStatGain
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3007,7 +3007,7 @@ loc_9740:
                 movem.w (sp)+,d0-d1/d7
                 rts
 
-	; End of function NewGame
+    ; End of function NewGame
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3078,7 +3078,7 @@ loc_97A0:
                 movem.l (sp)+,d0-d3/a0-a1
                 rts
 
-	; End of function InitCharacterDataInRAM
+    ; End of function InitCharacterDataInRAM
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3103,7 +3103,7 @@ loc_980C:
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-	; End of function SetCharacterClassData
+    ; End of function SetCharacterClassData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3117,7 +3117,7 @@ Promote:
                 movem.w (sp)+,d1
                 rts
 
-	; End of function Promote
+    ; End of function Promote
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3162,7 +3162,7 @@ loc_986E:
                 movem.l (sp)+,d0/d7-a0
                 rts
 
-	; End of function InitGameSettings
+    ; End of function InitGameSettings
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3175,7 +3175,7 @@ CheckFlag:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function CheckFlag
+    ; End of function CheckFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3188,7 +3188,7 @@ SetFlag:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function SetFlag
+    ; End of function SetFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3202,7 +3202,7 @@ ClearFlag:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function ClearFlag
+    ; End of function ClearFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3220,7 +3220,7 @@ GetFlag:
                 lsr.b   d1,d0
                 rts
 
-	; End of function GetFlag
+    ; End of function GetFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3267,7 +3267,7 @@ loc_993E:
                 movem.l (sp)+,d0-d4/d7/a2-a4
                 rts
 
-	; End of function UpdateForce
+    ; End of function UpdateForce
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3288,7 +3288,7 @@ loc_9972:
                 move.l  (sp)+,d1
                 rts
 
-	; End of function JoinForce
+    ; End of function JoinForce
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3305,7 +3305,7 @@ LeaveForce:
                 move.l  (sp)+,d1
                 rts
 
-	; End of function LeaveForce
+    ; End of function LeaveForce
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3320,7 +3320,7 @@ IsInBattleParty:
                 movem.l (sp)+,d1
                 rts
 
-	; End of function IsInBattleParty
+    ; End of function IsInBattleParty
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3335,7 +3335,7 @@ JoinBattleParty:
                 move.l  (sp)+,d1
                 rts
 
-	; End of function JoinBattleParty
+    ; End of function JoinBattleParty
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3352,7 +3352,7 @@ LeaveBattleParty:
                 move.l  (sp)+,d1
                 rts
 
-	; End of function LeaveBattleParty
+    ; End of function LeaveBattleParty
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3367,7 +3367,7 @@ GetDealsItemAmount:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function GetDealsItemAmount
+    ; End of function GetDealsItemAmount
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3386,7 +3386,7 @@ loc_99FC:
                 movem.l (sp)+,d0-d2/a0
                 rts
 
-	; End of function AddItemToDeals
+    ; End of function AddItemToDeals
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3405,7 +3405,7 @@ loc_9A10:
                 movem.l (sp)+,d0-d2/a0
                 rts
 
-	; End of function RemoveItemFromDeals
+    ; End of function RemoveItemFromDeals
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3435,7 +3435,7 @@ return_9A3A:
                 
                 rts
 
-	; End of function GetDealsItemInfo
+    ; End of function GetDealsItemInfo
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3458,7 +3458,7 @@ loc_9A5C:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function AddItemToCaravan
+    ; End of function AddItemToCaravan
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3494,5 +3494,5 @@ loc_9A94:
                 movem.l (sp)+,d0/d7-a1
                 rts
 
-	; End of function RemoveItemFromCaravan
+    ; End of function RemoveItemFromCaravan
 

@@ -70,5 +70,5 @@ loc_7A30:
                 movem.l (sp)+,d1-d6/a0
                 rts
 
-	; End of function CheckBattle
+    ; End of function CheckBattle
 

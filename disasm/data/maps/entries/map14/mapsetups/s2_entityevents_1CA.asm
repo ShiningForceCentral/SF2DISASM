@@ -12,5 +12,5 @@ Map14_1CA_EntityEvent0:
                 jsr     (MapTileset050+$3D6-ms_map14_flag1CA_EntityEvents)
                 rts
 
-	; End of function Map14_1CA_EntityEvent0
+    ; End of function Map14_1CA_EntityEvent0
 

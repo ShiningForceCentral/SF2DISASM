@@ -19,7 +19,7 @@ Map0_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map0_ZoneEvent0
+    ; End of function Map0_ZoneEvent0
 
 cs_5E3C2:       textCursor $AAB
                 setActscriptWait ALLY_PETER,eas_Init

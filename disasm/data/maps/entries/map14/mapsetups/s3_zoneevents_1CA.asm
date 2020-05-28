@@ -13,5 +13,5 @@ Map14_1CA_ZoneEvent0:
                 script  cs_58F5C
                 rts
 
-	; End of function Map14_1CA_ZoneEvent0
+    ; End of function Map14_1CA_ZoneEvent0
 

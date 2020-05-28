@@ -19,5 +19,5 @@ loc_16C6:
                 bne.s   loc_16C6
                 rts
 
-	; End of function PlayMusicAfterCurrentOne
+    ; End of function PlayMusicAfterCurrentOne
 

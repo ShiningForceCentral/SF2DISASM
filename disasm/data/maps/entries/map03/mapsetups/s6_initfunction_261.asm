@@ -14,7 +14,7 @@ return_513CC:
                 
                 rts
 
-	; End of function ms_map3_flag261_InitFunction
+    ; End of function ms_map3_flag261_InitFunction
 
 cs_513CE:       hide ALLY_JAHA
                 csc_end
@@ -25,5 +25,5 @@ nullsub_513D4:
                 
                 rts
 
-	; End of function nullsub_513D4
+    ; End of function nullsub_513D4
 

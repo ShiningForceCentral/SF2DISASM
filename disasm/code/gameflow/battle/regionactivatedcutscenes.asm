@@ -35,5 +35,5 @@ loc_47EC2:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function ExecuteBattleRegionCutscene
+    ; End of function ExecuteBattleRegionCutscene
 

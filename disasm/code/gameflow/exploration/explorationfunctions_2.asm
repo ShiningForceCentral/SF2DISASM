@@ -73,7 +73,7 @@ loc_25888:
                 
                 bra.s   loc_2586A       
 
-	; End of function ExplorationLoop
+    ; End of function ExplorationLoop
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -91,7 +91,7 @@ loc_25896:
                 movem.w (sp)+,d1/d7
                 rts
 
-	; End of function ClearMapTempFlags
+    ; End of function ClearMapTempFlags
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -126,7 +126,7 @@ loc_258CE:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-	; End of function sub_258A8
+    ; End of function sub_258A8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -143,7 +143,7 @@ FadeOutToBlackAll:
                 dc.l VInt_UpdateScrollingData
                 rts
 
-	; End of function FadeOutToBlackAll
+    ; End of function FadeOutToBlackAll
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -158,7 +158,7 @@ return_2591A:
                 
                 rts
 
-	; End of function WaitForFadeToFinish
+    ; End of function WaitForFadeToFinish
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -189,7 +189,7 @@ loc_25948:
                 
                 bra.s   loc_25930       
 
-	; End of function WaitForEvent
+    ; End of function WaitForEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -212,7 +212,7 @@ ProcessMapEvent:
                 sndCom  SFX_BATTLEFIELD_DEATH
                 rts
 
-	; End of function ProcessMapEvent
+    ; End of function ProcessMapEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -286,7 +286,7 @@ loc_25A18:
                 jsr     sub_440AC
                 rts
 
-	; End of function ProcessMapEventType1_Warp
+    ; End of function ProcessMapEventType1_Warp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -306,7 +306,7 @@ UpdatePlayerPosFromMapEvent:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function UpdatePlayerPosFromMapEvent
+    ; End of function UpdatePlayerPosFromMapEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -316,7 +316,7 @@ ProcessMapEventType2_GetIntoCaravan:
                 jsr     j_MapEventType2 
                 rts
 
-	; End of function ProcessMapEventType2_GetIntoCaravan
+    ; End of function ProcessMapEventType2_GetIntoCaravan
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -326,7 +326,7 @@ ProcessMapEventType3_GetIntoRaft:
                 jsr     j_MapEventType3
                 rts
 
-	; End of function ProcessMapEventType3_GetIntoRaft
+    ; End of function ProcessMapEventType3_GetIntoRaft
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -336,7 +336,7 @@ ProcessMapEventType4_GetOutOfCaravan:
                 jsr     j_MapEventType4
                 rts
 
-	; End of function ProcessMapEventType4_GetOutOfCaravan
+    ; End of function ProcessMapEventType4_GetOutOfCaravan
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -346,7 +346,7 @@ ProcessMapEventType5_GetOutOfRaft:
                 jsr     j_MapEventType5
                 rts
 
-	; End of function ProcessMapEventType5_GetOutOfRaft
+    ; End of function ProcessMapEventType5_GetOutOfRaft
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -356,7 +356,7 @@ j_j_ShrinkInBowieAndFollowers:
                 jsr     j_ShrinkInBowieAndFollowers
                 rts
 
-	; End of function j_j_ShrinkInBowieAndFollowers
+    ; End of function j_j_ShrinkInBowieAndFollowers
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -366,7 +366,7 @@ j_j_GrowOutBowieAndFollowers:
                 jsr     j_GrowOutBowieAndFollowers
                 rts
 
-	; End of function j_j_GrowOutBowieAndFollowers
+    ; End of function j_j_GrowOutBowieAndFollowers
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -380,5 +380,5 @@ ProcessMapEventType6_ZoneEvent:
                 jsr     j_RunMapSetupZoneEvent
                 rts
 
-	; End of function ProcessMapEventType6_ZoneEvent
+    ; End of function ProcessMapEventType6_ZoneEvent
 

@@ -133,7 +133,7 @@ loc_23BF4:
                 dbf     d7,loc_23BC2    
                 rts
 
-	; End of function BattleLoop
+    ; End of function BattleLoop
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -169,7 +169,7 @@ loc_23C4C:
                 movem.l (sp)+,d0-d7
                 rts
 
-	; End of function HealAliveCharsAndImmortals
+    ; End of function HealAliveCharsAndImmortals
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -219,7 +219,7 @@ return_23CB8:
                 
                 rts
 
-	; End of function GetRemainingFighters
+    ; End of function GetRemainingFighters
 
 
 ; START OF FUNCTION CHUNK FOR BattleLoop
@@ -333,7 +333,7 @@ byte_23DFA:
                 clr.w   d4
                 rts
 
-	; End of function sub_23D98
+    ; End of function sub_23D98
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -351,7 +351,7 @@ return_23E36:
                 
                 rts
 
-	; End of function sub_23E1A
+    ; End of function sub_23E1A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -364,7 +364,7 @@ HideBattlefieldWindows:
                 jsr     j_HideFighterMiniStatusWindow
                 rts
 
-	; End of function HideBattlefieldWindows
+    ; End of function HideBattlefieldWindows
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -421,7 +421,7 @@ loc_23EAA:
                 jsr     (GetSavePointForMap).w
                 rts
 
-	; End of function GetEgressPositionForBattle
+    ; End of function GetEgressPositionForBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -732,7 +732,7 @@ loc_2423E:
                 unlk    a6
                 rts
 
-	; End of function sub_23EB0
+    ; End of function sub_23EB0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -960,7 +960,7 @@ loc_24486:
                 unlk    a6
                 rts
 
-	; End of function HandleAfterTurnEffects
+    ; End of function HandleAfterTurnEffects
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1015,7 +1015,7 @@ loc_244D4:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function SpawnEnemySkipCamera
+    ; End of function SpawnEnemySkipCamera
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1025,7 +1025,7 @@ ClearDeadCombatantsListLength:
                 clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 rts
 
-	; End of function ClearDeadCombatantsListLength
+    ; End of function ClearDeadCombatantsListLength
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1135,7 +1135,7 @@ return_24640:
                 
                 rts
 
-	; End of function HandleKilledCombatants
+    ; End of function HandleKilledCombatants
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1158,7 +1158,7 @@ return_24660:
                 
                 rts
 
-	; End of function UpdateTargetListForCombatant
+    ; End of function UpdateTargetListForCombatant
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1186,7 +1186,7 @@ loc_2466C:
                 moveq   #1,d0
                 bsr.s   UpdateTargetListForCombatant
                 moveq   #$1E,d0
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 jsr     j_MakeRangeLists
@@ -1410,7 +1410,7 @@ loc_24952:
                 clr.w   d0
                 bra.w   loc_25188
 
-	; End of function sub_24662
+    ; End of function sub_24662
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1427,7 +1427,7 @@ sub_24966:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_24966
+    ; End of function sub_24966
 
 
 ; START OF FUNCTION CHUNK FOR sub_24662
@@ -1786,7 +1786,7 @@ loc_24D42:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_24C4E
+    ; End of function sub_24C4E
 
 
 ; START OF FUNCTION CHUNK FOR sub_24662
@@ -2133,7 +2133,7 @@ sub_2519E:
                 move.w  -2(a6),d0
                 rts
 
-	; End of function sub_2519E
+    ; End of function sub_2519E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2252,7 +2252,7 @@ byte_252F2:
                 clrFlg  $58             ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 bra.w   loc_25236
 
-	; End of function BattlefieldMenuActions
+    ; End of function BattlefieldMenuActions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2369,7 +2369,7 @@ loc_25480:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_252FA
+    ; End of function sub_252FA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2426,7 +2426,7 @@ loc_254D4:
                 sndCom  SFX_VALIDATION
                 rts
 
-	; End of function sub_2548E
+    ; End of function sub_2548E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2443,7 +2443,7 @@ loc_25512:
                 addq.w  #1,d0
                 dbf     d7,loc_25512
 
-	; End of function UpdateAllEnemyAI
+    ; End of function UpdateAllEnemyAI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2463,7 +2463,7 @@ return_25542:
                 
                 rts
 
-	; End of function UpdateEnemyAI
+    ; End of function UpdateEnemyAI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2518,7 +2518,7 @@ loc_25594:
                 clr.b   ((BATTLE_CURRENT_TURN_OFFSET-$1000000)).w
                 rts
 
-	; End of function CreateRandomizedTurnOrder
+    ; End of function CreateRandomizedTurnOrder
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2567,7 +2567,7 @@ return_2560E:
                 
                 rts
 
-	; End of function AddRandomizedAGIToTurnOrder
+    ; End of function AddRandomizedAGIToTurnOrder
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2624,7 +2624,7 @@ return_256A0:
                 
                 rts
 
-	; End of function LoadBattle
+    ; End of function LoadBattle
 
 tbl_RelativeTileMoveX:
                 dc.w 1
@@ -2661,7 +2661,7 @@ GetEntityPositionAfterApplyingFacing:
                 movem.l (sp)+,d2-d3/a0
                 rts
 
-	; End of function GetEntityPositionAfterApplyingFacing
+    ; End of function GetEntityPositionAfterApplyingFacing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2698,7 +2698,7 @@ loc_25724:
                 movem.l (sp)+,d0-d2/d7
                 rts
 
-	; End of function sub_256E6
+    ; End of function sub_256E6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2725,7 +2725,7 @@ PrintAllActivatedDefCons:
                 clsTxt
                 rts
 
-	; End of function PrintAllActivatedDefCons
+    ; End of function PrintAllActivatedDefCons
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2747,7 +2747,7 @@ loc_2578A:
                 addq.w  #1,d1
                 rts
 
-	; End of function PrintActivatedDefCon
+    ; End of function PrintActivatedDefCon
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2773,5 +2773,5 @@ loc_257BA:
                 movem.w (sp)+,d0-d7
                 rts
 
-	; End of function SetMoveSfx
+    ; End of function SetMoveSfx
 

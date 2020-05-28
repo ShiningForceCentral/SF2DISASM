@@ -11,7 +11,7 @@ ms_map6_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map6_AreaDescriptions
+    ; End of function ms_map6_AreaDescriptions
 
 byte_54D9A:     msDesc 5, 7, 4, 0       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                                         ; "A book...{N}GREAT VOYAGE{W1}"
@@ -56,7 +56,7 @@ return_54E02:
                 
                 rts
 
-	; End of function Map6_DescFunc0
+    ; End of function Map6_DescFunc0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -89,5 +89,5 @@ return_54E4A:
                 
                 rts
 
-	; End of function Map6_DescFunc1
+    ; End of function Map6_DescFunc1
 

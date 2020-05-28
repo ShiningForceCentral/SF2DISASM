@@ -22,5 +22,5 @@ Map22_DefaultItemEvent1:
                 
                 rts
 
-	; End of function Map22_ItemEvent0
+    ; End of function Map22_ItemEvent0
 

@@ -24,7 +24,7 @@ Map9_EntityEvent2:
                 txt     $553            ; "Hassan is a port town.{W2}{N}But, we've had no trading{N}recently.{W1}"
                 rts
 
-	; End of function Map9_EntityEvent2
+    ; End of function Map9_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -35,7 +35,7 @@ Map9_EntityEvent3:
                 txt     $554            ; "Our ancestors came here from{N}Rune by way of the sea.{W2}{N}They should've avoided such{N}an inconvenient place like{N}this.{W1}"
                 rts
 
-	; End of function Map9_EntityEvent3
+    ; End of function Map9_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -46,7 +46,7 @@ Map9_EntityEvent4:
                 txt     $565            ; "I think I'll take a nap{N}now.  Bye.{W1}"
                 rts
 
-	; End of function Map9_EntityEvent4
+    ; End of function Map9_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -57,7 +57,7 @@ Map9_EntityEvent5:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map9_EntityEvent5
+    ; End of function Map9_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -68,7 +68,7 @@ Map9_EntityEvent6:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map9_EntityEvent6
+    ; End of function Map9_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -78,7 +78,7 @@ Map9_EntityEvent7:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map9_EntityEvent7
+    ; End of function Map9_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -108,7 +108,7 @@ return_567C6:
                 
                 rts
 
-	; End of function Map9_EntityEvent8
+    ; End of function Map9_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -120,7 +120,7 @@ Map9_EntityEvent9:
                 txt     $558            ; "By raft?  Wow!{N}You killed the Kraken?!{W1}"
                 rts
 
-	; End of function Map9_EntityEvent9
+    ; End of function Map9_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -131,7 +131,7 @@ Map9_EntityEvent10:
                 txt     $559            ; "The river is drying up{N}because of the drought.{W2}{N}To the west?{N}If you really want to go,{N}ask Dr. {NAME;11}....{W1}"
                 rts
 
-	; End of function Map9_EntityEvent10
+    ; End of function Map9_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -142,7 +142,7 @@ Map9_EntityEvent11:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map9_EntityEvent11
+    ; End of function Map9_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -186,7 +186,7 @@ return_56840:
                 
                 rts
 
-	; End of function Map9_EntityEvent0
+    ; End of function Map9_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -202,7 +202,7 @@ return_56852:
                 
                 rts
 
-	; End of function Map9_EntityEvent1
+    ; End of function Map9_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -211,5 +211,5 @@ Map9_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map9_DefaultEntityEvent
+    ; End of function Map9_DefaultEntityEvent
 

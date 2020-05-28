@@ -19,7 +19,7 @@ return_51F00:
                 
                 rts
 
-	; End of function Map16_ZoneEvent0
+    ; End of function Map16_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -42,7 +42,7 @@ return_51F26:
                 
                 rts
 
-	; End of function Map16_ZoneEvent1
+    ; End of function Map16_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -51,5 +51,5 @@ Map16_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map16_DefaultZoneEvent
+    ; End of function Map16_DefaultZoneEvent
 

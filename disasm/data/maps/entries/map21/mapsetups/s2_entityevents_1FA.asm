@@ -30,7 +30,7 @@ return_53EDC:
                 
                 rts
 
-	; End of function Map21_EntityEvent0
+    ; End of function Map21_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -42,7 +42,7 @@ Map21_1F5_EntityEvent0:
                 txt     $244            ; "He's fainted.{W1}"
                 rts
 
-	; End of function Map21_1F5_EntityEvent0
+    ; End of function Map21_1F5_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -55,7 +55,7 @@ Map21_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map21_261_EntityEvent0
+    ; End of function Map21_261_EntityEvent0
 
 cs_53EF4:       entityActionsWait 128
                  moveRight 1

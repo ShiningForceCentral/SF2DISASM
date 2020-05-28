@@ -56,7 +56,7 @@ loc_4450A:
                 unlk    a6
                 rts
 
-	; End of function sub_444A2
+    ; End of function sub_444A2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -91,7 +91,7 @@ loc_4455C:
                 movem.l (sp)+,d0-d5/d7-a0
                 rts
 
-	; End of function sub_44536
+    ; End of function sub_44536
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -141,7 +141,7 @@ loc_445A0:
                 movem.l (sp)+,d0-a0
                 rts
 
-	; End of function InitializeNewEntity
+    ; End of function InitializeNewEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -204,7 +204,7 @@ loc_4463C:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function DeclareNewEntity
+    ; End of function DeclareNewEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -238,7 +238,7 @@ loc_44688:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function ClearEntities
+    ; End of function ClearEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -442,5 +442,5 @@ loc_448BC:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function MoveEntitiesToBattlePositions
+    ; End of function MoveEntitiesToBattlePositions
 

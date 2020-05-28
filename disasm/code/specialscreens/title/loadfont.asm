@@ -33,5 +33,5 @@ loc_2C76E:
                 jsr     (CopyBytes).w   
                 rts
 
-	; End of function LoadTitleScreenFont
+    ; End of function LoadTitleScreenFont
 

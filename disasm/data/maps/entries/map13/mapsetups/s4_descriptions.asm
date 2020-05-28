@@ -11,7 +11,7 @@ ms_map13_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map13_AreaDescriptions
+    ; End of function ms_map13_AreaDescriptions
 
 byte_582BC:     msDesc 17, 2, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                                         ; "A book...{N}VIVA, FRIENDSHIP!{W1}"

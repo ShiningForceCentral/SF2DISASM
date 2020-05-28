@@ -10,5 +10,5 @@ Map59_21F_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map59_21F_DefaultEntityEvent
+    ; End of function Map59_21F_DefaultEntityEvent
 

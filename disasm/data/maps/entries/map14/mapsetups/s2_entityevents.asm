@@ -22,7 +22,7 @@ Map14_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map14_EntityEvent0
+    ; End of function Map14_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -33,7 +33,7 @@ Map14_EntityEvent1:
                 txt     $8CF            ; "I can't talk now!{N}I'm working!{W1}"
                 rts
 
-	; End of function Map14_EntityEvent1
+    ; End of function Map14_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -44,7 +44,7 @@ Map14_EntityEvent2:
                 txt     $8CE            ; "{LEADER}, bring that plank{N}above deck.{W1}"
                 rts
 
-	; End of function Map14_EntityEvent2
+    ; End of function Map14_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -55,7 +55,7 @@ Map14_EntityEvent3:
                 txt     $8D0            ; "Boy, I sure hope {NAME;3}{N}can swim....{W1}"
                 rts
 
-	; End of function Map14_EntityEvent3
+    ; End of function Map14_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -66,7 +66,7 @@ Map14_EntityEvent4:
                 txt     $8D1            ; "What can I do to help?{W1}"
                 rts
 
-	; End of function Map14_EntityEvent4
+    ; End of function Map14_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -77,7 +77,7 @@ Map14_EntityEvent5:
                 txt     $8D2            ; "Our home town will be{N}reborn!{W1}"
                 rts
 
-	; End of function Map14_EntityEvent5
+    ; End of function Map14_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -88,7 +88,7 @@ Map14_EntityEvent6:
                 txt     $8D3            ; "They're mining granite for{N}our town at North Cliff.{W1}"
                 rts
 
-	; End of function Map14_EntityEvent6
+    ; End of function Map14_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -99,5 +99,5 @@ Map14_EntityEvent7:
                 txt     $8D4            ; "You had better bring up that{N}plank!{W1}"
                 rts
 
-	; End of function Map14_EntityEvent7
+    ; End of function Map14_EntityEvent7
 

@@ -26,7 +26,7 @@ return_5E070:
                 
                 rts
 
-	; End of function Map39_EntityEvent0
+    ; End of function Map39_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -37,7 +37,7 @@ Map39_EntityEvent1:
                 txt     $7FB            ; "Pacalon abandoned us!{W1}"
                 rts
 
-	; End of function Map39_EntityEvent1
+    ; End of function Map39_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -48,7 +48,7 @@ Map39_EntityEvent2:
                 txt     $7FC            ; "Can you imagine how many{N}people were killed?{W1}"
                 rts
 
-	; End of function Map39_EntityEvent2
+    ; End of function Map39_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -60,7 +60,7 @@ Map39_EntityEvent3:
                 txt     $7FE            ; "I can go outside now!{W1}"
                 rts
 
-	; End of function Map39_EntityEvent3
+    ; End of function Map39_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -71,7 +71,7 @@ Map39_EntityEvent4:
                 txt     $7FF            ; "I wasn't scared!  It was{N}hard for me not to go out{N}and fight.{W1}"
                 rts
 
-	; End of function Map39_EntityEvent4
+    ; End of function Map39_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -82,7 +82,7 @@ Map39_EntityEvent5:
                 txt     $800            ; "Tom is lying!{N}I know he wet his pants{N}just now.{W1}"
                 rts
 
-	; End of function Map39_EntityEvent5
+    ; End of function Map39_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -93,7 +93,7 @@ Map39_EntityEvent6:
                 txt     $801            ; "{NAME;26} hid us here{N}when the devils invaded.{W1}"
                 rts
 
-	; End of function Map39_EntityEvent6
+    ; End of function Map39_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -113,7 +113,7 @@ return_5E0AE:
                 
                 rts
 
-	; End of function Map39_EntityEvent7
+    ; End of function Map39_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -122,5 +122,5 @@ Map39_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map39_DefaultEntityEvent
+    ; End of function Map39_DefaultEntityEvent
 

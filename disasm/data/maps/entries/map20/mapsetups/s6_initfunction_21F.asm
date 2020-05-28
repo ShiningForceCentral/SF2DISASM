@@ -21,5 +21,5 @@ byte_633BA:
                 jsr     (FadeInFromBlack).w
                 rts
 
-	; End of function ms_map20_flag21F_InitFunction
+    ; End of function ms_map20_flag21F_InitFunction
 

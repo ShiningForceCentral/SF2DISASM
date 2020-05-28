@@ -79,5 +79,5 @@ byte_59CF4:
                 clrFlg  $220            ; Battle 44 completed
                 rts
 
-	; End of function ms_map24_InitFunction
+    ; End of function ms_map24_InitFunction
 

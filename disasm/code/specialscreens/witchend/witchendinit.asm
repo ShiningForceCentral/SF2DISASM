@@ -22,5 +22,5 @@ WitchEnd:
                 dc.l VInt_WitchBlink
                 jmp     j_EndGame
 
-	; End of function WitchEnd
+    ; End of function WitchEnd
 

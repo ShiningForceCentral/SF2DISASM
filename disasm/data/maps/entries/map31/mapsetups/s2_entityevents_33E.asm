@@ -23,7 +23,7 @@ Map31_33E_EntityEvent0:
                 txt     $7F1            ; "But now, it's like a ghost{N}town.{W1}"
                 rts
 
-	; End of function Map31_33E_EntityEvent0
+    ; End of function Map31_33E_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -34,7 +34,7 @@ Map31_33E_EntityEvent1:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map31_33E_EntityEvent1
+    ; End of function Map31_33E_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -45,7 +45,7 @@ Map31_33E_EntityEvent2:
                 txt     $7F2            ; "You saved us!{N}You saved our town!{W1}"
                 rts
 
-	; End of function Map31_33E_EntityEvent2
+    ; End of function Map31_33E_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -57,7 +57,7 @@ Map31_33E_EntityEvent3:
                 txt     $7F4            ; "Some golems are bad, some{N}are good.  I want to see a{N}good golem!{W1}"
                 rts
 
-	; End of function Map31_33E_EntityEvent3
+    ; End of function Map31_33E_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -78,7 +78,7 @@ return_5D50C:
                 
                 rts
 
-	; End of function Map31_33E_EntityEvent4
+    ; End of function Map31_33E_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -89,7 +89,7 @@ Map31_33E_EntityEvent5:
                 txt     $7F5            ; "We'll really miss you,{N}{NAME;26}....{W1}"
                 rts
 
-	; End of function Map31_33E_EntityEvent5
+    ; End of function Map31_33E_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -101,7 +101,7 @@ Map31_33E_EntityEvent6:
                 txt     $7F7            ; "Will you get rid of it?{W1}"
                 rts
 
-	; End of function Map31_33E_EntityEvent6
+    ; End of function Map31_33E_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -111,7 +111,7 @@ Map31_33E_EntityEvent7:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map31_33E_EntityEvent7
+    ; End of function Map31_33E_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -131,7 +131,7 @@ return_5D53E:
                 
                 rts
 
-	; End of function Map31_33E_EntityEvent8
+    ; End of function Map31_33E_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -140,7 +140,7 @@ nullsub_5D540:
                 
                 rts
 
-	; End of function nullsub_5D540
+    ; End of function nullsub_5D540
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -151,7 +151,7 @@ Map31_33E_EntityEvent9:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map31_33E_EntityEvent9
+    ; End of function Map31_33E_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -160,5 +160,5 @@ Map31_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map31_DefaultEntityEvent
+    ; End of function Map31_DefaultEntityEvent
 

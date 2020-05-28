@@ -25,7 +25,7 @@ return_53994:
                 
                 rts
 
-	; End of function ms_map20_InitFunction
+    ; End of function ms_map20_InitFunction
 
 cs_53996:       textCursor $880
                 setPos ALLY_BOWIE,23,39,DOWN

@@ -33,7 +33,7 @@ byte_58068:
                 txt     $58F            ; "Now we can use that tunnel{N}to travel between Polca and{N}the wilderness area!{W1}"
                 rts
 
-	; End of function Map13_EntityEvent1
+    ; End of function Map13_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -44,7 +44,7 @@ Map13_EntityEvent2:
                 txt     $590            ; "Breathe deeply....{W2}{N}Wonderful air, huh?{W1}"
                 rts
 
-	; End of function Map13_EntityEvent2
+    ; End of function Map13_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -64,7 +64,7 @@ return_5808E:
                 
                 rts
 
-	; End of function Map13_EntityEvent3
+    ; End of function Map13_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,7 +75,7 @@ Map13_EntityEvent4:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map13_EntityEvent4
+    ; End of function Map13_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ Map13_EntityEvent5:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map13_EntityEvent5
+    ; End of function Map13_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -107,7 +107,7 @@ return_580C4:
                 
                 rts
 
-	; End of function Map13_EntityEvent6
+    ; End of function Map13_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -117,7 +117,7 @@ Map13_EntityEvent7:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map13_EntityEvent7
+    ; End of function Map13_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -128,7 +128,7 @@ Map13_EntityEvent8:
                 txt     $593            ; "Mt. Volcano is home to{N}beastmen.{W2}{N}We were a warlike tribe, but{N}we've almost forgotten how{N}to fight.{W1}"
                 rts
 
-	; End of function Map13_EntityEvent8
+    ; End of function Map13_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -139,7 +139,7 @@ Map13_EntityEvent9:
                 txt     $594            ; "Young men these days are{N}lucky!  I wish I was young{N}again!{W1}"
                 rts
 
-	; End of function Map13_EntityEvent9
+    ; End of function Map13_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -168,7 +168,7 @@ return_58100:
                 
                 rts
 
-	; End of function Map13_EntityEvent10
+    ; End of function Map13_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -179,7 +179,7 @@ Map13_EntityEvent11:
                 txt     $599            ; "Clank!  Clank!{N}All of our weapons are made{N}by me!{W2}{N}But, who uses them in this{N}peaceful country?{W1}"
                 rts
 
-	; End of function Map13_EntityEvent11
+    ; End of function Map13_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -190,7 +190,7 @@ Map13_EntityEvent0:
                 txt     $59A            ; "Hirsute?  'Cause I'm a{N}beastman.{W2}{N}I'm not hairy enough though.{N}I envy those hairy guys!{W1}"
                 rts
 
-	; End of function Map13_EntityEvent0
+    ; End of function Map13_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -201,7 +201,7 @@ Map13_EntityEvent12:
                 txt     $5B8            ; "Ah...stop...no!{N}I don't want...to see....{N}My...head...aches....{W1}"
                 rts
 
-	; End of function Map13_EntityEvent12
+    ; End of function Map13_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -210,7 +210,7 @@ Map13_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map13_DefaultEntityEvent
+    ; End of function Map13_DefaultEntityEvent
 
 cs_58116:       textCursor $595
                 nextSingleText $0,137   ; "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"

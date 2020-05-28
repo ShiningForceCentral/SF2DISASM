@@ -11,7 +11,7 @@ ms_map11_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map11_AreaDescriptions
+    ; End of function ms_map11_AreaDescriptions
 
 byte_57A98:     msDesc 6, 12, 9, 0      ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
                                         ; "A big statue of a heroic{N}bird.{W1}"

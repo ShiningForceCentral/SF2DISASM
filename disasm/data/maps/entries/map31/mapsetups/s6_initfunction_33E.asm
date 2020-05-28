@@ -21,7 +21,7 @@ return_5D63A:
                 
                 rts
 
-	; End of function ms_map31_flag33E_InitFunction
+    ; End of function ms_map31_flag33E_InitFunction
 
 cs_5D63C:       setPos 136,30,6,LEFT
                 csc_end

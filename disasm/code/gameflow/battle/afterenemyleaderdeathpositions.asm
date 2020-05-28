@@ -76,7 +76,7 @@ loc_47E66:
                 movem.l (sp)+,d0-d1/d7-a0
                 rts
 
-	; End of function ApplyPositionsAfterEnemyLeaderDies
+    ; End of function ApplyPositionsAfterEnemyLeaderDies
 
 AfterBattlePositions:
                 dc.w 5                  ; battle 5

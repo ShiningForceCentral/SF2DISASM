@@ -551,7 +551,7 @@ loc_219E8:
                 
                 bra.w   loc_21286
 
-	; End of function MainMenuActions
+    ; End of function MainMenuActions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -574,7 +574,7 @@ loc_21A0A:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function sub_219EC
+    ; End of function sub_219EC
 
 byte_21A16:     dc.b 0
                 dc.b 2
@@ -602,5 +602,5 @@ loc_21A34:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function sub_21A1C
+    ; End of function sub_21A1C
 

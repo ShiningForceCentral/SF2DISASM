@@ -17,7 +17,7 @@ return_55830:
                 
                 rts
 
-	; End of function ms_map7_InitFunction
+    ; End of function ms_map7_InitFunction
 
 cs_55832:       textCursor $50A
                 mapLoad 7,6,2

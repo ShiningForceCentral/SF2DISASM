@@ -579,7 +579,7 @@ byte_207CC:
                 clsTxt
                 bra.w   loc_20088
 
-	; End of function ShopMenuActions
+    ; End of function ShopMenuActions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -593,7 +593,7 @@ WaitForMusicResumeAndPlayerInput_Shop:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function WaitForMusicResumeAndPlayerInput_Shop
+    ; End of function WaitForMusicResumeAndPlayerInput_Shop
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -612,7 +612,7 @@ loc_207F6:
                 dbf     d7,loc_207F6
                 rts
 
-	; End of function sub_207E6
+    ; End of function sub_207E6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -640,7 +640,7 @@ loc_20828:
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-	; End of function DetermineDealsItemsNotInCurrentShop
+    ; End of function DetermineDealsItemsNotInCurrentShop
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -665,7 +665,7 @@ loc_2084C:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function DoesCurrentShopContainItem
+    ; End of function DoesCurrentShopContainItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -689,5 +689,5 @@ loc_20872:
                 movem.l (sp)+,d0/d7
                 rts
 
-	; End of function GetCurrentShopDefAddress
+    ; End of function GetCurrentShopDefAddress
 

@@ -10,5 +10,5 @@ Map5_212_DefaultItemEvent0:
                 
                 rts
 
-	; End of function Map5_212_DefaultItemEvent0
+    ; End of function Map5_212_DefaultItemEvent0
 

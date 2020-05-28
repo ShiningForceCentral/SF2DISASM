@@ -14,7 +14,7 @@ return_5CA5C:
                 
                 rts
 
-	; End of function ms_map63_InitFunction
+    ; End of function ms_map63_InitFunction
 
 cs_5CA5E:       setSprite ALLY_CLAUDE,MAPSPRITE_POSE3
                 setFacing ALLY_CLAUDE,DOWN

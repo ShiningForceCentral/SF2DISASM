@@ -57,7 +57,7 @@ return_54A0C:
                 
                 rts
 
-	; End of function Map6_EntityEvent0
+    ; End of function Map6_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ return_54A32:
                 
                 rts
 
-	; End of function Map6_EntityEvent1
+    ; End of function Map6_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -124,7 +124,7 @@ return_54A68:
                 
                 rts
 
-	; End of function Map6_EntityEvent2
+    ; End of function Map6_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -161,7 +161,7 @@ return_54A9A:
                 
                 rts
 
-	; End of function Map6_EntityEvent3
+    ; End of function Map6_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -202,7 +202,7 @@ return_54AD6:
                 
                 rts
 
-	; End of function Map6_EntityEvent4
+    ; End of function Map6_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -253,7 +253,7 @@ return_54B34:
                 
                 rts
 
-	; End of function Map6_EntityEvent5
+    ; End of function Map6_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -280,7 +280,7 @@ return_54B52:
                 
                 rts
 
-	; End of function Map6_EntityEvent6
+    ; End of function Map6_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -315,7 +315,7 @@ return_54B7C:
                 
                 rts
 
-	; End of function Map6_EntityEvent7
+    ; End of function Map6_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -343,7 +343,7 @@ return_54B9E:
                 
                 rts
 
-	; End of function Map6_EntityEvent8
+    ; End of function Map6_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -362,7 +362,7 @@ return_54BB0:
                 
                 rts
 
-	; End of function Map6_EntityEvent9
+    ; End of function Map6_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -383,7 +383,7 @@ return_54BCA:
                 
                 rts
 
-	; End of function Map6_EntityEvent10
+    ; End of function Map6_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -420,7 +420,7 @@ return_54BFC:
                 
                 rts
 
-	; End of function Map6_EntityEvent11
+    ; End of function Map6_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -439,7 +439,7 @@ return_54C0E:
                 
                 rts
 
-	; End of function Map6_EntityEvent12
+    ; End of function Map6_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -515,7 +515,7 @@ return_54CC4:
                 
                 rts
 
-	; End of function Map6_EntityEvent13
+    ; End of function Map6_EntityEvent13
 
 cs_54CC6:       setFacing FOLLOWER_B,UP
                 nod FOLLOWER_B

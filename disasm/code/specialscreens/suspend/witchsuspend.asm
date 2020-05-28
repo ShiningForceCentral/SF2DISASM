@@ -35,5 +35,5 @@ loc_7068:
                 movea.l (p_Start).w,a0  
                 jmp     (a0)
 
-	; End of function WitchSuspend
+    ; End of function WitchSuspend
 

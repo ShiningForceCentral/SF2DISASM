@@ -3220,7 +3220,7 @@ loc_11B9E:
                 move.w  (sp)+,d0
                 
                 if (FORCE_MEMBERS_EXPANSION=0)
-                bsr.w   GetAllyPortrait 
+                bsrIfVanillaRom.w GetAllyPortrait
                 endif
                 
                 bsr.w   LoadPortrait    
@@ -3319,7 +3319,7 @@ BuildMemberStatsScreen:
                 blt.s   loc_11CA6
                 
                 if (FORCE_MEMBERS_EXPANSION=0)
-                bsr.w   GetAllyPortrait 
+                bsrIfVanillaRom.w GetAllyPortrait
                 endif
                 
                 bsr.w   LoadPortrait    
@@ -4183,7 +4183,7 @@ aJewel:
                 
                 move.w  -2(a6),d0
                 bne.s   @DrawSpellIcons
-                chkFlg  $180
+                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
                 beq.s   @DrawSpellIcons
                 move.w  d7,-(sp)
                 lea     aJewel(pc), a0  
@@ -4197,7 +4197,7 @@ aJewel:
                 adda.w  #$39E,a1
                 move.w  #$92,d1 
                 bsr.w   CopyMemberScreenIconsToVDPTileOrder
-                chkFlg  $181
+                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
                 beq.s   @DrawSpellIcons
                 movea.l -6(a6),a1
                 adda.w  #$3A2,a1

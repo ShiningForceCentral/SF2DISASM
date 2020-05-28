@@ -38,7 +38,7 @@ loc_49022:
                 movem.l (sp)+,d0/a0-a1
                 rts
 
-	; End of function ApplyStormEffect
+    ; End of function ApplyStormEffect
 
 plt_IntroStormEffect:
                 dc.w 0

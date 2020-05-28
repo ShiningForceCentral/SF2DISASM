@@ -58,7 +58,7 @@ return_50F96:
                 
                 rts
 
-	; End of function Map3_EntityEvent0
+    ; End of function Map3_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ return_50FB8:
                 
                 rts
 
-	; End of function Map3_EntityEvent1
+    ; End of function Map3_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -105,7 +105,7 @@ return_50FCA:
                 
                 rts
 
-	; End of function Map3_EntityEvent2
+    ; End of function Map3_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -117,7 +117,7 @@ Map3_EntityEvent3:
                 txt     $1E5            ; "Sometimes he may badger{N}you, but that's because he{N}loves you.{W1}"
                 rts
 
-	; End of function Map3_EntityEvent3
+    ; End of function Map3_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -130,7 +130,7 @@ Map3_EntityEvent4:
                 txt     $1E8            ; "He even teaches a{N}mischievous kid like you.{W1}"
                 rts
 
-	; End of function Map3_EntityEvent4
+    ; End of function Map3_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -141,7 +141,7 @@ Map3_EntityEvent5:
                 txt     $1E9            ; "Good morning {LEADER}!{N}It's a wonderful day,{N}isn't it?{W1}"
                 rts
 
-	; End of function Map3_EntityEvent5
+    ; End of function Map3_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -152,7 +152,7 @@ Map3_EntityEvent6:
                 txt     $1EA            ; "Zzzzz...zzzzz....{W1}"
                 rts
 
-	; End of function Map3_EntityEvent6
+    ; End of function Map3_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -165,7 +165,7 @@ Map3_EntityEvent7:
                 txt     $1ED            ; "You must realize how lucky{N}you are.{W1}"
                 rts
 
-	; End of function Map3_EntityEvent7
+    ; End of function Map3_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -176,7 +176,7 @@ Map3_EntityEvent8:
                 txt     $1EE            ; "Hi, would-be customer!{N}Sorry, we are not open yet.{W1}"
                 rts
 
-	; End of function Map3_EntityEvent8
+    ; End of function Map3_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -188,7 +188,7 @@ Map3_EntityEvent9:
                 txt     $1F0            ; "All ships left early this{N}morning.{W1}"
                 rts
 
-	; End of function Map3_EntityEvent9
+    ; End of function Map3_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -207,7 +207,7 @@ return_5101E:
                 
                 rts
 
-	; End of function Map3_EntityEvent10
+    ; End of function Map3_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -226,7 +226,7 @@ return_51030:
                 
                 rts
 
-	; End of function Map3_EntityEvent11
+    ; End of function Map3_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -238,7 +238,7 @@ Map3_EntityEvent12:
                 txt     $1F3            ; "There is no school outside!{N}Go to school!{W1}"
                 rts
 
-	; End of function Map3_EntityEvent12
+    ; End of function Map3_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -248,7 +248,7 @@ Map3_EntityEvent13:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map3_EntityEvent13
+    ; End of function Map3_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -268,5 +268,5 @@ Map3_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map3_EntityEvent15
+    ; End of function Map3_EntityEvent15
 

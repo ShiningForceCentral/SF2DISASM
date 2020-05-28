@@ -14,7 +14,7 @@ AlphabetHighlightTiles:
 NumberPrompt:
                 
                 movem.l d1-a1,-(sp)
-                link    a6,#$FFF0
+                link    a6,#-WINDOW_NUMPROMPT_STACK_NEGSIZE
                 move.w  d0,-WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6)
                 move.w  d1,-WINDOW_NUMPROMPT_STACK_OFFSET_MINNUM(a6)
                 move.w  d2,-WINDOW_NUMPROMPT_STACK_OFFSET_MAXNUM(a6)
@@ -88,7 +88,7 @@ loc_1634A:
                 movem.l (sp)+,d1-a1
                 rts
 
-	; End of function NumberPrompt
+    ; End of function NumberPrompt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -106,7 +106,7 @@ sub_16376:
                 moveq   #5,d7
                 bra.w   WriteTilesFromNumber
 
-	; End of function sub_16376
+    ; End of function sub_16376
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -131,7 +131,7 @@ loc_163B2:
                 sndCom  SFX_MENU_SELECTION
                 rts
 
-	; End of function ModifyPromptNumber
+    ; End of function ModifyPromptNumber
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -217,7 +217,7 @@ loc_16484:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function DebugFlagSetter
+    ; End of function DebugFlagSetter
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -247,7 +247,7 @@ return_164E6:
                 
                 rts
 
-	; End of function sub_164AC
+    ; End of function sub_164AC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -270,7 +270,7 @@ loc_16502:
                 sndCom  SFX_MENU_SELECTION
                 rts
 
-	; End of function sub_164E8
+    ; End of function sub_164E8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -298,7 +298,7 @@ loc_1654C:
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-	; End of function DisplayTimerWindow
+    ; End of function DisplayTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -323,7 +323,7 @@ loc_16582:
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-	; End of function RemoveTimerWindow
+    ; End of function RemoveTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -349,7 +349,7 @@ loc_165BA:
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-	; End of function VInt_UpdateTimerWindow
+    ; End of function VInt_UpdateTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -387,7 +387,7 @@ loc_165FA:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function sub_165C0
+    ; End of function sub_165C0
 
 TimerWindowLayout:
                 incbin "data/graphics/tech/windowlayouts/timerwindowwindowlayout.bin"
@@ -487,7 +487,7 @@ byte_1675A:
                 movem.l (sp)+,d1-a1
                 rts
 
-	; End of function WitchMainMenu
+    ; End of function WitchMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -503,7 +503,7 @@ sub_1678A:
                 beq.s   sub_1678A
                 rts
 
-	; End of function sub_1678A
+    ; End of function sub_1678A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -551,7 +551,7 @@ return_16808:
                 
                 rts
 
-	; End of function sub_1679E
+    ; End of function sub_1679E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -635,7 +635,7 @@ loc_168A4:
                 bsr.w   sub_1697C
                 rts
 
-	; End of function DrawWitchMenuBubble
+    ; End of function DrawWitchMenuBubble
 
 pt_s_DataMenu:  dc.l aData1             
                 dc.l aData1             
@@ -684,7 +684,7 @@ return_16940:
                 
                 rts
 
-	; End of function sub_168D8
+    ; End of function sub_168D8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -698,7 +698,7 @@ sub_16942:
                 bsr.w   sub_1697C
                 rts
 
-	; End of function sub_16942
+    ; End of function sub_16942
 
 pt_s_DifficultyMenu:
                 dc.l aNorm_             
@@ -731,7 +731,7 @@ loc_16990:
                 movem.w (sp)+,d0
                 rts
 
-	; End of function sub_1697C
+    ; End of function sub_1697C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -781,7 +781,7 @@ loc_16A2A:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function sub_169AE
+    ; End of function sub_169AE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -803,5 +803,5 @@ loc_16A5C:
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-	; End of function sub_16A30
+    ; End of function sub_16A30
 

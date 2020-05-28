@@ -184,7 +184,7 @@ loc_E0AA:
                 movem.l (sp)+,d0-a5
                 rts
 
-	; End of function j_sub_DEFC_0
+    ; End of function j_sub_DEFC_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -213,7 +213,7 @@ loc_E0DE:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_E0B6
+    ; End of function sub_E0B6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -251,7 +251,7 @@ loc_E13E:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function HandleLineAttackerAI
+    ; End of function HandleLineAttackerAI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -291,7 +291,7 @@ loc_E1A6:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function HandleExploderAI
+    ; End of function HandleExploderAI
 
 off_E1AC:       dc.l byte_E1EC
                 dc.l byte_E1F2
@@ -606,7 +606,7 @@ loc_E3E8:
                 movem.l (sp)+,d0/d2-a5
                 rts
 
-	; End of function HandleEnemyAICommand
+    ; End of function HandleEnemyAICommand
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -928,8 +928,8 @@ loc_E70A:
                 
                 move.b  d1,d0
                 move.b  d2,d1
-                lea     ((byte_FF4000+$400)).l,a2
-                lea     ((byte_FF4000+$400)).l,a3
+                lea     (byte_FF4400).l,a2
+                lea     (byte_FF4400).l,a3
                 bsr.w   sub_DD10
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a1
@@ -973,7 +973,7 @@ loc_E782:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_E3EE
+    ; End of function sub_E3EE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1044,7 +1044,7 @@ loc_E81E:
                 bsr.w   GetClosestAttackPosition
                 move.w  d1,d0
                 move.w  d2,d1
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
                 bra.w   loc_E984
@@ -1074,7 +1074,7 @@ loc_E89A:
                 bsr.w   GetClosestAttackPosition
                 move.w  d1,d0
                 move.w  d2,d1
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
                 bra.w   loc_E984
@@ -1136,7 +1136,7 @@ loc_E94C:
                 bsr.w   GetClosestAttackPosition
                 move.w  d1,d0
                 move.w  d2,d1
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
                 bra.w   loc_E984
@@ -1151,7 +1151,7 @@ loc_E984:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_E78C
+    ; End of function sub_E78C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1339,7 +1339,7 @@ loc_EB9C:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_E98C
+    ; End of function sub_E98C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1550,7 +1550,7 @@ loc_EDBA:
                 
                 move.w  d1,d0
                 move.w  d2,d1
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
                 clr.w   d1
@@ -1559,7 +1559,7 @@ loc_EDD0:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_EBA4
+    ; End of function sub_EBA4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1990,7 +1990,7 @@ loc_F1CC:
                 movem.l (sp)+,d3-a5
                 rts
 
-	; End of function sub_EDD6
+    ; End of function sub_EDD6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2235,7 +2235,7 @@ loc_F3D0:
                 bsr.w   GetXPos
                 move.w  d1,d3
                 move.w  #$80,d0 
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     KrakenMoveCosts(pc), a5
@@ -2253,7 +2253,7 @@ loc_F404:
                 bsr.w   GetXPos
                 move.w  d1,d3
                 move.w  #$80,d0 
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     ((MOVE_COST_LIST-$1000000)).w,a5
@@ -2326,7 +2326,7 @@ loc_F4FE:
                 
                 move.w  d1,d0
                 move.w  d2,d1
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
 loc_F512:
@@ -2337,7 +2337,7 @@ loc_F512:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function sub_F1D4
+    ; End of function sub_F1D4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2565,7 +2565,7 @@ loc_F72E:
                 move.b  1(a1,d7.w),d1
                 add.b   -1(a6),d0
                 add.b   -2(a6),d1
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
                 lea     (BATTLESCENE_ACTION_TYPE).l,a2
@@ -2576,7 +2576,7 @@ loc_F782:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_F522
+    ; End of function sub_F522
 
 off_F78A:       dc.l byte_F792
                 dc.l byte_F798
@@ -2611,7 +2611,7 @@ sub_F7A0:
                 move.w  d1,d3
                 move.w  d2,d4
                 move.w  #$80,d0 
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     ((MOVE_COST_LIST-$1000000)).w,a5
@@ -2695,7 +2695,7 @@ loc_F8CE:
                 
                 move.w  d1,d0
                 move.w  d2,d1
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   sub_DD10
 loc_F8E2:
@@ -2704,7 +2704,7 @@ loc_F8E2:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_F7A0
+    ; End of function sub_F7A0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2785,7 +2785,7 @@ loc_F9AC:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function sub_F8EA
+    ; End of function sub_F8EA
 
 KrakenMoveCosts:dc.b $F                 ; special move cost list for Kraken Arm, Kraken Leg, Kraken Head
                 dc.b 2

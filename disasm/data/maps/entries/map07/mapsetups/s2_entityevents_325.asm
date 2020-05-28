@@ -43,7 +43,7 @@ return_555E6:
                 
                 rts
 
-	; End of function Map7_EntityEvent11
+    ; End of function Map7_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -79,7 +79,7 @@ return_5561C:
                 
                 rts
 
-	; End of function Map7_EntityEvent1
+    ; End of function Map7_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -109,7 +109,7 @@ return_55646:
                 
                 rts
 
-	; End of function Map7_EntityEvent0
+    ; End of function Map7_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -129,7 +129,7 @@ return_5565C:
                 
                 rts
 
-	; End of function Map7_EntityEvent2
+    ; End of function Map7_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -149,7 +149,7 @@ return_55672:
                 
                 rts
 
-	; End of function Map7_EntityEvent3
+    ; End of function Map7_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -192,7 +192,7 @@ return_556B0:
                 
                 rts
 
-	; End of function Map7_EntityEvent4
+    ; End of function Map7_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -227,7 +227,7 @@ return_556E2:
                 
                 rts
 
-	; End of function Map7_EntityEvent5
+    ; End of function Map7_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -254,7 +254,7 @@ return_55700:
                 
                 rts
 
-	; End of function Map7_EntityEvent6
+    ; End of function Map7_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -290,7 +290,7 @@ return_5572E:
                 
                 rts
 
-	; End of function Map7_EntityEvent7
+    ; End of function Map7_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -333,7 +333,7 @@ return_55774:
                 
                 rts
 
-	; End of function Map7_EntityEvent8
+    ; End of function Map7_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -344,7 +344,7 @@ Map7_EntityEvent9:
                 txt     $48D            ; "Oh, the King looks so sad.{W1}"
                 rts
 
-	; End of function Map7_EntityEvent9
+    ; End of function Map7_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -364,7 +364,7 @@ return_55790:
                 
                 rts
 
-	; End of function Map7_EntityEvent10
+    ; End of function Map7_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -375,7 +375,7 @@ Map7_2BD_EntityEvent12:
                 txt     $4A2            ; "{LEADER}, something{N}important is happening.{W1}"
                 rts
 
-	; End of function Map7_2BD_EntityEvent12
+    ; End of function Map7_2BD_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -388,5 +388,5 @@ Map7_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map7_2BD_EntityEvent14
+    ; End of function Map7_2BD_EntityEvent14
 

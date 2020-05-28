@@ -11,7 +11,7 @@ ms_map23_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map23_AreaDescriptions
+    ; End of function ms_map23_AreaDescriptions
 
 byte_59BE8:     msDesc 5, 20, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                                         ; "A book...{N}AN APPLE A DAY{W1}"

@@ -11,5 +11,5 @@ ms_map21_flag21F_InitFunction:
                 jsr     (FadeInFromBlack).w
                 rts
 
-	; End of function ms_map21_flag21F_InitFunction
+    ; End of function ms_map21_flag21F_InitFunction
 

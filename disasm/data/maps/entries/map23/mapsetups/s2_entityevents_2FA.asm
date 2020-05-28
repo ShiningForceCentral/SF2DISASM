@@ -16,7 +16,7 @@ Map23_2FA_EntityEvent0:
                 txt     $6A5            ; "Hey, you met Creed, didn't{N}you?{W1}"
                 rts
 
-	; End of function Map23_2FA_EntityEvent0
+    ; End of function Map23_2FA_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -27,7 +27,7 @@ Map23_2FA_EntityEvent1:
                 txt     $6A6            ; "The evil has completely{N}lifted from the forest.{W1}"
                 rts
 
-	; End of function Map23_2FA_EntityEvent1
+    ; End of function Map23_2FA_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -39,5 +39,5 @@ Map23_2FA_EntityEvent2:
                 txt     $6A8            ; "Can he see the fairy now?{W1}"
                 rts
 
-	; End of function Map23_2FA_EntityEvent2
+    ; End of function Map23_2FA_EntityEvent2
 

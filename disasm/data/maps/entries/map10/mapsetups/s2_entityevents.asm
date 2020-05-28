@@ -35,7 +35,7 @@ Map10_EntityEvent0:
                 txt     $621            ; "Mighty Volcanon!  He easily{N}defeated the greater devil!{W1}"
                 rts
 
-	; End of function Map10_EntityEvent0
+    ; End of function Map10_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -47,7 +47,7 @@ Map10_EntityEvent1:
                 txt     $625            ; "What was their true{N}purpose?{W1}"
                 rts
 
-	; End of function Map10_EntityEvent1
+    ; End of function Map10_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -58,7 +58,7 @@ Map10_EntityEvent2:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map10_EntityEvent2
+    ; End of function Map10_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -70,7 +70,7 @@ Map10_EntityEvent3:
                 txt     $61D            ; "But he retired from the army{N}and now lives alone in{N}Devil's Tail.{W1}"
                 rts
 
-	; End of function Map10_EntityEvent3
+    ; End of function Map10_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -82,7 +82,7 @@ Map10_EntityEvent4:
                 txt     $61B            ; "Why did they attack Bedoe?{W1}"
                 rts
 
-	; End of function Map10_EntityEvent4
+    ; End of function Map10_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -94,7 +94,7 @@ Map10_EntityEvent5:
                 txt     $629            ; "as long as I drink a{N}rootbeer first...(burp).{W1}"
                 rts
 
-	; End of function Map10_EntityEvent5
+    ; End of function Map10_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -105,7 +105,7 @@ Map10_EntityEvent6:
                 txt     $61E            ; "Uuuu...ooo....{N}He's...a...terrible...{W1}"
                 rts
 
-	; End of function Map10_EntityEvent6
+    ; End of function Map10_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -117,7 +117,7 @@ Map10_EntityEvent7:
                 txt     $623            ; "But the other devils were{N}strong as well!{W1}"
                 rts
 
-	; End of function Map10_EntityEvent7
+    ; End of function Map10_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -129,7 +129,7 @@ Map10_EntityEvent8:
                 txt     $62D            ; "Monsters like the Kraken and{N}Taros are much bigger!{W1}"
                 rts
 
-	; End of function Map10_EntityEvent8
+    ; End of function Map10_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -140,7 +140,7 @@ Map10_EntityEvent9:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map10_EntityEvent9
+    ; End of function Map10_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -150,7 +150,7 @@ Map10_EntityEvent10:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map10_EntityEvent10
+    ; End of function Map10_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -161,7 +161,7 @@ Map10_EntityEvent11:
                 txt     $62E            ; "My spouse was...killed...{N}in the war....{W1}"
                 rts
 
-	; End of function Map10_EntityEvent11
+    ; End of function Map10_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -172,7 +172,7 @@ Map10_EntityEvent12:
                 txt     $62F            ; "Zzzz...dad, no...come back...!{W1}"
                 rts
 
-	; End of function Map10_EntityEvent12
+    ; End of function Map10_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -183,7 +183,7 @@ Map10_EntityEvent13:
                 txt     $630            ; "The devils?!  I thought they{N}were only an old legend.{W1}"
                 rts
 
-	; End of function Map10_EntityEvent13
+    ; End of function Map10_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -194,7 +194,7 @@ Map10_EntityEvent14:
                 txt     $631            ; "I never let my hatchling{N}go out!{W1}"
                 rts
 
-	; End of function Map10_EntityEvent14
+    ; End of function Map10_EntityEvent14
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -205,7 +205,7 @@ Map10_EntityEvent15:
                 txt     $632            ; "Have you seen my dad?{N}Mom won't tell me anyhting{N}about him.{W1}"
                 rts
 
-	; End of function Map10_EntityEvent15
+    ; End of function Map10_EntityEvent15
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -216,7 +216,7 @@ Map10_EntityEvent16:
                 txt     $633            ; "We have a lot of weapons,{N}but I don't want to use any{N}of them!{W1}"
                 rts
 
-	; End of function Map10_EntityEvent16
+    ; End of function Map10_EntityEvent16
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -228,7 +228,7 @@ Map10_EntityEvent17:
                 txt     $635            ; "How wonderful it would be to{N}fly on such a beautiful day!{W1}"
                 rts
 
-	; End of function Map10_EntityEvent17
+    ; End of function Map10_EntityEvent17
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -240,7 +240,7 @@ Map10_EntityEvent18:
                 txt     $637            ; "I've been standing here all{N}day!{W1}"
                 rts
 
-	; End of function Map10_EntityEvent18
+    ; End of function Map10_EntityEvent18
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -251,7 +251,7 @@ Map10_EntityEvent19:
                 txt     $68E            ; "Hmmm...you're right.{N}{NAME;7}, go ahead.{W1}"
                 rts
 
-	; End of function Map10_EntityEvent19
+    ; End of function Map10_EntityEvent19
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -262,7 +262,7 @@ Map10_EntityEvent20:
                 txt     $68D            ; "He should talk to him.{W1}"
                 rts
 
-	; End of function Map10_EntityEvent20
+    ; End of function Map10_EntityEvent20
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -273,7 +273,7 @@ Map10_EntityEvent21:
                 txt     $626            ; "Kneel before King Bedoe.{N}Just kidding.{W1}"
                 rts
 
-	; End of function Map10_EntityEvent21
+    ; End of function Map10_EntityEvent21
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -286,5 +286,5 @@ Map10_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map10_EntityEvent22
+    ; End of function Map10_EntityEvent22
 

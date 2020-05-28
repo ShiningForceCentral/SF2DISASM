@@ -23,7 +23,7 @@ return_5C84A:
                 
                 rts
 
-	; End of function Map62_ZoneEvent0
+    ; End of function Map62_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -43,5 +43,5 @@ Map62_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map62_ZoneEvent2
+    ; End of function Map62_ZoneEvent2
 

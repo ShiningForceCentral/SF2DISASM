@@ -23,7 +23,7 @@ return_59654:
                 
                 rts
 
-	; End of function ms_map22_InitFunction
+    ; End of function ms_map22_InitFunction
 
 cs_59656:       textCursor $6D4
                 reloadMap 0,19

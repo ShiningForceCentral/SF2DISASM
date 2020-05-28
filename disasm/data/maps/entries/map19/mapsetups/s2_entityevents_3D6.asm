@@ -30,7 +30,7 @@ Map19_3D6_EntityEvent11:
                 txt     $FA8            ; "The Minister is waiting{N}for you.{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent11
+    ; End of function Map19_3D6_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -41,7 +41,7 @@ Map19_3D6_EntityEvent12:
                 txt     $FA9            ; "Oh, {LEADER}!{N}I really respect you.{W2}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent12
+    ; End of function Map19_3D6_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -52,7 +52,7 @@ Map19_3D6_EntityEvent0:
                 txt     $FBD            ; "It's OK...{W2}{N}I'll find a girl someday!{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent0
+    ; End of function Map19_3D6_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -63,7 +63,7 @@ Map19_3D6_EntityEvent1:
                 txt     $F9D            ; "What does he mean?{N}I don't understand!{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent1
+    ; End of function Map19_3D6_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -74,7 +74,7 @@ Map19_3D6_EntityEvent2:
                 txt     $FBE            ; "Don't worry.{N}He's tough.{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent2
+    ; End of function Map19_3D6_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ Map19_3D6_EntityEvent3:
                 txt     $FBB            ; "You were so cool in our{N}adventure two years ago!{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent3
+    ; End of function Map19_3D6_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -97,7 +97,7 @@ Map19_3D6_EntityEvent4:
                 txt     $F92            ; "{LEADER} is a human!{N}They will make a cute couple!{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent4
+    ; End of function Map19_3D6_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -108,7 +108,7 @@ Map19_3D6_EntityEvent5:
                 txt     $F9E            ; "They remind me of when I{N}was young.{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent5
+    ; End of function Map19_3D6_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -119,7 +119,7 @@ Map19_3D6_EntityEvent6:
                 txt     $FBC            ; "{LEADER}, go kiss her!{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent6
+    ; End of function Map19_3D6_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -130,7 +130,7 @@ Map19_3D6_EntityEvent7:
                 txt     $F94            ; "I think he's the best{N}choice.{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent7
+    ; End of function Map19_3D6_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -141,7 +141,7 @@ Map19_3D6_EntityEvent8:
                 txt     $FBF            ; "You're blushing!{N}Just be cool!{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent8
+    ; End of function Map19_3D6_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -153,7 +153,7 @@ Map19_3D6_EntityEvent9:
                 txt     $FA3            ; "Everything went as you{N}expected, huh?{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent9
+    ; End of function Map19_3D6_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -164,5 +164,5 @@ Map19_3D6_EntityEvent10:
                 txt     $FC0            ; "He was young before?{W1}"
                 rts
 
-	; End of function Map19_3D6_EntityEvent10
+    ; End of function Map19_3D6_EntityEvent10
 

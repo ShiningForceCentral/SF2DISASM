@@ -34,7 +34,7 @@ loc_210C4:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function sub_21072
+    ; End of function sub_21072
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -63,7 +63,7 @@ loc_21102:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function sub_210D0
+    ; End of function sub_210D0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -89,7 +89,7 @@ loc_21126:
                 movem.l (sp)+,d0/d6
                 rts
 
-	; End of function FindPromotionSection
+    ; End of function FindPromotionSection
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -111,7 +111,7 @@ loc_2113E:
                 jsr     j_LearnSpell
                 rts
 
-	; End of function ReplaceSpellsWithSORCDefaults
+    ; End of function ReplaceSpellsWithSORCDefaults
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -125,7 +125,7 @@ Church_GetCurrentForceMemberInfo:
                 subq.b  #1,d7
                 rts
 
-	; End of function Church_GetCurrentForceMemberInfo
+    ; End of function Church_GetCurrentForceMemberInfo
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -193,7 +193,7 @@ return_21236:
                 
                 rts
 
-	; End of function ChurchCure
+    ; End of function ChurchCure
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -207,7 +207,7 @@ WaitForMusicResumeAndPlayerInput:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function WaitForMusicResumeAndPlayerInput
+    ; End of function WaitForMusicResumeAndPlayerInput
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -238,5 +238,5 @@ return_2127C:
                 
                 rts
 
-	; End of function sub_2124A
+    ; End of function sub_2124A
 

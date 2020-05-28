@@ -16,7 +16,7 @@ Map20_21F_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map20_21F_DefaultEntityEvent
+    ; End of function Map20_21F_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -38,7 +38,7 @@ return_6326E:
                 
                 rts
 
-	; End of function Map20_21F_EntityEvent0
+    ; End of function Map20_21F_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -50,7 +50,7 @@ Map20_21F_EntityEvent1:
                 txt     $FAF            ; "Zzzzz....{W1}"
                 rts
 
-	; End of function Map20_21F_EntityEvent1
+    ; End of function Map20_21F_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -61,7 +61,7 @@ Map20_21F_EntityEvent2:
                 txt     $FB0            ; "I'm splitting firewood!{N}My back hurts!{W1}"
                 rts
 
-	; End of function Map20_21F_EntityEvent2
+    ; End of function Map20_21F_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -72,7 +72,7 @@ Map20_21F_EntityEvent3:
                 txt     $FB6            ; "This is the east tower.{N}I'm on watch.{W1}"
                 rts
 
-	; End of function Map20_21F_EntityEvent3
+    ; End of function Map20_21F_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -83,7 +83,7 @@ Map20_21F_EntityEvent4:
                 txt     $FB7            ; "What a view!{N}Parmecia is beautiful!{W1}"
                 rts
 
-	; End of function Map20_21F_EntityEvent4
+    ; End of function Map20_21F_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -95,5 +95,5 @@ Map20_21F_EntityEvent5:
                 txt     $FB9            ; "I wouldn't have screamed{N}if I knew it was you.{W1}"
                 rts
 
-	; End of function Map20_21F_EntityEvent5
+    ; End of function Map20_21F_EntityEvent5
 

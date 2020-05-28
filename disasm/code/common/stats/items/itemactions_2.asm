@@ -55,7 +55,7 @@ loc_22A48:
                 movem.l (sp)+,d0-d1/d6-d7
                 rts
 
-	; End of function UseFieldItem
+    ; End of function UseFieldItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -76,7 +76,7 @@ loc_22A68:
                 jsr     j_SetStatus
                 rts
 
-	; End of function FieldItem_CurePoison
+    ; End of function FieldItem_CurePoison
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -108,7 +108,7 @@ loc_22AA0:
                 jsr     j_ApplyStatusAndItemsOnStats
                 rts
 
-	; End of function FieldItem_CurePoisonAndParalysis
+    ; End of function FieldItem_CurePoisonAndParalysis
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -128,7 +128,7 @@ FieldItem_IncreaseATK:
                 jsr     j_IncreaseCurrentATK
                 rts
 
-	; End of function FieldItem_IncreaseATK
+    ; End of function FieldItem_IncreaseATK
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -148,7 +148,7 @@ FieldItem_IncreaseDEF:
                 jsr     j_IncreaseCurrentDEF
                 rts
 
-	; End of function FieldItem_IncreaseDEF
+    ; End of function FieldItem_IncreaseDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -168,7 +168,7 @@ FieldItem_IncreaseAGI:
                 jsr     j_IncreaseCurrentAGI
                 rts
 
-	; End of function FieldItem_IncreaseAGI
+    ; End of function FieldItem_IncreaseAGI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -195,7 +195,7 @@ loc_22B42:
                 jsr     j_IncreaseCurrentMOV
                 rts
 
-	; End of function FieldItem_IncreaseMOV
+    ; End of function FieldItem_IncreaseMOV
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -215,7 +215,7 @@ FieldItem_IncreaseHP:
                 jsr     j_IncreaseCurrentHP
                 rts
 
-	; End of function FieldItem_IncreaseHP
+    ; End of function FieldItem_IncreaseHP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -244,5 +244,5 @@ return_22BC0:
                 
                 rts
 
-	; End of function FieldItem_IncreaseMP
+    ; End of function FieldItem_IncreaseMP
 

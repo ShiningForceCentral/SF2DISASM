@@ -22,7 +22,7 @@ Map20_1F5_ZoneEvent0:
                 script  cs_53B66
                 rts
 
-	; End of function Map20_1F5_ZoneEvent0
+    ; End of function Map20_1F5_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -31,5 +31,5 @@ Map20_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map20_DefaultZoneEvent
+    ; End of function Map20_DefaultZoneEvent
 

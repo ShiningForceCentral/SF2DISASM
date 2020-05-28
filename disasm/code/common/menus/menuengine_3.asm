@@ -27,7 +27,7 @@ loc_157A6:
                 movem.l (sp)+,d0-a2
                 rts
 
-	; End of function CreateLandEffectWindow
+    ; End of function CreateLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -52,7 +52,7 @@ return_157E6:
                 
                 rts
 
-	; End of function HideLandEffectWindow
+    ; End of function HideLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -76,7 +76,7 @@ return_15810:
                 
                 rts
 
-	; End of function sub_157E8
+    ; End of function sub_157E8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -109,7 +109,7 @@ DrawLandEffectWindow:
                 bsr.w   WriteTilesFromASCII
                 rts
 
-	; End of function DrawLandEffectWindow
+    ; End of function DrawLandEffectWindow
 
 aLandEffect:    if (THREE_DIGITS_STATS=1)
                 dc.b 'LE'
@@ -207,7 +207,7 @@ loc_1594C:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-	; End of function sub_1586E
+    ; End of function sub_1586E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -219,7 +219,7 @@ CopyBattlefieldOptionsMenuLayout:
                 move.w  #$156,d7
                 jmp     (CopyBytes).w   
 
-	; End of function CopyBattlefieldOptionsMenuLayout
+    ; End of function CopyBattlefieldOptionsMenuLayout
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -235,7 +235,7 @@ loc_15994:
                 dbf     d7,loc_15994
                 rts
 
-	; End of function sub_1598C
+    ; End of function sub_1598C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -283,7 +283,7 @@ loc_159EA:
                 movem.w (sp)+,d3-d4/d7
                 rts
 
-	; End of function sub_159A0
+    ; End of function sub_159A0
 
 unk_15A00:      dc.b   1
                 dc.b $24 
@@ -337,7 +337,7 @@ byte_15A38:
                 sndCom  SFX_MENU_SELECTION
                 rts
 
-	; End of function sub_15A20
+    ; End of function sub_15A20
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -358,7 +358,7 @@ byte_15A54:
                 sndCom  SFX_MENU_SELECTION
                 rts
 
-	; End of function sub_15A3E
+    ; End of function sub_15A3E
 
 BattleConfigWindowLayout:
                 incbin "data/graphics/tech/windowlayouts/battleconfigwindowlayout.bin"
@@ -442,7 +442,7 @@ NameCharacter:
                 movem.l (sp)+,d0-a2
                 rts
 
-	; End of function NameCharacter
+    ; End of function NameCharacter
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -662,7 +662,7 @@ loc_15ED2:
                 bsr.s   sub_15EE0
                 bra.w   loc_15D22
 
-	; End of function sub_15CC4
+    ; End of function sub_15CC4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -707,7 +707,7 @@ return_15F20:
                 
                 rts
 
-	; End of function sub_15EE0
+    ; End of function sub_15EE0
 
 
 ; START OF FUNCTION CHUNK FOR sub_15CC4
@@ -784,7 +784,7 @@ loc_15FC8:
                 move.b  #$10,$B(a0)
                 bra.w   sub_101E6
 
-	; End of function sub_15F24
+    ; End of function sub_15F24
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -812,7 +812,7 @@ loc_1601E:
                 move.w  #$FFFF,-$1A(a6)
                 rts
 
-	; End of function sub_15FD8
+    ; End of function sub_15FD8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -830,7 +830,7 @@ sub_16026:
                 bsr.w   WriteTilesFromASCII
                 rts
 
-	; End of function sub_16026
+    ; End of function sub_16026
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -851,7 +851,7 @@ sub_1604A:
                 jsr     (CopyBytes).w   
                 rts
 
-	; End of function sub_1604A
+    ; End of function sub_1604A
 
 AlphabetTopBorderWindowLayout:
                 incbin "data/graphics/tech/windowlayouts/alphabettopborderwindowlayout.bin"

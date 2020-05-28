@@ -95,7 +95,7 @@ loc_1AC362:
                 jsr     (ApplyImmediateVramDMA).w
                 rts
 
-	; End of function LoadEndCreditsFont
+    ; End of function LoadEndCreditsFont
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -187,7 +187,7 @@ loc_1AC434:
                 movem.l (sp)+,d0/d5-a6
                 rts
 
-	; End of function sub_1AC38E
+    ; End of function sub_1AC38E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -265,7 +265,7 @@ loc_1AC4EA:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function GetEnemyAITargetMoveList
+    ; End of function GetEnemyAITargetMoveList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -346,7 +346,7 @@ loc_1AC5A4:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_1AC4F0
+    ; End of function sub_1AC4F0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -421,7 +421,7 @@ loc_1AC64E:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_1AC5AA
+    ; End of function sub_1AC5AA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -457,7 +457,7 @@ loc_1AC684:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function ClearTerrainListObstructions
+    ; End of function ClearTerrainListObstructions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -516,7 +516,7 @@ loc_1AC722:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_1AC69A
+    ; End of function sub_1AC69A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -598,7 +598,7 @@ loc_1AC7E6:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_1AC728
+    ; End of function sub_1AC728
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -634,7 +634,7 @@ loc_1AC83C:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function sub_1AC7FE
+    ; End of function sub_1AC7FE
 
 unk_1AC848:     dc.b   1                ; AI-related data
                 dc.b   0
@@ -852,7 +852,7 @@ loc_1AC9AC:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_1AC8A0
+    ; End of function sub_1AC8A0
 
 byte_1AC9B8:    dc.b 3                  ; AI-related data, 3 entries, for battles 36, 43 and 0
                 dc.b BATTLE_VERSUS_PRISM_FLOWERS
@@ -967,7 +967,7 @@ loc_1ACA6A:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_1AC9FC
+    ; End of function sub_1AC9FC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1024,7 +1024,7 @@ loc_1ACAD0:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_1ACA72
+    ; End of function sub_1ACA72
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1154,7 +1154,7 @@ loc_1ACC1A:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_1ACAD6
+    ; End of function sub_1ACAD6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1406,7 +1406,7 @@ loc_1ACE2A:
                 ori     #1,ccr
                 bra.w   loc_1ACD32
 
-	; End of function sub_1ACC26
+    ; End of function sub_1ACC26
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1423,7 +1423,7 @@ CheckTriggerRegionFlag:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function CheckTriggerRegionFlag
+    ; End of function CheckTriggerRegionFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1521,7 +1521,7 @@ loc_1ACF2A:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function UpdateTriggeredRegionsAndAI
+    ; End of function UpdateTriggeredRegionsAndAI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1609,7 +1609,7 @@ loc_1ACFEA:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function GetListOfSpawningEnemies
+    ; End of function GetListOfSpawningEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1667,7 +1667,7 @@ loc_1AD088:
                 movem.l (sp)+,d1-a6
                 rts
 
-	; End of function UpdateEnemyActivationIfDead
+    ; End of function UpdateEnemyActivationIfDead
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1686,7 +1686,7 @@ GetRandomValueSigned:
                 movem.l (sp)+,d0-d5/a0-a6
                 rts
 
-	; End of function GetRandomValueSigned
+    ; End of function GetRandomValueSigned
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1719,7 +1719,7 @@ loc_1AD0D4:
                 movem.l (sp)+,d0-d5/a0-a6
                 rts
 
-	; End of function RandomUnderD6
+    ; End of function RandomUnderD6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1741,5 +1741,5 @@ LoadBattleTerrainData:
                 movem.l (sp)+,d0-d6/a0-a5
                 rts
 
-	; End of function LoadBattleTerrainData
+    ; End of function LoadBattleTerrainData
 

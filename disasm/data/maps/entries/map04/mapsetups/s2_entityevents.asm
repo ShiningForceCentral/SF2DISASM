@@ -10,5 +10,5 @@ Map4_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map4_DefaultEntityEvent
+    ; End of function Map4_DefaultEntityEvent
 

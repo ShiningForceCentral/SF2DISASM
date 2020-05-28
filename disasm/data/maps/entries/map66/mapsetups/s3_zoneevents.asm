@@ -22,7 +22,7 @@ return_4FAB8:
                 
                 rts
 
-	; End of function Map66_ZoneEvent0
+    ; End of function Map66_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -40,7 +40,7 @@ return_4FAD2:
                 
                 rts
 
-	; End of function Map66_ZoneEvent2
+    ; End of function Map66_ZoneEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -51,5 +51,5 @@ Map66_DefaultZoneEvent:
                 jsr     CheckRandomBattle
                 rts
 
-	; End of function Map66_DefaultZoneEvent
+    ; End of function Map66_DefaultZoneEvent
 

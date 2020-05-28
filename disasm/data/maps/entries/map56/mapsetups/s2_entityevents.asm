@@ -24,5 +24,5 @@ Map56_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map56_EntityEvent0
+    ; End of function Map56_EntityEvent0
 

@@ -8,5 +8,5 @@ ms_map17_flag212_InitFunction:
                 
                 rts
 
-	; End of function ms_map17_flag212_InitFunction
+    ; End of function ms_map17_flag212_InitFunction
 

@@ -17,7 +17,7 @@ Map5_212_EntityEvent0:
                 txt     $D9B            ; "I can't believe it!{N}I want to die, but I can't!{W1}"
                 rts
 
-	; End of function Map5_212_EntityEvent0
+    ; End of function Map5_212_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -28,7 +28,7 @@ Map5_212_EntityEvent1:
                 script  cs_60F18
                 rts
 
-	; End of function Map5_212_EntityEvent1
+    ; End of function Map5_212_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -38,7 +38,7 @@ Map5_212_EntityEvent2:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map5_212_EntityEvent2
+    ; End of function Map5_212_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -49,7 +49,7 @@ Map5_212_EntityEvent3:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map5_212_EntityEvent3
+    ; End of function Map5_212_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -82,5 +82,5 @@ Map5_212_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map5_212_EntityEvent4
+    ; End of function Map5_212_EntityEvent4
 

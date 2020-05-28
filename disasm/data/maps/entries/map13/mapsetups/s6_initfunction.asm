@@ -27,7 +27,7 @@ return_5830E:
                 
                 rts
 
-	; End of function ms_map13_InitFunction
+    ; End of function ms_map13_InitFunction
 
 cs_58310:       setFacing 130,DOWN
                 customActscriptWait 130

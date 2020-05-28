@@ -38,7 +38,7 @@ return_5C7F4:
                 
                 rts
 
-	; End of function Map62_EntityEvent0
+    ; End of function Map62_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -67,5 +67,5 @@ Map62_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map62_EntityEvent1
+    ; End of function Map62_EntityEvent1
 

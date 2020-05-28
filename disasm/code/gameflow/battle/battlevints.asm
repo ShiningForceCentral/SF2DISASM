@@ -32,5 +32,5 @@ SetBaseVIntFunctions:
                 dc.l VInt_UpdateMapAnimations
                 rts
 
-	; End of function SetBaseVIntFunctions
+    ; End of function SetBaseVIntFunctions
 

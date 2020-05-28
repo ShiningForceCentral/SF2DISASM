@@ -11,7 +11,7 @@ Map21_21F_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map21_21F_DefaultEntityEvent
+    ; End of function Map21_21F_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -23,5 +23,5 @@ Map21_21F_EntityEvent0:
                 txt     $239            ; "The Ancient Tower is a{N}sacred place where only the{N}King can go.{W1}"
                 rts
 
-	; End of function Map21_21F_EntityEvent0
+    ; End of function Map21_21F_EntityEvent0
 

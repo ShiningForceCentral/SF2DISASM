@@ -17,7 +17,7 @@ Map16_297_EntityEvent0:
                 txt     $364            ; "I don't want him to kill me!{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent0
+    ; End of function Map16_297_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -27,7 +27,7 @@ Map16_EntityEvent0:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map16_EntityEvent0
+    ; End of function Map16_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -38,7 +38,7 @@ Map16_297_EntityEvent2:
                 txt     $365            ; "We have many people to{N}send to the jail today.{N}Why?"
                 rts
 
-	; End of function Map16_297_EntityEvent2
+    ; End of function Map16_297_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -47,7 +47,7 @@ Map16_297_EntityEvent3:
                 
                 rts
 
-	; End of function Map16_297_EntityEvent3
+    ; End of function Map16_297_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -60,7 +60,7 @@ Map16_297_EntityEvent4:
                 txt     $34E            ; "No way!  We are allies!{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent4
+    ; End of function Map16_297_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -71,7 +71,7 @@ Map16_297_EntityEvent5:
                 txt     $34F            ; "Are you tourists?{N}From Granseal!  They say{N}it's a nice place.{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent5
+    ; End of function Map16_297_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -83,7 +83,7 @@ Map16_297_EntityEvent6:
                 txt     $351            ; "I heard that many monsters{N}are wandering around there.{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent6
+    ; End of function Map16_297_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -94,7 +94,7 @@ Map16_297_EntityEvent7:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map16_297_EntityEvent7
+    ; End of function Map16_297_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -105,7 +105,7 @@ Map16_297_EntityEvent8:
                 txt     $352            ; "The priest is out now.{N}Since he decided to marry{N}{NAME;25}, he has been{W2}{N}neglectful of his duties.{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent8
+    ; End of function Map16_297_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -116,7 +116,7 @@ Map16_297_EntityEvent9:
                 txt     $353            ; "I like trees!!{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent9
+    ; End of function Map16_297_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -127,7 +127,7 @@ Map16_297_EntityEvent10:
                 txt     $354            ; "Young men like you are{N}not my guests.{N}Go away!{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent10
+    ; End of function Map16_297_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -140,7 +140,7 @@ Map16_297_EntityEvent11:
                 txt     $357            ; "I don't want to live my{N}entire life on such a small{N}island.{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent11
+    ; End of function Map16_297_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -151,7 +151,7 @@ Map16_297_EntityEvent12:
                 txt     $358            ; "Sorry, we never open this{N}gate.{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent12
+    ; End of function Map16_297_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -163,7 +163,7 @@ Map16_297_EntityEvent13:
                 txt     $35A            ; "I hope to see her someday.{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent13
+    ; End of function Map16_297_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -177,7 +177,7 @@ Map16_297_EntityEvent14:
                 txt     $35E            ; "A record must be kept.{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent14
+    ; End of function Map16_297_EntityEvent14
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -188,7 +188,7 @@ Map16_297_EntityEvent15:
                 txt     $35F            ; "I want to be a fine{N}soldier like {NAME;28}{N}when I grow up.{W1}"
                 rts
 
-	; End of function Map16_297_EntityEvent15
+    ; End of function Map16_297_EntityEvent15
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -199,7 +199,7 @@ Map16_297_EntityEvent16:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map16_297_EntityEvent16
+    ; End of function Map16_297_EntityEvent16
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -208,5 +208,5 @@ Map16_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map16_DefaultEntityEvent
+    ; End of function Map16_DefaultEntityEvent
 

@@ -14,7 +14,7 @@ return_5FA9A:
                 
                 rts
 
-	; End of function ms_map37_InitFunction
+    ; End of function ms_map37_InitFunction
 
 cs_5FA9C:       setPos ALLY_ZYNK,8,10,RIGHT
                 csc_end

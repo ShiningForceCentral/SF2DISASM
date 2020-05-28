@@ -19,7 +19,7 @@ Map20_1F5_EntityEvent0:
                 txt     $896            ; "Guooooorrrr!{W1}"
                 rts
 
-	; End of function Map20_1F5_EntityEvent0
+    ; End of function Map20_1F5_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -30,7 +30,7 @@ Map20_1F5_EntityEvent1:
                 txt     $250            ; "Let me pass!{N}I must see my father!{W1}"
                 rts
 
-	; End of function Map20_1F5_EntityEvent1
+    ; End of function Map20_1F5_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -41,7 +41,7 @@ Map20_1F5_EntityEvent2:
                 script  cs_53C42
                 rts
 
-	; End of function Map20_1F5_EntityEvent2
+    ; End of function Map20_1F5_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -58,7 +58,7 @@ byte_53872:
                 txt     $252            ; "and the King became{N}violent!{W1}"
                 rts
 
-	; End of function Map20_1F5_EntityEvent3
+    ; End of function Map20_1F5_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,7 +75,7 @@ byte_53886:
                 txt     $254            ; "The King knocked down{N}the Princess....{W1}"
                 rts
 
-	; End of function Map20_1F5_EntityEvent4
+    ; End of function Map20_1F5_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -92,7 +92,7 @@ byte_5389A:
                 txt     $24D            ; "Ouch!  I was knocked down!{W1}"
                 rts
 
-	; End of function Map20_1F5_EntityEvent5
+    ; End of function Map20_1F5_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -109,5 +109,5 @@ byte_538AE:
                 txt     $24F            ; "Trust Sir Astral!{N}He knows how to cure{N}the King!{W1}"
                 rts
 
-	; End of function Map20_1F5_EntityEvent6
+    ; End of function Map20_1F5_EntityEvent6
 

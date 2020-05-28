@@ -11,7 +11,7 @@ Map39_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map39_DefaultZoneEvent
+    ; End of function Map39_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -27,5 +27,5 @@ return_5E0CC:
                 
                 rts
 
-	; End of function Map39_ZoneEvent0
+    ; End of function Map39_ZoneEvent0
 

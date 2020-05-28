@@ -38,7 +38,7 @@ Map22_EntityEvent2:
                 jsr     j_CaravanActions
                 rts
 
-	; End of function Map22_EntityEvent2
+    ; End of function Map22_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -50,7 +50,7 @@ Map22_EntityEvent3:
                 txt     $6E7            ; "His magic saved us a long time{N}ago during a natural disaster.{W1}"
                 rts
 
-	; End of function Map22_EntityEvent3
+    ; End of function Map22_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -62,7 +62,7 @@ Map22_EntityEvent4:
                 txt     $6E9            ; "Supposedly, it's one of their{N}rules.{W1}"
                 rts
 
-	; End of function Map22_EntityEvent4
+    ; End of function Map22_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -74,7 +74,7 @@ Map22_EntityEvent5:
                 txt     $6EB            ; "We never get old.{N}We never die.{N}What is the meaning of life?{W1}"
                 rts
 
-	; End of function Map22_EntityEvent5
+    ; End of function Map22_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ Map22_EntityEvent0:
                 txt     $6ED            ; "I was looking for the{N}legendary sword.{N}I hate it here!{W1}"
                 rts
 
-	; End of function Map22_EntityEvent0
+    ; End of function Map22_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -99,7 +99,7 @@ Map22_EntityEvent1:
                 txt     $6F0            ; "I suggest you see King{N}Ponpei.{N}He's a good man.{W1}"
                 rts
 
-	; End of function Map22_EntityEvent1
+    ; End of function Map22_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -109,7 +109,7 @@ Map22_EntityEvent6:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map22_EntityEvent6
+    ; End of function Map22_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -137,7 +137,7 @@ return_59552:
                 
                 rts
 
-	; End of function Map22_EntityEvent7
+    ; End of function Map22_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -164,7 +164,7 @@ return_5957A:
                 
                 rts
 
-	; End of function Map22_EntityEvent8
+    ; End of function Map22_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -184,7 +184,7 @@ return_59590:
                 
                 rts
 
-	; End of function Map22_EntityEvent9
+    ; End of function Map22_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -207,7 +207,7 @@ return_595B2:
                 
                 rts
 
-	; End of function Map22_EntityEvent10
+    ; End of function Map22_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -218,7 +218,7 @@ Map22_EntityEvent17:
                 txt     $6F9            ; "Mr. Creed gave me this solid,{N}armored body!{W1}"
                 rts
 
-	; End of function Map22_EntityEvent17
+    ; End of function Map22_EntityEvent17
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -229,7 +229,7 @@ Map22_EntityEvent21:
                 txt     $6FA            ; "My attack power is the best{N}in the army!{W1}"
                 rts
 
-	; End of function Map22_EntityEvent21
+    ; End of function Map22_EntityEvent21
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -240,7 +240,7 @@ Map22_EntityEvent15:
                 txt     $6FB            ; "We knights are always ready{N}to fight!{W1}"
                 rts
 
-	; End of function Map22_EntityEvent15
+    ; End of function Map22_EntityEvent15
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -251,7 +251,7 @@ Map22_EntityEvent13:
                 txt     $6FC            ; "Is healing is my only ability?{N}Ha, ha!  You have a lot to{N}learn!{W1}"
                 rts
 
-	; End of function Map22_EntityEvent13
+    ; End of function Map22_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -262,7 +262,7 @@ Map22_EntityEvent12:
                 txt     $6FD            ; "I lead the army with the King.{W1}"
                 rts
 
-	; End of function Map22_EntityEvent12
+    ; End of function Map22_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -274,7 +274,7 @@ Map22_EntityEvent11:
                 txt     $6FF            ; "If it is King Ponpei's wish,{N}we will accept your{N}challenge!{W1}"
                 rts
 
-	; End of function Map22_EntityEvent11
+    ; End of function Map22_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -283,5 +283,5 @@ Map22_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map22_DefaultEntityEvent
+    ; End of function Map22_DefaultEntityEvent
 

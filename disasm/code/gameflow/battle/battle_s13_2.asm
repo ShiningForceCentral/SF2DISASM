@@ -37,7 +37,7 @@ loc_1B126E:
                 bra.s   loc_1B126E
                 rts
 
-	; End of function BattleDebugFunction1B120A
+    ; End of function BattleDebugFunction1B120A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -92,7 +92,7 @@ loc_1B12EC:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function InitAllForceBattlePositions
+    ; End of function InitAllForceBattlePositions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -110,7 +110,7 @@ loc_1B12FC:
                 movem.l (sp)+,d0/d7
                 rts
 
-	; End of function InitAllEnemyBattlePositions
+    ; End of function InitAllEnemyBattlePositions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -168,7 +168,7 @@ loc_1B139A:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function InitEnemyBattlePosition
+    ; End of function InitEnemyBattlePosition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -213,7 +213,7 @@ loc_1B1404:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function UpdateEnemyStatsForRespawn
+    ; End of function UpdateEnemyStatsForRespawn
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -277,7 +277,7 @@ loc_1B142C:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function InitEnemyStats
+    ; End of function InitEnemyStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -303,7 +303,7 @@ loc_1B14F4:
                 movem.l (sp)+,d1/a0-a1
                 rts
 
-	; End of function InitEnemyList
+    ; End of function InitEnemyList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -342,7 +342,7 @@ loc_1B154E:
                 movem.l (sp)+,d0-a0
                 rts
 
-	; End of function InitEnemyItems
+    ; End of function InitEnemyItems
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -390,7 +390,7 @@ loc_1B15A4:
                 movem.l (sp)+,d0-d2/d7
                 rts
 
-	; End of function GetEnemyOriginalPosOccupied
+    ; End of function GetEnemyOriginalPosOccupied
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -427,7 +427,7 @@ loc_1B15F4:
                 move.l  (sp)+,d1
                 rts
 
-	; End of function SetEnemyBaseATK
+    ; End of function SetEnemyBaseATK
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -459,7 +459,7 @@ loc_1B162A:
                 movem.l (sp)+,d0/a0
                 rts
 
-	; End of function GetEnemyAITargetPos
+    ; End of function GetEnemyAITargetPos
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -509,7 +509,7 @@ loc_1B1698:
                 movem.l (sp)+,d0/d2/a1
                 rts
 
-	; End of function GetBattleSpriteSetSubsection
+    ; End of function GetBattleSpriteSetSubsection
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -559,7 +559,7 @@ loc_1B16F8:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function GetCombatantStartPos
+    ; End of function GetCombatantStartPos
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -613,7 +613,7 @@ loc_1B177A:
                 movem.l (sp)+,d1-a6
                 rts
 
-	; End of function sub_1B16FE
+    ; End of function sub_1B16FE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -652,7 +652,7 @@ loc_1B17B6:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function DoesBattleUpgrade
+    ; End of function DoesBattleUpgrade
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -688,7 +688,7 @@ loc_1B17F8:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function UpgradeBattle
+    ; End of function UpgradeBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -733,7 +733,7 @@ loc_1B1846:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function ShouldBattleUpgrade
+    ; End of function ShouldBattleUpgrade
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -970,7 +970,7 @@ loc_1B1A22:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function UpgradeUnitIdx
+    ; End of function UpgradeUnitIdx
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1002,5 +1002,5 @@ loc_1B1A60:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_1B1A28
+    ; End of function sub_1B1A28
 

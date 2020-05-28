@@ -22,5 +22,5 @@ Map30_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map30_ZoneEvent0
+    ; End of function Map30_ZoneEvent0
 

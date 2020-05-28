@@ -11,7 +11,7 @@ Map41_DefaultItemEvent1:
                 
                 rts
 
-	; End of function Map41_DefaultItemEvent1
+    ; End of function Map41_DefaultItemEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -34,5 +34,5 @@ return_5F49E:
                 
                 rts
 
-	; End of function Map41_ItemEvent0
+    ; End of function Map41_ItemEvent0
 

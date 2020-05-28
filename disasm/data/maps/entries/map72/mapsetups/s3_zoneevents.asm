@@ -21,7 +21,7 @@ Map72_ZoneEvent0:
                 jsr     CheckRandomBattle
                 rts
 
-	; End of function Map72_ZoneEvent0
+    ; End of function Map72_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -69,7 +69,7 @@ return_4FF04:
                 
                 rts
 
-	; End of function Map72_ZoneEvent3
+    ; End of function Map72_ZoneEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -90,5 +90,5 @@ return_4FF22:
                 
                 rts
 
-	; End of function Map72_DefaultZoneEvent
+    ; End of function Map72_DefaultZoneEvent
 

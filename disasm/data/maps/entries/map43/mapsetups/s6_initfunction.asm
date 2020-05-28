@@ -16,7 +16,7 @@ return_540BE:
                 
                 rts
 
-	; End of function ms_map43_InitFunction
+    ; End of function ms_map43_InitFunction
 
 cs_540C0:       textCursor $32B
                 setActscriptWait ALLY_BOWIE,eas_Init

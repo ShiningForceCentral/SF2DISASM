@@ -21,5 +21,5 @@ return_570AE:
                 
                 rts
 
-	; End of function ms_map10_flag2D2_InitFunction
+    ; End of function ms_map10_flag2D2_InitFunction
 

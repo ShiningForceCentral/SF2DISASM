@@ -490,5 +490,5 @@ byte_21028:
                 clsTxt
                 bra.w   loc_20A26
 
-	; End of function ChurchMenuActions
+    ; End of function ChurchMenuActions
 

@@ -10,5 +10,5 @@ Map24_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map24_DefaultZoneEvent
+    ; End of function Map24_DefaultZoneEvent
 

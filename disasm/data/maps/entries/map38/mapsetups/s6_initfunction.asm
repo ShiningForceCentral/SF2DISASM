@@ -27,7 +27,7 @@ return_5DD8C:
                 
                 rts
 
-	; End of function ms_map38_InitFunction
+    ; End of function ms_map38_InitFunction
 
 cs_5DD8E:       newEntity ALLY_ZYNK,11,8,DOWN,MAPSPRITE_TAROS
                 setFacing ALLY_ZYNK,DOWN

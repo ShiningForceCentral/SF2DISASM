@@ -31,7 +31,7 @@ Map3_1FA_EntityEvent0:
                 txt     $2A6            ; "Already passed away...{N}{LEADER} feels pity.{W1}"
                 rts
 
-	; End of function Map3_1FA_EntityEvent0
+    ; End of function Map3_1FA_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -42,7 +42,7 @@ Map3_1FA_EntityEvent2:
                 txt     $299            ; "(Shiver)....{N}The Galam Army was so{N}rude.{W1}"
                 rts
 
-	; End of function Map3_1FA_EntityEvent2
+    ; End of function Map3_1FA_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -53,7 +53,7 @@ Map3_1FA_EntityEvent3:
                 txt     $29A            ; "Galam soldiers rushed into{N}the castle.  What's going{N}on?{W1}"
                 rts
 
-	; End of function Map3_1FA_EntityEvent3
+    ; End of function Map3_1FA_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -64,7 +64,7 @@ Map3_1FA_EntityEvent4:
                 txt     $29B            ; "Be quiet when the Galam{N}Army comes in!  Got it?{W1}"
                 rts
 
-	; End of function Map3_1FA_EntityEvent4
+    ; End of function Map3_1FA_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,7 +75,7 @@ Map3_1FA_EntityEvent5:
                 txt     $29C            ; "I'm not afraid of Galam!{N}Grown-ups are cowards.{W1}"
                 rts
 
-	; End of function Map3_1FA_EntityEvent5
+    ; End of function Map3_1FA_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ Map3_1FA_EntityEvent6:
                 txt     $29D            ; "It has been so quiet since{N}they forced their way into{N}the castle.{W2}{N}What's going on?{W1}"
                 rts
 
-	; End of function Map3_1FA_EntityEvent6
+    ; End of function Map3_1FA_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -97,7 +97,7 @@ Map3_1FA_EntityEvent7:
                 txt     $29E            ; "Why did Galam invade our{N}country so suddenly?  Why?{N}We are allies.{W1}"
                 rts
 
-	; End of function Map3_1FA_EntityEvent7
+    ; End of function Map3_1FA_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -108,7 +108,7 @@ Map3_1FA_EntityEvent8:
                 txt     $29F            ; "I can't believe it!{W2}{N}The Galam Army went into{N}the castle with Mr. {NAME;28}{N}in the lead.{W1}"
                 rts
 
-	; End of function Map3_1FA_EntityEvent8
+    ; End of function Map3_1FA_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -119,7 +119,7 @@ Map3_1FA_EntityEvent12:
                 txt     $2A0            ; "See, see!{N}Galam soldiers destroyed{N}the cages!{W2}{N}The strange animals ran{N}away!{W1}"
                 rts
 
-	; End of function Map3_1FA_EntityEvent12
+    ; End of function Map3_1FA_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -130,7 +130,7 @@ Map3_1FA_EntityEvent13:
                 txt     $2A1            ; "{LEADER}, are you{N}alright?{W2}{N}Please do not go into{N}the castle, {LEADER}.{W1}"
                 rts
 
-	; End of function Map3_1FA_EntityEvent13
+    ; End of function Map3_1FA_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -164,7 +164,7 @@ return_512B8:
                 
                 rts
 
-	; End of function Map3_1FA_EntityEvent15
+    ; End of function Map3_1FA_EntityEvent15
 
 cs_512BA:       setFacing ALLY_KIWI,DOWN
                 setActscriptWait ALLY_KIWI,eas_Jump

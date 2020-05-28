@@ -59,7 +59,7 @@ loc_4F53C:
                 movem.l (sp)+,d1-d5/a0
                 rts
 
-	; End of function GetMandatoryItem
+    ; End of function GetMandatoryItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -81,7 +81,7 @@ loc_4F56A:
                 movem.w (sp)+,d1-d2
                 rts
 
-	; End of function RemoveItemFromInventory
+    ; End of function RemoveItemFromInventory
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -190,5 +190,5 @@ loc_4F6CE:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function DiscardItem
+    ; End of function DiscardItem
 

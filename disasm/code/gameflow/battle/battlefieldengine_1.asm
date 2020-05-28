@@ -19,7 +19,7 @@ ConvertCoordToOffset:
                 move.l  (sp)+,d2
                 rts
 
-	; End of function ConvertCoordToOffset
+    ; End of function ConvertCoordToOffset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -40,7 +40,7 @@ loc_C0B8:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function ClearTargetGrid
+    ; End of function ClearTargetGrid
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -50,7 +50,7 @@ loc_C0B8:
 ClearMovableGrid:
                 
                 movem.l d0-a6,-(sp)
-                lea     ((byte_FF4000+$400)).l,a0
+                lea     (byte_FF4400).l,a0
                 lea     (FF4D00_LOADING_SPACE).l,a1
                 move.w  #$240,d0
                 moveq   #$FFFFFFFF,d1
@@ -63,7 +63,7 @@ loc_C0DA:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function ClearMovableGrid
+    ; End of function ClearMovableGrid
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -82,7 +82,7 @@ GetTargetAtCoordOffset:
                 movem.l (sp)+,d1-a6
                 rts
 
-	; End of function GetTargetAtCoordOffset
+    ; End of function GetTargetAtCoordOffset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -99,7 +99,7 @@ GetMoveCostToEntity:
                 movem.l (sp)+,d1-a6
                 rts
 
-	; End of function GetMoveCostToEntity
+    ; End of function GetMoveCostToEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -109,7 +109,7 @@ GetMoveCostToEntity:
 GetDestinationMoveCost:
                 
                 movem.l d1-a6,-(sp)
-                lea     ((byte_FF4000+$400)).l,a0
+                lea     (byte_FF4400).l,a0
                 lea     (FF4D00_LOADING_SPACE).l,a1
                 clr.w   d0
                 mulu.w  #$30,d2 
@@ -121,7 +121,7 @@ GetDestinationMoveCost:
                 movem.l (sp)+,d1-a6
                 rts
 
-	; End of function GetDestinationMoveCost
+    ; End of function GetDestinationMoveCost
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -138,7 +138,7 @@ GetCurrentTerrainType:
                 movem.l (sp)+,d1-a6
                 rts
 
-	; End of function GetCurrentTerrainType
+    ; End of function GetCurrentTerrainType
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -157,7 +157,7 @@ GetTerrain:
                 movem.l (sp)+,d1-a6
                 rts
 
-	; End of function GetTerrain
+    ; End of function GetTerrain
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -171,7 +171,7 @@ SetTerrain:
                 movem.l (sp)+,d1-a6
                 rts
 
-	; End of function SetTerrain
+    ; End of function SetTerrain
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -199,7 +199,7 @@ loc_C1B2:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function MemorizePath
+    ; End of function MemorizePath
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -216,7 +216,7 @@ sub_C1BE:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_C1BE
+    ; End of function sub_C1BE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -237,7 +237,7 @@ GetMoveCost:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function GetMoveCost
+    ; End of function GetMoveCost
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -249,7 +249,7 @@ GetMoveCost:
 SetMovableAtCoord:
                 
                 movem.l d0-a6,-(sp)
-                lea     ((byte_FF4000+$400)).l,a0
+                lea     (byte_FF4400).l,a0
                 bsr.w   ConvertCoordToOffset
                 move.b  #0,(a0)
                 lea     (FF4D00_LOADING_SPACE).l,a0
@@ -258,7 +258,7 @@ SetMovableAtCoord:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function SetMovableAtCoord
+    ; End of function SetMovableAtCoord
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -281,5 +281,5 @@ GetResistanceToSpell:
                 movem.l (sp)+,d0-d1/d3-a6
                 rts
 
-	; End of function GetResistanceToSpell
+    ; End of function GetResistanceToSpell
 

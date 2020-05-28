@@ -11,7 +11,7 @@ ms_map9_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map9_AreaDescriptions
+    ; End of function ms_map9_AreaDescriptions
 
 byte_5688A:     msDesc 14, 13, 0, 0     ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
                                         ; "Monument of the landing{N}at Parmecia.{W1}"

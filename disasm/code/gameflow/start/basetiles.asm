@@ -27,5 +27,5 @@ LoadBaseTiles:
                 bsr.w   ApplyImmediateVramDMAOnCompressedTiles ; load base tiles
                 rts
 
-	; End of function LoadBaseTiles
+    ; End of function LoadBaseTiles
 

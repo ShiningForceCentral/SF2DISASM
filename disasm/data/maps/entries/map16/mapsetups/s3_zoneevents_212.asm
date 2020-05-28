@@ -10,5 +10,5 @@ Map16_212_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map16_212_DefaultZoneEvent
+    ; End of function Map16_212_DefaultZoneEvent
 

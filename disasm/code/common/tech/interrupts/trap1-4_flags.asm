@@ -15,7 +15,7 @@ Trap4_CheckFlag:
                 addq.l  #2,sp
                 rts
 
-	; End of function Trap4_CheckFlag
+    ; End of function Trap4_CheckFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -31,7 +31,7 @@ Trap2_SetFlag:
                 addq.l  #2,sp
                 rts
 
-	; End of function Trap2_SetFlag
+    ; End of function Trap2_SetFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -47,7 +47,7 @@ Trap1_CheckFlag:
                 addq.l  #2,sp
                 rts
 
-	; End of function Trap1_CheckFlag
+    ; End of function Trap1_CheckFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -63,5 +63,5 @@ Trap3_ClearFlag:
                 addq.l  #2,sp
                 rts
 
-	; End of function Trap3_ClearFlag
+    ; End of function Trap3_ClearFlag
 

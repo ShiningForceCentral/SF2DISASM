@@ -11,7 +11,7 @@ Map37_DefaultItemEvent1:
                 
                 rts
 
-	; End of function Map37_DefaultItemEvent1
+    ; End of function Map37_DefaultItemEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -46,5 +46,5 @@ return_5FA86:
                 
                 rts
 
-	; End of function Map37_ItemEvent0
+    ; End of function Map37_ItemEvent0
 

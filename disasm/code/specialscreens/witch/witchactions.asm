@@ -92,7 +92,7 @@ loc_74DE:
                 
                 bra.w   MainLoop        
 
-	; End of function WitchNew
+    ; End of function WitchNew
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -139,7 +139,7 @@ loc_753A:
                 moveq   #$FFFFFFFF,d4
                 bra.w   loc_75E0        
 
-	; End of function WitchLoad
+    ; End of function WitchLoad
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -158,7 +158,7 @@ WitchCopy:
                 txt     $E4             ; "Hee, hee!  It's done.{W2}"
                 bra.w   byte_73C2       
 
-	; End of function WitchCopy
+    ; End of function WitchCopy
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -194,5 +194,5 @@ loc_7590:
                 txt     $E7             ; "Hee, hee!  It's gone!{W2}"
                 bra.w   byte_73C2       
 
-	; End of function WitchDel
+    ; End of function WitchDel
 

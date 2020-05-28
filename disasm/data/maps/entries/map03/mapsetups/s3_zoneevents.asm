@@ -34,7 +34,7 @@ byte_50DA6:
                 setFlg  $101            ; TEMP FLAG #01
                 rts
 
-	; End of function Map3_ZoneEvent0
+    ; End of function Map3_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -68,7 +68,7 @@ return_50DF6:
                 
                 rts
 
-	; End of function Map3_ZoneEvent1
+    ; End of function Map3_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -102,7 +102,7 @@ return_50E42:
                 
                 rts
 
-	; End of function Map3_ZoneEvent4
+    ; End of function Map3_ZoneEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -123,7 +123,7 @@ return_50E64:
                 
                 rts
 
-	; End of function Map3_ZoneEvent6
+    ; End of function Map3_ZoneEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -162,7 +162,7 @@ return_50ED0:
                 
                 rts
 
-	; End of function Map3_ZoneEvent7
+    ; End of function Map3_ZoneEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -180,5 +180,5 @@ Map3_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map3_ZoneEvent8
+    ; End of function Map3_ZoneEvent8
 

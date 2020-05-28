@@ -8,63 +8,63 @@ DebugModeBattleTest:
                 
                 move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
                 move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
-                moveq   #1,d0
+                moveq   #ALLY_SARAH,d0
                 bsr.w   j_JoinForce
-                moveq   #2,d0
+                moveq   #ALLY_CHESTER,d0
                 bsr.w   j_JoinForce
-                moveq   #3,d0
+                moveq   #ALLY_JAHA,d0
                 bsr.w   j_JoinForce
-                moveq   #4,d0
+                moveq   #ALLY_KAZIN,d0
                 bsr.w   j_JoinForce
-                moveq   #5,d0
+                moveq   #ALLY_SLADE,d0
                 bsr.w   j_JoinForce
-                moveq   #6,d0
+                moveq   #ALLY_KIWI,d0
                 bsr.w   j_JoinForce
-                moveq   #7,d0
+                moveq   #ALLY_PETER,d0
                 bsr.w   j_JoinForce
-                moveq   #8,d0
+                moveq   #ALLY_MAY,d0
                 bsr.w   j_JoinForce
-                moveq   #9,d0
+                moveq   #ALLY_GERHALT,d0
                 bsr.w   j_JoinForce
-                moveq   #$A,d0
+                moveq   #ALLY_LUKE,d0
                 bsr.w   j_JoinForce
-                moveq   #$B,d0
+                moveq   #ALLY_ROHDE,d0
                 bsr.w   j_JoinForce
-                moveq   #$C,d0
+                moveq   #ALLY_RICK,d0
                 bsr.w   j_JoinForce
-                moveq   #$D,d0
+                moveq   #ALLY_ELRIC,d0
                 bsr.w   j_JoinForce
-                moveq   #$E,d0
+                moveq   #ALLY_ERIC,d0
                 bsr.w   j_JoinForce
-                moveq   #$F,d0
+                moveq   #ALLY_KARNA,d0
                 bsr.w   j_JoinForce
-                moveq   #$10,d0
+                moveq   #ALLY_RANDOLF,d0
                 bsr.w   j_JoinForce
-                moveq   #$11,d0
+                moveq   #ALLY_TYRIN,d0
                 bsr.w   j_JoinForce
-                moveq   #$12,d0
+                moveq   #ALLY_JANET,d0
                 bsr.w   j_JoinForce
-                moveq   #$13,d0
+                moveq   #ALLY_HIGINS,d0
                 bsr.w   j_JoinForce
-                moveq   #$14,d0
+                moveq   #ALLY_SKREECH,d0
                 bsr.w   j_JoinForce
-                moveq   #$15,d0
+                moveq   #ALLY_TAYA,d0
                 bsr.w   j_JoinForce
-                moveq   #$16,d0
+                moveq   #ALLY_FRAYJA,d0
                 bsr.w   j_JoinForce
-                moveq   #$17,d0
+                moveq   #ALLY_JARO,d0
                 bsr.w   j_JoinForce
-                moveq   #$18,d0
+                moveq   #ALLY_GYAN,d0
                 bsr.w   j_JoinForce
-                moveq   #$19,d0
+                moveq   #ALLY_SHEELA,d0
                 bsr.w   j_JoinForce
-                moveq   #$1A,d0
+                moveq   #ALLY_ZYNK,d0
                 bsr.w   j_JoinForce
-                moveq   #$1B,d0
+                moveq   #ALLY_CHAZ,d0
                 bsr.w   j_JoinForce
-                moveq   #$1C,d0
+                moveq   #ALLY_LEMON,d0
                 bsr.w   j_JoinForce
-                moveq   #$1D,d0
+                moveq   #ALLY_CLAUDE,d0
                 bsr.w   j_JoinForce
                 moveq   #0,d0
                 move.w  #$63,d1 
@@ -85,7 +85,7 @@ DebugModeBattleTest:
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
                 bsr.w   InitWindowProperties
-                move.w  #$1E,(INDEX_LIST_ENTRIES_NUM).l
+                move.w  #COM_ALLIES_NUM,(INDEX_LIST_ENTRIES_NUM).l
                 lea     (INDEX_LIST).l,a0
                 move.l  #$10203,(a0)+
                 move.l  #$4050607,(a0)+
@@ -165,7 +165,7 @@ loc_78BA:
                 
                 bra.s   loc_7894
 
-	; End of function DebugModeBattleTest
+    ; End of function DebugModeBattleTest
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -202,7 +202,7 @@ loc_78C6:
                 dbf     d7,loc_78C6
                 rts
 
-	; End of function sub_78BC
+    ; End of function sub_78BC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -218,7 +218,7 @@ loc_7924:
                 dbf     d7,loc_7924
                 rts
 
-	; End of function LevelUpWholeForce
+    ; End of function LevelUpWholeForce
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -241,5 +241,5 @@ sub_7930:
                 add.w   d2,d1
                 rts
 
-	; End of function sub_7930
+    ; End of function sub_7930
 

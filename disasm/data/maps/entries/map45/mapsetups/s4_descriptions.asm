@@ -11,7 +11,7 @@ ms_map45_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map45_AreaDescriptions
+    ; End of function ms_map45_AreaDescriptions
 
 byte_60088:     msDesc 21, 33, 5, 0     ; "{NAME} looked into{N}the well.{W2}{CLEAR}"
                                         ; "A deep well.{W1}"

@@ -31,7 +31,7 @@ byte_52E48:
                 txt     $220            ; "I'm going to the Ancient{N}Shrine in the south to{N}kill some rats.{W1}"
                 rts
 
-	; End of function Map19_EntityEvent0
+    ; End of function Map19_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -48,7 +48,7 @@ byte_52E5C:
                 txt     $222            ; "Some younger soldiers{N}think that peace is boring,{N}but they're wrong.{W1}"
                 rts
 
-	; End of function Map19_EntityEvent1
+    ; End of function Map19_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -59,7 +59,7 @@ Map19_EntityEvent2:
                 txt     $223            ; "Zzzzz....{N}Zzzzz....{W1}"
                 rts
 
-	; End of function Map19_EntityEvent2
+    ; End of function Map19_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -70,7 +70,7 @@ Map19_EntityEvent3:
                 txt     $224            ; "Zz...huh...who are you?{N}I'm tired because I was{N}standing watch all night{W2}{N}long...zzzz....{W1}"
                 rts
 
-	; End of function Map19_EntityEvent3
+    ; End of function Map19_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -87,7 +87,7 @@ byte_52E7C:
                 txt     $226            ; "The weapons inside could{N}be rusty.  We haven't{N}opened the door for many{W2}{N}years.{W1}"
                 rts
 
-	; End of function Map19_EntityEvent4
+    ; End of function Map19_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -104,7 +104,7 @@ byte_52E90:
                 txt     $228            ; "Why don't you go back to{N}school?{W1}"
                 rts
 
-	; End of function Map19_EntityEvent5
+    ; End of function Map19_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -121,7 +121,7 @@ byte_52EA4:
                 txt     $22A            ; "He was in such a hurry.{N}Do you know why?{W1}"
                 rts
 
-	; End of function Map19_EntityEvent6
+    ; End of function Map19_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -138,7 +138,7 @@ byte_52EB8:
                 txt     $22C            ; "I thought the King would{N}be the last person to{N}oversleep.{W1}"
                 rts
 
-	; End of function Map19_EntityEvent7
+    ; End of function Map19_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -155,7 +155,7 @@ byte_52ECC:
                 txt     $22E            ; "But I think that's OK.{N}A soldier's job is fighting.{W1}"
                 rts
 
-	; End of function Map19_EntityEvent8
+    ; End of function Map19_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -166,7 +166,7 @@ Map19_EntityEvent9:
                 txt     $22F            ; "What is she doing now?{N}She brought the King his{N}breakfast over an hour ago.{W1}"
                 rts
 
-	; End of function Map19_EntityEvent9
+    ; End of function Map19_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -183,7 +183,7 @@ byte_52EE6:
                 txt     $231            ; "But, he's still sleeping.{N}Did I arrive too early?{W1}"
                 rts
 
-	; End of function Map19_EntityEvent10
+    ; End of function Map19_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -194,7 +194,7 @@ Map19_EntityEvent11:
                 txt     $232            ; "The cook said that the{N}King didn't eat today.{N}I wonder why?{W1}"
                 rts
 
-	; End of function Map19_EntityEvent11
+    ; End of function Map19_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -214,7 +214,7 @@ Map19_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map19_EntityEvent12
+    ; End of function Map19_EntityEvent12
 
 cs_52F0C:       textCursor $23F
                 nextText $0,140         ; "I didn't want to involve{N}you, my children...but{N}this might be a good{W2}{N}opportunity for you to{N}learn how to properly{N}serve your King.{W2}{N}Are you ready, {LEADER}?{W1}"

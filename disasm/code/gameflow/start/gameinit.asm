@@ -60,5 +60,5 @@ loc_7118:
                 jsr     j_ExplorationLoop
                 bra.w   MainLoop        
 
-	; End of function InitGame
+    ; End of function InitGame
 

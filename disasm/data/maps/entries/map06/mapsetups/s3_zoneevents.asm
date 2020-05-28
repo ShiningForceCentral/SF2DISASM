@@ -31,7 +31,7 @@ return_54D10:
                 
                 rts
 
-	; End of function Map6_ZoneEvent0
+    ; End of function Map6_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -47,7 +47,7 @@ return_54D22:
                 
                 rts
 
-	; End of function Map6_ZoneEvent2
+    ; End of function Map6_ZoneEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -65,5 +65,5 @@ Map6_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map6_ZoneEvent3
+    ; End of function Map6_ZoneEvent3
 

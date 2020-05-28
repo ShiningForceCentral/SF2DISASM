@@ -31,5 +31,5 @@ loc_75E4:
                 jsr     j_ExplorationLoop
                 bra.s   loc_75C8        ; Return in case of warp event
 
-	; End of function MainLoop
+    ; End of function MainLoop
 

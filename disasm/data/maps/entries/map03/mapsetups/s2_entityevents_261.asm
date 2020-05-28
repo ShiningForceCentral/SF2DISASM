@@ -45,7 +45,7 @@ byte_510DA:
                 txt     $274            ; "Good luck, {LEADER}.{N}Your father would have{N}been proud of you.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent0
+    ; End of function Map3_261_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -62,7 +62,7 @@ byte_510EE:
                 txt     $276            ; "{LEADER}, you have to{N}study hard and be a fine{N}man like him.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent1
+    ; End of function Map3_261_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -73,7 +73,7 @@ Map3_261_EntityEvent2:
                 txt     $277            ; "He thinks of you as his{N}grandson.{W2}{N}Sometimes he may annoy{N}you, but it's because he{N}loves you.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent2
+    ; End of function Map3_261_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -84,7 +84,7 @@ Map3_261_EntityEvent3:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map3_261_EntityEvent3
+    ; End of function Map3_261_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -95,7 +95,7 @@ Map3_261_EntityEvent4:
                 txt     $278            ; "Why don't you stop by my{N}shop before you set out{N}on your journey?{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent4
+    ; End of function Map3_261_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -106,7 +106,7 @@ Map3_261_EntityEvent5:
                 txt     $279            ; "That Galam messenger rushed{N}out of town.{N}He looked pale.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent5
+    ; End of function Map3_261_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -117,7 +117,7 @@ Map3_261_EntityEvent6:
                 txt     $27A            ; "Don't listen to what that{N}fortune teller says.{N}She's a liar.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent6
+    ; End of function Map3_261_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -129,7 +129,7 @@ Map3_261_EntityEvent7:
                 txt     $27C            ; "The war!  Granseal will{N}fall in the war! {N}Believe me!{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent7
+    ; End of function Map3_261_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -140,7 +140,7 @@ Map3_261_EntityEvent8:
                 txt     $27D            ; "You heard about it?{N}The King was sick.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent8
+    ; End of function Map3_261_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -151,7 +151,7 @@ Map3_261_EntityEvent9:
                 txt     $27E            ; "Yes, I heard about it.{N}Soldiers of the castle{N}were talking about it.{W2}{N}It must be true!{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent9
+    ; End of function Map3_261_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -162,7 +162,7 @@ Map3_261_EntityEvent10:
                 txt     $27F            ; "The Minister said you{N}could enter anytime you{N}want.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent10
+    ; End of function Map3_261_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -174,7 +174,7 @@ Map3_261_EntityEvent12:
                 txt     $281            ; "You don't want a pet?{N}I'll lower my prices for{N}you!{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent12
+    ; End of function Map3_261_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -185,7 +185,7 @@ Map3_261_EntityEvent13:
                 txt     $282            ; "He looks so sad...{N}I feel sorry for him.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent13
+    ; End of function Map3_261_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -196,7 +196,7 @@ Map3_261_EntityEvent14:
                 txt     $283            ; "Bok-bok-bok.{N}Bok-gawk!{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent14
+    ; End of function Map3_261_EntityEvent14
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -207,7 +207,7 @@ Map3_261_EntityEvent15:
                 txt     $284            ; "Watch out!{N}Don't loiter around here!{N}Ever!{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent15
+    ; End of function Map3_261_EntityEvent15
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -218,7 +218,7 @@ Map3_261_EntityEvent16:
                 txt     $285            ; "Sorry, my husband is{N}angry.  He didn't catch any{N}fish today.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent16
+    ; End of function Map3_261_EntityEvent16
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -229,7 +229,7 @@ Map3_261_EntityEvent17:
                 txt     $286            ; "Granseal harbor is behind{N}me.{W2}{N}A ship just docked a few{N}minutes ago.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent17
+    ; End of function Map3_261_EntityEvent17
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -240,7 +240,7 @@ Map3_261_EntityEvent18:
                 txt     $287            ; "The human caught me when{N}I was taking a walk in{N}Parmecia.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent18
+    ; End of function Map3_261_EntityEvent18
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -251,7 +251,7 @@ Map3_261_EntityEvent19:
                 txt     $288            ; "Release me! Get me out of{N}here or I shall eat you up!!{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent19
+    ; End of function Map3_261_EntityEvent19
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -262,7 +262,7 @@ Map3_261_EntityEvent20:
                 txt     $289            ; "Me...(sob)...so hungry.{N}Hungry....{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent20
+    ; End of function Map3_261_EntityEvent20
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -272,7 +272,7 @@ Map3_261_EntityEvent21:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map3_261_EntityEvent21
+    ; End of function Map3_261_EntityEvent21
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -283,7 +283,7 @@ Map3_261_EntityEvent22:
                 txt     $28A            ; "I envy you!  You saw{N}the beautiful Princess Elis!{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent22
+    ; End of function Map3_261_EntityEvent22
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -303,7 +303,7 @@ return_51192:
                 
                 rts
 
-	; End of function Map3_261_EntityEvent23
+    ; End of function Map3_261_EntityEvent23
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -320,7 +320,7 @@ byte_511A2:
                 txt     $293            ; "I don't think it's right{N}to hold animals captive.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent24
+    ; End of function Map3_261_EntityEvent24
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -337,7 +337,7 @@ byte_511B6:
                 txt     $295            ; "I'm an inventor.{N}I'm looking for some sulfur.{W1}"
                 rts
 
-	; End of function Map3_261_EntityEvent25
+    ; End of function Map3_261_EntityEvent25
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -348,5 +348,5 @@ Map3_261_EntityEvent26:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map3_261_EntityEvent26
+    ; End of function Map3_261_EntityEvent26
 

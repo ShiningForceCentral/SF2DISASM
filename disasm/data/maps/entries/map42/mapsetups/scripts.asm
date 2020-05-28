@@ -63,5 +63,5 @@ csub_5FF56:
                 moveq   #1,d1
                 jmp     GetMandatoryItem
 
-	; End of function csub_5FF56
+    ; End of function csub_5FF56
 

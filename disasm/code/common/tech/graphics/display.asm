@@ -55,7 +55,7 @@ InitDisplay:
                 bsr.w   CopyBytes       
                 rts
 
-	; End of function InitDisplay
+    ; End of function InitDisplay
 
 plt_BasePalette:incbin "data/graphics/tech/basepalette.bin" ; Palette for UI/Sprites
 
@@ -75,7 +75,7 @@ sub_30BE:
                 bsr.w   ApplyVIntVramDMA
                 bra.w   WaitForDMAQueueProcessing
 
-	; End of function sub_30BE
+    ; End of function sub_30BE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -120,7 +120,7 @@ loc_312C:
                 movem.l (sp)+,a0-a5
                 rts
 
-	; End of function sub_30EE
+    ; End of function sub_30EE
 
 
 ; =============== S U B R O U T I N E =======================================

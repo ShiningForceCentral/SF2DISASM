@@ -19,7 +19,7 @@ Map23_EntityEvent0:
                 txt     $69B            ; "You may stay here as{N}long as you like.{W1}"
                 rts
 
-	; End of function Map23_EntityEvent0
+    ; End of function Map23_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -30,7 +30,7 @@ Map23_EntityEvent1:
                 txt     $69C            ; "They say a fairy lives{N}around here.{N}Do you know her?{W1}"
                 rts
 
-	; End of function Map23_EntityEvent1
+    ; End of function Map23_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -42,7 +42,7 @@ Map23_EntityEvent2:
                 txt     $69E            ; "She has not returned{N}from Creed's mansion.{W1}"
                 rts
 
-	; End of function Map23_EntityEvent2
+    ; End of function Map23_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -54,7 +54,7 @@ Map23_EntityEvent3:
                 txt     $6A0            ; "But, maybe {NAME;13} knows{N}because he is a friend of{N}the fairy.{W1}"
                 rts
 
-	; End of function Map23_EntityEvent3
+    ; End of function Map23_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,7 +75,7 @@ return_59B9C:
                 
                 rts
 
-	; End of function Map23_EntityEvent4
+    ; End of function Map23_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -85,7 +85,7 @@ Map23_EntityEvent5:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map23_EntityEvent5
+    ; End of function Map23_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -94,5 +94,5 @@ Map23_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map23_DefaultEntityEvent
+    ; End of function Map23_DefaultEntityEvent
 

@@ -111,7 +111,7 @@ loc_1AC1A8:
                 jsr     (Sleep).w       
                 rts
 
-	; End of function PlayEndCredits
+    ; End of function PlayEndCredits
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -129,7 +129,7 @@ ClearPalette2:
                 clr.l   (a0)+
                 rts
 
-	; End of function ClearPalette2
+    ; End of function ClearPalette2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -162,7 +162,7 @@ loc_1AC220:
                 jsr     (EnableDMAQueueProcessing).w
                 rts
 
-	; End of function VInt_EndCredits
+    ; End of function VInt_EndCredits
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -211,5 +211,5 @@ loc_1AC280:
                 jsr     (ApplyVIntVramDMA).w
                 rts
 
-	; End of function EndCreditSubroutine
+    ; End of function EndCreditSubroutine
 

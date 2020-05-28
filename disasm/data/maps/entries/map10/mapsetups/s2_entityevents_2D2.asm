@@ -60,7 +60,7 @@ return_56F3E:
                 
                 rts
 
-	; End of function Map10_2D2_EntityEvent19
+    ; End of function Map10_2D2_EntityEvent19
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -73,7 +73,7 @@ Map10_2D2_EntityEvent20:
                 txt     $640            ; "Only Tristan and Bedoe{N}will survive.{W1}"
                 rts
 
-	; End of function Map10_2D2_EntityEvent20
+    ; End of function Map10_2D2_EntityEvent20
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -85,7 +85,7 @@ Map10_2D2_EntityEvent22:
                 txt     $63B            ; "I saw a strange cloud!{W1}"
                 rts
 
-	; End of function Map10_2D2_EntityEvent22
+    ; End of function Map10_2D2_EntityEvent22
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -97,7 +97,7 @@ Map10_2D2_EntityEvent23:
                 txt     $63D            ; "The people living in Tristan{N}are kind, but weak.{N}I wonder if they are alright?{W1}"
                 rts
 
-	; End of function Map10_2D2_EntityEvent23
+    ; End of function Map10_2D2_EntityEvent23
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -108,7 +108,7 @@ Map10_2D2_EntityEvent24:
                 txt     $64F            ; "Shhhh!  My hatchling is{N}sleeping.  Quiet!{W1}"
                 rts
 
-	; End of function Map10_2D2_EntityEvent24
+    ; End of function Map10_2D2_EntityEvent24
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -128,7 +128,7 @@ return_56F7E:
                 
                 rts
 
-	; End of function Map10_2D2_EntityEvent25
+    ; End of function Map10_2D2_EntityEvent25
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -140,5 +140,5 @@ Map10_2D2_EntityEvent26:
                 txt     $642            ; "We can no longer depend on{N}him.  We must do it{N}ourselves!{W1}"
                 rts
 
-	; End of function Map10_2D2_EntityEvent26
+    ; End of function Map10_2D2_EntityEvent26
 

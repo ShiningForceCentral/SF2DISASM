@@ -48,7 +48,7 @@ loc_151C:
                 move.b  (a6),d7
                 rts
 
-	; End of function UpdatePlayerInputs
+    ; End of function UpdatePlayerInputs
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -63,7 +63,7 @@ return_1584:
                 
                 rts
 
-	; End of function WaitForPlayerInput
+    ; End of function WaitForPlayerInput
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -84,7 +84,7 @@ return_15A2:
                 
                 rts
 
-	; End of function WaitForPlayer1NewButtonPush
+    ; End of function WaitForPlayer1NewButtonPush
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -111,7 +111,7 @@ loc_15CA:
                 movem.l (sp)+,d7
                 rts
 
-	; End of function sub_15A4
+    ; End of function sub_15A4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -131,7 +131,7 @@ loc_15EE:
                 movem.l (sp)+,d5
                 rts
 
-	; End of function WaitForInputFor1Second
+    ; End of function WaitForInputFor1Second
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -142,5 +142,5 @@ WaitForInputFor3Seconds:
                 move.l  #$B3,d5 
                 bra.s   loc_15DE
 
-	; End of function WaitForInputFor3Seconds
+    ; End of function WaitForInputFor3Seconds
 

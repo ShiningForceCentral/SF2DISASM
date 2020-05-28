@@ -14,7 +14,7 @@ return_5D3A8:
                 
                 rts
 
-	; End of function ms_map25_InitFunction
+    ; End of function ms_map25_InitFunction
 
 cs_5D3AA:       setPos 133,25,18,RIGHT
                 setPos 135,25,17,RIGHT

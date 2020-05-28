@@ -64,5 +64,5 @@ return_7EC4:
                 
                 rts
 
-	; End of function CheatModeConfiguration
+    ; End of function CheatModeConfiguration
 

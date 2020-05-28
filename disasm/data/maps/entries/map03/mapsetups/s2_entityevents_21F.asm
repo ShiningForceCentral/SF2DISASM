@@ -25,7 +25,7 @@ Map3_21F_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map3_21F_DefaultEntityEvent
+    ; End of function Map3_21F_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -37,7 +37,7 @@ Map3_21F_EntityEvent0:
                 txt     $F50            ; "The Princess' face turned{N}pink!{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent0
+    ; End of function Map3_21F_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -49,7 +49,7 @@ Map3_21F_EntityEvent1:
                 txt     $F52            ; "I heard Princess Elis is{N}going to awaken today!{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent1
+    ; End of function Map3_21F_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -60,7 +60,7 @@ Map3_21F_EntityEvent2:
                 txt     $F53            ; "Thanks to Galam and{N}Pacalon, Granseal is{N}now the same as before!{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent2
+    ; End of function Map3_21F_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -71,7 +71,7 @@ Map3_21F_EntityEvent3:
                 txt     $F54            ; "Galam is making a statue of{N}{NAME;28} as a memorial.{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent3
+    ; End of function Map3_21F_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -83,7 +83,7 @@ Map3_21F_EntityEvent4:
                 txt     $F56            ; "I don't like you anymore.{N}(Sigh){W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent4
+    ; End of function Map3_21F_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -94,7 +94,7 @@ Map3_21F_EntityEvent5:
                 txt     $F57            ; "I'm so happy.  I'll get to{N}see Elis again!{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent5
+    ; End of function Map3_21F_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -106,7 +106,7 @@ Map3_21F_EntityEvent6:
                 txt     $F59            ; "If he kisses her, he'll have{N}my hoofprints on his rump!{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent6
+    ; End of function Map3_21F_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -117,7 +117,7 @@ Map3_21F_EntityEvent7:
                 script  cs_628C8
                 rts
 
-	; End of function Map3_21F_EntityEvent7
+    ; End of function Map3_21F_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -129,7 +129,7 @@ Map3_21F_EntityEvent8:
                 txt     $F5B            ; "Shucks, I wish I were as{N}young as you.{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent8
+    ; End of function Map3_21F_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -141,7 +141,7 @@ Map3_21F_EntityEvent9:
                 txt     $F47            ; "We have no more enemies.{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent9
+    ; End of function Map3_21F_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -165,7 +165,7 @@ return_627F6:
                 
                 rts
 
-	; End of function Map3_21F_EntityEvent10
+    ; End of function Map3_21F_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -177,7 +177,7 @@ Map3_21F_EntityEvent11:
                 txt     $F5F            ; "Who will it be?{N}What will I do if...{N}it's...?{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent11
+    ; End of function Map3_21F_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -189,7 +189,7 @@ Map3_21F_EntityEvent12:
                 txt     $F61            ; "Who will it be?{N}Does Sir Astral know?{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent12
+    ; End of function Map3_21F_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -201,7 +201,7 @@ Map3_21F_EntityEvent13:
                 txt     $F63            ; "I hope Sir Astral chooses{N}me!{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent13
+    ; End of function Map3_21F_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -213,5 +213,5 @@ Map3_21F_EntityEvent14:
                 txt     $F65            ; "And Sir Astral called us{N}here!{N}Who's going to kiss her?{W1}"
                 rts
 
-	; End of function Map3_21F_EntityEvent14
+    ; End of function Map3_21F_EntityEvent14
 

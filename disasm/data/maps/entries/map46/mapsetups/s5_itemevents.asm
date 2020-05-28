@@ -10,5 +10,5 @@ Map46_DefaultItemEvent0:
                 
                 rts
 
-	; End of function Map46_DefaultItemEvent0
+    ; End of function Map46_DefaultItemEvent0
 

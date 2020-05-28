@@ -16,5 +16,5 @@ return_58F28:
                 
                 rts
 
-	; End of function ms_map14_InitFunction
+    ; End of function ms_map14_InitFunction
 

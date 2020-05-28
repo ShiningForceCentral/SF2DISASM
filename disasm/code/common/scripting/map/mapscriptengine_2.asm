@@ -144,7 +144,7 @@ loc_4723E:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function ExecuteMapScript
+    ; End of function ExecuteMapScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -153,7 +153,7 @@ csc_doNothing:
                 
                 rts
 
-	; End of function csc_doNothing
+    ; End of function csc_doNothing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -193,7 +193,7 @@ return_4729C:
                 
                 rts
 
-	; End of function csc00_displaySingleTextbox
+    ; End of function csc00_displaySingleTextbox
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -227,7 +227,7 @@ loc_472BE:
                 jsr     (Sleep).w       
                 rts
 
-	; End of function csc01_displaySingleTextboxWithVars
+    ; End of function csc01_displaySingleTextboxWithVars
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -263,7 +263,7 @@ return_47330:
                 
                 rts
 
-	; End of function csc02_displayTextbox
+    ; End of function csc02_displayTextbox
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -293,7 +293,7 @@ loc_47352:
                 addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
                 rts
 
-	; End of function csc03_displayTextboxWithVars
+    ; End of function csc03_displayTextboxWithVars
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -305,7 +305,7 @@ csc04_setTextIndex:
                 move.w  (a6)+,((CUTSCENE_DIALOG_INDEX-$1000000)).w
                 rts
 
-	; End of function csc04_setTextIndex
+    ; End of function csc04_setTextIndex
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -318,7 +318,7 @@ csc05_playSound:
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
                 rts
 
-	; End of function csc05_playSound
+    ; End of function csc05_playSound
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -327,7 +327,7 @@ csc06_doNothing:
                 
                 rts
 
-	; End of function csc06_doNothing
+    ; End of function csc06_doNothing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -343,7 +343,7 @@ csc07_executeMapSystemEvent:
                 move.b  (a6)+,(a0)+
                 rts
 
-	; End of function csc07_executeMapSystemEvent
+    ; End of function csc07_executeMapSystemEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -387,7 +387,7 @@ loc_473EC:
                 jsr     (Sleep).w       
                 rts
 
-	; End of function csc08_joinForce
+    ; End of function csc08_joinForce
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -400,7 +400,7 @@ csc09_hideTextBoxAndPortrait:
                 clsTxt
                 rts
 
-	; End of function csc09_hideTextBoxAndPortrait
+    ; End of function csc09_hideTextBoxAndPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -413,7 +413,7 @@ csc0A_executeSubroutine:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function csc0A_executeSubroutine
+    ; End of function csc0A_executeSubroutine
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -423,7 +423,7 @@ csc0B_jump:
                 movea.l (a6),a6
                 rts
 
-	; End of function csc0B_jump
+    ; End of function csc0B_jump
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -444,7 +444,7 @@ return_4742A:
                 
                 rts
 
-	; End of function csc0C_jumpIfFlagSet
+    ; End of function csc0C_jumpIfFlagSet
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -465,7 +465,7 @@ return_4743E:
                 
                 rts
 
-	; End of function csc0D_jumpIfFlagClear
+    ; End of function csc0D_jumpIfFlagClear
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -493,7 +493,7 @@ return_47462:
                 
                 rts
 
-	; End of function csc0E_jumpIfForceMemberInList
+    ; End of function csc0E_jumpIfForceMemberInList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -515,7 +515,7 @@ return_47478:
                 
                 rts
 
-	; End of function csc0F_jumpIfCharacterAlive
+    ; End of function csc0F_jumpIfCharacterAlive
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -536,7 +536,7 @@ return_4748E:
                 
                 rts
 
-	; End of function csc10_setOrClearFlag
+    ; End of function csc10_setOrClearFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -560,7 +560,7 @@ loc_474AE:
                 jsr     (Sleep).w       
                 rts
 
-	; End of function csc11_promptYesNoForStoryFlow
+    ; End of function csc11_promptYesNoForStoryFlow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -587,7 +587,7 @@ loc_474DC:
                 movea.l (sp)+,a6
                 rts
 
-	; End of function csc12_executeContextMenu
+    ; End of function csc12_executeContextMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -601,7 +601,7 @@ csc13_setStoryFlag:
                 jsr     j_SetFlag
                 rts
 
-	; End of function csc13_setStoryFlag
+    ; End of function csc13_setStoryFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -613,5 +613,5 @@ sub_474EE:
                 bsr.w   RunMapSetupEntityEvent
                 rts
 
-	; End of function sub_474EE
+    ; End of function sub_474EE
 

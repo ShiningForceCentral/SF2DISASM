@@ -11,7 +11,7 @@ ms_map4_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map4_AreaDescriptions
+    ; End of function ms_map4_AreaDescriptions
 
 byte_51712:     msDesc 40, 6, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                                         ; "A book...{N}HEALING MAGIC{W1}"

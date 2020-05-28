@@ -20,7 +20,7 @@ Map2_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map2_DefaultEntityEvent
+    ; End of function Map2_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -32,7 +32,7 @@ Map2_EntityEvent0:
                 txt     $E00            ; "How did you get here safely?{W1}"
                 rts
 
-	; End of function Map2_EntityEvent0
+    ; End of function Map2_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -43,7 +43,7 @@ Map2_EntityEvent1:
                 txt     $E01            ; "I'm hungry....{W1}"
                 rts
 
-	; End of function Map2_EntityEvent1
+    ; End of function Map2_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -54,7 +54,7 @@ Map2_EntityEvent2:
                 txt     $E02            ; "Are you strong?  Will you{N}please kill the devils?{W1}"
                 rts
 
-	; End of function Map2_EntityEvent2
+    ; End of function Map2_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -66,7 +66,7 @@ Map2_EntityEvent3:
                 txt     $E04            ; "But, they're just cowards{N}that hide in the castle.{W1}"
                 rts
 
-	; End of function Map2_EntityEvent3
+    ; End of function Map2_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -77,7 +77,7 @@ Map2_EntityEvent4:
                 txt     $E05            ; "What will we do when we{N}lose?{W1}"
                 rts
 
-	; End of function Map2_EntityEvent4
+    ; End of function Map2_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -90,7 +90,7 @@ Map2_EntityEvent5:
                 txt     $E08            ; "Are all devils like him?{N}If so, I like them.{W1}"
                 rts
 
-	; End of function Map2_EntityEvent5
+    ; End of function Map2_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -102,7 +102,7 @@ Map2_EntityEvent6:
                 txt     $E0A            ; "Say yes!  Pacalon has the{N}best fighters in the world!{W1}"
                 rts
 
-	; End of function Map2_EntityEvent6
+    ; End of function Map2_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -113,7 +113,7 @@ Map2_EntityEvent7:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map2_EntityEvent7
+    ; End of function Map2_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -124,7 +124,7 @@ Map2_EntityEvent8:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map2_EntityEvent8
+    ; End of function Map2_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -134,5 +134,5 @@ Map2_EntityEvent9:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map2_EntityEvent9
+    ; End of function Map2_EntityEvent9
 

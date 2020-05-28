@@ -13,7 +13,7 @@ Map10_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map10_DefaultZoneEvent
+    ; End of function Map10_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -29,7 +29,7 @@ return_56FAC:
                 
                 rts
 
-	; End of function Map10_ZoneEvent0
+    ; End of function Map10_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -45,5 +45,5 @@ return_56FBE:
                 
                 rts
 
-	; End of function Map10_ZoneEvent1
+    ; End of function Map10_ZoneEvent1
 

@@ -30,7 +30,7 @@ return_5EB24:
                 
                 rts
 
-	; End of function ms_map59_InitFunction
+    ; End of function ms_map59_InitFunction
 
 cs_5EB26:       executeSubroutine csub_5EB34
                 warp $3B,$D,$22,$1
@@ -48,7 +48,7 @@ loc_5EB3C:
                 dbf     d7,loc_5EB3C
                 rts
 
-	; End of function csub_5EB34
+    ; End of function csub_5EB34
 
 cs_5EB44:       textCursor $E73
                 setCameraEntity 65535
@@ -432,7 +432,7 @@ csub_5F14C:
                 jsr     (sub_19C8).w    
                 rts
 
-	; End of function csub_5F14C
+    ; End of function csub_5F14C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -448,7 +448,7 @@ loc_5F16E:
                 dbf     d7,loc_5F16E
                 rts
 
-	; End of function sub_5F16C
+    ; End of function sub_5F16C
 
 plt_5F17E:      dc.w 0
                 dc.w $C40
@@ -532,7 +532,7 @@ csub_5F326:
                 move.b  #$18,((byte_FFAEEE+5-$1000000)).w
                 rts
 
-	; End of function sub_5F31E
+    ; End of function sub_5F31E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -543,7 +543,7 @@ sub_5F32E:
                 nop
                 rts
 
-	; End of function sub_5F32E
+    ; End of function sub_5F32E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -560,5 +560,5 @@ loc_5F33A:
                 dbf     d7,loc_5F33A
                 rts
 
-	; End of function sub_5F338
+    ; End of function sub_5F338
 

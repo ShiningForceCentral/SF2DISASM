@@ -20,5 +20,5 @@ GetCombatantPortrait:
                 
                 rts
 
-	; End of function GetCombatantPortrait
+    ; End of function GetCombatantPortrait
 

@@ -39,7 +39,7 @@ return_5827A:
                 
                 rts
 
-	; End of function Map13_ZoneEvent0
+    ; End of function Map13_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -57,7 +57,7 @@ return_58292:
                 
                 rts
 
-	; End of function Map13_ZoneEvent1
+    ; End of function Map13_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,5 +75,5 @@ Map13_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map13_ZoneEvent2
+    ; End of function Map13_ZoneEvent2
 

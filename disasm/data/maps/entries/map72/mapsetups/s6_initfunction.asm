@@ -16,7 +16,7 @@ return_4FF40:
                 
                 rts
 
-	; End of function ms_map72_InitFunction
+    ; End of function ms_map72_InitFunction
 
                 resetMap
                 reloadMap 0,0

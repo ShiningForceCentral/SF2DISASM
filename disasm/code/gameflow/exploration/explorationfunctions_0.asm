@@ -88,7 +88,7 @@ loc_23840:
                 movem.l (sp)+,d3-a0
                 rts
 
-	; End of function GetActivatedEntity
+    ; End of function GetActivatedEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -112,7 +112,7 @@ loc_2385C:
                 movem.l (sp)+,d0/a0
                 rts
 
-	; End of function CheckIfEntityIsFollower
+    ; End of function CheckIfEntityIsFollower
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -235,7 +235,7 @@ return_2399A:
                 
                 rts
 
-	; End of function CheckArea
+    ; End of function CheckArea
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -251,5 +251,5 @@ GetChestGoldAmount:
                 ext.l   d1
                 rts
 
-	; End of function GetChestGoldAmount
+    ; End of function GetChestGoldAmount
 

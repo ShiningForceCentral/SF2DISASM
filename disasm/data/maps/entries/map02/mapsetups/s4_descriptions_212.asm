@@ -11,7 +11,7 @@ ms_map2_flag212_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map2_flag212_AreaDescriptions
+    ; End of function ms_map2_flag212_AreaDescriptions
 
 byte_5EA72:     msDesc 8, 13, 2, 0      ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
                                         ; "Various weapons!{N}-inquire within{W1}"

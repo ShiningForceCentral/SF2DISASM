@@ -29,5 +29,5 @@ return_53166:
                 
                 rts
 
-	; End of function ms_map19_flag1FA_InitFunction
+    ; End of function ms_map19_flag1FA_InitFunction
 

@@ -22,5 +22,5 @@ loc_574:
                 movem.l (sp)+,d0-a6
                 rte
 
-	; End of function Trap5_TextBox
+    ; End of function Trap5_TextBox
 

@@ -16,7 +16,7 @@ Map70_ZoneEvent0:
                 jsr     CheckRandomBattle
                 rts
 
-	; End of function Map70_ZoneEvent0
+    ; End of function Map70_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -32,5 +32,5 @@ return_4FE30:
                 
                 rts
 
-	; End of function Map70_DefaultZoneEvent
+    ; End of function Map70_DefaultZoneEvent
 

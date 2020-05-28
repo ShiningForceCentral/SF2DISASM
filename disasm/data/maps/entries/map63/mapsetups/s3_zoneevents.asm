@@ -26,7 +26,7 @@ return_5CA12:
                 
                 rts
 
-	; End of function Map63_ZoneEvent0
+    ; End of function Map63_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -37,7 +37,7 @@ Map63_ZoneEvent2:
                 script  cs_5CC26
                 rts
 
-	; End of function Map63_ZoneEvent2
+    ; End of function Map63_ZoneEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -50,5 +50,5 @@ Map63_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map63_ZoneEvent3
+    ; End of function Map63_ZoneEvent3
 

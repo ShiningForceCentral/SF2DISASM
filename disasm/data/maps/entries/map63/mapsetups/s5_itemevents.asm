@@ -24,5 +24,5 @@ Map63_DefaultItemEvent1:
                 
                 rts
 
-	; End of function Map63_ItemEvent0
+    ; End of function Map63_ItemEvent0
 

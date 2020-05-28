@@ -37,5 +37,5 @@ Map7_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map7_ZoneEvent0
+    ; End of function Map7_ZoneEvent0
 

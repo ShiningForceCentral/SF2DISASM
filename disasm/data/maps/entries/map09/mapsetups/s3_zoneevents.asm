@@ -20,7 +20,7 @@ return_56876:
                 
                 rts
 
-	; End of function Map9_ZoneEvent0
+    ; End of function Map9_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -29,5 +29,5 @@ Map9_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map9_DefaultZoneEvent
+    ; End of function Map9_DefaultZoneEvent
 

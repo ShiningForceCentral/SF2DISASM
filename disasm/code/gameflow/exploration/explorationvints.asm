@@ -113,5 +113,5 @@ loc_25BF4:
                 jsr     j_DebugMapScript ; If Debug Mode and P1 C pushed while P2 C pushed, execute debug cutscene
                 rts
 
-	; End of function ProcessPlayerAction
+    ; End of function ProcessPlayerAction
 

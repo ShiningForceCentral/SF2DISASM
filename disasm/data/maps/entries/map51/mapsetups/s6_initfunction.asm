@@ -14,7 +14,7 @@ return_5C3D6:
                 
                 rts
 
-	; End of function ms_map51_InitFunction
+    ; End of function ms_map51_InitFunction
 
 cs_5C3D8:       textCursor $9F6
                 setActscriptWait FOLLOWER_B,eas_Init

@@ -14,5 +14,5 @@ return_53174:
                 
                 rts
 
-	; End of function ms_map19_flag1FB_InitFunction
+    ; End of function ms_map19_flag1FB_InitFunction
 

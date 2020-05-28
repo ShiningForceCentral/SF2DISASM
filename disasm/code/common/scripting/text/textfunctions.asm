@@ -67,7 +67,7 @@ loc_62FE:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function DisplayText
+    ; End of function DisplayText
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -90,7 +90,7 @@ loc_6338:
                 
                 bcs.s   return_634C
 
-	; End of function sub_6308
+    ; End of function sub_6308
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -105,7 +105,7 @@ return_634C:
                 
                 rts
 
-	; End of function sub_633A
+    ; End of function sub_633A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -134,7 +134,7 @@ return_6384:
                 
                 rts
 
-	; End of function GetNextTextSymbol
+    ; End of function GetNextTextSymbol
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -232,7 +232,7 @@ loc_6472:
                 move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
                 bra.w   loc_62CA
 
-	; End of function ParseSpecialTextSymbol
+    ; End of function ParseSpecialTextSymbol
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -277,7 +277,7 @@ return_64F4:
                 
                 rts
 
-	; End of function sub_64A8
+    ; End of function sub_64A8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -289,7 +289,7 @@ UpdateForceAndGetFirstForceMemberIndex:
                 move.b  (BATTLE_PARTY_MEMBERS).l,d0
                 rts
 
-	; End of function UpdateForceAndGetFirstForceMemberIndex
+    ; End of function UpdateForceAndGetFirstForceMemberIndex
 
 
 ; START OF FUNCTION CHUNK FOR ParseSpecialTextSymbol
@@ -450,7 +450,7 @@ sub_6648:
                 move.l  a1,((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w
                 rts
 
-	; End of function sub_6648
+    ; End of function sub_6648
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -473,7 +473,7 @@ return_666C:
                 
                 rts
 
-	; End of function CopyASCIIBytesForDialogueString
+    ; End of function CopyASCIIBytesForDialogueString
 
 unk_666E:       dc.b   1
                 dc.b   1
@@ -781,7 +781,7 @@ return_67E4:
                 
                 rts
 
-	; End of function sub_676E
+    ; End of function sub_676E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -839,7 +839,7 @@ loc_684E:
                 move.w  #$D860,d2
                 clr.w   d3
 
-	; End of function sub_67E6
+    ; End of function sub_67E6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -864,7 +864,7 @@ loc_6866:
                 move.w  d2,(a1)+
                 rts
 
-	; End of function CopyLineOfVDPTileOrderForDialogueWindowToRAM
+    ; End of function CopyLineOfVDPTileOrderForDialogueWindowToRAM
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -885,7 +885,7 @@ loc_688C:
                 clr.w   d0
                 bra.w   loc_68FC
 
-	; End of function sub_6872
+    ; End of function sub_6872
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -941,7 +941,7 @@ return_68FA:
                 
                 rts
 
-	; End of function HandleDialogueTypewriting
+    ; End of function HandleDialogueTypewriting
 
 
 ; START OF FUNCTION CHUNK FOR sub_6872
@@ -1045,7 +1045,7 @@ loc_6A0C:
                 bsr.w   ApplyVIntVramDMA
                 bra.w   WaitForDMAQueueProcessing
 
-	; End of function HandleBlinkingDialogueCursor
+    ; End of function HandleBlinkingDialogueCursor
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1085,7 +1085,7 @@ return_6A7E:
                 
                 rts
 
-	; End of function HideTextBox
+    ; End of function HideTextBox
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1130,7 +1130,7 @@ loc_6AC4:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function ClearNextLineOfDialoguePixels
+    ; End of function ClearNextLineOfDialoguePixels
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1142,7 +1142,7 @@ sub_6AD2:
                 bsr.w   WaitForVInt
                 rts
 
-	; End of function sub_6AD2
+    ; End of function sub_6AD2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1207,7 +1207,7 @@ loc_6B4C:
                 bsr.w   EnableDMAQueueProcessing
                 rts
 
-	; End of function sub_6AE0
+    ; End of function sub_6AE0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1237,7 +1237,7 @@ loc_6BA0:
                 movem.w (sp)+,d0-d2
                 rts
 
-	; End of function SymbolsToGraphics
+    ; End of function SymbolsToGraphics
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1271,7 +1271,7 @@ loc_6BD4:
                 add.b   d4,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 rts
 
-	; End of function DialogGraphicsToRAM
+    ; End of function DialogGraphicsToRAM
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1315,7 +1315,7 @@ loc_6C0E:
                 moveq   #$E,d6
                 rts
 
-	; End of function sub_6BDE
+    ; End of function sub_6BDE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1361,7 +1361,7 @@ loc_6C80:
                 dbf     d6,loc_6C3E
                 rts
 
-	; End of function sub_6C3A
+    ; End of function sub_6C3A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1372,7 +1372,7 @@ sub_6C86:
                 or.b    d2,(a2)
                 bra.s   loc_6C80
 
-	; End of function sub_6C86
+    ; End of function sub_6C86
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1383,7 +1383,7 @@ sub_6C8E:
                 or.b    d1,(a2)
                 bra.s   loc_6C80
 
-	; End of function sub_6C8E
+    ; End of function sub_6C8E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1394,7 +1394,7 @@ sub_6C96:
                 or.b    d2,1(a2)
                 bra.s   loc_6C80
 
-	; End of function sub_6C96
+    ; End of function sub_6C96
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1405,7 +1405,7 @@ sub_6CA2:
                 or.b    d1,1(a2)
                 bra.s   loc_6C80
 
-	; End of function sub_6CA2
+    ; End of function sub_6CA2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1416,7 +1416,7 @@ sub_6CAE:
                 or.b    d2,2(a2)
                 bra.s   loc_6C80
 
-	; End of function sub_6CAE
+    ; End of function sub_6CAE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1427,7 +1427,7 @@ sub_6CBA:
                 or.b    d1,2(a2)
                 bra.s   loc_6C80
 
-	; End of function sub_6CBA
+    ; End of function sub_6CBA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1438,7 +1438,7 @@ sub_6CC6:
                 or.b    d2,3(a2)
                 bra.s   loc_6C80
 
-	; End of function sub_6CC6
+    ; End of function sub_6CC6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1449,7 +1449,7 @@ sub_6CD2:
                 or.b    d1,3(a2)
                 bra.s   loc_6C80
 
-	; End of function sub_6CD2
+    ; End of function sub_6CD2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1460,7 +1460,7 @@ sub_6CDE:
                 or.b    d2,$20(a2)
                 bra.s   loc_6C80
 
-	; End of function sub_6CDE
+    ; End of function sub_6CDE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1471,7 +1471,7 @@ sub_6CEA:
                 or.b    d1,$20(a2)
                 bra.s   loc_6C80
 
-	; End of function sub_6CEA
+    ; End of function sub_6CEA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1482,7 +1482,7 @@ sub_6CF6:
                 or.b    d2,$21(a2)
                 bra.w   loc_6C80
 
-	; End of function sub_6CF6
+    ; End of function sub_6CF6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1495,7 +1495,7 @@ loc_6D0E:
                 
                 bra.w   loc_6C80
 
-	; End of function sub_6D04
+    ; End of function sub_6D04
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1506,7 +1506,7 @@ sub_6D12:
                 or.b    d2,$22(a2)
                 bra.w   loc_6C80
 
-	; End of function sub_6D12
+    ; End of function sub_6D12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1517,7 +1517,7 @@ sub_6D20:
                 or.b    d1,$22(a2)
                 bra.w   loc_6C80
 
-	; End of function sub_6D20
+    ; End of function sub_6D20
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1528,7 +1528,7 @@ sub_6D2E:
                 or.b    d2,$23(a2)
                 bra.w   loc_6C80
 
-	; End of function sub_6D2E
+    ; End of function sub_6D2E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1539,7 +1539,7 @@ sub_6D3C:
                 or.b    d1,$23(a2)
                 bra.w   loc_6C80
 
-	; End of function sub_6D3C
+    ; End of function sub_6D3C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1550,7 +1550,7 @@ sub_6D4A:
                 or.b    d2,$40(a2)
                 bra.w   loc_6C80
 
-	; End of function sub_6D4A
+    ; End of function sub_6D4A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1561,7 +1561,7 @@ sub_6D58:
                 or.b    d1,$40(a2)
                 bra.w   loc_6C80
 
-	; End of function sub_6D58
+    ; End of function sub_6D58
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1572,7 +1572,7 @@ sub_6D66:
                 or.b    d2,$41(a2)
                 bra.w   loc_6C80
 
-	; End of function sub_6D66
+    ; End of function sub_6D66
 
                 dc.b   0                ; unused layout ?
                 dc.b $EE 

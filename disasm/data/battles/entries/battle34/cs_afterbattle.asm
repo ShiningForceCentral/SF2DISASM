@@ -114,7 +114,7 @@ csub_4D694:
                 moveq   #1,d1
                 jmp     GetMandatoryItem
 
-	; End of function csub_4D694
+    ; End of function csub_4D694
 
 ce_4D69E:       mainEntity 7,12,UP
                 entity 9,11,UP,ALLY_PETER,eas_Init

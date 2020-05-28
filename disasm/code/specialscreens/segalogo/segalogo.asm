@@ -114,7 +114,7 @@ loc_28164:
                 clr.w   d0
                 rts
 
-	; End of function DisplaySegaLogo
+    ; End of function DisplaySegaLogo
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -131,7 +131,7 @@ loc_2818E:
                 moveq   #$FFFFFFFF,d0
                 rts
 
-	; End of function CheckStartButtonAtSegaLogo
+    ; End of function CheckStartButtonAtSegaLogo
 
 SegaLogoColors: incbin "data/graphics/tech/segalogocolors.bin"
 SegaLogoPalette:incbin "data/graphics/tech/segalogopalette.bin"
@@ -202,7 +202,7 @@ loc_28B7A:
                 addq.l  #4,sp
                 bra.w   loc_2818E
 
-	; End of function sub_28B12
+    ; End of function sub_28B12
 
 word_28BB0:     dc.w $F04
                 dc.w $F03
@@ -1144,7 +1144,7 @@ LoadSegaLogoPalette:
                 dbf     d0,LoadSegaLogoPalette
                 rts
 
-	; End of function LoadSegaLogoPalette
+    ; End of function LoadSegaLogoPalette
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1176,7 +1176,7 @@ return_28F96:
                 
                 rts
 
-	; End of function CalculateRomChecksum
+    ; End of function CalculateRomChecksum
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1201,7 +1201,7 @@ return_28FBA:
                 
                 rts
 
-	; End of function VInt_CheckConfigurationModeCheat
+    ; End of function VInt_CheckConfigurationModeCheat
 
 InputSequence_ConfigurationMode:
                 incbin "data/tech/configurationmodeinputsequence.bin"
@@ -1228,7 +1228,7 @@ return_28FEE:
                 
                 rts
 
-	; End of function VInt_CheckDebugModeCheat
+    ; End of function VInt_CheckDebugModeCheat
 
 InputSequence_DebugMode:
                 incbin "data/tech/debugmodeinputsequence.bin"

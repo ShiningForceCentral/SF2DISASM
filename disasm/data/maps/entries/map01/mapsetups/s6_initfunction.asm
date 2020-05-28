@@ -15,5 +15,5 @@ return_5E770:
                 
                 rts
 
-	; End of function ms_map1_InitFunction
+    ; End of function ms_map1_InitFunction
 

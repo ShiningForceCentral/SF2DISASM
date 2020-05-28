@@ -12,7 +12,7 @@ WaitForFollowersStopped:
                 bsr.w   WaitForPartyEntitiesIdle
                 rts
 
-	; End of function WaitForFollowersStopped
+    ; End of function WaitForFollowersStopped
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -25,7 +25,7 @@ WaitForHeroAndFollowersStopped:
                 bsr.w   WaitForPartyEntitiesIdle
                 rts
 
-	; End of function WaitForHeroAndFollowersStopped
+    ; End of function WaitForHeroAndFollowersStopped
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -55,7 +55,7 @@ return_4524A:
                 
                 rts
 
-	; End of function WaitForPartyEntitiesIdle
+    ; End of function WaitForPartyEntitiesIdle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -67,7 +67,7 @@ ApplyActscriptToHeroAndFollowers:
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a0
                 bra.w   ApplyActscriptToPartyEntities
 
-	; End of function ApplyActscriptToHeroAndFollowers
+    ; End of function ApplyActscriptToHeroAndFollowers
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -78,7 +78,7 @@ ApplyActscriptToFollowers:
                 
                 lea     ((byte_FFAF23-$1000000)).w,a0
 
-	; End of function ApplyActscriptToFollowers
+    ; End of function ApplyActscriptToFollowers
 
 
 ; START OF FUNCTION CHUNK FOR ApplyActscriptToHeroAndFollowers

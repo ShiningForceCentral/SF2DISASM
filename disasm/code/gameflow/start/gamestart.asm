@@ -166,7 +166,7 @@ loc_3DE:
                 bne.s   loc_3DE
                 bra.w   SystemInit
 
-	; End of function Start
+    ; End of function Start
 
                 dc.b $F3                ; some unused Z80 code, strange !
                 dc.b $31                ; loc_0:         di
@@ -205,7 +205,7 @@ loc_42E:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function InitZ80
+    ; End of function InitZ80
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -215,7 +215,7 @@ CopyWordToZ80:
                 bsr.w   CopyByteToZ80
                 lsr.w   #8,d0
 
-	; End of function CopyWordToZ80
+    ; End of function CopyWordToZ80
 
 
 ; =============== S U B R O U T I N E =======================================

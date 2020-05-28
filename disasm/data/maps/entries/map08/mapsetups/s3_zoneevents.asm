@@ -23,7 +23,7 @@ return_561D8:
                 
                 rts
 
-	; End of function Map8_ZoneEvent0
+    ; End of function Map8_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -39,5 +39,5 @@ Map8_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map8_ZoneEvent2
+    ; End of function Map8_ZoneEvent2
 

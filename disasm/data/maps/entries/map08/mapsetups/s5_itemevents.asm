@@ -26,7 +26,7 @@ Map8_DefaultItemEvent2:
                 
                 rts
 
-	; End of function Map8_ItemEvent0
+    ; End of function Map8_ItemEvent0
 
 cs_56314:       hideText
                 setActscriptWait ALLY_BOWIE,eas_Init

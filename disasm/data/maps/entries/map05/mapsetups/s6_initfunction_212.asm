@@ -88,7 +88,7 @@ return_606E8:
                 
                 rts
 
-	; End of function ms_map5_flag212_InitFunction
+    ; End of function ms_map5_flag212_InitFunction
 
 cs_606EA:       setPos ALLY_BOWIE,11,10,UP
                 setPos ALLY_PETER,11,10,UP

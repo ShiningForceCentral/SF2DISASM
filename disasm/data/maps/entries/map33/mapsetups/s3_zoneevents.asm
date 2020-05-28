@@ -12,7 +12,7 @@ Map33_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map33_DefaultZoneEvent
+    ; End of function Map33_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -39,7 +39,7 @@ return_5AAC8:
                 
                 rts
 
-	; End of function Map33_ZoneEvent0
+    ; End of function Map33_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -54,5 +54,5 @@ return_5AAD6:
                 
                 rts
 
-	; End of function Map33_ZoneEvent1
+    ; End of function Map33_ZoneEvent1
 

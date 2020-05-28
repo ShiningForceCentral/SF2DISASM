@@ -8,5 +8,5 @@ ms_map33_flag312_InitFunction:
                 
                 rts
 
-	; End of function ms_map33_flag312_InitFunction
+    ; End of function ms_map33_flag312_InitFunction
 

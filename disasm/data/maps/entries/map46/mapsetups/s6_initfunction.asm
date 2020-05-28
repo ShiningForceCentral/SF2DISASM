@@ -9,5 +9,5 @@ ms_map46_InitFunction:
                 jmp     InitHeadquartersForceMembers
                 rts
 
-	; End of function ms_map46_InitFunction
+    ; End of function ms_map46_InitFunction
 

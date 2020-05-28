@@ -10,5 +10,5 @@ Map75_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map75_DefaultZoneEvent
+    ; End of function Map75_DefaultZoneEvent
 

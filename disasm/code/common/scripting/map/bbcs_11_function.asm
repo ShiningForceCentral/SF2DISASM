@@ -22,5 +22,5 @@ sub_458E:
                 bset    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 rts
 
-	; End of function sub_458E
+    ; End of function sub_458E
 

@@ -11,7 +11,7 @@ ms_map10_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map10_AreaDescriptions
+    ; End of function ms_map10_AreaDescriptions
 
 byte_56FF0:     msDesc 32, 23, 2, 0     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
                                         ; "ITEMS{W1}"

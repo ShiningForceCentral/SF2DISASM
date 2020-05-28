@@ -171,7 +171,7 @@ loc_27C2C:
                 movea.l (p_Start).w,a0  
                 jmp     (a0)            ; reset
 
-	; End of function EndGame
+    ; End of function EndGame
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -193,7 +193,7 @@ sub_27C64:
                 addq.w  #1,d0
                 rts
 
-	; End of function sub_27C64
+    ; End of function sub_27C64
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -205,7 +205,7 @@ VInt_FallingJewels:
                 jsr     (EnableDMAQueueProcessing).w
                 rts
 
-	; End of function VInt_FallingJewels
+    ; End of function VInt_FallingJewels
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -290,5 +290,5 @@ loc_27D8A:
                 unlk    a6
                 rts
 
-	; End of function VInt_WitchEndBlink
+    ; End of function VInt_WitchEndBlink
 

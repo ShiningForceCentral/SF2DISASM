@@ -22,7 +22,7 @@ Map44_EntityEvent0:
                 txt     $271            ; "My husband rushed out{N}of here when he saw the{N}sun rise.{W2}{N}Yeah, maybe he'll make{N}a good haul today.{W1}"
                 rts
 
-	; End of function Map44_EntityEvent0
+    ; End of function Map44_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -33,7 +33,7 @@ Map44_EntityEvent1:
                 txt     $32A            ; "Meow!{W1}"
                 rts
 
-	; End of function Map44_EntityEvent1
+    ; End of function Map44_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -44,7 +44,7 @@ Map44_261_EntityEvent0:
                 txt     $26C            ; "Hang it all!{N}Where have all the fish gone?!{N}My boss was really upset.{W1}"
                 rts
 
-	; End of function Map44_261_EntityEvent0
+    ; End of function Map44_261_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -55,7 +55,7 @@ Map44_261_EntityEvent1:
                 txt     $26D            ; "It's strange...{N}The sea is so calm.{W2}{N}I have never seen such a{N}quiet sea before!{W1}"
                 rts
 
-	; End of function Map44_261_EntityEvent1
+    ; End of function Map44_261_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -66,7 +66,7 @@ Map44_261_EntityEvent2:
                 txt     $26E            ; "I'm so sorry.  I have no fish{N}for you today.{W2}{N}I don't know why, but we{N}made no haul.{W1}"
                 rts
 
-	; End of function Map44_261_EntityEvent2
+    ; End of function Map44_261_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -77,7 +77,7 @@ Map44_261_EntityEvent3:
                 txt     $26F            ; "Meow! {W1}"
                 rts
 
-	; End of function Map44_261_EntityEvent3
+    ; End of function Map44_261_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -88,7 +88,7 @@ Map44_261_EntityEvent4:
                 txt     $270            ; "Hey, you!{N}This ship is for{N}fishermen only!{W2}{N}Get out of here, you{N}silly kid!{W1}"
                 rts
 
-	; End of function Map44_261_EntityEvent4
+    ; End of function Map44_261_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -99,7 +99,7 @@ Map44_1FA_EntityEvent0:
                 txt     $272            ; "I heard that Galam invaded{N}this kingdom while I was{N}fishing.{W2}{N}What's going on in the{N}castle?{W1}"
                 rts
 
-	; End of function Map44_1FA_EntityEvent0
+    ; End of function Map44_1FA_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -110,7 +110,7 @@ Map44_1FB_EntityEvent0:
                 txt     $3E9            ; "The town was destroyed{N}by the earthquake....{W1}"
                 rts
 
-	; End of function Map44_1FB_EntityEvent0
+    ; End of function Map44_1FB_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -121,7 +121,7 @@ Map44_1FB_EntityEvent1:
                 txt     $3EA            ; "It was big enough to cause{N}a tsunami!{W1}"
                 rts
 
-	; End of function Map44_1FB_EntityEvent1
+    ; End of function Map44_1FB_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -132,7 +132,7 @@ Map44_1FB_EntityEvent2:
                 txt     $3EB            ; "Leave port now!{N}Right now!{W1}"
                 rts
 
-	; End of function Map44_1FB_EntityEvent2
+    ; End of function Map44_1FB_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -143,7 +143,7 @@ Map44_1FB_EntityEvent3:
                 txt     $3EC            ; "Who are you?{N}Don't push me.{N}The ship is full!{W1}"
                 rts
 
-	; End of function Map44_1FB_EntityEvent3
+    ; End of function Map44_1FB_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -154,7 +154,7 @@ Map44_1FB_EntityEvent4:
                 txt     $3ED            ; "Ouch...{N}I have bruises everywhere!{W1}"
                 rts
 
-	; End of function Map44_1FB_EntityEvent4
+    ; End of function Map44_1FB_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -165,7 +165,7 @@ Map44_1FB_EntityEvent5:
                 txt     $3EE            ; "There is no room for you{N}here!{W1}"
                 rts
 
-	; End of function Map44_1FB_EntityEvent5
+    ; End of function Map44_1FB_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -176,7 +176,7 @@ Map44_1FB_EntityEvent6:
                 txt     $3EF            ; "Oh, my!  Granseal is{N}collapsing....{W1}"
                 rts
 
-	; End of function Map44_1FB_EntityEvent6
+    ; End of function Map44_1FB_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -204,7 +204,7 @@ return_5454E:
                 
                 rts
 
-	; End of function Map44_1FB_EntityEvent7
+    ; End of function Map44_1FB_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -215,7 +215,7 @@ Map44_1FB_EntityEvent8:
                 txt     $3F3            ; "King Granseal!{N}Sir Astral...oh,{N}Minister!{W1}"
                 rts
 
-	; End of function Map44_1FB_EntityEvent8
+    ; End of function Map44_1FB_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -226,7 +226,7 @@ Map44_1FB_EntityEvent9:
                 txt     $3F4            ; "Everything is ready!{N}We can go anytime!{W1}"
                 rts
 
-	; End of function Map44_1FB_EntityEvent9
+    ; End of function Map44_1FB_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -235,5 +235,5 @@ Map44_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map44_DefaultEntityEvent
+    ; End of function Map44_DefaultEntityEvent
 

@@ -16,7 +16,7 @@ Map14_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map14_ZoneEvent0
+    ; End of function Map14_ZoneEvent0
 
 cs_58E5C:       textCursor $8D5
                 nextText $FF,255        ; "Bring up the plank?"

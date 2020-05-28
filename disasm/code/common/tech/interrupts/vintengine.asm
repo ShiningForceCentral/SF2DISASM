@@ -48,7 +48,7 @@ loc_620:
                 movem.l (sp)+,d0-a6
                 rte
 
-	; End of function VInt
+    ; End of function VInt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -82,7 +82,7 @@ loc_658:
                 dbf     d7,loc_644
                 rts
 
-	; End of function CallContextualFunctions
+    ; End of function CallContextualFunctions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -93,7 +93,7 @@ DisableDisplay:
                 move.w  (VDP_REG01_STATUS).l,(VDP_Control).l
                 rts
 
-	; End of function DisableDisplay
+    ; End of function DisableDisplay
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -104,7 +104,7 @@ ProcessVdpQueues:
                 bsr.w   ProcessDMAQueue
                 rts
 
-	; End of function ProcessVdpQueues
+    ; End of function ProcessVdpQueues
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -152,7 +152,7 @@ return_6FE:
                 
                 rts
 
-	; End of function ProcessVdpCommandQueue
+    ; End of function ProcessVdpCommandQueue
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -179,7 +179,7 @@ return_73E:
                 
                 rts
 
-	; End of function ProcessVramRead
+    ; End of function ProcessVramRead
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -227,7 +227,7 @@ return_7CC:
                 
                 rts
 
-	; End of function ProcessDMAQueue
+    ; End of function ProcessDMAQueue
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -244,7 +244,7 @@ Trap9_ManageContextualFunctions:
                 move.w  rjt_Trap9ActionsOfs(pc,d0.w),d0
                 jmp     rjt_Trap9ActionsOfs(pc,d0.w) ; jump according to the first two bytes parameter : $0000 to $0004
 
-	; End of function Trap9_ManageContextualFunctions
+    ; End of function Trap9_ManageContextualFunctions
 
 rjt_Trap9ActionsOfs:
                 dc.w Trap9_ClearPointers-rjt_Trap9ActionsOfs
@@ -270,7 +270,7 @@ Trap9_ClearPointers:
                 clr.l   (a0)+
                 bra.w   loc_8D6
 
-	; End of function Trap9_ClearPointers
+    ; End of function Trap9_ClearPointers
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -295,7 +295,7 @@ loc_832:
                 bset    d1,((VINT_FUNCS_ENABLED_BITFIELD-$1000000)).w
                 bra.w   loc_8D6
 
-	; End of function Trap9_SetFunctionAndTrigger
+    ; End of function Trap9_SetFunctionAndTrigger
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -320,7 +320,7 @@ loc_85A:
                 bclr    d1,((VINT_FUNCS_ENABLED_BITFIELD-$1000000)).w
                 bra.w   loc_8D6
 
-	; End of function Trap9_ClearFunctionAndTrigger
+    ; End of function Trap9_ClearFunctionAndTrigger
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -349,7 +349,7 @@ loc_88E:
                 clr.b   ((VINT_FUNCS_ENABLED_BITFIELD-$1000000)).w
                 bra.w   loc_8D6
 
-	; End of function Trap9_ClearTrigger
+    ; End of function Trap9_ClearTrigger
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -395,7 +395,7 @@ loc_8D6:
                 movem.l (sp)+,d0-a6
                 rte
 
-	; End of function Trap9_SetTrigger
+    ; End of function Trap9_SetTrigger
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -585,7 +585,7 @@ loc_AAC:
                 bsr.w   sub_19F8        
                 rts
 
-	; End of function ApplyZ80BusUpdates
+    ; End of function ApplyZ80BusUpdates
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -629,7 +629,7 @@ return_B1C:
                 
                 rts
 
-	; End of function ApplyFadingFX
+    ; End of function ApplyFadingFX
 
 FadingData:     incbin "data/graphics/tech/fadingdata.bin" ; 80 : end
                                         ; 8x : go x backward
@@ -647,7 +647,7 @@ loc_B9A:
                 movem.w (sp)+,d0
                 rts
 
-	; End of function WaitDmaEnd
+    ; End of function WaitDmaEnd
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -661,7 +661,7 @@ GetVdpRegStatus:
                 movem.l (sp)+,a0
                 rts
 
-	; End of function GetVdpRegStatus
+    ; End of function GetVdpRegStatus
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -679,7 +679,7 @@ SetVdpReg:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function SetVdpReg
+    ; End of function SetVdpReg
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -693,7 +693,7 @@ ApplyLogicalOrOnVdpReg:
                 or.b    d1,1(a0,d0.w)   ; enable display
                 bra.s   SendVDPCommand
 
-	; End of function ApplyLogicalOrOnVdpReg
+    ; End of function ApplyLogicalOrOnVdpReg
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -706,7 +706,7 @@ ApplyLogicalAndOnVdpReg:
                 add.w   d0,d0
                 and.b   d1,1(a0,d0.w)   ; disable display
 
-	; End of function ApplyLogicalAndOnVdpReg
+    ; End of function ApplyLogicalAndOnVdpReg
 
 
 ; START OF FUNCTION CHUNK FOR ApplyLogicalOrOnVdpReg
@@ -729,7 +729,7 @@ EnableDisplayOnVdp:
                 move.w  #$40,d1 
                 bra.s   ApplyLogicalOrOnVdpReg
 
-	; End of function EnableDisplayOnVdp
+    ; End of function EnableDisplayOnVdp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -740,7 +740,7 @@ DisableDisplayOnVdp:
                 move.w  #$BF,d1 
                 bra.s   ApplyLogicalAndOnVdpReg
 
-	; End of function DisableDisplayOnVdp
+    ; End of function DisableDisplayOnVdp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -751,7 +751,7 @@ EnableInterrupts:
                 move    #$2300,sr       ; set interrupt mask to level 3
                 rts
 
-	; End of function EnableInterrupts
+    ; End of function EnableInterrupts
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -762,7 +762,7 @@ DisableInterrupts:
                 move    #$2700,sr       ; set interrupt mask to level 7 : no more HInt/VInt !
                 rts
 
-	; End of function DisableInterrupts
+    ; End of function DisableInterrupts
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -772,7 +772,7 @@ EnableDisplayAndInterrupts:
                 bsr.s   EnableDisplayOnVdp
                 bra.s   EnableInterrupts
 
-	; End of function EnableDisplayAndInterrupts
+    ; End of function EnableDisplayAndInterrupts
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -782,7 +782,7 @@ DisableDisplayAndVInt:
                 bsr.s   DisableInterrupts
                 bra.s   DisableDisplayOnVdp
 
-	; End of function DisableDisplayAndVInt
+    ; End of function DisableDisplayAndVInt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -792,7 +792,7 @@ ActivateVIntDMAQueueProcessing:
                 bclr    #DEACTIVATE_DMA,(VINT_PARAMS).l
                 rts
 
-	; End of function ActivateVIntDMAQueueProcessing
+    ; End of function ActivateVIntDMAQueueProcessing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -802,7 +802,7 @@ DeactivateVIntDMAQueueProcessing:
                 bset    #DEACTIVATE_DMA,(VINT_PARAMS).l
                 rts
 
-	; End of function DeactivateVIntDMAQueueProcessing
+    ; End of function DeactivateVIntDMAQueueProcessing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -819,7 +819,7 @@ loc_C76:
                 dbf     d7,loc_C76
                 movem.l (sp)+,d7/a5-a6
 
-	; End of function DuplicatePalettes
+    ; End of function DuplicatePalettes
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -846,7 +846,7 @@ ApplyVIntCramDMA:
                 move    (sp)+,sr
                 rts
 
-	; End of function ApplyVIntCramDMA
+    ; End of function ApplyVIntCramDMA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -863,7 +863,7 @@ loc_CCE:
                 dbf     d0,loc_CCE
                 rts
 
-	; End of function sub_CC4
+    ; End of function sub_CC4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -873,7 +873,7 @@ FadeInFromBlack:
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
                 bra.w   ExecuteFading
 
-	; End of function FadeInFromBlack
+    ; End of function FadeInFromBlack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -883,7 +883,7 @@ FadeOutToBlack:
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
                 bra.w   ExecuteFading
 
-	; End of function FadeOutToBlack
+    ; End of function FadeOutToBlack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -893,7 +893,7 @@ FadeInFromWhite:
                 move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
                 bra.w   ExecuteFading
 
-	; End of function FadeInFromWhite
+    ; End of function FadeInFromWhite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -902,7 +902,7 @@ FadeOutToWhite:
                 
                 move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
 
-	; End of function FadeOutToWhite
+    ; End of function FadeOutToWhite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -921,7 +921,7 @@ loc_D0E:
                 bsr.w   WaitForVInt
                 rts
 
-	; End of function ExecuteFading
+    ; End of function ExecuteFading
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1003,7 +1003,7 @@ loc_DA8:
                 movem.l (sp)+,d2-a2
                 rts
 
-	; End of function ApplyCurrentColorFadingValue
+    ; End of function ApplyCurrentColorFadingValue
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1021,7 +1021,7 @@ loc_DC2:
                 move.w  #0,(Z80BusReq).l
                 rts
 
-	; End of function ClearVsramAndSprites
+    ; End of function ClearVsramAndSprites
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1044,7 +1044,7 @@ UpdateVDPSpriteTable:
                 move.w  (VDP_REG01_STATUS).l,(a6)
                 rts
 
-	; End of function UpdateVDPSpriteTable
+    ; End of function UpdateVDPSpriteTable
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1066,7 +1066,7 @@ loc_E22:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function ClearSpriteTable
+    ; End of function ClearSpriteTable
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1097,7 +1097,7 @@ loc_E70:
                 movem.l (sp)+,d7/a6
                 rts
 
-	; End of function ClearScrollTableData
+    ; End of function ClearScrollTableData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1128,7 +1128,7 @@ loc_EC8:
                 movem.l (sp)+,d0-d3
                 rts
 
-	; End of function sub_E7C
+    ; End of function sub_E7C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1143,7 +1143,7 @@ loc_EFC:
                 bne.s   loc_EFC         
                 rts
 
-	; End of function WaitForVInt
+    ; End of function WaitForVInt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1164,7 +1164,7 @@ loc_F14:
                 movem.w (sp)+,d0
                 rts
 
-	; End of function Sleep
+    ; End of function Sleep
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1174,7 +1174,7 @@ RequestVdpCommandQueueProcessing:
                 bset    #VDP_COMMAND_REQUEST,(VINT_PARAMS).l
                 rts
 
-	; End of function RequestVdpCommandQueueProcessing
+    ; End of function RequestVdpCommandQueueProcessing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1184,7 +1184,7 @@ WaitForVdpCommandQueueProcessing:
                 bsr.s   RequestVdpCommandQueueProcessing
                 bra.w   WaitForVInt
 
-	; End of function WaitForVdpCommandQueueProcessing
+    ; End of function WaitForVdpCommandQueueProcessing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1194,7 +1194,7 @@ EnableDMAQueueProcessing:
                 bset    #DMA_REQUEST,(VINT_PARAMS).l
                 rts
 
-	; End of function EnableDMAQueueProcessing
+    ; End of function EnableDMAQueueProcessing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1204,7 +1204,7 @@ WaitForDMAQueueProcessing:
                 bsr.s   EnableDMAQueueProcessing
                 bra.w   WaitForVInt
 
-	; End of function WaitForDMAQueueProcessing
+    ; End of function WaitForDMAQueueProcessing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1234,7 +1234,7 @@ loc_F50:
                 bsr.w   EnableInterrupts
                 rts
 
-	; End of function sub_F3A
+    ; End of function sub_F3A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1253,7 +1253,7 @@ sub_F76:
                 move.w  a6,(a4)+
                 bra.s   loc_F50
 
-	; End of function sub_F76
+    ; End of function sub_F76
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1301,7 +1301,7 @@ loc_FFE:
                 andi.w  #$F80,d6
                 rts
 
-	; End of function sub_F90
+    ; End of function sub_F90
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1315,7 +1315,7 @@ SwapA6:
                 movem.l (sp)+,d7
                 rts
 
-	; End of function SwapA6
+    ; End of function SwapA6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1383,7 +1383,7 @@ loc_1088:
                 bsr.w   SwapA6
                 bra.w   loc_103C
 
-	; End of function sub_1014
+    ; End of function sub_1014
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1459,7 +1459,7 @@ loc_1188:
                 move    (sp)+,sr
                 rts
 
-	; End of function ApplyImmediateVramDMA
+    ; End of function ApplyImmediateVramDMA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1476,7 +1476,7 @@ ApplyVIntVramDMA:
                 movem.l d0/a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.l  d1,d2
-                addi.w  #$8F00,d1
+                addi.w  #-$7100,d1
                 move.w  d1,(a6)+        ; Apply auto-increment from D1
                 move.l  d2,d1
                 clr.w   d2
@@ -1520,7 +1520,7 @@ ApplyVIntVramDMA:
                 move    (sp)+,sr
                 rts
 
-	; End of function ApplyVIntVramDMA
+    ; End of function ApplyVIntVramDMA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1541,7 +1541,7 @@ sub_1234:
                 movem.w (sp)+,d7
                 rts
 
-	; End of function sub_1234
+    ; End of function sub_1234
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1577,7 +1577,7 @@ loc_1284:
                 movem.l (sp)+,a6
                 rts
 
-	; End of function UpdateVDPHScrollData
+    ; End of function UpdateVDPHScrollData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1597,7 +1597,7 @@ loc_12B8:
                 movem.l (sp)+,d7/a6
                 bra.s   UpdateVDPHScrollData
 
-	; End of function UpdateForegroundHScrollData
+    ; End of function UpdateForegroundHScrollData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1608,7 +1608,7 @@ UpdateBackgroundHScrollData:
                 lea     ((HORIZONTAL_SCROLL_DATA+2)).l,a6
                 bra.s   loc_12B4
 
-	; End of function UpdateBackgroundHScrollData
+    ; End of function UpdateBackgroundHScrollData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1641,7 +1641,7 @@ loc_12FC:
                 movem.l (sp)+,a6
                 rts
 
-	; End of function UpdateVDPVScrollData
+    ; End of function UpdateVDPVScrollData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1661,7 +1661,7 @@ loc_1330:
                 movem.l (sp)+,d7/a6
                 bra.s   UpdateVDPVScrollData
 
-	; End of function UpdateForegroundVScrollData
+    ; End of function UpdateForegroundVScrollData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1672,7 +1672,7 @@ UpdateBackgroundVScrollData:
                 lea     ((VERTICAL_SCROLL_DATA+2)).l,a6
                 bra.s   loc_132C
 
-	; End of function UpdateBackgroundVScrollData
+    ; End of function UpdateBackgroundVScrollData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1687,7 +1687,7 @@ sub_134A:
                 movem.w (sp)+,d1
                 rts
 
-	; End of function sub_134A
+    ; End of function sub_134A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1703,7 +1703,7 @@ sub_135A:
                 move.w  #2,d1
                 rts
 
-	; End of function sub_135A
+    ; End of function sub_135A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1718,7 +1718,7 @@ sub_1372:
                 movem.w (sp)+,d1
                 rts
 
-	; End of function sub_1372
+    ; End of function sub_1372
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1733,7 +1733,7 @@ ApplyImmediateVramDMAOnCompressedTiles:
                 movem.w (sp)+,d1
                 rts
 
-	; End of function ApplyImmediateVramDMAOnCompressedTiles
+    ; End of function ApplyImmediateVramDMAOnCompressedTiles
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1748,7 +1748,7 @@ DecompressTilesForVramDMA:
                 move.w  #2,d1
                 rts
 
-	; End of function DecompressTilesForVramDMA
+    ; End of function DecompressTilesForVramDMA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1761,7 +1761,7 @@ ApplyVIntVramDMAOnCompressedTiles:
                 movem.w (sp)+,d1
                 rts
 
-	; End of function ApplyVIntVramDMAOnCompressedTiles
+    ; End of function ApplyVIntVramDMAOnCompressedTiles
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1780,7 +1780,7 @@ sub_13C0:
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-	; End of function sub_13C0
+    ; End of function sub_13C0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1799,7 +1799,7 @@ sub_13E4:
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-	; End of function sub_13E4
+    ; End of function sub_13E4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1811,7 +1811,7 @@ DMAandWait:
                 bsr.s   sub_13C0        
                 bra.w   WaitForVInt
 
-	; End of function DMAandWait
+    ; End of function DMAandWait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1855,5 +1855,5 @@ loc_1480:
                 movem.l (sp)+,d0-d3
                 rts
 
-	; End of function ApplyVramDMAFill
+    ; End of function ApplyVramDMAFill
 

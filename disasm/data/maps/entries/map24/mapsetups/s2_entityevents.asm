@@ -10,5 +10,5 @@ Map24_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map24_DefaultEntityEvent
+    ; End of function Map24_DefaultEntityEvent
 

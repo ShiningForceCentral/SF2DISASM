@@ -19,7 +19,7 @@ loc_612A8:
                 jsr     MoveEntityOutOfMap
                 rts
 
-	; End of function ms_map18_flag212_InitFunction
+    ; End of function ms_map18_flag212_InitFunction
 
 cs_612BE:       textCursor $E61
                 mapLoad 59,8,4
@@ -123,5 +123,5 @@ loc_61434:
                 dbf     d0,loc_61434
                 rts
 
-	; End of function csub_61426
+    ; End of function csub_61426
 

@@ -11,7 +11,7 @@ Map22_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map22_DefaultZoneEvent
+    ; End of function Map22_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -29,5 +29,5 @@ return_59600:
                 
                 rts
 
-	; End of function Map22_ZoneEvent0
+    ; End of function Map22_ZoneEvent0
 

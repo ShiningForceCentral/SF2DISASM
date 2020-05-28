@@ -8,5 +8,5 @@ ms_map76_InitFunction:
                 
                 rts
 
-	; End of function ms_map76_InitFunction
+    ; End of function ms_map76_InitFunction
 

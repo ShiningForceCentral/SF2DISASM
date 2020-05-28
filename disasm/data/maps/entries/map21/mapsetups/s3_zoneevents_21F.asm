@@ -10,5 +10,5 @@ Map21_21F_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map21_21F_DefaultZoneEvent
+    ; End of function Map21_21F_DefaultZoneEvent
 

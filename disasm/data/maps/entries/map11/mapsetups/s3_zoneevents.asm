@@ -11,7 +11,7 @@ Map11_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map11_DefaultZoneEvent
+    ; End of function Map11_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -28,5 +28,5 @@ return_57A86:
                 
                 rts
 
-	; End of function Map11_ZoneEvent0
+    ; End of function Map11_ZoneEvent0
 

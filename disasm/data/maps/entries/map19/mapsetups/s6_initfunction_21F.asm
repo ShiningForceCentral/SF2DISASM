@@ -49,7 +49,7 @@ return_62D04:
                 
                 rts
 
-	; End of function ms_map19_flag21F_InitFunction
+    ; End of function ms_map19_flag21F_InitFunction
 
 cs_62D06:       setSprite ALLY_ROHDE,MAPSPRITE_NPC_ROHDE
                 csc_end

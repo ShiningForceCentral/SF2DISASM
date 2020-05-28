@@ -11,7 +11,7 @@ Map77_DefaultItemEvent1:
                 
                 rts
 
-	; End of function Map77_DefaultItemEvent1
+    ; End of function Map77_DefaultItemEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -33,7 +33,7 @@ loc_50ABA:
                 moveq   #$FFFFFFFF,d6
                 rts
 
-	; End of function Map77_ItemEvent0
+    ; End of function Map77_ItemEvent0
 
 cs_50ABE:       playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 1

@@ -83,7 +83,7 @@ loc_9B3E:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-	; End of function DebugModeActionSelect
+    ; End of function DebugModeActionSelect
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -96,7 +96,7 @@ DebugModeSelectTargetEnemy:
                 jsr     j_NumberPrompt
                 rts
 
-	; End of function DebugModeSelectTargetEnemy
+    ; End of function DebugModeSelectTargetEnemy
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -119,5 +119,5 @@ DebugModeSelectHits:
                 movem.l (sp)+,d0/a0-a6
                 rts
 
-	; End of function DebugModeSelectHits
+    ; End of function DebugModeSelectHits
 

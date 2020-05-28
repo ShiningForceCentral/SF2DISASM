@@ -230,7 +230,7 @@ loc_227A:
                 move.w  d1,(a1)+
                 bra.w   loc_2114        
 
-	; End of function LoadMapLayoutData
+    ; End of function LoadMapLayoutData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -299,7 +299,7 @@ loc_22E6:
                 move.l  (sp)+,d2
                 rts
 
-	; End of function ReadMapLayoutBarrelForBlockFlags
+    ; End of function ReadMapLayoutBarrelForBlockFlags
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -320,7 +320,7 @@ loc_2308:
                 ori.w   #$400,d4        ; get upper block value + 0x0400 for upper blocks offset
                 bra.w   loc_2324
 
-	; End of function SaveBlockToUpperStackMap
+    ; End of function SaveBlockToUpperStackMap
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -381,7 +381,7 @@ return_2370:
                 
                 rts
 
-	; End of function SaveBlockToLeftStackMap
+    ; End of function SaveBlockToLeftStackMap
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -656,7 +656,7 @@ loc_257A:
                 move.w  d3,(a1)+        ; output tile value
                 bra.w   loc_240A        
 
-	; End of function LoadMapBlocks
+    ; End of function LoadMapBlocks
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -732,7 +732,7 @@ loc_2632:
                 dc.l 0
                 rts
 
-	; End of function ProcessMapTransition
+    ; End of function ProcessMapTransition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -745,7 +745,7 @@ ApplyOverworldMapTransition:
                 move.w  rjt_OverworldMapTransition(pc,d0.w),d0
                 jmp     rjt_OverworldMapTransition(pc,d0.w)
 
-	; End of function ApplyOverworldMapTransition
+    ; End of function ApplyOverworldMapTransition
 
 rjt_OverworldMapTransition:
                 dc.w ApplyOverworldMapTransition_Right-rjt_OverworldMapTransition
@@ -815,7 +815,7 @@ loc_26E8:
                 nop
                 rts
 
-	; End of function ApplyOverworldMapTransition_Right
+    ; End of function ApplyOverworldMapTransition_Right
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -882,7 +882,7 @@ loc_27AE:
                 nop
                 rts
 
-	; End of function ApplyOverworldMapTransition_Left
+    ; End of function ApplyOverworldMapTransition_Left
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -947,7 +947,7 @@ loc_2874:
                 nop
                 rts
 
-	; End of function ApplyOverworldMapTransition_Up
+    ; End of function ApplyOverworldMapTransition_Up
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1012,7 +1012,7 @@ loc_293A:
                 nop
                 rts
 
-	; End of function ApplyOverworldMapTransition_Down
+    ; End of function ApplyOverworldMapTransition_Down
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1049,7 +1049,7 @@ loc_29D6:
                 movem.l (sp)+,d0-a0
                 rts
 
-	; End of function sub_29A2
+    ; End of function sub_29A2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1118,7 +1118,7 @@ loc_2A86:
                 movem.l (sp)+,d0-d1/a0-a1/a5
                 rts
 
-	; End of function LoadMapTilesets
+    ; End of function LoadMapTilesets
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1404,7 +1404,7 @@ loc_2CF6:
                 bsr.w   UpdateVdpPlaneB 
                 rts
 
-	; End of function LoadMap
+    ; End of function LoadMap
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1467,7 +1467,7 @@ return_2DEA:
                 
                 rts
 
-	; End of function LoadMapBlocksAndLayout
+    ; End of function LoadMapBlocksAndLayout
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1540,7 +1540,7 @@ return_2EBE:
                 
                 rts
 
-	; End of function LoadMapArea
+    ; End of function LoadMapArea
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1578,7 +1578,7 @@ loc_2F04:
                 bne.s   loc_2F04
                 rts
 
-	; End of function sub_2EC0
+    ; End of function sub_2EC0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1617,5 +1617,5 @@ loc_2F66:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function sub_2F24
+    ; End of function sub_2F24
 

@@ -20,5 +20,5 @@ return_229E0:
                 
                 rts
 
-	; End of function sub_229CA
+    ; End of function sub_229CA
 

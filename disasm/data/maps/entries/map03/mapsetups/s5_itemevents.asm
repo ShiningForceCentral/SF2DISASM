@@ -10,5 +10,5 @@ Map3_DefaultItemEvent0:
                 
                 rts
 
-	; End of function Map3_DefaultItemEvent0
+    ; End of function Map3_DefaultItemEvent0
 

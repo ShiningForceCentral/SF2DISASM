@@ -255,7 +255,7 @@ sub_493EC:
                 moveq   #$78,d0 
                 rts
 
-	; End of function sub_493EC
+    ; End of function sub_493EC
 
                 updateDefeatedAllies
                 allyDefeated ALLY_PETER

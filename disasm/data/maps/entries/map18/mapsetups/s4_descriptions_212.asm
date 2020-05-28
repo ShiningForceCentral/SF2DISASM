@@ -11,7 +11,7 @@ ms_map18_flag212_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map18_flag212_AreaDescriptions
+    ; End of function ms_map18_flag212_AreaDescriptions
 
 byte_61288:     msDesc 12, 9, 6, 0      ; "{NAME} looked at{N}the paper.{W2}{CLEAR}"
                                         ; "It reads...{N}RESPECT YOUR PARENTS{W1}"

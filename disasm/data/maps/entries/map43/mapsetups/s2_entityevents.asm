@@ -10,5 +10,5 @@ Map43_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map43_DefaultEntityEvent
+    ; End of function Map43_DefaultEntityEvent
 

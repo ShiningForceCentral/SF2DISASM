@@ -14,7 +14,7 @@ return_5F4AC:
                 
                 rts
 
-	; End of function ms_map41_InitFunction
+    ; End of function ms_map41_InitFunction
 
 cs_5F4AE:       setBlocks 13,0,3,5,5,4
                 csc_end

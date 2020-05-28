@@ -11,7 +11,7 @@ ms_map31_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map31_AreaDescriptions
+    ; End of function ms_map31_AreaDescriptions
 
 byte_5D584:     msDesc 8, 26, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                                         ; "A book...{N}MYSTERY OF NAZCA{W1}"
@@ -39,7 +39,7 @@ return_5D5BC:
                 
                 rts
 
-	; End of function Map31_DescFunc0
+    ; End of function Map31_DescFunc0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -79,5 +79,5 @@ return_5D60C:
                 
                 rts
 
-	; End of function Map31_DescFunc1
+    ; End of function Map31_DescFunc1
 

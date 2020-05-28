@@ -13,7 +13,7 @@ Map20_21F_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map20_21F_DefaultZoneEvent
+    ; End of function Map20_21F_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -39,7 +39,7 @@ byte_632E0:
                 sndCom  MUSIC_TOWN
                 rts
 
-	; End of function Map20_21F_ZoneEvent0
+    ; End of function Map20_21F_ZoneEvent0
 
 cs_632EA:       setActscriptWait ALLY_BOWIE,eas_Init
                 csWait 1
@@ -68,7 +68,7 @@ return_6332E:
                 
                 rts
 
-	; End of function Map20_21F_ZoneEvent1
+    ; End of function Map20_21F_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -90,7 +90,7 @@ return_6335C:
                 
                 rts
 
-	; End of function Map20_21F_ZoneEvent2
+    ; End of function Map20_21F_ZoneEvent2
 
 cs_6335E:       setFacing 128,DOWN
                 csc_end

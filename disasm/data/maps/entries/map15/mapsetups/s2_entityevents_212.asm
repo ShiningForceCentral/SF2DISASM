@@ -23,7 +23,7 @@ Map15_212_EntityEvent1:
                 txt     $7CE            ; "Will Tristan be attacked?{W1}"
                 rts
 
-	; End of function Map15_212_EntityEvent1
+    ; End of function Map15_212_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -35,7 +35,7 @@ Map15_212_EntityEvent2:
                 txt     $7D0            ; "If your spirit is stolen, you{N}become a vampire.{W1}"
                 rts
 
-	; End of function Map15_212_EntityEvent2
+    ; End of function Map15_212_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -47,7 +47,7 @@ Map15_212_EntityEvent3:
                 txt     $7D2            ; "A vampire becomes a mortal{N}again if the devil is purged{N}from the body.{W1}"
                 rts
 
-	; End of function Map15_212_EntityEvent3
+    ; End of function Map15_212_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -58,7 +58,7 @@ Map15_212_EntityEvent4:
                 txt     $7D3            ; "I did see a ship in the{N}western sky!{W1}"
                 rts
 
-	; End of function Map15_212_EntityEvent4
+    ; End of function Map15_212_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -69,7 +69,7 @@ Map15_212_EntityEvent5:
                 txt     $7D4            ; "Thank you.  You saved Mitula{N}and Pacalon!{W1}"
                 rts
 
-	; End of function Map15_212_EntityEvent5
+    ; End of function Map15_212_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -80,5 +80,5 @@ Map15_212_EntityEvent6:
                 txt     $7D5            ; "To keep the devils out,{N}Moun gate has been closed.{W1}"
                 rts
 
-	; End of function Map15_212_EntityEvent6
+    ; End of function Map15_212_EntityEvent6
 

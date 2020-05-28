@@ -11,7 +11,7 @@ ms_map8_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map8_AreaDescriptions
+    ; End of function ms_map8_AreaDescriptions
 
 byte_561FC:     msDesc 5, 15, 2, 11     ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
                                         ; "WEAPONS AND ITEMS{N}BY HASSAN{W1}"
@@ -52,7 +52,7 @@ return_5626A:
                 
                 rts
 
-	; End of function Map8_DescFunc0
+    ; End of function Map8_DescFunc0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -78,7 +78,7 @@ return_56298:
                 
                 rts
 
-	; End of function Map8_DescFunc2
+    ; End of function Map8_DescFunc2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -94,7 +94,7 @@ Map8_DescFunc5:
                 move.w  #$550,d0        ; I need the Achilles Sword{N}to defeat the giant Taros{N}in the shrine!{W1}
                 jmp     (DisplayText).w 
 
-	; End of function Map8_DescFunc5
+    ; End of function Map8_DescFunc5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -120,5 +120,5 @@ return_562DE:
                 
                 rts
 
-	; End of function Map8_DescFunc6
+    ; End of function Map8_DescFunc6
 

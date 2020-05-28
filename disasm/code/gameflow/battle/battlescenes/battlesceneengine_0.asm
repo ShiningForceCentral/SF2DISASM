@@ -8,7 +8,7 @@ j_rts:
                 
                 jmp     rts(pc)
 
-	; End of function j_rts
+    ; End of function j_rts
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -17,7 +17,7 @@ j_InitializeBattleScene:
                 
                 jmp     InitializeBattleScene(pc)
 
-	; End of function j_InitializeBattleScene
+    ; End of function j_InitializeBattleScene
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -26,7 +26,7 @@ j_ExecuteBattleSceneScript:
                 
                 jmp     ExecuteBattleSceneScript(pc)
 
-	; End of function j_ExecuteBattleSceneScript
+    ; End of function j_ExecuteBattleSceneScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -35,7 +35,7 @@ sub_1800C:
                 
                 jmp     sub_1924A(pc)
 
-	; End of function sub_1800C
+    ; End of function sub_1800C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -44,7 +44,7 @@ rts:
                 
                 rts
 
-	; End of function rts
+    ; End of function rts
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -318,7 +318,7 @@ loc_18390:
                 bne.s   loc_18390
                 rts
 
-	; End of function InitializeBattleScene
+    ; End of function InitializeBattleScene
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -370,7 +370,7 @@ loc_183EA:
                 clr.w   d0
                 rts
 
-	; End of function ExecuteBattleSceneScript
+    ; End of function ExecuteBattleSceneScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -379,7 +379,7 @@ j_WaitForPlayerInput:
                 
                 jmp     (WaitForPlayerInput).w
 
-	; End of function j_WaitForPlayerInput
+    ; End of function j_WaitForPlayerInput
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -388,7 +388,7 @@ nullsub_183F2:
                 
                 rts
 
-	; End of function nullsub_183F2
+    ; End of function nullsub_183F2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -465,7 +465,7 @@ loc_18496:
                 bne.w   bsc0D_endAnimation
                 rts
 
-	; End of function bsc00_animateEnemyAction
+    ; End of function bsc00_animateEnemyAction
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -477,7 +477,7 @@ AnimateSpell:
                 beq.s   EndBattlesceneAnimation
                 bsr.w   ExecuteSpellAnimation
 
-	; End of function AnimateSpell
+    ; End of function AnimateSpell
 
 
 ; START OF FUNCTION CHUNK FOR bsc00_animateEnemyAction
@@ -523,7 +523,7 @@ return_184E6:
                 
                 rts
 
-	; End of function sub_184B0
+    ; End of function sub_184B0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -618,7 +618,7 @@ loc_185C0:
                 bne.w   bsc0D_endAnimation
                 rts
 
-	; End of function bsc01_animateAllyAction
+    ; End of function bsc01_animateAllyAction
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -636,7 +636,7 @@ return_185DC:
                 
                 rts
 
-	; End of function bsc03_moveAllyBSprite
+    ; End of function bsc03_moveAllyBSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -654,7 +654,7 @@ return_185F2:
                 
                 rts
 
-	; End of function bsc02_moveEnemyBSprite
+    ; End of function bsc02_moveEnemyBSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -719,7 +719,7 @@ return_18698:
                 
                 rts
 
-	; End of function bsc05_makeAllyIdle
+    ; End of function bsc05_makeAllyIdle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -748,7 +748,7 @@ return_186D8:
                 
                 rts
 
-	; End of function bsc04_makeEnemyIdle
+    ; End of function bsc04_makeEnemyIdle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -925,7 +925,7 @@ loc_188CC:
                 move.b  #3,((byte_FFB589-$1000000)).w
                 rts
 
-	; End of function bsc07_switchAllies
+    ; End of function bsc07_switchAllies
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -977,7 +977,7 @@ return_18928:
                 
                 rts
 
-	; End of function sub_188D4
+    ; End of function sub_188D4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -993,7 +993,7 @@ loc_18934:
                 dbf     d0,loc_18934
                 bra.w   sub_1A092
 
-	; End of function sub_1892A
+    ; End of function sub_1892A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1063,7 +1063,7 @@ loc_189FC:
                 move.w  #$F0,d1 
                 moveq   #1,d2
                 lea     (byte_FF9202).l,a0
-                lea     (loc_9E00).l,a1
+                lea     ($9E00).l,a1
                 lea     (byte_FFC1B8).l,a2
 loc_18A14:
                 
@@ -1150,7 +1150,7 @@ loc_18ACE:
 loc_18AEC:
                 
                 lea     (byte_FF4A00).l,a0
-                lea     (loc_9E00).l,a1
+                lea     ($9E00).l,a1
                 lea     (byte_FFC1B8).l,a2
 loc_18AFE:
                 
@@ -1214,7 +1214,7 @@ loc_18BA0:
                 move.b  #3,((byte_FFB589-$1000000)).w
                 rts
 
-	; End of function bsc06_switchEnemies
+    ; End of function bsc06_switchEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1263,7 +1263,7 @@ off_18BFE:
                 dc.l FFA202_LOADING_SPACE
                 dc.l $5600
 
-	; End of function sub_18BAA
+    ; End of function sub_18BAA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1304,7 +1304,7 @@ loc_18C5A:
                 move.w  (sp)+,d6
                 rts
 
-	; End of function sub_18C1E
+    ; End of function sub_18C1E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1347,7 +1347,7 @@ loc_18CD0:
                 move.w  (sp)+,d6
                 rts
 
-	; End of function sub_18C94
+    ; End of function sub_18C94
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1390,7 +1390,7 @@ loc_18D56:
                 clr.w   d0
                 rts
 
-	; End of function sub_18D14
+    ; End of function sub_18D14
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1413,7 +1413,7 @@ bsc08_switchToEnemyAlone:
                 movea.l (sp)+,a6
                 rts
 
-	; End of function bsc08_switchToEnemyAlone
+    ; End of function bsc08_switchToEnemyAlone
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1436,7 +1436,7 @@ bsc09_switchToAllyAlone:
                 movea.l (sp)+,a6
                 rts
 
-	; End of function bsc09_switchToAllyAlone
+    ; End of function bsc09_switchToAllyAlone
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1586,7 +1586,7 @@ byte_18F48:
                 sndCom  SFX_HEALING
                 rts
 
-	; End of function bsc0B_executeAllyReaction
+    ; End of function bsc0B_executeAllyReaction
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1720,7 +1720,7 @@ byte_19098:
                 bset    #1,((byte_FFB583-$1000000)).w
                 rts
 
-	; End of function bsc0A_executeEnemyReaction
+    ; End of function bsc0A_executeEnemyReaction
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1734,7 +1734,7 @@ bsc0C_makeActorIdleAndEndAnimation:
                 bsr.w   sub_1F2F6
                 jmp     (WaitForVInt).w
 
-	; End of function bsc0C_makeActorIdleAndEndAnimation
+    ; End of function bsc0C_makeActorIdleAndEndAnimation
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1750,7 +1750,7 @@ loc_190C4:
                 bsr.w   sub_1F2F6
                 jmp     (WaitForVInt).w
 
-	; End of function bsc0D_endAnimation
+    ; End of function bsc0D_endAnimation
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1760,7 +1760,7 @@ bsc0E_sleep:
                 move.w  (a6)+,d0
                 jmp     (Sleep).w       
 
-	; End of function bsc0E_sleep
+    ; End of function bsc0E_sleep
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1862,7 +1862,7 @@ return_191DE:
                 
                 rts
 
-	; End of function bsc0F_giveEXP
+    ; End of function bsc0F_giveEXP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1904,7 +1904,7 @@ return_19228:
                 
                 rts
 
-	; End of function bsc10_displayMessage
+    ; End of function bsc10_displayMessage
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1920,7 +1920,7 @@ bsc11_displayMessageWithNoWait:
                 clr.w   (SPEECH_SFX).l
                 jmp     (DisplayText).l 
 
-	; End of function bsc11_displayMessageWithNoWait
+    ; End of function bsc11_displayMessageWithNoWait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1929,7 +1929,7 @@ j_hideTextBox:
                 
                 jmp     (HideTextBox).l 
 
-	; End of function j_hideTextBox
+    ; End of function j_hideTextBox
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1965,7 +1965,7 @@ return_1928A:
                 
                 rts
 
-	; End of function sub_1924A
+    ; End of function sub_1924A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1976,7 +1976,7 @@ sub_1928C:
                 bsr.s   sub_19296
                 bra.w   sub_1EFD8
 
-	; End of function sub_1928C
+    ; End of function sub_1928C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2029,7 +2029,7 @@ loc_192F8:
                 move.b  d2,((byte_FFB57F-$1000000)).w
                 rts
 
-	; End of function sub_19296
+    ; End of function sub_19296
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2082,7 +2082,7 @@ loc_19360:
                 move.b  d2,((byte_FFB57E-$1000000)).w
                 rts
 
-	; End of function sub_192FE
+    ; End of function sub_192FE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2106,7 +2106,7 @@ loc_19378:
                 bsr.w   sub_19546
                 jmp     (sub_1942).w    
 
-	; End of function sub_19366
+    ; End of function sub_19366
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2122,7 +2122,7 @@ loc_1939C:
                 
                 move.w  (sp)+,d1
 
-	; End of function sub_1938C
+    ; End of function sub_1938C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2138,7 +2138,7 @@ sub_1939E:
                 bsr.w   sub_1955E
                 jmp     (sub_1942).w    
 
-	; End of function sub_1939E
+    ; End of function sub_1939E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2151,7 +2151,7 @@ sub_193B2:
                 bsr.w   sub_19564
                 jmp     (sub_1942).w    
 
-	; End of function sub_193B2
+    ; End of function sub_193B2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2201,7 +2201,7 @@ return_1942A:
                 
                 rts
 
-	; End of function sub_193C4
+    ; End of function sub_193C4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2228,7 +2228,7 @@ return_19456:
                 
                 rts
 
-	; End of function sub_1942C
+    ; End of function sub_1942C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2242,7 +2242,7 @@ return_19462:
                 
                 rts
 
-	; End of function sub_19458
+    ; End of function sub_19458
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2280,7 +2280,7 @@ return_194A8:
                 
                 rts
 
-	; End of function sub_19464
+    ; End of function sub_19464
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2317,7 +2317,7 @@ return_194FC:
                 
                 rts
 
-	; End of function sub_194AA
+    ; End of function sub_194AA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2328,7 +2328,7 @@ sub_194FE:
                 asr.w   #8,d0
                 ext.w   d1
 
-	; End of function sub_194FE
+    ; End of function sub_194FE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2361,7 +2361,7 @@ return_19544:
                 
                 rts
 
-	; End of function sub_19504
+    ; End of function sub_19504
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2379,7 +2379,7 @@ sub_19546:
                 add.w   d2,d1
                 bra.s   loc_1958E
 
-	; End of function sub_19546
+    ; End of function sub_19546
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2390,7 +2390,7 @@ sub_1955E:
                 asr.w   #8,d0
                 ext.w   d1
 
-	; End of function sub_1955E
+    ; End of function sub_1955E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2448,7 +2448,7 @@ return_195E0:
                 
                 rts
 
-	; End of function sub_19564
+    ; End of function sub_19564
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2472,7 +2472,7 @@ loc_195F8:
                 clr.b   ((ACTOR_TO_MAKE_IDLE-$1000000)).w
                 rts
 
-	; End of function MakeActorIdle
+    ; End of function MakeActorIdle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2500,7 +2500,7 @@ return_19630:
                 
                 rts
 
-	; End of function sub_195FE
+    ; End of function sub_195FE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2556,7 +2556,7 @@ loc_196B0:
                 
                 jmp     (WaitForVInt).w
 
-	; End of function sub_19632
+    ; End of function sub_19632
 
 word_196B4:     dc.w $FFF
                 dc.w 0
@@ -2610,7 +2610,7 @@ return_1971A:
                 
                 rts
 
-	; End of function sub_196D4
+    ; End of function sub_196D4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2644,7 +2644,7 @@ loc_19748:
                 jsr     (ApplyVIntVramDMA).w
                 jmp     (WaitForDMAQueueProcessing).w
 
-	; End of function sub_1971C
+    ; End of function sub_1971C
 
 word_19764:     dc.w $FFF
                 dc.w 0
@@ -2679,7 +2679,7 @@ return_197A4:
                 
                 rts
 
-	; End of function AddAllyToDeadList
+    ; End of function AddAllyToDeadList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2700,7 +2700,7 @@ return_197C6:
                 
                 rts
 
-	; End of function AddEnemyToDeadList
+    ; End of function AddEnemyToDeadList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2749,7 +2749,7 @@ loc_19826:
                 movem.l (sp)+,d1-d2
                 rts
 
-	; End of function GetAllyAnimation
+    ; End of function GetAllyAnimation
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2777,7 +2777,7 @@ loc_19850:
                 move.w  (sp)+,d1
                 rts
 
-	; End of function sub_19838
+    ; End of function sub_19838
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2792,7 +2792,7 @@ GetAllyBattleSpriteIdleAnimate:
                 lea     AllyBSpriteIdleAnimate(pc), a0
                 bra.w   loc_19870
 
-	; End of function GetAllyBattleSpriteIdleAnimate
+    ; End of function GetAllyBattleSpriteIdleAnimate
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2820,7 +2820,7 @@ loc_19880:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function GetEnemyBattleSpriteIdleAnimate
+    ; End of function GetEnemyBattleSpriteIdleAnimate
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2846,7 +2846,7 @@ loc_198A0:
                 dbf     d0,loc_198A0
                 rts
 
-	; End of function InitializeBattleScenePalettes
+    ; End of function InitializeBattleScenePalettes
 
 plt_BattleSceneBasePalette:
                 incbin "data/graphics/battles/plt_battlescenebasepalette.bin" 
@@ -2887,7 +2887,7 @@ loc_19904:
                 movem.l (sp)+,d0/a0-a1
                 rts
 
-	; End of function sub_198C8
+    ; End of function sub_198C8
 
 
 ; START OF FUNCTION CHUNK FOR bsc07_switchAllies
@@ -2924,7 +2924,7 @@ loc_19932:
                 jsr     (ApplyVIntVramDMA).w
                 jmp     (EnableDMAQueueProcessing).w
 
-	; End of function sub_19926
+    ; End of function sub_19926
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2943,7 +2943,7 @@ loc_1995C:
                 movem.l (sp)+,d0/a0
                 rts
 
-	; End of function sub_19952
+    ; End of function sub_19952
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2969,7 +2969,7 @@ loc_19996:
                 dbf     d0,loc_19996
                 rts
 
-	; End of function sub_19970
+    ; End of function sub_19970
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2987,7 +2987,7 @@ sub_1999E:
                 move.w  #$C00,d0
                 jmp     (ApplyImmediateVramDMAOnCompressedTiles).w
 
-	; End of function sub_1999E
+    ; End of function sub_1999E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3006,7 +3006,7 @@ sub_199BC:
                 jsr     (ApplyVIntVramDMAOnCompressedTiles).w
                 jmp     (WaitForDMAQueueProcessing).w
 
-	; End of function sub_199BC
+    ; End of function sub_199BC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3034,7 +3034,7 @@ loc_19A04:
                 dbf     d0,loc_19A04
                 rts
 
-	; End of function LoadPaletteForBattleScene
+    ; End of function LoadPaletteForBattleScene
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3054,7 +3054,7 @@ LoadAllyBattleSpriteFrame:
                 move.w  #$900,d0
                 jmp     (ApplyImmediateVramDMAOnCompressedTiles).w
 
-	; End of function LoadAllyBattleSpriteFrame
+    ; End of function LoadAllyBattleSpriteFrame
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3075,7 +3075,7 @@ VIntLoadAllyBattleSpriteFrame:
                 jsr     (ApplyVIntVramDMAOnCompressedTiles).w
                 jmp     (WaitForDMAQueueProcessing).w
 
-	; End of function VIntLoadAllyBattleSpriteFrame
+    ; End of function VIntLoadAllyBattleSpriteFrame
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3087,7 +3087,7 @@ LoadWeaponPalette:
                 move.l  (a0,d0.w),((PALETTE_1_BASE_0E-$1000000)).w
                 rts
 
-	; End of function LoadWeaponPalette
+    ; End of function LoadWeaponPalette
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3109,7 +3109,7 @@ loc_19A7C:
                 dbf     d0,loc_19A7C
                 rts
 
-	; End of function LoadWeaponSprite
+    ; End of function LoadWeaponSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3129,7 +3129,7 @@ LoadBattleSceneGround:
                 jmp     (ApplyImmediateVramDMAOnCompressedTiles).w
                 rts
 
-	; End of function LoadBattleSceneGround
+    ; End of function LoadBattleSceneGround
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3154,7 +3154,7 @@ loc_19AD6:
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jmp     (LoadCompressedData).w
 
-	; End of function sub_19AB0
+    ; End of function sub_19AB0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3184,7 +3184,7 @@ LoadNewAllyBattleSprite:
                 move.w  (sp)+,d1
                 rts
 
-	; End of function LoadNewAllyBattleSprite
+    ; End of function LoadNewAllyBattleSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3202,7 +3202,7 @@ LoadEnemyBattleSpriteFrame:
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jmp     (LoadCompressedData).w
 
-	; End of function LoadEnemyBattleSpriteFrame
+    ; End of function LoadEnemyBattleSpriteFrame
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3232,7 +3232,7 @@ return_19B7E:
                 
                 rts
 
-	; End of function LoadEnemyBattleSprite
+    ; End of function LoadEnemyBattleSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3269,7 +3269,7 @@ return_19BCA:
                 
                 rts
 
-	; End of function LoadBattleBackground
+    ; End of function LoadBattleBackground
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3287,7 +3287,7 @@ LoadGround:
                 lea     (byte_FF8C02).l,a1
                 jmp     (LoadCompressedData).w
 
-	; End of function LoadGround
+    ; End of function LoadGround
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3340,7 +3340,7 @@ loc_19C58:
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 lea     (FF8804_LOADING_SPACE).l,a0
-                lea     (loc_B600).l,a1
+                lea     ($B600).l,a1
                 move.w  #$500,d0
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDMA).w
@@ -3354,7 +3354,7 @@ loc_19CA0:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function LoadInvocationSprite
+    ; End of function LoadInvocationSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3383,7 +3383,7 @@ LoadSpellGraphics:
                 jsr     (ApplyVIntVramDMAOnCompressedTiles).w
                 jmp     (WaitForDMAQueueProcessing).w
 
-	; End of function LoadSpellGraphics
+    ; End of function LoadSpellGraphics
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3414,7 +3414,7 @@ sub_19CE8:
                 jsr     (ApplyVIntVramDMA).w
                 jmp     (WaitForDMAQueueProcessing).w
 
-	; End of function sub_19CE8
+    ; End of function sub_19CE8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3473,7 +3473,7 @@ loc_19D90:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function GetBattleSpriteAndPalette
+    ; End of function GetBattleSpriteAndPalette
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3507,7 +3507,7 @@ loc_19DF2:
                 movem.l (sp)+,d1/a0
                 rts
 
-	; End of function GetWeaponSpriteAndPalette
+    ; End of function GetWeaponSpriteAndPalette
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3549,7 +3549,7 @@ loc_19E58:
                 movem.l (sp)+,d0/a0
                 rts
 
-	; End of function GetBattleBackground
+    ; End of function GetBattleBackground
 
 TerrainBackgrounds:
                 incbin "data/battles/global/terrainbackgrounds.bin" ; mostly used for overworld battles, I guess !
@@ -3571,7 +3571,7 @@ loc_19E90:
                 move.w  #$FFFF,d1
                 rts
 
-	; End of function sub_19E6E
+    ; End of function sub_19E6E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3590,7 +3590,7 @@ loc_19EA8:
                 movem.l (sp)+,a0
                 rts
 
-	; End of function sub_19E96
+    ; End of function sub_19E96
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3604,7 +3604,7 @@ FadeInFromBlackIntoBattlescene:
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 rts
 
-	; End of function FadeInFromBlackIntoBattlescene
+    ; End of function FadeInFromBlackIntoBattlescene
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3618,7 +3618,7 @@ FadeOutToBlackForBattlescene:
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 rts
 
-	; End of function FadeOutToBlackForBattlescene
+    ; End of function FadeOutToBlackForBattlescene
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3683,7 +3683,7 @@ return_19F5C:
                 
                 rts
 
-	; End of function ExecuteSpellAnimation
+    ; End of function ExecuteSpellAnimation
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3716,7 +3716,7 @@ sub_19F5E:
                 addq.w  #1,d0
                 rts
 
-	; End of function sub_19F5E
+    ; End of function sub_19F5E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3759,7 +3759,7 @@ loc_19FC8:
                 add.w   d1,d0
                 rts
 
-	; End of function sub_19FAA
+    ; End of function sub_19FAA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3776,7 +3776,7 @@ loc_1A00E:
                 dbf     d7,loc_1A00E
                 jmp     (sub_1942).w    
 
-	; End of function sub_1A00A
+    ; End of function sub_1A00A
 
 word_1A020:     dc.w 1
                 dc.w 1
@@ -3791,7 +3791,7 @@ sub_1A028:
                 beq.w   nullsub_1A090
                 bsr.w   sub_1A0AA
 
-	; End of function sub_1A028
+    ; End of function sub_1A028
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3805,7 +3805,7 @@ sub_1A034:
                 jsr     rjt_1A048(pc,d0.w)
                 bra.w   loc_1A088
 
-	; End of function sub_1A034
+    ; End of function sub_1A034
 
 rjt_1A048:      dc.w nullsub_1A090-rjt_1A048 ; related to ally or enemy reaction
                 dc.w sub_1A21C-rjt_1A048
@@ -3856,7 +3856,7 @@ nullsub_1A090:
                 
                 rts
 
-	; End of function nullsub_1A090
+    ; End of function nullsub_1A090
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3876,7 +3876,7 @@ return_1A0A8:
                 
                 rts
 
-	; End of function sub_1A092
+    ; End of function sub_1A092
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3894,7 +3894,7 @@ loc_1A0B8:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function sub_1A0AA
+    ; End of function sub_1A0AA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3909,7 +3909,7 @@ sub_1A0C4:
                 movem.l (sp)+,a0-a1
                 rts
 
-	; End of function sub_1A0C4
+    ; End of function sub_1A0C4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3924,7 +3924,7 @@ sub_1A0E2:
                 movem.l (sp)+,a0-a1
                 rts
 
-	; End of function sub_1A0E2
+    ; End of function sub_1A0E2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3944,7 +3944,7 @@ loc_1A10A:
                 movem.l (sp)+,d6-a0
                 rts
 
-	; End of function sub_1A100
+    ; End of function sub_1A100
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3954,7 +3954,7 @@ sub_1A11E:
                 bsr.s   sub_1A100
                 bra.s   sub_1A0E2
 
-	; End of function sub_1A11E
+    ; End of function sub_1A11E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3977,7 +3977,7 @@ loc_1A12C:
                 movem.l (sp)+,d5-a0
                 rts
 
-	; End of function sub_1A122
+    ; End of function sub_1A122
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3987,7 +3987,7 @@ sub_1A146:
                 bsr.s   sub_1A122
                 bra.s   sub_1A0E2
 
-	; End of function sub_1A146
+    ; End of function sub_1A146
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4029,7 +4029,7 @@ loc_1A182:
                 movem.l (sp)+,d0-d2/a0
                 rts
 
-	; End of function sub_1A14A
+    ; End of function sub_1A14A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4039,7 +4039,7 @@ sub_1A198:
                 bsr.s   sub_1A14A
                 bra.w   sub_1A0E2
 
-	; End of function sub_1A198
+    ; End of function sub_1A198
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4062,7 +4062,7 @@ loc_1A1A8:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function sub_1A19E
+    ; End of function sub_1A19E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4072,7 +4072,7 @@ sub_1A1C4:
                 bsr.s   sub_1A19E
                 bra.w   sub_1A0E2
 
-	; End of function sub_1A1C4
+    ; End of function sub_1A1C4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4095,7 +4095,7 @@ loc_1A1D4:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function sub_1A1CA
+    ; End of function sub_1A1CA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4105,7 +4105,7 @@ sub_1A1F0:
                 bsr.s   sub_1A1CA
                 bra.w   sub_1A0E2
 
-	; End of function sub_1A1F0
+    ; End of function sub_1A1F0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4128,7 +4128,7 @@ loc_1A200:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function sub_1A1F6
+    ; End of function sub_1A1F6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4138,7 +4138,7 @@ sub_1A21C:
                 bsr.s   sub_1A1F6
                 bra.w   sub_1A0E2
 
-	; End of function sub_1A21C
+    ; End of function sub_1A21C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4164,7 +4164,7 @@ loc_1A242:
                 movem.l (sp)+,d0/a0-a1
                 rts
 
-	; End of function sub_1A222
+    ; End of function sub_1A222
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4184,7 +4184,7 @@ loc_1A25C:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function sub_1A24E
+    ; End of function sub_1A24E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4209,7 +4209,7 @@ loc_1A286:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function sub_1A270
+    ; End of function sub_1A270
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4235,7 +4235,7 @@ loc_1A2AA:
                 dbf     d7,loc_1A2AA
                 rts
 
-	; End of function ExecSpellAnimationFlash
+    ; End of function ExecSpellAnimationFlash
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4260,7 +4260,7 @@ loc_1A2EA:
                 movem.l (sp)+,d7-a0
                 rts
 
-	; End of function ClearSpellAnimationProperties
+    ; End of function ClearSpellAnimationProperties
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4292,7 +4292,7 @@ loc_1A324:
                 movem.l (sp)+,d6-d7
                 rts
 
-	; End of function sub_1A2F6
+    ; End of function sub_1A2F6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4323,7 +4323,7 @@ LoadInvocationSpell:
                 bset    #4,((byte_FFB56F-$1000000)).w
                 rts
 
-	; End of function LoadInvocationSpell
+    ; End of function LoadInvocationSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4370,7 +4370,7 @@ loc_1A3C6:
                 dbf     d1,loc_1A3C0
                 jmp     (sub_1942).w    
 
-	; End of function sub_1A380
+    ; End of function sub_1A380
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4396,7 +4396,7 @@ loc_1A40E:
                 dbf     d0,loc_1A40E
                 rts
 
-	; End of function sub_1A3E8
+    ; End of function sub_1A3E8
 
 
 ; START OF FUNCTION CHUNK FOR bsc05_makeAllyIdle
@@ -4443,7 +4443,7 @@ nullsub_1A476:
                 
                 rts
 
-	; End of function nullsub_1A476
+    ; End of function nullsub_1A476
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4452,7 +4452,7 @@ sa00_Nothing:
                 
                 rts
 
-	; End of function sa00_Nothing
+    ; End of function sa00_Nothing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4558,7 +4558,7 @@ loc_1A58A:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa01_
+    ; End of function sa01_
 
                 dc.b 0
                 dc.b $48
@@ -4802,7 +4802,7 @@ loc_1A6CC:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa02_
+    ; End of function sa02_
 
                 dc.b 1
                 dc.b $70
@@ -4965,7 +4965,7 @@ loc_1A7E2:
                 move.b  d2,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa03_
+    ; End of function sa03_
 
 byte_1A810:     dc.b 0
                 dc.b 1
@@ -5092,7 +5092,7 @@ loc_1A898:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa04_
+    ; End of function sa04_
 
 byte_1A8F4:     dc.b 0
                 dc.b 0
@@ -5229,7 +5229,7 @@ loc_1AA06:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa05_
+    ; End of function sa05_
 
 byte_1AA28:     dc.b 0
                 dc.b 8
@@ -5279,7 +5279,7 @@ sa06_:
                 move.b  #1,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa06_
+    ; End of function sa06_
 
 byte_1AA88:     dc.b 0
                 dc.b 0
@@ -5358,7 +5358,7 @@ loc_1AB4A:
                 
                 bra.w   sub_1A028
 
-	; End of function sa07_
+    ; End of function sa07_
 
                 dc.b 0
                 dc.b 1
@@ -5449,7 +5449,7 @@ sa08_:
                 moveq   #$1E,d1
                 bra.w   loc_1ABAC
 
-	; End of function sa08_
+    ; End of function sa08_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5477,7 +5477,7 @@ loc_1ABAC:
                 move.b  #1,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa19_
+    ; End of function sa19_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5487,7 +5487,7 @@ sa09_:
                 lea     byte_1ACC6(pc), a0
                 bra.w   loc_1AC08
 
-	; End of function sa09_
+    ; End of function sa09_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5497,7 +5497,7 @@ sa1B_:
                 lea     byte_1ACCC(pc), a0
                 bra.w   loc_1AC08
 
-	; End of function sa1B_
+    ; End of function sa1B_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5506,7 +5506,7 @@ sa1C_:
                 
                 lea     byte_1ACD2(pc), a0
 
-	; End of function sa1C_
+    ; End of function sa1C_
 
 
 ; START OF FUNCTION CHUNK FOR sa09_
@@ -5599,7 +5599,7 @@ sa0A_:
                 move.w  #$F,d0
                 bra.w   ExecSpellAnimationFlash
 
-	; End of function sa0A_
+    ; End of function sa0A_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5632,7 +5632,7 @@ loc_1AD16:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa0B_
+    ; End of function sa0B_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5670,7 +5670,7 @@ loc_1AD6A:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa0C_
+    ; End of function sa0C_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5723,7 +5723,7 @@ loc_1AE16:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa0D_
+    ; End of function sa0D_
 
                 dc.b $F2
                 dc.b 0
@@ -5897,7 +5897,7 @@ loc_1AECA:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa0E_
+    ; End of function sa0E_
 
 byte_1AEFA:     dc.b $F3
                 dc.b 0
@@ -5948,7 +5948,7 @@ loc_1AF2C:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa0F_
+    ; End of function sa0F_
 
 byte_1AF64:     dc.b $F4
                 dc.b 0
@@ -6024,7 +6024,7 @@ loc_1AFAE:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa10_
+    ; End of function sa10_
 
 byte_1AFEA:     dc.b $F3
                 dc.b 0
@@ -6123,7 +6123,7 @@ loc_1B076:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa11_Dao
+    ; End of function sa11_Dao
 
 byte_1B0CC:     dc.b 4
                 dc.b 1
@@ -6219,7 +6219,7 @@ loc_1B1A4:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa12_Atlas
+    ; End of function sa12_Atlas
 
 byte_1B1FA:     dc.b 1
                 dc.b $12
@@ -6363,7 +6363,7 @@ loc_1B314:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa13_Neptun
+    ; End of function sa13_Neptun
 
 byte_1B358:     dc.b 1
                 dc.b 0
@@ -6441,7 +6441,7 @@ loc_1B3D8:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa14_Apollo
+    ; End of function sa14_Apollo
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6488,7 +6488,7 @@ loc_1B456:
                 move.b  #1,((byte_FFB589-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa15_
+    ; End of function sa15_
 
 byte_1B480:     dc.b 0
                 dc.b $B8
@@ -6532,7 +6532,7 @@ loc_1B4CE:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa16_
+    ; End of function sa16_
 
 byte_1B4F0:     dc.b $C
                 dc.b $BF
@@ -6654,7 +6654,7 @@ loc_1B604:
                 
                 bra.w   sub_1A00A
 
-	; End of function sa18_
+    ; End of function sa18_
 
 word_1B608:     dc.w $138
                 dc.w $110
@@ -6688,7 +6688,7 @@ sa1A_Detox:
                 move.b  #1,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa1A_Detox
+    ; End of function sa1A_Detox
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6717,7 +6717,7 @@ loc_1B680:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa17_IceBreath
+    ; End of function sa17_IceBreath
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6745,7 +6745,7 @@ loc_1B6B8:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa1D_Blast
+    ; End of function sa1D_Blast
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6763,7 +6763,7 @@ sa1E_BurstRockExplosion:
                 move.b  #1,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa1E_BurstRockExplosion
+    ; End of function sa1E_BurstRockExplosion
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6813,7 +6813,7 @@ loc_1B764:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-	; End of function sa1F_OddeyeBeam
+    ; End of function sa1F_OddeyeBeam
 
 byte_1B794:     dc.b 1
                 dc.b 4
@@ -6876,7 +6876,7 @@ loc_1B7D8:
                 move.w  rjt_SpellAnimations(pc,d7.w),d7
                 jmp     rjt_SpellAnimations(pc,d7.w)
 
-	; End of function sub_1B7B0
+    ; End of function sub_1B7B0
 
 rjt_SpellAnimations:
                 dc.w nullsub_1B93A-rjt_SpellAnimations
@@ -6918,7 +6918,7 @@ nullsub_1B828:
                 
                 rts
 
-	; End of function nullsub_1B828
+    ; End of function nullsub_1B828
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6951,7 +6951,7 @@ loc_1B858:
                 clr.b   ((byte_FFB589-$1000000)).w
                 jmp     (WaitForVInt).w
 
-	; End of function sub_1B82A
+    ; End of function sub_1B82A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -6980,7 +6980,7 @@ loc_1B8AC:
                 movem.w (sp)+,d1-d2
                 rts
 
-	; End of function sub_1B884
+    ; End of function sub_1B884
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -7017,7 +7017,7 @@ loc_1B8F8:
                 movem.w (sp)+,d0-d1/d6-d7
                 rts
 
-	; End of function sub_1B8B2
+    ; End of function sub_1B8B2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -7031,7 +7031,7 @@ return_1B90A:
                 
                 rts
 
-	; End of function sub_1B8FE
+    ; End of function sub_1B8FE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -7055,7 +7055,7 @@ word_1B930:
                 
                 dc.w $4E75
 
-	; End of function sub_1B90C
+    ; End of function sub_1B90C
 
                 dc.b $FF
                 dc.b $FE
@@ -7072,7 +7072,7 @@ nullsub_1B93A:
                 
                 rts
 
-	; End of function nullsub_1B93A
+    ; End of function nullsub_1B93A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -7485,7 +7485,7 @@ return_1BD4A:
                 
                 rts
 
-	; End of function sub_1B93C
+    ; End of function sub_1B93C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -7527,7 +7527,7 @@ loc_1BD92:
                 movem.l (sp)+,d0-d2/a3-a4
                 rts
 
-	; End of function sub_1BD4C
+    ; End of function sub_1BD4C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -7593,7 +7593,7 @@ loc_1BE16:
                 movem.w (sp)+,d1-d6
                 rts
 
-	; End of function sub_1BDA0
+    ; End of function sub_1BDA0
 
 byte_1BE1C:     dc.b 0
                 dc.b $E0
@@ -7998,7 +7998,7 @@ loc_1C184:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1BE9E
+    ; End of function sub_1BE9E
 
                 dc.b 0
                 dc.b 0
@@ -8383,7 +8383,7 @@ loc_1C464:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1C248
+    ; End of function sub_1C248
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -8430,7 +8430,7 @@ return_1C4D6:
                 
                 rts
 
-	; End of function sub_1C46E
+    ; End of function sub_1C46E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -8451,7 +8451,7 @@ sub_1C4D8:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function sub_1C4D8
+    ; End of function sub_1C4D8
 
 word_1C4FE:     dc.w 0
                 dc.b 0
@@ -8771,7 +8771,7 @@ loc_1C7D8:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1C53E
+    ; End of function sub_1C53E
 
 byte_1C7EE:     dc.b 0
                 dc.b $60
@@ -9145,7 +9145,7 @@ loc_1CB94:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1C7F6
+    ; End of function sub_1C7F6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9162,7 +9162,7 @@ sub_1CBA6:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function sub_1CBA6
+    ; End of function sub_1CBA6
 
 byte_1CBBA:     dc.b $FF
                 dc.b $D0
@@ -9476,7 +9476,7 @@ loc_1CDF2:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1CC56
+    ; End of function sub_1CC56
 
 byte_1CE0C:     dc.b 0
                 dc.b 8
@@ -9721,7 +9721,7 @@ loc_1CFEA:
                 lea     word_1CFF6(pc), a0
                 bra.w   sub_1B8B2
 
-	; End of function spellanim_Bolt
+    ; End of function spellanim_Bolt
 
 word_1CFF6:     dc.w $EAA
                 dc.w $E
@@ -9751,7 +9751,7 @@ return_1D036:
                 
                 rts
 
-	; End of function sub_1CFFC
+    ; End of function sub_1CFFC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -9823,7 +9823,7 @@ loc_1D0D4:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1D038
+    ; End of function sub_1D038
 
 byte_1D0EE:     dc.b 0
                 dc.b 0
@@ -9999,7 +9999,7 @@ loc_1D288:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1D0FE
+    ; End of function sub_1D0FE
 
 byte_1D2A2:     dc.b 0
                 dc.b 0
@@ -10247,7 +10247,7 @@ loc_1D494:
                 dbf     d0,loc_1D466
                 rts
 
-	; End of function sub_1D2E6
+    ; End of function sub_1D2E6
 
 byte_1D4A0:     dc.b 1
                 dc.b $1C
@@ -10417,7 +10417,7 @@ return_1D5C4:
                 
                 rts
 
-	; End of function sub_1D4E6
+    ; End of function sub_1D4E6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10588,7 +10588,7 @@ loc_1D748:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1D5C6
+    ; End of function sub_1D5C6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10603,7 +10603,7 @@ return_1D774:
                 
                 rts
 
-	; End of function sub_1D762
+    ; End of function sub_1D762
 
 byte_1D776:     dc.b 1
                 dc.b $14
@@ -10844,7 +10844,7 @@ loc_1D9A8:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1D786
+    ; End of function sub_1D786
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10862,7 +10862,7 @@ loc_1D9C8:
                 move.w  d0,4(a4)
                 rts
 
-	; End of function sub_1D9B2
+    ; End of function sub_1D9B2
 
 byte_1D9CE:     dc.b 0
                 dc.b   0
@@ -11124,7 +11124,7 @@ return_1DC12:
                 
                 rts
 
-	; End of function sub_1D9FC
+    ; End of function sub_1D9FC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11148,7 +11148,7 @@ loc_1DC30:
                 move.w  d0,4(a4)
                 rts
 
-	; End of function sub_1DC14
+    ; End of function sub_1DC14
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11164,7 +11164,7 @@ loc_1DC40:
                 dbf     d0,loc_1DC40
                 rts
 
-	; End of function sub_1DC36
+    ; End of function sub_1DC36
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11187,7 +11187,7 @@ loc_1DC56:
                 move.l  $5A(a0),$5A(a1)
                 rts
 
-	; End of function sub_1DC48
+    ; End of function sub_1DC48
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11203,7 +11203,7 @@ loc_1DC80:
                 dbf     d0,loc_1DC80
                 rts
 
-	; End of function LoadPalette1FromFFB41E
+    ; End of function LoadPalette1FromFFB41E
 
 byte_1DC88:     dc.b 0
                 dc.b   0
@@ -11409,7 +11409,7 @@ loc_1DDE8:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1DCE8
+    ; End of function sub_1DCE8
 
 byte_1DE06:     dc.b 0
                 dc.b   0
@@ -11579,7 +11579,7 @@ loc_1DF7E:
                 bcs.w   sub_1B82A
                 rts
 
-	; End of function sub_1DE24
+    ; End of function sub_1DE24
 
 byte_1DFA2:     dc.b 1
                 dc.b $12
@@ -11730,7 +11730,7 @@ loc_1E0C0:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1DFD4
+    ; End of function sub_1DFD4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11752,7 +11752,7 @@ sub_1E0DA:
                 dbf     d0,sub_1E0DA
                 rts
 
-	; End of function sub_1E0DA
+    ; End of function sub_1E0DA
 
 byte_1E106:     dc.b 0
                 dc.b $80 
@@ -11821,7 +11821,7 @@ loc_1E152:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1E134
+    ; End of function sub_1E134
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -11961,7 +11961,7 @@ loc_1E26E:
                 movea.l (sp)+,a4
                 rts
 
-	; End of function sub_1E160
+    ; End of function sub_1E160
 
 byte_1E290:     dc.b $89
                 dc.b $60 
@@ -12153,7 +12153,7 @@ return_1E452:
                 
                 rts
 
-	; End of function sub_1E2D4
+    ; End of function sub_1E2D4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -12181,7 +12181,7 @@ loc_1E476:
                 addq.w  #1,6(a5)
                 rts
 
-	; End of function sub_1E454
+    ; End of function sub_1E454
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -12202,7 +12202,7 @@ loc_1E4A0:
                 addq.w  #1,6(a5)
                 rts
 
-	; End of function sub_1E48A
+    ; End of function sub_1E48A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -12327,7 +12327,7 @@ loc_1E5C6:
                 movem.l (sp)+,a4-a5
                 rts
 
-	; End of function sub_1E4AC
+    ; End of function sub_1E4AC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -12503,7 +12503,7 @@ loc_1E770:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1E5D0
+    ; End of function sub_1E5D0
 
 byte_1E786:     dc.b 0
                 dc.b $D4 
@@ -12668,7 +12668,7 @@ loc_1E8D6:
                 beq.w   sub_1B82A
                 bra.w   loc_1D45C
 
-	; End of function sub_1E7B2
+    ; End of function sub_1E7B2
 
 byte_1E8E2:     dc.b 1
                 dc.b $1C
@@ -12990,7 +12990,7 @@ loc_1EB7E:
                 bcc.w   sub_1B82A
                 rts
 
-	; End of function sub_1E958
+    ; End of function sub_1E958
 
 byte_1EB88:     dc.b 1
                 dc.b $1C
@@ -13127,7 +13127,7 @@ loc_1EC80:
                 beq.w   sub_1B82A
                 rts
 
-	; End of function sub_1EBBA
+    ; End of function sub_1EBBA
 
 byte_1EC9A:     dc.b 0
                 dc.b   0
@@ -13261,7 +13261,7 @@ return_1EDDA:
                 
                 rts
 
-	; End of function sub_1ECC8
+    ; End of function sub_1ECC8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13293,7 +13293,7 @@ loc_1EE00:
                 addq.w  #1,4(a5)
                 rts
 
-	; End of function sub_1EDDC
+    ; End of function sub_1EDDC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13306,7 +13306,7 @@ sub_1EE1A:
                 addq.w  #1,4(a5)
                 rts
 
-	; End of function sub_1EE1A
+    ; End of function sub_1EE1A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13326,7 +13326,7 @@ VInt_UpdateBattlesceneGraphics:
                 bsr.w   sub_1F176
                 jmp     (sub_1942).w    
 
-	; End of function VInt_UpdateBattlesceneGraphics
+    ; End of function VInt_UpdateBattlesceneGraphics
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13345,7 +13345,7 @@ return_1EE74:
                 
                 rts
 
-	; End of function UpdateEnemyBSprite
+    ; End of function UpdateEnemyBSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13364,7 +13364,7 @@ return_1EE94:
                 
                 rts
 
-	; End of function UpdateAllyBSprite
+    ; End of function UpdateAllyBSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13434,7 +13434,7 @@ return_1EF2C:
                 
                 rts
 
-	; End of function UpdateWeaponSprite
+    ; End of function UpdateWeaponSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13444,7 +13444,7 @@ sub_1EF2E:
                 bsr.w   sub_1EF50
                 bra.w   loc_1EFB0
 
-	; End of function sub_1EF2E
+    ; End of function sub_1EF2E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13458,7 +13458,7 @@ sub_1EF36:
                 moveq   #2,d1
                 jmp     (ApplyImmediateVramDMA).w
 
-	; End of function sub_1EF36
+    ; End of function sub_1EF36
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13513,7 +13513,7 @@ return_1EFAE:
                 
                 rts
 
-	; End of function sub_1EF50
+    ; End of function sub_1EF50
 
 
 ; START OF FUNCTION CHUNK FOR sub_1EF2E
@@ -13616,7 +13616,7 @@ loc_1F082:
                 move.b  #2,(word_FFAFB2).l
                 rts
 
-	; End of function sub_1EFD8
+    ; End of function sub_1EFD8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13679,7 +13679,7 @@ loc_1F120:
                 move.w  d1,d4
                 rts
 
-	; End of function sub_1F0B0
+    ; End of function sub_1F0B0
 
                 dc.b $FF
                 dc.b $F8 
@@ -13735,7 +13735,7 @@ return_1F174:
                 
                 rts
 
-	; End of function sub_1F148
+    ; End of function sub_1F148
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13777,7 +13777,7 @@ return_1F1CA:
                 
                 rts
 
-	; End of function sub_1F176
+    ; End of function sub_1F176
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13798,7 +13798,7 @@ loc_1F1DA:
                 movem.l (sp)+,d0/a0
                 rts
 
-	; End of function sub_1F1CC
+    ; End of function sub_1F1CC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13819,7 +13819,7 @@ loc_1F1FE:
                 movem.l (sp)+,d0/a0
                 rts
 
-	; End of function sub_1F1F0
+    ; End of function sub_1F1F0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13851,7 +13851,7 @@ loc_1F23E:
                 movem.l (sp)+,d0/a0
                 rts
 
-	; End of function sub_1F214
+    ; End of function sub_1F214
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13877,7 +13877,7 @@ loc_1F26C:
                 movem.l (sp)+,d0/a0
                 rts
 
-	; End of function sub_1F254
+    ; End of function sub_1F254
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13925,7 +13925,7 @@ return_1F2F4:
                 
                 rts
 
-	; End of function sub_1F282
+    ; End of function sub_1F282
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -13959,7 +13959,7 @@ return_1F336:
                 
                 rts
 
-	; End of function sub_1F2F6
+    ; End of function sub_1F2F6
 
 
 ; START OF FUNCTION CHUNK FOR sub_1F282
@@ -14143,7 +14143,7 @@ loc_1F470:
                 dbf     d2,loc_1F470
                 jmp     (UpdateVDPHScrollData).w
 
-	; End of function sub_1F45E
+    ; End of function sub_1F45E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -14174,7 +14174,7 @@ loc_1F4A8:
                 jsr     (UpdateVDPVScrollData).w
                 jmp     (EnableDMAQueueProcessing).w
 
-	; End of function sub_1F496
+    ; End of function sub_1F496
 
 
 ; START OF FUNCTION CHUNK FOR sub_1F282
@@ -14270,7 +14270,7 @@ return_1F574:
                 
                 rts
 
-	; End of function sub_1F540
+    ; End of function sub_1F540
 
 byte_1F576:     dc.b 0
                 dc.b $C0 

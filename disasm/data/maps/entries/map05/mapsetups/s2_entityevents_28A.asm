@@ -43,7 +43,7 @@ Map5_EntityEvent0:
                 setFlg  $48             ; Kazin is a follower
                 rts
 
-	; End of function Map5_EntityEvent0
+    ; End of function Map5_EntityEvent0
 
 cs_51B14:       followEntity ALLY_KAZIN,ALLY_BOWIE,2
                 csc_end
@@ -56,7 +56,7 @@ Map5_EntityEvent1:
                 txt     $2F8            ; "Welcome to Yeel.{W1}"
                 rts
 
-	; End of function Map5_EntityEvent1
+    ; End of function Map5_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -68,7 +68,7 @@ Map5_EntityEvent2:
                 txt     $2FA            ; "I'm tired of living in such a{N}rustic small village.{W1}"
                 rts
 
-	; End of function Map5_EntityEvent2
+    ; End of function Map5_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -80,7 +80,7 @@ Map5_EntityEvent3:
                 txt     $2FC            ; "I don't understand those who{N}want to leave this town.{W1}"
                 rts
 
-	; End of function Map5_EntityEvent3
+    ; End of function Map5_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -92,7 +92,7 @@ Map5_EntityEvent4:
                 txt     $2FE            ; "War is not fun, but they{N}think it is.{N}{W1}"
                 rts
 
-	; End of function Map5_EntityEvent4
+    ; End of function Map5_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -105,7 +105,7 @@ Map5_EntityEvent5:
                 txt     $301            ; "He lives northwest{N}of this village.{N}You can't miss it.{W1}"
                 rts
 
-	; End of function Map5_EntityEvent5
+    ; End of function Map5_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -116,7 +116,7 @@ Map5_EntityEvent6:
                 txt     $302            ; "Bok-bok-bok...{N}...(scratch)....{W1}"
                 rts
 
-	; End of function Map5_EntityEvent6
+    ; End of function Map5_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -127,7 +127,7 @@ Map5_EntityEvent7:
                 txt     $303            ; "Cock-a-doodle-dooo....{W1}"
                 rts
 
-	; End of function Map5_EntityEvent7
+    ; End of function Map5_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -138,7 +138,7 @@ Map5_EntityEvent8:
                 txt     $304            ; "That's my hen!{N}Don't torment her!{W1}"
                 rts
 
-	; End of function Map5_EntityEvent8
+    ; End of function Map5_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -150,7 +150,7 @@ Map5_EntityEvent9:
                 txt     $306            ; "My son is working in{N}Granseal.{N}Do you know him?{W1}"
                 rts
 
-	; End of function Map5_EntityEvent9
+    ; End of function Map5_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -163,7 +163,7 @@ Map5_EntityEvent10:
                 txt     $309            ; "Hawel, Hawel, Hawel!{N}Why is he so important?{N}He's just an old man.{W1}"
                 rts
 
-	; End of function Map5_EntityEvent10
+    ; End of function Map5_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -174,7 +174,7 @@ Map5_EntityEvent11:
                 txt     $30A            ; "Soldiers are so cool!{N}That's neat armor!{W1}"
                 rts
 
-	; End of function Map5_EntityEvent11
+    ; End of function Map5_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -187,7 +187,7 @@ Map5_EntityEvent12:
                 txt     $30D            ; "I'm a big fan of{N}Mr. {NAME;28}.{N}He's so cute!{W1}"
                 rts
 
-	; End of function Map5_EntityEvent12
+    ; End of function Map5_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -208,7 +208,7 @@ return_51BA6:
                 
                 rts
 
-	; End of function Map5_EntityEvent13
+    ; End of function Map5_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -219,7 +219,7 @@ Map5_EntityEvent15:
                 txt     $32A            ; "Meow!{W1}"
                 rts
 
-	; End of function Map5_EntityEvent15
+    ; End of function Map5_EntityEvent15
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -229,7 +229,7 @@ Map5_EntityEvent14:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map5_EntityEvent14
+    ; End of function Map5_EntityEvent14
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -238,7 +238,7 @@ Map5_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map5_DefaultEntityEvent
+    ; End of function Map5_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -250,7 +250,7 @@ Map5_28A_EntityEvent1:
                 txt     $317            ; "I love peace.{N}I love Yeel!{W1}"
                 rts
 
-	; End of function Map5_28A_EntityEvent1
+    ; End of function Map5_28A_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -262,7 +262,7 @@ Map5_28A_EntityEvent2:
                 txt     $319            ; "You don't have to die at{N}your age.{W1}"
                 rts
 
-	; End of function Map5_28A_EntityEvent2
+    ; End of function Map5_28A_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -273,7 +273,7 @@ Map5_28A_EntityEvent3:
                 txt     $31A            ; "A war always takes place{N}so suddenly.{N}But we're neutral.{W1}"
                 rts
 
-	; End of function Map5_28A_EntityEvent3
+    ; End of function Map5_28A_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -285,7 +285,7 @@ Map5_28A_EntityEvent4:
                 txt     $31C            ; "Was he...kidnapped?{N}Or...or...?{W1}"
                 rts
 
-	; End of function Map5_28A_EntityEvent4
+    ; End of function Map5_28A_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -296,7 +296,7 @@ Map5_28A_EntityEvent7:
                 txt     $31D            ; "I heard that you are being{N}pursued by Galam.{N}Are you a criminal?{W1}"
                 rts
 
-	; End of function Map5_28A_EntityEvent7
+    ; End of function Map5_28A_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -309,7 +309,7 @@ Map5_28A_EntityEvent8:
                 txt     $320            ; "Ah, why did I let him{N}leave?{W1}"
                 rts
 
-	; End of function Map5_28A_EntityEvent8
+    ; End of function Map5_28A_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -321,7 +321,7 @@ Map5_28A_EntityEvent9:
                 txt     $322            ; "But I didn't foresee a{N}war.{W1}"
                 rts
 
-	; End of function Map5_28A_EntityEvent9
+    ; End of function Map5_28A_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -333,7 +333,7 @@ Map5_28A_EntityEvent10:
                 txt     $324            ; "I wanted to be a soldier{N}like them.  I've changed my{N}mind.{W1}"
                 rts
 
-	; End of function Map5_28A_EntityEvent10
+    ; End of function Map5_28A_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -345,7 +345,7 @@ Map5_28A_EntityEvent11:
                 txt     $326            ; "I thought Mr. {NAME;28} was{N}a gentleman....{W1}"
                 rts
 
-	; End of function Map5_28A_EntityEvent11
+    ; End of function Map5_28A_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -358,7 +358,7 @@ Map5_28A_EntityEvent12:
                 txt     $329            ; "Of course, we welcome you{N}and your people anytime.{W1}"
                 rts
 
-	; End of function Map5_28A_EntityEvent12
+    ; End of function Map5_28A_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -369,5 +369,5 @@ Map5_28A_EntityEvent14:
                 txt     $32A            ; "Meow!{W1}"
                 rts
 
-	; End of function Map5_28A_EntityEvent14
+    ; End of function Map5_28A_EntityEvent14
 

@@ -171,5 +171,5 @@ csub_56632:
                 
                 jmp     (csub_56632_0).w
 
-	; End of function csub_56632
+    ; End of function csub_56632
 

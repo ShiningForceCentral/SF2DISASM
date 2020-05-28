@@ -3,7 +3,7 @@
 ; 0x45A..0x490 : Trap 0 - Sound Command
                 rts
 
-	; End of function CopyByteToZ80
+    ; End of function CopyByteToZ80
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -35,5 +35,5 @@ loc_48A:
                 movem.l (sp)+,d0-d1/a0
                 rte
 
-	; End of function Trap0_SoundCommand
+    ; End of function Trap0_SoundCommand
 

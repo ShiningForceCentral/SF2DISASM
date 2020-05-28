@@ -27,5 +27,5 @@ return_568F4:
                 
                 rts
 
-	; End of function ms_map9_InitFunction
+    ; End of function ms_map9_InitFunction
 

@@ -45,5 +45,5 @@ SuspendGame:
                 jsr     (WaitForDMAQueueProcessing).w
                 rts
 
-	; End of function SuspendGame
+    ; End of function SuspendGame
 

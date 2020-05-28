@@ -133,7 +133,7 @@ loc_5FD3C:
                 dbf     d7,loc_5FD3C
                 rts
 
-	; End of function csub_5FD3A
+    ; End of function csub_5FD3A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -149,7 +149,7 @@ loc_5FD4E:
                 dbf     d7,loc_5FD4E
                 rts
 
-	; End of function sub_5FD4C
+    ; End of function sub_5FD4C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -159,7 +159,7 @@ sub_5FD5E:
                 move.b  #$18,((byte_FFAEEE+5-$1000000)).w
                 rts
 
-	; End of function sub_5FD5E
+    ; End of function sub_5FD5E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -176,7 +176,7 @@ loc_5FD68:
                 dbf     d7,loc_5FD68
                 rts
 
-	; End of function sub_5FD66
+    ; End of function sub_5FD66
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -195,7 +195,7 @@ loc_5FD82:
                 dbf     d7,loc_5FD82
                 rts
 
-	; End of function sub_5FD7C
+    ; End of function sub_5FD7C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -213,7 +213,7 @@ sub_5FD92:
                 jsr     (sub_19C8).w    
                 rts
 
-	; End of function sub_5FD92
+    ; End of function sub_5FD92
 
 plt_5FDB4:      dc.w 0
                 dc.w 0

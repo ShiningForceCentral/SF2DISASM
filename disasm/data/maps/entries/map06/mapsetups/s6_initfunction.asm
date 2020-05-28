@@ -20,7 +20,7 @@ return_54E6E:
                 
                 rts
 
-	; End of function ms_map6_InitFunction
+    ; End of function ms_map6_InitFunction
 
 cs_54E70:       setPos 132,11,18,DOWN
                 csc_end

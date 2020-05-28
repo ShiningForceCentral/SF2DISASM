@@ -25,5 +25,5 @@ loc_478CE:
                 movem.l (sp)+,d0-d7
                 rts
 
-	; End of function ResetAlliesBattleStats
+    ; End of function ResetAlliesBattleStats
 

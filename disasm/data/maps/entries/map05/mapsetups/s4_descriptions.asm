@@ -11,7 +11,7 @@ ms_map5_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map5_AreaDescriptions
+    ; End of function ms_map5_AreaDescriptions
 
 byte_51C38:     msDesc 9, 15, 6, 0      ; "{NAME} looked at{N}the paper.{W2}{CLEAR}"
                                         ; "A book...{N}MYCOLOGY{W1}"

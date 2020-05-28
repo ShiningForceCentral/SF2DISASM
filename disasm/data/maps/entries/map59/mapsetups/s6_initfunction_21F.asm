@@ -14,7 +14,7 @@ return_615E4:
                 
                 rts
 
-	; End of function ms_map59_flag21F_InitFunction
+    ; End of function ms_map59_flag21F_InitFunction
 
 cs_615E6:       textCursor $EB0
                 setCameraEntity 65535
@@ -1132,5 +1132,5 @@ csub_6269C:
                 jsr     j_ClosePortraitEyes
                 rts
 
-	; End of function csub_6269C
+    ; End of function csub_6269C
 

@@ -8,5 +8,5 @@ nullsub_4712A:
                 
                 rts
 
-	; End of function nullsub_4712A
+    ; End of function nullsub_4712A
 

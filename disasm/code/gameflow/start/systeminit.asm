@@ -11,7 +11,7 @@ SystemInit:
                 bsr.s   InitVDPData
                 jmp     (InitGame).l
 
-	; End of function SystemInit
+    ; End of function SystemInit
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -39,7 +39,7 @@ loc_22E:
                 bsr.w   ApplyVramDMAFill
                 rts
 
-	; End of function InitVDP
+    ; End of function InitVDP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -78,7 +78,7 @@ loc_2A0:
                 bsr.w   EnableDMAQueueProcessing
                 rts
 
-	; End of function InitVDPData
+    ; End of function InitVDPData
 
 vdp_init_params:dc.w $8004              ; disable H int, enable read H V counter
                 dc.w $8124              ; disable display, enable Vint, disable DMA, V28 cell mode

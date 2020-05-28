@@ -10,5 +10,5 @@ Map40_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map40_DefaultZoneEvent
+    ; End of function Map40_DefaultZoneEvent
 

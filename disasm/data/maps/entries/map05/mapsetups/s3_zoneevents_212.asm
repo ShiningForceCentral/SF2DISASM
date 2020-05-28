@@ -12,7 +12,7 @@ Map5_212_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map5_212_DefaultZoneEvent
+    ; End of function Map5_212_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -39,7 +39,7 @@ return_60500:
                 
                 rts
 
-	; End of function Map5_212_ZoneEvent0
+    ; End of function Map5_212_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -58,7 +58,7 @@ return_6051C:
                 
                 rts
 
-	; End of function Map5_212_ZoneEvent1
+    ; End of function Map5_212_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -72,7 +72,7 @@ sub_6051E:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function sub_6051E
+    ; End of function sub_6051E
 
 byte_6052E:     dc.b 9
                 dc.b $F

@@ -12,5 +12,5 @@ Map68_DefaultZoneEvent:
                 jsr     CheckRandomBattle
                 rts
 
-	; End of function Map68_DefaultZoneEvent
+    ; End of function Map68_DefaultZoneEvent
 

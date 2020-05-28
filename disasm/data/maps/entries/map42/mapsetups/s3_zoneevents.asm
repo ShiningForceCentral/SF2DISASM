@@ -20,5 +20,5 @@ Map42_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map42_ZoneEvent0
+    ; End of function Map42_ZoneEvent0
 

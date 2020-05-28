@@ -8,5 +8,5 @@ ms_map52_AreaDescriptions:
                 
                 rts
 
-	; End of function ms_map52_AreaDescriptions
+    ; End of function ms_map52_AreaDescriptions
 

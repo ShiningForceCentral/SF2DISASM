@@ -10,5 +10,5 @@ Map51_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map51_DefaultEntityEvent
+    ; End of function Map51_DefaultEntityEvent
 

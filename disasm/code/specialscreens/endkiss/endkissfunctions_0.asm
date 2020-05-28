@@ -36,7 +36,7 @@ loc_2C5CC:
                 jsr     (sub_19C8).w    
                 rts
 
-	; End of function EndKissPictureSequence
+    ; End of function EndKissPictureSequence
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -72,7 +72,7 @@ loc_2C61C:
                 movem.l (sp)+,d0-a3
                 rts
 
-	; End of function sub_2C5E4
+    ; End of function sub_2C5E4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -146,7 +146,7 @@ loc_2C6F6:
                 dbf     d7,loc_2C65E
                 rts
 
-	; End of function DisplayEndingKissWithPixelFilling
+    ; End of function DisplayEndingKissWithPixelFilling
 
 byte_2C6FC:     dc.b $13                ; Pixel appearance parameters for end kiss picture
                 dc.b   9

@@ -43,7 +43,7 @@ loc_22014:
                 movem.l (sp)+,d0-a5
                 rts
 
-	; End of function CaravanMenuActions
+    ; End of function CaravanMenuActions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -117,7 +117,7 @@ byte_220E8:
                 clsTxt
                 rts
 
-	; End of function sub_22028
+    ; End of function sub_22028
 
 
 ; START OF FUNCTION CHUNK FOR sub_22028
@@ -170,7 +170,7 @@ byte_22144:
                 clsTxt
                 rts
 
-	; End of function sub_22102
+    ; End of function sub_22102
 
 
 ; START OF FUNCTION CHUNK FOR sub_22102
@@ -210,7 +210,7 @@ loc_2215C:
                 jsr     rjt_CaravanItemActions(pc,d0.w)
                 bra.s   loc_2215A
 
-	; End of function CaravanDepotActions
+    ; End of function CaravanDepotActions
 
 rjt_CaravanItemActions:
                 dc.w Caravan_DescribeItem-rjt_CaravanItemActions
@@ -364,7 +364,7 @@ byte_222E0:
                 clsTxt
                 rts
 
-	; End of function Caravan_DescribeItem
+    ; End of function Caravan_DescribeItem
 
 
 ; START OF FUNCTION CHUNK FOR Caravan_DescribeItem
@@ -428,7 +428,7 @@ loc_22376:
                 bsr.w   ChooseCaravanPortrait
                 rts
 
-	; End of function sub_222FA
+    ; End of function sub_222FA
 
 
 ; START OF FUNCTION CHUNK FOR sub_222FA
@@ -511,7 +511,7 @@ byte_2247E:
                 clsTxt
                 rts
 
-	; End of function sub_22384
+    ; End of function sub_22384
 
 
 ; START OF FUNCTION CHUNK FOR sub_22384
@@ -579,7 +579,7 @@ byte_2251E:
                 clsTxt
                 rts
 
-	; End of function sub_22498
+    ; End of function sub_22498
 
 
 ; START OF FUNCTION CHUNK FOR sub_22498
@@ -621,7 +621,7 @@ loc_22540:
                 jsr     rjt_CaravanItemMenuActions(pc,d0.w)
                 bra.s   loc_2253E
 
-	; End of function CaravanItemMenuActions
+    ; End of function CaravanItemMenuActions
 
 rjt_CaravanItemMenuActions:
                 dc.w sub_2256C-rjt_CaravanItemMenuActions
@@ -693,7 +693,7 @@ byte_225FA:
                 clsTxt
                 rts
 
-	; End of function sub_2256C
+    ; End of function sub_2256C
 
 
 ; START OF FUNCTION CHUNK FOR sub_2256C
@@ -805,7 +805,7 @@ byte_22760:
                 clsTxt
                 rts
 
-	; End of function sub_22610
+    ; End of function sub_22610
 
 
 ; START OF FUNCTION CHUNK FOR sub_22610
@@ -838,7 +838,7 @@ loc_2277E:
                 clsTxt
                 rts
 
-	; End of function sub_22776
+    ; End of function sub_22776
 
 
 ; START OF FUNCTION CHUNK FOR sub_22776
@@ -907,7 +907,7 @@ byte_2284E:
                 clsTxt
                 rts
 
-	; End of function sub_227B0
+    ; End of function sub_227B0
 
 
 ; START OF FUNCTION CHUNK FOR sub_227B0
@@ -955,5 +955,5 @@ loc_2289C:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function DisplaySpecialCaravanDescription
+    ; End of function DisplaySpecialCaravanDescription
 

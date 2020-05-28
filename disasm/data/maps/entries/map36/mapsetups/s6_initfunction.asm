@@ -15,5 +15,5 @@ return_5DA26:
                 
                 rts
 
-	; End of function ms_map36_InitFunction
+    ; End of function ms_map36_InitFunction
 

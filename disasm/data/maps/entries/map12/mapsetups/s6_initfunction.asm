@@ -20,7 +20,7 @@ return_57D20:
                 
                 rts
 
-	; End of function ms_map12_InitFunction
+    ; End of function ms_map12_InitFunction
 
 cs_57D22:       textCursor $C7D
                 cameraSpeed $30

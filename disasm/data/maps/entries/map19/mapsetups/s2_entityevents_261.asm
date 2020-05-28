@@ -25,7 +25,7 @@ Map19_261_EntityEvent0:
                 txt     $261            ; "Very few people know{N}about the sickness, even{N}in the castle.{W2}{N}Know what I mean?{W1}"
                 rts
 
-	; End of function Map19_261_EntityEvent0
+    ; End of function Map19_261_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -42,7 +42,7 @@ byte_52FDC:
                 txt     $263            ; "Why don't you see him{N}before you leave?{N}He would be pleased.{W1}"
                 rts
 
-	; End of function Map19_261_EntityEvent1
+    ; End of function Map19_261_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -53,7 +53,7 @@ Map19_261_EntityEvent6:
                 txt     $264            ; "I have not seen{N}Princess Elis today.{N}Is she OK?{W1}"
                 rts
 
-	; End of function Map19_261_EntityEvent6
+    ; End of function Map19_261_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -64,7 +64,7 @@ Map19_261_EntityEvent4:
                 txt     $265            ; "Darn!{N}I can't sleep!{N}He keeps snoring!{W1}"
                 rts
 
-	; End of function Map19_261_EntityEvent4
+    ; End of function Map19_261_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,7 +75,7 @@ Map19_261_EntityEvent2:
                 txt     $266            ; "The Galam messenger just{N}went back to his country.{N}He looked so pale.{W2}{N}I hope he gets to Galam{N}safely?{W1}"
                 rts
 
-	; End of function Map19_261_EntityEvent2
+    ; End of function Map19_261_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ Map19_261_EntityEvent7:
                 txt     $267            ; "Breakfast is over and now{N}I have to make lunch!{N}Busy, busy!{W1}"
                 rts
 
-	; End of function Map19_261_EntityEvent7
+    ; End of function Map19_261_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -97,7 +97,7 @@ Map19_261_EntityEvent8:
                 txt     $268            ; "The messenger from Galam{N}has left.{W2}{N}He was in such hurry.{W1}"
                 rts
 
-	; End of function Map19_261_EntityEvent8
+    ; End of function Map19_261_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -108,7 +108,7 @@ Map19_261_EntityEvent9:
                 txt     $269            ; "Yeel?  Yes, it's a small{N}village near the mountains.{N}Travel northwest to get there.{W1}"
                 rts
 
-	; End of function Map19_261_EntityEvent9
+    ; End of function Map19_261_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -119,7 +119,7 @@ Map19_261_EntityEvent10:
                 txt     $2F7            ; "You are the pupils of{N}Sir Astral.  We are counting{N}on you.{W2}{N}Good luck.{W1}"
                 rts
 
-	; End of function Map19_261_EntityEvent10
+    ; End of function Map19_261_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -131,7 +131,7 @@ Map19_261_EntityEvent11:
                 txt     $258            ; "Why?  I don't know why.{N}It was already there when{N}our ancestors settled here.{W1}"
                 rts
 
-	; End of function Map19_261_EntityEvent11
+    ; End of function Map19_261_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -142,5 +142,5 @@ Map19_261_EntityEvent12:
                 txt     $2F6            ; "Thank you.{N}Depart to fetch Hawel{N}immediately.{W1}"
                 rts
 
-	; End of function Map19_261_EntityEvent12
+    ; End of function Map19_261_EntityEvent12
 

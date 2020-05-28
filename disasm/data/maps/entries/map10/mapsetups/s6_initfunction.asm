@@ -33,5 +33,5 @@ return_5708C:
                 
                 rts
 
-	; End of function ms_map10_InitFunction
+    ; End of function ms_map10_InitFunction
 

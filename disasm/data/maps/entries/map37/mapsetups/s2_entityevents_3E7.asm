@@ -21,7 +21,7 @@ Map37_3E7_EntityEvent2:
                 
                 rts
 
-	; End of function Map37_DefaultEntityEvent
+    ; End of function Map37_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -32,7 +32,7 @@ Map37_3E7_EntityEvent0:
                 txt     $D24            ; "Was it...too wild?{W1}"
                 rts
 
-	; End of function Map37_3E7_EntityEvent0
+    ; End of function Map37_3E7_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -48,7 +48,7 @@ return_5FA0E:
                 
                 rts
 
-	; End of function Map37_3E7_EntityEvent1
+    ; End of function Map37_3E7_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -67,5 +67,5 @@ return_5FA20:
                 
                 rts
 
-	; End of function Map37_3E7_EntityEvent3
+    ; End of function Map37_3E7_EntityEvent3
 

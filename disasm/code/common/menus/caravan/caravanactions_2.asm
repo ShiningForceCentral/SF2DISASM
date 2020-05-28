@@ -26,7 +26,7 @@ loc_228BA:
                 movem.l (sp)+,d0-d1
                 rts
 
-	; End of function ChooseCaravanPortrait
+    ; End of function ChooseCaravanPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -67,7 +67,7 @@ loc_22920:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function sub_228D8
+    ; End of function sub_228D8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -92,7 +92,7 @@ loc_22946:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function sub_22926
+    ; End of function sub_22926
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -126,7 +126,7 @@ loc_2298A:
                 movem.l (sp)+,d1
                 rts
 
-	; End of function sub_2294C
+    ; End of function sub_2294C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -139,7 +139,7 @@ PlayPreviousMusicAfterCurrentOne:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function PlayPreviousMusicAfterCurrentOne
+    ; End of function PlayPreviousMusicAfterCurrentOne
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -163,5 +163,5 @@ loc_229C4:
                 movem.l (sp)+,d1/a0
                 rts
 
-	; End of function sub_2299E
+    ; End of function sub_2299E
 

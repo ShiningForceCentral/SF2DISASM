@@ -25,7 +25,7 @@ return_5A234:
                 
                 rts
 
-	; End of function Map30_EntityEvent0
+    ; End of function Map30_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -37,7 +37,7 @@ Map30_EntityEvent1:
                 setFlg  $2F7            ; Set after talking to one of the dwarves in the mine near the Fairy Woods
                 rts
 
-	; End of function Map30_EntityEvent1
+    ; End of function Map30_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -51,7 +51,7 @@ Map30_EntityEvent2:
                 setFlg  $2F7            ; Set after talking to one of the dwarves in the mine near the Fairy Woods
                 rts
 
-	; End of function Map30_EntityEvent2
+    ; End of function Map30_EntityEvent2
 
 cs_5A256:       shiver 130
                 csc_end
@@ -73,7 +73,7 @@ return_5A270:
                 
                 rts
 
-	; End of function Map30_EntityEvent3
+    ; End of function Map30_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ Map30_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map30_EntityEvent4
+    ; End of function Map30_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -120,5 +120,5 @@ return_5A2C0:
                 
                 rts
 
-	; End of function sub_5A278
+    ; End of function sub_5A278
 

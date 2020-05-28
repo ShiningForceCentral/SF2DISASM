@@ -11,5 +11,5 @@ nullsub_5445C:
                 
                 rts
 
-	; End of function nullsub_5445C
+    ; End of function nullsub_5445C
 

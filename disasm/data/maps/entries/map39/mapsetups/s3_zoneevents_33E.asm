@@ -10,5 +10,5 @@ Map39_33E_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map39_33E_DefaultZoneEvent
+    ; End of function Map39_33E_DefaultZoneEvent
 

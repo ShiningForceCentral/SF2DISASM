@@ -8,5 +8,5 @@ ms_map21_flag21F_AreaDescriptions:
                 
                 rts
 
-	; End of function ms_map21_flag21F_AreaDescriptions
+    ; End of function ms_map21_flag21F_AreaDescriptions
 

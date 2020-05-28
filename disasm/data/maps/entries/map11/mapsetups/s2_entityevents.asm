@@ -17,7 +17,7 @@ Map11_EntityEvent0:
                 txt     $C4C            ; "They can't enter the shrine.{W1}"
                 rts
 
-	; End of function Map11_EntityEvent0
+    ; End of function Map11_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -29,7 +29,7 @@ Map11_EntityEvent1:
                 txt     $C4E            ; "Volcanon's shrine is here.{W1}"
                 rts
 
-	; End of function Map11_EntityEvent1
+    ; End of function Map11_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -40,7 +40,7 @@ Map11_EntityEvent2:
                 txt     $C74            ; "This shrine was built on top{N}of the mountain to watch{N}over everything.{W1}"
                 rts
 
-	; End of function Map11_EntityEvent2
+    ; End of function Map11_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -66,5 +66,5 @@ Map11_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map11_EntityEvent3
+    ; End of function Map11_EntityEvent3
 

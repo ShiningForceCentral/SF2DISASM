@@ -17,7 +17,7 @@ Map33_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map33_DefaultEntityEvent
+    ; End of function Map33_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -59,7 +59,7 @@ return_5A7D0:
                 
                 rts
 
-	; End of function Map33_EntityEvent0
+    ; End of function Map33_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -81,7 +81,7 @@ return_5A7EE:
                 
                 rts
 
-	; End of function Map33_EntityEvent1
+    ; End of function Map33_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -114,7 +114,7 @@ return_5A826:
                 
                 rts
 
-	; End of function Map33_EntityEvent2
+    ; End of function Map33_EntityEvent2
 
 cs_5A828:       setBlocks 17,13,1,1,9,5
                 textCursor $76F
@@ -144,7 +144,7 @@ return_5A862:
                 
                 rts
 
-	; End of function Map33_EntityEvent3
+    ; End of function Map33_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -169,7 +169,7 @@ return_5A884:
                 
                 rts
 
-	; End of function Map33_EntityEvent4
+    ; End of function Map33_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -196,7 +196,7 @@ return_5A8A6:
                 
                 rts
 
-	; End of function Map33_EntityEvent5
+    ; End of function Map33_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -223,7 +223,7 @@ return_5A8C8:
                 
                 rts
 
-	; End of function Map33_EntityEvent6
+    ; End of function Map33_EntityEvent6
 
 cs_5A8CA:       textCursor $773
                 nextText $0,ALLY_ERIC   ; "I'm {NAME;14}, a knight.{N}I was looking for a magic{N}sword.{W2}"

@@ -39,7 +39,7 @@ Map37_EntityEvent0:
                 moveq   #1,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent0
+    ; End of function Map37_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -49,7 +49,7 @@ Map37_EntityEvent1:
                 moveq   #2,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent1
+    ; End of function Map37_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -59,7 +59,7 @@ Map37_EntityEvent2:
                 moveq   #3,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent2
+    ; End of function Map37_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -69,7 +69,7 @@ Map37_EntityEvent3:
                 moveq   #4,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent3
+    ; End of function Map37_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -79,7 +79,7 @@ Map37_EntityEvent4:
                 moveq   #5,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent4
+    ; End of function Map37_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -89,7 +89,7 @@ Map37_EntityEvent5:
                 moveq   #6,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent5
+    ; End of function Map37_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -99,7 +99,7 @@ Map37_EntityEvent6:
                 moveq   #7,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent6
+    ; End of function Map37_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -109,7 +109,7 @@ Map37_EntityEvent7:
                 moveq   #8,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent7
+    ; End of function Map37_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -119,7 +119,7 @@ Map37_EntityEvent8:
                 moveq   #9,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent8
+    ; End of function Map37_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -129,7 +129,7 @@ Map37_EntityEvent9:
                 moveq   #$A,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent9
+    ; End of function Map37_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -139,7 +139,7 @@ Map37_EntityEvent10:
                 moveq   #$B,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent10
+    ; End of function Map37_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -149,7 +149,7 @@ Map37_EntityEvent11:
                 moveq   #$C,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent11
+    ; End of function Map37_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -159,7 +159,7 @@ Map37_EntityEvent12:
                 moveq   #$D,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent12
+    ; End of function Map37_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -169,7 +169,7 @@ Map37_EntityEvent13:
                 moveq   #$E,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent13
+    ; End of function Map37_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -179,7 +179,7 @@ Map37_EntityEvent14:
                 moveq   #$F,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent14
+    ; End of function Map37_EntityEvent14
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -189,7 +189,7 @@ Map37_EntityEvent15:
                 moveq   #$10,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent15
+    ; End of function Map37_EntityEvent15
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -199,7 +199,7 @@ Map37_EntityEvent16:
                 moveq   #$11,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent16
+    ; End of function Map37_EntityEvent16
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -209,7 +209,7 @@ Map37_EntityEvent17:
                 moveq   #$12,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent17
+    ; End of function Map37_EntityEvent17
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -219,7 +219,7 @@ Map37_EntityEvent18:
                 moveq   #$13,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent18
+    ; End of function Map37_EntityEvent18
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -229,7 +229,7 @@ Map37_EntityEvent19:
                 moveq   #$14,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent19
+    ; End of function Map37_EntityEvent19
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -239,7 +239,7 @@ Map37_EntityEvent20:
                 moveq   #$15,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent20
+    ; End of function Map37_EntityEvent20
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -249,7 +249,7 @@ Map37_EntityEvent21:
                 moveq   #$16,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent21
+    ; End of function Map37_EntityEvent21
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -259,7 +259,7 @@ Map37_EntityEvent22:
                 moveq   #$17,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent22
+    ; End of function Map37_EntityEvent22
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -269,7 +269,7 @@ Map37_EntityEvent23:
                 moveq   #$18,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent23
+    ; End of function Map37_EntityEvent23
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -279,7 +279,7 @@ sub_5F9A0:
                 moveq   #$19,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5F9A0
+    ; End of function sub_5F9A0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -290,7 +290,7 @@ Map37_EntityEvent24:
                 txt     $D30            ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
                 rts
 
-	; End of function Map37_EntityEvent24
+    ; End of function Map37_EntityEvent24
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -300,7 +300,7 @@ sub_5F9AE:
                 moveq   #$1B,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5F9AE
+    ; End of function sub_5F9AE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -310,7 +310,7 @@ sub_5F9B6:
                 moveq   #$1C,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function sub_5F9B6
+    ; End of function sub_5F9B6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -320,7 +320,7 @@ Map37_EntityEvent25:
                 moveq   #$1D,d0
                 jmp     DisplayHeadquartersQuote
 
-	; End of function Map37_EntityEvent25
+    ; End of function Map37_EntityEvent25
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -331,7 +331,7 @@ sub_5F9C6:
                 txt     $B              ; "{LEADER}, take it easy!{W1}"
                 rts
 
-	; End of function sub_5F9C6
+    ; End of function sub_5F9C6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -344,5 +344,5 @@ Map37_EntityEvent27:
                 
                 rts
 
-	; End of function Map37_EntityEvent26
+    ; End of function Map37_EntityEvent26
 

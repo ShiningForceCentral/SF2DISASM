@@ -9,7 +9,7 @@ sub_45634:
                 clr.w   d0
                 rts
 
-	; End of function sub_45634
+    ; End of function sub_45634
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -47,5 +47,5 @@ GetEntityPortaitAndSpeechSound:
                 movem.l (sp)+,d0/a0/a5
                 rts
 
-	; End of function GetEntityPortaitAndSpeechSound
+    ; End of function GetEntityPortaitAndSpeechSound
 

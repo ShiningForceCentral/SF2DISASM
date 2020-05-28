@@ -10,5 +10,5 @@ Map75_DefaultItemEvent0:
                 
                 rts
 
-	; End of function Map75_DefaultItemEvent0
+    ; End of function Map75_DefaultItemEvent0
 

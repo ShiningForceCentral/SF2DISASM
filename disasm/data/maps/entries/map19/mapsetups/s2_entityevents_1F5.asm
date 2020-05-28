@@ -21,7 +21,7 @@ byte_52F7E:
                 txt     $24A            ; "I don't know why, but{N}everybody ignores my{N}questions....{W1}"
                 rts
 
-	; End of function Map19_1F5_EntityEvent0
+    ; End of function Map19_1F5_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -32,7 +32,7 @@ Map19_1F5_EntityEvent1:
                 txt     $247            ; "The Minister ordered me{N}to stand here.{N}What's happening upstairs?{W1}"
                 rts
 
-	; End of function Map19_1F5_EntityEvent1
+    ; End of function Map19_1F5_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -43,5 +43,5 @@ Map19_1F5_EntityEvent2:
                 txt     $248            ; "By the Minister's order,{N}I cannot let you pass.{N}Sorry!{W1}"
                 rts
 
-	; End of function Map19_1F5_EntityEvent2
+    ; End of function Map19_1F5_EntityEvent2
 

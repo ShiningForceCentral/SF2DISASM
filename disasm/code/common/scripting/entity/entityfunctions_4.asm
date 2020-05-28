@@ -97,7 +97,7 @@ loc_45914:
                 movem.l (sp)+,d0-d1/d5-a0
                 rts
 
-	; End of function sub_45858
+    ; End of function sub_45858
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -195,7 +195,7 @@ loc_45A2C:
                 movem.l (sp)+,d0-d1/d5-a0
                 rts
 
-	; End of function sub_45974
+    ; End of function sub_45974
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -239,7 +239,7 @@ loc_45AA2:
                 movem.l (sp)+,d0-a0
                 rts
 
-	; End of function sub_45A8C
+    ; End of function sub_45A8C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -256,7 +256,7 @@ sub_45B0E:
                 move.l  -4(a6,d0.l),-(a0)
                 rts
 
-	; End of function sub_45B0E
+    ; End of function sub_45B0E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -286,7 +286,7 @@ loc_45B58:
                 movem.l (sp)+,a0
                 rts
 
-	; End of function sub_45B30
+    ; End of function sub_45B30
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -308,7 +308,7 @@ loc_45B78:
                 movem.l (sp)+,a0
                 rts
 
-	; End of function sub_45B64
+    ; End of function sub_45B64
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -347,7 +347,7 @@ loc_45BB0:
                 movem.l (sp)+,d0-d1/d7-a0
                 rts
 
-	; End of function sub_45B84
+    ; End of function sub_45B84
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -435,7 +435,7 @@ loc_45C5C:
                 movem.l (sp)+,d0-a5
                 rts
 
-	; End of function sub_45BBE
+    ; End of function sub_45BBE
 
 byte_45C6A:     dc.b 0
                 dc.b 0
@@ -473,7 +473,7 @@ sub_45C82:
                 movem.l (sp)+,d0-d1
                 rts
 
-	; End of function sub_45C82
+    ; End of function sub_45C82
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -487,7 +487,7 @@ sub_45C94:
                 movem.l (sp)+,d0-d1
                 rts
 
-	; End of function sub_45C94
+    ; End of function sub_45C94
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -533,7 +533,7 @@ loc_45D16:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function sub_45CA6
+    ; End of function sub_45CA6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -561,7 +561,7 @@ loc_45D2C:
                 movem.l (sp)+,d1-d7
                 rts
 
-	; End of function sub_45D1C
+    ; End of function sub_45D1C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -589,7 +589,7 @@ loc_45D56:
                 movem.l (sp)+,d1-d7
                 rts
 
-	; End of function sub_45D46
+    ; End of function sub_45D46
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -620,7 +620,7 @@ loc_45D80:
                 movem.l (sp)+,d1-d7
                 rts
 
-	; End of function sub_45D70
+    ; End of function sub_45D70
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -672,7 +672,7 @@ loc_45E0A:
                 movem.l (sp)+,d1-d4/a1-a3
                 rts
 
-	; End of function sub_45DA4
+    ; End of function sub_45DA4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -707,5 +707,5 @@ loc_45E36:
                 movem.l (sp)+,d0-d3/d7-a0
                 rts
 
-	; End of function sub_45E10
+    ; End of function sub_45E10
 

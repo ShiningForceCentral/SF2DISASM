@@ -24,5 +24,5 @@ return_5F394:
                 
                 rts
 
-	; End of function Map28_DefaultZoneEvent
+    ; End of function Map28_DefaultZoneEvent
 

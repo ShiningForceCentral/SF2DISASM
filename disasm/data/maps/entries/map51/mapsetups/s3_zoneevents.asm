@@ -23,7 +23,7 @@ return_5C302:
                 
                 rts
 
-	; End of function Map51_ZoneEvent0
+    ; End of function Map51_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -38,7 +38,7 @@ Map51_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map51_ZoneEvent4
+    ; End of function Map51_ZoneEvent4
 
 cs_5C312:       textCursor $9FB
                 setActscriptWait ALLY_PETER,eas_Init

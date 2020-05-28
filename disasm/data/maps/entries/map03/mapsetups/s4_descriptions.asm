@@ -11,7 +11,7 @@ ms_map3_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map3_AreaDescriptions
+    ; End of function ms_map3_AreaDescriptions
 
 byte_512F0:     msDesc 9, 22, 2, 0      ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
                                         ; "Welcome!{N}WEAPONS and ITEMS{W1}"

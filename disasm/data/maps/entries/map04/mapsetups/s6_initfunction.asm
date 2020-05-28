@@ -19,7 +19,7 @@ return_51740:
                 
                 rts
 
-	; End of function ms_map4_InitFunction
+    ; End of function ms_map4_InitFunction
 
 cs_51742:       setPos 128,0,0,RIGHT
                 setPos 129,0,0,RIGHT

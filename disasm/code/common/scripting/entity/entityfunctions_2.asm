@@ -14,7 +14,7 @@ SetEntityActscript:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function SetEntityActscript
+    ; End of function SetEntityActscript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -45,7 +45,7 @@ loc_44B8E:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function SetControlledEntityActScript
+    ; End of function SetControlledEntityActScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -60,7 +60,7 @@ sub_44B94:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function sub_44B94
+    ; End of function sub_44B94
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,7 +75,7 @@ SetUnitCursorActscript:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function SetUnitCursorActscript
+    ; End of function SetUnitCursorActscript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -90,7 +90,7 @@ sub_44BC0:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function sub_44BC0
+    ; End of function sub_44BC0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -105,7 +105,7 @@ sub_44BD6:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function sub_44BD6
+    ; End of function sub_44BD6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -120,7 +120,7 @@ MakeEntityIdle:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function MakeEntityIdle
+    ; End of function MakeEntityIdle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -135,7 +135,7 @@ ApplyInitActscript:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function ApplyInitActscript
+    ; End of function ApplyInitActscript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -150,7 +150,7 @@ SetEntityMovescriptToIdle:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function SetEntityMovescriptToIdle
+    ; End of function SetEntityMovescriptToIdle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -184,7 +184,7 @@ loc_44C7E:
                 movem.l (sp)+,a0-a1
                 rts
 
-	; End of function AddFollower
+    ; End of function AddFollower
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -225,7 +225,7 @@ loc_44CCA:
                 movem.l (sp)+,a0-a1
                 rts
 
-	; End of function HideEntity
+    ; End of function HideEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -248,7 +248,7 @@ SetWalkingActscript:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function SetWalkingActscript
+    ; End of function SetWalkingActscript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -307,7 +307,7 @@ loc_44D90:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function sub_44D0E
+    ; End of function sub_44D0E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -340,7 +340,7 @@ loc_44DD0:
                 movem.w (sp)+,d0-d7
                 rts
 
-	; End of function WaitForEntityToStopMoving
+    ; End of function WaitForEntityToStopMoving
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -354,5 +354,5 @@ GetEntityRAMAddress:
                 adda.w  d0,a0
                 rts
 
-	; End of function GetEntityRAMAddress
+    ; End of function GetEntityRAMAddress
 

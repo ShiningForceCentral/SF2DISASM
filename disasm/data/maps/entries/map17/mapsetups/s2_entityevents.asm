@@ -22,7 +22,7 @@ Map17_EntityEvent9:
                 
                 rts
 
-	; End of function Map17_EntityEvent9
+    ; End of function Map17_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -37,7 +37,7 @@ return_5235C:
                 
                 rts
 
-	; End of function Map17_EntityEvent7
+    ; End of function Map17_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -52,7 +52,7 @@ return_52368:
                 
                 rts
 
-	; End of function Map17_EntityEvent8
+    ; End of function Map17_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -67,7 +67,7 @@ return_52374:
                 
                 rts
 
-	; End of function Map17_EntityEvent10
+    ; End of function Map17_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -78,7 +78,7 @@ Map17_EntityEvent11:
                 txt     $3B1            ; "I didn't mean to...{W1}"
                 rts
 
-	; End of function Map17_EntityEvent11
+    ; End of function Map17_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -89,7 +89,7 @@ Map17_EntityEvent0:
                 txt     $343            ; "This is the treasure room!{N}You may not pass!{W1}"
                 rts
 
-	; End of function Map17_EntityEvent0
+    ; End of function Map17_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -102,7 +102,7 @@ Map17_EntityEvent1:
                 txt     $346            ; "I don't understand.{N}Why is King Galam so{N}impatient?{W1}"
                 rts
 
-	; End of function Map17_EntityEvent1
+    ; End of function Map17_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -116,7 +116,7 @@ Map17_EntityEvent2:
                 txt     $34A            ; "I believe in my King!{W1}"
                 rts
 
-	; End of function Map17_EntityEvent2
+    ; End of function Map17_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -135,7 +135,7 @@ return_523B2:
                 
                 rts
 
-	; End of function Map17_EntityEvent4
+    ; End of function Map17_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -146,7 +146,7 @@ Map17_EntityEvent5:
                 txt     $382            ; "You're so brave.{N}Good luck!{W1}"
                 rts
 
-	; End of function Map17_EntityEvent5
+    ; End of function Map17_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -166,7 +166,7 @@ return_523D0:
                 
                 rts
 
-	; End of function Map17_EntityEvent3
+    ; End of function Map17_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -177,7 +177,7 @@ Map17_EntityEvent6:
                 txt     $384            ; "Oh, I'm so busy!{W1}"
                 rts
 
-	; End of function Map17_EntityEvent6
+    ; End of function Map17_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -186,7 +186,7 @@ Map17_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map17_DefaultEntityEvent
+    ; End of function Map17_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -198,5 +198,5 @@ sub_523DA:
                 txt     $384            ; "Oh, I'm so busy!{W1}"
                 rts
 
-	; End of function sub_523DA
+    ; End of function sub_523DA
 

@@ -43,7 +43,7 @@ return_7F40:
                 
                 rts
 
-	; End of function CheckRegion
+    ; End of function CheckRegion
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -59,7 +59,7 @@ return_7F4C:
                 
                 rts
 
-	; End of function LoadRegionCheckString
+    ; End of function LoadRegionCheckString
 
 aDevelopedForUseOnlyWith:
                 dc.b 'DEVELOPED FOR USE ONLY WITH',0

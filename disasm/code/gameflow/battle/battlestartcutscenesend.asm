@@ -6,5 +6,5 @@ loc_47B8C:
                 movem.l (sp)+,d1
                 rts
 
-	; End of function ExecuteBattleCutscene_Start
+    ; End of function ExecuteBattleCutscene_Start
 

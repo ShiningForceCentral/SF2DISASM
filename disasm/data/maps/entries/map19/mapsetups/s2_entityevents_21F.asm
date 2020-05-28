@@ -25,7 +25,7 @@ Map19_21F_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map19_21F_DefaultEntityEvent
+    ; End of function Map19_21F_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -37,7 +37,7 @@ Map19_21F_EntityEvent9:
                 txt     $F7E            ; "Astral said he knew who...{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent9
+    ; End of function Map19_21F_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -50,7 +50,7 @@ Map19_21F_EntityEvent0:
                 txt     $F6B            ; "I'm happy to say that{N}everyone looks well.{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent0
+    ; End of function Map19_21F_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -62,7 +62,7 @@ Map19_21F_EntityEvent1:
                 txt     $F6D            ; "I got an invitation to a{N}wedding party.{N}Who's getting married?{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent1
+    ; End of function Map19_21F_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -74,7 +74,7 @@ Map19_21F_EntityEvent2:
                 txt     $F6F            ; "{NAME;2} told me about{N}it, but it's better than I{N}pictured!{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent2
+    ; End of function Map19_21F_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ Map19_21F_EntityEvent3:
                 txt     $F71            ; "The Caravan is working well!{N}I found some more ruins!{N}Ha, ha, ha!{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent3
+    ; End of function Map19_21F_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -98,7 +98,7 @@ Map19_21F_EntityEvent4:
                 txt     $F73            ; "It's hard to believe there{N}was ever a threat of evil!{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent4
+    ; End of function Map19_21F_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -110,7 +110,7 @@ Map19_21F_EntityEvent5:
                 txt     $F75            ; "He should see this beautiful{N}castle.{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent5
+    ; End of function Map19_21F_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -122,7 +122,7 @@ Map19_21F_EntityEvent6:
                 txt     $F77            ; "I hope {NAME;28} is OK.{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent6
+    ; End of function Map19_21F_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -135,7 +135,7 @@ Map19_21F_EntityEvent7:
                 txt     $F7A            ; "But, age doesn't matter.{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent7
+    ; End of function Map19_21F_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -147,7 +147,7 @@ Map19_21F_EntityEvent8:
                 txt     $F7C            ; "He's living his dream of{N}continuous adventure.{N}{LEADER}, will you join us?{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent8
+    ; End of function Map19_21F_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -158,7 +158,7 @@ Map19_21F_EntityEvent10:
                 txt     $FB1            ; "I'll make a delicious meal{N}for them!{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent10
+    ; End of function Map19_21F_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -169,7 +169,7 @@ Map19_21F_EntityEvent11:
                 txt     $FB2            ; "We have a lot of guests{N}today.{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent11
+    ; End of function Map19_21F_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -180,7 +180,7 @@ Map19_21F_EntityEvent12:
                 txt     $FB3            ; "It's my responsibility to{N}guard everybody!{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent12
+    ; End of function Map19_21F_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -191,7 +191,7 @@ Map19_21F_EntityEvent13:
                 txt     $FB4            ; "Is it time to stand guard?{N}Oh, it's you, {LEADER}!{N}Let me sleep.{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent13
+    ; End of function Map19_21F_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -202,5 +202,5 @@ Map19_21F_EntityEvent14:
                 txt     $FB5            ; "...zzz...earthquake...{N}go...to...ship...{N}hurry...zzzzzz....{W1}"
                 rts
 
-	; End of function Map19_21F_EntityEvent14
+    ; End of function Map19_21F_EntityEvent14
 

@@ -19,7 +19,7 @@ Map26_EntityEvent0:
                 txt     $6CF            ; "A hole in the wall leads{N}to Creed, but don't use it!{W1}"
                 rts
 
-	; End of function Map26_EntityEvent0
+    ; End of function Map26_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -31,7 +31,7 @@ Map26_EntityEvent1:
                 txt     $6D1            ; "They're too ferocious!{N}I'm gonna stay in Floor{N}World.{W1}"
                 rts
 
-	; End of function Map26_EntityEvent1
+    ; End of function Map26_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -43,7 +43,7 @@ Map26_EntityEvent2:
                 txt     $6D3            ; "{NAME;16} is a brave leader.{N}We trust him!{W1}"
                 rts
 
-	; End of function Map26_EntityEvent2
+    ; End of function Map26_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -53,7 +53,7 @@ Map26_EntityEvent4:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map26_EntityEvent4
+    ; End of function Map26_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -63,7 +63,7 @@ Map26_EntityEvent5:
                 jsr     j_CaravanActions
                 rts
 
-	; End of function Map26_EntityEvent5
+    ; End of function Map26_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -72,5 +72,5 @@ Map26_EntityEvent3:
                 
                 rts
 
-	; End of function Map26_EntityEvent3
+    ; End of function Map26_EntityEvent3
 

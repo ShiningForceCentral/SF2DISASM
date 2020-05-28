@@ -11,7 +11,7 @@ Map45_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map45_DefaultZoneEvent
+    ; End of function Map45_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -26,5 +26,5 @@ return_60076:
                 
                 rts
 
-	; End of function Map45_ZoneEvent0
+    ; End of function Map45_ZoneEvent0
 

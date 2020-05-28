@@ -84,7 +84,7 @@ loc_6F64:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function CheckSRAM
+    ; End of function CheckSRAM
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -113,7 +113,7 @@ loc_6F96:
                 movem.l (sp)+,d0-d1/d7-a2
                 rts
 
-	; End of function SaveGame
+    ; End of function SaveGame
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -140,7 +140,7 @@ loc_6FCC:
                 movem.l (sp)+,d0-d1/d7-a2
                 rts
 
-	; End of function LoadGame
+    ; End of function LoadGame
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -155,7 +155,7 @@ CopySave:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function CopySave
+    ; End of function CopySave
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -173,7 +173,7 @@ return_7002:
                 
                 rts
 
-	; End of function ClearSaveSlotFlag
+    ; End of function ClearSaveSlotFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -196,7 +196,7 @@ loc_700C:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function CopyBytesToSRAM
+    ; End of function CopyBytesToSRAM
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -219,5 +219,5 @@ loc_702E:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function CopyBytesFromSRAM
+    ; End of function CopyBytesFromSRAM
 

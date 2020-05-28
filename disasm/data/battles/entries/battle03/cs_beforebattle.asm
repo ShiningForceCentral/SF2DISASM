@@ -11,5 +11,5 @@ csub_49816:
                 move.b  #5,((EGRESS_MAP_INDEX-$1000000)).w
                 rts
 
-	; End of function csub_49816
+    ; End of function csub_49816
 

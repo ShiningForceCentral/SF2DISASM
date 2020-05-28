@@ -30,5 +30,5 @@ loc_16F4:
                 movem.l (sp)+,d7-a1
                 rts
 
-	; End of function CopyBytes
+    ; End of function CopyBytes
 

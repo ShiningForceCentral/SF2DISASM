@@ -14,7 +14,7 @@ return_53FD6:
                 
                 rts
 
-	; End of function ms_map40_InitFunction
+    ; End of function ms_map40_InitFunction
 
 cs_53FD8:       playSound MUSIC_BOSS_ATTACK
                 fadeInB

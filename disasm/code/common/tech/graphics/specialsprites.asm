@@ -37,7 +37,7 @@ LoadSpecialSprite:
                 move.w  rjt_25C5A(pc,d1.w),d1
                 jmp     rjt_25C5A(pc,d1.w)
 
-	; End of function LoadSpecialSprite
+    ; End of function LoadSpecialSprite
 
 rjt_25C5A:      dc.w LoadBattleSpecialSprite-rjt_25C5A
                 dc.w LoadBattleSpecialSprite-rjt_25C5A
@@ -63,7 +63,7 @@ LoadBattleSpecialSprite:
                 jsr     (ApplyImmediateVramDMA).w
                 bra.w   loc_25CB0
 
-	; End of function LoadBattleSpecialSprite
+    ; End of function LoadBattleSpecialSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -84,7 +84,7 @@ loc_25CB0:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function LoadExplorationSpecialSprite
+    ; End of function LoadExplorationSpecialSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -116,7 +116,7 @@ loc_25CD2:
                 movem.l (sp)+,d0-d2/a0-a1
                 rts
 
-	; End of function sub_25CB6
+    ; End of function sub_25CB6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -143,7 +143,7 @@ loc_25D0E:
                 move.w  rjt_SpecialSpriteUpdate(pc,d6.w),d6
                 jmp     rjt_SpecialSpriteUpdate(pc,d6.w)
 
-	; End of function UpdateSpecialSprites
+    ; End of function UpdateSpecialSprites
 
 rjt_SpecialSpriteUpdate:
                 dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
@@ -203,7 +203,7 @@ loc_25D7E:
                 dbf     d7,loc_25D7E
                 bra.w   loc_25DF0
 
-	; End of function UpdateBattleSpecialSprite
+    ; End of function UpdateBattleSpecialSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -253,5 +253,5 @@ loc_25DF0:
                 movem.l (sp)+,d0-d2/d7-a2
                 rts
 
-	; End of function UpdateExplorationSpecialSprite
+    ; End of function UpdateExplorationSpecialSprite
 

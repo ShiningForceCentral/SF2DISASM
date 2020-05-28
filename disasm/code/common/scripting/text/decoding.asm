@@ -15,7 +15,7 @@ InitDecoder:
                 clr.w   (STRING_BYTE).l
                 rts
 
-	; End of function InitDecoder
+    ; End of function InitDecoder
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -82,5 +82,5 @@ loc_2E182:
                 movem.l (sp)+,d1-d7/a1-a3
                 rts
 
-	; End of function HuffmanDecode
+    ; End of function HuffmanDecode
 

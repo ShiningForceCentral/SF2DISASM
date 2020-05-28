@@ -10,5 +10,5 @@ Map73_DefaultItemEvent0:
                 
                 rts
 
-	; End of function Map73_DefaultItemEvent0
+    ; End of function Map73_DefaultItemEvent0
 

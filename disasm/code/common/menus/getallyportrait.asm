@@ -41,5 +41,5 @@ GetAllyPortrait:
                 move.w  (sp)+,d1
                 rts
 
-	; End of function GetAllyPortrait
+    ; End of function GetAllyPortrait
 

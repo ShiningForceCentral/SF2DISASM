@@ -8,5 +8,5 @@ ms_map0_InitFunction:
                 
                 rts
 
-	; End of function ms_map0_InitFunction
+    ; End of function ms_map0_InitFunction
 

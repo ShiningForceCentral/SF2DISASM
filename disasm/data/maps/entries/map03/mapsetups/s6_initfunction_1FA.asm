@@ -15,7 +15,7 @@ byte_5136C:
                 script  cs_5137A
                 rts
 
-	; End of function ms_map3_flag1FA_InitFunction
+    ; End of function ms_map3_flag1FA_InitFunction
 
 cs_51374:       hide ALLY_KIWI
                 csc_end

@@ -11,7 +11,7 @@ Int_AdressError:
                 bsr.w   SaveErrorCode
                 bra.w   Int_ExternalInterrupt
 
-	; End of function Int_AdressError
+    ; End of function Int_AdressError
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -23,7 +23,7 @@ Int_IllegalInstruction:
                 bsr.w   SaveErrorCode
                 bra.w   Int_ExternalInterrupt
 
-	; End of function Int_IllegalInstruction
+    ; End of function Int_IllegalInstruction
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -35,7 +35,7 @@ Int_ZeroDivide:
                 bsr.w   SaveErrorCode
                 bra.w   Int_ExternalInterrupt
 
-	; End of function Int_ZeroDivide
+    ; End of function Int_ZeroDivide
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -47,7 +47,7 @@ Int_OtherError:
                 bsr.w   SaveErrorCode
                 bra.w   Int_ExternalInterrupt
 
-	; End of function Int_OtherError
+    ; End of function Int_OtherError
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -63,7 +63,7 @@ SaveErrorCode:
                 move.b  (ERRCODE_BYTE6).l,(SAVED_ERRCODE_BYTE6).l
                 move.b  (ERRCODE_BYTE7).l,(SAVED_ERRCODE_BYTE7).l
 
-	; End of function SaveErrorCode
+    ; End of function SaveErrorCode
 
 
 ; START OF FUNCTION CHUNK FOR Int_AdressError
@@ -85,5 +85,5 @@ IntLvl7:
                 nop
                 bra.s   IntLvl7
 
-	; End of function IntLvl7
+    ; End of function IntLvl7
 

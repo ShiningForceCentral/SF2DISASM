@@ -8,5 +8,5 @@ ms_map3_flag21F_InitFunction:
                 
                 rts
 
-	; End of function ms_map3_flag21F_InitFunction
+    ; End of function ms_map3_flag21F_InitFunction
 

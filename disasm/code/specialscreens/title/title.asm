@@ -147,7 +147,7 @@ loc_1001EC:
                 clr.w   d0
                 rts
 
-	; End of function TitleScreen
+    ; End of function TitleScreen
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -163,7 +163,7 @@ WaitForPlayer1InputStart:
                 bne.s   WaitForPlayer1InputStart
                 rts
 
-	; End of function WaitForPlayer1InputStart
+    ; End of function WaitForPlayer1InputStart
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -184,7 +184,7 @@ loc_10022C:
                 bne.s   TitleScreenLoop1
                 rts
 
-	; End of function TitleScreenLoop1
+    ; End of function TitleScreenLoop1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -219,7 +219,7 @@ loc_100260:
                 bne.s   TitleScreenLoop2
                 rts
 
-	; End of function TitleScreenLoop2
+    ; End of function TitleScreenLoop2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -237,5 +237,5 @@ TitleScreenEnd:
                 moveq   #$FFFFFFFF,d0
                 rts
 
-	; End of function TitleScreenEnd
+    ; End of function TitleScreenEnd
 

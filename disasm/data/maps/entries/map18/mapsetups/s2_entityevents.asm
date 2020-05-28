@@ -25,7 +25,7 @@ Map18_EntityEvent0:
                 txt     $368            ; "I can't remove it!  Blast!{N}How did you attach it{N}so firmly?{W1}"
                 rts
 
-	; End of function Map18_EntityEvent0
+    ; End of function Map18_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -37,7 +37,7 @@ Map18_EntityEvent1:
                 txt     $36A            ; "I didn't know a war was{N}going to start!{W1}"
                 rts
 
-	; End of function Map18_EntityEvent1
+    ; End of function Map18_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -49,7 +49,7 @@ Map18_EntityEvent2:
                 txt     $36C            ; "Anyway, don't leave town.{N}The King ordered us to stop{N}anybody who tries to leave.{W1}"
                 rts
 
-	; End of function Map18_EntityEvent2
+    ; End of function Map18_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -61,7 +61,7 @@ Map18_EntityEvent3:
                 txt     $36E            ; "Who are you?!{N}Civilians are not allowed{N}to come up here!{W1}"
                 rts
 
-	; End of function Map18_EntityEvent3
+    ; End of function Map18_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -70,5 +70,5 @@ Map18_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map18_DefaultEntityEvent
+    ; End of function Map18_DefaultEntityEvent
 

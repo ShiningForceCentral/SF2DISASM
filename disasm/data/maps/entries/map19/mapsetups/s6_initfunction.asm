@@ -19,7 +19,7 @@ return_53102:
                 
                 rts
 
-	; End of function ms_map19_InitFunction
+    ; End of function ms_map19_InitFunction
 
 cs_53104:       setPos 140,63,63,LEFT
                 csc_end

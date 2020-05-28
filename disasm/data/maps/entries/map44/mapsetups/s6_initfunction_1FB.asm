@@ -12,7 +12,7 @@ return_5456E:
                 
                 rts
 
-	; End of function ms_map44_flag1FB_InitFunction
+    ; End of function ms_map44_flag1FB_InitFunction
 
 cs_54570:       playSound MUSIC_BOSS_ATTACK
                 fadeInB

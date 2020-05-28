@@ -31,7 +31,7 @@ return_513B8:
                 
                 rts
 
-	; End of function ms_map3_InitFunction
+    ; End of function ms_map3_InitFunction
 
 cs_513BA:       hide 142
                 csc_end

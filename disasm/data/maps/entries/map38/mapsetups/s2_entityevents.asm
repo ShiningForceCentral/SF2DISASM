@@ -28,7 +28,7 @@ Map38_EntityEvent0:
                 txt     $85A            ; "Every peaceful person is{N}welcome!{W1}"
                 rts
 
-	; End of function Map38_EntityEvent0
+    ; End of function Map38_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -39,7 +39,7 @@ Map38_EntityEvent1:
                 txt     $85B            ; "Mr. Petro and Mr. Paseran{N}came from the south.{W1}"
                 rts
 
-	; End of function Map38_EntityEvent1
+    ; End of function Map38_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -50,7 +50,7 @@ Map38_EntityEvent2:
                 txt     $85C            ; "{NAME;26}, are you OK?{N}You were captured by the{N}devils!{W1}"
                 rts
 
-	; End of function Map38_EntityEvent2
+    ; End of function Map38_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -61,7 +61,7 @@ Map38_EntityEvent3:
                 txt     $85D            ; "The devils kidnapped{N}Mr. Petro and stole the{N}Nazca Ship.{W1}"
                 rts
 
-	; End of function Map38_EntityEvent3
+    ; End of function Map38_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -74,7 +74,7 @@ Map38_EntityEvent4:
                 txt     $860            ; "And we have seen many{N}devils here since he came{N}to Roft.{W1}"
                 rts
 
-	; End of function Map38_EntityEvent4
+    ; End of function Map38_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ Map38_EntityEvent5:
                 txt     $862            ; "He has smeared his armor with{N}the blood of his enemies.{W1}"
                 rts
 
-	; End of function Map38_EntityEvent5
+    ; End of function Map38_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -99,7 +99,7 @@ Map38_EntityEvent6:
                 txt     $865            ; "They may help you in your{N}battles.{W1}"
                 rts
 
-	; End of function Map38_EntityEvent6
+    ; End of function Map38_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -111,7 +111,7 @@ Map38_EntityEvent7:
                 txt     $867            ; "The Dwarven Blacksmith lives{N}in Grans Forest.{W1}"
                 rts
 
-	; End of function Map38_EntityEvent7
+    ; End of function Map38_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -122,7 +122,7 @@ Map38_EntityEvent8:
                 txt     $868            ; "Nobody but the Dwarven{N}Blacksmith can work with{N}Mithril.{W1}"
                 rts
 
-	; End of function Map38_EntityEvent8
+    ; End of function Map38_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -165,7 +165,7 @@ return_5DC54:
                 
                 rts
 
-	; End of function Map38_EntityEvent9
+    ; End of function Map38_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -208,7 +208,7 @@ return_5DCA2:
                 
                 rts
 
-	; End of function Map38_EntityEvent10
+    ; End of function Map38_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -218,7 +218,7 @@ Map38_EntityEvent11:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map38_EntityEvent11
+    ; End of function Map38_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -229,7 +229,7 @@ Map38_EntityEvent12:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map38_EntityEvent12
+    ; End of function Map38_EntityEvent12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -240,7 +240,7 @@ Map38_EntityEvent13:
                 jsr     j_ShopActions
                 rts
 
-	; End of function Map38_EntityEvent13
+    ; End of function Map38_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -251,7 +251,7 @@ Map38_EntityEvent14:
                 txt     $869            ; "Huh!  Huh!{W1}"
                 rts
 
-	; End of function Map38_EntityEvent14
+    ; End of function Map38_EntityEvent14
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -260,5 +260,5 @@ Map38_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map38_DefaultEntityEvent
+    ; End of function Map38_DefaultEntityEvent
 

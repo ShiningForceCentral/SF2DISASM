@@ -30,5 +30,5 @@ ExecuteBattleCutscene_Defeated:
                 movem.l (sp)+,d0/a0
                 bra.w   loc_47C48
 
-	; End of function ExecuteBattleCutscene_Defeated
+    ; End of function ExecuteBattleCutscene_Defeated
 

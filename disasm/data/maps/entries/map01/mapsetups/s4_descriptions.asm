@@ -11,7 +11,7 @@ ms_map1_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map1_AreaDescriptions
+    ; End of function ms_map1_AreaDescriptions
 
 byte_5E736:     msDesc 11, 3, 9, 0      ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
                                         ; "A statue of beautiful Mitula.{W1}"
@@ -33,5 +33,5 @@ return_5E756:
                 
                 rts
 
-	; End of function Map1_DescFunc0
+    ; End of function Map1_DescFunc0
 

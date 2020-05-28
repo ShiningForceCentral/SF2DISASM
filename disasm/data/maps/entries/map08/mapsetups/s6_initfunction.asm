@@ -15,5 +15,5 @@ return_563B0:
                 
                 rts
 
-	; End of function ms_map8_InitFunction
+    ; End of function ms_map8_InitFunction
 

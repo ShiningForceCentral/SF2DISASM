@@ -14,7 +14,7 @@ return_5E0EC:
                 
                 rts
 
-	; End of function ms_map39_flag33E_InitFunction
+    ; End of function ms_map39_flag33E_InitFunction
 
 cs_5E0EE:       newEntity ALLY_ZYNK,4,12,UP,MAPSPRITE_TAROS
                 csc_end

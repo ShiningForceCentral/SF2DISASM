@@ -20,5 +20,5 @@ return_56FDE:
                 
                 rts
 
-	; End of function Map10_2D2_ZoneEvent0
+    ; End of function Map10_2D2_ZoneEvent0
 

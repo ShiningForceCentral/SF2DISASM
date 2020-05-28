@@ -15,5 +15,5 @@ return_5E27A:
                 
                 rts
 
-	; End of function ms_map55_InitFunction
+    ; End of function ms_map55_InitFunction
 

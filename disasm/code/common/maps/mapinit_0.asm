@@ -32,5 +32,5 @@ loc_7982:
                 movem.l (sp)+,d1-d2/a0
                 rts
 
-	; End of function CheckMapSwitch
+    ; End of function CheckMapSwitch
 

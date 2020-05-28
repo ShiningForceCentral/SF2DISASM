@@ -145,7 +145,7 @@ return_AE30:
                 
                 rts
 
-	; End of function WriteSkirmishScript_InflictDamage
+    ; End of function WriteSkirmishScript_InflictDamage
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -185,7 +185,7 @@ return_AE88:
                 
                 rts
 
-	; End of function WriteSkirmishScript_InflictAilment
+    ; End of function WriteSkirmishScript_InflictAilment
 
 SkirmishAilmentFuncTable:
                 dc.l WriteSkirmishScript_InflictPoison
@@ -209,7 +209,7 @@ WriteSkirmishScript_InflictPoison:
                 ori.w   #2,d1
                 rts
 
-	; End of function WriteSkirmishScript_InflictPoison
+    ; End of function WriteSkirmishScript_InflictPoison
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -225,7 +225,7 @@ WriteSkirmishScript_InflictSleep:
                 ori.w   #$C0,d1 
                 rts
 
-	; End of function WriteSkirmishScript_InflictSleep
+    ; End of function WriteSkirmishScript_InflictSleep
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -241,7 +241,7 @@ WriteSkirmishScript_InflictStun:
                 ori.w   #1,d1
                 rts
 
-	; End of function WriteSkirmishScript_InflictStun
+    ; End of function WriteSkirmishScript_InflictStun
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -260,7 +260,7 @@ loc_AF08:
                 ori.w   #$30,d1 
                 rts
 
-	; End of function WriteSkirmishScript_InflictMuddle
+    ; End of function WriteSkirmishScript_InflictMuddle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -273,7 +273,7 @@ WriteSkirmishScript_InflictSlow:
                 ori.w   #$C00,d1
                 rts
 
-	; End of function WriteSkirmishScript_InflictSlow
+    ; End of function WriteSkirmishScript_InflictSlow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -290,7 +290,7 @@ loc_AF3E:
                 movem.l (sp)+,d0-d1
                 rts
 
-	; End of function WriteSkirmishScript_DrainMP
+    ; End of function WriteSkirmishScript_DrainMP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -314,7 +314,7 @@ loc_AF6C:
                 move.w  d3,d1
                 rts
 
-	; End of function WriteSkirmishScript_InflictSilence
+    ; End of function WriteSkirmishScript_InflictSilence
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -383,7 +383,7 @@ return_B00C:
                 
                 rts
 
-	; End of function WriteSkirmishScript_InflictCurseDamage
+    ; End of function WriteSkirmishScript_InflictCurseDamage
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -436,7 +436,7 @@ return_B07E:
                 
                 rts
 
-	; End of function DetermineDoubleAndCounter
+    ; End of function DetermineDoubleAndCounter
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -461,7 +461,7 @@ loc_B092:
                 move.w  #0,(a6)+
                 rts
 
-	; End of function WriteSkirmishScript_DeathMessage
+    ; End of function WriteSkirmishScript_DeathMessage
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -480,7 +480,7 @@ WriteSkirmishScript_UseSpell:
                 move.w  rjt_ItemUsedEffects(pc,d1.w),d1
                 jmp     rjt_ItemUsedEffects(pc,d1.w)
 
-	; End of function WriteSkirmishScript_UseSpell
+    ; End of function WriteSkirmishScript_UseSpell
 
 rjt_ItemUsedEffects:
                 dc.w sub_B114-rjt_ItemUsedEffects
@@ -586,7 +586,7 @@ loc_B16A:
                 bsr.w   sub_A872
                 rts
 
-	; End of function sub_B114
+    ; End of function sub_B114
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -681,7 +681,7 @@ loc_B26C:
                 jsr     ApplyStatusAndItemsOnStats
                 rts
 
-	; End of function sub_B194
+    ; End of function sub_B194
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -737,7 +737,7 @@ loc_B2C8:
                 move.w  d1,(a6)+
                 rts
 
-	; End of function sub_B27C
+    ; End of function sub_B27C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -779,7 +779,7 @@ loc_B362:
                 
                 bsr.w   GiveMagicDrainEXP
 
-	; End of function sub_B30E
+    ; End of function sub_B30E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -806,7 +806,7 @@ WriteSkirmishScript_SlowMessage:
                 move.w  d1,(a6)+
                 rts
 
-	; End of function WriteSkirmishScript_SlowMessage
+    ; End of function WriteSkirmishScript_SlowMessage
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -855,7 +855,7 @@ loc_B404:
                 move.w  d1,(a6)+
                 rts
 
-	; End of function sub_B3A8
+    ; End of function sub_B3A8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -905,7 +905,7 @@ loc_B46C:
                 move.w  #0,(a6)+
                 rts
 
-	; End of function sub_B41A
+    ; End of function sub_B41A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -965,7 +965,7 @@ loc_B4FC:
                 move.w  #0,(a6)+
                 rts
 
-	; End of function spell07_Muddle
+    ; End of function spell07_Muddle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1011,7 +1011,7 @@ loc_B562:
                 move.b  #$FF,-4(a2)
                 rts
 
-	; End of function sub_B516
+    ; End of function sub_B516
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1048,7 +1048,7 @@ loc_B5BA:
                 move.w  #0,(a6)+
                 rts
 
-	; End of function sub_B57E
+    ; End of function sub_B57E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1072,8 +1072,6 @@ loc_B5EC:
                 jsr     GetStatus
                 btst    #7,d0
                 bne.s   loc_B612
-loc_B600:
-                
                 move.w  #$B,(a6)+
                 move.w  #0,(a6)+
                 move.w  d3,(a6)+
@@ -1130,7 +1128,7 @@ loc_B66C:
                 move.w  d2,(a6)+
                 rts
 
-	; End of function sub_B5D6
+    ; End of function sub_B5D6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1174,7 +1172,7 @@ loc_B6B4:
                 jsr     ApplyStatusAndItemsOnStats
                 rts
 
-	; End of function sub_B680
+    ; End of function sub_B680
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1218,7 +1216,7 @@ loc_B71A:
                 jsr     ApplyStatusAndItemsOnStats
                 rts
 
-	; End of function sub_B6E6
+    ; End of function sub_B6E6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1260,7 +1258,7 @@ loc_B780:
                 jsr     ApplyStatusAndItemsOnStats
                 rts
 
-	; End of function sub_B74C
+    ; End of function sub_B74C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1307,7 +1305,7 @@ loc_B802:
                 jsr     ApplyStatusAndItemsOnStats
                 rts
 
-	; End of function sub_B7B2
+    ; End of function sub_B7B2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1348,7 +1346,7 @@ loc_B85A:
                 jsr     IncreaseMaxHP
                 rts
 
-	; End of function sub_B826
+    ; End of function sub_B826
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1399,7 +1397,7 @@ loc_B8CC:
                 jsr     IncreaseMaxMP
                 rts
 
-	; End of function sub_B886
+    ; End of function sub_B886
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1521,7 +1519,7 @@ return_BA1A:
                 
                 rts
 
-	; End of function sub_B8F8
+    ; End of function sub_B8F8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1575,7 +1573,7 @@ loc_BA7C:
                 bsr.w   sub_A872
                 rts
 
-	; End of function sub_BA1C
+    ; End of function sub_BA1C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1584,7 +1582,7 @@ NoItemEffect:
                 
                 rts
 
-	; End of function NoItemEffect
+    ; End of function NoItemEffect
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1617,7 +1615,7 @@ loc_BAD2:
                 move.l  (sp)+,d0
                 rts
 
-	; End of function ApplyRandomEffectiveness
+    ; End of function ApplyRandomEffectiveness
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1627,7 +1625,7 @@ sub_BAD6:
                 moveq   #$10,d3
                 bra.w   loc_BB02
 
-	; End of function sub_BAD6
+    ; End of function sub_BAD6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1637,7 +1635,7 @@ sub_BADC:
                 moveq   #$20,d3 
                 bra.w   loc_BB02
 
-	; End of function sub_BADC
+    ; End of function sub_BADC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1647,7 +1645,7 @@ sub_BAE2:
                 moveq   #$20,d3 
                 bra.w   loc_BB02
 
-	; End of function sub_BAE2
+    ; End of function sub_BAE2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1657,7 +1655,7 @@ sub_BAE8:
                 moveq   #$10,d3
                 bra.w   loc_BB02
 
-	; End of function sub_BAE8
+    ; End of function sub_BAE8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1667,7 +1665,7 @@ sub_BAEE:
                 moveq   #8,d3
                 bra.w   loc_BB02
 
-	; End of function sub_BAEE
+    ; End of function sub_BAEE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1677,7 +1675,7 @@ sub_BAF4:
                 moveq   #8,d3
                 bra.w   loc_BB02
 
-	; End of function sub_BAF4
+    ; End of function sub_BAF4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1687,7 +1685,7 @@ sub_BAFA:
                 moveq   #$20,d3 
                 bra.w   loc_BB02
 
-	; End of function sub_BAFA
+    ; End of function sub_BAFA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1696,7 +1694,7 @@ sub_BB00:
                 
                 moveq   #0,d3
 
-	; End of function sub_BB00
+    ; End of function sub_BB00
 
 
 ; START OF FUNCTION CHUNK FOR sub_BAD6
@@ -1786,7 +1784,7 @@ loc_BBB2:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function GetSpellPowerAdjustedForClass
+    ; End of function GetSpellPowerAdjustedForClass
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1805,7 +1803,7 @@ WriteSkirmishScript_UseItem:
                 move.w  d0,((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
                 bra.w   WriteSkirmishScript_UseSpell
 
-	; End of function WriteSkirmishScript_UseItem
+    ; End of function WriteSkirmishScript_UseItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1814,7 +1812,7 @@ nullsub_BBE4:
                 
                 rts
 
-	; End of function nullsub_BBE4
+    ; End of function nullsub_BBE4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1880,7 +1878,7 @@ loc_BC94:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-	; End of function WriteSkirmishScript_BreakUsedItem
+    ; End of function WriteSkirmishScript_BreakUsedItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1938,5 +1936,5 @@ loc_BCEA:
                 movem.l (sp)+,d0/a0
                 rts
 
-	; End of function GetItemBreakMessage
+    ; End of function GetItemBreakMessage
 

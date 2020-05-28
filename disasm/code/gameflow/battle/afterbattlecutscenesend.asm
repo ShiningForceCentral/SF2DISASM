@@ -10,5 +10,5 @@ loc_47D54:
                 movem.l (sp)+,d0-d1
                 rts
 
-	; End of function ExecuteAfterBattleCutscene
+    ; End of function ExecuteAfterBattleCutscene
 

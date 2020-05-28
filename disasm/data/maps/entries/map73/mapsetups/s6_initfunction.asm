@@ -25,7 +25,7 @@ return_5036C:
                 
                 rts
 
-	; End of function ms_map73_InitFunction
+    ; End of function ms_map73_InitFunction
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -41,7 +41,7 @@ loc_50370:
                 dbf     d7,loc_50370
                 rts
 
-	; End of function sub_5036E
+    ; End of function sub_5036E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -52,7 +52,7 @@ sub_50380:
                 move.w  #$3F60,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
                 rts
 
-	; End of function sub_50380
+    ; End of function sub_50380
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -67,7 +67,7 @@ loc_50390:
                 dbf     d7,loc_50390
                 rts
 
-	; End of function sub_5038E
+    ; End of function sub_5038E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -77,7 +77,7 @@ sub_5039E:
                 move.b  #0,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
                 rts
 
-	; End of function sub_5039E
+    ; End of function sub_5039E
 
 cs_503A6:       textCursor $8BF
                 resetForceBattleStats

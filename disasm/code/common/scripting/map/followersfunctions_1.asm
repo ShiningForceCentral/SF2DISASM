@@ -70,5 +70,5 @@ return_44336:
                 
                 rts
 
-	; End of function InitializeFollowerEntities
+    ; End of function InitializeFollowerEntities
 

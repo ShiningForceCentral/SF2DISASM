@@ -11,7 +11,7 @@ ms_map67_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map67_AreaDescriptions
+    ; End of function ms_map67_AreaDescriptions
 
 byte_4FCDE:     msDescFunction 57, 23, Map67_DescFunc0-byte_4FCDE
                 msDescEnd
@@ -54,5 +54,5 @@ return_4FD40:
                 
                 rts
 
-	; End of function Map67_DescFunc0
+    ; End of function Map67_DescFunc0
 

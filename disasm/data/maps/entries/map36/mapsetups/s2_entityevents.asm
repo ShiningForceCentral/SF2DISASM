@@ -23,7 +23,7 @@ Map36_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map36_DefaultEntityEvent
+    ; End of function Map36_DefaultEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -34,7 +34,7 @@ Map36_EntityEvent1:
                 txt     $CD1            ; "Are you from South Parmecia?{N}Oh, great!{W1}"
                 rts
 
-	; End of function Map36_EntityEvent1
+    ; End of function Map36_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -46,7 +46,7 @@ Map36_EntityEvent2:
                 txt     $CD3            ; "They must have done something{N}to Goddess Mitula!{W1}"
                 rts
 
-	; End of function Map36_EntityEvent2
+    ; End of function Map36_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -58,7 +58,7 @@ Map36_EntityEvent3:
                 txt     $CD5            ; "None at all.  There are no{N}soldiers who can fight{N}against the devils.{W1}"
                 rts
 
-	; End of function Map36_EntityEvent3
+    ; End of function Map36_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -77,7 +77,7 @@ byte_5D8B6:
                 txt     $CD7            ; "Oh, I can't.  I'm too hungry!{W1}"
                 rts
 
-	; End of function Map36_EntityEvent4
+    ; End of function Map36_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -90,7 +90,7 @@ Map36_EntityEvent5:
                 txt     $CDA            ; "Vicar {NAME;22} has the{N}key to open the gate.{W1}"
                 rts
 
-	; End of function Map36_EntityEvent5
+    ; End of function Map36_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -103,7 +103,7 @@ Map36_EntityEvent6:
                 txt     $CDD            ; "That means, we abandoned{N}the people living there.{W1}"
                 rts
 
-	; End of function Map36_EntityEvent6
+    ; End of function Map36_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -115,7 +115,7 @@ Map36_EntityEvent7:
                 txt     $CDF            ; "Just one rainfall would make{N}us happy.{W1}"
                 rts
 
-	; End of function Map36_EntityEvent7
+    ; End of function Map36_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -128,7 +128,7 @@ Map36_EntityEvent8:
                 txt     $CE2            ; "We will be ruined by the{N}drought long before the{N}devils destroy us.{W1}"
                 rts
 
-	; End of function Map36_EntityEvent8
+    ; End of function Map36_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -140,7 +140,7 @@ Map36_EntityEvent9:
                 txt     $CE4            ; "You can get to Tristan by{N}traveling along that route.{W1}"
                 rts
 
-	; End of function Map36_EntityEvent9
+    ; End of function Map36_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -152,7 +152,7 @@ Map36_EntityEvent0:
                 txt     $CE6            ; "I abandoned the people of{N}Moun to protect the{N}Parmecia continent.{W1}"
                 rts
 
-	; End of function Map36_EntityEvent0
+    ; End of function Map36_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -164,7 +164,7 @@ Map36_EntityEvent10:
                 txt     $CE8            ; "Were they all killed?{W1}"
                 rts
 
-	; End of function Map36_EntityEvent10
+    ; End of function Map36_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -177,7 +177,7 @@ Map36_EntityEvent11:
                 txt     $CEB            ; "I didn't wish to see such{N}an uncouth princess.{W1}"
                 rts
 
-	; End of function Map36_EntityEvent11
+    ; End of function Map36_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -187,5 +187,5 @@ Map36_EntityEvent12:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map36_EntityEvent12
+    ; End of function Map36_EntityEvent12
 

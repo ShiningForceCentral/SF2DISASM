@@ -12,7 +12,7 @@ Map38_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map38_DefaultZoneEvent
+    ; End of function Map38_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -28,7 +28,7 @@ return_5DCEE:
                 
                 rts
 
-	; End of function Map38_ZoneEvent0
+    ; End of function Map38_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -57,5 +57,5 @@ return_5DD24:
                 
                 rts
 
-	; End of function Map38_ZoneEvent1
+    ; End of function Map38_ZoneEvent1
 

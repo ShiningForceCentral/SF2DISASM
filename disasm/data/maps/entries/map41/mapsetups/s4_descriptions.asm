@@ -11,7 +11,7 @@ ms_map41_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map41_AreaDescriptions
+    ; End of function ms_map41_AreaDescriptions
 
 byte_5F41E:     msDescFunctionD6 6, 7, $FF, Map41_DescFunc0-byte_5F41E
                 msDescFunction 6, 7, Map41_DescFunc1-byte_5F41E
@@ -44,7 +44,7 @@ return_5F454:
                 
                 rts
 
-	; End of function Map41_DescFunc0
+    ; End of function Map41_DescFunc0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -64,5 +64,5 @@ return_5F46A:
                 
                 rts
 
-	; End of function Map41_DescFunc1
+    ; End of function Map41_DescFunc1
 

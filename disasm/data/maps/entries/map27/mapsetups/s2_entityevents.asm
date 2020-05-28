@@ -10,5 +10,5 @@ Map27_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map27_DefaultEntityEvent
+    ; End of function Map27_DefaultEntityEvent
 

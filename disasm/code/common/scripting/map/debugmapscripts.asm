@@ -19,5 +19,5 @@ DebugMapScript:
                 bsr.w   ExecuteMapScript
                 rts
 
-	; End of function DebugMapScript
+    ; End of function DebugMapScript
 

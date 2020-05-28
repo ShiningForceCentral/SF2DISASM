@@ -63,5 +63,5 @@ loc_764A:
                 movea.l (sp)+,a0
                 rts
 
-	; End of function GetSavePointForMap
+    ; End of function GetSavePointForMap
 

@@ -8,5 +8,5 @@ ms_map17_flag212_AreaDescriptions:
                 
                 rts
 
-	; End of function ms_map17_flag212_AreaDescriptions
+    ; End of function ms_map17_flag212_AreaDescriptions
 

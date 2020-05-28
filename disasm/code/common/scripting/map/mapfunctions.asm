@@ -9,7 +9,7 @@ InitMapEntities:
                 movem.l d0-a5,-(sp)
                 bra.w   loc_440E2
 
-	; End of function InitMapEntities
+    ; End of function InitMapEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -21,7 +21,7 @@ sub_440D4:
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
 
-	; End of function sub_440D4
+    ; End of function sub_440D4
 
 
 ; START OF FUNCTION CHUNK FOR InitMapEntities
@@ -173,7 +173,7 @@ loc_44262:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function sub_441AA
+    ; End of function sub_441AA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -199,5 +199,5 @@ loc_44282:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-	; End of function IsOverworldMap
+    ; End of function IsOverworldMap
 

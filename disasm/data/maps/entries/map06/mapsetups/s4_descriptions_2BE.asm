@@ -11,7 +11,7 @@ ms_map6_flag2BE_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map6_flag2BE_AreaDescriptions
+    ; End of function ms_map6_flag2BE_AreaDescriptions
 
 byte_54D4C:     msDesc 5, 7, 4, 0       ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                                         ; "A book...{N}GREAT VOYAGE{W1}"

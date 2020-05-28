@@ -22,7 +22,7 @@ return_59E02:
                 
                 rts
 
-	; End of function ms_map26_InitFunction
+    ; End of function ms_map26_InitFunction
 
 cs_59E04:       textCursor $6CB
                 setCameraEntity 65535

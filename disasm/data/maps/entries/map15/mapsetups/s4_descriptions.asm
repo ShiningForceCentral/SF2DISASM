@@ -11,7 +11,7 @@ ms_map15_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map15_AreaDescriptions
+    ; End of function ms_map15_AreaDescriptions
 
 byte_5D030:     msDesc 31, 3, 9, 0      ; "{NAME} investigated{N}the statue.{W2}{CLEAR}"
                                         ; "A statue of beautiful Mitula.{W1}"

@@ -14,7 +14,7 @@ csc32_setCameraDestInTiles:
                 jsr     (WaitForViewScrollEnd).w
                 rts
 
-	; End of function csc32_setCameraDestInTiles
+    ; End of function csc32_setCameraDestInTiles
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -55,7 +55,7 @@ return_46564:
                 
                 rts
 
-	; End of function csc33_setQuakeAmount
+    ; End of function csc33_setQuakeAmount
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -70,7 +70,7 @@ csc34_setBlocks:
                 bset    #1,(VIEW_PLANE_UPDATE_TRIGGERS).l
                 rts
 
-	; End of function csc34_setBlocks
+    ; End of function csc34_setBlocks
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -85,7 +85,7 @@ csc35_setBlocksVar:
                 jsr     (CopyMapBlocks).w
                 rts
 
-	; End of function csc35_setBlocksVar
+    ; End of function csc35_setBlocksVar
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -99,7 +99,7 @@ csc36_resetMap:
                 movea.l (sp)+,a6
                 rts
 
-	; End of function csc36_resetMap
+    ; End of function csc36_resetMap
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -112,7 +112,7 @@ csc37_loadMapAndFadeIn:
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
 
-	; End of function csc37_loadMapAndFadeIn
+    ; End of function csc37_loadMapAndFadeIn
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -149,7 +149,7 @@ loc_465C4:
                 jsr     (WaitForVInt).w
                 rts
 
-	; End of function csc48_loadMap
+    ; End of function csc48_loadMap
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -159,7 +159,7 @@ csc39_fadeInFromBlack:
                 jsr     (FadeInFromBlack).w
                 rts
 
-	; End of function csc39_fadeInFromBlack
+    ; End of function csc39_fadeInFromBlack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -169,7 +169,7 @@ csc3A_fadeOutToBlack:
                 jsr     (FadeOutToBlack).w
                 rts
 
-	; End of function csc3A_fadeOutToBlack
+    ; End of function csc3A_fadeOutToBlack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -182,7 +182,7 @@ csc3B_slowFadeInFromBlack:
                 move.b  d0,((FADING_COUNTER_MAX-$1000000)).w
                 rts
 
-	; End of function csc3B_slowFadeInFromBlack
+    ; End of function csc3B_slowFadeInFromBlack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -195,7 +195,7 @@ csc3C_slowFadeOutToBlack:
                 move.b  d0,((FADING_COUNTER_MAX-$1000000)).w
                 rts
 
-	; End of function csc3C_slowFadeOutToBlack
+    ; End of function csc3C_slowFadeOutToBlack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -209,7 +209,7 @@ csc3D_tintMap:
                 nop
                 rts
 
-	; End of function csc3D_tintMap
+    ; End of function csc3D_tintMap
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -223,7 +223,7 @@ csc3E_FlickerOnce:
                 nop
                 rts
 
-	; End of function csc3E_FlickerOnce
+    ; End of function csc3E_FlickerOnce
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -237,7 +237,7 @@ csc3F_fadeMapOutToWhite:
                 nop
                 rts
 
-	; End of function csc3F_fadeMapOutToWhite
+    ; End of function csc3F_fadeMapOutToWhite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -251,7 +251,7 @@ csc40_fadeMapInFromWhite:
                 nop
                 rts
 
-	; End of function csc40_fadeMapInFromWhite
+    ; End of function csc40_fadeMapInFromWhite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -271,7 +271,7 @@ loc_4667A:
                 jsr     (DuplicatePalettes).w
                 rts
 
-	; End of function csc41_flashScreenWhite
+    ; End of function csc41_flashScreenWhite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -294,7 +294,7 @@ csc42_loadMapEntities:
                 dc.l 0
                 rts
 
-	; End of function csc42_loadMapEntities
+    ; End of function csc42_loadMapEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -308,7 +308,7 @@ csc43_RoofEvent:
                 jsr     (PerformMapBlockCopyScript).w
                 rts
 
-	; End of function csc43_RoofEvent
+    ; End of function csc43_RoofEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -335,7 +335,7 @@ csc44_reloadEntities:
                 dc.l 0
                 rts
 
-	; End of function csc44_reloadEntities
+    ; End of function csc44_reloadEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -346,7 +346,7 @@ csc45_cameraSpeed:
                 nop
                 rts
 
-	; End of function csc45_cameraSpeed
+    ; End of function csc45_cameraSpeed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -376,7 +376,7 @@ csc46_reloadMap:
                 jsr     (WaitForVInt).w
                 rts
 
-	; End of function csc46_reloadMap
+    ; End of function csc46_reloadMap
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -390,7 +390,7 @@ csc47_StepEvent:
                 jsr     (OpenDoor).w    
                 rts
 
-	; End of function csc47_StepEvent
+    ; End of function csc47_StepEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -413,7 +413,7 @@ csc49_loadEntitiesFromMapSetup:
                 dc.l 0
                 rts
 
-	; End of function csc49_loadEntitiesFromMapSetup
+    ; End of function csc49_loadEntitiesFromMapSetup
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -427,7 +427,7 @@ csc4A_fadeInFromBlackHalf:
                 nop
                 rts
 
-	; End of function csc4A_fadeInFromBlackHalf
+    ; End of function csc4A_fadeInFromBlackHalf
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -441,7 +441,7 @@ csc4B_fadeOutToBlackHalf:
                 nop
                 rts
 
-	; End of function csc4B_fadeOutToBlackHalf
+    ; End of function csc4B_fadeOutToBlackHalf
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -467,7 +467,7 @@ loc_467C6:
                 move.b  (sp)+,d3
                 rts
 
-	; End of function LaunchFading
+    ; End of function LaunchFading
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -495,7 +495,7 @@ loc_467FC:
                 jsr     rjt_EntityMoveCommands(pc,d1.w)
                 bra.s   loc_467FC
 
-	; End of function csc2D_entityActionSequence
+    ; End of function csc2D_entityActionSequence
 
 rjt_EntityMoveCommands:
                 dc.w csc2D_0_moveRight-rjt_EntityMoveCommands
@@ -525,7 +525,7 @@ csc2D_0_moveRight:
                 move.w  #1,(a0)+
                 rts
 
-	; End of function csc2D_0_moveRight
+    ; End of function csc2D_0_moveRight
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -538,7 +538,7 @@ csc2D_1_moveUp:
                 move.w  #1,(a0)+
                 rts
 
-	; End of function csc2D_1_moveUp
+    ; End of function csc2D_1_moveUp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -551,7 +551,7 @@ csc2D_2_moveLeft:
                 move.w  #1,(a0)+
                 rts
 
-	; End of function csc2D_2_moveLeft
+    ; End of function csc2D_2_moveLeft
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -564,7 +564,7 @@ csc2D_3_moveDown:
                 move.w  #1,(a0)+
                 rts
 
-	; End of function csc2D_3_moveDown
+    ; End of function csc2D_3_moveDown
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -577,7 +577,7 @@ csc2D_4_moveUpRight:
                 move.w  #1,(a0)+
                 rts
 
-	; End of function csc2D_4_moveUpRight
+    ; End of function csc2D_4_moveUpRight
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -590,7 +590,7 @@ csc2D_5_moveUpLeft:
                 move.w  #1,(a0)+
                 rts
 
-	; End of function csc2D_5_moveUpLeft
+    ; End of function csc2D_5_moveUpLeft
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -603,7 +603,7 @@ csc2D_6_moveDownLeft:
                 move.w  #1,(a0)+
                 rts
 
-	; End of function csc2D_6_moveDownLeft
+    ; End of function csc2D_6_moveDownLeft
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -616,7 +616,7 @@ csc2D_7_moveDownRight:
                 move.w  #1,(a0)+
                 rts
 
-	; End of function csc2D_7_moveDownRight
+    ; End of function csc2D_7_moveDownRight
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -630,7 +630,7 @@ csc2D_8_faceRight:
                 move.w  d2,(a0)+
                 rts
 
-	; End of function csc2D_8_faceRight
+    ; End of function csc2D_8_faceRight
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -644,7 +644,7 @@ csc2D_9_faceUp:
                 move.w  d2,(a0)+
                 rts
 
-	; End of function csc2D_9_faceUp
+    ; End of function csc2D_9_faceUp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -658,7 +658,7 @@ csc2D_A_faceLeft:
                 move.w  d2,(a0)+
                 rts
 
-	; End of function csc2D_A_faceLeft
+    ; End of function csc2D_A_faceLeft
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -674,7 +674,7 @@ loc_468F2:
                 move.w  d2,(a0)+
                 rts
 
-	; End of function csc2D_B_faceDown
+    ; End of function csc2D_B_faceDown
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -703,7 +703,7 @@ loc_46914:
                 move.w  (a1)+,(a0)+
                 rts
 
-	; End of function csc2D_D_jump
+    ; End of function csc2D_D_jump
 
 
 ; START OF FUNCTION CHUNK FOR csc2D_entityActionSequence
@@ -749,7 +749,7 @@ loc_46970:
                 bne.s   loc_46970
                 rts
 
-	; End of function csc14_setEntityActscriptManual
+    ; End of function csc14_setEntityActscriptManual
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -773,7 +773,7 @@ return_46998:
                 
                 rts
 
-	; End of function csc15_setEntityActscript
+    ; End of function csc15_setEntityActscript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -790,7 +790,7 @@ loc_469A0:
                 bne.s   loc_469A0
                 rts
 
-	; End of function csc16_waitUntilEntityIdle
+    ; End of function csc16_waitUntilEntityIdle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -821,7 +821,7 @@ loc_469D0:
                 dbf     d7,loc_469BA
                 bra.w   csc19_setEntityPosAndFacing
 
-	; End of function csc17_setEntityPosAndFacingWithFlash
+    ; End of function csc17_setEntityPosAndFacingWithFlash
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -845,7 +845,7 @@ loc_469E8:
                 dbf     d7,loc_469E8    
                 rts
 
-	; End of function csc18_flashEntityWhite
+    ; End of function csc18_flashEntityWhite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -873,7 +873,7 @@ csc19_setEntityPosAndFacing:
                 bsr.w   UpdateEntitySprite_0
                 rts
 
-	; End of function csc19_setEntityPosAndFacing
+    ; End of function csc19_setEntityPosAndFacing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -894,7 +894,7 @@ loc_46A5E:
                 bsr.w   UpdateEntitySprite_0
                 rts
 
-	; End of function csc1A_setEntitySprite
+    ; End of function csc1A_setEntitySprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -911,7 +911,7 @@ csc1B_startEntityAnim:
                 move.b  #0,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
                 rts
 
-	; End of function csc1B_startEntityAnim
+    ; End of function csc1B_startEntityAnim
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -928,7 +928,7 @@ csc1C_stopEntityAnim:
                 move.b  #$FF,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
                 rts
 
-	; End of function csc1C_stopEntityAnim
+    ; End of function csc1C_stopEntityAnim
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -962,7 +962,7 @@ return_46AD0:
                 
                 rts
 
-	; End of function csc1D_showPortrait
+    ; End of function csc1D_showPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -973,7 +973,7 @@ csc1E_hidePortrait:
                 jsr     j_HidePortraitWindow
                 rts
 
-	; End of function csc1E_hidePortrait
+    ; End of function csc1E_hidePortrait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -987,7 +987,7 @@ csc1F_addDefeatedAlly:
                 addq.w  #1,((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 rts
 
-	; End of function csc1F_addDefeatedAlly
+    ; End of function csc1F_addDefeatedAlly
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1015,7 +1015,7 @@ loc_46B0E:
                 move.w  d2,((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 rts
 
-	; End of function csc20_updateDefeatedAllies
+    ; End of function csc20_updateDefeatedAllies
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1045,7 +1045,7 @@ return_46B40:
                 
                 rts
 
-	; End of function csc21_reviveAlly
+    ; End of function csc21_reviveAlly
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1172,7 +1172,7 @@ loc_46C1A:
                 dbf     d7,loc_46BF2
                 rts
 
-	; End of function csc22_animateEntityFadeInOrOut
+    ; End of function csc22_animateEntityFadeInOrOut
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1190,7 +1190,7 @@ csc23_setEntityFacing:
                 bsr.w   UpdateEntitySprite_0
                 rts
 
-	; End of function csc23_setEntityFacing
+    ; End of function csc23_setEntityFacing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1215,7 +1215,7 @@ loc_46C52:
                 nop
                 rts
 
-	; End of function csc24_setCameraTargetEntity
+    ; End of function csc24_setCameraTargetEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1232,7 +1232,7 @@ csc25_cloneEntity:
                 move.b  d1,ENTITYDEF_OFFSET_ENTNUM(a5)
                 rts
 
-	; End of function csc25_cloneEntity
+    ; End of function csc25_cloneEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1260,7 +1260,7 @@ loc_46C8A:
                 move.b  #0,$1E(a5)
                 rts
 
-	; End of function csc26_entityNodHead
+    ; End of function csc26_entityNodHead
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1292,7 +1292,7 @@ loc_46CC8:
                 move.b  #0,$1E(a5)
                 rts
 
-	; End of function csc27_entityShakeHead
+    ; End of function csc27_entityShakeHead
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1356,7 +1356,7 @@ loc_46D76:
                 bsr.w   WaitForEntityToStopMoving
                 rts
 
-	; End of function csc28_moveEntityNextToPlayer
+    ; End of function csc28_moveEntityNextToPlayer
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1399,7 +1399,7 @@ return_46DEC:
                 
                 rts
 
-	; End of function csc29_setEntityDest
+    ; End of function csc29_setEntityDest
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1428,7 +1428,7 @@ loc_46E0A:
                 move.w  d6,((SPRITE_SIZE-$1000000)).w
                 rts
 
-	; End of function csc2A_entityShiver
+    ; End of function csc2A_entityShiver
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1448,7 +1448,7 @@ csc2B_initializeNewEntity:
                 jsr     InitializeNewEntity
                 rts
 
-	; End of function csc2B_initializeNewEntity
+    ; End of function csc2B_initializeNewEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1475,7 +1475,7 @@ csc2C_followEntity:
                 jsr     AddFollower
                 rts
 
-	; End of function csc2C_followEntity
+    ; End of function csc2C_followEntity
 
 FollowerPositions:
                 dc.b $18
@@ -1504,7 +1504,7 @@ csc2E_hideEntity:
                 jsr     HideEntity
                 rts
 
-	; End of function csc2E_hideEntity
+    ; End of function csc2E_hideEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1526,7 +1526,7 @@ return_46EBE:
                 
                 rts
 
-	; End of function csc2F_fly
+    ; End of function csc2F_fly
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1542,7 +1542,7 @@ csc30_removeEntityShadow:
                 jsr     (WaitForVInt).w
                 rts
 
-	; End of function csc30_removeEntityShadow
+    ; End of function csc30_removeEntityShadow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1559,7 +1559,7 @@ csc50_setEntitySize:
                 move.w  d6,((SPRITE_SIZE-$1000000)).w
                 rts
 
-	; End of function csc50_setEntitySize
+    ; End of function csc50_setEntitySize
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1598,7 +1598,7 @@ return_46F56:
                 
                 rts
 
-	; End of function csc51_joinBattleParty
+    ; End of function csc51_joinBattleParty
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1653,7 +1653,7 @@ loc_46FB4:
                 jsr     (WaitForVInt).w
                 rts
 
-	; End of function csc52_faceEntity
+    ; End of function csc52_faceEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1675,7 +1675,7 @@ return_46FDA:
                 
                 rts
 
-	; End of function csc53_setPriority
+    ; End of function csc53_setPriority
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1697,7 +1697,7 @@ loc_46FF8:
                 jsr     j_SetCharacterWord34
                 rts
 
-	; End of function csc54_joinForceAI
+    ; End of function csc54_joinForceAI
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1707,7 +1707,7 @@ csc55_resetCharacterBattleStats:
                 jsr     ResetAlliesBattleStats
                 rts
 
-	; End of function csc55_resetCharacterBattleStats
+    ; End of function csc55_resetCharacterBattleStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1731,7 +1731,7 @@ loc_47020:
                 jsr     AddFollower
                 rts
 
-	; End of function csc56_addFollower
+    ; End of function csc56_addFollower
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1748,7 +1748,7 @@ csc31_moveEntityAboveEntity:
                 jsr     AddFollower
                 rts
 
-	; End of function csc31_moveEntityAboveEntity
+    ; End of function csc31_moveEntityAboveEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1774,7 +1774,7 @@ loc_4705A:
                 move.l  (sp)+,d0
                 rts
 
-	; End of function GetEntityAddressFromCharacter
+    ; End of function GetEntityAddressFromCharacter
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1788,7 +1788,7 @@ UpdateEntitySprite_0:
                 movem.l (sp)+,d6/a0
                 rts
 
-	; End of function UpdateEntitySprite_0
+    ; End of function UpdateEntitySprite_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1810,7 +1810,7 @@ return_4709C:
                 
                 rts
 
-	; End of function AdjustScriptPointerByCharAliveStatus
+    ; End of function AdjustScriptPointerByCharAliveStatus
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1835,7 +1835,7 @@ sub_4709E:
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-	; End of function sub_4709E
+    ; End of function sub_4709E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1865,5 +1865,5 @@ loc_470DA:
                 movem.l (sp)+,d0-d1/d6/a1
                 rts
 
-	; End of function LoadMapsprite
+    ; End of function LoadMapsprite
 

@@ -49,7 +49,7 @@ loc_C06A:
                 movem.l (sp)+,d0/a0
                 rts
 
-	; End of function GetEnemyDestination
+    ; End of function GetEnemyDestination
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -71,5 +71,5 @@ loc_C082:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function ClearEnemyMoveInfo
+    ; End of function ClearEnemyMoveInfo
 

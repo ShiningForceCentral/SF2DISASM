@@ -10,5 +10,5 @@ Map66_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map66_DefaultEntityEvent
+    ; End of function Map66_DefaultEntityEvent
 

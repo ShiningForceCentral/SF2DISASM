@@ -49,5 +49,5 @@ csub_4CD56:
                 move.b  ((byte_FFB160+$F)).l,(ENTITY_EVENT_IDX_LIST+$17).l
                 rts
 
-	; End of function csub_4CD56
+    ; End of function csub_4CD56
 

@@ -19,7 +19,7 @@ return_5A30A:
                 
                 rts
 
-	; End of function ms_map30_InitFunction
+    ; End of function ms_map30_InitFunction
 
 cs_5A30C:       setBlocks 21,6,2,2,7,5
                 setBlocks 21,0,4,4,6,0

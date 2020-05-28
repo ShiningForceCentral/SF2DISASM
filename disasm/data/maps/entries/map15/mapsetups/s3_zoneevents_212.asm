@@ -11,7 +11,7 @@ Map15_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map15_DefaultZoneEvent
+    ; End of function Map15_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -29,5 +29,5 @@ return_5D01E:
                 
                 rts
 
-	; End of function Map15_212_ZoneEvent0
+    ; End of function Map15_212_ZoneEvent0
 

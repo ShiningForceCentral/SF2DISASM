@@ -15,5 +15,5 @@ return_5311C:
                 
                 rts
 
-	; End of function ms_map19_flag261_InitFunction
+    ; End of function ms_map19_flag261_InitFunction
 

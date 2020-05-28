@@ -8,7 +8,7 @@ j_GameIntro:
                 
                 bra.w   GameIntro
 
-	; End of function j_GameIntro
+    ; End of function j_GameIntro
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -18,7 +18,7 @@ j_j_DisplaySegaLogo:
                 jsr     j_DisplaySegaLogo
                 bne.w   loc_71EC
 
-	; End of function j_j_DisplaySegaLogo
+    ; End of function j_j_DisplaySegaLogo
 
 
 ; START OF FUNCTION CHUNK FOR InitGame

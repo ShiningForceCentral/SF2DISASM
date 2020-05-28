@@ -51,7 +51,7 @@ loc_443FE:
                 movem.l (sp)+,a6
                 rts
 
-	; End of function InitializeFollowerActscripts
+    ; End of function InitializeFollowerActscripts
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -93,7 +93,7 @@ return_4446A:
                 
                 rts
 
-	; End of function sub_44404
+    ; End of function sub_44404
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -120,5 +120,5 @@ loc_4449C:
                 movem.l (sp)+,d0/a0-a1
                 rts
 
-	; End of function sub_4446C
+    ; End of function sub_4446C
 

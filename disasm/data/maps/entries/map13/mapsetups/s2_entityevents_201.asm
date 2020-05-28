@@ -25,7 +25,7 @@ Map13_201_EntityEvent0:
                 txt     $59F            ; "I've been to a desolate{N}port town in the south....{W1}"
                 rts
 
-	; End of function Map13_201_EntityEvent0
+    ; End of function Map13_201_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -36,7 +36,7 @@ Map13_201_EntityEvent1:
                 txt     $5A0            ; "They say, a huge monster{N}lives in the river.{W1}"
                 rts
 
-	; End of function Map13_201_EntityEvent1
+    ; End of function Map13_201_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -47,7 +47,7 @@ Map13_201_EntityEvent5:
                 txt     $5A1            ; "You saw Volcanon?{N}Are you serious?{W2}{N}I've never met him, though{N}I've lived here all my life.{W1}"
                 rts
 
-	; End of function Map13_201_EntityEvent5
+    ; End of function Map13_201_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -58,7 +58,7 @@ Map13_201_EntityEvent7:
                 txt     $5A2            ; "There's a desert in the south.{W2}{N}Ancient ruins lay in the{N}desert.{W1}"
                 rts
 
-	; End of function Map13_201_EntityEvent7
+    ; End of function Map13_201_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -69,7 +69,7 @@ Map13_201_EntityEvent8:
                 txt     $5A3            ; "I could help you if I were{N}younger.{W2}{N}But now I'm too darn old.{N}Drat!{W1}"
                 rts
 
-	; End of function Map13_201_EntityEvent8
+    ; End of function Map13_201_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -132,7 +132,7 @@ return_58216:
                 
                 rts
 
-	; End of function Map13_201_EntityEvent9
+    ; End of function Map13_201_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -143,7 +143,7 @@ Map13_201_EntityEvent10:
                 txt     $5A5            ; "Clank!  Clank!{W2}{N}I heard that blacksmiths in{N}ancient times made special{N}weapons from a rare metal.{W1}"
                 rts
 
-	; End of function Map13_201_EntityEvent10
+    ; End of function Map13_201_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -154,7 +154,7 @@ Map13_201_EntityEvent11:
                 txt     $5A6            ; "I need more hair and more{N}courage!{W2}{N}I couldn't move when I{N}saw the devils....{W1}"
                 rts
 
-	; End of function Map13_201_EntityEvent11
+    ; End of function Map13_201_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -165,5 +165,5 @@ Map13_201_EntityEvent12:
                 txt     $5A7            ; "Who are you?{N}Excuse me, but...{N}I'm blind.{W1}"
                 rts
 
-	; End of function Map13_201_EntityEvent12
+    ; End of function Map13_201_EntityEvent12
 

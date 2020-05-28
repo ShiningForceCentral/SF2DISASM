@@ -10,5 +10,5 @@ Map51_DefaultItemEvent0:
                 
                 rts
 
-	; End of function Map51_DefaultItemEvent0
+    ; End of function Map51_DefaultItemEvent0
 

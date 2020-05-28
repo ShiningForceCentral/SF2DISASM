@@ -17,7 +17,7 @@ return_50A80:
                 
                 rts
 
-	; End of function Map77_DefaultZoneEvent
+    ; End of function Map77_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -26,5 +26,5 @@ nullsub_50A82:
                 
                 rts
 
-	; End of function nullsub_50A82
+    ; End of function nullsub_50A82
 

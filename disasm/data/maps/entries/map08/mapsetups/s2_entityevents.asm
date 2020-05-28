@@ -22,7 +22,7 @@ byte_560A6:
                 txt     $52C            ; "Are you going to{N}Mt. Volcano?{N}That's {NAME;7}'s hometown?{W1}"
                 rts
 
-	; End of function Map8_EntityEvent0
+    ; End of function Map8_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -33,7 +33,7 @@ Map8_EntityEvent1:
                 txt     $52D            ; "We won't hide from you{N}anymore.  Ribble has many{N}ancient ruins.{W1}"
                 rts
 
-	; End of function Map8_EntityEvent1
+    ; End of function Map8_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -44,7 +44,7 @@ Map8_2C4_EntityEvent2:
                 txt     $52E            ; "Men are so selfish.{N}My husband has gone to the{N}east to work.  What about me?{W1}"
                 rts
 
-	; End of function Map8_2C4_EntityEvent2
+    ; End of function Map8_2C4_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -53,7 +53,7 @@ Map8_2C4_EntityEvent3:
                 
                 jmp     j_ChurchActions
 
-	; End of function Map8_2C4_EntityEvent3
+    ; End of function Map8_2C4_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -66,7 +66,7 @@ Map8_2C4_EntityEvent4:
                 txt     $531            ; "Is what you're looking for in{N}Ribble?{W1}"
                 rts
 
-	; End of function Map8_2C4_EntityEvent4
+    ; End of function Map8_2C4_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,7 +86,7 @@ return_560E0:
                 
                 rts
 
-	; End of function Map8_2C4_EntityEvent5
+    ; End of function Map8_2C4_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -96,7 +96,7 @@ Map8_2C4_EntityEvent6:
                 move.b  #3,((CURRENT_SHOP_INDEX-$1000000)).w
                 jmp     j_ShopActions
 
-	; End of function Map8_2C4_EntityEvent6
+    ; End of function Map8_2C4_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -107,7 +107,7 @@ Map8_2C4_EntityEvent7:
                 script  cs_56172
                 rts
 
-	; End of function Map8_2C4_EntityEvent7
+    ; End of function Map8_2C4_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -121,7 +121,7 @@ Map8_2C4_EntityEvent8:
                 txt     $53C            ; "I'll find it before Paseran!{N}I think that tree has{N}something to do with it.{W1}"
                 rts
 
-	; End of function Map8_2C4_EntityEvent8
+    ; End of function Map8_2C4_EntityEvent8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -133,7 +133,7 @@ Map8_2C4_EntityEvent9:
                 txt     $53E            ; "It was once very prosperous,{N}but now it's desolate.{W1}"
                 rts
 
-	; End of function Map8_2C4_EntityEvent9
+    ; End of function Map8_2C4_EntityEvent9
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -145,7 +145,7 @@ Map8_2C4_EntityEvent10:
                 txt     $540            ; "But, I'm not worried!{N}He's very strong.{W1}"
                 rts
 
-	; End of function Map8_2C4_EntityEvent10
+    ; End of function Map8_2C4_EntityEvent10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -157,7 +157,7 @@ Map8_2C4_EntityEvent11:
                 txt     $542            ; "The cave was somehow{N}blocked.  How can I explain{N}this to my son?{W1}"
                 rts
 
-	; End of function Map8_2C4_EntityEvent11
+    ; End of function Map8_2C4_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -168,7 +168,7 @@ Map8_2C4_EntityEvent13:
                 move.b  #$12,((CURRENT_SHOP_INDEX-$1000000)).w
                 jmp     j_ShopActions
 
-	; End of function Map8_2C4_EntityEvent13
+    ; End of function Map8_2C4_EntityEvent13
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -183,7 +183,7 @@ Map8_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map8_2C4_EntityEvent12
+    ; End of function Map8_2C4_EntityEvent12
 
 cs_56146:       setActscriptWait ALLY_MAY,eas_Init
                 setActscriptWait ALLY_MAY,eas_461AA

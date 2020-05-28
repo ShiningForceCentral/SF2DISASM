@@ -37,7 +37,7 @@ loc_C2C2:
                 movem.l (sp)+,d0-d2/d4-a6
                 rts
 
-	; End of function sub_C27A
+    ; End of function sub_C27A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -48,7 +48,7 @@ GetMoveInfo:
                 
                 movem.l d1-d2/d5-a1,-(sp)
                 bsr.w   MemorizePath
-                lea     ((byte_FF4000+$400)).l,a2
+                lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     ((MOVE_COST_LIST-$1000000)).w,a5
@@ -62,7 +62,7 @@ GetMoveInfo:
                 movem.l (sp)+,d1-d2/d5-a1
                 rts
 
-	; End of function GetMoveInfo
+    ; End of function GetMoveInfo
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -117,7 +117,7 @@ loc_C37A:
                 movem.l (sp)+,d0-d2/d5-a6
                 rts
 
-	; End of function GetWeaponRange
+    ; End of function GetWeaponRange
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -131,7 +131,7 @@ GetSpellRange:
                 movem.l (sp)+,d0-d2/d5-a6
                 rts
 
-	; End of function GetSpellRange
+    ; End of function GetSpellRange
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -145,7 +145,7 @@ GetItemRange:
                 movem.l (sp)+,d0-d2/d5-a6
                 rts
 
-	; End of function GetItemRange
+    ; End of function GetItemRange
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -181,7 +181,7 @@ loc_C3D8:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function CheckMuddled2
+    ; End of function CheckMuddled2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -200,7 +200,7 @@ GenerateTargetRangeLists:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function GenerateTargetRangeLists
+    ; End of function GenerateTargetRangeLists
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -234,7 +234,7 @@ loc_C43C:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function j_sub_C404_0
+    ; End of function j_sub_C404_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -258,7 +258,7 @@ loc_C472:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function CreateItemRangeGrid
+    ; End of function CreateItemRangeGrid
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -317,7 +317,7 @@ loc_C4D8:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function CreateSpellRangeGrid
+    ; End of function CreateSpellRangeGrid
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -336,7 +336,7 @@ j_sub_C4E8_0:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function j_sub_C4E8_0
+    ; End of function j_sub_C4E8_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -398,7 +398,7 @@ loc_C58A:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function ApplyRelativeCoordListToGrids
+    ; End of function ApplyRelativeCoordListToGrids
 
 pt_SpellRanges: dc.l SpellRange0
                 dc.l SpellRange1
@@ -475,7 +475,7 @@ loc_C5F4:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function j_sub_C5D6_0
+    ; End of function j_sub_C5D6_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -494,7 +494,7 @@ loc_C618:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function j_sub_C5FA_0
+    ; End of function j_sub_C5FA_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -509,7 +509,7 @@ loc_C62A:
                 
                 bsr.w   MakeTargetList
 
-	; End of function CreateTargetGridFromSpell
+    ; End of function CreateTargetGridFromSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -557,7 +557,7 @@ loc_C688:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function CreateTargetGrid
+    ; End of function CreateTargetGrid
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -593,7 +593,7 @@ loc_C6CE:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_C68E
+    ; End of function sub_C68E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -629,7 +629,7 @@ loc_C714:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_C6D4
+    ; End of function sub_C6D4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -729,7 +729,7 @@ loc_C7EA:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function GetClosestAttackPosition
+    ; End of function GetClosestAttackPosition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -739,7 +739,7 @@ MakeTargetList:
                 btst    #7,d0
                 bne.w   MakeTargetListMonsters ; generate list of targets: opposite alignment of D0
 
-	; End of function MakeTargetList
+    ; End of function MakeTargetList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -754,7 +754,7 @@ MakeTargetListAllies:
                 moveq   #COM_ALLIES_COUNTER,d7
                 bra.w   loc_C828
 
-	; End of function MakeTargetListAllies
+    ; End of function MakeTargetListAllies
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -767,7 +767,7 @@ MakeTargetListMonsters:
                 moveq   #COM_ENEMIES_COUNTER,d7
                 bra.w   loc_C828
 
-	; End of function MakeTargetListMonsters
+    ; End of function MakeTargetListMonsters
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -806,7 +806,7 @@ loc_C86E:
                 movem.l (sp)+,d0-a0
                 rts
 
-	; End of function MakeTargetListEverybody
+    ; End of function MakeTargetListEverybody
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -816,7 +816,7 @@ UpdateTargetList:
                 btst    #7,d0
                 beq.w   UpdateTargetListMonsters
 
-	; End of function UpdateTargetList
+    ; End of function UpdateTargetList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -828,7 +828,7 @@ UpdateTargetListCharacters:
                 moveq   #COM_ALLIES_COUNTER,d7
                 bra.w   loc_C898
 
-	; End of function UpdateTargetListCharacters
+    ; End of function UpdateTargetListCharacters
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -879,7 +879,7 @@ loc_C8F4:
                 movem.l (sp)+,d0-a0
                 rts
 
-	; End of function UpdateTargetListMonsters
+    ; End of function UpdateTargetListMonsters
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -917,7 +917,7 @@ loc_C94C:
                 movem.l (sp)+,d0-a0
                 rts
 
-	; End of function sub_C900
+    ; End of function sub_C900
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1089,7 +1089,7 @@ loc_CAE4:
                 movem.l (sp)+,d1-a2
                 rts
 
-	; End of function sub_C958
+    ; End of function sub_C958
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1117,7 +1117,7 @@ loc_CB12:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_CAEA
+    ; End of function sub_CAEA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1154,7 +1154,7 @@ loc_CB3E:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_CB18
+    ; End of function sub_CB18
 
 off_CB62:       dc.l sub_CCA0
                 dc.l sub_CCD4
@@ -1224,7 +1224,7 @@ loc_CC04:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_CBA2
+    ; End of function sub_CBA2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1258,7 +1258,7 @@ loc_CC4A:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_CC0C
+    ; End of function sub_CC0C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1294,7 +1294,7 @@ loc_CC84:
                 movem.l (sp)+,d0-d5/d7-a0
                 rts
 
-	; End of function GetSpellPowerAdjustedForResistance
+    ; End of function GetSpellPowerAdjustedForResistance
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1311,7 +1311,7 @@ loc_CC9A:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_CC8A
+    ; End of function sub_CC8A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1340,7 +1340,7 @@ loc_CCCA:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_CCA0
+    ; End of function sub_CCA0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1379,7 +1379,7 @@ loc_CD0E:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_CCD4
+    ; End of function sub_CCD4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1412,7 +1412,7 @@ loc_CD46:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_CD18
+    ; End of function sub_CD18
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1434,7 +1434,7 @@ loc_CD62:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_CD4C
+    ; End of function sub_CD4C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1495,7 +1495,7 @@ loc_CDE4:
                 movem.l (sp)+,d0-d1/d3-a6
                 rts
 
-	; End of function sub_CD68
+    ; End of function sub_CD68
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1535,7 +1535,7 @@ loc_CE30:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_CDEA
+    ; End of function sub_CDEA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1584,7 +1584,7 @@ loc_CE90:
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-	; End of function sub_CE36
+    ; End of function sub_CE36
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1613,7 +1613,7 @@ loc_CECC:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function sub_CE96
+    ; End of function sub_CE96
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1649,7 +1649,7 @@ loc_CF08:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function GetHighestUsableSpellLevel
+    ; End of function GetHighestUsableSpellLevel
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1683,7 +1683,7 @@ loc_CF38:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function GetSlotContainingSpell
+    ; End of function GetSlotContainingSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1717,7 +1717,7 @@ loc_CF6C:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function GetSlotContainingItem
+    ; End of function GetSlotContainingItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1798,7 +1798,7 @@ loc_D012:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function GetNextUsableAttackSpell
+    ; End of function GetNextUsableAttackSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1843,7 +1843,7 @@ loc_D05C:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function GetNextHealingSpell
+    ; End of function GetNextHealingSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1882,7 +1882,7 @@ loc_D0A6:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function GetNextStatusSpell
+    ; End of function GetNextStatusSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1973,7 +1973,7 @@ loc_D15A:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function GetNextUsableAttackItem
+    ; End of function GetNextUsableAttackItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2029,7 +2029,7 @@ loc_D1C6:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-	; End of function GetNextUsableHealingItem
+    ; End of function GetNextUsableHealingItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2043,7 +2043,7 @@ GetTargetsReachableByAttack:
                 bsr.w   GetWeaponRange  
                 bra.w   loc_D22E
 
-	; End of function GetTargetsReachableByAttack
+    ; End of function GetTargetsReachableByAttack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2061,7 +2061,7 @@ GetTargetsReachableByItem:
                 move.b  5(a0),d4
                 bra.w   loc_D22E
 
-	; End of function GetTargetsReachableByItem
+    ; End of function GetTargetsReachableByItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2122,7 +2122,7 @@ loc_D28A:
                 movem.l (sp)+,d0-d5/d7-a3
                 rts
 
-	; End of function GetTargetsReachableBySpell
+    ; End of function GetTargetsReachableBySpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2148,7 +2148,7 @@ loc_D2C8:
                 movem.l (sp)+,d1-d2
                 rts
 
-	; End of function IsCharacterLessThanHalfHP
+    ; End of function IsCharacterLessThanHalfHP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2167,7 +2167,7 @@ loc_D2E4:
                 jsr     GetMaxHP
                 bra.w   loc_D304
 
-	; End of function sub_D2D2
+    ; End of function sub_D2D2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2184,7 +2184,7 @@ loc_D304:
                 movem.l (sp)+,d1-d2
                 rts
 
-	; End of function sub_D2F8
+    ; End of function sub_D2F8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2197,7 +2197,7 @@ sub_D310:
                 jsr     GetMaxHP
                 bra.w   loc_D342
 
-	; End of function sub_D310
+    ; End of function sub_D310
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2209,7 +2209,7 @@ sub_D326:
                 jsr     GetMaxHP
                 bra.w   loc_D342
 
-	; End of function sub_D326
+    ; End of function sub_D326
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2220,7 +2220,7 @@ sub_D336:
                 move.w  d1,d2
                 jsr     GetCurrentHP
 
-	; End of function sub_D336
+    ; End of function sub_D336
 
 
 ; START OF FUNCTION CHUNK FOR sub_D310
@@ -2245,7 +2245,7 @@ sub_D34C:
                 jsr     GetMaxHP
                 bra.w   loc_D37E
 
-	; End of function sub_D34C
+    ; End of function sub_D34C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2266,7 +2266,7 @@ loc_D37E:
                 movem.l (sp)+,d1-d2
                 rts
 
-	; End of function sub_D362
+    ; End of function sub_D362
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2293,7 +2293,7 @@ loc_D3BC:
                 movem.l (sp)+,d1-d2
                 rts
 
-	; End of function sub_D38A
+    ; End of function sub_D38A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2306,7 +2306,7 @@ sub_D3CA:
                 jsr     GetMaxMP
                 bra.w   loc_D3FC
 
-	; End of function sub_D3CA
+    ; End of function sub_D3CA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2318,7 +2318,7 @@ sub_D3E0:
                 jsr     GetMaxMP
                 bra.w   loc_D3FC
 
-	; End of function sub_D3E0
+    ; End of function sub_D3E0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2329,7 +2329,7 @@ sub_D3F0:
                 move.w  d1,d2
                 jsr     GetCurrentMP
 
-	; End of function sub_D3F0
+    ; End of function sub_D3F0
 
 
 ; START OF FUNCTION CHUNK FOR sub_D3CA
@@ -2366,7 +2366,7 @@ loc_D428:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function GetDifficulty
+    ; End of function GetDifficulty
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2393,7 +2393,7 @@ loc_D458:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_D430
+    ; End of function sub_D430
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2452,7 +2452,7 @@ loc_D4DA:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_D460
+    ; End of function sub_D460
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2509,7 +2509,7 @@ loc_D55A:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_D4E0
+    ; End of function sub_D4E0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2594,7 +2594,7 @@ loc_D626:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_D560
+    ; End of function sub_D560
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2680,7 +2680,7 @@ loc_D6EC:
                 movem.l (sp)+,d0-a6
                 rts
 
-	; End of function sub_D62C
+    ; End of function sub_D62C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2719,7 +2719,7 @@ loc_D732:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_D6F2
+    ; End of function sub_D6F2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2769,7 +2769,7 @@ loc_D7A2:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_D742
+    ; End of function sub_D742
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2824,7 +2824,7 @@ loc_D81C:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-	; End of function sub_D7AA
+    ; End of function sub_D7AA
 
 MoveTypeTerrainCosts:
                 incbin "data/battles/global/movetypeterraincosts.bin"
@@ -3225,7 +3225,7 @@ loc_DB40:
                 movem.l (sp)+,d0-a5
                 rts
 
-	; End of function MakeRangeLists
+    ; End of function MakeRangeLists
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3269,7 +3269,7 @@ loc_DB8A:
                 move.b  d1,(a3,d5.w)
                 rts
 
-	; End of function sub_DB48
+    ; End of function sub_DB48
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3281,7 +3281,7 @@ MakeBattleEntityCancelMoveString_0:
                 movem.l (sp)+,d0-d6/a0-a5
                 rts
 
-	; End of function MakeBattleEntityCancelMoveString_0
+    ; End of function MakeBattleEntityCancelMoveString_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3487,7 +3487,7 @@ loc_DD0A:
                 move.b  #$FF,(a0)
                 rts
 
-	; End of function sub_DBA8
+    ; End of function sub_DBA8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3533,7 +3533,7 @@ loc_DD5A:
                 movem.l (sp)+,d0-d6/a0-a5
                 rts
 
-	; End of function sub_DD10
+    ; End of function sub_DD10
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3546,7 +3546,7 @@ AddAllToStack:
                 movem.l (sp)+,d0-a5
                 rts
 
-	; End of function AddAllToStack
+    ; End of function AddAllToStack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3558,7 +3558,7 @@ j_makeEnemyMoveOrder:
                 movem.l (sp)+,d0-d6/a0-a5
                 rts
 
-	; End of function j_makeEnemyMoveOrder
+    ; End of function j_makeEnemyMoveOrder
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3783,5 +3783,5 @@ loc_DEF6:
                 move.b  #$FF,(a0)
                 rts
 
-	; End of function MakeEnemyMoveOrder
+    ; End of function MakeEnemyMoveOrder
 

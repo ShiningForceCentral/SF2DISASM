@@ -112,5 +112,5 @@ loc_BE4C:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-	; End of function WriteSkirmishScript_EnemyDropItem
+    ; End of function WriteSkirmishScript_EnemyDropItem
 

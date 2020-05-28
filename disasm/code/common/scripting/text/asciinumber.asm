@@ -34,7 +34,7 @@ loc_14DC:
                 movem.l (sp)+,d5-d7/a5-a6
                 rts
 
-	; End of function WriteAsciiNumber
+    ; End of function WriteAsciiNumber
 
 PowersOfTen:    dc.l 1000000000
                 dc.l 100000000
@@ -53,7 +53,7 @@ nullsub_150A:
                 
                 rts
 
-	; End of function nullsub_150A
+    ; End of function nullsub_150A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -62,5 +62,5 @@ nullsub_150C:
                 
                 rts
 
-	; End of function nullsub_150C
+    ; End of function nullsub_150C
 

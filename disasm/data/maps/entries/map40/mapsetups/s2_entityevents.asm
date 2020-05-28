@@ -15,7 +15,7 @@ Map40_EntityEvent0:
                 script  cs_53FE0
                 rts
 
-	; End of function Map40_EntityEvent0
+    ; End of function Map40_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -29,5 +29,5 @@ Map40_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map40_EntityEvent1
+    ; End of function Map40_EntityEvent1
 

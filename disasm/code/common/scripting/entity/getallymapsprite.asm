@@ -75,5 +75,5 @@ GetAllyMapSprite:
                 
                 rts
 
-	; End of function GetAllyMapSprite
+    ; End of function GetAllyMapSprite
 

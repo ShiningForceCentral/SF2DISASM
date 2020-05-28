@@ -11,7 +11,7 @@ ms_map5_flag212_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map5_flag212_AreaDescriptions
+    ; End of function ms_map5_flag212_AreaDescriptions
 
 byte_60558:     msDesc 9, 15, 6, 0      ; "{NAME} looked at{N}the paper.{W2}{CLEAR}"
                                         ; "A poster...{N}PULL IT!  PUSH IT!{W1}"
@@ -41,7 +41,7 @@ return_6058E:
                 
                 rts
 
-	; End of function Map5_212_DescFunc0
+    ; End of function Map5_212_DescFunc0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -84,5 +84,5 @@ return_60604:
                 
                 rts
 
-	; End of function Map5_212_DescFunc1
+    ; End of function Map5_212_DescFunc1
 

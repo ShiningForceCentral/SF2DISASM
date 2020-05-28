@@ -166,7 +166,7 @@ loc_4E10:
                 bsr.w   sub_4E24
                 rts
 
-	; End of function VInt_UpdateSprites
+    ; End of function VInt_UpdateSprites
 
 byte_4E16:      dc.b 0
                 dc.b 1
@@ -184,7 +184,7 @@ sub_4E1E:
                 move.w  #1,(a1)
                 bra.s   loc_4DC4
 
-	; End of function sub_4E1E
+    ; End of function sub_4E1E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -237,7 +237,7 @@ loc_4E7E:
                 move.b  #8,3(a1,d6.w)
                 rts
 
-	; End of function sub_4E24
+    ; End of function sub_4E24
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -268,7 +268,7 @@ loc_4EBE:
                 movem.l (sp)+,a0-a1
                 rts
 
-	; End of function sub_4E86
+    ; End of function sub_4E86
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -282,7 +282,7 @@ sub_4EC6:
                 move.b  #1,((byte_FFAF6B-$1000000)).w
                 rts
 
-	; End of function sub_4EC6
+    ; End of function sub_4EC6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -294,7 +294,7 @@ sub_4ED8:
                 move.b  #$F,((byte_FFAF6B-$1000000)).w
                 rts
 
-	; End of function sub_4ED8
+    ; End of function sub_4ED8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -321,7 +321,7 @@ loc_4F06:
                 move.w  rjt_EntityScriptCommands(pc,d2.w),d2
                 jmp     rjt_EntityScriptCommands(pc,d2.w)
 
-	; End of function VInt_UpdateEntities
+    ; End of function VInt_UpdateEntities
 
 rjt_EntityScriptCommands:
                 dc.w esc00_wait-rjt_EntityScriptCommands ; esc for Entity Script Command
@@ -423,7 +423,7 @@ loc_4FCE:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc00_wait
+    ; End of function esc00_wait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -446,7 +446,7 @@ esc01_waitUntilDestination:
                 addq.l  #2,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc01_waitUntilDestination
+    ; End of function esc01_waitUntilDestination
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -764,7 +764,7 @@ loc_531E:
                 addq.l  #2,a1
                 bra.w   esc_goToNextEntity
 
-	; End of function esc02_
+    ; End of function esc02_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -864,7 +864,7 @@ loc_53F8:
                 addq.l  #8,a1
                 bra.w   esc_goToNextEntity
 
-	; End of function esc03_
+    ; End of function esc03_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -884,7 +884,7 @@ esc04_moveToRelativeDest:
                 addq.l  #6,a1
                 bra.w   loc_55C8
 
-	; End of function esc04_moveToRelativeDest
+    ; End of function esc04_moveToRelativeDest
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -900,7 +900,7 @@ esc05_moveToAbsoluteDest:
                 addq.l  #6,a1
                 bra.w   loc_55C8
 
-	; End of function esc05_moveToAbsoluteDest
+    ; End of function esc05_moveToAbsoluteDest
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1087,7 +1087,7 @@ loc_55FC:
                 move.w  d5,6(a0)
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc06_
+    ; End of function esc06_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1136,7 +1136,7 @@ loc_5660:
                 movem.w (sp)+,d4-d6
                 rts
 
-	; End of function CheckIfSameDestForOtherEntity
+    ; End of function CheckIfSameDestForOtherEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1294,7 +1294,7 @@ loc_57E0:
                 addq.l  #2,a1
                 bra.w   esc_goToNextEntity
 
-	; End of function esc07_
+    ; End of function esc07_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1452,7 +1452,7 @@ loc_5962:
                 addq.l  #2,a1
                 bra.w   esc_goToNextEntity
 
-	; End of function esc08_
+    ; End of function esc08_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1502,7 +1502,7 @@ word_59AE:
                 dc.w $180
                 dc.w $180
 
-	; End of function esc09_
+    ; End of function esc09_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1536,7 +1536,7 @@ esc0E_:
                 addq.l  #8,a1
                 bra.w   loc_55C8
 
-	; End of function esc0E_
+    ; End of function esc0E_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1552,7 +1552,7 @@ esc0A_updateEntitySprite:
                 addq.l  #2,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc0A_updateEntitySprite
+    ; End of function esc0A_updateEntitySprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1565,7 +1565,7 @@ esc0B_setSpriteSize:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc0B_setSpriteSize
+    ; End of function esc0B_setSpriteSize
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1586,7 +1586,7 @@ esc0C_setPosition:
                 addq.l  #6,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc0C_setPosition
+    ; End of function esc0C_setPosition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1610,7 +1610,7 @@ esc0D_clonePosition:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc0D_clonePosition
+    ; End of function esc0D_clonePosition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1637,7 +1637,7 @@ esc0F_waitUntilOtherEntityReachesDest:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc0F_waitUntilOtherEntityReachesDest
+    ; End of function esc0F_waitUntilOtherEntityReachesDest
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1650,7 +1650,7 @@ esc10_setSpeed:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc10_setSpeed
+    ; End of function esc10_setSpeed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1663,7 +1663,7 @@ esc11_:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc11_
+    ; End of function esc11_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1693,7 +1693,7 @@ loc_5B08:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc12_
+    ; End of function esc12_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1723,7 +1723,7 @@ loc_5B36:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc13_
+    ; End of function esc13_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1742,7 +1742,7 @@ loc_5B50:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc14_setAnimationCounter
+    ; End of function esc14_setAnimationCounter
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1761,7 +1761,7 @@ loc_5B6A:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc15_setAbilityToChangeFacing
+    ; End of function esc15_setAbilityToChangeFacing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1772,7 +1772,7 @@ esc16_setEntityNumber:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc16_setEntityNumber
+    ; End of function esc16_setEntityNumber
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1783,7 +1783,7 @@ esc17_setSpriteNumber:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc17_setSpriteNumber
+    ; End of function esc17_setSpriteNumber
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1804,7 +1804,7 @@ loc_5B9C:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc18_set1Cbit7
+    ; End of function esc18_set1Cbit7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1825,7 +1825,7 @@ loc_5BB6:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc19_set1Cbit6
+    ; End of function esc19_set1Cbit6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1846,7 +1846,7 @@ loc_5BD0:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc1A_set1Cbit5
+    ; End of function esc1A_set1Cbit5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1860,7 +1860,7 @@ esc1B_setEntityFlipping:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc1B_setEntityFlipping
+    ; End of function esc1B_setEntityFlipping
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1879,7 +1879,7 @@ loc_5C02:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc1C_setEntityTransparency
+    ; End of function esc1C_setEntityTransparency
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1898,7 +1898,7 @@ loc_5C1C:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc1D_setEntityGhost
+    ; End of function esc1D_setEntityGhost
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1917,7 +1917,7 @@ loc_5C36:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc1E_setEntityAnimSpeedx2
+    ; End of function esc1E_setEntityAnimSpeedx2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1938,7 +1938,7 @@ loc_5C50:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc1F_set1Dbit3
+    ; End of function esc1F_set1Dbit3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1959,7 +1959,7 @@ loc_5C6A:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc20_setEntityInWater
+    ; End of function esc20_setEntityInWater
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1980,7 +1980,7 @@ loc_5C84:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc21_set1Cbit4
+    ; End of function esc21_set1Cbit4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1992,7 +1992,7 @@ esc22_setEntityFacing:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc22_setEntityFacing
+    ; End of function esc22_setEntityFacing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2004,7 +2004,7 @@ esc23_sendSoundCommand:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc23_sendSoundCommand
+    ; End of function esc23_sendSoundCommand
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2016,7 +2016,7 @@ esc30_branch:
                 adda.w  2(a1),a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc30_branch
+    ; End of function esc30_branch
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2037,7 +2037,7 @@ loc_5CC8:
                 
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc31_branchIfFlagSet
+    ; End of function esc31_branchIfFlagSet
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2058,7 +2058,7 @@ loc_5CE6:
                 
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc32_branchIfFlagClear
+    ; End of function esc32_branchIfFlagClear
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2080,7 +2080,7 @@ loc_5D06:
                 
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc33_randomBranch
+    ; End of function esc33_randomBranch
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2090,7 +2090,7 @@ esc34_jump:
                 movea.l 2(a1),a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc34_jump
+    ; End of function esc34_jump
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2121,7 +2121,7 @@ loc_5D42:
                 addq.l  #2,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-	; End of function esc40_
+    ; End of function esc40_
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2133,7 +2133,7 @@ esc41_Pass:
                 addq.l  #4,a1
                 bra.w   *+4
 
-	; End of function esc41_Pass
+    ; End of function esc41_Pass
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2144,7 +2144,7 @@ esc_clearTimerGoToNextCommand:
                 move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 bra.w   loc_4F06
 
-	; End of function esc_clearTimerGoToNextCommand
+    ; End of function esc_clearTimerGoToNextCommand
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2155,7 +2155,7 @@ esc_clearTimerGoToNextEntity:
                 
                 clr.b   ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER(a0)
 
-	; End of function esc_clearTimerGoToNextEntity
+    ; End of function esc_clearTimerGoToNextEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2169,7 +2169,7 @@ UpdateNextEntity:
                 dbf     d7,loc_4EF4
                 rts
 
-	; End of function esc_goToNextEntity
+    ; End of function esc_goToNextEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2437,7 +2437,7 @@ return_5F9A:
                 
                 rts
 
-	; End of function UpdateEntityData
+    ; End of function UpdateEntityData
 
 byte_5F9C:      dc.b 5
                 dc.b 2
@@ -2523,7 +2523,7 @@ return_6022:
                 
                 rts
 
-	; End of function sub_5FAC
+    ; End of function sub_5FAC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2547,7 +2547,7 @@ loc_603C:
                 bsr.w   EnableDisplayAndInterrupts
                 rts
 
-	; End of function LoadMapEntitySprites
+    ; End of function LoadMapEntitySprites
 
 FacingValues_2: dc.b 0
                 dc.b 1
@@ -2586,7 +2586,7 @@ loc_607C:
                 movem.l (sp)+,d0-a2
                 rts
 
-	; End of function UpdateEntityProperties
+    ; End of function UpdateEntityProperties
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2600,7 +2600,7 @@ UpdateEntitySprite:
                 cmpi.b  #7,((NUM_SPRITES_TO_LOAD-$1000000)).w
                 bge.w   return_6180
 
-	; End of function UpdateEntitySprite
+    ; End of function UpdateEntitySprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2692,7 +2692,7 @@ return_6180:
                 
                 rts
 
-	; End of function ChangeEntitySprite
+    ; End of function ChangeEntitySprite
 
 FacingValues:   dc.b 0                  ; 8 bytes holding facing values for sprites (not sure what it's for)
                 dc.b 1
@@ -2753,7 +2753,7 @@ loc_61F6:
                 movem.l (sp)+,a0-a1
                 rts
 
-	; End of function DmaMapSprite
+    ; End of function DmaMapSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2804,5 +2804,5 @@ loc_622E:
                 movem.w (sp)+,d0-d1
                 rts
 
-	; End of function GetMapPixelCoordRAMOffset
+    ; End of function GetMapPixelCoordRAMOffset
 

@@ -587,7 +587,7 @@ csub_5BFD0:
                 jsr     sub_20058
                 rts
 
-	; End of function csub_5BFD0
+    ; End of function csub_5BFD0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -598,7 +598,7 @@ sub_5BFDA:
                 jsr     sub_20058
                 rts
 
-	; End of function sub_5BFDA
+    ; End of function sub_5BFDA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -609,5 +609,5 @@ sub_5BFE4:
                 jsr     sub_20058
                 rts
 
-	; End of function sub_5BFE4
+    ; End of function sub_5BFE4
 

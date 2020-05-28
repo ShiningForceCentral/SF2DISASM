@@ -15,7 +15,7 @@ return_5FABA:
                 
                 rts
 
-	; End of function ms_map37_flag3E7_InitFunction
+    ; End of function ms_map37_flag3E7_InitFunction
 
 cs_5FABC:       textCursor $D1F
                 reloadMap 6,6

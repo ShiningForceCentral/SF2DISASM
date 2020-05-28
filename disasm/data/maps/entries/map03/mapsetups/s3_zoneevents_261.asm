@@ -20,5 +20,5 @@ Map3_261_ZoneEvent0:
                 
                 rts
 
-	; End of function Map3_261_ZoneEvent1
+    ; End of function Map3_261_ZoneEvent1
 

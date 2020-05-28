@@ -19,7 +19,7 @@ return_53F28:
                 
                 rts
 
-	; End of function ms_map21_InitFunction
+    ; End of function ms_map21_InitFunction
 
 cs_53F2A:       customActscriptWait 128
                  ac_setAnimCounter $0   ;   

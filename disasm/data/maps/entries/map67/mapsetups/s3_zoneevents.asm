@@ -21,7 +21,7 @@ return_4FB30:
                 
                 rts
 
-	; End of function Map67_ZoneEvent1
+    ; End of function Map67_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -43,7 +43,7 @@ return_4FB56:
                 
                 rts
 
-	; End of function Map67_ZoneEvent0
+    ; End of function Map67_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -54,7 +54,7 @@ Map67_DefaultZoneEvent:
                 jsr     CheckRandomBattle
                 rts
 
-	; End of function Map67_DefaultZoneEvent
+    ; End of function Map67_DefaultZoneEvent
 
 cs_4FB64:       textCursor $9EF
                 setActscriptWait FOLLOWER_B,eas_Init

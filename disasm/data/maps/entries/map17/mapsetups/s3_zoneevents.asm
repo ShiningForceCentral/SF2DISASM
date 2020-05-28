@@ -20,7 +20,7 @@ return_52404:
                 
                 rts
 
-	; End of function Map17_ZoneEvent0
+    ; End of function Map17_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -43,7 +43,7 @@ return_5242C:
                 
                 rts
 
-	; End of function Map17_ZoneEvent1
+    ; End of function Map17_ZoneEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -59,7 +59,7 @@ return_5243E:
                 
                 rts
 
-	; End of function Map17_ZoneEvent2
+    ; End of function Map17_ZoneEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -68,5 +68,5 @@ Map17_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map17_DefaultZoneEvent
+    ; End of function Map17_DefaultZoneEvent
 

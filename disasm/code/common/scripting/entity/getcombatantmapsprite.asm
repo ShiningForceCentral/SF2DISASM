@@ -27,5 +27,5 @@ GetCombatantMapSprite:
                 movem.w (sp)+,d0
                 rts
 
-	; End of function GetCombatantMapSprite
+    ; End of function GetCombatantMapSprite
 

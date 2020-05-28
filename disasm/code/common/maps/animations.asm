@@ -22,7 +22,7 @@ loc_4740:
                 tst.b   d7
                 rts
 
-	; End of function IsMapScrollingToViewTarget
+    ; End of function IsMapScrollingToViewTarget
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -46,7 +46,7 @@ return_4770:
                 
                 rts
 
-	; End of function VInt_UpdateMapPlanes
+    ; End of function VInt_UpdateMapPlanes
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -86,5 +86,5 @@ return_47C4:
                 
                 rts
 
-	; End of function VInt_UpdateMapAnimations
+    ; End of function VInt_UpdateMapAnimations
 

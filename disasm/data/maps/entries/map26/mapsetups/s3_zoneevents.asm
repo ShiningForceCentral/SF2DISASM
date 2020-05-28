@@ -18,7 +18,7 @@ return_59DCE:
                 
                 rts
 
-	; End of function Map26_ZoneEvent0
+    ; End of function Map26_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -27,5 +27,5 @@ Map26_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map26_DefaultZoneEvent
+    ; End of function Map26_DefaultZoneEvent
 

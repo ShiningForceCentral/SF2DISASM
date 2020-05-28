@@ -16,7 +16,7 @@ sub_1288E:
                 
                 link    a6,#-$20
 
-	; End of function sub_1288E
+    ; End of function sub_1288E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -111,7 +111,7 @@ loc_1291E:
                 unlk    a6
                 rts
 
-	; End of function sub_12892
+    ; End of function sub_12892
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -235,7 +235,7 @@ loc_12A9A:
                 jsr     (EnableInterrupts).w
                 bra.w   loc_12BF4
 
-	; End of function sub_129E8
+    ; End of function sub_129E8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -268,7 +268,7 @@ loc_12BD4:
                 movem.w (sp)+,d2-d3
                 rts
 
-	; End of function sub_12BA4
+    ; End of function sub_12BA4
 
 
 ; START OF FUNCTION CHUNK FOR sub_129E8
@@ -347,7 +347,7 @@ loc_12CA2:
                 move.w  #$F8F9,(a0)+
                 rts
 
-	; End of function sub_12C46
+    ; End of function sub_12C46
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -488,7 +488,7 @@ loc_12DDE:
                 beq.w   loc_12CB2
                 rts
 
-	; End of function sub_12CB0
+    ; End of function sub_12CB0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -578,7 +578,7 @@ loc_12EB4:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-	; End of function PlayEndKiss
+    ; End of function PlayEndKiss
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -608,7 +608,7 @@ return_12F5C:
                 
                 rts
 
-	; End of function sub_12F12
+    ; End of function sub_12F12
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -633,7 +633,7 @@ sub_12F5E:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function sub_12F5E
+    ; End of function sub_12F5E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -664,7 +664,7 @@ loc_12FCA:
                 movem.l (sp)+,d0-a1
                 rts
 
-	; End of function sub_12F9A
+    ; End of function sub_12F9A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -915,7 +915,7 @@ loc_13256:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-	; End of function sub_12FE6
+    ; End of function sub_12FE6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -981,7 +981,7 @@ return_13326:
                 
                 rts
 
-	; End of function sub_132BC
+    ; End of function sub_132BC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1029,7 +1029,7 @@ loc_13388:
                 bsr.w   sub_1445A
                 rts
 
-	; End of function sub_13328
+    ; End of function sub_13328
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1042,7 +1042,7 @@ LoadCharPortrait:
                 bsr.w   GetCombatantPortrait
                 bra.w   LoadPortrait    
 
-	; End of function LoadCharPortrait
+    ; End of function LoadCharPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1116,7 +1116,7 @@ loc_1344A:
                 bsr.w   sub_101E6
                 rts
 
-	; End of function sub_133A0
+    ; End of function sub_133A0
 
 tbl_SpriteDefs_TextHighlight_MemberList:
                 dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_INIT_Y
@@ -1153,7 +1153,7 @@ GetSelectedMember:
                 andi.w  #$FF,d0
                 rts
 
-	; End of function GetSelectedMember
+    ; End of function GetSelectedMember
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1171,7 +1171,7 @@ sub_13478:
                 moveq   #$A,d1
                 rts
 
-	; End of function sub_13478
+    ; End of function sub_13478
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1182,7 +1182,7 @@ CopyWords:
                 dbf     d7,CopyWords
                 rts
 
-	; End of function CopyWords
+    ; End of function CopyWords
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1237,7 +1237,7 @@ loc_13510:
                 moveq   #$A,d1
                 rts
 
-	; End of function sub_134A8
+    ; End of function sub_134A8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1268,7 +1268,7 @@ sub_1354C:
                 jsr     (CopyBytes).w   
                 rts
 
-	; End of function sub_1354C
+    ; End of function sub_1354C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1661,7 +1661,7 @@ WriteMemberListText:
                 unlk    a6
                 rts
 
-	; End of function WriteMemberListText
+    ; End of function WriteMemberListText
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1673,7 +1673,7 @@ sub_137AC:
                 jsr     (GetWindowTileAddress).l
                 move.w  -2(a6),d0
 
-	; End of function sub_137AC
+    ; End of function sub_137AC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1819,7 +1819,7 @@ loc_138FE:
                 unlk    a6
                 rts
 
-	; End of function sub_137BC
+    ; End of function sub_137BC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1840,7 +1840,7 @@ WriteMemberMiniStatus:
                 bsr.w   WriteMemberItemsList
                 rts
 
-	; End of function WriteMemberMiniStatus
+    ; End of function WriteMemberMiniStatus
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1859,7 +1859,7 @@ WriteItemsMiniStatus:
                 bsr.w   DrawMemberItemsIconsCross
                 rts
 
-	; End of function WriteItemsMiniStatus
+    ; End of function WriteItemsMiniStatus
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1878,7 +1878,7 @@ WriteMagicMiniStatus:
                 bsr.w   DrawMemberMagicIconsCross
                 rts
 
-	; End of function WriteMagicMiniStatus
+    ; End of function WriteMagicMiniStatus
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1955,7 +1955,7 @@ loc_139A6:
                 bra.w   loc_13C36
                 rts
 
-	; End of function WriteEquipMiniStatus
+    ; End of function WriteEquipMiniStatus
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2013,7 +2013,7 @@ loc_13AD8:
                 move.w  (sp)+,d7
                 rts
 
-	; End of function WriteMemberMagicList
+    ; End of function WriteMemberMagicList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2061,7 +2061,7 @@ loc_13B48:
                 move.w  (sp)+,d7
                 rts
 
-	; End of function WriteMemberItemsList
+    ; End of function WriteMemberItemsList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2072,7 +2072,7 @@ LoadItemIcon:
                 movea.l (p_Icons).l,a0
                 bra.w   LoadIcon
 
-	; End of function LoadItemIcon
+    ; End of function LoadItemIcon
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2089,7 +2089,7 @@ loc_13B7E:
                 
                 addi.w  #ICONIDX_HEAL,d1
 
-	; End of function LoadSpellIcon
+    ; End of function LoadSpellIcon
 
 
 ; START OF FUNCTION CHUNK FOR LoadItemIcon
@@ -2135,7 +2135,7 @@ DrawMemberItemsIconsCross:
                 bsr.w   LoadItemIcon
                 bra.w   loc_13C20
 
-	; End of function DrawMemberItemsIconsCross
+    ; End of function DrawMemberItemsIconsCross
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2180,7 +2180,7 @@ loc_13C36:
                 move.l  #$C5F6C5F7,$1D8(a1)
                 rts
 
-	; End of function DrawMemberMagicIconsCross
+    ; End of function DrawMemberMagicIconsCross
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2234,7 +2234,7 @@ aName:
                 endif
                 
 
-	; End of function CopyWindowTilesToRAM
+    ; End of function CopyWindowTilesToRAM
 
 aNameClassLevExp:
                 
@@ -2247,7 +2247,7 @@ aNameClassLevExp:
                     if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
                     dc.b ' '
                     endif
-                dc.b 'CLASS     LEV EXP',0
+aClassLevExp:   dc.b 'CLASS     LEV EXP',0
                 endif
                 
 ; ---------------------------------------------------------------------------
@@ -2274,7 +2274,7 @@ aNameHpMpAtDfAgMv:
                     if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
                     dc.b ' '
                     endif
-                
+aHpMpAtDfAgMv:  
                 if (THREE_DIGITS_STATS=1)
                 dc.b 'ATT DEF AGI MV EX',0
                 else
@@ -2293,7 +2293,7 @@ aNameAttackDefense:
                     endif
                 endif
                 
-                dc.b 'ATTACK   DEFENSE',0
+aAttackDefense: dc.b 'ATTACK   DEFENSE',0
 aMagicItem:     dc.b 'MAGIC     ITEM'
 aItem_3:        dc.b '- ITEM -',0
 aMagic_2:       dc.b '- MAGIC -',0
@@ -2470,7 +2470,7 @@ loc_1406E:
                 movem.l (sp)+,d0/d3-a1
                 rts
 
-	; End of function sub_13F14
+    ; End of function sub_13F14
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2484,7 +2484,7 @@ sub_14074:
                 move.w  rjt_14080(pc,d0.w),d0
                 jmp     rjt_14080(pc,d0.w)
 
-	; End of function sub_14074
+    ; End of function sub_14074
 
 rjt_14080:      dc.w DMAicon1-rjt_14080
                 dc.w DMAicon2-rjt_14080
@@ -2506,7 +2506,7 @@ loc_14098:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function DMAicon1
+    ; End of function DMAicon1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2524,7 +2524,7 @@ loc_140B8:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function DMAicon2
+    ; End of function DMAicon2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2542,7 +2542,7 @@ loc_140D8:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function DMAicon3
+    ; End of function DMAicon3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2560,7 +2560,7 @@ loc_140F8:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function DMAicon4
+    ; End of function DMAicon4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2638,7 +2638,7 @@ loc_141C8:
                 movem.l (sp)+,d0/d3-a2
                 rts
 
-	; End of function sub_14108
+    ; End of function sub_14108
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2840,7 +2840,7 @@ loc_143C4:
                 move.b  #1,((word_FFAF8C-$1000000)).w
                 rts
 
-	; End of function sub_141CE
+    ; End of function sub_141CE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2867,7 +2867,7 @@ sub_143E0:
                 movem.w (sp)+,d0-d7
                 rts
 
-	; End of function sub_143E0
+    ; End of function sub_143E0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2883,7 +2883,7 @@ sub_14422:
                 movem.w (sp)+,d0-d2/d7
                 rts
 
-	; End of function sub_14422
+    ; End of function sub_14422
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2899,7 +2899,7 @@ sub_1443E:
                 movem.w (sp)+,d0-d2/d7
                 rts
 
-	; End of function sub_1443E
+    ; End of function sub_1443E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3118,7 +3118,7 @@ loc_1466C:
                                         ;     In: A1 = end of selection rect section in RAM
                 rts
 
-	; End of function sub_1445A
+    ; End of function sub_1445A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3135,7 +3135,7 @@ CleanIconCorners:
                 ori.w   #$F000,-$180(a1)
                 rts
 
-	; End of function CleanIconCorners
+    ; End of function CleanIconCorners
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3192,7 +3192,7 @@ loc_14702:
                 movem.w (sp)+,d0/d2
                 rts
 
-	; End of function sub_146AE
+    ; End of function sub_146AE
 
 tbl_SpriteDefs_TextHighlight_ItemList:
                 dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_INIT_Y
@@ -3252,7 +3252,7 @@ sub_1474C:
                 jsr     (SetWindowDestination).w
                 rts
 
-	; End of function sub_1474C
+    ; End of function sub_1474C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3293,7 +3293,7 @@ return_147E6:
                 
                 rts
 
-	; End of function sub_1477E
+    ; End of function sub_1477E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3307,7 +3307,7 @@ WaitForMusicResumeAndPlayerInput_0:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function WaitForMusicResumeAndPlayerInput_0
+    ; End of function WaitForMusicResumeAndPlayerInput_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3518,7 +3518,7 @@ loc_14A26:
                 unlk    a6
                 rts
 
-	; End of function sub_147FA
+    ; End of function sub_147FA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3582,7 +3582,7 @@ loc_14B24:
                 
                 bra.w   sub_101E6
 
-	; End of function sub_14A82
+    ; End of function sub_14A82
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3608,7 +3608,7 @@ sub_14B28:
                 jsr     WriteTilesFromNumber
                 rts
 
-	; End of function sub_14B28
+    ; End of function sub_14B28
 
 aGold:          dc.b 'GOLD',0
                 dc.b 0
@@ -3638,7 +3638,7 @@ sub_14B68:
                 jsr     WriteTilesFromNumber
                 rts
 
-	; End of function sub_14B68
+    ; End of function sub_14B68
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3703,7 +3703,7 @@ loc_14C0E:
                 jsr     (WaitForDMAQueueProcessing).w
                 rts
 
-	; End of function sub_14BB0
+    ; End of function sub_14BB0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3752,7 +3752,7 @@ loc_14CA6:
                 movem.l (sp)+,a1-a2
                 rts
 
-	; End of function sub_14C56
+    ; End of function sub_14C56
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3782,7 +3782,7 @@ loc_14CC8:
                 movea.l (sp)+,a1
                 rts
 
-	; End of function sub_14CB2
+    ; End of function sub_14CB2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3803,7 +3803,7 @@ sub_14CEC:
                 andi.w  #$FF,d0
                 rts
 
-	; End of function sub_14CEC
+    ; End of function sub_14CEC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3836,7 +3836,7 @@ loc_14D4A:
                 jsr     (SetWindowDestination).l
                 jmp     (WaitForVInt).w
 
-	; End of function sub_14D0C
+    ; End of function sub_14D0C
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3865,7 +3865,7 @@ sub_14D6A:
                 move.w  #$D8,d7 
                 jsr     (CopyBytes).w   
 
-	; End of function sub_14D6A
+    ; End of function sub_14D6A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3874,7 +3874,7 @@ sub_14DBE:
                 
                 bra.s   loc_14D4A
 
-	; End of function sub_14DBE
+    ; End of function sub_14DBE
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3900,7 +3900,7 @@ sub_14DC0:
                 jsr     (CopyBytes).w   
                 bra.w   loc_14D4A
 
-	; End of function sub_14DC0
+    ; End of function sub_14DC0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3930,7 +3930,7 @@ sub_14E06:
                 move.w  #$D8,d7 
                 jsr     (CopyBytes).w   
 
-	; End of function sub_14E06
+    ; End of function sub_14E06
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3939,7 +3939,7 @@ sub_14E5E:
                 
                 bra.w   loc_14D4A
 
-	; End of function sub_14E5E
+    ; End of function sub_14E5E
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3981,7 +3981,7 @@ loc_14EAE:
                 jsr     (MoveWindow).l  
                 bra.s   sub_14EDE
 
-	; End of function sub_14E62
+    ; End of function sub_14E62
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -3996,7 +3996,7 @@ sub_14EC0:
                 moveq   #4,d2
                 jsr     (MoveWindow).l  
 
-	; End of function sub_14EC0
+    ; End of function sub_14EC0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4013,7 +4013,7 @@ sub_14EDE:
                 moveq   #$A,d1
                 rts
 
-	; End of function sub_14EDE
+    ; End of function sub_14EDE
 
 unk_14EFC:      dc.b $11                ; price window layout ?
                 dc.b $FF
@@ -4905,7 +4905,7 @@ loc_15278:
                 dbf     d7,loc_15278
                 rts
 
-	; End of function sub_15268
+    ; End of function sub_15268
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4916,7 +4916,7 @@ YesNoPrompt:
                 move.b  ((P1_INPUT-$1000000)).w,d0
                 bra.s   loc_1528E
 
-	; End of function YesNoPrompt
+    ; End of function YesNoPrompt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -4925,7 +4925,7 @@ YesNoChoiceBox:
                 
                 clr.w   d0
 
-	; End of function YesNoChoiceBox
+    ; End of function YesNoChoiceBox
 
 
 ; START OF FUNCTION CHUNK FOR YesNoPrompt
@@ -5096,7 +5096,7 @@ sub_15422:
                 andi.w  #1,d0
                 bne.w   sub_1544A
 
-	; End of function sub_15422
+    ; End of function sub_15422
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5114,7 +5114,7 @@ loc_1543A:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function sub_1542A
+    ; End of function sub_1542A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5132,7 +5132,7 @@ loc_1545A:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDMA).w
 
-	; End of function sub_1544A
+    ; End of function sub_1544A
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5159,7 +5159,7 @@ loc_1548A:
                 bsr.w   WriteTilesFromASCII
                 rts
 
-	; End of function CopyYesNoIconsToRAM
+    ; End of function CopyYesNoIconsToRAM
 
 s_Yes:          dc.b 'Yes'
 s_No:           dc.b 'No'
@@ -5220,7 +5220,7 @@ loc_15526:
                 bsr.w   UpdatePortrait  
                 rts
 
-	; End of function ClosePortraitEyes
+    ; End of function ClosePortraitEyes
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5286,7 +5286,7 @@ return_155C2:
                 
                 rts
 
-	; End of function VInt_HandlePortraitBlinking
+    ; End of function VInt_HandlePortraitBlinking
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5343,7 +5343,7 @@ loc_1560E:
                 jsr     (SetWindowDestination).w
                 rts
 
-	; End of function UpdatePortrait
+    ; End of function UpdatePortrait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5400,7 +5400,7 @@ loc_15674:
                 movem.l (sp)+,d0-a3
                 rts
 
-	; End of function LoadPortrait
+    ; End of function LoadPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5414,7 +5414,7 @@ sub_156A8:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function sub_156A8
+    ; End of function sub_156A8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5428,7 +5428,7 @@ sub_156BC:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function sub_156BC
+    ; End of function sub_156BC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -5451,7 +5451,7 @@ sub_156CE:
                 move.w  #4,d2
                 rts
 
-	; End of function sub_156CE
+    ; End of function sub_156CE
 
 MenuLayout_15706:
                 dc.b $C0 

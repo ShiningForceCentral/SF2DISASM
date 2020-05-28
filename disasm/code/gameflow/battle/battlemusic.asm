@@ -40,5 +40,5 @@ byte_4586:
                 move.w  (sp)+,d0
                 rts
 
-	; End of function PlayMapMusic
+    ; End of function PlayMapMusic
 

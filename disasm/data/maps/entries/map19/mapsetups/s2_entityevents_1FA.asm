@@ -33,7 +33,7 @@ Map19_1FA_EntityEvent1:
                 txt     $2A6            ; "Already passed away...{N}{LEADER} feels pity.{W1}"
                 rts
 
-	; End of function Map19_1FA_EntityEvent1
+    ; End of function Map19_1FA_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -44,7 +44,7 @@ Map19_1FA_EntityEvent2:
                 txt     $2A7            ; "This is a nightmare.{W1}"
                 rts
 
-	; End of function Map19_1FA_EntityEvent2
+    ; End of function Map19_1FA_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -57,7 +57,7 @@ Map19_1FA_EntityEvent3:
                 txt     $2AA            ; "He ran upstairs with a{N}pained look on his face.{W1}"
                 rts
 
-	; End of function Map19_1FA_EntityEvent3
+    ; End of function Map19_1FA_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -69,7 +69,7 @@ Map19_1FA_EntityEvent6:
                 txt     $2AC            ; "But we were powerless{N}against King Galam's magic.{W1}"
                 rts
 
-	; End of function Map19_1FA_EntityEvent6
+    ; End of function Map19_1FA_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -81,7 +81,7 @@ Map19_1FA_EntityEvent7:
                 txt     $2AE            ; "We did not attack Galam!{W1}"
                 rts
 
-	; End of function Map19_1FA_EntityEvent7
+    ; End of function Map19_1FA_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -92,7 +92,7 @@ Map19_1FA_EntityEvent11:
                 txt     $2AF            ; "Nobody knew that King Galam{N}was a wizard!{W1}"
                 rts
 
-	; End of function Map19_1FA_EntityEvent11
+    ; End of function Map19_1FA_EntityEvent11
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -103,7 +103,7 @@ Map19_1FA_EntityEvent14:
                 txt     $2B0            ; "Why are we at war?{W1}"
                 rts
 
-	; End of function Map19_1FA_EntityEvent14
+    ; End of function Map19_1FA_EntityEvent14
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -114,5 +114,5 @@ Map19_1FA_EntityEvent0:
                 txt     $2B1            ; "The Princess was taken{N}away...and I'm paralyzed{N}with fear.{W1}"
                 rts
 
-	; End of function Map19_1FA_EntityEvent0
+    ; End of function Map19_1FA_EntityEvent0
 

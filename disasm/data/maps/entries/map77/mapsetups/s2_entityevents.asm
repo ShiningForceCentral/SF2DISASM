@@ -10,5 +10,5 @@ Map77_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map77_DefaultEntityEvent
+    ; End of function Map77_DefaultEntityEvent
 

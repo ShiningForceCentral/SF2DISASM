@@ -16,5 +16,5 @@ Trap6_TriggerAndExecuteMapScript:
                 movem.l (sp)+,d0-a6
                 rte
 
-	; End of function Trap6_TriggerAndExecuteMapScript
+    ; End of function Trap6_TriggerAndExecuteMapScript
 

@@ -15,5 +15,5 @@ return_51F86:
                 
                 rts
 
-	; End of function ms_map16_InitFunction
+    ; End of function ms_map16_InitFunction
 

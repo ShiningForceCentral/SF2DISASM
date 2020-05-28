@@ -11,7 +11,7 @@ Map31_DefaultZoneEvent:
                 
                 rts
 
-	; End of function Map31_DefaultZoneEvent
+    ; End of function Map31_DefaultZoneEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -27,7 +27,7 @@ return_5D570:
                 
                 rts
 
-	; End of function Map31_33E_ZoneEvent0
+    ; End of function Map31_33E_ZoneEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -36,5 +36,5 @@ nullsub_5D572:
                 
                 rts
 
-	; End of function nullsub_5D572
+    ; End of function nullsub_5D572
 

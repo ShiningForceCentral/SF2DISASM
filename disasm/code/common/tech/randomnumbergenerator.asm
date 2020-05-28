@@ -21,7 +21,7 @@ GenerateRandomNumber:
                 lsr.w   #1,d7
                 rts
 
-	; End of function GenerateRandomNumber
+    ; End of function GenerateRandomNumber
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -54,7 +54,7 @@ loc_164A:
                 movem.l (sp)+,d0-d5/a0-a6
                 rts
 
-	; End of function WaitForRandomValueToMatch
+    ; End of function WaitForRandomValueToMatch
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -72,7 +72,7 @@ GetRandomValueUnsigned:
                 movem.l (sp)+,d0-d5/a0-a6
                 rts
 
-	; End of function GetRandomValueUnsigned
+    ; End of function GetRandomValueUnsigned
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -108,5 +108,5 @@ loc_16B8:
                 movem.l (sp)+,d6-d7
                 rts
 
-	; End of function GetRandomOrDebugValue
+    ; End of function GetRandomOrDebugValue
 

@@ -20,7 +20,7 @@ Map25_EntityEvent0:
                 txt     $7A4            ; "Ketto is on the southern{N}edge of North Parmecia.{W1}"
                 rts
 
-	; End of function Map25_EntityEvent0
+    ; End of function Map25_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -33,7 +33,7 @@ Map25_EntityEvent1:
                 txt     $7A7            ; "The tunnel to the south is{N}blocked.{W1}"
                 rts
 
-	; End of function Map25_EntityEvent1
+    ; End of function Map25_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -46,7 +46,7 @@ Map25_EntityEvent2:
                 txt     $7AA            ; "If I were you, I'd leave.{W1}"
                 rts
 
-	; End of function Map25_EntityEvent2
+    ; End of function Map25_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -58,7 +58,7 @@ Map25_EntityEvent3:
                 txt     $7AC            ; "Is Mitula as sick as I've{N}heard?{W1}"
                 rts
 
-	; End of function Map25_EntityEvent3
+    ; End of function Map25_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -69,7 +69,7 @@ Map25_EntityEvent4:
                 txt     $7AD            ; "The devils forbade us to go{N}out. {W1}"
                 rts
 
-	; End of function Map25_EntityEvent4
+    ; End of function Map25_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -102,7 +102,7 @@ return_5D2D0:
                 
                 rts
 
-	; End of function Map25_EntityEvent5
+    ; End of function Map25_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -119,7 +119,7 @@ loc_5D2E0:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map25_EntityEvent6
+    ; End of function Map25_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -128,7 +128,7 @@ nullsub_5D2E8:
                 
                 rts
 
-	; End of function nullsub_5D2E8
+    ; End of function nullsub_5D2E8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -171,7 +171,7 @@ return_5D336:
                 
                 rts
 
-	; End of function Map25_EntityEvent7
+    ; End of function Map25_EntityEvent7
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -180,5 +180,5 @@ Map25_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map25_DefaultEntityEvent
+    ; End of function Map25_DefaultEntityEvent
 

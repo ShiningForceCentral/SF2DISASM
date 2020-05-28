@@ -11,7 +11,7 @@ ms_map19_flag21F_AreaDescriptions:
                 nop
                 jmp     DisplayAreaDescription
 
-	; End of function ms_map19_flag21F_AreaDescriptions
+    ; End of function ms_map19_flag21F_AreaDescriptions
 
 byte_62C82:     msDesc 19, 3, 4, 0      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                                         ; "A book...{N}GRANSEAL KINGS{W1}"

@@ -78,5 +78,5 @@ sub_5D73E:
                 movem.l (sp)+,d0-d2/a0
                 rts
 
-	; End of function sub_5D73E
+    ; End of function sub_5D73E
 

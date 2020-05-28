@@ -17,7 +17,7 @@ Map29_EntityEvent0:
                 
                 jmp     j_BlacksmithActions
 
-	; End of function Map29_EntityEvent0
+    ; End of function Map29_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -26,7 +26,7 @@ Map29_EntityEvent1:
                 
                 jmp     j_ChurchActions
 
-	; End of function Map29_EntityEvent1
+    ; End of function Map29_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -36,7 +36,7 @@ Map29_EntityEvent2:
                 move.b  #$1C,((CURRENT_SHOP_INDEX-$1000000)).w
                 jmp     j_ShopActions
 
-	; End of function Map29_EntityEvent2
+    ; End of function Map29_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -47,7 +47,7 @@ Map29_EntityEvent3:
                 txt     $84D            ; "I think...I've met you{N}somewhere before.{W1}"
                 rts
 
-	; End of function Map29_EntityEvent3
+    ; End of function Map29_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -59,7 +59,7 @@ Map29_EntityEvent4:
                 txt     $84F            ; "But, we have to leave here{N}very soon.{W1}"
                 rts
 
-	; End of function Map29_EntityEvent4
+    ; End of function Map29_EntityEvent4
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -71,7 +71,7 @@ Map29_EntityEvent5:
                 txt     $851            ; "You can place a custom order{N}with him.{W1}"
                 rts
 
-	; End of function Map29_EntityEvent5
+    ; End of function Map29_EntityEvent5
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -83,7 +83,7 @@ Map29_EntityEvent6:
                 txt     $853            ; "Go see the blacksmith if you{N}have any Mithril.{W1}"
                 rts
 
-	; End of function Map29_EntityEvent6
+    ; End of function Map29_EntityEvent6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -92,5 +92,5 @@ Map29_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map29_DefaultEntityEvent
+    ; End of function Map29_DefaultEntityEvent
 

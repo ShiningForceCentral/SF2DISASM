@@ -130,7 +130,7 @@ loc_54726:
                 dbf     d7,loc_54726
                 rts
 
-	; End of function csub_54714
+    ; End of function csub_54714
 
 ce_54736:       mainEntity 34,33,RIGHT
                 dc.w $FFFF

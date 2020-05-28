@@ -19,7 +19,7 @@ return_600B0:
                 
                 rts
 
-	; End of function ms_map45_InitFunction
+    ; End of function ms_map45_InitFunction
 
 cs_600B2:       setActscriptWait ALLY_SHEELA,eas_45F9C
                 setSprite ALLY_SHEELA,MAPSPRITE_POSE7

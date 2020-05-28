@@ -17,7 +17,7 @@ Map45_EntityEvent0:
                 txt     $81E            ; "We train very hard.{W1}"
                 rts
 
-	; End of function Map45_EntityEvent0
+    ; End of function Map45_EntityEvent0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -28,7 +28,7 @@ Map45_EntityEvent1:
                 txt     $81F            ; "Don't approach my back!{N}You will die!{W1}"
                 rts
 
-	; End of function Map45_EntityEvent1
+    ; End of function Map45_EntityEvent1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -39,7 +39,7 @@ Map45_EntityEvent2:
                 txt     $820            ; "I'm always in control of my{N}mind.{W1}"
                 rts
 
-	; End of function Map45_EntityEvent2
+    ; End of function Map45_EntityEvent2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -52,7 +52,7 @@ Map45_EntityEvent3:
                 jsr     j_ChurchActions
                 rts
 
-	; End of function Map45_EntityEvent3
+    ; End of function Map45_EntityEvent3
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -61,5 +61,5 @@ Map45_DefaultEntityEvent:
                 
                 rts
 
-	; End of function Map45_DefaultEntityEvent
+    ; End of function Map45_DefaultEntityEvent
 
