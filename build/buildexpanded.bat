@@ -32,5 +32,9 @@ SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%.bin"
 echo End of assembly, produced %buildname%
 
 echo -------------------------------------------------------------
+echo Checking build ...
+cd ../build/
+IF EXIST "%buildname%" (echo "%buildname%" exists in build directory. Success!) ELSE echo "%buildname%" does not exist, probably due to an assembly error. Check output.log.
 
 
+pause

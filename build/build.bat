@@ -28,11 +28,11 @@ cd ../musicbank1/
 cd ../../../
 echo Assembling game ...
 SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%.bin"
-@"../tools/asm68k"  /e EXPANDED_ROM=0 /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%" > ../build/output.log
+@"../tools/asm68k" /e EXPANDED_ROM=0 /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%" > ../build/output.log
 echo End of assembly, produced %buildname%
 
 echo -------------------------------------------------------------
-echo Checking build ...
+echo Checking build against reference ROM ...
 cd ../build/
 IF EXIST "%buildname%" (IF EXIST ../rom/sf2.bin (fc /b "%buildname%" ../rom/sf2.bin) ELSE echo sf2.bin does not exist in build directory) ELSE echo "%buildname%" does not exist, probably due to an assembly error. Check output.log.
 
