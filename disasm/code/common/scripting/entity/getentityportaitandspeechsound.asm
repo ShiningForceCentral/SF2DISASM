@@ -5,13 +5,14 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; In: D0 = character index
+; 
 ; Out: D1 = portrait index
 ;      D2 = speech sound index
 
 GetEntityPortaitAndSpeechSound:
                 
                 movem.l d0/a0/a5,-(sp)
-                andi.w  #CHAR_MASK_IDX,d0
+                andi.w  #COMBATANT_MASK,d0
                 clr.w   d1
                 clr.w   d2
                 bsr.w   GetEntityAddressFromCharacter

@@ -4,135 +4,137 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D6 = damage
+; In: A4 = pointer to attacker's index in RAM
+;     A5 = pointer to target's index in RAM
+;     D6 = damage
 
 WriteSkirmishScript_InflictDamage:
                 
                 move.b  (a5),d0
-                jsr     GetEnemyIndex
-                cmpi.w  #ENEMYIDX_TAROS,d1
-                bne.s   loc_AD1C
+                jsr     GetEnemyIndex   
+                cmpi.w  #ENEMY_TAROS,d1 ; if enemy target is Taros, check if attack is ineffective
+                bne.s   @CheckCounterAttack ; otherwise, go to next step
                 tst.b   -BCSTACK_OFFSET_INEFFECTIVEATTACK(a2)
-                beq.s   loc_AD1C
+                beq.s   @CheckCounterAttack
                 move.w  #$10,(a6)+
-                move.w  #TEXTIDX_BATTLE_INEFFECTIVEATTACK,(a6)+
+                move.w  #MESSAGE_BATTLE_INEFFECTIVE_ATTACK,(a6)+
                 move.b  #0,(a6)+
                 move.b  (a5),(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
-                bra.w   return_AE30
-loc_AD1C:
+                bra.w   @Return
+@CheckCounterAttack:
                 
-                cmpi.w  #2,((RAM_BattleScene_AttackNumber-$1000000)).w
-                bne.s   loc_AD26
-                lsr.w   #1,d6
-loc_AD26:
+                cmpi.w  #BATTLEACTION_ATTACKTYPE_COUNTER,((BATTLESCENE_ATTACK_TYPE-$1000000)).w
+                bne.s   @CheckBurstRock
+                lsr.w   #1,d6           ; inflict 1/2 damage if counter attack
+@CheckBurstRock:
                 
                 move.b  (a5),d0
-                jsr     GetEnemyIndex
-                cmpi.w  #ENEMYIDX_BURST_ROCK,d1
-                bne.s   loc_AD3E
+                jsr     GetEnemyIndex   
+                cmpi.w  #ENEMY_BURST_ROCK,d1
+                bne.s   @ApplyDamageVariance
                 tst.w   d6
-                bne.s   loc_AD3A
+                bne.s   @GoTo_CheckCutoff
                 moveq   #1,d6
-loc_AD3A:
+@GoTo_CheckCutoff:
                 
-                bra.w   loc_AD58
-loc_AD3E:
+                bra.w   @CheckCutoff
+@ApplyDamageVariance:
                 
                 move.w  d6,d1
                 lsr.w   #3,d1
                 addq.w  #1,d1
                 move.w  d1,d0
                 jsr     (GetRandomOrDebugValue).w
-                sub.w   d0,d6
+                sub.w   d0,d6           ; randomly subtract 0..(damage/8)
                 move.w  d1,d0
                 jsr     (GetRandomOrDebugValue).w
-                sub.w   d0,d6
-                bgt.s   loc_AD58
-                moveq   #1,d6
-loc_AD58:
+                sub.w   d0,d6           ; do it again
+                bgt.s   @CheckCutoff
+                moveq   #1,d6           ; minimum damage = 1
+@CheckCutoff:
                 
                 jsr     CalculateDamageEXP
                 tst.b   -BCSTACK_OFFSET_CUTOFF(a2)
-                beq.s   loc_AD74
-                move.w  #$18,d4
+                beq.s   @CheckTargetDies
+                move.w  #SPELLANIMATION_CUTOFF,d4
                 move.w  #$FFFF,d5
                 bsr.w   WriteSkirmishScript_AnimateSprite
                 move.w  #$8000,d6
-loc_AD74:
+@CheckTargetDies:
                 
                 move.b  (a5),d0
                 move.w  d6,d1
                 jsr     DecreaseCurrentHP
                 jsr     GetCurrentHP
                 tst.w   d1
-                bne.s   loc_AD92
+                bne.s   @CheckExplode
                 move.b  #$FF,-BCSTACK_OFFSET_TARGETDIES(a2)
                 bsr.w   GiveEXPandGoldForKill
-loc_AD92:
+@CheckExplode:
                 
                 move.b  (a5),d0
                 move.w  d6,d2
                 neg.w   d2
                 tst.b   -BCSTACK_OFFSET_TARGETDIES(a2)
-                beq.s   loc_ADBA
-                jsr     GetEnemyIndex
-                cmpi.b  #ENEMYIDX_BURST_ROCK,d1
-                bne.s   loc_ADBA
+                beq.s   @WriteScriptCommands
+                jsr     GetEnemyIndex   
+                cmpi.b  #ENEMY_BURST_ROCK,d1
+                bne.s   @WriteScriptCommands
                 tst.w   d7
-                bne.s   loc_ADBA
+                bne.s   @WriteScriptCommands
                 move.b  #$FF,-BCSTACK_OFFSET_EXPLODE(a2)
                 move.b  d0,-BCSTACK_OFFSET_EXPLODECHAR(a2)
                 moveq   #0,d2
-loc_ADBA:
+@WriteScriptCommands:
                 
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_ADD8
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  d2,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-                bra.s   loc_ADE8
-loc_ADD8:
+                bra.s   @DetermineBattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  d2,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-loc_ADE8:
+@DetermineBattleMessage:
                 
-                btst    #CHAR_BIT_ENEMY,(a4)
-                bne.s   loc_AE00
+                btst    #COMBATANT_BIT_ENEMY,(a4)
+                bne.s   @EnemyAttacker
                 tst.b   -BCSTACK_OFFSET_CRIT(a2)
-                beq.s   loc_ADFA
-                move.w  #TEXTIDX_BATTLE_CRITDAMAGE,d1
-                bra.s   loc_ADFE
-loc_ADFA:
+                beq.s   @RegularDamageMessageIfAllyAttacker
+                move.w  #MESSAGE_BATTLE_CRITICAL_HIT,d1 ; critical hit message when attacker is ally
+                bra.s   @GoTo_CutoffMessage
+@RegularDamageMessageIfAllyAttacker:
                 
-                move.w  #TEXTIDX_BATTLE_DAMAGE_ALLY,d1
-loc_ADFE:
+                move.w  #MESSAGE_BATTLE_DAMAGE_ALLY,d1
+@GoTo_CutoffMessage:
                 
-                bra.s   loc_AE10
-loc_AE00:
+                bra.s   @CutoffMessage
+@EnemyAttacker:
                 
                 tst.b   -BCSTACK_OFFSET_CRIT(a2)
-                beq.s   loc_AE0C
-                move.w  #TEXTIDX_BATTLE_HEAVYDAMAGE,d1
-                bra.s   loc_AE10
-loc_AE0C:
+                beq.s   @RegularDamageMessageIfEnemyAttacker
+                move.w  #MESSAGE_BATTLE_HEAVY_ATTACK,d1 ; critical hit message when attacker is enemy
+                bra.s   @CutoffMessage
+@RegularDamageMessageIfEnemyAttacker:
                 
-                move.w  #TEXTIDX_BATTLE_DAMAGE_ENEMY,d1
-loc_AE10:
+                move.w  #MESSAGE_BATTLE_DAMAGE_ENEMY,d1
+@CutoffMessage:
                 
                 tst.b   -BCSTACK_OFFSET_CUTOFF(a2)
-                beq.s   loc_AE1A
-                move.w  #TEXTIDX_BATTLE_CUTOFF,d1
-loc_AE1A:
+                beq.s   @DisplayBattleMessage
+                move.w  #MESSAGE_BATTLE_CUTOFF,d1 ; message when target is cut off
+@DisplayBattleMessage:
                 
                 move.w  #$10,(a6)+
                 move.w  d1,(a6)+
@@ -141,7 +143,7 @@ loc_AE1A:
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d6,(a6)+
-return_AE30:
+@Return:
                 
                 rts
 
@@ -152,36 +154,34 @@ return_AE30:
 
 WriteSkirmishScript_InflictAilment:
                 
-                tst.b   -2(a2)
-                beq.w   return_AE88
+                tst.b   -BCSTACK_OFFSET_INFLICTAILMENT(a2)
+                beq.w   @Return
                 move.b  (a4),d0
                 jsr     GetCurrentProwess
-                andi.w  #$F,d1
+                andi.w  #PROWESS_MASK_CRITICAL,d1
                 move.w  d1,d2
-                subi.w  #9,d2
+                subi.w  #PROWESS_INFLICT_AILMENTS_START,d2
                 move.b  (a5),d0
                 jsr     GetStatus
                 lsl.w   #2,d2
                 movea.l SkirmishAilmentFuncTable(pc,d2.w),a1
                 jsr     (a1)
-                btst    #7,d0
-                bne.s   loc_AE76
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @WriteEnemyReactionCommand
                 move.w  #$B,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
-loc_AE70:
-                
                 move.w  #0,(a6)+
-                bra.s   return_AE88
-loc_AE76:
+                bra.s   @Return
+@WriteEnemyReactionCommand:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #0,(a6)+
-return_AE88:
+@Return:
                 
                 rts
 
@@ -201,12 +201,12 @@ SkirmishAilmentFuncTable:
 WriteSkirmishScript_InflictPoison:
                 
                 move.w  #$11,(a6)+
-                move.w  #$153,(a6)+
+                move.w  #MESSAGE_BATTLE_IS_POISONED,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
-                ori.w   #2,d1
+                ori.w   #STATUSEFFECTS_MASK_POISON,d1
                 rts
 
     ; End of function WriteSkirmishScript_InflictPoison
@@ -217,12 +217,12 @@ WriteSkirmishScript_InflictPoison:
 WriteSkirmishScript_InflictSleep:
                 
                 move.w  #$11,(a6)+
-                move.w  #$152,(a6)+
+                move.w  #MESSAGE_BATTLE_FELL_ASLEEP,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
-                ori.w   #$C0,d1 
+                ori.w   #STATUSEFFECTS_MASK_SLEEP,d1
                 rts
 
     ; End of function WriteSkirmishScript_InflictSleep
@@ -233,12 +233,12 @@ WriteSkirmishScript_InflictSleep:
 WriteSkirmishScript_InflictStun:
                 
                 move.w  #$11,(a6)+
-                move.w  #$15B,(a6)+
+                move.w  #MESSAGE_BATTLE_IS_STUNNED,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
-                ori.w   #1,d1
+                ori.w   #STATUSEFFECTS_MASK_STUN,d1
                 rts
 
     ; End of function WriteSkirmishScript_InflictStun
@@ -249,15 +249,15 @@ WriteSkirmishScript_InflictStun:
 WriteSkirmishScript_InflictMuddle:
                 
                 move.w  #$11,(a6)+
-                move.w  #$15A,(a6)+
+                move.w  #MESSAGE_BATTLE_BECOMES_CONFUSED,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
 loc_AF08:
                 
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
-                ori.w   #8,d1
-                ori.w   #$30,d1 
+                ori.w   #STATUSEFFECTS_MASK_MUDDLE2,d1
+                ori.w   #STATUSEFFECTS_MASK_MUDDLE1,d1
                 rts
 
     ; End of function WriteSkirmishScript_InflictMuddle
@@ -270,7 +270,7 @@ WriteSkirmishScript_InflictSlow:
                 movem.l d0-d1,-(sp)
                 bsr.w   WriteSkirmishScript_SlowMessage
                 movem.l (sp)+,d0-d1
-                ori.w   #$C00,d1
+                ori.w   #STATUSEFFECTS_MASK_SLOW,d1
                 rts
 
     ; End of function WriteSkirmishScript_InflictSlow
@@ -283,9 +283,9 @@ WriteSkirmishScript_DrainMP:
                 movem.l d0-d1,-(sp)
                 jsr     GetCurrentMP
                 tst.w   d1
-                beq.s   loc_AF3E
-                bsr.w   sub_B5D6
-loc_AF3E:
+                beq.s   @Skip           ; skip if target has no MP
+                bsr.w   SpellEffect_DrainMP
+@Skip:
                 
                 movem.l (sp)+,d0-d1
                 rts
@@ -301,15 +301,15 @@ WriteSkirmishScript_InflictSilence:
                 moveq   #0,d1
                 jsr     GetSpellAndNumberOfSpells
                 tst.w   d2
-                beq.s   loc_AF6C
+                beq.s   @Skip           ; skip if target has no spells
                 move.w  #$11,(a6)+
-                move.w  #$14F,(a6)+
+                move.w  #MESSAGE_BATTLE_HAS_BEEN_SILENCED,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
-                ori.w   #$300,d3
-loc_AF6C:
+                ori.w   #STATUSEFFECTS_MASK_SILENCE,d3
+@Skip:
                 
                 move.w  d3,d1
                 rts
@@ -319,20 +319,20 @@ loc_AF6C:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: D6 = damage
+
 WriteSkirmishScript_InflictCurseDamage:
                 
                 move.b  (a4),d0
-                btst    #7,d0
-                bne.w   return_B00C
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.w   @Return
                 jsr     GetStatus
-                btst    #2,d1
-                beq.w   return_B00C
-                moveq   #2,d0
-loc_AF8A:
-                
+                btst    #STATUSEFFECTS_BIT_CURSE,d1
+                beq.w   @Return
+                moveq   #CHANCE_TO_INFLICT_CURSE_DAMAGE,d0 ; 1/2 chance to inflict curse damage
                 jsr     (GetRandomOrDebugValue).w
                 tst.w   d0
-                beq.w   return_B00C
+                beq.w   @Return
                 exg     a4,a5
                 bsr.w   WriteSkirmishScript_SwitchTargets
                 exg     a4,a5
@@ -340,37 +340,35 @@ loc_AF8A:
                 move.b  (a4),d0
                 move.w  d6,d3
                 lsr.w   #3,d3
-                addq.w  #1,d3
+                addq.w  #1,d3           ; D3 = curse damage = (damage / 8) + 1
                 move.w  d3,d1
                 jsr     DecreaseCurrentHP
                 jsr     GetCurrentHP
                 tst.w   d1
-                bne.s   loc_AFC0
-loc_AFBA:
-                
-                move.b  #$FF,-4(a2)
-loc_AFC0:
+                bne.s   @TargetAlive
+                move.b  #$FF,-BCSTACK_OFFSET_TARGETDIES(a2)
+@TargetAlive:
                 
                 move.w  d3,d2
                 neg.w   d2
                 move.b  (a4),d0
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_AFE4
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  d2,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-                bra.s   loc_AFF4
-loc_AFE4:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  d2,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-loc_AFF4:
+@BattleMessage:
                 
                 move.w  #$12,(a6)+
                 move.w  #$10,(a6)+
@@ -379,7 +377,7 @@ loc_AFF4:
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d3,(a6)+
-return_B00C:
+@Return:
                 
                 rts
 
@@ -388,51 +386,54 @@ return_B00C:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: A4 = pointer to attacker index in RAM
+;     A5 = pointer to target index in RAM
+
 DetermineDoubleAndCounter:
                 
-                move.b  (a4),d0
+                move.b  (a4),d0         ; evaluate chance to double attack
 loc_B010:
                 
                 jsr     GetCurrentProwess
-                lsr.b   #4,d1
-                moveq   #$20,d0 
-                andi.w  #3,d1
-                beq.w   loc_B038
-                moveq   #$10,d0
+                lsr.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d1
+                moveq   #32,d0          ; 1/32 chance to double attack if setting value is 0
+                andi.w  #PROWESS_MASK_LOWER_COUNTER,d1
+                beq.w   @DetermineDouble
+                moveq   #16,d0          ; 1/16 if setting value is 1
                 cmpi.b  #1,d1
-                beq.w   loc_B038
-                moveq   #8,d0
+                beq.w   @DetermineDouble
+                moveq   #8,d0           ; 1/8 if setting value is 2
                 cmpi.b  #2,d1
-                beq.w   loc_B038
-                moveq   #4,d0
-loc_B038:
+                beq.w   @DetermineDouble
+                moveq   #4,d0           ; 1/4 otherwise
+@DetermineDouble:
                 
                 jsr     (GetRandomOrDebugValue).w
                 tst.w   d0
-                bne.s   loc_B046
+                bne.s   @EvaluateChanceToCounter
                 move.b  #$FF,-BCSTACK_OFFSET_DOUBLE(a2)
-loc_B046:
+@EvaluateChanceToCounter:
                 
-                move.b  (a5),d0
+                move.b  (a5),d0         ; evaluate chance to counter using same mechanism as above
                 jsr     GetCurrentProwess
-                lsr.b   #6,d1
-                moveq   #$20,d0 
+                lsr.b   #PROWESS_LOWER_COUNTER_SHIFTCOUNT,d1
+                moveq   #32,d0
                 andi.w  #3,d1
-                beq.w   loc_B070
-                moveq   #$10,d0
+                beq.w   @DetermineCounter
+                moveq   #16,d0
                 cmpi.b  #1,d1
-                beq.w   loc_B070
+                beq.w   @DetermineCounter
                 moveq   #8,d0
                 cmpi.b  #2,d1
-                beq.w   loc_B070
+                beq.w   @DetermineCounter
                 moveq   #4,d0
-loc_B070:
+@DetermineCounter:
                 
                 jsr     (GetRandomOrDebugValue).w
                 tst.w   d0
-                bne.s   return_B07E
+                bne.s   @Return
                 move.b  #$FF,-BCSTACK_OFFSET_COUNTER(a2)
-return_B07E:
+@Return:
                 
                 rts
 
@@ -444,14 +445,14 @@ return_B07E:
 WriteSkirmishScript_DeathMessage:
                 
                 move.b  (a5),d0
-                btst    #7,d0
-                bne.s   loc_B08E
-                move.w  #$123,d1
-                bra.s   loc_B092
-loc_B08E:
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @Enemy
+                move.w  #MESSAGE_BATTLE_IS_EXHAUSTED,d1
+                bra.s   @WriteBattleMessageCommand
+@Enemy:
                 
-                move.w  #$122,d1
-loc_B092:
+                move.w  #MESSAGE_BATTLE_WAS_DEFEATED,d1
+@WriteBattleMessageCommand:
                 
                 move.w  #$10,(a6)+
                 move.w  d1,(a6)+
@@ -468,97 +469,97 @@ loc_B092:
 
 ; In: A2 = battle scene stack
 ;     A3 = address in RAM of scene action type
-;     A4 = address in RAM of attacker idx
-;     A5 = address in RAM of target idx
+;     A4 = address in RAM of attacker index
+;     A5 = address in RAM of target index
 
-WriteSkirmishScript_UseSpell:
+WriteSkirmishScript_CastSpell:
                 
                 move.b  (a5),d0
                 move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d1
                 bsr.w   GetResistanceToSpell
                 add.w   d1,d1
-                move.w  rjt_ItemUsedEffects(pc,d1.w),d1
-                jmp     rjt_ItemUsedEffects(pc,d1.w)
+                move.w  rjt_SpellEffects(pc,d1.w),d1
+                jmp     rjt_SpellEffects(pc,d1.w)
 
-    ; End of function WriteSkirmishScript_UseSpell
+    ; End of function WriteSkirmishScript_CastSpell
 
-rjt_ItemUsedEffects:
-                dc.w sub_B114-rjt_ItemUsedEffects
-                dc.w sub_B114-rjt_ItemUsedEffects
-                dc.w sub_B194-rjt_ItemUsedEffects
-                dc.w sub_B27C-rjt_ItemUsedEffects
-                dc.w sub_B30E-rjt_ItemUsedEffects
-                dc.w sub_B3A8-rjt_ItemUsedEffects
-                dc.w sub_B41A-rjt_ItemUsedEffects
-                dc.w spell07_Muddle-rjt_ItemUsedEffects
-                dc.w sub_B516-rjt_ItemUsedEffects
-                dc.w sub_B57E-rjt_ItemUsedEffects
-                dc.w NoItemEffect-rjt_ItemUsedEffects
-                dc.w sub_BADC-rjt_ItemUsedEffects
-                dc.w sub_BAE2-rjt_ItemUsedEffects
-                dc.w sub_BAF4-rjt_ItemUsedEffects
-                dc.w sub_BAFA-rjt_ItemUsedEffects
-                dc.w sub_B5D6-rjt_ItemUsedEffects
-                dc.w sub_B114-rjt_ItemUsedEffects
-                dc.w sub_BAD6-rjt_ItemUsedEffects
-                dc.w sub_BAE2-rjt_ItemUsedEffects
-                dc.w sub_BB00-rjt_ItemUsedEffects
-                dc.w sub_B680-rjt_ItemUsedEffects
-                dc.w sub_B6E6-rjt_ItemUsedEffects
-                dc.w sub_B74C-rjt_ItemUsedEffects
-                dc.w sub_B7B2-rjt_ItemUsedEffects
-                dc.w sub_B826-rjt_ItemUsedEffects
-                dc.w NoItemEffect-rjt_ItemUsedEffects
-                dc.w NoItemEffect-rjt_ItemUsedEffects
-                dc.w sub_BADC-rjt_ItemUsedEffects
-                dc.w sub_BAF4-rjt_ItemUsedEffects
-                dc.w sub_BAFA-rjt_ItemUsedEffects
-                dc.w sub_BADC-rjt_ItemUsedEffects
-                dc.w sub_BAE8-rjt_ItemUsedEffects
-                dc.w sub_BAF4-rjt_ItemUsedEffects
-                dc.w sub_B194-rjt_ItemUsedEffects
-                dc.w sub_BA1C-rjt_ItemUsedEffects
-                dc.w sub_B886-rjt_ItemUsedEffects
-                dc.w sub_B8F8-rjt_ItemUsedEffects
-                dc.w sub_BADC-rjt_ItemUsedEffects
-                dc.w sub_BAE2-rjt_ItemUsedEffects
-                dc.w sub_BAF4-rjt_ItemUsedEffects
-                dc.w sub_BAEE-rjt_ItemUsedEffects
-                dc.w sub_BAD6-rjt_ItemUsedEffects
-                dc.w sub_BA1C-rjt_ItemUsedEffects
-                dc.w sub_BAF4-rjt_ItemUsedEffects
+rjt_SpellEffects:
+                dc.w SpellEffect_Heal-rjt_SpellEffects ; HEAL
+                dc.w SpellEffect_Heal-rjt_SpellEffects ; AURA
+                dc.w SpellEffect_Detox-rjt_SpellEffects ; DETOX
+                dc.w SpellEffect_Boost-rjt_SpellEffects ; BOOST
+                dc.w SpellEffect_Slow-rjt_SpellEffects ; SLOW
+                dc.w SpellEffect_Attack-rjt_SpellEffects ; ATTACK
+                dc.w SpellEffect_Dispel-rjt_SpellEffects ; DISPEL
+                dc.w SpellEffect_Muddle-rjt_SpellEffects ; MUDDLE
+                dc.w SpellEffect_Desoul-rjt_SpellEffects ; DESOUL
+                dc.w SpellEffect_Sleep-rjt_SpellEffects ; SLEEP
+                dc.w SpellEffect_None-rjt_SpellEffects ; EGRESS
+                dc.w SpellEffect_Blaze-rjt_SpellEffects ; BLAZE
+                dc.w SpellEffect_Freeze-rjt_SpellEffects ; FREEZE
+                dc.w SpellEffect_Bolt-rjt_SpellEffects ; BOLT
+                dc.w SpellEffect_Blast-rjt_SpellEffects ; BLAST
+                dc.w SpellEffect_DrainMP-rjt_SpellEffects ; SPOIT
+                dc.w SpellEffect_Heal-rjt_SpellEffects ; HEALIN
+                dc.w SpellEffect_FlameBreath-rjt_SpellEffects ; FLAME
+                dc.w SpellEffect_Freeze-rjt_SpellEffects ; SNOW
+                dc.w SpellEffect_DemonBreath-rjt_SpellEffects ; DEMON
+                dc.w SpellEffect_PowerWater-rjt_SpellEffects ; POWER
+                dc.w SpellEffect_ProtectMilk-rjt_SpellEffects ; GUARD
+                dc.w SpellEffect_QuickChicken-rjt_SpellEffects ; SPEED
+                dc.w SpellEffect_RunningPimento-rjt_SpellEffects ; IDATEN
+                dc.w SpellEffect_CheerfulBread-rjt_SpellEffects ; HEALTH
+                dc.w SpellEffect_None-rjt_SpellEffects ; B.ROCK
+                dc.w SpellEffect_None-rjt_SpellEffects ; LASER
+                dc.w SpellEffect_Blaze-rjt_SpellEffects ; KATON
+                dc.w SpellEffect_Bolt-rjt_SpellEffects ; RAIJIN
+                dc.w SpellEffect_Blast-rjt_SpellEffects ; DAO
+                dc.w SpellEffect_Blaze-rjt_SpellEffects ; APOLLO
+                dc.w SpellEffect_Neptun-rjt_SpellEffects ; NEPTUN
+                dc.w SpellEffect_Bolt-rjt_SpellEffects ; ATLAS
+                dc.w SpellEffect_Detox-rjt_SpellEffects ; POWDER
+                dc.w SpellEffect_FairyTear-rjt_SpellEffects ; G.TEAR
+                dc.w SpellEffect_BrightHoney-rjt_SpellEffects ; HANNY
+                dc.w SpellEffect_BraveApple-rjt_SpellEffects ; BRAVE
+                dc.w SpellEffect_Blaze-rjt_SpellEffects ; F.BALL
+                dc.w SpellEffect_Freeze-rjt_SpellEffects ; BREZAD
+                dc.w SpellEffect_Bolt-rjt_SpellEffects ; THUNDR
+                dc.w SpellEffect_BubbleBreath-rjt_SpellEffects ; AQUA
+                dc.w SpellEffect_FlameBreath-rjt_SpellEffects ; KIWI
+                dc.w SpellEffect_FairyTear-rjt_SpellEffects ; SHINE
+                dc.w SpellEffect_Bolt-rjt_SpellEffects ; ODDEYE
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B114:
+SpellEffect_Heal:
                 
                 move.b  (a5),d0
                 jsr     GetMaxHP
                 move.w  d1,d2
                 jsr     GetCurrentHP
-                sub.w   d1,d2
-                move.w  2(a3),d1
+                sub.w   d1,d2           ; D2 = target's missing HP
+                move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     GetSpellDefAddress
                 clr.w   d6
                 move.b  SPELLDEF_OFFSET_POWER(a0),d6
-                cmpi.b  #$FF,d6
-                bne.s   loc_B140
+                cmpi.b  #255,d6         ; full recovery if spell power is 255
+                bne.s   @AdjustSpellPower
                 move.w  d2,d6
-                bra.s   loc_B144
-loc_B140:
+                bra.s   @CapRecovery    
+@AdjustSpellPower:
                 
-                bsr.w   GetSpellPowerAdjustedForClass
-loc_B144:
+                bsr.w   AdjustSpellPower
+@CapRecovery:
                 
-                cmp.w   d6,d2
-                bcc.s   loc_B14A
+                cmp.w   d6,d2           ; cap recovery amount if missing HP is lower than spell power
+                bcc.s   @WriteScriptCommands
                 move.w  d2,d6
-loc_B14A:
+@WriteScriptCommands:
                 
                 move.b  (a5),d0
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_B16A
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
                 move.w  #$B,(a6)+
                 move.w  d6,(a6)+
                 dc.b $3C 
@@ -570,158 +571,163 @@ loc_B14A:
                 dc.b   2
                 dc.b $60 
                 dc.b $10
-loc_B16A:
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  d6,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
+@BattleMessage:
+                
                 move.w  #$10,(a6)+
-                move.w  #$12A,(a6)+
+                move.w  #MESSAGE_BATTLE_RECOVERED_HIT_POINTS,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d6,(a6)+
-                bsr.w   sub_A872
+                bsr.w   CalculateHealingEXP
                 rts
 
-    ; End of function sub_B114
+    ; End of function SpellEffect_Heal
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B194:
+SpellEffect_Detox:
                 
                 move.b  (a5),d0
                 jsr     GetStatus
                 clr.b   d2
                 tst.w   ((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
-                cmpi.w  #0,((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
-                beq.w   loc_B1CA
+                cmpi.w  #0,((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w 
+                                                        ; useless compare instruction
+                beq.w   @CurePoison     ; if spell level 1, cure poison
+                                        ; else if spell level 2, cure poison and stun 
+                                        ; otherwise, cure poison, stun, and curse
                 cmpi.w  #1,((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
-                beq.w   loc_B1C0
-                bclr    #2,d1
-                beq.s   loc_B1C0
-                ori.b   #4,d2
-loc_B1C0:
+                beq.w   @CureStun
+                bclr    #STATUSEFFECTS_BIT_CURSE,d1
+                beq.s   @CureStun
+                ori.b   #4,d2           ; D2 = bit 2 set if curse was cured
+@CureStun:
                 
-                bclr    #0,d1
-                beq.s   loc_B1CA
-                ori.b   #2,d2
-loc_B1CA:
+                bclr    #STATUSEFFECTS_BIT_STUN,d1
+                beq.s   @CurePoison
+                ori.b   #2,d2           ; D2 = bit 1 set if stun was cured
+@CurePoison:
                 
-                bclr    #1,d1
-                beq.s   loc_B1D4
-                ori.b   #1,d2
-loc_B1D4:
+                bclr    #STATUSEFFECTS_BIT_POISON,d1
+                beq.s   @CheckIfAnyStatusCured
+                ori.b   #1,d2           ; D2 = bit 0 set if poison was cured
+@CheckIfAnyStatusCured:
                 
                 tst.b   d2
 loc_B1D6:
                 
-                beq.w   loc_B266
-                btst    #7,d0
-                bne.s   loc_B1F4
-                move.w  #$B,(a6)+
+                beq.w   @Ineffective
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @WriteEnemyReactionCommand
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_B206
-loc_B1F4:
+                bra.s   @CheckIfPoisonCured
+@WriteEnemyReactionCommand:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_B206:
+@CheckIfPoisonCured:
                 
-                bsr.w   GiveMagicDrainEXP
+                bsr.w   GiveStatusEffectSpellsEXP
                 btst    #0,d2
-                beq.s   loc_B226
+                beq.s   @CheckIfStunCured
                 move.w  #$10,(a6)+
-                move.w  #$12D,(a6)+
+                move.w  #MESSAGE_BATTLE_IS_NO_LONGER_POISONED,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
-loc_B226:
+@CheckIfStunCured:
                 
                 btst    #1,d2
-                beq.s   loc_B242
+                beq.s   @CheckIfCurseCured
                 move.w  #$10,(a6)+
-                move.w  #$12E,(a6)+
+                move.w  #MESSAGE_BATTLE_IS_NO_LONGER_STUNNED,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
-loc_B242:
+@CheckIfCurseCured:
                 
                 btst    #2,d2
-                beq.s   loc_B264
+                beq.s   @Skip
                 move.w  #$10,(a6)+
-                move.w  #$12F,(a6)+
+                move.w  #MESSAGE_BATTLE_IS_NO_LONGER_CURSED,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 jsr     UnequipAllItemsIfNotCursed
-loc_B264:
+@Skip:
                 
-                bra.s   loc_B26C
-loc_B266:
+                bra.s   @UpdateStatusEffects
+@Ineffective:
                 
                 moveq   #8,d2
                 bsr.w   ApplyRandomEffectiveness
-loc_B26C:
+@UpdateStatusEffects:
                 
                 move.b  (a5),d0
                 jsr     SetStatus
-                jsr     ApplyStatusAndItemsOnStats
+                jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
-    ; End of function sub_B194
+    ; End of function SpellEffect_Detox
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B27C:
+SpellEffect_Boost:
                 
                 move.b  (a5),d0
                 jsr     GetStatus
                 move.w  d1,d3
-                ori.w   #$3000,d1
+                ori.w   #STATUSEFFECTS_MASK_BOOST,d1
                 jsr     SetStatus
-                andi.w  #$3000,d3
-                beq.s   loc_B29C
+                andi.w  #STATUSEFFECTS_MASK_BOOST,d3
+                beq.s   @WriteScriptCommands
                 moveq   #8,d2
                 bsr.w   ApplyRandomEffectiveness
-loc_B29C:
+@WriteScriptCommands:
                 
-                btst    #7,d0
-                bne.s   loc_B2B6
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_B2C8
-loc_B2B6:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_B2C8:
+@BattleMessage:
                 
-                bsr.w   GiveMagicDrainEXP
+                bsr.w   GiveStatusEffectSpellsEXP
                 jsr     GetBaseAGI
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 move.w  #$10,(a6)+
-                move.w  #$14C,(a6)+
+                move.w  #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
@@ -730,56 +736,56 @@ loc_B2C8:
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 move.w  #$10,(a6)+
-                move.w  #$155,(a6)+
+                move.w  #MESSAGE_BATTLE_BOOST_SPELL_DEF_INCREASE,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 rts
 
-    ; End of function sub_B27C
+    ; End of function SpellEffect_Boost
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B30E:
+SpellEffect_Slow:
                 
                 tst.w   d2
-                beq.s   loc_B314
-                addq.w  #5,d2
-loc_B314:
+                beq.s   @Skip
+                addq.w  #CHANCE_TO_INFLICT_SLOW,d2 ; 3/8 base chance to inflict slow
+@Skip:
                 
                 bsr.w   ApplyRandomEffectiveness
                 jsr     GetStatus
                 move.w  d1,d3
-                ori.w   #$C00,d1
+                ori.w   #STATUSEFFECTS_MASK_SLOW,d1
                 jsr     SetStatus
-                andi.w  #$C00,d3
-                beq.s   loc_B336
+                andi.w  #STATUSEFFECTS_MASK_SLOW,d3
+                beq.s   @WriteScriptCommands
                 moveq   #8,d2
                 bsr.w   ApplyRandomEffectiveness
-loc_B336:
+@WriteScriptCommands:
                 
-                btst    #7,d0
-                bne.s   loc_B350
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-                bra.s   loc_B362
-loc_B350:
+                bra.s   @GiveEXP
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-loc_B362:
+@GiveEXP:
                 
-                bsr.w   GiveMagicDrainEXP
+                bsr.w   GiveStatusEffectSpellsEXP
 
-    ; End of function sub_B30E
+    ; End of function SpellEffect_Slow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -790,7 +796,7 @@ WriteSkirmishScript_SlowMessage:
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 move.w  #$10,(a6)+
-                move.w  #$14D,(a6)+
+                move.w  #MESSAGE_BATTLE_AGILITY_DECREASED_BY,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
@@ -799,7 +805,7 @@ WriteSkirmishScript_SlowMessage:
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 move.w  #$10,(a6)+
-                move.w  #$156,(a6)+
+                move.w  #MESSAGE_BATTLE_DEFENSE_DECREASED_BY,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
@@ -811,152 +817,150 @@ WriteSkirmishScript_SlowMessage:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B3A8:
+SpellEffect_Attack:
                 
                 move.b  (a5),d0
                 jsr     GetStatus
                 move.w  d1,d3
-                ori.w   #$C000,d1
+                ori.w   #STATUSEFFECTS_MASK_ATTACK,d1
                 jsr     SetStatus
-                andi.w  #$C000,d3
-                beq.s   loc_B3C8
+                andi.w  #STATUSEFFECTS_MASK_ATTACK,d3
+                beq.s   @WriteScriptCommands
                 moveq   #8,d2
                 bsr.w   ApplyRandomEffectiveness
-loc_B3C8:
+@WriteScriptCommands:
                 
-                btst    #7,d0
-                bne.s   loc_B3E2
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_B3F4
-loc_B3E2:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_B3F4:
+@BattleMessage:
                 
-                bsr.w   GiveMagicDrainEXP
-                jsr     GetBaseATK
+                bsr.w   GiveStatusEffectSpellsEXP
+                jsr     GetBaseATT
                 mulu.w  #3,d1
                 lsr.l   #3,d1
 loc_B404:
                 
                 move.w  #$10,(a6)+
-                move.w  #$14E,(a6)+
+                move.w  #MESSAGE_BATTLE_ATTACK_SPELL_EFFECT,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 rts
 
-    ; End of function sub_B3A8
+    ; End of function SpellEffect_Attack
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B41A:
+SpellEffect_Dispel:
                 
                 move.w  d2,d3
                 move.b  (a5),d0
                 moveq   #0,d1
                 jsr     GetSpellAndNumberOfSpells
                 tst.w   d2
-                bne.s   loc_B42E
+                bne.s   @TargetHasSpells
                 moveq   #8,d3
-                bra.s   loc_B430
-loc_B42E:
+                bra.s   @DetermineSuccess
+@TargetHasSpells:
                 
-                addq.w  #5,d3
-loc_B430:
+                addq.w  #CHANCE_TO_INFLICT_SILENCE,d3 ; if target has spells, 3/8 base chance to inflict silence
+@DetermineSuccess:
                 
                 move.w  d3,d2
                 bsr.w   ApplyRandomEffectiveness
                 jsr     GetStatus
-                ori.w   #$300,d1
-                btst    #7,d0
-                bne.s   loc_B45A
-                move.w  #$B,(a6)+
+                ori.w   #STATUSEFFECTS_MASK_SILENCE,d1
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-                bra.s   loc_B46C
-loc_B45A:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-loc_B46C:
+@BattleMessage:
                 
-                bsr.w   GiveMagicDrainEXP
+                bsr.w   GiveStatusEffectSpellsEXP
                 move.w  #$10,(a6)+
-                move.w  #$14F,(a6)+
+                move.w  #MESSAGE_BATTLE_HAS_BEEN_SILENCED,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 rts
 
-    ; End of function sub_B41A
+    ; End of function SpellEffect_Dispel
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; muddle
-
-spell07_Muddle:
+SpellEffect_Muddle:
                 
                 move.b  (a5),d0
                 tst.w   ((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
-                beq.w   loc_B4AE        
-                addq.w  #5,d2           ; muddle 2, 25% chance
+                beq.w   @Muddle1        
+                addq.w  #CHANCE_TO_INFLICT_MUDDLE2,d2 ; 3/8 base chance to inflict muddle 2
                 bsr.w   ApplyRandomEffectiveness
                 jsr     GetStatus
-                ori.w   #COM_STATUS_MASK_MUDDLE2,d1
-                ori.w   #COM_STATUS_MASK_MUDDLE,d1
-                move.w  #$151,d2
-                bra.w   loc_B4D0
-loc_B4AE:
+                ori.w   #STATUSEFFECTS_MASK_MUDDLE2,d1
+                ori.w   #STATUSEFFECTS_MASK_MUDDLE1,d1
+                move.w  #MESSAGE_BATTLE_IS_IN_A_DEEP_HAZE,d2
+                bra.w   @WriteScriptCommands
+@Muddle1:
                 
                 moveq   #8,d2           ; muddle 1
                 jsr     GetStatus
-                andi.w  #COM_STATUS_MASK_MUDDLE2,d1
-                bne.s   loc_B4BE        ; if target already affected by Muddle 2, then no chance for Muddle 1 to work.
-                moveq   #5,d2           ; 25% chance
-loc_B4BE:
+                andi.w  #STATUSEFFECTS_MASK_MUDDLE2,d1
+                bne.s   @DetermineSuccess ; if target already affected by Muddle 2, then no chance for Muddle 1 to work
+                moveq   #CHANCE_TO_INFLICT_MUDDLE1,d2 ; otherwise, 3/8 base chance to inflict muddle 1
+@DetermineSuccess:
                 
                 bsr.w   ApplyRandomEffectiveness
                 jsr     GetStatus
-                ori.w   #COM_STATUS_MASK_MUDDLE,d1
-                move.w  #$151,d2
-loc_B4D0:
+                ori.w   #STATUSEFFECTS_MASK_MUDDLE1,d1
+                move.w  #MESSAGE_BATTLE_IS_IN_A_DEEP_HAZE,d2
+@WriteScriptCommands:
                 
-                btst    #7,d0
-                bne.s   loc_B4EA
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-                bra.s   loc_B4FC
-loc_B4EA:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-loc_B4FC:
+@BattleMessage:
                 
-                bsr.w   GiveMagicDrainEXP
+                bsr.w   GiveStatusEffectSpellsEXP
                 move.w  #$10,(a6)+
                 move.w  d2,(a6)+
                 move.w  d0,(a6)+
@@ -965,42 +969,42 @@ loc_B4FC:
                 move.w  #0,(a6)+
                 rts
 
-    ; End of function spell07_Muddle
+    ; End of function SpellEffect_Muddle
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B516:
+SpellEffect_Desoul:
                 
-                addq.w  #5,d2
+                addq.w  #CHANCE_TO_INFLICT_DESOUL,d2 ; 3/8 base chance to inflict desoul
                 bsr.w   ApplyRandomEffectiveness
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_B53C
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #$8000,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-                bra.s   loc_B54E
-loc_B53C:
+                bra.s   @DetermineBattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #$8000,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-loc_B54E:
+@DetermineBattleMessage:
                 
                 bsr.w   GiveEXPandGoldForKill
-                btst    #7,d0
-                bne.s   loc_B55E
-                move.w  #$130,d2
-                bra.s   loc_B562
-loc_B55E:
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyMessage
+                move.w  #MESSAGE_BATTLE_SOUL_WAS_STOLEN_ALLY,d2 ; ally message
+                bra.s   @BattleMessage
+@EnemyMessage:
                 
-                move.w  #$131,d2
-loc_B562:
+                move.w  #MESSAGE_BATTLE_SOUL_WAS_STOLEN_ENEMY,d2
+@BattleMessage:
                 
                 move.w  #$10,(a6)+
                 move.w  d2,(a6)+
@@ -1011,114 +1015,112 @@ loc_B562:
                 move.b  #$FF,-4(a2)
                 rts
 
-    ; End of function sub_B516
+    ; End of function SpellEffect_Desoul
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B57E:
+SpellEffect_Sleep:
                 
-                addq.w  #5,d2
+                addq.w  #CHANCE_TO_INFLICT_SLEEP,d2 ; 3/8 base chance to inflict sleep
                 bsr.w   ApplyRandomEffectiveness
                 jsr     GetStatus
-                ori.w   #$C0,d1 
-                btst    #7,d0
-                bne.s   loc_B5A8
-                move.w  #$B,(a6)+
+                ori.w   #STATUSEFFECTS_MASK_SLEEP,d1
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-                bra.s   loc_B5BA
-loc_B5A8:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-loc_B5BA:
+@BattleMessage:
                 
-                bsr.w   GiveMagicDrainEXP
+                bsr.w   GiveStatusEffectSpellsEXP
                 move.w  #$10,(a6)+
-                move.w  #$152,(a6)+
+                move.w  #MESSAGE_BATTLE_FELL_ASLEEP,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 rts
 
-    ; End of function sub_B57E
+    ; End of function SpellEffect_Sleep
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B5D6:
+SpellEffect_DrainMP:
                 
                 move.b  (a5),d0
                 jsr     GetCurrentMP
                 moveq   #3,d0
                 jsr     (GetRandomOrDebugValue).w
                 addq.w  #3,d0
-                cmp.b   d0,d1
-                bcc.s   loc_B5EC
+                cmp.b   d0,d1           ; if random value > target's current MP, cap it
+                bcc.s   @WriteTargetReactionCommand
                 move.w  d1,d0
-loc_B5EC:
+@WriteTargetReactionCommand:
                 
                 move.w  d0,d2
                 move.w  d0,d3
                 neg.w   d3
                 move.b  (a5),d0
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_B612
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyTargetReaction
+                move.w  #$B,(a6)+       ; write ally target reaction command
                 move.w  #0,(a6)+
                 move.w  d3,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-                bra.s   loc_B622
-loc_B612:
+                bra.s   @WriteCasterReactionCommand
+@EnemyTargetReaction:
                 
                 move.w  #$A,(a6)+
-loc_B616:
-                
                 move.w  #0,(a6)+
                 move.w  d3,(a6)+
                 move.w  d1,(a6)+
                 move.w  #1,(a6)+
-loc_B622:
+@WriteCasterReactionCommand:
                 
                 move.b  (a4),d0
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_B642
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyCasterReaction
+                move.w  #$B,(a6)+       ; write ally caster reaction command
                 move.w  #0,(a6)+
                 move.w  d2,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_B652
-loc_B642:
+                bra.s   @DetermineBattleMessage
+@EnemyCasterReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  d2,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_B652:
+@DetermineBattleMessage:
                 
-                bsr.w   GiveMagicDrainEXP
+                bsr.w   GiveStatusEffectSpellsEXP
                 move.w  #$12,(a6)+
-                btst    #7,d0
-                bne.s   loc_B666
-                move.w  #$13D,d1
-                bra.s   loc_B66C
-loc_B666:
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyMessage
+                move.w  #MESSAGE_BATTLE_ABSORBED_MAGIC_POINTS,d1 ; ally message
+                bra.s   @BattleMessage
+@EnemyMessage:
                 
                 move.b  (a5),d0
-                move.w  #$13A,d1
-loc_B66C:
+                move.w  #MESSAGE_BATTLE_MP_WAS_DRAINED_BY,d1
+@BattleMessage:
                 
                 move.w  #$10,(a6)+
                 move.w  d1,(a6)+
@@ -1128,39 +1130,37 @@ loc_B66C:
                 move.w  d2,(a6)+
                 rts
 
-    ; End of function sub_B5D6
+    ; End of function SpellEffect_DrainMP
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B680:
+SpellEffect_PowerWater:
                 
                 move.b  (a5),d0
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_B6A2
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_B6B4
-loc_B6A2:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
-loc_B6A6:
-                
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_B6B4:
+@BattleMessage:
                 
                 moveq   #3,d0
                 jsr     (GetRandomOrDebugValue).w
                 addq.w  #2,d0
                 move.w  #$10,(a6)+
-                move.w  #$96,(a6)+ 
+                move.w  #MESSAGE_BATTLE_ATTACK_POWER_IS_BOOSTED_BY,(a6)+
                 move.b  #0,(a6)+
                 move.b  (a5),(a6)+
                 move.w  #0,(a6)+
@@ -1168,43 +1168,43 @@ loc_B6B4:
                 move.w  d0,(a6)+
                 move.w  d0,d1
                 move.b  (a5),d0
-                jsr     IncreaseBaseATK
-                jsr     ApplyStatusAndItemsOnStats
+                jsr     IncreaseBaseATT
+                jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
-    ; End of function sub_B680
+    ; End of function SpellEffect_PowerWater
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B6E6:
+SpellEffect_ProtectMilk:
                 
                 move.b  (a5),d0
 loc_B6E8:
                 
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_B708
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_B71A
-loc_B708:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_B71A:
+@BattleMessage:
                 
                 moveq   #3,d0
                 jsr     (GetRandomOrDebugValue).w
                 addq.w  #2,d0
                 move.w  #$10,(a6)+
-                move.w  #$97,(a6)+ 
+                move.w  #MESSAGE_BATTLE_DEFENSIVE_POWER_IS_BOOSTED_BY,(a6)+
                 move.b  #0,(a6)+
                 move.b  (a5),(a6)+
                 move.w  #0,(a6)+
@@ -1213,40 +1213,40 @@ loc_B71A:
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseBaseDEF
-                jsr     ApplyStatusAndItemsOnStats
+                jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
-    ; End of function sub_B6E6
+    ; End of function SpellEffect_ProtectMilk
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B74C:
+SpellEffect_QuickChicken:
                 
                 move.b  (a5),d0
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_B76E
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_B780
-loc_B76E:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_B780:
+@BattleMessage:
                 
                 moveq   #3,d0
                 jsr     (GetRandomOrDebugValue).w
                 addq.w  #2,d0
                 move.w  #$10,(a6)+
-                move.w  #$98,(a6)+ 
+                move.w  #MESSAGE_BATTLE_AGILITY_IS_BOOSTED_BY,(a6)+
                 move.b  #0,(a6)+
                 move.b  (a5),(a6)+
                 move.w  #0,(a6)+
@@ -1255,87 +1255,87 @@ loc_B780:
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseBaseAGI
-                jsr     ApplyStatusAndItemsOnStats
+                jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
-    ; End of function sub_B74C
+    ; End of function SpellEffect_QuickChicken
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B7B2:
+SpellEffect_RunningPimento:
                 
                 move.b  (a5),d0
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_B7D4
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_B7E6
-loc_B7D4:
+                bra.s   @DetermineIncreaseValue
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_B7E6:
+@DetermineIncreaseValue:
                 
                 jsr     GetBaseMOV
                 clr.w   d2
                 cmpi.b  #9,d1
-                beq.w   loc_B802
+                beq.w   @BattleMessage
                 moveq   #1,d2
                 cmpi.b  #8,d1
-                beq.w   loc_B802
+                beq.w   @BattleMessage
                 moveq   #2,d2
-loc_B802:
+@BattleMessage:
                 
                 move.w  #$10,(a6)+
-                move.w  #$99,(a6)+ 
+                move.w  #MESSAGE_BATTLE_MOVEMENT_RANGE_IS_ENLARGED_BY,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d2,(a6)+
                 move.w  d2,d1
                 jsr     IncreaseBaseMOV
-                jsr     ApplyStatusAndItemsOnStats
+                jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
-    ; End of function sub_B7B2
+    ; End of function SpellEffect_RunningPimento
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B826:
+SpellEffect_CheerfulBread:
                 
                 move.b  (a5),d0
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_B848
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_B85A
-loc_B848:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_B85A:
+@BattleMessage:
                 
                 moveq   #3,d0
                 jsr     (GetRandomOrDebugValue).w
                 addq.w  #2,d0
                 move.w  #$10,(a6)+
-                move.w  #$9A,(a6)+ 
+                move.w  #MESSAGE_BATTLE_MAX_HP_ARE_RAISED_BY,(a6)+
                 move.b  #0,(a6)+
                 move.b  (a5),(a6)+
                 move.w  #0,(a6)+
@@ -1346,47 +1346,47 @@ loc_B85A:
                 jsr     IncreaseMaxHP
                 rts
 
-    ; End of function sub_B826
+    ; End of function SpellEffect_CheerfulBread
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B886:
+SpellEffect_BrightHoney:
                 
                 move.b  (a5),d0
 loc_B888:
                 
                 jsr     GetMaxMP
                 tst.w   d1
-                bne.s   loc_B898
+                bne.s   @TargetHasMP
                 moveq   #8,d2
                 bsr.w   ApplyRandomEffectiveness
-loc_B898:
+@TargetHasMP:
                 
                 move.b  (a5),d0
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_B8BA
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_B8CC
-loc_B8BA:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_B8CC:
+@BattleMessage:
                 
                 moveq   #3,d0
                 jsr     (GetRandomOrDebugValue).w
                 addq.w  #2,d0
                 move.w  #$10,(a6)+
-                move.w  #$9B,(a6)+ 
+                move.w  #MESSAGE_BATTLE_MAX_MP_ARE_RAISED_BY,(a6)+
                 move.b  #0,(a6)+
                 move.b  (a5),(a6)+
                 move.w  #0,(a6)+
@@ -1397,192 +1397,192 @@ loc_B8CC:
                 jsr     IncreaseMaxMP
                 rts
 
-    ; End of function sub_B886
+    ; End of function SpellEffect_BrightHoney
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B8F8:
+SpellEffect_BraveApple:
                 
                 move.b  (a5),d0
                 moveq   #0,d1
                 jsr     SetCurrentEXP
                 jsr     LevelUp
                 lea     ((byte_FFAF82-$1000000)).w,a1
-                cmpi.b  #$FF,(a1)
-                bne.s   loc_B918
+                cmpi.b  #$FF,(a1)       ; check if target is able to level up
+                bne.s   @AbleToLevelUp
                 moveq   #8,d2
                 bsr.w   ApplyRandomEffectiveness
-loc_B918:
+@AbleToLevelUp:
                 
                 move.b  (a5),d0
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_B93A
-                move.w  #$B,(a6)+
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
+                move.w  #$B,(a6)+       ; write ally reaction command
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_B94C
-loc_B93A:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_B94C:
+@BattleMessage:
                 
                 clr.l   d1
                 move.b  (a1)+,d1
                 move.w  #$10,(a6)+
-                move.w  #$F4,(a6)+ 
+                move.w  #MESSAGE_BATTLE_BECAME_LEVEL,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
-                move.b  (a1)+,d1
-                beq.s   loc_B97C
+                move.b  (a1)+,d1        ; evaluate stat gain : HP
+                beq.s   @EvaluateStatGain_MP
                 move.w  #$10,(a6)+
-                move.w  #$10A,(a6)+
+                move.w  #MESSAGE_BATTLE_HP_INCREASED_BY,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
-loc_B97C:
+@EvaluateStatGain_MP:
                 
                 move.b  (a1)+,d1
-                beq.s   loc_B994
+                beq.s   @EvaluateStatGain_ATT
                 move.w  #$10,(a6)+
-                move.w  #$10B,(a6)+
+                move.w  #MESSAGE_BATTLE_MP_INCREASED_BY,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
-loc_B994:
+@EvaluateStatGain_ATT:
                 
                 move.b  (a1)+,d1
-                beq.s   loc_B9AC
+                beq.s   @EvaluateStatGain_DEF
                 move.w  #$10,(a6)+
-                move.w  #$10C,(a6)+
+                move.w  #MESSAGE_BATTLE_ATTACK_INCREASED_BY,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
-loc_B9AC:
+@EvaluateStatGain_DEF:
                 
                 move.b  (a1)+,d1
-                beq.s   loc_B9C4
+                beq.s   @EvaluateStatGain_AGI
                 move.w  #$10,(a6)+
-                move.w  #$10D,(a6)+
+                move.w  #MESSAGE_BATTLE_DEFENSE_INCREASED_BY,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
-loc_B9C4:
+@EvaluateStatGain_AGI:
                 
                 move.b  (a1)+,d1
-                beq.s   loc_B9DC
+                beq.s   @EvaluateLearnedSpell
                 move.w  #$10,(a6)+
-                move.w  #$10E,(a6)+
+                move.w  #MESSAGE_BATTLE_AGILITY_INCREASED_BY,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
-loc_B9DC:
+@EvaluateLearnedSpell:
                 
                 move.b  (a1)+,d1
                 cmpi.b  #$FF,d1
-                beq.s   return_BA1A
+                beq.s   @Return
                 move.w  d1,d2
                 andi.w  #$3F,d2 
                 lsr.w   #6,d1
-                bne.s   loc_BA04
+                bne.s   @SpellLevelIncreasedMessage
                 move.w  #$10,(a6)+
-                move.w  #$10F,(a6)+
+                move.w  #MESSAGE_BATTLE_LEARNED_THE_NEW_MAGIC_SPELL,(a6)+
                 move.w  d0,(a6)+
                 move.w  d2,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
-                bra.s   return_BA1A
-loc_BA04:
+                bra.s   @Return
+@SpellLevelIncreasedMessage:
                 
                 addq.w  #1,d1
                 move.w  #$10,(a6)+
-                move.w  #$110,(a6)+
+                move.w  #MESSAGE_BATTLE_SPELL_INCREASED_TO_LEVEL,(a6)+
                 move.w  d2,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d1,(a6)+
-return_BA1A:
+@Return:
                 
                 rts
 
-    ; End of function sub_B8F8
+    ; End of function SpellEffect_BraveApple
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BA1C:
+SpellEffect_FairyTear:
                 
                 move.b  (a5),d0
                 jsr     GetMaxMP
                 move.w  d1,d2
                 jsr     GetCurrentMP
                 sub.w   d1,d2
-                move.w  2(a3),d1
+                move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     GetSpellDefAddress
                 clr.w   d6
-                move.b  7(a0),d6
-                cmpi.b  #$FF,d6
-                bne.s   loc_BA46
+                move.b  SPELLDEF_OFFSET_POWER(a0),d6
+                cmpi.b  #255,d6         ; full recovery if spell power is 255
+                bne.s   @CapRecovery    
                 move.w  d2,d6
-loc_BA46:
+@CapRecovery:
                 
-                cmp.w   d6,d2
-                bcc.s   loc_BA4C
+                cmp.w   d6,d2           ; cap recovery amount if missing MP is lower than spell power
+                bcc.s   @WriteScriptCommands
                 move.w  d2,d6
-loc_BA4C:
+@WriteScriptCommands:
                 
                 move.b  (a5),d0
                 jsr     GetStatus
-                btst    #7,d0
-                bne.s   loc_BA6C
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @EnemyReaction
                 move.w  #$B,(a6)+
                 move.w  #0,(a6)+
                 move.w  d6,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-                bra.s   loc_BA7C
-loc_BA6C:
+                bra.s   @BattleMessage
+@EnemyReaction:
                 
                 move.w  #$A,(a6)+
                 move.w  #0,(a6)+
                 move.w  d6,(a6)+
                 move.w  d1,(a6)+
                 move.w  #2,(a6)+
-loc_BA7C:
+@BattleMessage:
                 
                 move.w  #$10,(a6)+
-                move.w  #$12C,(a6)+
+                move.w  #MESSAGE_BATTLE_RECOVERED_MAGIC_POINTS,(a6)+
                 move.w  d0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  d6,(a6)+
-                bsr.w   sub_A872
+                bsr.w   CalculateHealingEXP
                 rts
 
-    ; End of function sub_BA1C
+    ; End of function SpellEffect_FairyTear
 
 
 ; =============== S U B R O U T I N E =======================================
 
-NoItemEffect:
+SpellEffect_None:
                 
                 rts
 
-    ; End of function NoItemEffect
+    ; End of function SpellEffect_None
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1590,27 +1590,27 @@ NoItemEffect:
 ApplyRandomEffectiveness:
                 
                 move.l  d0,-(sp)
-                tst.b   -$17(a2)
-                beq.s   loc_BAA2
+                tst.b   -BCSTACK_OFFSET_DEBUGDODGE(a2)
+                beq.s   @DetermineSuccess
                 moveq   #8,d2
-loc_BAA2:
+@DetermineSuccess:
                 
                 moveq   #8,d0
                 jsr     (GetRandomOrDebugValue).w
                 cmp.w   d2,d0
-                bcc.s   loc_BAD2
-                move.w  #$10,(a6)+
-                move.w  #$127,(a6)+
+                bcc.s   @Success
+                move.w  #$10,(a6)+      ; write battle message command : ineffective spell
+                move.w  #MESSAGE_BATTLE_THE_SPELL_HAS_NO_EFFECT,(a6)+
                 move.b  #0,(a6)+
                 move.b  (a5),(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
                 move.w  #0,(a6)+
-                move.b  #$FF,-5(a2)
+                move.b  #$FF,-BCSTACK_OFFSET_DODGE(a2)
                 move.l  (sp)+,d0
                 move.l  (sp)+,d0
                 rts
-loc_BAD2:
+@Success:
                 
                 move.l  (sp)+,d0
                 rts
@@ -1620,171 +1620,178 @@ loc_BAD2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BAD6:
+SpellEffect_FlameBreath:
                 
-                moveq   #$10,d3
-                bra.w   loc_BB02
+                moveq   #CHANCE_TO_CRITICAL_FLAME_BREATH,d3 ; 1/16 chance to critical hit
+                bra.w   CalculateDamage_Spell
 
-    ; End of function sub_BAD6
+    ; End of function SpellEffect_FlameBreath
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BADC:
+SpellEffect_Blaze:
                 
-                moveq   #$20,d3 
-                bra.w   loc_BB02
+                moveq   #CHANCE_TO_CRITICAL_BLAZE,d3 ; 1/32 chance to critical hit
+                bra.w   CalculateDamage_Spell
 
-    ; End of function sub_BADC
+    ; End of function SpellEffect_Blaze
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BAE2:
+SpellEffect_Freeze:
                 
-                moveq   #$20,d3 
-                bra.w   loc_BB02
+                moveq   #CHANCE_TO_CRITICAL_FREEZE,d3 ; 1/32 chance to critical hit
+                bra.w   CalculateDamage_Spell
 
-    ; End of function sub_BAE2
+    ; End of function SpellEffect_Freeze
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BAE8:
+SpellEffect_Neptun:
                 
-                moveq   #$10,d3
-                bra.w   loc_BB02
+                moveq   #CHANCE_TO_CRITICAL_NEPTUN,d3 ; 1/16 chance to critical hit
+                bra.w   CalculateDamage_Spell
 
-    ; End of function sub_BAE8
+    ; End of function SpellEffect_Neptun
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BAEE:
+SpellEffect_BubbleBreath:
                 
-                moveq   #8,d3
-                bra.w   loc_BB02
+                moveq   #CHANCE_TO_CRITICAL_BUBBLE_BREATH,d3 ; 1/8 chance to critical hit
+                bra.w   CalculateDamage_Spell
 
-    ; End of function sub_BAEE
+    ; End of function SpellEffect_BubbleBreath
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BAF4:
+SpellEffect_Bolt:
                 
-                moveq   #8,d3
-                bra.w   loc_BB02
+                moveq   #CHANCE_TO_CRITICAL_BOLT,d3 ; 1/8 chance to critical hit
+                bra.w   CalculateDamage_Spell
 
-    ; End of function sub_BAF4
+    ; End of function SpellEffect_Bolt
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BAFA:
+SpellEffect_Blast:
                 
-                moveq   #$20,d3 
-                bra.w   loc_BB02
+                moveq   #CHANCE_TO_CRITICAL_BLAST,d3 ; 1/32 chance to critical hit
+                bra.w   CalculateDamage_Spell
 
-    ; End of function sub_BAFA
+    ; End of function SpellEffect_Blast
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BB00:
+SpellEffect_DemonBreath:
                 
-                moveq   #0,d3
+                moveq   #CHANCE_TO_CRITICAL_DEMON_BREATH,d3 ; no chance to critical hit
 
-    ; End of function sub_BB00
+    ; End of function SpellEffect_DemonBreath
 
 
-; START OF FUNCTION CHUNK FOR sub_BAD6
+; =============== S U B R O U T I N E =======================================
 
-loc_BB02:
+; In: D2 = resistance setting (0=none, 1=minor, 2=major, 3=weakness)
+;     D3 = chance to critical hit
+
+CalculateDamage_Spell:
                 
-                move.w  2(a3),d1
+                move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     GetSpellDefAddress
                 clr.w   d6
-                move.b  7(a0),d6
-                bsr.w   GetSpellPowerAdjustedForClass
+                move.b  SPELLDEF_OFFSET_POWER(a0),d6
+                bsr.w   AdjustSpellPower
                 move.w  d6,d1
-                lsr.w   #2,d1
-                cmpi.b  #1,d2
-                bne.s   loc_BB22
-                sub.w   d1,d6
-loc_BB22:
+                lsr.w   #2,d1           ; D1 = spell power divided by 4
+                cmpi.b  #RESISTANCESETTING_MINOR,d2
+                bne.s   @CheckMajorResistance
+                sub.w   d1,d6           ; -25% damage if target has minor resistance
+@CheckMajorResistance:
                 
-                cmpi.b  #2,d2
-                bne.s   loc_BB2A
-                lsr.w   #1,d6
-loc_BB2A:
+                cmpi.b  #RESISTANCESETTING_MAJOR,d2
+                bne.s   @CheckWeakness
+                lsr.w   #1,d6           ; -50% damage if target has major resistance
+@CheckWeakness:
                 
-                cmpi.b  #3,d2
-                bne.s   loc_BB32
-                add.w   d1,d6
-loc_BB32:
+                cmpi.b  #RESISTANCESETTING_WEAKNESS,d2
+                bne.s   @DetermineCriticalHit
+                add.w   d1,d6           ; +25% damage if target is weak
+@DetermineCriticalHit:
                 
                 move.w  d3,d0
-                beq.s   loc_BB46
+                beq.s   @Skip           ; skip if no chance to critical hit
                 jsr     (GetRandomOrDebugValue).w
                 tst.w   d0
-                bne.s   loc_BB46
-                add.w   d1,d6
-                move.b  #$FF,-3(a2)
-loc_BB46:
+                bne.s   @Skip
+                add.w   d1,d6           ; +25% damage if successful critical hit
+                move.b  #$FF,-BCSTACK_OFFSET_CRIT(a2)
+@Skip:
                 
                 bsr.w   WriteSkirmishScript_InflictDamage
-                tst.b   -4(a2)
-                beq.s   return_BB54
+                tst.b   -BCSTACK_OFFSET_TARGETDIES(a2)
+                beq.s   @Return
                 bsr.w   WriteSkirmishScript_DeathMessage
-return_BB54:
+@Return:
                 
                 rts
 
-; END OF FUNCTION CHUNK FOR sub_BAD6
+    ; End of function CalculateDamage_Spell
 
 
 ; =============== S U B R O U T I N E =======================================
 
-;     Miscellaneous hacks to alter spell damage. (125% if promoted, damage divided if SORC spells)
-;     In: D6 = original damage
-;     Out: D6 = altered damage
+; Miscellaneous hacks to alter spell power (125% if promoted, damage divided if SORC spells)
+; 
+;       In: A3 = pointer to action type index in RAM
+;           A4 = pointer to caster's index in RAM
+;           D6 = original spell power
+; 
+;       Out: D6 = altered spell power
 
-GetSpellPowerAdjustedForClass:
+AdjustSpellPower:
                 
                 movem.l d0-d1/a0,-(sp)
-                cmpi.w  #1,(a3)
-                bne.w   loc_BB78
+                cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
+                bne.w   @CheckSummon    ; go to next step if action is not a spell
                 move.b  (a4),d0
-                jsr     GetClass
+                jsr     GetClass        
                 cmpi.b  #CHAR_CLASS_FIRSTPROMOTED,d1
-                bcs.w   loc_BB78
+                bcs.w   @CheckSummon    ; go to next step if caster is not promoted
                 mulu.w  #5,d6
-                lsr.w   #2,d6
-loc_BB78:
+                lsr.w   #2,d6           ; +25% spell power
+@CheckSummon:
                 
                 move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d1
                 cmpi.w  #SPELL_DAO,d1   ; HARDCODED spell indexes
-                beq.w   loc_BBA0
+                beq.w   @DivideSpellPower
                 cmpi.w  #SPELL_APOLLO,d1
-                beq.w   loc_BBA0
+                beq.w   @DivideSpellPower
                 cmpi.w  #SPELL_NEPTUN,d1
-                beq.w   loc_BBA0
+                beq.w   @DivideSpellPower
                 cmpi.w  #SPELL_ATLAS,d1
-                beq.w   loc_BBA0
-                bra.w   loc_BBB2
-loc_BBA0:
+                beq.w   @DivideSpellPower
+                bra.w   @Done
+@DivideSpellPower:
                 
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d0
-                beq.w   loc_BBB2
+                beq.w   @Done
                 andi.w  #$FFFF,d6
-                divu.w  d0,d6
+                divu.w  d0,d6           ; divide spell power by number of targets
                 andi.w  #$FFFF,d6
-loc_BBB2:
+@Done:
                 
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function GetSpellPowerAdjustedForClass
+    ; End of function AdjustSpellPower
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1793,15 +1800,15 @@ WriteSkirmishScript_UseItem:
                 
                 move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d1
                 jsr     GetItemDefAddress
-                move.b  ITEMDEF_OFFSET_SPELL(a0),d0
-                move.w  d0,2(a3)
-                andi.w  #SPELL_MASK_IDX,d0
+                move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d0
+                move.w  d0,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3)
+                andi.w  #SPELLENTRY_MASK_INDEX,d0
                 move.w  d0,((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w
-                move.b  ITEMDEF_OFFSET_SPELL(a0),d0
-                lsr.b   #SPELL_OFFSET_LV,d0
-                andi.w  #SPELL_UPPERMASK_LV,d0
+                move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d0
+                lsr.b   #SPELLENTRY_OFFSET_LV,d0
+                andi.w  #SPELLENTRY_UPPERMASK_LV,d0
                 move.w  d0,((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
-                bra.w   WriteSkirmishScript_UseSpell
+                bra.w   WriteSkirmishScript_CastSpell
 
     ; End of function WriteSkirmishScript_UseItem
 
@@ -1820,24 +1827,24 @@ nullsub_BBE4:
 WriteSkirmishScript_BreakUsedItem:
                 
                 movem.l d0-d3/a0,-(sp)
-                cmpi.w  #ACTION_ITEM,(a3)
-                bne.w   loc_BC94
+                cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
+                bne.w   @Done           ; skip if action type is not "use item"
                 move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d1
                 jsr     GetItemType     
                 tst.w   d2
-                beq.w   loc_BC88
+                beq.w   @RemoveItem     ; remove item if neither weapon or ring
                 jsr     GetItemDefAddress
-                btst    #ITEMTYPE_BIT_MAGICAL,ITEMDEF_OFFSET_TYPE(a0)
-                beq.w   loc_BC94
-                btst    #CHAR_BIT_ENEMY,(a4)
-                bne.w   loc_BC94
+                btst    #ITEMTYPE_BIT_BREAKABLE,ITEMDEF_OFFSET_TYPE(a0)
+                beq.w   @Done           ; skip if item has no chance to break
+                btst    #COMBATANT_BIT_ENEMY,(a4)
+                bne.w   @Done           ; skip if user is an enemy
                 move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d0
-                btst    #ITEM_BIT_BROKEN,d0
-                bne.w   loc_BC5C
-                moveq   #4,d0
+                btst    #ITEMENTRY_BIT_BROKEN,d0
+                bne.w   @DestroyItem    ; destroy item if already broken
+                moveq   #CHANCE_TO_BREAK_USED_ITEM,d0 ; 1/4 chance to break used item
                 jsr     (GetRandomOrDebugValue).w
                 tst.b   d0
-                bne.s   loc_BC58
+                bne.s   @Skip           ; skip if item does not break
                 moveq   #0,d0
                 jsr     GetItemBreakMessage(pc)
                 nop
@@ -1850,10 +1857,10 @@ WriteSkirmishScript_BreakUsedItem:
                 move.b  (a4),d0
                 move.w  6(a3),d1
                 jsr     BreakItem       
-loc_BC58:
+@Skip:
                 
-                bra.w   loc_BC94
-loc_BC5C:
+                bra.w   @Done
+@DestroyItem:
                 
                 moveq   #1,d0
                 jsr     GetItemBreakMessage(pc)
@@ -1867,13 +1874,13 @@ loc_BC5C:
                 move.b  (a4),d0
                 move.w  6(a3),d1
                 jsr     RemoveItemBySlot
-                bra.w   loc_BC94
-loc_BC88:
+                bra.w   @Done
+@RemoveItem:
                 
                 move.b  (a4),d0
                 move.w  6(a3),d1
                 jsr     RemoveItemBySlot
-loc_BC94:
+@Done:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
@@ -1885,7 +1892,8 @@ loc_BC94:
 
 ; In: A2 = skirmish properties stack
 ;     D0 = whether item is already damaged (0=no, 1=yes)
-; Out: D3 = message idx
+; 
+; Out: D3 = message index
 
 GetItemBreakMessage:
                 
@@ -1896,11 +1904,13 @@ GetItemBreakMessage:
                 bne.s   loc_BCAE        
 loc_BCA8:
                 
-                move.w  #$174,d3        ; But smoke rose from{N}the {ITEM}.{D1}
+                move.w  #MESSAGE_BATTLE_USED_ITEM_HIT_AND_BROKEN_START,d3 
+                                                        ; But smoke rose from{N}the {ITEM}.{D1}
                 bra.s   loc_BCB2
 loc_BCAE:
                 
-                move.w  #$17E,d3        ; And smoke emerged from{N}the {ITEM}.{D1}
+                move.w  #MESSAGE_BATTLE_USED_ITEM_MISS_AND_BROKEN_START,d3 
+                                                        ; And smoke emerged from{N}the {ITEM}.{D1}
 loc_BCB2:
                 
                 bra.s   loc_BCC4
@@ -1908,15 +1918,17 @@ loc_BCB4:
                 
                 tst.b   -5(a2)
                 bne.s   loc_BCC0        
-                move.w  #$179,d3        ; But, the {ITEM}{N}burst into flames.
+                move.w  #MESSAGE_BATTLE_USED_ITEM_HIT_AND_DESTROYED_START,d3 
+                                                        ; But, the {ITEM}{N}burst into flames.
                 bra.s   loc_BCC4
 loc_BCC0:
                 
-                move.w  #$183,d3        ; And the {ITEM}{N}burst into flames.
+                move.w  #MESSAGE_BATTLE_USED_ITEM_MISS_AND_DESTROYED_START,d3 
+                                                        ; And the {ITEM}{N}burst into flames.
 loc_BCC4:
                 
                 move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d0
-                andi.w  #ITEM_MASK_IDX,d0
+                andi.w  #ITEMENTRY_MASK_INDEX,d0
                 lea     ItemBreakMessages(pc), a0
 loc_BCD0:
                 

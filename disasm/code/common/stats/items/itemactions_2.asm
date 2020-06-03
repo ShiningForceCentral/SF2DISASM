@@ -9,7 +9,7 @@
 UseFieldItem:
                 
                 movem.l d0-d1/d6-d7,-(sp)
-                andi.w  #ITEM_MASK_IDX,d1
+                andi.w  #ITEMENTRY_MASK_INDEX,d1
                 movem.l d1/a0,-(sp)
                 lea     rjt_FieldItemEffects(pc), a0
 loc_229FC:
@@ -36,7 +36,7 @@ rjt_FieldItemEffects:
                 dc.w 5
                 dc.w FieldItem_CurePoisonAndParalysis-rjt_FieldItemEffects
                 dc.w 9
-                dc.w FieldItem_IncreaseATK-rjt_FieldItemEffects
+                dc.w FieldItem_IncreaseATT-rjt_FieldItemEffects
                 dc.w $A
                 dc.w FieldItem_IncreaseDEF-rjt_FieldItemEffects
                 dc.w $B
@@ -63,7 +63,7 @@ loc_22A48:
 FieldItem_CurePoison:
                 
                 jsr     j_GetStatus
-                bclr    #CHAR_STATUS_BIT_POISON,d1
+                bclr    #STATUSEFFECTS_BIT_POISON,d1
                 beq.s   byte_22A64      
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     $95             ; "{NAME} is no longer{N}poisoned.{W2}"
@@ -85,14 +85,14 @@ FieldItem_CurePoisonAndParalysis:
                 
                 jsr     j_GetStatus
                 moveq   #0,d2
-                bclr    #1,d1
+                bclr    #STATUSEFFECTS_BIT_POISON,d1
                 beq.s   loc_22A88
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     $95             ; "{NAME} is no longer{N}poisoned.{W2}"
                 moveq   #$FFFFFFFF,d2
 loc_22A88:
                 
-                bclr    #0,d1
+                bclr    #STATUSEFFECTS_BIT_STUN,d1
                 beq.s   loc_22A98
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     $9C             ; "{NAME} is no longer{N}paralyzed.{W2}"
@@ -105,7 +105,7 @@ loc_22A98:
 loc_22AA0:
                 
                 jsr     j_SetStatus
-                jsr     j_ApplyStatusAndItemsOnStats
+                jsr     j_ApplyStatusEffectsAndItemsOnStats
                 rts
 
     ; End of function FieldItem_CurePoisonAndParalysis
@@ -113,7 +113,7 @@ loc_22AA0:
 
 ; =============== S U B R O U T I N E =======================================
 
-FieldItem_IncreaseATK:
+FieldItem_IncreaseATT:
                 
                 moveq   #3,d6
                 jsr     (GenerateRandomNumber).w
@@ -123,12 +123,12 @@ FieldItem_IncreaseATK:
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     $96             ; "{NAME}'s attack{N}power is boosted by {#}.{W2}"
-                jsr     j_IncreaseBaseATK
+                jsr     j_IncreaseBaseATT
                 move.w  d7,d1
-                jsr     j_IncreaseCurrentATK
+                jsr     j_IncreaseCurrentATT
                 rts
 
-    ; End of function FieldItem_IncreaseATK
+    ; End of function FieldItem_IncreaseATT
 
 
 ; =============== S U B R O U T I N E =======================================

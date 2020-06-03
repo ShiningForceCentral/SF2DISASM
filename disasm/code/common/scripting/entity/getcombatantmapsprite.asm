@@ -5,7 +5,8 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; In: A6 = battle vars stack ???
-; Out: D4 = map sprite ID
+; 
+; Out: D4 = map sprite index
 
 GetCombatantMapSprite:
                 

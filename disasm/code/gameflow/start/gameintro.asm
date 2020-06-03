@@ -48,9 +48,9 @@ loc_71EC:
                 jsr     (UpdateBackgroundHScrollData).w
                 jsr     (UpdateForegroundVScrollData).w
                 jsr     (UpdateBackgroundVScrollData).w
-                jsr     (WaitForDMAQueueProcessing).w
+                jsr     (WaitForDmaQueueProcessing).w
                 bsr.w   InitDisplay
-                bsr.w   DisableDisplayAndVInt
+                bsr.w   DisableDisplayAndInterrupts
                 sndCom  MUSIC_TITLE
                 jsr     TitleScreen
                 bne.s   loc_724E        
@@ -60,7 +60,7 @@ loc_71EC:
                 jmp     (a0)            ; reset
 loc_724E:
                 
-                bsr.w   DisableDisplayAndVInt ; title screen -> witch menu
+                bsr.w   DisableDisplayAndInterrupts ; title screen -> witch menu
                 bsr.w   ClearVsramAndSprites
                 bsr.w   EnableDisplayAndInterrupts
                 move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
@@ -71,9 +71,9 @@ loc_724E:
                 jsr     (UpdateBackgroundHScrollData).w
                 jsr     (UpdateForegroundVScrollData).w
                 jsr     (UpdateBackgroundVScrollData).w
-                jsr     (WaitForDMAQueueProcessing).w
+                jsr     (WaitForDmaQueueProcessing).w
                 bsr.w   InitDisplay
-                bsr.w   DisableDisplayAndVInt
+                bsr.w   DisableDisplayAndInterrupts
                 clr.b   ((byte_FFB198-$1000000)).w
                 move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w 
                                                         ; Witch speech SFX
@@ -88,7 +88,7 @@ loc_729C:
                 lea     ($8000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (ApplyImmediateVramDMAOnCompressedTiles).w
+                jsr     (ApplyImmediateVramDmaOnCompressedTiles).w
                 bsr.w   EnableDisplayAndInterrupts
                 sndCom  MUSIC_WITCH
                 bsr.w   FadeInFromBlack
@@ -101,7 +101,7 @@ loc_729C:
                 dc.w VINTS_ADD
                 dc.l VInt_WitchBlink
                 enableSram
-                bsr.w   CheckSRAM
+                bsr.w   CheckSram
                 moveq   #$20,d7 
                 move.b  d7,(SAVED_ERRCODE_BYTE0).l
                 move.b  d7,(SAVED_ERRCODE_BYTE1).l
@@ -127,7 +127,7 @@ loc_7332:
                 jsr     j_FadeOut_WaitForP1Input
 loc_734C:
                 
-                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 bne.w   loc_73AA
                 txt     $D8             ; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
                 bsr.w   WaitForVInt
@@ -139,13 +139,13 @@ loc_734C:
                 txt     $D9             ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
 loc_737C:
                 
-                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_73C2       
                 txt     $DA             ; "Yes, yes...I used a spell{N}on you.{W2}"
-                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_73C2       
                 txt     $DB             ; "Ha, ha.  Where are you{N}going?  You can't escape{W2}"
-                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_73C2       
                 txt     $DC             ; "from this mystery forest{N}unless you help me.{W2}"
                 bra.w   byte_73C2       

@@ -4,9 +4,9 @@
 ; FREE SPACE : 626 bytes.
 
 
-j_ShopActions:                
+j_ShopMenuActions:                
                 jmp     ShopMenuActions(pc)
-j_ChurchActions:                
+j_ChurchMenuActions:                
                 jmp     ChurchMenuActions(pc)
 j_MainMenuActions:                
                 jmp     MainMenuActions(pc)
@@ -34,8 +34,8 @@ j_BattleLoop:
                 jmp     BattleLoop(pc)  
 j_BattleLoop_Unused:                
                 jmp     BattleLoop(pc)  
-j_GetEntityEventIdx:                
-                jmp     GetEntityEventIdx(pc)
+j_GetEntityEventIndex:                
+                jmp     GetEntityEventIndex(pc)
 j_GetEntityIndex:                
                 jmp     GetEntityNumberOfCombatant(pc)
 j_FadeOut_WaitForP1Input:                

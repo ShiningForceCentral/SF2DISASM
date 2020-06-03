@@ -5,14 +5,15 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; In: D0 = ally or portrait index (depending on caller function)
-; Out: D0 = adjusted portrait index
+; 
+; Out: D0 = portrait index adjusted for class
 
 GetAllyPortrait:
                 
                 move.w  d1,-(sp)
-                cmpi.b  #COM_ALLIES_NUM,d0
+                cmpi.b  #COMBATANT_ALLIES_NUMBER,d0
                 bhi.w   @Done
-                jsr     j_GetClass      
+                jsr     j_GetClass
                 cmpi.b  #CLASS_HERO,d1  ; stupid CMP mechanism for alternate portraits, need to improve that one day
                 bne.s   @NotHero        ; HARDCODED promotion classes which trigger new portraits
                 moveq   #PORTRAIT_BOWIE_PROMO,d0

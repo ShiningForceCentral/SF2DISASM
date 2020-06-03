@@ -226,7 +226,7 @@ Map5_EntityEvent15:
 
 Map5_EntityEvent14:
                 
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map5_EntityEvent14

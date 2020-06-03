@@ -103,7 +103,7 @@ loc_46A0:
                 moveq   #$40,d7 
 loc_46AA:
                 
-                cmpi.b  #5,((FADING_SETTING-$1000000)).w
+                cmpi.b  #PULSATING_1,((FADING_SETTING-$1000000)).w
                 bne.s   loc_46B4
                 moveq   #$20,d7 
 loc_46B4:

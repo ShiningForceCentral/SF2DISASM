@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D6=Value range, Out: D7=Random value
+; In: D6 = Value range, Out: D7 = Random value
 
 GenerateRandomNumber:
                 
@@ -77,9 +77,11 @@ GetRandomValueUnsigned:
 
 ; =============== S U B R O U T I N E =======================================
 
-; input D0=value range
-; output D0=random value
-; debug mode allows values 0-3 depending on player direction
+; In: D0 = value range
+; 
+; Out: D0 = random value
+; 
+; Debug mode allows values 0-3 depending on player direction
 
 GetRandomOrDebugValue:
                 
@@ -88,16 +90,16 @@ GetRandomOrDebugValue:
                 tst.b   (DEBUG_MODE_ACTIVATED).l
                 beq.s   loc_16B2
                 moveq   #0,d0
-                btst    #INPUT_A_RIGHT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_RIGHT,((P1_INPUT-$1000000)).w
                 bne.w   loc_16B8
                 moveq   #1,d0
-                btst    #INPUT_A_UP,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
                 bne.w   loc_16B8
                 moveq   #2,d0
-                btst    #INPUT_A_LEFT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_LEFT,((P1_INPUT-$1000000)).w
                 bne.w   loc_16B8
                 moveq   #3,d0
-                btst    #INPUT_A_DOWN,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_DOWN,((P1_INPUT-$1000000)).w
                 bne.w   loc_16B8
 loc_16B2:
                 

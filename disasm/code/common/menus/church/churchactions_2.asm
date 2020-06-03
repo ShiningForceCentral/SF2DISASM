@@ -10,7 +10,7 @@ sub_21072:
                 jsr     j_UpdateForce
                 clr.w   -$16(a6)
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
                 lea     ((INDEX_LIST-$1000000)).w,a1
                 subq.b  #1,d7
@@ -18,7 +18,7 @@ loc_21094:
                 
                 clr.w   d0
                 move.b  (a0),d0
-                jsr     j_GetClass      
+                jsr     j_GetClass
                 move.w  #0,d2
                 bsr.w   sub_210D0
                 cmpi.w  #0,-$24(a6)
@@ -96,22 +96,22 @@ loc_21126:
 
 ; In: A6 = church actions stack
 
-ReplaceSpellsWithSORCDefaults:
+ReplaceSpellsWithSORCdefaults:
                 
                 move.w  -$C(a6),d0
-                jsr     j_GetCharEntryAddress
-                lea     CHAR_OFFSET_SPELL_0(a0),a0
-                move.w  #CHAR_SPELLSLOTS_COUNTER,d7
-loc_2113E:
+                jsr     j_GetCombatantEntryAddress
+                lea     COMBATANT_OFFSET_SPELLS_START(a0),a0
+                move.w  #COMBATANT_SPELLSLOTS_COUNTER,d7
+@Loop:
                 
                 move.b  #SPELL_NOTHING,(a0)+
-                dbf     d7,loc_2113E
+                dbf     d7,@Loop
                 move.w  -$C(a6),d0
                 move.w  #SPELL_DAO,d1
                 jsr     j_LearnSpell
                 rts
 
-    ; End of function ReplaceSpellsWithSORCDefaults
+    ; End of function ReplaceSpellsWithSORCdefaults
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -139,8 +139,8 @@ loc_21170:
                 move.b  (a0)+,d0
                 movem.l a0,-(sp)
                 move.w  d0,-$C(a6)
-                jsr     j_GetCharEntryAddress
-                lea     CHAR_OFFSET_STATUS(a0),a0
+                jsr     j_GetCombatantEntryAddress
+                lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
                 move.w  (a0),d2
                 move.w  d2,d3
                 andi.w  #1,d3
@@ -214,7 +214,7 @@ WaitForMusicResumeAndPlayerInput:
 
 sub_2124A:
                 
-                cmpi.b  #COM_ALLIES_NUM,d0
+                cmpi.b  #COMBATANT_ALLIES_NUMBER,d0
                 bhi.s   return_2127C
                 movem.l d0-d4/a0,-(sp)
                 move.w  d0,d1

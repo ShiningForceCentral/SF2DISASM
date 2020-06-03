@@ -4,8 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = from map idx
-; Out: D0 = to map idx
+; In: D0 = from map index
+; Out: D0 = to map index
 ;      D1 = X
 ;      D2 = Y
 ;      D3 = facing

@@ -2,8 +2,11 @@
 ; ASM FILE data\battles\global\randombattles.asm :
 ; 0x1B6DB0..0x1B6DBC : Random battles table
 RandomBattlesList:
-                ; enum Battles : BATTLE_*
-    
+                
+; List of battle indexes prefixed with length
+;
+; Syntax        randomBattles battle_index1, battle_index2, ...
+                
                 randomBattles &
                     TO_HAWEL_HOUSE, &
                     NORTH_CLIFF, &

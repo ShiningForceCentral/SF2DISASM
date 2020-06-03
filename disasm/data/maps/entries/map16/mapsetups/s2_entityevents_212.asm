@@ -130,7 +130,7 @@ Map16_212_EntityEvent8:
 Map16_212_EntityEvent9:
                 
                 move.b  #$1D,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map16_212_EntityEvent9
@@ -140,7 +140,7 @@ Map16_212_EntityEvent9:
 
 Map16_212_EntityEvent10:
                 
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map16_212_EntityEvent10
@@ -199,7 +199,7 @@ Map16_212_EntityEvent14:
 Map16_212_EntityEvent15:
                 
                 move.b  #$E,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map16_212_EntityEvent15

@@ -35,7 +35,7 @@ loc_212B8:
                 jsr     sub_10040
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_212D4
-                jsr     j_MemberStatsScreen
+                jsr     j_BuildMemberStatsScreen
                 bra.s   loc_212B8
 loc_212D4:
                 
@@ -86,7 +86,7 @@ loc_21366:
                 
                 move.b  -$1A(a6),d1
                 jsr     j_GetSpellDefAddress
-                move.b  1(a0),d1
+                move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  -4(a6),d0
                 jsr     j_DecreaseCurrentMP
                 jsr     j_ExecuteFlashScreenScript
@@ -118,7 +118,7 @@ byte_213A8:
                 clsTxt
                 move.b  -$1A(a6),d1
                 jsr     j_GetSpellDefAddress
-                move.b  1(a0),d1
+                move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  -4(a6),d0
                 jsr     j_DecreaseCurrentMP
                 move.w  -6(a6),d0
@@ -157,7 +157,7 @@ byte_21468:
                 
                 clsTxt
                 jsr     j_SetStatus
-                jsr     j_ApplyStatusAndItemsOnStats
+                jsr     j_ApplyStatusEffectsAndItemsOnStats
 loc_21478:
                 
                 bra.w   loc_219E8
@@ -318,7 +318,7 @@ loc_2168E:
                 jsr     j_RemoveItemBySlot
                 move.w  -6(a6),d0
                 move.w  -8(a6),d1
-                andi.b  #ITEM_MASK_IDX,d1
+                andi.b  #ITEMENTRY_MASK_INDEX,d1
                 jsr     j_AddItem
                 move.w  -4(a6),d0
                 move.w  -6(a6),d1
@@ -395,7 +395,7 @@ loc_217C4:
                 move.w  -$C(a6),d1
                 jsr     j_DropItemBySlot
                 move.w  -$A(a6),d1
-                andi.b  #ITEM_MASK_IDX,d1
+                andi.b  #ITEMENTRY_MASK_INDEX,d1
                 jsr     j_AddItem
                 move.w  -6(a6),d2
                 cmp.w   -4(a6),d2
@@ -410,7 +410,7 @@ loc_217FE:
                 move.w  -$E(a6),d1
                 jsr     j_RemoveItemBySlot
                 move.w  -8(a6),d1
-                andi.b  #ITEM_MASK_IDX,d1
+                andi.b  #ITEMENTRY_MASK_INDEX,d1
                 jsr     j_AddItem
 loc_2181A:
                 
@@ -468,7 +468,7 @@ loc_218BA:
                 move.w  d2,-8(a6)
                 move.w  -8(a6),d1
                 jsr     j_GetItemDefAddress
-                move.l  8(a0),-$14(a6)
+                move.l  ITEMDEF_OFFSET_TYPE(a0),-$14(a6)
                 move.b  -$14(a6),d1
                 andi.b  #$10,d1
                 cmpi.b  #0,d1
@@ -564,7 +564,7 @@ sub_219EC:
                 jsr     j_UpdateForce
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
                 lea     ((INDEX_LIST-$1000000)).w,a1
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
                 subq.w  #1,d7
 loc_21A0A:

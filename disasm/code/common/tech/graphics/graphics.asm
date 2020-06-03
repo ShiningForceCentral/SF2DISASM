@@ -11,14 +11,14 @@ InitSprites:
                 movem.l d0-d1/a0,-(sp)
                 lea     (SPRITE_TABLE).l,a0
                 move.w  #1,d1
-loc_177E:
+@Loop:
                 
                 move.w  #1,(a0)+
                 move.w  d1,(a0)+
                 move.w  #1,(a0)+
                 move.w  #1,(a0)+
                 addq.w  #1,d1
-                dbf     d0,loc_177E
+                dbf     d0,@Loop
                 subq.l  #6,a0
                 clr.w   (a0)
                 movem.l (sp)+,d0-d1/a0
@@ -444,11 +444,11 @@ loc_1A1C:
                 move.b  d2,(a1)+
                 move.w  (sp)+,d7
                 dbf     d7,loc_1A1C
-                jsr     ApplyVIntCramDMA(pc)
+                jsr     ApplyVIntCramDma(pc)
                 tst.b   ((FADING_TIMER-$1000000)).w
                 bne.s   return_1A7E
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
-                tst.b   ((byte_FFDFAB-$1000000)).w
+                tst.b   ((FADING_TIMER+1-$1000000)).w
                 bne.w   sub_19C8        
 return_1A7E:
                 

@@ -2,7 +2,8 @@
 ; ASM FILE data\stats\allies\allymapsprites.asm :
 ; 0x44A5E..0x44A7C : Ally map sprite indexes table
 tbl_AllyMapSprites:
-                ; Syntax        mapSprite index (enum Mapsprites : MAPSPRITE_*)
+                
+; Syntax        mapSprite index (enum Mapsprites : MAPSPRITE_*)
                 
                 mapSprite BOWIE_PROMO   ; BOWIE
                 mapSprite SARAH_SPECIAL ; SARAH

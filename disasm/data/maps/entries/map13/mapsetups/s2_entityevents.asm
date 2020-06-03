@@ -72,7 +72,7 @@ return_5808E:
 Map13_EntityEvent4:
                 
                 move.b  #4,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map13_EntityEvent4
@@ -83,7 +83,7 @@ Map13_EntityEvent4:
 Map13_EntityEvent5:
                 
                 move.b  #$13,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map13_EntityEvent5
@@ -114,7 +114,7 @@ return_580C4:
 
 Map13_EntityEvent7:
                 
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map13_EntityEvent7

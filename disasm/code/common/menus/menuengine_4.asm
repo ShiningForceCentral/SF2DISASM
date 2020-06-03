@@ -6,84 +6,85 @@ AlphabetHighlightTiles:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = default num
-;     D1 = min num
-;     D2 = max num
-; Out: D0 = chosen num
+; In: D0 = default number
+;     D1 = min number
+;     D2 = max number
+; 
+; Out: D0 = chosen number
 
 NumberPrompt:
                 
                 movem.l d1-a1,-(sp)
-                link    a6,#-WINDOW_NUMPROMPT_STACK_NEGSIZE
-                move.w  d0,-WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6)
-                move.w  d1,-WINDOW_NUMPROMPT_STACK_OFFSET_MINNUM(a6)
-                move.w  d2,-WINDOW_NUMPROMPT_STACK_OFFSET_MAXNUM(a6)
-                move.w  #$703,d0
-                move.w  #$2001,d1
+                link    a6,#$FFF0
+                move.w  d0,-8(a6)
+                move.w  d1,-$A(a6)
+                move.w  d2,-$C(a6)
+                move.w  #WINDOW_NUMBERPROMPT_SIZE,d0
+                move.w  #WINDOW_NUMBERPROMPT_ORIGIN,d1
                 jsr     (CreateWindow).l
-                move.w  d0,-WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6)
-                move.l  a1,-WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWTILESEND(a6)
-                bsr.w   sub_16376
-                move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6),d0
-                move.w  #$1801,d1
-                moveq   #4,d2
-                jsr     (MoveWindowWithSFX).l
+                move.w  d0,-6(a6)
+                move.l  a1,-4(a6)
+                bsr.w   WritePromptNumberTiles
+                move.w  -6(a6),d0
+                move.w  #WINDOW_NUMBERPROMPT_DESTINATION,d1
+                moveq   #WINDOW_NUMBERPROMPT_ANIMATION_LENGTH,d2
+                jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
-loc_162C6:
+@Loop:
                 
-                bsr.w   sub_16376
-                move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6),d0
+                bsr.w   WritePromptNumberTiles
+                move.w  -6(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
-                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_162E6
-                moveq   #1,d3
+                btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                beq.s   @CheckInput_Left
+                moveq   #1,d3           ; add 1
                 bsr.w   ModifyPromptNumber
-loc_162E6:
+@CheckInput_Left:
                 
-                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_162F4
-                moveq   #$FFFFFFFF,d3
+                btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                beq.s   @CheckInput_Down
+                moveq   #-1,d3          ; subtract 1
                 bsr.w   ModifyPromptNumber
-loc_162F4:
+@CheckInput_Down:
                 
-                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_16302
-                moveq   #$A,d3
+                btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
+                beq.s   @CheckInput_Up
+                moveq   #10,d3          ; add 10
                 bsr.w   ModifyPromptNumber
-loc_16302:
+@CheckInput_Up:
                 
-                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_16310
-                moveq   #$FFFFFFF6,d3
+                btst    #INPUT_BIT_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
+                beq.s   @CheckRemainingInputs
+                moveq   #-10,d3         ; subtract 10
                 bsr.w   ModifyPromptNumber
-loc_16310:
+@CheckRemainingInputs:
                 
-                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
-                bne.w   loc_16344
-                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
-                bne.w   loc_1634A
-                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
-                bne.w   loc_1634A
+                btst    #INPUT_BIT_B,((CURRENT_PLAYER_INPUT-$1000000)).w
+                bne.w   @ReturnDefaultNumber
+                btst    #INPUT_BIT_C,((CURRENT_PLAYER_INPUT-$1000000)).w
+                bne.w   @ReturnChosenNumber
+                btst    #INPUT_BIT_A,((CURRENT_PLAYER_INPUT-$1000000)).w
+                bne.w   @ReturnChosenNumber
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
                 jsr     (GenerateRandomNumber).w
                 movem.l (sp)+,d6-d7
                 jsr     (WaitForVInt).w
-                bra.s   loc_162C6       ; bra.s loc_162C6
-loc_16344:
+                bra.s   @Loop
+@ReturnDefaultNumber:
                 
-                move.w  #$FFFF,-WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6)
-loc_1634A:
+                move.w  #$FFFF,-8(a6)
+@ReturnChosenNumber:
                 
-                move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6),d0
-                move.w  #$2001,d1
-                moveq   #4,d2
-                jsr     (MoveWindowWithSFX).l
+                move.w  -6(a6),d0
+                move.w  #WINDOW_NUMBERPROMPT_ORIGIN,d1
+                moveq   #WINDOW_NUMBERPROMPT_ANIMATION_LENGTH,d2
+                jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
-                move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_WINDOWIDX(a6),d0
-                jsr     (ClearWindowAndUpdateEndPtr).l
-                move.w  -WINDOW_NUMPROMPT_STACK_OFFSET_NUM(a6),d0
+                move.w  -6(a6),d0
+                jsr     (ClearWindowAndUpdateEndPointer).l
+                move.w  -8(a6),d0
                 unlk    a6
                 movem.l (sp)+,d1-a1
                 rts
@@ -93,39 +94,41 @@ loc_1634A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_16376:
+; In: A6 = number prompt window stack
+
+WritePromptNumberTiles:
                 
                 movea.l -4(a6),a1
-                move.w  #$703,d0
-                bsr.w   CopyWindowTilesToRAM
+                move.w  #WINDOW_NUMBERPROMPT_SIZE,d0
+                bsr.w   CopyWindowTilesToRam
                 movea.l -4(a6),a1
-                adda.w  #$10,a1
+                adda.w  #WINDOW_NUMBERPROMPT_DIGITS_OFFSET,a1
                 move.w  -8(a6),d0
                 ext.l   d0
                 moveq   #$FFFFFFF2,d1
-                moveq   #5,d7
+                moveq   #WINDOW_NUMBERPROMPT_DIGITS_NUMBER,d7
                 bra.w   WriteTilesFromNumber
 
-    ; End of function sub_16376
+    ; End of function WritePromptNumberTiles
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A6 = prompt stack
+; In: A6 = number prompt window stack
 
 ModifyPromptNumber:
                 
                 move.w  -8(a6),d0
                 add.w   d3,d0
                 cmp.w   -$C(a6),d0
-                blt.s   loc_163A8
+                blt.s   @MaxNumber_Skip
                 move.w  -$C(a6),d0
-loc_163A8:
+@MaxNumber_Skip:
                 
                 cmp.w   -$A(a6),d0
-                bge.s   loc_163B2
+                bge.s   @MinNumber_Skip
                 move.w  -$A(a6),d0
-loc_163B2:
+@MinNumber_Skip:
                 
                 move.w  d0,-8(a6)
                 sndCom  SFX_MENU_SELECTION
@@ -146,11 +149,11 @@ DebugFlagSetter:
                 jsr     (CreateWindow).l
                 move.w  d0,-6(a6)
                 move.l  a1,-4(a6)
-                bsr.s   sub_16376
+                bsr.s   WritePromptNumberTiles
                 move.w  -6(a6),d0
                 move.w  #$1801,d1
                 moveq   #4,d2
-                jsr     (MoveWindowWithSFX).l
+                jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
 loc_163F6:
                 
@@ -158,35 +161,35 @@ loc_163F6:
                 move.w  -6(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
-                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16416
                 moveq   #1,d3
                 bsr.w   sub_164E8
 loc_16416:
                 
-                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16424
                 moveq   #$FFFFFFFF,d3
                 bsr.w   sub_164E8
 loc_16424:
                 
-                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16432
                 moveq   #$A,d3
                 bsr.w   sub_164E8
 loc_16432:
                 
-                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16440
                 moveq   #$FFFFFFF6,d3
                 bsr.w   sub_164E8
 loc_16440:
                 
-                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_16484
-                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   byte_16464
-                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   byte_16474
 loc_1645E:
                 
@@ -209,10 +212,10 @@ loc_16484:
                 move.w  -6(a6),d0
                 move.w  #$2001,d1
                 moveq   #4,d2
-                jsr     (MoveWindowWithSFX).l
+                jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
                 move.w  -6(a6),d0
-                jsr     (ClearWindowAndUpdateEndPtr).l
+                jsr     (ClearWindowAndUpdateEndPointer).l
                 unlk    a6
                 movem.l (sp)+,d0-a1
                 rts
@@ -226,7 +229,7 @@ sub_164AC:
                 
                 movea.l -4(a6),a1
                 move.w  #$703,d0
-                bsr.w   CopyWindowTilesToRAM
+                bsr.w   CopyWindowTilesToRam
                 movea.l -4(a6),a1
                 adda.w  #$10,a1
                 move.w  -8(a6),d0
@@ -312,7 +315,7 @@ RemoveTimerWindow:
                 move.w  #$2020,d1
                 jsr     (SetWindowDestination).l
                 jsr     (WaitForVInt).w
-                jsr     (ClearWindowAndUpdateEndPtr).l
+                jsr     (ClearWindowAndUpdateEndPointer).l
                 clr.w   ((TIMER_WINDOW_INDEX-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
@@ -413,7 +416,7 @@ WitchMainMenu:
                 lea     (PALETTE_2_CURRENT).l,a1
                 move.w  #$20,d7 
                 jsr     (CopyBytes).w   
-                jsr     (ApplyVIntCramDMA).w
+                jsr     (ApplyVIntCramDma).w
                 bsr.w   sub_1679E
                 move.w  -6(a6),d0
                 move.w  #$202,d1
@@ -428,35 +431,35 @@ loc_166C2:
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
                 movem.w (sp)+,d0
-                btst    #INPUT_A_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_166EA
                 moveq   #1,d3
                 bsr.w   sub_1678A
 loc_166EA:
                 
-                btst    #INPUT_A_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_166F8
                 moveq   #$FFFFFFFF,d3
                 bsr.w   sub_1678A
 loc_166F8:
                 
-                btst    #INPUT_A_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16706
                 moveq   #1,d3
                 bsr.w   sub_1678A
 loc_16706:
                 
-                btst    #INPUT_A_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16714
                 moveq   #$FFFFFFFF,d3
                 bsr.w   sub_1678A
 loc_16714:
                 
-                btst    #INPUT_A_B,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   loc_16756
-                btst    #INPUT_A_C,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_C,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   byte_1675A
-                btst    #INPUT_A_A,((CURRENT_PLAYER_INPUT-$1000000)).w
+                btst    #INPUT_BIT_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   byte_1675A
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
@@ -481,7 +484,7 @@ byte_1675A:
                 jsr     (SetWindowDestination).l
                 jsr     (WaitForVInt).w
                 move.w  -6(a6),d0
-                jsr     (ClearWindowAndUpdateEndPtr).l
+                jsr     (ClearWindowAndUpdateEndPointer).l
                 movem.w (sp)+,d0
                 unlk    a6
                 movem.l (sp)+,d1-a1
@@ -718,7 +721,7 @@ sub_1697C:
                 movem.w d0,-(sp)
                 movem.l d7/a1,-(sp)
                 moveq   #$FFFFFFC8,d1
-                bsr.w   WriteTilesFromASCII
+                bsr.w   WriteTilesFromAsciiWithRegularFont
                 movem.l (sp)+,d7/a1
                 subq.w  #1,d7
 loc_16990:
@@ -752,7 +755,7 @@ sub_169AE:
                 movem.w (sp)+,d0
                 jsr     j_GetCurrentHP
                 move.w  d1,d2
-                jsr     j_GetCharName
+                jsr     j_GetCombatantName
                 move.w  d7,d0
                 addq.w  #1,d0
                 andi.w  #$E,d0
@@ -763,18 +766,18 @@ sub_169AE:
                 moveq   #$A,d7
                 tst.w   d2
                 bne.s   loc_16A0C
-                bsr.w   sub_100C8       
+                bsr.w   WriteTilesFromAsciiWithOrangeFont
                 bra.s   loc_16A10
 loc_16A0C:
                 
-                bsr.w   WriteTilesFromASCII
+                bsr.w   WriteTilesFromAsciiWithRegularFont
 loc_16A10:
                 
                 move.w  (word_FFB08C).l,d0
                 subq.w  #1,d0
                 move.w  #$10B,d1
                 moveq   #4,d2
-                jsr     (MoveWindowWithSFX).l
+                jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
 loc_16A2A:
                 
@@ -794,9 +797,9 @@ sub_16A30:
                 subq.w  #1,d0
                 move.w  #$F60B,d1
                 moveq   #4,d2
-                jsr     (MoveWindowWithSFX).l
+                jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
-                jsr     (ClearWindowAndUpdateEndPtr).l
+                jsr     (ClearWindowAndUpdateEndPointer).l
                 clr.w   (word_FFB08C).l
 loc_16A5C:
                 

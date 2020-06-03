@@ -32,7 +32,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 1           ; HUGE RAT
@@ -58,7 +58,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType STEALTH
+                moveType UPPER_STEALTH
                 unknownWord 8224
                     
                 unknownByte 2           ; GALAM SOLDIER
@@ -84,7 +84,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 3           ; GALAM KNIGHT
@@ -110,7 +110,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType CENTAUR
+                moveType UPPER_CENTAUR
                 unknownWord 8224
                     
                 unknownByte 4           ; GOBLIN
@@ -136,7 +136,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 5           ; GREEN OOZE
@@ -163,7 +163,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 6           ; DARK DWARF
@@ -189,7 +189,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 7           ; HOBGOBLIN
@@ -215,7 +215,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 8           ; ZOMBIE
@@ -242,7 +242,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 9           ; GOLEM
@@ -269,7 +269,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 10          ; KRAKEN LEG
@@ -296,7 +296,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType AQUATIC
+                moveType UPPER_AQUATIC
                 unknownWord 8224
                     
                 unknownByte 11          ; SOULSOWER
@@ -323,7 +323,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 12          ; ORC
@@ -349,7 +349,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 13          ; PAWN
@@ -376,7 +376,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 14          ; KNIGHT
@@ -403,7 +403,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 15          ; RAT
@@ -429,7 +429,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType STEALTH
+                moveType UPPER_STEALTH
                 unknownWord 8224
                     
                 unknownByte 16          ; BUBBLING OOZE
@@ -456,7 +456,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 17          ; SKELETON
@@ -483,7 +483,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 18          ; DARK SOLDIER
@@ -509,7 +509,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8192
                     
                 unknownByte 19          ; LIZARDMAN
@@ -536,7 +536,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8192
                     
                 unknownByte 20          ; WORM
@@ -562,7 +562,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType STEALTH
+                moveType UPPER_STEALTH
                 unknownWord 8192
                     
                 unknownByte 21          ; DARK KNIGHT
@@ -588,7 +588,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType CENTAUR
+                moveType UPPER_CENTAUR
                 unknownWord 8192
                     
                 unknownByte 22          ; ORC LORD
@@ -614,7 +614,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 23          ; DEVIL SOLDIER
@@ -641,7 +641,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 24          ; CERBERUS
@@ -668,7 +668,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType STEALTH
+                moveType UPPER_STEALTH
                 unknownWord 8224
                     
                 unknownByte 25          ; MUD MAN
@@ -695,7 +695,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 26          ; DRAGONEWT
@@ -721,7 +721,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 27          ; PURPLE WORM
@@ -747,7 +747,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType STEALTH
+                moveType UPPER_STEALTH
                 unknownWord 8224
                     
                 unknownByte 28          ; EXECUTIONER
@@ -774,7 +774,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8192
                     
                 unknownByte 29          ; HELL HOUND
@@ -801,7 +801,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType STEALTH
+                moveType UPPER_STEALTH
                 unknownWord 8192
                     
                 unknownByte 30          ; MINOTAUR
@@ -827,7 +827,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8192
                     
                 unknownByte 31          ; CYCLOPS
@@ -853,7 +853,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8192
                     
                 unknownByte 32          ; BURST ROCK
@@ -879,7 +879,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8224
                     
                 unknownByte 33          ; HYDRA
@@ -906,7 +906,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType STEALTH
+                moveType UPPER_STEALTH
                 unknownWord 8224
                     
                 unknownByte 34          ; CHAOS WARRIOR
@@ -933,7 +933,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8192
                     
                 unknownByte 35          ; REAPER
@@ -960,7 +960,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8192
                     
                 unknownByte 36          ; EVIL BEAST
@@ -986,7 +986,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8192
                     
                 unknownByte 37          ; PYROHYDRA
@@ -1013,7 +1013,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType STEALTH
+                moveType UPPER_STEALTH
                 unknownWord 8192
                     
                 unknownByte 38          ; ZEON GUARD
@@ -1040,7 +1040,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 8192
                     
                 unknownByte 39          ; GIZMO
@@ -1067,7 +1067,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HOVERING
+                moveType UPPER_HOVERING
                 unknownWord 8192
                     
                 unknownByte 40          ; HUGE BAT
@@ -1094,7 +1094,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8192
                     
                 unknownByte 41          ; VAMPIRE BAT
@@ -1120,7 +1120,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8192
                     
                 unknownByte 42          ; EVIL CLOUD
@@ -1147,7 +1147,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HOVERING
+                moveType UPPER_HOVERING
                 unknownWord 8192
                     
                 unknownByte 43          ; GARGOYLE
@@ -1173,7 +1173,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8240
                     
                 unknownByte 44          ; HARPY
@@ -1200,7 +1200,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8240
                     
                 unknownByte 45          ; LESSER DEMON
@@ -1227,7 +1227,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8240
                     
                 unknownByte 46          ; WYVERN
@@ -1254,7 +1254,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8240
                     
                 unknownByte 47          ; HARPY QUEEN
@@ -1281,7 +1281,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8208
                     
                 unknownByte 48          ; PEGASUS KNIGHT
@@ -1308,7 +1308,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8208
                     
                 unknownByte 49          ; GRIFFIN
@@ -1335,7 +1335,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8208
                     
                 unknownByte 50          ; MIST DEMON
@@ -1362,7 +1362,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HOVERING
+                moveType UPPER_HOVERING
                 unknownWord 8208
                     
                 unknownByte 51          ; WHITE DRAGON
@@ -1389,7 +1389,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8208
                     
                 unknownByte 52          ; DEMON
@@ -1416,7 +1416,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8208
                     
                 unknownByte 53          ; CHAOS DRAGON
@@ -1443,7 +1443,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8208
                     
                 unknownByte 54          ; DEVIL GRIFFIN
@@ -1470,7 +1470,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8208
                     
                 unknownByte 55          ; ARCH DEMON
@@ -1497,7 +1497,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8208
                     
                 unknownByte 56          ; GALAM ARCHER
@@ -1523,7 +1523,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType ARCHER
+                moveType UPPER_ARCHER
                 unknownWord 8208
                     
                 unknownByte 57          ; HUNTER GOBLIN
@@ -1549,7 +1549,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType STEALTH_ARCHER
+                moveType UPPER_STEALTH_ARCHER
                 unknownWord 8208
                     
                 unknownByte 58          ; DEATH ARCHER
@@ -1575,7 +1575,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType ARCHER
+                moveType UPPER_ARCHER
                 unknownWord 8208
                     
                 unknownByte 59          ; KRAKEN ARM
@@ -1601,7 +1601,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType AQUATIC
+                moveType UPPER_AQUATIC
                 unknownWord 8208
                     
                 unknownByte 60          ; ARROW LAUNCHER
@@ -1628,7 +1628,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType BRASS_GUNNER
+                moveType UPPER_BRASS_GUNNER
                 unknownWord 8208
                     
                 unknownByte 61          ; ROOK
@@ -1655,7 +1655,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType BRASS_GUNNER
+                moveType UPPER_BRASS_GUNNER
                 unknownWord 8208
                     
                 unknownByte 62          ; DARK SNIPER
@@ -1681,7 +1681,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType STEALTH_ARCHER
+                moveType UPPER_STEALTH_ARCHER
                 unknownWord 8208
                     
                 unknownByte 63          ; BOW MASTER
@@ -1707,7 +1707,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType ARCHER
+                moveType UPPER_ARCHER
                 unknownWord 8208
                     
                 unknownByte 64          ; BOW RIDER
@@ -1733,7 +1733,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType CENTAUR_ARCHER
+                moveType UPPER_CENTAUR_ARCHER
                 unknownWord 8208
                     
                 unknownByte 65          ; DARK GUNNER
@@ -1760,7 +1760,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType BRASS_GUNNER
+                moveType UPPER_BRASS_GUNNER
                 unknownWord 8208
                     
                 unknownByte 66          ; HORSEMAN
@@ -1786,7 +1786,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType CENTAUR_ARCHER
+                moveType UPPER_CENTAUR_ARCHER
                 unknownWord 8208
                     
                 unknownByte 67          ; GALAM MAGE
@@ -1813,7 +1813,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 8208
                     
                 unknownByte 68          ; WITCH
@@ -1840,7 +1840,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 8208
                     
                 unknownByte 69          ; MASTER MAGE
@@ -1867,7 +1867,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 8208
                     
                 unknownByte 70          ; DARK MADAM
@@ -1894,7 +1894,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 8208
                     
                 unknownByte 71          ; QUEEN
@@ -1921,7 +1921,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 8208
                     
                 unknownByte 72          ; WIZARD
@@ -1948,7 +1948,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 8208
                     
                 unknownByte 73          ; NECROMANCER
@@ -1975,7 +1975,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 8208
                     
                 unknownByte 74          ; CHAOS WIZARD
@@ -2001,7 +2001,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 8208
                     
                 unknownByte 75          ; DEMON MASTER
@@ -2028,7 +2028,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 8192
                     
                 unknownByte 76          ; DARK CLERIC
@@ -2054,7 +2054,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HEALER
+                moveType UPPER_HEALER
                 unknownWord 12288
                     
                 unknownByte 77          ; DEATH MONK
@@ -2080,7 +2080,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HEALER
+                moveType UPPER_HEALER
                 unknownWord 12288
                     
                 unknownByte 78          ; BLACK MONK
@@ -2106,7 +2106,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HEALER
+                moveType UPPER_HEALER
                 unknownWord 12288
                     
                 unknownByte 79          ; HIGH PRIEST
@@ -2132,7 +2132,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HEALER
+                moveType UPPER_HEALER
                 unknownWord 12288
                     
                 unknownByte 80          ; EVIL BISHOP
@@ -2158,7 +2158,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HEALER
+                moveType UPPER_HEALER
                 unknownWord 12288
                     
                 unknownByte 81          ; DARK BISHOP
@@ -2184,7 +2184,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HEALER
+                moveType UPPER_HEALER
                 unknownWord 12288
                     
                 unknownByte 0           ; MASTER MONK
@@ -2210,7 +2210,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HEALER
+                moveType UPPER_HEALER
                 unknownWord 12288
                     
                 unknownByte 0           ; SHAMAN
@@ -2236,7 +2236,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HEALER
+                moveType UPPER_HEALER
                 unknownWord 12288
                     
                 unknownByte 0           ; EVIL BISHOP
@@ -2262,7 +2262,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HEALER
+                moveType UPPER_HEALER
                 unknownWord 12288
                     
                 unknownByte 0           ; BLUE SHAMAN
@@ -2288,7 +2288,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HEALER
+                moveType UPPER_HEALER
                 unknownWord 12288
                     
                 unknownByte 0           ; DARK SMOKE
@@ -2315,7 +2315,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HOVERING
+                moveType UPPER_HOVERING
                 unknownWord 0
                     
                 unknownByte 0           ; KRAKEN HEAD
@@ -2342,7 +2342,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType AQUATIC
+                moveType UPPER_AQUATIC
                 unknownWord 4096
                     
                 unknownByte 0           ; TAROS
@@ -2369,7 +2369,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 4096
                     
                 unknownByte 0           ; KING
@@ -2396,7 +2396,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 4096
                     
                 unknownByte 0           ; WILLARD
@@ -2423,7 +2423,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType STEALTH
+                moveType UPPER_STEALTH
                 unknownWord 0
                     
                 unknownByte 0           ; ZALBARD
@@ -2450,7 +2450,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 4096
                     
                 unknownByte 0           ; CAMEELA
@@ -2477,7 +2477,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 4096
                     
                 unknownByte 0           ; PRISM FLOWER
@@ -2504,7 +2504,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 4096
                     
                 unknownByte 0           ; RED BARON
@@ -2531,7 +2531,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 4096
                     
                 unknownByte 0           ; GESHP
@@ -2558,7 +2558,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 4096
                     
                 unknownByte 0           ; ODD EYE
@@ -2585,7 +2585,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 4096
                     
                 unknownByte 0           ; GALAM
@@ -2612,7 +2612,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 4096
                     
                 unknownByte 0           ; ZEON
@@ -2639,7 +2639,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType REGULAR
+                moveType UPPER_REGULAR
                 unknownWord 4096
                     
                 unknownByte 0           ; JAR
@@ -2666,7 +2666,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType FLYING
+                moveType UPPER_FLYING
                 unknownWord 8192
                     
                 unknownByte 0           ; MASTER MAGE
@@ -2693,7 +2693,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 8192
                     
                 unknownByte 0           ; NECROMANCER
@@ -2720,7 +2720,7 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType MAGE
+                moveType UPPER_MAGE
                 unknownWord 8192
                     
                 unknownByte 0           ; BLUE SHAMAN
@@ -2746,6 +2746,6 @@ EnemyDefs:      ; spellPower     enum SpellPower : SPELLPOWER_*
                     NOTHING, &
                     NOTHING
                 initialStatus 0
-                moveType HEALER
+                moveType UPPER_HEALER
                 unknownWord 12288
                     

@@ -4,10 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = map idx (if not supplied, will be pulled from CURRENT_MAP)
+; In: D0 = map index (if not supplied, will be pulled from CURRENT_MAP)
 ;     D1 = player X coord to check
 ;     D2 = player Y coord to check
-; Out: D7 = battle idx to trigger (FFFF if none)
+; Out: D7 = battle index to trigger ($FFFF if none)
 ; ...more
 
 CheckBattle:

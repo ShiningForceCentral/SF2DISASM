@@ -23,13 +23,13 @@ WitchSuspend:
 loc_7068:
                 
                 bsr.w   WaitForVInt
-                btst    #7,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 dbne    d0,loc_7068
                 sndCom  SOUND_COMMAND_FADE_OUT
                 bsr.w   FadeOutToBlack
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
-                bsr.w   DisableDisplayAndVInt
+                bsr.w   DisableDisplayAndInterrupts
                 move    #$2700,sr
                 movea.l (InitStack).w,sp
                 movea.l (p_Start).w,a0  

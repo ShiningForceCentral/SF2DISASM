@@ -36,7 +36,7 @@ loc_9ADA:
                 
                 moveq   #1,d0           ; use magic
                 moveq   #1,d1
-                moveq   #SPELLDEF_LEVELS_NUM,d2
+                moveq   #SPELLENTRY_LEVELS_NUMBER,d2
                 jsr     j_NumberPrompt
                 move.w  d0,d3
                 subq.w  #1,d3
@@ -90,9 +90,9 @@ loc_9B3E:
 
 DebugModeSelectTargetEnemy:
                 
-                move.l  #COM_ENEMY_START,d0
+                move.l  #COMBATANT_ENEMIES_START,d0
                 moveq   #0,d1
-                move.w  #COM_ENEMY_END,d2
+                move.w  #COMBATANT_ENEMIES_END,d2
                 jsr     j_NumberPrompt
                 rts
 

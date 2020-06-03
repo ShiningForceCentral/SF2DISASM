@@ -5,11 +5,12 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; In: D0 = combatant index
+; 
 ; Out: D4 = map sprite index
 
 GetAllyMapSprite:
                 
-                cmpi.w  #COM_ALLIES_NUM,d0 ; HARDCODED number of allies
+                cmpi.w  #COMBATANT_ALLIES_NUMBER,d0 ; HARDCODED number of allies
                 blt.s   @CheckIfCurrentlyInBattle
                 move.w  d0,d4
                 bra.w   @Return         ; return if combatant is not an ally
@@ -35,10 +36,10 @@ GetAllyMapSprite:
                 bra.w   @Done           ; Rhode hasn't joined yet, so use his NPC sprite
 @GetMapSpriteForClass:
                 
-                move.w  d0,d4
-                andi.w  #ALLY_MASK_IDX,d4
+                move.w  d0,d4           ; start handling sprite indexes based on class
+                andi.w  #ALLY_MASK_INDEX,d4
                 move.b  tbl_AllyMapSprites(pc,d4.w),d4
-                jsr     j_GetClass      
+                jsr     j_GetClass
                 cmpi.b  #CLASS_HERO,d1  ; HARDCODED class indexes
                 beq.w   @Done           ; if HERO, use index as is from the table
                 cmpi.b  #CLASS_SDMN,d1

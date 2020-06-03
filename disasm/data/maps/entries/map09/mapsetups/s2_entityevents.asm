@@ -54,7 +54,7 @@ Map9_EntityEvent4:
 Map9_EntityEvent5:
                 
                 move.b  #6,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map9_EntityEvent5
@@ -65,7 +65,7 @@ Map9_EntityEvent5:
 Map9_EntityEvent6:
                 
                 move.b  #$15,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map9_EntityEvent6
@@ -75,7 +75,7 @@ Map9_EntityEvent6:
 
 Map9_EntityEvent7:
                 
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map9_EntityEvent7
@@ -139,7 +139,7 @@ Map9_EntityEvent10:
 Map9_EntityEvent11:
                 
                 move.b  #7,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map9_EntityEvent11

@@ -34,7 +34,7 @@ loc_442D2:
                 move.w  d0,-(sp)
                 clr.w   d0
                 move.b  1(a4),d0
-                cmpi.b  #COM_ALLIES_NUM,d0 ; HARDCODED max force member index
+                cmpi.b  #COMBATANT_ALLIES_NUMBER,d0 ; HARDCODED max force member index
                 bcc.s   loc_44302
                 bsr.w   GetAllyMapSprite
                 bra.s   loc_44308

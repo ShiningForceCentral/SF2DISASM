@@ -281,7 +281,7 @@ csc42_loadMapEntities:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
                 dc.l 0
-                jsr     (DisableDisplayAndVInt).w
+                jsr     (DisableDisplayAndInterrupts).w
                 movea.l (a6)+,a0
                 move.w  (a0)+,d1
                 move.w  (a0)+,d2
@@ -400,7 +400,7 @@ csc49_loadEntitiesFromMapSetup:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
                 dc.l 0
-                jsr     (DisableDisplayAndVInt).w
+                jsr     (DisableDisplayAndInterrupts).w
                 jsr     GetMapSetupEntityList
                 move.w  (a6)+,d1
                 move.w  (a6)+,d2
@@ -856,7 +856,7 @@ csc19_setEntityPosAndFacing:
                 
                 move.b  (a6),d0
                 moveq   #4,d7
-                bsr.w   AdjustScriptPointerByCharAliveStatus
+                bsr.w   AdjustScriptPointerByCharacterAliveStatus
                 move.b  (a6)+,d0
                 bsr.w   GetEntityAddressFromCharacter
                 moveq   #0,d0           ; set new pos-dest, and facing
@@ -883,7 +883,7 @@ csc1A_setEntitySprite:
                 move.w  (a6)+,d0
                 bsr.w   GetEntityAddressFromCharacter
                 move.w  (a6)+,d0
-                cmpi.w  #COM_ALLIES_NUM,d0
+                cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
                 bcc.s   loc_46A5E
                 jsr     GetAllyMapSprite
                 move.w  d4,d0
@@ -905,7 +905,7 @@ csc1B_startEntityAnim:
                 
                 move.w  (a6),d0
                 moveq   #2,d7
-                bsr.w   AdjustScriptPointerByCharAliveStatus
+                bsr.w   AdjustScriptPointerByCharacterAliveStatus
                 move.w  (a6)+,d0
                 bsr.w   GetEntityAddressFromCharacter
                 move.b  #0,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
@@ -922,7 +922,7 @@ csc1C_stopEntityAnim:
                 
                 move.w  (a6),d0
                 moveq   #2,d7
-                bsr.w   AdjustScriptPointerByCharAliveStatus
+                bsr.w   AdjustScriptPointerByCharacterAliveStatus
                 move.w  (a6)+,d0
                 bsr.w   GetEntityAddressFromCharacter
                 move.b  #$FF,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
@@ -1183,7 +1183,7 @@ csc23_setEntityFacing:
                 
                 move.b  (a6),d0
                 moveq   #2,d7
-                bsr.w   AdjustScriptPointerByCharAliveStatus
+                bsr.w   AdjustScriptPointerByCharacterAliveStatus
                 move.b  (a6)+,d0
                 bsr.w   GetEntityAddressFromCharacter
                 move.b  (a6)+,ENTITYDEF_OFFSET_FACING(a5)
@@ -1199,7 +1199,7 @@ csc23_setEntityFacing:
 
 csc24_setCameraTargetEntity:
                 
-                lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a5
+                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a5
                 move.w  (a6)+,d0
                 bmi.w   loc_46C52
                 tst.b   d0
@@ -1457,7 +1457,7 @@ csc2C_followEntity:
                 
                 move.b  (a6),d0
                 moveq   #6,d7
-                bsr.w   AdjustScriptPointerByCharAliveStatus
+                bsr.w   AdjustScriptPointerByCharacterAliveStatus
                 move.w  (a6)+,d0
                 bsr.w   GetEntityAddressFromCharacter
                 move.w  d0,d3
@@ -1575,7 +1575,7 @@ csc51_joinBattleParty:
                 jsr     j_UpdateForce
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
                 nop
-                move.w  ((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w,d7
+                move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
                 nop
                 subq.w  #2,d7
 loc_46F2C:
@@ -1759,8 +1759,8 @@ csc31_moveEntityAboveEntity:
 
 GetEntityAddressFromCharacter:
                 
-                lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a5
-                andi.w  #CHAR_MASK_IDX,d0
+                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a5
+                andi.w  #COMBATANT_MASK,d0
                 tst.b   d0
                 bpl.s   loc_4705A
                 subi.b  #$60,d0 
@@ -1795,22 +1795,22 @@ UpdateEntitySprite_0:
 
 ; move script pointer d7 forward if character dead
 
-AdjustScriptPointerByCharAliveStatus:
+AdjustScriptPointerByCharacterAliveStatus:
                 
-                btst    #7,d0
-                bne.s   return_4709C
-                cmpi.b  #COM_ALLIES_NUM,d0 ; HARDCODED force member index limit
-                bge.s   return_4709C    ; it must be a force member
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @Return
+                cmpi.b  #COMBATANT_ALLIES_NUMBER,d0 ; HARDCODED force member index limit
+                bge.s   @Return         ; it must be a force member
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                bne.s   return_4709C
+                bne.s   @Return
                 adda.w  d7,a6
                 movem.l (sp)+,d7
-return_4709C:
+@Return:
                 
                 rts
 
-    ; End of function AdjustScriptPointerByCharAliveStatus
+    ; End of function AdjustScriptPointerByCharacterAliveStatus
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1830,8 +1830,8 @@ sub_4709E:
                 adda.w  d1,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                jsr     (ApplyVIntVramDMA).w
-                jsr     (EnableDMAQueueProcessing).w
+                jsr     (ApplyVIntVramDma).w
+                jsr     (EnableDmaQueueProcessing).w
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 

@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-Int_AdressError:
+Int_AddressError:
                 
                 move.l  #'ADDR',(ERRCODE_BYTE0).l
                 move.l  $A(sp),(ERRCODE_BYTE4).l
                 bsr.w   SaveErrorCode
                 bra.w   Int_ExternalInterrupt
 
-    ; End of function Int_AdressError
+    ; End of function Int_AddressError
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -66,7 +66,7 @@ SaveErrorCode:
     ; End of function SaveErrorCode
 
 
-; START OF FUNCTION CHUNK FOR Int_AdressError
+; START OF FUNCTION CHUNK FOR Int_AddressError
 
 Int_ExternalInterrupt:
                 
@@ -75,7 +75,7 @@ Int_ExternalInterrupt:
                 nop
                 bra.s   Int_ExternalInterrupt
 
-; END OF FUNCTION CHUNK FOR Int_AdressError
+; END OF FUNCTION CHUNK FOR Int_AddressError
 
 
 ; =============== S U B R O U T I N E =======================================

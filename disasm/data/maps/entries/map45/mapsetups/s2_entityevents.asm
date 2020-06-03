@@ -49,7 +49,7 @@ Map45_EntityEvent3:
                  
                 txt     $821            ; "Where are you from?{N}I used to be a priest.{W2}"
                 txt     $822            ; "Do you need my help?{W1}"
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map45_EntityEvent3

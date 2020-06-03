@@ -4,6 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; Vertical interrupt
+
 VInt:
                 
                 movem.l d0-a6,-(sp)
@@ -14,13 +16,13 @@ VInt:
                 bsr.w   ProcessVdpQueues
                 bsr.w   EnableDisplayOnVdp
                 bsr.w   ProcessVramRead
-                bsr.w   ApplyFadingFX
+                bsr.w   ApplyFadingEffect
                 bsr.w   ApplyZ80BusUpdates
                 andi    #$F800,sr       ; disable interrupts
                 clr.b   ((HIDE_WINDOWS-$1000000)).w
                 tst.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 bne.s   loc_5DA
-                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w ; if Start pushed, hide windows
+                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w ; if Start pushed, hide windows
                 beq.s   loc_5DA
                 move.b  #$FF,((HIDE_WINDOWS-$1000000)).w
 loc_5DA:
@@ -36,7 +38,7 @@ loc_5EC:
                 move.w  (VDP_REG00_STATUS).l,(VDP_Control).l
                 move.l  ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w,d0
                 beq.s   loc_620
-                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 beq.s   loc_620
                 clr.l   ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
                 movea.l (GAME_INTRO_SP_OFFSET).l,sp ; if P1 START pushed during intro cutscenes, stop and go back to game intro flow
@@ -101,7 +103,7 @@ DisableDisplay:
 ProcessVdpQueues:
                 
                 bsr.s   ProcessVdpCommandQueue
-                bsr.w   ProcessDMAQueue
+                bsr.w   ProcessDmaQueue
                 rts
 
     ; End of function ProcessVdpQueues
@@ -160,7 +162,7 @@ return_6FE:
 ProcessVramRead:
                 
                 bclr    #VRAM_READ_REQUEST,(VINT_PARAMS).l ; Check if VRAM read requested
-                beq.s   return_73E
+                beq.s   @Return
                 lea     (VDP_COMMAND_QUEUE).l,a0
                 move.w  #$8F02,(VDP_Control).l ; autoincrement 02
                 move.w  (a0),d7
@@ -171,11 +173,11 @@ ProcessVramRead:
                 andi.w  #3,d7
                 move.w  d7,(VDP_Control).l
                 move.w  (a0)+,d7
-loc_734:
+@Loop:
                 
                 move.w  (VDP_Data).l,(a0)+
-                dbf     d7,loc_734
-return_73E:
+                dbf     d7,@Loop
+@Return:
                 
                 rts
 
@@ -184,9 +186,9 @@ return_73E:
 
 ; =============== S U B R O U T I N E =======================================
 
-ProcessDMAQueue:
+ProcessDmaQueue:
                 
-                bclr    #DMA_REQUEST,(VINT_PARAMS).l ; Check is DMA requested
+                bclr    #DMA_REQUEST,(VINT_PARAMS).l ; Check if DMA requested
                 bne.s   loc_754         
                 btst    #DEACTIVATE_DMA,(VINT_PARAMS).l ; Check if DMA deactivated
                 bne.s   return_7CC
@@ -199,7 +201,7 @@ loc_75C:
                 bne.s   loc_75C         
                 btst    #DEACTIVATE_DMA,(VINT_PARAMS).l ; Check if DMA deactivated
                 bne.s   return_7CC
-                bsr.w   UpdateVDPSpriteTable ; Update sprites
+                bsr.w   UpdateVdpSpriteTable ; Update sprites
                 tst.b   (DMA_QUEUE_SIZE).l
                 beq.s   loc_7BA
                 lea     (DMA_QUEUE).l,a0
@@ -227,7 +229,7 @@ return_7CC:
                 
                 rts
 
-    ; End of function ProcessDMAQueue
+    ; End of function ProcessDmaQueue
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -536,14 +538,15 @@ loc_9F6:
                 dbcc    d0,*+4
                 tst.w   d0
                 bgt.s   loc_A52
-                andi.b  #3,((P1_INPUT-$1000000)).w ; if both directions are new, only keep vertical one
+                andi.b  #INPUT_UP|INPUT_DOWN,((P1_INPUT-$1000000)).w 
+                                                        ; if both directions are new, only keep vertical one
 loc_A52:
                 
                 bra.s   loc_A60
 loc_A54:
                 
                 move.b  ((P1_INPUT-$1000000)).w,d1 ; if only one direction pushed, set it as primary
-                andi.w  #$F,d1
+                andi.w  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT,d1
                 move.b  d1,((PRIMARY_WALKING_DIRECTION-$1000000)).w
 loc_A60:
                 
@@ -566,13 +569,13 @@ loc_A86:
                 
                 clr.w   d2              ; if input is new
                 move.b  ((LAST_PLAYER_INPUT-$1000000)).w,d1
-                andi.b  #$F,d1
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT,d1
                 beq.s   loc_A94
                 moveq   #1,d2           ; was pushing a direction
 loc_A94:
                 
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,((LAST_PLAYER_INPUT-$1000000)).w
-                andi.b  #$F,d0
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT,d0
                 beq.w   loc_AA8
                 tst.b   d2
                 bne.w   loc_AAC
@@ -590,7 +593,7 @@ loc_AAC:
 
 ; =============== S U B R O U T I N E =======================================
 
-ApplyFadingFX:
+ApplyFadingEffect:
                 
                 move.b  ((FADING_SETTING-$1000000)).w,d0
                 beq.w   return_B1C
@@ -616,7 +619,7 @@ loc_AEC:
                 bne.s   loc_B0A
                 andi.w  #$F,d1          ; go x backwards
                 sub.b   d1,((FADING_POINTER-$1000000)).w
-                bra.w   ApplyFadingFX
+                bra.w   ApplyFadingEffect
 loc_B0A:
                 
                 ext.w   d1
@@ -629,7 +632,7 @@ return_B1C:
                 
                 rts
 
-    ; End of function ApplyFadingFX
+    ; End of function ApplyFadingEffect
 
 FadingData:     incbin "data/graphics/tech/fadingdata.bin" ; 80 : end
                                         ; 8x : go x backward
@@ -639,11 +642,11 @@ FadingData:     incbin "data/graphics/tech/fadingdata.bin" ; 80 : end
 WaitDmaEnd:
                 
                 movem.w d0,-(sp)
-loc_B9A:
+@Wait:
                 
                 move.w  (VDP_Control).l,d0
                 btst    #1,d0           ; control if DMA in progress
-                bne.s   loc_B9A         ; loop if DMA in progress
+                bne.s   @Wait           ; loop if DMA in progress
                 movem.w (sp)+,d0
                 rts
 
@@ -651,6 +654,8 @@ loc_B9A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; VDP Reg Status -> D0
 
 GetVdpRegStatus:
                 
@@ -691,7 +696,7 @@ ApplyLogicalOrOnVdpReg:
                 lea     (VDP_REG00_STATUS).l,a0
                 add.w   d0,d0
                 or.b    d1,1(a0,d0.w)   ; enable display
-                bra.s   SendVDPCommand
+                bra.s   SendVdpCommand
 
     ; End of function ApplyLogicalOrOnVdpReg
 
@@ -711,7 +716,7 @@ ApplyLogicalAndOnVdpReg:
 
 ; START OF FUNCTION CHUNK FOR ApplyLogicalOrOnVdpReg
 
-SendVDPCommand:
+SendVdpCommand:
                 
                 move.w  (a0,d0.w),d1
                 move.w  d1,(VDP_Control).l
@@ -777,32 +782,32 @@ EnableDisplayAndInterrupts:
 
 ; =============== S U B R O U T I N E =======================================
 
-DisableDisplayAndVInt:
+DisableDisplayAndInterrupts:
                 
                 bsr.s   DisableInterrupts
                 bra.s   DisableDisplayOnVdp
 
-    ; End of function DisableDisplayAndVInt
+    ; End of function DisableDisplayAndInterrupts
 
 
 ; =============== S U B R O U T I N E =======================================
 
-ActivateVIntDMAQueueProcessing:
+ActivateVIntDmaQueueProcessing:
                 
                 bclr    #DEACTIVATE_DMA,(VINT_PARAMS).l
                 rts
 
-    ; End of function ActivateVIntDMAQueueProcessing
+    ; End of function ActivateVIntDmaQueueProcessing
 
 
 ; =============== S U B R O U T I N E =======================================
 
-DeactivateVIntDMAQueueProcessing:
+DeactivateVIntDmaQueueProcessing:
                 
                 bset    #DEACTIVATE_DMA,(VINT_PARAMS).l
                 rts
 
-    ; End of function DeactivateVIntDMAQueueProcessing
+    ; End of function DeactivateVIntDmaQueueProcessing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -812,11 +817,11 @@ DuplicatePalettes:
                 movem.l d7/a5-a6,-(sp)
                 lea     (PALETTE_1_BASE).l,a5
                 lea     (PALETTE_1_CURRENT).l,a6
-                move.w  #$3F,d7 
-loc_C76:
+                move.w  #CRAM_COLORS_COUNTER,d7
+@Loop:
                 
                 move.w  (a5)+,(a6)+
-                dbf     d7,loc_C76
+                dbf     d7,@Loop
                 movem.l (sp)+,d7/a5-a6
 
     ; End of function DuplicatePalettes
@@ -826,7 +831,7 @@ loc_C76:
 
 ; VDP CRAM
 
-ApplyVIntCramDMA:
+ApplyVIntCramDma:
                 
                 move    sr,-(sp)
                 move    #$2700,sr       ; disable interrupts
@@ -846,7 +851,7 @@ ApplyVIntCramDMA:
                 move    (sp)+,sr
                 rts
 
-    ; End of function ApplyVIntCramDMA
+    ; End of function ApplyVIntCramDma
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -913,11 +918,11 @@ ExecuteFading:
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
-loc_D0E:
+@Wait:
                 
                 bsr.w   WaitForVInt
                 tst.b   ((FADING_SETTING-$1000000)).w ; wait until fade end
-                bne.s   loc_D0E
+                bne.s   @Wait
                 bsr.w   WaitForVInt
                 rts
 
@@ -998,8 +1003,8 @@ loc_D9C:
 loc_DA8:
                 
                 dbf     d6,loc_D30
-                bsr.w   ApplyVIntCramDMA
-                bsr.w   EnableDMAQueueProcessing
+                bsr.w   ApplyVIntCramDma
+                bsr.w   EnableDmaQueueProcessing
                 movem.l (sp)+,d2-a2
                 rts
 
@@ -1017,7 +1022,7 @@ loc_DC2:
                 bne.s   loc_DC2         ; wait for bus available
                 bsr.s   ClearScrollTableData
                 bsr.s   ClearSpriteTable
-                bsr.s   UpdateVDPSpriteTable
+                bsr.s   UpdateVdpSpriteTable
                 move.w  #0,(Z80BusReq).l
                 rts
 
@@ -1026,7 +1031,7 @@ loc_DC2:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateVDPSpriteTable:
+UpdateVdpSpriteTable:
                 
                 bsr.w   WaitDmaEnd
                 lea     (VDP_Control).l,a6
@@ -1044,7 +1049,7 @@ UpdateVDPSpriteTable:
                 move.w  (VDP_REG01_STATUS).l,(a6)
                 rts
 
-    ; End of function UpdateVDPSpriteTable
+    ; End of function UpdateVdpSpriteTable
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1053,15 +1058,15 @@ ClearSpriteTable:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     (SPRITE_TABLE).l,a0
-                moveq   #$3F,d1 
+                moveq   #VDP_SPRITES_COUNTER,d1
                 moveq   #1,d0
-loc_E22:
+@Loop:
                 
                 move.l  d0,(a0)
                 clr.l   4(a0)
                 addq.w  #8,a0
                 addq.b  #1,d0
-                dbf     d1,loc_E22
+                dbf     d1,@Loop
                 clr.b   -5(a0)
                 movem.l (sp)+,d0-d1/a0
                 rts
@@ -1077,11 +1082,11 @@ ClearScrollTableData:
                 move.w  #$C000,d0       ; clear scroll A table
                 move.w  #$1000,d1
                 clr.w   d2
-                bsr.w   ApplyVramDMAFill
+                bsr.w   ApplyVramDmaFill
                 move.w  #$E000,d0       ; clear scroll B table
                 move.w  #$1000,d1
                 clr.w   d2
-                bsr.w   ApplyVramDMAFill
+                bsr.w   ApplyVramDmaFill
                 move.w  #$1FF,d7
                 lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a6
 loc_E62:
@@ -1137,10 +1142,10 @@ WaitForVInt:
                 
                 bset    #ENABLE_VINT,(VINT_PARAMS).l
                 move.b  #1,((WAITING_NEXT_VINT-$1000000)).w
-loc_EFC:
+@Wait:
                 
                 tst.b   ((WAITING_NEXT_VINT-$1000000)).w ; wait until FFDEF7 clear
-                bne.s   loc_EFC         
+                bne.s   @Wait           
                 rts
 
     ; End of function WaitForVInt
@@ -1154,12 +1159,12 @@ Sleep:
                 
                 movem.w d0,-(sp)
                 subq.w  #1,d0
-                bcs.w   loc_F14
-loc_F0E:
+                bcs.w   @Done
+@Loop:
                 
                 bsr.s   WaitForVInt
-                dbf     d0,loc_F0E
-loc_F14:
+                dbf     d0,@Loop
+@Done:
                 
                 movem.w (sp)+,d0
                 rts
@@ -1189,22 +1194,22 @@ WaitForVdpCommandQueueProcessing:
 
 ; =============== S U B R O U T I N E =======================================
 
-EnableDMAQueueProcessing:
+EnableDmaQueueProcessing:
                 
                 bset    #DMA_REQUEST,(VINT_PARAMS).l
                 rts
 
-    ; End of function EnableDMAQueueProcessing
+    ; End of function EnableDmaQueueProcessing
 
 
 ; =============== S U B R O U T I N E =======================================
 
-WaitForDMAQueueProcessing:
+WaitForDmaQueueProcessing:
                 
-                bsr.s   EnableDMAQueueProcessing
+                bsr.s   EnableDmaQueueProcessing
                 bra.w   WaitForVInt
 
-    ; End of function WaitForDMAQueueProcessing
+    ; End of function WaitForDmaQueueProcessing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1390,7 +1395,7 @@ loc_1088:
 
 ; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
 
-ApplyImmediateVramDMA:
+ApplyImmediateVramDma:
                 
                 move    sr,-(sp)
                 move    #$2700,sr
@@ -1459,14 +1464,14 @@ loc_1188:
                 move    (sp)+,sr
                 rts
 
-    ; End of function ApplyImmediateVramDMA
+    ; End of function ApplyImmediateVramDma
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
 
-ApplyVIntVramDMA:
+ApplyVIntVramDma:
                 
                 move    sr,-(sp)
                 move    #$2700,sr
@@ -1520,7 +1525,7 @@ ApplyVIntVramDMA:
                 move    (sp)+,sr
                 rts
 
-    ; End of function ApplyVIntVramDMA
+    ; End of function ApplyVIntVramDma
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1546,7 +1551,7 @@ sub_1234:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateVDPHScrollData:
+UpdateVdpHScrollData:
                 
                 movem.l a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
@@ -1577,7 +1582,7 @@ loc_1284:
                 movem.l (sp)+,a6
                 rts
 
-    ; End of function UpdateVDPHScrollData
+    ; End of function UpdateVdpHScrollData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1595,7 +1600,7 @@ loc_12B8:
                 addq.l  #2,a6
                 dbf     d7,loc_12B8
                 movem.l (sp)+,d7/a6
-                bra.s   UpdateVDPHScrollData
+                bra.s   UpdateVdpHScrollData
 
     ; End of function UpdateForegroundHScrollData
 
@@ -1615,7 +1620,7 @@ UpdateBackgroundHScrollData:
 
 ; VDP Vertical Scroll Data
 
-UpdateVDPVScrollData:
+UpdateVdpVScrollData:
                 
                 movem.l a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
@@ -1641,7 +1646,7 @@ loc_12FC:
                 movem.l (sp)+,a6
                 rts
 
-    ; End of function UpdateVDPVScrollData
+    ; End of function UpdateVdpVScrollData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1659,7 +1664,7 @@ loc_1330:
                 addq.l  #2,a6
                 dbf     d7,loc_1330
                 movem.l (sp)+,d7/a6
-                bra.s   UpdateVDPVScrollData
+                bra.s   UpdateVdpVScrollData
 
     ; End of function UpdateForegroundVScrollData
 
@@ -1683,7 +1688,7 @@ sub_134A:
                 
                 movem.w d1,-(sp)
                 bsr.s   sub_135A        
-                bsr.w   ApplyImmediateVramDMA
+                bsr.w   ApplyImmediateVramDma
                 movem.w (sp)+,d1
                 rts
 
@@ -1714,7 +1719,7 @@ sub_1372:
                 
                 movem.w d1,-(sp)
                 bsr.s   sub_135A        
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
                 movem.w (sp)+,d1
                 rts
 
@@ -1725,20 +1730,20 @@ sub_1372:
 
 ; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
 
-ApplyImmediateVramDMAOnCompressedTiles:
+ApplyImmediateVramDmaOnCompressedTiles:
                 
                 movem.w d1,-(sp)
-                bsr.s   DecompressTilesForVramDMA
-                bsr.w   ApplyImmediateVramDMA
+                bsr.s   DecompressTilesForVramDma
+                bsr.w   ApplyImmediateVramDma
                 movem.w (sp)+,d1
                 rts
 
-    ; End of function ApplyImmediateVramDMAOnCompressedTiles
+    ; End of function ApplyImmediateVramDmaOnCompressedTiles
 
 
 ; =============== S U B R O U T I N E =======================================
 
-DecompressTilesForVramDMA:
+DecompressTilesForVramDma:
                 
                 movem.l d0-d1/a1,-(sp)
                 lea     (FF8804_LOADING_SPACE).l,a1
@@ -1748,20 +1753,20 @@ DecompressTilesForVramDMA:
                 move.w  #2,d1
                 rts
 
-    ; End of function DecompressTilesForVramDMA
+    ; End of function DecompressTilesForVramDma
 
 
 ; =============== S U B R O U T I N E =======================================
 
-ApplyVIntVramDMAOnCompressedTiles:
+ApplyVIntVramDmaOnCompressedTiles:
                 
                 movem.w d1,-(sp)
-                bsr.s   DecompressTilesForVramDMA
-                bsr.w   ApplyVIntVramDMA
+                bsr.s   DecompressTilesForVramDma
+                bsr.w   ApplyVIntVramDma
                 movem.w (sp)+,d1
                 rts
 
-    ; End of function ApplyVIntVramDMAOnCompressedTiles
+    ; End of function ApplyVIntVramDmaOnCompressedTiles
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1775,8 +1780,8 @@ sub_13C0:
                 lea     ($C000).l,a1
                 move.w  #$800,d0
                 move.w  #2,d1
-                bsr.w   ApplyVIntVramDMA
-                bsr.w   EnableDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bsr.w   EnableDmaQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
@@ -1794,8 +1799,8 @@ sub_13E4:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 move.w  #2,d1
-                bsr.w   ApplyVIntVramDMA
-                bsr.w   EnableDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bsr.w   EnableDmaQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
@@ -1806,19 +1811,19 @@ sub_13E4:
 
 ; unused
 
-DMAandWait:
+DmaAndWait:
                 
                 bsr.s   sub_13C0        
                 bra.w   WaitForVInt
 
-    ; End of function DMAandWait
+    ; End of function DmaAndWait
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; D0=Destination, D1=Length, D2=Filler value
 
-ApplyVramDMAFill:
+ApplyVramDmaFill:
                 
                 movem.l d0-d3,-(sp)
                 move.w  (VDP_REG01_STATUS).l,d3 ; get last 16+ vdp reg config command ?
@@ -1844,16 +1849,16 @@ ApplyVramDMAFill:
                 ori.w   #$80,d0 ; errr .. CD5 set to 1 ? doesn't correspond to any access mode
                 move.w  d0,(VDP_Control).l ; destination address, second word
                 move.w  d2,(VDP_Data).l ; writes 0 everytime
-loc_1480:
+@Wait:
                 
                 move.w  (VDP_Control).l,d0
                 andi.w  #2,d0           ; wait for DMA free
-                bne.s   loc_1480
+                bne.s   @Wait
                 move.w  (VDP_REG01_STATUS).l,d3 ; get last vdp 16+ reg config command and send it
                 move.w  d3,(VDP_Control).l
                 move.w  #$8F02,(VDP_Control).l ; auto increment bias number : 2
                 movem.l (sp)+,d0-d3
                 rts
 
-    ; End of function ApplyVramDMAFill
+    ; End of function ApplyVramDmaFill
 

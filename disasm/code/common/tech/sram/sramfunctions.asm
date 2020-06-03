@@ -6,7 +6,7 @@ SramCheckString:dc.b 'Taguchi New Supra'
 
 ; =============== S U B R O U T I N E =======================================
 
-CheckSRAM:
+CheckSram:
                 
                 movem.l d7-a1,-(sp)
                 lea     SramCheckString(pc), a0
@@ -29,7 +29,7 @@ loc_6ED2:
 loc_6EDE:
                 
                 move.w  #$FB0,d7
-                bsr.w   CopyBytesFromSRAM
+                bsr.w   CopyBytesFromSram
                 cmp.b   (SAVE2_CHECKSUM).l,d0
                 bne.s   loc_6EF2
                 moveq   #1,d1
@@ -49,7 +49,7 @@ loc_6F0A:
                 lea     (SAVE1_CHARACTER_DATA).l,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  #$FB0,d7
-                bsr.w   CopyBytesFromSRAM
+                bsr.w   CopyBytesFromSram
                 cmp.b   (SAVE1_CHECKSUM).l,d0
                 bne.s   loc_6F2A
                 moveq   #1,d0
@@ -75,7 +75,7 @@ loc_6F42:
                 moveq   #$11,d7         ; copy string to sram ... again ?
 loc_6F56:
                 
-                bsr.w   CopyBytesToSRAM 
+                bsr.w   CopyBytesToSram 
                 clr.b   (SAVE_FLAGS).l  
                 clr.w   d0
                 clr.w   d1
@@ -84,7 +84,7 @@ loc_6F64:
                 movem.l (sp)+,d7-a1
                 rts
 
-    ; End of function CheckSRAM
+    ; End of function CheckSram
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -92,7 +92,7 @@ loc_6F64:
 SaveGame:
                 
                 movem.l d0-d1/d7-a2,-(sp)
-                lea     (CHARACTER_DATA).l,a0
+                lea     (COMBATANT_ENTRIES).l,a0
                 tst.b   d0
                 bne.s   loc_6F88
                 lea     (SAVE1_CHARACTER_DATA).l,a1
@@ -107,7 +107,7 @@ loc_6F88:
 loc_6F96:
                 
                 move.w  #$FB0,d7
-                bsr.w   CopyBytesToSRAM 
+                bsr.w   CopyBytesToSram 
                 move.b  d0,(a2)         ; d0 = save checksum
                 bset    d1,(SAVE_FLAGS).l ; indicate busy save slot
                 movem.l (sp)+,d0-d1/d7-a2
@@ -121,7 +121,7 @@ loc_6F96:
 LoadGame:
                 
                 movem.l d0-d1/d7-a2,-(sp)
-                lea     (CHARACTER_DATA).l,a1
+                lea     (COMBATANT_ENTRIES).l,a1
                 tst.b   d0
                 bne.s   loc_6FC4
 loc_6FBA:
@@ -136,7 +136,7 @@ loc_6FC4:
 loc_6FCC:
                 
                 move.w  #$FB0,d7
-                bsr.w   CopyBytesFromSRAM
+                bsr.w   CopyBytesFromSram
                 movem.l (sp)+,d0-d1/d7-a2
                 rts
 
@@ -182,7 +182,7 @@ return_7002:
 ; a1 = destination address
 ; d7 = number of bytes to copy
 
-CopyBytesToSRAM:
+CopyBytesToSram:
                 
                 movem.l d7-a1,-(sp)
                 clr.w   d0
@@ -196,14 +196,14 @@ loc_700C:
                 movem.l (sp)+,d7-a1
                 rts
 
-    ; End of function CopyBytesToSRAM
+    ; End of function CopyBytesToSram
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; and calculate checksum
 
-CopyBytesFromSRAM:
+CopyBytesFromSram:
                 
                 movem.l d7-a1,-(sp)
                 clr.w   d0
@@ -219,5 +219,5 @@ loc_702E:
                 movem.l (sp)+,d7-a1
                 rts
 
-    ; End of function CopyBytesFromSRAM
+    ; End of function CopyBytesFromSram
 

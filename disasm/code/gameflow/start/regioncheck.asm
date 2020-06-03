@@ -24,7 +24,7 @@ CheckRegion:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
                 lea     (PALETTE_1_CURRENT).l,a0
                 move.l  #$EEE,(a0)+
                 clr.l   (a0)+
@@ -34,8 +34,8 @@ CheckRegion:
                 clr.l   (a0)+
                 clr.l   (a0)+
                 clr.l   (a0)+
-                bsr.w   ApplyVIntCramDMA
-                bsr.w   WaitForDMAQueueProcessing
+                bsr.w   ApplyVIntCramDma
+                bsr.w   WaitForDmaQueueProcessing
 loc_7F3E:
                 
                 bra.s   loc_7F3E

@@ -62,7 +62,7 @@ loc_20A78:
                 jsr     j_GetCurrentLevel
                 mulu.w  #$A,d1
                 move.l  d1,-8(a6)
-                jsr     j_GetClass      
+                jsr     j_GetClass
                 move.w  #0,d2
                 bsr.w   sub_210D0
                 cmpi.w  #0,-$24(a6)
@@ -125,7 +125,7 @@ loc_20B74:
                 move.b  (a0)+,d0
                 movem.l a0,-(sp)
                 move.w  d0,-$C(a6)
-                jsr     j_GetCharEntryAddress
+                jsr     j_GetCombatantEntryAddress
                 lea     $2C(a0),a0
                 move.w  (a0),d2
                 move.w  d2,d3
@@ -185,7 +185,7 @@ loc_20C42:
                 move.b  (a0)+,d0
                 movem.l a0,-(sp)
                 move.w  d0,-$C(a6)
-                jsr     j_GetCharEntryAddress
+                jsr     j_GetCombatantEntryAddress
                 lea     $2C(a0),a0
                 move.w  (a0),d2
                 andi.w  #4,d2
@@ -207,7 +207,7 @@ loc_20C86:
                 bcc.w   loc_20CA8
                 jsr     j_GetItemDefAddress
                 clr.l   d4
-                move.w  6(a0),d4
+                move.w  ITEMDEF_OFFSET_PRICE(a0),d4
                 lsr.w   #2,d4
                 add.l   d4,d3
 loc_20CA8:
@@ -276,7 +276,7 @@ byte_20D5C:
 loc_20D80:
                 
                 move.w  d0,-$C(a6)
-                jsr     j_GetClass      
+                jsr     j_GetClass
                 move.w  d1,-$1A(a6)
                 move.w  #0,d2
                 bsr.w   sub_210D0
@@ -419,7 +419,7 @@ loc_20F30:
                 jsr     j_Promote
                 cmpi.w  #CLASS_SORC,-$1C(a6)
                 bne.s   loc_20F66
-                bsr.w   ReplaceSpellsWithSORCDefaults
+                bsr.w   ReplaceSpellsWithSORCdefaults
 loc_20F66:
                 
                 cmpi.w  #CLASS_MMNK,-$1C(a6)

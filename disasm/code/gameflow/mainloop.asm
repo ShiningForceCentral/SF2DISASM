@@ -4,12 +4,12 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = map idx
+; In: D0 = map index
 ;     D1 = player X coord
 ;     D2 = player Y coord
 ;     D3 = player facing
 ;     D4 = ???
-;     D7 = battle idx (FFFF for none)
+;     D7 = battle index ($FFFF for none)
 ; ...more
 
 MainLoop:

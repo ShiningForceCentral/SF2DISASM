@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\items\weapongraphics.asm :
 ; 0x1F9E2..0x1FA8A : Weapon graphics table
-WeaponGraphicsTable:
+tbl_WeaponGraphics:
                 ; weaponSprite  enum WeaponSprites : WEAPONSPRITE_*
 ; weaponPalette enum WeaponPalettes : WEAPONPALETTE_*
     

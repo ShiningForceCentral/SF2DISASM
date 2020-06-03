@@ -85,7 +85,7 @@ loc_4443C:
                 moveq   #$3D,d4 
                 move.l  #eas_Standing,d5
                 clr.w   d6
-                lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 move.b  d0,$3F(a0)
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
@@ -109,7 +109,7 @@ loc_44478:
                 cmpi.b  #$FF,d0
                 beq.s   loc_4449C
                 movem.l a0,-(sp)
-                bsr.w   GetEntityRAMAddress
+                bsr.w   GetEntityEntryAddress
                 move.l  #$60006000,(a0)
                 move.l  (a0),ENTITYDEF_OFFSET_XDEST(a0)
                 move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)

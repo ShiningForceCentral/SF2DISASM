@@ -245,7 +245,7 @@ Map3_EntityEvent12:
 
 Map3_EntityEvent13:
                 
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map3_EntityEvent13

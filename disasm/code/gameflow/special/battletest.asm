@@ -81,11 +81,11 @@ DebugModeBattleTest:
                 moveq   #0,d0
                 move.w  #$63,d1 
                 bsr.w   j_SetBaseAGI
-                bsr.w   j_SetBaseATK
+                bsr.w   j_SetBaseATT
                 bsr.w   j_SetBaseDEF
                 bsr.w   j_SetMaxHP
                 bsr.w   j_SetCurrentAGI
-                bsr.w   j_SetCurrentATK
+                bsr.w   j_SetCurrentATT
                 bsr.w   j_SetCurrentDEF
                 bsr.w   j_SetCurrentHP
                 sndCom  MUSIC_BATTLE_THEME_3
@@ -97,7 +97,7 @@ DebugModeBattleTest:
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
                 bsr.w   InitWindowProperties
-                move.w  #COM_ALLIES_NUM,(INDEX_LIST_ENTRIES_NUM).l
+                move.w  #COMBATANT_ALLIES_NUMBER,(INDEX_LIST_ENTRIES_NUMBER).l
                 lea     (INDEX_LIST).l,a0
                 move.l  #$10203,(a0)+
                 move.l  #$4050607,(a0)+
@@ -147,7 +147,7 @@ loc_7820:
                 move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
                 jsr     j_BattleLoop
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 txt     $1CC            ; "Shop number?{D1}"
                 move.w  #0,d0
                 move.w  #0,d1
@@ -155,7 +155,7 @@ loc_7820:
                 jsr     j_NumberPrompt
                 clsTxt
                 move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 jsr     j_MainMenuActions
                 jsr     j_CaravanActions
                 bra.w   byte_77DE       
@@ -167,7 +167,7 @@ loc_7894:
                 bne.w   byte_77DE       
                 bpl.s   loc_78B6
                 movem.l d0-a6,-(sp)
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 movem.l (sp)+,d0-a6
                 bra.s   loc_78BA
 loc_78B6:
@@ -184,7 +184,7 @@ loc_78BA:
 
 sub_78BC:
                 
-                moveq   #COM_ALLIES_COUNTER,d7
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   d0
                 lea     (FF0000_RAM_START).l,a0
 loc_78C6:
@@ -200,7 +200,7 @@ loc_78C6:
                 bsr.w   j_SetCurrentMP
                 bsr.w   sub_7930
                 move.w  d1,4(a0)
-                bsr.w   j_GetBaseATK
+                bsr.w   j_GetBaseATT
                 bsr.w   sub_7930
                 move.w  d1,6(a0)
                 bsr.w   j_GetBaseDEF
@@ -221,7 +221,7 @@ loc_78C6:
 
 LevelUpWholeForce:
                 
-                moveq   #COM_ALLIES_COUNTER,d7
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   d0
 loc_7924:
                 

@@ -6,7 +6,7 @@
 
 LoadBaseTiles:
                 
-                bsr.w   DisableDisplayAndVInt
+                bsr.w   DisableDisplayAndInterrupts
                 bsr.w   ClearVsramAndSprites
                 move.w  #$8C00,d0       ; H32 cell mode, no interlace
                 bsr.w   SetVdpReg
@@ -24,7 +24,7 @@ LoadBaseTiles:
                 lea     (0).w,a1
                 move.w  #$1000,d0
                 moveq   #2,d1
-                bsr.w   ApplyImmediateVramDMAOnCompressedTiles ; load base tiles
+                bsr.w   ApplyImmediateVramDmaOnCompressedTiles ; load base tiles
                 rts
 
     ; End of function LoadBaseTiles

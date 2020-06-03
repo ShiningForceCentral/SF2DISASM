@@ -26,7 +26,7 @@ InitDisplay:
                 dc.w VINTS_DEACTIVATE   ; clear all triggers
                 dc.l 0
                 bsr.w   WaitForVInt
-                bsr.w   DisableDisplayAndVInt
+                bsr.w   DisableDisplayAndInterrupts
                 bsr.w   ClearSpriteTable
                 move.w  #$8C00,d0       ; H32 cell mode, no interlace
                 bsr.w   SetVdpReg
@@ -44,7 +44,7 @@ InitDisplay:
                 lea     ($EF80).l,a1
                 move.w  #$40,d0 
                 moveq   #2,d1
-                bsr.w   ApplyImmediateVramDMA
+                bsr.w   ApplyImmediateVramDma
                 lea     MaskSprites(pc), a0
                 lea     (SPRITE_TABLE).l,a1
                 moveq   #$38,d7 
@@ -67,13 +67,13 @@ sub_30BE:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   ApplyVIntVramDMA
-                bra.w   WaitForDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bra.w   WaitForDmaQueueProcessing
 
     ; End of function sub_30BE
 
@@ -114,8 +114,8 @@ loc_312C:
                 movea.l a1,a0
                 moveq   #$20,d0 
                 moveq   #2,d1
-                bsr.w   ApplyVIntVramDMA
-                bsr.w   EnableDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bsr.w   EnableDmaQueueProcessing
                 movem.w (sp)+,d0-d5/d7
                 movem.l (sp)+,a0-a5
                 rts
@@ -162,7 +162,7 @@ loc_3196:
                 movea.l a2,a0
                 moveq   #$20,d0 
                 moveq   #$40,d1 
-                bsr.w   ApplyVIntVramDMA
-                bsr.w   EnableDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bsr.w   EnableDmaQueueProcessing
                 movem.w (sp)+,d0-d5/d7
                 movem.l (sp)+,a0-a5

@@ -35,7 +35,7 @@ loc_7428:
                 jsr     j_NameCharacter
                 btst    #7,(SAVE_FLAGS).l ; "Game completed" bit
                 beq.w   byte_7476       
-                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 beq.w   byte_7476       
                 moveq   #1,d0
                 moveq   #$1B,d7

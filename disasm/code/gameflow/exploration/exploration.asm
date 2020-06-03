@@ -801,8 +801,8 @@ FinalizeScrollDataUpdate:
                 add.w   d0,(VERTICAL_SCROLL_DATA+2).l
 loc_3D7E:
                 
-                bsr.w   UpdateVDPHScrollData
-                bsr.w   UpdateVDPVScrollData
+                bsr.w   UpdateVdpHScrollData
+                bsr.w   UpdateVdpVScrollData
                 rts
 
     ; End of function FinalizeScrollDataUpdate
@@ -1251,7 +1251,7 @@ OpenChest:
 loc_416E:
                 
                 jsr     j_SetFlag
-                move.w  #MAP_BLOCKIDX_OPENCHEST,(a2,d0.w) ; set block idx to open chest
+                move.w  #MAP_BLOCKINDEX_OPEN_CHEST,(a2,d0.w) ; set block index to open chest
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_4188
                 bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
@@ -1276,7 +1276,7 @@ CloseChest:
                 tst.w   d0
                 blt.s   loc_41C0
                 jsr     j_ClearFlag
-                move.w  #MAP_BLOCKIDX_CLOSEDCHEST,(a2,d0.w)
+                move.w  #MAP_BLOCKINDEX_CLOSED_CHEST,(a2,d0.w)
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_41BA
                 bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
@@ -1526,7 +1526,7 @@ loc_435E:
                 lea     ($C000).l,a1    ; Update VDP Plane A layout data
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
 loc_439A:
                 
                 movem.w (sp)+,d7
@@ -1563,7 +1563,7 @@ loc_43BE:
                 lea     ($E000).l,a1    ; Update VDP Plane B layout data
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
                 movem.w (sp)+,d7
                 movem.l (sp)+,a0-a1
                 rts

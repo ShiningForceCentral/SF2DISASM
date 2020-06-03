@@ -44,7 +44,7 @@ loc_45224:
                 clr.w   d0
                 move.b  -2(a0),d0
                 movem.l d0/a0,-(sp)
-                bsr.w   GetEntityRAMAddress
+                bsr.w   GetEntityEntryAddress
 loc_45238:
                 
                 jsr     (WaitForVInt).w

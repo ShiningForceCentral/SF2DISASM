@@ -55,11 +55,11 @@ loc_151C:
 
 WaitForPlayerInput:
                 
-                andi.b  #$FF,((CURRENT_PLAYER_INPUT-$1000000)).w
-                bne.s   return_1584
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((CURRENT_PLAYER_INPUT-$1000000)).w
+                bne.s   @Return
                 bsr.w   WaitForVInt
                 bra.s   WaitForPlayerInput
-return_1584:
+@Return:
                 
                 rts
 
@@ -68,23 +68,23 @@ return_1584:
 
 ; =============== S U B R O U T I N E =======================================
 
-WaitForPlayer1NewButtonPush:
+WaitForPlayer1NewInput:
                 
-                andi.b  #$FF,((P1_INPUT-$1000000)).w
-                beq.s   loc_1594
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((P1_INPUT-$1000000)).w
+                beq.s   @Wait
                 bsr.w   WaitForVInt
-                bra.s   WaitForPlayer1NewButtonPush
-loc_1594:
+                bra.s   WaitForPlayer1NewInput
+@Wait:
                 
-                andi.b  #$FF,((P1_INPUT-$1000000)).w
-                bne.s   return_15A2
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((P1_INPUT-$1000000)).w
+                bne.s   @Return
                 bsr.w   WaitForVInt
-                bra.s   loc_1594
-return_15A2:
+                bra.s   @Wait
+@Return:
                 
                 rts
 
-    ; End of function WaitForPlayer1NewButtonPush
+    ; End of function WaitForPlayer1NewInput
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -119,14 +119,14 @@ loc_15CA:
 WaitForInputFor1Second:
                 
                 movem.l d5,-(sp)
-                moveq   #$3B,d5 
-loc_15DE:
+                moveq   #59,d5          ; number of frames to wait, minus one
+WaitForInput_Loop:
                 
-                andi.b  #$FF,((P1_INPUT-$1000000)).w
-                bne.s   loc_15EE
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((P1_INPUT-$1000000)).w
+                bne.s   @Done
                 bsr.w   WaitForVInt
-                dbf     d5,loc_15DE
-loc_15EE:
+                dbf     d5,WaitForInput_Loop
+@Done:
                 
                 movem.l (sp)+,d5
                 rts
@@ -139,8 +139,8 @@ loc_15EE:
 WaitForInputFor3Seconds:
                 
                 movem.l d5,-(sp)
-                move.l  #$B3,d5 
-                bra.s   loc_15DE
+                move.l  #179,d5
+                bra.s   WaitForInput_Loop
 
     ; End of function WaitForInputFor3Seconds
 

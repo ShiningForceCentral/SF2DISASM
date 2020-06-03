@@ -11,13 +11,13 @@ CheatModeConfiguration:
                 nop
                 nop
                 else
-                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 endif
                 
                 beq.w   return_7EC4
 @CheckInput_Up:
                 
-                btst    #INPUT_A_UP,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
                 beq.s   loc_7E58
                 enableSram
                 btst    #7,(SAVE_FLAGS).l

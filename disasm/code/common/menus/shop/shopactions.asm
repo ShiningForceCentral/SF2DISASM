@@ -56,7 +56,7 @@ byte_200CE:
                 move.w  d0,-$C(a6)
                 move.w  d0,d1
                 jsr     j_GetItemDefAddress
-                move.w  6(a0),-4(a6)
+                move.w  ITEMDEF_OFFSET_PRICE(a0),-4(a6)
                 move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 clr.l   ((TEXT_NUMBER-$1000000)).w
                 move.w  -4(a6),((word_FFB778-$1000000)).w
@@ -83,7 +83,7 @@ byte_2013C:
                 txt     $A6             ; "Who gets it?{W2}"
                 clsTxt
                 jsr     j_UpdateForce
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
                 lea     ((INDEX_LIST-$1000000)).w,a1
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
@@ -205,7 +205,7 @@ byte_202D2:
                 txt     $B1             ; "Whose and which item do{N}you want to sell?{D3}"
                 clsTxt
                 jsr     j_UpdateForce
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
                 lea     ((INDEX_LIST-$1000000)).w,a1
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
@@ -316,7 +316,7 @@ byte_2044A:
                 txt     $BA             ; "Whose and which item{N}should I repair?{D1}"
                 clsTxt
                 jsr     j_UpdateForce
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
                 lea     ((INDEX_LIST-$1000000)).w,a1
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
@@ -336,12 +336,12 @@ loc_2046C:
                 move.w  d2,-$C(a6)
                 move.w  -$C(a6),d1
                 jsr     j_GetItemDefAddress
-                move.w  6(a0),-4(a6)
+                move.w  ITEMDEF_OFFSET_PRICE(a0),-4(a6)
                 move.w  -4(a6),d0
                 lsr.w   #2,d0
                 move.w  d0,-4(a6)
                 move.w  -$A(a6),d0
-                jsr     j_GetCharEntryAddress
+                jsr     j_GetCombatantEntryAddress
                 move.w  -$E(a6),d1
                 add.w   d1,d1
                 lea     $20(a0,d1.w),a0
@@ -418,7 +418,7 @@ loc_205B4:
                 
                 jsr     DetermineDealsItemsNotInCurrentShop(pc)
                 nop
-                tst.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                tst.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 bne.s   byte_205C8      
                 txt     $AC             ; "I'm very sorry!{N}I'm out of stock!{W2}"
                 bra.w   byte_207CC
@@ -431,7 +431,7 @@ byte_205C8:
                 move.w  d0,-$C(a6)
                 move.w  d0,d1
                 jsr     j_GetItemDefAddress
-                move.w  6(a0),-4(a6)
+                move.w  ITEMDEF_OFFSET_PRICE(a0),-4(a6)
                 move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 clr.l   ((TEXT_NUMBER-$1000000)).w
                 move.w  -4(a6),((word_FFB778-$1000000)).w
@@ -458,7 +458,7 @@ byte_20630:
                 txt     $A6             ; "Who gets it?{W2}"
                 clsTxt
                 jsr     j_UpdateForce
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
                 lea     ((INDEX_LIST-$1000000)).w,a1
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
@@ -604,7 +604,7 @@ sub_207E6:
                 bsr.s   GetCurrentShopDefAddress
                 clr.w   d7
                 move.b  (a0)+,d7
-                move.w  d7,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                move.w  d7,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 subq.b  #1,d7
 loc_207F6:
                 
@@ -621,9 +621,9 @@ DetermineDealsItemsNotInCurrentShop:
                 
                 movem.l d1-d2/d7-a0,-(sp)
                 lea     ((INDEX_LIST-$1000000)).w,a0
-                clr.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                clr.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 clr.w   d1
-                moveq   #ITEM_MAX_IDX,d7
+                moveq   #ITEMENTRY_MAX_INDEX,d7
 loc_2080E:
                 
                 jsr     j_GetDealsItemAmount
@@ -632,7 +632,7 @@ loc_2080E:
                 bsr.w   DoesCurrentShopContainItem
                 beq.w   loc_20828
                 move.b  d1,(a0)+
-                addq.w  #1,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                addq.w  #1,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
 loc_20828:
                 
                 addq.w  #1,d1
@@ -645,7 +645,7 @@ loc_20828:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D1 = item idx
+; In: D1 = item index
 ; Out: Z = 0 = yes, 1 = no
 
 DoesCurrentShopContainItem:

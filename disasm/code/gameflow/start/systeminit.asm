@@ -6,9 +6,9 @@
 
 SystemInit:
                 
-                bsr.s   InitVDP
+                bsr.s   InitVdp
                 bsr.w   InitZ80
-                bsr.s   InitVDPData
+                bsr.s   InitVdpData
                 jmp     (InitGame).l
 
     ; End of function SystemInit
@@ -16,35 +16,35 @@ SystemInit:
 
 ; =============== S U B R O U T I N E =======================================
 
-InitVDP:
+InitVdp:
                 
                 move.w  #$3FFE,d0
                 lea     (FF0000_RAM_START).l,a0
-loc_218:
+@ClearRam_Loop:
                 
                 clr.l   (a0)+           ; clear all RAM !
-                dbf     d0,loc_218      
+                dbf     d0,@ClearRam_Loop
                 move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
                 clr.b   ((FADING_SETTING-$1000000)).w
                 lea     vdp_init_params(pc), a0
                 moveq   #$12,d1
-loc_22E:
+@SetVdpReg_Loop:
                 
                 move.w  (a0)+,d0
                 bsr.w   SetVdpReg
-                dbf     d1,loc_22E
+                dbf     d1,@SetVdpReg_Loop
                 clr.w   d0
                 clr.w   d1
                 clr.w   d2
-                bsr.w   ApplyVramDMAFill
+                bsr.w   ApplyVramDmaFill
                 rts
 
-    ; End of function InitVDP
+    ; End of function InitVdp
 
 
 ; =============== S U B R O U T I N E =======================================
 
-InitVDPData:
+InitVdpData:
                 
                 move.l  #VDP_COMMAND_QUEUE,(VDP_COMMAND_QUEUE_POINTER).l
                 move.l  #DMA_QUEUE,(DMA_QUEUE_POINTER).l
@@ -73,12 +73,12 @@ loc_2A0:
                 clr.w   (a0)+           ; clear palette replicas ?
                 dbf     d1,loc_2A0      
                 bsr.w   ClearSpriteTable
-                bsr.w   UpdateVDPHScrollData
-                bsr.w   UpdateVDPVScrollData
-                bsr.w   EnableDMAQueueProcessing
+                bsr.w   UpdateVdpHScrollData
+                bsr.w   UpdateVdpVScrollData
+                bsr.w   EnableDmaQueueProcessing
                 rts
 
-    ; End of function InitVDPData
+    ; End of function InitVdpData
 
 vdp_init_params:dc.w $8004              ; disable H int, enable read H V counter
                 dc.w $8124              ; disable display, enable Vint, disable DMA, V28 cell mode

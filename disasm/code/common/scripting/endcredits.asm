@@ -10,12 +10,12 @@ PlayEndCredits:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 jsr     (WaitForVInt).w
-                jsr     (DisableDisplayAndVInt).w
+                jsr     (DisableDisplayAndInterrupts).w
                 jsr     (ClearVsramAndSprites).w
                 jsr     (EnableDisplayAndInterrupts).w
                 jsr     (InitDisplay).w
                 bsr.w   ClearPalette2
-                jsr     (DisableDisplayAndVInt).w
+                jsr     (DisableDisplayAndInterrupts).w
                 bsr.w   LoadEndCreditsFont
                 lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$27C0,d1
@@ -35,7 +35,7 @@ loc_1AC09E:
                 lea     ($E000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (ApplyImmediateVramDMA).w
+                jsr     (ApplyImmediateVramDma).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 jsr     (EnableDisplayAndInterrupts).w
@@ -44,7 +44,7 @@ loc_1AC09E:
                 jsr     (UpdateForegroundVScrollData).w
                 jsr     (UpdateBackgroundHScrollData).w
                 jsr     (UpdateBackgroundVScrollData).w
-                jsr     (EnableDMAQueueProcessing).w
+                jsr     (EnableDmaQueueProcessing).w
                 jsr     (FadeInFromBlack).w
                 move.l  (p_GameStaff).l,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
@@ -72,7 +72,7 @@ loc_1AC10E:
                 clr.l   (a0)+
                 clr.l   (a0)+
                 clr.l   (a0)+
-                jsr     (ApplyVIntCramDMA).w
+                jsr     (ApplyVIntCramDma).w
                 move.w  #$40,d6 
                 jsr     (GenerateRandomNumber).w
                 addi.w  #$80,d7 
@@ -83,13 +83,13 @@ loc_1AC10E:
                 neg.w   d7
                 move.w  d7,(VERTICAL_SCROLL_DATA+2).l
                 move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
-                move.b  #1,((FADING_SETTING-$1000000)).w
+                move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.w  #$B4,d0 
                 jsr     (Sleep).w       
-                move.b  #2,((FADING_SETTING-$1000000)).w
+                move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
@@ -139,7 +139,7 @@ VInt_EndCredits:
                 btst    #0,((FRAME_COUNTER-$1000000)).w
                 bne.s   loc_1AC1F6
                 subq.w  #1,(HORIZONTAL_SCROLL_DATA+2).l
-                jsr     (UpdateVDPHScrollData).w
+                jsr     (UpdateVdpHScrollData).w
 loc_1AC1F6:
                 
                 movea.l ((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w,a0
@@ -157,9 +157,9 @@ loc_1AC21A:
                 addq.w  #1,(VERTICAL_SCROLL_DATA).l
 loc_1AC220:
                 
-                jsr     (UpdateVDPHScrollData).w
-                jsr     (UpdateVDPVScrollData).w
-                jsr     (EnableDMAQueueProcessing).w
+                jsr     (UpdateVdpHScrollData).w
+                jsr     (UpdateVdpVScrollData).w
+                jsr     (EnableDmaQueueProcessing).w
                 rts
 
     ; End of function VInt_EndCredits
@@ -208,7 +208,7 @@ loc_1AC280:
                 lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
-                jsr     (ApplyVIntVramDMA).w
+                jsr     (ApplyVIntVramDma).w
                 rts
 
     ; End of function EndCreditSubroutine

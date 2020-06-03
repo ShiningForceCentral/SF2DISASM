@@ -53,15 +53,15 @@ return_4770:
 
 VInt_UpdateMapAnimations:
                 
-                move.l  ((TILE_ANIM_DATA_ADDR-$1000000)).w,d0
+                move.l  ((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w,d0
                 ble.s   return_47C4
-                subq.w  #1,((TILE_ANIM_COUNTER-$1000000)).w
+                subq.w  #1,((TILE_ANIMATION_COUNTER-$1000000)).w
                 bne.s   return_47C4
                 movea.l d0,a0
                 move.w  (a0)+,d1
                 bge.w   loc_47A2
                 clr.w   d0
-                move.b  (TILE_ANIM_MAP_INDEX).l,d0
+                move.b  (TILE_ANIMATION_MAP_INDEX).l,d0
                 movea.l (p_pt_MapData).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
@@ -72,8 +72,8 @@ loc_47A2:
                 
                 move.w  (a0)+,d0
                 move.w  (a0)+,d2
-                move.w  (a0)+,((TILE_ANIM_COUNTER-$1000000)).w
-                move.l  a0,((TILE_ANIM_DATA_ADDR-$1000000)).w
+                move.w  (a0)+,((TILE_ANIMATION_COUNTER-$1000000)).w
+                move.l  a0,((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w
                 lsl.w   #5,d1
                 lea     (byte_FF9B04).l,a0
                 adda.w  d1,a0
@@ -81,7 +81,7 @@ loc_47A2:
                 movea.w d2,a1
                 lsl.w   #4,d0
                 moveq   #2,d1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
 return_47C4:
                 
                 rts

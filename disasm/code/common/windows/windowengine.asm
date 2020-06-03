@@ -170,19 +170,23 @@ CopyPlaneALayoutForWindows:
 
 ; =============== S U B R O U T I N E =======================================
 
-; D0=Windows index, D1=Destination, D2=Anim max
+; In: D0 = window slot
+;     D1 = destination
+;     D2 = animation length
 
-MoveWindowWithSFX:
+MoveWindowWithSfx:
                 
                  
                 sndCom  SFX_MENU_SWITCH
 
-    ; End of function MoveWindowWithSFX
+    ; End of function MoveWindowWithSfx
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; D0=Windows index, D1=Destination, D2=Anim max
+; In: D0 = window slot
+;     D1 = destination
+;     D2 = animation length
 
 MoveWindow:
                 
@@ -212,7 +216,7 @@ loc_4914:
 
 ; =============== S U B R O U T I N E =======================================
 
-ClearWindowAndUpdateEndPtr:
+ClearWindowAndUpdateEndPointer:
                 
                 movem.l d0-d4/a0-a1,-(sp)
                 bsr.w   GetWindowInfo   
@@ -250,7 +254,7 @@ loc_4972:
                 movem.l (sp)+,d0-d4/a0-a1
                 rts
 
-    ; End of function ClearWindowAndUpdateEndPtr
+    ; End of function ClearWindowAndUpdateEndPointer
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -382,8 +386,8 @@ loc_4AA2:
                 lea     ($C000).l,a1    ; Update VDP Plane A
                 move.w  #$400,d0
                 moveq   #2,d1
-                bsr.w   ApplyVIntVramDMA
-                bsr.w   EnableDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bsr.w   EnableDmaQueueProcessing
                 clr.b   ((byte_FFA8FF-$1000000)).w
 return_4AC6:
                 

@@ -66,11 +66,11 @@ sub_44074:
                 jmp     sub_45B84(pc)
 sub_44078:                
                 jmp     sub_474EE(pc)
-j_RunEntityEvent:                
+j_RunMapSetupEntityEvent:                
                 jmp     RunMapSetupEntityEvent(pc)
 j_RunMapSetupZoneEvent:                
                 jmp     RunMapSetupZoneEvent(pc)
-j_ExecuteEntityEvent_0:                
+j_RunMapSetupEntityEvent_0:                
                 jmp     RunMapSetupEntityEvent(pc)
 ; triggers a map setup function according to up to 4 criterias in d1-d4
 j_RunMapSetupItemEvent:                

@@ -106,7 +106,7 @@ Map22_EntityEvent1:
 
 Map22_EntityEvent6:
                 
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map22_EntityEvent6

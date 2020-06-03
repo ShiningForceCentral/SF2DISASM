@@ -10,11 +10,11 @@ ChooseCaravanPortrait:
                 move.l  d1,-(sp)
                 chkFlg  $46             ; Astral is a follower
                 bne.s   loc_228B8       
-                moveq   #PORTRAIT_ROHDE,d0 ; ROHDE portrait idx
+                moveq   #PORTRAIT_ROHDE,d0 ; ROHDE portrait index
                 bra.s   loc_228BA
 loc_228B8:
                 
-                moveq   #PORTRAIT_ASTRAL,d0 ; Astral portrait idx
+                moveq   #PORTRAIT_ASTRAL,d0 ; Astral portrait index
 loc_228BA:
                 
                 moveq   #0,d1
@@ -45,16 +45,16 @@ loc_228F0:
                 cmpi.w  #1,d1
                 bne.s   loc_22900
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
-                move.w  ((NUMBER_OF_BATTLE_PARTY_MEMBERS-$1000000)).w,d7
+                move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
                 bra.s   loc_22908
 loc_22900:
                 
                 lea     ((RESERVE_MEMBERS-$1000000)).w,a0
-                move.w  ((NUMBER_OF_OTHER_PARTY_MEMBERS-$1000000)).w,d7
+                move.w  ((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
 loc_22908:
                 
                 lea     ((INDEX_LIST-$1000000)).w,a1
-                move.w  d7,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                move.w  d7,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
                 subq.w  #1,d7
                 bcs.w   loc_22920
@@ -72,13 +72,13 @@ loc_22920:
 
 ; =============== S U B R O U T I N E =======================================
 
-; copy item idxes of caravan items to index list
+; Copy caravan item indexes to generic list space
 
-sub_22926:
+CopyCaravanItems:
                 
                 movem.l d7-a1,-(sp)
-                move.w  ((NUM_ITEMS_IN_CARAVAN-$1000000)).w,d7
-                move.w  d7,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
+                move.w  d7,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 subq.w  #1,d7
                 bcs.w   loc_22946
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
@@ -92,7 +92,7 @@ loc_22946:
                 movem.l (sp)+,d7-a1
                 rts
 
-    ; End of function sub_22926
+    ; End of function CopyCaravanItems
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -148,7 +148,7 @@ sub_2299E:
                 
                 movem.l d1/a0,-(sp)
                 jsr     j_GetItemDefAddress
-                btst    #4,8(a0)
+                btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   loc_229C2
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  #$25,d1 

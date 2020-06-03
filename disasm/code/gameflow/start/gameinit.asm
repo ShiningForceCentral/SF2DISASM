@@ -21,19 +21,19 @@ InitGame:
                 bra.w   DebugModeBattleTest
                 nop
                 else
-                btst    #INPUT_A_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 endif
                 
                 beq.s   loc_7118
                 jsr     (EnableDisplayAndInterrupts).w
                 bsr.w   InitDisplay
                 jsr     (EnableDisplayAndInterrupts).w
-                jmp     j_rts
+                jmp     j_nullsub_18010
 loc_7118:
                 
-                btst    #INPUT_A_UP,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
                 bne.w   DebugModeBattleTest
-                btst    #INPUT_A_DOWN,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_DOWN,((P1_INPUT-$1000000)).w
                 beq.w   j_GameIntro
                 jsr     (EnableDisplayAndInterrupts).w
                 bsr.w   InitDisplay

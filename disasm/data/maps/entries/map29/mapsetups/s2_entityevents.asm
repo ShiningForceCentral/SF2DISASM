@@ -24,7 +24,7 @@ Map29_EntityEvent0:
 
 Map29_EntityEvent1:
                 
-                jmp     j_ChurchActions
+                jmp     j_ChurchMenuActions
 
     ; End of function Map29_EntityEvent1
 
@@ -34,7 +34,7 @@ Map29_EntityEvent1:
 Map29_EntityEvent2:
                 
                 move.b  #$1C,((CURRENT_SHOP_INDEX-$1000000)).w
-                jmp     j_ShopActions
+                jmp     j_ShopMenuActions
 
     ; End of function Map29_EntityEvent2
 

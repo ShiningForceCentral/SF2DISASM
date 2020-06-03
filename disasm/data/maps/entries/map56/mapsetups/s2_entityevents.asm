@@ -19,7 +19,7 @@ byte_614C2:
                 txt     $E1B            ; "There is no church around{N}here.  Think of me as a{N}priest.{W1}"
                 txt     $E1C            ; "Now, what can I do for you?{W1}"
                 clsTxt
-                jmp     j_ChurchActions
+                jmp     j_ChurchMenuActions
 Map56_DefaultEntityEvent:
                 
                 rts

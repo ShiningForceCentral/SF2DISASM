@@ -123,24 +123,24 @@ loc_47A28:
     ; End of function InitHeadquartersForceMembers
 
 byte_47A38:     dc.b $11                ; related to headquarters
-                dc.b   7
+                dc.b 7
                 dc.b $12
-                dc.b   7
+                dc.b 7
                 dc.b $14
-                dc.b   7
+                dc.b 7
                 dc.b $15
-                dc.b   7
+                dc.b 7
                 dc.b $11
-                dc.b  $A
+                dc.b $A
                 dc.b $12
-                dc.b  $A
+                dc.b $A
                 dc.b $14
-                dc.b  $A
+                dc.b $A
                 dc.b $15
-                dc.b  $A
+                dc.b $A
                 dc.b $12
-                dc.b  $D
+                dc.b $D
                 dc.b $13
-                dc.b  $D
+                dc.b $D
                 dc.b $14
-                dc.b  $D
+                dc.b $D

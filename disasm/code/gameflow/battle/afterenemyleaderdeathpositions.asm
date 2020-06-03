@@ -32,13 +32,13 @@ loc_47DCA:
                 move.w  #1,(DEAD_COMBATANTS_LIST_LENGTH).l
 loc_47DEE:
                 
-                moveq   #COM_ALLY_START,d0
-                moveq   #COM_ALLIES_COUNTER,d7 ; HARDCODED $1D limit for number of allies ?
+                moveq   #COMBATANT_ALLIES_START,d0
+                moveq   #COMBATANT_ALLIES_COUNTER,d7 ; HARDCODED $1D limit for number of allies ?
 loc_47DF2:
                 
                 move.w  #$FFFF,d1
                 jsr     j_SetXPos
-                ori.b   #COM_TYPE_REALMASK,d0
+                ori.b   #COMBATANT_MASK_ENEMY_BIT,d0
                 jsr     j_SetXPos       ; move enemy as well
                 moveq   #0,d1
                 jsr     j_SetCurrentHP

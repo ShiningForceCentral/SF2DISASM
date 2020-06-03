@@ -97,7 +97,7 @@ Map25_EntityEvent5:
 loc_5D2C4:
                 
                 move.b  #9,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
 return_5D2D0:
                 
                 rts
@@ -116,7 +116,7 @@ Map25_EntityEvent6:
                 setFlg  $100            ; TEMP FLAG #00
 loc_5D2E0:
                 
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map25_EntityEvent6
@@ -166,7 +166,7 @@ loc_5D328:
 loc_5D32A:
                 
                 move.b  #$1B,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
 return_5D336:
                 
                 rts

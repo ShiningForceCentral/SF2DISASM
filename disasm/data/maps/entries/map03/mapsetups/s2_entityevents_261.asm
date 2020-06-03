@@ -81,7 +81,7 @@ Map3_261_EntityEvent2:
 Map3_261_EntityEvent3:
                 
                 move.b  #0,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map3_261_EntityEvent3
@@ -269,7 +269,7 @@ Map3_261_EntityEvent20:
 
 Map3_261_EntityEvent21:
                 
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map3_261_EntityEvent21
@@ -345,7 +345,7 @@ byte_511B6:
 Map3_261_EntityEvent26:
                 
                 move.b  #$F,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map3_261_EntityEvent26

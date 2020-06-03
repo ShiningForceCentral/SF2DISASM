@@ -31,7 +31,7 @@ Map31_33E_EntityEvent0:
 Map31_33E_EntityEvent1:
                 
                 move.b  #$C,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map31_33E_EntityEvent1
@@ -108,7 +108,7 @@ Map31_33E_EntityEvent6:
 
 Map31_33E_EntityEvent7:
                 
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map31_33E_EntityEvent7
@@ -148,7 +148,7 @@ nullsub_5D540:
 Map31_33E_EntityEvent9:
                 
                 move.b  #$1B,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map31_33E_EntityEvent9

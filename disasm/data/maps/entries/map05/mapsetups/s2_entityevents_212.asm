@@ -35,7 +35,7 @@ Map5_212_EntityEvent1:
 
 Map5_212_EntityEvent2:
                 
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map5_212_EntityEvent2
@@ -46,7 +46,7 @@ Map5_212_EntityEvent2:
 Map5_212_EntityEvent3:
                 
                 move.b  #$1D,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopActions
+                jsr     j_ShopMenuActions
                 rts
 
     ; End of function Map5_212_EntityEvent3

@@ -301,7 +301,7 @@ sub_4ED8:
 
 VInt_UpdateEntities:
                 
-                clr.b   ((NUM_SPRITES_TO_LOAD-$1000000)).w
+                clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 moveq   #$30,d7 ; do that for each entity
 loc_4EF4:
@@ -482,7 +482,7 @@ loc_5032:
                 moveq   #$FFFFFFFF,d6
 loc_5042:
                 
-                btst    #0,-$A(a6)
+                btst    #INPUT_BIT_UP,-$A(a6)
                 beq.s   loc_505E
                 cmp.w   -2(a6),d1
                 ble.s   loc_505E
@@ -493,7 +493,7 @@ loc_5042:
                 moveq   #1,d6
 loc_505E:
                 
-                btst    #1,-$A(a6)
+                btst    #INPUT_BIT_DOWN,-$A(a6)
                 beq.s   loc_5078
                 cmp.w   -6(a6),d1
                 bge.s   loc_5078
@@ -503,7 +503,7 @@ loc_505E:
                 moveq   #3,d6
 loc_5078:
                 
-                btst    #2,-$A(a6)
+                btst    #INPUT_BIT_LEFT,-$A(a6)
                 beq.s   loc_5094
                 cmp.w   -4(a6),d0
                 ble.s   loc_5094
@@ -514,7 +514,7 @@ loc_5078:
                 moveq   #2,d6
 loc_5094:
                 
-                btst    #3,-$A(a6)
+                btst    #INPUT_BIT_RIGHT,-$A(a6)
                 beq.s   loc_50AE
                 cmp.w   -8(a6),d0
                 bge.s   loc_50AE
@@ -535,7 +535,7 @@ loc_50BC:
                 beq.w   loc_51A8
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.s   loc_50D6
-                btst    #4,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_B,((P1_INPUT-$1000000)).w
                 bne.w   loc_51A8
 loc_50D6:
                 
@@ -543,7 +543,7 @@ loc_50D6:
                 bne.w   loc_51A8
                 movem.w d0-d1,-(sp)
                 movem.w d2-d3,-(sp)
-                bsr.w   GetMapPixelCoordRAMOffset
+                bsr.w   GetMapPixelCoordRamOffset
                 move.w  d2,d0
                 movem.w (sp)+,d2-d3
                 move.w  (a4,d0.w),d1
@@ -672,7 +672,7 @@ loc_5220:
                 
                 movem.w (sp)+,d4-d6
                 movem.w d2-d3,-(sp)
-                bsr.w   GetMapPixelCoordRAMOffset
+                bsr.w   GetMapPixelCoordRamOffset
                 move.w  (a4,d2.w),d3
                 andi.w  #$3C00,d3
                 cmpi.w  #$3800,d3
@@ -731,7 +731,7 @@ loc_52C0:
                 bcs.w   loc_52E8
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.s   loc_52DE
-                btst    #4,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_B,((P1_INPUT-$1000000)).w
                 bne.w   loc_52E8
 loc_52DE:
                 
@@ -809,7 +809,7 @@ loc_5360:
                 move.w  6(a1),d3
                 lsl.w   #4,d3
                 bsr.w   sub_5FAC
-                bsr.w   GetMapPixelCoordRAMOffset
+                bsr.w   GetMapPixelCoordRamOffset
                 cmpi.w  #$C000,(a4,d2.w)
                 bcs.s   loc_53B4
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
@@ -819,7 +819,7 @@ loc_5360:
                 clr.w   d3
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d4
                 bsr.w   sub_5FAC
-                bsr.w   GetMapPixelCoordRAMOffset
+                bsr.w   GetMapPixelCoordRamOffset
                 cmpi.w  #$C000,(a4,d2.w)
                 bcs.s   loc_53B4
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
@@ -968,7 +968,7 @@ loc_54CC:
                 movem.w d2-d3,-(sp)
                 move.w  (a0),d0
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
-                bsr.w   GetMapPixelCoordRAMOffset
+                bsr.w   GetMapPixelCoordRamOffset
                 move.w  d2,d0
                 movem.w (sp)+,d2-d3
                 move.w  (a4,d0.w),d1
@@ -1033,7 +1033,7 @@ loc_5596:
                 add.w   d7,d1
                 move.w  (sp)+,d7
                 movem.w d2-d3,-(sp)
-                bsr.w   GetMapPixelCoordRAMOffset
+                bsr.w   GetMapPixelCoordRamOffset
                 cmpi.w  #$C000,(a4,d2.w)
                 movem.w (sp)+,d2-d3
                 bcc.w   loc_55B8
@@ -1156,7 +1156,7 @@ esc07_:
                 clr.w   d4
                 clr.w   d5
                 moveq   #$FFFFFFFF,d6
-                btst    #0,-$A(a6)
+                btst    #INPUT_BIT_UP,-$A(a6)
                 beq.s   loc_56AA
                 cmp.w   -2(a6),d1
                 ble.s   loc_56AA
@@ -1167,7 +1167,7 @@ esc07_:
                 moveq   #1,d6
 loc_56AA:
                 
-                btst    #1,-$A(a6)
+                btst    #INPUT_BIT_DOWN,-$A(a6)
                 beq.s   loc_56C4
                 cmp.w   -6(a6),d1
                 bge.s   loc_56C4
@@ -1177,7 +1177,7 @@ loc_56AA:
                 moveq   #3,d6
 loc_56C4:
                 
-                btst    #2,-$A(a6)
+                btst    #INPUT_BIT_LEFT,-$A(a6)
                 beq.s   loc_56E0
                 cmp.w   -4(a6),d0
                 ble.s   loc_56E0
@@ -1188,7 +1188,7 @@ loc_56C4:
                 moveq   #2,d6
 loc_56E0:
                 
-                btst    #3,-$A(a6)
+                btst    #INPUT_BIT_RIGHT,-$A(a6)
                 beq.s   loc_56FA
                 cmp.w   -8(a6),d0
                 bge.s   loc_56FA
@@ -1242,7 +1242,7 @@ loc_575C:
                 
                 movem.w (sp)+,d4-d6
                 movem.w d2-d3,-(sp)
-                bsr.w   GetMapPixelCoordRAMOffset
+                bsr.w   GetMapPixelCoordRamOffset
                 move.w  (a4,d2.w),d3
                 andi.w  #$3C00,d3
                 cmpi.w  #$400,d3
@@ -1314,7 +1314,7 @@ esc08_:
                 clr.w   d4
                 clr.w   d5
                 moveq   #$FFFFFFFF,d6
-                btst    #INPUT_A_UP,-$A(a6)
+                btst    #INPUT_BIT_UP,-$A(a6)
                 beq.s   loc_582C
                 cmp.w   -2(a6),d1
                 ble.s   loc_582C
@@ -1325,7 +1325,7 @@ esc08_:
                 moveq   #1,d6
 loc_582C:
                 
-                btst    #INPUT_A_DOWN,-$A(a6)
+                btst    #INPUT_BIT_DOWN,-$A(a6)
                 beq.s   loc_5846
                 cmp.w   -6(a6),d1
                 bge.s   loc_5846
@@ -1335,7 +1335,7 @@ loc_582C:
                 moveq   #3,d6
 loc_5846:
                 
-                btst    #INPUT_A_LEFT,-$A(a6)
+                btst    #INPUT_BIT_LEFT,-$A(a6)
                 beq.s   loc_5862
                 cmp.w   -4(a6),d0
                 ble.s   loc_5862
@@ -1346,7 +1346,7 @@ loc_5846:
                 moveq   #2,d6
 loc_5862:
                 
-                btst    #INPUT_A_RIGHT,-$A(a6)
+                btst    #INPUT_BIT_RIGHT,-$A(a6)
                 beq.s   loc_587C
                 cmp.w   -8(a6),d0
                 bge.s   loc_587C
@@ -1400,7 +1400,7 @@ loc_58DE:
                 
                 movem.w (sp)+,d4-d6
                 movem.w d2-d3,-(sp)
-                bsr.w   GetMapPixelCoordRAMOffset
+                bsr.w   GetMapPixelCoordRamOffset
                 move.w  (a4,d2.w),d3
                 andi.w  #$3C00,d3
                 cmpi.w  #$400,d3
@@ -1545,7 +1545,7 @@ esc0E_:
 
 esc0A_updateEntitySprite:
                 
-                cmpi.b  #7,((NUM_SPRITES_TO_LOAD-$1000000)).w
+                cmpi.b  #7,((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 bgt.w   esc_goToNextEntity
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d6
                 bsr.w   ChangeEntitySprite
@@ -2101,8 +2101,8 @@ esc40_:
                 bne.s   loc_5D42
                 move.w  (a0),d0         ; get player's pixel position from entity info
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
-                bsr.w   GetMapPixelCoordRAMOffset
-                move.w  (a4,d2.w),d3    ; copy block idx under player from RAM
+                bsr.w   GetMapPixelCoordRamOffset
+                move.w  (a4,d2.w),d3    ; copy block index under player from RAM
                 move.w  d3,d2
                 andi.w  #$3C00,d2
                 cmpi.w  #$800,d2        ; check for "block copy" flag
@@ -2396,7 +2396,7 @@ loc_5F28:
                 movem.w d0-d3,-(sp)
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
                 move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
-                bsr.w   GetMapPixelCoordRAMOffset
+                bsr.w   GetMapPixelCoordRamOffset
                 move.w  (a4,d2.w),d0
                 andi.w  #$3C00,d0
                 cmpi.w  #$2000,d0
@@ -2530,7 +2530,7 @@ return_6022:
 
 LoadMapEntitySprites:
                 
-                bsr.w   DisableDisplayAndVInt
+                bsr.w   DisableDisplayAndInterrupts
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 moveq   #$2F,d7 
 loc_602E:
@@ -2597,7 +2597,7 @@ UpdateEntitySprite:
                 beq.w   return_6180
                 cmp.b   ENTITYDEF_OFFSET_FACING(a0),d6
                 beq.w   return_6180
-                cmpi.b  #7,((NUM_SPRITES_TO_LOAD-$1000000)).w
+                cmpi.b  #7,((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 bge.w   return_6180
 
     ; End of function UpdateEntitySprite
@@ -2639,8 +2639,8 @@ loc_60B6:
                 movea.l (a0,d1.w),a0
                 lea     (FF8002_LOADING_SPACE).l,a1
                 clr.w   d0
-                move.b  ((NUM_SPRITES_TO_LOAD-$1000000)).w,d0
-                addq.b  #1,((NUM_SPRITES_TO_LOAD-$1000000)).w
+                move.b  ((SPRITES_TO_LOAD_NUMBER-$1000000)).w,d0
+                addq.b  #1,((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 mulu.w  #$240,d0        ; two sprites to load for the walking animation
                 lea     (a1,d0.w),a1
                 jsr     (LoadSpriteData).w
@@ -2683,8 +2683,8 @@ loc_615E:
                 adda.w  d1,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                bsr.w   ApplyVIntVramDMA
-                bsr.w   EnableDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bsr.w   EnableDmaQueueProcessing
 loc_617C:
                 
                 movem.l (sp)+,a0-a1
@@ -2747,7 +2747,7 @@ loc_61BA:
                 adda.w  d1,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                bsr.w   ApplyImmediateVramDMA
+                bsr.w   ApplyImmediateVramDma
 loc_61F6:
                 
                 movem.l (sp)+,a0-a1
@@ -2762,7 +2762,7 @@ loc_61F6:
 ;     D1 = y pixel coord
 ; Out: D2 = RAM offset from start of map VDP tile data
 
-GetMapPixelCoordRAMOffset:
+GetMapPixelCoordRamOffset:
                 
                 movem.w d0-d1,-(sp)
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
@@ -2804,5 +2804,5 @@ loc_622E:
                 movem.w (sp)+,d0-d1
                 rts
 
-    ; End of function GetMapPixelCoordRAMOffset
+    ; End of function GetMapPixelCoordRamOffset
 

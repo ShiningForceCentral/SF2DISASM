@@ -42,7 +42,7 @@ byte_21A7C:
 sub_21A92:
                 
                 jsr     j_UpdateForce
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
                 lea     ((INDEX_LIST-$1000000)).w,a1
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
@@ -255,7 +255,7 @@ byte_21D1A:
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_21CDE      
                 move.w  d0,-8(a6)
-                jsr     j_GetClass      
+                jsr     j_GetClass
                 move.w  d1,-$18(a6)
                 cmpi.w  #$C,d1
                 bcc.w   loc_21D5C

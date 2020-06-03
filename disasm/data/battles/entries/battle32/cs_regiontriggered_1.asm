@@ -37,16 +37,16 @@ csub_4CD56:
                 jsr     j_SetXPos
                 move.w  #$FFFF,d1
                 jsr     j_SetYPos
-                moveq   #$17,d0
+                moveq   #ALLY_JARO,d0
                 move.w  d7,d1
                 jsr     j_SetXPos
                 move.w  d6,d1
                 jsr     j_SetYPos
-                moveq   #$17,d0
+                moveq   #ALLY_JARO,d0
                 jsr     j_JoinForce
-                moveq   #$17,d0
+                moveq   #ALLY_JARO,d0
                 jsr     j_JoinBattleParty
-                move.b  ((byte_FFB160+$F)).l,(ENTITY_EVENT_IDX_LIST+$17).l
+                move.b  (byte_FFB16F).l,(ENTITY_EVENT_INDEX_LIST+$17).l
                 rts
 
     ; End of function csub_4CD56

@@ -52,7 +52,7 @@ sub_22028:
                 
                 moveq   #2,d1
                 bsr.w   sub_228D8
-                tst.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                tst.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 beq.w   loc_220F4
                 move.w  #$F,d1
                 bsr.w   ChooseCaravanPortrait
@@ -72,7 +72,7 @@ loc_22070:
                 
                 moveq   #1,d1
                 bsr.w   sub_228D8
-                cmpi.w  #$C,((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                cmpi.w  #$C,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 bcc.s   loc_22098
                 move.w  -2(a6),d0
                 jsr     j_JoinBattleParty
@@ -143,7 +143,7 @@ sub_22102:
                 
                 moveq   #1,d1
                 bsr.w   sub_228D8
-                tst.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
+                tst.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 beq.s   return_22150
                 move.w  #$10,d1
                 bsr.w   ChooseCaravanPortrait
@@ -214,9 +214,9 @@ loc_2215C:
 
 rjt_CaravanItemActions:
                 dc.w Caravan_DescribeItem-rjt_CaravanItemActions
-                dc.w sub_222FA-rjt_CaravanItemActions
-                dc.w sub_22384-rjt_CaravanItemActions
-                dc.w sub_22498-rjt_CaravanItemActions
+                dc.w Caravan_StoreItem-rjt_CaravanItemActions
+                dc.w Caravan_PassItem-rjt_CaravanItemActions
+                dc.w Caravan_DiscardItem-rjt_CaravanItemActions
 
 ; START OF FUNCTION CHUNK FOR CaravanDepotActions
 
@@ -231,10 +231,10 @@ return_22186:
 
 Caravan_DescribeItem:
                 
-                bsr.w   sub_22926       
-                tst.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
-                beq.w   loc_222EC
-                move.w  #$59,d1 
+                bsr.w   CopyCaravanItems
+                tst.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                beq.w   loc_222EC       
+                move.w  #MESSAGE_CARAVAN_APPRAISE_WHICH_ITEM,d1 ; "Appraise which item?{W2}"
                 bsr.w   ChooseCaravanPortrait
                 jsr     sub_1004C
                 move.w  d0,d2
@@ -275,7 +275,7 @@ loc_221F8:
                 
                 move.w  -4(a6),d1
                 jsr     j_GetItemDefAddress
-                cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_SPELL(a0)
+                cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
                 beq.s   byte_22210      
                 txt     $5D             ; "It has a special effect when{N}used in battle.{W2}"
                 bra.s   loc_22214
@@ -310,7 +310,7 @@ loc_22266:
                 move.b  (a0)+,d0
                 jsr     j_IsWeaponOrRingEquippable
                 bcc.s   loc_2228E
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (char idx) for trap #5 using a {NAME} command
+                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
                 txt     $62             ; "{DICT}{NAME},"
                 addq.w  #1,d6
                 cmpi.w  #1,d6
@@ -349,8 +349,8 @@ loc_222C0:
                 
                 clr.l   d1
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d1
-                mulu.w  #ITEM_SELLPRICE_MULTIPLIER,d1
-                lsr.l   #ITEM_SELLPRICE_BITSHIFTRIGHT,d1
+                mulu.w  #ITEMENTRY_SELLPRICE_MULTIPLIER,d1
+                lsr.l   #ITEMENTRY_SELLPRICE_BITSHIFTRIGHT,d1
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     $65             ; "It brings {#} gold coins{N}at a shop.{W2}"
 byte_222D4:
@@ -374,7 +374,8 @@ loc_222EA:
                 bra.s   loc_222F6
 loc_222EC:
                 
-                move.w  #$52,d1 
+                move.w  #MESSAGE_CARAVAN_WELL_THE_STOREHOUSE_IS_EMPTY,d1 
+                                                        ; "Well, the storehouse is{N}empty.{W2}"
                 bsr.w   ChooseCaravanPortrait
                 rts
 loc_222F6:
@@ -386,14 +387,14 @@ loc_222F6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_222FA:
+Caravan_StoreItem:
                 
-                bsr.w   sub_22926       
-                cmpi.w  #$40,((INDEX_LIST_ENTRIES_NUM-$1000000)).w 
-                bcc.s   loc_22376
+                bsr.w   CopyCaravanItems
+                cmpi.w  #CARAVAN_MAX_ITEMS_NUMBER,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                bcc.s   loc_22376       
                 moveq   #0,d1
                 bsr.w   sub_228D8
-                move.w  #$53,d1 
+                move.w  #MESSAGE_CARAVAN_STORE_WHOSE_ITEM,d1 ; "Store whose item?{W2}"
                 bsr.w   ChooseCaravanPortrait
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
@@ -411,7 +412,8 @@ sub_222FA:
                 jsr     j_DropItemBySlot
                 move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  -4(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  #$57,d1 
+                move.w  #MESSAGE_CARAVAN_ITEM_IS_NOW_IN_THE_STOREHOUSE,d1 
+                                                        ; "{NAME}'s {ITEM}{N}is now in the storehouse.{W2}"
                 bsr.w   ChooseCaravanPortrait
                 bra.s   loc_22374
 byte_2236A:
@@ -424,30 +426,30 @@ loc_22374:
                 bra.s   loc_22380
 loc_22376:
                 
-                move.w  #$51,d1 
+                move.w  #MESSAGE_CARAVAN_SORRY_THERE_IS_NO_ROOM,d1 ; "Sorry, there's no room!{W2}"
                 bsr.w   ChooseCaravanPortrait
                 rts
 
-    ; End of function sub_222FA
+    ; End of function Caravan_StoreItem
 
 
-; START OF FUNCTION CHUNK FOR sub_222FA
+; START OF FUNCTION CHUNK FOR Caravan_StoreItem
 
 loc_22380:
                 
-                bra.w   sub_222FA
+                bra.w   Caravan_StoreItem
 
-; END OF FUNCTION CHUNK FOR sub_222FA
+; END OF FUNCTION CHUNK FOR Caravan_StoreItem
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22384:
+Caravan_PassItem:
                 
-                bsr.w   sub_22926       
-                tst.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
-                beq.w   loc_2248A
-                move.w  #$56,d1 
+                bsr.w   CopyCaravanItems
+                tst.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                beq.w   loc_2248A       
+                move.w  #MESSAGE_CARAVAN_CHOOSE_WHICH_ITEM,d1 ; "Choose which item?{W2}"
                 bsr.w   ChooseCaravanPortrait
                 jsr     sub_1004C
                 move.w  d0,d2
@@ -458,7 +460,7 @@ sub_22384:
                 moveq   #0,d1
                 bsr.w   sub_228D8
                 move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  #$54,d1 
+                move.w  #MESSAGE_CARAVAN_PASS_THE_ITEM_TO_WHOM,d1 ; "Pass the {ITEM}{N}to whom?{W2}"
                 bsr.w   ChooseCaravanPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
                 move.w  -4(a6),((word_FFB13A-$1000000)).w
@@ -478,7 +480,8 @@ sub_22384:
                 jsr     j_RemoveItemFromCaravan
                 move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  -4(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  #$58,d1 
+                move.w  #MESSAGE_CARAVAN_CHARACTER_NOW_HAS_THE_ITEM,d1 
+                                                        ; "{NAME} now has the{N}{ITEM}.{W2}"
                 bsr.w   ChooseCaravanPortrait
                 bra.s   loc_2247C
 loc_22422:
@@ -500,7 +503,7 @@ loc_22422:
                 move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  -$A(a6),((TEXT_NAME_INDEX_3-$1000000)).w
-                move.w  #$29,d1 
+                move.w  #MESSAGE_ITEMMENU_ITEM_IS_EXCHANGED_FOR,d1 ; "{ITEM} is exchanged{N}for {NAME}'s {ITEM}.{W2}"
                 bsr.w   ChooseCaravanPortrait
 loc_2247C:
                 
@@ -511,34 +514,35 @@ byte_2247E:
                 clsTxt
                 rts
 
-    ; End of function sub_22384
+    ; End of function Caravan_PassItem
 
 
-; START OF FUNCTION CHUNK FOR sub_22384
+; START OF FUNCTION CHUNK FOR Caravan_PassItem
 
 loc_22488:
                 
                 bra.s   loc_22494
 loc_2248A:
                 
-                move.w  #$52,d1 
+                move.w  #MESSAGE_CARAVAN_WELL_THE_STOREHOUSE_IS_EMPTY,d1 
+                                                        ; "Well, the storehouse is{N}empty.{W2}"
                 bsr.w   ChooseCaravanPortrait
                 rts
 loc_22494:
                 
-                bra.w   sub_22384
+                bra.w   Caravan_PassItem
 
-; END OF FUNCTION CHUNK FOR sub_22384
+; END OF FUNCTION CHUNK FOR Caravan_PassItem
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22498:
+Caravan_DiscardItem:
                 
-                bsr.w   sub_22926       
-                tst.w   ((INDEX_LIST_ENTRIES_NUM-$1000000)).w
-                beq.w   loc_2252A
-                move.w  #$55,d1 
+                bsr.w   CopyCaravanItems
+                tst.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                beq.w   loc_2252A       
+                move.w  #MESSAGE_CARAVAN_DISCARD_WHICH_ITEM,d1 ; "Discard which item?{W2}"
                 bsr.w   ChooseCaravanPortrait
                 jsr     sub_1004C
                 move.w  d0,d2
@@ -558,13 +562,13 @@ sub_22498:
                 jsr     j_RemoveItemFromCaravan
                 move.w  -4(a6),d1
                 jsr     j_GetItemDefAddress
-                btst    #3,8(a0)
+                btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   loc_22508
                 jsr     j_AddItemToDeals
 loc_22508:
                 
                 move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  #$2A,d1 
+                move.w  #MESSAGE_ITEMMENU_DISCARDED_THE_ITEM,d1 ; "Discarded the {ITEM}.{W2}"
                 bsr.w   ChooseCaravanPortrait
                 bra.s   loc_2251C
 byte_22518:
@@ -579,24 +583,25 @@ byte_2251E:
                 clsTxt
                 rts
 
-    ; End of function sub_22498
+    ; End of function Caravan_DiscardItem
 
 
-; START OF FUNCTION CHUNK FOR sub_22498
+; START OF FUNCTION CHUNK FOR Caravan_DiscardItem
 
 loc_22528:
                 
                 bra.s   loc_22534
 loc_2252A:
                 
-                move.w  #$52,d1 
+                move.w  #MESSAGE_CARAVAN_WELL_THE_STOREHOUSE_IS_EMPTY,d1 
+                                                        ; "Well, the storehouse is{N}empty.{W2}"
                 bsr.w   ChooseCaravanPortrait
                 rts
 loc_22534:
                 
-                bra.w   sub_22498
+                bra.w   Caravan_DiscardItem
 
-; END OF FUNCTION CHUNK FOR sub_22498
+; END OF FUNCTION CHUNK FOR Caravan_DiscardItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -928,7 +933,7 @@ loc_22858:
 DisplaySpecialCaravanDescription:
                 
                 movem.l d0-d1/a0,-(sp)
-                andi.w  #ITEM_MASK_IDX,d1
+                andi.w  #ITEMENTRY_MASK_INDEX,d1
                 lea     SpecialCaravanDescriptions(pc), a0
 loc_22870:
                 

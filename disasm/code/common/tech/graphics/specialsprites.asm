@@ -60,7 +60,7 @@ LoadBattleSpecialSprite:
                 lea     ($AF00).l,a1
                 move.w  #$480,d0
                 moveq   #2,d1
-                jsr     (ApplyImmediateVramDMA).w
+                jsr     (ApplyImmediateVramDma).w
                 bra.w   loc_25CB0
 
     ; End of function LoadBattleSpecialSprite
@@ -77,7 +77,7 @@ LoadExplorationSpecialSprite:
                 lea     ($A3C0).l,a1
                 move.w  #$A20,d0
                 moveq   #2,d1
-                jsr     (ApplyImmediateVramDMA).w
+                jsr     (ApplyImmediateVramDma).w
                 bra.w   *+4
 loc_25CB0:
                 
@@ -111,8 +111,8 @@ loc_25CD2:
                 lea     ($AF00).l,a1
                 move.w  #$480,d0
                 moveq   #2,d1
-                jsr     (ApplyVIntVramDMA).w
-                jsr     (EnableDMAQueueProcessing).w
+                jsr     (ApplyVIntVramDma).w
+                jsr     (EnableDmaQueueProcessing).w
                 movem.l (sp)+,d0-d2/a0-a1
                 rts
 
@@ -164,11 +164,11 @@ UpdateBattleSpecialSprite:
                 move.b  ENTITYDEF_OFFSET_ANIMCOUNTER(a0),d2
                 cmpi.b  #$F,d2
                 ble.s   loc_25D56
-                lea     byte_2784C(pc), a2
+                lea     word_2784C(pc), a2
                 bra.s   loc_25D5A
 loc_25D56:
                 
-                lea     byte_2786C(pc), a2
+                lea     word_2786C(pc), a2
 loc_25D5A:
                 
                 btst    #4,ENTITYDEF_OFFSET_FLAGS_B(a0)

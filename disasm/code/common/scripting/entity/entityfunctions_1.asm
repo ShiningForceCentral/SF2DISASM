@@ -49,8 +49,8 @@ loc_4450A:
                 adda.w  d6,a1
                 move.w  #$120,d0
                 moveq   #2,d1
-                jsr     (ApplyVIntVramDMA).w
-                jsr     (WaitForDMAQueueProcessing).w
+                jsr     (ApplyVIntVramDma).w
+                jsr     (WaitForDmaQueueProcessing).w
                 movem.l (sp)+,a0-a1
                 movem.l (sp)+,d0-d7
                 unlk    a6
@@ -65,7 +65,7 @@ sub_44536:
                 
                 movem.l d0-d5/d7-a0,-(sp)
                 move.w  d0,-(sp)
-                lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 clr.w   d0
                 moveq   #$3F,d7 
 loc_44544:
@@ -84,7 +84,7 @@ loc_4454A:
                 subi.w  #$60,d7 
 loc_4455C:
                 
-                lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 move.b  d0,(a0,d7.w)
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
@@ -105,7 +105,7 @@ InitializeNewEntity:
                 bsr.w   GetAllyMapSprite
 loc_4457E:
                 
-                lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 clr.w   d0
                 moveq   #$3E,d7 
 loc_44586:
@@ -125,7 +125,7 @@ loc_4458C:
                 subi.w  #$60,d7 
 loc_445A0:
                 
-                lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 adda.w  d7,a0
                 move.w  (sp)+,d7
                 move.b  d0,(a0)
@@ -227,7 +227,7 @@ loc_44666:
                 clr.l   (a0)+
                 clr.l   (a0)+
                 dbf     d7,loc_44666
-                lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 moveq   #$F,d7
 loc_44688:
                 
@@ -248,8 +248,8 @@ MoveEntitiesToBattlePositions:
                 movem.l d0-a1,-(sp)
                 link    a6,#-$10
                 bsr.s   ClearEntities   
-                lea     ((ENTITY_EVENT_IDX_LIST-$1000000)).w,a1
-                moveq   #COM_ALLIES_COUNTER,d7
+                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   -4(a6)
                 clr.w   d0
 loc_446B8:
@@ -303,8 +303,8 @@ loc_44736:
                 addq.w  #1,-4(a6)
                 dbf     d7,loc_446B8
                 lea     ((byte_FFB160-$1000000)).w,a1
-                moveq   #COM_ENEMIES_COUNTER,d7
-                move.w  #COM_ENEMY_START,-4(a6)
+                moveq   #COMBATANT_ENEMIES_COUNTER,d7
+                move.w  #COMBATANT_ENEMIES_START,-4(a6)
 loc_4474A:
                 
                 move.w  d0,-(sp)

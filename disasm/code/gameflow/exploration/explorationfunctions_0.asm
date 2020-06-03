@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: D0 = activated entity idx
+; Out: D0 = activated entity index
 ;      D1 = activated entity's facing
 ;      D2 = player entity's facing
 
@@ -93,7 +93,7 @@ loc_23840:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = entity idx
+; In: D0 = entity index
 ; Out: Z = entity is NOT follower
 
 CheckIfEntityIsFollower:
@@ -161,7 +161,7 @@ loc_2386C:
                 jsr     (OpenChest).w
                 txt     $193            ; "{NAME} opened the chest.{W2}{CLEAR}"
                 move.w  d2,d0
-                andi.w  #ITEM_MASK_IDX,d0
+                andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.b  #ITEM_NOTHING,d0
                 bne.w   loc_239C8
                 txt     $198            ; "But, it was empty.{W1}"
@@ -173,7 +173,7 @@ loc_238E8:
                 jsr     (CheckNonChestItem).w
                 txt     $194            ; "{NAME} investigated{N}the vase.{W2}{CLEAR}"
                 move.w  d2,d0
-                andi.w  #ITEM_MASK_IDX,d0
+                andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.b  #ITEM_NOTHING,d0
                 bne.w   loc_239C8
                 txt     $199            ; "It was dark inside.{W1}"
@@ -185,7 +185,7 @@ loc_2390C:
                 jsr     (CheckNonChestItem).w
                 txt     $195            ; "{NAME} looked in{N}the barrel.{W2}{CLEAR}"
                 move.w  d2,d0
-                andi.w  #ITEM_MASK_IDX,d0
+                andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.b  #ITEM_NOTHING,d0
                 bne.w   loc_239C8
                 txt     $19A            ; "It was empty.{W1}"
@@ -197,7 +197,7 @@ loc_23930:
                 jsr     (CheckNonChestItem).w
                 txt     $1AB            ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                 move.w  d2,d0
-                andi.w  #ITEM_MASK_IDX,d0
+                andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.b  #ITEM_NOTHING,d0
                 bne.w   loc_239C8
                 txt     $19C            ; "Nothing was there.{W1}"
@@ -209,7 +209,7 @@ loc_23954:
                 jsr     (CheckNonChestItem).w
                 txt     $1A7            ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
                 move.w  d2,d0
-                andi.w  #ITEM_MASK_IDX,d0
+                andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.b  #ITEM_NOTHING,d0
                 bne.w   loc_239C8
                 txt     $19C            ; "Nothing was there.{W1}"
@@ -244,8 +244,8 @@ return_2399A:
 
 GetChestGoldAmount:
                 
-                subi.w  #ITEM_IDX_GOLD_CHESTS_START,d2
-                andi.w  #ITEM_MASK_IDX,d2
+                subi.w  #ITEMENTRY_INDEX_GOLD_CHESTS_START,d2
+                andi.w  #ITEMENTRY_MASK_INDEX,d2
                 add.w   d2,d2
                 move.w  ChestGoldAmounts(pc,d2.w),d1
                 ext.l   d1

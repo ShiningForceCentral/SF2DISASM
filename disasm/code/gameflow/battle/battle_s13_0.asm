@@ -13,20 +13,20 @@ j_LoadBattleTerrainData:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_InitAllForceBattlePositions:
+j_InitAllAlliesBattlePositions:
                 
-                jmp     InitAllForceBattlePositions(pc)
+                jmp     InitAllAlliesBattlePositions(pc)
 
-    ; End of function j_InitAllForceBattlePositions
+    ; End of function j_InitAllAlliesBattlePositions
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_InitAllEnemyBattlePositions:
+j_InitAllEnemiesBattlePositions:
                 
-                jmp     InitAllEnemyBattlePositions(pc)
+                jmp     InitAllEnemiesBattlePositions(pc)
 
-    ; End of function j_InitAllEnemyBattlePositions
+    ; End of function j_InitAllEnemiesBattlePositions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -49,11 +49,11 @@ j_InitEnemyList:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_getEnemyAITargetPos:
+j_GetEnemyAITargetPosition:
                 
-                jmp     GetEnemyAITargetPos(pc)
+                jmp     GetEnemyAITargetPosition(pc)
 
-    ; End of function j_getEnemyAITargetPos
+    ; End of function j_GetEnemyAITargetPosition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -76,11 +76,11 @@ j_BattleDebugFunction1B120A:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetCombatantStartPos:
+j_GetCombatantStartingPositions:
                 
-                jmp     GetCombatantStartPos(pc)
+                jmp     GetCombatantStartingPositions(pc)
 
-    ; End of function j_GetCombatantStartPos
+    ; End of function j_GetCombatantStartingPositions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -107,11 +107,11 @@ sub_1AC028:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_getMoveListForEnemyTarget:
+j_GetMoveListForEnemyTarget:
                 
-                jmp     GetEnemyAITargetMoveList(pc)
+                jmp     GetMoveListForEnemyTarget(pc)
 
-    ; End of function j_getMoveListForEnemyTarget
+    ; End of function j_GetMoveListForEnemyTarget
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -127,11 +127,11 @@ sub_1AC030:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_clearTerrainListObstructions:
+j_ClearTerrainListObstructions:
                 
                 jmp     ClearTerrainListObstructions(pc)
 
-    ; End of function j_clearTerrainListObstructions
+    ; End of function j_ClearTerrainListObstructions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -165,20 +165,20 @@ j_GetListOfSpawningEnemies:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_randomUnderD6:
+j_RandomUnderD6:
                 
                 jmp     RandomUnderD6(pc)
 
-    ; End of function j_randomUnderD6
+    ; End of function j_RandomUnderD6
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_IsSpecialBattle:
+j_DoesBattleUpgrade:
                 
                 jmp     DoesBattleUpgrade(pc)
 
-    ; End of function j_IsSpecialBattle
+    ; End of function j_DoesBattleUpgrade
 
 
 ; =============== S U B R O U T I N E =======================================

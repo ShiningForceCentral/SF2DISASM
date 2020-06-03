@@ -30,14 +30,14 @@ GoToNextString:
 loc_6298:
                 
                 dbf     d0,GoToNextString ; loop until wanted string reached
-                clr.l   ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w 
+                clr.l   ((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w 
                                                         ; get ready
                 clr.b   ((byte_FFB6D8-$1000000)).w
                 move.b  (a0)+,((COMPRESSED_STRING_LENGTH-$1000000)).w 
                                                         ; keep length of current string
 loc_62A8:
                 
-                move.l  #TEXT_NAME_INDEX_1,((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w
+                move.l  #TEXT_NAME_INDEX_1,((CURRENT_DIALOGUE_NAME_INDEX_ADDRESS-$1000000)).w
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
                 cmpi.b  #1,((COMPRESSED_STRING_LENGTH-$1000000)).w ; check length
                 beq.w   loc_62FE
@@ -112,7 +112,7 @@ return_634C:
 
 GetNextTextSymbol:
                 
-                tst.l   ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
+                tst.l   ((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w
                 bne.w   loc_6366
                 movea.l ((COMPRESSED_STRING_POINTER-$1000000)).w,a0
                 jsr     j_HuffmanDecode
@@ -120,16 +120,16 @@ GetNextTextSymbol:
                 rts
 loc_6366:
                 
-                movea.l ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w,a1
+                movea.l ((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w,a1
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.b  (a1),d1
-                move.l  a1,((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
-                lea     unk_666E(pc), a1
+                move.l  a1,((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w
+                lea     byte_666E(pc), a1
                 move.b  (a1,d0.w),d0
                 tst.b   d1
                 bne.s   return_6384
-                clr.l   ((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
+                clr.l   ((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w
 return_6384:
                 
                 rts
@@ -223,7 +223,7 @@ loc_6472:
                 bsr.s   sub_64A8
                 bsr.w   WaitForVInt
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
-                andi.b  #$7F,d1 
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A,d1
                 beq.s   loc_6472
                 sndCom  SFX_VALIDATION
                 clr.w   d2
@@ -282,53 +282,53 @@ return_64F4:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateForceAndGetFirstForceMemberIndex:
+UpdateForceAndGetFirstBattlePartyMemberIndex:
                 
                 jsr     j_UpdateForce
                 clr.w   d0
                 move.b  (BATTLE_PARTY_MEMBERS).l,d0
                 rts
 
-    ; End of function UpdateForceAndGetFirstForceMemberIndex
+    ; End of function UpdateForceAndGetFirstBattlePartyMemberIndex
 
 
 ; START OF FUNCTION CHUNK FOR ParseSpecialTextSymbol
 
 leader:
                 
-                bsr.s   UpdateForceAndGetFirstForceMemberIndex
-                jsr     j_GetCharName
-                moveq   #CHAR_NAMELENGTH,d7
-                bsr.w   CopyASCIIBytesForDialogueString
+                bsr.s   UpdateForceAndGetFirstBattlePartyMemberIndex
+                jsr     j_GetCombatantName
+                moveq   #ALLYNAME_MAX_LENGTH,d7
+                bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 player:
                 
                 bsr.w   GetNextTextSymbol
 loc_651C:
                 
-                jsr     j_GetCharName
-                moveq   #CHAR_NAMELENGTH,d7
-                bsr.w   CopyASCIIBytesForDialogueString
+                jsr     j_GetCombatantName
+                moveq   #ALLYNAME_MAX_LENGTH,d7
+                bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 name:
                 
                 bsr.w   sub_6648
                 move.w  d1,d0
-                jsr     j_GetCharName
-                bsr.w   CopyASCIIBytesForDialogueString
+                jsr     j_GetCombatantName
+                bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 item:
                 
                 bsr.w   sub_6648
                 jsr     j_FindItemName
-                bsr.w   CopyASCIIBytesForDialogueString
+                bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 number:
                 
                 move.l  ((TEXT_NUMBER-$1000000)).w,d0
                 jsr     (WriteAsciiNumber).w
-                lea     ((RAM_Dialog_StringToPrint-$1000000)).w,a1
-                move.l  a1,((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
+                lea     ((DIALOGUE_STRING_TO_PRINT-$1000000)).w,a1
+                move.l  a1,((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w
                 lea     ((LOADED_NUMBER-$1000000)).w,a0
                 moveq   #9,d1
 loc_6568:
@@ -354,7 +354,7 @@ class:
                 jsr     j_GetClassName
                 endif
                 
-                bsr.w   CopyASCIIBytesForDialogueString
+                bsr.w   CopyAsciiBytesForDialogueString
 loc_658C:
                 
                 bra.w   loc_62CA
@@ -375,7 +375,7 @@ loc_659C:
 loc_65B4:
                 
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
-                andi.b  #$7F,d1 
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A,d1
                 beq.s   loc_659C
                 move.w  (sp)+,d0
                 move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
@@ -393,7 +393,7 @@ loc_65D8:
                 tst.b   ((byte_FFB198-$1000000)).w
                 bne.s   loc_65EC
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
-                andi.b  #$7F,d1 
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A,d1
                 bne.s   loc_65F0
                 bsr.w   WaitForVInt
 loc_65EC:
@@ -414,7 +414,7 @@ spell:
 loc_6606:
                 
                 jsr     j_FindSpellName
-                bsr.w   CopyASCIIBytesForDialogueString
+                bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 clear:
                 
@@ -445,9 +445,9 @@ loc_6644:
 
 sub_6648:
                 
-                movea.l ((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w,a1
+                movea.l ((CURRENT_DIALOGUE_NAME_INDEX_ADDRESS-$1000000)).w,a1
                 move.w  (a1)+,d1
-                move.l  a1,((ADDR_CURRENT_DIALOGUE_NAMEIDX-$1000000)).w
+                move.l  a1,((CURRENT_DIALOGUE_NAME_INDEX_ADDRESS-$1000000)).w
                 rts
 
     ; End of function sub_6648
@@ -455,14 +455,14 @@ sub_6648:
 
 ; =============== S U B R O U T I N E =======================================
 
-; copy ASCII string of length D7 at A0 to RAM for dialogue textbox
+; Copy ASCII string of length D7 at A0 to RAM for dialogue textbox
 
-CopyASCIIBytesForDialogueString:
+CopyAsciiBytesForDialogueString:
                 
                 movea.l a0,a2
                 subq.w  #1,d7
-                lea     ((RAM_Dialog_StringToPrint-$1000000)).w,a1
-                move.l  a1,((ADDR_CURRENT_DIALOGUE_ASCII_BYTE-$1000000)).w
+                lea     ((DIALOGUE_STRING_TO_PRINT-$1000000)).w,a1
+                move.l  a1,((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w
 loc_6660:
                 
                 move.b  (a2)+,(a1)+
@@ -473,77 +473,77 @@ return_666C:
                 
                 rts
 
-    ; End of function CopyASCIIBytesForDialogueString
+    ; End of function CopyAsciiBytesForDialogueString
 
-unk_666E:       dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b $44 
-                dc.b   1
-                dc.b $4B 
-                dc.b   1
-                dc.b $4C 
-                dc.b $4D 
-                dc.b $48 
-                dc.b $49 
-                dc.b $4A 
-                dc.b   1
-                dc.b $4E 
-                dc.b $43 
-                dc.b $41 
-                dc.b $42 
-                dc.b $4F 
-                dc.b   2
-                dc.b   3
-                dc.b   4
-                dc.b   5
-                dc.b   6
-                dc.b   7
-                dc.b   8
-                dc.b   9
-                dc.b  $A
-                dc.b  $B
-                dc.b $50 
-                dc.b   1
-                dc.b $49 
-                dc.b   1
-                dc.b $4A 
-                dc.b $45 
-                dc.b   1
-                dc.b  $C
-                dc.b  $D
-                dc.b  $E
-                dc.b  $F
+byte_666E:      dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b $44
+                dc.b 1
+                dc.b $4B
+                dc.b 1
+                dc.b $4C
+                dc.b $4D
+                dc.b $48
+                dc.b $49
+                dc.b $4A
+                dc.b 1
+                dc.b $4E
+                dc.b $43
+                dc.b $41
+                dc.b $42
+                dc.b $4F
+                dc.b 2
+                dc.b 3
+                dc.b 4
+                dc.b 5
+                dc.b 6
+                dc.b 7
+                dc.b 8
+                dc.b 9
+                dc.b $A
+                dc.b $B
+                dc.b $50
+                dc.b 1
+                dc.b $49
+                dc.b 1
+                dc.b $4A
+                dc.b $45
+                dc.b 1
+                dc.b $C
+                dc.b $D
+                dc.b $E
+                dc.b $F
                 dc.b $10
                 dc.b $11
                 dc.b $12
@@ -561,176 +561,176 @@ unk_666E:       dc.b   1
                 dc.b $1E
                 dc.b $1F
                 dc.b $20
-                dc.b $21 
-                dc.b $22 
-                dc.b $23 
-                dc.b $24 
-                dc.b $25 
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b $40 
-                dc.b   1
-                dc.b $26 
-                dc.b $27 
-                dc.b $28 
-                dc.b $29 
-                dc.b $2A 
-                dc.b $2B 
-                dc.b $2C 
-                dc.b $2D 
-                dc.b $2E 
-                dc.b $2F 
-                dc.b $30 
-                dc.b $31 
-                dc.b $32 
-                dc.b $33 
-                dc.b $34 
-                dc.b $35 
-                dc.b $36 
-                dc.b $37 
-                dc.b $38 
-                dc.b $39 
-                dc.b $3A 
-                dc.b $3B 
-                dc.b $3C 
-                dc.b $3D 
-                dc.b $3E 
-                dc.b $3F 
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b $40 
-                dc.b   1
-                dc.b $26 
-                dc.b $27 
-                dc.b $28 
-                dc.b $29 
-                dc.b $2A 
-                dc.b $2B 
-                dc.b $2C 
-                dc.b $2D 
-                dc.b $2E 
-                dc.b $2F 
-                dc.b $30 
-                dc.b $31 
-                dc.b $32 
-                dc.b $33 
-                dc.b $34 
-                dc.b $35 
-                dc.b $36 
-                dc.b $37 
-                dc.b $38 
-                dc.b $39 
-                dc.b $3A 
-                dc.b $3B 
-                dc.b $3C 
-                dc.b $3D 
-                dc.b $3E 
-                dc.b $3F 
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b $40 
-                dc.b   1
-                dc.b $42 
-                dc.b $49 
-                dc.b $4A 
-                dc.b $42 
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
-                dc.b   1
+                dc.b $21
+                dc.b $22
+                dc.b $23
+                dc.b $24
+                dc.b $25
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b $40
+                dc.b 1
+                dc.b $26
+                dc.b $27
+                dc.b $28
+                dc.b $29
+                dc.b $2A
+                dc.b $2B
+                dc.b $2C
+                dc.b $2D
+                dc.b $2E
+                dc.b $2F
+                dc.b $30
+                dc.b $31
+                dc.b $32
+                dc.b $33
+                dc.b $34
+                dc.b $35
+                dc.b $36
+                dc.b $37
+                dc.b $38
+                dc.b $39
+                dc.b $3A
+                dc.b $3B
+                dc.b $3C
+                dc.b $3D
+                dc.b $3E
+                dc.b $3F
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b $40
+                dc.b 1
+                dc.b $26
+                dc.b $27
+                dc.b $28
+                dc.b $29
+                dc.b $2A
+                dc.b $2B
+                dc.b $2C
+                dc.b $2D
+                dc.b $2E
+                dc.b $2F
+                dc.b $30
+                dc.b $31
+                dc.b $32
+                dc.b $33
+                dc.b $34
+                dc.b $35
+                dc.b $36
+                dc.b $37
+                dc.b $38
+                dc.b $39
+                dc.b $3A
+                dc.b $3B
+                dc.b $3C
+                dc.b $3D
+                dc.b $3E
+                dc.b $3F
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b $40
+                dc.b 1
+                dc.b $42
+                dc.b $49
+                dc.b $4A
+                dc.b $42
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
+                dc.b 1
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -788,7 +788,7 @@ return_67E4:
 
 sub_67E6:
                 
-                cmpi.w  #VDPTILE_IDX_SCREEN_BLACKBAR,(SPRITE_00_TILE_FLAGS).l 
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT,(SPRITE_00_TILE_FLAGS).l 
                                                         ; check if we are on the map or in battle (by checking for presence of black bar sprites)
                 bne.s   loc_67F6
                 move.w  #WINDOW_DIALOGUE_TILELINECOUNTER_EVENT,d6
@@ -798,22 +798,22 @@ loc_67F6:
                 move.w  #WINDOW_DIALOGUE_TILELINECOUNTER_BATTLE,d6
 loc_67FA:
                 
-                move.w  #VDPTILE_IDX_DIALOGUEWINDOW_TOPLEFTBORDER,d0
-                move.w  #VDPTILE_IDX_DIALOGUEWINDOW_TOPBORDER,d1
-                move.w  #VDPTILE_IDX_DIALOGUEWINDOW_TOPRIGHTBORDER,d2
+                move.w  #VDPTILE_WINDOW_CORNER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT,d0
+                move.w  #VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT,d1
+                move.w  #VDPTILE_WINDOW_CORNER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT,d2
                 clr.w   d3
-                bsr.w   CopyLineOfVDPTileOrderForDialogueWindowToRAM
-                move.w  #VDPTILE_IDX_DIALOGUEWINDOW_LEFTBORDER,d0
-                move.w  #VDPTILE_IDX_DIALOGUEWINDOW_FIRSTINNERBOXTILE,d1
-                move.w  #VDPTILE_IDX_DIALOGUEWINDOW_RIGHTBORDER,d2
-                move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d4
+                bsr.w   CopyLineOfVdpTileOrderForDialogueWindowToRam
+                move.w  #VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT,d0
+                move.w  #VDPTILE_MESSAGE_WINDOW_START|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT,d1
+                move.w  #VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT,d2
+                move.w  ((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w,d4
                 lsl.w   #5,d4
                 add.w   d4,d1
                 moveq   #1,d3
 loc_6822:
                 
                 move.w  d1,-(sp)
-                bsr.w   CopyLineOfVDPTileOrderForDialogueWindowToRAM
+                bsr.w   CopyLineOfVdpTileOrderForDialogueWindowToRam
                 move.w  (sp)+,d1
                 addi.w  #$20,d1 
                 cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
@@ -844,13 +844,13 @@ loc_684E:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A1 - address in RAM to copy VDP tile idxes
-;     D0 - VDP tile idx for left border of line
-;     D1 - VDP tile idx for first inner box tile of line
-;     D2 - VDP tile idx for right border of line
-;     D3 - amount to add to D1 each time a tile is copied (0 for top and bottom border lines, 1 for inner box)
+; In: A1 = address in RAM to copy VDP tile indexes
+;     D0 = VDP tile index for left border of line
+;     D1 = VDP tile index for first inner box tile of line
+;     D2 = VDP tile index for right border of line
+;     D3 = amount to add to D1 each time a tile is copied (0 for top and bottom border lines, 1 for inner box)
 
-CopyLineOfVDPTileOrderForDialogueWindowToRAM:
+CopyLineOfVdpTileOrderForDialogueWindowToRam:
                 
                 move.w  d0,(a1)+
 loc_6862:
@@ -864,14 +864,14 @@ loc_6866:
                 move.w  d2,(a1)+
                 rts
 
-    ; End of function CopyLineOfVDPTileOrderForDialogueWindowToRAM
+    ; End of function CopyLineOfVdpTileOrderForDialogueWindowToRam
 
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_6872:
                 
-                clr.w   ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w
+                clr.w   ((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w
                 move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 loc_687C:
                 
@@ -957,30 +957,30 @@ loc_690C:
                 
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
                 lea     (byte_FF6C02).l,a0
                 lea     ($CC00).l,a1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
                 lea     (byte_FF7002).l,a0
                 lea     ($D000).l,a1
-                bsr.w   ApplyVIntVramDMA
-                bsr.w   WaitForDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bsr.w   WaitForDmaQueueProcessing
                 lea     (byte_FF7402).l,a0
                 lea     ($D400).l,a1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
 loc_694C:
                 
                 cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6976
                 lea     (byte_FF7802).l,a0
                 lea     ($D800).l,a1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
                 lea     (byte_FF7C02).l,a0
                 lea     ($DC00).l,a1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
 loc_6976:
                 
-                bra.w   EnableDMAQueueProcessing
+                bra.w   EnableDmaQueueProcessing
 
 ; END OF FUNCTION CHUNK FOR sub_6872
 
@@ -989,7 +989,7 @@ loc_6976:
 
 HandleBlinkingDialogueCursor:
                 
-                move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d0
+                move.w  ((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w,d0
                 lsl.w   #3,d0
                 add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
                 cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
@@ -1013,11 +1013,11 @@ loc_69A4:
                 lea     ($C800).l,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
                 lea     (byte_FF6C02).l,a0
                 lea     ($CC00).l,a1
-                bsr.w   ApplyVIntVramDMA
-                bra.w   WaitForDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bra.w   WaitForDmaQueueProcessing
 loc_69D8:
                 
                 cmpi.b  #$20,d0 
@@ -1028,22 +1028,22 @@ loc_69DC:
                 lea     ($D000).l,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
                 lea     (byte_FF7402).l,a0
                 lea     ($D400).l,a1
-                bsr.w   ApplyVIntVramDMA
-                bra.w   WaitForDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bra.w   WaitForDmaQueueProcessing
 loc_6A0C:
                 
                 lea     (byte_FF7802).l,a0
                 lea     ($D800).l,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   ApplyVIntVramDMA
+                bsr.w   ApplyVIntVramDma
                 lea     (byte_FF7C02).l,a0
                 lea     ($DC00).l,a1
-                bsr.w   ApplyVIntVramDMA
-                bra.w   WaitForDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bra.w   WaitForDmaQueueProcessing
 
     ; End of function HandleBlinkingDialogueCursor
 
@@ -1078,7 +1078,7 @@ loc_6A68:
                 bsr.w   WaitForWindowMovementEnd
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
-                bsr.w   ClearWindowAndUpdateEndPtr
+                bsr.w   ClearWindowAndUpdateEndPointer
                 clr.w   ((TEXT_WINDOW_INDEX-$1000000)).w
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 return_6A7E:
@@ -1093,7 +1093,7 @@ return_6A7E:
 ClearNextLineOfDialoguePixels:
                 
                 move.w  d0,-(sp)
-                move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d0
+                move.w  ((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w,d0
                 addq.w  #2,d0
                 cmpi.w  #6,d0
                 bne.s   loc_6A90
@@ -1149,7 +1149,7 @@ sub_6AD2:
 
 sub_6AE0:
                 
-                move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d0
+                move.w  ((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w,d0
                 move.w  d0,-(sp)
                 addq.w  #1,d0
                 cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
@@ -1165,7 +1165,7 @@ loc_6AFC:
                 clr.w   d0
 loc_6B00:
                 
-                move.w  d0,((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w
+                move.w  d0,((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  d0,-(sp)
@@ -1203,8 +1203,8 @@ loc_6B4C:
                 adda.w  d0,a1
                 move.w  #$1B0,d0
                 move.w  #2,d1
-                bsr.w   ApplyVIntVramDMA
-                bsr.w   EnableDMAQueueProcessing
+                bsr.w   ApplyVIntVramDma
+                bsr.w   EnableDmaQueueProcessing
                 rts
 
     ; End of function sub_6AE0
@@ -1222,16 +1222,16 @@ SymbolsToGraphics:
                 beq.s   loc_6B9E
                 move.b  ((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w,d2
                 movem.w d0-d2/d7,-(sp)
-                bsr.s   DialogGraphicsToRAM
+                bsr.s   DialogueGraphicsToRam
                 movem.w (sp)+,d0-d2/d7
                 addq.b  #1,d2
                 move.b  d2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
-                bsr.s   DialogGraphicsToRAM
+                bsr.s   DialogueGraphicsToRam
                 addq.w  #1,d4
                 bra.s   loc_6BA0
 loc_6B9E:
                 
-                bsr.s   DialogGraphicsToRAM
+                bsr.s   DialogueGraphicsToRam
 loc_6BA0:
                 
                 movem.w (sp)+,d0-d2
@@ -1242,7 +1242,7 @@ loc_6BA0:
 
 ; =============== S U B R O U T I N E =======================================
 
-DialogGraphicsToRAM:
+DialogueGraphicsToRam:
                 
                 subq.w  #1,d7
                 lsl.w   #5,d7
@@ -1271,7 +1271,7 @@ loc_6BD4:
                 add.b   d4,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 rts
 
-    ; End of function DialogGraphicsToRAM
+    ; End of function DialogueGraphicsToRam
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1281,7 +1281,7 @@ sub_6BDE:
                 move.b  d1,d2
                 lsl.b   #4,d2
                 move.b  ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
-                move.w  ((RAM_Dialogue_VDPTileRowScrollingOffset-$1000000)).w,d3
+                move.w  ((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w,d3
                 lsl.w   #3,d3
                 add.b   d3,d0
                 cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
@@ -1574,291 +1574,291 @@ sub_6D66:
 
     ; End of function sub_6D66
 
-                dc.b   0                ; unused layout ?
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b  $E
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $EC 
-                dc.b $CB 
-                dc.b $BB 
-                dc.b $BB 
-                dc.b $EC 
-                dc.b $BE 
-                dc.b $CB 
+                dc.b 0                  ; unused layout ?
+                dc.b $EE
+                dc.b $EE
+                dc.b $EE
+                dc.b $E
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $EC
+                dc.b $CB
+                dc.b $BB
+                dc.b $BB
+                dc.b $EC
+                dc.b $BE
+                dc.b $CB
                 dc.b $11
-                dc.b $EC 
-                dc.b $BC 
-                dc.b $B1 
-                dc.b $CC 
-                dc.b $EC 
-                dc.b $BB 
+                dc.b $EC
+                dc.b $BC
+                dc.b $B1
+                dc.b $CC
+                dc.b $EC
+                dc.b $BB
                 dc.b $1C
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $BB 
-                dc.b $BB 
-                dc.b $BB 
-                dc.b $BB 
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EE
+                dc.b $EE
+                dc.b $EE
+                dc.b $EE
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $BB
+                dc.b $BB
+                dc.b $BB
+                dc.b $BB
                 dc.b $11
                 dc.b $11
                 dc.b $11
                 dc.b $11
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $BB 
-                dc.b $BB 
-                dc.b $BB 
-                dc.b $BB 
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $EE
+                dc.b $EE
+                dc.b $EE
+                dc.b $EE
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $BB
+                dc.b $BB
+                dc.b $BB
+                dc.b $BB
                 dc.b $11
                 dc.b $11
                 dc.b $11
                 dc.b $11
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $BB 
-                dc.b $BB 
-                dc.b $BB 
-                dc.b $BB 
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $EE
+                dc.b $EE
+                dc.b $EE
+                dc.b $EE
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $BB
+                dc.b $BB
+                dc.b $BB
+                dc.b $BB
                 dc.b $11
                 dc.b $11
                 dc.b $11
                 dc.b $11
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $EE 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $BB 
-                dc.b $BB 
-                dc.b $BB 
-                dc.b $BB 
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $EE
+                dc.b $EE
+                dc.b $EE
+                dc.b $EE
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $BB
+                dc.b $BB
+                dc.b $BB
+                dc.b $BB
                 dc.b $11
                 dc.b $11
                 dc.b $11
                 dc.b $11
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $CC 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
-                dc.b $EC 
-                dc.b $B1 
-                dc.b $CD 
-                dc.b $DD 
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $CC
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD
+                dc.b $EC
+                dc.b $B1
+                dc.b $CD
+                dc.b $DD

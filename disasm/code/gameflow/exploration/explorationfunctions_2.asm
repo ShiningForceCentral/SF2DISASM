@@ -12,12 +12,12 @@ ExplorationLoop:
                 clr.w   ((word_FFB196-$1000000)).w
 loc_257D0:
                 
-                jsr     HealAliveCharsAndImmortals
+                jsr     HealAliveCharactersAndImmortals
                 jsr     FadeOutToBlackAll(pc)
                 nop
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  d0,-(sp)
-                cmpi.b  #$FF,d0         ; map idx is FF, not provided
+                cmpi.b  #$FF,d0         ; map index is $FF, not provided
                 beq.s   loc_25828
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 move.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
@@ -182,7 +182,7 @@ loc_25930:
 loc_2593C:
                 
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
-                andi.w  #$60,d1 ; Check A/C buttons
+                andi.w  #INPUT_C|INPUT_A,d1 ; Check A/C buttons
                 beq.s   loc_25948
                 rts
 loc_25948:

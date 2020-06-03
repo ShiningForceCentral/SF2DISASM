@@ -2,10 +2,11 @@
 ; ASM FILE data\spritedialogproperties.asm :
 ; 0x4567A..0x45858 : Sprite dialog properties
 SpriteDialogProperties:
-                ; mapSprite   enum Mapsprites : MAPSPRITE_*
-; portrait    enum Portraits : PORTRAIT_*
-; speechSound enum Sfx : SFX_*
-    
+                
+; Syntax        mapSprite   map_sprite_index (enum Mapsprites : MAPSPRITE_*)
+;               portrait    portrait_index   (enum Portraits : PORTRAIT_*)
+;               speechSound sfx_index        (enum Sfx : SFX_*)
+                
                 mapSprite BOWIE_BASE
                 portrait BOWIE_BASE
                 speechSound DIALOG_BLEEP_5

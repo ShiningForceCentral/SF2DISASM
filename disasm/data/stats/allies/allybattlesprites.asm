@@ -1,11 +1,13 @@
 
 ; ASM FILE data\stats\allies\allybattlesprites.asm :
 ; 0x1F806..0x1F914 : Ally battle sprites table
-AllyBattleSpritesTable:
-                ; 3 entries per ally, 3 bytes each :
-;  forClass         enum Classes : CLASS_*
-;  allyBattleSprite enum AllyBattleSprites : ALLYBATTLESPRITE_*, Pallete ID
-    
+tbl_AllyBattleSprites:
+                
+; 3 entries per ally, 3 bytes per entry :
+;
+; Syntax        forClass         class_index
+;               allyBattleSprite ally_battle_sprite_index, palette_index
+                
                 forClass SDMN           ; BOWIE
                 allyBattleSprite SDMN, 0
                 forClass HERO

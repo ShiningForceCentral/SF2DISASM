@@ -270,7 +270,7 @@ battle:			macro
 	endm
 	
 enemyEntity:	macro
-	dc.b \1
+	dc.b \1+128
 	endm
 	
 itemDrop:		macro
@@ -370,7 +370,7 @@ mpCost:		macro
 	endm
 	
 animation:	macro
-	defineBitfield.b SPELLANIMIDX_,\1
+	defineBitfield.b SPELLANIMATION_,\1
 	endm
 	
 properties:	macro
@@ -645,11 +645,11 @@ spellList:	macro
 	shift
 	shift
 	endr
-	dc.b CODE_TERMINATOR_BYTE
+	dc.b ALLYSTATS_CODE_END_OF_SPELL_LIST
 	endm
 	
 useFirstSpellList:	macro
-	dc.b CODE_USEFIRSTSPELLLIST
+	dc.b ALLYSTATS_CODE_USE_FIRST_SPELL_LIST
 	endm
 	
 	

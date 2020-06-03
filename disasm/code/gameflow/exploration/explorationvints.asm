@@ -14,26 +14,26 @@ ProcessPlayerAction:
                 clr.w   d0
                 jsr     j_WaitForEntityToStopMoving
                 jsr     (WaitForViewScrollEnd).l
-                btst    #INPUT_A_A,d7
+                btst    #INPUT_BIT_A,d7
                 bne.w   loc_25BCC       
-                btst    #INPUT_A_C,d7
+                btst    #INPUT_BIT_C,d7
                 bne.w   loc_25B02       
                 rts
 loc_25B02:
                 
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w ; BUTTON C PUSHED
                 beq.s   loc_25B40       
-                btst    #INPUT_A_B,((P2_INPUT-$1000000)).w ; If Debug Mode and P1 C pushed while P2 B pushed, access Debug Flag Setter and then Chuch Actions
+                btst    #INPUT_BIT_B,((P2_INPUT-$1000000)).w ; If Debug Mode and P1 C pushed while P2 B pushed, access Debug Flag Setter and then Chuch Actions
                 beq.s   loc_25B22
                 move.w  #$258,d0
                 jsr     j_DebugFlagSetter
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 loc_25B22:
                 
-                btst    #INPUT_A_C,((P2_INPUT-$1000000)).w
+                btst    #INPUT_BIT_C,((P2_INPUT-$1000000)).w
                 bne.w   loc_25BF4       
-                btst    #INPUT_A_A,((P2_INPUT-$1000000)).w ; If Debug Mode and P1 C pushed while P2 A pushed, access Debug Mode Action Select
+                btst    #INPUT_BIT_A,((P2_INPUT-$1000000)).w ; If Debug Mode and P1 C pushed while P2 A pushed, access Debug Mode Action Select
                 beq.s   loc_25B40       
                 jsr     (FadeOutToBlack).w
                 jsr     j_DebugModeActionSelect
@@ -82,8 +82,8 @@ loc_25BAA:
                 bsr.w   GetActivatedEntity
                 tst.w   d0
                 blt.s   loc_25BC0       
-                bsr.w   GetEntityEventIdx
-                jsr     j_RunEntityEvent
+                bsr.w   GetEntityEventIndex
+                jsr     j_RunMapSetupEntityEvent
                 bra.w   return_25BF2
 loc_25BC0:
                 

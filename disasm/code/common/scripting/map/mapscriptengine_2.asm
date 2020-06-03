@@ -14,7 +14,7 @@ ExecuteMapScript:
                 clr.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
 loc_47140:
                 
-                btst    #INPUT_A_START,((P2_INPUT-$1000000)).w ; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
+                btst    #INPUT_BIT_START,((P2_INPUT-$1000000)).w ; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
                 beq.s   loc_47156
                 tst.b   (DEBUG_MODE_ACTIVATED).l
                 beq.s   loc_47156
@@ -375,7 +375,7 @@ loc_473B4:
 loc_473D4:
                 
                 jsr     j_JoinForce
-                jsr     j_GetClass      
+                jsr     j_GetClass
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     $1BE            ; "{NAME} the {CLASS} {N}has joined the force."
@@ -571,12 +571,12 @@ csc12_executeContextMenu:
                 move.l  a6,-(sp)
                 tst.w   d0
                 bne.s   loc_474C4
-                jsr     j_ChurchActions ; xxxx = 0
+                jsr     j_ChurchMenuActions ; xxxx = 0
 loc_474C4:
                 
                 cmpi.w  #1,d0
                 bne.s   loc_474D0
-                jsr     j_ShopActions   ; xxxx = 1
+                jsr     j_ShopMenuActions ; xxxx = 1
 loc_474D0:
                 
                 cmpi.w  #2,d0

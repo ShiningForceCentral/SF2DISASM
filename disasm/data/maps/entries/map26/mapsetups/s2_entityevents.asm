@@ -50,7 +50,7 @@ Map26_EntityEvent2:
 
 Map26_EntityEvent4:
                 
-                jsr     j_ChurchActions
+                jsr     j_ChurchMenuActions
                 rts
 
     ; End of function Map26_EntityEvent4

@@ -204,7 +204,7 @@ loc_5FD82:
 
 sub_5FD92:
                 
-                move.b  #1,((byte_FFDFAB-$1000000)).w
+                move.b  #1,((FADING_TIMER+1-$1000000)).w
                 lea     plt_5FDB4(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
                 moveq   #$20,d7 

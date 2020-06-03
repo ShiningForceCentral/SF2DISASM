@@ -4,13 +4,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = char idx
+; In: D0 = character index
 
 j_sub_DEFC_0:
                 
                 movem.l d0-a5,-(sp)
                 move.w  d0,d7
-                btst    #CHAR_BIT_ENEMY,d0
+                btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   loc_DF10
                 move.w  #6,d5
                 bra.w   loc_E076
@@ -100,22 +100,22 @@ loc_DFC2:
 loc_DFE6:
                 
                 move.w  d7,d0
-                btst    #7,d0
+                btst    #COMBATANT_BIT_ENEMY,d0
                 beq.s   loc_E01C
-                bsr.w   GetEnemyIndex
-                cmpi.w  #$5D,d1 ; check if Prism Flower
+                bsr.w   GetEnemyIndex   
+                cmpi.w  #ENEMY_PRISM_FLOWER,d1 ; check if Prism Flower
                 bne.s   loc_E000        
                 bsr.w   HandleLineAttackerAI
                 bra.w   loc_E0AA
 loc_E000:
                 
-                cmpi.w  #$26,d1 ; check if Zeon Guard
+                cmpi.w  #ENEMY_ZEON_GUARD,d1 ; check if Zeon Guard
                 bne.s   loc_E00E        
                 bsr.w   HandleLineAttackerAI
                 bra.w   loc_E0AA
 loc_E00E:
                 
-                cmpi.w  #$20,d1 ; check if Burst Rock
+                cmpi.w  #ENEMY_BURST_ROCK,d1 ; check if Burst Rock
                 bne.s   loc_E01C
                 bsr.w   HandleExploderAI
                 bra.w   loc_E0AA
@@ -148,7 +148,7 @@ loc_E048:
                 beq.s   loc_E076
                 cmpi.b  #1,d6
                 bne.s   loc_E06A
-                jsr     j_getMoveListForEnemyTarget
+                jsr     j_GetMoveListForEnemyTarget
 loc_E06A:
                 
                 cmpi.b  #2,d6
@@ -180,7 +180,7 @@ loc_E0A2:
                 dbf     d2,loc_E090
 loc_E0AA:
                 
-                jsr     j_clearTerrainListObstructions
+                jsr     j_ClearTerrainListObstructions
                 movem.l (sp)+,d0-a5
                 rts
 
@@ -192,7 +192,7 @@ loc_E0AA:
 sub_E0B6:
                 
                 movem.l d0/d2-a6,-(sp)
-                move.w  #1,d1
+                move.w  #BATTLESPRITESET_SUBSECTION_ALLIES,d1
                 jsr     j_GetBattleSpriteSetSubsection
                 move.w  d1,d2
                 subi.w  #2,d2
@@ -268,7 +268,7 @@ HandleExploderAI:
                 tst.w   d0
                 beq.s   loc_E190
                 move.w  #6,d6
-                jsr     j_randomUnderD6
+                jsr     j_RandomUnderD6
                 cmpi.b  #4,d7
                 bne.s   loc_E190
                 lea     (BATTLESCENE_ACTION_TYPE).l,a0
@@ -620,7 +620,7 @@ sub_E3EE:
                 bsr.w   CheckMuddled2   
                 tst.b   d1
                 beq.s   loc_E40A
-                bra.w   loc_E776
+                bra.w   loc_E776        ; skip this function if combatant is inflicted with muddle 2
 loc_E40A:
                 
                 clr.w   d1
@@ -630,16 +630,16 @@ loc_E40A:
                 move.b  -4(a6),d0
                 clr.w   d3
                 bsr.w   GetNextUsableHealingItem
-                cmpi.w  #$7F,d1 
+                cmpi.w  #ITEM_NOTHING,d1
                 beq.s   loc_E490
-                cmpi.b  #8,d1
+                cmpi.b  #ITEM_HEALING_RAIN,d1
                 bne.s   loc_E490
                 move.b  d1,-2(a6)       ; item is Healing Rain
                 move.b  d2,-3(a6)
                 bsr.w   GetItemDefAddress
-                move.b  ITEMDEF_OFFSET_SPELL(a0),-1(a6)
+                move.b  ITEMDEF_OFFSET_USE_SPELL(a0),-1(a6)
                 move.w  #$80,d0 
-                bsr.w   IsCharacterLessThanHalfHP
+                bsr.w   IsCombatantAtLessThanHalfHP
                 bcc.s   loc_E45E        
                 move.b  #$7F,-2(a6) 
                 move.b  #$3F,-1(a6) 
@@ -647,16 +647,16 @@ loc_E40A:
 loc_E45E:
                 
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a1 ; enemy 0 has less than half HP, and we have a healing rain, so use it
-                move.w  #2,(a1)
+                move.w  #BATTLEACTION_USE_ITEM,(a1)
                 clr.w   d0
                 move.b  -3(a6),d0
-                move.w  d0,6(a1)
+                move.w  d0,BATTLEACTION_OFFSET_ITEM_SLOT(a1)
                 clr.w   d0
                 move.b  -4(a6),d0
-                move.w  d0,4(a1)
+                move.w  d0,BATTLEACTION_OFFSET_4(a1)
                 clr.w   d1
                 move.b  -2(a6),d1
-                move.w  d1,2(a1)
+                move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
                 move.w  #$FF,(a1)
                 bra.w   loc_E782
@@ -704,13 +704,13 @@ loc_E4EE:
                 move.b  d1,-2(a6)
                 move.b  d2,-3(a6)
                 bsr.w   GetItemDefAddress
-                move.b  ITEMDEF_OFFSET_SPELL(a0),-1(a6)
+                move.b  ITEMDEF_OFFSET_USE_SPELL(a0),-1(a6)
 loc_E500:
                 
                 move.b  -4(a6),d0
                 btst    #7,d0
                 beq.s   loc_E510
-                bsr.w   MakeTargetListMonsters
+                bsr.w   MakeTargetListEnemies
                 bra.s   loc_E514
 loc_E510:
                 
@@ -718,12 +718,12 @@ loc_E510:
 loc_E514:
                 
                 move.w  #$FFFF,d3
-                bsr.w   UpdateTargetListCharacters
+                bsr.w   UpdateTargetListAllies
                 move.b  -4(a6),d0
                 bsr.w   GetMoveInfo     
                 bsr.w   MakeRangeLists
                 clr.w   d3
-                bsr.w   UpdateTargetListCharacters
+                bsr.w   UpdateTargetListAllies
                 lea     ((byte_FF883E-$1000000)).w,a0
                 clr.w   d3
                 move.b  -4(a6),d0
@@ -935,28 +935,28 @@ loc_E70A:
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a1
                 cmpi.b  #$7F,-2(a6) 
                 bne.s   loc_E748
-                move.w  #1,(a1)
+                move.w  #BATTLEACTION_CAST_SPELL,(a1)
                 clr.w   d0
                 move.b  -1(a6),d0
-                move.w  d0,2(a1)
+                move.w  d0,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
                 clr.w   d0
                 move.b  (a0,d6.w),d0
-                move.w  d0,4(a1)
+                move.w  d0,BATTLEACTION_OFFSET_4(a1)
                 bra.s   loc_E772
 loc_E748:
                 
-                move.w  #2,(a1)
+                move.w  #BATTLEACTION_USE_ITEM,(a1)
                 clr.w   d0
                 move.b  -3(a6),d0
-                move.w  d0,6(a1)
+                move.w  d0,BATTLEACTION_OFFSET_ITEM_SLOT(a1)
                 clr.w   d0
                 move.b  (a0,d6.w),d0
-                move.w  d0,4(a1)
+                move.w  d0,BATTLEACTION_OFFSET_4(a1)
                 clr.w   d0
                 move.b  -4(a6),d0
                 move.b  -3(a6),d1
-                bsr.w   GetCharItemAtSlotAndNumberOfItems
-                move.w  d1,2(a1)
+                bsr.w   GetItemAndNumberOfItems
+                move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
 loc_E772:
                 
                 bra.w   loc_E782
@@ -1012,14 +1012,14 @@ loc_E7DE:
                 cmpi.b  #2,d2
                 bne.w   loc_E86C
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
-                move.w  #2,(a0)
+                move.w  #BATTLEACTION_USE_ITEM,(a0)
                 lea     ((word_FF880A-$1000000)).w,a1
-                move.w  (a1),6(a0)
-                move.w  d0,4(a0)
+                move.w  (a1),BATTLEACTION_OFFSET_ITEM_SLOT(a0)
+                move.w  d0,BATTLEACTION_OFFSET_4(a0)
                 move.w  d7,d0
                 move.w  (a1),d1
-                bsr.w   GetCharItemAtSlotAndNumberOfItems
-                move.w  d1,2(a0)
+                bsr.w   GetItemAndNumberOfItems
+                move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
                 lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
                 move.w  d7,d1
                 btst    #7,d1
@@ -1031,9 +1031,9 @@ loc_E81E:
                 lea     ((word_FF880A-$1000000)).w,a1
                 move.w  (a1),d1
                 move.w  d7,d0
-                bsr.w   GetCharItemAtSlotAndNumberOfItems
+                bsr.w   GetItemAndNumberOfItems
                 bsr.w   GetItemDefAddress
-                move.b  9(a0),d1
+                move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 bsr.w   GetSpellRange
                 bsr.w   MakeTargetListEverybody
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
@@ -1053,10 +1053,10 @@ loc_E86C:
                 cmpi.b  #1,d2
                 bne.s   loc_E8D0
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
-                move.w  #1,(a0)
+                move.w  #BATTLEACTION_CAST_SPELL,(a0)
                 lea     ((word_FF880C-$1000000)).w,a1
-                move.w  (a1),2(a0)
-                move.w  d0,4(a0)
+                move.w  (a1),BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
+                move.w  d0,BATTLEACTION_OFFSET_4(a0)
                 lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
                 move.w  d7,d1
                 btst    #7,d1
@@ -1065,7 +1065,7 @@ loc_E86C:
                 move.b  d0,(a2,d1.w)
 loc_E89A:
                 
-                move.w  2(a0),d1
+                move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0),d1
                 bsr.w   GetSpellRange
                 bsr.w   MakeTargetListEverybody
                 jsr     GetYPos
@@ -1084,7 +1084,7 @@ loc_E8D0:
                 bne.w   loc_E97C
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
                 move.w  #0,(a0)
-                move.w  d0,2(a0)
+                move.w  d0,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
                 lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a2
                 move.w  d7,d1
                 btst    #7,d1
@@ -1101,14 +1101,19 @@ loc_E8F6:
                 clr.l   d3
                 clr.l   d4
                 jsr     GetSomethingClassType
-                cmpi.b  #$3B,d1 
+                cmpi.b  #ENEMY_KRAKEN_ARM,d1 ; <BUG> When getting Claude's class type, the previous routine 
+                                        ;  returns a value in the byte area that happens to be the same
+                                        ;  as the Kraken Arm's index, causing the former to perform 
+                                        ;  a ranged attack when controlled by the AI.
+                                        ;                                                 
+                                        ; That can be fixed by using a word-sized CMPI instruction
                 bne.s   loc_E922
                 move.w  #2,d3
                 move.w  #1,d4
                 bra.w   loc_E938
 loc_E922:
                 
-                cmpi.b  #$57,d1 
+                cmpi.b  #ENEMY_KRAKEN_HEAD,d1
                 bne.s   loc_E934
                 move.w  #3,d3
                 move.w  #1,d4
@@ -1124,8 +1129,8 @@ loc_E93C:
                 
                 jsr     GetItemDefAddress
                 moveq   #0,d3
-                move.b  4(a0),d3
-                move.b  5(a0),d4
+                move.b  ITEMDEF_OFFSET_MAX_RANGE(a0),d3
+                move.b  ITEMDEF_OFFSET_MIN_RANGE(a0),d4
 loc_E94C:
                 
                 move.l  (sp)+,d0
@@ -1216,11 +1221,11 @@ loc_EA2E:
                 bne.w   loc_EAE6
                 move.b  -1(a6),d0
                 move.w  #$FFFF,d3
-                bsr.w   UpdateTargetListCharacters
+                bsr.w   UpdateTargetListAllies
                 bsr.w   GetMoveInfo     
                 bsr.w   MakeRangeLists
                 clr.w   d3
-                bsr.w   UpdateTargetListCharacters
+                bsr.w   UpdateTargetListAllies
                 clr.w   d0
                 move.b  -1(a6),d0
                 bsr.w   sub_CE96
@@ -1234,7 +1239,7 @@ loc_EA2E:
                 bra.w   loc_EB7A
 loc_EA78:
                 
-                jsr     j_clearTerrainListObstructions
+                jsr     j_ClearTerrainListObstructions
                 move.b  -1(a6),d0
                 jsr     sub_1AC028      
                 move.b  -1(a6),d0
@@ -1246,7 +1251,7 @@ loc_EA78:
                 bra.w   loc_EB7A
 loc_EA9C:
                 
-                jsr     j_clearTerrainListObstructions
+                jsr     j_ClearTerrainListObstructions
                 move.b  -1(a6),d0
                 move.b  -3(a6),d1
                 bsr.w   sub_F7A0
@@ -1286,7 +1291,7 @@ loc_EAE6:
                 bra.w   loc_EB7A
 loc_EB10:
                 
-                jsr     j_clearTerrainListObstructions
+                jsr     j_ClearTerrainListObstructions
                 move.b  -1(a6),d0
                 jsr     sub_1AC028      
                 move.b  -1(a6),d0
@@ -1298,7 +1303,7 @@ loc_EB10:
                 bra.w   loc_EB7A
 loc_EB34:
                 
-                jsr     j_clearTerrainListObstructions
+                jsr     j_ClearTerrainListObstructions
                 move.b  -1(a6),d0
                 move.b  -3(a6),d1
                 bsr.w   sub_F7A0
@@ -1327,7 +1332,7 @@ loc_EB7A:
                 beq.s   loc_EB9C
                 cmpi.w  #1,d2
                 bne.s   loc_EB90
-                jsr     j_getMoveListForEnemyTarget
+                jsr     j_GetMoveListForEnemyTarget
 loc_EB90:
                 
                 cmpi.w  #2,d2
@@ -1344,13 +1349,13 @@ loc_EB9C:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = char idx
+; In: D0 = character index
 
 sub_EBA4:
                 
                 movem.l d0/d2-a6,-(sp)
                 move.w  d0,d7
-                btst    #CHAR_BIT_ENEMY,d0
+                btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   loc_EBC8
                 move.w  #$FFFF,d1
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
@@ -1407,7 +1412,7 @@ loc_EC3A:
                 move.w  d1,d6
                 bsr.w   GetSpellDefAddress
                 clr.w   d2
-                move.b  SPELLDEF_OFFSET_MPCOST(a0),d2
+                move.b  SPELLDEF_OFFSET_MP_COST(a0),d2
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d5
                 clr.w   d0
                 move.b  d7,d0
@@ -1426,11 +1431,11 @@ loc_EC6E:
                 btst    #6,d5
                 move.w  #$FFFF,d3
                 bne.s   loc_EC80
-                bsr.w   UpdateTargetListMonsters
+                bsr.w   UpdateTargetListEnemies
                 bra.s   loc_EC84
 loc_EC80:
                 
-                bsr.w   UpdateTargetListCharacters
+                bsr.w   UpdateTargetListAllies
 loc_EC84:
                 
                 move.b  d7,d0
@@ -1439,13 +1444,13 @@ loc_EC84:
                 btst    #6,d5
                 clr.w   d3
                 bne.s   loc_ECA0
-                bsr.w   UpdateTargetListMonsters
+                bsr.w   UpdateTargetListEnemies
                 bsr.w   MakeTargetListAllies
                 bra.s   loc_ECA8
 loc_ECA0:
                 
-                bsr.w   UpdateTargetListCharacters
-                bsr.w   MakeTargetListMonsters
+                bsr.w   UpdateTargetListAllies
+                bsr.w   MakeTargetListEnemies
 loc_ECA8:
                 
                 clr.w   d1
@@ -1525,12 +1530,12 @@ loc_ED46:
 loc_ED6C:
                 
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
-                move.w  #1,(a0)
-                move.w  d6,2(a0)
-                move.w  d0,4(a0)
+                move.w  #BATTLEACTION_CAST_SPELL,(a0)
+                move.w  d6,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
+                move.w  d0,BATTLEACTION_OFFSET_4(a0)
                 move.w  d6,d1
                 bsr.w   GetSpellRange
-                move.w  4(a0),d0
+                move.w  BATTLEACTION_OFFSET_4(a0),d0
                 bsr.w   MakeTargetListEverybody
 loc_ED8A:
                 
@@ -1669,7 +1674,7 @@ loc_EEC2:
 loc_EEC6:
                 
                 move.b  #2,d6
-                jsr     j_randomUnderD6
+                jsr     j_RandomUnderD6
                 cmpi.b  #1,d7
                 bne.s   loc_EEDC
                 bra.w   loc_EF14
@@ -1855,7 +1860,7 @@ loc_F088:
                 bra.w   loc_F0D8
 loc_F098:
                 
-                jsr     GetClass
+                jsr     GetClass        
                 cmp.b   (a4,d5.w),d1
                 beq.s   loc_F0A8
                 bra.w   loc_F0D8
@@ -2005,7 +2010,7 @@ sub_F1D4:
                 beq.s   loc_F1FE
                 cmpi.b  #1,d1
                 bne.s   loc_F1F2
-                jsr     j_getMoveListForEnemyTarget
+                jsr     j_GetMoveListForEnemyTarget
 loc_F1F2:
                 
                 cmpi.b  #2,d1
@@ -2035,22 +2040,22 @@ loc_F228:
 loc_F22C:
                 
                 move.w  d7,d0
-                btst    #7,d0
+                btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   loc_F23E
-                move.w  #$80,d0 
-                move.w  #$1F,d6
+                move.w  #COMBATANT_ENEMIES_START,d0
+                move.w  #COMBATANT_ENEMIES_COUNTER,d6
                 bra.s   loc_F244
 loc_F23E:
                 
                 clr.w   d0
-                move.w  #$1D,d6
+                move.w  #COMBATANT_ALLIES_COUNTER,d6
 loc_F244:
                 
                 lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
                 clr.w   d2
 loc_F24A:
                 
-                bsr.w   GetCurrentHP    ; iterate through force or monsters
+                bsr.w   GetCurrentHP    ; iterate through combatants
                 tst.w   d1
                 bne.s   loc_F256
                 bra.w   loc_F276
@@ -2146,7 +2151,7 @@ loc_F31A:
                 
                 clr.w   d0
                 move.b  (a0,d5.w),d0
-                bsr.w   GetClass
+                bsr.w   GetClass        
                 move.b  d1,d4
                 clr.w   d3
                 move.w  #$20,d2 
@@ -2209,7 +2214,7 @@ loc_F39E:
                 move.b  d7,d0
                 btst    #7,d0
                 beq.w   loc_F404
-                bsr.w   GetEnemyIndex
+                bsr.w   GetEnemyIndex   
                 cmpi.b  #$A,d1          ; HARDCODED enemy indexes
                 bne.s   loc_F3B8
                 bra.w   loc_F3D0
@@ -2228,7 +2233,7 @@ loc_F3CC:
                 bra.w   loc_F404
 loc_F3D0:
                 
-                jsr     j_clearTerrainListObstructions
+                jsr     j_ClearTerrainListObstructions
                 move.b  d6,d0
                 bsr.w   GetYPos
                 move.w  d1,d4
@@ -2243,7 +2248,7 @@ loc_F3D0:
                 bra.w   loc_F43A
 loc_F404:
                 
-                jsr     j_clearTerrainListObstructions
+                jsr     j_ClearTerrainListObstructions
                 clr.w   d0
                 move.b  d7,d0
                 bsr.w   MemorizePath
@@ -2284,7 +2289,7 @@ loc_F476:
                 cmpi.b  #1,d1
                 bne.s   loc_F48C
                 move.b  d7,d0
-                jsr     j_getMoveListForEnemyTarget
+                jsr     j_GetMoveListForEnemyTarget
 loc_F48C:
                 
                 cmpi.b  #2,d1
@@ -2331,7 +2336,7 @@ loc_F4FE:
                 bsr.w   sub_DD10
 loc_F512:
                 
-                jsr     j_clearTerrainListObstructions
+                jsr     j_ClearTerrainListObstructions
                 clr.w   d1
                 unlk    a6
                 movem.l (sp)+,d0/d3-a6
@@ -2348,7 +2353,7 @@ sub_F522:
                 link    a6,#-4
                 move.b  d0,-3(a6)
                 move.w  #8,d6
-                jsr     j_randomUnderD6
+                jsr     j_RandomUnderD6
                 cmpi.b  #2,d7
                 bne.s   loc_F554
                 lea     (BATTLESCENE_ACTION_TYPE).l,a2
@@ -2390,7 +2395,7 @@ loc_F5AA:
                 bne.s   loc_F5C4
                 clr.w   d0
                 move.b  -3(a6),d0
-                jsr     j_GetCombatantStartPos
+                jsr     j_GetCombatantStartingPositions
                 move.b  d1,-1(a6)
                 move.b  d2,-2(a6)
                 bra.s   loc_F5DE
@@ -2400,7 +2405,7 @@ loc_F5C4:
                 move.b  -3(a6),d0
                 bsr.w   GetEnemyAISetting3233
                 move.w  d1,d0
-                jsr     j_getEnemyAITargetPos
+                jsr     j_GetEnemyAITargetPosition
                 move.b  d1,-1(a6)
                 move.b  d1,-2(a6)
 loc_F5DE:
@@ -2421,7 +2426,7 @@ loc_F5DE:
                 bne.s   loc_F62A
                 clr.w   d6
                 move.w  #2,d6
-                jsr     j_randomUnderD6
+                jsr     j_RandomUnderD6
                 tst.b   d7
                 bne.s   loc_F624
                 move.b  #4,d1
@@ -2524,7 +2529,7 @@ loc_F6FA:
                 dbf     d4,loc_F6F2
                 move.w  d7,d5
                 move.w  d0,d6
-                jsr     j_randomUnderD6
+                jsr     j_RandomUnderD6
                 clr.l   d4
                 move.b  -4(a6),d4
                 subi.w  #1,d4
@@ -2607,7 +2612,7 @@ sub_F7A0:
                 move.b  -1(a6),d0
                 bsr.w   MemorizePath
                 move.b  -2(a6),d0
-                jsr     j_getEnemyAITargetPos
+                jsr     j_GetEnemyAITargetPosition
                 move.w  d1,d3
                 move.w  d2,d4
                 move.w  #$80,d0 
@@ -2642,12 +2647,12 @@ loc_F820:
                 move.b  d1,-4(a6)
                 move.b  d2,-3(a6)
                 move.w  #$FFFF,d3
-                bsr.w   UpdateTargetListCharacters
+                bsr.w   UpdateTargetListAllies
                 move.b  -1(a6),d0
                 bsr.w   GetMoveInfo     
                 bsr.w   MakeRangeLists
                 move.w  #0,d3
-                bsr.w   UpdateTargetListCharacters
+                bsr.w   UpdateTargetListAllies
                 move.b  -4(a6),d1
                 move.b  -3(a6),d2
                 clr.w   d3

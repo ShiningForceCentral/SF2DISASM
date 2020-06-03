@@ -823,13 +823,11 @@
 #split	0x10FCC,0x110A4,data/graphics/tech/menus/unidentifiedlayout02.bin
 #split	0x114BE,0x11572,data/graphics/tech/windowlayouts/battleequipwindowlayout.bin
 #split	0x1264E,0x126EE,data/graphics/tech/windowbordertiles.bin
-#split	0x126EE,0x1278E,data/graphics/tech/windowlayouts/portraitwindowlayout.bin
-#split	0x1278E,0x1284E,data/graphics/tech/windowlayouts/allykilldefeatwindowlayout.bin
-#split	0x1284E,0x1288E,data/graphics/tech/windowlayouts/characterstatsdefeatwindowlayout.bin
 #split	0x13D9E,0x13EDE,data/graphics/tech/texthighlighttiles.bin
+#split	0x14EFC,0x14F7C,data/graphics/tech/shoppricetagtiles-blank.bin
+#split	0x14F7C,0x1505C,data/graphics/tech/shoppricetagtiles-numbers.bin
+#split	0x151D6,0x15268,data/graphics/tech/shopinventoryitemhighlighttiles.bin
 #split	0x15A5A,0x15BB0,data/graphics/tech/windowlayouts/battleconfigwindowlayout.bin
-#split	0x1607C,0x160B4,data/graphics/tech/windowlayouts/alphabettopborderwindowlayout.bin
-#split	0x160B4,0x16204,data/graphics/tech/windowlayouts/alphabetwindowlayout.bin
 #split	0x1623A,0x16282,data/graphics/tech/alphabethighlighttiles.bin
 #split	0x16618,0x16658,data/graphics/tech/windowlayouts/timerwindowwindowlayout.bin
 #split	0x198A8,0x198C8,data/graphics/battles/plt_battlescenebasepalette.bin
