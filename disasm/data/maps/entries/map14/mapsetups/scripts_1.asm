@@ -9,7 +9,7 @@ cs_58F5C:       moveNextToPlayer 129,DOWN
                 textCursor $C86
                 nextSingleText $0,129   ; "I want to leave soon.{N}Finish your preparations.{W1}"
                 csc_end
-cs_58F7E:       nextSingleText $0,129   ; "The game will be suspended.{N}OK?"
+cs_58F7E:       nextSingleText $0,129   ; "Are you ready?{W1}"
                 entityActions 129
                  moveDown 4
                 endActions

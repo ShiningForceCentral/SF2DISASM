@@ -16,7 +16,7 @@ bbcs_08:        textCursor $99D
                 setPos ALLY_KIWI,63,63,DOWN
 cs_4A994:       playSound MUSIC_MAIN_THEME
                 fadeInB
-                nextSingleText $0,128   ; "The game will be suspended.{N}OK?"
+                nextSingleText $0,128   ; "It's over there!{N}There he is!{W1}"
                 entityActionsWait 128
                  moveRight 2
                 endActions
@@ -25,7 +25,7 @@ cs_4A994:       playSound MUSIC_MAIN_THEME
                  moveUp 1
                 endActions
                 setCameraEntity 129
-                nextSingleText $0,128   ; "....{W1}"
+                nextSingleText $0,128   ; "He's lying down!  Why?{N}What happened?{W1}"
                 playSound MUSIC_ENEMY_ATTACK
                 setCamDest 7,32
                 setPos 131,12,35,DOWN
@@ -35,12 +35,12 @@ cs_4A994:       playSound MUSIC_MAIN_THEME
                 setPos 133,13,35,DOWN
                 csWait 30
                 setPos 130,12,37,DOWN
-                nextSingleText $C0,130  ; "{LEADER}, are you ready{N}for battle?{D3}"
-                nextSingleText $C0,130  ; "Do you need more preparations?"
-                nextText $C0,130        ; "Did you change your mind?{W2}"
-                nextSingleText $C0,130  ; "Be careful.{D1}{N}Haste makes waste.{D1}"
+                nextSingleText $C0,130  ; "Hee, hee!  More strangers{N}have arrived!{W1}"
+                nextSingleText $C0,130  ; "You!  Did you hurt him?{W1}"
+                nextText $C0,130        ; "This is my territory.{N}I protect it.{W2}"
+                nextSingleText $C0,130  ; "You come here to save him?{N}Ha!{W1}"
                 setFacing 130,UP
-                nextSingleText $C0,130  ; "{LEADER}, you had better{N}take a rest now.{D3}"
+                nextSingleText $C0,130  ; "Everybody, attack!{W1}"
                 setActscript 131,eas_Jump
                 setActscript 132,eas_Jump
                 setActscriptWait 133,eas_Jump

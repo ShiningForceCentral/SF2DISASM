@@ -15,7 +15,7 @@ abcs_battle08:  textCursor $9A4
                 jumpIfFlagSet $6,cs_4AAB6 ; Kiwi joined
                 setPos ALLY_KIWI,63,63,DOWN
 cs_4AAB6:       fadeInB
-                nextSingleText $0,128   ; "The game will be suspended.{N}OK?"
+                nextSingleText $0,128   ; "Oh, my...hey!{N}Are you OK?!{W1}"
                 setFacing 128,LEFT
                 entityActionsWait 128
                  moveLeft 1
@@ -25,23 +25,23 @@ cs_4AAB6:       fadeInB
                  moveUp 1
                 endActions
                 setFacing 128,RIGHT
-                nextSingleText $0,128   ; "....{W1}"
+                nextSingleText $0,128   ; "Oh!{W1}"
                 setActscriptWait 129,eas_Init
                 setSprite 129,MAPSPRITE_POSE1
                 setFacing 129,LEFT
-                nextSingleText $C0,129  ; "{LEADER}, are you ready{N}for battle?{D3}"
+                nextSingleText $C0,129  ; "Oooh...unh...a big rock...{N}fell on me....{W1}"
                 setSprite 129,MAPSPRITE_WORKER
                 setFacing 129,DOWN
-                nextSingleText $C0,129  ; "Do you need more preparations?"
+                nextSingleText $C0,129  ; "Huh?  Where is it?{W1}"
                 setActscriptWait 129,eas_Init
                 csWait 5
                 setActscript 129,eas_461B6
                 csWait 120
                 setFacing 129,LEFT
                 startEntity 129
-                nextSingleText $C0,129  ; "Did you change your mind?{W2}"
+                nextSingleText $C0,129  ; "It's...humph...{W1}"
                 setFacing 129,DOWN
-                nextSingleText $C0,129  ; "Be careful.{D1}{N}Haste makes waste.{D1}"
+                nextSingleText $C0,129  ; "{LEADER}...how come{N}you're here?{W1}"
                 setActscript 128,eas_BumpRight
                 customActscriptWait 129
                  ac_setSpeed 32,32      ;   
@@ -54,13 +54,13 @@ cs_4AAB6:       fadeInB
                 endActions
                 setFacing 129,DOWN
                 headshake 129
-                nextText $0,128         ; "{LEADER}, you had better{N}take a rest now.{D3}"
-                nextSingleText $0,128   ; "{LEADER}, to retreat is{N}sometimes a good strategy.{D3}"
+                nextText $0,128         ; "What a fool.{N}We came to help you!{W2}"
+                nextSingleText $0,128   ; "You would be dead if we{N}hadn't come.{W1}"
                 setFacing 129,LEFT
-                nextText $C0,129        ; "{LEADER}, are you ready?{D3}"
-                nextText $C0,129        ; "{LEADER}, you are going to{N}battle again."
-                nextText $C0,129        ; "{LEADER}, take it easy!{W1}"
-                nextSingleText $C0,129  ; "{LEADER}, take it easy!{W1}"
+                nextText $C0,129        ; "What are you talking about?{N}Oh, yeah!  I remember.{W2}"
+                nextText $C0,129        ; "A huge rock fell on me after{N}you left.{W2}"
+                nextText $C0,129        ; "It must have knocked me out.{N}Anyway, thank you.{W2}"
+                nextSingleText $C0,129  ; "Look at that!{N}The tunnel is blocked by{N}a rockslide.{W1}"
                 setFacing 129,RIGHT
                 csWait 20
                 setFacing ALLY_KIWI,RIGHT
@@ -71,13 +71,13 @@ cs_4AAB6:       fadeInB
                  moveRight 1
                 endActions
                 setActscriptWait 128,eas_Jump
-                nextText $0,128         ; "{LEADER}, are you ready?{D3}"
-                nextSingleText $0,128   ; "Do you need more preparations?"
+                nextText $0,128         ; "Oh, what a pity.{N}Treasures may lie within....{W2}"
+                nextSingleText $0,128   ; "I guess we'll never know.{W1}"
                 setFacing 128,DOWN
                 entityActionsWait 128
                  moveDown 1
                 endActions
-                nextSingleText $0,128   ; "You changed your mind?{W2}"
+                nextSingleText $0,128   ; "{LEADER}, let's go back{N}to the ship.{W1}"
                 warp $49,$3E,$31,$2
                 csc_end
 ce_4ABBE:       mainEntity 14,37,UP
