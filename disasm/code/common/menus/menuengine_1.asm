@@ -3183,7 +3183,7 @@ loc_11B9E:
                 move.w  (sp)+,d0
                 
                 if (FORCE_MEMBERS_EXPANSION=0)
-                bsrIfVanillaRom.w GetAllyPortrait
+                bsr.w   GetAllyPortrait 
                 endif
                 
                 bsr.w   LoadPortrait    
@@ -3282,7 +3282,7 @@ BuildMemberStatsScreen:
                 blt.s   loc_11CA6
                 
                 if (FORCE_MEMBERS_EXPANSION=0)
-                bsrIfVanillaRom.w GetAllyPortrait
+                bsr.w   GetAllyPortrait 
                 endif
                 
                 bsr.w   LoadPortrait    

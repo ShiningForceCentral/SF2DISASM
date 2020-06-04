@@ -15,7 +15,7 @@ AlphabetHighlightTiles:
 NumberPrompt:
                 
                 movem.l d1-a1,-(sp)
-                link    a6,#$FFF0
+                link    a6,#-$10
                 move.w  d0,-8(a6)
                 move.w  d1,-$A(a6)
                 move.w  d2,-$C(a6)

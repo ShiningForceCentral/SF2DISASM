@@ -2459,14 +2459,14 @@ UpdateEnemyAI:
                 
                 jsr     j_GetXPos
                 tst.b   d1
-                bmi.w   @Return
+                bmi.w   return_25542
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                beq.w   @Return
+                beq.w   return_25542
                 tst.b   d0
-                bpl.s   @Return
+                bpl.s   return_25542
                 jsr     j_UpdateTriggeredRegionsAndAI
-@Return:
+return_25542:
                 
                 rts
 
