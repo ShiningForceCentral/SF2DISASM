@@ -11,7 +11,7 @@
 
 GetAllyMapSprite:
                 move.w  d0,d4                           ; map sprite index = combatant index
-                cmpi.w  #COM_ALLIES_NUM,d0
+                cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
                 bhs.s   @Return                         ; return if combatant is not an ally
                 
                 ; Check if currently in battle
