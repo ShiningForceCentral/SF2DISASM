@@ -3,7 +3,7 @@
 ; 0x7BCE..0x7BDE : Raft reset map coords
 RaftResetMapCoordinates:
                 ; Save point map, Raft map, Raft X, Raft Y
-                raftResetMapCoords 9, 69, 28, 55
-                raftResetMapCoords 13, 72, 43, 48
-                raftResetMapCoords 10, 72, 43, 48
-                raftResetMapCoords 255, 69, 42, 15
+                raftResetMapCoords MAP_HASSAN, MAP_OVERWORLD_PATH_TO_RIBBLE, 28, 55
+                raftResetMapCoords MAP_POLCA, MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION, 43, 48
+                raftResetMapCoords MAP_MOUNT_VOLCANON, MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION, 43, 48
+                raftResetMapCoords 255, MAP_OVERWORLD_PATH_TO_RIBBLE, 42, 15

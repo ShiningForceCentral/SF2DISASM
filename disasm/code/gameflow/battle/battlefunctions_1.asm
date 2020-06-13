@@ -445,7 +445,8 @@ sub_23EB0:
 loc_23EC4:
                 
                 bsr.w   ClearDeadCombatantsListLength
-                cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w
+                cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w 
+                                                        ; HARDCODED battle index
                 bne.s   loc_23EDA
                 tst.w   -2(a6)
                 bne.s   loc_23EDA
@@ -707,7 +708,7 @@ loc_241C4:
                 jsr     j_InitializeBattleScene
                 move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 jsr     j_ExecuteBattleSceneScript
-                jsr     sub_1800C
+                jsr     j_EndBattleScene
                 jsr     j_ApplyPositionsAfterEnemyLeaderDies ; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
                 movem.l (sp)+,a6
                 movem.l a6,-(sp)

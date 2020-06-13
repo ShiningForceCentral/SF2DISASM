@@ -31,11 +31,11 @@ j_ExecuteBattleSceneScript:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1800C:
+j_EndBattleScene:
                 
-                jmp     sub_1924A(pc)
+                jmp     EndBattleScene(pc)
 
-    ; End of function sub_1800C
+    ; End of function j_EndBattleScene
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -809,7 +809,7 @@ loc_18754:
                 bsr.w   sub_19952
 loc_18758:
                 
-                jsr     sub_10028
+                jsr     j_RemoveAllyBattlesceneWindow
                 move.w  d7,((BATTLESCENE_ALLY-$1000000)).w
                 move.w  d7,d0
                 bsr.w   GetBattleSpriteAndPalette
@@ -1040,7 +1040,7 @@ loc_189AE:
                 lea     (FF2000_LOADING_SPACE).l,a1
                 bsr.w   LoadBattleBackground
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
-                jsr     sub_1002C
+                jsr     j_RemoveEnemyBattlesceneWindow
                 bsr.w   sub_198C8
                 move.w  (sp)+,d0
                 move.w  2(a6),d1
@@ -1934,7 +1934,7 @@ j_hideTextBox:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1924A:
+EndBattleScene:
                 
                 clr.w   d0
                 move.b  ((MESSAGE_SPEED-$1000000)).w,d0
@@ -1954,18 +1954,18 @@ byte_19266:
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 cmpi.w  #$FFFF,d0
                 beq.s   loc_1927A
-                jsr     sub_10028
+                jsr     j_RemoveAllyBattlesceneWindow
 loc_1927A:
                 
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
                 cmpi.w  #$FFFF,d0
                 beq.s   return_1928A
-                jsr     sub_1002C
+                jsr     j_RemoveEnemyBattlesceneWindow
 return_1928A:
                 
                 rts
 
-    ; End of function sub_1924A
+    ; End of function EndBattleScene
 
 
 ; =============== S U B R O U T I N E =======================================

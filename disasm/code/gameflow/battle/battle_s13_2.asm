@@ -723,7 +723,7 @@ loc_1B181C:
                 move.b  (a1,d3.w),d1
                 cmp.b   d1,d7
                 bne.s   loc_1B183E
-                addi.w  #$1F4,d1        ; HARDCODED "Battle completed" flag index start
+                addi.w  #500,d1         ; HARDCODED "Battle completed" flag index start
                 jsr     j_CheckFlag
                 bne.s   loc_1B1836
                 clr.w   d1

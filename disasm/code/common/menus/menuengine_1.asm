@@ -87,27 +87,27 @@ sub_10020:
 
 sub_10024:
                 
-                jmp     loc_116B8(pc)
+                jmp     sub_116B8(pc)
 
     ; End of function sub_10024
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_10028:
+j_RemoveAllyBattlesceneWindow:
                 
-                jmp     loc_11694(pc)
+                jmp     RemoveAllyBattlesceneWindow(pc)
 
-    ; End of function sub_10028
+    ; End of function j_RemoveAllyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1002C:
+j_RemoveEnemyBattlesceneWindow:
                 
-                jmp     sub_11716(pc)
+                jmp     RemoveEnemyBattlesceneWindow(pc)
 
-    ; End of function sub_1002C
+    ; End of function j_RemoveEnemyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2548,7 +2548,13 @@ loc_11674:
                 jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a1
                 rts
-loc_11694:
+
+    ; End of function sub_11638
+
+
+; =============== S U B R O U T I N E =======================================
+
+RemoveAllyBattlesceneWindow:
                 
                 cmpi.b  #$FF,d0
                 beq.w   return_11714
@@ -2560,7 +2566,13 @@ loc_11694:
                 jsr     (MoveWindow).l  
                 movem.l (sp)+,d0-a1
                 rts
-loc_116B8:
+
+    ; End of function RemoveAllyBattlesceneWindow
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_116B8:
                 
                 cmpi.b  #$FF,d0
                 beq.w   return_11714
@@ -2597,12 +2609,12 @@ return_11714:
                 
                 rts
 
-    ; End of function sub_11638
+    ; End of function sub_116B8
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_11716:
+RemoveEnemyBattlesceneWindow:
                 
                 cmpi.b  #$FF,d0
                 beq.s   return_11714
@@ -2615,7 +2627,7 @@ sub_11716:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function sub_11716
+    ; End of function RemoveEnemyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================

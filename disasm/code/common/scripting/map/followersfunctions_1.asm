@@ -6,9 +6,11 @@
 
 InitializeFollowerEntities:
                 
-                cmpi.b  #$2E,((CURRENT_MAP-$1000000)).w  ; new granseal headquarters
+                cmpi.b  #MAP_NEW_GRANSEAL_HQ,((CURRENT_MAP-$1000000)).w 
+                                                        ; new granseal headquarters
                 beq.w   return_44336    ; HARDCODED maps with no followers
-                cmpi.b  #$25,((CURRENT_MAP-$1000000)).w  ; nazca ship headquarters
+                cmpi.b  #MAP_NAZCA_SHIP_INTERIOR,((CURRENT_MAP-$1000000)).w 
+                                                        ; nazca ship headquarters
                 beq.w   return_44336
                 movem.l a6,-(sp)
                 lea     FollowersTable(pc), a4

@@ -1518,7 +1518,7 @@ loc_435E:
                 move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
-                bsr.w   sub_43F8
+                bsr.w   UpdateVdpPlane
                 movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
                 cmpa.l  #WINDOW_TILE_LAYOUTS,a1
                 bne.s   loc_439A
@@ -1558,7 +1558,7 @@ loc_43BE:
                 move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_B_LAYOUT).l,a1
-                bsr.w   sub_43F8
+                bsr.w   UpdateVdpPlane
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1    ; Update VDP Plane B layout data
                 move.w  #$400,d0
@@ -1573,7 +1573,7 @@ loc_43BE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43F8:
+UpdateVdpPlane:
                 
                 neg.w   d2
                 andi.w  #$FF,d2
@@ -1709,5 +1709,5 @@ loc_452A:
                 dbf     d7,loc_44B6
                 rts
 
-    ; End of function sub_43F8
+    ; End of function UpdateVdpPlane
 

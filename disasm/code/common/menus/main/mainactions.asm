@@ -78,9 +78,9 @@ loc_21354:
                 
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmpi.w  #$42,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
+                cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.s   byte_21348      
-                cmpi.w  #$4E,d0 
+                cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
                 bgt.s   byte_21348      
 loc_21366:
                 
