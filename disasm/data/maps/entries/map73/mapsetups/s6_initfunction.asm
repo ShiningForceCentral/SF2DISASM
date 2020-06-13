@@ -140,7 +140,7 @@ cs_50426:       textCursor $8B5
                 csWait 30
                 textCursor $8BF
                 nextSingleText $FF,255  ; "The people of Granseal have{N}arrived at their new home.{W1}"
-                loadMapFadeIn 14,18,25
+                loadMapFadeIn MAP_SHIP_DAMAGED,18,25
                 loadMapEntities ce_5072E
                 setActscriptWait ALLY_BOWIE,eas_Init
                 fadeInB
@@ -205,7 +205,7 @@ cs_50426:       textCursor $8B5
                 setActscript 139,eas_Walking
                 setActscript 140,eas_Walking
                 csWait 80
-                loadMapFadeIn 14,45,2
+                loadMapFadeIn MAP_SHIP_DAMAGED,45,2
                 loadMapEntities ce_5079E
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setBlocks 51,7,1,1,63,63
@@ -375,7 +375,7 @@ cs_50806:       textCursor $8F0
                 nextSingleText $FF,255  ; "They worked hard to build{N}their new town.{W1}"
                 playSound $FD
                 resetForceBattleStats
-                warp $7,$B,$A,$1
+                warp MAP_NEW_GRANSEAL_CASTLE,11,10,UP
                 csc_end
 ce_5094A:       mainEntity 61,48,LEFT
                 entity 62,48,LEFT,MAPSPRITE_WORKER,eas_Init

@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle28\cs_afterbattle.asm :
 ; 0x4C07C..0x4C3DC : Cutscene after battle 28
 abcs_battle28:  textCursor $A6E
-                loadMapFadeIn 47,7,25
+                loadMapFadeIn MAP_PANGOAT_VALLEY_BRIDGE,7,25
                 loadMapEntities ce_4C3B4
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -208,7 +208,7 @@ abcs_battle28:  textCursor $A6E
                 followEntity 129,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,129,1
                 followEntity ALLY_PETER,129,3
-                warp $FF,$10,$1E,$0
+                warp 255,16,30,RIGHT
                 csc_end
 ce_4C3B4:       mainEntity 12,28,DOWN
                 entity 12,31,UP,MAPSPRITE_POSE3,eas_Init

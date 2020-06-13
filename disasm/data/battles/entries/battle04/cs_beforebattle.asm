@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle04\cs_beforebattle.asm :
 ; 0x4981E..0x498EE : Cutscene before battle 4
 bbcs_04:        textCursor $907
-                loadMapFadeIn 66,1,5
+                loadMapFadeIn MAP_OVERWORLD_GRANS_GRANSEAL,1,5
                 loadMapEntities ce_4989E
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setPos ALLY_KAZIN,6,9,DOWN

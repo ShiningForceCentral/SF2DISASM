@@ -95,7 +95,7 @@ cs_4FB64:       textCursor $9EF
                 setPos ALLY_PETER,63,63,DOWN
                 setDest ALLY_BOWIE,57,25
                 setPos ALLY_BOWIE,63,63,DOWN
-                warp $33,$B,$16,$1
+                warp MAP_HARPY_POOL,11,22,UP
                 csc_end
 cs_4FC32:       textCursor $A21
                 newEntity ALLY_ELRIC,57,25,UP,MAPSPRITE_TAROS
@@ -136,5 +136,5 @@ cs_4FC32:       textCursor $A21
                 entityActions ALLY_BOWIE
                  moveUp 1
                 endActions
-                warp $20,$1D,$3,$2
+                warp MAP_UNDERGROUND_PATH_1,29,3,LEFT
                 csc_end

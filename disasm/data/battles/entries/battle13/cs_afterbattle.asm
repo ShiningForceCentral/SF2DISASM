@@ -3,7 +3,7 @@
 ; 0x4ACF8..0x4ADA6 : Cutscene after battle 13
 abcs_battle13:  textCursor $9BF
                 playSound $FD
-                loadMapFadeIn 13,11,8
+                loadMapFadeIn MAP_POLCA,11,8
                 loadMapEntities ce_4AD96
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setPos ALLY_PETER,15,13,RIGHT
@@ -35,7 +35,7 @@ abcs_battle13:  textCursor $9BF
                 setFacing ALLY_LUKE,UP
                 nextSingleText $FF,255  ; "{CLEAR}{LEADER} decides to take{N}{NAME;10} the BDMN with him.{W1}{CLEAR}"
                 setF $4B                ; Luke is a follower
-                warp $D,$10,$C,$3
+                warp MAP_POLCA,16,12,DOWN
                 csc_end
 ce_4AD96:       mainEntity 16,12,DOWN
                 entity 16,13,DOWN,ALLY_LUKE,eas_Init

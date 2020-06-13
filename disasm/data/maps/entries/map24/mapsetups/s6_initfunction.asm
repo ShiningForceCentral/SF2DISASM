@@ -42,11 +42,11 @@ return_59C9C:
 cs_StartSpecialBattle:
                 
                 setStoryFlag $2C        ; Battle 44 unlocked
-                warp $18,$1,$18,$2
+                warp MAP_SECRET_MONK_FOREST_BATTLEFIELD,1,24,LEFT
                 csc_end
 cs_LeaveSpecialBattle:
                 
-                warp $17,$1E,$18,$2
+                warp MAP_SECRET_MONK_FOREST,30,24,LEFT
                 csc_end
 loc_59CB2:
                 

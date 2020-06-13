@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle42\cs_beforebattle.asm :
 ; 0x4ED8E..0x4EF04 : Cutscene before battle 42
 bbcs_42:        textCursor $C10
-                loadMapFadeIn 59,8,29
+                loadMapFadeIn MAP_ZEON_ARENA,8,29
                 loadMapEntities ce_4EEDC
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

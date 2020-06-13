@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle39\cs_beforebattle.asm :
 ; 0x4E3D2..0x4E4DC : Cutscene before battle 39
 bbcs_39:        textCursor $BD5
-                loadMapFadeIn 66,3,5
+                loadMapFadeIn MAP_OVERWORLD_GRANS_GRANSEAL,3,5
                 loadMapEntities ce_4E4AC
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setPos ALLY_PETER,9,8,DOWN

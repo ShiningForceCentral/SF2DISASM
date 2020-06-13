@@ -49,7 +49,7 @@ rjt_cutsceneScriptCommands:
                 dc.w csc04_setTextIndex-rjt_cutsceneScriptCommands
                 dc.w csc05_playSound-rjt_cutsceneScriptCommands
                 dc.w csc06_doNothing-rjt_cutsceneScriptCommands
-                dc.w csc07_executeMapSystemEvent-rjt_cutsceneScriptCommands
+                dc.w csc07_warp-rjt_cutsceneScriptCommands
                 dc.w csc08_joinForce-rjt_cutsceneScriptCommands
                 dc.w csc09_hideTextBoxAndPortrait-rjt_cutsceneScriptCommands
                 dc.w csc0A_executeSubroutine-rjt_cutsceneScriptCommands 
@@ -332,7 +332,7 @@ csc06_doNothing:
 
 ; =============== S U B R O U T I N E =======================================
 
-csc07_executeMapSystemEvent:
+csc07_warp:
                 
                 lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
                 move.w  #1,(a0)+
@@ -343,7 +343,7 @@ csc07_executeMapSystemEvent:
                 move.b  (a6)+,(a0)+
                 rts
 
-    ; End of function csc07_executeMapSystemEvent
+    ; End of function csc07_warp
 
 
 ; =============== S U B R O U T I N E =======================================

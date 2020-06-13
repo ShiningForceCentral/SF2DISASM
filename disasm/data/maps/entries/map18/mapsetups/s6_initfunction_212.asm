@@ -22,7 +22,7 @@ loc_612A8:
     ; End of function ms_map18_flag212_InitFunction
 
 cs_612BE:       textCursor $E61
-                mapLoad 59,8,4
+                mapLoad MAP_ZEON_ARENA,8,4
                 setPos ALLY_BOWIE,63,63,DOWN
                 setPos ALLY_PETER,63,63,DOWN
                 setPos FOLLOWER_B,63,63,DOWN
@@ -107,7 +107,7 @@ cs_612BE:       textCursor $E61
                 nextSingleText $0,129   ; "I'll do it.  If this comes{N}to pass, it will be his final{N}battle.{W1}"
                 csWait 30
                 executeSubroutine csub_61426
-                warp $12,$9,$A,$3
+                warp MAP_GALAM_CASTLE_EXIT,9,10,DOWN
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================

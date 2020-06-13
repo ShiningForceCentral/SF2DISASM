@@ -2,7 +2,7 @@
 ; ASM FILE data\scripting\map\cs_intro2.asm :
 ; 0x48380..0x48540 : Intro cutscene 2
 IntroCutscene2: textCursor $106A
-                mapLoad 65,7,2
+                mapLoad MAP_GRANSEAL_CASTLE,7,2
                 loadMapEntities ce_48510
                 setActscriptWait ALLY_BOWIE,eas_Init
                 cloneEntity 132,131
@@ -10,7 +10,7 @@ IntroCutscene2: textCursor $106A
                 fadeInB
                 reloadMap 7,2
                 nextSingleText $80,128  ; "Quite a storm.{D2}"
-                loadMapFadeIn 65,7,2
+                loadMapFadeIn MAP_GRANSEAL_CASTLE,7,2
                 fadeInB
                 csWait 40
                 playSound SFX_DEMON_BREATH

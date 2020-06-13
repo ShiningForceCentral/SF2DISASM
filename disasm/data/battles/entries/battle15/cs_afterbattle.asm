@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle15\cs_afterbattle.asm :
 ; 0x4AE72..0x4AFBE : Cutscene after battle 15
 abcs_battle15:  textCursor $9CA
-                loadMapFadeIn 50,9,10
+                loadMapFadeIn MAP_ACHILLES_SHRINES,9,10
                 loadMapEntities ce_4AFB6
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -80,7 +80,7 @@ abcs_battle15:  textCursor $9CA
                 setF $2DC               ; Set after the old man fails to open the way to Grans in the Wooden Panel shrine
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,ALLY_PETER,2
-                warp $32,$1B,$B,$1
+                warp MAP_ACHILLES_SHRINES,27,11,UP
                 csc_end
 ce_4AFB6:       mainEntity 14,5,DOWN
                 dc.w $FFFF

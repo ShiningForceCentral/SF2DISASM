@@ -198,5 +198,5 @@ cs_521BA:       textCursor $3DA
                 setActscriptWait 145,eas_Jump
                 nextSingleText $0,145   ; "Intruders!  Intruders!{N}Arrest them!{W1}"
                 setStoryFlag $5         ; Battle 5 unlocked
-cs_5227C:       warp $10,$0,$0,$0
+cs_5227C:       warp MAP_GALAM_CASTLE,0,0,RIGHT
                 csc_end

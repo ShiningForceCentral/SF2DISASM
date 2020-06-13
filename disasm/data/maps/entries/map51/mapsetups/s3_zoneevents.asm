@@ -69,7 +69,7 @@ cs_5C312:       textCursor $9FB
                 setActscript 129,eas_Jump
                 setActscriptWait 130,eas_Jump
                 setStoryFlag $14        ; Battle 20 unlocked
-                warp $33,$0,$0,$0
+                warp MAP_HARPY_POOL,0,0,RIGHT
                 csc_end
 cs_5C3AA:       textCursor $A05
                 nextSingleText $0,ALLY_PETER ; "{LEADER}, we have to{N}save him!{W1}"

@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle30\cs_afterbattle.asm :
 ; 0x4C6A8..0x4C994 : Cutscene after battle 30
 abcs_battle30:  textCursor $ACD
-                loadMapFadeIn 1,5,8
+                loadMapFadeIn MAP_INSIDE_MITULA,5,8
                 loadMapEntities ce_4C96C
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

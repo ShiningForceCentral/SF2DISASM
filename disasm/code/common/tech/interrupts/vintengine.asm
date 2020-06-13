@@ -858,7 +858,7 @@ ApplyVIntCramDma:
 
 ; Unused palette copy
 
-sub_CC4:
+SetBasePalette1:
                 
                 lea     (PALETTE_1_BASE).l,a1
                 move.w  #$F,d0
@@ -868,7 +868,7 @@ loc_CCE:
                 dbf     d0,loc_CCE
                 rts
 
-    ; End of function sub_CC4
+    ; End of function SetBasePalette1
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1107,9 +1107,7 @@ loc_E70:
 
 ; =============== S U B R O U T I N E =======================================
 
-; unused DMA
-
-sub_E7C:
+ClearCram:
                 
                 movem.l d0-d3,-(sp)
                 move.w  (VDP_REG01_STATUS).l,d3
@@ -1133,7 +1131,7 @@ loc_EC8:
                 movem.l (sp)+,d0-d3
                 rts
 
-    ; End of function sub_E7C
+    ; End of function ClearCram
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -77,7 +77,7 @@ cs_5C4EE:       textCursor $575
                 setFacing 131,UP
                 nextSingleText $0,128   ; "They shall never return{N}alive!{W1}"
                 setStoryFlag $C         ; Battle 12 unlocked
-                warp $34,$0,$0,$0
+                warp MAP_PATH_TO_MOUNT_VOLCANON,0,0,RIGHT
                 csc_end
 cs_5C622:       setPos ALLY_PETER,22,8,RIGHT
                 textCursor $9BD

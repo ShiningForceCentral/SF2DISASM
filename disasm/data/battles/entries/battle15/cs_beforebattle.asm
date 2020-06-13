@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle15\cs_beforebattle.asm :
 ; 0x4ADA6..0x4AE72 : Cutscene before battle 15
 bbcs_15:        textCursor $9C7
-                loadMapFadeIn 50,9,15
+                loadMapFadeIn MAP_ACHILLES_SHRINES,9,15
                 loadMapEntities ce_4AE42
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait FOLLOWER_A,eas_Init

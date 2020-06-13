@@ -40,5 +40,5 @@ cs_59FB8:       textCursor $6C5
                 setActscript 128,eas_Jump
                 setActscriptWait 130,eas_Jump
                 setStoryFlag $17        ; Battle 23 unlocked
-                warp $1B,$0,$0,$0
+                warp MAP_CREED_WILLARD_CAVE,0,0,RIGHT
                 csc_end

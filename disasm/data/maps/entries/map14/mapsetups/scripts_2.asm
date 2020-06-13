@@ -212,7 +212,7 @@ cs_59142:       textCursor $8E6
                  moveDown 7
                 endActions
                 setStoryFlag $8         ; Battle 8 unlocked
-                warp $48,$1,$1,$3
+                warp MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,1,1,DOWN
                 csc_end
 ce_59270:       mainEntity 13,11,DOWN
                 entity 12,20,UP,ALLY_JAHA,eas_Init

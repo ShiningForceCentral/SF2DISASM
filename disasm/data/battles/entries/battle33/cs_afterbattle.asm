@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle33\cs_afterbattle.asm :
 ; 0x4D09A..0x4D342 : Cutscene after battle 33
 abcs_battle33:  textCursor $B3C
-                loadMapFadeIn 31,8,6
+                loadMapFadeIn MAP_MOUN,8,6
                 loadMapEntities ce_4D322
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

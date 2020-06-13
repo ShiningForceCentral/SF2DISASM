@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle38\cs_afterbattle.asm :
 ; 0x4DE8C..0x4E3D2 : Cutscene after battle 38
 abcs_battle38:  textCursor $BC4
-                loadMapFadeIn 66,3,22
+                loadMapFadeIn MAP_OVERWORLD_GRANS_GRANSEAL,3,22
                 loadMapEntities ce_4E372
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

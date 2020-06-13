@@ -33,7 +33,7 @@ return_5EB24:
     ; End of function ms_map59_InitFunction
 
 cs_5EB26:       executeSubroutine csub_5EB34
-                warp $3B,$D,$22,$1
+                warp MAP_ZEON_ARENA,13,34,UP
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -95,7 +95,7 @@ cs_5EB44:       textCursor $E73
                 nextSingleText $0,130   ; "We must never underestimate{N}him.{W1}"
                 nextSingleText $0,128   ; "Anyway, it will be a{N}fantastic show!  Ha, ha!{W1}"
                 csc_end
-cs_5EBFC:       loadMapFadeIn 53,8,14
+cs_5EBFC:       loadMapFadeIn MAP_PRISM_FLOWERS_FIELD,8,14
                 textCursor $E8B
                 loadMapEntities ce_5F1DE
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -162,7 +162,7 @@ cs_5EBFC:       loadMapFadeIn 53,8,14
                 nod 129
                 csc_end
 cs_5ED06:       textCursor $E91
-                loadMapFadeIn 73,0,0
+                loadMapFadeIn MAP_OVERWORLD_NEW_GRANSEAL_SHORE,0,0
                 loadMapEntities ce_5F1BE
                 setActscriptWait ALLY_BOWIE,eas_Init
                 executeSubroutine sub_5F31E
@@ -173,7 +173,7 @@ cs_5ED06:       textCursor $E91
                 nextSingleText $80,ALLY_ZYNK ; "There's Grans Island!{W1}"
                 nextSingleText $80,ALLY_PETER ; "Alright!{W1}"
                 nextSingleText $0,FOLLOWER_B ; "We've finally come home.{W1}"
-                loadMapFadeIn 53,10,13
+                loadMapFadeIn MAP_PRISM_FLOWERS_FIELD,10,13
                 loadMapEntities ce_5F23E
                 setActscriptWait ALLY_BOWIE,eas_Init
                 playSound MUSIC_BATTLE_THEME_1
@@ -183,7 +183,7 @@ cs_5ED06:       textCursor $E91
                 stopEntity 132
                 fadeInB
                 nextSingleText $80,129  ; "I see the Nazca Ship!{N}Everybody, get ready!{W1}"
-                loadMapFadeIn 73,0,0
+                loadMapFadeIn MAP_OVERWORLD_NEW_GRANSEAL_SHORE,0,0
                 loadMapEntities ce_5F1BE
                 setActscriptWait ALLY_BOWIE,eas_Init
                 executeSubroutine sub_5F31E
@@ -197,7 +197,7 @@ cs_5ED06:       textCursor $E91
                 nextSingleText $0,FOLLOWER_B ; "Someday, {NAME;7}....{W1}"
                 csc_end
 cs_5EDB8:       textCursor $E99
-                loadMapFadeIn 53,10,13
+                loadMapFadeIn MAP_PRISM_FLOWERS_FIELD,10,13
                 loadMapEntities ce_5F28E
                 setActscriptWait ALLY_BOWIE,eas_Init
                 playSound MUSIC_ENEMY_ATTACK
@@ -300,7 +300,7 @@ eas_5EF46:       ac_setAnimSpeedX2 $FFFF
                  ac_setSpeed 64,64
                  ac_jump eas_Idle
 cs_5EF60:       textCursor $E9B
-                loadMapFadeIn 37,4,6
+                loadMapFadeIn MAP_NAZCA_SHIP_INTERIOR,4,6
                 loadEntitiesFromMapSetup 9,11,DOWN
                 executeSubroutine InitNazcaShipForceMembers
                 setPos ALLY_ZYNK,8,10,RIGHT
@@ -389,7 +389,7 @@ cs_5EF60:       textCursor $E9B
                 executeSubroutine sub_5F338
                 fadeOutB
                 setQuake 0
-                mapLoad 75,20,14
+                mapLoad MAP_OVERWORLD_GRANS_NORTH_SHORE,20,14
                 loadMapEntities ce_5F1CE
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setCameraEntity 128
@@ -416,7 +416,7 @@ cs_5EF60:       textCursor $E9B
                 setQuake 0
                 executeSubroutine csub_5F14C
                 csWait 120
-                warp $25,$8,$C,$3
+                warp MAP_NAZCA_SHIP_INTERIOR,8,12,DOWN
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================

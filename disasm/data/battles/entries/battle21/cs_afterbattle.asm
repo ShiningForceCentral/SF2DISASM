@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle21\cs_afterbattle.asm :
 ; 0x4B88C..0x4B958 : Cutscene after battle 21
 abcs_battle21:  textCursor $A17
-                loadMapFadeIn 67,4,18
+                loadMapFadeIn MAP_OVERWORLD_DEVILS_TAIL,4,18
                 loadMapEntities ce_4B948
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -41,7 +41,7 @@ abcs_battle21:  textCursor $A17
                 followEntity FOLLOWER_A,ALLY_BOWIE,2
                 followEntity ALLY_PETER,FOLLOWER_A,1
                 followEntity FOLLOWER_B,FOLLOWER_A,3
-                warp $43,$1A,$17,$3
+                warp MAP_OVERWORLD_DEVILS_TAIL,26,23,DOWN
                 csc_end
 ce_4B948:       mainEntity 10,22,LEFT
                 entity 11,23,LEFT,ALLY_PETER,eas_Init

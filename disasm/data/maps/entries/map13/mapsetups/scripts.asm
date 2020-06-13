@@ -347,7 +347,7 @@ cs_585FE:       playSound $FD
                 nextText $0,128         ; "You still dare to resist us?!{W2}"
                 nextSingleText $0,128   ; "For that you shall die!!{W1}"
                 setStoryFlag $D         ; Battle 13 unlocked
-                warp $D,$0,$0,$0
+                warp MAP_POLCA,0,0,RIGHT
                 csc_end
 cs_58856:       textCursor $5CF
                 setActscriptWait ALLY_PETER,eas_Init

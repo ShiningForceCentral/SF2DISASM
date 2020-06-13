@@ -7,7 +7,7 @@ cs_5994E:       textCursor $700
                 nextText $0,134         ; "Are you ready?{W2}"
                 nextSingleText $0,134   ; "Now, start the battle!{N}Do your best!{W1}"
                 setStoryFlag $16        ; Battle 22 unlocked
-                warp $16,$0,$0,$0
+                warp MAP_CREED_DESKTOP_WORLD,0,0,RIGHT
                 csc_end
 cs_5996E:       textCursor $702
                 setCameraEntity 65535
@@ -97,5 +97,5 @@ cs_599B2:       setActscriptWait ALLY_BOWIE,eas_Init
                 entityActionsWait 139
                  moveDown 6
                 endActions
-                warp $1A,$1A,$8,$3
+                warp MAP_CREED_FLOOR_WORLD,26,8,DOWN
                 csc_end

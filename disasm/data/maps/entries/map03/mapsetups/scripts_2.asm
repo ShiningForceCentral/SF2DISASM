@@ -48,5 +48,5 @@ cs_6290C:       hideText
                  eaWait 10
                  moveUp 6
                 endActions
-                warp $13,$1A,$1E,$1
+                warp MAP_GRANSEAL_CASTLE_2F,26,30,UP
                 csc_end

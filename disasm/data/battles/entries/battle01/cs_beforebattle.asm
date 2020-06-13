@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle01\cs_beforebattle.asm :
 ; 0x494BC..0x496DC : Cutscene before battle 1
 bbcs_01:        textCursor $8F4
-                loadMapFadeIn 57,2,10
+                loadMapFadeIn MAP_ANCIENT_TOWER_FIRST_ROOM,2,10
                 loadMapEntities ce_49694
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setPos ALLY_SARAH,8,17,UP

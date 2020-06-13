@@ -3,7 +3,7 @@
 ; 0x49CE2..0x49F7E : Cutscene before battle 7
 bbcs_07:        textCursor $935
                 clearF $53              ; King + Minister are followers
-                loadMapFadeIn 58,8,29
+                loadMapFadeIn MAP_ANCIENT_TOWER_UNDERGROUND_ROOM,8,29
                 loadMapEntities ce_49F36
                 setActscriptWait ALLY_BOWIE,eas_Init
                 animEntityFX 133,4

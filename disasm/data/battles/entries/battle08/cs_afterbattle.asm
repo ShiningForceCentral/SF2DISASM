@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle08\cs_afterbattle.asm :
 ; 0x4AA74..0x4ABFE : Cutscene after battle 8
 abcs_battle08:  textCursor $9A4
-                loadMapFadeIn 72,8,32
+                loadMapFadeIn MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,8,32
                 loadMapEntities ce_4ABBE
                 setActscriptWait ALLY_BOWIE,eas_Init
                 stopEntity 129
@@ -78,7 +78,7 @@ cs_4AAB6:       fadeInB
                  moveDown 1
                 endActions
                 nextSingleText $0,128   ; "{LEADER}, let's go back{N}to the ship.{W1}"
-                warp $49,$3E,$31,$2
+                warp MAP_OVERWORLD_NEW_GRANSEAL_SHORE,62,49,LEFT
                 csc_end
 ce_4ABBE:       mainEntity 14,37,UP
                 entity 14,35,UP,MAPSPRITE_WORKER,eas_Init

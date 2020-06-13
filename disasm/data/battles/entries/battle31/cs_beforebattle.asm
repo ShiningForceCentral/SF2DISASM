@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle31\cs_beforebattle.asm :
 ; 0x4C994..0x4CBE2 : Cutscene before battle 31
 bbcs_31:        textCursor $AFB
-                loadMapFadeIn 2,16,2
+                loadMapFadeIn MAP_PACALON,16,2
                 loadMapEntities ce_4CB92
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

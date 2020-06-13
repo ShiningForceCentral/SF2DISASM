@@ -3,7 +3,7 @@
 ; 0x496DC..0x4980E : Cutscene after battle 1
 abcs_battle01:  textCursor $901
                 resetForceBattleStats
-                loadMapFadeIn 57,2,0
+                loadMapFadeIn MAP_ANCIENT_TOWER_FIRST_ROOM,2,0
                 loadMapEntities ce_497F6
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setPos ALLY_SARAH,8,7,UP

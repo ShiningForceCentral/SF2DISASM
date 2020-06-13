@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle06\cs_beforebattle.asm :
 ; 0x49BCA..0x49CE2 : Cutscene before battle 6
 bbcs_06:        textCursor $926
-                loadMapFadeIn 66,25,5
+                loadMapFadeIn MAP_OVERWORLD_GRANS_GRANSEAL,25,5
                 loadMapEntities ce_49CBA
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_SLADE,eas_Init

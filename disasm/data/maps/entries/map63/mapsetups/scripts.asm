@@ -100,7 +100,7 @@ cs_5CC26:       entityFlashWhite ALLY_BOWIE,$32
                 setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 csWait 30
                 executeSubroutine FadeOutToWhite
-                mapLoad 64,0,0
+                mapLoad MAP_MAGIC_TUNNEL_PIPE,0,0
                 loadEntitiesFromMapSetup 5,4,UP
                 executeSubroutine csub_5CDDC
                 setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
@@ -130,7 +130,7 @@ cs_5CC26:       entityFlashWhite ALLY_BOWIE,$32
                 csWait 40
                 executeSubroutine sub_5CDF8
                 csWait 2
-                mapLoad 63,3,3
+                mapLoad MAP_MAGIC_TUNNEL_HUB,3,3
                 loadEntitiesFromMapSetup 8,7,UP
                 setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 executeSubroutine FadeInFromWhite
@@ -143,7 +143,7 @@ cs_5CCF6:       entityFlashWhite ALLY_BOWIE,$32
                 setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 csWait 30
                 executeSubroutine FadeOutToWhite
-                mapLoad 64,0,0
+                mapLoad MAP_MAGIC_TUNNEL_PIPE,0,0
                 loadEntitiesFromMapSetup 5,4,UP
                 executeSubroutine sub_5CDE4
                 setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
@@ -173,7 +173,7 @@ cs_5CCF6:       entityFlashWhite ALLY_BOWIE,$32
                 csWait 40
                 executeSubroutine sub_5CDF8
                 csWait 2
-                mapLoad 63,5,17
+                mapLoad MAP_MAGIC_TUNNEL_HUB,5,17
                 loadEntitiesFromMapSetup 10,21,UP
                 setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 executeSubroutine FadeInFromWhite

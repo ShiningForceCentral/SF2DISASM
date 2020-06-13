@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle28\cs_beforebattle.asm :
 ; 0x4BE8C..0x4C07C : Cutscene before battle 28
 bbcs_28:        textCursor $A65
-                loadMapFadeIn 47,0,4
+                loadMapFadeIn MAP_PANGOAT_VALLEY_BRIDGE,0,4
                 loadMapEntities ce_4C03C
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

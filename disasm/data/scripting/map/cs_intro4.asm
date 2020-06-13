@@ -2,7 +2,7 @@
 ; ASM FILE data\scripting\map\cs_intro4.asm :
 ; 0x48A78..0x48FE2 : Intro cutscene 4
 IntroCutscene4: textCursor $1089
-                mapLoad 65,7,3
+                mapLoad MAP_GRANSEAL_CASTLE,7,3
                 loadMapEntities ce_48FAA
                 setActscriptWait ALLY_BOWIE,eas_Init
                 fadeInFromBlackHalf

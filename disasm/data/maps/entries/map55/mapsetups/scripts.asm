@@ -9,7 +9,7 @@ cs_5E27C:       setActscriptWait ALLY_BOWIE,eas_5E2C4
                 jumpIfFlagClear $4C,cs_5E2BC ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setActscriptWait ALLY_ZYNK,eas_5E2C4
-cs_5E2BC:       warp $25,$1D,$8,$2
+cs_5E2BC:       warp MAP_NAZCA_SHIP_INTERIOR,29,8,LEFT
                 csc_end
 eas_5E2C4:       ac_set1Cb5 $0
                  ac_moveAbs 7,7
@@ -37,7 +37,7 @@ eas_5E2C4:       ac_set1Cb5 $0
                  ac_updateSprite
                  ac_wait 1
                  ac_jump eas_Idle
-cs_5E320:       mapLoad 75,8,14
+cs_5E320:       mapLoad MAP_OVERWORLD_GRANS_NORTH_SHORE,8,14
                 loadMapEntities ce_5E33E
                 setActscriptWait ALLY_BOWIE,eas_Init
                 playSound MUSIC_MAIN_THEME

@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle40\cs_afterbattle.asm :
 ; 0x4EA94..0x4ED0E : Cutscene after battle 40
 abcs_battle40:  textCursor $BF9
-                loadMapFadeIn 54,10,4
+                loadMapFadeIn MAP_ODDEYE_ARENA,10,4
                 loadMapEntities ce_4ECD6
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

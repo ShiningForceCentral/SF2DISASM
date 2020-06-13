@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle21\cs_beforebattle.asm :
 ; 0x4B790..0x4B88C : Cutscene before battle 21
 bbcs_21:        textCursor $A10
-                loadMapFadeIn 67,5,18
+                loadMapFadeIn MAP_OVERWORLD_DEVILS_TAIL,5,18
                 loadMapEntities ce_4B84C
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

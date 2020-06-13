@@ -20,7 +20,7 @@ return_55830:
     ; End of function ms_map7_InitFunction
 
 cs_55832:       textCursor $50A
-                mapLoad 7,6,2
+                mapLoad MAP_NEW_GRANSEAL_CASTLE,6,2
                 loadMapEntities ce_559AE
                 setActscriptWait ALLY_BOWIE,eas_Init
                 resetMap
@@ -29,7 +29,7 @@ cs_55832:       textCursor $50A
                 nextText $FF,255        ; "One year has passed.{W1}"
                 textCursor $470
                 stopEntity 129
-                loadMapFadeIn 7,6,2
+                loadMapFadeIn MAP_NEW_GRANSEAL_CASTLE,6,2
                 playSound MUSIC_CASTLE
                 fadeInB
                 csWait 40

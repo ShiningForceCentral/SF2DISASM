@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle18\cs_beforebattle.asm :
 ; 0x4B1D8..0x4B2F2 : Cutscene before battle 18
 bbcs_18:        textCursor $9D8
-                loadMapFadeIn 12,7,22
+                loadMapFadeIn MAP_TAROS_SHRINE,7,22
                 loadMapEntities ce_4B2DA
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

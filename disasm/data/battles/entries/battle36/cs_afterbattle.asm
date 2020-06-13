@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle36\cs_afterbattle.asm :
 ; 0x4D9A4..0x4DA66 : Cutscene after battle 36
 abcs_battle36:  textCursor $B89
-                loadMapFadeIn 53,6,17
+                loadMapFadeIn MAP_PRISM_FLOWERS_FIELD,6,17
                 loadMapEntities ce_4DA46
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

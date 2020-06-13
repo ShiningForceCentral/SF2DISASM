@@ -28,5 +28,5 @@ abcs_battle05:  textCursor $91C
                 clearF $49              ; Slade is a follower
                 setStoryFlag $6         ; Battle 6 unlocked
                 followEntity ALLY_SLADE,ALLY_BOWIE,2
-                warp $10,$10,$12,$3
+                warp MAP_GALAM_CASTLE,16,18,DOWN
                 csc_end

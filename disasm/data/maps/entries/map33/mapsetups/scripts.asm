@@ -242,7 +242,7 @@ cs_5AF36:       textCursor $72A
                 endActions
                 setActscriptWait 128,eas_Jump
                 csWait 20
-                warp $16,$0,$0,$3
+                warp MAP_CREED_DESKTOP_WORLD,0,0,DOWN
                 csc_end
 cs_5B016:       textCursor $730
                 reloadMap 12,2

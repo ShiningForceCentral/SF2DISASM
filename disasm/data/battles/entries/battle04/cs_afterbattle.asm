@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle04\cs_afterbattle.asm :
 ; 0x498EE..0x49AB2 : Cutscene after battle 4
 abcs_battle04:  textCursor $90F
-                loadMapFadeIn 66,9,16
+                loadMapFadeIn MAP_OVERWORLD_GRANS_GRANSEAL,9,16
                 loadMapEntities ce_49A6A
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setPos ALLY_SARAH,14,21,DOWN
@@ -94,7 +94,7 @@ abcs_battle04:  textCursor $90F
                  moveDown 1
                  moveRight 2
                 endActions
-                warp $11,$0,$0,$0
+                warp MAP_GALAM_CASTLE_INNER,0,0,RIGHT
                 csc_end
 ce_49A6A:       mainEntity 13,20,DOWN
                 entity 14,21,DOWN,ALLY_SARAH,eas_Init

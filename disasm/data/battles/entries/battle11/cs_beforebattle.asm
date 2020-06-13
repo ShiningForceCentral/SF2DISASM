@@ -3,7 +3,7 @@
 ; 0x4ABFE..0x4ACC8 : Cutscene before battle 11
 bbcs_11:        textCursor $9B3
                 setCameraEntity ALLY_BOWIE
-                loadMapFadeIn 48,8,19
+                loadMapFadeIn MAP_CAVERNS_OF_DARKNESS,8,19
                 loadMapEntities ce_4ACA0
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setCameraEntity ALLY_BOWIE

@@ -16,5 +16,5 @@ cs_58F7E:       nextSingleText $0,129   ; "Are you ready?{W1}"
                 entityActionsWait ALLY_BOWIE
                  moveDown 4
                 endActions
-                warp $48,$1,$1,$3
+                warp MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,1,1,DOWN
                 csc_end

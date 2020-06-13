@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle07\cs_afterbattle.asm :
 ; 0x49F7E..0x4A952 : Cutscene after battle 7
 abcs_battle07:  textCursor $951
-                loadMapFadeIn 58,8,16
+                loadMapFadeIn MAP_ANCIENT_TOWER_UNDERGROUND_ROOM,8,16
                 loadMapEntities ce_4A912
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setBlocks 7,23,1,2,13,22
@@ -635,7 +635,7 @@ abcs_battle07:  textCursor $951
                 nextText $0,131         ; "{LEADER}, you'll be{N}buried in the tower!{W2}"
                 nextSingleText $0,131   ; "Come on!{W1}"
                 csWait 50
-                warp $3A,$D,$23,$3
+                warp MAP_ANCIENT_TOWER_UNDERGROUND_ROOM,13,35,DOWN
                 followEntity 131,ALLY_BOWIE,2
                 followEntity 133,131,2
                 followEntity 134,133,2

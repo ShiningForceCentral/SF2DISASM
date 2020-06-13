@@ -1,7 +1,7 @@
 
 ; ASM FILE data\scripting\map\cs_end.asm :
 ; 0x49058..0x494BC : End cutscene
-EndCutscene:    mapLoad 20,19,33
+EndCutscene:    mapLoad MAP_GRANSEAL_CASTLE_1F,19,33
                 loadMapEntities ce_492CC
                 setActscriptWait ALLY_BOWIE,eas_Init
                 customActscriptWait ALLY_BOWIE
@@ -203,7 +203,7 @@ cs_4934A:       entityFlashWhite ALLY_BOWIE,$B4
                 showPortrait $0,ALLY_BOWIE
                 setQuake 32770
                 setQuake 16386
-                loadMapFadeIn 0,13,13
+                loadMapFadeIn MAP_OUTSIDE_MITULA,13,13
                 flashScreenWhite $3C
                 csc_end
                 flashScreenWhite $3C

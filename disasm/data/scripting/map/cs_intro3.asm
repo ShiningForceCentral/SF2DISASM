@@ -2,14 +2,14 @@
 ; ASM FILE data\scripting\map\cs_intro3.asm :
 ; 0x48540..0x48A78 : Intro cutscene 3
 IntroCutscene3: textCursor $1077
-                mapLoad 42,21,1
+                mapLoad MAP_FORCE_SWORD_SHRINE,21,1
                 loadMapEntities ce_48A50
                 setActscriptWait ALLY_BOWIE,eas_Init
                 resetMap
                 fadeInB
                 reloadMap 21,1
                 nextSingleText $80,ALLY_SLADE ; "Well?{D2}"
-                loadMapFadeIn 42,21,1
+                loadMapFadeIn MAP_FORCE_SWORD_SHRINE,21,1
                 setActscript 130,eas_Transparent
                 fadeInFromBlackHalf
                 setCameraEntity ALLY_SLADE
