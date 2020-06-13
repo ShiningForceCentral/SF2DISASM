@@ -5,20 +5,20 @@
                   warpNoScroll
                   warpMap    255
                   warpDest   37, 8
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 37, 9
                   warpNoScroll
                   warpMap    255
                   warpDest   9, 20
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    72
+                  warpMap    MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION
                   warpDest   43, 47
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 31, 255
                   warpNoScroll
-                  warpMap    52
+                  warpMap    MAP_PATH_TO_MOUNT_VOLCANON
                   warpDest   1, 28
-                  warpFacing 0
+                  warpFacing RIGHT
                 endWord

@@ -3,22 +3,22 @@
 ; 0x9BBBC..0x9BBDE : 
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    69
+                  warpMap    MAP_OVERWORLD_PATH_TO_RIBBLE
                   warpDest   44, 8
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 18, 5
                   warpNoScroll
                   warpMap    255
                   warpDest   40, 8
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 40, 8
                   warpNoScroll
                   warpMap    255
                   warpDest   18, 5
-                  warpFacing 2
+                  warpFacing LEFT
                 mWarp 255, 20
                   warpNoScroll
-                  warpMap    50
+                  warpMap    MAP_ACHILLES_SHRINES
                   warpDest   42, 23
-                  warpFacing 1
+                  warpFacing UP
                 endWord

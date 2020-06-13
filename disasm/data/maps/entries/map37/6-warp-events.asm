@@ -3,7 +3,7 @@
 ; 0xAEEF2..0xAEEFC : 
                 mWarp 29, 8
                   warpNoScroll
-                  warpMap    55
+                  warpMap    MAP_CAMEELA_ARENA
                   warpDest   7, 7
-                  warpFacing 1
+                  warpFacing UP
                 endWord

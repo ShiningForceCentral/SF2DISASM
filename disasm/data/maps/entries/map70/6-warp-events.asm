@@ -3,17 +3,17 @@
 ; 0xBF7C6..0xBF7E0 : 
                 mWarp 43, 40
                   warpNoScroll
-                  warpMap    62
+                  warpMap    MAP_EAST_SHRINE
                   warpDest   6, 18
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 0, 255
                   warpScroll LEFT
-                  warpMap    69
+                  warpMap    MAP_OVERWORLD_PATH_TO_RIBBLE
                   warpDest   62, 255
-                  warpFacing 2
+                  warpFacing LEFT
                 mWarp 255, 0
                   warpScroll UP
-                  warpMap    71
+                  warpMap    MAP_OVERWORLD_AROUND_PACALON
                   warpDest   255, 62
-                  warpFacing 1
+                  warpFacing UP
                 endWord

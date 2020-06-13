@@ -3,27 +3,27 @@
 ; 0xBD262..0xBD28C : 
                 mWarp 26, 22
                   warpNoScroll
-                  warpMap    33
+                  warpMap    MAP_CREED_MANSION
                   warpDest   15, 30
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 51, 22
                   warpNoScroll
-                  warpMap    32
+                  warpMap    MAP_UNDERGROUND_PATH_1
                   warpDest   2, 3
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 57, 23
                   warpNoScroll
-                  warpMap    32
+                  warpMap    MAP_UNDERGROUND_PATH_1
                   warpDest   29, 3
-                  warpFacing 2
+                  warpFacing LEFT
                 mWarp 57, 25
                   warpNoScroll
-                  warpMap    51
+                  warpMap    MAP_HARPY_POOL
                   warpDest   10, 24
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 63, 255
                   warpScroll RIGHT
-                  warpMap    68
+                  warpMap    MAP_OVERWORLD_AROUND_ELVEN_VILLAGE
                   warpDest   1, 255
-                  warpFacing 0
+                  warpFacing RIGHT
                 endWord

@@ -3,32 +3,32 @@
 ; 0xBDA5E..0xBDA90 : 
                 mWarp 55, 43
                   warpNoScroll
-                  warpMap    12
+                  warpMap    MAP_TAROS_SHRINE
                   warpDest   12, 30
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 57, 24
                   warpNoScroll
-                  warpMap    30
+                  warpMap    MAP_SECRET_DWARVEN_VILLAGE_INSIDE
                   warpDest   8, 20
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 48, 30
                   warpNoScroll
-                  warpMap    23
+                  warpMap    MAP_SECRET_MONK_FOREST
                   warpDest   22, 29
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 255, 0
                   warpScroll UP
-                  warpMap    73
+                  warpMap    MAP_OVERWORLD_NEW_GRANSEAL_SHORE
                   warpDest   255, 62
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 0, 255
                   warpScroll LEFT
-                  warpMap    67
+                  warpMap    MAP_OVERWORLD_DEVILS_TAIL
                   warpDest   62, 255
-                  warpFacing 2
+                  warpFacing LEFT
                 mWarp 63, 255
                   warpScroll RIGHT
-                  warpMap    69
+                  warpMap    MAP_OVERWORLD_PATH_TO_RIBBLE
                   warpDest   1, 255
-                  warpFacing 0
+                  warpFacing RIGHT
                 endWord

@@ -213,7 +213,7 @@ Rewrite algorithm :
 
 - 8 bytes per entry
 - Block copies triggered by stepping on a defined block.
-    Byte 00  	Trigger X
+    Byte 00  	  Trigger X
     Byte 01     Trigger Y
     Byte 02     Source X
     Byte 03     Source Y
@@ -228,7 +228,7 @@ Rewrite algorithm :
 
 - 8 bytes per entry
 - Layer 2 block copies (mostly roofs) triggered by stepping on a defined block.
-    Byte 00  	Trigger X
+    Byte 00  	  Trigger X
     Byte 01     Trigger Y
     Byte 02     Source X
     Byte 03     Source Y
@@ -245,7 +245,7 @@ Warps
 
 - 8 bytes per entry
 - Layer 2 block copies (mostly roofs) triggered by stepping on a defined block.
-    Byte 00  	Trigger X
+    Byte 00  	  Trigger X
     Byte 01     Trigger Y
     Byte 02     Scrolling transition value $xy : x=1 to activate transition, y=direction
     Byte 03     Destination Map
@@ -260,7 +260,7 @@ Warps
 
 - 4 bytes per entry
 - Items contained in chests, needing the chest open animation.
-    Byte 00  	X
+    Byte 00  	  X
     Byte 01     Y
     Byte 02     Item Flag
     Byte 03     Item Id
@@ -271,7 +271,7 @@ Warps
 
 - 4 bytes per entry
 - Items not contained in chests, with no open animation.
-    Byte 00  	X
+    Byte 00  	  X
     Byte 01     Y
     Byte 02     Item Flag
     Byte 03     Item Id

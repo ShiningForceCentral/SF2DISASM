@@ -3,32 +3,32 @@
 ; 0xA6ECC..0xA6EFE : 
                 mWarp 255, 1
                   warpNoScroll
-                  warpMap    68
+                  warpMap    MAP_OVERWORLD_AROUND_ELVEN_VILLAGE
                   warpDest   48, 31
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 0, 255
                   warpNoScroll
-                  warpMap    68
+                  warpMap    MAP_OVERWORLD_AROUND_ELVEN_VILLAGE
                   warpDest   48, 31
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 255, 30
                   warpNoScroll
-                  warpMap    68
+                  warpMap    MAP_OVERWORLD_AROUND_ELVEN_VILLAGE
                   warpDest   48, 31
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 31, 24
                   warpNoScroll
-                  warpMap    24
+                  warpMap    MAP_SECRET_MONK_FOREST_BATTLEFIELD
                   warpDest   1, 27
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 21, 8
                   warpNoScroll
                   warpMap    255
                   warpDest   57, 3
-                  warpFacing 2
+                  warpFacing LEFT
                 mWarp 57, 3
                   warpNoScroll
                   warpMap    255
                   warpDest   21, 8
-                  warpFacing 0
+                  warpFacing RIGHT
                 endWord

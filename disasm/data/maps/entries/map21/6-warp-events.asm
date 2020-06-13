@@ -3,12 +3,12 @@
 ; 0xA61F8..0xA620A : 
                 mWarp 3, 16
                   warpNoScroll
-                  warpMap    20
+                  warpMap    MAP_GRANSEAL_CASTLE_1F
                   warpDest   3, 36
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 9, 1
                   warpNoScroll
-                  warpMap    40
+                  warpMap    MAP_ANCIENT_TOWER_OUTSIDE
                   warpDest   4, 30
-                  warpFacing 1
+                  warpFacing UP
                 endWord

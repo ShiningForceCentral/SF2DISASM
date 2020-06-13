@@ -3,42 +3,42 @@
 ; 0xBE680..0xBE6C2 : 
                 mWarp 28, 51
                   warpNoScroll
-                  warpMap    49
+                  warpMap    MAP_KRAKEN_RAFT
                   warpDest   15, 16
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 43, 31
                   warpNoScroll
-                  warpMap    61
+                  warpMap    MAP_SHRINE_NEAR_RIBBLE_EXTERIOR
                   warpDest   5, 15
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 26, 55
                   warpNoScroll
-                  warpMap    9
+                  warpMap    MAP_HASSAN
                   warpDest   14, 1
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 44, 7
                   warpNoScroll
-                  warpMap    8
+                  warpMap    MAP_RIBBLE
                   warpDest   15, 30
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 41, 15
                   warpNoScroll
-                  warpMap    72
+                  warpMap    MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION
                   warpDest   40, 61
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 0, 255
                   warpScroll LEFT
-                  warpMap    68
+                  warpMap    MAP_OVERWORLD_AROUND_ELVEN_VILLAGE
                   warpDest   62, 255
-                  warpFacing 2
+                  warpFacing LEFT
                 mWarp 63, 255
                   warpScroll RIGHT
-                  warpMap    70
+                  warpMap    MAP_OVERWORLD_SOUTHEAST_PARMECIA
                   warpDest   1, 255
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 255, 0
                   warpScroll UP
-                  warpMap    72
+                  warpMap    MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION
                   warpDest   255, 62
-                  warpFacing 1
+                  warpFacing UP
                 endWord

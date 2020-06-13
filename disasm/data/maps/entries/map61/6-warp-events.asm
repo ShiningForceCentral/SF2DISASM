@@ -3,12 +3,12 @@
 ; 0xBABFE..0xBAC10 : 
                 mWarp 5, 6
                   warpNoScroll
-                  warpMap    50
+                  warpMap    MAP_ACHILLES_SHRINES
                   warpDest   14, 22
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 5, 16
                   warpNoScroll
-                  warpMap    69
+                  warpMap    MAP_OVERWORLD_PATH_TO_RIBBLE
                   warpDest   43, 31
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

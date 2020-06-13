@@ -3,27 +3,27 @@
 ; 0x9C83A..0x9C864 : 
                 mWarp 255, 0
                   warpNoScroll
-                  warpMap    69
+                  warpMap    MAP_OVERWORLD_PATH_TO_RIBBLE
                   warpDest   26, 54
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 6, 16
                   warpNoScroll
                   warpMap    255
                   warpDest   3, 57
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 3, 57
                   warpNoScroll
                   warpMap    255
                   warpDest   6, 16
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 11, 26
                   warpNoScroll
                   warpMap    255
                   warpDest   14, 57
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 14, 57
                   warpNoScroll
                   warpMap    255
                   warpDest   11, 26
-                  warpFacing 0
+                  warpFacing RIGHT
                 endWord

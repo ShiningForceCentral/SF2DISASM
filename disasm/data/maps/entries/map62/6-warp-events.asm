@@ -3,7 +3,7 @@
 ; 0xBAE00..0xBAE0A : 
                 mWarp 255, 19
                   warpNoScroll
-                  warpMap    70
+                  warpMap    MAP_OVERWORLD_SOUTHEAST_PARMECIA
                   warpDest   43, 41
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

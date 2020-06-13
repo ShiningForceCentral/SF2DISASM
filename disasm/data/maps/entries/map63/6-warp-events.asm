@@ -3,22 +3,22 @@
 ; 0xBB040..0xBB062 : 
                 mWarp 37, 58
                   warpNoScroll
-                  warpMap    66
+                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
                   warpDest   40, 8
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 17, 2
                   warpNoScroll
                   warpMap    255
                   warpDest   37, 40
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 37, 40
                   warpNoScroll
                   warpMap    255
                   warpDest   17, 2
-                  warpFacing 2
+                  warpFacing LEFT
                 mWarp 8, 51
                   warpNoScroll
-                  warpMap    50
+                  warpMap    MAP_ACHILLES_SHRINES
                   warpDest   27, 3
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

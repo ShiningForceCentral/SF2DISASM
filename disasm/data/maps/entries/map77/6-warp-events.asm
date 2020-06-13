@@ -3,27 +3,27 @@
 ; 0xC5D78..0xC5DA2 : 
                 mWarp 40, 42
                   warpNoScroll
-                  warpMap    29
+                  warpMap    MAP_SECRET_DWARVEN_VILLAGE_OUTSIDE
                   warpDest   15, 20
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 255, 33
                   warpNoScroll
-                  warpMap    53
+                  warpMap    MAP_PRISM_FLOWERS_FIELD
                   warpDest   19, 1
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 255, 34
                   warpNoScroll
-                  warpMap    53
+                  warpMap    MAP_PRISM_FLOWERS_FIELD
                   warpDest   10, 30
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 255, 63
                   warpScroll DOWN
-                  warpMap    66
+                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
                   warpDest   255, 1
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 63, 255
                   warpScroll RIGHT
-                  warpMap    76
+                  warpMap    MAP_OVERWORLD_GRANS_RETURN_PATH
                   warpDest   1, 255
-                  warpFacing 0
+                  warpFacing RIGHT
                 endWord

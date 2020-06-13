@@ -5,20 +5,20 @@
                   warpNoScroll
                   warpMap    255
                   warpDest   41, 55
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 41, 55
                   warpNoScroll
                   warpMap    255
                   warpDest   2, 8
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 255, 29
                   warpNoScroll
-                  warpMap    66
+                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
                   warpDest   31, 9
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 255, 9
                   warpNoScroll
-                  warpMap    16
+                  warpMap    MAP_GALAM_CASTLE
                   warpDest   26, 30
-                  warpFacing 1
+                  warpFacing UP
                 endWord

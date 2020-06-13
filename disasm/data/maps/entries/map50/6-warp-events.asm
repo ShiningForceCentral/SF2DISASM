@@ -3,17 +3,17 @@
 ; 0xB5628..0xB5642 : 
                 mWarp 27, 3
                   warpNoScroll
-                  warpMap    63
+                  warpMap    MAP_MAGIC_TUNNEL_HUB
                   warpDest   8, 51
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 14, 23
                   warpNoScroll
-                  warpMap    61
+                  warpMap    MAP_SHRINE_NEAR_RIBBLE_EXTERIOR
                   warpDest   5, 7
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 42, 24
                   warpNoScroll
-                  warpMap    8
+                  warpMap    MAP_RIBBLE
                   warpDest   16, 20
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

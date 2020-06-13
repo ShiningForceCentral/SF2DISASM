@@ -3,12 +3,12 @@
 ; 0xB0792..0xB07A4 : 
                 mWarp 3, 21
                   warpNoScroll
-                  warpMap    31
+                  warpMap    MAP_MOUN
                   warpDest   16, 8
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 14, 20
                   warpNoScroll
-                  warpMap    31
+                  warpMap    MAP_MOUN
                   warpDest   27, 7
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

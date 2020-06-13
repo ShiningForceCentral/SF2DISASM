@@ -3,37 +3,37 @@
 ; 0xA464E..0xA4688 : 
                 mWarp 6, 2
                   warpNoScroll
-                  warpMap    20
+                  warpMap    MAP_GRANSEAL_CASTLE_1F
                   warpDest   6, 37
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 23, 3
                   warpNoScroll
-                  warpMap    20
+                  warpMap    MAP_GRANSEAL_CASTLE_1F
                   warpDest   23, 37
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 35, 7
                   warpNoScroll
-                  warpMap    20
+                  warpMap    MAP_GRANSEAL_CASTLE_1F
                   warpDest   36, 40
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 38, 8
                   warpNoScroll
-                  warpMap    20
+                  warpMap    MAP_GRANSEAL_CASTLE_1F
                   warpDest   38, 10
-                  warpFacing 2
+                  warpFacing LEFT
                 mWarp 19, 15
                   warpNoScroll
-                  warpMap    20
+                  warpMap    MAP_GRANSEAL_CASTLE_1F
                   warpDest   19, 14
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 35, 15
                   warpNoScroll
-                  warpMap    20
+                  warpMap    MAP_GRANSEAL_CASTLE_1F
                   warpDest   35, 14
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    3
+                  warpMap    MAP_GRANSEAL
                   warpDest   29, 2
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

@@ -3,12 +3,12 @@
 ; 0xB0ABC..0xB0ACE : 
                 mWarp 255, 12
                   warpNoScroll
-                  warpMap    57
+                  warpMap    MAP_ANCIENT_TOWER_FIRST_ROOM
                   warpDest   8, 18
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    21
+                  warpMap    MAP_GRANSEAL_CASTLE_3F
                   warpDest   9, 2
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

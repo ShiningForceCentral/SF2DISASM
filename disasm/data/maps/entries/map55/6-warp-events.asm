@@ -3,22 +3,22 @@
 ; 0xB790C..0xB792E : 
                 mWarp 0, 255
                   warpNoScroll
-                  warpMap    75
+                  warpMap    MAP_OVERWORLD_GRANS_NORTH_SHORE
                   warpDest   46, 19
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 31, 255
                   warpNoScroll
-                  warpMap    75
+                  warpMap    MAP_OVERWORLD_GRANS_NORTH_SHORE
                   warpDest   46, 19
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 255, 0
                   warpNoScroll
-                  warpMap    75
+                  warpMap    MAP_OVERWORLD_GRANS_NORTH_SHORE
                   warpDest   46, 19
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    75
+                  warpMap    MAP_OVERWORLD_GRANS_NORTH_SHORE
                   warpDest   46, 19
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

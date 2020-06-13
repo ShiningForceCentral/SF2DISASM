@@ -3,7 +3,7 @@
 ; 0xB1FF0..0xB1FFA : 
                 mWarp 255, 14
                   warpNoScroll
-                  warpMap    66
+                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
                   warpDest   6, 6
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

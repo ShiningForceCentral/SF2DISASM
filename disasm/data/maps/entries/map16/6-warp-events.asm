@@ -3,52 +3,52 @@
 ; 0xA1618..0xA166A : 
                 mWarp 17, 14
                   warpNoScroll
-                  warpMap    17
+                  warpMap    MAP_GALAM_CASTLE_INNER
                   warpDest   11, 8
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 10, 15
                   warpNoScroll
-                  warpMap    17
+                  warpMap    MAP_GALAM_CASTLE_INNER
                   warpDest   5, 9
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 8, 5
                   warpNoScroll
-                  warpMap    17
+                  warpMap    MAP_GALAM_CASTLE_INNER
                   warpDest   2, 3
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 23, 5
                   warpNoScroll
-                  warpMap    17
+                  warpMap    MAP_GALAM_CASTLE_INNER
                   warpDest   17, 3
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 39, 3
                   warpNoScroll
-                  warpMap    17
+                  warpMap    MAP_GALAM_CASTLE_INNER
                   warpDest   41, 29
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 51, 3
                   warpNoScroll
-                  warpMap    17
+                  warpMap    MAP_GALAM_CASTLE_INNER
                   warpDest   53, 29
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 49, 9
                   warpNoScroll
-                  warpMap    17
+                  warpMap    MAP_GALAM_CASTLE_INNER
                   warpDest   51, 30
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 21, 3
                   warpNoScroll
-                  warpMap    17
+                  warpMap    MAP_GALAM_CASTLE_INNER
                   warpDest   15, 1
-                  warpFacing 2
+                  warpFacing LEFT
                 mWarp 255, 0
                   warpNoScroll
-                  warpMap    66
+                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
                   warpDest   32, 4
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    18
+                  warpMap    MAP_GALAM_CASTLE_EXIT
                   warpDest   9, 10
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

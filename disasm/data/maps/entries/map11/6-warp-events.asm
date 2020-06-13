@@ -5,15 +5,15 @@
                   warpNoScroll
                   warpMap    255
                   warpDest   8, 13
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 255, 12
                   warpNoScroll
                   warpMap    255
                   warpDest   39, 18
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 8, 34
                   warpNoScroll
-                  warpMap    10
+                  warpMap    MAP_MOUNT_VOLCANON
                   warpDest   45, 50
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

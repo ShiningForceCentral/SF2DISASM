@@ -3,17 +3,17 @@
 ; 0xC4F98..0xC4FB2 : 
                 mWarp 8, 47
                   warpNoScroll
-                  warpMap    38
+                  warpMap    MAP_ROFT
                   warpDest   14, 30
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 0, 255
                   warpScroll LEFT
-                  warpMap    77
+                  warpMap    MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE
                   warpDest   62, 255
-                  warpFacing 2
+                  warpFacing LEFT
                 mWarp 63, 255
                   warpScroll RIGHT
-                  warpMap    75
+                  warpMap    MAP_OVERWORLD_GRANS_NORTH_SHORE
                   warpDest   1, 255
-                  warpFacing 0
+                  warpFacing RIGHT
                 endWord

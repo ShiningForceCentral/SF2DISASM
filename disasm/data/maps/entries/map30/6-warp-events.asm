@@ -3,7 +3,7 @@
 ; 0xAB39C..0xAB3A6 : 
                 mWarp 255, 21
                   warpNoScroll
-                  warpMap    68
+                  warpMap    MAP_OVERWORLD_AROUND_ELVEN_VILLAGE
                   warpDest   57, 25
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

@@ -3,17 +3,17 @@
 ; 0x98A24..0x98A3E : 
                 mWarp 50, 23
                   warpNoScroll
-                  warpMap    44
+                  warpMap    MAP_GRANSEAL_DOCKS_AND_SHIP
                   warpDest   1, 25
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 50, 24
                   warpNoScroll
-                  warpMap    44
+                  warpMap    MAP_GRANSEAL_DOCKS_AND_SHIP
                   warpDest   1, 25
-                  warpFacing 0
+                  warpFacing RIGHT
                 mWarp 50, 25
                   warpNoScroll
-                  warpMap    44
+                  warpMap    MAP_GRANSEAL_DOCKS_AND_SHIP
                   warpDest   1, 25
-                  warpFacing 0
+                  warpFacing RIGHT
                 endWord

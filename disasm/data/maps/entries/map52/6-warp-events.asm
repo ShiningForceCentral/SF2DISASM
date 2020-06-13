@@ -3,12 +3,12 @@
 ; 0xB60D2..0xB60E4 : 
                 mWarp 28, 6
                   warpNoScroll
-                  warpMap    10
+                  warpMap    MAP_MOUNT_VOLCANON
                   warpDest   12, 30
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 0, 255
                   warpNoScroll
-                  warpMap    13
+                  warpMap    MAP_POLCA
                   warpDest   30, 6
-                  warpFacing 2
+                  warpFacing LEFT
                 endWord

@@ -3,12 +3,12 @@
 ; 0xA9C6C..0xA9C7E : 
                 mWarp 255, 15
                   warpNoScroll
-                  warpMap    54
+                  warpMap    MAP_ODDEYE_ARENA
                   warpDest   16, 41
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    41
+                  warpMap    MAP_DEVILS_HEAD
                   warpDest   6, 8
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

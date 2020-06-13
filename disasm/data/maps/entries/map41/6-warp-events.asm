@@ -3,27 +3,27 @@
 ; 0xB150A..0xB1534 : 
                 mWarp 23, 15
                   warpNoScroll
-                  warpMap    66
+                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
                   warpDest   33, 44
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 24, 15
                   warpNoScroll
-                  warpMap    66
+                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
                   warpDest   33, 44
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 6, 15
                   warpNoScroll
-                  warpMap    66
+                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
                   warpDest   36, 28
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 23, 4
                   warpNoScroll
-                  warpMap    42
+                  warpMap    MAP_FORCE_SWORD_SHRINE
                   warpDest   7, 14
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 6, 7
                   warpNoScroll
-                  warpMap    28
+                  warpMap    MAP_DEVILS_HEAD_LABYRINTH
                   warpDest   16, 30
-                  warpFacing 1
+                  warpFacing UP
                 endWord

@@ -3,12 +3,12 @@
 ; 0x9AFF6..0x9B008 : 
                 mWarp 19, 2
                   warpNoScroll
-                  warpMap    46
+                  warpMap    MAP_NEW_GRANSEAL_HQ
                   warpDest   19, 22
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 255, 23
                   warpNoScroll
-                  warpMap    6
+                  warpMap    MAP_NEW_GRANSEAL
                   warpDest   11, 1
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

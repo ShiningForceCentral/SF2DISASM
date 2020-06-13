@@ -3,12 +3,12 @@
 ; 0xAC722..0xAC734 : 
                 mWarp 9, 5
                   warpNoScroll
-                  warpMap    34
+                  warpMap    MAP_EVIL_SPIRIT_SHRINE
                   warpDest   26, 28
-                  warpFacing 2
+                  warpFacing LEFT
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    67
+                  warpMap    MAP_OVERWORLD_DEVILS_TAIL
                   warpDest   26, 23
-                  warpFacing 1
+                  warpFacing UP
                 endWord

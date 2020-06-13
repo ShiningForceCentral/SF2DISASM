@@ -5,30 +5,30 @@
                   warpNoScroll
                   warpMap    255
                   warpDest   48, 30
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 20, 14
                   warpNoScroll
                   warpMap    255
                   warpDest   27, 8
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 48, 31
                   warpNoScroll
                   warpMap    255
                   warpDest   2, 15
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 27, 9
                   warpNoScroll
                   warpMap    255
                   warpDest   20, 15
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 10, 32
                   warpNoScroll
-                  warpMap    0
+                  warpMap    MAP_OUTSIDE_MITULA
                   warpDest   14, 12
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 255, 32
                   warpNoScroll
-                  warpMap    0
+                  warpMap    MAP_OUTSIDE_MITULA
                   warpDest   15, 12
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

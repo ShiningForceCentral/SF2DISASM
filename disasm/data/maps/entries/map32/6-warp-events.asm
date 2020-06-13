@@ -3,12 +3,12 @@
 ; 0xAC380..0xAC392 : 
                 mWarp 2, 3
                   warpNoScroll
-                  warpMap    67
+                  warpMap    MAP_OVERWORLD_DEVILS_TAIL
                   warpDest   51, 23
-                  warpFacing 3
+                  warpFacing DOWN
                 mWarp 29, 3
                   warpNoScroll
-                  warpMap    67
+                  warpMap    MAP_OVERWORLD_DEVILS_TAIL
                   warpDest   57, 24
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord

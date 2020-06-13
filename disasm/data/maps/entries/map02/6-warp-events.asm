@@ -3,22 +3,22 @@
 ; 0x96A5C..0x96A7E : 
                 mWarp 19, 0
                   warpNoScroll
-                  warpMap    36
+                  warpMap    MAP_PACALON_CASTLE
                   warpDest   20, 30
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 23, 0
                   warpNoScroll
-                  warpMap    36
+                  warpMap    MAP_PACALON_CASTLE
                   warpDest   22, 30
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 255, 0
                   warpNoScroll
-                  warpMap    36
+                  warpMap    MAP_PACALON_CASTLE
                   warpDest   255, 30
-                  warpFacing 1
+                  warpFacing UP
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    71
+                  warpMap    MAP_OVERWORLD_AROUND_PACALON
                   warpDest   22, 16
-                  warpFacing 3
+                  warpFacing DOWN
                 endWord
