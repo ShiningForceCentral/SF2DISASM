@@ -2546,10 +2546,20 @@ AddRandomizedAGItoTurnOrder:
                 jsr     (GenerateRandomNumber).w
                 subq.w  #1,d7
                 add.w   d7,d1
+                
+                if (BUGFIX_SKIPPED_TURNS=1)
+                tst.b   d1
+                bpl.s   @AddTurnData
+                moveq   #CHAR_STATCAP_AGI_CURRENT,d1 ; cap randomized AGI
+                endif
+@AddTurnData:
+                
                 move.b  d0,(a0)+
                 move.b  d1,(a0)+
                 cmpi.w  #128,d3
                 blt.s   @Return
+                
+                ; Add a second turn if AGI >= 128
                 move.w  d3,d1
                 andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
                 mulu.w  #5,d1
@@ -2560,6 +2570,14 @@ AddRandomizedAGItoTurnOrder:
                 add.w   d7,d1
                 jsr     (GenerateRandomNumber).w
                 sub.w   d7,d1
+                
+                if (BUGFIX_SKIPPED_TURNS=1)
+                tst.b   d1
+                bpl.s   @AddSecondTurnData
+                moveq   #CHAR_STATCAP_AGI_CURRENT,d1 ; cap randomized AGI
+                endif
+@AddSecondTurnData:
+                
                 move.b  d0,(a0)+
                 move.b  d1,(a0)+
 @Return:
