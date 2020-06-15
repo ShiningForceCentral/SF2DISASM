@@ -2770,7 +2770,12 @@ GROWTHCURVE_DEF_SIZE: equ $74
 ; ---------------------------------------------------------------------------
 
 ; enum BattleMapCoordinates_Properties
-BATTLEMAPCOORDS_ENTRY_SIZE: equ $5
+                if (BUGFIX_SEARCH_IN_BATTLE=1)
+BATTLEMAPCOORDS_ENTRY_SIZE: equ 7
+                else
+BATTLEMAPCOORDS_ENTRY_SIZE: equ 5
+                endif
+
 
 ; ---------------------------------------------------------------------------
 
